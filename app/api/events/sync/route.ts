@@ -1,9 +1,7 @@
 import { NextResponse } from 'next/server';
-import { fetchEventbriteEvents } from '@/lib/eventbriteSync';
+import { fetchEventbriteEvents, debugEventbrite } from '@/lib/eventbriteSync';
 
-// Called by Vercel cron every hour — also callable manually
 export async function GET(request: Request) {
-  // Protect with cron secret in production
   const authHeader = request.headers.get('authorization');
   if (
     process.env.NODE_ENV === 'production' &&
@@ -11,6 +9,12 @@ export async function GET(request: Request) {
     authHeader !== `Bearer ${process.env.CRON_SECRET}`
   ) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  const debug = request.url.includes('debug=1');
+  if (debug) {
+    const info = await debugEventbrite();
+    return NextResponse.json(info);
   }
 
   const events = await fetchEventbriteEvents();

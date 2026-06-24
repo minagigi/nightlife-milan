@@ -60,6 +60,30 @@ function extractEntryPrice(ticketClasses?: Array<{ free: boolean; cost?: { major
   return paid ? parseFloat(paid.cost!.major_value) : 0;
 }
 
+export async function debugEventbrite() {
+  const token = process.env.EVENTBRITE_TOKEN;
+  if (!token) return { error: 'EVENTBRITE_TOKEN not set', hasToken: false };
+
+  const url = `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=live&expand=venue,logo,ticket_classes&order_by=start_asc&time_filter=current_future`;
+  const res = await fetch(url, {
+    headers: { Authorization: `Bearer ${token}` },
+    cache: 'no-store',
+  });
+
+  const text = await res.text();
+  let parsed: unknown;
+  try { parsed = JSON.parse(text); } catch { parsed = text.slice(0, 500); }
+
+  return {
+    hasToken: true,
+    tokenPrefix: token.slice(0, 6) + '...',
+    status: res.status,
+    ok: res.ok,
+    url,
+    responsePreview: parsed,
+  };
+}
+
 export async function fetchEventbriteEvents(): Promise<Event[]> {
   const token = process.env.EVENTBRITE_TOKEN;
   if (!token) return [];
@@ -69,7 +93,7 @@ export async function fetchEventbriteEvents(): Promise<Event[]> {
       `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=live&expand=venue,logo,ticket_classes&order_by=start_asc&time_filter=current_future`,
       {
         headers: { Authorization: `Bearer ${token}` },
-        next: { revalidate: 3600 },
+        cache: 'no-store',
       }
     );
 
