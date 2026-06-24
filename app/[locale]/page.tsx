@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import Hero from '@/components/Hero';
 import IntentCards from '@/components/IntentCards';
 import EventTimeline from '@/components/EventTimeline';
-import EventFilters from '@/components/EventFilters';
+const EventFilters = dynamic(() => import('@/components/EventFilters'));
 
 // Lazy-load below-fold components that use Framer Motion to reduce TBT
 const DiscoveryGrid = dynamic(() => import('@/components/DiscoveryGrid'));
