@@ -73,7 +73,7 @@ function GridContent({ items, lang, title, subtitle }: DiscoveryGridProps) {
         <h2 id="discovery-grid-title" className="font-serif text-3xl md:text-4xl font-bold tracking-tight text-champagne">
           {title || defaultTitle}
         </h2>
-        <p className="text-white/40 mt-3 text-lg">
+        <p className="text-white/60 mt-3 text-lg">
           {subtitle || defaultSubtitle}
         </p>
       </motion.div>

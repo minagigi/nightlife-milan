@@ -267,9 +267,9 @@ export default async function Page({
                   </div>
                   {/* Content */}
                   <div className="flex-1 pt-2.5">
-                    <p className="font-sans text-champagne/50 text-[10px] tracking-[0.3em] uppercase mb-1">{item.time}</p>
+                    <p className="font-sans text-champagne/70 text-[10px] tracking-[0.3em] uppercase mb-1">{item.time}</p>
                     <h3 className="font-serif text-xl text-white font-semibold mb-2">{item.title}</h3>
-                    <p className="font-sans text-white/45 text-sm leading-relaxed">{item.body}</p>
+                    <p className="font-sans text-white/60 text-sm leading-relaxed">{item.body}</p>
                   </div>
                 </div>
               ))}

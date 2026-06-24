@@ -12,8 +12,8 @@ export default function Footer({ lang }: FooterProps) {
   const isIt = lang === 'it';
 
   const t = {
-    desc: isIt 
-      ? "La guida più esclusiva alla notte milanese. Curata, internazionale, autentica." 
+    desc: isIt
+      ? "La guida più esclusiva alla notte milanese. Curata, internazionale, autentica."
       : "The most exclusive guide to Milan's nightlife. Curated, international, authentic.",
     nav: isIt ? "Navigazione" : "Navigation",
     zones: isIt ? "Zone Hotspots" : "Zone Hotspots",
@@ -52,15 +52,15 @@ export default function Footer({ lang }: FooterProps) {
           <Link href={lp + '/'} className="inline-block group drop-shadow-[0_0_12px_rgba(201,168,106,0.4)] hover:drop-shadow-[0_0_20px_rgba(201,168,106,0.7)] transition-all duration-500">
             <Logo className="h-8 w-auto" />
           </Link>
-          <p className="text-white/40 text-sm leading-relaxed max-w-xs">
+          <p className="text-white/60 text-sm leading-relaxed max-w-xs">
             {t.desc}
           </p>
           <div className="pt-4">
-            <a 
-              href={CONTACT.whatsapp.link} 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-champagne transition-colors group"
+            <a
+              href={CONTACT.whatsapp.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-sm text-white/60 hover:text-champagne transition-colors group"
             >
               <MessageCircle className="w-4 h-4 text-champagne group-hover:scale-110 transition-transform" />
               <div className="flex flex-col">
@@ -76,17 +76,17 @@ export default function Footer({ lang }: FooterProps) {
           <h3 className="text-white font-semibold tracking-wider uppercase text-sm">{t.nav}</h3>
           <ul className="flex flex-col space-y-3">
             <li>
-              <Link href={links.clubs} className="text-white/40 hover:text-champagne transition-colors text-sm">
+              <Link href={links.clubs} className="text-white/60 hover:text-champagne transition-colors text-sm">
                 {t.clubs}
               </Link>
             </li>
             <li>
-              <Link href={links.calendar} className="text-white/40 hover:text-champagne transition-colors text-sm">
+              <Link href={links.calendar} className="text-white/60 hover:text-champagne transition-colors text-sm">
                 {t.calendar}
               </Link>
             </li>
             <li>
-              <Link href={links.guides} className="text-white/40 hover:text-champagne transition-colors text-sm">
+              <Link href={links.guides} className="text-white/60 hover:text-champagne transition-colors text-sm">
                 {t.guides}
               </Link>
             </li>
@@ -96,7 +96,7 @@ export default function Footer({ lang }: FooterProps) {
               </Link>
             </li>
             <li>
-              <Link href={links.concierge} className="text-white/40 hover:text-champagne transition-colors text-sm">
+              <Link href={links.concierge} className="text-white/60 hover:text-champagne transition-colors text-sm">
                 {t.concierge}
               </Link>
             </li>
@@ -108,27 +108,27 @@ export default function Footer({ lang }: FooterProps) {
           <h3 className="text-white font-semibold tracking-wider uppercase text-sm">{t.zones}</h3>
           <ul className="flex flex-col space-y-3">
             <li>
-              <Link href={links.brera} className="text-white/40 hover:text-champagne transition-colors text-sm">
+              <Link href={links.brera} className="text-white/60 hover:text-champagne transition-colors text-sm">
                 Brera
               </Link>
             </li>
             <li>
-              <Link href={links.navigli} className="text-white/40 hover:text-champagne transition-colors text-sm">
+              <Link href={links.navigli} className="text-white/60 hover:text-champagne transition-colors text-sm">
                 Navigli
               </Link>
             </li>
             <li>
-              <Link href={links.isola} className="text-white/40 hover:text-champagne transition-colors text-sm">
+              <Link href={links.isola} className="text-white/60 hover:text-champagne transition-colors text-sm">
                 Isola
               </Link>
             </li>
             <li>
-              <Link href={links.corsoComo} className="text-white/40 hover:text-champagne transition-colors text-sm">
+              <Link href={links.corsoComo} className="text-white/60 hover:text-champagne transition-colors text-sm">
                 Corso Como
               </Link>
             </li>
             <li>
-              <Link href={links.portaVenezia} className="text-white/40 hover:text-champagne transition-colors text-sm">
+              <Link href={links.portaVenezia} className="text-white/60 hover:text-champagne transition-colors text-sm">
                 Porta Venezia
               </Link>
             </li>
@@ -140,17 +140,17 @@ export default function Footer({ lang }: FooterProps) {
           <h3 className="text-white font-semibold tracking-wider uppercase text-sm">{t.legal}</h3>
           <ul className="flex flex-col space-y-3 mb-4">
             <li>
-              <Link href={links.privacy} className="text-white/40 hover:text-champagne transition-colors text-sm">
+              <Link href={links.privacy} className="text-white/60 hover:text-champagne transition-colors text-sm">
                 {t.privacy}
               </Link>
             </li>
           </ul>
-          
+
           <div className="flex gap-1 pt-2 -ml-2.5">
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-11 h-11 rounded-lg text-white/40 hover:text-champagne active:bg-white/5 transition-colors" aria-label="Instagram">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-11 h-11 rounded-lg text-white/60 hover:text-champagne active:bg-white/5 transition-colors" aria-label="Instagram">
               <Instagram className="w-5 h-5" />
             </a>
-            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-11 h-11 rounded-lg text-white/40 hover:text-champagne active:bg-white/5 transition-colors" aria-label="TikTok">
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center w-11 h-11 rounded-lg text-white/60 hover:text-champagne active:bg-white/5 transition-colors" aria-label="TikTok">
               <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
               </svg>
@@ -158,12 +158,12 @@ export default function Footer({ lang }: FooterProps) {
           </div>
         </div>
       </div>
-      
+
       <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p className="text-white/30 text-xs">
+        <p className="text-white/50 text-xs">
           © {new Date().getFullYear()} Nightlife Milan. All rights reserved.
         </p>
-        <div className="flex space-x-4 text-xs text-white/30">
+        <div className="flex space-x-4 text-xs text-white/50">
           <Link href="/" className="hover:text-champagne transition-colors" aria-label="English">EN</Link>
           <Link href="/it" className="hover:text-champagne transition-colors" aria-label="Italiano">IT</Link>
         </div>
