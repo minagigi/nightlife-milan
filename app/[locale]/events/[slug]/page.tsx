@@ -4,9 +4,23 @@ import Image from 'next/image';
 import { getEventBySlug, getVenueById, getPerformerById, mockEvents } from '@/lib/data';
 import { weeklyEvents, getWeeklyEventBySlug } from '@/lib/eventsConfig';
 import { getLocalizedText, generateEventSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import { fetchEventbriteEvents } from '@/lib/eventbriteSync';
+import { Event } from '@/lib/types';
 import BookingForm from '@/components/BookingForm';
 import FAQAccordion from '@/components/FAQAccordion';
 import PricingGrid from '@/components/PricingGrid';
+
+/** Find a live Eventbrite event by its SEO slug (EN or IT). */
+async function getEbEventBySlug(slug: string): Promise<Event | undefined> {
+  try {
+    const events = await fetchEventbriteEvents();
+    return events.find(
+      (ev) => ev.localizedContent.slug.en === slug || ev.localizedContent.slug.it === slug
+    );
+  } catch {
+    return undefined;
+  }
+}
 
 // ISR Configuration (1 hour)
 export const revalidate = 3600;
@@ -18,12 +32,12 @@ type Props = {
 // Generate Static Params for SEO Crawling
 export async function generateStaticParams() {
   const paths: { locale: string; slug: string }[] = [];
-  
+
   mockEvents.forEach((event) => {
     paths.push({ locale: 'en', slug: event.localizedContent.slug.en });
-    paths.push({ 
-      locale: 'it', 
-      slug: event.localizedContent.slug.it || event.localizedContent.slug.en 
+    paths.push({
+      locale: 'it',
+      slug: event.localizedContent.slug.it || event.localizedContent.slug.en
     });
   });
 
@@ -32,6 +46,21 @@ export async function generateStaticParams() {
     paths.push({ locale: 'en', slug });
     paths.push({ locale: 'it', slug });
   });
+
+  // Pre-generate pages for live Eventbrite events at build time.
+  // New events added after the last build are served on-demand via ISR.
+  try {
+    const ebEvents = await fetchEventbriteEvents();
+    ebEvents.forEach((ev) => {
+      if (ev.localizedContent.slug.en)
+        paths.push({ locale: 'en', slug: ev.localizedContent.slug.en });
+      const itSlug = ev.localizedContent.slug.it || ev.localizedContent.slug.en;
+      if (itSlug)
+        paths.push({ locale: 'it', slug: itSlug });
+    });
+  } catch {
+    // Eventbrite unreachable at build time — new events served on-demand
+  }
 
   return paths;
 }
@@ -78,8 +107,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const event = getEventBySlug(slug, locale);
-
+  let event = getEventBySlug(slug, locale);
+  if (!event) event = await getEbEventBySlug(slug);
   if (!event) return notFound();
 
   const venue = getVenueById(event.venueId);
@@ -87,7 +116,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const title = `${getLocalizedText(event.localizedContent.title, locale)} @ ${getLocalizedText(venue.localizedContent.name, locale)} | Nightlife Milan`;
   const description = getLocalizedText(event.localizedContent.shortDescription, locale);
-  
+
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   
   // Generate Canonical and Hreflang URLs
@@ -309,8 +338,8 @@ export default async function EventPage({ params }: Props) {
     );
   }
 
-  const event = getEventBySlug(slug, locale);
-
+  let event = getEventBySlug(slug, locale);
+  if (!event) event = await getEbEventBySlug(slug);
   if (!event) return notFound();
 
   const venue = getVenueById(event.venueId);
@@ -515,7 +544,9 @@ export default async function EventPage({ params }: Props) {
                 className="flex items-center justify-center gap-2 w-full bg-champagne text-black px-6 py-4 font-sans font-bold text-sm tracking-[0.15em] uppercase hover:bg-white transition-colors duration-300 mb-4"
               >
                 <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" /></svg>
-                {locale === 'it' ? 'Acquista su Xceed' : 'Buy on Xceed'}
+                {event.xceedUrl.includes('eventbrite')
+                  ? (locale === 'it' ? 'Compra il Biglietto' : 'Buy Ticket')
+                  : (locale === 'it' ? 'Acquista su Xceed' : 'Buy on Xceed')}
               </a>
             )}
 
