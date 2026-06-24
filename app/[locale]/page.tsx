@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import dynamic from 'next/dynamic';
+import nextDynamic from 'next/dynamic';
 import Hero from '@/components/Hero';
 import IntentCards from '@/components/IntentCards';
 import Image from 'next/image';
@@ -11,10 +11,9 @@ import { fetchEventbriteEvents } from '@/lib/eventbriteSync';
 import { Venue } from '@/lib/types';
 import { CONTACT } from '@/config/contact';
 
-const EventFilters = dynamic(() => import('@/components/EventFilters'));
-const EventsCarousel = dynamic(() => import('@/components/EventsCarousel'));
+const EventsCarousel = nextDynamic(() => import('@/components/EventsCarousel'));
 
-export const revalidate = 3600;
+export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -163,29 +162,52 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     ...eventbriteEvents.filter(eb => !mockEvents.some(m => m.id === eb.id)),
   ];
 
-  // Priority: JustMe=1, Pineta=2, Voya=3, rest=99
+  // Priority: JustMe=1, Pineta=2, Aria=3, rest=99
   const getVenuePriority = (venueId: string) => {
     if (venueId === 'v-justme') return 1;
     if (venueId === 'v-pineta') return 2;
-    if (venueId === 'v-voya')   return 3;
+    if (venueId === 'v-aria')   return 3;
     return 99;
   };
 
-  const allEvents = allRawEvents
-    .filter(event => new Date(event.dateISO) >= todayMidnight)
+  const sortEvents = (a: { event: typeof allRawEvents[0]; venue: Venue }, b: { event: typeof allRawEvents[0]; venue: Venue }) => {
+    const dateA = new Date(a.event.dateISO).getTime();
+    const dateB = new Date(b.event.dateISO).getTime();
+    if (dateA !== dateB) return dateA - dateB;
+    return getVenuePriority(a.event.venueId) - getVenuePriority(b.event.venueId);
+  };
+
+  const todayEnd = new Date(todayMidnight);
+  todayEnd.setHours(23, 59, 59, 999);
+
+  const tomorrow = new Date(todayMidnight);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  const sunday = new Date(todayMidnight);
+  const dow = sunday.getDay();
+  sunday.setDate(sunday.getDate() + (dow === 0 ? 0 : 7 - dow));
+  sunday.setHours(23, 59, 59, 999);
+
+  const baseItems = allRawEvents
     .map(event => ({ event, venue: mockVenues.find(v => v.id === event.venueId) as Venue }))
-    .filter(item => item.venue !== undefined)
-    .sort((a, b) => {
-      const dateA = new Date(a.event.dateISO).getTime();
-      const dateB = new Date(b.event.dateISO).getTime();
-      // Within the same calendar day, sort by venue priority
-      const sameDay = Math.abs(dateA - dateB) < 86_400_000;
-      if (sameDay) {
-        const pd = getVenuePriority(a.event.venueId) - getVenuePriority(b.event.venueId);
-        if (pd !== 0) return pd;
-      }
-      return dateA - dateB;
-    });
+    .filter(item => item.venue !== undefined);
+
+  const tonightEvents = baseItems
+    .filter(({ event }) => {
+      const d = new Date(event.dateISO);
+      return d >= todayMidnight && d <= todayEnd;
+    })
+    .sort(sortEvents);
+
+  const weekEvents = baseItems
+    .filter(({ event }) => {
+      const d = new Date(event.dateISO);
+      return d >= tomorrow && d <= sunday;
+    })
+    .sort(sortEvents);
+
+  // Keep allEvents for any legacy usage
+  const allEvents = [...tonightEvents, ...weekEvents];
 
   const lp = lang === 'it' ? '/it' : '';
   const waMsg = encodeURIComponent(
@@ -301,39 +323,119 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           </div>
         </section>
 
-        {/* ── 5. Events: filters + discovery grid (together) ───────────── */}
-        <section className="border-t border-white/5">
-          <div className="py-20 px-4 sm:px-6 lg:px-8 w-full">
-            <div className="max-w-7xl mx-auto mb-10">
-              <p className="font-sans text-champagne/60 text-[10px] tracking-[0.3em] uppercase mb-3">
-                {lang === 'it' ? 'Agenda' : 'Upcoming'}
-              </p>
-              <div className="flex items-end justify-between gap-4">
+        {/* ── 5a. Tonight's events ─────────────────────────────────────── */}
+        <section className="border-t border-white/5 pt-16 pb-4">
+          <div className="px-4 sm:px-6 lg:px-8 mb-8">
+            <div className="max-w-7xl mx-auto flex items-end justify-between gap-4">
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-champagne animate-pulse" />
+                  <p className="font-sans text-champagne/60 text-[10px] tracking-[0.3em] uppercase">
+                    {lang === 'it' ? 'Stasera' : 'Tonight'}
+                  </p>
+                </div>
                 <h2 className="font-serif text-3xl md:text-4xl font-medium text-white tracking-tight">
-                  {lang === 'it' ? 'Prossime Serate' : 'Upcoming Events'}
+                  {lang === 'it' ? 'Eventi di Stasera' : 'Tonight\'s Events'}
                 </h2>
-                <Link
-                  href={`${lp}/events`}
-                  className="hidden sm:flex items-center gap-2 text-xs font-sans text-champagne/60 hover:text-champagne tracking-widest uppercase transition-colors shrink-0"
-                >
-                  {lang === 'it' ? 'Tutti gli eventi' : 'All events'} →
+              </div>
+              <Link
+                href={`${lp}/events/tonight`}
+                className="hidden sm:flex items-center gap-2 text-xs font-sans text-champagne/60 hover:text-champagne tracking-widest uppercase transition-colors shrink-0"
+              >
+                {lang === 'it' ? 'Vedi tutti' : 'See all'} →
+              </Link>
+            </div>
+          </div>
+
+          {tonightEvents.length > 0 ? (
+            <Suspense fallback={<div className="h-[380px]" />}>
+              <EventsCarousel items={tonightEvents} lang={lang} />
+            </Suspense>
+          ) : (
+            <div className="px-4 sm:px-6 lg:px-8 pb-8">
+              <div className="max-w-7xl mx-auto py-10 px-6 rounded-xl border border-white/8 bg-white/[0.02] text-center">
+                <p className="font-sans text-white/40 text-sm mb-3">
+                  {lang === 'it' ? 'Nessun evento programmato stasera.' : 'No events scheduled for tonight.'}
+                </p>
+                <Link href={`${lp}/events/best`} className="text-xs text-champagne/60 hover:text-champagne tracking-widest uppercase transition-colors">
+                  {lang === 'it' ? 'Scopri i migliori club →' : 'Discover best clubs →'}
                 </Link>
               </div>
             </div>
+          )}
 
-            {/* Filters sit directly above the grid */}
-            <Suspense fallback={<div className="h-12" />}>
-              <EventFilters lang={lang} />
-            </Suspense>
+          <div className="pb-4 text-center sm:hidden px-4 mt-2">
+            <Link href={`${lp}/events/tonight`} className="text-xs font-sans text-champagne/60 hover:text-champagne tracking-widest uppercase transition-colors">
+              {lang === 'it' ? 'Tutti gli eventi di stasera →' : 'All tonight\'s events →'}
+            </Link>
+          </div>
+        </section>
+
+        {/* ── WhatsApp CTA (between the two rows) ──────────────────────── */}
+        <div className="px-4 sm:px-6 lg:px-8 py-8">
+          <div className="max-w-7xl mx-auto">
+            <a
+              href={waLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between gap-4 px-6 py-4 rounded-xl border border-champagne/25 bg-champagne/[0.05] hover:bg-champagne/[0.09] hover:border-champagne/40 transition-all duration-300 group"
+            >
+              <div className="flex items-center gap-3">
+                <MessageCircle className="w-5 h-5 text-champagne shrink-0" />
+                <span className="font-sans text-white/80 text-sm group-hover:text-white transition-colors">
+                  {lang === 'it'
+                    ? 'Prenota tavolo o guestlist — risposta in 10 minuti'
+                    : 'Book table or guestlist — reply in 10 minutes'}
+                </span>
+              </div>
+              <span className="font-sans text-champagne text-xs tracking-widest uppercase shrink-0 hidden sm:block">
+                WhatsApp →
+              </span>
+            </a>
+          </div>
+        </div>
+
+        {/* ── 5b. This week's events ───────────────────────────────────── */}
+        <section className="border-t border-white/5 pt-12 pb-8">
+          <div className="px-4 sm:px-6 lg:px-8 mb-8">
+            <div className="max-w-7xl mx-auto flex items-end justify-between gap-4">
+              <div>
+                <p className="font-sans text-champagne/60 text-[10px] tracking-[0.3em] uppercase mb-2">
+                  {lang === 'it' ? 'Questa Settimana' : 'This Week'}
+                </p>
+                <h2 className="font-serif text-3xl md:text-4xl font-medium text-white tracking-tight">
+                  {lang === 'it' ? 'Prossime Serate' : 'Upcoming This Week'}
+                </h2>
+              </div>
+              <Link
+                href={`${lp}/events/this-week`}
+                className="hidden sm:flex items-center gap-2 text-xs font-sans text-champagne/60 hover:text-champagne tracking-widest uppercase transition-colors shrink-0"
+              >
+                {lang === 'it' ? 'Vedi tutti' : 'See all'} →
+              </Link>
+            </div>
           </div>
 
-          <Suspense fallback={<div className="h-[380px]" />}>
-            <EventsCarousel items={allEvents} lang={lang} />
-          </Suspense>
+          {weekEvents.length > 0 ? (
+            <Suspense fallback={<div className="h-[380px]" />}>
+              <EventsCarousel items={weekEvents} lang={lang} />
+            </Suspense>
+          ) : (
+            <div className="px-4 sm:px-6 lg:px-8 pb-8">
+              <div className="max-w-7xl mx-auto py-10 px-6 rounded-xl border border-white/8 bg-white/[0.02] text-center">
+                <p className="font-sans text-white/40 text-sm mb-3">
+                  {lang === 'it' ? 'Nessun altro evento questa settimana.' : 'No more events this week.'}
+                </p>
+                <Link href={`${lp}/events/best`} className="text-xs text-champagne/60 hover:text-champagne tracking-widest uppercase transition-colors">
+                  {lang === 'it' ? 'Scopri i migliori club →' : 'Discover best clubs →'}
+                </Link>
+              </div>
+            </div>
+          )}
 
-          <div className="pb-6 text-center sm:hidden px-4">
-            <Link href={`${lp}/events`} className="text-xs font-sans text-champagne/60 hover:text-champagne tracking-widest uppercase transition-colors">
-              {lang === 'it' ? 'Tutti gli eventi →' : 'All events →'}
+          <div className="pb-6 text-center sm:hidden px-4 mt-2">
+            <Link href={`${lp}/events/this-week`} className="text-xs font-sans text-champagne/60 hover:text-champagne tracking-widest uppercase transition-colors">
+              {lang === 'it' ? 'Tutti gli eventi della settimana →' : 'All this week\'s events →'}
             </Link>
           </div>
         </section>
