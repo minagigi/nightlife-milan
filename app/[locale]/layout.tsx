@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Montserrat, Cormorant_Garamond } from 'next/font/google';
-import { GoogleAnalytics } from '@next/third-parties/google';
+import Script from 'next/script';
 import dynamic from 'next/dynamic';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -142,15 +142,7 @@ export default async function RootLayout({
     <html lang={locale} className={`${montserrat.variable} ${cormorant.variable}`}>
       <head>
         <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link rel="preconnect" href="https://www.google-analytics.com" />
-        <link rel="dns-prefetch" href="https://region1.google-analytics.com" />
-        <link
-          rel="preload"
-          as="image"
-          href="/images/venues/just-me-milano/just-me-milano-interior-01.webp"
-          fetchPriority="high"
-          imageSizes="100vw"
-        />
+        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
       </head>
@@ -164,7 +156,13 @@ export default async function RootLayout({
           <MobileBottomBar currentLocale={locale} />
           <CustomCursor />
         </Providers>
-        <GoogleAnalytics gaId="G-89JEXSWX80" />
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-89JEXSWX80"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-89JEXSWX80');`}
+        </Script>
       </body>
     </html>
   );

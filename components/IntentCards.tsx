@@ -58,7 +58,7 @@ export default function IntentCards({ locale }: { locale: 'en' | 'it' }) {
                     ${card.isGold ? 'text-champagne' : 'text-white group-hover:text-champagne transition-colors duration-300'}`}>
                     {card.title}
                   </p>
-                  <p className="font-sans text-white/40 text-xs leading-relaxed">{card.subtitle}</p>
+                  <p className="font-sans text-white/60 text-xs leading-relaxed">{card.subtitle}</p>
                 </div>
                 <div className={`mt-auto flex items-center gap-1 text-xs font-sans
                   ${card.isGold ? 'text-champagne/60' : 'text-white/25 group-hover:text-white/50 transition-colors duration-300'}`}>
