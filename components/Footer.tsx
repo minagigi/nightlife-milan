@@ -49,7 +49,7 @@ export default function Footer({ lang }: FooterProps) {
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
         {/* Col 1: Brand Info */}
         <div className="flex flex-col space-y-4">
-          <Link href={lp + '/'} className="inline-block group drop-shadow-[0_0_12px_rgba(201,168,106,0.4)] hover:drop-shadow-[0_0_20px_rgba(201,168,106,0.7)] transition-all duration-500">
+          <Link href={lp + '/'} className="inline-block group drop-shadow-[0_0_12px_rgba(201,168,106,0.4)] hover:drop-shadow-[0_0_20px_rgba(201,168,106,0.7)] transition-all duration-500" aria-label="Nightlife Milan Home">
             <Logo className="h-8 w-auto" />
           </Link>
           <p className="text-white/60 text-sm leading-relaxed max-w-xs">
