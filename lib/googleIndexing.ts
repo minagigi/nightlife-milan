@@ -45,7 +45,7 @@ function getCredentials(): ServiceAccount {
 }
 
 /** Exchange the signed JWT for a short-lived OAuth access token. */
-async function getAccessToken(): Promise<string> {
+async function getAccessToken(scope = 'https://www.googleapis.com/auth/indexing'): Promise<string> {
   const sa = getCredentials();
   const now = Math.floor(Date.now() / 1000);
 
@@ -53,7 +53,7 @@ async function getAccessToken(): Promise<string> {
   const claims = base64url(
     JSON.stringify({
       iss: sa.client_email,
-      scope: 'https://www.googleapis.com/auth/indexing',
+      scope,
       aud: 'https://oauth2.googleapis.com/token',
       iat: now,
       exp: now + 3600,
@@ -110,6 +110,41 @@ export async function notifyUrl(url: string, type: NotifyType = 'URL_UPDATED'): 
     return { url, ok: true, status: res.status };
   } catch (err) {
     return { url, ok: false, status: 0, error: err instanceof Error ? err.message : String(err) };
+  }
+}
+
+export interface SitemapResult {
+  ok: boolean;
+  status: number;
+  error?: string;
+}
+
+/**
+ * Submit (or re-submit) a sitemap to Google Search Console.
+ * Uses the webmasters scope — same service account as the Indexing API.
+ *
+ * siteUrl:    the verified property, e.g. "https://nightlifemilan.com/"
+ * sitemapUrl: e.g. "https://nightlifemilan.com/sitemap.xml"
+ */
+export async function submitSitemap(siteUrl: string, sitemapUrl: string): Promise<SitemapResult> {
+  try {
+    const token = await getAccessToken('https://www.googleapis.com/auth/webmasters');
+    const site = encodeURIComponent(siteUrl);
+    const feed = encodeURIComponent(sitemapUrl);
+    const res = await fetch(
+      `https://www.googleapis.com/webmasters/v3/sites/${site}/sitemaps/${feed}`,
+      {
+        method: 'PUT',
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    if (!res.ok) {
+      const text = await res.text();
+      return { ok: false, status: res.status, error: text.slice(0, 300) };
+    }
+    return { ok: true, status: res.status };
+  } catch (err) {
+    return { ok: false, status: 0, error: err instanceof Error ? err.message : String(err) };
   }
 }
 

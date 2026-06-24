@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { fetchEventbriteEvents, debugEventbrite } from '@/lib/eventbriteSync';
-import { notifyUrls } from '@/lib/googleIndexing';
+import { notifyUrls, submitSitemap } from '@/lib/googleIndexing';
 import { mockEvents } from '@/lib/data';
 import { weeklyEvents } from '@/lib/eventsConfig';
 
@@ -69,15 +69,21 @@ export async function GET(request: Request) {
 
   const urls = Array.from(new Set(rawUrls));
 
-  // 3. Ping Google Indexing API (only if credentials are configured)
+  // 3. Ping Google Indexing API + submit sitemap (only if credentials are configured)
   let indexing: { total: number; succeeded: number; failed: number } = { total: 0, succeeded: 0, failed: 0 };
+  let sitemap: { ok: boolean; status: number; error?: string } = { ok: false, status: 0 };
+
   if (process.env.GOOGLE_INDEXING_CREDENTIALS) {
-    const results = await notifyUrls(urls, 'URL_UPDATED');
+    const [indexResults, sitemapResult] = await Promise.all([
+      notifyUrls(urls, 'URL_UPDATED'),
+      submitSitemap(`${BASE}/`, `${BASE}/sitemap.xml`),
+    ]);
     indexing = {
-      total:     results.length,
-      succeeded: results.filter((r) => r.ok).length,
-      failed:    results.filter((r) => !r.ok).length,
+      total:     indexResults.length,
+      succeeded: indexResults.filter((r) => r.ok).length,
+      failed:    indexResults.filter((r) => !r.ok).length,
     };
+    sitemap = sitemapResult;
   }
 
   return NextResponse.json({
@@ -86,6 +92,7 @@ export async function GET(request: Request) {
     urlsBuilt: urls.length,
     indexingConfigured: !!process.env.GOOGLE_INDEXING_CREDENTIALS,
     indexing,
+    sitemap,
     updated: new Date().toISOString(),
     preview: ebEvents.slice(0, 3).map((e) => ({
       id: e.id,
