@@ -141,6 +141,16 @@ export default async function RootLayout({
   return (
     <html lang={locale} className={`${montserrat.variable} ${cormorant.variable}`}>
       <head>
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://region1.google-analytics.com" />
+        <link
+          rel="preload"
+          as="image"
+          href="/images/venues/just-me-milano/just-me-milano-interior-01.webp"
+          fetchPriority="high"
+          imageSizes="100vw"
+        />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
       </head>

@@ -1,9 +1,12 @@
 import { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import Hero from '@/components/Hero';
 import IntentCards from '@/components/IntentCards';
 import EventTimeline from '@/components/EventTimeline';
-import DiscoveryGrid from '@/components/DiscoveryGrid';
 import EventFilters from '@/components/EventFilters';
+
+// Lazy-load below-fold components that use Framer Motion to reduce TBT
+const DiscoveryGrid = dynamic(() => import('@/components/DiscoveryGrid'));
 import { mockEvents, mockVenues } from '@/lib/data';
 import { fetchEventbriteEvents } from '@/lib/eventbriteSync';
 import { Venue } from '@/lib/types';
@@ -176,7 +179,7 @@ export default async function Page({
                 <Image
                   src="/images/vip-table-milan-nightclub-just-me.webp"
                   alt="Just Me Milano VIP tables — luxury nightclub in Sempione"
-                  fill
+                  fill quality={65}
                   className="object-cover hover:scale-105 transition-transform duration-700"
                   sizes="(max-width: 1024px) 66vw, 40vw"
                 />
@@ -186,7 +189,7 @@ export default async function Page({
                 <Image
                   src="/images/pineta-milano.webp"
                   alt="Pineta Club Milan — singing aperitivo at Corso Como"
-                  fill
+                  fill quality={65}
                   className="object-cover hover:scale-105 transition-transform duration-700"
                   sizes="(max-width: 1024px) 33vw, 40vw"
                 />
@@ -195,7 +198,7 @@ export default async function Page({
                 <Image
                   src="/images/rooftop-bar-milan-voya-skyline.webp"
                   alt="Voya Rooftop Milan — cocktails with skyline view in Isola"
-                  fill
+                  fill quality={65}
                   className="object-cover hover:scale-105 transition-transform duration-700"
                   sizes="(max-width: 1024px) 33vw, 20vw"
                 />
@@ -205,7 +208,7 @@ export default async function Page({
                 <Image
                   src="/images/milan-club-crowd-dancefloor-night.webp"
                   alt="Milan nightclub dancefloor — Friday night crowd 2026"
-                  fill
+                  fill quality={65}
                   className="object-cover hover:scale-105 transition-transform duration-700"
                   sizes="(max-width: 1024px) 33vw, 40vw"
                 />
@@ -214,7 +217,7 @@ export default async function Page({
                 <Image
                   src="/images/bottle-service-milan-vip-nightclub.webp"
                   alt="Bottle service Milan — VIP champagne at exclusive nightclub"
-                  fill
+                  fill quality={65}
                   className="object-cover hover:scale-105 transition-transform duration-700"
                   sizes="(max-width: 1024px) 33vw, 20vw"
                 />
