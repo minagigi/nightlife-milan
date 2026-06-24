@@ -39,6 +39,17 @@ function detectGenre(text: string): MusicGenre[] {
   return genres.length > 0 ? genres : [MusicGenre.COMMERCIAL];
 }
 
+/** Extract the first Xceed link from an Eventbrite event description (HTML or plain text). */
+function extractXceedUrl(text: string): string | undefined {
+  if (!text) return undefined;
+  // href="https://xceed.me/..." (HTML anchor)
+  const href = text.match(/href=["']?(https?:\/\/(?:www\.)?xceed\.me\/[^"'\s>]+)/i);
+  if (href) return href[1].replace(/[.,;!?)]+$/, '');
+  // plain URL in text
+  const plain = text.match(/https?:\/\/(?:www\.)?xceed\.me\/[^\s"'<>\)\]]+/i);
+  return plain?.[0]?.replace(/[.,;!?)]+$/, '');
+}
+
 function cleanTitle(raw: string): string {
   return raw
     .replace(/[·•–—·]/g, '-')
@@ -98,7 +109,7 @@ export async function fetchEventbriteEvents(): Promise<Event[]> {
     const raw = (data.events || []) as Array<{
       id: string;
       name: { text: string };
-      description?: { text: string };
+      description?: { text: string; html?: string };
       start: { local: string };
       end: { local: string };
       status: string;
@@ -137,7 +148,10 @@ export async function fetchEventbriteEvents(): Promise<Event[]> {
           image: ev.logo?.url || ev.logo?.original?.url,
           isSpecial: /live|special|vip/i.test(title),
           isTrending: ev.status === 'live',
-          xceedUrl: `https://www.eventbrite.com/e/${ev.id}`,
+          xceedUrl:
+            extractXceedUrl(ev.description?.html || '') ||
+            extractXceedUrl(ev.description?.text || '') ||
+            `https://www.eventbrite.com/e/${ev.id}`,
         };
       })
     );
