@@ -734,5 +734,43 @@ export const venuesData: Venue[] = [
       "/images/venues/the-club-milano/the-club-milano-interior-06.webp",
       "/images/venues/the-club-milano/the-club-milano-interior-07.webp",
     ]
+  },
+  {
+    id: "v-aria",
+    slugs: { en: "aria-club-milano", it: "aria-club-milano" },
+    address: {
+      streetAddress: "Via Ippodromo, 115",
+      addressLocality: "Milano",
+      postalCode: "20151",
+      addressCountry: "IT"
+    },
+    coordinates: { latitude: 45.4700, longitude: 9.1250 },
+    category: VenueCategory.CLUB,
+    zone: MilanZone.CITY_LIFE,
+    sameAs: ["https://instagram.com/ariaclubmilano"],
+    localizedContent: {
+      name: { en: "Aria Club Milano", it: "Aria Club Milano" },
+      description: {
+        en: "New concept club near San Siro. Aperitivo buffet from 19:30, dinner option, then full club until dawn. Three separate areas: Dance Floor Tables, Privé Aria and Privé DJ. Thursday to Saturday.",
+        it: "Nuovo concept club vicino a San Siro. Aperitivo a buffet dalle 19:30, opzione cena, poi club fino all'alba. Tre aree distinte: Dance Floor Table, Privé Aria e Privé DJ. Dal giovedì al sabato."
+      },
+      dressCode: { en: "Smart Elegant — No sportswear, no sneakers", it: "Smart Elegant — No abbigliamento sportivo, no sneakers" },
+      altTextImg: { en: "Aria Club Milano interior dancefloor San Siro nightclub", it: "Aria Club Milano interno pista da ballo San Siro discoteca" },
+      insiderTip: { en: "Arrive at aperitivo (19:30) to secure a Dance Floor Table — they book out fast on Fridays. The Privé DJ area is the quieter, more exclusive option.", it: "Arriva all'aperitivo (19:30) per assicurarti un Dance Floor Table — si esauriscono subito il venerdì. Il Privé DJ è l'opzione più tranquilla ed esclusiva." }
+    },
+    image: "/images/events/xceed-aria-friday-night.jpg",
+    gallery: [
+      "/images/events/xceed-aria-friday-night.jpg",
+      "/images/events/xceed-aria-saturday-night.jpg",
+      "/images/events/xceed-aria-friday-night-alt.png",
+      "/images/events/xceed-aria-summer-party.png",
+    ],
+    isManaged: true,
+    isPriority: true,
+    isFeatured: false,
+    priorityScore: 75,
+    ageRange: "22-40",
+    priceRange: "$$",
+    tags: ["Aperitivo Buffet", "EDM", "Hits", "Dance Floor Tables"]
   }
 ];

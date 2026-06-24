@@ -62,16 +62,31 @@ export default async function EventsHubPage({ params }: Props) {
   const isIt = locale === 'it';
   const lp = isIt ? '/it' : '';
 
-  // Upcoming mock events
+  // Upcoming mock events — chronological, priority Just Me > Pineta > Aria
   const today = new Date();
   today.setHours(0, 0, 0, 0);
+
+  const getVenuePriority = (venueId: string) => {
+    if (venueId === 'v-justme') return 1;
+    if (venueId === 'v-pineta') return 2;
+    if (venueId === 'v-aria')   return 3;
+    return 99;
+  };
+
   const upcomingEvents = mockEvents.filter(e => new Date(e.dateISO) >= today);
 
-  const items = upcomingEvents.flatMap(event => {
-    const venue = mockVenues.find(v => v.id === event.venueId);
-    if (!venue) return [];
-    return [{ event, venue }];
-  });
+  const items = upcomingEvents
+    .flatMap(event => {
+      const venue = mockVenues.find(v => v.id === event.venueId);
+      if (!venue) return [];
+      return [{ event, venue }];
+    })
+    .sort((a, b) => {
+      const dateA = new Date(a.event.dateISO).getTime();
+      const dateB = new Date(b.event.dateISO).getTime();
+      if (dateA !== dateB) return dateA - dateB;
+      return getVenuePriority(a.event.venueId) - getVenuePriority(b.event.venueId);
+    });
 
   // Special events
   const specialItems = items.filter(i => i.event.isSpecial);
@@ -168,16 +183,22 @@ export default async function EventsHubPage({ params }: Props) {
           {/* Calendar Nav */}
           <div className="flex gap-3 flex-wrap mb-12">
             <Link
-              href={`${lp}/calendar/tonight`}
+              href={`${lp}/events/tonight`}
               className="px-6 py-3 rounded-full border border-champagne/40 text-champagne hover:bg-champagne hover:text-black transition-colors font-medium tracking-wider uppercase text-sm"
             >
               {t.tonight}
             </Link>
             <Link
-              href={`${lp}/calendar/this-week`}
+              href={`${lp}/events/this-week`}
               className="px-6 py-3 rounded-full border border-white/20 text-white hover:border-champagne hover:text-champagne transition-colors font-medium tracking-wider uppercase text-sm"
             >
               {t.thisWeek}
+            </Link>
+            <Link
+              href={`${lp}/events/best`}
+              className="px-6 py-3 rounded-full border border-white/20 text-white hover:border-champagne hover:text-champagne transition-colors font-medium tracking-wider uppercase text-sm"
+            >
+              {isIt ? 'I Migliori' : 'Best Clubs'}
             </Link>
             <Link
               href={`${lp}/events/special`}
