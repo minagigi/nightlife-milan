@@ -64,7 +64,7 @@ export default function EventTimeline({ items, lang }: EventTimelineProps) {
           <h2 className="font-serif text-4xl md:text-5xl font-bold text-champagne mb-4">
             {typedLang === 'it' ? 'La Tua Serata' : 'Your Night Timeline'}
           </h2>
-          <p className="text-white/40 text-lg">
+          <p className="text-white/60 text-lg">
             {typedLang === 'it' ? 'Scopri come si evolve la notte milanese.' : 'Discover how the Milanese night evolves.'}
           </p>
         </div>

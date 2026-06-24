@@ -39,7 +39,7 @@ export default function NewsletterHub({ lang }: NewsletterHubProps) {
         <h2 className="font-serif text-3xl md:text-4xl font-bold text-champagne mb-4">
           Join the Inner Circle
         </h2>
-        <p className="text-white/40 text-lg mb-8">
+        <p className="text-white/60 text-lg mb-8">
           {isIt 
             ? 'Ricevi i migliori tavoli e le liste segrete ogni giovedì.' 
             : 'Get the best tables and secret guestlists every Thursday.'}

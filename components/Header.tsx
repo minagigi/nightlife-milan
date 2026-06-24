@@ -171,7 +171,7 @@ export default function Header({ currentLocale }: { currentLocale: string }) {
               <MessageCircle className="w-4 h-4 text-champagne group-hover:scale-110 transition-transform" />
               <div className="flex flex-col leading-none">
                 <span className="font-semibold tracking-wider text-[11px] text-champagne">{CONTACT.whatsapp.number}</span>
-                <span className="text-[9px] text-white/30 tracking-widest uppercase">
+                <span className="text-[9px] text-white/50 tracking-widest uppercase">
                   {currentLocale === 'it' ? 'Concierge · VIP Tables' : 'Concierge · VIP Tables'}
                 </span>
               </div>

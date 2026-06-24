@@ -61,7 +61,7 @@ export default function IntentCards({ locale }: { locale: 'en' | 'it' }) {
                   <p className="font-sans text-white/60 text-xs leading-relaxed">{card.subtitle}</p>
                 </div>
                 <div className={`mt-auto flex items-center gap-1 text-xs font-sans
-                  ${card.isGold ? 'text-champagne/60' : 'text-white/25 group-hover:text-white/50 transition-colors duration-300'}`}>
+                  ${card.isGold ? 'text-champagne/70' : 'text-white/50 group-hover:text-white/70 transition-colors duration-300'}`}>
                   {card.isWhatsApp
                     ? <><MessageCircle className="w-3 h-3" /> WhatsApp</>
                     : <><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-300" /> {locale === 'it' ? 'Scopri' : 'Explore'}</>
