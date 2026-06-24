@@ -5,6 +5,7 @@ import EventTimeline from '@/components/EventTimeline';
 import DiscoveryGrid from '@/components/DiscoveryGrid';
 import EventFilters from '@/components/EventFilters';
 import { mockEvents, mockVenues } from '@/lib/data';
+import { fetchEventbriteEvents } from '@/lib/eventbriteSync';
 import { Venue } from '@/lib/types';
 import { Suspense } from 'react';
 import Image from 'next/image';
@@ -91,7 +92,14 @@ export default async function Page({
   const todayMidnight = new Date();
   todayMidnight.setHours(0, 0, 0, 0);
 
-  let allEvents = mockEvents
+  // Merge static mock events + live Eventbrite events
+  const eventbriteEvents = await fetchEventbriteEvents();
+  const allRawEvents = [
+    ...mockEvents,
+    ...eventbriteEvents.filter(eb => !mockEvents.some(m => m.id === eb.id)),
+  ];
+
+  let allEvents = allRawEvents
     .filter(event => new Date(event.dateISO) >= todayMidnight)
     .map(event => {
       const venue = mockVenues.find(v => v.id === event.venueId);

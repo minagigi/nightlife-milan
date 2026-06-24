@@ -93,6 +93,8 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'ai-images.freepik.com', pathname: '/**' },
       { protocol: 'https', hostname: '*.freepik.com', pathname: '/**' },
       { protocol: 'https', hostname: 'img.freepik.com', pathname: '/**' },
+      { protocol: 'https', hostname: 'img.evbuc.com', pathname: '/**' },
+      { protocol: 'https', hostname: 'cdn.evbuc.com', pathname: '/**' },
     ],
   },
   output: 'standalone',
