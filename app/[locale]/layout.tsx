@@ -154,7 +154,7 @@ export default async function RootLayout({
           <MobileBottomBar currentLocale={locale} />
           <CustomCursor />
         </Providers>
-        {process.env.NEXT_PUBLIC_GA_ID && <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />}
+        <GoogleAnalytics gaId="G-89JEXSWX80" />
       </body>
     </html>
   );
