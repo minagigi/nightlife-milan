@@ -88,7 +88,7 @@ export default function MobileBottomBar({ currentLocale }: { currentLocale: stri
           <MessageCircle className="w-5 h-5 flex-shrink-0" />
           <span className="flex flex-col min-w-0 leading-none">
             <span className="font-sans font-bold text-sm tracking-[0.12em] uppercase truncate">{mainLabel}</span>
-            <span className="font-sans font-medium text-[10px] tracking-wide text-black/60 mt-0.5 truncate">{sub}</span>
+            <span className="font-sans font-medium text-[10px] tracking-wide text-black/80 mt-0.5 truncate">{sub}</span>
           </span>
         </a>
       </div>
