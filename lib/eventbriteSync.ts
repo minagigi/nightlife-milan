@@ -1,23 +1,28 @@
 import { Event, MusicGenre } from './types';
+import { rewriteEventSEO } from './seoRewrite';
 
 const EVENTBRITE_API = 'https://www.eventbriteapi.com/v3';
 const ORG_ID = '2988002072164';
 
-// Map Eventbrite venue name → internal venue ID
+// Map Eventbrite venue name → canonical internal venue id (matches venuesData ids)
 function mapVenueId(venueName: string): string {
   const n = (venueName || '').toLowerCase();
-  if (n.includes('justme') || n.includes('just me')) return 'just-me-milano';
-  if (n.includes('pineta')) return 'pineta-milano';
-  if (n.includes('voya')) return 'voya-rooftop-milan';
-  if (n.includes('volt')) return 'volt-club-milano';
-  if (n.includes('magazzini')) return 'magazzini-generali-milano';
-  if (n.includes('55 milano') || n.includes('55milano')) return '55-milano';
-  if (n.includes('church')) return 'church-81-milano';
-  if (n.includes('terrazza')) return 'terrazza-21-milano';
-  if (n.includes('apollo')) return 'apollo-club-navigli';
-  if (n.includes('aria')) return 'aria-club-milano';
-  if (n.includes('repvblic')) return 'repvblic-club-milano';
-  return 'just-me-milano';
+  if (n.includes('justme') || n.includes('just me')) return 'v-justme';
+  if (n.includes('pineta')) return 'v-pineta';
+  if (n.includes('voya')) return 'v-voya';
+  if (n.includes('volt')) return 'v-volt';
+  if (n.includes('magazzini')) return 'v-magazzini';
+  if (n.includes('55 milano') || n.includes('55milano')) return 'v-55milano';
+  if (n.includes('church')) return 'v-church81';
+  if (n.includes('terrazza')) return 'v-terrazza21';
+  if (n.includes('apollo')) return 'v-apollo';
+  if (n.includes('play')) return 'v-playclub';
+  if (n.includes('repvblic')) return 'v-repvblic';
+  if (n.includes('11 club') || n.includes('11club')) return 'v-11clubroom';
+  if (n.includes('gattopardo')) return 'v-gattopardo';
+  if (n.includes('hollywood')) return 'v-hollywood';
+  if (n.includes('armani')) return 'v-armani-prive';
+  return 'v-justme';
 }
 
 function detectGenre(text: string): MusicGenre[] {
@@ -40,16 +45,6 @@ function cleanTitle(raw: string): string {
     .replace(/Â·|â|Ã¬|â¬/g, '')
     .replace(/\s{2,}/g, ' ')
     .trim();
-}
-
-function toSlug(text: string): string {
-  return text
-    .toLowerCase()
-    .normalize('NFD').replace(/[̀-ͯ]/g, '')
-    .replace(/[^a-z0-9\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .slice(0, 70);
 }
 
 function extractEntryPrice(ticketClasses?: Array<{ free: boolean; cost?: { major_value: string } }>): number {
@@ -112,35 +107,42 @@ export async function fetchEventbriteEvents(): Promise<Event[]> {
       ticket_classes?: Array<{ free: boolean; cost?: { major_value: string } }>;
     }>;
 
-    return raw.map((ev): Event => {
-      const title = cleanTitle(ev.name.text);
-      const desc = (ev.description?.text || title).slice(0, 200);
+    // SEO rewrite each event (AI in the Nightlife Milan voice, fail-safe to
+    // rule-based). Cached by content hash so unchanged events aren't re-billed.
+    const events = await Promise.all(
+      raw.map(async (ev): Promise<Event> => {
+        const title = cleanTitle(ev.name.text);
+        const desc = (ev.description?.text || title).slice(0, 600);
+        const venueId = mapVenueId(ev.venue?.name || '');
+        const dateISO = `${ev.start.local}+01:00`;
 
-      return {
-        id: `eb-${ev.id}`,
-        venueId: mapVenueId(ev.venue?.name || ''),
-        genre: detectGenre(title + ' ' + desc),
-        dateISO: `${ev.start.local}+01:00`,
-        endDateISO: `${ev.end.local}+01:00`,
-        pricing: {
-          entry: extractEntryPrice(ev.ticket_classes),
-          currency: 'EUR',
-          tableMinSpend: null,
-        },
-        localizedContent: {
-          title: { en: title, it: title },
-          shortDescription: { en: desc, it: desc },
-          slug: {
-            en: toSlug(title),
-            it: toSlug(title),
+        const seo = await rewriteEventSEO({ title, description: desc, venueId, dateISO });
+
+        return {
+          id: `eb-${ev.id}`,
+          venueId,
+          genre: detectGenre(title + ' ' + desc),
+          dateISO,
+          endDateISO: `${ev.end.local}+01:00`,
+          pricing: {
+            entry: extractEntryPrice(ev.ticket_classes),
+            currency: 'EUR',
+            tableMinSpend: null,
           },
-        },
-        image: ev.logo?.url || ev.logo?.original?.url,
-        isSpecial: /live|special|vip/i.test(title),
-        isTrending: ev.status === 'live',
-        xceedUrl: `https://www.eventbrite.com/e/${ev.id}`,
-      };
-    });
+          localizedContent: {
+            title: { en: seo.titleEn, it: seo.titleIt },
+            shortDescription: { en: seo.descEn, it: seo.descIt },
+            slug: { en: seo.slugEn, it: seo.slugIt },
+          },
+          image: ev.logo?.url || ev.logo?.original?.url,
+          isSpecial: /live|special|vip/i.test(title),
+          isTrending: ev.status === 'live',
+          xceedUrl: `https://www.eventbrite.com/e/${ev.id}`,
+        };
+      })
+    );
+
+    return events;
   } catch {
     return [];
   }
