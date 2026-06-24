@@ -83,7 +83,7 @@ const nextConfig: NextConfig = {
   },
   images: {
     formats: ['image/avif', 'image/webp'],
-    qualities: [50, 65, 75],
+    qualities: [40, 50, 65, 75],
     minimumCacheTTL: 86400,
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     remotePatterns: [
@@ -102,6 +102,7 @@ const nextConfig: NextConfig = {
   transpilePackages: ['motion'],
   experimental: {
     optimizePackageImports: ['motion', 'lucide-react'],
+    optimizeCss: true,
   },
   webpack: (config, {dev}) => {
     // HMR is disabled in AI Studio via DISABLE_HMR env var.

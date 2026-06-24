@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { getVenues } from '@/lib/data';
 import HeroInteractive from './HeroInteractive';
 
-const HERO_Q = 55;
+const HERO_Q = 40;
 
 export default function Hero({ locale }: { locale: string }) {
   const typedLocale = (locale === 'it' ? 'it' : 'en') as 'en' | 'it';
