@@ -6,7 +6,7 @@ import EventTimeline from '@/components/EventTimeline';
 import EventFilters from '@/components/EventFilters';
 
 // Lazy-load below-fold components that use Framer Motion to reduce TBT
-const DiscoveryGrid = dynamic(() => import('@/components/DiscoveryGrid'));
+const DiscoveryGrid = dynamic(() => import('@/components/DiscoveryGrid'), { ssr: false });
 import { mockEvents, mockVenues } from '@/lib/data';
 import { fetchEventbriteEvents } from '@/lib/eventbriteSync';
 import { Venue } from '@/lib/types';

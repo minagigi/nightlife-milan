@@ -198,10 +198,11 @@ export default function HeroInteractive({ venues, locale, firstVenueId }: Props)
                 {i === currentIndex && (
                   <span
                     key={currentIndex}
-                    className="absolute inset-y-0 left-0 bg-champagne rounded-full"
+                    className="absolute inset-y-0 left-0 w-full bg-champagne rounded-full"
                     style={{
                       animation: 'progress-bar 5s linear forwards',
                       animationPlayState: isPaused ? 'paused' : 'running',
+                      transformOrigin: 'left center',
                     }}
                   />
                 )}

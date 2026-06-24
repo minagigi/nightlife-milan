@@ -96,10 +96,10 @@
 
 body { color: #EDE6D6; }
 
-/* Hero carousel progress bar */
+/* Hero carousel progress bar — uses transform:scaleX (composite, no layout reflow) */
 @keyframes progress-bar {
-  from { width: 0%; }
-  to   { width: 100%; }
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
 }
 
 /* Custom cursor — desktop only */
