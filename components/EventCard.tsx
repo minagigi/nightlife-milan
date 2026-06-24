@@ -55,7 +55,7 @@ export default function EventCard({ event, venue, lang, priority = false }: Even
         fill
         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         priority={priority}
-        quality={85}
+        quality={65}
         className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
         referrerPolicy="no-referrer"
       />

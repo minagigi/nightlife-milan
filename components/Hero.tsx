@@ -59,7 +59,7 @@ export default function Hero({ locale }: { locale: string }) {
           <Image
             src={current.gallery?.[0] || current.image || '/images/milan-nightclub-luxury-vip-champagne.webp'}
             alt={current.localizedContent.name[typedLocale] || current.localizedContent.name.en}
-            fill priority quality={85}
+            fill priority quality={75}
             className="object-cover"
             sizes="100vw"
             referrerPolicy="no-referrer"
