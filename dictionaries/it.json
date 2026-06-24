@@ -1,0 +1,417 @@
+{
+  "club": {
+    "back": "Torna ai Locali",
+    "bookWa": "Prenota via WhatsApp",
+    "vipAccess": "Ottieni Accesso VIP",
+    "timelineTitle": "I 3 Atti della Serata",
+    "pricingTitle": "Prezzi Tavoli & VIP",
+    "scheduleTitle": "Programmazione Settimanale",
+    "labels": {
+      "address": "Indirizzo",
+      "targetAge": "Target Età",
+      "dressCode": "Dress Code",
+      "music": "Musica",
+      "services": "Servizi"
+    },
+    "justme": {
+      "subtitle": "Un mix perfetto di eleganza e divertimento",
+      "description": "Nel cuore di Parco Sempione, JUSTME è il punto di riferimento per un'esperienza completa: dall'aperitivo alla cena, dalla serata disco al privé esclusivo.",
+      "insiderTip": "Il Just Me è il cuore della Fashion Week. Se vuoi il tavolo migliore, chiedi del Privé Branca: sarai letteralmente sotto i pilastri della torre.",
+      "location": "Viale Luigi Camoens 2, Milano (Parco Sempione)",
+      "target": "25-45 anni",
+      "dressCode": "Elegante / Smart Casual",
+      "music": "House, Hip-Hop, Hits, Commercial",
+      "events": [
+        {
+          "day": "LUN",
+          "title": "Monday Night",
+          "description": "House & Hits",
+          "type": "Day + Night"
+        },
+        {
+          "day": "MAR",
+          "title": "Martedì Universitario",
+          "description": "Drink e Divertimento",
+          "type": "Day + Night"
+        },
+        {
+          "day": "MER",
+          "title": "Wednesday / Absolutely",
+          "description": "Vibrazioni infrasettimanali + Cartomante",
+          "type": "Day + Night"
+        },
+        {
+          "day": "GIO",
+          "title": "VIZIATISSIMA",
+          "description": "Cena Cantata + Show Live",
+          "type": "Day + Night"
+        },
+        {
+          "day": "VEN",
+          "title": "Friday Night",
+          "description": "Guest Internazionali",
+          "type": "Day + Night"
+        },
+        {
+          "day": "SAB",
+          "title": "Saturday Night",
+          "description": "Party a tema",
+          "type": "Day + Night"
+        },
+        {
+          "day": "DOM",
+          "title": "Uptown Nights",
+          "description": "Domenica Hip-Hop",
+          "type": "Night"
+        }
+      ],
+      "acts": [
+        {
+          "title": "Atto I: Aperitivo",
+          "time": "19:30 - 22:00",
+          "description": "Drink + Buffet Luxury",
+          "price": "20€ - 30€"
+        },
+        {
+          "title": "Atto II: Dinner",
+          "time": "21:00 - 00:00",
+          "description": "Cucina Fusion-Mediterranea",
+          "price": "Menu 60€+ | A la carte 80-120€"
+        },
+        {
+          "title": "Atto III: Club",
+          "time": "00:00 - 05:00",
+          "description": "Ingresso in lista",
+          "price": "20€ - 30€"
+        }
+      ],
+      "pricing": {
+        "dancefloor": {
+          "title": "Tavolo Pista",
+          "price": "da 250€",
+          "desc": "Fino a 5-6 persone. Bottiglia inclusa."
+        },
+        "priveGold": {
+          "title": "Privé Gold",
+          "price": "da 600€",
+          "desc": "Zona rialzata, vista pista."
+        },
+        "priveDiamond": {
+          "title": "Privé Diamond (VIP)",
+          "price": "1.5k - 3k€+",
+          "desc": "La massima esclusività sotto la Torre Branca. Servizio dedicato."
+        }
+      },
+      "rules": {
+        "title": "Regole del Locale",
+        "selection": "Selezione rigorosa all'ingresso. La prenotazione del tavolo garantisce l'accesso prioritario."
+      }
+    },
+    "voya": {
+      "subtitle": "Rooftop al 20° piano: cena e serata sopra le nuvole.",
+      "description": "Un'esperienza unica con vista panoramica su Milano. Cena e serata sopra le nuvole, nel cuore pulsante della città.",
+      "insiderTip": "Prenota in anticipo per assicurarti un tavolo con la migliore vista sullo skyline.",
+      "location": "Milano (Skyline view)",
+      "target": "28-45 anni",
+      "dressCode": "Elegante / Smart Casual",
+      "music": "Lounge, Deep House, Commercial",
+      "events": [
+        {
+          "day": "MAR",
+          "title": "Rooftop Experience",
+          "description": "Aperitivo & dinner con vista skyline.",
+          "type": "Day + Night"
+        },
+        {
+          "day": "MER",
+          "title": "Rooftop Experience",
+          "description": "Aperitivo & dinner con vista skyline.",
+          "type": "Day + Night"
+        },
+        {
+          "day": "GIO",
+          "title": "Rooftop Experience",
+          "description": "Aperitivo & dinner con vista skyline.",
+          "type": "Day + Night"
+        },
+        {
+          "day": "VEN",
+          "title": "Rooftop Experience",
+          "description": "Aperitivo & dinner con vista skyline.",
+          "type": "Day + Night"
+        },
+        {
+          "day": "SAB",
+          "title": "Rooftop Experience",
+          "description": "Aperitivo & dinner con vista skyline.",
+          "type": "Day + Night"
+        },
+        {
+          "day": "DOM",
+          "title": "Rooftop Experience",
+          "description": "Brunch & aperitivo con vista skyline.",
+          "type": "Day + Night"
+        }
+      ],
+      "acts": [
+        {
+          "title": "Atto I: Aperitivo",
+          "time": "19:00 - 21:30",
+          "description": "Cocktail & Vista Skyline",
+          "price": "20€ - 30€"
+        },
+        {
+          "title": "Atto II: Dinner",
+          "time": "21:00 - 23:30",
+          "description": "Cena Gourmet",
+          "price": "Menu 70€+"
+        },
+        {
+          "title": "Atto III: Party",
+          "time": "23:30 - 03:00",
+          "description": "DJ Set sopra le nuvole",
+          "price": "Ingresso con drink"
+        }
+      ],
+      "pricing": {
+        "dancefloor": {
+          "title": "Tavolo Standard",
+          "price": "da 200€",
+          "desc": "Fino a 5 persone. Bottiglia inclusa."
+        },
+        "priveGold": {
+          "title": "Tavolo Premium View",
+          "price": "da 500€",
+          "desc": "Migliore vista skyline."
+        },
+        "priveDiamond": {
+          "title": "VIP Rooftop",
+          "price": "1k€+",
+          "desc": "Massima esclusività e servizio dedicato."
+        }
+      },
+      "rules": {
+        "title": "Regole del Locale",
+        "selection": "Richiesto abbigliamento elegante. Selezione all'ingresso."
+      }
+    },
+    "pineta": {
+      "subtitle": "Aperitivo cantato e serate disco nel cuore di Milano.",
+      "description": "Aperitivo cantato e ballato, serate disco con i migliori DJ, maxi schermi per eventi speciali. Pineta Club Milano offre un'esperienza unica che unisce apericena, intrattenimento live e clubbing in un'atmosfera sofisticata.",
+      "insiderTip": "L'aperitivo cantato è un must prima che la serata si trasformi in una vera e propria esperienza da club.",
+      "location": "Milano",
+      "target": "25-45 anni",
+      "dressCode": "Elegante, 18+",
+      "music": "House, Commercial, Hip-Hop",
+      "events": [
+        {
+          "day": "VEN",
+          "title": "Aperitivo Cantato",
+          "description": "Venerdì aperitivo con musica live."
+        },
+        {
+          "day": "SAB",
+          "title": "Aperitivo Cantato",
+          "description": "Sabato aperitivo con musica live."
+        }
+      ]
+    },
+    "playclub": {
+      "subtitle": "Il tempio della musica urban a Milano.",
+      "description": "Il tempio della musica urban a Milano. Situato a pochi passi da Corso Como, il Play Club è lo spazio dove design moderno e sonorità internazionali si incontrano. Dalle vibes afrobeats del giovedì all'hip-hop più ricercato del weekend, è la scelta definitiva per chi cerca un'esperienza clubbing dinamica e senza compromessi.",
+      "insiderTip": "Prendi un tavolo VIP vicino al maxischermo per la massima esperienza di festa.",
+      "location": "Milano (Zona Corso Como / Garibaldi)",
+      "target": "22-35 anni",
+      "dressCode": "Smart Casual / Trendy",
+      "music": "Hip-Hop, Afrobeats, Reggaeton, House",
+      "events": [
+        {
+          "day": "MAR",
+          "title": "Esplicito",
+          "description": "Martedì urban night."
+        },
+        {
+          "day": "GIO",
+          "title": "Shakara",
+          "description": "Giovedì afrobeats & amapiano."
+        },
+        {
+          "day": "VEN",
+          "title": "Flexx",
+          "description": "Venerdì hip-hop & trap."
+        },
+        {
+          "day": "SAB",
+          "title": "Golden Society",
+          "description": "Sabato house & commercial."
+        },
+        {
+          "day": "DOM",
+          "title": "DemonTime",
+          "description": "Domenica after-hours vibes."
+        }
+      ]
+    },
+    "fiftyfive": {
+      "subtitle": "Il cuore pulsante dell'apericena milanese.",
+      "description": "Situato in un ex deposito ferroviario di altissimo fascino, il 55 Milano è il cuore pulsante dell'apericena milanese. Uno spazio immenso e raffinato che unisce l'arte del mixology a show live e cene cantate. Dalla splendida terrazza estiva al palco interno per performance dal vivo, il Fifty Five offre un'esperienza versatile che evolve da un aperitivo rilassato a una serata energica.",
+      "insiderTip": "Arriva presto per l'aperitivo per goderti il miglior buffet in città prima dell'inizio dello spettacolo dal vivo.",
+      "location": "Milano (Zona Sempione/Bullona)",
+      "target": "25-40 anni",
+      "dressCode": "Smart Casual",
+      "music": "Commercial, House, Pop",
+      "events": [
+        {
+          "day": "VEN",
+          "title": "Aperitivo Cantato + Cena Cantata",
+          "description": "Venerdì con live music dall'aperitivo alla cena."
+        },
+        {
+          "day": "SAB",
+          "title": "Aperitivo Cantato + Cena Cantata",
+          "description": "Sabato con live music dall'aperitivo alla cena."
+        },
+        {
+          "day": "DOM",
+          "title": "Serata Latina",
+          "description": "Domenica latina (solo aperitivo)."
+        }
+      ]
+    },
+    "repvblic": {
+      "subtitle": "Il punto d'incontro tra l'estetica industriale e il clubbing d'avanguardia.",
+      "description": "Repvblic Milano è il punto d'incontro tra l'estetica industriale e il clubbing d'avanguardia. Situato nel distretto creativo della città, il locale si distingue per una ricerca sonora costante: dalla house music più ricercata del mercoledì alle vibrazioni urban del giovedì, fino agli eventi speciali del venerdì. Un'atmosfera elettrica pensata per un pubblico che vive la notte per la sua musica.",
+      "insiderTip": "Controlla il loro programma settimanale, poiché il genere musicale cambia drasticamente a seconda della serata.",
+      "location": "Milano (Zona Lambrate / Est)",
+      "target": "25-40 anni",
+      "dressCode": "Casual / Trendy",
+      "music": "House, Urban, Hip-Hop",
+      "events": [
+        {
+          "day": "MER",
+          "title": "HOME",
+          "description": "Mercoledì house music."
+        },
+        {
+          "day": "GIO",
+          "title": "SBRAAKE",
+          "description": "Giovedì urban, hip-hop & hits."
+        },
+        {
+          "day": "VEN",
+          "title": "DIRTY MONDAY",
+          "description": "Venerdì special — Dirty Monday edition."
+        }
+      ]
+    },
+    "11clubroom": {
+      "subtitle": "Un hotspot elegante e internazionale in Corso Como.",
+      "description": "Situato a pochi passi da Corso Como, l'11 Clubroom è un hotspot elegante e internazionale. Noto per la sua atmosfera sofisticata, il servizio bottiglie premium e un pubblico che ama la musica hip-hop, R&B e trap. È la destinazione perfetta per una serata esclusiva nel quartiere più vivace di Milano.",
+      "insiderTip": "Prenota un tavolo in anticipo, specialmente nei fine settimana, poiché il locale si riempie di un pubblico internazionale.",
+      "location": "Corso Como",
+      "target": "Internazionale, Elegante",
+      "dressCode": "Elegante / Chic",
+      "music": "Hip-Hop, R&B, Trap",
+      "events": [
+        {
+          "day": "MAR",
+          "title": "Serata Urban",
+          "description": "Martedì vibrazioni urban."
+        },
+        {
+          "day": "VEN",
+          "title": "Venerdì Hip-Hop",
+          "description": "Venerdì hip-hop e R&B."
+        },
+        {
+          "day": "SAB",
+          "title": "Sabato Trap",
+          "description": "Sabato trap e hits."
+        }
+      ]
+    },
+    "church81": {
+      "subtitle": "Esclusive vibrazioni deep house in un ambiente elegante.",
+      "description": "Church 81 è un locale esclusivo e alla moda situato in Via della Chiesa Rossa. Attrae un pubblico fashion altamente selezionato e offre vibrazioni deep house in un ambiente unico ed elegante. Il posto perfetto per chi cerca un'esperienza di clubbing d'élite lontano dal mainstream.",
+      "insiderTip": "Vestiti per impressionare. La selezione all'ingresso è severa e un outfit alla moda è il tuo miglior biglietto d'ingresso.",
+      "location": "Via della Chiesa Rossa",
+      "target": "Esclusivo, Fashion Crowd",
+      "dressCode": "Fashion / Avant-Garde",
+      "music": "Fashion, Deep House",
+      "events": []
+    },
+    "mibmilano": {
+      "subtitle": "La destinazione finale per i professionisti del business.",
+      "description": "Situato proprio in Piazza Affari, il cuore finanziario di Milano, il MIB Milano è la destinazione finale per i professionisti del business e un pubblico maturo. Passa senza soluzione di continuità da un dinner show di alto livello a una vivace serata in discoteca commerciale, offrendo un'esperienza premium dalla cena all'alba.",
+      "insiderTip": "Il dinner show è assolutamente da provare. Prenota un tavolo per cena per assicurarti il posto per la serata in discoteca che segue.",
+      "location": "Piazza Affari",
+      "target": "Business, 25-45",
+      "dressCode": "Business Casual / Elegante",
+      "music": "Commerciale, Dinner Show",
+      "events": []
+    },
+    "gattopardo": {
+      "subtitle": "Eleganza milanese in una chiesa sconsacrata.",
+      "description": "Situato all'interno di una chiesa sconsacrata, Il Gattopardo è uno dei locali più iconici e mozzafiato di Milano. Sotto la luce di un enorme e spettacolare lampadario di cristallo, il pubblico d'élite balla al ritmo di successi house e commerciali. È un simbolo dell'eleganza milanese e della vita notturna esclusiva, offrendo un'esperienza di clubbing indimenticabile.",
+      "insiderTip": "Il locale è famoso per il suo splendido lampadario. Vestiti in modo elegante, poiché la politica all'ingresso è molto severa.",
+      "location": "Sempione / Piero della Francesca",
+      "target": "Elite, Elegante",
+      "dressCode": "Elegante / Chic",
+      "music": "House, Commercial Gold",
+      "events": [
+        {
+          "day": "MER",
+          "title": "Dinner Show",
+          "description": "Mercoledì dinner show."
+        },
+        {
+          "day": "VEN",
+          "title": "Eleganza del Weekend",
+          "description": "Venerdì serata elegante."
+        },
+        {
+          "day": "SAB",
+          "title": "Eleganza del Weekend",
+          "description": "Sabato serata elegante."
+        }
+      ]
+    },
+    "terrazza21": {
+      "subtitle": "Vista mozzafiato che si affaccia direttamente sul Duomo di Milano.",
+      "description": "Terrazza 21 offre una vista impareggiabile e mozzafiato che si affaccia direttamente sul magnifico Duomo di Milano. Questa lounge d'élite è la destinazione finale per un aperitivo sofisticato o un drink a tarda notte accompagnato da ritmi deep house. Attrae un mix di turisti internazionali e l'élite locale in cerca di un'esperienza premium e panoramica proprio nel cuore della città.",
+      "insiderTip": "Prenota un tavolo sul bordo della terrazza per le migliori foto del Duomo al tramonto.",
+      "location": "Piazza Duomo",
+      "target": "Turisti Elite, Aperitivo con Vista",
+      "dressCode": "Smart Casual / Elegante",
+      "music": "Lounge, Deep House",
+      "events": [
+        {
+          "day": "TUTTI I GIORNI",
+          "title": "Aperitivo & Late Night Lounge",
+          "description": "Aperitivo quotidiano e lounge a tarda notte."
+        }
+      ]
+    },
+    "theclub": {
+      "subtitle": "Un punto fermo iconico della vita notturna milanese.",
+      "description": "Un punto fermo iconico della vita notturna milanese, The Club si trova tra Brera e Garibaldi. Aperto più sere a settimana, è famoso per i suoi successi commerciali ad alta energia e l'atmosfera vibrante. Uno dei preferiti dai giovani locali, dagli studenti universitari e dai turisti internazionali in cerca di una serata all'insegna del divertimento assicurato.",
+      "insiderTip": "Il martedì sera (Fidelio) e il sabato sono leggendari. Arriva presto o prenota un tavolo per saltare le lunghe code.",
+      "location": "Brera / Garibaldi",
+      "target": "Giovani, Turisti, Iconico",
+      "dressCode": "Smart Casual / Trendy",
+      "music": "Commerciale, Hits",
+      "events": [
+        {
+          "day": "MAR",
+          "title": "Fidelio",
+          "description": "Leggendaria serata del martedì."
+        },
+        {
+          "day": "SAB",
+          "title": "Sabato Sera",
+          "description": "Successi commerciali ad alta energia."
+        }
+      ]
+    }
+  }
+}

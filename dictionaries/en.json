@@ -1,0 +1,417 @@
+{
+  "club": {
+    "back": "Back to Venues",
+    "bookWa": "Book via WhatsApp",
+    "vipAccess": "Get VIP Access",
+    "timelineTitle": "The 3 Acts of the Night",
+    "pricingTitle": "Table & VIP Pricing",
+    "scheduleTitle": "Weekly Schedule",
+    "labels": {
+      "address": "Address",
+      "targetAge": "Target Age",
+      "dressCode": "Dress Code",
+      "music": "Music",
+      "services": "Services"
+    },
+    "justme": {
+      "subtitle": "A perfect mix of elegance and fun",
+      "description": "In the heart of Parco Sempione, JUSTME is the reference point for a complete experience: from aperitivo to dinner, from disco nights to exclusive VIP areas.",
+      "insiderTip": "Just Me is the heart of Fashion Week. If you want the best table, ask for Privé Branca: you will literally be under the pillars of the tower.",
+      "location": "Viale Luigi Camoens 2, Milano (Parco Sempione)",
+      "target": "25-45 years",
+      "dressCode": "Elegant / Smart Casual",
+      "music": "House, Hip-Hop, Hits, Commercial",
+      "events": [
+        {
+          "day": "MON",
+          "title": "Monday Night",
+          "description": "House & Hits",
+          "type": "Day + Night"
+        },
+        {
+          "day": "TUE",
+          "title": "University Tuesday",
+          "description": "Drinks & Fun",
+          "type": "Day + Night"
+        },
+        {
+          "day": "WED",
+          "title": "Wednesday / Absolutely",
+          "description": "Midweek vibes + Fortune teller",
+          "type": "Day + Night"
+        },
+        {
+          "day": "THU",
+          "title": "VIZIATISSIMA",
+          "description": "Singing dinner + Live show",
+          "type": "Day + Night"
+        },
+        {
+          "day": "FRI",
+          "title": "Friday Night",
+          "description": "International Guests",
+          "type": "Day + Night"
+        },
+        {
+          "day": "SAT",
+          "title": "Saturday Night",
+          "description": "Themed Parties",
+          "type": "Day + Night"
+        },
+        {
+          "day": "SUN",
+          "title": "Uptown Nights",
+          "description": "Hip-Hop Sunday",
+          "type": "Night"
+        }
+      ],
+      "acts": [
+        {
+          "title": "Act I: Aperitivo",
+          "time": "19:30 - 22:00",
+          "description": "Drink + Luxury Buffet",
+          "price": "20€ - 30€"
+        },
+        {
+          "title": "Act II: Dinner",
+          "time": "21:00 - 00:00",
+          "description": "Fusion-Mediterranean Cuisine",
+          "price": "Menu 60€+ | A la carte 80-120€"
+        },
+        {
+          "title": "Act III: Club",
+          "time": "00:00 - 05:00",
+          "description": "Guestlist Entry",
+          "price": "20€ - 30€"
+        }
+      ],
+      "pricing": {
+        "dancefloor": {
+          "title": "Dancefloor Table",
+          "price": "from 250€",
+          "desc": "Up to 5-6 people. Bottle included."
+        },
+        "priveGold": {
+          "title": "Privé Gold",
+          "price": "from 600€",
+          "desc": "Raised area, dancefloor view."
+        },
+        "priveDiamond": {
+          "title": "Privé Diamond (VIP)",
+          "price": "1.5k - 3k€+",
+          "desc": "Maximum exclusivity under the Branca Tower. Dedicated service."
+        }
+      },
+      "rules": {
+        "title": "Rules of the House",
+        "selection": "Strict door selection. Table reservation guarantees priority access."
+      }
+    },
+    "voya": {
+      "subtitle": "20th-floor rooftop: dinner and party above the clouds.",
+      "description": "A unique experience with a panoramic view of Milan. Dinner and party above the clouds, in the beating heart of the city.",
+      "insiderTip": "Book in advance to secure a table with the best skyline view.",
+      "location": "Milano (Skyline view)",
+      "target": "28-45 years",
+      "dressCode": "Elegant / Smart Casual",
+      "music": "Lounge, Deep House, Commercial",
+      "events": [
+        {
+          "day": "TUE",
+          "title": "Rooftop Experience",
+          "description": "Aperitivo & dinner with skyline view.",
+          "type": "Day + Night"
+        },
+        {
+          "day": "WED",
+          "title": "Rooftop Experience",
+          "description": "Aperitivo & dinner with skyline view.",
+          "type": "Day + Night"
+        },
+        {
+          "day": "THU",
+          "title": "Rooftop Experience",
+          "description": "Aperitivo & dinner with skyline view.",
+          "type": "Day + Night"
+        },
+        {
+          "day": "FRI",
+          "title": "Rooftop Experience",
+          "description": "Aperitivo & dinner with skyline view.",
+          "type": "Day + Night"
+        },
+        {
+          "day": "SAT",
+          "title": "Rooftop Experience",
+          "description": "Aperitivo & dinner with skyline view.",
+          "type": "Day + Night"
+        },
+        {
+          "day": "SUN",
+          "title": "Rooftop Experience",
+          "description": "Brunch & aperitivo with skyline view.",
+          "type": "Day + Night"
+        }
+      ],
+      "acts": [
+        {
+          "title": "Act I: Aperitivo",
+          "time": "19:00 - 21:30",
+          "description": "Cocktails & Skyline View",
+          "price": "20€ - 30€"
+        },
+        {
+          "title": "Act II: Dinner",
+          "time": "21:00 - 23:30",
+          "description": "Gourmet Dinner",
+          "price": "Menu 70€+"
+        },
+        {
+          "title": "Act III: Party",
+          "time": "23:30 - 03:00",
+          "description": "DJ Set above the clouds",
+          "price": "Entry with drink"
+        }
+      ],
+      "pricing": {
+        "dancefloor": {
+          "title": "Standard Table",
+          "price": "from 200€",
+          "desc": "Up to 5 people. Bottle included."
+        },
+        "priveGold": {
+          "title": "Premium View Table",
+          "price": "from 500€",
+          "desc": "Best skyline view."
+        },
+        "priveDiamond": {
+          "title": "VIP Rooftop",
+          "price": "1k€+",
+          "desc": "Maximum exclusivity and dedicated service."
+        }
+      },
+      "rules": {
+        "title": "Rules of the House",
+        "selection": "Elegant dress code required. Door selection applies."
+      }
+    },
+    "pineta": {
+      "subtitle": "Aperitivo cantato and disco nights in the heart of Milan.",
+      "description": "Singing and dancing aperitivo, disco nights with the best DJs, giant screens for special events. Pineta Club Milano offers a unique experience combining apericena, live entertainment, and clubbing in a sophisticated atmosphere.",
+      "insiderTip": "The singing aperitivo is a must-do before the night turns into a full-blown club experience.",
+      "location": "Milano",
+      "target": "25-45 years",
+      "dressCode": "Elegant, 18+",
+      "music": "House, Commercial, Hip-Hop",
+      "events": [
+        {
+          "day": "FRI",
+          "title": "Aperitivo Cantato",
+          "description": "Friday aperitivo with live music."
+        },
+        {
+          "day": "SAT",
+          "title": "Aperitivo Cantato",
+          "description": "Saturday aperitivo with live music."
+        }
+      ]
+    },
+    "playclub": {
+      "subtitle": "Milan's urban music temple.",
+      "description": "Milan's urban music temple. Located steps away from Corso Como, Play Club is where modern design meets international sounds. From Thursday's afrobeats vibes to the weekend's finest hip-hop, it's the ultimate choice for a dynamic and uncompromising clubbing experience.",
+      "insiderTip": "Get a VIP table near the maxiscreen for the ultimate party experience.",
+      "location": "Milano (Zona Corso Como / Garibaldi)",
+      "target": "22-35 years",
+      "dressCode": "Smart Casual / Trendy",
+      "music": "Hip-Hop, Afrobeats, Reggaeton, House",
+      "events": [
+        {
+          "day": "TUE",
+          "title": "Esplicito",
+          "description": "Tuesday urban night."
+        },
+        {
+          "day": "THU",
+          "title": "Shakara",
+          "description": "Thursday afrobeats & amapiano."
+        },
+        {
+          "day": "FRI",
+          "title": "Flexx",
+          "description": "Friday hip-hop & trap."
+        },
+        {
+          "day": "SAT",
+          "title": "Golden Society",
+          "description": "Saturday house & commercial."
+        },
+        {
+          "day": "SUN",
+          "title": "DemonTime",
+          "description": "Sunday after-hours vibes."
+        }
+      ]
+    },
+    "fiftyfive": {
+      "subtitle": "The heart of Milanese apericena.",
+      "description": "Located in a stunning former railway depot, 55 Milano is the heart of Milanese 'apericena'. An immense and refined space that blends the art of mixology with live shows and singing dinners. From the beautiful summer terrace to the indoor stage for live performances, Fifty Five offers a versatile experience that evolves from a relaxed aperitivo to an energetic night out.",
+      "insiderTip": "Arrive early for the aperitivo to enjoy the best buffet in town before the live show starts.",
+      "location": "Milano (Zona Sempione/Bullona)",
+      "target": "25-40 years",
+      "dressCode": "Smart Casual",
+      "music": "Commercial, House, Pop",
+      "events": [
+        {
+          "day": "FRI",
+          "title": "Singing Aperitivo + Dinner",
+          "description": "Friday with live music from aperitivo to dinner."
+        },
+        {
+          "day": "SAT",
+          "title": "Singing Aperitivo + Dinner",
+          "description": "Saturday with live music from aperitivo to dinner."
+        },
+        {
+          "day": "SUN",
+          "title": "Latin Night",
+          "description": "Latin Sunday (aperitivo only)."
+        }
+      ]
+    },
+    "repvblic": {
+      "subtitle": "Where industrial aesthetics meet avant-garde clubbing.",
+      "description": "Repvblic Milano is where industrial aesthetics meet avant-garde clubbing. Located in the city's creative district, the venue stands out for its constant sonic research: from the refined house music of Wednesdays to Thursday's urban vibes and Friday's special events. An electric atmosphere designed for an audience that lives for the music.",
+      "insiderTip": "Check their weekly schedule, as the music genre changes drastically depending on the night.",
+      "location": "Milano (Zona Lambrate / Est)",
+      "target": "25-40 years",
+      "dressCode": "Casual / Trendy",
+      "music": "House, Urban, Hip-Hop",
+      "events": [
+        {
+          "day": "WED",
+          "title": "HOME",
+          "description": "Wednesday house music."
+        },
+        {
+          "day": "THU",
+          "title": "SBRAAKE",
+          "description": "Thursday urban, hip-hop & hits."
+        },
+        {
+          "day": "FRI",
+          "title": "DIRTY MONDAY",
+          "description": "Friday special — Dirty Monday edition."
+        }
+      ]
+    },
+    "11clubroom": {
+      "subtitle": "An elegant and international hotspot in Corso Como.",
+      "description": "Located just steps away from Corso Como, 11 Clubroom is an elegant and international hotspot. Known for its sophisticated atmosphere, premium bottle service, and a crowd that loves hip-hop, R&B, and trap music. It's the perfect destination for an exclusive night out in Milan's most vibrant district.",
+      "insiderTip": "Book a table in advance, especially on weekends, as the venue gets packed with an international crowd.",
+      "location": "Corso Como",
+      "target": "International, Elegant",
+      "dressCode": "Elegant / Chic",
+      "music": "Hip-Hop, R&B, Trap",
+      "events": [
+        {
+          "day": "TUE",
+          "title": "Urban Night",
+          "description": "Tuesday urban vibes."
+        },
+        {
+          "day": "FRI",
+          "title": "Hip-Hop Friday",
+          "description": "Friday hip-hop and R&B."
+        },
+        {
+          "day": "SAT",
+          "title": "Saturday Trap",
+          "description": "Saturday trap and hits."
+        }
+      ]
+    },
+    "church81": {
+      "subtitle": "Exclusive deep house vibes in a stylish setting.",
+      "description": "Church 81 is an exclusive and fashionable venue located in Via della Chiesa Rossa. It attracts a highly curated fashion crowd and offers deep house vibes in a unique, stylish setting. The perfect spot for those seeking an elite clubbing experience away from the mainstream.",
+      "insiderTip": "Dress to impress. The door selection is strict, and a fashionable outfit is your best ticket in.",
+      "location": "Via della Chiesa Rossa",
+      "target": "Exclusive, Fashion Crowd",
+      "dressCode": "Fashion / Avant-Garde",
+      "music": "Fashion, Deep House",
+      "events": []
+    },
+    "mibmilano": {
+      "subtitle": "The ultimate destination for business professionals.",
+      "description": "Located right in Piazza Affari, the financial heart of Milan, MIB Milano is the ultimate destination for business professionals and a mature crowd. It seamlessly transitions from a high-end dinner show to a vibrant commercial club night, offering a premium experience from dinner to dawn.",
+      "insiderTip": "The dinner show is a must-try. Book a table for dinner to secure your spot for the club night that follows.",
+      "location": "Piazza Affari",
+      "target": "Business, 25-45",
+      "dressCode": "Business Casual / Elegant",
+      "music": "Commercial, Dinner Show",
+      "events": []
+    },
+    "gattopardo": {
+      "subtitle": "Milanese elegance in a deconsecrated church.",
+      "description": "Set inside a deconsecrated church, Il Gattopardo is one of Milan's most iconic and breathtaking venues. Under the glow of a massive, spectacular chandelier, the elite crowd dances to house and commercial gold hits. It's a symbol of Milanese elegance and exclusive nightlife, offering an unforgettable clubbing experience.",
+      "insiderTip": "The venue is famous for its stunning chandelier. Dress elegantly, as the door policy is very strict.",
+      "location": "Sempione / Piero della Francesca",
+      "target": "Elite, Elegant",
+      "dressCode": "Elegant / Chic",
+      "music": "House, Commercial Gold",
+      "events": [
+        {
+          "day": "WED",
+          "title": "Dinner Show",
+          "description": "Wednesday dinner show."
+        },
+        {
+          "day": "FRI",
+          "title": "Weekend Elegance",
+          "description": "Friday elegant night."
+        },
+        {
+          "day": "SAT",
+          "title": "Weekend Elegance",
+          "description": "Saturday elegant night."
+        }
+      ]
+    },
+    "terrazza21": {
+      "subtitle": "Breathtaking view directly overlooking the Milan Duomo.",
+      "description": "Terrazza 21 offers an unparalleled, breathtaking view directly overlooking the magnificent Milan Duomo. This elite lounge is the ultimate destination for a sophisticated aperitivo or a late-night drink accompanied by deep house beats. It attracts a mix of international tourists and local elite seeking a premium, scenic experience right in the heart of the city.",
+      "insiderTip": "Book a table by the edge of the terrace for the best photos of the Duomo at sunset.",
+      "location": "Piazza Duomo",
+      "target": "Tourist Elite, Aperitivo View",
+      "dressCode": "Smart Casual / Elegant",
+      "music": "Lounge, Deep House",
+      "events": [
+        {
+          "day": "DAILY",
+          "title": "Aperitivo & Late Night Lounge",
+          "description": "Daily aperitivo and late night lounge."
+        }
+      ]
+    },
+    "theclub": {
+      "subtitle": "An iconic staple of Milan's nightlife.",
+      "description": "An iconic staple of Milan's nightlife, The Club is located between Brera and Garibaldi. Open multiple nights a week, it's famous for its high-energy commercial hits and vibrant atmosphere. A favorite among young locals, university students, and international tourists looking for a guaranteed fun night out.",
+      "insiderTip": "Tuesday nights (Fidelio) and Saturdays are legendary. Arrive early or book a table to skip the long lines.",
+      "location": "Brera / Garibaldi",
+      "target": "Young, Tourists, Iconic",
+      "dressCode": "Smart Casual / Trendy",
+      "music": "Commercial, Hits",
+      "events": [
+        {
+          "day": "TUE",
+          "title": "Fidelio",
+          "description": "Legendary Tuesday night."
+        },
+        {
+          "day": "SAT",
+          "title": "Saturday Night",
+          "description": "High-energy commercial hits."
+        }
+      ]
+    }
+  }
+}

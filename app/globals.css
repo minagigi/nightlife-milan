@@ -1,0 +1,120 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --color-charcoal: #131009;
+  --color-champagne: #C9A86A;
+  --color-canvas: #131009;
+  --color-surface-1: #1C1810;
+  --color-surface-2: #262017;
+  --color-gold: #C9A86A;
+  --color-gold-bright: #DFC58E;
+  --color-gold-deep: #8A6E3A;
+  --color-ivory: #EDE6D6;
+  --color-ivory-dim: #B8B0A0;
+  --color-stone: #837C6C;
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-cormorant), ui-serif, Georgia, serif;
+}
+
+@layer utilities {
+  /* Scrollbar hide — used across pages */
+  .scrollbar-hide,
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar,
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Liquid glass — dark surface with blur */
+  .glass-dark {
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    background: rgba(10, 10, 10, 0.72);
+    border: 1px solid rgba(212, 175, 55, 0.12);
+  }
+
+  /* Gold ambient glow for card hover */
+  .glow-gold {
+    box-shadow:
+      0 0 0 1px rgba(212, 175, 55, 0.25),
+      0 8px 32px rgba(212, 175, 55, 0.10),
+      0 24px 64px rgba(212, 175, 55, 0.05);
+  }
+
+  /* Luxury easing transition */
+  .transition-luxury {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Gold text glow for headings */
+  .text-glow-gold {
+    text-shadow:
+      0 0 24px rgba(212, 175, 55, 0.45),
+      0 0 60px rgba(212, 175, 55, 0.20);
+  }
+
+  /* Shimmer gradient text */
+  @keyframes shimmer {
+    0%   { background-position: -200% center; }
+    100% { background-position:  200% center; }
+  }
+  .shimmer-gold {
+    background: linear-gradient(90deg, #B8962E 0%, #F5E6A3 45%, #C9A86A 55%, #B8962E 100%);
+    background-size: 200% auto;
+    animation: shimmer 4s linear infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Floating gold line accent */
+  .accent-line-gold::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: #C9A86A;
+    margin-bottom: 1rem;
+    opacity: 0.6;
+  }
+
+  /* Maison — velo caldo uniforme sulle foto */
+  .img-maison { position: relative; }
+  .img-maison::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg, rgba(19,16,9,0) 35%, rgba(19,16,9,0.55) 100%);
+  }
+}
+
+body { color: #EDE6D6; }
+
+/* Hero carousel progress bar */
+@keyframes progress-bar {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+/* Custom cursor — desktop only */
+@media (hover: hover) and (pointer: fine) {
+  html, a, button, [role="button"], input, textarea, select, label {
+    cursor: none !important;
+  }
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "pagespeed-insights": {
+      "source": "enderpuentes/ai-agent-skills",
+      "sourceType": "github",
+      "skillPath": "pagespeed-insights/SKILL.md",
+      "computedHash": "80a9e00c680f7341b442efae1e9d05572681dbf57db1cee0db8cc8d920b14a7c"
+    },
+    "web-design-guidelines": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/web-design-guidelines/SKILL.md",
+      "computedHash": "f3bc47f890f42a44db1007ab390709ec368e4b8c089baee6b0007182236ac474"
+    }
+  }
+}
