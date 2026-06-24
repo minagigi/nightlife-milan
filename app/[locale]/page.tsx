@@ -2,19 +2,19 @@ import { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import Hero from '@/components/Hero';
 import IntentCards from '@/components/IntentCards';
-import EventTimeline from '@/components/EventTimeline';
-const EventFilters = dynamic(() => import('@/components/EventFilters'));
-
-// Lazy-load below-fold components that use Framer Motion to reduce TBT
-const DiscoveryGrid = dynamic(() => import('@/components/DiscoveryGrid'));
+import Image from 'next/image';
+import Link from 'next/link';
+import { MessageCircle } from 'lucide-react';
+import { Suspense } from 'react';
 import { mockEvents, mockVenues } from '@/lib/data';
 import { fetchEventbriteEvents } from '@/lib/eventbriteSync';
 import { Venue } from '@/lib/types';
-import { Suspense } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
+import { CONTACT } from '@/config/contact';
 
-export const revalidate = 3600; // ISR: revalidate every hour
+const EventFilters = dynamic(() => import('@/components/EventFilters'));
+const EventsCarousel = dynamic(() => import('@/components/EventsCarousel'));
+
+export const revalidate = 3600;
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -66,88 +66,311 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+// ─── Featured venues shown in the homepage strip ───────────────────────────
+const FEATURED_VENUES = [
+  {
+    id: 'v-justme',
+    slug: 'just-me-milano',
+    image: '/images/just-me-milano.webp',
+    name: { en: 'Just Me', it: 'Just Me' },
+    zone: { en: 'Sempione', it: 'Sempione' },
+    label: { en: 'Most Exclusive', it: 'Più Esclusivo' },
+    desc: {
+      en: 'Roberto Cavalli design, velvet booths, fashion crowd. The Milan door that reads the room.',
+      it: 'Design Roberto Cavalli, velluto e acciaio, crowd fashion. La selezione che legge la sala.',
+    },
+    tags: { en: ['House', 'Luxury', 'VIP Tables'], it: ['House', 'Lusso', 'Tavoli VIP'] },
+  },
+  {
+    id: 'v-pineta',
+    slug: 'pineta-club-milano',
+    image: '/images/pineta-milano.webp',
+    name: { en: 'Pineta Club', it: 'Pineta Club' },
+    zone: { en: 'Corso Como', it: 'Corso Como' },
+    label: { en: 'Singing Aperitivo', it: 'Aperitivo Cantato' },
+    desc: {
+      en: 'Long shared tables, buffet from 19:30, everyone on their feet by midnight.',
+      it: 'Tavoli lunghi condivisi, buffet dalle 19:30, tutti in piedi a mezzanotte.',
+    },
+    tags: { en: ['Reggaeton', 'Commercial', 'Aperitivo'], it: ['Reggaeton', 'Commerciale', 'Aperitivo'] },
+  },
+  {
+    id: 'v-voya',
+    slug: 'voya-rooftop-milan',
+    image: '/images/voya-rooftop-milan.webp',
+    name: { en: 'Voya Rooftop', it: 'Voya Rooftop' },
+    zone: { en: 'Isola — 20th floor', it: 'Isola — 20° piano' },
+    label: { en: 'Best Skyline View', it: 'Vista Skyline' },
+    desc: {
+      en: 'The Milan skyline runs the length of the glass. Aperitivo turns into a DJ set without anyone noticing.',
+      it: 'Lo skyline di Milano lungo le vetrate. L\'aperitivo diventa DJ set senza che te ne accorga.',
+    },
+    tags: { en: ['Skyline', 'Lounge', 'Cocktails'], it: ['Skyline', 'Lounge', 'Cocktail'] },
+  },
+];
+
+// ─── How-the-night-works steps ─────────────────────────────────────────────
+const NIGHT_STEPS = [
+  {
+    time: '18:00 — 22:00',
+    title: { en: 'Aperitivo', it: 'Aperitivo' },
+    body: {
+      en: 'Every Milan night starts with aperitivo. Navigli for canal-side vibes, Brera for luxury, Voya for rooftop skyline views.',
+      it: 'La serata milanese inizia sempre con l\'aperitivo. Navigli per il canalside, Brera per il luxury, Voya per il rooftop con vista skyline.',
+    },
+  },
+  {
+    time: '22:00 — 00:00',
+    title: { en: 'Dinner & Pre-Club', it: 'Cena & Pre-Club' },
+    body: {
+      en: 'Dinner at the top restaurants in Corso Como or Brera. Clubs open but stay quiet. Arrive after midnight for the right atmosphere.',
+      it: 'La cena nei migliori ristoranti di Corso Como o Brera. I club aprono ma restano vuoti. Arriva dopo mezzanotte.',
+    },
+  },
+  {
+    time: '00:00 — 05:00',
+    title: { en: 'Club & VIP', it: 'Club & VIP' },
+    body: {
+      en: 'Just Me, Pineta, Play Club peak between 1–3 AM. VIP tables with bottle service to skip the queue and own the night.',
+      it: 'Just Me, Pineta, Play Club al picco tra l\'una e le tre. Tavolo VIP con bottle service per saltare la fila.',
+    },
+  },
+];
+
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const lang = (locale === 'it' ? 'it' : 'en') as 'en' | 'it';
 
-  // JSON-LD Schema for LocalBusiness / Guide
   const schema = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Nightlife Milan",
-    "image": "https://nightlifemilan.com/images/milan-nightclub-luxury-vip-champagne.webp",
-    "description": lang === 'it' 
-      ? "La guida definitiva alla vita notturna milanese. Esplora club esclusivi ed eventi." 
-      : "The ultimate guide to Milan's nightlife. Explore exclusive clubs and events.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Milan",
-      "addressCountry": "IT"
-    },
-    "url": lang === 'it' ? "https://nightlifemilan.com/it" : "https://nightlifemilan.com"
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: 'Nightlife Milan',
+    image: 'https://nightlifemilan.com/images/milan-nightclub-luxury-vip-champagne.webp',
+    description: lang === 'it'
+      ? 'La guida definitiva alla vita notturna milanese.'
+      : "The ultimate guide to Milan's nightlife.",
+    address: { '@type': 'PostalAddress', addressLocality: 'Milan', addressCountry: 'IT' },
+    url: lang === 'it' ? 'https://nightlifemilan.com/it' : 'https://nightlifemilan.com',
   };
 
-  // Only show upcoming events (today or future) — filtering by genre/zone/price is handled client-side in DiscoveryGrid
+  // Upcoming events only
   const todayMidnight = new Date();
   todayMidnight.setHours(0, 0, 0, 0);
 
-  // Merge static mock events + live Eventbrite events
   const eventbriteEvents = await fetchEventbriteEvents();
   const allRawEvents = [
     ...mockEvents,
     ...eventbriteEvents.filter(eb => !mockEvents.some(m => m.id === eb.id)),
   ];
 
-  let allEvents = allRawEvents
-    .filter(event => new Date(event.dateISO) >= todayMidnight)
-    .map(event => {
-      const venue = mockVenues.find(v => v.id === event.venueId);
-      return { event, venue: venue as Venue };
-    })
-    .filter(item => item.venue !== undefined);
-
-  // Helper to get absolute priority
-  const getAbsolutePriority = (name: string) => {
-    const upperName = name.toUpperCase();
-    if (upperName.includes('JUSTME')) return 1;
-    if (upperName.includes('PINETA')) return 2;
-    if (upperName.includes('VOYA')) return 3;
-    return 99; // Default for others
+  // Priority: JustMe=1, Pineta=2, Voya=3, rest=99
+  const getVenuePriority = (venueId: string) => {
+    if (venueId === 'v-justme') return 1;
+    if (venueId === 'v-pineta') return 2;
+    if (venueId === 'v-voya')   return 3;
+    return 99;
   };
 
-  allEvents.sort((a, b) => new Date(a.event.dateISO).getTime() - new Date(b.event.dateISO).getTime());
+  const allEvents = allRawEvents
+    .filter(event => new Date(event.dateISO) >= todayMidnight)
+    .map(event => ({ event, venue: mockVenues.find(v => v.id === event.venueId) as Venue }))
+    .filter(item => item.venue !== undefined)
+    .sort((a, b) => {
+      const dateA = new Date(a.event.dateISO).getTime();
+      const dateB = new Date(b.event.dateISO).getTime();
+      // Within the same calendar day, sort by venue priority
+      const sameDay = Math.abs(dateA - dateB) < 86_400_000;
+      if (sameDay) {
+        const pd = getVenuePriority(a.event.venueId) - getVenuePriority(b.event.venueId);
+        if (pd !== 0) return pd;
+      }
+      return dateA - dateB;
+    });
+
+  const lp = lang === 'it' ? '/it' : '';
+  const waMsg = encodeURIComponent(
+    lang === 'it'
+      ? 'Ciao! Vorrei prenotare un tavolo VIP a Milano. Puoi aiutarmi?'
+      : "Hi! I'd like to book a VIP table in Milan. Can you help me?"
+  );
+  const waLink = `${CONTACT.whatsapp.link}?text=${waMsg}`;
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <main className="flex-1 flex flex-col w-full">
-        {/* Passiamo la prop lang a tutti i componenti */}
+
+        {/* ── 1. Hero ───────────────────────────────────────────────────── */}
         <Hero locale={lang} />
+
+        {/* ── 2. Intent cards ──────────────────────────────────────────── */}
         <IntentCards locale={lang} />
 
-        <Suspense fallback={<div className="h-20" />}>
-          <EventFilters lang={lang} />
-        </Suspense>
+        {/* ── 3. How the night works (context before events) ───────────── */}
+        <section className="py-20 px-4 sm:px-6 lg:px-8 w-full border-t border-white/5">
+          <div className="max-w-7xl mx-auto">
+            <p className="font-sans text-champagne/60 text-[10px] tracking-[0.3em] uppercase mb-3">
+              {lang === 'it' ? 'La Notte Milanese' : 'The Milan Night'}
+            </p>
+            <h2 className="font-serif text-3xl md:text-4xl font-medium text-white tracking-tight mb-10">
+              {lang === 'it' ? 'Come Funziona la Notte a Milano' : 'How Milan Nightlife Works'}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {NIGHT_STEPS.map((step, i) => (
+                <div
+                  key={i}
+                  className="p-6 rounded-xl border border-white/8 bg-white/[0.02] hover:border-champagne/20 transition-colors duration-300"
+                >
+                  <p className="font-sans text-champagne/60 text-[10px] tracking-[0.25em] uppercase mb-3">{step.time}</p>
+                  <h3 className="font-serif text-xl text-white font-semibold mb-3">{step.title[lang]}</h3>
+                  <p className="font-sans text-white/55 text-sm leading-relaxed">{step.body[lang]}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-        <EventTimeline items={allEvents} lang={lang} />
+        {/* ── 4. Featured Venues strip ─────────────────────────────────── */}
+        <section className="py-20 px-4 sm:px-6 lg:px-8 w-full border-t border-white/5">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex items-end justify-between mb-10 gap-4">
+              <div>
+                <p className="font-sans text-champagne/60 text-[10px] tracking-[0.3em] uppercase mb-3">
+                  {lang === 'it' ? 'Selezione Curata' : 'Curated Selection'}
+                </p>
+                <h2 className="font-serif text-3xl md:text-4xl font-medium text-white tracking-tight">
+                  {lang === 'it' ? 'I Migliori Club di Milano' : 'Top Milan Clubs'}
+                </h2>
+              </div>
+              <Link
+                href={`${lp}/clubs`}
+                className="hidden sm:flex items-center gap-2 text-xs font-sans text-champagne/60 hover:text-champagne tracking-widest uppercase transition-colors shrink-0"
+              >
+                {lang === 'it' ? 'Tutti i locali' : 'All venues'} →
+              </Link>
+            </div>
 
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-champagne/20 to-transparent" aria-hidden="true" />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {FEATURED_VENUES.map((v) => (
+                <Link
+                  key={v.id}
+                  href={`${lp}/clubs/${v.slug}`}
+                  className="group relative overflow-hidden rounded-xl border border-white/8 hover:border-champagne/25 transition-all duration-500 bg-black"
+                >
+                  {/* Image */}
+                  <div className="relative h-52 overflow-hidden">
+                    <Image
+                      src={v.image}
+                      alt={v.name[lang]}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      quality={65}
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+                    {/* Label badge */}
+                    <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-champagne/15 border border-champagne/30 text-champagne text-[10px] font-sans tracking-widest uppercase backdrop-blur-sm">
+                      {v.label[lang]}
+                    </span>
+                  </div>
 
-        <Suspense fallback={<div className="h-64 flex items-center justify-center"><span className="text-champagne">Loading...</span></div>}>
-          <DiscoveryGrid items={allEvents} lang={lang} />
-        </Suspense>
+                  {/* Content */}
+                  <div className="p-5">
+                    <p className="font-sans text-champagne/50 text-[10px] tracking-[0.25em] uppercase mb-1">{v.zone[lang]}</p>
+                    <h3 className="font-serif text-xl text-white font-semibold mb-2 group-hover:text-champagne transition-colors duration-300">
+                      {v.name[lang]}
+                    </h3>
+                    <p className="font-sans text-white/50 text-sm leading-relaxed mb-4">{v.desc[lang]}</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {v.tags[lang].map(tag => (
+                        <span key={tag} className="px-2 py-0.5 rounded-full border border-white/10 text-white/40 text-[10px] font-sans tracking-wider">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            <div className="mt-6 sm:hidden text-center">
+              <Link href={`${lp}/clubs`} className="text-xs font-sans text-champagne/60 hover:text-champagne tracking-widest uppercase transition-colors">
+                {lang === 'it' ? 'Vedi tutti i locali →' : 'See all venues →'}
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 5. Events: filters + discovery grid (together) ───────────── */}
+        <section className="border-t border-white/5">
+          <div className="py-20 px-4 sm:px-6 lg:px-8 w-full">
+            <div className="max-w-7xl mx-auto mb-10">
+              <p className="font-sans text-champagne/60 text-[10px] tracking-[0.3em] uppercase mb-3">
+                {lang === 'it' ? 'Agenda' : 'Upcoming'}
+              </p>
+              <div className="flex items-end justify-between gap-4">
+                <h2 className="font-serif text-3xl md:text-4xl font-medium text-white tracking-tight">
+                  {lang === 'it' ? 'Prossime Serate' : 'Upcoming Events'}
+                </h2>
+                <Link
+                  href={`${lp}/events`}
+                  className="hidden sm:flex items-center gap-2 text-xs font-sans text-champagne/60 hover:text-champagne tracking-widest uppercase transition-colors shrink-0"
+                >
+                  {lang === 'it' ? 'Tutti gli eventi' : 'All events'} →
+                </Link>
+              </div>
+            </div>
+
+            {/* Filters sit directly above the grid */}
+            <Suspense fallback={<div className="h-12" />}>
+              <EventFilters lang={lang} />
+            </Suspense>
+          </div>
+
+          <Suspense fallback={<div className="h-[380px]" />}>
+            <EventsCarousel items={allEvents} lang={lang} />
+          </Suspense>
+
+          <div className="pb-6 text-center sm:hidden px-4">
+            <Link href={`${lp}/events`} className="text-xs font-sans text-champagne/60 hover:text-champagne tracking-widest uppercase transition-colors">
+              {lang === 'it' ? 'Tutti gli eventi →' : 'All events →'}
+            </Link>
+          </div>
+        </section>
 
         <div className="w-full h-px bg-gradient-to-r from-transparent via-champagne/15 to-transparent" aria-hidden="true" />
 
-        {/* AI Trafiletto — for AI search engines */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 w-full bg-gradient-to-b from-charcoal to-black">
+        {/* ── 6. WhatsApp CTA strip ────────────────────────────────────── */}
+        <section className="py-24 px-4 sm:px-6 lg:px-8 w-full border-t border-white/5 bg-gradient-to-b from-transparent to-champagne/[0.03]">
+          <div className="max-w-2xl mx-auto text-center">
+            <p className="font-sans text-champagne/60 text-[10px] tracking-[0.3em] uppercase mb-4">
+              {lang === 'it' ? 'Concierge Personale' : 'Personal Concierge'}
+            </p>
+            <h2 className="font-serif text-3xl md:text-4xl font-medium text-white tracking-tight mb-4">
+              {lang === 'it' ? 'Prenota il Tuo Tavolo Stasera' : 'Book Your Table Tonight'}
+            </h2>
+            <p className="font-sans text-white/50 text-base leading-relaxed mb-8 max-w-lg mx-auto">
+              {lang === 'it'
+                ? 'Scrivi su WhatsApp. Ti rispondo entro 10 minuti con disponibilità, prezzi e accesso diretto senza coda.'
+                : 'Message on WhatsApp. Reply within 10 minutes with availability, pricing and direct queue-free access.'}
+            </p>
+            <a
+              href={waLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-champagne text-[#131009] font-sans font-semibold text-sm tracking-wider uppercase hover:bg-champagne/90 transition-colors duration-300 shadow-[0_0_40px_rgba(201,168,106,0.2)]"
+            >
+              <MessageCircle className="w-4 h-4" />
+              {lang === 'it' ? 'WhatsApp — Rispondo in 10 min' : 'WhatsApp — Reply in 10 min'}
+            </a>
+            <p className="mt-4 font-sans text-white/25 text-xs tracking-wider">
+              {lang === 'it' ? 'Servizio gratuito · Nessuna commissione' : 'Free service · No booking fee'}
+            </p>
+          </div>
+        </section>
+
+        {/* ── 7. AI Trafiletto ─────────────────────────────────────────── */}
+        <section className="py-20 px-4 sm:px-6 lg:px-8 w-full bg-gradient-to-b from-charcoal to-black border-t border-white/5">
           <div className="max-w-3xl mx-auto">
             <div className="p-5 rounded-xl border border-champagne/20 bg-champagne/[0.04] mb-12">
               <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">Quick Answer</p>
@@ -158,7 +381,6 @@ export default async function Page({
               </p>
             </div>
 
-            {/* H2: The Beating Heart of Milan */}
             <h2 className="font-serif text-3xl md:text-4xl font-medium text-[var(--ivory)] tracking-tight mb-6">
               {lang === 'it' ? 'Il Cuore Pulsante di Milano' : 'The Beating Heart of Milan'}
             </h2>
@@ -170,117 +392,30 @@ export default async function Page({
           </div>
         </section>
 
-        {/* Photo Grid — asymmetric masonry layout */}
+        {/* ── 8. Photo Grid ────────────────────────────────────────────── */}
         <section className="py-4 px-4 sm:px-6 lg:px-8 w-full bg-black border-t border-white/5">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-3 lg:grid-cols-5 gap-2" style={{ gridTemplateRows: 'auto auto' }}>
-              {/* Large featured image — spans 2 rows on desktop */}
               <div className="relative col-span-2 lg:col-span-2 row-span-2 h-56 sm:h-72 lg:h-80 overflow-hidden rounded-xl">
-                <Image
-                  src="/images/vip-table-milan-nightclub-just-me.webp"
-                  alt="Just Me Milano VIP tables — luxury nightclub in Sempione"
-                  fill quality={65}
-                  className="object-cover hover:scale-105 transition-transform duration-700"
-                  sizes="(max-width: 1024px) 66vw, 40vw"
-                />
+                <Image src="/images/vip-table-milan-nightclub-just-me.webp" alt="Just Me Milano VIP tables — luxury nightclub in Sempione" fill quality={65} className="object-cover hover:scale-105 transition-transform duration-700" sizes="(max-width: 1024px) 66vw, 40vw" />
               </div>
-              {/* Top-right small images */}
               <div className="relative col-span-1 lg:col-span-2 h-28 sm:h-36 lg:h-[152px] overflow-hidden rounded-xl">
-                <Image
-                  src="/images/pineta-milano.webp"
-                  alt="Pineta Club Milan — singing aperitivo at Corso Como"
-                  fill quality={65}
-                  className="object-cover hover:scale-105 transition-transform duration-700"
-                  sizes="(max-width: 1024px) 33vw, 40vw"
-                />
+                <Image src="/images/pineta-milano.webp" alt="Pineta Club Milan — singing aperitivo at Corso Como" fill quality={65} className="object-cover hover:scale-105 transition-transform duration-700" sizes="(max-width: 1024px) 33vw, 40vw" />
               </div>
               <div className="relative col-span-1 lg:col-span-1 h-28 sm:h-36 lg:h-[152px] overflow-hidden rounded-xl">
-                <Image
-                  src="/images/rooftop-bar-milan-voya-skyline.webp"
-                  alt="Voya Rooftop Milan — cocktails with skyline view in Isola"
-                  fill quality={65}
-                  className="object-cover hover:scale-105 transition-transform duration-700"
-                  sizes="(max-width: 1024px) 33vw, 20vw"
-                />
+                <Image src="/images/rooftop-bar-milan-voya-skyline.webp" alt="Voya Rooftop Milan — cocktails with skyline view in Isola" fill quality={65} className="object-cover hover:scale-105 transition-transform duration-700" sizes="(max-width: 1024px) 33vw, 20vw" />
               </div>
-              {/* Bottom-right small images */}
               <div className="relative col-span-1 lg:col-span-2 h-28 sm:h-36 lg:h-[152px] overflow-hidden rounded-xl">
-                <Image
-                  src="/images/milan-club-crowd-dancefloor-night.webp"
-                  alt="Milan nightclub dancefloor — Friday night crowd 2026"
-                  fill quality={65}
-                  className="object-cover hover:scale-105 transition-transform duration-700"
-                  sizes="(max-width: 1024px) 33vw, 40vw"
-                />
+                <Image src="/images/milan-club-crowd-dancefloor-night.webp" alt="Milan nightclub dancefloor — Friday night crowd 2026" fill quality={65} className="object-cover hover:scale-105 transition-transform duration-700" sizes="(max-width: 1024px) 33vw, 40vw" />
               </div>
               <div className="relative col-span-1 lg:col-span-1 h-28 sm:h-36 lg:h-[152px] overflow-hidden rounded-xl">
-                <Image
-                  src="/images/bottle-service-milan-vip-nightclub.webp"
-                  alt="Bottle service Milan — VIP champagne at exclusive nightclub"
-                  fill quality={65}
-                  className="object-cover hover:scale-105 transition-transform duration-700"
-                  sizes="(max-width: 1024px) 33vw, 20vw"
-                />
+                <Image src="/images/bottle-service-milan-vip-nightclub.webp" alt="Bottle service Milan — VIP champagne at exclusive nightclub" fill quality={65} className="object-cover hover:scale-105 transition-transform duration-700" sizes="(max-width: 1024px) 33vw, 20vw" />
               </div>
             </div>
           </div>
         </section>
 
-        {/* How Milan Nightlife Works — staggered timeline */}
-        <section className="py-28 px-4 sm:px-6 lg:px-8 w-full bg-black border-t border-white/5">
-          <div className="max-w-5xl mx-auto">
-            <h2 className="font-serif text-3xl md:text-4xl font-medium text-[var(--ivory)] tracking-tight mb-16">
-              {lang === 'it' ? 'Come Funziona la Notte a Milano' : 'How Milan Nightlife Works'}
-            </h2>
-            <div className="relative flex flex-col gap-0">
-              {/* Vertical connector line */}
-              <div className="absolute left-[22px] top-8 bottom-8 w-px bg-gradient-to-b from-champagne/40 via-champagne/15 to-transparent hidden sm:block" />
-              {[
-                {
-                  num: '01',
-                  time: '18:00 — 22:00',
-                  title: lang === 'it' ? 'Aperitivo' : 'Aperitivo',
-                  body: lang === 'it'
-                    ? 'La serata milanese inizia sempre con l\'aperitivo. Navigli per il canalside, Brera per il luxury, Voya per il rooftop con vista skyline.'
-                    : 'Every Milan night starts with aperitivo. Navigli for canal-side vibes, Brera for luxury, Voya for rooftop skyline views.',
-                },
-                {
-                  num: '02',
-                  time: '21:00 — 23:30',
-                  title: lang === 'it' ? 'Cena & Pre-Club' : 'Dinner & Pre-Club',
-                  body: lang === 'it'
-                    ? 'La cena nei migliori ristoranti di Corso Como o Brera. I club aprono ma restano vuoti. Arriva dopo mezzanotte per trovare l\'atmosfera giusta.'
-                    : 'Dinner at the top restaurants in Corso Como or Brera. Clubs open but stay quiet. Arrive after midnight for the right atmosphere.',
-                },
-                {
-                  num: '03',
-                  time: '00:00 — 05:00',
-                  title: lang === 'it' ? 'Club & VIP' : 'Club & VIP',
-                  body: lang === 'it'
-                    ? 'Just Me, Pineta, Play Club raggiungono il picco tra l\'una e le tre. VIP table con bottle service consigliati per saltare la coda e vivere il meglio della serata.'
-                    : 'Just Me, Pineta, Play Club peak between 1–3 AM. VIP tables with bottle service recommended to skip the queue and get the best of the night.',
-                },
-              ].map((item, i) => (
-                <div key={item.num} className={`flex gap-6 sm:gap-10 items-start ${i < 2 ? 'pb-12' : ''}`}>
-                  {/* Number node */}
-                  <div className="relative flex-shrink-0 flex flex-col items-center">
-                    <div className="w-11 h-11 rounded-full border border-champagne/30 bg-champagne/[0.06] flex items-center justify-center">
-                      <span className="font-sans text-champagne text-[11px] font-bold tracking-widest">{item.num}</span>
-                    </div>
-                  </div>
-                  {/* Content */}
-                  <div className="flex-1 pt-2.5">
-                    <p className="font-sans text-champagne/70 text-[10px] tracking-[0.3em] uppercase mb-1">{item.time}</p>
-                    <h3 className="font-serif text-xl text-white font-semibold mb-2">{item.title}</h3>
-                    <p className="font-sans text-white/60 text-sm leading-relaxed">{item.body}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* H2: Tags / Popular Searches */}
+        {/* ── 9. Tags / Popular Searches ───────────────────────────────── */}
         <section className="py-20 px-4 sm:px-6 lg:px-8 w-full bg-black border-t border-white/5">
           <div className="max-w-5xl mx-auto">
             <h2 className="font-serif text-3xl md:text-4xl font-medium text-[var(--ivory)] tracking-tight mb-6">
@@ -288,14 +423,14 @@ export default async function Page({
             </h2>
             <div className="flex flex-wrap gap-3">
               {[
-                { label: lang === 'it' ? 'Club Techno' : 'Techno Clubs', href: `${lang === 'it' ? '/it' : ''}/zones` },
-                { label: lang === 'it' ? 'VIP Table' : 'VIP Tables', href: `${lang === 'it' ? '/it' : ''}/vip-tables` },
-                { label: lang === 'it' ? 'Aperitivo Milano' : 'Aperitivo Milan', href: `${lang === 'it' ? '/it' : ''}/aperitivo` },
-                { label: lang === 'it' ? 'Zona Navigli' : 'Navigli Zone', href: `${lang === 'it' ? '/it' : ''}/zones/navigli` },
-                { label: lang === 'it' ? 'Zona Corso Como' : 'Corso Como Zone', href: `${lang === 'it' ? '/it' : ''}/zones/corso-como` },
-                { label: lang === 'it' ? 'Guida ai Club' : 'Club Guide', href: `${lang === 'it' ? '/it' : ''}/guides` },
-                { label: lang === 'it' ? 'Concierge' : 'Concierge Service', href: `${lang === 'it' ? '/it' : ''}/concierge` },
-                { label: lang === 'it' ? 'Fashion Week Milano' : 'Fashion Week Milan', href: `${lang === 'it' ? '/it' : ''}/clubs` },
+                { label: lang === 'it' ? 'Club Techno' : 'Techno Clubs', href: `${lp}/zones` },
+                { label: lang === 'it' ? 'VIP Table' : 'VIP Tables', href: `${lp}/vip-tables` },
+                { label: lang === 'it' ? 'Aperitivo Milano' : 'Aperitivo Milan', href: `${lp}/aperitivo` },
+                { label: lang === 'it' ? 'Zona Navigli' : 'Navigli Zone', href: `${lp}/zones/navigli` },
+                { label: lang === 'it' ? 'Zona Corso Como' : 'Corso Como Zone', href: `${lp}/zones/corso-como` },
+                { label: lang === 'it' ? 'Guida ai Club' : 'Club Guide', href: `${lp}/guides` },
+                { label: lang === 'it' ? 'Concierge' : 'Concierge Service', href: `${lp}/concierge` },
+                { label: lang === 'it' ? 'Fashion Week Milano' : 'Fashion Week Milan', href: `${lp}/clubs` },
               ].map((tag) => (
                 <Link
                   key={tag.label}
@@ -308,6 +443,7 @@ export default async function Page({
             </div>
           </div>
         </section>
+
       </main>
     </>
   );

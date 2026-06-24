@@ -458,6 +458,16 @@ export default async function ClubPage({ params }: Props) {
               <MapPin className="w-6 h-6 text-champagne mb-2" />
               <span className="text-xs text-white/40 uppercase tracking-wider mb-1">{t.labels.address}</span>
               <span className="text-sm font-medium text-white/80">{c?.location || venue.address.streetAddress}</span>
+              {venue.coordinates?.latitude && (
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${venue.coordinates.latitude},${venue.coordinates.longitude}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-1 text-xs text-champagne/70 hover:text-champagne underline underline-offset-2 transition-colors"
+                >
+                  {locale === 'it' ? 'Apri in Google Maps ↗' : 'Open in Google Maps ↗'}
+                </a>
+              )}
             </div>
             <div className="flex flex-col px-4">
               <Clock className="w-6 h-6 text-champagne mb-2" />
@@ -610,6 +620,16 @@ export default async function ClubPage({ params }: Props) {
                     {locale === 'it' ? 'Indirizzo' : 'Address'}
                   </p>
                   <p className="text-white/70">{venue.address.streetAddress}, Milan</p>
+                  {venue.coordinates?.latitude && (
+                    <a
+                      href={`https://www.google.com/maps/search/?api=1&query=${venue.coordinates.latitude},${venue.coordinates.longitude}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs text-champagne/70 hover:text-champagne underline underline-offset-2 transition-colors mt-1 inline-block"
+                    >
+                      {locale === 'it' ? 'Apri in Google Maps ↗' : 'Open in Google Maps ↗'}
+                    </a>
+                  )}
                 </div>
                 <div>
                   <p className="text-white/40 uppercase tracking-widest text-[10px] mb-1">

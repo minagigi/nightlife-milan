@@ -141,6 +141,18 @@ export default async function ClubsPage({
   const topVenues = sortedVenues.slice(0, 3);
   const allVenues = sortedVenues;
 
+  const mapPins = getVenues()
+    .filter((v) => v.coordinates?.latitude && v.coordinates?.longitude)
+    .map((v) => ({
+      id: v.id,
+      name: v.localizedContent.name[typedLocale] || v.localizedContent.name.en,
+      address: v.address.streetAddress,
+      slug: v.slugs[typedLocale] || v.slugs.en,
+      latitude: v.coordinates!.latitude,
+      longitude: v.coordinates!.longitude,
+      lang: typedLocale,
+    }));
+
   return (
     <main className="flex-grow pb-20">
       {/* Hero Section */}
@@ -206,7 +218,7 @@ export default async function ClubsPage({
 
       {/* Smart Grid & Interactive Map Toggle */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <VenueMapToggle venues={allVenues} lang={locale} />
+        <VenueMapToggle venues={allVenues} lang={locale} mapPins={mapPins} />
       </section>
 
       {/* SEO Copy + AI Trafiletto */}
