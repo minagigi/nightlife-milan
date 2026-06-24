@@ -60,8 +60,11 @@ export default function IntentCards({ locale }: { locale: 'en' | 'it' }) {
                   </p>
                   <p className="font-sans text-white/60 text-xs leading-relaxed">{card.subtitle}</p>
                 </div>
-                <div className={`mt-auto flex items-center gap-1 text-xs font-sans
-                  ${card.isGold ? 'text-champagne' : 'text-white/50 group-hover:text-white/70 transition-colors duration-300'}`}>
+                <div
+                  className={`mt-auto flex items-center gap-1 text-xs font-sans
+                    ${card.isGold ? '' : 'text-white/50 group-hover:text-white/70 transition-colors duration-300'}`}
+                  style={card.isGold ? { color: '#C9A86A' } : undefined}
+                >
                   {card.isWhatsApp
                     ? <><MessageCircle className="w-3 h-3" /> WhatsApp</>
                     : <><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-300" /> {locale === 'it' ? 'Scopri' : 'Explore'}</>
