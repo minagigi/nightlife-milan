@@ -1,10 +1,10 @@
 import type { Metadata, Viewport } from 'next';
 import { Montserrat, Cormorant_Garamond } from 'next/font/google';
-import Script from 'next/script';
 import dynamic from 'next/dynamic';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Providers } from '@/components/Providers';
+import GoogleAnalytics from '@/components/GoogleAnalytics';
 import '@/app/globals.css';
 
 const WhatsAppFloating = dynamic(() => import('@/components/WhatsAppFloating'));
@@ -141,7 +141,8 @@ export default async function RootLayout({
   return (
     <html lang={locale} className={`${montserrat.variable} ${cormorant.variable}`}>
       <head>
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        {/* GA loads on first interaction (see GoogleAnalytics.tsx) — dns-prefetch only, no premature preconnect */}
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
@@ -156,13 +157,7 @@ export default async function RootLayout({
           <MobileBottomBar currentLocale={locale} />
           <CustomCursor />
         </Providers>
-        <Script
-          strategy="lazyOnload"
-          src="https://www.googletagmanager.com/gtag/js?id=G-89JEXSWX80"
-        />
-        <Script id="ga4-init" strategy="lazyOnload">
-          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-89JEXSWX80');`}
-        </Script>
+        <GoogleAnalytics />
       </body>
     </html>
   );
