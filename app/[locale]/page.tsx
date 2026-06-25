@@ -444,7 +444,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 
         {/* ── 6. WhatsApp CTA strip ────────────────────────────────────── */}
         <section className="py-24 px-4 sm:px-6 lg:px-8 w-full border-t border-white/5 bg-gradient-to-b from-transparent to-champagne/[0.03]">
-          <div className="max-w-2xl mx-auto text-center">
+          <div className="max-w-7xl mx-auto text-center">
             <p className="font-sans text-champagne/60 text-[10px] tracking-[0.3em] uppercase mb-4">
               {lang === 'it' ? 'Concierge Personale' : 'Personal Concierge'}
             </p>
@@ -473,7 +473,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 
         {/* ── 7. AI Trafiletto ─────────────────────────────────────────── */}
         <section className="py-20 px-4 sm:px-6 lg:px-8 w-full bg-gradient-to-b from-charcoal to-black border-t border-white/5">
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             <div className="p-5 rounded-xl border border-champagne/20 bg-champagne/[0.04] mb-12">
               <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">Quick Answer</p>
               <p className="font-sans text-white/70 text-sm leading-relaxed">
@@ -519,7 +519,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 
         {/* ── 9. Tags / Popular Searches ───────────────────────────────── */}
         <section className="py-20 px-4 sm:px-6 lg:px-8 w-full bg-black border-t border-white/5">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-7xl mx-auto">
             <h2 className="font-serif text-3xl md:text-4xl font-medium text-[var(--ivory)] tracking-tight mb-6">
               {lang === 'it' ? 'Esplora per Categoria' : 'Explore by Category'}
             </h2>
