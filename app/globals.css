@@ -2,17 +2,20 @@
 @import "tw-animate-css";
 
 @theme {
-  --color-charcoal: #131009;
-  --color-champagne: #C9A86A;
-  --color-canvas: #131009;
-  --color-surface-1: #1C1810;
-  --color-surface-2: #262017;
-  --color-gold: #C9A86A;
-  --color-gold-bright: #DFC58E;
-  --color-gold-deep: #8A6E3A;
-  --color-ivory: #EDE6D6;
-  --color-ivory-dim: #B8B0A0;
-  --color-stone: #837C6C;
+  --color-charcoal:   #131009;
+  --color-champagne:  #C9A86A;
+  --color-canvas:     #131009;
+  --color-depth:      #0C0A07;   /* warm near-black — deeper than charcoal, warmer than pure black */
+  --color-surface-1:  #1C1810;
+  --color-surface-2:  #262017;
+  --color-surface-3:  #302818;   /* elevated surfaces / active hover */
+  --color-gold:       #C9A86A;
+  --color-gold-bright: #E8CC8A;  /* hover / active state gold */
+  --color-gold-deep:  #8A6E3A;
+  --color-ivory:      #EDE6D6;
+  --color-ivory-dim:  #B8B0A0;
+  --color-corpo:      #C2B8A0;   /* warm body text — replaces cold white/50 */
+  --color-stone:      #837C6C;
   --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-cormorant), ui-serif, Georgia, serif;
 }

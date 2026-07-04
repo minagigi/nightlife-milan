@@ -229,7 +229,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         <IntentCards locale={lang} />
 
         {/* ── 3. How the night works (context before events) ───────────── */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 w-full border-t border-white/5 bg-surface-1">
+        <section className="py-24 sm:py-28 px-4 sm:px-6 lg:px-8 w-full border-t border-white/5 bg-surface-1">
           <div className="max-w-7xl mx-auto">
             <p className="font-sans text-champagne/60 text-[10px] tracking-[0.3em] uppercase mb-3">
               {lang === 'it' ? 'La Notte Milanese' : 'The Milan Night'}
@@ -256,7 +256,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                   <div className="relative z-10 mt-20">
                     <p className="font-sans text-champagne/50 text-[10px] tracking-[0.3em] uppercase mb-4">{step.time}</p>
                     <h3 className="font-serif text-2xl md:text-3xl text-white font-medium italic leading-snug mb-4">{step.title[lang]}</h3>
-                    <p className="font-sans text-white/50 text-sm leading-relaxed">{step.body[lang]}</p>
+                    <p className="font-sans text-corpo text-sm leading-relaxed">{step.body[lang]}</p>
                   </div>
                 </div>
               ))}
@@ -265,7 +265,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         </section>
 
         {/* ── 4. Featured Venues strip ─────────────────────────────────── */}
-        <section className="relative py-20 px-4 sm:px-6 lg:px-8 w-full border-t border-white/5 overflow-hidden">
+        <section className="relative py-24 sm:py-28 px-4 sm:px-6 lg:px-8 w-full border-t border-white/5 overflow-hidden">
           {/* Ambient glow blobs — cinematic atmosphere */}
           <div className="blob-1 absolute top-1/4 right-1/3 w-[500px] h-[500px] rounded-full bg-champagne/[0.04] blur-[120px] pointer-events-none" aria-hidden="true" />
           <div className="blob-2 absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full bg-champagne/[0.03] blur-[100px] pointer-events-none" aria-hidden="true" />
@@ -292,7 +292,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                 <Link
                   key={v.id}
                   href={`${lp}/clubs/${v.slug}`}
-                  className="animate-card-in group relative overflow-hidden rounded-xl border border-white/8 hover:border-champagne/30 transition-all duration-500 bg-black flex flex-col"
+                  className="animate-card-in group relative overflow-hidden rounded-xl border border-white/8 hover:border-champagne/30 transition-all duration-500 bg-depth flex flex-col"
                   style={{ animationDelay: `${i * 120}ms` }}
                 >
                   {/* Image — 4:5 portrait ratio */}
@@ -325,7 +325,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 
                   {/* Content below image */}
                   <div className="p-5 flex-1 flex flex-col">
-                    <p className="font-sans text-white/50 text-sm leading-relaxed mb-4 flex-1">{v.desc[lang]}</p>
+                    <p className="font-sans text-corpo text-sm leading-relaxed mb-4 flex-1">{v.desc[lang]}</p>
                     <div className="flex flex-wrap gap-1.5">
                       {v.tags[lang].map(tag => (
                         <span key={tag} className="px-2 py-0.5 rounded-full border border-white/10 text-white/40 text-[10px] font-sans tracking-wider">
@@ -463,7 +463,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           </div>
         </section>
 
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-champagne/15 to-transparent" aria-hidden="true" />
+        <div className="w-full h-px bg-gradient-to-r from-transparent via-champagne/25 to-transparent" aria-hidden="true" />
 
         {/* ── 6. WhatsApp CTA strip ────────────────────────────────────── */}
         <section className="relative py-28 px-4 sm:px-6 lg:px-8 w-full overflow-hidden border-t border-white/5">
@@ -483,7 +483,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
             <h2 className="font-serif text-4xl md:text-5xl font-medium text-white tracking-tight mb-4 leading-tight">
               {lang === 'it' ? 'Il Tavolo Migliore\ndi Milano Stasera' : 'The Best Table\nin Milan Tonight'}
             </h2>
-            <p className="font-sans text-white/50 text-base leading-relaxed mb-3 max-w-md mx-auto">
+            <p className="font-sans text-corpo text-base leading-relaxed mb-3 max-w-md mx-auto">
               {lang === 'it'
                 ? 'Scrivi ora. Rispondo in 10 minuti con disponibilità, prezzi e accesso diretto — senza coda, senza stress.'
                 : 'Message now. I reply in 10 minutes with availability, pricing, and direct access — no queue, no hassle.'}
@@ -511,7 +511,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
               ].map(({ n, label }) => (
                 <div key={n} className="text-center">
                   <p className="font-serif text-champagne text-xl font-semibold">{n}</p>
-                  <p className="font-sans text-white/30 text-[9px] tracking-widest uppercase">{label}</p>
+                  <p className="font-sans text-white/45 text-[9px] tracking-widest uppercase">{label}</p>
                 </div>
               ))}
             </div>
@@ -519,21 +519,24 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         </section>
 
         {/* ── 7. AI Trafiletto ─────────────────────────────────────────── */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 w-full bg-gradient-to-b from-charcoal to-black border-t border-white/5">
+        <section className="py-24 sm:py-28 px-4 sm:px-6 lg:px-8 w-full bg-gradient-to-b from-charcoal to-depth border-t border-white/5">
           <div className="max-w-7xl mx-auto">
             <div className="relative pl-6 border-l-2 border-champagne/35 mb-14">
               <p className="font-sans text-champagne/50 text-[9px] tracking-[0.35em] uppercase mb-2">Quick Answer</p>
-              <p className="font-serif italic text-white/75 text-lg leading-relaxed">
+              <p className="font-serif italic text-ivory/70 text-lg leading-relaxed">
                 {lang === 'it'
                   ? 'La vita notturna di Milano 2026: i migliori club sono Just Me (Sempione, VIP table da €500), Pineta (Corso Como, aperitivo cantato venerdì), Voya Rooftop (Isola, 20° piano). Club aperti dalle 22:00–23:30 fino alle 5:00. Prenota via WhatsApp +39 351 912 7047 — risposta in 10 minuti.'
                   : 'Milan nightlife 2026: top clubs are Just Me (Sempione, VIP tables from €500), Pineta (Corso Como, singing aperitivo Fridays), Voya Rooftop (Isola, 20th floor). Clubs open from 22:00–23:30 until 5:00 AM. Book via WhatsApp +39 351 912 7047 — reply in under 10 minutes.'}
               </p>
             </div>
 
-            <h2 className="font-serif text-5xl md:text-6xl font-medium text-[var(--ivory)] tracking-tight leading-tight mb-6">
+            <p className="font-sans text-champagne/60 text-[10px] tracking-[0.3em] uppercase mb-5 accent-line-gold">
+              {lang === 'it' ? 'La Guida Definitiva' : 'The Definitive Guide'}
+            </p>
+            <h2 className="font-serif text-5xl md:text-6xl font-medium text-ivory tracking-tight leading-tight mb-6">
               {lang === 'it' ? 'Il Cuore Pulsante di Milano' : 'The Beating Heart of Milan'}
             </h2>
-            <p className="text-white/60 text-lg leading-relaxed font-light mb-10">
+            <p className="text-corpo text-lg leading-relaxed font-light mb-10">
               {lang === 'it'
                 ? 'Milano non è solo la capitale della moda, ma anche il centro nevralgico del divertimento italiano. Dai lussuosi club di Corso Como ai bar underground dei Navigli, la nostra guida ti porta alla scoperta dei luoghi più esclusivi.'
                 : 'Milan is not just the fashion capital, but also the nerve center of Italian entertainment. From the luxurious clubs of Corso Como to the underground bars of the Navigli, our guide takes you to discover the most exclusive places.'}
@@ -542,7 +545,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         </section>
 
         {/* ── 8. Photo Grid ────────────────────────────────────────────── */}
-        <section className="py-4 px-4 sm:px-6 lg:px-8 w-full bg-black border-t border-white/5">
+        <section className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 w-full bg-depth border-t border-white/5">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-3 lg:grid-cols-5 gap-2" style={{ gridTemplateRows: 'auto auto' }}>
               <div className="relative col-span-2 lg:col-span-2 row-span-2 h-56 sm:h-72 lg:h-80 overflow-hidden rounded-xl">
@@ -565,9 +568,12 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         </section>
 
         {/* ── 9. Tags / Popular Searches ───────────────────────────────── */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 w-full bg-black border-t border-white/5">
+        <section className="py-24 px-4 sm:px-6 lg:px-8 w-full bg-depth border-t border-white/5">
           <div className="max-w-7xl mx-auto">
-            <h2 className="font-serif text-4xl md:text-5xl font-medium text-[var(--ivory)] tracking-tight mb-8">
+            <p className="font-sans text-champagne/60 text-[10px] tracking-[0.3em] uppercase mb-5 accent-line-gold">
+              {lang === 'it' ? 'Naviga' : 'Discover'}
+            </p>
+            <h2 className="font-serif text-4xl md:text-5xl font-medium text-ivory tracking-tight mb-10">
               {lang === 'it' ? 'Esplora per Categoria' : 'Explore by Category'}
             </h2>
             <div className="flex flex-wrap gap-3">
@@ -584,7 +590,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                 <Link
                   key={tag.label}
                   href={tag.href}
-                  className="px-5 py-2.5 rounded-full border border-white/15 text-white/50 text-xs font-sans tracking-widest uppercase hover:border-champagne/40 hover:text-champagne transition-colors duration-300 min-h-[44px] flex items-center"
+                  className="px-6 py-3 border border-white/10 text-corpo text-[11px] font-sans tracking-[0.2em] uppercase hover:border-champagne/40 hover:text-champagne hover:bg-champagne/[0.04] transition-all duration-300 min-h-[44px] flex items-center"
                 >
                   {tag.label}
                 </Link>
