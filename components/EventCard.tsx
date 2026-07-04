@@ -56,6 +56,8 @@ export default function EventCard({ event, venue, lang, priority = false }: Even
         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         priority={priority}
         quality={65}
+        placeholder="blur"
+        blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiMxQzE4MTAiLz48L3N2Zz4="
         className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
         referrerPolicy="no-referrer"
       />

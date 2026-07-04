@@ -273,11 +273,12 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {FEATURED_VENUES.map((v) => (
+              {FEATURED_VENUES.map((v, i) => (
                 <Link
                   key={v.id}
                   href={`${lp}/clubs/${v.slug}`}
-                  className="group relative overflow-hidden rounded-xl border border-white/8 hover:border-champagne/30 transition-all duration-500 bg-black flex flex-col"
+                  className="animate-card-in group relative overflow-hidden rounded-xl border border-white/8 hover:border-champagne/30 transition-all duration-500 bg-black flex flex-col"
+                  style={{ animationDelay: `${i * 120}ms` }}
                 >
                   {/* Image — 4:5 portrait ratio */}
                   <div className="relative aspect-[4/5] overflow-hidden">
@@ -287,6 +288,8 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
                       quality={65}
+                      placeholder="blur"
+                      blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiMxQzE4MTAiLz48L3N2Zz4="
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                     {/* Warm tone overlay on hover */}

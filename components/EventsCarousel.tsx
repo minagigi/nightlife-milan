@@ -93,10 +93,35 @@ function CarouselInner({ items, lang }: EventsCarouselProps) {
   );
 }
 
+function CarouselSkeleton() {
+  return (
+    <div className="flex gap-4 overflow-hidden px-4 sm:px-6 lg:px-8 pb-4" aria-hidden="true">
+      {Array.from({ length: 4 }).map((_, i) => (
+        <div key={i} className="shrink-0 w-[260px] sm:w-[280px]">
+          <div
+            className="relative overflow-hidden rounded-lg bg-white/[0.04]"
+            style={{ aspectRatio: '3/4', animationDelay: `${i * 80}ms` }}
+          >
+            <div className="skeleton-sweep absolute inset-0" />
+          </div>
+          <div className="mt-3 space-y-2 px-1">
+            <div className="relative h-3 w-1/3 rounded-sm bg-white/[0.04] overflow-hidden">
+              <div className="skeleton-sweep absolute inset-0" style={{ animationDelay: `${i * 80 + 100}ms` }} />
+            </div>
+            <div className="relative h-4 w-2/3 rounded-sm bg-white/[0.04] overflow-hidden">
+              <div className="skeleton-sweep absolute inset-0" style={{ animationDelay: `${i * 80 + 200}ms` }} />
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function EventsCarousel(props: EventsCarouselProps) {
   return (
     <div className="group/carousel">
-      <Suspense fallback={<div className="h-[380px]" />}>
+      <Suspense fallback={<CarouselSkeleton />}>
         <CarouselInner {...props} />
       </Suspense>
     </div>
