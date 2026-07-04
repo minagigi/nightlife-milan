@@ -16,9 +16,17 @@ export default function Header({ currentLocale }: { currentLocale: string }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { favorites, setDrawerOpen } = useFavorites();
   const [mounted, setMounted] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     setTimeout(() => setMounted(true), 0);
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   // Lock body scroll while the mobile menu is open
@@ -87,8 +95,8 @@ export default function Header({ currentLocale }: { currentLocale: string }) {
   )}`;
 
   return (
-    <header className="sticky top-0 z-50 w-full pt-3 px-3 sm:px-4">
-      <div className="max-w-7xl mx-auto rounded-lg bg-[#1C1810]/80 backdrop-blur-xl border border-white/8 shadow-[0_4px_32px_rgba(0,0,0,0.5)] transition-all duration-300">
+    <header className={`sticky top-0 z-50 w-full transition-all duration-300 ${scrolled ? 'bg-[#131009]/90 backdrop-blur-[12px] border-b border-[var(--linea)] shadow-[0_4px_32px_rgba(0,0,0,0.6)]' : 'bg-transparent'}`}>
+      <div className="max-w-7xl mx-auto">
       <div className="px-4 sm:px-6">
         <div className="flex justify-between items-center h-16">
           
@@ -101,14 +109,14 @@ export default function Header({ currentLocale }: { currentLocale: string }) {
                 <div key={link.name} className="relative flex items-center">
                   <Link
                     href={link.href}
-                    className={`text-sm font-medium tracking-widest transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne rounded-sm ${
+                    className={`transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne ${
                       isGold
                         ? isActive
-                          ? 'text-champagne border-b border-champagne pb-0.5'
-                          : 'text-champagne/80 hover:text-champagne border-b border-champagne/30 hover:border-champagne pb-0.5'
+                          ? 'text-xs font-semibold tracking-widest rounded-full px-4 py-1.5 border border-champagne bg-champagne text-charcoal'
+                          : 'text-xs font-semibold tracking-widest rounded-full px-4 py-1.5 border border-champagne/60 text-champagne hover:bg-champagne hover:text-charcoal hover:border-champagne'
                         : isActive
-                          ? 'text-champagne'
-                          : 'text-white hover:text-champagne'
+                          ? 'text-sm font-medium tracking-widest text-champagne rounded-sm'
+                          : 'text-sm font-medium tracking-widest text-white hover:text-champagne rounded-sm'
                     }`}
                   >
                     {link.name}

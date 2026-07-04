@@ -229,7 +229,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         <IntentCards locale={lang} />
 
         {/* ── 3. How the night works (context before events) ───────────── */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 w-full border-t border-white/5">
+        <section className="py-20 px-4 sm:px-6 lg:px-8 w-full border-t border-white/5 bg-surface-1">
           <div className="max-w-7xl mx-auto">
             <p className="font-sans text-champagne/60 text-[10px] tracking-[0.3em] uppercase mb-3">
               {lang === 'it' ? 'La Notte Milanese' : 'The Milan Night'}
@@ -277,10 +277,10 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                 <Link
                   key={v.id}
                   href={`${lp}/clubs/${v.slug}`}
-                  className="group relative overflow-hidden rounded-xl border border-white/8 hover:border-champagne/25 transition-all duration-500 bg-black"
+                  className="group relative overflow-hidden rounded-xl border border-white/8 hover:border-champagne/30 transition-all duration-500 bg-black flex flex-col"
                 >
-                  {/* Image */}
-                  <div className="relative h-52 overflow-hidden">
+                  {/* Image — 4:5 portrait ratio */}
+                  <div className="relative aspect-[4/5] overflow-hidden">
                     <Image
                       src={v.image}
                       alt={v.name[lang]}
@@ -289,20 +289,25 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                       quality={65}
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+                    {/* Warm tone overlay on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    <div className="absolute inset-0 bg-champagne/0 group-hover:bg-champagne/[0.07] transition-colors duration-500" />
                     {/* Label badge */}
-                    <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-champagne/15 border border-champagne/30 text-champagne text-[10px] font-sans tracking-widest uppercase backdrop-blur-sm">
+                    <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/50 border border-champagne/30 text-champagne text-[10px] font-sans tracking-widest uppercase backdrop-blur-sm">
                       {v.label[lang]}
                     </span>
+                    {/* Name overlay at bottom of image */}
+                    <div className="absolute bottom-0 left-0 right-0 p-5">
+                      <p className="font-sans text-champagne/60 text-[10px] tracking-[0.25em] uppercase mb-1">{v.zone[lang]}</p>
+                      <h3 className="font-serif text-2xl text-white font-semibold group-hover:text-champagne transition-colors duration-300 leading-tight">
+                        {v.name[lang]}
+                      </h3>
+                    </div>
                   </div>
 
-                  {/* Content */}
-                  <div className="p-5">
-                    <p className="font-sans text-champagne/50 text-[10px] tracking-[0.25em] uppercase mb-1">{v.zone[lang]}</p>
-                    <h3 className="font-serif text-xl text-white font-semibold mb-2 group-hover:text-champagne transition-colors duration-300">
-                      {v.name[lang]}
-                    </h3>
-                    <p className="font-sans text-white/50 text-sm leading-relaxed mb-4">{v.desc[lang]}</p>
+                  {/* Content below image */}
+                  <div className="p-5 flex-1 flex flex-col">
+                    <p className="font-sans text-white/50 text-sm leading-relaxed mb-4 flex-1">{v.desc[lang]}</p>
                     <div className="flex flex-wrap gap-1.5">
                       {v.tags[lang].map(tag => (
                         <span key={tag} className="px-2 py-0.5 rounded-full border border-white/10 text-white/40 text-[10px] font-sans tracking-wider">
@@ -396,7 +401,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         </div>
 
         {/* ── 5b. This week's events ───────────────────────────────────── */}
-        <section className="border-t border-white/5 pt-12 pb-8">
+        <section className="border-t border-white/5 pt-12 pb-8 bg-surface-1">
           <div className="px-4 sm:px-6 lg:px-8 mb-8">
             <div className="max-w-7xl mx-auto flex items-end justify-between gap-4">
               <div>
@@ -443,31 +448,55 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         <div className="w-full h-px bg-gradient-to-r from-transparent via-champagne/15 to-transparent" aria-hidden="true" />
 
         {/* ── 6. WhatsApp CTA strip ────────────────────────────────────── */}
-        <section className="py-24 px-4 sm:px-6 lg:px-8 w-full border-t border-white/5 bg-gradient-to-b from-transparent to-champagne/[0.03]">
-          <div className="max-w-7xl mx-auto text-center">
-            <p className="font-sans text-champagne/60 text-[10px] tracking-[0.3em] uppercase mb-4">
-              {lang === 'it' ? 'Concierge Personale' : 'Personal Concierge'}
-            </p>
-            <h2 className="font-serif text-3xl md:text-4xl font-medium text-white tracking-tight mb-4">
-              {lang === 'it' ? 'Prenota il Tuo Tavolo Stasera' : 'Book Your Table Tonight'}
+        <section className="relative py-28 px-4 sm:px-6 lg:px-8 w-full overflow-hidden border-t border-white/5">
+          {/* Background ambient glow */}
+          <div className="absolute inset-0 bg-gradient-to-b from-charcoal via-[#1a1508] to-charcoal" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-champagne/[0.07] blur-[80px] rounded-full pointer-events-none" />
+
+          <div className="relative max-w-3xl mx-auto text-center">
+            {/* Live indicator */}
+            <div className="inline-flex items-center gap-2 mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-champagne animate-pulse" />
+              <p className="font-sans text-champagne/60 text-[10px] tracking-[0.35em] uppercase">
+                {lang === 'it' ? 'Disponibile Adesso' : 'Available Now'}
+              </p>
+            </div>
+
+            <h2 className="font-serif text-4xl md:text-5xl font-medium text-white tracking-tight mb-4 leading-tight">
+              {lang === 'it' ? 'Il Tavolo Migliore\ndi Milano Stasera' : 'The Best Table\nin Milan Tonight'}
             </h2>
-            <p className="font-sans text-white/50 text-base leading-relaxed mb-8 max-w-lg mx-auto">
+            <p className="font-sans text-white/50 text-base leading-relaxed mb-3 max-w-md mx-auto">
               {lang === 'it'
-                ? 'Scrivi su WhatsApp. Ti rispondo entro 10 minuti con disponibilità, prezzi e accesso diretto senza coda.'
-                : 'Message on WhatsApp. Reply within 10 minutes with availability, pricing and direct queue-free access.'}
+                ? 'Scrivi ora. Rispondo in 10 minuti con disponibilità, prezzi e accesso diretto — senza coda, senza stress.'
+                : 'Message now. I reply in 10 minutes with availability, pricing, and direct access — no queue, no hassle.'}
             </p>
+            <p className="font-sans text-champagne/40 text-xs tracking-widest uppercase mb-10">
+              {lang === 'it' ? 'Servizio gratuito · Nessuna commissione · 500+ prenotazioni' : 'Free service · No booking fee · 500+ bookings'}
+            </p>
+
             <a
               href={waLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-champagne text-[#131009] font-sans font-semibold text-sm tracking-wider uppercase hover:bg-champagne/90 transition-colors duration-300 shadow-[0_0_40px_rgba(201,168,106,0.2)]"
+              className="inline-flex items-center gap-3 px-10 py-5 bg-champagne text-charcoal font-sans font-bold text-sm tracking-[0.12em] uppercase hover:bg-white transition-colors duration-300 shadow-[0_0_60px_rgba(201,168,106,0.25)] mb-6"
             >
               <MessageCircle className="w-4 h-4" />
-              {lang === 'it' ? 'WhatsApp — Rispondo in 10 min' : 'WhatsApp — Reply in 10 min'}
+              {lang === 'it' ? 'Prenota Ora via WhatsApp' : 'Book Now via WhatsApp'}
             </a>
-            <p className="mt-4 font-sans text-white/25 text-xs tracking-wider">
-              {lang === 'it' ? 'Servizio gratuito · Nessuna commissione' : 'Free service · No booking fee'}
-            </p>
+
+            {/* Social proof row */}
+            <div className="flex items-center justify-center gap-6 mt-6">
+              {[
+                { n: '10 min', label: lang === 'it' ? 'risposta' : 'reply time' },
+                { n: '500+', label: lang === 'it' ? 'prenotazioni' : 'bookings' },
+                { n: '18+', label: lang === 'it' ? 'club partner' : 'partner clubs' },
+              ].map(({ n, label }) => (
+                <div key={n} className="text-center">
+                  <p className="font-serif text-champagne text-xl font-semibold">{n}</p>
+                  <p className="font-sans text-white/30 text-[9px] tracking-widest uppercase">{label}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 

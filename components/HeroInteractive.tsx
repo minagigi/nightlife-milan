@@ -158,7 +158,7 @@ export default function HeroInteractive({ venues, locale, firstVenueId }: Props)
           </Link>
 
           <Link
-            href={`${lp}/calendar/tonight`}
+            href={`${lp}/events/tonight`}
             className="group inline-flex items-center justify-center sm:justify-start gap-3 px-6 py-4 border border-white/20
               font-sans font-semibold text-sm tracking-[0.15em] uppercase text-white/80
               hover:border-champagne/50 hover:text-champagne active:scale-[0.98] transition-all duration-300 cursor-pointer"
@@ -212,6 +212,24 @@ export default function HeroInteractive({ venues, locale, firstVenueId }: Props)
           <span className="ml-2 font-sans text-white/30 text-[10px] tracking-widest">
             {String(currentIndex + 1).padStart(2, '0')} / {String(venues.length).padStart(2, '0')}
           </span>
+        </div>
+      </div>
+
+      {/* Scroll indicator — bottom right */}
+      <div className="absolute bottom-8 right-8 z-[10] hidden sm:flex flex-col items-center gap-2 pointer-events-none">
+        <span
+          className="font-sans text-[9px] tracking-[0.35em] uppercase text-champagne/40"
+          style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+        >
+          SCROLL
+        </span>
+        <div className="relative w-px h-16 bg-champagne/15 overflow-hidden">
+          <motion.div
+            className="absolute top-0 left-0 w-full bg-champagne/60"
+            animate={{ y: ['0%', '100%'] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut', repeatDelay: 0.4 }}
+            style={{ height: '40%' }}
+          />
         </div>
       </div>
     </>
