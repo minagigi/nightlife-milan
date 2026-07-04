@@ -234,18 +234,30 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
             <p className="font-sans text-champagne/60 text-[10px] tracking-[0.3em] uppercase mb-3">
               {lang === 'it' ? 'La Notte Milanese' : 'The Milan Night'}
             </p>
-            <h2 className="font-serif text-3xl md:text-4xl font-medium text-white tracking-tight mb-10">
+            <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl font-medium italic text-white tracking-tight leading-tight mb-10 md:mb-16">
               {lang === 'it' ? 'Come Funziona la Notte a Milano' : 'How Milan Nightlife Works'}
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3">
               {NIGHT_STEPS.map((step, i) => (
                 <div
                   key={i}
-                  className="p-6 rounded-xl border border-white/8 bg-white/[0.02] hover:border-champagne/20 transition-colors duration-300"
+                  className={`relative group py-10
+                    ${i > 0 ? 'border-t md:border-t-0 md:border-l border-white/8 md:pl-10' : ''}
+                    ${i < 2 ? 'md:pr-10' : ''}`}
                 >
-                  <p className="font-sans text-champagne/60 text-[10px] tracking-[0.25em] uppercase mb-3">{step.time}</p>
-                  <h3 className="font-serif text-xl text-white font-semibold mb-3">{step.title[lang]}</h3>
-                  <p className="font-sans text-white/55 text-sm leading-relaxed">{step.body[lang]}</p>
+                  {/* Giant serif number — decorative */}
+                  <span
+                    className="absolute top-0 left-0 font-serif font-medium leading-none select-none pointer-events-none text-champagne/[0.07] group-hover:text-champagne/[0.13] transition-colors duration-500"
+                    style={{ fontSize: 'clamp(6rem, 8vw, 8rem)' }}
+                    aria-hidden="true"
+                  >
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <div className="relative z-10 mt-20">
+                    <p className="font-sans text-champagne/50 text-[10px] tracking-[0.3em] uppercase mb-4">{step.time}</p>
+                    <h3 className="font-serif text-2xl md:text-3xl text-white font-medium italic leading-snug mb-4">{step.title[lang]}</h3>
+                    <p className="font-sans text-white/50 text-sm leading-relaxed">{step.body[lang]}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -253,14 +265,17 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         </section>
 
         {/* ── 4. Featured Venues strip ─────────────────────────────────── */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 w-full border-t border-white/5">
-          <div className="max-w-7xl mx-auto">
+        <section className="relative py-20 px-4 sm:px-6 lg:px-8 w-full border-t border-white/5 overflow-hidden">
+          {/* Ambient glow blobs — cinematic atmosphere */}
+          <div className="blob-1 absolute top-1/4 right-1/3 w-[500px] h-[500px] rounded-full bg-champagne/[0.04] blur-[120px] pointer-events-none" aria-hidden="true" />
+          <div className="blob-2 absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full bg-champagne/[0.03] blur-[100px] pointer-events-none" aria-hidden="true" />
+          <div className="max-w-7xl mx-auto relative z-10">
             <div className="flex items-end justify-between mb-10 gap-4">
               <div>
                 <p className="font-sans text-champagne/60 text-[10px] tracking-[0.3em] uppercase mb-3">
                   {lang === 'it' ? 'Selezione Curata' : 'Curated Selection'}
                 </p>
-                <h2 className="font-serif text-3xl md:text-4xl font-medium text-white tracking-tight">
+                <h2 className="font-serif text-5xl md:text-6xl font-medium text-white tracking-tight leading-tight">
                   {lang === 'it' ? 'I Migliori Club di Milano' : 'Top Milan Clubs'}
                 </h2>
               </div>
@@ -342,8 +357,8 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                     {lang === 'it' ? 'Stasera' : 'Tonight'}
                   </p>
                 </div>
-                <h2 className="font-serif text-3xl md:text-4xl font-medium text-white tracking-tight">
-                  {lang === 'it' ? 'Eventi di Stasera' : 'Tonight\'s Events'}
+                <h2 className="font-serif text-4xl md:text-5xl font-medium text-white tracking-tight">
+                  {lang === 'it' ? 'Eventi di Stasera' : "Tonight's Events"}
                 </h2>
               </div>
               <Link
@@ -411,7 +426,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                 <p className="font-sans text-champagne/60 text-[10px] tracking-[0.3em] uppercase mb-2">
                   {lang === 'it' ? 'Questa Settimana' : 'This Week'}
                 </p>
-                <h2 className="font-serif text-3xl md:text-4xl font-medium text-white tracking-tight">
+                <h2 className="font-serif text-4xl md:text-5xl font-medium text-white tracking-tight">
                   {lang === 'it' ? 'Prossime Serate' : 'Upcoming This Week'}
                 </h2>
               </div>
@@ -506,16 +521,16 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         {/* ── 7. AI Trafiletto ─────────────────────────────────────────── */}
         <section className="py-20 px-4 sm:px-6 lg:px-8 w-full bg-gradient-to-b from-charcoal to-black border-t border-white/5">
           <div className="max-w-7xl mx-auto">
-            <div className="p-5 rounded-xl border border-champagne/20 bg-champagne/[0.04] mb-12">
-              <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">Quick Answer</p>
-              <p className="font-sans text-white/70 text-sm leading-relaxed">
+            <div className="relative pl-6 border-l-2 border-champagne/35 mb-14">
+              <p className="font-sans text-champagne/50 text-[9px] tracking-[0.35em] uppercase mb-2">Quick Answer</p>
+              <p className="font-serif italic text-white/75 text-lg leading-relaxed">
                 {lang === 'it'
                   ? 'La vita notturna di Milano 2026: i migliori club sono Just Me (Sempione, VIP table da €500), Pineta (Corso Como, aperitivo cantato venerdì), Voya Rooftop (Isola, 20° piano). Club aperti dalle 22:00–23:30 fino alle 5:00. Prenota via WhatsApp +39 351 912 7047 — risposta in 10 minuti.'
                   : 'Milan nightlife 2026: top clubs are Just Me (Sempione, VIP tables from €500), Pineta (Corso Como, singing aperitivo Fridays), Voya Rooftop (Isola, 20th floor). Clubs open from 22:00–23:30 until 5:00 AM. Book via WhatsApp +39 351 912 7047 — reply in under 10 minutes.'}
               </p>
             </div>
 
-            <h2 className="font-serif text-3xl md:text-4xl font-medium text-[var(--ivory)] tracking-tight mb-6">
+            <h2 className="font-serif text-5xl md:text-6xl font-medium text-[var(--ivory)] tracking-tight leading-tight mb-6">
               {lang === 'it' ? 'Il Cuore Pulsante di Milano' : 'The Beating Heart of Milan'}
             </h2>
             <p className="text-white/60 text-lg leading-relaxed font-light mb-10">
@@ -552,7 +567,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         {/* ── 9. Tags / Popular Searches ───────────────────────────────── */}
         <section className="py-20 px-4 sm:px-6 lg:px-8 w-full bg-black border-t border-white/5">
           <div className="max-w-7xl mx-auto">
-            <h2 className="font-serif text-3xl md:text-4xl font-medium text-[var(--ivory)] tracking-tight mb-6">
+            <h2 className="font-serif text-4xl md:text-5xl font-medium text-[var(--ivory)] tracking-tight mb-8">
               {lang === 'it' ? 'Esplora per Categoria' : 'Explore by Category'}
             </h2>
             <div className="flex flex-wrap gap-3">

@@ -37,37 +37,52 @@ export default function IntentCards({ locale }: { locale: 'en' | 'it' }) {
       ];
 
   return (
-    <section className="px-4 sm:px-6 lg:px-8 -mt-8 relative z-10 pb-6">
+    <section className="px-4 sm:px-6 lg:px-8 -mt-8 relative z-10 pb-8">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-          {cards.map((card) => {
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/[0.06] rounded-xl overflow-hidden">
+          {cards.map((card, i) => {
             const inner = (
               <div
-                className={`group relative flex flex-col gap-3 p-5 rounded-lg border transition-all duration-400 cursor-pointer min-h-[120px] active:scale-[0.98]
+                className={`group relative flex flex-col gap-4 p-6 sm:p-8 transition-colors duration-300 cursor-pointer min-h-[160px] sm:min-h-[180px] active:scale-[0.99]
                   ${card.isGold
-                    ? 'bg-champagne/10 border-champagne/30 hover:bg-champagne/15 hover:border-champagne/50 shadow-[0_0_32px_rgba(201,168,106,0.08)]'
-                    : 'bg-white/[0.03] border-white/8 hover:bg-white/[0.06] hover:border-white/15'
+                    ? 'bg-[#1a1508] hover:bg-[#211b09]'
+                    : 'bg-[#131009] hover:bg-[#1C1810]'
                   }`}
               >
+                {/* Gold top accent for VIP */}
                 {card.isGold && (
-                  <div className="absolute top-0 inset-x-0 h-[1px] rounded-t-2xl bg-gradient-to-r from-transparent via-champagne/60 to-transparent" />
+                  <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-champagne/50 to-transparent" />
                 )}
-                <span className={`block transition-all duration-300 group-hover:scale-110 ${card.isGold ? 'text-champagne' : 'text-white/60 group-hover:text-champagne'}`}>{card.icon}</span>
-                <div>
-                  <p className={`font-serif text-base sm:text-lg font-semibold leading-tight mb-0.5
-                    ${card.isGold ? 'text-champagne' : 'text-white group-hover:text-champagne transition-colors duration-300'}`}>
+
+                {/* Giant serif number — decorative background */}
+                <span
+                  className="absolute bottom-2 right-4 font-serif font-medium leading-none select-none pointer-events-none text-champagne/[0.06] group-hover:text-champagne/[0.12] transition-colors duration-500"
+                  style={{ fontSize: 'clamp(4rem, 6vw, 5.5rem)' }}
+                  aria-hidden="true"
+                >
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+
+                {/* Icon */}
+                <span className={`block w-5 h-5 transition-colors duration-300 ${card.isGold ? 'text-champagne' : 'text-white/35 group-hover:text-champagne/70'}`}>
+                  {card.icon}
+                </span>
+
+                {/* Title + subtitle */}
+                <div className="flex-1">
+                  <p className={`font-serif text-xl sm:text-2xl font-medium leading-tight mb-1.5
+                    ${card.isGold ? 'text-champagne' : 'text-white group-hover:text-champagne/90 transition-colors duration-300'}`}>
                     {card.title}
                   </p>
-                  <p className="font-sans text-white/60 text-xs leading-relaxed">{card.subtitle}</p>
+                  <p className="font-sans text-white/35 text-xs leading-relaxed tracking-wide">{card.subtitle}</p>
                 </div>
-                <div
-                  className={`mt-auto flex items-center gap-1 text-xs font-sans
-                    ${card.isGold ? '' : 'text-white/50 group-hover:text-white/70 transition-colors duration-300'}`}
-                  style={card.isGold ? { color: '#C9A86A' } : undefined}
-                >
+
+                {/* CTA */}
+                <div className={`flex items-center gap-1.5 text-[10px] font-sans tracking-widest uppercase transition-colors duration-300
+                  ${card.isGold ? 'text-champagne/55' : 'text-white/20 group-hover:text-white/50'}`}>
                   {card.isWhatsApp
-                    ? <><MessageCircle className="w-3 h-3" /> WhatsApp</>
-                    : <><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-300" /> {locale === 'it' ? 'Scopri' : 'Explore'}</>
+                    ? <><MessageCircle className="w-3 h-3" />WhatsApp</>
+                    : <><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-300" />{locale === 'it' ? 'Scopri' : 'Explore'}</>
                   }
                 </div>
               </div>

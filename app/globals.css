@@ -165,6 +165,23 @@ body { color: #EDE6D6; }
   animation: card-in 0.45s var(--ease-luxury) both;
 }
 
+/* Ambient cinematic blobs — Modern Dark Cinema */
+@keyframes blob-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(20px, -15px) scale(1.04); }
+  66%       { transform: translate(-12px, 10px) scale(0.97); }
+}
+.blob-1 { animation: blob-drift 16s ease-in-out infinite; }
+.blob-2 { animation: blob-drift 22s ease-in-out infinite reverse; }
+
+/* Gold gradient text */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #C9A86A 0%, #F0D898 50%, #C9A86A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 /* Hero carousel progress bar — uses transform:scaleX (composite, no layout reflow) */
 @keyframes progress-bar {
   from { transform: scaleX(0); }

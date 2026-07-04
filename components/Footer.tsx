@@ -159,7 +159,18 @@ export default function Footer({ lang }: FooterProps) {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+      {/* Editorial wordmark */}
+      <div className="overflow-hidden mt-16">
+        <p
+          className="font-serif font-medium leading-none tracking-tighter text-champagne/[0.04] select-none text-center whitespace-nowrap"
+          style={{ fontSize: 'clamp(2.5rem, 14vw, 11rem)' }}
+          aria-hidden="true"
+        >
+          NIGHTLIFE MILAN
+        </p>
+      </div>
+
+      <div className="max-w-7xl mx-auto mt-6 pt-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
         <p className="text-white/50 text-xs">
           © {new Date().getFullYear()} Nightlife Milan. All rights reserved.
         </p>
