@@ -9,9 +9,10 @@ import { Event, Venue } from '@/lib/types';
 interface EventsCarouselProps {
   items: { event: Event; venue: Venue }[];
   lang: string;
+  showTonightTag?: boolean;
 }
 
-function CarouselInner({ items, lang }: EventsCarouselProps) {
+function CarouselInner({ items, lang, showTonightTag }: EventsCarouselProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const searchParams = useSearchParams();
 
@@ -64,7 +65,7 @@ function CarouselInner({ items, lang }: EventsCarouselProps) {
             key={event.id}
             className="snap-start shrink-0 w-[260px] sm:w-[280px]"
           >
-            <EventCard event={event} venue={venue} lang={lang} priority={i < 4} />
+            <EventCard event={event} venue={venue} lang={lang} priority={i < 4} isTonight={showTonightTag} />
           </div>
         ))}
       </div>

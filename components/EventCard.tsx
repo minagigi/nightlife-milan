@@ -8,9 +8,10 @@ interface EventCardProps {
   venue: Venue;
   lang: string;
   priority?: boolean;
+  isTonight?: boolean;
 }
 
-export default function EventCard({ event, venue, lang, priority = false }: EventCardProps) {
+export default function EventCard({ event, venue, lang, priority = false, isTonight = false }: EventCardProps) {
   const typedLang = (lang === 'it' ? 'it' : 'en') as 'en' | 'it';
   const langPrefix = typedLang === 'it' ? '/it' : '';
 
@@ -81,7 +82,7 @@ export default function EventCard({ event, venue, lang, priority = false }: Even
 
       {/* Price badge top-right */}
       <div className="absolute top-4 right-14 z-20">
-        <span className={`font-sans text-[10px] font-bold tracking-[0.15em] uppercase
+        <span className={`font-sans text-[10px] font-bold tracking-[0.15em] uppercase tabular-nums
           px-2.5 py-1.5 rounded-full
           ${isFree
             ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
@@ -101,13 +102,21 @@ export default function EventCard({ event, venue, lang, priority = false }: Even
       {/* Bottom content */}
       <div className="absolute inset-x-0 bottom-0 z-20 p-5">
 
+        {/* Tonight tag — unico uso campari in questa sezione */}
+        {isTonight && (
+          <span className="flex items-center gap-1.5 text-[10px] font-sans font-semibold tracking-[0.2em] uppercase text-campari-hi mb-1.5">
+            <span className="live-dot inline-block w-1.5 h-1.5 rounded-full bg-campari" aria-hidden="true" />
+            {typedLang === 'it' ? 'Stasera' : 'Tonight'}
+          </span>
+        )}
+
         {/* Time */}
         <div className="flex items-center gap-2 mb-2">
-          <span className="font-sans text-champagne text-[11px] font-semibold tracking-[0.2em] uppercase">
+          <span className="font-sans text-champagne text-[11px] font-semibold tracking-[0.2em] uppercase tabular-nums">
             {timeStr}
           </span>
           <span className="text-white/30 text-[10px]">·</span>
-          <span className="font-sans text-white/50 text-[11px] tracking-wider">{dateStr}</span>
+          <span className="font-sans text-white/50 text-[11px] tracking-wider tabular-nums">{dateStr}</span>
         </div>
 
         {/* Title */}

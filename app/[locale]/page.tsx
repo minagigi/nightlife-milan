@@ -370,6 +370,9 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                 <h2 className="font-serif text-4xl md:text-5xl font-medium text-white tracking-tight">
                   {lang === 'it' ? 'Eventi di Stasera' : "Tonight's Events"}
                 </h2>
+                <p className="font-serif italic text-lg text-ivory/50 mt-2">
+                  {lang === 'it' ? 'In scena questa notte a Milano' : 'On stage tonight in Milan'}
+                </p>
               </div>
               <Link
                 href={`${lp}/events/tonight`}
@@ -382,7 +385,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 
           {tonightEvents.length > 0 ? (
             <Suspense fallback={<div className="h-[380px]" />}>
-              <EventsCarousel items={tonightEvents} lang={lang} />
+              <EventsCarousel items={tonightEvents} lang={lang} showTonightTag />
             </Suspense>
           ) : (
             <div className="px-4 sm:px-6 lg:px-8 pb-8">
