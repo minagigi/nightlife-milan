@@ -2,14 +2,19 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
 import { Heart, MessageCircle } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
 import { useFavorites } from './FavoritesContext';
-import GlobalSearch from './GlobalSearch';
 import LanguageSwitcher from './LanguageSwitcher';
 import { CONTACT } from '@/config/contact';
 import Logo from './Logo';
+
+// Code-split GlobalSearch (pulls in motion/react) out of the Header's critical bundle —
+// same size reserved via the skeleton to avoid layout shift while the chunk loads.
+const GlobalSearch = dynamic(() => import('./GlobalSearch'), {
+  loading: () => <div className="w-10 h-10 rounded-full bg-white/5" aria-hidden="true" />,
+});
 
 export default function Header({ currentLocale }: { currentLocale: string }) {
   const pathname = usePathname();
@@ -191,74 +196,66 @@ export default function Header({ currentLocale }: { currentLocale: string }) {
       </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            id="mobile-menu"
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
-            className="md:hidden mx-3 mt-1 rounded-xl bg-[#1C1810]/95 backdrop-blur-xl border border-white/8 max-h-[calc(100vh-6rem)] overflow-y-auto overscroll-contain"
-          >
-            <nav className="px-5 pt-2 pb-5 flex flex-col" aria-label="Mobile Navigation">
-              {[...navLinks, ...mobileExtraLinks].map((link, i) => {
-                const isActive = pathname?.startsWith(link.match);
-                const isGold = (link as { gold?: boolean }).gold;
-                return (
-                  <motion.div
-                    key={link.name}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.18, delay: Math.min(i, 6) * 0.03 }}
-                    className="flex items-center justify-between border-b border-white/5 last:border-0"
+      {/* Mobile Menu Dropdown — CSS-only entrance, no framer-motion */}
+      {isMobileMenuOpen && (
+        <div
+          id="mobile-menu"
+          className="animate-menu-drop md:hidden mx-3 mt-1 rounded-xl bg-[#1C1810]/95 backdrop-blur-xl border border-white/8 max-h-[calc(100vh-6rem)] overflow-y-auto overscroll-contain"
+        >
+          <nav className="px-5 pt-2 pb-5 flex flex-col" aria-label="Mobile Navigation">
+            {[...navLinks, ...mobileExtraLinks].map((link, i) => {
+              const isActive = pathname?.startsWith(link.match);
+              const isGold = (link as { gold?: boolean }).gold;
+              return (
+                <div
+                  key={link.name}
+                  className="animate-menu-item flex items-center justify-between border-b border-white/5 last:border-0"
+                  style={{ animationDelay: `${Math.min(i, 6) * 30}ms` }}
+                >
+                  <Link
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`flex-1 text-base font-medium tracking-widest transition-colors duration-300 block py-3.5 min-h-[44px] ${
+                      isGold
+                        ? 'text-champagne'
+                        : isActive ? 'text-champagne' : 'text-white hover:text-champagne active:text-champagne'
+                    }`}
                   >
-                    <Link
-                      href={link.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className={`flex-1 text-base font-medium tracking-widest transition-colors duration-300 block py-3.5 min-h-[44px] ${
-                        isGold
-                          ? 'text-champagne'
-                          : isActive ? 'text-champagne' : 'text-white hover:text-champagne active:text-champagne'
-                      }`}
+                    {link.name}
+                  </Link>
+                  {link.name === t.clubs && mounted && favorites.length > 0 && (
+                    <button
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        setDrawerOpen(true);
+                      }}
+                      className="flex items-center justify-center w-8 h-8 rounded-full bg-champagne text-charcoal text-xs font-bold"
+                      aria-label="Open My Night"
                     >
-                      {link.name}
-                    </Link>
-                    {link.name === t.clubs && mounted && favorites.length > 0 && (
-                      <button
-                        onClick={() => {
-                          setIsMobileMenuOpen(false);
-                          setDrawerOpen(true);
-                        }}
-                        className="flex items-center justify-center w-8 h-8 rounded-full bg-champagne text-charcoal text-xs font-bold"
-                        aria-label="Open My Night"
-                      >
-                        {favorites.length}
-                      </button>
-                    )}
-                  </motion.div>
-                );
-              })}
+                      {favorites.length}
+                    </button>
+                  )}
+                </div>
+              );
+            })}
 
-              {/* Concierge CTA + phone number */}
-              <a
-                href={waMenuLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="mt-4 flex items-center justify-center gap-2 rounded-xl bg-champagne text-black font-semibold text-sm tracking-[0.1em] uppercase py-3.5 min-h-[48px] active:scale-[0.98] transition-transform"
-              >
-                <MessageCircle className="w-4 h-4" />
-                {typedLocale === 'it' ? 'Prenota via WhatsApp' : 'Book via WhatsApp'}
-              </a>
-              <p className="text-center text-white/35 text-[11px] tracking-widest mt-2.5">
-                {CONTACT.whatsapp.number} · {typedLocale === 'it' ? 'Risposta in 10 min' : 'Reply in 10 min'}
-              </p>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            {/* Concierge CTA + phone number */}
+            <a
+              href={waMenuLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="mt-4 flex items-center justify-center gap-2 rounded-xl bg-champagne text-black font-semibold text-sm tracking-[0.1em] uppercase py-3.5 min-h-[48px] active:scale-[0.98] transition-transform"
+            >
+              <MessageCircle className="w-4 h-4" />
+              {typedLocale === 'it' ? 'Prenota via WhatsApp' : 'Book via WhatsApp'}
+            </a>
+            <p className="text-center text-white/50 text-[11px] tracking-widest mt-2.5">
+              {CONTACT.whatsapp.number} · {typedLocale === 'it' ? 'Risposta in 10 min' : 'Reply in 10 min'}
+            </p>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }

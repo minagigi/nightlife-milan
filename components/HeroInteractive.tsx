@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import type { Venue } from '@/lib/types';
 import NightTicker from './NightTicker';
@@ -57,104 +56,70 @@ export default function HeroInteractive({ venues, locale, firstVenueId }: Props)
 
       {/* Slideshow overlay — only renders for venues after the first (first is SSR'd) */}
       {currentIndex > 0 && (
-        <AnimatePresence mode="sync">
-          <motion.div
-            key={current.id}
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.6, ease: [0.4, 0, 0.2, 1] }}
-            className="absolute inset-0 z-[2]"
-          >
-            <Image
-              src={current.gallery?.[0] || current.image || '/images/milan-nightclub-luxury-vip-champagne.webp'}
-              alt={current.localizedContent.name[typedLocale] || current.localizedContent.name.en}
-              fill quality={75}
-              className="object-cover"
-              sizes="100vw"
-              referrerPolicy="no-referrer"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/10" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
-          </motion.div>
-        </AnimatePresence>
+        <div key={current.id} className="animate-hero-slide-in absolute inset-0 z-[2]">
+          <Image
+            src={current.gallery?.[0] || current.image || '/images/milan-nightclub-luxury-vip-champagne.webp'}
+            alt={current.localizedContent.name[typedLocale] || current.localizedContent.name.en}
+            fill quality={75}
+            className="object-cover"
+            sizes="100vw"
+            referrerPolicy="no-referrer"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/10" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
+        </div>
       )}
 
       {/* Animated gold ambient glow */}
-      <motion.div
-        animate={{ opacity: [0.08, 0.18, 0.08] }}
-        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute bottom-0 left-0 w-[60%] h-[50%] pointer-events-none z-[4]"
+      <div
+        className="animate-glow-pulse absolute bottom-0 left-0 w-[60%] h-[50%] pointer-events-none z-[4]"
         style={{ background: 'radial-gradient(ellipse at bottom left, rgba(201,168,106,0.22) 0%, transparent 70%)' }}
       />
 
       {/* Content */}
       <div className="relative z-[10] w-full max-w-6xl mx-auto px-6 sm:px-10 pb-14 sm:pb-20">
         {/* Night ticker — live Milan time + phase */}
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-3"
-        >
+        <div className="animate-card-in mb-3" style={{ animationDelay: '0ms' }}>
           <NightTicker lang={typedLocale} />
-        </motion.div>
+        </div>
 
         {/* Label */}
-        <motion.p
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.05 }}
-          className="font-sans text-champagne/50 text-[10px] tracking-[0.35em] uppercase mb-6"
+        <p
+          className="animate-card-in font-sans text-champagne/50 text-[10px] tracking-[0.35em] uppercase mb-6"
+          style={{ animationDelay: '50ms' }}
         >
           {t[typedLocale].label}
-        </motion.p>
+        </p>
 
         {/* Venue name */}
         <div className="overflow-hidden mb-2">
-          <AnimatePresence mode="wait">
-            <motion.h1
-              key={current.id}
-              initial={{ y: 60, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -40, opacity: 0 }}
-              transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
-              className="font-serif font-bold leading-none tracking-tight text-champagne"
-              style={{ fontSize: 'clamp(2.75rem, 9vw, 8rem)', textShadow: '0 0 60px rgba(201,168,106,0.3)' }}
-            >
-              {current.localizedContent.name[typedLocale] || current.localizedContent.name.en}
-            </motion.h1>
-          </AnimatePresence>
+          <h1
+            key={current.id}
+            className="animate-hero-title-in font-serif font-bold leading-none tracking-tight text-champagne"
+            style={{ fontSize: 'clamp(2.75rem, 9vw, 8rem)', textShadow: '0 0 60px rgba(201,168,106,0.3)' }}
+          >
+            {current.localizedContent.name[typedLocale] || current.localizedContent.name.en}
+          </h1>
         </div>
 
         {/* Zone */}
-        <AnimatePresence mode="wait">
-          <motion.p
-            key={current.id + '-meta'}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4, delay: 0.1 }}
-            className="font-sans text-white/40 text-xs tracking-[0.25em] uppercase mb-6"
-          >
-            {current.zone.replace(/_/g, ' ')} &nbsp;·&nbsp; {current.category.replace(/_/g, ' ')}
-          </motion.p>
-        </AnimatePresence>
+        <p
+          key={current.id + '-meta'}
+          className="animate-fade-in font-sans text-white/40 text-xs tracking-[0.25em] uppercase mb-6"
+          style={{ animationDelay: '100ms' }}
+        >
+          {current.zone.replace(/_/g, ' ')} &nbsp;·&nbsp; {current.category.replace(/_/g, ' ')}
+        </p>
 
         {/* Value proposition */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.55, delay: 0.2 }}
-          className="mb-8"
-        >
+        <div className="animate-card-in mb-8" style={{ animationDelay: '200ms' }}>
           <p className="font-serif text-white text-xl sm:text-2xl font-medium leading-snug mb-3 max-w-xl">
             {t[typedLocale].sub}
           </p>
           <p className="font-sans text-champagne/60 text-[11px] tracking-[0.2em] uppercase">
             {t[typedLocale].pills}
           </p>
-        </motion.div>
+        </div>
 
         {/* CTA row */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-6">
@@ -235,10 +200,8 @@ export default function HeroInteractive({ venues, locale, firstVenueId }: Props)
           SCROLL
         </span>
         <div className="relative w-px h-16 bg-champagne/15 overflow-hidden">
-          <motion.div
-            className="absolute top-0 left-0 w-full bg-champagne/60"
-            animate={{ y: ['0%', '100%'] }}
-            transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut', repeatDelay: 0.4 }}
+          <div
+            className="animate-scroll-hint absolute top-0 left-0 w-full bg-champagne/60"
             style={{ height: '40%' }}
           />
         </div>

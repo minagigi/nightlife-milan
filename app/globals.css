@@ -176,6 +176,64 @@ body { color: #EDE6D6; }
   animation: card-in 0.45s var(--ease-luxury) both;
 }
 
+/* Mobile menu — CSS-only entrance (replaces framer-motion AnimatePresence) */
+@keyframes menu-drop {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-menu-drop {
+  animation: menu-drop 0.2s var(--ease-luxury) both;
+}
+@keyframes menu-item-in {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.animate-menu-item {
+  animation: menu-item-in 0.18s var(--ease-luxury) both;
+}
+
+/* Hero slideshow crossfade — CSS-only, replaces framer-motion AnimatePresence */
+@keyframes hero-slide-in {
+  from { opacity: 0; transform: scale(1.05); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.animate-hero-slide-in {
+  animation: hero-slide-in 1.6s var(--ease-luxury) both;
+}
+@keyframes hero-title-in {
+  from { opacity: 0; transform: translateY(60px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-hero-title-in {
+  animation: hero-title-in 0.55s var(--ease-luxury) both;
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.animate-fade-in {
+  animation: fade-in 0.4s var(--ease-luxury) both;
+}
+
+/* Hero ambient glow — replaces framer-motion infinite opacity pulse */
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.08; }
+  50%      { opacity: 0.18; }
+}
+.animate-glow-pulse {
+  animation: glow-pulse 4s ease-in-out infinite;
+}
+
+/* Hero scroll hint — replaces framer-motion infinite y translate */
+@keyframes scroll-hint {
+  0%   { transform: translateY(-100%); }
+  50%  { transform: translateY(150%); }
+  100% { transform: translateY(150%); }
+}
+.animate-scroll-hint {
+  animation: scroll-hint 2.2s ease-in-out infinite;
+}
+
 /* Ambient cinematic blobs — Modern Dark Cinema */
 @keyframes blob-drift {
   0%, 100% { transform: translate(0, 0) scale(1); }

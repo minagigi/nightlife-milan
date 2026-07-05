@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Providers } from '@/components/Providers';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
+import IdleMount from '@/components/IdleMount';
 import '@/app/globals.css';
 
 const WhatsAppFloating = dynamic(() => import('@/components/WhatsAppFloating'));
@@ -152,10 +153,12 @@ export default async function RootLayout({
           <Header currentLocale={locale} />
           {children}
           <Footer lang={locale} />
-          <WhatsAppFloating />
-          <BackToTop />
-          <MobileBottomBar currentLocale={locale} />
-          <CustomCursor />
+          <IdleMount>
+            <WhatsAppFloating />
+            <BackToTop />
+            <MobileBottomBar currentLocale={locale} />
+            <CustomCursor />
+          </IdleMount>
         </Providers>
         <GoogleAnalytics />
       </body>
