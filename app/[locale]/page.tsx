@@ -315,9 +315,13 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                     />
                     {/* Warm tone overlay on hover */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                    <div className="absolute inset-0 bg-champagne/0 group-hover:bg-champagne/[0.07] transition-colors duration-500" />
-                    {/* Label badge */}
-                    <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/50 border border-champagne/30 text-champagne text-[10px] font-sans tracking-widest uppercase backdrop-blur-sm">
+                    {/* Hover "luce interna" — luce che filtra dalla porta del club */}
+                    <div
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                      style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 100%, rgba(201,168,106,0.18) 0%, transparent 65%)' }}
+                    />
+                    {/* Label badge — targa civica */}
+                    <span className="absolute top-3 left-3 px-3 py-1.5 bg-gradient-to-b from-[#2A2214] to-[#1C1810] border border-brass/40 text-champagne text-[10px] font-sans font-medium tracking-[0.2em] uppercase shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_2px_8px_rgba(0,0,0,0.5)]">
                       {v.label[lang]}
                     </span>
                     {/* Name overlay at bottom of image */}

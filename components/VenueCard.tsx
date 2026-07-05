@@ -70,6 +70,12 @@ export default function VenueCard({
       {/* Permanent dark gradient at bottom */}
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/10 z-10" />
 
+      {/* Hover "luce interna" — luce che filtra dalla porta del club */}
+      <div
+        className="absolute inset-0 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 100%, rgba(201,168,106,0.16) 0%, transparent 65%)' }}
+      />
+
       {/* Top fade for badges */}
       <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/60 to-transparent z-10" />
 
@@ -83,20 +89,20 @@ export default function VenueCard({
         item={{ id, type: 'venue', title: name, image, subtitle: zone, url: href }}
       />
 
-      {/* Top-left badges */}
+      {/* Top-left badges — targhe civiche */}
       <div className="absolute top-4 left-4 flex flex-col gap-2 z-20">
         {isFeatured && (
-          <span className="bg-champagne text-[#1C1810] text-[10px] font-sans font-bold px-3 py-1 rounded-full tracking-[0.15em] uppercase">
+          <span className="bg-gradient-to-b from-[#2A2214] to-[#1C1810] border border-brass/40 text-champagne text-[10px] font-sans font-medium px-3 py-1.5 tracking-[0.2em] uppercase shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_2px_8px_rgba(0,0,0,0.5)]">
             {lang === 'it' ? 'Consigliato' : 'Top Pick'}
           </span>
         )}
         {isManaged && (
-          <span className="bg-white/10 backdrop-blur-md text-white text-[10px] font-sans font-bold px-3 py-1 rounded-full tracking-[0.12em] uppercase border border-white/20">
+          <span className="bg-gradient-to-b from-[#2A2214] to-[#1C1810] border border-brass/40 text-white text-[10px] font-sans font-medium px-3 py-1.5 tracking-[0.15em] uppercase shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_2px_8px_rgba(0,0,0,0.5)]">
             {lang === 'it' ? 'Verificato' : 'Verified'}
           </span>
         )}
         {isOpenTonight && (
-          <span className="bg-emerald-500/20 backdrop-blur-md text-emerald-400 text-[10px] font-sans font-bold px-3 py-1 rounded-full tracking-[0.12em] uppercase border border-emerald-500/40">
+          <span className="bg-gradient-to-b from-[#2A2214] to-[#1C1810] border border-emerald-500/40 text-emerald-400 text-[10px] font-sans font-medium px-3 py-1.5 tracking-[0.15em] uppercase shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_2px_8px_rgba(0,0,0,0.5)]">
             {lang === 'it' ? 'Aperto Stasera' : 'Open Tonight'}
           </span>
         )}
@@ -149,7 +155,7 @@ export default function VenueCard({
           )}
           <div className="flex items-center justify-between">
             {priceRange && (
-              <span className="text-champagne text-sm font-sans font-medium">{priceRange}</span>
+              <span className="text-champagne text-sm font-sans font-medium tabular-nums">{priceRange}</span>
             )}
             <span className="flex items-center gap-1.5 text-champagne text-xs font-sans font-semibold tracking-[0.15em] uppercase ml-auto">
               {lang === 'it' ? 'Scopri' : 'Explore'}
