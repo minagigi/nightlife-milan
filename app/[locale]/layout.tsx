@@ -147,7 +147,7 @@ export default async function RootLayout({
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
       </head>
-      <body className="font-sans antialiased bg-charcoal text-white min-h-screen flex flex-col pb-[calc(env(safe-area-inset-bottom)+4.25rem)] md:pb-0" suppressHydrationWarning>
+      <body className="grain font-sans antialiased bg-charcoal text-white min-h-screen flex flex-col pb-[calc(env(safe-area-inset-bottom)+4.25rem)] md:pb-0" suppressHydrationWarning>
         <Providers>
           <Header currentLocale={locale} />
           {children}
