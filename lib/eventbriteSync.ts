@@ -73,7 +73,7 @@ export async function debugEventbrite() {
   const url = `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=live&expand=venue,logo,ticket_classes&order_by=start_asc&time_filter=current_future`;
   const res = await fetch(url, {
     headers: { Authorization: `Bearer ${token}` },
-    cache: 'no-store',
+    next: { revalidate: 300 },
   });
 
   const text = await res.text();
@@ -99,7 +99,7 @@ export async function fetchEventbriteEvents(): Promise<Event[]> {
       `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=live&expand=venue,logo,ticket_classes&order_by=start_asc&time_filter=current_future`,
       {
         headers: { Authorization: `Bearer ${token}` },
-        cache: 'no-store',
+        next: { revalidate: 300 },
       }
     );
 

@@ -14,7 +14,11 @@ import { CONTACT } from '@/config/contact';
 
 const EventsCarousel = nextDynamic(() => import('@/components/EventsCarousel'));
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 300; // ISR 5 min — metadata bloccante nel <head>, HTML cacheato all'edge
+
+export async function generateStaticParams() {
+  return [{ locale: 'en' }, { locale: 'it' }];
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
