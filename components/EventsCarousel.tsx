@@ -55,8 +55,9 @@ function CarouselInner({ items, lang }: EventsCarouselProps) {
       <div
         ref={scrollRef}
         className="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4
-          px-4 sm:px-6 lg:px-8
+          pr-4 sm:pr-6 lg:pr-8
           [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        style={{ paddingLeft: 'var(--carousel-pl)' }}
       >
         {filtered.map(({ event, venue }, i) => (
           <div

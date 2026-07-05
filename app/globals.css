@@ -198,6 +198,11 @@ body { color: #EDE6D6; }
   }
 }
 
+/* Carousel left-edge alignment — mirrors max-w-7xl mx-auto inside px-4/6/8 section */
+:root { --carousel-pl: 1rem; }
+@media (min-width: 640px)  { :root { --carousel-pl: 1.5rem; } }
+@media (min-width: 1024px) { :root { --carousel-pl: max(2rem, calc((100vw - 80rem) / 2)); } }
+
 /* Respect prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
