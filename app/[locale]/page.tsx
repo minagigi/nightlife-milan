@@ -237,7 +237,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         {/* ── 3. How the night works (context before events) ───────────── */}
         <section className="py-24 sm:py-28 px-4 sm:px-6 lg:px-8 w-full border-t border-white/5 bg-surface-1">
           <div className="max-w-7xl mx-auto">
-            <p className="font-sans text-champagne/60 text-[10px] tracking-[0.3em] uppercase mb-3">
+            <p className="font-sans text-champagne/80 text-[10px] tracking-[0.3em] uppercase mb-3">
               {lang === 'it' ? 'La Notte Milanese' : 'The Milan Night'}
             </p>
             <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl font-medium italic text-white tracking-tight leading-tight mb-10 md:mb-16">
@@ -262,7 +262,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                       <span className="w-2.5 h-2.5 rounded-full bg-champagne shrink-0" aria-hidden="true" />
                       <span className="h-px flex-1 bg-gradient-to-r from-champagne/40 to-transparent" aria-hidden="true" />
                     </span>
-                    <p className="font-sans text-champagne/70 text-[10px] tracking-[0.3em] uppercase mb-4 tabular-nums">{step.time}</p>
+                    <p className="font-sans text-champagne/80 text-[10px] tracking-[0.3em] uppercase mb-4 tabular-nums">{step.time}</p>
                     <h3 className="font-serif text-2xl md:text-3xl text-white font-medium italic leading-snug mb-4">{step.title[lang]}</h3>
                     <p className="font-sans text-corpo text-sm leading-relaxed">{step.body[lang]}</p>
                   </div>
@@ -280,7 +280,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           <div className="max-w-7xl mx-auto relative z-10">
             <div className="flex items-end justify-between mb-10 gap-4">
               <div>
-                <p className="font-sans text-champagne/60 text-[10px] tracking-[0.3em] uppercase mb-3">
+                <p className="font-sans text-champagne/80 text-[10px] tracking-[0.3em] uppercase mb-3">
                   {lang === 'it' ? 'Selezione Curata' : 'Curated Selection'}
                 </p>
                 <h2 className="font-serif text-5xl md:text-6xl font-medium text-white tracking-tight leading-tight">
@@ -289,7 +289,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
               </div>
               <Link
                 href={`${lp}/clubs`}
-                className="hidden sm:flex items-center gap-2 text-xs font-sans text-champagne/60 hover:text-champagne tracking-widest uppercase transition-colors shrink-0"
+                className="hidden sm:flex items-center gap-2 text-xs font-sans text-champagne/80 hover:text-champagne tracking-widest uppercase transition-colors shrink-0"
               >
                 {lang === 'it' ? 'Tutti i locali' : 'All venues'} →
               </Link>
@@ -328,7 +328,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                     </span>
                     {/* Name overlay at bottom of image */}
                     <div className="absolute bottom-0 left-0 right-0 p-5">
-                      <p className="font-sans text-champagne/60 text-[10px] tracking-[0.25em] uppercase mb-1">{v.zone[lang]}</p>
+                      <p className="font-sans text-champagne/80 text-[10px] tracking-[0.25em] uppercase mb-1">{v.zone[lang]}</p>
                       <h3 className="font-serif text-2xl text-white font-semibold group-hover:text-champagne transition-colors duration-300 leading-tight">
                         {v.name[lang]}
                       </h3>
@@ -340,7 +340,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                     <p className="font-sans text-corpo text-sm leading-relaxed mb-4 flex-1">{v.desc[lang]}</p>
                     <div className="flex flex-wrap gap-1.5">
                       {v.tags[lang].map(tag => (
-                        <span key={tag} className="px-2 py-0.5 rounded-full border border-white/10 text-white/40 text-[10px] font-sans tracking-wider">
+                        <span key={tag} className="px-2 py-0.5 rounded-full border border-white/10 text-white/60 text-[10px] font-sans tracking-wider">
                           {tag}
                         </span>
                       ))}
@@ -351,7 +351,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
             </div>
 
             <div className="mt-6 sm:hidden text-center">
-              <Link href={`${lp}/clubs`} className="text-xs font-sans text-champagne/60 hover:text-champagne tracking-widest uppercase transition-colors">
+              <Link href={`${lp}/clubs`} className="text-xs font-sans text-champagne/80 hover:text-champagne tracking-widest uppercase transition-colors">
                 {lang === 'it' ? 'Vedi tutti i locali →' : 'See all venues →'}
               </Link>
             </div>
@@ -365,7 +365,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-champagne animate-pulse" />
-                  <p className="font-sans text-champagne/60 text-[10px] tracking-[0.3em] uppercase">
+                  <p className="font-sans text-champagne/80 text-[10px] tracking-[0.3em] uppercase">
                     {lang === 'it' ? 'Stasera' : 'Tonight'}
                   </p>
                 </div>
@@ -378,7 +378,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
               </div>
               <Link
                 href={`${lp}/events/tonight`}
-                className="hidden sm:flex items-center gap-2 text-xs font-sans text-champagne/60 hover:text-champagne tracking-widest uppercase transition-colors shrink-0"
+                className="hidden sm:flex items-center gap-2 text-xs font-sans text-champagne/80 hover:text-champagne tracking-widest uppercase transition-colors shrink-0"
               >
                 {lang === 'it' ? 'Vedi tutti' : 'See all'} →
               </Link>
@@ -392,10 +392,10 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           ) : (
             <div className="px-4 sm:px-6 lg:px-8 pb-8">
               <div className="max-w-7xl mx-auto py-10 px-6 rounded-xl border border-white/8 bg-white/[0.02] text-center">
-                <p className="font-sans text-white/40 text-sm mb-3">
+                <p className="font-sans text-white/60 text-sm mb-3">
                   {lang === 'it' ? 'Nessun evento programmato stasera.' : 'No events scheduled for tonight.'}
                 </p>
-                <Link href={`${lp}/events/best`} className="text-xs text-champagne/60 hover:text-champagne tracking-widest uppercase transition-colors">
+                <Link href={`${lp}/events/best`} className="text-xs text-champagne/80 hover:text-champagne tracking-widest uppercase transition-colors">
                   {lang === 'it' ? 'Scopri i migliori club →' : 'Discover best clubs →'}
                 </Link>
               </div>
@@ -403,7 +403,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           )}
 
           <div className="pb-4 text-center sm:hidden px-4 mt-2">
-            <Link href={`${lp}/events/tonight`} className="text-xs font-sans text-champagne/60 hover:text-champagne tracking-widest uppercase transition-colors">
+            <Link href={`${lp}/events/tonight`} className="text-xs font-sans text-champagne/80 hover:text-champagne tracking-widest uppercase transition-colors">
               {lang === 'it' ? 'Tutti gli eventi di stasera →' : 'All tonight\'s events →'}
             </Link>
           </div>
@@ -438,7 +438,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           <div className="px-4 sm:px-6 lg:px-8 mb-8">
             <div className="max-w-7xl mx-auto flex items-end justify-between gap-4">
               <div>
-                <p className="font-sans text-champagne/60 text-[10px] tracking-[0.3em] uppercase mb-2">
+                <p className="font-sans text-champagne/80 text-[10px] tracking-[0.3em] uppercase mb-2">
                   {lang === 'it' ? 'Questa Settimana' : 'This Week'}
                 </p>
                 <h2 className="font-serif text-4xl md:text-5xl font-medium text-white tracking-tight">
@@ -447,7 +447,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
               </div>
               <Link
                 href={`${lp}/events/this-week`}
-                className="hidden sm:flex items-center gap-2 text-xs font-sans text-champagne/60 hover:text-champagne tracking-widest uppercase transition-colors shrink-0"
+                className="hidden sm:flex items-center gap-2 text-xs font-sans text-champagne/80 hover:text-champagne tracking-widest uppercase transition-colors shrink-0"
               >
                 {lang === 'it' ? 'Vedi tutti' : 'See all'} →
               </Link>
@@ -461,10 +461,10 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           ) : (
             <div className="px-4 sm:px-6 lg:px-8 pb-8">
               <div className="max-w-7xl mx-auto py-10 px-6 rounded-xl border border-white/8 bg-white/[0.02] text-center">
-                <p className="font-sans text-white/40 text-sm mb-3">
+                <p className="font-sans text-white/60 text-sm mb-3">
                   {lang === 'it' ? 'Nessun altro evento questa settimana.' : 'No more events this week.'}
                 </p>
-                <Link href={`${lp}/events/best`} className="text-xs text-champagne/60 hover:text-champagne tracking-widest uppercase transition-colors">
+                <Link href={`${lp}/events/best`} className="text-xs text-champagne/80 hover:text-champagne tracking-widest uppercase transition-colors">
                   {lang === 'it' ? 'Scopri i migliori club →' : 'Discover best clubs →'}
                 </Link>
               </div>
@@ -472,7 +472,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           )}
 
           <div className="pb-6 text-center sm:hidden px-4 mt-2">
-            <Link href={`${lp}/events/this-week`} className="text-xs font-sans text-champagne/60 hover:text-champagne tracking-widest uppercase transition-colors">
+            <Link href={`${lp}/events/this-week`} className="text-xs font-sans text-champagne/80 hover:text-champagne tracking-widest uppercase transition-colors">
               {lang === 'it' ? 'Tutti gli eventi della settimana →' : 'All this week\'s events →'}
             </Link>
           </div>
@@ -490,7 +490,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
             {/* Live indicator */}
             <div className="inline-flex items-center gap-2 mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-champagne animate-pulse" />
-              <p className="font-sans text-champagne/60 text-[10px] tracking-[0.35em] uppercase">
+              <p className="font-sans text-champagne/80 text-[10px] tracking-[0.35em] uppercase">
                 {lang === 'it' ? 'Disponibile Adesso' : 'Available Now'}
               </p>
             </div>
@@ -545,7 +545,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
               </p>
             </div>
 
-            <p className="font-sans text-champagne/60 text-[10px] tracking-[0.3em] uppercase mb-5 accent-line-gold">
+            <p className="font-sans text-champagne/80 text-[10px] tracking-[0.3em] uppercase mb-5 accent-line-gold">
               {lang === 'it' ? 'La Guida Definitiva' : 'The Definitive Guide'}
             </p>
             <h2 className="font-serif text-5xl md:text-6xl font-medium text-ivory tracking-tight leading-tight mb-6">
@@ -586,7 +586,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         {/* ── 9. Tags / Popular Searches ───────────────────────────────── */}
         <section className="py-24 px-4 sm:px-6 lg:px-8 w-full bg-depth border-t border-white/5">
           <div className="max-w-7xl mx-auto">
-            <p className="font-sans text-champagne/60 text-[10px] tracking-[0.3em] uppercase mb-5 accent-line-gold">
+            <p className="font-sans text-champagne/80 text-[10px] tracking-[0.3em] uppercase mb-5 accent-line-gold">
               {lang === 'it' ? 'Naviga' : 'Discover'}
             </p>
             <h2 className="font-serif text-4xl md:text-5xl font-medium text-ivory tracking-tight mb-10">

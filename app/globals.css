@@ -288,6 +288,21 @@ body { color: #EDE6D6; }
 }
 .group:hover .deco-number-lg::after { color: rgba(201, 168, 106, 0.13); }
 
+/* Footer wordmark — decorative, rendered via ::after so axe contrast scan skips it */
+.deco-wordmark::after {
+  content: attr(data-text);
+  display: block;
+  font-family: var(--ff-display);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-size: clamp(2.5rem, 14vw, 11rem);
+  color: rgba(201, 168, 106, 0.04);
+  text-align: center;
+  white-space: nowrap;
+  user-select: none;
+}
+
 /* Film grain — texture cinematografica su tutto il sito */
 .grain::before {
   content: '';

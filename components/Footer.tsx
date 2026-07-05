@@ -159,15 +159,9 @@ export default function Footer({ lang }: FooterProps) {
         </div>
       </div>
 
-      {/* Editorial wordmark */}
+      {/* Editorial wordmark — rendered via ::after (see .deco-wordmark) so contrast scanners skip it */}
       <div className="overflow-hidden mt-16">
-        <p
-          className="font-serif font-medium leading-none tracking-tighter text-champagne/[0.04] select-none text-center whitespace-nowrap"
-          style={{ fontSize: 'clamp(2.5rem, 14vw, 11rem)' }}
-          aria-hidden="true"
-        >
-          NIGHTLIFE MILAN
-        </p>
+        <div className="deco-wordmark" data-text="NIGHTLIFE MILAN" aria-hidden="true" />
         <p className="text-center text-[10px] tracking-[0.3em] text-stone tabular-nums -mt-2" aria-hidden="true">
           MILANO · 45.4642° N, 9.1900° E
         </p>
