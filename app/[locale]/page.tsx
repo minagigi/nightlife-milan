@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import nextDynamic from 'next/dynamic';
 import Hero from '@/components/Hero';
 import IntentCards from '@/components/IntentCards';
+import NightLine from '@/components/NightLine';
 import Image from 'next/image';
 import Link from 'next/link';
 import { MessageCircle } from 'lucide-react';
@@ -221,6 +222,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <main className="flex-1 flex flex-col w-full">
+        <NightLine />
 
         {/* ── 1. Hero ───────────────────────────────────────────────────── */}
         <Hero locale={lang} />
@@ -254,7 +256,11 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <div className="relative z-10 mt-20">
-                    <p className="font-sans text-champagne/50 text-[10px] tracking-[0.3em] uppercase mb-4">{step.time}</p>
+                    <span className="flex items-center gap-2.5 mb-4">
+                      <span className="w-2.5 h-2.5 rounded-full bg-champagne shrink-0" aria-hidden="true" />
+                      <span className="h-px flex-1 bg-gradient-to-r from-champagne/40 to-transparent" aria-hidden="true" />
+                    </span>
+                    <p className="font-sans text-champagne/70 text-[10px] tracking-[0.3em] uppercase mb-4 tabular-nums">{step.time}</p>
                     <h3 className="font-serif text-2xl md:text-3xl text-white font-medium italic leading-snug mb-4">{step.title[lang]}</h3>
                     <p className="font-sans text-corpo text-sm leading-relaxed">{step.body[lang]}</p>
                   </div>
