@@ -43,9 +43,9 @@ export default function IntentCards({ locale }: { locale: 'en' | 'it' }) {
           {cards.map((card, i) => {
             const inner = (
               <div
-                className={`group relative flex flex-col gap-4 p-6 sm:p-8 transition-colors duration-300 cursor-pointer min-h-[160px] sm:min-h-[180px] active:scale-[0.99]
+                className={`group relative flex flex-col gap-4 p-6 sm:p-8 transition-all duration-300 cursor-pointer min-h-[160px] sm:min-h-[180px] active:scale-[0.99]
                   ${card.isGold
-                    ? 'bg-[#1a1508] hover:bg-[#211b09]'
+                    ? 'bg-[#1a1508] hover:bg-[#211b09] hover:shadow-[inset_0_0_0_1px_rgba(201,168,106,0.35)]'
                     : 'bg-[#131009] hover:bg-[#1C1810]'
                   }`}
               >
@@ -64,7 +64,7 @@ export default function IntentCards({ locale }: { locale: 'en' | 'it' }) {
                 </span>
 
                 {/* Icon */}
-                <span className={`block w-5 h-5 transition-colors duration-300 ${card.isGold ? 'text-champagne' : 'text-white/35 group-hover:text-champagne/70'}`}>
+                <span className={`block w-5 h-5 transition-all duration-300 group-hover:-translate-y-0.5 ${card.isGold ? 'text-champagne' : 'text-white/35 group-hover:text-champagne/70'}`}>
                   {card.icon}
                 </span>
 

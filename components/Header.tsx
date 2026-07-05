@@ -109,14 +109,14 @@ export default function Header({ currentLocale }: { currentLocale: string }) {
                 <div key={link.name} className="relative flex items-center">
                   <Link
                     href={link.href}
-                    className={`transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne ${
+                    className={`relative transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne ${
                       isGold
                         ? isActive
                           ? 'text-xs font-semibold tracking-widest rounded-full px-4 py-1.5 border border-champagne bg-champagne text-charcoal'
                           : 'text-xs font-semibold tracking-widest rounded-full px-4 py-1.5 border border-champagne/60 text-champagne hover:bg-champagne hover:text-charcoal hover:border-champagne'
                         : isActive
-                          ? 'text-sm font-medium tracking-widest text-champagne rounded-sm'
-                          : 'text-sm font-medium tracking-widest text-white hover:text-champagne rounded-sm'
+                          ? 'text-sm font-medium tracking-widest text-champagne rounded-sm before:content-[""] before:absolute before:-left-3 before:top-1/2 before:-translate-y-1/2 before:w-1 before:h-1 before:rounded-full before:bg-champagne'
+                          : 'text-sm font-medium tracking-widest text-white hover:text-champagne rounded-sm before:content-[""] before:absolute before:-left-3 before:top-1/2 before:-translate-y-1/2 before:w-1 before:h-1 before:rounded-full before:bg-champagne before:opacity-0 before:-translate-x-1 before:transition-all before:duration-300 hover:before:opacity-100 hover:before:translate-x-0'
                     }`}
                   >
                     {link.name}
