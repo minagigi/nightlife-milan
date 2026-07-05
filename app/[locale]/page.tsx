@@ -251,14 +251,12 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                     ${i > 0 ? 'border-t md:border-t-0 md:border-l border-white/8 md:pl-10' : ''}
                     ${i < 2 ? 'md:pr-10' : ''}`}
                 >
-                  {/* Giant serif number — decorative */}
+                  {/* Giant serif number — decorative, rendered via ::after (see .deco-number-lg) */}
                   <span
-                    className="absolute top-0 left-0 font-serif font-medium leading-none select-none pointer-events-none text-champagne/[0.07] group-hover:text-champagne/[0.13] transition-colors duration-500"
-                    style={{ fontSize: 'clamp(6rem, 8vw, 8rem)' }}
+                    className="deco-number-lg absolute inset-0"
+                    data-n={String(i + 1).padStart(2, '0')}
                     aria-hidden="true"
-                  >
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
+                  />
                   <div className="relative z-10 mt-20">
                     <span className="flex items-center gap-2.5 mb-4">
                       <span className="w-2.5 h-2.5 rounded-full bg-champagne shrink-0" aria-hidden="true" />

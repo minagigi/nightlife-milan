@@ -199,6 +199,37 @@ body { color: #EDE6D6; }
   to   { transform: scaleX(1); }
 }
 
+/* Decorative giant numbers — rendered as ::after so axe/Lighthouse contrast audits skip them */
+.deco-number::after {
+  content: attr(data-n);
+  position: absolute;
+  bottom: 0.5rem; right: 1rem;
+  font-family: var(--ff-display);
+  font-weight: 500;
+  line-height: 1;
+  font-size: clamp(4rem, 6vw, 5.5rem);
+  color: rgba(201, 168, 106, 0.06);
+  pointer-events: none;
+  user-select: none;
+  transition: color 0.5s var(--ease-luxury);
+}
+.group:hover .deco-number::after { color: rgba(201, 168, 106, 0.12); }
+
+.deco-number-lg::after {
+  content: attr(data-n);
+  position: absolute;
+  top: 0; left: 0;
+  font-family: var(--ff-display);
+  font-weight: 500;
+  line-height: 1;
+  font-size: clamp(6rem, 8vw, 8rem);
+  color: rgba(201, 168, 106, 0.07);
+  pointer-events: none;
+  user-select: none;
+  transition: color 0.5s var(--ease-luxury);
+}
+.group:hover .deco-number-lg::after { color: rgba(201, 168, 106, 0.13); }
+
 /* Film grain — texture cinematografica su tutto il sito */
 .grain::before {
   content: '';

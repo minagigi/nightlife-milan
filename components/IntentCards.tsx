@@ -54,14 +54,12 @@ export default function IntentCards({ locale }: { locale: 'en' | 'it' }) {
                   <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-champagne/50 to-transparent" />
                 )}
 
-                {/* Giant serif number — decorative background */}
+                {/* Giant serif number — decorative background, rendered via ::after (see .deco-number) */}
                 <span
-                  className="absolute bottom-2 right-4 font-serif font-medium leading-none select-none pointer-events-none text-champagne/[0.06] group-hover:text-champagne/[0.12] transition-colors duration-500"
-                  style={{ fontSize: 'clamp(4rem, 6vw, 5.5rem)' }}
+                  className="deco-number absolute inset-0"
+                  data-n={String(i + 1).padStart(2, '0')}
                   aria-hidden="true"
-                >
-                  {String(i + 1).padStart(2, '0')}
-                </span>
+                />
 
                 {/* Icon */}
                 <span className={`block w-5 h-5 transition-all duration-300 group-hover:-translate-y-0.5 ${card.isGold ? 'text-champagne' : 'text-white/35 group-hover:text-champagne/70'}`}>
@@ -74,12 +72,12 @@ export default function IntentCards({ locale }: { locale: 'en' | 'it' }) {
                     ${card.isGold ? 'text-champagne' : 'text-white group-hover:text-champagne/90 transition-colors duration-300'}`}>
                     {card.title}
                   </p>
-                  <p className="font-sans text-white/35 text-xs leading-relaxed tracking-wide">{card.subtitle}</p>
+                  <p className="font-sans text-white/60 text-xs leading-relaxed tracking-wide">{card.subtitle}</p>
                 </div>
 
                 {/* CTA */}
                 <div className={`flex items-center gap-1.5 text-[10px] font-sans tracking-widest uppercase transition-colors duration-300
-                  ${card.isGold ? 'text-champagne/55' : 'text-white/20 group-hover:text-white/50'}`}>
+                  ${card.isGold ? 'text-champagne/55' : 'text-white/50 group-hover:text-white/75'}`}>
                   {card.isWhatsApp
                     ? <><MessageCircle className="w-3 h-3" />WhatsApp</>
                     : <><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-300" />{locale === 'it' ? 'Scopri' : 'Explore'}</>
