@@ -549,7 +549,8 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
             <h2 className="font-serif text-5xl md:text-6xl font-medium text-ivory tracking-tight leading-tight mb-6">
               {lang === 'it' ? 'Il Cuore Pulsante di Milano' : 'The Beating Heart of Milan'}
             </h2>
-            <p className="text-corpo text-lg leading-relaxed font-light mb-10">
+            <p className="text-corpo text-lg leading-relaxed font-light mb-10
+              first-letter:font-serif first-letter:text-6xl first-letter:font-medium first-letter:text-champagne first-letter:float-left first-letter:mr-3 first-letter:leading-[0.8] first-letter:mt-1">
               {lang === 'it'
                 ? 'Milano non è solo la capitale della moda, ma anche il centro nevralgico del divertimento italiano. Dai lussuosi club di Corso Como ai bar underground dei Navigli, la nostra guida ti porta alla scoperta dei luoghi più esclusivi.'
                 : 'Milan is not just the fashion capital, but also the nerve center of Italian entertainment. From the luxurious clubs of Corso Como to the underground bars of the Navigli, our guide takes you to discover the most exclusive places.'}

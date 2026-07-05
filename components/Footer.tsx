@@ -168,6 +168,9 @@ export default function Footer({ lang }: FooterProps) {
         >
           NIGHTLIFE MILAN
         </p>
+        <p className="text-center text-[10px] tracking-[0.3em] text-stone tabular-nums -mt-2" aria-hidden="true">
+          MILANO · 45.4642° N, 9.1900° E
+        </p>
       </div>
 
       <div className="max-w-7xl mx-auto mt-6 pt-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
