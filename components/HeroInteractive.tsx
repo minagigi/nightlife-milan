@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 import type { Venue } from '@/lib/types';
+import NightTicker from './NightTicker';
 
 interface Props {
   venues: Venue[];
@@ -89,11 +90,21 @@ export default function HeroInteractive({ venues, locale, firstVenueId }: Props)
 
       {/* Content */}
       <div className="relative z-[10] w-full max-w-6xl mx-auto px-6 sm:px-10 pb-14 sm:pb-20">
+        {/* Night ticker — live Milan time + phase */}
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mb-3"
+        >
+          <NightTicker lang={typedLocale} />
+        </motion.div>
+
         {/* Label */}
         <motion.p
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.5, delay: 0.05 }}
           className="font-sans text-champagne/50 text-[10px] tracking-[0.35em] uppercase mb-6"
         >
           {t[typedLocale].label}
