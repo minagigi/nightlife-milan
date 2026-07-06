@@ -1,28 +1,16 @@
 import { Event, MusicGenre } from './types';
 import { rewriteEventSEO } from './seoRewrite';
+import { matchVenueId } from './venueMatching';
 
 const EVENTBRITE_API = 'https://www.eventbriteapi.com/v3';
 const ORG_ID = '2988002072164';
 
-// Map Eventbrite venue name → canonical internal venue id (matches venuesData ids)
+// Map Eventbrite venue name → canonical internal venue id (matches venuesData ids).
+// Eventi della NOSTRA org sono sempre in uno dei 18 venue: se il nome non matcha
+// nessun alias noto (typo, nome leggermente diverso), il fallback a v-justme evita
+// di scartare l'evento — comportamento invariato rispetto a prima del refactor.
 function mapVenueId(venueName: string): string {
-  const n = (venueName || '').toLowerCase();
-  if (n.includes('justme') || n.includes('just me')) return 'v-justme';
-  if (n.includes('pineta')) return 'v-pineta';
-  if (n.includes('voya')) return 'v-voya';
-  if (n.includes('volt')) return 'v-volt';
-  if (n.includes('magazzini')) return 'v-magazzini';
-  if (n.includes('55 milano') || n.includes('55milano')) return 'v-55milano';
-  if (n.includes('church')) return 'v-church81';
-  if (n.includes('terrazza')) return 'v-terrazza21';
-  if (n.includes('apollo')) return 'v-apollo';
-  if (n.includes('play')) return 'v-playclub';
-  if (n.includes('repvblic')) return 'v-repvblic';
-  if (n.includes('11 club') || n.includes('11club')) return 'v-11clubroom';
-  if (n.includes('gattopardo')) return 'v-gattopardo';
-  if (n.includes('hollywood')) return 'v-hollywood';
-  if (n.includes('armani')) return 'v-armani-prive';
-  return 'v-justme';
+  return matchVenueId(venueName) || 'v-justme';
 }
 
 function detectGenre(text: string): MusicGenre[] {

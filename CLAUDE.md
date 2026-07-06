@@ -52,4 +52,24 @@
 
 ---
 
-**Last Updated**: 2026-06-23
+## Auto-Import Eventbrite (cron notturno, 02:00 UTC)
+
+Trova eventi di terzi nei 18 venue, li riscrive in chiave SEO, ripulisce locandine e testi da contatti/brand di terzi, pubblica sulla nostra org Eventbrite. Piano: `.claude/plans/2026-07-07-eventbrite-auto-import.md`.
+
+| File | Ruolo |
+|------|-------|
+| `lib/venueMatching.ts` | Matcher nome-venue → venueId condiviso (null-safe, usato anche da `eventbriteSync.ts`) |
+| `lib/eventScout.ts` | Discovery pubblica (feed this-week/next-week Eventbrite Milano) + matching + filtro evergreen |
+| `lib/importLedger.ts` | Dedupe: fingerprint venue+data + marker `<!-- src:{ebId} -->` |
+| `lib/eventRewriter.ts` | Riscrittura SEO bilingue con claude-sonnet-5 (voce + regole anti-AI-tell) |
+| `lib/brandSanitizer.ts` | Seconda linea regex: telefoni/URL/handle/promoter terzi → Nightlife Milan |
+| `lib/promoterBlacklist.ts` | Nomi promoter noti da sostituire |
+| `lib/posterPipeline.ts` | Locandine: vision check → editing Gemini (Nano Banana 2) → fallback foto venue |
+| `lib/eventPublisher.ts` | Pubblicazione API v3 sulla nostra org (venue/immagine/ticket/publish) |
+| `lib/duplicateCleanup.ts` | Pulizia duplicati esistenti (usato da `app/api/events/cleanup-duplicates`) |
+| `app/api/events/import/route.ts` | Route cron principale (`?dryRun=1`, `?max=N`) |
+| `app/api/events/cleanup-duplicates/route.ts` | Pulizia one-off (dry-run default, `?execute=1` per eseguire) |
+
+---
+
+**Last Updated**: 2026-07-07
