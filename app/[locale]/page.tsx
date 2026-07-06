@@ -310,7 +310,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                       alt={v.name[lang]}
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
-                      quality={50}
+                      quality={65}
                       placeholder="blur"
                       blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiMxQzE4MTAiLz48L3N2Zz4="
                       className="object-cover group-hover:scale-105 transition-transform duration-700"

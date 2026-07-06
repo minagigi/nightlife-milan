@@ -19,7 +19,6 @@ export default function Hero({ locale }: { locale: string }) {
             alt={firstVenue.localizedContent.name[typedLocale] || firstVenue.localizedContent.name.en}
             fill
             priority
-            fetchPriority="high"
             quality={HERO_Q}
             className="object-cover"
             sizes="100vw"

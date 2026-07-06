@@ -103,7 +103,6 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ['motion', 'lucide-react'],
     optimizeCss: true,
-    inlineCss: true, // CSS (~20KB) inlinato nell'HTML — elimina le 2 richieste render-blocking (450ms su 4G)
   },
   webpack: (config, {dev}) => {
     // HMR is disabled in AI Studio via DISABLE_HMR env var.
