@@ -145,9 +145,15 @@ async function resolveEventbriteVenueId(token: string, venueId: string, dryRun: 
 /** Upload immagine via media upload API — ritorna l'image_id da assegnare come logo dell'evento. */
 async function uploadEventImage(token: string, poster: PosterResult): Promise<string | null> {
   try {
+    // Bug reale riscontrato al primo publish: con header
+    // 'content-type: application/json' su una GET senza body, Eventbrite
+    // sembra cercare "type" in un body JSON inesistente invece che nella query
+    // string ("type - This field is required" nonostante ?type=... nell'URL).
+    // Fix: niente content-type su questa GET, e token anche come query param
+    // (pattern documentato ufficialmente, oltre all'header Authorization).
     const uploadInfoRes = await fetch(
-      `${EVENTBRITE_API}/media/upload/?type=image-event-logo`,
-      { headers: authHeaders(token) }
+      `${EVENTBRITE_API}/media/upload/?type=image-event-logo&token=${encodeURIComponent(token)}`,
+      { headers: { Authorization: `Bearer ${token}` } }
     );
     if (!uploadInfoRes.ok) {
       console.error(`[eventPublisher] Media upload info failed: HTTP ${uploadInfoRes.status} ${(await uploadInfoRes.text()).slice(0, 200)}`);
