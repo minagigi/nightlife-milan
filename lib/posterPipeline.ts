@@ -172,6 +172,19 @@ function isClean(inspection: VisionInspection): boolean {
   return !inspection.hasPhoneNumbers && !inspection.hasThirdPartyBranding && !inspection.hasSocialHandles;
 }
 
+/**
+ * Le foto venue del sito sono .webp — formato rifiutato da Eventbrite
+ * ("The image format is not allowed", scoperto correggendo un evento live
+ * pubblicato con questo fallback). Conversione a JPEG con sharp (bundle
+ * opzionale di Next.js, verificato disponibile anche nel runtime standalone
+ * di Vercel). Se sharp non fosse disponibile per qualche motivo, meglio
+ * fallire esplicitamente che pubblicare un'immagine in un formato rifiutato.
+ */
+async function toJpeg(buffer: Buffer): Promise<Buffer> {
+  const sharp = (await import('sharp')).default;
+  return sharp(buffer).jpeg({ quality: 85 }).toBuffer();
+}
+
 async function venueFallback(venueId: string, imageSlug: string): Promise<PosterResult | null> {
   const venue = venuesData.find((v) => v.id === venueId);
   if (!venue) return null;
@@ -181,10 +194,11 @@ async function venueFallback(venueId: string, imageSlug: string): Promise<Poster
   const downloaded = await downloadImage(`https://nightlifemilan.com${path}`);
   if (!downloaded) return null;
 
-  const ext = downloaded.contentType.includes('png') ? 'png' : 'jpg';
+  const jpegBuffer = await toJpeg(downloaded.buffer);
+  const ext = 'jpg';
   return {
-    buffer: downloaded.buffer,
-    contentType: downloaded.contentType,
+    buffer: jpegBuffer,
+    contentType: 'image/jpeg',
     filename: `${imageSlug}-venue-fallback.${ext}`,
     source: 'venue-fallback',
   };
