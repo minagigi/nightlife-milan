@@ -278,6 +278,26 @@ export async function GET(request: Request) {
       const eventMainGetRes5 = await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { headers });
       const eventMainBody5 = await eventMainGetRes5.json().catch(() => null);
       log.eventMainDescriptionAfterGoldLike = { htmlLength: (eventMainBody5?.description?.html || '').length, html: (eventMainBody5?.description?.html || '').slice(0, 400) };
+
+      // Isola la causa: (a) un singolo <p> lungo senza tag ripetuti, (b) solo 3
+      // blocchi h3/p/ul ripetuti invece di 8 — lunghezza vs. ripetizione di tag.
+      const longSingleP = `<p>${'This is a long single paragraph sentence about the event. '.repeat(25)}</p>`;
+      const descLongPRes = await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, {
+        method: 'POST', headers: jsonHeaders,
+        body: JSON.stringify({ event: { description: { html: longSingleP } } }),
+      });
+      log.descLongPPost = { status: descLongPRes.status, sentLength: longSingleP.length };
+      const gLongP = await (await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { headers })).json().catch(() => null);
+      log.eventMainDescriptionAfterLongP = { htmlLength: (gLongP?.description?.html || '').length, html: (gLongP?.description?.html || '').slice(0, 200) };
+
+      const threeBlocks = Array.from({ length: 3 }, (_, i) => `<h3>Section ${i + 1}</h3><p>Paragraph ${i + 1}.</p><ul><li>A</li><li>B</li></ul>`).join('');
+      const desc3BlocksRes = await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, {
+        method: 'POST', headers: jsonHeaders,
+        body: JSON.stringify({ event: { description: { html: threeBlocks } } }),
+      });
+      log.desc3BlocksPost = { status: desc3BlocksRes.status, sentLength: threeBlocks.length };
+      const g3Blocks = await (await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { headers })).json().catch(() => null);
+      log.eventMainDescriptionAfter3Blocks = { htmlLength: (g3Blocks?.description?.html || '').length, html: (g3Blocks?.description?.html || '').slice(0, 400) };
     } catch (e) {
       log.descImgTest = { threw: (e as Error).message };
     }
