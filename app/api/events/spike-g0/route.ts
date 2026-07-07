@@ -236,6 +236,21 @@ export async function GET(request: Request) {
       const eventMainGetRes2 = await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { headers });
       const eventMainBody2 = await eventMainGetRes2.json().catch(() => null);
       log.eventMainDescriptionAfterWrapped = eventMainBody2?.description;
+
+      // Variante v2-style: HTML moderato (<h2>/<p>/<ul><li>), come lo shape che la
+      // v2 già usava e come appaiono le description di eventi REALI di terzi che
+      // scrapiamo — verifica se QUESTO shape sopravvive intatto (isola se il
+      // problema è la lunghezza/nesting o lo shape esatto usato sopra).
+      const v2Style = '<h2>The Night</h2><p>Aperitivo and DJ set at Just Me Milano.</p><ul><li>Doors 19:30</li><li>Dress code: elegant</li></ul>';
+      const descV2Res = await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, {
+        method: 'POST',
+        headers: jsonHeaders,
+        body: JSON.stringify({ event: { description: { html: v2Style } } }),
+      });
+      log.descV2StylePost = { status: descV2Res.status, ok: descV2Res.ok };
+      const eventMainGetRes3 = await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { headers });
+      const eventMainBody3 = await eventMainGetRes3.json().catch(() => null);
+      log.eventMainDescriptionAfterV2Style = eventMainBody3?.description;
     } catch (e) {
       log.descImgTest = { threw: (e as Error).message };
     }
