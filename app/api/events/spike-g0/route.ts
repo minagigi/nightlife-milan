@@ -204,6 +204,17 @@ export async function GET(request: Request) {
 
       const descGetRes = await fetch(`${EVENTBRITE_API}/events/${testEventId}/description/`, { headers });
       log.descImgGet = { status: descGetRes.status, body: await descGetRes.text() };
+
+      // Plain text (no tag) — verifica se newline/emoji/bullet sopravvivono senza escaping
+      const plainText = '🌙 Hook line one.\nSecond line.\n\n📞 CONTACTS\n• WhatsApp: https://wa.me/393519127047\n• Phone: +39 351 912 7047\n\n❓ FAQ\nQ1: Test question?\nA1: Test answer.';
+      const descPlainRes = await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, {
+        method: 'POST',
+        headers: jsonHeaders,
+        body: JSON.stringify({ event: { description: { html: plainText } } }),
+      });
+      log.descPlainPost = { status: descPlainRes.status, ok: descPlainRes.ok };
+      const descPlainGetRes = await fetch(`${EVENTBRITE_API}/events/${testEventId}/description/`, { headers });
+      log.descPlainGet = { status: descPlainGetRes.status, body: await descPlainGetRes.text() };
     } catch (e) {
       log.descImgTest = { threw: (e as Error).message };
     }
