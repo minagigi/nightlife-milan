@@ -317,6 +317,44 @@ export async function GET(request: Request) {
       await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { method: 'POST', headers: jsonHeaders, body: JSON.stringify({ event: { description: { html: withComment } } }) });
       const gComment = await (await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { headers })).json().catch(() => null);
       log.afterComment = { html: gComment?.description?.html || '' };
+
+      // Test finale a piena scala: simula l'output reale di assembleGoldDescription
+      // (h2/h3/p/ul/li/a + 25 FAQ + marker) per validare che l'intera catena
+      // sopravviva intatta a lunghezza gold-standard reale, non solo nei micro-test.
+      const fakeFaq = Array.from({ length: 25 }, (_, i) =>
+        `<h3>Q${i + 1}: What about topic number ${i + 1} for this Saturday night at Just Me Milano?</h3><p>Answer ${i + 1}: this covers a specific detail about Just Me Milano on Saturday, mentioning price €${15 + i}, dress code, and a WhatsApp contact for bookings and confirmations before the doors open at 19:30.</p>`
+      ).join('');
+      const fakeSections = Array.from({ length: 3 }, (_, i) =>
+        `<h3>🎧 Section ${i + 1}</h3><p>Realistic paragraph describing part ${i + 1} of the night, with concrete details like the time 19:3${i} and a price of €${20 + i}, avoiding any vague filler language.</p>`
+      ).join('');
+      const fullGold = [
+        '<p>Hook paragraph describing the Saturday night experience at Just Me Milano in concrete terms.</p>',
+        '<h2>Contacts &amp; Bookings</h2><ul><li>💬 WhatsApp: <a href="https://wa.me/393519127047">+39 351 912 7047</a></li><li>✉️ Email: concierge@nightlifemilan.com</li><li>🌐 Full event guide: <a href="https://nightlifemilan.com/events/test-slug">nightlifemilan.com/events/test-slug</a></li></ul>',
+        '<h2>⚠️ Important Legal Notice</h2><p>Online tickets are non-refundable. Refunds are only considered if admission is denied by club security at the entrance.</p>',
+        fakeSections,
+        '<h2>🗓️ Evening Programme</h2><ul><li>19:30 — Doors open</li><li>22:00 — DJ set starts</li></ul>',
+        '<h2>🎟️ Tickets</h2><ul><li>Aperitif + 1 Drink: €15 — includes buffet and one drink</li></ul>',
+        '<h2>🍾 Bottle Services / VIP Tables</h2><ul><li>Dance Floor: €320 (up to 5 guests, 1 bottle)</li></ul>',
+        '<h2>Good to Know</h2><ul><li>👗 Dress code: Elegant attire mandatory.</li><li>🚪 Age: 21+ men, 18+ women.</li></ul>',
+        '<p>🔗 Link in bio • 💬 <a href="https://wa.me/393519127047">+39 351 912 7047</a> • ✉️ concierge@nightlifemilan.com</p>',
+        `<h2>FAQ</h2>${fakeFaq}`,
+        '<p>SEO TAGS: milano nightlife, saturday night milan, just me milano</p>',
+        '<p>EVENTBRITE TAGS: milan_nightlife, saturday_night, just_me_milano</p>',
+        '<!-- nlm:src=999;slug-en=test-slug -->',
+      ].join('');
+
+      await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { method: 'POST', headers: jsonHeaders, body: JSON.stringify({ event: { description: { html: fullGold } } }) });
+      const gFull = await (await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { headers })).json().catch(() => null);
+      const savedHtml = gFull?.description?.html || '';
+      log.fullGoldTest = {
+        sentLength: fullGold.length,
+        savedLength: savedHtml.length,
+        survivedFully: savedHtml.length >= fullGold.length * 0.95,
+        markerSurvived: savedHtml.includes('nlm:src=999;slug-en=test-slug'),
+        faq25thSurvived: savedHtml.includes('Q25:'),
+        htmlPreviewStart: savedHtml.slice(0, 200),
+        htmlPreviewEnd: savedHtml.slice(-200),
+      };
     } catch (e) {
       log.descImgTest = { threw: (e as Error).message };
     }
