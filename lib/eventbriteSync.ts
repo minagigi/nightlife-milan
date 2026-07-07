@@ -1,6 +1,7 @@
 import { Event, MusicGenre } from './types';
 import { rewriteEventSEO } from './seoRewrite';
 import { matchVenueId } from './venueMatching';
+import { getEventbriteToken } from './eventbriteToken';
 
 const EVENTBRITE_API = 'https://www.eventbriteapi.com/v3';
 const ORG_ID = '2988002072164';
@@ -55,7 +56,7 @@ function extractEntryPrice(ticketClasses?: Array<{ free: boolean; cost?: { major
 }
 
 export async function debugEventbrite() {
-  const token = process.env.EVENTBRITE_TOKEN;
+  const token = getEventbriteToken();
   if (!token) return { error: 'EVENTBRITE_TOKEN not set', hasToken: false };
 
   const url = `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=live&expand=venue,logo,ticket_classes&order_by=start_asc&time_filter=current_future`;
@@ -79,7 +80,7 @@ export async function debugEventbrite() {
 }
 
 export async function fetchEventbriteEvents(): Promise<Event[]> {
-  const token = process.env.EVENTBRITE_TOKEN;
+  const token = getEventbriteToken();
   if (!token) return [];
 
   try {

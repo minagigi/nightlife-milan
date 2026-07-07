@@ -1,4 +1,5 @@
 import { matchVenueId } from './venueMatching';
+import { getEventbriteToken } from './eventbriteToken';
 
 /**
  * Pulizia duplicati esistenti sulla nostra org — Fase 2C. Adattamento del piano
@@ -103,7 +104,7 @@ export interface CleanupPlan {
 }
 
 export async function buildCleanupPlan(): Promise<CleanupPlan> {
-  const token = process.env.EVENTBRITE_TOKEN;
+  const token = getEventbriteToken();
   if (!token) throw new Error('EVENTBRITE_TOKEN not set');
 
   const rawEvents = await fetchAllOrgEvents(token);
@@ -176,7 +177,7 @@ export interface CleanupExecutionResult {
 }
 
 export async function executeCleanup(plan: CleanupPlan): Promise<CleanupExecutionResult> {
-  const token = process.env.EVENTBRITE_TOKEN;
+  const token = getEventbriteToken();
   if (!token) throw new Error('EVENTBRITE_TOKEN not set');
 
   const deleted: { id: string; title: string }[] = [];

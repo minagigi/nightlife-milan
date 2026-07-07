@@ -2,6 +2,7 @@ import { venuesData } from './venuesData';
 import type { ScoutedEvent } from './eventScout';
 import type { RewrittenEvent } from './eventRewriter';
 import type { PosterResult } from './posterPipeline';
+import { getEventbriteToken } from './eventbriteToken';
 
 /**
  * Pubblicazione sulla nostra org Eventbrite — Fase 5. Non testabile in locale
@@ -172,7 +173,7 @@ export async function publishEvent(
   poster: PosterResult,
   dryRun: boolean
 ): Promise<PublishResult> {
-  const token = process.env.EVENTBRITE_TOKEN;
+  const token = getEventbriteToken();
   if (!token) return { ok: false, reason: 'EVENTBRITE_TOKEN not set' };
 
   const venueEbId = await resolveEventbriteVenueId(token, scouted.venueId, dryRun);

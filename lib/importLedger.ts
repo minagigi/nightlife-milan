@@ -1,5 +1,6 @@
 import { matchVenueId } from './venueMatching';
 import type { ScoutedEvent } from './eventScout';
+import { getEventbriteToken } from './eventbriteToken';
 
 const EVENTBRITE_API = 'https://www.eventbriteapi.com/v3';
 const ORG_ID = '2988002072164';
@@ -21,7 +22,7 @@ interface OwnOrgEvent {
 }
 
 async function fetchOwnOrgEvents(): Promise<OwnOrgEvent[]> {
-  const token = process.env.EVENTBRITE_TOKEN;
+  const token = getEventbriteToken();
   if (!token) return [];
 
   const all: OwnOrgEvent[] = [];
