@@ -3,6 +3,8 @@ import type { ScoutedEvent } from './eventScout';
 import type { RewrittenEvent } from './eventRewriter';
 import type { PosterResult } from './posterPipeline';
 import { getEventbriteToken } from './eventbriteToken';
+import { getVenuePricing } from './venuePricing';
+import { CONTACT } from '@/config/contact';
 
 /**
  * Pubblicazione sulla nostra org Eventbrite — Fase 5. Non testabile in locale
@@ -233,8 +235,7 @@ export async function replaceEventImage(eventId: string, poster: PosterResult): 
 export async function publishEvent(
   scouted: ScoutedEvent,
   rewritten: RewrittenEvent,
-  sanitizedHtmlIt: string,
-  sanitizedHtmlEn: string,
+  sanitizedDescription: string,
   poster: PosterResult,
   dryRun: boolean
 ): Promise<PublishResult> {
@@ -244,18 +245,19 @@ export async function publishEvent(
   const venueEbId = await resolveEventbriteVenueId(token, scouted.venueId, dryRun);
   if (!venueEbId) return { ok: false, reason: `Could not resolve/create Eventbrite venue for ${scouted.venueId}` };
 
-  const description = `${sanitizedHtmlIt}\n<hr/>\n${sanitizedHtmlEn}\n<!-- src:${scouted.ebId} -->`;
+  const description = sanitizedDescription;
 
   if (dryRun) {
     return {
       ok: true,
       reason: 'dry-run: not published',
       imageSource: poster.source,
-      url: `[dry-run] ${rewritten.titleIt}`,
+      url: `[dry-run] ${rewritten.titleEn}`,
     };
   }
 
-  // 1. Crea l'evento (draft)
+  // 1. Crea l'evento (draft) — EN-only (regola gold standard: pubblico internazionale,
+  // il sito genera le sue pagine bilingui in autonomia da seoRewrite.ts).
   let eventId: string;
   let eventUrl: string;
   try {
@@ -264,8 +266,8 @@ export async function publishEvent(
       headers: authHeaders(token),
       body: JSON.stringify({
         event: {
-          name: { html: rewritten.titleIt },
-          summary: rewritten.summaryIt,
+          name: { html: rewritten.titleEn },
+          summary: rewritten.summaryEn,
           start: { timezone: 'Europe/Rome', utc: toEventbriteUtc(scouted.dateISO) },
           end: { timezone: 'Europe/Rome', utc: toEventbriteUtc(scouted.endISO || scouted.dateISO) },
           currency: 'EUR',
@@ -304,28 +306,43 @@ export async function publishEvent(
   }
 
   // 3. Description completa
+  // Bug reale scoperto (spike G0): POST/PUT su /events/{id}/description/ dà
+  // sempre 405 METHOD_NOT_ALLOWED — l'evento reale pubblicato in precedenza è
+  // rimasto con la sola summary perché questa chiamata falliva silenziosamente
+  // (nessun controllo dell'esito). Il metodo che funziona davvero è annidare
+  // "description" nel body della POST generica /events/{id}/. Inoltre
+  // Eventbrite HTML-escapa qualunque tag ricevuto qui (non è un editor rich
+  // text) — va quindi scritto testo semplice con newline/emoji/bullet, non
+  // markup HTML (vedi assembleGoldDescription in eventRewriter.ts).
   try {
-    await fetch(`${EVENTBRITE_API}/events/${eventId}/description/`, {
+    const descRes = await fetch(`${EVENTBRITE_API}/events/${eventId}/`, {
       method: 'POST',
       headers: authHeaders(token),
-      body: JSON.stringify({ description: { html: description } }),
+      body: JSON.stringify({ event: { description: { html: description } } }),
     });
-  } catch {
-    // non bloccante: l'evento resta pubblicabile con la sola summary
+    if (!descRes.ok) {
+      console.error(`[eventPublisher] Description write failed: HTTP ${descRes.status} ${(await descRes.text()).slice(0, 200)}`);
+    }
+  } catch (e) {
+    console.error(`[eventPublisher] Description write threw: ${(e as Error).message}`);
   }
 
-  // 4. Ticket gratuito
+  // 4. Ticket — formato ESATTO del gold standard (mai varianti inventate).
+  // Il vero contatto viene sempre da CONTACT, mai hardcodato nel testo.
   try {
     const ticketRes = await fetch(`${EVENTBRITE_API}/events/${eventId}/ticket_classes/`, {
       method: 'POST',
       headers: authHeaders(token),
       body: JSON.stringify({
         ticket_class: {
-          name: 'Guestlist — Ingresso Omaggio',
+          name: 'RESERVATION TICKET - PAY AT THE DOOR - NOT FREE',
           free: true,
-          quantity_total: 50,
+          quantity_total: 500,
           minimum_quantity: 1,
-          maximum_quantity: 4,
+          maximum_quantity: 10,
+          hide_sale_dates: false,
+          sales_end: toEventbriteUtc(scouted.endISO || scouted.dateISO),
+          description: `This listing is only a reservation request and NOT a real ticket purchase.\nTo be accredited/confirmed, you must contact Luis Nightlife at ☎️ ${CONTACT.whatsapp.number}.`,
         },
       }),
     });
@@ -334,6 +351,32 @@ export async function publishEvent(
     }
   } catch (e) {
     return { ok: false, reason: `Ticket creation threw: ${(e as Error).message}`, ebEventId: eventId, imageSource: poster.source };
+  }
+
+  // 4b. music_properties — highlights nativi "Buono a sapersi" (età + check-in).
+  // Scoperto scrivibile nello spike G0 (a differenza dei widget structured_content,
+  // non scrivibili via API pubblica). Non bloccante: un fallimento qui non deve
+  // impedire la pubblicazione del resto dell'evento.
+  try {
+    const pricing = getVenuePricing(scouted.venueId);
+    const ageRestriction = pricing.ageLimit ? `${pricing.ageLimit}+` : undefined;
+    let doorTime: string | undefined;
+    if (pricing.checkinMinutesBefore) {
+      const startMs = new Date(toEventbriteUtc(scouted.dateISO)).getTime() - pricing.checkinMinutesBefore * 60000;
+      doorTime = new Date(startMs).toISOString().replace(/\.\d{3}Z$/, 'Z');
+    }
+    if (ageRestriction || doorTime) {
+      const mpRes = await fetch(`${EVENTBRITE_API}/events/${eventId}/music_properties/`, {
+        method: 'POST',
+        headers: authHeaders(token),
+        body: JSON.stringify({ music_properties: { ...(ageRestriction && { age_restriction: ageRestriction }), ...(doorTime && { door_time: doorTime }) } }),
+      });
+      if (!mpRes.ok) {
+        console.error(`[eventPublisher] music_properties write failed: HTTP ${mpRes.status} ${(await mpRes.text()).slice(0, 200)}`);
+      }
+    }
+  } catch (e) {
+    console.error(`[eventPublisher] music_properties write threw: ${(e as Error).message}`);
   }
 
   // 5. Publish

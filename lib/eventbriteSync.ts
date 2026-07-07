@@ -28,6 +28,17 @@ function detectGenre(text: string): MusicGenre[] {
   return genres.length > 0 ? genres : [MusicGenre.COMMERCIAL];
 }
 
+// FASE G4B: il publisher (eventPublisher.ts) incorpora nella description un
+// marker testuale con lo slug canonico deciso PRIMA del publish (necessario per
+// il backlink Eventbrite→sito: il link viene scritto nell'evento e va puntare
+// a uno slug che il sito genererà IDENTICO). Se presente, va usato verbatim al
+// posto della rigenerazione AI — coerenza garantita sito↔Eventbrite.
+const SLUG_MARKER_RE = /\[nlm:src=(\d+);slug-en=([a-z0-9-]+)\]/;
+
+function extractSlugMarker(text: string): string | undefined {
+  return text?.match(SLUG_MARKER_RE)?.[2];
+}
+
 /** Extract the first Xceed link from an Eventbrite event description (HTML or plain text). */
 function extractXceedUrl(text: string): string | undefined {
   if (!text) return undefined;
@@ -117,6 +128,9 @@ export async function fetchEventbriteEvents(): Promise<Event[]> {
         const dateISO = `${ev.start.local}+01:00`;
 
         const seo = await rewriteEventSEO({ title, description: desc, venueId, dateISO });
+        const markerSlug = extractSlugMarker(ev.description?.text || '') || extractSlugMarker(ev.description?.html || '');
+        const slugEn = markerSlug || seo.slugEn;
+        const slugIt = markerSlug || seo.slugIt;
 
         return {
           id: `eb-${ev.id}`,
@@ -132,7 +146,7 @@ export async function fetchEventbriteEvents(): Promise<Event[]> {
           localizedContent: {
             title: { en: seo.titleEn, it: seo.titleIt },
             shortDescription: { en: seo.descEn, it: seo.descIt },
-            slug: { en: seo.slugEn, it: seo.slugIt },
+            slug: { en: slugEn, it: slugIt },
           },
           image: ev.logo?.url || ev.logo?.original?.url,
           isSpecial: /live|special|vip/i.test(title),

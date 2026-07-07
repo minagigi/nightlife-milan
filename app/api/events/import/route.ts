@@ -6,11 +6,32 @@ import { sanitize } from '@/lib/brandSanitizer';
 import { addToBlacklist } from '@/lib/promoterBlacklist';
 import { processPoster } from '@/lib/posterPipeline';
 import { publishEvent, sleep, PUBLISH_RATE_LIMIT_MS } from '@/lib/eventPublisher';
+import { notifyUrl } from '@/lib/googleIndexing';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 300;
 
-const DEFAULT_MAX_PER_RUN = 15;
+// FASE G5: con corpo gold-standard (2 chiamate AI lunghe + poster + poll sito)
+// ogni evento costa ~3-4 min — con maxDuration 300 il cap sicuro per run è ~3.
+// Il cron notturno smaltisce il backlog su più notti.
+const DEFAULT_MAX_PER_RUN = 3;
+const SITE_BASE = process.env.APP_URL || 'https://nightlifemilan.com';
+
+/** Polla la pagina sito finché risponde 200 (o scade il timeout) — FASE G4B:
+ * mai notificare Google Indexing per un URL ancora morto. */
+async function pollSitePageUntilLive(url: string, maxMs: number, intervalMs: number): Promise<boolean> {
+  const deadline = Date.now() + maxMs;
+  while (Date.now() < deadline) {
+    try {
+      const res = await fetch(url, { cache: 'no-store' });
+      if (res.ok) return true;
+    } catch {
+      // riprova al prossimo giro
+    }
+    await sleep(intervalMs);
+  }
+  return false;
+}
 
 /**
  * Cron NOTTURNO (vercel.json: 0 2 * * *) — Fase 6 del piano auto-import.
@@ -43,7 +64,7 @@ export async function GET(request: Request) {
   const maxParam = parseInt(searchParams.get('max') || '', 10);
   const maxPerRun = Number.isFinite(maxParam) && maxParam > 0 ? maxParam : DEFAULT_MAX_PER_RUN;
 
-  const published: { title: string; url: string; imageSource?: string }[] = [];
+  const published: { title: string; url: string; imageSource?: string; sitePageUrl?: string; sitePageLive?: boolean; indexed?: boolean }[] = [];
   const skipped: { title: string; reason: string }[] = [];
   const errors: string[] = [];
 
@@ -76,8 +97,7 @@ export async function GET(request: Request) {
         continue;
       }
 
-      const sanitizedHtmlIt = sanitize(rewritten.descriptionHtmlIt, knownOrganizers);
-      const sanitizedHtmlEn = sanitize(rewritten.descriptionHtmlEn, knownOrganizers);
+      const sanitizedDescription = sanitize(rewritten.descriptionPlainEn, knownOrganizers);
 
       let poster;
       try {
@@ -87,10 +107,25 @@ export async function GET(request: Request) {
         continue;
       }
 
-      const result = await publishEvent(candidate, rewritten, sanitizedHtmlIt, sanitizedHtmlEn, poster, dryRun);
+      const result = await publishEvent(candidate, rewritten, sanitizedDescription, poster, dryRun);
 
       if (result.ok) {
-        published.push({ title: rewritten.titleIt, url: result.url || '', imageSource: result.imageSource });
+        const entry: (typeof published)[number] = { title: rewritten.titleEn, url: result.url || '', imageSource: result.imageSource };
+
+        // FASE G4B: backlink Eventbrite→sito — poll della pagina sito (slug
+        // deterministico, generato dal rewriter) finché è viva, poi notifica
+        // Google Indexing SOLO per un URL confermato 200 (mai un link morto).
+        if (!dryRun && rewritten.slugEn) {
+          const sitePageUrl = `${SITE_BASE}/events/${rewritten.slugEn}`;
+          entry.sitePageUrl = sitePageUrl;
+          entry.sitePageLive = await pollSitePageUntilLive(sitePageUrl, 6 * 60 * 1000, 30 * 1000);
+          if (entry.sitePageLive && process.env.GOOGLE_INDEXING_CREDENTIALS) {
+            const idx = await notifyUrl(sitePageUrl, 'URL_UPDATED');
+            entry.indexed = idx.ok;
+          }
+        }
+
+        published.push(entry);
       } else {
         skipped.push({ title: candidate.rawTitle, reason: `needsReview: ${result.reason}` });
       }
@@ -101,11 +136,10 @@ export async function GET(request: Request) {
     }
   }
 
-  // Nota Google Indexing: gli URL del NOSTRO sito per i nuovi eventi (slug incluso)
-  // sono generati solo a lettura da fetchEventbriteEvents()/rewriteEventSEO() —
-  // non calcolabili qui senza duplicare quella pipeline. Il cron esistente
-  // /api/events/sync (08:00 UTC, vercel.json) li troverà entro poche ore e li
-  // notificherà a Google — nessuna azione aggiuntiva necessaria qui.
+  // Nota Google Indexing: da FASE G4B lo slug è deterministico (generato dal
+  // rewriter, non più dall'AI a lettura) e notificato subito sopra dopo il poll
+  // 200 sulla pagina sito. Il cron /api/events/sync (08:00 UTC) resta come rete
+  // di sicurezza per eventi il cui poll fosse scaduto senza successo.
 
   return NextResponse.json({
     ok: true,

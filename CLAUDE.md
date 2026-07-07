@@ -52,23 +52,25 @@
 
 ---
 
-## Auto-Import Eventbrite (cron notturno, 02:00 UTC)
+## Auto-Import Eventbrite (cron notturno, 02:00 UTC) — v3 "gold standard"
 
-Trova eventi di terzi nei 18 venue, li riscrive in chiave SEO, ripulisce locandine e testi da contatti/brand di terzi, pubblica sulla nostra org Eventbrite. Piano: `.claude/plans/2026-07-07-eventbrite-auto-import.md`.
+Trova eventi di terzi nei 18 venue, li riscrive in chiave SEO gold-standard (corpo lungo, 25 FAQ, listino, programma) con claude-sonnet-5, ripulisce locandine e testi da contatti/brand di terzi, pubblica sulla nostra org Eventbrite EN-only con backlink verso la pagina sito. Piano: `.claude/plans/2026-07-07-eventbrite-gold-standard.md` (vedi in fondo il riquadro "RISULTATO REALE FASE G0" — l'API pubblica di Eventbrite NON permette di scrivere la structured_content/galleria/widget nativi: tutto il corpo gold vive in `description` come TESTO SEMPLICE, non HTML).
 
 | File | Ruolo |
 |------|-------|
 | `lib/venueMatching.ts` | Matcher nome-venue → venueId condiviso (null-safe, usato anche da `eventbriteSync.ts`) |
 | `lib/eventScout.ts` | Discovery pubblica (feed this-week/next-week Eventbrite Milano) + matching + filtro evergreen |
 | `lib/importLedger.ts` | Dedupe: fingerprint venue+data + marker `<!-- src:{ebId} -->` |
-| `lib/eventRewriter.ts` | Riscrittura SEO bilingue con claude-sonnet-5 (voce + regole anti-AI-tell) |
-| `lib/brandSanitizer.ts` | Seconda linea regex: telefoni/URL/handle/promoter terzi → Nightlife Milan |
+| `lib/venuePricing.ts` | Listini tavoli/ticket + dress code/età/parcheggio per venue (solo dati reali, mai inventati) |
+| `lib/eventRewriter.ts` | Rewriter v3: 2 chiamate Sonnet (corpo + 25 FAQ) → assembla description gold TESTO SEMPLICE (contatti/legal/listino da codice, marker slug canonico per il backlink) |
+| `lib/brandSanitizer.ts` | Seconda linea regex: telefoni/URL/handle/promoter terzi → Nightlife Milan (testo semplice, non HTML) |
 | `lib/promoterBlacklist.ts` | Nomi promoter noti da sostituire |
 | `lib/posterPipeline.ts` | Locandine: vision check → editing Gemini (Nano Banana 2) → fallback foto venue |
-| `lib/eventPublisher.ts` | Pubblicazione API v3 sulla nostra org (venue/immagine/ticket/publish) |
+| `lib/eventPublisher.ts` | Pubblicazione API v3: venue/immagine/description(fix bug 405)/ticket gold format/`music_properties` (età+check-in nativi)/publish |
 | `lib/duplicateCleanup.ts` | Pulizia duplicati esistenti (usato da `app/api/events/cleanup-duplicates`) |
-| `app/api/events/import/route.ts` | Route cron principale (`?dryRun=1`, `?max=N`) |
+| `app/api/events/import/route.ts` | Route cron principale (`?dryRun=1`, `?max=N`, default 3/run) + poll pagina sito + notifica Google Indexing (FASE G4B) |
 | `app/api/events/cleanup-duplicates/route.ts` | Pulizia one-off (dry-run default, `?execute=1` per eseguire) |
+| `app/api/events/spike-g0/route.ts` | Route diagnostica one-off (non produzione) usata per lo spike G0 |
 
 ---
 

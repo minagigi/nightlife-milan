@@ -30,10 +30,12 @@ function isOurUrl(url: string): boolean {
 export function sanitize(html: string, knownOrganizers: string[] = []): string {
   let out = html;
 
-  // 1. Placeholder WhatsApp → numero + link reale (SEMPRE dal config, mai hardcodato)
+  // 1. Placeholder WhatsApp → numero + link reale (SEMPRE dal config, mai hardcodato).
+  // Testo semplice, non HTML: Eventbrite html-escapa qualunque tag ricevuto via API
+  // (scoperto nello spike G0) — un <a href> finirebbe visibile come testo letterale.
   out = out.replace(
     WHATSAPP_PLACEHOLDER_RE,
-    `<a href="${CONTACT.whatsapp.link}">${CONTACT.whatsapp.number}</a>`
+    `${CONTACT.whatsapp.number} (${CONTACT.whatsapp.link})`
   );
 
   // 2. Telefoni di terzi → il nostro
