@@ -164,77 +164,44 @@ function esc(s: string): string {
   return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
+// Limite reale scoperto empiricamente nello spike G0 (test ripetuti, anche su
+// eventi mai toccati prima con UNA sola scrittura): oltre ~1300 caratteri la
+// description scritta via /events/{id}/ viene TRONCATA silenziosamente a un
+// frammento minuscolo (confermato indipendente da forma/tag usati, da riscritture
+// ripetute, da attese asincrone). È un limite reale della piattaforma, non un
+// bug di questo codice. Budget conservativo con margine.
+const DESCRIPTION_SAFE_BUDGET = 1000;
+
 /**
  * Assembla la description finale come HTML vero (h2/h3/p/ul/li/a — MAI <img>
- * o <br/>, vedi nota in testa al file) da parti statiche (codice) + dinamiche (AI).
+ * o <br/>, vedi nota in testa al file), rispettando DESCRIPTION_SAFE_BUDGET.
+ * Il corpo gold-standard completo (sezioni, 25 FAQ, programma) NON entra nel
+ * limite reale di Eventbrite: qui va solo un hook breve + contatti + un
+ * richiamo + il backlink alla pagina sito (che non ha questo limite) + marker.
  */
 function assembleGoldDescription(
   body: BodyResult,
-  faq: { question: string; answer: string }[],
-  pricing: ReturnType<typeof getVenuePricing>,
+  _faq: { question: string; answer: string }[],
+  _pricing: ReturnType<typeof getVenuePricing>,
   slugEn: string,
   ebId: string
 ): string {
-  const blocks: string[] = [];
+  const marker = `<!-- nlm:src=${ebId};slug-en=${slugEn} -->`;
+  const siteUrl = `https://nightlifemilan.com/events/${slugEn}`;
 
-  blocks.push(`<p>${esc(body.hook)}</p>`);
+  const contacts =
+    '<p>💬 WhatsApp: {{WHATSAPP}} · ✉️ concierge@nightlifemilan.com</p>' +
+    `<p>🌐 Full event guide, FAQ &amp; VIP tables: <a href="${siteUrl}">${siteUrl}</a></p>`;
 
-  blocks.push(
-    '<h2>Contacts &amp; Bookings</h2>' +
-    `<ul><li>💬 WhatsApp: {{WHATSAPP}}</li>` +
-    `<li>✉️ Email: concierge@nightlifemilan.com</li>` +
-    `<li>🌐 Full event guide: <a href="https://nightlifemilan.com/events/${slugEn}">nightlifemilan.com/events/${slugEn}</a></li></ul>`
-  );
+  const legal = '<p>⚠️ Eventbrite registrations are information requests only, not valid for entry on their own. Online tickets are non-refundable except if entry is denied by security.</p>';
 
-  blocks.push(
-    '<h2>⚠️ Important Legal Notice</h2>' +
-    '<p>Online tickets are non-refundable. Refunds are only considered if admission is denied by club security at the entrance; requests must be submitted within 24 hours of the event. Eventbrite registrations represent information requests only and are not valid for entry on their own.</p>'
-  );
+  // Budget rigido: taglia l'hook finché il totale rientra, mai il contrario
+  // (contatti/link/legal/marker sono innegoziabili — sono il vero valore SEO/legale).
+  const fixedLength = contacts.length + legal.length + marker.length + '<p></p>'.length;
+  const hookBudget = Math.max(80, DESCRIPTION_SAFE_BUDGET - fixedLength);
+  const hookText = clamp(body.hook, hookBudget);
 
-  for (const s of body.sections) {
-    blocks.push(`<h3>${esc(s.emoji)} ${esc(s.title.toUpperCase())}</h3><p>${esc(s.body)}</p>`);
-  }
-
-  if (body.programme.length) {
-    const items = body.programme.map((slot) => {
-      const time = slot.end ? `${slot.start}-${slot.end}` : slot.start;
-      return `<li>${esc(time)} — ${esc(slot.title)}</li>`;
-    }).join('');
-    blocks.push(`<h2>🗓️ Evening Programme</h2><ul>${items}</ul>`);
-  }
-
-  if (pricing.ticketTiers?.length) {
-    const items = pricing.ticketTiers.map((t) => `<li>${esc(t.name)}: €${t.price} — ${esc(t.includes)}</li>`).join('');
-    blocks.push(`<h2>🎟️ Tickets</h2><ul>${items}</ul>`);
-  }
-
-  const tableItems = pricing.tableTiers?.length
-    ? pricing.tableTiers.map((t) => `<li>${esc(t.name)}: €${t.price} (up to ${t.capacity} guests, ${esc(t.includes)})</li>`).join('')
-    : '<li>Contact our concierge for table options and pricing.</li>';
-  blocks.push(`<h2>🍾 Bottle Services / VIP Tables</h2><ul>${tableItems}</ul>`);
-
-  const goodToKnow = [
-    `👗 Dress code: ${esc(pricing.dressCode || 'Smart elegant. Management reserves the right to refuse entry.')}`,
-    `🚪 Age: ${esc(pricing.agePolicy || '')}`,
-  ];
-  if (pricing.parking && pricing.parking !== 'none') {
-    goodToKnow.push(`🅿️ Parking: ${pricing.parking === 'free' ? 'Free onsite parking available.' : 'Paid parking available onsite.'}`);
-  }
-  blocks.push(`<h2>Good to Know</h2><ul>${goodToKnow.map((l) => `<li>${l}</li>`).join('')}</ul>`);
-
-  blocks.push('<p>🔗 Link in bio • 💬 {{WHATSAPP}} • ✉️ concierge@nightlifemilan.com</p>');
-
-  const faqItems = faq.map((f, i) => `<h3>Q${i + 1}: ${esc(f.question)}</h3><p>${esc(f.answer)}</p>`).join('');
-  blocks.push(`<h2>FAQ</h2>${faqItems}`);
-
-  blocks.push(`<p>SEO TAGS: ${esc(body.seoTags.join(', '))}</p>`);
-  blocks.push(`<p>EVENTBRITE TAGS: ${esc(body.ebTags.join(', '))}</p>`);
-
-  // Marker canonico (dentro un commento HTML, basso peso visivo) — consumato
-  // da eventbriteSync.ts per garantire lo stesso slug sito↔Eventbrite (FASE G4B).
-  blocks.push(`<!-- nlm:src=${ebId};slug-en=${slugEn} -->`);
-
-  return blocks.join('');
+  return `<p>${esc(hookText)}</p>${contacts}${legal}${marker}`;
 }
 
 /**
