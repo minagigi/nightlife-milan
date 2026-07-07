@@ -181,14 +181,26 @@ export async function GET(request: Request) {
     }
 
     // Test 2: la description classica accetta <img> inline? (fallback per la galleria)
+    // Bug reale scoperto: POST /description/ dà 405 anche sull'evento reale già in
+    // produzione (la description live è rimasta alla sola summary) — provo PUT e
+    // anche POST diretta su /events/{id}/ con description annidata nel body evento.
     try {
       const testImgUrl = 'https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1178782357%2F2988002064108%2F1%2Foriginal.20260302-123735?auto=format&q=75&s=1';
-      const descPostRes = await fetch(`${EVENTBRITE_API}/events/${testEventId}/description/`, {
+      const html = `<p>Before</p><img src="${testImgUrl}" alt="test"/><p>After</p>`;
+
+      const descPutRes = await fetch(`${EVENTBRITE_API}/events/${testEventId}/description/`, {
+        method: 'PUT',
+        headers: jsonHeaders,
+        body: JSON.stringify({ description: { html } }),
+      });
+      log.descImgPut = { status: descPutRes.status, ok: descPutRes.ok, body: await descPutRes.text() };
+
+      const descViaEventRes = await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, {
         method: 'POST',
         headers: jsonHeaders,
-        body: JSON.stringify({ description: { html: `<p>Before</p><img src="${testImgUrl}" alt="test"/><p>After</p>` } }),
+        body: JSON.stringify({ event: { description: { html } } }),
       });
-      log.descImgPost = { status: descPostRes.status, ok: descPostRes.ok, body: await descPostRes.text() };
+      log.descViaEventPost = { status: descViaEventRes.status, ok: descViaEventRes.ok, body: await descViaEventRes.text() };
 
       const descGetRes = await fetch(`${EVENTBRITE_API}/events/${testEventId}/description/`, { headers });
       log.descImgGet = { status: descGetRes.status, body: await descGetRes.text() };
