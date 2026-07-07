@@ -166,6 +166,37 @@ export async function GET(request: Request) {
       log.writeTestThrew = (e as Error).message;
     }
 
+    // Test 2: la description classica accetta <img> inline? (fallback per la galleria)
+    try {
+      const testImgUrl = 'https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1178782357%2F2988002064108%2F1%2Foriginal.20260302-123735?auto=format&q=75&s=1';
+      const descPostRes = await fetch(`${EVENTBRITE_API}/events/${testEventId}/description/`, {
+        method: 'POST',
+        headers: jsonHeaders,
+        body: JSON.stringify({ description: { html: `<p>Before</p><img src="${testImgUrl}" alt="test"/><p>After</p>` } }),
+      });
+      log.descImgPost = { status: descPostRes.status, ok: descPostRes.ok, body: await descPostRes.text() };
+
+      const descGetRes = await fetch(`${EVENTBRITE_API}/events/${testEventId}/description/`, { headers });
+      log.descImgGet = { status: descGetRes.status, body: await descGetRes.text() };
+    } catch (e) {
+      log.descImgTest = { threw: (e as Error).message };
+    }
+
+    // Test 3: music_properties (age_restriction/door_time) è scrivibile?
+    try {
+      const mpRes = await fetch(`${EVENTBRITE_API}/events/${testEventId}/music_properties/`, {
+        method: 'POST',
+        headers: jsonHeaders,
+        body: JSON.stringify({ music_properties: { age_restriction: '18+', door_time: '19:30' } }),
+      });
+      log.musicPropertiesPost = { status: mpRes.status, ok: mpRes.ok, body: await mpRes.text() };
+
+      const mpGetRes = await fetch(`${EVENTBRITE_API}/events/${testEventId}/music_properties/`, { headers });
+      log.musicPropertiesGet = { status: mpGetRes.status, body: await mpGetRes.text() };
+    } catch (e) {
+      log.musicPropertiesTest = { threw: (e as Error).message };
+    }
+
     // Cleanup: elimina SEMPRE l'evento di prova
     try {
       const delRes = await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { method: 'DELETE', headers });
