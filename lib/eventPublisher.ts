@@ -198,6 +198,33 @@ async function uploadEventImage(token: string, poster: PosterResult): Promise<st
 }
 
 /**
+ * Sostituisce l'immagine di un evento GIÀ pubblicato — usato per correggere
+ * un evento live la cui locandina è risultata sporca dopo il fatto (vision
+ * check con falso negativo). Upload + riassegnazione logo, nessun'altra
+ * modifica ai dati dell'evento.
+ */
+export async function replaceEventImage(eventId: string, poster: PosterResult): Promise<{ ok: boolean; reason?: string }> {
+  const token = getEventbriteToken();
+  if (!token) return { ok: false, reason: 'EVENTBRITE_TOKEN not set' };
+
+  const imageId = await uploadEventImage(token, poster);
+  if (!imageId) return { ok: false, reason: 'Image upload failed' };
+
+  try {
+    const res = await fetch(`${EVENTBRITE_API}/events/${eventId}/`, {
+      method: 'POST',
+      headers: authHeaders(token),
+      body: JSON.stringify({ event: { logo_id: imageId } }),
+    });
+    if (!res.ok) return { ok: false, reason: `Logo reassignment failed: HTTP ${res.status} ${(await res.text()).slice(0, 200)}` };
+  } catch (e) {
+    return { ok: false, reason: `Logo reassignment threw: ${(e as Error).message}` };
+  }
+
+  return { ok: true };
+}
+
+/**
  * Pubblica un evento riscritto+sanitizzato+con locandina pronta sulla nostra
  * org Eventbrite. Ritorna `ok: false` con `reason` su qualunque fallimento —
  * non lancia mai eccezioni verso il chiamante (la route gestisce N eventi in

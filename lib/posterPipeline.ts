@@ -65,12 +65,16 @@ async function inspectWithVision(imageBase64: string, mediaType: string, afterEd
     ? `\nNote: "nightlifemilan.com" and "${CONTACT.whatsapp.number}" (with a WhatsApp icon) are OUR OWN contact info, already correctly added — do NOT flag them as phone numbers or branding.`
     : '';
 
-  const prompt = `Look at this event poster. The VENUE name and EVENT name/date printed on it are expected and fine — they are NOT third-party branding.${ownContactNote} Answer ONLY with a JSON object (no markdown, no prose):
+  const prompt = `Look VERY CAREFULLY at every part of this event poster, including small text and watermarks in corners or centered at top/bottom edges — these are easy to miss but are the most common way third parties brand a poster. The VENUE name and EVENT name/date printed on it are expected and fine — they are NOT third-party branding.${ownContactNote}
+
+Explicitly check for: a website domain (anything.it, anything.com), a wordmark/logo overlay (a stylized brand name, even if it doesn't sound like an agency), a small watermark in a corner or centered near an edge, an @handle, a hashtag, or a phone number. If you are not fully sure something is our own venue/brand, treat it as third-party and flag it — a false alarm here is cheap, missing a real brand leak is not.
+
+Answer ONLY with a JSON object (no markdown, no prose):
 {
   "hasPhoneNumbers": boolean (any THIRD-PARTY phone number printed on the poster, in any format),
-  "hasThirdPartyBranding": boolean (any promoter/agency/sponsor logo or name that is NOT the venue itself and NOT Nightlife Milan),
+  "hasThirdPartyBranding": boolean (any promoter/agency/sponsor logo, wordmark, or watermark that is NOT the venue itself and NOT Nightlife Milan — include website domains and stylized text logos),
   "hasSocialHandles": boolean (any @handle, hashtag, or social media icon with a handle, belonging to a third party),
-  "textFound": ["list every piece of THIRD-PARTY contact-related text found, e.g. phone numbers, handles, URLs — do not list our own info"]
+  "textFound": ["list every piece of THIRD-PARTY text/logo/watermark found, including website domains — do not list our own info"]
 }`;
 
   const controller = new AbortController();
