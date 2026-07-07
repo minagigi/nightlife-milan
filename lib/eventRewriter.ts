@@ -116,13 +116,25 @@ Raw description (from third-party promoter, needs full rewrite, strip any contac
         messages: [{ role: 'user', content: userMsg }],
       }),
     });
-    if (!res.ok) return null;
+    if (!res.ok) {
+      console.error(`[eventRewriter] Anthropic API ${res.status} for "${event.rawTitle}": ${(await res.text()).slice(0, 300)}`);
+      return null;
+    }
 
-    const data = (await res.json()) as { content: Array<{ type: string; text?: string }> };
+    const data = (await res.json()) as { stop_reason?: string; content: Array<{ type: string; text?: string }> };
+    if (data.stop_reason === 'max_tokens') {
+      console.error(`[eventRewriter] Response truncated (max_tokens) for "${event.rawTitle}" — output likely incomplete JSON`);
+    }
     const text = data.content?.find((c) => c.type === 'text')?.text || '';
     const jsonStr = text.slice(text.indexOf('{'), text.lastIndexOf('}') + 1);
-    return JSON.parse(jsonStr) as Partial<RewrittenEvent>;
-  } catch {
+    try {
+      return JSON.parse(jsonStr) as Partial<RewrittenEvent>;
+    } catch (parseErr) {
+      console.error(`[eventRewriter] JSON parse failed for "${event.rawTitle}": ${(parseErr as Error).message}. Raw text (first 500 chars): ${text.slice(0, 500)}`);
+      return null;
+    }
+  } catch (e) {
+    console.error(`[eventRewriter] Fetch/abort error for "${event.rawTitle}": ${(e as Error).message}`);
     return null;
   } finally {
     clearTimeout(timeout);
@@ -147,6 +159,12 @@ export async function rewriteEvent(event: ScoutedEvent): Promise<RewrittenEvent>
   const missing = !result || required.some((k) => !result[k]) || !Array.isArray(result.tags) || result.tags.length === 0;
 
   if (missing) {
+    if (result) {
+      const missingFields = required.filter((k) => !result[k]);
+      console.error(`[eventRewriter] needsReview for "${event.rawTitle}" — missing fields: ${missingFields.join(', ') || 'none'}, tags: ${JSON.stringify(result.tags)}`);
+    } else {
+      console.error(`[eventRewriter] needsReview for "${event.rawTitle}" — callSonnet returned null (see error above)`);
+    }
     return {
       titleEn: '', titleIt: '', descriptionHtmlEn: '', descriptionHtmlIt: '',
       summaryEn: '', summaryIt: '', tags: [], imageAltEn: '', imageAltIt: '',
