@@ -215,6 +215,27 @@ export async function GET(request: Request) {
       log.descPlainPost = { status: descPlainRes.status, ok: descPlainRes.ok };
       const descPlainGetRes = await fetch(`${EVENTBRITE_API}/events/${testEventId}/description/`, { headers });
       log.descPlainGet = { status: descPlainGetRes.status, body: await descPlainGetRes.text() };
+
+      // Cross-check: stesso stato letto dal campo description ANNIDATO nell'evento
+      // principale (più affidabile, è quello che ha rivelato il bug reale sull'evento
+      // live) invece del sub-endpoint /description/ dedicato.
+      const eventMainGetRes = await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { headers });
+      const eventMainBody = await eventMainGetRes.json().catch(() => null);
+      log.eventMainDescriptionAfterPlain = eventMainBody?.description;
+
+      // Variante: paragrafi wrappati in <p> (uno per riga) — verifica se questo è
+      // ciò che serve perché il contenuto "conti" come reale (a differenza del
+      // testo nudo senza alcun tag, che sopra è risultato vuoto).
+      const wrappedText = plainText.split('\n\n').map((para) => `<p>${para.replace(/\n/g, '<br/>')}</p>`).join('');
+      const descWrappedRes = await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, {
+        method: 'POST',
+        headers: jsonHeaders,
+        body: JSON.stringify({ event: { description: { html: wrappedText } } }),
+      });
+      log.descWrappedPost = { status: descWrappedRes.status, ok: descWrappedRes.ok };
+      const eventMainGetRes2 = await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { headers });
+      const eventMainBody2 = await eventMainGetRes2.json().catch(() => null);
+      log.eventMainDescriptionAfterWrapped = eventMainBody2?.description;
     } catch (e) {
       log.descImgTest = { threw: (e as Error).message };
     }
