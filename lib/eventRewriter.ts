@@ -9,18 +9,19 @@ import type { ScoutedEvent } from './eventScout';
  * SEO tag, poi li assembla con i blocchi statici (contatti/legal/listino) in
  * un'unica description TESTO SEMPLICE.
  *
- * IMPORTANTE (scoperto nello spike G0, con un evento draft di prova poi
- * eliminato): l'API pubblica di Eventbrite HTML-escapa qualunque tag ricevuto
- * su description — non è un editor rich text, i tag <p>/<h2>/<img> arrivano
- * visibili come testo letterale. La structured_content (dove vive davvero il
- * corpo HTML ricco con galleria/FAQ native/agenda nativa dell'evento gold
- * fatto a mano) è leggibile ma NON scrivibile via API pubblica (add_module
- * risponde 404, il publish della pagina risponde 400 con un errore interno
- * "Unrecognized service name structured_content" — funzionalità riservata
- * all'editor web interno). Per questo l'intero corpo gold va scritto come
- * testo semplice con newline/emoji/bullet, non HTML. Eventbrite resta
- * EN-only (il sito genera le sue pagine bilingui in autonomia da
- * seoRewrite.ts, non toccato).
+ * IMPORTANTE (scoperto nello spike G0, con eventi draft di prova poi
+ * eliminati): la description ACCETTA HTML vero (h2/h3/p/ul/li/a href sono
+ * confermati scritti e letti intatti, link cliccabili inclusi) — NON va
+ * scritta come testo semplice. Le uniche eccezioni instabili sono `<img>`
+ * (URL con query string complesse fanno collassare tutto il payload in testo
+ * escapato) e `<br/>` self-closing — evitare entrambi, usare `<p>` separati
+ * per gli a capo. La structured_content (dove vive davvero la galleria/FAQ
+ * native/agenda nativa dell'evento gold fatto a mano) è leggibile ma NON
+ * scrivibile via API pubblica (add_module risponde 404, il publish della
+ * pagina risponde 400 con un errore interno "Unrecognized service name
+ * structured_content" — funzionalità riservata all'editor web interno).
+ * Eventbrite resta EN-only (il sito genera le sue pagine bilingui in
+ * autonomia da seoRewrite.ts, non toccato).
  */
 
 const MODEL = 'claude-sonnet-5';
@@ -159,7 +160,14 @@ async function callSonnetJSON<T>(system: string, userMsg: string, label: string)
   }
 }
 
-/** Assembla la description finale (testo semplice) da parti statiche (codice) + dinamiche (AI). */
+function esc(s: string): string {
+  return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+/**
+ * Assembla la description finale come HTML vero (h2/h3/p/ul/li/a — MAI <img>
+ * o <br/>, vedi nota in testa al file) da parti statiche (codice) + dinamiche (AI).
+ */
 function assembleGoldDescription(
   body: BodyResult,
   faq: { question: string; answer: string }[],
@@ -167,67 +175,66 @@ function assembleGoldDescription(
   slugEn: string,
   ebId: string
 ): string {
-  const lines: string[] = [];
+  const blocks: string[] = [];
 
-  lines.push(body.hook, '');
+  blocks.push(`<p>${esc(body.hook)}</p>`);
 
-  lines.push('CONTACTS & BOOKINGS');
-  lines.push(`💬 WhatsApp: {{WHATSAPP}}`);
-  lines.push(`✉️ Email: concierge@nightlifemilan.com`);
-  lines.push(`🌐 Full event guide: https://nightlifemilan.com/events/${slugEn}`, '');
+  blocks.push(
+    '<h2>Contacts &amp; Bookings</h2>' +
+    `<ul><li>💬 WhatsApp: {{WHATSAPP}}</li>` +
+    `<li>✉️ Email: concierge@nightlifemilan.com</li>` +
+    `<li>🌐 Full event guide: <a href="https://nightlifemilan.com/events/${slugEn}">nightlifemilan.com/events/${slugEn}</a></li></ul>`
+  );
 
-  lines.push('⚠️ IMPORTANT LEGAL NOTICE');
-  lines.push('Online tickets are non-refundable. Refunds are only considered if admission is denied by club security at the entrance; requests must be submitted within 24 hours of the event. Eventbrite registrations represent information requests only and are not valid for entry on their own.', '');
+  blocks.push(
+    '<h2>⚠️ Important Legal Notice</h2>' +
+    '<p>Online tickets are non-refundable. Refunds are only considered if admission is denied by club security at the entrance; requests must be submitted within 24 hours of the event. Eventbrite registrations represent information requests only and are not valid for entry on their own.</p>'
+  );
 
   for (const s of body.sections) {
-    lines.push(`${s.emoji} ${s.title.toUpperCase()}`);
-    lines.push(s.body, '');
+    blocks.push(`<h3>${esc(s.emoji)} ${esc(s.title.toUpperCase())}</h3><p>${esc(s.body)}</p>`);
   }
 
   if (body.programme.length) {
-    lines.push('🗓️ EVENING PROGRAMME');
-    for (const slot of body.programme) {
+    const items = body.programme.map((slot) => {
       const time = slot.end ? `${slot.start}-${slot.end}` : slot.start;
-      lines.push(`${time} — ${slot.title}`);
-    }
-    lines.push('');
+      return `<li>${esc(time)} — ${esc(slot.title)}</li>`;
+    }).join('');
+    blocks.push(`<h2>🗓️ Evening Programme</h2><ul>${items}</ul>`);
   }
 
   if (pricing.ticketTiers?.length) {
-    lines.push('🎟️ TICKETS');
-    for (const t of pricing.ticketTiers) lines.push(`${t.name}: €${t.price} — ${t.includes}`);
-    lines.push('');
+    const items = pricing.ticketTiers.map((t) => `<li>${esc(t.name)}: €${t.price} — ${esc(t.includes)}</li>`).join('');
+    blocks.push(`<h2>🎟️ Tickets</h2><ul>${items}</ul>`);
   }
 
-  lines.push('🍾 BOTTLE SERVICES / VIP TABLES');
-  if (pricing.tableTiers?.length) {
-    for (const t of pricing.tableTiers) lines.push(`${t.name}: €${t.price} (up to ${t.capacity} guests, ${t.includes})`);
-  } else {
-    lines.push('Contact our concierge for table options and pricing.');
-  }
-  lines.push('');
+  const tableItems = pricing.tableTiers?.length
+    ? pricing.tableTiers.map((t) => `<li>${esc(t.name)}: €${t.price} (up to ${t.capacity} guests, ${esc(t.includes)})</li>`).join('')
+    : '<li>Contact our concierge for table options and pricing.</li>';
+  blocks.push(`<h2>🍾 Bottle Services / VIP Tables</h2><ul>${tableItems}</ul>`);
 
-  lines.push(`👗 DRESS CODE: ${pricing.dressCode || 'Smart elegant. Management reserves the right to refuse entry.'}`);
-  lines.push(`🚪 AGE: ${pricing.agePolicy}`);
+  const goodToKnow = [
+    `👗 Dress code: ${esc(pricing.dressCode || 'Smart elegant. Management reserves the right to refuse entry.')}`,
+    `🚪 Age: ${esc(pricing.agePolicy || '')}`,
+  ];
   if (pricing.parking && pricing.parking !== 'none') {
-    lines.push(`🅿️ PARKING: ${pricing.parking === 'free' ? 'Free onsite parking available.' : 'Paid parking available onsite.'}`);
+    goodToKnow.push(`🅿️ Parking: ${pricing.parking === 'free' ? 'Free onsite parking available.' : 'Paid parking available onsite.'}`);
   }
-  lines.push('');
+  blocks.push(`<h2>Good to Know</h2><ul>${goodToKnow.map((l) => `<li>${l}</li>`).join('')}</ul>`);
 
-  lines.push('🔗 Link in bio • 💬 {{WHATSAPP}} • ✉️ concierge@nightlifemilan.com', '');
+  blocks.push('<p>🔗 Link in bio • 💬 {{WHATSAPP}} • ✉️ concierge@nightlifemilan.com</p>');
 
-  lines.push('FAQ');
-  faq.forEach((f, i) => lines.push(`Q${i + 1}: ${f.question}`, `A${i + 1}: ${f.answer}`));
-  lines.push('');
+  const faqItems = faq.map((f, i) => `<h3>Q${i + 1}: ${esc(f.question)}</h3><p>${esc(f.answer)}</p>`).join('');
+  blocks.push(`<h2>FAQ</h2>${faqItems}`);
 
-  lines.push(`SEO TAGS: ${body.seoTags.join(', ')}`);
-  lines.push(`EVENTBRITE TAGS: ${body.ebTags.join(', ')}`, '');
+  blocks.push(`<p>SEO TAGS: ${esc(body.seoTags.join(', '))}</p>`);
+  blocks.push(`<p>EVENTBRITE TAGS: ${esc(body.ebTags.join(', '))}</p>`);
 
-  // Marker canonico (testo semplice, basso peso visivo) — consumato da
-  // eventbriteSync.ts per garantire lo stesso slug sito↔Eventbrite (FASE G4B).
-  lines.push(`[nlm:src=${ebId};slug-en=${slugEn}]`);
+  // Marker canonico (dentro un commento HTML, basso peso visivo) — consumato
+  // da eventbriteSync.ts per garantire lo stesso slug sito↔Eventbrite (FASE G4B).
+  blocks.push(`<!-- nlm:src=${ebId};slug-en=${slugEn} -->`);
 
-  return lines.join('\n');
+  return blocks.join('');
 }
 
 /**

@@ -31,11 +31,12 @@ export function sanitize(html: string, knownOrganizers: string[] = []): string {
   let out = html;
 
   // 1. Placeholder WhatsApp → numero + link reale (SEMPRE dal config, mai hardcodato).
-  // Testo semplice, non HTML: Eventbrite html-escapa qualunque tag ricevuto via API
-  // (scoperto nello spike G0) — un <a href> finirebbe visibile come testo letterale.
+  // <a href> è confermato scrivibile e renderizzato correttamente da Eventbrite
+  // (spike G0) — l'unico tag che si è rivelato instabile è <img> (e <br/>), non i
+  // link di testo con href pulito.
   out = out.replace(
     WHATSAPP_PLACEHOLDER_RE,
-    `${CONTACT.whatsapp.number} (${CONTACT.whatsapp.link})`
+    `<a href="${CONTACT.whatsapp.link}">${CONTACT.whatsapp.number}</a>`
   );
 
   // 2. Telefoni di terzi → il nostro

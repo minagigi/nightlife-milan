@@ -311,6 +311,12 @@ export async function GET(request: Request) {
       await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { method: 'POST', headers: jsonHeaders, body: JSON.stringify({ event: { description: { html: eightPOnly } } }) });
       const g8p = await (await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { headers })).json().catch(() => null);
       log.after8POnly = { sentLength: eightPOnly.length, htmlLength: (g8p?.description?.html || '').length, html: (g8p?.description?.html || '').slice(0, 300) };
+
+      // Il marker HTML-comment (usato dal backlink G4B / dedupe ledger) sopravvive?
+      const withComment = `<p>Test content.</p><!-- nlm:src=999;slug-en=test-slug-here -->`;
+      await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { method: 'POST', headers: jsonHeaders, body: JSON.stringify({ event: { description: { html: withComment } } }) });
+      const gComment = await (await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { headers })).json().catch(() => null);
+      log.afterComment = { html: gComment?.description?.html || '' };
     } catch (e) {
       log.descImgTest = { threw: (e as Error).message };
     }
