@@ -161,7 +161,7 @@ async function uploadEventImage(token: string, poster: PosterResult): Promise<st
     }
     const uploadInfo = await uploadInfoRes.json();
     const { upload_url, file_parameters, upload_token } = uploadInfo;
-    console.error(`[eventPublisher] Media upload info: upload_url=${upload_url}, file_parameters keys=${Object.keys(file_parameters || {}).join(',')}, has upload_token=${!!upload_token}`);
+    console.error(`[eventPublisher] Media upload info FULL JSON: ${JSON.stringify(uploadInfo)}`);
 
     const form = new FormData();
     for (const [key, value] of Object.entries(file_parameters || {})) {
