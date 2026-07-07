@@ -28,9 +28,36 @@ function authHeaders(token: string) {
   return { Authorization: `Bearer ${token}`, 'content-type': 'application/json' };
 }
 
-/** Formatta una data per l'API Eventbrite: "YYYY-MM-DDTHH:MM:SS" (no timezone, va nel campo utc/timezone separato). */
-function toEventbriteLocal(dateISO: string): string {
-  return dateISO.slice(0, 19);
+/**
+ * Converte un orario "wall-clock" di Milano (es. "2026-07-08T20:00:00", senza
+ * offset esplicito) nel vero istante UTC richiesto dal campo event.start.utc /
+ * event.end.utc dell'API Eventbrite (formato "YYYY-MM-DDThh:mm:ssZ").
+ *
+ * Bug reale riscontrato al primo publish di test: passare l'ora locale grezza
+ * come se fosse già UTC (senza "Z" e senza conversione) veniva rifiutato da
+ * Eventbrite con 400 "Datetime has wrong format" — e anche quando accettato
+ * per errore avrebbe pubblicato l'evento 1-2 ore fuori orario. Calcola
+ * l'offset reale di Europe/Rome per quella data specifica (gestisce CET/CEST
+ * senza bisogno di una libreria timezone).
+ */
+function romeOffsetMinutesForDate(y: number, m: number, d: number): number {
+  const utcNoon = new Date(Date.UTC(y, m - 1, d, 12, 0, 0));
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Europe/Rome',
+    hour: 'numeric',
+    hour12: false,
+  }).formatToParts(utcNoon);
+  const romeHour = parseInt(parts.find((p) => p.type === 'hour')?.value || '12', 10);
+  return (romeHour - 12) * 60;
+}
+
+function toEventbriteUtc(dateISO: string): string {
+  const [datePart, timePart] = dateISO.slice(0, 19).split('T');
+  const [y, m, d] = datePart.split('-').map(Number);
+  const [hh, mm, ss] = (timePart || '00:00:00').split(':').map(Number);
+  const offsetMin = romeOffsetMinutesForDate(y, m, d);
+  const utcMs = Date.UTC(y, m - 1, d, hh, mm, ss || 0) - offsetMin * 60000;
+  return new Date(utcMs).toISOString().replace(/\.\d{3}Z$/, 'Z');
 }
 
 /**
@@ -201,8 +228,8 @@ export async function publishEvent(
         event: {
           name: { html: rewritten.titleIt },
           summary: rewritten.summaryIt,
-          start: { timezone: 'Europe/Rome', utc: toEventbriteLocal(scouted.dateISO) },
-          end: { timezone: 'Europe/Rome', utc: toEventbriteLocal(scouted.endISO || scouted.dateISO) },
+          start: { timezone: 'Europe/Rome', utc: toEventbriteUtc(scouted.dateISO) },
+          end: { timezone: 'Europe/Rome', utc: toEventbriteUtc(scouted.endISO || scouted.dateISO) },
           currency: 'EUR',
           venue_id: venueEbId,
           online_event: false,
