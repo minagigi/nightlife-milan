@@ -355,6 +355,38 @@ export async function GET(request: Request) {
         htmlPreviewStart: savedHtml.slice(0, 200),
         htmlPreviewEnd: savedHtml.slice(-200),
       };
+
+      // Variante B: niente <a> annidato dentro <li> (ipotesi: è il trigger della
+      // corruzione), Contacts come <p> semplici, FAQ ridotte a 12 senza link annidati.
+      const fakeFaq12 = Array.from({ length: 12 }, (_, i) =>
+        `<h3>Q${i + 1}: What about topic number ${i + 1} for this Saturday night at Just Me Milano?</h3><p>Answer ${i + 1}: this covers a specific detail about Just Me Milano on Saturday, mentioning price €${15 + i}, dress code, and a WhatsApp contact for bookings and confirmations before the doors open at 19:30.</p>`
+      ).join('');
+      const fullGoldB = [
+        '<p>Hook paragraph describing the Saturday night experience at Just Me Milano in concrete terms.</p>',
+        '<h2>Contacts &amp; Bookings</h2><p>💬 WhatsApp: <a href="https://wa.me/393519127047">+39 351 912 7047</a></p><p>✉️ Email: concierge@nightlifemilan.com</p><p>🌐 Full event guide: <a href="https://nightlifemilan.com/events/test-slug">nightlifemilan.com/events/test-slug</a></p>',
+        '<h2>⚠️ Important Legal Notice</h2><p>Online tickets are non-refundable. Refunds are only considered if admission is denied by club security at the entrance.</p>',
+        fakeSections,
+        '<h2>🗓️ Evening Programme</h2><p>19:30 — Doors open. 22:00 — DJ set starts.</p>',
+        '<h2>🎟️ Tickets</h2><p>Aperitif + 1 Drink: €15 — includes buffet and one drink.</p>',
+        '<h2>🍾 Bottle Services / VIP Tables</h2><p>Dance Floor: €320 (up to 5 guests, 1 bottle).</p>',
+        '<h2>Good to Know</h2><p>👗 Dress code: Elegant attire mandatory. 🚪 Age: 21+ men, 18+ women.</p>',
+        '<p>🔗 Link in bio • 💬 <a href="https://wa.me/393519127047">+39 351 912 7047</a> • ✉️ concierge@nightlifemilan.com</p>',
+        `<h2>FAQ</h2>${fakeFaq12}`,
+        '<p>SEO TAGS: milano nightlife, saturday night milan, just me milano</p>',
+        '<p>EVENTBRITE TAGS: milan_nightlife, saturday_night, just_me_milano</p>',
+        '<!-- nlm:src=999;slug-en=test-slug -->',
+      ].join('');
+      await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { method: 'POST', headers: jsonHeaders, body: JSON.stringify({ event: { description: { html: fullGoldB } } }) });
+      const gFullB = await (await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { headers })).json().catch(() => null);
+      const savedHtmlB = gFullB?.description?.html || '';
+      log.fullGoldTestB_noNestedLinks = {
+        sentLength: fullGoldB.length,
+        savedLength: savedHtmlB.length,
+        survivedFully: savedHtmlB.length >= fullGoldB.length * 0.95,
+        markerSurvived: savedHtmlB.includes('nlm:src=999;slug-en=test-slug'),
+        faq12thSurvived: savedHtmlB.includes('Q12:'),
+        htmlPreviewEnd: savedHtmlB.slice(-200),
+      };
     } catch (e) {
       log.descImgTest = { threw: (e as Error).message };
     }
