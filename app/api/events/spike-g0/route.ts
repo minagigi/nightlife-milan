@@ -440,6 +440,81 @@ export async function GET(request: Request) {
       log.musicPropertiesTest = { threw: (e as Error).message };
     }
 
+    // Test isolato su evento FRESH (mai toccato prima): ipotesi che i fallimenti
+    // sopra siano corruzione da troppe scritture rapide consecutive sullo STESSO
+    // evento (testEventId ha già ricevuto 15+ POST description in pochi secondi),
+    // non un vero limite di contenuto. Un evento nuovo con UNA sola scrittura
+    // isola la variabile.
+    let freshEventId: string | null = null;
+    try {
+      const freshCreateRes = await fetch(`${EVENTBRITE_API}/organizations/${ORG_ID}/events/`, {
+        method: 'POST',
+        headers: jsonHeaders,
+        body: JSON.stringify({
+          event: {
+            name: { html: 'SPIKE G0 FRESH TEST — DELETE ME' },
+            start: { timezone: 'Europe/Rome', utc: '2027-01-01T20:00:00Z' },
+            end: { timezone: 'Europe/Rome', utc: '2027-01-02T02:00:00Z' },
+            currency: 'EUR',
+            online_event: !realVenueId,
+            venue_id: realVenueId,
+            listed: false,
+            shareable: false,
+          },
+        }),
+      });
+      const freshCreateBody = await freshCreateRes.json().catch(() => null);
+      if (freshCreateRes.ok && freshCreateBody?.id) freshEventId = freshCreateBody.id;
+
+      if (freshEventId) {
+        const faq25Fresh = Array.from({ length: 25 }, (_, i) =>
+          `<h3>Q${i + 1}: What about topic number ${i + 1} for this Saturday night at Just Me Milano?</h3><p>Answer ${i + 1}: this covers a specific detail about Just Me Milano on Saturday, mentioning price €${15 + i}, dress code, and a WhatsApp contact for bookings and confirmations before the doors open at 19:30.</p>`
+        ).join('');
+        const sections3Fresh = Array.from({ length: 3 }, (_, i) =>
+          `<h3>🎧 Section ${i + 1}</h3><p>Realistic paragraph describing part ${i + 1} of the night, with concrete details like the time 19:3${i} and a price of €${20 + i}.</p>`
+        ).join('');
+        const freshFullGold = [
+          '<p>Hook paragraph describing the Saturday night experience at Just Me Milano in concrete terms.</p>',
+          '<h2>Contacts &amp; Bookings</h2><p>💬 WhatsApp: <a href="https://wa.me/393519127047">+39 351 912 7047</a></p><p>✉️ Email: concierge@nightlifemilan.com</p><p>🌐 Full event guide: <a href="https://nightlifemilan.com/events/test-slug">nightlifemilan.com/events/test-slug</a></p>',
+          '<h2>⚠️ Important Legal Notice</h2><p>Online tickets are non-refundable. Refunds are only considered if admission is denied by club security at the entrance.</p>',
+          sections3Fresh,
+          '<h2>🗓️ Evening Programme</h2><p>19:30 — Doors open. 22:00 — DJ set starts.</p>',
+          '<h2>🎟️ Tickets</h2><p>Aperitif + 1 Drink: €15 — includes buffet and one drink.</p>',
+          '<h2>🍾 Bottle Services / VIP Tables</h2><p>Dance Floor: €320 (up to 5 guests, 1 bottle).</p>',
+          '<h2>Good to Know</h2><p>👗 Dress code: Elegant attire mandatory. 🚪 Age: 21+ men, 18+ women.</p>',
+          '<p>🔗 Link in bio • 💬 <a href="https://wa.me/393519127047">+39 351 912 7047</a> • ✉️ concierge@nightlifemilan.com</p>',
+          `<h2>FAQ</h2>${faq25Fresh}`,
+          '<p>SEO TAGS: milano nightlife, saturday night milan, just me milano</p>',
+          '<p>EVENTBRITE TAGS: milan_nightlife, saturday_night, just_me_milano</p>',
+          '<!-- nlm:src=999;slug-en=test-slug -->',
+        ].join('');
+
+        // UNA sola POST, UNA sola GET — nessuna scrittura precedente su questo evento.
+        const freshDescRes = await fetch(`${EVENTBRITE_API}/events/${freshEventId}/`, {
+          method: 'POST', headers: jsonHeaders,
+          body: JSON.stringify({ event: { description: { html: freshFullGold } } }),
+        });
+        const freshGet = await (await fetch(`${EVENTBRITE_API}/events/${freshEventId}/`, { headers })).json().catch(() => null);
+        const freshSaved = freshGet?.description?.html || '';
+        log.freshEventSingleWriteTest = {
+          descPostOk: freshDescRes.ok,
+          sentLength: freshFullGold.length,
+          savedLength: freshSaved.length,
+          survivedFully: freshSaved.length >= freshFullGold.length * 0.95,
+          markerSurvived: freshSaved.includes('nlm:src=999;slug-en=test-slug'),
+          faq25thSurvived: freshSaved.includes('Q25:'),
+        };
+      }
+    } catch (e) {
+      log.freshEventTestThrew = (e as Error).message;
+    } finally {
+      if (freshEventId) {
+        try {
+          await fetch(`${EVENTBRITE_API}/events/${freshEventId}/`, { method: 'DELETE', headers });
+        } catch { /* best-effort cleanup */ }
+      }
+    }
+
     // Cleanup: elimina SEMPRE l'evento di prova
     try {
       const delRes = await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { method: 'DELETE', headers });
