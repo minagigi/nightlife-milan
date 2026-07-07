@@ -87,6 +87,19 @@ export async function GET(request: Request) {
   const log: Record<string, unknown> = {};
   let testEventId: string | null = null;
 
+  // Riusa un venue reale della org (in-person, come sono gli eventi di produzione —
+  // "online_event" potrebbe bloccare endpoint come /description/ per motivi diversi
+  // dal vero oggetto del test).
+  let realVenueId: string | undefined;
+  try {
+    const venuesRes = await fetch(`${EVENTBRITE_API}/organizations/${ORG_ID}/venues/`, { headers });
+    const venuesBody = await venuesRes.json().catch(() => null);
+    realVenueId = venuesBody?.venues?.[0]?.id;
+    log.realVenueUsed = realVenueId;
+  } catch (e) {
+    log.realVenueLookup = { threw: (e as Error).message };
+  }
+
   try {
     const createRes = await fetch(`${EVENTBRITE_API}/organizations/${ORG_ID}/events/`, {
       method: 'POST',
@@ -97,7 +110,8 @@ export async function GET(request: Request) {
           start: { timezone: 'Europe/Rome', utc: '2027-01-01T20:00:00Z' },
           end: { timezone: 'Europe/Rome', utc: '2027-01-02T02:00:00Z' },
           currency: 'EUR',
-          online_event: true,
+          online_event: !realVenueId,
+          venue_id: realVenueId,
           listed: false,
           shareable: false,
         },
@@ -187,7 +201,7 @@ export async function GET(request: Request) {
       const mpRes = await fetch(`${EVENTBRITE_API}/events/${testEventId}/music_properties/`, {
         method: 'POST',
         headers: jsonHeaders,
-        body: JSON.stringify({ music_properties: { age_restriction: '18+', door_time: '19:30' } }),
+        body: JSON.stringify({ music_properties: { age_restriction: '18+', door_time: '2027-01-01T19:30:00Z' } }),
       });
       log.musicPropertiesPost = { status: mpRes.status, ok: mpRes.ok, body: await mpRes.text() };
 
