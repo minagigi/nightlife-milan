@@ -95,7 +95,10 @@ Raw title (from third-party promoter, needs full rewrite): ${event.rawTitle}
 Raw description (from third-party promoter, needs full rewrite, strip any contacts/brands): ${event.rawDescription.slice(0, 2000)}`;
 
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 30000);
+  // 45s invece di 30s — verificato in produzione: alcune chiamate con extended
+  // thinking + 4500 max_tokens hanno superato i 30s ed erano abortite (needsReview
+  // ingiustificato, la generazione stava semplicemente impiegando più tempo).
+  const timeout = setTimeout(() => controller.abort(), 45000);
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',

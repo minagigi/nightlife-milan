@@ -39,20 +39,26 @@ function toEventbriteLocal(dateISO: string): string {
  */
 const venueIdCache = new Map<string, string>();
 
-async function resolveEventbriteVenueId(token: string, venueId: string): Promise<string | null> {
+async function resolveEventbriteVenueId(token: string, venueId: string, dryRun: boolean): Promise<string | null> {
   if (venueIdCache.has(venueId)) return venueIdCache.get(venueId)!;
 
   const venue = venuesData.find((v) => v.id === venueId);
-  if (!venue) return null;
+  if (!venue) {
+    console.error(`[eventPublisher] No internal venue data for "${venueId}"`);
+    return null;
+  }
 
   const name = venue.localizedContent.name.en;
 
-  // 1. Cerca tra i venue Eventbrite già esistenti nella nostra org.
+  // 1. Cerca tra i venue Eventbrite già esistenti nella nostra org (sempre read-only,
+  // sicuro anche in dry-run).
   try {
     const listRes = await fetch(`${EVENTBRITE_API}/organizations/${ORG_ID}/venues/`, {
       headers: authHeaders(token),
     });
-    if (listRes.ok) {
+    if (!listRes.ok) {
+      console.error(`[eventPublisher] Venue list fetch failed: HTTP ${listRes.status} ${(await listRes.text()).slice(0, 200)}`);
+    } else {
       const data = await listRes.json();
       const match = (data.venues || []).find((v: { name?: string }) =>
         (v.name || '').toLowerCase().includes(name.toLowerCase())
@@ -62,11 +68,16 @@ async function resolveEventbriteVenueId(token: string, venueId: string): Promise
         return match.id;
       }
     }
-  } catch {
-    // continua a provare a crearlo
+  } catch (e) {
+    console.error(`[eventPublisher] Venue list fetch threw: ${(e as Error).message}`);
   }
 
-  // 2. Non trovato: crealo.
+  // 2. Non trovato: crealo — MA MAI in dry-run (creare un venue non è un'operazione
+  // reversibile senza costo, va evitata quando dryRun=1 deve garantire "zero effetti").
+  if (dryRun) {
+    return `[dry-run] would create Eventbrite venue for "${name}"`;
+  }
+
   try {
     const createRes = await fetch(`${EVENTBRITE_API}/organizations/${ORG_ID}/venues/`, {
       method: 'POST',
@@ -85,13 +96,18 @@ async function resolveEventbriteVenueId(token: string, venueId: string): Promise
         },
       }),
     });
-    if (!createRes.ok) return null;
+    if (!createRes.ok) {
+      console.error(`[eventPublisher] Venue creation failed for "${name}": HTTP ${createRes.status} ${(await createRes.text()).slice(0, 200)}`);
+      return null;
+    }
     const created = await createRes.json();
     if (created?.id) {
       venueIdCache.set(venueId, created.id);
       return created.id;
     }
-  } catch {
+    console.error(`[eventPublisher] Venue creation response missing id for "${name}": ${JSON.stringify(created).slice(0, 200)}`);
+  } catch (e) {
+    console.error(`[eventPublisher] Venue creation threw for "${name}": ${(e as Error).message}`);
     return null;
   }
 
@@ -105,7 +121,10 @@ async function uploadEventImage(token: string, poster: PosterResult): Promise<st
       `${EVENTBRITE_API}/media/upload/?type=image-event-logo`,
       { headers: authHeaders(token) }
     );
-    if (!uploadInfoRes.ok) return null;
+    if (!uploadInfoRes.ok) {
+      console.error(`[eventPublisher] Media upload info failed: HTTP ${uploadInfoRes.status} ${(await uploadInfoRes.text()).slice(0, 200)}`);
+      return null;
+    }
     const uploadInfo = await uploadInfoRes.json();
     const { upload_url, file_parameters, upload_token } = uploadInfo;
 
@@ -116,17 +135,25 @@ async function uploadEventImage(token: string, poster: PosterResult): Promise<st
     form.append('file', new Blob([new Uint8Array(poster.buffer)], { type: poster.contentType }), poster.filename);
 
     const putRes = await fetch(upload_url, { method: 'POST', body: form });
-    if (!putRes.ok) return null;
+    if (!putRes.ok) {
+      console.error(`[eventPublisher] Media upload PUT failed: HTTP ${putRes.status} ${(await putRes.text()).slice(0, 200)}`);
+      return null;
+    }
 
     const finalizeRes = await fetch(`${EVENTBRITE_API}/media/upload/`, {
       method: 'POST',
       headers: authHeaders(token),
       body: JSON.stringify({ upload_token }),
     });
-    if (!finalizeRes.ok) return null;
+    if (!finalizeRes.ok) {
+      console.error(`[eventPublisher] Media upload finalize failed: HTTP ${finalizeRes.status} ${(await finalizeRes.text()).slice(0, 200)}`);
+      return null;
+    }
     const finalized = await finalizeRes.json();
+    if (!finalized?.id) console.error(`[eventPublisher] Media upload finalize response missing id: ${JSON.stringify(finalized).slice(0, 200)}`);
     return finalized?.id || null;
-  } catch {
+  } catch (e) {
+    console.error(`[eventPublisher] Media upload threw: ${(e as Error).message}`);
     return null;
   }
 }
@@ -148,7 +175,7 @@ export async function publishEvent(
   const token = process.env.EVENTBRITE_TOKEN;
   if (!token) return { ok: false, reason: 'EVENTBRITE_TOKEN not set' };
 
-  const venueEbId = await resolveEventbriteVenueId(token, scouted.venueId);
+  const venueEbId = await resolveEventbriteVenueId(token, scouted.venueId, dryRun);
   if (!venueEbId) return { ok: false, reason: `Could not resolve/create Eventbrite venue for ${scouted.venueId}` };
 
   const description = `${sanitizedHtmlIt}\n<hr/>\n${sanitizedHtmlEn}\n<!-- src:${scouted.ebId} -->`;
