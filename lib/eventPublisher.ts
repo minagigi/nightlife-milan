@@ -160,14 +160,18 @@ async function uploadEventImage(token: string, poster: PosterResult): Promise<st
       return null;
     }
     const uploadInfo = await uploadInfoRes.json();
-    const { upload_url, file_parameters, upload_token } = uploadInfo;
-    console.error(`[eventPublisher] Media upload info FULL JSON: ${JSON.stringify(uploadInfo)}`);
+    // Il servizio Eventbrite dietro questo endpoint ("ImageBFF") restituisce i
+    // campi del presigned POST S3 sotto "upload_data" (non "file_parameters"
+    // come nella vecchia documentazione/tutorial ancora in giro online) e il
+    // nome del campo file sotto "file_parameter_name" — scoperto loggando la
+    // risposta completa dopo un 400 "Key parameter is required".
+    const { upload_url, upload_data, upload_token, file_parameter_name } = uploadInfo;
 
     const form = new FormData();
-    for (const [key, value] of Object.entries(file_parameters || {})) {
-      form.append(key, value as string);
+    for (const [key, value] of Object.entries(upload_data || {})) {
+      form.append(key, (value as string) ?? '');
     }
-    form.append('file', new Blob([new Uint8Array(poster.buffer)], { type: poster.contentType }), poster.filename);
+    form.append(file_parameter_name || 'file', new Blob([new Uint8Array(poster.buffer)], { type: poster.contentType }), poster.filename);
 
     const putRes = await fetch(upload_url, { method: 'POST', body: form });
     if (!putRes.ok) {
