@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { processPoster } from '@/lib/posterPipeline';
 import { replaceEventImage } from '@/lib/eventPublisher';
+import { getEventbriteToken } from '@/lib/eventbriteToken';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
@@ -34,7 +35,23 @@ export async function GET(request: Request) {
   try {
     const poster = await processPoster(undefined, venueId, `fix-${eventId}`);
     const result = await replaceEventImage(eventId, poster);
-    return NextResponse.json({ ok: result.ok, reason: result.reason, imageSource: poster.source });
+
+    // Verifica server-side lo stato attuale dell'evento (bypassa qualsiasi
+    // cache CDN/pagina che potrebbe mascherare un aggiornamento riuscito o
+    // rivelarne uno fallito silenziosamente).
+    let currentLogo: unknown = null;
+    const token = getEventbriteToken();
+    if (token) {
+      const checkRes = await fetch(`https://www.eventbriteapi.com/v3/events/${eventId}/?expand=logo`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (checkRes.ok) {
+        const data = await checkRes.json();
+        currentLogo = { logo_id: data.logo_id, logo_url: data.logo?.url || data.logo?.original?.url };
+      }
+    }
+
+    return NextResponse.json({ ok: result.ok, reason: result.reason, imageSource: poster.source, currentLogo });
   } catch (e) {
     return NextResponse.json({ ok: false, error: (e as Error).message }, { status: 500 });
   }
