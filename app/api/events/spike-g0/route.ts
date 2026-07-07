@@ -298,6 +298,19 @@ export async function GET(request: Request) {
       log.desc3BlocksPost = { status: desc3BlocksRes.status, sentLength: threeBlocks.length };
       const g3Blocks = await (await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { headers })).json().catch(() => null);
       log.eventMainDescriptionAfter3Blocks = { htmlLength: (g3Blocks?.description?.html || '').length, html: (g3Blocks?.description?.html || '').slice(0, 400) };
+
+      // 6 blocchi h3/p/ul (a metà tra 3=ok e 8=rotto) — trova la soglia reale.
+      const sixBlocks = Array.from({ length: 6 }, (_, i) => `<h3>Section ${i + 1}</h3><p>Paragraph ${i + 1} with some more realistic detail and length to it, mentioning a price of €${20 + i} and a time like 19:3${i}.</p><ul><li>Point A for section ${i + 1}</li><li>Point B for section ${i + 1}</li></ul>`).join('');
+      await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { method: 'POST', headers: jsonHeaders, body: JSON.stringify({ event: { description: { html: sixBlocks } } }) });
+      const g6 = await (await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { headers })).json().catch(() => null);
+      log.after6Blocks = { sentLength: sixBlocks.length, htmlLength: (g6?.description?.html || '').length, html: (g6?.description?.html || '').slice(0, 300) };
+
+      // 8 blocchi ma SOLO <p> ripetuti (niente h3/ul) — isola se è la ripetizione
+      // di <ul>/<h3> specificamente o qualunque tag ripetuto molte volte.
+      const eightPOnly = Array.from({ length: 8 }, (_, i) => `<p>Paragraph ${i + 1} with some realistic detail, mentioning a price of €${20 + i} and a time like 19:3${i}.</p>`).join('');
+      await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { method: 'POST', headers: jsonHeaders, body: JSON.stringify({ event: { description: { html: eightPOnly } } }) });
+      const g8p = await (await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { headers })).json().catch(() => null);
+      log.after8POnly = { sentLength: eightPOnly.length, htmlLength: (g8p?.description?.html || '').length, html: (g8p?.description?.html || '').slice(0, 300) };
     } catch (e) {
       log.descImgTest = { threw: (e as Error).message };
     }
