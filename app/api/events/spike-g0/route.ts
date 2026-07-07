@@ -387,6 +387,20 @@ export async function GET(request: Request) {
         faq12thSurvived: savedHtmlB.includes('Q12:'),
         htmlPreviewEnd: savedHtmlB.slice(-200),
       };
+
+      // Ipotesi: processing ASINCRONO lato Eventbrite per payload grandi — il GET
+      // immediato dopo la POST leggerebbe uno stato ancora in elaborazione. Attende
+      // 8s e rilegge lo STESSO evento (fullGoldB appena scritto) per vedere se nel
+      // frattempo il contenuto si "completa" da solo.
+      await new Promise((r) => setTimeout(r, 8000));
+      const gFullBDelayed = await (await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { headers })).json().catch(() => null);
+      const savedHtmlBDelayed = gFullBDelayed?.description?.html || '';
+      log.fullGoldTestB_after8sDelay = {
+        savedLength: savedHtmlBDelayed.length,
+        survivedFully: savedHtmlBDelayed.length >= fullGoldB.length * 0.95,
+        markerSurvived: savedHtmlBDelayed.includes('nlm:src=999;slug-en=test-slug'),
+        faq12thSurvived: savedHtmlBDelayed.includes('Q12:'),
+      };
     } catch (e) {
       log.descImgTest = { threw: (e as Error).message };
     }
