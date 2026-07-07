@@ -310,18 +310,36 @@ export async function publishEvent(
   // sempre 405 METHOD_NOT_ALLOWED — l'evento reale pubblicato in precedenza è
   // rimasto con la sola summary perché questa chiamata falliva silenziosamente
   // (nessun controllo dell'esito). Il metodo che funziona davvero è annidare
-  // "description" nel body della POST generica /events/{id}/. Inoltre
-  // Eventbrite HTML-escapa qualunque tag ricevuto qui (non è un editor rich
-  // text) — va quindi scritto testo semplice con newline/emoji/bullet, non
-  // markup HTML (vedi assembleGoldDescription in eventRewriter.ts).
+  // "description" nel body della POST generica /events/{id}/. La description
+  // accetta HTML vero (h2/h3/p/ul/li/a, vedi assembleGoldDescription) — ma lo
+  // spike ha osservato un caso di corruzione/troncamento apparentemente
+  // transitorio lato Eventbrite; verifica con un GET e un retry prima di
+  // arrendersi (non bloccante: un fallimento qui non impedisce il resto).
   try {
-    const descRes = await fetch(`${EVENTBRITE_API}/events/${eventId}/`, {
-      method: 'POST',
-      headers: authHeaders(token),
-      body: JSON.stringify({ event: { description: { html: description } } }),
-    });
-    if (!descRes.ok) {
-      console.error(`[eventPublisher] Description write failed: HTTP ${descRes.status} ${(await descRes.text()).slice(0, 200)}`);
+    let descOk = false;
+    for (let attempt = 0; attempt < 2 && !descOk; attempt++) {
+      const descRes = await fetch(`${EVENTBRITE_API}/events/${eventId}/`, {
+        method: 'POST',
+        headers: authHeaders(token),
+        body: JSON.stringify({ event: { description: { html: description } } }),
+      });
+      if (!descRes.ok) {
+        console.error(`[eventPublisher] Description write failed (attempt ${attempt + 1}): HTTP ${descRes.status} ${(await descRes.text()).slice(0, 200)}`);
+        continue;
+      }
+      const verifyRes = await fetch(`${EVENTBRITE_API}/events/${eventId}/`, { headers: authHeaders(token) });
+      const verifyBody = await verifyRes.json().catch(() => null);
+      const savedLength = (verifyBody?.description?.html || '').length;
+      // Soglia empirica: la description gold reale supera sempre qualche
+      // migliaio di caratteri — una lunghezza molto più corta indica un
+      // troncamento/corruzione lato Eventbrite (visto nello spike G0).
+      descOk = savedLength >= description.length * 0.8;
+      if (!descOk) {
+        console.error(`[eventPublisher] Description write looks truncated (attempt ${attempt + 1}): sent ${description.length} chars, saved ${savedLength}`);
+      }
+    }
+    if (!descOk) {
+      console.error(`[eventPublisher] Description write did not stick after retries — event published with partial/short description (needs manual review)`);
     }
   } catch (e) {
     console.error(`[eventPublisher] Description write threw: ${(e as Error).message}`);
