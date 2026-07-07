@@ -95,10 +95,10 @@ Raw title (from third-party promoter, needs full rewrite): ${event.rawTitle}
 Raw description (from third-party promoter, needs full rewrite, strip any contacts/brands): ${event.rawDescription.slice(0, 2000)}`;
 
   const controller = new AbortController();
-  // 45s invece di 30s — verificato in produzione: alcune chiamate con extended
-  // thinking + 4500 max_tokens hanno superato i 30s ed erano abortite (needsReview
-  // ingiustificato, la generazione stava semplicemente impiegando più tempo).
-  const timeout = setTimeout(() => controller.abort(), 45000);
+  // 70s: margine per il max_tokens più alto (7000) — più budget token richiede
+  // più tempo di generazione, un timeout troppo stretto abortisce chiamate
+  // valide in corso (needsReview ingiustificato).
+  const timeout = setTimeout(() => controller.abort(), 70000);
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -110,11 +110,11 @@ Raw description (from third-party promoter, needs full rewrite, strip any contac
       signal: controller.signal,
       body: JSON.stringify({
         model: MODEL,
-        // 4500 invece di 2500: claude-sonnet-5 usa extended thinking di default
-        // (verificato: ~900-1000 thinking_tokens consumati prima dell'output),
-        // che condivide il budget di max_tokens — con 2500 la risposta troncava
-        // a metà JSON (stop_reason: max_tokens) e ogni evento finiva needsReview.
-        max_tokens: 4500,
+        // 7000: anche 4500 troncava a metà JSON su eventi con description più
+        // lunga (thinking_tokens variabile 900-1300 + output verboso bilingue
+        // può superare 3500 token da solo). Margine ampio per evitare
+        // needsReview ingiustificati per semplice esaurimento token.
+        max_tokens: 7000,
         system: SYSTEM_PROMPT,
         messages: [{ role: 'user', content: userMsg }],
       }),
