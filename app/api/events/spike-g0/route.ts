@@ -251,6 +251,33 @@ export async function GET(request: Request) {
       const eventMainGetRes3 = await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { headers });
       const eventMainBody3 = await eventMainGetRes3.json().catch(() => null);
       log.eventMainDescriptionAfterV2Style = eventMainBody3?.description;
+
+      // Variante con link <a href> (serve per WhatsApp/sito) — verifica se
+      // sopravvive come tag reale (come h2/p/ul) o rompe come <img>.
+      const withLink = '<p>WhatsApp us: <a href="https://wa.me/393519127047">+39 351 912 7047</a></p><p>Full guide: <a href="https://nightlifemilan.com/events/test-slug">nightlifemilan.com</a></p>';
+      const descLinkRes = await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, {
+        method: 'POST',
+        headers: jsonHeaders,
+        body: JSON.stringify({ event: { description: { html: withLink } } }),
+      });
+      log.descLinkPost = { status: descLinkRes.status, ok: descLinkRes.ok };
+      const eventMainGetRes4 = await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { headers });
+      const eventMainBody4 = await eventMainGetRes4.json().catch(() => null);
+      log.eventMainDescriptionAfterLink = eventMainBody4?.description;
+
+      // Variante gold-length reale: emoji + h2/h3 + p + ul/li ripetuti molte volte
+      // (simula davvero la lunghezza/ripetizione di assembleGoldDescription) per
+      // escludere che sia un limite di LUNGHEZZA a rompere il parsing, non lo shape.
+      const goldLike = Array.from({ length: 8 }, (_, i) => `<h3>🎧 Section ${i + 1}</h3><p>Paragraph text for section ${i + 1} with some detail and a number like €${20 + i}.</p><ul><li>Point A</li><li>Point B</li></ul>`).join('');
+      const descGoldRes = await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, {
+        method: 'POST',
+        headers: jsonHeaders,
+        body: JSON.stringify({ event: { description: { html: goldLike } } }),
+      });
+      log.descGoldLikePost = { status: descGoldRes.status, ok: descGoldRes.ok, sentLength: goldLike.length };
+      const eventMainGetRes5 = await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { headers });
+      const eventMainBody5 = await eventMainGetRes5.json().catch(() => null);
+      log.eventMainDescriptionAfterGoldLike = { htmlLength: (eventMainBody5?.description?.html || '').length, html: (eventMainBody5?.description?.html || '').slice(0, 400) };
     } catch (e) {
       log.descImgTest = { threw: (e as Error).message };
     }
