@@ -71,10 +71,109 @@ export async function GET(request: Request) {
   let scJson: unknown;
   try { scJson = JSON.parse(scBody); } catch { scJson = scBody.slice(0, 2000); }
 
-  return NextResponse.json({
-    eventId,
-    matchedTitle,
-    event: { status: eventRes.status, ok: eventRes.ok, body: eventJson },
-    structuredContent: { status: scRes.status, ok: scRes.ok, body: scJson },
-  });
+  if (searchParams.get('writeTest') !== '1') {
+    return NextResponse.json({
+      eventId,
+      matchedTitle,
+      event: { status: eventRes.status, ok: eventRes.ok, body: eventJson },
+      structuredContent: { status: scRes.status, ok: scRes.ok, body: scJson },
+    });
+  }
+
+  // --- Write test: crea un evento DRAFT usa-e-getta, prova a scrivere
+  // structured_content (modulo text + image) e i widget nativi (agenda/parking/faqs),
+  // poi elimina SEMPRE l'evento di prova, successo o fallimento.
+  const jsonHeaders = { Authorization: `Bearer ${token}`, 'content-type': 'application/json' };
+  const log: Record<string, unknown> = {};
+  let testEventId: string | null = null;
+
+  try {
+    const createRes = await fetch(`${EVENTBRITE_API}/organizations/${ORG_ID}/events/`, {
+      method: 'POST',
+      headers: jsonHeaders,
+      body: JSON.stringify({
+        event: {
+          name: { html: 'SPIKE G0 TEST — DELETE ME' },
+          start: { timezone: 'Europe/Rome', utc: '2027-01-01T20:00:00Z' },
+          end: { timezone: 'Europe/Rome', utc: '2027-01-02T02:00:00Z' },
+          currency: 'EUR',
+          online_event: true,
+          listed: false,
+          shareable: false,
+        },
+      }),
+    });
+    const createBody = await createRes.json().catch(() => null);
+    log.createEvent = { status: createRes.status, ok: createRes.ok, body: createBody };
+    if (createRes.ok && createBody?.id) testEventId = createBody.id;
+  } catch (e) {
+    log.createEvent = { threw: (e as Error).message };
+  }
+
+  if (testEventId) {
+    // GET structured_content per scoprire self/add_module su un evento nuovo
+    try {
+      const scNewRes = await fetch(`${EVENTBRITE_API}/events/${testEventId}/structured_content/`, { headers });
+      const scNewBody = await scNewRes.json().catch(() => null);
+      log.scNewGet = { status: scNewRes.status, ok: scNewRes.ok, body: scNewBody };
+
+      const addModuleUrl: string | undefined = scNewBody?.resource_uris?.add_module;
+      const publishUrl: string | undefined = scNewBody?.resource_uris?.publish;
+
+      if (addModuleUrl) {
+        // Modulo text
+        try {
+          const modRes = await fetch(addModuleUrl, {
+            method: 'POST',
+            headers: jsonHeaders,
+            body: JSON.stringify({ type: 'text', data: { body: { text: '<p>Spike G0 test module</p>', alignment: 'left' } } }),
+          });
+          log.addTextModule = { status: modRes.status, ok: modRes.ok, body: await modRes.json().catch(async () => (await modRes.text()).slice(0, 500)) };
+        } catch (e) {
+          log.addTextModule = { threw: (e as Error).message };
+        }
+
+        // Tentativi widget nativi (probabile non-documentati/non scrivibili via API pubblica)
+        for (const widgetType of ['agenda', 'parking', 'faqs']) {
+          try {
+            const wRes = await fetch(addModuleUrl, {
+              method: 'POST',
+              headers: jsonHeaders,
+              body: JSON.stringify({ type: widgetType, data: {} }),
+            });
+            log[`addWidget_${widgetType}`] = { status: wRes.status, ok: wRes.ok, body: await wRes.json().catch(async () => (await wRes.text()).slice(0, 300)) };
+          } catch (e) {
+            log[`addWidget_${widgetType}`] = { threw: (e as Error).message };
+          }
+        }
+      } else {
+        log.addModuleUrl = 'MISSING — nessun resource_uris.add_module su evento nuovo';
+      }
+
+      if (publishUrl) {
+        try {
+          const pubRes = await fetch(publishUrl, { method: 'POST', headers: jsonHeaders });
+          log.publishStructuredContent = { status: pubRes.status, ok: pubRes.ok, body: await pubRes.text() };
+        } catch (e) {
+          log.publishStructuredContent = { threw: (e as Error).message };
+        }
+      }
+
+      // GET finale per vedere cosa è stato effettivamente salvato
+      const scFinalRes = await fetch(`${EVENTBRITE_API}/events/${testEventId}/structured_content/`, { headers });
+      log.scFinalGet = { status: scFinalRes.status, body: await scFinalRes.json().catch(() => null) };
+    } catch (e) {
+      log.writeTestThrew = (e as Error).message;
+    }
+
+    // Cleanup: elimina SEMPRE l'evento di prova
+    try {
+      const delRes = await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { method: 'DELETE', headers });
+      log.cleanup = { status: delRes.status, ok: delRes.ok, body: await delRes.text() };
+    } catch (e) {
+      log.cleanup = { threw: (e as Error).message };
+    }
+  }
+
+  return NextResponse.json({ eventId, matchedTitle, testEventId, writeTest: log });
 }
