@@ -401,6 +401,26 @@ export async function GET(request: Request) {
         markerSurvived: savedHtmlBDelayed.includes('nlm:src=999;slug-en=test-slug'),
         faq12thSurvived: savedHtmlBDelayed.includes('Q12:'),
       };
+
+      // Bisezione: 1224 char sopravvive, 5106 no — trova la soglia reale tra i due
+      // con 4 FAQ (~2200 char stimati) e con 6 FAQ (~3000 char stimati).
+      for (const faqCount of [4, 6, 8]) {
+        const faqN = Array.from({ length: faqCount }, (_, i) =>
+          `<h3>Q${i + 1}: What about topic ${i + 1}?</h3><p>Answer ${i + 1}: detail about Just Me Milano, price €${15 + i}, dress code, WhatsApp contact, doors 19:30.</p>`
+        ).join('');
+        const testDoc = [
+          '<p>Hook paragraph describing the Saturday night experience at Just Me Milano.</p>',
+          '<h2>Contacts &amp; Bookings</h2><p>💬 WhatsApp: <a href="https://wa.me/393519127047">+39 351 912 7047</a></p>',
+          fakeSections,
+          '<h2>🗓️ Evening Programme</h2><p>19:30 — Doors open. 22:00 — DJ set.</p>',
+          `<h2>FAQ</h2>${faqN}`,
+          '<!-- nlm:src=999;slug-en=test-slug -->',
+        ].join('');
+        await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { method: 'POST', headers: jsonHeaders, body: JSON.stringify({ event: { description: { html: testDoc } } }) });
+        const g = await (await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { headers })).json().catch(() => null);
+        const saved = g?.description?.html || '';
+        log[`bisect_faq${faqCount}`] = { sentLength: testDoc.length, savedLength: saved.length, survivedFully: saved.length >= testDoc.length * 0.95 };
+      }
     } catch (e) {
       log.descImgTest = { threw: (e as Error).message };
     }
