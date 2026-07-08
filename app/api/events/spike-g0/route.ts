@@ -30,6 +30,29 @@ export async function GET(request: Request) {
   if (!token) return NextResponse.json({ error: 'EVENTBRITE_TOKEN not set' }, { status: 500 });
   const headers = { Authorization: `Bearer ${token}` };
 
+  // Bisezione su un evento REALE già pubblicato (con immagine vera assegnata)
+  // — isola se la presenza di un logo_id reale cambia la soglia di troncamento
+  // osservata nel publish reale (X4), diversa da quella vista nello spike G0
+  // originale (eventi draft senza immagine).
+  if (searchParams.get('bisectReal') === '1') {
+    const realEventId = searchParams.get('eventId');
+    if (!realEventId) return NextResponse.json({ error: 'eventId required' }, { status: 400 });
+    const jsonHeaders = { Authorization: `Bearer ${token}`, 'content-type': 'application/json' };
+    const results: Record<string, unknown> = {};
+    for (const len of [100, 250, 400, 600, 800]) {
+      const filler = 'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor. '.repeat(20);
+      const html = `<p>${filler.slice(0, len)}</p>`;
+      await fetch(`${EVENTBRITE_API}/events/${realEventId}/`, {
+        method: 'POST', headers: jsonHeaders,
+        body: JSON.stringify({ event: { description: { html } } }),
+      });
+      const g = await (await fetch(`${EVENTBRITE_API}/events/${realEventId}/`, { headers })).json().catch(() => null);
+      const saved = g?.description?.html || '';
+      results[`len_${len}`] = { sentLength: html.length, savedLength: saved.length, survivedFully: saved.length >= html.length * 0.9 };
+    }
+    return NextResponse.json({ eventId: realEventId, results });
+  }
+
   let eventId = searchParams.get('eventId');
   let matchedTitle: string | undefined;
 
