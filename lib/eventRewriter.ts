@@ -174,9 +174,22 @@ function esc(s: string): string {
 // bug di questo codice. Budget conservativo con margine.
 const DESCRIPTION_SAFE_BUDGET = 1000;
 
+// Rimuove emoji/simboli pittografici (qualunque codepoint fuori dal Basic
+// Multilingual Plane più i simboli/dingbat comuni nel BMP) — scoperto nello
+// spike G0 (bisezione su un evento reale già pubblicato, con immagine vera
+// assegnata): un'emoji in QUALUNQUE punto della description rompe il parser
+// di Eventbrite, che tronca silenziosamente tutto da lì in poi (in un caso
+// un paragrafo che INIZIAVA con un'emoji è stato ridotto a "<P>" vuoto). Non
+// è un limite di lunghezza né di lasciata `<a href>` — è specifico ai
+// caratteri emoji. Il sito (blob/pagina) non ha questo vincolo e mantiene le
+// emoji per la UX.
+function stripEmoji(s: string): string {
+  return (s || '').replace(/[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\u{2190}-\u{21FF}\u{2B00}-\u{2BFF}\u{FE0F}\u{200D}]/gu, '').replace(/\s{2,}/g, ' ').trim();
+}
+
 /**
- * Assembla la description finale come HTML vero (h2/h3/p/ul/li/a — MAI <img>
- * o <br/>, vedi nota in testa al file), rispettando DESCRIPTION_SAFE_BUDGET.
+ * Assembla la description finale come HTML vero (h2/h3/p/ul/li/a — MAI <img>,
+ * <br/> o EMOJI, vedi nota in testa al file), rispettando DESCRIPTION_SAFE_BUDGET.
  * Il corpo gold-standard completo (sezioni, 25 FAQ, programma) NON entra nel
  * limite reale di Eventbrite: qui va solo un hook breve + contatti + un
  * richiamo + i link (che non hanno questo limite) + marker.
@@ -197,20 +210,20 @@ function assembleGoldDescription(
   const siteUrl = `https://nightlifemilan.com/events/${slugEn}`;
 
   const links = affiliateUrl
-    ? `<p><a href="${affiliateUrl}">🎟️ BUY TICKETS — Official link</a></p>` +
-      `<p><a href="${affiliateUrl}">🍾 BOOK A TABLE — VIP &amp; Bottle Service</a></p>` +
-      `<p><a href="${siteUrl}">🌐 Full event guide, programme &amp; 25 FAQ</a></p>`
-    : `<p><a href="${siteUrl}">🌐 Full event guide, FAQ &amp; VIP tables: ${siteUrl}</a></p>`;
+    ? `<p><a href="${affiliateUrl}">BUY TICKETS — Official link</a></p>` +
+      `<p><a href="${affiliateUrl}">BOOK A TABLE — VIP &amp; Bottle Service</a></p>` +
+      `<p><a href="${siteUrl}">Full event guide, programme &amp; 25 FAQ</a></p>`
+    : `<p><a href="${siteUrl}">Full event guide, FAQ &amp; VIP tables: ${siteUrl}</a></p>`;
 
-  const contacts = `<p>💬 WhatsApp: {{WHATSAPP}} · ✉️ concierge@nightlifemilan.com</p>${links}`;
+  const contacts = `<p>WhatsApp: {{WHATSAPP}} - Email: concierge@nightlifemilan.com</p>${links}`;
 
-  const legal = '<p>⚠️ Eventbrite registrations are information requests only, not valid for entry on their own. Online tickets are non-refundable except if entry is denied by security.</p>';
+  const legal = '<p>IMPORTANT: Eventbrite registrations are information requests only, not valid for entry on their own. Online tickets are non-refundable except if entry is denied by security.</p>';
 
   // Budget rigido: taglia l'hook finché il totale rientra, mai il contrario
   // (contatti/link/legal/marker sono innegoziabili — sono il vero valore SEO/legale).
   const fixedLength = contacts.length + legal.length + marker.length + '<p></p>'.length;
   const hookBudget = Math.max(80, DESCRIPTION_SAFE_BUDGET - fixedLength);
-  const hookText = clamp(body.hook, hookBudget);
+  const hookText = clamp(stripEmoji(body.hook), hookBudget);
 
   return `<p>${esc(hookText)}</p>${contacts}${legal}${marker}`;
 }
