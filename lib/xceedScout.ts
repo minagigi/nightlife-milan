@@ -39,7 +39,7 @@ export interface XceedEvent {
   ageRange?: string;
   description: string;
   dressCode?: string;
-  doorsOpen?: string;
+  doorsOpen?: string; // "HH:MM" in UTC (orario, non una data — vedi nota in fetchEventDetail)
   offers: XceedOffer[];
   imageUrl?: string;
   genres: string[];
@@ -159,7 +159,10 @@ async function fetchEventDetail(venueId: string, slug: string, xceedId: string, 
     ageRange: eventLd.typicalAgeRange ? String(eventLd.typicalAgeRange) : (minAgeMatch ? `${minAgeMatch[1]}+` : undefined),
     description: String(eventLd.description || '').slice(0, 3000),
     dressCode: dressMatch?.[1]?.trim(),
-    doorsOpen: doorsMatch ? new Date(parseInt(doorsMatch[1], 10) * 1000).toISOString() : undefined,
+    // doorsOpening è un timestamp-template del venue (la DATA è un riferimento
+    // arbitrario/storico, non quella dell'evento) — usabile solo per l'ORARIO
+    // (UTC hh:mm), da ricombinare con la data reale dell'evento a valle.
+    doorsOpen: doorsMatch ? new Date(parseInt(doorsMatch[1], 10) * 1000).toISOString().slice(11, 16) : undefined,
     offers,
     imageUrl: ogImageMatch ? decodeEntities(ogImageMatch[1]) : undefined,
     genres: [...new Set(genreMatches)],
