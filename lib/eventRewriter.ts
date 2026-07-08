@@ -72,12 +72,15 @@ export interface RewrittenEvent {
   debugError?: string;
 }
 
-function clamp(s: string, max: number): string {
+// Esportate per scripts/prepare-event.ts (FASE L3, pipeline locale
+// senza API): lo script deve produrre BYTE-PER-BYTE lo stesso output del
+// server, mai una reimplementazione parallela.
+export function clamp(s: string, max: number): string {
   const t = (s || '').replace(/\s+/g, ' ').trim();
   return t.length <= max ? t : t.slice(0, max - 1).trimEnd() + '…';
 }
 
-function slugify(text: string): string {
+export function slugify(text: string): string {
   return (text || '')
     .toLowerCase()
     .normalize('NFD')
@@ -90,7 +93,10 @@ function slugify(text: string): string {
     .replace(/-$/, '');
 }
 
-const BODY_SYSTEM_PROMPT = `You are the copywriter for "Nightlife Milan", a luxury insider guide to Milan nightlife.
+// Esportati per la skill locale (FASE L3): stessi prompt esatti che
+// userebbe la chiamata server-side, seguiti a mano da Claude Code in
+// sessione invece che da una richiesta HTTP ad Anthropic.
+export const BODY_SYSTEM_PROMPT = `You are the copywriter for "Nightlife Milan", a luxury insider guide to Milan nightlife.
 
 VOICE: insider, exclusive, confident, never try-hard. Specific over generic. No exclamation marks.
 Banned words (English): stunning, amazing, ultimate, epic, iconic, unforgettable, vibrant, elevate, dive into, delve into, journey, tapestry, testament, boasts, seamless.
@@ -130,7 +136,7 @@ OUTPUT — return ONLY a JSON object with these exact keys, no markdown, no pros
   "imageSlug": "ascii-lowercase-hyphenated slug for the image filename"
 }`;
 
-const FAQ_SYSTEM_PROMPT = `You are the copywriter for "Nightlife Milan". Generate 25 SEO FAQ entries for a long-form Eventbrite event listing (the "gold standard" format), in BOTH English and Italian.
+export const FAQ_SYSTEM_PROMPT = `You are the copywriter for "Nightlife Milan". Generate 25 SEO FAQ entries for a long-form Eventbrite event listing (the "gold standard" format), in BOTH English and Italian.
 
 VOICE: insider, exclusive, confident, never try-hard. No exclamation marks. No vague attribution.
 
@@ -142,14 +148,14 @@ BILINGUAL RULE (permanent): questionIt/answerIt are a GENUINE Italian version wi
 
 OUTPUT — return ONLY a JSON object: {"faqLong": [{"question": "... (English)", "questionIt": "... (italiano, ricerca nativa)", "answer": "... (English)", "answerIt": "... (italiano)"}, ... 25 items]}`;
 
-interface BodyResult {
+export interface BodyResult {
   titleEn: string; titleIt: string; summaryEn: string; summaryIt: string; hook: string; hookIt: string;
   sections: { emoji: string; title: string; titleIt: string; body: string; bodyIt: string }[];
   programme: ProgrammeSlot[];
   seoTags: string[]; seoTagsIt: string[]; ebTags: string[];
   imageAltEn: string; imageAltIt: string; imageSlug: string;
 }
-interface FaqResult { faqLong: { question: string; questionIt: string; answer: string; answerIt: string }[] }
+export interface FaqResult { faqLong: { question: string; questionIt: string; answer: string; answerIt: string }[] }
 
 interface SonnetResult<T> { data: T | null; error?: string }
 
@@ -321,7 +327,7 @@ function assembleGoldDescriptionForLang(
 
 interface AssembledDescriptions { descriptionEn: string; descriptionIt: string }
 
-function assembleBothDescriptions(
+export function assembleBothDescriptions(
   body: BodyResult,
   faq: { question: string; questionIt: string; answer: string; answerIt: string }[],
   slugEn: string,
@@ -339,7 +345,7 @@ const BODY_REQUIRED: (keyof BodyResult)[] = [
   'seoTags', 'seoTagsIt', 'ebTags', 'imageAltEn', 'imageAltIt', 'imageSlug',
 ];
 
-function isBodyMissing(bodyResult: BodyResult | null): boolean {
+export function isBodyMissing(bodyResult: BodyResult | null): boolean {
   return !bodyResult || BODY_REQUIRED.some((k) => {
     const v = bodyResult[k];
     return v === undefined || v === null || (Array.isArray(v) && v.length === 0) || v === '';
