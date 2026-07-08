@@ -28,12 +28,24 @@ function detectGenre(text: string): MusicGenre[] {
   return genres.length > 0 ? genres : [MusicGenre.COMMERCIAL];
 }
 
-// FASE G4B: il publisher (eventPublisher.ts) incorpora nella description un
-// marker testuale con lo slug canonico deciso PRIMA del publish (necessario per
-// il backlink Eventbrite→sito: il link viene scritto nell'evento e va puntare
-// a uno slug che il sito genererà IDENTICO). Se presente, va usato verbatim al
-// posto della rigenerazione AI — coerenza garantita sito↔Eventbrite.
-const SLUG_MARKER_RE = /\[nlm:src=(\d+);slug-en=([a-z0-9-]+)\]/;
+// FASE G4B: il publisher (eventRewriter.ts/assembleGoldDescription) incorpora
+// nella description un marker (commento HTML) con lo slug canonico deciso
+// PRIMA del publish (necessario per il backlink Eventbrite→sito: il link
+// viene scritto nell'evento e va puntare a uno slug che il sito genererà
+// IDENTICO). Se presente, va usato verbatim al posto della rigenerazione AI —
+// coerenza garantita sito↔Eventbrite.
+//
+// Bug reale corretto: questo regex cercava ancora il vecchio formato testuale
+// `[nlm:src=N;slug-en=...]` (con parentesi quadre, id solo numerico) di una
+// versione precedente di assembleGoldDescription — MAI aggiornato quando il
+// marker è diventato un commento HTML `<!-- nlm:src=X;slug-en=... -->` con id
+// anche non numerico (es. "xc-220757" per gli eventi Xceed, FASE X4). Il
+// meccanismo di backlink non ha mai effettivamente funzionato: ogni pagina
+// sito veniva rigenerata con uno slug AI diverso da quello linkato su
+// Eventbrite, e il poll "200 = pagina viva" del publisher risultava un falso
+// positivo (una pagina ESISTENTE ma per uno slug diverso/inesistente veniva
+// comunque scambiata per quella giusta).
+const SLUG_MARKER_RE = /nlm:src=([^;]+);slug-en=([a-z0-9-]+)/;
 
 function extractSlugMarker(text: string): string | undefined {
   return text?.match(SLUG_MARKER_RE)?.[2];
