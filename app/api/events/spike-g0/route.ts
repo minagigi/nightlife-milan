@@ -87,6 +87,38 @@ export async function GET(request: Request) {
     return NextResponse.json({ eventId: realEventId, results });
   }
 
+  // Corregge l'orario sbagliato (bug doppia conversione, ora fixato nel codice)
+  // e ritesta music_properties sull'evento reale già pubblicato.
+  if (searchParams.get('fixTimeAndMusicProps') === '1') {
+    const realEventId = searchParams.get('eventId');
+    if (!realEventId) return NextResponse.json({ error: 'eventId required' }, { status: 400 });
+    const jsonHeaders = { Authorization: `Bearer ${token}`, 'content-type': 'application/json' };
+    const results: Record<string, unknown> = {};
+
+    const timeRes = await fetch(`${EVENTBRITE_API}/events/${realEventId}/`, {
+      method: 'POST', headers: jsonHeaders,
+      body: JSON.stringify({ event: {
+        start: { timezone: 'Europe/Rome', utc: '2026-07-08T17:30:00Z' },
+        end: { timezone: 'Europe/Rome', utc: '2026-07-09T03:00:00Z' },
+      } }),
+    });
+    results.timeFixPostOk = timeRes.ok;
+
+    const mpRes = await fetch(`${EVENTBRITE_API}/events/${realEventId}/music_properties/`, {
+      method: 'POST', headers: jsonHeaders,
+      body: JSON.stringify({ music_properties: { age_restriction: '21+', door_time: '2026-07-08T17:30:00Z' } }),
+    });
+    results.mpPostStatus = mpRes.status;
+    results.mpPostBody = await mpRes.text();
+
+    const g = await (await fetch(`${EVENTBRITE_API}/events/${realEventId}/?expand=music_properties`, { headers })).json().catch(() => null);
+    results.afterStart = g?.start;
+    results.afterEnd = g?.end;
+    results.afterMusicProperties = g?.music_properties;
+
+    return NextResponse.json({ eventId: realEventId, results });
+  }
+
   let eventId = searchParams.get('eventId');
   let matchedTitle: string | undefined;
 
