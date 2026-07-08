@@ -126,16 +126,17 @@ async function callSonnetJSON<T>(system: string, userMsg: string, label: string)
   if (!key) return null;
 
   const controller = new AbortController();
-  // 90s/8000 tok: il corpo gold-standard (~2000+ parole equivalenti tra le due
-  // chiamate) richiede più budget della v2 (300-450 parole) — margini alzati
-  // per evitare needsReview per semplice esaurimento token (visto in v2).
-  const timeout = setTimeout(() => controller.abort(), 90000);
+  // 120s/16000 tok: bug reale osservato in FASE X3 — con un userMsg più ricco
+  // (offers/dress/age reali Xceed) la chiamata FAQ ha troncato a 8000 token
+  // (stop_reason "max_tokens", JSON incompleto) generando solo ~13/25 FAQ.
+  // Margine ampio per evitare needsReview per semplice esaurimento token.
+  const timeout = setTimeout(() => controller.abort(), 120000);
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
       signal: controller.signal,
-      body: JSON.stringify({ model: MODEL, max_tokens: 8000, system, messages: [{ role: 'user', content: userMsg }] }),
+      body: JSON.stringify({ model: MODEL, max_tokens: 16000, system, messages: [{ role: 'user', content: userMsg }] }),
     });
     if (!res.ok) {
       console.error(`[eventRewriter] Anthropic API ${res.status} (${label}): ${(await res.text()).slice(0, 300)}`);
