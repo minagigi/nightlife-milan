@@ -6,9 +6,10 @@ import type { Lang } from '@/lib/eventRewriter';
 import { resolveWhatsappOnly } from '@/lib/brandSanitizer';
 import { addToBlacklist } from '@/lib/promoterBlacklist';
 import { processPoster } from '@/lib/posterPipeline';
-import { publishEvent, sleep, PUBLISH_RATE_LIMIT_MS } from '@/lib/eventPublisher';
+import { publishEvent, PUBLISH_RATE_LIMIT_MS } from '@/lib/eventPublisher';
 import { notifyUrl } from '@/lib/googleIndexing';
 import { XCEED_VENUE_IDS } from '@/lib/xceedScout';
+import { sleep, pollSitePageUntilLive, sitePageUrlFor, getLastManualRunAt, isRecentManualRun } from '@/lib/importShared';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 300;
@@ -17,27 +18,8 @@ export const maxDuration = 300;
 // + poll sito) ogni evento costa ~4-6 min — con maxDuration 300 il cap sicuro
 // per run è ~3. Il cron notturno smaltisce il backlog su più notti.
 const DEFAULT_MAX_PER_RUN = 3;
-const SITE_BASE = process.env.APP_URL || 'https://nightlifemilan.com';
-
-/** Polla la pagina sito finché risponde 200 (o scade il timeout) — FASE G4B:
- * mai notificare Google Indexing per un URL ancora morto. */
-async function pollSitePageUntilLive(url: string, maxMs: number, intervalMs: number): Promise<boolean> {
-  const deadline = Date.now() + maxMs;
-  while (Date.now() < deadline) {
-    try {
-      const res = await fetch(url, { cache: 'no-store' });
-      if (res.ok) return true;
-    } catch {
-      // riprova al prossimo giro
-    }
-    await sleep(intervalMs);
-  }
-  return false;
-}
-
-function sitePageUrlFor(slugEn: string, lang: Lang): string {
-  return lang === 'en' ? `${SITE_BASE}/events/${slugEn}` : `${SITE_BASE}/it/events/${slugEn}`;
-}
+// FASE L2 (piano local-pipeline-no-api): vedi import-xceed/route.ts.
+const MANUAL_RUN_GRACE_HOURS = 36;
 
 /**
  * Cron NOTTURNO (vercel.json: 0 2 * * *) — Fase 6 del piano auto-import.
@@ -69,8 +51,23 @@ export async function GET(request: Request) {
   }
 
   const dryRun = searchParams.get('dryRun') === '1';
+  const force = searchParams.get('force') === '1';
   const maxParam = parseInt(searchParams.get('max') || '', 10);
   const maxPerRun = Number.isFinite(maxParam) && maxParam > 0 ? maxParam : DEFAULT_MAX_PER_RUN;
+
+  // FASE L2: la pipeline manuale locale (publish-prepared) copre già questa
+  // finestra recente — non consumare credito API per lo stesso lavoro.
+  if (!force) {
+    const lastManualRunAt = await getLastManualRunAt();
+    if (isRecentManualRun(lastManualRunAt, MANUAL_RUN_GRACE_HOURS)) {
+      return NextResponse.json({
+        ok: true,
+        skippedBecause: 'manual run recent',
+        lastManualRunAt,
+        ranAt: new Date().toISOString(),
+      });
+    }
+  }
 
   const published: Array<{
     title: string; lang: Lang; url: string; imageSource?: string;
