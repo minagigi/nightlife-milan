@@ -68,6 +68,22 @@ export async function GET(request: Request) {
     const gLinks = await (await fetch(`${EVENTBRITE_API}/events/${realEventId}/`, { headers })).json().catch(() => null);
     results.withLinks = { sentLength: withLinks.length, savedLength: (gLinks?.description?.html || '').length, saved: (gLinks?.description?.html || '').slice(0, 500) };
 
+    // Fix reale: stessa struttura di withLinks ma SENZA emoji (il fix appena
+    // applicato a assembleGoldDescription) — se sopravvive, questa stessa
+    // scrittura corregge anche la description dell'evento live rotto.
+    const noEmojiFixed = '<p>Just Me in Sempione turns Wednesday into the night to be seen in Milan. On July 8 2026 doors open at 7.30pm with a buffet aperitif and premium cocktails before the room shifts into a full set of house, hip-hop, EDM and reggaeton.</p>' +
+      '<p>WhatsApp: {{WHATSAPP}} - Email: concierge@nightlifemilan.com</p>' +
+      '<p><a href="https://xceed.me/en/milano/event/wednesday-night-213/220731/channel/nightlifemilan-1">BUY TICKETS — Official link</a></p>' +
+      '<p><a href="https://xceed.me/en/milano/event/wednesday-night-213/220731/channel/nightlifemilan-1">BOOK A TABLE — VIP &amp; Bottle Service</a></p>' +
+      '<p><a href="https://nightlifemilan.com/events/wednesday-night-just-me-wednesday-july-8-2026-2026-07-08">Full event guide, programme &amp; 25 FAQ</a></p>' +
+      '<p>IMPORTANT: Eventbrite registrations are information requests only, not valid for entry on their own. Online tickets are non-refundable except if entry is denied by security.</p>' +
+      '<!-- nlm:src=xc-220731;slug-en=wednesday-night-just-me-wednesday-july-8-2026-2026-07-08 -->';
+    // sostituisce {{WHATSAPP}} col numero reale prima dell'invio (come fa sanitize() in produzione)
+    const noEmojiFixedResolved = noEmojiFixed.replace('{{WHATSAPP}}', '+39 351 912 7047');
+    await fetch(`${EVENTBRITE_API}/events/${realEventId}/`, { method: 'POST', headers: jsonHeaders, body: JSON.stringify({ event: { description: { html: noEmojiFixedResolved } } }) });
+    const gFixed = await (await fetch(`${EVENTBRITE_API}/events/${realEventId}/`, { headers })).json().catch(() => null);
+    results.noEmojiFixed = { sentLength: noEmojiFixedResolved.length, savedLength: (gFixed?.description?.html || '').length, saved: (gFixed?.description?.html || '') };
+
     return NextResponse.json({ eventId: realEventId, results });
   }
 
