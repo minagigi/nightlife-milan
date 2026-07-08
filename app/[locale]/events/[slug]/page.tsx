@@ -363,8 +363,8 @@ export default async function EventPage({ params }: Props) {
         '@type': 'FAQPage',
         mainEntity: richContent.rewritten.faqLong.map((f) => ({
           '@type': 'Question',
-          name: locale === 'it' ? f.questionIt : f.question,
-          acceptedAnswer: { '@type': 'Answer', text: locale === 'it' ? f.answerIt : f.answer },
+          name: (locale === 'it' && f.questionIt) || f.question,
+          acceptedAnswer: { '@type': 'Answer', text: (locale === 'it' && f.answerIt) || f.answer },
         })),
       }
     : null;
