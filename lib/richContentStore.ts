@@ -41,6 +41,7 @@ function resolveWhatsappPlaceholders(rewritten: RewrittenEvent): RewrittenEvent 
   return {
     ...rewritten,
     hook: resolve(rewritten.hook),
+    hookIt: resolve(rewritten.hookIt),
     summaryEn: resolve(rewritten.summaryEn),
     sections: rewritten.sections.map((s) => ({ ...s, body: resolve(s.body), bodyIt: resolve(s.bodyIt) })),
     faqLong: rewritten.faqLong.map((f) => ({ ...f, answer: resolve(f.answer), answerIt: resolve(f.answerIt) })),

@@ -6,7 +6,7 @@ import { weeklyEvents, getWeeklyEventBySlug } from '@/lib/eventsConfig';
 import { getLocalizedText, generateEventSchema, generateBreadcrumbSchema } from '@/lib/seo';
 import { fetchEventbriteEvents } from '@/lib/eventbriteSync';
 import { getRichContent } from '@/lib/richContentStore';
-import { Event } from '@/lib/types';
+import { Event, Venue } from '@/lib/types';
 import BookingForm from '@/components/BookingForm';
 import FAQAccordion from '@/components/FAQAccordion';
 import PricingGrid from '@/components/PricingGrid';
@@ -22,6 +22,38 @@ async function getEbEventBySlug(slug: string): Promise<Event | undefined> {
   } catch {
     return undefined;
   }
+}
+
+const FALLBACK_GALLERY = [
+  '/images/milan-nightclub-luxury-vip-champagne.webp',
+  '/images/milan-nightclub-dancefloor-vip.webp',
+  '/images/bottle-service-milan-vip-nightclub.webp',
+  '/images/milan-club-crowd-dancefloor-night.webp',
+];
+
+const GALLERY_DESCRIPTORS: Record<'en' | 'it', string[]> = {
+  en: ['VIP tables and lounge area', 'dancefloor and DJ booth', 'bar and champagne service', 'entrance and crowd atmosphere'],
+  it: ['area tavoli VIP e lounge', 'pista da ballo e consolle DJ', 'bar e servizio champagne', 'ingresso e atmosfera del pubblico'],
+};
+
+/**
+ * Galleria foto reali della venue (non più 4 foto stock identiche su ogni
+ * pagina evento) — alt/title unico per immagine, SEO in chiave locale,
+ * combina venue + descrittore posizionale + titolo evento specifico.
+ */
+function buildVenueGalleryImages(venue: Venue, eventTitle: string, locale: string): { src: string; alt: string }[] {
+  const isIt = locale === 'it';
+  const sources = venue.gallery && venue.gallery.length > 0 ? venue.gallery : FALLBACK_GALLERY;
+  const descriptors = GALLERY_DESCRIPTORS[isIt ? 'it' : 'en'];
+  const venueName = getLocalizedText(venue.localizedContent.name, locale);
+
+  return sources.slice(0, 4).map((src, i) => {
+    const descriptor = descriptors[i % descriptors.length];
+    const alt = isIt
+      ? `${venueName} Milano — ${descriptor} durante ${eventTitle}`
+      : `${venueName} Milan — ${descriptor} during ${eventTitle}`;
+    return { src, alt };
+  });
 }
 
 // ISR Configuration (1 hour)
@@ -497,14 +529,9 @@ export default async function EventPage({ params }: Props) {
                 : `${venueName} is one of Milan's most exclusive venues, located at ${venue.address.streetAddress}. Book your VIP table or get on the guestlist to ensure the best experience.`}
             </p>
             <div className="mt-6 grid grid-cols-2 gap-4 not-prose">
-              {[
-                { src: '/images/milan-nightclub-luxury-vip-champagne.webp', alt: `${venueName} Milan luxury nightclub VIP atmosphere` },
-                { src: '/images/milan-nightclub-dancefloor-vip.webp', alt: `${venueName} Milan dancefloor club night 2026` },
-                { src: '/images/bottle-service-milan-vip-nightclub.webp', alt: `${venueName} bottle service VIP table Milan` },
-                { src: '/images/milan-club-crowd-dancefloor-night.webp', alt: `${venueName} Milan club crowd night atmosphere` },
-              ].map((img, i) => (
+              {buildVenueGalleryImages(venue, title, locale).map((img, i) => (
                 <div key={i} className="relative h-32 rounded-xl overflow-hidden border border-white/8">
-                  <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
+                  <Image src={img.src} alt={img.alt} title={img.alt} fill className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
                 </div>
               ))}
             </div>
