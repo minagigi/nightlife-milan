@@ -1,5 +1,6 @@
 import { venuesData } from './venuesData';
 import type { ScoutedEvent } from './eventScout';
+import type { XceedEvent } from './xceedScout';
 import type { RewrittenEvent } from './eventRewriter';
 import type { PosterResult } from './posterPipeline';
 import { getEventbriteToken } from './eventbriteToken';
@@ -226,33 +227,43 @@ export async function replaceEventImage(eventId: string, poster: PosterResult): 
   return { ok: true };
 }
 
+interface PublishCoreParams {
+  venueId: string;
+  dateISO: string;
+  endISO?: string;
+  titleEn: string;
+  summaryEn: string;
+  description: string;
+  poster: PosterResult;
+  /** "18+" / "21+" — se assente niente music_properties.age_restriction */
+  ageRestriction?: string;
+  /** door_time completo UTC ISO — se assente niente music_properties.door_time */
+  doorTimeISO?: string;
+  dryRun: boolean;
+}
+
 /**
- * Pubblica un evento riscritto+sanitizzato+con locandina pronta sulla nostra
- * org Eventbrite. Ritorna `ok: false` con `reason` su qualunque fallimento —
- * non lancia mai eccezioni verso il chiamante (la route gestisce N eventi in
- * sequenza, un fallimento non deve fermare gli altri).
+ * Nucleo condiviso di pubblicazione — usato sia dallo scout Eventbrite
+ * (publishEvent) sia dalla pipeline Xceed (publishXceedEvent, FASE X4). Ritorna
+ * `ok: false` con `reason` su qualunque fallimento — non lancia mai eccezioni
+ * verso il chiamante (la route gestisce N eventi in sequenza, un fallimento
+ * non deve fermare gli altri).
  */
-export async function publishEvent(
-  scouted: ScoutedEvent,
-  rewritten: RewrittenEvent,
-  sanitizedDescription: string,
-  poster: PosterResult,
-  dryRun: boolean
-): Promise<PublishResult> {
+async function publishCore(p: PublishCoreParams): Promise<PublishResult> {
   const token = getEventbriteToken();
   if (!token) return { ok: false, reason: 'EVENTBRITE_TOKEN not set' };
 
-  const venueEbId = await resolveEventbriteVenueId(token, scouted.venueId, dryRun);
-  if (!venueEbId) return { ok: false, reason: `Could not resolve/create Eventbrite venue for ${scouted.venueId}` };
+  const venueEbId = await resolveEventbriteVenueId(token, p.venueId, p.dryRun);
+  if (!venueEbId) return { ok: false, reason: `Could not resolve/create Eventbrite venue for ${p.venueId}` };
 
-  const description = sanitizedDescription;
+  const { dateISO, endISO, titleEn, summaryEn, description, poster, ageRestriction, doorTimeISO, dryRun } = p;
 
   if (dryRun) {
     return {
       ok: true,
       reason: 'dry-run: not published',
       imageSource: poster.source,
-      url: `[dry-run] ${rewritten.titleEn}`,
+      url: `[dry-run] ${titleEn}`,
     };
   }
 
@@ -266,10 +277,10 @@ export async function publishEvent(
       headers: authHeaders(token),
       body: JSON.stringify({
         event: {
-          name: { html: rewritten.titleEn },
-          summary: rewritten.summaryEn,
-          start: { timezone: 'Europe/Rome', utc: toEventbriteUtc(scouted.dateISO) },
-          end: { timezone: 'Europe/Rome', utc: toEventbriteUtc(scouted.endISO || scouted.dateISO) },
+          name: { html: titleEn },
+          summary: summaryEn,
+          start: { timezone: 'Europe/Rome', utc: toEventbriteUtc(dateISO) },
+          end: { timezone: 'Europe/Rome', utc: toEventbriteUtc(endISO || dateISO) },
           currency: 'EUR',
           venue_id: venueEbId,
           online_event: false,
@@ -359,7 +370,7 @@ export async function publishEvent(
           minimum_quantity: 1,
           maximum_quantity: 10,
           hide_sale_dates: false,
-          sales_end: toEventbriteUtc(scouted.endISO || scouted.dateISO),
+          sales_end: toEventbriteUtc(endISO || dateISO),
           description: `This listing is only a reservation request and NOT a real ticket purchase.\nTo be accredited/confirmed, you must contact Luis Nightlife at ☎️ ${CONTACT.whatsapp.number}.`,
         },
       }),
@@ -376,18 +387,11 @@ export async function publishEvent(
   // non scrivibili via API pubblica). Non bloccante: un fallimento qui non deve
   // impedire la pubblicazione del resto dell'evento.
   try {
-    const pricing = getVenuePricing(scouted.venueId);
-    const ageRestriction = pricing.ageLimit ? `${pricing.ageLimit}+` : undefined;
-    let doorTime: string | undefined;
-    if (pricing.checkinMinutesBefore) {
-      const startMs = new Date(toEventbriteUtc(scouted.dateISO)).getTime() - pricing.checkinMinutesBefore * 60000;
-      doorTime = new Date(startMs).toISOString().replace(/\.\d{3}Z$/, 'Z');
-    }
-    if (ageRestriction || doorTime) {
+    if (ageRestriction || doorTimeISO) {
       const mpRes = await fetch(`${EVENTBRITE_API}/events/${eventId}/music_properties/`, {
         method: 'POST',
         headers: authHeaders(token),
-        body: JSON.stringify({ music_properties: { ...(ageRestriction && { age_restriction: ageRestriction }), ...(doorTime && { door_time: doorTime }) } }),
+        body: JSON.stringify({ music_properties: { ...(ageRestriction && { age_restriction: ageRestriction }), ...(doorTimeISO && { door_time: doorTimeISO }) } }),
       });
       if (!mpRes.ok) {
         console.error(`[eventPublisher] music_properties write failed: HTTP ${mpRes.status} ${(await mpRes.text()).slice(0, 200)}`);
@@ -412,6 +416,71 @@ export async function publishEvent(
   }
 
   return { ok: true, ebEventId: eventId, url: eventUrl, imageSource: poster.source };
+}
+
+/** Pubblica un evento dallo scout Eventbrite (v3) — età/check-in da venuePricing statico. */
+export async function publishEvent(
+  scouted: ScoutedEvent,
+  rewritten: RewrittenEvent,
+  sanitizedDescription: string,
+  poster: PosterResult,
+  dryRun: boolean
+): Promise<PublishResult> {
+  const pricing = getVenuePricing(scouted.venueId);
+  const ageRestriction = pricing.ageLimit ? `${pricing.ageLimit}+` : undefined;
+  let doorTimeISO: string | undefined;
+  if (pricing.checkinMinutesBefore) {
+    const startMs = new Date(toEventbriteUtc(scouted.dateISO)).getTime() - pricing.checkinMinutesBefore * 60000;
+    doorTimeISO = new Date(startMs).toISOString().replace(/\.\d{3}Z$/, 'Z');
+  }
+
+  return publishCore({
+    venueId: scouted.venueId,
+    dateISO: scouted.dateISO,
+    endISO: scouted.endISO,
+    titleEn: rewritten.titleEn,
+    summaryEn: rewritten.summaryEn,
+    description: sanitizedDescription,
+    poster,
+    ageRestriction,
+    doorTimeISO,
+    dryRun,
+  });
+}
+
+/**
+ * Pubblica un evento dalla pipeline Xceed (FASE X4) — età/check-in REALI
+ * dell'evento (typicalAgeRange/doorsOpen ufficiali), non da venuePricing statico.
+ */
+export async function publishXceedEvent(
+  xceed: XceedEvent,
+  rewritten: RewrittenEvent,
+  sanitizedDescription: string,
+  poster: PosterResult,
+  dryRun: boolean
+): Promise<PublishResult> {
+  // xceed.ageRange è già nel formato "18+"/"21+"; xceed.doorsOpen è "HH:MM" UTC
+  // (orario ufficiale del venue, non una data — va ricombinato con la data
+  // reale dell'evento per ottenere un door_time completo valido).
+  let doorTimeISO: string | undefined;
+  if (xceed.doorsOpen) {
+    const eventUtc = toEventbriteUtc(xceed.startISO);
+    const datePart = eventUtc.slice(0, 10);
+    doorTimeISO = `${datePart}T${xceed.doorsOpen}:00Z`;
+  }
+
+  return publishCore({
+    venueId: xceed.venueId,
+    dateISO: xceed.startISO,
+    endISO: xceed.endISO,
+    titleEn: rewritten.titleEn,
+    summaryEn: rewritten.summaryEn,
+    description: sanitizedDescription,
+    poster,
+    ageRestriction: xceed.ageRange,
+    doorTimeISO,
+    dryRun,
+  });
 }
 
 export async function sleep(ms: number): Promise<void> {
