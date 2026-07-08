@@ -401,10 +401,27 @@ async function publishCore(p: PublishCoreParams): Promise<PublishResult> {
     return { ok: false, reason: `Ticket creation threw: ${(e as Error).message}`, ebEventId: eventId, imageSource: poster.source };
   }
 
-  // 4b. music_properties — highlights nativi "Buono a sapersi" (età + check-in).
-  // Scoperto scrivibile nello spike G0 (a differenza dei widget structured_content,
-  // non scrivibili via API pubblica). Non bloccante: un fallimento qui non deve
-  // impedire la pubblicazione del resto dell'evento.
+  // 5. Publish
+  try {
+    const publishRes = await fetch(`${EVENTBRITE_API}/events/${eventId}/publish/`, {
+      method: 'POST',
+      headers: authHeaders(token),
+    });
+    if (!publishRes.ok) {
+      const errBody = await publishRes.text();
+      return { ok: false, reason: `Publish failed: ${publishRes.status} ${errBody.slice(0, 200)}`, ebEventId: eventId, imageSource: poster.source };
+    }
+  } catch (e) {
+    return { ok: false, reason: `Publish threw: ${(e as Error).message}`, ebEventId: eventId, imageSource: poster.source };
+  }
+
+  // 6. music_properties — highlights nativi "Buono a sapersi" (età + check-in).
+  // Bug reale scoperto in FASE X4: scriverlo PRIMA del publish (quando l'evento
+  // è ancora draft) veniva silenziosamente azzerato dalla pubblicazione stessa
+  // (confermato: null dopo publish anche con una POST riuscita prima). Va
+  // scritto DOPO, quando l'evento è già live — verificato persistere così sul
+  // vero evento pubblicato. Non bloccante: un fallimento qui non invalida
+  // la pubblicazione già avvenuta.
   try {
     if (ageRestriction || doorTimeISO) {
       const mpRes = await fetch(`${EVENTBRITE_API}/events/${eventId}/music_properties/`, {
@@ -418,20 +435,6 @@ async function publishCore(p: PublishCoreParams): Promise<PublishResult> {
     }
   } catch (e) {
     console.error(`[eventPublisher] music_properties write threw: ${(e as Error).message}`);
-  }
-
-  // 5. Publish
-  try {
-    const publishRes = await fetch(`${EVENTBRITE_API}/events/${eventId}/publish/`, {
-      method: 'POST',
-      headers: authHeaders(token),
-    });
-    if (!publishRes.ok) {
-      const errBody = await publishRes.text();
-      return { ok: false, reason: `Publish failed: ${publishRes.status} ${errBody.slice(0, 200)}`, ebEventId: eventId, imageSource: poster.source };
-    }
-  } catch (e) {
-    return { ok: false, reason: `Publish threw: ${(e as Error).message}`, ebEventId: eventId, imageSource: poster.source };
   }
 
   return { ok: true, ebEventId: eventId, url: eventUrl, imageSource: poster.source };
