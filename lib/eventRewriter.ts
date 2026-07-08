@@ -1,6 +1,7 @@
 import { getVenueMeta } from './seoRewrite';
 import { getVenuePricing } from './venuePricing';
 import type { ScoutedEvent } from './eventScout';
+import type { XceedEvent } from './xceedScout';
 
 /**
  * Riscrittura SEO gold-standard di un evento scoutato — v3 (FASE G3). A
@@ -177,21 +178,30 @@ const DESCRIPTION_SAFE_BUDGET = 1000;
  * o <br/>, vedi nota in testa al file), rispettando DESCRIPTION_SAFE_BUDGET.
  * Il corpo gold-standard completo (sezioni, 25 FAQ, programma) NON entra nel
  * limite reale di Eventbrite: qui va solo un hook breve + contatti + un
- * richiamo + il backlink alla pagina sito (che non ha questo limite) + marker.
+ * richiamo + i link (che non hanno questo limite) + marker.
+ *
+ * `affiliateUrl` (FASE X4, solo per eventi Xceed): quando presente, i link
+ * d'acquisto vanno IN TESTA, come nell'articolo gold di esempio dell'utente —
+ * "Buy Tickets" e "Book a Table" prima del link alla guida completa del sito.
  */
 function assembleGoldDescription(
   body: BodyResult,
   _faq: { question: string; answer: string }[],
   _pricing: ReturnType<typeof getVenuePricing>,
   slugEn: string,
-  ebId: string
+  ebId: string,
+  affiliateUrl?: string
 ): string {
   const marker = `<!-- nlm:src=${ebId};slug-en=${slugEn} -->`;
   const siteUrl = `https://nightlifemilan.com/events/${slugEn}`;
 
-  const contacts =
-    '<p>💬 WhatsApp: {{WHATSAPP}} · ✉️ concierge@nightlifemilan.com</p>' +
-    `<p>🌐 Full event guide, FAQ &amp; VIP tables: <a href="${siteUrl}">${siteUrl}</a></p>`;
+  const links = affiliateUrl
+    ? `<p><a href="${affiliateUrl}">🎟️ BUY TICKETS — Official link</a></p>` +
+      `<p><a href="${affiliateUrl}">🍾 BOOK A TABLE — VIP &amp; Bottle Service</a></p>` +
+      `<p><a href="${siteUrl}">🌐 Full event guide, programme &amp; 25 FAQ</a></p>`
+    : `<p><a href="${siteUrl}">🌐 Full event guide, FAQ &amp; VIP tables: ${siteUrl}</a></p>`;
+
+  const contacts = `<p>💬 WhatsApp: {{WHATSAPP}} · ✉️ concierge@nightlifemilan.com</p>${links}`;
 
   const legal = '<p>⚠️ Eventbrite registrations are information requests only, not valid for entry on their own. Online tickets are non-refundable except if entry is denied by security.</p>';
 
@@ -259,6 +269,83 @@ Raw description (from third-party promoter, needs full rewrite, strip any contac
     ebTags: bodyResult!.ebTags.slice(0, 18),
     imageAltEn: clamp(bodyResult!.imageAltEn, 125),
     imageSlug: slugify(bodyResult!.imageSlug || `${meta.name}-${event.rawTitle}-${dateSlugPart}`),
+    slugEn,
+    descriptionPlainEn,
+    needsReview: false,
+  };
+}
+
+/**
+ * Riscrive un evento Xceed (dati UFFICIALI del venue: prezzi/orari/dress
+ * code/età reali) al livello gold-standard — FASE X3 (piano Xceed). A
+ * differenza di rewriteEvent (fonte scout Eventbrite, dati poveri/di terzi),
+ * qui la sorgente è ricca e autorevole: sezioni/FAQ derivano da offers/dress/
+ * age/doors REALI, mai inventati. Il marker usa il prefisso "xc-" per
+ * distinguere il ledger di questa sorgente da quello dello scout Eventbrite
+ * (lib/xceedLedger.ts vs lib/importLedger.ts).
+ */
+export async function rewriteXceedEvent(event: XceedEvent): Promise<RewrittenEvent> {
+  const meta = getVenueMeta(event.venueId);
+  const pricing = getVenuePricing(event.venueId);
+  const dateSlugPart = event.startISO.slice(0, 10);
+  const year = new Date(event.startISO).getFullYear() || new Date().getFullYear();
+
+  const offersText = event.offers
+    .map((o) => `- ${o.name} (${o.category}): ${o.price === 0 ? 'Free' : `€${o.price}`}`)
+    .join('\n');
+
+  const userMsg = `Venue: ${meta.name} (zone: ${meta.zone}, ${meta.locality})
+Event date: ${event.startISO} (year ${year})
+Official event name: ${event.name}
+Age policy (official, real): ${event.ageRange || 'not specified'}
+Dress code (official, real): ${event.dressCode || 'not specified'}
+Doors open (official, real, UTC time): ${event.doorsOpen || 'not specified'}
+Music genres (official): ${event.genres.join(', ') || 'not specified'}
+
+Official tickets/guest lists/tables for THIS event (real prices, from the venue's own booking platform — use these EXACT names and prices, never invent others):
+${offersText || '(no offers listed)'}
+
+Official event description (from the venue's own booking platform, may be a shared venue blurb — do not copy verbatim, rewrite in our voice):
+${event.description.slice(0, 2000)}`;
+
+  const [bodyResult, faqResult] = await Promise.all([
+    callSonnetJSON<BodyResult>(BODY_SYSTEM_PROMPT, userMsg, `xc-body:${event.name}`),
+    callSonnetJSON<FaqResult>(FAQ_SYSTEM_PROMPT, userMsg, `xc-faq:${event.name}`),
+  ]);
+
+  const bodyRequired: (keyof BodyResult)[] = ['titleEn', 'summaryEn', 'hook', 'sections', 'programme', 'seoTags', 'ebTags', 'imageAltEn', 'imageSlug'];
+  const bodyMissing = !bodyResult || bodyRequired.some((k) => {
+    const v = bodyResult[k];
+    return v === undefined || v === null || (Array.isArray(v) && v.length === 0) || v === '';
+  });
+  const faqMissing = !faqResult || !Array.isArray(faqResult.faqLong) || faqResult.faqLong.length < 15;
+
+  const xcEbId = `xc-${event.xceedId}`;
+
+  if (bodyMissing || faqMissing) {
+    console.error(`[eventRewriter] needsReview for Xceed "${event.name}" — bodyMissing=${bodyMissing} faqMissing=${faqMissing}`);
+    return {
+      titleEn: '', summaryEn: '', hook: '', sections: [], programme: [], faqLong: [],
+      seoTags: [], ebTags: [], imageAltEn: '', imageSlug: slugify(`${meta.name}-${event.name}-${dateSlugPart}`),
+      slugEn: '', descriptionPlainEn: '', needsReview: true,
+    };
+  }
+
+  const titleEn = clamp(bodyResult!.titleEn, 75);
+  const slugEn = slugify(`${titleEn}-${dateSlugPart}`) || slugify(`${meta.name}-${dateSlugPart}`);
+  const descriptionPlainEn = assembleGoldDescription(bodyResult!, faqResult!.faqLong.slice(0, 25), pricing, slugEn, xcEbId, event.affiliateUrl);
+
+  return {
+    titleEn,
+    summaryEn: clamp(bodyResult!.summaryEn, 140),
+    hook: bodyResult!.hook,
+    sections: bodyResult!.sections,
+    programme: bodyResult!.programme,
+    faqLong: faqResult!.faqLong.slice(0, 25),
+    seoTags: bodyResult!.seoTags.slice(0, 24),
+    ebTags: bodyResult!.ebTags.slice(0, 18),
+    imageAltEn: clamp(bodyResult!.imageAltEn, 125),
+    imageSlug: slugify(bodyResult!.imageSlug || `${meta.name}-${event.name}-${dateSlugPart}`),
     slugEn,
     descriptionPlainEn,
     needsReview: false,
