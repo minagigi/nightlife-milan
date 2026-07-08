@@ -87,6 +87,84 @@ export async function GET(request: Request) {
     return NextResponse.json({ eventId: realEventId, results });
   }
 
+  // FASE B0 (piano bilingual-everywhere): bisezione emoji-free su un draft
+  // usa-e-getta per capire se il "tetto ~1.300 char" scoperto in FASE X4 era in
+  // realtà causato dalle emoji (mai testate separatamente dalla lunghezza in
+  // quello spike) o è un limite reale indipendente. Crea 1 evento draft,
+  // scrive lunghezze crescenti di HTML realistico SENZA emoji, poi elimina.
+  if (searchParams.get('bisectLength') === '1') {
+    const jsonHeaders = { Authorization: `Bearer ${token}`, 'content-type': 'application/json' };
+    const results: Record<string, unknown> = {};
+
+    let realVenueId: string | undefined;
+    const venuesRes = await fetch(`${EVENTBRITE_API}/organizations/${ORG_ID}/venues/`, { headers });
+    const venuesBody = await venuesRes.json().catch(() => null);
+    realVenueId = venuesBody?.venues?.[0]?.id;
+
+    const createRes = await fetch(`${EVENTBRITE_API}/organizations/${ORG_ID}/events/`, {
+      method: 'POST', headers: jsonHeaders,
+      body: JSON.stringify({
+        event: {
+          name: { html: 'SPIKE B0 LENGTH TEST — DELETE ME' },
+          start: { timezone: 'Europe/Rome', utc: '2027-02-01T20:00:00Z' },
+          end: { timezone: 'Europe/Rome', utc: '2027-02-02T02:00:00Z' },
+          currency: 'EUR',
+          online_event: !realVenueId,
+          venue_id: realVenueId,
+          listed: false,
+          shareable: false,
+        },
+      }),
+    });
+    const createBody = await createRes.json().catch(() => null);
+    const testEventId = createRes.ok ? createBody?.id : null;
+    results.createEvent = { status: createRes.status, ok: createRes.ok, testEventId };
+
+    if (testEventId) {
+      // Genera un blocco HTML realistico emoji-free di lunghezza approssimativa target.
+      const buildFaqBlock = (n: number) => Array.from({ length: n }, (_, i) =>
+        `<h3>Q${i + 1}: What time does the special experience run at Just Me Milano on Saturday?</h3><p>A${i + 1}: The experience runs from 19:30 to 22:00 at Just Me Milano, price EUR ${15 + i}, dress code elegant, contact via WhatsApp for bookings and table confirmations before doors open.</p>`
+      ).join('');
+      const sections = Array.from({ length: 4 }, (_, i) =>
+        `<h3>Section ${i + 1}</h3><p>Realistic paragraph describing part ${i + 1} of the night at Just Me Milano, with concrete details like the time 19:3${i} and a price of EUR ${20 + i}, avoiding vague filler language and focusing on real facts from the source material.</p>`
+      ).join('');
+
+      for (const targetFaq of [8, 20, 35, 55, 80]) {
+        const html = [
+          '<p>Hook paragraph describing the Saturday night experience at Just Me Milano in concrete, non-generic terms with real proper nouns.</p>',
+          '<h2>Contacts and Bookings</h2><p>WhatsApp: +39 351 912 7047 - Email: concierge@nightlifemilan.com</p><p><a href="https://xceed.me/en/milano/event/white-party-134/220757/channel/nightlifemilan-1">BUY TICKETS - Official link</a></p><p><a href="https://xceed.me/en/milano/event/white-party-134/220757/channel/nightlifemilan-1">BOOK A TABLE - VIP and Bottle Service</a></p><p><a href="https://nightlifemilan.com/events/test-slug-for-b0-spike">Full event guide, programme and FAQ</a></p>',
+          '<h2>Important Legal Notice</h2><p>Online tickets are non-refundable except if entry is denied by security. Eventbrite registrations are information requests only, not valid for entry on their own.</p>',
+          sections,
+          '<h2>Evening Programme</h2><p>19:30 doors open. 22:00 main set starts. 05:00 closing.</p>',
+          `<h2>FAQ</h2>${buildFaqBlock(targetFaq)}`,
+          '<!-- nlm:src=xc-000000;slug-en=test-slug-for-b0-spike -->',
+        ].join('');
+
+        await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, {
+          method: 'POST', headers: jsonHeaders,
+          body: JSON.stringify({ event: { description: { html } } }),
+        });
+        const g = await (await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { headers })).json().catch(() => null);
+        const saved = g?.description?.html || '';
+        results[`faq_${targetFaq}`] = {
+          sentLength: html.length,
+          savedLength: saved.length,
+          survivedFully: saved.length >= html.length * 0.95,
+          markerSurvived: saved.includes('nlm:src=xc-000000;slug-en=test-slug-for-b0-spike'),
+          preview: saved.length < html.length * 0.95 ? saved.slice(-200) : undefined,
+        };
+        // Se questo giro NON sopravvive per intero, i gradini successivi
+        // sarebbero solo rumore — interrompi la bisezione qui.
+        if (saved.length < html.length * 0.95) break;
+      }
+
+      await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { method: 'DELETE', headers });
+      results.cleanedUp = true;
+    }
+
+    return NextResponse.json({ results });
+  }
+
   // Fix generico start/end — usato per correggere un errore di battitura mio
   // (fixTimeAndMusicProps ha date hardcoded per un evento specifico, applicato
   // per sbaglio a un evento diverso). Query: eventId, startUtc, endUtc.
