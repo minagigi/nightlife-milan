@@ -21,7 +21,7 @@ interface OwnOrgEvent {
   description?: { html?: string };
 }
 
-async function fetchOwnOrgEvents(): Promise<OwnOrgEvent[]> {
+export async function fetchOwnOrgEvents(): Promise<OwnOrgEvent[]> {
   const token = getEventbriteToken();
   if (!token) return [];
 
@@ -55,7 +55,12 @@ export interface Ledger {
   importedEbIds: Set<string>; // marker src:{ebId} già pubblicati
 }
 
-const SRC_MARKER_RE = /<!--\s*src:(\d+)\s*-->/;
+// Bug reale corretto: il marker generato da eventRewriter.ts v3 (FASE G3/G4B) è
+// cambiato in `<!-- nlm:src=X;slug-en=Y -->`, ma questo regex era rimasto al
+// vecchio formato v2 `<!-- src:N -->` — non avrebbe mai matchato nulla dopo
+// l'upgrade v3, rendendo il dedupe-by-marker silenziosamente inefficace
+// (restava comunque il fingerprint venueId|data come rete di sicurezza).
+const SRC_MARKER_RE = /nlm:src=([^;]+);slug-en=/;
 
 export async function buildLedger(): Promise<Ledger> {
   const ownEvents = await fetchOwnOrgEvents();

@@ -7,6 +7,7 @@ import { addToBlacklist } from '@/lib/promoterBlacklist';
 import { processPoster } from '@/lib/posterPipeline';
 import { publishEvent, sleep, PUBLISH_RATE_LIMIT_MS } from '@/lib/eventPublisher';
 import { notifyUrl } from '@/lib/googleIndexing';
+import { XCEED_VENUE_IDS } from '@/lib/xceedScout';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 300;
@@ -83,7 +84,11 @@ export async function GET(request: Request) {
   } catch (e) {
     return NextResponse.json({ ok: false, error: `Ledger build failed: ${(e as Error).message}` }, { status: 500 });
   }
-  const newCandidates = filterNewCandidates(scouted, ledger).slice(0, maxPerRun);
+  // FASE X4 regola 5: i 3 venue affiliati Xceed hanno una pipeline dedicata
+  // con dati ufficiali (prezzi/orari/età reali) — escluderli qui evita
+  // doppioni dalla fonte peggiore (scraping di terzi vs dati del venue stesso).
+  const nonXceedScouted = scouted.filter((s) => !XCEED_VENUE_IDS.includes(s.venueId));
+  const newCandidates = filterNewCandidates(nonXceedScouted, ledger).slice(0, maxPerRun);
 
   const knownOrganizers = addToBlacklist(scouted.map((s) => s.rawOrganizer).filter(Boolean));
 
@@ -144,7 +149,7 @@ export async function GET(request: Request) {
   return NextResponse.json({
     ok: true,
     dryRun,
-    scouted: scouted.length,
+    scouted: nonXceedScouted.length,
     new: newCandidates.length,
     published,
     skipped,
