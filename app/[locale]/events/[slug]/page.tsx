@@ -32,9 +32,19 @@ const FALLBACK_GALLERY = [
 ];
 
 const GALLERY_DESCRIPTORS: Record<'en' | 'it', string[]> = {
-  en: ['VIP tables and lounge area', 'dancefloor and DJ booth', 'bar and champagne service', 'entrance and crowd atmosphere'],
-  it: ['area tavoli VIP e lounge', 'pista da ballo e consolle DJ', 'bar e servizio champagne', 'ingresso e atmosfera del pubblico'],
+  en: [
+    'VIP tables and lounge area', 'dancefloor and DJ booth', 'bar and champagne service',
+    'entrance and crowd atmosphere', 'main room interior', 'private booth seating',
+  ],
+  it: [
+    'area tavoli VIP e lounge', 'pista da ballo e consolle DJ', 'bar e servizio champagne',
+    'ingresso e atmosfera del pubblico', 'interno della sala principale', 'area privé con divani',
+  ],
 };
+
+// FASE F3 (piano fix-i18n-posters-redo-justme): fino a 6 foto reali della
+// venue invece di 4 — più copertura visiva sulla pagina evento.
+const GALLERY_MAX = 6;
 
 /**
  * Galleria foto reali della venue (non più 4 foto stock identiche su ogni
@@ -47,7 +57,7 @@ function buildVenueGalleryImages(venue: Venue, eventTitle: string, locale: strin
   const descriptors = GALLERY_DESCRIPTORS[isIt ? 'it' : 'en'];
   const venueName = getLocalizedText(venue.localizedContent.name, locale);
 
-  return sources.slice(0, 4).map((src, i) => {
+  return sources.slice(0, GALLERY_MAX).map((src, i) => {
     const descriptor = descriptors[i % descriptors.length];
     const alt = isIt
       ? `${venueName} Milano — ${descriptor} durante ${eventTitle}`
@@ -528,10 +538,10 @@ export default async function EventPage({ params }: Props) {
                 ? `${venueName} è uno dei locali più esclusivi di Milano, situato in ${venue.address.streetAddress}. Prenota il tuo tavolo VIP o inserisciti in guestlist per garantirti la migliore esperienza.`
                 : `${venueName} is one of Milan's most exclusive venues, located at ${venue.address.streetAddress}. Book your VIP table or get on the guestlist to ensure the best experience.`}
             </p>
-            <div className="mt-6 grid grid-cols-2 gap-4 not-prose">
+            <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-4 not-prose">
               {buildVenueGalleryImages(venue, title, locale).map((img, i) => (
                 <div key={i} className="relative h-32 rounded-xl overflow-hidden border border-white/8">
-                  <Image src={img.src} alt={img.alt} title={img.alt} fill className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
+                  <Image src={img.src} alt={img.alt} title={img.alt} fill className="object-cover" sizes="(max-width: 768px) 50vw, 33vw" />
                 </div>
               ))}
             </div>
