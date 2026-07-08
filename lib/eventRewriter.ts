@@ -32,15 +32,18 @@ export interface ProgrammeSlot {
   start: string;
   end?: string;
   title: string;
+  titleIt: string;
 }
 
 export interface RewrittenEvent {
   titleEn: string;
   summaryEn: string;
   hook: string;
-  sections: { emoji: string; title: string; body: string }[];
+  // sezioni/programma/FAQ sono bilingui — il sito (components/GoldEventContent.tsx)
+  // sceglie il campo giusto per locale. Eventbrite resta EN-only (usa solo hook/titleEn/summaryEn).
+  sections: { emoji: string; title: string; titleIt: string; body: string; bodyIt: string }[];
   programme: ProgrammeSlot[];
-  faqLong: { question: string; answer: string }[];
+  faqLong: { question: string; questionIt: string; answer: string; answerIt: string }[];
   seoTags: string[];
   ebTags: string[];
   imageAltEn: string;
@@ -86,15 +89,17 @@ REBRAND RULES (source is a third-party promoter listing, not us):
 - The VENUE name is not a third-party brand — keep it.
 - Keep factual data (date, time, venue, music, price) exactly as given. Never invent details, DJ names, or experiences not present in the source.
 
-TASK: produce the DYNAMIC content blocks of a long-form (gold-standard) English event listing — NOT the static blocks (contacts/legal/pricing are added separately by code). Base "sections" and "programme" ONLY on what the source material actually describes — if the source only mentions an aperitivo and a DJ set, write two sections, not four invented ones.
+TASK: produce the DYNAMIC content blocks of a long-form (gold-standard) event listing — NOT the static blocks (contacts/legal/pricing are added separately by code). Base "sections" and "programme" ONLY on what the source material actually describes — if the source only mentions an aperitivo and a DJ set, write two sections, not four invented ones.
+
+The site renders BOTH languages (EN default, IT via a language switcher) — "sections" and "programme" need a genuine Italian translation (titleIt/bodyIt/titleIt), not a copy of the English text. Keep the same insider voice and anti-AI-tell rules in Italian too (no filler like "nel cuore di", no rule-of-three padding).
 
 OUTPUT — return ONLY a JSON object with these exact keys, no markdown, no prose:
 {
   "titleEn": "max 75 chars, format '[Experience] @ [Venue] - [Weekday] [Month Day] [Year]'",
   "summaryEn": "max 140 chars, with date + venue + {{WHATSAPP}}",
-  "hook": "3-5 sentences, the experience in a nutshell, with proper nouns (venue, landmark, date)",
-  "sections": [{"emoji": "🗼", "title": "SECTION TITLE", "body": "1-2 paragraphs, only real details from the source"}],
-  "programme": [{"start": "19:30", "end": "22:00", "title": "practical, actionable description of this time slot"}],
+  "hook": "3-5 sentences, the experience in a nutshell, with proper nouns (venue, landmark, date) — English only, used for Eventbrite",
+  "sections": [{"emoji": "🗼", "title": "SECTION TITLE (English)", "titleIt": "TITOLO SEZIONE (italiano)", "body": "1-2 paragraphs in English, only real details from the source", "bodyIt": "stessi 1-2 paragrafi tradotti in italiano naturale, stessa voce"}],
+  "programme": [{"start": "19:30", "end": "22:00", "title": "practical, actionable description of this time slot (English)", "titleIt": "stessa descrizione in italiano"}],
   "seoTags": ["24 lowercase SEO keywords, e.g. milano nightlife, saturday night milan, ..."],
   "ebTags": ["18 snake_case tags, e.g. milan_nightlife, saturday_night, ..."],
   "imageAltEn": "SEO alt text max 125 chars: venue + night type + Milan",
@@ -111,16 +116,18 @@ Each answer: 50-70 words, keyword-rich, repeats the FULL date and venue name (th
 
 Contact placeholder: use the literal token {{WHATSAPP}} wherever a phone/WhatsApp contact belongs — never invent a number. Never invent prices, DJ names, or details not given to you; if no table pricing was provided, keep that FAQ generic ("contact our concierge for options and pricing").
 
-OUTPUT — return ONLY a JSON object: {"faqLong": [{"question": "...", "answer": "..."}, ... 25 items]}`;
+The site renders BOTH languages (EN default, IT via a language switcher) — each FAQ needs a genuine Italian translation (questionIt/answerIt), not a copy of the English text. Same voice, same length target, same {{WHATSAPP}} placeholder.
+
+OUTPUT — return ONLY a JSON object: {"faqLong": [{"question": "... (English)", "questionIt": "... (italiano)", "answer": "... (English)", "answerIt": "... (italiano)"}, ... 25 items]}`;
 
 interface BodyResult {
   titleEn: string; summaryEn: string; hook: string;
-  sections: { emoji: string; title: string; body: string }[];
+  sections: { emoji: string; title: string; titleIt: string; body: string; bodyIt: string }[];
   programme: ProgrammeSlot[];
   seoTags: string[]; ebTags: string[];
   imageAltEn: string; imageSlug: string;
 }
-interface FaqResult { faqLong: { question: string; answer: string }[] }
+interface FaqResult { faqLong: { question: string; questionIt: string; answer: string; answerIt: string }[] }
 
 async function callSonnetJSON<T>(system: string, userMsg: string, label: string): Promise<T | null> {
   const key = process.env.ANTHROPIC_API_KEY;

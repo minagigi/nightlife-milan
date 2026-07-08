@@ -40,13 +40,13 @@ export default function GoldEventContent({ data, locale }: { data: RichContentPa
         </a>
       </div>
 
-      {/* Sezioni gold */}
+      {/* Sezioni gold — bilingui, sceglie il campo in base a locale */}
       {rewritten.sections?.map((s, i) => (
         <div key={i} className="mb-8">
           <h2 className="text-2xl font-serif font-bold text-champagne mb-3">
-            {s.emoji} {s.title}
+            {s.emoji} {isIt ? s.titleIt : s.title}
           </h2>
-          <p className="text-white/70 leading-relaxed">{s.body}</p>
+          <p className="text-white/70 leading-relaxed">{isIt ? s.bodyIt : s.body}</p>
         </div>
       ))}
 
@@ -62,7 +62,7 @@ export default function GoldEventContent({ data, locale }: { data: RichContentPa
                 <span className="text-champagne font-mono whitespace-nowrap">
                   {slot.start}{slot.end ? `–${slot.end}` : ''}
                 </span>
-                <span className="text-white/60">{slot.title}</span>
+                <span className="text-white/60">{isIt ? slot.titleIt : slot.title}</span>
               </div>
             ))}
           </div>
@@ -99,11 +99,11 @@ export default function GoldEventContent({ data, locale }: { data: RichContentPa
                   className="w-full text-left p-5 flex justify-between items-center gap-4"
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 >
-                  <span className="text-white font-medium text-sm">{faq.question}</span>
+                  <span className="text-white font-medium text-sm">{isIt ? faq.questionIt : faq.question}</span>
                   <ChevronDown className={`text-champagne shrink-0 transition-transform ${openIndex === index ? 'rotate-180' : ''}`} size={18} />
                 </button>
                 {openIndex === index && (
-                  <div className="px-5 pb-5 text-white/50 text-sm leading-relaxed">{faq.answer}</div>
+                  <div className="px-5 pb-5 text-white/50 text-sm leading-relaxed">{isIt ? faq.answerIt : faq.answer}</div>
                 )}
               </div>
             ))}
