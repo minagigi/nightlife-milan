@@ -45,10 +45,31 @@ function detectGenre(text: string): MusicGenre[] {
 // Eventbrite, e il poll "200 = pagina viva" del publisher risultava un falso
 // positivo (una pagina ESISTENTE ma per uno slug diverso/inesistente veniva
 // comunque scambiata per quella giusta).
-const SLUG_MARKER_RE = /nlm:src=([^;]+);slug-en=([a-z0-9-]+)/;
+//
+// FASE F1 (2026-07-08): con l'architettura "eventi separati" (due listing
+// Eventbrite per serata, uno EN uno IT) il marker include anche la lingua
+// (`nlm:src={baseId}-{lang};slug-en=...`) — i marker dei 3 eventi legacy
+// (pre-pivot) restano nel vecchio formato senza lingua. Bug reale riportato
+// dall'utente con screenshot: senza distinguere per lingua, ogni serata
+// produceva DUE card identiche su "Upcoming This Week" (una per listing) —
+// la card IT mostrava comunque il titolo italiano ma affiancata alla EN,
+// invece di essercene una sola che cambia lingua col sito.
+const NEW_MARKER_RE = /nlm:src=(.+?)-(en|it);slug-en=([a-z0-9-]+)/;
+const LEGACY_MARKER_RE = /nlm:src=([^;]+);slug-en=([a-z0-9-]+)/;
 
-function extractSlugMarker(text: string): string | undefined {
-  return text?.match(SLUG_MARKER_RE)?.[2];
+interface ParsedMarker {
+  baseId: string;
+  lang?: 'en' | 'it';
+  slug: string;
+}
+
+function parseMarker(text: string | undefined): ParsedMarker | undefined {
+  if (!text) return undefined;
+  const fresh = text.match(NEW_MARKER_RE);
+  if (fresh) return { baseId: fresh[1], lang: fresh[2] as 'en' | 'it', slug: fresh[3] };
+  const legacy = text.match(LEGACY_MARKER_RE);
+  if (legacy) return { baseId: legacy[1], slug: legacy[2] };
+  return undefined;
 }
 
 /** Extract the first Xceed link from an Eventbrite event description (HTML or plain text). */
@@ -102,6 +123,47 @@ export async function debugEventbrite() {
   };
 }
 
+interface RawEbEvent {
+  id: string;
+  name: { text: string };
+  description?: { text: string; html?: string };
+  start: { local: string };
+  end: { local: string };
+  status: string;
+  logo?: { url: string; original?: { url: string } };
+  venue?: { name: string };
+  ticket_classes?: Array<{ free: boolean; cost?: { major_value: string } }>;
+}
+
+/** Costruisce l'Event condiviso da UN listing (venue/data/prezzo/immagine/xceedUrl —
+ * identici tra i due listing EN/IT della stessa serata, quindi presi da uno qualsiasi). */
+function buildSharedFields(ev: RawEbEvent, title: string, desc: string) {
+  const venueId = mapVenueId(ev.venue?.name || '');
+  return {
+    venueId,
+    genre: detectGenre(title + ' ' + desc),
+    dateISO: `${ev.start.local}+01:00`,
+    endDateISO: `${ev.end.local}+01:00`,
+    pricing: { entry: extractEntryPrice(ev.ticket_classes), currency: 'EUR' as const, tableMinSpend: null },
+    image: ev.logo?.url || ev.logo?.original?.url,
+    isSpecial: /live|special|vip/i.test(title),
+    isTrending: ev.status === 'live',
+    xceedUrl:
+      extractXceedUrl(ev.description?.html || '') ||
+      extractXceedUrl(ev.description?.text || '') ||
+      `https://www.eventbrite.com/e/${ev.id}`,
+  };
+}
+
+/** Prima frase/paragrafo in chiaro dalla description — usata SOLO per i listing
+ * "eventi separati" (marker con lingua): sono già il nostro contenuto gold-standard,
+ * riscriverli con l'AI generica sarebbe ridondante e, a credito API esaurito,
+ * degraderebbe un testo già corretto al fallback rule-based. */
+function shortDescFromText(text: string | undefined, fallback: string): string {
+  const clean = (text || '').replace(/\s+/g, ' ').trim();
+  return clean ? clean.slice(0, 200) : fallback;
+}
+
 export async function fetchEventbriteEvents(): Promise<Event[]> {
   const token = getEventbriteToken();
   if (!token) return [];
@@ -118,58 +180,76 @@ export async function fetchEventbriteEvents(): Promise<Event[]> {
     if (!res.ok) return [];
 
     const data = await res.json();
-    const raw = (data.events || []) as Array<{
-      id: string;
-      name: { text: string };
-      description?: { text: string; html?: string };
-      start: { local: string };
-      end: { local: string };
-      status: string;
-      logo?: { url: string; original?: { url: string } };
-      venue?: { name: string };
-      ticket_classes?: Array<{ free: boolean; cost?: { major_value: string } }>;
-    }>;
+    const raw = (data.events || []) as RawEbEvent[];
 
-    // SEO rewrite each event (AI in the Nightlife Milan voice, fail-safe to
-    // rule-based). Cached by content hash so unchanged events aren't re-billed.
-    const events = await Promise.all(
-      raw.map(async (ev): Promise<Event> => {
+    // FASE F1 (2026-07-08): raggruppare per baseId del marker — l'architettura
+    // "eventi separati" pubblica DUE listing (EN+IT) per ogni serata reale; senza
+    // raggruppare, ognuno diventava una Event a sé, mostrando due card duplicate
+    // (una per lingua) sullo stesso carosello invece di una sola card bilingue.
+    interface Group { baseId: string; en?: RawEbEvent; it?: RawEbEvent; singles: RawEbEvent[] }
+    const groups = new Map<string, Group>();
+
+    for (const ev of raw) {
+      const marker = parseMarker(ev.description?.text) || parseMarker(ev.description?.html);
+      const baseId = marker?.baseId || ev.id;
+      const group = groups.get(baseId) || { baseId, singles: [] };
+      if (marker?.lang === 'en') group.en = ev;
+      else if (marker?.lang === 'it') group.it = ev;
+      else group.singles.push(ev);
+      groups.set(baseId, group);
+    }
+
+    const events: Event[] = [];
+
+    for (const group of groups.values()) {
+      if (group.en && group.it) {
+        // Coppia EN+IT completa — UNA sola card bilingue, niente riscrittura AI:
+        // il contenuto è già il nostro gold-standard in entrambe le lingue.
+        const marker = parseMarker(group.en.description?.text) || parseMarker(group.en.description?.html);
+        const titleEn = cleanTitle(group.en.name.text);
+        const titleIt = cleanTitle(group.it.name.text);
+        const slug = marker?.slug || '';
+        const shared = buildSharedFields(group.en, titleEn, group.en.description?.text || '');
+
+        events.push({
+          id: `eb-${group.baseId}`,
+          ...shared,
+          localizedContent: {
+            title: { en: titleEn, it: titleIt },
+            shortDescription: {
+              en: shortDescFromText(group.en.description?.text, titleEn),
+              it: shortDescFromText(group.it.description?.text, titleIt),
+            },
+            slug: { en: slug, it: slug },
+          },
+        });
+        continue;
+      }
+
+      // Gruppo parziale (solo una lingua pubblicata finora) o singolo listing
+      // legacy/scout (marker senza lingua, o nessun marker) — comportamento
+      // invariato: riscrittura AI generica, fail-safe a rule-based.
+      for (const ev of [group.en, group.it, ...group.singles].filter((e): e is RawEbEvent => !!e)) {
         const title = cleanTitle(ev.name.text);
         const desc = (ev.description?.text || title).slice(0, 600);
-        const venueId = mapVenueId(ev.venue?.name || '');
-        const dateISO = `${ev.start.local}+01:00`;
+        const shared = buildSharedFields(ev, title, desc);
 
-        const seo = await rewriteEventSEO({ title, description: desc, venueId, dateISO });
-        const markerSlug = extractSlugMarker(ev.description?.text || '') || extractSlugMarker(ev.description?.html || '');
-        const slugEn = markerSlug || seo.slugEn;
-        const slugIt = markerSlug || seo.slugIt;
+        const seo = await rewriteEventSEO({ title, description: desc, venueId: shared.venueId, dateISO: shared.dateISO });
+        const marker = parseMarker(ev.description?.text) || parseMarker(ev.description?.html);
+        const slugEn = marker?.slug || seo.slugEn;
+        const slugIt = marker?.slug || seo.slugIt;
 
-        return {
+        events.push({
           id: `eb-${ev.id}`,
-          venueId,
-          genre: detectGenre(title + ' ' + desc),
-          dateISO,
-          endDateISO: `${ev.end.local}+01:00`,
-          pricing: {
-            entry: extractEntryPrice(ev.ticket_classes),
-            currency: 'EUR',
-            tableMinSpend: null,
-          },
+          ...shared,
           localizedContent: {
             title: { en: seo.titleEn, it: seo.titleIt },
             shortDescription: { en: seo.descEn, it: seo.descIt },
             slug: { en: slugEn, it: slugIt },
           },
-          image: ev.logo?.url || ev.logo?.original?.url,
-          isSpecial: /live|special|vip/i.test(title),
-          isTrending: ev.status === 'live',
-          xceedUrl:
-            extractXceedUrl(ev.description?.html || '') ||
-            extractXceedUrl(ev.description?.text || '') ||
-            `https://www.eventbrite.com/e/${ev.id}`,
-        };
-      })
-    );
+        });
+      }
+    }
 
     return events;
   } catch {
