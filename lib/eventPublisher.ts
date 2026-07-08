@@ -64,6 +64,20 @@ function toEventbriteUtc(dateISO: string): string {
 }
 
 /**
+ * Normalizza una data GIÀ in UTC vero (es. XceedEvent.startISO, che arriva dal
+ * JSON-LD "startDate" con suffisso "Z" reale) al formato richiesto da
+ * Eventbrite — SENZA applicare alcuna conversione di offset.
+ *
+ * Bug reale scoperto in FASE X4 (primo publish Xceed): passare startISO già-UTC
+ * a `toEventbriteUtc` (pensata per orari "wall-clock" locali senza offset, vedi
+ * sopra) sottrae l'offset di Roma UNA SECONDA VOLTA, pubblicando l'evento 2 ore
+ * prima dell'orario reale (19:30 Rome → mostrato come 17:30 Rome su Eventbrite).
+ */
+function normalizeAlreadyUtc(isoUtc: string): string {
+  return new Date(isoUtc).toISOString().replace(/\.\d{3}Z$/, 'Z');
+}
+
+/**
  * Trova (o crea) il venue Eventbrite corrispondente al nostro venueId interno.
  * Cache in-memory per la durata della run — non ricreare lo stesso venue Eventbrite
  * ad ogni chiamata.
@@ -229,8 +243,13 @@ export async function replaceEventImage(eventId: string, poster: PosterResult): 
 
 interface PublishCoreParams {
   venueId: string;
-  dateISO: string;
-  endISO?: string;
+  /** Già nel formato Eventbrite "YYYY-MM-DDThh:mm:ssZ" (UTC vero) — il
+   * chiamante sceglie la conversione giusta per la sua sorgente (vedi
+   * toEventbriteUtc per date wall-clock locali, normalizeAlreadyUtc per date
+   * già UTC come XceedEvent.startISO). Bug reale evitato qui: applicare la
+   * conversione "locale" a una data già-UTC sfasa l'evento di ore. */
+  startUtc: string;
+  endUtc: string;
   titleEn: string;
   summaryEn: string;
   description: string;
@@ -256,7 +275,7 @@ async function publishCore(p: PublishCoreParams): Promise<PublishResult> {
   const venueEbId = await resolveEventbriteVenueId(token, p.venueId, p.dryRun);
   if (!venueEbId) return { ok: false, reason: `Could not resolve/create Eventbrite venue for ${p.venueId}` };
 
-  const { dateISO, endISO, titleEn, summaryEn, description, poster, ageRestriction, doorTimeISO, dryRun } = p;
+  const { startUtc, endUtc, titleEn, summaryEn, description, poster, ageRestriction, doorTimeISO, dryRun } = p;
 
   if (dryRun) {
     return {
@@ -279,8 +298,8 @@ async function publishCore(p: PublishCoreParams): Promise<PublishResult> {
         event: {
           name: { html: titleEn },
           summary: summaryEn,
-          start: { timezone: 'Europe/Rome', utc: toEventbriteUtc(dateISO) },
-          end: { timezone: 'Europe/Rome', utc: toEventbriteUtc(endISO || dateISO) },
+          start: { timezone: 'Europe/Rome', utc: startUtc },
+          end: { timezone: 'Europe/Rome', utc: endUtc },
           currency: 'EUR',
           venue_id: venueEbId,
           online_event: false,
@@ -370,7 +389,7 @@ async function publishCore(p: PublishCoreParams): Promise<PublishResult> {
           minimum_quantity: 1,
           maximum_quantity: 10,
           hide_sale_dates: false,
-          sales_end: toEventbriteUtc(endISO || dateISO),
+          sales_end: endUtc,
           description: `This listing is only a reservation request and NOT a real ticket purchase.\nTo be accredited/confirmed, you must contact Luis Nightlife at ☎️ ${CONTACT.whatsapp.number}.`,
         },
       }),
@@ -428,16 +447,19 @@ export async function publishEvent(
 ): Promise<PublishResult> {
   const pricing = getVenuePricing(scouted.venueId);
   const ageRestriction = pricing.ageLimit ? `${pricing.ageLimit}+` : undefined;
+  const startUtc = toEventbriteUtc(scouted.dateISO);
+  const endUtc = toEventbriteUtc(scouted.endISO || scouted.dateISO);
+
   let doorTimeISO: string | undefined;
   if (pricing.checkinMinutesBefore) {
-    const startMs = new Date(toEventbriteUtc(scouted.dateISO)).getTime() - pricing.checkinMinutesBefore * 60000;
+    const startMs = new Date(startUtc).getTime() - pricing.checkinMinutesBefore * 60000;
     doorTimeISO = new Date(startMs).toISOString().replace(/\.\d{3}Z$/, 'Z');
   }
 
   return publishCore({
     venueId: scouted.venueId,
-    dateISO: scouted.dateISO,
-    endISO: scouted.endISO,
+    startUtc,
+    endUtc,
     titleEn: rewritten.titleEn,
     summaryEn: rewritten.summaryEn,
     description: sanitizedDescription,
@@ -459,20 +481,25 @@ export async function publishXceedEvent(
   poster: PosterResult,
   dryRun: boolean
 ): Promise<PublishResult> {
+  // xceed.startISO/endISO sono GIÀ UTC vero (dal JSON-LD "startDate") — usare
+  // normalizeAlreadyUtc, MAI toEventbriteUtc (che sottrarrebbe l'offset di Roma
+  // una seconda volta, vedi bug reale documentato sopra la funzione).
+  const startUtc = normalizeAlreadyUtc(xceed.startISO);
+  const endUtc = normalizeAlreadyUtc(xceed.endISO || xceed.startISO);
+
   // xceed.ageRange è già nel formato "18+"/"21+"; xceed.doorsOpen è "HH:MM" UTC
   // (orario ufficiale del venue, non una data — va ricombinato con la data
-  // reale dell'evento per ottenere un door_time completo valido).
+  // reale dell'evento, presa da startUtc già corretto, per un door_time valido).
   let doorTimeISO: string | undefined;
   if (xceed.doorsOpen) {
-    const eventUtc = toEventbriteUtc(xceed.startISO);
-    const datePart = eventUtc.slice(0, 10);
+    const datePart = startUtc.slice(0, 10);
     doorTimeISO = `${datePart}T${xceed.doorsOpen}:00Z`;
   }
 
   return publishCore({
     venueId: xceed.venueId,
-    dateISO: xceed.startISO,
-    endISO: xceed.endISO,
+    startUtc,
+    endUtc,
     titleEn: rewritten.titleEn,
     summaryEn: rewritten.summaryEn,
     description: sanitizedDescription,
