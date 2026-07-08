@@ -87,6 +87,32 @@ export async function GET(request: Request) {
     return NextResponse.json({ eventId: realEventId, results });
   }
 
+  // Repair generico: ricostruisce la description corretta (senza il bug
+  // sanitize/emoji, ora fixato nel codice) per un evento Xceed già pubblicato
+  // con contenuto rotto. Query: eventId, hook, affiliateUrl, slugEn, xceedId.
+  if (searchParams.get('repairXceedDescription') === '1') {
+    const realEventId = searchParams.get('eventId');
+    const hook = searchParams.get('hook');
+    const affiliateUrl = searchParams.get('affiliateUrl');
+    const slugEn = searchParams.get('slugEn');
+    const xceedId = searchParams.get('xceedId');
+    if (!realEventId || !hook || !affiliateUrl || !slugEn || !xceedId) {
+      return NextResponse.json({ error: 'eventId, hook, affiliateUrl, slugEn, xceedId required' }, { status: 400 });
+    }
+    const jsonHeaders = { Authorization: `Bearer ${token}`, 'content-type': 'application/json' };
+    const siteUrl = `https://nightlifemilan.com/events/${slugEn}`;
+    const html = `<p>${hook}</p>` +
+      `<p>WhatsApp: +39 351 912 7047 - Email: concierge@nightlifemilan.com</p>` +
+      `<p><a href="${affiliateUrl}">BUY TICKETS — Official link</a></p>` +
+      `<p><a href="${affiliateUrl}">BOOK A TABLE — VIP &amp; Bottle Service</a></p>` +
+      `<p><a href="${siteUrl}">Full event guide, programme &amp; 25 FAQ</a></p>` +
+      `<p>IMPORTANT: Eventbrite registrations are information requests only, not valid for entry on their own. Online tickets are non-refundable except if entry is denied by security.</p>` +
+      `<!-- nlm:src=xc-${xceedId};slug-en=${slugEn} -->`;
+    await fetch(`${EVENTBRITE_API}/events/${realEventId}/`, { method: 'POST', headers: jsonHeaders, body: JSON.stringify({ event: { description: { html } } }) });
+    const g = await (await fetch(`${EVENTBRITE_API}/events/${realEventId}/`, { headers })).json().catch(() => null);
+    return NextResponse.json({ eventId: realEventId, sentLength: html.length, saved: g?.description });
+  }
+
   // Corregge l'orario sbagliato (bug doppia conversione, ora fixato nel codice)
   // e ritesta music_properties sull'evento reale già pubblicato.
   if (searchParams.get('fixTimeAndMusicProps') === '1') {
