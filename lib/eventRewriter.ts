@@ -69,6 +69,7 @@ export interface RewrittenEvent {
   descriptionEn: string; // description COMPLETA per l'evento Eventbrite EN, già sanitizzata
   descriptionIt: string; // description COMPLETA per l'evento Eventbrite IT, già sanitizzata
   needsReview: boolean;
+  debugError?: string;
 }
 
 function clamp(s: string, max: number): string {
@@ -150,9 +151,11 @@ interface BodyResult {
 }
 interface FaqResult { faqLong: { question: string; questionIt: string; answer: string; answerIt: string }[] }
 
-async function callSonnetJSON<T>(system: string, userMsg: string, label: string): Promise<T | null> {
+interface SonnetResult<T> { data: T | null; error?: string }
+
+async function callSonnetJSON<T>(system: string, userMsg: string, label: string): Promise<SonnetResult<T>> {
   const key = process.env.ANTHROPIC_API_KEY;
-  if (!key) return null;
+  if (!key) return { data: null, error: 'ANTHROPIC_API_KEY not set' };
 
   const controller = new AbortController();
   // 120s/16000 tok: l'output bilingue (corpo+FAQ raddoppiati) richiede più
@@ -167,8 +170,9 @@ async function callSonnetJSON<T>(system: string, userMsg: string, label: string)
       body: JSON.stringify({ model: MODEL, max_tokens: 16000, system, messages: [{ role: 'user', content: userMsg }] }),
     });
     if (!res.ok) {
-      console.error(`[eventRewriter] Anthropic API ${res.status} (${label}): ${(await res.text()).slice(0, 300)}`);
-      return null;
+      const errText = `Anthropic API ${res.status} (${label}): ${(await res.text()).slice(0, 300)}`;
+      console.error(`[eventRewriter] ${errText}`);
+      return { data: null, error: errText };
     }
     const data = (await res.json()) as { stop_reason?: string; content: Array<{ type: string; text?: string }> };
     if (data.stop_reason === 'max_tokens') {
@@ -177,14 +181,16 @@ async function callSonnetJSON<T>(system: string, userMsg: string, label: string)
     const text = data.content?.find((c) => c.type === 'text')?.text || '';
     const jsonStr = text.slice(text.indexOf('{'), text.lastIndexOf('}') + 1);
     try {
-      return JSON.parse(jsonStr) as T;
+      return { data: JSON.parse(jsonStr) as T };
     } catch (parseErr) {
-      console.error(`[eventRewriter] JSON parse failed (${label}): ${(parseErr as Error).message}. Raw (first 500): ${text.slice(0, 500)}`);
-      return null;
+      const errText = `JSON parse failed (${label}): ${(parseErr as Error).message}. Raw (first 500): ${text.slice(0, 500)}`;
+      console.error(`[eventRewriter] ${errText}`);
+      return { data: null, error: errText };
     }
   } catch (e) {
-    console.error(`[eventRewriter] Fetch/abort error (${label}): ${(e as Error).message}`);
-    return null;
+    const errText = `Fetch/abort error (${label}): ${(e as Error).message}`;
+    console.error(`[eventRewriter] ${errText}`);
+    return { data: null, error: errText };
   } finally {
     clearTimeout(timeout);
   }
@@ -340,12 +346,13 @@ function isBodyMissing(bodyResult: BodyResult | null): boolean {
   });
 }
 
-function emptyRewrittenEvent(imageSlug: string): RewrittenEvent {
+function emptyRewrittenEvent(imageSlug: string, debugError?: string): RewrittenEvent {
   return {
     titleEn: '', titleIt: '', summaryEn: '', summaryIt: '', hook: '', hookIt: '',
     sections: [], programme: [], faqLong: [], seoTags: [], seoTagsIt: [], ebTags: [],
     imageAltEn: '', imageAltIt: '', imageSlug, slugEn: '', descriptionEn: '', descriptionIt: '',
     needsReview: true,
+    debugError,
   };
 }
 
@@ -368,17 +375,20 @@ Raw title (from third-party promoter, needs full rewrite): ${event.rawTitle}
 
 Raw description (from third-party promoter, needs full rewrite, strip any contacts/brands): ${event.rawDescription.slice(0, 2000)}`;
 
-  const [bodyResult, faqResult] = await Promise.all([
+  const [bodyRes, faqRes] = await Promise.all([
     callSonnetJSON<BodyResult>(BODY_SYSTEM_PROMPT, userMsg, `body:${event.rawTitle}`),
     callSonnetJSON<FaqResult>(FAQ_SYSTEM_PROMPT, userMsg, `faq:${event.rawTitle}`),
   ]);
+  const bodyResult = bodyRes.data;
+  const faqResult = faqRes.data;
 
   const bodyMissing = isBodyMissing(bodyResult);
   const faqMissing = !faqResult || !Array.isArray(faqResult.faqLong) || faqResult.faqLong.length < 15;
 
   if (bodyMissing || faqMissing) {
-    console.error(`[eventRewriter] needsReview for "${event.rawTitle}" — bodyMissing=${bodyMissing} faqMissing=${faqMissing}`);
-    return emptyRewrittenEvent(slugify(`${meta.name}-${event.rawTitle}-${dateSlugPart}`));
+    const debugError = [bodyMissing && (bodyRes.error || 'body fields missing'), faqMissing && (faqRes.error || 'faq fields missing')].filter(Boolean).join(' | ');
+    console.error(`[eventRewriter] needsReview for "${event.rawTitle}" — bodyMissing=${bodyMissing} faqMissing=${faqMissing} — ${debugError}`);
+    return emptyRewrittenEvent(slugify(`${meta.name}-${event.rawTitle}-${dateSlugPart}`), debugError);
   }
 
   const titleEn = clamp(bodyResult!.titleEn, 75);
@@ -445,18 +455,21 @@ ${offersText || '(no offers listed)'}
 Official event description (from the venue's own booking platform, may be a shared venue blurb — do not copy verbatim, rewrite in our voice):
 ${event.description.slice(0, 2000)}`;
 
-  const [bodyResult, faqResult] = await Promise.all([
+  const [bodyRes, faqRes] = await Promise.all([
     callSonnetJSON<BodyResult>(BODY_SYSTEM_PROMPT, userMsg, `xc-body:${event.name}`),
     callSonnetJSON<FaqResult>(FAQ_SYSTEM_PROMPT, userMsg, `xc-faq:${event.name}`),
   ]);
+  const bodyResult = bodyRes.data;
+  const faqResult = faqRes.data;
 
   const bodyMissing = isBodyMissing(bodyResult);
   const faqMissing = !faqResult || !Array.isArray(faqResult.faqLong) || faqResult.faqLong.length < 15;
   const xcEbIdBase = `xc-${event.xceedId}`;
 
   if (bodyMissing || faqMissing) {
-    console.error(`[eventRewriter] needsReview for Xceed "${event.name}" — bodyMissing=${bodyMissing} faqMissing=${faqMissing}`);
-    return emptyRewrittenEvent(slugify(`${meta.name}-${event.name}-${dateSlugPart}`));
+    const debugError = [bodyMissing && (bodyRes.error || 'body fields missing'), faqMissing && (faqRes.error || 'faq fields missing')].filter(Boolean).join(' | ');
+    console.error(`[eventRewriter] needsReview for Xceed "${event.name}" — bodyMissing=${bodyMissing} faqMissing=${faqMissing} — ${debugError}`);
+    return emptyRewrittenEvent(slugify(`${meta.name}-${event.name}-${dateSlugPart}`), debugError);
   }
 
   const titleEn = clamp(bodyResult!.titleEn, 75);

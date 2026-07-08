@@ -109,7 +109,7 @@ export async function GET(request: Request) {
       const rewritten = await rewriteXceedEvent(candidate);
 
       if (rewritten.needsReview) {
-        skipped.push({ title: candidate.name, reason: 'needsReview: AI rewrite failed or incomplete' });
+        skipped.push({ title: candidate.name, reason: `needsReview: ${rewritten.debugError || 'AI rewrite failed or incomplete'}` });
         continue;
       }
 
