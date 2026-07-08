@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { scoutThirdPartyEvents } from '@/lib/eventScout';
 import { buildLedger, filterNewCandidates } from '@/lib/importLedger';
 import { rewriteEvent } from '@/lib/eventRewriter';
-import { sanitize } from '@/lib/brandSanitizer';
+import { resolveWhatsappOnly } from '@/lib/brandSanitizer';
 import { addToBlacklist } from '@/lib/promoterBlacklist';
 import { processPoster } from '@/lib/posterPipeline';
 import { publishEvent, sleep, PUBLISH_RATE_LIMIT_MS } from '@/lib/eventPublisher';
@@ -95,14 +95,17 @@ export async function GET(request: Request) {
   // 3-6. Per ogni candidato: rewrite → sanitize → poster → publish
   for (const candidate of newCandidates) {
     try {
-      const rewritten = await rewriteEvent(candidate);
+      const rewritten = await rewriteEvent(candidate, knownOrganizers);
 
       if (rewritten.needsReview) {
         skipped.push({ title: candidate.rawTitle, reason: 'needsReview: AI rewrite failed or incomplete' });
         continue;
       }
 
-      const sanitizedDescription = sanitize(rewritten.descriptionPlainEn, knownOrganizers);
+      // Solo il placeholder {{WHATSAPP}} va risolto qui — il resto della
+      // description (contatti/link/legal/marker) è codice, non testo di terzi:
+      // passarlo per sanitize() lo corromperebbe (bug reale, vedi brandSanitizer.ts).
+      const sanitizedDescription = resolveWhatsappOnly(rewritten.descriptionPlainEn);
 
       let poster;
       try {

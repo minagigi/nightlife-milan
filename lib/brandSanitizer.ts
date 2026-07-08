@@ -24,9 +24,29 @@ function isOurPhone(rawMatch: string): boolean {
 }
 
 function isOurUrl(url: string): boolean {
-  return /nightlifemilan\.com/i.test(url) || /wa\.me\/393519127047/i.test(url);
+  // xceed.me/.../channel/nightlifemilan-1: l'affiliate link ufficiale (FASE X4)
+  // — NON un URL di terzi da rimuovere, va sempre preservato.
+  return /nightlifemilan\.com/i.test(url) || /wa\.me\/393519127047/i.test(url) || /xceed\.me\/.*\/channel\/nightlifemilan-1/i.test(url);
 }
 
+/**
+ * Risolve SOLO il placeholder {{WHATSAPP}} — usato sul risultato GIÀ assemblato
+ * di assembleGoldDescription (contatti/link/legal/marker sono codice, non
+ * testo di terzi: non vanno mai passati per sanitize(), che ha regex pensate
+ * per testo AI/scrapato e romperebbe URL/slug propri contenenti sequenze
+ * numeriche tipo date — bug reale osservato in FASE X4, PHONE_RE matchava
+ * "9-2026-2026-07-09" dentro uno slug come fosse un numero di telefono).
+ */
+export function resolveWhatsappOnly(html: string): string {
+  return html.replace(WHATSAPP_PLACEHOLDER_RE, `<a href="${CONTACT.whatsapp.link}">${CONTACT.whatsapp.number}</a>`);
+}
+
+/**
+ * Sanitize completo (placeholder + terzi) — va applicato SOLO al testo
+ * generato dall'AI (es. l'hook) PRIMA di assemblarlo con i blocchi statici in
+ * assembleGoldDescription, mai al risultato finale già assemblato (vedi
+ * resolveWhatsappOnly sopra per il motivo).
+ */
 export function sanitize(html: string, knownOrganizers: string[] = []): string {
   let out = html;
 

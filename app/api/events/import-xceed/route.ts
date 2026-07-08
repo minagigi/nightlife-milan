@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { scoutXceedEvents } from '@/lib/xceedScout';
 import { buildXceedLedger, filterNewXceedCandidates } from '@/lib/xceedLedger';
 import { rewriteXceedEvent } from '@/lib/eventRewriter';
-import { sanitize } from '@/lib/brandSanitizer';
+import { resolveWhatsappOnly } from '@/lib/brandSanitizer';
 import { processPoster } from '@/lib/posterPipeline';
 import { publishXceedEvent, sleep, PUBLISH_RATE_LIMIT_MS } from '@/lib/eventPublisher';
 import { putRichContent } from '@/lib/richContentStore';
@@ -98,10 +98,13 @@ export async function GET(request: Request) {
         continue;
       }
 
-      // Nessun promoter/organizer di terzi da ripulire qui (fonte ufficiale del
-      // venue, non un promoter esterno) — sanitize resta comunque una seconda
-      // linea di difesa deterministica sul placeholder {{WHATSAPP}}.
-      const sanitizedDescription = sanitize(rewritten.descriptionPlainEn, []);
+      // Solo il placeholder {{WHATSAPP}} va risolto qui — il resto della
+      // description (contatti/link affiliate/legal/marker) è codice, non
+      // testo di terzi: passarlo per sanitize() lo corromperebbe (bug reale:
+      // la regex telefono matchava le date nello slug, e l'URL affiliate
+      // Xceed veniva rimosso perché non riconosciuto come "nostro"). L'hook
+      // AI è già stato sanitizzato dentro rewriteXceedEvent prima di qui.
+      const sanitizedDescription = resolveWhatsappOnly(rewritten.descriptionPlainEn);
 
       let poster;
       try {

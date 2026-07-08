@@ -1,5 +1,6 @@
 import { getVenueMeta } from './seoRewrite';
 import { getVenuePricing } from './venuePricing';
+import { sanitize } from './brandSanitizer';
 import type { ScoutedEvent } from './eventScout';
 import type { XceedEvent } from './xceedScout';
 
@@ -233,7 +234,7 @@ function assembleGoldDescription(
  * chiamate AI fallisce o produce campi mancanti, ritorna `needsReview: true`
  * — l'evento NON va mai pubblicato in quel caso (vedi lib/eventPublisher.ts).
  */
-export async function rewriteEvent(event: ScoutedEvent): Promise<RewrittenEvent> {
+export async function rewriteEvent(event: ScoutedEvent, knownOrganizers: string[] = []): Promise<RewrittenEvent> {
   const meta = getVenueMeta(event.venueId);
   const pricing = getVenuePricing(event.venueId);
   const dateSlugPart = event.dateISO.slice(0, 10);
@@ -270,12 +271,17 @@ Raw description (from third-party promoter, needs full rewrite, strip any contac
 
   const titleEn = clamp(bodyResult!.titleEn, 75);
   const slugEn = slugify(`${titleEn}-${dateSlugPart}`) || slugify(`${meta.name}-${dateSlugPart}`);
-  const descriptionPlainEn = assembleGoldDescription(bodyResult!, faqResult!.faqLong.slice(0, 25), pricing, slugEn, event.ebId);
+  // Sanitize SOLO l'hook (testo AI derivato da una fonte di terzi) PRIMA
+  // dell'assemblaggio — mai sul risultato finale già assemblato (contatti/
+  // link/legal/marker sono codice, sanitize() li corromperebbe, vedi nota
+  // sopra resolveWhatsappOnly in lib/brandSanitizer.ts).
+  const sanitizedBody: BodyResult = { ...bodyResult!, hook: sanitize(bodyResult!.hook, knownOrganizers) };
+  const descriptionPlainEn = assembleGoldDescription(sanitizedBody, faqResult!.faqLong.slice(0, 25), pricing, slugEn, event.ebId);
 
   return {
     titleEn,
     summaryEn: clamp(bodyResult!.summaryEn, 140),
-    hook: bodyResult!.hook,
+    hook: sanitizedBody.hook,
     sections: bodyResult!.sections,
     programme: bodyResult!.programme,
     faqLong: faqResult!.faqLong.slice(0, 25),
@@ -347,12 +353,17 @@ ${event.description.slice(0, 2000)}`;
 
   const titleEn = clamp(bodyResult!.titleEn, 75);
   const slugEn = slugify(`${titleEn}-${dateSlugPart}`) || slugify(`${meta.name}-${dateSlugPart}`);
-  const descriptionPlainEn = assembleGoldDescription(bodyResult!, faqResult!.faqLong.slice(0, 25), pricing, slugEn, xcEbId, event.affiliateUrl);
+  // Sanitize SOLO l'hook prima dell'assemblaggio (vedi commento in rewriteEvent) —
+  // per Xceed la fonte è ufficiale (non un promoter terzo), ma resta comunque
+  // il posto giusto per risolvere eventuali contatti impropri nel testo AI,
+  // senza mai passare per sanitize() i blocchi statici (link/marker/legal).
+  const sanitizedBody: BodyResult = { ...bodyResult!, hook: sanitize(bodyResult!.hook, []) };
+  const descriptionPlainEn = assembleGoldDescription(sanitizedBody, faqResult!.faqLong.slice(0, 25), pricing, slugEn, xcEbId, event.affiliateUrl);
 
   return {
     titleEn,
     summaryEn: clamp(bodyResult!.summaryEn, 140),
-    hook: bodyResult!.hook,
+    hook: sanitizedBody.hook,
     sections: bodyResult!.sections,
     programme: bodyResult!.programme,
     faqLong: faqResult!.faqLong.slice(0, 25),
