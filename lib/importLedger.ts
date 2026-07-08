@@ -1,5 +1,5 @@
-import { matchVenueId } from './venueMatching';
 import type { ScoutedEvent } from './eventScout';
+import type { Lang } from './eventRewriter';
 import { getEventbriteToken } from './eventbriteToken';
 
 const EVENTBRITE_API = 'https://www.eventbriteapi.com/v3';
@@ -51,42 +51,36 @@ export async function fetchOwnOrgEvents(): Promise<OwnOrgEvent[]> {
 }
 
 export interface Ledger {
-  fingerprints: Set<string>; // "venueId|YYYY-MM-DD"
-  importedEbIds: Set<string>; // marker src:{ebId} già pubblicati
+  /** Set di "ebId:lang" già pubblicati, es. "237143:en" */
+  importedEbIdLangs: Set<string>;
 }
 
-// Bug reale corretto: il marker generato da eventRewriter.ts v3 (FASE G3/G4B) è
-// cambiato in `<!-- nlm:src=X;slug-en=Y -->`, ma questo regex era rimasto al
-// vecchio formato v2 `<!-- src:N -->` — non avrebbe mai matchato nulla dopo
-// l'upgrade v3, rendendo il dedupe-by-marker silenziosamente inefficace
-// (restava comunque il fingerprint venueId|data come rete di sicurezza).
-const SRC_MARKER_RE = /nlm:src=([^;]+);slug-en=/;
+// Marker per-lingua (FASE B "eventi separati", 2026-07-08): ogni serata reale
+// produce DUE eventi Eventbrite (EN + IT), marker `nlm:src={ebId}-{lang};slug-en=…`.
+// Il vecchio fingerprint `venueId|data` è stato rimosso: con 2 eventi attesi per
+// venue/giorno (uno per lingua) bloccherebbe erroneamente la seconda lingua come
+// "slot già occupato" — il marker per-lingua è ormai l'unica fonte affidabile.
+const SRC_MARKER_RE = /nlm:src=([^-;]+)-(en|it);slug-en=/;
 
 export async function buildLedger(): Promise<Ledger> {
   const ownEvents = await fetchOwnOrgEvents();
-
-  const fingerprints = new Set<string>();
-  const importedEbIds = new Set<string>();
+  const importedEbIdLangs = new Set<string>();
 
   for (const ev of ownEvents) {
-    const venueId = matchVenueId(ev.venue?.name || '');
-    if (venueId) {
-      const day = ev.start.local.slice(0, 10); // YYYY-MM-DD
-      fingerprints.add(`${venueId}|${day}`);
-    }
-
     const marker = ev.description?.html?.match(SRC_MARKER_RE);
-    if (marker) importedEbIds.add(marker[1]);
+    if (marker) importedEbIdLangs.add(`${marker[1]}:${marker[2]}`);
   }
 
-  return { fingerprints, importedEbIds };
+  return { importedEbIdLangs };
+}
+
+/** Lingue ANCORA da pubblicare per questo candidato (vuoto = entrambe già fatte). */
+export function missingLangsForCandidate(candidate: ScoutedEvent, ledger: Ledger): Lang[] {
+  return (['en', 'it'] as Lang[]).filter((lang) => !ledger.importedEbIdLangs.has(`${candidate.ebId}:${lang}`));
 }
 
 export function isNewCandidate(candidate: ScoutedEvent, ledger: Ledger): boolean {
-  if (ledger.importedEbIds.has(candidate.ebId)) return false;
-  const day = candidate.dateISO.slice(0, 10);
-  if (ledger.fingerprints.has(`${candidate.venueId}|${day}`)) return false;
-  return true;
+  return missingLangsForCandidate(candidate, ledger).length > 0;
 }
 
 export function filterNewCandidates(candidates: ScoutedEvent[], ledger: Ledger): ScoutedEvent[] {

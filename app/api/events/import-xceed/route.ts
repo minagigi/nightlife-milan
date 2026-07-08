@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import { scoutXceedEvents } from '@/lib/xceedScout';
-import { buildXceedLedger, filterNewXceedCandidates } from '@/lib/xceedLedger';
+import { buildXceedLedger, filterNewXceedCandidates, missingLangsForXceedCandidate } from '@/lib/xceedLedger';
 import { rewriteXceedEvent } from '@/lib/eventRewriter';
+import type { Lang } from '@/lib/eventRewriter';
 import { resolveWhatsappOnly } from '@/lib/brandSanitizer';
 import { processPoster } from '@/lib/posterPipeline';
 import { publishXceedEvent, sleep, PUBLISH_RATE_LIMIT_MS } from '@/lib/eventPublisher';
@@ -11,8 +12,9 @@ import { notifyUrl } from '@/lib/googleIndexing';
 export const dynamic = 'force-dynamic';
 export const maxDuration = 300;
 
-// FASE X4/G5: 2 chiamate AI lunghe + poster + poll sito per evento (~3-4 min) —
-// cap conservativo, il backlog dei 3 venue affiliati si smaltisce su più notti.
+// FASE X4/B: 2 chiamate AI lunghe + poster + 2 publish (EN+IT) + poll sito per
+// evento reale (~4-6 min) — cap conservativo, il backlog dei 3 venue affiliati
+// si smaltisce su più notti.
 const DEFAULT_MAX_PER_RUN = 3;
 const SITE_BASE = process.env.APP_URL || 'https://nightlifemilan.com';
 
@@ -32,17 +34,24 @@ async function pollSitePageUntilLive(url: string, maxMs: number, intervalMs: num
   return false;
 }
 
+function sitePageUrlFor(slugEn: string, lang: Lang): string {
+  return lang === 'en' ? `${SITE_BASE}/events/${slugEn}` : `${SITE_BASE}/it/events/${slugEn}`;
+}
+
 /**
- * Cron NOTTURNO (vercel.json: 0 3 * * *) — pipeline Xceed (FASE X4, piano
- * .claude/plans/2026-07-07-xceed-affiliate-pipeline.md).
+ * Cron NOTTURNO (vercel.json: 0 3 * * *) — pipeline Xceed (FASE X4/B, piani
+ * .claude/plans/2026-07-07-xceed-affiliate-pipeline.md e
+ * .claude/plans/2026-07-08-bilingual-everywhere.md).
  *
  * Trova eventi nei 3 venue dove siamo Ambassador Xceed (dati UFFICIALI:
  * prezzi/orari/dress code/età reali, non scraping di terzi), li riscrive in
- * chiave gold-standard con claude-sonnet-5 (corpo + 25 FAQ), scrive il
- * contenuto ricco su Vercel Blob (letto dalla pagina sito), pulisce/edita la
- * locandina ufficiale, pubblica su Eventbrite (teaser con link affiliate in
- * testa) e notifica Google Indexing dopo aver verificato che la pagina sito
- * sia viva.
+ * chiave gold-standard con claude-sonnet-5 in ENTRAMBE le lingue (corpo + 25
+ * FAQ, EN e IT indipendenti), scrive il contenuto ricco su Vercel Blob (letto
+ * dalla pagina sito, bilingue), pulisce/edita la locandina ufficiale UNA
+ * volta (condivisa dalle due lingue), pubblica DUE eventi Eventbrite separati
+ * (uno interamente EN, uno interamente IT — non un'unica description mista)
+ * e notifica Google Indexing per entrambe le pagine sito dopo averle
+ * verificate vive.
  *
  * Auth: Authorization: Bearer CRON_SECRET  (Vercel cron automatico)
  *    o  ?secret=INDEXING_SECRET             (trigger manuale)
@@ -67,7 +76,10 @@ export async function GET(request: Request) {
   const maxPerRun = Number.isFinite(maxParam) && maxParam > 0 ? maxParam : DEFAULT_MAX_PER_RUN;
   const days = parseInt(searchParams.get('days') || '7', 10);
 
-  const published: { title: string; url: string; imageSource?: string; sitePageUrl?: string; sitePageLive?: boolean; indexed?: boolean; blobWritten?: boolean }[] = [];
+  const published: Array<{
+    title: string; lang: Lang; url: string; imageSource?: string;
+    sitePageUrl?: string; sitePageLive?: boolean; indexed?: boolean; blobWritten?: boolean;
+  }> = [];
   const skipped: { title: string; reason: string }[] = [];
   const errors: string[] = [];
 
@@ -79,7 +91,8 @@ export async function GET(request: Request) {
     return NextResponse.json({ ok: false, error: `Xceed scout failed: ${(e as Error).message}` }, { status: 500 });
   }
 
-  // 2. Dedupe — marker nlm:src=xc-{xceedId} sugli eventi già pubblicati
+  // 2. Dedupe — marker nlm:src=xc-{xceedId}-{lang}: un candidato è "nuovo" se
+  // manca ANCHE una sola delle due lingue (FASE B "eventi separati").
   let ledger;
   try {
     ledger = await buildXceedLedger();
@@ -88,9 +101,11 @@ export async function GET(request: Request) {
   }
   const newCandidates = filterNewXceedCandidates(scouted, ledger).slice(0, maxPerRun);
 
-  // 3-7. Per ogni candidato: rewrite → sanitize → blob → poster → publish → poll → index
+  // 3-7. Per ogni candidato: rewrite (bilingue) → blob → poster (condiviso) →
+  // publish (una o due lingue, quelle mancanti) → poll → index
   for (const candidate of newCandidates) {
     try {
+      const langsToPublish = missingLangsForXceedCandidate(candidate, ledger);
       const rewritten = await rewriteXceedEvent(candidate);
 
       if (rewritten.needsReview) {
@@ -102,9 +117,10 @@ export async function GET(request: Request) {
       // description (contatti/link affiliate/legal/marker) è codice, non
       // testo di terzi: passarlo per sanitize() lo corromperebbe (bug reale:
       // la regex telefono matchava le date nello slug, e l'URL affiliate
-      // Xceed veniva rimosso perché non riconosciuto come "nostro"). L'hook
-      // AI è già stato sanitizzato dentro rewriteXceedEvent prima di qui.
-      const sanitizedDescription = resolveWhatsappOnly(rewritten.descriptionPlainEn);
+      // Xceed veniva rimosso perché non riconosciuto come "nostro"). Gli
+      // hook AI sono già stati sanitizzati dentro rewriteXceedEvent.
+      const sanitizedDescriptionEn = resolveWhatsappOnly(rewritten.descriptionEn);
+      const sanitizedDescriptionIt = resolveWhatsappOnly(rewritten.descriptionIt);
 
       let poster;
       try {
@@ -114,9 +130,9 @@ export async function GET(request: Request) {
         continue;
       }
 
-      // FASE X2: il corpo gold (sezioni/programma/25 FAQ/offers reali) va sul
-      // blob PRIMA del publish — la pagina sito deve poterlo leggere appena
-      // il poll (sotto) la raggiunge.
+      // FASE X2: il corpo gold bilingue (sezioni/programma/25 FAQ EN+IT/offers
+      // reali) va sul blob PRIMA del publish — entrambe le pagine sito
+      // (/events/ e /it/events/) devono poterlo leggere appena il poll le raggiunge.
       let blobWritten = false;
       if (!dryRun && rewritten.slugEn) {
         const blobResult = await putRichContent(rewritten.slugEn, {
@@ -135,27 +151,35 @@ export async function GET(request: Request) {
         }
       }
 
-      const result = await publishXceedEvent(candidate, rewritten, sanitizedDescription, poster, dryRun);
+      const results = await publishXceedEvent(candidate, rewritten, sanitizedDescriptionEn, sanitizedDescriptionIt, poster, dryRun, langsToPublish);
 
-      if (result.ok) {
-        const entry: (typeof published)[number] = { title: rewritten.titleEn, url: result.url || '', imageSource: result.imageSource, blobWritten };
+      for (const lang of langsToPublish) {
+        const result = results[lang];
+        if (!result) continue;
 
-        // FASE G4B/X2: poll della pagina sito (slug deterministico) finché è
-        // viva (ora renderizza il gold dal blob), poi notifica Google Indexing
-        // SOLO per un URL confermato 200.
-        if (!dryRun && rewritten.slugEn) {
-          const sitePageUrl = `${SITE_BASE}/events/${rewritten.slugEn}`;
-          entry.sitePageUrl = sitePageUrl;
-          entry.sitePageLive = await pollSitePageUntilLive(sitePageUrl, 6 * 60 * 1000, 30 * 1000);
-          if (entry.sitePageLive && process.env.GOOGLE_INDEXING_CREDENTIALS) {
-            const idx = await notifyUrl(sitePageUrl, 'URL_UPDATED');
-            entry.indexed = idx.ok;
+        if (result.ok) {
+          const entry: (typeof published)[number] = {
+            title: lang === 'en' ? rewritten.titleEn : rewritten.titleIt,
+            lang, url: result.url || '', imageSource: result.imageSource, blobWritten,
+          };
+
+          // FASE G4B/X2: poll della pagina sito nella lingua corrispondente
+          // (slug deterministico, stesso per entrambe le lingue) finché è
+          // viva, poi notifica Google Indexing SOLO per un URL confermato 200.
+          if (!dryRun && rewritten.slugEn) {
+            const sitePageUrl = sitePageUrlFor(rewritten.slugEn, lang);
+            entry.sitePageUrl = sitePageUrl;
+            entry.sitePageLive = await pollSitePageUntilLive(sitePageUrl, 6 * 60 * 1000, 30 * 1000);
+            if (entry.sitePageLive && process.env.GOOGLE_INDEXING_CREDENTIALS) {
+              const idx = await notifyUrl(sitePageUrl, 'URL_UPDATED');
+              entry.indexed = idx.ok;
+            }
           }
-        }
 
-        published.push(entry);
-      } else {
-        skipped.push({ title: candidate.name, reason: `needsReview: ${result.reason}` });
+          published.push(entry);
+        } else {
+          skipped.push({ title: `${candidate.name} (${lang})`, reason: `needsReview: ${result.reason}` });
+        }
       }
 
       if (!dryRun) await sleep(PUBLISH_RATE_LIMIT_MS);

@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import { scoutThirdPartyEvents } from '@/lib/eventScout';
-import { buildLedger, filterNewCandidates } from '@/lib/importLedger';
+import { buildLedger, filterNewCandidates, missingLangsForCandidate } from '@/lib/importLedger';
 import { rewriteEvent } from '@/lib/eventRewriter';
+import type { Lang } from '@/lib/eventRewriter';
 import { resolveWhatsappOnly } from '@/lib/brandSanitizer';
 import { addToBlacklist } from '@/lib/promoterBlacklist';
 import { processPoster } from '@/lib/posterPipeline';
@@ -12,9 +13,9 @@ import { XCEED_VENUE_IDS } from '@/lib/xceedScout';
 export const dynamic = 'force-dynamic';
 export const maxDuration = 300;
 
-// FASE G5: con corpo gold-standard (2 chiamate AI lunghe + poster + poll sito)
-// ogni evento costa ~3-4 min — con maxDuration 300 il cap sicuro per run è ~3.
-// Il cron notturno smaltisce il backlog su più notti.
+// FASE G5/B: con corpo gold-standard bilingue (2 chiamate AI + 2 publish EN+IT
+// + poll sito) ogni evento costa ~4-6 min — con maxDuration 300 il cap sicuro
+// per run è ~3. Il cron notturno smaltisce il backlog su più notti.
 const DEFAULT_MAX_PER_RUN = 3;
 const SITE_BASE = process.env.APP_URL || 'https://nightlifemilan.com';
 
@@ -34,21 +35,27 @@ async function pollSitePageUntilLive(url: string, maxMs: number, intervalMs: num
   return false;
 }
 
+function sitePageUrlFor(slugEn: string, lang: Lang): string {
+  return lang === 'en' ? `${SITE_BASE}/events/${slugEn}` : `${SITE_BASE}/it/events/${slugEn}`;
+}
+
 /**
  * Cron NOTTURNO (vercel.json: 0 2 * * *) — Fase 6 del piano auto-import.
  *
- * Trova eventi di terzi nei nostri 18 venue (scout), scarta i già-importati
- * (ledger), riscrive ogni candidato in chiave SEO con claude-sonnet-5 (rewriter,
- * incorpora le regole anti-AI-tell della skill humanizer), rimuove ogni
- * contatto/brand di terzi (sanitizer), ripulisce/edita la locandina originale
- * o usa il fallback venue (posterPipeline, Gemini Nano Banana 2), pubblica
- * sulla nostra org Eventbrite (publisher) e notifica Google Indexing.
+ * Trova eventi di terzi nei nostri venue non-Xceed (scout), scarta i
+ * già-importati (ledger, per lingua), riscrive ogni candidato in chiave SEO
+ * gold-standard con claude-sonnet-5 in ENTRAMBE le lingue (rewriter, incorpora
+ * le regole anti-AI-tell), rimuove ogni contatto/brand di terzi (sanitizer),
+ * ripulisce/edita la locandina originale o usa il fallback venue
+ * (posterPipeline, condivisa dalle due lingue), pubblica DUE eventi Eventbrite
+ * separati (EN + IT, FASE B "eventi separati") e notifica Google Indexing per
+ * entrambe le pagine sito.
  *
  * Auth: Authorization: Bearer CRON_SECRET  (Vercel cron automatico)
  *    o  ?secret=INDEXING_SECRET             (trigger manuale)
  *
  * Query: ?dryRun=1 esegue tutto tranne la pubblicazione (ritorna il piano).
- *        ?max=N     override del cap eventi/run (default 15).
+ *        ?max=N     override del cap eventi/run (default 3).
  */
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -65,7 +72,10 @@ export async function GET(request: Request) {
   const maxParam = parseInt(searchParams.get('max') || '', 10);
   const maxPerRun = Number.isFinite(maxParam) && maxParam > 0 ? maxParam : DEFAULT_MAX_PER_RUN;
 
-  const published: { title: string; url: string; imageSource?: string; sitePageUrl?: string; sitePageLive?: boolean; indexed?: boolean }[] = [];
+  const published: Array<{
+    title: string; lang: Lang; url: string; imageSource?: string;
+    sitePageUrl?: string; sitePageLive?: boolean; indexed?: boolean;
+  }> = [];
   const skipped: { title: string; reason: string }[] = [];
   const errors: string[] = [];
 
@@ -77,7 +87,7 @@ export async function GET(request: Request) {
     return NextResponse.json({ ok: false, error: `Scout failed: ${(e as Error).message}` }, { status: 500 });
   }
 
-  // 2. Dedupe — scarta eventi già pubblicati (fingerprint venue+data o marker src:ebId)
+  // 2. Dedupe — marker per-lingua: un candidato è "nuovo" se manca almeno una lingua
   let ledger;
   try {
     ledger = await buildLedger();
@@ -92,9 +102,10 @@ export async function GET(request: Request) {
 
   const knownOrganizers = addToBlacklist(scouted.map((s) => s.rawOrganizer).filter(Boolean));
 
-  // 3-6. Per ogni candidato: rewrite → sanitize → poster → publish
+  // 3-6. Per ogni candidato: rewrite (bilingue) → sanitize → poster (condiviso) → publish (lingue mancanti)
   for (const candidate of newCandidates) {
     try {
+      const langsToPublish = missingLangsForCandidate(candidate, ledger);
       const rewritten = await rewriteEvent(candidate, knownOrganizers);
 
       if (rewritten.needsReview) {
@@ -105,7 +116,8 @@ export async function GET(request: Request) {
       // Solo il placeholder {{WHATSAPP}} va risolto qui — il resto della
       // description (contatti/link/legal/marker) è codice, non testo di terzi:
       // passarlo per sanitize() lo corromperebbe (bug reale, vedi brandSanitizer.ts).
-      const sanitizedDescription = resolveWhatsappOnly(rewritten.descriptionPlainEn);
+      const sanitizedDescriptionEn = resolveWhatsappOnly(rewritten.descriptionEn);
+      const sanitizedDescriptionIt = resolveWhatsappOnly(rewritten.descriptionIt);
 
       let poster;
       try {
@@ -115,27 +127,35 @@ export async function GET(request: Request) {
         continue;
       }
 
-      const result = await publishEvent(candidate, rewritten, sanitizedDescription, poster, dryRun);
+      const results = await publishEvent(candidate, rewritten, sanitizedDescriptionEn, sanitizedDescriptionIt, poster, dryRun, langsToPublish);
 
-      if (result.ok) {
-        const entry: (typeof published)[number] = { title: rewritten.titleEn, url: result.url || '', imageSource: result.imageSource };
+      for (const lang of langsToPublish) {
+        const result = results[lang];
+        if (!result) continue;
 
-        // FASE G4B: backlink Eventbrite→sito — poll della pagina sito (slug
-        // deterministico, generato dal rewriter) finché è viva, poi notifica
-        // Google Indexing SOLO per un URL confermato 200 (mai un link morto).
-        if (!dryRun && rewritten.slugEn) {
-          const sitePageUrl = `${SITE_BASE}/events/${rewritten.slugEn}`;
-          entry.sitePageUrl = sitePageUrl;
-          entry.sitePageLive = await pollSitePageUntilLive(sitePageUrl, 6 * 60 * 1000, 30 * 1000);
-          if (entry.sitePageLive && process.env.GOOGLE_INDEXING_CREDENTIALS) {
-            const idx = await notifyUrl(sitePageUrl, 'URL_UPDATED');
-            entry.indexed = idx.ok;
+        if (result.ok) {
+          const entry: (typeof published)[number] = {
+            title: lang === 'en' ? rewritten.titleEn : rewritten.titleIt,
+            lang, url: result.url || '', imageSource: result.imageSource,
+          };
+
+          // FASE G4B: backlink Eventbrite→sito — poll della pagina sito nella
+          // lingua corrispondente (slug deterministico) finché è viva, poi
+          // notifica Google Indexing SOLO per un URL confermato 200.
+          if (!dryRun && rewritten.slugEn) {
+            const sitePageUrl = sitePageUrlFor(rewritten.slugEn, lang);
+            entry.sitePageUrl = sitePageUrl;
+            entry.sitePageLive = await pollSitePageUntilLive(sitePageUrl, 6 * 60 * 1000, 30 * 1000);
+            if (entry.sitePageLive && process.env.GOOGLE_INDEXING_CREDENTIALS) {
+              const idx = await notifyUrl(sitePageUrl, 'URL_UPDATED');
+              entry.indexed = idx.ok;
+            }
           }
-        }
 
-        published.push(entry);
-      } else {
-        skipped.push({ title: candidate.rawTitle, reason: `needsReview: ${result.reason}` });
+          published.push(entry);
+        } else {
+          skipped.push({ title: `${candidate.rawTitle} (${lang})`, reason: `needsReview: ${result.reason}` });
+        }
       }
 
       if (!dryRun) await sleep(PUBLISH_RATE_LIMIT_MS);
@@ -143,11 +163,6 @@ export async function GET(request: Request) {
       errors.push(`${candidate.rawTitle}: ${(e as Error).message}`);
     }
   }
-
-  // Nota Google Indexing: da FASE G4B lo slug è deterministico (generato dal
-  // rewriter, non più dall'AI a lettura) e notificato subito sopra dopo il poll
-  // 200 sulla pagina sito. Il cron /api/events/sync (08:00 UTC) resta come rete
-  // di sicurezza per eventi il cui poll fosse scaduto senza successo.
 
   return NextResponse.json({
     ok: true,
@@ -157,9 +172,6 @@ export async function GET(request: Request) {
     published,
     skipped,
     errors,
-    googleIndexingNote: published.length > 0
-      ? 'New events will be picked up and submitted to Google by the existing /api/events/sync cron (08:00 UTC)'
-      : undefined,
     geminiKeyPresent: !!process.env.GEMINI_API_KEY,
     anthropicKeyPresent: !!process.env.ANTHROPIC_API_KEY,
     ranAt: new Date().toISOString(),

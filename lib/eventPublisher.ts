@@ -1,23 +1,30 @@
 import { venuesData } from './venuesData';
 import type { ScoutedEvent } from './eventScout';
 import type { XceedEvent } from './xceedScout';
-import type { RewrittenEvent } from './eventRewriter';
+import type { RewrittenEvent, Lang } from './eventRewriter';
+import { getTicketText } from './eventRewriter';
 import type { PosterResult } from './posterPipeline';
 import { getEventbriteToken } from './eventbriteToken';
 import { getVenuePricing } from './venuePricing';
 import { CONTACT } from '@/config/contact';
 
 /**
- * Pubblicazione sulla nostra org Eventbrite — Fase 5. Non testabile in locale
+ * Pubblicazione sulla nostra org Eventbrite. Non testabile in locale
  * (EVENTBRITE_TOKEN è una env "Sensitive" su Vercel, illeggibile fuori dal
- * runtime di produzione) — validato via `?dryRun=1` sulla route deployata
- * (Fase 6). Segue la sequenza documentata dell'API v3: risoluzione/creazione
- * venue → creazione evento → upload immagine → ticket gratuito → publish.
+ * runtime di produzione) — validato via `?dryRun=1` sulla route deployata.
+ *
+ * FASE B "eventi separati" (2026-07-08, richiesta esplicita utente): ogni
+ * serata reale produce DUE eventi Eventbrite distinti (EN e IT), non un unico
+ * evento con description mista — venue/immagine sono risolti/caricati UNA
+ * volta sola e riusati per entrambi (contenuto visivo language-agnostic),
+ * poi si crea/descrive/ticketta/pubblica/music_properties per ciascuna lingua.
  */
 
 const EVENTBRITE_API = 'https://www.eventbriteapi.com/v3';
 const ORG_ID = '2988002072164';
 const RATE_LIMIT_MS = 3000;
+
+const LOCALE: Record<Lang, string> = { en: 'en_US', it: 'it_IT' };
 
 export interface PublishResult {
   ok: boolean;
@@ -26,6 +33,8 @@ export interface PublishResult {
   reason?: string;
   imageSource?: string;
 }
+
+export type PublishResultByLang = Partial<Record<Lang, PublishResult>>;
 
 function authHeaders(token: string) {
   return { Authorization: `Bearer ${token}`, 'content-type': 'application/json' };
@@ -95,8 +104,6 @@ async function resolveEventbriteVenueId(token: string, venueId: string, dryRun: 
 
   const name = venue.localizedContent.name.en;
 
-  // 1. Cerca tra i venue Eventbrite già esistenti nella nostra org (sempre read-only,
-  // sicuro anche in dry-run).
   try {
     const listRes = await fetch(`${EVENTBRITE_API}/organizations/${ORG_ID}/venues/`, {
       headers: authHeaders(token),
@@ -117,8 +124,6 @@ async function resolveEventbriteVenueId(token: string, venueId: string, dryRun: 
     console.error(`[eventPublisher] Venue list fetch threw: ${(e as Error).message}`);
   }
 
-  // 2. Non trovato: crealo — MA MAI in dry-run (creare un venue non è un'operazione
-  // reversibile senza costo, va evitata quando dryRun=1 deve garantire "zero effetti").
   if (dryRun) {
     return `[dry-run] would create Eventbrite venue for "${name}"`;
   }
@@ -162,12 +167,6 @@ async function resolveEventbriteVenueId(token: string, venueId: string, dryRun: 
 /** Upload immagine via media upload API — ritorna l'image_id da assegnare come logo dell'evento. */
 async function uploadEventImage(token: string, poster: PosterResult): Promise<string | null> {
   try {
-    // Bug reale riscontrato al primo publish: con header
-    // 'content-type: application/json' su una GET senza body, Eventbrite
-    // sembra cercare "type" in un body JSON inesistente invece che nella query
-    // string ("type - This field is required" nonostante ?type=... nell'URL).
-    // Fix: niente content-type su questa GET, e token anche come query param
-    // (pattern documentato ufficialmente, oltre all'header Authorization).
     const uploadInfoRes = await fetch(
       `${EVENTBRITE_API}/media/upload/?type=image-event-logo&token=${encodeURIComponent(token)}`,
       { headers: { Authorization: `Bearer ${token}` } }
@@ -177,11 +176,6 @@ async function uploadEventImage(token: string, poster: PosterResult): Promise<st
       return null;
     }
     const uploadInfo = await uploadInfoRes.json();
-    // Il servizio Eventbrite dietro questo endpoint ("ImageBFF") restituisce i
-    // campi del presigned POST S3 sotto "upload_data" (non "file_parameters"
-    // come nella vecchia documentazione/tutorial ancora in giro online) e il
-    // nome del campo file sotto "file_parameter_name" — scoperto loggando la
-    // risposta completa dopo un 400 "Key parameter is required".
     const { upload_url, upload_data, upload_token, file_parameter_name } = uploadInfo;
 
     const form = new FormData();
@@ -241,53 +235,27 @@ export async function replaceEventImage(eventId: string, poster: PosterResult): 
   return { ok: true };
 }
 
-interface PublishCoreParams {
-  venueId: string;
-  /** Già nel formato Eventbrite "YYYY-MM-DDThh:mm:ssZ" (UTC vero) — il
-   * chiamante sceglie la conversione giusta per la sua sorgente (vedi
-   * toEventbriteUtc per date wall-clock locali, normalizeAlreadyUtc per date
-   * già UTC come XceedEvent.startISO). Bug reale evitato qui: applicare la
-   * conversione "locale" a una data già-UTC sfasa l'evento di ore. */
+interface PublishOneLangParams {
+  token: string;
+  venueEbId: string;
+  imageId: string;
   startUtc: string;
   endUtc: string;
-  titleEn: string;
-  summaryEn: string;
+  title: string;
+  summary: string;
   description: string;
-  poster: PosterResult;
-  /** "18+" / "21+" — se assente niente music_properties.age_restriction */
+  locale: string;
+  lang: Lang;
   ageRestriction?: string;
-  /** door_time completo UTC ISO — se assente niente music_properties.door_time */
   doorTimeISO?: string;
-  dryRun: boolean;
+  poster: PosterResult;
 }
 
-/**
- * Nucleo condiviso di pubblicazione — usato sia dallo scout Eventbrite
- * (publishEvent) sia dalla pipeline Xceed (publishXceedEvent, FASE X4). Ritorna
- * `ok: false` con `reason` su qualunque fallimento — non lancia mai eccezioni
- * verso il chiamante (la route gestisce N eventi in sequenza, un fallimento
- * non deve fermare gli altri).
- */
-async function publishCore(p: PublishCoreParams): Promise<PublishResult> {
-  const token = getEventbriteToken();
-  if (!token) return { ok: false, reason: 'EVENTBRITE_TOKEN not set' };
+/** Pubblica UN evento Eventbrite in UNA lingua (chiamato due volte, una per EN una per IT). */
+async function publishOneLang(p: PublishOneLangParams): Promise<PublishResult> {
+  const { token, venueEbId, imageId, startUtc, endUtc, title, summary, description, locale, lang, ageRestriction, doorTimeISO, poster } = p;
 
-  const venueEbId = await resolveEventbriteVenueId(token, p.venueId, p.dryRun);
-  if (!venueEbId) return { ok: false, reason: `Could not resolve/create Eventbrite venue for ${p.venueId}` };
-
-  const { startUtc, endUtc, titleEn, summaryEn, description, poster, ageRestriction, doorTimeISO, dryRun } = p;
-
-  if (dryRun) {
-    return {
-      ok: true,
-      reason: 'dry-run: not published',
-      imageSource: poster.source,
-      url: `[dry-run] ${titleEn}`,
-    };
-  }
-
-  // 1. Crea l'evento (draft) — EN-only (regola gold standard: pubblico internazionale,
-  // il sito genera le sue pagine bilingui in autonomia da seoRewrite.ts).
+  // 1. Crea l'evento (draft) — logo_id già noto, assegnato direttamente in creazione.
   let eventId: string;
   let eventUrl: string;
   try {
@@ -296,8 +264,8 @@ async function publishCore(p: PublishCoreParams): Promise<PublishResult> {
       headers: authHeaders(token),
       body: JSON.stringify({
         event: {
-          name: { html: titleEn },
-          summary: summaryEn,
+          name: { html: title },
+          summary,
           start: { timezone: 'Europe/Rome', utc: startUtc },
           end: { timezone: 'Europe/Rome', utc: endUtc },
           currency: 'EUR',
@@ -305,6 +273,8 @@ async function publishCore(p: PublishCoreParams): Promise<PublishResult> {
           online_event: false,
           listed: true,
           shareable: true,
+          locale,
+          logo_id: imageId,
         },
       }),
     });
@@ -319,32 +289,9 @@ async function publishCore(p: PublishCoreParams): Promise<PublishResult> {
     return { ok: false, reason: `Event creation threw: ${(e as Error).message}` };
   }
 
-  // 2. Upload immagine → assegna come logo (obbligatorio: Lineup blocca senza immagine)
-  const imageId = await uploadEventImage(token, poster);
-  if (!imageId) {
-    return { ok: false, reason: 'Image upload failed — event created as draft but not published (needsReview)', ebEventId: eventId, imageSource: poster.source };
-  }
-
-  try {
-    await fetch(`${EVENTBRITE_API}/events/${eventId}/`, {
-      method: 'POST',
-      headers: authHeaders(token),
-      body: JSON.stringify({ event: { logo_id: imageId } }),
-    });
-  } catch {
-    return { ok: false, reason: 'Logo assignment failed', ebEventId: eventId, imageSource: poster.source };
-  }
-
-  // 3. Description completa
-  // Bug reale scoperto (spike G0): POST/PUT su /events/{id}/description/ dà
-  // sempre 405 METHOD_NOT_ALLOWED — l'evento reale pubblicato in precedenza è
-  // rimasto con la sola summary perché questa chiamata falliva silenziosamente
-  // (nessun controllo dell'esito). Il metodo che funziona davvero è annidare
-  // "description" nel body della POST generica /events/{id}/. La description
-  // accetta HTML vero (h2/h3/p/ul/li/a, vedi assembleGoldDescription) — ma lo
-  // spike ha osservato un caso di corruzione/troncamento apparentemente
-  // transitorio lato Eventbrite; verifica con un GET e un retry prima di
-  // arrendersi (non bloccante: un fallimento qui non impedisce il resto).
+  // 2. Description completa — annidata nella POST generica /events/{id}/ (l'endpoint
+  // dedicato /description/ dà sempre 405). Verify+retry: uno spike ha osservato un
+  // caso di corruzione/troncamento apparentemente transitorio lato Eventbrite.
   try {
     let descOk = false;
     for (let attempt = 0; attempt < 2 && !descOk; attempt++) {
@@ -354,43 +301,40 @@ async function publishCore(p: PublishCoreParams): Promise<PublishResult> {
         body: JSON.stringify({ event: { description: { html: description } } }),
       });
       if (!descRes.ok) {
-        console.error(`[eventPublisher] Description write failed (attempt ${attempt + 1}): HTTP ${descRes.status} ${(await descRes.text()).slice(0, 200)}`);
+        console.error(`[eventPublisher] Description write failed (${lang}, attempt ${attempt + 1}): HTTP ${descRes.status} ${(await descRes.text()).slice(0, 200)}`);
         continue;
       }
       const verifyRes = await fetch(`${EVENTBRITE_API}/events/${eventId}/`, { headers: authHeaders(token) });
       const verifyBody = await verifyRes.json().catch(() => null);
       const savedLength = (verifyBody?.description?.html || '').length;
-      // Soglia empirica: la description gold reale supera sempre qualche
-      // migliaio di caratteri — una lunghezza molto più corta indica un
-      // troncamento/corruzione lato Eventbrite (visto nello spike G0).
       descOk = savedLength >= description.length * 0.8;
       if (!descOk) {
-        console.error(`[eventPublisher] Description write looks truncated (attempt ${attempt + 1}): sent ${description.length} chars, saved ${savedLength}`);
+        console.error(`[eventPublisher] Description write looks truncated (${lang}, attempt ${attempt + 1}): sent ${description.length} chars, saved ${savedLength}`);
       }
     }
     if (!descOk) {
-      console.error(`[eventPublisher] Description write did not stick after retries — event published with partial/short description (needs manual review)`);
+      console.error(`[eventPublisher] Description write did not stick after retries (${lang}) — event published with partial/short description (needs manual review)`);
     }
   } catch (e) {
-    console.error(`[eventPublisher] Description write threw: ${(e as Error).message}`);
+    console.error(`[eventPublisher] Description write threw (${lang}): ${(e as Error).message}`);
   }
 
-  // 4. Ticket — formato ESATTO del gold standard (mai varianti inventate).
-  // Il vero contatto viene sempre da CONTACT, mai hardcodato nel testo.
+  // 3. Ticket — formato ESATTO del gold standard per lingua (mai varianti inventate).
   try {
+    const ticketText = getTicketText(lang);
     const ticketRes = await fetch(`${EVENTBRITE_API}/events/${eventId}/ticket_classes/`, {
       method: 'POST',
       headers: authHeaders(token),
       body: JSON.stringify({
         ticket_class: {
-          name: 'RESERVATION TICKET - PAY AT THE DOOR - NOT FREE',
+          name: ticketText.name,
           free: true,
           quantity_total: 500,
           minimum_quantity: 1,
           maximum_quantity: 10,
           hide_sale_dates: false,
           sales_end: endUtc,
-          description: `This listing is only a reservation request and NOT a real ticket purchase.\nTo be accredited/confirmed, you must contact Luis Nightlife at ☎️ ${CONTACT.whatsapp.number}.`,
+          description: ticketText.description(`☎️ ${CONTACT.whatsapp.number}`),
         },
       }),
     });
@@ -401,7 +345,7 @@ async function publishCore(p: PublishCoreParams): Promise<PublishResult> {
     return { ok: false, reason: `Ticket creation threw: ${(e as Error).message}`, ebEventId: eventId, imageSource: poster.source };
   }
 
-  // 5. Publish
+  // 4. Publish
   try {
     const publishRes = await fetch(`${EVENTBRITE_API}/events/${eventId}/publish/`, {
       method: 'POST',
@@ -415,13 +359,8 @@ async function publishCore(p: PublishCoreParams): Promise<PublishResult> {
     return { ok: false, reason: `Publish threw: ${(e as Error).message}`, ebEventId: eventId, imageSource: poster.source };
   }
 
-  // 6. music_properties — highlights nativi "Buono a sapersi" (età + check-in).
-  // Bug reale scoperto in FASE X4: scriverlo PRIMA del publish (quando l'evento
-  // è ancora draft) veniva silenziosamente azzerato dalla pubblicazione stessa
-  // (confermato: null dopo publish anche con una POST riuscita prima). Va
-  // scritto DOPO, quando l'evento è già live — verificato persistere così sul
-  // vero evento pubblicato. Non bloccante: un fallimento qui non invalida
-  // la pubblicazione già avvenuta.
+  // 5. music_properties DOPO il publish — scriverlo prima (draft) viene azzerato
+  // dalla pubblicazione stessa (bug reale confermato in FASE X4). Non bloccante.
   try {
     if (ageRestriction || doorTimeISO) {
       const mpRes = await fetch(`${EVENTBRITE_API}/events/${eventId}/music_properties/`, {
@@ -430,24 +369,99 @@ async function publishCore(p: PublishCoreParams): Promise<PublishResult> {
         body: JSON.stringify({ music_properties: { ...(ageRestriction && { age_restriction: ageRestriction }), ...(doorTimeISO && { door_time: doorTimeISO }) } }),
       });
       if (!mpRes.ok) {
-        console.error(`[eventPublisher] music_properties write failed: HTTP ${mpRes.status} ${(await mpRes.text()).slice(0, 200)}`);
+        console.error(`[eventPublisher] music_properties write failed (${lang}): HTTP ${mpRes.status} ${(await mpRes.text()).slice(0, 200)}`);
       }
     }
   } catch (e) {
-    console.error(`[eventPublisher] music_properties write threw: ${(e as Error).message}`);
+    console.error(`[eventPublisher] music_properties write threw (${lang}): ${(e as Error).message}`);
   }
 
   return { ok: true, ebEventId: eventId, url: eventUrl, imageSource: poster.source };
+}
+
+interface PublishBothLangsParams {
+  venueId: string;
+  startUtc: string;
+  endUtc: string;
+  rewritten: RewrittenEvent;
+  descriptionEn: string;
+  descriptionIt: string;
+  poster: PosterResult;
+  ageRestriction?: string;
+  doorTimeISO?: string;
+  dryRun: boolean;
+  /** Solo le lingue mancanti nel ledger (dedupe per-lingua, FASE B "eventi separati") */
+  langsToPublish?: Lang[];
+}
+
+/**
+ * Nucleo condiviso: risolve venue + carica l'immagine UNA sola volta (contenuto
+ * visivo language-agnostic), poi pubblica un evento Eventbrite SEPARATO per
+ * ciascuna lingua richiesta (`langsToPublish`, default entrambe).
+ */
+async function publishBothLangs(p: PublishBothLangsParams): Promise<PublishResultByLang> {
+  const langs = p.langsToPublish && p.langsToPublish.length > 0 ? p.langsToPublish : (['en', 'it'] as Lang[]);
+  const token = getEventbriteToken();
+  if (!token) {
+    const r: PublishResult = { ok: false, reason: 'EVENTBRITE_TOKEN not set' };
+    return Object.fromEntries(langs.map((l) => [l, r]));
+  }
+
+  const venueEbId = await resolveEventbriteVenueId(token, p.venueId, p.dryRun);
+  if (!venueEbId) {
+    const r: PublishResult = { ok: false, reason: `Could not resolve/create Eventbrite venue for ${p.venueId}` };
+    return Object.fromEntries(langs.map((l) => [l, r]));
+  }
+
+  if (p.dryRun) {
+    const results: PublishResultByLang = {};
+    for (const lang of langs) {
+      results[lang] = {
+        ok: true,
+        reason: 'dry-run: not published',
+        imageSource: p.poster.source,
+        url: `[dry-run] ${lang === 'en' ? p.rewritten.titleEn : p.rewritten.titleIt}`,
+      };
+    }
+    return results;
+  }
+
+  const imageId = await uploadEventImage(token, p.poster);
+  if (!imageId) {
+    const r: PublishResult = { ok: false, reason: 'Image upload failed — not published (needsReview)', imageSource: p.poster.source };
+    return Object.fromEntries(langs.map((l) => [l, r]));
+  }
+
+  const results: PublishResultByLang = {};
+  for (let i = 0; i < langs.length; i++) {
+    const lang = langs[i];
+    results[lang] = await publishOneLang({
+      token, venueEbId, imageId,
+      startUtc: p.startUtc, endUtc: p.endUtc,
+      title: lang === 'en' ? p.rewritten.titleEn : p.rewritten.titleIt,
+      summary: lang === 'en' ? p.rewritten.summaryEn : p.rewritten.summaryIt,
+      description: lang === 'en' ? p.descriptionEn : p.descriptionIt,
+      locale: LOCALE[lang],
+      lang,
+      ageRestriction: p.ageRestriction,
+      doorTimeISO: p.doorTimeISO,
+      poster: p.poster,
+    });
+    if (i < langs.length - 1) await sleep(RATE_LIMIT_MS);
+  }
+  return results;
 }
 
 /** Pubblica un evento dallo scout Eventbrite (v3) — età/check-in da venuePricing statico. */
 export async function publishEvent(
   scouted: ScoutedEvent,
   rewritten: RewrittenEvent,
-  sanitizedDescription: string,
+  sanitizedDescriptionEn: string,
+  sanitizedDescriptionIt: string,
   poster: PosterResult,
-  dryRun: boolean
-): Promise<PublishResult> {
+  dryRun: boolean,
+  langsToPublish?: Lang[]
+): Promise<PublishResultByLang> {
   const pricing = getVenuePricing(scouted.venueId);
   const ageRestriction = pricing.ageLimit ? `${pricing.ageLimit}+` : undefined;
   const startUtc = toEventbriteUtc(scouted.dateISO);
@@ -459,17 +473,10 @@ export async function publishEvent(
     doorTimeISO = new Date(startMs).toISOString().replace(/\.\d{3}Z$/, 'Z');
   }
 
-  return publishCore({
-    venueId: scouted.venueId,
-    startUtc,
-    endUtc,
-    titleEn: rewritten.titleEn,
-    summaryEn: rewritten.summaryEn,
-    description: sanitizedDescription,
-    poster,
-    ageRestriction,
-    doorTimeISO,
-    dryRun,
+  return publishBothLangs({
+    venueId: scouted.venueId, startUtc, endUtc, rewritten,
+    descriptionEn: sanitizedDescriptionEn, descriptionIt: sanitizedDescriptionIt,
+    poster, ageRestriction, doorTimeISO, dryRun, langsToPublish,
   });
 }
 
@@ -480,36 +487,28 @@ export async function publishEvent(
 export async function publishXceedEvent(
   xceed: XceedEvent,
   rewritten: RewrittenEvent,
-  sanitizedDescription: string,
+  sanitizedDescriptionEn: string,
+  sanitizedDescriptionIt: string,
   poster: PosterResult,
-  dryRun: boolean
-): Promise<PublishResult> {
+  dryRun: boolean,
+  langsToPublish?: Lang[]
+): Promise<PublishResultByLang> {
   // xceed.startISO/endISO sono GIÀ UTC vero (dal JSON-LD "startDate") — usare
   // normalizeAlreadyUtc, MAI toEventbriteUtc (che sottrarrebbe l'offset di Roma
   // una seconda volta, vedi bug reale documentato sopra la funzione).
   const startUtc = normalizeAlreadyUtc(xceed.startISO);
   const endUtc = normalizeAlreadyUtc(xceed.endISO || xceed.startISO);
 
-  // xceed.ageRange è già nel formato "18+"/"21+"; xceed.doorsOpen è "HH:MM" UTC
-  // (orario ufficiale del venue, non una data — va ricombinato con la data
-  // reale dell'evento, presa da startUtc già corretto, per un door_time valido).
   let doorTimeISO: string | undefined;
   if (xceed.doorsOpen) {
     const datePart = startUtc.slice(0, 10);
     doorTimeISO = `${datePart}T${xceed.doorsOpen}:00Z`;
   }
 
-  return publishCore({
-    venueId: xceed.venueId,
-    startUtc,
-    endUtc,
-    titleEn: rewritten.titleEn,
-    summaryEn: rewritten.summaryEn,
-    description: sanitizedDescription,
-    poster,
-    ageRestriction: xceed.ageRange,
-    doorTimeISO,
-    dryRun,
+  return publishBothLangs({
+    venueId: xceed.venueId, startUtc, endUtc, rewritten,
+    descriptionEn: sanitizedDescriptionEn, descriptionIt: sanitizedDescriptionIt,
+    poster, ageRestriction: xceed.ageRange, doorTimeISO, dryRun, langsToPublish,
   });
 }
 
