@@ -134,10 +134,18 @@ async function fetchEventDetail(venueId: string, slug: string, xceedId: string, 
 
   if (!eventLd) return null;
 
+  // Questi campi vivono in un blob RSC con quote escapate (\"key\":\"value\"),
+  // non nel JSON-LD — verificato sulla pagina reale (2026-07-08).
   const ogImageMatch = html.match(/property="og:image" content="([^"]+)"/);
-  const dressMatch = html.match(/Dress Code[^A-Za-z]*<\/[a-z]+>\s*<[^>]*>([^<]+)/i);
-  const doorsMatch = html.match(/Doors open[^A-Za-z]*<\/[a-z]+>\s*<[^>]*>([^<]+)/i);
-  const genreMatches = [...html.matchAll(/"genre":"([^"]+)"/g)].map((m) => m[1]);
+  const dressMatch = html.match(/\\"dressCode\\":\{[^}]*\\"name\\":\\"([^\\]+)\\"/);
+  const doorsMatch = html.match(/\\"doorsOpening\\":(\d+)/);
+  const minAgeMatch = html.match(/\\"minimumAge\\":(\d+)/);
+  const genreMatches = [...html.matchAll(/\\"musicGenres\\":\[([^\]]*)\]/g)]
+    .flatMap((m) => [...m[1].matchAll(/\\"name\\":\\"([^\\]+)\\"/g)].map((g) => g[1]));
+
+  // decodeHtmlEntities: og:image arriva con "&amp;" nell'attributo HTML — un
+  // URL con "&amp;" letterale invece di "&" romperebbe i parametri di query.
+  const decodeEntities = (s: string) => s.replace(/&amp;/g, '&').replace(/&quot;/g, '"');
 
   return {
     xceedId,
@@ -148,13 +156,13 @@ async function fetchEventDetail(venueId: string, slug: string, xceedId: string, 
     name: String(eventLd.name || ''),
     startISO: String(eventLd.startDate || ''),
     endISO: eventLd.endDate ? String(eventLd.endDate) : undefined,
-    ageRange: eventLd.typicalAgeRange ? String(eventLd.typicalAgeRange) : undefined,
+    ageRange: eventLd.typicalAgeRange ? String(eventLd.typicalAgeRange) : (minAgeMatch ? `${minAgeMatch[1]}+` : undefined),
     description: String(eventLd.description || '').slice(0, 3000),
     dressCode: dressMatch?.[1]?.trim(),
-    doorsOpen: doorsMatch?.[1]?.trim(),
+    doorsOpen: doorsMatch ? new Date(parseInt(doorsMatch[1], 10) * 1000).toISOString() : undefined,
     offers,
-    imageUrl: ogImageMatch?.[1],
-    genres: genreMatches.length ? genreMatches : [],
+    imageUrl: ogImageMatch ? decodeEntities(ogImageMatch[1]) : undefined,
+    genres: [...new Set(genreMatches)],
   };
 }
 
