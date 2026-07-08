@@ -106,6 +106,22 @@ export async function GET(request: Request) {
     return NextResponse.json({ eventId: realEventId, start: g?.start, end: g?.end });
   }
 
+  // Fix generico music_properties — stesso motivo del fix time sopra.
+  // Query: eventId, ageRestriction, doorTime.
+  if (searchParams.get('fixMusicProps') === '1') {
+    const realEventId = searchParams.get('eventId');
+    const ageRestriction = searchParams.get('ageRestriction');
+    const doorTime = searchParams.get('doorTime');
+    if (!realEventId) return NextResponse.json({ error: 'eventId required' }, { status: 400 });
+    const jsonHeaders = { Authorization: `Bearer ${token}`, 'content-type': 'application/json' };
+    await fetch(`${EVENTBRITE_API}/events/${realEventId}/music_properties/`, {
+      method: 'POST', headers: jsonHeaders,
+      body: JSON.stringify({ music_properties: { ...(ageRestriction && { age_restriction: ageRestriction }), ...(doorTime && { door_time: doorTime }) } }),
+    });
+    const g = await (await fetch(`${EVENTBRITE_API}/events/${realEventId}/music_properties/`, { headers })).json().catch(() => null);
+    return NextResponse.json({ eventId: realEventId, musicProperties: g });
+  }
+
   // Repair generico: ricostruisce la description corretta (senza il bug
   // sanitize/emoji, ora fixato nel codice) per un evento Xceed già pubblicato
   // con contenuto rotto. Query: eventId, hook, affiliateUrl, slugEn, xceedId.
