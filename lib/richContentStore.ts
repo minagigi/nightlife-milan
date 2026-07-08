@@ -34,7 +34,7 @@ export async function putRichContent(slugEn: string, data: Omit<RichContentPaylo
   try {
     const payload: RichContentPayload = { ...data, storedAt: new Date().toISOString() };
     const blob = await put(pathFor(slugEn), JSON.stringify(payload), {
-      access: 'public',
+      access: 'private',
       addRandomSuffix: false,
       contentType: 'application/json',
       allowOverwrite: true,
@@ -51,7 +51,7 @@ export async function getRichContent(slugEn: string): Promise<RichContentPayload
   if (!token || !slugEn) return null;
 
   try {
-    const result = await get(pathFor(slugEn), { access: 'public', token });
+    const result = await get(pathFor(slugEn), { access: 'private', token });
     if (!result || result.statusCode !== 200 || !result.stream) return null;
     const text = await new Response(result.stream).text();
     return JSON.parse(text) as RichContentPayload;
