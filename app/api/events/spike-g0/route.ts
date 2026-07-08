@@ -87,6 +87,25 @@ export async function GET(request: Request) {
     return NextResponse.json({ eventId: realEventId, results });
   }
 
+  // Fix generico start/end — usato per correggere un errore di battitura mio
+  // (fixTimeAndMusicProps ha date hardcoded per un evento specifico, applicato
+  // per sbaglio a un evento diverso). Query: eventId, startUtc, endUtc.
+  if (searchParams.get('fixEventTime') === '1') {
+    const realEventId = searchParams.get('eventId');
+    const startUtc = searchParams.get('startUtc');
+    const endUtc = searchParams.get('endUtc');
+    if (!realEventId || !startUtc || !endUtc) {
+      return NextResponse.json({ error: 'eventId, startUtc, endUtc required' }, { status: 400 });
+    }
+    const jsonHeaders = { Authorization: `Bearer ${token}`, 'content-type': 'application/json' };
+    await fetch(`${EVENTBRITE_API}/events/${realEventId}/`, {
+      method: 'POST', headers: jsonHeaders,
+      body: JSON.stringify({ event: { start: { timezone: 'Europe/Rome', utc: startUtc }, end: { timezone: 'Europe/Rome', utc: endUtc } } }),
+    });
+    const g = await (await fetch(`${EVENTBRITE_API}/events/${realEventId}/`, { headers })).json().catch(() => null);
+    return NextResponse.json({ eventId: realEventId, start: g?.start, end: g?.end });
+  }
+
   // Repair generico: ricostruisce la description corretta (senza il bug
   // sanitize/emoji, ora fixato nel codice) per un evento Xceed già pubblicato
   // con contenuto rotto. Query: eventId, hook, affiliateUrl, slugEn, xceedId.
