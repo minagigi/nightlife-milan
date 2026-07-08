@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { scoutXceedEvents } from '@/lib/xceedScout';
+import { putRichContent, getRichContent } from '@/lib/richContentStore';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 120;
@@ -21,6 +22,18 @@ export async function GET(request: Request) {
   const okSecret = process.env.INDEXING_SECRET && searchParams.get('secret') === process.env.INDEXING_SECRET;
   if (!okCron && !okSecret) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  if (searchParams.get('testBlob') === '1') {
+    const testSlug = 'spike-x2-blob-test';
+    const writeResult = await putRichContent(testSlug, {
+      rewritten: { titleEn: 'TEST' } as unknown as import('@/lib/eventRewriter').RewrittenEvent,
+      offers: [{ name: 'Test Ticket', price: 10, category: 'ticket' }],
+      affiliateUrl: 'https://example.com/test',
+      venueId: 'v-justme',
+    });
+    const readResult = await getRichContent(testSlug);
+    return NextResponse.json({ writeResult, readResult, roundTripOk: readResult?.affiliateUrl === 'https://example.com/test' });
   }
 
   const days = parseInt(searchParams.get('days') || '7', 10);
