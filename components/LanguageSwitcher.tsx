@@ -38,12 +38,14 @@ export default function LanguageSwitcher({ currentLocale }: { currentLocale: str
   const getAlternatePath = (targetLocale: string) => {
     if (!pathname) return targetLocale === 'it' ? '/it' : '/';
 
-    const isCurrentlyIt = pathname.startsWith('/it/') || pathname === '/it';
-    let pathWithoutLocale = pathname;
-
-    if (isCurrentlyIt) {
-      pathWithoutLocale = pathname.replace(/^\/it(\/|$)/, '/');
-    }
+    // usePathname() can return the middleware-REWRITTEN internal path
+    // (`/en/events/...`) rather than the clean public URL (`/events/...`,
+    // English has no prefix on this site) — strip EITHER locale prefix, not
+    // just `/it/`. Real bug found live: stripping only `/it/` left the
+    // internal `/en/...` path untouched, so switching to Italian built
+    // `/it` + `/en/events/...` = `/it/en/events/...`, a route [locale] can't
+    // resolve past its first segment → 404.
+    const pathWithoutLocale = pathname.replace(/^\/(it|en)(\/|$)/, '/');
 
     if (targetLocale === 'it') {
       return pathWithoutLocale === '/' ? '/it' : `/it${pathWithoutLocale}`;
