@@ -50,6 +50,24 @@ export async function GET(request: Request) {
       const saved = g?.description?.html || '';
       results[`len_${len}`] = { sentLength: html.length, savedLength: saved.length, survivedFully: saved.length >= html.length * 0.9 };
     }
+
+    // Variante con emoji (il testo reale usa 💬🎟️🍾🌐⚠️) — isola se sono
+    // multi-byte/multi-codepoint emoji specifici a rompere il parsing.
+    const withEmoji = '<p>💬 WhatsApp: {{WHATSAPP}} · ✉️ concierge@nightlifemilan.com</p><p>🎟️ Buy tickets here</p><p>🍾 Book a table here</p><p>🌐 Full guide here</p><p>⚠️ Legal notice text here for testing purposes only.</p>';
+    await fetch(`${EVENTBRITE_API}/events/${realEventId}/`, { method: 'POST', headers: jsonHeaders, body: JSON.stringify({ event: { description: { html: withEmoji } } }) });
+    const gEmoji = await (await fetch(`${EVENTBRITE_API}/events/${realEventId}/`, { headers })).json().catch(() => null);
+    results.withEmoji = { sentLength: withEmoji.length, savedLength: (gEmoji?.description?.html || '').length, saved: (gEmoji?.description?.html || '').slice(0, 300) };
+
+    // Variante con link <a href> reali (affiliate url lunga) — isola se sono i
+    // link specificamente, indipendentemente dalle emoji.
+    const withLinks = '<p>Hook text here for testing the real link scenario in production.</p>' +
+      '<p><a href="https://xceed.me/en/milano/event/wednesday-night-213/220731/channel/nightlifemilan-1">🎟️ BUY TICKETS — Official link</a></p>' +
+      '<p><a href="https://xceed.me/en/milano/event/wednesday-night-213/220731/channel/nightlifemilan-1">🍾 BOOK A TABLE — VIP &amp; Bottle Service</a></p>' +
+      '<p><a href="https://nightlifemilan.com/events/wednesday-night-just-me-wednesday-july-8-2026-2026-07-08">🌐 Full event guide, programme &amp; 25 FAQ</a></p>';
+    await fetch(`${EVENTBRITE_API}/events/${realEventId}/`, { method: 'POST', headers: jsonHeaders, body: JSON.stringify({ event: { description: { html: withLinks } } }) });
+    const gLinks = await (await fetch(`${EVENTBRITE_API}/events/${realEventId}/`, { headers })).json().catch(() => null);
+    results.withLinks = { sentLength: withLinks.length, savedLength: (gLinks?.description?.html || '').length, saved: (gLinks?.description?.html || '').slice(0, 500) };
+
     return NextResponse.json({ eventId: realEventId, results });
   }
 
