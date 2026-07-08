@@ -5,10 +5,12 @@ import { getEventBySlug, getVenueById, getPerformerById, mockEvents } from '@/li
 import { weeklyEvents, getWeeklyEventBySlug } from '@/lib/eventsConfig';
 import { getLocalizedText, generateEventSchema, generateBreadcrumbSchema } from '@/lib/seo';
 import { fetchEventbriteEvents } from '@/lib/eventbriteSync';
+import { getRichContent } from '@/lib/richContentStore';
 import { Event } from '@/lib/types';
 import BookingForm from '@/components/BookingForm';
 import FAQAccordion from '@/components/FAQAccordion';
 import PricingGrid from '@/components/PricingGrid';
+import GoldEventContent from '@/components/GoldEventContent';
 
 /** Find a live Eventbrite event by its SEO slug (EN or IT). */
 async function getEbEventBySlug(slug: string): Promise<Event | undefined> {
@@ -347,9 +349,25 @@ export default async function EventPage({ params }: Props) {
 
   const performer = event.performerId ? getPerformerById(event.performerId) : null;
 
+  // FASE X2 (piano Xceed): contenuto gold-standard (sezioni/programma/25 FAQ/
+  // listino reale) letto dal blob se questo evento è passato dalla pipeline
+  // Xceed — assente per tutti gli altri eventi, rendering base invariato.
+  const richContent = await getRichContent(event.localizedContent.slug.en);
+
   // Generate JSON-LD Schemas
   const eventSchema = generateEventSchema(event, venue, performer || null, locale);
   const breadcrumbSchema = generateBreadcrumbSchema(event, venue, locale);
+  const faqSchema = richContent?.rewritten.faqLong?.length
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: richContent.rewritten.faqLong.map((f) => ({
+          '@type': 'Question',
+          name: f.question,
+          acceptedAnswer: { '@type': 'Answer', text: f.answer },
+        })),
+      }
+    : null;
 
   const title = getLocalizedText(event.localizedContent.title, locale);
   const venueName = getLocalizedText(venue.localizedContent.name, locale);
@@ -384,7 +402,13 @@ export default async function EventPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
+
       <main className="flex-1 flex flex-col w-full">
         {/* Hero Section */}
         <section className="relative w-full h-[60vh] min-h-[400px]">
@@ -511,6 +535,8 @@ export default async function EventPage({ params }: Props) {
                 <p className="font-sans text-white/50 text-sm">{venue.address.streetAddress}, {locale === 'it' ? 'Milano' : 'Milan'}</p>
               </div>
             </div>
+
+            {richContent && <GoldEventContent data={richContent} locale={locale} />}
           </div>
 
           {/* Sidebar / Ticket Info */}
@@ -540,7 +566,7 @@ export default async function EventPage({ params }: Props) {
               <a
                 href={event.xceedUrl}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel={event.xceedUrl.includes('eventbrite') ? 'noopener noreferrer' : 'noopener noreferrer sponsored'}
                 className="flex items-center justify-center gap-2 w-full bg-champagne text-black px-6 py-4 font-sans font-bold text-sm tracking-[0.15em] uppercase hover:bg-white transition-colors duration-300 mb-4"
               >
                 <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" /></svg>

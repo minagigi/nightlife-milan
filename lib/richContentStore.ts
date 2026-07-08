@@ -1,6 +1,7 @@
 import { put, get } from '@vercel/blob';
 import type { RewrittenEvent } from './eventRewriter';
 import type { XceedOffer } from './xceedScout';
+import { CONTACT } from '@/config/contact';
 
 /**
  * Storage del contenuto gold-standard completo (sezioni, programma, 25 FAQ)
@@ -26,13 +27,37 @@ function pathFor(slugEn: string): string {
   return `events/${slugEn}.json`;
 }
 
+const WHATSAPP_PLACEHOLDER_RE = /\{\{\s*WHATSAPP\s*\}\}/g;
+
+/**
+ * Risolve il placeholder {{WHATSAPP}} in testo semplice (il numero, non un
+ * link HTML) prima dello storage — questi campi vengono renderizzati come
+ * testo in components/GoldEventContent.tsx, non tramite dangerouslySetInnerHTML.
+ * A differenza di sanitize() (lib/brandSanitizer.ts, usato per la description
+ * Eventbrite) che inserisce un <a href> HTML, qui basta il numero puro.
+ */
+function resolveWhatsappPlaceholders(rewritten: RewrittenEvent): RewrittenEvent {
+  const resolve = (s: string) => (s || '').replace(WHATSAPP_PLACEHOLDER_RE, CONTACT.whatsapp.number);
+  return {
+    ...rewritten,
+    hook: resolve(rewritten.hook),
+    summaryEn: resolve(rewritten.summaryEn),
+    sections: rewritten.sections.map((s) => ({ ...s, body: resolve(s.body) })),
+    faqLong: rewritten.faqLong.map((f) => ({ ...f, answer: resolve(f.answer) })),
+  };
+}
+
 /** Scrive il contenuto ricco per uno slug — sovrascrive se già presente (stessa pathname, no suffisso random). */
 export async function putRichContent(slugEn: string, data: Omit<RichContentPayload, 'storedAt'>): Promise<{ ok: boolean; url?: string; error?: string }> {
   const token = process.env.BLOB_READ_WRITE_TOKEN;
   if (!token) return { ok: false, error: 'BLOB_READ_WRITE_TOKEN not set' };
 
   try {
-    const payload: RichContentPayload = { ...data, storedAt: new Date().toISOString() };
+    const payload: RichContentPayload = {
+      ...data,
+      rewritten: resolveWhatsappPlaceholders(data.rewritten),
+      storedAt: new Date().toISOString(),
+    };
     const blob = await put(pathFor(slugEn), JSON.stringify(payload), {
       access: 'private',
       addRandomSuffix: false,
