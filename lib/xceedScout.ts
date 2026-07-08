@@ -65,8 +65,15 @@ function extractJsonLdBlocks(html: string): unknown[] {
   return blocks;
 }
 
-/** Lista eventi di una venue page (slug + id + startDate) via i link `/event/{slug}/{id}`. */
-async function fetchVenueEventLinks(venuePageUrl: string): Promise<{ slug: string; xceedId: string }[]> {
+/**
+ * Lista eventi di una venue page CON data (slug + id + startingTime). La pagina
+ * incorpora un blob RSC con `\"legacyId\":N,\"name\":\"…\",\"slug\":\"…\",
+ * \"startingTime\":unixSeconds` per ogni evento — permette di filtrare per
+ * finestra temporale QUI, prima di visitare ogni pagina dettaglio (senza
+ * questo pre-filtro lo scout supera il maxDuration: una venue page elenca
+ * settimane di eventi futuri, non solo la finestra di interesse).
+ */
+async function fetchVenueEventLinks(venuePageUrl: string): Promise<{ slug: string; xceedId: string; startMs: number }[]> {
   let res: Response;
   try {
     res = await fetch(venuePageUrl, { headers: { 'User-Agent': UA } });
@@ -77,13 +84,17 @@ async function fetchVenueEventLinks(venuePageUrl: string): Promise<{ slug: strin
 
   const html = await res.text();
   const seen = new Set<string>();
-  const out: { slug: string; xceedId: string }[] = [];
+  const out: { slug: string; xceedId: string; startMs: number }[] = [];
 
-  for (const m of html.matchAll(/\/event\/([a-z0-9-]+)\/(\d+)/g)) {
-    const key = `${m[1]}/${m[2]}`;
+  const re = /\\"legacyId\\":(\d+),\\"name\\":\\"[^\\]*\\",\\"slug\\":\\"([a-z0-9-]+)\\",\\"startingTime\\":(\d+)/g;
+  for (const m of html.matchAll(re)) {
+    const xceedId = m[1];
+    const slug = m[2];
+    const startMs = parseInt(m[3], 10) * 1000;
+    const key = `${slug}/${xceedId}`;
     if (seen.has(key)) continue;
     seen.add(key);
-    out.push({ slug: m[1], xceedId: m[2] });
+    out.push({ slug, xceedId, startMs });
   }
 
   return out;
@@ -163,7 +174,12 @@ export async function scoutXceedEvents(daysAhead: number = WINDOW_DAYS_DEFAULT):
     const links = await fetchVenueEventLinks(venue.venuePageUrl);
     await new Promise((r) => setTimeout(r, RATE_LIMIT_MS));
 
-    for (const { slug, xceedId } of links) {
+    // Pre-filtro sulla finestra temporale usando startMs della lista — evita
+    // di visitare la pagina dettaglio di eventi fuori finestra (una venue page
+    // elenca settimane di eventi futuri).
+    const inWindow = links.filter((l) => l.startMs >= now.getTime() && l.startMs <= windowEnd.getTime());
+
+    for (const { slug, xceedId } of inWindow) {
       await new Promise((r) => setTimeout(r, RATE_LIMIT_MS));
       const detail = await fetchEventDetail(venue.venueId, slug, xceedId, venue.channel);
       if (!detail || !detail.startISO) continue;
