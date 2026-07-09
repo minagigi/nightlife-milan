@@ -29,12 +29,14 @@ export async function GET(request: Request) {
 
   const eventId = searchParams.get('eventId');
   const venueId = searchParams.get('venueId');
+  const posterUrl = searchParams.get('posterUrl') || undefined;
+  const returnBase64 = searchParams.get('returnBase64') === '1';
   if (!eventId || !venueId) {
     return NextResponse.json({ error: 'eventId and venueId query params required' }, { status: 400 });
   }
 
   try {
-    const poster = await processPoster(undefined, venueId, `fix-${eventId}`);
+    const poster = await processPoster(posterUrl, venueId, `fix-${eventId}`);
     const result = await replaceEventImage(eventId, poster);
 
     // Verifica server-side lo stato attuale dell'evento (bypassa qualsiasi
@@ -52,7 +54,13 @@ export async function GET(request: Request) {
       }
     }
 
-    return NextResponse.json({ ok: result.ok, reason: result.reason, imageSource: poster.source, currentLogo });
+    return NextResponse.json({
+      ok: result.ok,
+      reason: result.reason,
+      imageSource: poster.source,
+      currentLogo,
+      ...(returnBase64 ? { posterBase64: poster.buffer.toString('base64'), posterContentType: poster.contentType } : {}),
+    });
   } catch (e) {
     return NextResponse.json({ ok: false, error: (e as Error).message }, { status: 500 });
   }
