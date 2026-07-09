@@ -164,22 +164,53 @@ function shortDescFromText(text: string | undefined, fallback: string): string {
   return clean ? clean.slice(0, 200) : fallback;
 }
 
+/**
+ * Fetch della lista eventi live con retry — un fallimento transitorio
+ * dell'API Eventbrite (rate limit/hiccup) non deve tradursi in una lista
+ * vuota indistinguibile da "nessun evento": la pagina evento farebbe
+ * notFound() e Next CACHEREBBE quel 404 per l'intera finestra di
+ * revalidate (fino a 1h) — bug reale riportato dall'utente (bandierina
+ * italiana → 404 su una pagina che pochi minuti dopo rispondeva 200).
+ * Dopo i retry, fallisce con throw: i chiamanti tolleranti (homepage,
+ * sync) degradano a [], la pagina evento propaga l'errore (500 non
+ * cacheato) invece di un 404 cacheabile.
+ */
+const FETCH_RETRIES = 3;
+const FETCH_RETRY_DELAY_MS = 700;
+
 export async function fetchEventbriteEvents(): Promise<Event[]> {
   const token = getEventbriteToken();
   if (!token) return [];
 
-  try {
-    const res = await fetch(
-      `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=live&expand=venue,logo,ticket_classes&order_by=start_asc&time_filter=current_future`,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-        next: { revalidate: 300 },
+  let lastError: unknown = null;
+  let data: { events?: RawEbEvent[] } | null = null;
+
+  for (let attempt = 1; attempt <= FETCH_RETRIES; attempt++) {
+    try {
+      const res = await fetch(
+        `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=live&expand=venue,logo,ticket_classes&order_by=start_asc&time_filter=current_future`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+          next: { revalidate: 300 },
+        }
+      );
+      if (!res.ok) {
+        lastError = new Error(`Eventbrite list HTTP ${res.status}`);
+      } else {
+        data = await res.json();
+        break;
       }
-    );
+    } catch (e) {
+      lastError = e;
+    }
+    if (attempt < FETCH_RETRIES) await new Promise((r) => setTimeout(r, FETCH_RETRY_DELAY_MS * attempt));
+  }
 
-    if (!res.ok) return [];
+  if (!data) {
+    throw new Error(`Eventbrite events fetch failed after ${FETCH_RETRIES} attempts: ${(lastError as Error)?.message || 'unknown'}`);
+  }
 
-    const data = await res.json();
+  try {
     const raw = (data.events || []) as RawEbEvent[];
 
     // FASE F1 (2026-07-08): raggruppare per baseId del marker — l'architettura
@@ -252,7 +283,9 @@ export async function fetchEventbriteEvents(): Promise<Event[]> {
     }
 
     return events;
-  } catch {
-    return [];
+  } catch (e) {
+    // Anche un errore di mapping post-fetch deve propagarsi, mai degradare a
+    // lista vuota: stessa ragione del retry sopra (404 cacheato da ISR).
+    throw new Error(`Eventbrite events mapping failed: ${(e as Error).message}`);
   }
 }

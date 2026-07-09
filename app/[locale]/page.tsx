@@ -9,7 +9,7 @@ import { MessageCircle } from 'lucide-react';
 import { Suspense } from 'react';
 import { mockEvents, mockVenues } from '@/lib/data';
 import { fetchEventbriteEvents } from '@/lib/eventbriteSync';
-import { Venue } from '@/lib/types';
+import { Venue, Event } from '@/lib/types';
 import { CONTACT } from '@/config/contact';
 
 const EventsCarousel = nextDynamic(() => import('@/components/EventsCarousel'));
@@ -161,7 +161,15 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   const todayMidnight = new Date();
   todayMidnight.setHours(0, 0, 0, 0);
 
-  const eventbriteEvents = await fetchEventbriteEvents();
+  // Tollerante al fallimento: la homepage degrada agli eventi statici se
+  // l'API Eventbrite è irraggiungibile (fetchEventbriteEvents ora lancia
+  // dopo i retry invece di ritornare [] — vedi lib/eventbriteSync.ts).
+  let eventbriteEvents: Event[] = [];
+  try {
+    eventbriteEvents = await fetchEventbriteEvents();
+  } catch {
+    // degrado silenzioso: solo eventi statici
+  }
   const allRawEvents = [
     ...mockEvents,
     ...eventbriteEvents.filter(eb => !mockEvents.some(m => m.id === eb.id)),

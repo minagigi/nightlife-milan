@@ -12,16 +12,16 @@ import FAQAccordion from '@/components/FAQAccordion';
 import PricingGrid from '@/components/PricingGrid';
 import GoldEventContent from '@/components/GoldEventContent';
 
-/** Find a live Eventbrite event by its SEO slug (EN or IT). */
+/** Find a live Eventbrite event by its SEO slug (EN or IT).
+ * NESSUN try/catch qui: se la fetch Eventbrite fallisce (dopo i retry
+ * interni) l'errore DEVE propagarsi come 500 non cacheato — degradare a
+ * undefined produceva notFound(), e Next cacheava quel 404 per l'intera
+ * finestra ISR (bug reale: bandierina IT → 404 su pagina esistente). */
 async function getEbEventBySlug(slug: string): Promise<Event | undefined> {
-  try {
-    const events = await fetchEventbriteEvents();
-    return events.find(
-      (ev) => ev.localizedContent.slug.en === slug || ev.localizedContent.slug.it === slug
-    );
-  } catch {
-    return undefined;
-  }
+  const events = await fetchEventbriteEvents();
+  return events.find(
+    (ev) => ev.localizedContent.slug.en === slug || ev.localizedContent.slug.it === slug
+  );
 }
 
 const FALLBACK_GALLERY = [
