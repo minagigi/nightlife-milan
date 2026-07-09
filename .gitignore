@@ -5,7 +5,8 @@ coverage/
 *.log
 .env*
 !.env.example
-.claude/
+.claude/*
+!.claude/brain/
 
 .vercel
 .env*
