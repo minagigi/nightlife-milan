@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { CONTACT } from '@/config/contact';
+import { trackEvent } from '@/lib/analytics';
 
 interface BookingFormProps {
   lang: string;
@@ -35,6 +36,11 @@ export default function BookingForm({ lang, prefilledDate, venueName, eventName 
     const message = isIt
       ? `Ciao! Vorrei prenotare ${context}${dateStr} per ${formData.guests} persone. Mi chiamo ${formData.name} (${formData.email}). Potete aiutarmi?`
       : `Hi! I'd like to book ${context}${dateStr} for ${formData.guests} guests. My name is ${formData.name} (${formData.email}). Can you help?`;
+
+    // window.open non è un click su <a>: la delega di AnalyticsTracker non lo
+    // vede, quindi qui il tracking è esplicito. Mai inviare nome/email.
+    trackEvent('booking_form_submit', { venue: venueName, event_slug: eventName, guests: formData.guests });
+    trackEvent('whatsapp_click', { source: 'booking_form' });
 
     window.open(`${CONTACT.whatsapp.link}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
   };

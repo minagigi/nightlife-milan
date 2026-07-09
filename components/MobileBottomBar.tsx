@@ -73,6 +73,7 @@ export default function MobileBottomBar({ currentLocale }: { currentLocale: stri
           href={`${CONTACT.whatsapp.link}?text=${encodeURIComponent(bookingMsg)}`}
           target="_blank"
           rel="noopener noreferrer"
+          data-analytics-source="bottom_bar"
           aria-label={
             contextName
               ? isIt

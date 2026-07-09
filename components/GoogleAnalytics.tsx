@@ -30,17 +30,12 @@ export default function GoogleAnalytics() {
       s.async = true;
       document.head.appendChild(s);
 
-      // @ts-expect-error gtag dataLayer global
+      // Tipi globali di window.dataLayer/gtag dichiarati in lib/analytics.ts
       window.dataLayer = window.dataLayer || [];
-      // @ts-expect-error gtag global
       window.gtag = function gtag() {
-        // eslint-disable-next-line prefer-rest-params
-        // @ts-expect-error arguments
-        window.dataLayer.push(arguments);
+        window.dataLayer!.push(arguments);
       };
-      // @ts-expect-error gtag global
       window.gtag('js', new Date());
-      // @ts-expect-error gtag global
       window.gtag('config', GA_ID);
     }
 

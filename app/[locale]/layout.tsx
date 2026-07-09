@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Providers } from '@/components/Providers';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
+import AnalyticsTracker from '@/components/AnalyticsTracker';
 import IdleMount from '@/components/IdleMount';
 import '@/app/globals.css';
 
@@ -161,6 +162,7 @@ export default async function RootLayout({
           </IdleMount>
         </Providers>
         <GoogleAnalytics />
+        <AnalyticsTracker />
       </body>
     </html>
   );

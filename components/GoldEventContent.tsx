@@ -26,6 +26,7 @@ export default function GoldEventContent({ data, locale }: { data: RichContentPa
           href={affiliateUrl}
           target="_blank"
           rel="noopener noreferrer sponsored"
+          data-analytics-source="gold_buy_tickets"
           className="flex-1 flex items-center justify-center gap-2 bg-champagne text-black px-6 py-4 font-sans font-bold text-sm tracking-[0.15em] uppercase hover:bg-white transition-colors duration-300"
         >
           🎟️ {isIt ? 'Compra Biglietti' : 'Buy Tickets'}
@@ -34,6 +35,7 @@ export default function GoldEventContent({ data, locale }: { data: RichContentPa
           href={affiliateUrl}
           target="_blank"
           rel="noopener noreferrer sponsored"
+          data-analytics-source="gold_book_table"
           className="flex-1 flex items-center justify-center gap-2 border border-champagne/60 text-champagne px-6 py-4 font-sans font-bold text-sm tracking-[0.15em] uppercase hover:bg-champagne/10 transition-colors duration-300"
         >
           🍾 {isIt ? 'Prenota Tavolo' : 'Book a Table'}

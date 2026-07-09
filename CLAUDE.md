@@ -100,4 +100,20 @@ Dati UFFICIALI dei venue (prezzi/orari/età/dress code reali, non scraping) via 
 
 ---
 
-**Last Updated**: 2026-07-08
+## Analytics interno (dashboard /analytics)
+
+Strategia completa: `docs/analytics-strategy.md`. Dashboard su `/analytics` protetta da **Basic Auth nel middleware** (`ANALYTICS_USER`/`ANALYTICS_PASSWORD`).
+
+| File | Ruolo |
+|------|-------|
+| `lib/analytics.ts` + `components/AnalyticsTracker.tsx` | `trackEvent()` doppia scrittura (GA4 + beacon `/api/track`); tracker nel layout con delega click globale su `wa.me`/`xceed.me`/`eventbrite` (`data-analytics-source` etichetta la CTA) |
+| `lib/analyticsStore.ts` | Layer dati su Blob: raw append-only → daily compattati (fuso Europe/Rome), snapshot Eventbrite, dati manuali Xceed |
+| `app/api/track/route.ts` | Ingest beacon (whitelist eventi, filtro bot, mai PII) |
+| `app/api/analytics/aggregate`, `app/api/analytics/eventbrite` | Cron 04:30/04:00 UTC (auth: `CRON_SECRET` o `?secret=INDEXING_SECRET`) |
+| `app/[locale]/analytics/` | Dashboard + server action Xceed (POSTano sull'URL della pagina → coperte dalla Basic Auth; NON spostarle su /api) |
+
+⚠️ Le visite/vendite Xceed si inseriscono a mano da pro.xceed.me nel form della dashboard (nessuna API pubblica).
+
+---
+
+**Last Updated**: 2026-07-09

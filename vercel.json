@@ -11,6 +11,14 @@
     {
       "path": "/api/events/import-xceed",
       "schedule": "0 3 * * *"
+    },
+    {
+      "path": "/api/analytics/eventbrite",
+      "schedule": "0 4 * * *"
+    },
+    {
+      "path": "/api/analytics/aggregate",
+      "schedule": "30 4 * * *"
     }
   ]
 }
