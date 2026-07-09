@@ -16,7 +16,7 @@
 
 **At task completion:**
 - Save key decisions in `.claude/completions/YYYY-MM-DD-task.md`
-- Run the `/self-improve:self-improve` cycle (plugin — one-time install: `/plugin marketplace add minagigi/nightlife-milan` then `/plugin install self-improve@minagigi-tools`; source in `tools/claude-plugins/`): distill session lessons into max 4 gated edits to CLAUDE.md/skills, logged in `.claude/self-improve/EVOLUTION_LOG.md`
+- Run the self-improve cycle: distill session lessons into max 4 gated edits to CLAUDE.md/skills, logged in `.claude/self-improve/EVOLUTION_LOG.md`. (The reusable skill previously lived in this repo as a plugin; pulled out because this repo is public — pending a private repo to host it again, see EVOLUTION_LOG.)
 
 **⚠️ NEVER auto-load:**
 - `.claude/completions/` · `.claude/sessions/` · `docs/archive/`
