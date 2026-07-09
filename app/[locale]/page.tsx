@@ -7,8 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { MessageCircle } from 'lucide-react';
 import { Suspense } from 'react';
-import { mockEvents, mockVenues } from '@/lib/data';
-import { fetchEventbriteEvents } from '@/lib/eventbriteSync';
+import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset, romeSundayKey } from '@/lib/calendarEvents';
 import { Venue, Event } from '@/lib/types';
 import { CONTACT } from '@/config/contact';
 
@@ -157,23 +156,19 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     url: lang === 'it' ? 'https://nightlifemilan.com/it' : 'https://nightlifemilan.com',
   };
 
-  // Upcoming events only
-  const todayMidnight = new Date();
-  todayMidnight.setHours(0, 0, 0, 0);
+  // Sorgente unificata (statici + Eventbrite/Xceed + serate ricorrenti
+  // settimanali) e confini di giorno nel fuso di Roma — non del server
+  // (UTC su Vercel), stessa correzione già applicata a /calendar/* ed
+  // /events/*. Prima la homepage usava la mezzanotte locale del server e
+  // ignorava del tutto le serate ricorrenti (Just Me, Pineta, Aria, Voya,
+  // 55 Milano, Play Club, Repvblic): se una venue non aveva un evento
+  // one-off proprio quella sera, "Stasera" saltava al giorno successivo
+  // anche se il locale era regolarmente aperto.
+  const baseItems = await getAllCalendarEvents();
 
-  // Tollerante al fallimento: la homepage degrada agli eventi statici se
-  // l'API Eventbrite è irraggiungibile (fetchEventbriteEvents ora lancia
-  // dopo i retry invece di ritornare [] — vedi lib/eventbriteSync.ts).
-  let eventbriteEvents: Event[] = [];
-  try {
-    eventbriteEvents = await fetchEventbriteEvents();
-  } catch {
-    // degrado silenzioso: solo eventi statici
-  }
-  const allRawEvents = [
-    ...mockEvents,
-    ...eventbriteEvents.filter(eb => !mockEvents.some(m => m.id === eb.id)),
-  ];
+  const todayKey = romeDayKeyOffset(0);
+  const tomorrowKey = romeDayKeyOffset(1);
+  const sundayKey = romeSundayKey();
 
   // Priority: JustMe=1, Pineta=2, Aria=3, rest=99
   const getVenuePriority = (venueId: string) => {
@@ -183,39 +178,21 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     return 99;
   };
 
-  const sortEvents = (a: { event: typeof allRawEvents[0]; venue: Venue }, b: { event: typeof allRawEvents[0]; venue: Venue }) => {
+  const sortEvents = (a: { event: Event; venue: Venue }, b: { event: Event; venue: Venue }) => {
     const dateA = new Date(a.event.dateISO).getTime();
     const dateB = new Date(b.event.dateISO).getTime();
     if (dateA !== dateB) return dateA - dateB;
     return getVenuePriority(a.event.venueId) - getVenuePriority(b.event.venueId);
   };
 
-  const todayEnd = new Date(todayMidnight);
-  todayEnd.setHours(23, 59, 59, 999);
-
-  const tomorrow = new Date(todayMidnight);
-  tomorrow.setDate(tomorrow.getDate() + 1);
-
-  const sunday = new Date(todayMidnight);
-  const dow = sunday.getDay();
-  sunday.setDate(sunday.getDate() + (dow === 0 ? 0 : 7 - dow));
-  sunday.setHours(23, 59, 59, 999);
-
-  const baseItems = allRawEvents
-    .map(event => ({ event, venue: mockVenues.find(v => v.id === event.venueId) as Venue }))
-    .filter(item => item.venue !== undefined);
-
   const tonightEvents = baseItems
-    .filter(({ event }) => {
-      const d = new Date(event.dateISO);
-      return d >= todayMidnight && d <= todayEnd;
-    })
+    .filter(({ event }) => romeDayKey(event.dateISO) === todayKey)
     .sort(sortEvents);
 
   const weekEvents = baseItems
     .filter(({ event }) => {
-      const d = new Date(event.dateISO);
-      return d >= tomorrow && d <= sunday;
+      const key = romeDayKey(event.dateISO);
+      return key >= tomorrowKey && key <= sundayKey;
     })
     .sort(sortEvents);
 
