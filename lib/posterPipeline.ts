@@ -174,7 +174,7 @@ async function loadBadge(): Promise<{ base64: string; mediaType: string } | null
   return cachedBadge;
 }
 
-async function editWithNanoBanana(
+export async function editWithNanoBanana(
   imageBase64: string,
   mediaType: string,
   retryPrompt?: string,
