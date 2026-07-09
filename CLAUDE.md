@@ -16,6 +16,7 @@
 
 **At task completion:**
 - Save key decisions in `.claude/completions/YYYY-MM-DD-task.md`
+- Run the `/self-improve` cycle (`.claude/skills/self-improve/SKILL.md`): distill session lessons into max 4 gated edits to CLAUDE.md/skills, logged in `EVOLUTION_LOG.md`
 
 **⚠️ NEVER auto-load:**
 - `.claude/completions/` · `.claude/sessions/` · `docs/archive/`
@@ -100,4 +101,4 @@ Dati UFFICIALI dei venue (prezzi/orari/età/dress code reali, non scraping) via 
 
 ---
 
-**Last Updated**: 2026-07-08
+**Last Updated**: 2026-07-09

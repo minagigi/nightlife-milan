@@ -5,7 +5,10 @@ coverage/
 *.log
 .env*
 !.env.example
-.claude/
+# .claude/ resta locale (sessions, completions, settings) MA le skills sono versionate:
+# le sessioni remote clonano il repo fresco, una skill non committata non esiste per loro
+.claude/*
+!.claude/skills/
 
 .vercel
 .env*
