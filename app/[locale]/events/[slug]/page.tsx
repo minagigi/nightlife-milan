@@ -481,12 +481,28 @@ export default async function EventPage({ params }: Props) {
     timeZone: 'Europe/Rome'
   }).format(dateObj);
 
-  // Format Price
-  const formattedPrice = new Intl.NumberFormat(locale === 'it' ? 'it-IT' : 'en-US', {
-    style: 'currency',
-    currency: event.pricing.currency,
-    maximumFractionDigits: 0,
-  }).format(event.pricing.entry);
+  // Format Price — null quando non c'è un prezzo reale confermato (vedi
+  // lib/eventbriteSync.ts: il ticket Eventbrite non è mai il prezzo vero)
+  const formattedPrice = event.pricing.entry === null
+    ? null
+    : new Intl.NumberFormat(locale === 'it' ? 'it-IT' : 'en-US', {
+        style: 'currency',
+        currency: event.pricing.currency,
+        maximumFractionDigits: 0,
+      }).format(event.pricing.entry);
+
+  // Frase prezzo per il trafiletto AI — omette del tutto la parte "Ingresso"
+  // quando il prezzo non è confermato, invece di affermare "Gratuito" a caso.
+  const entryText = event.pricing.entry === null
+    ? null
+    : (event.pricing.entry === 0 ? (locale === 'it' ? 'Gratuito' : 'Free') : formattedPrice);
+  const tableText = event.pricing.tableMinSpend
+    ? (locale === 'it' ? `tavoli VIP da €${event.pricing.tableMinSpend}` : `VIP tables from €${event.pricing.tableMinSpend}`)
+    : null;
+  const pricePhrase = [
+    entryText ? `${locale === 'it' ? 'Ingresso' : 'Entry'}: ${entryText}` : null,
+    tableText,
+  ].filter(Boolean).join(', ');
 
   return (
     <>
@@ -548,8 +564,8 @@ export default async function EventPage({ params }: Props) {
               <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">Quick Answer</p>
               <p className="font-sans text-white/70 text-sm leading-relaxed">
                 {locale === 'it'
-                  ? `${title} @ ${venueName} a Milano. Data: ${formattedDate}. Ingresso: ${event.pricing.entry === 0 ? 'Gratuito' : formattedPrice}${event.pricing.tableMinSpend ? `, tavoli VIP da €${event.pricing.tableMinSpend}` : ''}. Prenota via WhatsApp +39 351 912 7047.`
-                  : `${title} @ ${venueName} in Milan. Date: ${formattedDate}. Entry: ${event.pricing.entry === 0 ? 'Free' : formattedPrice}${event.pricing.tableMinSpend ? `, VIP tables from €${event.pricing.tableMinSpend}` : ''}. Book via WhatsApp +39 351 912 7047.`}
+                  ? `${title} @ ${venueName} a Milano. Data: ${formattedDate}.${pricePhrase ? ` ${pricePhrase}.` : ''} Prenota via WhatsApp +39 351 912 7047.`
+                  : `${title} @ ${venueName} in Milan. Date: ${formattedDate}.${pricePhrase ? ` ${pricePhrase}.` : ''} Book via WhatsApp +39 351 912 7047.`}
               </p>
             </div>
 
@@ -657,7 +673,11 @@ export default async function EventPage({ params }: Props) {
               <div className="flex justify-between items-center">
                 <span className="text-white/50">{locale === 'it' ? 'Ingresso' : 'Entry'}</span>
                 <span className="text-white font-bold text-xl">
-                  {event.pricing.entry === 0 ? (locale === 'it' ? 'Gratis' : 'Free') : formattedPrice}
+                  {event.pricing.entry === null
+                    ? (locale === 'it' ? 'Su richiesta' : 'On request')
+                    : event.pricing.entry === 0
+                      ? (locale === 'it' ? 'Gratis' : 'Free')
+                      : formattedPrice}
                 </span>
               </div>
               {event.pricing.tableMinSpend && (

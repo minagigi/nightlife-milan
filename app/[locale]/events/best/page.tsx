@@ -308,7 +308,7 @@ export default async function EventsBestPage({ params }: Props) {
                               <span className="text-champagne/50 text-xs font-mono w-28 shrink-0">{dateStr}</span>
                               <span className="text-white/80 text-sm group-hover:text-champagne transition-colors">{title}</span>
                             </div>
-                            {event.pricing.entry > 0 && (
+                            {event.pricing.entry !== null && event.pricing.entry > 0 && (
                               <span className="text-champagne/50 text-xs shrink-0 ml-2">€{event.pricing.entry}</span>
                             )}
                           </Link>

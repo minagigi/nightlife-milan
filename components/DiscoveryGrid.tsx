@@ -39,6 +39,7 @@ function GridContent({ items, lang, title, subtitle }: DiscoveryGridProps) {
   if (priceFilter) {
     filteredItems = filteredItems.filter(item => {
       const entry = item.event.pricing.entry;
+      if (entry === null) return false; // prezzo non confermato: escluso dai filtri specifici
       if (priceFilter === 'free') return entry === 0;
       if (priceFilter === 'under30') return entry > 0 && entry < 30;
       if (priceFilter === 'over30') return entry >= 30;

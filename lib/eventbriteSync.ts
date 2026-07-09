@@ -2,6 +2,7 @@ import { Event, MusicGenre } from './types';
 import { rewriteEventSEO } from './seoRewrite';
 import { matchVenueId } from './venueMatching';
 import { getEventbriteToken } from './eventbriteToken';
+import { getVenuePricing } from './venuePricing';
 
 const EVENTBRITE_API = 'https://www.eventbriteapi.com/v3';
 const ORG_ID = '2988002072164';
@@ -91,12 +92,22 @@ function cleanTitle(raw: string): string {
     .trim();
 }
 
-function extractEntryPrice(ticketClasses?: Array<{ free: boolean; cost?: { major_value: string } }>): number {
-  if (!ticketClasses?.length) return 0;
-  const free = ticketClasses.find(t => t.free);
-  if (free) return 0;
-  const paid = ticketClasses.find(t => t.cost?.major_value);
-  return paid ? parseFloat(paid.cost!.major_value) : 0;
+/** Prezzo reale di ingresso per venue, MAI da Eventbrite: il nostro stesso
+ * publisher (eventPublisher.ts) crea sempre un ticket_class `free: true` come
+ * semplice RSVP — non è mai il prezzo vero (si paga alla porta o si prenota
+ * via WhatsApp). Usare `ticket_classes` per il prezzo mostrerebbe "Gratis" su
+ * OGNI evento importato (bug reale riportato dall'utente). L'unica fonte di
+ * prezzo reale è il listino confermato in `venuePricing.ts`; se il venue non
+ * ha ancora un listino confermato, il prezzo resta `null` (nessun prezzo
+ * mostrato) invece di affermare "Gratis" o inventare una cifra. */
+function realEntryPrice(venueId: string): number | null {
+  const tiers = getVenuePricing(venueId).ticketTiers;
+  return tiers?.length ? Math.min(...tiers.map(t => t.price)) : null;
+}
+
+function realTableMinSpend(venueId: string): number | null {
+  const tiers = getVenuePricing(venueId).tableTiers;
+  return tiers?.length ? Math.min(...tiers.map(t => t.price)) : null;
 }
 
 export async function debugEventbrite() {
@@ -151,7 +162,7 @@ function buildSharedFields(ev: RawEbEvent, title: string, desc: string) {
     genre: detectGenre(title + ' ' + desc),
     dateISO: ev.start.utc,
     endDateISO: ev.end.utc,
-    pricing: { entry: extractEntryPrice(ev.ticket_classes), currency: 'EUR' as const, tableMinSpend: null },
+    pricing: { entry: realEntryPrice(venueId), currency: 'EUR' as const, tableMinSpend: realTableMinSpend(venueId) },
     image: ev.logo?.url || ev.logo?.original?.url,
     isSpecial: /live|special|vip/i.test(title),
     isTrending: ev.status === 'live',
