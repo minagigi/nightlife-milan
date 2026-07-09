@@ -1,0 +1,24 @@
+# EVOLUTION.md — Auto-miglioramento del cervello
+
+Ogni volta che il cervello modifica sé stesso (BRAIN.md, PROJECTS.md, protocolli), registra qui:
+data, cosa è cambiato, perché, effetto atteso. Le voci più recenti in alto.
+
+---
+
+## 2026-07-09 — Anticipo del mattino (richiesta del proprietario)
+
+- **Cosa**: analisi spostata dalle 06:00 alle 04:00, briefing+dispatch dalle 08:00 alle 06:00
+  (ora di Milano). Routine 14:00 e 20:00 invariate.
+- **Perché**: il proprietario vuole la strategia in mano alle 06:00 del mattino, con il
+  ragionamento fatto molto prima.
+- **Effetto atteso**: due ore di lavoro in più ogni giorno per i sub-agenti.
+
+## 2026-07-09 — Nascita del cervello
+
+- **Cosa**: creati BRAIN.md, PROJECTS.md, template strategia, journal e le 4 routine giornaliere
+  (04:00 analisi, 06:00 briefing+dispatch, 14:00 avanzamento, 20:00 retro+auto-miglioramento,
+  ora di Milano).
+- **Perché**: il proprietario vuole che tutti i progetti si auto-migliorino ogni giorno, con
+  strategia pensata dal cervello (Fable 5) ed esecuzione parallela di sub-agenti Sonnet.
+- **Effetto atteso**: ogni mattina alle 06:00 un briefing con analisi e strategia; PR di
+  miglioramento aperte ogni giorno; il sistema impara dai propri errori via retrospettiva.
