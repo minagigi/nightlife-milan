@@ -1,3 +1,6 @@
+> **NON ATTIVO** — alternativa opzionale al cloud. Le routine cloud sono ATTIVE:
+> installare queste attività solo dopo averle spente, altrimenti doppie esecuzioni.
+
 # Il Cervello in locale su Windows
 
 Il cervello ora gira sul tuo PC invece che in cloud: stessi protocolli (BRAIN.md), stessi

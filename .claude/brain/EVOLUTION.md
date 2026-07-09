@@ -5,6 +5,20 @@ data, cosa è cambiato, perché, effetto atteso. Le voci più recenti in alto.
 
 ---
 
+## 2026-07-09 — Rientro sul cloud + Remote Control per PC/telefono
+
+- **Cosa**: le 4 routine cloud sono state RIATTIVATE (la migrazione allo scheduler
+  Windows era un fraintendimento: il proprietario voleva usare Claude Code dal PC e
+  comandarlo dal telefono, non spostare lo scheduling). Aggiunto
+  `remoteControlAtStartup: true` in `.claude/settings.json`: ogni sessione `claude`
+  aperta nel repo sul PC compare con l'icona laptop su claude.ai/code e nell'app
+  mobile, comandabile da lì. Il kit Task Scheduler resta nel repo come alternativa
+  opzionale non attiva.
+- **Perché**: uso interattivo dal PC (accesso a ciò che il cloud non ha) con controllo
+  remoto dal telefono, restando tutto su Claude Code.
+- **Effetto atteso**: cervello autonomo in cloud invariato; in più sessioni locali
+  interattive raggiungibili da qualsiasi dispositivo.
+
 ## 2026-07-09 — Migrazione in locale su Windows (richiesta del proprietario)
 
 - **Cosa**: il cervello ora gira sul PC Windows del proprietario via Utilità di
