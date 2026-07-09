@@ -1,16 +1,19 @@
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 import { getEventBySlug, getVenueById, getPerformerById, mockEvents } from '@/lib/data';
 import { weeklyEvents, getWeeklyEventBySlug } from '@/lib/eventsConfig';
 import { getLocalizedText, generateEventSchema, generateBreadcrumbSchema } from '@/lib/seo';
 import { fetchEventbriteEvents } from '@/lib/eventbriteSync';
+import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
 import { getRichContent } from '@/lib/richContentStore';
 import { Event, Venue } from '@/lib/types';
 import BookingForm from '@/components/BookingForm';
 import FAQAccordion from '@/components/FAQAccordion';
 import PricingGrid from '@/components/PricingGrid';
 import GoldEventContent from '@/components/GoldEventContent';
+import MoreVenueEvents, { MoreVenueEventItem } from '@/components/MoreVenueEvents';
 
 /** Find a live Eventbrite event by its SEO slug (EN or IT).
  * NESSUN try/catch qui: se la fetch Eventbrite fallisce (dopo i retry
@@ -397,6 +400,35 @@ export default async function EventPage({ params }: Props) {
   // Xceed — assente per tutti gli altri eventi, rendering base invariato.
   const richContent = await getRichContent(event.localizedContent.slug.en);
 
+  // Internal linking: "More events at {venue}" — riusa la sorgente dati
+  // unificata già usata da homepage/calendar (statici + Eventbrite/Xceed
+  // reali). getAllCalendarEvents() degrada già da sola se Eventbrite non
+  // risponde (vedi lib/calendarEvents.ts), quindi nessun try/catch qui.
+  const allVenueCalendarItems = await getAllCalendarEvents();
+  const moreVenueEvents: MoreVenueEventItem[] = allVenueCalendarItems
+    .filter(
+      ({ event: e }) =>
+        e.venueId === event.venueId && e.id !== event.id && isUpcomingRome(e.dateISO)
+    )
+    .sort((a, b) => new Date(a.event.dateISO).getTime() - new Date(b.event.dateISO).getTime())
+    .slice(0, 4)
+    .map(({ event: e }) => {
+      const eSlug = locale === 'it' ? (e.localizedContent.slug.it || e.localizedContent.slug.en) : e.localizedContent.slug.en;
+      const eDateStr = new Intl.DateTimeFormat(locale === 'it' ? 'it-IT' : 'en-US', {
+        weekday: 'short',
+        day: 'numeric',
+        month: 'short',
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZone: 'Europe/Rome',
+      }).format(new Date(e.dateISO));
+      return {
+        href: `${locale === 'it' ? '/it' : ''}/events/${eSlug}`,
+        title: getLocalizedText(e.localizedContent.title, locale),
+        dateStr: eDateStr,
+      };
+    });
+
   // Generate JSON-LD Schemas
   const eventSchema = generateEventSchema(event, venue, performer || null, locale);
   const breadcrumbSchema = generateBreadcrumbSchema(event, venue, locale);
@@ -415,6 +447,9 @@ export default async function EventPage({ params }: Props) {
   const title = getLocalizedText(event.localizedContent.title, locale);
   const venueName = getLocalizedText(venue.localizedContent.name, locale);
   const description = getLocalizedText(event.localizedContent.shortDescription, locale);
+  // Internal linking: venue name in "About the venue" links to its /clubs page.
+  const venueSlug = getLocalizedText(venue.slugs, locale);
+  const venueHref = `${locale === 'it' ? '/it' : ''}/clubs/${venueSlug}`;
 
   // Format Date
   const dateObj = new Date(event.dateISO);
@@ -533,7 +568,21 @@ export default async function EventPage({ params }: Props) {
 
             {/* H2: Venue Info */}
             <h2 className="text-2xl font-serif font-bold text-champagne mt-12 mb-4">
-              {locale === 'it' ? `${venueName}: La Venue` : `About ${venueName}`}
+              {locale === 'it' ? (
+                <>
+                  <Link href={venueHref} className="hover:text-white transition-colors underline decoration-champagne/40 underline-offset-4">
+                    {venueName}
+                  </Link>
+                  {': La Venue'}
+                </>
+              ) : (
+                <>
+                  {'About '}
+                  <Link href={venueHref} className="hover:text-white transition-colors underline decoration-champagne/40 underline-offset-4">
+                    {venueName}
+                  </Link>
+                </>
+              )}
             </h2>
             <p className="text-white/70 leading-relaxed">
               {locale === 'it'
@@ -576,6 +625,8 @@ export default async function EventPage({ params }: Props) {
             </div>
 
             {richContent && <GoldEventContent data={richContent} locale={locale} />}
+
+            <MoreVenueEvents items={moreVenueEvents} locale={locale} venueName={venueName} />
           </div>
 
           {/* Sidebar / Ticket Info */}
