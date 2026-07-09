@@ -40,8 +40,10 @@ function mapSameSite(v) {
 }
 
 async function launch() {
+  // In locale (sul PC dell'utente) usare HEADFUL=1 per vedere la finestra
+  // e fare il login Google manualmente la prima volta; il profilo persiste.
   return chromium.launchPersistentContext(PROFILE_DIR, {
-    headless: true,
+    headless: process.env.HEADFUL !== '1',
     viewport: { width: 1440, height: 900 },
     locale: 'it-IT',
     timezoneId: 'Europe/Rome',
@@ -98,7 +100,17 @@ if (cmd === 'cookies') {
   } finally {
     await ctx.close();
   }
+} else if (cmd === 'login') {
+  // Solo in locale: apre Flow in finestra visibile e resta aperto finché
+  // non chiudi il browser. Fai il login Google a mano; il profilo persiste.
+  process.env.HEADFUL = '1';
+  const ctx = await launch();
+  const page = await ctx.newPage();
+  await page.goto(FLOW_URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
+  console.log('Browser aperto: fai il login Google, poi chiudi la finestra.');
+  await new Promise((resolve) => ctx.on('close', resolve));
+  console.log('Profilo salvato. Da ora i comandi shot/whoami useranno la sessione.');
 } else {
-  console.error('Comandi: cookies | shot | whoami');
+  console.error('Comandi: cookies | shot | whoami | login');
   process.exit(1);
 }
