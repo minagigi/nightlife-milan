@@ -11,7 +11,7 @@ import type { Lang } from './eventRewriter';
  * la lingua mancante al giro successivo, non l'intera serata.
  */
 
-const SRC_MARKER_RE = /nlm:src=xc-(\d+)-(en|it);slug-en=/;
+export const SRC_MARKER_RE = /nlm:src=xc-(\d+)-(en|it);slug-en=/;
 
 export interface XceedLedger {
   /** Set di "xceedId:lang" già pubblicati, es. "220757:en" */
