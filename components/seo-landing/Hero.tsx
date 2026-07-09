@@ -21,6 +21,7 @@ export default function Hero({ title, subtitle, ctaText, ctaLink, imageUrl }: He
         src={imageUrl}
         alt={title}
         fill
+        quality={85}
         priority
         sizes="100vw"
         className="object-cover object-center"

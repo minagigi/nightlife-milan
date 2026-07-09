@@ -311,6 +311,7 @@ export default async function GenrePage({ params }: Props) {
                     src={img.src}
                     alt={img.alt}
                     fill
+                    quality={85}
                     className="object-cover"
                     sizes="(max-width: 768px) 40vw, 140px"
                   />
@@ -406,6 +407,7 @@ export default async function GenrePage({ params }: Props) {
             src="/images/milan-nightclub-luxury-vip-champagne.webp"
             alt={`${genre.name} club Milan — VIP experience and nightlife atmosphere 2026`}
             fill
+            quality={85}
             className="object-cover"
             sizes="100vw"
           />

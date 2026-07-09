@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { mockEvents, mockVenues } from '@/lib/data';
+import { isUpcomingRome } from '@/lib/calendarEvents';
 import { weeklyEvents } from '@/lib/eventsConfig';
 import DiscoveryGrid from '@/components/DiscoveryGrid';
 
@@ -63,9 +64,6 @@ export default async function EventsHubPage({ params }: Props) {
   const lp = isIt ? '/it' : '';
 
   // Upcoming mock events — chronological, priority Just Me > Pineta > Aria
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
   const getVenuePriority = (venueId: string) => {
     if (venueId === 'v-justme') return 1;
     if (venueId === 'v-pineta') return 2;
@@ -73,7 +71,9 @@ export default async function EventsHubPage({ params }: Props) {
     return 99;
   };
 
-  const upcomingEvents = mockEvents.filter(e => new Date(e.dateISO) >= today);
+  // Confine giorno nel fuso di Roma, non del server (UTC su Vercel):
+  // mai mostrare eventi già passati.
+  const upcomingEvents = mockEvents.filter(e => isUpcomingRome(e.dateISO));
 
   const items = upcomingEvents
     .flatMap(event => {

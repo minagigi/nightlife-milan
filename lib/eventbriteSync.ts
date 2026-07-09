@@ -248,6 +248,11 @@ export async function fetchEventbriteEvents(): Promise<Event[]> {
         const titleIt = cleanTitle(group.it.name.text);
         const slug = marker?.slug || '';
         const shared = buildSharedFields(group.en, titleEn, group.en.description?.text || '');
+        // Bug reale: l'immagine veniva presa SOLO dal listing EN — se il logo
+        // non era stato caricato su quel listing (upload fallito/parziale) ma
+        // era presente su quello IT, la card mostrava il fallback venue invece
+        // della locandina reale già disponibile sull'altro listing.
+        shared.image = shared.image || group.it.logo?.url || group.it.logo?.original?.url;
 
         events.push({
           id: `eb-${group.baseId}`,

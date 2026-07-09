@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { mockEvents, mockVenues } from '@/lib/data';
+import { isUpcomingRome } from '@/lib/calendarEvents';
 import DiscoveryGrid from '@/components/DiscoveryGrid';
 
 // ISR Configuration
@@ -47,8 +48,10 @@ export default async function SpecialEventsPage({ params }: Props) {
   const { locale } = await params;
   const isIt = locale === 'it';
 
-  // Filter special events: isSpecial === true OR tableMinSpend > 500
+  // Filter special events: isSpecial === true OR tableMinSpend > 500.
+  // Solo eventi di oggi o futuri (giorno di Roma) — mai eventi già passati.
   const specialEvents = mockEvents.filter(e => {
+    if (!isUpcomingRome(e.dateISO)) return false;
     const isSpecialFlag = e.isSpecial === true;
     const isHighSpend = e.pricing.tableMinSpend !== null && e.pricing.tableMinSpend > 500;
     return isSpecialFlag || isHighSpend;
@@ -218,7 +221,7 @@ export default async function SpecialEventsPage({ params }: Props) {
             { src: '/images/milan-nightclub-luxury-vip-champagne.webp', alt: 'Milan luxury nightclub VIP champagne special night' },
           ].map((img, i) => (
             <div key={i} className="relative h-32 rounded-xl overflow-hidden border border-white/8">
-              <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="(max-width: 768px) 50vw, 20vw" />
+              <Image src={img.src} alt={img.alt} fill quality={85} className="object-cover" sizes="(max-width: 768px) 50vw, 20vw" />
             </div>
           ))}
         </div>

@@ -32,6 +32,14 @@ export async function getAllCalendarEvents(): Promise<{ event: Event; venue: Ven
     .filter((item): item is { event: Event; venue: Venue } => item.venue !== undefined);
 }
 
+/** True se l'evento è di oggi o futuro nel fuso di Roma. Confronto per
+ * GIORNO di calendario romano, non per istante: un evento iniziato stasera
+ * resta "di oggi" per tutta la notte, e il confine non slitta con il fuso
+ * del server (UTC su Vercel ≠ mezzanotte italiana). */
+export function isUpcomingRome(dateISO: string): boolean {
+  return romeDayKey(dateISO) >= romeDayKeyOffset(0);
+}
+
 /** Chiave giorno "YYYY-MM-DD" nel fuso di Roma — MAI usare i confini UTC
  * (un evento all'1:30 di notte italiana finirebbe nel giorno sbagliato). */
 export function romeDayKey(dateISO: string): string {
