@@ -218,10 +218,10 @@ async function toJpeg(buffer: Buffer): Promise<Buffer> {
   return sharp(buffer).jpeg({ quality: 85 }).toBuffer();
 }
 
-async function venueFallback(venueId: string, imageSlug: string): Promise<PosterResult | null> {
+async function venueFallback(venueId: string, imageSlug: string, galleryIndex = 0): Promise<PosterResult | null> {
   const venue = venuesData.find((v) => v.id === venueId);
   if (!venue) return null;
-  const imgPath = venue.gallery?.[0] || venue.image;
+  const imgPath = (venue.gallery?.length ? venue.gallery[galleryIndex % venue.gallery.length] : undefined) || venue.image;
   if (!imgPath) return null;
 
   const downloaded = await downloadImage(`https://nightlifemilan.com${imgPath}`);
@@ -274,16 +274,16 @@ async function rebrand(buffer: Buffer, contentType: string, imageSlug: string): 
  * rimuovere. Irrecuperabile (es. persone reali con diritti d'immagine, o
  * editing fallito) → foto venue, con badge/contatti applicati comunque.
  */
-export async function processPoster(posterUrl: string | undefined, venueId: string, imageSlug: string): Promise<PosterResult> {
+export async function processPoster(posterUrl: string | undefined, venueId: string, imageSlug: string, galleryIndex = 0): Promise<PosterResult> {
   if (!posterUrl) {
-    const rebranded = await rebrandVenueFallback(venueId, imageSlug);
+    const rebranded = await rebrandVenueFallback(venueId, imageSlug, galleryIndex);
     if (rebranded) return rebranded;
     throw new Error(`No poster and no venue fallback image for ${venueId}`);
   }
 
   const downloaded = await downloadImage(posterUrl);
   if (!downloaded) {
-    const rebranded = await rebrandVenueFallback(venueId, imageSlug);
+    const rebranded = await rebrandVenueFallback(venueId, imageSlug, galleryIndex);
     if (rebranded) return rebranded;
     throw new Error(`Poster download failed and no venue fallback for ${venueId}`);
   }
@@ -294,7 +294,7 @@ export async function processPoster(posterUrl: string | undefined, venueId: stri
   // Vision non disponibile (niente ANTHROPIC_API_KEY o errore) → non possiamo
   // garantire l'assenza di contatti terzi: fallback prudente, mai rischiare.
   if (!inspection) {
-    const rebranded = await rebrandVenueFallback(venueId, imageSlug);
+    const rebranded = await rebrandVenueFallback(venueId, imageSlug, galleryIndex);
     if (rebranded) return rebranded;
     throw new Error(`Vision inspection unavailable and no venue fallback for ${venueId}`);
   }
@@ -302,14 +302,14 @@ export async function processPoster(posterUrl: string | undefined, venueId: stri
   const rebranded = await rebrand(downloaded.buffer, downloaded.contentType, imageSlug);
   if (rebranded) return rebranded;
 
-  const fallback = await rebrandVenueFallback(venueId, imageSlug);
+  const fallback = await rebrandVenueFallback(venueId, imageSlug, galleryIndex);
   if (fallback) return fallback;
   throw new Error(`Poster unrecoverable and no venue fallback for ${venueId}`);
 }
 
 /** Foto venue passata comunque per il rebrand (badge + contatti nostri) — mai usata "nuda". */
-async function rebrandVenueFallback(venueId: string, imageSlug: string): Promise<PosterResult | null> {
-  const base = await venueFallback(venueId, imageSlug);
+async function rebrandVenueFallback(venueId: string, imageSlug: string, galleryIndex = 0): Promise<PosterResult | null> {
+  const base = await venueFallback(venueId, imageSlug, galleryIndex);
   if (!base) return null;
   const rebranded = await rebrand(base.buffer, base.contentType, imageSlug);
   return rebranded || base;

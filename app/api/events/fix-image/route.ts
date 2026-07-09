@@ -31,12 +31,13 @@ export async function GET(request: Request) {
   const venueId = searchParams.get('venueId');
   const posterUrl = searchParams.get('posterUrl') || undefined;
   const returnBase64 = searchParams.get('returnBase64') === '1';
+  const galleryIndex = Number(searchParams.get('galleryIndex') || '0') || 0;
   if (!eventId || !venueId) {
     return NextResponse.json({ error: 'eventId and venueId query params required' }, { status: 400 });
   }
 
   try {
-    const poster = await processPoster(posterUrl, venueId, `fix-${eventId}`);
+    const poster = await processPoster(posterUrl, venueId, `fix-${eventId}`, galleryIndex);
     const result = await replaceEventImage(eventId, poster);
 
     // Verifica server-side lo stato attuale dell'evento (bypassa qualsiasi
