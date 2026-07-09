@@ -16,7 +16,7 @@
 
 **At task completion:**
 - Save key decisions in `.claude/completions/YYYY-MM-DD-task.md`
-- Run the `/self-improve` cycle (`.claude/skills/self-improve/SKILL.md`): distill session lessons into max 4 gated edits to CLAUDE.md/skills, logged in `EVOLUTION_LOG.md`
+- Run the `/self-improve:self-improve` cycle (plugin — one-time install: `/plugin marketplace add minagigi/nightlife-milan` then `/plugin install self-improve@minagigi-tools`; source in `tools/claude-plugins/`): distill session lessons into max 4 gated edits to CLAUDE.md/skills, logged in `.claude/self-improve/EVOLUTION_LOG.md`
 
 **⚠️ NEVER auto-load:**
 - `.claude/completions/` · `.claude/sessions/` · `docs/archive/`

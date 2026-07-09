@@ -1,0 +1,16 @@
+{
+  "name": "minagigi-tools",
+  "owner": {
+    "name": "minagigi"
+  },
+  "description": "Personal Claude Code plugin marketplace (hosted alongside the nightlife-milan project until a dedicated repo is available).",
+  "plugins": [
+    {
+      "name": "self-improve",
+      "source": "./tools/claude-plugins/plugins/self-improve",
+      "description": "SkillOpt-style self-improvement and self-evolution cycle: distills session lessons into small, evidence-gated edits to a project's instruction files, with a per-project rejection buffer log.",
+      "version": "1.0.0",
+      "keywords": ["self-improvement", "self-evolution", "meta", "skillopt"]
+    }
+  ]
+}

@@ -5,10 +5,10 @@ coverage/
 *.log
 .env*
 !.env.example
-# .claude/ resta locale (sessions, completions, settings) MA le skills sono versionate:
-# le sessioni remote clonano il repo fresco, una skill non committata non esiste per loro
+# .claude/ resta locale (sessions, completions, settings) MA il log evolutivo del
+# self-improve plugin è stato del progetto e va versionato (vedi tools/claude-plugins/):
 .claude/*
-!.claude/skills/
+!.claude/self-improve/
 
 .vercel
 .env*
