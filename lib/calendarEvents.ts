@@ -199,3 +199,20 @@ export function romeSundayKey(): string {
   }
   return romeDayKeyOffset(6);
 }
+
+/** ISO UTC per la prossima occorrenza reale di un giorno della settimana
+ * (0=domenica..6=sabato) nel fuso di Roma, all'orario locale indicato
+ * (default 23:00) — include oggi stesso se oggi è già il giorno cercato.
+ * Usata dalla pagina evento per i weekly recurring events (JSON-LD Event
+ * startDate), al posto di una data placeholder hardcoded che poteva finire
+ * nel passato. */
+export function nextWeekdayISO(dayOfWeek: number, hour = 23, minute = 0): string {
+  for (let offset = 0; offset < 7; offset++) {
+    const dayKey = romeDayKeyOffset(offset);
+    if (dayOfWeekForKey(dayKey) === dayOfWeek) {
+      return romeWallTimeToISO(dayKey, hour, minute);
+    }
+  }
+  // Difensivo: dayOfWeek 0-6 trova sempre un match entro 7 giorni.
+  return romeWallTimeToISO(romeDayKeyOffset(0), hour, minute);
+}
