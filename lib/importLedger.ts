@@ -60,7 +60,7 @@ export interface Ledger {
 // Il vecchio fingerprint `venueId|data` è stato rimosso: con 2 eventi attesi per
 // venue/giorno (uno per lingua) bloccherebbe erroneamente la seconda lingua come
 // "slot già occupato" — il marker per-lingua è ormai l'unica fonte affidabile.
-const SRC_MARKER_RE = /nlm:src=([^-;]+)-(en|it);slug-en=/;
+export const SRC_MARKER_RE = /nlm:src=([^-;]+)-(en|it);slug-en=/;
 
 export async function buildLedger(): Promise<Ledger> {
   const ownEvents = await fetchOwnOrgEvents();

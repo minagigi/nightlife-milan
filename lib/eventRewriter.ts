@@ -211,7 +211,7 @@ function esc(s: string): string {
 // QUALUNQUE punto della description rompe il parser di Eventbrite, che
 // tronca silenziosamente tutto da lì in poi. Il sito (blob/pagina) non ha
 // questo vincolo e mantiene le emoji per la UX.
-function stripEmoji(s: string): string {
+export function stripEmoji(s: string): string {
   return (s || '').replace(/[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\u{2190}-\u{21FF}\u{2B00}-\u{2BFF}\u{FE0F}\u{200D}]/gu, '').replace(/\s{2,}/g, ' ').trim();
 }
 
@@ -220,7 +220,7 @@ function stripEmoji(s: string): string {
 // budget resta al 70% di quella soglia misurata per margine, non perché
 // serva davvero (una description gold-standard in una sola lingua, anche con
 // 25 FAQ, entra comodamente ben sotto questo tetto).
-const DESCRIPTION_SAFE_BUDGET = 16000;
+export const DESCRIPTION_SAFE_BUDGET = 16000;
 
 const STATIC_TEXT: Record<Lang, {
   contactsLabel: string; emailLabel: string; buyTickets: string; bookTable: string; fullGuide: string;

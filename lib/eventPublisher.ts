@@ -63,7 +63,7 @@ function romeOffsetMinutesForDate(y: number, m: number, d: number): number {
   return (romeHour - 12) * 60;
 }
 
-function toEventbriteUtc(dateISO: string): string {
+export function toEventbriteUtc(dateISO: string): string {
   const [datePart, timePart] = dateISO.slice(0, 19).split('T');
   const [y, m, d] = datePart.split('-').map(Number);
   const [hh, mm, ss] = (timePart || '00:00:00').split(':').map(Number);
@@ -82,7 +82,7 @@ function toEventbriteUtc(dateISO: string): string {
  * sopra) sottrae l'offset di Roma UNA SECONDA VOLTA, pubblicando l'evento 2 ore
  * prima dell'orario reale (19:30 Rome → mostrato come 17:30 Rome su Eventbrite).
  */
-function normalizeAlreadyUtc(isoUtc: string): string {
+export function normalizeAlreadyUtc(isoUtc: string): string {
   return new Date(isoUtc).toISOString().replace(/\.\d{3}Z$/, 'Z');
 }
 

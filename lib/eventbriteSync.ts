@@ -54,16 +54,16 @@ function detectGenre(text: string): MusicGenre[] {
 // produceva DUE card identiche su "Upcoming This Week" (una per listing) —
 // la card IT mostrava comunque il titolo italiano ma affiancata alla EN,
 // invece di essercene una sola che cambia lingua col sito.
-const NEW_MARKER_RE = /nlm:src=(.+?)-(en|it);slug-en=([a-z0-9-]+)/;
-const LEGACY_MARKER_RE = /nlm:src=([^;]+);slug-en=([a-z0-9-]+)/;
+export const NEW_MARKER_RE = /nlm:src=(.+?)-(en|it);slug-en=([a-z0-9-]+)/;
+export const LEGACY_MARKER_RE = /nlm:src=([^;]+);slug-en=([a-z0-9-]+)/;
 
-interface ParsedMarker {
+export interface ParsedMarker {
   baseId: string;
   lang?: 'en' | 'it';
   slug: string;
 }
 
-function parseMarker(text: string | undefined): ParsedMarker | undefined {
+export function parseMarker(text: string | undefined): ParsedMarker | undefined {
   if (!text) return undefined;
   const fresh = text.match(NEW_MARKER_RE);
   if (fresh) return { baseId: fresh[1], lang: fresh[2] as 'en' | 'it', slug: fresh[3] };
