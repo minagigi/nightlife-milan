@@ -13,6 +13,8 @@
 
 Add topic files in `docs/learnings/` and list them here.
 
+- `docs/analytics-strategy.md` — Strategia analytics funnel completo (sito, Eventbrite, Xceed, WhatsApp, form)
+
 ---
 
-**Last Updated**: 2026-06-23
+**Last Updated**: 2026-07-09
