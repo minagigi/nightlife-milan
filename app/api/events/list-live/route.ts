@@ -95,5 +95,12 @@ export async function GET(request: Request) {
   const formatBody = await formatRes.json().catch(() => null);
   const formats = (formatBody?.formats || []).map((f: { id: string; name: string }) => ({ id: f.id, name: f.name }));
 
-  return NextResponse.json({ count: events.length, events, tagsProbe, categories, formats });
+  const subcatRes = await fetch(`${EVENTBRITE_API}/subcategories/`, { headers: auth });
+  const subcatBody = await subcatRes.json().catch(() => null);
+  const allSubcategories = (subcatBody?.subcategories || []) as Array<{ id: string; name: string; parent_category?: { id: string } }>;
+  const musicSubcategories = allSubcategories
+    .filter((s) => s.parent_category?.id === '103')
+    .map((s) => ({ id: s.id, name: s.name }));
+
+  return NextResponse.json({ count: events.length, events, tagsProbe, categories, formats, musicSubcategories });
 }
