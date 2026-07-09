@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { getEventBySlug, getVenueById, getPerformerById, mockEvents } from '@/lib/data';
 import { weeklyEvents, getWeeklyEventBySlug } from '@/lib/eventsConfig';
 import { getLocalizedText, generateEventSchema, generateBreadcrumbSchema } from '@/lib/seo';
+import { nextWeekdayISO } from '@/lib/calendarEvents';
 import { fetchEventbriteEvents } from '@/lib/eventbriteSync';
 import { getRichContent } from '@/lib/richContentStore';
 import { Event, Venue } from '@/lib/types';
@@ -211,19 +212,36 @@ export default async function EventPage({ params }: Props) {
     const title = `${weeklyEvent.name} @ ${weeklyEvent.clubName} Milano - ${weeklyEvent.day.charAt(0).toUpperCase() + weeklyEvent.day.slice(1)} 2026`;
     const description = isIt ? weeklyEvent.description.it : weeklyEvent.description.en;
     const dressCode = isIt ? weeklyEvent.dressCode.it : weeklyEvent.dressCode.en;
-    
+
+    const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
+    const weeklyVenue = getVenueById(`v-${weeklyEvent.clubSlug}`);
+    const absoluteImage = weeklyEvent.image.startsWith('http')
+      ? weeklyEvent.image
+      : `${baseUrl}${weeklyEvent.image}`;
+
+    // Prossima occorrenza reale del giorno ricorrente (fuso Europe/Rome, 23:00
+    // orario indicativo salvo dato più specifico), mai una data placeholder
+    // hardcoded che poteva finire nel passato.
+    const startDateISO = nextWeekdayISO(weeklyEvent.dayOfWeek, 23, 0);
+    const endDateISO = new Date(new Date(startDateISO).getTime() + 4 * 60 * 60 * 1000).toISOString();
+
     // Generate JSON-LD
-    const jsonLd = {
+    const jsonLd: any = {
       '@context': 'https://schema.org',
       '@type': 'Event',
       name: title,
       description: description,
-      startDate: `2026-03-16T23:00:00`, // Placeholder date, ideally calculated based on dayOfWeek
+      startDate: startDateISO,
+      endDate: endDateISO,
+      eventStatus: 'https://schema.org/EventScheduled',
+      eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+      image: absoluteImage,
       location: {
         '@type': 'Place',
         name: weeklyEvent.clubName,
         address: {
           '@type': 'PostalAddress',
+          ...(weeklyVenue?.address?.streetAddress ? { streetAddress: weeklyVenue.address.streetAddress } : {}),
           addressLocality: 'Milan',
           addressCountry: 'IT'
         }
@@ -237,7 +255,7 @@ export default async function EventPage({ params }: Props) {
       organizer: {
         '@type': 'Organization',
         name: 'Nightlife Milan',
-        url: 'https://nightlifemilan.com'
+        url: baseUrl
       }
     };
 

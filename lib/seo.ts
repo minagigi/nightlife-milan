@@ -31,6 +31,13 @@ export const generateEventSchema = (
     description: getLocalizedText(event.localizedContent.shortDescription, lang),
     startDate: event.dateISO,
     url: eventUrl,
+    eventStatus: 'https://schema.org/EventScheduled',
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    organizer: {
+      '@type': 'Organization',
+      name: 'Nightlife Milan',
+      url: baseUrl,
+    },
   };
 
   if (event.endDateISO) {
@@ -38,7 +45,9 @@ export const generateEventSchema = (
   }
 
   if (event.image) {
-    schema.image = event.image;
+    // L'immagine nello schema deve sempre essere un URL assoluto — event.image
+    // arriva spesso come path relativo (es. '/images/events/...').
+    schema.image = event.image.startsWith('http') ? event.image : `${baseUrl}${event.image}`;
   }
 
   // Nested Location Schema (Venue)
