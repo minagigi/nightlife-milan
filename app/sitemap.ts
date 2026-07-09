@@ -1,10 +1,29 @@
 import { MetadataRoute } from 'next';
 import { mockVenues, mockGuides, mockEvents, mockZones } from '@/lib/data';
 import { weeklyEvents } from '@/lib/eventsConfig';
+import { fetchEventbriteEvents } from '@/lib/eventbriteSync';
+import { romeDayKey, romeDayKeyOffset } from '@/lib/calendarEvents';
+import type { Event } from '@/lib/types';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const locales = ['en', 'it'];
+
+  // Eventi live da Eventbrite — la sitemap NON deve MAI fallire per colpa di
+  // un problema con Eventbrite (token assente, rate limit, errore rete):
+  // in caso di errore si degrada silenziosamente alla sola sitemap statica
+  // (mockEvents + weeklyEvents), come già fanno homepage/calendar.
+  let liveEvents: Event[] = [];
+  try {
+    liveEvents = await fetchEventbriteEvents();
+  } catch {
+    liveEvents = [];
+  }
+
+  // "Ieri" nel fuso di Roma: i mockEvents con data più vecchia restano fuori
+  // dalla sitemap (eventi passati non hanno valore SEO e sporcano l'indice).
+  const yesterdayKey = romeDayKeyOffset(-1);
+  const upcomingMockEvents = mockEvents.filter((event) => romeDayKey(event.dateISO) >= yesterdayKey);
 
   const sitemapEntries: MetadataRoute.Sitemap = [];
 
@@ -72,8 +91,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
   });
 
-  // 4. Dynamic Events
-  mockEvents.forEach((event) => {
+  // 4. Dynamic Events (mockEvents statici, esclusi quelli più vecchi di ieri)
+  upcomingMockEvents.forEach((event) => {
     locales.forEach((locale) => {
       const langPrefix = locale === 'en' ? '' : `/${locale}`;
       const slug = locale === 'it' && event.localizedContent.slug.it ? event.localizedContent.slug.it : event.localizedContent.slug.en;
@@ -83,6 +102,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
         changeFrequency: 'daily',
         priority: 0.9,
       });
+    });
+  });
+
+  // 4b. Dynamic Events — live da Eventbrite (scout + Xceed)
+  liveEvents.forEach((event) => {
+    const slugEn = event.localizedContent.slug.en;
+    const slugIt = event.localizedContent.slug.it || event.localizedContent.slug.en;
+    const lastModified = new Date(event.dateISO);
+    sitemapEntries.push({
+      url: `${baseUrl}/events/${slugEn}`,
+      lastModified,
+      changeFrequency: 'daily',
+      priority: 0.9,
+    });
+    sitemapEntries.push({
+      url: `${baseUrl}/it/events/${slugIt}`,
+      lastModified,
+      changeFrequency: 'daily',
+      priority: 0.9,
     });
   });
 
