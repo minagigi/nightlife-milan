@@ -758,12 +758,11 @@ export const venuesData: Venue[] = [
       altTextImg: { en: "Aria Club Milano interior dancefloor San Siro nightclub", it: "Aria Club Milano interno pista da ballo San Siro discoteca" },
       insiderTip: { en: "Arrive at aperitivo (19:30) to secure a Dance Floor Table — they book out fast on Fridays. The Privé DJ area is the quieter, more exclusive option.", it: "Arriva all'aperitivo (19:30) per assicurarti un Dance Floor Table — si esauriscono subito il venerdì. Il Privé DJ è l'opzione più tranquilla ed esclusiva." }
     },
-    image: "/images/events/xceed-aria-friday-night.jpg",
+    image: "/images/venues/aria-club-milano/aria-club-milano-interior-01.webp",
     gallery: [
-      "/images/events/xceed-aria-friday-night.jpg",
-      "/images/events/xceed-aria-saturday-night.jpg",
-      "/images/events/xceed-aria-friday-night-alt.png",
-      "/images/events/xceed-aria-summer-party.png",
+      "/images/venues/aria-club-milano/aria-club-milano-interior-01.webp",
+      "/images/venues/aria-club-milano/aria-club-milano-interior-02.webp",
+      "/images/venues/aria-club-milano/aria-club-milano-buffet-01.webp",
     ],
     isManaged: true,
     isPriority: true,
