@@ -240,7 +240,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "flower-power-ibiza-justme-12-06-2026", it: "flower-power-ibiza-justme-12-06-2026" }
     },
-    image: "/images/venues/just-me-milano/just-me-milano-interior-01.webp",
+    image: "/images/events/xceed-justme-friday-night.jpg",
     isTrending: true
   },
   {
@@ -258,7 +258,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "fashion-week-night-justme-20-06-2026", it: "fashion-week-justme-20-06-2026" }
     },
-    image: "/images/venues/just-me-milano/just-me-milano-interior-02.webp",
+    image: "/images/events/xceed-justme-saturday-night.jpg",
     isSpecial: true,
     isTrending: true
   },
