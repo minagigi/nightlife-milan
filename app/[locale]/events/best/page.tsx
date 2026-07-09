@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { Star, Clock, MapPin, ExternalLink } from 'lucide-react';
 import { mockEvents, mockVenues } from '@/lib/data';
+import { isUpcomingRome } from '@/lib/calendarEvents';
 import { weeklyEvents } from '@/lib/eventsConfig';
 
 export const revalidate = 3600;
@@ -105,14 +106,13 @@ export default async function EventsBestPage({ params }: Props) {
   const lp = isIt ? '/it' : '';
   const lang = (isIt ? 'it' : 'en') as 'en' | 'it';
 
-  // Upcoming events for these 3 venues
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  // Upcoming events for these 3 venues — confine giorno nel fuso di Roma,
+  // mai eventi già passati.
   const venueIds = BEST_VENUES.map(v => v.id);
 
   const upcomingByVenue: Record<string, typeof mockEvents> = {};
   mockEvents
-    .filter(e => venueIds.includes(e.venueId) && new Date(e.dateISO) >= today)
+    .filter(e => venueIds.includes(e.venueId) && isUpcomingRome(e.dateISO))
     .sort((a, b) => new Date(a.dateISO).getTime() - new Date(b.dateISO).getTime())
     .forEach(e => {
       if (!upcomingByVenue[e.venueId]) upcomingByVenue[e.venueId] = [];
