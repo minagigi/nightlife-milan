@@ -1,6 +1,116 @@
 import { mockEvents, mockVenues } from './data';
 import { fetchEventbriteEvents } from './eventbriteSync';
-import type { Event, Venue } from './types';
+import { weeklyEvents, WeeklyEvent } from './eventsConfig';
+import { MusicGenre, type Event, type Venue } from './types';
+
+/** Quante notti in avanti "materializzare" dagli eventi ricorrenti
+ * settimanali — copre sia /calendar/tonight (oggi+domani) sia
+ * /calendar/this-week (oggi→domenica, max 7 giorni). */
+const WEEKLY_HORIZON_DAYS = 8;
+
+const GENRE_MAP: Record<string, MusicGenre> = {
+  house: MusicGenre.HOUSE,
+  deephouse: MusicGenre.HOUSE,
+  techno: MusicGenre.TECHNO,
+  'hip-hop': MusicGenre.HIP_HOP,
+  hiphop: MusicGenre.HIP_HOP,
+  trap: MusicGenre.HIP_HOP,
+  urban: MusicGenre.HIP_HOP,
+  reggaeton: MusicGenre.REGGAETON,
+  latin: MusicGenre.REGGAETON,
+  edm: MusicGenre.EDM,
+  electronic: MusicGenre.EDM,
+  livemusic: MusicGenre.LIVE_MUSIC,
+  rock: MusicGenre.LIVE_MUSIC,
+  indie: MusicGenre.INDIE,
+};
+
+function mapWeeklyGenres(genres: string[]): MusicGenre[] {
+  const mapped = genres
+    .map((g) => GENRE_MAP[g.toLowerCase().replace(/[\s-]/g, '')])
+    .filter((g): g is MusicGenre => g !== undefined);
+  return mapped.length > 0 ? Array.from(new Set(mapped)) : [MusicGenre.COMMERCIAL];
+}
+
+/** Estrae il primo numero da stringhe tipo "From €15" / "From €320 to €5,000". */
+function parseLeadingPrice(text: string | undefined): number {
+  if (!text) return 0;
+  const match = text.replace(/[.,](?=\d{3}\b)/g, '').match(/\d+/);
+  return match ? parseInt(match[0], 10) : 0;
+}
+
+/** Offset Roma (minuti) per l'istante UTC dato — gestisce CET/CEST senza
+ * hardcodare l'offset (bug reale già corretto altrove: vedi eventbriteSync.ts). */
+function romeOffsetMinutes(instantUTC: Date): number {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Europe/Rome',
+    timeZoneName: 'shortOffset',
+  }).formatToParts(instantUTC);
+  const tz = parts.find((p) => p.type === 'timeZoneName')?.value || 'GMT+1';
+  const match = tz.match(/GMT([+-])(\d+)(?::(\d+))?/);
+  if (!match) return 60;
+  const sign = match[1] === '-' ? -1 : 1;
+  const hours = parseInt(match[2], 10);
+  const minutes = match[3] ? parseInt(match[3], 10) : 0;
+  return sign * (hours * 60 + minutes);
+}
+
+/** ISO UTC per un orario locale di Roma in un giorno "YYYY-MM-DD" dato. */
+function romeWallTimeToISO(dayKey: string, hour: number, minute = 0): string {
+  const [y, m, d] = dayKey.split('-').map(Number);
+  const approxUTC = new Date(Date.UTC(y, m - 1, d, hour, minute, 0));
+  const offsetMin = romeOffsetMinutes(approxUTC);
+  return new Date(approxUTC.getTime() - offsetMin * 60000).toISOString();
+}
+
+/** Trasforma le serate ricorrenti settimanali (lib/eventsConfig.ts) in Event
+ * concreti per le prossime WEEKLY_HORIZON_DAYS notti — prima d'ora queste
+ * venue (Just Me, Pineta, Aria, Voya, 55 Milano, Play Club, Repvblic) non
+ * comparivano MAI su /calendar/tonight o /calendar/this-week perché
+ * getAllCalendarEvents leggeva solo mockEvents + Eventbrite: se una venue
+ * non aveva un evento one-off quella sera, il calendario saltava
+ * direttamente al giorno successivo che ne aveva uno, anche se il locale
+ * era regolarmente aperto stasera con la sua serata ricorrente. */
+function expandWeeklyEvents(): { event: Event; venue: Venue }[] {
+  const out: { event: Event; venue: Venue }[] = [];
+
+  for (let offset = 0; offset < WEEKLY_HORIZON_DAYS; offset++) {
+    const dayKey = romeDayKeyOffset(offset);
+    const dow = dayOfWeekForKey(dayKey);
+
+    for (const we of weeklyEvents as WeeklyEvent[]) {
+      if (we.dayOfWeek !== dow) continue;
+      const venue = mockVenues.find((v) => v.id === `v-${we.clubSlug}`);
+      if (!venue) continue;
+
+      const hasAperitivo = !!we.pricing.aperitif;
+      const dateISO = romeWallTimeToISO(dayKey, hasAperitivo ? 19 : 23, hasAperitivo ? 30 : 0);
+      const slug = `${we.clubSlug}-${we.day}-${we.eventSlug}`;
+
+      const event: Event = {
+        id: `weekly-${we.id}-${dayKey}`,
+        venueId: venue.id,
+        genre: mapWeeklyGenres(we.genres),
+        dateISO,
+        pricing: {
+          entry: parseLeadingPrice(we.pricing.club),
+          currency: 'EUR',
+          tableMinSpend: parseLeadingPrice(we.pricing.tables) || null,
+        },
+        localizedContent: {
+          title: { en: we.name, it: we.name },
+          shortDescription: { en: we.description.en, it: we.description.it },
+          slug: { en: slug, it: slug },
+        },
+        image: we.image,
+      };
+
+      out.push({ event, venue });
+    }
+  }
+
+  return out;
+}
 
 /**
  * Sorgente dati unificata per le pagine /calendar/* — FASE C1 (piano
@@ -27,9 +137,21 @@ export async function getAllCalendarEvents(): Promise<{ event: Event; venue: Ven
     ...eventbriteEvents.filter((eb) => !mockEvents.some((m) => m.id === eb.id)),
   ];
 
-  return allEvents
+  const concreteItems = allEvents
     .map((event) => ({ event, venue: mockVenues.find((v) => v.id === event.venueId) }))
     .filter((item): item is { event: Event; venue: Venue } => item.venue !== undefined);
+
+  // Le serate ricorrenti riempiono solo le notti prive già di un evento
+  // one-off/reale per la stessa venue — mai due card per la stessa venue
+  // la stessa sera (es. Just Me venerdì ha già "Flower Power Party").
+  const bookedVenueNights = new Set(
+    concreteItems.map(({ event }) => `${event.venueId}|${romeDayKey(event.dateISO)}`)
+  );
+  const weeklyItems = expandWeeklyEvents().filter(
+    ({ event }) => !bookedVenueNights.has(`${event.venueId}|${romeDayKey(event.dateISO)}`)
+  );
+
+  return [...concreteItems, ...weeklyItems];
 }
 
 /** True se l'evento è di oggi o futuro nel fuso di Roma. Confronto per
