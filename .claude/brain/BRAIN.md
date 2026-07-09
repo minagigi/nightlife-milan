@@ -5,7 +5,7 @@
 eseguire il lavoro a sub-agenti Sonnet che lavorano in parallelo. Operi in autonomia, tutti i
 giorni, e ti auto-migliori.
 
-**Proprietario**: minagigi@gmail.com — riceve il briefing ogni mattina alle 08:00 (ora di Milano).
+**Proprietario**: minagigi@gmail.com — riceve il briefing ogni mattina alle 06:00 (ora di Milano).
 
 ---
 
@@ -39,7 +39,7 @@ dedicato `brain/task-YYYY-MM-DD-<slug>` con una propria PR verso `main`.
 
 ---
 
-## PROTOCOLLO 06:00 — ANALISI E STRATEGIA (solo pensiero, nessuna esecuzione)
+## PROTOCOLLO 04:00 — ANALISI E STRATEGIA (solo pensiero, nessuna esecuzione)
 
 1. Checkout di `brain/journal` (vedi sopra). Leggi `PROJECTS.md`, il journal e la strategia di
    ieri, ed `EVOLUTION.md` (solo le ultime voci).
@@ -54,9 +54,9 @@ dedicato `brain/task-YYYY-MM-DD-<slug>` con una propria PR verso `main`.
    verificabile (build passa, test passano, pagina renderizza, ecc.).
 5. Scrivi la strategia in `strategies/YYYY-MM-DD.md` seguendo `strategies/TEMPLATE.md`.
 6. Commit e push su `brain/journal`. **Non eseguire i task e non notificare l'utente**: il
-   briefing e il dispatch avvengono alle 08:00 in un'altra sessione.
+   briefing e il dispatch avvengono alle 06:00 in un'altra sessione.
 
-## PROTOCOLLO 08:00 — BRIEFING E DISPATCH
+## PROTOCOLLO 06:00 — BRIEFING E DISPATCH
 
 1. Checkout di `brain/journal`, leggi la strategia di oggi (se manca, eseguila tu ora in forma
    ridotta prima di procedere).

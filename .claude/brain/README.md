@@ -8,8 +8,8 @@ l'esecuzione dei task usa sub-agenti **Sonnet**.
 
 | Ora   | Routine | Cosa fa |
 |-------|---------|---------|
-| 06:00 | Analisi & Strategia | Analizza tutti i progetti (pro, difetti, opportunità), scrive la strategia del giorno. Silenziosa. |
-| 08:00 | Briefing & Dispatch | Ti manda il briefing (notifica push + email) con tutta l'analisi e la strategia, poi lancia i sub-agenti Sonnet in parallelo e apre le PR. |
+| 04:00 | Analisi & Strategia | Analizza tutti i progetti (pro, difetti, opportunità), scrive la strategia del giorno. Silenziosa. |
+| 06:00 | Briefing & Dispatch | Ti manda il briefing (notifica push + email) con tutta l'analisi e la strategia, poi lancia i sub-agenti Sonnet in parallelo e apre le PR. |
 | 14:00 | Avanzamento | Controlla le PR e la CI, corregge, rilancia i task falliti, pesca dai task di riserva. |
 | 20:00 | Retro & Auto-miglioramento | Retrospettiva del giorno, chiude il journal, aggiorna BRAIN.md/PROJECTS.md se ha imparato qualcosa (log in EVOLUTION.md). |
 
@@ -22,7 +22,7 @@ Le routine sono gestite con i tool `list_triggers` / `update_trigger` / `delete_
 `fire_trigger` da una qualsiasi sessione Claude Code di questo account. In pratica, apri una
 sessione e chiedi ad esempio:
 
-- **Pausa**: "disattiva la routine Cervello 08:00" (`update_trigger` con `enabled: false`)
+- **Pausa**: "disattiva la routine Cervello 06:00" (`update_trigger` con `enabled: false`)
 - **Riprendi**: "riattiva le routine del cervello"
 - **Cambia orario**: "sposta il briefing alle 09:00" (nuova `cron_expression`)
 - **Esegui subito**: "fai partire ora la routine del briefing" (`fire_trigger`)

@@ -1,6 +1,6 @@
 # Strategia — YYYY-MM-DD
 
-## Sintesi esecutiva (3-5 righe, per il briefing delle 08:00)
+## Sintesi esecutiva (3-5 righe, per il briefing delle 06:00)
 
 …
 
