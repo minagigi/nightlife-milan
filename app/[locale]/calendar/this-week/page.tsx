@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { mockEvents, mockVenues } from '@/lib/data';
+import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset, romeSundayKey } from '@/lib/calendarEvents';
 import DiscoveryGrid from '@/components/DiscoveryGrid';
 
 export const dynamic = 'force-dynamic';
@@ -61,19 +61,16 @@ export default async function ThisWeekPage({ params }: Props) {
   const { locale } = await params;
   const isIt = locale === 'it';
 
-  // Filter events for upcoming using dynamic date
-  const today = new Date();
-  const todayStart = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate(), 0, 0, 0));
+  // FASE C1/C3 (piano 2026-07-09-fix-calendar.md): sorgente dati unificata
+  // (statici + Eventbrite/Xceed reali), finestra oggi→domenica nel fuso di
+  // Roma — mai eventi mai passati per l'evento all'1:30 di notte italiana.
+  const allItems = await getAllCalendarEvents();
+  const todayKey = romeDayKeyOffset(0);
+  const sundayKey = romeSundayKey();
 
-  const upcomingEvents = mockEvents.filter(e => {
-    const eventDate = new Date(e.dateISO);
-    return eventDate >= todayStart;
-  });
-
-  const items = upcomingEvents.flatMap(event => {
-    const venue = mockVenues.find(v => v.id === event.venueId);
-    if (!venue) return [];
-    return [{ event, venue }];
+  const items = allItems.filter(({ event }) => {
+    const key = romeDayKey(event.dateISO);
+    return key >= todayKey && key <= sundayKey;
   });
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
@@ -95,7 +92,10 @@ export default async function ThisWeekPage({ params }: Props) {
       },
     },
     'organizer': { '@type': 'Organization', 'name': 'Nightlife Milan', 'url': baseUrl },
-    'url': `${baseUrl}${lp}/calendar/this-week`,
+    'url': (() => {
+      const slug = locale === 'it' ? event.localizedContent?.slug?.it : event.localizedContent?.slug?.en;
+      return slug ? `${baseUrl}${lp}/events/${slug}` : `${baseUrl}${lp}/calendar/this-week`;
+    })(),
     'eventStatus': 'https://schema.org/EventScheduled',
     'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode',
     'offers': {
@@ -185,7 +185,7 @@ export default async function ThisWeekPage({ params }: Props) {
             : "We've curated the most exclusive nights, most anticipated artists, and unmissable venues this week in Milan."}
         </p>
 
-        {/* Calendar toggle */}
+        {/* Calendar toggle — FASE C3: stesso selettore a 3 bottoni di /calendar/tonight */}
         <div className="flex space-x-4 overflow-x-auto pb-4 scrollbar-hide">
           <Link
             href={`${isIt ? '/it' : ''}/calendar/tonight`}
@@ -194,10 +194,16 @@ export default async function ThisWeekPage({ params }: Props) {
             {isIt ? 'Stasera' : 'Tonight'}
           </Link>
           <Link
+            href={`${isIt ? '/it' : ''}/calendar/tonight#tomorrow`}
+            className="flex-shrink-0 px-8 py-3 rounded-full border border-white/20 text-white hover:border-champagne hover:text-champagne transition-colors font-medium tracking-wider uppercase text-sm"
+          >
+            {isIt ? 'Domani' : 'Tomorrow'}
+          </Link>
+          <Link
             href={`${isIt ? '/it' : ''}/calendar/this-week`}
             className="flex-shrink-0 px-8 py-3 rounded-full bg-champagne text-black font-medium tracking-wider uppercase text-sm"
           >
-            {isIt ? 'Questa Settimana' : 'This Week'}
+            {isIt ? 'Tutta la Settimana' : 'Full Week'}
           </Link>
         </div>
       </section>

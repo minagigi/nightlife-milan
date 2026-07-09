@@ -127,8 +127,8 @@ interface RawEbEvent {
   id: string;
   name: { text: string };
   description?: { text: string; html?: string };
-  start: { local: string };
-  end: { local: string };
+  start: { local: string; utc: string };
+  end: { local: string; utc: string };
   status: string;
   logo?: { url: string; original?: { url: string } };
   venue?: { name: string };
@@ -136,14 +136,21 @@ interface RawEbEvent {
 }
 
 /** Costruisce l'Event condiviso da UN listing (venue/data/prezzo/immagine/xceedUrl —
- * identici tra i due listing EN/IT della stessa serata, quindi presi da uno qualsiasi). */
+ * identici tra i due listing EN/IT della stessa serata, quindi presi da uno qualsiasi).
+ *
+ * FASE C0 (2026-07-09, bug reale riportato dall'utente): `ev.start.local` NON ha
+ * offset — costruire la data con un `+01:00` hardcoded (ora solare CET) fa
+ * slittare di un'ora OGNI evento durante l'ora legale (CEST, marzo-ottobre),
+ * mostrando sul sito orari sbagliati (es. un doors-open reale delle 19:30
+ * mostrato come 20:30). `ev.start.utc`/`ev.end.utc` sono già UTC vero
+ * dall'API — usarli sempre, mai ricostruire l'offset a mano. */
 function buildSharedFields(ev: RawEbEvent, title: string, desc: string) {
   const venueId = mapVenueId(ev.venue?.name || '');
   return {
     venueId,
     genre: detectGenre(title + ' ' + desc),
-    dateISO: `${ev.start.local}+01:00`,
-    endDateISO: `${ev.end.local}+01:00`,
+    dateISO: ev.start.utc,
+    endDateISO: ev.end.utc,
     pricing: { entry: extractEntryPrice(ev.ticket_classes), currency: 'EUR' as const, tableMinSpend: null },
     image: ev.logo?.url || ev.logo?.original?.url,
     isSpecial: /live|special|vip/i.test(title),

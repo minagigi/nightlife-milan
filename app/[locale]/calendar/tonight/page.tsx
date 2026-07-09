@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { Calendar, Clock, MapPin } from 'lucide-react';
-import { mockEvents, mockVenues } from '@/lib/data';
+import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset } from '@/lib/calendarEvents';
 import type { Event, Venue } from '@/lib/types';
 
 export const dynamic = 'force-dynamic';
@@ -62,20 +62,16 @@ export default async function TonightPage({ params }: Props) {
   const { locale } = await params;
   const isIt = locale === 'it';
 
-  // Filter events for tonight using dynamic date
-  const now = new Date();
-  const todayStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0));
-  const todayEnd = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 23, 59, 59));
+  // FASE C1/C2 (piano 2026-07-09-fix-calendar.md): sorgente dati unificata
+  // (statici + Eventbrite/Xceed reali), confini di giorno nel fuso di Roma —
+  // MAI i confini UTC (un evento all'1:30 di notte italiana finiva nel
+  // giorno sbagliato con Date.UTC).
+  const allItems = await getAllCalendarEvents();
+  const todayKey = romeDayKeyOffset(0);
+  const tomorrowKey = romeDayKeyOffset(1);
 
-  const tonightEvents = mockEvents.filter(e => {
-    const eventDate = new Date(e.dateISO);
-    return eventDate >= todayStart && eventDate <= todayEnd;
-  });
-
-  const items = tonightEvents.map(event => {
-    const venue = mockVenues.find(v => v.id === event.venueId)!;
-    return { event, venue };
-  });
+  const items = allItems.filter(({ event }) => romeDayKey(event.dateISO) === todayKey);
+  const tomorrowItems = allItems.filter(({ event }) => romeDayKey(event.dateISO) === tomorrowKey);
 
   // Categorize events by time slot (using Milan local time)
   // Aperitivo (19:00 - 22:00)
@@ -87,26 +83,30 @@ export default async function TonightPage({ params }: Props) {
     }).format(new Date(dateISO)), 10);
   };
 
-  const aperitivoEvents = items.filter(item => {
-    const hour = getMilanHour(item.event.dateISO);
-    return hour >= 19 && hour <= 22;
+  const categorize = (group: { event: Event; venue: Venue }[]) => ({
+    aperitivo: group.filter((item) => {
+      const hour = getMilanHour(item.event.dateISO);
+      return hour >= 19 && hour <= 22;
+    }),
+    primeTime: group.filter((item) => {
+      const hour = getMilanHour(item.event.dateISO);
+      return hour === 23 || hour === 0 || hour === 1;
+    }),
+    afterHours: group.filter((item) => {
+      const hour = getMilanHour(item.event.dateISO);
+      return hour >= 2 && hour < 19;
+    }),
   });
 
-  const primeTimeEvents = items.filter(item => {
-    const hour = getMilanHour(item.event.dateISO);
-    return hour === 23 || hour === 0 || hour === 1;
-  });
-
-  const afterHoursEvents = items.filter(item => {
-    const hour = getMilanHour(item.event.dateISO);
-    return hour >= 2 && hour < 19;
-  });
+  const { aperitivo: aperitivoEvents, primeTime: primeTimeEvents, afterHours: afterHoursEvents } = categorize(items);
+  const { aperitivo: tomorrowAperitivo, primeTime: tomorrowPrimeTime, afterHours: tomorrowAfterHours } = categorize(tomorrowItems);
 
   const hasEvents = items.length > 0;
+  const hasTomorrowEvents = tomorrowItems.length > 0;
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const lp = locale === 'it' ? '/it' : '';
-  const eventSchemas = items.map(({ event, venue }) => ({
+  const eventSchemas = [...items, ...tomorrowItems].map(({ event, venue }) => ({
     '@context': 'https://schema.org',
     '@type': 'Event',
     'name': event.localizedContent?.title?.en || `${venue ? venue.localizedContent?.name?.en || 'Club' : 'Club'} Milan Tonight`,
@@ -123,7 +123,10 @@ export default async function TonightPage({ params }: Props) {
       },
     } : { '@type': 'Place', 'name': 'Milan', 'address': { '@type': 'PostalAddress', 'addressLocality': 'Milan', 'addressCountry': 'IT' } },
     'organizer': { '@type': 'Organization', 'name': 'Nightlife Milan', 'url': baseUrl },
-    'url': `${baseUrl}${lp}/calendar/tonight`,
+    'url': (() => {
+      const slug = locale === 'it' ? event.localizedContent?.slug?.it : event.localizedContent?.slug?.en;
+      return slug ? `${baseUrl}${lp}/events/${slug}` : `${baseUrl}${lp}/calendar/tonight`;
+    })(),
     'eventStatus': 'https://schema.org/EventScheduled',
     'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode',
     'offers': {
@@ -187,7 +190,9 @@ export default async function TonightPage({ params }: Props) {
           ))}
         </div>
 
-        {/* Interactive Calendar Selector */}
+        {/* Interactive Calendar Selector — FASE C2: 3 bottoni corretti
+            (prima "Domani" puntava a /calendar/this-week, e mancava il
+            bottone per tutta la settimana). */}
         {(() => {
           const lp = locale === 'it' ? '/it' : '';
           return (
@@ -198,18 +203,24 @@ export default async function TonightPage({ params }: Props) {
               >
                 {t.today}
               </Link>
+              <a
+                href="#tomorrow"
+                className="flex-shrink-0 px-8 py-3 rounded-full border border-white/20 text-white hover:border-champagne hover:text-champagne transition-colors font-medium tracking-wider uppercase text-sm"
+              >
+                {t.tomorrow}
+              </a>
               <Link
                 href={`${lp}/calendar/this-week`}
                 className="flex-shrink-0 px-8 py-3 rounded-full border border-white/20 text-white hover:border-champagne hover:text-champagne transition-colors font-medium tracking-wider uppercase text-sm"
               >
-                {t.tomorrow}
+                {isIt ? 'Tutta la Settimana' : 'Full Week'}
               </Link>
             </div>
           );
         })()}
       </section>
 
-      {/* Timeline View */}
+      {/* Timeline View — Stasera */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {!hasEvents ? (
           <div className="py-20 text-center border border-white/10 rounded-lg bg-white/[0.03]">
@@ -261,6 +272,67 @@ export default async function TonightPage({ params }: Props) {
                 </div>
                 <div className="space-y-6">
                   {afterHoursEvents.map((item) => (
+                    <EventCard key={item.event.id} item={item} locale={locale} />
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </section>
+
+      {/* Timeline View — Domani (FASE C2: mancava del tutto) */}
+      <section id="tomorrow" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-24 pt-16 border-t border-white/10 scroll-mt-24">
+        <h2 className="font-serif text-4xl md:text-5xl font-bold text-champagne tracking-tight mb-10">
+          {t.tomorrow}
+        </h2>
+        {!hasTomorrowEvents ? (
+          <div className="py-20 text-center border border-white/10 rounded-lg bg-white/[0.03]">
+            <Calendar className="w-12 h-12 text-white/20 mx-auto mb-4" />
+            <h3 className="font-serif text-2xl text-white mb-2">{t.emptyTitle}</h3>
+            <p className="text-white/40">{t.emptyDesc}</p>
+          </div>
+        ) : (
+          <div className="space-y-16">
+            {tomorrowAperitivo.length > 0 && (
+              <div>
+                <div className="flex items-center space-x-4 mb-8">
+                  <h3 className="font-serif text-3xl text-white">Aperitivo</h3>
+                  <span className="text-white/40 font-mono text-sm">19:00 - 22:00</span>
+                  <div className="flex-grow h-px bg-white/10"></div>
+                </div>
+                <div className="space-y-6">
+                  {tomorrowAperitivo.map((item) => (
+                    <EventCard key={item.event.id} item={item} locale={locale} />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {tomorrowPrimeTime.length > 0 && (
+              <div>
+                <div className="flex items-center space-x-4 mb-8">
+                  <h3 className="font-serif text-3xl text-white">Prime Time</h3>
+                  <span className="text-white/40 font-mono text-sm">23:00 - 01:00</span>
+                  <div className="flex-grow h-px bg-white/10"></div>
+                </div>
+                <div className="space-y-6">
+                  {tomorrowPrimeTime.map((item) => (
+                    <EventCard key={item.event.id} item={item} locale={locale} />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {tomorrowAfterHours.length > 0 && (
+              <div>
+                <div className="flex items-center space-x-4 mb-8">
+                  <h3 className="font-serif text-3xl text-white">After Hours</h3>
+                  <span className="text-white/40 font-mono text-sm">02:00+</span>
+                  <div className="flex-grow h-px bg-white/10"></div>
+                </div>
+                <div className="space-y-6">
+                  {tomorrowAfterHours.map((item) => (
                     <EventCard key={item.event.id} item={item} locale={locale} />
                   ))}
                 </div>
