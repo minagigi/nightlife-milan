@@ -1,0 +1,11 @@
+node_modules/
+.env
+.env.*
+
+# Profili browser e cookie (sessioni Google - MAI committare)
+.flow-profile/
+google-cookies*.json
+
+# Output temporanei
+*.png
+!docs/**/*.png
