@@ -5,6 +5,16 @@ data, cosa è cambiato, perché, effetto atteso. Le voci più recenti in alto.
 
 ---
 
+## 2026-07-09 — Migrazione in locale su Windows (richiesta del proprietario)
+
+- **Cosa**: il cervello ora gira sul PC Windows del proprietario via Utilità di
+  pianificazione + Claude Code CLI headless (`scripts/brain/*.ps1`, prompt condivisi in
+  `prompts/*.md`, guida in `LOCAL-WINDOWS.md`). Le 4 routine cloud sono state DISATTIVATE
+  (non cancellate) per evitare doppie esecuzioni.
+- **Perché**: il proprietario deve far fare al cervello cose possibili solo dal suo PC.
+- **Effetto atteso**: stessi protocolli e orari (ma in ora locale, niente più slittamenti
+  UTC/ora legale); briefing salvato in `briefings/YYYY-MM-DD.md`; PR aperte via `gh` CLI.
+
 ## 2026-07-09 — Anticipo del mattino (richiesta del proprietario)
 
 - **Cosa**: analisi spostata dalle 06:00 alle 04:00, briefing+dispatch dalle 08:00 alle 06:00
