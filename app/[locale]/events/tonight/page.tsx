@@ -232,7 +232,7 @@ function TimeSlot({ title, time, items, locale, lp }: {
                   <MapPin className="w-3.5 h-3.5" />
                   <span className="text-sm">{venueName}</span>
                 </div>
-                {event.pricing.entry > 0 && (
+                {event.pricing.entry !== null && event.pricing.entry > 0 && (
                   <p className="text-white/30 text-xs mt-2">
                     {isIt ? 'Ingresso' : 'Entry'} €{event.pricing.entry}
                   </p>

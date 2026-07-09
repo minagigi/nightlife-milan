@@ -25,6 +25,7 @@ function CarouselInner({ items, lang, showTonightTag }: EventsCarouselProps) {
   if (zoneFilter)  filtered = filtered.filter(i => i.venue.zone.toLowerCase() === zoneFilter);
   if (priceFilter) filtered = filtered.filter(i => {
     const e = i.event.pricing.entry;
+    if (e === null) return false; // prezzo non confermato: escluso dai filtri specifici
     if (priceFilter === 'free')    return e === 0;
     if (priceFilter === 'under30') return e > 0 && e < 30;
     if (priceFilter === 'over30')  return e >= 30;

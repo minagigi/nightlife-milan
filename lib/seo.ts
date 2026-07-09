@@ -78,15 +78,18 @@ export const generateEventSchema = (
     };
   }
 
-  // Offers Schema (Pricing)
-  schema.offers = {
-    '@type': 'Offer',
-    price: event.pricing.entry,
-    priceCurrency: event.pricing.currency,
-    availability: 'https://schema.org/InStock',
-    url: eventUrl, // Assuming tickets are bought on the event page or linked from there
-    validFrom: event.dateISO,
-  };
+  // Offers Schema (Pricing) — solo se abbiamo un prezzo reale confermato.
+  // Un Offer con un prezzo inventato/sbagliato è peggio di nessun Offer.
+  if (event.pricing.entry !== null) {
+    schema.offers = {
+      '@type': 'Offer',
+      price: event.pricing.entry,
+      priceCurrency: event.pricing.currency,
+      availability: 'https://schema.org/InStock',
+      url: eventUrl, // Assuming tickets are bought on the event page or linked from there
+      validFrom: event.dateISO,
+    };
+  }
 
   return schema;
 };

@@ -110,7 +110,12 @@ export interface Event {
   dateISO: string; // ISO 8601 format (e.g., "2024-12-31T23:00:00+01:00")
   endDateISO?: string;
   pricing: {
-    entry: number;
+    // null = nessun prezzo reale confermato (es. eventi Eventbrite: il ticket
+    // pubblicato lì è sempre un RSVP gratuito di comodo, il pagamento reale
+    // avviene alla porta/via WhatsApp — non è mai il prezzo vero dell'evento).
+    // Non mostrare "Gratis" per null: nascondere il prezzo piuttosto che
+    // inventarlo o affermare erroneamente che l'ingresso è gratuito.
+    entry: number | null;
     currency: 'EUR';
     tableMinSpend: number | null;
   };

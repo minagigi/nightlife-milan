@@ -29,11 +29,17 @@ export default function EventCard({ event, venue, lang, priority = false, isToni
   }).format(dateObj);
 
   const isFree = event.pricing.entry === 0;
-  const formattedPrice = isFree
-    ? (typedLang === 'it' ? 'GRATUITO' : 'FREE')
-    : new Intl.NumberFormat(typedLang === 'it' ? 'it-IT' : 'en-US', {
-        style: 'currency', currency: event.pricing.currency, maximumFractionDigits: 0,
-      }).format(event.pricing.entry);
+  // entry === null: nessun prezzo reale confermato per questo evento (tipico
+  // per eventi importati da Eventbrite, dove il ticket pubblicato lì è solo
+  // un RSVP gratuito, non il prezzo reale) — niente badge piuttosto che un
+  // "Gratis" sbagliato.
+  const formattedPrice = event.pricing.entry === null
+    ? null
+    : isFree
+      ? (typedLang === 'it' ? 'GRATUITO' : 'FREE')
+      : new Intl.NumberFormat(typedLang === 'it' ? 'it-IT' : 'en-US', {
+          style: 'currency', currency: event.pricing.currency, maximumFractionDigits: 0,
+        }).format(event.pricing.entry);
 
   const genre = event.genre[0]?.replace(/_/g, ' ') ?? '';
 
@@ -80,17 +86,19 @@ export default function EventCard({ event, venue, lang, priority = false, isToni
         </span>
       </div>
 
-      {/* Price badge top-right */}
-      <div className="absolute top-4 right-14 z-20">
-        <span className={`font-sans text-[10px] font-bold tracking-[0.15em] uppercase tabular-nums
-          px-2.5 py-1.5 rounded-full
-          ${isFree
-            ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-            : 'bg-champagne text-black'
-          }`}>
-          {formattedPrice}
-        </span>
-      </div>
+      {/* Price badge top-right — nascosto se non c'è un prezzo reale confermato */}
+      {formattedPrice && (
+        <div className="absolute top-4 right-14 z-20">
+          <span className={`font-sans text-[10px] font-bold tracking-[0.15em] uppercase tabular-nums
+            px-2.5 py-1.5 rounded-full
+            ${isFree
+              ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+              : 'bg-champagne text-black'
+            }`}>
+            {formattedPrice}
+          </span>
+        </div>
+      )}
 
       {/* Favorite */}
       <div className="absolute top-4 right-4 z-20">
