@@ -24,15 +24,14 @@ export const venuesData: Venue[] = [
       altTextImg: { en: "Just Me Milan nightclub Roberto Cavalli design Torre Branca Sempione VIP tables", it: "Just Me Milano discoteca design Roberto Cavalli Torre Branca Sempione tavoli VIP" },
       insiderTip: { en: "Ask for Privé Branca: you dance directly under the tower's lit steel pillars. It fills first during Fashion Week.", it: "Chiedi il Privé Branca: balli sotto i pilastri d'acciaio illuminati della torre. Si riempie per primo durante la Fashion Week." }
     },
-    image: "/images/just-me-milano.webp",
+    image: "/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp",
     gallery: [
+      "/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp",
+      "/images/venues/just-me-milano/just-me-milano-lounge-01.webp",
+      "/images/venues/just-me-milano/just-me-milano-buffet-01.webp",
       "/images/venues/just-me-milano/just-me-milano-interior-01.webp",
       "/images/venues/just-me-milano/just-me-milano-interior-02.webp",
       "/images/venues/just-me-milano/just-me-milano-interior-03.webp",
-      "/images/venues/just-me-milano/just-me-milano-interior-04.webp",
-      "/images/venues/just-me-milano/just-me-milano-interior-05.webp",
-      "/images/venues/just-me-milano/just-me-milano-interior-06.webp",
-      "/images/venues/just-me-milano/just-me-milano-interior-07.webp",
     ],
     isManaged: true,
     isPriority: true,
@@ -106,7 +105,7 @@ export const venuesData: Venue[] = [
       altTextImg: { en: "Pineta Club Milan aperitivo cantato Via Messina 38 Corso Como nightclub", it: "Aperitivo Cantato Pineta Club Milano Via Messina 38 Corso Como" },
       insiderTip: { en: "Come for the buffet at 19:30 to claim a table — by 22:00 it's standing room only.", it: "Arriva al buffet delle 19:30 per prendere il tavolo — alle 22:00 si sta solo in piedi." }
     },
-    image: "/images/pineta-milano.webp",
+    image: "/images/venues/pineta-milano/pineta-milano-ingresso-01.webp",
     isManaged: true,
     isPriority: true,
     isFeatured: true,
@@ -115,13 +114,12 @@ export const venuesData: Venue[] = [
     priceRange: "$$$",
     tags: ["Singing Aperitivo", "Chic", "Commercial"],
     gallery: [
+      "/images/venues/pineta-milano/pineta-milano-ingresso-01.webp",
+      "/images/venues/pineta-milano/pineta-milano-lounge-01.webp",
+      "/images/venues/pineta-milano/pineta-milano-party-01.webp",
       "/images/venues/pineta-milano/pineta-milano-interior-01.webp",
       "/images/venues/pineta-milano/pineta-milano-interior-02.webp",
       "/images/venues/pineta-milano/pineta-milano-interior-03.webp",
-      "/images/venues/pineta-milano/pineta-milano-interior-04.webp",
-      "/images/venues/pineta-milano/pineta-milano-interior-05.webp",
-      "/images/venues/pineta-milano/pineta-milano-interior-06.webp",
-      "/images/venues/pineta-milano/pineta-milano-interior-07.webp",
     ]
   },
   {
