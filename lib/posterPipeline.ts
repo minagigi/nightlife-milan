@@ -279,8 +279,18 @@ async function venueFallback(venueId: string, imageSlug: string, galleryIndex = 
 
 /** Applica SEMPRE il rebrand (badge + contatti/sito nostri), sulla venue
  * fallback compresa — vedi FASE P1: nessuna immagine pubblicata resta senza
- * badge, anche quando parte già pulita da branding di terzi. */
-async function rebrand(buffer: Buffer, contentType: string, imageSlug: string): Promise<PosterResult | null> {
+ * badge, anche quando parte già pulita da branding di terzi.
+ *
+ * `skipVisionRecheck` (FASE P2, 2026-07-09): la vision-check serve a
+ * verificare che una locandina ESTERNA (contenuto sconosciuto) non abbia
+ * branding di terzi residuo dopo l'editing — quando la base è invece una
+ * NOSTRA foto venue già vagliata a mano (rebrandVenueFallback), non c'è
+ * contenuto sconosciuto da verificare: richiedere comunque la vision-check
+ * fa fallire SEMPRE il rebrand quando ANTHROPIC_API_KEY è esaurita (bug
+ * reale osservato: Gemini editava correttamente ma il fallback ripiegava
+ * sulla foto grezza senza badge perché `inspectWithVision` tornava null).
+ */
+async function rebrand(buffer: Buffer, contentType: string, imageSlug: string, skipVisionRecheck = false): Promise<PosterResult | null> {
   const badge = await loadBadge();
   let currentBuffer = buffer;
   let currentMediaType = contentType;
@@ -292,6 +302,16 @@ async function rebrand(buffer: Buffer, contentType: string, imageSlug: string): 
 
     currentBuffer = edited.buffer;
     currentMediaType = edited.mediaType;
+
+    if (skipVisionRecheck) {
+      const ext = currentMediaType.includes('png') ? 'png' : 'jpg';
+      return {
+        buffer: currentBuffer,
+        contentType: currentMediaType,
+        filename: `${imageSlug}.${ext}`,
+        source: 'poster-edited',
+      };
+    }
 
     const recheck = await inspectWithVision(currentBuffer.toString('base64'), currentMediaType, /* afterEdit */ true);
     if (recheck && isClean(recheck)) {
@@ -351,7 +371,7 @@ export async function processPoster(posterUrl: string | undefined, venueId: stri
 async function rebrandVenueFallback(venueId: string, imageSlug: string, galleryIndex = 0): Promise<PosterResult | null> {
   const base = await venueFallback(venueId, imageSlug, galleryIndex);
   if (!base) return null;
-  const rebranded = await rebrand(base.buffer, base.contentType, imageSlug);
+  const rebranded = await rebrand(base.buffer, base.contentType, imageSlug, /* skipVisionRecheck */ true);
   return rebranded || base;
 }
 
