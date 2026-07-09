@@ -306,11 +306,17 @@ async function venueFallback(venueId: string, imageSlug: string, galleryIndex = 
  * reale osservato: Gemini editava correttamente ma il fallback ripiegava
  * sulla foto grezza senza badge perché `inspectWithVision` tornava null).
  */
-async function rebrand(buffer: Buffer, contentType: string, imageSlug: string, skipVisionRecheck = false): Promise<PosterResult | null> {
+async function rebrand(
+  buffer: Buffer,
+  contentType: string,
+  imageSlug: string,
+  skipVisionRecheck = false,
+  promptOverride?: string
+): Promise<PosterResult | null> {
   const badge = await loadBadge();
   let currentBuffer = buffer;
   let currentMediaType = contentType;
-  let retryPrompt: string | undefined = skipVisionRecheck ? VENUE_PHOTO_EDIT_PROMPT : undefined;
+  let retryPrompt: string | undefined = promptOverride;
 
   for (let attempt = 1; attempt <= MAX_EDIT_ATTEMPTS; attempt++) {
     const edited = await editWithNanoBanana(currentBuffer.toString('base64'), currentMediaType, retryPrompt, badge || undefined);
@@ -367,12 +373,21 @@ export async function processPoster(posterUrl: string | undefined, venueId: stri
   const base64 = downloaded.buffer.toString('base64');
   const inspection = await inspectWithVision(base64, downloaded.contentType);
 
-  // Vision non disponibile (niente ANTHROPIC_API_KEY o errore) → non possiamo
-  // garantire l'assenza di contatti terzi: fallback prudente, mai rischiare.
+  // Vision non disponibile (ANTHROPIC_API_KEY esaurita) — FASE P3, bug reale
+  // riportato dall'utente 2026-07-09: la vecchia regola prudente scartava
+  // SEMPRE la locandina reale a favore della foto venue generica, mostrando
+  // su ogni evento la stessa foto d'ambiente invece dell'artwork specifico.
+  // L'editing Gemini stesso (badge/contatti/rimozione branding terzi) è
+  // verificato funzionante — solo il doppio controllo Claude vision manca.
+  // Tentare comunque l'editing della locandina VERA (saltando solo il
+  // recheck, non l'edit) è la scelta giusta: mostrare l'artwork reale del
+  // party val la pena anche senza la doppia verifica automatica.
   if (!inspection) {
-    const rebranded = await rebrandVenueFallback(venueId, imageSlug, galleryIndex);
+    const rebranded = await rebrand(downloaded.buffer, downloaded.contentType, imageSlug, /* skipVisionRecheck */ true);
     if (rebranded) return rebranded;
-    throw new Error(`Vision inspection unavailable and no venue fallback for ${venueId}`);
+    const fallback = await rebrandVenueFallback(venueId, imageSlug, galleryIndex);
+    if (fallback) return fallback;
+    throw new Error(`Vision inspection unavailable, poster edit failed, and no venue fallback for ${venueId}`);
   }
 
   const rebranded = await rebrand(downloaded.buffer, downloaded.contentType, imageSlug);
@@ -387,7 +402,7 @@ export async function processPoster(posterUrl: string | undefined, venueId: stri
 async function rebrandVenueFallback(venueId: string, imageSlug: string, galleryIndex = 0): Promise<PosterResult | null> {
   const base = await venueFallback(venueId, imageSlug, galleryIndex);
   if (!base) return null;
-  const rebranded = await rebrand(base.buffer, base.contentType, imageSlug, /* skipVisionRecheck */ true);
+  const rebranded = await rebrand(base.buffer, base.contentType, imageSlug, /* skipVisionRecheck */ true, VENUE_PHOTO_EDIT_PROMPT);
   return rebranded || base;
 }
 
