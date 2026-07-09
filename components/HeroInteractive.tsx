@@ -60,7 +60,7 @@ export default function HeroInteractive({ venues, locale, firstVenueId }: Props)
           <Image
             src={current.gallery?.[0] || current.image || '/images/milan-nightclub-luxury-vip-champagne.webp'}
             alt={current.localizedContent.name[typedLocale] || current.localizedContent.name.en}
-            fill quality={82}
+            fill quality={85}
             className="object-cover"
             sizes="100vw"
             referrerPolicy="no-referrer"

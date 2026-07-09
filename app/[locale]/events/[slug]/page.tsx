@@ -253,6 +253,7 @@ export default async function EventPage({ params }: Props) {
             src={weeklyEvent.image}
             alt={title}
             fill
+            quality={85}
             sizes="100vw"
             className="object-cover"
             referrerPolicy="no-referrer"
@@ -458,6 +459,7 @@ export default async function EventPage({ params }: Props) {
             src={event.image || venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp'}
             alt={title}
             fill
+            quality={85}
             priority={true} // Above the fold
             sizes="100vw"
             className="object-cover"
@@ -541,7 +543,7 @@ export default async function EventPage({ params }: Props) {
             <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-4 not-prose">
               {buildVenueGalleryImages(venue, title, locale).map((img, i) => (
                 <div key={i} className="relative h-32 rounded-xl overflow-hidden border border-white/8">
-                  <Image src={img.src} alt={img.alt} title={img.alt} fill className="object-cover" sizes="(max-width: 768px) 50vw, 33vw" />
+                  <Image src={img.src} alt={img.alt} title={img.alt} fill quality={85} className="object-cover" sizes="(max-width: 768px) 50vw, 33vw" />
                 </div>
               ))}
             </div>

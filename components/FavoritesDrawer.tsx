@@ -63,6 +63,7 @@ export default function FavoritesDrawer({ lang }: { lang: string }) {
                           src={item.image}
                           alt={item.title}
                           fill
+                          quality={85}
                           sizes="64px"
                           className="object-cover"
                         />

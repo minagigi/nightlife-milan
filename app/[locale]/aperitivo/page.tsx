@@ -284,6 +284,7 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
                       src={bar.image}
                       alt={bar.name}
                       fill
+                      quality={85}
                       className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />

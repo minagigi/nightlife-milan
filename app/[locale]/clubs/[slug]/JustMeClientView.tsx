@@ -20,6 +20,7 @@ export default function JustMeClientView({ dict, locale }: { dict: Dictionary, l
             src="/images/just-me-milano.webp"
             alt="Just Me Milano"
             fill
+            quality={85}
             sizes="100vw"
             className="object-cover"
             priority

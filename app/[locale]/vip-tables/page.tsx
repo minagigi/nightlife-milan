@@ -301,6 +301,7 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
                         src={venue.image}
                         alt={venue.name}
                         fill
+                        quality={85}
                         className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                         sizes="(max-width: 1024px) 100vw, 288px"
                         referrerPolicy="no-referrer"

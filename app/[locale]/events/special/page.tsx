@@ -218,7 +218,7 @@ export default async function SpecialEventsPage({ params }: Props) {
             { src: '/images/milan-nightclub-luxury-vip-champagne.webp', alt: 'Milan luxury nightclub VIP champagne special night' },
           ].map((img, i) => (
             <div key={i} className="relative h-32 rounded-xl overflow-hidden border border-white/8">
-              <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="(max-width: 768px) 50vw, 20vw" />
+              <Image src={img.src} alt={img.alt} fill quality={85} className="object-cover" sizes="(max-width: 768px) 50vw, 20vw" />
             </div>
           ))}
         </div>

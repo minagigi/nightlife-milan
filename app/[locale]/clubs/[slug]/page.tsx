@@ -399,6 +399,7 @@ export default async function ClubPage({ params }: Props) {
             src={image}
             alt={name}
             fill
+            quality={85}
             sizes="100vw"
             className="object-cover"
             priority
@@ -604,6 +605,7 @@ export default async function ClubPage({ params }: Props) {
                       `${name} Milan — terrace and outdoor space`,
                     ][i] ?? `${name} Milan — venue photo ${i + 1}`}
                     fill
+                    quality={85}
                     className="object-cover hover:scale-105 transition-transform duration-700"
                     sizes="(max-width: 768px) 50vw, 25vw"
                   />

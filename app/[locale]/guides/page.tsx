@@ -143,6 +143,7 @@ export default async function GuidesPage({
             src={featuredArticle.image}
             alt={featuredArticle.title}
             fill
+            quality={85}
             sizes="100vw"
             className="object-cover transition-transform duration-700 group-hover:scale-105"
             referrerPolicy="no-referrer"
@@ -205,6 +206,7 @@ export default async function GuidesPage({
                   src={article.image}
                   alt={article.title}
                   fill
+                  quality={85}
                   sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                   referrerPolicy="no-referrer"

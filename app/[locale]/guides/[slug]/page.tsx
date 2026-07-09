@@ -196,6 +196,7 @@ export default async function GuidePage({ params }: Props) {
               src={guide.image || '/images/milan-nightlife-guide-2026-insider.webp'}
               alt={title}
               fill
+              quality={85}
               sizes="100vw"
               className="object-cover"
               priority
@@ -340,6 +341,7 @@ export default async function GuidePage({ params }: Props) {
                         src={venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp'}
                         alt={venueName}
                         fill
+                        quality={85}
                         sizes="(max-width: 768px) 50vw, 200px"
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                       />

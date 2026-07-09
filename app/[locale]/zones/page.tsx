@@ -195,6 +195,7 @@ export default async function ZonesPage({
                     src={imgSrc}
                     alt={`Nightlife in ${zone.name}, Milan — ${zone.vibe}`}
                     fill
+                    quality={85}
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />

@@ -318,7 +318,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                       alt={v.name[lang]}
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
-                      quality={82}
+                      quality={85}
                       placeholder="blur"
                       blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiMxQzE4MTAiLz48L3N2Zz4="
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -573,19 +573,19 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-3 lg:grid-cols-5 gap-2" style={{ gridTemplateRows: 'auto auto' }}>
               <div className="relative col-span-2 lg:col-span-2 row-span-2 h-56 sm:h-72 lg:h-80 overflow-hidden rounded-xl">
-                <Image src="/images/vip-table-milan-nightclub-just-me.webp" alt="Just Me Milano VIP tables — luxury nightclub in Sempione" fill quality={82} className="object-cover hover:scale-105 transition-transform duration-700" sizes="(max-width: 1024px) 66vw, 40vw" />
+                <Image src="/images/vip-table-milan-nightclub-just-me.webp" alt="Just Me Milano VIP tables — luxury nightclub in Sempione" fill quality={85} className="object-cover hover:scale-105 transition-transform duration-700" sizes="(max-width: 1024px) 66vw, 40vw" />
               </div>
               <div className="relative col-span-1 lg:col-span-2 h-28 sm:h-36 lg:h-[152px] overflow-hidden rounded-xl">
-                <Image src="/images/pineta-milano.webp" alt="Pineta Club Milan — singing aperitivo at Corso Como" fill quality={82} className="object-cover hover:scale-105 transition-transform duration-700" sizes="(max-width: 1024px) 33vw, 40vw" />
+                <Image src="/images/pineta-milano.webp" alt="Pineta Club Milan — singing aperitivo at Corso Como" fill quality={85} className="object-cover hover:scale-105 transition-transform duration-700" sizes="(max-width: 1024px) 33vw, 40vw" />
               </div>
               <div className="relative col-span-1 lg:col-span-1 h-28 sm:h-36 lg:h-[152px] overflow-hidden rounded-xl">
-                <Image src="/images/rooftop-bar-milan-voya-skyline.webp" alt="Voya Rooftop Milan — cocktails with skyline view in Isola" fill quality={82} className="object-cover hover:scale-105 transition-transform duration-700" sizes="(max-width: 1024px) 33vw, 20vw" />
+                <Image src="/images/rooftop-bar-milan-voya-skyline.webp" alt="Voya Rooftop Milan — cocktails with skyline view in Isola" fill quality={85} className="object-cover hover:scale-105 transition-transform duration-700" sizes="(max-width: 1024px) 33vw, 20vw" />
               </div>
               <div className="relative col-span-1 lg:col-span-2 h-28 sm:h-36 lg:h-[152px] overflow-hidden rounded-xl">
-                <Image src="/images/milan-club-crowd-dancefloor-night.webp" alt="Milan nightclub dancefloor — Friday night crowd 2026" fill quality={82} className="object-cover hover:scale-105 transition-transform duration-700" sizes="(max-width: 1024px) 33vw, 40vw" />
+                <Image src="/images/milan-club-crowd-dancefloor-night.webp" alt="Milan nightclub dancefloor — Friday night crowd 2026" fill quality={85} className="object-cover hover:scale-105 transition-transform duration-700" sizes="(max-width: 1024px) 33vw, 40vw" />
               </div>
               <div className="relative col-span-1 lg:col-span-1 h-28 sm:h-36 lg:h-[152px] overflow-hidden rounded-xl">
-                <Image src="/images/bottle-service-milan-vip-nightclub.webp" alt="Bottle service Milan — VIP champagne at exclusive nightclub" fill quality={82} className="object-cover hover:scale-105 transition-transform duration-700" sizes="(max-width: 1024px) 33vw, 20vw" />
+                <Image src="/images/bottle-service-milan-vip-nightclub.webp" alt="Bottle service Milan — VIP champagne at exclusive nightclub" fill quality={85} className="object-cover hover:scale-105 transition-transform duration-700" sizes="(max-width: 1024px) 33vw, 20vw" />
               </div>
             </div>
           </div>
