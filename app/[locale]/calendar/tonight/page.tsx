@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Calendar, Clock, MapPin } from 'lucide-react';
 import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset } from '@/lib/calendarEvents';
 import type { Event, Venue } from '@/lib/types';
@@ -366,9 +367,13 @@ function EventCard({ item, locale }: { item: { event: Event; venue: Venue }, loc
     <div className="group relative flex flex-col md:flex-row bg-white/[0.03] rounded-lg overflow-hidden border border-white/5 hover:border-champagne/30 transition-colors duration-500">
       {/* Image */}
       <div className="w-full md:w-1/3 h-48 md:h-auto relative">
-        <div
-          className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-          style={{ backgroundImage: `url(${event.image || venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp'})` }}
+        <Image
+          src={event.image || venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp'}
+          alt={title}
+          fill
+          sizes="(max-width: 768px) 100vw, 33vw"
+          quality={85}
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#131009] via-transparent to-transparent" />
 
