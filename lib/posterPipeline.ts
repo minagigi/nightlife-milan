@@ -131,6 +131,22 @@ const EDIT_PROMPT = `Edit this event poster with these changes:
 Keep the artwork, layout, composition, colors, venue's own logo/wordmark, event title, date, lineup and every other element pixel-identical. Do not redesign anything else.`;
 
 /**
+ * Prompt separato per la foto venue fallback (FASE P2, 2026-07-09, bug
+ * reale): questa è una foto d'ambiente reale, SENZA alcun titolo/data/lineup
+ * stampato — usare EDIT_PROMPT (che parla di "event poster" e istruisce di
+ * "keep event title, date, lineup") su una foto senza quegli elementi ha
+ * fatto sì che Nano Banana 2 li INVENTASSE (testo palesemente falso e
+ * illeggibile tipo "JUST DO ALNPYY" / "DJ SHISONE CAMVNRASTHE" pubblicato
+ * su un listing Eventbrite live). Questo prompt vieta esplicitamente di
+ * aggiungere qualsiasi testo oltre a sito/WhatsApp/badge.
+ */
+const VENUE_PHOTO_EDIT_PROMPT = `This is a real venue photo (not a poster — it has no title, date, or lineup text on it). Make only these additions:
+(1) Add "www.nightlifemilan.com" in small, clean, legible text near the bottom of the image, in a color that contrasts with the background.
+(2) Add a small WhatsApp icon followed by "+39 351 912 7047" and small UK/Italy flag icons, in small, clean, legible text near the bottom of the image, next to the website text.
+(3) Composite the second reference image (a circular "Milan Nightlife — Event Service" badge) into the top-left corner, sized proportionally.
+Do NOT add any other text, title, date, lineup, DJ names, or any invented wording anywhere in the image — only the two short contact lines above. Keep the venue photo itself (people, furniture, lighting, composition) pixel-identical.`;
+
+/**
  * Prompt di retry mirato — verificato che funzioni meglio del prompt generico
  * ripetuto identico: descrivere ESATTAMENTE cosa è rimasto (dal recheck vision
  * precedente) fa pulire a Nano Banana 2 anche loghi/testo residuo in background
@@ -294,7 +310,7 @@ async function rebrand(buffer: Buffer, contentType: string, imageSlug: string, s
   const badge = await loadBadge();
   let currentBuffer = buffer;
   let currentMediaType = contentType;
-  let retryPrompt: string | undefined;
+  let retryPrompt: string | undefined = skipVisionRecheck ? VENUE_PHOTO_EDIT_PROMPT : undefined;
 
   for (let attempt = 1; attempt <= MAX_EDIT_ATTEMPTS; attempt++) {
     const edited = await editWithNanoBanana(currentBuffer.toString('base64'), currentMediaType, retryPrompt, badge || undefined);
