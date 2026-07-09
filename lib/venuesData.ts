@@ -202,6 +202,9 @@ export const venuesData: Venue[] = [
       "/images/venues/55-milano/55-milano-interior-05.webp",
       "/images/venues/55-milano/55-milano-interior-06.webp",
       "/images/venues/55-milano/55-milano-interior-07.webp",
+      "/images/venues/55-milano/55-milano-friday-dinner-show-01.webp",
+      "/images/venues/55-milano/55-milano-saturday-the-wall-01.webp",
+      "/images/venues/55-milano/55-milano-sunday-latino-americano-01.webp",
     ]
   },
   {

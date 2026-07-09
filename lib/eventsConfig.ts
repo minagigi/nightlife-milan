@@ -502,7 +502,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Smart Casual.'
     },
     faqs: defaultFaqs('55 Milano', 'Via Piero della Francesca 55, Milan', '25+', 'Smart Casual', 'Live Music and Commercial'),
-    image: '/images/pineta-milano.webp',
+    image: '/images/venues/55-milano/55-milano-friday-dinner-show-01.webp',
     priority: 70
   },
   {
@@ -525,7 +525,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Smart Casual.'
     },
     faqs: defaultFaqs('55 Milano', 'Via Piero della Francesca 55, Milan', '25+', 'Smart Casual', 'Live Music and Commercial'),
-    image: '/images/pineta-milano.webp',
+    image: '/images/venues/55-milano/55-milano-saturday-the-wall-01.webp',
     priority: 70
   },
   {
@@ -548,7 +548,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Smart Casual. Comodo per ballare.'
     },
     faqs: defaultFaqs('55 Milano', 'Via Piero della Francesca 55, Milan', '21+', 'Smart Casual', 'Reggaeton and Latin'),
-    image: '/images/milan-club-crowd-dancefloor-night.webp',
+    image: '/images/venues/55-milano/55-milano-sunday-latino-americano-01.webp',
     priority: 70
   },
 
@@ -573,7 +573,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Casual Chic. Streetwear consentito.'
     },
     faqs: defaultFaqs('Play Club', 'Viale Monte Grappa 14, Milan', '18+', 'Casual Chic', 'Hip-Hop and Trap'),
-    image: '/images/play-club-milano.webp',
+    image: '/images/venues/play-club-milano/play-club-milano-interior-01.webp',
     priority: 50
   },
   {
@@ -596,7 +596,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Casual Chic.'
     },
     faqs: defaultFaqs('Play Club', 'Viale Monte Grappa 14, Milan', '18+', 'Casual Chic', 'Reggaeton and Urban'),
-    image: '/images/milan-club-crowd-dancefloor-night.webp',
+    image: '/images/venues/play-club-milano/play-club-milano-interior-02.webp',
     priority: 50
   },
   {
@@ -619,7 +619,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Smart Casual.'
     },
     faqs: defaultFaqs('Play Club', 'Viale Monte Grappa 14, Milan', '21+', 'Smart Casual', 'Commercial and House'),
-    image: '/images/milan-nightclub-dancefloor-vip.webp',
+    image: '/images/venues/play-club-milano/play-club-milano-interior-03.webp',
     priority: 50
   },
   {
@@ -642,7 +642,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Elegante. Vestiti per impressionare.'
     },
     faqs: defaultFaqs('Play Club', 'Viale Monte Grappa 14, Milan', '21+', 'Elegant', 'Commercial and House'),
-    image: '/images/play-club-milano.webp',
+    image: '/images/venues/play-club-milano/play-club-milano-interior-04.webp',
     priority: 50
   },
   {
@@ -665,7 +665,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Urban Chic. Streetwear consentito.'
     },
     faqs: defaultFaqs('Play Club', 'Viale Monte Grappa 14, Milan', '18+', 'Urban Chic', 'Hip-Hop and Trap'),
-    image: '/images/play-club-milano.webp',
+    image: '/images/venues/play-club-milano/play-club-milano-interior-05.webp',
     priority: 50
   },
 
@@ -690,7 +690,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Casual Chic.'
     },
     faqs: defaultFaqs('Repvblic', 'Piazza della Repubblica 12, Milan', '18+', 'Casual Chic', 'Commercial and Reggaeton'),
-    image: '/images/milan-nightclub-dancefloor-vip.webp',
+    image: '/images/venues/repvblic-milano/repvblic-milano-interior-01.webp',
     priority: 40
   },
   {
@@ -713,7 +713,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Urban Casual.'
     },
     faqs: defaultFaqs('Repvblic', 'Piazza della Repubblica 12, Milan', '18+', 'Urban Casual', 'Hip-Hop and Trap'),
-    image: '/images/play-club-milano.webp',
+    image: '/images/venues/repvblic-milano/repvblic-milano-interior-02.webp',
     priority: 40
   },
   {
@@ -736,7 +736,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Alternative Chic. Esprimi te stesso.'
     },
     faqs: defaultFaqs('Repvblic', 'Piazza della Repubblica 12, Milan', '21+', 'Alternative Chic', 'Indie, Rock, and Electronic'),
-    image: '/images/milan-club-crowd-dancefloor-night.webp',
+    image: '/images/venues/repvblic-milano/repvblic-milano-interior-03.webp',
     priority: 40
   }
 ];
