@@ -22,9 +22,19 @@ export async function GET(request: Request) {
   const token = getEventbriteToken();
   if (!token) return NextResponse.json({ error: 'EVENTBRITE_TOKEN not set' }, { status: 500 });
 
+  const { searchParams } = new URL(request.url);
+  const auth = { Authorization: `Bearer ${token}` };
+
+  // FASE M1 (piano eventbrite-enrichment): ?fields=1 espande i campi che ci
+  // interessa censire (summary/category/format/music_properties) invece del
+  // solo elenco base usato per FASE P2.
+  const expand = searchParams.get('fields') === '1'
+    ? 'venue,logo,category,format,music_properties'
+    : 'venue,logo';
+
   const res = await fetch(
-    `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=live&expand=venue,logo&order_by=start_asc&time_filter=current_future`,
-    { headers: { Authorization: `Bearer ${token}` } }
+    `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=live&expand=${expand}&order_by=start_asc&time_filter=current_future`,
+    { headers: auth }
   );
   if (!res.ok) return NextResponse.json({ error: `Eventbrite HTTP ${res.status}` }, { status: 502 });
 
@@ -32,17 +42,58 @@ export async function GET(request: Request) {
   interface RawEv {
     id: string;
     name?: { text?: string };
+    summary?: string;
     start?: { local?: string };
     venue?: { name?: string };
     logo?: { url?: string; original?: { url?: string } };
+    category_id?: string | null;
+    subcategory_id?: string | null;
+    format_id?: string | null;
+    music_properties?: { age_restriction?: string | null; door_time?: string | null; presented_by?: string | null } | null;
   }
-  const events = ((data.events || []) as RawEv[]).map((ev) => ({
+  const rawEvents = (data.events || []) as RawEv[];
+
+  if (searchParams.get('fields') !== '1') {
+    const events = rawEvents.map((ev) => ({
+      id: ev.id,
+      name: ev.name?.text,
+      start: ev.start?.local,
+      venue: ev.venue?.name,
+      logoUrl: ev.logo?.original?.url || ev.logo?.url,
+    }));
+    return NextResponse.json({ count: events.length, events });
+  }
+
+  const events = rawEvents.map((ev) => ({
     id: ev.id,
     name: ev.name?.text,
-    start: ev.start?.local,
     venue: ev.venue?.name,
-    logoUrl: ev.logo?.original?.url || ev.logo?.url,
+    missing: {
+      summary: !ev.summary,
+      category_id: !ev.category_id,
+      subcategory_id: !ev.subcategory_id,
+      format_id: !ev.format_id,
+      age_restriction: !ev.music_properties?.age_restriction,
+      door_time: !ev.music_properties?.door_time,
+      presented_by: !ev.music_properties?.presented_by,
+    },
   }));
 
-  return NextResponse.json({ count: events.length, events });
+  // Probe one-off: /tags/ esiste davvero come endpoint pubblico? Mai testato.
+  let tagsProbe: unknown = null;
+  if (rawEvents[0]) {
+    const tagsRes = await fetch(`${EVENTBRITE_API}/events/${rawEvents[0].id}/tags/`, { headers: auth });
+    tagsProbe = { status: tagsRes.status, ok: tagsRes.ok, body: await tagsRes.text() };
+  }
+
+  // Elenco categorie reali (per scegliere gli id giusti in FASE M1/M2).
+  const catRes = await fetch(`${EVENTBRITE_API}/categories/`, { headers: auth });
+  const catBody = await catRes.json().catch(() => null);
+  const categories = (catBody?.categories || []).map((c: { id: string; name: string; short_name?: string }) => ({ id: c.id, name: c.name }));
+
+  const formatRes = await fetch(`${EVENTBRITE_API}/formats/`, { headers: auth });
+  const formatBody = await formatRes.json().catch(() => null);
+  const formats = (formatBody?.formats || []).map((f: { id: string; name: string }) => ({ id: f.id, name: f.name }));
+
+  return NextResponse.json({ count: events.length, events, tagsProbe, categories, formats });
 }
