@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Clock, MapPin, Calendar } from 'lucide-react';
-import { mockEvents, mockVenues } from '@/lib/data';
+import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset } from '@/lib/calendarEvents';
 import type { Event, Venue } from '@/lib/types';
 
 export const dynamic = 'force-dynamic';
@@ -54,18 +55,11 @@ export default async function EventsTonightPage({ params }: Props) {
   const lp = isIt ? '/it' : '';
 
   const now = new Date();
-  const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0);
-  const todayEnd = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
+  const allItems = await getAllCalendarEvents();
+  const todayKey = romeDayKeyOffset(0);
 
-  const items = mockEvents
-    .filter(e => {
-      const d = new Date(e.dateISO);
-      return d >= todayStart && d <= todayEnd;
-    })
-    .flatMap(e => {
-      const venue = mockVenues.find(v => v.id === e.venueId);
-      return venue ? [{ event: e, venue }] : [];
-    })
+  const items = allItems
+    .filter(({ event }) => romeDayKey(event.dateISO) === todayKey)
     .sort((a, b) => new Date(a.event.dateISO).getTime() - new Date(b.event.dateISO).getTime());
 
   const getMilanHour = (iso: string) =>
@@ -209,9 +203,13 @@ function TimeSlot({ title, time, items, locale, lp }: {
               className="group flex flex-col sm:flex-row bg-white/[0.03] rounded-lg overflow-hidden border border-white/5 hover:border-champagne/30 transition-all duration-300"
             >
               <div className="sm:w-1/3 h-40 sm:h-auto relative shrink-0">
-                <div
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                  style={{ backgroundImage: `url(${event.image || venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp'})` }}
+                <Image
+                  src={event.image || venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp'}
+                  alt={title}
+                  fill
+                  sizes="(max-width: 640px) 100vw, 33vw"
+                  quality={85}
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-[#131009] via-[#131009]/40 to-transparent" />
                 {event.isSpecial && (

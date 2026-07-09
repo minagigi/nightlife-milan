@@ -1,8 +1,7 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { mockEvents, mockVenues } from '@/lib/data';
-import { isUpcomingRome } from '@/lib/calendarEvents';
+import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
 import DiscoveryGrid from '@/components/DiscoveryGrid';
 
 // ISR Configuration
@@ -50,16 +49,12 @@ export default async function SpecialEventsPage({ params }: Props) {
 
   // Filter special events: isSpecial === true OR tableMinSpend > 500.
   // Solo eventi di oggi o futuri (giorno di Roma) — mai eventi già passati.
-  const specialEvents = mockEvents.filter(e => {
+  const allItems = await getAllCalendarEvents();
+  const items = allItems.filter(({ event: e }) => {
     if (!isUpcomingRome(e.dateISO)) return false;
     const isSpecialFlag = e.isSpecial === true;
     const isHighSpend = e.pricing.tableMinSpend !== null && e.pricing.tableMinSpend > 500;
     return isSpecialFlag || isHighSpend;
-  });
-
-  const items = specialEvents.map(event => {
-    const venue = mockVenues.find(v => v.id === event.venueId)!;
-    return { event, venue };
   });
 
   const t = {

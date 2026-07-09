@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { mockEvents, mockVenues } from '@/lib/data';
-import { isUpcomingRome } from '@/lib/calendarEvents';
+import Image from 'next/image';
+import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
 import { weeklyEvents } from '@/lib/eventsConfig';
 import DiscoveryGrid from '@/components/DiscoveryGrid';
 
@@ -73,14 +73,10 @@ export default async function EventsHubPage({ params }: Props) {
 
   // Confine giorno nel fuso di Roma, non del server (UTC su Vercel):
   // mai mostrare eventi già passati.
-  const upcomingEvents = mockEvents.filter(e => isUpcomingRome(e.dateISO));
+  const allItems = await getAllCalendarEvents();
 
-  const items = upcomingEvents
-    .flatMap(event => {
-      const venue = mockVenues.find(v => v.id === event.venueId);
-      if (!venue) return [];
-      return [{ event, venue }];
-    })
+  const items = allItems
+    .filter(({ event }) => isUpcomingRome(event.dateISO))
     .sort((a, b) => {
       const dateA = new Date(a.event.dateISO).getTime();
       const dateB = new Date(b.event.dateISO).getTime();
@@ -221,7 +217,7 @@ export default async function EventsHubPage({ params }: Props) {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {specialItems.slice(0, 3).map(item => {
-                const title = item.event.localizedContent.title[isIt ? 'it' : 'en'];
+                const title = item.event.localizedContent.title[isIt ? 'it' : 'en'] || item.event.localizedContent.title.en;
                 const slug = item.event.localizedContent.slug[isIt ? 'it' : 'en'];
                 const venueName = item.venue.localizedContent.name[isIt ? 'it' : 'en'] || item.venue.localizedContent.name.en;
                 const date = new Date(item.event.dateISO).toLocaleDateString(isIt ? 'it-IT' : 'en-US', {
@@ -233,9 +229,13 @@ export default async function EventsHubPage({ params }: Props) {
                     href={`${lp}/events/${slug}`}
                     className="group relative h-64 rounded-lg overflow-hidden border border-champagne/20 hover:border-champagne/60 transition-colors"
                   >
-                    <div
-                      className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                      style={{ backgroundImage: `url(${item.event.image || item.venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp'})` }}
+                    <Image
+                      src={item.event.image || item.venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp'}
+                      alt={title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      quality={85}
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
                     <div className="absolute top-4 left-4">

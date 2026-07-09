@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Clock, MapPin, Calendar } from 'lucide-react';
-import { mockEvents, mockVenues } from '@/lib/data';
+import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset, dayOfWeekForKey } from '@/lib/calendarEvents';
 import type { Event, Venue } from '@/lib/types';
 
 export const dynamic = 'force-dynamic';
@@ -56,32 +57,28 @@ export default async function EventsThisWeekPage({ params }: Props) {
   const isIt = locale === 'it';
   const lp = isIt ? '/it' : '';
 
-  // Week: Monday to Sunday of current week
+  // Week: Monday to Sunday of current week, nel fuso di Roma (mai i confini UTC).
   const now = new Date();
-  const day = now.getDay(); // 0=Sun
-  const monday = new Date(now);
-  monday.setDate(now.getDate() - (day === 0 ? 6 : day - 1));
-  monday.setHours(0, 0, 0, 0);
-  const sunday = new Date(monday);
-  sunday.setDate(monday.getDate() + 6);
-  sunday.setHours(23, 59, 59, 999);
+  const todayKey = romeDayKeyOffset(0);
+  const todayDow = dayOfWeekForKey(todayKey); // 0=Sun..6=Sat
+  const daysSinceMonday = todayDow === 0 ? 6 : todayDow - 1;
+  const mondayKey = romeDayKeyOffset(-daysSinceMonday);
+  const sundayKey = romeDayKeyOffset(-daysSinceMonday + 6);
+  const monday = new Date(`${mondayKey}T12:00:00Z`);
+  const sunday = new Date(`${sundayKey}T12:00:00Z`);
 
-  const weekItems = mockEvents
-    .filter(e => {
-      const d = new Date(e.dateISO);
-      return d >= monday && d <= sunday;
-    })
-    .flatMap(e => {
-      const venue = mockVenues.find(v => v.id === e.venueId);
-      return venue ? [{ event: e, venue }] : [];
+  const allItems = await getAllCalendarEvents();
+  const weekItems = allItems
+    .filter(({ event }) => {
+      const key = romeDayKey(event.dateISO);
+      return key >= mondayKey && key <= sundayKey;
     })
     .sort((a, b) => new Date(a.event.dateISO).getTime() - new Date(b.event.dateISO).getTime());
 
   // Group by day of week
   const byDay: Record<number, { event: Event; venue: Venue }[]> = {};
   weekItems.forEach(item => {
-    const d = new Date(item.event.dateISO);
-    const dow = d.getDay();
+    const dow = dayOfWeekForKey(romeDayKey(item.event.dateISO));
     if (!byDay[dow]) byDay[dow] = [];
     byDay[dow].push(item);
   });
@@ -89,7 +86,7 @@ export default async function EventsThisWeekPage({ params }: Props) {
   // Order: Mon(1) Tue(2) Wed(3) Thu(4) Fri(5) Sat(6) Sun(0)
   const orderedDays = [1, 2, 3, 4, 5, 6, 0].filter(d => byDay[d]?.length > 0);
 
-  const weekLabel = `${monday.toLocaleDateString(isIt ? 'it-IT' : 'en-US', { day: 'numeric', month: 'short' })} – ${sunday.toLocaleDateString(isIt ? 'it-IT' : 'en-US', { day: 'numeric', month: 'short' })}`;
+  const weekLabel = `${monday.toLocaleDateString(isIt ? 'it-IT' : 'en-US', { day: 'numeric', month: 'short', timeZone: 'Europe/Rome' })} – ${sunday.toLocaleDateString(isIt ? 'it-IT' : 'en-US', { day: 'numeric', month: 'short', timeZone: 'Europe/Rome' })}`;
 
   return (
     <main className="flex-1 bg-[#131009] w-full pt-20 pb-20">
@@ -161,13 +158,13 @@ export default async function EventsThisWeekPage({ params }: Props) {
           <div className="space-y-12">
             {orderedDays.map(dow => {
               const dayEvents = byDay[dow];
-              const dayDate = new Date(monday);
-              dayDate.setDate(monday.getDate() + (dow === 0 ? 6 : dow - 1));
+              const dayOffset = dow === 0 ? 6 : dow - 1;
+              const dayDate = new Date(`${romeDayKeyOffset(-daysSinceMonday + dayOffset)}T12:00:00Z`);
               const dayName = isIt ? DAYS_IT[dow] : DAYS_EN[dow];
               const dateStr = dayDate.toLocaleDateString(isIt ? 'it-IT' : 'en-US', {
                 day: 'numeric', month: 'long', timeZone: 'Europe/Rome',
               });
-              const isToday = dayDate.toDateString() === now.toDateString();
+              const isToday = romeDayKey(dayDate.toISOString()) === todayKey;
 
               return (
                 <div key={dow}>
@@ -204,9 +201,13 @@ export default async function EventsThisWeekPage({ params }: Props) {
                           className="group flex flex-col sm:flex-row bg-white/[0.03] rounded-lg overflow-hidden border border-white/5 hover:border-champagne/30 transition-all duration-300"
                         >
                           <div className="sm:w-[200px] h-36 sm:h-auto relative shrink-0">
-                            <div
-                              className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                              style={{ backgroundImage: `url(${event.image || venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp'})` }}
+                            <Image
+                              src={event.image || venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp'}
+                              alt={title}
+                              fill
+                              sizes="(max-width: 640px) 100vw, 200px"
+                              quality={85}
+                              className="object-cover transition-transform duration-700 group-hover:scale-105"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-[#131009] via-[#131009]/40 to-transparent" />
                             {event.isSpecial && (

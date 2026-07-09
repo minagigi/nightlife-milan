@@ -1,8 +1,9 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Star, Clock, MapPin, ExternalLink } from 'lucide-react';
-import { mockEvents, mockVenues } from '@/lib/data';
-import { isUpcomingRome } from '@/lib/calendarEvents';
+import { mockVenues } from '@/lib/data';
+import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
 import { weeklyEvents } from '@/lib/eventsConfig';
 
 export const revalidate = 3600;
@@ -110,8 +111,10 @@ export default async function EventsBestPage({ params }: Props) {
   // mai eventi già passati.
   const venueIds = BEST_VENUES.map(v => v.id);
 
-  const upcomingByVenue: Record<string, typeof mockEvents> = {};
-  mockEvents
+  const allItems = await getAllCalendarEvents();
+  const upcomingByVenue: Record<string, typeof allItems[number]['event'][]> = {};
+  allItems
+    .map(({ event }) => event)
     .filter(e => venueIds.includes(e.venueId) && isUpcomingRome(e.dateISO))
     .sort((a, b) => new Date(a.dateISO).getTime() - new Date(b.dateISO).getTime())
     .forEach(e => {
@@ -198,9 +201,13 @@ export default async function EventsBestPage({ params }: Props) {
             <div key={v.id} className="border border-white/8 rounded-xl overflow-hidden">
               {/* Hero image */}
               <div className="relative h-56 sm:h-72">
-                <div
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{ backgroundImage: `url(${v.image})` }}
+                <Image
+                  src={v.image}
+                  alt={v.name[lang]}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 1024px"
+                  quality={85}
+                  className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#131009] via-[#131009]/60 to-transparent" />
 
