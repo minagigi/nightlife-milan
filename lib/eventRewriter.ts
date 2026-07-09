@@ -271,12 +271,16 @@ function assembleGoldDescriptionForLang(
   const t = STATIC_TEXT[lang];
   const marker = `<!-- nlm:src=${ebIdBase}-${lang};slug-en=${slugEn} -->`;
   const siteUrl = lang === 'en' ? `https://nightlifemilan.com/events/${slugEn}` : `https://nightlifemilan.com/it/events/${slugEn}`;
+  // UTM per attribuire in GA4 il traffico Eventbrite→sito per singolo evento.
+  // Solo nell'href (mai nel testo visibile) e costruito qui nel codice, DOPO
+  // sanitize() sull'output AI — le sue regex corromperebbero l'URL (vedi CLAUDE.md).
+  const siteUrlTracked = `${siteUrl}?utm_source=eventbrite&utm_medium=referral&utm_campaign=${slugEn}`;
 
   const links = affiliateUrl
     ? `<p><a href="${affiliateUrl}">${t.buyTickets}</a></p>` +
       `<p><a href="${affiliateUrl}">${t.bookTable}</a></p>` +
-      `<p><a href="${siteUrl}">${t.fullGuide}</a></p>`
-    : `<p><a href="${siteUrl}">${t.fullGuide}: ${siteUrl}</a></p>`;
+      `<p><a href="${siteUrlTracked}">${t.fullGuide}</a></p>`
+    : `<p><a href="${siteUrlTracked}">${t.fullGuide}: ${siteUrl}</a></p>`;
 
   const contacts = `<p>${t.contactsLabel}: {{WHATSAPP}} - ${t.emailLabel}: concierge@nightlifemilan.com</p>${links}`;
   const legal = `<p>${t.legal}</p>`;

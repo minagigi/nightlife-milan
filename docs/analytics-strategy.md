@@ -2,7 +2,7 @@
 
 **Obiettivo**: un quadro unico che risponda a 7 domande di traffico/conversione, dal primo click sul sito fino al biglietto venduto o alla prenotazione via WhatsApp.
 
-**Data**: 2026-07-09
+**Data**: 2026-07-09 · **Stato**: IMPLEMENTATO (vedi §7) — dashboard su `nightlifemilan.com/analytics`
 
 ---
 
@@ -10,13 +10,13 @@
 
 | # | Domanda | Fonte primaria | Come | Stato |
 |---|---------|----------------|------|-------|
-| 1 | Visite al sito | GA4 (`G-89JEXSWX80`) | pageview già attivi | ✅ attivo (con caveat, §3.1) |
-| 2 | Visite agli eventi Eventbrite | Dashboard organizzatore Eventbrite | report "Visualizzazioni pagina" per evento | ✅ disponibile, da consultare |
-| 3 | Registrazioni Eventbrite | API Eventbrite (`/events/{id}/attendees/`) | cron rollup interno (§3.3) | 🔨 da costruire |
-| 4 | Visite pagina Xceed per evento | Dashboard Ambassador Xceed + GA4 | click in uscita `xceed_click` come proxy (§3.4) | 🔨 da costruire |
-| 5 | Acquisti biglietti su Xceed | Dashboard Ambassador Xceed (channel `nightlifemilan-1`) | vendite/commissioni per evento | ✅ disponibile, da consultare |
-| 6 | Click sul tasto WhatsApp | GA4 evento custom `whatsapp_click` | tracking su tutte le CTA (§3.5) | 🔨 da costruire |
-| 7 | Form prenotazione compilato | GA4 evento custom `booking_form_submit` (key event) | tracking nel submit (§3.6) | 🔨 da costruire |
+| 1 | Visite al sito | Tracking first-party + GA4 | pageview doppia scrittura (§7) | ✅ implementato |
+| 2 | Visite agli eventi Eventbrite | Dashboard organizzatore Eventbrite | report "Visualizzazioni pagina" per evento (link in dashboard) | ✅ disponibile, da consultare |
+| 3 | Registrazioni Eventbrite | API Eventbrite (`quantity_sold` per ticket class) | lettura live a ogni apertura dashboard + snapshot cron per la curva | ✅ implementato |
+| 4 | Visite pagina Xceed per evento | pro.xceed.me + click in uscita | `xceed_click` automatico come proxy + inserimento manuale in dashboard | ✅ implementato |
+| 5 | Acquisti biglietti su Xceed | pro.xceed.me (channel `nightlifemilan-1`) | inserimento manuale in dashboard (nessuna API pubblica) | ✅ implementato |
+| 6 | Click sul tasto WhatsApp | Tracking first-party + GA4 `whatsapp_click` | delega click globale su tutte le CTA | ✅ implementato |
+| 7 | Form prenotazione compilato | Tracking first-party + GA4 `booking_form_submit` | tracking nel submit | ✅ implementato |
 
 Principio: **GA4 è l'hub** per tutto ciò che accade sul nostro dominio (1, 4-proxy, 6, 7). **Eventbrite e Xceed restano le fonti di verità** per ciò che accade sui loro domini (2, 3, 5) — non possiamo mettere il nostro tracking lì, ma possiamo estrarre i loro dati (API Eventbrite) o leggerli in dashboard (Xceed).
 
@@ -126,6 +126,34 @@ Nota privacy: **mai** mandare a GA4 nome/email dell'utente — solo venue, event
 | **4 — Routine e reportistica** | Check settimanale: GA4 (funnel key events), dashboard Eventbrite (page view), dashboard Xceed Ambassador (vendite); eventuale pagina interna `/admin/analytics` che unisce snapshot Blob + link alle dashboard | ricorrente; pagina opzionale |
 
 **Il funnel finale leggibile per ogni evento**: pageview pagina evento (GA4) → `xceed_click`/`eventbrite_click` (GA4) → visite pagina esterna (dashboard EB/Xceed) → registrazioni (API EB) / acquisti (dashboard Xceed) → in parallelo `whatsapp_click` + `booking_form_submit` per il canale prenotazione diretta.
+
+---
+
+## 6bis. Stato implementazione (2026-07-09) {#7}
+
+Tutto implementato nello stesso PR di questo documento. Architettura:
+
+**Dashboard** — `nightlifemilan.com/analytics` (il typo `/analitycs` redirige), protetta da **Basic Auth nel middleware**. Mostra: KPI del funnel, visite/click per giorno (grafici 30 gg), curva registrazioni Eventbrite, tabella funnel per evento (visite sito → click out → registrati/capienza → Δ giorno), top pagine, referrer, WhatsApp per sorgente, e la sezione Xceed con inserimento manuale.
+
+| File | Ruolo |
+|------|-------|
+| `lib/analytics.ts` | `trackEvent()` client: doppia scrittura GA4 (coda gtag) + beacon `/api/track` |
+| `components/AnalyticsTracker.tsx` | Nel layout: pageview per navigazione + **delega click globale** sui link `wa.me`/`xceed.me`/`eventbrite` (copre anche i server component; `data-analytics-source` etichetta la CTA) |
+| `app/api/track/route.ts` | Ingest: whitelist nomi evento, filtro bot, mai PII → un blob raw per evento (append-only, niente race sui contatori) |
+| `lib/analyticsStore.ts` | Layer dati: contatori raw/daily su Blob, snapshot Eventbrite, dati manuali Xceed. Giorni in fuso **Europe/Rome** |
+| `app/api/analytics/aggregate/route.ts` | Cron 04:30 UTC: compatta i raw in `analytics/daily/{giorno}.json` |
+| `app/api/analytics/eventbrite/route.ts` | Cron 04:00 UTC: snapshot registrazioni (la sequenza = curva) |
+| `app/[locale]/analytics/page.tsx` + `actions.ts` | Dashboard (force-dynamic, noindex) + server action Xceed (passano dalla Basic Auth perché POSTano sull'URL della pagina) |
+| `components/analytics/Charts.tsx` | Grafici SVG senza librerie (barre + linea, tooltip hover) |
+
+**Setup richiesto (una volta, su Vercel)**:
+1. Env `ANALYTICS_USER` e `ANALYTICS_PASSWORD` → user/password della dashboard (senza, /analytics risponde sempre 401).
+2. Tutto il resto usa env già esistenti: `BLOB_READ_WRITE_TOKEN`, `EVENTBRITE_TOKEN`, `CRON_SECRET`.
+3. Facoltativo: in GA4 marcare `whatsapp_click` e `booking_form_submit` come key event (Admin → Events).
+
+**Trigger manuali** (stessa convenzione delle altre pipeline): `/api/analytics/aggregate?secret=INDEXING_SECRET`, `/api/analytics/eventbrite?secret=INDEXING_SECRET`.
+
+L'UTM sul backlink Eventbrite→sito (§4) è attivo in `assembleGoldDescriptionForLang` per i prossimi eventi pubblicati.
 
 ---
 

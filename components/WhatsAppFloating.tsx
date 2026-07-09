@@ -34,6 +34,7 @@ export default function WhatsAppFloating() {
           href={CONTACT.whatsapp.link}
           target="_blank"
           rel="noopener noreferrer"
+          data-analytics-source="floating"
           className="flex fixed bottom-6 right-6 z-50 items-center justify-center gap-3 px-4 py-3 glass-dark border-champagne/30 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.6),0_0_0_1px_rgba(201,168,106,0.15)] group cursor-pointer active:scale-95 transition-transform"
           aria-label={label}
         >
