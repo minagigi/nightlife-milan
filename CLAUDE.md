@@ -57,7 +57,7 @@
 **Regole scoperte sull'API Eventbrite (valide per ENTRAMBE le pipeline, vedi `.claude/plans/2026-07-07-eventbrite-gold-standard.md` sezione "RISULTATO REALE FASE G0" per il dettaglio):**
 - `description` va scritta annidata in `POST /events/{id}/` (NON l'endpoint dedicato `/description/`, che dà sempre 405).
 - Accetta HTML vero (h2/h3/p/ul/li/a) — MAI `<img>`/`<br/>` **e MAI EMOJI**: un'emoji ovunque nella description fa collassare/troncare tutto il contenuto da quel punto in poi (bug reale scoperto in FASE X4, confermato con bisezione su un evento live). Niente emoji nel campo `description`; il sito/blob non ha questo limite e le usa liberamente.
-- `description` ha un tetto reale di ~1.000-1.300 caratteri utili (limite piattaforma) — il corpo gold-standard completo (sezioni/25 FAQ/programma) vive invece sul **blob** e sulla pagina sito, mai su Eventbrite.
+- Il vincolo reale su `description` NON è la lunghezza (il presunto "tetto ~1.000-1.300 caratteri" di FASE X4 era in realtà causato dalle emoji nei test, mai isolate dalla lunghezza) ma il contenuto vietato sopra (emoji/`<img>`/`<br/>`): una bisezione reale su un evento live (FASE B0) ha mostrato 23.288 caratteri di HTML emoji-free intatti senza troncamento. Il codice usa comunque un budget di sicurezza cautelativo, `DESCRIPTION_SAFE_BUDGET = 16000` caratteri in `lib/eventRewriter.ts` (~70% della soglia misurata) — sotto quel tetto il corpo gold-standard completo (sezioni/25 FAQ/programma) può vivere anche direttamente nella description, oltre che sul **blob** e sulla pagina sito.
 - `music_properties` (età/check-in) va scritto **DOPO** `POST /events/{id}/publish/`, non prima — scriverlo su un evento ancora draft viene azzerato dal publish stesso (bug reale confermato).
 - Le date `XceedEvent.startISO/endISO` sono GIÀ UTC vero — usare `normalizeAlreadyUtc()`, mai `toEventbriteUtc()` (pensata per date wall-clock locali, sottrarrebbe l'offset di Roma una seconda volta).
 - `sanitize()` (telefoni/URL/promoter di terzi → nostri) va applicato SOLO al testo AI-generato (hook) prima di assemblare la description, mai al risultato finale già assemblato: le sue regex corrompono URL/slug/marker costruiti dal codice (falsi positivi su date numeriche nello slug, e l'URL affiliate Xceed veniva rimosso perché non riconosciuto come "nostro"). Usare `resolveWhatsappOnly()` sul risultato finale.
@@ -70,7 +70,7 @@
 | `lib/eventScout.ts` | Discovery pubblica (feed this-week/next-week Eventbrite Milano) + matching + filtro evergreen |
 | `lib/importLedger.ts` | Dedupe: fingerprint venue+data + marker `nlm:src=` (commento HTML) |
 | `lib/venuePricing.ts` | Listini tavoli/ticket + dress code/età/parcheggio per venue (fallback statico, solo dati reali) |
-| `lib/eventRewriter.ts` | `rewriteEvent()`: 2 chiamate Sonnet (corpo + 25 FAQ) → `assembleGoldDescription` (HTML vero senza emoji, budget ~1.000 char, marker canonico) |
+| `lib/eventRewriter.ts` | `rewriteEvent()`: 2 chiamate Sonnet (corpo + 25 FAQ) → `assembleGoldDescription` (HTML vero senza emoji, budget `DESCRIPTION_SAFE_BUDGET` = 16.000 char, marker canonico) |
 | `app/api/events/import/route.ts` | Cron (`?dryRun=1`, `?max=N`, default 3/run) + poll pagina sito + notifica Google Indexing |
 
 ### Sorgente 2 — Xceed affiliate (v4, FASE X, cron 03:00 UTC, i 3 venue Ambassador: Justme/Aria/Pineta)
