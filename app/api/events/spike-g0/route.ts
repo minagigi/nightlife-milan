@@ -165,6 +165,72 @@ export async function GET(request: Request) {
     return NextResponse.json({ results });
   }
 
+  // FASE M0 (piano eventbrite-enrichment, 2026-07-09): la description accetta
+  // <img> con URL Eventbrite pieni di query string? Mai testato con un URL
+  // PULITO self-hosted (nightlifemilan.com, zero query string) — questo spike
+  // isola quella variabile specifica su un draft usa-e-getta, poi elimina.
+  if (searchParams.get('imgClean') === '1') {
+    const jsonHeaders = { Authorization: `Bearer ${token}`, 'content-type': 'application/json' };
+    const results: Record<string, unknown> = {};
+
+    const venuesRes = await fetch(`${EVENTBRITE_API}/organizations/${ORG_ID}/venues/`, { headers });
+    const venuesBody = await venuesRes.json().catch(() => null);
+    const realVenueId: string | undefined = venuesBody?.venues?.[0]?.id;
+
+    const createRes = await fetch(`${EVENTBRITE_API}/organizations/${ORG_ID}/events/`, {
+      method: 'POST', headers: jsonHeaders,
+      body: JSON.stringify({
+        event: {
+          name: { html: 'SPIKE M0 IMG TEST — DELETE ME' },
+          start: { timezone: 'Europe/Rome', utc: '2027-03-01T20:00:00Z' },
+          end: { timezone: 'Europe/Rome', utc: '2027-03-02T02:00:00Z' },
+          currency: 'EUR',
+          online_event: !realVenueId,
+          venue_id: realVenueId,
+          listed: false,
+          shareable: false,
+        },
+      }),
+    });
+    const createBody = await createRes.json().catch(() => null);
+    const testEventId = createRes.ok ? createBody?.id : null;
+    results.createEvent = { status: createRes.status, ok: createRes.ok, testEventId };
+
+    if (testEventId) {
+      const webpUrl = 'https://nightlifemilan.com/images/venues/aria-club-milano/aria-club-milano-interior-01.webp';
+      const jpgUrl = 'https://nightlifemilan.com/images/events/xceed-justme-friday-night.jpg';
+
+      const variants: Record<string, string> = {
+        webpSelfClosing: `<p>Before</p><img src="${webpUrl}" alt="Aria Club Milano interior"/><p>After</p>`,
+        webpOpenTag: `<p>Before</p><img src="${webpUrl}" alt="Aria Club Milano interior"><p>After</p>`,
+        jpgSelfClosing: `<p>Before</p><img src="${jpgUrl}" alt="Just Me Milano Friday night"/><p>After</p>`,
+        webpWithWidth: `<p>Before</p><img src="${webpUrl}" alt="Aria Club Milano interior" width="800"/><p>After</p>`,
+        threeImagesInSequence: `<h2>Inside the venue</h2><img src="${webpUrl}" alt="Aria interior 1"/><p>Caption one.</p><img src="${jpgUrl}" alt="Just Me Friday"/><p>Caption two.</p>`,
+      };
+
+      for (const [name, html] of Object.entries(variants)) {
+        await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, {
+          method: 'POST', headers: jsonHeaders,
+          body: JSON.stringify({ event: { description: { html } } }),
+        });
+        const g = await (await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { headers })).json().catch(() => null);
+        const saved = g?.description?.html || '';
+        results[name] = {
+          sentLength: html.length,
+          savedLength: saved.length,
+          survivedFully: saved.length >= html.length * 0.9,
+          imgTagSurvived: saved.includes('<img'),
+          savedHtml: saved,
+        };
+      }
+
+      await fetch(`${EVENTBRITE_API}/events/${testEventId}/`, { method: 'DELETE', headers });
+      results.cleanedUp = true;
+    }
+
+    return NextResponse.json({ results });
+  }
+
   // Fix generico start/end — usato per correggere un errore di battitura mio
   // (fixTimeAndMusicProps ha date hardcoded per un evento specifico, applicato
   // per sbaglio a un evento diverso). Query: eventId, startUtc, endUtc.
