@@ -201,6 +201,46 @@ async function editWithNanoBanana(
   }
 }
 
+/**
+ * Diagnostica one-off (come le spike route): verifica se GEMINI_API_KEY è
+ * presente e se una chiamata reale a editWithNanoBanana funziona, per capire
+ * perché processPoster stia cadendo su venue-fallback SENZA badge (FASE P2,
+ * 2026-07-09) — se la chiamata Gemini fallisce silenziosamente, rebrand()
+ * ritorna null e rebrandVenueFallback ritorna la foto grezza non brandizzata.
+ */
+export async function debugGeminiEdit(): Promise<Record<string, unknown>> {
+  const hasKey = !!process.env.GEMINI_API_KEY;
+  const badge = await loadBadge();
+  if (!hasKey) return { hasGeminiKey: false, badgeLoaded: !!badge };
+
+  const key = process.env.GEMINI_API_KEY!;
+  // 1x1 red pixel PNG come input minimo di test.
+  const tinyPngBase64 =
+    'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=';
+  try {
+    const res = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/${IMAGE_EDIT_MODEL}:generateContent?key=${key}`,
+      {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: 'Make this red pixel blue instead.' }, { inline_data: { mime_type: 'image/png', data: tinyPngBase64 } }] }],
+        }),
+      }
+    );
+    const text = await res.text();
+    return {
+      hasGeminiKey: true,
+      badgeLoaded: !!badge,
+      geminiStatus: res.status,
+      geminiOk: res.ok,
+      geminiResponsePreview: text.slice(0, 800),
+    };
+  } catch (e) {
+    return { hasGeminiKey: true, badgeLoaded: !!badge, geminiError: (e as Error).message };
+  }
+}
+
 function isClean(inspection: VisionInspection): boolean {
   return !inspection.hasPhoneNumbers && !inspection.hasThirdPartyBranding && !inspection.hasSocialHandles;
 }

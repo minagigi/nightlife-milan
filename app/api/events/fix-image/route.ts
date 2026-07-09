@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { processPoster } from '@/lib/posterPipeline';
+import { processPoster, debugGeminiEdit } from '@/lib/posterPipeline';
 import { replaceEventImage } from '@/lib/eventPublisher';
 import { getEventbriteToken } from '@/lib/eventbriteToken';
 import type { PosterResult, PosterSource } from '@/lib/posterPipeline';
@@ -32,6 +32,11 @@ export async function GET(request: Request) {
   const posterUrl = searchParams.get('posterUrl') || undefined;
   const returnBase64 = searchParams.get('returnBase64') === '1';
   const galleryIndex = Number(searchParams.get('galleryIndex') || '0') || 0;
+  if (searchParams.get('debug') === '1') {
+    const diag = await debugGeminiEdit();
+    return NextResponse.json(diag);
+  }
+
   if (!eventId || !venueId) {
     return NextResponse.json({ error: 'eventId and venueId query params required' }, { status: 400 });
   }
