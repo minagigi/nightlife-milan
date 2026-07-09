@@ -1,14 +1,20 @@
+import { readFile } from 'fs/promises';
+import path from 'path';
 import { CONTACT } from '@/config/contact';
 import { venuesData } from './venuesData';
 
 /**
- * Pipeline locandine — Fase 4B. Per ogni evento scoutato con `posterUrl`:
+ * Pipeline locandine — Fase 4B, aggiornata FASE P1 (2026-07-09, standard
+ * rebrand completo, memoria nightlife-poster-rebrand-standard). Per ogni
+ * evento scoutato con `posterUrl`:
  * 1. Scarica la locandina originale.
  * 2. Claude vision ispeziona: contiene contatti/brand di terzi?
- * 3. Se sporca: editing generativo con Gemini (Nano Banana 2) — SOSTITUISCE
- *    (non solo rimuove) siti/numeri di terzi con i nostri, stesso stile
- *    grafico, poi ri-verifica con vision (max 2 tentativi).
- * 4. Se non ripulibile: fallback alla foto venue nostra.
+ * 3. Editing generativo con Gemini (Nano Banana 2) SEMPRE (non solo se
+ *    "sporca"): badge Milan Nightlife + contatti/sito nostri sostituiscono
+ *    SEMPRE quelli del venue, anche quando non c'era branding di terzi da
+ *    rimuovere — poi ri-verifica con vision (max 2 tentativi).
+ * 4. Se non ripulibile: fallback alla foto venue nostra (badge/contatti
+ *    comunque applicati sopra).
  *
  * Modello Gemini verificato disponibile (2026-07-07): gemini-3.1-flash-image
  * ("Nano Banana 2") — supporta generateContent con input+output immagine.
@@ -112,11 +118,17 @@ Answer ONLY with a JSON object (no markdown, no prose):
   }
 }
 
-const EDIT_PROMPT = `Edit this event poster with minimal changes:
-(1) Replace any website URL with "nightlifemilan.com" in the same font, size, color and position as the original text.
-(2) Replace any phone number with "+39 351 912 7047" preceded by a small WhatsApp icon, matching the original font, size, color and position.
-(3) Remove any third-party promoter logos and social media handles.
-Keep the artwork, layout, composition, colors, venue name, event name, date and every other element pixel-identical. Do not redesign anything.`;
+// Standard rebrand completo (memoria nightlife-poster-rebrand-standard,
+// 2026-07-09) — supera la vecchia regola "solo pulizia terzi": OGNI
+// locandina pubblicata porta il badge e i contatti nostri, anche quando non
+// c'era alcun branding di terzi da rimuovere. Il badge è la seconda
+// immagine passata nella richiesta (vedi editWithNanoBanana).
+const EDIT_PROMPT = `Edit this event poster with these changes:
+(1) Replace any website URL with "nightlifemilan.com" in the same font, size, color and position as the original text (if there's no URL, add "www.nightlifemilan.com" in small text near where contact info appears).
+(2) Replace ANY phone number — including the venue's own official reservation number, not just third-party promoters — with a small WhatsApp icon followed by "+39 351 912 7047" and small UK/Italy flag icons, matching the original font, size, color and position.
+(3) Remove any third-party promoter logos, sponsor/liquor brand logos, and social media handles.
+(4) Composite the second reference image (a circular "Milan Nightlife — Event Service" badge) into the top-left corner of the poster, sized proportionally, without covering existing text or the main subject.
+Keep the artwork, layout, composition, colors, venue's own logo/wordmark, event title, date, lineup and every other element pixel-identical. Do not redesign anything else.`;
 
 /**
  * Prompt di retry mirato — verificato che funzioni meglio del prompt generico
@@ -126,36 +138,57 @@ Keep the artwork, layout, composition, colors, venue name, event name, date and 
  */
 function buildRetryPrompt(residualText: string[]): string {
   const items = residualText.length ? residualText.join(', ') : 'a third-party logo or contact still visible';
-  return `This poster still has third-party branding visible: ${items}. Remove it completely — if it's on a small object (balloon, sign, banner), make that object plain/blank matching similar plain objects already in the scene. Do not change anything else: keep the "nightlifemilan.com" text and WhatsApp number already added exactly as they are, keep all people, lighting, and composition pixel-identical.`;
+  return `This poster still has third-party branding visible: ${items}. Remove it completely — if it's on a small object (balloon, sign, banner), make that object plain/blank matching similar plain objects already in the scene. Do not change anything else: keep the "nightlifemilan.com" text, the WhatsApp number, and the Milan Nightlife badge already added exactly as they are, keep all people, lighting, and composition pixel-identical.`;
 }
 
-async function editWithNanoBanana(imageBase64: string, mediaType: string, retryPrompt?: string): Promise<{ buffer: Buffer; mediaType: string } | null> {
+let cachedBadge: { base64: string; mediaType: string } | null | undefined;
+
+/** Badge "Milan Nightlife — Event Service" (asset reale, mai generato
+ * dall'AI — vedi memoria nightlife-poster-rebrand-standard). Cache
+ * in-memory per la durata della run. */
+async function loadBadge(): Promise<{ base64: string; mediaType: string } | null> {
+  if (cachedBadge !== undefined) return cachedBadge;
+  try {
+    const buf = await readFile(path.join(process.cwd(), 'public/images/brand/milan-nightlife-badge.png'));
+    cachedBadge = { base64: buf.toString('base64'), mediaType: 'image/png' };
+  } catch (e) {
+    console.error(`[posterPipeline] Badge asset not found: ${(e as Error).message}`);
+    cachedBadge = null;
+  }
+  return cachedBadge;
+}
+
+async function editWithNanoBanana(
+  imageBase64: string,
+  mediaType: string,
+  retryPrompt?: string,
+  badge?: { base64: string; mediaType: string }
+): Promise<{ buffer: Buffer; mediaType: string } | null> {
   const key = process.env.GEMINI_API_KEY;
   if (!key) return null;
 
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 30000);
   try {
+    const parts: Array<{ text?: string; inline_data?: { mime_type: string; data: string } }> = [
+      { text: retryPrompt || EDIT_PROMPT },
+      { inline_data: { mime_type: mediaType, data: imageBase64 } },
+    ];
+    if (badge) parts.push({ inline_data: { mime_type: badge.mediaType, data: badge.base64 } });
+
     const res = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/${IMAGE_EDIT_MODEL}:generateContent?key=${key}`,
       {
         method: 'POST',
         signal: controller.signal,
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{
-            parts: [
-              { text: retryPrompt || EDIT_PROMPT },
-              { inline_data: { mime_type: mediaType, data: imageBase64 } },
-            ],
-          }],
-        }),
+        body: JSON.stringify({ contents: [{ parts }] }),
       }
     );
     if (!res.ok) return null;
     const data = await res.json();
-    const parts = data.candidates?.[0]?.content?.parts || [];
-    const imagePart = parts.find((p: { inlineData?: { data?: string; mimeType?: string } }) => p.inlineData?.data);
+    const resultParts = data.candidates?.[0]?.content?.parts || [];
+    const imagePart = resultParts.find((p: { inlineData?: { data?: string; mimeType?: string } }) => p.inlineData?.data);
     if (!imagePart) return null;
     return {
       buffer: Buffer.from(imagePart.inlineData.data, 'base64'),
@@ -188,10 +221,10 @@ async function toJpeg(buffer: Buffer): Promise<Buffer> {
 async function venueFallback(venueId: string, imageSlug: string): Promise<PosterResult | null> {
   const venue = venuesData.find((v) => v.id === venueId);
   if (!venue) return null;
-  const path = venue.gallery?.[0] || venue.image;
-  if (!path) return null;
+  const imgPath = venue.gallery?.[0] || venue.image;
+  if (!imgPath) return null;
 
-  const downloaded = await downloadImage(`https://nightlifemilan.com${path}`);
+  const downloaded = await downloadImage(`https://nightlifemilan.com${imgPath}`);
   if (!downloaded) return null;
 
   const jpegBuffer = await toJpeg(downloaded.buffer);
@@ -204,55 +237,17 @@ async function venueFallback(venueId: string, imageSlug: string): Promise<Poster
   };
 }
 
-/**
- * Processa la locandina di un evento: pulita → usala; sporca → editing con
- * Nano Banana 2 + ri-verifica (max 2 tentativi); irrecuperabile → foto venue.
- */
-export async function processPoster(posterUrl: string | undefined, venueId: string, imageSlug: string): Promise<PosterResult> {
-  if (!posterUrl) {
-    const fallback = await venueFallback(venueId, imageSlug);
-    if (fallback) return fallback;
-    throw new Error(`No poster and no venue fallback image for ${venueId}`);
-  }
-
-  const downloaded = await downloadImage(posterUrl);
-  if (!downloaded) {
-    const fallback = await venueFallback(venueId, imageSlug);
-    if (fallback) return fallback;
-    throw new Error(`Poster download failed and no venue fallback for ${venueId}`);
-  }
-
-  const base64 = downloaded.buffer.toString('base64');
-  const inspection = await inspectWithVision(base64, downloaded.contentType);
-
-  // Vision non disponibile (niente ANTHROPIC_API_KEY o errore) → non possiamo
-  // garantire l'assenza di contatti terzi: fallback prudente, mai rischiare.
-  if (!inspection) {
-    const fallback = await venueFallback(venueId, imageSlug);
-    if (fallback) return fallback;
-    throw new Error(`Vision inspection unavailable and no venue fallback for ${venueId}`);
-  }
-
-  if (isClean(inspection)) {
-    const ext = downloaded.contentType.includes('png') ? 'png' : 'jpg';
-    return {
-      buffer: downloaded.buffer,
-      contentType: downloaded.contentType,
-      filename: `${imageSlug}.${ext}`,
-      source: 'poster-clean',
-    };
-  }
-
-  // Sporca: prova l'editing generativo, max 2 tentativi con ri-verifica.
-  // Il tentativo 2 usa un prompt mirato sui residui trovati dal recheck
-  // precedente (verificato: molto più efficace del prompt generico ripetuto
-  // identico su loghi/testo residuo in aree secondarie dell'immagine).
-  let currentBuffer = downloaded.buffer;
-  let currentMediaType = downloaded.contentType;
+/** Applica SEMPRE il rebrand (badge + contatti/sito nostri), sulla venue
+ * fallback compresa — vedi FASE P1: nessuna immagine pubblicata resta senza
+ * badge, anche quando parte già pulita da branding di terzi. */
+async function rebrand(buffer: Buffer, contentType: string, imageSlug: string): Promise<PosterResult | null> {
+  const badge = await loadBadge();
+  let currentBuffer = buffer;
+  let currentMediaType = contentType;
   let retryPrompt: string | undefined;
 
   for (let attempt = 1; attempt <= MAX_EDIT_ATTEMPTS; attempt++) {
-    const edited = await editWithNanoBanana(currentBuffer.toString('base64'), currentMediaType, retryPrompt);
+    const edited = await editWithNanoBanana(currentBuffer.toString('base64'), currentMediaType, retryPrompt, badge || undefined);
     if (!edited) break;
 
     currentBuffer = edited.buffer;
@@ -270,8 +265,53 @@ export async function processPoster(posterUrl: string | undefined, venueId: stri
     }
     if (recheck) retryPrompt = buildRetryPrompt(recheck.textFound);
   }
+  return null;
+}
 
-  const fallback = await venueFallback(venueId, imageSlug);
+/**
+ * Processa la locandina di un evento — FASE P1: rebrand SEMPRE applicato
+ * (badge + contatti/sito nostri), non solo quando c'è branding di terzi da
+ * rimuovere. Irrecuperabile (es. persone reali con diritti d'immagine, o
+ * editing fallito) → foto venue, con badge/contatti applicati comunque.
+ */
+export async function processPoster(posterUrl: string | undefined, venueId: string, imageSlug: string): Promise<PosterResult> {
+  if (!posterUrl) {
+    const rebranded = await rebrandVenueFallback(venueId, imageSlug);
+    if (rebranded) return rebranded;
+    throw new Error(`No poster and no venue fallback image for ${venueId}`);
+  }
+
+  const downloaded = await downloadImage(posterUrl);
+  if (!downloaded) {
+    const rebranded = await rebrandVenueFallback(venueId, imageSlug);
+    if (rebranded) return rebranded;
+    throw new Error(`Poster download failed and no venue fallback for ${venueId}`);
+  }
+
+  const base64 = downloaded.buffer.toString('base64');
+  const inspection = await inspectWithVision(base64, downloaded.contentType);
+
+  // Vision non disponibile (niente ANTHROPIC_API_KEY o errore) → non possiamo
+  // garantire l'assenza di contatti terzi: fallback prudente, mai rischiare.
+  if (!inspection) {
+    const rebranded = await rebrandVenueFallback(venueId, imageSlug);
+    if (rebranded) return rebranded;
+    throw new Error(`Vision inspection unavailable and no venue fallback for ${venueId}`);
+  }
+
+  const rebranded = await rebrand(downloaded.buffer, downloaded.contentType, imageSlug);
+  if (rebranded) return rebranded;
+
+  const fallback = await rebrandVenueFallback(venueId, imageSlug);
   if (fallback) return fallback;
   throw new Error(`Poster unrecoverable and no venue fallback for ${venueId}`);
 }
+
+/** Foto venue passata comunque per il rebrand (badge + contatti nostri) — mai usata "nuda". */
+async function rebrandVenueFallback(venueId: string, imageSlug: string): Promise<PosterResult | null> {
+  const base = await venueFallback(venueId, imageSlug);
+  if (!base) return null;
+  const rebranded = await rebrand(base.buffer, base.contentType, imageSlug);
+  return rebranded || base;
+}
+
