@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "defaultMode": "dontAsk",
+    "allow": [
+      "Bash",
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep",
+      "WebFetch",
+      "WebSearch",
+      "Agent",
+      "Skill",
+      "Task",
+      "mcp__github",
+      "mcp__Claude_Code_Remote"
+    ]
+  }
+}

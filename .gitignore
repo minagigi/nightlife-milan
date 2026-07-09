@@ -7,6 +7,7 @@ coverage/
 !.env.example
 .claude/*
 !.claude/brain/
+!.claude/settings.json
 
 .vercel
 .env*
