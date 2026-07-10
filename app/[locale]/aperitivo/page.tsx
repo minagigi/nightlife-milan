@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Clock, MapPin, MessageCircle } from 'lucide-react';
 import { CONTACT } from '@/config/contact';
+import { tr } from '@/lib/i18n/t';
 
 export const revalidate = 3600;
 
@@ -13,20 +14,17 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const isIt = locale === 'it';
   const canonical = `${baseUrl}${isIt ? '/it' : ''}/aperitivo`;
 
-  const title = isIt
-    ? 'Migliore Aperitivo Milano 2026 | Bar, Orari e Zone | Nightlife Milan'
-    : 'Best Aperitivo in Milan 2026 | Top Bars & Where to Go | Nightlife Milan';
-  const description = isIt
-    ? 'I migliori locali per l\'aperitivo a Milano: orari, cosa ordinare, dress code e top bar per zona — Navigli, Corso Como, Brera. Guida aggiornata 2026.'
-    : 'Find the best aperitivo spots in Milan. Opening hours, what to order, dress code, and the top bars by zone — Navigli, Corso Como, Brera. Updated 2026.';
+  const title = tr(locale, 'Best Aperitivo in Milan 2026 | Top Bars & Where to Go | Nightlife Milan', 'Migliore Aperitivo Milano 2026 | Bar, Orari e Zone | Nightlife Milan');
+  const description = tr(locale, 'Find the best aperitivo spots in Milan. Opening hours, what to order, dress code, and the top bars by zone — Navigli, Corso Como, Brera. Updated 2026.', 'I migliori locali per l\'aperitivo a Milano: orari, cosa ordinare, dress code e top bar per zona — Navigli, Corso Como, Brera. Guida aggiornata 2026.');
   const ogImage = `${baseUrl}/images/aperitivo-milan-cocktails-bar.webp`;
+
+  const keywordsEn = ['aperitivo milan', 'best aperitivo milan', 'milan aperitivo bars', 'where to do aperitivo milan', 'navigli aperitivo'];
+  const keywordsIt = ['aperitivo milano', 'migliore aperitivo milano', 'bar aperitivo milano', 'dove fare aperitivo milano', 'aperitivo navigli'];
 
   return {
     title,
     description,
-    keywords: isIt
-      ? ['aperitivo milano', 'migliore aperitivo milano', 'bar aperitivo milano', 'dove fare aperitivo milano', 'aperitivo navigli']
-      : ['aperitivo milan', 'best aperitivo milan', 'milan aperitivo bars', 'where to do aperitivo milan', 'navigli aperitivo'],
+    keywords: keywordsEn.map((k, i) => tr(locale, k, keywordsIt[i])),
     robots: { index: true, follow: true },
     alternates: {
       canonical,
@@ -37,13 +35,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       },
     },
     openGraph: {
-      title: isIt ? 'Migliore Aperitivo Milano 2026 — Nightlife Milan' : 'Best Aperitivo in Milan 2026 — Nightlife Milan',
+      title: tr(locale, 'Best Aperitivo in Milan 2026 — Nightlife Milan', 'Migliore Aperitivo Milano 2026 — Nightlife Milan'),
       description,
       type: 'article',
       url: canonical,
       siteName: 'Nightlife Milan',
       locale: isIt ? 'it_IT' : 'en_US',
-      images: [{ url: ogImage, width: 1200, height: 630, alt: isIt ? 'Aperitivo Milano cocktail bar' : 'Milan aperitivo cocktail bar' }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: tr(locale, 'Milan aperitivo cocktail bar', 'Aperitivo Milano cocktail bar') }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -202,25 +200,23 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
 
         <div className="relative max-w-3xl mx-auto">
           <p className="font-sans text-champagne/60 text-[10px] tracking-[0.4em] uppercase mb-6">
-            THE MILANESE RITUAL
+            {tr(locale, 'THE MILANESE RITUAL')}
           </p>
           <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-none mb-6">
-            Aperitivo<br />
-            <span className="text-champagne">in Milan</span>
+            {tr(locale, 'Aperitivo')}<br />
+            <span className="text-champagne">{tr(locale, 'in Milan')}</span>
           </h1>
           <p className="font-sans text-white/50 text-lg leading-relaxed max-w-2xl mx-auto mb-8">
-            The Milanese aperitivo is more than a drink — it&apos;s the start of the evening.
-            From canal-side Navigli to rooftop lounges, here&apos;s where to go and what to expect.
+            {tr(locale, "The Milanese aperitivo is more than a drink — it's the start of the evening. From canal-side Navigli to rooftop lounges, here's where to go and what to expect.")}
           </p>
 
           {/* Quick Answer — for AI search engines (ChatGPT, Perplexity, Claude) */}
           <div className="max-w-2xl mx-auto mb-10 p-5 rounded-xl border border-champagne/20 bg-champagne/[0.04] text-left">
-            <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">Quick Answer</p>
-            <p className="font-sans text-white/70 text-sm leading-relaxed">
-              Aperitivo in Milan runs <strong className="text-white">18:00–21:00</strong>. Arrive by <strong className="text-white">18:30</strong> on weekends to get a table.
-              Top spots: <strong className="text-white">Pineta</strong> (Via Messina 38, from €15), <strong className="text-white">Voya Rooftop</strong> (20th floor, from €20), Navigli canal bars (from €10).
-              Book Friday and Saturday via <strong className="text-white">WhatsApp +39 351 912 7047</strong> — free, reply in 10 min.
-            </p>
+            <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">{tr(locale, 'Quick Answer')}</p>
+            <p
+              className="font-sans text-white/70 text-sm leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: tr(locale, 'Aperitivo in Milan runs <strong class="text-white">18:00–21:00</strong>. Arrive by <strong class="text-white">18:30</strong> on weekends to get a table. Top spots: <strong class="text-white">Pineta</strong> (Via Messina 38, from €15), <strong class="text-white">Voya Rooftop</strong> (20th floor, from €20), Navigli canal bars (from €10). Book Friday and Saturday via <strong class="text-white">WhatsApp +39 351 912 7047</strong> — free, reply in 10 min.') }}
+            />
           </div>
 
           <a
@@ -232,7 +228,7 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
               hover:bg-white transition-colors duration-300"
           >
             <MessageCircle className="w-4 h-4" />
-            Reserve a Table
+            {tr(locale, 'Reserve a Table')}
           </a>
         </div>
       </section>
@@ -241,13 +237,13 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
       <section className="px-6 pb-20 border-t border-white/5 pt-16">
         <div className="max-w-5xl mx-auto">
           <p className="font-sans text-champagne/50 text-[10px] tracking-[0.4em] uppercase mb-12 text-center">
-            WHAT YOU NEED TO KNOW
+            {tr(locale, 'WHAT YOU NEED TO KNOW')}
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {tips.map((tip) => (
               <div key={tip.title} className="p-7 rounded-lg border border-white/8 bg-white/[0.02]">
-                <h3 className="font-serif text-lg text-white mb-3">{tip.title}</h3>
-                <p className="font-sans text-white/50 text-sm leading-relaxed">{tip.body}</p>
+                <h3 className="font-serif text-lg text-white mb-3">{tr(locale, tip.title)}</h3>
+                <p className="font-sans text-white/50 text-sm leading-relaxed">{tr(locale, tip.body)}</p>
               </div>
             ))}
           </div>
@@ -258,10 +254,10 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
       <section className="px-6 pb-24">
         <div className="max-w-6xl mx-auto">
           <p className="font-sans text-champagne/50 text-[10px] tracking-[0.4em] uppercase mb-3">
-            BEST SPOTS
+            {tr(locale, 'BEST SPOTS')}
           </p>
           <h2 className="font-serif text-4xl text-white mb-12">
-            Top Aperitivo Bars
+            {tr(locale, 'Top Aperitivo Bars')}
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -292,7 +288,7 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
                     {bar.isTop && (
                       <div className="absolute top-4 right-4">
                         <span className="font-sans text-[9px] font-bold tracking-[0.2em] uppercase px-2.5 py-1.5 rounded-full bg-champagne text-black">
-                          Top Pick
+                          {tr(locale, 'Top Pick')}
                         </span>
                       </div>
                     )}
@@ -303,7 +299,7 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
                       <div>
                         <h3 className="font-serif text-xl text-white mb-1">{bar.name}</h3>
                         <p className="font-sans text-champagne/60 text-[11px] tracking-[0.2em] uppercase">
-                          {bar.vibe}
+                          {tr(locale, bar.vibe)}
                         </p>
                       </div>
                       <span className="font-sans text-white/60 text-xs mt-1 flex-shrink-0">{bar.price}</span>
@@ -319,7 +315,7 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
                     </div>
 
                     <p className="font-sans text-white/50 text-sm leading-relaxed mb-5 italic">
-                      &ldquo;{bar.highlight}&rdquo;
+                      &ldquo;{tr(locale, bar.highlight)}&rdquo;
                     </p>
 
                     <div className="flex gap-3">
@@ -332,7 +328,7 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
                           hover:bg-white transition-colors duration-300"
                       >
                         <MessageCircle className="w-3 h-3" />
-                        Reserve
+                        {tr(locale, 'Reserve')}
                       </a>
                       <Link
                         href={`${lp}/clubs/${bar.slug}`}
@@ -340,7 +336,7 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
                           font-sans text-xs tracking-[0.12em] uppercase
                           hover:border-champagne/30 hover:text-champagne transition-colors duration-300"
                       >
-                        Details
+                        {tr(locale, 'Details')}
                         <ArrowRight className="w-3 h-3" />
                       </Link>
                     </div>
@@ -356,10 +352,10 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
       <section className="px-6 pb-24 border-t border-white/5 pt-16">
         <div className="max-w-5xl mx-auto">
           <h2 className="font-serif text-4xl text-white mb-4">
-            Aperitivo by Zone: Where to Go in Milan
+            {tr(locale, 'Aperitivo by Zone: Where to Go in Milan')}
           </h2>
           <p className="font-sans text-white/40 text-sm mb-10 max-w-2xl">
-            Different neighborhoods, different aperitivo energy. Here&apos;s how to pick your spot.
+            {tr(locale, "Different neighborhoods, different aperitivo energy. Here's how to pick your spot.")}
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-10">
             {[
@@ -395,10 +391,10 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
               <div key={item.zone} className="p-6 rounded-lg border border-white/8 bg-white/[0.02]">
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="font-serif text-xl text-white">{item.zone}</h3>
-                  <span className="px-2.5 py-1 rounded-full border border-champagne/30 text-champagne text-[10px] font-sans tracking-widest uppercase">{item.tag}</span>
+                  <span className="px-2.5 py-1 rounded-full border border-champagne/30 text-champagne text-[10px] font-sans tracking-widest uppercase">{tr(locale, item.tag)}</span>
                 </div>
-                <p className="font-sans text-champagne/60 text-xs tracking-widest uppercase mb-3">{item.vibe} · {item.price}</p>
-                <p className="font-sans text-white/50 text-sm leading-relaxed">{item.desc}</p>
+                <p className="font-sans text-champagne/60 text-xs tracking-widest uppercase mb-3">{tr(locale, item.vibe)} · {item.price}</p>
+                <p className="font-sans text-white/50 text-sm leading-relaxed">{tr(locale, item.desc)}</p>
               </div>
             ))}
           </div>
@@ -417,14 +413,13 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
       <section className="px-6 pb-24 border-t border-white/5 pt-16">
         <div className="max-w-5xl mx-auto text-center">
           <p className="font-sans text-champagne/50 text-[10px] tracking-[0.4em] uppercase mb-4">
-            AFTER APERITIVO
+            {tr(locale, 'AFTER APERITIVO')}
           </p>
           <h2 className="font-serif text-4xl text-white mb-4">
-            Turn it into a Full Night
+            {tr(locale, 'Turn it into a Full Night')}
           </h2>
           <p className="font-sans text-white/40 text-sm mb-8 max-w-xl mx-auto">
-            The aperitivo is just the beginning. Book a VIP table at the same venue for the club set,
-            or move to a different spot — we can organize it all.
+            {tr(locale, 'The aperitivo is just the beginning. Book a VIP table at the same venue for the club set, or move to a different spot — we can organize it all.')}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
@@ -433,7 +428,7 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
                 font-sans font-semibold text-sm tracking-[0.15em] uppercase
                 hover:bg-white transition-colors duration-300"
             >
-              Book VIP Table
+              {tr(locale, 'Book VIP Table')}
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
@@ -441,7 +436,7 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
               className="inline-flex items-center gap-2 font-sans text-white/40 text-sm tracking-[0.15em] uppercase
                 hover:text-champagne transition-colors duration-300"
             >
-              See Tonight&apos;s Events
+              {tr(locale, "See Tonight's Events")}
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
