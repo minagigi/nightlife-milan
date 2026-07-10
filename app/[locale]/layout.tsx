@@ -9,6 +9,7 @@ import GoogleAnalytics from '@/components/GoogleAnalytics';
 import AnalyticsTracker from '@/components/AnalyticsTracker';
 import IdleMount from '@/components/IdleMount';
 import '@/app/globals.css';
+import 'flag-icons/css/flag-icons.min.css';
 
 const WhatsAppFloating = dynamic(() => import('@/components/WhatsAppFloating'));
 const BackToTop = dynamic(() => import('@/components/BackToTop'));

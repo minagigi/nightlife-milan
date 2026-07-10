@@ -59,18 +59,58 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(url);
     }
     const firstSegment = pathname.split('/')[1];
+    const res = NextResponse.next();
+    // Visitare una pagina con prefisso lingua memorizza la scelta: da qui in poi
+    // il cookie vince sull'auto-rilevamento (il selettore lo setta anche lato client).
+    res.cookies.set('NEXT_LOCALE', firstSegment, { path: '/', maxAge: 31536000, sameSite: 'lax' });
     if (nonIndexedLocales.has(firstSegment)) {
-      const res = NextResponse.next();
       res.headers.set('X-Robots-Tag', 'noindex, follow');
-      return res;
     }
-    return NextResponse.next();
+    return res;
+  }
+
+  // Spazio EN (nessun prefisso): auto-switch alla lingua del browser al primo
+  // accesso; una scelta manuale (cookie NEXT_LOCALE) vince per sempre. I bot
+  // NON vengono mai rediretti (SEO: ogni URL serve sempre lo stesso contenuto).
+  const isBot = /bot|crawl|spider|slurp|bingpreview|yandex|baidu|duckduck/i.test(request.headers.get('user-agent') || '');
+  if (!isBot) {
+    const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value;
+    const target =
+      cookieLocale && locales.includes(cookieLocale)
+        ? cookieLocale
+        : cookieLocale
+          ? null
+          : matchBrowserLocale(request.headers.get('accept-language'));
+    if (target && target !== 'en') {
+      const url = new URL(`/${target}${pathname === '/' ? '' : pathname}`, request.url);
+      url.search = request.nextUrl.search;
+      return NextResponse.redirect(url);
+    }
   }
 
   // Rewrite to /en/pathname if no locale is present (so English is served on root)
   const rewriteUrl = new URL(`/en${pathname}`, request.url);
   rewriteUrl.search = request.nextUrl.search;
   return NextResponse.rewrite(rewriteUrl);
+}
+
+/** Migliore lingua attiva dall'header Accept-Language (q-value desc, subtag primario) */
+function matchBrowserLocale(header: string | null): string | null {
+  if (!header) return null;
+  const prefs = header
+    .split(',')
+    .map((part) => {
+      const [tag, qPart] = part.trim().split(';');
+      const q = qPart?.startsWith('q=') ? parseFloat(qPart.slice(2)) : 1;
+      return { tag: tag.toLowerCase(), q: isNaN(q) ? 0 : q };
+    })
+    .sort((a, b) => b.q - a.q);
+  for (const { tag } of prefs) {
+    let primary = tag.split('-')[0];
+    if (primary === 'nb' || primary === 'nn') primary = 'no';
+    if (locales.includes(primary)) return primary;
+  }
+  return null;
 }
 
 export const config = {
