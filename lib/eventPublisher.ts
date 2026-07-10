@@ -235,7 +235,7 @@ export async function replaceEventImage(eventId: string, poster: PosterResult): 
   return { ok: true };
 }
 
-interface PublishOneLangParams {
+export interface PublishOneLangParams {
   token: string;
   venueEbId: string;
   imageId: string;
@@ -245,14 +245,24 @@ interface PublishOneLangParams {
   summary: string;
   description: string;
   locale: string;
-  lang: Lang;
+  /** Codice lingua del registry — en/it usano i ticket nativi di getTicketText,
+   *  le altre lingue DEVONO passare `ticketText` tradotto (FASE L3). */
+  lang: string;
   ageRestriction?: string;
   doorTimeISO?: string;
-  poster: PosterResult;
+  poster?: PosterResult;
+  /** Override ticket per le lingue oltre en/it (traduzione dal contentTranslator) */
+  ticketText?: { name: string; description: string };
+  /** Copiati dal listing EN sorgente nel worker multilingua (FASE L3) */
+  categoryId?: string;
+  subcategoryId?: string;
+  formatId?: string;
 }
 
-/** Pubblica UN evento Eventbrite in UNA lingua (chiamato due volte, una per EN una per IT). */
-async function publishOneLang(p: PublishOneLangParams): Promise<PublishResult> {
+/** Pubblica UN evento Eventbrite in UNA lingua. Esportata per il worker
+ *  multilingua FASE L3 (app/api/events/publish-locales), che la invoca con
+ *  venue/logo già noti dal listing EN sorgente. */
+export async function publishOneLang(p: PublishOneLangParams): Promise<PublishResult> {
   const { token, venueEbId, imageId, startUtc, endUtc, title, summary, description, locale, lang, ageRestriction, doorTimeISO, poster } = p;
 
   // 1. Crea l'evento (draft) — logo_id già noto, assegnato direttamente in creazione.
@@ -275,6 +285,9 @@ async function publishOneLang(p: PublishOneLangParams): Promise<PublishResult> {
           shareable: true,
           locale,
           logo_id: imageId,
+          ...(p.categoryId && { category_id: p.categoryId }),
+          ...(p.subcategoryId && { subcategory_id: p.subcategoryId }),
+          ...(p.formatId && { format_id: p.formatId }),
         },
       }),
     });
@@ -320,29 +333,34 @@ async function publishOneLang(p: PublishOneLangParams): Promise<PublishResult> {
   }
 
   // 3. Ticket — formato ESATTO del gold standard per lingua (mai varianti inventate).
+  // en/it: testi nativi da getTicketText; altre lingue: testo tradotto passato dal worker.
   try {
-    const ticketText = getTicketText(lang);
+    let ticket = p.ticketText;
+    if (!ticket) {
+      const t = getTicketText(lang as Lang);
+      ticket = { name: t.name, description: t.description(`☎️ ${CONTACT.whatsapp.number}`) };
+    }
     const ticketRes = await fetch(`${EVENTBRITE_API}/events/${eventId}/ticket_classes/`, {
       method: 'POST',
       headers: authHeaders(token),
       body: JSON.stringify({
         ticket_class: {
-          name: ticketText.name,
+          name: ticket.name,
           free: true,
           quantity_total: 500,
           minimum_quantity: 1,
           maximum_quantity: 10,
           hide_sale_dates: false,
           sales_end: endUtc,
-          description: ticketText.description(`☎️ ${CONTACT.whatsapp.number}`),
+          description: ticket.description,
         },
       }),
     });
     if (!ticketRes.ok) {
-      return { ok: false, reason: 'Ticket creation failed — not publishing without a ticket', ebEventId: eventId, imageSource: poster.source };
+      return { ok: false, reason: 'Ticket creation failed — not publishing without a ticket', ebEventId: eventId, imageSource: poster?.source };
     }
   } catch (e) {
-    return { ok: false, reason: `Ticket creation threw: ${(e as Error).message}`, ebEventId: eventId, imageSource: poster.source };
+    return { ok: false, reason: `Ticket creation threw: ${(e as Error).message}`, ebEventId: eventId, imageSource: poster?.source };
   }
 
   // 4. Publish
@@ -353,10 +371,10 @@ async function publishOneLang(p: PublishOneLangParams): Promise<PublishResult> {
     });
     if (!publishRes.ok) {
       const errBody = await publishRes.text();
-      return { ok: false, reason: `Publish failed: ${publishRes.status} ${errBody.slice(0, 200)}`, ebEventId: eventId, imageSource: poster.source };
+      return { ok: false, reason: `Publish failed: ${publishRes.status} ${errBody.slice(0, 200)}`, ebEventId: eventId, imageSource: poster?.source };
     }
   } catch (e) {
-    return { ok: false, reason: `Publish threw: ${(e as Error).message}`, ebEventId: eventId, imageSource: poster.source };
+    return { ok: false, reason: `Publish threw: ${(e as Error).message}`, ebEventId: eventId, imageSource: poster?.source };
   }
 
   // 5. music_properties DOPO il publish — scriverlo prima (draft) viene azzerato
@@ -376,7 +394,7 @@ async function publishOneLang(p: PublishOneLangParams): Promise<PublishResult> {
     console.error(`[eventPublisher] music_properties write threw (${lang}): ${(e as Error).message}`);
   }
 
-  return { ok: true, ebEventId: eventId, url: eventUrl, imageSource: poster.source };
+  return { ok: true, ebEventId: eventId, url: eventUrl, imageSource: poster?.source };
 }
 
 interface PublishBothLangsParams {

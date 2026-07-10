@@ -11,7 +11,9 @@ import type { Lang } from './eventRewriter';
  * la lingua mancante al giro successivo, non l'intera serata.
  */
 
-export const SRC_MARKER_RE = /nlm:src=xc-(\d+)-(en|it);slug-en=/;
+// Lang esteso a qualsiasi codice a 2 lettere (FASE L3 multilingua) — il dedupe
+// en/it della pipeline v4 resta invariato (interroga solo xceedId:en/it).
+export const SRC_MARKER_RE = /nlm:src=xc-(\d+)-([a-z]{2});slug-en=/;
 
 export interface XceedLedger {
   /** Set di "xceedId:lang" già pubblicati, es. "220757:en" */
