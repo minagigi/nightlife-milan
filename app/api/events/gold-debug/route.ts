@@ -40,6 +40,21 @@ export async function GET(request: Request) {
     });
   }
 
+  if (searchParams.get('events') === '1') {
+    const { fetchEventbriteEvents } = await import('@/lib/eventbriteSync');
+    let evs: { localizedContent: { slug: { en: string } } }[] = [];
+    let err: string | undefined;
+    try { evs = await fetchEventbriteEvents(); } catch (e) { err = (e as Error).message; }
+    const found = evs.find((e) => e.localizedContent.slug.en === slug);
+    return NextResponse.json({
+      ok: !err, err,
+      totalGrouped: evs.length,
+      slugSearched: slug,
+      found: !!found,
+      sampleSlugs: evs.slice(0, 40).map((e) => e.localizedContent.slug.en),
+    });
+  }
+
   const path = `events/${slug}.json`;
   try {
     const result = await get(path, { access: 'private', token });
