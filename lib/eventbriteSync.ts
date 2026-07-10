@@ -1,4 +1,4 @@
-import { Event, MusicGenre } from './types';
+import { Event, MusicGenre, LocalizedString } from './types';
 import { rewriteEventSEO } from './seoRewrite';
 import { matchVenueId } from './venueMatching';
 import { getEventbriteToken } from './eventbriteToken';
@@ -55,19 +55,24 @@ function detectGenre(text: string): MusicGenre[] {
 // produceva DUE card identiche su "Upcoming This Week" (una per listing) —
 // la card IT mostrava comunque il titolo italiano ma affiancata alla EN,
 // invece di essercene una sola che cambia lingua col sito.
-export const NEW_MARKER_RE = /nlm:src=(.+?)-(en|it);slug-en=([a-z0-9-]+)/;
+// FASE L3 multilingua: il marker per-lingua ora usa QUALSIASI codice a 2 lettere
+// (`nlm:src={baseId}-{lang};slug-en=...`), non più solo en|it — ogni serata ha
+// fino a 35 listing Eventbrite tradotti. Tutti condividono lo stesso baseId e
+// slug-en, così il sito li raggruppa in UNA sola card che mostra la lingua
+// selezionata (vedi fetchEventbriteEvents).
+export const NEW_MARKER_RE = /nlm:src=(.+?)-([a-z]{2});slug-en=([a-z0-9-]+)/;
 export const LEGACY_MARKER_RE = /nlm:src=([^;]+);slug-en=([a-z0-9-]+)/;
 
 export interface ParsedMarker {
   baseId: string;
-  lang?: 'en' | 'it';
+  lang?: string;
   slug: string;
 }
 
 export function parseMarker(text: string | undefined): ParsedMarker | undefined {
   if (!text) return undefined;
   const fresh = text.match(NEW_MARKER_RE);
-  if (fresh) return { baseId: fresh[1], lang: fresh[2] as 'en' | 'it', slug: fresh[3] };
+  if (fresh) return { baseId: fresh[1], lang: fresh[2], slug: fresh[3] };
   const legacy = text.match(LEGACY_MARKER_RE);
   if (legacy) return { baseId: legacy[1], slug: legacy[2] };
   return undefined;
@@ -231,19 +236,19 @@ export async function fetchEventbriteEvents(): Promise<Event[]> {
   try {
     const raw = (data.events || []) as RawEbEvent[];
 
-    // FASE F1 (2026-07-08): raggruppare per baseId del marker — l'architettura
-    // "eventi separati" pubblica DUE listing (EN+IT) per ogni serata reale; senza
-    // raggruppare, ognuno diventava una Event a sé, mostrando due card duplicate
-    // (una per lingua) sullo stesso carosello invece di una sola card bilingue.
-    interface Group { baseId: string; en?: RawEbEvent; it?: RawEbEvent; singles: RawEbEvent[] }
+    // FASE F1 (2026-07-08) + L3 multilingua (2026-07-10): raggruppare per baseId
+    // del marker. Ogni serata reale pubblica FINO A 35 listing Eventbrite (uno per
+    // lingua); senza raggruppare, ognuno diventava una Event a sé → 35 card
+    // duplicate sullo stesso carosello. Qui diventano UNA sola card che mostra il
+    // titolo/descrizione nella lingua selezionata dal sito (fallback EN).
+    interface Group { baseId: string; byLang: Map<string, RawEbEvent>; singles: RawEbEvent[] }
     const groups = new Map<string, Group>();
 
     for (const ev of raw) {
       const marker = parseMarker(ev.description?.text) || parseMarker(ev.description?.html);
       const baseId = marker?.baseId || ev.id;
-      const group = groups.get(baseId) || { baseId, singles: [] };
-      if (marker?.lang === 'en') group.en = ev;
-      else if (marker?.lang === 'it') group.it = ev;
+      const group: Group = groups.get(baseId) || { baseId, byLang: new Map<string, RawEbEvent>(), singles: [] };
+      if (marker?.lang) group.byLang.set(marker.lang, ev);
       else group.singles.push(ev);
       groups.set(baseId, group);
     }
@@ -251,39 +256,51 @@ export async function fetchEventbriteEvents(): Promise<Event[]> {
     const events: Event[] = [];
 
     for (const group of groups.values()) {
-      if (group.en && group.it) {
-        // Coppia EN+IT completa — UNA sola card bilingue, niente riscrittura AI:
-        // il contenuto è già il nostro gold-standard in entrambe le lingue.
-        const marker = parseMarker(group.en.description?.text) || parseMarker(group.en.description?.html);
-        const titleEn = cleanTitle(group.en.name.text);
-        const titleIt = cleanTitle(group.it.name.text);
+      if (group.byLang.size > 0) {
+        // Serata gold multilingua — UNA sola card, titolo/descrizione per lingua,
+        // niente riscrittura AI (il contenuto è già il nostro gold-standard).
+        const primary = group.byLang.get('en') || group.byLang.get('it') || [...group.byLang.values()][0];
+        const marker = parseMarker(primary.description?.text) || parseMarker(primary.description?.html);
         const slug = marker?.slug || '';
-        const shared = buildSharedFields(group.en, titleEn, group.en.description?.text || '');
-        // Bug reale: l'immagine veniva presa SOLO dal listing EN — se il logo
-        // non era stato caricato su quel listing (upload fallito/parziale) ma
-        // era presente su quello IT, la card mostrava il fallback venue invece
-        // della locandina reale già disponibile sull'altro listing.
-        shared.image = shared.image || group.it.logo?.url || group.it.logo?.original?.url;
+        const primaryTitle = cleanTitle(primary.name.text);
+        const shared = buildSharedFields(primary, primaryTitle, primary.description?.text || '');
+        // Immagine: primo listing del gruppo che ha una locandina caricata
+        // (upload logo può essere fallito/parziale su singoli listing).
+        if (!shared.image) {
+          for (const ev of group.byLang.values()) {
+            const img = ev.logo?.url || ev.logo?.original?.url;
+            if (img) { shared.image = img; break; }
+          }
+        }
+
+        // Titolo/descrizione per OGNI lingua pubblicata → la card mostra quella
+        // selezionata dal sito, con fallback automatico a EN (getLocalizedText).
+        const title: Record<string, string> = {};
+        const shortDescription: Record<string, string> = {};
+        for (const [lang, ev] of group.byLang) {
+          const t = cleanTitle(ev.name.text);
+          title[lang] = t;
+          shortDescription[lang] = shortDescFromText(ev.description?.text, t);
+        }
+        if (!title.en) title.en = primaryTitle;
+        if (!shortDescription.en) shortDescription.en = shortDescFromText(primary.description?.text, primaryTitle);
 
         events.push({
           id: `eb-${group.baseId}`,
           ...shared,
           localizedContent: {
-            title: { en: titleEn, it: titleIt },
-            shortDescription: {
-              en: shortDescFromText(group.en.description?.text, titleEn),
-              it: shortDescFromText(group.it.description?.text, titleIt),
-            },
-            slug: { en: slug, it: slug },
+            title: title as LocalizedString,
+            shortDescription: shortDescription as LocalizedString,
+            // stesso slug-en per tutte le lingue: l'URL è /{locale}/events/{slugEn}
+            slug: { en: slug } as LocalizedString,
           },
         });
         continue;
       }
 
-      // Gruppo parziale (solo una lingua pubblicata finora) o singolo listing
-      // legacy/scout (marker senza lingua, o nessun marker) — comportamento
-      // invariato: riscrittura AI generica, fail-safe a rule-based.
-      for (const ev of [group.en, group.it, ...group.singles].filter((e): e is RawEbEvent => !!e)) {
+      // Singoli listing legacy/scout (marker senza lingua, o nessun marker) —
+      // comportamento invariato: riscrittura AI generica, fail-safe a rule-based.
+      for (const ev of group.singles) {
         const title = cleanTitle(ev.name.text);
         const desc = (ev.description?.text || title).slice(0, 600);
         const shared = buildSharedFields(ev, title, desc);
