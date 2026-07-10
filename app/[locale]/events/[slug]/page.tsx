@@ -673,7 +673,6 @@ export default async function EventPage({ params }: Props) {
               </div>
             </div>
 
-            <div data-golddebug={JSON.stringify({ slug, locale, richNull: !richContent, goldLen: goldHtml ? goldHtml.length : 0 })} style={{ display: 'none' }} />
             {richContent && <GoldEventContent data={richContent} locale={locale} />}
             {!richContent && goldHtml && <GoldEventHtml html={goldHtml} />}
 
