@@ -14,3 +14,7 @@ coverage/
 
 .vercel
 .env*
+
+# Profilo browser Flow (contiene cookie di sessione Google - MAI committare)
+.flow-profile/
+google-cookies*.json

@@ -1,0 +1,1598 @@
+{
+  "title": "AiraBreeze Landing Page (clone getairabreeze.com)",
+  "type": "page",
+  "version": "0.4",
+  "page_settings": {
+    "hide_title": "yes"
+  },
+  "content": [
+    {
+      "id": "sbar001",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#E53935",
+        "padding": {"unit": "px", "top": "10", "right": "20", "bottom": "10", "left": "20", "isLinked": false}
+      },
+      "elements": [
+        {
+          "id": "cbar001",
+          "elType": "column",
+          "isInner": false,
+          "settings": {"_column_size": 100, "_inline_size": null},
+          "elements": [
+            {
+              "id": "wbar001",
+              "elType": "widget",
+              "widgetType": "heading",
+              "elements": [],
+              "settings": {
+                "title": "🔥 SALDI ESTIVI: 50% DI SCONTO + SPEDIZIONE GRATUITA — Solo per oggi!",
+                "header_size": "div",
+                "align": "center",
+                "title_color": "#FFFFFF",
+                "typography_typography": "custom",
+                "typography_font_size": {"unit": "px", "size": 15, "sizes": []},
+                "typography_font_weight": "700",
+                "typography_letter_spacing": {"unit": "px", "size": 0.5, "sizes": []}
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shero01",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "structure": "20",
+        "background_background": "classic",
+        "background_color": "#EAF6FF",
+        "padding": {"unit": "px", "top": "80", "right": "20", "bottom": "80", "left": "20", "isLinked": false}
+      },
+      "elements": [
+        {
+          "id": "chero01",
+          "elType": "column",
+          "isInner": false,
+          "settings": {"_column_size": 50, "_inline_size": null},
+          "elements": [
+            {
+              "id": "whero01",
+              "elType": "widget",
+              "widgetType": "star-rating",
+              "elements": [],
+              "settings": {
+                "rating_scale": "5",
+                "rating": 5,
+                "star_style": "star_fontawesome",
+                "unmarked_star_style": "solid",
+                "title": "4,8/5 — Scelto da oltre 12.000 clienti",
+                "stars_color": "#FFC107",
+                "title_color": "#0B2239",
+                "align": "left"
+              }
+            },
+            {
+              "id": "whero02",
+              "elType": "widget",
+              "widgetType": "heading",
+              "elements": [],
+              "settings": {
+                "title": "Raffresca Qualsiasi Stanza in 90 Secondi — Senza Installazione",
+                "header_size": "h1",
+                "align": "left",
+                "title_color": "#0B2239",
+                "typography_typography": "custom",
+                "typography_font_size": {"unit": "px", "size": 44, "sizes": []},
+                "typography_font_size_mobile": {"unit": "px", "size": 30, "sizes": []},
+                "typography_font_weight": "800",
+                "typography_line_height": {"unit": "em", "size": 1.15, "sizes": []}
+              }
+            },
+            {
+              "id": "whero03",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "elements": [],
+              "settings": {
+                "editor": "<p>AiraBreeze è il raffrescatore portatile 3-in-1 che <strong>raffredda, umidifica e purifica</strong> l'aria. Niente tubi, niente montaggio, niente bollette da capogiro.</p>",
+                "text_color": "#3D5266",
+                "typography_typography": "custom",
+                "typography_font_size": {"unit": "px", "size": 18, "sizes": []},
+                "typography_line_height": {"unit": "em", "size": 1.6, "sizes": []}
+              }
+            },
+            {
+              "id": "whero04",
+              "elType": "widget",
+              "widgetType": "icon-list",
+              "elements": [],
+              "settings": {
+                "icon_list": [
+                  {"_id": "hl001", "text": "Aria fresca in soli 90 secondi", "selected_icon": {"value": "fas fa-check-circle", "library": "fa-solid"}},
+                  {"_id": "hl002", "text": "Fino a 8 ore con un solo serbatoio d'acqua", "selected_icon": {"value": "fas fa-check-circle", "library": "fa-solid"}},
+                  {"_id": "hl003", "text": "Ultra silenzioso: perfetto anche per dormire", "selected_icon": {"value": "fas fa-check-circle", "library": "fa-solid"}},
+                  {"_id": "hl004", "text": "Consuma fino al 90% in meno di un climatizzatore", "selected_icon": {"value": "fas fa-check-circle", "library": "fa-solid"}}
+                ],
+                "icon_color": "#2ECC71",
+                "text_color": "#0B2239",
+                "space_between": {"unit": "px", "size": 12, "sizes": []},
+                "typography_typography": "custom",
+                "typography_font_size": {"unit": "px", "size": 16, "sizes": []},
+                "typography_font_weight": "600"
+              }
+            },
+            {
+              "id": "whero05",
+              "elType": "widget",
+              "widgetType": "button",
+              "elements": [],
+              "settings": {
+                "text": "SÌ! VOGLIO IL 50% DI SCONTO →",
+                "align": "left",
+                "link": {"url": "#offerta", "is_external": false, "nofollow": false},
+                "background_color": "#FF5A1F",
+                "button_text_color": "#FFFFFF",
+                "hover_color": "#FFFFFF",
+                "button_background_hover_color": "#E64A19",
+                "border_radius": {"unit": "px", "top": "50", "right": "50", "bottom": "50", "left": "50", "isLinked": true},
+                "text_padding": {"unit": "px", "top": "18", "right": "44", "bottom": "18", "left": "44", "isLinked": false},
+                "typography_typography": "custom",
+                "typography_font_size": {"unit": "px", "size": 18, "sizes": []},
+                "typography_font_weight": "800",
+                "button_box_shadow_box_shadow_type": "yes",
+                "button_box_shadow_box_shadow": {"horizontal": 0, "vertical": 8, "blur": 24, "spread": 0, "color": "rgba(255,90,31,0.4)"}
+              }
+            },
+            {
+              "id": "whero06",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "elements": [],
+              "settings": {
+                "editor": "<p>✓ Spedizione gratuita&nbsp;&nbsp;&nbsp;✓ Garanzia soddisfatti o rimborsati 30 giorni</p>",
+                "text_color": "#3D5266",
+                "typography_typography": "custom",
+                "typography_font_size": {"unit": "px", "size": 14, "sizes": []}
+              }
+            }
+          ]
+        },
+        {
+          "id": "chero02",
+          "elType": "column",
+          "isInner": false,
+          "settings": {"_column_size": 50, "_inline_size": null},
+          "elements": [
+            {
+              "id": "whero07",
+              "elType": "widget",
+              "widgetType": "image",
+              "elements": [],
+              "settings": {
+                "image": {"url": "https://placehold.co/560x560/ffffff/0ea5e9.png?text=AiraBreeze", "id": ""},
+                "align": "center",
+                "image_border_radius": {"unit": "px", "top": "24", "right": "24", "bottom": "24", "left": "24", "isLinked": true}
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "strst01",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "structure": "40",
+        "background_background": "classic",
+        "background_color": "#FFFFFF",
+        "padding": {"unit": "px", "top": "40", "right": "20", "bottom": "40", "left": "20", "isLinked": false},
+        "border_border": "solid",
+        "border_width": {"unit": "px", "top": "0", "right": "0", "bottom": "1", "left": "0", "isLinked": false},
+        "border_color": "#E2EEF7"
+      },
+      "elements": [
+        {
+          "id": "ctrst01",
+          "elType": "column",
+          "isInner": false,
+          "settings": {"_column_size": 25, "_inline_size": null},
+          "elements": [
+            {
+              "id": "wtrst01",
+              "elType": "widget",
+              "widgetType": "icon-box",
+              "elements": [],
+              "settings": {
+                "selected_icon": {"value": "fas fa-shipping-fast", "library": "fa-solid"},
+                "title_text": "Spedizione Gratuita",
+                "description_text": "Consegna in tutta Italia in 3-5 giorni lavorativi",
+                "primary_color": "#0EA5E9",
+                "title_color": "#0B2239",
+                "description_color": "#5B7186",
+                "icon_size": {"unit": "px", "size": 34, "sizes": []},
+                "title_size": "h4"
+              }
+            }
+          ]
+        },
+        {
+          "id": "ctrst02",
+          "elType": "column",
+          "isInner": false,
+          "settings": {"_column_size": 25, "_inline_size": null},
+          "elements": [
+            {
+              "id": "wtrst02",
+              "elType": "widget",
+              "widgetType": "icon-box",
+              "elements": [],
+              "settings": {
+                "selected_icon": {"value": "fas fa-shield-alt", "library": "fa-solid"},
+                "title_text": "Garanzia 30 Giorni",
+                "description_text": "Soddisfatti o rimborsati al 100%",
+                "primary_color": "#0EA5E9",
+                "title_color": "#0B2239",
+                "description_color": "#5B7186",
+                "icon_size": {"unit": "px", "size": 34, "sizes": []},
+                "title_size": "h4"
+              }
+            }
+          ]
+        },
+        {
+          "id": "ctrst03",
+          "elType": "column",
+          "isInner": false,
+          "settings": {"_column_size": 25, "_inline_size": null},
+          "elements": [
+            {
+              "id": "wtrst03",
+              "elType": "widget",
+              "widgetType": "icon-box",
+              "elements": [],
+              "settings": {
+                "selected_icon": {"value": "fas fa-lock", "library": "fa-solid"},
+                "title_text": "Pagamenti Sicuri",
+                "description_text": "Checkout protetto con crittografia SSL",
+                "primary_color": "#0EA5E9",
+                "title_color": "#0B2239",
+                "description_color": "#5B7186",
+                "icon_size": {"unit": "px", "size": 34, "sizes": []},
+                "title_size": "h4"
+              }
+            }
+          ]
+        },
+        {
+          "id": "ctrst04",
+          "elType": "column",
+          "isInner": false,
+          "settings": {"_column_size": 25, "_inline_size": null},
+          "elements": [
+            {
+              "id": "wtrst04",
+              "elType": "widget",
+              "widgetType": "icon-box",
+              "elements": [],
+              "settings": {
+                "selected_icon": {"value": "fas fa-users", "library": "fa-solid"},
+                "title_text": "12.000+ Clienti",
+                "description_text": "Valutazione media di 4,8 su 5 stelle",
+                "primary_color": "#0EA5E9",
+                "title_color": "#0B2239",
+                "description_color": "#5B7186",
+                "icon_size": {"unit": "px", "size": 34, "sizes": []},
+                "title_size": "h4"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sfeat01",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#FFFFFF",
+        "padding": {"unit": "px", "top": "90", "right": "20", "bottom": "90", "left": "20", "isLinked": false}
+      },
+      "elements": [
+        {
+          "id": "cfeat00",
+          "elType": "column",
+          "isInner": false,
+          "settings": {"_column_size": 100, "_inline_size": null},
+          "elements": [
+            {
+              "id": "wfeat00",
+              "elType": "widget",
+              "widgetType": "heading",
+              "elements": [],
+              "settings": {
+                "title": "Perché Tutti Stanno Scegliendo AiraBreeze",
+                "header_size": "h2",
+                "align": "center",
+                "title_color": "#0B2239",
+                "typography_typography": "custom",
+                "typography_font_size": {"unit": "px", "size": 36, "sizes": []},
+                "typography_font_weight": "800"
+              }
+            },
+            {
+              "id": "wfeat0b",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "elements": [],
+              "settings": {
+                "editor": "<p style=\"text-align:center;\">Tutta la potenza di un climatizzatore, senza i suoi costi e le sue complicazioni.</p>",
+                "text_color": "#5B7186",
+                "typography_typography": "custom",
+                "typography_font_size": {"unit": "px", "size": 17, "sizes": []}
+              }
+            },
+            {
+              "id": "wfeat0s",
+              "elType": "widget",
+              "widgetType": "spacer",
+              "elements": [],
+              "settings": {"space": {"unit": "px", "size": 30, "sizes": []}}
+            },
+            {
+              "id": "ifeat01",
+              "elType": "section",
+              "isInner": true,
+              "settings": {"structure": "30"},
+              "elements": [
+                {
+                  "id": "cfeat01",
+                  "elType": "column",
+                  "isInner": true,
+                  "settings": {"_column_size": 33, "_inline_size": null},
+                  "elements": [
+                    {
+                      "id": "wfeat01",
+                      "elType": "widget",
+                      "widgetType": "icon-box",
+                      "elements": [],
+                      "settings": {
+                        "selected_icon": {"value": "fas fa-bolt", "library": "fa-solid"},
+                        "title_text": "Raffrescamento in 90 Secondi",
+                        "description_text": "La tecnologia evaporativa abbassa la temperatura percepita in meno di due minuti dall'accensione.",
+                        "primary_color": "#0EA5E9",
+                        "title_color": "#0B2239",
+                        "description_color": "#5B7186",
+                        "icon_size": {"unit": "px", "size": 40, "sizes": []},
+                        "title_size": "h4"
+                      }
+                    },
+                    {
+                      "id": "wfeat02",
+                      "elType": "widget",
+                      "widgetType": "icon-box",
+                      "elements": [],
+                      "settings": {
+                        "selected_icon": {"value": "fas fa-leaf", "library": "fa-solid"},
+                        "title_text": "Risparmio Energetico",
+                        "description_text": "Consuma una frazione dell'energia di un condizionatore tradizionale: circa €0,01 all'ora.",
+                        "primary_color": "#0EA5E9",
+                        "title_color": "#0B2239",
+                        "description_color": "#5B7186",
+                        "icon_size": {"unit": "px", "size": 40, "sizes": []},
+                        "title_size": "h4"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "cfeat02",
+                  "elType": "column",
+                  "isInner": true,
+                  "settings": {"_column_size": 33, "_inline_size": null},
+                  "elements": [
+                    {
+                      "id": "wfeat03",
+                      "elType": "widget",
+                      "widgetType": "icon-box",
+                      "elements": [],
+                      "settings": {
+                        "selected_icon": {"value": "fas fa-tint", "library": "fa-solid"},
+                        "title_text": "Serbatoio da 300 ml",
+                        "description_text": "Fino a 8 ore di aria fresca e umidificata con un solo riempimento del serbatoio.",
+                        "primary_color": "#0EA5E9",
+                        "title_color": "#0B2239",
+                        "description_color": "#5B7186",
+                        "icon_size": {"unit": "px", "size": 40, "sizes": []},
+                        "title_size": "h4"
+                      }
+                    },
+                    {
+                      "id": "wfeat05",
+                      "elType": "widget",
+                      "widgetType": "icon-box",
+                      "elements": [],
+                      "settings": {
+                        "selected_icon": {"value": "fas fa-lightbulb", "library": "fa-solid"},
+                        "title_text": "Luce LED Notturna",
+                        "description_text": "Luce soffusa integrata per un'atmosfera rilassante mentre dormi.",
+                        "primary_color": "#0EA5E9",
+                        "title_color": "#0B2239",
+                        "description_color": "#5B7186",
+                        "icon_size": {"unit": "px", "size": 40, "sizes": []},
+                        "title_size": "h4"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "cfeat03",
+                  "elType": "column",
+                  "isInner": true,
+                  "settings": {"_column_size": 33, "_inline_size": null},
+                  "elements": [
+                    {
+                      "id": "wfeat06",
+                      "elType": "widget",
+                      "widgetType": "icon-box",
+                      "elements": [],
+                      "settings": {
+                        "selected_icon": {"value": "fas fa-volume-off", "library": "fa-solid"},
+                        "title_text": "Silenziosissimo",
+                        "description_text": "Motore ultra silenzioso: lavora, studia e dormi senza ronzii fastidiosi.",
+                        "primary_color": "#0EA5E9",
+                        "title_color": "#0B2239",
+                        "description_color": "#5B7186",
+                        "icon_size": {"unit": "px", "size": 40, "sizes": []},
+                        "title_size": "h4"
+                      }
+                    },
+                    {
+                      "id": "wfeat07",
+                      "elType": "widget",
+                      "widgetType": "icon-box",
+                      "elements": [],
+                      "settings": {
+                        "selected_icon": {"value": "fas fa-suitcase-rolling", "library": "fa-solid"},
+                        "title_text": "Portatile Ovunque",
+                        "description_text": "Compatto e leggero: perfetto per camera, ufficio, camper e campeggio.",
+                        "primary_color": "#0EA5E9",
+                        "title_color": "#0B2239",
+                        "description_color": "#5B7186",
+                        "icon_size": {"unit": "px", "size": 40, "sizes": []},
+                        "title_size": "h4"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "show001",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#EAF6FF",
+        "padding": {"unit": "px", "top": "90", "right": "20", "bottom": "90", "left": "20", "isLinked": false}
+      },
+      "elements": [
+        {
+          "id": "chow000",
+          "elType": "column",
+          "isInner": false,
+          "settings": {"_column_size": 100, "_inline_size": null},
+          "elements": [
+            {
+              "id": "whow000",
+              "elType": "widget",
+              "widgetType": "heading",
+              "elements": [],
+              "settings": {
+                "title": "Come Funziona — 3 Semplici Passi",
+                "header_size": "h2",
+                "align": "center",
+                "title_color": "#0B2239",
+                "typography_typography": "custom",
+                "typography_font_size": {"unit": "px", "size": 36, "sizes": []},
+                "typography_font_weight": "800"
+              }
+            },
+            {
+              "id": "whow00s",
+              "elType": "widget",
+              "widgetType": "spacer",
+              "elements": [],
+              "settings": {"space": {"unit": "px", "size": 30, "sizes": []}}
+            },
+            {
+              "id": "ihow001",
+              "elType": "section",
+              "isInner": true,
+              "settings": {"structure": "30"},
+              "elements": [
+                {
+                  "id": "chow001",
+                  "elType": "column",
+                  "isInner": true,
+                  "settings": {"_column_size": 33, "_inline_size": null},
+                  "elements": [
+                    {
+                      "id": "whow001",
+                      "elType": "widget",
+                      "widgetType": "heading",
+                      "elements": [],
+                      "settings": {
+                        "title": "1",
+                        "header_size": "div",
+                        "align": "center",
+                        "title_color": "#0EA5E9",
+                        "typography_typography": "custom",
+                        "typography_font_size": {"unit": "px", "size": 64, "sizes": []},
+                        "typography_font_weight": "800"
+                      }
+                    },
+                    {
+                      "id": "whow002",
+                      "elType": "widget",
+                      "widgetType": "heading",
+                      "elements": [],
+                      "settings": {
+                        "title": "Riempi il Serbatoio",
+                        "header_size": "h3",
+                        "align": "center",
+                        "title_color": "#0B2239",
+                        "typography_typography": "custom",
+                        "typography_font_size": {"unit": "px", "size": 22, "sizes": []},
+                        "typography_font_weight": "700"
+                      }
+                    },
+                    {
+                      "id": "whow003",
+                      "elType": "widget",
+                      "widgetType": "text-editor",
+                      "elements": [],
+                      "settings": {
+                        "editor": "<p style=\"text-align:center;\">Aggiungi acqua fresca (o cubetti di ghiaccio per un effetto extra) nel serbatoio da 300 ml.</p>",
+                        "text_color": "#5B7186"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "chow002",
+                  "elType": "column",
+                  "isInner": true,
+                  "settings": {"_column_size": 33, "_inline_size": null},
+                  "elements": [
+                    {
+                      "id": "whow004",
+                      "elType": "widget",
+                      "widgetType": "heading",
+                      "elements": [],
+                      "settings": {
+                        "title": "2",
+                        "header_size": "div",
+                        "align": "center",
+                        "title_color": "#0EA5E9",
+                        "typography_typography": "custom",
+                        "typography_font_size": {"unit": "px", "size": 64, "sizes": []},
+                        "typography_font_weight": "800"
+                      }
+                    },
+                    {
+                      "id": "whow005",
+                      "elType": "widget",
+                      "widgetType": "heading",
+                      "elements": [],
+                      "settings": {
+                        "title": "Accendi e Scegli la Velocità",
+                        "header_size": "h3",
+                        "align": "center",
+                        "title_color": "#0B2239",
+                        "typography_typography": "custom",
+                        "typography_font_size": {"unit": "px", "size": 22, "sizes": []},
+                        "typography_font_weight": "700"
+                      }
+                    },
+                    {
+                      "id": "whow006",
+                      "elType": "widget",
+                      "widgetType": "text-editor",
+                      "elements": [],
+                      "settings": {
+                        "editor": "<p style=\"text-align:center;\">Premi il pulsante e seleziona una delle 3 velocità in base alle tue esigenze.</p>",
+                        "text_color": "#5B7186"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "chow003",
+                  "elType": "column",
+                  "isInner": true,
+                  "settings": {"_column_size": 33, "_inline_size": null},
+                  "elements": [
+                    {
+                      "id": "whow007",
+                      "elType": "widget",
+                      "widgetType": "heading",
+                      "elements": [],
+                      "settings": {
+                        "title": "3",
+                        "header_size": "div",
+                        "align": "center",
+                        "title_color": "#0EA5E9",
+                        "typography_typography": "custom",
+                        "typography_font_size": {"unit": "px", "size": 64, "sizes": []},
+                        "typography_font_weight": "800"
+                      }
+                    },
+                    {
+                      "id": "whow008",
+                      "elType": "widget",
+                      "widgetType": "heading",
+                      "elements": [],
+                      "settings": {
+                        "title": "Goditi l'Aria Fresca",
+                        "header_size": "h3",
+                        "align": "center",
+                        "title_color": "#0B2239",
+                        "typography_typography": "custom",
+                        "typography_font_size": {"unit": "px", "size": 22, "sizes": []},
+                        "typography_font_weight": "700"
+                      }
+                    },
+                    {
+                      "id": "whow009",
+                      "elType": "widget",
+                      "widgetType": "text-editor",
+                      "elements": [],
+                      "settings": {
+                        "editor": "<p style=\"text-align:center;\">In 90 secondi la brezza fresca si diffonde nella stanza. Relax totale.</p>",
+                        "text_color": "#5B7186"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scomp01",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#FFFFFF",
+        "padding": {"unit": "px", "top": "90", "right": "20", "bottom": "90", "left": "20", "isLinked": false}
+      },
+      "elements": [
+        {
+          "id": "ccomp00",
+          "elType": "column",
+          "isInner": false,
+          "settings": {"_column_size": 100, "_inline_size": null},
+          "elements": [
+            {
+              "id": "wcomp00",
+              "elType": "widget",
+              "widgetType": "heading",
+              "elements": [],
+              "settings": {
+                "title": "AiraBreeze vs Condizionatore Tradizionale",
+                "header_size": "h2",
+                "align": "center",
+                "title_color": "#0B2239",
+                "typography_typography": "custom",
+                "typography_font_size": {"unit": "px", "size": 36, "sizes": []},
+                "typography_font_weight": "800"
+              }
+            },
+            {
+              "id": "wcomp0s",
+              "elType": "widget",
+              "widgetType": "spacer",
+              "elements": [],
+              "settings": {"space": {"unit": "px", "size": 30, "sizes": []}}
+            },
+            {
+              "id": "icomp01",
+              "elType": "section",
+              "isInner": true,
+              "settings": {"structure": "20"},
+              "elements": [
+                {
+                  "id": "ccomp01",
+                  "elType": "column",
+                  "isInner": true,
+                  "settings": {
+                    "_column_size": 50,
+                    "_inline_size": null,
+                    "background_background": "classic",
+                    "background_color": "#EAF6FF",
+                    "border_radius": {"unit": "px", "top": "16", "right": "16", "bottom": "16", "left": "16", "isLinked": true},
+                    "padding": {"unit": "px", "top": "35", "right": "35", "bottom": "35", "left": "35", "isLinked": true},
+                    "margin": {"unit": "px", "top": "0", "right": "12", "bottom": "0", "left": "12", "isLinked": false}
+                  },
+                  "elements": [
+                    {
+                      "id": "wcomp01",
+                      "elType": "widget",
+                      "widgetType": "heading",
+                      "elements": [],
+                      "settings": {
+                        "title": "✓ AiraBreeze",
+                        "header_size": "h3",
+                        "align": "center",
+                        "title_color": "#0EA5E9",
+                        "typography_typography": "custom",
+                        "typography_font_size": {"unit": "px", "size": 26, "sizes": []},
+                        "typography_font_weight": "800"
+                      }
+                    },
+                    {
+                      "id": "wcomp02",
+                      "elType": "widget",
+                      "widgetType": "icon-list",
+                      "elements": [],
+                      "settings": {
+                        "icon_list": [
+                          {"_id": "cp001", "text": "Nessuna installazione: pronto in 60 secondi", "selected_icon": {"value": "fas fa-check", "library": "fa-solid"}},
+                          {"_id": "cp002", "text": "Circa €0,01 di energia all'ora", "selected_icon": {"value": "fas fa-check", "library": "fa-solid"}},
+                          {"_id": "cp003", "text": "Portatile: spostalo di stanza in stanza", "selected_icon": {"value": "fas fa-check", "library": "fa-solid"}},
+                          {"_id": "cp004", "text": "Silenzioso anche di notte", "selected_icon": {"value": "fas fa-check", "library": "fa-solid"}},
+                          {"_id": "cp005", "text": "Un unico pagamento, zero manutenzione", "selected_icon": {"value": "fas fa-check", "library": "fa-solid"}}
+                        ],
+                        "icon_color": "#2ECC71",
+                        "text_color": "#0B2239",
+                        "space_between": {"unit": "px", "size": 14, "sizes": []}
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "ccomp02",
+                  "elType": "column",
+                  "isInner": true,
+                  "settings": {
+                    "_column_size": 50,
+                    "_inline_size": null,
+                    "background_background": "classic",
+                    "background_color": "#FDF2F2",
+                    "border_radius": {"unit": "px", "top": "16", "right": "16", "bottom": "16", "left": "16", "isLinked": true},
+                    "padding": {"unit": "px", "top": "35", "right": "35", "bottom": "35", "left": "35", "isLinked": true},
+                    "margin": {"unit": "px", "top": "0", "right": "12", "bottom": "0", "left": "12", "isLinked": false}
+                  },
+                  "elements": [
+                    {
+                      "id": "wcomp03",
+                      "elType": "widget",
+                      "widgetType": "heading",
+                      "elements": [],
+                      "settings": {
+                        "title": "✗ Condizionatore Tradizionale",
+                        "header_size": "h3",
+                        "align": "center",
+                        "title_color": "#E74C3C",
+                        "typography_typography": "custom",
+                        "typography_font_size": {"unit": "px", "size": 26, "sizes": []},
+                        "typography_font_weight": "800"
+                      }
+                    },
+                    {
+                      "id": "wcomp04",
+                      "elType": "widget",
+                      "widgetType": "icon-list",
+                      "elements": [],
+                      "settings": {
+                        "icon_list": [
+                          {"_id": "cp006", "text": "Installazione costosa (€500+ solo di montaggio)", "selected_icon": {"value": "fas fa-times", "library": "fa-solid"}},
+                          {"_id": "cp007", "text": "Bollette elettriche alle stelle in estate", "selected_icon": {"value": "fas fa-times", "library": "fa-solid"}},
+                          {"_id": "cp008", "text": "Fisso al muro: raffredda una sola stanza", "selected_icon": {"value": "fas fa-times", "library": "fa-solid"}},
+                          {"_id": "cp009", "text": "Rumoroso: difficile dormirci accanto", "selected_icon": {"value": "fas fa-times", "library": "fa-solid"}},
+                          {"_id": "cp010", "text": "Manutenzione e ricariche gas periodiche", "selected_icon": {"value": "fas fa-times", "library": "fa-solid"}}
+                        ],
+                        "icon_color": "#E74C3C",
+                        "text_color": "#0B2239",
+                        "space_between": {"unit": "px", "size": 14, "sizes": []}
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stest01",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#EAF6FF",
+        "padding": {"unit": "px", "top": "90", "right": "20", "bottom": "90", "left": "20", "isLinked": false}
+      },
+      "elements": [
+        {
+          "id": "ctest00",
+          "elType": "column",
+          "isInner": false,
+          "settings": {"_column_size": 100, "_inline_size": null},
+          "elements": [
+            {
+              "id": "wtest00",
+              "elType": "widget",
+              "widgetType": "heading",
+              "elements": [],
+              "settings": {
+                "title": "Cosa Dicono i Nostri Clienti",
+                "header_size": "h2",
+                "align": "center",
+                "title_color": "#0B2239",
+                "typography_typography": "custom",
+                "typography_font_size": {"unit": "px", "size": 36, "sizes": []},
+                "typography_font_weight": "800"
+              }
+            },
+            {
+              "id": "wtest0s",
+              "elType": "widget",
+              "widgetType": "spacer",
+              "elements": [],
+              "settings": {"space": {"unit": "px", "size": 30, "sizes": []}}
+            },
+            {
+              "id": "itest01",
+              "elType": "section",
+              "isInner": true,
+              "settings": {"structure": "30"},
+              "elements": [
+                {
+                  "id": "ctest01",
+                  "elType": "column",
+                  "isInner": true,
+                  "settings": {
+                    "_column_size": 33,
+                    "_inline_size": null,
+                    "background_background": "classic",
+                    "background_color": "#FFFFFF",
+                    "border_radius": {"unit": "px", "top": "16", "right": "16", "bottom": "16", "left": "16", "isLinked": true},
+                    "padding": {"unit": "px", "top": "30", "right": "25", "bottom": "30", "left": "25", "isLinked": false},
+                    "margin": {"unit": "px", "top": "0", "right": "10", "bottom": "0", "left": "10", "isLinked": false}
+                  },
+                  "elements": [
+                    {
+                      "id": "wtest01",
+                      "elType": "widget",
+                      "widgetType": "star-rating",
+                      "elements": [],
+                      "settings": {
+                        "rating_scale": "5",
+                        "rating": 5,
+                        "star_style": "star_fontawesome",
+                        "stars_color": "#FFC107",
+                        "align": "center"
+                      }
+                    },
+                    {
+                      "id": "wtest02",
+                      "elType": "widget",
+                      "widgetType": "testimonial",
+                      "elements": [],
+                      "settings": {
+                        "testimonial_content": "Non ci credevo, ma la mia camera è passata da forno a fresca in due minuti. Ora lo uso ogni notte e dormo finalmente bene.",
+                        "testimonial_name": "Marco R.",
+                        "testimonial_job": "Milano — Acquisto verificato",
+                        "testimonial_alignment": "center"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "ctest02",
+                  "elType": "column",
+                  "isInner": true,
+                  "settings": {
+                    "_column_size": 33,
+                    "_inline_size": null,
+                    "background_background": "classic",
+                    "background_color": "#FFFFFF",
+                    "border_radius": {"unit": "px", "top": "16", "right": "16", "bottom": "16", "left": "16", "isLinked": true},
+                    "padding": {"unit": "px", "top": "30", "right": "25", "bottom": "30", "left": "25", "isLinked": false},
+                    "margin": {"unit": "px", "top": "0", "right": "10", "bottom": "0", "left": "10", "isLinked": false}
+                  },
+                  "elements": [
+                    {
+                      "id": "wtest03",
+                      "elType": "widget",
+                      "widgetType": "star-rating",
+                      "elements": [],
+                      "settings": {
+                        "rating_scale": "5",
+                        "rating": 5,
+                        "star_style": "star_fontawesome",
+                        "stars_color": "#FFC107",
+                        "align": "center"
+                      }
+                    },
+                    {
+                      "id": "wtest04",
+                      "elType": "widget",
+                      "widgetType": "testimonial",
+                      "elements": [],
+                      "settings": {
+                        "testimonial_content": "Perfetto per l'ufficio: è così silenzioso che i colleghi non si accorgono che è acceso. E la bolletta non è cambiata di un euro.",
+                        "testimonial_name": "Giulia T.",
+                        "testimonial_job": "Roma — Acquisto verificato",
+                        "testimonial_alignment": "center"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "ctest03",
+                  "elType": "column",
+                  "isInner": true,
+                  "settings": {
+                    "_column_size": 33,
+                    "_inline_size": null,
+                    "background_background": "classic",
+                    "background_color": "#FFFFFF",
+                    "border_radius": {"unit": "px", "top": "16", "right": "16", "bottom": "16", "left": "16", "isLinked": true},
+                    "padding": {"unit": "px", "top": "30", "right": "25", "bottom": "30", "left": "25", "isLinked": false},
+                    "margin": {"unit": "px", "top": "0", "right": "10", "bottom": "0", "left": "10", "isLinked": false}
+                  },
+                  "elements": [
+                    {
+                      "id": "wtest05",
+                      "elType": "widget",
+                      "widgetType": "star-rating",
+                      "elements": [],
+                      "settings": {
+                        "rating_scale": "5",
+                        "rating": 5,
+                        "star_style": "star_fontawesome",
+                        "stars_color": "#FFC107",
+                        "align": "center"
+                      }
+                    },
+                    {
+                      "id": "wtest06",
+                      "elType": "widget",
+                      "widgetType": "testimonial",
+                      "elements": [],
+                      "settings": {
+                        "testimonial_content": "Ne ho presi tre con l'offerta bundle, uno per stanza. Il miglior acquisto di quest'estate, altro che ventilatori.",
+                        "testimonial_name": "Luca B.",
+                        "testimonial_job": "Napoli — Acquisto verificato",
+                        "testimonial_alignment": "center"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sprice1",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "_element_id": "offerta",
+        "background_background": "classic",
+        "background_color": "#FFFFFF",
+        "padding": {"unit": "px", "top": "90", "right": "20", "bottom": "90", "left": "20", "isLinked": false}
+      },
+      "elements": [
+        {
+          "id": "cprice0",
+          "elType": "column",
+          "isInner": false,
+          "settings": {"_column_size": 100, "_inline_size": null},
+          "elements": [
+            {
+              "id": "wprice0",
+              "elType": "widget",
+              "widgetType": "heading",
+              "elements": [],
+              "settings": {
+                "title": "Scegli la Tua Offerta — 50% di Sconto Solo Oggi",
+                "header_size": "h2",
+                "align": "center",
+                "title_color": "#0B2239",
+                "typography_typography": "custom",
+                "typography_font_size": {"unit": "px", "size": 36, "sizes": []},
+                "typography_font_weight": "800"
+              }
+            },
+            {
+              "id": "wprice1",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "elements": [],
+              "settings": {
+                "editor": "<p style=\"text-align:center;\">Spedizione gratuita e garanzia soddisfatti o rimborsati di 30 giorni su tutti i pacchetti.</p>",
+                "text_color": "#5B7186",
+                "typography_typography": "custom",
+                "typography_font_size": {"unit": "px", "size": 17, "sizes": []}
+              }
+            },
+            {
+              "id": "wpricsp",
+              "elType": "widget",
+              "widgetType": "spacer",
+              "elements": [],
+              "settings": {"space": {"unit": "px", "size": 30, "sizes": []}}
+            },
+            {
+              "id": "iprice1",
+              "elType": "section",
+              "isInner": true,
+              "settings": {"structure": "30"},
+              "elements": [
+                {
+                  "id": "cprice1",
+                  "elType": "column",
+                  "isInner": true,
+                  "settings": {
+                    "_column_size": 33,
+                    "_inline_size": null,
+                    "background_background": "classic",
+                    "background_color": "#FFFFFF",
+                    "border_border": "solid",
+                    "border_width": {"unit": "px", "top": "1", "right": "1", "bottom": "1", "left": "1", "isLinked": true},
+                    "border_color": "#DCE9F5",
+                    "border_radius": {"unit": "px", "top": "16", "right": "16", "bottom": "16", "left": "16", "isLinked": true},
+                    "padding": {"unit": "px", "top": "35", "right": "25", "bottom": "35", "left": "25", "isLinked": false},
+                    "margin": {"unit": "px", "top": "20", "right": "10", "bottom": "0", "left": "10", "isLinked": false}
+                  },
+                  "elements": [
+                    {
+                      "id": "wprc101",
+                      "elType": "widget",
+                      "widgetType": "heading",
+                      "elements": [],
+                      "settings": {
+                        "title": "1x AiraBreeze",
+                        "header_size": "h3",
+                        "align": "center",
+                        "title_color": "#0B2239",
+                        "typography_typography": "custom",
+                        "typography_font_size": {"unit": "px", "size": 22, "sizes": []},
+                        "typography_font_weight": "700"
+                      }
+                    },
+                    {
+                      "id": "wprc102",
+                      "elType": "widget",
+                      "widgetType": "text-editor",
+                      "elements": [],
+                      "settings": {
+                        "editor": "<p style=\"text-align:center;\"><s style=\"color:#94A3B8;\">€119,98</s></p>",
+                        "typography_typography": "custom",
+                        "typography_font_size": {"unit": "px", "size": 18, "sizes": []}
+                      }
+                    },
+                    {
+                      "id": "wprc103",
+                      "elType": "widget",
+                      "widgetType": "heading",
+                      "elements": [],
+                      "settings": {
+                        "title": "€59,99",
+                        "header_size": "div",
+                        "align": "center",
+                        "title_color": "#0EA5E9",
+                        "typography_typography": "custom",
+                        "typography_font_size": {"unit": "px", "size": 44, "sizes": []},
+                        "typography_font_weight": "800"
+                      }
+                    },
+                    {
+                      "id": "wprc104",
+                      "elType": "widget",
+                      "widgetType": "text-editor",
+                      "elements": [],
+                      "settings": {
+                        "editor": "<p style=\"text-align:center;\">Risparmi il 50% · Spedizione gratuita</p>",
+                        "text_color": "#5B7186",
+                        "typography_typography": "custom",
+                        "typography_font_size": {"unit": "px", "size": 14, "sizes": []}
+                      }
+                    },
+                    {
+                      "id": "wprc105",
+                      "elType": "widget",
+                      "widgetType": "button",
+                      "elements": [],
+                      "settings": {
+                        "text": "ACQUISTA ORA",
+                        "align": "center",
+                        "link": {"url": "#", "is_external": false, "nofollow": false},
+                        "background_color": "#0EA5E9",
+                        "button_text_color": "#FFFFFF",
+                        "button_background_hover_color": "#0284C7",
+                        "border_radius": {"unit": "px", "top": "50", "right": "50", "bottom": "50", "left": "50", "isLinked": true},
+                        "text_padding": {"unit": "px", "top": "14", "right": "36", "bottom": "14", "left": "36", "isLinked": false},
+                        "typography_typography": "custom",
+                        "typography_font_weight": "800"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "cprice2",
+                  "elType": "column",
+                  "isInner": true,
+                  "settings": {
+                    "_column_size": 33,
+                    "_inline_size": null,
+                    "background_background": "classic",
+                    "background_color": "#FFFFFF",
+                    "border_border": "solid",
+                    "border_width": {"unit": "px", "top": "3", "right": "3", "bottom": "3", "left": "3", "isLinked": true},
+                    "border_color": "#FF5A1F",
+                    "border_radius": {"unit": "px", "top": "16", "right": "16", "bottom": "16", "left": "16", "isLinked": true},
+                    "padding": {"unit": "px", "top": "35", "right": "25", "bottom": "35", "left": "25", "isLinked": false},
+                    "margin": {"unit": "px", "top": "0", "right": "10", "bottom": "0", "left": "10", "isLinked": false},
+                    "box_shadow_box_shadow_type": "yes",
+                    "box_shadow_box_shadow": {"horizontal": 0, "vertical": 12, "blur": 35, "spread": 0, "color": "rgba(255,90,31,0.2)"}
+                  },
+                  "elements": [
+                    {
+                      "id": "wprc201",
+                      "elType": "widget",
+                      "widgetType": "heading",
+                      "elements": [],
+                      "settings": {
+                        "title": "PIÙ POPOLARE — 2+1 GRATIS",
+                        "header_size": "div",
+                        "align": "center",
+                        "title_color": "#FFFFFF",
+                        "typography_typography": "custom",
+                        "typography_font_size": {"unit": "px", "size": 13, "sizes": []},
+                        "typography_font_weight": "800",
+                        "typography_letter_spacing": {"unit": "px", "size": 1, "sizes": []},
+                        "_background_background": "classic",
+                        "_background_color": "#FF5A1F",
+                        "_border_radius": {"unit": "px", "top": "30", "right": "30", "bottom": "30", "left": "30", "isLinked": true},
+                        "_padding": {"unit": "px", "top": "8", "right": "16", "bottom": "8", "left": "16", "isLinked": false}
+                      }
+                    },
+                    {
+                      "id": "wprc202",
+                      "elType": "widget",
+                      "widgetType": "heading",
+                      "elements": [],
+                      "settings": {
+                        "title": "3x AiraBreeze",
+                        "header_size": "h3",
+                        "align": "center",
+                        "title_color": "#0B2239",
+                        "typography_typography": "custom",
+                        "typography_font_size": {"unit": "px", "size": 22, "sizes": []},
+                        "typography_font_weight": "700"
+                      }
+                    },
+                    {
+                      "id": "wprc203",
+                      "elType": "widget",
+                      "widgetType": "text-editor",
+                      "elements": [],
+                      "settings": {
+                        "editor": "<p style=\"text-align:center;\"><s style=\"color:#94A3B8;\">€359,94</s></p>",
+                        "typography_typography": "custom",
+                        "typography_font_size": {"unit": "px", "size": 18, "sizes": []}
+                      }
+                    },
+                    {
+                      "id": "wprc204",
+                      "elType": "widget",
+                      "widgetType": "heading",
+                      "elements": [],
+                      "settings": {
+                        "title": "€119,99",
+                        "header_size": "div",
+                        "align": "center",
+                        "title_color": "#FF5A1F",
+                        "typography_typography": "custom",
+                        "typography_font_size": {"unit": "px", "size": 44, "sizes": []},
+                        "typography_font_weight": "800"
+                      }
+                    },
+                    {
+                      "id": "wprc205",
+                      "elType": "widget",
+                      "widgetType": "text-editor",
+                      "elements": [],
+                      "settings": {
+                        "editor": "<p style=\"text-align:center;\">Solo €40,00 al pezzo · Spedizione gratuita</p>",
+                        "text_color": "#5B7186",
+                        "typography_typography": "custom",
+                        "typography_font_size": {"unit": "px", "size": 14, "sizes": []}
+                      }
+                    },
+                    {
+                      "id": "wprc206",
+                      "elType": "widget",
+                      "widgetType": "button",
+                      "elements": [],
+                      "settings": {
+                        "text": "VOGLIO L'OFFERTA MIGLIORE",
+                        "align": "center",
+                        "link": {"url": "#", "is_external": false, "nofollow": false},
+                        "background_color": "#FF5A1F",
+                        "button_text_color": "#FFFFFF",
+                        "button_background_hover_color": "#E64A19",
+                        "border_radius": {"unit": "px", "top": "50", "right": "50", "bottom": "50", "left": "50", "isLinked": true},
+                        "text_padding": {"unit": "px", "top": "14", "right": "30", "bottom": "14", "left": "30", "isLinked": false},
+                        "typography_typography": "custom",
+                        "typography_font_weight": "800"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "cprice3",
+                  "elType": "column",
+                  "isInner": true,
+                  "settings": {
+                    "_column_size": 33,
+                    "_inline_size": null,
+                    "background_background": "classic",
+                    "background_color": "#FFFFFF",
+                    "border_border": "solid",
+                    "border_width": {"unit": "px", "top": "1", "right": "1", "bottom": "1", "left": "1", "isLinked": true},
+                    "border_color": "#DCE9F5",
+                    "border_radius": {"unit": "px", "top": "16", "right": "16", "bottom": "16", "left": "16", "isLinked": true},
+                    "padding": {"unit": "px", "top": "35", "right": "25", "bottom": "35", "left": "25", "isLinked": false},
+                    "margin": {"unit": "px", "top": "20", "right": "10", "bottom": "0", "left": "10", "isLinked": false}
+                  },
+                  "elements": [
+                    {
+                      "id": "wprc301",
+                      "elType": "widget",
+                      "widgetType": "heading",
+                      "elements": [],
+                      "settings": {
+                        "title": "2x AiraBreeze",
+                        "header_size": "h3",
+                        "align": "center",
+                        "title_color": "#0B2239",
+                        "typography_typography": "custom",
+                        "typography_font_size": {"unit": "px", "size": 22, "sizes": []},
+                        "typography_font_weight": "700"
+                      }
+                    },
+                    {
+                      "id": "wprc302",
+                      "elType": "widget",
+                      "widgetType": "text-editor",
+                      "elements": [],
+                      "settings": {
+                        "editor": "<p style=\"text-align:center;\"><s style=\"color:#94A3B8;\">€239,96</s></p>",
+                        "typography_typography": "custom",
+                        "typography_font_size": {"unit": "px", "size": 18, "sizes": []}
+                      }
+                    },
+                    {
+                      "id": "wprc303",
+                      "elType": "widget",
+                      "widgetType": "heading",
+                      "elements": [],
+                      "settings": {
+                        "title": "€99,99",
+                        "header_size": "div",
+                        "align": "center",
+                        "title_color": "#0EA5E9",
+                        "typography_typography": "custom",
+                        "typography_font_size": {"unit": "px", "size": 44, "sizes": []},
+                        "typography_font_weight": "800"
+                      }
+                    },
+                    {
+                      "id": "wprc304",
+                      "elType": "widget",
+                      "widgetType": "text-editor",
+                      "elements": [],
+                      "settings": {
+                        "editor": "<p style=\"text-align:center;\">Solo €50,00 al pezzo · Spedizione gratuita</p>",
+                        "text_color": "#5B7186",
+                        "typography_typography": "custom",
+                        "typography_font_size": {"unit": "px", "size": 14, "sizes": []}
+                      }
+                    },
+                    {
+                      "id": "wprc305",
+                      "elType": "widget",
+                      "widgetType": "button",
+                      "elements": [],
+                      "settings": {
+                        "text": "ACQUISTA ORA",
+                        "align": "center",
+                        "link": {"url": "#", "is_external": false, "nofollow": false},
+                        "background_color": "#0EA5E9",
+                        "button_text_color": "#FFFFFF",
+                        "button_background_hover_color": "#0284C7",
+                        "border_radius": {"unit": "px", "top": "50", "right": "50", "bottom": "50", "left": "50", "isLinked": true},
+                        "text_padding": {"unit": "px", "top": "14", "right": "36", "bottom": "14", "left": "36", "isLinked": false},
+                        "typography_typography": "custom",
+                        "typography_font_weight": "800"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sguar01",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#EAF6FF",
+        "padding": {"unit": "px", "top": "80", "right": "20", "bottom": "80", "left": "20", "isLinked": false}
+      },
+      "elements": [
+        {
+          "id": "cguar01",
+          "elType": "column",
+          "isInner": false,
+          "settings": {"_column_size": 100, "_inline_size": null},
+          "elements": [
+            {
+              "id": "wguar01",
+              "elType": "widget",
+              "widgetType": "icon",
+              "elements": [],
+              "settings": {
+                "selected_icon": {"value": "fas fa-shield-alt", "library": "fa-solid"},
+                "align": "center",
+                "primary_color": "#0EA5E9",
+                "size": {"unit": "px", "size": 60, "sizes": []}
+              }
+            },
+            {
+              "id": "wguar02",
+              "elType": "widget",
+              "widgetType": "heading",
+              "elements": [],
+              "settings": {
+                "title": "Garanzia Soddisfatti o Rimborsati di 30 Giorni",
+                "header_size": "h2",
+                "align": "center",
+                "title_color": "#0B2239",
+                "typography_typography": "custom",
+                "typography_font_size": {"unit": "px", "size": 32, "sizes": []},
+                "typography_font_weight": "800"
+              }
+            },
+            {
+              "id": "wguar03",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "elements": [],
+              "settings": {
+                "editor": "<p style=\"text-align:center;\">Prova AiraBreeze senza rischi per 30 giorni. Se non sei completamente soddisfatto, ti rimborsiamo il 100% dell'importo. Nessuna domanda, nessuna complicazione. Contatta il nostro servizio clienti e riceverai il rimborso completo.</p>",
+                "text_color": "#3D5266",
+                "typography_typography": "custom",
+                "typography_font_size": {"unit": "px", "size": 17, "sizes": []},
+                "typography_line_height": {"unit": "em", "size": 1.7, "sizes": []},
+                "_margin": {"unit": "px", "top": "0", "right": "120", "bottom": "0", "left": "120", "isLinked": false},
+                "_margin_mobile": {"unit": "px", "top": "0", "right": "0", "bottom": "0", "left": "0", "isLinked": true}
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sfaq001",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#FFFFFF",
+        "padding": {"unit": "px", "top": "90", "right": "20", "bottom": "90", "left": "20", "isLinked": false}
+      },
+      "elements": [
+        {
+          "id": "cfaq001",
+          "elType": "column",
+          "isInner": false,
+          "settings": {"_column_size": 100, "_inline_size": null},
+          "elements": [
+            {
+              "id": "wfaq001",
+              "elType": "widget",
+              "widgetType": "heading",
+              "elements": [],
+              "settings": {
+                "title": "Domande Frequenti",
+                "header_size": "h2",
+                "align": "center",
+                "title_color": "#0B2239",
+                "typography_typography": "custom",
+                "typography_font_size": {"unit": "px", "size": 36, "sizes": []},
+                "typography_font_weight": "800"
+              }
+            },
+            {
+              "id": "wfaq0sp",
+              "elType": "widget",
+              "widgetType": "spacer",
+              "elements": [],
+              "settings": {"space": {"unit": "px", "size": 20, "sizes": []}}
+            },
+            {
+              "id": "wfaq002",
+              "elType": "widget",
+              "widgetType": "accordion",
+              "elements": [],
+              "settings": {
+                "tabs": [
+                  {
+                    "_id": "faq001",
+                    "tab_title": "Quanto velocemente raffresca la stanza?",
+                    "tab_content": "<p>La brezza fresca inizia a diffondersi entro 90 secondi dall'accensione. Per un effetto ancora più intenso puoi aggiungere cubetti di ghiaccio nel serbatoio.</p>"
+                  },
+                  {
+                    "_id": "faq002",
+                    "tab_title": "Quanto dura il serbatoio d'acqua?",
+                    "tab_content": "<p>Il serbatoio da 300 ml garantisce fino a 8 ore di funzionamento continuo, sufficiente per un'intera notte di sonno.</p>"
+                  },
+                  {
+                    "_id": "faq003",
+                    "tab_title": "È rumoroso? Posso usarlo mentre dormo?",
+                    "tab_content": "<p>Assolutamente sì. Il motore ultra silenzioso è stato progettato proprio per l'uso notturno: nessun ronzio o rumore fastidioso.</p>"
+                  },
+                  {
+                    "_id": "faq004",
+                    "tab_title": "Quanto consuma di elettricità?",
+                    "tab_content": "<p>Pochissimo: circa €0,01 all'ora, ovvero fino al 90% in meno rispetto a un climatizzatore tradizionale.</p>"
+                  },
+                  {
+                    "_id": "faq005",
+                    "tab_title": "Quanto costa la spedizione e in quanto arriva?",
+                    "tab_content": "<p>La spedizione è gratuita su tutti gli ordini. La consegna avviene in 3-5 giorni lavorativi con corriere tracciato.</p>"
+                  },
+                  {
+                    "_id": "faq006",
+                    "tab_title": "Come funziona la garanzia di rimborso?",
+                    "tab_content": "<p>Hai 30 giorni dalla data di acquisto per provare AiraBreeze. Se non sei soddisfatto, contatta il servizio clienti e riceverai un rimborso completo del 100%.</p>"
+                  }
+                ],
+                "title_color": "#0B2239",
+                "icon_color": "#0EA5E9",
+                "icon_active_color": "#FF5A1F",
+                "border_color": "#DCE9F5",
+                "title_typography_typography": "custom",
+                "title_typography_font_weight": "700"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scta001",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#0B2239",
+        "padding": {"unit": "px", "top": "90", "right": "20", "bottom": "90", "left": "20", "isLinked": false}
+      },
+      "elements": [
+        {
+          "id": "ccta001",
+          "elType": "column",
+          "isInner": false,
+          "settings": {"_column_size": 100, "_inline_size": null},
+          "elements": [
+            {
+              "id": "wcta001",
+              "elType": "widget",
+              "widgetType": "heading",
+              "elements": [],
+              "settings": {
+                "title": "L'Estate Non Aspetta. Il 50% di Sconto Nemmeno.",
+                "header_size": "h2",
+                "align": "center",
+                "title_color": "#FFFFFF",
+                "typography_typography": "custom",
+                "typography_font_size": {"unit": "px", "size": 36, "sizes": []},
+                "typography_font_weight": "800"
+              }
+            },
+            {
+              "id": "wcta002",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "elements": [],
+              "settings": {
+                "editor": "<p style=\"text-align:center;\">Le scorte a prezzo scontato stanno andando a ruba. Ordina oggi con spedizione gratuita e garanzia 30 giorni.</p>",
+                "text_color": "#A8C6DD",
+                "typography_typography": "custom",
+                "typography_font_size": {"unit": "px", "size": 17, "sizes": []}
+              }
+            },
+            {
+              "id": "wcta003",
+              "elType": "widget",
+              "widgetType": "button",
+              "elements": [],
+              "settings": {
+                "text": "OTTIENI IL 50% DI SCONTO ORA →",
+                "align": "center",
+                "link": {"url": "#offerta", "is_external": false, "nofollow": false},
+                "background_color": "#FF5A1F",
+                "button_text_color": "#FFFFFF",
+                "button_background_hover_color": "#E64A19",
+                "border_radius": {"unit": "px", "top": "50", "right": "50", "bottom": "50", "left": "50", "isLinked": true},
+                "text_padding": {"unit": "px", "top": "18", "right": "48", "bottom": "18", "left": "48", "isLinked": false},
+                "typography_typography": "custom",
+                "typography_font_size": {"unit": "px", "size": 18, "sizes": []},
+                "typography_font_weight": "800"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sfoot01",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "background_background": "classic",
+        "background_color": "#071827",
+        "padding": {"unit": "px", "top": "40", "right": "20", "bottom": "40", "left": "20", "isLinked": false}
+      },
+      "elements": [
+        {
+          "id": "cfoot01",
+          "elType": "column",
+          "isInner": false,
+          "settings": {"_column_size": 100, "_inline_size": null},
+          "elements": [
+            {
+              "id": "wfoot01",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "elements": [],
+              "settings": {
+                "editor": "<p style=\"text-align:center;\">© 2026 AiraBreeze — Tutti i diritti riservati&nbsp;&nbsp;·&nbsp;&nbsp;<a href=\"#\" style=\"color:#7DD3FC;\">Privacy Policy</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href=\"#\" style=\"color:#7DD3FC;\">Termini e Condizioni</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href=\"#\" style=\"color:#7DD3FC;\">Resi e Rimborsi</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href=\"#\" style=\"color:#7DD3FC;\">Contatti</a></p><p style=\"text-align:center; font-size:12px; color:#5B7186;\">Le dichiarazioni presenti su questo sito non sostituiscono il parere di un professionista. I risultati possono variare da persona a persona.</p>",
+                "text_color": "#A8C6DD",
+                "typography_typography": "custom",
+                "typography_font_size": {"unit": "px", "size": 14, "sizes": []}
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
