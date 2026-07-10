@@ -240,8 +240,8 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                       <span className="h-px flex-1 bg-gradient-to-r from-champagne/40 to-transparent" aria-hidden="true" />
                     </span>
                     <p className="font-sans text-champagne/80 text-[10px] tracking-[0.3em] uppercase mb-4 tabular-nums">{step.time}</p>
-                    <h3 className="font-serif text-2xl md:text-3xl text-white font-medium italic leading-snug mb-4">{step.title[lang]}</h3>
-                    <p className="font-sans text-corpo text-sm leading-relaxed">{step.body[lang]}</p>
+                    <h3 className="font-serif text-2xl md:text-3xl text-white font-medium italic leading-snug mb-4">{tr(locale, step.title.en, step.title.it)}</h3>
+                    <p className="font-sans text-corpo text-sm leading-relaxed">{tr(locale, step.body.en, step.body.it)}</p>
                   </div>
                 </div>
               ))}
@@ -284,7 +284,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                   <div className="relative aspect-[4/5] overflow-hidden">
                     <Image
                       src={v.image}
-                      alt={v.name[lang]}
+                      alt={tr(locale, v.name.en, v.name.it)}
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
                       quality={85}
@@ -301,24 +301,24 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                     />
                     {/* Label badge — targa civica */}
                     <span className="absolute top-3 left-3 px-3 py-1.5 bg-gradient-to-b from-[#2A2214] to-[#1C1810] border border-brass/40 text-champagne text-[10px] font-sans font-medium tracking-[0.2em] uppercase shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_2px_8px_rgba(0,0,0,0.5)]">
-                      {v.label[lang]}
+                      {tr(locale, v.label.en, v.label.it)}
                     </span>
                     {/* Name overlay at bottom of image */}
                     <div className="absolute bottom-0 left-0 right-0 p-5">
-                      <p className="font-sans text-champagne/80 text-[10px] tracking-[0.25em] uppercase mb-1">{v.zone[lang]}</p>
+                      <p className="font-sans text-champagne/80 text-[10px] tracking-[0.25em] uppercase mb-1">{tr(locale, v.zone.en, v.zone.it)}</p>
                       <h3 className="font-serif text-2xl text-white font-semibold group-hover:text-champagne transition-colors duration-300 leading-tight">
-                        {v.name[lang]}
+                        {tr(locale, v.name.en, v.name.it)}
                       </h3>
                     </div>
                   </div>
 
                   {/* Content below image */}
                   <div className="p-5 flex-1 flex flex-col">
-                    <p className="font-sans text-corpo text-sm leading-relaxed mb-4 flex-1">{v.desc[lang]}</p>
+                    <p className="font-sans text-corpo text-sm leading-relaxed mb-4 flex-1">{tr(locale, v.desc.en, v.desc.it)}</p>
                     <div className="flex flex-wrap gap-1.5">
-                      {v.tags[lang].map(tag => (
-                        <span key={tag} className="px-2 py-0.5 rounded-full border border-white/10 text-white/60 text-[10px] font-sans tracking-wider">
-                          {tag}
+                      {v.tags.en.map((tagEn, ti) => (
+                        <span key={tagEn} className="px-2 py-0.5 rounded-full border border-white/10 text-white/60 text-[10px] font-sans tracking-wider">
+                          {tr(locale, tagEn, v.tags.it[ti])}
                         </span>
                       ))}
                     </div>
