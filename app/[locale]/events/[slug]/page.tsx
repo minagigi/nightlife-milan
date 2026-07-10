@@ -74,6 +74,10 @@ function buildVenueGalleryImages(venue: Venue, eventTitle: string, locale: strin
 
 // ISR Configuration (1 hour)
 export const revalidate = 3600;
+// getEventGoldHtml legge tutti i listing Eventbrite (via API) come fallback al
+// Blob sospeso: alza il budget di tempo per il rendering on-demand degli eventi
+// futuri (il default ~10s non basta per la fetch paginata dell'intera org).
+export const maxDuration = 60;
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;

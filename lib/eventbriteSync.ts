@@ -89,14 +89,26 @@ export function parseMarker(text: string | undefined): ParsedMarker | undefined 
  * la description raw — necessario perché con ~200 listing la lingua giusta sta
  * spesso oltre la prima pagina.
  */
+// Cache in-memory dei listing org (paginati, ~260 con description completa):
+// senza, OGNI render di pagina evento rifà la fetch di ~3MB e sfora il tempo
+// runtime sugli eventi generati on-demand. TTL breve: i contenuti cambiano solo
+// all'import notturno.
+let orgEventsCache: { at: number; events: { description?: { html?: string; text?: string } }[] } | null = null;
+const ORG_EVENTS_TTL_MS = 5 * 60 * 1000;
+
 export async function getEventGoldHtml(slugEn: string, locale: string): Promise<string | null> {
   if (!slugEn) return null;
   let all: { description?: { html?: string; text?: string } }[];
-  try {
-    const { fetchOwnOrgEvents } = await import('./importLedger');
-    all = await fetchOwnOrgEvents();
-  } catch {
-    return null;
+  if (orgEventsCache && Date.now() - orgEventsCache.at < ORG_EVENTS_TTL_MS) {
+    all = orgEventsCache.events;
+  } else {
+    try {
+      const { fetchOwnOrgEvents } = await import('./importLedger');
+      all = await fetchOwnOrgEvents();
+      orgEventsCache = { at: Date.now(), events: all };
+    } catch {
+      return null;
+    }
   }
 
   const byLang = new Map<string, string>();
