@@ -10,6 +10,7 @@ import LanguageSwitcher from './LanguageSwitcher';
 import { CONTACT } from '@/config/contact';
 import Logo from './Logo';
 import { LOCALES, localePrefix as urlLocalePrefix } from '@/lib/i18n/locales';
+import { getChrome } from '@/lib/i18n/chrome';
 
 // Prefissi lingua riconoscibili nel path (tutti i codici del registry: strippare
 // un prefisso di lingua non attiva è innocuo e copre i path interni riscritti).
@@ -64,13 +65,8 @@ export default function Header({ currentLocale }: { currentLocale: string }) {
     return pathWithoutLocale === '/' ? targetPrefix : `${targetPrefix}${pathWithoutLocale}`;
   };
 
-  // Dizionario per le traduzioni statiche
-  const typedLocale = (currentLocale === 'it' ? 'it' : 'en') as 'en' | 'it';
-  const dict = {
-    en: { clubs: 'CLUBS', calendar: 'CALENDAR', zones: 'ZONES', guides: 'GUIDES', vip: 'VIP TABLES' },
-    it: { clubs: 'LOCALI', calendar: 'CALENDARIO', zones: 'ZONE', guides: 'GUIDE', vip: 'TAVOLI VIP' }
-  };
-  const t = dict[typedLocale];
+  // Chrome UI in tutte le 35 lingue del registry (fallback EN campo per campo)
+  const t = getChrome(currentLocale);
 
   const localePrefix = urlLocalePrefix(currentLocale);
   const navLinks = [
@@ -78,22 +74,20 @@ export default function Header({ currentLocale }: { currentLocale: string }) {
     { name: t.calendar, href: `${localePrefix}/calendar/tonight`, match: `${localePrefix}/calendar` },
     { name: t.zones, href: `${localePrefix}/zones`, match: `${localePrefix}/zones` },
     { name: t.guides, href: `${localePrefix}/guides`, match: `${localePrefix}/guides` },
-    { name: t.vip, href: `${localePrefix}/vip-tables`, match: `${localePrefix}/vip-tables`, gold: true },
+    { name: t.vipTables, href: `${localePrefix}/vip-tables`, match: `${localePrefix}/vip-tables`, gold: true },
   ];
 
   // Extra links surfaced only in the mobile menu (kept off the desktop bar to avoid clutter)
   const mobileExtraLinks = [
-    { name: typedLocale === 'it' ? 'EVENTI' : 'EVENTS', href: `${localePrefix}/events`, match: `${localePrefix}/events` },
+    { name: t.events, href: `${localePrefix}/events`, match: `${localePrefix}/events` },
     { name: 'APERITIVO', href: `${localePrefix}/aperitivo`, match: `${localePrefix}/aperitivo` },
-    { name: typedLocale === 'it' ? 'PREZZI BOTTIGLIE' : 'BOTTLE PRICES', href: `${localePrefix}/bottle-prices`, match: `${localePrefix}/bottle-prices` },
-    { name: typedLocale === 'it' ? 'DRESS CODE' : 'DRESS CODE', href: `${localePrefix}/door-policy`, match: `${localePrefix}/door-policy` },
+    { name: t.bottlePrices, href: `${localePrefix}/bottle-prices`, match: `${localePrefix}/bottle-prices` },
+    { name: 'DRESS CODE', href: `${localePrefix}/door-policy`, match: `${localePrefix}/door-policy` },
     { name: 'FAQ', href: `${localePrefix}/faq`, match: `${localePrefix}/faq` },
   ];
 
   const waMenuLink = `${CONTACT.whatsapp.link}?text=${encodeURIComponent(
-    typedLocale === 'it'
-      ? 'Ciao! Vorrei prenotare un tavolo VIP a Milano.'
-      : "Hi! I'd like to book a VIP table in Milan."
+    currentLocale === 'it' ? 'Ciao! Vorrei prenotare un tavolo VIP a Milano.' : "Hi! I'd like to book a VIP table in Milan."
   )}`;
 
   return (
@@ -245,10 +239,10 @@ export default function Header({ currentLocale }: { currentLocale: string }) {
               className="mt-4 flex items-center justify-center gap-2 rounded-xl bg-champagne text-black font-semibold text-sm tracking-[0.1em] uppercase py-3.5 min-h-[48px] active:scale-[0.98] transition-transform"
             >
               <MessageCircle className="w-4 h-4" />
-              {typedLocale === 'it' ? 'Prenota via WhatsApp' : 'Book via WhatsApp'}
+              {t.bookWhatsApp}
             </a>
             <p className="text-center text-white/50 text-[11px] tracking-widest mt-2.5">
-              {CONTACT.whatsapp.number} · {typedLocale === 'it' ? 'Risposta in 10 min' : 'Reply in 10 min'}
+              {CONTACT.whatsapp.number} · {currentLocale === 'it' ? 'Risposta in 10 min' : 'Reply in 10 min'}
             </p>
           </nav>
         </div>
