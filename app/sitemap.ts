@@ -3,7 +3,7 @@ import { mockVenues, mockGuides, mockEvents, mockZones } from '@/lib/data';
 import { weeklyEvents } from '@/lib/eventsConfig';
 import { fetchEventbriteEvents } from '@/lib/eventbriteSync';
 import { romeDayKey, romeDayKeyOffset } from '@/lib/calendarEvents';
-import { enabledLocaleCodes, localePrefix } from '@/lib/i18n/locales';
+import { indexedLocaleCodes, localePrefix } from '@/lib/i18n/locales';
 import { getLocalizedText } from '@/lib/seo';
 import type { Event } from '@/lib/types';
 
@@ -11,7 +11,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   // Lingue attive dal registry unico — la sitemap si estende da sola quando
   // una lingua viene attivata in lib/i18n/locales.ts.
-  const locales: string[] = enabledLocaleCodes;
+  const locales: string[] = indexedLocaleCodes;
 
   // Eventi live da Eventbrite — la sitemap NON deve MAI fallire per colpa di
   // un problema con Eventbrite (token assente, rate limit, errore rete):

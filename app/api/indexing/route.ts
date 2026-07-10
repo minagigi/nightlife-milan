@@ -2,14 +2,14 @@ import { NextResponse } from 'next/server';
 import { notifyUrl, notifyUrls } from '@/lib/googleIndexing';
 import { mockEvents } from '@/lib/data';
 import { weeklyEvents } from '@/lib/eventsConfig';
-import { enabledLocaleCodes, localePrefix } from '@/lib/i18n/locales';
+import { indexedLocaleCodes, localePrefix } from '@/lib/i18n/locales';
 import { getLocalizedText } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
 
 const BASE = process.env.APP_URL || 'https://nightlifemilan.com';
 // Lingue attive dal registry unico (lib/i18n/locales.ts).
-const LOCALES: readonly string[] = enabledLocaleCodes;
+const LOCALES: readonly string[] = indexedLocaleCodes;
 
 /** All indexable event URLs (one-off + weekly), all enabled locales. */
 function allEventUrls(): string[] {

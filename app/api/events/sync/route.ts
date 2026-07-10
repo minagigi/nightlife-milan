@@ -3,7 +3,7 @@ import { fetchEventbriteEvents, debugEventbrite } from '@/lib/eventbriteSync';
 import { notifyUrls, submitSitemap } from '@/lib/googleIndexing';
 import { mockEvents } from '@/lib/data';
 import { weeklyEvents } from '@/lib/eventsConfig';
-import { enabledLocaleCodes, localePrefix } from '@/lib/i18n/locales';
+import { indexedLocaleCodes, localePrefix } from '@/lib/i18n/locales';
 import { getLocalizedText } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
@@ -11,7 +11,7 @@ export const maxDuration = 60;
 
 const BASE = process.env.APP_URL || 'https://nightlifemilan.com';
 // Lingue attive dal registry unico (lib/i18n/locales.ts).
-const LOCALES: readonly string[] = enabledLocaleCodes;
+const LOCALES: readonly string[] = indexedLocaleCodes;
 
 /**
  * Daily cron (vercel.json: 0 8 * * *) — syncs Eventbrite events and pings

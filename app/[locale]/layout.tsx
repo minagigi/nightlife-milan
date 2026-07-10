@@ -102,11 +102,16 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       site: '@nightlifemilan',
       creator: '@nightlifemilan',
     },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
-    },
+    // Lingue navigabili ma senza contenuto tradotto (indexed:false nel registry):
+    // noindex finché il contenuto non è pronto — evita di indicizzare i fallback
+    // inglesi come duplicati sotto 33 prefissi URL (guardrail del piano).
+    robots: localeDef.indexed
+      ? {
+          index: true,
+          follow: true,
+          googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
+        }
+      : { index: false, follow: true },
     other: {
       'og:locale:alternate': isIt ? 'en_US' : 'it_IT',
     },
