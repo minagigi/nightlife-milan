@@ -1,7 +1,10 @@
 import { NextResponse } from 'next/server';
 import { get } from '@vercel/blob';
+import { getEventGoldHtml } from '@/lib/eventbriteSync';
+import { fetchOwnOrgEvents } from '@/lib/importLedger';
 
 export const dynamic = 'force-dynamic';
+export const maxDuration = 60;
 
 /**
  * Diagnostica one-off: legge il blob del contenuto gold di un evento e riporta
@@ -17,6 +20,25 @@ export async function GET(request: Request) {
   const slug = searchParams.get('slug') || 'white-party-just-me-milano-friday-july-10-2026-2026-07-10';
   const token = process.env.BLOB_READ_WRITE_TOKEN;
   if (!token) return NextResponse.json({ ok: false, reason: 'BLOB_READ_WRITE_TOKEN not set' });
+
+  // Diagnosi getEventGoldHtml: quali marker-slug/lang trova l'org per questo slug
+  if (searchParams.get('gold') === '1') {
+    const locale = searchParams.get('locale') || 'fr';
+    const all = await fetchOwnOrgEvents();
+    const markers: string[] = [];
+    for (const ev of all) {
+      const html = ev.description?.html || '';
+      const m = html.match(/nlm:src=(.+?)-([a-z]{2});slug-en=([a-z0-9-]+)/);
+      if (m && m[3] === slug) markers.push(`${m[1]}-${m[2]}`);
+    }
+    const html = await getEventGoldHtml(slug, locale);
+    return NextResponse.json({
+      ok: true, slug, locale,
+      orgEventsTotal: all.length,
+      markersMatchingSlug: markers,
+      goldHtmlLen: html ? html.length : 0,
+    });
+  }
 
   const path = `events/${slug}.json`;
   try {
