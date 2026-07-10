@@ -34,6 +34,14 @@ export async function POST(request: NextRequest) {
       return new NextResponse(null, { status: 204 });
     }
 
+    // Quota Blob (Hobby) esaurita 10 lug 2026: i pageview NON si scrivono più su
+    // Blob — sono già in GA4 (doppia scrittura di lib/analytics.ts) ed erano ~95%
+    // del volume (1 put per visita × 35 lingue). Su Blob restano SOLO le conversioni
+    // (whatsapp/booking/xceed/eventbrite), poche e preziose per la dashboard.
+    if (body.name === 'pageview') {
+      return new NextResponse(null, { status: 204 });
+    }
+
     // Solo campi noti, troncati — mai PII (nome/email non vengono mandati dal client)
     const p = body.params || {};
     const params: Record<string, string | undefined> = {

@@ -73,15 +73,30 @@ export async function putRichContent(slugEn: string, data: Omit<RichContentPaylo
 }
 
 /** Legge il contenuto ricco per uno slug, o null se non presente/errore (degrado silenzioso: la pagina usa il rendering base). */
+// Cache in-memory per lambda (quota Blob Hobby esaurita 10 lug 2026): con 35
+// lingue ogni evento viene renderizzato molte più volte — senza cache ogni
+// render era 1 operazione Blob. TTL breve: il contenuto gold cambia solo
+// all'import notturno.
+const richCache = new Map<string, { at: number; data: RichContentPayload | null }>();
+const RICH_CACHE_TTL_MS = 10 * 60 * 1000;
+
 export async function getRichContent(slugEn: string): Promise<RichContentPayload | null> {
   const token = process.env.BLOB_READ_WRITE_TOKEN;
   if (!token || !slugEn) return null;
 
+  const cached = richCache.get(slugEn);
+  if (cached && Date.now() - cached.at < RICH_CACHE_TTL_MS) return cached.data;
+
   try {
     const result = await get(pathFor(slugEn), { access: 'private', token });
-    if (!result || result.statusCode !== 200 || !result.stream) return null;
+    if (!result || result.statusCode !== 200 || !result.stream) {
+      richCache.set(slugEn, { at: Date.now(), data: null });
+      return null;
+    }
     const text = await new Response(result.stream).text();
-    return JSON.parse(text) as RichContentPayload;
+    const data = JSON.parse(text) as RichContentPayload;
+    richCache.set(slugEn, { at: Date.now(), data });
+    return data;
   } catch {
     return null;
   }
