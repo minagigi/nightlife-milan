@@ -78,6 +78,51 @@ export function parseMarker(text: string | undefined): ParsedMarker | undefined 
   return undefined;
 }
 
+/**
+ * Contenuto gold-standard (sezioni + programma + 25 FAQ) di un evento, letto
+ * DIRETTAMENTE dalla description HTML dei listing Eventbrite via API — NON dal
+ * Vercel Blob (che è andato in 403/sospeso per overage quota, azzerando il
+ * contenuto gold del sito). Riusa i listing tradotti: ritorna l'HTML nella
+ * lingua richiesta, con fallback it→en. Idempotente e senza dipendenze a pagamento.
+ *
+ * `fetchOwnOrgEvents` (importLedger) pagina TUTTI i listing dell'org includendo
+ * la description raw — necessario perché con ~200 listing la lingua giusta sta
+ * spesso oltre la prima pagina.
+ */
+export async function getEventGoldHtml(slugEn: string, locale: string): Promise<string | null> {
+  if (!slugEn) return null;
+  let all: { description?: { html?: string; text?: string } }[];
+  try {
+    const { fetchOwnOrgEvents } = await import('./importLedger');
+    all = await fetchOwnOrgEvents();
+  } catch {
+    return null;
+  }
+
+  const byLang = new Map<string, string>();
+  for (const ev of all) {
+    const html = ev.description?.html;
+    if (!html) continue;
+    const marker = parseMarker(ev.description?.text) || parseMarker(html);
+    if (marker?.slug === slugEn && marker.lang) byLang.set(marker.lang, html);
+  }
+  const chosen = byLang.get(locale) || byLang.get('it') || byLang.get('en');
+  if (!chosen) return null;
+
+  // Togli il marker HTML e il blocco legale/affiliate in testa (Contacts + link
+  // BUY TICKETS + IMPORTANT): il sito ha già la sua sidebar prenotazione e CTA.
+  // Renderizza dalla prima sezione di contenuto in poi (primo <H2> DOPO Contacts).
+  let body = chosen.replace(/<!--\s*nlm:src=[^>]*-->/gi, '');
+  const h2s = [...body.matchAll(/<H2[^>]*>/gi)];
+  if (h2s.length >= 2 && typeof h2s[1].index === 'number') {
+    // il 1° <H2> è "Contacts/Contatti/…"; taglia da lì fino al 2° <H2> (prima sezione reale),
+    // ma tieni il paragrafo introduttivo iniziale (prima del 1° <H2>).
+    const intro = body.slice(0, h2s[0].index ?? 0);
+    body = intro + body.slice(h2s[1].index);
+  }
+  return body.trim() || null;
+}
+
 /** Extract the first Xceed link from an Eventbrite event description (HTML or plain text). */
 function extractXceedUrl(text: string): string | undefined {
   if (!text) return undefined;

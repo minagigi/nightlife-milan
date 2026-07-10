@@ -9,11 +9,13 @@ import { nextWeekdayISO } from '@/lib/calendarEvents';
 import { fetchEventbriteEvents } from '@/lib/eventbriteSync';
 import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
 import { getRichContent } from '@/lib/richContentStore';
+import { getEventGoldHtml } from '@/lib/eventbriteSync';
 import { Event, Venue } from '@/lib/types';
 import BookingForm from '@/components/BookingForm';
 import FAQAccordion from '@/components/FAQAccordion';
 import PricingGrid from '@/components/PricingGrid';
 import GoldEventContent from '@/components/GoldEventContent';
+import GoldEventHtml from '@/components/GoldEventHtml';
 import MoreVenueEvents, { MoreVenueEventItem } from '@/components/MoreVenueEvents';
 
 /** Find a live Eventbrite event by its SEO slug (EN or IT).
@@ -418,6 +420,12 @@ export default async function EventPage({ params }: Props) {
   // Xceed — assente per tutti gli altri eventi, rendering base invariato.
   const richContent = await getRichContent(event.localizedContent.slug.en);
 
+  // Fallback robusto (2026-07-10): il Vercel Blob è andato 403/sospeso per
+  // overage quota, azzerando richContent su TUTTE le pagine. Il contenuto gold
+  // completo vive comunque nei listing Eventbrite (via API, non Blob): se il
+  // blob non risponde, si legge da lì — e nella lingua giusta (listing tradotti).
+  const goldHtml = richContent ? null : await getEventGoldHtml(event.localizedContent.slug.en, locale);
+
   // Internal linking: "More events at {venue}" — riusa la sorgente dati
   // unificata già usata da homepage/calendar (statici + Eventbrite/Xceed
   // reali). getAllCalendarEvents() degrada già da sola se Eventbrite non
@@ -659,6 +667,7 @@ export default async function EventPage({ params }: Props) {
             </div>
 
             {richContent && <GoldEventContent data={richContent} locale={locale} />}
+            {!richContent && goldHtml && <GoldEventHtml html={goldHtml} />}
 
             <MoreVenueEvents items={moreVenueEvents} locale={locale} venueName={venueName} />
           </div>
