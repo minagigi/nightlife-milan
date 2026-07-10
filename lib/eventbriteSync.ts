@@ -267,19 +267,26 @@ export async function fetchEventbriteEvents(): Promise<Event[]> {
 
   for (let attempt = 1; attempt <= FETCH_RETRIES; attempt++) {
     try {
-      const res = await fetch(
-        `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=live&expand=venue,logo,ticket_classes&order_by=start_asc&time_filter=current_future`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-          next: { revalidate: 300 },
-        }
-      );
-      if (!res.ok) {
-        lastError = new Error(`Eventbrite list HTTP ${res.status}`);
-      } else {
-        data = await res.json();
-        break;
-      }
+      // PAGINAZIONE (fix 2026-07-11): con le traduzioni multilingua l'org ha
+      // >250 listing; una singola pagina (max 50) tagliava fuori gli eventi
+      // futuri (order_by=start_asc → i passati riempiono la prima pagina) →
+      // getEbEventBySlug non li trovava → pagine evento future in 404/stale.
+      // Si sfogliano tutte le pagine (page_size=200) accumulando i listing.
+      const acc: RawEbEvent[] = [];
+      let continuation: string | undefined;
+      let pages = 0;
+      do {
+        const url =
+          `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=live&expand=venue,logo,ticket_classes&order_by=start_asc&time_filter=current_future&page_size=200` +
+          (continuation ? `&continuation=${continuation}` : '');
+        const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` }, next: { revalidate: 300 } });
+        if (!res.ok) throw new Error(`Eventbrite list HTTP ${res.status}`);
+        const page = await res.json();
+        acc.push(...((page.events || []) as RawEbEvent[]));
+        continuation = page.pagination?.has_more_items ? page.pagination?.continuation : undefined;
+      } while (continuation && ++pages < 10);
+      data = { events: acc };
+      break;
     } catch (e) {
       lastError = e;
     }
