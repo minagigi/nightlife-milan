@@ -424,7 +424,9 @@ export default async function EventPage({ params }: Props) {
   // overage quota, azzerando richContent su TUTTE le pagine. Il contenuto gold
   // completo vive comunque nei listing Eventbrite (via API, non Blob): se il
   // blob non risponde, si legge da lì — e nella lingua giusta (listing tradotti).
-  const goldHtml = richContent ? null : await getEventGoldHtml(event.localizedContent.slug.en, locale);
+  // Usa lo slug dell'URL (= slug-en nei marker Eventbrite), non event.slug.en:
+  // per alcuni eventi con duplicato scout i due divergono e il match fallirebbe.
+  const goldHtml = richContent ? null : await getEventGoldHtml(slug, locale);
 
   // Internal linking: "More events at {venue}" — riusa la sorgente dati
   // unificata già usata da homepage/calendar (statici + Eventbrite/Xceed
