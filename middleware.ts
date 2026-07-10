@@ -1,10 +1,13 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { enabledLocaleCodes } from '@/lib/i18n/locales';
+import { enabledLocaleCodes, LOCALES } from '@/lib/i18n/locales';
 
 // Lingue attive dal registry unico (lib/i18n/locales.ts): attivare una lingua lì
 // la rende automaticamente instradabile qui, senza toccare il middleware.
 const locales: string[] = enabledLocaleCodes;
+// Lingue navigabili ma senza contenuto tradotto: noindex via header HTTP —
+// vince su qualsiasi metadata di pagina (che altrimenti sovrascrive il layout).
+const nonIndexedLocales = new Set(LOCALES.filter((l) => l.enabled && !l.indexed).map((l) => l.code as string));
 const localePrefixPattern = `(?:${locales.map((l) => `\\/${l}`).join('|')})?`;
 const analyticsRe = new RegExp(`^${localePrefixPattern}\\/analytics(\\/|$)`);
 const analyticsTypoRe = new RegExp(`^${localePrefixPattern}\\/analitycs(\\/|$)`);
@@ -54,6 +57,12 @@ export function middleware(request: NextRequest) {
       const url = new URL(newPath, request.url);
       url.search = request.nextUrl.search;
       return NextResponse.redirect(url);
+    }
+    const firstSegment = pathname.split('/')[1];
+    if (nonIndexedLocales.has(firstSegment)) {
+      const res = NextResponse.next();
+      res.headers.set('X-Robots-Tag', 'noindex, follow');
+      return res;
     }
     return NextResponse.next();
   }
