@@ -53,6 +53,68 @@ function defaultTargetLangs(): LocaleCode[] {
   return [...rest.filter((l) => l.tier === 'A'), ...rest.filter((l) => l.tier === 'B')].map((l) => l.code);
 }
 
+/**
+ * POST — pubblica UN listing con contenuto GIÀ TRADOTTO in-sessione (regola
+ * 10 lug: le traduzioni le fa Claude Code sul PC, mai le API Anthropic).
+ * Body: { base, enEventId, slugEn, lang, title, summary, descriptionHtml,
+ *         ticketName, ticketDescription }
+ * Venue/logo/categoria/orari/music_properties vengono copiati dal listing EN.
+ */
+export async function POST(request: Request) {
+  const authHeader = request.headers.get('authorization');
+  if (!(process.env.CRON_SECRET && authHeader === `Bearer ${process.env.CRON_SECRET}`)) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+  const token = getEventbriteToken();
+  if (!token) return NextResponse.json({ ok: false, error: 'EVENTBRITE_TOKEN not set' }, { status: 500 });
+
+  let body: {
+    base?: string; enEventId?: string; slugEn?: string; lang?: string;
+    title?: string; summary?: string; descriptionHtml?: string;
+    ticketName?: string; ticketDescription?: string;
+  };
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ ok: false, error: 'Invalid JSON' }, { status: 400 });
+  }
+  const { base, enEventId, slugEn, lang, title, summary, descriptionHtml, ticketName, ticketDescription } = body;
+  const def = lang ? getLocaleDef(lang) : undefined;
+  if (!base || !enEventId || !slugEn || !def || !title || !summary || !descriptionHtml || !ticketName || !ticketDescription) {
+    return NextResponse.json({ ok: false, error: 'Missing fields' }, { status: 400 });
+  }
+
+  const srcRes = await fetch(`${EVENTBRITE_API}/events/${enEventId}/?expand=music_properties`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!srcRes.ok) return NextResponse.json({ ok: false, error: `EN fetch ${srcRes.status}` }, { status: 502 });
+  const s = await srcRes.json();
+  if (!s.venue_id || !s.start?.utc || !s.end?.utc) {
+    return NextResponse.json({ ok: false, error: 'EN source incomplete' }, { status: 502 });
+  }
+
+  const marker = `<!-- nlm:src=${base}-${def.code};slug-en=${slugEn} -->`;
+  const result = await publishOneLang({
+    token,
+    venueEbId: s.venue_id,
+    imageId: s.logo_id || '',
+    startUtc: normalizeAlreadyUtc(s.start.utc),
+    endUtc: normalizeAlreadyUtc(s.end.utc),
+    title: title.slice(0, 75),
+    summary: summary.slice(0, 140),
+    description: `${descriptionHtml}\n${marker}`,
+    locale: def.ebLocale,
+    lang: def.code,
+    ageRestriction: s.music_properties?.age_restriction,
+    doorTimeISO: s.music_properties?.door_time,
+    ticketText: { name: ticketName.slice(0, 100), description: ticketDescription },
+    categoryId: s.category_id,
+    subcategoryId: s.subcategory_id,
+    formatId: s.format_id,
+  });
+  return NextResponse.json({ ok: result.ok, base, lang: def.code, url: result.url, reason: result.reason });
+}
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const authHeader = request.headers.get('authorization');
@@ -107,6 +169,32 @@ export async function GET(request: Request) {
         });
       }
     }
+  }
+
+  // ?content=<base>: ritorna il contenuto EN sorgente per la traduzione
+  // IN-SESSIONE (regola 10 lug: mai tradurre via API Anthropic server-side).
+  const contentBase = searchParams.get('content');
+  if (contentBase) {
+    const entry = bySrc.get(contentBase);
+    if (!entry?.enEventId) return NextResponse.json({ ok: false, error: 'EN source not found' }, { status: 404 });
+    const res = await fetch(`${EVENTBRITE_API}/events/${entry.enEventId}/?expand=music_properties`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!res.ok) return NextResponse.json({ ok: false, error: `EN fetch ${res.status}` }, { status: 502 });
+    const s = await res.json();
+    const ticketEn = getTicketText('en');
+    return NextResponse.json({
+      ok: true,
+      base: contentBase,
+      enEventId: entry.enEventId,
+      slugEn: entry.slugEn,
+      langsPresent: [...entry.langs],
+      titleEn: s.name?.text || '',
+      summaryEn: s.summary || '',
+      descriptionHtmlEn: (s.description?.html || '').replace(/<!--\s*nlm:src=[^>]*-->/g, '').trim(),
+      ticketNameEn: ticketEn.name,
+      ticketDescriptionEn: ticketEn.description(`☎️ ${CONTACT.whatsapp.number}`),
+    });
   }
 
   if (dryRun) {
