@@ -73,10 +73,11 @@ function buildVenueGalleryImages(venue: Venue, eventTitle: string, locale: strin
 }
 
 // ISR Configuration (1 hour)
-export const revalidate = 3600;
-// getEventGoldHtml legge tutti i listing Eventbrite (via API) come fallback al
-// Blob sospeso: alza il budget di tempo per il rendering on-demand degli eventi
-// futuri (il default ~10s non basta per la fetch paginata dell'intera org).
+// force-dynamic (2026-07-11): l'ISR serviva un notFound cacheato sugli eventi
+// futuri (non trovati finché la fetch org non è stata paginata) che revalidatePath
+// non ripuliva. Reso dinamico → ogni richiesta esegue il codice aggiornato, trova
+// l'evento e mostra il contenuto gold. La fetch org è comunque in cache (5min).
+export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
 
 type Props = {
