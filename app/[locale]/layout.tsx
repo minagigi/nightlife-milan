@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
-import { Montserrat, Cormorant_Garamond } from 'next/font/google';
+import { Montserrat, Cormorant_Garamond, Noto_Sans_SC, Noto_Naskh_Arabic } from 'next/font/google';
 import dynamic from 'next/dynamic';
+import { getLocaleDef, hreflangAlternates, localePrefix, DEFAULT_LOCALE } from '@/lib/i18n/locales';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Providers } from '@/components/Providers';
@@ -33,15 +34,33 @@ const cormorant = Cormorant_Garamond({
   weight: ['400', '500', '600', '700'],
   display: 'swap',
 });
+// Font per script non-latini: preload:false + variable class applicata SOLO sul
+// locale corrispondente → i file font si scaricano solo dove servono (zh/ar),
+// zero peso sulle altre lingue. Il binding è in globals.css (html[lang]/[dir]).
+const notoSansSC = Noto_Sans_SC({
+  subsets: ['latin'],
+  variable: '--font-noto-sc',
+  weight: ['400', '500', '700'],
+  display: 'swap',
+  preload: false,
+});
+const notoNaskhArabic = Noto_Naskh_Arabic({
+  subsets: ['arabic'],
+  variable: '--font-noto-naskh',
+  weight: ['400', '500', '700'],
+  display: 'swap',
+  preload: false,
+});
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const isIt = locale === 'it';
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const path = isIt ? '/it' : '';
-  const canonical = `${baseUrl}${path}`;
+  const path = localePrefix(locale);
+  const canonical = `${baseUrl}${path}` || baseUrl;
   const ogImage = `${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`;
+  const localeDef = getLocaleDef(locale) || getLocaleDef(DEFAULT_LOCALE)!;
 
   const title = isIt
     ? 'Nightlife Milan — Migliori Club, Tavoli VIP & Aperitivo Milano 2026'
@@ -62,18 +81,16 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       : ['nightlife milan', 'best clubs milan', 'vip table milan', 'bottle service milan', 'aperitivo milan', 'milan nightclub guide', 'milan nightlife 2026', 'exclusive clubs milan'],
     alternates: {
       canonical,
-      languages: {
-        'en': `${baseUrl}/`,
-        'it': `${baseUrl}/it`,
-        'x-default': `${baseUrl}/`,
-      },
+      // hreflang generati dal registry: si estendono da soli quando una lingua
+      // viene attivata in lib/i18n/locales.ts.
+      languages: hreflangAlternates(baseUrl, ''),
     },
     openGraph: {
       title,
       description,
       url: canonical,
       siteName: 'Nightlife Milan',
-      locale: isIt ? 'it_IT' : 'en_US',
+      locale: localeDef.ogLocale,
       type: 'website',
       images: [{ url: ogImage, width: 1200, height: 630, alt: isIt ? 'Nightlife Milano — Club Esclusivi' : 'Nightlife Milan — Exclusive Clubs & VIP Tables' }],
     },
@@ -106,6 +123,9 @@ export default async function RootLayout({
   const { locale } = await params;
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const isIt = locale === 'it';
+  const localeDef = getLocaleDef(locale) || getLocaleDef(DEFAULT_LOCALE)!;
+  const scriptFontClass =
+    locale === 'zh' ? notoSansSC.variable : locale === 'ar' ? notoNaskhArabic.variable : '';
 
   const orgSchema = {
     '@context': 'https://schema.org',
@@ -141,7 +161,7 @@ export default async function RootLayout({
   };
 
   return (
-    <html lang={locale} className={`${montserrat.variable} ${cormorant.variable}`}>
+    <html lang={localeDef.hreflang} dir={localeDef.dir} className={`${montserrat.variable} ${cormorant.variable} ${scriptFontClass}`.trim()}>
       <head>
         {/* GA loads on first interaction (see GoogleAnalytics.tsx) — dns-prefetch only, no premature preconnect */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />

@@ -9,6 +9,11 @@ import { useFavorites } from './FavoritesContext';
 import LanguageSwitcher from './LanguageSwitcher';
 import { CONTACT } from '@/config/contact';
 import Logo from './Logo';
+import { LOCALES, localePrefix as urlLocalePrefix } from '@/lib/i18n/locales';
+
+// Prefissi lingua riconoscibili nel path (tutti i codici del registry: strippare
+// un prefisso di lingua non attiva è innocuo e copre i path interni riscritti).
+const anyLocalePrefixRe = new RegExp(`^\\/(${LOCALES.map((l) => l.code).join('|')})(\\/|$)`);
 
 // Code-split GlobalSearch (pulls in motion/react) out of the Header's critical bundle —
 // same size reserved via the skeleton to avoid layout shift while the chunk loads.
@@ -49,22 +54,14 @@ export default function Header({ currentLocale }: { currentLocale: string }) {
     setIsMobileMenuOpen(false);
   }, [pathname]);
 
-  // Helper to get the alternate path for the language switcher
+  // Helper to get the alternate path for the language switcher — registry-driven:
+  // strippa QUALSIASI prefisso lingua e applica quello del locale target.
   const getAlternatePath = (targetLocale: string) => {
-    if (!pathname) return targetLocale === 'it' ? '/it' : '/';
-    
-    const isCurrentlyIt = pathname.startsWith('/it/') || pathname === '/it';
-    let pathWithoutLocale = pathname;
-    
-    if (isCurrentlyIt) {
-      pathWithoutLocale = pathname.replace(/^\/it(\/|$)/, '/');
-    }
-
-    if (targetLocale === 'it') {
-      return pathWithoutLocale === '/' ? '/it' : `/it${pathWithoutLocale}`;
-    } else {
-      return pathWithoutLocale;
-    }
+    const targetPrefix = urlLocalePrefix(targetLocale);
+    if (!pathname) return targetPrefix || '/';
+    const pathWithoutLocale = pathname.replace(anyLocalePrefixRe, '/');
+    if (!targetPrefix) return pathWithoutLocale;
+    return pathWithoutLocale === '/' ? targetPrefix : `${targetPrefix}${pathWithoutLocale}`;
   };
 
   // Dizionario per le traduzioni statiche
@@ -75,7 +72,7 @@ export default function Header({ currentLocale }: { currentLocale: string }) {
   };
   const t = dict[typedLocale];
 
-  const localePrefix = currentLocale === 'it' ? '/it' : '';
+  const localePrefix = urlLocalePrefix(currentLocale);
   const navLinks = [
     { name: t.clubs, href: `${localePrefix}/clubs`, match: `${localePrefix}/clubs` },
     { name: t.calendar, href: `${localePrefix}/calendar/tonight`, match: `${localePrefix}/calendar` },

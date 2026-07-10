@@ -2,32 +2,30 @@ import { NextResponse } from 'next/server';
 import { notifyUrl, notifyUrls } from '@/lib/googleIndexing';
 import { mockEvents } from '@/lib/data';
 import { weeklyEvents } from '@/lib/eventsConfig';
+import { enabledLocaleCodes, localePrefix } from '@/lib/i18n/locales';
+import { getLocalizedText } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
 
 const BASE = process.env.APP_URL || 'https://nightlifemilan.com';
-const LOCALES = ['en', 'it'] as const;
+// Lingue attive dal registry unico (lib/i18n/locales.ts).
+const LOCALES: readonly string[] = enabledLocaleCodes;
 
-/** All indexable event URLs (one-off + weekly), both locales. */
+/** All indexable event URLs (one-off + weekly), all enabled locales. */
 function allEventUrls(): string[] {
   const urls: string[] = [];
 
   mockEvents.forEach((event) => {
     LOCALES.forEach((locale) => {
-      const prefix = locale === 'en' ? '' : `/${locale}`;
-      const slug =
-        locale === 'it' && event.localizedContent.slug.it
-          ? event.localizedContent.slug.it
-          : event.localizedContent.slug.en;
-      urls.push(`${BASE}${prefix}/events/${slug}`);
+      const slug = getLocalizedText(event.localizedContent.slug, locale);
+      urls.push(`${BASE}${localePrefix(locale)}/events/${slug}`);
     });
   });
 
   weeklyEvents.forEach((event) => {
     LOCALES.forEach((locale) => {
-      const prefix = locale === 'en' ? '' : `/${locale}`;
       const slug = `${event.clubSlug}-${event.day}-${event.eventSlug}`;
-      urls.push(`${BASE}${prefix}/events/${slug}`);
+      urls.push(`${BASE}${localePrefix(locale)}/events/${slug}`);
     });
   });
 

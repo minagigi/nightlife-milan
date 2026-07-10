@@ -1,11 +1,9 @@
 import { Event, Venue, Performer, LocalizedString } from './types';
 
-// Helper to get localized string with fallback to English
+// Helper to get localized string — qualsiasi locale del registry, fallback a 'en'
 export const getLocalizedText = (text: LocalizedString, lang: string): string => {
-  if (lang === 'it' && text.it) {
-    return text.it;
-  }
-  return text.en;
+  const value = (text as Record<string, string | undefined>)[lang];
+  return value || text.en;
 };
 
 // Helper to format zone enum to readable string

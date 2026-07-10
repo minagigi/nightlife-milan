@@ -1,7 +1,13 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { enabledLocaleCodes } from '@/lib/i18n/locales';
 
-const locales = ['en', 'it'];
+// Lingue attive dal registry unico (lib/i18n/locales.ts): attivare una lingua lì
+// la rende automaticamente instradabile qui, senza toccare il middleware.
+const locales: string[] = enabledLocaleCodes;
+const localePrefixPattern = `(?:${locales.map((l) => `\\/${l}`).join('|')})?`;
+const analyticsRe = new RegExp(`^${localePrefixPattern}\\/analytics(\\/|$)`);
+const analyticsTypoRe = new RegExp(`^${localePrefixPattern}\\/analitycs(\\/|$)`);
 
 // Dashboard interna /analytics: Basic Auth con ANALYTICS_USER / ANALYTICS_PASSWORD.
 // Protegge anche le Server Action della pagina (stesso path → il browser riallega
@@ -25,13 +31,13 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Typo comune → path canonico
-  if (/^(\/it)?\/analitycs(\/|$)/.test(pathname)) {
+  if (analyticsTypoRe.test(pathname)) {
     const url = request.nextUrl.clone();
     url.pathname = pathname.replace('/analitycs', '/analytics');
     return NextResponse.redirect(url);
   }
 
-  if (/^(\/it|\/en)?\/analytics(\/|$)/.test(pathname)) {
+  if (analyticsRe.test(pathname)) {
     const denied = analyticsAuth(request);
     if (denied) return denied;
   }

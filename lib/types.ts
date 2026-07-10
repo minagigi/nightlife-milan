@@ -1,3 +1,5 @@
+import type { LocaleCode } from './i18n/locales';
+
 // Enums for Taxonomies
 export enum MusicGenre {
   TECHNO = 'TECHNO',
@@ -35,11 +37,10 @@ export enum VenueCategory {
   SPEAKEASY = 'SPEAKEASY',
 }
 
-// Localized Content Type
-export type LocalizedString = {
-  en: string;
-  it?: string; // Optional, will fallback to 'en' if missing
-};
+// Localized Content Type — generalizzato a tutti i locali del registry
+// (lib/i18n/locales.ts). Retrocompatibile con gli oggetti {en, it} esistenti:
+// ogni lingua diversa da 'en' è opzionale, fallback a 'en' se mancante.
+export type LocalizedString = { en: string } & Partial<Record<Exclude<LocaleCode, 'en'>, string>>;
 
 export interface Zone {
   id: MilanZone;

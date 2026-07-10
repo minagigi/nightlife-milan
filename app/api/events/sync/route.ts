@@ -3,12 +3,15 @@ import { fetchEventbriteEvents, debugEventbrite } from '@/lib/eventbriteSync';
 import { notifyUrls, submitSitemap } from '@/lib/googleIndexing';
 import { mockEvents } from '@/lib/data';
 import { weeklyEvents } from '@/lib/eventsConfig';
+import { enabledLocaleCodes, localePrefix } from '@/lib/i18n/locales';
+import { getLocalizedText } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
 
 const BASE = process.env.APP_URL || 'https://nightlifemilan.com';
-const LOCALES = ['en', 'it'] as const;
+// Lingue attive dal registry unico (lib/i18n/locales.ts).
+const LOCALES: readonly string[] = enabledLocaleCodes;
 
 /**
  * Daily cron (vercel.json: 0 8 * * *) — syncs Eventbrite events and pings
@@ -42,28 +45,21 @@ export async function GET(request: Request) {
 
   ebEvents.forEach((ev) => {
     LOCALES.forEach((locale) => {
-      const prefix = locale === 'en' ? '' : `/${locale}`;
-      const slug = locale === 'it'
-        ? (ev.localizedContent.slug.it || ev.localizedContent.slug.en)
-        : ev.localizedContent.slug.en;
-      if (slug) rawUrls.push(`${BASE}${prefix}/events/${slug}`);
+      const slug = getLocalizedText(ev.localizedContent.slug, locale);
+      if (slug) rawUrls.push(`${BASE}${localePrefix(locale)}/events/${slug}`);
     });
   });
 
   mockEvents.forEach((ev) => {
     LOCALES.forEach((locale) => {
-      const prefix = locale === 'en' ? '' : `/${locale}`;
-      const slug = locale === 'it' && ev.localizedContent.slug.it
-        ? ev.localizedContent.slug.it
-        : ev.localizedContent.slug.en;
-      if (slug) rawUrls.push(`${BASE}${prefix}/events/${slug}`);
+      const slug = getLocalizedText(ev.localizedContent.slug, locale);
+      if (slug) rawUrls.push(`${BASE}${localePrefix(locale)}/events/${slug}`);
     });
   });
 
   weeklyEvents.forEach((ev) => {
     LOCALES.forEach((locale) => {
-      const prefix = locale === 'en' ? '' : `/${locale}`;
-      rawUrls.push(`${BASE}${prefix}/events/${ev.clubSlug}-${ev.day}-${ev.eventSlug}`);
+      rawUrls.push(`${BASE}${localePrefix(locale)}/events/${ev.clubSlug}-${ev.day}-${ev.eventSlug}`);
     });
   });
 

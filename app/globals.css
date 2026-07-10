@@ -355,3 +355,12 @@ body { color: #EDE6D6; }
     scroll-behavior: auto !important;
   }
 }
+
+/* Font per script non-latini — variabile applicata dal layout SOLO sul locale
+   corrispondente (lib/i18n/locales.ts); qui il binding al body. */
+html[lang='zh-Hans'] body {
+  font-family: var(--font-noto-sc), var(--font-montserrat), sans-serif;
+}
+html[dir='rtl'] body {
+  font-family: var(--font-noto-naskh), var(--font-montserrat), sans-serif;
+}

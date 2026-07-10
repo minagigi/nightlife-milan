@@ -3,6 +3,7 @@ import { Instagram, MessageCircle } from 'lucide-react';
 import NewsletterHub from './NewsletterHub';
 import Logo from './Logo';
 import { CONTACT } from '@/config/contact';
+import { ENABLED_LOCALES, localePrefix } from '@/lib/i18n/locales';
 
 interface FooterProps {
   lang: string;
@@ -171,9 +172,18 @@ export default function Footer({ lang }: FooterProps) {
         <p className="text-white/50 text-xs">
           © {new Date().getFullYear()} Nightlife Milan. All rights reserved.
         </p>
-        <div className="flex space-x-4 text-xs text-white/50">
-          <Link href="/" className="hover:text-champagne transition-colors" aria-label="English">EN</Link>
-          <Link href="/it" className="hover:text-champagne transition-colors" aria-label="Italiano">IT</Link>
+        <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs text-white/50">
+          {ENABLED_LOCALES.map((l) => (
+            <Link
+              key={l.code}
+              href={localePrefix(l.code) || '/'}
+              lang={l.hreflang}
+              className="hover:text-champagne transition-colors uppercase"
+              aria-label={l.nativeName}
+            >
+              {l.code}
+            </Link>
+          ))}
         </div>
       </div>
     </footer>
