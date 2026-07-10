@@ -57,14 +57,20 @@ function extractJson(text: string): Record<string, string> | null {
   }
 }
 
+/** Ultimo errore (diagnostica via route ?dryRun — mai in risposta pubblica) */
+export let lastTranslatorError: string | null = null;
+
 export async function translateListing(input: TranslateListingInput): Promise<ListingTranslation | null> {
+  lastTranslatorError = null;
   const key = process.env.ANTHROPIC_API_KEY;
   if (!key) {
+    lastTranslatorError = 'ANTHROPIC_API_KEY not set';
     console.error('[contentTranslator] ANTHROPIC_API_KEY not set');
     return null;
   }
   const def = getLocaleDef(input.targetLocale);
   if (!def) {
+    lastTranslatorError = `Unknown locale "${input.targetLocale}"`;
     console.error(`[contentTranslator] Unknown locale "${input.targetLocale}"`);
     return null;
   }
@@ -90,17 +96,20 @@ export async function translateListing(input: TranslateListingInput): Promise<Li
       }),
     });
     if (!res.ok) {
-      console.error(`[contentTranslator] API ${res.status} for ${def.code}: ${(await res.text()).slice(0, 200)}`);
+      lastTranslatorError = `API ${res.status}: ${(await res.text()).slice(0, 300)}`;
+      console.error(`[contentTranslator] ${lastTranslatorError} (${def.code})`);
       return null;
     }
     const data = await res.json();
     if (data.stop_reason === 'max_tokens') {
+      lastTranslatorError = 'Truncated output (max_tokens)';
       console.error(`[contentTranslator] Truncated output (max_tokens) for ${def.code} — skipping`);
       return null;
     }
     const text = (data.content || []).map((b: { text?: string }) => b.text || '').join('');
     const parsed = extractJson(text);
     if (!parsed?.title || !parsed?.summary || !parsed?.descriptionHtml) {
+      lastTranslatorError = `Incomplete JSON (text head: ${text.slice(0, 200)})`;
       console.error(`[contentTranslator] Incomplete JSON for ${def.code}`);
       return null;
     }
@@ -119,6 +128,7 @@ export async function translateListing(input: TranslateListingInput): Promise<Li
       ticketDescription: parsed.ticketDescription || input.ticketDescriptionEn,
     };
   } catch (e) {
+    lastTranslatorError = `threw: ${(e as Error).message}`;
     console.error(`[contentTranslator] Threw for ${def.code}: ${(e as Error).message}`);
     return null;
   }

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { fetchOwnOrgEvents } from '@/lib/importLedger';
 import { publishOneLang, sleep, PUBLISH_RATE_LIMIT_MS, normalizeAlreadyUtc } from '@/lib/eventPublisher';
-import { translateListing } from '@/lib/contentTranslator';
+import { translateListing, lastTranslatorError } from '@/lib/contentTranslator';
 import { LOCALES, getLocaleDef, type LocaleCode } from '@/lib/i18n/locales';
 import { getEventbriteToken } from '@/lib/eventbriteToken';
 import { getTicketText } from '@/lib/eventRewriter';
@@ -179,7 +179,7 @@ export async function GET(request: Request) {
       targetLocale: item.lang,
     });
     if (!translated) {
-      processed.push({ base: item.base, lang: item.lang, ok: false, reason: 'translation failed' });
+      processed.push({ base: item.base, lang: item.lang, ok: false, reason: `translation failed: ${lastTranslatorError || 'unknown'}` });
       continue;
     }
 
