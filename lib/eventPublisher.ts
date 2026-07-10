@@ -266,10 +266,14 @@ export async function publishOneLang(p: PublishOneLangParams): Promise<PublishRe
   const { token, venueEbId, imageId, startUtc, endUtc, title, summary, description, locale, lang, ageRestriction, doorTimeISO, poster } = p;
 
   // 1. Crea l'evento (draft) — logo_id già noto, assegnato direttamente in creazione.
+  // Resiliente sul locale: se Eventbrite rifiuta il locale mappato (es. sv_SE non
+  // è un locale valido lato Eventbrite → 400 ARGUMENTS_ERROR event.locale INVALID),
+  // ritenta UNA volta con en_GB. Il CONTENUTO resta nella lingua target: il locale
+  // è solo la cornice UI del listing.
   let eventId: string;
   let eventUrl: string;
-  try {
-    const createRes = await fetch(`${EVENTBRITE_API}/organizations/${ORG_ID}/events/`, {
+  const createEvent = async (loc: string) =>
+    fetch(`${EVENTBRITE_API}/organizations/${ORG_ID}/events/`, {
       method: 'POST',
       headers: authHeaders(token),
       body: JSON.stringify({
@@ -283,7 +287,7 @@ export async function publishOneLang(p: PublishOneLangParams): Promise<PublishRe
           online_event: false,
           listed: true,
           shareable: true,
-          locale,
+          locale: loc,
           logo_id: imageId,
           ...(p.categoryId && { category_id: p.categoryId }),
           ...(p.subcategoryId && { subcategory_id: p.subcategoryId }),
@@ -291,9 +295,19 @@ export async function publishOneLang(p: PublishOneLangParams): Promise<PublishRe
         },
       }),
     });
+  try {
+    let createRes = await createEvent(locale);
     if (!createRes.ok) {
       const errBody = await createRes.text();
-      return { ok: false, reason: `Event creation failed: ${createRes.status} ${errBody.slice(0, 200)}` };
+      if (createRes.status === 400 && /locale/i.test(errBody) && locale !== 'en_GB') {
+        console.error(`[eventPublisher] locale "${locale}" rejected (${lang}) — retry con en_GB`);
+        createRes = await createEvent('en_GB');
+        if (!createRes.ok) {
+          return { ok: false, reason: `Event creation failed (en_GB fallback): ${createRes.status} ${(await createRes.text()).slice(0, 200)}` };
+        }
+      } else {
+        return { ok: false, reason: `Event creation failed: ${createRes.status} ${errBody.slice(0, 200)}` };
+      }
     }
     const created = await createRes.json();
     eventId = created.id;

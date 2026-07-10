@@ -78,7 +78,7 @@ export const LOCALES: LocaleDef[] = [
   { code: 'ro', country: 'ro', hreflang: 'ro', nativeName: 'Română', englishName: 'Romanian', dir: 'ltr', tier: 'B', ebLocale: 'en_GB', ogLocale: 'ro_RO', group: 'east', enabled: true, indexed: false },
   { code: 'sk', country: 'sk', hreflang: 'sk', nativeName: 'Slovenčina', englishName: 'Slovak', dir: 'ltr', tier: 'B', ebLocale: 'en_GB', ogLocale: 'sk_SK', group: 'east', enabled: true, indexed: false },
   { code: 'sl', country: 'si', hreflang: 'sl', nativeName: 'Slovenščina', englishName: 'Slovenian', dir: 'ltr', tier: 'B', ebLocale: 'en_GB', ogLocale: 'sl_SI', group: 'balkan', enabled: true, indexed: false },
-  { code: 'sv', country: 'se', hreflang: 'sv', nativeName: 'Svenska', englishName: 'Swedish', dir: 'ltr', tier: 'B', ebLocale: 'sv_SE', ogLocale: 'sv_SE', group: 'north', enabled: true, indexed: false },
+  { code: 'sv', country: 'se', hreflang: 'sv', nativeName: 'Svenska', englishName: 'Swedish', dir: 'ltr', tier: 'B', ebLocale: 'en_GB', ogLocale: 'sv_SE', group: 'north', enabled: true, indexed: false },
   // ——— Tier B: Europa extra-UE / Est / Balcani ———
   { code: 'no', country: 'no', hreflang: 'no', nativeName: 'Norsk', englishName: 'Norwegian', dir: 'ltr', tier: 'B', ebLocale: 'en_GB', ogLocale: 'nb_NO', group: 'north', enabled: true, indexed: false },
   { code: 'is', country: 'is', hreflang: 'is', nativeName: 'Íslenska', englishName: 'Icelandic', dir: 'ltr', tier: 'B', ebLocale: 'en_GB', ogLocale: 'is_IS', group: 'north', enabled: true, indexed: false },
