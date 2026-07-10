@@ -10,6 +10,7 @@ import { Suspense } from 'react';
 import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset, romeSundayKey } from '@/lib/calendarEvents';
 import { Venue, Event } from '@/lib/types';
 import { CONTACT } from '@/config/contact';
+import { tr } from '@/lib/i18n/t';
 
 const EventsCarousel = nextDynamic(() => import('@/components/EventsCarousel'));
 
@@ -26,19 +27,16 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const canonical = isIt ? `${baseUrl}/it` : baseUrl;
   const ogImage = `${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`;
 
-  const title = isIt
-    ? 'Vita Notturna Milano 2026 | Club, VIP Table & Aperitivo | Nightlife Milan'
-    : 'Milan Nightlife 2026 | Best Clubs, VIP Tables & Aperitivo | Nightlife Milan';
-  const description = isIt
-    ? 'La guida definitiva alla vita notturna di Milano. I migliori club, tavoli VIP, aperitivo e serate luglio 2026. Prenota via WhatsApp in 10 minuti.'
-    : 'The definitive guide to Milan nightlife. Best clubs, VIP tables, aperitivo and July 2026 events. Book via WhatsApp in under 10 minutes.';
+  const title = tr(locale, 'Milan Nightlife 2026 | Best Clubs, VIP Tables & Aperitivo | Nightlife Milan', 'Vita Notturna Milano 2026 | Club, VIP Table & Aperitivo | Nightlife Milan');
+  const description = tr(locale, 'The definitive guide to Milan nightlife. Best clubs, VIP tables, aperitivo and July 2026 events. Book via WhatsApp in under 10 minutes.', 'La guida definitiva alla vita notturna di Milano. I migliori club, tavoli VIP, aperitivo e serate luglio 2026. Prenota via WhatsApp in 10 minuti.');
+
+  const keywordsEn = ['milan nightlife', 'best clubs milan', 'vip tables milan', 'aperitivo milan', 'milan nightclub 2026', 'nightlife milan guide'];
+  const keywordsIt = ['vita notturna milano', 'migliori club milano', 'tavoli vip milano', 'aperitivo milano', 'nightlife milano 2026', 'guida vita notturna milano'];
 
   return {
     title,
     description,
-    keywords: isIt
-      ? ['vita notturna milano', 'migliori club milano', 'tavoli vip milano', 'aperitivo milano', 'nightlife milano 2026', 'guida vita notturna milano']
-      : ['milan nightlife', 'best clubs milan', 'vip tables milan', 'aperitivo milan', 'milan nightclub 2026', 'nightlife milan guide'],
+    keywords: keywordsEn.map((k, i) => tr(locale, k, keywordsIt[i])),
     robots: { index: true, follow: true },
     alternates: {
       canonical,
@@ -49,15 +47,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       },
     },
     openGraph: {
-      title: isIt ? 'Vita Notturna Milano 2026 — La Guida Definitiva' : 'Milan Nightlife 2026 — The Definitive Guide',
-      description: isIt
-        ? 'Club esclusivi, VIP table, aperitivo e serate private. La guida che usano i local.'
-        : 'Exclusive clubs, VIP tables, aperitivo and private events. The guide locals actually use.',
+      title: tr(locale, 'Milan Nightlife 2026 — The Definitive Guide', 'Vita Notturna Milano 2026 — La Guida Definitiva'),
+      description: tr(locale, 'Exclusive clubs, VIP tables, aperitivo and private events. The guide locals actually use.', 'Club esclusivi, VIP table, aperitivo e serate private. La guida che usano i local.'),
       type: 'website',
       url: canonical,
       siteName: 'Nightlife Milan',
       locale: isIt ? 'it_IT' : 'en_US',
-      images: [{ url: ogImage, width: 1200, height: 630, alt: isIt ? 'Vita notturna Milano 2026' : 'Milan nightlife 2026' }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: tr(locale, 'Milan nightlife 2026', 'Vita notturna Milano 2026') }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -149,9 +145,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     '@type': 'LocalBusiness',
     name: 'Nightlife Milan',
     image: 'https://nightlifemilan.com/images/milan-nightclub-luxury-vip-champagne.webp',
-    description: lang === 'it'
-      ? 'La guida definitiva alla vita notturna milanese.'
-      : "The ultimate guide to Milan's nightlife.",
+    description: tr(locale, "The ultimate guide to Milan's nightlife.", 'La guida definitiva alla vita notturna milanese.'),
     address: { '@type': 'PostalAddress', addressLocality: 'Milan', addressCountry: 'IT' },
     url: lang === 'it' ? 'https://nightlifemilan.com/it' : 'https://nightlifemilan.com',
   };
@@ -201,9 +195,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 
   const lp = lang === 'it' ? '/it' : '';
   const waMsg = encodeURIComponent(
-    lang === 'it'
-      ? 'Ciao! Vorrei prenotare un tavolo VIP a Milano. Puoi aiutarmi?'
-      : "Hi! I'd like to book a VIP table in Milan. Can you help me?"
+    tr(locale, "Hi! I'd like to book a VIP table in Milan. Can you help me?", 'Ciao! Vorrei prenotare un tavolo VIP a Milano. Puoi aiutarmi?')
   );
   const waLink = `${CONTACT.whatsapp.link}?text=${waMsg}`;
 
@@ -223,10 +215,10 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         <section className="py-24 sm:py-28 px-4 sm:px-6 lg:px-8 w-full border-t border-white/5 bg-surface-1">
           <div className="max-w-7xl mx-auto">
             <p className="font-sans text-champagne/80 text-[10px] tracking-[0.3em] uppercase mb-3">
-              {lang === 'it' ? 'La Notte Milanese' : 'The Milan Night'}
+              {tr(locale, 'The Milan Night', 'La Notte Milanese')}
             </p>
             <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl font-medium italic text-white tracking-tight leading-tight mb-10 md:mb-16">
-              {lang === 'it' ? 'Come Funziona la Notte a Milano' : 'How Milan Nightlife Works'}
+              {tr(locale, 'How Milan Nightlife Works', 'Come Funziona la Notte a Milano')}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3">
               {NIGHT_STEPS.map((step, i) => (
@@ -266,17 +258,17 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
             <div className="flex items-end justify-between mb-10 gap-4">
               <div>
                 <p className="font-sans text-champagne/80 text-[10px] tracking-[0.3em] uppercase mb-3">
-                  {lang === 'it' ? 'Selezione Curata' : 'Curated Selection'}
+                  {tr(locale, 'Curated Selection', 'Selezione Curata')}
                 </p>
                 <h2 className="font-serif text-5xl md:text-6xl font-medium text-white tracking-tight leading-tight">
-                  {lang === 'it' ? 'I Migliori Club di Milano' : 'Top Milan Clubs'}
+                  {tr(locale, 'Top Milan Clubs', 'I Migliori Club di Milano')}
                 </h2>
               </div>
               <Link
                 href={`${lp}/clubs`}
                 className="hidden sm:flex items-center gap-2 text-xs font-sans text-champagne/80 hover:text-champagne tracking-widest uppercase transition-colors shrink-0"
               >
-                {lang === 'it' ? 'Tutti i locali' : 'All venues'} →
+                {tr(locale, 'All venues', 'Tutti i locali')} →
               </Link>
             </div>
 
@@ -337,7 +329,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 
             <div className="mt-6 sm:hidden text-center">
               <Link href={`${lp}/clubs`} className="text-xs font-sans text-champagne/80 hover:text-champagne tracking-widest uppercase transition-colors">
-                {lang === 'it' ? 'Vedi tutti i locali →' : 'See all venues →'}
+                {tr(locale, 'See all venues →', 'Vedi tutti i locali →')}
               </Link>
             </div>
           </div>
@@ -351,21 +343,21 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                 <div className="flex items-center gap-2 mb-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-champagne animate-pulse" />
                   <p className="font-sans text-champagne/80 text-[10px] tracking-[0.3em] uppercase">
-                    {lang === 'it' ? 'Stasera' : 'Tonight'}
+                    {tr(locale, 'Tonight', 'Stasera')}
                   </p>
                 </div>
                 <h2 className="font-serif text-4xl md:text-5xl font-medium text-white tracking-tight">
-                  {lang === 'it' ? 'Eventi di Stasera' : "Tonight's Events"}
+                  {tr(locale, "Tonight's Events", 'Eventi di Stasera')}
                 </h2>
                 <p className="font-serif italic text-lg text-ivory/50 mt-2">
-                  {lang === 'it' ? 'In scena questa notte a Milano' : 'On stage tonight in Milan'}
+                  {tr(locale, 'On stage tonight in Milan', 'In scena questa notte a Milano')}
                 </p>
               </div>
               <Link
                 href={`${lp}/events/tonight`}
                 className="hidden sm:flex items-center gap-2 text-xs font-sans text-champagne/80 hover:text-champagne tracking-widest uppercase transition-colors shrink-0"
               >
-                {lang === 'it' ? 'Vedi tutti' : 'See all'} →
+                {tr(locale, 'See all', 'Vedi tutti')} →
               </Link>
             </div>
           </div>
@@ -378,10 +370,10 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
             <div className="px-4 sm:px-6 lg:px-8 pb-8">
               <div className="max-w-7xl mx-auto py-10 px-6 rounded-xl border border-white/8 bg-white/[0.02] text-center">
                 <p className="font-sans text-white/60 text-sm mb-3">
-                  {lang === 'it' ? 'Nessun evento programmato stasera.' : 'No events scheduled for tonight.'}
+                  {tr(locale, 'No events scheduled for tonight.', 'Nessun evento programmato stasera.')}
                 </p>
                 <Link href={`${lp}/events/best`} className="text-xs text-champagne/80 hover:text-champagne tracking-widest uppercase transition-colors">
-                  {lang === 'it' ? 'Scopri i migliori club →' : 'Discover best clubs →'}
+                  {tr(locale, 'Discover best clubs →', 'Scopri i migliori club →')}
                 </Link>
               </div>
             </div>
@@ -389,7 +381,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 
           <div className="pb-4 text-center sm:hidden px-4 mt-2">
             <Link href={`${lp}/events/tonight`} className="text-xs font-sans text-champagne/80 hover:text-champagne tracking-widest uppercase transition-colors">
-              {lang === 'it' ? 'Tutti gli eventi di stasera →' : 'All tonight\'s events →'}
+              {tr(locale, 'All tonight\'s events →', 'Tutti gli eventi di stasera →')}
             </Link>
           </div>
         </section>
@@ -406,9 +398,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
               <div className="flex items-center gap-3">
                 <MessageCircle className="w-5 h-5 text-champagne shrink-0" />
                 <span className="font-sans text-white/80 text-sm group-hover:text-white transition-colors">
-                  {lang === 'it'
-                    ? 'Prenota tavolo o guestlist — risposta in 10 minuti'
-                    : 'Book table or guestlist — reply in 10 minutes'}
+                  {tr(locale, 'Book table or guestlist — reply in 10 minutes', 'Prenota tavolo o guestlist — risposta in 10 minuti')}
                 </span>
               </div>
               <span className="font-sans text-champagne text-xs tracking-widest uppercase shrink-0 hidden sm:block">
@@ -424,17 +414,17 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
             <div className="max-w-7xl mx-auto flex items-end justify-between gap-4">
               <div>
                 <p className="font-sans text-champagne/80 text-[10px] tracking-[0.3em] uppercase mb-2">
-                  {lang === 'it' ? 'Questa Settimana' : 'This Week'}
+                  {tr(locale, 'This Week', 'Questa Settimana')}
                 </p>
                 <h2 className="font-serif text-4xl md:text-5xl font-medium text-white tracking-tight">
-                  {lang === 'it' ? 'Prossime Serate' : 'Upcoming This Week'}
+                  {tr(locale, 'Upcoming This Week', 'Prossime Serate')}
                 </h2>
               </div>
               <Link
                 href={`${lp}/events/this-week`}
                 className="hidden sm:flex items-center gap-2 text-xs font-sans text-champagne/80 hover:text-champagne tracking-widest uppercase transition-colors shrink-0"
               >
-                {lang === 'it' ? 'Vedi tutti' : 'See all'} →
+                {tr(locale, 'See all', 'Vedi tutti')} →
               </Link>
             </div>
           </div>
@@ -447,10 +437,10 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
             <div className="px-4 sm:px-6 lg:px-8 pb-8">
               <div className="max-w-7xl mx-auto py-10 px-6 rounded-xl border border-white/8 bg-white/[0.02] text-center">
                 <p className="font-sans text-white/60 text-sm mb-3">
-                  {lang === 'it' ? 'Nessun altro evento questa settimana.' : 'No more events this week.'}
+                  {tr(locale, 'No more events this week.', 'Nessun altro evento questa settimana.')}
                 </p>
                 <Link href={`${lp}/events/best`} className="text-xs text-champagne/80 hover:text-champagne tracking-widest uppercase transition-colors">
-                  {lang === 'it' ? 'Scopri i migliori club →' : 'Discover best clubs →'}
+                  {tr(locale, 'Discover best clubs →', 'Scopri i migliori club →')}
                 </Link>
               </div>
             </div>
@@ -458,7 +448,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 
           <div className="pb-6 text-center sm:hidden px-4 mt-2">
             <Link href={`${lp}/events/this-week`} className="text-xs font-sans text-champagne/80 hover:text-champagne tracking-widest uppercase transition-colors">
-              {lang === 'it' ? 'Tutti gli eventi della settimana →' : 'All this week\'s events →'}
+              {tr(locale, 'All this week\'s events →', 'Tutti gli eventi della settimana →')}
             </Link>
           </div>
         </section>
@@ -476,20 +466,18 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
             <div className="inline-flex items-center gap-2 mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-champagne animate-pulse" />
               <p className="font-sans text-champagne/80 text-[10px] tracking-[0.35em] uppercase">
-                {lang === 'it' ? 'Disponibile Adesso' : 'Available Now'}
+                {tr(locale, 'Available Now', 'Disponibile Adesso')}
               </p>
             </div>
 
             <h2 className="font-serif text-4xl md:text-5xl font-medium text-white tracking-tight mb-4 leading-tight">
-              {lang === 'it' ? 'Il Tavolo Migliore\ndi Milano Stasera' : 'The Best Table\nin Milan Tonight'}
+              {tr(locale, 'The Best Table\nin Milan Tonight', 'Il Tavolo Migliore\ndi Milano Stasera')}
             </h2>
             <p className="font-sans text-corpo text-base leading-relaxed mb-3 max-w-md mx-auto">
-              {lang === 'it'
-                ? 'Scrivi ora. Rispondo in 10 minuti con disponibilità, prezzi e accesso diretto — senza coda, senza stress.'
-                : 'Message now. I reply in 10 minutes with availability, pricing, and direct access — no queue, no hassle.'}
+              {tr(locale, 'Message now. I reply in 10 minutes with availability, pricing, and direct access — no queue, no hassle.', 'Scrivi ora. Rispondo in 10 minuti con disponibilità, prezzi e accesso diretto — senza coda, senza stress.')}
             </p>
             <p className="font-sans text-champagne/40 text-xs tracking-widest uppercase mb-10">
-              {lang === 'it' ? 'Servizio gratuito · Nessuna commissione · 500+ prenotazioni' : 'Free service · No booking fee · 500+ bookings'}
+              {tr(locale, 'Free service · No booking fee · 500+ bookings', 'Servizio gratuito · Nessuna commissione · 500+ prenotazioni')}
             </p>
 
             <a
@@ -499,15 +487,15 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
               className="inline-flex items-center gap-3 px-10 py-5 bg-champagne text-charcoal font-sans font-bold text-sm tracking-[0.12em] uppercase hover:bg-white transition-colors duration-300 shadow-[0_0_60px_rgba(201,168,106,0.25)] mb-6"
             >
               <MessageCircle className="w-4 h-4" />
-              {lang === 'it' ? 'Prenota Ora via WhatsApp' : 'Book Now via WhatsApp'}
+              {tr(locale, 'Book Now via WhatsApp', 'Prenota Ora via WhatsApp')}
             </a>
 
             {/* Social proof row */}
             <div className="flex items-center justify-center gap-6 mt-6">
               {[
-                { n: '10 min', label: lang === 'it' ? 'risposta' : 'reply time' },
-                { n: '500+', label: lang === 'it' ? 'prenotazioni' : 'bookings' },
-                { n: '18+', label: lang === 'it' ? 'club partner' : 'partner clubs' },
+                { n: '10 min', label: tr(locale, 'reply time', 'risposta') },
+                { n: '500+', label: tr(locale, 'bookings', 'prenotazioni') },
+                { n: '18+', label: tr(locale, 'partner clubs', 'club partner') },
               ].map(({ n, label }) => (
                 <div key={n} className="text-center">
                   <p className="font-serif text-champagne text-xl font-semibold">{n}</p>
@@ -524,23 +512,19 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
             <div className="relative pl-6 border-l-2 border-champagne/35 mb-14">
               <p className="font-sans text-champagne/50 text-[9px] tracking-[0.35em] uppercase mb-2">Quick Answer</p>
               <p className="font-serif italic text-ivory/70 text-lg leading-relaxed">
-                {lang === 'it'
-                  ? 'La vita notturna di Milano 2026: i migliori club sono Just Me (Sempione, VIP table da €500), Pineta (Corso Como, aperitivo cantato venerdì), Voya Rooftop (Isola, 20° piano). Club aperti dalle 22:00–23:30 fino alle 5:00. Prenota via WhatsApp +39 351 912 7047 — risposta in 10 minuti.'
-                  : 'Milan nightlife 2026: top clubs are Just Me (Sempione, VIP tables from €500), Pineta (Corso Como, singing aperitivo Fridays), Voya Rooftop (Isola, 20th floor). Clubs open from 22:00–23:30 until 5:00 AM. Book via WhatsApp +39 351 912 7047 — reply in under 10 minutes.'}
+                {tr(locale, 'Milan nightlife 2026: top clubs are Just Me (Sempione, VIP tables from €500), Pineta (Corso Como, singing aperitivo Fridays), Voya Rooftop (Isola, 20th floor). Clubs open from 22:00–23:30 until 5:00 AM. Book via WhatsApp +39 351 912 7047 — reply in under 10 minutes.', 'La vita notturna di Milano 2026: i migliori club sono Just Me (Sempione, VIP table da €500), Pineta (Corso Como, aperitivo cantato venerdì), Voya Rooftop (Isola, 20° piano). Club aperti dalle 22:00–23:30 fino alle 5:00. Prenota via WhatsApp +39 351 912 7047 — risposta in 10 minuti.')}
               </p>
             </div>
 
             <p className="font-sans text-champagne/80 text-[10px] tracking-[0.3em] uppercase mb-5 accent-line-gold">
-              {lang === 'it' ? 'La Guida Definitiva' : 'The Definitive Guide'}
+              {tr(locale, 'The Definitive Guide', 'La Guida Definitiva')}
             </p>
             <h2 className="font-serif text-5xl md:text-6xl font-medium text-ivory tracking-tight leading-tight mb-6">
-              {lang === 'it' ? 'Il Cuore Pulsante di Milano' : 'The Beating Heart of Milan'}
+              {tr(locale, 'The Beating Heart of Milan', 'Il Cuore Pulsante di Milano')}
             </h2>
             <p className="text-corpo text-lg leading-relaxed font-light mb-10
               first-letter:font-serif first-letter:text-6xl first-letter:font-medium first-letter:text-champagne first-letter:float-left first-letter:mr-3 first-letter:leading-[0.8] first-letter:mt-1">
-              {lang === 'it'
-                ? 'Milano non è solo la capitale della moda, ma anche il centro nevralgico del divertimento italiano. Dai lussuosi club di Corso Como ai bar underground dei Navigli, la nostra guida ti porta alla scoperta dei luoghi più esclusivi.'
-                : 'Milan is not just the fashion capital, but also the nerve center of Italian entertainment. From the luxurious clubs of Corso Como to the underground bars of the Navigli, our guide takes you to discover the most exclusive places.'}
+              {tr(locale, 'Milan is not just the fashion capital, but also the nerve center of Italian entertainment. From the luxurious clubs of Corso Como to the underground bars of the Navigli, our guide takes you to discover the most exclusive places.', 'Milano non è solo la capitale della moda, ma anche il centro nevralgico del divertimento italiano. Dai lussuosi club di Corso Como ai bar underground dei Navigli, la nostra guida ti porta alla scoperta dei luoghi più esclusivi.')}
             </p>
           </div>
         </section>
@@ -572,21 +556,21 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         <section className="py-24 px-4 sm:px-6 lg:px-8 w-full bg-depth border-t border-white/5">
           <div className="max-w-7xl mx-auto">
             <p className="font-sans text-champagne/80 text-[10px] tracking-[0.3em] uppercase mb-5 accent-line-gold">
-              {lang === 'it' ? 'Naviga' : 'Discover'}
+              {tr(locale, 'Discover', 'Naviga')}
             </p>
             <h2 className="font-serif text-4xl md:text-5xl font-medium text-ivory tracking-tight mb-10">
-              {lang === 'it' ? 'Esplora per Categoria' : 'Explore by Category'}
+              {tr(locale, 'Explore by Category', 'Esplora per Categoria')}
             </h2>
             <div className="flex flex-wrap gap-3">
               {[
-                { label: lang === 'it' ? 'Club Techno' : 'Techno Clubs', href: `${lp}/zones` },
-                { label: lang === 'it' ? 'VIP Table' : 'VIP Tables', href: `${lp}/vip-tables` },
-                { label: lang === 'it' ? 'Aperitivo Milano' : 'Aperitivo Milan', href: `${lp}/aperitivo` },
-                { label: lang === 'it' ? 'Zona Navigli' : 'Navigli Zone', href: `${lp}/zones/navigli` },
-                { label: lang === 'it' ? 'Zona Corso Como' : 'Corso Como Zone', href: `${lp}/zones/corso-como` },
-                { label: lang === 'it' ? 'Guida ai Club' : 'Club Guide', href: `${lp}/guides` },
-                { label: lang === 'it' ? 'Concierge' : 'Concierge Service', href: `${lp}/concierge` },
-                { label: lang === 'it' ? 'Fashion Week Milano' : 'Fashion Week Milan', href: `${lp}/clubs` },
+                { label: tr(locale, 'Techno Clubs', 'Club Techno'), href: `${lp}/zones` },
+                { label: tr(locale, 'VIP Tables', 'VIP Table'), href: `${lp}/vip-tables` },
+                { label: tr(locale, 'Aperitivo Milan', 'Aperitivo Milano'), href: `${lp}/aperitivo` },
+                { label: tr(locale, 'Navigli Zone', 'Zona Navigli'), href: `${lp}/zones/navigli` },
+                { label: tr(locale, 'Corso Como Zone', 'Zona Corso Como'), href: `${lp}/zones/corso-como` },
+                { label: tr(locale, 'Club Guide', 'Guida ai Club'), href: `${lp}/guides` },
+                { label: tr(locale, 'Concierge Service', 'Concierge'), href: `${lp}/concierge` },
+                { label: tr(locale, 'Fashion Week Milan', 'Fashion Week Milano'), href: `${lp}/clubs` },
               ].map((tag) => (
                 <Link
                   key={tag.label}
