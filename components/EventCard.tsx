@@ -1,6 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Event, Venue } from '@/lib/types';
+import { getLocalizedText } from '@/lib/seo';
+import { localePrefix } from '@/lib/i18n/locales';
+import { tr } from '@/lib/i18n/t';
 import FavoriteButton from './FavoriteButton';
 
 interface EventCardProps {
@@ -12,19 +15,21 @@ interface EventCardProps {
 }
 
 export default function EventCard({ event, venue, lang, priority = false, isTonight = false }: EventCardProps) {
-  const typedLang = (lang === 'it' ? 'it' : 'en') as 'en' | 'it';
-  const langPrefix = typedLang === 'it' ? '/it' : '';
-
-  const slug = event.localizedContent.slug[typedLang] || event.localizedContent.slug.en;
-  const title = event.localizedContent.title[typedLang] || event.localizedContent.title.en;
-  const venueName = venue.localizedContent.name[typedLang] || venue.localizedContent.name.en;
-  const altText = venue.localizedContent.altTextImg?.[typedLang] || title;
+  // Locale-aware su TUTTE le lingue (prima era forzato a solo en/it → gli eventi
+  // apparivano in inglese su /es, /fr, /de, ecc.). getLocalizedText ritorna il
+  // testo nella lingua selezionata con fallback automatico a 'en'.
+  const lp = localePrefix(lang);
+  const slug = getLocalizedText(event.localizedContent.slug, lang);
+  const title = getLocalizedText(event.localizedContent.title, lang);
+  const venueName = getLocalizedText(venue.localizedContent.name, lang);
+  const altText =
+    (venue.localizedContent.altTextImg && getLocalizedText(venue.localizedContent.altTextImg, lang)) || title;
 
   const dateObj = new Date(event.dateISO);
-  const timeStr = new Intl.DateTimeFormat(typedLang === 'it' ? 'it-IT' : 'en-US', {
+  const timeStr = new Intl.DateTimeFormat(lang, {
     hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Rome',
   }).format(dateObj);
-  const dateStr = new Intl.DateTimeFormat(typedLang === 'it' ? 'it-IT' : 'en-US', {
+  const dateStr = new Intl.DateTimeFormat(lang, {
     weekday: 'short', day: 'numeric', month: 'short', timeZone: 'Europe/Rome',
   }).format(dateObj);
 
@@ -36,12 +41,13 @@ export default function EventCard({ event, venue, lang, priority = false, isToni
   const formattedPrice = event.pricing.entry === null
     ? null
     : isFree
-      ? (typedLang === 'it' ? 'GRATUITO' : 'FREE')
-      : new Intl.NumberFormat(typedLang === 'it' ? 'it-IT' : 'en-US', {
+      ? tr(lang, 'FREE', 'GRATUITO')
+      : new Intl.NumberFormat(lang, {
           style: 'currency', currency: event.pricing.currency, maximumFractionDigits: 0,
         }).format(event.pricing.entry);
 
   const genre = event.genre[0]?.replace(/_/g, ' ') ?? '';
+  const href = `${lp}/events/${slug}`;
 
   return (
     <article className="group relative overflow-hidden rounded-lg cursor-pointer aspect-[3/4] img-maison
@@ -51,7 +57,7 @@ export default function EventCard({ event, venue, lang, priority = false, isToni
       hover:shadow-[0_0_0_1px_rgba(201,168,106,0.2),0_16px_48px_rgba(201,168,106,0.08)]">
 
       {/* Full-card link */}
-      <Link href={`${langPrefix}/events/${slug}`} className="absolute inset-0 z-20" aria-label={title}>
+      <Link href={href} className="absolute inset-0 z-20" aria-label={title}>
         <span className="sr-only">{title}</span>
       </Link>
 
@@ -103,7 +109,7 @@ export default function EventCard({ event, venue, lang, priority = false, isToni
       {/* Favorite */}
       <div className="absolute top-4 right-4 z-20">
         <FavoriteButton
-          item={{ id: event.id, type: 'event', title, image: event.image || venue.image || '', subtitle: dateStr, url: `${langPrefix}/events/${slug}` }}
+          item={{ id: event.id, type: 'event', title, image: event.image || venue.image || '', subtitle: dateStr, url: href }}
         />
       </div>
 
@@ -114,7 +120,7 @@ export default function EventCard({ event, venue, lang, priority = false, isToni
         {isTonight && (
           <span className="flex items-center gap-1.5 text-[10px] font-sans font-semibold tracking-[0.2em] uppercase text-campari-hi mb-1.5">
             <span className="live-dot inline-block w-1.5 h-1.5 rounded-full bg-campari" aria-hidden="true" />
-            {typedLang === 'it' ? 'Stasera' : 'Tonight'}
+            {tr(lang, 'Tonight', 'Stasera')}
           </span>
         )}
 
@@ -142,20 +148,21 @@ export default function EventCard({ event, venue, lang, priority = false, isToni
         {event.isTrending && (
           <div className="flex items-center gap-2 mb-3">
             <span className="font-sans text-champagne text-[10px] font-bold tracking-[0.2em] uppercase">
-              {typedLang === 'it' ? 'Di Tendenza' : 'Trending'}
+              {tr(lang, 'Trending', 'Di Tendenza')}
             </span>
           </div>
         )}
 
-        {/* CTA — always visible on mobile, reveal on hover desktop */}
+        {/* CTA — always visible on mobile, reveal on hover desktop.
+            Va alla pagina evento (NON più a #booking, che apriva a metà pagina). */}
         <div className="overflow-hidden max-h-12 lg:max-h-0 lg:opacity-0 lg:translate-y-1 lg:group-hover:max-h-[60px] lg:group-hover:opacity-100 lg:group-hover:translate-y-0 transition-all duration-400 ease-out">
           <Link
-            href={`${langPrefix}/events/${slug}#booking`}
+            href={href}
             className="block w-full text-center bg-champagne text-black
               font-sans font-semibold text-xs py-3 tracking-[0.15em] uppercase
               hover:bg-white active:scale-[0.98] transition-all duration-300 relative z-30 cursor-pointer rounded-lg"
           >
-            {typedLang === 'it' ? 'Prenota Ora' : 'Book Now'}
+            {tr(lang, 'Book Now', 'Prenota Ora')}
           </Link>
         </div>
       </div>

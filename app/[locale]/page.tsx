@@ -11,6 +11,7 @@ import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset, romeSundayKey } fro
 import { Venue, Event } from '@/lib/types';
 import { CONTACT } from '@/config/contact';
 import { tr } from '@/lib/i18n/t';
+import { localePrefix } from '@/lib/i18n/locales';
 
 const EventsCarousel = nextDynamic(() => import('@/components/EventsCarousel'));
 
@@ -138,7 +139,10 @@ const NIGHT_STEPS = [
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const lang = (locale === 'it' ? 'it' : 'en') as 'en' | 'it';
+  // Locale REALE ovunque (prima era coerciato a en/it → su /es, /fr, ecc. eventi,
+  // card e link interni finivano in inglese). Il prefisso URL e i contenuti
+  // localizzati usano il locale selezionato.
+  const lp = localePrefix(locale);
 
   const schema = {
     '@context': 'https://schema.org',
@@ -147,7 +151,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     image: 'https://nightlifemilan.com/images/milan-nightclub-luxury-vip-champagne.webp',
     description: tr(locale, "The ultimate guide to Milan's nightlife.", 'La guida definitiva alla vita notturna milanese.'),
     address: { '@type': 'PostalAddress', addressLocality: 'Milan', addressCountry: 'IT' },
-    url: lang === 'it' ? 'https://nightlifemilan.com/it' : 'https://nightlifemilan.com',
+    url: `https://nightlifemilan.com${lp}`,
   };
 
   // Sorgente unificata (statici + Eventbrite/Xceed + serate ricorrenti
@@ -193,7 +197,6 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   // Keep allEvents for any legacy usage
   const allEvents = [...tonightEvents, ...weekEvents];
 
-  const lp = lang === 'it' ? '/it' : '';
   const waMsg = encodeURIComponent(
     tr(locale, "Hi! I'd like to book a VIP table in Milan. Can you help me?", 'Ciao! Vorrei prenotare un tavolo VIP a Milano. Puoi aiutarmi?')
   );
@@ -206,10 +209,10 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         <NightLine />
 
         {/* ── 1. Hero ───────────────────────────────────────────────────── */}
-        <Hero locale={lang} />
+        <Hero locale={locale} />
 
         {/* ── 2. Intent cards ──────────────────────────────────────────── */}
-        <IntentCards locale={lang} />
+        <IntentCards locale={locale === 'it' ? 'it' : 'en'} />
 
         {/* ── 3. How the night works (context before events) ───────────── */}
         <section className="py-24 sm:py-28 px-4 sm:px-6 lg:px-8 w-full border-t border-white/5 bg-surface-1">
@@ -364,7 +367,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 
           {tonightEvents.length > 0 ? (
             <Suspense fallback={<div className="h-[380px]" />}>
-              <EventsCarousel items={tonightEvents} lang={lang} showTonightTag />
+              <EventsCarousel items={tonightEvents} lang={locale} showTonightTag />
             </Suspense>
           ) : (
             <div className="px-4 sm:px-6 lg:px-8 pb-8">
@@ -431,7 +434,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 
           {weekEvents.length > 0 ? (
             <Suspense fallback={<div className="h-[380px]" />}>
-              <EventsCarousel items={weekEvents} lang={lang} />
+              <EventsCarousel items={weekEvents} lang={locale} />
             </Suspense>
           ) : (
             <div className="px-4 sm:px-6 lg:px-8 pb-8">

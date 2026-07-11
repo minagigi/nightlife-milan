@@ -349,18 +349,19 @@ export default async function TonightPage({ params }: Props) {
 
 function EventCard({ item, locale }: { item: { event: Event; venue: Venue }, locale: string }) {
   const { event, venue } = item;
-  const lang = (locale === 'it' ? 'it' : 'en') as 'en' | 'it';
-
   const eventDate = new Date(event.dateISO);
   const diffHours = (eventDate.getTime() - Date.now()) / (1000 * 60 * 60);
   const isLive = diffHours > 0 && diffHours <= 2;
 
-  const timeStr = new Intl.DateTimeFormat(lang === 'it' ? 'it-IT' : 'en-US', {
+  const timeStr = new Intl.DateTimeFormat(locale, {
     hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Rome',
   }).format(eventDate);
 
-  const title = event.localizedContent.title[lang] || event.localizedContent.title.en;
-  const venueName = venue.localizedContent.name[lang] || venue.localizedContent.name.en;
+  // locale-aware su tutte le lingue (prima forzato a en/it → eventi in inglese su /es, ecc.)
+  const tLoc = event.localizedContent.title as Record<string, string | undefined>;
+  const vLoc = venue.localizedContent.name as Record<string, string | undefined>;
+  const title = tLoc[locale] || tLoc.en || '';
+  const venueName = vLoc[locale] || vLoc.en || '';
   const category = event.genre[0]?.replace(/_/g, ' ') ?? '';
 
   return (
