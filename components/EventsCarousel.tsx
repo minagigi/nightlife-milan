@@ -58,7 +58,12 @@ function CarouselInner({ items, lang, showTonightTag }: EventsCarouselProps) {
         ref={scrollRef}
         className="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4
           [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        style={{ paddingLeft: 'var(--carousel-pl)', paddingRight: 'var(--carousel-pl)' }}
+        style={{
+          paddingLeft: 'var(--carousel-pl)', paddingRight: 'var(--carousel-pl)',
+          // scroll-padding = padding: senza, snap-mandatory aggancia il primo card
+          // al bordo del contenitore ignorando il padding (lo trascina a filo).
+          scrollPaddingLeft: 'var(--carousel-pl)', scrollPaddingRight: 'var(--carousel-pl)',
+        }}
       >
         {filtered.map(({ event, venue }, i) => (
           <div
