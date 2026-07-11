@@ -17,17 +17,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // un problema con Eventbrite (token assente, rate limit, errore rete):
   // in caso di errore si degrada silenziosamente alla sola sitemap statica
   // (mockEvents + weeklyEvents), come già fanno homepage/calendar.
+  // includePast=true (2026-07-11, richiesta SEO): le pagine degli eventi PASSATI
+  // non devono mai sparire dall'indice — restano accessibili e indicizzate,
+  // solo fuori dai menu/liste attive (vedi /events/past). Quindi la sitemap
+  // include anche i passati.
   let liveEvents: Event[] = [];
   try {
-    liveEvents = await fetchEventbriteEvents();
+    liveEvents = await fetchEventbriteEvents(true);
   } catch {
     liveEvents = [];
   }
 
-  // "Ieri" nel fuso di Roma: i mockEvents con data più vecchia restano fuori
-  // dalla sitemap (eventi passati non hanno valore SEO e sporcano l'indice).
-  const yesterdayKey = romeDayKeyOffset(-1);
-  const upcomingMockEvents = mockEvents.filter((event) => romeDayKey(event.dateISO) >= yesterdayKey);
+  // Tutti i mockEvents (anche passati) restano in sitemap per la SEO.
+  const upcomingMockEvents = mockEvents;
 
   const sitemapEntries: MetadataRoute.Sitemap = [];
 
@@ -44,6 +46,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: '/calendar/this-week', priority: 0.7, changeFrequency: 'daily' as const },
     { path: '/aperitivo', priority: 0.85, changeFrequency: 'weekly' as const },
     { path: '/events', priority: 0.85, changeFrequency: 'daily' as const },
+    { path: '/events/past', priority: 0.6, changeFrequency: 'daily' as const },
     { path: '/events/special', priority: 0.80, changeFrequency: 'monthly' as const },
     { path: '/faq', priority: 0.75, changeFrequency: 'monthly' as const },
     { path: '/bottle-prices', priority: 0.80, changeFrequency: 'monthly' as const },

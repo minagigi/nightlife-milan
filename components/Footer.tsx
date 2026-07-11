@@ -101,6 +101,11 @@ export default function Footer({ lang }: FooterProps) {
                 {t.concierge}
               </Link>
             </li>
+            <li>
+              <Link href={`${lp}/events/past`} className="text-white/60 hover:text-champagne transition-colors text-sm">
+                {isIt ? 'Eventi passati' : 'Past events'}
+              </Link>
+            </li>
           </ul>
         </div>
 

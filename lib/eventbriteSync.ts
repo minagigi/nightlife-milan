@@ -258,7 +258,14 @@ function shortDescFromText(text: string | undefined, fallback: string): string {
 const FETCH_RETRIES = 3;
 const FETCH_RETRY_DELAY_MS = 700;
 
-export async function fetchEventbriteEvents(): Promise<Event[]> {
+/**
+ * @param includePast  Se true NON applica time_filter=current_future → include
+ *   anche gli eventi PASSATI. Serve alla risoluzione delle pagine evento
+ *   (getEbEventBySlug) e alla sezione "Eventi passati": per SEO le pagine dei
+ *   passati NON devono mai sparire/404. Le liste attive (home, tonight,
+ *   this-week) usano il default (solo futuri).
+ */
+export async function fetchEventbriteEvents(includePast = false): Promise<Event[]> {
   const token = getEventbriteToken();
   if (!token) return [];
 
@@ -277,7 +284,8 @@ export async function fetchEventbriteEvents(): Promise<Event[]> {
       let pages = 0;
       do {
         const url =
-          `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=live&expand=venue,logo,ticket_classes&order_by=start_asc&time_filter=current_future&page_size=200` +
+          `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=live&expand=venue,logo,ticket_classes&order_by=start_asc&page_size=200` +
+          (includePast ? '' : '&time_filter=current_future') +
           (continuation ? `&continuation=${continuation}` : '');
         const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` }, next: { revalidate: 300 } });
         if (!res.ok) throw new Error(`Eventbrite list HTTP ${res.status}`);

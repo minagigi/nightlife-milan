@@ -1,0 +1,101 @@
+import { Metadata } from 'next';
+import Link from 'next/link';
+import EventCard from '@/components/EventCard';
+import { fetchEventbriteEvents } from '@/lib/eventbriteSync';
+import { getVenueById, mockEvents } from '@/lib/data';
+import { romeDayKey, romeDayKeyOffset } from '@/lib/calendarEvents';
+import { hreflangAlternates, localePrefix, getLocaleDef, DEFAULT_LOCALE } from '@/lib/i18n/locales';
+import { tr } from '@/lib/i18n/t';
+import type { Event, Venue } from '@/lib/types';
+
+// force-dynamic: la lista dipende dalla data corrente (evento "passato" = data <
+// oggi nel fuso di Roma) e da Eventbrite live+past.
+export const dynamic = 'force-dynamic';
+export const maxDuration = 60;
+
+type Props = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
+  const def = getLocaleDef(locale) || getLocaleDef(DEFAULT_LOCALE)!;
+  const canonical = `${baseUrl}${localePrefix(locale)}/events/past`;
+  const title = tr(locale, 'Past Events in Milan | Nightlife Milan Archive', 'Eventi Passati a Milano | Archivio Nightlife Milan');
+  const description = tr(
+    locale,
+    'Browse past nightlife events in Milan — clubs, aperitivo and special nights. Full line-ups, programmes and FAQ preserved for every past night.',
+    'Sfoglia gli eventi passati della nightlife milanese — club, aperitivo e serate speciali. Line-up, programmi e FAQ di ogni serata restano consultabili.'
+  );
+  return {
+    title,
+    description,
+    alternates: { canonical, languages: hreflangAlternates(baseUrl, '/events/past') },
+    robots: { index: true, follow: true },
+    openGraph: {
+      title, description, url: canonical, type: 'website', siteName: 'Nightlife Milan',
+      locale: def.ogLocale,
+      images: [{ url: `${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`, width: 1200, height: 630 }],
+    },
+  };
+}
+
+export default async function PastEventsPage({ params }: Props) {
+  const { locale } = await params;
+  const lp = localePrefix(locale);
+  const todayKey = romeDayKeyOffset(0);
+
+  let live: Event[] = [];
+  try {
+    // includePast=true: include anche gli eventi già passati (per SEO non spariscono).
+    live = await fetchEventbriteEvents(true);
+  } catch {
+    live = [];
+  }
+
+  // Unione con i mockEvents (eventi one-off statici) senza duplicare.
+  const all: Event[] = [...live, ...mockEvents.filter((m) => !live.some((l) => l.id === m.id))];
+
+  // "Passato" = data < oggi (fuso Roma) → parte dagli eventi di IERI a ritroso,
+  // ordine dal più recente al più vecchio.
+  const past = all
+    .filter((e) => romeDayKey(e.dateISO) < todayKey)
+    .sort((a, b) => (a.dateISO < b.dateISO ? 1 : -1));
+
+  const items = past
+    .map((event) => ({ event, venue: getVenueById(event.venueId) }))
+    .filter((x): x is { event: Event; venue: Venue } => !!x.venue);
+
+  const heading = tr(locale, 'Past Events', 'Eventi Passati');
+  const sub = tr(
+    locale,
+    'The archive of Milan nights. Every past event stays online — full programme and FAQ preserved.',
+    "L'archivio delle serate milanesi. Ogni evento passato resta online — programma e FAQ consultabili."
+  );
+  const emptyMsg = tr(locale, 'No past events yet.', 'Ancora nessun evento passato.');
+
+  return (
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
+      <div className="mb-10">
+        <p className="text-champagne text-xs tracking-[0.3em] uppercase mb-3">{tr(locale, 'Archive', 'Archivio')}</p>
+        <h1 className="text-4xl md:text-5xl font-serif font-bold text-white mb-4">{heading}</h1>
+        <p className="text-white/60 max-w-2xl leading-relaxed">{sub}</p>
+      </div>
+
+      {items.length === 0 ? (
+        <p className="text-white/50">{emptyMsg}</p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {items.map(({ event, venue }) => (
+            <EventCard key={event.id} event={event} venue={venue} lang={locale} />
+          ))}
+        </div>
+      )}
+
+      <div className="mt-14 pt-8 border-t border-white/10">
+        <Link href={`${lp}/events`} className="text-champagne hover:text-white transition-colors text-sm tracking-wide">
+          ← {tr(locale, 'Upcoming events', 'Eventi in programma')}
+        </Link>
+      </div>
+    </main>
+  );
+}

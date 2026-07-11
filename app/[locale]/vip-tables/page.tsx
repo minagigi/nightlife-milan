@@ -5,6 +5,7 @@ import { ArrowRight, MessageCircle, Star, Users, Clock, Shield } from 'lucide-re
 import { CONTACT } from '@/config/contact';
 import { venuesData } from '@/lib/venuesData';
 import { MilanZone } from '@/lib/types';
+import { tr } from '@/lib/i18n/t';
 
 export const revalidate = 3600;
 
@@ -15,19 +16,16 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const isIt = locale === 'it';
   const canonicalUrl = `${baseUrlGlobal}${isIt ? '/it' : ''}/vip-tables`;
 
-  const title = isIt
-    ? 'Prenotazione Tavoli VIP Milano | Bottle Service & Tavoli | Nightlife Milan'
-    : 'VIP Table Booking Milan | Bottle Service & Table Reservations | Nightlife Milan';
-  const description = isIt
-    ? 'Prenota tavoli VIP nei migliori club di Milano. Ingresso garantito, bottle service premium e concierge personale. Risposta WhatsApp in meno di 10 minuti.'
-    : 'Book VIP tables at the best clubs in Milan. Guaranteed entry, premium bottle service, and personal concierge. WhatsApp response in under 10 minutes.';
+  const title = tr(locale, 'VIP Table Booking Milan | Bottle Service & Table Reservations | Nightlife Milan', 'Prenotazione Tavoli VIP Milano | Bottle Service & Tavoli | Nightlife Milan');
+  const description = tr(locale, 'Book VIP tables at the best clubs in Milan. Guaranteed entry, premium bottle service, and personal concierge. WhatsApp response in under 10 minutes.', 'Prenota tavoli VIP nei migliori club di Milano. Ingresso garantito, bottle service premium e concierge personale. Risposta WhatsApp in meno di 10 minuti.');
+
+  const keywordsEn = ['vip table milan', 'bottle service milan', 'table booking milan', 'vip nightclub milan', 'exclusive table milan'];
+  const keywordsIt = ['tavoli vip milano', 'bottle service milano', 'prenotazione tavolo milano', 'vip nightclub milano', 'tavolo esclusivo milano'];
 
   return {
     title,
     description,
-    keywords: isIt
-      ? ['tavoli vip milano', 'bottle service milano', 'prenotazione tavolo milano', 'vip nightclub milano', 'tavolo esclusivo milano']
-      : ['vip table milan', 'bottle service milan', 'table booking milan', 'vip nightclub milan', 'exclusive table milan'],
+    keywords: keywordsEn.map((k, i) => tr(locale, k, keywordsIt[i])),
     robots: { index: true, follow: true },
     alternates: {
       canonical: canonicalUrl,
@@ -38,9 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       },
     },
     openGraph: {
-      title: isIt
-        ? 'Prenotazione Tavoli VIP Milano — Nightlife Milan Concierge'
-        : 'VIP Table Booking Milan — Nightlife Milan Concierge',
+      title: tr(locale, 'VIP Table Booking Milan — Nightlife Milan Concierge', 'Prenotazione Tavoli VIP Milano — Nightlife Milan Concierge'),
       description,
       type: 'website',
       url: canonicalUrl,
@@ -50,7 +46,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
         url: `${baseUrlGlobal}/images/vip-table-milan-nightclub-just-me.webp`,
         width: 1200,
         height: 630,
-        alt: isIt ? 'Tavoli VIP Milano — Just Me Club' : 'VIP Tables Milan — Just Me Club',
+        alt: tr(locale, 'VIP Tables Milan — Just Me Club', 'Tavoli VIP Milano — Just Me Club'),
       }],
     },
     twitter: {
@@ -191,6 +187,39 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
     ],
   };
 
+  const faqs = [
+    {
+      q: 'How much does a VIP table cost in Milan?',
+      a: 'VIP tables in Milan typically start at €200–€500 minimum spend per table, depending on the venue and night. This amount goes toward drinks and bottle service. Our concierge will find the best option for your group and budget.',
+      qIt: 'Quanto costa un tavolo VIP a Milano?',
+      aIt: 'I tavoli VIP a Milano partono in genere da €200–€500 di consumazione minima a tavolo, a seconda del locale e della serata. L\'importo viene speso in drink e bottle service. Il nostro concierge troverà l\'opzione migliore per il tuo gruppo e budget.',
+    },
+    {
+      q: "What's included in bottle service?",
+      a: 'Bottle service includes 1 or more bottles of premium spirits (vodka, champagne, etc.), mixers, ice, and dedicated table service. Some venues include entry in the minimum spend; others charge separately.',
+      qIt: 'Cosa è incluso nel bottle service?',
+      aIt: 'Il bottle service include una o più bottiglie di alcolici premium (vodka, champagne, ecc.), mixer, ghiaccio e servizio al tavolo dedicato. Alcuni locali includono l\'ingresso nella consumazione minima; altri lo fanno pagare a parte.',
+    },
+    {
+      q: 'Do we need to book in advance?',
+      a: 'For weekends and special events, we recommend booking at least 48 hours in advance. For Fashion Week, Salone del Mobile, or New Year\'s Eve — book as early as possible. Same-day bookings are possible on weekdays.',
+      qIt: 'Bisogna prenotare in anticipo?',
+      aIt: 'Per weekend ed eventi speciali consigliamo di prenotare almeno 48 ore prima. Per Fashion Week, Salone del Mobile o Capodanno — prenota il prima possibile. Nei giorni infrasettimanali sono possibili prenotazioni anche in giornata.',
+    },
+    {
+      q: 'Is there a service fee?',
+      a: 'Our concierge service is free for you. We earn a commission directly from the venue. You pay only the minimum spend agreed with the club.',
+      qIt: 'C\'è un costo per il servizio?',
+      aIt: 'Il nostro servizio concierge è gratuito per te. La nostra commissione viene pagata direttamente dal locale. Tu paghi solo la consumazione minima concordata con il club.',
+    },
+    {
+      q: 'What should we wear?',
+      a: 'Milan clubs enforce strict dress codes. Smart-elegant is the minimum — no sneakers, no shorts, no sportswear. For top venues like Just Me, fashion-forward is expected. We\'ll send you the specific dress code when you book.',
+      qIt: 'Come dobbiamo vestirci?',
+      aIt: 'I club milanesi applicano un dress code rigoroso. Smart-elegant è il minimo richiesto — niente sneakers, pantaloncini o abbigliamento sportivo. Nei locali top come Just Me è richiesto un look fashion-forward. Ti invieremo il dress code specifico al momento della prenotazione.',
+    },
+  ];
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
@@ -204,26 +233,28 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
 
         <div className="relative max-w-4xl mx-auto text-center">
           <p className="font-sans text-champagne/60 text-[10px] tracking-[0.4em] uppercase mb-6">
-            MILAN NIGHTLIFE CONCIERGE
+            {tr(locale, 'MILAN NIGHTLIFE CONCIERGE')}
           </p>
           <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-none mb-6"
             style={{ textShadow: '0 0 80px rgba(201,168,106,0.2)' }}>
-            VIP Tables<br />
-            <span className="text-champagne">in Milan</span>
+            {tr(locale, 'VIP Tables')}<br />
+            <span className="text-champagne">{tr(locale, 'in Milan')}</span>
           </h1>
           <p className="font-sans text-white/50 text-lg leading-relaxed max-w-2xl mx-auto mb-8">
-            Skip the queue. Get the best seat in the house. We book VIP tables at Milan&apos;s
-            most exclusive clubs — with guaranteed entry, bottle service, and personal concierge.
+            {tr(locale, "Skip the queue. Get the best seat in the house. We book VIP tables at Milan's most exclusive clubs — with guaranteed entry, bottle service, and personal concierge.", 'Salta la fila. Prendi il posto migliore della casa. Prenotiamo tavoli VIP nei club più esclusivi di Milano — con ingresso garantito, bottle service e concierge personale.')}
           </p>
 
           {/* Quick Answer — for AI search engines */}
           <div className="max-w-2xl mx-auto mb-10 p-5 rounded-xl border border-champagne/20 bg-champagne/[0.04] text-left">
-            <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">Quick Answer</p>
-            <p className="font-sans text-white/70 text-sm leading-relaxed">
-              VIP tables in Milan start at <strong className="text-white">€200 minimum spend</strong> (Play Club) up to <strong className="text-white">€500+</strong> (Just Me).
-              Book via <strong className="text-white">WhatsApp +39 351 912 7047</strong> — reply guaranteed in 10 minutes. Free service, no booking fee.
-              Venues: Just Me (Sempione), Pineta (Corso Como), Voya Rooftop (Isola), Play Club (Corso Como), Magazzini Generali (Navigli).
-            </p>
+            <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">{tr(locale, 'Quick Answer')}</p>
+            <p
+              className="font-sans text-white/70 text-sm leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: tr(
+                locale,
+                'VIP tables in Milan start at <strong class="text-white">€200 minimum spend</strong> (Play Club) up to <strong class="text-white">€500+</strong> (Just Me). Book via <strong class="text-white">WhatsApp +39 351 912 7047</strong> — reply guaranteed in 10 minutes. Free service, no booking fee. Venues: Just Me (Sempione), Pineta (Corso Como), Voya Rooftop (Isola), Play Club (Corso Como), Magazzini Generali (Navigli).',
+                'I tavoli VIP a Milano partono da <strong class="text-white">€200 di consumazione minima</strong> (Play Club) fino a <strong class="text-white">€500+</strong> (Just Me). Prenota via <strong class="text-white">WhatsApp +39 351 912 7047</strong> — risposta garantita in 10 minuti. Servizio gratuito, nessuna commissione. Locali: Just Me (Sempione), Pineta (Corso Como), Voya Rooftop (Isola), Play Club (Corso Como), Magazzini Generali (Navigli).'
+              ) }}
+            />
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -236,11 +267,11 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
                 hover:bg-white transition-colors duration-300"
             >
               <MessageCircle className="w-4 h-4" />
-              Book via WhatsApp
+              {tr(locale, 'Book via WhatsApp', 'Prenota su WhatsApp')}
             </a>
             <div className="flex items-center gap-2 text-white/40 text-sm font-sans">
               <Clock className="w-4 h-4" />
-              Reply in under 10 minutes
+              {tr(locale, 'Reply in under 10 minutes', 'Risposta in meno di 10 minuti')}
             </div>
           </div>
         </div>
@@ -249,9 +280,9 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
       {/* How it works */}
       <section className="px-6 pb-20">
         <div className="max-w-5xl mx-auto">
-          <h2 className="font-serif text-4xl text-white mb-3 text-center">How to Book a VIP Table in Milan</h2>
+          <h2 className="font-serif text-4xl text-white mb-3 text-center">{tr(locale, 'How to Book a VIP Table in Milan', 'Come Prenotare un Tavolo VIP a Milano')}</h2>
           <p className="font-sans text-champagne/50 text-[10px] tracking-[0.4em] uppercase text-center mb-12">
-            3 STEPS · FREE SERVICE · 10-MINUTE REPLY
+            {tr(locale, '3 STEPS · FREE SERVICE · 10-MINUTE REPLY', '3 PASSI · SERVIZIO GRATUITO · RISPOSTA IN 10 MINUTI')}
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {steps.map((step, i) => (
@@ -262,8 +293,8 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
                   </div>
                   <span className="font-sans text-champagne/30 text-3xl font-bold">0{i + 1}</span>
                 </div>
-                <h3 className="font-serif text-xl text-white mb-2">{step.title}</h3>
-                <p className="font-sans text-white/50 text-sm leading-relaxed">{step.desc}</p>
+                <h3 className="font-serif text-xl text-white mb-2">{tr(locale, step.title)}</h3>
+                <p className="font-sans text-white/50 text-sm leading-relaxed">{tr(locale, step.desc)}</p>
               </div>
             ))}
           </div>
@@ -274,10 +305,10 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
       <section className="px-6 pb-24">
         <div className="max-w-6xl mx-auto">
           <p className="font-sans text-champagne/50 text-[10px] tracking-[0.4em] uppercase mb-3">
-            AVAILABLE VENUES
+            {tr(locale, 'AVAILABLE VENUES', 'LOCALI DISPONIBILI')}
           </p>
           <h2 className="font-serif text-4xl text-white mb-12">
-            Choose Your Club
+            {tr(locale, 'Choose Your Club', 'Scegli il Tuo Club')}
           </h2>
 
           <div className="space-y-5">
@@ -320,40 +351,40 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
                             </h3>
                             {venue.isHot && (
                               <span className="font-sans text-[9px] font-bold tracking-[0.2em] uppercase px-2 py-1 rounded-full bg-champagne text-black">
-                                Most Popular
+                                {tr(locale, 'Most Popular', 'Il Più Richiesto')}
                               </span>
                             )}
                           </div>
                           <p className="font-sans text-champagne/60 text-xs tracking-[0.2em] uppercase">
-                            {venue.zone} · {venue.vibe}
+                            {venue.zone} · {tr(locale, venue.vibe)}
                           </p>
                         </div>
                         <div className="text-right flex-shrink-0">
-                          <p className="font-sans text-white/30 text-[10px] uppercase tracking-widest mb-1">Min. Spend</p>
+                          <p className="font-sans text-white/30 text-[10px] uppercase tracking-widest mb-1">{tr(locale, 'Min. Spend', 'Consumo Min.')}</p>
                           <p className="font-serif text-3xl text-champagne font-bold">€{venue.minSpend}</p>
-                          <p className="font-sans text-white/30 text-[10px]">tables from €{venue.tableStart}</p>
+                          <p className="font-sans text-white/30 text-[10px]">{tr(locale, `tables from €${venue.tableStart}`, `tavoli da €${venue.tableStart}`)}</p>
                         </div>
                       </div>
 
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5 text-sm">
                         <div>
-                          <p className="font-sans text-white/25 text-[10px] uppercase tracking-widest mb-1">Music</p>
-                          <p className="font-sans text-white/60 text-xs">{venue.music}</p>
+                          <p className="font-sans text-white/25 text-[10px] uppercase tracking-widest mb-1">{tr(locale, 'Music', 'Musica')}</p>
+                          <p className="font-sans text-white/60 text-xs">{tr(locale, venue.music)}</p>
                         </div>
                         <div>
-                          <p className="font-sans text-white/25 text-[10px] uppercase tracking-widest mb-1">Table Size</p>
+                          <p className="font-sans text-white/25 text-[10px] uppercase tracking-widest mb-1">{tr(locale, 'Table Size', 'Capienza Tavolo')}</p>
                           <p className="font-sans text-white/60 text-xs flex items-center gap-1.5">
                             <Users className="w-3 h-3" />{venue.capacity}
                           </p>
                         </div>
                         <div>
-                          <p className="font-sans text-white/25 text-[10px] uppercase tracking-widest mb-1">Best For</p>
-                          <p className="font-sans text-white/60 text-xs">{venue.bestFor}</p>
+                          <p className="font-sans text-white/25 text-[10px] uppercase tracking-widest mb-1">{tr(locale, 'Best For', 'Ideale Per')}</p>
+                          <p className="font-sans text-white/60 text-xs">{tr(locale, venue.bestFor)}</p>
                         </div>
                       </div>
 
                       <p className="font-sans text-white/40 text-xs italic border-l-2 border-champagne/30 pl-3 mb-6">
-                        &ldquo;{venue.insiderTip}&rdquo;
+                        &ldquo;{tr(locale, venue.insiderTip)}&rdquo;
                       </p>
 
                       <div className="flex flex-wrap gap-2 mb-6">
@@ -376,7 +407,7 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
                             hover:bg-white transition-colors duration-300"
                         >
                           <MessageCircle className="w-3.5 h-3.5" />
-                          Book This Table
+                          {tr(locale, 'Book This Table', 'Prenota Questo Tavolo')}
                         </a>
                         <Link
                           href={`${lp}/clubs/${venue.slug}`}
@@ -384,7 +415,7 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
                             font-sans text-xs tracking-[0.15em] uppercase
                             hover:border-champagne/40 hover:text-champagne transition-colors duration-300"
                         >
-                          View Club
+                          {tr(locale, 'View Club', 'Vedi il Club')}
                           <ArrowRight className="w-3.5 h-3.5" />
                         </Link>
                       </div>
@@ -401,34 +432,13 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
       <section className="px-6 pb-24 border-t border-white/5 pt-16">
         <div className="max-w-3xl mx-auto">
           <p className="font-sans text-champagne/50 text-[10px] tracking-[0.4em] uppercase mb-12 text-center">
-            FREQUENTLY ASKED QUESTIONS
+            {tr(locale, 'FREQUENTLY ASKED QUESTIONS', 'DOMANDE FREQUENTI')}
           </p>
           <div className="space-y-8">
-            {[
-              {
-                q: 'How much does a VIP table cost in Milan?',
-                a: 'VIP tables in Milan typically start at €200–€500 minimum spend per table, depending on the venue and night. This amount goes toward drinks and bottle service. Our concierge will find the best option for your group and budget.',
-              },
-              {
-                q: 'What\'s included in bottle service?',
-                a: 'Bottle service includes 1 or more bottles of premium spirits (vodka, champagne, etc.), mixers, ice, and dedicated table service. Some venues include entry in the minimum spend; others charge separately.',
-              },
-              {
-                q: 'Do we need to book in advance?',
-                a: 'For weekends and special events, we recommend booking at least 48 hours in advance. For Fashion Week, Salone del Mobile, or New Year\'s Eve — book as early as possible. Same-day bookings are possible on weekdays.',
-              },
-              {
-                q: 'Is there a service fee?',
-                a: 'Our concierge service is free for you. We earn a commission directly from the venue. You pay only the minimum spend agreed with the club.',
-              },
-              {
-                q: 'What should we wear?',
-                a: 'Milan clubs enforce strict dress codes. Smart-elegant is the minimum — no sneakers, no shorts, no sportswear. For top venues like Just Me, fashion-forward is expected. We\'ll send you the specific dress code when you book.',
-              },
-            ].map((item, i) => (
+            {faqs.map((item, i) => (
               <div key={i} className="border-b border-white/8 pb-8">
-                <h3 className="font-serif text-lg text-white mb-3">{item.q}</h3>
-                <p className="font-sans text-white/50 text-sm leading-relaxed">{item.a}</p>
+                <h3 className="font-serif text-lg text-white mb-3">{tr(locale, item.q, item.qIt)}</h3>
+                <p className="font-sans text-white/50 text-sm leading-relaxed">{tr(locale, item.a, item.aIt)}</p>
               </div>
             ))}
           </div>
@@ -441,13 +451,13 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
           <div className="relative p-10 rounded-xl border border-champagne/20 bg-champagne/[0.04] overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-champagne/8 via-transparent to-transparent pointer-events-none" />
             <p className="font-sans text-champagne/60 text-[10px] tracking-[0.4em] uppercase mb-4 relative">
-              READY TO GO?
+              {tr(locale, 'READY TO GO?', 'PRONTO A PARTIRE?')}
             </p>
             <h2 className="font-serif text-4xl text-white mb-4 relative">
-              Reserve Your Table Now
+              {tr(locale, 'Reserve Your Table Now', 'Prenota il Tuo Tavolo Ora')}
             </h2>
             <p className="font-sans text-white/40 text-sm mb-8 relative">
-              WhatsApp us with your date, group size, and budget. We&apos;ll handle everything.
+              {tr(locale, "WhatsApp us with your date, group size, and budget. We'll handle everything.", 'Scrivici su WhatsApp con data, numero di persone e budget. Ci pensiamo a tutto noi.')}
             </p>
             <a
               href={waLink}
@@ -461,7 +471,7 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
               {CONTACT.whatsapp.number}
             </a>
             <p className="font-sans text-white/20 text-xs mt-4 relative">
-              Response guaranteed in under 10 minutes · Available 7 days a week
+              {tr(locale, 'Response guaranteed in under 10 minutes · Available 7 days a week', 'Risposta garantita in meno di 10 minuti · Disponibili 7 giorni su 7')}
             </p>
           </div>
         </div>

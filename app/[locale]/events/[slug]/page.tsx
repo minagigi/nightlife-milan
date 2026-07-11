@@ -24,7 +24,9 @@ import MoreVenueEvents, { MoreVenueEventItem } from '@/components/MoreVenueEvent
  * undefined produceva notFound(), e Next cacheava quel 404 per l'intera
  * finestra ISR (bug reale: bandierina IT → 404 su pagina esistente). */
 async function getEbEventBySlug(slug: string): Promise<Event | undefined> {
-  const events = await fetchEventbriteEvents();
+  // includePast=true: le pagine degli eventi passati NON devono mai sparire
+  // (SEO) — restano risolvibili anche dopo la data.
+  const events = await fetchEventbriteEvents(true);
   return events.find(
     (ev) => ev.localizedContent.slug.en === slug || ev.localizedContent.slug.it === slug
   );
