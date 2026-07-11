@@ -1,4 +1,5 @@
 import { Event, Venue, Performer, MusicGenre, MilanZone, VenueCategory, Guide, Zone } from '@/lib/types';
+import { MOCK_EVENT_I18N } from '@/lib/mockEventI18n';
 
 // Mock Data for Zones
 export const mockZones: Zone[] = [
@@ -1259,6 +1260,20 @@ export const mockEvents: Event[] = [
     isTrending: true
   }
 ];
+
+// Unione delle traduzioni (33 lingue mancanti, generate in-sessione) nei campi
+// localizzati di ogni mock event: le card mostrano titolo/descrizione nella lingua
+// selezionata su TUTTE le 35 lingue (prima solo en/it → fallback inglese).
+for (const ev of mockEvents) {
+  const tr = MOCK_EVENT_I18N[ev.id];
+  if (!tr) continue;
+  const title = ev.localizedContent.title as Record<string, string>;
+  const desc = ev.localizedContent.shortDescription as Record<string, string> | undefined;
+  for (const lang of Object.keys(tr)) {
+    if (tr[lang].title) title[lang] = tr[lang].title;
+    if (desc && tr[lang].shortDescription) desc[lang] = tr[lang].shortDescription;
+  }
+}
 
 // Helper functions to simulate DB queries
 export const getVenues = (): Venue[] => {
