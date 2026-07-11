@@ -47,9 +47,6 @@ function CarouselInner({ items, lang, showTonightTag }: EventsCarouselProps) {
   }
 
   return (
-    {/* max-w-7xl mx-auto: il carosello è CONTENUTO nella stessa colonna centrata
-        delle intestazioni e delle altre sezioni → margini uguali a destra e a
-        sinistra, le card scorrono DENTRO la colonna (non sfondano fino al bordo). */}
     <div className="relative max-w-7xl mx-auto">
       {/* Fade — right edge (indica che si può scorrere) */}
       <div className="pointer-events-none absolute right-0 top-0 bottom-4 w-16 bg-gradient-to-l from-[#131009] to-transparent z-10 hidden sm:block" />
