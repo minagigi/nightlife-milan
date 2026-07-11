@@ -374,18 +374,47 @@ export async function fetchEventbriteEvents(includePast = false, sinceDaysAgo?: 
       physicalEventKey(mapVenueId(ev.venue?.name || ''), ev.start?.utc || '', cleanTitle(ev.name.text), ev.venue?.name || '');
 
     interface Group { baseId: string; byLang: Map<string, RawEbEvent>; singles: RawEbEvent[] }
-    const groups = new Map<string, Group>();
-    for (const ev of raw) {
-      const marker = parseMarker(ev.description?.text) || parseMarker(ev.description?.html);
-      const key = physKey(ev);
-      const group: Group =
-        groups.get(key) || { baseId: marker?.baseId || ev.id, byLang: new Map<string, RawEbEvent>(), singles: [] };
-      // baseId rappresentativo stabile: preferisci quello di un listing marcato.
-      if (marker?.baseId && group.byLang.size === 0 && group.singles.length === 0) group.baseId = marker.baseId;
-      if (marker?.lang) group.byLang.set(marker.lang, ev);
-      else group.singles.push(ev);
-      groups.set(key, group);
-    }
+
+    // UNION-FIND: due listing sono lo STESSO evento se condividono UN QUALSIASI
+    // di questi segnali —
+    //   • stesso slug-en del marker → TUTTE le lingue di un evento lo condividono,
+    //     quindi 13 lingue = UNA card ANCHE col titolo tradotto (dove il solo
+    //     nucleo-nome fallisce: "Argentina vs Switzerland" ≠ "阿根廷vs瑞士" ≠ "Mecz…");
+    //   • stesso baseId del marker;
+    //   • stessa identità fisica venue+giorno+nucleo-nome → unisce l'evento
+    //     pubblicato come 2 listing con slug/baseId DIVERSI ma stesso nome
+    //     (es. Just Me "…-july-11" vs "…-11-luglio").
+    const markers = raw.map((ev) => parseMarker(ev.description?.text) || parseMarker(ev.description?.html));
+    const parent = raw.map((_, i) => i);
+    const find = (x: number): number => {
+      while (parent[x] !== x) { parent[x] = parent[parent[x]]; x = parent[x]; }
+      return x;
+    };
+    const union = (a: number, b: number) => { parent[find(a)] = find(b); };
+    const firstBy = new Map<string, number>();
+    const link = (k: string | undefined, i: number) => {
+      if (!k) return;
+      const prev = firstBy.get(k);
+      if (prev === undefined) firstBy.set(k, i);
+      else union(i, prev);
+    };
+    raw.forEach((ev, i) => {
+      const m = markers[i];
+      link(m?.slug ? `slug:${m.slug}` : undefined, i);
+      link(m?.baseId ? `base:${m.baseId}` : undefined, i);
+      link(`phys:${physKey(ev)}`, i);
+    });
+
+    const groups = new Map<number, Group>();
+    raw.forEach((ev, i) => {
+      const root = find(i);
+      const m = markers[i];
+      let g = groups.get(root);
+      if (!g) { g = { baseId: m?.baseId || ev.id, byLang: new Map<string, RawEbEvent>(), singles: [] }; groups.set(root, g); }
+      if (m?.baseId && g.byLang.size === 0 && g.singles.length === 0) g.baseId = m.baseId;
+      if (m?.lang) { if (!g.byLang.has(m.lang)) g.byLang.set(m.lang, ev); }
+      else g.singles.push(ev);
+    });
 
     const events: Event[] = [];
 
