@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { hreflangAlternates } from '@/lib/i18n/locales';
+import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Image from 'next/image';
 import Link from 'next/link';
 import { MapPin, Clock, Shirt, MessageCircle, Star, Calendar, ArrowLeft, Music, Wine, Utensils, ShieldCheck, Check, CreditCard } from 'lucide-react';
@@ -378,9 +378,9 @@ export default async function ClubPage({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": `${baseUrl}${locale === 'it' ? '/it' : ''}` },
-      { "@type": "ListItem", "position": 2, "name": locale === 'it' ? "Club Milano" : "Milan Clubs", "item": `${baseUrl}${locale === 'it' ? '/it' : ''}/clubs` },
-      { "@type": "ListItem", "position": 3, "name": name, "item": `${baseUrl}${locale === 'it' ? '/it' : ''}/clubs/${venue.slugs.en}` },
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": `${baseUrl}${localePrefix(locale)}` },
+      { "@type": "ListItem", "position": 2, "name": locale === 'it' ? "Club Milano" : "Milan Clubs", "item": `${baseUrl}${localePrefix(locale)}/clubs` },
+      { "@type": "ListItem", "position": 3, "name": name, "item": `${baseUrl}${localePrefix(locale)}/clubs/${venue.slugs.en}` },
     ],
   };
 

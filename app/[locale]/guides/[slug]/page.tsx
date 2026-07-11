@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { hreflangAlternates } from '@/lib/i18n/locales';
+import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const itSlug = guide.slugs.it || enSlug;
   
   const currentSlug = locale === 'it' ? itSlug : enSlug;
-  const path = locale === 'it' ? `/it/guides/${currentSlug}` : `/guides/${currentSlug}`;
+  const path = `${localePrefix(locale)}/guides/${currentSlug}`;
   const canonical = `${baseUrl}${path}`;
 
   return {
@@ -91,7 +91,7 @@ export default async function GuidePage({ params }: Props) {
   const excerpt = getLocalizedText(guide.excerpt, locale);
   
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const langPrefix = isIt ? '/it' : '';
+  const langPrefix = localePrefix(locale);
   const currentSlug = isIt ? (guide.slugs.it || guide.slugs.en) : guide.slugs.en;
   const guideUrl = `${baseUrl}${langPrefix}/guides/${currentSlug}`;
 

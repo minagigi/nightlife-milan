@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { hreflangAlternates } from '@/lib/i18n/locales';
+import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import { mockVenues } from '@/lib/data';
 
@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const isIt = locale === 'it';
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const canonical = `${baseUrl}${isIt ? '/it' : ''}/bottle-prices`;
+  const canonical = `${baseUrl}${localePrefix(locale)}/bottle-prices`;
 
   const title = isIt
     ? 'Prezzi Bottiglie Discoteche Milano 2026 | Listino VIP | Nightlife Milan'
@@ -168,7 +168,7 @@ const commonBottles = [
 export default async function BottlePricesPage({ params }: Props) {
   const { locale } = await params;
   const isIt = locale === 'it';
-  const lp = isIt ? '/it' : '';
+  const lp = localePrefix(locale);
 
   const venuesWithPrices = mockVenues.filter(v => bottleData[v.id]);
 
@@ -230,7 +230,7 @@ export default async function BottlePricesPage({ params }: Props) {
           <nav className="text-sm text-white/40">
             <ol className="list-none p-0 inline-flex">
               <li className="flex items-center">
-                <Link href={isIt ? '/it' : '/'} className="hover:text-champagne transition-colors">Home</Link>
+                <Link href={localePrefix(locale) || '/'} className="hover:text-champagne transition-colors">Home</Link>
                 <span className="mx-2">/</span>
               </li>
               <li className="text-champagne" aria-current="page">{isIt ? 'Prezzi Bottiglie' : 'Bottle Prices'}</li>

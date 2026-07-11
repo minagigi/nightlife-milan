@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { localePrefix } from '@/lib/i18n/locales';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { mockZones, mockEvents, mockVenues } from '@/lib/data';
@@ -35,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const description = zone.metaDescription[typedLocale] || zone.metaDescription.en;
   
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const canonical = `${baseUrl}${locale === 'it' ? '/it' : ''}/zones/${slug}`;
+  const canonical = `${baseUrl}${localePrefix(locale)}/zones/${slug}`;
 
   const isIt = locale === 'it';
   const ogImage = zone.image ? `${baseUrl}${zone.image}` : `${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`;

@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
-import { hreflangAlternates } from '@/lib/i18n/locales';
+import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { getLocalizedText } from '@/lib/seo';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const isIt = locale === 'it';
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const canonical = `${baseUrl}${isIt ? '/it' : ''}/events`;
+  const canonical = `${baseUrl}${localePrefix(locale)}/events`;
 
   return {
     title: isIt
@@ -58,7 +59,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function EventsHubPage({ params }: Props) {
   const { locale } = await params;
   const isIt = locale === 'it';
-  const lp = isIt ? '/it' : '';
+  const lp = localePrefix(locale);
 
   // Upcoming mock events — chronological, priority Just Me > Pineta > Aria
   const getVenuePriority = (venueId: string) => {
@@ -107,18 +108,18 @@ export default async function EventsHubPage({ params }: Props) {
       position: i + 1,
       item: {
         '@type': 'Event',
-        name: item.event.localizedContent.title[isIt ? 'it' : 'en'],
+        name: getLocalizedText(item.event.localizedContent.title, locale),
         startDate: item.event.dateISO,
         location: {
           '@type': 'Place',
-          name: item.venue.localizedContent.name[isIt ? 'it' : 'en'] || item.venue.localizedContent.name.en,
+          name: getLocalizedText(item.venue.localizedContent.name, locale),
           address: {
             '@type': 'PostalAddress',
             addressLocality: 'Milan',
             addressCountry: 'IT',
           },
         },
-        url: `${baseUrl}${lp}/events/${item.event.localizedContent.slug[isIt ? 'it' : 'en']}`,
+        url: `${baseUrl}${lp}/events/${getLocalizedText(item.event.localizedContent.slug, locale)}`,
       },
     })),
   };
@@ -150,7 +151,7 @@ export default async function EventsHubPage({ params }: Props) {
           <nav className="text-sm text-white/40" aria-label="Breadcrumb">
             <ol className="list-none p-0 inline-flex">
               <li className="flex items-center">
-                <Link href={isIt ? '/it' : '/'} className="hover:text-champagne transition-colors">Home</Link>
+                <Link href={lp || '/'} className="hover:text-champagne transition-colors">Home</Link>
                 <span className="mx-2">/</span>
               </li>
               <li className="text-champagne" aria-current="page">{isIt ? 'Eventi' : 'Events'}</li>
@@ -214,10 +215,10 @@ export default async function EventsHubPage({ params }: Props) {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {specialItems.slice(0, 3).map(item => {
-                const title = item.event.localizedContent.title[isIt ? 'it' : 'en'] || item.event.localizedContent.title.en;
-                const slug = item.event.localizedContent.slug[isIt ? 'it' : 'en'];
-                const venueName = item.venue.localizedContent.name[isIt ? 'it' : 'en'] || item.venue.localizedContent.name.en;
-                const date = new Date(item.event.dateISO).toLocaleDateString(isIt ? 'it-IT' : 'en-US', {
+                const title = getLocalizedText(item.event.localizedContent.title, locale);
+                const slug = getLocalizedText(item.event.localizedContent.slug, locale);
+                const venueName = getLocalizedText(item.venue.localizedContent.name, locale);
+                const date = new Date(item.event.dateISO).toLocaleDateString(locale, {
                   weekday: 'short', day: 'numeric', month: 'short', timeZone: 'Europe/Rome',
                 });
                 return (

@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { hreflangAlternates } from '@/lib/i18n/locales';
+import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -169,7 +169,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const description = genre.metaDescription[typedLocale];
   
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const canonical = `${baseUrl}${locale === 'it' ? '/it' : ''}/genres/${slug}`;
+  const canonical = `${baseUrl}${localePrefix(locale)}/genres/${slug}`;
 
   const isIt = locale === 'it';
   const genreImages: Record<string, string> = {

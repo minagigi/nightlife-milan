@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { hreflangAlternates } from '@/lib/i18n/locales';
+import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Image from 'next/image';
 import { MessageCircle, Star, Clock, Shield, Zap, MapPin, Calendar, CheckCircle } from 'lucide-react';
 import { CONTACT } from '@/config/contact';
@@ -11,7 +11,7 @@ const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const isIt = locale === 'it';
-  const canonical = `${baseUrl}${isIt ? '/it' : ''}/concierge`;
+  const canonical = `${baseUrl}${localePrefix(locale)}/concierge`;
 
   const title = isIt
     ? 'Concierge Vita Notturna Milano | Tavoli VIP & Guestlist | Nightlife Milan'

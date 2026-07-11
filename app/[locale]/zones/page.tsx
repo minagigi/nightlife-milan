@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { localePrefix } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import Image from 'next/image';
 import { mockZones } from '@/lib/data';
@@ -10,7 +11,7 @@ const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const isIt = locale === 'it';
-  const canonical = `${baseUrl}${isIt ? '/it' : ''}/zones`;
+  const canonical = `${baseUrl}${localePrefix(locale)}/zones`;
 
   const title = isIt
     ? 'Zone Vita Notturna Milano 2026 | Migliori Quartieri | Nightlife Milan'
@@ -72,7 +73,7 @@ export default async function ZonesPage({
 }) {
   const { locale } = await params;
   const typedLocale = (locale === 'it' ? 'it' : 'en') as 'en' | 'it';
-  const lp = locale === 'it' ? '/it' : '';
+  const lp = localePrefix(locale);
 
   const zonesSchema = {
     "@context": "https://schema.org",

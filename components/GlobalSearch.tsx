@@ -35,7 +35,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
   const pathname = usePathname();
   
   const typedLocale = (currentLocale === 'it' ? 'it' : 'en') as 'en' | 'it';
-  const langPrefix = typedLocale === 'it' ? '/it' : '';
+  const langPrefix = currentLocale === 'en' ? '' : `/${currentLocale}`;
 
   // Focus input when opened
   useEffect(() => {

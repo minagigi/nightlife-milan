@@ -13,7 +13,7 @@ const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const isIt = locale === 'it';
-  const canonical = `${baseUrl}${isIt ? '/it' : ''}/guides`;
+  const canonical = `${baseUrl}${locale === 'en' ? '' : `/${locale}`}/guides`;
 
   const title = tr(locale, 'Milan Nightlife Guides 2026 | Dress Code, VIP Tables & Insider Tips | Nightlife Milan', 'Guide Vita Notturna Milano 2026 | Dress Code, VIP Table & Consigli Insider | Nightlife Milan');
   const description = tr(locale, 'Expert guides to Milan nightlife: door policies, dress codes, VIP table booking, aperitivo zones, best techno clubs and insider tips. Updated 2026.', 'Guide esperte sulla vita notturna milanese: dress code, accesso VIP, zone aperitivo, migliori club techno e consigli insider. Aggiornato luglio 2026.');
@@ -105,7 +105,7 @@ export default async function GuidesPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const localePrefix = locale === 'it' ? '/it' : '';
+  const localePrefix = locale === 'en' ? '' : `/${locale}`;
 
   return (
     <main className="flex-grow pt-24 pb-20">

@@ -153,7 +153,7 @@ export default function Header({ currentLocale }: { currentLocale: string }) {
           {/* Logo (Center) */}
           <div className="flex-shrink-0 flex justify-center items-center relative group">
             <Link
-              href={currentLocale === 'it' ? '/it' : '/'}
+              href={localePrefix || '/'}
               className="relative z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-sm drop-shadow-[0_0_14px_rgba(201,168,106,0.5)] hover:drop-shadow-[0_0_20px_rgba(201,168,106,0.8)] transition-all duration-500"
               aria-label="Nightlife Milan Home"
             >

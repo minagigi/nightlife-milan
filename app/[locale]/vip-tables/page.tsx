@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { hreflangAlternates } from '@/lib/i18n/locales';
+import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, MessageCircle, Star, Users, Clock, Shield } from 'lucide-react';
@@ -15,7 +15,7 @@ const baseUrlGlobal = process.env.APP_URL || 'https://nightlifemilan.com';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const isIt = locale === 'it';
-  const canonicalUrl = `${baseUrlGlobal}${isIt ? '/it' : ''}/vip-tables`;
+  const canonicalUrl = `${baseUrlGlobal}${localePrefix(locale)}/vip-tables`;
 
   const title = tr(locale, 'VIP Table Booking Milan | Bottle Service & Table Reservations | Nightlife Milan', 'Prenotazione Tavoli VIP Milano | Bottle Service & Tavoli | Nightlife Milan');
   const description = tr(locale, 'Book VIP tables at the best clubs in Milan. Guaranteed entry, premium bottle service, and personal concierge. WhatsApp response in under 10 minutes.', 'Prenota tavoli VIP nei migliori club di Milano. Ingresso garantito, bottle service premium e concierge personale. Risposta WhatsApp in meno di 10 minuti.');
@@ -143,7 +143,7 @@ const steps = [
 
 export default async function VipTablesPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const lp = locale === 'it' ? '/it' : '';
+  const lp = localePrefix(locale);
   const waMsg = encodeURIComponent("Hi! I'd like to book a VIP table in Milan. Can you help me?");
   const waLink = `https://wa.me/393519127047?text=${waMsg}`;
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';

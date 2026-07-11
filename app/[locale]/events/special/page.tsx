@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { hreflangAlternates } from '@/lib/i18n/locales';
+import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     : `Discover the most exclusive events, VIP parties, and special nights in Milan. Book your table for an unforgettable experience.`;
   
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const canonical = `${baseUrl}${locale === 'it' ? '/it' : ''}/events/special`;
+  const canonical = `${baseUrl}${localePrefix(locale)}/events/special`;
 
   return {
     title,
@@ -43,6 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function SpecialEventsPage({ params }: Props) {
   const { locale } = await params;
   const isIt = locale === 'it';
+  const lp = localePrefix(locale);
 
   // Filter special events: isSpecial === true OR tableMinSpend > 500.
   // Solo eventi di oggi o futuri (giorno di Roma) — mai eventi già passati.
@@ -70,11 +71,11 @@ export default async function SpecialEventsPage({ params }: Props) {
         <nav className="text-sm text-white/40" aria-label="Breadcrumb">
           <ol className="list-none p-0 inline-flex">
             <li className="flex items-center">
-              <a href={isIt ? '/it' : '/'} className="hover:text-champagne transition-colors">Home</a>
+              <a href={lp || '/'} className="hover:text-champagne transition-colors">Home</a>
               <span className="mx-2">/</span>
             </li>
             <li className="flex items-center">
-              <a href={isIt ? '/it/events' : '/events'} className="hover:text-champagne transition-colors">{isIt ? 'Eventi' : 'Events'}</a>
+              <a href={`${lp}/events`} className="hover:text-champagne transition-colors">{isIt ? 'Eventi' : 'Events'}</a>
               <span className="mx-2">/</span>
             </li>
             <li className="text-champagne" aria-current="page">{isIt ? 'Speciali' : 'Special'}</li>
@@ -247,15 +248,15 @@ export default async function SpecialEventsPage({ params }: Props) {
       {/* Cross-links */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center border-t border-white/5">
         <div className="flex flex-wrap justify-center gap-4">
-          <Link href={`${isIt ? '/it' : ''}/vip-tables`}
+          <Link href={`${lp}/vip-tables`}
             className="px-6 py-3 rounded-full border border-champagne/30 text-champagne text-sm font-medium tracking-wider hover:bg-champagne hover:text-black transition-colors">
             {isIt ? 'VIP Tables' : 'VIP Tables Guide'}
           </Link>
-          <Link href={`${isIt ? '/it' : ''}/concierge`}
+          <Link href={`${lp}/concierge`}
             className="px-6 py-3 rounded-full border border-white/20 text-white text-sm font-medium tracking-wider hover:border-champagne hover:text-champagne transition-colors">
             {isIt ? 'Servizio Concierge' : 'Concierge Service'}
           </Link>
-          <Link href={`${isIt ? '/it' : ''}/calendar/this-week`}
+          <Link href={`${lp}/calendar/this-week`}
             className="px-6 py-3 rounded-full border border-white/20 text-white text-sm font-medium tracking-wider hover:border-champagne hover:text-champagne transition-colors">
             {isIt ? 'Tutti gli Eventi' : 'All Events'}
           </Link>

@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { hreflangAlternates } from '@/lib/i18n/locales';
+import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Calendar, Clock, MapPin } from 'lucide-react';
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     : `Discover the best events, parties, and nights out happening tonight in Milan. Book your table or get on the guestlist for the most exclusive clubs.`;
   
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const canonical = `${baseUrl}${locale === 'it' ? '/it' : ''}/calendar/tonight`;
+  const canonical = `${baseUrl}${localePrefix(locale)}/calendar/tonight`;
 
   const isIt = locale === 'it';
   const ogImage = `${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`;
@@ -103,7 +103,7 @@ export default async function TonightPage({ params }: Props) {
   const hasTomorrowEvents = tomorrowItems.length > 0;
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const lp = locale === 'it' ? '/it' : '';
+  const lp = localePrefix(locale);
   const eventSchemas = [...items, ...tomorrowItems].map(({ event, venue }) => ({
     '@context': 'https://schema.org',
     '@type': 'Event',
@@ -192,7 +192,7 @@ export default async function TonightPage({ params }: Props) {
             (prima "Domani" puntava a /calendar/this-week, e mancava il
             bottone per tutta la settimana). */}
         {(() => {
-          const lp = locale === 'it' ? '/it' : '';
+          const lp = localePrefix(locale);
           return (
             <div className="flex space-x-4 overflow-x-auto pb-4 scrollbar-hide">
               <Link

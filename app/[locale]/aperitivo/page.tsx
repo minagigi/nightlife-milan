@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { hreflangAlternates } from '@/lib/i18n/locales';
+import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Clock, MapPin, MessageCircle } from 'lucide-react';
@@ -13,7 +13,7 @@ const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const isIt = locale === 'it';
-  const canonical = `${baseUrl}${isIt ? '/it' : ''}/aperitivo`;
+  const canonical = `${baseUrl}${localePrefix(locale)}/aperitivo`;
 
   const title = tr(locale, 'Best Aperitivo in Milan 2026 | Top Bars & Where to Go | Nightlife Milan', 'Migliore Aperitivo Milano 2026 | Bar, Orari e Zone | Nightlife Milan');
   const description = tr(locale, 'Find the best aperitivo spots in Milan. Opening hours, what to order, dress code, and the top bars by zone — Navigli, Corso Como, Brera. Updated 2026.', 'I migliori locali per l\'aperitivo a Milano: orari, cosa ordinare, dress code e top bar per zona — Navigli, Corso Como, Brera. Guida aggiornata 2026.');
@@ -122,7 +122,7 @@ const tips = [
 
 export default async function AperitivoPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const lp = locale === 'it' ? '/it' : '';
+  const lp = localePrefix(locale);
   const waMsg = encodeURIComponent("Hi! Can you help me book a spot for aperitivo in Milan?");
   const waLink = `https://wa.me/393519127047?text=${waMsg}`;
 

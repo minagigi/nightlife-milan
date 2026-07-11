@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { hreflangAlternates } from '@/lib/i18n/locales';
+import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset, romeSundayKey } from '@/lib/calendarEvents';
 import DiscoveryGrid from '@/components/DiscoveryGrid';
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     : `Discover all upcoming events, parties, and nights out in Milan. Book your table or get on the guestlist for the most exclusive clubs.`;
   
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const canonical = `${baseUrl}${locale === 'it' ? '/it' : ''}/calendar/this-week`;
+  const canonical = `${baseUrl}${localePrefix(locale)}/calendar/this-week`;
 
   const isIt = locale === 'it';
   const ogImage = `${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`;
@@ -71,7 +71,7 @@ export default async function ThisWeekPage({ params }: Props) {
   });
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const lp = locale === 'it' ? '/it' : '';
+  const lp = localePrefix(locale);
   const eventSchemas = items.map(({ event, venue }) => ({
     '@context': 'https://schema.org',
     '@type': 'Event',
@@ -123,7 +123,7 @@ export default async function ThisWeekPage({ params }: Props) {
         <nav className="text-sm text-white/40" aria-label="Breadcrumb">
           <ol className="list-none p-0 inline-flex">
             <li className="flex items-center">
-              <a href={isIt ? '/it' : '/'} className="hover:text-champagne transition-colors">Home</a>
+              <a href={localePrefix(locale) || '/'} className="hover:text-champagne transition-colors">Home</a>
               <span className="mx-2">/</span>
             </li>
             <li className="flex items-center">
@@ -185,19 +185,19 @@ export default async function ThisWeekPage({ params }: Props) {
         {/* Calendar toggle — FASE C3: stesso selettore a 3 bottoni di /calendar/tonight */}
         <div className="flex space-x-4 overflow-x-auto pb-4 scrollbar-hide">
           <Link
-            href={`${isIt ? '/it' : ''}/calendar/tonight`}
+            href={`${localePrefix(locale)}/calendar/tonight`}
             className="flex-shrink-0 px-8 py-3 rounded-full border border-white/20 text-white hover:border-champagne hover:text-champagne transition-colors font-medium tracking-wider uppercase text-sm"
           >
             {isIt ? 'Stasera' : 'Tonight'}
           </Link>
           <Link
-            href={`${isIt ? '/it' : ''}/calendar/tonight#tomorrow`}
+            href={`${localePrefix(locale)}/calendar/tonight#tomorrow`}
             className="flex-shrink-0 px-8 py-3 rounded-full border border-white/20 text-white hover:border-champagne hover:text-champagne transition-colors font-medium tracking-wider uppercase text-sm"
           >
             {isIt ? 'Domani' : 'Tomorrow'}
           </Link>
           <Link
-            href={`${isIt ? '/it' : ''}/calendar/this-week`}
+            href={`${localePrefix(locale)}/calendar/this-week`}
             className="flex-shrink-0 px-8 py-3 rounded-full bg-champagne text-black font-medium tracking-wider uppercase text-sm"
           >
             {isIt ? 'Tutta la Settimana' : 'Full Week'}

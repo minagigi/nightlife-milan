@@ -14,7 +14,7 @@ interface Props {
 
 export default function HeroInteractive({ venues, locale, firstVenueId }: Props) {
   const typedLocale = (locale === 'it' ? 'it' : 'en') as 'en' | 'it';
-  const lp = typedLocale === 'it' ? '/it' : '';
+  const lp = locale === 'en' ? '' : `/${locale}`;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 

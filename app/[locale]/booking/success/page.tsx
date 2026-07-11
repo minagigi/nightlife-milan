@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { localePrefix } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import { Calendar, Share2, MapPin, Clock, ArrowLeft } from 'lucide-react';
 
@@ -155,7 +156,7 @@ export default async function BookingSuccessPage({
           {/* Back to Home */}
           <div className="text-center pt-4">
             <Link 
-              href={isIt ? '/it' : '/'}
+              href={localePrefix(locale) || '/'}
               className="inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors text-sm"
             >
               <ArrowLeft className="w-4 h-4" />

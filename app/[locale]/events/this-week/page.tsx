@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
-import { hreflangAlternates } from '@/lib/i18n/locales';
+import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { getLocalizedText } from '@/lib/seo';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Clock, MapPin, Calendar } from 'lucide-react';
@@ -14,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const isIt = locale === 'it';
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const canonical = `${baseUrl}${isIt ? '/it' : ''}/events/this-week`;
+  const canonical = `${baseUrl}${localePrefix(locale)}/events/this-week`;
 
   const title = isIt
     ? 'Eventi Questa Settimana a Milano 2026 | Serate della Settimana'
@@ -52,7 +53,7 @@ const DAYS_EN = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday
 export default async function EventsThisWeekPage({ params }: Props) {
   const { locale } = await params;
   const isIt = locale === 'it';
-  const lp = isIt ? '/it' : '';
+  const lp = localePrefix(locale);
 
   // Week: Monday to Sunday of current week, nel fuso di Roma (mai i confini UTC).
   const now = new Date();
@@ -182,11 +183,10 @@ export default async function EventsThisWeekPage({ params }: Props) {
                   </div>
                   <div className="space-y-4">
                     {dayEvents.map(({ event, venue }) => {
-                      const lang = (isIt ? 'it' : 'en') as 'en' | 'it';
-                      const title = event.localizedContent.title[lang] || event.localizedContent.title.en;
-                      const slug = event.localizedContent.slug[lang] || event.localizedContent.slug.en;
-                      const venueName = venue.localizedContent.name[lang] || venue.localizedContent.name.en;
-                      const timeStr = new Intl.DateTimeFormat(isIt ? 'it-IT' : 'en-US', {
+                      const title = getLocalizedText(event.localizedContent.title, locale);
+                      const slug = getLocalizedText(event.localizedContent.slug, locale);
+                      const venueName = getLocalizedText(venue.localizedContent.name, locale);
+                      const timeStr = new Intl.DateTimeFormat(locale, {
                         hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Rome',
                       }).format(new Date(event.dateISO));
                       const genre = event.genre[0]?.replace(/_/g, ' ') ?? '';

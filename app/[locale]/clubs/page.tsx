@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { hreflangAlternates } from '@/lib/i18n/locales';
+import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import Image from 'next/image';
 import VenueCard from '@/components/VenueCard';
@@ -15,7 +15,7 @@ const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const isIt = locale === 'it';
-  const canonicalUrl = `${baseUrl}${isIt ? '/it' : ''}/clubs`;
+  const canonicalUrl = `${baseUrl}${localePrefix(locale)}/clubs`;
 
   const title = isIt
     ? 'Migliori Club Milano 2026 | La Selezione Definitiva'
@@ -298,7 +298,7 @@ export default async function ClubsPage({
 
       {/* VIP Tables CTA Banner */}
       {(() => {
-        const lp = locale === 'it' ? '/it' : '';
+        const lp = localePrefix(locale);
         return (
           <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 mt-8">
             <div className="rounded-lg border border-champagne/20 bg-champagne/[0.04] p-10 flex flex-col md:flex-row items-center justify-between gap-6">

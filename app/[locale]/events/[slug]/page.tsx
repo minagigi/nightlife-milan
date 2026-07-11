@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { hreflangAlternates } from '@/lib/i18n/locales';
+import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -147,7 +147,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const title = `${weeklyEvent.name} @ ${weeklyEvent.clubName} Milano - ${weeklyEvent.day.charAt(0).toUpperCase() + weeklyEvent.day.slice(1)} 2026 | Nightlife Milan`;
     const description = locale === 'it' ? weeklyEvent.description.it : weeklyEvent.description.en;
     const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-    const canonical = `${baseUrl}${locale === 'it' ? '/it' : ''}/events/${slug}`;
+    const canonical = `${baseUrl}${localePrefix(locale)}/events/${slug}`;
 
     return {
       title,
@@ -193,7 +193,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const itSlug = event.localizedContent.slug.it || enSlug;
   
   const currentSlug = locale === 'it' ? itSlug : enSlug;
-  const path = locale === 'it' ? `/it/events/${currentSlug}` : `/events/${currentSlug}`;
+  const path = `${localePrefix(locale)}/events/${currentSlug}`;
   const canonical = `${baseUrl}${path}`;
 
   return {
@@ -479,7 +479,7 @@ export default async function EventPage({ params }: Props) {
         timeZone: 'Europe/Rome',
       }).format(new Date(e.dateISO));
       return {
-        href: `${locale === 'it' ? '/it' : ''}/events/${eSlug}`,
+        href: `${localePrefix(locale)}/events/${eSlug}`,
         title: getLocalizedText(e.localizedContent.title, locale),
         dateStr: eDateStr,
       };
@@ -505,7 +505,7 @@ export default async function EventPage({ params }: Props) {
   const description = getLocalizedText(event.localizedContent.shortDescription, locale);
   // Internal linking: venue name in "About the venue" links to its /clubs page.
   const venueSlug = getLocalizedText(venue.slugs, locale);
-  const venueHref = `${locale === 'it' ? '/it' : ''}/clubs/${venueSlug}`;
+  const venueHref = `${localePrefix(locale)}/clubs/${venueSlug}`;
 
   // Format Date
   const dateObj = new Date(event.dateISO);

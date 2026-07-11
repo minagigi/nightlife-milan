@@ -14,7 +14,7 @@ interface IntentCard {
 }
 
 export default function IntentCards({ locale }: { locale: 'en' | 'it' }) {
-  const lp = locale === 'it' ? '/it' : '';
+  const lp = locale === 'en' ? '' : `/${locale}`;
   const waMsg = encodeURIComponent(
     locale === 'it'
       ? "Ciao! Vorrei prenotare un tavolo VIP a Milano. Puoi aiutarmi?"

@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
-import { hreflangAlternates } from '@/lib/i18n/locales';
+import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { getLocalizedText } from '@/lib/seo';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Star, Clock, MapPin, ExternalLink } from 'lucide-react';
@@ -15,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const isIt = locale === 'it';
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const canonical = `${baseUrl}${isIt ? '/it' : ''}/events/best`;
+  const canonical = `${baseUrl}${localePrefix(locale)}/events/best`;
 
   const title = isIt
     ? 'I Migliori Club di Milano 2026 | Just Me, Pineta, Aria Club'
@@ -101,7 +102,7 @@ const BEST_VENUES = [
 export default async function EventsBestPage({ params }: Props) {
   const { locale } = await params;
   const isIt = locale === 'it';
-  const lp = isIt ? '/it' : '';
+  const lp = localePrefix(locale);
   const lang = (isIt ? 'it' : 'en') as 'en' | 'it';
 
   // Upcoming events for these 3 venues — confine giorno nel fuso di Roma,
@@ -290,9 +291,9 @@ export default async function EventsBestPage({ params }: Props) {
                     </h3>
                     <div className="space-y-2">
                       {upcoming.slice(0, 3).map(event => {
-                        const title = event.localizedContent.title[lang] || event.localizedContent.title.en;
-                        const slug = event.localizedContent.slug[lang] || event.localizedContent.slug.en;
-                        const dateStr = new Date(event.dateISO).toLocaleDateString(isIt ? 'it-IT' : 'en-US', {
+                        const title = getLocalizedText(event.localizedContent.title, locale);
+                        const slug = getLocalizedText(event.localizedContent.slug, locale);
+                        const dateStr = new Date(event.dateISO).toLocaleDateString(locale, {
                           weekday: 'short', day: 'numeric', month: 'short', timeZone: 'Europe/Rome',
                         });
                         return (
