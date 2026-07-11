@@ -80,9 +80,16 @@ export async function putRichContent(slugEn: string, data: Omit<RichContentPaylo
 const richCache = new Map<string, { at: number; data: RichContentPayload | null }>();
 const RICH_CACHE_TTL_MS = 10 * 60 * 1000;
 
+// Circuit breaker (2026-07-11): il Blob è sospeso (403 Forbidden per overage
+// quota). L'SDK @vercel/blob ritenta internamente ogni chiamata fallita →
+// ~15-25s di ritardo AGGIUNTO a ogni render di pagina evento. Dopo il primo
+// fallimento si disabilita per la vita del processo (torna a provare su nuovi
+// lambda, così recupera da solo quando la quota si resetta).
+let blobDown = false;
+
 export async function getRichContent(slugEn: string): Promise<RichContentPayload | null> {
   const token = process.env.BLOB_READ_WRITE_TOKEN;
-  if (!token || !slugEn) return null;
+  if (!token || !slugEn || blobDown) return null;
 
   const cached = richCache.get(slugEn);
   if (cached && Date.now() - cached.at < RICH_CACHE_TTL_MS) return cached.data;
@@ -98,6 +105,7 @@ export async function getRichContent(slugEn: string): Promise<RichContentPayload
     richCache.set(slugEn, { at: Date.now(), data });
     return data;
   } catch {
+    blobDown = true; // non ritentare il Blob morto su questo lambda
     return null;
   }
 }
