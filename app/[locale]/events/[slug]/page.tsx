@@ -440,7 +440,15 @@ export default async function EventPage({ params }: Props) {
   // FASE X2 (piano Xceed): contenuto gold-standard (sezioni/programma/25 FAQ/
   // listino reale) letto dal blob se questo evento è passato dalla pipeline
   // Xceed — assente per tutti gli altri eventi, rendering base invariato.
-  const richContent = await getRichContent(event.localizedContent.slug.en);
+  // Prova il gold nel Blob sotto lo slug EN e, se assente, sotto lo slug IT: per
+  // gli eventi pubblicati come due listing (EN/IT con slug diversi) il gold può
+  // essere stato scritto sotto lo slug IT, mentre la card FUSA usa lo slug-en
+  // canonico → senza questo secondo tentativo il gold sparirebbe dopo la dedup.
+  const slugEnKey = event.localizedContent.slug.en;
+  const slugItKey = event.localizedContent.slug.it;
+  const richContent =
+    (await getRichContent(slugEnKey)) ||
+    (slugItKey && slugItKey !== slugEnKey ? await getRichContent(slugItKey) : null);
 
   // Fallback gold dai listing Eventbrite (2026-07-11, dopo passaggio a Vercel Pro):
   // se il Blob non ha il gold per questo evento (listing pubblicato senza
