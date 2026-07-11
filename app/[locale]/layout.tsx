@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import { Montserrat, Cormorant_Garamond, Noto_Sans_SC, Noto_Naskh_Arabic } from 'next/font/google';
 import dynamic from 'next/dynamic';
-import { getLocaleDef, hreflangAlternates, localePrefix, DEFAULT_LOCALE } from '@/lib/i18n/locales';
+import { notFound } from 'next/navigation';
+import { getLocaleDef, hreflangAlternates, localePrefix, DEFAULT_LOCALE, isEnabledLocale } from '@/lib/i18n/locales';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Providers } from '@/components/Providers';
@@ -23,14 +24,17 @@ export const viewport: Viewport = {
   viewportFit: 'cover',
 };
 
+// latin-ext copre gli accenti dell'Europa centrale (cs/pl/hu/hr/ro/sl/…), cyrillic
+// copre ru/uk/bg/sr/mk. next/font emette @font-face con unicode-range, quindi i
+// glifi cirillici NON pesano sugli utenti latini (si scaricano solo quando servono).
 const montserrat = Montserrat({
-  subsets: ['latin'],
+  subsets: ['latin', 'latin-ext', 'cyrillic', 'cyrillic-ext'],
   variable: '--font-montserrat',
   weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
 });
 const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
+  subsets: ['latin', 'latin-ext', 'cyrillic'],
   variable: '--font-cormorant',
   weight: ['400', '500', '600', '700'],
   display: 'swap',
@@ -127,6 +131,9 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  // Whitelist locale a livello route (fix bug #9): un /xx/ fuori dal registry non
+  // deve renderizzare in inglese sotto un lang errato, ma dare 404.
+  if (!isEnabledLocale(locale)) notFound();
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const isIt = locale === 'it';
   const localeDef = getLocaleDef(locale) || getLocaleDef(DEFAULT_LOCALE)!;

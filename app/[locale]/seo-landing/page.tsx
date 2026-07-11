@@ -7,6 +7,9 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: 'Just Me Milano | Eventi, Prezzi e Prenotazioni 2026',
   description: 'Scopri il Just Me Milano. Prenota il tuo tavolo VIP, scopri i prezzi, il dress code e gli eventi esclusivi del club più iconico di Milano.',
+  // Bug #7: pagina hardcoded in IT e non localizzata → noindex esplicito finché
+  // non è resa locale-aware, per non esporre contenuto IT sotto 35 URL.
+  robots: { index: false, follow: true },
 };
 
 export default function LandingPage() {
