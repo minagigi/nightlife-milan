@@ -30,7 +30,19 @@ export function dedupeEventsByIdentity<T extends { event: Event }>(items: T[]): 
       best.set(key, item);
     }
   }
-  return order.map((k) => best.get(k)!);
+  const pass1 = order.map((k) => best.get(k)!);
+
+  // Passata 2 — priorità all'evento REALE: se una notte (venue+giorno) ha un
+  // listing Eventbrite (`eb-`), rimuovi le versioni mock/ricorrenti dello STESSO
+  // venue+giorno. Copre i casi in cui il titolo mock corto ("Noche de Perreo") e
+  // quello Eventbrite lungo ("Noche de Perreo @ Pineta Club Milano — …") non
+  // collassano sullo stesso nucleo: la card reale vince, la demo sparisce.
+  const ebNights = new Set(
+    pass1.filter((i) => i.event.id.startsWith('eb-')).map((i) => `${i.event.venueId}|${romeDayKey(i.event.dateISO)}`)
+  );
+  return pass1.filter(
+    (i) => i.event.id.startsWith('eb-') || !ebNights.has(`${i.event.venueId}|${romeDayKey(i.event.dateISO)}`)
+  );
 }
 
 /** Quante notti in avanti "materializzare" dagli eventi ricorrenti
