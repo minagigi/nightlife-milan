@@ -446,19 +446,22 @@ export default async function EventPage({ params }: Props) {
   // canonico → senza questo secondo tentativo il gold sparirebbe dopo la dedup.
   const slugEnKey = event.localizedContent.slug.en;
   const slugItKey = event.localizedContent.slug.it;
-  const richContent =
+  const blobRich =
     (await getRichContent(slugEnKey)) ||
     (slugItKey && slugItKey !== slugEnKey ? await getRichContent(slugItKey) : null);
 
-  // Fallback gold dai listing Eventbrite (2026-07-11, dopo passaggio a Vercel Pro):
-  // se il Blob non ha il gold per questo evento (listing pubblicato senza
-  // enrichment Xceed, o slug divergente per i duplicati scout), si legge il gold
-  // completo (sezioni/programma/25 FAQ) direttamente dalla description dei listing
-  // tradotti. RI-ATTIVATO ora perché con Pro maxDuration=300s la fetch dell'org
-  // (~260 listing) non va più in timeout, e resta dietro cache 5min + ISR.
-  // Usa lo slug dell'URL (= slug-en nei marker), non event.slug.en: per gli eventi
-  // con duplicato scout i due divergono e il match fallirebbe.
-  const goldHtml = richContent ? null : await getEventGoldHtml(slug, locale);
+  // CORPO GOLD LOCALIZZATO (2026-07-12). Il Blob (GoldEventContent) contiene le
+  // sezioni/FAQ SOLO in en/it → su /es, /fr, ecc. il corpo restava in inglese.
+  // Per le lingue diverse da en/it si legge quindi il gold TRADOTTO direttamente
+  // dal listing Eventbrite nella lingua scelta (getEventGoldHtml → GoldEventHtml).
+  // Se quella lingua non ha un gold tradotto, si ripiega sul Blob en/it così il
+  // corpo non resta vuoto. Per en/it: Blob se presente, altrimenti gold dal listing
+  // (copre gli eventi pubblicati senza enrichment). getEventGoldHtml è cacheato
+  // (fetchOrgCached 5min) + ISR, e con Vercel Pro (maxDuration 300s) non va in timeout.
+  const isEnIt = locale === 'en' || locale === 'it';
+  const localizedGold = isEnIt ? null : await getEventGoldHtml(slug, locale);
+  const richContent = localizedGold ? null : blobRich;
+  const goldHtml = localizedGold || (richContent ? null : await getEventGoldHtml(slug, locale));
 
   // Internal linking: "More events at {venue}" — riusa la sorgente dati
   // unificata già usata da homepage/calendar (statici + Eventbrite/Xceed
