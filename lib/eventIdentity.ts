@@ -20,15 +20,27 @@
 const DATE_WORDS =
   /\b(jan(uary)?|feb(ruary)?|mar(ch)?|apr(il)?|may|jun(e)?|jul(y)?|aug(ust)?|sep(t|tember)?|oct(ober)?|nov(ember)?|dec(ember)?|gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre|monday|tuesday|wednesday|thursday|friday|saturday|sunday|luned|marted|mercoled|gioved|venerd|sabato|domenica)\b/gi;
 
-/** Nucleo del nome evento, invariante rispetto alla lingua e alla data. */
+// Città (Milano/Milan): sempre presente nei titoli Eventbrite ("... @ Pineta Club
+// Milano"), assente nei titoli mock brevi ("Noche de Perreo") → toglierla fa
+// collassare le due sorgenti sullo stesso nucleo (fix bug #2, dedup cross-sorgente).
+const CITY_WORDS = /\b(milano|milan)\b/gi;
+
+/** Nucleo del nome evento, invariante rispetto alla lingua e alla data.
+ * Fix bug #1: non ritorna MAI stringa vuota — se lo strip di date/città/numeri
+ * azzera tutto (titolo fatto solo di quelle parole), ripiega su una pulizia
+ * minima alfanumerica, così due eventi diversi non collassano sulla stessa chiave. */
 export function eventNameCore(title: string): string {
-  return (title || '')
-    .toLowerCase()
+  const raw = (title || '').toLowerCase();
+  const core = raw
     .replace(DATE_WORDS, ' ')
+    .replace(CITY_WORDS, ' ')
     .replace(/[0-9]+/g, ' ')
     .replace(/[^a-zà-ù]+/gi, ' ')
     .trim()
     .replace(/\s+/g, ' ');
+  if (core) return core;
+  const fallback = raw.replace(/[^a-zà-ù0-9]+/gi, ' ').trim().replace(/\s+/g, ' ');
+  return fallback || raw.trim();
 }
 
 /** Giorno "YYYY-MM-DD" nel fuso di Roma (self-contained, no import esterni). */
@@ -50,11 +62,13 @@ function romeDayKey(dateISO: string): string {
  * (es. Eventbrite "Noche de Perreo @ Pineta Club Milano" vs mock "Noche de
  * Perreo"): togliendolo, entrambe collassano su "noche de perreo" → una card. */
 export function physicalEventKey(venueId: string, dateISO: string, titleEn: string, venueName = ''): string {
-  let core = eventNameCore(titleEn);
+  const base = eventNameCore(titleEn);
+  let core = base;
   const venueTokens = eventNameCore(venueName).split(' ').filter((w) => w.length >= 2);
   if (venueTokens.length) {
     const re = new RegExp('\\b(' + venueTokens.join('|') + ')\\b', 'g');
-    core = core.replace(re, ' ').replace(/\s+/g, ' ').trim();
+    const stripped = core.replace(re, ' ').replace(/\s+/g, ' ').trim();
+    core = stripped || base; // fix bug #1: se togliere il venue svuota il nucleo, tieni quello pieno
   }
   return `${venueId}|${romeDayKey(dateISO)}|${core}`;
 }

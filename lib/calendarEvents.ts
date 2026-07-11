@@ -2,7 +2,7 @@ import { mockEvents, mockVenues } from './data';
 import { fetchEventbriteEvents } from './eventbriteSync';
 import { weeklyEvents, WeeklyEvent } from './eventsConfig';
 import { MusicGenre, type Event, type Venue } from './types';
-import { physicalEventKey } from './eventIdentity';
+import { physicalEventKey, eventNameCore } from './eventIdentity';
 
 /** REGOLA (richiesta utente): ogni gallery/carosello/calendario mostra UNA sola
  * card per evento — mai due versioni (IT + EN) né due sorgenti (Eventbrite +
@@ -32,17 +32,28 @@ export function dedupeEventsByIdentity<T extends { event: Event }>(items: T[]): 
   }
   const pass1 = order.map((k) => best.get(k)!);
 
-  // Passata 2 — priorità all'evento REALE: se una notte (venue+giorno) ha un
-  // listing Eventbrite (`eb-`), rimuovi le versioni mock/ricorrenti dello STESSO
-  // venue+giorno. Copre i casi in cui il titolo mock corto ("Noche de Perreo") e
-  // quello Eventbrite lungo ("Noche de Perreo @ Pineta Club Milano — …") non
-  // collassano sullo stesso nucleo: la card reale vince, la demo sparisce.
-  const ebNights = new Set(
-    pass1.filter((i) => i.event.id.startsWith('eb-')).map((i) => `${i.event.venueId}|${romeDayKey(i.event.dateISO)}`)
-  );
-  return pass1.filter(
-    (i) => i.event.id.startsWith('eb-') || !ebNights.has(`${i.event.venueId}|${romeDayKey(i.event.dateISO)}`)
-  );
+  // Passata 2 — priorità all'evento reale, ma SOLO sullo stesso evento (fix bug #2).
+  // Rimuove una card non-eb (mock/ricorrente) solo se, nella stessa notte
+  // venue+giorno, esiste un eb il cui nucleo-nome è in relazione di sottoinsieme
+  // (uno contiene l'altro, es. mock "White Party" ⊂ eb "White Party … VIP Tables").
+  // NON rimuove più ogni non-eb per il solo venue+giorno condiviso: due eventi
+  // DIVERSI la stessa sera (nuclei non correlati) restano entrambi.
+  const ebCoresByNight = new Map<string, string[]>();
+  for (const i of pass1) {
+    if (!i.event.id.startsWith('eb-')) continue;
+    const night = `${i.event.venueId}|${romeDayKey(i.event.dateISO)}`;
+    const arr = ebCoresByNight.get(night) || [];
+    arr.push(eventNameCore(i.event.localizedContent.title.en || ''));
+    ebCoresByNight.set(night, arr);
+  }
+  const related = (a: string, b: string) => !!a && !!b && (a.includes(b) || b.includes(a));
+  return pass1.filter((i) => {
+    if (i.event.id.startsWith('eb-')) return true;
+    const ebCores = ebCoresByNight.get(`${i.event.venueId}|${romeDayKey(i.event.dateISO)}`);
+    if (!ebCores) return true;
+    const myCore = eventNameCore(i.event.localizedContent.title.en || '');
+    return !ebCores.some((c) => related(c, myCore)); // scarta solo se è lo stesso evento
+  });
 }
 
 /** Quante notti in avanti "materializzare" dagli eventi ricorrenti
