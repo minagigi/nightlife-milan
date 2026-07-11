@@ -359,21 +359,68 @@ export async function fetchEventbriteEvents(includePast = false, sinceDaysAgo?: 
     // lingua); senza raggruppare, ognuno diventava una Event a sé → 35 card
     // duplicate sullo stesso carosello. Qui diventano UNA sola card che mostra il
     // titolo/descrizione nella lingua selezionata dal sito (fallback EN).
-    interface Group { baseId: string; byLang: Map<string, RawEbEvent>; singles: RawEbEvent[] }
+    interface Group { baseId: string; byLang: Map<string, RawEbEvent>; singles: RawEbEvent[]; sig?: string }
     const groups = new Map<string, Group>();
+    const orphans: RawEbEvent[] = []; // listing SENZA marker-lingua (perso o legacy)
 
+    // Impronta FISICA della serata: venue normalizzata (mapVenueId unifica gli
+    // alias EN/IT) + istante d'inizio UTC. Due listing con la stessa impronta sono
+    // la STESSA serata in lingue diverse — NON due eventi diversi: eventi diversi
+    // nello stesso locale/sera (es. Pineta: Saturday Night + Fifa watch party)
+    // hanno comunque baseId distinti e restano separati (mai fusi per impronta).
+    const sigOf = (ev: RawEbEvent) => `${mapVenueId(ev.venue?.name || '')}|${ev.start?.utc || ''}`;
+
+    // FASE 1 — raggruppa per baseId i listing CON marker-lingua (fonte autorevole).
     for (const ev of raw) {
       const marker = parseMarker(ev.description?.text) || parseMarker(ev.description?.html);
-      const baseId = marker?.baseId || ev.id;
-      const group: Group = groups.get(baseId) || { baseId, byLang: new Map<string, RawEbEvent>(), singles: [] };
-      if (marker?.lang) group.byLang.set(marker.lang, ev);
-      else group.singles.push(ev);
-      groups.set(baseId, group);
+      if (marker?.lang) {
+        const group: Group =
+          groups.get(marker.baseId) || { baseId: marker.baseId, byLang: new Map<string, RawEbEvent>(), singles: [], sig: sigOf(ev) };
+        group.byLang.set(marker.lang, ev);
+        if (!group.sig) group.sig = sigOf(ev);
+        groups.set(marker.baseId, group);
+      } else {
+        orphans.push(ev);
+      }
+    }
+
+    // FASE 2 — riattacca gli orfani (listing che hanno PERSO il marker, es. durante
+    // un enrichment via browser) al gruppo gemello con la stessa impronta fisica →
+    // niente seconda card IT/EN. Se più gruppi condividono l'impronta (ambiguo) o
+    // nessuno, l'orfano fa gruppo per impronta (così due orfani EN/IT della stessa
+    // serata SENZA marker si uniscono comunque tra loro, mai con eventi già marcati).
+    const bySig = new Map<string, Group[]>();
+    for (const g of groups.values()) {
+      if (!g.sig) continue;
+      const arr = bySig.get(g.sig) || [];
+      arr.push(g);
+      bySig.set(g.sig, arr);
+    }
+    for (const ev of orphans) {
+      const sig = sigOf(ev);
+      const marked = bySig.get(sig) || [];
+      if (marked.length === 1) {
+        marked[0].singles.push(ev);
+      } else {
+        const key = `orphan|${sig}|${marked.length > 1 ? ev.id : ''}`;
+        const g: Group = groups.get(key) || { baseId: ev.id, byLang: new Map<string, RawEbEvent>(), singles: [], sig };
+        g.singles.push(ev);
+        groups.set(key, g);
+      }
     }
 
     const events: Event[] = [];
 
     for (const group of groups.values()) {
+      const allListings = [...group.byLang.values(), ...group.singles];
+      const pickImage = () => {
+        for (const ev of allListings) {
+          const img = ev.logo?.url || ev.logo?.original?.url;
+          if (img) return img;
+        }
+        return undefined;
+      };
+
       if (group.byLang.size > 0) {
         // Serata gold multilingua — UNA sola card, titolo/descrizione per lingua,
         // niente riscrittura AI (il contenuto è già il nostro gold-standard).
@@ -382,14 +429,7 @@ export async function fetchEventbriteEvents(includePast = false, sinceDaysAgo?: 
         const slug = marker?.slug || '';
         const primaryTitle = cleanTitle(primary.name.text);
         const shared = buildSharedFields(primary, primaryTitle, primary.description?.text || '');
-        // Immagine: primo listing del gruppo che ha una locandina caricata
-        // (upload logo può essere fallito/parziale su singoli listing).
-        if (!shared.image) {
-          for (const ev of group.byLang.values()) {
-            const img = ev.logo?.url || ev.logo?.original?.url;
-            if (img) { shared.image = img; break; }
-          }
-        }
+        if (!shared.image) shared.image = pickImage();
 
         // Titolo/descrizione per OGNI lingua pubblicata → la card mostra quella
         // selezionata dal sito, con fallback automatico a EN (getLocalizedText).
@@ -399,6 +439,18 @@ export async function fetchEventbriteEvents(includePast = false, sinceDaysAgo?: 
           const t = cleanTitle(ev.name.text);
           title[lang] = t;
           shortDescription[lang] = shortDescFromText(ev.description?.text, t);
+        }
+        // Fold dei listing orfani (senza marker) della STESSA serata come lingua
+        // mancante: la loro presenza NON deve mai creare una seconda card. Riempie
+        // il primo slot vuoto tra en/it — di norma è la lingua dell'orfano, perché
+        // il gruppo marcato ha già l'altra.
+        for (const ev of group.singles) {
+          const t = cleanTitle(ev.name.text);
+          const lang = !title.en ? 'en' : !title.it ? 'it' : null;
+          if (lang) {
+            title[lang] = t;
+            shortDescription[lang] = shortDescFromText(ev.description?.text, t);
+          }
         }
         if (!title.en) title.en = primaryTitle;
         if (!shortDescription.en) shortDescription.en = shortDescFromText(primary.description?.text, primaryTitle);
@@ -416,28 +468,38 @@ export async function fetchEventbriteEvents(includePast = false, sinceDaysAgo?: 
         continue;
       }
 
-      // Singoli listing legacy/scout (marker senza lingua, o nessun marker) —
-      // comportamento invariato: riscrittura AI generica, fail-safe a rule-based.
-      for (const ev of group.singles) {
-        const title = cleanTitle(ev.name.text);
-        const desc = (ev.description?.text || title).slice(0, 600);
-        const shared = buildSharedFields(ev, title, desc);
+      // Gruppo di soli orfani (nessun marker-lingua): UNA sola card, MAI una per
+      // listing — i singoli sono la stessa serata in lingue diverse. Primario: chi
+      // ha un marker legacy (slug stabile), altrimenti il primo per id (deterministico).
+      const singlesSorted = group.singles
+        .slice()
+        .sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
+      const primary =
+        singlesSorted.find((s) => parseMarker(s.description?.text) || parseMarker(s.description?.html)) ||
+        singlesSorted[0];
+      const title = cleanTitle(primary.name.text);
+      const desc = (primary.description?.text || title).slice(0, 600);
+      const shared = buildSharedFields(primary, title, desc);
+      if (!shared.image) shared.image = pickImage();
 
-        const seo = await rewriteEventSEO({ title, description: desc, venueId: shared.venueId, dateISO: shared.dateISO });
-        const marker = parseMarker(ev.description?.text) || parseMarker(ev.description?.html);
-        const slugEn = marker?.slug || seo.slugEn;
-        const slugIt = marker?.slug || seo.slugIt;
+      const seo = await rewriteEventSEO({ title, description: desc, venueId: shared.venueId, dateISO: shared.dateISO });
+      const marker = parseMarker(primary.description?.text) || parseMarker(primary.description?.html);
+      const slugEn = marker?.slug || seo.slugEn;
+      const slugIt = marker?.slug || seo.slugIt;
+      // Se c'è un secondo orfano (l'altra lingua), usa il suo titolo umano invece
+      // di quello riscritto — senza però creare una card extra.
+      const other = singlesSorted.find((s) => s !== primary);
+      const otherTitle = other ? cleanTitle(other.name.text) : '';
 
-        events.push({
-          id: `eb-${ev.id}`,
-          ...shared,
-          localizedContent: {
-            title: { en: seo.titleEn, it: seo.titleIt },
-            shortDescription: { en: seo.descEn, it: seo.descIt },
-            slug: { en: slugEn, it: slugIt },
-          },
-        });
-      }
+      events.push({
+        id: `eb-${marker?.baseId || primary.id}`,
+        ...shared,
+        localizedContent: {
+          title: { en: seo.titleEn, it: otherTitle || seo.titleIt },
+          shortDescription: { en: seo.descEn, it: seo.descIt },
+          slug: { en: slugEn, it: slugIt },
+        },
+      });
     }
 
     ebEventsCache[cacheKey] = { at: Date.now(), events };
