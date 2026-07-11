@@ -29,10 +29,12 @@ async function getEbEventBySlug(slug: string): Promise<Event | undefined> {
   const hit = events.find(match);
   if (hit) return hit;
   // Evento passato: NON è nel set current_future, ma la sua pagina deve restare
-  // raggiungibile per sempre (SEO: tutti i link accessibili anche quando l'evento
-  // è uscito dalla lista "Eventi passati"). Fetch più pesante (include past) solo
-  // qui, come fallback — le serate future/di stasera si risolvono al primo fetch.
-  const withPast = await fetchEventbriteEvents(true);
+  // raggiungibile (SEO: link accessibili anche quando l'evento è uscito dalla
+  // lista "Eventi passati"). Percorso VELOCE (ended,completed + start_desc, ~400
+  // listing più recenti): copre gli eventi passati recenti in pochi secondi,
+  // senza scansionare tutta la storia (start_asc completo = ~60s → timeout →
+  // pagina mai renderizzata). Gli eventi molto vecchi restano nella sitemap.
+  const withPast = await fetchEventbriteEvents(true, 30);
   return withPast.find(match);
 }
 
@@ -110,9 +112,15 @@ export async function generateStaticParams() {
 
   // Pre-generate pages for live Eventbrite events at build time.
   // New events added after the last build are served on-demand via ISR.
+  // Include ANCHE i passati recenti (percorso veloce ended,completed): così le
+  // pagine degli eventi appena trascorsi sono già renderizzate/cacheate e non
+  // dipendono dal fetch on-demand lento (che andava in timeout → link rotti).
   try {
-    const ebEvents = await fetchEventbriteEvents();
-    ebEvents.forEach((ev) => {
+    const [future, recentPast] = await Promise.all([
+      fetchEventbriteEvents(),
+      fetchEventbriteEvents(true, 30).catch(() => [] as Awaited<ReturnType<typeof fetchEventbriteEvents>>),
+    ]);
+    [...future, ...recentPast].forEach((ev) => {
       if (ev.localizedContent.slug.en)
         paths.push({ locale: 'en', slug: ev.localizedContent.slug.en });
       const itSlug = ev.localizedContent.slug.it || ev.localizedContent.slug.en;

@@ -16,6 +16,13 @@ import type { Event, Venue } from '@/lib/types';
 export const revalidate = 1800;
 export const maxDuration = 60;
 
+// Prerendera en/it al build + abilita l'ISR per TUTTI i locale (senza
+// generateStaticParams la route dinamica veniva ri-renderizzata a ogni richiesta,
+// pagando il fetch ~33s ogni volta invece di servire l'HTML cacheato).
+export function generateStaticParams() {
+  return [{ locale: 'en' }, { locale: 'it' }];
+}
+
 type Props = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
