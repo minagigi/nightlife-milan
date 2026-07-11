@@ -8,9 +8,12 @@ import { hreflangAlternates, localePrefix, getLocaleDef, DEFAULT_LOCALE } from '
 import { tr } from '@/lib/i18n/t';
 import type { Event, Venue } from '@/lib/types';
 
-// force-dynamic: la lista dipende dalla data corrente (evento "passato" = data <
-// oggi nel fuso di Roma) e da Eventbrite live+past.
-export const dynamic = 'force-dynamic';
+// ISR invece di force-dynamic: la lista mostra solo la serata di ieri, ma il
+// fetch Eventbrite (anche limitato agli ultimi giorni) resta costoso →
+// force-dynamic lo rifaceva a OGNI richiesta e andava in timeout (lista vuota).
+// Con revalidate la pagina è cacheata e rigenerata ~ogni 30min: il confine
+// ieri/oggi si aggiorna con un ritardo trascurabile per un archivio.
+export const revalidate = 1800;
 export const maxDuration = 60;
 
 type Props = { params: Promise<{ locale: string }> };
@@ -47,8 +50,11 @@ export default async function PastEventsPage({ params }: Props) {
 
   let live: Event[] = [];
   try {
-    // includePast=true: include anche gli eventi già passati (per SEO non spariscono).
-    live = await fetchEventbriteEvents(true);
+    // includePast=true + bound agli ultimi 3 giorni: la lista mostra solo la
+    // serata di ieri, quindi non serve scaricare tutta la storia (che cresce e
+    // manda in timeout). Le pagine dei singoli eventi più vecchi restano
+    // raggiungibili via la route evento (fallback include-past) e la sitemap.
+    live = await fetchEventbriteEvents(true, 3);
   } catch {
     live = [];
   }

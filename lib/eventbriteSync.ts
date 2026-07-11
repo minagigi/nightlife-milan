@@ -281,11 +281,24 @@ const FETCH_RETRY_DELAY_MS = 700;
 const ebEventsCache: Record<string, { at: number; events: Event[] }> = {};
 const EB_EVENTS_TTL_MS = 5 * 60 * 1000;
 
-export async function fetchEventbriteEvents(includePast = false): Promise<Event[]> {
+export async function fetchEventbriteEvents(includePast = false, sinceDaysAgo?: number): Promise<Event[]> {
   const token = getEventbriteToken();
   if (!token) return [];
 
-  const cacheKey = includePast ? 'past' : 'future';
+  // sinceDaysAgo (solo con includePast): limita la query agli eventi iniziati
+  // negli ultimi N giorni (via start_date.range_start). Serve alla sezione
+  // "Eventi passati", che mostra solo la serata di ieri: senza questo bound la
+  // query scaricherebbe TUTTA la storia (>260 listing, cresce ogni giorno con le
+  // traduzioni) → ~55s → timeout → lista vuota. getEbEventBySlug resta senza
+  // bound (deve risolvere qualsiasi slug passato per SEO).
+  // Eventbrite vuole un datetime UTC "naive" (YYYY-MM-DDTHH:MM:SS, SENZA la Z):
+  // con la Z l'API risponde 400 ARGUMENTS_ERROR.
+  const rangeStartParam =
+    includePast && sinceDaysAgo
+      ? `&start_date.range_start=${new Date(Date.now() - sinceDaysAgo * 86400000).toISOString().slice(0, 19)}`
+      : '';
+
+  const cacheKey = includePast ? (sinceDaysAgo ? `past-${sinceDaysAgo}` : 'past') : 'future';
   const cached = ebEventsCache[cacheKey];
   if (cached && Date.now() - cached.at < EB_EVENTS_TTL_MS) return cached.events;
 
@@ -309,6 +322,7 @@ export async function fetchEventbriteEvents(includePast = false): Promise<Event[
         const url =
           `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=${status}&expand=venue,logo&order_by=start_asc&page_size=200` +
           (includePast ? '' : '&time_filter=current_future') +
+          rangeStartParam +
           (continuation ? `&continuation=${continuation}` : '');
         const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` }, next: { revalidate: 300 } });
         if (!res.ok) throw new Error(`Eventbrite list HTTP ${res.status}`);
