@@ -47,23 +47,18 @@ function CarouselInner({ items, lang, showTonightTag }: EventsCarouselProps) {
   }
 
   return (
-    <div className="relative">
-      {/* Fade — right edge */}
-      <div className="pointer-events-none absolute right-0 top-0 bottom-4 w-24 bg-gradient-to-l from-[#131009] to-transparent z-10 hidden sm:block" />
-      {/* Fade — left edge */}
-      <div className="pointer-events-none absolute left-0 top-0 bottom-4 w-8 bg-gradient-to-r from-[#131009] to-transparent z-10" />
+    {/* max-w-7xl mx-auto: il carosello è CONTENUTO nella stessa colonna centrata
+        delle intestazioni e delle altre sezioni → margini uguali a destra e a
+        sinistra, le card scorrono DENTRO la colonna (non sfondano fino al bordo). */}
+    <div className="relative max-w-7xl mx-auto">
+      {/* Fade — right edge (indica che si può scorrere) */}
+      <div className="pointer-events-none absolute right-0 top-0 bottom-4 w-16 bg-gradient-to-l from-[#131009] to-transparent z-10 hidden sm:block" />
 
       {/* Scroll track */}
       <div
         ref={scrollRef}
         className="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4
           [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        style={{
-          paddingLeft: 'var(--carousel-pl)', paddingRight: 'var(--carousel-pl)',
-          // scroll-padding = padding: senza, snap-mandatory aggancia il primo card
-          // al bordo del contenitore ignorando il padding (lo trascina a filo).
-          scrollPaddingLeft: 'var(--carousel-pl)', scrollPaddingRight: 'var(--carousel-pl)',
-        }}
       >
         {filtered.map(({ event, venue }, i) => (
           <div
@@ -102,7 +97,7 @@ function CarouselInner({ items, lang, showTonightTag }: EventsCarouselProps) {
 
 function CarouselSkeleton() {
   return (
-    <div className="flex gap-4 overflow-hidden px-4 sm:px-6 lg:px-8 pb-4" aria-hidden="true">
+    <div className="flex gap-4 overflow-hidden max-w-7xl mx-auto pb-4" aria-hidden="true">
       {Array.from({ length: 4 }).map((_, i) => (
         <div key={i} className="shrink-0 w-[260px] sm:w-[280px]">
           <div
@@ -127,7 +122,7 @@ function CarouselSkeleton() {
 
 export default function EventsCarousel(props: EventsCarouselProps) {
   return (
-    <div className="group/carousel">
+    <div className="group/carousel px-4 sm:px-6 lg:px-8">
       <Suspense fallback={<CarouselSkeleton />}>
         <CarouselInner {...props} />
       </Suspense>
