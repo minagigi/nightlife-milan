@@ -104,7 +104,8 @@ export async function getEventGoldHtml(slugEn: string, locale: string): Promise<
   } else {
     try {
       const { fetchOwnOrgEvents } = await import('./importLedger');
-      all = await fetchOwnOrgEvents();
+      // include ended/completed: gli eventi passati mantengono programma+FAQ.
+      all = await fetchOwnOrgEvents('live,draft,started,ended,completed');
       orgEventsCache = { at: Date.now(), events: all };
     } catch {
       return null;
@@ -283,8 +284,11 @@ export async function fetchEventbriteEvents(includePast = false): Promise<Event[
       let continuation: string | undefined;
       let pages = 0;
       do {
+        // includePast: Eventbrite marca gli eventi trascorsi come ended/completed,
+        // quindi status=live da solo li escluderebbe → si aggiungono quegli stati.
+        const status = includePast ? 'live,started,ended,completed' : 'live';
         const url =
-          `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=live&expand=venue,logo,ticket_classes&order_by=start_asc&page_size=200` +
+          `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=${status}&expand=venue,logo,ticket_classes&order_by=start_asc&page_size=200` +
           (includePast ? '' : '&time_filter=current_future') +
           (continuation ? `&continuation=${continuation}` : '');
         const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` }, next: { revalidate: 300 } });

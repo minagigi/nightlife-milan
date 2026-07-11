@@ -21,13 +21,18 @@ interface OwnOrgEvent {
   description?: { html?: string };
 }
 
-export async function fetchOwnOrgEvents(): Promise<OwnOrgEvent[]> {
+/**
+ * @param statuses  Stati Eventbrite da includere. Default `live,draft,started`
+ *   (dedupe import). Il rendering del contenuto gold sul sito passa anche
+ *   `ended,completed` così le pagine degli eventi PASSATI mantengono programma/FAQ.
+ */
+export async function fetchOwnOrgEvents(statuses = 'live,draft,started'): Promise<OwnOrgEvent[]> {
   const token = getEventbriteToken();
   if (!token) return [];
 
+  const base = `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=${statuses}&expand=venue&page_size=100&order_by=start_asc`;
   const all: OwnOrgEvent[] = [];
-  let url: string | null =
-    `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=live,draft,started&expand=venue&page_size=100&order_by=start_asc`;
+  let url: string | null = base;
 
   while (url) {
     let res: Response;
@@ -43,7 +48,7 @@ export async function fetchOwnOrgEvents(): Promise<OwnOrgEvent[]> {
 
     const pagination = data.pagination;
     url = pagination?.has_more_items && pagination?.continuation
-      ? `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=live,draft,started&expand=venue&page_size=100&order_by=start_asc&continuation=${pagination.continuation}`
+      ? `${base}&continuation=${pagination.continuation}`
       : null;
   }
 
