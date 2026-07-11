@@ -371,7 +371,7 @@ export async function fetchEventbriteEvents(includePast = false, sinceDaysAgo?: 
     // locale/sera (es. Pineta: "Saturday Night" vs "Argentina vs Switzerland Watch
     // Party") hanno nucleo-nome diverso → restano DUE card separate.
     const physKey = (ev: RawEbEvent) =>
-      physicalEventKey(mapVenueId(ev.venue?.name || ''), ev.start?.utc || '', cleanTitle(ev.name.text));
+      physicalEventKey(mapVenueId(ev.venue?.name || ''), ev.start?.utc || '', cleanTitle(ev.name.text), ev.venue?.name || '');
 
     interface Group { baseId: string; byLang: Map<string, RawEbEvent>; singles: RawEbEvent[] }
     const groups = new Map<string, Group>();

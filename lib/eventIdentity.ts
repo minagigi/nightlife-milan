@@ -43,7 +43,18 @@ function romeDayKey(dateISO: string): string {
   return `${get('year')}-${get('month')}-${get('day')}`;
 }
 
-/** Chiave di identità fisica: venue + giorno (Roma) + nucleo-nome. */
-export function physicalEventKey(venueId: string, dateISO: string, titleEn: string): string {
-  return `${venueId}|${romeDayKey(dateISO)}|${eventNameCore(titleEn)}`;
+/** Chiave di identità fisica: venue + giorno (Roma) + nucleo-nome.
+ * `venueName` (opzionale): i suoi token vengono rimossi dal nucleo — il nome del
+ * locale è già rappresentato dal venueId, e includerlo nel nucleo creava falsi
+ * "eventi diversi" tra sorgenti che titolano lo stesso evento in modo diverso
+ * (es. Eventbrite "Noche de Perreo @ Pineta Club Milano" vs mock "Noche de
+ * Perreo"): togliendolo, entrambe collassano su "noche de perreo" → una card. */
+export function physicalEventKey(venueId: string, dateISO: string, titleEn: string, venueName = ''): string {
+  let core = eventNameCore(titleEn);
+  const venueTokens = eventNameCore(venueName).split(' ').filter((w) => w.length >= 2);
+  if (venueTokens.length) {
+    const re = new RegExp('\\b(' + venueTokens.join('|') + ')\\b', 'g');
+    core = core.replace(re, ' ').replace(/\s+/g, ' ').trim();
+  }
+  return `${venueId}|${romeDayKey(dateISO)}|${core}`;
 }

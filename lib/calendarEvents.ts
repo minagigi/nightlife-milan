@@ -19,7 +19,9 @@ export function dedupeEventsByIdentity<T extends { event: Event }>(items: T[]): 
   const best = new Map<string, T>();
   const order: string[] = [];
   for (const item of items) {
-    const key = physicalEventKey(item.event.venueId, item.event.dateISO, item.event.localizedContent.title.en || '');
+    const venueName =
+      mockVenues.find((v) => v.id === item.event.venueId)?.localizedContent.name.en || '';
+    const key = physicalEventKey(item.event.venueId, item.event.dateISO, item.event.localizedContent.title.en || '', venueName);
     const cur = best.get(key);
     if (!cur) {
       best.set(key, item);
