@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { hreflangAlternates } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import { mockVenues } from '@/lib/data';
 
@@ -26,11 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description,
     alternates: {
       canonical,
-      languages: {
-        'en': `${baseUrl}/bottle-prices`,
-        'it': `${baseUrl}/it/bottle-prices`,
-        'x-default': `${baseUrl}/bottle-prices`,
-      },
+      languages: hreflangAlternates(baseUrl, '/bottle-prices'),
     },
     keywords: isIt
       ? ['prezzi bottiglie discoteche milano', 'listino bottle service milano', 'costo tavolo vip milano', 'champagne club milano', 'prezzi just me milano']

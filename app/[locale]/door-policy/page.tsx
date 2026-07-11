@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { hreflangAlternates } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import { mockVenues } from '@/lib/data';
 
@@ -26,11 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description,
     alternates: {
       canonical,
-      languages: {
-        'en': `${baseUrl}/door-policy`,
-        'it': `${baseUrl}/it/door-policy`,
-        'x-default': `${baseUrl}/door-policy`,
-      },
+      languages: hreflangAlternates(baseUrl, '/door-policy'),
     },
     keywords: isIt
       ? ['dress code discoteche milano', 'door policy milano', 'cosa indossare club milano', 'età minima discoteche milano', 'selezione ingresso milano']

@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { hreflangAlternates } from '@/lib/i18n/locales';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Clock, MapPin, MessageCircle } from 'lucide-react';
@@ -28,11 +29,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     robots: { index: true, follow: true },
     alternates: {
       canonical,
-      languages: {
-        'en': `${baseUrl}/aperitivo`,
-        'it': `${baseUrl}/it/aperitivo`,
-        'x-default': `${baseUrl}/aperitivo`,
-      },
+      languages: hreflangAlternates(baseUrl, '/aperitivo'),
     },
     openGraph: {
       title: tr(locale, 'Best Aperitivo in Milan 2026 — Nightlife Milan', 'Migliore Aperitivo Milano 2026 — Nightlife Milan'),

@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { hreflangAlternates } from '@/lib/i18n/locales';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -185,11 +186,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     robots: { index: true, follow: true },
     alternates: {
       canonical,
-      languages: {
-        'en': `${baseUrl}/genres/${slug}`,
-        'it': `${baseUrl}/it/genres/${slug}`,
-        'x-default': `${baseUrl}/genres/${slug}`,
-      },
+      languages: hreflangAlternates(baseUrl, `/genres/${slug}`),
     },
     openGraph: {
       title,

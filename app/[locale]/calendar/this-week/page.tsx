@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { hreflangAlternates } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset, romeSundayKey } from '@/lib/calendarEvents';
 import DiscoveryGrid from '@/components/DiscoveryGrid';
@@ -32,11 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     robots: { index: true, follow: true },
     alternates: {
       canonical,
-      languages: {
-        'en': `${baseUrl}/calendar/this-week`,
-        'it': `${baseUrl}/it/calendar/this-week`,
-        'x-default': `${baseUrl}/calendar/this-week`,
-      },
+      languages: hreflangAlternates(baseUrl, '/calendar/this-week'),
     },
     openGraph: {
       title,

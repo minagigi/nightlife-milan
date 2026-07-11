@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { hreflangAlternates } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import Image from 'next/image';
 import NewsletterHub from '@/components/NewsletterHub';
@@ -28,11 +29,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     robots: { index: true, follow: true },
     alternates: {
       canonical,
-      languages: {
-        'en': `${baseUrl}/guides`,
-        'it': `${baseUrl}/it/guides`,
-        'x-default': `${baseUrl}/guides`,
-      },
+      languages: hreflangAlternates(baseUrl, '/guides'),
     },
     openGraph: {
       title: tr(locale, 'Milan Nightlife Guides 2026 — The Insider Magazine', 'Guide Vita Notturna Milano 2026 — Nightlife Milan'),

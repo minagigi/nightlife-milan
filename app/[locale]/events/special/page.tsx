@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { hreflangAlternates } from '@/lib/i18n/locales';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
@@ -28,11 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     keywords: ['special events milan', 'vip events milan', 'exclusive parties milan', 'vip table milan', 'private events milan 2026', 'eventi speciali milano', 'serate esclusive milano'],
     alternates: {
       canonical,
-      languages: {
-        'en': `${baseUrl}/events/special`,
-        'it': `${baseUrl}/it/events/special`,
-        'x-default': `${baseUrl}/events/special`,
-      },
+      languages: hreflangAlternates(baseUrl, '/events/special'),
     },
     openGraph: {
       title,

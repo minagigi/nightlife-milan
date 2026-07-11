@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { hreflangAlternates } from '@/lib/i18n/locales';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -153,11 +154,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       alternates: {
         canonical,
-        languages: {
-          'en': `${baseUrl}/events/${slug}`,
-          'it': `${baseUrl}/it/events/${slug}`,
-          'x-default': `${baseUrl}/events/${slug}`,
-        },
+        languages: hreflangAlternates(baseUrl, `/events/${slug}`),
       },
       robots: { index: true, follow: true },
       openGraph: {
@@ -204,11 +201,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description,
     alternates: {
       canonical,
-      languages: {
-        'en': `${baseUrl}/events/${enSlug}`,
-        'it': `${baseUrl}/it/events/${itSlug}`,
-        'x-default': `${baseUrl}/events/${enSlug}`,
-      },
+      languages: { ...hreflangAlternates(baseUrl, `/events/${enSlug}`), it: `${baseUrl}/it/events/${itSlug}` },
     },
     robots: { index: true, follow: true },
     openGraph: {

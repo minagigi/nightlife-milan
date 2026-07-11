@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { hreflangAlternates } from '@/lib/i18n/locales';
 import Image from 'next/image';
 import Link from 'next/link';
 import { MapPin, Clock, Shirt, MessageCircle, Star, Calendar, ArrowLeft, Music, Wine, Utensils, ShieldCheck, Check, CreditCard } from 'lucide-react';
@@ -215,11 +216,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
     alternates: {
       canonical: canonicalUrl,
-      languages: {
-        'en': `${baseUrl}/clubs/${enSlug}`,
-        'it': `${baseUrl}/it/clubs/${itSlug}`,
-        'x-default': `${baseUrl}/clubs/${enSlug}`,
-      },
+      languages: { ...hreflangAlternates(baseUrl, `/clubs/${enSlug}`), it: `${baseUrl}/it/clubs/${itSlug}` },
     },
     openGraph: {
       title,

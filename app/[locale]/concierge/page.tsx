@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { hreflangAlternates } from '@/lib/i18n/locales';
 import Image from 'next/image';
 import { MessageCircle, Star, Clock, Shield, Zap, MapPin, Calendar, CheckCircle } from 'lucide-react';
 import { CONTACT } from '@/config/contact';
@@ -29,11 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     robots: { index: true, follow: true },
     alternates: {
       canonical,
-      languages: {
-        'en': `${baseUrl}/concierge`,
-        'it': `${baseUrl}/it/concierge`,
-        'x-default': `${baseUrl}/concierge`,
-      },
+      languages: hreflangAlternates(baseUrl, '/concierge'),
     },
     openGraph: {
       title: isIt ? 'Concierge Vita Notturna Milano — Nightlife Milan' : 'Personal Milan Nightlife Concierge — Nightlife Milan',

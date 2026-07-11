@@ -11,7 +11,7 @@ import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset, romeSundayKey } fro
 import { Venue, Event } from '@/lib/types';
 import { CONTACT } from '@/config/contact';
 import { tr } from '@/lib/i18n/t';
-import { localePrefix } from '@/lib/i18n/locales';
+import { localePrefix, hreflangAlternates } from '@/lib/i18n/locales';
 
 const EventsCarousel = nextDynamic(() => import('@/components/EventsCarousel'));
 
@@ -41,11 +41,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     robots: { index: true, follow: true },
     alternates: {
       canonical,
-      languages: {
-        'en': baseUrl,
-        'it': `${baseUrl}/it`,
-        'x-default': baseUrl,
-      },
+      languages: hreflangAlternates(baseUrl, ''),
     },
     openGraph: {
       title: tr(locale, 'Milan Nightlife 2026 — The Definitive Guide', 'Vita Notturna Milano 2026 — La Guida Definitiva'),

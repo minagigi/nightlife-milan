@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { hreflangAlternates } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Calendar, Clock, MapPin } from 'lucide-react';
@@ -34,11 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     robots: { index: false, follow: true },
     alternates: {
       canonical,
-      languages: {
-        'en': `${baseUrl}/calendar/tonight`,
-        'it': `${baseUrl}/it/calendar/tonight`,
-        'x-default': `${baseUrl}/calendar/tonight`,
-      },
+      languages: hreflangAlternates(baseUrl, '/calendar/tonight'),
     },
     openGraph: {
       title,

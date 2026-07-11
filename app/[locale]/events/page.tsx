@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { hreflangAlternates } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
@@ -26,11 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       : 'Discover all events, nights and experiences in Milan. Clubs, aperitivo, live music, special nights. Book VIP table or guestlist via WhatsApp.',
     alternates: {
       canonical,
-      languages: {
-        'en': `${baseUrl}/events`,
-        'it': `${baseUrl}/it/events`,
-        'x-default': `${baseUrl}/events`,
-      },
+      languages: hreflangAlternates(baseUrl, '/events'),
     },
     openGraph: {
       title: isIt ? 'Tutti gli Eventi a Milano 2026' : 'All Events in Milan 2026',

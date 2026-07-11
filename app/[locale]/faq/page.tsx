@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { hreflangAlternates } from '@/lib/i18n/locales';
 import Link from 'next/link';
 
 export const revalidate = 86400;
@@ -25,11 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description,
     alternates: {
       canonical,
-      languages: {
-        'en': `${baseUrl}/faq`,
-        'it': `${baseUrl}/it/faq`,
-        'x-default': `${baseUrl}/faq`,
-      },
+      languages: hreflangAlternates(baseUrl, '/faq'),
     },
     keywords: isIt
       ? ['faq vita notturna milano', 'domande discoteche milano', 'prezzi tavoli vip milano', 'dress code milano', 'guestlist milano', 'età minima club milano']

@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { hreflangAlternates } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import Image from 'next/image';
 import VenueCard from '@/components/VenueCard';
@@ -33,11 +34,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     robots: { index: true, follow: true },
     alternates: {
       canonical: canonicalUrl,
-      languages: {
-        'en': `${baseUrl}/clubs`,
-        'it': `${baseUrl}/it/clubs`,
-        'x-default': `${baseUrl}/clubs`,
-      },
+      languages: hreflangAlternates(baseUrl, '/clubs'),
     },
     openGraph: {
       title: isIt

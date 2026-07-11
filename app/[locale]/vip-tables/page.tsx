@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { hreflangAlternates } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, MessageCircle, Star, Users, Clock, Shield } from 'lucide-react';
@@ -29,11 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     robots: { index: true, follow: true },
     alternates: {
       canonical: canonicalUrl,
-      languages: {
-        'en': `${baseUrlGlobal}/vip-tables`,
-        'it': `${baseUrlGlobal}/it/vip-tables`,
-        'x-default': `${baseUrlGlobal}/vip-tables`,
-      },
+      languages: hreflangAlternates(baseUrlGlobal, '/vip-tables'),
     },
     openGraph: {
       title: tr(locale, 'VIP Table Booking Milan — Nightlife Milan Concierge', 'Prenotazione Tavoli VIP Milano — Nightlife Milan Concierge'),
