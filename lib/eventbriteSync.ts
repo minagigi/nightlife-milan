@@ -359,54 +359,35 @@ export async function fetchEventbriteEvents(includePast = false, sinceDaysAgo?: 
     // lingua); senza raggruppare, ognuno diventava una Event a sé → 35 card
     // duplicate sullo stesso carosello. Qui diventano UNA sola card che mostra il
     // titolo/descrizione nella lingua selezionata dal sito (fallback EN).
-    interface Group { baseId: string; byLang: Map<string, RawEbEvent>; singles: RawEbEvent[]; sig?: string }
+    // Raggruppamento per IDENTITÀ FISICA dell'evento — NON per baseId del marker
+    // (fragile). Due sorgenti reali di duplicati IT/EN sfuggivano al baseId:
+    //   1) un listing che PERDE il marker (enrichment via browser) → orfano a sé;
+    //   2) lo STESSO evento pubblicato come DUE listing con baseId e slug diversi
+    //      (uno "…-july-11-2026", uno "…-11-luglio-2026") → due gruppi distinti.
+    // La chiave è: venue normalizzata (mapVenueId unifica gli alias) + giorno di
+    // inizio + NUCLEO del nome (tolte date/numeri/mesi/giorni, che cambiano tra
+    // EN/IT). Stesso evento → stessa chiave → UNA card. Eventi DIVERSI stesso
+    // locale/sera (es. Pineta: "Saturday Night" vs "Argentina vs Switzerland Watch
+    // Party") hanno nucleo-nome diverso → restano DUE card separate.
+    const DATE_WORDS = /\b(jan(uary)?|feb(ruary)?|mar(ch)?|apr(il)?|may|jun(e)?|jul(y)?|aug(ust)?|sep(t|tember)?|oct(ober)?|nov(ember)?|dec(ember)?|gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre|monday|tuesday|wednesday|thursday|friday|saturday|sunday|luned|marted|mercoled|gioved|venerd|sabato|domenica)\b/gi;
+    const nameCore = (t: string) =>
+      cleanTitle(t).toLowerCase().replace(DATE_WORDS, ' ').replace(/[0-9]+/g, ' ')
+        .replace(/[^a-zà-ù]+/gi, ' ').trim().replace(/\s+/g, ' ');
+    const physKey = (ev: RawEbEvent) =>
+      `${mapVenueId(ev.venue?.name || '')}|${(ev.start?.utc || '').slice(0, 10)}|${nameCore(ev.name.text)}`;
+
+    interface Group { baseId: string; byLang: Map<string, RawEbEvent>; singles: RawEbEvent[] }
     const groups = new Map<string, Group>();
-    const orphans: RawEbEvent[] = []; // listing SENZA marker-lingua (perso o legacy)
-
-    // Impronta FISICA della serata: venue normalizzata (mapVenueId unifica gli
-    // alias EN/IT) + istante d'inizio UTC. Due listing con la stessa impronta sono
-    // la STESSA serata in lingue diverse — NON due eventi diversi: eventi diversi
-    // nello stesso locale/sera (es. Pineta: Saturday Night + Fifa watch party)
-    // hanno comunque baseId distinti e restano separati (mai fusi per impronta).
-    const sigOf = (ev: RawEbEvent) => `${mapVenueId(ev.venue?.name || '')}|${ev.start?.utc || ''}`;
-
-    // FASE 1 — raggruppa per baseId i listing CON marker-lingua (fonte autorevole).
     for (const ev of raw) {
       const marker = parseMarker(ev.description?.text) || parseMarker(ev.description?.html);
-      if (marker?.lang) {
-        const group: Group =
-          groups.get(marker.baseId) || { baseId: marker.baseId, byLang: new Map<string, RawEbEvent>(), singles: [], sig: sigOf(ev) };
-        group.byLang.set(marker.lang, ev);
-        if (!group.sig) group.sig = sigOf(ev);
-        groups.set(marker.baseId, group);
-      } else {
-        orphans.push(ev);
-      }
-    }
-
-    // FASE 2 — riattacca gli orfani (listing che hanno PERSO il marker, es. durante
-    // un enrichment via browser) al gruppo gemello con la stessa impronta fisica →
-    // niente seconda card IT/EN. Se più gruppi condividono l'impronta (ambiguo) o
-    // nessuno, l'orfano fa gruppo per impronta (così due orfani EN/IT della stessa
-    // serata SENZA marker si uniscono comunque tra loro, mai con eventi già marcati).
-    const bySig = new Map<string, Group[]>();
-    for (const g of groups.values()) {
-      if (!g.sig) continue;
-      const arr = bySig.get(g.sig) || [];
-      arr.push(g);
-      bySig.set(g.sig, arr);
-    }
-    for (const ev of orphans) {
-      const sig = sigOf(ev);
-      const marked = bySig.get(sig) || [];
-      if (marked.length === 1) {
-        marked[0].singles.push(ev);
-      } else {
-        const key = `orphan|${sig}|${marked.length > 1 ? ev.id : ''}`;
-        const g: Group = groups.get(key) || { baseId: ev.id, byLang: new Map<string, RawEbEvent>(), singles: [], sig };
-        g.singles.push(ev);
-        groups.set(key, g);
-      }
+      const key = physKey(ev);
+      const group: Group =
+        groups.get(key) || { baseId: marker?.baseId || ev.id, byLang: new Map<string, RawEbEvent>(), singles: [] };
+      // baseId rappresentativo stabile: preferisci quello di un listing marcato.
+      if (marker?.baseId && group.byLang.size === 0 && group.singles.length === 0) group.baseId = marker.baseId;
+      if (marker?.lang) group.byLang.set(marker.lang, ev);
+      else group.singles.push(ev);
+      groups.set(key, group);
     }
 
     const events: Event[] = [];
@@ -425,8 +406,16 @@ export async function fetchEventbriteEvents(includePast = false, sinceDaysAgo?: 
         // Serata gold multilingua — UNA sola card, titolo/descrizione per lingua,
         // niente riscrittura AI (il contenuto è già il nostro gold-standard).
         const primary = group.byLang.get('en') || group.byLang.get('it') || [...group.byLang.values()][0];
-        const marker = parseMarker(primary.description?.text) || parseMarker(primary.description?.html);
-        const slug = marker?.slug || '';
+        // Slug per lingua dal marker di CIASCUN listing: se lo stesso evento è
+        // stato pubblicato con slug diversi per EN/IT, ENTRAMBI gli URL restano
+        // validi (getEbEventBySlug matcha slug.en O slug.it) → nessun 404, una card.
+        const slugByLang: Record<string, string> = {};
+        for (const [lang, ev] of group.byLang) {
+          const m = parseMarker(ev.description?.text) || parseMarker(ev.description?.html);
+          if (m?.slug) slugByLang[lang] = m.slug;
+        }
+        const slugEn = slugByLang.en || slugByLang.it || Object.values(slugByLang)[0] || '';
+        const slugIt = slugByLang.it || slugEn;
         const primaryTitle = cleanTitle(primary.name.text);
         const shared = buildSharedFields(primary, primaryTitle, primary.description?.text || '');
         if (!shared.image) shared.image = pickImage();
@@ -461,8 +450,8 @@ export async function fetchEventbriteEvents(includePast = false, sinceDaysAgo?: 
           localizedContent: {
             title: title as LocalizedString,
             shortDescription: shortDescription as LocalizedString,
-            // stesso slug-en per tutte le lingue: l'URL è /{locale}/events/{slugEn}
-            slug: { en: slug } as LocalizedString,
+            // slug per lingua: entrambi gli URL EN/IT risolvono → una card, zero 404.
+            slug: { en: slugEn, it: slugIt } as LocalizedString,
           },
         });
         continue;
