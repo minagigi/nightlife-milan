@@ -3,7 +3,7 @@ import Link from 'next/link';
 import EventCard from '@/components/EventCard';
 import { fetchEventbriteEvents } from '@/lib/eventbriteSync';
 import { getVenueById, mockEvents } from '@/lib/data';
-import { romeDayKey, romeDayKeyOffset } from '@/lib/calendarEvents';
+import { romeDayKey, romeDayKeyOffset, dedupeEventsByIdentity } from '@/lib/calendarEvents';
 import { hreflangAlternates, localePrefix, getLocaleDef, DEFAULT_LOCALE } from '@/lib/i18n/locales';
 import { tr } from '@/lib/i18n/t';
 import type { Event, Venue } from '@/lib/types';
@@ -80,9 +80,11 @@ export default async function PastEventsPage({ params }: Props) {
     })
     .sort((a, b) => (a.dateISO < b.dateISO ? 1 : -1));
 
-  const items = past
-    .map((event) => ({ event, venue: getVenueById(event.venueId) }))
-    .filter((x): x is { event: Event; venue: Venue } => !!x.venue);
+  const items = dedupeEventsByIdentity(
+    past
+      .map((event) => ({ event, venue: getVenueById(event.venueId) }))
+      .filter((x): x is { event: Event; venue: Venue } => !!x.venue)
+  );
 
   const heading = tr(locale, 'Past Events', 'Eventi Passati');
   const sub = tr(

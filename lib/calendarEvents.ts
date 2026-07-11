@@ -2,6 +2,34 @@ import { mockEvents, mockVenues } from './data';
 import { fetchEventbriteEvents } from './eventbriteSync';
 import { weeklyEvents, WeeklyEvent } from './eventsConfig';
 import { MusicGenre, type Event, type Venue } from './types';
+import { physicalEventKey } from './eventIdentity';
+
+/** REGOLA (richiesta utente): ogni gallery/carosello/calendario mostra UNA sola
+ * card per evento — mai due versioni (IT + EN) né due sorgenti (Eventbrite +
+ * mock/ricorrente) dello STESSO evento. Deduplica per identità fisica (venue +
+ * giorno + nucleo-nome); a parità tiene la card più ricca: Eventbrite reale >
+ * mock curato > serata ricorrente generica. La lingua è poi risolta al rendering
+ * (getLocalizedText), quindi ogni card appare nella lingua selezionata dal sito. */
+function eventSourceRank(id: string): number {
+  if (id.startsWith('eb-')) return 3;
+  if (id.startsWith('weekly-')) return 1;
+  return 2; // mock one-off curato
+}
+export function dedupeEventsByIdentity<T extends { event: Event }>(items: T[]): T[] {
+  const best = new Map<string, T>();
+  const order: string[] = [];
+  for (const item of items) {
+    const key = physicalEventKey(item.event.venueId, item.event.dateISO, item.event.localizedContent.title.en || '');
+    const cur = best.get(key);
+    if (!cur) {
+      best.set(key, item);
+      order.push(key);
+    } else if (eventSourceRank(item.event.id) > eventSourceRank(cur.event.id)) {
+      best.set(key, item);
+    }
+  }
+  return order.map((k) => best.get(k)!);
+}
 
 /** Quante notti in avanti "materializzare" dagli eventi ricorrenti
  * settimanali — copre sia /calendar/tonight (oggi+domani) sia
@@ -151,7 +179,8 @@ export async function getAllCalendarEvents(): Promise<{ event: Event; venue: Ven
     ({ event }) => !bookedVenueNights.has(`${event.venueId}|${romeDayKey(event.dateISO)}`)
   );
 
-  return [...concreteItems, ...weeklyItems];
+  // Deduplica finale per identità: una sola card per evento, ovunque.
+  return dedupeEventsByIdentity([...concreteItems, ...weeklyItems]);
 }
 
 /** True se l'evento è di oggi o futuro nel fuso di Roma. Confronto per

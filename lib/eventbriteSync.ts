@@ -3,6 +3,7 @@ import { rewriteEventSEO } from './seoRewrite';
 import { matchVenueId } from './venueMatching';
 import { getEventbriteToken } from './eventbriteToken';
 import { getVenuePricing } from './venuePricing';
+import { physicalEventKey } from './eventIdentity';
 
 const EVENTBRITE_API = 'https://www.eventbriteapi.com/v3';
 const ORG_ID = '2988002072164';
@@ -369,12 +370,8 @@ export async function fetchEventbriteEvents(includePast = false, sinceDaysAgo?: 
     // EN/IT). Stesso evento → stessa chiave → UNA card. Eventi DIVERSI stesso
     // locale/sera (es. Pineta: "Saturday Night" vs "Argentina vs Switzerland Watch
     // Party") hanno nucleo-nome diverso → restano DUE card separate.
-    const DATE_WORDS = /\b(jan(uary)?|feb(ruary)?|mar(ch)?|apr(il)?|may|jun(e)?|jul(y)?|aug(ust)?|sep(t|tember)?|oct(ober)?|nov(ember)?|dec(ember)?|gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre|monday|tuesday|wednesday|thursday|friday|saturday|sunday|luned|marted|mercoled|gioved|venerd|sabato|domenica)\b/gi;
-    const nameCore = (t: string) =>
-      cleanTitle(t).toLowerCase().replace(DATE_WORDS, ' ').replace(/[0-9]+/g, ' ')
-        .replace(/[^a-zà-ù]+/gi, ' ').trim().replace(/\s+/g, ' ');
     const physKey = (ev: RawEbEvent) =>
-      `${mapVenueId(ev.venue?.name || '')}|${(ev.start?.utc || '').slice(0, 10)}|${nameCore(ev.name.text)}`;
+      physicalEventKey(mapVenueId(ev.venue?.name || ''), ev.start?.utc || '', cleanTitle(ev.name.text));
 
     interface Group { baseId: string; byLang: Map<string, RawEbEvent>; singles: RawEbEvent[] }
     const groups = new Map<string, Group>();
