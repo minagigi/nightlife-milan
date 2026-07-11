@@ -320,7 +320,15 @@ export async function fetchEventbriteEvents(includePast = false, sinceDaysAgo?: 
       do {
         // includePast: Eventbrite marca gli eventi trascorsi come ended/completed,
         // quindi status=live da solo li escluderebbe → si aggiungono quegli stati.
-        const status = includePast ? 'live,started,ended,completed' : 'live';
+        // Caso lista passati (sinceDaysAgo): SOLO ended,completed. Escludendo
+        // live/started (i futuri) dalla query, con order_by=start_desc la serata
+        // di ieri è in cima alla pagina 1 — altrimenti i molti listing futuri
+        // (Jul 11/12 × 35 lingue) riempivano le 2 pagine e ieri restava fuori.
+        const status = sinceDaysAgo
+          ? 'ended,completed'
+          : includePast
+            ? 'live,started,ended,completed'
+            : 'live';
         const url =
           `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=${status}&expand=venue,logo&order_by=${orderBy}&page_size=200` +
           (includePast ? '' : '&time_filter=current_future') +
