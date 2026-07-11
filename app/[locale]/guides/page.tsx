@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import NewsletterHub from '@/components/NewsletterHub';
 import { Clock } from 'lucide-react';
+import { tr } from '@/lib/i18n/t';
 
 export const revalidate = 3600;
 
@@ -13,20 +14,17 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const isIt = locale === 'it';
   const canonical = `${baseUrl}${isIt ? '/it' : ''}/guides`;
 
-  const title = isIt
-    ? 'Guide Vita Notturna Milano 2026 | Dress Code, VIP Table & Consigli Insider | Nightlife Milan'
-    : 'Milan Nightlife Guides 2026 | Dress Code, VIP Tables & Insider Tips | Nightlife Milan';
-  const description = isIt
-    ? 'Guide esperte sulla vita notturna milanese: dress code, accesso VIP, zone aperitivo, migliori club techno e consigli insider. Aggiornato luglio 2026.'
-    : 'Expert guides to Milan nightlife: door policies, dress codes, VIP table booking, aperitivo zones, best techno clubs and insider tips. Updated 2026.';
+  const title = tr(locale, 'Milan Nightlife Guides 2026 | Dress Code, VIP Tables & Insider Tips | Nightlife Milan', 'Guide Vita Notturna Milano 2026 | Dress Code, VIP Table & Consigli Insider | Nightlife Milan');
+  const description = tr(locale, 'Expert guides to Milan nightlife: door policies, dress codes, VIP table booking, aperitivo zones, best techno clubs and insider tips. Updated 2026.', 'Guide esperte sulla vita notturna milanese: dress code, accesso VIP, zone aperitivo, migliori club techno e consigli insider. Aggiornato luglio 2026.');
   const ogImage = `${baseUrl}/images/guides-hero.webp`;
+
+  const keywordsEn = ['milan nightlife guide', 'milan club dress code', 'vip table milan guide', 'milan nightlife tips', 'best techno milan', 'aperitivo milan guide'];
+  const keywordsIt = ['guida vita notturna milano', 'dress code discoteche milano', 'guida tavoli vip milano', 'consigli nightlife milano', 'migliori club techno milano'];
 
   return {
     title,
     description,
-    keywords: isIt
-      ? ['guida vita notturna milano', 'dress code discoteche milano', 'guida tavoli vip milano', 'consigli nightlife milano', 'migliori club techno milano']
-      : ['milan nightlife guide', 'milan club dress code', 'vip table milan guide', 'milan nightlife tips', 'best techno milan', 'aperitivo milan guide'],
+    keywords: keywordsEn.map((k, i) => tr(locale, k, keywordsIt[i])),
     robots: { index: true, follow: true },
     alternates: {
       canonical,
@@ -37,13 +35,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       },
     },
     openGraph: {
-      title: isIt ? 'Guide Vita Notturna Milano 2026 — Nightlife Milan' : 'Milan Nightlife Guides 2026 — The Insider Magazine',
+      title: tr(locale, 'Milan Nightlife Guides 2026 — The Insider Magazine', 'Guide Vita Notturna Milano 2026 — Nightlife Milan'),
       description,
       type: 'website',
       url: canonical,
       siteName: 'Nightlife Milan',
       locale: isIt ? 'it_IT' : 'en_US',
-      images: [{ url: ogImage, width: 1200, height: 630, alt: isIt ? 'Guide vita notturna Milano insider' : 'Milan nightlife guides insider tips' }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: tr(locale, 'Milan nightlife guides insider tips', 'Guide vita notturna Milano insider') }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -118,18 +116,22 @@ export default async function GuidesPage({
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <div className="text-center mb-8">
           <h1 className="font-serif text-5xl md:text-7xl font-bold text-champagne tracking-tighter mb-6">
-            The Nightlife Magazine
+            {tr(locale, 'The Nightlife Magazine')}
           </h1>
           <p className="text-xl text-white/40 max-w-2xl mx-auto">
-            Expert guides, insider tips, and cultural deep dives into Milan&apos;s exclusive clubbing scene.
+            {tr(locale, "Expert guides, insider tips, and cultural deep dives into Milan's exclusive clubbing scene.")}
           </p>
         </div>
         {/* AI Trafiletto */}
         <div className="max-w-2xl mx-auto p-5 rounded-xl border border-champagne/20 bg-champagne/[0.04]">
-          <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">Quick Answer</p>
-          <p className="font-sans text-white/70 text-sm leading-relaxed">
-            Our Milan nightlife guides cover: <strong className="text-white">dress codes</strong> (total black or chic fashion at premium clubs), <strong className="text-white">VIP table booking</strong> (from €200 minimum spend, free concierge service), <strong className="text-white">aperitivo zones</strong> (Corso Como, Navigli, Brera, Isola), and the <strong className="text-white">best techno clubs</strong> (Magazzini Generali, Volt). All guides are updated for June 2026.
-          </p>
+          <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">{tr(locale, 'Quick Answer')}</p>
+          <p
+            className="font-sans text-white/70 text-sm leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: tr(
+              locale,
+              'Our Milan nightlife guides cover: <strong class="text-white">dress codes</strong> (total black or chic fashion at premium clubs), <strong class="text-white">VIP table booking</strong> (from €200 minimum spend, free concierge service), <strong class="text-white">aperitivo zones</strong> (Corso Como, Navigli, Brera, Isola), and the <strong class="text-white">best techno clubs</strong> (Magazzini Generali, Volt). All guides are updated for June 2026.'
+            ) }}
+          />
         </div>
       </section>
 
@@ -141,7 +143,7 @@ export default async function GuidesPage({
         >
           <Image
             src={featuredArticle.image}
-            alt={featuredArticle.title}
+            alt={tr(locale, featuredArticle.title)}
             fill
             quality={85}
             sizes="100vw"
@@ -153,22 +155,22 @@ export default async function GuidesPage({
           <div className="absolute inset-0 p-8 md:p-16 flex flex-col justify-end">
             <div className="flex items-center space-x-4 mb-4">
               <span className="bg-champagne text-black px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase">
-                Featured
+                {tr(locale, 'Featured')}
               </span>
               <span className="text-champagne text-sm font-medium tracking-wider uppercase border border-champagne/30 px-4 py-1.5 rounded-full backdrop-blur-sm">
-                {featuredArticle.category}
+                {tr(locale, featuredArticle.category)}
               </span>
               <div className="flex items-center space-x-1 text-white/70 text-sm">
                 <Clock className="w-4 h-4" />
-                <span>{featuredArticle.readTime}</span>
+                <span>{tr(locale, featuredArticle.readTime)}</span>
               </div>
             </div>
-            
+
             <h2 className="font-serif text-4xl md:text-6xl font-bold text-white mb-4 group-hover:text-champagne transition-colors">
-              {featuredArticle.title}
+              {tr(locale, featuredArticle.title)}
             </h2>
             <p className="text-xl text-white/70 max-w-3xl line-clamp-2">
-              {featuredArticle.excerpt}
+              {tr(locale, featuredArticle.excerpt)}
             </p>
           </div>
         </Link>
@@ -178,16 +180,16 @@ export default async function GuidesPage({
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
         <div className="flex flex-wrap gap-4 border-b border-white/10 pb-4">
           <button className="px-6 py-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors text-sm font-medium tracking-wider uppercase">
-            All
+            {tr(locale, 'All')}
           </button>
           <button className="px-6 py-2 rounded-full border border-white/20 text-white/40 hover:border-champagne hover:text-champagne transition-colors text-sm font-medium tracking-wider uppercase">
-            Dress Code
+            {tr(locale, 'Dress Code')}
           </button>
           <button className="px-6 py-2 rounded-full border border-white/20 text-white/40 hover:border-champagne hover:text-champagne transition-colors text-sm font-medium tracking-wider uppercase">
-            Secret Bars
+            {tr(locale, 'Secret Bars')}
           </button>
           <button className="px-6 py-2 rounded-full border border-white/20 text-white/40 hover:border-champagne hover:text-champagne transition-colors text-sm font-medium tracking-wider uppercase">
-            Interviews
+            {tr(locale, 'Interviews')}
           </button>
         </div>
       </section>
@@ -204,7 +206,7 @@ export default async function GuidesPage({
               <div className="relative h-64 w-full">
                 <Image
                   src={article.image}
-                  alt={article.title}
+                  alt={tr(locale, article.title)}
                   fill
                   quality={85}
                   sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
@@ -212,22 +214,22 @@ export default async function GuidesPage({
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md border border-white/10 text-white px-3 py-1 rounded-full text-xs font-medium tracking-wider uppercase">
-                  {article.category}
+                  {tr(locale, article.category)}
                 </div>
               </div>
-              
+
               <div className="p-8 flex flex-col flex-grow">
                 <div className="flex items-center space-x-2 text-champagne mb-4">
                   <Clock className="w-4 h-4" />
-                  <span className="font-mono text-sm">{article.readTime}</span>
+                  <span className="font-mono text-sm">{tr(locale, article.readTime)}</span>
                 </div>
-                
+
                 <h3 className="font-serif text-2xl font-bold text-white mb-3 group-hover:text-champagne transition-colors">
-                  {article.title}
+                  {tr(locale, article.title)}
                 </h3>
-                
+
                 <p className="text-white/40 line-clamp-3">
-                  {article.excerpt}
+                  {tr(locale, article.excerpt)}
                 </p>
               </div>
             </Link>
@@ -240,12 +242,12 @@ export default async function GuidesPage({
         <div className="relative rounded-lg overflow-hidden border border-champagne/20 bg-champagne/[0.04] p-10 md:p-14 flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="absolute inset-0 bg-gradient-to-r from-champagne/8 via-transparent to-transparent pointer-events-none" />
           <div className="relative">
-            <p className="font-sans text-champagne/60 text-[9px] tracking-[0.35em] uppercase mb-3">Ready to go?</p>
+            <p className="font-sans text-champagne/60 text-[9px] tracking-[0.35em] uppercase mb-3">{tr(locale, 'Ready to go?')}</p>
             <h2 className="font-serif text-3xl md:text-4xl text-white mb-2">
-              Book a VIP Table Tonight
+              {tr(locale, 'Book a VIP Table Tonight')}
             </h2>
             <p className="font-sans text-white/40 text-sm max-w-md">
-              Skip the queue. Get the best table in Milan. WhatsApp concierge — reply in 10 minutes.
+              {tr(locale, 'Skip the queue. Get the best table in Milan. WhatsApp concierge — reply in 10 minutes.')}
             </p>
           </div>
           <div className="relative flex-shrink-0 flex flex-col sm:flex-row gap-4">
@@ -255,7 +257,7 @@ export default async function GuidesPage({
                 font-sans font-bold text-sm tracking-[0.15em] uppercase
                 hover:bg-white transition-colors duration-300"
             >
-              See VIP Tables
+              {tr(locale, 'See VIP Tables')}
             </Link>
             <Link
               href={`${localePrefix}/concierge`}
@@ -263,7 +265,7 @@ export default async function GuidesPage({
                 font-sans text-sm tracking-[0.15em] uppercase
                 hover:border-champagne/50 hover:text-champagne transition-colors duration-300"
             >
-              Concierge Service
+              {tr(locale, 'Concierge Service')}
             </Link>
           </div>
         </div>
@@ -271,30 +273,30 @@ export default async function GuidesPage({
 
       {/* Essential Milan Nightlife Knowledge — 3rd H2 */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 border-t border-white/5 pt-16">
-        <h2 className="font-serif text-3xl md:text-4xl text-white mb-8">Essential Milan Nightlife Knowledge</h2>
+        <h2 className="font-serif text-3xl md:text-4xl text-white mb-8">{tr(locale, 'Essential Milan Nightlife Knowledge')}</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="p-7 rounded-lg border border-white/8 bg-white/[0.02]">
-            <h3 className="font-serif text-xl text-white mb-3">Dress Code: What Actually Gets You In</h3>
+            <h3 className="font-serif text-xl text-white mb-3">{tr(locale, 'Dress Code: What Actually Gets You In')}</h3>
             <p className="font-sans text-white/50 text-sm leading-relaxed">
-              Milan enforces real dress codes. At Just Me and Pineta: smart-elegant minimum, fashion-forward preferred — no sneakers, no sportswear, no shorts. At Magazzini Generali and Volt: all-black underground look. At Voya Rooftop: smart casual to cocktail attire. When in doubt, overdress.
+              {tr(locale, 'Milan enforces real dress codes. At Just Me and Pineta: smart-elegant minimum, fashion-forward preferred — no sneakers, no sportswear, no shorts. At Magazzini Generali and Volt: all-black underground look. At Voya Rooftop: smart casual to cocktail attire. When in doubt, overdress.')}
             </p>
           </div>
           <div className="p-7 rounded-lg border border-white/8 bg-white/[0.02]">
-            <h3 className="font-serif text-xl text-white mb-3">When to Arrive (and When Not to)</h3>
+            <h3 className="font-serif text-xl text-white mb-3">{tr(locale, 'When to Arrive (and When Not to)')}</h3>
             <p className="font-sans text-white/50 text-sm leading-relaxed">
-              Aperitivo starts at 18:00 and peaks at 19:30–20:30. Clubs open at 22:00–23:00 but don&apos;t fill until midnight. The real energy at Just Me, Pineta, and Play Club hits between 1:00–3:00 AM. Arriving before 23:30 at a club means you&apos;ll wait in an empty room.
+              {tr(locale, "Aperitivo starts at 18:00 and peaks at 19:30–20:30. Clubs open at 22:00–23:00 but don't fill until midnight. The real energy at Just Me, Pineta, and Play Club hits between 1:00–3:00 AM. Arriving before 23:30 at a club means you'll wait in an empty room.")}
             </p>
           </div>
           <div className="p-7 rounded-lg border border-white/8 bg-white/[0.02]">
-            <h3 className="font-serif text-xl text-white mb-3">Guestlist vs VIP Table: Which to Choose</h3>
+            <h3 className="font-serif text-xl text-white mb-3">{tr(locale, 'Guestlist vs VIP Table: Which to Choose')}</h3>
             <p className="font-sans text-white/50 text-sm leading-relaxed">
-              Guestlist = free or reduced entry, no queue, but standing in the main room. VIP table = reserved table, dedicated service, bottle service, best spot in the club. For groups of 4+, a VIP table at €200–300 total is often better value than individual entry fees plus bottles at the bar.
+              {tr(locale, 'Guestlist = free or reduced entry, no queue, but standing in the main room. VIP table = reserved table, dedicated service, bottle service, best spot in the club. For groups of 4+, a VIP table at €200–300 total is often better value than individual entry fees plus bottles at the bar.')}
             </p>
           </div>
           <div className="p-7 rounded-lg border border-white/8 bg-white/[0.02]">
-            <h3 className="font-serif text-xl text-white mb-3">Music Zones: Find Your Sound</h3>
+            <h3 className="font-serif text-xl text-white mb-3">{tr(locale, 'Music Zones: Find Your Sound')}</h3>
             <p className="font-sans text-white/50 text-sm leading-relaxed">
-              Techno &amp; Electronic: Magazzini Generali (Porta Romana), Volt (Corso Como). Hip Hop &amp; Afrobeats: Play Club (Corso Como), Apollo (Navigli). Commercial &amp; House: Just Me (Sempione), Pineta (Corso Como). Lounge &amp; Nu-Disco: Voya Rooftop (Isola), Terrazza 21 (Isola). Jazz &amp; Live: Gattopardo (Garibaldi).
+              {tr(locale, 'Techno & Electronic: Magazzini Generali (Porta Romana), Volt (Corso Como). Hip Hop & Afrobeats: Play Club (Corso Como), Apollo (Navigli). Commercial & House: Just Me (Sempione), Pineta (Corso Como). Lounge & Nu-Disco: Voya Rooftop (Isola), Terrazza 21 (Isola). Jazz & Live: Gattopardo (Garibaldi).')}
             </p>
           </div>
         </div>
@@ -303,7 +305,7 @@ export default async function GuidesPage({
         <div className="flex flex-wrap gap-2 mt-8">
           {['Dress Code Milan', 'VIP Table Guide', 'Milan Club Tips', 'Aperitivo Guide', 'Techno Milan', 'Hip Hop Milan', 'Guestlist Milan', 'Milan Nightlife 2026'].map((tag) => (
             <span key={tag} className="px-3 py-1.5 rounded-full border border-white/10 text-white/40 text-xs font-sans tracking-wider">
-              {tag}
+              {tr(locale, tag)}
             </span>
           ))}
         </div>
