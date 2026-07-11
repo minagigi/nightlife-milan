@@ -185,7 +185,7 @@ export async function debugEventbrite() {
   const token = getEventbriteToken();
   if (!token) return { error: 'EVENTBRITE_TOKEN not set', hasToken: false };
 
-  const url = `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=live&expand=venue,logo,ticket_classes&order_by=start_asc&time_filter=current_future`;
+  const url = `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=live&expand=venue,logo&order_by=start_asc&time_filter=current_future`;
   const res = await fetch(url, {
     headers: { Authorization: `Bearer ${token}` },
     next: { revalidate: 300 },
@@ -274,9 +274,20 @@ const FETCH_RETRY_DELAY_MS = 700;
  *   passati NON devono mai sparire/404. Le liste attive (home, tonight,
  *   this-week) usano il default (solo futuri).
  */
+// Cache in-memory del risultato GIÀ raggruppato (Event[]). Con >250 listing la
+// fetch+grouping costa ~10-20s: senza questa cache ogni render di pagina/lista
+// la rifà (Next data-cache non affidabile su Vercel a questa dimensione) →
+// timeout. Qui il lavoro pesante avviene UNA volta ogni 5min per lambda.
+const ebEventsCache: Record<string, { at: number; events: Event[] }> = {};
+const EB_EVENTS_TTL_MS = 5 * 60 * 1000;
+
 export async function fetchEventbriteEvents(includePast = false): Promise<Event[]> {
   const token = getEventbriteToken();
   if (!token) return [];
+
+  const cacheKey = includePast ? 'past' : 'future';
+  const cached = ebEventsCache[cacheKey];
+  if (cached && Date.now() - cached.at < EB_EVENTS_TTL_MS) return cached.events;
 
   let lastError: unknown = null;
   let data: { events?: RawEbEvent[] } | null = null;
@@ -296,7 +307,7 @@ export async function fetchEventbriteEvents(includePast = false): Promise<Event[
         // quindi status=live da solo li escluderebbe → si aggiungono quegli stati.
         const status = includePast ? 'live,started,ended,completed' : 'live';
         const url =
-          `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=${status}&expand=venue,logo,ticket_classes&order_by=start_asc&page_size=200` +
+          `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=${status}&expand=venue,logo&order_by=start_asc&page_size=200` +
           (includePast ? '' : '&time_filter=current_future') +
           (continuation ? `&continuation=${continuation}` : '');
         const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` }, next: { revalidate: 300 } });
@@ -406,6 +417,7 @@ export async function fetchEventbriteEvents(includePast = false): Promise<Event[
       }
     }
 
+    ebEventsCache[cacheKey] = { at: Date.now(), events };
     return events;
   } catch (e) {
     // Anche un errore di mapping post-fetch deve propagarsi, mai degradare a
