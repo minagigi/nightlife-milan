@@ -4,31 +4,30 @@ import NewsletterHub from './NewsletterHub';
 import Logo from './Logo';
 import { CONTACT } from '@/config/contact';
 import { ENABLED_LOCALES, localePrefix } from '@/lib/i18n/locales';
+import { tr } from '@/lib/i18n/t';
 
 interface FooterProps {
   lang: string;
 }
 
 export default function Footer({ lang }: FooterProps) {
-  const isIt = lang === 'it';
-
+  // Locale-aware su tutte le lingue (prima solo en/it). tr() ripiega su EN dove
+  // manca la traduzione; i link usano localePrefix (prima su /es puntavano a EN).
   const t = {
-    desc: isIt
-      ? "La guida più esclusiva alla notte milanese. Curata, internazionale, autentica."
-      : "The most exclusive guide to Milan's nightlife. Curated, international, authentic.",
-    nav: isIt ? "Navigazione" : "Navigation",
-    zones: isIt ? "Zone Hotspots" : "Zone Hotspots",
-    legal: isIt ? "Legale & Social" : "Legal & Social",
-    clubs: isIt ? "Locali" : "Clubs",
-    calendar: isIt ? "Calendario" : "Calendar",
-    guides: isIt ? "Guide" : "Guides",
-    vip: isIt ? "Tavoli VIP" : "VIP Tables",
-    concierge: isIt ? "Servizio Concierge" : "Concierge Service",
+    desc: tr(lang, "The most exclusive guide to Milan's nightlife. Curated, international, authentic.", "La guida più esclusiva alla notte milanese. Curata, internazionale, autentica."),
+    nav: tr(lang, "Navigation", "Navigazione"),
+    zones: tr(lang, "Zone Hotspots", "Zone Hotspots"),
+    legal: tr(lang, "Legal & Social", "Legale & Social"),
+    clubs: tr(lang, "Clubs", "Locali"),
+    calendar: tr(lang, "Calendar", "Calendario"),
+    guides: tr(lang, "Guides", "Guide"),
+    vip: tr(lang, "VIP Tables", "Tavoli VIP"),
+    concierge: tr(lang, "Concierge Service", "Servizio Concierge"),
     privacy: "Privacy Policy",
-    whatsappLabel: isIt ? CONTACT.whatsapp.labels.it : CONTACT.whatsapp.labels.en,
+    whatsappLabel: tr(lang, CONTACT.whatsapp.labels.en, CONTACT.whatsapp.labels.it),
   };
 
-  const lp = isIt ? '/it' : '';
+  const lp = localePrefix(lang);
   const links = {
     clubs: `${lp}/clubs`,
     calendar: `${lp}/calendar/tonight`,
@@ -103,7 +102,7 @@ export default function Footer({ lang }: FooterProps) {
             </li>
             <li>
               <Link href={`${lp}/events/past`} className="text-white/60 hover:text-champagne transition-colors text-sm">
-                {isIt ? 'Eventi passati' : 'Past events'}
+                {tr(lang, 'Past events', 'Eventi passati')}
               </Link>
             </li>
           </ul>
