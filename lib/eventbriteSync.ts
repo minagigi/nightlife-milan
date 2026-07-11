@@ -315,12 +315,20 @@ export async function fetchEventbriteEvents(includePast = false, sinceDaysAgo?: 
       const acc: RawEbEvent[] = [];
       let continuation: string | undefined;
       let pages = 0;
+      // Per la lista "Eventi passati" (sinceDaysAgo) NON serve tutta la storia:
+      // order_by=start_desc mette i listing più RECENTI in cima, così la serata
+      // di ieri sta nelle prime pagine (bug reale: con start_asc i listing più
+      // vecchi riempivano le prime pagine → per arrivare a ieri si sfogliava
+      // l'intera org, ~262 listing, ~60s → timeout → lista vuota). Poche pagine
+      // bastano; getEbEventBySlug (senza sinceDaysAgo) resta start_asc completo.
+      const orderBy = sinceDaysAgo ? 'start_desc' : 'start_asc';
+      const maxPages = sinceDaysAgo ? 2 : 10;
       do {
         // includePast: Eventbrite marca gli eventi trascorsi come ended/completed,
         // quindi status=live da solo li escluderebbe → si aggiungono quegli stati.
         const status = includePast ? 'live,started,ended,completed' : 'live';
         const url =
-          `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=${status}&expand=venue,logo&order_by=start_asc&page_size=200` +
+          `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=${status}&expand=venue,logo&order_by=${orderBy}&page_size=200` +
           (includePast ? '' : '&time_filter=current_future') +
           rangeStartParam +
           (continuation ? `&continuation=${continuation}` : '');
@@ -329,7 +337,7 @@ export async function fetchEventbriteEvents(includePast = false, sinceDaysAgo?: 
         const page = await res.json();
         acc.push(...((page.events || []) as RawEbEvent[]));
         continuation = page.pagination?.has_more_items ? page.pagination?.continuation : undefined;
-      } while (continuation && ++pages < 10);
+      } while (continuation && ++pages < maxPages);
       data = { events: acc };
       break;
     } catch (e) {
