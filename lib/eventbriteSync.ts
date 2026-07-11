@@ -93,25 +93,20 @@ export function parseMarker(text: string | undefined): ParsedMarker | undefined 
 // senza, OGNI render di pagina evento rifà la fetch di ~3MB e sfora il tempo
 // runtime sugli eventi generati on-demand. TTL breve: i contenuti cambiano solo
 // all'import notturno.
-let orgEventsCache: { at: number; events: { description?: { html?: string; text?: string } }[] } | null = null;
+type RawDesc = { description?: { html?: string; text?: string } };
+const orgCache: Record<string, { at: number; events: RawDesc[] }> = {};
 const ORG_EVENTS_TTL_MS = 5 * 60 * 1000;
 
-export async function getEventGoldHtml(slugEn: string, locale: string): Promise<string | null> {
-  if (!slugEn) return null;
-  let all: { description?: { html?: string; text?: string } }[];
-  if (orgEventsCache && Date.now() - orgEventsCache.at < ORG_EVENTS_TTL_MS) {
-    all = orgEventsCache.events;
-  } else {
-    try {
-      const { fetchOwnOrgEvents } = await import('./importLedger');
-      // include ended/completed: gli eventi passati mantengono programma+FAQ.
-      all = await fetchOwnOrgEvents('live,draft,started,ended,completed');
-      orgEventsCache = { at: Date.now(), events: all };
-    } catch {
-      return null;
-    }
-  }
+async function fetchOrgCached(statuses: string): Promise<RawDesc[]> {
+  const c = orgCache[statuses];
+  if (c && Date.now() - c.at < ORG_EVENTS_TTL_MS) return c.events;
+  const { fetchOwnOrgEvents } = await import('./importLedger');
+  const events = await fetchOwnOrgEvents(statuses);
+  orgCache[statuses] = { at: Date.now(), events };
+  return events;
+}
 
+function pickGoldHtml(all: RawDesc[], slugEn: string, locale: string): string | null {
   const byLang = new Map<string, string>();
   for (const ev of all) {
     const html = ev.description?.html;
@@ -119,7 +114,20 @@ export async function getEventGoldHtml(slugEn: string, locale: string): Promise<
     const marker = parseMarker(ev.description?.text) || parseMarker(html);
     if (marker?.slug === slugEn && marker.lang) byLang.set(marker.lang, html);
   }
-  const chosen = byLang.get(locale) || byLang.get('it') || byLang.get('en');
+  return byLang.get(locale) || byLang.get('it') || byLang.get('en') || null;
+}
+
+export async function getEventGoldHtml(slugEn: string, locale: string): Promise<string | null> {
+  if (!slugEn) return null;
+  let chosen: string | null;
+  try {
+    // Set LEGGERO (eventi correnti) → veloce, copre i futuri. Solo se lo slug
+    // non c'è (evento passato) si tenta il set con ended/completed.
+    chosen = pickGoldHtml(await fetchOrgCached('live,draft,started'), slugEn, locale);
+    if (!chosen) chosen = pickGoldHtml(await fetchOrgCached('ended,completed'), slugEn, locale);
+  } catch {
+    return null;
+  }
   if (!chosen) return null;
 
   // Togli il marker HTML e il blocco legale/affiliate in testa (Contacts + link
