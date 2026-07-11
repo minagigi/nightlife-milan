@@ -86,7 +86,10 @@ function buildVenueGalleryImages(venue: Venue, eventTitle: string, locale: strin
 // NON a ogni visita (force-dynamic rendeva ogni richiesta lentissima/timeout).
 // revalidate breve + maxDuration alto per la prima generazione on-demand.
 export const revalidate = 600;
-export const maxDuration = 60;
+// Vercel Pro (2026-07-11): 300s. La prima generazione on-demand di un evento SENZA
+// gold nel Blob fa il fallback getEventGoldHtml (fetch ~260 listing org): con 60s
+// (Hobby) andava in timeout → gold assente; con 300s completa e poi resta in ISR.
+export const maxDuration = 300;
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -439,17 +442,15 @@ export default async function EventPage({ params }: Props) {
   // Xceed — assente per tutti gli altri eventi, rendering base invariato.
   const richContent = await getRichContent(event.localizedContent.slug.en);
 
-  // Fallback robusto (2026-07-10): il Vercel Blob è andato 403/sospeso per
-  // overage quota, azzerando richContent su TUTTE le pagine. Il contenuto gold
-  // completo vive comunque nei listing Eventbrite (via API, non Blob): se il
-  // blob non risponde, si legge da lì — e nella lingua giusta (listing tradotti).
-  // Usa lo slug dell'URL (= slug-en nei marker Eventbrite), non event.slug.en:
-  // per alcuni eventi con duplicato scout i due divergono e il match fallirebbe.
-  // getEventGoldHtml DISATTIVATO temporaneamente: con >250 listing tradotti la
-  // fetch dell'intera org a ogni render era troppo lenta (timeout). Il gold per
-  // il sito verrà da un archivio committato nel repo, veloce e permanente.
-  const goldHtml: string | null = null;
-  void getEventGoldHtml;
+  // Fallback gold dai listing Eventbrite (2026-07-11, dopo passaggio a Vercel Pro):
+  // se il Blob non ha il gold per questo evento (listing pubblicato senza
+  // enrichment Xceed, o slug divergente per i duplicati scout), si legge il gold
+  // completo (sezioni/programma/25 FAQ) direttamente dalla description dei listing
+  // tradotti. RI-ATTIVATO ora perché con Pro maxDuration=300s la fetch dell'org
+  // (~260 listing) non va più in timeout, e resta dietro cache 5min + ISR.
+  // Usa lo slug dell'URL (= slug-en nei marker), non event.slug.en: per gli eventi
+  // con duplicato scout i due divergono e il match fallirebbe.
+  const goldHtml = richContent ? null : await getEventGoldHtml(slug, locale);
 
   // Internal linking: "More events at {venue}" — riusa la sorgente dati
   // unificata già usata da homepage/calendar (statici + Eventbrite/Xceed
