@@ -1,4 +1,5 @@
 import { Event, Venue, Performer, LocalizedString } from './types';
+import { localePrefix } from './i18n/locales';
 
 // Helper to get localized string — qualsiasi locale del registry, fallback a 'en'
 export const getLocalizedText = (text: LocalizedString, lang: string): string => {
@@ -19,7 +20,7 @@ export const generateEventSchema = (
   lang: string
 ) => {
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const langPrefix = lang === 'it' ? '/it' : '';
+  const langPrefix = localePrefix(lang);
   const eventUrl = `${baseUrl}${langPrefix}/events/${getLocalizedText(event.localizedContent.slug, lang)}`;
 
   const schema: any = {
@@ -99,7 +100,7 @@ export const generateBreadcrumbSchema = (
   lang: string
 ) => {
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const langPrefix = lang === 'it' ? '/it' : '';
+  const langPrefix = localePrefix(lang);
   
   const zoneName = formatZoneName(venue.zone);
   const zoneSlug = venue.zone.toLowerCase().replace('_', '-');
