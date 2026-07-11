@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import { Metadata } from 'next';
 import Link from 'next/link';
@@ -261,7 +262,7 @@ export default async function GenrePage({ params }: Props) {
 
             {/* Tags */}
             <div className="flex flex-wrap gap-2 mb-6">
-              {[genre.name, 'Milan Nightlife', typedLocale === 'it' ? 'Club Milano' : 'Milan Clubs', typedLocale === 'it' ? 'Notte Milano' : 'Night Out Milan', 'VIP Tables'].map(tag => (
+              {[genre.name, 'Milan Nightlife', tr(locale, 'Milan Clubs', 'Club Milano'), tr(locale, 'Night Out Milan', 'Notte Milano'), 'VIP Tables'].map(tag => (
                 <span key={tag} className="px-3 py-1.5 rounded-full border border-champagne/30 text-champagne/80 text-xs font-medium tracking-wide">
                   {tag}
                 </span>
@@ -326,7 +327,7 @@ export default async function GenrePage({ params }: Props) {
             items={items} 
             lang={locale} 
             title={typedLocale === 'it' ? `Eventi ${genre.name}` : `${genre.name} Events`}
-            subtitle={typedLocale === 'it' ? `I migliori party con questo vibe` : `The best parties with this vibe`}
+            subtitle={tr(locale, `The best parties with this vibe`, `I migliori party con questo vibe`)}
           />
         ) : (
           <section className="max-w-3xl mx-auto px-4 py-24 text-center">
@@ -339,22 +340,20 @@ export default async function GenrePage({ params }: Props) {
                 : `No ${genre.name} events tonight.`}
             </h2>
             <p className="text-white/40 mb-8 text-lg">
-              {typedLocale === 'it'
-                ? 'Controlla il calendario completo per il weekend o esplora altri generi.'
-                : 'Check the full calendar for the weekend or explore other genres.'}
+              {tr(locale, 'Check the full calendar for the weekend or explore other genres.', 'Controlla il calendario completo per il weekend o esplora altri generi.')}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link 
                 href={`/${locale}/calendar/tonight`}
                 className="px-8 py-3 rounded-full bg-champagne text-black font-medium tracking-wider uppercase text-sm w-full sm:w-auto"
               >
-                {typedLocale === 'it' ? 'Timeline di Stasera' : 'Tonight\'s Timeline'}
+                {tr(locale, 'Tonight\'s Timeline', 'Timeline di Stasera')}
               </Link>
               <Link 
                 href={`/${locale}`}
                 className="px-8 py-3 rounded-full border border-white/20 text-white hover:border-champagne hover:text-champagne transition-colors font-medium tracking-wider uppercase text-sm w-full sm:w-auto"
               >
-                {typedLocale === 'it' ? 'Torna alla Home' : 'Back to Home'}
+                {tr(locale, 'Back to Home', 'Torna alla Home')}
               </Link>
             </div>
           </section>
@@ -369,7 +368,7 @@ export default async function GenrePage({ params }: Props) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
           <div className="p-6 rounded-lg border border-white/8 bg-white/[0.02]">
             <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-3">
-              {typedLocale === 'it' ? 'Dove Andare' : 'Where to Go'}
+              {tr(locale, 'Where to Go', 'Dove Andare')}
             </h3>
             <p className="font-sans text-white/50 text-sm leading-relaxed">
               {typedLocale === 'it'
@@ -379,22 +378,18 @@ export default async function GenrePage({ params }: Props) {
           </div>
           <div className="p-6 rounded-lg border border-white/8 bg-white/[0.02]">
             <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-3">
-              {typedLocale === 'it' ? 'Come Prenotare' : 'How to Book'}
+              {tr(locale, 'How to Book', 'Come Prenotare')}
             </h3>
             <p className="font-sans text-white/50 text-sm leading-relaxed">
-              {typedLocale === 'it'
-                ? 'Contattaci via WhatsApp +39 351 912 7047. Ti confermiamo disponibilità, prezzi e dress code per ogni locale. Servizio gratuito, risposta in 10 minuti.'
-                : 'Contact us via WhatsApp +39 351 912 7047. We confirm availability, prices and dress code for each venue. Free service, reply in 10 minutes.'}
+              {tr(locale, 'Contact us via WhatsApp +39 351 912 7047. We confirm availability, prices and dress code for each venue. Free service, reply in 10 minutes.', 'Contattaci via WhatsApp +39 351 912 7047. Ti confermiamo disponibilità, prezzi e dress code per ogni locale. Servizio gratuito, risposta in 10 minuti.')}
             </p>
           </div>
           <div className="p-6 rounded-lg border border-white/8 bg-white/[0.02]">
             <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-3">
-              {typedLocale === 'it' ? 'Dress Code & Accesso' : 'Dress Code & Entry'}
+              {tr(locale, 'Dress Code & Entry', 'Dress Code & Accesso')}
             </h3>
             <p className="font-sans text-white/50 text-sm leading-relaxed">
-              {typedLocale === 'it'
-                ? 'Ogni locale ha le sue regole. Smart-elegant nei club commerciali, total black nel techno, casual nei club indie. Il nostro concierge ti darà le info specifiche prima di uscire.'
-                : 'Each club has its own rules. Smart-elegant at commercial clubs, total black at techno, casual at indie spots. Our concierge will give you specific info before you go.'}
+              {tr(locale, 'Each club has its own rules. Smart-elegant at commercial clubs, total black at techno, casual at indie spots. Our concierge will give you specific info before you go.', 'Ogni locale ha le sue regole. Smart-elegant nei club commerciali, total black nel techno, casual nei club indie. Il nostro concierge ti darà le info specifiche prima di uscire.')}
             </p>
           </div>
         </div>
@@ -411,7 +406,7 @@ export default async function GenrePage({ params }: Props) {
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent" />
           <div className="absolute inset-0 p-8 flex flex-col justify-center">
             <p className="font-sans text-champagne/80 text-xs tracking-widest uppercase mb-2">
-              {typedLocale === 'it' ? 'Prenota Ora' : 'Book Now'}
+              {tr(locale, 'Book Now', 'Prenota Ora')}
             </p>
             <p className="font-serif text-2xl text-white">WhatsApp +39 351 912 7047</p>
           </div>
@@ -425,7 +420,7 @@ export default async function GenrePage({ params }: Props) {
           className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white hover:bg-champagne hover:text-black hover:border-champagne transition-all duration-300 font-bold tracking-widest uppercase text-sm gap-2"
         >
           <ArrowLeft className="w-4 h-4" />
-          {typedLocale === 'it' ? 'Esplora altri generi' : 'Back to all Genres'}
+          {tr(locale, 'Back to all Genres', 'Esplora altri generi')}
         </Link>
       </section>
 

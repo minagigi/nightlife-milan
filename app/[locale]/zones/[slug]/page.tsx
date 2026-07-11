@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { tr } from '@/lib/i18n/t';
 import { localePrefix } from '@/lib/i18n/locales';
 import { Metadata } from 'next';
 import Link from 'next/link';
@@ -117,7 +118,7 @@ export default async function ZonePage({ params }: Props) {
             </li>
             <li className="flex items-center">
               <Link href={`/${locale}/zones`} className="hover:text-champagne transition-colors">
-                {typedLocale === 'it' ? 'Zone' : 'Zones'}
+                {tr(locale, 'Zones', 'Zone')}
               </Link>
               <span className="mx-2">/</span>
             </li>
@@ -172,37 +173,31 @@ export default async function ZonePage({ params }: Props) {
             {/* What to Expect — 2nd H2 */}
             <div className="mb-12">
               <h2 className="text-2xl font-serif text-white mb-6">
-                {typedLocale === 'it' ? 'Cosa Aspettarsi' : 'What to Expect'}
+                {tr(locale, 'What to Expect', 'Cosa Aspettarsi')}
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="p-5 rounded-xl border border-white/8 bg-white/[0.02]">
                   <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-2">
-                    {typedLocale === 'it' ? 'Orari' : 'Hours'}
+                    {tr(locale, 'Hours', 'Orari')}
                   </h3>
                   <p className="font-sans text-white/50 text-sm leading-relaxed">
-                    {typedLocale === 'it'
-                      ? 'Aperitivo dalle 18:00. Club aperti dalle 22:30. Picco tra mezzanotte e le 3:00.'
-                      : 'Aperitivo from 18:00. Clubs open from 22:30. Peak between midnight and 3 AM.'}
+                    {tr(locale, 'Aperitivo from 18:00. Clubs open from 22:30. Peak between midnight and 3 AM.', 'Aperitivo dalle 18:00. Club aperti dalle 22:30. Picco tra mezzanotte e le 3:00.')}
                   </p>
                 </div>
                 <div className="p-5 rounded-xl border border-white/8 bg-white/[0.02]">
                   <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-2">
-                    {typedLocale === 'it' ? 'Dress Code' : 'Dress Code'}
+                    {tr(locale, 'Dress Code', 'Dress Code')}
                   </h3>
                   <p className="font-sans text-white/50 text-sm leading-relaxed">
-                    {typedLocale === 'it'
-                      ? 'Smart-elegant minimo. Niente sneakers, shorts o sportswear nei locali premium.'
-                      : 'Smart-elegant minimum. No sneakers, shorts or sportswear at premium venues.'}
+                    {tr(locale, 'Smart-elegant minimum. No sneakers, shorts or sportswear at premium venues.', 'Smart-elegant minimo. Niente sneakers, shorts o sportswear nei locali premium.')}
                   </p>
                 </div>
                 <div className="p-5 rounded-xl border border-white/8 bg-white/[0.02]">
                   <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-2">
-                    {typedLocale === 'it' ? 'Come Arrivare' : 'Getting There'}
+                    {tr(locale, 'Getting There', 'Come Arrivare')}
                   </h3>
                   <p className="font-sans text-white/50 text-sm leading-relaxed">
-                    {typedLocale === 'it'
-                      ? 'Metro, taxi o Uber. La zona è ben servita dai mezzi pubblici fino all\'1:00.'
-                      : 'Metro, taxi or Uber. The area is well served by public transport until 1 AM.'}
+                    {tr(locale, 'Metro, taxi or Uber. The area is well served by public transport until 1 AM.', 'Metro, taxi o Uber. La zona è ben servita dai mezzi pubblici fino all\'1:00.')}
                   </p>
                 </div>
               </div>
@@ -253,7 +248,7 @@ export default async function ZonePage({ params }: Props) {
           items={items} 
           lang={locale} 
           title={typedLocale === 'it' ? `Eventi a ${zone.name}` : `Events in ${zone.name}`}
-          subtitle={typedLocale === 'it' ? `Scopri cosa succede stasera nel quartiere` : `Discover what's happening tonight in the district`}
+          subtitle={tr(locale, `Discover what's happening tonight in the district`, `Scopri cosa succede stasera nel quartiere`)}
         />
       </div>
 
@@ -263,7 +258,7 @@ export default async function ZonePage({ params }: Props) {
           href={`/${locale}/zones`}
           className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white hover:bg-champagne hover:text-black hover:border-champagne transition-all duration-300 font-bold tracking-widest uppercase text-sm"
         >
-          {typedLocale === 'it' ? 'Esplora altre zone' : 'Explore other zones'}
+          {tr(locale, 'Explore other zones', 'Esplora altre zone')}
         </Link>
       </section>
 

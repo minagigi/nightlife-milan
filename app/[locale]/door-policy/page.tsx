@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import { mockVenues } from '@/lib/data';
@@ -15,12 +16,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const canonical = `${baseUrl}${localePrefix(locale)}/door-policy`;
 
-  const title = isIt
-    ? 'Dress Code & Door Policy Discoteche Milano 2026 | Nightlife Milan'
-    : 'Dress Code & Door Policy Milan Clubs 2026 | Nightlife Milan';
-  const description = isIt
-    ? 'Guida completa al dress code dei club di Milano 2026: cosa indossare, cosa evitare, età minima, selezione all\'ingresso. Just Me, Armani Privé, Play Club e tutti i principali locali.'
-    : 'Complete guide to Milan club dress codes 2026: what to wear, what to avoid, minimum age, door selection. Just Me, Armani Privé, Play Club and all major venues.';
+  const title = tr(locale, 'Dress Code & Door Policy Milan Clubs 2026 | Nightlife Milan', 'Dress Code & Door Policy Discoteche Milano 2026 | Nightlife Milan');
+  const description = tr(locale, 'Complete guide to Milan club dress codes 2026: what to wear, what to avoid, minimum age, door selection. Just Me, Armani Privé, Play Club and all major venues.', 'Guida completa al dress code dei club di Milano 2026: cosa indossare, cosa evitare, età minima, selezione all\'ingresso. Just Me, Armani Privé, Play Club e tutti i principali locali.');
 
   return {
     title,
@@ -40,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'website',
       siteName: 'Nightlife Milan',
       locale: isIt ? 'it_IT' : 'en_US',
-      images: [{ url: `${baseUrl}/images/door-policy-hero.webp`, width: 1200, height: 630, alt: isIt ? 'Dress code e door policy club Milano' : 'Milan clubs dress code and door policy' }],
+      images: [{ url: `${baseUrl}/images/door-policy-hero.webp`, width: 1200, height: 630, alt: tr(locale, 'Milan clubs dress code and door policy', 'Dress code e door policy club Milano') }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -240,7 +237,7 @@ export default async function DoorPolicyPage({ params }: Props) {
                 <Link href={localePrefix(locale) || '/'} className="hover:text-champagne transition-colors">Home</Link>
                 <span className="mx-2">/</span>
               </li>
-              <li className="text-champagne" aria-current="page">{isIt ? 'Dress Code & Door Policy' : 'Dress Code & Door Policy'}</li>
+              <li className="text-champagne" aria-current="page">{tr(locale, 'Dress Code & Door Policy', 'Dress Code & Door Policy')}</li>
             </ol>
           </nav>
         </div>
@@ -248,7 +245,7 @@ export default async function DoorPolicyPage({ params }: Props) {
         {/* Hero */}
         <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <h1 className="font-serif text-5xl md:text-6xl font-bold text-champagne tracking-tight mb-6">
-            {isIt ? 'Dress Code & Door Policy' : 'Dress Code & Door Policy'}
+            {tr(locale, 'Dress Code & Door Policy', 'Dress Code & Door Policy')}
           </h1>
           <p className="text-xl text-white/40 font-light leading-relaxed mb-8 max-w-3xl">
             {isIt
@@ -260,9 +257,7 @@ export default async function DoorPolicyPage({ params }: Props) {
           <div className="p-5 rounded-xl border border-champagne/20 bg-champagne/[0.04] mb-12 max-w-2xl">
             <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">Quick Answer</p>
             <p className="font-sans text-white/70 text-sm leading-relaxed">
-              {isIt
-                ? 'Regola base: nei club di lusso (Just Me, Armani Privé, Gattopardo) elegante obbligatorio, no sneakers, no tute. Nei club smart-casual (Play Club, The Club) jeans scuri e sneakers in pelle vanno bene. Età minima 18 anni ovunque, 21+ nei top club.'
-                : 'Basic rule: at luxury clubs (Just Me, Armani Privé, Gattopardo) elegant is mandatory, no sneakers, no tracksuits. At smart-casual clubs (Play Club, The Club) dark jeans and leather sneakers are fine. Min age 18 everywhere, 21+ at top clubs.'}
+              {tr(locale, 'Basic rule: at luxury clubs (Just Me, Armani Privé, Gattopardo) elegant is mandatory, no sneakers, no tracksuits. At smart-casual clubs (Play Club, The Club) dark jeans and leather sneakers are fine. Min age 18 everywhere, 21+ at top clubs.', 'Regola base: nei club di lusso (Just Me, Armani Privé, Gattopardo) elegante obbligatorio, no sneakers, no tute. Nei club smart-casual (Play Club, The Club) jeans scuri e sneakers in pelle vanno bene. Età minima 18 anni ovunque, 21+ nei top club.')}
             </p>
           </div>
         </section>
@@ -270,7 +265,7 @@ export default async function DoorPolicyPage({ params }: Props) {
         {/* General Rules */}
         <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
           <h2 className="font-serif text-2xl text-white mb-8 pb-4 border-b border-white/10">
-            {isIt ? 'Regole Generali' : 'General Rules'}
+            {tr(locale, 'General Rules', 'Regole Generali')}
           </h2>
           <div className="space-y-4">
             {generalRules.map((rule, i) => (
@@ -290,7 +285,7 @@ export default async function DoorPolicyPage({ params }: Props) {
         {/* Per-Venue Dress Code */}
         <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
           <h2 className="font-serif text-2xl text-white mb-8 pb-4 border-b border-white/10">
-            {isIt ? 'Dress Code per Locale' : 'Dress Code by Venue'}
+            {tr(locale, 'Dress Code by Venue', 'Dress Code per Locale')}
           </h2>
 
           <div className="space-y-6">
@@ -313,7 +308,7 @@ export default async function DoorPolicyPage({ params }: Props) {
                     <div className="flex items-center gap-4">
                       <span className="text-white/40 text-xs">{isIt ? `Min. ${data.minAge} anni` : `Min. ${data.minAge}+`}</span>
                       <Link href={`${lp}/clubs/${venueSlug}`} className="text-champagne text-xs hover:underline">
-                        {isIt ? 'Dettagli →' : 'Details →'}
+                        {tr(locale, 'Details →', 'Dettagli →')}
                       </Link>
                     </div>
                   </div>
@@ -322,7 +317,7 @@ export default async function DoorPolicyPage({ params }: Props) {
                     {/* Allowed */}
                     <div className="p-5">
                       <p className="text-green-400 text-[10px] font-bold tracking-widest uppercase mb-3">
-                        ✓ {isIt ? 'Consentito' : 'Allowed'}
+                        ✓ {tr(locale, 'Allowed', 'Consentito')}
                       </p>
                       <ul className="space-y-1.5">
                         {(isIt ? data.allowedIt : data.allowed).map((item, i) => (
@@ -337,7 +332,7 @@ export default async function DoorPolicyPage({ params }: Props) {
                     {/* Banned */}
                     <div className="p-5">
                       <p className="text-red-400 text-[10px] font-bold tracking-widest uppercase mb-3">
-                        ✗ {isIt ? 'Vietato' : 'Banned'}
+                        ✗ {tr(locale, 'Banned', 'Vietato')}
                       </p>
                       <ul className="space-y-1.5">
                         {(isIt ? data.bannedIt : data.banned).map((item, i) => (
@@ -353,7 +348,7 @@ export default async function DoorPolicyPage({ params }: Props) {
                   {/* Insider tip */}
                   <div className="px-5 py-4 bg-champagne/[0.03] border-t border-white/8">
                     <p className="text-[10px] text-champagne/60 font-bold tracking-widest uppercase mb-1">
-                      {isIt ? 'Insider Tip' : 'Insider Tip'}
+                      {tr(locale, 'Insider Tip', 'Insider Tip')}
                     </p>
                     <p className="text-white/40 text-sm leading-relaxed">{isIt ? data.tipIt : data.tip}</p>
                   </div>

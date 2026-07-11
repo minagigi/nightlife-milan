@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -439,7 +440,7 @@ export default async function ClubPage({ params }: Props) {
                 </div>
                 {isWhatsAppOnlyVenue && (
                   <span className="text-[10px] mt-1 opacity-80 normal-case font-medium">
-                    {locale === 'it' ? 'Disponibile solo via WhatsApp' : 'Available via WhatsApp only'}
+                    {tr(locale, 'Available via WhatsApp only', 'Disponibile solo via WhatsApp')}
                   </span>
                 )}
               </a>
@@ -463,7 +464,7 @@ export default async function ClubPage({ params }: Props) {
                   rel="noopener noreferrer"
                   className="mt-1 text-xs text-champagne/70 hover:text-champagne underline underline-offset-2 transition-colors"
                 >
-                  {locale === 'it' ? 'Apri in Google Maps ↗' : 'Open in Google Maps ↗'}
+                  {tr(locale, 'Open in Google Maps ↗', 'Apri in Google Maps ↗')}
                 </a>
               )}
             </div>
@@ -574,7 +575,7 @@ export default async function ClubPage({ params }: Props) {
                 {isWhatsAppOnlyVenue && (
                   <div className="text-center mt-2">
                     <span className="text-[10px] opacity-80 normal-case font-medium text-white/50">
-                      {locale === 'it' ? 'Disponibile solo via WhatsApp' : 'Available via WhatsApp only'}
+                      {tr(locale, 'Available via WhatsApp only', 'Disponibile solo via WhatsApp')}
                     </span>
                   </div>
                 )}
@@ -611,12 +612,12 @@ export default async function ClubPage({ params }: Props) {
             </div>
             <div className="p-5 rounded-xl border border-white/10 bg-white/[0.03]">
               <h3 className="font-serif text-lg text-white mb-3">
-                {locale === 'it' ? 'Informazioni Pratiche' : 'Practical Information'}
+                {tr(locale, 'Practical Information', 'Informazioni Pratiche')}
               </h3>
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <p className="text-white/40 uppercase tracking-widest text-[10px] mb-1">
-                    {locale === 'it' ? 'Indirizzo' : 'Address'}
+                    {tr(locale, 'Address', 'Indirizzo')}
                   </p>
                   <p className="text-white/70">{venue.address.streetAddress}, Milan</p>
                   {venue.coordinates?.latitude && (
@@ -626,27 +627,27 @@ export default async function ClubPage({ params }: Props) {
                       rel="noopener noreferrer"
                       className="text-xs text-champagne/70 hover:text-champagne underline underline-offset-2 transition-colors mt-1 inline-block"
                     >
-                      {locale === 'it' ? 'Apri in Google Maps ↗' : 'Open in Google Maps ↗'}
+                      {tr(locale, 'Open in Google Maps ↗', 'Apri in Google Maps ↗')}
                     </a>
                   )}
                 </div>
                 <div>
                   <p className="text-white/40 uppercase tracking-widest text-[10px] mb-1">
-                    {locale === 'it' ? 'Dress Code' : 'Dress Code'}
+                    {tr(locale, 'Dress Code', 'Dress Code')}
                   </p>
                   <p className="text-white/70">{dressCode}</p>
                 </div>
                 <div>
                   <p className="text-white/40 uppercase tracking-widest text-[10px] mb-1">
-                    {locale === 'it' ? 'Prenotazione' : 'Booking'}
+                    {tr(locale, 'Booking', 'Prenotazione')}
                   </p>
                   <p className="text-white/70">WhatsApp +39 351 912 7047</p>
                 </div>
                 <div>
                   <p className="text-white/40 uppercase tracking-widest text-[10px] mb-1">
-                    {locale === 'it' ? 'Servizio' : 'Service'}
+                    {tr(locale, 'Service', 'Servizio')}
                   </p>
-                  <p className="text-white/70">{locale === 'it' ? 'Gratuito' : 'Free'}</p>
+                  <p className="text-white/70">{tr(locale, 'Free', 'Gratuito')}</p>
                 </div>
               </div>
             </div>
@@ -703,7 +704,7 @@ export default async function ClubPage({ params }: Props) {
                   {isWhatsAppOnlyVenue && (
                     <div className="text-center mt-2">
                       <span className="text-[10px] opacity-80 normal-case font-medium text-white/50">
-                        {locale === 'it' ? 'Disponibile solo via WhatsApp' : 'Available via WhatsApp only'}
+                        {tr(locale, 'Available via WhatsApp only', 'Disponibile solo via WhatsApp')}
                       </span>
                     </div>
                   )}

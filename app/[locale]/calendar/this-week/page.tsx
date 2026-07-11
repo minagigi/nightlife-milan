@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset, romeSundayKey } from '@/lib/calendarEvents';
@@ -13,10 +14,8 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   
-  const title = locale === 'it' ? `Eventi in Arrivo a Milano | Nightlife Milan` : `Upcoming Events in Milan | Nightlife Milan`;
-  const description = locale === 'it' 
-    ? `Scopri tutti gli eventi, party e serate in programma a Milano. Prenota il tuo tavolo o mettiti in lista per i club più esclusivi.` 
-    : `Discover all upcoming events, parties, and nights out in Milan. Book your table or get on the guestlist for the most exclusive clubs.`;
+  const title = tr(locale, `Upcoming Events in Milan | Nightlife Milan`, `Eventi in Arrivo a Milano | Nightlife Milan`);
+  const description = tr(locale, `Discover all upcoming events, parties, and nights out in Milan. Book your table or get on the guestlist for the most exclusive clubs.`, `Scopri tutti gli eventi, party e serate in programma a Milano. Prenota il tuo tavolo o mettiti in lista per i club più esclusivi.`);
   
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const canonical = `${baseUrl}${localePrefix(locale)}/calendar/this-week`;
@@ -42,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'website',
       siteName: 'Nightlife Milan',
       locale: isIt ? 'it_IT' : 'en_US',
-      images: [{ url: ogImage, width: 1200, height: 630, alt: isIt ? 'Eventi questa settimana Milano' : 'Milan events this week' }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: tr(locale, 'Milan events this week', 'Eventi questa settimana Milano') }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -104,12 +103,10 @@ export default async function ThisWeekPage({ params }: Props) {
   }));
 
   const t = {
-    title: isIt ? `Eventi in Arrivo` : `Upcoming Events`,
-    intro: isIt 
-      ? `Scopri tutti gli eventi in programma a Milano. Dai club underground ai rooftop di lusso, abbiamo curato per te le migliori esperienze della città.`
-      : `Discover all upcoming events in Milan. From underground clubs to luxury rooftops, we have curated the best experiences in the city for you.`,
-    gridTitle: isIt ? `In Programma` : `Upcoming`,
-    gridSubtitle: isIt ? 'I migliori party selezionati per te' : 'The best parties selected for you',
+    title: tr(locale, `Upcoming Events`, `Eventi in Arrivo`),
+    intro: tr(locale, `Discover all upcoming events in Milan. From underground clubs to luxury rooftops, we have curated the best experiences in the city for you.`, `Scopri tutti gli eventi in programma a Milano. Dai club underground ai rooftop di lusso, abbiamo curato per te le migliori esperienze della città.`),
+    gridTitle: tr(locale, `Upcoming`, `In Programma`),
+    gridSubtitle: tr(locale, 'The best parties selected for you', 'I migliori party selezionati per te'),
   };
 
   return (
@@ -127,10 +124,10 @@ export default async function ThisWeekPage({ params }: Props) {
               <span className="mx-2">/</span>
             </li>
             <li className="flex items-center">
-              <a href={isIt ? '/it/calendar' : '/calendar'} className="hover:text-champagne transition-colors">{isIt ? 'Calendario' : 'Calendar'}</a>
+              <a href={tr(locale, '/calendar', '/it/calendar')} className="hover:text-champagne transition-colors">{tr(locale, 'Calendar', 'Calendario')}</a>
               <span className="mx-2">/</span>
             </li>
-            <li className="text-champagne" aria-current="page">{isIt ? 'Questa Settimana' : 'This Week'}</li>
+            <li className="text-champagne" aria-current="page">{tr(locale, 'This Week', 'Questa Settimana')}</li>
           </ol>
         </nav>
       </div>
@@ -159,12 +156,12 @@ export default async function ThisWeekPage({ params }: Props) {
         {/* Tags */}
         <div className="flex flex-wrap gap-2 mb-8">
           {[
-            isIt ? 'Questa Settimana Milano' : 'This Week Milan',
-            isIt ? 'Serate in Arrivo' : 'Upcoming Events',
-            isIt ? 'Club Milano' : 'Milan Clubs',
+            tr(locale, 'This Week Milan', 'Questa Settimana Milano'),
+            tr(locale, 'Upcoming Events', 'Serate in Arrivo'),
+            tr(locale, 'Milan Clubs', 'Club Milano'),
             'VIP Tables',
-            isIt ? 'Guestlist' : 'Guestlist Milan',
-            isIt ? 'Aperitivo' : 'Aperitivo Events',
+            tr(locale, 'Guestlist Milan', 'Guestlist'),
+            tr(locale, 'Aperitivo Events', 'Aperitivo'),
           ].map((tag) => (
             <span key={tag} className="px-3 py-1.5 rounded-full border border-white/10 text-white/40 text-xs font-sans tracking-wider">
               {tag}
@@ -188,19 +185,19 @@ export default async function ThisWeekPage({ params }: Props) {
             href={`${localePrefix(locale)}/calendar/tonight`}
             className="flex-shrink-0 px-8 py-3 rounded-full border border-white/20 text-white hover:border-champagne hover:text-champagne transition-colors font-medium tracking-wider uppercase text-sm"
           >
-            {isIt ? 'Stasera' : 'Tonight'}
+            {tr(locale, 'Tonight', 'Stasera')}
           </Link>
           <Link
             href={`${localePrefix(locale)}/calendar/tonight#tomorrow`}
             className="flex-shrink-0 px-8 py-3 rounded-full border border-white/20 text-white hover:border-champagne hover:text-champagne transition-colors font-medium tracking-wider uppercase text-sm"
           >
-            {isIt ? 'Domani' : 'Tomorrow'}
+            {tr(locale, 'Tomorrow', 'Domani')}
           </Link>
           <Link
             href={`${localePrefix(locale)}/calendar/this-week`}
             className="flex-shrink-0 px-8 py-3 rounded-full bg-champagne text-black font-medium tracking-wider uppercase text-sm"
           >
-            {isIt ? 'Tutta la Settimana' : 'Full Week'}
+            {tr(locale, 'Full Week', 'Tutta la Settimana')}
           </Link>
         </div>
       </section>
@@ -216,37 +213,31 @@ export default async function ThisWeekPage({ params }: Props) {
       {/* H3 section: How to Book */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/5">
         <h2 className="font-serif text-3xl text-white mb-8">
-          {isIt ? 'Come Prenotare per Questa Settimana' : 'How to Book for This Week in Milan'}
+          {tr(locale, 'How to Book for This Week in Milan', 'Come Prenotare per Questa Settimana')}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           <div className="p-6 rounded-lg border border-white/8 bg-white/[0.02]">
             <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-3">
-              {isIt ? 'Contattaci via WhatsApp' : 'Contact us via WhatsApp'}
+              {tr(locale, 'Contact us via WhatsApp', 'Contattaci via WhatsApp')}
             </h3>
             <p className="font-sans text-white/50 text-sm leading-relaxed">
-              {isIt
-                ? 'Scrivi a +39 351 912 7047. Dicci data, numero di persone e preferenze. Risposta garantita in 10 minuti.'
-                : 'Message +39 351 912 7047. Tell us your date, group size and preferences. Reply guaranteed in 10 minutes.'}
+              {tr(locale, 'Message +39 351 912 7047. Tell us your date, group size and preferences. Reply guaranteed in 10 minutes.', 'Scrivi a +39 351 912 7047. Dicci data, numero di persone e preferenze. Risposta garantita in 10 minuti.')}
             </p>
           </div>
           <div className="p-6 rounded-lg border border-white/8 bg-white/[0.02]">
             <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-3">
-              {isIt ? 'VIP Table o Guestlist?' : 'VIP Table or Guestlist?'}
+              {tr(locale, 'VIP Table or Guestlist?', 'VIP Table o Guestlist?')}
             </h3>
             <p className="font-sans text-white/50 text-sm leading-relaxed">
-              {isIt
-                ? 'Guestlist = ingresso gratuito o ridotto, in piedi. VIP table = tavolo riservato, bottle service, migliore posizione. Per gruppi di 4+, il tavolo VIP è spesso la scelta migliore.'
-                : 'Guestlist = free or reduced entry, standing. VIP table = reserved table, bottle service, best position. For groups of 4+, VIP table is often the best choice.'}
+              {tr(locale, 'Guestlist = free or reduced entry, standing. VIP table = reserved table, bottle service, best position. For groups of 4+, VIP table is often the best choice.', 'Guestlist = ingresso gratuito o ridotto, in piedi. VIP table = tavolo riservato, bottle service, migliore posizione. Per gruppi di 4+, il tavolo VIP è spesso la scelta migliore.')}
             </p>
           </div>
           <div className="p-6 rounded-lg border border-white/8 bg-white/[0.02]">
             <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-3">
-              {isIt ? 'Servizio Gratuito' : 'Free Service'}
+              {tr(locale, 'Free Service', 'Servizio Gratuito')}
             </h3>
             <p className="font-sans text-white/50 text-sm leading-relaxed">
-              {isIt
-                ? 'Il nostro servizio di concierge è completamente gratuito. Guadagniamo una commissione dai locali partner. Non paghi nulla di extra oltre al prezzo concordato.'
-                : 'Our concierge service is completely free. We earn a commission from partner venues. You pay nothing extra beyond the agreed price.'}
+              {tr(locale, 'Our concierge service is completely free. We earn a commission from partner venues. You pay nothing extra beyond the agreed price.', 'Il nostro servizio di concierge è completamente gratuito. Guadagniamo una commissione dai locali partner. Non paghi nulla di extra oltre al prezzo concordato.')}
             </p>
           </div>
         </div>

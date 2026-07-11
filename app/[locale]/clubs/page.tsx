@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -17,12 +18,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const isIt = locale === 'it';
   const canonicalUrl = `${baseUrl}${localePrefix(locale)}/clubs`;
 
-  const title = isIt
-    ? 'Migliori Club Milano 2026 | La Selezione Definitiva'
-    : 'Best Clubs in Milan 2026 | The Definitive Clubbing Selection';
-  const description = isIt
-    ? 'Scopri i club più esclusivi di Milano 2026. Just Me, Pineta, Voya Rooftop, Play Club, Magazzini Generali e altri. Tavoli VIP, lista, dress code.'
-    : 'Discover the most exclusive clubs in Milan 2026. Just Me, Pineta, Voya Rooftop, Play Club, Magazzini Generali and more. VIP tables, guestlist, dress code guide.';
+  const title = tr(locale, 'Best Clubs in Milan 2026 | The Definitive Clubbing Selection', 'Migliori Club Milano 2026 | La Selezione Definitiva');
+  const description = tr(locale, 'Discover the most exclusive clubs in Milan 2026. Just Me, Pineta, Voya Rooftop, Play Club, Magazzini Generali and more. VIP tables, guestlist, dress code guide.', 'Scopri i club più esclusivi di Milano 2026. Just Me, Pineta, Voya Rooftop, Play Club, Magazzini Generali e altri. Tavoli VIP, lista, dress code.');
   const keywords = isIt
     ? ['migliori club milano', 'discoteche milano 2026', 'club vip milano', 'guida club milano', 'just me milano', 'pineta club milano', 'vita notturna milano', 'tavoli vip milano']
     : ['best clubs milan', 'milan nightclubs 2026', 'clubs milan vip', 'milan club guide', 'just me milan', 'pineta club milan', 'milan nightlife', 'vip tables milan'];
@@ -37,9 +34,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       languages: hreflangAlternates(baseUrl, '/clubs'),
     },
     openGraph: {
-      title: isIt
-        ? 'Migliori Club Milano 2026 — La Selezione Definitiva'
-        : 'Best Clubs in Milan 2026 — The Definitive Selection',
+      title: tr(locale, 'Best Clubs in Milan 2026 — The Definitive Selection', 'Migliori Club Milano 2026 — La Selezione Definitiva'),
       description,
       type: 'website',
       url: canonicalUrl,
@@ -49,9 +44,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
         url: `${baseUrl}/images/clubs-hero.webp`,
         width: 1200,
         height: 630,
-        alt: isIt
-          ? 'Migliori club di Milano 2026 — selezione curata'
-          : 'Best clubs in Milan 2026 — curated selection',
+        alt: tr(locale, 'Best clubs in Milan 2026 — curated selection', 'Migliori club di Milano 2026 — selezione curata'),
       }],
     },
     twitter: {

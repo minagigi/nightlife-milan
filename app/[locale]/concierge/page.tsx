@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Image from 'next/image';
 import { MessageCircle, Star, Clock, Shield, Zap, MapPin, Calendar, CheckCircle } from 'lucide-react';
@@ -13,12 +14,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const isIt = locale === 'it';
   const canonical = `${baseUrl}${localePrefix(locale)}/concierge`;
 
-  const title = isIt
-    ? 'Concierge Vita Notturna Milano | Tavoli VIP & Guestlist | Nightlife Milan'
-    : 'Milan Nightlife Concierge | Personal Table & Guestlist Service | Nightlife Milan';
-  const description = isIt
-    ? 'Il tuo concierge personale per la vita notturna milanese. Tavoli VIP, guestlist, bottle service e consigli insider — tutto via WhatsApp. Servizio gratuito.'
-    : 'Your personal Milan nightlife concierge. VIP table booking, guestlist access, bottle service, and insider advice — all via WhatsApp. Free service for guests.';
+  const title = tr(locale, 'Milan Nightlife Concierge | Personal Table & Guestlist Service | Nightlife Milan', 'Concierge Vita Notturna Milano | Tavoli VIP & Guestlist | Nightlife Milan');
+  const description = tr(locale, 'Your personal Milan nightlife concierge. VIP table booking, guestlist access, bottle service, and insider advice — all via WhatsApp. Free service for guests.', 'Il tuo concierge personale per la vita notturna milanese. Tavoli VIP, guestlist, bottle service e consigli insider — tutto via WhatsApp. Servizio gratuito.');
   const ogImage = `${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`;
 
   return {
@@ -33,13 +30,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       languages: hreflangAlternates(baseUrl, '/concierge'),
     },
     openGraph: {
-      title: isIt ? 'Concierge Vita Notturna Milano — Nightlife Milan' : 'Personal Milan Nightlife Concierge — Nightlife Milan',
+      title: tr(locale, 'Personal Milan Nightlife Concierge — Nightlife Milan', 'Concierge Vita Notturna Milano — Nightlife Milan'),
       description,
       type: 'website',
       url: canonical,
       siteName: 'Nightlife Milan',
       locale: isIt ? 'it_IT' : 'en_US',
-      images: [{ url: ogImage, width: 1200, height: 630, alt: isIt ? 'Concierge nightlife Milano tavolo VIP' : 'Milan nightlife concierge VIP table service' }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: tr(locale, 'Milan nightlife concierge VIP table service', 'Concierge nightlife Milano tavolo VIP') }],
     },
     twitter: {
       card: 'summary_large_image',

@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { tr } from '@/lib/i18n/t';
 import { localePrefix } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -13,12 +14,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const isIt = locale === 'it';
   const canonical = `${baseUrl}${localePrefix(locale)}/zones`;
 
-  const title = isIt
-    ? 'Zone Vita Notturna Milano 2026 | Migliori Quartieri | Nightlife Milan'
-    : 'Milan Nightlife Zones 2026 | Best Nightlife Districts & Areas | Nightlife Milan';
-  const description = isIt
-    ? 'Esplora i migliori quartieri della vita notturna milanese: Corso Como, Navigli, Brera, Isola, Sempione, Porta Romana. Scopri club, bar ed eventi per zona. Aggiornato 2026.'
-    : 'Explore Milan\'s top nightlife districts: Corso Como, Navigli, Brera, Isola, Sempione, Porta Romana. Find the best clubs, bars and events by zone. Updated 2026.';
+  const title = tr(locale, 'Milan Nightlife Zones 2026 | Best Nightlife Districts & Areas | Nightlife Milan', 'Zone Vita Notturna Milano 2026 | Migliori Quartieri | Nightlife Milan');
+  const description = tr(locale, 'Explore Milan\'s top nightlife districts: Corso Como, Navigli, Brera, Isola, Sempione, Porta Romana. Find the best clubs, bars and events by zone. Updated 2026.', 'Esplora i migliori quartieri della vita notturna milanese: Corso Como, Navigli, Brera, Isola, Sempione, Porta Romana. Scopri club, bar ed eventi per zona. Aggiornato 2026.');
   const ogImage = `${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`;
 
   return {
@@ -37,13 +34,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       },
     },
     openGraph: {
-      title: isIt ? 'Zone Vita Notturna Milano 2026 — Nightlife Milan' : 'Milan Nightlife Zones 2026 — Best Districts for a Night Out',
+      title: tr(locale, 'Milan Nightlife Zones 2026 — Best Districts for a Night Out', 'Zone Vita Notturna Milano 2026 — Nightlife Milan'),
       description,
       type: 'website',
       url: canonical,
       siteName: 'Nightlife Milan',
       locale: isIt ? 'it_IT' : 'en_US',
-      images: [{ url: ogImage, width: 1200, height: 630, alt: isIt ? 'Vita notturna Milano quartieri club' : 'Milan nightlife districts clubs and bars' }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: tr(locale, 'Milan nightlife districts clubs and bars', 'Vita notturna Milano quartieri club') }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -110,7 +107,7 @@ export default async function ZonesPage({
               <span className="mx-2">/</span>
             </li>
             <li className="text-champagne" aria-current="page">
-              {typedLocale === 'it' ? 'Zone' : 'Zones'}
+              {tr(locale, 'Zones', 'Zone')}
             </li>
           </ol>
         </nav>
@@ -131,9 +128,7 @@ export default async function ZonesPage({
         <div className="max-w-2xl p-5 rounded-xl border border-champagne/20 bg-champagne/[0.04]">
           <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">Quick Answer</p>
           <p className="font-sans text-white/70 text-sm leading-relaxed">
-            {typedLocale === 'it'
-              ? 'I migliori quartieri per la vita notturna a Milano sono: Corso Como (club esclusivi, moda), Navigli (canal-side bars, atmosfera bohémien), Brera (lounge di lusso), Isola (rooftop e cocktail bar), Sempione (mega-club come Just Me). I club aprono dalle 22:00 con picco tra mezzanotte e le 3:00.'
-              : 'The best zones for nightlife in Milan are: Corso Como (exclusive clubs, fashion crowd), Navigli (canal-side bars, bohemian vibe), Brera (luxury lounges), Isola (rooftops and cocktail bars), Sempione (mega-clubs like Just Me). Clubs open from 22:00 with peak between midnight and 3 AM.'}
+            {tr(locale, 'The best zones for nightlife in Milan are: Corso Como (exclusive clubs, fashion crowd), Navigli (canal-side bars, bohemian vibe), Brera (luxury lounges), Isola (rooftops and cocktail bars), Sempione (mega-clubs like Just Me). Clubs open from 22:00 with peak between midnight and 3 AM.', 'I migliori quartieri per la vita notturna a Milano sono: Corso Como (club esclusivi, moda), Navigli (canal-side bars, atmosfera bohémien), Brera (lounge di lusso), Isola (rooftop e cocktail bar), Sempione (mega-club come Just Me). I club aprono dalle 22:00 con picco tra mezzanotte e le 3:00.')}
           </p>
         </div>
       </section>
@@ -141,30 +136,24 @@ export default async function ZonesPage({
       {/* How to Choose Your Zone — H2 section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 border-t border-white/5 pt-12">
         <h2 className="font-serif text-3xl md:text-4xl text-white mb-8">
-          {typedLocale === 'it' ? 'Scegli la Zona Giusta per Te' : 'How to Choose the Right Zone'}
+          {tr(locale, 'How to Choose the Right Zone', 'Scegli la Zona Giusta per Te')}
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {[
             {
-              label: typedLocale === 'it' ? 'Per i Club di Lusso' : 'For Luxury Clubs',
-              zone: typedLocale === 'it' ? 'Corso Como & Sempione' : 'Corso Como & Sempione',
-              desc: typedLocale === 'it'
-                ? 'I mega-club con VIP table, bottle service e le migliori line-up. Just Me, Pineta, Play Club.'
-                : 'Mega-clubs with VIP tables, bottle service and top DJ line-ups. Just Me, Pineta, Play Club.',
+              label: tr(locale, 'For Luxury Clubs', 'Per i Club di Lusso'),
+              zone: tr(locale, 'Corso Como & Sempione', 'Corso Como & Sempione'),
+              desc: tr(locale, 'Mega-clubs with VIP tables, bottle service and top DJ line-ups. Just Me, Pineta, Play Club.', 'I mega-club con VIP table, bottle service e le migliori line-up. Just Me, Pineta, Play Club.'),
             },
             {
-              label: typedLocale === 'it' ? 'Per L\'Aperitivo' : 'For Aperitivo & Cocktails',
-              zone: typedLocale === 'it' ? 'Navigli & Brera' : 'Navigli & Brera',
-              desc: typedLocale === 'it'
-                ? 'Canal-side terrazze, lounge ricercati e cocktail bar iconici. Atmosfera rilassata dal tramonto.'
-                : 'Canal-side terraces, refined lounges and iconic cocktail bars. Relaxed vibe from sunset.',
+              label: tr(locale, 'For Aperitivo & Cocktails', 'Per L\'Aperitivo'),
+              zone: tr(locale, 'Navigli & Brera', 'Navigli & Brera'),
+              desc: tr(locale, 'Canal-side terraces, refined lounges and iconic cocktail bars. Relaxed vibe from sunset.', 'Canal-side terrazze, lounge ricercati e cocktail bar iconici. Atmosfera rilassata dal tramonto.'),
             },
             {
-              label: typedLocale === 'it' ? 'Per Le Viste Panoramiche' : 'For Rooftop Views',
+              label: tr(locale, 'For Rooftop Views', 'Per Le Viste Panoramiche'),
               zone: 'Isola',
-              desc: typedLocale === 'it'
-                ? 'Voya Rooftop al 20° piano con vista sullo skyline di Milano. Sky lounge fino all\'alba.'
-                : 'Voya Rooftop on the 20th floor with views over the Milan skyline. Sky lounge until dawn.',
+              desc: tr(locale, 'Voya Rooftop on the 20th floor with views over the Milan skyline. Sky lounge until dawn.', 'Voya Rooftop al 20° piano con vista sullo skyline di Milano. Sky lounge fino all\'alba.'),
             },
           ].map((item) => (
             <div key={item.label} className="p-6 rounded-lg border border-white/8 bg-white/[0.02]">
@@ -179,7 +168,7 @@ export default async function ZonesPage({
       {/* Zones Grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <h2 className="font-serif text-3xl text-white mb-8">
-          {typedLocale === 'it' ? 'Tutti i Quartieri' : 'All Milan Nightlife Districts'}
+          {tr(locale, 'All Milan Nightlife Districts', 'Tutti i Quartieri')}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {mockZones.map((zone) => {
@@ -250,33 +239,25 @@ export default async function ZonesPage({
             <div>
               <h3 className="font-sans text-champagne text-sm font-semibold tracking-widest uppercase mb-2">Corso Como</h3>
               <p className="font-sans text-white/50 text-sm leading-relaxed">
-                {typedLocale === 'it'
-                  ? 'La zona più glamour di Milano. Casa di Pineta Club (aperitivo cantato, venerdì), Play Club (hip hop, afrobeats), Volt (techno underground). Dress code rigoroso — total black o chic fashion.'
-                  : 'The most glamorous zone in Milan. Home to Pineta Club (singing aperitivo, Fridays), Play Club (hip hop, afrobeats), Volt (underground techno). Strict dress code — total black or chic fashion.'}
+                {tr(locale, 'The most glamorous zone in Milan. Home to Pineta Club (singing aperitivo, Fridays), Play Club (hip hop, afrobeats), Volt (underground techno). Strict dress code — total black or chic fashion.', 'La zona più glamour di Milano. Casa di Pineta Club (aperitivo cantato, venerdì), Play Club (hip hop, afrobeats), Volt (techno underground). Dress code rigoroso — total black o chic fashion.')}
               </p>
             </div>
             <div>
               <h3 className="font-sans text-champagne text-sm font-semibold tracking-widest uppercase mb-2">Sempione</h3>
               <p className="font-sans text-white/50 text-sm leading-relaxed">
-                {typedLocale === 'it'
-                  ? 'Quartiere esclusivo vicino al Castello Sforzesco. Just Me Milano è qui — il club più in voga della città con design Roberto Cavalli, VIP table da €500 e DJ set internazionali.'
-                  : 'Exclusive district near the Castello Sforzesco. Just Me Milano is here — the city\'s most fashionable club with Roberto Cavalli design, VIP tables from €500 and international DJ sets.'}
+                {tr(locale, 'Exclusive district near the Castello Sforzesco. Just Me Milano is here — the city\'s most fashionable club with Roberto Cavalli design, VIP tables from €500 and international DJ sets.', 'Quartiere esclusivo vicino al Castello Sforzesco. Just Me Milano è qui — il club più in voga della città con design Roberto Cavalli, VIP table da €500 e DJ set internazionali.')}
               </p>
             </div>
             <div>
               <h3 className="font-sans text-champagne text-sm font-semibold tracking-widest uppercase mb-2">Navigli</h3>
               <p className="font-sans text-white/50 text-sm leading-relaxed">
-                {typedLocale === 'it'
-                  ? 'I canali di Milano di notte. Magazzini Generali (techno e live music), Hollywood Club (storico), decine di bar lungo i canali per l\'aperitivo. Atmosfera bohémien, crowd misto.'
-                  : 'Milan\'s canals at night. Magazzini Generali (techno and live music), Hollywood Club (historic), dozens of canal-side bars for aperitivo. Bohemian atmosphere, mixed crowd.'}
+                {tr(locale, 'Milan\'s canals at night. Magazzini Generali (techno and live music), Hollywood Club (historic), dozens of canal-side bars for aperitivo. Bohemian atmosphere, mixed crowd.', 'I canali di Milano di notte. Magazzini Generali (techno e live music), Hollywood Club (storico), decine di bar lungo i canali per l\'aperitivo. Atmosfera bohémien, crowd misto.')}
               </p>
             </div>
             <div>
               <h3 className="font-sans text-champagne text-sm font-semibold tracking-widest uppercase mb-2">Isola</h3>
               <p className="font-sans text-white/50 text-sm leading-relaxed">
-                {typedLocale === 'it'
-                  ? 'Il quartiere più trendy di Milano con Voya Rooftop (sky lounge al 20° piano, vista skyline), cocktail bar nascosti e locali d\'autore. Aperitivo da sogno con vista sui grattacieli.'
-                  : 'Milan\'s trendiest neighborhood with Voya Rooftop (sky lounge on the 20th floor, skyline view), hidden cocktail bars and design venues. Dream aperitivo with views of the skyscrapers.'}
+                {tr(locale, 'Milan\'s trendiest neighborhood with Voya Rooftop (sky lounge on the 20th floor, skyline view), hidden cocktail bars and design venues. Dream aperitivo with views of the skyscrapers.', 'Il quartiere più trendy di Milano con Voya Rooftop (sky lounge al 20° piano, vista skyline), cocktail bar nascosti e locali d\'autore. Aperitivo da sogno con vista sui grattacieli.')}
               </p>
             </div>
           </div>
@@ -288,12 +269,10 @@ export default async function ZonesPage({
         <div className="rounded-lg border border-champagne/20 bg-champagne/[0.04] p-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <h2 className="font-serif text-2xl md:text-3xl text-white mb-2">
-              {typedLocale === 'it' ? 'Trovata la zona? Prenota il tavolo.' : 'Found your zone? Book the table.'}
+              {tr(locale, 'Found your zone? Book the table.', 'Trovata la zona? Prenota il tavolo.')}
             </h2>
             <p className="font-sans text-white/40 text-sm">
-              {typedLocale === 'it'
-                ? 'VIP table da €200. Concierge WhatsApp — risposta in 10 minuti. Servizio gratuito.'
-                : 'VIP tables from €200. WhatsApp concierge — reply in 10 minutes. Free service.'}
+              {tr(locale, 'VIP tables from €200. WhatsApp concierge — reply in 10 minutes. Free service.', 'VIP table da €200. Concierge WhatsApp — risposta in 10 minuti. Servizio gratuito.')}
             </p>
           </div>
           <Link
@@ -302,7 +281,7 @@ export default async function ZonesPage({
               font-sans font-bold text-sm tracking-[0.15em] uppercase
               hover:bg-white transition-colors duration-300"
           >
-            {typedLocale === 'it' ? 'Prenota VIP Table' : 'Book VIP Table'}
+            {tr(locale, 'Book VIP Table', 'Prenota VIP Table')}
           </Link>
         </div>
       </section>

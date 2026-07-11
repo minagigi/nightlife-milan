@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -15,10 +16,8 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   
-  const title = locale === 'it' ? `Eventi di Stasera a Milano | Nightlife Milan` : `Events Tonight in Milan | Nightlife Milan`;
-  const description = locale === 'it' 
-    ? `Scopri i migliori eventi, party e serate in programma stasera a Milano. Prenota il tuo tavolo o mettiti in lista per i club più esclusivi.` 
-    : `Discover the best events, parties, and nights out happening tonight in Milan. Book your table or get on the guestlist for the most exclusive clubs.`;
+  const title = tr(locale, `Events Tonight in Milan | Nightlife Milan`, `Eventi di Stasera a Milano | Nightlife Milan`);
+  const description = tr(locale, `Discover the best events, parties, and nights out happening tonight in Milan. Book your table or get on the guestlist for the most exclusive clubs.`, `Scopri i migliori eventi, party e serate in programma stasera a Milano. Prenota il tuo tavolo o mettiti in lista per i club più esclusivi.`);
   
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const canonical = `${baseUrl}${localePrefix(locale)}/calendar/tonight`;
@@ -44,7 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'website',
       siteName: 'Nightlife Milan',
       locale: isIt ? 'it_IT' : 'en_US',
-      images: [{ url: ogImage, width: 1200, height: 630, alt: isIt ? 'Eventi stasera Milano' : 'Events tonight Milan' }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: tr(locale, 'Events tonight Milan', 'Eventi stasera Milano') }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -136,15 +135,13 @@ export default async function TonightPage({ params }: Props) {
   }));
 
   const t = {
-    title: isIt ? `La Timeline` : `The Timeline`,
-    intro: isIt 
-      ? `Eventi curati in programma stasera a Milano.`
-      : `Curated events happening tonight in Milan.`,
-    today: isIt ? 'Oggi' : 'Today',
-    tomorrow: isIt ? 'Domani' : 'Tomorrow',
-    weekend: isIt ? 'Weekend' : 'Weekend',
-    emptyTitle: isIt ? 'La notte riposa.' : 'The night is resting.',
-    emptyDesc: isIt ? 'Torna a controllare per il weekend.' : 'Check back for the weekend.',
+    title: tr(locale, `The Timeline`, `La Timeline`),
+    intro: tr(locale, `Curated events happening tonight in Milan.`, `Eventi curati in programma stasera a Milano.`),
+    today: tr(locale, 'Today', 'Oggi'),
+    tomorrow: tr(locale, 'Tomorrow', 'Domani'),
+    weekend: tr(locale, 'Weekend', 'Weekend'),
+    emptyTitle: tr(locale, 'The night is resting.', 'La notte riposa.'),
+    emptyDesc: tr(locale, 'Check back for the weekend.', 'Torna a controllare per il weekend.'),
   };
 
   return (
@@ -166,21 +163,19 @@ export default async function TonightPage({ params }: Props) {
         <div className="mb-10 p-5 rounded-xl border border-champagne/20 bg-champagne/[0.04]">
           <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">Quick Answer</p>
           <p className="font-sans text-white/70 text-sm leading-relaxed">
-            {isIt
-              ? 'Stasera a Milano: aperitivo dalle 19:00–22:00 (Pineta, Voya Rooftop, Navigli), club dalle 22:30 (Just Me, Play Club, Magazzini). Prenota tavolo VIP via WhatsApp +39 351 912 7047 — risposta in 10 minuti.'
-              : 'Tonight in Milan: aperitivo 19:00–22:00 (Pineta, Voya Rooftop, Navigli bars), clubs from 22:30 (Just Me, Play Club, Magazzini). Book VIP table via WhatsApp +39 351 912 7047 — reply in 10 minutes.'}
+            {tr(locale, 'Tonight in Milan: aperitivo 19:00–22:00 (Pineta, Voya Rooftop, Navigli bars), clubs from 22:30 (Just Me, Play Club, Magazzini). Book VIP table via WhatsApp +39 351 912 7047 — reply in 10 minutes.', 'Stasera a Milano: aperitivo dalle 19:00–22:00 (Pineta, Voya Rooftop, Navigli), club dalle 22:30 (Just Me, Play Club, Magazzini). Prenota tavolo VIP via WhatsApp +39 351 912 7047 — risposta in 10 minuti.')}
           </p>
         </div>
 
         {/* Tags */}
         <div className="flex flex-wrap gap-2 mb-10">
           {[
-            isIt ? 'Stasera Milano' : 'Tonight Milan',
-            isIt ? 'Aperitivo' : 'Aperitivo Tonight',
-            isIt ? 'Club Milano' : 'Milan Clubs Tonight',
+            tr(locale, 'Tonight Milan', 'Stasera Milano'),
+            tr(locale, 'Aperitivo Tonight', 'Aperitivo'),
+            tr(locale, 'Milan Clubs Tonight', 'Club Milano'),
             'VIP Tables',
-            isIt ? 'Serate Milano' : 'Milan Events',
-            isIt ? 'Prenotazione Tavolo' : 'Table Booking',
+            tr(locale, 'Milan Events', 'Serate Milano'),
+            tr(locale, 'Table Booking', 'Prenotazione Tavolo'),
           ].map((tag) => (
             <span key={tag} className="px-3 py-1.5 rounded-full border border-white/10 text-white/40 text-xs font-sans tracking-wider">
               {tag}
@@ -211,7 +206,7 @@ export default async function TonightPage({ params }: Props) {
                 href={`${lp}/calendar/this-week`}
                 className="flex-shrink-0 px-8 py-3 rounded-full border border-white/20 text-white hover:border-champagne hover:text-champagne transition-colors font-medium tracking-wider uppercase text-sm"
               >
-                {isIt ? 'Tutta la Settimana' : 'Full Week'}
+                {tr(locale, 'Full Week', 'Tutta la Settimana')}
               </Link>
             </div>
           );

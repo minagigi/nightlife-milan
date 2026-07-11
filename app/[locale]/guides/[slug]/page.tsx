@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import { Metadata } from 'next';
 import Image from 'next/image';
@@ -96,11 +97,11 @@ export default async function GuidePage({ params }: Props) {
   const guideUrl = `${baseUrl}${langPrefix}/guides/${currentSlug}`;
 
   const t = {
-    back: isIt ? 'Torna alle Guide' : 'Back to Guides',
-    toc: isIt ? 'Indice dei Contenuti' : 'Table of Contents',
-    relatedVenues: isIt ? 'Locali Menzionati' : 'Related Venues',
-    proTip: isIt ? 'Il Consiglio dell\'Esperto' : 'Pro Tip',
-    faq: isIt ? 'Domande Frequenti' : 'Frequently Asked Questions',
+    back: tr(locale, 'Back to Guides', 'Torna alle Guide'),
+    toc: tr(locale, 'Table of Contents', 'Indice dei Contenuti'),
+    relatedVenues: tr(locale, 'Related Venues', 'Locali Menzionati'),
+    proTip: tr(locale, 'Pro Tip', 'Il Consiglio dell\'Esperto'),
+    faq: tr(locale, 'Frequently Asked Questions', 'Domande Frequenti'),
   };
 
   // Format date
@@ -254,11 +255,11 @@ export default async function GuidePage({ params }: Props) {
             {/* Tags */}
             <div className="not-prose flex flex-wrap gap-2 mb-10">
               {[
-                isIt ? 'Guida Milano' : 'Milan Guide',
-                isIt ? 'Vita Notturna' : 'Nightlife Milan',
+                tr(locale, 'Milan Guide', 'Guida Milano'),
+                tr(locale, 'Nightlife Milan', 'Vita Notturna'),
                 ...(guide.relatedGenres || []).map(g => g.replace(/_/g, ' ')),
-                isIt ? 'Club Milano' : 'Milan Clubs',
-                isIt ? 'Consigli Insider' : 'Insider Tips',
+                tr(locale, 'Milan Clubs', 'Club Milano'),
+                tr(locale, 'Insider Tips', 'Consigli Insider'),
               ].slice(0, 6).map(tag => (
                 <span key={tag} className="px-3 py-1.5 rounded-full border border-white/10 text-white/40 text-xs font-sans tracking-wider">
                   {tag}

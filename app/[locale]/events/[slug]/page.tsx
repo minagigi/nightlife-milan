@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import { Metadata } from 'next';
 import Image from 'next/image';
@@ -316,7 +317,7 @@ export default async function EventPage({ params }: Props) {
                 className="inline-flex items-center gap-2 bg-champagne text-black px-8 py-4 rounded-full font-bold hover:bg-white transition-colors text-lg"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" /></svg>
-                {isIt ? 'Acquista su Xceed' : 'Buy on Xceed'}
+                {tr(locale, 'Buy on Xceed', 'Acquista su Xceed')}
               </a>
             )}
             <a
@@ -325,7 +326,7 @@ export default async function EventPage({ params }: Props) {
               rel="noopener noreferrer"
               className={`inline-block ${weeklyEvent.xceedLink ? 'ml-4 border border-white/40 text-white hover:border-champagne hover:text-champagne' : 'bg-champagne text-black hover:bg-white'} px-8 py-4 rounded-full font-bold transition-colors text-lg`}
             >
-              {isIt ? 'Prenota via WhatsApp' : 'Book via WhatsApp'}
+              {tr(locale, 'Book via WhatsApp', 'Prenota via WhatsApp')}
             </a>
           </div>
         </section>
@@ -333,38 +334,38 @@ export default async function EventPage({ params }: Props) {
         <div className="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2">
             <h2 className="text-3xl font-serif font-bold text-champagne mb-6">
-              {isIt ? 'L\'Esperienza' : 'The Experience'}
+              {tr(locale, 'The Experience', 'L\'Esperienza')}
             </h2>
             <p className="text-lg text-white/70 leading-relaxed mb-8">{description}</p>
             
             <div className="bg-white/[0.03] p-8 rounded-lg border border-white/10 mb-12">
-              <h3 className="text-xl font-bold text-white mb-4">{isIt ? 'Dress Code' : 'Dress Code'}</h3>
+              <h3 className="text-xl font-bold text-white mb-4">{tr(locale, 'Dress Code', 'Dress Code')}</h3>
               <p className="text-white/50">{dressCode}</p>
             </div>
 
             <h2 className="text-3xl font-serif font-bold text-champagne mb-6 mt-12">
-              {isIt ? 'Prezzi & Tavoli VIP' : 'Pricing & VIP Tables'}
+              {tr(locale, 'Pricing & VIP Tables', 'Prezzi & Tavoli VIP')}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
               {weeklyEvent.pricing.aperitif && (
                 <div className="bg-white/[0.03] p-6 rounded-xl border border-white/10">
-                  <h4 className="text-lg font-bold text-white mb-2">{isIt ? 'Aperitivo' : 'Aperitif'}</h4>
+                  <h4 className="text-lg font-bold text-white mb-2">{tr(locale, 'Aperitif', 'Aperitivo')}</h4>
                   <p className="text-2xl font-serif text-champagne">{weeklyEvent.pricing.aperitif}</p>
                 </div>
               )}
               <div className="bg-white/[0.03] p-6 rounded-xl border border-white/10">
-                <h4 className="text-lg font-bold text-white mb-2">{isIt ? 'Ingresso Club' : 'Club Entry'}</h4>
+                <h4 className="text-lg font-bold text-white mb-2">{tr(locale, 'Club Entry', 'Ingresso Club')}</h4>
                 <p className="text-2xl font-serif text-champagne">{weeklyEvent.pricing.club}</p>
               </div>
               <div className="bg-white/[0.03] p-6 rounded-xl border border-white/10 md:col-span-2">
-                <h4 className="text-lg font-bold text-white mb-2">{isIt ? 'Tavoli VIP' : 'VIP Tables'}</h4>
+                <h4 className="text-lg font-bold text-white mb-2">{tr(locale, 'VIP Tables', 'Tavoli VIP')}</h4>
                 <p className="text-2xl font-serif text-champagne">{weeklyEvent.pricing.tables}</p>
-                <p className="text-sm text-white/50 mt-2">{isIt ? 'I prezzi variano in base alla posizione e al numero di persone.' : 'Prices vary based on location and number of guests.'}</p>
+                <p className="text-sm text-white/50 mt-2">{tr(locale, 'Prices vary based on location and number of guests.', 'I prezzi variano in base alla posizione e al numero di persone.')}</p>
               </div>
             </div>
             
             <h2 className="text-3xl font-serif font-bold text-champagne mb-6 mt-12">
-              {isIt ? 'Domande Frequenti' : 'Frequently Asked Questions'}
+              {tr(locale, 'Frequently Asked Questions', 'Domande Frequenti')}
             </h2>
             <div className="space-y-4">
               {weeklyEvent.faqs.map((faq, index) => (
@@ -378,19 +379,19 @@ export default async function EventPage({ params }: Props) {
 
           <aside className="bg-white/[0.03] rounded-xl p-8 border border-white/10 h-fit sticky top-24">
             <h3 className="text-xl font-serif font-bold text-champagne mb-6 pb-4 border-b border-white/10">
-              {isIt ? 'Dettagli Evento' : 'Event Details'}
+              {tr(locale, 'Event Details', 'Dettagli Evento')}
             </h3>
             <div className="space-y-6">
               <div>
-                <p className="text-sm text-white/50 mb-1">{isIt ? 'Giorno' : 'Day'}</p>
+                <p className="text-sm text-white/50 mb-1">{tr(locale, 'Day', 'Giorno')}</p>
                 <p className="text-white font-medium capitalize">{isIt ? weeklyEvent.day : weeklyEvent.day}</p>
               </div>
               <div>
-                <p className="text-sm text-white/50 mb-1">{isIt ? 'Target' : 'Target'}</p>
+                <p className="text-sm text-white/50 mb-1">{tr(locale, 'Target', 'Target')}</p>
                 <p className="text-white font-medium">{weeklyEvent.target}</p>
               </div>
               <div>
-                <p className="text-sm text-white/50 mb-1">{isIt ? 'Generi Musicali' : 'Music Genres'}</p>
+                <p className="text-sm text-white/50 mb-1">{tr(locale, 'Music Genres', 'Generi Musicali')}</p>
                 <p className="text-white font-medium">{weeklyEvent.genres.join(', ')}</p>
               </div>
               <div className="pt-6 border-t border-white/10 space-y-3">
@@ -402,7 +403,7 @@ export default async function EventPage({ params }: Props) {
                     className="flex items-center justify-center gap-2 w-full bg-champagne text-black px-6 py-3 rounded-xl font-bold hover:bg-white transition-colors"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" /></svg>
-                    {isIt ? 'Acquista su Xceed' : 'Buy on Xceed'}
+                    {tr(locale, 'Buy on Xceed', 'Acquista su Xceed')}
                   </a>
                 )}
                 <a
@@ -411,7 +412,7 @@ export default async function EventPage({ params }: Props) {
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 w-full bg-[#25D366] text-white px-6 py-3 rounded-xl font-bold hover:bg-[#20bd5a] transition-colors"
                 >
-                  {isIt ? 'Prenota su WhatsApp' : 'Book on WhatsApp'}
+                  {tr(locale, 'Book on WhatsApp', 'Prenota su WhatsApp')}
                 </a>
               </div>
             </div>
@@ -533,12 +534,12 @@ export default async function EventPage({ params }: Props) {
   // quando il prezzo non è confermato, invece di affermare "Gratuito" a caso.
   const entryText = event.pricing.entry === null
     ? null
-    : (event.pricing.entry === 0 ? (locale === 'it' ? 'Gratuito' : 'Free') : formattedPrice);
+    : (event.pricing.entry === 0 ? (tr(locale, 'Free', 'Gratuito')) : formattedPrice);
   const tableText = event.pricing.tableMinSpend
     ? (locale === 'it' ? `tavoli VIP da €${event.pricing.tableMinSpend}` : `VIP tables from €${event.pricing.tableMinSpend}`)
     : null;
   const pricePhrase = [
-    entryText ? `${locale === 'it' ? 'Ingresso' : 'Entry'}: ${entryText}` : null,
+    entryText ? `${tr(locale, 'Entry', 'Ingresso')}: ${entryText}` : null,
     tableText,
   ].filter(Boolean).join(', ');
 
@@ -612,9 +613,9 @@ export default async function EventPage({ params }: Props) {
               {[
                 venueName,
                 ...event.genre.map(g => g.replace(/_/g, ' ')),
-                locale === 'it' ? 'Serate Milano' : 'Milan Events',
+                tr(locale, 'Milan Events', 'Serate Milano'),
                 'VIP Tables',
-                locale === 'it' ? 'Prenotazione' : 'Book Now',
+                tr(locale, 'Book Now', 'Prenotazione'),
               ].map(tag => (
                 <span key={tag} className="px-3 py-1.5 rounded-full border border-white/10 text-white/40 text-xs font-sans tracking-wider">
                   {tag}
@@ -623,7 +624,7 @@ export default async function EventPage({ params }: Props) {
             </div>
 
             <h2 className="text-2xl font-serif font-bold text-champagne mb-4">
-              {locale === 'it' ? 'Informazioni sull\'evento' : 'About the event'}
+              {tr(locale, 'About the event', 'Informazioni sull\'evento')}
             </h2>
             <p className="text-lg text-white/70 leading-relaxed">
               {description}
@@ -671,28 +672,28 @@ export default async function EventPage({ params }: Props) {
 
             {/* H2: Practical Info */}
             <h2 className="text-2xl font-serif font-bold text-champagne mt-12 mb-4">
-              {locale === 'it' ? 'Informazioni Pratiche' : 'Practical Information'}
+              {tr(locale, 'Practical Information', 'Informazioni Pratiche')}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 not-prose">
               <div className="p-4 rounded-xl border border-white/8 bg-white/[0.02]">
                 <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-2">
-                  {locale === 'it' ? 'Dress Code' : 'Dress Code'}
+                  {tr(locale, 'Dress Code', 'Dress Code')}
                 </h3>
                 <p className="font-sans text-white/50 text-sm">
-                  {locale === 'it' ? 'Smart elegant. Niente sneakers o shorts.' : 'Smart elegant. No sneakers or shorts.'}
+                  {tr(locale, 'Smart elegant. No sneakers or shorts.', 'Smart elegant. Niente sneakers o shorts.')}
                 </p>
               </div>
               <div className="p-4 rounded-xl border border-white/8 bg-white/[0.02]">
                 <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-2">
-                  {locale === 'it' ? 'Età Minima' : 'Minimum Age'}
+                  {tr(locale, 'Minimum Age', 'Età Minima')}
                 </h3>
-                <p className="font-sans text-white/50 text-sm">18+ {locale === 'it' ? '(documento richiesto)' : '(ID required)'}</p>
+                <p className="font-sans text-white/50 text-sm">18+ {tr(locale, '(ID required)', '(documento richiesto)')}</p>
               </div>
               <div className="p-4 rounded-xl border border-white/8 bg-white/[0.02]">
                 <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-2">
-                  {locale === 'it' ? 'Come Arrivare' : 'Getting There'}
+                  {tr(locale, 'Getting There', 'Come Arrivare')}
                 </h3>
-                <p className="font-sans text-white/50 text-sm">{venue.address.streetAddress}, {locale === 'it' ? 'Milano' : 'Milan'}</p>
+                <p className="font-sans text-white/50 text-sm">{venue.address.streetAddress}, {tr(locale, 'Milan', 'Milano')}</p>
               </div>
             </div>
 
@@ -705,23 +706,23 @@ export default async function EventPage({ params }: Props) {
           {/* Sidebar / Ticket Info */}
           <aside id="booking" className="bg-white/[0.03] rounded-xl p-8 border border-white/10 h-fit sticky top-24">
             <h3 className="text-xl font-serif font-bold text-champagne mb-6 pb-4 border-b border-white/10">
-              {locale === 'it' ? 'Dettagli Ingresso' : 'Entry Details'}
+              {tr(locale, 'Entry Details', 'Dettagli Ingresso')}
             </h3>
             
             <div className="space-y-4 mb-8">
               <div className="flex justify-between items-center">
-                <span className="text-white/50">{locale === 'it' ? 'Ingresso' : 'Entry'}</span>
+                <span className="text-white/50">{tr(locale, 'Entry', 'Ingresso')}</span>
                 <span className="text-white font-bold text-xl">
                   {event.pricing.entry === null
-                    ? (locale === 'it' ? 'Su richiesta' : 'On request')
+                    ? (tr(locale, 'On request', 'Su richiesta'))
                     : event.pricing.entry === 0
-                      ? (locale === 'it' ? 'Gratis' : 'Free')
+                      ? (tr(locale, 'Free', 'Gratis'))
                       : formattedPrice}
                 </span>
               </div>
               {event.pricing.tableMinSpend && (
                 <div className="flex justify-between items-center">
-                  <span className="text-white/50">{locale === 'it' ? 'Tavoli da' : 'Tables from'}</span>
+                  <span className="text-white/50">{tr(locale, 'Tables from', 'Tavoli da')}</span>
                   <span className="text-white font-medium">
                     {new Intl.NumberFormat(locale === 'it' ? 'it-IT' : 'en-US', { style: 'currency', currency: event.pricing.currency, maximumFractionDigits: 0 }).format(event.pricing.tableMinSpend)}
                   </span>
@@ -738,8 +739,8 @@ export default async function EventPage({ params }: Props) {
               >
                 <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" /></svg>
                 {event.xceedUrl.includes('eventbrite')
-                  ? (locale === 'it' ? 'Compra il Biglietto' : 'Buy Ticket')
-                  : (locale === 'it' ? 'Acquista su Xceed' : 'Buy on Xceed')}
+                  ? (tr(locale, 'Buy Ticket', 'Compra il Biglietto'))
+                  : (tr(locale, 'Buy on Xceed', 'Acquista su Xceed'))}
               </a>
             )}
 
@@ -751,7 +752,7 @@ export default async function EventPage({ params }: Props) {
             />
 
             <div className="mt-6 pt-6 border-t border-white/10">
-              <p className="text-sm text-white/50 mb-1">{locale === 'it' ? 'Location' : 'Location'}</p>
+              <p className="text-sm text-white/50 mb-1">{tr(locale, 'Location', 'Location')}</p>
               <p className="text-white font-medium">{venueName}</p>
               <p className="text-sm text-white/40">{venue.address.streetAddress}, {venue.address.addressLocality}</p>
             </div>

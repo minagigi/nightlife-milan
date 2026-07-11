@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { tr } from '@/lib/i18n/t';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
@@ -149,7 +150,7 @@ export default function HeroInteractive({ venues, locale, firstVenueId }: Props)
               hover:text-champagne transition-colors duration-300 cursor-pointer
               flex items-center gap-2 group hidden sm:flex"
           >
-            {typedLocale === 'it' ? 'Tutti i locali' : 'All venues'}
+            {tr(locale, 'All venues', 'Tutti i locali')}
             <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all duration-300" />
           </Link>
         </div>

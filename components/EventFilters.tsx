@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import { tr } from '@/lib/i18n/t';
 import { useCallback } from 'react';
 import { MusicGenre, MilanZone } from '@/lib/types';
 
@@ -55,9 +56,9 @@ export default function EventFilters({ lang }: EventFiltersProps) {
             value={currentGenre}
             onChange={(e) => handleFilterChange('genre', e.target.value)}
             className="w-full appearance-none bg-black/40 border border-white/10 text-white rounded-lg px-4 py-3 pr-10 focus:outline-none focus:border-champagne/50 transition-colors cursor-pointer text-sm tracking-wider uppercase"
-            aria-label={isIt ? 'Filtra per Genere' : 'Filter by Genre'}
+            aria-label={tr(lang, 'Filter by Genre', 'Filtra per Genere')}
           >
-            <option value="">{isIt ? 'Tutti i Generi' : 'All Genres'}</option>
+            <option value="">{tr(lang, 'All Genres', 'Tutti i Generi')}</option>
             {Object.values(MusicGenre).map((genre) => (
               <option key={genre} value={genre}>
                 {formatEnum(genre)}
@@ -77,9 +78,9 @@ export default function EventFilters({ lang }: EventFiltersProps) {
             value={currentZone}
             onChange={(e) => handleFilterChange('zone', e.target.value)}
             className="w-full appearance-none bg-black/40 border border-white/10 text-white rounded-lg px-4 py-3 pr-10 focus:outline-none focus:border-champagne/50 transition-colors cursor-pointer text-sm tracking-wider uppercase"
-            aria-label={isIt ? 'Filtra per Zona' : 'Filter by Zone'}
+            aria-label={tr(lang, 'Filter by Zone', 'Filtra per Zona')}
           >
-            <option value="">{isIt ? 'Tutte le Zone' : 'All Zones'}</option>
+            <option value="">{tr(lang, 'All Zones', 'Tutte le Zone')}</option>
             {Object.values(MilanZone).map((zone) => (
               <option key={zone} value={zone}>
                 {formatEnum(zone)}
@@ -99,11 +100,11 @@ export default function EventFilters({ lang }: EventFiltersProps) {
             value={currentPrice}
             onChange={(e) => handleFilterChange('price', e.target.value)}
             className="w-full appearance-none bg-black/40 border border-white/10 text-white rounded-lg px-4 py-3 pr-10 focus:outline-none focus:border-champagne/50 transition-colors cursor-pointer text-sm tracking-wider uppercase"
-            aria-label={isIt ? 'Filtra per Prezzo' : 'Filter by Price'}
+            aria-label={tr(lang, 'Filter by Price', 'Filtra per Prezzo')}
           >
-            <option value="">{isIt ? 'Tutti i Prezzi' : 'All Prices'}</option>
-            <option value="free">{isIt ? 'Ingresso Gratuito' : 'Free Entry'}</option>
-            <option value="under30">{isIt ? 'Sotto i 30€' : 'Under 30€'}</option>
+            <option value="">{tr(lang, 'All Prices', 'Tutti i Prezzi')}</option>
+            <option value="free">{tr(lang, 'Free Entry', 'Ingresso Gratuito')}</option>
+            <option value="under30">{tr(lang, 'Under 30€', 'Sotto i 30€')}</option>
             <option value="over30">{isIt ? '30€+' : '30€+'}</option>
           </select>
           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-white/50">
@@ -119,7 +120,7 @@ export default function EventFilters({ lang }: EventFiltersProps) {
             onClick={handleReset}
             className="w-full sm:w-auto px-6 py-3 font-serif text-champagne hover:text-white transition-colors text-sm tracking-wider uppercase whitespace-nowrap"
           >
-            {isIt ? 'Azzera Filtri' : 'Reset Filters'}
+            {tr(lang, 'Reset Filters', 'Azzera Filtri')}
           </button>
         )}
       </div>

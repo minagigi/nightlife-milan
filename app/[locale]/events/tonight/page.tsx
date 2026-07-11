@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import { getLocalizedText } from '@/lib/seo';
 import Link from 'next/link';
@@ -17,12 +18,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const canonical = `${baseUrl}${localePrefix(locale)}/events/tonight`;
 
-  const title = isIt
-    ? 'Eventi Stasera a Milano 2026 | Cosa Fare Stasera'
-    : 'Events Tonight in Milan 2026 | What to Do Tonight';
-  const description = isIt
-    ? 'Scopri i migliori eventi in programma stasera a Milano. Club aperti, serate speciali, aperitivo e party. Prenota tavolo VIP o guestlist via WhatsApp in 10 minuti.'
-    : 'Discover the best events happening tonight in Milan. Open clubs, special nights, aperitivo and parties. Book VIP table or guestlist via WhatsApp in 10 minutes.';
+  const title = tr(locale, 'Events Tonight in Milan 2026 | What to Do Tonight', 'Eventi Stasera a Milano 2026 | Cosa Fare Stasera');
+  const description = tr(locale, 'Discover the best events happening tonight in Milan. Open clubs, special nights, aperitivo and parties. Book VIP table or guestlist via WhatsApp in 10 minutes.', 'Scopri i migliori eventi in programma stasera a Milano. Club aperti, serate speciali, aperitivo e party. Prenota tavolo VIP o guestlist via WhatsApp in 10 minuti.');
 
   return {
     title,
@@ -78,9 +75,9 @@ export default async function EventsTonightPage({ params }: Props) {
         <nav className="text-xs text-white/30 flex gap-2">
           <Link href={`${lp}/`} className="hover:text-champagne transition-colors">Home</Link>
           <span>/</span>
-          <Link href={`${lp}/events`} className="hover:text-champagne transition-colors">{isIt ? 'Eventi' : 'Events'}</Link>
+          <Link href={`${lp}/events`} className="hover:text-champagne transition-colors">{tr(locale, 'Events', 'Eventi')}</Link>
           <span>/</span>
-          <span className="text-champagne">{isIt ? 'Stasera' : 'Tonight'}</span>
+          <span className="text-champagne">{tr(locale, 'Tonight', 'Stasera')}</span>
         </nav>
       </div>
 
@@ -91,7 +88,7 @@ export default async function EventsTonightPage({ params }: Props) {
           <span className="text-champagne/60 text-xs font-mono uppercase tracking-[0.2em]">{dateLabel}</span>
         </div>
         <h1 className="font-serif text-5xl md:text-7xl font-bold text-champagne tracking-tighter mb-4">
-          {isIt ? 'Stasera a Milano' : 'Tonight in Milan'}
+          {tr(locale, 'Tonight in Milan', 'Stasera a Milano')}
         </h1>
         <p className="text-lg text-white/40 font-light mb-8">
           {isIt
@@ -103,22 +100,20 @@ export default async function EventsTonightPage({ params }: Props) {
         <div className="mb-8 p-5 rounded-xl border border-champagne/20 bg-champagne/[0.04]">
           <p className="text-champagne/50 text-[9px] tracking-[0.3em] uppercase mb-2">Quick Answer</p>
           <p className="text-white/70 text-sm leading-relaxed">
-            {isIt
-              ? 'Stasera a Milano: aperitivo dalle 18–21 (Voya, Pineta, Navigli), club dalle 22:30 (Just Me, Aria Club, Play Club). Tavolo VIP via WhatsApp +39 351 912 7047 — risposta in 10 min. Dress code elegante per i club premium.'
-              : 'Tonight in Milan: aperitivo 18–21 (Voya, Pineta, Navigli), clubs from 22:30 (Just Me, Aria Club, Play Club). VIP table via WhatsApp +39 351 912 7047 — 10 min reply. Elegant dress code for premium clubs.'}
+            {tr(locale, 'Tonight in Milan: aperitivo 18–21 (Voya, Pineta, Navigli), clubs from 22:30 (Just Me, Aria Club, Play Club). VIP table via WhatsApp +39 351 912 7047 — 10 min reply. Elegant dress code for premium clubs.', 'Stasera a Milano: aperitivo dalle 18–21 (Voya, Pineta, Navigli), club dalle 22:30 (Just Me, Aria Club, Play Club). Tavolo VIP via WhatsApp +39 351 912 7047 — risposta in 10 min. Dress code elegante per i club premium.')}
           </p>
         </div>
 
         {/* Nav pills */}
         <div className="flex gap-3 flex-wrap">
           <span className="px-6 py-2.5 rounded-full bg-champagne text-black text-sm font-medium tracking-wider uppercase">
-            {isIt ? 'Stasera' : 'Tonight'}
+            {tr(locale, 'Tonight', 'Stasera')}
           </span>
           <Link href={`${lp}/events/this-week`} className="px-6 py-2.5 rounded-full border border-white/20 text-white/60 hover:border-champagne hover:text-champagne transition-colors text-sm tracking-wider uppercase">
-            {isIt ? 'Questa Settimana' : 'This Week'}
+            {tr(locale, 'This Week', 'Questa Settimana')}
           </Link>
           <Link href={`${lp}/events/best`} className="px-6 py-2.5 rounded-full border border-white/20 text-white/60 hover:border-champagne hover:text-champagne transition-colors text-sm tracking-wider uppercase">
-            {isIt ? 'I Migliori' : 'Best Events'}
+            {tr(locale, 'Best Events', 'I Migliori')}
           </Link>
         </div>
       </section>
@@ -129,13 +124,13 @@ export default async function EventsTonightPage({ params }: Props) {
           <div className="py-24 text-center border border-white/10 rounded-xl bg-white/[0.02]">
             <Calendar className="w-12 h-12 text-white/20 mx-auto mb-4" />
             <h3 className="font-serif text-2xl text-white/60 mb-2">
-              {isIt ? 'Nessun evento stasera.' : 'No events tonight.'}
+              {tr(locale, 'No events tonight.', 'Nessun evento stasera.')}
             </h3>
             <p className="text-white/30 text-sm mb-6">
-              {isIt ? 'Controlla questa settimana o i migliori club.' : 'Check this week or the best clubs.'}
+              {tr(locale, 'Check this week or the best clubs.', 'Controlla questa settimana o i migliori club.')}
             </p>
             <Link href={`${lp}/events/this-week`} className="inline-flex px-6 py-3 rounded-full border border-champagne/40 text-champagne text-sm hover:bg-champagne hover:text-black transition-colors">
-              {isIt ? 'Questa Settimana →' : 'This Week →'}
+              {tr(locale, 'This Week →', 'Questa Settimana →')}
             </Link>
           </div>
         ) : (
@@ -151,13 +146,13 @@ export default async function EventsTonightPage({ params }: Props) {
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="rounded-xl border border-champagne/20 bg-champagne/[0.04] p-8 text-center">
           <h2 className="font-serif text-2xl text-white mb-3">
-            {isIt ? 'Prenota Stasera' : 'Book for Tonight'}
+            {tr(locale, 'Book for Tonight', 'Prenota Stasera')}
           </h2>
           <p className="text-white/40 text-sm mb-6">
-            {isIt ? 'Tavolo VIP, guestlist o bottiglie — rispondiamo in 10 minuti.' : 'VIP table, guestlist or bottles — we reply in 10 minutes.'}
+            {tr(locale, 'VIP table, guestlist or bottles — we reply in 10 minutes.', 'Tavolo VIP, guestlist o bottiglie — rispondiamo in 10 minuti.')}
           </p>
           <a
-            href={`https://wa.me/393519127047?text=${encodeURIComponent(isIt ? 'Ciao! Vorrei prenotare per stasera a Milano.' : 'Hi! I want to book for tonight in Milan.')}`}
+            href={`https://wa.me/393519127047?text=${encodeURIComponent(tr(locale, 'Hi! I want to book for tonight in Milan.', 'Ciao! Vorrei prenotare per stasera a Milano.'))}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-3.5 bg-champagne text-black font-bold rounded-full hover:bg-white transition-colors uppercase tracking-wider text-sm"
@@ -211,7 +206,7 @@ function TimeSlot({ title, time, items, locale, lp }: {
                 <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-[#131009] via-[#131009]/40 to-transparent" />
                 {event.isSpecial && (
                   <div className="absolute top-3 left-3 bg-champagne text-black text-[9px] font-bold px-2 py-1 rounded uppercase tracking-wider">
-                    {isIt ? 'Speciale' : 'Special'}
+                    {tr(locale, 'Special', 'Speciale')}
                   </div>
                 )}
               </div>
@@ -231,7 +226,7 @@ function TimeSlot({ title, time, items, locale, lp }: {
                 </div>
                 {event.pricing.entry !== null && event.pricing.entry > 0 && (
                   <p className="text-white/30 text-xs mt-2">
-                    {isIt ? 'Ingresso' : 'Entry'} €{event.pricing.entry}
+                    {tr(locale, 'Entry', 'Ingresso')} €{event.pricing.entry}
                   </p>
                 )}
               </div>

@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import { getLocalizedText } from '@/lib/seo';
 import Link from 'next/link';
@@ -17,12 +18,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const canonical = `${baseUrl}${localePrefix(locale)}/events/this-week`;
 
-  const title = isIt
-    ? 'Eventi Questa Settimana a Milano 2026 | Serate della Settimana'
-    : 'Events This Week in Milan 2026 | Nightlife This Week';
-  const description = isIt
-    ? 'Tutti gli eventi e le serate in programma questa settimana a Milano. Club, aperitivo, live music e serate speciali. Prenota il tuo posto via WhatsApp.'
-    : 'All events and nights happening this week in Milan. Clubs, aperitivo, live music and special nights. Book your spot via WhatsApp.';
+  const title = tr(locale, 'Events This Week in Milan 2026 | Nightlife This Week', 'Eventi Questa Settimana a Milano 2026 | Serate della Settimana');
+  const description = tr(locale, 'All events and nights happening this week in Milan. Clubs, aperitivo, live music and special nights. Book your spot via WhatsApp.', 'Tutti gli eventi e le serate in programma questa settimana a Milano. Club, aperitivo, live music e serate speciali. Prenota il tuo posto via WhatsApp.');
 
   return {
     title,
@@ -93,9 +90,9 @@ export default async function EventsThisWeekPage({ params }: Props) {
         <nav className="text-xs text-white/30 flex gap-2">
           <Link href={`${lp}/`} className="hover:text-champagne transition-colors">Home</Link>
           <span>/</span>
-          <Link href={`${lp}/events`} className="hover:text-champagne transition-colors">{isIt ? 'Eventi' : 'Events'}</Link>
+          <Link href={`${lp}/events`} className="hover:text-champagne transition-colors">{tr(locale, 'Events', 'Eventi')}</Link>
           <span>/</span>
-          <span className="text-champagne">{isIt ? 'Questa Settimana' : 'This Week'}</span>
+          <span className="text-champagne">{tr(locale, 'This Week', 'Questa Settimana')}</span>
         </nav>
       </div>
 
@@ -105,7 +102,7 @@ export default async function EventsThisWeekPage({ params }: Props) {
           <span className="text-champagne/50 text-xs font-mono uppercase tracking-[0.2em]">{weekLabel}</span>
         </div>
         <h1 className="font-serif text-5xl md:text-7xl font-bold text-champagne tracking-tighter mb-4">
-          {isIt ? 'Questa Settimana' : 'This Week'}
+          {tr(locale, 'This Week', 'Questa Settimana')}
         </h1>
         <p className="text-lg text-white/40 font-light mb-8">
           {isIt
@@ -117,22 +114,20 @@ export default async function EventsThisWeekPage({ params }: Props) {
         <div className="mb-8 p-5 rounded-xl border border-champagne/20 bg-champagne/[0.04]">
           <p className="text-champagne/50 text-[9px] tracking-[0.3em] uppercase mb-2">Quick Answer</p>
           <p className="text-white/70 text-sm leading-relaxed">
-            {isIt
-              ? 'Questa settimana a Milano: Just Me apre ogni sera (lun–dom), Pineta venerdì e sabato, Aria Club giovedì–sabato. Serate speciali con DJ internazionali nel weekend. Prenota tavolo via WhatsApp +39 351 912 7047.'
-              : 'This week in Milan: Just Me opens every night (Mon–Sun), Pineta on Friday and Saturday, Aria Club Thursday–Saturday. Special nights with international DJs on the weekend. Book your table via WhatsApp +39 351 912 7047.'}
+            {tr(locale, 'This week in Milan: Just Me opens every night (Mon–Sun), Pineta on Friday and Saturday, Aria Club Thursday–Saturday. Special nights with international DJs on the weekend. Book your table via WhatsApp +39 351 912 7047.', 'Questa settimana a Milano: Just Me apre ogni sera (lun–dom), Pineta venerdì e sabato, Aria Club giovedì–sabato. Serate speciali con DJ internazionali nel weekend. Prenota tavolo via WhatsApp +39 351 912 7047.')}
           </p>
         </div>
 
         {/* Nav pills */}
         <div className="flex gap-3 flex-wrap">
           <Link href={`${lp}/events/tonight`} className="px-6 py-2.5 rounded-full border border-white/20 text-white/60 hover:border-champagne hover:text-champagne transition-colors text-sm tracking-wider uppercase">
-            {isIt ? 'Stasera' : 'Tonight'}
+            {tr(locale, 'Tonight', 'Stasera')}
           </Link>
           <span className="px-6 py-2.5 rounded-full bg-champagne text-black text-sm font-medium tracking-wider uppercase">
-            {isIt ? 'Questa Settimana' : 'This Week'}
+            {tr(locale, 'This Week', 'Questa Settimana')}
           </span>
           <Link href={`${lp}/events/best`} className="px-6 py-2.5 rounded-full border border-white/20 text-white/60 hover:border-champagne hover:text-champagne transition-colors text-sm tracking-wider uppercase">
-            {isIt ? 'I Migliori' : 'Best Events'}
+            {tr(locale, 'Best Events', 'I Migliori')}
           </Link>
         </div>
       </section>
@@ -143,13 +138,13 @@ export default async function EventsThisWeekPage({ params }: Props) {
           <div className="py-24 text-center border border-white/10 rounded-xl bg-white/[0.02]">
             <Calendar className="w-12 h-12 text-white/20 mx-auto mb-4" />
             <h3 className="font-serif text-2xl text-white/60 mb-2">
-              {isIt ? 'Nessun evento questa settimana.' : 'No events this week.'}
+              {tr(locale, 'No events this week.', 'Nessun evento questa settimana.')}
             </h3>
             <p className="text-white/30 text-sm mb-6">
-              {isIt ? 'Controlla i migliori club sempre aperti.' : 'Check the best clubs always open.'}
+              {tr(locale, 'Check the best clubs always open.', 'Controlla i migliori club sempre aperti.')}
             </p>
             <Link href={`${lp}/events/best`} className="inline-flex px-6 py-3 rounded-full border border-champagne/40 text-champagne text-sm hover:bg-champagne hover:text-black transition-colors">
-              {isIt ? 'I Migliori Club →' : 'Best Clubs →'}
+              {tr(locale, 'Best Clubs →', 'I Migliori Club →')}
             </Link>
           </div>
         ) : (
@@ -173,7 +168,7 @@ export default async function EventsThisWeekPage({ params }: Props) {
                       </h2>
                       {isToday && (
                         <span className="ml-3 text-[9px] font-bold uppercase tracking-wider text-black bg-champagne px-2 py-0.5 rounded align-middle">
-                          {isIt ? 'Oggi' : 'Today'}
+                          {tr(locale, 'Today', 'Oggi')}
                         </span>
                       )}
                     </div>
@@ -209,7 +204,7 @@ export default async function EventsThisWeekPage({ params }: Props) {
                             <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-[#131009] via-[#131009]/40 to-transparent" />
                             {event.isSpecial && (
                               <span className="absolute top-3 left-3 bg-champagne text-black text-[9px] font-bold px-2 py-1 rounded uppercase tracking-wider">
-                                {isIt ? 'Speciale' : 'Special'}
+                                {tr(locale, 'Special', 'Speciale')}
                               </span>
                             )}
                             {event.isTrending && !event.isSpecial && (
@@ -234,7 +229,7 @@ export default async function EventsThisWeekPage({ params }: Props) {
                             </div>
                             {event.pricing.entry !== null && event.pricing.entry > 0 && (
                               <p className="text-white/30 text-xs mt-2">
-                                {isIt ? 'Ingresso' : 'Entry'} €{event.pricing.entry}
+                                {tr(locale, 'Entry', 'Ingresso')} €{event.pricing.entry}
                               </p>
                             )}
                           </div>
@@ -253,13 +248,13 @@ export default async function EventsThisWeekPage({ params }: Props) {
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="rounded-xl border border-champagne/20 bg-champagne/[0.04] p-8 text-center">
           <h2 className="font-serif text-2xl text-white mb-3">
-            {isIt ? 'Prenota per Questa Settimana' : 'Book for This Week'}
+            {tr(locale, 'Book for This Week', 'Prenota per Questa Settimana')}
           </h2>
           <p className="text-white/40 text-sm mb-6">
-            {isIt ? 'Tavolo VIP, guestlist o bottiglie — rispondiamo in 10 minuti.' : 'VIP table, guestlist or bottles — we reply in 10 minutes.'}
+            {tr(locale, 'VIP table, guestlist or bottles — we reply in 10 minutes.', 'Tavolo VIP, guestlist o bottiglie — rispondiamo in 10 minuti.')}
           </p>
           <a
-            href={`https://wa.me/393519127047?text=${encodeURIComponent(isIt ? 'Ciao! Vorrei prenotare per questa settimana a Milano.' : 'Hi! I want to book for this week in Milan.')}`}
+            href={`https://wa.me/393519127047?text=${encodeURIComponent(tr(locale, 'Hi! I want to book for this week in Milan.', 'Ciao! Vorrei prenotare per questa settimana a Milano.'))}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-3.5 bg-champagne text-black font-bold rounded-full hover:bg-white transition-colors uppercase tracking-wider text-sm"

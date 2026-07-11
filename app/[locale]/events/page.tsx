@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import { getLocalizedText } from '@/lib/seo';
 import Link from 'next/link';
@@ -20,22 +21,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const canonical = `${baseUrl}${localePrefix(locale)}/events`;
 
   return {
-    title: isIt
-      ? 'Tutti gli Eventi a Milano 2026 | Nightlife Milan'
-      : 'All Events in Milan 2026 | Nightlife Milan',
-    description: isIt
-      ? 'Scopri tutti gli eventi, serate ed esperienze in programma a Milano. Club, aperitivo, live music, serate speciali. Prenota tavolo VIP o guestlist via WhatsApp.'
-      : 'Discover all events, nights and experiences in Milan. Clubs, aperitivo, live music, special nights. Book VIP table or guestlist via WhatsApp.',
+    title: tr(locale, 'All Events in Milan 2026 | Nightlife Milan', 'Tutti gli Eventi a Milano 2026 | Nightlife Milan'),
+    description: tr(locale, 'Discover all events, nights and experiences in Milan. Clubs, aperitivo, live music, special nights. Book VIP table or guestlist via WhatsApp.', 'Scopri tutti gli eventi, serate ed esperienze in programma a Milano. Club, aperitivo, live music, serate speciali. Prenota tavolo VIP o guestlist via WhatsApp.'),
     alternates: {
       canonical,
       languages: hreflangAlternates(baseUrl, '/events'),
     },
     openGraph: {
-      title: isIt ? 'Tutti gli Eventi a Milano 2026' : 'All Events in Milan 2026',
-      description: isIt
-        ? 'Il calendario completo della vita notturna milanese. Serate VIP, aperitivo, live music e molto altro.'
-        : 'The complete calendar of Milanese nightlife. VIP nights, aperitivo, live music and much more.',
-      images: [{ url: `${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`, width: 1200, height: 630, alt: isIt ? 'Eventi Milano vita notturna' : 'Milan nightlife events' }],
+      title: tr(locale, 'All Events in Milan 2026', 'Tutti gli Eventi a Milano 2026'),
+      description: tr(locale, 'The complete calendar of Milanese nightlife. VIP nights, aperitivo, live music and much more.', 'Il calendario completo della vita notturna milanese. Serate VIP, aperitivo, live music e molto altro.'),
+      images: [{ url: `${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`, width: 1200, height: 630, alt: tr(locale, 'Milan nightlife events', 'Eventi Milano vita notturna') }],
       type: 'website',
       siteName: 'Nightlife Milan',
       locale: isIt ? 'it_IT' : 'en_US',
@@ -46,10 +41,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     robots: { index: true, follow: true },
     twitter: {
       card: 'summary_large_image',
-      title: isIt ? 'Tutti gli Eventi a Milano 2026' : 'All Events in Milan 2026',
-      description: isIt
-        ? 'Il calendario completo della vita notturna milanese. Serate VIP, aperitivo, live music e molto altro.'
-        : 'The complete calendar of Milanese nightlife. VIP nights, aperitivo, live music and much more.',
+      title: tr(locale, 'All Events in Milan 2026', 'Tutti gli Eventi a Milano 2026'),
+      description: tr(locale, 'The complete calendar of Milanese nightlife. VIP nights, aperitivo, live music and much more.', 'Il calendario completo della vita notturna milanese. Serate VIP, aperitivo, live music e molto altro.'),
       images: [`${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`],
       site: '@nightlifemilan',
     },
@@ -98,10 +91,8 @@ export default async function EventsHubPage({ params }: Props) {
   const eventListSchema = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: isIt ? 'Eventi Milano 2026' : 'Milan Events 2026',
-    description: isIt
-      ? 'Lista completa degli eventi notturni a Milano'
-      : 'Complete list of nightlife events in Milan',
+    name: tr(locale, 'Milan Events 2026', 'Eventi Milano 2026'),
+    description: tr(locale, 'Complete list of nightlife events in Milan', 'Lista completa degli eventi notturni a Milano'),
     numberOfItems: items.length,
     itemListElement: items.slice(0, 10).map((item, i) => ({
       '@type': 'ListItem',
@@ -125,21 +116,19 @@ export default async function EventsHubPage({ params }: Props) {
   };
 
   const t = {
-    hero: isIt ? 'Tutti gli Eventi' : 'All Events',
+    hero: tr(locale, 'All Events', 'Tutti gli Eventi'),
     heroSub: isIt
       ? 'Il calendario completo della vita notturna milanese — serate speciali, eventi ricorrenti, aperitivo e molto altro.'
       : "Milan's complete nightlife calendar — special nights, recurring events, aperitivo and much more.",
     quickAnswer: isIt
       ? `A Milano ci sono ${items.length} eventi in programma: serate VIP (Just Me, Armani Privé, The Club), techno underground (Volt, Magazzini), aperitivo cantato (Pineta, 55 Milano), rooftop (Voya, Ceresio 7). Prenota via WhatsApp +39 351 912 7047.`
       : `Milan has ${items.length} upcoming events: VIP nights (Just Me, Armani Privé, The Club), underground techno (Volt, Magazzini), singing aperitivo (Pineta, 55 Milano), rooftop (Voya, Ceresio 7). Book via WhatsApp +39 351 912 7047.`,
-    upcoming: isIt ? 'In Programma' : 'Upcoming Events',
-    special: isIt ? 'Serate Speciali' : 'Special Nights',
-    weekly: isIt ? 'Serate Ricorrenti' : 'Weekly Recurring Nights',
-    weeklyDesc: isIt
-      ? 'Ogni settimana, gli stessi locali offrono esperienze ripetibili e selezionate. Prenota il tuo posto in anticipo.'
-      : 'Every week, the same venues offer curated recurring experiences. Book your spot in advance.',
-    tonight: isIt ? 'Stasera' : 'Tonight',
-    thisWeek: isIt ? 'Questa Settimana' : 'This Week',
+    upcoming: tr(locale, 'Upcoming Events', 'In Programma'),
+    special: tr(locale, 'Special Nights', 'Serate Speciali'),
+    weekly: tr(locale, 'Weekly Recurring Nights', 'Serate Ricorrenti'),
+    weeklyDesc: tr(locale, 'Every week, the same venues offer curated recurring experiences. Book your spot in advance.', 'Ogni settimana, gli stessi locali offrono esperienze ripetibili e selezionate. Prenota il tuo posto in anticipo.'),
+    tonight: tr(locale, 'Tonight', 'Stasera'),
+    thisWeek: tr(locale, 'This Week', 'Questa Settimana'),
   };
 
   return (
@@ -154,7 +143,7 @@ export default async function EventsHubPage({ params }: Props) {
                 <Link href={lp || '/'} className="hover:text-champagne transition-colors">Home</Link>
                 <span className="mx-2">/</span>
               </li>
-              <li className="text-champagne" aria-current="page">{isIt ? 'Eventi' : 'Events'}</li>
+              <li className="text-champagne" aria-current="page">{tr(locale, 'Events', 'Eventi')}</li>
             </ol>
           </nav>
         </div>
@@ -192,13 +181,13 @@ export default async function EventsHubPage({ params }: Props) {
               href={`${lp}/events/best`}
               className="px-6 py-3 rounded-full border border-white/20 text-white hover:border-champagne hover:text-champagne transition-colors font-medium tracking-wider uppercase text-sm"
             >
-              {isIt ? 'I Migliori' : 'Best Clubs'}
+              {tr(locale, 'Best Clubs', 'I Migliori')}
             </Link>
             <Link
               href={`${lp}/events/special`}
               className="px-6 py-3 rounded-full border border-white/20 text-white hover:border-champagne hover:text-champagne transition-colors font-medium tracking-wider uppercase text-sm"
             >
-              {isIt ? 'Speciali' : 'Special Events'}
+              {tr(locale, 'Special Events', 'Speciali')}
             </Link>
           </div>
         </section>
@@ -210,7 +199,7 @@ export default async function EventsHubPage({ params }: Props) {
               <h2 className="font-serif text-3xl text-white">{t.special}</h2>
               <div className="flex-grow h-px bg-champagne/20" />
               <Link href={`${lp}/events/special`} className="text-champagne text-sm tracking-wider hover:underline uppercase">
-                {isIt ? 'Vedi tutti →' : 'See all →'}
+                {tr(locale, 'See all →', 'Vedi tutti →')}
               </Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -238,7 +227,7 @@ export default async function EventsHubPage({ params }: Props) {
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
                     <div className="absolute top-4 left-4">
                       <span className="bg-champagne text-black text-[9px] font-bold px-2 py-1 rounded uppercase tracking-wider">
-                        {isIt ? 'Speciale' : 'Special'}
+                        {tr(locale, 'Special', 'Speciale')}
                       </span>
                     </div>
                     <div className="absolute bottom-0 left-0 right-0 p-5">
@@ -258,7 +247,7 @@ export default async function EventsHubPage({ params }: Props) {
           items={items}
           lang={locale}
           title={t.upcoming}
-          subtitle={isIt ? 'Tutti gli appuntamenti selezionati per te' : 'All curated upcoming events'}
+          subtitle={tr(locale, 'All curated upcoming events', 'Tutti gli appuntamenti selezionati per te')}
         />
 
         {/* Weekly Recurring Nights */}
@@ -300,12 +289,10 @@ export default async function EventsHubPage({ params }: Props) {
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="rounded-lg border border-champagne/20 bg-champagne/[0.04] p-8 md:p-12 text-center">
             <h2 className="font-serif text-3xl md:text-4xl text-white mb-4">
-              {isIt ? 'Prenota per Qualsiasi Evento' : 'Book for Any Event'}
+              {tr(locale, 'Book for Any Event', 'Prenota per Qualsiasi Evento')}
             </h2>
             <p className="text-white/40 max-w-xl mx-auto mb-8 font-light">
-              {isIt
-                ? 'Il nostro concierge risponde in 10 minuti. Tavolo VIP, guestlist, bottiglie — tutto gestito per te, gratis.'
-                : 'Our concierge replies in 10 minutes. VIP table, guestlist, bottles — everything handled for you, for free.'}
+              {tr(locale, 'Our concierge replies in 10 minutes. VIP table, guestlist, bottles — everything handled for you, for free.', 'Il nostro concierge risponde in 10 minuti. Tavolo VIP, guestlist, bottiglie — tutto gestito per te, gratis.')}
             </p>
             <a
               href="https://wa.me/393519127047?text=Hi%2C%20I%20want%20to%20book%20for%20an%20event%20in%20Milan."

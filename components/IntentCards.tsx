@@ -1,5 +1,6 @@
 'use client';
 import React from 'react';
+import { tr } from '@/lib/i18n/t';
 import Link from 'next/link';
 import { ArrowRight, MessageCircle, Wine, Music2, Gem } from 'lucide-react';
 import { CONTACT } from '@/config/contact';
@@ -80,7 +81,7 @@ export default function IntentCards({ locale }: { locale: 'en' | 'it' }) {
                   ${card.isGold ? 'text-champagne/55' : 'text-white/50 group-hover:text-white/75'}`}>
                   {card.isWhatsApp
                     ? <><MessageCircle className="w-3 h-3" />WhatsApp</>
-                    : <><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-300" />{locale === 'it' ? 'Scopri' : 'Explore'}</>
+                    : <><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-300" />{tr(locale, 'Explore', 'Scopri')}</>
                   }
                 </div>
               </div>

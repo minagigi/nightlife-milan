@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import { mockVenues } from '@/lib/data';
@@ -15,12 +16,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const canonical = `${baseUrl}${localePrefix(locale)}/bottle-prices`;
 
-  const title = isIt
-    ? 'Prezzi Bottiglie Discoteche Milano 2026 | Listino VIP | Nightlife Milan'
-    : 'Milan Club Bottle Prices 2026 | VIP Table Price List | Nightlife Milan';
-  const description = isIt
-    ? 'Listino prezzi bottiglie aggiornato per tutti i club di Milano: Just Me, Armani Privé, Play Club, Volt, Pineta. Prezzi tavoli VIP, champagne, vodka. Prenota via WhatsApp.'
-    : 'Updated bottle price list for all Milan clubs: Just Me, Armani Privé, Play Club, Volt, Pineta. VIP table prices, champagne, vodka. Book via WhatsApp.';
+  const title = tr(locale, 'Milan Club Bottle Prices 2026 | VIP Table Price List | Nightlife Milan', 'Prezzi Bottiglie Discoteche Milano 2026 | Listino VIP | Nightlife Milan');
+  const description = tr(locale, 'Updated bottle price list for all Milan clubs: Just Me, Armani Privé, Play Club, Volt, Pineta. VIP table prices, champagne, vodka. Book via WhatsApp.', 'Listino prezzi bottiglie aggiornato per tutti i club di Milano: Just Me, Armani Privé, Play Club, Volt, Pineta. Prezzi tavoli VIP, champagne, vodka. Prenota via WhatsApp.');
 
   return {
     title,
@@ -40,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'website',
       siteName: 'Nightlife Milan',
       locale: isIt ? 'it_IT' : 'en_US',
-      images: [{ url: `${baseUrl}/images/bottle-prices-hero.webp`, width: 1200, height: 630, alt: isIt ? 'Prezzi bottiglie club Milano' : 'Milan club bottle prices' }],
+      images: [{ url: `${baseUrl}/images/bottle-prices-hero.webp`, width: 1200, height: 630, alt: tr(locale, 'Milan club bottle prices', 'Prezzi bottiglie club Milano') }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -178,27 +175,23 @@ export default async function BottlePricesPage({ params }: Props) {
     mainEntity: [
       {
         '@type': 'Question',
-        name: isIt ? 'Quanto costa una bottiglia in discoteca a Milano?' : 'How much does a bottle cost at a Milan nightclub?',
+        name: tr(locale, 'How much does a bottle cost at a Milan nightclub?', 'Quanto costa una bottiglia in discoteca a Milano?'),
         acceptedAnswer: {
           '@type': 'Answer',
-          text: isIt
-            ? 'Una bottiglia standard (vodka, rum) costa da €120 a €200 nei club di Milano. Champagne entry level (Moët) da €200 a €350. Champagne premium (Dom Pérignon) da €500 a €900. Armani Privé e Just Me Milano hanno i prezzi più alti.'
-            : 'A standard bottle (vodka, rum) costs €120–200 at Milan clubs. Entry-level champagne (Moët) from €200–350. Premium champagne (Dom Pérignon) from €500–900. Armani Privé and Just Me Milano have the highest prices.',
+          text: tr(locale, 'A standard bottle (vodka, rum) costs €120–200 at Milan clubs. Entry-level champagne (Moët) from €200–350. Premium champagne (Dom Pérignon) from €500–900. Armani Privé and Just Me Milano have the highest prices.', 'Una bottiglia standard (vodka, rum) costa da €120 a €200 nei club di Milano. Champagne entry level (Moët) da €200 a €350. Champagne premium (Dom Pérignon) da €500 a €900. Armani Privé e Just Me Milano hanno i prezzi più alti.'),
         },
       },
       {
         '@type': 'Question',
-        name: isIt ? 'Quanto è il minimo di spesa per un tavolo VIP a Milano?' : 'What is the minimum spend for a VIP table in Milan?',
+        name: tr(locale, 'What is the minimum spend for a VIP table in Milan?', 'Quanto è il minimo di spesa per un tavolo VIP a Milano?'),
         acceptedAnswer: {
           '@type': 'Answer',
-          text: isIt
-            ? 'Il minimo di spesa per un tavolo VIP varia da €200 (Play Club, infrasettimanale) a €1000+ (Armani Privé, weekend). Just Me Milano parte da €320 in settimana e €500 nel weekend. Di solito include una o più bottiglie base.'
-            : 'Minimum spend for a VIP table ranges from €200 (Play Club, weekday) to €1000+ (Armani Privé, weekends). Just Me Milano starts at €320 weekdays and €500 weekends. Usually includes one or more base bottles.',
+          text: tr(locale, 'Minimum spend for a VIP table ranges from €200 (Play Club, weekday) to €1000+ (Armani Privé, weekends). Just Me Milano starts at €320 weekdays and €500 weekends. Usually includes one or more base bottles.', 'Il minimo di spesa per un tavolo VIP varia da €200 (Play Club, infrasettimanale) a €1000+ (Armani Privé, weekend). Just Me Milano parte da €320 in settimana e €500 nel weekend. Di solito include una o più bottiglie base.'),
         },
       },
       {
         '@type': 'Question',
-        name: isIt ? 'Il servizio bottiglia è obbligatorio con il tavolo?' : 'Is bottle service mandatory with a VIP table?',
+        name: tr(locale, 'Is bottle service mandatory with a VIP table?', 'Il servizio bottiglia è obbligatorio con il tavolo?'),
         acceptedAnswer: {
           '@type': 'Answer',
           text: isIt
@@ -210,9 +203,9 @@ export default async function BottlePricesPage({ params }: Props) {
   };
 
   const tiers = {
-    luxury: isIt ? 'Lusso' : 'Luxury',
-    premium: isIt ? 'Premium' : 'Premium',
-    mid: isIt ? 'Mid-Range' : 'Mid-Range',
+    luxury: tr(locale, 'Luxury', 'Lusso'),
+    premium: tr(locale, 'Premium', 'Premium'),
+    mid: tr(locale, 'Mid-Range', 'Mid-Range'),
   };
 
   const tierColors = {
@@ -233,7 +226,7 @@ export default async function BottlePricesPage({ params }: Props) {
                 <Link href={localePrefix(locale) || '/'} className="hover:text-champagne transition-colors">Home</Link>
                 <span className="mx-2">/</span>
               </li>
-              <li className="text-champagne" aria-current="page">{isIt ? 'Prezzi Bottiglie' : 'Bottle Prices'}</li>
+              <li className="text-champagne" aria-current="page">{tr(locale, 'Bottle Prices', 'Prezzi Bottiglie')}</li>
             </ol>
           </nav>
         </div>
@@ -241,36 +234,30 @@ export default async function BottlePricesPage({ params }: Props) {
         {/* Hero */}
         <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <h1 className="font-serif text-5xl md:text-6xl font-bold text-champagne tracking-tight mb-6">
-            {isIt ? 'Prezzi Bottiglie Milano 2026' : 'Milan Bottle Prices 2026'}
+            {tr(locale, 'Milan Bottle Prices 2026', 'Prezzi Bottiglie Milano 2026')}
           </h1>
           <p className="text-xl text-white/40 font-light leading-relaxed mb-8 max-w-3xl">
-            {isIt
-              ? 'Il listino prezzi aggiornato per bottiglie e tavoli VIP nei principali club di Milano. Prezzi indicativi — contattaci per preventivi precisi e personalizzati.'
-              : 'The updated price list for bottles and VIP tables at Milan\'s top clubs. Indicative prices — contact us for exact personalised quotes.'}
+            {tr(locale, 'The updated price list for bottles and VIP tables at Milan\'s top clubs. Indicative prices — contact us for exact personalised quotes.', 'Il listino prezzi aggiornato per bottiglie e tavoli VIP nei principali club di Milano. Prezzi indicativi — contattaci per preventivi precisi e personalizzati.')}
           </p>
 
           {/* Quick Answer */}
           <div className="p-5 rounded-xl border border-champagne/20 bg-champagne/[0.04] mb-8 max-w-2xl">
             <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">Quick Answer</p>
             <p className="font-sans text-white/70 text-sm leading-relaxed">
-              {isIt
-                ? 'Bottiglia standard a Milano: €120–200. Champagne entry (Moët): €200–350. Dom Pérignon: €500–900. Tavolo VIP da €200 (Play Club) a €1000+ (Armani Privé). Servizio gratuito, preventivo in 10 min: WhatsApp +39 351 912 7047.'
-                : 'Standard bottle in Milan: €120–200. Entry champagne (Moët): €200–350. Dom Pérignon: €500–900. VIP table from €200 (Play Club) to €1000+ (Armani Privé). Free service, quote in 10 min: WhatsApp +39 351 912 7047.'}
+              {tr(locale, 'Standard bottle in Milan: €120–200. Entry champagne (Moët): €200–350. Dom Pérignon: €500–900. VIP table from €200 (Play Club) to €1000+ (Armani Privé). Free service, quote in 10 min: WhatsApp +39 351 912 7047.', 'Bottiglia standard a Milano: €120–200. Champagne entry (Moët): €200–350. Dom Pérignon: €500–900. Tavolo VIP da €200 (Play Club) a €1000+ (Armani Privé). Servizio gratuito, preventivo in 10 min: WhatsApp +39 351 912 7047.')}
             </p>
           </div>
 
           {/* Disclaimer */}
           <p className="text-white/40 text-xs italic mb-12">
-            {isIt
-              ? '* Prezzi indicativi 2026. I prezzi effettivi variano in base alla data, all\'evento e alla disponibilità. Contattaci per il prezzo esatto.'
-              : '* Indicative 2026 prices. Actual prices vary by date, event and availability. Contact us for the exact price.'}
+            {tr(locale, '* Indicative 2026 prices. Actual prices vary by date, event and availability. Contact us for the exact price.', '* Prezzi indicativi 2026. I prezzi effettivi variano in base alla data, all\'evento e alla disponibilità. Contattaci per il prezzo esatto.')}
           </p>
         </section>
 
         {/* Per-Venue Price Tables */}
         <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
           <h2 className="font-serif text-3xl text-white mb-10">
-            {isIt ? 'Prezzi per Locale' : 'Prices by Venue'}
+            {tr(locale, 'Prices by Venue', 'Prezzi per Locale')}
           </h2>
 
           <div className="space-y-8">
@@ -294,34 +281,34 @@ export default async function BottlePricesPage({ params }: Props) {
                       href={`${lp}/clubs/${venueSlug}`}
                       className="text-champagne text-xs tracking-wider hover:underline"
                     >
-                      {isIt ? 'Prenota →' : 'Book →'}
+                      {tr(locale, 'Book →', 'Prenota →')}
                     </Link>
                   </div>
 
                   {/* Price grid */}
                   <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y divide-white/8">
                     <div className="p-4">
-                      <p className="text-white/40 text-[10px] uppercase tracking-wider mb-1">{isIt ? 'Vodka/Rum Standard' : 'Standard Vodka/Rum'}</p>
+                      <p className="text-white/40 text-[10px] uppercase tracking-wider mb-1">{tr(locale, 'Standard Vodka/Rum', 'Vodka/Rum Standard')}</p>
                       <p className="text-white font-semibold">{data.standardBottle}</p>
                     </div>
                     <div className="p-4">
-                      <p className="text-white/40 text-[10px] uppercase tracking-wider mb-1">{isIt ? 'Vodka/Rum Premium' : 'Premium Vodka/Rum'}</p>
+                      <p className="text-white/40 text-[10px] uppercase tracking-wider mb-1">{tr(locale, 'Premium Vodka/Rum', 'Vodka/Rum Premium')}</p>
                       <p className="text-white font-semibold">{data.premiumBottle}</p>
                     </div>
                     <div className="p-4">
-                      <p className="text-white/40 text-[10px] uppercase tracking-wider mb-1">{isIt ? 'Champagne Entry' : 'Entry Champagne'}</p>
+                      <p className="text-white/40 text-[10px] uppercase tracking-wider mb-1">{tr(locale, 'Entry Champagne', 'Champagne Entry')}</p>
                       <p className="text-champagne font-semibold">{data.champagneEntry}</p>
                     </div>
                     <div className="p-4">
-                      <p className="text-white/40 text-[10px] uppercase tracking-wider mb-1">{isIt ? 'Champagne Premium' : 'Premium Champagne'}</p>
+                      <p className="text-white/40 text-[10px] uppercase tracking-wider mb-1">{tr(locale, 'Premium Champagne', 'Champagne Premium')}</p>
                       <p className="text-champagne font-semibold">{data.champagnePremium}</p>
                     </div>
                     <div className="p-4 col-span-2">
-                      <p className="text-white/40 text-[10px] uppercase tracking-wider mb-1">{isIt ? 'Min. Tavolo VIP (infrasettimanale)' : 'VIP Table Min. (weekday)'}</p>
+                      <p className="text-white/40 text-[10px] uppercase tracking-wider mb-1">{tr(locale, 'VIP Table Min. (weekday)', 'Min. Tavolo VIP (infrasettimanale)')}</p>
                       <p className="text-white font-semibold">{data.tableMinWeekday ?? '—'}</p>
                     </div>
                     <div className="p-4 col-span-2">
-                      <p className="text-white/40 text-[10px] uppercase tracking-wider mb-1">{isIt ? 'Min. Tavolo VIP (weekend)' : 'VIP Table Min. (weekend)'}</p>
+                      <p className="text-white/40 text-[10px] uppercase tracking-wider mb-1">{tr(locale, 'VIP Table Min. (weekend)', 'Min. Tavolo VIP (weekend)')}</p>
                       <p className="text-white font-semibold">{data.tableMinWeekend ?? '—'}</p>
                     </div>
                   </div>
@@ -329,7 +316,7 @@ export default async function BottlePricesPage({ params }: Props) {
                   {/* Best for */}
                   <div className="px-5 py-3 bg-white/[0.01] border-t border-white/8">
                     <p className="text-white/40 text-xs">
-                      <span className="text-white/40 font-medium">{isIt ? 'Ideale per: ' : 'Best for: '}</span>
+                      <span className="text-white/40 font-medium">{tr(locale, 'Best for: ', 'Ideale per: ')}</span>
                       {isIt ? data.bestForIt : data.bestFor}
                     </p>
                   </div>
@@ -342,21 +329,19 @@ export default async function BottlePricesPage({ params }: Props) {
         {/* Common Bottles Reference */}
         <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
           <h2 className="font-serif text-3xl text-white mb-8">
-            {isIt ? 'Prezzi di Riferimento per Bottiglia' : 'Reference Bottle Prices'}
+            {tr(locale, 'Reference Bottle Prices', 'Prezzi di Riferimento per Bottiglia')}
           </h2>
           <p className="text-white/40 font-light mb-8 text-sm">
-            {isIt
-              ? 'Prezzi medi indicativi nei club di Milano. I prezzi variano del ±20-30% a seconda del locale.'
-              : 'Average indicative prices across Milan clubs. Prices vary ±20-30% depending on venue.'}
+            {tr(locale, 'Average indicative prices across Milan clubs. Prices vary ±20-30% depending on venue.', 'Prezzi medi indicativi nei club di Milano. I prezzi variano del ±20-30% a seconda del locale.')}
           </p>
 
           <div className="overflow-x-auto">
             <table className="w-full border-collapse">
               <thead>
                 <tr className="border-b border-white/10">
-                  <th className="text-left py-3 px-4 text-white/40 text-xs uppercase tracking-wider font-normal">{isIt ? 'Bottiglia' : 'Bottle'}</th>
-                  <th className="text-left py-3 px-4 text-white/40 text-xs uppercase tracking-wider font-normal">{isIt ? 'Categoria' : 'Category'}</th>
-                  <th className="text-right py-3 px-4 text-white/40 text-xs uppercase tracking-wider font-normal">{isIt ? 'Prezzo Medio' : 'Avg. Price'}</th>
+                  <th className="text-left py-3 px-4 text-white/40 text-xs uppercase tracking-wider font-normal">{tr(locale, 'Bottle', 'Bottiglia')}</th>
+                  <th className="text-left py-3 px-4 text-white/40 text-xs uppercase tracking-wider font-normal">{tr(locale, 'Category', 'Categoria')}</th>
+                  <th className="text-right py-3 px-4 text-white/40 text-xs uppercase tracking-wider font-normal">{tr(locale, 'Avg. Price', 'Prezzo Medio')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -399,12 +384,10 @@ export default async function BottlePricesPage({ params }: Props) {
         <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="rounded-lg border border-champagne/20 bg-champagne/[0.04] p-8 text-center">
             <h2 className="font-serif text-2xl text-white mb-3">
-              {isIt ? 'Preventivo Personalizzato' : 'Get a Custom Quote'}
+              {tr(locale, 'Get a Custom Quote', 'Preventivo Personalizzato')}
             </h2>
             <p className="text-white/40 mb-6 text-sm font-light max-w-xl mx-auto">
-              {isIt
-                ? 'Dicci il locale, la data e il numero di persone. Risposta con preventivo preciso in 10 minuti. Gratis.'
-                : 'Tell us the venue, date and group size. Reply with exact quote in 10 minutes. Free.'}
+              {tr(locale, 'Tell us the venue, date and group size. Reply with exact quote in 10 minutes. Free.', 'Dicci il locale, la data e il numero di persone. Risposta con preventivo preciso in 10 minuti. Gratis.')}
             </p>
             <a
               href="https://wa.me/393519127047?text=Hi%2C%20I%20want%20a%20bottle%20price%20quote%20for%20a%20Milan%20club."

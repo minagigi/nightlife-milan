@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import { getLocalizedText } from '@/lib/seo';
 import Link from 'next/link';
@@ -18,12 +19,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const canonical = `${baseUrl}${localePrefix(locale)}/events/best`;
 
-  const title = isIt
-    ? 'I Migliori Club di Milano 2026 | Just Me, Pineta, Aria Club'
-    : 'Best Clubs in Milan 2026 | Just Me, Pineta, Aria Club';
-  const description = isIt
-    ? 'I tre migliori club di Milano selezionati dal nostro concierge: Just Me Milano, Pineta Club e Aria Club. Serate garantite ogni settimana. Prenota tavolo VIP via WhatsApp.'
-    : 'The three best clubs in Milan selected by our concierge: Just Me Milano, Pineta Club and Aria Club. Events guaranteed every week. Book VIP table via WhatsApp.';
+  const title = tr(locale, 'Best Clubs in Milan 2026 | Just Me, Pineta, Aria Club', 'I Migliori Club di Milano 2026 | Just Me, Pineta, Aria Club');
+  const description = tr(locale, 'The three best clubs in Milan selected by our concierge: Just Me Milano, Pineta Club and Aria Club. Events guaranteed every week. Book VIP table via WhatsApp.', 'I tre migliori club di Milano selezionati dal nostro concierge: Just Me Milano, Pineta Club e Aria Club. Serate garantite ogni settimana. Prenota tavolo VIP via WhatsApp.');
 
   return {
     title,
@@ -141,9 +138,9 @@ export default async function EventsBestPage({ params }: Props) {
         <nav className="text-xs text-white/30 flex gap-2">
           <Link href={`${lp}/`} className="hover:text-champagne transition-colors">Home</Link>
           <span>/</span>
-          <Link href={`${lp}/events`} className="hover:text-champagne transition-colors">{isIt ? 'Eventi' : 'Events'}</Link>
+          <Link href={`${lp}/events`} className="hover:text-champagne transition-colors">{tr(locale, 'Events', 'Eventi')}</Link>
           <span>/</span>
-          <span className="text-champagne">{isIt ? 'I Migliori' : 'Best'}</span>
+          <span className="text-champagne">{tr(locale, 'Best', 'I Migliori')}</span>
         </nav>
       </div>
 
@@ -152,38 +149,34 @@ export default async function EventsBestPage({ params }: Props) {
         <div className="flex items-center gap-2 mb-4">
           <Star className="w-4 h-4 text-champagne fill-champagne" />
           <span className="text-champagne/60 text-xs uppercase tracking-[0.2em]">
-            {isIt ? 'Selezione Concierge' : 'Concierge Selection'}
+            {tr(locale, 'Concierge Selection', 'Selezione Concierge')}
           </span>
         </div>
         <h1 className="font-serif text-5xl md:text-7xl font-bold text-champagne tracking-tighter mb-4">
-          {isIt ? 'I Migliori Club' : 'Best Clubs'}
+          {tr(locale, 'Best Clubs', 'I Migliori Club')}
         </h1>
         <p className="text-lg text-white/40 font-light mb-8 max-w-2xl">
-          {isIt
-            ? 'Tre locali, tre esperienze diverse. Sempre aperti, sempre selezionati. La scelta del nostro concierge per ogni sera della settimana.'
-            : 'Three venues, three different experiences. Always open, always curated. Our concierge\'s choice for every night of the week.'}
+          {tr(locale, 'Three venues, three different experiences. Always open, always curated. Our concierge\'s choice for every night of the week.', 'Tre locali, tre esperienze diverse. Sempre aperti, sempre selezionati. La scelta del nostro concierge per ogni sera della settimana.')}
         </p>
 
         {/* Quick Answer */}
         <div className="mb-8 p-5 rounded-xl border border-champagne/20 bg-champagne/[0.04] max-w-2xl">
           <p className="text-champagne/50 text-[9px] tracking-[0.3em] uppercase mb-2">Quick Answer</p>
           <p className="text-white/70 text-sm leading-relaxed">
-            {isIt
-              ? 'I 3 migliori club di Milano: Just Me (aperto 7/7, dress code elegante, jet-set internazionale), Pineta (ven–sab, aperitivo cantato + reggaeton), Aria Club (gio–sab, aperitivo buffet, EDM e hits). Prenota via WhatsApp +39 351 912 7047.'
-              : 'The 3 best clubs in Milan: Just Me (open 7 nights, elegant dress code, international jet-set), Pineta (Fri–Sat, singing aperitivo + reggaeton), Aria Club (Thu–Sat, buffet aperitivo, EDM and hits). Book via WhatsApp +39 351 912 7047.'}
+            {tr(locale, 'The 3 best clubs in Milan: Just Me (open 7 nights, elegant dress code, international jet-set), Pineta (Fri–Sat, singing aperitivo + reggaeton), Aria Club (Thu–Sat, buffet aperitivo, EDM and hits). Book via WhatsApp +39 351 912 7047.', 'I 3 migliori club di Milano: Just Me (aperto 7/7, dress code elegante, jet-set internazionale), Pineta (ven–sab, aperitivo cantato + reggaeton), Aria Club (gio–sab, aperitivo buffet, EDM e hits). Prenota via WhatsApp +39 351 912 7047.')}
           </p>
         </div>
 
         {/* Nav pills */}
         <div className="flex gap-3 flex-wrap">
           <Link href={`${lp}/events/tonight`} className="px-6 py-2.5 rounded-full border border-white/20 text-white/60 hover:border-champagne hover:text-champagne transition-colors text-sm tracking-wider uppercase">
-            {isIt ? 'Stasera' : 'Tonight'}
+            {tr(locale, 'Tonight', 'Stasera')}
           </Link>
           <Link href={`${lp}/events/this-week`} className="px-6 py-2.5 rounded-full border border-white/20 text-white/60 hover:border-champagne hover:text-champagne transition-colors text-sm tracking-wider uppercase">
-            {isIt ? 'Questa Settimana' : 'This Week'}
+            {tr(locale, 'This Week', 'Questa Settimana')}
           </Link>
           <span className="px-6 py-2.5 rounded-full bg-champagne text-black text-sm font-medium tracking-wider uppercase">
-            {isIt ? 'I Migliori' : 'Best Events'}
+            {tr(locale, 'Best Events', 'I Migliori')}
           </span>
         </div>
       </section>
@@ -213,7 +206,7 @@ export default async function EventsBestPage({ params }: Props) {
                   <div>
                     <div className="flex items-center gap-2 mb-2">
                       <span className="text-[9px] uppercase tracking-[0.25em] font-bold px-2 py-1 rounded" style={{ color: v.color, border: `1px solid ${v.color}40`, background: `${v.color}10` }}>
-                        #{index + 1} {isIt ? 'SCELTA CONCIERGE' : 'CONCIERGE PICK'}
+                        #{index + 1} {tr(locale, 'CONCIERGE PICK', 'SCELTA CONCIERGE')}
                       </span>
                     </div>
                     <h2 className="font-serif text-3xl sm:text-4xl text-white font-bold tracking-tight">
@@ -225,7 +218,7 @@ export default async function EventsBestPage({ params }: Props) {
                     href={`${lp}/clubs/${v.slug}`}
                     className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 text-white/70 text-sm hover:border-champagne hover:text-champagne transition-colors"
                   >
-                    {isIt ? 'Vedi Club' : 'View Club'} <ExternalLink className="w-3.5 h-3.5" />
+                    {tr(locale, 'View Club', 'Vedi Club')} <ExternalLink className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               </div>
@@ -257,7 +250,7 @@ export default async function EventsBestPage({ params }: Props) {
                 {weekly.length > 0 && (
                   <div className="mb-6">
                     <h3 className="text-white/50 text-[10px] uppercase tracking-[0.25em] mb-3">
-                      {isIt ? 'Serate Ricorrenti' : 'Weekly Schedule'}
+                      {tr(locale, 'Weekly Schedule', 'Serate Ricorrenti')}
                     </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {weekly.map(we => {
@@ -287,7 +280,7 @@ export default async function EventsBestPage({ params }: Props) {
                 {upcoming.length > 0 && (
                   <div className="mb-6">
                     <h3 className="text-white/50 text-[10px] uppercase tracking-[0.25em] mb-3">
-                      {isIt ? 'Prossimi Eventi Speciali' : 'Upcoming Special Events'}
+                      {tr(locale, 'Upcoming Special Events', 'Prossimi Eventi Speciali')}
                     </h3>
                     <div className="space-y-2">
                       {upcoming.slice(0, 3).map(event => {
@@ -324,13 +317,13 @@ export default async function EventsBestPage({ params }: Props) {
                     rel="noopener noreferrer"
                     className="px-5 py-2.5 bg-champagne text-black font-bold rounded-full hover:bg-white transition-colors text-xs uppercase tracking-wider"
                   >
-                    {isIt ? 'Prenota Tavolo' : 'Book Table'}
+                    {tr(locale, 'Book Table', 'Prenota Tavolo')}
                   </a>
                   <Link
                     href={`${lp}/clubs/${v.slug}`}
                     className="px-5 py-2.5 border border-white/20 text-white/60 rounded-full hover:border-champagne hover:text-champagne transition-colors text-xs uppercase tracking-wider"
                   >
-                    {isIt ? 'Scheda Club' : 'Club Info'}
+                    {tr(locale, 'Club Info', 'Scheda Club')}
                   </Link>
                 </div>
               </div>
@@ -343,15 +336,13 @@ export default async function EventsBestPage({ params }: Props) {
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="rounded-xl border border-champagne/20 bg-champagne/[0.04] p-8 text-center">
           <h2 className="font-serif text-2xl text-white mb-3">
-            {isIt ? 'Non sai dove andare?' : 'Not sure where to go?'}
+            {tr(locale, 'Not sure where to go?', 'Non sai dove andare?')}
           </h2>
           <p className="text-white/40 text-sm mb-6 max-w-md mx-auto">
-            {isIt
-              ? 'Dicci la data, quante persone siete e il budget. Ti troviamo il tavolo perfetto in 10 minuti, gratis.'
-              : 'Tell us the date, group size and budget. We\'ll find the perfect table in 10 minutes, for free.'}
+            {tr(locale, 'Tell us the date, group size and budget. We\'ll find the perfect table in 10 minutes, for free.', 'Dicci la data, quante persone siete e il budget. Ti troviamo il tavolo perfetto in 10 minuti, gratis.')}
           </p>
           <a
-            href={`https://wa.me/393519127047?text=${encodeURIComponent(isIt ? 'Ciao! Aiutami a scegliere il club giusto per stasera a Milano.' : 'Hi! Help me choose the right club for tonight in Milan.')}`}
+            href={`https://wa.me/393519127047?text=${encodeURIComponent(tr(locale, 'Hi! Help me choose the right club for tonight in Milan.', 'Ciao! Aiutami a scegliere il club giusto per stasera a Milano.'))}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-3.5 bg-champagne text-black font-bold rounded-full hover:bg-white transition-colors uppercase tracking-wider text-sm"

@@ -1,6 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
+import { tr } from '@/lib/i18n/t';
 import { MessageCircle } from 'lucide-react';
 import { CONTACT } from '@/config/contact';
 import { mockVenues, mockEvents } from '@/lib/data';
@@ -57,15 +58,13 @@ export default function MobileBottomBar({ currentLocale }: { currentLocale: stri
   }
 
   const mainLabel = contextName
-    ? `${isIt ? 'Prenota' : 'Book'}: ${contextName}`
-    : isIt
-    ? 'Prenota Ora'
-    : 'Book Now';
-  const sub = isIt ? 'Risposta WhatsApp in 10 min' : 'WhatsApp reply in 10 min';
+    ? `${tr(currentLocale, 'Book', 'Prenota')}: ${contextName}`
+    : tr(currentLocale, 'Book Now', 'Prenota Ora');
+  const sub = tr(currentLocale, 'WhatsApp reply in 10 min', 'Risposta WhatsApp in 10 min');
 
   return (
     <nav
-      aria-label={isIt ? 'Prenotazione' : 'Booking'}
+      aria-label={tr(currentLocale, 'Booking', 'Prenotazione')}
       className="md:hidden fixed bottom-0 inset-x-0 z-50 glass-dark border-t border-champagne/15 pb-[env(safe-area-inset-bottom)]"
     >
       <div className="px-3 py-2.5">
@@ -79,9 +78,7 @@ export default function MobileBottomBar({ currentLocale }: { currentLocale: stri
               ? isIt
                 ? `Prenota ${contextName} su WhatsApp`
                 : `Book ${contextName} on WhatsApp`
-              : isIt
-              ? 'Prenota ora su WhatsApp'
-              : 'Book now on WhatsApp'
+              : tr(currentLocale, 'Book now on WhatsApp', 'Prenota ora su WhatsApp')
           }
           className="flex items-center justify-center gap-2.5 w-full rounded-xl bg-champagne text-black
             min-h-[52px] px-4 active:scale-[0.98] active:bg-[#c2a02f] transition-transform duration-150"

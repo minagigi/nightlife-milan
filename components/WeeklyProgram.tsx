@@ -1,4 +1,5 @@
 import React from 'react';
+import { tr } from '@/lib/i18n/t';
 import { MessageCircle } from 'lucide-react';
 import { CONTACT } from '@/config/contact';
 
@@ -11,50 +12,50 @@ interface WeeklyProgramProps {
 export default function WeeklyProgram({ venueId, venueName, locale }: WeeklyProgramProps) {
   const programs: Record<string, { day: string; event: string }[]> = {
     'v-justme': [
-      { day: locale === 'it' ? 'Martedì' : 'Tue', event: 'University Night' },
-      { day: locale === 'it' ? 'Mercoledì' : 'Wed', event: 'Fortune Teller' },
-      { day: locale === 'it' ? 'Giovedì' : 'Thu', event: 'Viziatissima w/ Benny Camaro' },
+      { day: tr(locale, 'Tue', 'Martedì'), event: 'University Night' },
+      { day: tr(locale, 'Wed', 'Mercoledì'), event: 'Fortune Teller' },
+      { day: tr(locale, 'Thu', 'Giovedì'), event: 'Viziatissima w/ Benny Camaro' },
     ],
     'v-pineta': [
-      { day: locale === 'it' ? 'Venerdì' : 'Fri', event: 'Aperitivo Cantato & Live Music' },
-      { day: locale === 'it' ? 'Sabato' : 'Sat', event: 'Aperitivo Cantato & Live Music' },
+      { day: tr(locale, 'Fri', 'Venerdì'), event: 'Aperitivo Cantato & Live Music' },
+      { day: tr(locale, 'Sat', 'Sabato'), event: 'Aperitivo Cantato & Live Music' },
     ],
     'v-playclub': [
-      { day: locale === 'it' ? 'Giovedì' : 'Thu', event: 'Shakara (Afrobeats)' },
-      { day: locale === 'it' ? 'Venerdì' : 'Fri', event: 'Flexx (Hip-Hop)' },
+      { day: tr(locale, 'Thu', 'Giovedì'), event: 'Shakara (Afrobeats)' },
+      { day: tr(locale, 'Fri', 'Venerdì'), event: 'Flexx (Hip-Hop)' },
     ],
     'v-55milano': [
-      { day: locale === 'it' ? 'Venerdì' : 'Fri', event: 'Singing Dinner' },
-      { day: locale === 'it' ? 'Sabato' : 'Sat', event: 'Singing Dinner' },
-      { day: locale === 'it' ? 'Domenica' : 'Sun', event: 'Latin Night' },
+      { day: tr(locale, 'Fri', 'Venerdì'), event: 'Singing Dinner' },
+      { day: tr(locale, 'Sat', 'Sabato'), event: 'Singing Dinner' },
+      { day: tr(locale, 'Sun', 'Domenica'), event: 'Latin Night' },
     ],
     'v-repvblic': [
-      { day: locale === 'it' ? 'Mercoledì' : 'Wed', event: 'Home (House Music)' },
-      { day: locale === 'it' ? 'Venerdì' : 'Fri', event: 'Dirty Monday Edition' },
+      { day: tr(locale, 'Wed', 'Mercoledì'), event: 'Home (House Music)' },
+      { day: tr(locale, 'Fri', 'Venerdì'), event: 'Dirty Monday Edition' },
     ],
     'v-11clubroom': [
-      { day: locale === 'it' ? 'Venerdì' : 'Fri', event: 'Urban Night' },
-      { day: locale === 'it' ? 'Sabato' : 'Sat', event: 'Elite Night' },
+      { day: tr(locale, 'Fri', 'Venerdì'), event: 'Urban Night' },
+      { day: tr(locale, 'Sat', 'Sabato'), event: 'Elite Night' },
     ],
     'v-church81': [
-      { day: locale === 'it' ? 'Venerdì' : 'Fri', event: 'Deep House Session' },
-      { day: locale === 'it' ? 'Sabato' : 'Sat', event: 'Avant-Garde Night' },
+      { day: tr(locale, 'Fri', 'Venerdì'), event: 'Deep House Session' },
+      { day: tr(locale, 'Sat', 'Sabato'), event: 'Avant-Garde Night' },
     ],
     'v-mibmilano': [
-      { day: locale === 'it' ? 'Giovedì' : 'Thu', event: 'Dinner Show' },
-      { day: locale === 'it' ? 'Venerdì' : 'Fri', event: 'Corporate Night' },
+      { day: tr(locale, 'Thu', 'Giovedì'), event: 'Dinner Show' },
+      { day: tr(locale, 'Fri', 'Venerdì'), event: 'Corporate Night' },
     ],
     'v-gattopardo': [
-      { day: locale === 'it' ? 'Venerdì' : 'Fri', event: 'Classic Elegance' },
-      { day: locale === 'it' ? 'Sabato' : 'Sat', event: 'Exclusive Night' },
+      { day: tr(locale, 'Fri', 'Venerdì'), event: 'Classic Elegance' },
+      { day: tr(locale, 'Sat', 'Sabato'), event: 'Exclusive Night' },
     ],
     'v-terrazza21': [
-      { day: locale === 'it' ? 'Tutti i giorni' : 'Daily', event: 'Sunset Aperitivo' },
+      { day: tr(locale, 'Daily', 'Tutti i giorni'), event: 'Sunset Aperitivo' },
     ],
     'v-theclub': [
-      { day: locale === 'it' ? 'Martedì' : 'Tue', event: 'Fidelio' },
-      { day: locale === 'it' ? 'Venerdì' : 'Fri', event: 'Commercial Night' },
-      { day: locale === 'it' ? 'Sabato' : 'Sat', event: 'International Night' },
+      { day: tr(locale, 'Tue', 'Martedì'), event: 'Fidelio' },
+      { day: tr(locale, 'Fri', 'Venerdì'), event: 'Commercial Night' },
+      { day: tr(locale, 'Sat', 'Sabato'), event: 'International Night' },
     ],
   };
 
@@ -64,13 +65,13 @@ export default function WeeklyProgram({ venueId, venueName, locale }: WeeklyProg
     return null;
   }
 
-  const bookText = locale === 'it' ? 'PRENOTA' : 'BOOK';
-  const disclaimerText = locale === 'it' ? 'Disponibile solo via WhatsApp' : 'Available via WhatsApp only';
+  const bookText = tr(locale, 'BOOK', 'PRENOTA');
+  const disclaimerText = tr(locale, 'Available via WhatsApp only', 'Disponibile solo via WhatsApp');
 
   return (
     <div className="bg-white/[0.03] border border-white/10 rounded-lg p-6 mt-8">
       <h3 className="text-xl font-serif font-bold text-white mb-6">
-        {locale === 'it' ? 'Programma Settimanale' : 'Weekly Program'}
+        {tr(locale, 'Weekly Program', 'Programma Settimanale')}
       </h3>
       <ul className="space-y-4">
         {program.map((item, idx) => {

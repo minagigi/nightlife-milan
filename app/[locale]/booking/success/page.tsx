@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { tr } from '@/lib/i18n/t';
 import { localePrefix } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import { Calendar, Share2, MapPin, Clock, ArrowLeft } from 'lucide-react';
@@ -22,7 +23,7 @@ export default async function BookingSuccessPage({
   const resolvedSearchParams = await searchParams;
   const isIt = locale === 'it';
   
-  const eventName = (resolvedSearchParams.event as string) || (isIt ? 'Evento Esclusivo' : 'Exclusive Event');
+  const eventName = (resolvedSearchParams.event as string) || (tr(locale, 'Exclusive Event', 'Evento Esclusivo'));
   const venueName = (resolvedSearchParams.venue as string) || 'Nightlife Milan';
   const dateStr = (resolvedSearchParams.date as string) || new Date().toISOString().split('T')[0];
   
@@ -78,10 +79,10 @@ export default async function BookingSuccessPage({
               </div>
               
               <h1 className="text-3xl font-serif font-bold text-champagne mb-2">
-                {isIt ? 'Confermato' : 'Confirmed'}
+                {tr(locale, 'Confirmed', 'Confermato')}
               </h1>
               <p className="text-white/70 font-light mb-8">
-                {isIt ? 'Il tuo nome è in lista. Ci vediamo al party.' : 'Your name is on the list. See you at the party.'}
+                {tr(locale, 'Your name is on the list. See you at the party.', 'Il tuo nome è in lista. Ci vediamo al party.')}
               </p>
 
               {/* Ticket Details with dashed border */}
@@ -117,7 +118,7 @@ export default async function BookingSuccessPage({
               className="flex items-center justify-center gap-2 w-full bg-charcoal border border-champagne/30 text-champagne px-4 py-3 rounded-xl hover:bg-champagne/10 transition-colors font-medium"
             >
               <Calendar className="w-4 h-4" />
-              {isIt ? 'Aggiungi al Calendario' : 'Add to Calendar'}
+              {tr(locale, 'Add to Calendar', 'Aggiungi al Calendario')}
             </a>
             
             <a 
@@ -127,7 +128,7 @@ export default async function BookingSuccessPage({
               className="flex items-center justify-center gap-2 w-full bg-[#25D366]/10 border border-[#25D366]/30 text-[#25D366] px-4 py-3 rounded-xl hover:bg-[#25D366]/20 transition-colors font-medium"
             >
               <Share2 className="w-4 h-4" />
-              {isIt ? 'Invia agli amici' : 'Share with friends'}
+              {tr(locale, 'Share with friends', 'Invia agli amici')}
             </a>
           </div>
 
@@ -135,20 +136,20 @@ export default async function BookingSuccessPage({
           <div className="bg-charcoal/50 border border-white/10 rounded-xl p-6">
             <h3 className="text-lg font-serif font-bold text-white mb-3 flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-champagne" />
-              {isIt ? 'Come entrare' : 'How to get in'}
+              {tr(locale, 'How to get in', 'Come entrare')}
             </h3>
             <ul className="space-y-2 text-sm text-white/50 font-light">
               <li className="flex items-start gap-2">
                 <span className="text-champagne mt-0.5">•</span>
-                {isIt ? 'Ricorda il dress code: Elegante / Smart Casual.' : 'Remember the dress code: Elegant / Smart Casual.'}
+                {tr(locale, 'Remember the dress code: Elegant / Smart Casual.', 'Ricorda il dress code: Elegante / Smart Casual.')}
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-champagne mt-0.5">•</span>
-                {isIt ? 'Presentati all\'ingresso comunicando il nome usato per la prenotazione.' : 'Show up at the entrance and give the name used for the booking.'}
+                {tr(locale, 'Show up at the entrance and give the name used for the booking.', 'Presentati all\'ingresso comunicando il nome usato per la prenotazione.')}
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-champagne mt-0.5">•</span>
-                {isIt ? 'La direzione si riserva il diritto di selezione all\'ingresso.' : 'The management reserves the right of admission.'}
+                {tr(locale, 'The management reserves the right of admission.', 'La direzione si riserva il diritto di selezione all\'ingresso.')}
               </li>
             </ul>
           </div>
@@ -160,7 +161,7 @@ export default async function BookingSuccessPage({
               className="inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors text-sm"
             >
               <ArrowLeft className="w-4 h-4" />
-              {isIt ? 'Torna alla Home' : 'Back to Home'}
+              {tr(locale, 'Back to Home', 'Torna alla Home')}
             </Link>
           </div>
 

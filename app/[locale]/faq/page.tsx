@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Link from 'next/link';
 
@@ -14,12 +15,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const canonical = `${baseUrl}${localePrefix(locale)}/faq`;
 
-  const title = isIt
-    ? 'FAQ Vita Notturna Milano 2026 | Domande Frequenti | Nightlife Milan'
-    : 'Milan Nightlife FAQ 2026 | Frequently Asked Questions | Nightlife Milan';
-  const description = isIt
-    ? 'Tutte le risposte sulle discoteche di Milano: prezzi tavoli VIP, dress code, guestlist, età minima, orari, prenotazioni. La guida completa per uscire a Milano nel 2026.'
-    : 'All answers about Milan nightclubs: VIP table prices, dress code, guestlist, minimum age, opening hours, bookings. The complete guide to going out in Milan in 2026.';
+  const title = tr(locale, 'Milan Nightlife FAQ 2026 | Frequently Asked Questions | Nightlife Milan', 'FAQ Vita Notturna Milano 2026 | Domande Frequenti | Nightlife Milan');
+  const description = tr(locale, 'All answers about Milan nightclubs: VIP table prices, dress code, guestlist, minimum age, opening hours, bookings. The complete guide to going out in Milan in 2026.', 'Tutte le risposte sulle discoteche di Milano: prezzi tavoli VIP, dress code, guestlist, età minima, orari, prenotazioni. La guida completa per uscire a Milano nel 2026.');
 
   return {
     title,
@@ -39,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'website',
       siteName: 'Nightlife Milan',
       locale: isIt ? 'it_IT' : 'en_US',
-      images: [{ url: `${baseUrl}/images/faq-hero.webp`, width: 1200, height: 630, alt: isIt ? 'FAQ vita notturna Milano' : 'Milan nightlife FAQ' }],
+      images: [{ url: `${baseUrl}/images/faq-hero.webp`, width: 1200, height: 630, alt: tr(locale, 'Milan nightlife FAQ', 'FAQ vita notturna Milano') }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -58,89 +55,65 @@ export default async function FAQPage({ params }: Props) {
 
   const faqCategories = [
     {
-      category: isIt ? 'Prenotazioni & Accesso' : 'Bookings & Entry',
+      category: tr(locale, 'Bookings & Entry', 'Prenotazioni & Accesso'),
       faqs: [
         {
-          q: isIt ? 'Come si prenota un tavolo VIP a Milano?' : 'How do I book a VIP table in Milan?',
-          a: isIt
-            ? 'Il modo più rapido è WhatsApp al +39 351 912 7047. Dicci il locale, la data, il numero di persone e il budget. Risposta garantita in 10 minuti. Il servizio è completamente gratuito — guadagniamo una commissione dal locale, non da te.'
-            : 'The fastest way is WhatsApp at +39 351 912 7047. Tell us the venue, date, group size and budget. Reply guaranteed in 10 minutes. The service is completely free — we earn a commission from the venue, not from you.',
+          q: tr(locale, 'How do I book a VIP table in Milan?', 'Come si prenota un tavolo VIP a Milano?'),
+          a: tr(locale, 'The fastest way is WhatsApp at +39 351 912 7047. Tell us the venue, date, group size and budget. Reply guaranteed in 10 minutes. The service is completely free — we earn a commission from the venue, not from you.', 'Il modo più rapido è WhatsApp al +39 351 912 7047. Dicci il locale, la data, il numero di persone e il budget. Risposta garantita in 10 minuti. Il servizio è completamente gratuito — guadagniamo una commissione dal locale, non da te.'),
         },
         {
           q: isIt ? "Quanto costa una prenotazione tramite Nightlife Milan?" : 'How much does a booking through Nightlife Milan cost?',
-          a: isIt
-            ? 'Il nostro servizio è gratuito al 100%. Non aggiungiamo costi extra rispetto al prezzo concordato con il locale. Guadagniamo una commissione dal club quando porti il tuo gruppo — tu non paghi nulla di più.'
-            : '100% free. We add no extra costs on top of the venue\'s price. We earn a commission from the club when you bring your group — you pay nothing extra.',
+          a: tr(locale, '100% free. We add no extra costs on top of the venue\'s price. We earn a commission from the club when you bring your group — you pay nothing extra.', 'Il nostro servizio è gratuito al 100%. Non aggiungiamo costi extra rispetto al prezzo concordato con il locale. Guadagniamo una commissione dal club quando porti il tuo gruppo — tu non paghi nulla di più.'),
         },
         {
-          q: isIt ? 'Qual è la differenza tra guestlist e tavolo VIP?' : 'What is the difference between guestlist and VIP table?',
-          a: isIt
-            ? 'La guestlist garantisce l\'ingresso (spesso gratuito o ridotto) ma non include posto a sedere — stai in piedi. Il tavolo VIP include posto riservato, servizio bottiglie e una hostess dedicata. Per gruppi di 4+ persone, il tavolo VIP è quasi sempre la scelta migliore.'
-            : 'Guestlist guarantees entry (often free or reduced) but no seating — you stand. VIP table includes reserved seating, bottle service and a dedicated hostess. For groups of 4+ people, VIP table is almost always the better choice.',
+          q: tr(locale, 'What is the difference between guestlist and VIP table?', 'Qual è la differenza tra guestlist e tavolo VIP?'),
+          a: tr(locale, 'Guestlist guarantees entry (often free or reduced) but no seating — you stand. VIP table includes reserved seating, bottle service and a dedicated hostess. For groups of 4+ people, VIP table is almost always the better choice.', 'La guestlist garantisce l\'ingresso (spesso gratuito o ridotto) ma non include posto a sedere — stai in piedi. Il tavolo VIP include posto riservato, servizio bottiglie e una hostess dedicata. Per gruppi di 4+ persone, il tavolo VIP è quasi sempre la scelta migliore.'),
         },
         {
-          q: isIt ? 'Con quanto anticipo devo prenotare?' : 'How far in advance should I book?',
-          a: isIt
-            ? 'Per i weekend normali, 24-48 ore sono sufficienti. Per eventi speciali (Fashion Week, Capodanno, serate con DJ internazionali), consigliamo almeno 1-2 settimane prima. Contattaci comunque anche all\'ultimo minuto — spesso riusciamo a trovare soluzioni.'
-            : 'For regular weekends, 24-48 hours is sufficient. For special events (Fashion Week, New Year\'s Eve, international DJs), we recommend at least 1-2 weeks in advance. Contact us last minute anyway — we often find solutions.',
+          q: tr(locale, 'How far in advance should I book?', 'Con quanto anticipo devo prenotare?'),
+          a: tr(locale, 'For regular weekends, 24-48 hours is sufficient. For special events (Fashion Week, New Year\'s Eve, international DJs), we recommend at least 1-2 weeks in advance. Contact us last minute anyway — we often find solutions.', 'Per i weekend normali, 24-48 ore sono sufficienti. Per eventi speciali (Fashion Week, Capodanno, serate con DJ internazionali), consigliamo almeno 1-2 settimane prima. Contattaci comunque anche all\'ultimo minuto — spesso riusciamo a trovare soluzioni.'),
         },
         {
           q: isIt ? "Cosa succede se cambio idea dopo la prenotazione?" : "What if I change my mind after booking?",
-          a: isIt
-            ? 'Dipende dal locale e dall\'anticipo. In generale, le cancellazioni oltre 48 ore prima sono gratuite. Per serate speciali, i tavoli possono avere una caparra non rimborsabile. Ti informeremo sempre della policy prima di confermare.'
-            : 'It depends on the venue and timing. Generally, cancellations more than 48 hours in advance are free. For special nights, tables may have a non-refundable deposit. We always inform you of the policy before confirming.',
+          a: tr(locale, 'It depends on the venue and timing. Generally, cancellations more than 48 hours in advance are free. For special nights, tables may have a non-refundable deposit. We always inform you of the policy before confirming.', 'Dipende dal locale e dall\'anticipo. In generale, le cancellazioni oltre 48 ore prima sono gratuite. Per serate speciali, i tavoli possono avere una caparra non rimborsabile. Ti informeremo sempre della policy prima di confermare.'),
         },
       ],
     },
     {
-      category: isIt ? 'Prezzi & Pagamenti' : 'Prices & Payments',
+      category: tr(locale, 'Prices & Payments', 'Prezzi & Pagamenti'),
       faqs: [
         {
-          q: isIt ? 'Quanto costa un tavolo VIP a Milano?' : 'How much does a VIP table cost in Milan?',
-          a: isIt
-            ? 'I prezzi variano molto per locale. Just Me Milano: da €320 per la settimana, da €500 il weekend. Pineta Club: da €300. Play Club: da €200. Armani Privé: da €1.000. Voya Rooftop: cena da €60/persona. I prezzi includono di solito una o più bottiglie di base.'
-            : 'Prices vary widely by venue. Just Me Milano: from €320 weekdays, from €500 weekends. Pineta Club: from €300. Play Club: from €200. Armani Privé: from €1,000. Voya Rooftop: dinner from €60/person. Prices usually include one or more base bottles.',
+          q: tr(locale, 'How much does a VIP table cost in Milan?', 'Quanto costa un tavolo VIP a Milano?'),
+          a: tr(locale, 'Prices vary widely by venue. Just Me Milano: from €320 weekdays, from €500 weekends. Pineta Club: from €300. Play Club: from €200. Armani Privé: from €1,000. Voya Rooftop: dinner from €60/person. Prices usually include one or more base bottles.', 'I prezzi variano molto per locale. Just Me Milano: da €320 per la settimana, da €500 il weekend. Pineta Club: da €300. Play Club: da €200. Armani Privé: da €1.000. Voya Rooftop: cena da €60/persona. I prezzi includono di solito una o più bottiglie di base.'),
         },
         {
-          q: isIt ? 'Quali metodi di pagamento accettano i club?' : 'What payment methods do clubs accept?',
-          a: isIt
-            ? 'La maggior parte dei club a Milano accetta contanti e carte di credito/debito. Alcuni accettano anche Apple Pay e Google Pay. Non tutti accettano American Express. È sempre meglio avere contanti come backup, specialmente per il pagamento al tavolo.'
-            : 'Most Milan clubs accept cash and credit/debit cards. Some also accept Apple Pay and Google Pay. Not all accept American Express. It\'s always good to have cash as backup, especially for table payments.',
+          q: tr(locale, 'What payment methods do clubs accept?', 'Quali metodi di pagamento accettano i club?'),
+          a: tr(locale, 'Most Milan clubs accept cash and credit/debit cards. Some also accept Apple Pay and Google Pay. Not all accept American Express. It\'s always good to have cash as backup, especially for table payments.', 'La maggior parte dei club a Milano accetta contanti e carte di credito/debito. Alcuni accettano anche Apple Pay e Google Pay. Non tutti accettano American Express. È sempre meglio avere contanti come backup, specialmente per il pagamento al tavolo.'),
         },
         {
           q: isIt ? "L'ingresso è gratuito con la guestlist?" : 'Is entry free with guestlist?',
-          a: isIt
-            ? 'Dipende dal locale e dal giorno. Nei giorni infrasettimanali (lunedì-giovedì), la guestlist è spesso gratuita. Il venerdì e sabato, la guestlist può essere gratuita (entro una certa ora) o ridotta rispetto al prezzo pieno. Ti confermeremo sempre le condizioni prima.'
-            : 'It depends on the venue and day. On weekdays (Mon-Thu), guestlist is often free. On Friday and Saturday, guestlist may be free (before a certain time) or reduced vs. full price. We always confirm conditions before.',
+          a: tr(locale, 'It depends on the venue and day. On weekdays (Mon-Thu), guestlist is often free. On Friday and Saturday, guestlist may be free (before a certain time) or reduced vs. full price. We always confirm conditions before.', 'Dipende dal locale e dal giorno. Nei giorni infrasettimanali (lunedì-giovedì), la guestlist è spesso gratuita. Il venerdì e sabato, la guestlist può essere gratuita (entro una certa ora) o ridotta rispetto al prezzo pieno. Ti confermeremo sempre le condizioni prima.'),
         },
         {
-          q: isIt ? 'Quanto costano le bottiglie nei club di Milano?' : 'How much do bottles cost in Milan clubs?',
-          a: isIt
-            ? 'Prezzi indicativi: Vodka/Rum standard (es. Smirnoff) da €120-180. Vodka premium (Belvedere, Grey Goose) da €180-280. Champagne (Moët) da €200-350. Champagne luxury (Dom Pérignon, Cristal) da €500+. I prezzi variano molto per locale — contattaci per preventivi precisi.'
-            : 'Indicative prices: Standard vodka/rum (e.g. Smirnoff) from €120-180. Premium vodka (Belvedere, Grey Goose) from €180-280. Champagne (Moët) from €200-350. Luxury champagne (Dom Pérignon, Cristal) from €500+. Prices vary widely — contact us for exact quotes.',
+          q: tr(locale, 'How much do bottles cost in Milan clubs?', 'Quanto costano le bottiglie nei club di Milano?'),
+          a: tr(locale, 'Indicative prices: Standard vodka/rum (e.g. Smirnoff) from €120-180. Premium vodka (Belvedere, Grey Goose) from €180-280. Champagne (Moët) from €200-350. Luxury champagne (Dom Pérignon, Cristal) from €500+. Prices vary widely — contact us for exact quotes.', 'Prezzi indicativi: Vodka/Rum standard (es. Smirnoff) da €120-180. Vodka premium (Belvedere, Grey Goose) da €180-280. Champagne (Moët) da €200-350. Champagne luxury (Dom Pérignon, Cristal) da €500+. I prezzi variano molto per locale — contattaci per preventivi precisi.'),
         },
       ],
     },
     {
-      category: isIt ? 'Dress Code & Accesso' : 'Dress Code & Door Policy',
+      category: tr(locale, 'Dress Code & Door Policy', 'Dress Code & Accesso'),
       faqs: [
         {
           q: isIt ? "Qual è il dress code per i club di Milano?" : "What is the dress code for Milan clubs?",
-          a: isIt
-            ? 'Milano ha uno dei dress code più rigorosi in Europa. I club di lusso (Just Me, Armani Privé, Gattopardo) richiedono abbigliamento elegante obbligatorio: pantaloni lunghi per uomo, no sneakers tecniche, no cappelli, no tute. I club più giovani (Play Club, Repvblic) accettano uno stile smart casual o urban chic.'
-            : 'Milan has one of the strictest dress codes in Europe. Luxury clubs (Just Me, Armani Privé, Gattopardo) require strictly elegant attire: long trousers for men, no technical sneakers, no caps, no tracksuits. Younger clubs (Play Club, Repvblic) accept smart casual or urban chic.',
+          a: tr(locale, 'Milan has one of the strictest dress codes in Europe. Luxury clubs (Just Me, Armani Privé, Gattopardo) require strictly elegant attire: long trousers for men, no technical sneakers, no caps, no tracksuits. Younger clubs (Play Club, Repvblic) accept smart casual or urban chic.', 'Milano ha uno dei dress code più rigorosi in Europa. I club di lusso (Just Me, Armani Privé, Gattopardo) richiedono abbigliamento elegante obbligatorio: pantaloni lunghi per uomo, no sneakers tecniche, no cappelli, no tute. I club più giovani (Play Club, Repvblic) accettano uno stile smart casual o urban chic.'),
         },
         {
           q: isIt ? "Posso entrare in sneakers?" : "Can I get in wearing sneakers?",
-          a: isIt
-            ? 'Dipende dal tipo di sneakers e dal locale. Le sneakers eleganti in pelle (es. Common Projects, New Balance in pelle) sono accettate in molti club. Sneakers da running, tecniche o sportive (Nike Air, Adidas ultraboost) sono vietate nei club di lusso. In caso di dubbio, opta per scarpe in pelle o mocassini.'
-            : 'It depends on the sneaker type and venue. Elegant leather sneakers (e.g. Common Projects, leather New Balance) are accepted in many clubs. Running or technical sneakers (Nike Air, Adidas ultraboost) are banned in luxury clubs. When in doubt, opt for leather shoes or loafers.',
+          a: tr(locale, 'It depends on the sneaker type and venue. Elegant leather sneakers (e.g. Common Projects, leather New Balance) are accepted in many clubs. Running or technical sneakers (Nike Air, Adidas ultraboost) are banned in luxury clubs. When in doubt, opt for leather shoes or loafers.', 'Dipende dal tipo di sneakers e dal locale. Le sneakers eleganti in pelle (es. Common Projects, New Balance in pelle) sono accettate in molti club. Sneakers da running, tecniche o sportive (Nike Air, Adidas ultraboost) sono vietate nei club di lusso. In caso di dubbio, opta per scarpe in pelle o mocassini.'),
         },
         {
           q: isIt ? 'Qual è l\'età minima per entrare nei club di Milano?' : "What is the minimum age to enter Milan clubs?",
-          a: isIt
-            ? 'In Italia, l\'età legale per bere alcolici è 18 anni. La maggior parte dei club applica un limite minimo di 18 anni. I club di lusso (Just Me, Armani Privé) spesso preferiscono un pubblico 21+ o addirittura 25+. Porta sempre un documento di identità valido con foto.'
-            : 'In Italy, the legal drinking age is 18. Most clubs have a minimum age of 18. Luxury clubs (Just Me, Armani Privé) often prefer a 21+ or even 25+ crowd. Always bring a valid photo ID.',
+          a: tr(locale, 'In Italy, the legal drinking age is 18. Most clubs have a minimum age of 18. Luxury clubs (Just Me, Armani Privé) often prefer a 21+ or even 25+ crowd. Always bring a valid photo ID.', 'In Italia, l\'età legale per bere alcolici è 18 anni. La maggior parte dei club applica un limite minimo di 18 anni. I club di lusso (Just Me, Armani Privé) spesso preferiscono un pubblico 21+ o addirittura 25+. Porta sempre un documento di identità valido con foto.'),
         },
         {
           q: isIt ? "Il tavolo VIP garantisce l'ingresso?" : 'Does a VIP table guarantee entry?',
@@ -151,16 +124,16 @@ export default async function FAQPage({ params }: Props) {
       ],
     },
     {
-      category: isIt ? 'Orari & Logistica' : 'Opening Hours & Logistics',
+      category: tr(locale, 'Opening Hours & Logistics', 'Orari & Logistica'),
       faqs: [
         {
-          q: isIt ? 'A che ora aprono i club di Milano?' : 'What time do Milan clubs open?',
+          q: tr(locale, 'What time do Milan clubs open?', 'A che ora aprono i club di Milano?'),
           a: isIt
             ? "L'aperitivo inizia dalle 19:00-19:30 in bar e rooftop (Voya, Pineta, 55 Milano). I club veri e propri aprono dalle 22:30-23:30 di sera. L'orario di punta è tra mezzanotte e le 3:00. Molti club restano aperti fino alle 5:00-6:00 del mattino."
             : 'Aperitivo starts from 19:00-19:30 in bars and rooftops (Voya, Pineta, 55 Milano). Proper clubs open from 22:30-23:30. Peak time is between midnight and 3:00 AM. Many clubs stay open until 5:00-6:00 AM.',
         },
         {
-          q: isIt ? 'Come si arriva nei club di Milano?' : 'How do I get to Milan clubs?',
+          q: tr(locale, 'How do I get to Milan clubs?', 'Come si arriva nei club di Milano?'),
           a: isIt
             ? 'La metropolitana di Milano chiude all\'1:30 circa nei fine settimana (fino alle 2:00 il sabato). Per il rientro notturno, usa Uber o taxi (disponibili 24/7). Nelle zone centrali (Corso Como, Brera, Navigli) molti posti sono raggiungibili a piedi da diverse metro. Alcune zone (Sempione per Just Me) richiedono taxi o Uber.'
             : "Milan's metro closes around 1:30 AM on weekends (2:00 AM on Saturdays). For the ride back, use Uber or taxi (available 24/7). In central areas (Corso Como, Brera, Navigli) many spots are walkable from metro stations. Some areas (Sempione for Just Me) require taxi or Uber.",
@@ -174,7 +147,7 @@ export default async function FAQPage({ params }: Props) {
       ],
     },
     {
-      category: isIt ? 'Aperitivo & Ristoranti' : 'Aperitivo & Dining',
+      category: tr(locale, 'Aperitivo & Dining', 'Aperitivo & Ristoranti'),
       faqs: [
         {
           q: isIt ? "Cos'è l'aperitivo a Milano?" : "What is aperitivo in Milan?",
@@ -227,21 +200,17 @@ export default async function FAQPage({ params }: Props) {
         {/* Hero */}
         <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <h1 className="font-serif text-5xl md:text-6xl font-bold text-champagne tracking-tight mb-6">
-            {isIt ? 'Domande Frequenti' : 'Frequently Asked Questions'}
+            {tr(locale, 'Frequently Asked Questions', 'Domande Frequenti')}
           </h1>
           <p className="text-xl text-white/40 font-light leading-relaxed mb-8">
-            {isIt
-              ? 'Tutto quello che devi sapere prima di uscire a Milano: prenotazioni, prezzi, dress code, orari e molto altro.'
-              : 'Everything you need to know before going out in Milan: bookings, prices, dress code, opening hours and much more.'}
+            {tr(locale, 'Everything you need to know before going out in Milan: bookings, prices, dress code, opening hours and much more.', 'Tutto quello che devi sapere prima di uscire a Milano: prenotazioni, prezzi, dress code, orari e molto altro.')}
           </p>
 
           {/* Quick Answer */}
           <div className="p-5 rounded-xl border border-champagne/20 bg-champagne/[0.04] mb-12">
             <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">Quick Answer</p>
             <p className="font-sans text-white/70 text-sm leading-relaxed">
-              {isIt
-                ? 'Per prenotare: WhatsApp +39 351 912 7047 (risposta in 10 min, servizio gratuito). Dress code: elegante obbligatorio per i club di lusso, no sneakers tecniche. Età minima: 18 anni (21+ per i locali top). Orari: aperitivo dalle 19:00, club dalle 22:30-23:30, chiusura alle 5:00-6:00.'
-                : 'To book: WhatsApp +39 351 912 7047 (reply in 10 min, free service). Dress code: elegant mandatory for luxury clubs, no technical sneakers. Min age: 18 (21+ for top venues). Hours: aperitivo from 19:00, clubs from 22:30-23:30, closing at 5:00-6:00 AM.'}
+              {tr(locale, 'To book: WhatsApp +39 351 912 7047 (reply in 10 min, free service). Dress code: elegant mandatory for luxury clubs, no technical sneakers. Min age: 18 (21+ for top venues). Hours: aperitivo from 19:00, clubs from 22:30-23:30, closing at 5:00-6:00 AM.', 'Per prenotare: WhatsApp +39 351 912 7047 (risposta in 10 min, servizio gratuito). Dress code: elegante obbligatorio per i club di lusso, no sneakers tecniche. Età minima: 18 anni (21+ per i locali top). Orari: aperitivo dalle 19:00, club dalle 22:30-23:30, chiusura alle 5:00-6:00.')}
             </p>
           </div>
 
@@ -286,12 +255,10 @@ export default async function FAQPage({ params }: Props) {
         <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="rounded-lg border border-champagne/20 bg-champagne/[0.04] p-8 text-center">
             <h2 className="font-serif text-2xl text-white mb-3">
-              {isIt ? 'Hai altre domande?' : 'Still have questions?'}
+              {tr(locale, 'Still have questions?', 'Hai altre domande?')}
             </h2>
             <p className="text-white/40 mb-6 text-sm font-light">
-              {isIt
-                ? 'Il nostro concierge risponde entro 10 minuti, 7 giorni su 7.'
-                : 'Our concierge replies within 10 minutes, 7 days a week.'}
+              {tr(locale, 'Our concierge replies within 10 minutes, 7 days a week.', 'Il nostro concierge risponde entro 10 minuti, 7 giorni su 7.')}
             </p>
             <a
               href="https://wa.me/393519127047"

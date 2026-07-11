@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { tr } from '@/lib/i18n/t';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
@@ -176,7 +177,7 @@ export default function Header({ currentLocale }: { currentLocale: string }) {
               <div className="flex flex-col leading-none">
                 <span className="font-semibold tracking-wider text-[11px] text-champagne">{CONTACT.whatsapp.number}</span>
                 <span className="text-[9px] text-white/50 tracking-widest uppercase">
-                  {currentLocale === 'it' ? 'Concierge · VIP Tables' : 'Concierge · VIP Tables'}
+                  {tr(currentLocale, 'Concierge · VIP Tables', 'Concierge · VIP Tables')}
                 </span>
               </div>
             </a>
@@ -242,7 +243,7 @@ export default function Header({ currentLocale }: { currentLocale: string }) {
               {t.bookWhatsApp}
             </a>
             <p className="text-center text-white/50 text-[11px] tracking-widest mt-2.5">
-              {CONTACT.whatsapp.number} · {currentLocale === 'it' ? 'Risposta in 10 min' : 'Reply in 10 min'}
+              {CONTACT.whatsapp.number} · {tr(currentLocale, 'Reply in 10 min', 'Risposta in 10 min')}
             </p>
           </nav>
         </div>

@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -15,10 +16,8 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   
-  const title = locale === 'it' ? `Eventi Speciali e VIP a Milano | Nightlife Milan` : `Special & VIP Events in Milan | Nightlife Milan`;
-  const description = locale === 'it' 
-    ? `Scopri gli eventi più esclusivi, i party VIP e le serate speciali a Milano. Prenota il tuo tavolo per un'esperienza indimenticabile.` 
-    : `Discover the most exclusive events, VIP parties, and special nights in Milan. Book your table for an unforgettable experience.`;
+  const title = tr(locale, `Special & VIP Events in Milan | Nightlife Milan`, `Eventi Speciali e VIP a Milano | Nightlife Milan`);
+  const description = tr(locale, `Discover the most exclusive events, VIP parties, and special nights in Milan. Book your table for an unforgettable experience.`, `Scopri gli eventi più esclusivi, i party VIP e le serate speciali a Milano. Prenota il tuo tavolo per un'esperienza indimenticabile.`);
   
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const canonical = `${baseUrl}${localePrefix(locale)}/events/special`;
@@ -56,12 +55,10 @@ export default async function SpecialEventsPage({ params }: Props) {
   });
 
   const t = {
-    title: isIt ? `Eventi Speciali & VIP` : `Special & VIP Events`,
-    intro: isIt 
-      ? `L'apice della vita notturna milanese. Questa selezione curata rappresenta il meglio assoluto che la città ha da offrire. Da party privati esclusivi a serate con DJ internazionali di fama mondiale, questi eventi sono pensati per chi cerca un'esperienza senza compromessi. Preparati a vivere notti indimenticabili nei locali più prestigiosi, dove il lusso, la musica e l'atmosfera si fondono per creare ricordi indelebili.`
-      : `The pinnacle of Milanese nightlife. This curated selection represents the absolute best the city has to offer. From exclusive private parties to nights with world-renowned international DJs, these events are designed for those seeking an uncompromising experience. Get ready to live unforgettable nights in the most prestigious venues, where luxury, music, and atmosphere blend to create indelible memories.`,
-    gridTitle: isIt ? `Eventi Esclusivi` : `Exclusive Events`,
-    gridSubtitle: isIt ? 'La selezione premium per le tue serate' : 'The premium selection for your nights',
+    title: tr(locale, `Special & VIP Events`, `Eventi Speciali & VIP`),
+    intro: tr(locale, `The pinnacle of Milanese nightlife. This curated selection represents the absolute best the city has to offer. From exclusive private parties to nights with world-renowned international DJs, these events are designed for those seeking an uncompromising experience. Get ready to live unforgettable nights in the most prestigious venues, where luxury, music, and atmosphere blend to create indelible memories.`, `L'apice della vita notturna milanese. Questa selezione curata rappresenta il meglio assoluto che la città ha da offrire. Da party privati esclusivi a serate con DJ internazionali di fama mondiale, questi eventi sono pensati per chi cerca un'esperienza senza compromessi. Preparati a vivere notti indimenticabili nei locali più prestigiosi, dove il lusso, la musica e l'atmosfera si fondono per creare ricordi indelebili.`),
+    gridTitle: tr(locale, `Exclusive Events`, `Eventi Esclusivi`),
+    gridSubtitle: tr(locale, 'The premium selection for your nights', 'La selezione premium per le tue serate'),
   };
 
   return (
@@ -75,10 +72,10 @@ export default async function SpecialEventsPage({ params }: Props) {
               <span className="mx-2">/</span>
             </li>
             <li className="flex items-center">
-              <a href={`${lp}/events`} className="hover:text-champagne transition-colors">{isIt ? 'Eventi' : 'Events'}</a>
+              <a href={`${lp}/events`} className="hover:text-champagne transition-colors">{tr(locale, 'Events', 'Eventi')}</a>
               <span className="mx-2">/</span>
             </li>
-            <li className="text-champagne" aria-current="page">{isIt ? 'Speciali' : 'Special'}</li>
+            <li className="text-champagne" aria-current="page">{tr(locale, 'Special', 'Speciali')}</li>
           </ol>
         </nav>
       </div>
@@ -107,12 +104,12 @@ export default async function SpecialEventsPage({ params }: Props) {
         {/* Tags */}
         <div className="flex flex-wrap gap-2 mb-8">
           {[
-            isIt ? 'Eventi Speciali Milano' : 'Special Events Milan',
-            isIt ? 'Serate VIP' : 'VIP Nights Milan',
-            isIt ? 'Party Esclusivi' : 'Exclusive Parties',
+            tr(locale, 'Special Events Milan', 'Eventi Speciali Milano'),
+            tr(locale, 'VIP Nights Milan', 'Serate VIP'),
+            tr(locale, 'Exclusive Parties', 'Party Esclusivi'),
             'VIP Tables',
-            isIt ? 'Bottle Service' : 'Bottle Service Milan',
-            isIt ? 'DJ Internazionali' : 'International DJs Milan',
+            tr(locale, 'Bottle Service Milan', 'Bottle Service'),
+            tr(locale, 'International DJs Milan', 'DJ Internazionali'),
           ].map(tag => (
             <span key={tag} className="px-3 py-1.5 rounded-full border border-white/10 text-white/40 text-xs font-sans tracking-wider">
               {tag}
@@ -122,37 +119,31 @@ export default async function SpecialEventsPage({ params }: Props) {
 
         {/* H2: Why These Events Are Special */}
         <h2 className="font-serif text-3xl text-white mb-6">
-          {isIt ? 'Perché Questi Eventi Sono Unici' : 'Why These Events Are Different'}
+          {tr(locale, 'Why These Events Are Different', 'Perché Questi Eventi Sono Unici')}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
           <div className="p-6 rounded-lg border border-white/8 bg-white/[0.02]">
             <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-3">
-              {isIt ? 'DJ & Lineup' : 'DJ & Lineup'}
+              {tr(locale, 'DJ & Lineup', 'DJ & Lineup')}
             </h3>
             <p className="font-sans text-white/50 text-sm leading-relaxed">
-              {isIt
-                ? 'Solo artisti selezionati: da residenti ai più importanti DJ internazionali del momento. Ogni serata è una produzione a sé.'
-                : 'Only selected artists: from resident DJs to the most important international headliners. Each night is a production of its own.'}
+              {tr(locale, 'Only selected artists: from resident DJs to the most important international headliners. Each night is a production of its own.', 'Solo artisti selezionati: da residenti ai più importanti DJ internazionali del momento. Ogni serata è una produzione a sé.')}
             </p>
           </div>
           <div className="p-6 rounded-lg border border-white/8 bg-white/[0.02]">
             <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-3">
-              {isIt ? 'Location di Lusso' : 'Luxury Venues'}
+              {tr(locale, 'Luxury Venues', 'Location di Lusso')}
             </h3>
             <p className="font-sans text-white/50 text-sm leading-relaxed">
-              {isIt
-                ? 'Just Me Milano, Voya Rooftop, Pineta Milano e i club più esclusivi della città. Ambienti curati nei minimi dettagli.'
-                : 'Just Me Milano, Voya Rooftop, Pineta Milano and the most exclusive clubs in the city. Environments curated to the smallest detail.'}
+              {tr(locale, 'Just Me Milano, Voya Rooftop, Pineta Milano and the most exclusive clubs in the city. Environments curated to the smallest detail.', 'Just Me Milano, Voya Rooftop, Pineta Milano e i club più esclusivi della città. Ambienti curati nei minimi dettagli.')}
             </p>
           </div>
           <div className="p-6 rounded-lg border border-white/8 bg-white/[0.02]">
             <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-3">
-              {isIt ? 'VIP Table Garantita' : 'Guaranteed VIP Table'}
+              {tr(locale, 'Guaranteed VIP Table', 'VIP Table Garantita')}
             </h3>
             <p className="font-sans text-white/50 text-sm leading-relaxed">
-              {isIt
-                ? 'Prenotazione prioritaria, migliore posizione in sala, bottle service dedicato e ingresso riservato. Esperienza senza compromessi.'
-                : 'Priority booking, best position in the room, dedicated bottle service and reserved entry. Uncompromising experience.'}
+              {tr(locale, 'Priority booking, best position in the room, dedicated bottle service and reserved entry. Uncompromising experience.', 'Prenotazione prioritaria, migliore posizione in sala, bottle service dedicato e ingresso riservato. Esperienza senza compromessi.')}
             </p>
           </div>
         </div>
@@ -169,37 +160,31 @@ export default async function SpecialEventsPage({ params }: Props) {
       {/* H2: How to Book a Special Event */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/5">
         <h2 className="font-serif text-3xl text-white mb-8">
-          {isIt ? 'Come Prenotare un Evento Speciale a Milano' : 'How to Book a Special Event in Milan'}
+          {tr(locale, 'How to Book a Special Event in Milan', 'Come Prenotare un Evento Speciale a Milano')}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <div className="p-6 rounded-lg border border-white/8 bg-white/[0.02]">
             <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-3">
-              {isIt ? '1. Contattaci' : '1. Contact Us'}
+              {tr(locale, '1. Contact Us', '1. Contattaci')}
             </h3>
             <p className="font-sans text-white/50 text-sm leading-relaxed">
-              {isIt
-                ? 'WhatsApp +39 351 912 7047 o email. Dicci l\'evento, il numero di persone e le tue preferenze. Risposta in 10 minuti.'
-                : 'WhatsApp +39 351 912 7047 or email. Tell us the event, number of people and your preferences. Reply in 10 minutes.'}
+              {tr(locale, 'WhatsApp +39 351 912 7047 or email. Tell us the event, number of people and your preferences. Reply in 10 minutes.', 'WhatsApp +39 351 912 7047 o email. Dicci l\'evento, il numero di persone e le tue preferenze. Risposta in 10 minuti.')}
             </p>
           </div>
           <div className="p-6 rounded-lg border border-white/8 bg-white/[0.02]">
             <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-3">
-              {isIt ? '2. Scegliamo Insieme' : '2. We Choose Together'}
+              {tr(locale, '2. We Choose Together', '2. Scegliamo Insieme')}
             </h3>
             <p className="font-sans text-white/50 text-sm leading-relaxed">
-              {isIt
-                ? 'Ti proponiamo le opzioni migliori in base al budget e al tipo di serata. Tavoli VIP, guestlist o pacchetti completi.'
-                : 'We propose the best options based on budget and type of evening. VIP tables, guestlist or complete packages.'}
+              {tr(locale, 'We propose the best options based on budget and type of evening. VIP tables, guestlist or complete packages.', 'Ti proponiamo le opzioni migliori in base al budget e al tipo di serata. Tavoli VIP, guestlist o pacchetti completi.')}
             </p>
           </div>
           <div className="p-6 rounded-lg border border-white/8 bg-white/[0.02]">
             <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-3">
-              {isIt ? '3. Vivi la Serata' : '3. Enjoy the Night'}
+              {tr(locale, '3. Enjoy the Night', '3. Vivi la Serata')}
             </h3>
             <p className="font-sans text-white/50 text-sm leading-relaxed">
-              {isIt
-                ? 'Arrivi, il tuo tavolo è pronto. Il servizio è gestito direttamente dal locale. Noi restiamo disponibili per qualsiasi necessità.'
-                : 'You arrive, your table is ready. The service is managed directly by the venue. We remain available for any need.'}
+              {tr(locale, 'You arrive, your table is ready. The service is managed directly by the venue. We remain available for any need.', 'Arrivi, il tuo tavolo è pronto. Il servizio è gestito direttamente dal locale. Noi restiamo disponibili per qualsiasi necessità.')}
             </p>
           </div>
         </div>
@@ -223,19 +208,17 @@ export default async function SpecialEventsPage({ params }: Props) {
       {/* H2: Who Attends VIP Events in Milan */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/5">
         <h2 className="font-serif text-3xl text-white mb-6">
-          {isIt ? 'Chi Frequenta gli Eventi VIP a Milano' : 'Who Attends VIP Events in Milan'}
+          {tr(locale, 'Who Attends VIP Events in Milan', 'Chi Frequenta gli Eventi VIP a Milano')}
         </h2>
         <p className="text-white/40 mb-8 max-w-3xl">
-          {isIt
-            ? 'Gli eventi speciali di Milano attraggono una clientela internazionale: manager, imprenditori, modelle, celebrities e turisti di lusso. Il dress code è rigoroso e l\'ambiente è impeccabile.'
-            : 'Milan\'s special events attract an international clientele: managers, entrepreneurs, models, celebrities and luxury tourists. The dress code is strict and the atmosphere is impeccable.'}
+          {tr(locale, 'Milan\'s special events attract an international clientele: managers, entrepreneurs, models, celebrities and luxury tourists. The dress code is strict and the atmosphere is impeccable.', 'Gli eventi speciali di Milano attraggono una clientela internazionale: manager, imprenditori, modelle, celebrities e turisti di lusso. Il dress code è rigoroso e l\'ambiente è impeccabile.')}
         </p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[
-            { label: isIt ? 'Nazionalità' : 'Nationalities', value: '30+' },
-            { label: isIt ? 'Età Media' : 'Average Age', value: '25–40' },
-            { label: isIt ? 'Dress Code' : 'Dress Code', value: isIt ? 'Smart Elegante' : 'Smart Elegant' },
-            { label: isIt ? 'Spesa Media Tavolo' : 'Avg Table Spend', value: '€500+' },
+            { label: tr(locale, 'Nationalities', 'Nazionalità'), value: '30+' },
+            { label: tr(locale, 'Average Age', 'Età Media'), value: '25–40' },
+            { label: tr(locale, 'Dress Code', 'Dress Code'), value: tr(locale, 'Smart Elegant', 'Smart Elegante') },
+            { label: tr(locale, 'Avg Table Spend', 'Spesa Media Tavolo'), value: '€500+' },
           ].map((stat, i) => (
             <div key={i} className="p-5 rounded-xl border border-white/8 bg-white/[0.02] text-center">
               <p className="font-serif text-2xl text-champagne mb-1">{stat.value}</p>
@@ -250,15 +233,15 @@ export default async function SpecialEventsPage({ params }: Props) {
         <div className="flex flex-wrap justify-center gap-4">
           <Link href={`${lp}/vip-tables`}
             className="px-6 py-3 rounded-full border border-champagne/30 text-champagne text-sm font-medium tracking-wider hover:bg-champagne hover:text-black transition-colors">
-            {isIt ? 'VIP Tables' : 'VIP Tables Guide'}
+            {tr(locale, 'VIP Tables Guide', 'VIP Tables')}
           </Link>
           <Link href={`${lp}/concierge`}
             className="px-6 py-3 rounded-full border border-white/20 text-white text-sm font-medium tracking-wider hover:border-champagne hover:text-champagne transition-colors">
-            {isIt ? 'Servizio Concierge' : 'Concierge Service'}
+            {tr(locale, 'Concierge Service', 'Servizio Concierge')}
           </Link>
           <Link href={`${lp}/calendar/this-week`}
             className="px-6 py-3 rounded-full border border-white/20 text-white text-sm font-medium tracking-wider hover:border-champagne hover:text-champagne transition-colors">
-            {isIt ? 'Tutti gli Eventi' : 'All Events'}
+            {tr(locale, 'All Events', 'Tutti gli Eventi')}
           </Link>
         </div>
       </section>

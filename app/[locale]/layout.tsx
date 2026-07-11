@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import { tr } from '@/lib/i18n/t';
 import { Montserrat, Cormorant_Garamond, Noto_Sans_SC, Noto_Naskh_Arabic } from 'next/font/google';
 import dynamic from 'next/dynamic';
 import { notFound } from 'next/navigation';
@@ -67,12 +68,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const ogImage = `${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`;
   const localeDef = getLocaleDef(locale) || getLocaleDef(DEFAULT_LOCALE)!;
 
-  const title = isIt
-    ? 'Nightlife Milan — Migliori Club, Tavoli VIP & Aperitivo Milano 2026'
-    : 'Nightlife Milan — Best Clubs, VIP Tables & Aperitivo Guide Milan 2026';
-  const description = isIt
-    ? 'La guida definitiva alla vita notturna milanese. Prenota tavoli VIP, scopri i migliori club, aperitivo e bottle service a Milano. Concierge WhatsApp h24.'
-    : 'The ultimate guide to Milan nightlife. Book VIP tables, discover the best clubs, aperitivo spots and bottle service. WhatsApp concierge 24/7. Trusted by 50,000+ visitors.';
+  const title = tr(locale, 'Nightlife Milan — Best Clubs, VIP Tables & Aperitivo Guide Milan 2026', 'Nightlife Milan — Migliori Club, Tavoli VIP & Aperitivo Milano 2026');
+  const description = tr(locale, 'The ultimate guide to Milan nightlife. Book VIP tables, discover the best clubs, aperitivo spots and bottle service. WhatsApp concierge 24/7. Trusted by 50,000+ visitors.', 'La guida definitiva alla vita notturna milanese. Prenota tavoli VIP, scopri i migliori club, aperitivo e bottle service a Milano. Concierge WhatsApp h24.');
 
   return {
     metadataBase: new URL(baseUrl),
@@ -97,7 +94,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       siteName: 'Nightlife Milan',
       locale: localeDef.ogLocale,
       type: 'website',
-      images: [{ url: ogImage, width: 1200, height: 630, alt: isIt ? 'Nightlife Milano — Club Esclusivi' : 'Nightlife Milan — Exclusive Clubs & VIP Tables' }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: tr(locale, 'Nightlife Milan — Exclusive Clubs & VIP Tables', 'Nightlife Milano — Club Esclusivi') }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -156,9 +153,7 @@ export default async function RootLayout({
       contactOption: 'TollFree',
     },
     areaServed: { '@type': 'City', name: 'Milan', sameAs: 'https://www.wikidata.org/wiki/Q490' },
-    description: isIt
-      ? 'La guida definitiva alla vita notturna milanese. Tavoli VIP, aperitivo, concierge WhatsApp.'
-      : 'The ultimate guide to Milan nightlife. VIP tables, aperitivo, WhatsApp concierge.',
+    description: tr(locale, 'The ultimate guide to Milan nightlife. VIP tables, aperitivo, WhatsApp concierge.', 'La guida definitiva alla vita notturna milanese. Tavoli VIP, aperitivo, concierge WhatsApp.'),
   };
 
   const websiteSchema = {
