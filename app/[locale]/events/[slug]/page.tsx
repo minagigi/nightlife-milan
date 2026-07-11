@@ -24,16 +24,8 @@ import MoreVenueEvents, { MoreVenueEventItem } from '@/components/MoreVenueEvent
  * undefined produceva notFound(), e Next cacheava quel 404 per l'intera
  * finestra ISR (bug reale: bandierina IT → 404 su pagina esistente). */
 async function getEbEventBySlug(slug: string): Promise<Event | undefined> {
-  // Prima i futuri (fetch leggero current_future): copre la stragrande
-  // maggioranza delle visite. Solo se non trovato si tenta il fetch
-  // past-inclusive (più pesante) per non far sparire le pagine dei passati.
-  let events = await fetchEventbriteEvents();
-  let hit = events.find((ev) => ev.localizedContent.slug.en === slug || ev.localizedContent.slug.it === slug);
-  if (!hit) {
-    events = await fetchEventbriteEvents(true);
-    hit = events.find((ev) => ev.localizedContent.slug.en === slug || ev.localizedContent.slug.it === slug);
-  }
-  return hit;
+  const events = await fetchEventbriteEvents();
+  return events.find((ev) => ev.localizedContent.slug.en === slug || ev.localizedContent.slug.it === slug);
 }
 
 const FALLBACK_GALLERY = [
@@ -437,7 +429,11 @@ export default async function EventPage({ params }: Props) {
   // blob non risponde, si legge da lì — e nella lingua giusta (listing tradotti).
   // Usa lo slug dell'URL (= slug-en nei marker Eventbrite), non event.slug.en:
   // per alcuni eventi con duplicato scout i due divergono e il match fallirebbe.
-  const goldHtml = richContent ? null : await getEventGoldHtml(slug, locale);
+  // getEventGoldHtml DISATTIVATO temporaneamente: con >250 listing tradotti la
+  // fetch dell'intera org a ogni render era troppo lenta (timeout). Il gold per
+  // il sito verrà da un archivio committato nel repo, veloce e permanente.
+  const goldHtml: string | null = null;
+  void getEventGoldHtml;
 
   // Internal linking: "More events at {venue}" — riusa la sorgente dati
   // unificata già usata da homepage/calendar (statici + Eventbrite/Xceed
