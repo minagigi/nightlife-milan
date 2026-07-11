@@ -264,7 +264,7 @@ function shortDescFromText(text: string | undefined, fallback: string): string {
  * sync) degradano a [], la pagina evento propaga l'errore (500 non
  * cacheato) invece di un 404 cacheabile.
  */
-const FETCH_RETRIES = 3;
+const FETCH_RETRIES = 1;
 const FETCH_RETRY_DELAY_MS = 700;
 
 /**
