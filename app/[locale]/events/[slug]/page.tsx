@@ -79,11 +79,11 @@ function buildVenueGalleryImages(venue: Venue, eventTitle: string, locale: strin
 }
 
 // ISR Configuration (1 hour)
-// force-dynamic (2026-07-11): l'ISR serviva un notFound cacheato sugli eventi
-// futuri (non trovati finché la fetch org non è stata paginata) che revalidatePath
-// non ripuliva. Reso dinamico → ogni richiesta esegue il codice aggiornato, trova
-// l'evento e mostra il contenuto gold. La fetch org è comunque in cache (5min).
-export const dynamic = 'force-dynamic';
+// ISR (revalidate): la pagina è cacheata → il fetch pesante dei ~260 listing
+// Eventbrite (risoluzione evento + contenuto gold) avviene solo alla rigenerazione,
+// NON a ogni visita (force-dynamic rendeva ogni richiesta lentissima/timeout).
+// revalidate breve + maxDuration alto per la prima generazione on-demand.
+export const revalidate = 600;
 export const maxDuration = 60;
 
 type Props = {
