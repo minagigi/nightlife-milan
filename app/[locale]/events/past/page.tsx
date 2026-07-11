@@ -43,6 +43,7 @@ export default async function PastEventsPage({ params }: Props) {
   const { locale } = await params;
   const lp = localePrefix(locale);
   const todayKey = romeDayKeyOffset(0);
+  const yesterdayKey = romeDayKeyOffset(-1);
 
   let live: Event[] = [];
   try {
@@ -55,10 +56,15 @@ export default async function PastEventsPage({ params }: Props) {
   // Unione con i mockEvents (eventi one-off statici) senza duplicare.
   const all: Event[] = [...live, ...mockEvents.filter((m) => !live.some((l) => l.id === m.id))];
 
-  // "Passato" = data < oggi (fuso Roma) → parte dagli eventi di IERI a ritroso,
-  // ordine dal più recente al più vecchio.
+  // La sezione "Eventi passati" mostra SOLO la serata di ieri (da ieri sera in poi):
+  // >= ieri e < oggi nel fuso di Roma. Gli eventi PRECEDENTI a ieri sera NON
+  // compaiono qui — ma le loro pagine restano online e indicizzate (sitemap +
+  // route evento con fallback su include-past): i link esistono, fuori dalla lista.
   const past = all
-    .filter((e) => romeDayKey(e.dateISO) < todayKey)
+    .filter((e) => {
+      const k = romeDayKey(e.dateISO);
+      return k >= yesterdayKey && k < todayKey;
+    })
     .sort((a, b) => (a.dateISO < b.dateISO ? 1 : -1));
 
   const items = past
