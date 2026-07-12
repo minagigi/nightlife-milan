@@ -1,6 +1,6 @@
 # CLAUDE.md — Nightlife Milan
 
-**Next.js 15 App Router · Multilingual EN/IT · Milan nightlife guide**
+**Next.js 15 App Router · Multilingual ~35 locales (EN default) · Milan nightlife guide**
 
 ---
 
@@ -25,7 +25,7 @@
 ## Tech Stack
 
 - **Framework**: Next.js 15.5 App Router, TypeScript
-- **Routing**: `app/[locale]/` — locales: `en` (default, no prefix), `it`
+- **Routing**: `app/[locale]/` — ~35 locales defined in `lib/i18n/locales.ts` (source of truth; `en` default, no prefix). ALL enabled locales are indexed — every new page/content must cover all of them.
 - **Middleware**: strips `/en/` prefix → rewrites to `/en/` internally
 - **Styling**: Tailwind CSS
 - **Data**: static files in `lib/` (no database)
@@ -116,4 +116,4 @@ Strategia completa: `docs/analytics-strategy.md`. Dashboard su `/analytics` prot
 
 ---
 
-**Last Updated**: 2026-07-09
+**Last Updated**: 2026-07-12

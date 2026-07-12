@@ -3,9 +3,9 @@
 
 # Il Cervello in locale su Windows
 
-Il cervello ora gira sul tuo PC invece che in cloud: stessi protocolli (BRAIN.md), stessi
-orari, ma le sessioni partono dall'Utilità di pianificazione di Windows e possono usare
-tutto ciò che c'è sul PC. **Le 4 routine cloud sono state disattivate** per evitare doppie
+Con questo kit il cervello gira sul tuo PC invece che in cloud: stessi protocolli (BRAIN.md),
+stessi orari, ma le sessioni partono dall'Utilità di pianificazione di Windows e possono usare
+tutto ciò che c'è sul PC. Prima di installarlo, disattiva le 4 routine cloud per evitare doppie
 esecuzioni (riattivabili in qualsiasi momento, vedi in fondo).
 
 Bonus: gli orari sono in **ora locale del PC** — il problema del fuso UTC e del cambio

@@ -9,12 +9,13 @@ abilitato nell'ambiente delle Routine (l'accesso GitHub è per-repo).
 ## 1. Nightlife Milan — sito (nightlife-milan)
 
 - **Repo**: `minagigi/nightlife-milan` · branch di produzione: `main` · deploy: Vercel
-- **Cos'è**: guida ai locali notturni di Milano, Next.js 15 App Router, bilingue EN/IT
-  (EN default senza prefisso, IT con `/it/`). Dati statici in `lib/` (niente database).
+- **Cos'è**: guida ai locali notturni di Milano, Next.js 15 App Router, multilingue ~35 locali
+  secondo `lib/i18n/locales.ts` (fonte di verità; EN default senza prefisso), tutti indicizzati.
+  Dati statici in `lib/` (niente database).
 - **Obiettivo**: crescere il traffico organico SEO e la qualità dei contenuti; il sito deve
-  essere veloce, indicizzabile e sempre coerente EN/IT.
-- **Metriche da osservare**: build verde, pagine venue/eventi complete nei due locali, schema.org
-  valido (Event, FAQPage), Core Web Vitals ragionevoli.
+  essere veloce, indicizzabile e sempre coerente in tutte le lingue.
+- **Metriche da osservare**: build verde, pagine venue/eventi complete in tutte le lingue abilitate
+  (`npm run verify` / build verde), schema.org valido (Event, FAQPage), Core Web Vitals ragionevoli.
 - **Aree di evoluzione tipiche**: copertura contenuti IT/EN, SEO on-page, internal linking,
   performance, refactoring componenti, accessibilità.
 
@@ -24,7 +25,9 @@ abilitato nell'ambiente delle Routine (l'accesso GitHub è per-repo).
   `app/api/events/import/route.ts` · cron Vercel 02:00 UTC · 15 venue non-Xceed.
 - **Obiettivo**: importare e riscrivere eventi in formato gold-standard senza duplicati né
   regressioni sulle regole Eventbrite (vedi CLAUDE.md di root: NIENTE EMOJI nelle description,
-  tetto ~1.000-1.300 caratteri, `music_properties` solo dopo il publish, ecc.).
+  budget cautelativo `DESCRIPTION_SAFE_BUDGET = 16.000` caratteri in `lib/eventRewriter.ts` (il
+  vero vincolo è niente emoji/`<img>`/`<br/>`, non la lunghezza), `music_properties` solo dopo il
+  publish, ecc.).
 - **Metriche**: eventi importati/giorno senza duplicati, description integre, marker `nlm:src=`
   presenti, zero eventi evergreen importati per errore.
 
@@ -45,4 +48,4 @@ abilitato nell'ambiente delle Routine (l'accesso GitHub è per-repo).
 - Audit SEO periodico delle pagine evento generate (title/description/schema).
 - Monitoraggio qualità delle description Eventbrite pubblicate (troncamenti, emoji sfuggite).
 - Test automatici sulle funzioni critiche (`normalizeAlreadyUtc`, `sanitize`, dedupe ledger).
-- Copertura IT dei contenuti generati solo in EN (o viceversa).
+- Copertura di tutte le lingue abilitate per i contenuti generati (evitare pagine solo in EN/IT).
