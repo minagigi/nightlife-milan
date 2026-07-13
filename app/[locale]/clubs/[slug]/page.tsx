@@ -6,10 +6,10 @@ import Link from 'next/link';
 import { MapPin, Clock, Shirt, MessageCircle, Star, Calendar, ArrowLeft, Music, Wine, Utensils, ShieldCheck, Check, CreditCard } from 'lucide-react';
 import { getDictionary } from '../../../../dictionaries/get-dictionary';
 import { CONTACT } from '@/config/contact';
-import { getVenueBySlug, getEventsByVenueId, mockVenues } from '@/lib/data';
+import { getVenueBySlug, mockVenues } from '@/lib/data';
 import { VenueCategory } from '@/lib/types';
 import { getLocalizedText } from '@/lib/seo';
-import { romeDayKey, romeNextMondayKey } from '@/lib/calendarEvents';
+import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
 import WeeklyProgram from '@/components/WeeklyProgram';
 
 export const revalidate = 3600;
@@ -332,13 +332,21 @@ export default async function ClubPage({ params }: Props) {
   const servicesTags = venue.tags || [venue.category];
   
   const lp = localePrefix(locale);
-  const mondayKey = romeNextMondayKey();
-  const venueEvents = getEventsByVenueId(venue.id);
+  // Bug fix: prima leggeva SOLO mockEvents (mai gli eventi reali Xceed/Eventbrite)
+  // e usava "prossimo lunedì" come confine upcoming/past, il che etichettava come
+  // "passati" gli eventi di questa stessa settimana nei giorni diversi da lunedì.
+  // Ora usa la stessa fonte unificata della pagina evento (getAllCalendarEvents)
+  // e lo stesso confine "oggi" (isUpcomingRome) usato altrove nel sito.
+  const venueEvents = (await getAllCalendarEvents())
+    // Le serate ricorrenti settimanali sono già mostrate a parte da
+    // WeeklyProgram più sotto — escluse qui per non duplicarle.
+    .filter((item) => item.event.venueId === venue.id && !item.event.id.startsWith('weekly-'))
+    .map((item) => item.event);
   const futureVenueEvents = venueEvents
-    .filter((e) => romeDayKey(e.dateISO) >= mondayKey)
+    .filter((e) => isUpcomingRome(e.dateISO))
     .sort((a, b) => new Date(a.dateISO).getTime() - new Date(b.dateISO).getTime());
   const pastVenueEvents = venueEvents
-    .filter((e) => romeDayKey(e.dateISO) < mondayKey)
+    .filter((e) => !isUpcomingRome(e.dateISO))
     .sort((a, b) => new Date(b.dateISO).getTime() - new Date(a.dateISO).getTime());
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';

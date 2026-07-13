@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { MapPin, ArrowUpRight } from 'lucide-react';
 import FavoriteButton from './FavoriteButton';
+import { localePrefix } from '@/lib/i18n/locales';
 
 export interface VenueProps {
   id: string;
@@ -40,7 +41,7 @@ export default function VenueCard({
   lang = 'en',
   customUrl,
 }: VenueProps) {
-  const href = customUrl || `/${lang}/clubs/${slug || id}`;
+  const href = customUrl || `${localePrefix(lang)}/clubs/${slug || id}`;
 
   return (
     <div

@@ -1301,9 +1301,14 @@ export const getEvents = (): Event[] => {
 };
 
 export const getEventBySlug = (slug: string, lang: string): Event | undefined => {
-  return mockEvents.find(e => 
-    (lang === 'it' && e.localizedContent.slug.it === slug) || 
-    e.localizedContent.slug.en === slug
+  // Bug fix: prima lo slug.it veniva riconosciuto solo con lang==='it'. Il
+  // language switcher (Header/LanguageSwitcher) mantiene lo slug invariato
+  // cambiando solo il prefisso lingua — passando da /it/events/{slug-it} a
+  // qualsiasi altra lingua si otteneva un 404 perché slug.it non veniva più
+  // controllato. Ora riconosce entrambi gli slug a prescindere da lang.
+  return mockEvents.find(e =>
+    e.localizedContent.slug.en === slug ||
+    e.localizedContent.slug.it === slug
   );
 };
 
@@ -1482,9 +1487,10 @@ for (const guide of mockGuides) {
 }
 
 export const getGuideBySlug = (slug: string, lang: string): Guide | undefined => {
-  return mockGuides.find(g => 
-    (lang === 'it' && g.slugs.it === slug) || 
-    g.slugs.en === slug
+  // Stesso bug fix di getEventBySlug: riconosce entrambi gli slug a prescindere da lang.
+  return mockGuides.find(g =>
+    g.slugs.en === slug ||
+    g.slugs.it === slug
   );
 };
 

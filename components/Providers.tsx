@@ -8,11 +8,11 @@ import { FavoritesProvider } from './FavoritesContext';
 // it's a closed-by-default overlay, never needed for the initial paint.
 const FavoritesDrawer = dynamic(() => import('./FavoritesDrawer'));
 
-export function Providers({ children }: { children: React.ReactNode }) {
+export function Providers({ children, lang }: { children: React.ReactNode; lang: string }) {
   return (
     <FavoritesProvider>
       {children}
-      <FavoritesDrawer lang="en" />
+      <FavoritesDrawer lang={lang} />
     </FavoritesProvider>
   );
 }

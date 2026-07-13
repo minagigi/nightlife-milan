@@ -6,6 +6,7 @@ import { MessageCircle } from 'lucide-react';
 import { CONTACT } from '@/config/contact';
 import { mockVenues, mockEvents } from '@/lib/data';
 import { weeklyEvents } from '@/lib/eventsConfig';
+import { localePrefix } from '@/lib/i18n/locales';
 
 export default function MobileBottomBar({ currentLocale }: { currentLocale: string }) {
   const pathname = usePathname();
@@ -15,8 +16,11 @@ export default function MobileBottomBar({ currentLocale }: { currentLocale: stri
   // Hide on the booking success page (conversion already complete)
   if (pathname?.includes('/booking/success')) return null;
 
-  // Strip the /it prefix and split into segments
-  const stripped = (pathname || '/').replace(/^\/it(?=\/|$)/, '') || '/';
+  // Strip the current locale's prefix (bug fix: prima toglieva solo '/it',
+  // quindi su qualsiasi altra lingua seg[0] restava il codice lingua e il
+  // lookup contestuale venue/evento falliva sempre) e split into segments.
+  const lp = localePrefix(currentLocale);
+  const stripped = (lp && pathname?.startsWith(lp) ? pathname.slice(lp.length) : pathname) || '/';
   const seg = stripped.split('/').filter(Boolean); // e.g. ['clubs', 'just-me-milano']
 
   // Resolve the venue/event currently being viewed so the CTA is contextual

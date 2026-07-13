@@ -14,16 +14,20 @@ interface IntentCard {
   isGold?: boolean;
 }
 
-export default function IntentCards({ locale }: { locale: 'en' | 'it' }) {
+export default function IntentCards({ locale }: { locale: string }) {
+  // Prefisso URL sempre dalla locale REALE (bug fix: prima veniva collassata a
+  // 'en'/'it' a monte, facendo puntare queste card sempre allo spazio inglese
+  // senza prefisso per tutte le altre 33 lingue).
   const lp = locale === 'en' ? '' : `/${locale}`;
+  const isIt = locale === 'it';
   const waMsg = encodeURIComponent(
-    locale === 'it'
+    isIt
       ? "Ciao! Vorrei prenotare un tavolo VIP a Milano. Puoi aiutarmi?"
       : "Hi! I'd like to book a VIP table in Milan tonight. Can you help me?"
   );
   const waLink = `${CONTACT.whatsapp.link}?text=${waMsg}`;
 
-  const cards: IntentCard[] = locale === 'it'
+  const cards: IntentCard[] = isIt
     ? [
         { icon: <Gem className="w-5 h-5" />, title: 'Tavolo VIP', subtitle: 'Bottle service nei migliori club', href: `${lp}/vip-tables`, isGold: true },
         { icon: <Music2 className="w-5 h-5" />, title: 'Ballare Stasera', subtitle: 'Migliori club e DJ set', href: `${lp}/clubs` },

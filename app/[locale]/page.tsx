@@ -208,7 +208,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         <Hero locale={locale} />
 
         {/* ── 2. Intent cards ──────────────────────────────────────────── */}
-        <IntentCards locale={locale === 'it' ? 'it' : 'en'} />
+        <IntentCards locale={locale} />
 
         {/* ── 3. How the night works (context before events) ───────────── */}
         <section className="py-24 sm:py-28 px-4 sm:px-6 lg:px-8 w-full border-t border-white/5 bg-surface-1">
