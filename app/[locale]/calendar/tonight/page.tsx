@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Calendar, Clock, MapPin } from 'lucide-react';
 import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset } from '@/lib/calendarEvents';
+import { buildOfferSchema } from '@/lib/seo';
 import type { Event, Venue } from '@/lib/types';
 
 export const dynamic = 'force-dynamic';
@@ -103,36 +104,35 @@ export default async function TonightPage({ params }: Props) {
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const lp = localePrefix(locale);
-  const eventSchemas = [...items, ...tomorrowItems].map(({ event, venue }) => ({
-    '@context': 'https://schema.org',
-    '@type': 'Event',
-    'name': event.localizedContent?.title?.en || `${venue ? venue.localizedContent?.name?.en || 'Club' : 'Club'} Milan Tonight`,
-    'startDate': event.dateISO,
-    'endDate': (() => { const d = new Date(event.dateISO); d.setHours(d.getHours() + 5); return d.toISOString(); })(),
-    'location': venue ? {
-      '@type': 'Place',
-      'name': venue.localizedContent?.name?.en || 'Milan Club',
-      'address': {
-        '@type': 'PostalAddress',
-        'streetAddress': venue.address?.streetAddress,
-        'addressLocality': 'Milan',
-        'addressCountry': 'IT',
-      },
-    } : { '@type': 'Place', 'name': 'Milan', 'address': { '@type': 'PostalAddress', 'addressLocality': 'Milan', 'addressCountry': 'IT' } },
-    'organizer': { '@type': 'Organization', 'name': 'Nightlife Milan', 'url': baseUrl },
-    'url': (() => {
-      const slug = locale === 'it' ? event.localizedContent?.slug?.it : event.localizedContent?.slug?.en;
-      return slug ? `${baseUrl}${lp}/events/${slug}` : `${baseUrl}${lp}/calendar/tonight`;
-    })(),
-    'eventStatus': 'https://schema.org/EventScheduled',
-    'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode',
-    'offers': {
-      '@type': 'Offer',
-      'availability': 'https://schema.org/InStock',
-      'url': `https://wa.me/393519127047?text=${encodeURIComponent('Hi! I want to book for tonight in Milan.')}`,
-      'seller': { '@type': 'Organization', 'name': 'Nightlife Milan' },
-    },
-  }));
+  const eventSchemas = [...items, ...tomorrowItems].map(({ event, venue }) => {
+    const bookingUrl = `https://wa.me/393519127047?text=${encodeURIComponent('Hi! I want to book for tonight in Milan.')}`;
+    const offer = buildOfferSchema(event.pricing, bookingUrl, event.dateISO);
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'Event',
+      'name': event.localizedContent?.title?.en || `${venue ? venue.localizedContent?.name?.en || 'Club' : 'Club'} Milan Tonight`,
+      'startDate': event.dateISO,
+      'endDate': (() => { const d = new Date(event.dateISO); d.setHours(d.getHours() + 5); return d.toISOString(); })(),
+      'location': venue ? {
+        '@type': 'Place',
+        'name': venue.localizedContent?.name?.en || 'Milan Club',
+        'address': {
+          '@type': 'PostalAddress',
+          'streetAddress': venue.address?.streetAddress,
+          'addressLocality': 'Milan',
+          'addressCountry': 'IT',
+        },
+      } : { '@type': 'Place', 'name': 'Milan', 'address': { '@type': 'PostalAddress', 'addressLocality': 'Milan', 'addressCountry': 'IT' } },
+      'organizer': { '@type': 'Organization', 'name': 'Nightlife Milan', 'url': baseUrl },
+      'url': (() => {
+        const slug = locale === 'it' ? event.localizedContent?.slug?.it : event.localizedContent?.slug?.en;
+        return slug ? `${baseUrl}${lp}/events/${slug}` : `${baseUrl}${lp}/calendar/tonight`;
+      })(),
+      'eventStatus': 'https://schema.org/EventScheduled',
+      'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode',
+      ...(offer ? { offers: { ...offer, seller: { '@type': 'Organization', name: 'Nightlife Milan' } } } : {}),
+    };
+  });
 
   const t = {
     title: tr(locale, `The Timeline`, `La Timeline`),

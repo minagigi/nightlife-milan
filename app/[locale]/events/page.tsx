@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
-import { getLocalizedText } from '@/lib/seo';
+import { getLocalizedText, buildOfferSchema } from '@/lib/seo';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
@@ -94,25 +94,30 @@ export default async function EventsHubPage({ params }: Props) {
     name: tr(locale, 'Milan Events 2026', 'Eventi Milano 2026'),
     description: tr(locale, 'Complete list of nightlife events in Milan', 'Lista completa degli eventi notturni a Milano'),
     numberOfItems: items.length,
-    itemListElement: items.slice(0, 10).map((item, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      item: {
-        '@type': 'Event',
-        name: getLocalizedText(item.event.localizedContent.title, locale),
-        startDate: item.event.dateISO,
-        location: {
-          '@type': 'Place',
-          name: getLocalizedText(item.venue.localizedContent.name, locale),
-          address: {
-            '@type': 'PostalAddress',
-            addressLocality: 'Milan',
-            addressCountry: 'IT',
+    itemListElement: items.slice(0, 10).map((item, i) => {
+      const eventUrl = `${baseUrl}${lp}/events/${getLocalizedText(item.event.localizedContent.slug, locale)}`;
+      const offer = buildOfferSchema(item.event.pricing, eventUrl, item.event.dateISO);
+      return {
+        '@type': 'ListItem',
+        position: i + 1,
+        item: {
+          '@type': 'Event',
+          name: getLocalizedText(item.event.localizedContent.title, locale),
+          startDate: item.event.dateISO,
+          location: {
+            '@type': 'Place',
+            name: getLocalizedText(item.venue.localizedContent.name, locale),
+            address: {
+              '@type': 'PostalAddress',
+              addressLocality: 'Milan',
+              addressCountry: 'IT',
+            },
           },
+          url: eventUrl,
+          ...(offer ? { offers: offer } : {}),
         },
-        url: `${baseUrl}${lp}/events/${getLocalizedText(item.event.localizedContent.slug, locale)}`,
-      },
-    })),
+      };
+    }),
   };
 
   const t = {

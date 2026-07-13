@@ -33,9 +33,10 @@ async function main() {
   const posterPath = argValue('poster');
   const posterContentType = argValue('poster-content-type', 'image/jpeg')!;
   const posterSource = argValue('poster-source', 'poster-clean')!;
+  const langsArg = argValue('langs'); // e.g. "en" or "en,it" — server intersects with the real ledger-missing set regardless
 
   if (!candidatePath || !rewrittenPath || !posterPath) {
-    throw new Error('Usage: --candidate candidate.json --rewritten rewritten.json --poster poster.jpg [--poster-content-type image/jpeg] [--poster-source poster-clean]');
+    throw new Error('Usage: --candidate candidate.json --rewritten rewritten.json --poster poster.jpg [--poster-content-type image/jpeg] [--poster-source poster-clean] [--langs en,it]');
   }
 
   const { source, candidate } = JSON.parse(readFileSync(candidatePath, 'utf-8'));
@@ -53,6 +54,7 @@ async function main() {
       posterBase64, posterContentType,
       posterFilename: `${rewritten.imageSlug}.jpg`,
       posterSource,
+      ...(langsArg ? { langsToPublish: langsArg.split(',').map((s) => s.trim()) } : {}),
     }),
   });
 

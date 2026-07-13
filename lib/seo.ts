@@ -79,19 +79,38 @@ export const generateEventSchema = (
 
   // Offers Schema (Pricing) — solo se abbiamo un prezzo reale confermato.
   // Un Offer con un prezzo inventato/sbagliato è peggio di nessun Offer.
-  if (event.pricing.entry !== null) {
-    schema.offers = {
-      '@type': 'Offer',
-      price: event.pricing.entry,
-      priceCurrency: event.pricing.currency,
-      availability: 'https://schema.org/InStock',
-      url: eventUrl, // Assuming tickets are bought on the event page or linked from there
-      validFrom: event.dateISO,
-    };
-  }
+  const offer = buildOfferSchema(event.pricing, eventUrl, event.dateISO);
+  if (offer) schema.offers = offer;
 
   return schema;
 };
+
+/**
+ * Offer reale a partire dai soli dati di pricing confermati sull'evento —
+ * mai un prezzo inventato. `entry` (ticket reale) ha priorità; se assente
+ * (es. eventi Eventbrite: il ticket lì è sempre RSVP gratuito di comodo,
+ * mai il vero prezzo — vedi commento su Event['pricing']) si usa
+ * `tableMinSpend` come prezzo "a partire da" quando è un dato reale
+ * confermato. Se nessuno dei due è disponibile, niente Offer — evita il
+ * campo "offers" mancante segnalato da Search Console senza fabbricare un
+ * numero. Riusata da tutte le pagine che emettono schema.org Event.
+ */
+export function buildOfferSchema(
+  pricing: { entry: number | null; currency: 'EUR'; tableMinSpend: number | null },
+  url: string,
+  validFrom?: string
+): Record<string, unknown> | null {
+  const price = pricing.entry ?? pricing.tableMinSpend;
+  if (price === null || price === undefined) return null;
+  return {
+    '@type': 'Offer',
+    price,
+    priceCurrency: pricing.currency,
+    availability: 'https://schema.org/InStock',
+    url,
+    ...(validFrom ? { validFrom } : {}),
+  };
+}
 
 // Generate BreadcrumbList JSON-LD Schema
 export const generateBreadcrumbSchema = (

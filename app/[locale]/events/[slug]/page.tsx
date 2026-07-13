@@ -267,12 +267,28 @@ export default async function EventPage({ params }: Props) {
           addressCountry: 'IT'
         }
       },
-      offers: {
-        '@type': 'Offer',
-        url: weeklyEvent.xceedLink || `https://wa.me/393519127047?text=Booking%20for%20${weeklyEvent.name}`,
-        price: weeklyEvent.pricing.club.replace(/[^0-9]/g, '') || '15',
-        priceCurrency: 'EUR'
-      },
+      // Prezzo reale dalle stringhe pricing ("From €15" -> 15, "Free Entry..." ->
+      // 0): mai un fallback fabbricato — se non si riesce a leggere un numero
+      // reale né un "free" esplicito, niente offers piuttosto che un prezzo finto.
+      ...(() => {
+        const parsePriceEUR = (s?: string): number | null => {
+          if (!s) return null;
+          if (/free/i.test(s)) return 0;
+          const digits = s.replace(/[^0-9]/g, '');
+          return digits ? parseInt(digits, 10) : null;
+        };
+        const price = parsePriceEUR(weeklyEvent.pricing.club) ?? parsePriceEUR(weeklyEvent.pricing.aperitif);
+        if (price === null) return {};
+        return {
+          offers: {
+            '@type': 'Offer',
+            url: weeklyEvent.xceedLink || `https://wa.me/393519127047?text=Booking%20for%20${weeklyEvent.name}`,
+            price,
+            priceCurrency: 'EUR',
+            availability: 'https://schema.org/InStock',
+          },
+        };
+      })(),
       organizer: {
         '@type': 'Organization',
         name: 'Nightlife Milan',
