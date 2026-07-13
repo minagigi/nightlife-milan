@@ -1,5 +1,6 @@
 import { Event, Venue, Performer, MusicGenre, MilanZone, VenueCategory, Guide, Zone } from '@/lib/types';
 import { MOCK_EVENT_I18N } from '@/lib/mockEventI18n';
+import { GUIDE_I18N } from '@/lib/guideI18n.generated';
 
 // Mock Data for Zones
 export const mockZones: Zone[] = [
@@ -1453,6 +1454,32 @@ export const mockGuides: Guide[] = [
     ]
   }
 ];
+
+// Unione delle traduzioni articoli (33 lingue mancanti, generate in-sessione)
+// nei campi localizzati di ogni guida: titolo/estratto/sezioni/FAQ nella lingua
+// selezionata su tutte le 35 lingue (prima solo en/it -> fallback inglese).
+for (const guide of mockGuides) {
+  const fields = GUIDE_I18N[guide.slugs.en];
+  if (!fields) continue;
+  const applyField = (target: Record<string, string> | undefined, key: string) => {
+    const translations = fields[key];
+    if (!target || !translations) return;
+    for (const lang of Object.keys(translations)) {
+      const text = translations[lang as keyof typeof translations];
+      if (text) target[lang] = text;
+    }
+  };
+  applyField(guide.title as Record<string, string>, 'title');
+  applyField(guide.excerpt as Record<string, string>, 'excerpt');
+  (guide.sections || []).forEach((s) => {
+    applyField(s.heading as Record<string, string>, `sec.${s.id}.heading`);
+    applyField(s.content as Record<string, string>, `sec.${s.id}.content`);
+  });
+  (guide.faqs || []).forEach((f, i) => {
+    applyField(f.question as Record<string, string>, `faq.${i}.q`);
+    applyField(f.answer as Record<string, string>, `faq.${i}.a`);
+  });
+}
 
 export const getGuideBySlug = (slug: string, lang: string): Guide | undefined => {
   return mockGuides.find(g => 

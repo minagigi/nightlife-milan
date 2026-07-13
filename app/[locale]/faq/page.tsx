@@ -62,7 +62,7 @@ export default async function FAQPage({ params }: Props) {
           a: tr(locale, 'The fastest way is WhatsApp at +39 351 912 7047. Tell us the venue, date, group size and budget. Reply guaranteed in 10 minutes. The service is completely free — we earn a commission from the venue, not from you.', 'Il modo più rapido è WhatsApp al +39 351 912 7047. Dicci il locale, la data, il numero di persone e il budget. Risposta garantita in 10 minuti. Il servizio è completamente gratuito — guadagniamo una commissione dal locale, non da te.'),
         },
         {
-          q: isIt ? "Quanto costa una prenotazione tramite Nightlife Milan?" : 'How much does a booking through Nightlife Milan cost?',
+          q: tr(locale, 'How much does a booking through Nightlife Milan cost?', 'Quanto costa una prenotazione tramite Nightlife Milan?'),
           a: tr(locale, '100% free. We add no extra costs on top of the venue\'s price. We earn a commission from the club when you bring your group — you pay nothing extra.', 'Il nostro servizio è gratuito al 100%. Non aggiungiamo costi extra rispetto al prezzo concordato con il locale. Guadagniamo una commissione dal club quando porti il tuo gruppo — tu non paghi nulla di più.'),
         },
         {
@@ -74,7 +74,7 @@ export default async function FAQPage({ params }: Props) {
           a: tr(locale, 'For regular weekends, 24-48 hours is sufficient. For special events (Fashion Week, New Year\'s Eve, international DJs), we recommend at least 1-2 weeks in advance. Contact us last minute anyway — we often find solutions.', 'Per i weekend normali, 24-48 ore sono sufficienti. Per eventi speciali (Fashion Week, Capodanno, serate con DJ internazionali), consigliamo almeno 1-2 settimane prima. Contattaci comunque anche all\'ultimo minuto — spesso riusciamo a trovare soluzioni.'),
         },
         {
-          q: isIt ? "Cosa succede se cambio idea dopo la prenotazione?" : "What if I change my mind after booking?",
+          q: tr(locale, "What if I change my mind after booking?", "Cosa succede se cambio idea dopo la prenotazione?"),
           a: tr(locale, 'It depends on the venue and timing. Generally, cancellations more than 48 hours in advance are free. For special nights, tables may have a non-refundable deposit. We always inform you of the policy before confirming.', 'Dipende dal locale e dall\'anticipo. In generale, le cancellazioni oltre 48 ore prima sono gratuite. Per serate speciali, i tavoli possono avere una caparra non rimborsabile. Ti informeremo sempre della policy prima di confermare.'),
         },
       ],
@@ -91,7 +91,7 @@ export default async function FAQPage({ params }: Props) {
           a: tr(locale, 'Most Milan clubs accept cash and credit/debit cards. Some also accept Apple Pay and Google Pay. Not all accept American Express. It\'s always good to have cash as backup, especially for table payments.', 'La maggior parte dei club a Milano accetta contanti e carte di credito/debito. Alcuni accettano anche Apple Pay e Google Pay. Non tutti accettano American Express. È sempre meglio avere contanti come backup, specialmente per il pagamento al tavolo.'),
         },
         {
-          q: isIt ? "L'ingresso è gratuito con la guestlist?" : 'Is entry free with guestlist?',
+          q: tr(locale, 'Is entry free with guestlist?', "L'ingresso è gratuito con la guestlist?"),
           a: tr(locale, 'It depends on the venue and day. On weekdays (Mon-Thu), guestlist is often free. On Friday and Saturday, guestlist may be free (before a certain time) or reduced vs. full price. We always confirm conditions before.', 'Dipende dal locale e dal giorno. Nei giorni infrasettimanali (lunedì-giovedì), la guestlist è spesso gratuita. Il venerdì e sabato, la guestlist può essere gratuita (entro una certa ora) o ridotta rispetto al prezzo pieno. Ti confermeremo sempre le condizioni prima.'),
         },
         {
@@ -104,22 +104,20 @@ export default async function FAQPage({ params }: Props) {
       category: tr(locale, 'Dress Code & Door Policy', 'Dress Code & Accesso'),
       faqs: [
         {
-          q: isIt ? "Qual è il dress code per i club di Milano?" : "What is the dress code for Milan clubs?",
+          q: tr(locale, "What is the dress code for Milan clubs?", "Qual è il dress code per i club di Milano?"),
           a: tr(locale, 'Milan has one of the strictest dress codes in Europe. Luxury clubs (Just Me, Armani Privé, Gattopardo) require strictly elegant attire: long trousers for men, no technical sneakers, no caps, no tracksuits. Younger clubs (Play Club, Repvblic) accept smart casual or urban chic.', 'Milano ha uno dei dress code più rigorosi in Europa. I club di lusso (Just Me, Armani Privé, Gattopardo) richiedono abbigliamento elegante obbligatorio: pantaloni lunghi per uomo, no sneakers tecniche, no cappelli, no tute. I club più giovani (Play Club, Repvblic) accettano uno stile smart casual o urban chic.'),
         },
         {
-          q: isIt ? "Posso entrare in sneakers?" : "Can I get in wearing sneakers?",
+          q: tr(locale, "Can I get in wearing sneakers?", "Posso entrare in sneakers?"),
           a: tr(locale, 'It depends on the sneaker type and venue. Elegant leather sneakers (e.g. Common Projects, leather New Balance) are accepted in many clubs. Running or technical sneakers (Nike Air, Adidas ultraboost) are banned in luxury clubs. When in doubt, opt for leather shoes or loafers.', 'Dipende dal tipo di sneakers e dal locale. Le sneakers eleganti in pelle (es. Common Projects, New Balance in pelle) sono accettate in molti club. Sneakers da running, tecniche o sportive (Nike Air, Adidas ultraboost) sono vietate nei club di lusso. In caso di dubbio, opta per scarpe in pelle o mocassini.'),
         },
         {
-          q: isIt ? 'Qual è l\'età minima per entrare nei club di Milano?' : "What is the minimum age to enter Milan clubs?",
+          q: tr(locale, "What is the minimum age to enter Milan clubs?", 'Qual è l\'età minima per entrare nei club di Milano?'),
           a: tr(locale, 'In Italy, the legal drinking age is 18. Most clubs have a minimum age of 18. Luxury clubs (Just Me, Armani Privé) often prefer a 21+ or even 25+ crowd. Always bring a valid photo ID.', 'In Italia, l\'età legale per bere alcolici è 18 anni. La maggior parte dei club applica un limite minimo di 18 anni. I club di lusso (Just Me, Armani Privé) spesso preferiscono un pubblico 21+ o addirittura 25+. Porta sempre un documento di identità valido con foto.'),
         },
         {
-          q: isIt ? "Il tavolo VIP garantisce l'ingresso?" : 'Does a VIP table guarantee entry?',
-          a: isIt
-            ? 'Sì, avere un tavolo VIP confermato garantisce quasi sempre l\'ingresso, indipendentemente dalla coda o dalla selezione. Dovrai comunque rispettare il dress code — anche con tavolo, possono rifiutare l\'accesso per abbigliamento inappropriato.'
-            : "Yes, having a confirmed VIP table almost always guarantees entry, regardless of the queue or door selection. You still need to comply with the dress code — even with a table, entry can be refused for inappropriate attire.",
+          q: tr(locale, 'Does a VIP table guarantee entry?', "Il tavolo VIP garantisce l'ingresso?"),
+          a: tr(locale, "Yes, having a confirmed VIP table almost always guarantees entry, regardless of the queue or door selection. You still need to comply with the dress code — even with a table, entry can be refused for inappropriate attire.", 'Sì, avere un tavolo VIP confermato garantisce quasi sempre l\'ingresso, indipendentemente dalla coda o dalla selezione. Dovrai comunque rispettare il dress code — anche con tavolo, possono rifiutare l\'accesso per abbigliamento inappropriato.'),
         },
       ],
     },
@@ -128,21 +126,15 @@ export default async function FAQPage({ params }: Props) {
       faqs: [
         {
           q: tr(locale, 'What time do Milan clubs open?', 'A che ora aprono i club di Milano?'),
-          a: isIt
-            ? "L'aperitivo inizia dalle 19:00-19:30 in bar e rooftop (Voya, Pineta, 55 Milano). I club veri e propri aprono dalle 22:30-23:30 di sera. L'orario di punta è tra mezzanotte e le 3:00. Molti club restano aperti fino alle 5:00-6:00 del mattino."
-            : 'Aperitivo starts from 19:00-19:30 in bars and rooftops (Voya, Pineta, 55 Milano). Proper clubs open from 22:30-23:30. Peak time is between midnight and 3:00 AM. Many clubs stay open until 5:00-6:00 AM.',
+          a: tr(locale, 'Aperitivo starts from 19:00-19:30 in bars and rooftops (Voya, Pineta, 55 Milano). Proper clubs open from 22:30-23:30. Peak time is between midnight and 3:00 AM. Many clubs stay open until 5:00-6:00 AM.', "L'aperitivo inizia dalle 19:00-19:30 in bar e rooftop (Voya, Pineta, 55 Milano). I club veri e propri aprono dalle 22:30-23:30 di sera. L'orario di punta è tra mezzanotte e le 3:00. Molti club restano aperti fino alle 5:00-6:00 del mattino."),
         },
         {
           q: tr(locale, 'How do I get to Milan clubs?', 'Come si arriva nei club di Milano?'),
-          a: isIt
-            ? 'La metropolitana di Milano chiude all\'1:30 circa nei fine settimana (fino alle 2:00 il sabato). Per il rientro notturno, usa Uber o taxi (disponibili 24/7). Nelle zone centrali (Corso Como, Brera, Navigli) molti posti sono raggiungibili a piedi da diverse metro. Alcune zone (Sempione per Just Me) richiedono taxi o Uber.'
-            : "Milan's metro closes around 1:30 AM on weekends (2:00 AM on Saturdays). For the ride back, use Uber or taxi (available 24/7). In central areas (Corso Como, Brera, Navigli) many spots are walkable from metro stations. Some areas (Sempione for Just Me) require taxi or Uber.",
+          a: tr(locale, "Milan's metro closes around 1:30 AM on weekends (2:00 AM on Saturdays). For the ride back, use Uber or taxi (available 24/7). In central areas (Corso Como, Brera, Navigli) many spots are walkable from metro stations. Some areas (Sempione for Just Me) require taxi or Uber.", 'La metropolitana di Milano chiude all\'1:30 circa nei fine settimana (fino alle 2:00 il sabato). Per il rientro notturno, usa Uber o taxi (disponibili 24/7). Nelle zone centrali (Corso Como, Brera, Navigli) molti posti sono raggiungibili a piedi da diverse metro. Alcune zone (Sempione per Just Me) richiedono taxi o Uber.'),
         },
         {
-          q: isIt ? "C'è il guardaroba?" : 'Is there a cloakroom?',
-          a: isIt
-            ? 'La maggior parte dei club di lusso a Milano ha il servizio guardaroba, spesso incluso nel prezzo del biglietto o del tavolo. Nei club di medie dimensioni, il guardaroba costa generalmente €2-5. Controlla sempre prima di portare zaini grandi — alcuni club non li accettano.'
-            : "Most luxury clubs in Milan have a cloakroom service, often included in the ticket or table price. In mid-size clubs, cloakroom usually costs €2-5. Always check before bringing large backpacks — some clubs don't allow them.",
+          q: tr(locale, 'Is there a cloakroom?', "C'è il guardaroba?"),
+          a: tr(locale, "Most luxury clubs in Milan have a cloakroom service, often included in the ticket or table price. In mid-size clubs, cloakroom usually costs €2-5. Always check before bringing large backpacks — some clubs don't allow them.", 'La maggior parte dei club di lusso a Milano ha il servizio guardaroba, spesso incluso nel prezzo del biglietto o del tavolo. Nei club di medie dimensioni, il guardaroba costa generalmente €2-5. Controlla sempre prima di portare zaini grandi — alcuni club non li accettano.'),
         },
       ],
     },
@@ -150,16 +142,12 @@ export default async function FAQPage({ params }: Props) {
       category: tr(locale, 'Aperitivo & Dining', 'Aperitivo & Ristoranti'),
       faqs: [
         {
-          q: isIt ? "Cos'è l'aperitivo a Milano?" : "What is aperitivo in Milan?",
-          a: isIt
-            ? "L'aperitivo milanese è un rituale serale unico: dal tramonto fino alle 21:00-22:00, i bar offrono drink (Spritz, Negroni, cocktail) con buffet di stuzzichini inclusi nel prezzo. Non è solo un drinks — è un evento sociale. Le zone migliori: Navigli, Brera, Isola. Prezzi tipici: €12-18 per drink con buffet."
-            : "The Milanese aperitivo is a unique evening ritual: from sunset until 21:00-22:00, bars offer drinks (Spritz, Negroni, cocktails) with an included snack buffet. It's not just drinks — it's a social event. Best zones: Navigli, Brera, Isola. Typical prices: €12-18 per drink with buffet.",
+          q: tr(locale, "What is aperitivo in Milan?", "Cos'è l'aperitivo a Milano?"),
+          a: tr(locale, "The Milanese aperitivo is a unique evening ritual: from sunset until 21:00-22:00, bars offer drinks (Spritz, Negroni, cocktails) with an included snack buffet. It's not just drinks — it's a social event. Best zones: Navigli, Brera, Isola. Typical prices: €12-18 per drink with buffet.", "L'aperitivo milanese è un rituale serale unico: dal tramonto fino alle 21:00-22:00, i bar offrono drink (Spritz, Negroni, cocktail) con buffet di stuzzichini inclusi nel prezzo. Non è solo un drinks — è un evento sociale. Le zone migliori: Navigli, Brera, Isola. Prezzi tipici: €12-18 per drink con buffet."),
         },
         {
-          q: isIt ? "Qual è la differenza tra aperitivo e apericena?" : "What is the difference between aperitivo and apericena?",
-          a: isIt
-            ? "L'aperitivo è drink + snack leggeri. L'apericena (portmanteau di 'aperitivo' e 'cena') è drink + cibo abbondante che sostituisce la cena. Posti come 55 Milano e Pineta fanno dell'apericena la loro proposta principale: paghi il drink e mangi fino a saziarti."
-            : "Aperitivo is drinks + light snacks. Apericena (portmanteau of 'aperitivo' and 'cena'/dinner) is drinks + abundant food that replaces dinner. Places like 55 Milano and Pineta make apericena their main offer: pay for the drink and eat your fill.",
+          q: tr(locale, "What is the difference between aperitivo and apericena?", "Qual è la differenza tra aperitivo e apericena?"),
+          a: tr(locale, "Aperitivo is drinks + light snacks. Apericena (portmanteau of 'aperitivo' and 'cena'/dinner) is drinks + abundant food that replaces dinner. Places like 55 Milano and Pineta make apericena their main offer: pay for the drink and eat your fill.", "L'aperitivo è drink + snack leggeri. L'apericena (portmanteau di 'aperitivo' e 'cena') è drink + cibo abbondante che sostituisce la cena. Posti come 55 Milano e Pineta fanno dell'apericena la loro proposta principale: paghi il drink e mangi fino a saziarti."),
         },
       ],
     },
@@ -208,7 +196,7 @@ export default async function FAQPage({ params }: Props) {
 
           {/* Quick Answer */}
           <div className="p-5 rounded-xl border border-champagne/20 bg-champagne/[0.04] mb-12">
-            <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">Quick Answer</p>
+            <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">{tr(locale, 'Quick Answer', 'Risposta Rapida')}</p>
             <p className="font-sans text-white/70 text-sm leading-relaxed">
               {tr(locale, 'To book: WhatsApp +39 351 912 7047 (reply in 10 min, free service). Dress code: elegant mandatory for luxury clubs, no technical sneakers. Min age: 18 (21+ for top venues). Hours: aperitivo from 19:00, clubs from 22:30-23:30, closing at 5:00-6:00 AM.', 'Per prenotare: WhatsApp +39 351 912 7047 (risposta in 10 min, servizio gratuito). Dress code: elegante obbligatorio per i club di lusso, no sneakers tecniche. Età minima: 18 anni (21+ per i locali top). Orari: aperitivo dalle 19:00, club dalle 22:30-23:30, chiusura alle 5:00-6:00.')}
             </p>

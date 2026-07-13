@@ -254,6 +254,16 @@ export function romeSundayKey(): string {
   return romeDayKeyOffset(6);
 }
 
+/** Chiave del prossimo lunedì (oggi incluso se oggi è già lunedì), nel fuso di
+ * Roma — confine passato/futuro per le sezioni eventi delle pagine locale. */
+export function romeNextMondayKey(): string {
+  for (let offset = 0; offset < 7; offset++) {
+    const key = romeDayKeyOffset(offset);
+    if (dayOfWeekForKey(key) === 1) return key;
+  }
+  return romeDayKeyOffset(7);
+}
+
 /** ISO UTC per la prossima occorrenza reale di un giorno della settimana
  * (0=domenica..6=sabato) nel fuso di Roma, all'orario locale indicato
  * (default 23:00) — include oggi stesso se oggi è già il giorno cercato.

@@ -9,6 +9,7 @@ import { CONTACT } from '@/config/contact';
 import { getVenueBySlug, getEventsByVenueId, mockVenues } from '@/lib/data';
 import { VenueCategory } from '@/lib/types';
 import { getLocalizedText } from '@/lib/seo';
+import { romeDayKey, romeNextMondayKey } from '@/lib/calendarEvents';
 import WeeklyProgram from '@/components/WeeklyProgram';
 
 export const revalidate = 3600;
@@ -330,7 +331,15 @@ export default async function ClubPage({ params }: Props) {
     : `${CONTACT.whatsapp.link}?text=Hi,%20I'd%20like%20to%20book%20at%20${encodeURIComponent(name)}`;
   const servicesTags = venue.tags || [venue.category];
   
-  const events = getEventsByVenueId(venue.id);
+  const lp = localePrefix(locale);
+  const mondayKey = romeNextMondayKey();
+  const venueEvents = getEventsByVenueId(venue.id);
+  const futureVenueEvents = venueEvents
+    .filter((e) => romeDayKey(e.dateISO) >= mondayKey)
+    .sort((a, b) => new Date(a.dateISO).getTime() - new Date(b.dateISO).getTime());
+  const pastVenueEvents = venueEvents
+    .filter((e) => romeDayKey(e.dateISO) < mondayKey)
+    .sort((a, b) => new Date(b.dateISO).getTime() - new Date(a.dateISO).getTime());
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const jsonLd: any = {
@@ -531,6 +540,70 @@ export default async function ClubPage({ params }: Props) {
 
           {/* Weekly Schedule (Event Component) */}
           <WeeklyProgram venueId={venue.id} venueName={name} locale={locale as 'en' | 'it'} />
+
+          {/* Upcoming Events at this venue — chronological */}
+          {futureVenueEvents.length > 0 && (
+            <section>
+              <h2 className="text-2xl font-serif font-bold text-white mb-6 flex items-center gap-3">
+                <Calendar className="w-6 h-6 text-champagne" />
+                {tr(locale, `Upcoming Events at ${name}`, `Prossimi Eventi da ${name}`)}
+              </h2>
+              <div className="space-y-3">
+                {futureVenueEvents.map((ev) => {
+                  const evTitle = getLocalizedText(ev.localizedContent.title, locale);
+                  const evSlug = getLocalizedText(ev.localizedContent.slug, locale);
+                  const dateStr = new Intl.DateTimeFormat(locale, {
+                    weekday: 'short', day: 'numeric', month: 'short', timeZone: 'Europe/Rome',
+                  }).format(new Date(ev.dateISO));
+                  const timeStr = new Intl.DateTimeFormat(locale, {
+                    hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Rome',
+                  }).format(new Date(ev.dateISO));
+                  return (
+                    <Link
+                      key={ev.id}
+                      href={`${lp}/events/${evSlug}`}
+                      className="flex items-center justify-between gap-4 py-3 px-4 rounded-lg bg-white/[0.03] border border-white/10 hover:border-champagne/40 transition-colors group"
+                    >
+                      <div className="flex items-center gap-4 min-w-0">
+                        <span className="text-champagne/70 text-xs font-mono shrink-0">{dateStr}</span>
+                        <span className="text-white/90 text-sm font-medium truncate group-hover:text-champagne transition-colors">{evTitle}</span>
+                      </div>
+                      <span className="text-white/40 text-xs font-mono shrink-0">{timeStr}</span>
+                    </Link>
+                  );
+                })}
+              </div>
+            </section>
+          )}
+
+          {/* Past Events at this venue — most recent first */}
+          {pastVenueEvents.length > 0 && (
+            <section>
+              <h2 className="text-2xl font-serif font-bold text-white/60 mb-6 flex items-center gap-3">
+                <Clock className="w-6 h-6 text-white/40" />
+                {tr(locale, `Past Events at ${name}`, `Eventi Passati da ${name}`)}
+              </h2>
+              <div className="space-y-2">
+                {pastVenueEvents.slice(0, 12).map((ev) => {
+                  const evTitle = getLocalizedText(ev.localizedContent.title, locale);
+                  const evSlug = getLocalizedText(ev.localizedContent.slug, locale);
+                  const dateStr = new Intl.DateTimeFormat(locale, {
+                    day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Europe/Rome',
+                  }).format(new Date(ev.dateISO));
+                  return (
+                    <Link
+                      key={ev.id}
+                      href={`${lp}/events/${evSlug}`}
+                      className="flex items-center justify-between gap-4 py-2 px-4 rounded-lg bg-transparent border border-white/5 hover:border-white/20 transition-colors group"
+                    >
+                      <span className="text-white/50 text-sm truncate group-hover:text-white/80 transition-colors">{evTitle}</span>
+                      <span className="text-white/30 text-xs font-mono shrink-0">{dateStr}</span>
+                    </Link>
+                  );
+                })}
+              </div>
+            </section>
+          )}
 
           {/* TheTimeline (3 Acts) */}
           {c?.acts && (
