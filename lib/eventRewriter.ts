@@ -120,8 +120,8 @@ TASK: produce the DYNAMIC content blocks of a long-form (gold-standard) event li
 
 OUTPUT — return ONLY a JSON object with these exact keys, no markdown, no prose:
 {
-  "titleEn": "max 75 chars, format '[Experience] @ [Venue] - [Weekday] [Month Day] [Year]'",
-  "titleIt": "max 75 char, stesso formato in italiano ('[Esperienza] @ [Venue] - [Giorno] [Data]')",
+  "titleEn": "max 75 chars. TITLE ORDER RULE: most people search by VENUE name first, not by generic party names ('Friday Night', 'University Party', 'Saturday Fever'...). DEFAULT (no internationally-recognizable guest/artist named in the source): venue FIRST — '[Venue] - [Experience] - [Weekday] [Month Day] [Year]'. ONLY put the experience/guest FIRST — '[Experience] @ [Venue] - [Weekday] [Month Day] [Year]' — if the source names a genuinely internationally-known DJ/artist/performer (someone people would search for by name regardless of venue). A generic support DJ or local guest name does NOT qualify — default to venue-first.",
+  "titleIt": "max 75 char, stesso criterio in italiano: default '[Venue] - [Esperienza] - [Giorno] [Data]' (locale prima), '[Esperienza] @ [Venue] - [Giorno] [Data]' SOLO con un guest davvero noto a livello internazionale.",
   "summaryEn": "max 140 chars, with date + venue + {{WHATSAPP}}",
   "summaryIt": "max 140 caratteri, data + venue + {{WHATSAPP}}, in italiano",
   "hook": "3-5 sentences, the experience in a nutshell, with proper nouns (venue, landmark, date)",
