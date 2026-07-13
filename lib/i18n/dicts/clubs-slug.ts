@@ -2,6 +2,32 @@ import type { LocaleCode } from '../locales';
 
 // Auto-generato (traduzione in-sessione per pagina). Testo EN (chiave) -> 33 lingue.
 export const clubsSlugDict: Record<string, Partial<Record<LocaleCode, string>>> = {
+  "Upcoming Events at": {
+    "es": "Próximos Eventos en", "fr": "Prochains Événements à", "de": "Kommende Events im",
+    "pt": "Próximos Eventos no", "nl": "Aankomende Evenementen bij", "ru": "Ближайшие события в",
+    "tr": "Yaklaşan Etkinlikler:", "zh": "即将举行的活动：", "ar": "الفعاليات القادمة في",
+    "bg": "Предстоящи събития в", "hr": "Nadolazeći događaji u", "cs": "Nadcházející akce v",
+    "da": "Kommende Events hos", "et": "Eelseisvad üritused:", "fi": "Tulevat tapahtumat:",
+    "el": "Επερχόμενες Εκδηλώσεις στο", "hu": "Közelgő események:", "ga": "Imeachtaí atá le teacht ag",
+    "lv": "Gaidāmie pasākumi:", "lt": "Artėjantys renginiai:", "mt": "Avvenimenti li Ġejjin fi",
+    "pl": "Nadchodzące wydarzenia w", "ro": "Evenimente Viitoare la", "sk": "Nadchádzajúce podujatia v",
+    "sl": "Prihajajoči dogodki v", "sv": "Kommande evenemang på", "no": "Kommende arrangementer på",
+    "is": "Væntanlegir viðburðir hjá", "uk": "Найближчі події в", "sq": "Ngjarjet e Ardhshme në",
+    "sr": "Predstojeći događaji u", "bs": "Nadolazeći događaji u", "mk": "Претстојни настани во"
+  },
+  "Past Events at": {
+    "es": "Eventos Pasados en", "fr": "Événements Passés à", "de": "Vergangene Events im",
+    "pt": "Eventos Passados no", "nl": "Eerdere Evenementen bij", "ru": "Прошедшие события в",
+    "tr": "Geçmiş Etkinlikler:", "zh": "往期活动：", "ar": "الفعاليات السابقة في",
+    "bg": "Минали събития в", "hr": "Prošli događaji u", "cs": "Minulé akce v",
+    "da": "Tidligere Events hos", "et": "Möödunud üritused:", "fi": "Menneet tapahtumat:",
+    "el": "Προηγούμενες Εκδηλώσεις στο", "hu": "Korábbi események:", "ga": "Imeachtaí Roimhe Seo ag",
+    "lv": "Pagājušie pasākumi:", "lt": "Praėję renginiai:", "mt": "Avvenimenti Preċedenti fi",
+    "pl": "Minione wydarzenia w", "ro": "Evenimente Trecute la", "sk": "Minulé podujatia v",
+    "sl": "Pretekli dogodki v", "sv": "Tidigare evenemang på", "no": "Tidligere arrangementer på",
+    "is": "Fyrri viðburðir hjá", "uk": "Минулі події в", "sq": "Ngjarjet e Kaluara në",
+    "sr": "Prošli događaji u", "bs": "Prošli događaji u", "mk": "Минати настани во"
+  },
   "Available via WhatsApp only": {
     "es": "Disponible solo por WhatsApp",
     "fr": "Disponible uniquement via WhatsApp",

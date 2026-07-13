@@ -546,7 +546,7 @@ export default async function ClubPage({ params }: Props) {
             <section>
               <h2 className="text-2xl font-serif font-bold text-white mb-6 flex items-center gap-3">
                 <Calendar className="w-6 h-6 text-champagne" />
-                {tr(locale, `Upcoming Events at ${name}`, `Prossimi Eventi da ${name}`)}
+                {tr(locale, 'Upcoming Events at', 'Prossimi Eventi da')} {name}
               </h2>
               <div className="space-y-3">
                 {futureVenueEvents.map((ev) => {
@@ -581,7 +581,7 @@ export default async function ClubPage({ params }: Props) {
             <section>
               <h2 className="text-2xl font-serif font-bold text-white/60 mb-6 flex items-center gap-3">
                 <Clock className="w-6 h-6 text-white/40" />
-                {tr(locale, `Past Events at ${name}`, `Eventi Passati da ${name}`)}
+                {tr(locale, 'Past Events at', 'Eventi Passati da')} {name}
               </h2>
               <div className="space-y-2">
                 {pastVenueEvents.slice(0, 12).map((ev) => {
