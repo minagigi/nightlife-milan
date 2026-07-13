@@ -9,7 +9,7 @@ import { weeklyEvents, getWeeklyEventBySlug } from '@/lib/eventsConfig';
 import { getLocalizedText, generateEventSchema, generateBreadcrumbSchema } from '@/lib/seo';
 import { nextWeekdayISO } from '@/lib/calendarEvents';
 import { fetchEventbriteEvents } from '@/lib/eventbriteSync';
-import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
+import { getAllCalendarEvents, isUpcomingRome, romeDayKey, romeDayKeyOffset, romeSundayKey } from '@/lib/calendarEvents';
 import { getRichContent } from '@/lib/richContentStore';
 import { getEventGoldHtml } from '@/lib/eventbriteSync';
 import { Event, Venue } from '@/lib/types';
@@ -19,6 +19,7 @@ import PricingGrid from '@/components/PricingGrid';
 import GoldEventContent from '@/components/GoldEventContent';
 import GoldEventHtml from '@/components/GoldEventHtml';
 import MoreVenueEvents, { MoreVenueEventItem } from '@/components/MoreVenueEvents';
+import EventsCarousel from '@/components/EventsCarousel';
 
 /** Find a live Eventbrite event by its SEO slug (EN or IT).
  * NESSUN try/catch qui: se la fetch Eventbrite fallisce (dopo i retry
@@ -308,7 +309,7 @@ export default async function EventPage({ params }: Props) {
             src={weeklyEvent.image}
             alt={title}
             fill
-            quality={85}
+            quality={95}
             sizes="100vw"
             className="object-cover"
             referrerPolicy="no-referrer"
@@ -502,6 +503,26 @@ export default async function EventPage({ params }: Props) {
       };
     });
 
+  // Gallery sotto l'evento (richiesta utente): oggi (tutti i locali) / questa
+  // settimana allo stesso locale di questo evento / questa settimana (tutti i
+  // locali) — stessa sorgente dati unificata di allVenueCalendarItems sopra,
+  // stessa finestra "oggi->domenica" di calendar/this-week (Europe/Rome).
+  const galleryTodayKey = romeDayKeyOffset(0);
+  const gallerySundayKey = romeSundayKey();
+  const inGalleryWeek = (dateISO: string) => {
+    const key = romeDayKey(dateISO);
+    return key >= galleryTodayKey && key <= gallerySundayKey;
+  };
+  const todayEvents = allVenueCalendarItems
+    .filter(({ event: e }) => e.id !== event.id && romeDayKey(e.dateISO) === galleryTodayKey)
+    .sort((a, b) => new Date(a.event.dateISO).getTime() - new Date(b.event.dateISO).getTime());
+  const venueWeekEvents = allVenueCalendarItems
+    .filter(({ event: e }) => e.id !== event.id && e.venueId === event.venueId && inGalleryWeek(e.dateISO))
+    .sort((a, b) => new Date(a.event.dateISO).getTime() - new Date(b.event.dateISO).getTime());
+  const allWeekEvents = allVenueCalendarItems
+    .filter(({ event: e }) => e.id !== event.id && inGalleryWeek(e.dateISO))
+    .sort((a, b) => new Date(a.event.dateISO).getTime() - new Date(b.event.dateISO).getTime());
+
   // Generate JSON-LD Schemas
   const eventSchema = generateEventSchema(event, venue, performer || null, locale);
   const breadcrumbSchema = generateBreadcrumbSchema(event, venue, locale);
@@ -583,7 +604,7 @@ export default async function EventPage({ params }: Props) {
             src={event.image || venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp'}
             alt={title}
             fill
-            quality={85}
+            quality={95}
             priority={true} // Above the fold
             sizes="100vw"
             className="object-cover"
@@ -681,7 +702,7 @@ export default async function EventPage({ params }: Props) {
             <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-4 not-prose">
               {buildVenueGalleryImages(venue, title, locale).map((img, i) => (
                 <div key={i} className="relative h-32 rounded-xl overflow-hidden border border-white/8">
-                  <Image src={img.src} alt={img.alt} title={img.alt} fill quality={85} className="object-cover" sizes="(max-width: 768px) 50vw, 33vw" />
+                  <Image src={img.src} alt={img.alt} title={img.alt} fill quality={92} className="object-cover" sizes="(max-width: 768px) 50vw, 33vw" />
                 </div>
               ))}
             </div>
@@ -774,6 +795,55 @@ export default async function EventPage({ params }: Props) {
             </div>
           </aside>
         </section>
+
+        {/* Discovery gallery sotto l'evento: oggi / questa settimana allo
+            stesso locale / questa settimana ovunque. Riusa EventsCarousel +
+            EventCard (stesso linguaggio visivo del resto del sito). */}
+        {(todayEvents.length > 0 || venueWeekEvents.length > 0 || allWeekEvents.length > 0) && (
+          <section className="py-16 border-t border-white/5">
+            {todayEvents.length > 0 && (
+              <div className="mb-14">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between mb-6">
+                  <h2 className="font-serif text-2xl md:text-3xl text-white">
+                    {tr(locale, 'Tonight in Milan', 'Stasera a Milano')}
+                  </h2>
+                  <Link href={`${localePrefix(locale)}/events/tonight`} className="text-champagne text-sm tracking-wider hover:underline uppercase whitespace-nowrap">
+                    {tr(locale, 'See all', 'Vedi tutti')} →
+                  </Link>
+                </div>
+                <EventsCarousel items={todayEvents} lang={locale} showTonightTag />
+              </div>
+            )}
+
+            {venueWeekEvents.length > 0 && (
+              <div className="mb-14">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between mb-6">
+                  <h2 className="font-serif text-2xl md:text-3xl text-white">
+                    {tr(locale, `This Week at ${venueName}`, `Questa Settimana al ${venueName}`)}
+                  </h2>
+                  <Link href={venueHref} className="text-champagne text-sm tracking-wider hover:underline uppercase whitespace-nowrap">
+                    {tr(locale, 'See all', 'Vedi tutti')} →
+                  </Link>
+                </div>
+                <EventsCarousel items={venueWeekEvents} lang={locale} />
+              </div>
+            )}
+
+            {allWeekEvents.length > 0 && (
+              <div>
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between mb-6">
+                  <h2 className="font-serif text-2xl md:text-3xl text-white">
+                    {tr(locale, 'This Week in Milan', 'Questa Settimana a Milano')}
+                  </h2>
+                  <Link href={`${localePrefix(locale)}/events/this-week`} className="text-champagne text-sm tracking-wider hover:underline uppercase whitespace-nowrap">
+                    {tr(locale, 'See all', 'Vedi tutti')} →
+                  </Link>
+                </div>
+                <EventsCarousel items={allWeekEvents} lang={locale} />
+              </div>
+            )}
+          </section>
+        )}
       </main>
     </>
   );
