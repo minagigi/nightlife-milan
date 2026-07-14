@@ -30,23 +30,31 @@ export async function POST(request: Request) {
   const { eventId, title, summary, descriptionHtml } = body;
   if (!eventId) return NextResponse.json({ ok: false, error: 'eventId required' }, { status: 400 });
 
-  const eventPatch: Record<string, unknown> = {};
-  if (title) eventPatch.name = { html: title.slice(0, 75) };
-  if (summary) eventPatch.summary = summary.slice(0, 140);
-  if (descriptionHtml) eventPatch.description = { html: descriptionHtml };
+  const basePatch: Record<string, unknown> = {};
+  if (title) basePatch.name = { html: title.slice(0, 75) };
+  if (summary) basePatch.summary = summary.slice(0, 140);
 
-  if (Object.keys(eventPatch).length === 0) {
+  if (Object.keys(basePatch).length === 0 && !descriptionHtml) {
     return NextResponse.json({ ok: false, error: 'No copy fields supplied' }, { status: 400 });
   }
 
-  const res = await fetch(`${EVENTBRITE_API}/events/${eventId}/`, {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${token}`, 'content-type': 'application/json' },
-    body: JSON.stringify({ event: eventPatch }),
-  });
-  const text = await res.text();
-  if (!res.ok) {
-    return NextResponse.json({ ok: false, status: res.status, body: text.slice(0, 600) }, { status: 502 });
+  const headers = { Authorization: `Bearer ${token}`, 'content-type': 'application/json' };
+  const patches: Array<{ label: string; event: Record<string, unknown> }> = [];
+  if (Object.keys(basePatch).length > 0) patches.push({ label: 'base', event: basePatch });
+  if (descriptionHtml) patches.push({ label: 'description', event: { description: { html: descriptionHtml } } });
+
+  const results: Array<{ label: string; status: number; ok: boolean }> = [];
+  for (const patch of patches) {
+    const res = await fetch(`${EVENTBRITE_API}/events/${eventId}/`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({ event: patch.event }),
+    });
+    const text = await res.text();
+    results.push({ label: patch.label, status: res.status, ok: res.ok });
+    if (!res.ok) {
+      return NextResponse.json({ ok: false, failedAt: patch.label, status: res.status, body: text.slice(0, 600), results }, { status: 502 });
+    }
   }
 
   const verify = await fetch(`${EVENTBRITE_API}/events/${eventId}/`, {
@@ -57,6 +65,7 @@ export async function POST(request: Request) {
   return NextResponse.json({
     ok: true,
     eventId,
+    results,
     current: {
       title: current?.name?.text,
       summary: current?.summary,
