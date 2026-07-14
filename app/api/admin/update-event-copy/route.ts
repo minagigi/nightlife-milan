@@ -39,24 +39,21 @@ export async function POST(request: Request) {
   }
 
   const headers = { Authorization: `Bearer ${token}`, 'content-type': 'application/json' };
-  const patches: Array<{ label: string; event: Record<string, unknown> }> = [];
-  // Eventbrite may regenerate summary from the description write. Apply the
-  // operator-authored title/summary last so those fields remain authoritative.
-  if (descriptionHtml) patches.push({ label: 'description', event: { description: { html: descriptionHtml } } });
-  if (Object.keys(basePatch).length > 0) patches.push({ label: 'base', event: basePatch });
-
-  const results: Array<{ label: string; status: number; ok: boolean }> = [];
-  for (const patch of patches) {
-    const res = await fetch(`${EVENTBRITE_API}/events/${eventId}/`, {
-      method: 'POST',
-      headers,
-      body: JSON.stringify({ event: patch.event }),
-    });
-    const text = await res.text();
-    results.push({ label: patch.label, status: res.status, ok: res.ok });
-    if (!res.ok) {
-      return NextResponse.json({ ok: false, failedAt: patch.label, status: res.status, body: text.slice(0, 600), results }, { status: 502 });
-    }
+  // Eventbrite derives one field from the other when summary and description
+  // arrive in separate requests. Send the complete copy patch atomically.
+  const eventPatch: Record<string, unknown> = {
+    ...basePatch,
+    ...(descriptionHtml && { description: { html: descriptionHtml } }),
+  };
+  const res = await fetch(`${EVENTBRITE_API}/events/${eventId}/`, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({ event: eventPatch }),
+  });
+  const text = await res.text();
+  const results = [{ label: 'copy', status: res.status, ok: res.ok }];
+  if (!res.ok) {
+    return NextResponse.json({ ok: false, failedAt: 'copy', status: res.status, body: text.slice(0, 600), results }, { status: 502 });
   }
 
   const verify = await fetch(`${EVENTBRITE_API}/events/${eventId}/`, {

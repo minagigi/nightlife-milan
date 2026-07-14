@@ -325,7 +325,9 @@ export async function publishOneLang(p: PublishOneLangParams): Promise<PublishRe
       const descRes = await fetch(`${EVENTBRITE_API}/events/${eventId}/`, {
         method: 'POST',
         headers: authHeaders(token),
-        body: JSON.stringify({ event: { description: { html: description } } }),
+        // Eventbrite may regenerate summary from description when the two are
+        // written separately. Keep both authoritative in the same request.
+        body: JSON.stringify({ event: { summary, description: { html: description } } }),
       });
       if (!descRes.ok) {
         console.error(`[eventPublisher] Description write failed (${lang}, attempt ${attempt + 1}): HTTP ${descRes.status} ${(await descRes.text()).slice(0, 200)}`);
