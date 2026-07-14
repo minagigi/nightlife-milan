@@ -38,5 +38,6 @@ Questo documento e la fonte operativa per creare o aggiornare eventi Nightlife M
 - Aggiornare prima i listing EN/IT esistenti, poi creare le altre lingue.
 - Marker canonico: `nlm:src=<base>-<lang>;slug-en=<slug>`.
 - Pubblicazione idempotente e riprendibile: controllare il marker prima di creare e registrare il progresso localmente.
+- Eventbrite applica una finestra mobile sulle azioni evento: usare blocchi da 5, almeno 60 secondi tra i blocchi e considerare circa 100 eventi completi/ora (creazione + publish). Su `Error processing event`, non ricreare: mantenere la bozza, attendere 5 minuti e ritentare il solo publish.
 - Prima di scrivere: typecheck, test di tutte le combinazioni evento-lingua, build, controllo mobile/tablet/desktop e verifica delle locandine non latine.
 - Dopo il deploy: verificare URL live e route immagini; poi pubblicare Eventbrite e ricontrollare che la coda delle lingue mancanti sia vuota.
