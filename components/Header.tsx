@@ -98,7 +98,7 @@ export default function Header({ currentLocale }: { currentLocale: string }) {
         <div className="flex justify-between items-center h-16">
           
           {/* Desktop Nav (Left) */}
-          <nav className="hidden md:flex space-x-8 flex-1 items-center" aria-label="Main Navigation">
+          <nav className="hidden lg:flex space-x-8 flex-1 items-center" aria-label="Main Navigation">
             {navLinks.map((link) => {
               const isActive = pathname?.startsWith(link.match);
               const isGold = (link as { gold?: boolean }).gold;
@@ -133,7 +133,7 @@ export default function Header({ currentLocale }: { currentLocale: string }) {
           </nav>
 
           {/* Mobile Menu Toggle (Left on Mobile) */}
-          <div className="flex md:hidden flex-1 items-center">
+          <div className="flex lg:hidden flex-1 items-center">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="flex items-center justify-center -ml-2.5 w-11 h-11 text-white hover:text-champagne focus:outline-none focus-visible:ring-2 focus-visible:ring-champagne rounded-lg active:bg-white/5 transition-colors"

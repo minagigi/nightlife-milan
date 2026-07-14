@@ -21,7 +21,7 @@ export default function EventImageGallery({ gallery }: { gallery: EventVisualGal
   }, [activeIndex, gallery.images.length]);
 
   return (
-    <section className="mt-14 border-t border-white/10 pt-10" aria-labelledby="event-gallery-heading">
+    <section className="mt-14 border-t border-white/10 pt-10" aria-labelledby="event-gallery-heading" data-event-section="gallery">
       <h2 id="event-gallery-heading" className="text-2xl font-serif font-bold text-champagne mb-6">
         {gallery.heading}
       </h2>

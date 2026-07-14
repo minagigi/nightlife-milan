@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { buildMoreVenueEventsHeading } from '@/lib/eventPageLocale';
 
 export interface MoreVenueEventItem {
   href: string;
@@ -18,12 +19,10 @@ interface MoreVenueEventsProps {
 export default function MoreVenueEvents({ items, locale, venueName }: MoreVenueEventsProps) {
   if (items.length === 0) return null;
 
-  const isIt = locale === 'it';
-
   return (
     <section className="mt-12 not-prose">
       <h2 className="text-2xl font-serif font-bold text-champagne mb-4">
-        {isIt ? `Altri eventi al ${venueName}` : `More events at ${venueName}`}
+        {buildMoreVenueEventsHeading(locale, venueName)}
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {items.map((item) => (

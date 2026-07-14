@@ -10,8 +10,8 @@ export type EventVisualGallery = {
 };
 
 const UNIVERSITY_PARTY_SLUGS = new Set([
-  'university-party-just-me-tuesday-july-14-2026-2026-07-14',
-  'justme-tuesday-martedi-universitario',
+  UNIVERSITY_PARTY_CANONICAL_SLUG,
+  UNIVERSITY_PARTY_PT_LEGACY_SLUG,
 ]);
 
 const UNIVERSITY_PARTY_PT: EventVisualGallery = {
@@ -19,28 +19,28 @@ const UNIVERSITY_PARTY_PT: EventVisualGallery = {
   images: [
     {
       src: '/images/events/generated/just-me-university-party-recomposed-1x1-pt.png',
-      title: 'Locandina Just Me Milano University Party 14 de julho',
-      alt: 'Locandina em portugues da University Party no Just Me Milano em 14 de julho com reservas WhatsApp',
+      title: 'Cartaz Just Me Milano University Party - 14 de julho',
+      alt: 'Cartaz em português da University Party no Just Me Milano em 14 de julho com reservas pelo WhatsApp',
     },
     {
       src: '/images/events/generated/just-me-university-party-pt-aperitivo-1x1.png',
       title: 'Aperitivo da University Party no Just Me Milano',
-      alt: 'Aperitivo no Just Me Milano antes da University Party para estudantes internacionais em Milao',
+      alt: 'Aperitivo no Just Me Milano antes da University Party para estudantes internacionais em Milão',
     },
     {
       src: '/images/events/generated/just-me-university-party-pt-dancefloor-1x1.png',
-      title: 'Dancefloor da University Party em Milao',
-      alt: 'Dancefloor da University Party no Just Me Milano com Erasmus, hip hop, reggaeton e EDM',
+      title: 'Pista da University Party em Milão',
+      alt: 'Pista da University Party no Just Me Milano com Erasmus, hip hop, reggaeton e EDM',
     },
     {
       src: '/images/events/generated/just-me-university-party-pt-vip-tables-1x1.png',
-      title: 'Mesas VIP Just Me Milano e bottle service',
-      alt: 'Mesas VIP no Just Me Milano com bottle service para grupos universitarios em Sempione',
+      title: 'Mesas VIP Just Me Milano e serviço de garrafas',
+      alt: 'Mesas VIP no Just Me Milano com serviço de garrafas para grupos universitários em Sempione',
     },
     {
       src: '/images/events/generated/just-me-university-party-pt-torre-branca-arrival-1x1.png',
-      title: 'Chegada ao Just Me Milano junto a Torre Branca',
-      alt: 'Chegada a University Party no Just Me Milano perto da Torre Branca em Sempione',
+      title: 'Chegada ao Just Me Milano junto à Torre Branca',
+      alt: 'Chegada à University Party no Just Me Milano perto da Torre Branca em Sempione',
     },
   ],
 };
@@ -54,3 +54,4 @@ export function getEventVisualGallery(slug: string, locale: string): EventVisual
   if (!UNIVERSITY_PARTY_SLUGS.has(slug) || locale !== 'pt') return null;
   return UNIVERSITY_PARTY_PT;
 }
+import { UNIVERSITY_PARTY_CANONICAL_SLUG, UNIVERSITY_PARTY_PT_LEGACY_SLUG } from './universityPartyPt';

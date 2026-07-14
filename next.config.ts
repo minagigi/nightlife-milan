@@ -33,6 +33,11 @@ const nextConfig: NextConfig = {
     ];
 
     return [
+      {
+        source: '/pt/events/justme-tuesday-martedi-universitario',
+        destination: '/pt/events/university-party-just-me-tuesday-july-14-2026-2026-07-14',
+        permanent: true,
+      },
       ...eventRedirects.flatMap(([from, to]) => [
         { source: `/events/${from}`, destination: `/events/${to}`, permanent: false },
         { source: `/it/events/${from}`, destination: `/it/events/${to}`, permanent: false },

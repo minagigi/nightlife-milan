@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { tr } from '@/lib/i18n/t';
-import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -22,7 +22,18 @@ import EventImageGallery from '@/components/EventImageGallery';
 import MoreVenueEvents, { MoreVenueEventItem } from '@/components/MoreVenueEvents';
 import EventsCarousel from '@/components/EventsCarousel';
 import { getEventVisualGallery } from '@/lib/eventVisualGallery';
-import { UNIVERSITY_PARTY_PT_SLUG, universityPartyPt } from '@/lib/universityPartyPt';
+import { getLocalizedEventContent, getLocalizedEventSeed } from '@/lib/localizedEventContent';
+import {
+  buildEventQuickAnswer,
+  buildThisWeekAtHeading,
+  buildVenueDescription,
+  eventText,
+  formatEventGenre,
+  getIntlLocale,
+  getQuickAnswerLabel,
+  getThisWeekInMilanHeading,
+  getVenueHeadingParts,
+} from '@/lib/eventPageLocale';
 
 /** Find a live Eventbrite event by its SEO slug (EN or IT).
  * NESSUN try/catch qui: se la fetch Eventbrite fallisce (dopo i retry
@@ -51,7 +62,7 @@ const FALLBACK_GALLERY = [
   '/images/milan-club-crowd-dancefloor-night.webp',
 ];
 
-const GALLERY_DESCRIPTORS: Record<'en' | 'it', string[]> = {
+const GALLERY_DESCRIPTORS: Record<'en' | 'it' | 'pt', string[]> = {
   en: [
     'VIP tables and lounge area', 'dancefloor and DJ booth', 'bar and champagne service',
     'entrance and crowd atmosphere', 'main room interior', 'private booth seating',
@@ -59,6 +70,10 @@ const GALLERY_DESCRIPTORS: Record<'en' | 'it', string[]> = {
   it: [
     'area tavoli VIP e lounge', 'pista da ballo e consolle DJ', 'bar e servizio champagne',
     'ingresso e atmosfera del pubblico', 'interno della sala principale', 'area privé con divani',
+  ],
+  pt: [
+    'mesas VIP e lounge', 'pista de dança e cabine do DJ', 'bar e serviço de champanhe',
+    'entrada e ambiente do público', 'interior da sala principal', 'área reservada com sofás',
   ],
 };
 
@@ -73,14 +88,17 @@ const GALLERY_MAX = 6;
  */
 function buildVenueGalleryImages(venue: Venue, eventTitle: string, locale: string): { src: string; alt: string }[] {
   const isIt = locale === 'it';
+  const isPt = locale === 'pt';
   const sources = venue.gallery && venue.gallery.length > 0 ? venue.gallery : FALLBACK_GALLERY;
-  const descriptors = GALLERY_DESCRIPTORS[isIt ? 'it' : 'en'];
+  const descriptors = GALLERY_DESCRIPTORS[isIt ? 'it' : isPt ? 'pt' : 'en'];
   const venueName = getLocalizedText(venue.localizedContent.name, locale);
 
   return sources.slice(0, GALLERY_MAX).map((src, i) => {
     const descriptor = descriptors[i % descriptors.length];
     const alt = isIt
       ? `${venueName} Milano — ${descriptor} durante ${eventTitle}`
+      : isPt
+        ? `${venueName} Milão — ${descriptor} durante ${eventTitle}`
       : `${venueName} Milan — ${descriptor} during ${eventTitle}`;
     return { src, alt };
   });
@@ -149,16 +167,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   
   const weeklyEvent = getWeeklyEventBySlug(slug);
   if (weeklyEvent) {
-    const isUniversityPartyPt = locale === 'pt' && slug === UNIVERSITY_PARTY_PT_SLUG;
-    const title = isUniversityPartyPt
-      ? `${universityPartyPt.title} | Nightlife Milan`
-      : `${weeklyEvent.name} @ ${weeklyEvent.clubName} Milano - ${weeklyEvent.day.charAt(0).toUpperCase() + weeklyEvent.day.slice(1)} 2026 | Nightlife Milan`;
-    const description = isUniversityPartyPt
-      ? universityPartyPt.intro[0]
-      : locale === 'it' ? weeklyEvent.description.it : weeklyEvent.description.en;
-    const heroImage = isUniversityPartyPt
-      ? '/images/events/generated/just-me-university-party-recomposed-1x1-pt.png'
-      : weeklyEvent.image;
+    const title = `${weeklyEvent.name} @ ${weeklyEvent.clubName} Milano - ${weeklyEvent.day.charAt(0).toUpperCase() + weeklyEvent.day.slice(1)} 2026 | Nightlife Milan`;
+    const description = locale === 'it' ? weeklyEvent.description.it : weeklyEvent.description.en;
     const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
     const canonical = `${baseUrl}${localePrefix(locale)}/events/${slug}`;
 
@@ -174,7 +184,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title,
         description,
         url: canonical,
-        images: [{ url: heroImage, width: isUniversityPartyPt ? 1080 : 1200, height: isUniversityPartyPt ? 1080 : 630, alt: title }],
+        images: [{ url: weeklyEvent.image, width: 1200, height: 630, alt: title }],
         type: 'website',
         siteName: 'Nightlife Milan',
         locale: locale === 'it' ? 'it_IT' : 'en_US',
@@ -183,27 +193,33 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         card: 'summary_large_image',
         title,
         description,
-        images: [heroImage],
+        images: [weeklyEvent.image],
         site: '@nightlifemilan',
       },
     };
   }
 
   let event = getEventBySlug(slug, locale);
+  if (!event) event = getLocalizedEventSeed(slug, locale) || undefined;
   if (!event) event = await getEbEventBySlug(slug);
   if (!event) return notFound();
 
   const venue = getVenueById(event.venueId);
   if (!venue) return notFound();
 
-  const title = `${getLocalizedText(event.localizedContent.title, locale)} @ ${getLocalizedText(venue.localizedContent.name, locale)} | Nightlife Milan`;
-  const description = getLocalizedText(event.localizedContent.shortDescription, locale);
+  const localizedContent = getLocalizedEventContent(event.localizedContent.slug.en, locale);
+  const localizedTitle = localizedContent?.title || getLocalizedText(event.localizedContent.title, locale);
+  const title = `${localizedTitle} @ ${getLocalizedText(venue.localizedContent.name, locale)} | Nightlife Milan`;
+  const description = localizedContent?.seoSummary || getLocalizedText(event.localizedContent.shortDescription, locale);
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   
   // Generate Canonical and Hreflang URLs
   const enSlug = event.localizedContent.slug.en;
   const itSlug = event.localizedContent.slug.it || enSlug;
+  const visualGallery = getEventVisualGallery(enSlug, locale);
+  const image = visualGallery?.images[0]?.src || event.image || venue.image || '';
+  const absoluteImage = image.startsWith('http') ? image : `${baseUrl}${image}`;
   
   const currentSlug = locale === 'it' ? itSlug : enSlug;
   const path = `${localePrefix(locale)}/events/${currentSlug}`;
@@ -221,16 +237,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description,
       url: canonical,
-      images: [{ url: `${baseUrl}${event.image || venue.image || ''}`, width: 1200, height: 630, alt: title }],
+      images: [{ url: absoluteImage, width: visualGallery ? 1080 : 1200, height: visualGallery ? 1080 : 630, alt: visualGallery?.images[0]?.alt || title }],
       type: 'website',
       siteName: 'Nightlife Milan',
-      locale: locale === 'it' ? 'it_IT' : 'en_US',
+      locale: getLocaleDef(locale)?.ogLocale || 'en_US',
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: [`${baseUrl}${event.image || venue.image || ''}`],
+      images: [absoluteImage],
       site: '@nightlifemilan',
     },
   };
@@ -242,16 +258,9 @@ export default async function EventPage({ params }: Props) {
   const weeklyEvent = getWeeklyEventBySlug(slug);
   if (weeklyEvent) {
     const isIt = locale === 'it';
-    const isUniversityPartyPt = locale === 'pt' && slug === UNIVERSITY_PARTY_PT_SLUG;
-    const title = isUniversityPartyPt
-      ? universityPartyPt.title
-      : `${weeklyEvent.name} @ ${weeklyEvent.clubName} Milano - ${weeklyEvent.day.charAt(0).toUpperCase() + weeklyEvent.day.slice(1)} 2026`;
+    const title = `${weeklyEvent.name} @ ${weeklyEvent.clubName} Milano - ${weeklyEvent.day.charAt(0).toUpperCase() + weeklyEvent.day.slice(1)} 2026`;
     const description = isIt ? weeklyEvent.description.it : weeklyEvent.description.en;
     const dressCode = isIt ? weeklyEvent.dressCode.it : weeklyEvent.dressCode.en;
-    const eventVisualGallery = getEventVisualGallery(slug, locale);
-    const heroImage = isUniversityPartyPt && eventVisualGallery
-      ? eventVisualGallery.images[0].src
-      : weeklyEvent.image;
 
     const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
     const weeklyVenue = getVenueById(`v-${weeklyEvent.clubSlug}`);
@@ -324,12 +333,12 @@ export default async function EventPage({ params }: Props) {
 
         <section className="relative h-screen flex items-center justify-center">
           <Image
-            src={heroImage}
-            alt={isUniversityPartyPt && eventVisualGallery ? eventVisualGallery.images[0].alt : title}
+            src={weeklyEvent.image}
+            alt={title}
             fill
             quality={95}
             sizes="100vw"
-            className={isUniversityPartyPt ? 'object-contain bg-black' : 'object-cover'}
+            className="object-cover"
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-black/60" />
@@ -343,7 +352,7 @@ export default async function EventPage({ params }: Props) {
               </span>
             </div>
             <h1 className="text-5xl md:text-7xl font-serif font-bold text-white mb-6 tracking-tight">{title}</h1>
-            <p className="text-xl text-white/70 mb-8 max-w-2xl mx-auto">{isUniversityPartyPt ? universityPartyPt.target : weeklyEvent.target}</p>
+            <p className="text-xl text-white/70 mb-8 max-w-2xl mx-auto">{weeklyEvent.target}</p>
             {weeklyEvent.xceedLink && (
               <a
                 href={weeklyEvent.xceedLink}
@@ -352,18 +361,16 @@ export default async function EventPage({ params }: Props) {
                 className="inline-flex items-center gap-2 bg-champagne text-black px-8 py-4 rounded-full font-bold hover:bg-white transition-colors text-lg"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" /></svg>
-                {isUniversityPartyPt ? 'Comprar no Xceed' : tr(locale, 'Buy on Xceed', 'Acquista su Xceed')}
+                {tr(locale, 'Buy on Xceed', 'Acquista su Xceed')}
               </a>
             )}
             <a
-              href={isUniversityPartyPt
-                ? 'https://wa.me/393519127047?text=Ola%2C%20quero%20reservar%20a%20University%20Party%20no%20Just%20Me%20Milano%20em%2014%20de%20julho.'
-                : `https://wa.me/393519127047?text=Hi,%20I%20would%20like%20to%20book%20for%20${weeklyEvent.name}%20at%20${weeklyEvent.clubName}`}
+              href={`https://wa.me/393519127047?text=Hi,%20I%20would%20like%20to%20book%20for%20${weeklyEvent.name}%20at%20${weeklyEvent.clubName}`}
               target="_blank"
               rel="noopener noreferrer"
               className={`inline-block ${weeklyEvent.xceedLink ? 'ml-4 border border-white/40 text-white hover:border-champagne hover:text-champagne' : 'bg-champagne text-black hover:bg-white'} px-8 py-4 rounded-full font-bold transition-colors text-lg`}
             >
-              {isUniversityPartyPt ? 'Reservar pelo WhatsApp' : tr(locale, 'Book via WhatsApp', 'Prenota via WhatsApp')}
+              {tr(locale, 'Book via WhatsApp', 'Prenota via WhatsApp')}
             </a>
           </div>
         </section>
@@ -371,57 +378,19 @@ export default async function EventPage({ params }: Props) {
         <div className="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2">
             <h2 className="text-3xl font-serif font-bold text-champagne mb-6">
-              {isUniversityPartyPt ? 'A experiencia' : tr(locale, 'The Experience', 'L\'Esperienza')}
+              {tr(locale, 'The Experience', 'L\'Esperienza')}
             </h2>
-            {isUniversityPartyPt ? (
-              <div className="space-y-5 text-lg text-white/70 leading-relaxed mb-8">
-                {universityPartyPt.intro.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-              </div>
-            ) : <p className="text-lg text-white/70 leading-relaxed mb-8">{description}</p>}
+            <p className="text-lg text-white/70 leading-relaxed mb-8">{description}</p>
             
             <div className="bg-white/[0.03] p-8 rounded-lg border border-white/10 mb-12">
-              <h3 className="text-xl font-bold text-white mb-4">{isUniversityPartyPt ? 'Codigo de vestuario' : tr(locale, 'Dress Code', 'Dress Code')}</h3>
-              <p className="text-white/50">{isUniversityPartyPt ? universityPartyPt.dressCode : dressCode}</p>
+              <h3 className="text-xl font-bold text-white mb-4">{tr(locale, 'Dress Code', 'Dress Code')}</h3>
+              <p className="text-white/50">{dressCode}</p>
             </div>
 
-            {isUniversityPartyPt && (
-              <>
-                <h2 className="text-3xl font-serif font-bold text-champagne mb-6 mt-12">Agenda detalhada da noite</h2>
-                <ol className="border-l border-champagne/40 ml-2 space-y-6 mb-12 pl-6">
-                  {universityPartyPt.agenda.map(([time, item]) => (
-                    <li key={time} className="relative">
-                      <span className="absolute -left-[31px] top-1 h-3 w-3 rounded-full bg-champagne" />
-                      <p className="font-semibold text-champagne">{time}</p>
-                      <p className="text-white/70">{item}</p>
-                    </li>
-                  ))}
-                </ol>
-                {eventVisualGallery && <EventImageGallery gallery={eventVisualGallery} />}
-                <h2 className="text-3xl font-serif font-bold text-champagne mb-6 mt-12">Programa do evento</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
-                  {universityPartyPt.programme.map(([heading, copy]) => (
-                    <section key={heading} className="border border-white/10 bg-white/[0.03] rounded-lg p-6">
-                      <h3 className="font-serif text-xl font-bold text-white mb-3">{heading}</h3>
-                      <p className="text-sm leading-relaxed text-white/60">{copy}</p>
-                    </section>
-                  ))}
-                </div>
-              </>
-            )}
-
             <h2 className="text-3xl font-serif font-bold text-champagne mb-6 mt-12">
-              {isUniversityPartyPt ? 'Bilhetes e mesas VIP' : tr(locale, 'Pricing & VIP Tables', 'Prezzi & Tavoli VIP')}
+              {tr(locale, 'Pricing & VIP Tables', 'Prezzi & Tavoli VIP')}
             </h2>
-            {isUniversityPartyPt ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
-                {universityPartyPt.prices.map(([name, price]) => (
-                  <section key={name} className="bg-white/[0.03] p-6 rounded-lg border border-white/10">
-                    <h3 className="text-lg font-bold text-white mb-2">{name}</h3>
-                    <p className="text-champagne leading-relaxed">{price}</p>
-                  </section>
-                ))}
-              </div>
-            ) : <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
               {weeklyEvent.pricing.aperitif && (
                 <div className="bg-white/[0.03] p-6 rounded-xl border border-white/10">
                   <h4 className="text-lg font-bold text-white mb-2">{tr(locale, 'Aperitif', 'Aperitivo')}</h4>
@@ -437,41 +406,37 @@ export default async function EventPage({ params }: Props) {
                 <p className="text-2xl font-serif text-champagne">{weeklyEvent.pricing.tables}</p>
                 <p className="text-sm text-white/50 mt-2">{tr(locale, 'Prices vary based on location and number of guests.', 'I prezzi variano in base alla posizione e al numero di persone.')}</p>
               </div>
-            </div>}
+            </div>
             
             <h2 className="text-3xl font-serif font-bold text-champagne mb-6 mt-12">
-              {isUniversityPartyPt ? 'Perguntas frequentes' : tr(locale, 'Frequently Asked Questions', 'Domande Frequenti')}
+              {tr(locale, 'Frequently Asked Questions', 'Domande Frequenti')}
             </h2>
             <div className="space-y-4">
-              {(isUniversityPartyPt
-                ? universityPartyPt.faqs
-                : weeklyEvent.faqs.map((faq) => [isIt ? faq.q.it : faq.q.en, isIt ? faq.a.it : faq.a.en] as const)
-              ).map(([question, answer], index) => (
+              {weeklyEvent.faqs.map((faq, index) => (
                 <div key={index} className="bg-white/[0.03] rounded-xl border border-white/10 p-6">
-                  <h3 className="text-lg font-semibold text-white mb-2">{question}</h3>
-                  <p className="text-white/50">{answer}</p>
+                  <h3 className="text-lg font-semibold text-white mb-2">{isIt ? faq.q.it : faq.q.en}</h3>
+                  <p className="text-white/50">{isIt ? faq.a.it : faq.a.en}</p>
                 </div>
               ))}
             </div>
-            {!isUniversityPartyPt && eventVisualGallery && <EventImageGallery gallery={eventVisualGallery} />}
           </div>
 
           <aside className="bg-white/[0.03] rounded-xl p-8 border border-white/10 h-fit sticky top-24">
             <h3 className="text-xl font-serif font-bold text-champagne mb-6 pb-4 border-b border-white/10">
-              {isUniversityPartyPt ? 'Detalhes do evento' : tr(locale, 'Event Details', 'Dettagli Evento')}
+              {tr(locale, 'Event Details', 'Dettagli Evento')}
             </h3>
             <div className="space-y-6">
               <div>
-                <p className="text-sm text-white/50 mb-1">{isUniversityPartyPt ? 'Data' : tr(locale, 'Day', 'Giorno')}</p>
-                <p className="text-white font-medium capitalize">{isUniversityPartyPt ? 'Terca-feira, 14 de julho de 2026' : weeklyEvent.day}</p>
+                <p className="text-sm text-white/50 mb-1">{tr(locale, 'Day', 'Giorno')}</p>
+                <p className="text-white font-medium capitalize">{weeklyEvent.day}</p>
               </div>
               <div>
-                <p className="text-sm text-white/50 mb-1">{isUniversityPartyPt ? 'Publico' : tr(locale, 'Target', 'Target')}</p>
-                <p className="text-white font-medium">{isUniversityPartyPt ? universityPartyPt.target : weeklyEvent.target}</p>
+                <p className="text-sm text-white/50 mb-1">{tr(locale, 'Target', 'Target')}</p>
+                <p className="text-white font-medium">{weeklyEvent.target}</p>
               </div>
               <div>
-                <p className="text-sm text-white/50 mb-1">{isUniversityPartyPt ? 'Musica' : tr(locale, 'Music Genres', 'Generi Musicali')}</p>
-                <p className="text-white font-medium">{isUniversityPartyPt ? 'House, hip hop, hits, EDM e reggaeton' : weeklyEvent.genres.join(', ')}</p>
+                <p className="text-sm text-white/50 mb-1">{tr(locale, 'Music Genres', 'Generi Musicali')}</p>
+                <p className="text-white font-medium">{weeklyEvent.genres.join(', ')}</p>
               </div>
               <div className="pt-6 border-t border-white/10 space-y-3">
                 {weeklyEvent.xceedLink && (
@@ -482,18 +447,16 @@ export default async function EventPage({ params }: Props) {
                     className="flex items-center justify-center gap-2 w-full bg-champagne text-black px-6 py-3 rounded-xl font-bold hover:bg-white transition-colors"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" /></svg>
-                    {isUniversityPartyPt ? 'Comprar no Xceed' : tr(locale, 'Buy on Xceed', 'Acquista su Xceed')}
+                    {tr(locale, 'Buy on Xceed', 'Acquista su Xceed')}
                   </a>
                 )}
                 <a
-                  href={isUniversityPartyPt
-                    ? 'https://wa.me/393519127047?text=Ola%2C%20quero%20reservar%20a%20University%20Party%20no%20Just%20Me%20Milano%20em%2014%20de%20julho.'
-                    : `https://wa.me/393519127047?text=Hi,%20I%20would%20like%20to%20book%20for%20${weeklyEvent.name}%20at%20${weeklyEvent.clubName}`}
+                  href={`https://wa.me/393519127047?text=Hi,%20I%20would%20like%20to%20book%20for%20${weeklyEvent.name}%20at%20${weeklyEvent.clubName}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 w-full bg-[#25D366] text-white px-6 py-3 rounded-xl font-bold hover:bg-[#20bd5a] transition-colors"
                 >
-                  {isUniversityPartyPt ? 'Reservar no WhatsApp' : tr(locale, 'Book on WhatsApp', 'Prenota su WhatsApp')}
+                  {tr(locale, 'Book on WhatsApp', 'Prenota su WhatsApp')}
                 </a>
               </div>
             </div>
@@ -504,6 +467,7 @@ export default async function EventPage({ params }: Props) {
   }
 
   let event = getEventBySlug(slug, locale);
+  if (!event) event = getLocalizedEventSeed(slug, locale) || undefined;
   if (!event) event = await getEbEventBySlug(slug);
   if (!event) return notFound();
 
@@ -521,9 +485,11 @@ export default async function EventPage({ params }: Props) {
   // canonico → senza questo secondo tentativo il gold sparirebbe dopo la dedup.
   const slugEnKey = event.localizedContent.slug.en;
   const slugItKey = event.localizedContent.slug.it;
-  const blobRich =
-    (await getRichContent(slugEnKey)) ||
-    (slugItKey && slugItKey !== slugEnKey ? await getRichContent(slugItKey) : null);
+  const localizedEventContent = getLocalizedEventContent(slugEnKey, locale);
+  const blobRich = localizedEventContent
+    ? null
+    : (await getRichContent(slugEnKey)) ||
+      (slugItKey && slugItKey !== slugEnKey ? await getRichContent(slugItKey) : null);
 
   // CORPO GOLD LOCALIZZATO (2026-07-12). Il Blob (GoldEventContent) contiene le
   // sezioni/FAQ SOLO in en/it → su /es, /fr, ecc. il corpo restava in inglese.
@@ -534,25 +500,29 @@ export default async function EventPage({ params }: Props) {
   // (copre gli eventi pubblicati senza enrichment). getEventGoldHtml è cacheato
   // (fetchOrgCached 5min) + ISR, e con Vercel Pro (maxDuration 300s) non va in timeout.
   const isEnIt = locale === 'en' || locale === 'it';
-  const localizedGold = isEnIt ? null : await getEventGoldHtml(slug, locale);
+  const localizedGold = localizedEventContent || isEnIt ? null : await getEventGoldHtml(slug, locale);
   const richContent = localizedGold ? null : blobRich;
-  const goldHtml = localizedGold || (richContent ? null : await getEventGoldHtml(slug, locale));
+  const goldHtml = localizedEventContent ? null : localizedGold || (richContent ? null : await getEventGoldHtml(slug, locale));
 
   // Internal linking: "More events at {venue}" — riusa la sorgente dati
   // unificata già usata da homepage/calendar (statici + Eventbrite/Xceed
   // reali). getAllCalendarEvents() degrada già da sola se Eventbrite non
   // risponde (vedi lib/calendarEvents.ts), quindi nessun try/catch qui.
   const allVenueCalendarItems = await getAllCalendarEvents();
+  const currentEventStartMs = new Date(event.dateISO).getTime();
+  const isCurrentEvent = (candidate: Event) =>
+    candidate.id === event.id ||
+    (candidate.venueId === event.venueId && Math.abs(new Date(candidate.dateISO).getTime() - currentEventStartMs) < 5 * 60 * 1000);
   const moreVenueEvents: MoreVenueEventItem[] = allVenueCalendarItems
     .filter(
       ({ event: e }) =>
-        e.venueId === event.venueId && e.id !== event.id && isUpcomingRome(e.dateISO)
+        e.venueId === event.venueId && !isCurrentEvent(e) && isUpcomingRome(e.dateISO)
     )
     .sort((a, b) => new Date(a.event.dateISO).getTime() - new Date(b.event.dateISO).getTime())
     .slice(0, 4)
     .map(({ event: e }) => {
       const eSlug = locale === 'it' ? (e.localizedContent.slug.it || e.localizedContent.slug.en) : e.localizedContent.slug.en;
-      const eDateStr = new Intl.DateTimeFormat(locale === 'it' ? 'it-IT' : 'en-US', {
+      const eDateStr = new Intl.DateTimeFormat(getIntlLocale(locale), {
         weekday: 'short',
         day: 'numeric',
         month: 'short',
@@ -578,41 +548,59 @@ export default async function EventPage({ params }: Props) {
     return key >= galleryTodayKey && key <= gallerySundayKey;
   };
   const todayEvents = allVenueCalendarItems
-    .filter(({ event: e }) => e.id !== event.id && romeDayKey(e.dateISO) === galleryTodayKey)
+    .filter(({ event: e }) => !isCurrentEvent(e) && romeDayKey(e.dateISO) === galleryTodayKey)
     .sort((a, b) => new Date(a.event.dateISO).getTime() - new Date(b.event.dateISO).getTime());
   const venueWeekEvents = allVenueCalendarItems
-    .filter(({ event: e }) => e.id !== event.id && e.venueId === event.venueId && inGalleryWeek(e.dateISO))
+    .filter(({ event: e }) => !isCurrentEvent(e) && e.venueId === event.venueId && inGalleryWeek(e.dateISO))
     .sort((a, b) => new Date(a.event.dateISO).getTime() - new Date(b.event.dateISO).getTime());
   const allWeekEvents = allVenueCalendarItems
-    .filter(({ event: e }) => e.id !== event.id && inGalleryWeek(e.dateISO))
+    .filter(({ event: e }) => !isCurrentEvent(e) && inGalleryWeek(e.dateISO))
     .sort((a, b) => new Date(a.event.dateISO).getTime() - new Date(b.event.dateISO).getTime());
 
+  const eventVisualGallery = getEventVisualGallery(event.localizedContent.slug.en, locale);
+  const eventHeroImage = eventVisualGallery?.images[0]?.src || event.image || venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp';
+  const title = localizedEventContent?.title || getLocalizedText(event.localizedContent.title, locale);
+  const venueName = getLocalizedText(venue.localizedContent.name, locale);
+  const description = localizedEventContent?.seoSummary || getLocalizedText(event.localizedContent.shortDescription, locale);
+  const eventForSchema: Event = localizedEventContent || eventVisualGallery
+    ? {
+        ...event,
+        image: eventHeroImage,
+        localizedContent: {
+          ...event.localizedContent,
+          title: { ...event.localizedContent.title, [locale]: title },
+          shortDescription: { ...event.localizedContent.shortDescription, [locale]: description },
+        },
+      }
+    : event;
+
   // Generate JSON-LD Schemas
-  const eventSchema = generateEventSchema(event, venue, performer || null, locale);
-  const breadcrumbSchema = generateBreadcrumbSchema(event, venue, locale);
-  const faqSchema = richContent?.rewritten.faqLong?.length
+  const eventSchema = generateEventSchema(eventForSchema, venue, performer || null, locale);
+  const breadcrumbSchema = generateBreadcrumbSchema(eventForSchema, venue, locale);
+  const faqItems = localizedEventContent?.faqs ?? richContent?.rewritten.faqLong.map((faq) => ({
+    question: (locale === 'it' && faq.questionIt) || faq.question,
+    answer: (locale === 'it' && faq.answerIt) || faq.answer,
+  })) ?? [];
+  const faqSchema = faqItems.length
     ? {
         '@context': 'https://schema.org',
         '@type': 'FAQPage',
-        mainEntity: richContent.rewritten.faqLong.map((f) => ({
+        mainEntity: faqItems.map((faq) => ({
           '@type': 'Question',
-          name: (locale === 'it' && f.questionIt) || f.question,
-          acceptedAnswer: { '@type': 'Answer', text: (locale === 'it' && f.answerIt) || f.answer },
+          name: faq.question,
+          acceptedAnswer: { '@type': 'Answer', text: faq.answer },
         })),
       }
     : null;
 
-  const title = getLocalizedText(event.localizedContent.title, locale);
-  const venueName = getLocalizedText(venue.localizedContent.name, locale);
-  const description = getLocalizedText(event.localizedContent.shortDescription, locale);
-  const eventVisualGallery = getEventVisualGallery(event.localizedContent.slug.en, locale);
   // Internal linking: venue name in "About the venue" links to its /clubs page.
   const venueSlug = getLocalizedText(venue.slugs, locale);
   const venueHref = `${localePrefix(locale)}/clubs/${venueSlug}`;
+  const venueHeading = getVenueHeadingParts(locale);
 
   // Format Date
   const dateObj = new Date(event.dateISO);
-  const formattedDate = new Intl.DateTimeFormat(locale === 'it' ? 'it-IT' : 'en-US', {
+  const formattedDate = new Intl.DateTimeFormat(getIntlLocale(locale), {
     weekday: 'long',
     day: 'numeric',
     month: 'long',
@@ -626,7 +614,7 @@ export default async function EventPage({ params }: Props) {
   // lib/eventbriteSync.ts: il ticket Eventbrite non è mai il prezzo vero)
   const formattedPrice = event.pricing.entry === null
     ? null
-    : new Intl.NumberFormat(locale === 'it' ? 'it-IT' : 'en-US', {
+    : new Intl.NumberFormat(getIntlLocale(locale), {
         style: 'currency',
         currency: event.pricing.currency,
         maximumFractionDigits: 0,
@@ -636,13 +624,15 @@ export default async function EventPage({ params }: Props) {
   // quando il prezzo non è confermato, invece di affermare "Gratuito" a caso.
   const entryText = event.pricing.entry === null
     ? null
-    : (event.pricing.entry === 0 ? (tr(locale, 'Free', 'Gratuito')) : formattedPrice);
+    : (event.pricing.entry === 0 ? eventText(locale, 'Free', 'Gratuito', 'Grátis') : formattedPrice);
   const tableText = event.pricing.tableMinSpend
     ? (locale === 'it' ? `tavoli VIP da €${event.pricing.tableMinSpend}` : `VIP tables from €${event.pricing.tableMinSpend}`)
     : null;
   const pricePhrase = [
-    entryText ? `${tr(locale, 'Entry', 'Ingresso')}: ${entryText}` : null,
-    tableText,
+    entryText ? `${eventText(locale, 'Entry', 'Ingresso', 'Entrada')}: ${entryText}` : null,
+    locale === 'pt' && event.pricing.tableMinSpend
+      ? `mesas VIP a partir de €${event.pricing.tableMinSpend}`
+      : tableText,
   ].filter(Boolean).join(', ');
 
   return (
@@ -666,13 +656,13 @@ export default async function EventPage({ params }: Props) {
         {/* Hero Section */}
         <section className="relative w-full h-[60vh] min-h-[400px]">
           <Image
-            src={event.image || venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp'}
-            alt={title}
+            src={eventHeroImage}
+            alt={eventVisualGallery?.images[0]?.alt || title}
             fill
             quality={95}
             priority={true} // Above the fold
             sizes="100vw"
-            className="object-cover"
+            className={eventVisualGallery ? 'object-contain bg-black' : 'object-cover'}
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#131009] via-[#131009]/60 to-transparent" />
@@ -683,7 +673,7 @@ export default async function EventPage({ params }: Props) {
                 {venueName}
               </span>
               <span className="text-white/70 text-sm font-medium">
-                {event.genre.map(g => g.replace('_', ' ')).join(', ')}
+                {event.genre.map(g => formatEventGenre(locale, g)).join(', ')}
               </span>
             </div>
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight">
@@ -702,11 +692,9 @@ export default async function EventPage({ params }: Props) {
 
             {/* AI Trafiletto */}
             <div className="not-prose mb-8 p-5 rounded-xl border border-champagne/20 bg-champagne/[0.04] text-left">
-              <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">Quick Answer</p>
+              <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">{getQuickAnswerLabel(locale)}</p>
               <p className="font-sans text-white/70 text-sm leading-relaxed">
-                {locale === 'it'
-                  ? `${title} @ ${venueName} a Milano. Data: ${formattedDate}.${pricePhrase ? ` ${pricePhrase}.` : ''} Prenota via WhatsApp +39 351 912 7047.`
-                  : `${title} @ ${venueName} in Milan. Date: ${formattedDate}.${pricePhrase ? ` ${pricePhrase}.` : ''} Book via WhatsApp +39 351 912 7047.`}
+                {buildEventQuickAnswer({ locale, title, venueName, formattedDate, pricePhrase })}
               </p>
             </div>
 
@@ -714,10 +702,10 @@ export default async function EventPage({ params }: Props) {
             <div className="not-prose flex flex-wrap gap-2 mb-8">
               {[
                 venueName,
-                ...event.genre.map(g => g.replace(/_/g, ' ')),
-                tr(locale, 'Milan Events', 'Serate Milano'),
-                'VIP Tables',
-                tr(locale, 'Book Now', 'Prenotazione'),
+                ...event.genre.map(g => formatEventGenre(locale, g)),
+                eventText(locale, 'Milan Events', 'Serate Milano', 'Eventos em Milão'),
+                eventText(locale, 'VIP Tables', 'Tavoli VIP', 'Mesas VIP'),
+                eventText(locale, 'Book Now', 'Prenotazione', 'Reservar agora'),
               ].map(tag => (
                 <span key={tag} className="px-3 py-1.5 rounded-full border border-white/10 text-white/40 text-xs font-sans tracking-wider">
                   {tag}
@@ -726,7 +714,7 @@ export default async function EventPage({ params }: Props) {
             </div>
 
             <h2 className="text-2xl font-serif font-bold text-champagne mb-4">
-              {tr(locale, 'About the event', 'Informazioni sull\'evento')}
+              {eventText(locale, 'About the event', 'Informazioni sull\'evento', 'Sobre o evento')}
             </h2>
             <p className="text-lg text-white/70 leading-relaxed">
               {description}
@@ -734,7 +722,7 @@ export default async function EventPage({ params }: Props) {
 
             {performer && (
               <div className="mt-8 p-6 bg-white/[0.03] rounded-lg border border-white/10">
-                <h3 className="text-xl font-serif font-bold text-champagne mb-2">Lineup: {performer.name}</h3>
+                <h3 className="text-xl font-serif font-bold text-champagne mb-2">{eventText(locale, 'Lineup', 'Lineup', 'Line-up')}: {performer.name}</h3>
                 <p className="text-white/50">
                   {getLocalizedText(performer.localizedContent.bio, locale)}
                 </p>
@@ -743,26 +731,14 @@ export default async function EventPage({ params }: Props) {
 
             {/* H2: Venue Info */}
             <h2 className="text-2xl font-serif font-bold text-champagne mt-12 mb-4">
-              {locale === 'it' ? (
-                <>
-                  <Link href={venueHref} className="hover:text-white transition-colors underline decoration-champagne/40 underline-offset-4">
-                    {venueName}
-                  </Link>
-                  {': La Venue'}
-                </>
-              ) : (
-                <>
-                  {'About '}
-                  <Link href={venueHref} className="hover:text-white transition-colors underline decoration-champagne/40 underline-offset-4">
-                    {venueName}
-                  </Link>
-                </>
-              )}
+              {venueHeading.prefix ? `${venueHeading.prefix} ` : null}
+              <Link href={venueHref} className="hover:text-white transition-colors underline decoration-champagne/40 underline-offset-4">
+                {venueName}
+              </Link>
+              {venueHeading.suffix || null}
             </h2>
             <p className="text-white/70 leading-relaxed">
-              {locale === 'it'
-                ? `${venueName} è uno dei locali più esclusivi di Milano, situato in ${venue.address.streetAddress}. Prenota il tuo tavolo VIP o inserisciti in guestlist per garantirti la migliore esperienza.`
-                : `${venueName} is one of Milan's most exclusive venues, located at ${venue.address.streetAddress}. Book your VIP table or get on the guestlist to ensure the best experience.`}
+              {buildVenueDescription(locale, venueName, venue.address.streetAddress)}
             </p>
             <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-4 not-prose">
               {buildVenueGalleryImages(venue, title, locale).map((img, i) => (
@@ -774,34 +750,41 @@ export default async function EventPage({ params }: Props) {
 
             {/* H2: Practical Info */}
             <h2 className="text-2xl font-serif font-bold text-champagne mt-12 mb-4">
-              {tr(locale, 'Practical Information', 'Informazioni Pratiche')}
+              {eventText(locale, 'Practical Information', 'Informazioni Pratiche', 'Informações práticas')}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 not-prose">
               <div className="p-4 rounded-xl border border-white/8 bg-white/[0.02]">
                 <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-2">
-                  {tr(locale, 'Dress Code', 'Dress Code')}
+                  {eventText(locale, 'Dress Code', 'Dress Code', 'Código de vestimenta')}
                 </h3>
                 <p className="font-sans text-white/50 text-sm">
-                  {tr(locale, 'Smart elegant. No sneakers or shorts.', 'Smart elegant. Niente sneakers o shorts.')}
+                  {eventText(locale, 'Smart elegant. No sneakers or shorts.', 'Smart elegant. Niente sneakers o shorts.', 'Elegante e sofisticado. Sem tênis ou bermudas.')}
                 </p>
               </div>
               <div className="p-4 rounded-xl border border-white/8 bg-white/[0.02]">
                 <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-2">
-                  {tr(locale, 'Minimum Age', 'Età Minima')}
+                  {eventText(locale, 'Minimum Age', 'Età Minima', 'Idade mínima')}
                 </h3>
-                <p className="font-sans text-white/50 text-sm">18+ {tr(locale, '(ID required)', '(documento richiesto)')}</p>
+                <p className="font-sans text-white/50 text-sm">18+ {eventText(locale, '(ID required)', '(documento richiesto)', '(documento obrigatório)')}</p>
               </div>
               <div className="p-4 rounded-xl border border-white/8 bg-white/[0.02]">
                 <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-2">
-                  {tr(locale, 'Getting There', 'Come Arrivare')}
+                  {eventText(locale, 'Getting There', 'Come Arrivare', 'Como chegar')}
                 </h3>
-                <p className="font-sans text-white/50 text-sm">{venue.address.streetAddress}, {tr(locale, 'Milan', 'Milano')}</p>
+                <p className="font-sans text-white/50 text-sm">{venue.address.streetAddress}, {eventText(locale, 'Milan', 'Milano', 'Milão')}</p>
               </div>
             </div>
 
-            {richContent && <GoldEventContent data={richContent} locale={locale} />}
-            {!richContent && goldHtml && <GoldEventHtml html={goldHtml} />}
-            {eventVisualGallery && <EventImageGallery gallery={eventVisualGallery} />}
+            {localizedEventContent && (
+              <GoldEventContent localized={localizedEventContent} locale={locale} gallery={eventVisualGallery} />
+            )}
+            {!localizedEventContent && richContent && (
+              <GoldEventContent data={richContent} locale={locale} gallery={eventVisualGallery} />
+            )}
+            {!localizedEventContent && !richContent && goldHtml && <GoldEventHtml html={goldHtml} />}
+            {!localizedEventContent && !richContent && !goldHtml && eventVisualGallery && (
+              <EventImageGallery gallery={eventVisualGallery} />
+            )}
 
             <MoreVenueEvents items={moreVenueEvents} locale={locale} venueName={venueName} />
           </div>
@@ -809,25 +792,25 @@ export default async function EventPage({ params }: Props) {
           {/* Sidebar / Ticket Info */}
           <aside id="booking" className="bg-white/[0.03] rounded-xl p-8 border border-white/10 h-fit sticky top-24">
             <h3 className="text-xl font-serif font-bold text-champagne mb-6 pb-4 border-b border-white/10">
-              {tr(locale, 'Entry Details', 'Dettagli Ingresso')}
+              {eventText(locale, 'Entry Details', 'Dettagli Ingresso', 'Detalhes de entrada')}
             </h3>
             
             <div className="space-y-4 mb-8">
               <div className="flex justify-between items-center">
-                <span className="text-white/50">{tr(locale, 'Entry', 'Ingresso')}</span>
+                <span className="text-white/50">{eventText(locale, 'Entry', 'Ingresso', 'Entrada')}</span>
                 <span className="text-white font-bold text-xl">
                   {event.pricing.entry === null
-                    ? (tr(locale, 'On request', 'Su richiesta'))
+                    ? eventText(locale, 'On request', 'Su richiesta', 'Sob consulta')
                     : event.pricing.entry === 0
-                      ? (tr(locale, 'Free', 'Gratis'))
+                      ? eventText(locale, 'Free', 'Gratis', 'Grátis')
                       : formattedPrice}
                 </span>
               </div>
               {event.pricing.tableMinSpend && (
                 <div className="flex justify-between items-center">
-                  <span className="text-white/50">{tr(locale, 'Tables from', 'Tavoli da')}</span>
+                  <span className="text-white/50">{eventText(locale, 'Tables from', 'Tavoli da', 'Mesas a partir de')}</span>
                   <span className="text-white font-medium">
-                    {new Intl.NumberFormat(locale === 'it' ? 'it-IT' : 'en-US', { style: 'currency', currency: event.pricing.currency, maximumFractionDigits: 0 }).format(event.pricing.tableMinSpend)}
+                    {new Intl.NumberFormat(getIntlLocale(locale), { style: 'currency', currency: event.pricing.currency, maximumFractionDigits: 0 }).format(event.pricing.tableMinSpend)}
                   </span>
                 </div>
               )}
@@ -842,8 +825,8 @@ export default async function EventPage({ params }: Props) {
               >
                 <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" /></svg>
                 {event.xceedUrl.includes('eventbrite')
-                  ? (tr(locale, 'Buy Ticket', 'Compra il Biglietto'))
-                  : (tr(locale, 'Buy on Xceed', 'Acquista su Xceed'))}
+                  ? eventText(locale, 'Buy Ticket', 'Compra il Biglietto', 'Comprar ingresso')
+                  : eventText(locale, 'Buy on Xceed', 'Acquista su Xceed', 'Comprar no Xceed')}
               </a>
             )}
 
@@ -855,9 +838,9 @@ export default async function EventPage({ params }: Props) {
             />
 
             <div className="mt-6 pt-6 border-t border-white/10">
-              <p className="text-sm text-white/50 mb-1">{tr(locale, 'Location', 'Location')}</p>
+              <p className="text-sm text-white/50 mb-1">{eventText(locale, 'Location', 'Location', 'Localização')}</p>
               <p className="text-white font-medium">{venueName}</p>
-              <p className="text-sm text-white/40">{venue.address.streetAddress}, {venue.address.addressLocality}</p>
+              <p className="text-sm text-white/40">{venue.address.streetAddress}, {locale === 'pt' ? 'Milão' : venue.address.addressLocality}</p>
             </div>
           </aside>
         </section>
@@ -871,10 +854,10 @@ export default async function EventPage({ params }: Props) {
               <div className="mb-14">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between mb-6">
                   <h2 className="font-serif text-2xl md:text-3xl text-white">
-                    {tr(locale, 'Tonight in Milan', 'Stasera a Milano')}
+                    {eventText(locale, 'Tonight in Milan', 'Stasera a Milano', 'Esta noite em Milão')}
                   </h2>
                   <Link href={`${localePrefix(locale)}/events/tonight`} className="text-champagne text-sm tracking-wider hover:underline uppercase whitespace-nowrap">
-                    {tr(locale, 'See all', 'Vedi tutti')} →
+                    {eventText(locale, 'See all', 'Vedi tutti', 'Ver todos')} →
                   </Link>
                 </div>
                 <EventsCarousel items={todayEvents} lang={locale} showTonightTag />
@@ -885,10 +868,10 @@ export default async function EventPage({ params }: Props) {
               <div className="mb-14">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between mb-6">
                   <h2 className="font-serif text-2xl md:text-3xl text-white">
-                    {tr(locale, `This Week at ${venueName}`, `Questa Settimana al ${venueName}`)}
+                    {buildThisWeekAtHeading(locale, venueName)}
                   </h2>
                   <Link href={venueHref} className="text-champagne text-sm tracking-wider hover:underline uppercase whitespace-nowrap">
-                    {tr(locale, 'See all', 'Vedi tutti')} →
+                    {eventText(locale, 'See all', 'Vedi tutti', 'Ver todos')} →
                   </Link>
                 </div>
                 <EventsCarousel items={venueWeekEvents} lang={locale} />
@@ -899,10 +882,10 @@ export default async function EventPage({ params }: Props) {
               <div>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between mb-6">
                   <h2 className="font-serif text-2xl md:text-3xl text-white">
-                    {tr(locale, 'This Week in Milan', 'Questa Settimana a Milano')}
+                    {getThisWeekInMilanHeading(locale)}
                   </h2>
                   <Link href={`${localePrefix(locale)}/events/this-week`} className="text-champagne text-sm tracking-wider hover:underline uppercase whitespace-nowrap">
-                    {tr(locale, 'See all', 'Vedi tutti')} →
+                    {eventText(locale, 'See all', 'Vedi tutti', 'Ver todos')} →
                   </Link>
                 </div>
                 <EventsCarousel items={allWeekEvents} lang={locale} />
