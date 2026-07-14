@@ -16,6 +16,8 @@ const ORG_ID = '2988002072164';
 
 interface OwnOrgEvent {
   id: string;
+  status?: string;
+  url?: string;
   venue?: { name?: string };
   start: { local: string };
   description?: { html?: string };

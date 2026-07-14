@@ -182,13 +182,14 @@ const ordered = manifest.entries
   .sort((a, b) => (a.mode === b.mode ? entryKey(a).localeCompare(entryKey(b)) : a.mode === 'update' ? -1 : 1));
 
 const progress = readJson(args.progress, { version: 1, completed: {}, failed: {} });
-const pending = ordered.filter((entry) => !progress.completed[entryKey(entry)]).slice(0, args.limit);
+const allPending = ordered.filter((entry) => !progress.completed[entryKey(entry)]);
+const pending = allPending.slice(0, args.limit);
 const summary = {
   execute: args.execute,
   phase: args.phase,
   manifestEntries: manifest.entries.length,
   selected: ordered.length,
-  previouslyCompleted: ordered.length - pending.length,
+  previouslyCompleted: ordered.length - allPending.length,
   pending: pending.length,
   updates: pending.filter((entry) => entry.mode === 'update').length,
   creates: pending.filter((entry) => entry.mode === 'create').length,

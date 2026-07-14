@@ -23,6 +23,7 @@ interface QueueItem {
 
 interface SourceEntry {
   langs: Set<string>;
+  eventsByLang: Map<string, { id: string; status?: string; url?: string }>;
   slugEn: string;
   enEventId?: string;
   startLocal: string;
@@ -85,11 +86,13 @@ async function buildQueue(searchParams: URLSearchParams): Promise<{
     const [, base, lang, slugEn] = marker;
     const entry = bySrc.get(base) || {
       langs: new Set<string>(),
+      eventsByLang: new Map<string, { id: string; status?: string; url?: string }>(),
       slugEn,
       startLocal: ev.start?.local || '',
     };
 
     entry.langs.add(lang);
+    entry.eventsByLang.set(lang, { id: ev.id, status: ev.status, url: ev.url });
     if (lang === 'en') {
       entry.enEventId = ev.id;
       entry.slugEn = slugEn;
@@ -146,7 +149,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: 'Invalid JSON' }, { status: 400 });
   }
 
-  const submissions = body.items?.length ? body.items : [body];
+  const isBatchRequest = Array.isArray(body.items) && body.items.length > 0;
+  const submissions = isBatchRequest ? body.items! : [body];
   if (submissions.length > 10) {
     return NextResponse.json({ ok: false, error: 'Maximum 10 locale submissions per request' }, { status: 400 });
   }
@@ -179,6 +183,46 @@ export async function POST(request: Request) {
     const ledgerSource = ledgerByBase.get(base);
     if (!ledgerSource) {
       results.push({ ok: false, skipped: false, base, lang: def.code, reason: 'source-marker-not-found' });
+      continue;
+    }
+    const existing = ledgerSource.eventsByLang.get(def.code);
+    if (existing?.status === 'draft') {
+      if (activeLocalePublishes.has(key)) {
+        results.push({ ok: false, skipped: false, base, lang: def.code, reason: 'publish-already-in-progress' });
+        continue;
+      }
+
+      activeLocalePublishes.add(key);
+      try {
+        const publishRes = await fetch(`${EVENTBRITE_API}/events/${existing.id}/publish/`, {
+          method: 'POST',
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (!publishRes.ok) {
+          const errorBody = await publishRes.text();
+          results.push({
+            ok: false,
+            skipped: false,
+            resumed: true,
+            base,
+            lang: def.code,
+            eventId: existing.id,
+            reason: `Draft publish failed: ${publishRes.status} ${errorBody.slice(0, 200)}`,
+          });
+          continue;
+        }
+        results.push({
+          ok: true,
+          skipped: false,
+          resumed: true,
+          base,
+          lang: def.code,
+          eventId: existing.id,
+          url: existing.url,
+        });
+      } finally {
+        activeLocalePublishes.delete(key);
+      }
       continue;
     }
     if (ledgerSource.langs.has(def.code)) {
@@ -250,7 +294,7 @@ export async function POST(request: Request) {
   }
 
   const response = { ok: results.every((result) => result.ok === true), results };
-  return NextResponse.json(submissions.length === 1 ? results[0] : response);
+  return NextResponse.json(isBatchRequest ? response : results[0]);
 }
 
 /**
