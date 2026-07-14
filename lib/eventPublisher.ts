@@ -251,7 +251,7 @@ export interface PublishOneLangParams {
   ageRestriction?: string;
   doorTimeISO?: string;
   poster?: PosterResult;
-  /** Override ticket per le lingue oltre en/it (traduzione dal contentTranslator) */
+  /** Override ticket per le lingue oltre en/it: contenuto gia tradotto localmente. */
   ticketText?: { name: string; description: string };
   /** Copiati dal listing EN sorgente nel worker multilingua (FASE L3) */
   categoryId?: string;

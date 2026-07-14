@@ -1,203 +1,24 @@
 import { NextResponse } from 'next/server';
-import { scoutXceedEvents } from '@/lib/xceedScout';
-import { buildXceedLedger, filterNewXceedCandidates, missingLangsForXceedCandidate } from '@/lib/xceedLedger';
-import { rewriteXceedEvent } from '@/lib/eventRewriter';
-import type { Lang } from '@/lib/eventRewriter';
-import { resolveWhatsappOnly } from '@/lib/brandSanitizer';
-import { processPoster } from '@/lib/posterPipeline';
-import { publishXceedEvent, PUBLISH_RATE_LIMIT_MS } from '@/lib/eventPublisher';
-import { putRichContent } from '@/lib/richContentStore';
-import { notifyUrl } from '@/lib/googleIndexing';
-import { sleep, pollSitePageUntilLive, sitePageUrlFor, getLastManualRunAt, isRecentManualRun } from '@/lib/importShared';
 
 export const dynamic = 'force-dynamic';
-export const maxDuration = 300;
-
-// FASE X4/B: 2 chiamate AI lunghe + poster + 2 publish (EN+IT) + poll sito per
-// evento reale (~4-6 min) — cap conservativo, il backlog dei 3 venue affiliati
-// si smaltisce su più notti.
-const DEFAULT_MAX_PER_RUN = 3;
-// FASE L2 (piano local-pipeline-no-api): se la pipeline manuale locale (skill
-// /import-events-local, gratuita via abbonamento) ha già girato di recente,
-// il cron a pagamento non serve — risparmia credito API.
-const MANUAL_RUN_GRACE_HOURS = 36;
 
 /**
- * Cron NOTTURNO (vercel.json: 0 3 * * *) — pipeline Xceed (FASE X4/B, piani
- * .claude/plans/2026-07-07-xceed-affiliate-pipeline.md e
- * .claude/plans/2026-07-08-bilingual-everywhere.md).
+ * Disabled intentionally.
  *
- * Trova eventi nei 3 venue dove siamo Ambassador Xceed (dati UFFICIALI:
- * prezzi/orari/dress code/età reali, non scraping di terzi), li riscrive in
- * chiave gold-standard con claude-sonnet-5 in ENTRAMBE le lingue (corpo + 25
- * FAQ, EN e IT indipendenti), scrive il contenuto ricco su Vercel Blob (letto
- * dalla pagina sito, bilingue), pulisce/edita la locandina ufficiale UNA
- * volta (condivisa dalle due lingue), pubblica DUE eventi Eventbrite separati
- * (uno interamente EN, uno interamente IT — non un'unica description mista)
- * e notifica Google Indexing per entrambe le pagine sito dopo averle
- * verificate vive.
- *
- * Auth: Authorization: Bearer CRON_SECRET  (Vercel cron automatico)
- *    o  ?secret=INDEXING_SECRET             (trigger manuale)
- *
- * Query: ?dryRun=1 esegue tutto tranne pubblicazione/scrittura blob.
- *        ?max=N     override del cap eventi/run (default 3).
- *        ?days=N    finestra scout in giorni (default 7).
+ * This route used to scout Xceed events, rewrite EN/IT content through a
+ * server-side AI API, then publish to Eventbrite. That workflow is no longer
+ * allowed: all content generation and translation must happen locally in the
+ * operator session, then be submitted as already prepared payloads through
+ * /api/events/publish-prepared or /api/events/publish-locales POST.
  */
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const authHeader = request.headers.get('authorization');
-
-  const okCron = process.env.CRON_SECRET && authHeader === `Bearer ${process.env.CRON_SECRET}`;
-  const okSecret = process.env.INDEXING_SECRET && searchParams.get('secret') === process.env.INDEXING_SECRET;
-
-  if (!okCron && !okSecret) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
-
-  const dryRun = searchParams.get('dryRun') === '1';
-  const force = searchParams.get('force') === '1';
-  const maxParam = parseInt(searchParams.get('max') || '', 10);
-  const maxPerRun = Number.isFinite(maxParam) && maxParam > 0 ? maxParam : DEFAULT_MAX_PER_RUN;
-  const days = parseInt(searchParams.get('days') || '7', 10);
-
-  // FASE L2: la pipeline manuale locale (publish-prepared) copre già questa
-  // finestra recente — non consumare credito API per lo stesso lavoro.
-  if (!force) {
-    const lastManualRunAt = await getLastManualRunAt();
-    if (isRecentManualRun(lastManualRunAt, MANUAL_RUN_GRACE_HOURS)) {
-      return NextResponse.json({
-        ok: true,
-        skippedBecause: 'manual run recent',
-        lastManualRunAt,
-        ranAt: new Date().toISOString(),
-      });
-    }
-  }
-
-  const published: Array<{
-    title: string; lang: Lang; url: string; imageSource?: string;
-    sitePageUrl?: string; sitePageLive?: boolean; indexed?: boolean; blobWritten?: boolean;
-  }> = [];
-  const skipped: { title: string; reason: string }[] = [];
-  const errors: string[] = [];
-
-  // 1. Scout — eventi ufficiali dei 3 venue affiliati Xceed
-  let scouted: Awaited<ReturnType<typeof scoutXceedEvents>> = [];
-  try {
-    scouted = await scoutXceedEvents(days);
-  } catch (e) {
-    return NextResponse.json({ ok: false, error: `Xceed scout failed: ${(e as Error).message}` }, { status: 500 });
-  }
-
-  // 2. Dedupe — marker nlm:src=xc-{xceedId}-{lang}: un candidato è "nuovo" se
-  // manca ANCHE una sola delle due lingue (FASE B "eventi separati").
-  let ledger;
-  try {
-    ledger = await buildXceedLedger();
-  } catch (e) {
-    return NextResponse.json({ ok: false, error: `Xceed ledger build failed: ${(e as Error).message}` }, { status: 500 });
-  }
-  const newCandidates = filterNewXceedCandidates(scouted, ledger).slice(0, maxPerRun);
-
-  // 3-7. Per ogni candidato: rewrite (bilingue) → blob → poster (condiviso) →
-  // publish (una o due lingue, quelle mancanti) → poll → index
-  for (const candidate of newCandidates) {
-    try {
-      const langsToPublish = missingLangsForXceedCandidate(candidate, ledger);
-      const rewritten = await rewriteXceedEvent(candidate);
-
-      if (rewritten.needsReview) {
-        skipped.push({ title: candidate.name, reason: `needsReview: ${rewritten.debugError || 'AI rewrite failed or incomplete'}` });
-        continue;
-      }
-
-      // Solo il placeholder {{WHATSAPP}} va risolto qui — il resto della
-      // description (contatti/link affiliate/legal/marker) è codice, non
-      // testo di terzi: passarlo per sanitize() lo corromperebbe (bug reale:
-      // la regex telefono matchava le date nello slug, e l'URL affiliate
-      // Xceed veniva rimosso perché non riconosciuto come "nostro"). Gli
-      // hook AI sono già stati sanitizzati dentro rewriteXceedEvent.
-      const sanitizedDescriptionEn = resolveWhatsappOnly(rewritten.descriptionEn);
-      const sanitizedDescriptionIt = resolveWhatsappOnly(rewritten.descriptionIt);
-
-      let poster;
-      try {
-        poster = await processPoster(candidate.imageUrl, candidate.venueId, rewritten.imageSlug);
-      } catch (e) {
-        skipped.push({ title: candidate.name, reason: `needsReview: poster pipeline failed — ${(e as Error).message}` });
-        continue;
-      }
-
-      // FASE X2: il corpo gold bilingue (sezioni/programma/25 FAQ EN+IT/offers
-      // reali) va sul blob PRIMA del publish — entrambe le pagine sito
-      // (/events/ e /it/events/) devono poterlo leggere appena il poll le raggiunge.
-      let blobWritten = false;
-      if (!dryRun && rewritten.slugEn) {
-        const blobResult = await putRichContent(rewritten.slugEn, {
-          rewritten,
-          offers: candidate.offers,
-          affiliateUrl: candidate.affiliateUrl,
-          venueId: candidate.venueId,
-          dressCode: candidate.dressCode,
-          ageRange: candidate.ageRange,
-          doorsOpen: candidate.doorsOpen,
-          imageUrl: candidate.imageUrl,
-        });
-        blobWritten = blobResult.ok;
-        if (!blobResult.ok) {
-          console.error(`[import-xceed] Blob write failed for "${candidate.name}": ${blobResult.error}`);
-        }
-      }
-
-      const results = await publishXceedEvent(candidate, rewritten, sanitizedDescriptionEn, sanitizedDescriptionIt, poster, dryRun, langsToPublish);
-
-      for (const lang of langsToPublish) {
-        const result = results[lang];
-        if (!result) continue;
-
-        if (result.ok) {
-          const entry: (typeof published)[number] = {
-            title: lang === 'en' ? rewritten.titleEn : rewritten.titleIt,
-            lang, url: result.url || '', imageSource: result.imageSource, blobWritten,
-          };
-
-          // FASE G4B/X2: poll della pagina sito nella lingua corrispondente
-          // (slug deterministico, stesso per entrambe le lingue) finché è
-          // viva, poi notifica Google Indexing SOLO per un URL confermato 200.
-          if (!dryRun && rewritten.slugEn) {
-            const sitePageUrl = sitePageUrlFor(rewritten.slugEn, lang);
-            entry.sitePageUrl = sitePageUrl;
-            entry.sitePageLive = await pollSitePageUntilLive(sitePageUrl, 6 * 60 * 1000, 30 * 1000);
-            if (entry.sitePageLive && process.env.GOOGLE_INDEXING_CREDENTIALS) {
-              const idx = await notifyUrl(sitePageUrl, 'URL_UPDATED');
-              entry.indexed = idx.ok;
-            }
-          }
-
-          published.push(entry);
-        } else {
-          skipped.push({ title: `${candidate.name} (${lang})`, reason: `needsReview: ${result.reason}` });
-        }
-      }
-
-      if (!dryRun) await sleep(PUBLISH_RATE_LIMIT_MS);
-    } catch (e) {
-      errors.push(`${candidate.name}: ${(e as Error).message}`);
-    }
-  }
-
-  return NextResponse.json({
-    ok: true,
-    dryRun,
-    scouted: scouted.length,
-    new: newCandidates.length,
-    published,
-    skipped,
-    errors,
-    geminiKeyPresent: !!process.env.GEMINI_API_KEY,
-    anthropicKeyPresent: !!process.env.ANTHROPIC_API_KEY,
-    blobTokenPresent: !!process.env.BLOB_READ_WRITE_TOKEN,
-    ranAt: new Date().toISOString(),
-  });
+export async function GET() {
+  return NextResponse.json(
+    {
+      ok: false,
+      disabled: true,
+      reason: 'Server-side AI Xceed import/rewrite is disabled. Prepare locally, then submit the completed payload.',
+      replacement: '/api/events/publish-prepared',
+    },
+    { status: 410 },
+  );
 }
