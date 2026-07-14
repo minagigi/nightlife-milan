@@ -318,6 +318,46 @@ export async function GET(request: Request) {
     const entry = sources.find(([base]) => base === contentBase)?.[1];
     if (!entry?.enEventId) return NextResponse.json({ ok: false, error: 'EN source not found' }, { status: 404 });
 
+    const inspectLang = searchParams.get('inspectLang');
+    if (inspectLang) {
+      const existing = entry.eventsByLang.get(inspectLang);
+      if (!existing) return NextResponse.json({ ok: false, error: 'Locale listing not found' }, { status: 404 });
+
+      const inspectRes = await fetch(
+        `${EVENTBRITE_API}/events/${existing.id}/?expand=ticket_classes,publish_settings,music_properties`,
+        { headers: { Authorization: `Bearer ${token}` } },
+      );
+      if (!inspectRes.ok) {
+        return NextResponse.json({ ok: false, error: `Event inspect ${inspectRes.status}` }, { status: 502 });
+      }
+
+      const inspected = await inspectRes.json();
+      return NextResponse.json({
+        ok: true,
+        base: contentBase,
+        lang: inspectLang,
+        event: {
+          id: inspected.id,
+          status: inspected.status,
+          locale: inspected.locale,
+          listed: inspected.listed,
+          venueId: inspected.venue_id,
+          startUtc: inspected.start?.utc,
+          endUtc: inspected.end?.utc,
+          summaryLength: inspected.summary?.length || 0,
+          descriptionLength: inspected.description?.html?.length || 0,
+          ticketClasses: (inspected.ticket_classes || []).map((ticket: Record<string, unknown>) => ({
+            id: ticket.id,
+            name: ticket.name,
+            free: ticket.free,
+            quantityTotal: ticket.quantity_total,
+            salesEnd: ticket.sales_end,
+          })),
+          publishSettings: inspected.publish_settings || null,
+        },
+      });
+    }
+
     const res = await fetch(`${EVENTBRITE_API}/events/${entry.enEventId}/?expand=music_properties`, {
       headers: { Authorization: `Bearer ${token}` },
     });

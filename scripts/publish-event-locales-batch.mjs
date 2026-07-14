@@ -13,7 +13,10 @@ function parseArgs(argv) {
     manifest: DEFAULT_MANIFEST,
     progress: DEFAULT_PROGRESS,
     limit: Number.POSITIVE_INFINITY,
-    delayMs: 3500,
+    batchSize: 5,
+    delayMs: 60000,
+    retryCooldownMs: 300000,
+    maxRetries: 12,
     langs: null,
     bases: null,
   };
@@ -25,7 +28,10 @@ function parseArgs(argv) {
     else if (arg.startsWith('--manifest=')) args.manifest = arg.slice('--manifest='.length);
     else if (arg.startsWith('--progress=')) args.progress = arg.slice('--progress='.length);
     else if (arg.startsWith('--limit=')) args.limit = Number(arg.slice('--limit='.length));
+    else if (arg.startsWith('--batch-size=')) args.batchSize = Number(arg.slice('--batch-size='.length));
     else if (arg.startsWith('--delay-ms=')) args.delayMs = Number(arg.slice('--delay-ms='.length));
+    else if (arg.startsWith('--retry-cooldown-ms=')) args.retryCooldownMs = Number(arg.slice('--retry-cooldown-ms='.length));
+    else if (arg.startsWith('--max-retries=')) args.maxRetries = Number(arg.slice('--max-retries='.length));
     else if (arg.startsWith('--langs=')) args.langs = new Set(arg.slice('--langs='.length).split(',').filter(Boolean));
     else if (arg.startsWith('--bases=')) args.bases = new Set(arg.slice('--bases='.length).split(',').filter(Boolean));
     else throw new Error(`Unknown argument: ${arg}`);
@@ -35,7 +41,16 @@ function parseArgs(argv) {
     throw new Error('--phase must be all, existing, or locales');
   }
   if (!Number.isFinite(args.limit) && args.limit !== Number.POSITIVE_INFINITY) throw new Error('--limit must be numeric');
+  if (!Number.isInteger(args.batchSize) || args.batchSize < 1 || args.batchSize > 10) {
+    throw new Error('--batch-size must be an integer from 1 to 10');
+  }
   if (!Number.isFinite(args.delayMs) || args.delayMs < 0) throw new Error('--delay-ms must be a non-negative number');
+  if (!Number.isFinite(args.retryCooldownMs) || args.retryCooldownMs < 0) {
+    throw new Error('--retry-cooldown-ms must be a non-negative number');
+  }
+  if (!Number.isInteger(args.maxRetries) || args.maxRetries < 0) {
+    throw new Error('--max-retries must be a non-negative integer');
+  }
   return args;
 }
 
@@ -204,47 +219,75 @@ if (!CRON_SECRET) throw new Error('CRON_SECRET missing from .env.local');
 const updates = pending.filter((entry) => entry.mode === 'update').map((entry) => [entry]);
 const creates = pending.filter((entry) => entry.mode === 'create');
 const createBatches = [];
-for (let index = 0; index < creates.length; index += 10) createBatches.push(creates.slice(index, index + 10));
+for (let index = 0; index < creates.length; index += args.batchSize) {
+  createBatches.push(creates.slice(index, index + args.batchSize));
+}
 const workUnits = [...updates, ...createBatches];
 let processed = 0;
 
-for (let unitIndex = 0; unitIndex < workUnits.length; unitIndex += 1) {
+workLoop: for (let unitIndex = 0; unitIndex < workUnits.length; unitIndex += 1) {
   const unit = workUnits[unitIndex];
-  try {
-    const responses = unit[0].mode === 'update'
-      ? [await submit(unit[0], CRON_SECRET)]
-      : await submitCreateBatch(unit, CRON_SECRET);
+  let unitPending = unit;
+  let retryCount = 0;
 
-    for (const entry of unit) {
-      const key = entryKey(entry);
-      const response = responses.find((item) => item.base === entry.base && item.lang === entry.lang) || responses[0];
-      if (!response?.ok) {
-        const reason = response?.reason || 'Batch response missing or failed';
-        progress.failed[key] = { at: new Date().toISOString(), reason };
-        console.error(JSON.stringify({ ok: false, index: processed + 1, total: pending.length, key, reason }));
-        process.exitCode = 1;
-        continue;
+  while (unitPending.length > 0) {
+    try {
+      const responses = unitPending[0].mode === 'update'
+        ? [await submit(unitPending[0], CRON_SECRET)]
+        : await submitCreateBatch(unitPending, CRON_SECRET);
+      const retryEntries = [];
+
+      for (const entry of unitPending) {
+        const key = entryKey(entry);
+        const response = responses.find((item) => item.base === entry.base && item.lang === entry.lang) || responses[0];
+        if (!response?.ok) {
+          const reason = response?.reason || 'Batch response missing or failed';
+          progress.failed[key] = { at: new Date().toISOString(), reason };
+          const retryable = entry.mode === 'create' && /Error processing event/i.test(reason) && retryCount < args.maxRetries;
+          console.error(JSON.stringify({
+            ok: false,
+            index: processed + 1,
+            total: pending.length,
+            key,
+            reason,
+            retryable,
+          }));
+          if (retryable) retryEntries.push(entry);
+          else process.exitCode = 1;
+          continue;
+        }
+        progress.completed[key] = {
+          at: new Date().toISOString(),
+          eventId: response.eventId || entry.existingEventId || null,
+          url: response.url || null,
+          skipped: response.skipped === true,
+        };
+        delete progress.failed[key];
+        processed += 1;
+        console.log(JSON.stringify({ ok: true, index: processed, total: pending.length, key, skipped: response.skipped === true }));
       }
-      progress.completed[key] = {
-        at: new Date().toISOString(),
-        eventId: response.eventId || entry.existingEventId || null,
-        url: response.url || null,
-        skipped: response.skipped === true,
-      };
-      delete progress.failed[key];
-      processed += 1;
-      console.log(JSON.stringify({ ok: true, index: processed, total: pending.length, key, skipped: response.skipped === true }));
+      writeJsonAtomic(args.progress, progress);
+      if (process.exitCode) break workLoop;
+      if (retryEntries.length === 0) break;
+
+      retryCount += 1;
+      console.log(JSON.stringify({
+        cooldown: true,
+        retry: retryCount,
+        pending: retryEntries.length,
+        waitMs: args.retryCooldownMs,
+      }));
+      await sleep(args.retryCooldownMs);
+      unitPending = retryEntries;
+    } catch (error) {
+      for (const entry of unitPending) {
+        progress.failed[entryKey(entry)] = { at: new Date().toISOString(), reason: error.message };
+      }
+      writeJsonAtomic(args.progress, progress);
+      console.error(JSON.stringify({ ok: false, unit: unitIndex + 1, reason: error.message }));
+      process.exitCode = 1;
+      break workLoop;
     }
-    writeJsonAtomic(args.progress, progress);
-    if (process.exitCode) break;
-  } catch (error) {
-    for (const entry of unit) {
-      progress.failed[entryKey(entry)] = { at: new Date().toISOString(), reason: error.message };
-    }
-    writeJsonAtomic(args.progress, progress);
-    console.error(JSON.stringify({ ok: false, unit: unitIndex + 1, reason: error.message }));
-    process.exitCode = 1;
-    break;
   }
   if (unitIndex < workUnits.length - 1) await sleep(args.delayMs);
 }
