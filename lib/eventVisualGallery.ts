@@ -1,3 +1,8 @@
+import { getBatchEventTemplateValues, interpolateEventBatchTemplate } from './eventBatchContent';
+import { getEventBatchProfile } from './eventBatchProfiles';
+import { getEventLocalePack } from './eventLocalePacks';
+import { UNIVERSITY_PARTY_CANONICAL_SLUG, UNIVERSITY_PARTY_PT_LEGACY_SLUG } from './universityPartyPt';
+
 export type EventGalleryImage = {
   src: string;
   title: string;
@@ -51,7 +56,28 @@ const UNIVERSITY_PARTY_PT: EventVisualGallery = {
  * metadata are localized, rather than showing a Portuguese or English asset.
  */
 export function getEventVisualGallery(slug: string, locale: string): EventVisualGallery | null {
-  if (!UNIVERSITY_PARTY_SLUGS.has(slug) || locale !== 'pt') return null;
-  return UNIVERSITY_PARTY_PT;
+  if (UNIVERSITY_PARTY_SLUGS.has(slug) && locale === 'pt') return UNIVERSITY_PARTY_PT;
+
+  const profile = getEventBatchProfile(slug);
+  const pack = getEventLocalePack(locale);
+  if (!profile || !pack) return null;
+
+  const values = getBatchEventTemplateValues(profile, pack.locale, pack);
+  const fill = (template: string) => interpolateEventBatchTemplate(template, values);
+
+  return {
+    heading: fill(pack.gallery.heading),
+    images: [
+      {
+        src: `/api/event-poster/${profile.baseId}/${pack.locale}`,
+        title: fill(pack.gallery.posterTitle),
+        alt: fill(pack.gallery.posterAlt),
+      },
+      ...profile.venueImages.map((src, index) => ({
+        src,
+        title: fill(pack.gallery.moodTitles[index]),
+        alt: fill(pack.gallery.moodAlts[index]),
+      })),
+    ],
+  };
 }
-import { UNIVERSITY_PARTY_CANONICAL_SLUG, UNIVERSITY_PARTY_PT_LEGACY_SLUG } from './universityPartyPt';

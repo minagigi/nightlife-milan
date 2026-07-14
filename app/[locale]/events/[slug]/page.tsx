@@ -23,6 +23,9 @@ import MoreVenueEvents, { MoreVenueEventItem } from '@/components/MoreVenueEvent
 import EventsCarousel from '@/components/EventsCarousel';
 import { getEventVisualGallery } from '@/lib/eventVisualGallery';
 import { getLocalizedEventContent, getLocalizedEventSeed } from '@/lib/localizedEventContent';
+import { getEventBatchProfile } from '@/lib/eventBatchProfiles';
+import { getBatchEventTemplateValues } from '@/lib/eventBatchContent';
+import { getEventLocalePack } from '@/lib/eventLocalePacks';
 import {
   buildEventQuickAnswer,
   buildThisWeekAtHeading,
@@ -30,7 +33,6 @@ import {
   eventText,
   formatEventGenre,
   getIntlLocale,
-  getQuickAnswerLabel,
   getThisWeekInMilanHeading,
   getVenueHeadingParts,
 } from '@/lib/eventPageLocale';
@@ -558,6 +560,11 @@ export default async function EventPage({ params }: Props) {
     .sort((a, b) => new Date(a.event.dateISO).getTime() - new Date(b.event.dateISO).getTime());
 
   const eventVisualGallery = getEventVisualGallery(event.localizedContent.slug.en, locale);
+  const eventBatchProfile = getEventBatchProfile(event.localizedContent.slug.en);
+  const eventLocalePack = getEventLocalePack(locale);
+  const eventBatchValues = eventBatchProfile && eventLocalePack
+    ? getBatchEventTemplateValues(eventBatchProfile, eventLocalePack.locale, eventLocalePack)
+    : null;
   const eventHeroImage = eventVisualGallery?.images[0]?.src || event.image || venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp';
   const title = localizedEventContent?.title || getLocalizedText(event.localizedContent.title, locale);
   const venueName = getLocalizedText(venue.localizedContent.name, locale);
@@ -692,9 +699,9 @@ export default async function EventPage({ params }: Props) {
 
             {/* AI Trafiletto */}
             <div className="not-prose mb-8 p-5 rounded-xl border border-champagne/20 bg-champagne/[0.04] text-left">
-              <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">{getQuickAnswerLabel(locale)}</p>
+              <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">{eventText(locale, 'Quick Answer', 'Risposta rapida', 'Resposta rapida')}</p>
               <p className="font-sans text-white/70 text-sm leading-relaxed">
-                {buildEventQuickAnswer({ locale, title, venueName, formattedDate, pricePhrase })}
+                {localizedEventContent?.seoSummary || buildEventQuickAnswer({ locale, title, venueName, formattedDate, pricePhrase })}
               </p>
             </div>
 
@@ -731,14 +738,14 @@ export default async function EventPage({ params }: Props) {
 
             {/* H2: Venue Info */}
             <h2 className="text-2xl font-serif font-bold text-champagne mt-12 mb-4">
-              {venueHeading.prefix ? `${venueHeading.prefix} ` : null}
+              {!localizedEventContent && venueHeading.prefix ? `${venueHeading.prefix} ` : null}
               <Link href={venueHref} className="hover:text-white transition-colors underline decoration-champagne/40 underline-offset-4">
                 {venueName}
               </Link>
-              {venueHeading.suffix || null}
+              {!localizedEventContent ? venueHeading.suffix || null : null}
             </h2>
             <p className="text-white/70 leading-relaxed">
-              {buildVenueDescription(locale, venueName, venue.address.streetAddress)}
+              {localizedEventContent?.sections[2]?.body || buildVenueDescription(locale, venueName, venue.address.streetAddress)}
             </p>
             <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-4 not-prose">
               {buildVenueGalleryImages(venue, title, locale).map((img, i) => (
@@ -758,20 +765,20 @@ export default async function EventPage({ params }: Props) {
                   {eventText(locale, 'Dress Code', 'Dress Code', 'Código de vestimenta')}
                 </h3>
                 <p className="font-sans text-white/50 text-sm">
-                  {eventText(locale, 'Smart elegant. No sneakers or shorts.', 'Smart elegant. Niente sneakers o shorts.', 'Elegante e sofisticado. Sem tênis ou bermudas.')}
+                  {eventBatchValues?.dressCode || eventText(locale, 'Smart elegant. No sneakers or shorts.', 'Smart elegant. Niente sneakers o shorts.', 'Elegante e sofisticado. Sem tênis ou bermudas.')}
                 </p>
               </div>
               <div className="p-4 rounded-xl border border-white/8 bg-white/[0.02]">
                 <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-2">
                   {eventText(locale, 'Minimum Age', 'Età Minima', 'Idade mínima')}
                 </h3>
-                <p className="font-sans text-white/50 text-sm">18+ {eventText(locale, '(ID required)', '(documento richiesto)', '(documento obrigatório)')}</p>
+                <p className="font-sans text-white/50 text-sm">{eventBatchProfile?.minAge ?? 18}+ {eventText(locale, '(ID required)', '(documento richiesto)', '(documento obrigatório)')}</p>
               </div>
               <div className="p-4 rounded-xl border border-white/8 bg-white/[0.02]">
                 <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-2">
                   {eventText(locale, 'Getting There', 'Come Arrivare', 'Como chegar')}
                 </h3>
-                <p className="font-sans text-white/50 text-sm">{venue.address.streetAddress}, {eventText(locale, 'Milan', 'Milano', 'Milão')}</p>
+                <p className="font-sans text-white/50 text-sm">{String(eventBatchValues?.address || `${venue.address.streetAddress}, ${eventText(locale, 'Milan', 'Milano', 'Milão')}`)}</p>
               </div>
             </div>
 
@@ -783,7 +790,7 @@ export default async function EventPage({ params }: Props) {
             )}
             {!localizedEventContent && !richContent && goldHtml && <GoldEventHtml html={goldHtml} />}
             {!localizedEventContent && !richContent && !goldHtml && eventVisualGallery && (
-              <EventImageGallery gallery={eventVisualGallery} />
+              <EventImageGallery gallery={eventVisualGallery} locale={locale} />
             )}
 
             <MoreVenueEvents items={moreVenueEvents} locale={locale} venueName={venueName} />

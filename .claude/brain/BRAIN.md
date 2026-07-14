@@ -30,12 +30,14 @@ dedicato `brain/task-YYYY-MM-DD-<slug>` con una propria PR verso `main`.
 
 ## Politica dei modelli
 
-- **Cervello / strategia / revisione**: la sessione principale delle routine (Fable 5). Pensa,
-  decide, verifica. Non fa lavoro meccanico di massa.
-- **Esecutori**: sub-agenti lanciati con l'Agent tool e `model: "sonnet"`. Lanciali **in
-  parallelo** (più chiamate Agent nello stesso messaggio). Se più agenti modificano file in
-  parallelo, usa `isolation: "worktree"`. Ogni agente riceve un task auto-contenuto: contesto,
-  file da toccare, branch su cui lavorare, criterio di successo.
+- **Sol**: strategia, architettura, prompt, decisioni ad alto rischio e revisione finale.
+- **Terra**: codice, automazioni, verifiche e lavoro operativo ordinario.
+- **Luna**: scrittura e traduzione dei contenuti.
+- Usare il modello minimo adeguato senza abbassare la qualita. Se esiste gia un template verificato,
+  riusarlo direttamente senza moltiplicare task e agenti.
+- Le traduzioni sono preparate localmente o in-sessione e poi inviate: mai usare API Anthropic per
+  tradurre e mai aggiungere logica di traduzione lato server.
+- Lo standard completo per gli eventi e in `strategies/event-production-standard.md`.
 
 ---
 

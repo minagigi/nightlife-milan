@@ -28,6 +28,31 @@ interface SourceEntry {
   startLocal: string;
 }
 
+interface LocaleSubmission {
+  base?: string;
+  enEventId?: string;
+  slugEn?: string;
+  lang?: string;
+  title?: string;
+  summary?: string;
+  descriptionHtml?: string;
+  ticketName?: string;
+  ticketDescription?: string;
+}
+
+interface EventbriteSourceEvent {
+  venue_id?: string;
+  logo_id?: string;
+  start?: { utc?: string };
+  end?: { utc?: string };
+  music_properties?: { age_restriction?: string; door_time?: string };
+  category_id?: string;
+  subcategory_id?: string;
+  format_id?: string;
+}
+
+const activeLocalePublishes = new Set<string>();
+
 function defaultTargetLangs(): LocaleCode[] {
   const rest = LOCALES.filter((locale) => locale.tier !== 'native');
   return [
@@ -113,17 +138,7 @@ export async function POST(request: Request) {
   const token = getEventbriteToken();
   if (!token) return NextResponse.json({ ok: false, error: 'EVENTBRITE_TOKEN not set' }, { status: 500 });
 
-  let body: {
-    base?: string;
-    enEventId?: string;
-    slugEn?: string;
-    lang?: string;
-    title?: string;
-    summary?: string;
-    descriptionHtml?: string;
-    ticketName?: string;
-    ticketDescription?: string;
-  };
+  let body: LocaleSubmission & { items?: LocaleSubmission[] };
 
   try {
     body = await request.json();
@@ -131,43 +146,111 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: 'Invalid JSON' }, { status: 400 });
   }
 
-  const { base, enEventId, slugEn, lang, title, summary, descriptionHtml, ticketName, ticketDescription } = body;
-  const def = lang ? getLocaleDef(lang) : undefined;
-  if (!base || !enEventId || !slugEn || !def || !title || !summary || !descriptionHtml || !ticketName || !ticketDescription) {
+  const submissions = body.items?.length ? body.items : [body];
+  if (submissions.length > 10) {
+    return NextResponse.json({ ok: false, error: 'Maximum 10 locale submissions per request' }, { status: 400 });
+  }
+
+  const validated = submissions.map((submission) => {
+    const def = submission.lang ? getLocaleDef(submission.lang) : undefined;
+    const complete = submission.base && submission.enEventId && submission.slugEn && def && submission.title &&
+      submission.summary && submission.descriptionHtml && submission.ticketName && submission.ticketDescription;
+    return { submission, def, complete: Boolean(complete) };
+  });
+  if (validated.some((item) => !item.complete)) {
     return NextResponse.json({ ok: false, error: 'Missing fields' }, { status: 400 });
   }
 
-  const srcRes = await fetch(`${EVENTBRITE_API}/events/${enEventId}/?expand=music_properties`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  if (!srcRes.ok) return NextResponse.json({ ok: false, error: `EN fetch ${srcRes.status}` }, { status: 502 });
+  // One marker-ledger read per request, including batch requests. Retrying a
+  // successful-but-unacknowledged batch therefore skips listings that already
+  // exist without issuing hundreds of organization-list reads.
+  const requestedLangs = [...new Set(validated.map((item) => item.def!.code))];
+  const preflight = await buildQueue(new URLSearchParams({ langs: requestedLangs.join(',') }));
+  const ledgerByBase = new Map(preflight.sources);
+  const sourceCache = new Map<string, EventbriteSourceEvent>();
+  const results: Array<Record<string, unknown>> = [];
 
-  const source = await srcRes.json();
-  if (!source.venue_id || !source.start?.utc || !source.end?.utc) {
-    return NextResponse.json({ ok: false, error: 'EN source incomplete' }, { status: 502 });
+  for (const [index, item] of validated.entries()) {
+    const submission = item.submission;
+    const def = item.def!;
+    const base = submission.base!;
+    const key = `${base}:${def.code}`;
+
+    const ledgerSource = ledgerByBase.get(base);
+    if (!ledgerSource) {
+      results.push({ ok: false, skipped: false, base, lang: def.code, reason: 'source-marker-not-found' });
+      continue;
+    }
+    if (ledgerSource.langs.has(def.code)) {
+      results.push({ ok: true, skipped: true, base, lang: def.code, reason: 'already-present' });
+      continue;
+    }
+
+    let source = sourceCache.get(submission.enEventId!);
+    if (!source) {
+      const srcRes = await fetch(`${EVENTBRITE_API}/events/${submission.enEventId}/?expand=music_properties`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!srcRes.ok) {
+        results.push({ ok: false, skipped: false, base, lang: def.code, reason: `EN fetch ${srcRes.status}` });
+        continue;
+      }
+      source = await srcRes.json() as EventbriteSourceEvent;
+      sourceCache.set(submission.enEventId!, source);
+    }
+
+    if (!source?.venue_id || !source.start?.utc || !source.end?.utc) {
+      results.push({ ok: false, skipped: false, base, lang: def.code, reason: 'EN source incomplete' });
+      continue;
+    }
+
+    const marker = `<!-- nlm:src=${base}-${def.code};slug-en=${submission.slugEn} -->`;
+    const description = /<!--\s*nlm:src=[^>]*-->/i.test(submission.descriptionHtml!)
+      ? submission.descriptionHtml!
+      : `${submission.descriptionHtml}\n${marker}`;
+    if (activeLocalePublishes.has(key)) {
+      results.push({ ok: false, skipped: false, base, lang: def.code, reason: 'publish-already-in-progress' });
+      continue;
+    }
+
+    activeLocalePublishes.add(key);
+    let result: Awaited<ReturnType<typeof publishOneLang>>;
+    try {
+      result = await publishOneLang({
+        token,
+        venueEbId: source.venue_id,
+        imageId: source.logo_id || '',
+        startUtc: normalizeAlreadyUtc(source.start.utc),
+        endUtc: normalizeAlreadyUtc(source.end.utc),
+        title: submission.title!.slice(0, 75),
+        summary: submission.summary!.slice(0, 140),
+        description,
+        locale: def.ebLocale,
+        lang: def.code,
+        ageRestriction: source.music_properties?.age_restriction,
+        doorTimeISO: source.music_properties?.door_time,
+        ticketText: { name: submission.ticketName!.slice(0, 100), description: submission.ticketDescription! },
+        categoryId: source.category_id,
+        subcategoryId: source.subcategory_id,
+        formatId: source.format_id,
+      });
+    } finally {
+      activeLocalePublishes.delete(key);
+    }
+    results.push({
+      ok: result.ok,
+      skipped: false,
+      base,
+      lang: def.code,
+      eventId: result.ebEventId,
+      url: result.url,
+      reason: result.reason,
+    });
+    if (index < validated.length - 1) await new Promise((resolve) => setTimeout(resolve, 3000));
   }
 
-  const marker = `<!-- nlm:src=${base}-${def.code};slug-en=${slugEn} -->`;
-  const result = await publishOneLang({
-    token,
-    venueEbId: source.venue_id,
-    imageId: source.logo_id || '',
-    startUtc: normalizeAlreadyUtc(source.start.utc),
-    endUtc: normalizeAlreadyUtc(source.end.utc),
-    title: title.slice(0, 75),
-    summary: summary.slice(0, 140),
-    description: `${descriptionHtml}\n${marker}`,
-    locale: def.ebLocale,
-    lang: def.code,
-    ageRestriction: source.music_properties?.age_restriction,
-    doorTimeISO: source.music_properties?.door_time,
-    ticketText: { name: ticketName.slice(0, 100), description: ticketDescription },
-    categoryId: source.category_id,
-    subcategoryId: source.subcategory_id,
-    formatId: source.format_id,
-  });
-
-  return NextResponse.json({ ok: result.ok, base, lang: def.code, url: result.url, reason: result.reason });
+  const response = { ok: results.every((result) => result.ok === true), results };
+  return NextResponse.json(submissions.length === 1 ? results[0] : response);
 }
 
 /**

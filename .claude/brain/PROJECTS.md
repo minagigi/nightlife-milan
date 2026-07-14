@@ -43,6 +43,10 @@ abilitato nell'ambiente delle Routine (l'accesso GitHub è per-repo).
 
 ---
 
+### Standard operativo eventi
+
+- `.claude/brain/strategies/event-production-standard.md` definisce routing Sol/Terra/Luna, contratto SEO, ordine immagini e pubblicazione idempotente sito/Eventbrite.
+
 ### Backlog di idee trasversali (il cervello può pescare da qui)
 
 - Audit SEO periodico delle pagine evento generate (title/description/schema).

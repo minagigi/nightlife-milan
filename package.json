@@ -10,6 +10,8 @@
     "clean": "next clean",
     "typecheck": "tsc --noEmit",
     "test": "tsx --test tests/*.test.ts",
+    "events:manifest": "tsx scripts/generate-event-locale-manifest.ts",
+    "events:publish:dry": "node scripts/publish-event-locales-batch.mjs --dry-run",
     "verify": "npm run typecheck && npm run test && npm run build"
   },
   "dependencies": {

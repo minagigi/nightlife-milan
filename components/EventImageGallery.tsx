@@ -4,8 +4,9 @@ import Image from 'next/image';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import type { EventVisualGallery } from '@/lib/eventVisualGallery';
+import { tr } from '@/lib/i18n/t';
 
-export default function EventImageGallery({ gallery }: { gallery: EventVisualGallery }) {
+export default function EventImageGallery({ gallery, locale }: { gallery: EventVisualGallery; locale: string }) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const activeImage = activeIndex === null ? null : gallery.images[activeIndex];
 
@@ -57,7 +58,7 @@ export default function EventImageGallery({ gallery }: { gallery: EventVisualGal
             type="button"
             className="absolute right-4 top-4 grid h-11 w-11 place-items-center rounded-full border border-white/25 bg-black/40 text-white hover:border-champagne hover:text-champagne focus:outline-none focus-visible:ring-2 focus-visible:ring-champagne"
             onClick={() => setActiveIndex(null)}
-            aria-label="Fechar galeria"
+            aria-label={tr(locale, 'Close gallery', 'Chiudi galleria')}
           >
             <X size={22} aria-hidden="true" />
           </button>
@@ -65,7 +66,7 @@ export default function EventImageGallery({ gallery }: { gallery: EventVisualGal
             type="button"
             className="absolute left-3 sm:left-6 grid h-11 w-11 place-items-center rounded-full border border-white/25 bg-black/40 text-white hover:border-champagne hover:text-champagne focus:outline-none focus-visible:ring-2 focus-visible:ring-champagne"
             onClick={() => setActiveIndex((activeIndex - 1 + gallery.images.length) % gallery.images.length)}
-            aria-label="Imagem anterior"
+            aria-label={tr(locale, 'Previous image', 'Immagine precedente')}
           >
             <ChevronLeft size={24} aria-hidden="true" />
           </button>
@@ -76,7 +77,7 @@ export default function EventImageGallery({ gallery }: { gallery: EventVisualGal
             type="button"
             className="absolute right-3 sm:right-6 grid h-11 w-11 place-items-center rounded-full border border-white/25 bg-black/40 text-white hover:border-champagne hover:text-champagne focus:outline-none focus-visible:ring-2 focus-visible:ring-champagne"
             onClick={() => setActiveIndex((activeIndex + 1) % gallery.images.length)}
-            aria-label="Proxima imagem"
+            aria-label={tr(locale, 'Next image', 'Immagine successiva')}
           >
             <ChevronRight size={24} aria-hidden="true" />
           </button>

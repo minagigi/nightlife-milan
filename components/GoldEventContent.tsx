@@ -100,7 +100,7 @@ export default function GoldEventContent({ locale, data, localized, gallery }: G
         </section>
       )}
 
-      {gallery ? <EventImageGallery gallery={gallery} /> : null}
+      {gallery ? <EventImageGallery gallery={gallery} locale={locale} /> : null}
 
       {(tickets.length > 0 || tables.length > 0 || guestlists.length > 0) && (
         <section className="mb-12 mt-12" data-event-section="offers">
