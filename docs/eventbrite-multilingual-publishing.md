@@ -53,6 +53,34 @@ Workflow corretto:
 5. Caricare l'asset su Eventbrite come media.
 6. Inserirlo nel corpo evento tramite `event.description.html` come `<IMG>`.
 
+La locandina iniziale deve apparire subito dopo il summary/primo paragrafo.
+
+## Gallery immagini nel corpo evento
+
+Dopo la locandina iniziale, aggiungere immagini mood dell'evento quando il lavoro richiede un Eventbrite ricco.
+
+Regole:
+
+- creare 4 immagini aggiuntive partendo da foto reali del locale di riferimento
+- le immagini devono rappresentare momenti reali della serata: arrivo, aperitivo, dancefloor, tavoli VIP/bottle service
+- il target visivo deve rispettare evento, agenda, dress code e pubblico atteso
+- per University Party: studenti universitari, Erasmus, international students, outfit fashion/elegante, energia giovane ma coerente con selezione porta Just Me
+- evitare immagini generiche o inventate senza legame col locale
+- niente testo dentro le immagini mood, salvo locandine vere
+- ogni immagine deve avere titolo, descrizione/caption, `ALT` e `TITLE` in lingua target
+- titolo/descrizione/alt devono includere keyword SEO locali ad alto intento, senza keyword stuffing
+- nel corpo Eventbrite usare blocchi chiari:
+  - `<H2>` titolo immagine SEO localizzato
+  - `<P>` descrizione/caption localizzata
+  - `<IMG SRC="..." ALT="..." TITLE="..." WIDTH="460" STYLE="width:100%;max-width:460px;height:auto;display:block;">`
+
+Esempi PT:
+
+- `Aperitivo Just Me Milano 14 julho 2026 - vida noturna em Milao`
+- `Dancefloor University Party Just Me Milano - festa universitaria Milao`
+- `Mesa VIP Just Me Milano - bottle service e guest list Milao`
+- `Torre Branca e Just Me Milano - onde sair em Milao terca-feira`
+
 ## Esempio PT
 
 Per portoghese:
