@@ -8,7 +8,7 @@ import { usePathname } from 'next/navigation';
 import { Heart, MessageCircle } from 'lucide-react';
 import { useFavorites } from './FavoritesContext';
 import LanguageSwitcher from './LanguageSwitcher';
-import { CONTACT } from '@/config/contact';
+import { CONTACT, getWhatsAppLabel } from '@/config/contact';
 import Logo from './Logo';
 import { LOCALES, localePrefix as urlLocalePrefix } from '@/lib/i18n/locales';
 import { getChrome } from '@/lib/i18n/chrome';
@@ -171,7 +171,7 @@ export default function Header({ currentLocale }: { currentLocale: string }) {
               target="_blank"
               rel="noopener noreferrer"
               className="hidden lg:flex items-center gap-2 text-sm text-white hover:text-champagne transition-colors group mr-2"
-              aria-label={currentLocale === 'it' ? CONTACT.whatsapp.labels.it : CONTACT.whatsapp.labels.en}
+              aria-label={getWhatsAppLabel(currentLocale)}
             >
               <MessageCircle className="w-4 h-4 text-champagne group-hover:scale-110 transition-transform" />
               <div className="flex flex-col leading-none">

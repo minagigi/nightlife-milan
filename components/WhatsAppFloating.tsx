@@ -4,13 +4,13 @@ import { MessageCircle } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { usePathname } from 'next/navigation';
-import { CONTACT } from '@/config/contact';
+import { CONTACT, getWhatsAppLabel } from '@/config/contact';
 
 export default function WhatsAppFloating() {
   const [isVisible, setIsVisible] = useState(false);
   const pathname = usePathname();
-  const isIt = pathname?.startsWith('/it') || pathname === '/it';
-  const label = isIt ? CONTACT.whatsapp.labels.it : CONTACT.whatsapp.labels.en;
+  const currentLocale = pathname?.split('/').filter(Boolean)[0] || 'en';
+  const label = getWhatsAppLabel(currentLocale);
 
   useEffect(() => {
     // Show button after a short delay to not distract immediately

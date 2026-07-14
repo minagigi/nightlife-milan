@@ -11,7 +11,8 @@ import { localePrefix } from '@/lib/i18n/locales';
 export default function MobileBottomBar({ currentLocale }: { currentLocale: string }) {
   const pathname = usePathname();
   const isIt = currentLocale === 'it';
-  const loc = (isIt ? 'it' : 'en') as 'en' | 'it';
+  const isPt = currentLocale === 'pt';
+  const loc = (isIt ? 'it' : isPt ? 'pt' : 'en') as 'en' | 'it' | 'pt';
 
   // Hide on the booking success page (conversion already complete)
   if (pathname?.includes('/booking/success')) return null;
@@ -27,7 +28,9 @@ export default function MobileBottomBar({ currentLocale }: { currentLocale: stri
   let contextName = '';
   let bookingMsg = isIt
     ? 'Ciao! Vorrei prenotare un tavolo VIP a Milano. Puoi aiutarmi?'
-    : "Hi! I'd like to book a VIP table in Milan. Can you help me?";
+    : isPt
+      ? 'Olá! Gostaria de reservar uma mesa VIP em Milão. Podem ajudar?'
+      : "Hi! I'd like to book a VIP table in Milan. Can you help me?";
 
   if (seg[0] === 'clubs' && seg[1]) {
     const venue = mockVenues.find((v) => v.slugs.en === seg[1] || v.slugs.it === seg[1]);
@@ -36,7 +39,9 @@ export default function MobileBottomBar({ currentLocale }: { currentLocale: stri
       contextName = name;
       bookingMsg = isIt
         ? `Ciao! Vorrei prenotare un tavolo da ${name} a Milano. Puoi aiutarmi?`
-        : `Hi! I'd like to book a table at ${name} in Milan. Can you help me?`;
+        : isPt
+          ? `Olá! Gostaria de reservar uma mesa no ${name}, em Milão. Podem ajudar?`
+          : `Hi! I'd like to book a table at ${name} in Milan. Can you help me?`;
     }
   } else if (seg[0] === 'events' && seg[1] && seg[1] !== 'special') {
     const event = mockEvents.find(
@@ -49,22 +54,26 @@ export default function MobileBottomBar({ currentLocale }: { currentLocale: stri
       contextName = title;
       bookingMsg = isIt
         ? `Ciao! Vorrei prenotare per "${title}"${vName ? ` da ${vName}` : ''} a Milano. Puoi aiutarmi?`
-        : `Hi! I'd like to book for "${title}"${vName ? ` at ${vName}` : ''} in Milan. Can you help me?`;
+        : isPt
+          ? `Olá! Gostaria de reservar para "${title}"${vName ? ` no ${vName}` : ''}, em Milão. Podem ajudar?`
+          : `Hi! I'd like to book for "${title}"${vName ? ` at ${vName}` : ''} in Milan. Can you help me?`;
     } else {
       const weekly = weeklyEvents.find((w) => `${w.clubSlug}-${w.day}-${w.eventSlug}` === seg[1]);
       if (weekly) {
         contextName = weekly.name;
         bookingMsg = isIt
           ? `Ciao! Vorrei prenotare per "${weekly.name}" da ${weekly.clubName} a Milano. Puoi aiutarmi?`
-          : `Hi! I'd like to book for "${weekly.name}" at ${weekly.clubName} in Milan. Can you help me?`;
+          : isPt
+            ? `Olá! Gostaria de reservar para "${weekly.name}" no ${weekly.clubName}, em Milão. Podem ajudar?`
+            : `Hi! I'd like to book for "${weekly.name}" at ${weekly.clubName} in Milan. Can you help me?`;
       }
     }
   }
 
   const mainLabel = contextName
-    ? `${tr(currentLocale, 'Book', 'Prenota')}: ${contextName}`
-    : tr(currentLocale, 'Book Now', 'Prenota Ora');
-  const sub = tr(currentLocale, 'WhatsApp reply in 10 min', 'Risposta WhatsApp in 10 min');
+    ? `${isPt ? 'Reservar' : tr(currentLocale, 'Book', 'Prenota')}: ${contextName}`
+    : isPt ? 'Reservar agora' : tr(currentLocale, 'Book Now', 'Prenota Ora');
+  const sub = isPt ? 'Resposta no WhatsApp em 10 min' : tr(currentLocale, 'WhatsApp reply in 10 min', 'Risposta WhatsApp in 10 min');
 
   return (
     <nav
@@ -81,8 +90,10 @@ export default function MobileBottomBar({ currentLocale }: { currentLocale: stri
             contextName
               ? isIt
                 ? `Prenota ${contextName} su WhatsApp`
-                : `Book ${contextName} on WhatsApp`
-              : tr(currentLocale, 'Book now on WhatsApp', 'Prenota ora su WhatsApp')
+                : isPt
+                  ? `Reservar ${contextName} pelo WhatsApp`
+                  : `Book ${contextName} on WhatsApp`
+              : isPt ? 'Reservar agora pelo WhatsApp' : tr(currentLocale, 'Book now on WhatsApp', 'Prenota ora su WhatsApp')
           }
           className="flex items-center justify-center gap-2.5 w-full rounded-xl bg-champagne text-black
             min-h-[52px] px-4 active:scale-[0.98] active:bg-[#c2a02f] transition-transform duration-150"

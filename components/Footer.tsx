@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Instagram, MessageCircle } from 'lucide-react';
 import NewsletterHub from './NewsletterHub';
 import Logo from './Logo';
-import { CONTACT } from '@/config/contact';
+import { CONTACT, getWhatsAppLabel } from '@/config/contact';
 import { ENABLED_LOCALES, localePrefix } from '@/lib/i18n/locales';
 import { tr } from '@/lib/i18n/t';
 
@@ -24,7 +24,7 @@ export default function Footer({ lang }: FooterProps) {
     vip: tr(lang, "VIP Tables", "Tavoli VIP"),
     concierge: tr(lang, "Concierge Service", "Servizio Concierge"),
     privacy: "Privacy Policy",
-    whatsappLabel: tr(lang, CONTACT.whatsapp.labels.en, CONTACT.whatsapp.labels.it),
+    whatsappLabel: getWhatsAppLabel(lang),
   };
 
   const lp = localePrefix(lang);

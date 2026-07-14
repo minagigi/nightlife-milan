@@ -4,6 +4,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { getLocalizedEventContent, getLocalizedEventSeed } from '../lib/localizedEventContent';
 import { getEventVisualGallery } from '../lib/eventVisualGallery';
+import { getWhatsAppLabel } from '../config/contact';
 import {
   UNIVERSITY_PARTY_CANONICAL_SLUG,
   UNIVERSITY_PARTY_PT_LEGACY_SLUG,
@@ -52,4 +53,8 @@ test('legacy Portuguese URL redirects to the canonical event URL', () => {
   assert.match(config, new RegExp(`/pt/events/${UNIVERSITY_PARTY_PT_LEGACY_SLUG}`));
   assert.match(config, new RegExp(`/pt/events/${UNIVERSITY_PARTY_CANONICAL_SLUG}`));
   assert.match(config, /permanent:\s*true/);
+});
+
+test('Portuguese global booking CTA has a localized label', () => {
+  assert.equal(getWhatsAppLabel('pt'), 'Fale conosco');
 });
