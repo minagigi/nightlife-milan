@@ -18,8 +18,11 @@ import FAQAccordion from '@/components/FAQAccordion';
 import PricingGrid from '@/components/PricingGrid';
 import GoldEventContent from '@/components/GoldEventContent';
 import GoldEventHtml from '@/components/GoldEventHtml';
+import EventImageGallery from '@/components/EventImageGallery';
 import MoreVenueEvents, { MoreVenueEventItem } from '@/components/MoreVenueEvents';
 import EventsCarousel from '@/components/EventsCarousel';
+import { getEventVisualGallery } from '@/lib/eventVisualGallery';
+import { UNIVERSITY_PARTY_PT_SLUG, universityPartyPt } from '@/lib/universityPartyPt';
 
 /** Find a live Eventbrite event by its SEO slug (EN or IT).
  * NESSUN try/catch qui: se la fetch Eventbrite fallisce (dopo i retry
@@ -146,8 +149,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   
   const weeklyEvent = getWeeklyEventBySlug(slug);
   if (weeklyEvent) {
-    const title = `${weeklyEvent.name} @ ${weeklyEvent.clubName} Milano - ${weeklyEvent.day.charAt(0).toUpperCase() + weeklyEvent.day.slice(1)} 2026 | Nightlife Milan`;
-    const description = locale === 'it' ? weeklyEvent.description.it : weeklyEvent.description.en;
+    const isUniversityPartyPt = locale === 'pt' && slug === UNIVERSITY_PARTY_PT_SLUG;
+    const title = isUniversityPartyPt
+      ? `${universityPartyPt.title} | Nightlife Milan`
+      : `${weeklyEvent.name} @ ${weeklyEvent.clubName} Milano - ${weeklyEvent.day.charAt(0).toUpperCase() + weeklyEvent.day.slice(1)} 2026 | Nightlife Milan`;
+    const description = isUniversityPartyPt
+      ? universityPartyPt.intro[0]
+      : locale === 'it' ? weeklyEvent.description.it : weeklyEvent.description.en;
+    const heroImage = isUniversityPartyPt
+      ? '/images/events/generated/just-me-university-party-recomposed-1x1-pt.png'
+      : weeklyEvent.image;
     const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
     const canonical = `${baseUrl}${localePrefix(locale)}/events/${slug}`;
 
@@ -163,7 +174,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title,
         description,
         url: canonical,
-        images: [{ url: weeklyEvent.image, width: 1200, height: 630, alt: title }],
+        images: [{ url: heroImage, width: isUniversityPartyPt ? 1080 : 1200, height: isUniversityPartyPt ? 1080 : 630, alt: title }],
         type: 'website',
         siteName: 'Nightlife Milan',
         locale: locale === 'it' ? 'it_IT' : 'en_US',
@@ -172,7 +183,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         card: 'summary_large_image',
         title,
         description,
-        images: [weeklyEvent.image],
+        images: [heroImage],
         site: '@nightlifemilan',
       },
     };
@@ -231,9 +242,16 @@ export default async function EventPage({ params }: Props) {
   const weeklyEvent = getWeeklyEventBySlug(slug);
   if (weeklyEvent) {
     const isIt = locale === 'it';
-    const title = `${weeklyEvent.name} @ ${weeklyEvent.clubName} Milano - ${weeklyEvent.day.charAt(0).toUpperCase() + weeklyEvent.day.slice(1)} 2026`;
+    const isUniversityPartyPt = locale === 'pt' && slug === UNIVERSITY_PARTY_PT_SLUG;
+    const title = isUniversityPartyPt
+      ? universityPartyPt.title
+      : `${weeklyEvent.name} @ ${weeklyEvent.clubName} Milano - ${weeklyEvent.day.charAt(0).toUpperCase() + weeklyEvent.day.slice(1)} 2026`;
     const description = isIt ? weeklyEvent.description.it : weeklyEvent.description.en;
     const dressCode = isIt ? weeklyEvent.dressCode.it : weeklyEvent.dressCode.en;
+    const eventVisualGallery = getEventVisualGallery(slug, locale);
+    const heroImage = isUniversityPartyPt && eventVisualGallery
+      ? eventVisualGallery.images[0].src
+      : weeklyEvent.image;
 
     const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
     const weeklyVenue = getVenueById(`v-${weeklyEvent.clubSlug}`);
@@ -306,12 +324,12 @@ export default async function EventPage({ params }: Props) {
 
         <section className="relative h-screen flex items-center justify-center">
           <Image
-            src={weeklyEvent.image}
-            alt={title}
+            src={heroImage}
+            alt={isUniversityPartyPt && eventVisualGallery ? eventVisualGallery.images[0].alt : title}
             fill
             quality={95}
             sizes="100vw"
-            className="object-cover"
+            className={isUniversityPartyPt ? 'object-contain bg-black' : 'object-cover'}
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-black/60" />
@@ -325,7 +343,7 @@ export default async function EventPage({ params }: Props) {
               </span>
             </div>
             <h1 className="text-5xl md:text-7xl font-serif font-bold text-white mb-6 tracking-tight">{title}</h1>
-            <p className="text-xl text-white/70 mb-8 max-w-2xl mx-auto">{weeklyEvent.target}</p>
+            <p className="text-xl text-white/70 mb-8 max-w-2xl mx-auto">{isUniversityPartyPt ? universityPartyPt.target : weeklyEvent.target}</p>
             {weeklyEvent.xceedLink && (
               <a
                 href={weeklyEvent.xceedLink}
@@ -334,16 +352,18 @@ export default async function EventPage({ params }: Props) {
                 className="inline-flex items-center gap-2 bg-champagne text-black px-8 py-4 rounded-full font-bold hover:bg-white transition-colors text-lg"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" /></svg>
-                {tr(locale, 'Buy on Xceed', 'Acquista su Xceed')}
+                {isUniversityPartyPt ? 'Comprar no Xceed' : tr(locale, 'Buy on Xceed', 'Acquista su Xceed')}
               </a>
             )}
             <a
-              href={`https://wa.me/393519127047?text=Hi,%20I%20would%20like%20to%20book%20for%20${weeklyEvent.name}%20at%20${weeklyEvent.clubName}`}
+              href={isUniversityPartyPt
+                ? 'https://wa.me/393519127047?text=Ola%2C%20quero%20reservar%20a%20University%20Party%20no%20Just%20Me%20Milano%20em%2014%20de%20julho.'
+                : `https://wa.me/393519127047?text=Hi,%20I%20would%20like%20to%20book%20for%20${weeklyEvent.name}%20at%20${weeklyEvent.clubName}`}
               target="_blank"
               rel="noopener noreferrer"
               className={`inline-block ${weeklyEvent.xceedLink ? 'ml-4 border border-white/40 text-white hover:border-champagne hover:text-champagne' : 'bg-champagne text-black hover:bg-white'} px-8 py-4 rounded-full font-bold transition-colors text-lg`}
             >
-              {tr(locale, 'Book via WhatsApp', 'Prenota via WhatsApp')}
+              {isUniversityPartyPt ? 'Reservar pelo WhatsApp' : tr(locale, 'Book via WhatsApp', 'Prenota via WhatsApp')}
             </a>
           </div>
         </section>
@@ -351,19 +371,57 @@ export default async function EventPage({ params }: Props) {
         <div className="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2">
             <h2 className="text-3xl font-serif font-bold text-champagne mb-6">
-              {tr(locale, 'The Experience', 'L\'Esperienza')}
+              {isUniversityPartyPt ? 'A experiencia' : tr(locale, 'The Experience', 'L\'Esperienza')}
             </h2>
-            <p className="text-lg text-white/70 leading-relaxed mb-8">{description}</p>
+            {isUniversityPartyPt ? (
+              <div className="space-y-5 text-lg text-white/70 leading-relaxed mb-8">
+                {universityPartyPt.intro.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+              </div>
+            ) : <p className="text-lg text-white/70 leading-relaxed mb-8">{description}</p>}
             
             <div className="bg-white/[0.03] p-8 rounded-lg border border-white/10 mb-12">
-              <h3 className="text-xl font-bold text-white mb-4">{tr(locale, 'Dress Code', 'Dress Code')}</h3>
-              <p className="text-white/50">{dressCode}</p>
+              <h3 className="text-xl font-bold text-white mb-4">{isUniversityPartyPt ? 'Codigo de vestuario' : tr(locale, 'Dress Code', 'Dress Code')}</h3>
+              <p className="text-white/50">{isUniversityPartyPt ? universityPartyPt.dressCode : dressCode}</p>
             </div>
 
+            {isUniversityPartyPt && (
+              <>
+                <h2 className="text-3xl font-serif font-bold text-champagne mb-6 mt-12">Agenda detalhada da noite</h2>
+                <ol className="border-l border-champagne/40 ml-2 space-y-6 mb-12 pl-6">
+                  {universityPartyPt.agenda.map(([time, item]) => (
+                    <li key={time} className="relative">
+                      <span className="absolute -left-[31px] top-1 h-3 w-3 rounded-full bg-champagne" />
+                      <p className="font-semibold text-champagne">{time}</p>
+                      <p className="text-white/70">{item}</p>
+                    </li>
+                  ))}
+                </ol>
+                {eventVisualGallery && <EventImageGallery gallery={eventVisualGallery} />}
+                <h2 className="text-3xl font-serif font-bold text-champagne mb-6 mt-12">Programa do evento</h2>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+                  {universityPartyPt.programme.map(([heading, copy]) => (
+                    <section key={heading} className="border border-white/10 bg-white/[0.03] rounded-lg p-6">
+                      <h3 className="font-serif text-xl font-bold text-white mb-3">{heading}</h3>
+                      <p className="text-sm leading-relaxed text-white/60">{copy}</p>
+                    </section>
+                  ))}
+                </div>
+              </>
+            )}
+
             <h2 className="text-3xl font-serif font-bold text-champagne mb-6 mt-12">
-              {tr(locale, 'Pricing & VIP Tables', 'Prezzi & Tavoli VIP')}
+              {isUniversityPartyPt ? 'Bilhetes e mesas VIP' : tr(locale, 'Pricing & VIP Tables', 'Prezzi & Tavoli VIP')}
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            {isUniversityPartyPt ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
+                {universityPartyPt.prices.map(([name, price]) => (
+                  <section key={name} className="bg-white/[0.03] p-6 rounded-lg border border-white/10">
+                    <h3 className="text-lg font-bold text-white mb-2">{name}</h3>
+                    <p className="text-champagne leading-relaxed">{price}</p>
+                  </section>
+                ))}
+              </div>
+            ) : <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
               {weeklyEvent.pricing.aperitif && (
                 <div className="bg-white/[0.03] p-6 rounded-xl border border-white/10">
                   <h4 className="text-lg font-bold text-white mb-2">{tr(locale, 'Aperitif', 'Aperitivo')}</h4>
@@ -379,37 +437,41 @@ export default async function EventPage({ params }: Props) {
                 <p className="text-2xl font-serif text-champagne">{weeklyEvent.pricing.tables}</p>
                 <p className="text-sm text-white/50 mt-2">{tr(locale, 'Prices vary based on location and number of guests.', 'I prezzi variano in base alla posizione e al numero di persone.')}</p>
               </div>
-            </div>
+            </div>}
             
             <h2 className="text-3xl font-serif font-bold text-champagne mb-6 mt-12">
-              {tr(locale, 'Frequently Asked Questions', 'Domande Frequenti')}
+              {isUniversityPartyPt ? 'Perguntas frequentes' : tr(locale, 'Frequently Asked Questions', 'Domande Frequenti')}
             </h2>
             <div className="space-y-4">
-              {weeklyEvent.faqs.map((faq, index) => (
+              {(isUniversityPartyPt
+                ? universityPartyPt.faqs
+                : weeklyEvent.faqs.map((faq) => [isIt ? faq.q.it : faq.q.en, isIt ? faq.a.it : faq.a.en] as const)
+              ).map(([question, answer], index) => (
                 <div key={index} className="bg-white/[0.03] rounded-xl border border-white/10 p-6">
-                  <h4 className="text-lg font-semibold text-white mb-2">{isIt ? faq.q.it : faq.q.en}</h4>
-                  <p className="text-white/50">{isIt ? faq.a.it : faq.a.en}</p>
+                  <h3 className="text-lg font-semibold text-white mb-2">{question}</h3>
+                  <p className="text-white/50">{answer}</p>
                 </div>
               ))}
             </div>
+            {!isUniversityPartyPt && eventVisualGallery && <EventImageGallery gallery={eventVisualGallery} />}
           </div>
 
           <aside className="bg-white/[0.03] rounded-xl p-8 border border-white/10 h-fit sticky top-24">
             <h3 className="text-xl font-serif font-bold text-champagne mb-6 pb-4 border-b border-white/10">
-              {tr(locale, 'Event Details', 'Dettagli Evento')}
+              {isUniversityPartyPt ? 'Detalhes do evento' : tr(locale, 'Event Details', 'Dettagli Evento')}
             </h3>
             <div className="space-y-6">
               <div>
-                <p className="text-sm text-white/50 mb-1">{tr(locale, 'Day', 'Giorno')}</p>
-                <p className="text-white font-medium capitalize">{isIt ? weeklyEvent.day : weeklyEvent.day}</p>
+                <p className="text-sm text-white/50 mb-1">{isUniversityPartyPt ? 'Data' : tr(locale, 'Day', 'Giorno')}</p>
+                <p className="text-white font-medium capitalize">{isUniversityPartyPt ? 'Terca-feira, 14 de julho de 2026' : weeklyEvent.day}</p>
               </div>
               <div>
-                <p className="text-sm text-white/50 mb-1">{tr(locale, 'Target', 'Target')}</p>
-                <p className="text-white font-medium">{weeklyEvent.target}</p>
+                <p className="text-sm text-white/50 mb-1">{isUniversityPartyPt ? 'Publico' : tr(locale, 'Target', 'Target')}</p>
+                <p className="text-white font-medium">{isUniversityPartyPt ? universityPartyPt.target : weeklyEvent.target}</p>
               </div>
               <div>
-                <p className="text-sm text-white/50 mb-1">{tr(locale, 'Music Genres', 'Generi Musicali')}</p>
-                <p className="text-white font-medium">{weeklyEvent.genres.join(', ')}</p>
+                <p className="text-sm text-white/50 mb-1">{isUniversityPartyPt ? 'Musica' : tr(locale, 'Music Genres', 'Generi Musicali')}</p>
+                <p className="text-white font-medium">{isUniversityPartyPt ? 'House, hip hop, hits, EDM e reggaeton' : weeklyEvent.genres.join(', ')}</p>
               </div>
               <div className="pt-6 border-t border-white/10 space-y-3">
                 {weeklyEvent.xceedLink && (
@@ -420,16 +482,18 @@ export default async function EventPage({ params }: Props) {
                     className="flex items-center justify-center gap-2 w-full bg-champagne text-black px-6 py-3 rounded-xl font-bold hover:bg-white transition-colors"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" /></svg>
-                    {tr(locale, 'Buy on Xceed', 'Acquista su Xceed')}
+                    {isUniversityPartyPt ? 'Comprar no Xceed' : tr(locale, 'Buy on Xceed', 'Acquista su Xceed')}
                   </a>
                 )}
                 <a
-                  href={`https://wa.me/393519127047?text=Hi,%20I%20would%20like%20to%20book%20for%20${weeklyEvent.name}%20at%20${weeklyEvent.clubName}`}
+                  href={isUniversityPartyPt
+                    ? 'https://wa.me/393519127047?text=Ola%2C%20quero%20reservar%20a%20University%20Party%20no%20Just%20Me%20Milano%20em%2014%20de%20julho.'
+                    : `https://wa.me/393519127047?text=Hi,%20I%20would%20like%20to%20book%20for%20${weeklyEvent.name}%20at%20${weeklyEvent.clubName}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 w-full bg-[#25D366] text-white px-6 py-3 rounded-xl font-bold hover:bg-[#20bd5a] transition-colors"
                 >
-                  {tr(locale, 'Book on WhatsApp', 'Prenota su WhatsApp')}
+                  {isUniversityPartyPt ? 'Reservar no WhatsApp' : tr(locale, 'Book on WhatsApp', 'Prenota su WhatsApp')}
                 </a>
               </div>
             </div>
@@ -541,6 +605,7 @@ export default async function EventPage({ params }: Props) {
   const title = getLocalizedText(event.localizedContent.title, locale);
   const venueName = getLocalizedText(venue.localizedContent.name, locale);
   const description = getLocalizedText(event.localizedContent.shortDescription, locale);
+  const eventVisualGallery = getEventVisualGallery(event.localizedContent.slug.en, locale);
   // Internal linking: venue name in "About the venue" links to its /clubs page.
   const venueSlug = getLocalizedText(venue.slugs, locale);
   const venueHref = `${localePrefix(locale)}/clubs/${venueSlug}`;
@@ -736,6 +801,7 @@ export default async function EventPage({ params }: Props) {
 
             {richContent && <GoldEventContent data={richContent} locale={locale} />}
             {!richContent && goldHtml && <GoldEventHtml html={goldHtml} />}
+            {eventVisualGallery && <EventImageGallery gallery={eventVisualGallery} />}
 
             <MoreVenueEvents items={moreVenueEvents} locale={locale} venueName={venueName} />
           </div>
