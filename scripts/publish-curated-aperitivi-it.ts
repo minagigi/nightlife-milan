@@ -15,6 +15,7 @@ type Args = {
   execute: boolean;
   date: string;
   weekEnd: string;
+  updateEventId?: string;
 };
 
 type CuratedEvent = XceedEvent & {
@@ -30,12 +31,14 @@ function parseArgs(argv: string[]): Args {
     if (arg === '--execute') values.set('execute', '1');
     else if (arg.startsWith('--date=')) values.set('date', arg.slice('--date='.length));
     else if (arg.startsWith('--week-end=')) values.set('weekEnd', arg.slice('--week-end='.length));
+    else if (arg.startsWith('--update-event-id=')) values.set('updateEventId', arg.slice('--update-event-id='.length));
     else throw new Error(`Argomento sconosciuto: ${arg}`);
   }
   return {
     execute: values.get('execute') === '1',
     date: values.get('date') || '2026-07-16',
     weekEnd: values.get('weekEnd') || '2026-07-19',
+    updateEventId: values.get('updateEventId'),
   };
 }
 
@@ -142,12 +145,36 @@ function euro(value: number): string {
   return new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(value);
 }
 
+function localizedOfferName(name: string): string {
+  const exact: Record<string, string> = {
+    'Aperitif + 1 Drink': 'Aperitivo + 1 drink',
+    'Aperitif + 2 Drinks': 'Aperitivo + 2 drink',
+    'Aperitif + 2 Drinks [Early Bird]': 'Aperitivo + 2 drink, tariffa Early Bird',
+    'Aperitif + Open Wine': 'Aperitivo + vino illimitato',
+    'Dance Floor Table': 'Tavolo in pista',
+    'VIP Area Table': 'Tavolo area VIP',
+    'Super VIP Area Table [Back Line]': 'Tavolo Super VIP, seconda fila',
+    'Super VIP Area Table [Front Line]': 'Tavolo Super VIP, prima fila',
+    'DJ Table': 'Tavolo DJ',
+    'Prive Aria Table': 'Tavolo privé Aria',
+    'Prive DJ Table': 'Tavolo privé DJ',
+    'Prive Dance Floor Table': 'Tavolo privé pista',
+    'Prive Balcony Table': 'Tavolo privé balconata',
+    'VIP Prive Table': 'Tavolo privé VIP',
+  };
+  return exact[name] || name;
+}
+
+function venueArticle(venue: string): string {
+  return venue === 'Aria Club Milano' ? "all'Aria Club Milano" : `al ${venue}`;
+}
+
 function offerRows(event: CuratedEvent): string {
   const aperitifs = event.offers.filter((offer) => /aperitif/i.test(offer.name));
   const tables = event.offers.filter((offer) => offer.category === 'table');
   const rows = [
-    ...aperitifs.map((offer) => `<li>${escapeHtml(offer.name)}: <strong>${escapeHtml(euro(offer.price))}</strong></li>`),
-    ...tables.map((offer) => `<li>${escapeHtml(offer.name)}: <strong>${escapeHtml(euro(offer.price))}</strong></li>`),
+    ...aperitifs.map((offer) => `<li>${escapeHtml(localizedOfferName(offer.name))}: <strong>${escapeHtml(euro(offer.price))}</strong></li>`),
+    ...tables.map((offer) => `<li>${escapeHtml(localizedOfferName(offer.name))}: <strong>${escapeHtml(euro(offer.price))}</strong></li>`),
   ];
   if (tables.length === 0) {
     rows.push('<li>Tavoli pista, privé e super privé: disponibilità e prezzo da verificare su WhatsApp.</li>');
@@ -159,9 +186,9 @@ function eventCard(event: CuratedEvent): string {
   const age = event.ageRange || 'da verificare';
   return [
     `<h3>${escapeHtml(event.venueName)} - ${escapeHtml(event.name)}</h3>`,
-    `<p><strong>Data:</strong> ${escapeHtml(dateLabel(event.localDate))}. <strong>Orario:</strong> aperitivo dalle 19:30; prosecuzione serale secondo il programma del locale. <strong>Età:</strong> ${escapeHtml(age)}. <strong>Dress code:</strong> ${escapeHtml(event.dressCode || 'elegante')}.</p>`,
+    `<p><strong>Data:</strong> ${escapeHtml(dateLabel(event.localDate))}. <strong>Orario:</strong> aperitivo dalle 19:30; prosecuzione serale secondo il programma del locale. <strong>Età:</strong> ${escapeHtml(age)}. <strong>Dress code:</strong> ${escapeHtml(/elegant/i.test(event.dressCode || '') ? 'Elegante' : event.dressCode || 'Elegante')}.</p>`,
     `<ul>${offerRows(event)}</ul>`,
-    `<p><a href="${escapeHtml(event.affiliateUrl)}">Prenota ${escapeHtml(event.name)} al ${escapeHtml(event.venueName)} su Xceed</a></p>`,
+    `<p><a href="${escapeHtml(event.affiliateUrl)}">Prenota ${escapeHtml(event.name)} ${escapeHtml(venueArticle(event.venueName))} su Xceed</a></p>`,
   ].join('');
 }
 
@@ -183,7 +210,7 @@ const FAQS: readonly Faq[] = [
   { question: 'Posso entrare senza prenotazione?', answer: "L'ingresso senza prenotazione non è garantito. Acquistare in anticipo su Xceed permette di controllare prezzo, disponibilità e condizioni della serata scelta." },
   { question: 'Il biglietto Eventbrite vale per entrare?', answer: 'No. Questa pagina raccoglie e confronta gli aperitivi disponibili. Il titolo valido è quello acquistato tramite il link Xceed della singola serata.' },
   { question: 'Perché devo inviare la conferma su WhatsApp?', answer: "La conferma ci permette di controllare locale, data, formula e nominativo. Invia il documento Xceed al +39 351 912 7047 subito dopo l'acquisto." },
-  { question: 'Posso chiedere informazioni in italiano?', answer: 'Si. Scrivi su WhatsApp al +39 351 912 7047 indicando data, locale, numero di persone, eta dei partecipanti e servizio richiesto.' },
+  { question: 'Posso chiedere informazioni in italiano?', answer: 'Sì. Scrivi su WhatsApp al +39 351 912 7047 indicando data, locale, numero di persone, età dei partecipanti e servizio richiesto.' },
   { question: 'Gli aperitivi sono adatti a gruppi internazionali?', answer: 'Just Me e Pineta hanno un pubblico fortemente internazionale. Aria è più orientato al pubblico italiano, pur accogliendo anche gruppi stranieri.' },
   { question: 'Quale aperitivo scegliere per un pubblico 21+?', answer: "Just Me Milano è la proposta prioritaria per un pubblico internazionale 21+. Controlla sempre l'età minima pubblicata nella pagina Xceed della data selezionata." },
   { question: 'Quale aperitivo scegliere per un pubblico 18+?', answer: 'Pineta Milano e Aria Club Milano sono le proposte principali 18+. Pineta ha un taglio più internazionale, Aria un pubblico prevalentemente italiano.' },
@@ -202,10 +229,10 @@ const BODY_IMAGES = [
   {
     title: 'Aperitivo e serata internazionale al Pineta Milano',
     src: `${SITE_URL}/images/venues/pineta-milano/pineta-milano-lounge-01.webp`,
-    alt: 'Pineta Milano aperitivo internazionale e tavoli prive',
+    alt: 'Pineta Milano aperitivo internazionale e tavoli privé',
   },
   {
-    title: 'Aperitivo e discoteca all Aria Club Milano',
+    title: "Aperitivo e discoteca all'Aria Club Milano",
     src: `${SITE_URL}/images/venues/aria-club-milano/aria-club-milano-buffet-01.webp`,
     alt: 'Aria Club Milano aperitivo buffet e discoteca 18+',
   },
@@ -239,8 +266,8 @@ function buildHtml(events: CuratedEvent[], args: Args, marker: string): string {
 
   return [
     '<h2>Aperitivi a Milano: calendario aggiornato della settimana</h2>',
-    `<p>Questa guida riunisce gli aperitivi ancora prenotabili da ${escapeHtml(dateLabel(args.date))} a ${escapeHtml(dateLabel(args.weekEnd))} nei locali selezionati da Nightlife Milan. Trovi formule, eta minima, orari, tavoli e il link Xceed specifico di ogni serata.</p>`,
-    '<p>Il calendario viene ripubblicato ogni giorno: le date trascorse vengono eliminate e restano soltanto le opzioni effettivamente disponibili. Just Me ha priorita per il pubblico internazionale 21+, Pineta per il pubblico internazionale 18+ e Aria per il pubblico italiano 18+.</p>',
+    `<p>Questa guida riunisce gli aperitivi ancora prenotabili da ${escapeHtml(dateLabel(args.date))} a ${escapeHtml(dateLabel(args.weekEnd))} nei locali selezionati da Nightlife Milan. Trovi formule, età minima, orari, tavoli e il link Xceed specifico di ogni serata.</p>`,
+    '<p>Il calendario viene ripubblicato ogni giorno: le date trascorse vengono eliminate e restano soltanto le opzioni effettivamente disponibili. Just Me ha priorità per il pubblico internazionale 21+, Pineta per il pubblico internazionale 18+ e Aria per il pubblico italiano 18+.</p>',
     '<h2>Come prenotare senza errori</h2>',
     `<p>Scegli locale e data, apri il relativo link Xceed e controlla formula e prezzo prima del pagamento. Dopo l'acquisto inoltra la conferma d'ordine su WhatsApp al <a href="https://wa.me/393519127047">${PHONE}</a>, indicando nome, locale, data e numero di persone. Verificheremo sul portale l'esito della prenotazione e del pagamento e ti invieremo conferma.</p>`,
     '<p><strong>Importante:</strong> il biglietto gratuito Eventbrite non costituisce titolo di ingresso. L\'acquisto o la prenotazione valida deve essere completata tramite il link Xceed specifico riportato sotto ciascuna proposta.</p>',
@@ -411,6 +438,20 @@ async function main(): Promise<void> {
 
   if (!args.execute) {
     console.log(JSON.stringify({ ok: true, execute: false, title, summaryLength: summary.length, htmlLength: html.length, eventCount: events.length, cover, preview }, null, 2));
+    return;
+  }
+
+  if (args.updateEventId) {
+    const secret = process.env.CRON_SECRET;
+    if (!secret) throw new Error('CRON_SECRET non disponibile per l aggiornamento server');
+    const response = await fetch(`${SITE_URL}/api/admin/update-event-copy`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${secret}`, 'content-type': 'application/json' },
+      body: JSON.stringify({ eventId: args.updateEventId, title, summary, descriptionHtml: html }),
+    });
+    const result = await response.json();
+    if (!response.ok || !result.ok) throw new Error(`Aggiornamento server fallito: ${response.status} ${result.error || 'errore sconosciuto'}`);
+    console.log(JSON.stringify({ ...result, execute: true, updatedEventId: args.updateEventId, eventCount: events.length, cover, preview }, null, 2));
     return;
   }
 

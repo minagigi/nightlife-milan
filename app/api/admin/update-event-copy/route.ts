@@ -40,8 +40,10 @@ export async function POST(request: Request) {
 
   const headers = { Authorization: `Bearer ${token}`, 'content-type': 'application/json' };
   const patches: Array<{ label: string; event: Record<string, unknown> }> = [];
-  if (Object.keys(basePatch).length > 0) patches.push({ label: 'base', event: basePatch });
+  // Eventbrite may regenerate summary from the description write. Apply the
+  // operator-authored title/summary last so those fields remain authoritative.
   if (descriptionHtml) patches.push({ label: 'description', event: { description: { html: descriptionHtml } } });
+  if (Object.keys(basePatch).length > 0) patches.push({ label: 'base', event: basePatch });
 
   const results: Array<{ label: string; status: number; ok: boolean }> = [];
   for (const patch of patches) {
