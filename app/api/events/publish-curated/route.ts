@@ -140,11 +140,30 @@ export async function GET(request: Request) {
   const token = getEventbriteToken();
   if (!token) return NextResponse.json({ ok: false, error: 'EVENTBRITE_TOKEN not set' }, { status: 500 });
   try {
+    const searchParams = new URL(request.url).searchParams;
     let events: ExistingCuratedEvent[];
-    if (new URL(request.url).searchParams.get('scope') === 'drafts') {
-      const response = await fetch(`${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=draft&order_by=start_desc&page_size=50`, { headers: authHeaders(token) });
-      if (!response.ok) throw new Error(`Draft lookup failed: ${response.status}`);
-      events = (await response.json()).events || [];
+    if (searchParams.get('scope') === 'drafts') {
+      const marker = searchParams.get('marker');
+      if (marker && !MARKER_RE.test(marker)) {
+        return NextResponse.json({ ok: false, error: 'Invalid marker' }, { status: 400 });
+      }
+
+      const base = `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=draft&order_by=start_desc&page_size=50`;
+      let continuation: string | undefined;
+      events = [];
+      for (let page = 1; page <= (marker ? 30 : 1); page += 1) {
+        const url = continuation ? `${base}&continuation=${encodeURIComponent(continuation)}` : base;
+        const response = await fetch(url, { headers: authHeaders(token) });
+        if (!response.ok) throw new Error(`Draft lookup failed: ${response.status}`);
+        const body = await response.json();
+        const pageEvents = (body.events || []) as ExistingCuratedEvent[];
+        events.push(...(marker
+          ? pageEvents.filter((event) => event.description?.html?.includes(marker))
+          : pageEvents));
+        if (events.length > 0 && marker) break;
+        continuation = body.pagination?.has_more_items ? body.pagination?.continuation : undefined;
+        if (!continuation) break;
+      }
     } else {
       events = await listExistingCuratedEvents(token);
     }
