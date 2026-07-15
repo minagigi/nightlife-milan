@@ -140,7 +140,14 @@ export async function GET(request: Request) {
   const token = getEventbriteToken();
   if (!token) return NextResponse.json({ ok: false, error: 'EVENTBRITE_TOKEN not set' }, { status: 500 });
   try {
-    const events = await listExistingCuratedEvents(token);
+    let events: ExistingCuratedEvent[];
+    if (new URL(request.url).searchParams.get('scope') === 'drafts') {
+      const response = await fetch(`${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=draft&order_by=start_desc&page_size=50`, { headers: authHeaders(token) });
+      if (!response.ok) throw new Error(`Draft lookup failed: ${response.status}`);
+      events = (await response.json()).events || [];
+    } else {
+      events = await listExistingCuratedEvents(token);
+    }
     return NextResponse.json({
       ok: true,
       events: events.map((event) => ({

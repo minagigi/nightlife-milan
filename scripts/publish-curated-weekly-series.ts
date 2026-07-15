@@ -25,6 +25,7 @@ interface Args {
   limit?: number;
   batchSize: number;
   batchPauseSeconds: number;
+  skipPreflight: boolean;
 }
 
 interface UiPack {
@@ -196,6 +197,7 @@ function parseArgs(argv: string[]): Args {
     else if (arg.startsWith('--limit=')) values.set('limit', arg.slice(8));
     else if (arg.startsWith('--batch-size=')) values.set('batchSize', arg.slice(13));
     else if (arg.startsWith('--batch-pause-seconds=')) values.set('batchPauseSeconds', arg.slice(22));
+    else if (arg === '--skip-preflight') values.set('skipPreflight', '1');
     else throw new Error(`Unknown argument: ${arg}`);
   }
   const locales = (values.get('locales') || 'it,en').split(',') as Locale[];
@@ -207,6 +209,7 @@ function parseArgs(argv: string[]): Args {
     from: values.get('from') || '2026-07-16', through: values.get('through') || '2026-07-19', locales, series,
     limit: values.get('limit') ? Number(values.get('limit')) : undefined,
     batchSize: Number(values.get('batchSize') || 18), batchPauseSeconds: Number(values.get('batchPauseSeconds') || 300),
+    skipPreflight: values.get('skipPreflight') === '1',
   };
 }
 
@@ -510,7 +513,17 @@ async function main(): Promise<void> {
   const selectedSeries = args.series || SERIES_IDS;
   const secret = args.execute ? process.env.CRON_SECRET : undefined;
   if (args.execute && !secret) throw new Error('CRON_SECRET is required for execution');
-  const existingEvents = secret ? await fetchExistingCuratedEvents(secret) : [];
+  const existingEvents = secret && !args.skipPreflight ? await fetchExistingCuratedEvents(secret) : [];
+  if (args.execute) {
+    try {
+      const previous = JSON.parse(await fs.readFile(manifestPath, 'utf8'));
+      for (const entry of previous.entries || []) {
+        if (entry.result?.ok && entry.marker && entry.result?.eventId) {
+          existingEvents.push({ id: String(entry.result.eventId), status: 'live', url: entry.result.url, title: entry.title, markers: [entry.marker] });
+        }
+      }
+    } catch { /* first run for this locale set */ }
+  }
   const existingMarkers = new Map<string, ExistingCuratedEvent>();
   const existingTitles = new Map<string, ExistingCuratedEvent>();
   for (const event of existingEvents) {
