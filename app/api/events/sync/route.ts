@@ -31,6 +31,24 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
+  // Deploy e correzioni SEO devono poter risottomettere la sitemap senza
+  // notificare ogni singola URL tramite la Google Indexing API. Questa modalità
+  // usa le stesse credenziali e la stessa route operativa già configurate.
+  if (searchParams.get('sitemapOnly') === '1') {
+    const indexingConfigured = Boolean(process.env.GOOGLE_INDEXING_CREDENTIALS);
+    const sitemap = indexingConfigured
+      ? await submitSitemap(`${BASE}/`, `${BASE}/sitemap.xml`)
+      : { ok: false, status: 0, error: 'Google credentials are not configured' };
+
+    return NextResponse.json({
+      ok: sitemap.ok,
+      sitemapOnly: true,
+      indexingConfigured,
+      sitemap,
+      updated: new Date().toISOString(),
+    }, { status: sitemap.ok ? 200 : 503 });
+  }
+
   // Debug mode: just check Eventbrite token
   if (searchParams.get('debug') === '1') {
     const info = await debugEventbrite();
