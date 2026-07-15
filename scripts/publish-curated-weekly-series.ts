@@ -17,6 +17,7 @@ type CuratedEvent = XceedEvent & { localDate: string; localStart: string; localE
 
 interface Args {
   execute: boolean;
+  updateExisting: boolean;
   from: string;
   through: string;
   locales: Locale[];
@@ -185,6 +186,7 @@ function parseArgs(argv: string[]): Args {
   const values = new Map<string, string>();
   for (const arg of argv) {
     if (arg === '--execute') values.set('execute', '1');
+    else if (arg === '--update-existing') values.set('updateExisting', '1');
     else if (arg.startsWith('--from=')) values.set('from', arg.slice(7));
     else if (arg.startsWith('--through=')) values.set('through', arg.slice(10));
     else if (arg.startsWith('--locales=')) values.set('locales', arg.slice(10));
@@ -196,7 +198,7 @@ function parseArgs(argv: string[]): Args {
   if (locales.some((locale) => !UI[locale])) throw new Error('Unsupported locale');
   const series = values.get('series')?.split(',') as SeriesId[] | undefined;
   if (series?.some((id) => !SERIES_IDS.includes(id))) throw new Error('Unsupported series');
-  return { execute: values.get('execute') === '1', from: values.get('from') || '2026-07-16', through: values.get('through') || '2026-07-19', locales, series, limit: values.get('limit') ? Number(values.get('limit')) : undefined };
+  return { execute: values.get('execute') === '1', updateExisting: values.get('updateExisting') === '1', from: values.get('from') || '2026-07-16', through: values.get('through') || '2026-07-19', locales, series, limit: values.get('limit') ? Number(values.get('limit')) : undefined };
 }
 
 async function loadLocalEnv(): Promise<void> {
@@ -241,7 +243,7 @@ function rangeLabel(from: string, through: string, locale: Locale): string {
   const end = new Date(`${through}T12:00:00+02:00`);
   const day = new Intl.DateTimeFormat(UI[locale].dateLocale, { day: 'numeric', timeZone: 'Europe/Rome' });
   const monthYear = new Intl.DateTimeFormat(UI[locale].dateLocale, { month: 'long', year: 'numeric', timeZone: 'Europe/Rome' });
-  return `${day.format(start)}-${day.format(end)} ${monthYear.format(end)}`;
+  return from === through ? `${day.format(start)} ${monthYear.format(end)}` : `${day.format(start)}-${day.format(end)} ${monthYear.format(end)}`;
 }
 
 function daySequence(from: string, through: string): string[] {
@@ -495,6 +497,7 @@ async function main(): Promise<void> {
   await fs.mkdir(artifactDir, { recursive: true });
   await fs.writeFile(path.join(artifactDir, 'xceed-snapshot.json'), `${JSON.stringify({ capturedAt: new Date().toISOString(), events }, null, 2)}\n`, 'utf8');
   const manifest: Array<Record<string, unknown>> = [];
+  const manifestPath = path.join(artifactDir, `manifest-${args.locales.join('-')}${args.execute ? '-published' : '-dry'}.json`);
   const selectedSeries = args.series || SERIES_IDS;
   const secret = args.execute ? process.env.CRON_SECRET : undefined;
   if (args.execute && !secret) throw new Error('CRON_SECRET is required for execution');
@@ -502,7 +505,11 @@ async function main(): Promise<void> {
   const existingMarkers = new Map<string, ExistingCuratedEvent>();
   const existingTitles = new Map<string, ExistingCuratedEvent>();
   for (const event of existingEvents) {
-    for (const marker of event.markers || []) existingMarkers.set(marker, event);
+    for (const marker of event.markers || []) {
+      existingMarkers.set(marker, event);
+      const legacyAperitivi = marker.match(/^nlm:curated=aperitivi-it-(\d{4}-\d{2}-\d{2})$/);
+      if (legacyAperitivi) existingMarkers.set(`nlm:curated=aperitivi-week-it-${legacyAperitivi[1]}`, event);
+    }
     if (event.title) existingTitles.set(event.title, event);
   }
   let prepared = 0;
@@ -526,33 +533,39 @@ async function main(): Promise<void> {
         await fs.writeFile(htmlPath, `${descriptionHtml}\n`, 'utf8');
         const entry: Record<string, unknown> = { publicationDate, locale, series: id, title, summary, marker, eventCount: selected.length, xceedIds: selected.map((event) => event.xceedId), cover, htmlPath, descriptionLength: descriptionHtml.length };
         if (args.execute) {
-          const existing = existingMarkers.get(marker) || existingTitles.get(title);
-          if (existing) {
-            entry.result = existing.status === 'draft'
-              ? await recoverDraft(existing.id, secret!)
-              : { ok: true, skipped: true, reason: 'already-present', eventId: existing.id, url: existing.url };
-          } else {
-            const result = await publish({
+          try {
+            const existing = existingMarkers.get(marker) || existingTitles.get(title);
+            const payload = {
               title, summary, descriptionHtml, marker, date: publicationDate, lang: locale,
               ageRestriction: SERIES[id].age, categoryId: SERIES[id].category,
               ticketName: UI[locale].ticketName, ticketDescription: UI[locale].ticketDescription,
               coverBase64: (await fs.readFile(cover)).toString('base64'), coverContentType: 'image/jpeg', coverFilename: path.basename(cover),
               dedupePrechecked: true,
-            }, secret!);
-            entry.result = result;
-            const created = { id: String(result.eventId || ''), url: typeof result.url === 'string' ? result.url : undefined };
-            existingMarkers.set(marker, created);
-            existingTitles.set(title, created);
+            };
+            if (existing) {
+              if (existing.status === 'draft') entry.result = await recoverDraft(existing.id, secret!);
+              else if (args.updateExisting) entry.result = await publish({ ...payload, action: 'update-existing', eventId: existing.id }, secret!);
+              else entry.result = { ok: true, skipped: true, reason: 'already-present', eventId: existing.id, url: existing.url };
+            } else {
+              const result = await publish(payload, secret!);
+              entry.result = result;
+              const created = { id: String(result.eventId || ''), url: typeof result.url === 'string' ? result.url : undefined };
+              existingMarkers.set(marker, created);
+              existingTitles.set(title, created);
+            }
+          } catch (error) {
+            entry.result = { ok: false, error: error instanceof Error ? error.message : String(error) };
           }
         }
         manifest.push(entry);
         prepared += 1;
+        await fs.writeFile(manifestPath, `${JSON.stringify({ execute: args.execute, from: args.from, through: args.through, count: manifest.length, entries: manifest }, null, 2)}\n`, 'utf8');
       }
     }
   }
-  const manifestPath = path.join(artifactDir, `manifest-${args.locales.join('-')}${args.execute ? '-published' : '-dry'}.json`);
   await fs.writeFile(manifestPath, `${JSON.stringify({ execute: args.execute, from: args.from, through: args.through, count: manifest.length, entries: manifest }, null, 2)}\n`, 'utf8');
-  console.log(JSON.stringify({ ok: true, execute: args.execute, count: manifest.length, manifest: manifestPath, byLocale: Object.fromEntries(args.locales.map((locale) => [locale, manifest.filter((entry) => entry.locale === locale).length])) }, null, 2));
+  const errors = manifest.filter((entry) => (entry.result as { ok?: boolean } | undefined)?.ok === false).length;
+  console.log(JSON.stringify({ ok: errors === 0, execute: args.execute, count: manifest.length, errors, manifest: manifestPath, byLocale: Object.fromEntries(args.locales.map((locale) => [locale, manifest.filter((entry) => entry.locale === locale).length])) }, null, 2));
 }
 
 main().catch((error) => {

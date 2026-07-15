@@ -20,7 +20,7 @@ const LOCALE_MAP: Record<string, string> = {
 };
 
 interface CuratedSubmission {
-  action?: 'recover-draft';
+  action?: 'recover-draft' | 'update-existing';
   eventId?: string;
   title?: string;
   summary?: string;
@@ -218,6 +218,35 @@ export async function POST(request: Request) {
   if (validationError) return NextResponse.json({ ok: false, error: validationError }, { status: 400 });
 
   try {
+    if (body.action === 'update-existing') {
+      if (!/^\d+$/.test(body.eventId || '')) return NextResponse.json({ ok: false, error: 'Invalid event id' }, { status: 400 });
+      const inspect = await fetch(`${EVENTBRITE_API}/events/${body.eventId}/`, { headers: authHeaders(token) });
+      if (!inspect.ok) throw new Error(`Event lookup failed: ${inspect.status}`);
+      const event = await inspect.json();
+      if (!['live', 'started'].includes(event.status) || !event.description?.html?.includes(body.marker)) {
+        throw new Error('Event is not an updatable curated listing');
+      }
+      const imageId = await uploadCover(token, body);
+      const metadata = await fetch(`${EVENTBRITE_API}/events/${body.eventId}/`, {
+        method: 'POST',
+        headers: authHeaders(token),
+        body: JSON.stringify({ event: { name: { html: body.title }, summary: body.summary, logo_id: imageId, category_id: body.categoryId || '103' } }),
+      });
+      if (!metadata.ok) throw new Error(`Event metadata update failed: ${metadata.status} ${(await metadata.text()).slice(0, 200)}`);
+      const description = await fetch(`${EVENTBRITE_API}/events/${body.eventId}/`, {
+        method: 'POST',
+        headers: authHeaders(token),
+        body: JSON.stringify({ event: { description: { html: body.descriptionHtml } } }),
+      });
+      if (!description.ok) throw new Error(`Event description update failed: ${description.status} ${(await description.text()).slice(0, 200)}`);
+      const verify = await fetch(`${EVENTBRITE_API}/events/${body.eventId}/`, { headers: authHeaders(token) });
+      const saved = await verify.json().catch(() => null);
+      if (!verify.ok || saved?.name?.text !== body.title || (saved?.description?.html || '').length < body.descriptionHtml!.length * 0.8) {
+        throw new Error('Event update verification failed');
+      }
+      return NextResponse.json({ ok: true, skipped: false, updated: true, eventId: body.eventId, url: saved.url || event.url });
+    }
+
     if (!body.dedupePrechecked) {
       const existing = await findExistingByMarker(token, body.marker!, body.title!);
       if (existing) {
