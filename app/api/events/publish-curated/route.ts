@@ -9,7 +9,15 @@ const EVENTBRITE_API = 'https://www.eventbriteapi.com/v3';
 const ORG_ID = '2988002072164';
 const PHONE = '+39 351 912 7047';
 const AFFILIATE_RE = /https:\/\/xceed\.me\/en\/milano\/event\/[^/]+\/\d+\/channel\/nightlifemilan-1/g;
-const MARKER_RE = /^nlm:curated=aperitivi-it-(\d{4}-\d{2}-\d{2})$/;
+const MARKER_RE = /^nlm:curated=([a-z0-9-]+)-(it|en|es|pt|fr|de)-(\d{4}-\d{2}-\d{2})$/;
+const LOCALE_MAP: Record<string, string> = {
+  it: 'it_IT',
+  en: 'en_GB',
+  es: 'es_ES',
+  pt: 'pt_PT',
+  fr: 'fr_FR',
+  de: 'de_DE',
+};
 
 interface CuratedSubmission {
   title?: string;
@@ -20,6 +28,11 @@ interface CuratedSubmission {
   coverBase64?: string;
   coverContentType?: string;
   coverFilename?: string;
+  lang?: string;
+  ageRestriction?: string;
+  categoryId?: string;
+  ticketName?: string;
+  ticketDescription?: string;
 }
 
 function authHeaders(token: string): Record<string, string> {
@@ -27,11 +40,12 @@ function authHeaders(token: string): Record<string, string> {
 }
 
 function validateSubmission(body: CuratedSubmission): string | null {
-  const { title, summary, descriptionHtml, marker, date, coverBase64, coverContentType } = body;
-  if (!title || !summary || !descriptionHtml || !marker || !date || !coverBase64 || !coverContentType) return 'Missing fields';
+  const { title, summary, descriptionHtml, marker, date, coverBase64, coverContentType, lang, ticketName, ticketDescription } = body;
+  if (!title || !summary || !descriptionHtml || !marker || !date || !coverBase64 || !coverContentType || !lang || !ticketName || !ticketDescription) return 'Missing fields';
   if (title.length > 75) return 'Title exceeds 75 characters';
   if (summary.length > 140 || !summary.includes(PHONE)) return 'Invalid summary';
-  if (!MARKER_RE.test(marker) || !marker.endsWith(date)) return 'Invalid marker or date';
+  const markerMatch = marker.match(MARKER_RE);
+  if (!markerMatch || markerMatch[2] !== lang || markerMatch[3] !== date || !LOCALE_MAP[lang]) return 'Invalid marker, locale or date';
   const timestamp = Date.parse(`${date}T18:00:00+02:00`);
   if (!Number.isFinite(timestamp) || timestamp < Date.now() - 3_600_000 || timestamp > Date.now() + 31 * 86_400_000) return 'Date outside allowed window';
   if (!descriptionHtml.includes(`<!-- ${marker} -->`)) return 'Description marker missing';
@@ -42,19 +56,27 @@ function validateSubmission(body: CuratedSubmission): string | null {
   if (/\p{Extended_Pictographic}/u.test(descriptionHtml)) return 'Unsupported emoji';
   if (!/^image\/jpeg$/i.test(coverContentType)) return 'Cover must be JPEG';
   if (Buffer.byteLength(coverBase64, 'base64') > 5_000_000) return 'Cover exceeds 5 MB';
+  if (!/^\d{2}\+$/.test(body.ageRestriction || '18+')) return 'Invalid age restriction';
+  if (!/^(103|110)$/.test(body.categoryId || '103')) return 'Invalid category';
+  if (ticketName.length > 100 || ticketDescription.length > 300) return 'Ticket copy too long';
   return null;
 }
 
 async function findExistingByMarker(token: string, marker: string): Promise<{ id: string; url?: string } | null> {
-  const response = await fetch(
-    `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=live&time_filter=current_future&page_size=100`,
-    { headers: authHeaders(token) },
-  );
-  if (!response.ok) throw new Error(`Duplicate check failed: ${response.status}`);
-  const body = await response.json();
-  return (body.events || []).find((event: { description?: { html?: string } }) =>
-    event.description?.html?.includes(marker)
-  ) || null;
+  for (let page = 1; page <= 20; page += 1) {
+    const response = await fetch(
+      `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=live&time_filter=current_future&page_size=100&page=${page}`,
+      { headers: authHeaders(token) },
+    );
+    if (!response.ok) throw new Error(`Duplicate check failed: ${response.status}`);
+    const body = await response.json();
+    const existing = (body.events || []).find((event: { description?: { html?: string } }) =>
+      event.description?.html?.includes(marker)
+    );
+    if (existing) return existing;
+    if (!body.pagination?.has_more_items) return null;
+  }
+  throw new Error('Duplicate check exceeded pagination guard');
 }
 
 async function resolveCuratedVenue(token: string): Promise<string> {
@@ -154,15 +176,15 @@ export async function POST(request: Request) {
       title: body.title!,
       summary: body.summary!,
       description: body.descriptionHtml!,
-      locale: 'it_IT',
-      lang: 'it',
-      ageRestriction: '18+',
+      locale: LOCALE_MAP[body.lang!],
+      lang: body.lang!,
+      ageRestriction: body.ageRestriction || '18+',
       doorTimeISO: `${body.date}T18:00:00`,
       ticketText: {
-        name: 'Richiesta informazioni gratuita - non valida per ingresso',
-        description: `Questa registrazione non è un biglietto di ingresso. Acquista la formula Xceed del locale scelto e invia la conferma su WhatsApp al ${PHONE}.`,
+        name: body.ticketName!,
+        description: body.ticketDescription!,
       },
-      categoryId: '110',
+      categoryId: body.categoryId || '103',
     });
     if (!result.ok) {
       return NextResponse.json({ ok: false, error: result.reason, eventId: result.ebEventId }, { status: 502 });

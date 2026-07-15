@@ -13,6 +13,7 @@ const GENERIC_EVENT_RE = /^(friday night|saturday night|sunday night|monday nigh
 
 type Args = {
   execute: boolean;
+  coverOnly: boolean;
   date: string;
   weekEnd: string;
   updateEventId?: string;
@@ -29,6 +30,7 @@ function parseArgs(argv: string[]): Args {
   const values = new Map<string, string>();
   for (const arg of argv) {
     if (arg === '--execute') values.set('execute', '1');
+    else if (arg === '--cover-only') values.set('coverOnly', '1');
     else if (arg.startsWith('--date=')) values.set('date', arg.slice('--date='.length));
     else if (arg.startsWith('--week-end=')) values.set('weekEnd', arg.slice('--week-end='.length));
     else if (arg.startsWith('--update-event-id=')) values.set('updateEventId', arg.slice('--update-event-id='.length));
@@ -36,6 +38,7 @@ function parseArgs(argv: string[]): Args {
   }
   return {
     execute: values.get('execute') === '1',
+    coverOnly: values.get('coverOnly') === '1',
     date: values.get('date') || '2026-07-16',
     weekEnd: values.get('weekEnd') || '2026-07-19',
     updateEventId: values.get('updateEventId'),
@@ -227,9 +230,9 @@ const BODY_IMAGES = [
     alt: 'Aperitivo Just Me Milano con buffet e cocktail in zona Sempione',
   },
   {
-    title: 'Aperitivo e serata internazionale al Pineta Milano',
-    src: `${SITE_URL}/images/venues/pineta-milano/pineta-milano-lounge-01.webp`,
-    alt: 'Pineta Milano aperitivo internazionale e tavoli privé',
+    title: 'Aperitivo internazionale al Pineta Milano',
+    src: 'https://cdn.evbuc.com/images/1188885890/2988002064108/1/original.20260715-005449',
+    alt: 'Aperitivo al Pineta Milano con cocktail, finger food e pubblico internazionale',
   },
   {
     title: "Aperitivo e discoteca all'Aria Club Milano",
@@ -306,36 +309,74 @@ function validateContent(title: string, summary: string, html: string, events: C
 async function makeCover(output: string, range: string): Promise<void> {
   const width = 2160;
   const height = 1080;
-  const sources = [
-    'public/images/venues/just-me-milano/just-me-milano-buffet-01.webp',
-    'public/images/venues/pineta-milano/pineta-milano-lounge-01.webp',
-    'public/images/venues/aria-club-milano/aria-club-milano-buffet-01.webp',
-  ];
-  const panels = await Promise.all(sources.map((source) =>
-    sharp(source).resize(720, height, { fit: 'cover', position: 'attention' }).jpeg({ quality: 90 }).toBuffer()
-  ));
-  const base = sharp({ create: { width, height, channels: 3, background: '#111111' } });
+  const scene = 'public/images/events/curated/aperitivi-milano-pineta-scene-v2.png';
+  const background = await sharp(scene)
+    .resize(width, height, { fit: 'cover', position: 'centre' })
+    .modulate({ saturation: 0.9, brightness: 0.86 })
+    .linear(1.08, -8)
+    .toBuffer();
+  const dateLabel = escapeHtml(range.toUpperCase().replace('-', ' / '));
   const overlay = Buffer.from(`
     <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
-      <rect width="2160" height="1080" fill="#050508" fill-opacity="0.48"/>
-      <rect x="0" y="0" width="2160" height="16" fill="#ef5b3f"/>
-      <text x="108" y="110" fill="#ffffff" font-family="Arial, sans-serif" font-size="38" font-weight="700">MILAN NIGHTLIFE | EVENT SERVICE</text>
-      <text x="1080" y="480" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="128" font-weight="800">APERITIVI A MILANO</text>
-      <text x="1080" y="590" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="62" font-weight="700">${escapeHtml(range.toUpperCase().replace('-', ' - '))}</text>
-      <rect x="525" y="650" width="1110" height="2" fill="#ffffff" fill-opacity="0.8"/>
-      <text x="1080" y="735" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="50" font-weight="700">JUST ME | PINETA | ARIA</text>
-      <text x="1080" y="995" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="34" font-weight="600">WHATSAPP ${PHONE} | NIGHTLIFEMILAN.COM</text>
+      <defs>
+        <linearGradient id="veil" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#050509" stop-opacity="0.72"/>
+          <stop offset="0.35" stop-color="#07070b" stop-opacity="0.55"/>
+          <stop offset="0.70" stop-color="#090610" stop-opacity="0.42"/>
+          <stop offset="1" stop-color="#050509" stop-opacity="0.68"/>
+        </linearGradient>
+        <linearGradient id="title" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#ffffff"/>
+          <stop offset="0.55" stop-color="#fff7e9"/>
+          <stop offset="1" stop-color="#d9e8ff"/>
+        </linearGradient>
+        <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#ff6b62"/>
+          <stop offset="0.5" stop-color="#f3be77"/>
+          <stop offset="1" stop-color="#78d7ff"/>
+        </linearGradient>
+        <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="10" result="blur"/>
+          <feOffset dy="8" result="offset"/>
+          <feColorMatrix in="offset" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .72 0"/>
+          <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <rect width="2160" height="1080" fill="url(#veil)"/>
+      <path d="M0 0 H2160 V52 C1650 86 510 86 0 52 Z" fill="#050509" fill-opacity="0.68"/>
+      <path d="M0 1028 C545 994 1615 994 2160 1028 V1080 H0 Z" fill="#050509" fill-opacity="0.86"/>
+      <rect x="58" y="54" width="2044" height="972" fill="none" stroke="#ffffff" stroke-opacity="0.25" stroke-width="2"/>
+      <rect x="58" y="54" width="430" height="4" fill="#ff6b62"/>
+      <rect x="1672" y="54" width="430" height="4" fill="#78d7ff"/>
+
+      <text x="108" y="128" fill="#ffffff" font-family="Bahnschrift, Arial, sans-serif" font-size="31" font-weight="600" letter-spacing="6">MILAN NIGHTLIFE</text>
+      <text x="108" y="169" fill="#ffffff" fill-opacity="0.72" font-family="Bahnschrift, Arial, sans-serif" font-size="20" font-weight="400" letter-spacing="5">EVENT SERVICE</text>
+      <text x="2052" y="128" text-anchor="end" fill="#ffffff" fill-opacity="0.86" font-family="Bahnschrift, Arial, sans-serif" font-size="23" font-weight="500" letter-spacing="5">MILANO 2026</text>
+
+      <g filter="url(#shadow)">
+        <text x="1080" y="475" text-anchor="middle" fill="url(#title)" font-family="Georgia, 'Times New Roman', serif" font-size="202" font-style="italic" font-weight="700">Aperitivi</text>
+        <text x="1080" y="568" text-anchor="middle" fill="#ffffff" font-family="Bahnschrift, 'Arial Narrow', sans-serif" font-size="86" font-weight="700" letter-spacing="28">A MILANO</text>
+      </g>
+
+      <rect x="674" y="625" width="812" height="3" fill="url(#accent)"/>
+      <text x="1080" y="700" text-anchor="middle" fill="#ffffff" font-family="Bahnschrift, Arial, sans-serif" font-size="48" font-weight="600" letter-spacing="8">${dateLabel}</text>
+      <text x="1080" y="781" text-anchor="middle" fill="#ffffff" font-family="Bahnschrift, Arial, sans-serif" font-size="43" font-weight="500" letter-spacing="10">JUST ME  /  PINETA  /  ARIA</text>
+
+      <rect x="550" y="858" width="1060" height="92" rx="0" fill="#050509" fill-opacity="0.66" stroke="#ffffff" stroke-opacity="0.36" stroke-width="2"/>
+      <rect x="550" y="858" width="8" height="92" fill="#ff6b62"/>
+      <rect x="1602" y="858" width="8" height="92" fill="#78d7ff"/>
+      <text x="1080" y="904" text-anchor="middle" fill="#ffffff" font-family="Bahnschrift, Arial, sans-serif" font-size="27" font-weight="600" letter-spacing="3">PRENOTAZIONI WHATSAPP  ${PHONE}</text>
+      <text x="1080" y="937" text-anchor="middle" fill="#ffffff" fill-opacity="0.74" font-family="Bahnschrift, Arial, sans-serif" font-size="20" font-weight="500" letter-spacing="6">NIGHTLIFEMILAN.COM</text>
     </svg>
   `);
   await fs.mkdir(path.dirname(output), { recursive: true });
-  await base
+  await sharp(background)
     .composite([
-      { input: panels[0], left: 0, top: 0 },
-      { input: panels[1], left: 720, top: 0 },
-      { input: panels[2], left: 1440, top: 0 },
       { input: overlay, left: 0, top: 0 },
     ])
-    .jpeg({ quality: 90, chromaSubsampling: '4:4:4' })
+    .sharpen({ sigma: 0.8, m1: 0.7, m2: 1.6 })
+    .jpeg({ quality: 94, chromaSubsampling: '4:4:4' })
     .toFile(output);
 }
 
@@ -413,19 +454,26 @@ async function findExistingByMarker(token: string, marker: string): Promise<{ id
 async function main(): Promise<void> {
   const args = parseArgs(process.argv.slice(2));
   await loadLocalEnv();
+
+  const range = dateRangeLabel(args.date, args.weekEnd);
+  const artifactDir = path.resolve('artifacts/curated-eventbrite');
+  const cover = path.join(artifactDir, `aperitivi-milano-${args.date}-cover.jpg`);
+  if (args.coverOnly) {
+    await makeCover(cover, range);
+    console.log(JSON.stringify({ ok: true, coverOnly: true, cover, range }, null, 2));
+    return;
+  }
+
   const days = Math.max(7, Math.ceil((Date.parse(`${args.weekEnd}T23:59:59+02:00`) - Date.now()) / 86_400_000) + 1);
   const events = curate(await scoutXceedEvents(days), args.date, args.weekEnd);
   if (events.length === 0) throw new Error('Nessun aperitivo Xceed disponibile nella finestra richiesta');
 
   const marker = `nlm:curated=aperitivi-it-${args.date}`;
-  const range = dateRangeLabel(args.date, args.weekEnd);
   const title = `Aperitivi a Milano questa settimana | ${range}`;
   const summary = `Aperitivi a Milano dal ${range.replace('-', ' al ')}: Just Me, Pineta e Aria. Prezzi, tavoli e prenotazioni su Xceed. Info WhatsApp ${PHONE}.`;
   const html = buildHtml(events, args, marker, summary);
   validateContent(title, summary, html, events);
 
-  const artifactDir = path.resolve('artifacts/curated-eventbrite');
-  const cover = path.join(artifactDir, `aperitivi-milano-${args.date}-cover.jpg`);
   const preview = path.join(artifactDir, `aperitivi-milano-${args.date}-preview.json`);
   await makeCover(cover, range);
   await fs.writeFile(preview, `${JSON.stringify({ title, summary, html, marker, events: events.map((event) => ({
@@ -471,6 +519,11 @@ async function main(): Promise<void> {
         descriptionHtml: html,
         marker,
         date: args.date,
+        lang: 'it',
+        ageRestriction: '18+',
+        categoryId: '110',
+        ticketName: 'Richiesta informazioni gratuita - non valida per ingresso',
+        ticketDescription: `Questa registrazione non è un biglietto di ingresso. Acquista la formula Xceed del locale scelto e invia la conferma su WhatsApp al ${PHONE}.`,
         coverBase64: (await fs.readFile(cover)).toString('base64'),
         coverContentType: 'image/jpeg',
         coverFilename: path.basename(cover),
