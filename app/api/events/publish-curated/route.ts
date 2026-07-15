@@ -62,16 +62,16 @@ function validateSubmission(body: CuratedSubmission): string | null {
   return null;
 }
 
-async function findExistingByMarker(token: string, marker: string): Promise<{ id: string; url?: string } | null> {
-  for (let page = 1; page <= 20; page += 1) {
+async function findExistingByMarker(token: string, marker: string, title: string): Promise<{ id: string; url?: string } | null> {
+  for (let page = 1; page <= 5; page += 1) {
     const response = await fetch(
-      `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=live&time_filter=current_future&page_size=100&page=${page}`,
+      `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=live&time_filter=current_future&page_size=50&page=${page}&name_filter=${encodeURIComponent(title)}`,
       { headers: authHeaders(token) },
     );
     if (!response.ok) throw new Error(`Duplicate check failed: ${response.status}`);
     const body = await response.json();
-    const existing = (body.events || []).find((event: { description?: { html?: string } }) =>
-      event.description?.html?.includes(marker)
+    const existing = (body.events || []).find((event: { name?: { text?: string }; description?: { html?: string } }) =>
+      event.description?.html?.includes(marker) || event.name?.text === title
     );
     if (existing) return existing;
     if (!body.pagination?.has_more_items) return null;
@@ -156,7 +156,7 @@ export async function POST(request: Request) {
   if (!token) return NextResponse.json({ ok: false, error: 'EVENTBRITE_TOKEN not set' }, { status: 500 });
 
   try {
-    const existing = await findExistingByMarker(token, body.marker!);
+    const existing = await findExistingByMarker(token, body.marker!, body.title!);
     if (existing) {
       return NextResponse.json({ ok: true, skipped: true, reason: 'already-present', eventId: existing.id, url: existing.url });
     }
