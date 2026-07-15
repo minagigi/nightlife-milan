@@ -554,7 +554,9 @@ async function main(): Promise<void> {
               existingTitles.set(title, created);
             }
           } catch (error) {
-            entry.result = { ok: false, error: error instanceof Error ? error.message : String(error) };
+            const message = error instanceof Error ? error.message : String(error);
+            if (/\b429\b|HIT_RATE_LIMIT/i.test(message)) throw error;
+            entry.result = { ok: false, error: message };
           }
         }
         manifest.push(entry);

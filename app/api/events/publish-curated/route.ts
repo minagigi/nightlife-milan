@@ -7,6 +7,7 @@ export const maxDuration = 300;
 
 const EVENTBRITE_API = 'https://www.eventbriteapi.com/v3';
 const ORG_ID = '2988002072164';
+const CURATED_VENUE_ID = '298565077';
 const PHONE = '+39 351 912 7047';
 const AFFILIATE_RE = /https:\/\/xceed\.me\/en\/milano\/event\/[^/]+\/\d+\/channel\/nightlifemilan-1/g;
 const MARKER_RE = /^nlm:curated=([a-z0-9-]+)-(it|en|es|pt|fr|de)-(\d{4}-\d{2}-\d{2})$/;
@@ -100,35 +101,8 @@ async function findExistingByMarker(token: string, marker: string, title: string
 }
 
 async function resolveCuratedVenue(token: string): Promise<string> {
-  const name = 'Milano - sedi indicate nel programma';
-  const list = await fetch(`${EVENTBRITE_API}/organizations/${ORG_ID}/venues/`, { headers: authHeaders(token) });
-  if (!list.ok) throw new Error(`Venue lookup failed: ${list.status}`);
-  const body = await list.json();
-  const existing = (body.venues || []).find((venue: { name?: string }) => venue.name === name);
-  if (existing?.id) return existing.id;
-
-  const create = await fetch(`${EVENTBRITE_API}/organizations/${ORG_ID}/venues/`, {
-    method: 'POST',
-    headers: authHeaders(token),
-    body: JSON.stringify({
-      venue: {
-        name,
-        address: {
-          address_1: 'Milano',
-          city: 'Milano',
-          region: 'Lombardia',
-          postal_code: '20121',
-          country: 'IT',
-          latitude: '45.4642',
-          longitude: '9.1900',
-        },
-      },
-    }),
-  });
-  if (!create.ok) throw new Error(`Venue creation failed: ${create.status} ${(await create.text()).slice(0, 200)}`);
-  const created = await create.json();
-  if (!created.id) throw new Error('Venue creation returned no id');
-  return created.id;
+  void token;
+  return CURATED_VENUE_ID;
 }
 
 async function uploadCover(token: string, body: CuratedSubmission): Promise<string> {
