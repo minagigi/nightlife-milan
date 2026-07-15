@@ -32,15 +32,26 @@ export async function POST(request: Request) {
 
   const basePatch: Record<string, unknown> = {};
   if (title) basePatch.name = { html: title.slice(0, 75) };
-  if (summary) basePatch.summary = summary.slice(0, 140);
+  if (summary && !descriptionHtml) basePatch.summary = summary.slice(0, 140);
+
+  if (summary && descriptionHtml) {
+    const descriptionStart = descriptionHtml.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trimStart();
+    if (!descriptionStart.startsWith(summary)) {
+      return NextResponse.json(
+        { ok: false, error: 'When description is supplied it must start with the requested summary' },
+        { status: 400 },
+      );
+    }
+  }
 
   if (Object.keys(basePatch).length === 0 && !descriptionHtml) {
     return NextResponse.json({ ok: false, error: 'No copy fields supplied' }, { status: 400 });
   }
 
   const headers = { Authorization: `Bearer ${token}`, 'content-type': 'application/json' };
-  // Eventbrite derives one field from the other when summary and description
-  // arrive in separate requests. Send the complete copy patch atomically.
+  // Eventbrite rejects summary + description in one request and regenerates
+  // summary from description when the long body is written. Rich descriptions
+  // therefore carry their summary as the first (max 140 character) paragraph.
   const eventPatch: Record<string, unknown> = {
     ...basePatch,
     ...(descriptionHtml && { description: { html: descriptionHtml } }),

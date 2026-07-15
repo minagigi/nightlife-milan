@@ -243,7 +243,7 @@ const BODY_IMAGES = [
   },
 ] as const;
 
-function buildHtml(events: CuratedEvent[], args: Args, marker: string): string {
+function buildHtml(events: CuratedEvent[], args: Args, marker: string, summary: string): string {
   const byDate = new Map<string, CuratedEvent[]>();
   for (const event of events) {
     const list = byDate.get(event.localDate) || [];
@@ -265,6 +265,7 @@ function buildHtml(events: CuratedEvent[], args: Args, marker: string): string {
     .join('');
 
   return [
+    `<p>${escapeHtml(summary)}</p>`,
     '<h2>Aperitivi a Milano: calendario aggiornato della settimana</h2>',
     `<p>Questa guida riunisce gli aperitivi ancora prenotabili da ${escapeHtml(dateLabel(args.date))} a ${escapeHtml(dateLabel(args.weekEnd))} nei locali selezionati da Nightlife Milan. Trovi formule, età minima, orari, tavoli e il link Xceed specifico di ogni serata.</p>`,
     '<p>Il calendario viene ripubblicato ogni giorno: le date trascorse vengono eliminate e restano soltanto le opzioni effettivamente disponibili. Just Me ha priorità per il pubblico internazionale 21+, Pineta per il pubblico internazionale 18+ e Aria per il pubblico italiano 18+.</p>',
@@ -419,8 +420,8 @@ async function main(): Promise<void> {
   const marker = `nlm:curated=aperitivi-it-${args.date}`;
   const range = dateRangeLabel(args.date, args.weekEnd);
   const title = `Aperitivi a Milano questa settimana | ${range}`;
-  const summary = `Aperitivi a Milano ${range}: Just Me, Pineta e Aria. Prezzi e prenotazioni Xceed. WhatsApp ${PHONE}.`;
-  const html = buildHtml(events, args, marker);
+  const summary = `Aperitivi a Milano dal ${range.replace('-', ' al ')}: Just Me, Pineta e Aria. Prezzi, tavoli e prenotazioni su Xceed. Info WhatsApp ${PHONE}.`;
+  const html = buildHtml(events, args, marker, summary);
   validateContent(title, summary, html, events);
 
   const artifactDir = path.resolve('artifacts/curated-eventbrite');
@@ -447,10 +448,12 @@ async function main(): Promise<void> {
     const response = await fetch(`${SITE_URL}/api/admin/update-event-copy`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${secret}`, 'content-type': 'application/json' },
-      body: JSON.stringify({ eventId: args.updateEventId, title, summary, descriptionHtml: html }),
+      body: JSON.stringify({ eventId: args.updateEventId, descriptionHtml: html }),
     });
     const result = await response.json();
-    if (!response.ok || !result.ok) throw new Error(`Aggiornamento server fallito: ${response.status} ${result.error || 'errore sconosciuto'}`);
+    if (!response.ok || !result.ok) {
+      throw new Error(`Aggiornamento server fallito: ${response.status} ${result.error || result.body || JSON.stringify(result)}`);
+    }
     console.log(JSON.stringify({ ...result, execute: true, updatedEventId: args.updateEventId, eventCount: events.length, cover, preview }, null, 2));
     return;
   }
