@@ -11,10 +11,9 @@ export interface VenueMapPin {
   id: string;
   name: string;
   address: string;
-  slug: string;
   latitude: number;
   longitude: number;
-  lang: string;
+  href: string;
 }
 
 interface VenueMapToggleProps {

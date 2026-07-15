@@ -8,6 +8,7 @@ import VenueMapToggle from '@/components/VenueMapToggle';
 import { Suspense } from 'react';
 import { getVenues } from '@/lib/data';
 import { weeklyEvents } from '@/lib/eventsConfig';
+import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 
 export const revalidate = 3600;
 
@@ -18,8 +19,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const isIt = locale === 'it';
   const canonicalUrl = `${baseUrl}${localePrefix(locale)}/clubs`;
 
-  const title = tr(locale, 'Best Clubs in Milan 2026 | The Definitive Clubbing Selection', 'Migliori Club Milano 2026 | La Selezione Definitiva');
-  const description = tr(locale, 'Discover the most exclusive clubs in Milan 2026. Just Me, Pineta, Voya Rooftop, Play Club, Magazzini Generali and more. VIP tables, guestlist, dress code guide.', 'Scopri i club più esclusivi di Milano 2026. Just Me, Pineta, Voya Rooftop, Play Club, Magazzini Generali e altri. Tavoli VIP, lista, dress code.');
+  const title = seoTitle(tr(locale, 'Best Clubs in Milan 2026 | The Definitive Clubbing Selection', 'Migliori Club Milano 2026 | La Selezione Definitiva'));
+  const description = withWhatsApp(tr(locale, 'Discover the most exclusive clubs in Milan 2026. Just Me, Pineta, Voya Rooftop, Play Club, Magazzini Generali and more. VIP tables, guestlist, dress code guide.', 'Scopri i club più esclusivi di Milano 2026. Just Me, Pineta, Voya Rooftop, Play Club, Magazzini Generali e altri. Tavoli VIP, lista, dress code.'), locale);
   const keywords = isIt
     ? ['migliori club milano', 'discoteche milano 2026', 'club vip milano', 'guida club milano', 'just me milano', 'pineta club milano', 'vita notturna milano', 'tavoli vip milano']
     : ['best clubs milan', 'milan nightclubs 2026', 'clubs milan vip', 'milan club guide', 'just me milan', 'pineta club milan', 'milan nightlife', 'vip tables milan'];
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title,
     description,
     keywords,
-    robots: { index: true, follow: true },
+    robots: seoRobots(locale),
     alternates: {
       canonical: canonicalUrl,
       languages: hreflangAlternates(baseUrl, '/clubs'),
@@ -137,10 +138,12 @@ export default async function ClubsPage({
       id: v.id,
       name: v.localizedContent.name[typedLocale] || v.localizedContent.name.en,
       address: v.address.streetAddress,
-      slug: v.slugs[typedLocale] || v.slugs.en,
+      // Bug fix: prima si ricostruiva l'URL dentro VenueMap con la stessa
+      // logica it/en-only del bug IntentCards — ora l'href è già corretto
+      // qui, con la locale REALE, non quella collassata a testo it/en.
+      href: `${localePrefix(locale)}/clubs/${v.slugs[typedLocale] || v.slugs.en}`,
       latitude: v.coordinates!.latitude,
       longitude: v.coordinates!.longitude,
-      lang: typedLocale,
     }));
 
   return (

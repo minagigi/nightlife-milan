@@ -26,6 +26,7 @@ import { getLocalizedEventContent, getLocalizedEventSeed } from '@/lib/localized
 import { getEventBatchProfile } from '@/lib/eventBatchProfiles';
 import { getBatchEventTemplateValues } from '@/lib/eventBatchContent';
 import { getEventLocalePack } from '@/lib/eventLocalePacks';
+import { buildEventSeoDescription, buildEventSeoTitle } from '@/lib/seoMetadata';
 import {
   buildEventQuickAnswer,
   buildThisWeekAtHeading,
@@ -169,8 +170,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   
   const weeklyEvent = getWeeklyEventBySlug(slug);
   if (weeklyEvent) {
-    const title = `${weeklyEvent.name} @ ${weeklyEvent.clubName} Milano - ${weeklyEvent.day.charAt(0).toUpperCase() + weeklyEvent.day.slice(1)} 2026 | Nightlife Milan`;
-    const description = locale === 'it' ? weeklyEvent.description.it : weeklyEvent.description.en;
+    const nextDateISO = nextWeekdayISO(weeklyEvent.dayOfWeek, 23, 0);
+    const title = buildEventSeoTitle({
+      locale,
+      eventName: weeklyEvent.name,
+      venueName: weeklyEvent.clubName,
+      dateISO: nextDateISO,
+    });
+    const description = buildEventSeoDescription({
+      locale,
+      venueName: weeklyEvent.clubName,
+      dateISO: nextDateISO,
+      summary: locale === 'it' ? weeklyEvent.description.it : weeklyEvent.description.en,
+    });
     const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
     const canonical = `${baseUrl}${localePrefix(locale)}/events/${slug}`;
 
@@ -181,7 +193,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         canonical,
         languages: hreflangAlternates(baseUrl, `/events/${slug}`),
       },
-      robots: { index: true, follow: true },
+      robots: getLocaleDef(locale)?.indexed === false ? { index: false, follow: true } : { index: true, follow: true },
       openGraph: {
         title,
         description,
@@ -211,8 +223,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const localizedContent = getLocalizedEventContent(event.localizedContent.slug.en, locale);
   const localizedTitle = localizedContent?.title || getLocalizedText(event.localizedContent.title, locale);
-  const title = `${localizedTitle} @ ${getLocalizedText(venue.localizedContent.name, locale)} | Nightlife Milan`;
-  const description = localizedContent?.seoSummary || getLocalizedText(event.localizedContent.shortDescription, locale);
+  const venueName = getLocalizedText(venue.localizedContent.name, locale);
+  const title = buildEventSeoTitle({ locale, eventName: localizedTitle, venueName, dateISO: event.dateISO });
+  const description = buildEventSeoDescription({
+    locale,
+    venueName,
+    dateISO: event.dateISO,
+    summary: localizedContent?.seoSummary || getLocalizedText(event.localizedContent.shortDescription, locale),
+  });
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   
@@ -234,7 +252,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical,
       languages: { ...hreflangAlternates(baseUrl, `/events/${enSlug}`), it: `${baseUrl}/it/events/${itSlug}` },
     },
-    robots: { index: true, follow: true },
+    robots: getLocaleDef(locale)?.indexed === false ? { index: false, follow: true } : { index: true, follow: true },
     openGraph: {
       title,
       description,

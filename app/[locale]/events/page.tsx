@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
 import { weeklyEvents } from '@/lib/eventsConfig';
 import DiscoveryGrid from '@/components/DiscoveryGrid';
+import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 
 export const revalidate = 3600;
 
@@ -19,17 +20,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const isIt = locale === 'it';
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const canonical = `${baseUrl}${localePrefix(locale)}/events`;
+  const title = seoTitle(tr(locale, 'All Events in Milan 2026 | Nightlife Milan', 'Tutti gli Eventi a Milano 2026 | Nightlife Milan'));
+  const description = withWhatsApp(tr(locale, 'Discover all events, nights and experiences in Milan. Clubs, aperitivo, live music, special nights. Book VIP table or guestlist via WhatsApp.', 'Scopri tutti gli eventi, serate ed esperienze in programma a Milano. Club, aperitivo, live music, serate speciali. Prenota tavolo VIP o guestlist via WhatsApp.'), locale);
 
   return {
-    title: tr(locale, 'All Events in Milan 2026 | Nightlife Milan', 'Tutti gli Eventi a Milano 2026 | Nightlife Milan'),
-    description: tr(locale, 'Discover all events, nights and experiences in Milan. Clubs, aperitivo, live music, special nights. Book VIP table or guestlist via WhatsApp.', 'Scopri tutti gli eventi, serate ed esperienze in programma a Milano. Club, aperitivo, live music, serate speciali. Prenota tavolo VIP o guestlist via WhatsApp.'),
+    title,
+    description,
     alternates: {
       canonical,
       languages: hreflangAlternates(baseUrl, '/events'),
     },
     openGraph: {
-      title: tr(locale, 'All Events in Milan 2026', 'Tutti gli Eventi a Milano 2026'),
-      description: tr(locale, 'The complete calendar of Milanese nightlife. VIP nights, aperitivo, live music and much more.', 'Il calendario completo della vita notturna milanese. Serate VIP, aperitivo, live music e molto altro.'),
+      title,
+      description,
       images: [{ url: `${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`, width: 1200, height: 630, alt: tr(locale, 'Milan nightlife events', 'Eventi Milano vita notturna') }],
       type: 'website',
       siteName: 'Nightlife Milan',
@@ -38,11 +41,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     keywords: isIt
       ? ['eventi milano', 'serate milano', 'eventi club milano', 'vita notturna milano luglio 2026', 'guestlist eventi milano']
       : ['milan events', 'milan nightlife events', 'club events milan', 'milan nightlife july 2026', 'guestlist events milan'],
-    robots: { index: true, follow: true },
+    robots: seoRobots(locale),
     twitter: {
       card: 'summary_large_image',
-      title: tr(locale, 'All Events in Milan 2026', 'Tutti gli Eventi a Milano 2026'),
-      description: tr(locale, 'The complete calendar of Milanese nightlife. VIP nights, aperitivo, live music and much more.', 'Il calendario completo della vita notturna milanese. Serate VIP, aperitivo, live music e molto altro.'),
+      title,
+      description,
       images: [`${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`],
       site: '@nightlifemilan',
     },

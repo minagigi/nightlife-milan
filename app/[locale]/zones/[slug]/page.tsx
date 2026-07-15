@@ -1,11 +1,12 @@
 import { notFound } from 'next/navigation';
 import { tr } from '@/lib/i18n/t';
-import { localePrefix } from '@/lib/i18n/locales';
+import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { mockZones, mockEvents, mockVenues } from '@/lib/data';
 import DiscoveryGrid from '@/components/DiscoveryGrid';
 import { MapPin, Calendar, GlassWater } from 'lucide-react';
+import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 
 // ISR Configuration
 export const revalidate = 3600;
@@ -33,8 +34,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   
   if (!zone) return notFound();
 
-  const title = zone.metaTitle[typedLocale] || zone.metaTitle.en;
-  const description = zone.metaDescription[typedLocale] || zone.metaDescription.en;
+  const title = seoTitle(zone.metaTitle[typedLocale] || zone.metaTitle.en);
+  const description = withWhatsApp(zone.metaDescription[typedLocale] || zone.metaDescription.en, locale);
   
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const canonical = `${baseUrl}${localePrefix(locale)}/zones/${slug}`;
@@ -45,14 +46,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title,
     description,
-    robots: { index: true, follow: true },
+    robots: seoRobots(locale),
     alternates: {
       canonical,
-      languages: {
-        'en': `${baseUrl}/zones/${slug}`,
-        'it': `${baseUrl}/it/zones/${slug}`,
-        'x-default': `${baseUrl}/zones/${slug}`,
-      },
+      languages: hreflangAlternates(baseUrl, `/zones/${slug}`),
     },
     openGraph: {
       title,
@@ -60,7 +57,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: canonical,
       type: 'website',
       siteName: 'Nightlife Milan',
-      locale: isIt ? 'it_IT' : 'en_US',
+      locale: getLocaleDef(locale)?.ogLocale || 'en_US',
       images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
     },
     twitter: {
@@ -113,11 +110,11 @@ export default async function ZonePage({ params }: Props) {
         <nav className="text-sm text-white/40" aria-label="Breadcrumb">
           <ol className="list-none p-0 inline-flex">
             <li className="flex items-center">
-              <Link href={`/${locale}`} className="hover:text-champagne transition-colors">Home</Link>
+              <Link href={localePrefix(locale) || '/'} className="hover:text-champagne transition-colors">Home</Link>
               <span className="mx-2">/</span>
             </li>
             <li className="flex items-center">
-              <Link href={`/${locale}/zones`} className="hover:text-champagne transition-colors">
+              <Link href={`${localePrefix(locale)}/zones`} className="hover:text-champagne transition-colors">
                 {tr(locale, 'Zones', 'Zone')}
               </Link>
               <span className="mx-2">/</span>
@@ -255,7 +252,7 @@ export default async function ZonePage({ params }: Props) {
       {/* Cross-Linking SEO */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
         <Link 
-          href={`/${locale}/zones`}
+          href={`${localePrefix(locale)}/zones`}
           className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white hover:bg-champagne hover:text-black hover:border-champagne transition-all duration-300 font-bold tracking-widest uppercase text-sm"
         >
           {tr(locale, 'Explore other zones', 'Esplora altre zone')}

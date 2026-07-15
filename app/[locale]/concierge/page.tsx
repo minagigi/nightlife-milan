@@ -4,6 +4,7 @@ import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Image from 'next/image';
 import { MessageCircle, Star, Clock, Shield, Zap, MapPin, Calendar, CheckCircle } from 'lucide-react';
 import { CONTACT } from '@/config/contact';
+import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 
 export const revalidate = 3600;
 
@@ -14,8 +15,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const isIt = locale === 'it';
   const canonical = `${baseUrl}${localePrefix(locale)}/concierge`;
 
-  const title = tr(locale, 'Milan Nightlife Concierge | Personal Table & Guestlist Service | Nightlife Milan', 'Concierge Vita Notturna Milano | Tavoli VIP & Guestlist | Nightlife Milan');
-  const description = tr(locale, 'Your personal Milan nightlife concierge. VIP table booking, guestlist access, bottle service, and insider advice — all via WhatsApp. Free service for guests.', 'Il tuo concierge personale per la vita notturna milanese. Tavoli VIP, guestlist, bottle service e consigli insider — tutto via WhatsApp. Servizio gratuito.');
+  const title = seoTitle(tr(locale, 'Milan Nightlife Concierge | Personal Table & Guestlist Service | Nightlife Milan', 'Concierge Vita Notturna Milano | Tavoli VIP & Guestlist | Nightlife Milan'));
+  const description = withWhatsApp(tr(locale, 'Your personal Milan nightlife concierge. VIP table booking, guestlist access, bottle service, and insider advice — all via WhatsApp. Free service for guests.', 'Il tuo concierge personale per la vita notturna milanese. Tavoli VIP, guestlist, bottle service e consigli insider — tutto via WhatsApp. Servizio gratuito.'), locale);
   const ogImage = `${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`;
 
   return {
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     keywords: isIt
       ? ['concierge vita notturna milano', 'prenotazione tavolo milano', 'guestlist milano', 'vip concierge milano', 'assistente nightlife milano']
       : ['milan nightlife concierge', 'milan club booking service', 'vip concierge milan', 'nightlife assistant milan', 'guestlist milan'],
-    robots: { index: true, follow: true },
+    robots: seoRobots(locale),
     alternates: {
       canonical,
       languages: hreflangAlternates(baseUrl, '/concierge'),

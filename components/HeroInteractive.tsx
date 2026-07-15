@@ -84,23 +84,23 @@ export default function HeroInteractive({ venues, locale, firstVenueId }: Props)
           <NightTicker lang={typedLocale} />
         </div>
 
-        {/* Label */}
-        <p
+        {/* Stable page heading; the changing venue remains the visual headline. */}
+        <h1
           className="animate-card-in font-sans text-champagne/50 text-[10px] tracking-[0.35em] uppercase mb-6"
           style={{ animationDelay: '50ms' }}
         >
-          {t[typedLocale].label}
-        </p>
+          Nightlife Milan <span aria-hidden="true">· {t[typedLocale].label}</span>
+        </h1>
 
         {/* Venue name */}
         <div className="overflow-hidden mb-2">
-          <h1
+          <h2
             key={current.id}
             className="animate-hero-title-in font-serif font-bold leading-none tracking-tight text-champagne"
             style={{ fontSize: 'clamp(2.75rem, 9vw, 8rem)', textShadow: '0 0 60px rgba(201,168,106,0.3)' }}
           >
             {current.localizedContent.name[typedLocale] || current.localizedContent.name.en}
-          </h1>
+          </h2>
         </div>
 
         {/* Zone */}

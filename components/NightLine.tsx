@@ -5,7 +5,10 @@ export default function NightLine() {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setProgress(1); return; }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const reducedMotionFrame = requestAnimationFrame(() => setProgress(1));
+      return () => cancelAnimationFrame(reducedMotionFrame);
+    }
     let raf = 0;
     const onScroll = () => {
       cancelAnimationFrame(raf);

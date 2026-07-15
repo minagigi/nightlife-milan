@@ -197,10 +197,10 @@
     },
     "pineta": {
       "subtitle": "Aperitivo cantato and disco nights in the heart of Milan.",
-      "description": "Singing and dancing aperitivo, disco nights with the best DJs, giant screens for special events. Pineta Club Milano offers a unique experience combining apericena, live entertainment, and clubbing in a sophisticated atmosphere.",
-      "insiderTip": "The singing aperitivo is a must-do before the night turns into a full-blown club experience.",
-      "location": "Milano",
-      "target": "25-45 years",
+      "description": "Pineta Club Milano combines an early aperitivo with live entertainment and a full nightclub programme. The crowd is international and 18+, with commercial, house, hip-hop and reggaeton depending on the night. Dinner show is mentioned only when confirmed on the individual event. Guests can request dance-floor, prive or super-prive tables, while current entry and table prices are shown on each dated event.",
+      "insiderTip": "Arrive for aperitivo if you want the complete experience. Check the dated event before travelling because dinner show, music and prices change by night.",
+      "location": "Via Messina 38, Milan",
+      "target": "International crowd, 18+",
       "dressCode": "Elegant, 18+",
       "music": "House, Commercial, Hip-Hop",
       "events": [
@@ -214,7 +214,43 @@
           "title": "Aperitivo Cantato",
           "description": "Saturday aperitivo with live music."
         }
-      ]
+      ],
+      "acts": [
+        { "title": "Act I: Aperitivo", "time": "19:30 - 22:30", "description": "Drinks, food and live entertainment when scheduled.", "price": "Check current event | Ask WhatsApp" },
+        { "title": "Act II: Warm-up", "time": "22:30 - 00:30", "description": "Guest-list check, table assignment and music warm-up.", "price": "Guest list | Table access" },
+        { "title": "Act III: Club", "time": "00:30 - 05:00", "description": "DJ set, dance floor and bottle service.", "price": "Check current event | Ask WhatsApp" }
+      ],
+      "pricing": {
+        "dancefloor": { "title": "Dance-floor Table", "price": "Current quote", "desc": "Central club area with bottle service." },
+        "priveGold": { "title": "Prive Table", "price": "Current quote", "desc": "Reserved raised area and dedicated service." },
+        "priveDiamond": { "title": "Super-Prive", "price": "On request", "desc": "Most exclusive position, subject to availability." }
+      },
+      "rules": { "title": "Rules of the House", "selection": "Original ID and elegant dress code required. Door selection still applies without a confirmed booking." }
+    },
+    "aria": {
+      "subtitle": "Italian 18+ aperitivo and club nights in Milan.",
+      "description": "Aria Club Milano is designed for an Italian 18+ crowd looking for aperitivo followed by a high-energy club night. The programme focuses on current Italian and international hits, commercial music, EDM and dance. The venue offers guest-list entry and dance-floor, prive and super-prive tables. Prices, music format and opening times must always be checked on the individual dated event before booking.",
+      "insiderTip": "Send the event date, group size and preferred table area on WhatsApp. After buying a ticket, send the purchase confirmation so the booking and payment can be checked.",
+      "location": "Via Ippodromo 115, Milan",
+      "target": "Italian crowd, 18+",
+      "dressCode": "Smart and fashionable, 18+",
+      "music": "Italian hits, Commercial, EDM, Dance",
+      "events": [
+        { "day": "THU", "title": "Thursday Night", "description": "Aperitivo and club programme when confirmed." },
+        { "day": "FRI", "title": "Friday Night", "description": "Commercial and dance club night." },
+        { "day": "SAT", "title": "Saturday Night", "description": "Weekend club night for an 18+ crowd." }
+      ],
+      "acts": [
+        { "title": "Act I: Aperitivo", "time": "19:30 - 22:30", "description": "Early drinks and social aperitivo when scheduled.", "price": "Check current event | Ask WhatsApp" },
+        { "title": "Act II: Entry", "time": "22:30 - 00:30", "description": "Guest-list validation and table assignment.", "price": "Guest list | Table access" },
+        { "title": "Act III: Club", "time": "00:30 - 05:00", "description": "Commercial music, EDM, dance floor and bottle service.", "price": "Check current event | Ask WhatsApp" }
+      ],
+      "pricing": {
+        "dancefloor": { "title": "Dance-floor Table", "price": "Current quote", "desc": "Table in the main club area." },
+        "priveGold": { "title": "Prive Table", "price": "Current quote", "desc": "Reserved area with bottle service." },
+        "priveDiamond": { "title": "Super-Prive", "price": "On request", "desc": "Premium position subject to availability." }
+      },
+      "rules": { "title": "Rules of the House", "selection": "Guests must be 18+ and carry an original valid ID. Smart dress code and door selection apply." }
     },
     "playclub": {
       "subtitle": "Milan's urban music temple.",

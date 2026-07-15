@@ -8,6 +8,7 @@ import { mockEvents, mockVenues } from '@/lib/data';
 import { MusicGenre } from '@/lib/types';
 import DiscoveryGrid from '@/components/DiscoveryGrid';
 import { Music, ArrowLeft, Calendar } from 'lucide-react';
+import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 
 // ISR Configuration
 export const revalidate = 3600;
@@ -166,8 +167,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   
   if (!genre) return notFound();
 
-  const title = genre.metaTitle[typedLocale];
-  const description = genre.metaDescription[typedLocale];
+  const title = seoTitle(genre.metaTitle[typedLocale]);
+  const description = withWhatsApp(genre.metaDescription[typedLocale], locale);
   
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const canonical = `${baseUrl}${localePrefix(locale)}/genres/${slug}`;
@@ -184,7 +185,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title,
     description,
-    robots: { index: true, follow: true },
+    robots: seoRobots(locale),
     alternates: {
       canonical,
       languages: hreflangAlternates(baseUrl, `/genres/${slug}`),

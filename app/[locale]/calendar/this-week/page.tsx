@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     keywords: isIt
       ? ['eventi questa settimana milano', 'serate milano settimana', 'club milano questa settimana', 'agenda vita notturna milano']
       : ['events this week milan', 'milan nightlife this week', 'clubs milan this week', 'milan party calendar'],
-    robots: { index: true, follow: true },
+    robots: { index: false, follow: true },
     alternates: {
       canonical,
       languages: hreflangAlternates(baseUrl, '/calendar/this-week'),

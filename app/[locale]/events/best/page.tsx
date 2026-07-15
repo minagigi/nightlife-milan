@@ -8,6 +8,7 @@ import { Star, Clock, MapPin, ExternalLink } from 'lucide-react';
 import { mockVenues } from '@/lib/data';
 import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
 import { weeklyEvents } from '@/lib/eventsConfig';
+import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 
 export const revalidate = 3600;
 
@@ -19,8 +20,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const canonical = `${baseUrl}${localePrefix(locale)}/events/best`;
 
-  const title = tr(locale, 'Best Clubs in Milan 2026 | Just Me, Pineta, Aria Club', 'I Migliori Club di Milano 2026 | Just Me, Pineta, Aria Club');
-  const description = tr(locale, 'The three best clubs in Milan selected by our concierge: Just Me Milano, Pineta Club and Aria Club. Events guaranteed every week. Book VIP table via WhatsApp.', 'I tre migliori club di Milano selezionati dal nostro concierge: Just Me Milano, Pineta Club e Aria Club. Serate garantite ogni settimana. Prenota tavolo VIP via WhatsApp.');
+  const title = seoTitle(tr(locale, 'Best Clubs in Milan 2026 | Just Me, Pineta, Aria Club', 'I Migliori Club di Milano 2026 | Just Me, Pineta, Aria Club'));
+  const description = withWhatsApp(tr(locale, 'The three best clubs in Milan selected by our concierge: Just Me Milano, Pineta Club and Aria Club. Events guaranteed every week. Book VIP table via WhatsApp.', 'I tre migliori club di Milano selezionati dal nostro concierge: Just Me Milano, Pineta Club e Aria Club. Serate garantite ogni settimana. Prenota tavolo VIP via WhatsApp.'), locale);
 
   return {
     title,
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     keywords: isIt
       ? ['migliori club milano', 'just me milano', 'pineta club milano', 'aria club milano', 'nightlife milano 2026', 'club esclusivi milano']
       : ['best clubs milan', 'just me milan', 'pineta club milan', 'aria club milan', 'milan nightlife 2026', 'exclusive clubs milan'],
-    robots: { index: true, follow: true },
+    robots: seoRobots(locale),
     alternates: {
       canonical,
       languages: hreflangAlternates(baseUrl, '/events/best'),

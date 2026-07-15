@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
 import DiscoveryGrid from '@/components/DiscoveryGrid';
+import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 
 // ISR Configuration
 export const revalidate = 3600;
@@ -16,8 +17,8 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   
-  const title = tr(locale, `Special & VIP Events in Milan | Nightlife Milan`, `Eventi Speciali e VIP a Milano | Nightlife Milan`);
-  const description = tr(locale, `Discover the most exclusive events, VIP parties, and special nights in Milan. Book your table for an unforgettable experience.`, `Scopri gli eventi più esclusivi, i party VIP e le serate speciali a Milano. Prenota il tuo tavolo per un'esperienza indimenticabile.`);
+  const title = seoTitle(tr(locale, `Special & VIP Events in Milan | Nightlife Milan`, `Eventi Speciali e VIP a Milano | Nightlife Milan`));
+  const description = withWhatsApp(tr(locale, `Discover the most exclusive events, VIP parties, and special nights in Milan. Book your table for an unforgettable experience.`, `Scopri gli eventi più esclusivi, i party VIP e le serate speciali a Milano. Prenota il tuo tavolo per un'esperienza indimenticabile.`), locale);
   
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const canonical = `${baseUrl}${localePrefix(locale)}/events/special`;

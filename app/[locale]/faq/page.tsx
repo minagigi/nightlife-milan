@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Link from 'next/link';
+import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 
 export const revalidate = 86400;
 
@@ -15,8 +16,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const canonical = `${baseUrl}${localePrefix(locale)}/faq`;
 
-  const title = tr(locale, 'Milan Nightlife FAQ 2026 | Frequently Asked Questions | Nightlife Milan', 'FAQ Vita Notturna Milano 2026 | Domande Frequenti | Nightlife Milan');
-  const description = tr(locale, 'All answers about Milan nightclubs: VIP table prices, dress code, guestlist, minimum age, opening hours, bookings. The complete guide to going out in Milan in 2026.', 'Tutte le risposte sulle discoteche di Milano: prezzi tavoli VIP, dress code, guestlist, età minima, orari, prenotazioni. La guida completa per uscire a Milano nel 2026.');
+  const title = seoTitle(tr(locale, 'Milan Nightlife FAQ 2026 | Frequently Asked Questions | Nightlife Milan', 'FAQ Vita Notturna Milano 2026 | Domande Frequenti | Nightlife Milan'));
+  const description = withWhatsApp(tr(locale, 'All answers about Milan nightclubs: VIP table prices, dress code, guestlist, minimum age, opening hours, bookings. The complete guide to going out in Milan in 2026.', 'Tutte le risposte sulle discoteche di Milano: prezzi tavoli VIP, dress code, guestlist, età minima, orari, prenotazioni. La guida completa per uscire a Milano nel 2026.'), locale);
 
   return {
     title,
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     keywords: isIt
       ? ['faq vita notturna milano', 'domande discoteche milano', 'prezzi tavoli vip milano', 'dress code milano', 'guestlist milano', 'età minima club milano']
       : ['milan nightlife faq', 'milan club questions', 'vip table prices milan', 'dress code milan clubs', 'guestlist milan', 'minimum age milan clubs'],
-    robots: { index: true, follow: true },
+    robots: seoRobots(locale),
     openGraph: {
       title,
       description,

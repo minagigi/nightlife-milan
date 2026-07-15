@@ -5,6 +5,7 @@ import Image from 'next/image';
 import NewsletterHub from '@/components/NewsletterHub';
 import { Clock } from 'lucide-react';
 import { tr } from '@/lib/i18n/t';
+import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 
 export const revalidate = 3600;
 
@@ -15,8 +16,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const isIt = locale === 'it';
   const canonical = `${baseUrl}${locale === 'en' ? '' : `/${locale}`}/guides`;
 
-  const title = tr(locale, 'Milan Nightlife Guides 2026 | Dress Code, VIP Tables & Insider Tips | Nightlife Milan', 'Guide Vita Notturna Milano 2026 | Dress Code, VIP Table & Consigli Insider | Nightlife Milan');
-  const description = tr(locale, 'Expert guides to Milan nightlife: door policies, dress codes, VIP table booking, aperitivo zones, best techno clubs and insider tips. Updated 2026.', 'Guide esperte sulla vita notturna milanese: dress code, accesso VIP, zone aperitivo, migliori club techno e consigli insider. Aggiornato luglio 2026.');
+  const title = seoTitle(tr(locale, 'Milan Nightlife Guides 2026 | Dress Code, VIP Tables & Insider Tips | Nightlife Milan', 'Guide Vita Notturna Milano 2026 | Dress Code, VIP Table & Consigli Insider | Nightlife Milan'));
+  const description = withWhatsApp(tr(locale, 'Expert guides to Milan nightlife: door policies, dress codes, VIP table booking, aperitivo zones, best techno clubs and insider tips. Updated 2026.', 'Guide esperte sulla vita notturna milanese: dress code, accesso VIP, zone aperitivo, migliori club techno e consigli insider. Aggiornato luglio 2026.'), locale);
   const ogImage = `${baseUrl}/images/guides-hero.webp`;
 
   const keywordsEn = ['milan nightlife guide', 'milan club dress code', 'vip table milan guide', 'milan nightlife tips', 'best techno milan', 'aperitivo milan guide'];
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title,
     description,
     keywords: keywordsEn.map((k, i) => tr(locale, k, keywordsIt[i])),
-    robots: { index: true, follow: true },
+    robots: seoRobots(locale),
     alternates: {
       canonical,
       languages: hreflangAlternates(baseUrl, '/guides'),

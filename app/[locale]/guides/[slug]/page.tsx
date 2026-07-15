@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { tr } from '@/lib/i18n/t';
-import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,6 +9,7 @@ import { getLocalizedText } from '@/lib/seo';
 import { ArrowLeft, Calendar, User, MapPin } from 'lucide-react';
 import GuideToc from '@/components/GuideToc';
 import GuideShareButtons from '@/components/GuideShareButtons';
+import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 
 // ISR Configuration (1 hour)
 export const revalidate = 3600;
@@ -39,8 +40,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!guide) return notFound();
 
-  const title = `${getLocalizedText(guide.title, locale)} | Nightlife Milan Guides`;
-  const description = getLocalizedText(guide.excerpt, locale);
+  const title = seoTitle(`${getLocalizedText(guide.title, locale)} | Nightlife Milan Guides`);
+  const description = withWhatsApp(getLocalizedText(guide.excerpt, locale), locale);
   
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   
@@ -58,7 +59,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical,
       languages: { ...hreflangAlternates(baseUrl, `/guides/${enSlug}`), it: `${baseUrl}/it/guides/${itSlug}` },
     },
-    robots: { index: true, follow: true },
+    robots: getLocaleDef(locale)?.indexed === false ? { index: false, follow: true } : { index: true, follow: true },
     openGraph: {
       title,
       description,
@@ -66,7 +67,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [{ url: guide.image ? `${baseUrl}${guide.image}` : `${baseUrl}/images/guides-hero.webp`, width: 1200, height: 630, alt: title }],
       type: 'article',
       siteName: 'Nightlife Milan',
-      locale: locale === 'it' ? 'it_IT' : 'en_US',
+      locale: getLocaleDef(locale)?.ogLocale || 'en_US',
       publishedTime: guide.datePublished,
       modifiedTime: guide.dateModified,
       authors: [guide.author],
@@ -204,8 +205,8 @@ export default async function GuidePage({ params }: Props) {
           </div>
           
           <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <Link 
-              href={`/${locale}`}
+            <Link
+              href={`${langPrefix}/guides`}
               className="inline-flex items-center text-white/40 hover:text-champagne transition-colors mb-8 text-sm uppercase tracking-wider font-semibold"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />

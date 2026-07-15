@@ -11,7 +11,8 @@ import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset, romeSundayKey } fro
 import { Venue, Event } from '@/lib/types';
 import { CONTACT } from '@/config/contact';
 import { tr } from '@/lib/i18n/t';
-import { localePrefix, hreflangAlternates } from '@/lib/i18n/locales';
+import { localePrefix, hreflangAlternates, getLocaleDef } from '@/lib/i18n/locales';
+import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 
 const EventsCarousel = nextDynamic(() => import('@/components/EventsCarousel'));
 
@@ -23,13 +24,15 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const isIt = locale === 'it';
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const canonical = isIt ? `${baseUrl}/it` : baseUrl;
+  // Bug fix: prima collassava a it/en, mandando il canonical/og:url di 33
+  // lingue su 35 alla root inglese — in contraddizione con gli hreflang
+  // alternates della stessa pagina (rischio reale di deindicizzazione).
+  const canonical = `${baseUrl}${localePrefix(locale)}` || baseUrl;
   const ogImage = `${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`;
 
-  const title = tr(locale, 'Milan Nightlife 2026 | Best Clubs, VIP Tables & Aperitivo | Nightlife Milan', 'Vita Notturna Milano 2026 | Club, VIP Table & Aperitivo | Nightlife Milan');
-  const description = tr(locale, 'The definitive guide to Milan nightlife. Best clubs, VIP tables, aperitivo and July 2026 events. Book via WhatsApp in under 10 minutes.', 'La guida definitiva alla vita notturna di Milano. I migliori club, tavoli VIP, aperitivo e serate luglio 2026. Prenota via WhatsApp in 10 minuti.');
+  const title = seoTitle(tr(locale, 'Milan Nightlife 2026 | Best Clubs, VIP Tables & Aperitivo | Nightlife Milan', 'Vita Notturna Milano 2026 | Club, VIP Table & Aperitivo | Nightlife Milan'));
+  const description = withWhatsApp(tr(locale, 'The definitive guide to Milan nightlife. Best clubs, VIP tables, aperitivo and July 2026 events. Book via WhatsApp in under 10 minutes.', 'La guida definitiva alla vita notturna di Milano. I migliori club, tavoli VIP, aperitivo e serate luglio 2026. Prenota via WhatsApp in 10 minuti.'), locale);
 
   const keywordsEn = ['milan nightlife', 'best clubs milan', 'vip tables milan', 'aperitivo milan', 'milan nightclub 2026', 'nightlife milan guide'];
   const keywordsIt = ['vita notturna milano', 'migliori club milano', 'tavoli vip milano', 'aperitivo milano', 'nightlife milano 2026', 'guida vita notturna milano'];
@@ -38,18 +41,18 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title,
     description,
     keywords: keywordsEn.map((k, i) => tr(locale, k, keywordsIt[i])),
-    robots: { index: true, follow: true },
+    robots: seoRobots(locale),
     alternates: {
       canonical,
       languages: hreflangAlternates(baseUrl, ''),
     },
     openGraph: {
-      title: tr(locale, 'Milan Nightlife 2026 — The Definitive Guide', 'Vita Notturna Milano 2026 — La Guida Definitiva'),
-      description: tr(locale, 'Exclusive clubs, VIP tables, aperitivo and private events. The guide locals actually use.', 'Club esclusivi, VIP table, aperitivo e serate private. La guida che usano i local.'),
+      title,
+      description,
       type: 'website',
       url: canonical,
       siteName: 'Nightlife Milan',
-      locale: isIt ? 'it_IT' : 'en_US',
+      locale: getLocaleDef(locale)?.ogLocale || 'en_US',
       images: [{ url: ogImage, width: 1200, height: 630, alt: tr(locale, 'Milan nightlife 2026', 'Vita notturna Milano 2026') }],
     },
     twitter: {

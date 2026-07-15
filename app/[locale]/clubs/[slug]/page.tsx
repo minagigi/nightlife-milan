@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { tr } from '@/lib/i18n/t';
-import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { hreflangAlternates, localePrefix, getLocaleDef } from '@/lib/i18n/locales';
+import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import Image from 'next/image';
 import Link from 'next/link';
 import { MapPin, Clock, Shirt, MessageCircle, Star, Calendar, ArrowLeft, Music, Wine, Utensils, ShieldCheck, Check, CreditCard } from 'lucide-react';
@@ -45,6 +46,10 @@ const venueTitles: Record<string, { en: string; it: string }> = {
   'v-pineta': {
     en: 'Pineta Club Milan — Aperitivo Cantato, Prices & Table Booking 2026',
     it: 'Pineta Club Milano — Aperitivo Cantato, Prezzi & Prenotazione Tavoli 2026',
+  },
+  'v-aria': {
+    en: 'Aria Club Milan — 18+ Events, Aperitivo & VIP Tables 2026',
+    it: 'Aria Club Milano — Eventi 18+, Aperitivo e Tavoli VIP 2026',
   },
   'v-playclub': {
     en: 'Play Club Milan — Hip Hop, Afrobeats & VIP Tables 2026 | Corso Como',
@@ -121,6 +126,10 @@ const venueKeywords: Record<string, { en: string[]; it: string[] }> = {
     en: ['pineta club milan', 'pineta aperitivo cantato', 'pineta singing aperitivo milan', 'pineta table booking', 'pineta milan prices 2026', 'aperitivo milan corso como'],
     it: ['pineta club milano', 'aperitivo cantato pineta', 'pineta cena cantata milano', 'prenotazione tavolo pineta', 'pineta prezzi 2026', 'aperitivo corso como milano'],
   },
+  'v-aria': {
+    en: ['aria club milan', 'aria club milan 18 plus', 'aria milan aperitivo', 'aria club vip tables', 'aria milan events 2026', 'italian crowd club milan'],
+    it: ['aria club milano', 'aria club milano 18+', 'aperitivo aria milano', 'tavoli vip aria club', 'eventi aria milano 2026', 'discoteca pubblico italiano milano'],
+  },
   'v-playclub': {
     en: ['play club milan', 'play club hip hop milan', 'play club afrobeats', 'play club corso como', 'milan hip hop club 2026', 'vip tables corso como milan'],
     it: ['play club milano', 'play club hip hop milano', 'play club afrobeats', 'play club corso como', 'discoteca hip hop milano 2026', 'tavoli vip corso como'],
@@ -191,14 +200,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const name = getLocalizedText(venue.localizedContent.name, locale);
   const rawDescription = getLocalizedText(venue.localizedContent.description, locale);
-  const metaDescription = rawDescription.length > 158
-    ? rawDescription.substring(0, 155) + '...'
-    : rawDescription;
+  const metaDescription = withWhatsApp(rawDescription, locale);
 
-  const title = venueTitles[venue.id]?.[locale as 'en' | 'it']
+  const title = seoTitle(venueTitles[venue.id]?.[locale as 'en' | 'it']
     ?? (locale === 'it'
       ? `${name} Milano | Prezzi, Tavoli e Liste 2026`
-      : `${name} Milan | Prices, Tables and Guestlists 2026`);
+      : `${name} Milan | Prices, Tables and Guestlists 2026`));
 
   const keywords = venueKeywords[venue.id]?.[locale as 'en' | 'it']
     ?? (locale === 'it'
@@ -209,13 +216,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const enSlug = venue.slugs.en;
   const itSlug = venue.slugs.it || enSlug;
   const ogImage = venue.image || venue.gallery?.[0] || '/images/milan-nightclub-luxury-vip-champagne.webp';
-  const canonicalUrl = `${baseUrl}/${locale === 'it' ? 'it/' : ''}clubs/${slug}`;
+  // Bug fix: prima collassava a it/en, mandando il canonical/og:url di 33
+  // lingue su 35 alla pagina inglese non prefissata.
+  const canonicalUrl = `${baseUrl}${localePrefix(locale)}/clubs/${slug}`;
 
   return {
     title,
     description: metaDescription,
     keywords,
-    robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
+    robots: getLocaleDef(locale)?.indexed === false
+      ? { index: false, follow: true }
+      : { index: true, follow: true, googleBot: { index: true, follow: true } },
     alternates: {
       canonical: canonicalUrl,
       languages: { ...hreflangAlternates(baseUrl, `/clubs/${enSlug}`), it: `${baseUrl}/it/clubs/${itSlug}` },
@@ -226,7 +237,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'website',
       url: canonicalUrl,
       siteName: 'Nightlife Milan',
-      locale: locale === 'it' ? 'it_IT' : 'en_US',
+      locale: getLocaleDef(locale)?.ogLocale || 'en_US',
       images: [{
         url: ogImage.startsWith('http') ? ogImage : `${baseUrl}${ogImage}`,
         width: 1200,
@@ -282,6 +293,7 @@ export default async function ClubPage({ params }: Props) {
     'v-justme': 'justme',
     'v-voya': 'voya',
     'v-pineta': 'pineta',
+    'v-aria': 'aria',
     'v-playclub': 'playclub',
     'v-55milano': 'fiftyfive',
     'v-repvblic': 'repvblic',
@@ -350,6 +362,12 @@ export default async function ClubPage({ params }: Props) {
     .sort((a, b) => new Date(b.dateISO).getTime() - new Date(a.dateISO).getTime());
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
+  const currentVenueSlug = getLocalizedText(venue.slugs, locale);
+  const openingDays = venue.id === 'v-justme'
+    ? ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    : venue.id === 'v-pineta'
+      ? ['Friday', 'Saturday']
+      : ['Thursday', 'Friday', 'Saturday'];
   const jsonLd: any = {
     "@context": "https://schema.org",
     "@type": venue.id === 'v-55milano' ? ["NightClub", "Restaurant"] : venue.category === VenueCategory.CLUB ? "NightClub" : "LocalBusiness",
@@ -369,14 +387,13 @@ export default async function ClubPage({ params }: Props) {
       "latitude": venue.coordinates?.latitude || 45.4642,
       "longitude": venue.coordinates?.longitude || 9.1900
     },
-    "url": `${baseUrl}/clubs/${venue.slugs.en}`,
+    "url": `${baseUrl}${localePrefix(locale)}/clubs/${currentVenueSlug}`,
     "telephone": "+393519127047",
     "priceRange": venue.priceRange || "€€€",
-    "servesCuisine": "Italian",
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Thursday", "Friday", "Saturday"],
+        "dayOfWeek": openingDays,
         "opens": "23:00",
         "closes": "05:00"
       }
@@ -387,8 +404,7 @@ export default async function ClubPage({ params }: Props) {
       "@type": "ContactPoint",
       "telephone": "+39-351-912-7047",
       "contactType": "reservations",
-      "availableLanguage": ["English", "Italian"],
-      "contactOption": "TollFree"
+      "availableLanguage": ["English", "Italian", "Spanish", "French", "German", "Portuguese"]
     }
   };
 
@@ -398,7 +414,7 @@ export default async function ClubPage({ params }: Props) {
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": `${baseUrl}${localePrefix(locale)}` },
       { "@type": "ListItem", "position": 2, "name": locale === 'it' ? "Club Milano" : "Milan Clubs", "item": `${baseUrl}${localePrefix(locale)}/clubs` },
-      { "@type": "ListItem", "position": 3, "name": name, "item": `${baseUrl}${localePrefix(locale)}/clubs/${venue.slugs.en}` },
+      { "@type": "ListItem", "position": 3, "name": name, "item": `${baseUrl}${localePrefix(locale)}/clubs/${currentVenueSlug}` },
     ],
   };
 
@@ -423,7 +439,7 @@ export default async function ClubPage({ params }: Props) {
         </div>
         
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link href={`/${locale}`} className="inline-flex items-center text-white/50 hover:text-champagne transition-colors mb-8 text-sm uppercase tracking-wider font-semibold">
+          <Link href={localePrefix(locale) || '/'} className="inline-flex items-center text-white/50 hover:text-champagne transition-colors mb-8 text-sm uppercase tracking-wider font-semibold">
             <ArrowLeft className="w-4 h-4 mr-2" />
             {t.back}
           </Link>

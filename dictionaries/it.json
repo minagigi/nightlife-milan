@@ -197,10 +197,10 @@
     },
     "pineta": {
       "subtitle": "Aperitivo cantato e serate disco nel cuore di Milano.",
-      "description": "Aperitivo cantato e ballato, serate disco con i migliori DJ, maxi schermi per eventi speciali. Pineta Club Milano offre un'esperienza unica che unisce apericena, intrattenimento live e clubbing in un'atmosfera sofisticata.",
-      "insiderTip": "L'aperitivo cantato è un must prima che la serata si trasformi in una vera e propria esperienza da club.",
-      "location": "Milano",
-      "target": "25-45 anni",
+      "description": "Pineta Club Milano unisce un aperitivo iniziale con intrattenimento live e un programma completo da discoteca. Il pubblico è internazionale e 18+, con musica commercial, house, hip-hop e reggaeton a seconda della serata. La cena spettacolo viene indicata soltanto quando è confermata nel singolo evento. Sono disponibili tavoli in pista, privé e super privé; prezzi di ingresso e tavoli vengono mostrati nel singolo evento datato.",
+      "insiderTip": "Arriva per l'aperitivo se vuoi vivere l'esperienza completa. Controlla sempre l'evento datato perché cena spettacolo, musica e prezzi cambiano in base alla serata.",
+      "location": "Via Messina 38, Milano",
+      "target": "Pubblico internazionale, 18+",
       "dressCode": "Elegante, 18+",
       "music": "House, Commercial, Hip-Hop",
       "events": [
@@ -214,7 +214,43 @@
           "title": "Aperitivo Cantato",
           "description": "Sabato aperitivo con musica live."
         }
-      ]
+      ],
+      "acts": [
+        { "title": "Atto I: Aperitivo", "time": "19:30 - 22:30", "description": "Drink, proposta food e intrattenimento live quando previsto.", "price": "Controlla l'evento | Chiedi su WhatsApp" },
+        { "title": "Atto II: Warm-up", "time": "22:30 - 00:30", "description": "Controllo guest list, assegnazione tavolo e warm-up musicale.", "price": "Guest list | Accesso tavolo" },
+        { "title": "Atto III: Club", "time": "00:30 - 05:00", "description": "DJ set, pista e bottle service.", "price": "Controlla l'evento | Chiedi su WhatsApp" }
+      ],
+      "pricing": {
+        "dancefloor": { "title": "Tavolo Pista", "price": "Preventivo attuale", "desc": "Zona centrale del club con bottle service." },
+        "priveGold": { "title": "Tavolo Privé", "price": "Preventivo attuale", "desc": "Zona rialzata riservata e servizio dedicato." },
+        "priveDiamond": { "title": "Super Privé", "price": "Su richiesta", "desc": "Posizione più esclusiva, soggetta a disponibilità." }
+      },
+      "rules": { "title": "Regole del Locale", "selection": "Documento originale e abbigliamento elegante obbligatori. Senza prenotazione confermata resta valida la selezione all'ingresso." }
+    },
+    "aria": {
+      "subtitle": "Aperitivo e serate club 18+ per un pubblico italiano.",
+      "description": "Aria Club Milano è pensato per un pubblico italiano 18+ che cerca un aperitivo seguito da una serata club ad alta energia. Il programma punta su hit italiane e internazionali, commercial, EDM e dance. Il locale offre ingresso in guest list e tavoli in pista, privé e super privé. Prezzi, musica e orari devono essere sempre verificati nel singolo evento datato prima della prenotazione.",
+      "insiderTip": "Invia su WhatsApp data, numero di persone e zona tavolo preferita. Dopo l'acquisto del biglietto manda la conferma per verificare prenotazione e pagamento.",
+      "location": "Via Ippodromo 115, Milano",
+      "target": "Pubblico italiano, 18+",
+      "dressCode": "Curato e alla moda, 18+",
+      "music": "Hit italiane, Commercial, EDM, Dance",
+      "events": [
+        { "day": "GIO", "title": "Thursday Night", "description": "Aperitivo e programma club quando confermati." },
+        { "day": "VEN", "title": "Friday Night", "description": "Serata club commercial e dance." },
+        { "day": "SAB", "title": "Saturday Night", "description": "Serata del weekend per pubblico 18+." }
+      ],
+      "acts": [
+        { "title": "Atto I: Aperitivo", "time": "19:30 - 22:30", "description": "Drink iniziali e aperitivo social quando previsto.", "price": "Controlla l'evento | Chiedi su WhatsApp" },
+        { "title": "Atto II: Ingresso", "time": "22:30 - 00:30", "description": "Convalida guest list e assegnazione tavolo.", "price": "Guest list | Accesso tavolo" },
+        { "title": "Atto III: Club", "time": "00:30 - 05:00", "description": "Commercial, EDM, pista e bottle service.", "price": "Controlla l'evento | Chiedi su WhatsApp" }
+      ],
+      "pricing": {
+        "dancefloor": { "title": "Tavolo Pista", "price": "Preventivo attuale", "desc": "Tavolo nella zona principale del club." },
+        "priveGold": { "title": "Tavolo Privé", "price": "Preventivo attuale", "desc": "Area riservata con bottle service." },
+        "priveDiamond": { "title": "Super Privé", "price": "Su richiesta", "desc": "Posizione premium soggetta a disponibilità." }
+      },
+      "rules": { "title": "Regole del Locale", "selection": "Gli ospiti devono avere almeno 18 anni e portare un documento originale valido. Si applicano dress code curato e selezione all'ingresso." }
     },
     "playclub": {
       "subtitle": "Il tempio della musica urban a Milano.",

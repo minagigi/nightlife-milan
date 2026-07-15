@@ -752,8 +752,8 @@ export const venuesData: Venue[] = [
     localizedContent: {
       name: { en: "Aria Club Milano", it: "Aria Club Milano" },
       description: {
-        en: "New concept club near San Siro. Aperitivo buffet from 19:30, dinner option, then full club until dawn. Three separate areas: Dance Floor Tables, Privé Aria and Privé DJ. Thursday to Saturday.",
-        it: "Nuovo concept club vicino a San Siro. Aperitivo a buffet dalle 19:30, opzione cena, poi club fino all'alba. Tre aree distinte: Dance Floor Table, Privé Aria e Privé DJ. Dal giovedì al sabato."
+        en: "New concept club near San Siro. Aperitivo buffet from 19:30, then full club until dawn. Three separate areas: Dance Floor Tables, Privé Aria and Privé DJ. Thursday to Saturday.",
+        it: "Nuovo concept club vicino a San Siro. Aperitivo a buffet dalle 19:30, poi club fino all'alba. Tre aree distinte: Dance Floor Table, Privé Aria e Privé DJ. Dal giovedì al sabato."
       },
       dressCode: { en: "Smart Elegant — No sportswear, no sneakers", it: "Smart Elegant — No abbigliamento sportivo, no sneakers" },
       altTextImg: { en: "Aria Club Milano interior dancefloor San Siro nightclub", it: "Aria Club Milano interno pista da ballo San Siro discoteca" },

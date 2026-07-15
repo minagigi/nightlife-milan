@@ -1,9 +1,10 @@
 import { Metadata } from 'next';
 import { tr } from '@/lib/i18n/t';
-import { localePrefix } from '@/lib/i18n/locales';
+import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import Image from 'next/image';
 import { mockZones } from '@/lib/data';
+import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 
 export const revalidate = 3600;
 
@@ -14,8 +15,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const isIt = locale === 'it';
   const canonical = `${baseUrl}${localePrefix(locale)}/zones`;
 
-  const title = tr(locale, 'Milan Nightlife Zones 2026 | Best Nightlife Districts & Areas | Nightlife Milan', 'Zone Vita Notturna Milano 2026 | Migliori Quartieri | Nightlife Milan');
-  const description = tr(locale, 'Explore Milan\'s top nightlife districts: Corso Como, Navigli, Brera, Isola, Sempione, Porta Romana. Find the best clubs, bars and events by zone. Updated 2026.', 'Esplora i migliori quartieri della vita notturna milanese: Corso Como, Navigli, Brera, Isola, Sempione, Porta Romana. Scopri club, bar ed eventi per zona. Aggiornato 2026.');
+  const title = seoTitle(tr(locale, 'Milan Nightlife Zones 2026 | Best Nightlife Districts & Areas | Nightlife Milan', 'Zone Vita Notturna Milano 2026 | Migliori Quartieri | Nightlife Milan'));
+  const description = withWhatsApp(tr(locale, 'Explore Milan\'s top nightlife districts: Corso Como, Navigli, Brera, Isola, Sempione, Porta Romana. Find the best clubs, bars and events by zone. Updated 2026.', 'Esplora i migliori quartieri della vita notturna milanese: Corso Como, Navigli, Brera, Isola, Sempione, Porta Romana. Scopri club, bar ed eventi per zona. Aggiornato 2026.'), locale);
   const ogImage = `${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`;
 
   return {
@@ -24,14 +25,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     keywords: isIt
       ? ['zone vita notturna milano', 'quartieri notturni milano', 'corso como nightlife', 'bar navigli milano', 'brera nightlife', 'migliori zone milano notte']
       : ['milan nightlife zones', 'milan nightlife districts', 'corso como milan nightlife', 'navigli bars milan', 'brera nightlife milan', 'best areas nightlife milan'],
-    robots: { index: true, follow: true },
+    robots: seoRobots(locale),
     alternates: {
       canonical,
-      languages: {
-        'en': `${baseUrl}/zones`,
-        'it': `${baseUrl}/it/zones`,
-        'x-default': `${baseUrl}/zones`,
-      },
+      languages: hreflangAlternates(baseUrl, '/zones'),
     },
     openGraph: {
       title: tr(locale, 'Milan Nightlife Zones 2026 — Best Districts for a Night Out', 'Zone Vita Notturna Milano 2026 — Nightlife Milan'),
@@ -39,7 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       type: 'website',
       url: canonical,
       siteName: 'Nightlife Milan',
-      locale: isIt ? 'it_IT' : 'en_US',
+      locale: getLocaleDef(locale)?.ogLocale || 'en_US',
       images: [{ url: ogImage, width: 1200, height: 630, alt: tr(locale, 'Milan nightlife districts clubs and bars', 'Vita notturna Milano quartieri club') }],
     },
     twitter: {
@@ -103,7 +100,7 @@ export default async function ZonesPage({
         <nav className="text-sm text-white/40" aria-label="Breadcrumb">
           <ol className="list-none p-0 inline-flex">
             <li className="flex items-center">
-              <Link href={`/${locale}`} className="hover:text-champagne transition-colors">Home</Link>
+              <Link href={localePrefix(locale) || '/'} className="hover:text-champagne transition-colors">Home</Link>
               <span className="mx-2">/</span>
             </li>
             <li className="text-champagne" aria-current="page">
@@ -176,7 +173,7 @@ export default async function ZonesPage({
             return (
               <Link
                 key={zone.id}
-                href={`/${locale}/zones/${zone.slug}`}
+                href={`${localePrefix(locale)}/zones/${zone.slug}`}
                 className="group relative h-[400px] rounded-lg overflow-hidden border border-white/10 hover:border-champagne/50 transition-colors duration-500 block"
               >
                 {/* Background Image or Gradient */}

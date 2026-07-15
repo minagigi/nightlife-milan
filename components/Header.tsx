@@ -51,11 +51,6 @@ export default function Header({ currentLocale }: { currentLocale: string }) {
     return () => document.body.classList.remove('overflow-hidden');
   }, [isMobileMenuOpen]);
 
-  // Close the mobile menu on route change
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [pathname]);
-
   // Helper to get the alternate path for the language switcher — registry-driven:
   // strippa QUALSIASI prefisso lingua e applica quello del locale target.
   const getAlternatePath = (targetLocale: string) => {

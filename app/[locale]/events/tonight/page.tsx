@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { Clock, MapPin, Calendar } from 'lucide-react';
 import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset } from '@/lib/calendarEvents';
 import type { Event, Venue } from '@/lib/types';
+import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,8 +19,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const canonical = `${baseUrl}${localePrefix(locale)}/events/tonight`;
 
-  const title = tr(locale, 'Events Tonight in Milan 2026 | What to Do Tonight', 'Eventi Stasera a Milano 2026 | Cosa Fare Stasera');
-  const description = tr(locale, 'Discover the best events happening tonight in Milan. Open clubs, special nights, aperitivo and parties. Book VIP table or guestlist via WhatsApp in 10 minutes.', 'Scopri i migliori eventi in programma stasera a Milano. Club aperti, serate speciali, aperitivo e party. Prenota tavolo VIP o guestlist via WhatsApp in 10 minuti.');
+  const title = seoTitle(tr(locale, 'Events Tonight in Milan 2026 | What to Do Tonight', 'Eventi Stasera a Milano 2026 | Cosa Fare Stasera'));
+  const description = withWhatsApp(tr(locale, 'Discover the best events happening tonight in Milan. Open clubs, special nights, aperitivo and parties. Book VIP table or guestlist via WhatsApp in 10 minutes.', 'Scopri i migliori eventi in programma stasera a Milano. Club aperti, serate speciali, aperitivo e party. Prenota tavolo VIP o guestlist via WhatsApp in 10 minuti.'), locale);
 
   return {
     title,
@@ -27,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     keywords: isIt
       ? ['eventi stasera milano', 'cosa fare stasera milano', 'club aperto stasera', 'serate stasera milano', 'aperitivo stasera milano']
       : ['events tonight milan', 'what to do tonight milan', 'clubs open tonight milan', 'parties tonight milan', 'aperitivo tonight milan'],
-    robots: { index: true, follow: true },
+    robots: seoRobots(locale),
     alternates: {
       canonical,
       languages: hreflangAlternates(baseUrl, '/events/tonight'),

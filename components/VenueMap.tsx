@@ -7,10 +7,9 @@ interface VenuePin {
   id: string;
   name: string;
   address: string;
-  slug: string;
   latitude: number;
   longitude: number;
-  lang: string;
+  href: string;
 }
 
 interface VenueMapProps {
@@ -61,7 +60,7 @@ export default function VenueMap({ venues }: VenueMapProps) {
 
       venues.forEach((venue) => {
         const gmUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(venue.address + ', Milan, Italy')}`;
-        const clubUrl = `/${venue.lang === 'it' ? 'it/' : ''}clubs/${venue.slug}`;
+        const clubUrl = venue.href;
 
         const popup = L.popup({ className: 'venue-popup', maxWidth: 220 }).setContent(`
           <div style="font-family:sans-serif;color:#fff;background:#1a1610;padding:12px 14px;border-radius:8px;min-width:180px">

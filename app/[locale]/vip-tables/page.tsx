@@ -7,6 +7,7 @@ import { CONTACT } from '@/config/contact';
 import { venuesData } from '@/lib/venuesData';
 import { MilanZone } from '@/lib/types';
 import { tr } from '@/lib/i18n/t';
+import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 
 export const revalidate = 3600;
 
@@ -17,8 +18,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const isIt = locale === 'it';
   const canonicalUrl = `${baseUrlGlobal}${localePrefix(locale)}/vip-tables`;
 
-  const title = tr(locale, 'VIP Table Booking Milan | Bottle Service & Table Reservations | Nightlife Milan', 'Prenotazione Tavoli VIP Milano | Bottle Service & Tavoli | Nightlife Milan');
-  const description = tr(locale, 'Book VIP tables at the best clubs in Milan. Guaranteed entry, premium bottle service, and personal concierge. WhatsApp response in under 10 minutes.', 'Prenota tavoli VIP nei migliori club di Milano. Ingresso garantito, bottle service premium e concierge personale. Risposta WhatsApp in meno di 10 minuti.');
+  const title = seoTitle(tr(locale, 'VIP Table Booking Milan | Bottle Service & Table Reservations | Nightlife Milan', 'Prenotazione Tavoli VIP Milano | Bottle Service & Tavoli | Nightlife Milan'));
+  const description = withWhatsApp(tr(locale, 'Book VIP tables at the best clubs in Milan. Guaranteed entry, premium bottle service, and personal concierge. WhatsApp response in under 10 minutes.', 'Prenota tavoli VIP nei migliori club di Milano. Ingresso garantito, bottle service premium e concierge personale. Risposta WhatsApp in meno di 10 minuti.'), locale);
 
   const keywordsEn = ['vip table milan', 'bottle service milan', 'table booking milan', 'vip nightclub milan', 'exclusive table milan'];
   const keywordsIt = ['tavoli vip milano', 'bottle service milano', 'prenotazione tavolo milano', 'vip nightclub milano', 'tavolo esclusivo milano'];
@@ -27,7 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title,
     description,
     keywords: keywordsEn.map((k, i) => tr(locale, k, keywordsIt[i])),
-    robots: { index: true, follow: true },
+    robots: seoRobots(locale),
     alternates: {
       canonical: canonicalUrl,
       languages: hreflangAlternates(baseUrlGlobal, '/vip-tables'),

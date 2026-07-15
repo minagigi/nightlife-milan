@@ -14,6 +14,10 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
+function currentTimestamp() {
+  return Date.now();
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   
@@ -59,6 +63,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function TonightPage({ params }: Props) {
   const { locale } = await params;
   const isIt = locale === 'it';
+  const renderedAtMs = currentTimestamp();
 
   // FASE C1/C2 (piano 2026-07-09-fix-calendar.md): sorgente dati unificata
   // (statici + Eventbrite/Xceed reali), confini di giorno nel fuso di Roma —
@@ -233,7 +238,7 @@ export default async function TonightPage({ params }: Props) {
                 </div>
                 <div className="space-y-6">
                   {aperitivoEvents.map((item) => (
-                    <EventCard key={item.event.id} item={item} locale={locale} />
+                    <EventCard key={item.event.id} item={item} locale={locale} renderedAtMs={renderedAtMs} />
                   ))}
                 </div>
               </div>
@@ -249,7 +254,7 @@ export default async function TonightPage({ params }: Props) {
                 </div>
                 <div className="space-y-6">
                   {primeTimeEvents.map((item) => (
-                    <EventCard key={item.event.id} item={item} locale={locale} />
+                    <EventCard key={item.event.id} item={item} locale={locale} renderedAtMs={renderedAtMs} />
                   ))}
                 </div>
               </div>
@@ -265,7 +270,7 @@ export default async function TonightPage({ params }: Props) {
                 </div>
                 <div className="space-y-6">
                   {afterHoursEvents.map((item) => (
-                    <EventCard key={item.event.id} item={item} locale={locale} />
+                    <EventCard key={item.event.id} item={item} locale={locale} renderedAtMs={renderedAtMs} />
                   ))}
                 </div>
               </div>
@@ -296,7 +301,7 @@ export default async function TonightPage({ params }: Props) {
                 </div>
                 <div className="space-y-6">
                   {tomorrowAperitivo.map((item) => (
-                    <EventCard key={item.event.id} item={item} locale={locale} />
+                    <EventCard key={item.event.id} item={item} locale={locale} renderedAtMs={renderedAtMs} />
                   ))}
                 </div>
               </div>
@@ -311,7 +316,7 @@ export default async function TonightPage({ params }: Props) {
                 </div>
                 <div className="space-y-6">
                   {tomorrowPrimeTime.map((item) => (
-                    <EventCard key={item.event.id} item={item} locale={locale} />
+                    <EventCard key={item.event.id} item={item} locale={locale} renderedAtMs={renderedAtMs} />
                   ))}
                 </div>
               </div>
@@ -326,7 +331,7 @@ export default async function TonightPage({ params }: Props) {
                 </div>
                 <div className="space-y-6">
                   {tomorrowAfterHours.map((item) => (
-                    <EventCard key={item.event.id} item={item} locale={locale} />
+                    <EventCard key={item.event.id} item={item} locale={locale} renderedAtMs={renderedAtMs} />
                   ))}
                 </div>
               </div>
@@ -339,10 +344,10 @@ export default async function TonightPage({ params }: Props) {
   );
 }
 
-function EventCard({ item, locale }: { item: { event: Event; venue: Venue }, locale: string }) {
+function EventCard({ item, locale, renderedAtMs }: { item: { event: Event; venue: Venue }, locale: string; renderedAtMs: number }) {
   const { event, venue } = item;
   const eventDate = new Date(event.dateISO);
-  const diffHours = (eventDate.getTime() - Date.now()) / (1000 * 60 * 60);
+  const diffHours = (eventDate.getTime() - renderedAtMs) / (1000 * 60 * 60);
   const isLive = diffHours > 0 && diffHours <= 2;
 
   const timeStr = new Intl.DateTimeFormat(locale, {

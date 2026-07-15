@@ -7,6 +7,7 @@ import { romeDayKey, romeDayKeyOffset, dedupeEventsByIdentity } from '@/lib/cale
 import { hreflangAlternates, localePrefix, getLocaleDef, DEFAULT_LOCALE } from '@/lib/i18n/locales';
 import { tr } from '@/lib/i18n/t';
 import type { Event, Venue } from '@/lib/types';
+import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 
 // ISR invece di force-dynamic: la lista mostra solo la serata di ieri, ma il
 // fetch Eventbrite (anche limitato agli ultimi giorni) resta costoso →
@@ -30,17 +31,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const def = getLocaleDef(locale) || getLocaleDef(DEFAULT_LOCALE)!;
   const canonical = `${baseUrl}${localePrefix(locale)}/events/past`;
-  const title = tr(locale, 'Past Events in Milan | Nightlife Milan Archive', 'Eventi Passati a Milano | Archivio Nightlife Milan');
-  const description = tr(
+  const title = seoTitle(tr(locale, 'Past Events in Milan | Nightlife Milan Archive', 'Eventi Passati a Milano | Archivio Nightlife Milan'));
+  const description = withWhatsApp(tr(
     locale,
     'Browse past nightlife events in Milan — clubs, aperitivo and special nights. Full line-ups, programmes and FAQ preserved for every past night.',
     'Sfoglia gli eventi passati della nightlife milanese — club, aperitivo e serate speciali. Line-up, programmi e FAQ di ogni serata restano consultabili.'
-  );
+  ), locale);
   return {
     title,
     description,
     alternates: { canonical, languages: hreflangAlternates(baseUrl, '/events/past') },
-    robots: { index: true, follow: true },
+    robots: seoRobots(locale),
     openGraph: {
       title, description, url: canonical, type: 'website', siteName: 'Nightlife Milan',
       locale: def.ogLocale,

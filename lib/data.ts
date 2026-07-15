@@ -1321,9 +1321,12 @@ export const getPerformerById = (id: string): Performer | undefined => {
 };
 
 export const getVenueBySlug = (slug: string, lang: string): Venue | undefined => {
-  return mockVenues.find(v => 
-    (lang === 'it' && v.slugs.it === slug) || 
-    v.slugs.en === slug
+  // Stesso bug fix di getEventBySlug/getGuideBySlug: riconosce entrambi gli
+  // slug a prescindere da lang (oggi dormiente perché ogni venue ha slugs.en
+  // === slugs.it, ma stessa classe di bug se in futuro divergessero).
+  return mockVenues.find(v =>
+    v.slugs.en === slug ||
+    v.slugs.it === slug
   );
 };
 

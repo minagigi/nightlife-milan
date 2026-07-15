@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { ArrowRight, Clock, MapPin, MessageCircle } from 'lucide-react';
 import { CONTACT } from '@/config/contact';
 import { tr } from '@/lib/i18n/t';
+import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 
 export const revalidate = 3600;
 
@@ -15,8 +16,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const isIt = locale === 'it';
   const canonical = `${baseUrl}${localePrefix(locale)}/aperitivo`;
 
-  const title = tr(locale, 'Best Aperitivo in Milan 2026 | Top Bars & Where to Go | Nightlife Milan', 'Migliore Aperitivo Milano 2026 | Bar, Orari e Zone | Nightlife Milan');
-  const description = tr(locale, 'Find the best aperitivo spots in Milan. Opening hours, what to order, dress code, and the top bars by zone — Navigli, Corso Como, Brera. Updated 2026.', 'I migliori locali per l\'aperitivo a Milano: orari, cosa ordinare, dress code e top bar per zona — Navigli, Corso Como, Brera. Guida aggiornata 2026.');
+  const title = seoTitle(tr(locale, 'Best Aperitivo in Milan 2026 | Top Bars & Where to Go | Nightlife Milan', 'Migliore Aperitivo Milano 2026 | Bar, Orari e Zone | Nightlife Milan'));
+  const description = withWhatsApp(tr(locale, 'Find the best aperitivo spots in Milan. Opening hours, what to order, dress code, and the top bars by zone — Navigli, Corso Como, Brera. Updated 2026.', 'I migliori locali per l\'aperitivo a Milano: orari, cosa ordinare, dress code e top bar per zona — Navigli, Corso Como, Brera. Guida aggiornata 2026.'), locale);
   const ogImage = `${baseUrl}/images/aperitivo-milan-cocktails-bar.webp`;
 
   const keywordsEn = ['aperitivo milan', 'best aperitivo milan', 'milan aperitivo bars', 'where to do aperitivo milan', 'navigli aperitivo'];
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title,
     description,
     keywords: keywordsEn.map((k, i) => tr(locale, k, keywordsIt[i])),
-    robots: { index: true, follow: true },
+    robots: seoRobots(locale),
     alternates: {
       canonical,
       languages: hreflangAlternates(baseUrl, '/aperitivo'),

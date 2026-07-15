@@ -10,6 +10,7 @@ import { Providers } from '@/components/Providers';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
 import AnalyticsTracker from '@/components/AnalyticsTracker';
 import IdleMount from '@/components/IdleMount';
+import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import '@/app/globals.css';
 import 'flag-icons/css/flag-icons.min.css';
 
@@ -68,8 +69,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const ogImage = `${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`;
   const localeDef = getLocaleDef(locale) || getLocaleDef(DEFAULT_LOCALE)!;
 
-  const title = tr(locale, 'Nightlife Milan — Best Clubs, VIP Tables & Aperitivo Guide Milan 2026', 'Nightlife Milan — Migliori Club, Tavoli VIP & Aperitivo Milano 2026');
-  const description = tr(locale, 'The ultimate guide to Milan nightlife. Book VIP tables, discover the best clubs, aperitivo spots and bottle service. WhatsApp concierge 24/7. Trusted by 50,000+ visitors.', 'La guida definitiva alla vita notturna milanese. Prenota tavoli VIP, scopri i migliori club, aperitivo e bottle service a Milano. Concierge WhatsApp h24.');
+  const title = seoTitle(tr(locale, 'Nightlife Milan — Best Clubs, VIP Tables & Aperitivo Guide Milan 2026', 'Nightlife Milan — Migliori Club, Tavoli VIP & Aperitivo Milano 2026'));
+  const description = withWhatsApp(tr(locale, 'The ultimate guide to Milan nightlife. Book VIP tables, discover the best clubs, aperitivo spots and bottle service. WhatsApp concierge 24/7. Trusted by 50,000+ visitors.', 'La guida definitiva alla vita notturna milanese. Prenota tavoli VIP, scopri i migliori club, aperitivo e bottle service a Milano. Concierge WhatsApp h24.'), locale);
 
   return {
     metadataBase: new URL(baseUrl),
@@ -149,8 +150,7 @@ export default async function RootLayout({
       '@type': 'ContactPoint',
       telephone: '+39-351-912-7047',
       contactType: 'customer service',
-      availableLanguage: ['English', 'Italian'],
-      contactOption: 'TollFree',
+      availableLanguage: ['English', 'Italian', 'Spanish', 'French', 'German', 'Portuguese'],
     },
     areaServed: { '@type': 'City', name: 'Milan', sameAs: 'https://www.wikidata.org/wiki/Q490' },
     description: tr(locale, 'The ultimate guide to Milan nightlife. VIP tables, aperitivo, WhatsApp concierge.', 'La guida definitiva alla vita notturna milanese. Tavoli VIP, aperitivo, concierge WhatsApp.'),
@@ -161,11 +161,6 @@ export default async function RootLayout({
     '@type': 'WebSite',
     name: 'Nightlife Milan',
     url: baseUrl,
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: { '@type': 'EntryPoint', urlTemplate: `${baseUrl}/clubs?q={search_term_string}` },
-      'query-input': 'required name=search_term_string',
-    },
   };
 
   return (

@@ -3,6 +3,7 @@ import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import { mockVenues } from '@/lib/data';
+import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 
 export const revalidate = 86400;
 
@@ -16,8 +17,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const canonical = `${baseUrl}${localePrefix(locale)}/bottle-prices`;
 
-  const title = tr(locale, 'Milan Club Bottle Prices 2026 | VIP Table Price List | Nightlife Milan', 'Prezzi Bottiglie Discoteche Milano 2026 | Listino VIP | Nightlife Milan');
-  const description = tr(locale, 'Updated bottle price list for all Milan clubs: Just Me, Armani Privé, Play Club, Volt, Pineta. VIP table prices, champagne, vodka. Book via WhatsApp.', 'Listino prezzi bottiglie aggiornato per tutti i club di Milano: Just Me, Armani Privé, Play Club, Volt, Pineta. Prezzi tavoli VIP, champagne, vodka. Prenota via WhatsApp.');
+  const title = seoTitle(tr(locale, 'Milan Club Bottle Prices 2026 | VIP Table Price List | Nightlife Milan', 'Prezzi Bottiglie Discoteche Milano 2026 | Listino VIP | Nightlife Milan'));
+  const description = withWhatsApp(tr(locale, 'Updated bottle price list for all Milan clubs: Just Me, Armani Privé, Play Club, Volt, Pineta. VIP table prices, champagne, vodka. Book via WhatsApp.', 'Listino prezzi bottiglie aggiornato per tutti i club di Milano: Just Me, Armani Privé, Play Club, Volt, Pineta. Prezzi tavoli VIP, champagne, vodka. Prenota via WhatsApp.'), locale);
 
   return {
     title,
@@ -29,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     keywords: isIt
       ? ['prezzi bottiglie discoteche milano', 'listino bottle service milano', 'costo tavolo vip milano', 'champagne club milano', 'prezzi just me milano']
       : ['milan club bottle prices', 'bottle service milan price', 'vip table cost milan', 'champagne milan nightclub', 'just me milan prices'],
-    robots: { index: true, follow: true },
+    robots: seoRobots(locale),
     openGraph: {
       title,
       description,

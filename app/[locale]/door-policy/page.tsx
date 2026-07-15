@@ -3,6 +3,7 @@ import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import { mockVenues } from '@/lib/data';
+import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 
 export const revalidate = 86400;
 
@@ -16,8 +17,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const canonical = `${baseUrl}${localePrefix(locale)}/door-policy`;
 
-  const title = tr(locale, 'Dress Code & Door Policy Milan Clubs 2026 | Nightlife Milan', 'Dress Code & Door Policy Discoteche Milano 2026 | Nightlife Milan');
-  const description = tr(locale, 'Complete guide to Milan club dress codes 2026: what to wear, what to avoid, minimum age, door selection. Just Me, Armani Privé, Play Club and all major venues.', 'Guida completa al dress code dei club di Milano 2026: cosa indossare, cosa evitare, età minima, selezione all\'ingresso. Just Me, Armani Privé, Play Club e tutti i principali locali.');
+  const title = seoTitle(tr(locale, 'Dress Code & Door Policy Milan Clubs 2026 | Nightlife Milan', 'Dress Code & Door Policy Discoteche Milano 2026 | Nightlife Milan'));
+  const description = withWhatsApp(tr(locale, 'Complete guide to Milan club dress codes 2026: what to wear, what to avoid, minimum age, door selection. Just Me, Armani Privé, Play Club and all major venues.', 'Guida completa al dress code dei club di Milano 2026: cosa indossare, cosa evitare, età minima, selezione all\'ingresso. Just Me, Armani Privé, Play Club e tutti i principali locali.'), locale);
 
   return {
     title,
@@ -29,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     keywords: isIt
       ? ['dress code discoteche milano', 'door policy milano', 'cosa indossare club milano', 'età minima discoteche milano', 'selezione ingresso milano']
       : ['dress code milan clubs', 'door policy milan', 'what to wear milan clubs', 'minimum age milan clubs', 'door selection milan'],
-    robots: { index: true, follow: true },
+    robots: seoRobots(locale),
     openGraph: {
       title,
       description,
