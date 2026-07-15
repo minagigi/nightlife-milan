@@ -4,10 +4,13 @@ import sharp from 'sharp';
 import { scoutXceedEvents, type XceedEvent, type XceedOffer } from '../lib/xceedScout';
 import { EVENT_LOCALE_PACKS_ALL } from '../lib/eventLocalePacks';
 import type { EventLocalePack, EventOfferKey } from '../lib/eventBatchLocaleTypes';
+import { getEventbriteToken } from '../lib/eventbriteToken';
 
 const PHONE = '+39 351 912 7047';
 const SITE_URL = 'https://nightlifemilan.com';
 const PUBLISH_URL = `${SITE_URL}/api/events/publish-curated`;
+const EVENTBRITE_API = 'https://www.eventbriteapi.com/v3';
+const EVENTBRITE_ORG_ID = '2988002072164';
 const PINETA_SCENE = 'https://cdn.evbuc.com/images/1188885890/2988002064108/1/original.20260715-005449';
 const AFFILIATE_RE = /^https:\/\/xceed\.me\/en\/milano\/event\/[^/]+\/(\d+)\/channel\/nightlifemilan-1$/;
 
@@ -466,6 +469,31 @@ async function publish(payload: Record<string, unknown>, secret: string): Promis
   return result;
 }
 
+interface ExistingCuratedEvent {
+  id: string;
+  url?: string;
+  name?: { text?: string };
+  description?: { html?: string };
+}
+
+async function fetchExistingCuratedEvents(token: string): Promise<ExistingCuratedEvent[]> {
+  const base = `${EVENTBRITE_API}/organizations/${EVENTBRITE_ORG_ID}/events/?status=live&time_filter=current_future&order_by=start_asc&page_size=200`;
+  const events: ExistingCuratedEvent[] = [];
+  let continuation: string | undefined;
+  let pages = 0;
+  do {
+    const url = continuation ? `${base}&continuation=${encodeURIComponent(continuation)}` : base;
+    const response = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+    if (!response.ok) throw new Error(`Eventbrite preflight failed: ${response.status}`);
+    const body = await response.json();
+    events.push(...(body.events || []));
+    continuation = body.pagination?.has_more_items ? body.pagination?.continuation : undefined;
+    pages += 1;
+  } while (continuation && pages < 20);
+  if (continuation) throw new Error('Eventbrite preflight exceeded pagination guard');
+  return events;
+}
+
 async function main(): Promise<void> {
   const args = parseArgs(process.argv.slice(2));
   await loadLocalEnv();
@@ -477,6 +505,20 @@ async function main(): Promise<void> {
   await fs.writeFile(path.join(artifactDir, 'xceed-snapshot.json'), `${JSON.stringify({ capturedAt: new Date().toISOString(), events }, null, 2)}\n`, 'utf8');
   const manifest: Array<Record<string, unknown>> = [];
   const selectedSeries = args.series || SERIES_IDS;
+  const secret = args.execute ? process.env.CRON_SECRET : undefined;
+  const eventbriteToken = args.execute ? getEventbriteToken() : undefined;
+  if (args.execute && !secret) throw new Error('CRON_SECRET is required for execution');
+  if (args.execute && !eventbriteToken) throw new Error('EVENTBRITE_TOKEN is required for execution');
+  const existingEvents = eventbriteToken ? await fetchExistingCuratedEvents(eventbriteToken) : [];
+  const existingMarkers = new Map<string, ExistingCuratedEvent>();
+  const existingTitles = new Map<string, ExistingCuratedEvent>();
+  for (const event of existingEvents) {
+    const html = event.description?.html || '';
+    for (const match of html.matchAll(/nlm:curated=[a-z0-9-]+-(?:it|en|es|pt|fr|de)-\d{4}-\d{2}-\d{2}/g)) {
+      existingMarkers.set(match[0], event);
+    }
+    if (event.name?.text) existingTitles.set(event.name.text, event);
+  }
   let prepared = 0;
 
   for (const publicationDate of daySequence(args.from, args.through)) {
@@ -498,14 +540,22 @@ async function main(): Promise<void> {
         await fs.writeFile(htmlPath, `${descriptionHtml}\n`, 'utf8');
         const entry: Record<string, unknown> = { publicationDate, locale, series: id, title, summary, marker, eventCount: selected.length, xceedIds: selected.map((event) => event.xceedId), cover, htmlPath, descriptionLength: descriptionHtml.length };
         if (args.execute) {
-          const secret = process.env.CRON_SECRET;
-          if (!secret) throw new Error('CRON_SECRET is required for execution');
-          entry.result = await publish({
-            title, summary, descriptionHtml, marker, date: publicationDate, lang: locale,
-            ageRestriction: SERIES[id].age, categoryId: SERIES[id].category,
-            ticketName: UI[locale].ticketName, ticketDescription: UI[locale].ticketDescription,
-            coverBase64: (await fs.readFile(cover)).toString('base64'), coverContentType: 'image/jpeg', coverFilename: path.basename(cover),
-          }, secret);
+          const existing = existingMarkers.get(marker) || existingTitles.get(title);
+          if (existing) {
+            entry.result = { ok: true, skipped: true, reason: 'already-present', eventId: existing.id, url: existing.url };
+          } else {
+            const result = await publish({
+              title, summary, descriptionHtml, marker, date: publicationDate, lang: locale,
+              ageRestriction: SERIES[id].age, categoryId: SERIES[id].category,
+              ticketName: UI[locale].ticketName, ticketDescription: UI[locale].ticketDescription,
+              coverBase64: (await fs.readFile(cover)).toString('base64'), coverContentType: 'image/jpeg', coverFilename: path.basename(cover),
+              dedupePrechecked: true,
+            }, secret!);
+            entry.result = result;
+            const created = { id: String(result.eventId || ''), url: typeof result.url === 'string' ? result.url : undefined };
+            existingMarkers.set(marker, created);
+            existingTitles.set(title, created);
+          }
         }
         manifest.push(entry);
         prepared += 1;
