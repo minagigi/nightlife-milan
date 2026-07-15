@@ -468,6 +468,7 @@ async function publish(payload: Record<string, unknown>, secret: string): Promis
 
 interface ExistingCuratedEvent {
   id: string;
+  status?: string;
   url?: string;
   title?: string;
   markers?: string[];
@@ -478,6 +479,10 @@ async function fetchExistingCuratedEvents(secret: string): Promise<ExistingCurat
   const body = await response.json();
   if (!response.ok || !body.ok) throw new Error(`Eventbrite preflight failed: ${response.status} ${body.error || ''}`.trim());
   return body.events || [];
+}
+
+async function recoverDraft(eventId: string, secret: string): Promise<Record<string, unknown>> {
+  return publish({ action: 'recover-draft', eventId }, secret);
 }
 
 async function main(): Promise<void> {
@@ -523,7 +528,9 @@ async function main(): Promise<void> {
         if (args.execute) {
           const existing = existingMarkers.get(marker) || existingTitles.get(title);
           if (existing) {
-            entry.result = { ok: true, skipped: true, reason: 'already-present', eventId: existing.id, url: existing.url };
+            entry.result = existing.status === 'draft'
+              ? await recoverDraft(existing.id, secret!)
+              : { ok: true, skipped: true, reason: 'already-present', eventId: existing.id, url: existing.url };
           } else {
             const result = await publish({
               title, summary, descriptionHtml, marker, date: publicationDate, lang: locale,

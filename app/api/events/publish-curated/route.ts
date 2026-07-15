@@ -20,6 +20,8 @@ const LOCALE_MAP: Record<string, string> = {
 };
 
 interface CuratedSubmission {
+  action?: 'recover-draft';
+  eventId?: string;
   title?: string;
   summary?: string;
   descriptionHtml?: string;
@@ -38,6 +40,7 @@ interface CuratedSubmission {
 
 interface ExistingCuratedEvent {
   id: string;
+  status?: string;
   url?: string;
   name?: { text?: string };
   description?: { html?: string };
@@ -52,7 +55,7 @@ function isAuthorized(request: Request): boolean {
 }
 
 async function listExistingCuratedEvents(token: string): Promise<ExistingCuratedEvent[]> {
-  const base = `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=live&time_filter=current_future&order_by=start_asc&page_size=200`;
+  const base = `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=live,draft,started&order_by=start_asc&page_size=200`;
   const events: ExistingCuratedEvent[] = [];
   let continuation: string | undefined;
   for (let page = 1; page <= 30; page += 1) {
@@ -164,6 +167,7 @@ export async function GET(request: Request) {
       ok: true,
       events: events.map((event) => ({
         id: event.id,
+        status: event.status,
         url: event.url,
         title: event.name?.text,
         markers: [...(event.description?.html || '').matchAll(/nlm:curated=[a-z0-9-]+-(?:it|en|es|pt|fr|de)-\d{4}-\d{2}-\d{2}/g)].map((match) => match[0]),
@@ -186,10 +190,32 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: 'Invalid JSON body' }, { status: 400 });
   }
 
-  const validationError = validateSubmission(body);
-  if (validationError) return NextResponse.json({ ok: false, error: validationError }, { status: 400 });
   const token = getEventbriteToken();
   if (!token) return NextResponse.json({ ok: false, error: 'EVENTBRITE_TOKEN not set' }, { status: 500 });
+  if (body.action === 'recover-draft') {
+    if (!/^\d+$/.test(body.eventId || '')) return NextResponse.json({ ok: false, error: 'Invalid draft id' }, { status: 400 });
+    try {
+      const inspect = await fetch(`${EVENTBRITE_API}/events/${body.eventId}/`, { headers: authHeaders(token) });
+      if (!inspect.ok) throw new Error(`Draft lookup failed: ${inspect.status}`);
+      const event = await inspect.json();
+      if (event.status !== 'draft' || !/nlm:curated=/.test(event.description?.html || '')) {
+        throw new Error('Event is not a recoverable curated draft');
+      }
+      let lastError = '';
+      for (let attempt = 1; attempt <= 3; attempt += 1) {
+        const publish = await fetch(`${EVENTBRITE_API}/events/${body.eventId}/publish/`, { method: 'POST', headers: authHeaders(token) });
+        if (publish.ok) return NextResponse.json({ ok: true, skipped: false, recovered: true, eventId: body.eventId, url: event.url });
+        lastError = `${publish.status} ${(await publish.text()).slice(0, 300)}`;
+        if (attempt < 3) await new Promise((resolve) => setTimeout(resolve, attempt * 2500));
+      }
+      throw new Error(`Draft publish failed: ${lastError}`);
+    } catch (error) {
+      return NextResponse.json({ ok: false, error: error instanceof Error ? error.message : String(error) }, { status: 502 });
+    }
+  }
+
+  const validationError = validateSubmission(body);
+  if (validationError) return NextResponse.json({ ok: false, error: validationError }, { status: 400 });
 
   try {
     if (!body.dedupePrechecked) {

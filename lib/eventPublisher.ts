@@ -379,14 +379,21 @@ export async function publishOneLang(p: PublishOneLangParams): Promise<PublishRe
 
   // 4. Publish
   try {
-    const publishRes = await fetch(`${EVENTBRITE_API}/events/${eventId}/publish/`, {
-      method: 'POST',
-      headers: authHeaders(token),
-    });
-    if (!publishRes.ok) {
-      const errBody = await publishRes.text();
-      return { ok: false, reason: `Publish failed: ${publishRes.status} ${errBody.slice(0, 200)}`, ebEventId: eventId, imageSource: poster?.source };
+    let lastError = '';
+    let published = false;
+    for (let attempt = 1; attempt <= 3; attempt += 1) {
+      const publishRes = await fetch(`${EVENTBRITE_API}/events/${eventId}/publish/`, {
+        method: 'POST',
+        headers: authHeaders(token),
+      });
+      if (publishRes.ok) {
+        published = true;
+        break;
+      }
+      lastError = `${publishRes.status} ${(await publishRes.text()).slice(0, 200)}`;
+      if (attempt < 3) await new Promise((resolve) => setTimeout(resolve, attempt * 2500));
     }
+    if (!published) return { ok: false, reason: `Publish failed: ${lastError}`, ebEventId: eventId, imageSource: poster?.source };
   } catch (e) {
     return { ok: false, reason: `Publish threw: ${(e as Error).message}`, ebEventId: eventId, imageSource: poster?.source };
   }
