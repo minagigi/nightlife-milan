@@ -48,6 +48,9 @@ event, page, landing, article, or guide on Nightlife Milan and Eventbrite.
   text-generation API for these tasks.
 - Operational APIs are allowed only for data retrieval and submission, such as
   Eventbrite, Xceed, Vercel, image hosting, and Search Console.
+- Eventbrite publication does not imply site publication. Listings marked
+  `nlm:curated` are Eventbrite-only and must stay out of site pages, cards,
+  calendars, and sitemap unless the user explicitly requests a separate page.
 - Follow `docs/seo-metadata-strategy.md` and use `lib/seoMetadata.ts`.
 - Use `+39 351 912 7047` exactly and ask buyers to send their purchase
   confirmation on WhatsApp.

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { enabledLocaleCodes, LOCALES } from '@/lib/i18n/locales';
+import { isRemovedCuratedSitePath } from '@/lib/eventVisibility';
 
 // Lingue attive dal registry unico (lib/i18n/locales.ts): attivare una lingua lì
 // la rende automaticamente instradabile qui, senza toccare il middleware.
@@ -32,6 +33,19 @@ function analyticsAuth(request: NextRequest): NextResponse | null {
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // Le vecchie pagine generate dalle collection Eventbrite non appartengono al
+  // sito. Un 410 esplicito evita il falso 200 del fallback App Router e accelera
+  // la loro rimozione dagli indici di ricerca.
+  if (isRemovedCuratedSitePath(pathname)) {
+    return new NextResponse(null, {
+      status: 410,
+      headers: {
+        'Cache-Control': 'public, max-age=0, s-maxage=86400',
+        'X-Robots-Tag': 'noindex, nofollow, noarchive',
+      },
+    });
+  }
 
   // Typo comune → path canonico
   if (analyticsTypoRe.test(pathname)) {

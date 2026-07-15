@@ -4,6 +4,7 @@
 
 - Treat the current production implementation as the baseline.
 - Keep `/events/this-week` as the only indexed weekly event hub.
+- Eventbrite publication does not imply site publication. Listings marked `nlm:curated` are Eventbrite-only distribution assets: never import or render them as site events, articles, cards, calendar entries, or sitemap URLs unless the user explicitly requests a separate site page. Previously generated curated site URLs must return `410 Gone` with `noindex`.
 - Redirect equivalent legacy hubs permanently.
 - Use full event pages: description, what happens, agenda, programme, venue information, contacts, gallery, FAQ, conversion CTA, and schema.
 - Keep the approved Nightlife Milan design. Do not replace complete pages with thin prototypes.

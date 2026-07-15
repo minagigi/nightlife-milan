@@ -4,6 +4,7 @@ import { matchVenueId } from './venueMatching';
 import { getEventbriteToken } from './eventbriteToken';
 import { getVenuePricing } from './venuePricing';
 import { physicalEventKey } from './eventIdentity';
+import { isEventbriteOnlyCuratedListing } from './eventVisibility';
 
 const EVENTBRITE_API = 'https://www.eventbriteapi.com/v3';
 const ORG_ID = '2988002072164';
@@ -353,7 +354,13 @@ export async function fetchEventbriteEvents(includePast = false, sinceDaysAgo?: 
   }
 
   try {
-    const raw = (data.events || []) as RawEbEvent[];
+    // Le collection settimanali contrassegnate `nlm:curated` sono asset di
+    // distribuzione Eventbrite, non pagine del sito. Escluderle qui le rimuove
+    // in modo coerente da liste, calendari, pagine dinamiche e sitemap senza
+    // interferire con la loro pubblicazione o permanenza su Eventbrite.
+    const raw = ((data.events || []) as RawEbEvent[]).filter(
+      (event) => !isEventbriteOnlyCuratedListing(event),
+    );
 
     // FASE F1 (2026-07-08) + L3 multilingua (2026-07-10): raggruppare per baseId
     // del marker. Ogni serata reale pubblica FINO A 35 listing Eventbrite (uno per
