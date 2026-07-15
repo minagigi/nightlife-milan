@@ -1,0 +1,4 @@
+interface:
+  display_name: "Nightlife Milan Publishing"
+  short_description: "Publish Nightlife Milan content consistently"
+  default_prompt: "Use $nightlife-milan-publishing to publish or update a Nightlife Milan event, page, article, or guide using the approved standard."
