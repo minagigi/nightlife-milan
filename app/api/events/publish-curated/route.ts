@@ -62,7 +62,11 @@ async function listExistingCuratedEvents(token: string): Promise<ExistingCurated
   for (let page = 1; page <= 30; page += 1) {
     const url = continuation ? `${base}&continuation=${encodeURIComponent(continuation)}` : base;
     const response = await fetch(url, { headers: authHeaders(token) });
-    if (!response.ok) throw new Error(`Duplicate check failed: ${response.status}`);
+    if (!response.ok) {
+      const retryAfter = response.headers.get('retry-after');
+      const reset = response.headers.get('x-ratelimit-reset');
+      throw new Error(`Duplicate check failed: ${response.status}${retryAfter ? ` retry-after=${retryAfter}` : ''}${reset ? ` reset=${reset}` : ''}`);
+    }
     const body = await response.json();
     events.push(...(body.events || []));
     continuation = body.pagination?.has_more_items ? body.pagination?.continuation : undefined;
