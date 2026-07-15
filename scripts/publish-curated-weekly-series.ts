@@ -23,6 +23,8 @@ interface Args {
   locales: Locale[];
   series?: SeriesId[];
   limit?: number;
+  batchSize: number;
+  batchPauseSeconds: number;
 }
 
 interface UiPack {
@@ -192,13 +194,20 @@ function parseArgs(argv: string[]): Args {
     else if (arg.startsWith('--locales=')) values.set('locales', arg.slice(10));
     else if (arg.startsWith('--series=')) values.set('series', arg.slice(9));
     else if (arg.startsWith('--limit=')) values.set('limit', arg.slice(8));
+    else if (arg.startsWith('--batch-size=')) values.set('batchSize', arg.slice(13));
+    else if (arg.startsWith('--batch-pause-seconds=')) values.set('batchPauseSeconds', arg.slice(22));
     else throw new Error(`Unknown argument: ${arg}`);
   }
   const locales = (values.get('locales') || 'it,en').split(',') as Locale[];
   if (locales.some((locale) => !UI[locale])) throw new Error('Unsupported locale');
   const series = values.get('series')?.split(',') as SeriesId[] | undefined;
   if (series?.some((id) => !SERIES_IDS.includes(id))) throw new Error('Unsupported series');
-  return { execute: values.get('execute') === '1', updateExisting: values.get('updateExisting') === '1', from: values.get('from') || '2026-07-16', through: values.get('through') || '2026-07-19', locales, series, limit: values.get('limit') ? Number(values.get('limit')) : undefined };
+  return {
+    execute: values.get('execute') === '1', updateExisting: values.get('updateExisting') === '1',
+    from: values.get('from') || '2026-07-16', through: values.get('through') || '2026-07-19', locales, series,
+    limit: values.get('limit') ? Number(values.get('limit')) : undefined,
+    batchSize: Number(values.get('batchSize') || 18), batchPauseSeconds: Number(values.get('batchPauseSeconds') || 300),
+  };
 }
 
 async function loadLocalEnv(): Promise<void> {
@@ -513,6 +522,13 @@ async function main(): Promise<void> {
     if (event.title) existingTitles.set(event.title, event);
   }
   let prepared = 0;
+  let publishActions = 0;
+
+  async function pauseBeforePublishAction(): Promise<void> {
+    if (publishActions > 0 && publishActions % args.batchSize === 0) {
+      await new Promise((resolve) => setTimeout(resolve, args.batchPauseSeconds * 1000));
+    }
+  }
 
   for (const publicationDate of daySequence(args.from, args.through)) {
     for (const locale of args.locales) {
@@ -543,11 +559,17 @@ async function main(): Promise<void> {
               dedupePrechecked: true,
             };
             if (existing) {
-              if (existing.status === 'draft') entry.result = await recoverDraft(existing.id, secret!);
+              if (existing.status === 'draft') {
+                await pauseBeforePublishAction();
+                entry.result = await recoverDraft(existing.id, secret!);
+                publishActions += 1;
+              }
               else if (args.updateExisting) entry.result = await publish({ ...payload, action: 'update-existing', eventId: existing.id }, secret!);
               else entry.result = { ok: true, skipped: true, reason: 'already-present', eventId: existing.id, url: existing.url };
             } else {
+              await pauseBeforePublishAction();
               const result = await publish(payload, secret!);
+              publishActions += 1;
               entry.result = result;
               const created = { id: String(result.eventId || ''), url: typeof result.url === 'string' ? result.url : undefined };
               existingMarkers.set(marker, created);
