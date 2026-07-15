@@ -24,6 +24,7 @@ Do not redesign from memory when an approved live example exists. Use the curren
 - Never invent prices, artists, schedules, minimum age, dress code, availability, ticket terms, or venue services.
 - Preserve the exact Xceed affiliate URL from the current source. A non-affiliate replacement loses commission and is a release blocker.
 - Use the booking number exactly as `+39 351 912 7047`. Tell buyers to send their purchase confirmation on WhatsApp so booking and payment can be checked.
+- For every Eventbrite listing with a verified Nightlife Milan Xceed affiliate URL, localize both order-confirmation fields to the listing language. State that Eventbrite registration is not an admission ticket, include only the exact Xceed URL with channel `nightlifemilan-1`, and repeat the WhatsApp purchase-confirmation instruction.
 - Write native search-oriented copy in each language. Never append an English SEO keyword block to a non-English event.
 - Publish only complete language variants. Keep incomplete locales navigable but `noindex`; include only complete locales in hreflang and sitemap.
 - Do not publish an image with cropped information, invented branding, unreadable contact text, or random artwork unrelated to the approved poster and venue.
@@ -37,7 +38,7 @@ Do not redesign from memory when an approved live example exists. Use the curren
 2. Prepare one language as a pilot when the template or visual treatment is new.
 3. Create native title, summary, full body, detailed agenda, programme, 25 FAQs, metadata, image labels, and gallery copy.
 4. Recompose the real poster for required aspect ratios; preserve its identity and localize visible text for the event language.
-5. Publish the Eventbrite variant through the existing submission path, never through a text-generation API.
+5. Publish the Eventbrite variant through the existing submission path, never through a text-generation API, and verify its localized order-confirmation message when an Xceed affiliate link is present.
 6. Create or update the matching site event using the approved Italian event design as the structural baseline.
 7. Verify the pilot live. Only then roll out the remaining complete languages.
 

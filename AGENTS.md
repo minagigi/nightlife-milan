@@ -54,6 +54,11 @@ event, page, landing, article, or guide on Nightlife Milan and Eventbrite.
 - Follow `docs/seo-metadata-strategy.md` and use `lib/seoMetadata.ts`.
 - Use `+39 351 912 7047` exactly and ask buyers to send their purchase
   confirmation on WhatsApp.
+- For every Eventbrite listing that contains a verified Nightlife Milan Xceed
+  affiliate URL, configure the order-confirmation page and email in the same
+  language as the listing. State unambiguously that the Eventbrite registration
+  is not an admission ticket, link only to the exact Xceed URL carrying the
+  `nightlifemilan-1` channel, and repeat the WhatsApp purchase-confirmation CTA.
 - Never invent price, artist, service, age, time, dress code, availability, or
   affiliate URL. Preserve the exact current Xceed affiliate link.
 - A complete event requires native-language title, summary, detailed body,

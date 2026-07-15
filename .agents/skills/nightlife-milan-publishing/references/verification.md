@@ -4,6 +4,7 @@
 
 - Confirm venue, date, time zone, services, audience, age, dress code, prices, capacity language, and exact affiliate URL.
 - Confirm native-language title, summary, full body, programme, 25 FAQs, WhatsApp number, and purchase-confirmation instruction.
+- For Eventbrite listings with Xceed, confirm that the order-confirmation page and email use the listing language, explicitly say the Eventbrite registration is not a ticket, preserve the exact `nightlifemilan-1` affiliate URL, and include the WhatsApp CTA.
 - Confirm image ratio, safe margins, readable text, localized visible copy, image order, title, description, and alt text.
 - Confirm no third-party phone, promoter, URL, or unsupported claim remains.
 

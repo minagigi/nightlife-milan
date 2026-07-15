@@ -7,6 +7,8 @@ import type { PosterResult } from './posterPipeline';
 import { getEventbriteToken } from './eventbriteToken';
 import { getVenuePricing } from './venuePricing';
 import { CONTACT } from '@/config/contact';
+import { extractXceedAffiliateUrls, updateEventbriteConfirmation } from './eventbriteConfirmation';
+import type { LocaleCode } from './i18n/locales';
 
 /**
  * Pubblicazione sulla nostra org Eventbrite. Non testabile in locale
@@ -32,6 +34,8 @@ export interface PublishResult {
   url?: string;
   reason?: string;
   imageSource?: string;
+  confirmationConfigured?: boolean;
+  confirmationReason?: string;
 }
 
 export type PublishResultByLang = Partial<Record<Lang, PublishResult>>;
@@ -415,7 +419,46 @@ export async function publishOneLang(p: PublishOneLangParams): Promise<PublishRe
     console.error(`[eventPublisher] music_properties write threw (${lang}): ${(e as Error).message}`);
   }
 
-  return { ok: true, ebEventId: eventId, url: eventUrl, imageSource: poster?.source };
+  // 6. Conferma ordine localizzata. Viene configurata solo quando il corpo
+  // contiene uno o più link Xceed con il canale affiliato Nightlife Milan.
+  // Un errore qui non deve innescare la ripubblicazione di un evento già live
+  // (creerebbe un duplicato), ma resta esplicito nel risultato e nei log.
+  let confirmationConfigured: boolean | undefined;
+  let confirmationReason: string | undefined;
+  const affiliateUrls = extractXceedAffiliateUrls(description);
+  if (affiliateUrls.length > 0) {
+    if (!lang || lang.length !== 2) {
+      confirmationConfigured = false;
+      confirmationReason = `Unsupported confirmation locale: ${lang}`;
+    } else {
+      try {
+        const confirmation = await updateEventbriteConfirmation({
+          token,
+          eventId,
+          locale: lang as LocaleCode,
+          affiliateUrls,
+        });
+        confirmationConfigured = confirmation.ok;
+        confirmationReason = confirmation.reason;
+        if (!confirmation.ok) {
+          console.error(`[eventPublisher] confirmation settings failed (${lang}): HTTP ${confirmation.status} ${confirmation.reason || ''}`);
+        }
+      } catch (e) {
+        confirmationConfigured = false;
+        confirmationReason = (e as Error).message;
+        console.error(`[eventPublisher] confirmation settings threw (${lang}): ${confirmationReason}`);
+      }
+    }
+  }
+
+  return {
+    ok: true,
+    ebEventId: eventId,
+    url: eventUrl,
+    imageSource: poster?.source,
+    confirmationConfigured,
+    confirmationReason,
+  };
 }
 
 interface PublishBothLangsParams {
