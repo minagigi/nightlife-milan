@@ -36,8 +36,35 @@ interface CuratedSubmission {
   dedupePrechecked?: boolean;
 }
 
+interface ExistingCuratedEvent {
+  id: string;
+  url?: string;
+  name?: { text?: string };
+  description?: { html?: string };
+}
+
 function authHeaders(token: string): Record<string, string> {
   return { Authorization: `Bearer ${token}`, 'content-type': 'application/json' };
+}
+
+function isAuthorized(request: Request): boolean {
+  return Boolean(process.env.CRON_SECRET && request.headers.get('authorization') === `Bearer ${process.env.CRON_SECRET}`);
+}
+
+async function listExistingCuratedEvents(token: string): Promise<ExistingCuratedEvent[]> {
+  const base = `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=live&time_filter=current_future&order_by=start_asc&page_size=200`;
+  const events: ExistingCuratedEvent[] = [];
+  let continuation: string | undefined;
+  for (let page = 1; page <= 10; page += 1) {
+    const url = continuation ? `${base}&continuation=${encodeURIComponent(continuation)}` : base;
+    const response = await fetch(url, { headers: authHeaders(token) });
+    if (!response.ok) throw new Error(`Duplicate check failed: ${response.status}`);
+    const body = await response.json();
+    events.push(...(body.events || []));
+    continuation = body.pagination?.has_more_items ? body.pagination?.continuation : undefined;
+    if (!continuation) return events;
+  }
+  throw new Error('Duplicate check exceeded pagination guard');
 }
 
 function validateSubmission(body: CuratedSubmission): string | null {
@@ -64,21 +91,9 @@ function validateSubmission(body: CuratedSubmission): string | null {
 }
 
 async function findExistingByMarker(token: string, marker: string, title: string): Promise<{ id: string; url?: string } | null> {
-  const base = `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=live&time_filter=current_future&order_by=start_asc&page_size=200`;
-  let continuation: string | undefined;
-  for (let page = 1; page <= 10; page += 1) {
-    const url = continuation ? `${base}&continuation=${encodeURIComponent(continuation)}` : base;
-    const response = await fetch(url, { headers: authHeaders(token) });
-    if (!response.ok) throw new Error(`Duplicate check failed: ${response.status}`);
-    const body = await response.json();
-    const existing = (body.events || []).find((event: { name?: { text?: string }; description?: { html?: string } }) =>
-      event.description?.html?.includes(marker) || event.name?.text === title
-    );
-    if (existing) return existing;
-    continuation = body.pagination?.has_more_items ? body.pagination?.continuation : undefined;
-    if (!continuation) return null;
-  }
-  throw new Error('Duplicate check exceeded pagination guard');
+  return (await listExistingCuratedEvents(token)).find((event) =>
+    event.description?.html?.includes(marker) || event.name?.text === title
+  ) || null;
 }
 
 async function resolveCuratedVenue(token: string): Promise<string> {
@@ -139,9 +154,28 @@ async function uploadCover(token: string, body: CuratedSubmission): Promise<stri
   return media.id;
 }
 
+export async function GET(request: Request) {
+  if (!isAuthorized(request)) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  const token = getEventbriteToken();
+  if (!token) return NextResponse.json({ ok: false, error: 'EVENTBRITE_TOKEN not set' }, { status: 500 });
+  try {
+    const events = await listExistingCuratedEvents(token);
+    return NextResponse.json({
+      ok: true,
+      events: events.map((event) => ({
+        id: event.id,
+        url: event.url,
+        title: event.name?.text,
+        markers: [...(event.description?.html || '').matchAll(/nlm:curated=[a-z0-9-]+-(?:it|en|es|pt|fr|de)-\d{4}-\d{2}-\d{2}/g)].map((match) => match[0]),
+      })),
+    });
+  } catch (error) {
+    return NextResponse.json({ ok: false, error: error instanceof Error ? error.message : String(error) }, { status: 500 });
+  }
+}
+
 export async function POST(request: Request) {
-  const authHeader = request.headers.get('authorization');
-  if (!(process.env.CRON_SECRET && authHeader === `Bearer ${process.env.CRON_SECRET}`)) {
+  if (!isAuthorized(request)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 

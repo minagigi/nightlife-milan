@@ -4,13 +4,10 @@ import sharp from 'sharp';
 import { scoutXceedEvents, type XceedEvent, type XceedOffer } from '../lib/xceedScout';
 import { EVENT_LOCALE_PACKS_ALL } from '../lib/eventLocalePacks';
 import type { EventLocalePack, EventOfferKey } from '../lib/eventBatchLocaleTypes';
-import { getEventbriteToken } from '../lib/eventbriteToken';
 
 const PHONE = '+39 351 912 7047';
 const SITE_URL = 'https://nightlifemilan.com';
 const PUBLISH_URL = `${SITE_URL}/api/events/publish-curated`;
-const EVENTBRITE_API = 'https://www.eventbriteapi.com/v3';
-const EVENTBRITE_ORG_ID = '2988002072164';
 const PINETA_SCENE = 'https://cdn.evbuc.com/images/1188885890/2988002064108/1/original.20260715-005449';
 const AFFILIATE_RE = /^https:\/\/xceed\.me\/en\/milano\/event\/[^/]+\/(\d+)\/channel\/nightlifemilan-1$/;
 
@@ -472,26 +469,15 @@ async function publish(payload: Record<string, unknown>, secret: string): Promis
 interface ExistingCuratedEvent {
   id: string;
   url?: string;
-  name?: { text?: string };
-  description?: { html?: string };
+  title?: string;
+  markers?: string[];
 }
 
-async function fetchExistingCuratedEvents(token: string): Promise<ExistingCuratedEvent[]> {
-  const base = `${EVENTBRITE_API}/organizations/${EVENTBRITE_ORG_ID}/events/?status=live&time_filter=current_future&order_by=start_asc&page_size=200`;
-  const events: ExistingCuratedEvent[] = [];
-  let continuation: string | undefined;
-  let pages = 0;
-  do {
-    const url = continuation ? `${base}&continuation=${encodeURIComponent(continuation)}` : base;
-    const response = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
-    if (!response.ok) throw new Error(`Eventbrite preflight failed: ${response.status}`);
-    const body = await response.json();
-    events.push(...(body.events || []));
-    continuation = body.pagination?.has_more_items ? body.pagination?.continuation : undefined;
-    pages += 1;
-  } while (continuation && pages < 20);
-  if (continuation) throw new Error('Eventbrite preflight exceeded pagination guard');
-  return events;
+async function fetchExistingCuratedEvents(secret: string): Promise<ExistingCuratedEvent[]> {
+  const response = await fetch(PUBLISH_URL, { headers: { Authorization: `Bearer ${secret}` } });
+  const body = await response.json();
+  if (!response.ok || !body.ok) throw new Error(`Eventbrite preflight failed: ${response.status} ${body.error || ''}`.trim());
+  return body.events || [];
 }
 
 async function main(): Promise<void> {
@@ -506,18 +492,13 @@ async function main(): Promise<void> {
   const manifest: Array<Record<string, unknown>> = [];
   const selectedSeries = args.series || SERIES_IDS;
   const secret = args.execute ? process.env.CRON_SECRET : undefined;
-  const eventbriteToken = args.execute ? getEventbriteToken() : undefined;
   if (args.execute && !secret) throw new Error('CRON_SECRET is required for execution');
-  if (args.execute && !eventbriteToken) throw new Error('EVENTBRITE_TOKEN is required for execution');
-  const existingEvents = eventbriteToken ? await fetchExistingCuratedEvents(eventbriteToken) : [];
+  const existingEvents = secret ? await fetchExistingCuratedEvents(secret) : [];
   const existingMarkers = new Map<string, ExistingCuratedEvent>();
   const existingTitles = new Map<string, ExistingCuratedEvent>();
   for (const event of existingEvents) {
-    const html = event.description?.html || '';
-    for (const match of html.matchAll(/nlm:curated=[a-z0-9-]+-(?:it|en|es|pt|fr|de)-\d{4}-\d{2}-\d{2}/g)) {
-      existingMarkers.set(match[0], event);
-    }
-    if (event.name?.text) existingTitles.set(event.name.text, event);
+    for (const marker of event.markers || []) existingMarkers.set(marker, event);
+    if (event.title) existingTitles.set(event.title, event);
   }
   let prepared = 0;
 
