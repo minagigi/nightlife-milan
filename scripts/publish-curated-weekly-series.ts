@@ -492,8 +492,8 @@ async function fetchExistingCuratedEvents(secret: string): Promise<ExistingCurat
   return body.events || [];
 }
 
-async function recoverDraft(eventId: string, secret: string): Promise<Record<string, unknown>> {
-  return publish({ action: 'recover-draft', eventId }, secret);
+async function recoverDraft(eventId: string, locale: Locale, secret: string): Promise<Record<string, unknown>> {
+  return publish({ action: 'recover-draft', eventId, ticketName: UI[locale].ticketName, ticketDescription: UI[locale].ticketDescription }, secret);
 }
 
 async function main(): Promise<void> {
@@ -561,7 +561,7 @@ async function main(): Promise<void> {
             if (existing) {
               if (existing.status === 'draft') {
                 await pauseBeforePublishAction();
-                entry.result = await recoverDraft(existing.id, secret!);
+                entry.result = await recoverDraft(existing.id, locale, secret!);
                 publishActions += 1;
               }
               else if (args.updateExisting) entry.result = await publish({ ...payload, action: 'update-existing', eventId: existing.id }, secret!);

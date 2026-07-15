@@ -173,11 +173,29 @@ export async function POST(request: Request) {
   if (body.action === 'recover-draft') {
     if (!/^\d+$/.test(body.eventId || '')) return NextResponse.json({ ok: false, error: 'Invalid draft id' }, { status: 400 });
     try {
-      const inspect = await fetch(`${EVENTBRITE_API}/events/${body.eventId}/`, { headers: authHeaders(token) });
+      const inspect = await fetch(`${EVENTBRITE_API}/events/${body.eventId}/?expand=ticket_classes`, { headers: authHeaders(token) });
       if (!inspect.ok) throw new Error(`Draft lookup failed: ${inspect.status}`);
       const event = await inspect.json();
       if (event.status !== 'draft' || !/nlm:curated=/.test(event.description?.html || '')) {
         throw new Error('Event is not a recoverable curated draft');
+      }
+      if (!(event.ticket_classes || []).length) {
+        if (!body.ticketName || !body.ticketDescription) throw new Error('Ticket copy is required to recover this draft');
+        const ticket = await fetch(`${EVENTBRITE_API}/events/${body.eventId}/ticket_classes/`, {
+          method: 'POST',
+          headers: authHeaders(token),
+          body: JSON.stringify({ ticket_class: {
+            name: body.ticketName,
+            free: true,
+            quantity_total: 500,
+            minimum_quantity: 1,
+            maximum_quantity: 10,
+            hide_sale_dates: false,
+            sales_end: event.end?.utc,
+            description: body.ticketDescription,
+          } }),
+        });
+        if (!ticket.ok) throw new Error(`Draft ticket recovery failed: ${ticket.status} ${(await ticket.text()).slice(0, 200)}`);
       }
       let lastError = '';
       for (let attempt = 1; attempt <= 3; attempt += 1) {
