@@ -55,7 +55,7 @@ async function listExistingCuratedEvents(token: string): Promise<ExistingCurated
   const base = `${EVENTBRITE_API}/organizations/${ORG_ID}/events/?status=live&time_filter=current_future&order_by=start_asc&page_size=200`;
   const events: ExistingCuratedEvent[] = [];
   let continuation: string | undefined;
-  for (let page = 1; page <= 10; page += 1) {
+  for (let page = 1; page <= 30; page += 1) {
     const url = continuation ? `${base}&continuation=${encodeURIComponent(continuation)}` : base;
     const response = await fetch(url, { headers: authHeaders(token) });
     if (!response.ok) throw new Error(`Duplicate check failed: ${response.status}`);
