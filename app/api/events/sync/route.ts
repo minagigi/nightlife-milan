@@ -32,6 +32,13 @@ export async function GET(request: Request) {
       ? await submitSitemap(`${BASE}/`, `${BASE}/sitemap.xml`)
       : { ok: false, status: 0, error: 'Google credentials are not configured' };
 
+    if (!sitemap.ok) {
+      console.error('[events/sync] sitemap submission failed', {
+        status: sitemap.status,
+        error: sitemap.error,
+      });
+    }
+
     return NextResponse.json({
       ok: sitemap.ok,
       sitemapOnly: true,
