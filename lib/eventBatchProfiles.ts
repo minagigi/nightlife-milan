@@ -272,6 +272,22 @@ export function getEventBatchProfile(slug: string): EventBatchProfile | undefine
   return profilesBySlug.get(slug) || profilesBySlug.get(normalizeEventBatchSlug(slug));
 }
 
+/**
+ * Whether this exact localized event path has an event-scoped indexing override.
+ * The localized slug check prevents a complete event in one locale from widening
+ * the HTTP indexing policy for the same (or another) slug under a different locale.
+ */
+export function isEventBatchLocaleHttpIndexable(locale: string, requestedSlug: string): boolean {
+  if (!enabledLocaleCodes.includes(locale as LocaleCode)) return false;
+
+  const normalizedSlug = normalizeEventBatchSlug(requestedSlug);
+  const profile = getEventBatchProfile(normalizedSlug);
+  const localeCode = locale as LocaleCode;
+
+  return profile?.indexedLocales?.includes(localeCode) === true
+    && getEventBatchSlug(profile, localeCode) === normalizedSlug;
+}
+
 export function getEventBatchProfileByBase(baseId: string): EventBatchProfile | undefined {
   return profilesByBase.get(baseId);
 }

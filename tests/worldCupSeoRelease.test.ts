@@ -3,7 +3,11 @@ import { access, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import test from 'node:test';
 import sharp from 'sharp';
-import { getEventBatchProfile, getEventBatchSlug } from '../lib/eventBatchProfiles';
+import {
+  getEventBatchProfile,
+  getEventBatchSlug,
+  isEventBatchLocaleHttpIndexable,
+} from '../lib/eventBatchProfiles';
 import { getEventVisualGallery } from '../lib/eventVisualGallery';
 import { enabledLocaleCodes, indexedLocaleCodes, localePrefix } from '../lib/i18n/locales';
 import { getLocalizedEventContent, getLocalizedEventSeed } from '../lib/localizedEventContent';
@@ -52,6 +56,23 @@ test('all complete World Cup locales enter search surfaces without widening glob
   );
   assert.equal(indexedUrls.length, 35);
   assert.equal(new Set(indexedUrls).size, 35);
+});
+
+test('World Cup event-scoped HTTP indexability requires the exact localized event path', async () => {
+  const middleware = await readFile(path.join(process.cwd(), 'middleware.ts'), 'utf8');
+  const profile = getEventBatchProfile(WORLD_CUP_FINAL_CANONICAL_SLUG)!;
+
+  for (const locale of enabledLocaleCodes) {
+    assert.equal(isEventBatchLocaleHttpIndexable(locale, getEventBatchSlug(profile, locale)), true);
+  }
+
+  assert.equal(isEventBatchLocaleHttpIndexable('nl', 'flower-power-ibiza-justme-12-06-2026'), false);
+  assert.equal(isEventBatchLocaleHttpIndexable('nl', getEventBatchSlug(profile, 'it')), false);
+  assert.equal(isEventBatchLocaleHttpIndexable('invalid', getEventBatchSlug(profile, 'nl')), false);
+  assert.match(middleware, /isEventBatchLocaleHttpIndexable/);
+  assert.match(middleware, /localizedEventPageRe/);
+  assert.equal(enabledLocaleCodes.length, 35);
+  assert.deepEqual(indexedLocaleCodes, ['en', 'it', 'es', 'fr', 'de', 'pt']);
 });
 
 test('event prerendering and ticket Offer integrity are preserved', async () => {
