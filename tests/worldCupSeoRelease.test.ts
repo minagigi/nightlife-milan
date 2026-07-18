@@ -110,3 +110,27 @@ test('favicon assets and canonical host redirect are release-gated', async () =>
   assert.match(nextConfig, /destination: 'https:\/\/nightlifemilan\.com\/:path\*'/);
   assert.match(nextConfig, /permanent: true/);
 });
+
+test('the HTTPS sitemap is submitted through the protected daily cron at 18:00 UTC', async () => {
+  const vercelConfig = JSON.parse(await readFile(path.join(process.cwd(), 'vercel.json'), 'utf8')) as {
+    crons?: Array<{ path: string; schedule: string }>;
+  };
+  const syncRoute = await readFile(
+    path.join(process.cwd(), 'app', 'api', 'events', 'sync', 'route.ts'),
+    'utf8',
+  );
+  const sitemapCrons = (vercelConfig.crons || []).filter(
+    (cron) => cron.path === '/api/events/sync?sitemapOnly=1',
+  );
+
+  assert.deepEqual(sitemapCrons, [
+    {
+      path: '/api/events/sync?sitemapOnly=1',
+      schedule: '0 18 * * *',
+    },
+  ]);
+  assert.match(syncRoute, /searchParams\.get\('sitemapOnly'\) === '1'/);
+  assert.equal((syncRoute.match(/await submitSitemap\(/g) || []).length, 1);
+  assert.doesNotMatch(syncRoute, /notifyUrls/);
+  assert.match(syncRoute, /searchNotifications: 'disabled_for_ordinary_pages'/);
+});
