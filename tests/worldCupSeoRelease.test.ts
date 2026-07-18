@@ -131,6 +131,8 @@ test('the HTTPS sitemap is submitted through the protected daily cron at 18:00 U
   ]);
   assert.match(syncRoute, /searchParams\.get\('sitemapOnly'\) === '1'/);
   assert.equal((syncRoute.match(/await submitSitemap\(/g) || []).length, 1);
+  assert.match(syncRoute, /`sc-domain:\$\{new URL\(BASE\)\.hostname\.replace/);
+  assert.match(syncRoute, /submitSitemap\(SEARCH_CONSOLE_SITE_URL/);
   assert.doesNotMatch(syncRoute, /notifyUrls/);
   assert.match(syncRoute, /searchNotifications: 'disabled_for_ordinary_pages'/);
 });

@@ -6,6 +6,8 @@ export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
 
 const BASE = process.env.APP_URL || 'https://nightlifemilan.com';
+const SEARCH_CONSOLE_SITE_URL = process.env.SEARCH_CONSOLE_SITE_URL
+  || `sc-domain:${new URL(BASE).hostname.replace(/^www\./, '')}`;
 /**
  * The 08:00 UTC cron refreshes Eventbrite data only. The dedicated 18:00 UTC
  * cron calls this route with sitemapOnly=1 and submits the HTTPS sitemap once.
@@ -29,7 +31,7 @@ export async function GET(request: Request) {
   if (searchParams.get('sitemapOnly') === '1') {
     const indexingConfigured = Boolean(process.env.GOOGLE_INDEXING_CREDENTIALS);
     const sitemap = indexingConfigured
-      ? await submitSitemap(`${BASE}/`, `${BASE}/sitemap.xml`)
+      ? await submitSitemap(SEARCH_CONSOLE_SITE_URL, `${BASE}/sitemap.xml`)
       : { ok: false, status: 0, error: 'Google credentials are not configured' };
 
     if (!sitemap.ok) {
