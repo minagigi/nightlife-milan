@@ -33,20 +33,25 @@ test('World Cup pages resolve natively in all enabled locales', () => {
   }
 });
 
-test('only globally indexable World Cup locales enter search surfaces', async () => {
+test('all complete World Cup locales enter search surfaces without widening global indexing', async () => {
   const page = await readFile(path.join(process.cwd(), 'app', '[locale]', 'events', '[slug]', 'page.tsx'), 'utf8');
   const sitemap = await readFile(path.join(process.cwd(), 'app', 'sitemap.ts'), 'utf8');
   assert.match(page, /indexedSiteLocales/);
+  assert.match(page, /eventProfile\?\.indexedLocales/);
   assert.match(page, /generateEventSchema/);
   assert.match(page, /'@type': 'FAQPage'/);
   assert.match(sitemap, /SITE_ONLY_EVENT_PROFILES/);
+  assert.match(sitemap, /profile\.indexedLocales/);
 
   const profile = getEventBatchProfile(WORLD_CUP_FINAL_CANONICAL_SLUG)!;
-  const indexedUrls = indexedLocaleCodes.map(
+  assert.deepEqual(profile.indexedLocales, enabledLocaleCodes);
+  assert.deepEqual(indexedLocaleCodes, ['en', 'it', 'es', 'fr', 'de', 'pt']);
+  assert.equal(enabledLocaleCodes.length, 35);
+  const indexedUrls = profile.indexedLocales!.map(
     (locale) => `${localePrefix(locale)}/events/${getEventBatchSlug(profile, locale)}`,
   );
-  assert.equal(indexedUrls.length, 6);
-  assert.equal(new Set(indexedUrls).size, indexedUrls.length);
+  assert.equal(indexedUrls.length, 35);
+  assert.equal(new Set(indexedUrls).size, 35);
 });
 
 test('event prerendering and ticket Offer integrity are preserved', async () => {

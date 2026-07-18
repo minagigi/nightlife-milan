@@ -228,6 +228,7 @@ export const SITE_ONLY_EVENT_PROFILES: readonly EventBatchProfile[] = [
     canonicalSlug: WORLD_CUP_FINAL_CANONICAL_SLUG,
     localizedSlugs: Object.fromEntries(enabledLocaleCodes.map((locale) => [locale, WORLD_CUP_FINAL_LOCALE_COPIES[locale].slug])),
     siteLocales: enabledLocaleCodes,
+    indexedLocales: enabledLocaleCodes,
     eventName: {
       en: 'World Cup Final on the Big Screen',
       it: 'Finale Coppa del Mondo su maxischermo',
