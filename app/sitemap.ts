@@ -6,6 +6,7 @@ import { dedupeEventsByIdentity } from '@/lib/calendarEvents';
 import { indexedLocaleCodes, localePrefix } from '@/lib/i18n/locales';
 import { getLocalizedText } from '@/lib/seo';
 import type { Event } from '@/lib/types';
+import { EVENT_BATCH_PROFILES, getEventBatchSlug, SITE_ONLY_EVENT_PROFILES } from '@/lib/eventBatchProfiles';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
@@ -112,6 +113,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       sitemapEntries.push({
         url: `${baseUrl}${langPrefix}/events/${slug}`,
         lastModified: new Date(event.dateISO),
+        changeFrequency: 'daily',
+        priority: 0.9,
+      });
+    });
+  });
+
+  // Eventi editoriali pubblicati solo nelle lingue con contenuto nativo completo.
+  const editorialEventProfiles = [
+    ...SITE_ONLY_EVENT_PROFILES,
+    ...EVENT_BATCH_PROFILES.filter((profile) => profile.indexedLocales && profile.indexedLocales.length > 0),
+  ];
+  editorialEventProfiles.forEach((profile) => {
+    const indexedSiteLocales = profile.indexedLocales
+      || (profile.siteLocales || []).filter((siteLocale) => indexedLocaleCodes.includes(siteLocale));
+    indexedSiteLocales.forEach((siteLocale) => {
+      sitemapEntries.push({
+        url: `${baseUrl}${localePrefix(siteLocale)}/events/${getEventBatchSlug(profile, siteLocale)}`,
+        lastModified: new Date(`${profile.dateISO}T00:00:00+02:00`),
         changeFrequency: 'daily',
         priority: 0.9,
       });

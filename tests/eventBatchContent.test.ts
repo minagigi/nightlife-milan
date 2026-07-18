@@ -21,8 +21,8 @@ test('event batch contains exactly eleven unique physical-event profiles', () =>
   assert.equal(new Set(EVENT_BATCH_PROFILES.map((profile) => profile.baseId)).size, 11);
   assert.equal(new Set(EVENT_BATCH_PROFILES.map((profile) => profile.canonicalSlug)).size, 11);
   for (const profile of EVENT_BATCH_PROFILES) {
-    assert.match(profile.eventbriteIds.en, /^\d+$/);
-    assert.match(profile.eventbriteIds.it, /^\d+$/);
+    assert.match(profile.eventbriteIds!.en, /^\d+$/);
+    assert.match(profile.eventbriteIds!.it, /^\d+$/);
     assert.match(profile.posterUrl, /^https:\/\//);
     assert.match(profile.affiliateUrl, /^https:\/\//);
     assert.equal(profile.venueImages.length, 4);

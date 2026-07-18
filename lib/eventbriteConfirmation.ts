@@ -11,6 +11,12 @@ interface ConfirmationCopy {
   afterPurchase: string;
 }
 
+export interface EventbriteConfirmationPlainText {
+  notTicket: string;
+  purchase: string;
+  afterPurchase: string;
+}
+
 const CONFIRMATION_COPY: Record<LocaleCode, ConfirmationCopy> = {
   en: {
     notTicket: 'This Eventbrite registration is an information request only. It is not an admission ticket and does not grant entry.',
@@ -188,6 +194,19 @@ const CONFIRMATION_COPY: Record<LocaleCode, ConfirmationCopy> = {
     afterPurchase: 'По купувањето, испратете ја потврдата од Xceed преку WhatsApp на {phone}, со име, настан и број на лица.',
   },
 };
+
+export function getEventbriteConfirmationPlainText(
+  locale: LocaleCode,
+  phone = CONTACT.whatsapp.number,
+): EventbriteConfirmationPlainText {
+  const copy = CONFIRMATION_COPY[locale];
+  if (!copy) throw new Error(`Missing Eventbrite confirmation copy for ${locale}`);
+  return {
+    notTicket: copy.notTicket,
+    purchase: copy.purchase,
+    afterPurchase: copy.afterPurchase.replace('{phone}', phone),
+  };
+}
 
 function escapeHtml(value: string): string {
   return value

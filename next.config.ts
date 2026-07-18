@@ -34,6 +34,12 @@ const nextConfig: NextConfig = {
 
     return [
       {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.nightlifemilan.com' }],
+        destination: 'https://nightlifemilan.com/:path*',
+        permanent: true,
+      },
+      {
         source: '/calendar/this-week',
         destination: '/events/this-week',
         permanent: true,

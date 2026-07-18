@@ -45,10 +45,28 @@ export default function GoldEventContent({ locale, data, localized, gallery }: G
   const tables = offers.filter((offer) => offer.category === 'table');
   const tickets = offers.filter((offer) => offer.category === 'ticket');
   const guestlists = offers.filter((offer) => offer.category === 'guestlist');
+  const programmeSection = programme.length > 0 ? (
+    <section className="mb-12" data-event-section="programme">
+      <h2 className="text-2xl font-serif font-bold text-champagne mb-4">
+        <span aria-hidden="true">🗓️ </span>
+        {eventText(locale, 'Evening Programme', 'Programma della Serata', 'Programa da noite')}
+      </h2>
+      <div className="space-y-2">
+        {programme.map((slot, index) => (
+          <div key={`${slot.start}-${index}`} className="flex gap-4 text-sm border-b border-white/8 py-2">
+            <span className="text-champagne font-mono whitespace-nowrap">
+              {slot.start}{slot.end ? `–${slot.end}` : ''}
+            </span>
+            <span className="text-white/60">{slot.title}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+  ) : null;
 
   return (
     <div className="mt-4" data-event-content="standard">
-      <div className="not-prose flex flex-col sm:flex-row gap-3 mb-10">
+      {!localized?.bookingIntro && <div className="not-prose flex flex-col sm:flex-row gap-3 mb-10">
         <a
           href={affiliateUrl}
           target="_blank"
@@ -69,7 +87,9 @@ export default function GoldEventContent({ locale, data, localized, gallery }: G
           <Wine size={18} aria-hidden="true" />
           {eventText(locale, 'Book a Table', 'Prenota Tavolo', 'Reservar mesa')}
         </a>
-      </div>
+      </div>}
+
+      {localized?.programmeBeforeSections ? programmeSection : null}
 
       {sections.map((section, index) => (
         <section key={`${section.title}-${index}`} className="mb-8" data-event-section="description">
@@ -81,24 +101,7 @@ export default function GoldEventContent({ locale, data, localized, gallery }: G
         </section>
       ))}
 
-      {programme.length > 0 && (
-        <section className="mb-12" data-event-section="programme">
-          <h2 className="text-2xl font-serif font-bold text-champagne mb-4">
-            <span aria-hidden="true">🗓️ </span>
-            {eventText(locale, 'Evening Programme', 'Programma della Serata', 'Programa da noite')}
-          </h2>
-          <div className="space-y-2">
-            {programme.map((slot, index) => (
-              <div key={`${slot.start}-${index}`} className="flex gap-4 text-sm border-b border-white/8 py-2">
-                <span className="text-champagne font-mono whitespace-nowrap">
-                  {slot.start}{slot.end ? `–${slot.end}` : ''}
-                </span>
-                <span className="text-white/60">{slot.title}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
+      {!localized?.programmeBeforeSections ? programmeSection : null}
 
       {gallery ? <EventImageGallery gallery={gallery} locale={locale} /> : null}
 

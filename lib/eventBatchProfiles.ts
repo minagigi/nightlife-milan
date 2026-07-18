@@ -3,6 +3,12 @@ import type {
   EventOfferKey,
   EventProgrammeKey,
 } from './eventBatchLocaleTypes';
+import { enabledLocaleCodes, type LocaleCode } from './i18n/locales';
+import {
+  WORLD_CUP_FINAL_AFFILIATE_URL,
+  WORLD_CUP_FINAL_CANONICAL_SLUG,
+} from './worldCupFinalIt';
+import { WORLD_CUP_FINAL_LOCALE_COPIES } from './worldCupFinalLocaleCopies';
 
 export interface EventBatchOfferProfile {
   key: EventOfferKey;
@@ -18,9 +24,15 @@ export interface EventBatchProgrammeProfile {
 
 export interface EventBatchProfile {
   baseId: string;
-  eventbriteIds: { en: string; it: string };
+  /** Required for the multilingual Eventbrite batch; omitted for website-only editorial profiles. */
+  eventbriteIds?: { en: string; it: string };
   canonicalSlug: string;
-  eventName: { en: string; it: string };
+  localizedSlugs?: Partial<Record<LocaleCode, string>>;
+  /** When present, this editorial event exists on the website only in these native locales. */
+  siteLocales?: readonly LocaleCode[];
+  /** Event-specific native locales allowed into hreflang, robots index and sitemap. */
+  indexedLocales?: readonly LocaleCode[];
+  eventName: { en: string; it: string } & Partial<Record<LocaleCode, string>>;
   venue: string;
   area: { en: string; it: string };
   dateISO: string;
@@ -208,13 +220,55 @@ export const EVENT_BATCH_PROFILES: readonly EventBatchProfile[] = [
     posterUrl: 'https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1188754235%2F2988002064108%2F1%2Foriginal.20260713-145438?auto=format%2Ccompress&q=75&sharp=10&s=c97267923bf1b1e8a9b35cde9576de94',
     programme: [{ key: 'aperitifDinner', start: '19:30', end: '23:00' }, { key: 'clubMixed', start: '23:00', end: '05:00' }], offers: justMeOffers(15), specialGuests: { en: ['Special guests'], it: ['Ospiti speciali'] }, venueImages: JUST_ME_IMAGES,
   },
+];
+
+export const SITE_ONLY_EVENT_PROFILES: readonly EventBatchProfile[] = [
+  {
+    baseId: 'nlm-world-cup-final-2026',
+    canonicalSlug: WORLD_CUP_FINAL_CANONICAL_SLUG,
+    localizedSlugs: Object.fromEntries(enabledLocaleCodes.map((locale) => [locale, WORLD_CUP_FINAL_LOCALE_COPIES[locale].slug])),
+    siteLocales: enabledLocaleCodes,
+    eventName: {
+      en: 'World Cup Final on the Big Screen',
+      it: 'Finale Coppa del Mondo su maxischermo',
+      ...Object.fromEntries(enabledLocaleCodes.map((locale) => [locale, WORLD_CUP_FINAL_LOCALE_COPIES[locale].eventName])),
+    },
+    venue: 'Just Me Milano', area: { en: 'Sempione, Milan', it: 'Sempione, Milano' }, dateISO: '2026-07-19', dates: { en: 'Sunday, July 19, 2026', it: 'Domenica 19 luglio 2026' },
+    start: '19:30', end: '05:00', minAge: 21, dressCode: { en: 'Elegant dress; long trousers for men.', it: 'Abbigliamento elegante; pantaloni lunghi per gli uomini.' }, kind: 'match',
+    genres: { en: 'World Cup final screening, house, hip-hop, hits, EDM and reggaeton', it: 'Finale Coppa del Mondo, house, hip-hop, hit, EDM e reggaeton' }, affiliateUrl: WORLD_CUP_FINAL_AFFILIATE_URL,
+    posterUrl: 'https://nightlifemilan.com/images/events/generated/just-me-world-cup-final-cover-2x1-en-v1.jpg',
+    programme: [{ key: 'aperitif', start: '19:30', end: '20:45' }, { key: 'matchAndDj', start: '21:00', end: '23:00' }, { key: 'clubMixed', start: '23:00', end: '05:00' }], offers: justMeOffers(15), specialGuests: { en: [], it: [] }, venueImages: JUST_ME_IMAGES,
+  },
 ] as const;
 
-const profilesBySlug = new Map(EVENT_BATCH_PROFILES.map((profile) => [profile.canonicalSlug, profile]));
-const profilesByBase = new Map(EVENT_BATCH_PROFILES.map((profile) => [profile.baseId, profile]));
+const ALL_EVENT_PROFILES: readonly EventBatchProfile[] = [
+  ...EVENT_BATCH_PROFILES,
+  ...SITE_ONLY_EVENT_PROFILES,
+];
+
+const profilesBySlug = new Map<string, EventBatchProfile>();
+for (const profile of ALL_EVENT_PROFILES) {
+  profilesBySlug.set(profile.canonicalSlug, profile);
+  Object.values(profile.localizedSlugs || {}).forEach((slug) => {
+    if (slug) profilesBySlug.set(slug, profile);
+  });
+}
+const profilesByBase = new Map(ALL_EVENT_PROFILES.map((profile) => [profile.baseId, profile]));
+
+export function getEventBatchSlug(profile: EventBatchProfile, locale: LocaleCode): string {
+  return profile.localizedSlugs?.[locale] || profile.canonicalSlug;
+}
+
+export function normalizeEventBatchSlug(slug: string): string {
+  try {
+    return decodeURIComponent(slug);
+  } catch {
+    return slug;
+  }
+}
 
 export function getEventBatchProfile(slug: string): EventBatchProfile | undefined {
-  return profilesBySlug.get(slug);
+  return profilesBySlug.get(slug) || profilesBySlug.get(normalizeEventBatchSlug(slug));
 }
 
 export function getEventBatchProfileByBase(baseId: string): EventBatchProfile | undefined {

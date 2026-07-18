@@ -74,7 +74,7 @@ export default async function ThisWeekPage({ params }: Props) {
   const lp = localePrefix(locale);
   const eventSchemas = items.map(({ event, venue }) => {
     const bookingUrl = `https://wa.me/393519127047?text=${encodeURIComponent('Hi! I want to book for an upcoming event in Milan.')}`;
-    const offer = buildOfferSchema(event.pricing, bookingUrl, event.dateISO);
+    const offer = buildOfferSchema(event.pricing, bookingUrl);
     return {
       '@context': 'https://schema.org',
       '@type': 'Event',

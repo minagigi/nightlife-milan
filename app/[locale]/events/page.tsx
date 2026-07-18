@@ -99,7 +99,7 @@ export default async function EventsHubPage({ params }: Props) {
     numberOfItems: items.length,
     itemListElement: items.slice(0, 10).map((item, i) => {
       const eventUrl = `${baseUrl}${lp}/events/${getLocalizedText(item.event.localizedContent.slug, locale)}`;
-      const offer = buildOfferSchema(item.event.pricing, eventUrl, item.event.dateISO);
+      const offer = buildOfferSchema(item.event.pricing, eventUrl);
       return {
         '@type': 'ListItem',
         position: i + 1,

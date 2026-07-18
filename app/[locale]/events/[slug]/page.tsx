@@ -1,6 +1,6 @@
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import { tr } from '@/lib/i18n/t';
-import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { getLocaleDef, hreflangAlternates, indexedLocaleCodes, localePrefix, type LocaleCode } from '@/lib/i18n/locales';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -23,10 +23,16 @@ import MoreVenueEvents, { MoreVenueEventItem } from '@/components/MoreVenueEvent
 import EventsCarousel from '@/components/EventsCarousel';
 import { getEventVisualGallery } from '@/lib/eventVisualGallery';
 import { getLocalizedEventContent, getLocalizedEventSeed } from '@/lib/localizedEventContent';
-import { getEventBatchProfile } from '@/lib/eventBatchProfiles';
+import {
+  getEventBatchProfile,
+  getEventBatchSlug,
+  normalizeEventBatchSlug,
+  SITE_ONLY_EVENT_PROFILES,
+} from '@/lib/eventBatchProfiles';
 import { getBatchEventTemplateValues } from '@/lib/eventBatchContent';
 import { getEventLocalePack } from '@/lib/eventLocalePacks';
-import { buildEventSeoDescription, buildEventSeoTitle } from '@/lib/seoMetadata';
+import { buildEventSeoDescription, buildEventSeoTitle, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { CONTACT } from '@/config/contact';
 import {
   buildEventQuickAnswer,
   buildThisWeekAtHeading,
@@ -113,6 +119,9 @@ function buildVenueGalleryImages(venue: Venue, eventTitle: string, locale: strin
 // NON a ogni visita (force-dynamic rendeva ogni richiesta lentissima/timeout).
 // revalidate breve + maxDuration alto per la prima generazione on-demand.
 export const revalidate = 600;
+// Eventbrite pages are generated on demand and then retained through ISR.
+// Excluding their slugs from the build path list avoids repeated organizer scans.
+export const dynamicParams = true;
 // Vercel Pro (2026-07-11): 300s. La prima generazione on-demand di un evento SENZA
 // gold nel Blob fa il fallback getEventGoldHtml (fetch ~260 listing org): con 60s
 // (Hobby) andava in timeout → gold assente; con 300s completa e poi resta in ISR.
@@ -130,7 +139,7 @@ export async function generateStaticParams() {
     paths.push({ locale: 'en', slug: event.localizedContent.slug.en });
     paths.push({
       locale: 'it',
-      slug: event.localizedContent.slug.it || event.localizedContent.slug.en
+      slug: event.localizedContent.slug.it || event.localizedContent.slug.en,
     });
   });
 
@@ -140,33 +149,47 @@ export async function generateStaticParams() {
     paths.push({ locale: 'it', slug });
   });
 
-  // Pre-generate pages for live Eventbrite events at build time.
-  // New events added after the last build are served on-demand via ISR.
-  // Include ANCHE i passati recenti (percorso veloce ended,completed): così le
-  // pagine degli eventi appena trascorsi sono già renderizzate/cacheate e non
-  // dipendono dal fetch on-demand lento (che andava in timeout → link rotti).
+  SITE_ONLY_EVENT_PROFILES.forEach((profile) => {
+    (profile.siteLocales || []).forEach((locale) => {
+      paths.push({ locale, slug: getEventBatchSlug(profile, locale) });
+    });
+  });
+
+  // Preserve the existing production behavior: known Eventbrite pages are
+  // prerendered, while listings created after the build remain available via ISR.
   try {
     const [future, recentPast] = await Promise.all([
       fetchEventbriteEvents(),
       fetchEventbriteEvents(true, 30).catch(() => [] as Awaited<ReturnType<typeof fetchEventbriteEvents>>),
     ]);
-    [...future, ...recentPast].forEach((ev) => {
-      if (ev.localizedContent.slug.en)
-        paths.push({ locale: 'en', slug: ev.localizedContent.slug.en });
-      const itSlug = ev.localizedContent.slug.it || ev.localizedContent.slug.en;
-      if (itSlug)
-        paths.push({ locale: 'it', slug: itSlug });
+    [...future, ...recentPast].forEach((event) => {
+      if (event.localizedContent.slug.en) {
+        paths.push({ locale: 'en', slug: event.localizedContent.slug.en });
+      }
+      const itSlug = event.localizedContent.slug.it || event.localizedContent.slug.en;
+      if (itSlug) paths.push({ locale: 'it', slug: itSlug });
     });
   } catch {
-    // Eventbrite unreachable at build time — new events served on-demand
+    // Eventbrite unreachable at build time: dynamicParams keeps pages available.
   }
 
-  return paths;
+  return Array.from(
+    new Map(paths.map((path) => [`${path.locale}:${path.slug}`, path])).values(),
+  );
 }
 
 // Generate Dynamic SEO Metadata
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
+  const requestedProfile = getEventBatchProfile(slug);
+  if (requestedProfile?.siteLocales && !requestedProfile.siteLocales.some((siteLocale) => siteLocale === locale)) {
+    const targetLocale = requestedProfile.siteLocales[0];
+    permanentRedirect(`${localePrefix(targetLocale)}/events/${getEventBatchSlug(requestedProfile, targetLocale)}`);
+  }
+  if (requestedProfile?.siteLocales?.includes(locale as LocaleCode)) {
+    const canonicalSlug = getEventBatchSlug(requestedProfile, locale as LocaleCode);
+    if (normalizeEventBatchSlug(slug) !== canonicalSlug) permanentRedirect(`${localePrefix(locale)}/events/${canonicalSlug}`);
+  }
   
   const weeklyEvent = getWeeklyEventBySlug(slug);
   if (weeklyEvent) {
@@ -224,40 +247,81 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const localizedContent = getLocalizedEventContent(event.localizedContent.slug.en, locale);
   const localizedTitle = localizedContent?.title || getLocalizedText(event.localizedContent.title, locale);
   const venueName = getLocalizedText(venue.localizedContent.name, locale);
-  const title = buildEventSeoTitle({ locale, eventName: localizedTitle, venueName, dateISO: event.dateISO });
-  const description = buildEventSeoDescription({
-    locale,
-    venueName,
-    dateISO: event.dateISO,
-    summary: localizedContent?.seoSummary || getLocalizedText(event.localizedContent.shortDescription, locale),
-  });
+  const title = localizedContent?.metaTitle
+    ? seoTitle(localizedContent.metaTitle)
+    : buildEventSeoTitle({ locale, eventName: localizedTitle, venueName, dateISO: event.dateISO });
+  const description = localizedContent?.metaDescription
+    ? withWhatsApp(localizedContent.metaDescription, locale)
+    : buildEventSeoDescription({
+        locale,
+        venueName,
+        dateISO: event.dateISO,
+        summary: localizedContent?.seoSummary || getLocalizedText(event.localizedContent.shortDescription, locale),
+      });
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   
   // Generate Canonical and Hreflang URLs
   const enSlug = event.localizedContent.slug.en;
   const itSlug = event.localizedContent.slug.it || enSlug;
+  const eventProfile = getEventBatchProfile(enSlug);
   const visualGallery = getEventVisualGallery(enSlug, locale);
-  const image = visualGallery?.images[0]?.src || event.image || venue.image || '';
+  const socialImage = visualGallery?.hero || visualGallery?.images[0];
+  const image = socialImage?.src || event.image || venue.image || '';
   const absoluteImage = image.startsWith('http') ? image : `${baseUrl}${image}`;
   
-  const currentSlug = locale === 'it' ? itSlug : enSlug;
+  const currentSlug = eventProfile && eventProfile.siteLocales?.includes(locale as LocaleCode)
+    ? getEventBatchSlug(eventProfile, locale as LocaleCode)
+    : locale === 'it' ? itSlug : enSlug;
   const path = `${localePrefix(locale)}/events/${currentSlug}`;
   const canonical = `${baseUrl}${path}`;
+  const indexedSiteLocales = eventProfile?.indexedLocales
+    || eventProfile?.siteLocales?.filter((siteLocale) => indexedLocaleCodes.includes(siteLocale));
+  const languages = eventProfile?.siteLocales?.length
+    ? Object.fromEntries([
+        ...(indexedSiteLocales || []).map((siteLocale) => [
+          getLocaleDef(siteLocale)?.hreflang || siteLocale,
+          `${baseUrl}${localePrefix(siteLocale)}/events/${getEventBatchSlug(eventProfile, siteLocale)}`,
+        ] as const),
+        [
+          'x-default',
+          `${baseUrl}${localePrefix(eventProfile.siteLocales[0])}/events/${getEventBatchSlug(eventProfile, eventProfile.siteLocales[0])}`,
+        ] as const,
+      ])
+    : { ...hreflangAlternates(baseUrl, `/events/${enSlug}`), it: `${baseUrl}/it/events/${itSlug}` };
+  const socialImageDimensions = socialImage?.src.includes('just-me-world-cup-final-cover-2x1-')
+    || socialImage?.src.includes('gue-just-me-2026-07-25-cover-2x1-')
+    ? { width: 2000, height: 1000 }
+    : socialImage?.src.includes('just-me-finale-coppa-mondo-cover-2x1-it-v4.jpg')
+      ? { width: 2752, height: 1376 }
+      : socialImage?.aspect === 'landscape'
+    ? { width: 2160, height: 1080 }
+    : socialImage?.aspect === 'five-four'
+      ? { width: 1600, height: 1280 }
+      : socialImage?.aspect === 'portrait'
+        ? { width: 900, height: 1600 }
+        : { width: 1600, height: 1600 };
 
   return {
     title,
     description,
     alternates: {
       canonical,
-      languages: { ...hreflangAlternates(baseUrl, `/events/${enSlug}`), it: `${baseUrl}/it/events/${itSlug}` },
+      languages,
     },
-    robots: getLocaleDef(locale)?.indexed === false ? { index: false, follow: true } : { index: true, follow: true },
+    robots: eventProfile?.indexedLocales?.includes(locale as LocaleCode) || getLocaleDef(locale)?.indexed !== false
+      ? { index: true, follow: true }
+      : { index: false, follow: true },
     openGraph: {
       title,
       description,
       url: canonical,
-      images: [{ url: absoluteImage, width: visualGallery ? 1080 : 1200, height: visualGallery ? 1080 : 630, alt: visualGallery?.images[0]?.alt || title }],
+      images: [{
+        url: absoluteImage,
+        width: visualGallery ? socialImageDimensions.width : 1200,
+        height: visualGallery ? socialImageDimensions.height : 630,
+        alt: socialImage?.alt || title,
+      }],
       type: 'website',
       siteName: 'Nightlife Milan',
       locale: getLocaleDef(locale)?.ogLocale || 'en_US',
@@ -274,6 +338,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function EventPage({ params }: Props) {
   const { locale, slug } = await params;
+  const requestedProfile = getEventBatchProfile(slug);
+  if (requestedProfile?.siteLocales && !requestedProfile.siteLocales.some((siteLocale) => siteLocale === locale)) {
+    const targetLocale = requestedProfile.siteLocales[0];
+    permanentRedirect(`${localePrefix(targetLocale)}/events/${getEventBatchSlug(requestedProfile, targetLocale)}`);
+  }
+  if (requestedProfile?.siteLocales?.includes(locale as LocaleCode)) {
+    const canonicalSlug = getEventBatchSlug(requestedProfile, locale as LocaleCode);
+    if (normalizeEventBatchSlug(slug) !== canonicalSlug) permanentRedirect(`${localePrefix(locale)}/events/${canonicalSlug}`);
+  }
   
   const weeklyEvent = getWeeklyEventBySlug(slug);
   if (weeklyEvent) {
@@ -583,10 +656,15 @@ export default async function EventPage({ params }: Props) {
   const eventBatchValues = eventBatchProfile && eventLocalePack
     ? getBatchEventTemplateValues(eventBatchProfile, eventLocalePack.locale, eventLocalePack)
     : null;
-  const eventHeroImage = eventVisualGallery?.images[0]?.src || event.image || venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp';
+  const leadPoster = localizedEventContent?.leadPosterAfterBooking ? eventVisualGallery?.images[0] : undefined;
+  const bodyVisualGallery = leadPoster && eventVisualGallery
+    ? { ...eventVisualGallery, images: eventVisualGallery.images.slice(1) }
+    : eventVisualGallery;
+  const eventHeroImage = eventVisualGallery?.hero?.src || eventVisualGallery?.images[0]?.src || event.image || venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp';
   const title = localizedEventContent?.title || getLocalizedText(event.localizedContent.title, locale);
   const venueName = getLocalizedText(venue.localizedContent.name, locale);
   const description = localizedEventContent?.seoSummary || getLocalizedText(event.localizedContent.shortDescription, locale);
+  const eventIntroduction = localizedEventContent?.answerFirst || description;
   const eventForSchema: Event = localizedEventContent || eventVisualGallery
     ? {
         ...event,
@@ -601,6 +679,12 @@ export default async function EventPage({ params }: Props) {
 
   // Generate JSON-LD Schemas
   const eventSchema = generateEventSchema(eventForSchema, venue, performer || null, locale);
+  if (localizedEventContent?.affiliateUrl && eventSchema.offers) {
+    eventSchema.offers = {
+      ...eventSchema.offers,
+      url: localizedEventContent.affiliateUrl,
+    };
+  }
   const breadcrumbSchema = generateBreadcrumbSchema(eventForSchema, venue, locale);
   const faqItems = localizedEventContent?.faqs ?? richContent?.rewritten.faqLong.map((faq) => ({
     question: (locale === 'it' && faq.questionIt) || faq.question,
@@ -682,7 +766,7 @@ export default async function EventPage({ params }: Props) {
         <section className="relative w-full h-[60vh] min-h-[400px]">
           <Image
             src={eventHeroImage}
-            alt={eventVisualGallery?.images[0]?.alt || title}
+            alt={eventVisualGallery?.hero?.alt || eventVisualGallery?.images[0]?.alt || title}
             fill
             quality={95}
             priority={true} // Above the fold
@@ -742,8 +826,58 @@ export default async function EventPage({ params }: Props) {
               {eventText(locale, 'About the event', 'Informazioni sull\'evento', 'Sobre o evento')}
             </h2>
             <p className="text-lg text-white/70 leading-relaxed">
-              {description}
+              {eventIntroduction}
             </p>
+
+            {localizedEventContent?.bookingIntro && (
+              <section className="mt-8 rounded-xl border border-champagne/30 bg-champagne/[0.06] p-6" data-event-section="booking-intro">
+                <h2 className="text-2xl font-serif font-bold text-champagne mb-3">
+                  {eventText(locale, 'Tickets, admission and WhatsApp', 'Prenotazioni, biglietti e WhatsApp', 'Bilhetes, entrada e WhatsApp')}
+                </h2>
+                <p className="text-white/70 leading-relaxed">{localizedEventContent.bookingIntro}</p>
+                <div className="mt-5 flex flex-col gap-3 sm:flex-row not-prose">
+                  <a
+                    href={localizedEventContent.affiliateUrl}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    data-analytics-source="event_intro_xceed"
+                    className="flex-1 bg-champagne px-5 py-3 text-center text-sm font-bold uppercase tracking-[0.12em] text-black transition-colors hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                  >
+                    {eventText(locale, 'Buy on Xceed', 'Acquista su Xceed', 'Comprar na Xceed')}
+                  </a>
+                  <a
+                    href={CONTACT.whatsapp.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-analytics-source="event_intro_whatsapp"
+                    className="flex-1 border border-champagne/60 px-5 py-3 text-center text-sm font-bold uppercase tracking-[0.12em] text-champagne transition-colors hover:bg-champagne/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-champagne"
+                  >
+                    {eventText(locale, 'Confirm on WhatsApp', 'Conferma su WhatsApp', 'Confirmar no WhatsApp')} {CONTACT.whatsapp.number}
+                  </a>
+                </div>
+              </section>
+            )}
+
+            {leadPoster && (
+              <section className="mt-8" data-event-section="lead-poster">
+                <h2 className="text-2xl font-serif font-bold text-champagne mb-4">{leadPoster.title}</h2>
+                <figure className="not-prose">
+                  <div className={`relative w-full overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] ${leadPoster.aspect === 'five-four' ? 'aspect-[5/4]' : leadPoster.aspect === 'landscape' ? 'aspect-[2/1]' : leadPoster.aspect === 'portrait' ? 'aspect-[9/16]' : 'aspect-square'}`}>
+                    <Image
+                      src={leadPoster.src}
+                      alt={leadPoster.alt}
+                      title={leadPoster.title}
+                      fill
+                      unoptimized
+                      priority
+                      sizes="(max-width: 1023px) 100vw, 66vw"
+                      className="object-contain"
+                    />
+                  </div>
+                  {leadPoster.description ? <figcaption className="mt-3 text-sm leading-relaxed text-white/55">{leadPoster.description}</figcaption> : null}
+                </figure>
+              </section>
+            )}
 
             {performer && (
               <div className="mt-8 p-6 bg-white/[0.03] rounded-lg border border-white/10">
@@ -754,61 +888,65 @@ export default async function EventPage({ params }: Props) {
               </div>
             )}
 
-            {/* H2: Venue Info */}
-            <h2 className="text-2xl font-serif font-bold text-champagne mt-12 mb-4">
+            {!localizedEventContent?.programmeBeforeSections && (
+              <>
+                {/* H2: Venue Info */}
+                <h2 className="text-2xl font-serif font-bold text-champagne mt-12 mb-4">
               {!localizedEventContent && venueHeading.prefix ? `${venueHeading.prefix} ` : null}
               <Link href={venueHref} className="hover:text-white transition-colors underline decoration-champagne/40 underline-offset-4">
                 {venueName}
               </Link>
               {!localizedEventContent ? venueHeading.suffix || null : null}
-            </h2>
-            <p className="text-white/70 leading-relaxed">
-              {localizedEventContent?.sections[2]?.body || buildVenueDescription(locale, venueName, venue.address.streetAddress)}
-            </p>
-            <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-4 not-prose">
-              {buildVenueGalleryImages(venue, title, locale).map((img, i) => (
-                <div key={i} className="relative h-32 rounded-xl overflow-hidden border border-white/8">
-                  <Image src={img.src} alt={img.alt} title={img.alt} fill quality={92} className="object-cover" sizes="(max-width: 768px) 50vw, 33vw" />
-                </div>
-              ))}
-            </div>
-
-            {/* H2: Practical Info */}
-            <h2 className="text-2xl font-serif font-bold text-champagne mt-12 mb-4">
-              {eventText(locale, 'Practical Information', 'Informazioni Pratiche', 'Informações práticas')}
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 not-prose">
-              <div className="p-4 rounded-xl border border-white/8 bg-white/[0.02]">
-                <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-2">
-                  {eventText(locale, 'Dress Code', 'Dress Code', 'Código de vestimenta')}
-                </h3>
-                <p className="font-sans text-white/50 text-sm">
-                  {eventBatchValues?.dressCode || eventText(locale, 'Smart elegant. No sneakers or shorts.', 'Smart elegant. Niente sneakers o shorts.', 'Elegante e sofisticado. Sem tênis ou bermudas.')}
+                </h2>
+                <p className="text-white/70 leading-relaxed">
+                  {localizedEventContent?.venueDescription || buildVenueDescription(locale, venueName, venue.address.streetAddress)}
                 </p>
-              </div>
-              <div className="p-4 rounded-xl border border-white/8 bg-white/[0.02]">
-                <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-2">
-                  {eventText(locale, 'Minimum Age', 'Età Minima', 'Idade mínima')}
-                </h3>
-                <p className="font-sans text-white/50 text-sm">{eventBatchProfile?.minAge ?? 18}+ {eventText(locale, '(ID required)', '(documento richiesto)', '(documento obrigatório)')}</p>
-              </div>
-              <div className="p-4 rounded-xl border border-white/8 bg-white/[0.02]">
-                <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-2">
-                  {eventText(locale, 'Getting There', 'Come Arrivare', 'Como chegar')}
-                </h3>
-                <p className="font-sans text-white/50 text-sm">{String(eventBatchValues?.address || `${venue.address.streetAddress}, ${eventText(locale, 'Milan', 'Milano', 'Milão')}`)}</p>
-              </div>
-            </div>
+                <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-4 not-prose">
+                  {buildVenueGalleryImages(venue, title, locale).map((img, i) => (
+                    <div key={i} className="relative h-32 rounded-xl overflow-hidden border border-white/8">
+                      <Image src={img.src} alt={img.alt} title={img.alt} fill quality={92} className="object-cover" sizes="(max-width: 768px) 50vw, 33vw" />
+                    </div>
+                  ))}
+                </div>
+
+                {/* H2: Practical Info */}
+                <h2 className="text-2xl font-serif font-bold text-champagne mt-12 mb-4">
+                  {eventText(locale, 'Practical Information', 'Informazioni Pratiche', 'Informações práticas')}
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 not-prose">
+                  <div className="p-4 rounded-xl border border-white/8 bg-white/[0.02]">
+                    <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-2">
+                      {eventText(locale, 'Dress Code', 'Dress Code', 'Código de vestimenta')}
+                    </h3>
+                    <p className="font-sans text-white/50 text-sm">
+                      {eventBatchValues?.dressCode || eventText(locale, 'Smart elegant. No sneakers or shorts.', 'Smart elegant. Niente sneakers o shorts.', 'Elegante e sofisticado. Sem tênis ou bermudas.')}
+                    </p>
+                  </div>
+                  <div className="p-4 rounded-xl border border-white/8 bg-white/[0.02]">
+                    <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-2">
+                      {eventText(locale, 'Minimum Age', 'Età Minima', 'Idade mínima')}
+                    </h3>
+                    <p className="font-sans text-white/50 text-sm">{eventBatchProfile?.minAge ?? 18}+ {eventText(locale, '(ID required)', '(documento richiesto)', '(documento obrigatório)')}</p>
+                  </div>
+                  <div className="p-4 rounded-xl border border-white/8 bg-white/[0.02]">
+                    <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-2">
+                      {eventText(locale, 'Getting There', 'Come Arrivare', 'Como chegar')}
+                    </h3>
+                    <p className="font-sans text-white/50 text-sm">{String(eventBatchValues?.address || `${venue.address.streetAddress}, ${eventText(locale, 'Milan', 'Milano', 'Milão')}`)}</p>
+                  </div>
+                </div>
+              </>
+            )}
 
             {localizedEventContent && (
-              <GoldEventContent localized={localizedEventContent} locale={locale} gallery={eventVisualGallery} />
+              <GoldEventContent localized={localizedEventContent} locale={locale} gallery={bodyVisualGallery} />
             )}
             {!localizedEventContent && richContent && (
-              <GoldEventContent data={richContent} locale={locale} gallery={eventVisualGallery} />
+              <GoldEventContent data={richContent} locale={locale} gallery={bodyVisualGallery} />
             )}
             {!localizedEventContent && !richContent && goldHtml && <GoldEventHtml html={goldHtml} />}
-            {!localizedEventContent && !richContent && !goldHtml && eventVisualGallery && (
-              <EventImageGallery gallery={eventVisualGallery} locale={locale} />
+            {!localizedEventContent && !richContent && !goldHtml && bodyVisualGallery && (
+              <EventImageGallery gallery={bodyVisualGallery} locale={locale} />
             )}
 
             <MoreVenueEvents items={moreVenueEvents} locale={locale} venueName={venueName} />

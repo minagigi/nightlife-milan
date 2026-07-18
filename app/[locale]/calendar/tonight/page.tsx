@@ -111,7 +111,7 @@ export default async function TonightPage({ params }: Props) {
   const lp = localePrefix(locale);
   const eventSchemas = [...items, ...tomorrowItems].map(({ event, venue }) => {
     const bookingUrl = `https://wa.me/393519127047?text=${encodeURIComponent('Hi! I want to book for tonight in Milan.')}`;
-    const offer = buildOfferSchema(event.pricing, bookingUrl, event.dateISO);
+    const offer = buildOfferSchema(event.pricing, bookingUrl);
     return {
       '@context': 'https://schema.org',
       '@type': 'Event',

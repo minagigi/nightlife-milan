@@ -2,15 +2,33 @@ import { getBatchEventTemplateValues, interpolateEventBatchTemplate } from './ev
 import { getEventBatchProfile } from './eventBatchProfiles';
 import { getEventLocalePack } from './eventLocalePacks';
 import { UNIVERSITY_PARTY_CANONICAL_SLUG, UNIVERSITY_PARTY_PT_LEGACY_SLUG } from './universityPartyPt';
+import {
+  WORLD_CUP_FINAL_CANONICAL_SLUG,
+  WORLD_CUP_FINAL_COVER_IT,
+  WORLD_CUP_FINAL_POSTER_IT,
+} from './worldCupFinalIt';
+import {
+  WORLD_CUP_FINAL_COVER_EN,
+  WORLD_CUP_FINAL_POSTER_EN,
+} from './worldCupFinalEn';
+import { getWorldCupFinalLocaleCopy } from './worldCupFinalLocaleCopies';
+import {
+  getWorldCupFinalGalleryImageCopy,
+  getWorldCupFinalGeneratedImagePath,
+} from './worldCupFinalVisuals';
+import { isEnabledLocale } from './i18n/locales';
 
 export type EventGalleryImage = {
   src: string;
   title: string;
   alt: string;
+  description?: string;
+  aspect?: 'square' | 'five-four' | 'portrait' | 'landscape';
 };
 
 export type EventVisualGallery = {
   heading: string;
+  hero?: EventGalleryImage;
   images: EventGalleryImage[];
 };
 
@@ -57,10 +75,64 @@ const UNIVERSITY_PARTY_PT: EventVisualGallery = {
  */
 export function getEventVisualGallery(slug: string, locale: string): EventVisualGallery | null {
   if (UNIVERSITY_PARTY_SLUGS.has(slug) && locale === 'pt') return UNIVERSITY_PARTY_PT;
+  const canonicalProfileSlug = getEventBatchProfile(slug)?.canonicalSlug;
+  const isWorldCupFinal = slug === WORLD_CUP_FINAL_CANONICAL_SLUG
+    || canonicalProfileSlug === WORLD_CUP_FINAL_CANONICAL_SLUG;
+  if (isWorldCupFinal && isEnabledLocale(locale)) {
+    const copy = getWorldCupFinalLocaleCopy(locale);
+    const cover = locale === 'it'
+      ? WORLD_CUP_FINAL_COVER_IT
+      : locale === 'en'
+        ? WORLD_CUP_FINAL_COVER_EN
+        : {
+            src: `/images/events/generated/just-me-world-cup-final-cover-2x1-${locale}-v1.jpg`,
+            title: copy.gallery.posterTitle,
+            alt: copy.gallery.posterAlt,
+            description: copy.gallery.posterAlt,
+          };
+    const poster = locale === 'it'
+      ? WORLD_CUP_FINAL_POSTER_IT
+      : locale === 'en'
+        ? WORLD_CUP_FINAL_POSTER_EN
+        : {
+            src: `/images/events/generated/just-me-world-cup-final-poster-5x4-${locale}-v1.jpg`,
+            title: copy.gallery.posterTitle,
+            alt: copy.gallery.posterAlt,
+            description: copy.gallery.posterAlt,
+          };
+    const supportingImages = getWorldCupFinalGalleryImageCopy(locale);
+    return {
+      heading: copy.gallery.heading,
+      hero: {
+        src: cover.src,
+        title: cover.title,
+        alt: cover.alt,
+        description: cover.description,
+        aspect: 'landscape',
+      },
+      images: [
+        {
+          src: poster.src,
+          title: poster.title,
+          alt: poster.alt,
+          description: poster.description,
+          aspect: 'five-four',
+        },
+        ...supportingImages.map((image) => ({
+          src: getWorldCupFinalGeneratedImagePath(locale, image.kind),
+          title: image.title,
+          alt: image.alt,
+          description: image.description,
+          aspect: 'five-four' as const,
+        })),
+      ],
+    };
+  }
 
   const profile = getEventBatchProfile(slug);
   const pack = getEventLocalePack(locale);
   if (!profile || !pack) return null;
+  if (profile.siteLocales && !profile.siteLocales.includes(pack.locale)) return null;
 
   const values = getBatchEventTemplateValues(profile, pack.locale, pack);
   const fill = (template: string) => interpolateEventBatchTemplate(template, values);
