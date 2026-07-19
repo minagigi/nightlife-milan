@@ -1,20 +1,9 @@
 {
   "crons": [
-    {
-      "path": "/api/events/sync",
-      "schedule": "0 8 * * *"
-    },
-    {
-      "path": "/api/analytics/eventbrite",
-      "schedule": "0 4 * * *"
-    },
-    {
-      "path": "/api/analytics/aggregate",
-      "schedule": "30 4 * * *"
-    },
-    {
-      "path": "/api/events/sync?sitemapOnly=1",
-      "schedule": "0 18 * * *"
-    }
+    { "path": "/api/events/sync", "schedule": "0 8 * * *" },
+    { "path": "/api/analytics/eventbrite", "schedule": "0 4 * * *" },
+    { "path": "/api/analytics/aggregate", "schedule": "30 4 * * *" },
+    { "path": "/api/events/sync?sitemapOnly=1", "schedule": "0 18 * * *" },
+    { "path": "/api/crm/email-dispatch", "schedule": "10 * * * *" }
   ]
 }
