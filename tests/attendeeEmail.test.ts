@@ -37,7 +37,11 @@ const baseRecipient: AttendeeEmailRecipient = {
   contactId: 'contact-abc123',
   email: 'mario.rossi@example.com',
   firstName: 'Mario',
+  lastName: 'Rossi',
   name: 'Mario Rossi',
+  ticketClassName: 'Guest List',
+  guests: 3,
+  registeredAtUtc: '2026-07-18T14:30:00.000Z',
 };
 
 test('renderAttendeeEmail: it with 2 affiliate URLs resolves placeholders and includes CTAs', () => {
@@ -63,6 +67,47 @@ test('renderAttendeeEmail: it with 2 affiliate URLs resolves placeholders and in
     assert.ok(!rendered.html.includes(placeholder), `html still contains literal ${placeholder}`);
     assert.ok(!rendered.text.includes(placeholder), `text still contains literal ${placeholder}`);
   }
+});
+
+test('renderAttendeeEmail: transactional summary carries full name and per-user data', () => {
+  const event: AttendeeEmailEventInfo = {
+    ...baseEvent,
+    locale: 'it',
+    affiliateUrls: ['https://xceed.me/it/milano/event/aria-saturday/111111/channel/nightlifemilan-1'],
+  };
+
+  const rendered = withCronSecret(() => renderAttendeeEmail(event, baseRecipient));
+
+  assert.ok(rendered.html.includes('Mario Rossi'), 'greeting must contain first AND last name');
+  assert.ok(rendered.html.includes('#order-1'), 'order number row');
+  assert.ok(rendered.html.includes('Guest List'), 'ticket class row');
+  assert.ok(rendered.html.includes('Ordine'), 'localized order label (it)');
+  assert.ok(rendered.html.includes('Registrato il'), 'localized registered-on label (it)');
+  assert.ok(rendered.html.includes('background-color:#ffffff'), 'transactional white background');
+  assert.ok(!rendered.html.includes('#C9A86A'), 'no decorative gold in transactional layout');
+  for (const line of ['Mario Rossi', '#order-1', 'Guest List']) {
+    assert.ok(rendered.text.includes(line), `text version misses ${line}`);
+  }
+});
+
+test('renderAttendeeEmail: greeting falls back to profile name, then to greetingNoName', () => {
+  const event: AttendeeEmailEventInfo = { ...baseEvent, locale: 'en', affiliateUrls: [] };
+
+  const withProfileName = withCronSecret(() => renderAttendeeEmail(event, {
+    ...baseRecipient,
+    firstName: null,
+    lastName: null,
+    name: 'Ludwig Van',
+  }));
+  assert.ok(withProfileName.html.includes('Ludwig Van'));
+
+  const anonymous = withCronSecret(() => renderAttendeeEmail(event, {
+    ...baseRecipient,
+    firstName: null,
+    lastName: null,
+    name: null,
+  }));
+  assert.ok(!anonymous.html.includes('{name}'));
 });
 
 test('renderAttendeeEmail: en without affiliate URLs drops the purchase CTA and gold button but keeps WhatsApp', () => {

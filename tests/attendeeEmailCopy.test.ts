@@ -46,6 +46,18 @@ test('whatsappCta contains the {phone} placeholder for every locale', () => {
   }
 });
 
+test('transactional summary labels (order, ticket type, guests, registered on) are present and non-empty for every locale', () => {
+  const summaryFields = ['orderLabel', 'ticketTypeLabel', 'guestsLabel', 'registeredOnLabel'] as const;
+  for (const locale of enabledLocaleCodes) {
+    const copy = getAttendeeEmailCopy(locale);
+    for (const field of summaryFields) {
+      const value = copy[field];
+      assert.ok(typeof value === 'string' && value.trim().length > 0, `${locale}.${field} should not be empty`);
+      assert.ok(!EMOJI_PATTERN.test(value), `${locale}.${field} should not contain emoji`);
+    }
+  }
+});
+
 test('getAttendeeEmailCopy throws for a locale without coverage', () => {
   assert.throws(
     () => getAttendeeEmailCopy('xx-not-a-locale' as LocaleCode),

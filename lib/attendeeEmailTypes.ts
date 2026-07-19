@@ -29,7 +29,14 @@ export interface AttendeeEmailRecipient {
   contactId: string;
   email: string;
   firstName: string | null;
+  lastName: string | null;
   name: string | null;
+  /** ticket class Eventbrite (es. 'Guest List'), null se assente */
+  ticketClassName: string | null;
+  /** persone coperte dalla registrazione (>=1) */
+  guests: number;
+  /** momento della registrazione (attendee.created, ISO UTC) */
+  registeredAtUtc: string | null;
 }
 
 export interface RenderedAttendeeEmail {
@@ -56,6 +63,11 @@ export interface AttendeeEmailCopy {
   whyReceiving: string;
   unsubscribeDoneTitle: string;
   unsubscribeDoneBody: string;
+  /** etichette del riepilogo transazionale (label: valore) */
+  orderLabel: string;
+  ticketTypeLabel: string;
+  guestsLabel: string;
+  registeredOnLabel: string;
 }
 
 export interface EmailMessage {
@@ -104,7 +116,12 @@ export interface DispatchCandidate {
   refunded: boolean;
   email: string | null;
   firstName: string | null;
+  lastName: string | null;
   name: string | null;
+  /** ticket class Eventbrite, null se assente */
+  ticketClassName: string | null;
+  /** persone coperte (>=1); nel percorso ordine viene alzato al numero di attendee con la stessa email */
+  quantity: number;
   /** null se i dati evento non sono risolvibili */
   event: AttendeeEmailEventInfo | null;
 }

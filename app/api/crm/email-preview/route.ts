@@ -35,11 +35,15 @@ function sampleEventInfo(locale: LocaleCode, withXceed: boolean): AttendeeEmailE
 
 const SAMPLE_RECIPIENT: AttendeeEmailRecipient = {
   attendeeId: 'preview',
-  orderId: null,
+  orderId: '1234567890',
   contactId: 'preview-contact',
   email: 'preview@example.com',
   firstName: 'Alex',
-  name: 'Alex',
+  lastName: 'Bianchi',
+  name: 'Alex Bianchi',
+  ticketClassName: 'Guest List',
+  guests: 2,
+  registeredAtUtc: new Date(Date.now() - 60 * 60 * 1000).toISOString(),
 };
 
 /**
@@ -76,13 +80,20 @@ async function loadOrderPreview(orderParam: string, indexParam: string | null): 
   const rawEvent = await eventRes.json();
 
   const event = resolveEventInfo(rawEvent, null);
+  const sameEmail = chosen.profile?.email
+    ? attendees.filter((a) => a.profile?.email?.trim().toLowerCase() === chosen.profile?.email?.trim().toLowerCase()).length
+    : 1;
   const recipient: AttendeeEmailRecipient = {
     attendeeId: chosen.id,
     orderId: chosen.order_id || orderParam,
     contactId: 'preview-contact',
     email: chosen.profile?.email?.trim() || 'preview@example.com',
     firstName: chosen.profile?.first_name?.trim() || null,
+    lastName: chosen.profile?.last_name?.trim() || null,
     name: chosen.profile?.name?.trim() || null,
+    ticketClassName: chosen.ticket_class_name?.trim() || null,
+    guests: Math.max(1, sameEmail, Number(chosen.quantity) || 1),
+    registeredAtUtc: chosen.created || null,
   };
 
   return { ok: true, event, recipient };

@@ -219,7 +219,11 @@ export async function dispatchCandidates(candidates: DispatchCandidate[], opts: 
         contactId: crmContactId(normalizeCrmEmail(email), candidate.attendeeId),
         email: normalizeCrmEmail(email) || email,
         firstName: candidate.firstName,
+        lastName: candidate.lastName,
         name: candidate.name,
+        ticketClassName: candidate.ticketClassName,
+        guests: candidate.quantity,
+        registeredAtUtc: candidate.createdAt || null,
       };
 
       const rendered = renderAttendeeEmail(event, recipient);
@@ -276,6 +280,8 @@ export interface RawAttendee {
   cancelled?: boolean;
   refunded?: boolean;
   order_id?: string;
+  ticket_class_name?: string;
+  quantity?: number;
   profile?: {
     name?: string;
     first_name?: string;
@@ -306,9 +312,29 @@ export function mapRawAttendee(raw: RawAttendee, event: AttendeeEmailEventInfo |
     refunded: Boolean(raw.refunded),
     email: cleanSpace(raw.profile?.email),
     firstName,
+    lastName,
     name,
+    ticketClassName: cleanSpace(raw.ticket_class_name),
+    quantity: Math.max(1, Number(raw.quantity) || 1),
     event,
   };
+}
+
+// Nel percorso ordine tutti gli attendee sono noti insieme: se piu' attendee
+// condividono la stessa email (una registrazione per N persone), l'unica email
+// inviata deve dichiarare il numero reale di persone coperte.
+export function raiseQuantityToEmailGroupSize(candidates: DispatchCandidate[]): DispatchCandidate[] {
+  const counts = new Map<string, number>();
+  for (const candidate of candidates) {
+    const email = normalizeCrmEmail(candidate.email);
+    if (!email) continue;
+    counts.set(email, (counts.get(email) || 0) + 1);
+  }
+  return candidates.map((candidate) => {
+    const email = normalizeCrmEmail(candidate.email);
+    const groupSize = email ? counts.get(email) || 1 : 1;
+    return groupSize > candidate.quantity ? { ...candidate, quantity: groupSize } : candidate;
+  });
 }
 
 export async function dispatchForOrderApiUrl(
@@ -342,7 +368,7 @@ export async function dispatchForOrderApiUrl(
 
   const info = resolveEventInfo(rawEvent, null);
   const attendees: RawAttendee[] = order.attendees || [];
-  const candidates = attendees.map((raw) => mapRawAttendee(raw, info));
+  const candidates = raiseQuantityToEmailGroupSize(attendees.map((raw) => mapRawAttendee(raw, info)));
 
   return dispatchCandidates(candidates, opts);
 }

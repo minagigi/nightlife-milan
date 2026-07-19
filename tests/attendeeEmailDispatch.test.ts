@@ -4,6 +4,7 @@ import {
   dispatchCandidates,
   evaluateAttendeeEligibility,
   mapRawAttendee,
+  raiseQuantityToEmailGroupSize,
   resolveEventInfo,
   resolveVenueName,
   validateOrderApiUrl,
@@ -103,7 +104,10 @@ function baseCandidate(overrides: Partial<DispatchCandidate> = {}): DispatchCand
     refunded: false,
     email: 'guest@example.com',
     firstName: 'Alex',
+    lastName: 'Guest',
     name: 'Alex Guest',
+    ticketClassName: 'Guest List',
+    quantity: 1,
     event: baseEvent(),
     ...overrides,
   };
@@ -248,4 +252,41 @@ test('dispatchCandidates deduplica la stessa coppia evento+email nello stesso ru
     if (savedBlob === undefined) delete process.env.BLOB_READ_WRITE_TOKEN; else process.env.BLOB_READ_WRITE_TOKEN = savedBlob;
     if (savedResend === undefined) delete process.env.RESEND_API_KEY; else process.env.RESEND_API_KEY = savedResend;
   }
+});
+
+test('raiseQuantityToEmailGroupSize raises quantity to the same-email attendee count in the order', () => {
+  const shared = [
+    baseCandidate({ attendeeId: 'a1', email: 'Group@Example.com' }),
+    baseCandidate({ attendeeId: 'a2', email: 'group@example.com ' }),
+    baseCandidate({ attendeeId: 'a3', email: 'group@example.com' }),
+    baseCandidate({ attendeeId: 'b1', email: 'solo@example.com', quantity: 2 }),
+    baseCandidate({ attendeeId: 'c1', email: null }),
+  ];
+
+  const raised = raiseQuantityToEmailGroupSize(shared);
+
+  assert.equal(raised[0].quantity, 3, 'normalized emails count as one group');
+  assert.equal(raised[1].quantity, 3);
+  assert.equal(raised[2].quantity, 3);
+  assert.equal(raised[3].quantity, 2, 'existing higher quantity is preserved');
+  assert.equal(raised[4].quantity, 1, 'null email stays untouched');
+});
+
+test('mapRawAttendee carries lastName, ticket class and quantity into the candidate', () => {
+  const candidate = mapRawAttendee(
+    {
+      id: 'raw-1',
+      order_id: 'order-9',
+      created: '2026-07-19T10:00:00Z',
+      status: 'Attending',
+      ticket_class_name: '  VIP Table  ',
+      quantity: 4,
+      profile: { first_name: ' Mario ', last_name: ' Rossi ', email: 'mario@example.com' },
+    },
+    baseEvent(),
+  );
+
+  assert.equal(candidate.lastName, 'Rossi');
+  assert.equal(candidate.ticketClassName, 'VIP Table');
+  assert.equal(candidate.quantity, 4);
 });
