@@ -139,6 +139,10 @@ export async function dispatchCandidates(candidates: DispatchCandidate[], opts: 
   };
 
   let attempted = 0;
+  // Il Blob e eventualmente consistente: read/claim ravvicinati sulla stessa
+  // chiave nello stesso run possono non vedersi (duplicato reale osservato in
+  // e2e con 2 attendee stessa email nello stesso ordine). Dedupe in-memory.
+  const attemptedKeys = new Set<string>();
 
   for (const candidate of candidates) {
     const ctx: EligibilityContext = { activatedAt, nowIso: now, force: Boolean(opts.force), optedOutContactIds };
@@ -158,6 +162,10 @@ export async function dispatchCandidates(candidates: DispatchCandidate[], opts: 
 
     try {
       key = emailLedgerKey(event.eventbriteEventId, email);
+      if (attemptedKeys.has(key)) {
+        recordSkip('in-flight', key, email, event.locale, candidate.orderId);
+        continue;
+      }
       const entry = await readLedgerEntry(key);
       if (!shouldAttempt(entry, transportLive, now)) {
         recordSkip(entry?.status === 'sent' ? 'already-sent' : 'in-flight', key, email, event.locale, candidate.orderId);
@@ -169,6 +177,7 @@ export async function dispatchCandidates(candidates: DispatchCandidate[], opts: 
         continue;
       }
       attempted += 1;
+      attemptedKeys.add(key);
 
       if (opts.dryRun) {
         report.dryRunCount += 1;

@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
+  dispatchCandidates,
   evaluateAttendeeEligibility,
   mapRawAttendee,
   resolveEventInfo,
@@ -222,4 +223,29 @@ test('mapRawAttendee falls back to profile.name and then null when no first/last
   const withNothing = mapRawAttendee({ id: 'att-11' }, null);
   assert.equal(withNothing.name, null);
   assert.equal(withNothing.email, null);
+});
+
+test('dispatchCandidates deduplica la stessa coppia evento+email nello stesso run', async () => {
+  // Regressione del duplicato osservato in e2e: il Blob e eventualmente
+  // consistente, quindi il dedupe intra-run deve avvenire in memoria.
+  const savedBlob = process.env.BLOB_READ_WRITE_TOKEN;
+  const savedResend = process.env.RESEND_API_KEY;
+  delete process.env.BLOB_READ_WRITE_TOKEN;
+  delete process.env.RESEND_API_KEY;
+  try {
+    const event = baseEvent({ eventStartUtc: '2030-01-01T22:00:00Z' });
+    const first = baseCandidate({ attendeeId: 'a1', event });
+    const duplicate = baseCandidate({ attendeeId: 'a2', event });
+    const other = baseCandidate({ attendeeId: 'a3', email: 'other@example.com', event });
+
+    const report = await dispatchCandidates([first, duplicate, other], { mode: 'manual', dryRun: true, force: true });
+
+    assert.equal(report.dryRunCount, 2);
+    assert.equal(report.skipped['in-flight'], 1);
+    assert.equal(report.failed, 0);
+    assert.equal(report.processed, 3);
+  } finally {
+    if (savedBlob === undefined) delete process.env.BLOB_READ_WRITE_TOKEN; else process.env.BLOB_READ_WRITE_TOKEN = savedBlob;
+    if (savedResend === undefined) delete process.env.RESEND_API_KEY; else process.env.RESEND_API_KEY = savedResend;
+  }
 });
