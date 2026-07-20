@@ -49,6 +49,8 @@ test('all complete World Cup locales enter search surfaces without widening glob
 
   const profile = getEventBatchProfile(WORLD_CUP_FINAL_CANONICAL_SLUG)!;
   assert.deepEqual(profile.indexedLocales, enabledLocaleCodes);
+  // Policy corrente: 6 lingue core indicizzate globalmente; gli EVENTI completi
+  // allargano a tutte le 35 via indexedLocales di profilo (event-scoped).
   assert.deepEqual(indexedLocaleCodes, ['en', 'it', 'es', 'fr', 'de', 'pt']);
   assert.equal(enabledLocaleCodes.length, 35);
   const indexedUrls = profile.indexedLocales!.map(
@@ -72,22 +74,16 @@ test('World Cup event-scoped HTTP indexability requires the exact localized even
   assert.match(middleware, /isEventBatchLocaleHttpIndexable/);
   assert.match(middleware, /localizedEventPageRe/);
   assert.equal(enabledLocaleCodes.length, 35);
+  // Policy corrente: 6 lingue core indicizzate globalmente; gli EVENTI completi
+  // allargano a tutte le 35 via indexedLocales di profilo (event-scoped).
   assert.deepEqual(indexedLocaleCodes, ['en', 'it', 'es', 'fr', 'de', 'pt']);
 });
 
-test('event prerendering and ticket Offer integrity are preserved', async () => {
-  const page = await readFile(path.join(process.cwd(), 'app', '[locale]', 'events', '[slug]', 'page.tsx'), 'utf8');
-  const seo = await readFile(path.join(process.cwd(), 'lib', 'seo.ts'), 'utf8');
-
-  assert.match(page, /mockEvents\.forEach/);
-  assert.match(page, /weeklyEvents\.forEach/);
-  assert.match(page, /SITE_ONLY_EVENT_PROFILES\.forEach/);
-  assert.match(page, /fetchEventbriteEvents\(\)/);
-  assert.doesNotMatch(page, /generateStaticParams\(\)[\s\S]{0,100}return \[\]/);
-  assert.match(page, /url: localizedEventContent\.affiliateUrl/);
-  assert.doesNotMatch(seo, /buildOfferSchema\(event\.pricing, eventUrl, event\.dateISO\)/);
-  assert.doesNotMatch(seo, /validFrom/);
-});
+// NOTA merge 20 lug 2026: il vecchio test "event prerendering and ticket Offer
+// integrity" codificava l'architettura precedente (prerender con fetch
+// Eventbrite in build, niente validFrom). L'architettura corrente è l'opposto
+// ed è coperta da tests/eventPageBuildIsolation.test.ts (generateStaticParams
+// vuoto + risoluzione on-demand via ISR).
 
 test('World Cup galleries use complete full-frame production assets', async () => {
   for (const locale of enabledLocaleCodes) {
@@ -137,28 +133,7 @@ test('favicon assets and canonical host redirect are release-gated', async () =>
   assert.match(nextConfig, /permanent: true/);
 });
 
-test('the HTTPS sitemap is submitted through the protected daily cron at 18:00 UTC', async () => {
-  const vercelConfig = JSON.parse(await readFile(path.join(process.cwd(), 'vercel.json'), 'utf8')) as {
-    crons?: Array<{ path: string; schedule: string }>;
-  };
-  const syncRoute = await readFile(
-    path.join(process.cwd(), 'app', 'api', 'events', 'sync', 'route.ts'),
-    'utf8',
-  );
-  const sitemapCrons = (vercelConfig.crons || []).filter(
-    (cron) => cron.path === '/api/events/sync?sitemapOnly=1',
-  );
-
-  assert.deepEqual(sitemapCrons, [
-    {
-      path: '/api/events/sync?sitemapOnly=1',
-      schedule: '0 18 * * *',
-    },
-  ]);
-  assert.match(syncRoute, /searchParams\.get\('sitemapOnly'\) === '1'/);
-  assert.equal((syncRoute.match(/await submitSitemap\(/g) || []).length, 1);
-  assert.match(syncRoute, /`sc-domain:\$\{new URL\(BASE\)\.hostname\.replace/);
-  assert.match(syncRoute, /submitSitemap\(SEARCH_CONSOLE_SITE_URL/);
-  assert.doesNotMatch(syncRoute, /notifyUrls/);
-  assert.match(syncRoute, /searchNotifications: 'disabled_for_ordinary_pages'/);
-});
+// NOTA merge 20 lug 2026: il vecchio test sul cron "sync?sitemapOnly=1" è stato
+// sostituito dal watcher protetto dedicato (/api/indexing/sitemap-watch, 18:00
+// UTC, con validazione della sitemap e idempotenza per giorno di Milano) —
+// coperto da tests/sitemapWatcher.test.ts.

@@ -246,6 +246,9 @@ export const SITE_ONLY_EVENT_PROFILES: readonly EventBatchProfile[] = [
     canonicalSlug: WORLD_CUP_FINAL_CANONICAL_SLUG,
     localizedSlugs: Object.fromEntries(enabledLocaleCodes.map((locale) => [locale, WORLD_CUP_FINAL_LOCALE_COPIES[locale].slug])),
     siteLocales: enabledLocaleCodes,
+    // Tutte le 35 localizzazioni sono complete → tutte indicizzabili
+    // (origin/main 3aea389 "index all complete World Cup locales").
+    indexedLocales: enabledLocaleCodes,
     eventName: {
       en: 'World Cup Final on the Big Screen',
       it: 'Finale Coppa del Mondo su maxischermo',
@@ -304,4 +307,23 @@ export function getEventBatchProfile(slug: string): EventBatchProfile | undefine
 
 export function getEventBatchProfileByBase(baseId: string): EventBatchProfile | undefined {
   return profilesByBase.get(baseId);
+}
+
+/**
+ * True solo quando il locale richiesto è tra gli indexedLocales del profilo E
+ * lo slug richiesto è esattamente lo slug localizzato di quel locale (portata
+ * dal merge dei fix SEO su origin/main: il middleware la usa per gli header
+ * di indicizzabilità per-evento). Il controllo sullo slug localizzato evita
+ * che un evento completo in una lingua allarghi la policy di indicizzazione
+ * HTTP allo stesso slug sotto un locale diverso.
+ */
+export function isEventBatchLocaleHttpIndexable(locale: string, requestedSlug: string): boolean {
+  if (!enabledLocaleCodes.includes(locale as LocaleCode)) return false;
+
+  const normalizedSlug = normalizeEventBatchSlug(requestedSlug);
+  const profile = getEventBatchProfile(normalizedSlug);
+  const localeCode = locale as LocaleCode;
+
+  return profile?.indexedLocales?.includes(localeCode) === true
+    && getEventBatchSlug(profile, localeCode) === normalizedSlug;
 }
