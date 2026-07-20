@@ -34,6 +34,12 @@ const nextConfig: NextConfig = {
 
     return [
       {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.nightlifemilan.com' }],
+        destination: 'https://nightlifemilan.com/:path*',
+        permanent: true,
+      },
+      {
         source: '/events/world-cup-final-big-screen-milan-just-me-july-19-2026',
         destination: '/it/events/finale-coppa-del-mondo-maxischermo-milano-just-me-19-luglio-2026',
         permanent: true,

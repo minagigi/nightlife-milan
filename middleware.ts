@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { enabledLocaleCodes, LOCALES } from '@/lib/i18n/locales';
+import { isEventBatchLocaleHttpIndexable } from '@/lib/eventBatchProfiles';
 import { isRemovedCuratedSitePath } from '@/lib/eventVisibility';
 
 // Lingue attive dal registry unico (lib/i18n/locales.ts): attivare una lingua lì
@@ -13,6 +14,7 @@ const localePrefixPattern = `(?:${locales.map((l) => `\\/${l}`).join('|')})?`;
 const analyticsRe = new RegExp(`^${localePrefixPattern}\\/analytics(\\/|$)`);
 const analyticsTypoRe = new RegExp(`^${localePrefixPattern}\\/analitycs(\\/|$)`);
 const crmRe = new RegExp(`^${localePrefixPattern}\\/crm(\\/|$)`);
+const localizedEventPageRe = /^\/([^/]+)\/events\/([^/]+)$/;
 
 // Dashboard interna /analytics: Basic Auth con ANALYTICS_USER / ANALYTICS_PASSWORD.
 // Protegge anche le Server Action della pagina (stesso path → il browser riallega
@@ -106,7 +108,10 @@ export function middleware(request: NextRequest) {
     // Visitare una pagina con prefisso lingua memorizza la scelta: da qui in poi
     // il cookie vince sull'auto-rilevamento (il selettore lo setta anche lato client).
     res.cookies.set('NEXT_LOCALE', firstSegment, { path: '/', maxAge: 31536000, sameSite: 'lax' });
-    if (nonIndexedLocales.has(firstSegment)) {
+    const localizedEventPage = pathname.match(localizedEventPageRe);
+    const hasEventScopedHttpIndexability = localizedEventPage
+      && isEventBatchLocaleHttpIndexable(localizedEventPage[1], localizedEventPage[2]);
+    if (nonIndexedLocales.has(firstSegment) && !hasEventScopedHttpIndexability) {
       res.headers.set('X-Robots-Tag', 'noindex, follow');
     }
     return res;

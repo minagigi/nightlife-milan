@@ -79,7 +79,7 @@ export const generateEventSchema = (
 
   // Offers Schema (Pricing) — solo se abbiamo un prezzo reale confermato.
   // Un Offer con un prezzo inventato/sbagliato è peggio di nessun Offer.
-  const offer = buildOfferSchema(event.pricing, eventUrl, event.dateISO);
+  const offer = buildOfferSchema(event.pricing, eventUrl);
   if (offer) schema.offers = offer;
 
   return schema;
@@ -97,8 +97,7 @@ export const generateEventSchema = (
  */
 export function buildOfferSchema(
   pricing: { entry: number | null; currency: 'EUR'; tableMinSpend: number | null },
-  url: string,
-  validFrom?: string
+  url: string
 ): Record<string, unknown> | null {
   const price = pricing.entry ?? pricing.tableMinSpend;
   if (price === null || price === undefined) return null;
@@ -108,7 +107,6 @@ export function buildOfferSchema(
     priceCurrency: pricing.currency,
     availability: 'https://schema.org/InStock',
     url,
-    ...(validFrom ? { validFrom } : {}),
   };
 }
 

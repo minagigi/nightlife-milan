@@ -617,6 +617,12 @@ export default async function EventPage({ params }: Props) {
 
   // Generate JSON-LD Schemas
   const eventSchema = generateEventSchema(eventForSchema, venue, performer || null, locale);
+  if (localizedEventContent?.affiliateUrl && eventSchema.offers) {
+    eventSchema.offers = {
+      ...eventSchema.offers,
+      url: localizedEventContent.affiliateUrl,
+    };
+  }
   const breadcrumbSchema = generateBreadcrumbSchema(eventForSchema, venue, locale);
   const faqItems = localizedEventContent?.faqs ?? richContent?.rewritten.faqLong.map((faq) => ({
     question: (locale === 'it' && faq.questionIt) || faq.question,

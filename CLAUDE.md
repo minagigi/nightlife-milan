@@ -100,6 +100,20 @@ Dati UFFICIALI dei venue (prezzi/orari/età/dress code reali, non scraping) via 
 
 ---
 
+## Email post-registrazione Eventbrite (attendee email)
+
+Runbook completo: `docs/attendee-email-runbook.md`. Webhook `order.placed` (tempo reale) + cron sweep orario `10 * * * *`; ledger idempotente su Blob `crm/v1/email/` con anti-backfill (`activation.json`); email nella lingua del listing (35 locali, riuso `CONFIRMATION_COPY` + `pack.eventbrite.buyTickets`); senza `RESEND_API_KEY` il transport è in dry-run; `EMAIL_TEST_OVERRIDE` reindirizza tutti gli invii.
+
+| File | Ruolo |
+|------|-------|
+| `lib/attendeeEmailTypes.ts` | Contratto tipi condiviso del sistema |
+| `lib/attendeeEmailDispatch.ts` | Eleggibilità, sweep/ordine, self-provisioning webhook (`?setupWebhook=1`) |
+| `lib/attendeeEmail.ts` + `lib/attendeeEmailCopy.ts` | Render localizzato (RTL, date Europe/Rome) + copy 35 locali |
+| `lib/emailTransport.ts` + `lib/emailLedger.ts` | Resend REST + ledger Blob (1 email per evento+indirizzo) |
+| `app/api/crm/email-{webhook,dispatch,unsubscribe,preview}` | Route (auth `CRON_SECRET`/`INDEXING_SECRET`/`?k=EMAIL_WEBHOOK_SECRET`) |
+
+---
+
 ## Analytics interno (dashboard /analytics)
 
 Strategia completa: `docs/analytics-strategy.md`. Dashboard su `/analytics` protetta da **Basic Auth nel middleware** (`ANALYTICS_USER`/`ANALYTICS_PASSWORD`).
@@ -116,4 +130,4 @@ Strategia completa: `docs/analytics-strategy.md`. Dashboard su `/analytics` prot
 
 ---
 
-**Last Updated**: 2026-07-12
+**Last Updated**: 2026-07-19
