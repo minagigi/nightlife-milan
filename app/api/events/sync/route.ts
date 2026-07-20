@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { fetchEventbriteEvents, debugEventbrite } from '@/lib/eventbriteSync';
-import { notifyUrls, submitSitemap } from '@/lib/googleIndexing';
+import { notifyUrls, submitProductionSitemap } from '@/lib/googleIndexing';
 import { mockEvents } from '@/lib/data';
 import { weeklyEvents } from '@/lib/eventsConfig';
 import { indexedLocaleCodes, localePrefix } from '@/lib/i18n/locales';
@@ -37,7 +37,7 @@ export async function GET(request: Request) {
   if (searchParams.get('sitemapOnly') === '1') {
     const indexingConfigured = Boolean(process.env.GOOGLE_INDEXING_CREDENTIALS);
     const sitemap = indexingConfigured
-      ? await submitSitemap(`${BASE}/`, `${BASE}/sitemap.xml`)
+      ? await submitProductionSitemap(`${BASE}/sitemap.xml`)
       : { ok: false, status: 0, error: 'Google credentials are not configured' };
 
     return NextResponse.json({
@@ -83,21 +83,19 @@ export async function GET(request: Request) {
 
   const urls = Array.from(new Set(rawUrls));
 
-  // 3. Ping Google Indexing API + submit sitemap (only if credentials are configured)
+  // 3. Keep the legacy URL notifications separate from sitemap submission.
+  // The sitemap is validated and submitted exactly once by the 18:00 UTC job.
   let indexing: { total: number; succeeded: number; failed: number } = { total: 0, succeeded: 0, failed: 0 };
   let sitemap: { ok: boolean; status: number; error?: string } = { ok: false, status: 0 };
 
   if (process.env.GOOGLE_INDEXING_CREDENTIALS) {
-    const [indexResults, sitemapResult] = await Promise.all([
-      notifyUrls(urls, 'URL_UPDATED'),
-      submitSitemap(`${BASE}/`, `${BASE}/sitemap.xml`),
-    ]);
+    const indexResults = await notifyUrls(urls, 'URL_UPDATED');
     indexing = {
       total:     indexResults.length,
       succeeded: indexResults.filter((r) => r.ok).length,
       failed:    indexResults.filter((r) => !r.ok).length,
     };
-    sitemap = sitemapResult;
+    sitemap = { ok: false, status: 0, error: 'Deferred to the protected daily sitemap submitter at 18:00 UTC' };
   }
 
   return NextResponse.json({

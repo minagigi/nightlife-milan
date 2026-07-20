@@ -6,9 +6,16 @@ import { CONTACT } from '@/config/contact';
 
 interface NewsletterHubProps {
   lang: string;
+  labels?: {
+    description: string;
+    welcome: string;
+    emailPlaceholder: string;
+    invalidEmail: string;
+    subscribe: string;
+  };
 }
 
-export default function NewsletterHub({ lang }: NewsletterHubProps) {
+export default function NewsletterHub({ lang, labels }: NewsletterHubProps) {
   const isIt = lang === 'it';
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -41,13 +48,13 @@ export default function NewsletterHub({ lang }: NewsletterHubProps) {
           Join the Inner Circle
         </h2>
         <p className="text-white/60 text-lg mb-8">
-          {tr(lang, 'Get the best tables and secret guestlists every Thursday.', 'Ricevi i migliori tavoli e le liste segrete ogni giovedì.')}
+          {labels?.description || tr(lang, 'Get the best tables and secret guestlists every Thursday.', 'Ricevi i migliori tavoli e le liste segrete ogni giovedì.')}
         </p>
 
         {status === 'success' ? (
           <div className="bg-white/[0.03] border border-champagne/30 rounded-xl p-6 inline-block">
             <p className="text-champagne font-serif text-xl">
-              {tr(lang, 'Welcome to the club.', 'Benvenuto nel club.')}
+              {labels?.welcome || tr(lang, 'Welcome to the club.', 'Benvenuto nel club.')}
             </p>
           </div>
         ) : (
@@ -60,13 +67,13 @@ export default function NewsletterHub({ lang }: NewsletterHubProps) {
                   setEmail(e.target.value);
                   if (status === 'error') setStatus('idle');
                 }}
-                placeholder={tr(lang, 'Your email address', 'La tua email')}
+                placeholder={labels?.emailPlaceholder || tr(lang, 'Your email address', 'La tua email')}
                 className={`w-full bg-white/[0.03] border ${status === 'error' ? 'border-red-500/50' : 'border-white/10'} rounded-xl px-6 py-4 text-white focus:outline-none focus:border-champagne focus:ring-1 focus:ring-champagne transition-colors`}
                 required
               />
               {status === 'error' && (
                 <p className="absolute -bottom-6 left-2 text-red-400 text-xs">
-                  {tr(lang, 'Please enter a valid email address.', 'Inserisci un indirizzo email valido.')}
+                  {labels?.invalidEmail || tr(lang, 'Please enter a valid email address.', 'Inserisci un indirizzo email valido.')}
                 </p>
               )}
             </div>
@@ -75,7 +82,7 @@ export default function NewsletterHub({ lang }: NewsletterHubProps) {
               disabled={status === 'loading'}
               className="bg-champagne text-zinc-950 font-bold px-8 py-4 rounded-xl hover:bg-white transition-all duration-300 disabled:opacity-70 whitespace-nowrap"
             >
-              {status === 'loading' ? '...' : (tr(lang, 'Subscribe', 'Iscriviti'))}
+              {status === 'loading' ? '...' : (labels?.subscribe || tr(lang, 'Subscribe', 'Iscriviti'))}
             </button>
           </form>
         )}

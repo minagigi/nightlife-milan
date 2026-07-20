@@ -11,6 +11,17 @@ interface ConfirmationCopy {
   afterPurchase: string;
 }
 
+export interface EventbriteConfirmationPlainText {
+  notTicket: string;
+  purchase: string;
+  afterPurchase: string;
+}
+
+export interface EventbriteConfirmationContext {
+  heading: string;
+  details: string;
+}
+
 const CONFIRMATION_COPY: Record<LocaleCode, ConfirmationCopy> = {
   en: {
     notTicket: 'This Eventbrite registration is an information request only. It is not an admission ticket and does not grant entry.',
@@ -189,6 +200,19 @@ const CONFIRMATION_COPY: Record<LocaleCode, ConfirmationCopy> = {
   },
 };
 
+export function getEventbriteConfirmationPlainText(
+  locale: LocaleCode,
+  phone = CONTACT.whatsapp.number,
+): EventbriteConfirmationPlainText {
+  const copy = CONFIRMATION_COPY[locale];
+  if (!copy) throw new Error(`Missing Eventbrite confirmation copy for ${locale}`);
+  return {
+    notTicket: copy.notTicket,
+    purchase: copy.purchase,
+    afterPurchase: copy.afterPurchase.replace('{phone}', phone),
+  };
+}
+
 function escapeHtml(value: string): string {
   return value
     .replace(/&/g, '&amp;')
@@ -196,6 +220,20 @@ function escapeHtml(value: string): string {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;');
+}
+
+export function normalizeEventbriteConfirmationText(value: string): string {
+  return value
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&#x27;/gi, "'")
+    .replace(/&nbsp;/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 function isNightlifeMilanAffiliateUrl(raw: string): boolean {
@@ -233,7 +271,11 @@ export function detectEventLocale(descriptionHtml: string): LocaleCode | null {
   return legacy && isEnabledLocale(legacy) ? legacy : null;
 }
 
-export function buildEventbriteConfirmationHtml(locale: LocaleCode, affiliateUrls: string[]): string {
+export function buildEventbriteConfirmationHtml(
+  locale: LocaleCode,
+  affiliateUrls: string[],
+  context?: EventbriteConfirmationContext,
+): string {
   if (affiliateUrls.length === 0) throw new Error('At least one verified Xceed affiliate URL is required');
   if (!affiliateUrls.every(isNightlifeMilanAffiliateUrl)) throw new Error('Invalid Xceed affiliate URL');
 
@@ -246,8 +288,11 @@ export function buildEventbriteConfirmationHtml(locale: LocaleCode, affiliateUrl
   const links = affiliateUrls
     .map((url, index) => `<li><a href="${escapeHtml(url)}">${escapeHtml(pack.eventbrite.buyTickets)}${affiliateUrls.length > 1 ? ` ${index + 1}` : ''}</a></li>`)
     .join('');
+  const eventContext = context
+    ? `<p><strong>${escapeHtml(context.heading)}</strong></p><p>${escapeHtml(context.details)}</p>`
+    : '';
 
-  return `<p><strong>${escapeHtml(copy.notTicket)}</strong></p><p>${escapeHtml(copy.purchase)}</p><ul>${links}</ul><p>${afterPurchase}</p>`;
+  return `${eventContext}<p><strong>${escapeHtml(copy.notTicket)}</strong></p><p>${escapeHtml(copy.purchase)}</p><ul>${links}</ul><p>${afterPurchase}</p>`;
 }
 
 export interface EventbriteConfirmationResult {
@@ -261,8 +306,9 @@ export async function updateEventbriteConfirmation(params: {
   eventId: string;
   locale: LocaleCode;
   affiliateUrls: string[];
+  context?: EventbriteConfirmationContext;
 }): Promise<EventbriteConfirmationResult> {
-  const html = buildEventbriteConfirmationHtml(params.locale, params.affiliateUrls);
+  const html = buildEventbriteConfirmationHtml(params.locale, params.affiliateUrls, params.context);
   const res = await fetch(`${EVENTBRITE_API}/events/${params.eventId}/ticket_buyer_settings/`, {
     method: 'POST',
     headers: {
@@ -288,8 +334,13 @@ export async function updateEventbriteConfirmation(params: {
 
   const current = await verify.json().catch(() => null);
   const saved = `${current?.confirmation_message?.html || ''} ${current?.instructions?.html || ''}`;
+  const savedText = normalizeEventbriteConfirmationText(saved);
   const verified = params.affiliateUrls.every((url) => saved.includes(url))
-    && saved.includes(CONTACT.whatsapp.number);
+    && saved.includes(CONTACT.whatsapp.number)
+    && (!params.context || (
+      savedText.includes(params.context.heading)
+      && savedText.includes(params.context.details)
+    ));
 
   return verified
     ? { ok: true, status: verify.status }

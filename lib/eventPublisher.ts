@@ -97,7 +97,36 @@ export function normalizeAlreadyUtc(isoUtc: string): string {
  */
 const venueIdCache = new Map<string, string>();
 
-async function resolveEventbriteVenueId(token: string, venueId: string, dryRun: boolean): Promise<string | null> {
+function normalizeVenueField(value: string): string {
+  return value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+}
+
+export function eventbriteVenueMatches(params: {
+  candidate: { name?: string; address?: { address_1?: string; postal_code?: string } };
+  expectedName: string;
+  expectedStreet: string;
+  expectedPostalCode: string;
+}): boolean {
+  const candidateName = normalizeVenueField(params.candidate.name || '');
+  const expectedName = normalizeVenueField(params.expectedName);
+  const candidateStreet = normalizeVenueField(params.candidate.address?.address_1 || '');
+  const expectedStreetTokens = normalizeVenueField(params.expectedStreet).split(' ').filter(Boolean);
+  const candidatePostal = normalizeVenueField(params.candidate.address?.postal_code || '');
+  const expectedPostal = normalizeVenueField(params.expectedPostalCode);
+
+  const nameMatches = candidateName.includes(expectedName) || expectedName.includes(candidateName);
+  const streetMatches = expectedStreetTokens.length > 0
+    && expectedStreetTokens.every((token) => candidateStreet.split(' ').includes(token));
+  const postalMatches = !candidatePostal || candidatePostal === expectedPostal;
+  return Boolean(candidateName && nameMatches && streetMatches && postalMatches);
+}
+
+export async function resolveEventbriteVenueId(token: string, venueId: string, dryRun: boolean): Promise<string | null> {
   if (venueIdCache.has(venueId)) return venueIdCache.get(venueId)!;
 
   const venue = venuesData.find((v) => v.id === venueId);
@@ -116,8 +145,13 @@ async function resolveEventbriteVenueId(token: string, venueId: string, dryRun: 
       console.error(`[eventPublisher] Venue list fetch failed: HTTP ${listRes.status} ${(await listRes.text()).slice(0, 200)}`);
     } else {
       const data = await listRes.json();
-      const match = (data.venues || []).find((v: { name?: string }) =>
-        (v.name || '').toLowerCase().includes(name.toLowerCase())
+      const match = (data.venues || []).find((candidate: { name?: string; address?: { address_1?: string; postal_code?: string } }) =>
+        eventbriteVenueMatches({
+          candidate,
+          expectedName: name,
+          expectedStreet: venue.address.streetAddress,
+          expectedPostalCode: venue.address.postalCode,
+        })
       );
       if (match?.id) {
         venueIdCache.set(venueId, match.id);
@@ -169,7 +203,7 @@ async function resolveEventbriteVenueId(token: string, venueId: string, dryRun: 
 }
 
 /** Upload immagine via media upload API — ritorna l'image_id da assegnare come logo dell'evento. */
-async function uploadEventImage(token: string, poster: PosterResult): Promise<string | null> {
+export async function uploadEventImage(token: string, poster: PosterResult): Promise<string | null> {
   try {
     const uploadInfoRes = await fetch(
       `${EVENTBRITE_API}/media/upload/?type=image-event-logo&token=${encodeURIComponent(token)}`,
@@ -261,6 +295,8 @@ export interface PublishOneLangParams {
   categoryId?: string;
   subcategoryId?: string;
   formatId?: string;
+  /** Hard gate for curated listings: keep the event in draft unless the saved HTML passes. */
+  validateSavedDescription?: (savedHtml: string) => string | null;
 }
 
 /** Pubblica UN evento Eventbrite in UNA lingua. Esportata per il worker
@@ -325,6 +361,7 @@ export async function publishOneLang(p: PublishOneLangParams): Promise<PublishRe
   // caso di corruzione/troncamento apparentemente transitorio lato Eventbrite.
   try {
     let descOk = false;
+    let validationReason = '';
     for (let attempt = 0; attempt < 2 && !descOk; attempt++) {
       const descRes = await fetch(`${EVENTBRITE_API}/events/${eventId}/`, {
         method: 'POST',
@@ -337,16 +374,34 @@ export async function publishOneLang(p: PublishOneLangParams): Promise<PublishRe
       }
       const verifyRes = await fetch(`${EVENTBRITE_API}/events/${eventId}/`, { headers: authHeaders(token) });
       const verifyBody = await verifyRes.json().catch(() => null);
-      const savedLength = (verifyBody?.description?.html || '').length;
-      descOk = savedLength >= description.length * 0.8;
+      const savedHtml = verifyBody?.description?.html || '';
+      const savedLength = savedHtml.length;
+      validationReason = p.validateSavedDescription?.(savedHtml) || '';
+      descOk = savedLength >= description.length * 0.8 && !validationReason;
       if (!descOk) {
-        console.error(`[eventPublisher] Description write looks truncated (${lang}, attempt ${attempt + 1}): sent ${description.length} chars, saved ${savedLength}`);
+        console.error(`[eventPublisher] Description verification failed (${lang}, attempt ${attempt + 1}): sent ${description.length} chars, saved ${savedLength}${validationReason ? `; ${validationReason}` : ''}`);
       }
     }
     if (!descOk) {
+      if (p.validateSavedDescription) {
+        return {
+          ok: false,
+          reason: `Description hard gate failed before publish${validationReason ? `: ${validationReason}` : ''}`,
+          ebEventId: eventId,
+          imageSource: poster?.source,
+        };
+      }
       console.error(`[eventPublisher] Description write did not stick after retries (${lang}) — event published with partial/short description (needs manual review)`);
     }
   } catch (e) {
+    if (p.validateSavedDescription) {
+      return {
+        ok: false,
+        reason: `Description hard gate threw before publish: ${(e as Error).message}`,
+        ebEventId: eventId,
+        imageSource: poster?.source,
+      };
+    }
     console.error(`[eventPublisher] Description write threw (${lang}): ${(e as Error).message}`);
   }
 
@@ -385,7 +440,8 @@ export async function publishOneLang(p: PublishOneLangParams): Promise<PublishRe
   try {
     let lastError = '';
     let published = false;
-    for (let attempt = 1; attempt <= 3; attempt += 1) {
+    const publishRetryDelays = [5000, 15000, 45000, 90000];
+    for (let attempt = 1; attempt <= 5; attempt += 1) {
       const publishRes = await fetch(`${EVENTBRITE_API}/events/${eventId}/publish/`, {
         method: 'POST',
         headers: authHeaders(token),
@@ -395,7 +451,7 @@ export async function publishOneLang(p: PublishOneLangParams): Promise<PublishRe
         break;
       }
       lastError = `${publishRes.status} ${(await publishRes.text()).slice(0, 200)}`;
-      if (attempt < 3) await new Promise((resolve) => setTimeout(resolve, attempt * 2500));
+      if (attempt < 5) await new Promise((resolve) => setTimeout(resolve, publishRetryDelays[attempt - 1] || attempt * attempt * 5000));
     }
     if (!published) return { ok: false, reason: `Publish failed: ${lastError}`, ebEventId: eventId, imageSource: poster?.source };
   } catch (e) {

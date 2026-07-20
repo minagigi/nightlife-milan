@@ -311,7 +311,16 @@ export default async function GuidesPage({
 
       {/* Newsletter Integration */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <NewsletterHub lang={locale} />
+        <NewsletterHub
+          lang={locale}
+          labels={{
+            description: tr(locale, 'Get the best tables and secret guestlists every Thursday.', 'Ricevi i migliori tavoli e le liste segrete ogni giovedì.'),
+            welcome: tr(locale, 'Welcome to the club.', 'Benvenuto nel club.'),
+            emailPlaceholder: tr(locale, 'Your email address', 'La tua email'),
+            invalidEmail: tr(locale, 'Please enter a valid email address.', 'Inserisci un indirizzo email valido.'),
+            subscribe: tr(locale, 'Subscribe', 'Iscriviti'),
+          }}
+        />
       </section>
     </main>
   );

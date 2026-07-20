@@ -4,11 +4,13 @@ import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { mockEvents, mockVenues } from '@/lib/data';
 import { MusicGenre } from '@/lib/types';
 import DiscoveryGrid from '@/components/DiscoveryGrid';
 import { Music, ArrowLeft, Calendar } from 'lucide-react';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { generateEventListSchema, jsonLdString } from '@/lib/seo';
+import { getAllCalendarEvents } from '@/lib/calendarEvents';
+import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 
 // ISR Configuration
 export const revalidate = 3600;
@@ -217,26 +219,8 @@ export default async function GenrePage({ params }: Props) {
 
   if (!genre) return notFound();
 
-  // Filter events by genre
-  const genreEvents = mockEvents.filter(e => e.genre.includes(genre.id));
-  
-  const items = genreEvents
-    .map(event => {
-      const venue = mockVenues.find(v => v.id === event.venueId);
-      return venue ? { event, venue } : null;
-    })
-    .filter((item): item is { event: any; venue: any } => item !== null);
-
-  // Helper to get absolute priority
-  const getAbsolutePriority = (name: string) => {
-    const upperName = name.toUpperCase();
-    if (upperName.includes('JUSTME')) return 1;
-    if (upperName.includes('PINETA')) return 2;
-    if (upperName.includes('VOYA')) return 3;
-    return 99; // Default for others
-  };
-
-  items.sort((a, b) => new Date(a.event.dateISO).getTime() - new Date(b.event.dateISO).getTime());
+  const items = getEventbriteDiscoveryItems(await getAllCalendarEvents(), locale)
+    .filter(({ event }) => event.genre.includes(genre.id));
 
   return (
     <main className="flex-grow pt-24 pb-20 bg-[#131009]">
@@ -425,33 +409,17 @@ export default async function GenrePage({ params }: Props) {
         </Link>
       </section>
 
-      {/* JSON-LD Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "MusicPlaylist",
-            "name": genre.heroTitle[typedLocale],
-            "description": genre.editorial[typedLocale],
-            "genre": genre.name,
-            "track": items.map(item => ({
-              "@type": "MusicEvent",
-              "name": item.event.localizedContent.title[typedLocale] || item.event.localizedContent.title.en,
-              "startDate": item.event.dateISO,
-              "location": {
-                "@type": "Place",
-                "name": item.venue.localizedContent.name[typedLocale] || item.venue.localizedContent.name.en,
-                "address": {
-                  "@type": "PostalAddress",
-                  "addressLocality": "Milan",
-                  "addressCountry": "IT"
-                }
-              }
-            }))
-          })
-        }}
-      />
+      {/* JSON-LD Schema — Event completi via il generatore condiviso: il
+          vecchio MusicPlaylist con MusicEvent dentro "track" era una proprietà
+          invalida (track vuole MusicRecording) e Google la ignorava. */}
+      {items.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: jsonLdString(generateEventListSchema(items, locale, genre.heroTitle[typedLocale])),
+          }}
+        />
+      )}
     </main>
   );
 }

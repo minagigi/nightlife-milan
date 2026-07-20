@@ -8,6 +8,7 @@
 - Redirect equivalent legacy hubs permanently.
 - Use full event pages: description, what happens, agenda, programme, venue information, contacts, gallery, FAQ, conversion CTA, and schema.
 - Keep the approved Nightlife Milan design. Do not replace complete pages with thin prototypes.
+- When one physical event uses keyword-specific Eventbrite satellites, keep exactly one canonical site event per language. Mark every satellite `nlm:curated`, exclude it from site import, and link it only to the canonical page in the same language. Never repurpose or overwrite an existing venue listing such as a recurring club night unless the user explicitly requests that exact listing to change.
 
 ## Event Copy
 
@@ -23,7 +24,7 @@
 
 - Keep the summary within 140 characters and include the booking number.
 - Provide both the short summary and the complete main body.
-- Use supported structured content blocks. Do not assume arbitrary HTML images work inside a text field.
+- For curated one-off listings, inline images are allowed only after uploading them to Eventbrite media first and using the returned Eventbrite CDN URLs. Start with an answer-first lead, put the clickable booking/WhatsApp block immediately after it, and place the approved poster immediately after those contacts. Keep additional mood images after the programme. Hard-gate the draft: all expected images, FAQs, marker and booking links must persist before ticket creation or publication. Arbitrary remote image URLs and legacy automatic-pipeline `<img>` tags remain forbidden.
 - The approved poster is the primary image. Keep only its title visible as an image label when a label is required; do not print title, description, and alt text as body paragraphs.
 - Place additional mood images after the agenda unless the current approved template demonstrates a newer user-approved order.
 - Image title, description, and alt text must be native to the event language and describe the actual image.
@@ -33,9 +34,14 @@
 - Start from the real poster and real venue imagery. Do not generate a substitute concept unrelated to the supplied artwork.
 - Recompose poster elements for the target ratio; do not crop critical text or add black padding as the final solution.
 - Eventbrite cover: use the current approved 2:1 composition and protect text inside mobile-safe margins.
-- Body poster and gallery: use 1:1 compositions that redistribute original elements while preserving hierarchy, palette, venue identity, date, and contact band.
+- Body poster and gallery: use 1:1 or 5:4 compositions that redistribute original elements while preserving hierarchy, palette, venue identity, date, and contact band.
+- A source panorama must never be made 1:1 by a centre crop. Use a deliberate 5:4 reframe or outpaint that retains the full focal scene, faces, hands, food, signage, landmarks and furniture; judge the live framing, not only the pixel ratio.
+- Eventbrite body images must include inline responsive sizing: `display:block;width:100%;max-width:100%;height:auto`. After publication, measure each image in the live DOM: `clientWidth` must equal its content-container width at 390 px and 1440 px viewports, with zero horizontal overflow.
 - Localize visible poster text to the event language.
-- Create four distinct mood images only from real venue references or clearly venue-faithful edits. Match audience, fashion, time of night, service, lighting, and event programme.
+- Create four distinct mood images only from real venue references or clearly venue-faithful edits. Prefer real venue photography when a generated scene cannot prove the location. Match audience, fashion, time of night, service, lighting, and event programme.
+- Image alt text and titles must describe literal visible pixels. Do not mention a venue, landmark, screen, age, target, dress code, performer, or service that is not actually visible in the image.
+- Resolve Eventbrite venues by normalized name plus address and postal code, not by name alone. Verify the saved venue after publication or update.
+- Personalize Eventbrite confirmation page and email with the event name, date and verified times, then re-read both `confirmation_message` and `instructions` after saving.
 - Verify every generated word and number character by character before publication.
 
 ## Language and Indexing
@@ -50,6 +56,7 @@
 - Use `lib/seoMetadata.ts` for title, description, phone preservation, event dates, and robots behavior.
 - Use exact, self-referential canonical URLs.
 - Include only indexable languages in hreflang and sitemap.
+- Keep the protected sitemap submitter scheduled once daily at 18:00 UTC (19:00 CET, 20:00 CEST). It validates the complete live sitemap, submits it once per Milan calendar day to the verified Search Console domain property even when unchanged, persists the submitted snapshot privately, and must not advance state after a failed submission.
 - Add Event, ItemList, FAQPage, Article, BreadcrumbList, or LocalBusiness schema only when visible data supports it.
 - Keep the WhatsApp number visible and clickable.
 - Include the purchase-confirmation instruction near booking or ticket information.

@@ -1,0 +1,11 @@
+.agents/
+.Codex/
+.codex-work/
+.claude/
+.next/
+.vercel/
+artifacts/
+node_modules/
+.env*
+*.log
+tsconfig.tsbuildinfo

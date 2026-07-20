@@ -5,8 +5,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Calendar, Clock, MapPin } from 'lucide-react';
 import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset } from '@/lib/calendarEvents';
-import { buildOfferSchema } from '@/lib/seo';
+import { generateEventListSchema, jsonLdString } from '@/lib/seo';
 import type { Event, Venue } from '@/lib/types';
+import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 
 export const dynamic = 'force-dynamic';
 
@@ -69,7 +70,7 @@ export default async function TonightPage({ params }: Props) {
   // (statici + Eventbrite/Xceed reali), confini di giorno nel fuso di Roma —
   // MAI i confini UTC (un evento all'1:30 di notte italiana finiva nel
   // giorno sbagliato con Date.UTC).
-  const allItems = await getAllCalendarEvents();
+  const allItems = getEventbriteDiscoveryItems(await getAllCalendarEvents(), locale);
   const todayKey = romeDayKeyOffset(0);
   const tomorrowKey = romeDayKeyOffset(1);
 
@@ -107,37 +108,13 @@ export default async function TonightPage({ params }: Props) {
   const hasEvents = items.length > 0;
   const hasTomorrowEvents = tomorrowItems.length > 0;
 
-  const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const lp = localePrefix(locale);
-  const eventSchemas = [...items, ...tomorrowItems].map(({ event, venue }) => {
-    const bookingUrl = `https://wa.me/393519127047?text=${encodeURIComponent('Hi! I want to book for tonight in Milan.')}`;
-    const offer = buildOfferSchema(event.pricing, bookingUrl, event.dateISO);
-    return {
-      '@context': 'https://schema.org',
-      '@type': 'Event',
-      'name': event.localizedContent?.title?.en || `${venue ? venue.localizedContent?.name?.en || 'Club' : 'Club'} Milan Tonight`,
-      'startDate': event.dateISO,
-      'endDate': (() => { const d = new Date(event.dateISO); d.setHours(d.getHours() + 5); return d.toISOString(); })(),
-      'location': venue ? {
-        '@type': 'Place',
-        'name': venue.localizedContent?.name?.en || 'Milan Club',
-        'address': {
-          '@type': 'PostalAddress',
-          'streetAddress': venue.address?.streetAddress,
-          'addressLocality': 'Milan',
-          'addressCountry': 'IT',
-        },
-      } : { '@type': 'Place', 'name': 'Milan', 'address': { '@type': 'PostalAddress', 'addressLocality': 'Milan', 'addressCountry': 'IT' } },
-      'organizer': { '@type': 'Organization', 'name': 'Nightlife Milan', 'url': baseUrl },
-      'url': (() => {
-        const slug = locale === 'it' ? event.localizedContent?.slug?.it : event.localizedContent?.slug?.en;
-        return slug ? `${baseUrl}${lp}/events/${slug}` : `${baseUrl}${lp}/calendar/tonight`;
-      })(),
-      'eventStatus': 'https://schema.org/EventScheduled',
-      'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode',
-      ...(offer ? { offers: { ...offer, seller: { '@type': 'Organization', name: 'Nightlife Milan' } } } : {}),
-    };
-  });
+  // Event completi via il generatore condiviso (lib/seo.ts): titoli e URL nel
+  // locale reale della pagina, immagini/geo inclusi, niente endDate fabbricato.
+  const calendarItems = [...items, ...tomorrowItems];
+  const eventListSchema = calendarItems.length > 0
+    ? generateEventListSchema(calendarItems, locale, tr(locale, 'Milan Events — Tonight & Tomorrow', 'Eventi Milano — Stasera e Domani'))
+    : null;
 
   const t = {
     title: tr(locale, `The Timeline`, `La Timeline`),
@@ -151,9 +128,9 @@ export default async function TonightPage({ params }: Props) {
 
   return (
     <>
-      {eventSchemas.map((schema, i) => (
-        <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      ))}
+      {eventListSchema && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(eventListSchema) }} />
+      )}
     <main className="flex-1 bg-[#131009] w-full pt-20 pb-20">
       {/* Header */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

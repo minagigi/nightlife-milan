@@ -11,6 +11,14 @@
     {
       "path": "/api/analytics/aggregate",
       "schedule": "30 4 * * *"
+    },
+    {
+      "path": "/api/crm/sync",
+      "schedule": "15 5 * * *"
+    },
+    {
+      "path": "/api/indexing/sitemap-watch",
+      "schedule": "0 18 * * *"
     }
   ]
 }

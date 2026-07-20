@@ -42,6 +42,9 @@
 
 Use the global skill `nightlife-milan-publishing` for every new or updated
 event, page, landing, article, or guide on Nightlife Milan and Eventbrite.
+Whenever Eventbrite is mentioned or in scope, also load
+`eventbrite-nightlife-publishing`; its approved Guè Pequeno pilot template and
+API-only mutation workflow are mandatory for every Eventbrite listing.
 
 - Generate writing, rewriting, FAQ, metadata, summaries, and translations
   locally in the active Codex session. Never call Anthropic or another paid
@@ -51,6 +54,11 @@ event, page, landing, article, or guide on Nightlife Milan and Eventbrite.
 - Eventbrite publication does not imply site publication. Listings marked
   `nlm:curated` are Eventbrite-only and must stay out of site pages, cards,
   calendars, and sitemap unless the user explicitly requests a separate page.
+- Site discovery galleries and suggested-event carousels may show only canonical
+  site events backed by an explicitly verified live Eventbrite listing. Preserve
+  the approved featured order (Guè first, World Cup final second while current),
+  never import the keyword satellites as duplicate site cards, and never label
+  an informational Eventbrite registration as admission or a paid ticket.
 - Follow `docs/seo-metadata-strategy.md` and use `lib/seoMetadata.ts`.
 - Use `+39 351 912 7047` exactly and ask buyers to send their purchase
   confirmation on WhatsApp.
@@ -66,13 +74,27 @@ event, page, landing, article, or guide on Nightlife Milan and Eventbrite.
   gallery treatment appropriate to the destination.
 - Eventbrite summaries stay within 140 characters. Site meta titles normally
   stay within 62 characters and meta descriptions within 158 characters.
-- Recompose the real poster for 2:1 and 1:1 formats. Preserve its hierarchy and
+- Recompose the real poster for 2:1 cover and 1:1 or 5:4 body formats. Preserve its hierarchy and
   localize visible text; never replace it with unrelated generated artwork.
+- Never convert panoramic venue photography to 1:1 with a centre crop. Reframe
+  or outpaint to 5:4 and reject any result that cuts focal subjects, signage,
+  landmarks, food, hands or furniture even when the numeric ratio is valid.
+- Eventbrite body images must persist `display:block;width:100%;max-width:100%;height:auto`.
+  On the live DOM, rendered image width must equal container width on mobile and
+  desktop; a valid source ratio does not pass if Eventbrite still clips it.
+- For curated Eventbrite descriptions, use answer-first copy, put clickable
+  Xceed/WhatsApp contacts immediately after the lead, then the approved poster;
+  keep four literal real-venue mood images after the programme. Alt/title text
+  must describe visible pixels only.
+- Match Eventbrite venues by normalized name plus verified address and postal
+  code. Personalize and re-read both order-confirmation fields after every live
+  create or refresh.
 - Verify 390x844, 768x1024, and 1440x900 visually before deploy. A `200` status
   above an error fallback is not a pass.
 - Run typecheck, lint, tests, production build, live crawl, and sitemap checks.
-  Submit the HTTPS sitemap after deploy; do not use Google's Indexing API for
-  ordinary pages.
+  The protected endpoint submits the valid HTTPS sitemap once daily at 18:00 UTC
+  (19:00 CET, 20:00 CEST), even when unchanged; do not use Google's Indexing API
+  for ordinary pages.
 
 Any user-approved correction becomes the new baseline. Apply it to the current
 artifact, update the skill or project rule, and add an automated check whenever
@@ -112,8 +134,8 @@ the rule can be enforced in code.
 
 **Regole scoperte sull'API Eventbrite (valide per ENTRAMBE le pipeline, vedi `.Codex/plans/2026-07-07-eventbrite-gold-standard.md` sezione "RISULTATO REALE FASE G0" per il dettaglio):**
 - `description` va scritta annidata in `POST /events/{id}/` (NON l'endpoint dedicato `/description/`, che dà sempre 405).
-- Accetta HTML vero (h2/h3/p/ul/li/a) — MAI `<img>`/`<br/>` **e MAI EMOJI**: un'emoji ovunque nella description fa collassare/troncare tutto il contenuto da quel punto in poi (bug reale scoperto in FASE X4, confermato con bisezione su un evento live). Niente emoji nel campo `description`; il sito/blob non ha questo limite e le usa liberamente.
-- Il vincolo reale su `description` NON è la lunghezza (il presunto "tetto ~1.000-1.300 caratteri" di FASE X4 era in realtà causato dalle emoji nei test, mai isolate dalla lunghezza) ma il contenuto vietato sopra (emoji/`<img>`/`<br/>`): una bisezione reale su un evento live (FASE B0) ha mostrato 23.288 caratteri di HTML emoji-free intatti senza troncamento. Il codice usa comunque un budget di sicurezza cautelativo, `DESCRIPTION_SAFE_BUDGET = 16000` caratteri in `lib/eventRewriter.ts` (~70% della soglia misurata) — sotto quel tetto il corpo gold-standard completo (sezioni/25 FAQ/programma) può vivere anche direttamente nella description, oltre che sul **blob** e sulla pagina sito.
+- Accetta HTML vero (h2/h3/p/ul/li/a) — MAI `<br/>` **e MAI EMOJI**: un'emoji ovunque nella description fa collassare/troncare tutto il contenuto da quel punto in poi (bug reale scoperto in FASE X4, confermato con bisezione su un evento live). Niente emoji nel campo `description`; il sito/blob non ha questo limite e le usa liberamente. Le pipeline automatiche legacy non devono inserire `<img>`. Eccezione approvata per listing curati one-off: sono ammessi esclusivamente URL immagine CDN Eventbrite caricati prima della scrittura, dopo il programma, con alt/title nativi e un hard gate che verifica nel draft tutte le immagini prima di creare ticket e pubblicare. Il test live del 2026-07-16 su cinque listing italiani ha conservato 4 immagini e 25 FAQ per listing senza troncamento.
+- Il vincolo reale su `description` NON è la lunghezza (il presunto "tetto ~1.000-1.300 caratteri" di FASE X4 era in realtà causato dalle emoji nei test, mai isolate dalla lunghezza) ma il contenuto vietato sopra (emoji/`<br/>`): una bisezione reale su un evento live (FASE B0) ha mostrato 23.288 caratteri di HTML emoji-free intatti senza troncamento. Il precedente divieto assoluto di `<img>` è superato soltanto dall'eccezione CDN Eventbrite con hard gate descritta sopra; URL arbitrari o immagini non verificate restano vietati. Il codice usa comunque un budget di sicurezza cautelativo, `DESCRIPTION_SAFE_BUDGET = 16000` caratteri in `lib/eventRewriter.ts` (~70% della soglia misurata) — sotto quel tetto il corpo gold-standard completo (sezioni/25 FAQ/programma) può vivere anche direttamente nella description, oltre che sul **blob** e sulla pagina sito.
 - `music_properties` (età/check-in) va scritto **DOPO** `POST /events/{id}/publish/`, non prima — scriverlo su un evento ancora draft viene azzerato dal publish stesso (bug reale confermato).
 - Le date `XceedEvent.startISO/endISO` sono GIÀ UTC vero — usare `normalizeAlreadyUtc()`, mai `toEventbriteUtc()` (pensata per date wall-clock locali, sottrarrebbe l'offset di Roma una seconda volta).
 - `sanitize()` (telefoni/URL/promoter di terzi → nostri) va applicato SOLO al testo AI-generato (hook) prima di assemblare la description, mai al risultato finale già assemblato: le sue regex corrompono URL/slug/marker costruiti dal codice (falsi positivi su date numeriche nello slug, e l'URL affiliate Xceed veniva rimosso perché non riconosciuto come "nostro"). Usare `resolveWhatsappOnly()` sul risultato finale.

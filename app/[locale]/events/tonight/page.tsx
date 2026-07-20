@@ -1,13 +1,14 @@
 import { Metadata } from 'next';
 import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
-import { getLocalizedText } from '@/lib/seo';
+import { generateEventListSchema, getLocalizedText, jsonLdString } from '@/lib/seo';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Clock, MapPin, Calendar } from 'lucide-react';
 import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset } from '@/lib/calendarEvents';
 import type { Event, Venue } from '@/lib/types';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 
 export const dynamic = 'force-dynamic';
 
@@ -51,7 +52,7 @@ export default async function EventsTonightPage({ params }: Props) {
   const lp = localePrefix(locale);
 
   const now = new Date();
-  const allItems = await getAllCalendarEvents();
+  const allItems = getEventbriteDiscoveryItems(await getAllCalendarEvents(), locale);
   const todayKey = romeDayKeyOffset(0);
 
   const items = allItems
@@ -69,8 +70,17 @@ export default async function EventsTonightPage({ params }: Props) {
     weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Rome',
   });
 
+  // Event schema sui soli eventi effettivamente mostrati nei tre slot orari.
+  const shownItems = [...aperitivo, ...primeTime, ...afterHours];
+  const eventListSchema = shownItems.length > 0
+    ? generateEventListSchema(shownItems, locale, tr(locale, 'Events Tonight in Milan', 'Eventi Stasera a Milano'))
+    : null;
+
   return (
     <main className="flex-1 bg-[#131009] w-full pt-20 pb-20">
+      {eventListSchema && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(eventListSchema) }} />
+      )}
       {/* Breadcrumb */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
         <nav className="text-xs text-white/30 flex gap-2">

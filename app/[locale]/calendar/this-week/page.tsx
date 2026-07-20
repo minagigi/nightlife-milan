@@ -2,9 +2,10 @@ import { Metadata } from 'next';
 import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Link from 'next/link';
-import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset, romeSundayKey } from '@/lib/calendarEvents';
-import { buildOfferSchema } from '@/lib/seo';
+import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset, romeUpcomingSundayKey } from '@/lib/calendarEvents';
+import { generateEventListSchema, jsonLdString } from '@/lib/seo';
 import DiscoveryGrid from '@/components/DiscoveryGrid';
+import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 
 export const dynamic = 'force-dynamic';
 
@@ -61,46 +62,20 @@ export default async function ThisWeekPage({ params }: Props) {
   // FASE C1/C3 (piano 2026-07-09-fix-calendar.md): sorgente dati unificata
   // (statici + Eventbrite/Xceed reali), finestra oggi→domenica nel fuso di
   // Roma — mai eventi mai passati per l'evento all'1:30 di notte italiana.
-  const allItems = await getAllCalendarEvents();
+  const allItems = getEventbriteDiscoveryItems(await getAllCalendarEvents(), locale);
   const todayKey = romeDayKeyOffset(0);
-  const sundayKey = romeSundayKey();
+  const sundayKey = romeUpcomingSundayKey();
 
   const items = allItems.filter(({ event }) => {
     const key = romeDayKey(event.dateISO);
     return key >= todayKey && key <= sundayKey;
   });
 
-  const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const lp = localePrefix(locale);
-  const eventSchemas = items.map(({ event, venue }) => {
-    const bookingUrl = `https://wa.me/393519127047?text=${encodeURIComponent('Hi! I want to book for an upcoming event in Milan.')}`;
-    const offer = buildOfferSchema(event.pricing, bookingUrl, event.dateISO);
-    return {
-      '@context': 'https://schema.org',
-      '@type': 'Event',
-      'name': event.localizedContent?.title?.en || `${venue.localizedContent?.name?.en || 'Club'} Milan`,
-      'startDate': event.dateISO,
-      'endDate': (() => { const d = new Date(event.dateISO); d.setHours(d.getHours() + 5); return d.toISOString(); })(),
-      'location': {
-        '@type': 'Place',
-        'name': venue.localizedContent?.name?.en || 'Milan Club',
-        'address': {
-          '@type': 'PostalAddress',
-          'streetAddress': venue.address?.streetAddress,
-          'addressLocality': 'Milan',
-          'addressCountry': 'IT',
-        },
-      },
-      'organizer': { '@type': 'Organization', 'name': 'Nightlife Milan', 'url': baseUrl },
-      'url': (() => {
-        const slug = locale === 'it' ? event.localizedContent?.slug?.it : event.localizedContent?.slug?.en;
-        return slug ? `${baseUrl}${lp}/events/${slug}` : `${baseUrl}${lp}/calendar/this-week`;
-      })(),
-      'eventStatus': 'https://schema.org/EventScheduled',
-      'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode',
-      ...(offer ? { offers: { ...offer, seller: { '@type': 'Organization', name: 'Nightlife Milan' } } } : {}),
-    };
-  });
+  // Event completi via il generatore condiviso (lib/seo.ts): titoli e URL nel
+  // locale reale della pagina, immagini/geo inclusi, niente endDate fabbricato.
+  const eventListSchema = items.length > 0
+    ? generateEventListSchema(items, locale, tr(locale, 'Milan Events This Week', 'Eventi Milano Questa Settimana'))
+    : null;
 
   const t = {
     title: tr(locale, `Upcoming Events`, `Eventi in Arrivo`),
@@ -111,9 +86,9 @@ export default async function ThisWeekPage({ params }: Props) {
 
   return (
     <>
-      {eventSchemas.map((schema, i) => (
-        <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      ))}
+      {eventListSchema && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(eventListSchema) }} />
+      )}
     <main className="flex-1 bg-[#131009] w-full pt-20">
       {/* Breadcrumb */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">

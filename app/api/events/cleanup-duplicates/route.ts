@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { buildCleanupPlan, executeCleanup } from '@/lib/duplicateCleanup';
-import { submitSitemap } from '@/lib/googleIndexing';
+import { submitProductionSitemap } from '@/lib/googleIndexing';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 120;
@@ -80,7 +80,7 @@ export async function GET(request: Request) {
       // ricostruibili con certezza qui (lo slug SEO viene generato a lettura,
       // non salvato) — ci limitiamo a un refresh sitemap, che è la parte
       // affidabile e utile: comunica a Google che l'elenco pagine è cambiato.
-      await submitSitemap(`${BASE}/`, `${BASE}/sitemap.xml`);
+      await submitProductionSitemap(`${BASE}/sitemap.xml`);
       googleIndexing = { attempted: true, note: 'Sitemap resubmitted; individual URL_DELETED pings skipped (slug not reconstructable post-deletion)' };
     } catch (e) {
       googleIndexing = { attempted: true, note: `failed: ${(e as Error).message}` };

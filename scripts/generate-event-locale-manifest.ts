@@ -30,15 +30,16 @@ const entries = EVENT_BATCH_PROFILES.flatMap((profile) => enabledLocaleCodes.map
   const fill = (template: string) => interpolateEventBatchTemplate(template, values);
   const descriptionHtml = renderBatchEventbriteHtml(profile, locale, pack);
   const mode = locale === 'en' || locale === 'it' ? 'update' : 'create';
+  const eventbriteIds = profile.eventbriteIds!;
 
   return {
     mode,
     base: profile.baseId,
-    enEventId: profile.eventbriteIds.en,
+    enEventId: eventbriteIds.en,
     slugEn: profile.canonicalSlug,
     lang: locale,
     existingEventId: mode === 'update'
-      ? locale === 'en' ? profile.eventbriteIds.en : profile.eventbriteIds.it
+      ? locale === 'en' ? eventbriteIds.en : eventbriteIds.it
       : undefined,
     title: truncate(content.title, TITLE_LIMIT),
     summary: content.seoSummary,

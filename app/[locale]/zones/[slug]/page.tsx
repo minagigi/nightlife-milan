@@ -3,10 +3,12 @@ import { tr } from '@/lib/i18n/t';
 import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { mockZones, mockEvents, mockVenues } from '@/lib/data';
+import { mockZones, mockVenues } from '@/lib/data';
 import DiscoveryGrid from '@/components/DiscoveryGrid';
 import { MapPin, Calendar, GlassWater } from 'lucide-react';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { getAllCalendarEvents } from '@/lib/calendarEvents';
+import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 
 // ISR Configuration
 export const revalidate = 3600;
@@ -81,27 +83,12 @@ export default async function ZonePage({ params }: Props) {
   // Filter events by zone
   const zoneVenues = mockVenues.filter(v => v.zone === zone.id);
   const venueIds = new Set(zoneVenues.map(v => v.id));
-  const zoneEvents = mockEvents.filter(e => venueIds.has(e.venueId));
-
-  const items = zoneEvents.map(event => {
-    const venue = mockVenues.find(v => v.id === event.venueId)!;
-    return { event, venue };
-  });
-
-  // Helper to get absolute priority
-  const getAbsolutePriority = (name: string) => {
-    const upperName = name.toUpperCase();
-    if (upperName.includes('JUSTME')) return 1;
-    if (upperName.includes('PINETA')) return 2;
-    if (upperName.includes('VOYA')) return 3;
-    return 99; // Default for others
-  };
-
-  items.sort((a, b) => new Date(a.event.dateISO).getTime() - new Date(b.event.dateISO).getTime());
+  const items = getEventbriteDiscoveryItems(await getAllCalendarEvents(), locale)
+    .filter(({ event }) => venueIds.has(event.venueId));
 
   // Calculate dynamic stats
   const venuesInZone = zoneVenues.length;
-  const eventsTonight = zoneEvents.length; // Simplified for mock data
+  const eventsTonight = items.length;
 
   return (
     <main className="flex-grow pt-24 pb-20 bg-[#131009]">
@@ -259,7 +246,8 @@ export default async function ZonePage({ params }: Props) {
         </Link>
       </section>
 
-      {/* JSON-LD Schema */}
+      {/* JSON-LD Schema — immagini sempre assolute (erano path relativi che
+          rompono i rich results) e URL della scheda club su ogni NightClub. */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -269,7 +257,7 @@ export default async function ZonePage({ params }: Props) {
               "@type": "TouristAttraction",
               "name": `${zone.name} Nightlife District — Milan`,
               "description": zone.description[typedLocale] || zone.description.en,
-              "image": zone.image,
+              ...(zone.image ? { "image": zone.image.startsWith('http') ? zone.image : `https://nightlifemilan.com${zone.image}` } : {}),
               "address": {
                 "@type": "PostalAddress",
                 "addressLocality": "Milan",
@@ -290,7 +278,8 @@ export default async function ZonePage({ params }: Props) {
                 "item": {
                   "@type": "NightClub",
                   "name": venue.localizedContent.name[typedLocale] || venue.localizedContent.name.en,
-                  "image": venue.image,
+                  ...(venue.image ? { "image": venue.image.startsWith('http') ? venue.image : `https://nightlifemilan.com${venue.image}` } : {}),
+                  "url": `https://nightlifemilan.com${localePrefix(locale)}/clubs/${venue.slugs[typedLocale] || venue.slugs.en}`,
                   "address": {
                     "@type": "PostalAddress",
                     "addressLocality": "Milan",

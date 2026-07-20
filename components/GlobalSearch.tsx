@@ -5,7 +5,58 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Search, X, MapPin, Calendar, BookOpen } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { mockVenues, mockEvents, mockZones, mockGuides } from '@/lib/data';
+import { mockVenues, mockZones, mockGuides } from '@/lib/data';
+
+const searchableEventbriteEvents = [
+  {
+    id: 'eb-1994392210790',
+    dateISO: '2026-07-25T19:30:00+02:00',
+    genre: ['HOUSE', 'HIP_HOP', 'COMMERCIAL'],
+    searchTerms: 'gue guè gue pequeno guè pequeno just me milano live performance',
+    localizedContent: {
+      title: { en: 'Guè — Live performance', it: 'Guè — Performance live' },
+      shortDescription: {
+        en: 'Guè live at Just Me Milan on July 25, 2026.',
+        it: 'Guè live al Just Me Milano il 25 luglio 2026.',
+      },
+      slug: {
+        en: 'gue-live-performance-just-me-milan-july-25-2026',
+        it: 'gue-live-performance-just-me-milan-july-25-2026',
+      },
+    },
+  },
+  {
+    id: 'eb-1994228700727',
+    dateISO: '2026-07-19T19:30:00+02:00',
+    genre: ['HOUSE', 'HIP_HOP', 'REGGAETON', 'EDM', 'COMMERCIAL'],
+    searchTerms: 'world cup coppa del mondo finale spagna argentina maxischermo just me milano',
+    localizedContent: {
+      title: {
+        en: 'World Cup Final on the Big Screen at Just Me Milan',
+        it: 'Finale Coppa del Mondo su maxischermo al Just Me Milano',
+      },
+      shortDescription: {
+        en: 'Spain vs Argentina on the big screen at Just Me Milan on July 19, 2026.',
+        it: 'Spagna-Argentina su maxischermo al Just Me Milano il 19 luglio 2026.',
+      },
+      slug: {
+        en: 'world-cup-final-spain-argentina-big-screen-milan-just-me-july-19-2026',
+        it: 'finale-coppa-del-mondo-maxischermo-milano-just-me-19-luglio-2026',
+      },
+    },
+  },
+] as const;
+
+const normalizeSearchText = (value: string) =>
+  value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+
+function romeDayKey(value: string | Date): string {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Europe/Rome', year: 'numeric', month: '2-digit', day: '2-digit',
+  }).formatToParts(typeof value === 'string' ? new Date(value) : value);
+  const part = (type: Intl.DateTimeFormatPartTypes) => parts.find((entry) => entry.type === type)?.value || '';
+  return `${part('year')}-${part('month')}-${part('day')}`;
+}
 
 // Helper to highlight text
 const escapeRegex = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -104,7 +155,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
   const searchResults = () => {
     if (!debouncedQuery.trim()) return { venues: [], events: [], zones: [], guides: [] };
     
-    const q = debouncedQuery.toLowerCase();
+    const q = normalizeSearchText(debouncedQuery);
     
     const venues = mockVenues.filter(v => {
       const name = (v.localizedContent.name[typedLocale] || v.localizedContent.name.en).toLowerCase();
@@ -115,11 +166,13 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
       return name.includes(q) || desc.includes(q) || dressCode.includes(q) || zone.includes(q) || category.includes(q);
     }).slice(0, 4);
 
-    const events = mockEvents.filter(e => {
-      const title = (e.localizedContent.title[typedLocale] || e.localizedContent.title.en).toLowerCase();
-      const desc = (e.localizedContent.shortDescription[typedLocale] || e.localizedContent.shortDescription.en).toLowerCase();
-      const genres = e.genre.map(g => g.toLowerCase()).join(' ');
-      return title.includes(q) || desc.includes(q) || genres.includes(q);
+    const todayKey = romeDayKey(new Date());
+    const events = searchableEventbriteEvents.filter(e => {
+      if (romeDayKey(e.dateISO) < todayKey) return false;
+      const title = normalizeSearchText(e.localizedContent.title[typedLocale] || e.localizedContent.title.en);
+      const desc = normalizeSearchText(e.localizedContent.shortDescription[typedLocale] || e.localizedContent.shortDescription.en);
+      const genres = normalizeSearchText(e.genre.join(' '));
+      return title.includes(q) || desc.includes(q) || genres.includes(q) || normalizeSearchText(e.searchTerms).includes(q);
     }).slice(0, 4);
 
     const zones = mockZones.filter(z => {

@@ -1,13 +1,14 @@
 import { Metadata } from 'next';
 import { tr } from '@/lib/i18n/t';
 import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
-import { buildOfferSchema, getLocalizedText } from '@/lib/seo';
+import { generateEventListSchema, getLocalizedText, jsonLdString } from '@/lib/seo';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Clock, MapPin, Calendar } from 'lucide-react';
 import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset, dayOfWeekForKey } from '@/lib/calendarEvents';
 import type { Event, Venue } from '@/lib/types';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 
 export const dynamic = 'force-dynamic';
 
@@ -70,7 +71,7 @@ export default async function EventsThisWeekPage({ params }: Props) {
   const startDay = new Date(`${todayKey}T12:00:00Z`);
   const sunday = new Date(`${sundayKey}T12:00:00Z`);
 
-  const allItems = await getAllCalendarEvents();
+  const allItems = getEventbriteDiscoveryItems(await getAllCalendarEvents(), locale);
   const weekItems = allItems
     .filter(({ event }) => {
       const key = romeDayKey(event.dateISO);
@@ -91,57 +92,18 @@ export default async function EventsThisWeekPage({ params }: Props) {
 
   const weekLabel = `${startDay.toLocaleDateString(isIt ? 'it-IT' : 'en-US', { day: 'numeric', month: 'short', timeZone: 'Europe/Rome' })} – ${sunday.toLocaleDateString(isIt ? 'it-IT' : 'en-US', { day: 'numeric', month: 'short', timeZone: 'Europe/Rome' })}`;
 
-  const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const eventUrl = (event: Event) => `${baseUrl}${lp}/events/${getLocalizedText(event.localizedContent.slug, locale)}`;
-  const eventSchemas = weekItems.map(({ event, venue }) => {
-    const url = eventUrl(event);
-    const bookingUrl = `https://wa.me/393519127047?text=${encodeURIComponent(`I want to book ${getLocalizedText(event.localizedContent.title, locale)} in Milan.`)}`;
-    const offer = buildOfferSchema(event.pricing, bookingUrl, event.dateISO);
-    return {
-      '@context': 'https://schema.org',
-      '@type': 'Event',
-      name: getLocalizedText(event.localizedContent.title, locale),
-      description: getLocalizedText(event.localizedContent.shortDescription, locale),
-      startDate: event.dateISO,
-      ...(event.endDateISO ? { endDate: event.endDateISO } : {}),
-      eventStatus: 'https://schema.org/EventScheduled',
-      eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-      url,
-      ...(event.image ? { image: event.image.startsWith('http') ? event.image : `${baseUrl}${event.image}` } : {}),
-      location: {
-        '@type': 'Place',
-        name: getLocalizedText(venue.localizedContent.name, locale),
-        address: {
-          '@type': 'PostalAddress',
-          streetAddress: venue.address.streetAddress,
-          addressLocality: 'Milan',
-          postalCode: venue.address.postalCode,
-          addressCountry: 'IT',
-        },
-      },
-      organizer: { '@type': 'Organization', name: 'Nightlife Milan', url: baseUrl },
-      ...(offer ? { offers: offer } : {}),
-    };
-  });
-  const itemListSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: tr(locale, 'Milan events this week', 'Eventi a Milano questa settimana'),
-    numberOfItems: weekItems.length,
-    itemListElement: weekItems.map(({ event }, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      url: eventUrl(event),
-      name: getLocalizedText(event.localizedContent.title, locale),
-    })),
-  };
+  // Un solo ItemList di Event COMPLETI via il generatore condiviso (lib/seo.ts):
+  // prima qui convivevano un array di Event sciolti e un ItemList di soli
+  // url+nome — due rappresentazioni della stessa lista sulla stessa pagina.
+  const eventListSchema = weekItems.length > 0
+    ? generateEventListSchema(weekItems, locale, tr(locale, 'Milan events this week', 'Eventi a Milano questa settimana'))
+    : null;
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }} />
-      {eventSchemas.map((schema, index) => (
-        <script key={`event-schema-${index}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      ))}
+      {eventListSchema && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(eventListSchema) }} />
+      )}
     <main className="flex-1 bg-[#131009] w-full pt-20 pb-20">
       {/* Breadcrumb */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">

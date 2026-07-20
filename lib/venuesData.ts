@@ -740,7 +740,7 @@ export const venuesData: Venue[] = [
     id: "v-aria",
     slugs: { en: "aria-club-milano", it: "aria-club-milano" },
     address: {
-      streetAddress: "Via Ippodromo, 115",
+      streetAddress: "Piazzale dello Sport, 14",
       addressLocality: "Milano",
       postalCode: "20151",
       addressCountry: "IT"

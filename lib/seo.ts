@@ -112,6 +112,40 @@ export function buildOfferSchema(
   };
 }
 
+/**
+ * ItemList di Event COMPLETI per le superfici-lista (homepage, pagina venue,
+ * genere, tonight/special/best e le landing intent). Ogni item riusa
+ * generateEventSchema — mai un secondo Event scritto a mano — così tutte le
+ * pagine emettono la stessa entità ricca (location con geo, organizer,
+ * eventStatus, offers reali) e Google/AI vedono gli stessi dati ovunque.
+ * Il @context resta solo sull'ItemList radice, mai sugli item annidati.
+ */
+export const generateEventListSchema = (
+  entries: { event: Event; venue: Venue }[],
+  lang: string,
+  name: string,
+  limit = 20,
+) => {
+  const shown = entries.slice(0, limit);
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name,
+    numberOfItems: shown.length,
+    itemListElement: shown.map(({ event, venue }, index) => {
+      const item = generateEventSchema(event, venue, null, lang) as Record<string, unknown>;
+      delete item['@context'];
+      return { '@type': 'ListItem', position: index + 1, item };
+    }),
+  };
+};
+
+/** Serializzazione sicura per i <script> JSON-LD: i titoli evento arrivano
+ * anche da feed esterni (Eventbrite/Xceed), quindi si neutralizza ogni "<"
+ * per impedire la chiusura anticipata del tag script. */
+export const jsonLdString = (schema: unknown): string =>
+  JSON.stringify(schema).replace(/</g, '\\u003c');
+
 // Generate BreadcrumbList JSON-LD Schema
 export const generateBreadcrumbSchema = (
   event: Event,

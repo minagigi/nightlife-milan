@@ -7,12 +7,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { MessageCircle } from 'lucide-react';
 import { Suspense } from 'react';
-import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset, romeSundayKey } from '@/lib/calendarEvents';
-import { Venue, Event } from '@/lib/types';
+import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset, romeUpcomingSundayKey } from '@/lib/calendarEvents';
 import { CONTACT } from '@/config/contact';
 import { tr } from '@/lib/i18n/t';
 import { localePrefix, hreflangAlternates, getLocaleDef } from '@/lib/i18n/locales';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { generateEventListSchema, jsonLdString } from '@/lib/seo';
+import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 
 const EventsCarousel = nextDynamic(() => import('@/components/EventsCarousel'));
 
@@ -143,15 +144,9 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   // localizzati usano il locale selezionato.
   const lp = localePrefix(locale);
 
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    name: 'Nightlife Milan',
-    image: 'https://nightlifemilan.com/images/milan-nightclub-luxury-vip-champagne.webp',
-    description: tr(locale, "The ultimate guide to Milan's nightlife.", 'La guida definitiva alla vita notturna milanese.'),
-    address: { '@type': 'PostalAddress', addressLocality: 'Milan', addressCountry: 'IT' },
-    url: `https://nightlifemilan.com${lp}`,
-  };
+  // Niente LocalBusiness qui: Nightlife Milan è già rappresentata dal
+  // Organization site-wide nel layout — due entità dello stesso soggetto con
+  // @type diversi sulla stessa pagina confondono Google, non aiutano.
 
   // Sorgente unificata (statici + Eventbrite/Xceed + serate ricorrenti
   // settimanali) e confini di giorno nel fuso di Roma — non del server
@@ -161,49 +156,42 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   // 55 Milano, Play Club, Repvblic): se una venue non aveva un evento
   // one-off proprio quella sera, "Stasera" saltava al giorno successivo
   // anche se il locale era regolarmente aperto.
-  const baseItems = await getAllCalendarEvents();
+  const baseItems = getEventbriteDiscoveryItems(await getAllCalendarEvents(), locale);
 
   const todayKey = romeDayKeyOffset(0);
   const tomorrowKey = romeDayKeyOffset(1);
-  const sundayKey = romeSundayKey();
-
-  // Priority: JustMe=1, Pineta=2, Aria=3, rest=99
-  const getVenuePriority = (venueId: string) => {
-    if (venueId === 'v-justme') return 1;
-    if (venueId === 'v-pineta') return 2;
-    if (venueId === 'v-aria')   return 3;
-    return 99;
-  };
-
-  const sortEvents = (a: { event: Event; venue: Venue }, b: { event: Event; venue: Venue }) => {
-    const dateA = new Date(a.event.dateISO).getTime();
-    const dateB = new Date(b.event.dateISO).getTime();
-    if (dateA !== dateB) return dateA - dateB;
-    return getVenuePriority(a.event.venueId) - getVenuePriority(b.event.venueId);
-  };
+  const sundayKey = romeUpcomingSundayKey();
 
   const tonightEvents = baseItems
-    .filter(({ event }) => romeDayKey(event.dateISO) === todayKey)
-    .sort(sortEvents);
+    .filter(({ event }) => romeDayKey(event.dateISO) === todayKey);
 
   const weekEvents = baseItems
     .filter(({ event }) => {
       const key = romeDayKey(event.dateISO);
       return key >= tomorrowKey && key <= sundayKey;
-    })
-    .sort(sortEvents);
-
-  // Keep allEvents for any legacy usage
-  const allEvents = [...tonightEvents, ...weekEvents];
+    });
 
   const waMsg = encodeURIComponent(
     tr(locale, "Hi! I'd like to book a VIP table in Milan. Can you help me?", 'Ciao! Vorrei prenotare un tavolo VIP a Milano. Puoi aiutarmi?')
   );
   const waLink = `${CONTACT.whatsapp.link}?text=${waMsg}`;
 
+  // Event schema per i caroselli "Stasera" + "Questa Settimana" — le stesse
+  // card visibili, come entità Event complete (generatore condiviso lib/seo.ts).
+  const homeEventItems = [...tonightEvents, ...weekEvents];
+  const eventListSchema = homeEventItems.length > 0
+    ? generateEventListSchema(
+        homeEventItems,
+        locale,
+        tr(locale, 'Milan Events — Tonight & This Week', 'Eventi Milano — Stasera e Questa Settimana'),
+      )
+    : null;
+
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      {eventListSchema && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(eventListSchema) }} />
+      )}
       <main className="flex-1 flex flex-col w-full">
         <NightLine />
 

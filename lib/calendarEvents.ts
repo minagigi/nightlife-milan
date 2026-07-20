@@ -254,6 +254,15 @@ export function romeSundayKey(): string {
   return romeDayKeyOffset(6);
 }
 
+/** Fine della finestra eventi imminenti: di domenica include la domenica
+ * successiva, così la sezione settimanale non diventa vuota proprio quando
+ * deve iniziare a mostrare il programma da lunedì. */
+export function romeUpcomingSundayKey(): string {
+  const todayKey = romeDayKeyOffset(0);
+  const sundayKey = romeSundayKey();
+  return sundayKey === todayKey ? romeDayKeyOffset(7) : sundayKey;
+}
+
 /** Chiave del prossimo lunedì (oggi incluso se oggi è già lunedì), nel fuso di
  * Roma — confine passato/futuro per le sezioni eventi delle pagine locale. */
 export function romeNextMondayKey(): string {

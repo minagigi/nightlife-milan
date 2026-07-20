@@ -1,6 +1,6 @@
 import type { EventLocalePack } from './eventBatchLocaleTypes';
 import { EVENT_LOCALE_PACKS_ALL } from './eventLocalePacks';
-import { getEventBatchProfile, type EventBatchProfile } from './eventBatchProfiles';
+import { getEventBatchProfile, getEventBatchSlug, type EventBatchProfile } from './eventBatchProfiles';
 import { EVENT_BATCH_LOCALE_FALLBACKS } from './eventBatchLocaleFallbacks';
 import { getLocaleDef, type LocaleCode } from './i18n/locales';
 import type { LocalizedEventContent } from './localizedEventContent';
@@ -80,8 +80,11 @@ export function validateEventLocalePack(pack: EventLocalePack): void {
 }
 
 export function validateEventBatchProfile(profile: EventBatchProfile): void {
-  if (!profile.baseId || !profile.eventbriteIds.en || !profile.eventbriteIds.it || !profile.canonicalSlug) {
+  if (!profile.baseId || !profile.canonicalSlug) {
     throw new Error('Event profile is missing an identity field');
+  }
+  if (!profile.siteLocales && (!profile.eventbriteIds?.en || !profile.eventbriteIds.it)) {
+    throw new Error(`${profile.baseId} is missing its Eventbrite identities`);
   }
   if (!/^https:\/\//.test(profile.affiliateUrl) || !/^https:\/\//.test(profile.posterUrl)) {
     throw new Error(`${profile.baseId} must use HTTPS booking and poster URLs`);
@@ -137,13 +140,13 @@ function packFor(locale: EventBatchLocale, pack?: EventLocalePack): EventLocaleP
 
 function eventUrl(profile: EventBatchProfile, locale: EventBatchLocale): string {
   const localePath = locale === 'en' ? '' : `/${locale}`;
-  return `${EVENT_BATCH_SITE_URL}${localePath}/events/${profile.canonicalSlug}`;
+  return `${EVENT_BATCH_SITE_URL}${localePath}/events/${getEventBatchSlug(profile, locale)}`;
 }
 
 const VENUE_ADDRESS: Record<string, string> = {
   'Just Me Milano': 'Viale Luigi Camoens 2, 20121 Milano',
   'Pineta Club': 'Via Messina 38, 20154 Milano',
-  'Aria Club Milano': 'Via Ippodromo 115, 20151 Milano',
+  'Aria Club Milano': 'Piazzale dello Sport 14, 20151 Milano',
 };
 
 function localizedDate(profile: EventBatchProfile, locale: EventBatchLocale): string {
@@ -158,7 +161,7 @@ function localizedDate(profile: EventBatchProfile, locale: EventBatchLocale): st
 }
 
 function localizedGenres(profile: EventBatchProfile, locale: EventBatchLocale, pack: EventLocalePack): string {
-  if (profile.kind === 'match') return pack.programme.matchAndDj;
+  if (profile.kind === 'match') return pack.programme.matchAndDj.replace(/[.!?;,:؟。]+$/u, '');
   const nativeLocale = locale === 'it' ? 'it' : 'en';
   const parts = profile.genres[nativeLocale]
     .replace(/\s+(?:and|e|ed)\s+/gi, ', ')
@@ -208,7 +211,7 @@ function valuesFor(profile: EventBatchProfile, locale: EventBatchLocale, pack: E
 
   return {
     venue: profile.venue,
-    event: profile.eventName[nativeLocale],
+    event: profile.eventName[locale] || profile.eventName[nativeLocale],
     date: localizedDate(profile, locale),
     start: profile.start,
     end: profile.end,

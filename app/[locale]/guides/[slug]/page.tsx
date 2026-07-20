@@ -135,11 +135,14 @@ export default async function GuidePage({ params }: Props) {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: title,
-    image: guide.image ? [guide.image] : [],
+    // image sempre assoluta (guide.image arriva come path relativo)
+    image: guide.image ? [guide.image.startsWith('http') ? guide.image : `${baseUrl}${guide.image}`] : [],
     datePublished: guide.datePublished,
     dateModified: guide.dateModified,
+    // Gli autori delle guide sono redazioni ("Nightlife Milan Team",
+    // "Editorial Team"), non persone fisiche: @type Organization.
     author: [{
-      '@type': 'Person',
+      '@type': 'Organization',
       name: guide.author,
     }],
     publisher: {

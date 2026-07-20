@@ -12,6 +12,7 @@ const nonIndexedLocales = new Set(LOCALES.filter((l) => l.enabled && !l.indexed)
 const localePrefixPattern = `(?:${locales.map((l) => `\\/${l}`).join('|')})?`;
 const analyticsRe = new RegExp(`^${localePrefixPattern}\\/analytics(\\/|$)`);
 const analyticsTypoRe = new RegExp(`^${localePrefixPattern}\\/analitycs(\\/|$)`);
+const crmRe = new RegExp(`^${localePrefixPattern}\\/crm(\\/|$)`);
 
 // Dashboard interna /analytics: Basic Auth con ANALYTICS_USER / ANALYTICS_PASSWORD.
 // Protegge anche le Server Action della pagina (stesso path → il browser riallega
@@ -22,7 +23,30 @@ function analyticsAuth(request: NextRequest): NextResponse | null {
   const unauthorized = () =>
     new NextResponse(user && pass ? 'Authentication required' : 'Analytics not configured (set ANALYTICS_USER / ANALYTICS_PASSWORD)', {
       status: 401,
-      headers: { 'WWW-Authenticate': 'Basic realm="Nightlife Milan Analytics"' },
+      headers: {
+        'Cache-Control': 'private, no-store',
+        'WWW-Authenticate': 'Basic realm="Nightlife Milan Analytics"',
+      },
+    });
+
+  if (!user || !pass) return unauthorized();
+  const expected = `Basic ${btoa(`${user}:${pass}`)}`;
+  if (request.headers.get('authorization') !== expected) return unauthorized();
+  return null;
+}
+
+// Il CRM contiene PII e usa credenziali dedicate quando presenti. Per evitare
+// di bloccare il primo deploy, ripiega sulle credenziali analytics già attive.
+function crmAuth(request: NextRequest): NextResponse | null {
+  const user = process.env.CRM_USER || process.env.ANALYTICS_USER;
+  const pass = process.env.CRM_PASSWORD || process.env.ANALYTICS_PASSWORD;
+  const unauthorized = () =>
+    new NextResponse(user && pass ? 'Authentication required' : 'CRM not configured (set CRM_USER / CRM_PASSWORD)', {
+      status: 401,
+      headers: {
+        'Cache-Control': 'private, no-store',
+        'WWW-Authenticate': 'Basic realm="Nightlife Milan CRM"',
+      },
     });
 
   if (!user || !pass) return unauthorized();
@@ -56,6 +80,11 @@ export function middleware(request: NextRequest) {
 
   if (analyticsRe.test(pathname)) {
     const denied = analyticsAuth(request);
+    if (denied) return denied;
+  }
+
+  if (crmRe.test(pathname)) {
+    const denied = crmAuth(request);
     if (denied) return denied;
   }
 

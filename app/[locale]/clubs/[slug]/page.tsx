@@ -9,9 +9,9 @@ import { getDictionary } from '../../../../dictionaries/get-dictionary';
 import { CONTACT } from '@/config/contact';
 import { getVenueBySlug, mockVenues } from '@/lib/data';
 import { VenueCategory } from '@/lib/types';
-import { getLocalizedText } from '@/lib/seo';
+import { generateEventListSchema, getLocalizedText, jsonLdString } from '@/lib/seo';
 import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
-import WeeklyProgram from '@/components/WeeklyProgram';
+import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 
 export const revalidate = 3600;
 
@@ -349,7 +349,7 @@ export default async function ClubPage({ params }: Props) {
   // "passati" gli eventi di questa stessa settimana nei giorni diversi da lunedì.
   // Ora usa la stessa fonte unificata della pagina evento (getAllCalendarEvents)
   // e lo stesso confine "oggi" (isUpcomingRome) usato altrove nel sito.
-  const venueEvents = (await getAllCalendarEvents())
+  const venueEvents = getEventbriteDiscoveryItems(await getAllCalendarEvents(), locale)
     // Le serate ricorrenti settimanali sono già mostrate a parte da
     // WeeklyProgram più sotto — escluse qui per non duplicarle.
     .filter((item) => item.event.venueId === venue.id && !item.event.id.startsWith('weekly-'))
@@ -363,16 +363,16 @@ export default async function ClubPage({ params }: Props) {
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const currentVenueSlug = getLocalizedText(venue.slugs, locale);
-  const openingDays = venue.id === 'v-justme'
-    ? ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-    : venue.id === 'v-pineta'
-      ? ['Friday', 'Saturday']
-      : ['Thursday', 'Friday', 'Saturday'];
+  // Schema NightClub con soli dati reali: niente openingHoursSpecification
+  // (il vecchio 23:00–05:00 gio-sab era inventato e falso per rooftop e
+  // aperitivo bar — venuesData non ha orari), niente priceRange di fallback,
+  // immagini sempre assolute e una sola chiave image (prima era duplicata).
+  const toAbsoluteUrl = (src: string) => (src.startsWith('http') ? src : `${baseUrl}${src}`);
   const jsonLd: any = {
     "@context": "https://schema.org",
     "@type": venue.id === 'v-55milano' ? ["NightClub", "Restaurant"] : venue.category === VenueCategory.CLUB ? "NightClub" : "LocalBusiness",
     "name": name,
-    "image": image,
+    "image": gallery.length > 1 ? gallery.map(toAbsoluteUrl) : toAbsoluteUrl(image),
     "description": description,
     "address": {
       "@type": "PostalAddress",
@@ -389,17 +389,8 @@ export default async function ClubPage({ params }: Props) {
     },
     "url": `${baseUrl}${localePrefix(locale)}/clubs/${currentVenueSlug}`,
     "telephone": "+393519127047",
-    "priceRange": venue.priceRange || "€€€",
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": openingDays,
-        "opens": "23:00",
-        "closes": "05:00"
-      }
-    ],
+    ...(venue.priceRange ? { "priceRange": venue.priceRange } : {}),
     ...(venue.sameAs?.length ? { "sameAs": venue.sameAs } : {}),
-    ...(gallery.length > 1 ? { "image": gallery } : {}),
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": "+39-351-912-7047",
@@ -418,10 +409,24 @@ export default async function ClubPage({ params }: Props) {
     ],
   };
 
+  // Event schema per la sezione "Prossimi Eventi" — gli stessi eventi visibili
+  // sotto, come entità complete (generatore condiviso lib/seo.ts). Gli eventi
+  // passati restano fuori dallo schema: Google indicizza solo eventi futuri.
+  const venueEventsLd = futureVenueEvents.length > 0
+    ? generateEventListSchema(
+        futureVenueEvents.map((event) => ({ event, venue })),
+        locale,
+        `${tr(locale, 'Upcoming Events at', 'Prossimi Eventi da')} ${name}`,
+      )
+    : null;
+
   return (
     <main className="bg-[#131009] min-h-screen text-white font-sans selection:bg-champagne selection:text-white pb-20">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      {venueEventsLd && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(venueEventsLd) }} />
+      )}
       
       {/* Hero Section */}
       <section className="relative w-full h-[70vh] min-h-[600px] flex items-end pb-16">
@@ -561,9 +566,6 @@ export default async function ClubPage({ params }: Props) {
               </p>
             </div>
           )}
-
-          {/* Weekly Schedule (Event Component) */}
-          <WeeklyProgram venueId={venue.id} venueName={name} locale={locale as 'en' | 'it'} />
 
           {/* Upcoming Events at this venue — chronological */}
           {futureVenueEvents.length > 0 && (

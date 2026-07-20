@@ -119,6 +119,12 @@ export interface SitemapResult {
   error?: string;
 }
 
+export const DEFAULT_SEARCH_CONSOLE_SITE_URL = 'sc-domain:nightlifemilan.com';
+
+export function getSearchConsoleSiteUrl(): string {
+  return process.env.SEARCH_CONSOLE_SITE_URL || DEFAULT_SEARCH_CONSOLE_SITE_URL;
+}
+
 /**
  * Submit (or re-submit) a sitemap to Google Search Console.
  * Uses the webmasters scope — same service account as the Indexing API.
@@ -146,6 +152,11 @@ export async function submitSitemap(siteUrl: string, sitemapUrl: string): Promis
   } catch (err) {
     return { ok: false, status: 0, error: err instanceof Error ? err.message : String(err) };
   }
+}
+
+/** Submit the production sitemap to the verified Search Console property. */
+export async function submitProductionSitemap(sitemapUrl: string): Promise<SitemapResult> {
+  return submitSitemap(getSearchConsoleSiteUrl(), sitemapUrl);
 }
 
 /**

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Eventbrite Nightlife Publishing"
+  short_description: "Template API per gli eventi Eventbrite"
+  default_prompt: "Use $eventbrite-nightlife-publishing to create or verify an Eventbrite listing with the approved Nightlife Milan template."

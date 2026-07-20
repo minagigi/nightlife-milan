@@ -22,7 +22,7 @@ export type LocaleTier = 'native' | 'A' | 'B';
 
 export interface LocaleDef {
   code: LocaleCode;
-  /** Codice ISO paese per la bandierina del selettore (flag-icons) */
+  /** Codice ISO paese per la bandierina Unicode del selettore */
   country: string;
   /** Codice hreflang / attributo lang (BCP 47) */
   hreflang: string;

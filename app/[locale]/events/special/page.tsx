@@ -4,8 +4,10 @@ import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
+import { generateEventListSchema, jsonLdString } from '@/lib/seo';
 import DiscoveryGrid from '@/components/DiscoveryGrid';
 import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 
 // ISR Configuration
 export const revalidate = 3600;
@@ -47,7 +49,7 @@ export default async function SpecialEventsPage({ params }: Props) {
 
   // Filter special events: isSpecial === true OR tableMinSpend > 500.
   // Solo eventi di oggi o futuri (giorno di Roma) — mai eventi già passati.
-  const allItems = await getAllCalendarEvents();
+  const allItems = getEventbriteDiscoveryItems(await getAllCalendarEvents(), locale);
   const items = allItems.filter(({ event: e }) => {
     if (!isUpcomingRome(e.dateISO)) return false;
     const isSpecialFlag = e.isSpecial === true;
@@ -62,8 +64,15 @@ export default async function SpecialEventsPage({ params }: Props) {
     gridSubtitle: tr(locale, 'The premium selection for your nights', 'La selezione premium per le tue serate'),
   };
 
+  const eventListSchema = items.length > 0
+    ? generateEventListSchema(items, locale, tr(locale, 'Special & VIP Events in Milan', 'Eventi Speciali e VIP a Milano'))
+    : null;
+
   return (
     <main className="flex-1 bg-[#131009] w-full pt-20">
+      {eventListSchema && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(eventListSchema) }} />
+      )}
       {/* Breadcrumb */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <nav className="text-sm text-white/40" aria-label="Breadcrumb">

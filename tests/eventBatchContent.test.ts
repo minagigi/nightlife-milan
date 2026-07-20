@@ -15,14 +15,15 @@ import { EVENT_LOCALE_PACKS_ALL, validateEventLocalePackCoverage } from '../lib/
 import { EVENT_BATCH_PROFILES } from '../lib/eventBatchProfiles';
 import { enabledLocaleCodes } from '../lib/i18n/locales';
 import { getEventVisualGallery } from '../lib/eventVisualGallery';
+import { BAD_BUNNY_ARIA_BASE_ID, getBadBunnyAriaImagePath } from '../lib/badBunnyAria';
 
 test('event batch contains exactly eleven unique physical-event profiles', () => {
   assert.equal(EVENT_BATCH_PROFILES.length, 11);
   assert.equal(new Set(EVENT_BATCH_PROFILES.map((profile) => profile.baseId)).size, 11);
   assert.equal(new Set(EVENT_BATCH_PROFILES.map((profile) => profile.canonicalSlug)).size, 11);
   for (const profile of EVENT_BATCH_PROFILES) {
-    assert.match(profile.eventbriteIds.en, /^\d+$/);
-    assert.match(profile.eventbriteIds.it, /^\d+$/);
+    assert.match(profile.eventbriteIds!.en, /^\d+$/);
+    assert.match(profile.eventbriteIds!.it, /^\d+$/);
     assert.match(profile.posterUrl, /^https:\/\//);
     assert.match(profile.affiliateUrl, /^https:\/\//);
     assert.equal(profile.venueImages.length, 4);
@@ -81,9 +82,16 @@ test('Eventbrite renderer preserves the required image order for all profiles an
       assert.ok(html.includes(`nlm:src=${profile.baseId}-${locale};slug-en=${profile.canonicalSlug}`));
 
       const gallery = getEventVisualGallery(profile.canonicalSlug, locale);
+      if (profile.siteLocales && !profile.siteLocales.includes(locale)) {
+        assert.equal(gallery, null);
+        continue;
+      }
       assert.ok(gallery);
       assert.equal(gallery.images.length, 5);
-      assert.equal(gallery.images[0].src, `/api/event-poster/${profile.baseId}/${locale}`);
+      const expectedGalleryPoster = profile.baseId === BAD_BUNNY_ARIA_BASE_ID
+        ? getBadBunnyAriaImagePath(locale, 'poster')
+        : `/api/event-poster/${profile.baseId}/${locale}`;
+      assert.equal(gallery.images[0].src, expectedGalleryPoster);
     }
   }
 });

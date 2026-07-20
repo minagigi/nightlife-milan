@@ -1,0 +1,27 @@
+body:has(.crm-shell) {
+  background: #101113;
+  padding-bottom: 0 !important;
+}
+
+body:has(.crm-shell) > header,
+body:has(.crm-shell) > main.crm-shell + div,
+body:has(.crm-shell) > a.fixed,
+body:has(.crm-shell) > button.fixed,
+body:has(.crm-shell) > nav.fixed,
+body:has(.crm-shell) > div.fixed {
+  display: none !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html:has(.crm-shell),
+  html:has(.crm-shell) body,
+  html:has(.crm-shell) a,
+  html:has(.crm-shell) button,
+  html:has(.crm-shell) [role="button"],
+  html:has(.crm-shell) input,
+  html:has(.crm-shell) textarea,
+  html:has(.crm-shell) select,
+  html:has(.crm-shell) label {
+    cursor: revert !important;
+  }
+}

@@ -1,14 +1,13 @@
 import { Metadata } from 'next';
 import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
-import { getLocalizedText } from '@/lib/seo';
+import { generateEventListSchema, getLocalizedText, jsonLdString } from '@/lib/seo';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Star, Clock, MapPin, ExternalLink } from 'lucide-react';
-import { mockVenues } from '@/lib/data';
 import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
-import { weeklyEvents } from '@/lib/eventsConfig';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 
 export const revalidate = 3600;
 
@@ -107,33 +106,32 @@ export default async function EventsBestPage({ params }: Props) {
   // mai eventi già passati.
   const venueIds = BEST_VENUES.map(v => v.id);
 
-  const allItems = await getAllCalendarEvents();
+  const allItems = getEventbriteDiscoveryItems(await getAllCalendarEvents(), locale);
   const upcomingByVenue: Record<string, typeof allItems[number]['event'][]> = {};
   allItems
     .map(({ event }) => event)
     .filter(e => venueIds.includes(e.venueId) && isUpcomingRome(e.dateISO))
-    .sort((a, b) => new Date(a.dateISO).getTime() - new Date(b.dateISO).getTime())
     .forEach(e => {
       if (!upcomingByVenue[e.venueId]) upcomingByVenue[e.venueId] = [];
       upcomingByVenue[e.venueId].push(e);
     });
 
-  // Weekly recurring events for these clubs — sorted Mon(1)→Sun(0)
-  const DOW_ORDER = [1, 2, 3, 4, 5, 6, 0];
-  const weeklyByVenue: Record<string, typeof weeklyEvents> = {};
-  weeklyEvents
-    .filter(e => ['justme', 'pineta', 'aria'].includes(e.clubSlug))
-    .sort((a, b) => DOW_ORDER.indexOf(a.dayOfWeek) - DOW_ORDER.indexOf(b.dayOfWeek))
-    .forEach(e => {
-      const key = `v-${e.clubSlug}`;
-      if (!weeklyByVenue[key]) weeklyByVenue[key] = [];
-      weeklyByVenue[key].push(e);
-    });
-
-  const DAYS_IT: Record<string, string> = { monday: 'Lunedì', tuesday: 'Martedì', wednesday: 'Mercoledì', thursday: 'Giovedì', friday: 'Venerdì', saturday: 'Sabato', sunday: 'Domenica' };
+  // Event schema sui soli eventi effettivamente mostrati (max 3 per venue,
+  // nello stesso ordine delle card "Prossimi Eventi Speciali").
+  const shownItems = BEST_VENUES.flatMap((v) =>
+    allItems
+      .filter(({ event }) => event.venueId === v.id && isUpcomingRome(event.dateISO))
+      .slice(0, 3),
+  );
+  const eventListSchema = shownItems.length > 0
+    ? generateEventListSchema(shownItems, locale, tr(locale, 'Best Clubs in Milan — Upcoming Events', 'I Migliori Club di Milano — Prossimi Eventi'))
+    : null;
 
   return (
     <main className="flex-1 bg-[#131009] w-full pt-20 pb-20">
+      {eventListSchema && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(eventListSchema) }} />
+      )}
       {/* Breadcrumb */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
         <nav className="text-xs text-white/30 flex gap-2">
@@ -186,9 +184,6 @@ export default async function EventsBestPage({ params }: Props) {
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 space-y-16">
         {BEST_VENUES.map((v, index) => {
           const upcoming = upcomingByVenue[v.id] ?? [];
-          const weekly = weeklyByVenue[v.id] ?? [];
-          const venue = mockVenues.find(mv => mv.id === v.id);
-
           return (
             <div key={v.id} className="border border-white/8 rounded-xl overflow-hidden">
               {/* Hero image */}
@@ -246,36 +241,6 @@ export default async function EventsBestPage({ params }: Props) {
                 </div>
 
                 <p className="text-champagne/60 text-xs font-mono mb-6">{v.priceFrom[lang]}</p>
-
-                {/* Weekly schedule */}
-                {weekly.length > 0 && (
-                  <div className="mb-6">
-                    <h3 className="text-white/50 text-[10px] uppercase tracking-[0.25em] mb-3">
-                      {tr(locale, 'Weekly Schedule', 'Serate Ricorrenti')}
-                    </h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      {weekly.map(we => {
-                        const dayLabel = isIt
-                          ? DAYS_IT[we.day] ?? we.day
-                          : we.day.charAt(0).toUpperCase() + we.day.slice(1);
-                        const eventSlug = `${we.clubSlug}-${we.day}-${we.eventSlug}`;
-                        return (
-                          <Link
-                            key={we.id}
-                            href={`${lp}/events/${eventSlug}`}
-                            className="flex items-center justify-between py-2.5 px-3 rounded-lg bg-white/[0.03] border border-white/5 hover:border-champagne/30 hover:bg-white/[0.05] transition-colors group"
-                          >
-                            <div className="flex items-center gap-3">
-                              <span className="text-white/30 text-xs font-mono w-20 shrink-0">{dayLabel}</span>
-                              <span className="text-white/70 text-sm group-hover:text-champagne transition-colors">{we.name}</span>
-                            </div>
-                            <span className="text-white/25 text-[10px] hidden sm:block">{we.genres[0]}</span>
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
 
                 {/* Upcoming special events */}
                 {upcoming.length > 0 && (

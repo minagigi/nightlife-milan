@@ -16,3 +16,12 @@ coverage/
 .env*
 nlm-post-*.json
 artifacts/event-locales-manifest.json
+
+# Copie di lavoro degli agenti e output QA locali: mai nel repo (già esclusi dal deploy via .vercelignore)
+.codex-work/
+.Codex/
+artifacts/
+tsconfig.tsbuildinfo
+
+# Materiale di altri progetti finito per errore nella cartella (Sardinia Society)
+deliverables/

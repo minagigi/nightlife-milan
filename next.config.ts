@@ -34,6 +34,16 @@ const nextConfig: NextConfig = {
 
     return [
       {
+        source: '/events/world-cup-final-big-screen-milan-just-me-july-19-2026',
+        destination: '/it/events/finale-coppa-del-mondo-maxischermo-milano-just-me-19-luglio-2026',
+        permanent: true,
+      },
+      {
+        source: '/:locale/events/world-cup-final-big-screen-milan-just-me-july-19-2026',
+        destination: '/it/events/finale-coppa-del-mondo-maxischermo-milano-just-me-19-luglio-2026',
+        permanent: true,
+      },
+      {
         source: '/calendar/this-week',
         destination: '/events/this-week',
         permanent: true,
@@ -118,7 +128,9 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ['motion', 'lucide-react'],
     optimizeCss: true,
-    inlineCss: true, // CSS (~20KB) inlinato nell'HTML — elimina le 2 richieste render-blocking (450ms su 4G)
+    // Inline the compact critical stylesheet to remove the mobile render-blocking
+    // round trip. Revalidate this choice if the global stylesheet grows again.
+    inlineCss: true,
   },
   webpack: (config, {dev}) => {
     // HMR is disabled in AI Studio via DISABLE_HMR env var.

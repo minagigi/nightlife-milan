@@ -14,25 +14,28 @@ export const metadata: Metadata = {
 
 export default function LandingPage() {
   // Generazione JSON-LD per LocalBusiness / EntertainmentBusiness
+  // Dati allineati a lib/venuesData.ts (fonte di verità): l'indirizzo era
+  // sbagliato (n. 15 invece di 2), l'URL usava lo slug inesistente /clubs/justme
+  // (quello vero è just-me-milano) e l'immagine era relativa.
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'EntertainmentBusiness',
     name: 'Just Me Milano',
-    image: '/images/just-me-milano.webp',
-    '@id': 'https://nightlifemilan.com/clubs/justme',
-    url: 'https://nightlifemilan.com/clubs/justme',
+    image: 'https://nightlifemilan.com/images/just-me-milano.webp',
+    '@id': 'https://nightlifemilan.com/clubs/just-me-milano',
+    url: 'https://nightlifemilan.com/clubs/just-me-milano',
     telephone: '+393519127047',
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'Viale Luigi Camoens, 15',
+      streetAddress: 'Viale Luigi Camoens, 2',
       addressLocality: 'Milano',
       postalCode: '20121',
       addressCountry: 'IT',
     },
     geo: {
       '@type': 'GeoCoordinates',
-      latitude: 45.4737,
-      longitude: 9.1746,
+      latitude: 45.4746,
+      longitude: 9.1729,
     },
     openingHoursSpecification: [
       {

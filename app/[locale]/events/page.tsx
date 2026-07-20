@@ -1,13 +1,13 @@
 import { Metadata } from 'next';
 import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
-import { getLocalizedText, buildOfferSchema } from '@/lib/seo';
+import { getLocalizedText, generateEventListSchema, jsonLdString } from '@/lib/seo';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
-import { weeklyEvents } from '@/lib/eventsConfig';
 import DiscoveryGrid from '@/components/DiscoveryGrid';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 
 export const revalidate = 3600;
 
@@ -57,71 +57,20 @@ export default async function EventsHubPage({ params }: Props) {
   const isIt = locale === 'it';
   const lp = localePrefix(locale);
 
-  // Upcoming mock events — chronological, priority Just Me > Pineta > Aria
-  const getVenuePriority = (venueId: string) => {
-    if (venueId === 'v-justme') return 1;
-    if (venueId === 'v-pineta') return 2;
-    if (venueId === 'v-aria')   return 3;
-    return 99;
-  };
-
   // Confine giorno nel fuso di Roma, non del server (UTC su Vercel):
   // mai mostrare eventi già passati.
-  const allItems = await getAllCalendarEvents();
+  const allItems = getEventbriteDiscoveryItems(await getAllCalendarEvents(), locale);
 
-  const items = allItems
-    .filter(({ event }) => isUpcomingRome(event.dateISO))
-    .sort((a, b) => {
-      const dateA = new Date(a.event.dateISO).getTime();
-      const dateB = new Date(b.event.dateISO).getTime();
-      if (dateA !== dateB) return dateA - dateB;
-      return getVenuePriority(a.event.venueId) - getVenuePriority(b.event.venueId);
-    });
+  const items = allItems.filter(({ event }) => isUpcomingRome(event.dateISO));
 
   // Special events
   const specialItems = items.filter(i => i.event.isSpecial);
-  const trendingItems = items.filter(i => i.event.isTrending);
 
-  // Weekly recurring events — group by club
-  const weeklyByClub: Record<string, typeof weeklyEvents> = {};
-  weeklyEvents.forEach(e => {
-    if (!weeklyByClub[e.clubName]) weeklyByClub[e.clubName] = [];
-    weeklyByClub[e.clubName].push(e);
-  });
-
-  const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-
-  const eventListSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: tr(locale, 'Milan Events 2026', 'Eventi Milano 2026'),
-    description: tr(locale, 'Complete list of nightlife events in Milan', 'Lista completa degli eventi notturni a Milano'),
-    numberOfItems: items.length,
-    itemListElement: items.slice(0, 10).map((item, i) => {
-      const eventUrl = `${baseUrl}${lp}/events/${getLocalizedText(item.event.localizedContent.slug, locale)}`;
-      const offer = buildOfferSchema(item.event.pricing, eventUrl, item.event.dateISO);
-      return {
-        '@type': 'ListItem',
-        position: i + 1,
-        item: {
-          '@type': 'Event',
-          name: getLocalizedText(item.event.localizedContent.title, locale),
-          startDate: item.event.dateISO,
-          location: {
-            '@type': 'Place',
-            name: getLocalizedText(item.venue.localizedContent.name, locale),
-            address: {
-              '@type': 'PostalAddress',
-              addressLocality: 'Milan',
-              addressCountry: 'IT',
-            },
-          },
-          url: eventUrl,
-          ...(offer ? { offers: offer } : {}),
-        },
-      };
-    }),
-  };
+  // Event completi via il generatore condiviso (lib/seo.ts) — stessa entità
+  // ricca di tutte le altre superfici, mai un Event scritto a mano.
+  const eventListSchema = items.length > 0
+    ? generateEventListSchema(items, locale, tr(locale, 'Milan Events 2026', 'Eventi Milano 2026'))
+    : null;
 
   const t = {
     hero: tr(locale, 'All Events', 'Tutti gli Eventi'),
@@ -129,19 +78,19 @@ export default async function EventsHubPage({ params }: Props) {
       ? 'Il calendario completo della vita notturna milanese — serate speciali, eventi ricorrenti, aperitivo e molto altro.'
       : "Milan's complete nightlife calendar — special nights, recurring events, aperitivo and much more.",
     quickAnswer: isIt
-      ? `A Milano ci sono ${items.length} eventi in programma: serate VIP (Just Me, Armani Privé, The Club), techno underground (Volt, Magazzini), aperitivo cantato (Pineta, 55 Milano), rooftop (Voya, Ceresio 7). Prenota via WhatsApp +39 351 912 7047.`
-      : `Milan has ${items.length} upcoming events: VIP nights (Just Me, Armani Privé, The Club), underground techno (Volt, Magazzini), singing aperitivo (Pineta, 55 Milano), rooftop (Voya, Ceresio 7). Book via WhatsApp +39 351 912 7047.`,
+      ? `A Milano ci sono ${items.length} eventi in programma nei migliori club. Apri l'evento per dettagli e prenotazione; assistenza WhatsApp +39 351 912 7047.`
+      : `Milan has ${items.length} upcoming events at the best clubs. Open the event for details and booking; WhatsApp +39 351 912 7047.`,
     upcoming: tr(locale, 'Upcoming Events', 'In Programma'),
     special: tr(locale, 'Special Nights', 'Serate Speciali'),
-    weekly: tr(locale, 'Weekly Recurring Nights', 'Serate Ricorrenti'),
-    weeklyDesc: tr(locale, 'Every week, the same venues offer curated recurring experiences. Book your spot in advance.', 'Ogni settimana, gli stessi locali offrono esperienze ripetibili e selezionate. Prenota il tuo posto in anticipo.'),
     tonight: tr(locale, 'Tonight', 'Stasera'),
     thisWeek: tr(locale, 'This Week', 'Questa Settimana'),
   };
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(eventListSchema) }} />
+      {eventListSchema && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(eventListSchema) }} />
+      )}
       <main className="flex-1 bg-[#131009] w-full pt-20">
         {/* Breadcrumb */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
@@ -257,41 +206,6 @@ export default async function EventsHubPage({ params }: Props) {
           title={t.upcoming}
           subtitle={tr(locale, 'All curated upcoming events', 'Tutti gli appuntamenti selezionati per te')}
         />
-
-        {/* Weekly Recurring Nights */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/5">
-          <h2 className="font-serif text-3xl text-white mb-3">{t.weekly}</h2>
-          <p className="text-white/40 mb-10 font-light">{t.weeklyDesc}</p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {Object.entries(weeklyByClub).slice(0, 4).map(([clubName, events]) => (
-              <div key={clubName} className="p-6 rounded-lg border border-white/8 bg-white/[0.02] hover:border-champagne/30 transition-colors">
-                <h3 className="font-serif text-xl text-champagne mb-4">{clubName}</h3>
-                <div className="space-y-2">
-                  {events.map(e => {
-                    const slug = `${e.clubSlug}-${e.day}-${e.eventSlug}`;
-                    const dayLabel = isIt
-                      ? { monday: 'Lunedì', tuesday: 'Martedì', wednesday: 'Mercoledì', thursday: 'Giovedì', friday: 'Venerdì', saturday: 'Sabato', sunday: 'Domenica' }[e.day]
-                      : e.day.charAt(0).toUpperCase() + e.day.slice(1);
-                    return (
-                      <Link
-                        key={e.id}
-                        href={`${lp}/events/${slug}`}
-                        className="flex items-center justify-between py-2 border-b border-white/5 hover:border-champagne/20 transition-colors group"
-                      >
-                        <div>
-                          <span className="text-white/40 text-xs font-mono uppercase tracking-wider w-24 inline-block">{dayLabel}</span>
-                          <span className="text-white/80 text-sm group-hover:text-champagne transition-colors">{e.name}</span>
-                        </div>
-                        <span className="text-white/30 text-xs">{e.genres.slice(0, 2).join(', ')}</span>
-                      </Link>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
 
         {/* CTA WhatsApp */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">

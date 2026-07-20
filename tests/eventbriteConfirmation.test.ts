@@ -44,6 +44,20 @@ test('buildEventbriteConfirmationHtml localizes the warning and includes Xceed a
   assert.ok(it.includes('https://wa.me/393519127047'));
 });
 
+test('buildEventbriteConfirmationHtml adds personalized event facts when provided', () => {
+  const html = buildEventbriteConfirmationHtml('it', [AFFILIATE], {
+    heading: 'Conferma registrazione: Spagna-Argentina al Just Me Milano',
+    details: 'Domenica 19 luglio 2026. Apertura alle 19:30 e diretta alle 21:00.',
+  });
+
+  assert.match(html, /Spagna-Argentina al Just Me Milano/);
+  assert.match(html, /19:30/);
+  assert.match(html, /21:00/);
+  assert.match(html, /Non è un biglietto/);
+  assert.ok(html.includes(AFFILIATE));
+  assert.ok(html.includes('+39 351 912 7047'));
+});
+
 test('buildEventbriteConfirmationHtml rejects non-affiliate links', () => {
   assert.throws(
     () => buildEventbriteConfirmationHtml('en', ['https://xceed.me/en/milano/event/example/123/channel/wrong']),

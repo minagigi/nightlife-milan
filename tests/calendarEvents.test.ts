@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { romeDayKey, romeDayKeyOffset, dayOfWeekForKey, isUpcomingRome, romeNextMondayKey } from '../lib/calendarEvents';
+import { romeDayKey, romeDayKeyOffset, dayOfWeekForKey, isUpcomingRome, romeNextMondayKey, romeUpcomingSundayKey } from '../lib/calendarEvents';
 
 test('romeDayKey: converts a late-night UTC instant to the correct Rome calendar day', () => {
   // 2026-07-11T23:30:00Z is 2026-07-12T01:30 in Rome (CEST, +2) -> next day.
@@ -41,4 +41,11 @@ test('romeNextMondayKey: always a Monday, within the next 7 days', () => {
   const [ky, km, kd] = key.split('-').map(Number);
   const diffDays = (Date.UTC(ky, km - 1, kd) - Date.UTC(y, m - 1, d)) / 86400000;
   assert.ok(diffDays >= 0 && diffDays <= 7, `expected 0-7 days ahead, got ${diffDays}`);
+});
+
+test('romeUpcomingSundayKey: is always a future Sunday, including when today is Sunday', () => {
+  const todayKey = romeDayKeyOffset(0);
+  const key = romeUpcomingSundayKey();
+  assert.equal(dayOfWeekForKey(key), 0);
+  assert.ok(key > todayKey);
 });

@@ -6,8 +6,9 @@ import EventCard from '@/components/EventCard';
 import { CONTACT } from '@/config/contact';
 import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
 import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
-import { getLocalizedText } from '@/lib/seo';
+import { generateEventListSchema, getLocalizedText, jsonLdString } from '@/lib/seo';
 import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 
 export type EventIntent = 'international' | 'university-erasmus' | '18-plus' | '21-plus';
 type CoreLocale = 'en' | 'it' | 'es' | 'fr' | 'de' | 'pt';
@@ -243,15 +244,14 @@ export default async function EventIntentLanding({ intent, locale }: { intent: E
   const config = INTENTS[intent];
   const lang = coreLocale(locale);
   const lp = localePrefix(locale);
-  const allItems = await getAllCalendarEvents();
+  const allItems = getEventbriteDiscoveryItems(await getAllCalendarEvents(), locale);
   const items = allItems
     .filter(({ event }) => isUpcomingRome(event.dateISO) && config.venueIds.includes(event.venueId))
     .filter(({ event }) => {
       if (!config.terms) return true;
       const haystack = `${event.localizedContent.title.en} ${event.localizedContent.shortDescription.en}`.toLowerCase();
       return config.terms.some((term) => haystack.includes(term));
-    })
-    .sort((a, b) => new Date(a.event.dateISO).getTime() - new Date(b.event.dateISO).getTime());
+    });
 
   const venues = Array.from(new Map(allItems
     .filter(({ venue }) => config.venueIds.includes(venue.id))
@@ -275,15 +275,11 @@ export default async function EventIntentLanding({ intent, locale }: { intent: E
     },
   ];
 
-  const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const itemListSchema = {
-    '@context': 'https://schema.org', '@type': 'ItemList', name: config.heading[lang], numberOfItems: items.length,
-    itemListElement: items.map(({ event }, index) => ({
-      '@type': 'ListItem', position: index + 1,
-      url: `${baseUrl}${lp}/events/${getLocalizedText(event.localizedContent.slug, locale)}`,
-      name: getLocalizedText(event.localizedContent.title, locale),
-    })),
-  };
+  // Event COMPLETI (non più soli url+name): stessa entità ricca delle altre
+  // superfici, via il generatore condiviso di lib/seo.ts.
+  const itemListSchema = items.length > 0
+    ? generateEventListSchema(items, locale, config.heading[lang])
+    : null;
   const faqSchema = {
     '@context': 'https://schema.org', '@type': 'FAQPage',
     mainEntity: faqs.map((faq) => ({ '@type': 'Question', name: faq.q, acceptedAnswer: { '@type': 'Answer', text: faq.a } })),
@@ -291,7 +287,9 @@ export default async function EventIntentLanding({ intent, locale }: { intent: E
 
   return (
     <main className="min-h-screen bg-[#131009] text-white pb-20">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }} />
+      {itemListSchema && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(itemListSchema) }} />
+      )}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       <section className="relative min-h-[620px] h-[78svh] max-h-[840px] flex items-end overflow-hidden">
