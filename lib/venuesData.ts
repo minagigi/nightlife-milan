@@ -109,7 +109,7 @@ export const venuesData: Venue[] = [
     isManaged: true,
     isPriority: true,
     isFeatured: true,
-    priorityScore: 90,
+    priorityScore: 95,
     ageRange: "25-45",
     priceRange: "$$$",
     tags: ["Singing Aperitivo", "Chic", "Commercial"],
@@ -190,7 +190,7 @@ export const venuesData: Venue[] = [
     isManaged: true,
     isPriority: true,
     isFeatured: true,
-    priorityScore: 70,
+    priorityScore: 85,
     ageRange: "25-40",
     priceRange: "$$",
     tags: ["Apericena", "Stage", "Terrace"],
@@ -233,8 +233,8 @@ export const venuesData: Venue[] = [
     image: "/images/repvblic-milano.webp",
     isManaged: true,
     isPriority: true,
-    isFeatured: false,
-    priorityScore: 40,
+    isFeatured: true,
+    priorityScore: 75,
     ageRange: "25-40",
     priceRange: "$$",
     tags: ["Industrial", "Dirty Monday", "House"],
@@ -770,10 +770,138 @@ export const venuesData: Venue[] = [
     ],
     isManaged: true,
     isPriority: true,
-    isFeatured: false,
-    priorityScore: 75,
+    isFeatured: true,
+    priorityScore: 90,
     ageRange: "22-40",
     priceRange: "$$",
     tags: ["Aperitivo Buffet", "EDM", "Hits", "Dance Floor Tables"]
+  },
+  {
+    id: "v-tocqueville",
+    slugs: { en: "tocqueville-13-milano", it: "tocqueville-13-milano" },
+    address: {
+      streetAddress: "Via Alessio di Tocqueville, 13",
+      addressLocality: "Milano",
+      postalCode: "20154",
+      addressCountry: "IT"
+    },
+    coordinates: { latitude: 45.4818, longitude: 9.1871 },
+    category: VenueCategory.CLUB,
+    zone: MilanZone.CORSO_COMO,
+    sameAs: ["https://instagram.com/tocqueville13"],
+    localizedContent: {
+      name: { en: "Tocqueville 13", it: "Tocqueville 13" },
+      description: {
+        en: "Historical two-story club in the heart of Corso Como featuring an upscale Dinner Show restaurant and a high-energy urban, reggaeton, and house dancefloor with LED ceiling.",
+        it: "Storico club su due livelli nel cuore di Corso Como con ristorante Dinner Show al piano superiore e pista ad alta energia urban, reggaeton e house con soffitto LED immersivo."
+      },
+      dressCode: { en: "Trendy Glamour & Smart Chic", it: "Trendy Glamour e Smart Chic" },
+      altTextImg: { en: "Tocqueville 13 Corso Como Milan VIP tables and dinner show", it: "Tocqueville 13 Corso Como Milano tavoli VIP e dinner show" },
+      insiderTip: { en: "Book the Friday or Saturday Dinner Show to keep your table as the room converts into a full nightclub at midnight.", it: "Prenota il Dinner Show del venerdì o sabato per mantenere la tua base tavolo quando a mezzanotte la sala diventa discoteca." }
+    },
+    image: "/images/11-clubroom-milan.webp",
+    isManaged: true,
+    isPriority: false,
+    isFeatured: false,
+    priorityScore: 38,
+    ageRange: "21-38",
+    priceRange: "$$",
+    tags: ["Corso Como", "Dinner Show", "Reggaeton"]
+  },
+  {
+    id: "v-alcatraz",
+    slugs: { en: "alcatraz-milano", it: "alcatraz-milano" },
+    address: {
+      streetAddress: "Via Valtellina, 25",
+      addressLocality: "Milano",
+      postalCode: "20159",
+      addressCountry: "IT"
+    },
+    coordinates: { latitude: 45.4939, longitude: 9.1806 },
+    category: VenueCategory.LIVE_MUSIC_VENUE,
+    zone: MilanZone.ISOLA,
+    sameAs: ["https://instagram.com/alcatrazmilano"],
+    localizedContent: {
+      name: { en: "Alcatraz Milano", it: "Alcatraz Milano" },
+      description: {
+        en: "Milan's largest multi-room arena in Zona Farini / Isola. Live concerts until 23:00 followed by a massive 3-room Friday and Saturday party (Commercial/90s-2000s, Reggaeton, Rock/DJ set).",
+        it: "La più grande arena multi-sala di Milano in Zona Farini / Isola. Concerti live fino alle 23:00 seguiti dal leggendario party del venerdì e sabato su 3 piste (Commerciale/90-2000, Reggaeton, Rock)."
+      },
+      dressCode: { en: "Smart Casual / Theme Night", it: "Casual Curato / Tema Evento" },
+      altTextImg: { en: "Alcatraz Milano mega club 3 dancefloors", it: "Alcatraz Milano mega club 3 piste da ballo" },
+      insiderTip: { en: "Ideal for large university groups, graduation parties, Halloween, and New Year's Eve — book the elevated VIP balcony overlooking the main stage.", it: "Ideale per grandi gruppi universitari, feste di laurea, Halloween e Capodanno — prenota la balconata VIP rialzata sul palco centrale." }
+    },
+    image: "/images/milan-club-crowd-dancefloor-night.webp",
+    isManaged: true,
+    isPriority: false,
+    isFeatured: false,
+    priorityScore: 36,
+    ageRange: "18-35",
+    priceRange: "$",
+    tags: ["3 Dancefloors", "Mega Club", "University"]
+  },
+  {
+    id: "v-fabrique",
+    slugs: { en: "fabrique-milano", it: "fabrique-milano" },
+    address: {
+      streetAddress: "Via Gaudenzio Fantoli, 9",
+      addressLocality: "Milano",
+      postalCode: "20138",
+      addressCountry: "IT"
+    },
+    coordinates: { latitude: 45.4557, longitude: 9.2405 },
+    category: VenueCategory.LIVE_MUSIC_VENUE,
+    zone: MilanZone.RIPAMONTI,
+    sameAs: ["https://instagram.com/fabriquemilano"],
+    localizedContent: {
+      name: { en: "Fabrique Milano", it: "Fabrique Milano" },
+      description: {
+        en: "Post-industrial warehouse in the Mecenate district hosting international electronic festivals, world-touring DJs, and high-production club showcases.",
+        it: "Warehouse post-industriale nel distretto Mecenate che ospita festival internazionali di musica elettronica, superstar DJ mondiali e grandi format urban."
+      },
+      dressCode: { en: "Clubwear & Contemporary Streetwear", it: "Clubwear & Streetwear Contemporaneo" },
+      altTextImg: { en: "Fabrique Milano warehouse electronic festival", it: "Fabrique Milano warehouse festival elettronico" },
+      insiderTip: { en: "Reserve the elevated VIP ring to enjoy international headliners with dedicated bottle service and private bar access.", it: "Prenota il ring VIP rialzato per goderti gli headliner internazionali con bottle service dedicato e bar privato." }
+    },
+    image: "/images/club-techno.webp",
+    isManaged: true,
+    isPriority: false,
+    isFeatured: false,
+    priorityScore: 34,
+    ageRange: "18-38",
+    priceRange: "$",
+    tags: ["Warehouse", "Electronic", "Live Arena"]
+  },
+  {
+    id: "v-amnesia",
+    slugs: { en: "amnesia-milano", it: "amnesia-milano" },
+    address: {
+      streetAddress: "Via Alfonso Gatto (ang. Viale Forlanini)",
+      addressLocality: "Milano",
+      postalCode: "20134",
+      addressCountry: "IT"
+    },
+    coordinates: { latitude: 45.4619, longitude: 9.2558 },
+    category: VenueCategory.CLUB,
+    zone: MilanZone.RIPAMONTI,
+    sameAs: ["https://instagram.com/amnesiamilano"],
+    localizedContent: {
+      name: { en: "Amnesia Milano", it: "Amnesia Milano" },
+      description: {
+        en: "Milan's premier temple of Tech-House, Melodic Techno, and international DJ culture for over twenty years, featuring a custom L-Acoustics sound system and immersive LED wall.",
+        it: "Il tempio milanese della Tech-House, Melodic Techno e dei grandi guest DJ internazionali da oltre vent'anni, con impianto L-Acoustics e LED wall immersivo."
+      },
+      dressCode: { en: "Total Black / Contemporary Clubwear", it: "Total Black / Clubwear Contemporaneo" },
+      altTextImg: { en: "Amnesia Milano techno and house club", it: "Amnesia Milano club techno e house" },
+      insiderTip: { en: "The Backstage Console Privé puts you directly behind the world's top Techno and Tech-House selectors.", it: "Il Privé Console Backstage ti posiziona esattamente dietro i migliori DJ Techno e Tech-House del mondo." }
+    },
+    image: "/images/club-techno.webp",
+    isManaged: true,
+    isPriority: false,
+    isFeatured: false,
+    priorityScore: 33,
+    ageRange: "21-38",
+    priceRange: "$$",
+    tags: ["Tech House", "Techno", "International DJs"]
   }
 ];

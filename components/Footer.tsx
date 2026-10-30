@@ -101,6 +101,27 @@ export default function Footer({ lang }: FooterProps) {
               </Link>
             </li>
             <li>
+              <Link href={`${lp}/rooftops`} className="text-white/60 hover:text-champagne transition-colors text-sm">{tr(lang, 'Rooftop Bars', 'Rooftop Bar & Terrazze')}</Link>
+            </li>
+            <li>
+              <Link href={`${lp}/football-afterparties`} className="text-champagne/90 hover:text-champagne transition-colors text-sm font-medium">{tr(lang, 'San Siro Football Afterparties', 'Dopo-Partita San Siro (Inter & Milan)')}</Link>
+            </li>
+            <li>
+              <Link href={`${lp}/guides/san-siro-football-match-afterparties-inter-ac-milan`} className="text-white/60 hover:text-champagne transition-colors text-sm">{tr(lang, 'San Siro Post-Match Guide', 'Guida Dopo-Partita San Siro')}</Link>
+            </li>
+            <li>
+              <Link href={`${lp}/private-parties`} className="text-white/60 hover:text-champagne transition-colors text-sm">{tr(lang, 'Private Parties & Graduations', 'Feste di Laurea & 18 Anni')}</Link>
+            </li>
+            <li>
+              <Link href={`${lp}/guest-lists`} className="text-white/60 hover:text-champagne transition-colors text-sm">{tr(lang, 'Guest Lists', 'Liste Discoteche')}</Link>
+            </li>
+            <li>
+              <Link href={`${lp}/bottle-prices`} className="text-white/60 hover:text-champagne transition-colors text-sm">{tr(lang, 'Bottle Service Prices', 'Listino Prezzi Bottiglie')}</Link>
+            </li>
+            <li>
+              <Link href={`${lp}/genres`} className="text-white/60 hover:text-champagne transition-colors text-sm">{tr(lang, 'Music Genres', 'Generi Musicali')}</Link>
+            </li>
+            <li>
               <Link href={`${lp}/events/past`} className="text-white/60 hover:text-champagne transition-colors text-sm">
                 {tr(lang, 'Past events', 'Eventi passati')}
               </Link>
@@ -131,6 +152,18 @@ export default function Footer({ lang }: FooterProps) {
               <Link href={links.corsoComo} className="text-white/60 hover:text-champagne transition-colors text-sm">
                 Corso Como
               </Link>
+            </li>
+            <li>
+              <Link href={`${lp}/zones/parco-sempione`} className="text-white/60 hover:text-champagne transition-colors text-sm">Parco Sempione</Link>
+            </li>
+            <li>
+              <Link href={`${lp}/zones/san-siro`} className="text-white/60 hover:text-champagne transition-colors text-sm">San Siro & Ippodromo</Link>
+            </li>
+            <li>
+              <Link href={`${lp}/zones/citylife-portello`} className="text-white/60 hover:text-champagne transition-colors text-sm">CityLife & Portello</Link>
+            </li>
+            <li>
+              <Link href={`${lp}/zones/duomo-san-babila`} className="text-white/60 hover:text-champagne transition-colors text-sm">Duomo & San Babila</Link>
             </li>
             <li>
               <Link href={links.portaVenezia} className="text-white/60 hover:text-champagne transition-colors text-sm">

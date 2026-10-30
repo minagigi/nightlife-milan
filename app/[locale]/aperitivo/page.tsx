@@ -6,6 +6,7 @@ import { ArrowRight, Clock, MapPin, MessageCircle } from 'lucide-react';
 import { CONTACT } from '@/config/contact';
 import { tr } from '@/lib/i18n/t';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { VipQuoteCalculator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
 
 export const revalidate = 3600;
 
@@ -405,6 +406,12 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
             ))}
           </div>
         </div>
+      </section>
+
+      {/* Interactive VIP Quote Calculator & Priority 6 */}
+      <section className="px-6 pb-20 max-w-7xl mx-auto space-y-16">
+        <VipQuoteCalculator locale={locale} />
+        <PrioritySixShowcase locale={locale} />
       </section>
 
       {/* After aperitivo CTA */}

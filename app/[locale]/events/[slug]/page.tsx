@@ -21,6 +21,7 @@ import GoldEventHtml from '@/components/GoldEventHtml';
 import EventImageGallery from '@/components/EventImageGallery';
 import MoreVenueEvents, { MoreVenueEventItem } from '@/components/MoreVenueEvents';
 import EventsCarousel from '@/components/EventsCarousel';
+import { VipQuoteCalculator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
 import { getEventVisualGallery } from '@/lib/eventVisualGallery';
 import { getLocalizedEventContent, getLocalizedEventSeed } from '@/lib/localizedEventContent';
 import { getEventBatchProfile, getEventBatchSlug, normalizeEventBatchSlug } from '@/lib/eventBatchProfiles';
@@ -962,6 +963,10 @@ export default async function EventPage({ params }: Props) {
             </div>
           </section>
         )}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 border-t border-white/10 space-y-12">
+          <VipQuoteCalculator locale={locale} />
+          <PrioritySixShowcase locale={locale} />
+        </section>
       </main>
     </>
   );

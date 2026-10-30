@@ -14,6 +14,7 @@ import { localePrefix, hreflangAlternates, getLocaleDef } from '@/lib/i18n/local
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { generateEventListSchema, jsonLdString } from '@/lib/seo';
 import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
+import { PrioritySixShowcase, WeeklyNightlifeNavigator, EntryFormulaMatrix, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 
 const EventsCarousel = nextDynamic(() => import('@/components/EventsCarousel'));
 
@@ -542,6 +543,22 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           </div>
         </section>
 
+        {/* ── 8b. Priority 6 Showcase, Weekly Navigator, Entry Matrix & VIP Calculator ── */}
+        <section className="py-16 px-4 sm:px-6 lg:px-8 w-full bg-depth border-t border-white/5 space-y-20">
+          <div className="max-w-7xl mx-auto">
+            <PrioritySixShowcase locale={locale} />
+          </div>
+          <div className="max-w-7xl mx-auto">
+            <WeeklyNightlifeNavigator locale={locale} />
+          </div>
+          <div className="max-w-7xl mx-auto">
+            <EntryFormulaMatrix locale={locale} />
+          </div>
+          <div className="max-w-7xl mx-auto">
+            <VipQuoteCalculator locale={locale} />
+          </div>
+        </section>
+
         {/* ── 9. Tags / Popular Searches ───────────────────────────────── */}
         <section className="py-24 px-4 sm:px-6 lg:px-8 w-full bg-depth border-t border-white/5">
           <div className="max-w-7xl mx-auto">
@@ -559,6 +576,13 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                 { label: tr(locale, 'Navigli Zone', 'Zona Navigli'), href: `${lp}/zones/navigli` },
                 { label: tr(locale, 'Corso Como Zone', 'Zona Corso Como'), href: `${lp}/zones/corso-como` },
                 { label: tr(locale, 'Club Guide', 'Guida ai Club'), href: `${lp}/guides` },
+                { label: tr(locale, 'San Siro Football Afterparties', 'Dopo-Partita San Siro (Inter & Milan)'), href: `${lp}/football-afterparties` },
+                { label: tr(locale, 'San Siro Post-Match Guide', 'Guida Dopo-Partita San Siro'), href: `${lp}/guides/san-siro-football-match-afterparties-inter-ac-milan` },
+                { label: tr(locale, 'Rooftop Bars', 'Rooftop Bar & Terrazze'), href: `${lp}/rooftops` },
+                { label: tr(locale, 'Private Parties & Graduations', 'Feste di Laurea & 18 Anni'), href: `${lp}/private-parties` },
+                { label: tr(locale, 'Guest Lists', 'Liste Discoteche'), href: `${lp}/guest-lists` },
+                { label: tr(locale, 'Bottle Prices 2026/2027', 'Listino Bottiglie 2026/2027'), href: `${lp}/bottle-prices` },
+                { label: tr(locale, 'Music Genres', 'Generi Musicali'), href: `${lp}/genres` },
                 { label: tr(locale, 'Concierge Service', 'Concierge'), href: `${lp}/concierge` },
                 { label: tr(locale, 'Fashion Week Milan', 'Fashion Week Milano'), href: `${lp}/clubs` },
               ].map((tag) => (

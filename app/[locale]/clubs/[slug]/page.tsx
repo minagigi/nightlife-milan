@@ -12,6 +12,7 @@ import { VenueCategory } from '@/lib/types';
 import { generateEventListSchema, getLocalizedText, jsonLdString } from '@/lib/seo';
 import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
 import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
+import { VipQuoteCalculator, EntryFormulaMatrix, SanSiroMatchAfterpartyFinder } from '@/components/NightlifeExpansionModules';
 
 export const revalidate = 3600;
 
@@ -834,7 +835,13 @@ export default async function ClubPage({ params }: Props) {
 
           </div>
         </div>
-
+      </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 space-y-12">
+        <EntryFormulaMatrix locale={locale} />
+        {(slug.includes('aria') || slug.includes('just-me') || slug.includes('voya') || slug.includes('55-milano')) && (
+          <SanSiroMatchAfterpartyFinder locale={locale} />
+        )}
+        <VipQuoteCalculator locale={locale} initialVenueSlug={slug} />
       </div>
     </main>
   );

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { mockZones } from '@/lib/data';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { VipQuoteCalculator, WeeklyNightlifeNavigator } from '@/components/NightlifeExpansionModules';
 
 export const revalidate = 3600;
 
@@ -58,6 +59,10 @@ const zoneImages: Record<string, string> = {
   porta_romana: '/images/milan-porta-romana-nightlife-magazzini.webp',
   citylife: '/images/milan-citylife-nightlife-clubs.webp',
   centro: '/images/milan-centro-nightlife-duomo-bars.webp',
+  'parco-sempione': '/images/venues/just-me-milano/just-me-milano-interior-01.webp',
+  'citylife-portello': '/images/venues/voya-rooftop-milan/voya-rooftop-milan-interior-01.webp',
+  'duomo-san-babila': '/images/venues/terrazza-21/terrazza-21-interior-01.webp',
+  'san-siro': '/images/venues/aria-club-milano/aria-club-milano-interior-01.webp',
 };
 
 export default async function ZonesPage({
@@ -259,6 +264,16 @@ export default async function ZonesPage({
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Interactive Weekly Nightlife Navigator */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <WeeklyNightlifeNavigator locale={locale} />
+      </section>
+
+      {/* Interactive VIP Quote Calculator */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <VipQuoteCalculator locale={locale} />
       </section>
 
       {/* VIP Tables CTA */}

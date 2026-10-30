@@ -9,6 +9,7 @@ import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/local
 import { generateEventListSchema, getLocalizedText, jsonLdString } from '@/lib/seo';
 import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
+import { VipQuoteCalculator, EntryFormulaMatrix, PrioritySixShowcase, SanSiroMatchAfterpartyFinder } from '@/components/NightlifeExpansionModules';
 
 export type EventIntent = 'international' | 'university-erasmus' | '18-plus' | '21-plus';
 type CoreLocale = 'en' | 'it' | 'es' | 'fr' | 'de' | 'pt';
@@ -380,6 +381,12 @@ export default async function EventIntentLanding({ intent, locale }: { intent: E
             </details>
           ))}
         </div>
+      </section>
+      <section className="max-w-6xl mx-auto px-5 sm:px-8 pb-20 space-y-12">
+        <EntryFormulaMatrix locale={locale} />
+        {intent === 'international' && <SanSiroMatchAfterpartyFinder locale={locale} />}
+        <VipQuoteCalculator locale={locale} />
+        <PrioritySixShowcase locale={locale} />
       </section>
     </main>
   );

@@ -60,6 +60,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: '/door-policy', priority: 0.75, changeFrequency: 'monthly' as const },
     { path: '/guides', priority: 0.8, changeFrequency: 'weekly' as const },
     { path: '/zones', priority: 0.75, changeFrequency: 'monthly' as const },
+    { path: '/genres', priority: 0.80, changeFrequency: 'weekly' as const },
+    { path: '/rooftops', priority: 0.90, changeFrequency: 'weekly' as const },
+    { path: '/private-parties', priority: 0.90, changeFrequency: 'weekly' as const },
+    { path: '/guest-lists', priority: 0.90, changeFrequency: 'weekly' as const },
+    { path: '/football-afterparties', priority: 0.92, changeFrequency: 'weekly' as const },
+    { path: '/guides/san-siro-football-match-afterparties-inter-ac-milan', priority: 0.88, changeFrequency: 'weekly' as const },
     { path: '/privacy', priority: 0.2, changeFrequency: 'yearly' as const },
     { path: '/terms', priority: 0.2, changeFrequency: 'yearly' as const },
   ];
@@ -151,7 +157,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
 
   // 6. Genre Pages
-  const genreSlugs = ['techno', 'house', 'hip-hop', 'reggaeton', 'commercial', 'edm', 'live-music', 'indie'];
+  const genreSlugs = ['techno', 'house', 'afro-house', 'hip-hop', 'reggaeton', 'commercial', 'dinner-show', 'edm', 'live-music', 'indie'];
   genreSlugs.forEach((slug) => {
     locales.forEach((locale) => {
       const langPrefix = localePrefix(locale);

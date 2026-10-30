@@ -9,6 +9,7 @@ import { Suspense } from 'react';
 import { getVenues } from '@/lib/data';
 import { weeklyEvents } from '@/lib/eventsConfig';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { PrioritySixShowcase, WeeklyNightlifeNavigator, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 
 export const revalidate = 3600;
 
@@ -213,6 +214,13 @@ export default async function ClubsPage({
       {/* Smart Grid & Interactive Map Toggle */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <VenueMapToggle venues={allVenues} lang={locale} mapPins={mapPins} />
+      </section>
+
+      {/* Priority 6 Showcase, Weekly Navigator & VIP Calculator */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/10 space-y-16">
+        <PrioritySixShowcase locale={locale} />
+        <WeeklyNightlifeNavigator locale={locale} />
+        <VipQuoteCalculator locale={locale} />
       </section>
 
       {/* SEO Copy + AI Trafiletto */}

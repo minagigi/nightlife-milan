@@ -8,6 +8,7 @@ import { venuesData } from '@/lib/venuesData';
 import { MilanZone } from '@/lib/types';
 import { tr } from '@/lib/i18n/t';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { VipQuoteCalculator, EntryFormulaMatrix, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
 
 export const revalidate = 3600;
 
@@ -424,6 +425,13 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
             })}
           </div>
         </div>
+      </section>
+
+      {/* Interactive VIP Quote Calculator & Formula Matrix */}
+      <section className="px-6 pb-20 max-w-7xl mx-auto space-y-16">
+        <VipQuoteCalculator locale={locale} />
+        <EntryFormulaMatrix locale={locale} />
+        <PrioritySixShowcase locale={locale} />
       </section>
 
       {/* FAQ */}

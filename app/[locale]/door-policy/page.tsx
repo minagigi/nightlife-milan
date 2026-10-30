@@ -4,6 +4,7 @@ import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import { mockVenues } from '@/lib/data';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { EntryFormulaMatrix, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
 
 export const revalidate = 86400;
 
@@ -357,6 +358,12 @@ export default async function DoorPolicyPage({ params }: Props) {
               );
             })}
           </div>
+        </section>
+
+        {/* Entry Formula Matrix & Priority 6 Showcase */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 space-y-16">
+          <EntryFormulaMatrix locale={locale} />
+          <PrioritySixShowcase locale={locale} />
         </section>
 
         {/* FAQ */}

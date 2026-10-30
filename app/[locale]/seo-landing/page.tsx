@@ -1,30 +1,42 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import Hero from '@/components/seo-landing/Hero';
+import { localePrefix } from '@/lib/i18n/locales';
+import {
+  VipQuoteCalculator,
+  WeeklyNightlifeNavigator,
+  EntryFormulaMatrix,
+  PrioritySixShowcase,
+  SanSiroMatchAfterpartyFinder,
+} from '@/components/NightlifeExpansionModules';
 
-// ISR (Incremental Static Regeneration) per mantenere i dati aggiornati ma veloci
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: 'Just Me Milano | Eventi, Prezzi e Prenotazioni 2026',
-  description: 'Scopri il Just Me Milano. Prenota il tuo tavolo VIP, scopri i prezzi, il dress code e gli eventi esclusivi del club più iconico di Milano.',
-  // Bug #7: pagina hardcoded in IT e non localizzata → noindex esplicito finché
-  // non è resa locale-aware, per non esporre contenuto IT sotto 35 URL.
+  title: 'Just Me Milano & Top 6 VIP Clubs | Prezzi, Eventi e Prenotazioni 2026/2027',
+  description:
+    'Guida ufficiale e prenotazione diretta Tavoli VIP, Royal Aperitivo e Dopo-Partita San Siro nei 6 Club Prioritari di Milano: Just Me, Pineta, Aria, 55 Milano, Voya Rooftop e Repvblic. WhatsApp +39 351 912 7047.',
   robots: { index: false, follow: true },
 };
 
-export default function LandingPage() {
-  // Generazione JSON-LD per LocalBusiness / EntertainmentBusiness
-  // Dati allineati a lib/venuesData.ts (fonte di verità): l'indirizzo era
-  // sbagliato (n. 15 invece di 2), l'URL usava lo slug inesistente /clubs/justme
-  // (quello vero è just-me-milano) e l'immagine era relativa.
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export default async function LandingPage({ params }: Props) {
+  const { locale } = await params;
+  const isIt = locale === 'it';
+  const lp = localePrefix(locale);
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'EntertainmentBusiness',
-    name: 'Just Me Milano',
+    name: 'Just Me Milano & Nightlife Milan VIP Concierge',
     image: 'https://nightlifemilan.com/images/just-me-milano.webp',
     '@id': 'https://nightlifemilan.com/clubs/just-me-milano',
     url: 'https://nightlifemilan.com/clubs/just-me-milano',
     telephone: '+393519127047',
+    email: 'concierge@nightlifemilan.com',
     address: {
       '@type': 'PostalAddress',
       streetAddress: 'Viale Luigi Camoens, 2',
@@ -46,51 +58,48 @@ export default function LandingPage() {
       },
     ],
     priceRange: '$$$',
-    sameAs: [
-      'https://www.instagram.com/justmemilano',
-      'https://www.facebook.com/justmemilano',
-    ],
   };
 
   return (
-    <main id="main-content" className="flex-1 flex flex-col w-full">
-      {/* Script JSON-LD iniettato nell'head */}
+    <main id="main-content" className="flex-1 flex flex-col w-full bg-[#131009]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Hero Section (LCP Ottimizzato) */}
-      <Hero 
-        title="Just Me Milano"
-        subtitle="L'esperienza notturna definitiva all'ombra della Torre Branca."
-        ctaText="Prenota ora su WhatsApp"
+      <Hero
+        title={isIt ? 'Just Me Milano & Top 6 Club VIP' : 'Just Me Milano & Top 6 VIP Clubs'}
+        subtitle={
+          isIt
+            ? 'Prenotazione ufficiale Tavoli VIP, Royal Aperitivo, Feste di Laurea e Dopo-Partita San Siro (+39 351 912 7047).'
+            : 'Official VIP Table, Royal Aperitivo, Graduation Party & San Siro Match Afterparty Desk (+39 351 912 7047).'
+        }
+        ctaText={isIt ? 'Prenota ora su WhatsApp +39 351 912 7047' : 'Book via WhatsApp +39 351 912 7047'}
         ctaLink="https://wa.me/393519127047"
         imageUrl="/images/just-me-milano.webp"
       />
 
-      {/* Sezione Contenuti (SEO & Accessibilità) */}
-      <section id="eventi" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        <article className="max-w-none">
-          <h2 className="text-3xl font-bold text-champagne mb-8">
-            Eventi Esclusivi e Serate a Tema
-          </h2>
-          <p className="text-white/70 leading-relaxed mb-6">
-            Il <strong>Just Me Milano</strong> (ex Just Cavalli) rappresenta l&apos;apice della vita notturna milanese. 
-            Situato nel cuore del Parco Sempione, offre un&apos;esperienza unica che unisce alta cucina, 
-            design d&apos;avanguardia e i migliori DJ set internazionali.
-          </p>
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-6 not-prose">
-            <li className="bg-white/[0.03] p-6 rounded-lg border border-white/5 hover:border-champagne/50 transition-colors">
-              <h3 className="text-xl font-bold text-white mb-2">Aperitivo (19:30 - 22:30)</h3>
-              <p className="text-white/50">Buffet reale e cocktail d&apos;autore in un&apos;atmosfera lounge elegante.</p>
-            </li>
-            <li className="bg-white/[0.03] p-6 rounded-lg border border-white/5 hover:border-champagne/50 transition-colors">
-              <h3 className="text-xl font-bold text-white mb-2">Clubbing (23:00 - 05:00)</h3>
-              <p className="text-white/50">La vera anima del locale si accende con musica House e Commerciale.</p>
-            </li>
-          </ul>
-        </article>
+      <section id="eventi" className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-14">
+        <PrioritySixShowcase locale={locale} />
+        <WeeklyNightlifeNavigator locale={locale} />
+        <EntryFormulaMatrix locale={locale} />
+        <SanSiroMatchAfterpartyFinder locale={locale} />
+        <VipQuoteCalculator locale={locale} />
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-white/10">
+          <Link href={`${lp}/vip-tables`} className="p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-champagne/40 text-sm font-bold text-white">
+            {isIt ? 'Tavoli VIP & Privé →' : 'VIP Tables & Privé →'}
+          </Link>
+          <Link href={`${lp}/bottle-prices`} className="p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-champagne/40 text-sm font-bold text-white">
+            {isIt ? 'Listino Bottiglie 2026/27 →' : 'Bottle Price List 2026/27 →'}
+          </Link>
+          <Link href={`${lp}/football-afterparties`} className="p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-champagne/40 text-sm font-bold text-white">
+            {isIt ? 'Dopo-Partita San Siro →' : 'San Siro Afterparties →'}
+          </Link>
+          <Link href={`${lp}/private-parties`} className="p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-champagne/40 text-sm font-bold text-white">
+            {isIt ? 'Lauree, 18° & Compleanni →' : 'Graduations & Birthdays →'}
+          </Link>
+        </div>
       </section>
     </main>
   );

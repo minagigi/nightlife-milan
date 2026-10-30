@@ -76,9 +76,14 @@ export default function Header({ currentLocale }: { currentLocale: string }) {
   // Extra links surfaced only in the mobile menu (kept off the desktop bar to avoid clutter)
   const mobileExtraLinks = [
     { name: t.events, href: `${localePrefix}/events`, match: `${localePrefix}/events` },
+    { name: currentLocale === 'it' ? 'DOPO-PARTITA SAN SIRO (INTER & MILAN)' : 'SAN SIRO FOOTBALL AFTERPARTIES', href: `${localePrefix}/football-afterparties`, match: `${localePrefix}/football-afterparties`, gold: true },
     { name: 'APERITIVO', href: `${localePrefix}/aperitivo`, match: `${localePrefix}/aperitivo` },
     { name: t.bottlePrices, href: `${localePrefix}/bottle-prices`, match: `${localePrefix}/bottle-prices` },
     { name: 'DRESS CODE', href: `${localePrefix}/door-policy`, match: `${localePrefix}/door-policy` },
+    { name: 'ROOFTOPS', href: `${localePrefix}/rooftops`, match: `${localePrefix}/rooftops` },
+    { name: currentLocale === 'it' ? 'FESTE & LAUREE' : 'PRIVATE PARTIES', href: `${localePrefix}/private-parties`, match: `${localePrefix}/private-parties` },
+    { name: currentLocale === 'it' ? 'LISTE' : 'GUEST LISTS', href: `${localePrefix}/guest-lists`, match: `${localePrefix}/guest-lists` },
+    { name: currentLocale === 'it' ? 'GENERI' : 'GENRES', href: `${localePrefix}/genres`, match: `${localePrefix}/genres` },
     { name: 'FAQ', href: `${localePrefix}/faq`, match: `${localePrefix}/faq` },
   ];
 

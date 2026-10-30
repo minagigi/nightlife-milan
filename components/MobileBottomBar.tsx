@@ -1,8 +1,9 @@
 'use client';
 
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { tr } from '@/lib/i18n/t';
-import { MessageCircle } from 'lucide-react';
+import { MessageCircle, Sparkles, Calendar, Crown, BookOpen } from 'lucide-react';
 import { CONTACT } from '@/config/contact';
 import { mockVenues, mockEvents } from '@/lib/data';
 import { weeklyEvents } from '@/lib/eventsConfig';
@@ -14,23 +15,18 @@ export default function MobileBottomBar({ currentLocale }: { currentLocale: stri
   const isPt = currentLocale === 'pt';
   const loc = (isIt ? 'it' : isPt ? 'pt' : 'en') as 'en' | 'it' | 'pt';
 
-  // Hide on the booking success page (conversion already complete)
   if (pathname?.includes('/booking/success')) return null;
 
-  // Strip the current locale's prefix (bug fix: prima toglieva solo '/it',
-  // quindi su qualsiasi altra lingua seg[0] restava il codice lingua e il
-  // lookup contestuale venue/evento falliva sempre) e split into segments.
   const lp = localePrefix(currentLocale);
   const stripped = (lp && pathname?.startsWith(lp) ? pathname.slice(lp.length) : pathname) || '/';
-  const seg = stripped.split('/').filter(Boolean); // e.g. ['clubs', 'just-me-milano']
+  const seg = stripped.split('/').filter(Boolean);
 
-  // Resolve the venue/event currently being viewed so the CTA is contextual
   let contextName = '';
   let bookingMsg = isIt
-    ? 'Ciao! Vorrei prenotare un tavolo VIP a Milano. Puoi aiutarmi?'
+    ? 'Ciao! Vorrei prenotare un tavolo VIP o lista nei 6 Club Prioritari a Milano (+39 351 912 7047). Puoi aiutarmi?'
     : isPt
-      ? 'Olá! Gostaria de reservar uma mesa VIP em Milão. Podem ajudar?'
-      : "Hi! I'd like to book a VIP table in Milan. Can you help me?";
+      ? 'Olá! Gostaria de reservar uma mesa VIP em Milão (+39 351 912 7047). Podem ajudar?'
+      : "Hi! I'd like to book a VIP table or guest list in Milan (+39 351 912 7047). Can you help me?";
 
   if (seg[0] === 'clubs' && seg[1]) {
     const venue = mockVenues.find((v) => v.slugs.en === seg[1] || v.slugs.it === seg[1]);
@@ -38,10 +34,10 @@ export default function MobileBottomBar({ currentLocale }: { currentLocale: stri
       const name = venue.localizedContent.name[loc] || venue.localizedContent.name.en;
       contextName = name;
       bookingMsg = isIt
-        ? `Ciao! Vorrei prenotare un tavolo da ${name} a Milano. Puoi aiutarmi?`
+        ? `Ciao! Vorrei prenotare un tavolo VIP o lista da ${name} a Milano. Puoi aiutarmi?`
         : isPt
           ? `Olá! Gostaria de reservar uma mesa no ${name}, em Milão. Podem ajudar?`
-          : `Hi! I'd like to book a table at ${name} in Milan. Can you help me?`;
+          : `Hi! I'd like to book a VIP table or guest list at ${name} in Milan. Can you help me?`;
     }
   } else if (seg[0] === 'events' && seg[1] && seg[1] !== 'special') {
     const event = mockEvents.find(
@@ -68,19 +64,91 @@ export default function MobileBottomBar({ currentLocale }: { currentLocale: stri
             : `Hi! I'd like to book for "${weekly.name}" at ${weekly.clubName} in Milan. Can you help me?`;
       }
     }
+  } else if (seg[0] === 'football-afterparties') {
+    contextName = isIt ? 'Dopo-Partita San Siro' : 'San Siro Afterparty';
+    bookingMsg = isIt
+      ? 'Ciao! Usciamo dalla partita a San Siro e vorremmo un tavolo VIP (Aria Club a 150m / Just Me / Voya / 55 Milano).'
+      : 'Hi! We are heading out from San Siro Stadium and would like a VIP table (Aria Club 150m / Just Me / Voya / 55 Milano).';
+  } else if (seg[0] === 'private-parties') {
+    contextName = isIt ? 'Festa Privata / Laurea' : 'Private Party';
+    bookingMsg = isIt
+      ? 'Ciao! Vorrei un preventivo per una festa di laurea / compleanno nei 6 Club Prioritari di Milano.'
+      : 'Hi! I would like a quote for a graduation / birthday party at the 6 Priority Clubs in Milan.';
+  } else if (seg[0] === 'rooftops') {
+    contextName = 'Rooftop VIP';
+    bookingMsg = isIt
+      ? 'Ciao! Vorrei prenotare un tavolo panoramico al Voya Rooftop 20° Piano / Terrazza Duomo 21.'
+      : 'Hi! I would like to book a panoramic table at Voya Rooftop 20th Floor / Terrazza Duomo 21.';
   }
 
   const mainLabel = contextName
     ? `${isPt ? 'Reservar' : tr(currentLocale, 'Book', 'Prenota')}: ${contextName}`
-    : isPt ? 'Reservar agora' : tr(currentLocale, 'Book Now', 'Prenota Ora');
-  const sub = isPt ? 'Resposta no WhatsApp em 10 min' : tr(currentLocale, 'WhatsApp reply in 10 min', 'Risposta WhatsApp in 10 min');
+    : isPt
+      ? 'Reservar VIP · +39 351 912 7047'
+      : tr(currentLocale, 'Book VIP · +39 351 912 7047', 'Prenota VIP · +39 351 912 7047');
+  const sub = isPt
+    ? 'Concierge WhatsApp em 10 min'
+    : tr(
+        currentLocale,
+        'WhatsApp Concierge in 10 min · concierge@nightlifemilan.com',
+        'Concierge WhatsApp in 10 min · concierge@nightlifemilan.com'
+      );
+
+  const navItems = [
+    {
+      href: `${lp}/clubs`,
+      active: seg[0] === 'clubs',
+      icon: Sparkles,
+      label: isIt ? 'Club (6 Top)' : 'Clubs',
+    },
+    {
+      href: `${lp}/events`,
+      active: seg[0] === 'events',
+      icon: Calendar,
+      label: isIt ? 'Eventi' : 'Events',
+    },
+    {
+      href: `${lp}/vip-tables`,
+      active: seg[0] === 'vip-tables' || seg[0] === 'bottle-prices',
+      icon: Crown,
+      label: isIt ? 'Tavoli/Prezzi' : 'VIP/Prices',
+    },
+    {
+      href: `${lp}/guides`,
+      active: seg[0] === 'guides' || seg[0] === 'football-afterparties',
+      icon: BookOpen,
+      label: isIt ? 'Guide' : 'Guides',
+    },
+  ];
 
   return (
     <nav
-      aria-label={tr(currentLocale, 'Booking', 'Prenotazione')}
-      className="md:hidden fixed bottom-0 inset-x-0 z-50 glass-dark border-t border-champagne/15 pb-[env(safe-area-inset-bottom)]"
+      aria-label={tr(currentLocale, 'Mobile Navigation & VIP Booking', 'Navigazione Mobile & Prenotazione VIP')}
+      className="md:hidden fixed bottom-0 inset-x-0 z-50 glass-dark border-t border-champagne/20 pb-[env(safe-area-inset-bottom)]"
     >
-      <div className="px-3 py-2.5">
+      <div className="px-2.5 pt-2 pb-2 space-y-1.5">
+        {/* Quick Navigation Row (Touch Targets >= 44px) */}
+        <div className="grid grid-cols-4 gap-1">
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`flex flex-col items-center justify-center min-h-[44px] rounded-lg px-1 transition-colors ${
+                  item.active
+                    ? 'bg-champagne/15 text-champagne font-semibold'
+                    : 'text-white/70 hover:text-champagne hover:bg-white/5'
+                }`}
+              >
+                <Icon className="w-4 h-4 mb-0.5 flex-shrink-0" />
+                <span className="text-[10px] tracking-wide truncate max-w-full">{item.label}</span>
+              </Link>
+            );
+          })}
+        </div>
+
+        {/* Direct WhatsApp Concierge CTA (+39 351 912 7047) */}
         <a
           href={`${CONTACT.whatsapp.link}?text=${encodeURIComponent(bookingMsg)}`}
           target="_blank"
@@ -89,19 +157,29 @@ export default function MobileBottomBar({ currentLocale }: { currentLocale: stri
           aria-label={
             contextName
               ? isIt
-                ? `Prenota ${contextName} su WhatsApp`
+                ? `Prenota ${contextName} su WhatsApp (+39 351 912 7047)`
                 : isPt
-                  ? `Reservar ${contextName} pelo WhatsApp`
-                  : `Book ${contextName} on WhatsApp`
-              : isPt ? 'Reservar agora pelo WhatsApp' : tr(currentLocale, 'Book now on WhatsApp', 'Prenota ora su WhatsApp')
+                  ? `Reservar ${contextName} pelo WhatsApp (+39 351 912 7047)`
+                  : `Book ${contextName} on WhatsApp (+39 351 912 7047)`
+              : isPt
+                ? 'Reservar agora pelo WhatsApp (+39 351 912 7047)'
+                : tr(
+                    currentLocale,
+                    'Book now on WhatsApp (+39 351 912 7047)',
+                    'Prenota ora su WhatsApp (+39 351 912 7047)'
+                  )
           }
           className="flex items-center justify-center gap-2.5 w-full rounded-xl bg-champagne text-black
-            min-h-[52px] px-4 active:scale-[0.98] active:bg-[#c2a02f] transition-transform duration-150"
+            min-h-[48px] px-4 active:scale-[0.98] active:bg-[#c2a02f] transition-transform duration-150 shadow-lg"
         >
           <MessageCircle className="w-5 h-5 flex-shrink-0" />
-          <span className="flex flex-col min-w-0 leading-none">
-            <span className="font-sans font-bold text-sm tracking-[0.12em] uppercase truncate">{mainLabel}</span>
-            <span className="font-sans font-medium text-[10px] tracking-wide text-black/80 mt-0.5 truncate">{sub}</span>
+          <span className="flex flex-col min-w-0 leading-none text-center">
+            <span className="font-sans font-bold text-xs sm:text-sm tracking-[0.08em] uppercase truncate">
+              {mainLabel}
+            </span>
+            <span className="font-sans font-medium text-[10px] tracking-wide text-black/80 mt-0.5 truncate">
+              {sub}
+            </span>
           </span>
         </a>
       </div>

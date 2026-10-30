@@ -3,6 +3,7 @@ import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { EntryFormulaMatrix, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 
 export const revalidate = 86400;
 
@@ -238,6 +239,12 @@ export default async function FAQPage({ params }: Props) {
               </div>
             </div>
           ))}
+        </section>
+
+        {/* Entry Formula Matrix & VIP Quote Calculator */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 space-y-16">
+          <EntryFormulaMatrix locale={locale} />
+          <VipQuoteCalculator locale={locale} />
         </section>
 
         {/* Still have questions */}
