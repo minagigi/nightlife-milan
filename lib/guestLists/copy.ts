@@ -108,6 +108,10 @@ const COPY: Record<LocaleCode, { womenOnlyLabel: string }> = {
   }
 };
 
-export function getGuestListsCopy(locale: LocaleCode) {
-  return COPY[locale] ?? COPY.en;
+export function getGuestListsCopy(locale: string): { title: string; womenOnlyLabel: string } {
+  const base = COPY[locale as LocaleCode] ?? COPY.en;
+  return {
+    title: locale === 'it' ? 'Liste Nominali & Accrediti' : 'Nominal Guest Lists',
+    womenOnlyLabel: base.womenOnlyLabel,
+  };
 }

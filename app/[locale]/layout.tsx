@@ -1,23 +1,18 @@
 import type { Metadata, Viewport } from 'next';
 import { tr } from '@/lib/i18n/t';
-import { Montserrat, Cormorant_Garamond, Noto_Sans_SC, Noto_Naskh_Arabic } from 'next/font/google';
-import dynamic from 'next/dynamic';
 import { notFound } from 'next/navigation';
-import { getLocaleDef, hreflangAlternates, localePrefix, DEFAULT_LOCALE, isEnabledLocale } from '@/lib/i18n/locales';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import { Providers } from '@/components/Providers';
-import GoogleAnalytics from '@/components/GoogleAnalytics';
-import AnalyticsTracker from '@/components/AnalyticsTracker';
-import IdleMount from '@/components/IdleMount';
+import {
+  getLocaleDef,
+  hreflangAlternates,
+  localePrefix,
+  DEFAULT_LOCALE,
+  enabledLocaleCodes,
+  isEnabledLocale,
+} from '@/lib/i18n/locales';
 import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
-import '@/app/globals.css';
-import 'flag-icons/css/flag-icons.min.css';
+import { readEditorialFields } from '@/lib/editorialContent';
 
-import WhatsAppFloating from '@/components/WhatsAppFloating';
-const BackToTop = dynamic(() => import('@/components/BackToTop'));
-const MobileBottomBar = dynamic(() => import('@/components/MobileBottomBar'));
-const CustomCursor = dynamic(() => import('@/components/CustomCursor'));
+import SiteShell from '@/components/SiteShell';
 
 export const viewport: Viewport = {
   themeColor: '#131009',
@@ -26,38 +21,12 @@ export const viewport: Viewport = {
   viewportFit: 'cover',
 };
 
-// latin-ext copre gli accenti dell'Europa centrale (cs/pl/hu/hr/ro/sl/…), cyrillic
-// copre ru/uk/bg/sr/mk. next/font emette @font-face con unicode-range, quindi i
-// glifi cirillici NON pesano sugli utenti latini (si scaricano solo quando servono).
-const montserrat = Montserrat({
-  subsets: ['latin', 'latin-ext', 'cyrillic', 'cyrillic-ext'],
-  variable: '--font-montserrat',
-  weight: ['300', '400', '500', '600', '700'],
-  display: 'swap',
-});
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin', 'latin-ext', 'cyrillic'],
-  variable: '--font-cormorant',
-  weight: ['400', '500', '600', '700'],
-  display: 'swap',
-});
-// Font per script non-latini: preload:false + variable class applicata SOLO sul
-// locale corrispondente → i file font si scaricano solo dove servono (zh/ar),
-// zero peso sulle altre lingue. Il binding è in globals.css (html[lang]/[dir]).
-const notoSansSC = Noto_Sans_SC({
-  subsets: ['latin'],
-  variable: '--font-noto-sc',
-  weight: ['400', '500', '700'],
-  display: 'swap',
-  preload: false,
-});
-const notoNaskhArabic = Noto_Naskh_Arabic({
-  subsets: ['arabic'],
-  variable: '--font-noto-naskh',
-  weight: ['400', '500', '700'],
-  display: 'swap',
-  preload: false,
-});
+// Pre-genera il segmento lingua per tutte le 35 lingue. In questo modo le
+// visite e i crawler non trasformano gli hub pubblici in una Function per
+// ogni richiesta; le route restano ferme fino a deploy o invalidazione.
+export function generateStaticParams() {
+  return enabledLocaleCodes.map((locale) => ({ locale }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -66,11 +35,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const path = localePrefix(locale);
   const canonical = `${baseUrl}${path}` || baseUrl;
-  const ogImage = `${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`;
+  const ogImage = `${baseUrl}/images/table-concierge/justme-night.webp`;
   const localeDef = getLocaleDef(locale) || getLocaleDef(DEFAULT_LOCALE)!;
 
   const title = seoTitle(tr(locale, 'Nightlife Milan — Best Clubs, VIP Tables & Aperitivo Guide Milan 2026', 'Nightlife Milan — Migliori Club, Tavoli VIP & Aperitivo Milano 2026'));
-  const description = withWhatsApp(tr(locale, 'The ultimate guide to Milan nightlife. Book VIP tables, discover the best clubs, aperitivo spots and bottle service. WhatsApp concierge 24/7. Trusted by 50,000+ visitors.', 'La guida definitiva alla vita notturna milanese. Prenota tavoli VIP, scopri i migliori club, aperitivo e bottle service a Milano. Concierge WhatsApp h24.'), locale);
+  const description = withWhatsApp(tr(locale, 'The guide to Milan nightlife: clubs, VIP tables, aperitivo and current events. Ask for availability on WhatsApp.', 'La guida alla vita notturna di Milano: club, tavoli VIP, aperitivo ed eventi attuali. Chiedi disponibilità su WhatsApp.'), locale);
 
   return {
     metadataBase: new URL(baseUrl),
@@ -95,19 +64,15 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       siteName: 'Nightlife Milan',
       locale: localeDef.ogLocale,
       type: 'website',
-      images: [{ url: ogImage, width: 1200, height: 630, alt: tr(locale, 'Nightlife Milan — Exclusive Clubs & VIP Tables', 'Nightlife Milano — Club Esclusivi') }],
+      images: [{ url: ogImage, width: 1200, height: 900, alt: tr(locale, 'Nightlife Milan — Exclusive Clubs & VIP Tables', 'Nightlife Milano — Club Esclusivi') }],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
       images: [ogImage],
-      site: '@nightlifemilan',
-      creator: '@nightlifemilan',
     },
-    // Lingue navigabili ma senza contenuto tradotto (indexed:false nel registry):
-    // noindex finché il contenuto non è pronto — evita di indicizzare i fallback
-    // inglesi come duplicati sotto 33 prefissi URL (guardrail del piano).
+    // Tutte le 35 lingue abilitate sono indicizzabili per decisione editoriale.
     robots: localeDef.indexed
       ? {
           index: true,
@@ -132,61 +97,6 @@ export default async function RootLayout({
   // Whitelist locale a livello route (fix bug #9): un /xx/ fuori dal registry non
   // deve renderizzare in inglese sotto un lang errato, ma dare 404.
   if (!isEnabledLocale(locale)) notFound();
-  const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const isIt = locale === 'it';
-  const localeDef = getLocaleDef(locale) || getLocaleDef(DEFAULT_LOCALE)!;
-  const scriptFontClass =
-    locale === 'zh' ? notoSansSC.variable : locale === 'ar' ? notoNaskhArabic.variable : '';
-
-  const orgSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    '@id': `${baseUrl}/#organization`,
-    name: 'Nightlife Milan',
-    url: baseUrl,
-    logo: `${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`,
-    sameAs: ['https://instagram.com/nightlifemilan', 'https://tiktok.com/@nightlifemilan'],
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: '+39-351-912-7047',
-      contactType: 'customer service',
-      availableLanguage: ['English', 'Italian', 'Spanish', 'French', 'German', 'Portuguese'],
-    },
-    areaServed: { '@type': 'City', name: 'Milan', sameAs: 'https://www.wikidata.org/wiki/Q490' },
-    description: tr(locale, 'The ultimate guide to Milan nightlife. VIP tables, aperitivo, WhatsApp concierge.', 'La guida definitiva alla vita notturna milanese. Tavoli VIP, aperitivo, concierge WhatsApp.'),
-  };
-
-  const websiteSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'Nightlife Milan',
-    url: baseUrl,
-  };
-
-  return (
-    <html lang={localeDef.hreflang} dir={localeDef.dir} className={`${montserrat.variable} ${cormorant.variable} ${scriptFontClass}`.trim()}>
-      <head>
-        {/* GA loads on first interaction (see GoogleAnalytics.tsx) — dns-prefetch only, no premature preconnect */}
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
-      </head>
-      <body className="grain font-sans antialiased bg-charcoal text-white min-h-screen flex flex-col pb-[calc(env(safe-area-inset-bottom)+4.25rem)] md:pb-0" suppressHydrationWarning>
-        <Providers lang={locale}>
-          <Header currentLocale={locale} />
-          {children}
-          <Footer lang={locale} />
-          <WhatsAppFloating locale={locale as any} />
-          <IdleMount>
-            <BackToTop />
-            <MobileBottomBar currentLocale={locale} />
-            <CustomCursor />
-          </IdleMount>
-        </Providers>
-        <GoogleAnalytics />
-        <AnalyticsTracker />
-      </body>
-    </html>
-  );
+  const sharedEditorialFields = await readEditorialFields('shared', locale);
+  return <SiteShell locale={locale} editorialFields={sharedEditorialFields}>{children}</SiteShell>;
 }

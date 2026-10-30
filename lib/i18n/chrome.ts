@@ -25,7 +25,7 @@ const EN: ChromeStrings = {
 
 const CHROME: Partial<Record<LocaleCode, Partial<ChromeStrings>>> = {
   en: EN,
-  it: { clubs: 'LOCALI', calendar: 'CALENDARIO', zones: 'ZONE', guides: 'GUIDE', vipTables: 'TAVOLI VIP', events: 'EVENTI', bottlePrices: 'PREZZI BOTTIGLIE', bookWhatsApp: 'Prenota via WhatsApp' },
+  it: { clubs: 'LOCALI', calendar: 'CALENDARIO', zones: 'ZONE', guides: 'GUIDE', vipTables: 'TAVOLI VIP', events: 'EVENTI', bottlePrices: 'PREZZI BOTTIGLIE', bookWhatsApp: 'Prenota su WhatsApp' },
   es: { clubs: 'CLUBES', calendar: 'CALENDARIO', zones: 'ZONAS', guides: 'GUÍAS', vipTables: 'MESAS VIP', events: 'EVENTOS', bottlePrices: 'PRECIOS DE BOTELLAS', bookWhatsApp: 'Reserva por WhatsApp' },
   fr: { clubs: 'CLUBS', calendar: 'CALENDRIER', zones: 'QUARTIERS', guides: 'GUIDES', vipTables: 'TABLES VIP', events: 'ÉVÉNEMENTS', bottlePrices: 'PRIX DES BOUTEILLES', bookWhatsApp: 'Réserver via WhatsApp' },
   de: { clubs: 'CLUBS', calendar: 'KALENDER', zones: 'VIERTEL', guides: 'GUIDES', vipTables: 'VIP-TISCHE', events: 'EVENTS', bottlePrices: 'FLASCHENPREISE', bookWhatsApp: 'Über WhatsApp buchen' },

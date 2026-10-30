@@ -63,6 +63,7 @@ export interface Venue {
     streetAddress: string;
     addressLocality: string;
     postalCode: string;
+    addressRegion?: string;
     addressCountry: 'IT';
   };
   coordinates: {

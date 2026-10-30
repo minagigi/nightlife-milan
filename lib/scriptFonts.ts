@@ -1,6 +1,8 @@
-import type { LocaleCode } from '@/lib/i18n/locales';
+export type ScriptFontConfig = {
+  variableClass: string;
+  cssHref: string;
+};
 
-export function getScriptFont(locale: LocaleCode | string): string | null {
-  if (locale === 'zh' || locale === 'ar') return null;
-  return 'default';
+export function getScriptFont(_locale: string): ScriptFontConfig | null {
+  return null;
 }

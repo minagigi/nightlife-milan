@@ -1,492 +1,436 @@
-import { Metadata } from 'next';
-import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
-import Link from 'next/link';
-import Image from 'next/image';
-import { ArrowRight, MessageCircle, Star, Users, Clock, Shield } from 'lucide-react';
-import { CONTACT } from '@/config/contact';
-import { venuesData } from '@/lib/venuesData';
-import { MilanZone } from '@/lib/types';
-import { tr } from '@/lib/i18n/t';
-import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
-import { VipQuoteCalculator, EntryFormulaMatrix, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import Image from 'next/image';
+import TableConcierge from '@/components/TableConcierge';
+import {
+  ArrowRight,
+  CheckCircle2,
+  CircleAlert,
+  ClipboardCheck,
+  MessageCircle,
+  Send,
+} from 'lucide-react';
+import { SITE_CONTACT } from '@/config/contact';
+import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { currentVipTablesDict } from '@/lib/i18n/currentSafePageCopy';
+import { resolveStrictPageCopy } from '@/lib/i18n/strictPageCopy';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
+import { getDateSensitiveCarouselInventory } from '@/lib/dateSensitiveInventory';
+import { selectPriorityVenueEvents } from '@/lib/priorityVenueEvents';
+import { getTableConciergeSharedCopy } from '@/lib/tableConciergePageCopy';
 
-export const revalidate = 3600;
+export const revalidate = false;
 
-const baseUrlGlobal = process.env.APP_URL || 'https://nightlifemilan.com';
+const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
+
+type PageCopy = {
+  metaTitle: string;
+  metaDescription: string;
+  eyebrow: string;
+  title: string;
+  lead: string;
+  answerLabel: string;
+  answer: string;
+  cta: string;
+  responseNote: string;
+  factorsEyebrow: string;
+  factorsTitle: string;
+  factorsLead: string;
+  factors: string[];
+  stepsEyebrow: string;
+  stepsTitle: string;
+  steps: Array<{ title: string; description: string }>;
+  notice: string;
+  finalEyebrow: string;
+  finalTitle: string;
+  finalText: string;
+  clubsLink: string;
+};
+
+const COPY: Record<'en' | 'it' | 'es' | 'fr' | 'de' | 'pt', PageCopy> = {
+  en: {
+    metaTitle: 'VIP Tables Milan | Nightclub Bookings',
+    metaDescription: 'VIP tables in Milan nightclubs: check availability, conditions and admission.',
+    eyebrow: 'MILAN NIGHTLIFE · CURRENT QUOTE REQUEST',
+    title: 'Milan VIP Tables, Privé Zones & Bottle Service Guide 2026',
+    lead: 'Send the date, group size and preferred venue. We use those details to request the current conditions from the venue.',
+    answerLabel: 'DIRECT ANSWER · HOW VIP TABLES WORK IN MILAN',
+    answer: 'Every VIP Table in Milan operates on a 100% Bottle Credit (Minimum Spend) formula: Dancefloor tables start at €250–€400 (5–6 passes), Privé tables run €500–€1,000 (8–10 passes), and Super Privé / DJ Console tables start at €1,200–€5,000+ (10–15 passes) with skip-the-line VIP Host entry via WhatsApp +39 351 912 7047.',
+    cta: 'Request current conditions',
+    responseNote: 'Wait for written venue confirmation before making plans.',
+    factorsEyebrow: 'BEFORE YOU DECIDE',
+    factorsTitle: 'What the venue must confirm',
+    factorsLead: 'Ask for one dated response covering every material condition.',
+    factors: [
+      'Current availability and table assignment',
+      'Total cost, payment terms and any minimum commitment',
+      'What is included and what is charged separately',
+      'Admission policy, age requirements and arrival time',
+      'Cancellation or change conditions for that date',
+      'Any event-specific rules communicated by the venue',
+    ],
+    stepsEyebrow: 'A CLEAR HANDOFF',
+    stepsTitle: 'How to request a current quote',
+    steps: [
+      { title: 'Send the essentials', description: 'Message the date, group size, preferred venue and any practical needs.' },
+      { title: 'Check the venue response', description: 'Review the dated availability, full cost, inclusions and admission conditions.' },
+      { title: 'Decide after confirmation', description: 'Proceed only when the venue conditions are clear and suitable for your group.' },
+    ],
+    notice: 'A WhatsApp request is not a reservation or an admission ticket. The venue controls availability, acceptance, table placement and door decisions.',
+    finalEyebrow: 'START WITH VERIFIED DETAILS',
+    finalTitle: 'Ask for the current venue quote',
+    finalText: 'Include the date and group size in your first message so the request can be checked against the correct night.',
+    clubsLink: 'View Milan clubs',
+  },
+  it: {
+    metaTitle: 'Tavoli VIP Milano | Prenotazioni Discoteche e Club',
+    metaDescription: 'Tavoli VIP in discoteche e club di Milano: verifica disponibilità, condizioni e ingresso.',
+    eyebrow: 'NIGHTLIFE MILANO · RICHIESTA PREVENTIVO ATTUALE',
+    title: 'Tavoli VIP, Privé e Bottle Service nelle Discoteche di Milano (2026)',
+    lead: 'Invia data, numero di persone e locale preferito. Questi dati servono per richiedere al locale le condizioni attuali.',
+    answerLabel: 'RISPOSTA IMMEDIATA · COME FUNZIONANO I TAVOLI VIP A MILANO',
+    answer: 'Tutti i Tavoli VIP nelle discoteche di Milano funzionano con formula 100% Credito Bottiglie (Minimum Spend): i tavoli Pista partono da 250–400 € (5–6 pass inclusi), i tavoli Privé da 500–1.000 € (8–10 pass) e i tavoli Super Privé / Console DJ da 1.200–5.000+ € (10–15 pass), con ingresso prioritario salta-fila tramite WhatsApp +39 351 912 7047.',
+    cta: 'Richiedi le condizioni attuali',
+    responseNote: 'Attendi la conferma scritta del locale prima di organizzarti.',
+    factorsEyebrow: 'PRIMA DI DECIDERE',
+    factorsTitle: 'Cosa deve confermare il locale',
+    factorsLead: 'Chiedi una risposta datata che includa ogni condizione importante.',
+    factors: [
+      'Disponibilità attuale e assegnazione del tavolo',
+      'Costo totale, modalità di pagamento ed eventuale impegno minimo',
+      'Cosa è incluso e cosa viene addebitato a parte',
+      'Regole di ingresso, requisiti di età e orario di arrivo',
+      'Condizioni di cancellazione o modifica per quella data',
+      'Eventuali regole specifiche comunicate dal locale',
+    ],
+    stepsEyebrow: 'UN PASSAGGIO CHIARO',
+    stepsTitle: 'Come chiedere un preventivo attuale',
+    steps: [
+      { title: 'Invia i dati essenziali', description: 'Scrivi data, numero di persone, locale preferito ed eventuali esigenze pratiche.' },
+      { title: 'Controlla la risposta', description: "Verifica disponibilità per la data, costo completo, inclusioni e condizioni di ingresso." },
+      { title: 'Decidi dopo la conferma', description: 'Procedi solo quando le condizioni del locale sono chiare e adatte al gruppo.' },
+    ],
+    notice: 'Una richiesta su WhatsApp non è una prenotazione né un titolo di ingresso. Il locale controlla disponibilità, accettazione, posizione del tavolo e decisioni alla porta.',
+    finalEyebrow: 'PARTI DA DATI VERIFICATI',
+    finalTitle: 'Chiedi il preventivo attuale del locale',
+    finalText: 'Indica data e numero di persone nel primo messaggio, così la richiesta può essere verificata sulla serata corretta.',
+    clubsLink: 'Vedi i club di Milano',
+  },
+  es: {
+    metaTitle: 'Mesas VIP Milán | Reservas en Discotecas y Clubes',
+    metaDescription: 'Mesas VIP en discotecas y clubes de Milán: confirma disponibilidad, condiciones y acceso.',
+    eyebrow: 'MILÁN NIGHTLIFE · SOLICITUD DE PRESUPUESTO ACTUAL',
+    title: 'Solicita una mesa VIP en Milán',
+    lead: 'Envía la fecha, el tamaño del grupo y el local preferido. Usaremos esos datos para pedir al local sus condiciones actuales.',
+    answerLabel: 'QUÉ HACE ESTA PÁGINA',
+    answer: 'Esta página no publica precios fijos ni promete disponibilidad. El local debe confirmar para la fecha concreta los costes, las inclusiones, las reglas de acceso y la asignación de mesa.',
+    cta: 'Solicitar condiciones actuales',
+    responseNote: 'Espera la confirmación escrita del local antes de organizarte.',
+    factorsEyebrow: 'ANTES DE DECIDIR',
+    factorsTitle: 'Qué debe confirmar el local',
+    factorsLead: 'Pide una respuesta fechada que incluya todas las condiciones importantes.',
+    factors: [
+      'Disponibilidad actual y asignación de mesa',
+      'Coste total, condiciones de pago y compromiso mínimo',
+      'Qué está incluido y qué se cobra por separado',
+      'Política de acceso, requisitos de edad y hora de llegada',
+      'Condiciones de cancelación o cambio para esa fecha',
+      'Cualquier regla específica comunicada por el local',
+    ],
+    stepsEyebrow: 'UN PROCESO CLARO',
+    stepsTitle: 'Cómo solicitar un presupuesto actual',
+    steps: [
+      { title: 'Envía los datos esenciales', description: 'Indica fecha, tamaño del grupo, local preferido y necesidades prácticas.' },
+      { title: 'Revisa la respuesta', description: "Comprueba la disponibilidad para la fecha, el coste total, las inclusiones y las condiciones de acceso." },
+      { title: 'Decide tras la confirmación', description: 'Continúa solo si las condiciones del local son claras y adecuadas para el grupo.' },
+    ],
+    notice: 'Una solicitud por WhatsApp no es una reserva ni una entrada. El local controla la disponibilidad, la aceptación, la asignación de mesa y las decisiones de acceso.',
+    finalEyebrow: 'EMPIEZA CON DATOS VERIFICADOS',
+    finalTitle: 'Pide el presupuesto actual del local',
+    finalText: 'Incluye la fecha y el tamaño del grupo en el primer mensaje para comprobar la noche correcta.',
+    clubsLink: 'Ver clubs de Milán',
+  },
+  fr: {
+    metaTitle: 'Tables VIP à Milan | Réservations en Club',
+    metaDescription: 'Tables VIP dans les clubs et discothèques de Milan : confirmez disponibilité, conditions et accès.',
+    eyebrow: 'MILAN NIGHTLIFE · DEMANDE DE DEVIS ACTUEL',
+    title: 'Demandez une table VIP à Milan',
+    lead: 'Envoyez la date, la taille du groupe et le lieu souhaité. Ces informations servent à demander les conditions actuelles au lieu.',
+    answerLabel: 'RÔLE DE CETTE PAGE',
+    answer: 'Cette page ne publie pas de tarifs fixes et ne promet pas de disponibilité. Le lieu doit confirmer pour la date choisie les coûts, les inclusions, les règles d’admission et l’attribution de la table.',
+    cta: 'Demander les conditions actuelles',
+    responseNote: 'Attendez la confirmation écrite du lieu avant de vous organiser.',
+    factorsEyebrow: 'AVANT DE DÉCIDER',
+    factorsTitle: 'Ce que le lieu doit confirmer',
+    factorsLead: 'Demandez une réponse datée couvrant chaque condition importante.',
+    factors: [
+      'Disponibilité actuelle et attribution de la table',
+      'Coût total, modalités de paiement et engagement minimum',
+      'Ce qui est inclus et ce qui est facturé séparément',
+      'Politique d’admission, âge requis et heure d’arrivée',
+      'Conditions d’annulation ou de modification pour cette date',
+      'Toute règle spécifique communiquée par le lieu',
+    ],
+    stepsEyebrow: 'UNE DEMANDE CLAIRE',
+    stepsTitle: 'Comment demander un devis actuel',
+    steps: [
+      { title: 'Envoyez les informations essentielles', description: 'Indiquez la date, la taille du groupe, le lieu souhaité et vos besoins pratiques.' },
+      { title: 'Vérifiez la réponse', description: "Vérifiez la disponibilité pour la date, le coût total, les inclusions et les conditions d’admission." },
+      { title: 'Décidez après confirmation', description: 'Poursuivez uniquement si les conditions du lieu sont claires et adaptées au groupe.' },
+    ],
+    notice: 'Une demande WhatsApp n’est ni une réservation ni un billet d’entrée. Le lieu contrôle la disponibilité, l’acceptation, l’attribution de la table et l’admission.',
+    finalEyebrow: 'COMMENCEZ PAR DES DONNÉES VÉRIFIÉES',
+    finalTitle: 'Demandez le devis actuel du lieu',
+    finalText: 'Indiquez la date et la taille du groupe dès le premier message afin de vérifier la bonne soirée.',
+    clubsLink: 'Voir les clubs de Milan',
+  },
+  de: {
+    metaTitle: 'VIP-Tische Mailand | Club-Reservierungen',
+    metaDescription: 'VIP-Tische in Mailänder Clubs und Diskotheken: Verfügbarkeit, Bedingungen und Einlass prüfen.',
+    eyebrow: 'MAILAND NIGHTLIFE · AKTUELLE ANGEBOTSANFRAGE',
+    title: 'VIP-Tisch in Mailand anfragen',
+    lead: 'Senden Sie Datum, Gruppengröße und gewünschten Club. Damit fragen wir die aktuellen Bedingungen beim Club an.',
+    answerLabel: 'WAS DIESE SEITE LEISTET',
+    answer: 'Diese Seite veröffentlicht keine festen Preise und verspricht keine Verfügbarkeit. Kosten, enthaltene Leistungen, Einlassregeln und Tischzuweisung muss der Club für das konkrete Datum bestätigen.',
+    cta: 'Aktuelle Bedingungen anfragen',
+    responseNote: 'Warten Sie vor Ihrer Planung auf die schriftliche Bestätigung des Clubs.',
+    factorsEyebrow: 'VOR DER ENTSCHEIDUNG',
+    factorsTitle: 'Was der Club bestätigen muss',
+    factorsLead: 'Bitten Sie um eine datierte Antwort mit allen wichtigen Bedingungen.',
+    factors: [
+      'Aktuelle Verfügbarkeit und Tischzuweisung',
+      'Gesamtkosten, Zahlungsbedingungen und Mindestverpflichtung',
+      'Enthaltene und separat berechnete Leistungen',
+      'Einlassregeln, Altersvorgaben und Ankunftszeit',
+      'Stornierungs- oder Änderungsbedingungen für das Datum',
+      'Weitere vom Club mitgeteilte veranstaltungsspezifische Regeln',
+    ],
+    stepsEyebrow: 'EINE KLARE ANFRAGE',
+    stepsTitle: 'So fragen Sie ein aktuelles Angebot an',
+    steps: [
+      { title: 'Eckdaten senden', description: 'Nennen Sie Datum, Gruppengröße, gewünschten Club und praktische Anforderungen.' },
+      { title: 'Antwort prüfen', description: "Prüfen Sie Verfügbarkeit für den Termin, Gesamtkosten, Leistungen und Einlassbedingungen." },
+      { title: 'Nach Bestätigung entscheiden', description: 'Fahren Sie nur fort, wenn die Bedingungen klar und für Ihre Gruppe passend sind.' },
+    ],
+    notice: 'Eine WhatsApp-Anfrage ist weder eine Reservierung noch eine Eintrittskarte. Der Club entscheidet über Verfügbarkeit, Annahme, Tischzuweisung und Einlass.',
+    finalEyebrow: 'MIT GEPRÜFTEN ANGABEN STARTEN',
+    finalTitle: 'Aktuelles Angebot des Clubs anfragen',
+    finalText: 'Nennen Sie Datum und Gruppengröße in der ersten Nachricht, damit die richtige Nacht geprüft werden kann.',
+    clubsLink: 'Clubs in Mailand ansehen',
+  },
+  pt: {
+    metaTitle: 'Mesas VIP Milão | Reservas em Discotecas e Clubes',
+    metaDescription: 'Mesas VIP em discotecas e clubes de Milão: confirme disponibilidade, condições e entrada.',
+    eyebrow: 'MILÃO NIGHTLIFE · PEDIDO DE ORÇAMENTO ATUAL',
+    title: 'Peça uma mesa VIP em Milão',
+    lead: 'Envie a data, o tamanho do grupo e o local preferido. Usaremos esses dados para pedir as condições atuais ao local.',
+    answerLabel: 'O QUE ESTA PÁGINA FAZ',
+    answer: 'Esta página não publica preços fixos nem promete disponibilidade. O local deve confirmar para a data específica os custos, as inclusões, as regras de entrada e a atribuição da mesa.',
+    cta: 'Pedir condições atuais',
+    responseNote: 'Aguarde a confirmação escrita do local antes de se organizar.',
+    factorsEyebrow: 'ANTES DE DECIDIR',
+    factorsTitle: 'O que o local deve confirmar',
+    factorsLead: 'Peça uma resposta datada que inclua todas as condições importantes.',
+    factors: [
+      'Disponibilidade atual e atribuição da mesa',
+      'Custo total, condições de pagamento e compromisso mínimo',
+      'O que está incluído e o que é cobrado separadamente',
+      'Política de entrada, requisitos de idade e hora de chegada',
+      'Condições de cancelamento ou alteração para essa data',
+      'Quaisquer regras específicas comunicadas pelo local',
+    ],
+    stepsEyebrow: 'UM PEDIDO CLARO',
+    stepsTitle: 'Como pedir um orçamento atual',
+    steps: [
+      { title: 'Envie os dados essenciais', description: 'Informe data, tamanho do grupo, local preferido e necessidades práticas.' },
+      { title: 'Verifique a resposta', description: "Confira a disponibilidade para a data, o custo total, as inclusões e as condições de entrada." },
+      { title: 'Decida após a confirmação', description: 'Prossiga apenas se as condições estiverem claras e adequadas ao grupo.' },
+    ],
+    notice: 'Um pedido por WhatsApp não é uma reserva nem um ingresso. O local controla disponibilidade, aceitação, atribuição da mesa e decisões de entrada.',
+    finalEyebrow: 'COMECE COM DADOS VERIFICADOS',
+    finalTitle: 'Peça o orçamento atual do local',
+    finalText: 'Inclua a data e o tamanho do grupo na primeira mensagem para verificar a noite correta.',
+    clubsLink: 'Ver clubes de Milão',
+  },
+};
+
+function getCopy(locale: string): PageCopy {
+  return resolveStrictPageCopy(locale, COPY, currentVipTablesDict, { trace: 'vip-tables' });
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const isIt = locale === 'it';
-  const canonicalUrl = `${baseUrlGlobal}${localePrefix(locale)}/vip-tables`;
-
-  const title = seoTitle(tr(locale, 'VIP Table Booking Milan | Bottle Service & Table Reservations | Nightlife Milan', 'Prenotazione Tavoli VIP Milano | Bottle Service & Tavoli | Nightlife Milan'));
-  const description = withWhatsApp(tr(locale, 'Book VIP tables at the best clubs in Milan. Guaranteed entry, premium bottle service, and personal concierge. WhatsApp response in under 10 minutes.', 'Prenota tavoli VIP nei migliori club di Milano. Ingresso garantito, bottle service premium e concierge personale. Risposta WhatsApp in meno di 10 minuti.'), locale);
-
-  const keywordsEn = ['vip table milan', 'bottle service milan', 'table booking milan', 'vip nightclub milan', 'exclusive table milan'];
-  const keywordsIt = ['tavoli vip milano', 'bottle service milano', 'prenotazione tavolo milano', 'vip nightclub milano', 'tavolo esclusivo milano'];
+  const copy = getCopy(locale);
+  const canonicalUrl = `${baseUrl}${localePrefix(locale)}/vip-tables`;
+  const title = seoTitle(copy.metaTitle);
+  const description = withWhatsApp(copy.metaDescription, locale);
 
   return {
     title,
     description,
-    keywords: keywordsEn.map((k, i) => tr(locale, k, keywordsIt[i])),
     robots: seoRobots(locale),
-    alternates: {
-      canonical: canonicalUrl,
-      languages: hreflangAlternates(baseUrlGlobal, '/vip-tables'),
-    },
+    alternates: { canonical: canonicalUrl, languages: hreflangAlternates(baseUrl, '/vip-tables') },
     openGraph: {
-      title: tr(locale, 'VIP Table Booking Milan — Nightlife Milan Concierge', 'Prenotazione Tavoli VIP Milano — Nightlife Milan Concierge'),
+      title,
       description,
       type: 'website',
       url: canonicalUrl,
       siteName: 'Nightlife Milan',
-      locale: isIt ? 'it_IT' : 'en_US',
+      locale: getLocaleDef(locale)?.ogLocale || 'en_US',
       images: [{
-        url: `${baseUrlGlobal}/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp`,
-        width: 1200,
-        height: 630,
-        alt: tr(locale, 'VIP Tables Milan — Just Me Club', 'Tavoli VIP Milano — Just Me Club'),
+        url: `${baseUrl}/images/milan-nightclub-dancefloor-vip.webp`,
+        width: 768,
+        height: 1024,
+        alt: copy.title,
       }],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: [`${baseUrlGlobal}/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp`],
+      images: [`${baseUrl}/images/milan-nightclub-dancefloor-vip.webp`],
       site: '@nightlifemilan',
     },
   };
 }
 
-const ZONE_LABELS: Partial<Record<MilanZone, string>> = {
-  [MilanZone.SEMPIONE]: 'Sempione',
-  [MilanZone.CORSO_COMO]: 'Corso Como',
-  [MilanZone.ISOLA]: 'Isola',
-  [MilanZone.PORTA_ROMANA]: 'Porta Romana',
-  [MilanZone.NAVIGLI]: 'Navigli',
-  [MilanZone.BRERA]: 'Brera',
-  [MilanZone.TORTONA]: 'Tortona',
-};
-
-const VIP_CONFIG: Record<string, {
-  zoneDisplay?: string;
-  vibe: string;
-  minSpend: number;
-  tableStart: number;
-  capacity: string;
-  music: string;
-  bestFor: string;
-  isHot: boolean;
-}> = {
-  'v-justme': {
-    vibe: 'Luxury Fashion Club', minSpend: 500, tableStart: 800, capacity: '6–12 guests',
-    music: 'House · Commercial · Fashion DJ Sets',
-    bestFor: 'Fashion Week, Special occasions, Celebrating in style', isHot: true,
-  },
-  'v-pineta': {
-    vibe: 'Chic Aperitivo & Night Club', minSpend: 300, tableStart: 400, capacity: '4–10 guests',
-    music: 'Commercial · Pop · Live Singing Aperitivo',
-    bestFor: 'Friday Singing Aperitivo, Group nights out', isHot: false,
-  },
-  'v-voya': {
-    zoneDisplay: 'Isola · 20th Floor',
-    vibe: 'Sky Lounge & Rooftop Bar', minSpend: 400, tableStart: 600, capacity: '4–8 guests',
-    music: 'Lounge · Nu Disco · Chill House',
-    bestFor: 'Sunset views, Romantic evenings, Corporate events', isHot: true,
-  },
-  'v-playclub': {
-    vibe: 'Urban Hip-Hop & Afrobeats', minSpend: 200, tableStart: 300, capacity: '4–8 guests',
-    music: 'Hip Hop · Afrobeats · Reggaeton',
-    bestFor: 'Late night parties, Urban crowd, Dancing', isHot: false,
-  },
-  'v-magazzini': {
-    vibe: 'Industrial Techno & Electronic', minSpend: 250, tableStart: 350, capacity: '4–6 guests',
-    music: 'Techno · Electronic · Underground',
-    bestFor: 'Electronic music lovers, After-work parties', isHot: false,
-  },
-};
-
-const VIP_ORDER = ['v-justme', 'v-pineta', 'v-voya', 'v-playclub', 'v-magazzini'];
-
-const venues = venuesData
-  .filter(v => VIP_ORDER.includes(v.id))
-  .sort((a, b) => VIP_ORDER.indexOf(a.id) - VIP_ORDER.indexOf(b.id))
-  .map(v => {
-    const cfg = VIP_CONFIG[v.id];
-    return {
-      id: v.id,
-      name: v.localizedContent.name.en,
-      slug: v.slugs.en,
-      zone: cfg.zoneDisplay ?? (ZONE_LABELS[v.zone] ?? v.zone),
-      image: v.image ?? '/images/milan-nightclub-dancefloor-vip.webp',
-      tags: v.tags ?? [],
-      insiderTip: v.localizedContent.insiderTip?.en ?? '',
-      ...cfg,
-    };
-  });
-
-const steps = [
-  {
-    icon: MessageCircle,
-    title: 'WhatsApp Us',
-    desc: 'Tell us the date, number of guests, and which club. We reply in under 10 minutes.',
-  },
-  {
-    icon: Shield,
-    title: 'We Confirm & Reserve',
-    desc: 'We personally confirm your table with the venue. No hidden fees, no surprises.',
-  },
-  {
-    icon: Star,
-    title: 'You Arrive as VIPs',
-    desc: 'Show up, skip the line, go straight to your table. Our staff ensures everything is perfect.',
-  },
-];
-
 export default async function VipTablesPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  const copy = getCopy(locale);
   const lp = localePrefix(locale);
-  const waMsg = encodeURIComponent("Hi! I'd like to book a VIP table in Milan. Can you help me?");
-  const waLink = `https://wa.me/393519127047?text=${waMsg}`;
-  const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-
-  const serviceSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    name: 'VIP Table Booking Milan',
-    description: 'Personal concierge service for VIP table and bottle service reservations at Milan\'s top nightclubs. WhatsApp response guaranteed in under 10 minutes.',
-    provider: { '@type': 'Organization', name: 'Nightlife Milan', url: baseUrl },
-    areaServed: { '@type': 'City', name: 'Milan', sameAs: 'https://www.wikidata.org/wiki/Q490' },
-    serviceType: 'Nightclub Table Reservation',
-    offers: {
-      '@type': 'AggregateOffer',
-      priceCurrency: 'EUR',
-      lowPrice: '200',
-      highPrice: '2000',
-      offerCount: venues.length,
-    },
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: '+39-351-912-7047',
-      contactType: 'reservations',
-      availableLanguage: ['English', 'Italian'],
-      hoursAvailable: { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'], opens: '12:00', closes: '04:00' },
-    },
-  };
-
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: [
-      { '@type': 'Question', name: 'How much does a VIP table cost in Milan?', acceptedAnswer: { '@type': 'Answer', text: 'VIP tables in Milan typically start at €200–€500 minimum spend per table, depending on the venue and night. This amount goes toward drinks and bottle service. Tables at premium venues like Just Me start from €500 minimum spend.' } },
-      { '@type': 'Question', name: 'What is included in bottle service at Milan clubs?', acceptedAnswer: { '@type': 'Answer', text: 'Bottle service includes 1 or more bottles of premium spirits (vodka, champagne, etc.), mixers, ice, and dedicated table service throughout the night.' } },
-      { '@type': 'Question', name: 'How do I book a VIP table in Milan?', acceptedAnswer: { '@type': 'Answer', text: 'WhatsApp us at +39 351 912 7047 with your preferred date, group size, and budget. We confirm your reservation and add your name to the guestlist. We reply in under 10 minutes.' } },
-      { '@type': 'Question', name: 'Is there a service fee for VIP table booking in Milan?', acceptedAnswer: { '@type': 'Answer', text: 'Our concierge service is completely free. We earn a commission directly from the venue, so you pay only the agreed minimum spend — often at better rates than booking directly.' } },
-      { '@type': 'Question', name: 'What should I wear to Milan clubs?', acceptedAnswer: { '@type': 'Answer', text: 'Milan clubs enforce strict dress codes. Smart-elegant is the minimum — no sneakers, no shorts, no sportswear. For premium venues like Just Me, fashion-forward attire is expected.' } },
-    ],
-  };
-
-  const faqs = [
-    {
-      q: 'How much does a VIP table cost in Milan?',
-      a: 'VIP tables in Milan typically start at €200–€500 minimum spend per table, depending on the venue and night. This amount goes toward drinks and bottle service. Our concierge will find the best option for your group and budget.',
-      qIt: 'Quanto costa un tavolo VIP a Milano?',
-      aIt: 'I tavoli VIP a Milano partono in genere da €200–€500 di consumazione minima a tavolo, a seconda del locale e della serata. L\'importo viene speso in drink e bottle service. Il nostro concierge troverà l\'opzione migliore per il tuo gruppo e budget.',
-    },
-    {
-      q: "What's included in bottle service?",
-      a: 'Bottle service includes 1 or more bottles of premium spirits (vodka, champagne, etc.), mixers, ice, and dedicated table service. Some venues include entry in the minimum spend; others charge separately.',
-      qIt: 'Cosa è incluso nel bottle service?',
-      aIt: 'Il bottle service include una o più bottiglie di alcolici premium (vodka, champagne, ecc.), mixer, ghiaccio e servizio al tavolo dedicato. Alcuni locali includono l\'ingresso nella consumazione minima; altri lo fanno pagare a parte.',
-    },
-    {
-      q: 'Do we need to book in advance?',
-      a: 'For weekends and special events, we recommend booking at least 48 hours in advance. For Fashion Week, Salone del Mobile, or New Year\'s Eve — book as early as possible. Same-day bookings are possible on weekdays.',
-      qIt: 'Bisogna prenotare in anticipo?',
-      aIt: 'Per weekend ed eventi speciali consigliamo di prenotare almeno 48 ore prima. Per Fashion Week, Salone del Mobile o Capodanno — prenota il prima possibile. Nei giorni infrasettimanali sono possibili prenotazioni anche in giornata.',
-    },
-    {
-      q: 'Is there a service fee?',
-      a: 'Our concierge service is free for you. We earn a commission directly from the venue. You pay only the minimum spend agreed with the club.',
-      qIt: 'C\'è un costo per il servizio?',
-      aIt: 'Il nostro servizio concierge è gratuito per te. La nostra commissione viene pagata direttamente dal locale. Tu paghi solo la consumazione minima concordata con il club.',
-    },
-    {
-      q: 'What should we wear?',
-      a: 'Milan clubs enforce strict dress codes. Smart-elegant is the minimum — no sneakers, no shorts, no sportswear. For top venues like Just Me, fashion-forward is expected. We\'ll send you the specific dress code when you book.',
-      qIt: 'Come dobbiamo vestirci?',
-      aIt: 'I club milanesi applicano un dress code rigoroso. Smart-elegant è il minimo richiesto — niente sneakers, pantaloncini o abbigliamento sportivo. Nei locali top come Just Me è richiesto un look fashion-forward. Ti invieremo il dress code specifico al momento della prenotazione.',
-    },
-  ];
+  const whatsappUrl = getConciergeBookingUrl(locale);
+  const stepIcons = [Send, ClipboardCheck, CheckCircle2];
+  const initialNow = new Date();
+  const datedEvents = selectPriorityVenueEvents(await getDateSensitiveCarouselInventory(locale), initialNow);
 
   return (
-    <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-    <main className="min-h-screen bg-[#131009]">
-
-      {/* Hero */}
-      <section className="relative pt-32 pb-20 px-6 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-champagne/5 via-transparent to-transparent pointer-events-none" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full bg-champagne/8 blur-[120px] pointer-events-none" />
-
-        <div className="relative max-w-4xl mx-auto text-center">
-          <p className="font-sans text-champagne/60 text-[10px] tracking-[0.4em] uppercase mb-6">
-            {tr(locale, 'MILAN NIGHTLIFE CONCIERGE')}
+    <main className="min-h-screen bg-[#131009] text-white">
+      <section className="relative overflow-hidden px-6 pb-10 pt-20 sm:pb-20 sm:pt-32">
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-champagne/10 via-transparent to-transparent" />
+        <div className="relative mx-auto max-w-4xl text-center">
+          <p className="mb-4 font-sans text-[10px] uppercase tracking-[0.25em] text-champagne/75 sm:mb-6 sm:tracking-[0.35em]">
+            {copy.eyebrow}
           </p>
-          <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-none mb-6"
-            style={{ textShadow: '0 0 80px rgba(201,168,106,0.2)' }}>
-            {tr(locale, 'VIP Tables')}<br />
-            <span className="text-champagne">{tr(locale, 'in Milan')}</span>
+          <h1 className="mx-auto mb-5 max-w-3xl font-serif text-4xl font-bold leading-[1.02] sm:mb-6 sm:text-6xl lg:text-7xl">
+            {copy.title}
           </h1>
-          <p className="font-sans text-white/50 text-lg leading-relaxed max-w-2xl mx-auto mb-8">
-            {tr(locale, "Skip the queue. Get the best seat in the house. We book VIP tables at Milan's most exclusive clubs — with guaranteed entry, bottle service, and personal concierge.", 'Salta la fila. Prendi il posto migliore della casa. Prenotiamo tavoli VIP nei club più esclusivi di Milano — con ingresso garantito, bottle service e concierge personale.')}
+          <p className="mx-auto mb-6 max-w-2xl font-sans text-base leading-relaxed text-white/65 sm:mb-10 sm:text-lg">
+            {copy.lead}
           </p>
 
-          {/* Quick Answer — for AI search engines */}
-          <div className="max-w-2xl mx-auto mb-10 p-5 rounded-xl border border-champagne/20 bg-champagne/[0.04] text-left">
-            <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">{tr(locale, 'Quick Answer')}</p>
-            <p
-              className="font-sans text-white/70 text-sm leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: tr(
-                locale,
-                'VIP tables in Milan start at <strong class="text-white">€200 minimum spend</strong> (Play Club) up to <strong class="text-white">€500+</strong> (Just Me). Book via <strong class="text-white">WhatsApp +39 351 912 7047</strong> — reply guaranteed in 10 minutes. Free service, no booking fee. Venues: Just Me (Sempione), Pineta (Corso Como), Voya Rooftop (Isola), Play Club (Corso Como), Magazzini Generali (Navigli).',
-                'I tavoli VIP a Milano partono da <strong class="text-white">€200 di consumazione minima</strong> (Play Club) fino a <strong class="text-white">€500+</strong> (Just Me). Prenota via <strong class="text-white">WhatsApp +39 351 912 7047</strong> — risposta garantita in 10 minuti. Servizio gratuito, nessuna commissione. Locali: Just Me (Sempione), Pineta (Corso Como), Voya Rooftop (Isola), Play Club (Corso Como), Magazzini Generali (Navigli).'
-              ) }}
-            />
+          <a
+            href="#tc-request-vip"
+            className="inline-flex min-h-12 items-center justify-center gap-3 bg-champagne px-8 py-4 font-sans text-sm font-semibold uppercase tracking-[0.12em] text-black transition-colors hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-champagne"
+          >
+            <MessageCircle className="h-5 w-5" aria-hidden="true" />
+            {copy.cta}
+          </a>
+          <p className="mt-4 font-sans text-sm text-white/45">
+            {SITE_CONTACT.whatsapp.number} · {copy.responseNote}
+          </p>
+
+          <div className="mx-auto mt-8 max-w-2xl overflow-hidden rounded-xl border border-champagne/25"><Image src="/images/milan-nightclub-dancefloor-vip.webp" alt={copy.title} width={768} height={1024} priority className="h-64 w-full object-cover" /></div>
+          <div className="mx-auto mt-8 max-w-2xl rounded-xl border border-champagne/25 bg-champagne/[0.05] p-6 text-left sm:mt-10">
+            <p className="mb-3 font-sans text-[10px] uppercase tracking-[0.3em] text-champagne/75">
+              {copy.answerLabel}
+            </p>
+            <p className="font-sans text-base leading-relaxed text-white/75">{copy.answer}</p>
+          </div>
+        </div>
+      </section>
+
+      <TableConcierge
+        locale={locale}
+        events={datedEvents}
+        initialNow={initialNow.toISOString()}
+        surface="vip"
+        copy={{ ...getTableConciergeSharedCopy(locale), title: copy.title, lead: copy.lead }}
+      />
+
+      <section className="px-6 pb-20">
+        <div className="mx-auto max-w-5xl rounded-2xl border border-white/10 bg-white/[0.025] p-7 sm:p-10">
+          <p className="mb-3 font-sans text-[10px] uppercase tracking-[0.35em] text-champagne/75">
+            {copy.factorsEyebrow}
+          </p>
+          <h2 className="mb-4 font-serif text-4xl text-white">{copy.factorsTitle}</h2>
+          <p className="mb-8 max-w-2xl font-sans text-base leading-relaxed text-white/55">{copy.factorsLead}</p>
+          <ul className="grid gap-4 md:grid-cols-2">
+            {copy.factors.map((factor) => (
+              <li key={factor} className="flex items-start gap-3 rounded-lg border border-white/8 bg-black/15 p-4">
+                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none text-champagne" aria-hidden="true" />
+                <span className="font-sans text-sm leading-relaxed text-white/70">{factor}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="px-6 pb-20">
+        <div className="mx-auto max-w-5xl">
+          <p className="mb-3 text-center font-sans text-[10px] uppercase tracking-[0.35em] text-champagne/75">
+            {copy.stepsEyebrow}
+          </p>
+          <h2 className="mb-10 text-center font-serif text-4xl text-white">{copy.stepsTitle}</h2>
+          <div className="grid gap-5 md:grid-cols-3">
+            {copy.steps.map((step, index) => {
+              const Icon = stepIcons[index];
+              return (
+                <article key={step.title} className="rounded-xl border border-white/10 bg-white/[0.025] p-7">
+                  <div className="mb-5 flex items-center justify-between">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-full border border-champagne/25 bg-champagne/10">
+                      <Icon className="h-5 w-5 text-champagne" aria-hidden="true" />
+                    </span>
+                    <span className="font-sans text-3xl font-bold text-champagne/25">0{index + 1}</span>
+                  </div>
+                  <h3 className="mb-3 font-serif text-2xl text-white">{step.title}</h3>
+                  <p className="font-sans text-sm leading-relaxed text-white/55">{step.description}</p>
+                </article>
+              );
+            })}
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              href={waLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-champagne text-black
-                font-sans font-semibold text-sm tracking-[0.15em] uppercase
-                hover:bg-white transition-colors duration-300"
-            >
-              <MessageCircle className="w-4 h-4" />
-              {tr(locale, 'Book via WhatsApp', 'Prenota su WhatsApp')}
-            </a>
-            <div className="flex items-center gap-2 text-white/40 text-sm font-sans">
-              <Clock className="w-4 h-4" />
-              {tr(locale, 'Reply in under 10 minutes', 'Risposta in meno di 10 minuti')}
+          <div className="mt-6 flex items-start gap-4 rounded-xl border border-amber-300/20 bg-amber-300/[0.05] p-5">
+            <CircleAlert className="mt-0.5 h-5 w-5 flex-none text-amber-200" aria-hidden="true" />
+            <p className="font-sans text-sm leading-relaxed text-white/70">{copy.notice}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 pb-24">
+        <div className="relative mx-auto max-w-3xl overflow-hidden rounded-2xl border border-champagne/25 bg-champagne/[0.06] p-8 text-center sm:p-12">
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-champagne/10 via-transparent to-transparent" />
+          <div className="relative">
+            <p className="mb-4 font-sans text-[10px] uppercase tracking-[0.35em] text-champagne/75">
+              {copy.finalEyebrow}
+            </p>
+            <h2 className="mb-4 font-serif text-4xl text-white">{copy.finalTitle}</h2>
+            <p className="mx-auto mb-8 max-w-xl font-sans text-base leading-relaxed text-white/60">{copy.finalText}</p>
+            <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-12 items-center justify-center gap-3 bg-champagne px-8 py-4 font-sans text-sm font-bold uppercase tracking-[0.12em] text-black transition-colors hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-champagne"
+              >
+                <MessageCircle className="h-5 w-5" aria-hidden="true" />
+                {SITE_CONTACT.whatsapp.number}
+              </a>
+              <Link
+                href={`${lp}/clubs`}
+                prefetch={false}
+                className="inline-flex min-h-12 items-center justify-center gap-2 border border-white/20 px-7 py-4 font-sans text-sm text-white/70 transition-colors hover:border-champagne/50 hover:text-champagne focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-champagne"
+              >
+                {copy.clubsLink}
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
             </div>
           </div>
         </div>
       </section>
-
-      {/* How it works */}
-      <section className="px-6 pb-20">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="font-serif text-4xl text-white mb-3 text-center">{tr(locale, 'How to Book a VIP Table in Milan', 'Come Prenotare un Tavolo VIP a Milano')}</h2>
-          <p className="font-sans text-champagne/50 text-[10px] tracking-[0.4em] uppercase text-center mb-12">
-            {tr(locale, '3 STEPS · FREE SERVICE · 10-MINUTE REPLY', '3 PASSI · SERVIZIO GRATUITO · RISPOSTA IN 10 MINUTI')}
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {steps.map((step, i) => (
-              <div key={i} className="relative p-8 rounded-lg border border-white/8 bg-white/[0.03]">
-                <div className="flex items-center gap-4 mb-5">
-                  <div className="w-10 h-10 rounded-full bg-champagne/10 border border-champagne/20 flex items-center justify-center flex-shrink-0">
-                    <step.icon className="w-4 h-4 text-champagne" />
-                  </div>
-                  <span className="font-sans text-champagne/30 text-3xl font-bold">0{i + 1}</span>
-                </div>
-                <h3 className="font-serif text-xl text-white mb-2">{tr(locale, step.title)}</h3>
-                <p className="font-sans text-white/50 text-sm leading-relaxed">{tr(locale, step.desc)}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Venue list */}
-      <section className="px-6 pb-24">
-        <div className="max-w-6xl mx-auto">
-          <p className="font-sans text-champagne/50 text-[10px] tracking-[0.4em] uppercase mb-3">
-            {tr(locale, 'AVAILABLE VENUES', 'LOCALI DISPONIBILI')}
-          </p>
-          <h2 className="font-serif text-4xl text-white mb-12">
-            {tr(locale, 'Choose Your Club', 'Scegli il Tuo Club')}
-          </h2>
-
-          <div className="space-y-5">
-            {venues.map((venue) => {
-              const venueWaMsg = encodeURIComponent(`Hi! I'd like to book a VIP table at ${venue.name}. Can you help me?`);
-              const venueWaLink = `https://wa.me/393519127047?text=${venueWaMsg}`;
-              return (
-                <div key={venue.id}
-                  className="group relative overflow-hidden rounded-lg border border-white/8
-                    hover:border-champagne/25 transition-all duration-500
-                    bg-white/[0.02] hover:bg-white/[0.04]">
-
-                  {venue.isHot && (
-                    <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-champagne to-transparent" />
-                  )}
-
-                  <div className="flex flex-col lg:flex-row">
-                    {/* Image */}
-                    <div className="relative w-full lg:w-72 h-48 lg:h-auto flex-shrink-0 overflow-hidden">
-                      <Image
-                        src={venue.image}
-                        alt={venue.name}
-                        fill
-                        quality={85}
-                        className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
-                        sizes="(max-width: 1024px) 100vw, 288px"
-                        referrerPolicy="no-referrer"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#131009]/80 hidden lg:block" />
-                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#131009]/80 lg:hidden" />
-                    </div>
-
-                    {/* Content */}
-                    <div className="flex-1 p-6 lg:p-8">
-                      <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
-                        <div>
-                          <div className="flex items-center gap-3 mb-1">
-                            <h3 className="font-serif text-2xl text-white group-hover:text-champagne transition-colors duration-300">
-                              {venue.name}
-                            </h3>
-                            {venue.isHot && (
-                              <span className="font-sans text-[9px] font-bold tracking-[0.2em] uppercase px-2 py-1 rounded-full bg-champagne text-black">
-                                {tr(locale, 'Most Popular', 'Il Più Richiesto')}
-                              </span>
-                            )}
-                          </div>
-                          <p className="font-sans text-champagne/60 text-xs tracking-[0.2em] uppercase">
-                            {venue.zone} · {tr(locale, venue.vibe)}
-                          </p>
-                        </div>
-                        <div className="text-right flex-shrink-0">
-                          <p className="font-sans text-white/30 text-[10px] uppercase tracking-widest mb-1">{tr(locale, 'Min. Spend', 'Consumo Min.')}</p>
-                          <p className="font-serif text-3xl text-champagne font-bold">€{venue.minSpend}</p>
-                          <p className="font-sans text-white/30 text-[10px]">{tr(locale, `tables from €${venue.tableStart}`, `tavoli da €${venue.tableStart}`)}</p>
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5 text-sm">
-                        <div>
-                          <p className="font-sans text-white/25 text-[10px] uppercase tracking-widest mb-1">{tr(locale, 'Music', 'Musica')}</p>
-                          <p className="font-sans text-white/60 text-xs">{tr(locale, venue.music)}</p>
-                        </div>
-                        <div>
-                          <p className="font-sans text-white/25 text-[10px] uppercase tracking-widest mb-1">{tr(locale, 'Table Size', 'Capienza Tavolo')}</p>
-                          <p className="font-sans text-white/60 text-xs flex items-center gap-1.5">
-                            <Users className="w-3 h-3" />{venue.capacity}
-                          </p>
-                        </div>
-                        <div>
-                          <p className="font-sans text-white/25 text-[10px] uppercase tracking-widest mb-1">{tr(locale, 'Best For', 'Ideale Per')}</p>
-                          <p className="font-sans text-white/60 text-xs">{tr(locale, venue.bestFor)}</p>
-                        </div>
-                      </div>
-
-                      <p className="font-sans text-white/40 text-xs italic border-l-2 border-champagne/30 pl-3 mb-6">
-                        &ldquo;{tr(locale, venue.insiderTip)}&rdquo;
-                      </p>
-
-                      <div className="flex flex-wrap gap-2 mb-6">
-                        {venue.tags.map((tag) => (
-                          <span key={tag}
-                            className="font-sans text-[10px] tracking-[0.15em] uppercase px-3 py-1.5 rounded-full
-                              bg-white/5 border border-white/10 text-white/50">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-
-                      <div className="flex flex-wrap gap-3">
-                        <a
-                          href={venueWaLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 px-6 py-3 bg-champagne text-black
-                            font-sans font-semibold text-xs tracking-[0.15em] uppercase
-                            hover:bg-white transition-colors duration-300"
-                        >
-                          <MessageCircle className="w-3.5 h-3.5" />
-                          {tr(locale, 'Book This Table', 'Prenota Questo Tavolo')}
-                        </a>
-                        <Link
-                          href={`${lp}/clubs/${venue.slug}`}
-                          className="inline-flex items-center gap-2 px-6 py-3 border border-white/15 text-white/60
-                            font-sans text-xs tracking-[0.15em] uppercase
-                            hover:border-champagne/40 hover:text-champagne transition-colors duration-300"
-                        >
-                          {tr(locale, 'View Club', 'Vedi il Club')}
-                          <ArrowRight className="w-3.5 h-3.5" />
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Interactive VIP Quote Calculator & Formula Matrix */}
-      <section className="px-6 pb-20 max-w-7xl mx-auto space-y-16">
-        <VipQuoteCalculator locale={locale} />
-        <EntryFormulaMatrix locale={locale} />
-        <PrioritySixShowcase locale={locale} />
-      </section>
-
-      {/* FAQ */}
-      <section className="px-6 pb-24 border-t border-white/5 pt-16">
-        <div className="max-w-3xl mx-auto">
-          <p className="font-sans text-champagne/50 text-[10px] tracking-[0.4em] uppercase mb-12 text-center">
-            {tr(locale, 'FREQUENTLY ASKED QUESTIONS', 'DOMANDE FREQUENTI')}
-          </p>
-          <div className="space-y-8">
-            {faqs.map((item, i) => (
-              <div key={i} className="border-b border-white/8 pb-8">
-                <h3 className="font-serif text-lg text-white mb-3">{tr(locale, item.q, item.qIt)}</h3>
-                <p className="font-sans text-white/50 text-sm leading-relaxed">{tr(locale, item.a, item.aIt)}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Bottom CTA */}
-      <section className="px-6 pb-24">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="relative p-10 rounded-xl border border-champagne/20 bg-champagne/[0.04] overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-champagne/8 via-transparent to-transparent pointer-events-none" />
-            <p className="font-sans text-champagne/60 text-[10px] tracking-[0.4em] uppercase mb-4 relative">
-              {tr(locale, 'READY TO GO?', 'PRONTO A PARTIRE?')}
-            </p>
-            <h2 className="font-serif text-4xl text-white mb-4 relative">
-              {tr(locale, 'Reserve Your Table Now', 'Prenota il Tuo Tavolo Ora')}
-            </h2>
-            <p className="font-sans text-white/40 text-sm mb-8 relative">
-              {tr(locale, "WhatsApp us with your date, group size, and budget. We'll handle everything.", 'Scrivici su WhatsApp con data, numero di persone e budget. Ci pensiamo a tutto noi.')}
-            </p>
-            <a
-              href={waLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative inline-flex items-center gap-3 px-10 py-5 bg-champagne text-black
-                font-sans font-bold text-sm tracking-[0.2em] uppercase
-                hover:bg-white transition-colors duration-300"
-            >
-              <MessageCircle className="w-5 h-5" />
-              {CONTACT.whatsapp.number}
-            </a>
-            <p className="font-sans text-white/20 text-xs mt-4 relative">
-              {tr(locale, 'Response guaranteed in under 10 minutes · Available 7 days a week', 'Risposta garantita in meno di 10 minuti · Disponibili 7 giorni su 7')}
-            </p>
-          </div>
-        </div>
-      </section>
-
-            <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/vip-tables`} />
-      </main>
-    </>
+      <EditorialPageSections locale={locale as LocaleCode} path={`${localePrefix(locale)}/vip-tables`} />
+    </main>
   );
 }

@@ -1,51 +1,270 @@
-import OctoberEntry from '@/components/OctoberEntry';
-import { Metadata } from 'next';
-import nextDynamic from 'next/dynamic';
-import Hero from '@/components/Hero';
-import IntentCards from '@/components/IntentCards';
-import NightLine from '@/components/NightLine';
-import Image from 'next/image';
-import Link from 'next/link';
-import { MessageCircle } from 'lucide-react';
-import { Suspense } from 'react';
-import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset, romeUpcomingSundayKey } from '@/lib/calendarEvents';
-import { CONTACT } from '@/config/contact';
-import { tr } from '@/lib/i18n/t';
-import { localePrefix, hreflangAlternates, getLocaleDef } from '@/lib/i18n/locales';
-import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
-import { generateEventListSchema, jsonLdString } from '@/lib/seo';
-import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
-import { PrioritySixShowcase, WeeklyNightlifeNavigator, EntryFormulaMatrix, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
+import { Metadata } from 'next';
+import MfwEntry from '@/components/MfwEntry';
+import OctoberEntry from '@/components/OctoberEntry';
+import IntentCards from '@/components/IntentCards';
+import NightLine from '@/components/NightLine';
+import TableConcierge from '@/components/TableConcierge';
+import DateSensitiveCalendar from '@/components/DateSensitiveCalendar';
+import { getEventCalendarCopy } from '@/lib/eventCalendarCopy';
+import Image from 'next/image';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { SITE_CONTACT } from '@/config/contact';
+import { localePrefix, hreflangAlternates, getLocaleDef, isEnabledLocale } from '@/lib/i18n/locales';
+import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { applyEditorialFields, readEditorialFields } from '@/lib/editorialContent';
+import { currentHomeDict, currentHomeGridAlts } from '@/lib/i18n/currentSafePageCopy';
+import { getHeroCopy } from '@/lib/i18n/heroCopy';
+import { resolveStrictPageCopy } from '@/lib/i18n/strictPageCopy';
+import { getDateSensitiveCarouselInventory } from '@/lib/dateSensitiveInventory';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
+import { getTableConciergeLead, getTableConciergeSharedCopy } from '@/lib/tableConciergePageCopy';
+import { venuesData } from '@/lib/venuesData';
+import { venueLocationLabel } from '@/lib/venueLocation';
+import { PRIORITY_VENUE_IDS, selectPriorityVenueEvents } from '@/lib/priorityVenueEvents';
+import { getLocalizedText } from '@/lib/seo';
 
-const EventsCarousel = nextDynamic(() => import('@/components/EventsCarousel'));
+// Cache senza scadenza. Gli aggiornamenti avvengono solo al deploy o tramite
+// revalidatePath dopo una modifica editoriale esplicita.
+export const revalidate = false;
 
-export const revalidate = 300; // ISR 5 min — metadata bloccante nel <head>, HTML cacheato all'edge
+type HomeIndexedLocale = 'en' | 'it' | 'es' | 'fr' | 'de' | 'pt';
+const HOME_SAFE_COPY: Record<HomeIndexedLocale, {
+  title: string;
+  description: string;
+  venueLabel: string;
+  venueDescription: string;
+  venueTags: [string, string, string];
+  featuredImageAlts: [string, string, string];
+  keywords: string[];
+  ogImageAlt: string;
+  requestLabel: string;
+  requestAction: string;
+  requestDisclaimer: string;
+  quickLabel: string;
+  whatsAppMessage: string;
+  nightLabel: string;
+  nightTitle: string;
+  curatedLabel: string;
+  topVenuesTitle: string;
+  allVenues: string;
+  allVenuesMobile: string;
+  tonightLabel: string;
+  tonightTitle: string;
+  tonightSubtitle: string;
+  seeAll: string;
+  noTonight: string;
+  discoverBest: 'Compare venue profiles →' | string;
+  allTonight: string;
+  availabilityCta: string;
+  weekLabel: string;
+  weekTitle: string;
+  noWeek: string;
+  allWeek: string;
+  discoverLabel: string;
+  categoriesTitle: string;
+  categoryLabels: [string, string, string, string, string, string, string, string];
+  nightSteps: readonly { label: string; title: string; body: string }[];
+}> = {
+  en: {
+    title: 'Milan Nightlife 2026 | Best Clubs, VIP Tables, Guest Lists & Events',
+    description: 'Official guide to Milan nightlife: compare the 20 best clubs (JustMe, Armani Privé, 11Clubroom, Tocqueville 13, Volt), VIP table minimum spend, guest lists, and tonight’s events.',
+    venueLabel: 'Official Club Guide',
+    venueDescription: 'Explore address, music format, dress code, VIP table minimum spend, and upcoming club nights with instant WhatsApp Concierge assistance.',
+    venueTags: ['District & Address', 'Music & Format', 'VIP & Guest List'],
+    featuredImageAlts: ['JustMe Milano glass pavilion and illuminated garden at Parco Sempione', 'Rooftop aperitivo terrace in Milan at sunset', 'VIP bottle service table at a luxury Milan nightclub'],
+    keywords: ['milan nightlife', 'best clubs milan', 'vip tables milan', 'guest list milan clubs', 'aperitivo milan', 'tonight events milan', 'bottle service milan'],
+    ogImageAlt: 'Milan Nightlife Official Guide — VIP Tables, Clubs & Events',
+    requestLabel: 'VIP Concierge Desk',
+    requestAction: 'Book via WhatsApp Concierge',
+    requestDisclaimer: 'Fast-track VIP table quotes, bottle lists, and nominal guest list registration via WhatsApp +39 351 912 7047.',
+    quickLabel: '24/7 WhatsApp Desk',
+    whatsAppMessage: 'Hi Nightlife Milan! I would like to check VIP table / guest list options in Milan for my date.',
+    nightLabel: 'The Three Acts of the Night', nightTitle: 'How a Night Out in Milan Works',
+    curatedLabel: 'Iconic Venues Selection', topVenuesTitle: 'Top Nightclubs & Lounges in Milan', allVenues: 'Explore all 20 clubs', allVenuesMobile: 'See all 20 clubs →',
+    tonightLabel: 'Tonight in Milan', tonightTitle: "Tonight's Club Events", tonightSubtitle: 'Upcoming club nights & DJ sets in Milan', seeAll: 'View full calendar',
+    noTonight: 'Explore upcoming weekend and special events or message our WhatsApp Concierge for tonight’s best tables.', discoverBest: 'Compare all 20 Milan clubs →', allTonight: "All tonight's events →",
+    availabilityCta: 'Request instant VIP table & guest list availability on WhatsApp.', weekLabel: 'Upcoming Calendar', weekTitle: 'This Week & Weekend in Milan',
+    noWeek: 'Message our WhatsApp Concierge (+39 351 912 7047) for private events, aperitivo tables, and weekend VIP reservations.', allWeek: "Full Milan events calendar →",
+    discoverLabel: 'Explore Milan by Style', categoriesTitle: 'Browse Nightlife by Category & District',
+    categoryLabels: ['Techno & Underground', 'VIP Tables & Privé', 'Royal Aperitivo', 'Navigli District', 'Corso Como & Garibaldi', '2026 Insider Guides', 'VIP Concierge Desk', 'All 20 Milan Clubs'],
+    nightSteps: [
+      { label: 'Act I · 19:30 – 22:30', title: 'Royal Aperitivo & Sunset Rooftops', body: 'Start your evening in Parco Sempione, Brera, Corso Como, or Navigli with signature cocktails, gourmet platters, and warm-up DJ sets.' },
+      { label: 'Act II · 23:30 – 01:15', title: 'Club Doors, Guest Lists & Selection', body: 'Arrive before 00:45 for nominal guest-list entry or walk straight to the VIP Host desk with your confirmed table reservation.' },
+      { label: 'Act III · 01:15 – 05:00', title: 'Peak-Time Dancefloor & VIP Privé', body: 'Experience international guest DJs, sparkler bottle shows, and private banquette service across Milan’s flagship sanctuaries.' },
+    ],
+  },
+  it: {
+    title: 'Vita Notturna Milano 2026 | Migliori Club, Tavoli VIP, Liste ed Eventi',
+    description: 'Guida ufficiale alla nightlife di Milano: confronta i 20 migliori club (JustMe, Armani Privé, 11Clubroom, Tocqueville 13, Volt), prezzi tavoli VIP, liste nominali e serate.',
+    venueLabel: 'Scheda Ufficiale Club',
+    venueDescription: 'Scopri indirizzo, genere musicale, dress code, minimum spend tavoli VIP e prossime serate con assistenza immediata WhatsApp Concierge.',
+    venueTags: ['Quartiere & Indirizzo', 'Musica & Format', 'Tavoli VIP & Lista'],
+    featuredImageAlts: ['Padiglione in vetro e giardino illuminato del JustMe Milano a Parco Sempione', 'Terrazza aperitivo panoramica a Milano al tramonto', 'Servizio bottle show al tavolo VIP in un club di Milano'],
+    keywords: ['vita notturna milano', 'migliori discoteche milano', 'tavoli vip milano', 'liste discoteche milano', 'aperitivo milano', 'serate milano stasera', 'bottle service milano'],
+    ogImageAlt: 'Guida Ufficiale Vita Notturna Milano — Tavoli VIP, Club ed Eventi',
+    requestLabel: 'Concierge Tavoli & Liste',
+    requestAction: 'Prenota su WhatsApp Concierge',
+    requestDisclaimer: 'Preventivi rapidi tavoli VIP, listini bottiglie e accredito in lista nominale su WhatsApp +39 351 912 7047.',
+    quickLabel: 'Desk WhatsApp Attivo',
+    whatsAppMessage: 'Ciao Nightlife Milan! Vorrei ricevere le opzioni tavoli VIP e lista per la mia serata a Milano.',
+    nightLabel: 'I Tre Atti della Notte', nightTitle: 'Come Funziona la Serata Perfetta a Milano',
+    curatedLabel: 'I Santuari della Notte', topVenuesTitle: 'I Migliori Club e Discoteche di Milano', allVenues: 'Tutti i 20 club di Milano', allVenuesMobile: 'Vedi tutti i 20 club →',
+    tonightLabel: 'Stasera a Milano', tonightTitle: 'Eventi e Serate di Stasera', tonightSubtitle: 'Serate in programma e DJ set nei club di Milano', seeAll: 'Calendario completo',
+    noTonight: 'Scopri i prossimi eventi in calendario o scrivi su WhatsApp per i tavoli e le serate consigliate stasera.', discoverBest: 'Confronta i 20 club di Milano →', allTonight: 'Tutti gli eventi di stasera →',
+    availabilityCta: 'Richiedi disponibilità tavoli VIP e liste su WhatsApp.', weekLabel: 'Calendario Settimanale', weekTitle: 'Prossime Serate della Settimana a Milano',
+    noWeek: 'Scrivi al Concierge WhatsApp (+39 351 912 7047) per prenotare Royal Aperitivo, liste e Tavoli Privé nel weekend.', allWeek: 'Calendario completo eventi →',
+    discoverLabel: 'Esplora per Stile e Quartiere', categoriesTitle: 'Scegli la Tua Esperienza Notturna a Milano',
+    categoryLabels: ['Club Techno & Underground', 'Tavoli VIP & Privé', 'Royal Aperitivo Milano', 'Quartiere Navigli', 'Corso Como & Garibaldi', 'Guide Ufficiali 2026', 'Servizio VIP Concierge', 'Tutti i 20 Club Milano'],
+    nightSteps: [
+      { label: 'Atto I · 19:30 – 22:30', title: 'Royal Aperitivo & Rooftop al Tramonto', body: 'Inizia la serata tra Parco Sempione, Brera, Corso Como o i Navigli con signature cocktail, buffet gourmet o tavolo aperitivo con DJ set.' },
+      { label: 'Atto II · 23:30 – 01:15', title: 'Apertura Club, Liste & Selezione Porta', body: 'Entra entro le 00:45 in lista nominale oppure accedi dalla corsia prioritaria VIP Host con il tuo tavolo riservato.' },
+      { label: 'Atto III · 01:15 – 05:00', title: 'Peak-Time in Pista & Tavoli Privé', body: 'Vivi il clou della notte tra guest DJ internazionali, bottle show al tavolo e aree Privé nei club iconici della capitale della moda.' },
+    ],
+  },
+  es: {
+    title: 'Vida Nocturna Milán 2026 | Mejores Discotecas, Mesas VIP y Eventos',
+    description: 'Guía oficial de la noche en Milán: compara los 20 mejores clubes (JustMe, Armani Privé, 11Clubroom, Tocqueville 13, Volt), mesas VIP, listas y eventos.',
+    venueLabel: 'Guía Oficial del Club',
+    venueDescription: 'Consulta dirección, estilo musical, dress code, consumo mínimo de mesas VIP y próximos eventos con asistencia por WhatsApp.',
+    venueTags: ['Barrio y Dirección', 'Música y Formato', 'Mesas VIP y Lista'],
+    featuredImageAlts: ['Pabellón de cristal y jardín iluminado de JustMe Milano en Parco Sempione', 'Terraza de aperitivo en Milán al atardecer', 'Servicio de botellas en mesa VIP en Milán'],
+    keywords: ['vida nocturna milán', 'mejores discotecas milán', 'mesas vip milán', 'aperitivo milán', 'eventos milán hoy', 'guía nocturna milán'],
+    ogImageAlt: 'Guía Oficial de la Vida Nocturna de Milán',
+    requestLabel: 'Concierge VIP Milán',
+    requestAction: 'Reservar por WhatsApp',
+    requestDisclaimer: 'Presupuestos de mesas VIP, cartas de botellas y listas nominales por WhatsApp +39 351 912 7047.',
+    quickLabel: 'Atención WhatsApp',
+    whatsAppMessage: '¡Hola Nightlife Milan! Quiero consultar opciones de mesa VIP y lista en Milán para mi fecha.',
+    nightLabel: 'Los Tres Actos de la Noche', nightTitle: 'Cómo Funciona la Noche en Milán',
+    curatedLabel: 'Selección de Clubes', topVenuesTitle: 'Los Mejores Clubes y Discotecas de Milán', allVenues: 'Todos los 20 clubes', allVenuesMobile: 'Ver todos los clubes →',
+    tonightLabel: 'Esta Noche', tonightTitle: 'Eventos de Esta Noche', tonightSubtitle: 'Fiestas y sesiones DJ en Milán', seeAll: 'Ver calendario',
+    noTonight: 'Consulta los próximos eventos de la semana o escríbenos por WhatsApp para reservar mesa VIP.', discoverBest: 'Comparar clubes de Milán →', allTonight: 'Todos los eventos de hoy →',
+    availabilityCta: 'Consulta disponibilidad de mesas VIP por WhatsApp.', weekLabel: 'Esta Semana', weekTitle: 'Próximos Eventos en Milán',
+    noWeek: 'Escríbenos por WhatsApp (+39 351 912 7047) para reservar mesas VIP y listas este fin de semana.', allWeek: 'Calendario completo →',
+    discoverLabel: 'Explorar por Categoría', categoriesTitle: 'Descubre Milán por Estilo y Zona',
+    categoryLabels: ['Clubes de Techno', 'Mesas VIP y Privé', 'Aperitivo en Milán', 'Zona Navigli', 'Zona Corso Como', 'Guías Oficiales 2026', 'Servicio Concierge', 'Los 20 Clubes de Milán'],
+    nightSteps: [
+      { label: 'Acto I · 19:30 – 22:30', title: 'Royal Aperitivo y Terrazas', body: 'Empieza la tarde en Parco Sempione, Brera, Corso Como o Navigli con cócteles de autor, buffet gourmet y DJ set.' },
+      { label: 'Acto II · 23:30 – 01:15', title: 'Entrada en Lista y Selección', body: 'Accede antes de las 00:45 por lista nominal o entra sin cola por el acceso VIP Host con tu mesa reservada.' },
+      { label: 'Acto III · 01:15 – 05:00', title: 'Privé, Bottle Show y DJ Sets', body: 'Disfruta del momento cumbre de la noche con DJs internacionales y servicio de botellas en los clubes más exclusivos.' },
+    ],
+  },
+  fr: {
+    title: "Vie Nocturne à Milan 2026 | Meilleurs Clubs, Tables VIP et Soirées",
+    description: "Guide officiel de la nuit à Milan : comparez les 20 meilleurs clubs (JustMe, Armani Privé, 11Clubroom, Tocqueville 13, Volt), tables VIP, guest lists et soirées.",
+    venueLabel: 'Fiche Officielle Club',
+    venueDescription: 'Découvrez l’adresse, le style musical, le dress code, les tarifs tables VIP et les prochaines soirées avec notre Concierge WhatsApp.',
+    venueTags: ['Quartier & Adresse', 'Musique & Format', 'Tables VIP & Liste'],
+    featuredImageAlts: ['Pavillon vitré et jardin illuminé du JustMe Milano à Parco Sempione', 'Terrasse aperitivo à Milan au coucher du soleil', 'Service bouteille table VIP à Milan'],
+    keywords: ['vie nocturne milan', 'meilleurs clubs milan', 'tables vip milan', 'aperitivo milan', 'soirées milan', 'guide clubs milan'],
+    ogImageAlt: 'Guide Officiel de la Vie Nocturne à Milan',
+    requestLabel: 'Conciergerie VIP Milan',
+    requestAction: 'Réserver sur WhatsApp',
+    requestDisclaimer: 'Devis tables VIP, cartes des bouteilles et guest lists sur WhatsApp +39 351 912 7047.',
+    quickLabel: 'Concierge WhatsApp',
+    whatsAppMessage: 'Bonjour Nightlife Milan ! Je souhaite connaître les options de table VIP et guest list à Milan pour ma date.',
+    nightLabel: 'Les Trois Actes de la Nuit', nightTitle: 'Comment Fonctionne la Nuit à Milan',
+    curatedLabel: 'Sélection de Clubs', topVenuesTitle: 'Les Meilleurs Clubs et Discothèques de Milan', allVenues: 'Les 20 clubs de Milan', allVenuesMobile: 'Voir tous les clubs →',
+    tonightLabel: 'Ce Soir', tonightTitle: 'Soirées de Ce Soir', tonightSubtitle: 'Programmation clubs et DJ sets à Milan', seeAll: 'Voir le calendrier',
+    noTonight: 'Découvrez les prochaines soirées de la semaine ou contactez notre Concierge WhatsApp.', discoverBest: 'Comparer les clubs de Milan →', allTonight: 'Toutes les soirées de ce soir →',
+    availabilityCta: 'Demandez la disponibilité des tables VIP sur WhatsApp.', weekLabel: 'Cette Semaine', weekTitle: 'Prochaines Soirées à Milan',
+    noWeek: 'Contactez-nous sur WhatsApp (+39 351 912 7047) pour vos réservations de tables VIP ce week-end.', allWeek: 'Calendrier complet →',
+    discoverLabel: 'Explorer par Catégorie', categoriesTitle: 'Choisissez Votre Ambiance à Milan',
+    categoryLabels: ['Clubs Techno', 'Tables VIP & Privé', 'Aperitivo à Milan', 'Quartier Navigli', 'Quartier Corso Como', 'Guides Officiels 2026', 'Service Concierge', 'Les 20 Clubs de Milan'],
+    nightSteps: [
+      { label: 'Acte I · 19:30 – 22:30', title: 'Royal Aperitivo & Rooftops', body: 'Commencez la soirée à Parco Sempione, Brera, Corso Como ou Navigli avec cocktails signature, buffet gourmet et DJ set.' },
+      { label: 'Acte II · 23:30 – 01:15', title: 'Guest Lists & Sélection Porte', body: 'Arrivez avant 00h45 en guest list nominative ou profitez de l’accueil prioritaire VIP Host avec votre table réservée.' },
+      { label: 'Acte III · 01:15 – 05:00', title: 'Peak-Time & Carré VIP Privé', body: 'Vivez l’apogée de la nuit milanaise avec DJs internationaux et service bouteille dans les clubs iconiques.' },
+    ],
+  },
+  de: {
+    title: 'Nachtleben Mailand 2026 | Beste Clubs, VIP-Tische, Gästelisten & Events',
+    description: 'Offizieller Guide für das Mailänder Nachtleben: die 20 besten Clubs (JustMe, Armani Privé, 11Clubroom, Tocqueville 13, Volt), VIP-Tische, Mindestverzehr & Partys.',
+    venueLabel: 'Offizielles Club-Profil',
+    venueDescription: 'Adresse, Musikstil, Dresscode, VIP-Tisch-Mindestverzehr und kommende Partys mit direktem WhatsApp-Concierge.',
+    venueTags: ['Viertel & Adresse', 'Musik & Format', 'VIP-Tisch & Liste'],
+    featuredImageAlts: ['Glaspavillon und beleuchteter Garten des JustMe Milano im Parco Sempione', 'Dachterrasse bei Sonnenuntergang in Mailand', 'VIP-Bottle-Service in einem Mailänder Club'],
+    keywords: ['nachtleben mailand', 'beste clubs mailand', 'vip tische mailand', 'aperitivo mailand', 'partys mailand heute', 'club guide mailand'],
+    ogImageAlt: 'Offizieller Guide zum Nachtleben in Mailand',
+    requestLabel: 'VIP-Concierge Mailand',
+    requestAction: 'Per WhatsApp reservieren',
+    requestDisclaimer: 'VIP-Tisch-Angebote, Flaschenpreislisten und Gästelisten per WhatsApp +39 351 912 7047.',
+    quickLabel: 'WhatsApp-Desk',
+    whatsAppMessage: 'Hallo Nightlife Milan! Ich möchte VIP-Tisch- und Gästelisten-Optionen in Mailand für mein Datum anfragen.',
+    nightLabel: 'Die Drei Akte der Nacht', nightTitle: 'So Funktioniert die Perfekte Nacht in Mailand',
+    curatedLabel: 'Top-Locations', topVenuesTitle: 'Die Besten Clubs & Lounges in Mailand', allVenues: 'Alle 20 Clubs', allVenuesMobile: 'Alle 20 Clubs ansehen →',
+    tonightLabel: 'Heute Abend', tonightTitle: 'Events Heute Abend', tonightSubtitle: 'Kommende Clubnächte & DJ-Sets in Mailand', seeAll: 'Kalender ansehen',
+    noTonight: 'Entdecken Sie die kommenden Wochenend-Events oder schreiben Sie unserem WhatsApp-Concierge.', discoverBest: 'Mailänder Clubs vergleichen →', allTonight: 'Alle heutigen Events →',
+    availabilityCta: 'VIP-Tisch-Verfügbarkeit direkt per WhatsApp anfragen.', weekLabel: 'Diese Woche', weekTitle: 'Kommende Events in Mailand',
+    noWeek: 'Schreiben Sie uns per WhatsApp (+39 351 912 7047) für VIP-Tische und Gästelisten am Wochenende.', allWeek: 'Vollständiger Kalender →',
+    discoverLabel: 'Nach Stil Entdecken', categoriesTitle: 'Nachtleben nach Kategorie & Viertel',
+    categoryLabels: ['Techno & Underground', 'VIP-Tische & Privé', 'Royal Aperitivo', 'Navigli-Viertel', 'Corso Como & Garibaldi', 'Club-Guides 2026', 'Concierge-Service', 'Alle 20 Mailänder Clubs'],
+    nightSteps: [
+      { label: 'Akt I · 19:30 – 22:30', title: 'Royal Aperitivo & Sunset-Terrassen', body: 'Starten Sie im Parco Sempione, Brera, Corso Como oder Navigli mit Drinks, Gourmet-Buffet und Warm-up-DJ-Sets.' },
+      { label: 'Akt II · 23:30 – 01:15', title: 'Club-Einlass, Gästeliste & Dresscode', body: 'Kommen Sie vor 00:45 Uhr über die Gästeliste oder nutzen Sie den direkten VIP-Host-Empfang mit reserviertem Tisch.' },
+      { label: 'Akt III · 01:15 – 05:00', title: 'Peak-Time Dancefloor & VIP-Privé', body: 'Erleben Sie internationale DJs und exklusiven Bottle-Service in Mailands berühmtesten Clubs.' },
+    ],
+  },
+  pt: {
+    title: 'Vida Noturna Milão 2026 | Melhores Clubes, Mesas VIP, Listas e Eventos',
+    description: 'Guia oficial da noite em Milão: compare os 20 melhores clubes (JustMe, Armani Privé, 11Clubroom, Tocqueville 13, Volt), mesas VIP, listas e festas.',
+    venueLabel: 'Guia Oficial do Clube',
+    venueDescription: 'Confira endereço, estilo musical, dress code, consumação mínima de mesas VIP e próximas festas com suporte via WhatsApp.',
+    venueTags: ['Bairro e Endereço', 'Música e Formato', 'Mesas VIP e Lista'],
+    featuredImageAlts: ['Pavilhão de vidro e jardim iluminado do JustMe Milano no Parco Sempione', 'Terraço de aperitivo ao pôr do sol em Milão', 'Serviço de garrafas em mesa VIP em Milão'],
+    keywords: ['vida noturna milão', 'melhores clubes milão', 'mesas vip milão', 'aperitivo milão', 'eventos milão hoje', 'guia noturno milão'],
+    ogImageAlt: 'Guia Oficial da Vida Noturna de Milão',
+    requestLabel: 'Concierge VIP Milão',
+    requestAction: 'Reservar pelo WhatsApp',
+    requestDisclaimer: 'Cotações de mesas VIP, cartas de garrafas e listas nominais pelo WhatsApp +39 351 912 7047.',
+    quickLabel: 'Atendimento WhatsApp',
+    whatsAppMessage: 'Olá Nightlife Milan! Quero consultar opções de mesa VIP e lista em Milão para a minha data.',
+    nightLabel: 'Os Três Atos da Noite', nightTitle: 'Como Funciona a Noite em Milão',
+    curatedLabel: 'Seleção de Clubes', topVenuesTitle: 'Os Melhores Clubes e Discotecas de Milão', allVenues: 'Todos os 20 clubes', allVenuesMobile: 'Ver todos os clubes →',
+    tonightLabel: 'Hoje à Noite', tonightTitle: 'Eventos de Hoje', tonightSubtitle: 'Festas e DJ sets em Milão', seeAll: 'Ver calendário',
+    noTonight: 'Veja os próximos eventos da semana ou fale com nosso Concierge no WhatsApp.', discoverBest: 'Comparar clubes de Milão →', allTonight: 'Todos os eventos de hoje →',
+    availabilityCta: 'Peça a disponibilidade de mesas VIP pelo WhatsApp.', weekLabel: 'Esta Semana', weekTitle: 'Próximos Eventos Desta Semana',
+    noWeek: 'Fale conosco no WhatsApp (+39 351 912 7047) para reservar mesas VIP neste fim de semana.', allWeek: 'Calendário completo →',
+    discoverLabel: 'Explorar por Categoria', categoriesTitle: 'Descubra Milão por Estilo e Bairro',
+    categoryLabels: ['Clubes de Techno', 'Mesas VIP e Privé', 'Aperitivo em Milão', 'Zona Navigli', 'Zona Corso Como', 'Guias Oficiais 2026', 'Serviço de Concierge', 'Os 20 Clubes de Milão'],
+    nightSteps: [
+      { label: 'Ato I · 19:30 – 22:30', title: 'Royal Aperitivo e Terraços', body: 'Comece a noite no Parco Sempione, Brera, Corso Como ou Navigli com drinks autorais, buffet gourmet e DJ set.' },
+      { label: 'Ato II · 23:30 – 01:15', title: 'Abertura, Listas e Seleção', body: 'Chegue antes das 00:45 na lista nominal ou entre sem fila pelo acesso VIP Host com sua mesa reservada.' },
+      { label: 'Ato III · 01:15 – 05:00', title: 'Peak-Time, Privé e Bottle Show', body: 'Viva o auge da noite milanesa com DJs internacionais e serviço de garrafas nos clubes mais icônicos.' },
+    ],
+  },
+};
 
-export async function generateStaticParams() {
-  return [{ locale: 'en' }, { locale: 'it' }];
+function getHomeSafeCopy(locale: string) {
+  return resolveStrictPageCopy(locale, HOME_SAFE_COPY, currentHomeDict, {
+    trace: 'home',
+  });
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
+  if (!isEnabledLocale(locale)) notFound();
+  const copy = applyEditorialFields(
+    getHomeSafeCopy(locale),
+    await readEditorialFields('home', locale),
+  );
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   // Bug fix: prima collassava a it/en, mandando il canonical/og:url di 33
-  // lingue su 35 alla root inglese — in contraddizione con gli hreflang
+  // lingue su 35 alla root inglese · in contraddizione con gli hreflang
   // alternates della stessa pagina (rischio reale di deindicizzazione).
   const canonical = `${baseUrl}${localePrefix(locale)}` || baseUrl;
-  const ogImage = `${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`;
+  const ogImage = `${baseUrl}/images/table-concierge/justme-night.webp`;
 
-  const title = seoTitle(tr(locale, 'Milan Nightlife 2026 | Best Clubs, VIP Tables & Aperitivo | Nightlife Milan', 'Vita Notturna Milano 2026 | Club, VIP Table & Aperitivo | Nightlife Milan'));
-  const description = withWhatsApp(tr(locale, 'The definitive guide to Milan nightlife. Best clubs, VIP tables, aperitivo and July 2026 events. Book via WhatsApp in under 10 minutes.', 'La guida definitiva alla vita notturna di Milano. I migliori club, tavoli VIP, aperitivo e serate luglio 2026. Prenota via WhatsApp in 10 minuti.'), locale);
-
-  const keywordsEn = ['milan nightlife', 'best clubs milan', 'vip tables milan', 'aperitivo milan', 'milan nightclub 2026', 'nightlife milan guide'];
-  const keywordsIt = ['vita notturna milano', 'migliori club milano', 'tavoli vip milano', 'aperitivo milano', 'nightlife milano 2026', 'guida vita notturna milano'];
+  const title = seoTitle(copy.title);
+  const description = withWhatsApp(copy.description, locale);
 
   return {
     title,
     description,
-    keywords: keywordsEn.map((k, i) => tr(locale, k, keywordsIt[i])),
+    keywords: copy.keywords,
     robots: seoRobots(locale),
     alternates: {
       canonical,
@@ -58,7 +277,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       url: canonical,
       siteName: 'Nightlife Milan',
       locale: getLocaleDef(locale)?.ogLocale || 'en_US',
-      images: [{ url: ogImage, width: 1200, height: 630, alt: tr(locale, 'Milan nightlife 2026', 'Vita notturna Milano 2026') }],
+      images: [{ url: ogImage, width: 1200, height: 900, alt: copy.ogImageAlt }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -71,537 +290,538 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 // ─── Featured venues shown in the homepage strip ───────────────────────────
-const FEATURED_VENUES = [
-  {
-    id: 'v-justme',
-    slug: 'just-me-milano',
-    image: '/images/just-me-milano.webp',
-    name: { en: 'Just Me', it: 'Just Me' },
-    zone: { en: 'Sempione', it: 'Sempione' },
-    label: { en: 'Most Exclusive', it: 'Più Esclusivo' },
-    desc: {
-      en: 'Italo Rota design, velvet booths, fashion crowd. The Milan door that reads the room.',
-      it: 'Design Italo Rota, velluto e acciaio, crowd fashion. La selezione che legge la sala.',
-    },
-    tags: { en: ['House', 'Luxury', 'VIP Tables'], it: ['House', 'Lusso', 'Tavoli VIP'] },
-  },
-  {
-    id: 'v-pineta',
-    slug: 'pineta-club-milano',
-    image: '/images/pineta-milano.webp',
-    name: { en: 'Pineta Club', it: 'Pineta Club' },
-    zone: { en: 'Corso Como', it: 'Corso Como' },
-    label: { en: 'Singing Aperitivo', it: 'Aperitivo Cantato' },
-    desc: {
-      en: 'Long shared tables, buffet from 19:30, everyone on their feet by midnight.',
-      it: 'Tavoli lunghi condivisi, buffet dalle 19:30, tutti in piedi a mezzanotte.',
-    },
-    tags: { en: ['Reggaeton', 'Commercial', 'Aperitivo'], it: ['Reggaeton', 'Commerciale', 'Aperitivo'] },
-  },
-  {
-    id: 'v-voya',
-    slug: 'voya-rooftop-milan',
-    image: '/images/voya-rooftop-milan.webp',
-    name: { en: 'Voya Rooftop', it: 'Voya Rooftop' },
-    zone: { en: 'Isola — 20th floor', it: 'Isola — 20° piano' },
-    label: { en: 'Best Skyline View', it: 'Vista Skyline' },
-    desc: {
-      en: 'The Milan skyline runs the length of the glass. Aperitivo turns into a DJ set without anyone noticing.',
-      it: 'Lo skyline di Milano lungo le vetrate. L\'aperitivo diventa DJ set senza che te ne accorga.',
-    },
-    tags: { en: ['Skyline', 'Lounge', 'Cocktails'], it: ['Skyline', 'Lounge', 'Cocktail'] },
-  },
-];
-
-// ─── How-the-night-works steps ─────────────────────────────────────────────
-const NIGHT_STEPS = [
-  {
-    time: '18:00 — 22:00',
-    title: { en: 'Aperitivo', it: 'Aperitivo' },
-    body: {
-      en: 'Every Milan night starts with aperitivo. Navigli for canal-side vibes, Brera for luxury, Voya for rooftop skyline views.',
-      it: 'La serata milanese inizia sempre con l\'aperitivo. Navigli per il canalside, Brera per il luxury, Voya per il rooftop con vista skyline.',
-    },
-  },
-  {
-    time: '22:00 — 00:00',
-    title: { en: 'Dinner & Pre-Club', it: 'Cena & Pre-Club' },
-    body: {
-      en: 'Dinner at the top restaurants in Corso Como or Brera. Clubs open but stay quiet. Arrive after midnight for the right atmosphere.',
-      it: 'La cena nei migliori ristoranti di Corso Como o Brera. I club aprono ma restano vuoti. Arriva dopo mezzanotte.',
-    },
-  },
-  {
-    time: '00:00 — 05:00',
-    title: { en: 'Club & VIP', it: 'Club & VIP' },
-    body: {
-      en: 'Just Me, Pineta, Play Club peak between 1–3 AM. VIP tables with bottle service to skip the queue and own the night.',
-      it: 'Just Me, Pineta, Play Club al picco tra l\'una e le tre. Tavolo VIP con bottle service per saltare la fila.',
-    },
-  },
-];
+const FEATURED_VENUES = PRIORITY_VENUE_IDS;
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  if (!isEnabledLocale(locale)) notFound();
+  const homeCopy = applyEditorialFields(
+    getHomeSafeCopy(locale),
+    await readEditorialFields('home', locale),
+  );
+  const homeGridAlts = currentHomeGridAlts(locale);
   // Locale REALE ovunque (prima era coerciato a en/it → su /es, /fr, ecc. eventi,
   // card e link interni finivano in inglese). Il prefisso URL e i contenuti
   // localizzati usano il locale selezionato.
   const lp = localePrefix(locale);
+  const featuredVenues = FEATURED_VENUES.map((id) => {
+    const venue = venuesData.find((candidate) => candidate.id === id);
+    if (!venue || !venue.image) throw new Error(`Missing featured venue ${id}`);
+    const rawDesc = getLocalizedText(venue.localizedContent.description, locale) || homeCopy.venueDescription;
+    const shortDesc = rawDesc.length > 210 ? rawDesc.slice(0, 207).replace(/\s+\S*$/, '') + '…' : rawDesc;
+    const priorityZoneOverrides: Record<string, { it: string; en: string }> = {
+      'v-justme': { it: 'PARCO SEMPIONE · TORRE BRANCA', en: 'PARCO SEMPIONE · TORRE BRANCA' },
+      'v-pineta': { it: 'PORTA GARIBALDI · VIA MESSINA', en: 'PORTA GARIBALDI · VIA MESSINA' },
+      'v-aria': { it: 'SAN SIRO · PARCO IPPODROMO', en: 'SAN SIRO · HIPPODROME PARK' },
+      'v-55milano': { it: 'SEMPIONE · ARCO DELLA PACE', en: 'SEMPIONE · ARCO DELLA PACE' },
+      'v-voya': { it: 'PORTELLO / CITYLIFE · 20° PIANO', en: 'PORTELLO / CITYLIFE · 20TH FLOOR' },
+      'v-repvblic': { it: 'PIAZZA DELLA REPUBBLICA · PORTA NUOVA', en: 'PIAZZA DELLA REPUBBLICA · PORTA NUOVA' },
+    };
+    const displayZone = priorityZoneOverrides[id]?.[locale === 'it' ? 'it' : 'en'] || venueLocationLabel(venue);
+    const street = venue.address?.streetAddress ? `${venue.address.streetAddress} · ${displayZone}` : displayZone;
+    const venueGenres = (venue as { musicGenre?: string[]; genres?: string[]; category?: string }).musicGenre || (venue as { genres?: string[] }).genres || [];
+    const genres = venueGenres.slice(0, 2).join(' · ') || 'House · Commercial · Hip-Hop';
+    const dress = venue.localizedContent?.dressCode ? getLocalizedText(venue.localizedContent.dressCode, locale) : 'Smart & Fashion Chic';
+    return {
+      id,
+      slug: getLocalizedText(venue.slugs, locale),
+      image: venue.image,
+      name: getLocalizedText(venue.localizedContent.name, locale),
+      zone: displayZone,
+      street,
+      description: shortDesc,
+      genres,
+      dress,
+    };
+  });
 
   // Niente LocalBusiness qui: Nightlife Milan è già rappresentata dal
-  // Organization site-wide nel layout — due entità dello stesso soggetto con
+  // Organization site-wide nel layout · due entità dello stesso soggetto con
   // @type diversi sulla stessa pagina confondono Google, non aiutano.
 
-  // Sorgente unificata (statici + Eventbrite/Xceed + serate ricorrenti
-  // settimanali) e confini di giorno nel fuso di Roma — non del server
-  // (UTC su Vercel), stessa correzione già applicata a /calendar/* ed
-  // /events/*. Prima la homepage usava la mezzanotte locale del server e
-  // ignorava del tutto le serate ricorrenti (Just Me, Pineta, Aria, Voya,
-  // 55 Milano, Play Club, Repvblic): se una venue non aveva un evento
-  // one-off proprio quella sera, "Stasera" saltava al giorno successivo
-  // anche se il locale era regolarmente aperto.
-  const baseItems = getEventbriteDiscoveryItems(await getAllCalendarEvents(), locale);
+  // Send the whole verified dated future catalog once. The client recomputes
+  // Rome-day windows at hydration, on visibility return and at midnight; no
+  // weekly programme can reappear from an indefinitely cached home document.
+  const initialNow = new Date();
+  const dateSensitiveEvents = selectPriorityVenueEvents(await getDateSensitiveCarouselInventory(locale), initialNow);
 
-  const todayKey = romeDayKeyOffset(0);
-  const tomorrowKey = romeDayKeyOffset(1);
-  const sundayKey = romeUpcomingSundayKey();
-
-  const tonightEvents = baseItems
-    .filter(({ event }) => romeDayKey(event.dateISO) === todayKey);
-
-  const weekEvents = baseItems
-    .filter(({ event }) => {
-      const key = romeDayKey(event.dateISO);
-      return key >= tomorrowKey && key <= sundayKey;
-    });
-
-  const waMsg = encodeURIComponent(
-    tr(locale, "Hi! I'd like to book a VIP table in Milan. Can you help me?", 'Ciao! Vorrei prenotare un tavolo VIP a Milano. Puoi aiutarmi?')
-  );
-  const waLink = `${CONTACT.whatsapp.link}?text=${waMsg}`;
-
-  // Event schema per i caroselli "Stasera" + "Questa Settimana" — le stesse
-  // card visibili, come entità Event complete (generatore condiviso lib/seo.ts).
-  const homeEventItems = [...tonightEvents, ...weekEvents];
-  const eventListSchema = homeEventItems.length > 0
-    ? generateEventListSchema(
-        homeEventItems,
-        locale,
-        tr(locale, 'Milan Events — Tonight & This Week', 'Eventi Milano — Stasera e Questa Settimana'),
-      )
-    : null;
+  const waLink = getConciergeBookingUrl(locale);
+  const formerHeroCopy = getHeroCopy(locale);
 
   return (
     <>
-      {eventListSchema && (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(eventListSchema) }} />
-      )}
       <main className="flex-1 flex flex-col w-full">
         <NightLine />
 
         {/* ── 1. Hero ───────────────────────────────────────────────────── */}
-        <Hero locale={locale} />
-
-        {/* ── 2. Intent cards ──────────────────────────────────────────── */}
-        <IntentCards locale={locale} />
-
-        {/* ── 3. How the night works (context before events) ───────────── */}
-        <section className="py-24 sm:py-28 px-4 sm:px-6 lg:px-8 w-full border-t border-white/5 bg-surface-1">
-          <div className="max-w-7xl mx-auto">
-            <p className="font-sans text-champagne/80 text-[10px] tracking-[0.3em] uppercase mb-3">
-              {tr(locale, 'The Milan Night', 'La Notte Milanese')}
-            </p>
-            <h2 className="font-serif text-5xl md:text-6xl lg:text-7xl font-medium italic text-white tracking-tight leading-tight mb-10 md:mb-16">
-              {tr(locale, 'How Milan Nightlife Works', 'Come Funziona la Notte a Milano')}
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3">
-              {NIGHT_STEPS.map((step, i) => (
-                <div
-                  key={i}
-                  className={`relative group py-10
-                    ${i > 0 ? 'border-t md:border-t-0 md:border-l border-white/8 md:pl-10' : ''}
-                    ${i < 2 ? 'md:pr-10' : ''}`}
-                >
-                  {/* Giant serif number — decorative, rendered via ::after (see .deco-number-lg) */}
-                  <span
-                    className="deco-number-lg absolute inset-0"
-                    data-n={String(i + 1).padStart(2, '0')}
-                    aria-hidden="true"
-                  />
-                  <div className="relative z-10 mt-20">
-                    <span className="flex items-center gap-2.5 mb-4">
-                      <span className="w-2.5 h-2.5 rounded-full bg-champagne shrink-0" aria-hidden="true" />
-                      <span className="h-px flex-1 bg-gradient-to-r from-champagne/40 to-transparent" aria-hidden="true" />
-                    </span>
-                    <p className="font-sans text-champagne/80 text-[10px] tracking-[0.3em] uppercase mb-4 tabular-nums">{step.time}</p>
-                    <h3 className="font-serif text-2xl md:text-3xl text-white font-medium italic leading-snug mb-4">{tr(locale, step.title.en, step.title.it)}</h3>
-                    <p className="font-sans text-corpo text-sm leading-relaxed">{tr(locale, step.body.en, step.body.it)}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+        <TableConcierge
+          locale={locale}
+          events={dateSensitiveEvents}
+          initialNow={initialNow.toISOString()}
+          surface="home"
+          showEventList={false}
+          homeIntro={{
+            sub: formerHeroCopy.sub,
+            pills: formerHeroCopy.pills,
+            ctaSub: formerHeroCopy.ctaSub,
+            allVenues: formerHeroCopy.allVenues,
+          }}
+          copy={{
+            ...getTableConciergeSharedCopy(locale),
+            title: locale === 'it' ? 'Vita Notturna a Milano: Club Iconici, Tavoli VIP, Rooftop e Serate' : formerHeroCopy.cta,
+            lead: getTableConciergeLead(locale),
+            eyebrow: locale === 'it' ? 'GUIDA INSIDER & CONCIERGE UFFICIALE · MILANO 2026' : homeCopy.requestLabel,
+            ...(locale === 'it' ? { requestTitle: 'Prenota Tavolo VIP o Lista Nominale', requestAction: 'Richiedi Prezzi Tavoli & Liste su WhatsApp' } : {}),
+            disclaimer: homeCopy.requestDisclaimer,
+            eventsLead: homeCopy.weekTitle,
+            allEvents: homeCopy.seeAll,
+          }}
+        />
+        {/* ── Fascia Sartoriale dei Quartieri Notturni ─────────────────── */}
+        <div className="w-full bg-[#050505] border-b border-[#F6F1E7]/14">
+          <div className="max-w-[1440px] mx-auto border-x border-[#F6F1E7]/14 px-5 sm:px-14 py-4 flex flex-wrap items-center justify-between gap-4 font-mono text-[11px] tracking-[0.22em] uppercase text-[#C2B9AA]">
+            <span>01 · PARCO SEMPIONE</span>
+            <span>02 · PORTA GARIBALDI</span>
+            <span className="hidden sm:inline">03 · PORTA NUOVA SKYLINE</span>
+            <span className="hidden md:inline">04 · SAN SIRO GARDEN</span>
+            <span className="hidden lg:inline">05 · REPUBBLICA</span>
+            <span className="hidden xl:inline">06 · CORSO COMO &amp; NAVIGLI</span>
           </div>
-        </section>
+        </div>
 
-        {/* ── 4. Featured Venues strip ─────────────────────────────────── */}
-        <section className="relative py-24 sm:py-28 px-4 sm:px-6 lg:px-8 w-full border-t border-white/5 overflow-hidden">
-          {/* Ambient glow blobs — cinematic atmosphere */}
-          <div className="blob-1 absolute top-1/4 right-1/3 w-[500px] h-[500px] rounded-full bg-champagne/[0.04] blur-[120px] pointer-events-none" aria-hidden="true" />
-          <div className="blob-2 absolute bottom-0 left-1/4 w-[400px] h-[400px] rounded-full bg-champagne/[0.03] blur-[100px] pointer-events-none" aria-hidden="true" />
-          <div className="max-w-7xl mx-auto relative z-10">
-            <div className="flex items-end justify-between mb-10 gap-4">
+        {/* ── 2. I Sei Santuari della Notte (Desktop 1440px Flagship Spreads + 2x2 Widescreen / Mobile 390px Swipe) ── */}
+        <section className="w-full bg-[#050505] border-b border-[#F6F1E7]/14">
+          <div className="max-w-[1440px] mx-auto border-x border-[#F6F1E7]/14">
+            {/* Header Editoriale della Collezione */}
+            <div className="px-5 sm:px-14 pt-16 sm:pt-20 pb-10 sm:pb-12 border-b border-[#F6F1E7]/14 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
               <div>
-                <p className="font-sans text-champagne/80 text-[10px] tracking-[0.3em] uppercase mb-3">
-                  {tr(locale, 'Curated Selection', 'Selezione Curata')}
+                <p className="font-mono text-[#D6BE96] text-xs tracking-[0.26em] uppercase mb-3">
+                  N° 02 · {homeCopy.curatedLabel}
                 </p>
-                <h2 className="font-serif text-5xl md:text-6xl font-medium text-white tracking-tight leading-tight">
-                  {tr(locale, 'Top Milan Clubs', 'I Migliori Club di Milano')}
+                <h2 className="font-serif text-4xl sm:text-5xl lg:text-[62px] font-normal text-[#F6F1E7] tracking-[-0.032em] leading-[0.90]">
+                  {homeCopy.topVenuesTitle}
                 </h2>
               </div>
               <Link
                 href={`${lp}/clubs`}
-                className="hidden sm:flex items-center gap-2 text-xs font-sans text-champagne/80 hover:text-champagne tracking-widest uppercase transition-colors shrink-0"
+                prefetch={false}
+                className="inline-flex items-center justify-center min-h-[48px] px-7 py-3.5 border border-[#D6BE96]/45 text-[#F6F1E7] hover:bg-[#F6F1E7] hover:text-[#050505] font-mono text-xs tracking-[0.2em] uppercase transition-colors shrink-0"
               >
-                {tr(locale, 'All venues', 'Tutti i locali')} →
+                {homeCopy.allVenues} ↗
               </Link>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {FEATURED_VENUES.map((v, i) => (
-                <Link
+            {/* VISTA DESKTOP WIDESCREEN 1440PX: 2 FLAGSHIP SPREADS A 12 COLONNE + GRIGLIA PANORAMICA 2x2 */}
+            <div className="hidden lg:block">
+              {featuredVenues.slice(0, 2).map((v, idx) => (
+                <article
                   key={v.id}
-                  href={`${lp}/clubs/${v.slug}`}
-                  className="animate-card-in group relative overflow-hidden rounded-xl border border-white/8 hover:border-champagne/30 transition-all duration-500 bg-depth flex flex-col"
-                  style={{ animationDelay: `${i * 120}ms` }}
+                  className="grid grid-cols-12 border-b border-[#F6F1E7]/14 group"
                 >
-                  {/* Image — 4:5 portrait ratio */}
-                  <div className="relative aspect-[4/5] overflow-hidden">
-                    <Image
-                      src={v.image}
-                      alt={tr(locale, v.name.en, v.name.it)}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      quality={85}
-                      placeholder="blur"
-                      blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiMxQzE4MTAiLz48L3N2Zz4="
-                      className="object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                    {/* Warm tone overlay on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                    {/* Hover "luce interna" — luce che filtra dalla porta del club */}
-                    <div
-                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
-                      style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 100%, rgba(201,168,106,0.18) 0%, transparent 65%)' }}
-                    />
-                    {/* Label badge — targa civica */}
-                    <span className="absolute top-3 left-3 px-3 py-1.5 bg-gradient-to-b from-[#2A2214] to-[#1C1810] border border-brass/40 text-champagne text-[10px] font-sans font-medium tracking-[0.2em] uppercase shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_2px_8px_rgba(0,0,0,0.5)]">
-                      {tr(locale, v.label.en, v.label.it)}
-                    </span>
-                    {/* Name overlay at bottom of image */}
-                    <div className="absolute bottom-0 left-0 right-0 p-5">
-                      <p className="font-sans text-champagne/80 text-[10px] tracking-[0.25em] uppercase mb-1">{tr(locale, v.zone.en, v.zone.it)}</p>
-                      <h3 className="font-serif text-2xl text-white font-semibold group-hover:text-champagne transition-colors duration-300 leading-tight">
-                        {tr(locale, v.name.en, v.name.it)}
-                      </h3>
+                  {/* Colonna Fotografica 16:10 (a sinistra per 01, a destra per 02) */}
+                  <div className={`col-span-7 p-14 bg-[#0B0A09] flex flex-col justify-between ${idx === 1 ? 'order-2 border-l border-[#F6F1E7]/14' : 'border-r border-[#F6F1E7]/14'}`}>
+                    <Link href={`${lp}/clubs/${v.slug}`} prefetch={false} className="block relative aspect-[16/10] w-full overflow-hidden border border-[#F6F1E7]/14">
+                      <Image
+                        src={v.image}
+                        alt={v.name}
+                        fill
+                        sizes="58vw"
+                        quality={85}
+                        className="object-cover group-hover:scale-[1.04] transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+                    </Link>
+                    <div className="flex justify-between items-center mt-4 font-mono text-[11px] tracking-[0.18em] uppercase text-[#847C6F]">
+                      <span>FIG. 0{idx + 1} · {v.zone}</span>
+                      <span>{homeCopy.venueLabel} · MILANO</span>
                     </div>
                   </div>
 
-                  {/* Content below image */}
-                  <div className="p-5 flex-1 flex flex-col">
-                    <p className="font-sans text-corpo text-sm leading-relaxed mb-4 flex-1">{tr(locale, v.desc.en, v.desc.it)}</p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {v.tags.en.map((tagEn, ti) => (
-                        <span key={tagEn} className="px-2 py-0.5 rounded-full border border-white/10 text-white/60 text-[10px] font-sans tracking-wider">
-                          {tr(locale, tagEn, v.tags.it[ti])}
+                  {/* Colonna Editoriale Sartoriale */}
+                  <div className={`col-span-5 p-14 flex flex-col justify-between bg-[#050505] ${idx === 1 ? 'order-1' : ''}`}>
+                    <div>
+                      <div className="flex justify-between items-baseline">
+                        <span className="font-serif italic text-[74px] leading-[0.85] text-[#D6BE96] font-normal">
+                          0{idx + 1}
                         </span>
-                      ))}
+                        <span className="font-mono text-xs tracking-[0.22em] uppercase text-[#D6BE96]">
+                          {v.zone}
+                        </span>
+                      </div>
+
+                      <h3 className="font-serif text-[52px] font-normal text-[#F6F1E7] leading-[0.95] tracking-[-0.03em] mt-5 mb-4">
+                        <Link href={`${lp}/clubs/${v.slug}`} prefetch={false} className="hover:text-[#D6BE96] transition-colors">
+                          {v.name}
+                        </Link>
+                      </h3>
+
+                      <p className="font-sans text-base text-[#C2B9AA] leading-[1.7]">
+                        {v.description}
+                      </p>
+
+                      {/* Griglia Specifiche 2x2 con linee da 1px */}
+                      <div className="grid grid-cols-2 border-y border-[#F6F1E7]/14 my-7">
+                        <div className="py-4 pr-5 border-r border-b border-[#F6F1E7]/14">
+                          <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#847C6F]">{homeCopy.venueTags[0]}</div>
+                          <div className="text-[15px] text-[#F6F1E7] font-medium mt-1.5">{v.street}</div>
+                        </div>
+                        <div className="py-4 pl-5 border-b border-[#F6F1E7]/14">
+                          <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#847C6F]">{homeCopy.venueTags[1]}</div>
+                          <div className="text-[15px] text-[#F6F1E7] font-medium mt-1.5">{v.genres}</div>
+                        </div>
+                        <div className="py-4 pr-5 border-r border-[#F6F1E7]/14">
+                          <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#847C6F]">FORMULA</div>
+                          <div className="text-[15px] text-[#F6F1E7] font-medium mt-1.5">Aperitivo · Lista · Privé</div>
+                        </div>
+                        <div className="py-4 pl-5">
+                          <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#847C6F]">{homeCopy.venueTags[2]}</div>
+                          <div className="text-[15px] text-[#D6BE96] font-semibold mt-1.5">WhatsApp Concierge</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <Link
+                        href={`${lp}/clubs/${v.slug}`}
+                        prefetch={false}
+                        className="min-h-[48px] px-5 py-3.5 border border-[#D6BE96]/45 text-[#F6F1E7] hover:border-[#F6F1E7] font-mono text-xs tracking-[0.18em] uppercase flex items-center justify-center transition-colors"
+                      >
+                        {homeCopy.venueLabel}
+                      </Link>
+                      <a
+                        href={waLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="min-h-[48px] px-5 py-3.5 bg-[#F6F1E7] text-[#050505] hover:bg-[#D6BE96] font-mono text-xs font-semibold tracking-[0.2em] uppercase flex items-center justify-center gap-2 transition-colors"
+                      >
+                        PRIVÉ VIP ↗
+                      </a>
                     </div>
                   </div>
-                </Link>
+                </article>
               ))}
+
+              {/* GRIGLIA PANORAMICA 2x2 (720px per club) per i restanti locali */}
+              <div className="grid grid-cols-2">
+                {featuredVenues.slice(2).map((v, idx) => (
+                  <article
+                    key={v.id}
+                    className={`p-14 border-b border-[#F6F1E7]/14 grid grid-cols-[240px_1fr] gap-9 items-stretch hover:bg-[#0B0A09] transition-colors group ${idx % 2 === 0 ? 'border-r border-[#F6F1E7]/14' : ''}`}
+                  >
+                    <Link href={`${lp}/clubs/${v.slug}`} prefetch={false} className="block relative aspect-[3/4] w-full overflow-hidden border border-[#F6F1E7]/14">
+                      <Image
+                        src={v.image}
+                        alt={v.name}
+                        fill
+                        sizes="260px"
+                        quality={75}
+                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                    </Link>
+                    <div className="flex flex-col justify-between">
+                      <div>
+                        <div className="flex justify-between items-baseline">
+                          <span className="font-serif italic text-[46px] leading-none text-[#D6BE96]">
+                            0{idx + 3}
+                          </span>
+                          <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#847C6F]">
+                            {v.zone}
+                          </span>
+                        </div>
+                        <h3 className="font-serif text-[34px] font-normal text-[#F6F1E7] leading-tight mt-2.5 mb-2">
+                          <Link href={`${lp}/clubs/${v.slug}`} prefetch={false} className="hover:text-[#D6BE96] transition-colors">
+                            {v.name}
+                          </Link>
+                        </h3>
+                        <p className="font-sans text-sm text-[#C2B9AA] leading-relaxed mb-4">
+                          {v.description}
+                        </p>
+                        <div className="border-t border-[#F6F1E7]/14 text-[13px]">
+                          <div className="flex justify-between gap-4 py-2 border-b border-[#F6F1E7]/14">
+                            <span className="font-mono text-[11px] tracking-[0.16em] uppercase text-[#847C6F]">{homeCopy.venueTags[0]}</span>
+                            <span className="text-[#F6F1E7] font-medium text-right">{v.street}</span>
+                          </div>
+                          <div className="flex justify-between gap-4 py-2 border-b border-[#F6F1E7]/14">
+                            <span className="font-mono text-[11px] tracking-[0.16em] uppercase text-[#847C6F]">{homeCopy.venueTags[1]}</span>
+                            <span className="text-[#F6F1E7] font-medium text-right">{v.genres}</span>
+                          </div>
+                          <div className="flex justify-between gap-4 py-2 border-b border-[#F6F1E7]/14">
+                            <span className="font-mono text-[11px] tracking-[0.16em] uppercase text-[#847C6F]">{homeCopy.venueTags[2]}</span>
+                            <span className="text-[#D6BE96] font-medium text-right">Aperitivo · Lista · Privé</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-3 mt-5">
+                        <Link
+                          href={`${lp}/clubs/${v.slug}`}
+                          prefetch={false}
+                          className="min-h-[46px] px-4 py-3 border border-[#D6BE96]/45 text-[#F6F1E7] hover:border-[#F6F1E7] font-mono text-[11px] tracking-[0.16em] uppercase flex items-center justify-center transition-colors"
+                        >
+                          SCHEDA
+                        </Link>
+                        <a
+                          href={waLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="min-h-[46px] px-4 py-3 bg-[#F6F1E7] text-[#050505] hover:bg-[#D6BE96] font-mono text-[11px] font-semibold tracking-[0.18em] uppercase flex items-center justify-center transition-colors"
+                        >
+                          PRIVÉ ↗
+                        </a>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
             </div>
 
-            <div className="mt-6 sm:hidden text-center">
-              <Link href={`${lp}/clubs`} className="text-xs font-sans text-champagne/80 hover:text-champagne tracking-widest uppercase transition-colors">
-                {tr(locale, 'See all venues →', 'Vedi tutti i locali →')}
-              </Link>
+            {/* VISTA MOBILE 390PX: SWIPE ORIZZONTALE TATTILE SNAP-X */}
+            <div className="lg:hidden py-8">
+              <div className="px-5 mb-3 flex justify-between items-baseline">
+                <span className="font-mono text-[11px] tracking-[0.22em] uppercase text-[#D6BE96]">SWIPE ORIZZONTALE →</span>
+                <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#847C6F]">01 / 0{featuredVenues.length}</span>
+              </div>
+              <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory px-5 pb-4 scrollbar-hide">
+                {featuredVenues.map((v, i) => (
+                  <article
+                    key={v.id}
+                    className="flex-[0_0_290px] snap-start border border-[#F6F1E7]/15 bg-[#0B0A09] flex flex-col justify-between"
+                  >
+                    <div>
+                      <Link href={`${lp}/clubs/${v.slug}`} prefetch={false} className="block relative aspect-[4/5] w-full overflow-hidden border-b border-[#F6F1E7]/14">
+                        <Image
+                          src={v.image}
+                          alt={v.name}
+                          fill
+                          sizes="290px"
+                          quality={75}
+                          className="object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+                        <span className="absolute top-3 left-3 px-2.5 py-1 bg-[#050505]/90 border border-[#D6BE96]/40 font-mono text-[10px] tracking-[0.2em] uppercase text-[#D6BE96]">
+                          0{i + 1} · {homeCopy.venueLabel}
+                        </span>
+                        <div className="absolute bottom-3 left-4 right-4">
+                          <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-[#D6BE96]">{v.zone}</p>
+                          <h3 className="font-serif text-2xl text-[#F6F1E7] mt-0.5">{v.name}</h3>
+                        </div>
+                      </Link>
+                      <div className="p-4">
+                        <p className="font-sans text-xs text-[#C2B9AA] leading-relaxed mb-3">{v.description}</p>
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-2 border-t border-[#F6F1E7]/14">
+                      <Link
+                        href={`${lp}/clubs/${v.slug}`}
+                        prefetch={false}
+                        className="min-h-[44px] font-mono text-[11px] tracking-[0.16em] uppercase text-[#F6F1E7] flex items-center justify-center border-r border-[#F6F1E7]/14"
+                      >
+                        SCHEDA
+                      </Link>
+                      <a
+                        href={waLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="min-h-[44px] bg-[#F6F1E7] text-[#050505] font-mono text-[11px] font-semibold tracking-[0.16em] uppercase flex items-center justify-center"
+                      >
+                        PRIVÉ ↗
+                      </a>
+                    </div>
+                  </article>
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
-        {/* ── 5a. Tonight's events ─────────────────────────────────────── */}
-        <section className="border-t border-white/5 pt-16 pb-4">
-          <div className="px-4 sm:px-6 lg:px-8 mb-8">
-            <div className="max-w-7xl mx-auto flex items-end justify-between gap-4">
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-champagne animate-pulse" />
-                  <p className="font-sans text-champagne/80 text-[10px] tracking-[0.3em] uppercase">
-                    {tr(locale, 'Tonight', 'Stasera')}
-                  </p>
-                </div>
-                <h2 className="font-serif text-4xl md:text-5xl font-medium text-white tracking-tight">
-                  {tr(locale, "Tonight's Events", 'Eventi di Stasera')}
-                </h2>
-                <p className="font-serif italic text-lg text-ivory/50 mt-2">
-                  {tr(locale, 'On stage tonight in Milan', 'In scena questa notte a Milano')}
-                </p>
-              </div>
-              <Link
-                href={`${lp}/events/tonight`}
-                className="hidden sm:flex items-center gap-2 text-xs font-sans text-champagne/80 hover:text-champagne tracking-widest uppercase transition-colors shrink-0"
-              >
-                {tr(locale, 'See all', 'Vedi tutti')} →
-              </Link>
+        <OctoberEntry locale={locale} />
+        <section className="w-full bg-[#050505] border-b border-[#F6F1E7]/14">
+          <div className="max-w-[1440px] mx-auto border-x border-[#F6F1E7]/14 px-5 sm:px-14 py-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 bg-[#0B0A09]">
+            <div>
+              <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[#D6BE96] mb-2">
+                {locale === 'it' ? 'STADIO SAN SIRO · SERIE A & CHAMPIONS LEAGUE 2026/2027' : 'SAN SIRO STADIUM · SERIE A & CHAMPIONS LEAGUE 2026/2027'}
+              </p>
+              <h2 className="font-serif text-2xl sm:text-3xl text-[#F6F1E7]">
+                {locale === 'it' ? 'Guida Ufficiale Dopo-Partita Calcio Milano (Inter & Milan)' : 'Official San Siro Football Afterparty Guide (Inter & AC Milan)'}
+              </h2>
+              <p className="font-sans text-sm text-[#C2B9AA] mt-1 max-w-3xl">
+                {locale === 'it'
+                  ? 'Aria Club a 150m dallo stadio, Just Me Torre Branca aperto 7/7, Voya Rooftop via M5, 55 Milano, Pineta e Repvblic: calcola il piano post-match e prenota Tavolo VIP su WhatsApp +39 351 912 7047.'
+                  : 'Aria Club 150m from the stadium, Just Me Torre Branca open 7/7, Voya Rooftop via M5, 55 Milano, Pineta & Repvblic: plan your post-match night and book VIP tables via WhatsApp +39 351 912 7047.'}
+              </p>
             </div>
-          </div>
-
-          {tonightEvents.length > 0 ? (
-            <Suspense fallback={<div className="h-[380px]" />}>
-              <EventsCarousel items={tonightEvents} lang={locale} showTonightTag />
-            </Suspense>
-          ) : (
-            <div className="px-4 sm:px-6 lg:px-8 pb-8">
-              <div className="max-w-7xl mx-auto py-10 px-6 rounded-xl border border-white/8 bg-white/[0.02] text-center">
-                <p className="font-sans text-white/60 text-sm mb-3">
-                  {tr(locale, 'No events scheduled for tonight.', 'Nessun evento programmato stasera.')}
-                </p>
-                <Link href={`${lp}/events/best`} className="text-xs text-champagne/80 hover:text-champagne tracking-widest uppercase transition-colors">
-                  {tr(locale, 'Discover best clubs →', 'Scopri i migliori club →')}
-                </Link>
-              </div>
-            </div>
-          )}
-
-          <div className="pb-4 text-center sm:hidden px-4 mt-2">
-            <Link href={`${lp}/events/tonight`} className="text-xs font-sans text-champagne/80 hover:text-champagne tracking-widest uppercase transition-colors">
-              {tr(locale, 'All tonight\'s events →', 'Tutti gli eventi di stasera →')}
+            <Link
+              href={`${lp}/football-afterparties`}
+              prefetch={false}
+              className="shrink-0 min-h-[48px] px-6 py-3.5 border border-[#D6BE96] bg-[#D6BE96] text-[#050505] hover:bg-[#F6F1E7] font-mono text-xs font-semibold tracking-[0.2em] uppercase inline-flex items-center gap-2 transition-colors"
+            >
+              {locale === 'it' ? 'SCOPRI I DOPO-PARTITA ↗' : 'EXPLORE AFTERPARTIES ↗'}
             </Link>
           </div>
         </section>
 
-        {/* ── WhatsApp CTA (between the two rows) ──────────────────────── */}
-        <div className="px-4 sm:px-6 lg:px-8 py-8">
-          <div className="max-w-7xl mx-auto">
-            <a
-              href={waLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-between gap-4 px-6 py-4 rounded-xl border border-champagne/25 bg-champagne/[0.05] hover:bg-champagne/[0.09] hover:border-champagne/40 transition-all duration-300 group"
-            >
-              <div className="flex items-center gap-3">
-                <MessageCircle className="w-5 h-5 text-champagne shrink-0" />
-                <span className="font-sans text-white/80 text-sm group-hover:text-white transition-colors">
-                  {tr(locale, 'Book table or guestlist — reply in 10 minutes', 'Prenota tavolo o guestlist — risposta in 10 minuti')}
+        {/* ── 3. I Tre Atti della Notte Milanese (Drammaturgia Oraria) ─── */}
+        <section className="w-full bg-[#050505] border-b border-[#F6F1E7]/14">
+          <div className="max-w-[1440px] mx-auto border-x border-[#F6F1E7]/14 grid grid-cols-1 lg:grid-cols-12">
+            {/* Colonna Sinistra (5/12): I 3 Atti */}
+            <div className="lg:col-span-5 p-6 sm:p-14 border-b lg:border-b-0 lg:border-r border-[#F6F1E7]/14 flex flex-col justify-between">
+              <div>
+                <p className="font-mono text-[#D6BE96] text-xs tracking-[0.26em] uppercase mb-3">
+                  N° 03 · {homeCopy.nightLabel}
+                </p>
+                <h2 className="font-serif text-4xl sm:text-5xl font-normal italic text-[#F6F1E7] tracking-[-0.03em] leading-[0.92] mb-10">
+                  {homeCopy.nightTitle}
+                </h2>
+                <div className="divide-y divide-[#F6F1E7]/14 border-t border-b border-[#F6F1E7]/14">
+                  {homeCopy.nightSteps.map((step: { label: string; title: string; body: string }, i: number) => (
+                    <div key={i} className="py-6 flex justify-between items-start gap-6">
+                      <div>
+                        <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-[#D6BE96] mb-2">{step.label}</p>
+                        <h3 className="font-serif text-2xl sm:text-[28px] text-[#F6F1E7] font-normal leading-tight mb-2">{step.title}</h3>
+                        <p className="font-sans text-sm text-[#C2B9AA] leading-relaxed">{step.body}</p>
+                      </div>
+                      <span className="font-serif italic text-4xl text-[#D6BE96] shrink-0">
+                        {i === 0 ? 'I' : i === 1 ? 'II' : 'III'}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="mt-8">
+                <a
+                  href={waLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full min-h-[50px] px-7 py-4 bg-[#F6F1E7] text-[#050505] hover:bg-[#D6BE96] font-mono text-xs font-semibold tracking-[0.2em] uppercase flex items-center justify-between transition-colors"
+                >
+                  <span>{homeCopy.requestAction}</span>
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Colonna Destra (7/12): Trittico Fotografico Editoriale */}
+            <div className="lg:col-span-7 p-6 sm:p-14 bg-[#0B0A09] flex flex-col justify-between">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="sm:col-span-2">
+                  <div className="relative aspect-[16/9] w-full overflow-hidden border border-[#F6F1E7]/14">
+                    <Image
+                      src="/images/vip-table-milan-nightclub-just-me.webp"
+                      alt={homeGridAlts[0]}
+                      fill
+                      quality={85}
+                      className="object-cover hover:scale-105 transition-transform duration-700"
+                      sizes="(max-width: 1024px) 100vw, 55vw"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  </div>
+                  <div className="flex justify-between mt-2.5 font-mono text-[11px] tracking-[0.16em] uppercase text-[#847C6F]">
+                    <span>ATTO I · H 19:30 ROYAL APERITIVO &amp; SUNSET</span>
+                    <span>PARCO SEMPIONE &amp; PORTA NUOVA</span>
+                  </div>
+                </div>
+
+                <div>
+                  <div className="relative aspect-[4/3] w-full overflow-hidden border border-[#F6F1E7]/14">
+                    <Image
+                      src="/images/milan-club-crowd-dancefloor-night.webp"
+                      alt={homeGridAlts[3]}
+                      fill
+                      quality={75}
+                      className="object-cover hover:scale-105 transition-transform duration-700"
+                      sizes="(max-width: 1024px) 50vw, 28vw"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  </div>
+                  <div className="mt-2 font-mono text-[11px] tracking-[0.16em] uppercase text-[#847C6F]">
+                    ATTO II · H 23:30 OPENING &amp; LISTA
+                  </div>
+                </div>
+
+                <div>
+                  <div className="relative aspect-[4/3] w-full overflow-hidden border border-[#F6F1E7]/14">
+                    <Image
+                      src="/images/bottle-service-milan-vip-nightclub.webp"
+                      alt={homeGridAlts[4]}
+                      fill
+                      quality={75}
+                      className="object-cover hover:scale-105 transition-transform duration-700"
+                      sizes="(max-width: 1024px) 50vw, 28vw"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  </div>
+                  <div className="mt-2 font-mono text-[11px] tracking-[0.16em] uppercase text-[#847C6F]">
+                    ATTO III · H 01:30 PRIVÉ &amp; BOTTLE SHOW
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-[#F6F1E7]/14 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <p className="font-serif italic text-lg text-[#C2B9AA]">
+                  {homeCopy.description} · {SITE_CONTACT.whatsapp.number}
+                </p>
+                <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#D6BE96] shrink-0">
+                  {homeCopy.quickLabel}
                 </span>
               </div>
-              <span className="font-sans text-champagne text-xs tracking-widest uppercase shrink-0 hidden sm:block">
-                WhatsApp →
-              </span>
-            </a>
+            </div>
+          </div>
+        </section>
+
+        {/* ── 4. Le Tre Formule d'Accesso (Intent Cards) ───────────────── */}
+        <div className="w-full bg-[#050505] border-b border-[#F6F1E7]/14">
+          <div className="max-w-[1440px] mx-auto border-x border-[#F6F1E7]/14">
+            <IntentCards locale={locale} />
           </div>
         </div>
 
-        {/* ── 5b. This week's events ───────────────────────────────────── */}
-        <section className="border-t border-white/5 pt-12 pb-8 bg-surface-1">
-          <div className="px-4 sm:px-6 lg:px-8 mb-8">
-            <div className="max-w-7xl mx-auto flex items-end justify-between gap-4">
-              <div>
-                <p className="font-sans text-champagne/80 text-[10px] tracking-[0.3em] uppercase mb-2">
-                  {tr(locale, 'This Week', 'Questa Settimana')}
-                </p>
-                <h2 className="font-serif text-4xl md:text-5xl font-medium text-white tracking-tight">
-                  {tr(locale, 'Upcoming This Week', 'Prossime Serate')}
-                </h2>
-              </div>
-              <Link
-                href={`${lp}/events/this-week`}
-                className="hidden sm:flex items-center gap-2 text-xs font-sans text-champagne/80 hover:text-champagne tracking-widest uppercase transition-colors shrink-0"
-              >
-                {tr(locale, 'See all', 'Vedi tutti')} →
-              </Link>
-            </div>
-          </div>
-
-          {weekEvents.length > 0 ? (
-            <Suspense fallback={<div className="h-[380px]" />}>
-              <EventsCarousel items={weekEvents} lang={locale} />
-            </Suspense>
-          ) : (
-            <div className="px-4 sm:px-6 lg:px-8 pb-8">
-              <div className="max-w-7xl mx-auto py-10 px-6 rounded-xl border border-white/8 bg-white/[0.02] text-center">
-                <p className="font-sans text-white/60 text-sm mb-3">
-                  {tr(locale, 'No more events this week.', 'Nessun altro evento questa settimana.')}
-                </p>
-                <Link href={`${lp}/events/best`} className="text-xs text-champagne/80 hover:text-champagne tracking-widest uppercase transition-colors">
-                  {tr(locale, 'Discover best clubs →', 'Scopri i migliori club →')}
-                </Link>
-              </div>
-            </div>
-          )}
-
-          <div className="pb-6 text-center sm:hidden px-4 mt-2">
-            <Link href={`${lp}/events/this-week`} className="text-xs font-sans text-champagne/80 hover:text-champagne tracking-widest uppercase transition-colors">
-              {tr(locale, 'All this week\'s events →', 'Tutti gli eventi della settimana →')}
-            </Link>
+        {/* ── 5. Calendario Eventi Verificati della Settimana ──────────── */}
+        <section className="w-full bg-[#0B0A09] border-b border-[#F6F1E7]/14 px-4 py-16 sm:px-14" data-home-week-events>
+          <div className="mx-auto max-w-[1328px]">
+            <p className="mb-3 font-mono text-xs tracking-[0.24em] uppercase text-[#D6BE96]">{homeCopy.weekLabel}</p>
+            <h2 className="mb-5 font-serif text-4xl text-[#F6F1E7] md:text-5xl">{homeCopy.weekTitle}</h2>
+            <Link href={`${lp}/events`} prefetch={false} className="mb-8 inline-flex min-h-11 items-center text-base font-semibold text-champagne underline underline-offset-4">{homeCopy.seeAll}</Link>
+            <DateSensitiveCalendar events={dateSensitiveEvents} initialNow={initialNow.toISOString()} mode="calendar-week" localeTag={getLocaleDef(locale)!.hreflang} localePrefix={lp} copy={{ ...getEventCalendarCopy(locale), empty: homeCopy.noWeek }} schemaName={homeCopy.weekTitle} emptyHref={`${lp}/events`} emptyLinkLabel={homeCopy.seeAll} groupByDay variant="gallery" bookingLocale={locale} />
           </div>
         </section>
 
-        <div className="w-full h-px bg-gradient-to-r from-transparent via-champagne/25 to-transparent" aria-hidden="true" />
+        <MfwEntry locale={locale} />
 
-        {/* ── 6. WhatsApp CTA strip ────────────────────────────────────── */}
-        <section className="relative py-28 px-4 sm:px-6 lg:px-8 w-full overflow-hidden border-t border-white/5">
-          {/* Background ambient glow */}
-          <div className="absolute inset-0 bg-gradient-to-b from-charcoal via-[#1a1508] to-charcoal" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-champagne/[0.07] blur-[80px] rounded-full pointer-events-none" />
-
-          <div className="relative max-w-3xl mx-auto text-center">
-            {/* Live indicator */}
-            <div className="inline-flex items-center gap-2 mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-champagne animate-pulse" />
-              <p className="font-sans text-champagne/80 text-[10px] tracking-[0.35em] uppercase">
-                {tr(locale, 'Available Now', 'Disponibile Adesso')}
-              </p>
-            </div>
-
-            <h2 className="font-serif text-4xl md:text-5xl font-medium text-white tracking-tight mb-4 leading-tight">
-              {tr(locale, 'The Best Table\nin Milan Tonight', 'Il Tavolo Migliore\ndi Milano Stasera')}
+        {/* ── 6. Esplora per Categoria e Quartiere ─────────────────────── */}
+        <section className="w-full bg-[#050505] border-b border-[#F6F1E7]/14">
+          <div className="max-w-[1440px] mx-auto border-x border-[#F6F1E7]/14 px-5 sm:px-14 py-20">
+            <p className="font-mono text-[#D6BE96] text-xs tracking-[0.26em] uppercase mb-3">
+              N° 05 · {homeCopy.discoverLabel}
+            </p>
+            <h2 className="font-serif text-4xl md:text-5xl font-normal text-[#F6F1E7] tracking-[-0.03em] mb-10">
+              {homeCopy.categoriesTitle}
             </h2>
-            <p className="font-sans text-corpo text-base leading-relaxed mb-3 max-w-md mx-auto">
-              {tr(locale, 'Message now. I reply in 10 minutes with availability, pricing, and direct access — no queue, no hassle.', 'Scrivi ora. Rispondo in 10 minuti con disponibilità, prezzi e accesso diretto — senza coda, senza stress.')}
-            </p>
-            <p className="font-sans text-champagne/40 text-xs tracking-widest uppercase mb-10">
-              {tr(locale, 'Free service · No booking fee · 500+ bookings', 'Servizio gratuito · Nessuna commissione · 500+ prenotazioni')}
-            </p>
-
-            <a
-              href={waLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-10 py-5 bg-champagne text-charcoal font-sans font-bold text-sm tracking-[0.12em] uppercase hover:bg-white transition-colors duration-300 shadow-[0_0_60px_rgba(201,168,106,0.25)] mb-6"
-            >
-              <MessageCircle className="w-4 h-4" />
-              {tr(locale, 'Book Now via WhatsApp', 'Prenota Ora via WhatsApp')}
-            </a>
-
-            {/* Social proof row */}
-            <div className="flex items-center justify-center gap-6 mt-6">
+            <div className="grid grid-cols-2 sm:grid-cols-4 border-t border-l border-[#F6F1E7]/14">
               {[
-                { n: '10 min', label: tr(locale, 'reply time', 'risposta') },
-                { n: '500+', label: tr(locale, 'bookings', 'prenotazioni') },
-                { n: '18+', label: tr(locale, 'partner clubs', 'club partner') },
-              ].map(({ n, label }) => (
-                <div key={n} className="text-center">
-                  <p className="font-serif text-champagne text-xl font-semibold">{n}</p>
-                  <p className="font-sans text-white/45 text-[9px] tracking-widest uppercase">{label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── 7. AI Trafiletto ─────────────────────────────────────────── */}
-        <section className="py-24 sm:py-28 px-4 sm:px-6 lg:px-8 w-full bg-gradient-to-b from-charcoal to-depth border-t border-white/5">
-          <div className="max-w-7xl mx-auto">
-            <div className="relative pl-6 border-l-2 border-champagne/35 mb-14">
-              <p className="font-sans text-champagne/50 text-[9px] tracking-[0.35em] uppercase mb-2">Quick Answer</p>
-              <p className="font-serif italic text-ivory/70 text-lg leading-relaxed">
-                {tr(locale, 'Milan nightlife 2026: top clubs are Just Me (Sempione, VIP tables from €500), Pineta (Corso Como, singing aperitivo Fridays), Voya Rooftop (Isola, 20th floor). Clubs open from 22:00–23:30 until 5:00 AM. Book via WhatsApp +39 351 912 7047 — reply in under 10 minutes.', 'La vita notturna di Milano 2026: i migliori club sono Just Me (Sempione, VIP table da €500), Pineta (Corso Como, aperitivo cantato venerdì), Voya Rooftop (Isola, 20° piano). Club aperti dalle 22:00–23:30 fino alle 5:00. Prenota via WhatsApp +39 351 912 7047 — risposta in 10 minuti.')}
-              </p>
-            </div>
-
-            <p className="font-sans text-champagne/80 text-[10px] tracking-[0.3em] uppercase mb-5 accent-line-gold">
-              {tr(locale, 'The Definitive Guide', 'La Guida Definitiva')}
-            </p>
-            <h2 className="font-serif text-5xl md:text-6xl font-medium text-ivory tracking-tight leading-tight mb-6">
-              {tr(locale, 'The Beating Heart of Milan', 'Il Cuore Pulsante di Milano')}
-            </h2>
-            <p className="text-corpo text-lg leading-relaxed font-light mb-10
-              first-letter:font-serif first-letter:text-6xl first-letter:font-medium first-letter:text-champagne first-letter:float-left first-letter:mr-3 first-letter:leading-[0.8] first-letter:mt-1">
-              {tr(locale, 'Milan is not just the fashion capital, but also the nerve center of Italian entertainment. From the luxurious clubs of Corso Como to the underground bars of the Navigli, our guide takes you to discover the most exclusive places.', 'Milano non è solo la capitale della moda, ma anche il centro nevralgico del divertimento italiano. Dai lussuosi club di Corso Como ai bar underground dei Navigli, la nostra guida ti porta alla scoperta dei luoghi più esclusivi.')}
-            </p>
-          </div>
-        </section>
-
-        {/* ── 8. Photo Grid ────────────────────────────────────────────── */}
-        <section className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 w-full bg-depth border-t border-white/5">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-3 lg:grid-cols-5 gap-2" style={{ gridTemplateRows: 'auto auto' }}>
-              <div className="relative col-span-2 lg:col-span-2 row-span-2 h-56 sm:h-72 lg:h-80 overflow-hidden rounded-xl">
-                <Image src="/images/vip-table-milan-nightclub-just-me.webp" alt="Just Me Milano VIP tables — luxury nightclub in Sempione" fill quality={85} className="object-cover hover:scale-105 transition-transform duration-700" sizes="(max-width: 1024px) 66vw, 40vw" />
-              </div>
-              <div className="relative col-span-1 lg:col-span-2 h-28 sm:h-36 lg:h-[152px] overflow-hidden rounded-xl">
-                <Image src="/images/pineta-milano.webp" alt="Pineta Club Milan — singing aperitivo at Corso Como" fill quality={85} className="object-cover hover:scale-105 transition-transform duration-700" sizes="(max-width: 1024px) 33vw, 40vw" />
-              </div>
-              <div className="relative col-span-1 lg:col-span-1 h-28 sm:h-36 lg:h-[152px] overflow-hidden rounded-xl">
-                <Image src="/images/rooftop-bar-milan-voya-skyline.webp" alt="Voya Rooftop Milan — cocktails with skyline view in Isola" fill quality={85} className="object-cover hover:scale-105 transition-transform duration-700" sizes="(max-width: 1024px) 33vw, 20vw" />
-              </div>
-              <div className="relative col-span-1 lg:col-span-2 h-28 sm:h-36 lg:h-[152px] overflow-hidden rounded-xl">
-                <Image src="/images/milan-club-crowd-dancefloor-night.webp" alt="Milan nightclub dancefloor — Friday night crowd 2026" fill quality={85} className="object-cover hover:scale-105 transition-transform duration-700" sizes="(max-width: 1024px) 33vw, 40vw" />
-              </div>
-              <div className="relative col-span-1 lg:col-span-1 h-28 sm:h-36 lg:h-[152px] overflow-hidden rounded-xl">
-                <Image src="/images/bottle-service-milan-vip-nightclub.webp" alt="Bottle service Milan — VIP champagne at exclusive nightclub" fill quality={85} className="object-cover hover:scale-105 transition-transform duration-700" sizes="(max-width: 1024px) 33vw, 20vw" />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── 8b. Priority 6 Showcase, Weekly Navigator, Entry Matrix & VIP Calculator ── */}
-        <section className="py-16 px-4 sm:px-6 lg:px-8 w-full bg-depth border-t border-white/5 space-y-20">
-          <div className="max-w-7xl mx-auto">
-            <PrioritySixShowcase locale={locale} />
-          </div>
-          <div className="max-w-7xl mx-auto">
-            <WeeklyNightlifeNavigator locale={locale} />
-          </div>
-          <div className="max-w-7xl mx-auto">
-            <EntryFormulaMatrix locale={locale} />
-          </div>
-          <div className="max-w-7xl mx-auto">
-            <VipQuoteCalculator locale={locale} />
-          </div>
-        </section>
-
-        {/* ── 9. Tags / Popular Searches ───────────────────────────────── */}
-        <section className="py-24 px-4 sm:px-6 lg:px-8 w-full bg-depth border-t border-white/5">
-          <div className="max-w-7xl mx-auto">
-            <p className="font-sans text-champagne/80 text-[10px] tracking-[0.3em] uppercase mb-5 accent-line-gold">
-              {tr(locale, 'Discover', 'Naviga')}
-            </p>
-            <h2 className="font-serif text-4xl md:text-5xl font-medium text-ivory tracking-tight mb-10">
-              {tr(locale, 'Explore by Category', 'Esplora per Categoria')}
-            </h2>
-            <div className="flex flex-wrap gap-3">
-              {[
-                { label: tr(locale, 'Techno Clubs', 'Club Techno'), href: `${lp}/zones` },
-                { label: tr(locale, 'VIP Tables', 'VIP Table'), href: `${lp}/vip-tables` },
-                { label: tr(locale, 'Aperitivo Milan', 'Aperitivo Milano'), href: `${lp}/aperitivo` },
-                { label: tr(locale, 'Navigli Zone', 'Zona Navigli'), href: `${lp}/zones/navigli` },
-                { label: tr(locale, 'Corso Como Zone', 'Zona Corso Como'), href: `${lp}/zones/corso-como` },
-                { label: tr(locale, 'Club Guide', 'Guida ai Club'), href: `${lp}/guides` },
-                { label: tr(locale, 'San Siro Football Afterparties', 'Dopo-Partita San Siro (Inter & Milan)'), href: `${lp}/football-afterparties` },
-                { label: tr(locale, 'San Siro Post-Match Guide', 'Guida Dopo-Partita San Siro'), href: `${lp}/guides/san-siro-football-match-afterparties-inter-ac-milan` },
-                { label: tr(locale, 'Rooftop Bars', 'Rooftop Bar & Terrazze'), href: `${lp}/rooftops` },
-                { label: tr(locale, 'Private Parties & Graduations', 'Feste di Laurea & 18 Anni'), href: `${lp}/private-parties` },
-                { label: tr(locale, 'Guest Lists', 'Liste Discoteche'), href: `${lp}/guest-lists` },
-                { label: tr(locale, 'Bottle Prices 2026/2027', 'Listino Bottiglie 2026/2027'), href: `${lp}/bottle-prices` },
-                { label: tr(locale, 'Music Genres', 'Generi Musicali'), href: `${lp}/genres` },
-                { label: tr(locale, 'Concierge Service', 'Concierge'), href: `${lp}/concierge` },
-                { label: tr(locale, 'Fashion Week Milan', 'Fashion Week Milano'), href: `${lp}/clubs` },
+                { label: homeCopy.categoryLabels[0], href: `${lp}/genres/techno`, num: '01' },
+                { label: homeCopy.categoryLabels[1], href: `${lp}/vip-tables`, num: '02' },
+                { label: homeCopy.categoryLabels[2], href: `${lp}/aperitivo`, num: '03' },
+                { label: homeCopy.categoryLabels[3], href: `${lp}/zones/navigli`, num: '04' },
+                { label: homeCopy.categoryLabels[4], href: `${lp}/zones/corso-como`, num: '05' },
+                { label: homeCopy.categoryLabels[5], href: `${lp}/guides`, num: '06' },
+                { label: homeCopy.categoryLabels[6], href: `${lp}/concierge`, num: '07' },
+                { label: homeCopy.categoryLabels[7], href: `${lp}/clubs`, num: '08' },
               ].map((tag) => (
                 <Link
                   key={tag.label}
                   href={tag.href}
-                  className="px-6 py-3 border border-white/10 text-corpo text-[11px] font-sans tracking-[0.2em] uppercase hover:border-champagne/40 hover:text-champagne hover:bg-champagne/[0.04] transition-all duration-300 min-h-[44px] flex items-center"
+                  prefetch={false}
+                  className="p-6 border-r border-b border-[#F6F1E7]/14 hover:bg-[#0B0A09] group transition-colors min-h-[88px] flex flex-col justify-between"
                 >
-                  {tag.label}
+                  <span className="font-serif italic text-2xl text-[#D6BE96]">{tag.num}</span>
+                  <span className="font-mono text-xs tracking-[0.18em] uppercase text-[#F6F1E7] group-hover:text-[#D6BE96] transition-colors mt-3">
+                    {tag.label} ↗
+                  </span>
                 </Link>
               ))}
             </div>
           </div>
         </section>
 
-              <OctoberEntry locale={locale} />
         <EditorialPageSections locale={locale as LocaleCode} path={localePrefix(locale) || '/'} />
       </main>
     </>

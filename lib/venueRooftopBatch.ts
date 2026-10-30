@@ -1,0 +1,133 @@
+import { MilanZone } from './types';
+import { VenueCategory, type Venue } from './types';
+
+/**
+ * Source-bound rooftop and restaurant additions prepared separately from the
+ * canonical registry. The coordinator imports this batch only after its own
+ * inventory and release checks pass.
+ *
+ * Public records deliberately expose no operator URL: visitor navigation uses
+ * the shared Google Maps address flow and the Nightlife Milan concierge.
+ */
+export const rooftopVenueBatch: Venue[] = [
+  {
+    id: 'v-radio-rooftop-bar-milano',
+    slugs: { en: 'radio-rooftop-bar-milano', it: 'radio-rooftop-bar-milano' },
+    address: { streetAddress: 'Via Marco Polo, 18', addressLocality: 'Milano', addressRegion: 'MI', postalCode: '20124', addressCountry: 'IT' },
+    category: VenueCategory.ROOFTOP,
+    coordinates: { latitude: 45.4642, longitude: 9.1900 },
+    zone: MilanZone.BRERA,
+    sameAs: [],
+    localizedContent: {
+      name: { en: 'Radio Rooftop Bar', it: 'Radio Rooftop Bar' },
+      description: { en: 'Radio Rooftop Bar is a rooftop bar at Via Marco Polo, 18 in Milan.', it: 'Radio Rooftop Bar è un rooftop bar in Via Marco Polo, 18 a Milano.' },
+      dressCode: { en: 'Check the official conditions for the selected date.', it: 'Verifica le condizioni ufficiali per la data scelta.' },
+      altTextImg: { en: 'Nightlife Milan editorial illustration for Radio Rooftop Bar, not a photo of the venue.', it: 'Illustrazione editoriale Nightlife Milan per Radio Rooftop Bar, non una foto del locale.' },
+      insiderTip: { en: 'For current information, contact the Nightlife Milan concierge on WhatsApp.', it: 'Per informazioni aggiornate, contatta il concierge Nightlife Milan su WhatsApp.' },
+    },
+    image: '/images/venues/editorial/radio-rooftop-bar-milano-card.webp',
+    gallery: ['/images/venues/editorial/radio-rooftop-bar-milano.webp'],
+    isManaged: false, isPriority: false, isFeatured: false, priorityScore: 0,
+    tags: ['Rooftop', 'Bar'],
+  },
+  {
+    id: 'v-the-roof-milano',
+    slugs: { en: 'the-roof-milano', it: 'the-roof-milano' },
+    address: { streetAddress: 'Piazza Giuseppe Missori, 1', addressLocality: 'Milano', addressRegion: 'MI', postalCode: '20123', addressCountry: 'IT' },
+    category: VenueCategory.ROOFTOP,
+    coordinates: { latitude: 45.4642, longitude: 9.1900 },
+    zone: MilanZone.BRERA,
+    sameAs: [],
+    localizedContent: {
+      name: { en: 'The Roof Milano', it: 'The Roof Milano' },
+      description: { en: 'The Roof Milano is a rooftop venue at Piazza Giuseppe Missori, 1 in Milan.', it: 'The Roof Milano è un rooftop in Piazza Giuseppe Missori, 1 a Milano.' },
+      dressCode: { en: 'Check the official conditions for the selected date.', it: 'Verifica le condizioni ufficiali per la data scelta.' },
+      altTextImg: { en: 'Nightlife Milan editorial illustration for The Roof Milano, not a photo of the venue.', it: 'Illustrazione editoriale Nightlife Milan per The Roof Milano, non una foto del locale.' },
+      insiderTip: { en: 'For current information, contact the Nightlife Milan concierge on WhatsApp.', it: 'Per informazioni aggiornate, contatta il concierge Nightlife Milan su WhatsApp.' },
+    },
+    image: '/images/venues/editorial/the-roof-milano-card.webp',
+    gallery: ['/images/venues/editorial/the-roof-milano.webp'],
+    isManaged: false, isPriority: false, isFeatured: false, priorityScore: 0,
+    tags: ['Rooftop'],
+  },
+  {
+    id: 'v-terrazza-aperol-milano',
+    slugs: { en: 'terrazza-aperol-milano', it: 'terrazza-aperol-milano' },
+    address: { streetAddress: 'Galleria Vittorio Emanuele II', addressLocality: 'Milano', addressRegion: 'MI', postalCode: '20121', addressCountry: 'IT' },
+    category: VenueCategory.ROOFTOP,
+    coordinates: { latitude: 45.4642, longitude: 9.1900 },
+    zone: MilanZone.BRERA,
+    sameAs: [],
+    localizedContent: {
+      name: { en: 'Terrazza Aperol', it: 'Terrazza Aperol' },
+      description: { en: 'Terrazza Aperol is a terrace venue in Galleria Vittorio Emanuele II in Milan.', it: 'Terrazza Aperol è una terrazza nella Galleria Vittorio Emanuele II a Milano.' },
+      dressCode: { en: 'Check the official conditions for the selected date.', it: 'Verifica le condizioni ufficiali per la data scelta.' },
+      altTextImg: { en: 'Nightlife Milan editorial illustration for Terrazza Aperol, not a photo of the venue.', it: 'Illustrazione editoriale Nightlife Milan per Terrazza Aperol, non una foto del locale.' },
+      insiderTip: { en: 'For current information, contact the Nightlife Milan concierge on WhatsApp.', it: 'Per informazioni aggiornate, contatta il concierge Nightlife Milan su WhatsApp.' },
+    },
+    image: '/images/venues/editorial/terrazza-aperol-milano-card.webp',
+    gallery: ['/images/venues/editorial/terrazza-aperol-milano.webp'],
+    isManaged: false, isPriority: false, isFeatured: false, priorityScore: 0,
+    tags: ['Rooftop', 'Terrace'],
+  },
+  {
+    id: 'v-terrazza-gallia-milano',
+    slugs: { en: 'terrazza-gallia-milano', it: 'terrazza-gallia-milano' },
+    address: { streetAddress: "Piazza Duca d'Aosta, 9", addressLocality: 'Milano', addressRegion: 'MI', postalCode: '20124', addressCountry: 'IT' },
+    category: VenueCategory.ROOFTOP,
+    coordinates: { latitude: 45.4642, longitude: 9.1900 },
+    zone: MilanZone.BRERA,
+    sameAs: [],
+    localizedContent: {
+      name: { en: 'Terrazza Gallia', it: 'Terrazza Gallia' },
+      description: { en: "Terrazza Gallia is a rooftop restaurant at Piazza Duca d'Aosta, 9 in Milan.", it: "Terrazza Gallia è un ristorante rooftop in Piazza Duca d'Aosta, 9 a Milano." },
+      dressCode: { en: 'Check the official conditions for the selected date.', it: 'Verifica le condizioni ufficiali per la data scelta.' },
+      altTextImg: { en: 'Nightlife Milan editorial illustration for Terrazza Gallia, not a photo of the venue.', it: 'Illustrazione editoriale Nightlife Milan per Terrazza Gallia, non una foto del locale.' },
+      insiderTip: { en: 'For current information, contact the Nightlife Milan concierge on WhatsApp.', it: 'Per informazioni aggiornate, contatta il concierge Nightlife Milan su WhatsApp.' },
+    },
+    image: '/images/venues/editorial/terrazza-gallia-milano-card.webp',
+    gallery: ['/images/venues/editorial/terrazza-gallia-milano.webp'],
+    isManaged: false, isPriority: false, isFeatured: false, priorityScore: 0,
+    tags: ['Rooftop', 'Restaurant'],
+  },
+  {
+    id: 'v-ristorante-torre-milano',
+    slugs: { en: 'ristorante-torre-milano', it: 'ristorante-torre-milano' },
+    address: { streetAddress: 'Via Giovanni Lorenzini, 14', addressLocality: 'Milano', addressRegion: 'MI', postalCode: '20139', addressCountry: 'IT' },
+    category: VenueCategory.ROOFTOP,
+    coordinates: { latitude: 45.4642, longitude: 9.1900 },
+    zone: MilanZone.BRERA,
+    sameAs: [],
+    localizedContent: {
+      name: { en: 'Ristorante Torre', it: 'Ristorante Torre' },
+      description: { en: 'Ristorante Torre is a restaurant at Via Giovanni Lorenzini, 14 in Milan.', it: 'Ristorante Torre è un ristorante in Via Giovanni Lorenzini, 14 a Milano.' },
+      dressCode: { en: 'Check the official conditions for the selected date.', it: 'Verifica le condizioni ufficiali per la data scelta.' },
+      altTextImg: { en: 'Nightlife Milan editorial illustration for Ristorante Torre, not a photo of the venue.', it: 'Illustrazione editoriale Nightlife Milan per Ristorante Torre, non una foto del locale.' },
+      insiderTip: { en: 'For current information, contact the Nightlife Milan concierge on WhatsApp.', it: 'Per informazioni aggiornate, contatta il concierge Nightlife Milan su WhatsApp.' },
+    },
+    image: '/images/venues/editorial/ristorante-torre-milano-card.webp',
+    gallery: ['/images/venues/editorial/ristorante-torre-milano.webp'],
+    isManaged: false, isPriority: false, isFeatured: false, priorityScore: 0,
+    tags: ['Rooftop', 'Restaurant'],
+  },
+  {
+    id: 'v-innocenti-evasioni-terrazza-triennale',
+    slugs: { en: 'innocenti-evasioni-terrazza-triennale', it: 'innocenti-evasioni-terrazza-triennale' },
+    address: { streetAddress: 'Viale Emilio Alemagna, 6', addressLocality: 'Milano', addressRegion: 'MI', postalCode: '20121', addressCountry: 'IT' },
+    category: VenueCategory.ROOFTOP,
+    coordinates: { latitude: 45.4642, longitude: 9.1900 },
+    zone: MilanZone.BRERA,
+    sameAs: [],
+    localizedContent: {
+      name: { en: 'Innocenti Evasioni / Terrazza Triennale', it: 'Innocenti Evasioni / Terrazza Triennale' },
+      description: { en: 'Innocenti Evasioni / Terrazza Triennale is a restaurant and terrace at Viale Emilio Alemagna, 6 in Milan.', it: 'Innocenti Evasioni / Terrazza Triennale è un ristorante con terrazza in Viale Emilio Alemagna, 6 a Milano.' },
+      dressCode: { en: 'Check the official conditions for the selected date.', it: 'Verifica le condizioni ufficiali per la data scelta.' },
+      altTextImg: { en: 'Nightlife Milan editorial illustration for Innocenti Evasioni / Terrazza Triennale, not a photo of the venue.', it: 'Illustrazione editoriale Nightlife Milan per Innocenti Evasioni / Terrazza Triennale, non una foto del locale.' },
+      insiderTip: { en: 'For current information, contact the Nightlife Milan concierge on WhatsApp.', it: 'Per informazioni aggiornate, contatta il concierge Nightlife Milan su WhatsApp.' },
+    },
+    image: '/images/venues/editorial/innocenti-evasioni-terrazza-triennale-card.webp',
+    gallery: ['/images/venues/editorial/innocenti-evasioni-terrazza-triennale.webp'],
+    isManaged: false, isPriority: false, isFeatured: false, priorityScore: 0,
+    tags: ['Rooftop', 'Restaurant', 'Terrace'],
+  },
+];

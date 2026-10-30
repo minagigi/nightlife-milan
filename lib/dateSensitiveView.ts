@@ -137,29 +137,30 @@ export function millisecondsUntilNextDateSensitiveChange(
 }
 
 
-
-const PRIORITY_VENUES = [
-  'just-me', 'justme', 'just me',
-  'aria-club', 'aria club', 'aria',
-  'hollywood', 'hollywood-rythmoteque',
-  'tocqueville', 'tocqueville-13',
-  'the-club', 'the club',
-  'pineta', 'pineta-milano',
-  'loolapaloosa',
-  'armani-prive', 'armani prive',
-  'voya', 'voya-club',
-  '55-milano', 'cinquantacinque',
-  'bobino',
-  'old-fashion',
-  'fabrique',
-  'alcatraz',
-  'gate-milano',
-  'magazzini-generali',
-];
+const PRIORITY_VENUE_ORDER: Record<string, number> = {
+  'v-justme': 0,
+  'just me': 0,
+  'justme': 0,
+  'v-pineta': 1,
+  'pineta': 1,
+  'v-aria': 2,
+  'aria': 2,
+  'aria club': 2,
+  'v-55milano': 3,
+  '55 milano': 3,
+  'v-voya': 4,
+  'voya': 4,
+  'voya rooftop': 4,
+  'v-repvblic': 5,
+  'repvblic': 5,
+};
 
 export function getVenuePriorityRank(venueIdOrName?: string | null): number {
-  if (!venueIdOrName) return 999;
-  const norm = venueIdOrName.toLowerCase().trim();
-  const idx = PRIORITY_VENUES.findIndex((v) => norm.includes(v));
-  return idx === -1 ? 500 : idx;
+  if (!venueIdOrName) return 99;
+  const key = venueIdOrName.trim().toLowerCase();
+  if (key in PRIORITY_VENUE_ORDER) return PRIORITY_VENUE_ORDER[key];
+  for (const [k, rank] of Object.entries(PRIORITY_VENUE_ORDER)) {
+    if (key.includes(k)) return rank;
+  }
+  return 50;
 }

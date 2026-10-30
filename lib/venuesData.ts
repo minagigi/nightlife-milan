@@ -1,3 +1,5 @@
+import { rooftopVenueBatch } from './venueRooftopBatch';
+import { superClubVenueBatch } from './venueSuperClubBatch';
 import { Venue, MilanZone, VenueCategory } from './types';
 
 export const venuesData: Venue[] = [
@@ -906,3 +908,42 @@ export const venuesData: Venue[] = [
     tags: ["Tech House", "Techno", "International DJs"]
   }
 ];
+
+const existingIds = new Set(venuesData.map((v) => v.id));
+for (const extra of [...rooftopVenueBatch, ...superClubVenueBatch]) {
+  if (!existingIds.has(extra.id)) {
+    venuesData.push(extra);
+    existingIds.add(extra.id);
+  }
+}
+
+const EXACT_VENUE_PRIORITY_SCORES: Record<string, number> = {
+  'v-justme': 1000,
+  'v-pineta': 990,
+  'v-aria': 980,
+  'v-55milano': 970,
+  'v-voya': 960,
+  'v-repvblic': 950,
+};
+
+for (const v of venuesData) {
+  const exactScore = EXACT_VENUE_PRIORITY_SCORES[v.id];
+  if (exactScore !== undefined) {
+    v.priorityScore = exactScore;
+    v.isPriority = true;
+    v.isFeatured = true;
+  } else {
+    v.isPriority = false;
+    if (v.priorityScore >= 900) {
+      v.priorityScore = 500;
+    }
+  }
+}
+
+venuesData.sort((a, b) => {
+  const rankA = EXACT_VENUE_PRIORITY_SCORES[a.id] ?? -1;
+  const rankB = EXACT_VENUE_PRIORITY_SCORES[b.id] ?? -1;
+  if (rankA !== rankB) return rankB - rankA;
+  if (b.priorityScore !== a.priorityScore) return b.priorityScore - a.priorityScore;
+  return a.localizedContent.name.en.localeCompare(b.localizedContent.name.en);
+});
