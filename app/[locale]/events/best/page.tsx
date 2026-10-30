@@ -78,6 +78,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       locale: isIt ? 'it_IT' : 'en_US',
       images: [{ url: `${baseUrl}/images/venues/just-me-milano/just-me-milano-interior-01.webp`, width: 1200, height: 630 }],
     },
+  twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [`${baseUrl}/images/venues/just-me-milano/just-me-milano-interior-01.webp`],
+    },
   };
 }
 

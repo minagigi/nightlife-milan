@@ -207,6 +207,16 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(conciergeSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
     <main className="min-h-screen bg-[#131009]">
+      <div className="relative h-64 sm:h-80 w-full overflow-hidden">
+        <Image
+          src="/images/milan-nightclub-luxury-vip-champagne.webp"
+          alt="Milan Nightlife VIP Concierge Desk"
+          fill
+          priority
+          className="object-cover opacity-50"
+          sizes="100vw"
+        />
+      </div>
 
       {/* Hero */}
       <section className="relative pt-32 pb-24 px-6 text-center overflow-hidden">

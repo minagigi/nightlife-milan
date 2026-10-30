@@ -264,6 +264,18 @@ export default async function ZonePage({ params }: Props) {
 
   return (
     <main className="flex-grow pt-24 pb-20 bg-[#131009]">
+      <div data-zone-top-hero="true" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+        <div className="relative h-64 sm:h-80 w-full rounded-2xl overflow-hidden border border-champagne/30">
+          <Image
+            src={zone.image || '/images/milan-nightclub-luxury-vip-champagne.webp'}
+            alt={`${zone.name} Milan Nightlife District`}
+            fill
+            priority
+            className="object-cover"
+            sizes="100vw"
+          />
+        </div>
+      </div>
       {/* Breadcrumbs */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
         <nav className="text-sm text-white/40" aria-label="Breadcrumb">

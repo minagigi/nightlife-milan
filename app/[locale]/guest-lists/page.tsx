@@ -61,6 +61,12 @@ export async function generateMetadata({
         },
       ],
     },
+  twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [`${baseUrl}/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp`],
+    },
   };
 }
 

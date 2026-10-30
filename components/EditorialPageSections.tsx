@@ -267,6 +267,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
   // ---------------------------------------------------------------------------
   if (cleanPath.startsWith('/guides/') && cleanPath !== '/guides') {
     return (
+    <>
       <aside className="w-full border-t border-[#F6F1E7]/14 bg-[#050505] text-[#F6F1E7]" aria-label={isIt ? 'Assistenza Concierge Guida' : 'Guide Concierge Desk'}>
         <div className="mx-auto max-w-[1280px] border-x border-[#F6F1E7]/14 px-6 py-12 sm:px-12">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border border-[#D6BE96]/40 bg-[#0B0A09] p-7">
@@ -289,7 +290,9 @@ export default function EditorialPageSections({ locale, path }: Props) {
           </div>
         </div>
       </aside>
-    );
+      <SeoAuthorityHub lang={locale} />
+    </>
+  );
   }
 
   // ---------------------------------------------------------------------------
@@ -318,6 +321,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
     };
 
     return (
+    <>
       <aside className="w-full border-t border-[#F6F1E7]/14 bg-[#050505] text-[#F6F1E7]" aria-label={`Dossier ${venueName}`}>
         <div className="mx-auto max-w-[1280px] border-x border-[#F6F1E7]/14 divide-y divide-[#F6F1E7]/14">
           <section className="px-6 py-12 sm:px-12" data-aiso-direct-answer="true">
@@ -409,7 +413,9 @@ export default function EditorialPageSections({ locale, path }: Props) {
           </section>
         </div>
       </aside>
-    );
+      <SeoAuthorityHub lang={locale} />
+    </>
+  );
   }
 
   // ---------------------------------------------------------------------------
@@ -420,6 +426,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
     const zoneObj = mockZones.find((z) => z.slug === zoneSlug);
     const zoneName = zoneObj?.name || zoneSlug.replace(/-/g, ' ');
     return (
+    <>
       <aside className="w-full border-t border-[#F6F1E7]/14 bg-[#050505] text-[#F6F1E7]" aria-label={`Guida Quartiere ${zoneName}`}>
         <div className="mx-auto max-w-[1280px] border-x border-[#F6F1E7]/14 divide-y divide-[#F6F1E7]/14">
           <section className="px-6 py-12 sm:px-12" data-aiso-direct-answer="true">
@@ -456,7 +463,9 @@ export default function EditorialPageSections({ locale, path }: Props) {
           </section>
         </div>
       </aside>
-    );
+      <SeoAuthorityHub lang={locale} />
+    </>
+  );
   }
 
   // ---------------------------------------------------------------------------
@@ -578,6 +587,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
     ];
 
     return (
+    <>
       <aside className="w-full border-t border-[#F6F1E7]/14 bg-[#050505] text-[#F6F1E7]" aria-label="Master Directory">
         <div className="mx-auto max-w-[1280px] border-x border-[#F6F1E7]/14 divide-y divide-[#F6F1E7]/14">
           <section className="px-6 py-14 sm:px-14">
@@ -613,7 +623,9 @@ export default function EditorialPageSections({ locale, path }: Props) {
           </section>
         </div>
       </aside>
-    );
+      <SeoAuthorityHub lang={locale} />
+    </>
+  );
   }
 
   // ---------------------------------------------------------------------------
@@ -627,6 +639,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
     const technoSlug = isIt ? 'dove-trovare-migliore-techno-2026' : 'where-to-find-best-techno-2026';
 
     return (
+    <>
       <aside className="w-full border-t border-[#F6F1E7]/14 bg-[#050505] text-[#F6F1E7]" aria-label="Editorial Clusters">
         <div className="mx-auto max-w-[1280px] border-x border-[#F6F1E7]/14 divide-y divide-[#F6F1E7]/14">
           {/* Pillar 1: Speakeasies & Secret Bars */}
@@ -731,7 +744,9 @@ export default function EditorialPageSections({ locale, path }: Props) {
           </section>
         </div>
       </aside>
-    );
+      <SeoAuthorityHub lang={locale} />
+    </>
+  );
   }
 
   // ---------------------------------------------------------------------------
@@ -739,6 +754,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
   // ---------------------------------------------------------------------------
   if (cleanPath.startsWith('/events')) {
     return (
+    <>
       <aside className="w-full border-t border-[#F6F1E7]/14 bg-[#050505] text-[#F6F1E7]" aria-label="Special & Thematic Events Hub">
         <div className="mx-auto max-w-[1280px] border-x border-[#F6F1E7]/14 divide-y divide-[#F6F1E7]/14">
           <section className="px-6 py-14 sm:px-14" data-aiso-direct-answer="true">
@@ -826,7 +842,9 @@ export default function EditorialPageSections({ locale, path }: Props) {
           </section>
         </div>
       </aside>
-    );
+      <SeoAuthorityHub lang={locale} />
+    </>
+  );
   }
 
   // ---------------------------------------------------------------------------
@@ -834,7 +852,8 @@ export default function EditorialPageSections({ locale, path }: Props) {
   // Render a concise, high-impact Quick Navigation Matrix without repeating the 5,000-word club wall!
   // ---------------------------------------------------------------------------
   return (
-    <aside className="w-full border-t border-[#F6F1E7]/14 bg-[#050505] text-[#F6F1E7]" aria-label={isIt ? 'Mappa Servizi Nightlife Milan' : 'Nightlife Milan Service Matrix'}>
+    <>
+      <aside className="w-full border-t border-[#F6F1E7]/14 bg-[#050505] text-[#F6F1E7]" aria-label={isIt ? 'Mappa Servizi Nightlife Milan' : 'Nightlife Milan Service Matrix'}>
       <div className="mx-auto max-w-[1280px] border-x border-[#F6F1E7]/14 px-6 py-12 sm:px-14">
         <div className="mb-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6 border border-[#D6BE96]/40 bg-[#0B0A09] p-7">
           <div className="max-w-2xl">
@@ -879,5 +898,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
         </div>
       </div>
     </aside>
+      <SeoAuthorityHub lang={locale} />
+    </>
   );
 }
