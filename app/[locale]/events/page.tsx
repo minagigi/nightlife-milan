@@ -256,6 +256,16 @@ export default async function EventsHubPage({ params }: Props) {
               )}
             </span>
           </div>
+                    <div className="relative w-full h-56 sm:h-72 rounded-2xl overflow-hidden mb-8 border border-champagne/25">
+            <Image
+              src="/images/milan-nightclub-luxury-vip-champagne.webp"
+              alt={t.hero}
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+            />
+          </div>
           <h1 className="font-serif text-5xl md:text-7xl font-bold text-champagne tracking-tighter mb-6">
             {t.hero}
           </h1>
@@ -295,6 +305,8 @@ export default async function EventsHubPage({ params }: Props) {
             </div>
           </div>
         </section>
+
+        <OctoberEntry locale={locale} />
 
         {/* Special Events highlight */}
         {specialItems.length > 0 && (
@@ -424,7 +436,7 @@ export default async function EventsHubPage({ params }: Props) {
                   {tr(
                     locale,
                     '1. Where to Go Out in Milan: The 6 Priority Clubs Selected by Our Concierge',
-                    '1. Dove Andare a Ballare a Milano: I 6 Club Prioritari Scelti dal Concierge',
+                    '1. Dove Le Serate nei Club a Milano: I 6 Club Prioritari Scelti dal Concierge',
                   )}
                 </h2>
                 <p className="text-white/70 text-sm sm:text-base leading-relaxed mb-4">

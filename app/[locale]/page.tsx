@@ -1,3 +1,4 @@
+import OctoberEntry from '@/components/OctoberEntry';
 import { Metadata } from 'next';
 import nextDynamic from 'next/dynamic';
 import Hero from '@/components/Hero';
@@ -600,7 +601,8 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           </div>
         </section>
 
-              <EditorialPageSections locale={locale as LocaleCode} path={localePrefix(locale) || '/'} />
+              <OctoberEntry locale={locale} />
+        <EditorialPageSections locale={locale as LocaleCode} path={localePrefix(locale) || '/'} />
       </main>
     </>
   );

@@ -1,3 +1,4 @@
+import OctoberEntry from '@/components/OctoberEntry';
 import { Metadata } from 'next';
 import { tr } from '@/lib/i18n/t';
 import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
@@ -82,6 +83,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: 'Nightlife Milan',
       locale: isIt ? 'it_IT' : 'en_US',
       images: [{ url: `${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [`${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`],
     },
   };
 }
@@ -233,6 +240,16 @@ export default async function EventsThisWeekPage({ params }: Props) {
             <span className="text-champagne/60 text-xs font-mono uppercase tracking-[0.2em]">
               {weekLabel} · {tr(locale, 'Autumn/Winter 2026 & NYE 2027', 'Autunno/Inverno 2026 & Capodanno 2027')}
             </span>
+          </div>
+          <div className="relative w-full h-56 sm:h-72 rounded-2xl overflow-hidden mb-6 border border-champagne/25">
+            <Image
+              src="/images/milan-nightclub-luxury-vip-champagne.webp"
+              alt={tr(locale, 'This Week in Milan', 'Questa Settimana a Milano')}
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+            />
           </div>
           <h1 className="font-serif text-5xl md:text-7xl font-bold text-champagne tracking-tighter mb-4">
             {tr(locale, 'This Week in Milan', 'Questa Settimana a Milano')}
@@ -512,7 +529,8 @@ export default async function EventsThisWeekPage({ params }: Props) {
             </a>
           </div>
         </section>
-              <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/events/this-week`} />
+              <OctoberEntry locale={locale} />
+        <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/events/this-week`} />
       </main>
     </>
   );

@@ -5,8 +5,8 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: '/images/seo-events/:locale/:masterFile',
-        destination: '/images/seo-events/master/:masterFile',
+        source: '/images/seo-events/:locale/:assetKey([a-z0-9_-]+)--:seoSlug.webp',
+        destination: '/images/seo-events/master/:assetKey.webp',
       },
       {
         source: '/media-seo/01/:slug.webp',

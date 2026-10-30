@@ -53,7 +53,7 @@ export async function generateMetadata({
     tr(
       locale,
       'Milan Concert Afterparties 2026/2027: San Siro, Ippodromo I-Days, Unipol Forum Assago, Fabrique & Alcatraz',
-      'Afterparty Concerti Milano 2026/2027: Dove Andare a Ballare Dopo San Siro, Ippodromo I-Days, Forum Assago, Fabrique e Alcatraz'
+      'Afterparty Concerti Milano 2026/2027: Dove Le Serate nei Club Dopo San Siro, Ippodromo I-Days, Forum Assago, Fabrique e Alcatraz'
     )
   );
 
@@ -487,7 +487,7 @@ export default async function ConcertAfterpartiesPage({
 
           <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-6">
             {isIt
-              ? 'Afterparty Concerti Milano 2026/2027: Dove Andare a Ballare Dopo Stadio San Siro, Ippodromo Snai (La Maura), Unipol Forum Assago, Fabrique & Alcatraz'
+              ? 'Afterparty Concerti Milano 2026/2027: Dove Le Serate nei Club Dopo Stadio San Siro, Ippodromo Snai (La Maura), Unipol Forum Assago, Fabrique & Alcatraz'
               : 'Milan Concert Afterparties 2026/2027: Where to Party After San Siro Stadium, Ippodromo Snai (I-Days), Unipol Forum Assago, Fabrique & Alcatraz'}
           </h1>
 

@@ -1,3 +1,4 @@
+import OctoberEntry from '@/components/OctoberEntry';
 import { Metadata } from 'next';
 import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
@@ -66,7 +67,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description,
       url: canonical,
-      images: [{ url: `${baseUrl}/images/milan-vip-event-luxury-nightclub-2026.webp` }],
+      images: [{ url: `${baseUrl}/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp` }],
     },
   };
 }
@@ -385,11 +386,11 @@ export default async function SpecialEventsPage({ params }: Props) {
         {/* Gallery: 5 images */}
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
           {[
-            { src: '/images/milan-vip-event-luxury-nightclub-2026.webp', alt: 'Milan VIP event luxury nightclub exclusive party' },
+            { src: '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp', alt: 'Milan VIP event luxury nightclub exclusive party' },
             { src: '/images/milan-nightclub-bottle-service-vip-table.webp', alt: 'Milan nightclub bottle service VIP table special event' },
             { src: '/images/milan-just-me-vip-tables-nightclub-2026.webp', alt: 'Just Me Milano VIP tables special event' },
             { src: '/images/milan-voya-rooftop-exclusive-party.webp', alt: 'Voya Rooftop Milan exclusive party special evening' },
-            { src: '/images/milan-nightclub-luxury-vip-champagne.webp', alt: 'Milan luxury nightclub VIP champagne special night' },
+            { src: '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp', alt: 'Milan luxury nightclub VIP champagne special night' },
           ].map((img, i) => (
             <div key={i} className="relative h-32 rounded-xl overflow-hidden border border-white/8">
               <Image src={img.src} alt={img.alt} fill quality={85} className="object-cover" sizes="(max-width: 768px) 50vw, 20vw" />
@@ -427,7 +428,8 @@ export default async function SpecialEventsPage({ params }: Props) {
           </Link>
         </div>
       </section>
-            <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/events/special`} />
+            <OctoberEntry locale={locale} />
+        <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/events/special`} />
       </main>
   );
 }

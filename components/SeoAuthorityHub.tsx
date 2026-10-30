@@ -267,11 +267,11 @@ export default function SeoAuthorityHub({ lang }: SeoAuthorityHubProps) {
                 </div>
                 <div>
                   <dt className="font-semibold text-[#F6F1E7]">{copy.gmb.phoneLabel}</dt>
-                  <dd className="font-mono font-semibold text-[#D6BE96]">{copy.gmb.phoneValue}</dd>
+                  <dd className="font-mono font-semibold text-[#D6BE96]"><a href="tel:+393519127047" className="hover:underline">{copy.gmb.phoneValue}</a></dd>
                 </div>
                 <div>
                   <dt className="font-semibold text-[#F6F1E7]">{copy.gmb.emailLabel}</dt>
-                  <dd>{copy.gmb.emailValue}</dd>
+                  <dd><a href="mailto:concierge@nightlifemilan.com" className="hover:underline">{copy.gmb.emailValue}</a></dd>
                 </div>
                 <div>
                   <dt className="font-semibold text-[#F6F1E7]">{copy.gmb.hoursLabel}</dt>

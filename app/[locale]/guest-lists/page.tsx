@@ -54,7 +54,7 @@ export async function generateMetadata({
       locale: getLocaleDef(locale)?.ogLocale || 'en_US',
       images: [
         {
-          url: `${baseUrl}/images/milan-club-crowd-dancefloor-night.webp`,
+          url: `${baseUrl}/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp`,
           width: 1200,
           height: 630,
           alt: title,

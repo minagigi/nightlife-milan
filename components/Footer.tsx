@@ -46,7 +46,7 @@ export default function Footer({ lang }: FooterProps) {
 
   return (
     <div className="mt-auto w-full">
-      <SeoAuthorityHub lang={lang as LocaleCode} />
+      
       <div className="bg-[#0B0A09] border-t border-white/10 px-4 sm:px-6 lg:px-8 py-6">
         <div className="max-w-7xl mx-auto">
           <details data-footer-city-map className="group rounded-lg border border-white/15 bg-black/40 p-4">
@@ -69,6 +69,7 @@ export default function Footer({ lang }: FooterProps) {
         </div>
       </div>
       <NewsletterHub lang={lang} />
+      <div className="sr-only"><a href="tel:+393519127047">+39 351 912 7047</a> <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a> <a href="https://wa.me/393519127047">WhatsApp</a></div>
       <footer className="w-full bg-[#131009] py-16 px-4 sm:px-6 lg:px-8" style={{ borderTop: '1px solid transparent', borderImage: 'linear-gradient(90deg, transparent, rgba(201,168,106,0.25), transparent) 1' }}>
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
         {/* Col 1: Brand Info */}

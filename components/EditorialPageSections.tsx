@@ -1,3 +1,4 @@
+import SeoAuthorityHub from './SeoAuthorityHub';
 import React from 'react';
 import Link from 'next/link';
 import { SITE_CONTACT } from '@/config/contact';

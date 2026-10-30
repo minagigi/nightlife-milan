@@ -1,3 +1,4 @@
+import OctoberEntry from '@/components/OctoberEntry';
 import { Metadata } from 'next';
 import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
@@ -222,6 +223,16 @@ export default async function EventsTonightPage({ params }: Props) {
             {dateLabel} · {tr(locale, 'Autumn/Winter 2026 & NYE 2027', 'Autunno/Inverno 2026 & Capodanno 2027')}
           </span>
         </div>
+        <div className="relative w-full h-56 sm:h-72 rounded-2xl overflow-hidden mb-6 border border-champagne/25">
+          <Image
+            src="/images/milan-nightclub-luxury-vip-champagne.webp"
+            alt={tr(locale, 'Tonight in Milan', 'Stasera a Milano')}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
         <h1 className="font-serif text-5xl md:text-7xl font-bold text-champagne tracking-tighter mb-4">
           {tr(locale, 'Tonight in Milan', 'Stasera a Milano')}
         </h1>
@@ -410,7 +421,8 @@ export default async function EventsTonightPage({ params }: Props) {
           </a>
         </div>
       </section>
-            <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/events/tonight`} />
+            <OctoberEntry locale={locale} />
+        <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/events/tonight`} />
       </main>
   );
 }

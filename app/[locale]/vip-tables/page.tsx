@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       siteName: 'Nightlife Milan',
       locale: isIt ? 'it_IT' : 'en_US',
       images: [{
-        url: `${baseUrlGlobal}/images/vip-table-milan-nightclub-just-me.webp`,
+        url: `${baseUrlGlobal}/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp`,
         width: 1200,
         height: 630,
         alt: tr(locale, 'VIP Tables Milan — Just Me Club', 'Tavoli VIP Milano — Just Me Club'),
@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       card: 'summary_large_image',
       title,
       description,
-      images: [`${baseUrlGlobal}/images/vip-table-milan-nightclub-just-me.webp`],
+      images: [`${baseUrlGlobal}/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp`],
       site: '@nightlifemilan',
     },
   };

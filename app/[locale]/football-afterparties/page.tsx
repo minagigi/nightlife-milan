@@ -42,7 +42,7 @@ export async function generateMetadata({
     tr(
       locale,
       'San Siro Football Match Afterparties Milan 2026/2027: Best Clubs, VIP Tables & Aperitivo After Inter & AC Milan (Serie A, Champions League & Derby)',
-      'Dopo Partita San Siro Milano 2026/2027: Dove Andare a Ballare, Fare Aperitivo e Prenotare Tavoli VIP Dopo Inter e Milan (Serie A, Champions e Derby)'
+      'Dopo Partita San Siro Milano 2026/2027: Dove Le Serate nei Club, Fare Aperitivo e Prenotare Tavoli VIP Dopo Inter e Milan (Serie A, Champions e Derby)'
     )
   );
 
@@ -396,7 +396,7 @@ export default async function FootballAfterpartiesPage({
         '@id': `${canonicalUrl}#webpage`,
         url: canonicalUrl,
         name: isIt
-          ? 'Dopo Partita San Siro Milano 2026/2027: Dove Andare a Ballare, Aperitivo e Tavoli VIP Dopo Inter e Milan'
+          ? 'Dopo Partita San Siro Milano 2026/2027: Dove Le Serate nei Club, Aperitivo e Tavoli VIP Dopo Inter e Milan'
           : 'San Siro Football Match Afterparties Milan 2026/2027: Best Clubs, VIP Tables & Aperitivo After Inter & AC Milan',
         description: isIt
           ? 'Hub ufficiale Dopo-Partita Stadio San Siro (Giuseppe Meazza) Milano: i 6 migliori club e rooftop per terzo tempo, cena cantata e tavoli VIP dopo Inter, Milan, Derby e Champions League.'
@@ -547,7 +547,7 @@ export default async function FootballAfterpartiesPage({
 
           <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-6">
             {isIt
-              ? 'Dopo Partita San Siro Milano 2026/2027: Dove Andare a Ballare, Fare Aperitivo e Prenotare Tavoli VIP Dopo le Partite di Inter e Milan (Serie A, Champions League, Derby e Coppa Italia)'
+              ? 'Dopo Partita San Siro Milano 2026/2027: Dove Le Serate nei Club, Fare Aperitivo e Prenotare Tavoli VIP Dopo le Partite di Inter e Milan (Serie A, Champions League, Derby e Coppa Italia)'
               : 'San Siro Football Match Afterparties Milan 2026/2027: Where to Party, Enjoy Royal Aperitivo & Book VIP Tables After Inter & AC Milan Matches (Serie A, Champions League, Derby & Coppa Italia)'}
           </h1>
 

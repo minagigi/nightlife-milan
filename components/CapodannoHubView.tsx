@@ -1,3 +1,5 @@
+import SeoAuthorityHub from '@/components/SeoAuthorityHub';
+import type { LocaleCode } from '@/lib/i18n/locales';
 import { capodannoEventPath, capodannoNavigation, capodannoPath } from '@/lib/capodanno/routes';
 import {
   getCapodannoLocalizedCategorySubtitle,
@@ -362,6 +364,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
           ))}
         </div>
       </section>
+      <SeoAuthorityHub lang={locale as LocaleCode} />
     </main>
   );
 }
