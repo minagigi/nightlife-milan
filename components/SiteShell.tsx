@@ -19,8 +19,7 @@ import { getBackToTopLabel } from '@/lib/i18n/backToTopCopy';
 import { getScriptFont } from '@/lib/scriptFonts';
 import '@/app/locale-flags.css';
 import GlobalPriorityRecommendations from '@/components/GlobalPriorityRecommendations';
-import { getDateSensitiveInventory } from '@/lib/dateSensitiveInventory';
-import { selectPriorityVenueEvents } from '@/lib/priorityVenueEvents';
+import { getTopPriorityVenueRecommendations } from '@/lib/priorityVenueRecommendations';
 import { getEventSelectionCopy } from '@/lib/i18n/eventSelectionCopy';
 import { getPriorityRecommendationsHeading } from '@/lib/i18n/priorityRecommendationsCopy';
 import { getEventCalendarCopy } from '@/lib/eventCalendarCopy';
@@ -73,7 +72,7 @@ export default async function SiteShell({ locale, editorialFields, copyrightYear
   const localeDef = getLocaleDef(locale) || getLocaleDef(DEFAULT_LOCALE)!;
   const scriptFont = getScriptFont(locale);
   const initialNow = new Date();
-  const recommendedEvents = selectPriorityVenueEvents(await getDateSensitiveInventory(locale), initialNow);
+  const recommendedEvents = getTopPriorityVenueRecommendations(locale, 6);
   const selectionCopy = getEventSelectionCopy(locale);
   const calendarCopy = getEventCalendarCopy(locale);
   const priorityClubSlugs = PRIORITY_VENUE_IDS.map(id => {

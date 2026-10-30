@@ -22,7 +22,7 @@ import { getDateSensitiveCarouselInventory } from '@/lib/dateSensitiveInventory'
 import { selectPriorityVenueEvents } from '@/lib/priorityVenueEvents';
 import { getTableConciergeSharedCopy } from '@/lib/tableConciergePageCopy';
 
-export const revalidate = false;
+export const revalidate = 3600;
 
 const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
 

@@ -36,12 +36,16 @@ export type DateSensitiveCarouselPresentation = DateSensitiveEventPresentation &
 };
 
 const ACTIVE_FLOOR_ROME_DAY = '2026-10-18';
+const MAX_SERIALIZED_EVENTS = 48;
 const ROME_DAY_FMT = new Intl.DateTimeFormat('en-CA', {
   timeZone: 'Europe/Rome',
   year: 'numeric',
   month: '2-digit',
   day: '2-digit',
 });
+
+const inventoryCache = new Map<string, Promise<DateSensitiveEventPresentation[]>>();
+const carouselCache = new Map<string, Promise<DateSensitiveCarouselPresentation[]>>();
 
 function isCurrentOrUpcomingOccurrence(dateISO: string, endDateISO?: string | null): boolean {
   const startMs = Date.parse(dateISO);
@@ -145,14 +149,25 @@ function getPriorityVenueSupplementalPresentations(locale: string, venueId?: str
 }
 
 export async function getDateSensitiveInventory(locale: string, venueId?: string): Promise<DateSensitiveEventPresentation[]> {
-  const october = await getOctoberDateSensitivePresentations(locale, venueId);
-  const supplemental = getPriorityVenueSupplementalPresentations(locale, venueId);
-  return [...october, ...supplemental].sort(
-    (left, right) =>
-      getVenuePriorityRank(left.venueId || left.venueName) - getVenuePriorityRank(right.venueId || right.venueName) ||
-      Date.parse(left.dateISO) - Date.parse(right.dateISO) ||
-      left.id.localeCompare(right.id),
-  );
+  const cacheKey = `${locale}|${venueId || ''}`;
+  const cached = inventoryCache.get(cacheKey);
+  if (cached) return cached;
+
+  const promise = (async () => {
+    const october = await getOctoberDateSensitivePresentations(locale, venueId);
+    const supplemental = getPriorityVenueSupplementalPresentations(locale, venueId);
+    return [...october, ...supplemental]
+      .sort(
+        (left, right) =>
+          getVenuePriorityRank(left.venueId || left.venueName) - getVenuePriorityRank(right.venueId || right.venueName) ||
+          Date.parse(left.dateISO) - Date.parse(right.dateISO) ||
+          left.id.localeCompare(right.id),
+      )
+      .slice(0, MAX_SERIALIZED_EVENTS);
+  })();
+
+  inventoryCache.set(cacheKey, promise);
+  return promise;
 }
 
 export async function getDateSensitiveCarouselInventory(
@@ -160,45 +175,60 @@ export async function getDateSensitiveCarouselInventory(
   _matches?: (event: Event) => boolean,
   matchesOctober?: (event: typeof OCTOBER_EVENTS[number]) => boolean,
 ): Promise<DateSensitiveCarouselPresentation[]> {
-  const october: DateSensitiveCarouselPresentation[] = isEnabledLocale(locale)
-    ? (await getOctoberDateSensitivePresentations(locale))
-        .filter((card) => !matchesOctober || matchesOctober(OCTOBER_EVENTS.find((e) => `october-${e.id}` === card.id)!))
-        .map((card) => {
-          const event = OCTOBER_EVENTS.find((e) => `october-${e.id}` === card.id)!;
-          const venue = getVenueById(event.venue.id);
-          const genreKeys: Record<string, string> = {
-            'hip-hop': 'HIP_HOP',
-            hits: 'COMMERCIAL',
-            house: 'HOUSE',
-            techno: 'TECHNO',
-            reggaeton: 'REGGAETON',
-          };
-          return {
-            ...card,
-            genre: event.genres.map((g) => genreKeys[g.toLowerCase()] || g.toUpperCase()),
-            venueAltText: getOctoberPosterLabel(event, locale),
-            venueZone: venue ? venueLocationLabel(venue) : '',
-            venueZoneKey: venue?.zone ?? null,
-            venueFeatured: venue?.isFeatured ?? false,
-          };
-        })
-    : [];
-  const supplementalCarousel: DateSensitiveCarouselPresentation[] = getPriorityVenueSupplementalPresentations(locale).map((card) => {
-    const venue = card.venueId ? getVenueById(card.venueId) : undefined;
-    const we = weeklyEvents.find((w) => card.id.startsWith(`priority-${w.id}-`));
-    return {
-      ...card,
-      genre: we ? we.genres.map((g: string) => String(g).toUpperCase()) : ['COMMERCIAL'],
-      venueAltText: card.title,
-      venueZone: venue ? venueLocationLabel(venue) : 'Milano',
-      venueZoneKey: venue?.zone ?? null,
-      venueFeatured: venue?.isFeatured ?? true,
-    };
-  });
-  return [...october, ...supplementalCarousel].sort(
-    (left, right) =>
-      getVenuePriorityRank(left.venueId || left.venueName) - getVenuePriorityRank(right.venueId || right.venueName) ||
-      Date.parse(left.dateISO) - Date.parse(right.dateISO) ||
-      left.id.localeCompare(right.id),
-  );
+  if (!matchesOctober) {
+    const cached = carouselCache.get(locale);
+    if (cached) return cached;
+  }
+
+  const compute = async (): Promise<DateSensitiveCarouselPresentation[]> => {
+    const october: DateSensitiveCarouselPresentation[] = isEnabledLocale(locale)
+      ? (await getOctoberDateSensitivePresentations(locale))
+          .filter((card) => !matchesOctober || matchesOctober(OCTOBER_EVENTS.find((e) => `october-${e.id}` === card.id)!))
+          .map((card) => {
+            const event = OCTOBER_EVENTS.find((e) => `october-${e.id}` === card.id)!;
+            const venue = getVenueById(event.venue.id);
+            const genreKeys: Record<string, string> = {
+              'hip-hop': 'HIP_HOP',
+              hits: 'COMMERCIAL',
+              house: 'HOUSE',
+              techno: 'TECHNO',
+              reggaeton: 'REGGAETON',
+            };
+            return {
+              ...card,
+              genre: event.genres.map((g) => genreKeys[g.toLowerCase()] || g.toUpperCase()),
+              venueAltText: getOctoberPosterLabel(event, locale),
+              venueZone: venue ? venueLocationLabel(venue) : '',
+              venueZoneKey: venue?.zone ?? null,
+              venueFeatured: venue?.isFeatured ?? false,
+            };
+          })
+      : [];
+    const supplementalCarousel: DateSensitiveCarouselPresentation[] = getPriorityVenueSupplementalPresentations(locale).map((card) => {
+      const venue = card.venueId ? getVenueById(card.venueId) : undefined;
+      const we = weeklyEvents.find((w) => card.id.startsWith(`priority-${w.id}-`));
+      return {
+        ...card,
+        genre: we ? we.genres.map((g: string) => String(g).toUpperCase()) : ['COMMERCIAL'],
+        venueAltText: card.title,
+        venueZone: venue ? venueLocationLabel(venue) : 'Milano',
+        venueZoneKey: venue?.zone ?? null,
+        venueFeatured: venue?.isFeatured ?? true,
+      };
+    });
+    return [...october, ...supplementalCarousel]
+      .sort(
+        (left, right) =>
+          getVenuePriorityRank(left.venueId || left.venueName) - getVenuePriorityRank(right.venueId || right.venueName) ||
+          Date.parse(left.dateISO) - Date.parse(right.dateISO) ||
+          left.id.localeCompare(right.id),
+      )
+      .slice(0, MAX_SERIALIZED_EVENTS);
+  };
+
+  const promise = compute();
+  if (!matchesOctober) {
+    carouselCache.set(locale, promise);
+  }
+  return promise;
 }

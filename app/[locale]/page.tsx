@@ -28,7 +28,7 @@ import { getLocalizedText } from '@/lib/seo';
 
 // Cache senza scadenza. Gli aggiornamenti avvengono solo al deploy o tramite
 // revalidatePath dopo una modifica editoriale esplicita.
-export const revalidate = false;
+export const revalidate = 3600;
 
 type HomeIndexedLocale = 'en' | 'it' | 'es' | 'fr' | 'de' | 'pt';
 const HOME_SAFE_COPY: Record<HomeIndexedLocale, {

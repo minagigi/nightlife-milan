@@ -24,7 +24,7 @@ import { getEventHubSerpDecisionDescription } from '@/lib/serpDecisionCopy';
 import { applyEditorialFields, readEditorialFields } from '@/lib/editorialContent';
 import { getGuestListsCopy } from '@/lib/guestLists/copy';
 
-export const revalidate = false;
+export const revalidate = 3600;
 const SITE_URL = 'https://nightlifemilan.com';
 
 type Props = {

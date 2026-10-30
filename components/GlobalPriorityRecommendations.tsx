@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import type { DateSensitiveEventPresentation } from '@/lib/dateSensitiveInventory';
+import type { PriorityRecommendationPresentation } from '@/lib/priorityVenueRecommendations';
 import { localePrefix } from '@/lib/i18n/locales';
 
 export default function GlobalPriorityRecommendations({
@@ -8,7 +8,7 @@ export default function GlobalPriorityRecommendations({
   heading,
   viewEvent,
 }: {
-  events: readonly DateSensitiveEventPresentation[];
+  events: readonly PriorityRecommendationPresentation[];
   locale: string;
   initialNow: string;
   priorityClubSlugs: readonly string[];

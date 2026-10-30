@@ -2,7 +2,7 @@ import { addRomeDays, getDateSensitiveEvents, romeDayKeyAt, type DateSensitiveEv
 import { physicalEventKey } from './eventIdentity';
 
 /** Only these verified venue identities may appear in public recommendations. */
-export const PRIORITY_VENUE_IDS = ['v-justme', 'v-pineta', 'v-aria', 'v-voya', 'v-repvblic'] as const;
+export const PRIORITY_VENUE_IDS = ['v-justme', 'v-pineta', 'v-aria', 'v-55milano', 'v-voya', 'v-repvblic'] as const;
 const priorityVenueIds = new Set<string>(PRIORITY_VENUE_IDS);
 // Live public and exact affiliate Xceed pages rendered "404 - Event Not Found"
 // on 2026-10-11. Preserve their dated source/archive; exclude these IDs only

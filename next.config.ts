@@ -157,7 +157,6 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'cdn.evbuc.com', pathname: '/**' },
     ],
   },
-  output: 'standalone',
   transpilePackages: ['motion'],
   experimental: {
     optimizePackageImports: ['motion', 'lucide-react'],
