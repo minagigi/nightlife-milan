@@ -10,6 +10,8 @@ import { generateEventListSchema, getLocalizedText, jsonLdString } from '@/lib/s
 import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 import { VipQuoteCalculator, EntryFormulaMatrix, PrioritySixShowcase, SanSiroMatchAfterpartyFinder } from '@/components/NightlifeExpansionModules';
+import EditorialPageSections from '@/components/EditorialPageSections';
+import type { LocaleCode } from '@/lib/i18n/locales';
 
 export type EventIntent = 'international' | 'university-erasmus' | '18-plus' | '21-plus';
 type CoreLocale = 'en' | 'it' | 'es' | 'fr' | 'de' | 'pt';
@@ -143,7 +145,7 @@ const INTENTS: Record<EventIntent, {
     },
     heading: { en: 'University & Erasmus Parties Milan', it: 'Serate Universitarie ed Erasmus Milano', es: 'Fiestas Universitarias y Erasmus Milan', fr: 'Soirees Etudiantes et Erasmus Milan', de: 'Studenten- und Erasmus-Partys Mailand', pt: 'Festas Universitarias e Erasmus Milao' },
     audience: { en: 'University students, Erasmus groups and international students who want a social, energetic club night.', it: 'Studenti universitari, gruppi Erasmus e studenti internazionali che cercano una serata sociale ed energica.', es: 'Universitarios, grupos Erasmus y estudiantes internacionales que buscan una noche social y energica.', fr: 'Etudiants, groupes Erasmus et internationaux qui recherchent une soiree sociale et energique.', de: 'Studierende, Erasmus-Gruppen und internationale Studierende fur eine lebhafte Clubnacht.', pt: 'Universitarios, grupos Erasmus e estudantes internacionais que procuram uma noite social e energica.' },
-    hero: '/images/events/generated/just-me-university-party-eventbrite-header-2x1-pt.png',
+    hero: '/images/venues/just-me-milano/just-me-milano-interior-01.webp',
     venueIds: ['v-justme', 'v-pineta', 'v-aria'],
     terms: ['university', 'universitario', 'universitaria', 'erasmus', 'student', 'college'],
   },
@@ -388,6 +390,7 @@ export default async function EventIntentLanding({ intent, locale }: { intent: E
         <VipQuoteCalculator locale={locale} />
         <PrioritySixShowcase locale={locale} />
       </section>
-    </main>
+            <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/events/${intent}`} />
+      </main>
   );
 }

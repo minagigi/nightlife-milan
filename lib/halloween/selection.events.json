@@ -1,0 +1,399 @@
+[
+  {
+    "id": "justme",
+    "title": "Marie Antoinette · The Dark Side",
+    "venueName": "Justme Milano",
+    "dates": [
+      "2026-10-31"
+    ],
+    "startISO": "2026-10-31T19:30:00+01:00",
+    "endISO": "2026-11-01T05:00:00+01:00",
+    "category": "club-party",
+    "canonicalEventId": "243574",
+    "affiliateUrl": "https://xceed.me/en/milano/event/halloween-night-20/243574/channel/nightlifemilan-1"
+  },
+  {
+    "id": "pineta",
+    "title": "The Ball of the Damned",
+    "venueName": "Pineta Milano",
+    "dates": [
+      "2026-10-31"
+    ],
+    "startISO": "2026-10-31T19:30:00+01:00",
+    "endISO": "2026-11-01T05:00:00+01:00",
+    "category": "club-party",
+    "canonicalEventId": "243812",
+    "affiliateUrl": "https://xceed.me/en/milano/event/the-ball-of-the-damned-the-halloween-party/243812/channel/nightlifemilan-1"
+  },
+  {
+    "id": "aria",
+    "title": "Welcome to Aria",
+    "venueName": "Aria Club Milano",
+    "dates": [
+      "2026-10-31"
+    ],
+    "startISO": "2026-10-31T21:00:00+01:00",
+    "endISO": "2026-11-01T05:00:00+01:00",
+    "category": "club-party",
+    "canonicalEventId": "243203",
+    "affiliateUrl": "https://xceed.me/en/milano/event/halloween-party-65/243203/channel/nightlifemilan-1"
+  },
+  {
+    "id": "voya",
+    "title": "Halloween Rooftop Night · Cena à la carte & Party",
+    "venueName": "Voya Rooftop",
+    "dates": [
+      "2026-10-31"
+    ],
+    "startISO": "2026-10-31T20:00:00+01:00",
+    "endISO": null,
+    "category": "club-party",
+    "canonicalEventId": "halloween-voya-rooftop-2026",
+    "affiliateUrl": null
+  },
+  {
+    "id": "55",
+    "title": "Hotel 55 Club",
+    "venueName": "55 Club Milano",
+    "dates": [
+      "2026-10-31"
+    ],
+    "startISO": "2026-10-31T19:30:00+01:00",
+    "endISO": null,
+    "category": "club-party",
+    "canonicalEventId": "halloween-55-club-milano-2026",
+    "affiliateUrl": null
+  },
+  {
+    "id": "magazzini",
+    "title": "Welcome to Hell",
+    "venueName": "Magazzini Generali",
+    "dates": [
+      "2026-10-31"
+    ],
+    "startISO": "2026-10-31T23:30:00+01:00",
+    "endISO": null,
+    "category": "club-party",
+    "canonicalEventId": "halloween-magazzini-generali-2026",
+    "affiliateUrl": null
+  },
+  {
+    "id": "tocqueville",
+    "title": "Noche de Vampiros · Dal tramonto all’alba",
+    "venueName": "Tocqueville 13",
+    "dates": [
+      "2026-10-31"
+    ],
+    "startISO": "2026-10-31T23:30:00+01:00",
+    "endISO": "2026-11-01T05:00:00+01:00",
+    "category": "club-party",
+    "canonicalEventId": "halloween-tocqueville-13-2026",
+    "affiliateUrl": null
+  },
+  {
+    "id": "fabbrica",
+    "title": "Circo de los Muertos",
+    "venueName": "Fabbrica del Vapore",
+    "dates": [
+      "2026-10-31"
+    ],
+    "startISO": "2026-10-31T22:00:00+01:00",
+    "endISO": "2026-11-01T04:00:00+01:00",
+    "category": "club-party",
+    "canonicalEventId": "halloween-fabbrica-del-vapore-2026",
+    "affiliateUrl": null
+  },
+  {
+    "id": "gate",
+    "title": "PERREO XL - HALLOWEEN",
+    "venueName": "Gate Milano",
+    "dates": [
+      "2026-10-31"
+    ],
+    "startISO": "2026-10-31T23:00:00+01:00",
+    "endISO": "2026-11-01T05:00:00+01:00",
+    "category": "club-party",
+    "canonicalEventId": "240984",
+    "affiliateUrl": null
+  },
+  {
+    "id": "tom",
+    "title": "L'HALLOWEEN DELLE AGENZIE 🎃",
+    "venueName": "TOM.",
+    "dates": [
+      "2026-10-29"
+    ],
+    "startISO": "2026-10-29T20:00:00+01:00",
+    "endISO": "2026-10-30T03:00:00+01:00",
+    "category": "club-party",
+    "canonicalEventId": "halloween-tom-milano-2026",
+    "affiliateUrl": null
+  },
+  {
+    "id": "alcatraz",
+    "title": "Alcatraz Halloween Party · Dia de los Muertos",
+    "venueName": "Alcatraz",
+    "dates": [
+      "2026-10-31"
+    ],
+    "startISO": "2026-10-31T22:00:00+01:00",
+    "endISO": null,
+    "category": "club-party",
+    "canonicalEventId": "alcatraz-halloween-dia-de-los-muertos-2026",
+    "affiliateUrl": null
+  },
+  {
+    "id": "amnesia",
+    "title": "Halloween Night · Leon extended set, Michele Arcieri",
+    "venueName": "Amnesia Milano",
+    "dates": [
+      "2026-10-31"
+    ],
+    "startISO": "2026-10-31T23:30:00+01:00",
+    "endISO": "2026-11-01T05:00:00+01:00",
+    "category": "club-party",
+    "canonicalEventId": "amnesia-halloween-leon-2026",
+    "affiliateUrl": null
+  },
+  {
+    "id": "nama",
+    "title": "Halloween’s Night at NAMA with MOAB & Alzaya",
+    "venueName": "NAMA -NuovoAnfiteatroMartesana",
+    "dates": [
+      "2026-10-31"
+    ],
+    "startISO": "2026-10-31T18:00:00+01:00",
+    "endISO": "2026-11-01T06:30:00+01:00",
+    "category": "club-party",
+    "canonicalEventId": "halloween-nama-milano-2026",
+    "affiliateUrl": null
+  },
+  {
+    "id": "tempio",
+    "title": "Educazione Techno Sessuale · La notte delle anime vive",
+    "venueName": "Tempio del Futuro Perduto",
+    "dates": [
+      "2026-10-31"
+    ],
+    "startISO": "2026-10-31T23:00:00+01:00",
+    "endISO": "2026-11-01T10:00:00+01:00",
+    "category": "club-party",
+    "canonicalEventId": "halloween-tempio-del-futuro-perduto-2026",
+    "affiliateUrl": null
+  },
+  {
+    "id": "volt",
+    "title": "Frankey & Sandrino + Alessio Cristiano (Halloween)",
+    "venueName": "Volt Club Milano",
+    "dates": [
+      "2026-10-31"
+    ],
+    "startISO": "2026-10-31T23:59:00+01:00",
+    "endISO": "2026-11-01T06:00:00+01:00",
+    "category": "club-party",
+    "canonicalEventId": "halloween-volt-club-milano-2026",
+    "affiliateUrl": null
+  },
+  {
+    "id": "cgm",
+    "title": "Manifesto Halloween · Darkdisco, EBM, electro",
+    "venueName": "CGM -ClubGiovanileMilano",
+    "dates": [
+      "2026-10-31"
+    ],
+    "startISO": "2026-10-31T18:00:00+01:00",
+    "endISO": "2026-11-01T02:00:00+01:00",
+    "category": "club-party",
+    "canonicalEventId": "halloween-cgm-milano-2026",
+    "affiliateUrl": null
+  },
+  {
+    "id": "base",
+    "title": "Warehouse Halloween",
+    "venueName": "BASE Milano",
+    "dates": [
+      "2026-10-31"
+    ],
+    "startISO": "2026-10-31T23:00:00+01:00",
+    "endISO": "2026-11-01T05:00:00+01:00",
+    "category": "club-party",
+    "canonicalEventId": "halloween-base-milano-2026",
+    "affiliateUrl": null
+  },
+  {
+    "id": "arca",
+    "title": "Take It Easy Halloween Night",
+    "venueName": "Arca",
+    "dates": [
+      "2026-10-31"
+    ],
+    "startISO": "2026-10-31T23:59:00+01:00",
+    "endISO": "2026-11-01T06:00:00+01:00",
+    "category": "club-party",
+    "canonicalEventId": "halloween-arca-milano-2026",
+    "affiliateUrl": null
+  },
+  {
+    "id": "pulse",
+    "title": "PULSE presents Enrico Sangiuliano",
+    "venueName": "CUBE -SuperstudioVillage",
+    "dates": [
+      "2026-10-31"
+    ],
+    "startISO": "2026-10-31T22:00:00+01:00",
+    "endISO": "2026-11-01T04:00:00+01:00",
+    "category": "club-party",
+    "canonicalEventId": "halloween-pulse-cube-milano-2026",
+    "affiliateUrl": null
+  },
+  {
+    "id": "fabrique",
+    "title": "Mamacita Halloween Edition",
+    "venueName": "Fabrique Milano",
+    "dates": [
+      "2026-10-31"
+    ],
+    "startISO": "2026-10-31T23:30:00+01:00",
+    "endISO": null,
+    "category": "club-party",
+    "canonicalEventId": "halloween-mamacita-fabrique-2026",
+    "affiliateUrl": null
+  },
+  {
+    "id": "cineteca",
+    "title": "Halloween · La notte delle streghe",
+    "venueName": "Cineteca Milano Arlecchino",
+    "dates": [
+      "2026-10-31"
+    ],
+    "startISO": "2026-10-31T21:00:00+01:00",
+    "endISO": null,
+    "category": "family-culture",
+    "canonicalEventId": "halloween-cineteca-milano-arlecchino-2026",
+    "affiliateUrl": null
+  },
+  {
+    "id": "teatro-gaber",
+    "title": "Non Aprite Quel Teatro",
+    "venueName": "Teatro Giorgio Gaber",
+    "dates": [
+      "2026-10-30",
+      "2026-10-31"
+    ],
+    "startISO": "2026-10-30T20:30:00+01:00",
+    "endISO": null,
+    "category": "family-culture",
+    "canonicalEventId": "halloween-teatro-giorgio-gaber-2026",
+    "affiliateUrl": null
+  },
+  {
+    "id": "parco-trotter",
+    "title": "Rosmunda e Al-Boino",
+    "venueName": "Parco Trotter",
+    "dates": [
+      "2026-10-31"
+    ],
+    "startISO": "2026-10-31T18:30:00+01:00",
+    "endISO": null,
+    "category": "family-culture",
+    "canonicalEventId": "halloween-parco-trotter-2026",
+    "affiliateUrl": null
+  },
+  {
+    "id": "museoscienza",
+    "title": "Halloween activities",
+    "venueName": "Museo Nazionale Scienza e Tecnologia",
+    "dates": [
+      "2026-10-24",
+      "2026-10-25",
+      "2026-10-31",
+      "2026-11-01"
+    ],
+    "startISO": "2026-10-31T10:00:00+01:00",
+    "endISO": null,
+    "category": "family-culture",
+    "canonicalEventId": "halloween-museo-scienza-tecnologia-2026",
+    "affiliateUrl": null
+  },
+  {
+    "id": "planetario-kids",
+    "title": "Il cielo sottosopra",
+    "venueName": "Civico Planetario",
+    "dates": [
+      "2026-10-31"
+    ],
+    "startISO": "2026-10-31T15:00:00+01:00",
+    "endISO": null,
+    "category": "family-culture",
+    "canonicalEventId": "halloween-planetario-cielo-sottosopra-2026",
+    "affiliateUrl": null
+  },
+  {
+    "id": "planetario-night",
+    "title": "Halloween’s Night",
+    "venueName": "Civico Planetario",
+    "dates": [
+      "2026-10-31"
+    ],
+    "startISO": "2026-10-31T21:00:00+01:00",
+    "endISO": null,
+    "category": "family-culture",
+    "canonicalEventId": "halloween-planetario-night-2026",
+    "affiliateUrl": null
+  },
+  {
+    "id": "castello-delitto",
+    "title": "Delitto al Castello",
+    "venueName": "Castello Sforzesco",
+    "dates": [
+      "2026-10-31",
+      "2026-11-01"
+    ],
+    "startISO": "2026-10-31T14:30:00+01:00",
+    "endISO": null,
+    "category": "family-culture",
+    "canonicalEventId": "halloween-castello-delitto-2026",
+    "affiliateUrl": null
+  },
+  {
+    "id": "castello-mostri",
+    "title": "Mostri al Castello",
+    "venueName": "Castello Sforzesco",
+    "dates": [
+      "2026-10-31",
+      "2026-11-01"
+    ],
+    "startISO": "2026-10-31T15:30:00+01:00",
+    "endISO": null,
+    "category": "family-culture",
+    "canonicalEventId": "halloween-castello-mostri-2026",
+    "affiliateUrl": null
+  },
+  {
+    "id": "castello-penombra",
+    "title": "Mostri nella penombra del Castello",
+    "venueName": "Castello Sforzesco",
+    "dates": [
+      "2026-10-31",
+      "2026-11-01"
+    ],
+    "startISO": "2026-10-31T17:30:00+01:00",
+    "endISO": null,
+    "category": "family-culture",
+    "canonicalEventId": "halloween-castello-penombra-2026",
+    "affiliateUrl": null
+  },
+  {
+    "id": "duomo-night",
+    "title": "Una notte al Museo del Duomo",
+    "venueName": "Museo del Duomo",
+    "dates": [
+      "2026-10-31"
+    ],
+    "startISO": "2026-10-31T20:30:00+01:00",
+    "endISO": null,
+    "category": "family-culture",
+    "canonicalEventId": "halloween-museo-del-duomo-2026",
+    "affiliateUrl": null
+  }
+]

@@ -1,3 +1,31 @@
+import CapodannoHubView from '@/components/CapodannoHubView';
+import CapodannoDetailView from '@/components/CapodannoDetailView';
+import { getCapodannoCategoryPageDef, getCapodannoEventBySlug, getCapodannoEventsForMode } from '@/lib/capodannoEvents';
+import {
+  buildCapodannoMetaDescription,
+  cleanCapodannoSeoTitle,
+  getCapodannoLocalizedCategorySubtitle,
+  getCapodannoLocalizedCategoryTitle,
+  getCapodannoLocalizedEventSubtitle,
+  getCapodannoLocalizedEventTitle,
+} from '@/lib/capodanno/i18n';
+import {
+  capodannoCategoryHreflangAlternates,
+  capodannoCategoryPath,
+  capodannoCategorySlug,
+  capodannoEventHreflangAlternates,
+  capodannoEventPath,
+  capodannoEventSlug,
+  resolveCapodannoCategoryIdByLocalizedSlug,
+  resolveCapodannoEventBaseSlugByLocalizedSlug,
+} from '@/lib/capodanno/routes';
+import HalloweenHub, { halloweenMetadata } from '@/components/HalloweenHub';
+import { halloweenNavigation } from '@/lib/halloween/routes';
+import OctoberEventPage from '@/components/OctoberEventPage';
+import { getOctoberEventBySlug } from '@/lib/octoberEvents';
+import { octoberEventMetadata } from '@/lib/octoberEventSeo';
+import EditorialPageSections from '@/components/EditorialPageSections';
+import { seoRobots } from '@/lib/seoMetadata';
 import { notFound, permanentRedirect } from 'next/navigation';
 import { tr } from '@/lib/i18n/t';
 import { getLocaleDef, hreflangAlternates, indexedLocaleCodes, localePrefix, type LocaleCode } from '@/lib/i18n/locales';
@@ -132,8 +160,94 @@ export async function generateStaticParams() {
 }
 
 // Generate Dynamic SEO Metadata
+
+function buildCapodannoCategoryMetadata(catId: string, locale: string): Metadata {
+  const def = getCapodannoCategoryPageDef(catId);
+  const modeEvents = getCapodannoEventsForMode(catId);
+  const eventsCount = modeEvents.length;
+  const heroImage = modeEvents[0]?.image || '/images/just-me-milano.webp';
+  const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
+  const canonical = `${baseUrl}${capodannoCategoryPath(catId, locale)}`;
+  const rawTitle = getCapodannoLocalizedCategoryTitle(def, locale, eventsCount);
+  const title = cleanCapodannoSeoTitle(rawTitle, 62);
+  const rawSummary = getCapodannoLocalizedCategorySubtitle(def, locale, eventsCount);
+  const description = buildCapodannoMetaDescription(rawSummary, locale);
+  return {
+    title,
+    description,
+    robots: seoRobots(locale, true, true),
+    alternates: {
+      canonical,
+      languages: capodannoCategoryHreflangAlternates(baseUrl, catId),
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      type: 'website',
+      siteName: 'Nightlife Milan',
+      locale: getLocaleDef(locale)?.ogLocale || 'en_US',
+      images: [{ url: `${baseUrl}${heroImage}`, width: 1200, height: 630, alt: title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [`${baseUrl}${heroImage}`],
+    },
+  };
+}
+
+function buildCapodannoEventMetadata(baseSlug: string, locale: string): Metadata {
+  const event = getCapodannoEventBySlug(baseSlug);
+  if (!event) return {};
+  const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
+  const canonical = `${baseUrl}${capodannoEventPath(event.slug, locale)}`;
+  const rawTitle = getCapodannoLocalizedEventTitle(event, locale);
+  const title = cleanCapodannoSeoTitle(rawTitle, 62);
+  const rawSummary = getCapodannoLocalizedEventSubtitle(event, locale);
+  const description = buildCapodannoMetaDescription(rawSummary, locale);
+  return {
+    title,
+    description,
+    robots: seoRobots(locale, true, true),
+    alternates: {
+      canonical,
+      languages: capodannoEventHreflangAlternates(baseUrl, event.slug),
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      type: 'website',
+      siteName: 'Nightlife Milan',
+      locale: getLocaleDef(locale)?.ogLocale || 'en_US',
+      images: [{ url: `${baseUrl}${event.image}`, width: 1200, height: 630, alt: title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [`${baseUrl}${event.image}`],
+    },
+  };
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
+  if (slug === halloweenNavigation(locale).slug) return halloweenMetadata(locale as LocaleCode);
+  const capCatId = resolveCapodannoCategoryIdByLocalizedSlug(slug, locale);
+  if (capCatId) {
+    if (slug !== capodannoCategorySlug(capCatId, locale)) permanentRedirect(capodannoCategoryPath(capCatId, locale));
+    return buildCapodannoCategoryMetadata(capCatId, locale);
+  }
+  const capEvSlug = resolveCapodannoEventBaseSlugByLocalizedSlug(slug, locale);
+  if (capEvSlug) {
+    if (slug !== capodannoEventSlug(capEvSlug, locale)) permanentRedirect(capodannoEventPath(capEvSlug, locale));
+    return buildCapodannoEventMetadata(capEvSlug, locale);
+  }
+  const octoberEvent = getOctoberEventBySlug(slug, locale as LocaleCode);
+  if (octoberEvent) return octoberEventMetadata(octoberEvent, locale as LocaleCode);
   const requestedProfile = getEventBatchProfile(slug);
   if (requestedProfile?.siteLocales && !requestedProfile.siteLocales.some((siteLocale) => siteLocale === locale)) {
     const targetLocale = requestedProfile.siteLocales[0];
@@ -291,6 +405,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function EventPage({ params }: Props) {
   const { locale, slug } = await params;
+  if (slug === halloweenNavigation(locale).slug) return <HalloweenHub locale={locale as LocaleCode} />;
+  const capCatId = resolveCapodannoCategoryIdByLocalizedSlug(slug, locale);
+  if (capCatId) {
+    if (slug !== capodannoCategorySlug(capCatId, locale)) permanentRedirect(capodannoCategoryPath(capCatId, locale));
+    return <CapodannoHubView locale={locale} mode={capCatId} canonicalPath={capodannoCategoryPath(capCatId, locale)} />;
+  }
+  const capEvSlug = resolveCapodannoEventBaseSlugByLocalizedSlug(slug, locale);
+  if (capEvSlug) {
+    if (slug !== capodannoEventSlug(capEvSlug, locale)) permanentRedirect(capodannoEventPath(capEvSlug, locale));
+    const capEv = getCapodannoEventBySlug(capEvSlug);
+    if (!capEv) notFound();
+    return <CapodannoDetailView locale={locale} event={capEv} />;
+  }
+  const octoberEvent = getOctoberEventBySlug(slug, locale as LocaleCode);
+  if (octoberEvent) return <OctoberEventPage event={octoberEvent} locale={locale as LocaleCode} initialNow={new Date().toISOString()}>
+    <EditorialPageSections locale={locale as LocaleCode} path={`${localePrefix(locale)}/events/${slug}`} />
+  </OctoberEventPage>;
   const requestedProfile = getEventBatchProfile(slug);
   if (requestedProfile?.siteLocales && !requestedProfile.siteLocales.some((siteLocale) => siteLocale === locale)) {
     const targetLocale = requestedProfile.siteLocales[0];

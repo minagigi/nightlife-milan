@@ -1,0 +1,177 @@
+{
+  "locale": "ro",
+  "city": "Milano",
+  "titleTemplate": "{venue}: {event} — {date}",
+  "metaTitleTemplate": "{venue} {event} {shortDate}",
+  "metaDescriptionTemplate": "{venue}, {shortDate}: {event}. {age}; {music}; {dressCode}.",
+  "introduction": "{event}. Evenimentul începe la data de {date}, la {venue}. Intervalul publicat este {time}, în fusul orar al orașului {city}. Locul este {venue}, la adresa {address}, {city}. Genuri indicate de local: {music}. Vârsta minimă: {age}. Ținuta cerută: {dressCode}.",
+  "headings": {
+    "overview": "{event} la {venue}: data și programul",
+    "booking": "Bilete și mese pentru {event} la {city}",
+    "faq": "Întrebări despre {event} la {venue}"
+  },
+  "sections": [
+    {
+      "id": "event",
+      "heading": "{event}: evenimentul din calendarul orașului {city}",
+      "body": "Numele publicat este {event}, la data de {date}. Folosește împreună numele, data și {venue} pentru a deosebi această seară de alte date sau localuri. Evenimentul începe la data de {date}, la {venue}. Genuri indicate de local: {music}."
+    },
+    {
+      "id": "programme",
+      "heading": "Evenimentul {event}: ora deschiderii și a încheierii",
+      "body": "Intervalul publicat este {time}, cu închiderea în data de {endDate}. Consideră, așadar, {date} drept data de început, chiar dacă întoarcerea are loc după miezul nopții. Deschiderea te ajută să planifici sosirea, dar nu este ora confirmată a setului. Dacă vrei să urmărești un anumit moment, cere informații concierge-ului fără a presupune un program nepublicat."
+    },
+    {
+      "id": "venue",
+      "heading": "{venue}, {address}",
+      "body": "Locul este {venue}, la adresa {address}, {city}. Păstrează adresa când trimiți programul prietenilor: alte seri pot avea nume asemănătoare, dar se pot desfășura în altă parte. Fotografiile din galerie arată spațiile localului și te ajută să îl recunoști; nu documentează seara viitoare și nici amplasarea unei mese atribuite."
+    },
+    {
+      "id": "arrival",
+      "heading": "Cum să organizezi sosirea și întoarcerea în {city}",
+      "body": "Setează destinația la {address} și verifică traseul din locul în care te afli. Alocă timp pentru întâlnirea cu grupul și pentru controlul la intrare. Pentru întoarcerea după miezul nopții, verifică orarele transportului la data corectă, fără a presupune existența unui serviciu de noapte. Pagina nu include transferuri sau parcare rezervată în prețul biletului."
+    },
+    {
+      "id": "tickets",
+      "heading": "Bilete {event} {city}: oferte și preț",
+      "body": "{admissionSummary}"
+    },
+    {
+      "id": "tables",
+      "heading": "Mese pentru {event} la {venue} prin WhatsApp",
+      "body": "{tableSummary}"
+    },
+    {
+      "id": "admission",
+      "heading": "Acces la {venue}: vârstă și ținută",
+      "body": "Pentru această dată, pragul de vârstă este {age}, iar ținuta cerută este {dressCode}. Comunică aceste condiții grupului înainte de cumpărare. Ia un act valabil pentru verificarea vârstei; pentru nelămuriri privind actele acceptate sau accesibilitatea, cere confirmare înainte de plecare. O conversație pe WhatsApp nu înlocuiește titlul de acces cumpărat."
+    },
+    {
+      "id": "planning",
+      "heading": "Confirmarea cumpărării și pregătirea serii",
+      "body": "Dacă ai cumpărat accesul, trimite confirmarea cumpărării pe WhatsApp la +39 351 912 7047, cu numele, evenimentul și numărul de persoane. Păstrează și documentul original."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Când are loc {event} la {city}?",
+      "answer": "Evenimentul începe la data de {date}, la {venue}. Închiderea este după miezul nopții, în data de {endDate}; folosește data de început pentru a găsi biletul corect."
+    },
+    {
+      "question": "Unde are loc evenimentul {event}?",
+      "answer": "Locul este {venue}, la adresa {address}, {city}. Verifică această adresă când organizezi călătoria sau trimiți grupului punctul de întâlnire."
+    },
+    {
+      "question": "Care este programul serii?",
+      "answer": "Intervalul publicat este {time}, în fusul orar al orașului {city}. El indică deschiderea și închiderea evenimentului, nu ora unei apariții individuale."
+    },
+    {
+      "question": "Care este numele complet al evenimentului?",
+      "answer": "Numele publicat este {event}, la data de {date}. Folosește împreună numele, data și {venue} pentru a deosebi această seară de alte date sau localuri."
+    },
+    {
+      "question": "Genuri indicate de local?",
+      "answer": "{music}"
+    },
+    {
+      "question": "De unde cumpăr bilete pentru {event}?",
+      "answer": "{admissionSummary}"
+    },
+    {
+      "question": "Cât costă accesul la {event} în {city}?",
+      "answer": "{admissionSummary} Tranșele anterioare pot fi epuizate."
+    },
+    {
+      "question": "De ce unele oferte au prețuri mai mici?",
+      "answer": "Tranșele anterioare pot fi epuizate. Pagina le separă de ofertele disponibile la verificare; un preț vechi nu garantează că formula mai poate fi cumpărată."
+    },
+    {
+      "question": "Biletul include o băutură?",
+      "answer": "Verifică denumirea exactă și includerile declarate ale opțiunii alese. Nu transfera includerile de la o ofertă la alta."
+    },
+    {
+      "question": "Cum cer o masă pentru {event}?",
+      "answer": "Scrie pe WhatsApp la +39 351 912 7047 și precizează evenimentul, data și numărul de invitați. Nightlife Milan te ajută cu cererea; disponibilitatea și condițiile trebuie confirmate."
+    },
+    {
+      "question": "Unde găsesc prețurile meselor?",
+      "answer": "{tableSummary} Cere concierge-ului să confirme pachetul și ceea ce include pentru grup."
+    },
+    {
+      "question": "Prețul mesei este de persoană?",
+      "answer": "{tableSummary} Nu îl interpreta automat ca preț individual."
+    },
+    {
+      "question": "WhatsApp confirmă automat rezervarea?",
+      "answer": "Nu. Mesajul este o cerere de informații sau rezervare. Așteaptă confirmarea condițiilor și urmează instrucțiunile primite; conversația singură nu este titlu de acces."
+    },
+    {
+      "question": "Ce trebuie să fac după cumpărarea accesului?",
+      "answer": "Dacă ai cumpărat accesul, trimite confirmarea cumpărării pe WhatsApp la +39 351 912 7047, cu numele, evenimentul și numărul de persoane. Păstrează și documentul original."
+    },
+    {
+      "question": "Care este vârsta minimă pentru {event}?",
+      "answer": "Pragul publicat pentru această seară este {age}. Este o condiție de acces pentru această dată, nu o indicație a vârstei medii a publicului."
+    },
+    {
+      "question": "Trebuie să aduc un act de identitate?",
+      "answer": "Ia un act valabil pentru verificarea vârstei. Pentru a afla ce documente sunt acceptate într-o situație concretă, cere confirmare localului înainte de eveniment."
+    },
+    {
+      "question": "Care este ținuta cerută la {venue}?",
+      "answer": "Ținuta indicată este {dressCode}. Transmite informația grupului și cere detalii înainte de plecare dacă ai nelămuriri despre un articol vestimentar sau o condiție."
+    },
+    {
+      "question": "Există o formulă de aperitiv?",
+      "answer": "{aperitifSummary}"
+    },
+    {
+      "question": "Cum ajung la {venue}?",
+      "answer": "Folosește {address}, {city}, ca destinație. Alege traseul în funcție de punctul de plecare și verifică transportul atât la dus, cât și la întors."
+    },
+    {
+      "question": "Sunt incluse parcarea sau transferurile?",
+      "answer": "Pagina nu prezintă parcare rezervată ori transferuri ca servicii incluse. Organizează-le separat și verifică disponibilitatea și condițiile cu furnizorul ales."
+    },
+    {
+      "question": "Cum verific condițiile de accesibilitate?",
+      "answer": "Contactează concierge-ul înainte de cumpărare și descrie nevoia concretă. Accesul, traseul interior și locul trebuie confirmate specific; fotografiile nu le pot garanta."
+    },
+    {
+      "question": "Cum recunosc evenimentul corect?",
+      "answer": "Compară numele complet {event}, data {date} și locația {venue}. Abrevierea din titlu nu înlocuiește aceste date și nu oferă acces la alte evenimente."
+    },
+    {
+      "question": "Pot organiza seara pentru un grup?",
+      "answer": "Cere informații Nightlife Milan și precizează numărul de persoane și data. Spune dacă dorești acces individual sau o masă, deoarece formulele au condiții diferite."
+    },
+    {
+      "question": "Pot ieși din local și reintra?",
+      "answer": "Posibilitatea de reintrare nu este confirmată de informațiile de aici. Întreabă personalul localului și consultă termenii accesului tău înainte să ieși."
+    },
+    {
+      "question": "Care sunt condițiile de modificare sau rambursare?",
+      "answer": "Depind de oferta cumpărată și de termenii comenzii. Înainte de plată, verifică data, numele ofertei și condițiile de cumpărare. Pagina nu promite modificări sau rambursări automate."
+    }
+  ],
+  "labels": {
+    "tickets": "Cumpără accesul pe Xceed",
+    "tables": "Solicită o masă pe WhatsApp",
+    "offers": "Formule de acces și mese",
+    "gallery": "Imagini din {venue}",
+    "programme": "Program și orar",
+    "related": "Alte evenimente importante la {city}",
+    "map": "Indicații către local",
+    "minimumAge": "Vârsta minimă",
+    "music": "Genuri indicate de local",
+    "dressCode": "Ținuta cerută",
+    "sourceChecked": "Ultima verificare a ofertelor",
+    "inquiry": "Întreabă concierge-ul despre opțiunile actuale — WhatsApp"
+  },
+  "noAdmission": "Nu este publicată nicio opțiune de acces pentru acest eveniment. Întreabă concierge-ul despre opțiunile actuale.",
+  "noTables": "Nu este publicat niciun pachet de masă pentru acest eveniment. Un mesaj WhatsApp inițiază o solicitare și nu confirmă disponibilitatea sau rezervarea.",
+  "noAperitif": "Nu este publicată nicio opțiune de aperitiv pentru acest eveniment.",
+  "hasAdmission": "Folosește linkul Xceed din această pagină, dedicat evenimentului {event}. Înainte de plată, verifică data, numele ofertei și condițiile de cumpărare. Cel mai mic preț de acces disponibil la ultima verificare este {price}. Ofertele se pot schimba; prețul efectiv este cel al formulei selectate și confirmate pe Xceed.",
+  "hasTables": "Scrie pe WhatsApp la +39 351 912 7047 și precizează evenimentul, data și numărul de invitați. Nightlife Milan te ajută cu cererea; disponibilitatea și condițiile trebuie confirmate.",
+  "hasAperitif": "Este publicată o opțiune de aperitiv. Verifică starea actuală, orele și includerile exacte înainte de a o alege."
+}

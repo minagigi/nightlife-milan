@@ -1,0 +1,177 @@
+{
+  "locale": "ga",
+  "city": "Milano",
+  "titleTemplate": "{venue}: {event} — {date}",
+  "metaTitleTemplate": "{venue} {event} {shortDate}",
+  "metaDescriptionTemplate": "{venue}, {shortDate}: {event}. {age}; {music}; {dressCode}.",
+  "introduction": "{event}. Tosóidh an ócáid ar {date} ag {venue}. Is é {time} an tréimhse fhoilsithe, de réir amchrios {city}. Is é {venue} an t-ionad, ag {address}, {city}. Seánraí a luaigh an t-ionad: {music}. Aois íosta: {age}. Cód feistis: {dressCode}.",
+  "headings": {
+    "overview": "{event} ag {venue}: dáta agus clár",
+    "booking": "Ticéid agus boird do {event} i {city}",
+    "faq": "Ceisteanna coitianta faoi {event} ag {venue}"
+  },
+  "sections": [
+    {
+      "id": "event",
+      "heading": "{event}: an ócáid i bhféilire {city}",
+      "body": "Is é {event} an t-ainm foilsithe, ar an dáta {date}. Úsáid an t-ainm, an dáta agus {venue} le chéile chun an oíche seo a idirdhealú ó dhátaí nó ionaid eile. Tosóidh an ócáid ar {date} ag {venue}. Seánraí a luaigh an t-ionad: {music}."
+    },
+    {
+      "id": "programme",
+      "heading": "Ócáid {event}: am oscailte agus dúnta",
+      "body": "Is é {time} an tréimhse fhoilsithe, agus dúnfar an ócáid ar {endDate}. Mar sin, bain úsáid as {date} mar dháta tosaigh, fiú má fhilleann tú tar éis meán oíche. Cabhraíonn an t-am oscailte leat do theacht a eagrú; ní am deimhnithe don seit é. Más mian leat a bheith ann ag tráth ar leith, iarr eolas ar an concierge gan glacadh le clár ama nár foilsíodh."
+    },
+    {
+      "id": "venue",
+      "heading": "{venue}, {address}",
+      "body": "Is é {venue} an t-ionad, ag {address}, {city}. Coinnigh an seoladh agus an clár á roinnt agat le cairde: d’fhéadfadh ainmneacha comhchosúla a bheith ar oícheanta eile ach iad a bheith ar siúl in áiteanna eile. Taispeánann grianghraif an ghailearaí spásanna an ionaid agus cabhraíonn siad leat é a aithint; ní dhéanann siad an oíche amach anseo ná suíomh boird leithdháilte a thaifeadadh."
+    },
+    {
+      "id": "arrival",
+      "heading": "Conas teacht agus filleadh i {city} a eagrú",
+      "body": "Socraigh {address} mar cheann scríbe agus seiceáil an bealach ó do shuíomh. Fág am chun bualadh leis an ngrúpa agus dul trí na seiceálacha iontrála. Chun filleadh tar éis meán oíche, seiceáil amchláir iompair an dáta cheart agus ná glac leis go mbeidh seirbhís oíche ann. Ní chuimsíonn praghas an ticéid aistrithe ná páirceáil fhorchoimeádta ar an leathanach seo."
+    },
+    {
+      "id": "tickets",
+      "heading": "Ticéid {event} {city}: tairiscintí agus praghas",
+      "body": "{admissionSummary}"
+    },
+    {
+      "id": "tables",
+      "heading": "Boird do {event} ag {venue} ar WhatsApp",
+      "body": "{tableSummary}"
+    },
+    {
+      "id": "admission",
+      "heading": "Cead isteach chuig {venue}: aois agus cód feistis",
+      "body": "Don dáta seo is é {age} an tairseach iontrála agus is é {dressCode} an cód feistis. Roinn na coinníollacha seo leis an ngrúpa roimh cheannach. Tabhair doiciméad bailí chun aois a fhíorú; má tá ceist agat faoi dhoiciméid inghlactha nó faoi riachtanais inrochtaineachta, iarr deimhniú sula n-imíonn tú. Ní hionann comhrá WhatsApp agus ticéad cead isteach ceannaithe."
+    },
+    {
+      "id": "planning",
+      "heading": "Deimhniú ceannaigh agus ullmhú don oíche",
+      "body": "Má cheannaigh tú iontráil, seol an deimhniú ceannaigh ar WhatsApp chuig +39 351 912 7047, le hainm, ócáid agus líon na ndaoine. Coinnigh an doiciméad bunaidh ceannaigh freisin."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Cathain a bheidh {event} ar siúl i {city}?",
+      "answer": "Tosóidh an ócáid ar {date} ag {venue}. Críochnóidh sí tar éis meán oíche, ar {endDate}: bain úsáid as an dáta tosaigh chun an ticéad ceart a aimsiú."
+    },
+    {
+      "question": "Cá mbeidh an ócáid {event} ar siúl?",
+      "answer": "Is é {venue} an t-ionad, ag {address}, {city}. Seiceáil an seoladh seo agus do thuras á eagrú agat nó agus pointe cruinnithe á roinnt agat leis an ngrúpa."
+    },
+    {
+      "question": "Cad iad uaireanta na hoíche?",
+      "answer": "Is é {time} an tréimhse fhoilsithe, de réir amchrios {city}. Léiríonn sí oscailt agus dúnadh na hócáide, ní am léirithe aonair."
+    },
+    {
+      "question": "Cad é ainm iomlán na hócáide?",
+      "answer": "Is é {event} an t-ainm foilsithe, ar an dáta {date}. Úsáid an t-ainm, an dáta agus {venue} le chéile chun an oíche seo a idirdhealú ó dhátaí nó ionaid eile."
+    },
+    {
+      "question": "Seánraí a luaigh an t-ionad?",
+      "answer": "{music}"
+    },
+    {
+      "question": "Cá háit ar féidir ticéid do {event} a cheannach?",
+      "answer": "{admissionSummary}"
+    },
+    {
+      "question": "Cé mhéad atá ar chead isteach do {event} i {city}?",
+      "answer": "{admissionSummary} D’fhéadfadh leibhéil níos luaithe a bheith díolta amach."
+    },
+    {
+      "question": "Cén fáth a bhfuil praghsanna níos ísle ar roinnt tairiscintí?",
+      "answer": "D’fhéadfadh leibhéil níos luaithe a bheith díolta amach. Déanann an leathanach idirdhealú eatarthu agus na tairiscintí a bhí ar fáil ag an tseiceáil: ní ráthaíonn seanphraghas go bhfuil an fhoirmle fós le ceannach."
+    },
+    {
+      "question": "An bhfuil deoch san áireamh sa ticéad?",
+      "answer": "Seiceáil ainm cruinn agus nithe sonraithe na rogha a roghnaíodh. Ná cuir nithe ó thairiscint amháin i leith tairisceana eile."
+    },
+    {
+      "question": "Conas is féidir bord do {event} a iarraidh?",
+      "answer": "Scríobh ar WhatsApp chuig +39 351 912 7047 agus luaigh an ócáid, an dáta agus líon na n-aíonna. Cabhróidh Nightlife Milan leis an iarratas; ní mór infhaighteacht agus coinníollacha a dheimhniú."
+    },
+    {
+      "question": "Cá bhfaighidh mé praghsanna na mbord?",
+      "answer": "{tableSummary} Iarr ar an concierge an pacáiste agus a bhfuil ann don ghrúpa a dheimhniú."
+    },
+    {
+      "question": "An praghas in aghaidh an duine é praghas an bhoird?",
+      "answer": "{tableSummary} Ná glac leis gur suim aonair é."
+    },
+    {
+      "question": "An ndeimhníonn WhatsApp an áirithint go huathoibríoch?",
+      "answer": "Ní dheimhníonn. Iarratas ar fhaisnéis nó ar áirithint atá sa teachtaireacht. Fan le deimhniú na gcoinníollacha agus lean na treoracha; ní ticéad cead isteach é an comhrá amháin."
+    },
+    {
+      "question": "Cad ba cheart dom a dhéanamh tar éis iontráil a cheannach?",
+      "answer": "Má cheannaigh tú iontráil, seol an deimhniú ceannaigh ar WhatsApp chuig +39 351 912 7047, le hainm, ócáid agus líon na ndaoine. Coinnigh an doiciméad bunaidh ceannaigh freisin."
+    },
+    {
+      "question": "Cad é an aois íosta do {event}?",
+      "answer": "Is é {age} an tairseach aoise fhoilsithe don oíche seo. Is riachtanas iontrála don dáta í, ní léiriú ar mheánaois an lucht freastail."
+    },
+    {
+      "question": "An gá dom doiciméad aitheantais a thabhairt?",
+      "answer": "Tabhair doiciméad bailí chun aois a fhíorú. Chun a fháil amach cad iad na doiciméid a nglactar leo i gcás ar leith, iarr deimhniú ar an ionad roimh an oíche."
+    },
+    {
+      "question": "Cad é cód feistis {venue}?",
+      "answer": "Is é {dressCode} an cód feistis a luaitear. Roinn é leis an ngrúpa agus iarr soiléiriú sula n-imíonn tú má tá amhras agat faoi bhall éadaigh nó coinníoll ar leith."
+    },
+    {
+      "question": "An bhfuil foirmle aperitivo ar fáil?",
+      "answer": "{aperitifSummary}"
+    },
+    {
+      "question": "Conas a shroichfidh mé {venue}?",
+      "answer": "Úsáid {address}, {city}, mar cheann scríbe. Roghnaigh an bealach de réir do phointe tosaigh agus seiceáil iompar don turas amach agus don fhilleadh."
+    },
+    {
+      "question": "An bhfuil páirceáil nó aistrithe san áireamh?",
+      "answer": "Ní chuireann an leathanach seo páirceáil fhorchoimeádta ná aistrithe i láthair mar sheirbhísí atá san áireamh. Eagraigh iad ar leithligh agus seiceáil infhaighteacht agus coinníollacha leis an soláthraí roghnaithe."
+    },
+    {
+      "question": "Conas a sheiceálfaidh mé coinníollacha inrochtaineachta?",
+      "answer": "Déan teagmháil leis an concierge roimh cheannach agus mínigh an riachtanas sonrach. Teastaíonn deimhniú ar leith don rochtain, don bhealach istigh agus don socrú; ní leor grianghraif chun iad a ráthú."
+    },
+    {
+      "question": "Conas a aithneoidh mé an oíche cheart ?",
+      "answer": "Cuir an t-ainm iomlán {event}, an dáta {date} agus an t-ionad {venue} i gcomparáid. Ní ghlacann an giorrúchán sa teideal ionad na sonraí seo agus ní thugann sé rochtain ar imeachtaí eile."
+    },
+    {
+      "question": "An féidir liom an oíche a eagrú do ghrúpa?",
+      "answer": "Iarr eolas ar Nightlife Milan agus luaigh líon na ndaoine agus an dáta. Sonraigh an bhfuil ticéid aonair nó bord uait, mar tá coinníollacha éagsúla ag na foirmlí."
+    },
+    {
+      "question": "An féidir liom imeacht ón ionad agus filleadh isteach?",
+      "answer": "Níl athiontráil deimhnithe ag an bhfaisnéis anseo. Fiafraigh d’fhoireann an ionaid agus seiceáil coinníollacha do chead isteach sula n-imíonn tú."
+    },
+    {
+      "question": "Cad iad na coinníollacha athraithe nó aisíocaíochta?",
+      "answer": "Braitheann siad ar an tairiscint a ceannaíodh agus ar choinníollacha an ordaithe. Roimh íoc, seiceáil an dáta, ainm na tairisceana agus na coinníollacha ceannaigh. Ní gheallann an leathanach seo athruithe ná aisíocaíochtaí uathoibríocha."
+    }
+  ],
+  "labels": {
+    "tickets": "Ceannaigh cead isteach ar Xceed",
+    "tables": "Iarr bord ar WhatsApp",
+    "offers": "Foirmlí cead isteach agus boird",
+    "gallery": "Íomhánna de {venue}",
+    "programme": "Clár agus amanna",
+    "related": "Imeachtaí tábhachtacha eile i {city}",
+    "map": "Treoracha chuig an ionad",
+    "minimumAge": "Aois íosta",
+    "music": "Seánraí a luaigh an t-ionad",
+    "dressCode": "Cód feistis",
+    "sourceChecked": "Seiceáil dheireanach na dtairiscintí",
+    "inquiry": "Fiafraigh den concierge faoi na roghanna reatha — WhatsApp"
+  },
+  "noAdmission": "Níl rogha iontrála foilsithe don imeacht seo. Fiafraigh den concierge faoi na roghanna reatha.",
+  "noTables": "Níl pacáiste boird foilsithe don imeacht seo. Cuireann teachtaireacht WhatsApp tús le fiosrú agus ní dhearbhaíonn sí infhaighteacht ná áirithint.",
+  "noAperitif": "Níl rogha apéritif foilsithe don imeacht seo.",
+  "hasAdmission": "Úsáid an nasc Xceed ar an leathanach seo atá tiomnaithe do {event}. Roimh íoc, seiceáil an dáta, ainm na tairisceana agus na coinníollacha ceannaigh. Ba é {price} an praghas cead isteach ab ísle a bhí ar fáil ag an tseiceáil dheireanach. D’fhéadfadh tairiscintí athrú: is é praghas na foirmle a roghnaítear agus a dheimhnítear ar Xceed an praghas iarbhír.",
+  "hasTables": "Scríobh ar WhatsApp chuig +39 351 912 7047 agus luaigh an ócáid, an dáta agus líon na n-aíonna. Cabhróidh Nightlife Milan leis an iarratas; ní mór infhaighteacht agus coinníollacha a dheimhniú.",
+  "hasAperitif": "Tá rogha apéritif foilsithe. Seiceáil a stádas reatha, na hamanna agus na nithe beachta atá san áireamh sula roghnaíonn tú é."
+}

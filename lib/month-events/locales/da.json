@@ -1,0 +1,177 @@
+{
+  "locale": "da",
+  "city": "Milano",
+  "titleTemplate": "{venue}: {event} — {date}",
+  "metaTitleTemplate": "{venue} {event} {shortDate}",
+  "metaDescriptionTemplate": "{venue}, {shortDate}: {event}. {age}; {music}; {dressCode}.",
+  "introduction": "{event}. Arrangementet begynder den {date} på {venue}. Det offentliggjorte tidsrum er {time} i {city}s tidszone. Stedet er {venue} på {address}, {city}. Genrer angivet af stedet: {music}. Minimumsalder: {age}. Dresscode: {dressCode}.",
+  "headings": {
+    "overview": "{event} på {venue}: dato og program",
+    "booking": "Billetter og borde til {event} i {city}",
+    "faq": "Ofte stillede spørgsmål om {event} på {venue}"
+  },
+  "sections": [
+    {
+      "id": "event",
+      "heading": "{event}: arrangementet i {city}s kalender",
+      "body": "Det offentliggjorte navn er {event} på datoen {date}. Brug navn, dato og {venue} sammen for at skelne aftenen fra andre datoer eller steder. Arrangementet begynder den {date} på {venue}. Genrer angivet af stedet: {music}."
+    },
+    {
+      "id": "programme",
+      "heading": "Arrangementet {event}: åbnings- og sluttid",
+      "body": "Det offentliggjorte tidsrum er {time}, og arrangementet slutter den {endDate}. Brug derfor {date} som startdato, også selv om du kommer hjem efter midnat. Åbningstiden hjælper dig med at planlægge ankomsten; den er ikke et bekræftet tidspunkt for sættet. Hvis du vil opleve et bestemt tidspunkt, kan du spørge conciergen uden at antage en programplan, som ikke er offentliggjort."
+    },
+    {
+      "id": "venue",
+      "heading": "{venue}, {address}",
+      "body": "Stedet er {venue} på {address}, {city}. Behold adressen, når du deler programmet med venner: andre aftener kan have lignende navne, men finde sted et andet sted. Billederne i galleriet viser stedets områder og hjælper dig med at genkende det; de dokumenterer ikke den kommende aften eller placeringen af et tildelt bord."
+    },
+    {
+      "id": "arrival",
+      "heading": "Sådan planlægger du ankomst og hjemrejse i {city}",
+      "body": "Indstil {address} som destination, og kontrollér ruten fra din placering. Afsæt tid til at mødes med gruppen og til kontrollen ved indgangen. Tjek transporttiderne for den korrekte dato til hjemrejsen efter midnat, og gå ikke ud fra, at der er natdrift. Siden inkluderer ikke transport eller reserveret parkering i billetprisen."
+    },
+    {
+      "id": "tickets",
+      "heading": "Billetter til {event} i {city}: tilbud og pris",
+      "body": "{admissionSummary}"
+    },
+    {
+      "id": "tables",
+      "heading": "Borde til {event} på {venue} via WhatsApp",
+      "body": "{tableSummary}"
+    },
+    {
+      "id": "admission",
+      "heading": "Adgang til {venue}: alder og dresscode",
+      "body": "Til denne dato er aldersgrænsen {age}, og dresscoden er {dressCode}. Del vilkårene med gruppen inden køb. Medbring gyldig legitimation til alderskontrol; få en bekræftelse inden afgang, hvis du har spørgsmål om accepterede dokumenter eller tilgængelighedsbehov. En WhatsApp-samtale er ikke det samme som en købt adgangsbillet."
+    },
+    {
+      "id": "planning",
+      "heading": "Købsbekræftelse og forberedelse til aftenen",
+      "body": "Hvis du har købt entré, send købsbekræftelsen på WhatsApp til +39 351 912 7047 med navn, arrangement og antal personer. Gem også det originale købsdokument."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Hvornår finder {event} sted i {city}?",
+      "answer": "Arrangementet begynder den {date} på {venue}. Det slutter efter midnat, den {endDate}; brug startdatoen, når du søger efter den rigtige billet."
+    },
+    {
+      "question": "Hvor finder arrangementet {event} sted?",
+      "answer": "Stedet er {venue} på {address}, {city}. Kontrollér adressen, når du planlægger rejsen eller deler mødestedet med gruppen."
+    },
+    {
+      "question": "Hvilke tider gælder for aftenen?",
+      "answer": "Det offentliggjorte tidsrum er {time} i {city}s tidszone. Det angiver arrangementets åbning og lukning, ikke tidspunktet for en enkelt optræden."
+    },
+    {
+      "question": "Hvad er arrangementets fulde navn?",
+      "answer": "Det offentliggjorte navn er {event} på datoen {date}. Brug navn, dato og {venue} sammen for at skelne aftenen fra andre datoer eller steder."
+    },
+    {
+      "question": "Genrer angivet af stedet?",
+      "answer": "{music}"
+    },
+    {
+      "question": "Hvor kan man købe billetter til {event}?",
+      "answer": "{admissionSummary}"
+    },
+    {
+      "question": "Hvad koster adgang til {event} i {city}?",
+      "answer": "{admissionSummary} Tidligere prisniveauer kan være udsolgt."
+    },
+    {
+      "question": "Hvorfor har nogle tilbud lavere priser?",
+      "answer": "Tidligere prisniveauer kan være udsolgt. Siden skelner dem fra de tilbud, der var tilgængelige ved kontrollen: en gammel pris garanterer ikke, at pakken stadig kan købes."
+    },
+    {
+      "question": "Er en drink inkluderet i billetten?",
+      "answer": "Kontrollér det præcise navn og det angivne indhold i den valgte mulighed. Overfør ikke indhold fra én mulighed til en anden."
+    },
+    {
+      "question": "Hvordan anmoder jeg om et bord til {event}?",
+      "answer": "Skriv på WhatsApp til +39 351 912 7047 med arrangement, dato og antal gæster. Nightlife Milan hjælper med forespørgslen; tilgængelighed og vilkår skal bekræftes."
+    },
+    {
+      "question": "Hvor finder jeg priserne på borde?",
+      "answer": "{tableSummary} Bed conciergen bekræfte pakken og det, den inkluderer for gruppen."
+    },
+    {
+      "question": "Er bordprisen pr. person?",
+      "answer": "{tableSummary} Fortolk den ikke automatisk som et individuelt beløb."
+    },
+    {
+      "question": "Bekræfter WhatsApp automatisk reservationen?",
+      "answer": "Nej. Beskeden er en informations- eller reservationsforespørgsel. Vent på bekræftelse af vilkårene, og følg de modtagne instruktioner; chatten alene er ikke en adgangsbillet."
+    },
+    {
+      "question": "Hvad skal jeg gøre efter køb af entré?",
+      "answer": "Hvis du har købt entré, send købsbekræftelsen på WhatsApp til +39 351 912 7047 med navn, arrangement og antal personer. Gem også det originale købsdokument."
+    },
+    {
+      "question": "Hvad er minimumsalderen for {event}?",
+      "answer": "Den offentliggjorte aldersgrænse for denne aften er {age}. Det er et adgangskrav for datoen, ikke en angivelse af gennemsnitsalderen blandt gæsterne."
+    },
+    {
+      "question": "Skal jeg medbringe legitimation?",
+      "answer": "Medbring gyldig legitimation til alderskontrol. Spørg stedet inden aftenen for at få bekræftet, hvilke dokumenter der accepteres i en bestemt situation."
+    },
+    {
+      "question": "Hvad er dresscoden på {venue}?",
+      "answer": "Den angivne dresscode er {dressCode}. Del den med gruppen, og bed om en afklaring inden afgang, hvis du er i tvivl om en bestemt beklædningsgenstand eller et vilkår."
+    },
+    {
+      "question": "Findes der en aperitifpakke?",
+      "answer": "{aperitifSummary}"
+    },
+    {
+      "question": "Hvordan kommer jeg til {venue}?",
+      "answer": "Brug {address}, {city}, som destination. Vælg ruten ud fra dit startsted, og kontrollér transporten både ud og hjem."
+    },
+    {
+      "question": "Er parkering eller transport inkluderet?",
+      "answer": "Denne side angiver ikke reserveret parkering eller transport som inkluderede ydelser. Arrangér dem separat, og kontrollér tilgængelighed og vilkår hos den valgte udbyder."
+    },
+    {
+      "question": "Hvordan kontrollerer jeg tilgængelighedsforholdene?",
+      "answer": "Kontakt conciergen inden køb, og beskriv det konkrete behov. Adgang, den indvendige rute og placering kræver særlig bekræftelse; billeder kan ikke garantere dem."
+    },
+    {
+      "question": "Hvordan genkender jeg den rigtige -aften?",
+      "answer": "Sammenlign det fulde navn {event}, datoen {date} og stedet {venue}. Forkortelsen i titlen erstatter ikke disse oplysninger og giver ikke adgang til andre arrangementer."
+    },
+    {
+      "question": "Kan jeg planlægge aftenen for en gruppe?",
+      "answer": "Bed Nightlife Milan om oplysninger, og oplys antal personer og dato. Angiv, om du ønsker individuelle adgange eller et bord, da pakkerne har forskellige vilkår."
+    },
+    {
+      "question": "Kan jeg forlade stedet og komme ind igen?",
+      "answer": "Muligheden for genindgang er ikke bekræftet af oplysningerne her. Spørg stedets personale, og læs vilkårene for din adgang, inden du går ud."
+    },
+    {
+      "question": "Hvad er vilkårene for ændring eller refundering?",
+      "answer": "De afhænger af det købte tilbud og ordrevilkårene. Kontrollér dato, tilbudsnavn og købsvilkår inden betaling. Denne side lover ikke automatiske ændringer eller refunderinger."
+    }
+  ],
+  "labels": {
+    "tickets": "Køb adgang på Xceed",
+    "tables": "Anmod om et bord på WhatsApp",
+    "offers": "Adgangs- og bordpakker",
+    "gallery": "Billeder af {venue}",
+    "programme": "Program og tider",
+    "related": "Andre vigtige arrangementer i {city}",
+    "map": "Rutevejledning til stedet",
+    "minimumAge": "Minimumsalder",
+    "music": "Genrer angivet af stedet",
+    "dressCode": "Dresscode",
+    "sourceChecked": "Seneste kontrol af tilbud",
+    "inquiry": "Spørg conciergen om de aktuelle muligheder — WhatsApp"
+  },
+  "noAdmission": "Der er ikke offentliggjort en entrémulighed til dette arrangement. Spørg conciergen om de aktuelle muligheder.",
+  "noTables": "Der er ikke offentliggjort en bordpakke til dette arrangement. En WhatsApp-besked starter en forespørgsel og bekræfter ikke tilgængelighed eller reservation.",
+  "noAperitif": "Der er ikke offentliggjort en aperitifmulighed til dette arrangement.",
+  "hasAdmission": "Brug Xceed-linket på denne side, som er beregnet til {event}. Kontrollér dato, tilbudsnavn og købsvilkår inden betaling. Den laveste tilgængelige adgangspris ved seneste kontrol er {price}. Tilbuddene kan ændre sig: den faktiske pris er prisen på den pakke, du vælger og bekræfter på Xceed.",
+  "hasTables": "Skriv på WhatsApp til +39 351 912 7047 med arrangement, dato og antal gæster. Nightlife Milan hjælper med forespørgslen; tilgængelighed og vilkår skal bekræftes.",
+  "hasAperitif": "Der er offentliggjort en aperitifmulighed. Tjek dens aktuelle status, tider og præcise indhold, før du vælger."
+}

@@ -1,0 +1,177 @@
+{
+  "locale": "zh",
+  "city": "米兰",
+  "titleTemplate": "{venue}: {event} — {date}",
+  "metaTitleTemplate": "{venue} {event} {shortDate}",
+  "metaDescriptionTemplate": "{venue}, {shortDate}: {event}. {age}; {music}; {dressCode}.",
+  "introduction": "{event}. 活动于 {date} 在 {venue} 开始，并在午夜后的 {endDate} 结束。 公布的时段为{city}时区的 {time}。 场所是 {venue}，地址为{city} {address}。 场所标注的音乐类型: {music}. 最低年龄: {age}. 着装要求: {dressCode}.",
+  "headings": {
+    "overview": "{event} 在 {venue}：日期与活动安排",
+    "booking": "{event} {city}活动门票与桌位",
+    "faq": "{event} 在 {venue} 的常见问题"
+  },
+  "sections": [
+    {
+      "id": "event",
+      "heading": "{event}：{city}活动日程中的这场活动",
+      "body": "公布的名称是 {event}，日期为 {date}。请将名称、日期和 {venue} 一并核对，以区别其他日期或场所的活动。 活动于 {date} 在 {venue} 开始，并在午夜后的 {endDate} 结束。 场所标注的音乐类型: {music}."
+    },
+    {
+      "id": "programme",
+      "heading": "{event} 的活动时间：开门与结束",
+      "body": "公布的时段为 {time}，活动在 {endDate} 结束。因此，即使离场时间在午夜之后，也应将 {date} 视为开始日期。开门时间用于帮助规划到场，并不是艺人演出的确认时间。如果你希望参加某个特定环节，请向礼宾服务询问，不要自行推断尚未公布的流程。"
+    },
+    {
+      "id": "venue",
+      "heading": "{venue}，{address}",
+      "body": "活动场所为 {venue}，地址是{city} {address}。与朋友分享活动安排时请保留完整地址：其他晚间活动可能名称相近，却在不同地点举行。相册照片展示场所空间，便于识别地点；照片并非未来活动的记录，也不代表已分配桌位的位置。"
+    },
+    {
+      "id": "arrival",
+      "heading": "如何规划在{city}的到场与返程",
+      "body": "将 {address} 设为目的地，并从你所在位置核对路线。请预留与团队会合和接受入场检查的时间。午夜后的返程应按正确日期查询交通时刻，不要假定一定有夜间服务。本页所示票价不包含接送或预留停车位。"
+    },
+    {
+      "id": "tickets",
+      "heading": "{event} {city}门票：方案与价格",
+      "body": "{admissionSummary}"
+    },
+    {
+      "id": "tables",
+      "heading": "通过 WhatsApp 预询 {event} 在 {venue} 的桌位",
+      "body": "{tableSummary}"
+    },
+    {
+      "id": "admission",
+      "heading": "{venue} 入场：年龄与着装要求",
+      "body": "该日期的最低入场年龄为 {age}，着装要求为 {dressCode}。购买前请将这些条件告知团队。请携带有效证件接受年龄核验；如对可接受证件或无障碍需求有疑问，应在出发前确认。WhatsApp 对话并不等同于已购买的入场凭证。"
+    },
+    {
+      "id": "planning",
+      "heading": "购票确认与活动准备",
+      "body": "如果你已购买入场资格，请通过 WhatsApp 将购买确认发送至 +39 351 912 7047，并注明姓名、活动和人数。同时保留原始购买凭证。"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "{event} 何时在{city}举行？",
+      "answer": "活动于 {date} 在 {venue} 开始，并在午夜后的 {endDate} 结束。查找正确门票时请使用开始日期。"
+    },
+    {
+      "question": "{event} 的活动在哪里举行？",
+      "answer": "场所是 {venue}，地址为{city} {address}。规划行程或与团队分享集合点时，请核对这一地址。"
+    },
+    {
+      "question": "当晚的活动时间是什么？",
+      "answer": "公布的时段为{city}时区的 {time}。它表示活动开门与结束时间，并不确定某一场演出的时间。"
+    },
+    {
+      "question": "这场活动的全名是什么？",
+      "answer": "公布的名称是 {event}，日期为 {date}。请将名称、日期和 {venue} 一并核对，以区别其他日期或场所的活动。"
+    },
+    {
+      "question": "场所标注的音乐类型？",
+      "answer": "{music}"
+    },
+    {
+      "question": "在哪里购买 {event} 的门票？",
+      "answer": "{admissionSummary}"
+    },
+    {
+      "question": "{event} {city}活动的入场费是多少？",
+      "answer": "{admissionSummary} 较早的价位可能已经售罄。"
+    },
+    {
+      "question": "为什么有些方案价格更低？",
+      "answer": "较早的价位可能已经售罄。本页会将它们与核查时可购的方案区分开；过去的价格不能保证该方案仍可购买。"
+    },
+    {
+      "question": "门票包含一杯饮品吗？",
+      "answer": "请核对所选方案的确切名称和列明的包含内容，不要把一个方案的内容套用到另一个方案。"
+    },
+    {
+      "question": "如何为 {event} 活动申请桌位？",
+      "answer": "通过 WhatsApp 向 +39 351 912 7047 发送活动、日期和宾客人数。Nightlife Milan 会协助提出申请；余位与条件仍需确认。"
+    },
+    {
+      "question": "在哪里查看桌位价格？",
+      "answer": "{tableSummary} 请让礼宾服务确认套餐及其为团队包含的具体内容。"
+    },
+    {
+      "question": "桌位价格是每人价格吗？",
+      "answer": "{tableSummary} 不要自动将其理解为个人价格。"
+    },
+    {
+      "question": "WhatsApp 会自动确认预订吗？",
+      "answer": "不会。消息只是信息或预订申请。请等待条件确认并遵循收到的说明；聊天记录本身不是入场凭证。"
+    },
+    {
+      "question": "购买入场资格后该怎么做？",
+      "answer": "如果你已购买入场资格，请通过 WhatsApp 将购买确认发送至 +39 351 912 7047，并注明姓名、活动和人数。同时保留原始购买凭证。"
+    },
+    {
+      "question": "{event} 的最低年龄是多少？",
+      "answer": "当晚公布的年龄门槛为 {age}。这是该日期的入场条件，并不代表现场观众的平均年龄。"
+    },
+    {
+      "question": "需要携带身份证件吗？",
+      "answer": "请携带有效证件接受年龄核验。如需了解特定情况下可接受哪些证件，请在活动前向场所确认。"
+    },
+    {
+      "question": "{venue} 的着装要求是什么？",
+      "answer": "公布的着装要求为 {dressCode}。请告知团队；如对某件服装或特殊条件有疑问，请在出发前询问。"
+    },
+    {
+      "question": "有开胃酒方案吗？",
+      "answer": "{aperitifSummary}"
+    },
+    {
+      "question": "如何前往 {venue}？",
+      "answer": "请将{city} {address} 设为目的地。根据出发点选择路线，并核对去程与返程交通。"
+    },
+    {
+      "question": "是否包含停车或接送？",
+      "answer": "本页没有将预留停车位或接送列为包含服务。请另行安排，并向所选服务方核实余量和条件。"
+    },
+    {
+      "question": "如何核实无障碍条件？",
+      "answer": "购买前联系礼宾服务并说明具体需求。入口、内部路线和安排都需要单独确认；照片本身不足以提供保证。"
+    },
+    {
+      "question": "如何识别正确的活动？",
+      "answer": "请核对全名 {event}、日期 {date} 和 {venue} 场所。标题中的缩写不能取代这些信息，也不表示可以进入其他活动。"
+    },
+    {
+      "question": "可以为团队组织当晚活动吗？",
+      "answer": "请向 Nightlife Milan 咨询并注明人数与日期。说明需要个人入场票还是桌位，因为不同方案的条件不同。"
+    },
+    {
+      "question": "离开场所后可以再次入场吗？",
+      "answer": "本页信息没有确认可以再次入场。离场前请询问场所工作人员，并查阅你的入场条件。"
+    },
+    {
+      "question": "更改或退款条件是什么？",
+      "answer": "条件取决于所购方案和订单条款。付款前核对日期、方案名称和所示购买条件。本页不承诺自动更改或退款。"
+    }
+  ],
+  "labels": {
+    "tickets": "在 Xceed 购买入场票",
+    "tables": "通过 WhatsApp 申请桌位",
+    "offers": "入场与桌位方案",
+    "gallery": "{venue} 图片",
+    "programme": "活动安排与时间",
+    "related": "{city}其他重要活动",
+    "map": "前往场所的路线",
+    "minimumAge": "最低年龄",
+    "music": "场所标注的音乐类型",
+    "dressCode": "着装要求",
+    "sourceChecked": "方案最近核查时间",
+    "inquiry": "请向礼宾团队询问当前选项 — WhatsApp"
+  },
+  "noAdmission": "此活动未公布入场方案。请向礼宾团队询问当前选项。",
+  "noTables": "此活动未公布桌位套餐。WhatsApp 消息仅发起咨询，不代表有位或预订已确认。",
+  "noAperitif": "此活动未公布开胃酒方案。",
+  "hasAdmission": "请使用本页专门指向 {event} 的 Xceed 链接。付款前核对日期、方案名称和所示购买条件。最近一次核查时，可购入场票的最低价格为 {price}。方案可能变化；实际价格以在 Xceed 选择并确认的方案为准。",
+  "hasTables": "通过 WhatsApp 向 +39 351 912 7047 发送活动、日期和宾客人数。Nightlife Milan 会协助提出申请；余位与条件仍需确认。",
+  "hasAperitif": "已公布开胃酒方案。选择前请核对其当前状态、时间和确切包含内容。"
+}

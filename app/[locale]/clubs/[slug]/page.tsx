@@ -13,6 +13,8 @@ import { generateEventListSchema, getLocalizedText, jsonLdString } from '@/lib/s
 import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
 import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 import { VipQuoteCalculator, EntryFormulaMatrix, SanSiroMatchAfterpartyFinder } from '@/components/NightlifeExpansionModules';
+import EditorialPageSections from '@/components/EditorialPageSections';
+import type { LocaleCode } from '@/lib/i18n/locales';
 
 export const revalidate = 3600;
 
@@ -37,8 +39,8 @@ export async function generateStaticParams() {
 
 const venueTitles: Record<string, { en: string; it: string }> = {
   'v-justme': {
-    en: 'Just Me Milan | Open 7/7 VIP Tables, Prices & Dress Code 2026/2027 | Roberto Cavalli Club',
-    it: 'Just Me Milano | Aperto 7/7 Tavoli VIP, Prezzi & Dress Code 2026/2027 | Club Roberto Cavalli',
+    en: 'Just Me Milan | Open 7/7 VIP Tables, Prices & Dress Code 2026/2027 | Italo Rota Club',
+    it: 'Just Me Milano | Aperto 7/7 Tavoli VIP, Prezzi & Dress Code 2026/2027 | Club Italo Rota',
   },
   'v-voya': {
     en: 'Voya Rooftop Milan | 20th Floor Skyline Bar, Tables & Aperitivo 2026/2027 | Isola & Portello',
@@ -132,8 +134,8 @@ const venueTitles: Record<string, { en: string; it: string }> = {
 
 const venueKeywords: Record<string, { en: string[]; it: string[] }> = {
   'v-justme': {
-    en: ['just me milan', 'just me club sempione', 'just me open 7 nights a week', 'just me vip table prices', 'roberto cavalli club milan', 'just me dress code', 'torre branca nightclub milan', 'champions league afterparty milan'],
-    it: ['just me milano', 'just me club sempione', 'just me aperto 7 su 7', 'prezzi tavoli just me', 'discoteca roberto cavalli milano', 'just me dress code', 'club torre branca milano', 'dopo partita champions league milano'],
+    en: ['just me milan', 'just me club sempione', 'just me open 7 nights a week', 'just me vip table prices', 'Italo Rota club milan', 'just me dress code', 'torre branca nightclub milan', 'champions league afterparty milan'],
+    it: ['just me milano', 'just me club sempione', 'just me aperto 7 su 7', 'prezzi tavoli just me', 'discoteca Italo Rota milano', 'just me dress code', 'club torre branca milano', 'dopo partita champions league milano'],
   },
   'v-voya': {
     en: ['voya rooftop milan', 'milan rooftop bar 2026', 'voya rooftop 20th floor', 'skyline bar milan', 'voya rooftop aperitivo', 'milan rooftop vip table reservation'],
@@ -243,7 +245,7 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
       tagline: 'Priority #1 Flagship | Open 7 Nights a Week (Monday to Sunday) Beneath the Illuminated Torre Branca in Parco Sempione',
       highlights: [
         'Open 7 nights out of 7 (Monday to Sunday, 19:30 to 05:00 AM)',
-        'Designed by Roberto Cavalli at the base of the 108m Torre Branca in Parco Sempione',
+        'Designed by Italo Rota at the base of the 108m Torre Branca in Parco Sempione',
         'Royal Aperitivo with private panoramic elevator ticket to the top of Torre Branca',
         '#1 destination for UEFA Champions League Tue/Wed afterparties, Fashion Week & international stars',
       ],
@@ -254,7 +256,7 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
       pricingTable: [
         { zone: 'Royal Aperitivo + Torre Branca Ascent (19:30-22:30)', price: '€25 - €35 / person', details: 'Includes gourmet buffet, 1 drink, reserved lounge seating & panoramic tower ticket' },
         { zone: 'Dancefloor VIP Table (Mon-Thu / Sun)', price: '€320 - €400 (6-8 guests)', details: '100% bottle credit, skip-the-line hostess escort & central dancefloor sofa' },
-        { zone: 'Dancefloor VIP Table (Fri-Sat & Big Matches)', price: '€500 - €600 (6-8 guests)', details: 'Full bottle service credit in the main Roberto Cavalli crystal pavilion' },
+        { zone: 'Dancefloor VIP Table (Fri-Sat & Big Matches)', price: '€500 - €600 (6-8 guests)', details: 'Full bottle service credit in the main Italo Rota crystal pavilion' },
         { zone: 'Prive Branca Elevated VIP', price: '€800 - €1,200 (8-10 guests)', details: 'Roped-off luxury tier with dedicated security & premium magnum / Dom Perignon service' },
         { zone: 'Super Prive DJ Console', price: '€1,500 - €5,000+ (10-15 guests)', details: 'Stage-level tables directly next to international guest DJs & celebrity performers' },
       ],
@@ -282,7 +284,7 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
       tagline: 'Priorita #1 Assoluta | Aperto 7 Notti su 7 (Lunedi-Domenica) Sotto la Torre Branca Illuminata nel Parco Sempione',
       highlights: [
         'Aperto 7 sere su 7 dal Lunedi alla Domenica (19:30 - 05:00 del mattino)',
-        'Architettura firmata Roberto Cavalli ai piedi della Torre Branca (108 metri) in Parco Sempione',
+        'Architettura firmata Italo Rota ai piedi della Torre Branca (108 metri) in Parco Sempione',
         'Royal Aperitivo con biglietto ascensore panoramico per salire in cima alla Torre Branca',
         'Meta #1 per Dopo-Partita UEFA Champions League (Mar/Mer), Derby, Milano Fashion Week e superstar mondiali',
       ],
@@ -1112,7 +1114,7 @@ export default async function ClubPage({ params }: Props) {
   const description = getLocalizedText(venue.localizedContent.description, locale).replace(/[—–]/g, ' - ');
   const dressCode = (getLocalizedText(venue.localizedContent.dressCode, locale) || "Smart Casual").replace(/[—–]/g, ' - ');
   const insiderTip = (venue.localizedContent.insiderTip ? getLocalizedText(venue.localizedContent.insiderTip, locale) : '').replace(/[—–]/g, ' - ');
-  const image = venue.gallery?.[0] || venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp';
+  const image = venue.image || venue.gallery?.[0] || '/images/milan-nightclub-luxury-vip-champagne.webp';
   const gallery = venue.gallery?.length ? venue.gallery : [image];
   
   const waLink = venue.id === 'v-pineta' 
@@ -1787,6 +1789,7 @@ export default async function ClubPage({ params }: Props) {
         )}
         <VipQuoteCalculator locale={locale} initialVenueSlug={slug} />
       </div>
-    </main>
+            <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/clubs/${slug}`} />
+      </main>
   );
 }

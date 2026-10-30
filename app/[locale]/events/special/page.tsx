@@ -9,6 +9,8 @@ import DiscoveryGrid from '@/components/DiscoveryGrid';
 import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 import { PrioritySixShowcase, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
+import EditorialPageSections from '@/components/EditorialPageSections';
+import type { LocaleCode } from '@/lib/i18n/locales';
 
 // ISR Configuration
 export const revalidate = 3600;
@@ -425,6 +427,7 @@ export default async function SpecialEventsPage({ params }: Props) {
           </Link>
         </div>
       </section>
-    </main>
+            <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/events/special`} />
+      </main>
   );
 }

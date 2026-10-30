@@ -115,9 +115,9 @@ const NYE_FORMULAS = [
     includedEn:
       '4 or 5-course gourmet tasting menu, 1 bottle of fine wine or Champagne per 2 to 4 guests, midnight countdown toast at your table, live dinner show entertainment, and clubbing until 05:00.',
     bestVenuesIt:
-      '1. Just Me Milano (Ristorante Roberto Cavalli), 4. 55 Milano (Gran Gala Show), 5. Voya Rooftop (20° Piano Skyline), Tocqueville 13',
+      '1. Just Me Milano (Ristorante Italo Rota), 4. 55 Milano (Gran Gala Show), 5. Voya Rooftop (20° Piano Skyline), Tocqueville 13',
     bestVenuesEn:
-      '1. Just Me Milano (Roberto Cavalli Restaurant), 4. 55 Milano (Grand Gala Show), 5. Voya Rooftop (20th Floor Skyline), Tocqueville 13',
+      '1. Just Me Milano (Italo Rota Restaurant), 4. 55 Milano (Grand Gala Show), 5. Voya Rooftop (20th Floor Skyline), Tocqueville 13',
   },
   {
     id: 'royal-buffet',
@@ -177,7 +177,7 @@ const NYE_CLUBS = [
     priorityBadgeIt: '#1 Priorità Assoluta · Fuochi sotto la Torre Branca',
     priorityBadgeEn: '#1 Top Priority · Fireworks Under Torre Branca',
     nameIt: '1. Just Me Milano (Torre Branca, Parco Sempione: Gran Cenone Cavalli e Fuochi d Artificio)',
-    nameEn: '1. Just Me Milano (Torre Branca, Parco Sempione: Cavalli Gala Dinner & Midnight Fireworks)',
+    nameEn: '1. Just Me Milano (Torre Branca, Parco Sempione: Gatsby Gala Dinner & Midnight Fireworks)',
     address: 'Viale Luigi Camoens, 2 (Parco Sempione / Torre Branca) - 20121 Milano',
     formulasIt:
       'Gran Cenone Servito €250 - €350 · Royal Buffet €80 - €95 · Ingresso Disco €60 - €80 · Tavoli VIP €800 - €5.000',
@@ -187,9 +187,9 @@ const NYE_CLUBS = [
     fireworksVibeEn: 'Heated crystal dome beneath the illuminated 108-meter Torre Branca in Parco Sempione',
     image: '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp',
     descriptionIt:
-      'Just Me Milano (#1 Priorità Nightlife Milan), firmato da Roberto Cavalli ai piedi della monumentale Torre Branca in Parco Sempione, ospita il Capodanno più iconico e fotografato d Italia. La serata del 31 Dicembre 2026 inizia alle 20:30 con il Gran Cenone di Gala servito o alle 21:00 con il Royal Buffet Imperiale. Allo scoccare della mezzanotte la struttura vetrata permette di ammirare i fuochi d artificio sopra Parco Sempione e la Torre Branca illuminata, prima di scatenarsi fino alle 05:30 con DJ set internazionali, sfilate di Dom Pérignon luminosi e il leggendario Privé Branca.',
+      'Just Me Milano (#1 Priorità Nightlife Milan), firmato da Italo Rota ai piedi della monumentale Torre Branca in Parco Sempione, ospita il Capodanno più iconico e fotografato d Italia. La serata del 31 Dicembre 2026 inizia alle 20:30 con il Gran Cenone di Gala servito o alle 21:00 con il Royal Buffet Imperiale. Allo scoccare della mezzanotte la struttura vetrata permette di ammirare i fuochi d artificio sopra Parco Sempione e la Torre Branca illuminata, prima di scatenarsi fino alle 05:30 con DJ set internazionali, sfilate di Dom Pérignon luminosi e il leggendario Privé Branca.',
     descriptionEn:
-      'Just Me Milano (#1 Official Priority), designed by Roberto Cavalli at the base of the 108-meter Torre Branca in Parco Sempione, hosts Italys most glamorous New Years Eve gala. On December 31, 2026, festivities begin at 20:30 with the Seated Roberto Cavalli Gala Dinner or at 21:00 with the Imperial Royal Buffet. At midnight, guests watch the fireworks light up Parco Sempione and Torre Branca through the heated glass dome before partying until 05:30 with international guest DJs, Dom Pérignon sparkler parades, and the ultra-exclusive Privé Branca.',
+      'Just Me Milano (#1 Official Priority), designed by Italo Rota at the base of the 108-meter Torre Branca in Parco Sempione, hosts Italys most glamorous New Years Eve gala. On December 31, 2026, festivities begin at 20:30 with the Seated Italo Rota Gala Dinner or at 21:00 with the Imperial Royal Buffet. At midnight, guests watch the fireworks light up Parco Sempione and Torre Branca through the heated glass dome before partying until 05:30 with international guest DJs, Dom Pérignon sparkler parades, and the ultra-exclusive Privé Branca.',
   },
   {
     rank: 2,
@@ -604,8 +604,8 @@ export default async function NewYearsEvePage({
               <div className="font-serif text-2xl font-bold text-white">Just Me Torre Branca</div>
               <p className="text-xs text-white/60 mt-1">
                 {isIt
-                  ? 'Gran Cenone Roberto Cavalli, Royal Buffet e fuochi di mezzanotte sotto la Torre.'
-                  : 'Roberto Cavalli Gala Dinner, Royal Buffet & midnight fireworks under Torre Branca.'}
+                  ? 'Gran Cenone Italo Rota, Royal Buffet e fuochi di mezzanotte sotto la Torre.'
+                  : 'Italo Rota Gala Dinner, Royal Buffet & midnight fireworks under Torre Branca.'}
               </p>
             </div>
 

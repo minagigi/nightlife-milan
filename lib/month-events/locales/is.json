@@ -1,0 +1,177 @@
+{
+  "locale": "is",
+  "city": "Mílanó",
+  "titleTemplate": "{venue}: {event} — {date}",
+  "metaTitleTemplate": "{venue} {event} {shortDate}",
+  "metaDescriptionTemplate": "{venue}, {shortDate}: {event}. {age}; {music}; {dressCode}.",
+  "introduction": "{event}. Viðburðurinn hefst {date} á {venue}. Birt tímabil er {time} á tímabelti {city}. Staðurinn er {venue}, á {address}, {city}. Tónlistarstefnur sem staðurinn tilgreinir: {music}. Lágmarksaldur: {age}. Klæðaregla: {dressCode}.",
+  "headings": {
+    "overview": "{event} á {venue}: dagsetning og dagskrá",
+    "booking": "Miðar og borð fyrir {event} í {city}",
+    "faq": "Algengar spurningar um {event} á {venue}"
+  },
+  "sections": [
+    {
+      "id": "event",
+      "heading": "{event}: viðburðurinn í dagatali {city}",
+      "body": "Birta heitið er {event}, á dagsetningunni {date}. Notaðu heiti, dagsetningu og {venue} saman til að greina kvöldið frá öðrum dagsetningum eða stöðum. Viðburðurinn hefst {date} á {venue}. Tónlistarstefnur sem staðurinn tilgreinir: {music}."
+    },
+    {
+      "id": "programme",
+      "heading": "Tímar {event}: opnun og lokun",
+      "body": "Birt tímabil er {time}, með lokun þann {endDate}. Notaðu því {date} sem upphafsdag, jafnvel þótt heimferð sé eftir miðnætti. Opnunartíminn hjálpar við að skipuleggja komu; hann er ekki staðfestur settími. Ef þú vilt mæta á tiltekið augnablik skaltu spyrja móttökuþjónustuna, án þess að gera ráð fyrir óbirtri dagskrá."
+    },
+    {
+      "id": "venue",
+      "heading": "{venue}, {address}",
+      "body": "Staðurinn er {venue}, á {address}, {city}. Haltu heimilisfanginu þegar þú deilir dagskránni með vinum: önnur kvöld kunna að bera svipuð heiti en fara fram annars staðar. Myndirnar í safninu sýna rými staðarins og hjálpa þér að þekkja hann; þær skrá ekki framtíðarviðburðinn eða staðsetningu úthlutaðs borðs."
+    },
+    {
+      "id": "arrival",
+      "heading": "Hvernig á að skipuleggja komu og heimferð í {city}",
+      "body": "Stilltu {address} sem áfangastað og athugaðu leiðina frá staðsetningu þinni. Gefðu þér tíma til að hitta hópinn og fara í gegnum aðgangseftirlit. Fyrir heimferð eftir miðnætti skaltu athuga samgöngutíma á réttri dagsetningu, án þess að gera ráð fyrir næturþjónustu. Síðan telur hvorki akstur né frátekið bílastæði með í miðaverði."
+    },
+    {
+      "id": "tickets",
+      "heading": "Miðar á {event} í {city}: valkostir og verð",
+      "body": "{admissionSummary}"
+    },
+    {
+      "id": "tables",
+      "heading": "Borð fyrir {event} á {venue} í gegnum WhatsApp",
+      "body": "{tableSummary}"
+    },
+    {
+      "id": "admission",
+      "heading": "Aðgangur að {venue}: aldur og klæðaburður",
+      "body": "Fyrir þessa dagsetningu er aldurstakmarkið {age} og klæðareglan {dressCode}. Deildu skilyrðunum með hópnum fyrir kaup. Taktu gilt skilríki með fyrir aldurseftirlit; fáðu staðfestingu fyrir brottför ef þú spyrð um samþykkt skjöl eða aðgengisþarfir. WhatsApp-samtal jafngildir ekki keyptum aðgangsmiða."
+    },
+    {
+      "id": "planning",
+      "heading": "Kaupstaðfesting og undirbúningur kvöldsins",
+      "body": "Ef þú hefur keypt aðgang, sendu kaupstaðfestinguna á WhatsApp í +39 351 912 7047 með nafni, viðburði og fjölda fólks. Geymdu einnig upprunalega kaupskjalið."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Hvenær fer {event} fram í {city}?",
+      "answer": "Viðburðurinn hefst {date} á {venue}. Honum lýkur eftir miðnætti, þann {endDate}; notaðu upphafsdaginn til að finna réttan miða."
+    },
+    {
+      "question": "Hvar fer {event} fram?",
+      "answer": "Staðurinn er {venue}, á {address}, {city}. Athugaðu heimilisfangið þegar þú skipuleggur ferðina eða deilir fundarstað með hópnum."
+    },
+    {
+      "question": "Hverjir eru tímar kvöldsins?",
+      "answer": "Birt tímabil er {time} á tímabelti {city}. Það sýnir opnun og lokun viðburðarins, ekki tíma einstaks atriðis."
+    },
+    {
+      "question": "Hvert er fullt heiti viðburðarins?",
+      "answer": "Birta heitið er {event}, á dagsetningunni {date}. Notaðu heiti, dagsetningu og {venue} saman til að greina kvöldið frá öðrum dagsetningum eða stöðum."
+    },
+    {
+      "question": "Tónlistarstefnur sem staðurinn tilgreinir?",
+      "answer": "{music}"
+    },
+    {
+      "question": "Hvar kaupi ég miða á {event}?",
+      "answer": "{admissionSummary}"
+    },
+    {
+      "question": "Hvað kostar aðgangur að {event} í {city}?",
+      "answer": "{admissionSummary} Fyrri verðþrep kunna að vera uppseld."
+    },
+    {
+      "question": "Af hverju eru sumir valkostir ódýrari?",
+      "answer": "Fyrri verðþrep kunna að vera uppseld. Síðan aðgreinir þau frá valkostum sem voru fáanlegir við athugun; gamalt verð tryggir ekki kaup."
+    },
+    {
+      "question": "Er drykkur innifalinn í miðanum?",
+      "answer": "Athugaðu nákvæmt heiti og tilgreint innihald valins kosts. Ekki yfirfæra það sem fylgir einum kosti yfir á annan."
+    },
+    {
+      "question": "Hvernig óska ég eftir borði fyrir {event}?",
+      "answer": "Skrifaðu á WhatsApp í +39 351 912 7047 með viðburði, dagsetningu og fjölda gesta. Nightlife Milan aðstoðar við beiðnina; framboð og skilyrði þarfnast staðfestingar."
+    },
+    {
+      "question": "Hvar finn ég borðverð?",
+      "answer": "{tableSummary} Biddu móttökuþjónustuna að staðfesta pakkann og innihald hans fyrir hópinn."
+    },
+    {
+      "question": "Er borðverðið á mann?",
+      "answer": "{tableSummary} Ekki túlka það sjálfkrafa sem einstaklingsverð."
+    },
+    {
+      "question": "Staðfestir WhatsApp bókunina sjálfkrafa?",
+      "answer": "Nei. Skilaboðin eru upplýsinga- eða bókunarbeiðni. Bíddu eftir staðfestingu skilyrða og fylgdu leiðbeiningum; spjallið eitt er ekki aðgangsmiði."
+    },
+    {
+      "question": "Hvað á ég að gera eftir að hafa keypt aðgang?",
+      "answer": "Ef þú hefur keypt aðgang, sendu kaupstaðfestinguna á WhatsApp í +39 351 912 7047 með nafni, viðburði og fjölda fólks. Geymdu einnig upprunalega kaupskjalið."
+    },
+    {
+      "question": "Hver er lágmarksaldur fyrir {event}?",
+      "answer": "Birta aldurstakmarkið fyrir kvöldið er {age}. Það er aðgangsskilyrði dagsins, ekki vísbending um meðalaldur gesta."
+    },
+    {
+      "question": "Þarf ég að taka skilríki með?",
+      "answer": "Taktu gilt skilríki með fyrir aldurseftirlit. Spurðu staðinn fyrir kvöldið hvaða skjöl eru samþykkt í þínu tilviki."
+    },
+    {
+      "question": "Hver er klæðareglan á {venue}?",
+      "answer": "Tilgreind klæðaregla er {dressCode}. Deildu henni með hópnum og spurðu fyrir brottför ef þú efast um flík eða sérstakt skilyrði."
+    },
+    {
+      "question": "Er aperitífvalkostur í boði?",
+      "answer": "{aperitifSummary}"
+    },
+    {
+      "question": "Hvernig kemst ég á {venue}?",
+      "answer": "Notaðu {address}, {city}, sem áfangastað. Veldu leið út frá upphafsstað og athugaðu samgöngur bæði út og heim."
+    },
+    {
+      "question": "Er bílastæði eða akstur innifalinn?",
+      "answer": "Síðan sýnir ekki frátekið bílastæði eða akstur sem innifalda þjónustu. Skipuleggðu þetta sér og athugaðu framboð og skilyrði hjá valinni þjónustu."
+    },
+    {
+      "question": "Hvernig athuga ég aðgengisskilyrði?",
+      "answer": "Hafðu samband við móttökuþjónustuna fyrir kaup og lýstu þörfinni. Aðgangur, leið innandyra og staðsetning þarfnast sérstakrar staðfestingar; ljósmyndir duga ekki sem trygging."
+    },
+    {
+      "question": "Hvernig þekki ég rétt -kvöld?",
+      "answer": "Berðu saman fullt heiti {event}, dagsetninguna {date} og staðinn {venue}. Skammstöfunin í titlinum kemur ekki í stað þessara gagna og veitir ekki aðgang að öðrum viðburðum."
+    },
+    {
+      "question": "Get ég skipulagt kvöldið fyrir hóp?",
+      "answer": "Biddu Nightlife Milan um upplýsingar og tilgreindu fjölda fólks og dagsetningu. Segðu hvort þú viljir stakan aðgang eða borð, því valkostirnir hafa ólík skilyrði."
+    },
+    {
+      "question": "Get ég farið út og komið aftur inn?",
+      "answer": "Upplýsingarnar hér staðfesta ekki endurkomu. Spurðu starfsfólkið og lestu skilyrði aðgangsins áður en þú ferð út."
+    },
+    {
+      "question": "Hver eru skilyrði breytinga eða endurgreiðslu?",
+      "answer": "Þau ráðast af keypta valkostinum og pöntunarskilyrðum. Athugaðu dagsetningu, heiti valkosts og kaupskilyrði fyrir greiðslu. Síðan lofar ekki sjálfvirkum breytingum eða endurgreiðslu."
+    }
+  ],
+  "labels": {
+    "tickets": "Kaupa aðgang á Xceed",
+    "tables": "Óska eftir borði á WhatsApp",
+    "offers": "Aðgangs- og borðvalkostir",
+    "gallery": "Myndir frá {venue}",
+    "programme": "Dagskrá og tímar",
+    "related": "Aðrir mikilvægir viðburðir í {city}",
+    "map": "Leiðbeiningar að staðnum",
+    "minimumAge": "Lágmarksaldur",
+    "music": "Tónlistarstefnur sem staðurinn tilgreinir",
+    "dressCode": "Klæðaregla",
+    "sourceChecked": "Síðasta athugun valkosta",
+    "inquiry": "Spurðu móttökuþjónustuna um núverandi valkosti — WhatsApp"
+  },
+  "noAdmission": "Ekkert aðgangstilboð hefur verið birt fyrir þennan viðburð. Spurðu móttökuþjónustuna um núverandi valkosti.",
+  "noTables": "Enginn borðpakki hefur verið birtur fyrir þennan viðburð. WhatsApp-skilaboð hefja fyrirspurn og staðfesta hvorki framboð né bókun.",
+  "noAperitif": "Enginn fordrykkjarkostur hefur verið birtur fyrir þennan viðburð.",
+  "hasAdmission": "Notaðu Xceed-tengilinn á þessari síðu sem er ætlaður {event}. Athugaðu dagsetningu, heiti valkosts og kaupskilyrði fyrir greiðslu. Lægsta fáanlega verð við síðustu athugun er {price}. Valkostir geta breyst; gildandi verð er verð þess valkosts sem er valinn og staðfestur á Xceed.",
+  "hasTables": "Skrifaðu á WhatsApp í +39 351 912 7047 með viðburði, dagsetningu og fjölda gesta. Nightlife Milan aðstoðar við beiðnina; framboð og skilyrði þarfnast staðfestingar.",
+  "hasAperitif": "Fordrykkjarkostur hefur verið birtur. Athugaðu núverandi stöðu, tíma og nákvæmlega hvað er innifalið áður en þú velur hann."
+}

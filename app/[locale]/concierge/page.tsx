@@ -1,4 +1,6 @@
 import { Metadata } from 'next';
+import EditorialPageSections from '@/components/EditorialPageSections';
+import type { LocaleCode } from '@/lib/i18n/locales';
 import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Image from 'next/image';
@@ -457,7 +459,8 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
         </div>
       </section>
 
-    </main>
+            <EditorialPageSections locale={locale as LocaleCode} path={`${localePrefix(locale)}/concierge`} />
+      </main>
     </>
   );
 }

@@ -10,6 +10,8 @@ import type { Event, Venue } from '@/lib/types';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 import { WeeklyNightlifeNavigator, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
+import EditorialPageSections from '@/components/EditorialPageSections';
+import type { LocaleCode } from '@/lib/i18n/locales';
 
 export const dynamic = 'force-dynamic';
 
@@ -510,6 +512,7 @@ export default async function EventsThisWeekPage({ params }: Props) {
             </a>
           </div>
         </section>
+              <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/events/this-week`} />
       </main>
     </>
   );

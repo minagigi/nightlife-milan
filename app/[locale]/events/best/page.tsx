@@ -9,6 +9,8 @@ import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 import { PrioritySixShowcase, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
+import EditorialPageSections from '@/components/EditorialPageSections';
+import type { LocaleCode } from '@/lib/i18n/locales';
 
 export const revalidate = 3600;
 
@@ -89,10 +91,10 @@ const BEST_VENUES = [
     zone: { en: 'Parco Sempione (Torre Branca)', it: 'Parco Sempione (Torre Branca)' },
     label: { en: 'Open 7 nights a week (19:30 – 05:00)', it: 'Aperto 7 sere su 7 (19:30 – 05:00)' },
     why: {
-      en: 'Designed by Roberto Cavalli beneath Torre Branca. Milan’s #1 priority flagship club: Royal Aperitivo from 19:30 with panoramic tower elevator, gala dinner, and international jet-set clubbing until 05:00 every night (including Tuesday/Wednesday Champions League nights).',
-      it: 'Progettato da Roberto Cavalli sotto la Torre Branca. Il club #1 assoluto di Milano: Royal Aperitivo dalle 19:30 con salita panoramica in torre, cena di gala e club internazionale fino alle 05:00 ogni sera (inclusi martedì e mercoledì di Champions League).',
+      en: 'Designed by Italo Rota beneath Torre Branca. Milan’s #1 priority flagship club: Royal Aperitivo from 19:30 with panoramic tower elevator, gala dinner, and international jet-set clubbing until 05:00 every night (including Tuesday/Wednesday Champions League nights).',
+      it: 'Progettato da Italo Rota sotto la Torre Branca. Il club #1 assoluto di Milano: Royal Aperitivo dalle 19:30 con salita panoramica in torre, cena di gala e club internazionale fino alle 05:00 ogni sera (inclusi martedì e mercoledì di Champions League).',
     },
-    tags: ['Open 7/7', 'VIP Tables', 'Roberto Cavalli', 'Fashion Crowd'],
+    tags: ['Open 7/7', 'VIP Tables', 'Italo Rota', 'Fashion Crowd'],
     priceFrom: { en: 'Aperitivo €20–30 · VIP Tables from €350–500', it: 'Aperitivo €20–30 · Tavoli VIP da €350–500' },
     openDays: { en: 'Mon – Sun', it: 'Lun – Dom' },
   },
@@ -116,7 +118,7 @@ const BEST_VENUES = [
     id: 'v-aria',
     slug: 'aria-club-milano',
     color: '#A0B4C9',
-    image: '/images/events/xceed-aria-friday-night.jpg',
+    image: '/images/venues/aria-club-milano/aria-club-milano-interior-01.webp',
     name: { en: '3. Aria Club Milano', it: '3. Aria Club Milano' },
     zone: { en: 'San Siro · Piazzale dello Sport 14 (150m Stadium)', it: 'San Siro · Piazzale dello Sport 14 (150m Stadio)' },
     label: { en: 'Thu–Sat + San Siro Match & Concert Afterparties', it: 'Gio–Sab + Dopo-Partita e Concerti San Siro' },
@@ -511,6 +513,7 @@ export default async function EventsBestPage({ params }: Props) {
           </a>
         </div>
       </section>
-    </main>
+            <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/events/best`} />
+      </main>
   );
 }

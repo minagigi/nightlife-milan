@@ -1,0 +1,177 @@
+{
+  "locale": "cs",
+  "city": "Milán",
+  "titleTemplate": "{venue}: {event} — {date}",
+  "metaTitleTemplate": "{venue} {event} {shortDate}",
+  "metaDescriptionTemplate": "{venue}, {shortDate}: {event}. {age}; {music}; {dressCode}.",
+  "introduction": "{event}. Akce začíná {date} v {venue}. Zveřejněný časový rozsah je {time} v milánském časovém pásmu. Místem konání je {venue} na adrese {address}, {city}. Žánry uváděné klubem: {music}. Minimální věk: {age}. Dress code: {dressCode}.",
+  "headings": {
+    "overview": "{event} v {venue}: datum a program",
+    "booking": "Vstupenky a stoly na {event} v {city}ě",
+    "faq": "Časté dotazy k {event} v {venue}"
+  },
+  "sections": [
+    {
+      "id": "event",
+      "heading": "{event}: událost v milánském kalendáři",
+      "body": "Zveřejněný název je {event} a datum je {date}. Používejte společně název, datum a {venue}, abyste tento večer odlišili od jiných termínů nebo klubů. Akce začíná {date} v {venue}. Žánry uváděné klubem: {music}."
+    },
+    {
+      "id": "programme",
+      "heading": "Událost {event}: čas otevření a ukončení",
+      "body": "Zveřejněný časový rozsah je {time}, konec připadá na den {endDate}. Za počáteční datum proto považujte {date}, i když se budete vracet až po půlnoci. Čas otevření pomáhá naplánovat příchod; není potvrzeným časem setu. Pokud chcete dorazit na konkrétní část programu, požádejte concierge o informace a nepředpokládejte nezveřejněný harmonogram."
+    },
+    {
+      "id": "venue",
+      "heading": "{venue}, {address}",
+      "body": "Místem konání je {venue} na adrese {address}, {city}. Při sdílení programu s přáteli si adresu ponechte: jiné večery mohou mít podobné názvy, ale konat se jinde. Fotografie v galerii ukazují prostory klubu a pomohou vám jej poznat; nedokumentují budoucí akci ani umístění přiděleného stolu."
+    },
+    {
+      "id": "arrival",
+      "heading": "Jak si naplánovat příjezd a návrat v {city}ě",
+      "body": "Nastavte si jako cíl {address} a zkontrolujte trasu ze svého místa. Počítejte s časem na setkání se skupinou a na vstupní kontroly. Pro návrat po půlnoci ověřte jízdní řády pro správné datum a nepředpokládejte noční provoz. Cena vstupenky na této stránce nezahrnuje transfer ani vyhrazené parkování."
+    },
+    {
+      "id": "tickets",
+      "heading": "Vstupenky na {event} v {city}ě: nabídky a cena",
+      "body": "{admissionSummary}"
+    },
+    {
+      "id": "tables",
+      "heading": "Stoly na {event} v {venue} přes WhatsApp",
+      "body": "{tableSummary}"
+    },
+    {
+      "id": "admission",
+      "heading": "Vstup do {venue}: věk a dress code",
+      "body": "Pro toto datum je věková hranice {age} a dress code je {dressCode}. Sdílejte tyto podmínky se skupinou před nákupem. Vezměte si platný doklad pro ověření věku; v případě dotazů k přijímaným dokladům nebo k bezbariérovému přístupu si vyžádejte potvrzení před odjezdem. Konverzace přes WhatsApp nenahrazuje zakoupenou vstupenku."
+    },
+    {
+      "id": "planning",
+      "heading": "Potvrzení nákupu a příprava na večer",
+      "body": "Pokud jste si koupili vstup, pošlete potvrzení nákupu přes WhatsApp na +39 351 912 7047 se jménem, akcí a počtem osob. Uschovejte také původní doklad o nákupu."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Kdy se {event} koná v {city}ě?",
+      "answer": "Akce začíná {date} v {venue}. Končí po půlnoci, v den {endDate}; při hledání správné vstupenky použijte počáteční datum."
+    },
+    {
+      "question": "Kde se koná událost {event}?",
+      "answer": "Místem konání je {venue} na adrese {address}, {city}. Tuto adresu si ověřte při plánování cesty nebo sdílení místa setkání se skupinou."
+    },
+    {
+      "question": "Jaký je čas konání večera?",
+      "answer": "Zveřejněný časový rozsah je {time} v milánském časovém pásmu. Označuje otevření a zavření akce, nikoli čas jednotlivého vystoupení."
+    },
+    {
+      "question": "Jak zní celý název akce?",
+      "answer": "Zveřejněný název je {event} a datum je {date}. Používejte společně název, datum a {venue}, abyste tento večer odlišili od jiných termínů nebo klubů."
+    },
+    {
+      "question": "Žánry uváděné klubem?",
+      "answer": "{music}"
+    },
+    {
+      "question": "Kde koupit vstupenky na {event}?",
+      "answer": "{admissionSummary}"
+    },
+    {
+      "question": "Kolik stojí vstup na {event} v {city}ě?",
+      "answer": "{admissionSummary} Dřívější cenové úrovně mohou být vyprodané."
+    },
+    {
+      "question": "Proč mají některé nabídky nižší ceny?",
+      "answer": "Dřívější cenové úrovně mohou být vyprodané. Stránka je odlišuje od nabídek dostupných při kontrole: stará cena nezaručuje, že lze variantu stále koupit."
+    },
+    {
+      "question": "Zahrnuje vstupenka nápoj?",
+      "answer": "Zkontrolujte přesný název a uvedený obsah vybrané nabídky. Nepřenášejte obsah jedné nabídky na jinou."
+    },
+    {
+      "question": "Jak požádat o stůl na {event}?",
+      "answer": "Napište přes WhatsApp na +39 351 912 7047 a uveďte akci, datum a počet hostů. Nightlife Milan vám s poptávkou pomůže; dostupnost a podmínky je třeba potvrdit."
+    },
+    {
+      "question": "Kde najdu ceny stolů?",
+      "answer": "{tableSummary} Požádejte concierge, aby potvrdil balíček a jeho obsah pro skupinu."
+    },
+    {
+      "question": "Je cena stolu uvedena za osobu?",
+      "answer": "{tableSummary} Nevykládejte ji automaticky jako částku za jednotlivce."
+    },
+    {
+      "question": "Potvrdí WhatsApp rezervaci automaticky?",
+      "answer": "Ne. Zpráva je žádostí o informace nebo rezervaci. Počkejte na potvrzení podmínek a postupujte podle obdržených pokynů; samotný chat není vstupenkou."
+    },
+    {
+      "question": "Co mám udělat po zakoupení vstupu?",
+      "answer": "Pokud jste si koupili vstup, pošlete potvrzení nákupu přes WhatsApp na +39 351 912 7047 se jménem, akcí a počtem osob. Uschovejte také původní doklad o nákupu."
+    },
+    {
+      "question": "Jaký je minimální věk pro {event}?",
+      "answer": "Zveřejněná věková hranice pro tento večer je {age}. Jde o podmínku vstupu pro dané datum, nikoli o údaj o průměrném věku přítomného publika."
+    },
+    {
+      "question": "Musím si vzít průkaz totožnosti?",
+      "answer": "Vezměte si platný doklad pro ověření věku. Informaci o tom, které doklady jsou v konkrétní situaci přijímány, si před večerem potvrďte u klubu."
+    },
+    {
+      "question": "Jaký je dress code v {venue}?",
+      "answer": "Uvedený dress code je {dressCode}. Sdílejte jej se skupinou a v případě pochybností o konkrétním oděvu nebo podmínce si před odjezdem vyžádejte vysvětlení."
+    },
+    {
+      "question": "Je k dispozici varianta s aperitivem?",
+      "answer": "{aperitifSummary}"
+    },
+    {
+      "question": "Jak se dostanu do {venue}?",
+      "answer": "Jako cíl použijte {address}, {city}. Zvolte trasu podle výchozího místa a ověřte dopravu pro cestu tam i zpět."
+    },
+    {
+      "question": "Je zahrnuto parkování nebo transfer?",
+      "answer": "Tato stránka neuvádí vyhrazené parkování ani transfer jako zahrnuté služby. Zařiďte je samostatně a ověřte dostupnost a podmínky u zvoleného poskytovatele."
+    },
+    {
+      "question": "Jak ověřím podmínky přístupnosti?",
+      "answer": "Před nákupem kontaktujte concierge a popište konkrétní potřebu. Přístup, pohyb uvnitř a umístění vyžadují výslovné potvrzení; fotografie je nemohou zaručit."
+    },
+    {
+      "question": "Jak poznám správný večer ?",
+      "answer": "Porovnejte celý název {event}, datum {date} a místo {venue}. Zkratka v názvu tyto údaje nenahrazuje a neznamená vstup na jiné akce."
+    },
+    {
+      "question": "Mohu naplánovat večer pro skupinu?",
+      "answer": "Požádejte Nightlife Milan o informace a uveďte počet osob a datum. Upřesněte, zda hledáte jednotlivé vstupy, nebo stůl, protože varianty mají rozdílné podmínky."
+    },
+    {
+      "question": "Mohu z klubu odejít a znovu vstoupit?",
+      "answer": "Možnost opětovného vstupu není zde uvedenými informacemi potvrzena. Před odchodem se zeptejte personálu klubu a přečtěte si podmínky svého vstupu."
+    },
+    {
+      "question": "Jaké jsou podmínky změny nebo vrácení peněz?",
+      "answer": "Závisí na zakoupené nabídce a podmínkách objednávky. Před platbou ověřte datum, název nabídky a podmínky uvedené u nákupu. Tato stránka neslibuje automatické změny ani vrácení peněz."
+    }
+  ],
+  "labels": {
+    "tickets": "Koupit vstup přes Xceed",
+    "tables": "Požádat o stůl přes WhatsApp",
+    "offers": "Nabídky vstupu a stolů",
+    "gallery": "Fotografie {venue}",
+    "programme": "Program a časy",
+    "related": "Další významné akce v {city}ě",
+    "map": "Trasa do klubu",
+    "minimumAge": "Minimální věk",
+    "music": "Žánry uváděné klubem",
+    "dressCode": "Dress code",
+    "sourceChecked": "Poslední kontrola nabídek",
+    "inquiry": "Zeptejte se concierge na aktuální možnosti — WhatsApp"
+  },
+  "noAdmission": "Pro tuto akci není zveřejněna nabídka vstupu. Zeptejte se concierge na aktuální možnosti.",
+  "noTables": "Pro tuto akci není zveřejněn balíček ke stolu. Zpráva na WhatsAppu zahájí poptávku a nepotvrzuje dostupnost ani rezervaci.",
+  "noAperitif": "Pro tuto akci není zveřejněna nabídka aperitivu.",
+  "hasAdmission": "Použijte odkaz Xceed na této stránce, který je určen pro {event}. Před platbou ověřte datum, název nabídky a podmínky uvedené u nákupu. Nejnižší dostupná cena vstupu při poslední kontrole je {price}. Nabídky se mohou měnit: platí cena varianty, kterou vyberete a potvrdíte na Xceed.",
+  "hasTables": "Napište přes WhatsApp na +39 351 912 7047 a uveďte akci, datum a počet hostů. Nightlife Milan vám s poptávkou pomůže; dostupnost a podmínky je třeba potvrdit.",
+  "hasAperitif": "Je zveřejněna nabídka aperitivu. Před výběrem ověřte její aktuální stav, časy a přesný obsah."
+}

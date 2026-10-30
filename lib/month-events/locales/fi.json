@@ -1,0 +1,177 @@
+{
+  "locale": "fi",
+  "city": "Milano",
+  "titleTemplate": "{venue}: {event} — {date}",
+  "metaTitleTemplate": "{venue} {event} {shortDate}",
+  "metaDescriptionTemplate": "{venue}, {shortDate}: {event}. {age}; {music}; {dressCode}.",
+  "introduction": "{event}. Tapahtuma alkaa {date} paikassa {venue}. Julkaistu aikaväli on {time} {city}n aikavyöhykkeellä. Tapahtumapaikka on {venue}, osoitteessa {address}, {city}. Paikan ilmoittamat tyylilajit: {music}. Alaikäraja: {age}. Pukukoodi: {dressCode}.",
+  "headings": {
+    "overview": "{event} {venue} -klubilla: päivämäärä ja ohjelma",
+    "booking": "Liput ja pöydät: {event} {city}ssa",
+    "faq": "Usein kysyttyä: {event} {venue}ssa"
+  },
+  "sections": [
+    {
+      "id": "event",
+      "heading": "{event}: tapahtuma {city}n kalenterissa",
+      "body": "Julkaistu nimi on {event} päivänä {date}. Käytä nimeä, päivämäärää ja {venue}a yhdessä erottaaksesi illan muista päivistä tai paikoista. Tapahtuma alkaa {date} paikassa {venue}. Paikan ilmoittamat tyylilajit: {music}."
+    },
+    {
+      "id": "programme",
+      "heading": "Tapahtuma {event}: alkamis- ja päättymisaika",
+      "body": "Julkaistu aikaväli on {time}, ja tapahtuma päättyy päivänä {endDate}. Käytä siis päivää {date} aloituspäivänä, vaikka palaisit puolenyön jälkeen. Avautumisaika auttaa saapumisen suunnittelussa; se ei ole setin vahvistettu aika. Jos haluat olla paikalla tiettynä hetkenä, kysy concierge-palvelusta tietoja olettamatta julkaisematonta aikataulua."
+    },
+    {
+      "id": "venue",
+      "heading": "{venue}, {address}",
+      "body": "Tapahtumapaikka on {venue}, osoitteessa {address}, {city}. Säilytä osoite, kun jaat ohjelman ystävien kanssa: muilla illoilla voi olla samankaltaisia nimiä, mutta ne voivat olla muualla. Gallerian kuvat näyttävät paikan tiloja ja auttavat tunnistamaan sen; ne eivät dokumentoi tulevaa iltaa tai määrätyn pöydän sijaintia."
+    },
+    {
+      "id": "arrival",
+      "heading": "Saapumisen ja paluumatkan suunnittelu {city}ssa",
+      "body": "Aseta määränpääksi {address} ja tarkista reitti sijainnistasi. Varaa aikaa ryhmän tapaamiseen ja sisäänpääsytarkastuksiin. Tarkista puolenyön jälkeistä paluuta varten oikean päivämäärän liikenneaikataulut äläkä oleta yöliikennettä. Sivulla lipun hintaan ei sisälly kuljetusta tai varattua pysäköintiä."
+    },
+    {
+      "id": "tickets",
+      "heading": "Liput: {event} {city}ssa – paketit ja hinta",
+      "body": "{admissionSummary}"
+    },
+    {
+      "id": "tables",
+      "heading": "Pöydät: {event} {venue} -klubilla WhatsAppin kautta",
+      "body": "{tableSummary}"
+    },
+    {
+      "id": "admission",
+      "heading": "Sisäänpääsy {venue} -klubille: ikä ja pukeutuminen",
+      "body": "Tämän päivämäärän ikäraja on {age} ja pukukoodi on {dressCode}. Jaa ehdot ryhmän kanssa ennen ostoa. Ota mukaan voimassa oleva asiakirja iän tarkistamiseen; kysy ennen lähtöä vahvistus hyväksytyistä asiakirjoista tai esteettömyystarpeista. WhatsApp-keskustelu ei vastaa ostettua pääsylippua."
+    },
+    {
+      "id": "planning",
+      "heading": "Ostovahvistus ja iltaan valmistautuminen",
+      "body": "Jos olet ostanut sisäänpääsyn, lähetä ostovahvistus WhatsAppissa numeroon +39 351 912 7047 sekä nimi, tapahtuma ja henkilömäärä. Säilytä myös alkuperäinen ostotosite."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Milloin {event} järjestetään {city}ssa?",
+      "answer": "Tapahtuma alkaa {date} paikassa {venue}. Se päättyy puolenyön jälkeen päivänä {endDate}; käytä aloituspäivää oikean lipun etsimiseen."
+    },
+    {
+      "question": "Missä tapahtuma {event} järjestetään?",
+      "answer": "Tapahtumapaikka on {venue}, osoitteessa {address}, {city}. Tarkista osoite matkaa suunnitellessa tai jakaessasi tapaamispaikan ryhmälle."
+    },
+    {
+      "question": "Mitkä ovat illan ajat?",
+      "answer": "Julkaistu aikaväli on {time} {city}n aikavyöhykkeellä. Se kertoo tapahtuman avautumis- ja sulkeutumisajan, ei yksittäisen esityksen aikaa."
+    },
+    {
+      "question": "Mikä on tapahtuman koko nimi?",
+      "answer": "Julkaistu nimi on {event} päivänä {date}. Käytä nimeä, päivämäärää ja {venue}a yhdessä erottaaksesi illan muista päivistä tai paikoista."
+    },
+    {
+      "question": "Paikan ilmoittamat tyylilajit?",
+      "answer": "{music}"
+    },
+    {
+      "question": "Mistä voi ostaa liput tapahtumaan {event}?",
+      "answer": "{admissionSummary}"
+    },
+    {
+      "question": "Paljonko sisäänpääsy tapahtumaan {event} maksaa {city}ssa?",
+      "answer": "{admissionSummary} Aiemmat hintaluokat voivat olla loppuunmyytyjä."
+    },
+    {
+      "question": "Miksi jotkin paketit ovat halvempia?",
+      "answer": "Aiemmat hintaluokat voivat olla loppuunmyytyjä. Sivulla ne erotetaan tarkistushetkellä saatavilla olleista paketeista: vanha hinta ei takaa, että paketin voi yhä ostaa."
+    },
+    {
+      "question": "Sisältyykö lippuun juoma?",
+      "answer": "Tarkista valitun vaihtoehdon tarkka nimi ja ilmoitettu sisältö. Älä siirrä yhden vaihtoehdon sisältöä toiseen."
+    },
+    {
+      "question": "Miten pyydän pöytää tapahtumaan {event}?",
+      "answer": "Kirjoita WhatsAppissa numeroon +39 351 912 7047 ja ilmoita tapahtuma, päivämäärä sekä vierasmäärä. Nightlife Milano auttaa tiedustelussa; saatavuus ja ehdot on vahvistettava."
+    },
+    {
+      "question": "Mistä löydän pöytien hinnat?",
+      "answer": "{tableSummary} Pyydä concierge-palvelua vahvistamaan paketti ja sen sisältö ryhmälle."
+    },
+    {
+      "question": "Onko pöydän hinta henkilökohtainen?",
+      "answer": "{tableSummary} Älä tulkitse sitä automaattisesti henkilökohtaiseksi summaksi."
+    },
+    {
+      "question": "Vahvistaako WhatsApp varauksen automaattisesti?",
+      "answer": "Ei. Viesti on tieto- tai varauspyyntö. Odota ehtojen vahvistusta ja noudata saatuja ohjeita; pelkkä keskustelu ei ole pääsylippu."
+    },
+    {
+      "question": "Mitä teen sisäänpääsyn ostamisen jälkeen?",
+      "answer": "Jos olet ostanut sisäänpääsyn, lähetä ostovahvistus WhatsAppissa numeroon +39 351 912 7047 sekä nimi, tapahtuma ja henkilömäärä. Säilytä myös alkuperäinen ostotosite."
+    },
+    {
+      "question": "Mikä on tapahtuman {event} alaikäraja?",
+      "answer": "Tämän illan julkaistu ikäraja on {age}. Se on päivämääräkohtainen sisäänpääsyvaatimus, ei tieto yleisön keski-iästä."
+    },
+    {
+      "question": "Pitääkö minun ottaa henkilötodistus mukaan?",
+      "answer": "Ota mukaan voimassa oleva asiakirja iän tarkistamiseen. Varmista paikalta ennen iltaa, mitkä asiakirjat hyväksytään omassa tilanteessasi."
+    },
+    {
+      "question": "Mikä on {venue} -klubin pukukoodi?",
+      "answer": "Ilmoitettu pukukoodi on {dressCode}. Jaa se ryhmälle ja pyydä ennen lähtöä selvennystä, jos jokin vaate tai ehto mietityttää."
+    },
+    {
+      "question": "Onko aperitiivipaketti saatavilla?",
+      "answer": "{aperitifSummary}"
+    },
+    {
+      "question": "Miten pääsen {venue}on?",
+      "answer": "Käytä määränpäänä osoitetta {address}, {city}. Valitse reitti lähtöpaikkasi mukaan ja tarkista liikenne sekä meno- että paluumatkalle."
+    },
+    {
+      "question": "Sisältyykö pysäköinti tai kuljetus hintaan?",
+      "answer": "Tällä sivulla varattua pysäköintiä tai kuljetusta ei esitetä sisältyvänä palveluna. Järjestä ne erikseen ja tarkista saatavuus ja ehdot valitulta palveluntarjoajalta."
+    },
+    {
+      "question": "Miten tarkistan esteettömyyden?",
+      "answer": "Ota yhteyttä concierge-palveluun ennen ostoa ja kuvaile konkreettinen tarve. Sisäänpääsy, kulkureitti sisällä ja sijoittuminen vaativat erillisen vahvistuksen; kuvat eivät takaa niitä."
+    },
+    {
+      "question": "Miten tunnistan oikean -illan?",
+      "answer": "Vertaa koko nimeä {event}, päivämäärää {date} ja paikkaa {venue}. Otsikon lyhenne ei korvaa näitä tietoja eikä anna pääsyä muihin tapahtumiin."
+    },
+    {
+      "question": "Voinko järjestää illan ryhmälle?",
+      "answer": "Pyydä tietoja Nightlife Milanolta ja ilmoita henkilömäärä ja päivämäärä. Kerro, etsitkö yksittäisiä sisäänpääsyjä vai pöytää, sillä paketeilla on eri ehdot."
+    },
+    {
+      "question": "Voinko poistua paikalta ja palata sisään?",
+      "answer": "Tässä esitetyt tiedot eivät vahvista paluumahdollisuutta. Kysy henkilökunnalta ja tarkista oman sisäänpääsysi ehdot ennen poistumista."
+    },
+    {
+      "question": "Mitkä ovat muutoksen tai palautuksen ehdot?",
+      "answer": "Ne riippuvat ostetusta paketista ja tilausehdoista. Tarkista päivämäärä, paketin nimi ja ostoehdot ennen maksamista. Tämä sivu ei lupaa automaattisia muutoksia tai palautuksia."
+    }
+  ],
+  "labels": {
+    "tickets": "Osta sisäänpääsy Xceedistä",
+    "tables": "Pyydä pöytää WhatsAppissa",
+    "offers": "Sisäänpääsy- ja pöytäpaketit",
+    "gallery": "Kuvia {venue}sta",
+    "programme": "Ohjelma ja ajat",
+    "related": "Muita tärkeitä tapahtumia {city}ssa",
+    "map": "Reittiohjeet paikalle",
+    "minimumAge": "Alaikäraja",
+    "music": "Paikan ilmoittamat tyylilajit",
+    "dressCode": "Pukukoodi",
+    "sourceChecked": "Pakettien viimeisin tarkistus",
+    "inquiry": "Kysy conciergelta ajankohtaisista vaihtoehdoista — WhatsApp"
+  },
+  "noAdmission": "Tähän tapahtumaan ei ole julkaistu pääsyvaihtoehtoa. Kysy conciergelta ajankohtaisista vaihtoehdoista.",
+  "noTables": "Tähän tapahtumaan ei ole julkaistu pöytäpakettia. WhatsApp-viesti aloittaa tiedustelun eikä vahvista saatavuutta tai varausta.",
+  "noAperitif": "Tähän tapahtumaan ei ole julkaistu aperitiivivaihtoehtoa.",
+  "hasAdmission": "Käytä tällä sivulla olevaa tapahtumalle {event} tarkoitettua Xceed-linkkiä. Tarkista päivämäärä, paketin nimi ja ostoehdot ennen maksamista. Viimeisimmän tarkistuksen halvin saatavilla oleva hinta on {price}. Paketit voivat muuttua: todellinen hinta on Xceedissä valitun ja vahvistetun vaihtoehdon hinta.",
+  "hasTables": "Kirjoita WhatsAppissa numeroon +39 351 912 7047 ja ilmoita tapahtuma, päivämäärä sekä vierasmäärä. Nightlife Milano auttaa tiedustelussa; saatavuus ja ehdot on vahvistettava.",
+  "hasAperitif": "Aperitiivivaihtoehto on julkaistu. Tarkista sen ajantasainen tila, ajat ja tarkka sisältö ennen valintaa."
+}

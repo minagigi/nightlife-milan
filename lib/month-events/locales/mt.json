@@ -1,0 +1,177 @@
+{
+  "locale": "mt",
+  "city": "Milan",
+  "titleTemplate": "{venue}: {event} — {date}",
+  "metaTitleTemplate": "{venue} {event} {shortDate}",
+  "metaDescriptionTemplate": "{venue}, {shortDate}: {event}. {age}; {music}; {dressCode}.",
+  "introduction": "{event}. L-avveniment jibda {date} f’{venue}. Il-medda ppubblikata hija {time}, fiż-żona tal-ħin ta’ {city}. Il-post huwa {venue}, f’{address}, {city}. Ġeneri indikati mill-post: {music}. Età minima: {age}. Dress code: {dressCode}.",
+  "headings": {
+    "overview": "{event} f’{venue}: data u programm",
+    "booking": "Biljetti u mwejjed għal {event} f’{city}",
+    "faq": "Mistoqsijiet dwar {event} f’{venue}"
+  },
+  "sections": [
+    {
+      "id": "event",
+      "heading": "{event}: l-appuntament fil-kalendarju ta’ {city}",
+      "body": "L-isem ippubblikat huwa {event}, fid-data {date}. Uża l-isem, id-data u {venue} flimkien biex tiddistingwi s-serata minn dati jew postijiet oħra. L-avveniment jibda {date} f’{venue}. Ġeneri indikati mill-post: {music}."
+    },
+    {
+      "id": "programme",
+      "heading": "L-avveniment {event}: ħin tal-ftuħ u tal-għeluq",
+      "body": "Il-medda ta’ ħin ippubblikata hija {time}, bl-għeluq fid-data {endDate}. Għalhekk uża {date} bħala d-data tal-bidu, anki jekk tirritorna wara nofsillejl. Il-ftuħ jgħinek tippjana l-wasla iżda mhuwiex ħin ikkonfermat tas-set. Jekk trid tara mument partikolari, staqsi lill-concierge u tassumix skeda mhux ippubblikata."
+    },
+    {
+      "id": "venue",
+      "heading": "{venue}, {address}",
+      "body": "Il-post huwa {venue}, f’{address}, {city}. Żomm l-indirizz meta taqsam il-programm ma’ sħabek: serati oħra jista’ jkollhom ismijiet simili iżda jsiru band’oħra. Ir-ritratti tal-gallerija juru l-ispazji tal-post u jgħinuk tagħrfu; ma jurux l-avveniment futur jew il-pożizzjoni ta’ mejda assenjata."
+    },
+    {
+      "id": "arrival",
+      "heading": "Kif tippjana l-wasla u r-ritorn f’{city}",
+      "body": "Issettja d-destinazzjoni għal {address} u ċċekkja r-rotta minn fejn tinsab. Ħalli ħin biex tiltaqa’ mal-grupp u għall-kontrolli tad-dħul. Għar-ritorn wara nofsillejl, ivverifika l-ħinijiet tat-trasport għad-data t-tajba u tassumix servizz bil-lejl. Il-paġna ma tinkludix trasferimenti jew parkeġġ riżervat fil-prezz tal-biljett."
+    },
+    {
+      "id": "tickets",
+      "heading": "Biljetti għal {event} f’{city}: offerti u prezz",
+      "body": "{admissionSummary}"
+    },
+    {
+      "id": "tables",
+      "heading": "Imwejjed għal {event} f’{venue} fuq WhatsApp",
+      "body": "{tableSummary}"
+    },
+    {
+      "id": "admission",
+      "heading": "Dħul f’{venue}: età u dress code",
+      "body": "Għal din id-data, l-età minima hija {age} u d-dress code huwa {dressCode}. Għarraf lill-grupp b’dawn il-kundizzjonijiet qabel ix-xiri. Ġib dokument validu għall-verifika tal-età; għal mistoqsijiet dwar dokumenti aċċettati jew aċċessibbiltà, itlob konferma qabel titlaq. Konverżazzjoni fuq WhatsApp ma tissostitwixxix biljett mixtri."
+    },
+    {
+      "id": "planning",
+      "heading": "Konferma tax-xiri u tħejjija għas-serata",
+      "body": "Jekk xtrajt id-dħul, ibgħat il-konferma tax-xiri fuq WhatsApp lil +39 351 912 7047, bl-isem, l-avveniment u n-numru ta’ persuni. Żomm ukoll id-dokument oriġinali."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Meta jsir {event} f’{city}?",
+      "answer": "L-avveniment jibda {date} f’{venue}. Jispiċċa wara nofsillejl, fid-data {endDate}; uża d-data tal-bidu biex issib il-biljett it-tajjeb."
+    },
+    {
+      "question": "Fejn isir l-avveniment {event}?",
+      "answer": "Il-post huwa {venue}, f’{address}, {city}. Iċċekkja dan l-indirizz meta tippjana l-vjaġġ jew taqsam il-punt tal-laqgħa mal-grupp."
+    },
+    {
+      "question": "X’inhuma l-ħinijiet tas-serata?",
+      "answer": "Il-medda ppubblikata hija {time}, fiż-żona tal-ħin ta’ {city}. Tindika l-ftuħ u l-għeluq tal-avveniment, mhux il-ħin ta’ wirja waħda."
+    },
+    {
+      "question": "X’inhu l-isem sħiħ tal-avveniment?",
+      "answer": "L-isem ippubblikat huwa {event}, fid-data {date}. Uża l-isem, id-data u {venue} flimkien biex tiddistingwi s-serata minn dati jew postijiet oħra."
+    },
+    {
+      "question": "Ġeneri indikati mill-post?",
+      "answer": "{music}"
+    },
+    {
+      "question": "Fejn nixtri biljetti għal {event}?",
+      "answer": "{admissionSummary}"
+    },
+    {
+      "question": "Kemm jiswa d-dħul għal {event} f’{city}?",
+      "answer": "{admissionSummary} Fażijiet preċedenti jistgħu jkunu mibjugħa kollha."
+    },
+    {
+      "question": "Għaliex xi offerti għandhom prezz aktar baxx?",
+      "answer": "Fażijiet preċedenti jistgħu jkunu mibjugħa kollha. Il-paġna tiddistingwihom mill-offerti disponibbli; prezz antik ma jiggarantixxix li l-formula għadha tista’ tinxtara."
+    },
+    {
+      "question": "Il-biljett jinkludi xarba?",
+      "answer": "Iċċekkja l-isem eżatt u x’inhu inkluż fl-għażla magħżula. Tapplikax dak li hu inkluż f’offerta waħda għal offerta oħra."
+    },
+    {
+      "question": "Kif nitlob mejda għal {event}?",
+      "answer": "Ikteb fuq WhatsApp lil +39 351 912 7047 u semmi l-avveniment, id-data u n-numru ta’ mistednin. Nightlife Milan jgħinek bit-talba; id-disponibbiltà u l-kundizzjonijiet jeħtieġu konferma."
+    },
+    {
+      "question": "Fejn insib il-prezzijiet tal-imwejjed?",
+      "answer": "{tableSummary} Itlob lill-concierge jikkonferma l-pakkett u x’jinkludi għall-grupp."
+    },
+    {
+      "question": "Il-prezz tal-mejda huwa għal kull persuna?",
+      "answer": "{tableSummary} Tinterpretahx awtomatikament bħala prezz individwali."
+    },
+    {
+      "question": "WhatsApp jikkonferma l-prenotazzjoni awtomatikament?",
+      "answer": "Le. Il-messaġġ huwa talba għal informazzjoni jew prenotazzjoni. Stenna l-konferma tal-kundizzjonijiet u segwi l-istruzzjonijiet; iċ-chat waħdu mhuwiex biljett tad-dħul."
+    },
+    {
+      "question": "X’għandi nagħmel wara li nixtri d-dħul?",
+      "answer": "Jekk xtrajt id-dħul, ibgħat il-konferma tax-xiri fuq WhatsApp lil +39 351 912 7047, bl-isem, l-avveniment u n-numru ta’ persuni. Żomm ukoll id-dokument oriġinali."
+    },
+    {
+      "question": "X’inhi l-età minima għal {event}?",
+      "answer": "Il-limitu ppubblikat għal din is-serata huwa {age}. Huwa rekwiżit tad-dħul għal din id-data, mhux indikazzjoni tal-età medja tal-pubbliku."
+    },
+    {
+      "question": "Għandi nġib dokument tal-identità?",
+      "answer": "Ġib dokument validu għall-verifika tal-età. Biex tkun taf liema dokumenti huma aċċettati fis-sitwazzjoni tiegħek, itlob konferma lill-post qabel is-serata."
+    },
+    {
+      "question": "X’inhu d-dress code ta’ {venue}?",
+      "answer": "Id-dress code indikat huwa {dressCode}. Għarraf lill-grupp u itlob kjarifika qabel titlaq jekk għandek dubju dwar xi lbies jew kundizzjoni."
+    },
+    {
+      "question": "Hemm formula ta’ aperittiv?",
+      "answer": "{aperitifSummary}"
+    },
+    {
+      "question": "Kif nasal {venue}?",
+      "answer": "Uża {address}, {city}, bħala d-destinazzjoni. Agħżel ir-rotta skont il-punt tat-tluq u ċċekkja t-trasport kemm għall-wasla kif ukoll għar-ritorn."
+    },
+    {
+      "question": "Il-parkeġġ jew it-trasferiment huma inklużi?",
+      "answer": "Din il-paġna ma tippreżentax parkeġġ riżervat jew trasferimenti bħala servizzi inklużi. Organizzahom separatament u ċċekkja d-disponibbiltà u l-kundizzjonijiet mal-fornitur."
+    },
+    {
+      "question": "Kif nivverifika l-kundizzjonijiet tal-aċċessibbiltà?",
+      "answer": "Ikkuntattja lill-concierge qabel ix-xiri u spjega l-ħtieġa. Id-dħul, ir-rotta interna u l-post jeħtieġu konferma speċifika; ir-ritratti ma jiggarantuhomx."
+    },
+    {
+      "question": "Kif nagħraf l-avveniment it-tajjeb?",
+      "answer": "Qabbel l-isem sħiħ {event}, id-data {date} u l-post {venue}. L-akronimu fit-titlu ma jissostitwixxix dawn id-dettalji u ma jagħtix aċċess għal avvenimenti oħra."
+    },
+    {
+      "question": "Nista’ norganizza s-serata għal grupp?",
+      "answer": "Itlob informazzjoni lil Nightlife Milan u semmi n-numru ta’ persuni u d-data. Għid jekk tridx dħul individwali jew mejda, għax il-formuli għandhom kundizzjonijiet differenti."
+    },
+    {
+      "question": "Nista’ noħroġ mill-post u nerġa’ nidħol?",
+      "answer": "Id-dħul mill-ġdid mhuwiex ikkonfermat fl-informazzjoni hawn. Staqsi lill-persunal u ara l-kundizzjonijiet tal-biljett tiegħek qabel toħroġ."
+    },
+    {
+      "question": "X’inhuma l-kundizzjonijiet għal tibdil jew rifużjoni?",
+      "answer": "Jiddependu mill-offerta mixtrija u mill-kundizzjonijiet tal-ordni. Qabel il-ħlas iċċekkja d-data, l-isem tal-offerta u l-kundizzjonijiet tax-xiri. Din il-paġna ma twiegħedx tibdil jew rifużjonijiet awtomatiċi."
+    }
+  ],
+  "labels": {
+    "tickets": "Ixtri d-dħul fuq Xceed",
+    "tables": "Itlob mejda fuq WhatsApp",
+    "offers": "Formuli tad-dħul u mwejjed",
+    "gallery": "Ritratti ta’ {venue}",
+    "programme": "Programm u ħinijiet",
+    "related": "Avvenimenti importanti oħra f’{city}",
+    "map": "Direzzjonijiet għall-post",
+    "minimumAge": "Età minima",
+    "music": "Ġeneri indikati mill-post",
+    "dressCode": "Dress code",
+    "sourceChecked": "L-aħħar verifika tal-offerti",
+    "inquiry": "Staqsi lill-concierge dwar l-għażliet attwali — WhatsApp"
+  },
+  "noAdmission": "Ma ġiet ippubblikata ebda għażla tad-dħul għal dan l-avveniment. Staqsi lill-concierge dwar l-għażliet attwali.",
+  "noTables": "Ma ġie ppubblikat ebda pakkett ta’ mejda għal dan l-avveniment. Messaġġ WhatsApp jibda talba u ma jikkonfermax disponibbiltà jew prenotazzjoni.",
+  "noAperitif": "Ma ġiet ippubblikata ebda għażla ta’ aperittiv għal dan l-avveniment.",
+  "hasAdmission": "Uża l-link Xceed f’din il-paġna, iddedikat għal {event}. Qabel il-ħlas iċċekkja d-data, l-isem tal-offerta u l-kundizzjonijiet tax-xiri. L-inqas prezz tad-dħul disponibbli fl-aħħar verifika huwa {price}. L-offerti jistgħu jinbidlu; jgħodd il-prezz tal-formula magħżula u kkonfermata fuq Xceed.",
+  "hasTables": "Ikteb fuq WhatsApp lil +39 351 912 7047 u semmi l-avveniment, id-data u n-numru ta’ mistednin. Nightlife Milan jgħinek bit-talba; id-disponibbiltà u l-kundizzjonijiet jeħtieġu konferma.",
+  "hasAperitif": "Ġiet ippubblikata għażla ta’ aperittiv. Qabel tagħżilha, iċċekkja l-istatus, il-ħinijiet u x’inhu inkluż eżatt."
+}

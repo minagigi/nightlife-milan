@@ -1,3 +1,5 @@
+import SeoAuthorityHub from './SeoAuthorityHub';
+import type { LocaleCode } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import { Instagram, MessageCircle } from 'lucide-react';
 import NewsletterHub from './NewsletterHub';
@@ -44,6 +46,28 @@ export default function Footer({ lang }: FooterProps) {
 
   return (
     <div className="mt-auto w-full">
+      <SeoAuthorityHub lang={lang as LocaleCode} />
+      <div className="bg-[#0B0A09] border-t border-white/10 px-4 sm:px-6 lg:px-8 py-6">
+        <div className="max-w-7xl mx-auto">
+          <details data-footer-city-map className="group rounded-lg border border-white/15 bg-black/40 p-4">
+            <summary className="cursor-pointer font-mono text-xs uppercase tracking-[0.2em] text-champagne flex items-center justify-between">
+              <span>Milano Nightlife Map · 45.4642° N, 9.1900° E · Google Maps</span>
+              <span className="text-white/60">+</span>
+            </summary>
+            <div className="mt-4 space-y-2 text-xs text-white/70">
+              <p>Centro Storico, Corso Como, Brera, Parco Sempione, San Siro &amp; Navigli — Milano (MI), Italia.</p>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=45.4642,9.1900"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-champagne underline"
+              >
+                Open Milan Nightlife Map on Google Maps (https://www.google.com/maps)
+              </a>
+            </div>
+          </details>
+        </div>
+      </div>
       <NewsletterHub lang={lang} />
       <footer className="w-full bg-[#131009] py-16 px-4 sm:px-6 lg:px-8" style={{ borderTop: '1px solid transparent', borderImage: 'linear-gradient(90deg, transparent, rgba(201,168,106,0.25), transparent) 1' }}>
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">

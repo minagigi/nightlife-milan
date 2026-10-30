@@ -4,6 +4,8 @@ import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { EntryFormulaMatrix, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
+import EditorialPageSections from '@/components/EditorialPageSections';
+import type { LocaleCode } from '@/lib/i18n/locales';
 
 export const revalidate = 86400;
 
@@ -266,6 +268,7 @@ export default async function FAQPage({ params }: Props) {
             </a>
           </div>
         </section>
+              <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/faq`} />
       </main>
     </>
   );

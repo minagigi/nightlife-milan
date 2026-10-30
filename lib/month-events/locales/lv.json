@@ -1,0 +1,177 @@
+{
+  "locale": "lv",
+  "city": "Milāna",
+  "titleTemplate": "{venue}: {event} — {date}",
+  "metaTitleTemplate": "{venue} {event} {shortDate}",
+  "metaDescriptionTemplate": "{venue}, {shortDate}: {event}. {age}; {music}; {dressCode}.",
+  "introduction": "{event}. Pasākums sākas {date} vietā {venue}. Publicētais laika posms ir {time} pēc {city}s laika joslas. Norises vieta ir {venue}, adresē {address}, Milānā. Kluba norādītie žanri: {music}. Minimālais vecums: {age}. Ģērbšanās prasības: {dressCode}.",
+  "headings": {
+    "overview": "{event} klubā {venue}: datums un programma",
+    "booking": "Biļetes un galdiņi uz {event} Milānā",
+    "faq": "Biežākie jautājumi par {event} klubā {venue}"
+  },
+  "sections": [
+    {
+      "id": "event",
+      "heading": "{event}: pasākums {city}s kalendārā",
+      "body": "Publicētais nosaukums ir {event}, datumā {date}. Izmantojiet nosaukumu, datumu un {venue} kopā, lai atšķirtu šo vakaru no citiem datumiem vai klubiem. Pasākums sākas {date} vietā {venue}. Kluba norādītie žanri: {music}."
+    },
+    {
+      "id": "programme",
+      "heading": "Pasākums {event}: sākuma un beigu laiks",
+      "body": "Publicētais laika posms ir {time}, un pasākums beidzas datumā {endDate}. Tāpēc par sākuma datumu uzskatiet {date}, pat ja atgriežaties pēc pusnakts. Atvēršanas laiks palīdz plānot ierašanos; tas nav apstiprināts seta laiks. Ja vēlaties apmeklēt konkrētu programmas brīdi, jautājiet konsjeržam, nepieņemot nepublicētu grafiku."
+    },
+    {
+      "id": "venue",
+      "heading": "{venue}, {address}",
+      "body": "Norises vieta ir {venue}, adresē {address}, Milānā. Saglabājiet adresi, kad dalāties programmā ar draugiem: citiem vakariem var būt līdzīgi nosaukumi, bet tie var notikt citur. Galerijas fotogrāfijas rāda kluba telpas un palīdz to atpazīt; tās neatspoguļo nākotnes vakaru vai piešķirta galdiņa atrašanās vietu."
+    },
+    {
+      "id": "arrival",
+      "heading": "Kā plānot ierašanos un atgriešanos Milānā",
+      "body": "Iestatiet {address} kā galamērķi un pārbaudiet maršrutu no savas atrašanās vietas. Atvēliet laiku, lai satiktos ar grupu un izietu ieejas pārbaudes. Atgriežoties pēc pusnakts, pārbaudiet transporta kustības sarakstus pareizajam datumam un nepaļaujieties uz nakts satiksmi. Biļetes cenā šajā lapā nav iekļauts transfērs vai rezervēta autostāvvieta."
+    },
+    {
+      "id": "tickets",
+      "heading": "{event} biļetes Milānā: piedāvājumi un cena",
+      "body": "{admissionSummary}"
+    },
+    {
+      "id": "tables",
+      "heading": "Galdiņi uz {event} klubā {venue}, izmantojot WhatsApp",
+      "body": "{tableSummary}"
+    },
+    {
+      "id": "admission",
+      "heading": "Ieeja {venue}: vecums un ģērbšanās prasības",
+      "body": "Šajā datumā ieejas vecuma slieksnis ir {age}, bet ģērbšanās prasības ir {dressCode}. Pirms pirkuma dariet šos nosacījumus zināmus grupai. Ņemiet līdzi derīgu dokumentu vecuma pārbaudei; par pieņemtiem dokumentiem vai pieejamības vajadzībām lūdziet apstiprinājumu pirms došanās ceļā. WhatsApp sarakste nav līdzvērtīga iegādātai ieejas biļetei."
+    },
+    {
+      "id": "planning",
+      "heading": "Pirkuma apstiprinājums un gatavošanās vakaram",
+      "body": "Ja ieeja ir iegādāta, nosūtiet pirkuma apstiprinājumu WhatsApp uz +39 351 912 7047, norādot vārdu, pasākumu un personu skaitu. Saglabājiet arī pirkuma dokumenta oriģinālu."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Kad {event} notiks Milānā?",
+      "answer": "Pasākums sākas {date} vietā {venue}. Tas beidzas pēc pusnakts, datumā {endDate}: pareizās biļetes meklēšanai izmantojiet sākuma datumu."
+    },
+    {
+      "question": "Kur notiks pasākums {event}?",
+      "answer": "Norises vieta ir {venue}, adresē {address}, Milānā. Pārbaudiet šo adresi, plānojot braucienu vai kopīgojot tikšanās vietu ar grupu."
+    },
+    {
+      "question": "Kāds ir vakara norises laiks?",
+      "answer": "Publicētais laika posms ir {time} pēc {city}s laika joslas. Tas norāda pasākuma atvēršanu un slēgšanu, nevis atsevišķas uzstāšanās laiku."
+    },
+    {
+      "question": "Kāds ir pasākuma pilnais nosaukums?",
+      "answer": "Publicētais nosaukums ir {event}, datumā {date}. Izmantojiet nosaukumu, datumu un {venue} kopā, lai atšķirtu šo vakaru no citiem datumiem vai klubiem."
+    },
+    {
+      "question": "Kluba norādītie žanri?",
+      "answer": "{music}"
+    },
+    {
+      "question": "Kur iegādāties biļetes uz {event}?",
+      "answer": "{admissionSummary}"
+    },
+    {
+      "question": "Cik maksā ieeja uz {event} Milānā?",
+      "answer": "{admissionSummary} Agrākas cenu kategorijas var būt izpārdotas."
+    },
+    {
+      "question": "Kāpēc dažiem piedāvājumiem ir zemāka cena?",
+      "answer": "Agrākas cenu kategorijas var būt izpārdotas. Lapa tās nošķir no pārbaudes laikā pieejamajiem piedāvājumiem: veca cena negarantē, ka paketi vēl var iegādāties."
+    },
+    {
+      "question": "Vai biļetē ir iekļauts dzēriens?",
+      "answer": "Pārbaudiet izvēlētā piedāvājuma precīzo nosaukumu un norādīto saturu. Nepārnesiet viena piedāvājuma iekļāvumus uz citu."
+    },
+    {
+      "question": "Kā pieprasīt galdiņu uz {event}?",
+      "answer": "Rakstiet WhatsApp uz +39 351 912 7047, norādot pasākumu, datumu un viesu skaitu. Nightlife Milan palīdzēs ar pieprasījumu; pieejamība un nosacījumi jāapstiprina."
+    },
+    {
+      "question": "Kur atrast galdiņu cenas?",
+      "answer": "{tableSummary} Lūdziet konsjeržam apstiprināt paketi un tās saturu grupai."
+    },
+    {
+      "question": "Vai galdiņa cena ir par personu?",
+      "answer": "{tableSummary} Neuzskatiet to automātiski par individuālu summu."
+    },
+    {
+      "question": "Vai WhatsApp automātiski apstiprina rezervāciju?",
+      "answer": "Nē. Ziņa ir informācijas vai rezervācijas pieprasījums. Sagaidiet nosacījumu apstiprinājumu un sekojiet saņemtajiem norādījumiem; sarakste pati par sevi nav ieejas biļete."
+    },
+    {
+      "question": "Ko darīt pēc ieejas iegādes?",
+      "answer": "Ja ieeja ir iegādāta, nosūtiet pirkuma apstiprinājumu WhatsApp uz +39 351 912 7047, norādot vārdu, pasākumu un personu skaitu. Saglabājiet arī pirkuma dokumenta oriģinālu."
+    },
+    {
+      "question": "Kāds ir minimālais vecums pasākumam {event}?",
+      "answer": "Publicētais vecuma slieksnis šim vakaram ir {age}. Tā ir konkrētā datuma ieejas prasība, nevis norāde par klātesošās publikas vidējo vecumu."
+    },
+    {
+      "question": "Vai jāņem līdzi personu apliecinošs dokuments?",
+      "answer": "Ņemiet līdzi derīgu dokumentu vecuma pārbaudei. Lai noskaidrotu, kādi dokumenti tiek pieņemti konkrētā situācijā, pirms vakara lūdziet klubam apstiprinājumu."
+    },
+    {
+      "question": "Kādas ir {venue} ģērbšanās prasības?",
+      "answer": "Norādītās ģērbšanās prasības ir {dressCode}. Informējiet grupu un pirms došanās ceļā lūdziet skaidrojumu, ja šaubāties par konkrētu apģērbu vai nosacījumu."
+    },
+    {
+      "question": "Vai ir pieejama aperitīva pakete?",
+      "answer": "{aperitifSummary}"
+    },
+    {
+      "question": "Kā nokļūt {venue}?",
+      "answer": "Izmantojiet {address}, {city}, kā galamērķi. Izvēlieties maršrutu atbilstoši sākumpunktam un pārbaudiet transportu gan turpceļam, gan atpakaļceļam."
+    },
+    {
+      "question": "Vai ir iekļauta autostāvvieta vai transfērs?",
+      "answer": "Šajā lapā rezervēta autostāvvieta vai transfērs nav norādīti kā iekļauti pakalpojumi. Organizējiet tos atsevišķi un pārbaudiet pieejamību un nosacījumus pie izvēlētā pakalpojuma sniedzēja."
+    },
+    {
+      "question": "Kā pārbaudīt pieejamības nosacījumus?",
+      "answer": "Pirms pirkuma sazinieties ar konsjeržu un aprakstiet konkrēto vajadzību. Ieejai, iekšējam maršrutam un izvietojumam nepieciešams atsevišķs apstiprinājums; fotogrāfijas tos nevar garantēt."
+    },
+    {
+      "question": "Kā atpazīt pareizo vakaru?",
+      "answer": "Salīdziniet pilnu nosaukumu {event}, datumu {date} un vietu {venue}. Saīsinājums nosaukumā neaizstāj šos datus un nenozīmē piekļuvi citiem pasākumiem."
+    },
+    {
+      "question": "Vai varu organizēt vakaru grupai?",
+      "answer": "Jautājiet informāciju Nightlife Milan, norādot cilvēku skaitu un datumu. Precizējiet, vai meklējat atsevišķas ieejas vai galdiņu, jo paketēm ir atšķirīgi nosacījumi."
+    },
+    {
+      "question": "Vai varu iziet no kluba un atgriezties?",
+      "answer": "Šeit norādītā informācija neapstiprina atkārtotas ieejas iespēju. Pirms iziešanas jautājiet kluba darbiniekiem un pārbaudiet savas ieejas nosacījumus."
+    },
+    {
+      "question": "Kādi ir izmaiņu vai atmaksas nosacījumi?",
+      "answer": "Tie ir atkarīgi no iegādātā piedāvājuma un pasūtījuma nosacījumiem. Pirms maksājuma pārbaudiet datumu, piedāvājuma nosaukumu un pirkuma nosacījumus. Šī lapa nesola automātiskas izmaiņas vai atmaksu."
+    }
+  ],
+  "labels": {
+    "tickets": "Iegādāties ieeju Xceed",
+    "tables": "Pieprasīt galdiņu WhatsApp",
+    "offers": "Ieejas un galdiņu paketes",
+    "gallery": "{venue} attēli",
+    "programme": "Programma un laiki",
+    "related": "Citi nozīmīgi pasākumi Milānā",
+    "map": "Norādes uz klubu",
+    "minimumAge": "Minimālais vecums",
+    "music": "Kluba norādītie žanri",
+    "dressCode": "Ģērbšanās prasības",
+    "sourceChecked": "Pēdējā piedāvājumu pārbaude",
+    "inquiry": "Jautājiet konsjeržam par pašreizējām iespējām — WhatsApp"
+  },
+  "noAdmission": "Šim pasākumam nav publicēts ieejas piedāvājums. Jautājiet konsjeržam par pašreizējām iespējām.",
+  "noTables": "Šim pasākumam nav publicēta galdiņa pakete. WhatsApp ziņa sāk pieprasījumu un neapstiprina pieejamību vai rezervāciju.",
+  "noAperitif": "Šim pasākumam nav publicēts aperitīva piedāvājums.",
+  "hasAdmission": "Izmantojiet šajā lapā esošo Xceed saiti, kas paredzēta pasākumam {event}. Pirms maksājuma pārbaudiet datumu, piedāvājuma nosaukumu un pirkuma nosacījumus. Zemākā pieejamā ieejas cena pēdējās pārbaudes laikā bija {price}. Piedāvājumi var mainīties: faktiskā cena ir Xceed izvēlētās un apstiprinātās paketes cena.",
+  "hasTables": "Rakstiet WhatsApp uz +39 351 912 7047, norādot pasākumu, datumu un viesu skaitu. Nightlife Milan palīdzēs ar pieprasījumu; pieejamība un nosacījumi jāapstiprina.",
+  "hasAperitif": "Ir publicēts aperitīva piedāvājums. Pirms izvēles pārbaudiet tā pašreizējo statusu, laikus un precīzu saturu."
+}

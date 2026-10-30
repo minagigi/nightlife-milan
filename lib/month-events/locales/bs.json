@@ -1,0 +1,177 @@
+{
+  "locale": "bs",
+  "city": "Milano",
+  "titleTemplate": "{venue}: {event} — {date}",
+  "metaTitleTemplate": "{venue} {event} {shortDate}",
+  "metaDescriptionTemplate": "{venue}, {shortDate}: {event}. {age}; {music}; {dressCode}.",
+  "introduction": "{event}. Događaj počinje {date} u {venue}. Objavljeni vremenski raspon je {time}, po vremenskoj zoni Milana. Mjesto održavanja je {venue}, na adresi {address}, {city}. Žanrovi koje klub navodi: {music}. Minimalna dob: {age}. Pravila odijevanja: {dressCode}.",
+  "headings": {
+    "overview": "{event} u klubu {venue}: datum i program",
+    "booking": "Ulaznice i stolovi za {event} u Milanu",
+    "faq": "Česta pitanja o {event} u klubu {venue}"
+  },
+  "sections": [
+    {
+      "id": "event",
+      "heading": "{event}: događaj u kalendaru Milana",
+      "body": "Objavljeni naziv je {event}, za datum {date}. Koristite zajedno naziv, datum i {venue} kako biste razlikovali ovu večer od drugih datuma ili mjesta. Događaj počinje {date} u {venue}. Žanrovi koje klub navodi: {music}."
+    },
+    {
+      "id": "programme",
+      "heading": "Termin za {event}: otvaranje i zatvaranje",
+      "body": "Objavljeni vremenski raspon je {time}, a zatvaranje je na datum {endDate}. Zato {date} koristite kao početni datum, čak i ako se vraćate poslije ponoći. Vrijeme otvaranja služi za planiranje dolaska; ono nije potvrđeno vrijeme seta. Ako želite prisustvovati određenom dijelu programa, zatražite informacije od conciergea bez pretpostavljanja neobjavljenog rasporeda."
+    },
+    {
+      "id": "venue",
+      "heading": "{venue}, {address}",
+      "body": "Mjesto održavanja je {venue}, na adresi {address}, {city}. Sačuvajte adresu kada dijelite plan s prijateljima: druge večeri mogu imati slične nazive, ali se održavati na drugom mjestu. Fotografije u galeriji prikazuju prostore kluba i pomažu da ga prepoznate; one ne dokumentuju budući događaj niti položaj dodijeljenog stola."
+    },
+    {
+      "id": "arrival",
+      "heading": "Kako organizovati dolazak i povratak u Milanu",
+      "body": "Postavite {address} kao odredište i provjerite rutu sa svoje lokacije. Ostavite dovoljno vremena za susret s grupom i kontrolu na ulazu. Za povratak poslije ponoći provjerite red vožnje za odgovarajući datum, bez pretpostavke da postoji noćni prijevoz. Stranica ne uključuje transfer ili rezervisani parking u cijenu ulaznice."
+    },
+    {
+      "id": "tickets",
+      "heading": "Ulaznice za {event} u Milanu: ponude i cijena",
+      "body": "{admissionSummary}"
+    },
+    {
+      "id": "tables",
+      "heading": "Stolovi za {event} u klubu {venue} putem WhatsAppa",
+      "body": "{tableSummary}"
+    },
+    {
+      "id": "admission",
+      "heading": "Ulaz u {venue}: dobna granica i pravila odijevanja",
+      "body": "Za ovaj datum dobna granica je {age}, a pravila odijevanja su {dressCode}. Podijelite ove uslove s grupom prije kupovine. Ponesite važeći dokument radi provjere godina; ako imate pitanja o prihvaćenim dokumentima ili pristupačnosti, zatražite potvrdu prije polaska. Razgovor putem WhatsAppa nije isto što i kupljena ulaznica."
+    },
+    {
+      "id": "planning",
+      "heading": "Potvrda kupovine i priprema za večer",
+      "body": "Ako ste kupili ulaz, pošaljite potvrdu kupovine putem WhatsAppa na broj +39 351 912 7047, uz ime, događaj i broj osoba. Sačuvajte i originalni dokument o kupovini."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Kada se {event} održava u Milanu?",
+      "answer": "Događaj počinje {date} u {venue}. Završava se poslije ponoći, na datum {endDate}: koristite početni datum kako biste pronašli odgovarajuću ulaznicu."
+    },
+    {
+      "question": "Gdje se održava {event}?",
+      "answer": "Mjesto održavanja je {venue}, na adresi {address}, {city}. Provjerite ovu adresu kada planirate put ili grupi šaljete mjesto susreta."
+    },
+    {
+      "question": "Koji je termin večeri?",
+      "answer": "Objavljeni vremenski raspon je {time}, po vremenskoj zoni Milana. On označava otvaranje i zatvaranje događaja, a ne vrijeme pojedinačnog nastupa."
+    },
+    {
+      "question": "Koji je puni naziv događaja?",
+      "answer": "Objavljeni naziv je {event}, za datum {date}. Koristite zajedno naziv, datum i {venue} kako biste razlikovali ovu večer od drugih datuma ili mjesta."
+    },
+    {
+      "question": "Žanrovi koje klub navodi?",
+      "answer": "{music}"
+    },
+    {
+      "question": "Gdje kupiti ulaznice za {event}?",
+      "answer": "{admissionSummary}"
+    },
+    {
+      "question": "Koliko košta ulaz za {event} u Milanu?",
+      "answer": "{admissionSummary} Ranije cjenovne kategorije mogu biti rasprodane."
+    },
+    {
+      "question": "Zašto neke ponude imaju niže cijene?",
+      "answer": "Ranije cjenovne kategorije mogu biti rasprodane. Stranica ih odvaja od ponuda dostupnih u vrijeme provjere: stara cijena ne garantuje da se paket još može kupiti."
+    },
+    {
+      "question": "Da li ulaznica uključuje piće?",
+      "answer": "Provjerite tačan naziv i navedene stavke izabrane ponude. Nemojte prenositi uključene stavke iz jedne ponude u drugu."
+    },
+    {
+      "question": "Kako zatražiti sto za {event}?",
+      "answer": "Pišite putem WhatsAppa na broj +39 351 912 7047 i navedite događaj, datum i broj gostiju. Nightlife Milan pomaže s upitom; dostupnost i uslovi moraju biti potvrđeni."
+    },
+    {
+      "question": "Gdje mogu vidjeti cijene stolova?",
+      "answer": "{tableSummary} Zamolite conciergea da potvrdi paket i šta on uključuje za grupu."
+    },
+    {
+      "question": "Da li je cijena stola po osobi?",
+      "answer": "{tableSummary} Nemojte je automatski tumačiti kao cijenu po osobi."
+    },
+    {
+      "question": "Da li WhatsApp automatski potvrđuje rezervaciju?",
+      "answer": "Ne. Poruka je upit za informacije ili rezervaciju. Sačekajte potvrdu uslova i pratite dobijene upute; sam razgovor nije ulaznica."
+    },
+    {
+      "question": "Šta trebam uraditi nakon kupovine ulaza?",
+      "answer": "Ako ste kupili ulaz, pošaljite potvrdu kupovine putem WhatsAppa na broj +39 351 912 7047, uz ime, događaj i broj osoba. Sačuvajte i originalni dokument o kupovini."
+    },
+    {
+      "question": "Koja je minimalna dob za {event}?",
+      "answer": "Objavljena dobna granica za ovu večer je {age}. To je uslov ulaska za taj datum, a ne pokazatelj prosječne dobi publike."
+    },
+    {
+      "question": "Trebam li ponijeti lični dokument?",
+      "answer": "Ponesite važeći dokument radi provjere godina. Za informaciju o tome koji se dokumenti prihvataju u vašem slučaju, zatražite potvrdu od kluba prije večeri."
+    },
+    {
+      "question": "Koja su pravila odijevanja u klubu {venue}?",
+      "answer": "Navedena pravila odijevanja su {dressCode}. Podijelite ih s grupom i zatražite pojašnjenje prije polaska ako niste sigurni u neki odjevni predmet ili poseban uslov."
+    },
+    {
+      "question": "Postoji li ponuda za aperitiv?",
+      "answer": "{aperitifSummary}"
+    },
+    {
+      "question": "Kako stići do kluba {venue}?",
+      "answer": "Koristite {address}, {city}, kao odredište. Izaberite rutu prema mjestu polaska i provjerite prijevoz i za dolazak i za povratak."
+    },
+    {
+      "question": "Da li su parking ili transfer uključeni?",
+      "answer": "Ova stranica ne navodi rezervisani parking ili transfer kao uključene usluge. Organizujte ih zasebno i provjerite dostupnost i uslove kod izabranog pružaoca."
+    },
+    {
+      "question": "Kako provjeriti uslove pristupačnosti?",
+      "answer": "Kontaktirajte conciergea prije kupovine i opišite konkretnu potrebu. Ulaz, unutrašnja ruta i smještaj zahtijevaju posebnu potvrdu; fotografije nisu dovoljne kao garancija."
+    },
+    {
+      "question": "Kako prepoznati pravu večer?",
+      "answer": "Uporedite puni naziv {event}, datum {date} i mjesto {venue}. Skraćenica u naslovu ne zamjenjuje te podatke i ne omogućava ulaz na druge događaje."
+    },
+    {
+      "question": "Mogu li organizovati večer za grupu?",
+      "answer": "Zatražite informacije od Nightlife Milana i navedite broj osoba i datum. Recite tražite li pojedinačne ulaze ili sto, jer ponude imaju različite uslove."
+    },
+    {
+      "question": "Mogu li izaći iz kluba i ponovo ući?",
+      "answer": "Mogućnost ponovnog ulaska nije potvrđena ovdje navedenim informacijama. Pitajte osoblje kluba i provjerite uslove ulaska prije nego što izađete."
+    },
+    {
+      "question": "Koji su uslovi za izmjenu ili povrat novca?",
+      "answer": "Zavise od kupljene ponude i uslova narudžbe. Prije plaćanja provjerite datum, naziv ponude i uslove kupovine. Ova stranica ne obećava automatske izmjene ili povrat novca."
+    }
+  ],
+  "labels": {
+    "tickets": "Kupite ulaz putem Xceeda",
+    "tables": "Zatražite sto putem WhatsAppa",
+    "offers": "Ponude za ulaz i stolove",
+    "gallery": "Fotografije kluba {venue}",
+    "programme": "Program i termini",
+    "related": "Drugi važni događaji u Milanu",
+    "map": "Upute do kluba",
+    "minimumAge": "Minimalna dob",
+    "music": "Žanrovi koje klub navodi",
+    "dressCode": "Pravila odijevanja",
+    "sourceChecked": "Posljednja provjera ponuda",
+    "inquiry": "Pitajte conciergea za trenutne mogućnosti — WhatsApp"
+  },
+  "noAdmission": "Za ovaj događaj nije objavljena ponuda ulaza. Pitajte conciergea za trenutne mogućnosti.",
+  "noTables": "Za ovaj događaj nije objavljen paket za sto. WhatsApp poruka pokreće upit i ne potvrđuje dostupnost ni rezervaciju.",
+  "noAperitif": "Za ovaj događaj nije objavljena opcija aperitiva.",
+  "hasAdmission": "Koristite Xceed link na ovoj stranici, namijenjen za {event}. Prije plaćanja provjerite datum, naziv ponude i uslove kupovine. Najniža dostupna cijena prilikom posljednje provjere je {price}. Ponude se mogu promijeniti: stvarna cijena je cijena paketa koji izaberete i potvrdite na Xceedu.",
+  "hasTables": "Pišite putem WhatsAppa na broj +39 351 912 7047 i navedite događaj, datum i broj gostiju. Nightlife Milan pomaže s upitom; dostupnost i uslovi moraju biti potvrđeni.",
+  "hasAperitif": "Objavljena je opcija aperitiva. Prije odabira provjerite trenutni status, vrijeme i tačno uključene stavke."
+}

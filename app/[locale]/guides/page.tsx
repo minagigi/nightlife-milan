@@ -9,6 +9,8 @@ import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { mockGuides } from '@/lib/data';
 import { getLocalizedText } from '@/lib/seo';
 import { VipQuoteCalculator, WeeklyNightlifeNavigator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
+import EditorialPageSections from '@/components/EditorialPageSections';
+import type { LocaleCode } from '@/lib/i18n/locales';
 
 export const revalidate = 3600;
 
@@ -34,7 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     ),
     locale
   );
-  const ogImage = `${baseUrl}/images/guides-hero.webp`;
+  const ogImage = `${baseUrl}${mockGuides[0]?.image || '/images/guides-hero.webp'}`;
 
   const keywordsEn = [
     'milan nightlife guide',
@@ -635,6 +637,7 @@ export default async function GuidesPage({
 
       {/* Newsletter Hub */}
       <NewsletterHub lang={locale} />
-    </main>
+            <EditorialPageSections locale={locale as LocaleCode} path={`${localePrefix}/guides`} />
+      </main>
   );
 }

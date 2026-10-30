@@ -12,6 +12,8 @@ import { generateEventListSchema, jsonLdString } from '@/lib/seo';
 import { getAllCalendarEvents } from '@/lib/calendarEvents';
 import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 import { VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
+import EditorialPageSections from '@/components/EditorialPageSections';
+import type { LocaleCode } from '@/lib/i18n/locales';
 
 // ISR Configuration
 export const revalidate = 3600;
@@ -353,6 +355,16 @@ export default async function GenrePage({ params }: Props) {
   const typedLocale = (locale === 'it' ? 'it' : 'en') as 'en' | 'it';
   const isIt = typedLocale === 'it';
   const lp = localePrefix(locale);
+  const genreHeroMap: Record<string, string> = {
+    'hip-hop': '/images/genres/hip-hop-hero.webp',
+    'techno': '/images/genres/techno-hero.webp',
+    'house': '/images/genres/house-hero.webp',
+    'commercial': '/images/genres/commercial-hero.webp',
+    'latin': '/images/genres/latin-hero.webp',
+    'afrobeats': '/images/genres/afrobeats-hero.webp',
+    'open-format': '/images/genres/open-format-hero.webp',
+  };
+  const genreHeroImg = genreHeroMap[slug] || '/images/milan-nightclub-luxury-vip-champagne.webp';
 
   const genre = genreData[slug];
 
@@ -591,6 +603,7 @@ export default async function GenrePage({ params }: Props) {
           }}
         />
       )}
-    </main>
+            <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/genres/${slug}`} />
+      </main>
   );
 }

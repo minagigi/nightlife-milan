@@ -1,0 +1,177 @@
+{
+  "locale": "lt",
+  "city": "Milanas",
+  "titleTemplate": "{venue}: {event} — {date}",
+  "metaTitleTemplate": "{venue} {event} {shortDate}",
+  "metaDescriptionTemplate": "{venue}, {shortDate}: {event}. {age}; {music}; {dressCode}.",
+  "introduction": "{event}. Renginys prasideda {date} vietoje {venue}. Paskelbtas intervalas yra {time} Milano laiko juostoje. Renginio vieta yra {venue}, adresu {address}, Milane. Klubo nurodyti žanrai: {music}. Minimalus amžius: {age}. Aprangos kodas: {dressCode}.",
+  "headings": {
+    "overview": "{event} klube „{venue}“: data ir programa",
+    "booking": "Bilietai ir staliukai renginiui {event} Milane",
+    "faq": "Klausimai apie {event} klube „{venue}“"
+  },
+  "sections": [
+    {
+      "id": "event",
+      "heading": "{event}: renginys Milano kalendoriuje",
+      "body": "Paskelbtas pavadinimas yra {event}, o data – {date}. Naudokite pavadinimą, datą ir „{venue}“ kartu, kad atskirtumėte šį vakarą nuo kitų datų ar klubų. Renginys prasideda {date} vietoje {venue}. Klubo nurodyti žanrai: {music}."
+    },
+    {
+      "id": "programme",
+      "heading": "Renginys {event}: pradžios ir pabaigos laikas",
+      "body": "Paskelbtas laiko intervalas yra {time}, o pabaiga numatyta {endDate}. Pradžios data laikykite {date}, net jei grįšite po vidurnakčio. Atidarymo laikas padeda planuoti atvykimą, bet nėra patvirtintas pasirodymo laikas. Jei norite pamatyti konkretų programos momentą, klauskite konsjeržo ir nepasikliaukite nepaskelbtu tvarkaraščiu."
+    },
+    {
+      "id": "venue",
+      "heading": "{venue}, {address}",
+      "body": "Renginio vieta yra {venue}, adresu {address}, Milane. Išsaugokite adresą dalydamiesi programa su draugais: panašiai pavadinti vakarai gali vykti kitur. Galerijos nuotraukos rodo klubo erdves ir padeda jį atpažinti; jos nefiksuoja būsimo renginio ar paskirto staliuko vietos."
+    },
+    {
+      "id": "arrival",
+      "heading": "Kaip suplanuoti atvykimą ir grįžimą Milane",
+      "body": "Nustatykite kelionės tikslą {address} ir patikrinkite maršrutą iš savo vietos. Skirkite laiko susitikti su grupe ir įėjimo patikrai. Grįždami po vidurnakčio tikrinkite transporto tvarkaraštį teisingai datai ir nemanykite, kad veiks naktinis transportas. Bilieto kaina šiame puslapyje neapima pervežimo ar rezervuotos stovėjimo vietos."
+    },
+    {
+      "id": "tickets",
+      "heading": "Bilietai į {event} Milane: pasiūlymai ir kaina",
+      "body": "{admissionSummary}"
+    },
+    {
+      "id": "tables",
+      "heading": "Staliukai renginiui {event} klube „{venue}“ per „WhatsApp“",
+      "body": "{tableSummary}"
+    },
+    {
+      "id": "admission",
+      "heading": "Įėjimas į „{venue}“: amžius ir apranga",
+      "body": "Šiai datai amžiaus riba yra {age}, o aprangos kodas – {dressCode}. Prieš pirkdami perduokite sąlygas grupei. Turėkite galiojantį dokumentą amžiui patikrinti; dėl priimamų dokumentų ar prieinamumo kreipkitės iš anksto. Pokalbis per „WhatsApp“ nepakeičia įsigyto įėjimo bilieto."
+    },
+    {
+      "id": "planning",
+      "heading": "Pirkimo patvirtinimas ir pasiruošimas vakarui",
+      "body": "Jei įsigijote įėjimą, nusiųskite pirkimo patvirtinimą per „WhatsApp“ numeriu +39 351 912 7047, nurodydami vardą, renginį ir žmonių skaičių. Išsaugokite ir originalų dokumentą."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Kada Milane vyks {event}?",
+      "answer": "Renginys prasideda {date} vietoje {venue}. Jis baigiasi po vidurnakčio, dieną {endDate}; ieškodami tinkamo bilieto naudokite pradžios datą."
+    },
+    {
+      "question": "Kur vyks renginys {event}?",
+      "answer": "Renginio vieta yra {venue}, adresu {address}, Milane. Patikrinkite šį adresą planuodami kelionę ar siųsdami grupei susitikimo vietą."
+    },
+    {
+      "question": "Kokiu laiku vyks vakaras?",
+      "answer": "Paskelbtas intervalas yra {time} Milano laiko juostoje. Jis nurodo renginio atidarymą ir pabaigą, o ne atskiro pasirodymo laiką."
+    },
+    {
+      "question": "Koks visas renginio pavadinimas?",
+      "answer": "Paskelbtas pavadinimas yra {event}, o data – {date}. Naudokite pavadinimą, datą ir „{venue}“ kartu, kad atskirtumėte šį vakarą nuo kitų datų ar klubų."
+    },
+    {
+      "question": "Klubo nurodyti žanrai?",
+      "answer": "{music}"
+    },
+    {
+      "question": "Kur įsigyti bilietus į {event}?",
+      "answer": "{admissionSummary}"
+    },
+    {
+      "question": "Kiek kainuoja įėjimas į {event} Milane?",
+      "answer": "{admissionSummary} Ankstesni kainų etapai gali būti išparduoti."
+    },
+    {
+      "question": "Kodėl kai kurie pasiūlymai pigesni?",
+      "answer": "Ankstesni kainų etapai gali būti išparduoti. Puslapis juos atskiria nuo prieinamų pasiūlymų; sena kaina negarantuoja, kad paketą dar galima įsigyti."
+    },
+    {
+      "question": "Ar bilietas apima gėrimą?",
+      "answer": "Patikrinkite tikslų pasirinkto pasiūlymo pavadinimą ir nurodytą turinį. Nepriskirkite vieno pasiūlymo įtraukčių kitam."
+    },
+    {
+      "question": "Kaip paprašyti staliuko renginiui {event}?",
+      "answer": "Rašykite per „WhatsApp“ numeriu +39 351 912 7047 ir nurodykite renginį, datą bei svečių skaičių. „Nightlife Milan“ padės pateikti užklausą; prieinamumą ir sąlygas būtina patvirtinti."
+    },
+    {
+      "question": "Kur rasti staliukų kainas?",
+      "answer": "{tableSummary} Paprašykite konsjeržo patvirtinti paketą ir kas į jį įeina grupei."
+    },
+    {
+      "question": "Ar staliuko kaina nurodyta asmeniui?",
+      "answer": "{tableSummary} Nelaikykite jos automatiškai asmens kaina."
+    },
+    {
+      "question": "Ar „WhatsApp“ automatiškai patvirtina rezervaciją?",
+      "answer": "Ne. Žinutė yra informacijos arba rezervacijos užklausa. Sulaukite sąlygų patvirtinimo ir vykdykite gautus nurodymus; vien pokalbis nėra įėjimo bilietas."
+    },
+    {
+      "question": "Ką daryti įsigijus įėjimą?",
+      "answer": "Jei įsigijote įėjimą, nusiųskite pirkimo patvirtinimą per „WhatsApp“ numeriu +39 351 912 7047, nurodydami vardą, renginį ir žmonių skaičių. Išsaugokite ir originalų dokumentą."
+    },
+    {
+      "question": "Koks minimalus amžius renginiui {event}?",
+      "answer": "Paskelbta šio vakaro amžiaus riba yra {age}. Tai konkrečios datos įėjimo sąlyga, o ne vidutinio lankytojų amžiaus apibūdinimas."
+    },
+    {
+      "question": "Ar reikia turėti asmens dokumentą?",
+      "answer": "Turėkite galiojantį dokumentą amžiui patikrinti. Jei reikia sužinoti, kokie dokumentai priimami jūsų atveju, iš anksto klauskite klubo."
+    },
+    {
+      "question": "Koks aprangos kodas galioja „{venue}“?",
+      "answer": "Nurodytas aprangos kodas yra {dressCode}. Pasakykite grupei ir prieš išvykdami pasiteiraukite, jei abejojate dėl konkretaus drabužio ar sąlygos."
+    },
+    {
+      "question": "Ar yra aperityvo pasiūlymas?",
+      "answer": "{aperitifSummary}"
+    },
+    {
+      "question": "Kaip nuvykti į „{venue}“?",
+      "answer": "Kaip tikslą naudokite {address}, {city}. Pasirinkite maršrutą pagal išvykimo vietą ir patikrinkite transportą atvykimui bei grįžimui."
+    },
+    {
+      "question": "Ar įskaičiuotas parkingas ar pervežimas?",
+      "answer": "Šiame puslapyje rezervuotas parkingas ar pervežimas nenurodomi kaip įtrauktos paslaugos. Užsakykite juos atskirai ir paslaugos teikėjo paklauskite apie sąlygas."
+    },
+    {
+      "question": "Kaip patikrinti prieinamumo sąlygas?",
+      "answer": "Prieš pirkdami susisiekite su konsjeržu ir aprašykite konkretų poreikį. Įėjimą, judėjimą viduje ir vietą reikia patvirtinti atskirai; nuotraukos to negarantuoja."
+    },
+    {
+      "question": "Kaip atpažinti tinkamą renginį?",
+      "answer": "Palyginkite visą pavadinimą {event}, datą {date} ir vietą „{venue}“. Santrumpa pavadinime nepakeičia šių duomenų ir nesuteikia įėjimo į kitus renginius."
+    },
+    {
+      "question": "Ar galiu suplanuoti vakarą grupei?",
+      "answer": "Kreipkitės į „Nightlife Milan“, nurodykite žmonių skaičių ir datą. Paaiškinkite, ar ieškote atskirų įėjimų, ar staliuko, nes paketų sąlygos skiriasi."
+    },
+    {
+      "question": "Ar galiu išeiti iš klubo ir grįžti?",
+      "answer": "Pakartotinis įėjimas pateiktoje informacijoje nepatvirtintas. Prieš išeidami paklauskite klubo darbuotojų ir patikrinkite savo bilieto sąlygas."
+    },
+    {
+      "question": "Kokios keitimo ar grąžinimo sąlygos?",
+      "answer": "Jos priklauso nuo įsigyto pasiūlymo ir užsakymo sąlygų. Prieš mokėdami patikrinkite datą, pasiūlymo pavadinimą ir pirkimo sąlygas. Puslapis nežada automatinių pakeitimų ar grąžinimų."
+    }
+  ],
+  "labels": {
+    "tickets": "Įsigyti įėjimą per „Xceed“",
+    "tables": "Paprašyti staliuko per „WhatsApp“",
+    "offers": "Įėjimo ir staliukų pasiūlymai",
+    "gallery": "„{venue}“ nuotraukos",
+    "programme": "Programa ir laikas",
+    "related": "Kiti svarbūs renginiai Milane",
+    "map": "Kelias į klubą",
+    "minimumAge": "Minimalus amžius",
+    "music": "Klubo nurodyti žanrai",
+    "dressCode": "Aprangos kodas",
+    "sourceChecked": "Paskutinis pasiūlymų tikrinimas",
+    "inquiry": "Apie dabartines galimybes klauskite concierge — WhatsApp"
+  },
+  "noAdmission": "Šiam renginiui nepaskelbtas įėjimo pasiūlymas. Apie dabartines galimybes klauskite concierge.",
+  "noTables": "Šiam renginiui nepaskelbtas staliuko paketas. WhatsApp žinutė pradeda užklausą ir nepatvirtina prieinamumo ar rezervacijos.",
+  "noAperitif": "Šiam renginiui nepaskelbtas aperityvo pasiūlymas.",
+  "hasAdmission": "Naudokite šiame puslapyje esančią „Xceed“ nuorodą, skirtą {event}. Prieš mokėdami patikrinkite datą, pasiūlymo pavadinimą ir pirkimo sąlygas. Mažiausia prieinama įėjimo kaina paskutinio tikrinimo metu yra {price}. Pasiūlymai gali keistis; galioja „Xceed“ pasirinkto ir patvirtinto paketo kaina.",
+  "hasTables": "Rašykite per „WhatsApp“ numeriu +39 351 912 7047 ir nurodykite renginį, datą bei svečių skaičių. „Nightlife Milan“ padės pateikti užklausą; prieinamumą ir sąlygas būtina patvirtinti.",
+  "hasAperitif": "Paskelbtas aperityvo pasiūlymas. Prieš pasirinkdami patikrinkite jo dabartinę būseną, laiką ir tikslias įtrauktas paslaugas."
+}

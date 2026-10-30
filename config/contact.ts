@@ -5,10 +5,15 @@ export const CONTACT = {
     labels: {
       en: 'Chat with us',
       it: 'Chatta con noi',
+      es: 'Chatea con nosotros',
+      fr: 'Écrivez-nous',
+      de: 'Schreiben Sie uns',
       pt: 'Fale conosco',
     },
   },
 };
+
+export const SITE_CONTACT = CONTACT;
 
 export function getWhatsAppLabel(locale: string): string {
   return CONTACT.whatsapp.labels[locale as keyof typeof CONTACT.whatsapp.labels] || CONTACT.whatsapp.labels.en;

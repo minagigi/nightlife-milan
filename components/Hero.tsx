@@ -8,7 +8,7 @@ export default function Hero({ locale }: { locale: string }) {
   const typedLocale = (locale === 'it' ? 'it' : 'en') as 'en' | 'it';
   const featuredVenues = getVenues().filter(v => v.isFeatured);
   const firstVenue = featuredVenues[0];
-  const firstImage = firstVenue.gallery?.[0] || firstVenue.image || '/images/milan-nightclub-luxury-vip-champagne.webp';
+  const firstImage = '/images/milan-nightclub-luxury-vip-champagne.webp';
 
   // Next.js <Image priority> emits <link rel="preload" fetchpriority="high"> automatically
   return (

@@ -1,0 +1,177 @@
+{
+  "locale": "sq",
+  "city": "Milano",
+  "titleTemplate": "{venue}: {event} — {date}",
+  "metaTitleTemplate": "{venue} {event} {shortDate}",
+  "metaDescriptionTemplate": "{venue}, {shortDate}: {event}. {age}; {music}; {dressCode}.",
+  "introduction": "{event}. Eventi fillon më {date} në {venue}. Intervali i publikuar është {time}, sipas zonës kohore të {city}s. Vendndodhja është {venue}, në {address}, {city}. Zhanret e treguara nga lokali: {music}. Mosha minimale: {age}. Kodi i veshjes: {dressCode}.",
+  "headings": {
+    "overview": "{event} në {venue}: data dhe programi",
+    "booking": "Bileta dhe tavolina për {event} në {city}",
+    "faq": "Pyetje të shpeshta për {event} në {venue}"
+  },
+  "sections": [
+    {
+      "id": "event",
+      "heading": "{event}: mbrëmja në kalendarin e {city}s",
+      "body": "Emri i publikuar është {event}, në datën {date}. Përdorni së bashku emrin, datën dhe {venue} për ta dalluar këtë mbrëmje nga data ose lokale të tjera. Eventi fillon më {date} në {venue}. Zhanret e treguara nga lokali: {music}."
+    },
+    {
+      "id": "programme",
+      "heading": "Oraret e {event}: hapja dhe mbyllja",
+      "body": "Intervali i publikuar është {time}, me mbyllje në datën {endDate}. Prandaj konsideroni {date} si datën e fillimit, edhe nëse kthimi bëhet pas mesnate. Ora e hapjes ndihmon për të planifikuar mbërritjen; nuk është një orar i konfirmuar i setit. Nëse dëshironi të ndiqni një moment të caktuar, kërkoni informacion nga concierge-i pa hamendësuar një program të papublikuar."
+    },
+    {
+      "id": "venue",
+      "heading": "{venue}, {address}",
+      "body": "Vendndodhja është {venue}, në {address}, {city}. Ruajeni adresën kur ndani programin me miqtë: mbrëmje të tjera mund të kenë emra të ngjashëm, por të zhvillohen diku tjetër. Fotografitë në galeri tregojnë ambientet e lokalit dhe ndihmojnë për ta njohur; ato nuk dokumentojnë mbrëmjen e ardhshme apo pozicionin e një tavoline të caktuar."
+    },
+    {
+      "id": "arrival",
+      "heading": "Si të organizoni mbërritjen dhe kthimin në {city}",
+      "body": "Vendosni {address} si destinacion dhe kontrolloni itinerarin nga vendndodhja juaj. Lini kohë për të takuar grupin dhe për kontrollet në hyrje. Për kthimin pas mesnate kontrolloni oraret e transportit në datën e saktë, pa supozuar se ka shërbim nate. Faqja nuk përfshin transfertë ose parkim të rezervuar në çmimin e biletës."
+    },
+    {
+      "id": "tickets",
+      "heading": "Bileta për {event} në {city}: ofertat dhe çmimi",
+      "body": "{admissionSummary}"
+    },
+    {
+      "id": "tables",
+      "heading": "Tavolina për {event} në {venue} përmes WhatsApp",
+      "body": "{tableSummary}"
+    },
+    {
+      "id": "admission",
+      "heading": "Hyrja në {venue}: mosha dhe kodi i veshjes",
+      "body": "Për këtë datë kufiri i moshës është {age} dhe kodi i veshjes është {dressCode}. Ndajini këto kushte me grupin përpara blerjes. Merrni një dokument të vlefshëm për verifikimin e moshës; për pyetje mbi dokumentet e pranuara ose nevoja aksesueshmërie, kërkoni konfirmim para nisjes. Një bisedë në WhatsApp nuk është e barasvlershme me një titull hyrjeje të blerë."
+    },
+    {
+      "id": "planning",
+      "heading": "Konfirmimi i blerjes dhe përgatitja e mbrëmjes",
+      "body": "Nëse keni blerë hyrjen, dërgoni konfirmimin e blerjes në WhatsApp në +39 351 912 7047, me emrin, eventin dhe numrin e personave. Ruani edhe dokumentin origjinal të blerjes."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Kur zhvillohet {event} në {city}?",
+      "answer": "Eventi fillon më {date} në {venue}. Mbyllja është pas mesnate, në datën {endDate}: përdorni datën e fillimit për të gjetur biletën e saktë."
+    },
+    {
+      "question": "Ku zhvillohet {event}?",
+      "answer": "Vendndodhja është {venue}, në {address}, {city}. Kontrolloni këtë adresë kur planifikoni udhëtimin ose ndani pikën e takimit me grupin."
+    },
+    {
+      "question": "Cilat janë oraret e mbrëmjes?",
+      "answer": "Intervali i publikuar është {time}, sipas zonës kohore të {city}s. Ai tregon hapjen dhe mbylljen e eventit, jo orarin e një performance të vetme."
+    },
+    {
+      "question": "Cili është emri i plotë i mbrëmjes?",
+      "answer": "Emri i publikuar është {event}, në datën {date}. Përdorni së bashku emrin, datën dhe {venue} për ta dalluar këtë mbrëmje nga data ose lokale të tjera."
+    },
+    {
+      "question": "Zhanret e treguara nga lokali?",
+      "answer": "{music}"
+    },
+    {
+      "question": "Ku mund të blej bileta për {event}?",
+      "answer": "{admissionSummary}"
+    },
+    {
+      "question": "Sa kushton hyrja për {event} në {city}?",
+      "answer": "{admissionSummary} Fashat e mëparshme mund të jenë shitur."
+    },
+    {
+      "question": "Pse disa oferta kanë çmime më të ulëta?",
+      "answer": "Fashat e mëparshme mund të jenë shitur. Faqja i dallon ato nga ofertat e disponueshme gjatë kontrollit: një çmim i vjetër nuk garanton që formula mund të blihet ende."
+    },
+    {
+      "question": "A përfshin bileta një pije?",
+      "answer": "Kontrolloni emrin e saktë dhe përfshirjet e deklaruara të opsionit të zgjedhur. Mos i transferoni përfshirjet nga një ofertë te tjetra."
+    },
+    {
+      "question": "Si të kërkoj një tavolinë për {event}?",
+      "answer": "Shkruani në WhatsApp në +39 351 912 7047 duke treguar eventin, datën dhe numrin e të ftuarve. Nightlife Milan ju ndihmon me kërkesën; disponueshmëria dhe kushtet kërkojnë konfirmim."
+    },
+    {
+      "question": "Ku i gjej çmimet e tavolinave?",
+      "answer": "{tableSummary} Kërkojini concierge-it të konfirmojë paketën dhe çfarë përfshin për grupin."
+    },
+    {
+      "question": "A është çmimi i tavolinës për person?",
+      "answer": "{tableSummary} Mos e interpretoni automatikisht si shumë individuale."
+    },
+    {
+      "question": "A e konfirmon WhatsApp automatikisht rezervimin?",
+      "answer": "Jo. Mesazhi është një kërkesë informacioni ose rezervimi. Prisni konfirmimin e kushteve dhe ndiqni udhëzimet e marra; vetëm biseda nuk është titull hyrjeje."
+    },
+    {
+      "question": "Çfarë duhet të bëj pasi të blej hyrjen?",
+      "answer": "Nëse keni blerë hyrjen, dërgoni konfirmimin e blerjes në WhatsApp në +39 351 912 7047, me emrin, eventin dhe numrin e personave. Ruani edhe dokumentin origjinal të blerjes."
+    },
+    {
+      "question": "Cila është mosha minimale për {event}?",
+      "answer": "Kufiri i publikuar për këtë mbrëmje është {age}. Është kërkesë hyrjeje për këtë datë, jo tregues i moshës mesatare të publikut."
+    },
+    {
+      "question": "A duhet të marr dokument identifikimi?",
+      "answer": "Merrni një dokument të vlefshëm për kontrollin e moshës. Për të ditur cilat dokumente pranohen në rastin tuaj, kërkoni konfirmim nga lokali para mbrëmjes."
+    },
+    {
+      "question": "Cili është kodi i veshjes në {venue}?",
+      "answer": "Kodi i treguar i veshjes është {dressCode}. Ndajeni me grupin dhe kërkoni sqarim para nisjes nëse keni dyshime për një veshje ose kusht të veçantë."
+    },
+    {
+      "question": "A ka një formulë aperitivi?",
+      "answer": "{aperitifSummary}"
+    },
+    {
+      "question": "Si shkoj në {venue}?",
+      "answer": "Përdorni {address}, {city}, si destinacion. Zgjidhni itinerarin sipas pikës së nisjes dhe kontrolloni transportin si për vajtje, ashtu edhe për kthim."
+    },
+    {
+      "question": "A përfshihen parkimi ose transfertat?",
+      "answer": "Kjo faqe nuk paraqet parkim të rezervuar ose transferta si shërbime të përfshira. Organizojini veçmas dhe kontrolloni disponueshmërinë dhe kushtet me ofruesin e zgjedhur."
+    },
+    {
+      "question": "Si t'i verifikoj kushtet e aksesueshmërisë?",
+      "answer": "Kontaktoni concierge-in para blerjes dhe përshkruani nevojën konkrete. Hyrja, rruga e brendshme dhe sistemimi kërkojnë konfirmim të posaçëm; fotografitë nuk mjaftojnë si garanci."
+    },
+    {
+      "question": "Si ta njoh mbrëmjen e saktë të ?",
+      "answer": "Krahasoni emrin e plotë {event}, datën {date} dhe vendndodhjen {venue}. Shkurtesa në titull nuk i zëvendëson këto të dhëna dhe nuk jep hyrje në evente të tjera."
+    },
+    {
+      "question": "A mund ta organizoj mbrëmjen për një grup?",
+      "answer": "Kërkojini informacion Nightlife Milan duke treguar numrin e personave dhe datën. Saktësoni nëse kërkoni hyrje individuale apo tavolinë, sepse formulat kanë kushte të ndryshme."
+    },
+    {
+      "question": "A mund të dal nga lokali dhe të hyj përsëri?",
+      "answer": "Mundësia e rihyrjes nuk konfirmohet nga informacioni këtu. Pyesni stafin e lokalit dhe kontrolloni kushtet e hyrjes suaj para se të dilni."
+    },
+    {
+      "question": "Cilat janë kushtet për ndryshim ose rimbursim?",
+      "answer": "Ato varen nga oferta e blerë dhe kushtet e porosisë. Para pagesës kontrolloni datën, emrin e ofertës dhe kushtet e blerjes. Kjo faqe nuk premton ndryshime ose rimbursime automatike."
+    }
+  ],
+  "labels": {
+    "tickets": "Bli hyrjen në Xceed",
+    "tables": "Kërko një tavolinë në WhatsApp",
+    "offers": "Formulat e hyrjes dhe tavolinave",
+    "gallery": "Pamje nga {venue}",
+    "programme": "Programi dhe oraret",
+    "related": "Evente të tjera të rëndësishme në {city}",
+    "map": "Udhëzime për te lokali",
+    "minimumAge": "Mosha minimale",
+    "music": "Zhanret e treguara nga lokali",
+    "dressCode": "Kodi i veshjes",
+    "sourceChecked": "Kontrolli i fundit i ofertave",
+    "inquiry": "Pyesni concierge-in për opsionet aktuale — WhatsApp"
+  },
+  "noAdmission": "Për këtë event nuk është publikuar ofertë hyrjeje. Pyesni concierge-in për opsionet aktuale.",
+  "noTables": "Për këtë event nuk është publikuar paketë tavoline. Mesazhi në WhatsApp nis një kërkesë dhe nuk konfirmon disponueshmëri apo rezervim.",
+  "noAperitif": "Për këtë event nuk është publikuar opsion aperitivi.",
+  "hasAdmission": "Përdorni lidhjen Xceed në këtë faqe, të dedikuar për {event}. Para pagesës kontrolloni datën, emrin e ofertës dhe kushtet e blerjes. Çmimi më i ulët i disponueshëm në kontrollin e fundit është {price}. Ofertat mund të ndryshojnë: çmimi real është ai i formulës së zgjedhur dhe të konfirmuar në Xceed.",
+  "hasTables": "Shkruani në WhatsApp në +39 351 912 7047 duke treguar eventin, datën dhe numrin e të ftuarve. Nightlife Milan ju ndihmon me kërkesën; disponueshmëria dhe kushtet kërkojnë konfirmim.",
+  "hasAperitif": "Është publikuar një opsion aperitivi. Para se ta zgjidhni, kontrolloni statusin aktual, orarin dhe përfshirjet e sakta."
+}

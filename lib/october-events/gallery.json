@@ -1,0 +1,399 @@
+[
+  {
+    "venueId": "v-gate",
+    "index": 1,
+    "src": "/images/events/october-2026/venues/v-gate-1-a5d13f3ea7de.webp",
+    "width": 1600,
+    "height": 1067,
+    "label": "room"
+  },
+  {
+    "venueId": "v-gate",
+    "index": 2,
+    "src": "/images/events/october-2026/venues/v-gate-2-1003644ce823.webp",
+    "width": 1600,
+    "height": 1067,
+    "label": "room"
+  },
+  {
+    "venueId": "v-alcatraz",
+    "index": 1,
+    "src": "/images/events/october-2026/venues/v-alcatraz-1-adaad5cd6a45.webp",
+    "width": 1600,
+    "height": 900,
+    "label": "crowd"
+  },
+  {
+    "venueId": "v-alcatraz",
+    "index": 2,
+    "src": "/images/events/october-2026/venues/v-alcatraz-2-bfadebe07c8c.webp",
+    "width": 1080,
+    "height": 1080,
+    "label": "crowd"
+  },
+  {
+    "venueId": "santeria-toscana-31",
+    "index": 1,
+    "src": "/images/events/october-2026/venues/v-santeria-toscana-1-d8dfba24617a.webp",
+    "width": 1600,
+    "height": 1067,
+    "label": "crowd"
+  },
+  {
+    "venueId": "santeria-toscana-31",
+    "index": 2,
+    "src": "/images/events/october-2026/venues/v-santeria-toscana-2-01106c746c08.webp",
+    "width": 1600,
+    "height": 1067,
+    "label": "crowd"
+  },
+  {
+    "venueId": "santeria-paladini-8",
+    "index": 1,
+    "src": "/images/events/october-2026/venues/v-santeria-paladini-1-740ac8ad0bef.webp",
+    "width": 1440,
+    "height": 1039,
+    "label": "outdoor"
+  },
+  {
+    "venueId": "santeria-paladini-8",
+    "index": 2,
+    "src": "/images/events/october-2026/venues/v-santeria-paladini-2-cbee38621238.webp",
+    "width": 1600,
+    "height": 754,
+    "label": "food"
+  },
+  {
+    "venueId": "v-fabrique",
+    "index": 1,
+    "src": "/images/events/october-2026/venues/v-fabrique-1-e76666a6755b.webp",
+    "width": 1440,
+    "height": 827,
+    "label": "crowd"
+  },
+  {
+    "venueId": "v-fabrique",
+    "index": 2,
+    "src": "/images/events/october-2026/venues/v-fabrique-2-bb94052c4361.webp",
+    "width": 1440,
+    "height": 891,
+    "label": "crowd"
+  },
+  {
+    "venueId": "v-amnesia",
+    "index": 1,
+    "src": "/images/events/october-2026/venues/v-amnesia-1-557a66407dac.webp",
+    "width": 1090,
+    "height": 1453,
+    "label": "crowd"
+  },
+  {
+    "venueId": "v-amnesia",
+    "index": 2,
+    "src": "/images/events/october-2026/venues/v-amnesia-2-1889f535d4a4.webp",
+    "width": 1023,
+    "height": 1365,
+    "label": "crowd"
+  },
+  {
+    "venueId": "v-justme",
+    "index": 1,
+    "src": "/images/events/october-2026/venues/v-justme-1-3f0929bd1a50.webp",
+    "width": 1600,
+    "height": 893,
+    "label": "tower"
+  },
+  {
+    "venueId": "v-justme",
+    "index": 2,
+    "src": "/images/events/october-2026/venues/v-justme-2-9242e6d30b5c.webp",
+    "width": 1600,
+    "height": 893,
+    "label": "outdoor"
+  },
+  {
+    "venueId": "v-pineta",
+    "index": 1,
+    "src": "/images/events/october-2026/venues/v-pineta-1-b6c0950a8e23.webp",
+    "width": 1600,
+    "height": 893,
+    "label": "entrance"
+  },
+  {
+    "venueId": "v-pineta",
+    "index": 2,
+    "src": "/images/events/october-2026/venues/v-pineta-2-7cc05fc99e9a.webp",
+    "width": 1316,
+    "height": 877,
+    "label": "room"
+  },
+  {
+    "venueId": "v-aria",
+    "index": 1,
+    "src": "/images/events/october-2026/venues/v-aria-1-f286de83311c.webp",
+    "width": 1600,
+    "height": 893,
+    "label": "outdoor"
+  },
+  {
+    "venueId": "v-aria",
+    "index": 2,
+    "src": "/images/events/october-2026/venues/v-aria-2-98d0349002fe.webp",
+    "width": 1600,
+    "height": 893,
+    "label": "food"
+  },
+  {
+    "venueId": "v-magazzini",
+    "index": 1,
+    "src": "/images/events/october-2026/venues/v-magazzini-1-6a31038a0713.webp",
+    "width": 1200,
+    "height": 896,
+    "label": "room"
+  },
+  {
+    "venueId": "v-magazzini",
+    "index": 2,
+    "src": "/images/events/october-2026/venues/v-magazzini-2-fa442ec04039.webp",
+    "width": 1200,
+    "height": 896,
+    "label": "room"
+  },
+  {
+    "venueId": "v-theclub",
+    "index": 1,
+    "src": "/images/events/october-2026/venues/v-theclub-1-bf38dd477534.webp",
+    "width": 1600,
+    "height": 893,
+    "label": "room"
+  },
+  {
+    "venueId": "v-theclub",
+    "index": 2,
+    "src": "/images/events/october-2026/venues/v-theclub-2-94cabe934f33.webp",
+    "width": 1600,
+    "height": 893,
+    "label": "room"
+  },
+  {
+    "venueId": "v-mibmilano",
+    "index": 1,
+    "src": "/images/venues/mib-milano/mib-milano-interior-01.webp",
+    "width": 1200,
+    "height": 896,
+    "label": "room"
+  },
+  {
+    "venueId": "v-mibmilano",
+    "index": 2,
+    "src": "/images/venues/mib-milano/mib-milano-interior-02.webp",
+    "width": 1200,
+    "height": 896,
+    "label": "room"
+  },
+  {
+    "venueId": "arci-bellezza",
+    "index": 1,
+    "src": "/images/events/october-2026/venues/arci-bellezza-1-86bd1986ac81.webp",
+    "width": 1600,
+    "height": 904,
+    "label": "room"
+  },
+  {
+    "venueId": "arci-bellezza",
+    "index": 2,
+    "src": "/images/events/october-2026/venues/arci-bellezza-2-1269684071cc.webp",
+    "width": 1520,
+    "height": 530,
+    "label": "mural"
+  },
+  {
+    "venueId": "circolo-magnolia",
+    "index": 1,
+    "src": "/images/events/october-2026/venues/circolo-magnolia-1-444cd15fcfe2.webp",
+    "width": 1600,
+    "height": 1066,
+    "label": "performance",
+    "subjects": "Parcels",
+    "date": "2026-08-18",
+    "credit": "Luca Marenda"
+  },
+  {
+    "venueId": "circolo-magnolia",
+    "index": 2,
+    "src": "/images/events/october-2026/venues/circolo-magnolia-2-677d77dc5510.webp",
+    "width": 1600,
+    "height": 1066,
+    "label": "performance",
+    "subjects": "rusowsky",
+    "date": "2026-07-04",
+    "credit": "Emanuela Giurano"
+  },
+  {
+    "venueId": "duro",
+    "index": 1,
+    "src": "/images/events/october-2026/venues/duro-1-85c1c935c26f.webp",
+    "width": 1067,
+    "height": 1600,
+    "label": "room"
+  },
+  {
+    "venueId": "duro",
+    "index": 2,
+    "src": "/images/events/october-2026/venues/duro-2-0eb90d70aa65.webp",
+    "width": 1600,
+    "height": 1067,
+    "label": "room"
+  },
+  {
+    "venueId": "apollo",
+    "index": 1,
+    "src": "/images/events/october-2026/venues/apollo-1-6e949e328e1c.webp",
+    "width": 700,
+    "height": 729,
+    "label": "crowd"
+  },
+  {
+    "venueId": "apollo",
+    "index": 2,
+    "src": "/images/events/october-2026/venues/apollo-2-394951d7b393.webp",
+    "width": 700,
+    "height": 729,
+    "label": "crowd"
+  },
+  {
+    "venueId": "tempio-del-futuro-perduto",
+    "index": 1,
+    "src": "/images/events/october-2026/venues/tempio-del-futuro-perduto-1-b27ad853440f.webp",
+    "width": 1000,
+    "height": 500,
+    "label": "venue-name"
+  },
+  {
+    "venueId": "tempio-del-futuro-perduto",
+    "index": 2,
+    "src": "/images/events/october-2026/venues/tempio-del-futuro-perduto-2-8236cd02bbd2.webp",
+    "width": 1200,
+    "height": 800,
+    "label": "outdoor",
+    "subjects": "Market del Baratto",
+    "credit": "Tempio del Futuro Perduto / Facebook"
+  },
+  {
+    "venueId": "department-184",
+    "index": 1,
+    "src": "/images/events/october-2026/venues/department-184-1-28ea9057ced0.webp",
+    "width": 987,
+    "height": 1600,
+    "label": "room"
+  },
+  {
+    "venueId": "department-184",
+    "index": 2,
+    "src": "/images/events/october-2026/venues/department-184-2-e43a10871cff.webp",
+    "width": 987,
+    "height": 1600,
+    "label": "room"
+  },
+  {
+    "venueId": "dopo-space",
+    "index": 1,
+    "src": "/images/events/october-2026/venues/dopo-space-1-22a4be0f14be.webp",
+    "width": 1012,
+    "height": 1518,
+    "label": "room",
+    "credit": "Mattia Greghi"
+  },
+  {
+    "venueId": "dopo-space",
+    "index": 2,
+    "src": "/images/events/october-2026/venues/dopo-space-2-7236c949f7a2.webp",
+    "width": 1012,
+    "height": 580,
+    "label": "outdoor",
+    "credit": "Carlotta Franco"
+  },
+  {
+    "venueId": "tunnel",
+    "index": 1,
+    "src": "/images/events/october-2026/venues/tunnel-1-2680e66aac68.webp",
+    "width": 1024,
+    "height": 684,
+    "label": "crowd",
+    "credit": "Davide Manea"
+  },
+  {
+    "venueId": "tunnel",
+    "index": 2,
+    "src": "/images/events/october-2026/venues/tunnel-2-c13b08d35a53.webp",
+    "width": 960,
+    "height": 720,
+    "label": "venue-name"
+  },
+  {
+    "venueId": "feat-barona",
+    "index": 1,
+    "src": "/images/events/october-2026/venues/feat-barona-1-47bae397953f.webp",
+    "width": 1500,
+    "height": 1080,
+    "label": "room",
+    "credit": "Alberto Lamberti"
+  },
+  {
+    "venueId": "feat-barona",
+    "index": 2,
+    "src": "/images/events/october-2026/venues/feat-barona-2-aa9157723d19.webp",
+    "width": 1500,
+    "height": 1080,
+    "label": "room",
+    "credit": "Alberto Lamberti"
+  },
+  {
+    "venueId": "arca",
+    "index": 1,
+    "src": "/images/events/october-2026/venues/arca-1-b0f7e1886421.webp",
+    "width": 1600,
+    "height": 1064,
+    "label": "room"
+  },
+  {
+    "venueId": "arca",
+    "index": 2,
+    "src": "/images/events/october-2026/venues/arca-2-720a61ddc1b7.webp",
+    "width": 1064,
+    "height": 1600,
+    "label": "room"
+  },
+  {
+    "venueId": "masada",
+    "index": 1,
+    "src": "/images/events/october-2026/venues/masada-1-14b1c613.webp",
+    "width": 960,
+    "height": 640,
+    "label": "room"
+  },
+  {
+    "venueId": "masada",
+    "index": 2,
+    "src": "/images/events/october-2026/venues/masada-2-f317f3e5a864.webp",
+    "width": 1440,
+    "height": 1080,
+    "label": "room"
+  },
+  {
+    "venueId": "amelia",
+    "index": 1,
+    "src": "/images/events/october-2026/venues/amelia-1-63c2c10f1649.webp",
+    "width": 1600,
+    "height": 1200,
+    "label": "room"
+  },
+  {
+    "venueId": "amelia",
+    "index": 2,
+    "src": "/images/events/october-2026/venues/amelia-2-a0d16cc109c0.webp",
+    "width": 1600,
+    "height": 1200,
+    "label": "room"
+  }
+]

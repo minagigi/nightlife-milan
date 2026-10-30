@@ -5,6 +5,9 @@ import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/local
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { Sparkles, CheckCircle2, MessageCircle, Clock, ShieldCheck } from 'lucide-react';
 import { EntryFormulaMatrix, VipQuoteCalculator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
+import Image from 'next/image';
+import EditorialPageSections from '@/components/EditorialPageSections';
+import type { LocaleCode } from '@/lib/i18n/locales';
 
 export const revalidate = 3600;
 
@@ -275,6 +278,7 @@ export default async function GuestListsPage({
           ))}
         </div>
       </section>
-    </main>
+            <EditorialPageSections locale={locale as LocaleCode} path={`${localePrefix(locale)}/guest-lists`} />
+      </main>
   );
 }

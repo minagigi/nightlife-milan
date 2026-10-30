@@ -193,3 +193,21 @@ export const generateBreadcrumbSchema = (
     ],
   };
 };
+
+export const generatePageBreadcrumbSchema = (
+  lang: string,
+  items: readonly { name: string; path: string }[],
+) => {
+  const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
+  const langPrefix = localePrefix(lang);
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 1,
+      name: item.name,
+      item: `${baseUrl}${langPrefix}${item.path}` || `${baseUrl}/`,
+    })),
+  };
+};

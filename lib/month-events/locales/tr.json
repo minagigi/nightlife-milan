@@ -1,0 +1,177 @@
+{
+  "locale": "tr",
+  "city": "Milano",
+  "titleTemplate": "{venue}: {event} — {date}",
+  "metaTitleTemplate": "{venue} {event} {shortDate}",
+  "metaDescriptionTemplate": "{venue}, {shortDate}: {event}. {age}; {music}; {dressCode}.",
+  "introduction": "{event}. Etkinlik {date} tarihinde {venue} mekânında başlar. Yayımlanan aralık {city} saat diliminde {time}. Mekân {venue}, adres ise {city}'da {address}. Mekânın belirttiği türler: {music}. Asgari yaş: {age}. Kıyafet kuralı: {dressCode}.",
+  "headings": {
+    "overview": "{venue}'da {event}: tarih ve program",
+    "booking": "{city}'da {event} için bilet ve masa",
+    "faq": "{venue}'da {event} hakkında SSS"
+  },
+  "sections": [
+    {
+      "id": "event",
+      "heading": "{event}: {city} takvimindeki buluşma",
+      "body": "Yayımlanan ad {event}, tarih ise {date}. Bu geceyi başka tarih veya mekânlardan ayırmak için adı, tarihi ve {venue}'yu birlikte kullanın. Etkinlik {date} tarihinde {venue} mekânında başlar. Mekânın belirttiği türler: {music}."
+    },
+    {
+      "id": "programme",
+      "heading": "{event} saatleri: açılış ve kapanış",
+      "body": "Yayımlanan saat aralığı {time}, kapanış günü ise {endDate} şeklindedir. Gece yarısından sonra dönseniz bile {date} tarihini başlangıç tarihi olarak kullanın. Açılış saati varışınızı planlamaya yarar; doğrulanmış bir set saati değildir. Belirli bir bölüme katılmak istiyorsanız, yayımlanmamış bir akışı varsaymadan concierge hizmetinden bilgi alın."
+    },
+    {
+      "id": "venue",
+      "heading": "{venue}, {address}",
+      "body": "Mekân {venue}, adres ise {city}'da {address} olarak belirtilmiştir. Programı arkadaşlarınızla paylaşırken adresi koruyun: benzer adlı başka geceler farklı yerlerde yapılabilir. Galeri fotoğrafları mekânın alanlarını gösterir ve onu tanımanıza yardımcı olur; gelecekteki etkinliği ya da size ayrılan masanın konumunu belgelemez."
+    },
+    {
+      "id": "arrival",
+      "heading": "{city}'da varış ve dönüş nasıl planlanır",
+      "body": "Hedef olarak {address} adresini girin ve bulunduğunuz yerden rotayı kontrol edin. Grubunuzla buluşmak ve giriş kontrollerinden geçmek için zaman ayırın. Gece yarısından sonraki dönüş için ulaşım saatlerini doğru tarihe göre kontrol edin; gece seferi olduğunu varsaymayın. Sayfa, bilet fiyatına transfer veya ayrılmış otopark dâhil etmez."
+    },
+    {
+      "id": "tickets",
+      "heading": "{event} {city} biletleri: seçenekler ve fiyat",
+      "body": "{admissionSummary}"
+    },
+    {
+      "id": "tables",
+      "heading": "WhatsApp üzerinden {venue}'da {event} için masa",
+      "body": "{tableSummary}"
+    },
+    {
+      "id": "admission",
+      "heading": "{venue} girişi: yaş ve kıyafet kuralı",
+      "body": "Bu tarih için giriş yaşı {age}, kıyafet kuralı ise {dressCode} olarak belirtilmiştir. Satın almadan önce koşulları grubunuzla paylaşın. Yaş kontrolü için geçerli kimlik getirin; kabul edilen belgeler veya erişilebilirlik ihtiyaçları konusunda kuşkunuz varsa yola çıkmadan teyit alın. WhatsApp görüşmesi, satın alınmış giriş belgesi değildir."
+    },
+    {
+      "id": "planning",
+      "heading": "Satın alma onayı ve geceye hazırlık",
+      "body": "Giriş satın aldıysanız, satın alma onayını ad, etkinlik ve kişi sayısıyla WhatsApp üzerinden +39 351 912 7047'ye gönderin. Özgün satın alma belgesini de saklayın."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "{event} {city}'da ne zaman yapılıyor?",
+      "answer": "Etkinlik {date} tarihinde {venue} mekânında başlar. Gece yarısından sonra, {endDate} tarihinde biter; doğru bileti ararken başlangıç tarihini kullanın."
+    },
+    {
+      "question": "{event} nerede gerçekleşiyor?",
+      "answer": "Mekân {venue}, adres ise {city}'da {address}. Yolculuğu planlarken veya buluşma noktasını grubunuzla paylaşırken bu adresi kontrol edin."
+    },
+    {
+      "question": "Gecenin saatleri nedir?",
+      "answer": "Yayımlanan aralık {city} saat diliminde {time}. Bu aralık etkinliğin açılış ve kapanışını gösterir, tek bir performansın saatini belirlemez."
+    },
+    {
+      "question": "Etkinliğin tam adı nedir?",
+      "answer": "Yayımlanan ad {event}, tarih ise {date}. Bu geceyi başka tarih veya mekânlardan ayırmak için adı, tarihi ve {venue}'yu birlikte kullanın."
+    },
+    {
+      "question": "Mekânın belirttiği türler?",
+      "answer": "{music}"
+    },
+    {
+      "question": "{event} biletleri nereden alınır?",
+      "answer": "{admissionSummary}"
+    },
+    {
+      "question": "{city}'da {event} girişi ne kadar?",
+      "answer": "{admissionSummary} Önceki fiyat kademeleri tükenmiş olabilir."
+    },
+    {
+      "question": "Bazı seçenekler neden daha ucuz?",
+      "answer": "Önceki fiyat kademeleri tükenmiş olabilir. Sayfa bunları kontrol sırasında mevcut seçeneklerden ayırır; eski fiyat, paketin hâlâ alınabileceğini garanti etmez."
+    },
+    {
+      "question": "Bilete bir içecek dâhil mi?",
+      "answer": "Seçtiğiniz seçeneğin tam adını ve belirtilen içeriğini kontrol edin. Bir seçeneğin içeriğini diğerine taşımayın."
+    },
+    {
+      "question": "{event} için nasıl masa talep edilir?",
+      "answer": "WhatsApp'tan +39 351 912 7047'ye etkinliği, tarihi ve konuk sayısını yazın. Nightlife Milan talebe yardımcı olur; uygunluk ve koşullar teyit gerektirir."
+    },
+    {
+      "question": "Masa fiyatlarını nerede bulurum?",
+      "answer": "{tableSummary} Concierge hizmetinden paketi ve grup için içeriğini teyit etmesini isteyin."
+    },
+    {
+      "question": "Masa fiyatı kişi başına mı?",
+      "answer": "{tableSummary} Otomatik olarak kişi başı tutar saymayın."
+    },
+    {
+      "question": "WhatsApp rezervasyonu otomatik onaylar mı?",
+      "answer": "Hayır. Mesaj bilgi veya rezervasyon talebidir. Koşulların onayını bekleyip verilen talimatları izleyin; sohbet tek başına giriş belgesi değildir."
+    },
+    {
+      "question": "Giriş satın aldıktan sonra ne yapmalıyım?",
+      "answer": "Giriş satın aldıysanız, satın alma onayını ad, etkinlik ve kişi sayısıyla WhatsApp üzerinden +39 351 912 7047'ye gönderin. Özgün satın alma belgesini de saklayın."
+    },
+    {
+      "question": "{event} için asgari yaş nedir?",
+      "answer": "Bu gece için yayımlanan sınır {age}. Bu, ilgili tarihin giriş koşuludur; katılanların ortalama yaşını göstermez."
+    },
+    {
+      "question": "Kimlik belgesi getirmeli miyim?",
+      "answer": "Yaş kontrolü için geçerli kimlik getirin. Özel durumunuzda hangi belgelerin kabul edildiğini etkinlikten önce mekâna teyit ettirin."
+    },
+    {
+      "question": "{venue}'ın kıyafet kuralı nedir?",
+      "answer": "Belirtilen kıyafet kuralı {dressCode}. Grubunuzla paylaşın; bir giysi veya özel koşul hakkında kuşkunuz varsa çıkmadan açıklama isteyin."
+    },
+    {
+      "question": "Aperitif seçeneği var mı?",
+      "answer": "{aperitifSummary}"
+    },
+    {
+      "question": "{venue}'ya nasıl gidilir?",
+      "answer": "Hedef olarak {city}'daki {address} adresini kullanın. Başlangıç noktanıza göre rotayı seçin, gidiş ve dönüş ulaşımını kontrol edin."
+    },
+    {
+      "question": "Otopark veya transfer dâhil mi?",
+      "answer": "Bu sayfa ayrılmış otoparkı veya transferi dâhil hizmet olarak göstermez. Bunları ayrıca düzenleyin ve seçtiğiniz hizmette uygunluk ile koşulları doğrulayın."
+    },
+    {
+      "question": "Erişilebilirlik koşullarını nasıl kontrol ederim?",
+      "answer": "Satın almadan önce concierge hizmetine ulaşıp ihtiyacınızı açıklayın. Giriş, iç rota ve yerleşim özel teyit gerektirir; yalnız fotoğraflar güvence sağlamaz."
+    },
+    {
+      "question": "Doğru gecesini nasıl tanırım?",
+      "answer": "{event} tam adını, {date} tarihini ve {venue} mekânını karşılaştırın. Başlıktaki kısaltma bu bilgilerin yerini tutmaz ve başka etkinliklere giriş sağlamaz."
+    },
+    {
+      "question": "Geceyi bir grup için düzenleyebilir miyim?",
+      "answer": "Kişi sayısı ve tarihi belirterek Nightlife Milan'dan bilgi isteyin. Koşullar farklı olduğu için bireysel giriş mi masa mı istediğinizi açıklayın."
+    },
+    {
+      "question": "Mekândan çıkıp yeniden girebilir miyim?",
+      "answer": "Buradaki bilgiler yeniden girişi doğrulamıyor. Çıkmadan önce mekân personeline sorun ve girişinizin koşullarını inceleyin."
+    },
+    {
+      "question": "Değişiklik veya iade koşulları nelerdir?",
+      "answer": "Satın alınan seçeneğe ve sipariş koşullarına bağlıdır. Ödemeden önce tarihi, seçenek adını ve satın alma koşullarını kontrol edin. Bu sayfa otomatik değişiklik veya iade sözü vermez."
+    }
+  ],
+  "labels": {
+    "tickets": "Xceed'den giriş satın al",
+    "tables": "WhatsApp'tan masa talep et",
+    "offers": "Giriş ve masa seçenekleri",
+    "gallery": "{venue} görselleri",
+    "programme": "Program ve saatler",
+    "related": "{city}'daki diğer önemli etkinlikler",
+    "map": "Mekâna yol tarifi",
+    "minimumAge": "Asgari yaş",
+    "music": "Mekânın belirttiği türler",
+    "dressCode": "Kıyafet kuralı",
+    "sourceChecked": "Seçeneklerin son kontrolü",
+    "inquiry": "Güncel seçenekleri concierge’e sorun — WhatsApp"
+  },
+  "noAdmission": "Bu etkinlik için yayımlanmış bir giriş seçeneği yok. Güncel seçenekleri concierge’e sorun.",
+  "noTables": "Bu etkinlik için yayımlanmış bir masa paketi yok. WhatsApp mesajı talep başlatır; uygunluğu veya rezervasyonu onaylamaz.",
+  "noAperitif": "Bu etkinlik için yayımlanmış bir aperitif seçeneği yok.",
+  "hasAdmission": "Bu sayfadaki {event} etkinliğine özel Xceed bağlantısını kullanın. Ödemeden önce tarihi, seçenek adını ve satın alma koşullarını kontrol edin. Son kontrolde mevcut en düşük giriş fiyatı {price}. Seçenekler değişebilir; geçerli fiyat Xceed'de seçilip onaylanan paketin fiyatıdır.",
+  "hasTables": "WhatsApp'tan +39 351 912 7047'ye etkinliği, tarihi ve konuk sayısını yazın. Nightlife Milan talebe yardımcı olur; uygunluk ve koşullar teyit gerektirir.",
+  "hasAperitif": "Bir aperitif seçeneği yayımlanmıştır. Seçmeden önce güncel durumunu, saatlerini ve tam içeriğini kontrol edin."
+}

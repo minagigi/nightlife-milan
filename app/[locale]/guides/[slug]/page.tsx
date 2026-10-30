@@ -11,6 +11,8 @@ import GuideToc from '@/components/GuideToc';
 import GuideShareButtons from '@/components/GuideShareButtons';
 import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
+import EditorialPageSections from '@/components/EditorialPageSections';
+import type { LocaleCode } from '@/lib/i18n/locales';
 
 // ISR Configuration (1 hour)
 export const revalidate = 3600;
@@ -213,7 +215,7 @@ export default async function GuidePage({ params }: Props) {
         <section className="relative w-full h-[60vh] min-h-[500px] flex items-end pb-16">
           <div className="absolute inset-0 z-0">
             <Image
-              src={guide.image || '/images/milan-nightlife-guide-2026-insider.webp'}
+              src={guide.image || '/images/guides-hero.webp'}
               alt={title}
               fill
               quality={85}
@@ -452,6 +454,7 @@ export default async function GuidePage({ params }: Props) {
             })}
           </div>
         </section>
+              <EditorialPageSections locale={locale as LocaleCode} path={`${langPrefix}/guides/${slug}`} />
       </main>
     </>
   );

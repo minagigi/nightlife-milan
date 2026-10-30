@@ -1,0 +1,177 @@
+{
+  "locale": "en",
+  "city": "Milan",
+  "titleTemplate": "{venue}: {event} — {date}",
+  "metaTitleTemplate": "{venue} {event} {shortDate}",
+  "metaDescriptionTemplate": "{venue}, {shortDate}: {event}. {age}; {music}; {dressCode}.",
+  "introduction": "{event} takes place on {date} at {venue}, {address}, {city}. Published hours are {time}; listed music is {music}. Minimum age: {age}. Dress code: {dressCode}.",
+  "headings": {
+    "overview": "{event} at {venue}: date and programme",
+    "booking": "Tickets and tables for {event} in {city}",
+    "faq": "FAQ about {event} at {venue}"
+  },
+  "sections": [
+    {
+      "id": "event",
+      "heading": "{event}: the date in {city}'s calendar",
+      "body": "Use {event}, {venue} and {date} together to identify this occurrence. This page covers that dated event, with music listed as {music}; it does not extend its conditions to another night."
+    },
+    {
+      "id": "programme",
+      "heading": "{event} times: opening and closing",
+      "body": "The published time range is {time}, with closing on {endDate}. Treat {date} as the start date, even though you will leave after midnight. The opening time helps you plan your arrival; it is not a confirmed set time. If you want to attend a specific part of the evening, ask the concierge for information rather than assuming an unpublished schedule."
+    },
+    {
+      "id": "venue",
+      "heading": "{venue}, {address}",
+      "body": "The venue is {venue}, at {address}, {city}. Keep the address when sharing the programme with friends: other evenings may have similar names but take place elsewhere. The gallery photographs show the venue's spaces and help you recognise it; they do not document the future event or the position of an assigned table."
+    },
+    {
+      "id": "arrival",
+      "heading": "How to plan your arrival and journey home in {city}",
+      "body": "Set {address} as your destination and check the route from your location. Allow time to meet your group and go through admission checks. For the journey home after midnight, check transport times for the correct date rather than assuming that a night service is available. The page does not include transfers or reserved parking in the ticket price."
+    },
+    {
+      "id": "tickets",
+      "heading": "{event} {city} tickets: offers and price",
+      "body": "{admissionSummary}"
+    },
+    {
+      "id": "tables",
+      "heading": "Tables for {event} at {venue} via WhatsApp",
+      "body": "{tableSummary}"
+    },
+    {
+      "id": "admission",
+      "heading": "Admission to {venue}: age and dress code",
+      "body": "For this date, the admission age is {age} and the dress code is {dressCode}. Share these conditions with your group before purchasing. Bring valid identification for the age check; if you have questions about accepted documents or accessibility needs, ask for confirmation before leaving. A WhatsApp conversation is not the same as a purchased admission ticket."
+    },
+    {
+      "id": "planning",
+      "heading": "Purchase confirmation and preparing for the evening",
+      "body": "If you have bought admission, send your purchase confirmation on WhatsApp to +39 351 912 7047 with your name, event and number of people. Keep the original purchase document as well."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "When does {event} take place in {city}?",
+      "answer": "The event starts on {date} at {venue}. It closes after midnight, on {endDate}: use the start date to find the correct ticket."
+    },
+    {
+      "question": "Where is the {event} event taking place?",
+      "answer": "The venue is {venue}, at {address}, {city}. Check this address when planning your journey or sharing the meeting point with your group."
+    },
+    {
+      "question": "What are the evening's hours?",
+      "answer": "The published time range is {time}, in the {city} time zone. It indicates the event's opening and closing and does not establish the time of an individual performance."
+    },
+    {
+      "question": "What is the event's full name?",
+      "answer": "The published name is {event}, on {date}. Use the name, date and {venue} together to distinguish this evening from other dates or venues."
+    },
+    {
+      "question": "Genres listed by the venue?",
+      "answer": "{music}"
+    },
+    {
+      "question": "Where can I buy tickets for {event}?",
+      "answer": "{admissionSummary}"
+    },
+    {
+      "question": "How much is admission for {event} in {city}?",
+      "answer": "{admissionSummary} Earlier tiers may be sold out."
+    },
+    {
+      "question": "Why are some offers cheaper?",
+      "answer": "Earlier tiers may be sold out. The page distinguishes them from the offers available when checked: an old price does not guarantee that the option can still be purchased."
+    },
+    {
+      "question": "Does the ticket include a drink?",
+      "answer": "Check the exact name and stated inclusions of the selected offer. Do not transfer inclusions from one offer to another."
+    },
+    {
+      "question": "How can I request a table for {event}?",
+      "answer": "Send a WhatsApp message to +39 351 912 7047 with the event, date and number of guests. Nightlife Milan will assist with the enquiry; availability and conditions require confirmation."
+    },
+    {
+      "question": "Where can I find table prices?",
+      "answer": "{tableSummary} Ask the concierge to confirm the package and what it includes for the group."
+    },
+    {
+      "question": "Is the table price per person?",
+      "answer": "{tableSummary} Do not automatically interpret it as an individual amount."
+    },
+    {
+      "question": "Does WhatsApp automatically confirm the reservation?",
+      "answer": "No. The message is an information or booking enquiry. Wait for confirmation of the conditions and follow the instructions received; the chat alone is not an admission ticket."
+    },
+    {
+      "question": "What should I do after buying admission?",
+      "answer": "If you have bought admission, send your purchase confirmation on WhatsApp to +39 351 912 7047 with your name, event and number of people. Keep the original purchase document as well."
+    },
+    {
+      "question": "What is the minimum age for {event}?",
+      "answer": "The published threshold for this evening is {age}. It is an admission requirement for this date, not an indication of the average age of the audience."
+    },
+    {
+      "question": "Do I need to bring identification?",
+      "answer": "Bring valid identification for the age check. To find out which documents are accepted in a specific situation, ask the venue for confirmation before the evening."
+    },
+    {
+      "question": "What is the dress code at {venue}?",
+      "answer": "The stated dress code is {dressCode}. Share it with your group and ask for clarification before leaving if you have doubts about a garment or particular condition."
+    },
+    {
+      "question": "Is an aperitif option available?",
+      "answer": "{aperitifSummary}"
+    },
+    {
+      "question": "How do I get to {venue}?",
+      "answer": "Use {address}, {city}, as your destination. Choose your route based on your starting point and check transport for both the outward and return journeys."
+    },
+    {
+      "question": "Are parking or transfers included?",
+      "answer": "This page does not list reserved parking or transfers as included services. Arrange them separately and check availability and conditions with your chosen provider."
+    },
+    {
+      "question": "How can I check accessibility arrangements?",
+      "answer": "Contact the concierge before purchasing and describe your specific need. Access, the route inside and accommodation require specific confirmation; photographs alone cannot guarantee them."
+    },
+    {
+      "question": "How do I identify the correct event?",
+      "answer": "Compare the full name {event}, the date {date} and the {venue} location. The abbreviation in the title does not replace these details and does not indicate access to other events."
+    },
+    {
+      "question": "Can I organise the evening for a group?",
+      "answer": "Ask Nightlife Milan for information, stating the number of people and date. Specify whether you want individual admission or a table, because the options have different conditions."
+    },
+    {
+      "question": "Can I leave the venue and come back in?",
+      "answer": "Re-entry is not confirmed by the information provided here. Ask the venue staff and consult the conditions of your admission before leaving."
+    },
+    {
+      "question": "What are the change or refund conditions?",
+      "answer": "They depend on the offer purchased and the order conditions. Before paying, check the date, offer name and purchase conditions shown. This page does not promise automatic changes or refunds."
+    }
+  ],
+  "labels": {
+    "tickets": "Buy admission on Xceed",
+    "tables": "Request a table on WhatsApp",
+    "offers": "Admission and table options",
+    "gallery": "Images of {venue}",
+    "programme": "Programme and times",
+    "related": "Other major events in {city}",
+    "map": "Directions to the venue",
+    "minimumAge": "Minimum age",
+    "music": "Genres listed by the venue",
+    "dressCode": "Dress code",
+    "sourceChecked": "Offers last checked",
+    "inquiry": "Ask the concierge about current options — WhatsApp"
+  },
+  "noAdmission": "No admission offer is published for this event. Ask the concierge about current options.",
+  "noTables": "No table package is published for this event. A WhatsApp message starts an enquiry and does not confirm availability or a booking.",
+  "noAperitif": "No aperitif option is published for this event.",
+  "hasAdmission": "Use the Xceed link on this page, which is dedicated to {event}. Before paying, check the date, offer name and purchase conditions shown. The lowest available admission price at the latest check is {price}. Offers can change: the effective price is that of the option selected and confirmed on Xceed.",
+  "hasTables": "Send a WhatsApp message to +39 351 912 7047 with the event, date and number of guests. Nightlife Milan will assist with the enquiry; availability and conditions require confirmation.",
+  "hasAperitif": "An aperitif option is published. Check its current status, times and exact inclusions before choosing it."
+}

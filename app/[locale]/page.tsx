@@ -15,6 +15,8 @@ import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { generateEventListSchema, jsonLdString } from '@/lib/seo';
 import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 import { PrioritySixShowcase, WeeklyNightlifeNavigator, EntryFormulaMatrix, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
+import EditorialPageSections from '@/components/EditorialPageSections';
+import type { LocaleCode } from '@/lib/i18n/locales';
 
 const EventsCarousel = nextDynamic(() => import('@/components/EventsCarousel'));
 
@@ -77,8 +79,8 @@ const FEATURED_VENUES = [
     zone: { en: 'Sempione', it: 'Sempione' },
     label: { en: 'Most Exclusive', it: 'Più Esclusivo' },
     desc: {
-      en: 'Roberto Cavalli design, velvet booths, fashion crowd. The Milan door that reads the room.',
-      it: 'Design Roberto Cavalli, velluto e acciaio, crowd fashion. La selezione che legge la sala.',
+      en: 'Italo Rota design, velvet booths, fashion crowd. The Milan door that reads the room.',
+      it: 'Design Italo Rota, velluto e acciaio, crowd fashion. La selezione che legge la sala.',
     },
     tags: { en: ['House', 'Luxury', 'VIP Tables'], it: ['House', 'Lusso', 'Tavoli VIP'] },
   },
@@ -598,6 +600,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           </div>
         </section>
 
+              <EditorialPageSections locale={locale as LocaleCode} path={localePrefix(locale) || '/'} />
       </main>
     </>
   );

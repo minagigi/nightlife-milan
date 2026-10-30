@@ -1,4 +1,7 @@
 import { Metadata } from 'next';
+import OctoberEntry from '@/components/OctoberEntry';
+import EditorialPageSections from '@/components/EditorialPageSections';
+import type { LocaleCode } from '@/lib/i18n/locales';
 import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import { getLocalizedText, generateEventListSchema, jsonLdString } from '@/lib/seo';
@@ -131,7 +134,7 @@ export default async function EventsHubPage({ params }: Props) {
           a: 'Il Royal Aperitivo (19:30–22:30, 15–30€) include buffet o tapas con drink e tavolo d’appoggio fino alle 23:00. La Cena Cantata / Dinner Show (20:30–00:00, 50–90€) offre cena servita con spettacolo musicale e tavolo garantito. La Lista Nominale o QR (23:30–00:45, 15–25€) consente l’ingresso per ballare in pista con selezione alla porta. Il Tavolo VIP (da 250€ a 5.000€+, 100% convertito in bottiglie) garantisce ingresso salta-fila con Hostess VIP e divanetto riservato fino alle 05:00.',
         },
         {
-          q: 'Dove andare a ballare dopo una partita di Serie A o Champions League di Inter e AC Milan a San Siro?',
+          q: 'Dove uscire la sera dopo una partita di Serie A o Champions League di Inter e AC Milan a San Siro?',
           a: 'Per il Dopo-Partita di San Siro (Inter, AC Milan, Derby della Madonnina e Champions League), il club più vicino a piedi è Aria Club Milano (a soli 150 metri dallo stadio in Piazzale dello Sport 14, zero taxi e zero attesa). Con la metro M5 Lilla raggiungi in 4 minuti Voya Rooftop (20° piano, fermata Portello), in 6 minuti 55 Milano (Domodossola/Gerusalemme) e in 12 minuti Pineta Club (Garibaldi/Cenisio), mentre in 10 minuti d’auto sei da Just Me Milano sotto la Torre Branca (aperto 7 sere su 7, anche martedì e mercoledì di Champions).',
         },
         {
@@ -434,8 +437,8 @@ export default async function EventsHubPage({ params }: Props) {
                     <h3 className="font-serif text-lg text-champagne font-bold mb-1">1. Just Me Milano (Parco Sempione)</h3>
                     <p className="text-xs text-white/65 leading-relaxed">
                       {isIt
-                        ? 'Aperto 7 sere su 7 sotto la Torre Branca. Firmato Roberto Cavalli, unisce Royal Aperitivo dalle 19:30, cena di gala e club internazionale fino alle 05:00.'
-                        : 'Open 7 nights a week beneath Torre Branca. Designed by Roberto Cavalli, combining Royal Aperitivo from 19:30, gala dinner, and international clubbing until 05:00.'}
+                        ? 'Aperto 7 sere su 7 sotto la Torre Branca. Firmato Italo Rota, unisce Royal Aperitivo dalle 19:30, cena di gala e club internazionale fino alle 05:00.'
+                        : 'Open 7 nights a week beneath Torre Branca. Designed by Italo Rota, combining Royal Aperitivo from 19:30, gala dinner, and international clubbing until 05:00.'}
                     </p>
                   </div>
                   <div className="p-4 rounded-xl border border-white/10 bg-white/[0.02]">
@@ -624,6 +627,7 @@ export default async function EventsHubPage({ params }: Props) {
             </div>
           </div>
         </section>
+              <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/events`} />
       </main>
     </>
   );

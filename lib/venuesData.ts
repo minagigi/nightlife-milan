@@ -17,11 +17,11 @@ export const venuesData: Venue[] = [
     localizedContent: {
       name: { en: "Just Me", it: "Just Me" },
       description: {
-        en: "Designed by Roberto Cavalli, Just Me sits beneath the Torre Branca in Sempione. Fashion crowd, house and commercial sets, velvet and steel. The door reads the room — arrive in a small, sharp group.",
-        it: "Firmato Roberto Cavalli, il Just Me è sotto la Torre Branca, in Sempione. Crowd fashion, house e commerciale, velluto e acciaio. La selezione legge la sala — presentati in un gruppo piccolo e curato."
+        en: "Designed by Italo Rota, Just Me sits beneath the Torre Branca in Sempione. Fashion crowd, house and commercial sets, velvet and steel. The door reads the room — arrive in a small, sharp group.",
+        it: "Firmato Italo Rota, il Just Me è sotto la Torre Branca, in Sempione. Crowd fashion, house e commerciale, velluto e acciaio. La selezione legge la sala — presentati in un gruppo piccolo e curato."
       },
       dressCode: { en: "Strictly Elegant — No sneakers, no casual, fashion-forward only", it: "Rigorosamente Elegante — No sneakers, no casual, solo moda" },
-      altTextImg: { en: "Just Me Milan nightclub Roberto Cavalli design Torre Branca Sempione VIP tables", it: "Just Me Milano discoteca design Roberto Cavalli Torre Branca Sempione tavoli VIP" },
+      altTextImg: { en: "Just Me Milan nightclub Italo Rota design Torre Branca Sempione VIP tables", it: "Just Me Milano discoteca design Italo Rota Torre Branca Sempione tavoli VIP" },
       insiderTip: { en: "Ask for Privé Branca: you dance directly under the tower's lit steel pillars. It fills first during Fashion Week.", it: "Chiedi il Privé Branca: balli sotto i pilastri d'acciaio illuminati della torre. Si riempie per primo durante la Fashion Week." }
     },
     image: "/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp",
@@ -775,7 +775,8 @@ export const venuesData: Venue[] = [
     ageRange: "22-40",
     priceRange: "$$",
     tags: ["Aperitivo Buffet", "EDM", "Hits", "Dance Floor Tables"]
-  },
+  }
+,
   {
     id: "v-tocqueville",
     slugs: { en: "tocqueville-13-milano", it: "tocqueville-13-milano" },

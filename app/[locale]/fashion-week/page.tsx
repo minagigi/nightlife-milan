@@ -1,4 +1,6 @@
 import { Metadata } from 'next';
+import EditorialPageSections from '@/components/EditorialPageSections';
+import type { LocaleCode } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import Image from 'next/image';
 import { tr } from '@/lib/i18n/t';
@@ -1036,6 +1038,7 @@ export default async function FashionWeekPage({
           </div>
         </div>
       </section>
-    </main>
+            <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/fashion-week`} />
+      </main>
   );
 }

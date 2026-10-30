@@ -11,6 +11,8 @@ import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getAllCalendarEvents } from '@/lib/calendarEvents';
 import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 import { VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
+import EditorialPageSections from '@/components/EditorialPageSections';
+import type { LocaleCode } from '@/lib/i18n/locales';
 
 export const revalidate = 3600;
 
@@ -648,6 +650,7 @@ export default async function ZonePage({ params }: Props) {
           ]),
         }}
       />
-    </main>
+            <EditorialPageSections locale={locale as LocaleCode} path={`${localePrefix(locale)}/zones/${slug}`} />
+      </main>
   );
 }

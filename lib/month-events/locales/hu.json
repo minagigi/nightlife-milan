@@ -1,0 +1,177 @@
+{
+  "locale": "hu",
+  "city": "Milánó",
+  "titleTemplate": "{venue}: {event} — {date}",
+  "metaTitleTemplate": "{venue} {event} {shortDate}",
+  "metaDescriptionTemplate": "{venue}, {shortDate}: {event}. {age}; {music}; {dressCode}.",
+  "introduction": "{event}. Az esemény kezdete {date}, helyszíne {venue}. A közzétett időszak {time}, milánói időzónában. A helyszín {venue}, címe {address}, {city}. A helyszín által megadott műfajok: {music}. Alsó korhatár: {age}. Öltözködési előírás: {dressCode}.",
+  "headings": {
+    "overview": "{event} a {venue}-ben: dátum és program",
+    "booking": "Belépők és asztalok: {event} {city}ban",
+    "faq": "Gyakori kérdések: {event} a {venue} Milanóban"
+  },
+  "sections": [
+    {
+      "id": "event",
+      "heading": "{event}: esemény a milánói naptárban",
+      "body": "A közzétett név {event}, dátuma {date}. A nevet, dátumot és {venue} Milanót együtt használd a más estéktől való megkülönböztetéshez. Az esemény kezdete {date}, helyszíne {venue}. A helyszín által megadott műfajok: {music}."
+    },
+    {
+      "id": "programme",
+      "heading": "A {event} esemény időpontjai: nyitás és zárás",
+      "body": "A közzétett időszak {time}, a zárás napja {endDate}. Ezért a kezdő dátum {date}, akkor is, ha éjfél után indulsz haza. A nyitás ideje az érkezés megtervezését segíti; nem a szett megerősített időpontja. Ha egy konkrét pillanatra érkeznél, kérdezd a concierge-t, és ne feltételezz közzé nem tett műsort."
+    },
+    {
+      "id": "venue",
+      "heading": "{venue}, {address}",
+      "body": "A helyszín {venue}, címe {address}, {city}. Őrizd meg a címet, amikor megosztod a programot: más esték neve hasonló lehet, de máshol tarthatják őket. A galéria képei a klub tereit mutatják és segítik a felismerését; nem a jövőbeli estet vagy egy kijelölt asztal helyét dokumentálják."
+    },
+    {
+      "id": "arrival",
+      "heading": "Érkezés és hazautazás megszervezése {city}ban",
+      "body": "Állítsd be úti célként a(z) {address} címet, és ellenőrizd az útvonalat. Számolj időt a társasággal való találkozásra és a beléptetésre. Az éjfél utáni hazautazáshoz ellenőrizd a megfelelő dátum menetrendjét, és ne feltételezz éjszakai járatot. A jegyár nem tartalmaz transzfert vagy fenntartott parkolást."
+    },
+    {
+      "id": "tickets",
+      "heading": "{event} {city} belépők: csomagok és ár",
+      "body": "{admissionSummary}"
+    },
+    {
+      "id": "tables",
+      "heading": "Asztalok: {event} a {venue}-ben WhatsAppon",
+      "body": "{tableSummary}"
+    },
+    {
+      "id": "admission",
+      "heading": "Belépés a {venue}-be: életkor és öltözet",
+      "body": "Erre a dátumra a korhatár {age}, az öltözködési előírás pedig {dressCode}. Vásárlás előtt oszd meg a feltételeket a társasággal. Vigyél érvényes okmányt az életkor ellenőrzéséhez; elfogadott okmányok vagy akadálymentességi igény esetén indulás előtt kérj megerősítést. A WhatsApp-beszélgetés nem helyettesíti a megvásárolt belépőt."
+    },
+    {
+      "id": "planning",
+      "heading": "Vásárlási visszaigazolás és felkészülés",
+      "body": "Ha belépőt vásároltál, küldd el a vásárlási visszaigazolást WhatsAppon a +39 351 912 7047 számra névvel, eseménnyel és létszámmal. Az eredeti dokumentumot is őrizd meg."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Mikor lesz a(z) {event} {city}ban?",
+      "answer": "Az esemény kezdete {date}, helyszíne {venue}. Éjfél után, {endDate} napján ér véget; a helyes jegyhez a kezdő dátumot használd."
+    },
+    {
+      "question": "Hol tartják a(z) {event} eseményt?",
+      "answer": "A helyszín {venue}, címe {address}, {city}. Utazástervezéskor vagy a találkozó megosztásakor ellenőrizd ezt a címet."
+    },
+    {
+      "question": "Mi az est időpontja?",
+      "answer": "A közzétett időszak {time}, milánói időzónában. Ez a nyitást és zárást jelzi, nem egyetlen fellépés idejét."
+    },
+    {
+      "question": "Mi az esemény teljes neve?",
+      "answer": "A közzétett név {event}, dátuma {date}. A nevet, dátumot és {venue} Milanót együtt használd a más estéktől való megkülönböztetéshez."
+    },
+    {
+      "question": "A helyszín által megadott műfajok?",
+      "answer": "{music}"
+    },
+    {
+      "question": "Hol vásárolható belépő {event} eseményére?",
+      "answer": "{admissionSummary}"
+    },
+    {
+      "question": "Mennyibe kerül a belépés {event} milánói eseményére?",
+      "answer": "{admissionSummary} A korábbi ársávok elfogyhattak."
+    },
+    {
+      "question": "Miért olcsóbb néhány csomag?",
+      "answer": "A korábbi ársávok elfogyhattak. Az oldal elkülöníti őket az ellenőrzéskor elérhetőktől; egy régi ár nem garantálja, hogy még vásárolható."
+    },
+    {
+      "question": "Tartalmaz italt a belépő?",
+      "answer": "Ellenőrizd a kiválasztott ajánlat pontos nevét és feltüntetett tartalmát. Ne vidd át az egyik ajánlat tartalmát a másikra."
+    },
+    {
+      "question": "Hogyan kérhetek asztalt {event} eseményére?",
+      "answer": "Írj WhatsAppon a +39 351 912 7047 számra az eseménnyel, dátummal és vendégszámmal. A Nightlife Milan segít; az elérhetőséget és feltételeket meg kell erősíteni."
+    },
+    {
+      "question": "Hol találom az asztalárakat?",
+      "answer": "{tableSummary} Kérd a concierge-t a csomag és tartalma megerősítésére."
+    },
+    {
+      "question": "Az asztal ára személyenként értendő?",
+      "answer": "{tableSummary} Ne értelmezd automatikusan egyéni összegként."
+    },
+    {
+      "question": "A WhatsApp automatikusan megerősíti a foglalást?",
+      "answer": "Nem. Az üzenet információ- vagy foglaláskérés. Várd meg a feltételek megerősítését és kövesd az utasításokat; a chat önmagában nem belépő."
+    },
+    {
+      "question": "Mit tegyek a belépő megvásárlása után?",
+      "answer": "Ha belépőt vásároltál, küldd el a vásárlási visszaigazolást WhatsAppon a +39 351 912 7047 számra névvel, eseménnyel és létszámmal. Az eredeti dokumentumot is őrizd meg."
+    },
+    {
+      "question": "Mi a(z) {event} alsó korhatára?",
+      "answer": "Az est közzétett korhatára {age}. Ez az adott dátum belépési követelménye, nem a közönség átlagéletkora."
+    },
+    {
+      "question": "Vigyek személyazonosító okmányt?",
+      "answer": "Vigyél érvényes okmányt az életkor ellenőrzéséhez. Konkrét helyzetben a klubtól kérj előzetes megerősítést az elfogadott okmányokról."
+    },
+    {
+      "question": "Mi a {venue} öltözködési előírása?",
+      "answer": "A megadott előírás {dressCode}. Oszd meg a társasággal, és indulás előtt kérj pontosítást, ha bizonytalan vagy egy ruhadarabban vagy feltételben."
+    },
+    {
+      "question": "Van aperitifcsomag?",
+      "answer": "{aperitifSummary}"
+    },
+    {
+      "question": "Hogyan jutok el a {venue} Milanóhoz?",
+      "answer": "Úti célként használd a(z) {address}, {city} címet. A kiindulópont alapján válassz útvonalat, és ellenőrizd az oda- és visszautat."
+    },
+    {
+      "question": "Tartalmaz parkolást vagy transzfert?",
+      "answer": "Az oldal nem tüntet fel fenntartott parkolást vagy transzfert tartalmazott szolgáltatásként. Szervezd meg külön, és ellenőrizd az elérhetőséget és feltételeket."
+    },
+    {
+      "question": "Hogyan ellenőrizhetem az akadálymentességet?",
+      "answer": "Vásárlás előtt írd le a konkrét igényt a concierge-nek. A bejutás, belső útvonal és elhelyezés külön megerősítést igényel; a fotók nem garantálják."
+    },
+    {
+      "question": "Hogyan azonosítom a helyes -estet?",
+      "answer": "Hasonlítsd össze a teljes {event} nevet, a {date} dátumot és a {venue} helyszínt. A rövidítés nem helyettesíti ezeket és nem ad hozzáférést más eseményekhez."
+    },
+    {
+      "question": "Szervezhetem az estet egy csoportnak?",
+      "answer": "Kérj információt a Nightlife Milantól a létszám és dátum megadásával. Mondd meg, egyéni belépőket vagy asztalt keresel, mert a feltételek eltérnek."
+    },
+    {
+      "question": "Kimehetek és visszatérhetek?",
+      "answer": "Az itt szereplő adatok nem erősítik meg a visszalépést. Kimenetel előtt kérdezd a személyzetet és olvasd el a belépésed feltételeit."
+    },
+    {
+      "question": "Mik a módosítás vagy visszatérítés feltételei?",
+      "answer": "A megvásárolt csomagtól és rendelési feltételektől függnek. Fizetés előtt ellenőrizd a dátumot, a csomagnevet és a feltételeket. Az oldal nem ígér automatikus módosítást vagy visszatérítést."
+    }
+  ],
+  "labels": {
+    "tickets": "Belépő vásárlása az Xceeden",
+    "tables": "Asztal kérése WhatsAppon",
+    "offers": "Belépő- és asztalcsomagok",
+    "gallery": "Képek a {venue} Milanóról",
+    "programme": "Program és időpontok",
+    "related": "További fontos milánói események",
+    "map": "Útvonal a helyszínhez",
+    "minimumAge": "Alsó korhatár",
+    "music": "A helyszín által megadott műfajok",
+    "dressCode": "Öltözködési előírás",
+    "sourceChecked": "Csomagok utolsó ellenőrzése",
+    "inquiry": "Az aktuális lehetőségekről kérdezd a concierge-t — WhatsApp"
+  },
+  "noAdmission": "Ehhez az eseményhez nincs közzétett belépési ajánlat. Az aktuális lehetőségekről kérdezd a concierge-t.",
+  "noTables": "Ehhez az eseményhez nincs közzétett asztalcsomag. A WhatsApp-üzenet érdeklődést indít, és nem igazolja a rendelkezésre állást vagy a foglalást.",
+  "noAperitif": "Ehhez az eseményhez nincs közzétett aperitifajánlat.",
+  "hasAdmission": "Használd az oldalon a(z) {event} eseményhez tartozó Xceed-linket. Fizetés előtt ellenőrizd a dátumot, a csomagnevet és a feltételeket. Az utolsó ellenőrzéskor a legalacsonyabb elérhető ár {price}. A csomagok változhatnak; az Xceeden kiválasztott és megerősített csomag ára érvényes.",
+  "hasTables": "Írj WhatsAppon a +39 351 912 7047 számra az eseménnyel, dátummal és vendégszámmal. A Nightlife Milan segít; az elérhetőséget és feltételeket meg kell erősíteni.",
+  "hasAperitif": "Aperitifajánlat van közzétéve. Választás előtt ellenőrizd az aktuális állapotát, időpontját és pontos tartalmát."
+}

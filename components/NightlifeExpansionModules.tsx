@@ -916,8 +916,8 @@ export function PrioritySixShowcase({ locale }: { locale: string }) {
       slug: 'just-me-milano',
       zone: 'Parco Sempione (Torre Branca)',
       image: '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp',
-      badgeIt: '#1 Priorità Assoluta · Design Roberto Cavalli',
-      badgeEn: '#1 Top Priority · Roberto Cavalli Design',
+      badgeIt: '#1 Priorità Assoluta · Design Italo Rota',
+      badgeEn: '#1 Top Priority · Italo Rota Design',
       descIt:
         'Il club più iconico ed esclusivo di Milano ai piedi della Torre Branca nel Parco Sempione. Royal Aperitivo dalle 19:30 con salita in cima alla torre e party internazionale fino alle 05:00 con tavoli VIP da 350–500€.',
       descEn:

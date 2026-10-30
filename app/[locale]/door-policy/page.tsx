@@ -1,4 +1,6 @@
 import { Metadata } from 'next';
+import EditorialPageSections from '@/components/EditorialPageSections';
+import type { LocaleCode } from '@/lib/i18n/locales';
 import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Link from 'next/link';
@@ -407,6 +409,7 @@ export default async function DoorPolicyPage({ params }: Props) {
             </a>
           </div>
         </section>
+              <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/door-policy`} />
       </main>
     </>
   );

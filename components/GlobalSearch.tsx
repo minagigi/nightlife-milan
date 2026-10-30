@@ -31,7 +31,7 @@ const PRIORITY_CLUBS_QUICK = [
     name: 'Just Me Milano',
     zone: { en: 'Parco Sempione · Torre Branca', it: 'Parco Sempione · Torre Branca' },
     badge: { en: '#1 Priority · Open 7/7 · VIP €350+', it: 'Priorità #1 · Aperto 7/7 · VIP 350€+' },
-    searchTerms: 'just me milano roberto cavalli torre branca parco sempione royal aperitivo vip tables',
+    searchTerms: 'just me milano Italo Rota torre branca parco sempione royal aperitivo vip tables',
   },
   {
     rank: 2,

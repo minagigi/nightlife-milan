@@ -1,0 +1,177 @@
+{
+  "locale": "et",
+  "city": "Milano",
+  "titleTemplate": "{venue}: {event} — {date}",
+  "metaTitleTemplate": "{venue} {event} {shortDate}",
+  "metaDescriptionTemplate": "{venue}, {shortDate}: {event}. {age}; {music}; {dressCode}.",
+  "introduction": "{event}. Üritus algab {date} kohas {venue}. Avaldatud ajavahemik on {time} {city} ajavööndis. Toimumiskoht on {venue}, aadressil {address}, {city}. Klubi märgitud žanrid: {music}. Vanuse alampiir: {age}. Riietusnõue: {dressCode}.",
+  "headings": {
+    "overview": "{event} {venue} klubis: kuupäev ja programm",
+    "booking": "Piletid ja lauad: {event} {city}s",
+    "faq": "Korduma kippuvad küsimused: {event} {venue}s"
+  },
+  "sections": [
+    {
+      "id": "event",
+      "heading": "{event}: sündmus {city} kalendris",
+      "body": "Avaldatud nimi on {event} kuupäeval {date}. Kasuta nime, kuupäeva ja {venue}t koos, et eristada õhtut teistest kuupäevadest või klubidest. Üritus algab {date} kohas {venue}. Klubi märgitud žanrid: {music}."
+    },
+    {
+      "id": "programme",
+      "heading": "Üritus {event}: algus- ja lõpuaeg",
+      "body": "Avaldatud ajavahemik on {time} ning üritus lõpeb kuupäeval {endDate}. Seega kasuta alguskuupäevana {date}, isegi kui naased pärast südaööd. Avamisaeg aitab saabumist kavandada; see pole seti kinnitatud aeg. Kui soovid kohal olla kindlal hetkel, küsi concierge’ilt teavet, eeldamata avaldamata ajakava."
+    },
+    {
+      "id": "venue",
+      "heading": "{venue}, {address}",
+      "body": "Toimumiskoht on {venue}, aadressil {address}, {city}. Hoia aadress alles, kui jagad programmi sõpradega: teistel õhtutel võivad olla sarnased nimed, kuid need võivad toimuda mujal. Galerii fotod näitavad klubi ruume ja aitavad seda ära tunda; need ei jäädvusta tulevast õhtut ega määratud laua asukohta."
+    },
+    {
+      "id": "arrival",
+      "heading": "Kuidas korraldada {city}s saabumine ja tagasisõit",
+      "body": "Määra sihtkohaks {address} ja kontrolli marsruuti oma asukohast. Jäta aega seltskonnaga kohtumiseks ja sissepääsukontrolliks. Pärast südaööd tagasisõiduks kontrolli õige kuupäeva sõiduplaane, eeldamata ööliikluse olemasolu. Lehel ei ole pileti hinna sees transfeeri ega reserveeritud parkimist."
+    },
+    {
+      "id": "tickets",
+      "heading": "{event} {city} piletid: pakkumised ja hind",
+      "body": "{admissionSummary}"
+    },
+    {
+      "id": "tables",
+      "heading": "Lauad üritusele {event} {venue} klubis WhatsAppi kaudu",
+      "body": "{tableSummary}"
+    },
+    {
+      "id": "admission",
+      "heading": "Sissepääs {venue} klubisse: vanus ja riietus",
+      "body": "Selle kuupäeva vanusepiir on {age} ja riietusnõue on {dressCode}. Jaga tingimusi seltskonnaga enne ostu. Võta vanuse kontrollimiseks kaasa kehtiv dokument; vastuvõetavate dokumentide või ligipääsetavusvajaduste korral küsi enne teele asumist kinnitust. WhatsAppi vestlus ei asenda ostetud sissepääsupiletit."
+    },
+    {
+      "id": "planning",
+      "heading": "Ostukinnitus ja õhtuks valmistumine",
+      "body": "Kui oled sissepääsu ostnud, saada ostukinnitus WhatsAppis numbrile +39 351 912 7047 koos nime, sündmuse ja inimeste arvuga. Säilita ka algne ostudokument."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Millal toimub {event} {city}s?",
+      "answer": "Üritus algab {date} kohas {venue}. See lõpeb pärast südaööd kuupäeval {endDate}: õige pileti otsimisel kasuta alguskuupäeva."
+    },
+    {
+      "question": "Kus toimub üritus {event}?",
+      "answer": "Toimumiskoht on {venue}, aadressil {address}, {city}. Kontrolli aadressi reisi kavandades või seltskonnaga kohtumispaika jagades."
+    },
+    {
+      "question": "Mis kell õhtu toimub?",
+      "answer": "Avaldatud ajavahemik on {time} {city} ajavööndis. See tähistab ürituse avamist ja sulgemist, mitte ühe esinemise aega."
+    },
+    {
+      "question": "Mis on sündmuse täielik nimi?",
+      "answer": "Avaldatud nimi on {event} kuupäeval {date}. Kasuta nime, kuupäeva ja {venue}t koos, et eristada õhtut teistest kuupäevadest või klubidest."
+    },
+    {
+      "question": "Klubi märgitud žanrid?",
+      "answer": "{music}"
+    },
+    {
+      "question": "Kust osta pileteid üritusele {event}?",
+      "answer": "{admissionSummary}"
+    },
+    {
+      "question": "Kui palju maksab sissepääs üritusele {event} {city}s?",
+      "answer": "{admissionSummary} Varasemad hinnatasemed võivad olla välja müüdud."
+    },
+    {
+      "question": "Miks on mõni pakkumine odavam?",
+      "answer": "Varasemad hinnatasemed võivad olla välja müüdud. Leht eristab neid kontrolli ajal saadaolevatest pakkumistest: vana hind ei taga, et pakett on veel ostetav."
+    },
+    {
+      "question": "Kas pilet sisaldab jooki?",
+      "answer": "Kontrolli valitud pakkumise täpset nime ja märgitud sisu. Ära kanna ühe pakkumise sisu üle teisele."
+    },
+    {
+      "question": "Kuidas küsida lauda üritusele {event}?",
+      "answer": "Kirjuta WhatsAppis numbrile +39 351 912 7047 ning lisa sündmus, kuupäev ja külaliste arv. Nightlife Milan aitab päringuga; saadavus ja tingimused tuleb kinnitada."
+    },
+    {
+      "question": "Kust leian laudade hinnad?",
+      "answer": "{tableSummary} Palu concierge’il kinnitada pakett ning see, mida see seltskonnale sisaldab."
+    },
+    {
+      "question": "Kas laua hind on inimese kohta?",
+      "answer": "{tableSummary} Ära tõlgenda seda automaatselt üksikisiku hinnana."
+    },
+    {
+      "question": "Kas WhatsApp kinnitab broneeringu automaatselt?",
+      "answer": "Ei. Sõnum on teabe- või broneerimispäring. Oota tingimuste kinnitamist ja järgi saadud juhiseid; vestlus üksi ei ole sissepääsupilet."
+    },
+    {
+      "question": "Mida teha pärast sissepääsu ostmist?",
+      "answer": "Kui oled sissepääsu ostnud, saada ostukinnitus WhatsAppis numbrile +39 351 912 7047 koos nime, sündmuse ja inimeste arvuga. Säilita ka algne ostudokument."
+    },
+    {
+      "question": "Mis on ürituse {event} vanuse alampiir?",
+      "answer": "Selle õhtu avaldatud vanusepiir on {age}. See on kuupäevapõhine sissepääsunõue, mitte kohaliku publiku keskmine vanus."
+    },
+    {
+      "question": "Kas pean võtma isikut tõendava dokumendi?",
+      "answer": "Võta vanuse kontrollimiseks kehtiv dokument. Konkreetse olukorra puhul küsi klubilt enne õhtut kinnitust, milliseid dokumente aktsepteeritakse."
+    },
+    {
+      "question": "Milline on {venue} riietusnõue?",
+      "answer": "Märgitud riietusnõue on {dressCode}. Jaga seda seltskonnaga ja küsi enne minekut selgitust, kui mõne rõivaeseme või tingimuse suhtes on kahtlusi."
+    },
+    {
+      "question": "Kas aperitiivipakett on saadaval?",
+      "answer": "{aperitifSummary}"
+    },
+    {
+      "question": "Kuidas jõuda {venue}sse?",
+      "answer": "Kasuta sihtkohana aadressi {address}, {city}. Vali marsruut lähtekoha järgi ja kontrolli transporti nii minekuks kui tagasitulekuks."
+    },
+    {
+      "question": "Kas parkimine või transfeer on hinna sees?",
+      "answer": "See leht ei esita reserveeritud parkimist ega transfeeri hinna sees oleva teenusena. Korralda need eraldi ning kontrolli valitud teenusepakkujalt saadavust ja tingimusi."
+    },
+    {
+      "question": "Kuidas kontrollida ligipääsetavuse tingimusi?",
+      "answer": "Võta enne ostu concierge’iga ühendust ja kirjelda konkreetset vajadust. Sissepääs, sisemine liikumistee ja paigutus vajavad eraldi kinnitust; fotod ei saa neid tagada."
+    },
+    {
+      "question": "Kuidas tunnen ära õige õhtu?",
+      "answer": "Võrdle täisnime {event}, kuupäeva {date} ja kohta {venue}. Pealkirja lühend ei asenda neid andmeid ega anna sissepääsu teistele üritustele."
+    },
+    {
+      "question": "Kas saan õhtu seltskonnale korraldada?",
+      "answer": "Küsi Nightlife Milanilt teavet ning märgi inimeste arv ja kuupäev. Täpsusta, kas soovid üksikuid sissepääse või lauda, sest pakettidel on erinevad tingimused."
+    },
+    {
+      "question": "Kas võin klubist väljuda ja tagasi tulla?",
+      "answer": "Siin esitatud teave ei kinnita korduvsissepääsu võimalust. Enne väljumist küsi klubi töötajatelt ja loe oma sissepääsu tingimusi."
+    },
+    {
+      "question": "Millised on muutmise või tagasimakse tingimused?",
+      "answer": "Need sõltuvad ostetud pakkumisest ja tellimuse tingimustest. Enne maksmist kontrolli kuupäeva, pakkumise nime ja ostutingimusi. See leht ei luba automaatseid muudatusi ega tagasimakseid."
+    }
+  ],
+  "labels": {
+    "tickets": "Osta sissepääs Xceedist",
+    "tables": "Küsi lauda WhatsAppis",
+    "offers": "Sissepääsu- ja lauapaketid",
+    "gallery": "{venue} pildid",
+    "programme": "Programm ja kellaajad",
+    "related": "Muud tähtsad sündmused {city}s",
+    "map": "Juhised klubisse",
+    "minimumAge": "Vanuse alampiir",
+    "music": "Klubi märgitud žanrid",
+    "dressCode": "Riietusnõue",
+    "sourceChecked": "Pakkumiste viimane kontroll",
+    "inquiry": "Küsi concierge’ilt praeguste võimaluste kohta — WhatsApp"
+  },
+  "noAdmission": "Sellele üritusele ei ole avaldatud sissepääsupakkumist. Küsi concierge’ilt praeguste võimaluste kohta.",
+  "noTables": "Sellele üritusele ei ole avaldatud lauapaketti. WhatsAppi sõnum alustab päringut ega kinnita saadavust või broneeringut.",
+  "noAperitif": "Sellele üritusele ei ole avaldatud aperitiivipakkumist.",
+  "hasAdmission": "Kasuta sellel lehel üritusele {event} mõeldud Xceedi linki. Enne maksmist kontrolli kuupäeva, pakkumise nime ja ostutingimusi. Viimasel kontrollimisel oli madalaim saadaolev hind {price}. Pakkumised võivad muutuda: tegelik hind on Xceedis valitud ja kinnitatud paketi hind.",
+  "hasTables": "Kirjuta WhatsAppis numbrile +39 351 912 7047 ning lisa sündmus, kuupäev ja külaliste arv. Nightlife Milan aitab päringuga; saadavus ja tingimused tuleb kinnitada.",
+  "hasAperitif": "Aperitiivipakkumine on avaldatud. Enne valimist kontrolli selle hetkeseisu, aegu ja täpset sisu."
+}

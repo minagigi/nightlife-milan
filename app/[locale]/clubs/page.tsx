@@ -10,6 +10,8 @@ import { getVenues } from '@/lib/data';
 import { weeklyEvents } from '@/lib/eventsConfig';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { PrioritySixShowcase, WeeklyNightlifeNavigator, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
+import EditorialPageSections from '@/components/EditorialPageSections';
+import type { LocaleCode } from '@/lib/i18n/locales';
 
 export const revalidate = 3600;
 
@@ -327,6 +329,7 @@ export default async function ClubsPage({
           </section>
         );
       })()}
-    </main>
+            <EditorialPageSections locale={locale as LocaleCode} path={`${localePrefix(locale)}/clubs`} />
+      </main>
   );
 }

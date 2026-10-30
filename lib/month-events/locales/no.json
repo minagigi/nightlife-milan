@@ -1,0 +1,177 @@
+{
+  "locale": "no",
+  "city": "Milano",
+  "titleTemplate": "{venue}: {event} — {date}",
+  "metaTitleTemplate": "{venue} {event} {shortDate}",
+  "metaDescriptionTemplate": "{venue}, {shortDate}: {event}. {age}; {music}; {dressCode}.",
+  "introduction": "{event}. Arrangementet starter den {date} på {venue}. Det publiserte tidsrommet er {time} i {city}s tidssone. Stedet er {venue}, på {address}, {city}. Sjangre oppgitt av stedet: {music}. Minstealder: {age}. Kleskode: {dressCode}.",
+  "headings": {
+    "overview": "{event} på {venue}: dato og program",
+    "booking": "Billetter og bord til {event} i {city}",
+    "faq": "Ofte stilte spørsmål om {event} på {venue}"
+  },
+  "sections": [
+    {
+      "id": "event",
+      "heading": "{event}: datoen i {city}s kalender",
+      "body": "Det publiserte navnet er {event}, på datoen {date}. Bruk navn, dato og {venue} sammen for å skille kvelden fra andre datoer eller steder. Arrangementet starter den {date} på {venue}. Sjangre oppgitt av stedet: {music}."
+    },
+    {
+      "id": "programme",
+      "heading": "Tidene for {event}: åpning og stenging",
+      "body": "Det publiserte tidsrommet er {time}, med stenging den {endDate}. Bruk derfor {date} som startdato selv om hjemreisen skjer etter midnatt. Åpningstiden hjelper deg med å planlegge ankomsten; den er ikke et bekreftet settidspunkt. Hvis du vil være til stede på et bestemt tidspunkt, spør conciergen uten å anta en upublisert kjøreplan."
+    },
+    {
+      "id": "venue",
+      "heading": "{venue}, {address}",
+      "body": "Stedet er {venue}, på {address}, {city}. Behold adressen når du deler programmet med venner: andre kvelder kan ha lignende navn, men finne sted et annet sted. Galleribildene viser lokalene og hjelper deg å kjenne dem igjen; de dokumenterer ikke den kommende kvelden eller plasseringen til et tildelt bord."
+    },
+    {
+      "id": "arrival",
+      "heading": "Slik planlegger du ankomst og hjemreise i {city}",
+      "body": "Angi {address} som reisemål og kontroller ruten fra der du befinner deg. Sett av tid til å møte gruppen og gå gjennom inngangskontrollene. For hjemreisen etter midnatt må du kontrollere transporttidene på riktig dato uten å forutsette nattjeneste. Siden inkluderer ikke transport eller reservert parkering i billettprisen."
+    },
+    {
+      "id": "tickets",
+      "heading": "Billetter til {event} i {city}: tilbud og pris",
+      "body": "{admissionSummary}"
+    },
+    {
+      "id": "tables",
+      "heading": "Bord til {event} på {venue} via WhatsApp",
+      "body": "{tableSummary}"
+    },
+    {
+      "id": "admission",
+      "heading": "Inngang på {venue}: alder og kleskode",
+      "body": "For denne datoen er aldersgrensen {age}, og kleskoden er {dressCode}. Del vilkårene med gruppen før kjøpet. Ta med gyldig legitimasjon for alderskontroll; be om bekreftelse før avreise ved spørsmål om godkjente dokumenter eller tilgjengelighet. En WhatsApp-samtale er ikke det samme som en kjøpt inngangsbillett."
+    },
+    {
+      "id": "planning",
+      "heading": "Kjøpsbekreftelse og forberedelse til kvelden",
+      "body": "Hvis du har kjøpt inngang, send kjøpsbekreftelsen via WhatsApp til +39 351 912 7047 med navn, arrangement og antall personer. Behold også det originale kjøpsdokumentet."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Når finner {event} sted i {city}?",
+      "answer": "Arrangementet starter den {date} på {venue}. Det avsluttes etter midnatt, den {endDate}; bruk startdatoen for å finne riktig billett."
+    },
+    {
+      "question": "Hvor finner {event} sted?",
+      "answer": "Stedet er {venue}, på {address}, {city}. Kontroller adressen når du planlegger reisen eller deler møtestedet med gruppen."
+    },
+    {
+      "question": "Hva er tidene for kvelden?",
+      "answer": "Det publiserte tidsrommet er {time} i {city}s tidssone. Det angir åpning og stenging, ikke tidspunktet for én opptreden."
+    },
+    {
+      "question": "Hva er det fulle navnet på arrangementet?",
+      "answer": "Det publiserte navnet er {event}, på datoen {date}. Bruk navn, dato og {venue} sammen for å skille kvelden fra andre datoer eller steder."
+    },
+    {
+      "question": "Sjangre oppgitt av stedet?",
+      "answer": "{music}"
+    },
+    {
+      "question": "Hvor kan jeg kjøpe billetter til {event}?",
+      "answer": "{admissionSummary}"
+    },
+    {
+      "question": "Hva koster inngang til {event} i {city}?",
+      "answer": "{admissionSummary} Tidligere pristrinn kan være utsolgt."
+    },
+    {
+      "question": "Hvorfor er enkelte tilbud billigere?",
+      "answer": "Tidligere pristrinn kan være utsolgt. Siden skiller dem fra tilbudene som var tilgjengelige ved kontrollen; en gammel pris garanterer ikke kjøp."
+    },
+    {
+      "question": "Er en drink inkludert i billetten?",
+      "answer": "Kontroller det nøyaktige navnet og det oppgitte innholdet i det valgte alternativet. Ikke overfør innhold fra ett alternativ til et annet."
+    },
+    {
+      "question": "Hvordan ber jeg om bord til {event}?",
+      "answer": "Skriv på WhatsApp til +39 351 912 7047 med arrangement, dato og antall gjester. Nightlife Milan hjelper med forespørselen; tilgjengelighet og vilkår må bekreftes."
+    },
+    {
+      "question": "Hvor finner jeg bordprisene?",
+      "answer": "{tableSummary} Be conciergen bekrefte pakken og hva den omfatter for gruppen."
+    },
+    {
+      "question": "Er bordprisen per person?",
+      "answer": "{tableSummary} Ikke tolk den automatisk som et individuelt beløp."
+    },
+    {
+      "question": "Bekrefter WhatsApp reservasjonen automatisk?",
+      "answer": "Nei. Meldingen er en informasjons- eller reservasjonsforespørsel. Vent på bekreftelse av vilkårene og følg instruksjonene; chatten alene er ikke en inngangsbillett."
+    },
+    {
+      "question": "Hva skal jeg gjøre etter at jeg har kjøpt inngang?",
+      "answer": "Hvis du har kjøpt inngang, send kjøpsbekreftelsen via WhatsApp til +39 351 912 7047 med navn, arrangement og antall personer. Behold også det originale kjøpsdokumentet."
+    },
+    {
+      "question": "Hva er minstealderen for {event}?",
+      "answer": "Den publiserte grensen for kvelden er {age}. Det er et inngangskrav for datoen, ikke et mål på gjennomsnittsalderen til publikum."
+    },
+    {
+      "question": "Må jeg ta med legitimasjon?",
+      "answer": "Ta med gyldig legitimasjon for alderskontrollen. Spør stedet før kvelden hvilke dokumenter som godtas i din situasjon."
+    },
+    {
+      "question": "Hva er kleskoden på {venue}?",
+      "answer": "Den oppgitte kleskoden er {dressCode}. Del den med gruppen og spør før avreise hvis du er usikker på et plagg eller et bestemt vilkår."
+    },
+    {
+      "question": "Finnes det et aperitiffalternativ?",
+      "answer": "{aperitifSummary}"
+    },
+    {
+      "question": "Hvordan kommer jeg til {venue}?",
+      "answer": "Bruk {address}, {city}, som reisemål. Velg ruten ut fra startstedet og kontroller transport både dit og tilbake."
+    },
+    {
+      "question": "Er parkering eller transport inkludert?",
+      "answer": "Siden viser ikke reservert parkering eller transport som inkluderte tjenester. Ordne dem separat og kontroller tilgjengelighet og vilkår hos valgt leverandør."
+    },
+    {
+      "question": "Hvordan kontrollerer jeg tilgjengeligheten?",
+      "answer": "Kontakt conciergen før kjøpet og beskriv det konkrete behovet. Inngang, intern rute og plassering krever særskilt bekreftelse; bilder gir ingen garanti."
+    },
+    {
+      "question": "Hvordan kjenner jeg igjen riktig -kveld?",
+      "answer": "Sammenlign det fulle navnet {event}, datoen {date} og stedet {venue}. Forkortelsen i tittelen erstatter ikke opplysningene og gir ikke tilgang til andre arrangementer."
+    },
+    {
+      "question": "Kan jeg organisere kvelden for en gruppe?",
+      "answer": "Be Nightlife Milan om informasjon og oppgi antall personer og dato. Si om du ønsker individuelle innganger eller bord, fordi alternativene har ulike vilkår."
+    },
+    {
+      "question": "Kan jeg forlate stedet og komme inn igjen?",
+      "answer": "Informasjonen her bekrefter ikke gjeninnslipp. Spør personalet og les vilkårene for inngangen før du går ut."
+    },
+    {
+      "question": "Hva er vilkårene for endring eller refusjon?",
+      "answer": "De avhenger av det kjøpte tilbudet og bestillingsvilkårene. Kontroller dato, tilbudsnavn og kjøpsvilkår før betaling. Siden lover ikke automatiske endringer eller refusjoner."
+    }
+  ],
+  "labels": {
+    "tickets": "Kjøp inngang på Xceed",
+    "tables": "Be om bord via WhatsApp",
+    "offers": "Inngangs- og bordalternativer",
+    "gallery": "Bilder fra {venue}",
+    "programme": "Program og tider",
+    "related": "Andre viktige arrangementer i {city}",
+    "map": "Veibeskrivelse til stedet",
+    "minimumAge": "Minstealder",
+    "music": "Sjangre oppgitt av stedet",
+    "dressCode": "Kleskode",
+    "sourceChecked": "Siste kontroll av tilbudene",
+    "inquiry": "Spør conciergen om aktuelle alternativer — WhatsApp"
+  },
+  "noAdmission": "Det er ikke publisert noe inngangstilbud for dette arrangementet. Spør conciergen om aktuelle alternativer.",
+  "noTables": "Det er ikke publisert noen bordpakke for dette arrangementet. En WhatsApp-melding starter en forespørsel og bekrefter ikke tilgjengelighet eller reservasjon.",
+  "noAperitif": "Det er ikke publisert noe aperitiffalternativ for dette arrangementet.",
+  "hasAdmission": "Bruk Xceed-lenken på denne siden, som gjelder {event}. Kontroller dato, tilbudsnavn og kjøpsvilkår før betaling. Laveste tilgjengelige pris ved siste kontroll er {price}. Tilbud kan endres; den faktiske prisen er prisen på alternativet som velges og bekreftes på Xceed.",
+  "hasTables": "Skriv på WhatsApp til +39 351 912 7047 med arrangement, dato og antall gjester. Nightlife Milan hjelper med forespørselen; tilgjengelighet og vilkår må bekreftes.",
+  "hasAperitif": "Et aperitiffalternativ er publisert. Kontroller gjeldende status, tider og nøyaktig innhold før du velger det."
+}

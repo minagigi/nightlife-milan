@@ -210,9 +210,9 @@ const PRIORITY_CONCERT_CLUBS = [
     pricesEn: 'Pre-Concert Royal Aperitivo €20-30 · Post-Concert VIP Tables €350 - €500 · Privé Branca €1,000+',
     image: '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp',
     descIt:
-      'Aperto 7 notti su 7 fino alle 05:00, il Just Me di Roberto Cavalli sotto la Torre Branca è il locale scelto dalle produzioni internazionali per gli afterparty ufficiali e informali dopo gli show a San Siro, La Maura e Forum Assago.',
+      'Aperto 7 notti su 7 fino alle 05:00, il Just Me di Italo Rota sotto la Torre Branca è il locale scelto dalle produzioni internazionali per gli afterparty ufficiali e informali dopo gli show a San Siro, La Maura e Forum Assago.',
     descEn:
-      'Open 7 nights a week until 05:00, Roberto Cavallis Just Me under Torre Branca is the #1 destination for artist entourages, VIP ticket holders, and fans after shows at San Siro, La Maura, and Forum Assago.',
+      'Open 7 nights a week until 05:00, Italo Rotas Just Me under Torre Branca is the #1 destination for artist entourages, VIP ticket holders, and fans after shows at San Siro, La Maura, and Forum Assago.',
   },
   {
     rank: 2,
@@ -314,7 +314,7 @@ export default async function ConcertAfterpartiesPage({
   const faqs = [
     {
       q: isIt
-        ? 'Qual è la discoteca più vicina per andare a ballare a piedi dopo un concerto allo Stadio San Siro o all Ippodromo Snai (I-Days)?'
+        ? 'Qual è la discoteca più vicina per uscire la sera a piedi dopo un concerto allo Stadio San Siro o all Ippodromo Snai (I-Days)?'
         : 'Which nightclub is closest to walk to after a concert at San Siro Stadium or Ippodromo Snai (I-Days)?',
       a: isIt
         ? 'Aria Club Milano (#3 Priorità Nightlife Milan) si trova in Piazzale dello Sport 14, a soli 150 metri reali (2 minuti a piedi) dai cancelli dello Stadio San Siro e dell Ippodromo Snai San Siro, e a pochi minuti da La Maura. Dalle 23:00 alle 05:00 ospita l Official Concert Afterparty nel giardino estivo e nella main room: entri a piedi senza aspettare taxi e senza fare coda alla metro M5.'
@@ -322,7 +322,7 @@ export default async function ConcertAfterpartiesPage({
     },
     {
       q: isIt
-        ? 'Dove andare a ballare a Milano dopo un concerto infrasettimanale (Lunedì, Martedì, Mercoledì, Giovedì o Domenica)?'
+        ? 'Dove uscire la sera a Milano dopo un concerto infrasettimanale (Lunedì, Martedì, Mercoledì, Giovedì o Domenica)?'
         : 'Where to go clubbing in Milan after a midweek concert (Monday, Tuesday, Wednesday, Thursday, or Sunday)?',
       a: isIt
         ? 'Just Me Milano (#1 Priorità, Viale Luigi Camoens 2 sotto la Torre Branca in Parco Sempione) è aperto 7 notti su 7 fino alle 05:00 ed è il punto di ritrovo di artisti internazionali, tour crew, VIP guest e fan dopo ogni grande concerto infrasettimanale. Inoltre il Lunedì sera è attivo il celebre Dirty Monday di Repvblic (#6 Priorità), e dal Martedì alla Domenica sono aperti 55 Milano (#4) e Voya Rooftop 20° Piano (#5).'
@@ -673,7 +673,7 @@ export default async function ConcertAfterpartiesPage({
           </h2>
           <p className="text-white/70 text-base sm:text-lg leading-relaxed max-w-4xl">
             {isIt
-              ? 'Ogni arena milanese ha tempi di deflusso e collegamenti notturni specifici. Ecco esattamente dove andare a ballare o bere un drink dopo l ultima canzone a San Siro, agli I-Days dell Ippodromo, all Unipol Forum di Assago o dopo i live di Fabrique e Alcatraz:'
+              ? 'Ogni arena milanese ha tempi di deflusso e collegamenti notturni specifici. Ecco esattamente dove uscire la sera o bere un drink dopo l ultima canzone a San Siro, agli I-Days dell Ippodromo, all Unipol Forum di Assago o dopo i live di Fabrique e Alcatraz:'
               : 'Every Milan concert venue has specific exit flows and late-night transit corridors. Here is exactly where to party or book bottle service after the final song at San Siro, I-Days at the Hippodrome, Unipol Forum Assago, or Fabrique and Alcatraz:'}
           </p>
         </div>

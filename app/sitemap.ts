@@ -1,44 +1,49 @@
 import { MetadataRoute } from 'next';
 import { mockVenues, mockGuides, mockEvents, mockZones } from '@/lib/data';
 import { weeklyEvents } from '@/lib/eventsConfig';
-import { fetchEventbriteEvents } from '@/lib/eventbriteSync';
 import { dedupeEventsByIdentity } from '@/lib/calendarEvents';
-import { indexedLocaleCodes, localePrefix } from '@/lib/i18n/locales';
+import { indexedLocaleCodes, localePrefix, type LocaleCode } from '@/lib/i18n/locales';
 import { getLocalizedText } from '@/lib/seo';
 import type { Event } from '@/lib/types';
 import { EVENT_BATCH_PROFILES, getEventBatchSlug, SITE_ONLY_EVENT_PROFILES } from '@/lib/eventBatchProfiles';
+import { CAPODANNO_EVENTS } from '@/lib/capodannoEvents';
+import { CAPODANNO_CATEGORY_IDS, capodannoCategoryPath, capodannoEventPath } from '@/lib/capodanno/routes';
+import { halloweenPath } from '@/lib/halloween/routes';
+import { OCTOBER_EVENTS } from '@/lib/octoberEvents';
+import { getOctoberEventCopy } from '@/lib/october-events/copy';
+
+export const revalidate = false;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const contentModified = new Date('2026-07-15T00:00:00+02:00');
-  // Lingue attive dal registry unico — la sitemap si estende da sola quando
-  // una lingua viene attivata in lib/i18n/locales.ts.
-  const locales: string[] = indexedLocaleCodes;
+  const contentModified = new Date('2026-10-30T00:00:00+01:00');
+  const locales: LocaleCode[] = indexedLocaleCodes;
 
-  // Eventi live da Eventbrite — la sitemap NON deve MAI fallire per colpa di
-  // un problema con Eventbrite (token assente, rate limit, errore rete):
-  // in caso di errore si degrada silenziosamente alla sola sitemap statica
-  // (mockEvents + weeklyEvents), come già fanno homepage/calendar.
-  // includePast=true (2026-07-11, richiesta SEO): le pagine degli eventi PASSATI
-  // non devono mai sparire dall'indice — restano accessibili e indicizzate,
-  // solo fuori dai menu/liste attive (vedi /events/past). Quindi la sitemap
-  // include anche i passati.
-  let liveEvents: Event[] = [];
-  try {
-    liveEvents = await fetchEventbriteEvents(true);
-  } catch {
-    liveEvents = [];
-  }
-
-  // Una sola entità per evento fisico, anche quando Eventbrite restituisce copie
-  // localizzate o lo stesso evento esiste già nei dati editoriali.
-  const physicalEvents = dedupeEventsByIdentity(
-    [...mockEvents, ...liveEvents].map((event) => ({ event }))
+  const physicalEvents: Event[] = dedupeEventsByIdentity(
+    mockEvents.map((event) => ({ event }))
   ).map(({ event }) => event);
 
   const sitemapEntries: MetadataRoute.Sitemap = [];
 
-  // 1. Static Routes — ordered by SEO priority
+  // 0. Halloween 2026 & Capodanno 2027 Hubs across all 35 locales
+  for (const locale of locales) {
+    sitemapEntries.push({
+      url: `${baseUrl}${halloweenPath(locale)}`,
+      lastModified: contentModified,
+      changeFrequency: 'daily',
+      priority: 0.92,
+    });
+    CAPODANNO_CATEGORY_IDS.forEach((catId) => {
+      sitemapEntries.push({
+        url: `${baseUrl}${capodannoCategoryPath(catId, locale)}`,
+        lastModified: contentModified,
+        changeFrequency: 'daily',
+        priority: catId === 'capodanno-2027' ? 0.95 : 0.9,
+      });
+    });
+  }
+
+  // 1. Static Routes — ordered by SEO priority (includes Football Afterparties, MFW, October 2026, 9-Pillar routes)
   const staticRoutes = [
     { path: '', priority: 1.0, changeFrequency: 'daily' as const },
     { path: '/vip-tables', priority: 0.95, changeFrequency: 'weekly' as const },
@@ -46,6 +51,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: '/clubs', priority: 0.9, changeFrequency: 'weekly' as const },
     { path: '/events/tonight', priority: 0.95, changeFrequency: 'hourly' as const },
     { path: '/events/this-week', priority: 0.9, changeFrequency: 'daily' as const },
+    { path: '/events/october-2026', priority: 0.9, changeFrequency: 'daily' as const },
     { path: '/events/best', priority: 0.9, changeFrequency: 'weekly' as const },
     { path: '/events/international', priority: 0.9, changeFrequency: 'daily' as const },
     { path: '/events/university-erasmus', priority: 0.9, changeFrequency: 'daily' as const },
@@ -54,28 +60,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: '/aperitivo', priority: 0.85, changeFrequency: 'weekly' as const },
     { path: '/events', priority: 0.85, changeFrequency: 'daily' as const },
     { path: '/events/past', priority: 0.6, changeFrequency: 'daily' as const },
-    { path: '/events/special', priority: 0.80, changeFrequency: 'monthly' as const },
+    { path: '/events/special', priority: 0.85, changeFrequency: 'weekly' as const },
     { path: '/faq', priority: 0.75, changeFrequency: 'monthly' as const },
-    { path: '/bottle-prices', priority: 0.80, changeFrequency: 'monthly' as const },
+    { path: '/bottle-prices', priority: 0.85, changeFrequency: 'weekly' as const },
     { path: '/door-policy', priority: 0.75, changeFrequency: 'monthly' as const },
     { path: '/guides', priority: 0.8, changeFrequency: 'weekly' as const },
     { path: '/zones', priority: 0.75, changeFrequency: 'monthly' as const },
-    { path: '/genres', priority: 0.80, changeFrequency: 'weekly' as const },
-    { path: '/rooftops', priority: 0.90, changeFrequency: 'weekly' as const },
-    { path: '/private-parties', priority: 0.90, changeFrequency: 'weekly' as const },
-    { path: '/guest-lists', priority: 0.90, changeFrequency: 'weekly' as const },
-    { path: '/football-afterparties', priority: 0.92, changeFrequency: 'weekly' as const },
-    { path: '/concert-afterparties', priority: 0.90, changeFrequency: 'weekly' as const },
-    { path: '/new-years-eve', priority: 0.90, changeFrequency: 'weekly' as const },
-    { path: '/fashion-week', priority: 0.90, changeFrequency: 'weekly' as const },
-    { path: '/guides/san-siro-football-match-afterparties-inter-ac-milan', priority: 0.88, changeFrequency: 'weekly' as const },
+    { path: '/genres', priority: 0.8, changeFrequency: 'weekly' as const },
+    { path: '/rooftops', priority: 0.9, changeFrequency: 'weekly' as const },
+    { path: '/private-parties', priority: 0.9, changeFrequency: 'weekly' as const },
+    { path: '/guest-lists', priority: 0.9, changeFrequency: 'daily' as const },
+    { path: '/football-afterparties', priority: 0.95, changeFrequency: 'daily' as const },
+    { path: '/concert-afterparties', priority: 0.9, changeFrequency: 'weekly' as const },
+    { path: '/new-years-eve', priority: 0.9, changeFrequency: 'weekly' as const },
+    { path: '/fashion-week', priority: 0.9, changeFrequency: 'weekly' as const },
+    { path: '/milan-fashion-week', priority: 0.9, changeFrequency: 'weekly' as const },
+    { path: '/milan-fashion-week/calendar', priority: 0.85, changeFrequency: 'weekly' as const },
+    { path: '/guides/san-siro-football-afterparties-guide', priority: 0.92, changeFrequency: 'weekly' as const },
+    { path: '/guides/san-siro-football-match-afterparties-inter-ac-milan', priority: 0.9, changeFrequency: 'weekly' as const },
     { path: '/privacy', priority: 0.2, changeFrequency: 'yearly' as const },
     { path: '/terms', priority: 0.2, changeFrequency: 'yearly' as const },
   ];
-  
+
   locales.forEach((locale) => {
     const langPrefix = localePrefix(locale);
-
     staticRoutes.forEach((route) => {
       sitemapEntries.push({
         url: `${baseUrl}${langPrefix}${route.path}`,
@@ -95,7 +103,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: `${baseUrl}${langPrefix}/clubs/${slug}`,
         lastModified: contentModified,
         changeFrequency: 'weekly',
-        priority: 0.8,
+        priority: 0.85,
       });
     });
   });
@@ -109,12 +117,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: `${baseUrl}${langPrefix}/guides/${slug}`,
         lastModified: guide.dateModified ? new Date(guide.dateModified) : new Date(guide.datePublished),
         changeFrequency: 'weekly',
-        priority: 0.5,
+        priority: 0.85,
       });
     });
   });
 
-  // 4. Dynamic Events, già raggruppati per identità fisica.
+  // 4. Physical Events
   physicalEvents.forEach((event) => {
     locales.forEach((locale) => {
       const langPrefix = localePrefix(locale);
@@ -128,7 +136,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
   });
 
-  // Eventi editoriali pubblicati solo nelle lingue con contenuto nativo completo.
+  // 4b. October 2026 Xceed verified dated events (315 events)
+  OCTOBER_EVENTS.forEach((event) => {
+    locales.forEach((locale) => {
+      sitemapEntries.push({
+        url: `${baseUrl}${localePrefix(locale)}/events/${getOctoberEventCopy(event, locale).slug}`,
+        lastModified: contentModified,
+        changeFrequency: 'daily',
+        priority: 0.9,
+      });
+    });
+  });
+
+  // 4c. Capodanno 2027 detail pages (all 112 events)
+  for (const ev of CAPODANNO_EVENTS) {
+    for (const locale of locales) {
+      sitemapEntries.push({
+        url: `${baseUrl}${capodannoEventPath(ev.slug, locale)}`,
+        lastModified: contentModified,
+        changeFrequency: 'daily',
+        priority: 0.9,
+      });
+    }
+  }
+
+  // 4d. Editorial Event Batch Profiles
   const editorialEventProfiles = [
     ...SITE_ONLY_EVENT_PROFILES,
     ...EVENT_BATCH_PROFILES.filter((profile) => profile.indexedLocales && profile.indexedLocales.length > 0),
@@ -146,7 +178,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
   });
 
-  // 5. Dynamic Zones (from mockZones data)
+  // 5. Dynamic Zones
   mockZones.forEach((zone) => {
     locales.forEach((locale) => {
       const langPrefix = localePrefix(locale);
@@ -154,7 +186,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: `${baseUrl}${langPrefix}/zones/${zone.slug}`,
         lastModified: contentModified,
         changeFrequency: 'monthly',
-        priority: 0.7,
+        priority: 0.75,
       });
     });
   });
@@ -168,7 +200,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: `${baseUrl}${langPrefix}/genres/${slug}`,
         lastModified: contentModified,
         changeFrequency: 'weekly',
-        priority: 0.65,
+        priority: 0.7,
       });
     });
   });
@@ -182,13 +214,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: `${baseUrl}${langPrefix}/events/${slug}`,
         lastModified: contentModified,
         changeFrequency: 'weekly',
-        priority: 0.9,
+        priority: 0.85,
       });
     });
   });
 
-  // Guardrail finale: una URL può arrivare da più fonti, ma compare una sola
-  // volta nel sitemap. Manteniamo l'entry con priorità maggiore e data più recente.
   const unique = new Map<string, MetadataRoute.Sitemap[number]>();
   for (const entry of sitemapEntries) {
     const current = unique.get(entry.url);

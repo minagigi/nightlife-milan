@@ -1,0 +1,177 @@
+{
+  "locale": "nl",
+  "city": "Milaan",
+  "titleTemplate": "{venue}: {event} — {date}",
+  "metaTitleTemplate": "{venue} {event} {shortDate}",
+  "metaDescriptionTemplate": "{venue}, {shortDate}: {event}. {age}; {music}; {dressCode}.",
+  "introduction": "{event}. Het evenement begint op {date} bij {venue}. Het gepubliceerde tijdvak is {time} in de tijdzone van {city}. De locatie is {venue}, aan {address}, {city}. Door de locatie vermelde genres: {music}. Minimumleeftijd: {age}. Dresscode: {dressCode}.",
+  "headings": {
+    "overview": "{event} bij {venue}: datum en programma",
+    "booking": "Tickets en tafels voor {event} in {city}",
+    "faq": "Veelgestelde vragen over {event} bij {venue}"
+  },
+  "sections": [
+    {
+      "id": "event",
+      "heading": "{event}: de afspraak in de agenda van {city}",
+      "body": "De gepubliceerde naam is {event}, op {date}. Gebruik naam, datum en {venue} samen om deze avond van andere data of locaties te onderscheiden. Het evenement begint op {date} bij {venue}. Door de locatie vermelde genres: {music}."
+    },
+    {
+      "id": "programme",
+      "heading": "Tijden van {event}: opening en sluiting",
+      "body": "Het gepubliceerde tijdvak is {time}, met sluiting op {endDate}. Gebruik {date} dus als begindatum, ook als je na middernacht naar huis gaat. De openingstijd helpt bij het plannen van je aankomst; het is geen bevestigde settijd. Wil je een specifiek moment bijwonen, vraag dan de concierge om informatie en ga niet uit van een ongepubliceerd programma."
+    },
+    {
+      "id": "venue",
+      "heading": "{venue}, {address}",
+      "body": "De locatie is {venue}, aan {address}, {city}. Bewaar het adres wanneer je het programma met vrienden deelt: andere avonden kunnen vergelijkbare namen hebben maar elders plaatsvinden. De galerijfoto's tonen de ruimtes van de locatie en helpen je die te herkennen; ze leggen de toekomstige avond of de plaats van een toegewezen tafel niet vast."
+    },
+    {
+      "id": "arrival",
+      "heading": "Aankomst en terugreis in {city} plannen",
+      "body": "Stel {address} in als bestemming en controleer de route vanaf je locatie. Plan tijd om je groep te ontmoeten en de toegangscontroles te doorlopen. Controleer voor de terugreis na middernacht de vervoerstijden op de juiste datum, zonder een nachtdienst te veronderstellen. Transfers en gereserveerd parkeren zijn niet in de ticketprijs opgenomen."
+    },
+    {
+      "id": "tickets",
+      "heading": "Tickets voor {event} in {city}: opties en prijs",
+      "body": "{admissionSummary}"
+    },
+    {
+      "id": "tables",
+      "heading": "Tafels voor {event} bij {venue} via WhatsApp",
+      "body": "{tableSummary}"
+    },
+    {
+      "id": "admission",
+      "heading": "Toegang tot {venue}: leeftijd en dresscode",
+      "body": "Voor deze datum is de toegangsleeftijd {age} en de dresscode {dressCode}. Deel deze voorwaarden vóór aankoop met je groep. Neem een geldig identiteitsbewijs mee voor de leeftijdscontrole; vraag bij twijfel over geaccepteerde documenten of toegankelijkheid vóór vertrek om bevestiging. Een WhatsApp-gesprek is geen gekocht toegangsbewijs."
+    },
+    {
+      "id": "planning",
+      "heading": "Aankoopbevestiging en voorbereiding van de avond",
+      "body": "Als je toegang hebt gekocht, stuur de aankoopbevestiging via WhatsApp naar +39 351 912 7047, met naam, evenement en aantal personen. Bewaar ook het oorspronkelijke aankoopdocument."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Wanneer vindt {event} in {city} plaats?",
+      "answer": "Het evenement begint op {date} bij {venue}. Het eindigt na middernacht op {endDate}; gebruik de begindatum om het juiste ticket te vinden."
+    },
+    {
+      "question": "Waar vindt {event} plaats?",
+      "answer": "De locatie is {venue}, aan {address}, {city}. Controleer dit adres wanneer je de reis plant of het ontmoetingspunt met je groep deelt."
+    },
+    {
+      "question": "Wat zijn de tijden van de avond?",
+      "answer": "Het gepubliceerde tijdvak is {time} in de tijdzone van {city}. Het geeft opening en sluiting aan, niet het tijdstip van één optreden."
+    },
+    {
+      "question": "Wat is de volledige naam van het evenement?",
+      "answer": "De gepubliceerde naam is {event}, op {date}. Gebruik naam, datum en {venue} samen om deze avond van andere data of locaties te onderscheiden."
+    },
+    {
+      "question": "Door de locatie vermelde genres?",
+      "answer": "{music}"
+    },
+    {
+      "question": "Waar koop ik tickets voor {event}?",
+      "answer": "{admissionSummary}"
+    },
+    {
+      "question": "Hoeveel kost toegang tot {event} in {city}?",
+      "answer": "{admissionSummary} Eerdere prijscategorieën kunnen uitverkocht zijn."
+    },
+    {
+      "question": "Waarom zijn sommige opties goedkoper?",
+      "answer": "Eerdere prijscategorieën kunnen uitverkocht zijn. De pagina onderscheidt ze van wat bij controle beschikbaar was; een oude prijs garandeert geen aankoopmogelijkheid."
+    },
+    {
+      "question": "Is een drankje bij het ticket inbegrepen?",
+      "answer": "Controleer de exacte naam en vermelde inhoud van de gekozen optie. Neem de inhoud van de ene optie niet over voor een andere."
+    },
+    {
+      "question": "Hoe vraag ik een tafel aan voor {event}?",
+      "answer": "Stuur via WhatsApp een bericht naar +39 351 912 7047 met evenement, datum en aantal gasten. Nightlife Milan helpt met de aanvraag; beschikbaarheid en voorwaarden moeten worden bevestigd."
+    },
+    {
+      "question": "Waar vind ik de tafelprijzen?",
+      "answer": "{tableSummary} Vraag de concierge het pakket en de inhoud voor de groep te bevestigen."
+    },
+    {
+      "question": "Is de tafelprijs per persoon?",
+      "answer": "{tableSummary} Vat die niet automatisch op als een individueel bedrag."
+    },
+    {
+      "question": "Bevestigt WhatsApp de reservering automatisch?",
+      "answer": "Nee. Het bericht is een informatie- of reserveringsaanvraag. Wacht op bevestiging van de voorwaarden en volg de ontvangen instructies; de chat alleen is geen toegangsbewijs."
+    },
+    {
+      "question": "Wat moet ik doen nadat ik toegang heb gekocht?",
+      "answer": "Als je toegang hebt gekocht, stuur de aankoopbevestiging via WhatsApp naar +39 351 912 7047, met naam, evenement en aantal personen. Bewaar ook het oorspronkelijke aankoopdocument."
+    },
+    {
+      "question": "Wat is de minimumleeftijd voor {event}?",
+      "answer": "De gepubliceerde grens voor deze avond is {age}. Dit is een toegangsvoorwaarde voor de datum en geen indicatie van de gemiddelde leeftijd van het publiek."
+    },
+    {
+      "question": "Moet ik een identiteitsbewijs meenemen?",
+      "answer": "Neem een geldig identiteitsbewijs mee voor de leeftijdscontrole. Vraag de locatie vóór de avond welke documenten in jouw situatie worden geaccepteerd."
+    },
+    {
+      "question": "Wat is de dresscode van {venue}?",
+      "answer": "De vermelde dresscode is {dressCode}. Deel die met je groep en vraag vóór vertrek uitleg als je over kleding of een bepaalde voorwaarde twijfelt."
+    },
+    {
+      "question": "Is er een aperitiefoptie?",
+      "answer": "{aperitifSummary}"
+    },
+    {
+      "question": "Hoe kom ik bij {venue}?",
+      "answer": "Gebruik {address}, {city}, als bestemming. Kies de route op basis van je vertrekpunt en controleer vervoer voor heen- en terugreis."
+    },
+    {
+      "question": "Zijn parkeren of transfers inbegrepen?",
+      "answer": "Deze pagina noemt gereserveerd parkeren of transfers niet als inbegrepen diensten. Regel ze apart en controleer beschikbaarheid en voorwaarden bij de gekozen aanbieder."
+    },
+    {
+      "question": "Hoe controleer ik de toegankelijkheid?",
+      "answer": "Neem vóór aankoop contact op met de concierge en beschrijf je concrete behoefte. Toegang, interne route en plaatsing vereisen specifieke bevestiging; foto's bieden geen garantie."
+    },
+    {
+      "question": "Hoe herken ik de juiste -avond?",
+      "answer": "Vergelijk de volledige naam {event}, datum {date} en locatie {venue}. De afkorting in de titel vervangt deze gegevens niet en geeft geen toegang tot andere evenementen."
+    },
+    {
+      "question": "Kan ik de avond voor een groep organiseren?",
+      "answer": "Vraag Nightlife Milan om informatie en vermeld aantal personen en datum. Geef aan of je losse toegang of een tafel zoekt, want de opties hebben verschillende voorwaarden."
+    },
+    {
+      "question": "Kan ik de locatie verlaten en opnieuw naar binnen?",
+      "answer": "De informatie hier bevestigt geen hernieuwde toegang. Vraag het personeel en raadpleeg de voorwaarden van je toegang voordat je vertrekt."
+    },
+    {
+      "question": "Wat zijn de voorwaarden voor wijziging of terugbetaling?",
+      "answer": "Die hangen af van de gekochte optie en bestelvoorwaarden. Controleer vóór betaling de datum, de naam van de optie en de vermelde aankoopvoorwaarden. Deze pagina belooft geen automatische wijzigingen of terugbetalingen."
+    }
+  ],
+  "labels": {
+    "tickets": "Toegang kopen op Xceed",
+    "tables": "Tafel aanvragen via WhatsApp",
+    "offers": "Toegangs- en tafelopties",
+    "gallery": "Beelden van {venue}",
+    "programme": "Programma en tijden",
+    "related": "Andere belangrijke evenementen in {city}",
+    "map": "Route naar de locatie",
+    "minimumAge": "Minimumleeftijd",
+    "music": "Door de locatie vermelde genres",
+    "dressCode": "Dresscode",
+    "sourceChecked": "Laatste controle van de opties",
+    "inquiry": "Vraag de concierge naar de actuele mogelijkheden — WhatsApp"
+  },
+  "noAdmission": "Voor dit evenement is geen toegangsoptie gepubliceerd. Vraag de concierge naar de actuele mogelijkheden.",
+  "noTables": "Voor dit evenement is geen tafelpakket gepubliceerd. Een WhatsApp-bericht start een aanvraag en bevestigt geen beschikbaarheid of reservering.",
+  "noAperitif": "Voor dit evenement is geen aperitiefformule gepubliceerd.",
+  "hasAdmission": "Gebruik de Xceed-link op deze pagina voor {event}. Controleer vóór betaling de datum, de naam van de optie en de vermelde aankoopvoorwaarden. De laagste beschikbare toegangsprijs bij de laatste controle is {price}. Opties kunnen veranderen; de werkelijke prijs is die van de op Xceed gekozen en bevestigde optie.",
+  "hasTables": "Stuur via WhatsApp een bericht naar +39 351 912 7047 met evenement, datum en aantal gasten. Nightlife Milan helpt met de aanvraag; beschikbaarheid en voorwaarden moeten worden bevestigd.",
+  "hasAperitif": "Er is een aperitiefformule gepubliceerd. Controleer vóór je kiest de status, tijden en exacte inhoud."
+}

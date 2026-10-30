@@ -7,6 +7,8 @@ import { CONTACT } from '@/config/contact';
 import { tr } from '@/lib/i18n/t';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { VipQuoteCalculator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
+import EditorialPageSections from '@/components/EditorialPageSections';
+import type { LocaleCode } from '@/lib/i18n/locales';
 
 export const revalidate = 3600;
 
@@ -448,7 +450,8 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
         </div>
       </section>
 
-    </main>
+            <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/aperitivo`} />
+      </main>
     </>
   );
 }

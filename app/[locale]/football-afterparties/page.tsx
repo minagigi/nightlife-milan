@@ -1,4 +1,6 @@
 import { Metadata } from 'next';
+import EditorialPageSections from '@/components/EditorialPageSections';
+import type { LocaleCode } from '@/lib/i18n/locales';
 import Link from 'next/link';
 import Image from 'next/image';
 import { tr } from '@/lib/i18n/t';
@@ -131,9 +133,9 @@ const POST_MATCH_CLUBS = [
     pricesEn: 'Royal Aperitivo €20–30 (with Torre Branca lift) · Dancefloor VIP €350–500 · Privé Branca €1,000–3,000',
     image: '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp',
     descriptionIt:
-      'Firmato dallo stilista Roberto Cavalli ai piedi della monumentale Torre Branca (108 metri d’altezza nel cuore del Parco Sempione), Just Me Milano è la Priorità #1 assoluta della vita notturna milanese e presenta un vantaggio decisivo per chi assiste alle partite a San Siro: è l’unico top club di lusso aperto 7 notti su 7, 365 giorni l’anno. Quando Inter o Milan giocano il Martedì o Mercoledì sera in UEFA Champions League (fischio finale ore 22:55), la Domenica sera alle 20:45 o il posticipo del Lunedì, mentre la maggior parte delle discoteche tradizionali è chiusa, il Just Me garantisce sempre il party internazionale più esclusivo della città, frequentato da calciatori, dirigenti UEFA, modelli, ospiti degli Skybox e tifosi VIP in trasferta.',
+      'Firmato dallo stilista Italo Rota ai piedi della monumentale Torre Branca (108 metri d’altezza nel cuore del Parco Sempione), Just Me Milano è la Priorità #1 assoluta della vita notturna milanese e presenta un vantaggio decisivo per chi assiste alle partite a San Siro: è l’unico top club di lusso aperto 7 notti su 7, 365 giorni l’anno. Quando Inter o Milan giocano il Martedì o Mercoledì sera in UEFA Champions League (fischio finale ore 22:55), la Domenica sera alle 20:45 o il posticipo del Lunedì, mentre la maggior parte delle discoteche tradizionali è chiusa, il Just Me garantisce sempre il party internazionale più esclusivo della città, frequentato da calciatori, dirigenti UEFA, modelli, ospiti degli Skybox e tifosi VIP in trasferta.',
     descriptionEn:
-      'Designed by fashion icon Roberto Cavalli beneath the 108-meter Torre Branca in Parco Sempione, Just Me Milano is our #1 Priority venue in Milan and offers a decisive advantage for San Siro matchgoers: it is the only flagship luxury club open 7 nights a week, 365 days a year. When Inter or AC Milan play on Tuesday or Wednesday nights in the UEFA Champions League (final whistle at 22:55), Sunday night at 20:45, or Monday night fixtures—when most conventional clubs are closed—Just Me always delivers Milan’s most exclusive international party, frequented by footballers, club executives, models, and Skybox VIP guests.',
+      'Designed by fashion icon Italo Rota beneath the 108-meter Torre Branca in Parco Sempione, Just Me Milano is our #1 Priority venue in Milan and offers a decisive advantage for San Siro matchgoers: it is the only flagship luxury club open 7 nights a week, 365 days a year. When Inter or AC Milan play on Tuesday or Wednesday nights in the UEFA Champions League (final whistle at 22:55), Sunday night at 20:45, or Monday night fixtures—when most conventional clubs are closed—Just Me always delivers Milan’s most exclusive international party, frequented by footballers, club executives, models, and Skybox VIP guests.',
   },
   {
     order: 3,
@@ -322,7 +324,7 @@ export default async function FootballAfterpartiesPage({
   const faqs = [
     {
       q: isIt
-        ? 'Qual è la discoteca più vicina allo Stadio San Siro per andare a ballare a piedi dopo la partita?'
+        ? 'Qual è la discoteca più vicina allo Stadio San Siro per uscire la sera a piedi dopo la partita?'
         : 'Which nightclub is closest to San Siro Stadium to walk to after an Inter or AC Milan match?',
       a: isIt
         ? 'Aria Club Milano (#3 Priorità Nightlife Milan) si trova in Piazzale dello Sport 14, a soli 150 metri reali (2 minuti a piedi) dai cancelli dello Stadio Giuseppe Meazza. Permette di fare il Royal Aperitivo dalle 19:30 o di entrare direttamente al proprio Tavolo VIP dopo il fischio finale delle 22:40 senza prendere taxi e senza fare coda alla metro M5.'
@@ -330,7 +332,7 @@ export default async function FootballAfterpartiesPage({
     },
     {
       q: isIt
-        ? 'Dove andare a ballare a Milano dopo una partita di Champions League il Martedì o Mercoledì sera?'
+        ? 'Dove uscire la sera a Milano dopo una partita di Champions League il Martedì o Mercoledì sera?'
         : 'Where to go clubbing in Milan after a Champions League match on Tuesday or Wednesday night?',
       a: isIt
         ? 'Per le notti infrasettimanali di UEFA Champions League (fischio finale ore 22:55), la scelta #1 assoluta è Just Me Milano sotto la Torre Branca in Parco Sempione (Viale Luigi Camoens 2), l’unico top club di lusso aperto 7 sere su 7 fino alle 05:00. In alternativa, a sole 3 fermate di M5 da San Siro, Voya Rooftop (20° piano, Via Achille Papa 30) e 55 Milano (4 fermate M5, Via Piero della Francesca 55) offrono drink panoramici e serata.'
@@ -1264,6 +1266,7 @@ export default async function FootballAfterpartiesPage({
           </div>
         </div>
       </section>
-    </main>
+            <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/football-afterparties`} />
+      </main>
   );
 }

@@ -1,0 +1,300 @@
+[
+  {
+    "id": "justme",
+    "startISO": "2026-10-31T19:30:00+01:00",
+    "endISO": "2026-11-01T05:00:00+01:00",
+    "offers": [
+      {
+        "kind": "party",
+        "price": 30,
+        "drinks": 1,
+        "from": "22:30",
+        "until": null,
+        "online": true,
+        "early": false,
+        "release": false,
+        "firstRelease": false,
+        "noDrink": false,
+        "reservation": true,
+        "lateAfter": null,
+        "lateSurcharge": null
+      }
+    ],
+    "table": {
+      "kind": "bottle-budget",
+      "amount": 320
+    }
+  },
+  {
+    "id": "pineta",
+    "startISO": "2026-10-31T19:30:00+01:00",
+    "endISO": "2026-11-01T05:00:00+01:00",
+    "offers": [
+      {
+        "kind": "aperitif",
+        "price": 20,
+        "drinks": 1,
+        "from": "19:30",
+        "until": "22:30",
+        "online": true,
+        "early": false,
+        "release": false,
+        "firstRelease": false,
+        "noDrink": false,
+        "reservation": false,
+        "lateAfter": "22:30",
+        "lateSurcharge": 15
+      },
+      {
+        "kind": "party",
+        "price": 20,
+        "drinks": 2,
+        "from": "22:30",
+        "until": null,
+        "online": true,
+        "early": false,
+        "release": false,
+        "firstRelease": false,
+        "noDrink": false,
+        "reservation": false,
+        "lateAfter": null,
+        "lateSurcharge": null
+      }
+    ],
+    "table": {
+      "kind": "bottle-budget",
+      "amount": 200
+    }
+  },
+  {
+    "id": "aria",
+    "startISO": "2026-10-31T21:00:00+01:00",
+    "endISO": "2026-11-01T05:00:00+01:00",
+    "offers": [
+      {
+        "kind": "party",
+        "price": 15,
+        "drinks": 1,
+        "from": "21:00",
+        "until": null,
+        "online": true,
+        "early": false,
+        "release": false,
+        "firstRelease": true,
+        "noDrink": false,
+        "reservation": false,
+        "lateAfter": null,
+        "lateSurcharge": null
+      }
+    ],
+    "table": {
+      "kind": "bottle-budget",
+      "amount": 200
+    }
+  },
+  {
+    "id": "55",
+    "startISO": "2026-10-31T19:30:00+01:00",
+    "endISO": null,
+    "offers": [
+      {
+        "kind": "buffet",
+        "price": 20,
+        "drinks": 1,
+        "from": "19:30",
+        "until": null,
+        "online": true,
+        "early": false,
+        "release": false,
+        "firstRelease": false,
+        "noDrink": false,
+        "reservation": true,
+        "lateAfter": null,
+        "lateSurcharge": null
+      },
+      {
+        "kind": "buffet",
+        "price": 30,
+        "drinks": 2,
+        "from": "19:30",
+        "until": null,
+        "online": true,
+        "early": false,
+        "release": false,
+        "firstRelease": false,
+        "noDrink": false,
+        "reservation": true,
+        "lateAfter": null,
+        "lateSurcharge": null
+      },
+      {
+        "kind": "party",
+        "price": 20,
+        "drinks": 1,
+        "from": "23:00",
+        "until": null,
+        "online": true,
+        "early": false,
+        "release": false,
+        "firstRelease": true,
+        "noDrink": false,
+        "reservation": false,
+        "lateAfter": null,
+        "lateSurcharge": null
+      }
+    ],
+    "table": {
+      "kind": "bottle-budget",
+      "amount": 300
+    }
+  },
+  {
+    "id": "voya",
+    "startISO": "2026-10-31T20:00:00+01:00",
+    "endISO": null,
+    "offers": [
+      {
+        "kind": "dinner",
+        "price": null,
+        "drinks": null,
+        "from": null,
+        "until": null,
+        "online": false,
+        "early": false,
+        "release": false,
+        "firstRelease": false,
+        "noDrink": false,
+        "reservation": true,
+        "lateAfter": null,
+        "lateSurcharge": null
+      },
+      {
+        "kind": "party",
+        "price": null,
+        "drinks": null,
+        "from": null,
+        "until": null,
+        "online": false,
+        "early": false,
+        "release": false,
+        "firstRelease": false,
+        "noDrink": false,
+        "reservation": false,
+        "lateAfter": null,
+        "lateSurcharge": null
+      }
+    ],
+    "table": {
+      "kind": "menu",
+      "amount": null
+    }
+  },
+  {
+    "id": "magazzini",
+    "startISO": "2026-10-31T23:30:00+01:00",
+    "endISO": null,
+    "offers": [
+      {
+        "kind": "party",
+        "price": 20,
+        "drinks": 1,
+        "from": "00:00",
+        "until": null,
+        "online": true,
+        "early": false,
+        "release": false,
+        "firstRelease": false,
+        "noDrink": false,
+        "reservation": false,
+        "lateAfter": null,
+        "lateSurcharge": null
+      }
+    ],
+    "table": {
+      "kind": "bottle-budget",
+      "amount": 300
+    }
+  },
+  {
+    "id": "tocqueville",
+    "startISO": "2026-10-31T23:30:00+01:00",
+    "endISO": "2026-11-01T05:00:00+01:00",
+    "offers": [
+      {
+        "kind": "men",
+        "price": 35,
+        "drinks": 1,
+        "from": null,
+        "until": null,
+        "online": true,
+        "early": true,
+        "release": false,
+        "firstRelease": false,
+        "noDrink": false,
+        "reservation": false,
+        "lateAfter": null,
+        "lateSurcharge": null
+      },
+      {
+        "kind": "women",
+        "price": 25,
+        "drinks": 1,
+        "from": null,
+        "until": null,
+        "online": true,
+        "early": true,
+        "release": false,
+        "firstRelease": false,
+        "noDrink": false,
+        "reservation": false,
+        "lateAfter": null,
+        "lateSurcharge": null
+      },
+      {
+        "kind": "door",
+        "price": 50,
+        "drinks": null,
+        "from": null,
+        "until": null,
+        "online": false,
+        "early": false,
+        "release": false,
+        "firstRelease": false,
+        "noDrink": false,
+        "reservation": false,
+        "lateAfter": null,
+        "lateSurcharge": null
+      }
+    ],
+    "table": {
+      "kind": "bottle-budget",
+      "amount": 600
+    }
+  },
+  {
+    "id": "fabbrica",
+    "startISO": "2026-10-31T22:00:00+01:00",
+    "endISO": "2026-11-01T04:00:00+01:00",
+    "offers": [
+      {
+        "kind": "party",
+        "price": 20,
+        "drinks": null,
+        "from": null,
+        "until": null,
+        "online": false,
+        "early": false,
+        "release": true,
+        "firstRelease": false,
+        "noDrink": true,
+        "reservation": false,
+        "lateAfter": null,
+        "lateSurcharge": null
+      }
+    ],
+    "table": {
+      "kind": "unknown",
+      "amount": null
+    }
+  }
+]

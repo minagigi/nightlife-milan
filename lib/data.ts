@@ -295,7 +295,7 @@ export const mockZones: Zone[] = [
     },
     metaDescription: {
       en: 'Where to party after an Inter or AC Milan match or concert at San Siro: Aria Club Milano (150m from the gates on Piazzale dello Sport 14), Voya Rooftop, 55 Milano & Just Me VIP tables.',
-      it: 'Dove andare a ballare o cenare dopo la partita di Inter e Milan o un concerto a San Siro: Aria Club Milano (a 150m dai cancelli in Piazzale dello Sport 14), Voya Rooftop, 55 Milano e Just Me.'
+      it: 'Dove uscire la sera o cenare dopo la partita di Inter e Milan o un concerto a San Siro: Aria Club Milano (a 150m dai cancelli in Piazzale dello Sport 14), Voya Rooftop, 55 Milano e Just Me.'
     }
   }
 ];
@@ -1508,8 +1508,8 @@ export const mockEvents: Event[] = [
         it: "Capodanno 2027 Gran Gala Sotto la Torre Branca | Just Me Milano"
       },
       shortDescription: {
-        en: "Ring in 2027 at Milan's #1 luxury club designed by Roberto Cavalli in Parco Sempione. Seated Gala Cenone (€220/person), Royal Buffet (€90/person), After-Dinner Entry (€80), and VIP Tables (Dancefloor €1,000, Prive Branca €2,000, Super Prive Console €3,500-€6,000). Book via WhatsApp +39 351 912 7047.",
-        it: "Festeggia il Capodanno 2027 nel club di lusso n.1 di Milano firmato Roberto Cavalli sotto la Torre Branca illuminata. Gran Cenone Servito (220€/pax), Royal Buffet (90€/pax), Ingresso Dopocena (80€) e Tavoli VIP (Pista 1.000€, Prive Branca 2.000€, Super Prive Console 3.500-6.000€). Prenota su WhatsApp +39 351 912 7047."
+        en: "Ring in 2027 at Milan's #1 luxury club designed by Italo Rota in Parco Sempione. Seated Gala Cenone (€220/person), Royal Buffet (€90/person), After-Dinner Entry (€80), and VIP Tables (Dancefloor €1,000, Prive Branca €2,000, Super Prive Console €3,500-€6,000). Book via WhatsApp +39 351 912 7047.",
+        it: "Festeggia il Capodanno 2027 nel club di lusso n.1 di Milano firmato Italo Rota sotto la Torre Branca illuminata. Gran Cenone Servito (220€/pax), Royal Buffet (90€/pax), Ingresso Dopocena (80€) e Tavoli VIP (Pista 1.000€, Prive Branca 2.000€, Super Prive Console 3.500-6.000€). Prenota su WhatsApp +39 351 912 7047."
       },
       slug: {
         en: "new-years-eve-2027-grand-gala-just-me-milano",
@@ -1631,6 +1631,9 @@ export const getPerformerById = (id: string): Performer | undefined => {
 };
 
 export const getVenueBySlug = (slug: string, lang: string): Venue | undefined => {
+  if (slug === 'just-me') slug = 'just-me-milano';
+  if (slug === 'pineta' || slug === 'pineta-milano') slug = 'pineta-club-milano';
+  if (slug === 'voya' || slug === 'voya-rooftop') slug = 'voya-rooftop-milan';
   // Stesso bug fix di getEventBySlug/getGuideBySlug: riconosce entrambi gli
   // slug a prescindere da lang (oggi dormiente perché ogni venue ha slugs.en
   // === slugs.it, ma stessa classe di bug se in futuro divergessero).
@@ -2269,8 +2272,8 @@ export const mockGuides: Guide[] = [
           it: "1. Milano Fashion Week e Fuorisalone Design Week: Dove Fanno Festa Modelli, Stilisti e Celebrity"
         },
         content: {
-          en: "<p>During <strong>Milan Women's Fashion Week</strong> (September & February), <strong>Men's Fashion Week</strong> (January & June), and <strong>Milano Design Week / Salone del Mobile</strong> (April), global demand for VIP tables triples:</p><ul><li><strong>Just Me Milano (#1 Priority):</strong> Hosted inside the Roberto Cavalli-designed pavilion in Parco Sempione, Just Me runs official runway afterparties every single night of Fashion Week with international superstar DJs and guests like Tyga, Uncle Waffles, and Bob Sinclar.</li><li><strong>Armani/Privé (Via Pisoni 1):</strong> The ultra-selective fashion bunker in the Quadrilatero. Tables start from €1,500–€5,000 during MFW.</li><li><strong>Pineta Club (#2), Voya Rooftop (#5) & Corso Como (11Clubroom, Tocqueville 13, Hollywood):</strong> Model agencies and showrooms book out the Privé rows every night from Wednesday to Sunday.</li><li><strong>Volt Club & Magazzini Generali:</strong> Host the biggest international electronic label showcases of Fuorisalone.</li></ul>",
-          it: "<p>Durante la <strong>Milano Fashion Week Donna</strong> (settembre e febbraio), la <strong>Fashion Week Uomo</strong> (gennaio e giugno) e la <strong>Milano Design Week / Fuorisalone</strong> (aprile), la richiesta internazionale di Tavoli VIP triplica:</p><ul><li><strong>Just Me Milano (#1 Priorità):</strong> Nella cornice firmata Roberto Cavalli sotto la Torre Branca, ospita ogni sera gli afterparty ufficiali delle sfilate con special guest mondiali (da Tyga e Uncle Waffles a Bob Sinclar).</li><li><strong>Armani/Privé (Via Pisoni 1):</strong> Il salotto dell'alta moda nel Quadrilatero, dove nelle settimane delle sfilate si entra quasi esclusivamente con Tavolo Privé (da 1.500–5.000€).</li><li><strong>Pineta Club (#2), Voya Rooftop (#5) e Corso Como (11Clubroom, Tocqueville 13, Hollywood):</strong> Le agenzie di moda prenotano intere file di tavoli dal mercoledì alla domenica.</li><li><strong>Volt Club & Magazzini Generali:</strong> I punti di riferimento per i grandi showcase elettronici internazionali del Fuorisalone.</li></ul>"
+          en: "<p>During <strong>Milan Women's Fashion Week</strong> (September & February), <strong>Men's Fashion Week</strong> (January & June), and <strong>Milano Design Week / Salone del Mobile</strong> (April), global demand for VIP tables triples:</p><ul><li><strong>Just Me Milano (#1 Priority):</strong> Hosted inside the Italo Rota-designed pavilion in Parco Sempione, Just Me runs official runway afterparties every single night of Fashion Week with international superstar DJs and guests like Tyga, Uncle Waffles, and Bob Sinclar.</li><li><strong>Armani/Privé (Via Pisoni 1):</strong> The ultra-selective fashion bunker in the Quadrilatero. Tables start from €1,500–€5,000 during MFW.</li><li><strong>Pineta Club (#2), Voya Rooftop (#5) & Corso Como (11Clubroom, Tocqueville 13, Hollywood):</strong> Model agencies and showrooms book out the Privé rows every night from Wednesday to Sunday.</li><li><strong>Volt Club & Magazzini Generali:</strong> Host the biggest international electronic label showcases of Fuorisalone.</li></ul>",
+          it: "<p>Durante la <strong>Milano Fashion Week Donna</strong> (settembre e febbraio), la <strong>Fashion Week Uomo</strong> (gennaio e giugno) e la <strong>Milano Design Week / Fuorisalone</strong> (aprile), la richiesta internazionale di Tavoli VIP triplica:</p><ul><li><strong>Just Me Milano (#1 Priorità):</strong> Nella cornice firmata Italo Rota sotto la Torre Branca, ospita ogni sera gli afterparty ufficiali delle sfilate con special guest mondiali (da Tyga e Uncle Waffles a Bob Sinclar).</li><li><strong>Armani/Privé (Via Pisoni 1):</strong> Il salotto dell'alta moda nel Quadrilatero, dove nelle settimane delle sfilate si entra quasi esclusivamente con Tavolo Privé (da 1.500–5.000€).</li><li><strong>Pineta Club (#2), Voya Rooftop (#5) e Corso Como (11Clubroom, Tocqueville 13, Hollywood):</strong> Le agenzie di moda prenotano intere file di tavoli dal mercoledì alla domenica.</li><li><strong>Volt Club & Magazzini Generali:</strong> I punti di riferimento per i grandi showcase elettronici internazionali del Fuorisalone.</li></ul>"
         }
       },
       {
@@ -2392,7 +2395,7 @@ export const mockGuides: Guide[] = [
       {
         question: {
           en: "Where can we party on a Tuesday or Wednesday night after a UEFA Champions League match at San Siro?",
-          it: "Dove andare a ballare il martedì o mercoledì sera dopo la Champions League a San Siro?"
+          it: "Dove uscire la sera il martedì o mercoledì sera dopo la Champions League a San Siro?"
         },
         answer: {
           en: "Just Me Milano (#1 Priority, Parco Sempione) is open every Tuesday and Wednesday night until 05:00 AM (10 min by taxi from San Siro). Voya Rooftop (#5 Priority, 20th floor) and 55 Milano (#4 Priority) are also open midweek and reachable in 3–5 stops on the M5 Purple metro line.",
@@ -2588,7 +2591,7 @@ export const mockGuides: Guide[] = [
       {
         question: {
           en: "Where can we party after a midweek concert (Monday, Tuesday, or Wednesday) in Milan?",
-          it: "Dove andare a ballare dopo un concerto infrasettimanale (lunedì, martedì o mercoledì) a Milano?"
+          it: "Dove uscire la sera dopo un concerto infrasettimanale (lunedì, martedì o mercoledì) a Milano?"
         },
         answer: {
           en: "Just Me Milano (#1 Priority, Parco Sempione) is open 7 nights a week from Monday to Sunday until 05:00 AM. On Mondays, Repvblic Milano also hosts Dirty Monday; from Tuesday to Sunday, Voya Rooftop and 55 Milano are open.",

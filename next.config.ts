@@ -2,6 +2,34 @@ import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  async rewrites() {
+    return [
+      {
+        source: '/images/seo-events/:locale/:masterFile',
+        destination: '/images/seo-events/master/:masterFile',
+      },
+      {
+        source: '/media-seo/01/:slug.webp',
+        destination: '/images/venues/editorial/01-milano-nightclubs-rooftops.webp',
+      },
+      {
+        source: '/media-seo/02/:slug.webp',
+        destination: '/images/venues/editorial/02-milano-vip-tables-bottle-service.webp',
+      },
+      {
+        source: '/media-seo/03/:slug.webp',
+        destination: '/images/venues/editorial/03-milano-dress-code-door-policy.webp',
+      },
+      {
+        source: '/media-seo/04/:slug.webp',
+        destination: '/images/venues/editorial/04-milano-nightlife-districts-map.webp',
+      },
+      {
+        source: '/media-seo/05/:slug.webp',
+        destination: '/images/venues/editorial/05-milano-hinterland-monza-lombardia.webp',
+      },
+    ];
+  },
   async redirects() {
     const eventRedirects = [
       // Slug changes from June → July 2026 date updates

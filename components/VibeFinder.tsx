@@ -59,8 +59,8 @@ const SIX_PRIORITY_CLUBS: PriorityClubRec[] = [
       it: 'Royal Aperitivo 20–30€ · Tavoli VIP 350–5.000€+ (Aperto 7/7)',
     },
     highlight: {
-      en: '#1 Priority Club in Milan by Roberto Cavalli. Open 7 days a week with Royal Aperitivo, panoramic Torre Branca elevator, and international VIP console tables.',
-      it: 'Club Priorità #1 a Milano firmato Roberto Cavalli. Aperto 7 giorni su 7 con Royal Aperitivo, salita panoramica Torre Branca e tavoli VIP console internazionali.',
+      en: '#1 Priority Club in Milan by Italo Rota. Open 7 days a week with Royal Aperitivo, panoramic Torre Branca elevator, and international VIP console tables.',
+      it: 'Club Priorità #1 a Milano firmato Italo Rota. Aperto 7 giorni su 7 con Royal Aperitivo, salita panoramica Torre Branca e tavoli VIP console internazionali.',
     },
     bestForMoods: ['glamour', 'vip-bottle', 'football', 'chill', 'graduation'],
     bestForBudgets: ['vip', 'standard', 'free'],

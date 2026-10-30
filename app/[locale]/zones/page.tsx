@@ -1,4 +1,6 @@
 import { Metadata } from 'next';
+import EditorialPageSections from '@/components/EditorialPageSections';
+import type { LocaleCode } from '@/lib/i18n/locales';
 import { tr } from '@/lib/i18n/t';
 import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Link from 'next/link';
@@ -251,7 +253,7 @@ export default async function ZonesPage({
             <div>
               <h3 className="font-sans text-champagne text-sm font-semibold tracking-widest uppercase mb-2">Sempione</h3>
               <p className="font-sans text-white/50 text-sm leading-relaxed">
-                {tr(locale, 'Exclusive district near the Castello Sforzesco. Just Me Milano is here — the city\'s most fashionable club with Roberto Cavalli design, VIP tables from €500 and international DJ sets.', 'Quartiere esclusivo vicino al Castello Sforzesco. Just Me Milano è qui — il club più in voga della città con design Roberto Cavalli, VIP table da €500 e DJ set internazionali.')}
+                {tr(locale, 'Exclusive district near the Castello Sforzesco. Just Me Milano is here — the city\'s most fashionable club with Italo Rota design, VIP tables from €500 and international DJ sets.', 'Quartiere esclusivo vicino al Castello Sforzesco. Just Me Milano è qui — il club più in voga della città con design Italo Rota, VIP table da €500 e DJ set internazionali.')}
               </p>
             </div>
             <div>
@@ -306,7 +308,8 @@ export default async function ZonesPage({
           </Link>
         </div>
       </section>
-    </main>
+            <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/zones`} />
+      </main>
     </>
   );
 }

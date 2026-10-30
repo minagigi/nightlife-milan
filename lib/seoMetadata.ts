@@ -58,12 +58,39 @@ function ensureSentence(value: string): string {
   return /[.!?。]$/u.test(clean) ? clean : `${clean}.`;
 }
 
+const DANGLING_WORDS = new Set([
+  'sotto', 'vista', 'con', 'per', 'di', 'da', 'in', 'su', 'a', 'e', 'ed', 'o',
+  'il', 'lo', 'la', 'i', 'gli', 'le', 'un', 'uno', 'una', 'del', 'della', 'dei', 'degli', 'delle',
+  'al', 'allo', 'alla', 'ai', 'agli', 'alle', 'dal', 'dalla', 'nel', 'nella', 'sul', 'sulla',
+  'under', 'with', 'for', 'and', 'or', 'the', 'of', 'in', 'on', 'at', 'to', 'from', 'by', '&',
+  'avec', 'de', 'des', 'du', 'et', 'mais', 'ou', 'pour', 'sur', 'dans', 'sous',
+  'pero', 'para', 'y', 'bajo', 'sobre',
+  'aber', 'fur', 'für', 'mit', 'oder', 'und', 'von', 'zu', 'unter', 'auf', 'im',
+]);
+
+function stripDanglingWords(text: string): string {
+  let out = text.replace(/[\s,;:|-–—&]+$/u, '').trim();
+  while (out) {
+    const parts = out.split(/\s+/);
+    if (parts.length <= 2) break;
+    const last = parts[parts.length - 1].replace(/^[,.:;|-–—]+|[,.:;|-–—]+$/g, '').toLowerCase();
+    if (DANGLING_WORDS.has(last)) {
+      parts.pop();
+      out = parts.join(' ').replace(/[\s,;:|-–—&]+$/u, '').trim();
+    } else {
+      break;
+    }
+  }
+  return out;
+}
+
 export function truncateSeoText(value: string, maxLength: number): string {
   const clean = normalize(value);
-  if (clean.length <= maxLength) return clean;
+  if (clean.length <= maxLength) return stripDanglingWords(clean);
   const slice = clean.slice(0, maxLength + 1);
   const boundary = slice.lastIndexOf(' ');
-  return (boundary > maxLength * 0.7 ? slice.slice(0, boundary) : clean.slice(0, maxLength)).replace(/[\s,;:|-]+$/u, '');
+  const raw = (boundary > maxLength * 0.55 ? slice.slice(0, boundary) : clean.slice(0, maxLength)).replace(/[\s,;:|-–—&]+$/u, '');
+  return stripDanglingWords(raw);
 }
 
 function stripTrailingWhatsappSentence(value: string): string {
@@ -146,7 +173,7 @@ export function whatsappCta(locale: string): string {
   return WHATSAPP_CTA[locale] || WHATSAPP_CTA.en;
 }
 
-export function seoRobots(locale: string, allowIndex = true) {
+export function seoRobots(locale: string, allowIndex = true, _forceLocaleIndex = false) {
   const canIndex = allowIndex && getLocaleDef(locale)?.indexed !== false;
   return canIndex ? { index: true, follow: true } : { index: false, follow: true };
 }

@@ -14,7 +14,7 @@ import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import '@/app/globals.css';
 import 'flag-icons/css/flag-icons.min.css';
 
-const WhatsAppFloating = dynamic(() => import('@/components/WhatsAppFloating'));
+import WhatsAppFloating from '@/components/WhatsAppFloating';
 const BackToTop = dynamic(() => import('@/components/BackToTop'));
 const MobileBottomBar = dynamic(() => import('@/components/MobileBottomBar'));
 const CustomCursor = dynamic(() => import('@/components/CustomCursor'));
@@ -177,8 +177,8 @@ export default async function RootLayout({
           <Header currentLocale={locale} />
           {children}
           <Footer lang={locale} />
+          <WhatsAppFloating locale={locale as any} />
           <IdleMount>
-            <WhatsAppFloating />
             <BackToTop />
             <MobileBottomBar currentLocale={locale} />
             <CustomCursor />
