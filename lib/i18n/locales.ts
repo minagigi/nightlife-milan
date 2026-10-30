@@ -92,6 +92,7 @@ export const LOCALES: LocaleDef[] = [
 ];
 
 export const ENABLED_LOCALES: LocaleDef[] = LOCALES.filter((l) => l.enabled);
+export const SUPPORTED_LOCALES: LocaleDef[] = ENABLED_LOCALES;
 
 export const enabledLocaleCodes: LocaleCode[] = ENABLED_LOCALES.map((l) => l.code);
 

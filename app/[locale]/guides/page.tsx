@@ -551,7 +551,7 @@ export default async function GuidesPage({
       </section>
 
       {/* Newsletter Hub */}
-      <NewsletterHub />
+      <NewsletterHub lang={locale} />
     </main>
   );
 }

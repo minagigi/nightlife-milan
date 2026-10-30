@@ -395,7 +395,7 @@ export default async function GuidePage({ params }: Props) {
                           src={venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp'}
                           alt={venueName}
                           fill
-                          quality={80}
+                          quality={85}
                           sizes="64px"
                           className="object-cover group-hover:scale-105 transition-transform duration-500"
                         />

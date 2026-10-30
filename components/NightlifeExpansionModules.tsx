@@ -147,7 +147,8 @@ const POSITIONS: Record<ZonePositionKey, { labelIt: string; labelEn: string; bot
   },
 };
 
-export function VipQuoteCalculator({ locale }: { locale: string }) {
+export function VipQuoteCalculator({ locale = 'it', initialVenueSlug }: { locale?: string; initialVenueSlug?: string }) {
+  void initialVenueSlug;
   const isIt = locale === 'it';
   const [occasion, setOccasion] = useState<OccasionKey>('club-vip');
   const [tier, setTier] = useState<TierKey>('luxury-flagship');
@@ -306,7 +307,7 @@ export function VipQuoteCalculator({ locale }: { locale: string }) {
               max={25}
               step={1}
               value={guests}
-              onChange={(e) => setGuests(Number(e.target.value))}
+              onChange={(e: { target: { value: string } }) => setGuests(Number(e.target.value))}
               className="w-full accent-[#C9A86A] cursor-pointer h-2 bg-white/15 rounded-lg"
             />
             <div className="flex justify-between text-[11px] text-white/40 mt-1">
@@ -1453,7 +1454,7 @@ export function SanSiroMatchAfterpartyFinder({ locale = 'it' }: { locale?: strin
               max={30}
               step={1}
               value={guests}
-              onChange={(e) => setGuests(Number(e.target.value))}
+              onChange={(e: { target: { value: string } }) => setGuests(Number(e.target.value))}
               className="w-full accent-[#C9A86A] cursor-pointer h-2 bg-white/15 rounded-lg"
             />
           </div>

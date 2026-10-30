@@ -1472,7 +1472,7 @@ export const mockEvents: Event[] = [
   {
     id: "ev-serie-a-postmatch-dinner-55milano",
     venueId: "v-55milano",
-    genre: [MusicGenre.DINNER_SHOW, MusicGenre.COMMERCIAL, MusicGenre.HOUSE],
+    genre: [MusicGenre.LIVE_MUSIC, MusicGenre.COMMERCIAL, MusicGenre.HOUSE],
     dateISO: "2026-12-06T20:00:00+01:00",
     endDateISO: "2026-12-07T03:00:00+01:00",
     pricing: { entry: 25, currency: "EUR", tableMinSpend: 250 },
