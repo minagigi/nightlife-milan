@@ -19,7 +19,7 @@ export async function generateMetadata({params}:Props):Promise<Metadata>{
   const {locale}=await params,code=locale as LocaleCode,copy=await readOctoberHubCopy(code);
   const canonical=`${BASE}${localePrefix(code)}/events/october-2026`;
   const firstEvent = OCTOBER_EVENTS[0];
-  const heroImg = `${BASE}/images/events/october-2026/243580-292f42b9b15f.webp`;
+  const heroImg = `${BASE}/images/events/october-2026/243585-e9e87e7f9d79.webp`;
   return {title:{absolute:copy.metaTitle},description:copy.metaDescription,alternates:{canonical,languages:Object.fromEntries([...indexedLocaleCodes.map(l=>[getLocaleDef(l)!.hreflang,`${BASE}${localePrefix(l)}/events/october-2026`]),['x-default',`${BASE}/events/october-2026`]])},robots:{index:true,follow:true},openGraph:{type:'website',title:copy.metaTitle,description:copy.metaDescription,url:canonical,locale:getLocaleDef(code)?.ogLocale,siteName:'Nightlife Milan',images:[{url:heroImg,width:firstEvent?.image.width||1344,height:firstEvent?.image.height||752,alt:copy.labels.heading}]},twitter:{card:'summary_large_image',title:copy.metaTitle,description:copy.metaDescription,images:[heroImg],site:'@nightlifemilan'}};
 }
 export default async function October2026EventsPage({params}:Props){
