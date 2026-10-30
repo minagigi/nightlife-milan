@@ -237,7 +237,7 @@ export interface ClubEditorialData {
   faqs: { q: string; a: string }[];
 }
 
-export const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData }> = {
+const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData }> = {
   'v-justme': {
     en: {
       tagline: 'Priority #1 Flagship | Open 7 Nights a Week (Monday to Sunday) Beneath the Illuminated Torre Branca in Parco Sempione',
