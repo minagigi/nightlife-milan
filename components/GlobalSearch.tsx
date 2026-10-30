@@ -90,11 +90,56 @@ const STRATEGIC_HUBS = [
       it: 'Dopo-Partita Calcio San Siro (Inter & Milan)',
     },
     subtitle: {
-      en: 'Serie A, Champions League, Derby & Concerts · Aria Club 150m away',
-      it: 'Serie A, Champions League, Derby & Concerti · Aria Club a 150m',
+      en: 'Serie A, Champions League, Derby & Coppa Italia · Aria Club 150m away',
+      it: 'Serie A, Champions League, Derby & Coppa Italia · Aria Club a 150m',
     },
     searchTerms:
-      'dopo partita calcio san siro inter ac milan serie a champions league derby della madonnina coppa italia concerto stadio meazza terzo tempo aria club 150m',
+      'dopo partita calcio san siro inter ac milan serie a champions league derby della madonnina coppa italia stadio meazza terzo tempo aria club 150m',
+  },
+  {
+    id: 'hub-nye',
+    href: '/new-years-eve',
+    icon: 'party',
+    title: {
+      en: "New Year's Eve 2027 in Milan (Capodanno Cenone & VIP Tables)",
+      it: 'Capodanno 2027 a Milano (Cenone, Rooftop & Tavoli VIP)',
+    },
+    subtitle: {
+      en: '31 Dec Gala Dinners, 20th Floor Fireworks at Voya, Just Me, Pineta, Aria & 55',
+      it: '31 Dicembre Cenoni Cantati, Fuochi 20° Piano Voya, Just Me, Pineta, Aria & 55',
+    },
+    searchTerms:
+      'capodanno 2027 milano new years eve nye 31 dicembre cenone veglione discoteca tavoli vip fuochi artificio just me voya pineta aria 55 milano repvblic',
+  },
+  {
+    id: 'hub-concerts',
+    href: '/concert-afterparties',
+    icon: 'music',
+    title: {
+      en: 'Concert Afterparties (San Siro, Ippodromo La Maura & Unipol Forum)',
+      it: 'Afterparty Concerti (San Siro, Ippodromo La Maura & Forum Assago)',
+    },
+    subtitle: {
+      en: 'Official post-concert VIP tables & guest lists · Aria 150m from San Siro',
+      it: 'Tavoli VIP e liste post-concerto · Aria Club a 150m da San Siro e Ippodromo',
+    },
+    searchTerms:
+      'afterparty concerti milano dopo concerto san siro ippodromo la maura snai i-days unipol forum assago fabrique alcatraz aria club just me',
+  },
+  {
+    id: 'hub-fashion-week',
+    href: '/fashion-week',
+    icon: 'crown',
+    title: {
+      en: 'Milan Fashion Week (MFW), Fuorisalone & Monza F1 GP Parties',
+      it: 'Milano Fashion Week (MFW), Fuorisalone & Party Monza F1 GP',
+    },
+    subtitle: {
+      en: 'VIP model tables, private brand afterparties & F1 drivers hospitality',
+      it: 'Tavoli VIP sfilate, afterparty privati brand & ospitalità piloti F1 Monza',
+    },
+    searchTerms:
+      'milan fashion week mfw settimana della moda sfilate fuorisalone salone del mobile design week formula 1 f1 gp monza afterparty modelli vip just me voya repvblic volt',
   },
   {
     id: 'hub-rooftops',
@@ -425,6 +470,8 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
         return <Wine className="w-4 h-4 text-champagne" />;
       case 'party':
         return <PartyPopper className="w-4 h-4 text-champagne" />;
+      case 'music':
+        return <Music2 className="w-4 h-4 text-champagne" />;
       case 'qr':
         return <QrCode className="w-4 h-4 text-champagne" />;
       case 'crown':
@@ -464,8 +511,8 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder={
                     typedLocale === 'it'
-                      ? 'Cerca Just Me, San Siro, Rooftop, Laurea, Prezzi Bottiglie...'
-                      : 'Search Just Me, San Siro, Rooftops, Graduation, Bottle Prices...'
+                      ? 'Cerca Just Me, San Siro, Capodanno 2027, Concerti, Fashion Week...'
+                      : 'Search Just Me, San Siro, NYE 2027, Concerts, Fashion Week...'
                   }
                   className="w-full bg-transparent border-none text-xl sm:text-3xl md:text-4xl font-serif text-champagne placeholder:text-champagne/30 focus:outline-none focus:ring-0 pl-9 sm:pl-12 py-3"
                 />
@@ -497,7 +544,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                         onClick={handleClose}
                         className="text-xs text-white/50 hover:text-champagne uppercase tracking-wider flex items-center gap-1"
                       >
-                        {typedLocale === 'it' ? 'Tutti i 18 Club' : 'All 18 Clubs'}
+                        {typedLocale === 'it' ? 'Tutti i 19 Club' : 'All 19 Clubs'}
                         <ArrowUpRight className="w-3.5 h-3.5" />
                       </Link>
                     </div>

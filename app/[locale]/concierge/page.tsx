@@ -5,7 +5,12 @@ import Image from 'next/image';
 import { MessageCircle, Star, Clock, Shield, Zap, MapPin, Calendar, CheckCircle } from 'lucide-react';
 import { CONTACT } from '@/config/contact';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
-import { VipQuoteCalculator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
+import {
+  VipQuoteCalculator,
+  PrioritySixShowcase,
+  DressCodeInstantChecker,
+  NeighborhoodCommutePlanner,
+} from '@/components/NightlifeExpansionModules';
 
 export const revalidate = 3600;
 
@@ -414,8 +419,10 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
         </div>
       </section>
 
-      {/* Interactive VIP Quote Calculator & Priority 6 */}
+      {/* Interactive Dress Code Checker, Neighborhood Commute Planner, VIP Quote Calculator & Priority 6 */}
       <section className="px-6 pb-20 max-w-7xl mx-auto space-y-16">
+        <DressCodeInstantChecker locale={locale} />
+        <NeighborhoodCommutePlanner locale={locale} />
         <VipQuoteCalculator locale={locale} />
         <PrioritySixShowcase locale={locale} />
       </section>

@@ -781,5 +781,156 @@ export const GUIDE_I18N: Record<string, Record<string, Partial<Record<LocaleCode
       "bs": "<p>Ove godine, fokus se pomjerio s tradicionalnih klubova ka sirovim, neobrađenim industrijskim prostorima na periferiji grada.</p>",
       "mk": "<p>Оваа година, фокусот се пренасочи од традиционалните клубови кон сурови, необработени индустриски простори во периферијата на градот.</p>"
     }
+  },
+  "vip-table-bottle-service-prices-milan": {
+    "title": {
+      "es": "Precios de Mesas VIP y Botellas en Discotecas de Milán 2026/2027: Consumo Mínimo Oficial",
+      "fr": "Prix des Tables VIP et Bouteilles dans les Clubs de Milan 2026/2027 : Minimum Spend Officiel",
+      "de": "VIP-Tisch- & Flaschenpreise in Mailands Clubs 2026/2027: Offizielle Mindestumsätze & Menüs",
+      "pt": "Preços de Mesas VIP e Garrafas nas Discotecas de Milão 2026/2027: Consumo Mínimo Oficial",
+      "nl": "VIP-tafel & Flessenprijzen in Clubs van Milaan 2026/2027: Officiële Minimum Spends",
+      "ru": "Цены на VIP-столы и бутылки в клубах Милана 2026/2027: официальный депозит и меню",
+      "tr": "Milano Kulüplerinde VIP Masa ve Şişe Fiyatları 2026/2027: Resmi Minimum Harcama Tablosu",
+      "zh": "2026/2027米兰夜店VIP卡座与酒水价格指南：官方最低消费与酒单",
+      "ar": "أسعار طاولات VIP والزجاجات في نوادي ميلانو 2026/2027: الحد الأدنى الرسمي للإنفاق",
+      "el": "Τιμές VIP Τραπεζιών & Φιαλών στα Κλαμπ του Μιλάνου 2026/2027: Επίσημες Ελάχιστες Καταναλώσεις",
+      "pl": "Ceny Stolików VIP i Butelek w Klubach w Mediolanie 2026/2027: Oficjalne Minimum Spend",
+      "ro": "Prețuri Mese VIP și Sticle în Cluburile din Milano 2026/2027: Consum Minim Oficial",
+      "sv": "VIP-bord och Flaskpriser på Milanos Klubbar 2026/2027: Officiella Minimibelopp"
+    },
+    "excerpt": {
+      "es": "¿Cuánto cuesta una mesa VIP o botella en Just Me, Pineta, Aria, 55 Milano, Voya Rooftop y Repvblic? Tablas de precios oficiales 2026/2027 y reserva por WhatsApp +39 351 912 7047.",
+      "fr": "Combien coûte une table VIP chez Just Me, Pineta, Aria, 55 Milano, Voya Rooftop et Repvblic ? Tarifs officiels 2026/2027 et réservation WhatsApp +39 351 912 7047.",
+      "de": "Was kostet ein VIP-Tisch bei Just Me, Pineta, Aria, 55 Milano, Voya Rooftop und Repvblic? Alle offiziellen Preise 2026/2027 und Reservierung via WhatsApp +39 351 912 7047.",
+      "pt": "Quanto custa uma mesa VIP no Just Me, Pineta, Aria, 55 Milano, Voya Rooftop e Repvblic? Tabelas de preços 2026/2027.",
+      "ru": "Сколько стоит VIP-стол в Just Me, Pineta, Aria, 55 Milano, Voya Rooftop и Repvblic? Полный прайс-лист 2026/2027.",
+      "zh": "Just Me、Pineta、Aria、55 Milano、Voya Rooftop和Repvblic的VIP卡座多少钱？2026/2027完整价格表。",
+      "ar": "كم تبلغ تكلفة طاولة VIP في Just Me وPineta وAria و55 Milano وVoya Rooftop وRepvblic؟ جدول أسعار 2026/2027 الكامل."
+    }
+  },
+  "where-to-go-out-milan-every-night-monday-sunday": {
+    "title": {
+      "es": "Dónde Salir en Milán Cada Noche (Lunes a Domingo): Calendario Semanal de Discotecas 2026/2027",
+      "fr": "Où Sortir à Milan Chaque Soir (Lundi au Dimanche) : Calendrier Hebdomadaire des Clubs 2026/2027",
+      "de": "Wo man in Mailand jeden Abend feiern geht (Montag bis Sonntag): Club-Wochenkalender 2026/2027",
+      "pt": "Onde Sair em Milão Todas as Noites (Segunda a Domingo): Calendário Semanal de Discotecas",
+      "nl": "Waar Uitgaan in Milaan Elke Avond (Maandag t/m Zondag): Weekkalender 2026/2027",
+      "ru": "Куда пойти в Милане в любой день недели (с понедельника по воскресенье): календарь клубов",
+      "tr": "Milano'da Her Gece Nereye Gidilir (Pazartesi-Pazar): Haftalık Kulüp Takvimi 2026/2027",
+      "zh": "米兰每晚夜生活指南（周一至周日）：2026/2027每周最佳夜店日历",
+      "ar": "أين تسهر في ميلانو كل ليلة (من الاثنين إلى الأحد): التقويم الأسبوعي للنوادي"
+    },
+    "excerpt": {
+      "es": "Desde el lunes universitario hasta el Just Me abierto 7 noches a la semana, el aperitivo cantado en Pineta y 55 Milano o el sábado en Aria Club y Voya Rooftop.",
+      "fr": "Du lundi au dimanche : Just Me ouvert 7j/7 sous la Torre Branca, dîner chantant chez Pineta et 55 Milano, jardin d'Aria Club et Voya Rooftop.",
+      "de": "Von Montag bis Sonntag: Just Me 7 Tage geöffnet, Singing Dinner im Pineta & 55 Milano, Aria Club San Siro und Voya Rooftop im 20. Stock."
+    }
+  },
+  "best-rooftop-bars-sky-lounges-milan": {
+    "title": {
+      "es": "Los Mejores Rooftops y Terrazas Panorámicas de Milán (2026/2027): Del Aperitivo al Club",
+      "fr": "Les Meilleurs Rooftops et Terrasses Panoramiques de Milan (2026/2027) : De l'Apéritif au Club",
+      "de": "Die besten Rooftop-Bars & Sky-Lounges in Mailand (2026/2027): Vom Sunset-Aperitivo zum Club",
+      "pt": "Os Melhores Rooftops e Terraços Panorâmicos de Milão (2026/2027): Do Aperitivo ao Club",
+      "ru": "Лучшие руфтопы и панорамные террасы Милана (2026/2027): от аперитива на закате до клуба"
+    },
+    "excerpt": {
+      "es": "Descubre Voya Rooftop (planta 20 con vistas 360° a CityLife), Terrazza Duomo 21 y Ceresio 7: precios de mesas, código de vestimenta y reserva VIP.",
+      "fr": "Découvrez Voya Rooftop (20e étage avec vue à 360° sur la skyline), Terrazza Duomo 21 et Ceresio 7 : tarifs, dress code et réservation.",
+      "de": "Entdecken Sie das Voya Rooftop (20. Stock mit 360°-Skyline-Blick), Terrazza Duomo 21 und Ceresio 7: Preise, Dresscode und VIP-Reservierung."
+    }
+  },
+  "graduation-18th-birthday-corporate-party-venues-milan": {
+    "title": {
+      "es": "Dónde Celebrar Graduación (Festa di Laurea), 18 Años, Cumpleaños y Eventos Privados en Milán",
+      "fr": "Où Fêter une Remise de Diplôme, un Anniversaire (18/30 ans) ou un Événement Privé à Milan",
+      "de": "Abschlussfeier (Laurea), 18. Geburtstag & Firmenfeiern in Mailand: Die besten Clubs & Pakete"
+    },
+    "excerpt": {
+      "es": "Compara paquetes de aperitivo reservado (20-35€/persona), cena cantada y áreas VIP exclusivas en 55 Milano, Voya Rooftop, Aria Club, Pineta y Just Me.",
+      "fr": "Comparez les formules apéritif réservé (20-35€/pers.), dîner spectacle et carrés VIP chez 55 Milano, Voya Rooftop, Aria Club, Pineta et Just Me."
+    }
+  },
+  "milan-fashion-week-fuorisalone-monza-f1-afterparties": {
+    "title": {
+      "es": "Milan Fashion Week, Fuorisalone Design Week y Monza F1: Guía de Afterparties VIP 2026/2027",
+      "fr": "Milan Fashion Week, Fuorisalone Design Week & GP F1 Monza : Guide des Afterparties VIP 2026/2027",
+      "de": "Mailand Fashion Week, Fuorisalone Design Week & Monza F1: VIP-Afterparty-Guide 2026/2027"
+    },
+    "excerpt": {
+      "es": "Cómo reservar mesas Super Privé y pases durante la Semana de la Moda, el Salone del Mobile y el Gran Premio de F1 en Just Me, Pineta, Aria, 55 Milano y Voya Rooftop.",
+      "fr": "Comment réserver une table Super Privé pendant la Fashion Week, le Salone del Mobile et le GP de F1 chez Just Me, Pineta, Aria, 55 Milano et Voya Rooftop."
+    }
+  },
+  "san-siro-football-match-afterparties-milan-inter-ac-milan": {
+    "title": {
+      "es": "Post-Partido San Siro Milán (Inter y AC Milan): Dónde Cenar y Salir de Fiesta Tras el Estadio",
+      "fr": "Après-Match San Siro Milan (Inter & AC Milan) : Où Dîner et Faire la Fête Après le Stade",
+      "de": "San Siro Fußball-Afterparty Mailand (Inter & AC Milan): Die besten Clubs nach dem Spiel",
+      "pt": "Pós-Jogo San Siro Milão (Inter e AC Milan): Onde Jantar e Festejar Depois do Estádio",
+      "nl": "San Siro Voetbal Afterparty Milaan (Inter & AC Milan): Waar Uitgaan Na de Wedstrijd",
+      "ru": "Куда пойти после футбольного матча на Сан-Сиро (Интер и Милан): клубы и рестораны",
+      "tr": "San Siro Maç Sonrası Gece Hayatı (Inter & AC Milan): Stadyum Çıkışı En İyi Kulüpler",
+      "zh": "圣西罗球场赛后夜生活指南（国际米兰 & AC米兰）：比赛结束后去哪家夜店狂欢",
+      "ar": "حفلات ما بعد مباريات سان سيرو ميلانو (إنتر وميلان): أين تسهر بعد المباراة",
+      "el": "Afterparty Αγώνων Σαν Σίρο Μιλάνο (Ίντερ & Μίλαν): Πού να Διασκεδάσετε Μετά το Γήπεδο",
+      "pl": "Afterparty po Meczu na San Siro w Mediolanie (Inter i AC Milan): Gdzie Iść po Stadionie",
+      "ro": "Afterparty După Meci pe San Siro Milano (Inter & AC Milan): Unde Mergi După Stadion",
+      "sv": "San Siro Efterfest Milano (Inter & AC Milan): Bästa Klubbarna Efter Fotbollsmatchen"
+    },
+    "excerpt": {
+      "es": "Guía oficial post-partido de Serie A, Champions League y Derby en San Siro: Aria Club a solo 150 metros a pie del estadio, Just Me abierto 7/7, Voya Rooftop y 55 Milano en línea M5. WhatsApp +39 351 912 7047.",
+      "fr": "Guide officiel après-match Serie A, Ligue des Champions et Derby à San Siro : Aria Club à seulement 150 mètres à pied du stade, Just Me ouvert 7j/7, Voya Rooftop et 55 Milano sur la ligne M5. WhatsApp +39 351 912 7047.",
+      "de": "Offizieller After-Match-Guide für Serie A, Champions League & Derby im San Siro: Aria Club nur 150m zu Fuß vom Stadion, Just Me 7/7 geöffnet, Voya Rooftop & 55 Milano an der M5. WhatsApp +39 351 912 7047.",
+      "pt": "Guia oficial pós-jogo da Serie A, Champions League e Derby em San Siro: Aria Club a apenas 150m a pé do estádio, Just Me aberto 7/7, Voya Rooftop e 55 Milano. WhatsApp +39 351 912 7047.",
+      "ru": "Официальный гид после матчей Серии А, Лиги чемпионов и Дерби на Сан-Сиро: Aria Club всего в 150 метрах пешком от стадиона, Just Me открыт 7/7, Voya Rooftop и 55 Milano. WhatsApp +39 351 912 7047.",
+      "zh": "圣西罗意甲、欧冠与米兰德比赛后官方指南：距离球场仅150米步行的Aria Club、每周7晚营业的Just Me、M5地铁直达的Voya Rooftop与55 Milano。WhatsApp +39 351 912 7047。",
+      "ar": "الدليل الرسمي لما بعد مباريات الدوري الإيطالي ودوري أبطال أوروبا والديربي في سان سيرو: نادي Aria على بعد 150 مترًا فقط سيرًا من الملعب، ونادي Just Me مفتوح 7/7. واتساب +39 351 912 7047."
+    }
+  },
+  "new-years-eve-milan-clubs-guide": {
+    "title": {
+      "es": "Nochevieja en Milán 2027 (Capodanno): Guía de Cenas de Gala, Rooftops y Precios de Mesas VIP",
+      "fr": "Nouvel An à Milan 2027 (Capodanno) : Guide des Dîners de Gala, Rooftops et Tables VIP",
+      "de": "Silvester in Mailand 2027 (Capodanno): Gala-Dinner, Royal Buffet, Rooftops & VIP-Tischpreise",
+      "pt": "Réveillon em Milão 2027 (Capodanno): Guia de Ceias de Gala, Rooftops e Mesas VIP",
+      "ru": "Новый год в Милане 2027 (Capodanno): гала-ужины, руфтопы и цены на VIP-столы в 19 клубах",
+      "zh": "2027米兰跨年之夜指南（Capodanno）：晚宴、高空屋顶烟花与19家夜店VIP卡座价格",
+      "ar": "ليلة رأس السنة في ميلانو 2027: دليل عشاء الغالا والأسطح وأسعار طاولات VIP"
+    },
+    "excerpt": {
+      "es": "Lista de precios verificada del 31 de diciembre de 2026 / Nochevieja 2027 para Just Me, Pineta, Aria Club, 55 Milano, Voya Rooftop, Repvblic, Alcatraz, Fabrique y Tocqueville 13.",
+      "fr": "Tarifs officiels du réveillon du 31 décembre 2026 / Nouvel An 2027 chez Just Me, Pineta, Aria Club, 55 Milano, Voya Rooftop, Repvblic, Alcatraz, Fabrique et Tocqueville 13.",
+      "de": "Offizielle Silvester-Preisliste 2026/2027 für Just Me, Pineta, Aria Club, 55 Milano, Voya Rooftop, Repvblic, Alcatraz, Fabrique und Tocqueville 13."
+    }
+  },
+  "milan-concert-afterparties-san-siro-ippodromo-guide": {
+    "title": {
+      "es": "Afterparties de Conciertos en Milán 2026/2027: San Siro, Ippodromo La Maura, Forum Assago y Fabrique",
+      "fr": "Afterparties Concerts à Milan 2026/2027 : San Siro, Hippodrome La Maura, Forum Assago & Fabrique",
+      "de": "Konzert-Afterpartys in Mailand 2026/2027: San Siro, Ippodromo La Maura, Forum Assago & Fabrique",
+      "pt": "Afterparties de Concertos em Milão 2026/2027: San Siro, Ippodromo La Maura, Forum Assago e Fabrique",
+      "ru": "Афтепати после концертов в Милане 2026/2027: Сан-Сиро, Ипподром Ла-Маура, Forum Assago и Fabrique"
+    },
+    "excerpt": {
+      "es": "Dónde salir de fiesta tras un concierto en el Estadio San Siro o I-Days Ippodromo: Aria Club a solo 150m a pie, Just Me abierto 7/7, Voya Rooftop y 55 Milano.",
+      "fr": "Où faire la fête après un concert au Stade San Siro ou à l'Hippodrome I-Days : Aria Club à 150m à pied, Just Me ouvert 7j/7, Voya Rooftop et 55 Milano.",
+      "de": "Wo man nach einem Konzert im San Siro oder Ippodromo weiterfeiert: Aria Club nur 150m zu Fuß, Just Me 7/7 geöffnet, Voya Rooftop und 55 Milano."
+    }
+  },
+  "milan-bachelor-bachelorette-vip-party-guide": {
+    "title": {
+      "es": "Despedida de Soltero y Soltera VIP en Milán: Cena Cantada, Rooftops, Limusina y Mesas Privé",
+      "fr": "EVG & EVJF VIP à Milan : Dîner Chantant, Rooftops Panoramiques, Limousine et Carrés Privé",
+      "de": "VIP-Junggesellenabschied (JGA) in Mailand: Dinner-Show, Rooftops, Limousine & Privé-Tische",
+      "pt": "Despedida de Solteiro e Solteira VIP em Milão: Jantar Cantado, Rooftops, Limusine e Privé",
+      "ru": "VIP-мальчишник и девичник в Милане: поющий ужин, панорамные руфтопы, лимузин и столы Privé"
+    },
+    "excerpt": {
+      "es": "Organiza una despedida inolvidable en Milán combinando aperitivo en la planta 20 de Voya Rooftop, cena cantada en Pineta o 55 Milano y mesa VIP garantizada en Just Me o Aria Club.",
+      "fr": "Organisez un EVG/EVJF inoubliable à Milan combinant apéritif au 20e étage de Voya Rooftop, dîner chantant chez Pineta ou 55 Milano et table VIP garantie chez Just Me ou Aria Club.",
+      "de": "Planen Sie einen unvergesslichen JGA in Mailand mit Sunset-Drinks im 20. Stock des Voya Rooftop, Dinner-Show im Pineta oder 55 Milano und garantiertem VIP-Tisch im Just Me oder Aria Club."
+    }
   }
+
 };

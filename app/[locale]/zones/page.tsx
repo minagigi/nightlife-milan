@@ -5,7 +5,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { mockZones } from '@/lib/data';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
-import { VipQuoteCalculator, WeeklyNightlifeNavigator } from '@/components/NightlifeExpansionModules';
+import {
+  NeighborhoodCommutePlanner,
+  VipQuoteCalculator,
+  WeeklyNightlifeNavigator,
+} from '@/components/NightlifeExpansionModules';
 
 export const revalidate = 3600;
 
@@ -264,6 +268,11 @@ export default async function ZonesPage({
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Interactive Neighborhood Commute Planner (Metro M1-M5, Night Buses & Taxi to Top 6 Priority Clubs) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <NeighborhoodCommutePlanner locale={locale} />
       </section>
 
       {/* Interactive Weekly Nightlife Navigator */}

@@ -110,6 +110,15 @@ export default function Footer({ lang }: FooterProps) {
               <Link href={`${lp}/guides/san-siro-football-match-afterparties-inter-ac-milan`} className="text-white/60 hover:text-champagne transition-colors text-sm">{tr(lang, 'San Siro Post-Match Guide', 'Guida Dopo-Partita San Siro')}</Link>
             </li>
             <li>
+              <Link href={`${lp}/new-years-eve`} className="text-champagne/90 hover:text-champagne transition-colors text-sm font-medium">{tr(lang, "New Year's Eve 2027 (Capodanno)", 'Capodanno 2027 Milano (Cenone & Club)')}</Link>
+            </li>
+            <li>
+              <Link href={`${lp}/concert-afterparties`} className="text-white/60 hover:text-champagne transition-colors text-sm">{tr(lang, 'Concert Afterparties (San Siro & Forum)', 'Afterparty Concerti (San Siro & Forum)')}</Link>
+            </li>
+            <li>
+              <Link href={`${lp}/fashion-week`} className="text-white/60 hover:text-champagne transition-colors text-sm">{tr(lang, 'Fashion Week & Monza F1 Parties', 'Fashion Week & Monza F1 Party')}</Link>
+            </li>
+            <li>
               <Link href={`${lp}/private-parties`} className="text-white/60 hover:text-champagne transition-colors text-sm">{tr(lang, 'Private Parties & Graduations', 'Feste di Laurea & 18 Anni')}</Link>
             </li>
             <li>

@@ -77,6 +77,9 @@ export default function Header({ currentLocale }: { currentLocale: string }) {
   const mobileExtraLinks = [
     { name: t.events, href: `${localePrefix}/events`, match: `${localePrefix}/events` },
     { name: currentLocale === 'it' ? 'DOPO-PARTITA SAN SIRO (INTER & MILAN)' : 'SAN SIRO FOOTBALL AFTERPARTIES', href: `${localePrefix}/football-afterparties`, match: `${localePrefix}/football-afterparties`, gold: true },
+    { name: currentLocale === 'it' ? 'CAPODANNO 2027 MILANO' : "NEW YEAR'S EVE 2027", href: `${localePrefix}/new-years-eve`, match: `${localePrefix}/new-years-eve`, gold: true },
+    { name: currentLocale === 'it' ? 'AFTERPARTY CONCERTI (SAN SIRO & FORUM)' : 'CONCERT AFTERPARTIES', href: `${localePrefix}/concert-afterparties`, match: `${localePrefix}/concert-afterparties` },
+    { name: currentLocale === 'it' ? 'FASHION WEEK & MONZA F1' : 'FASHION WEEK & F1', href: `${localePrefix}/fashion-week`, match: `${localePrefix}/fashion-week` },
     { name: 'APERITIVO', href: `${localePrefix}/aperitivo`, match: `${localePrefix}/aperitivo` },
     { name: t.bottlePrices, href: `${localePrefix}/bottle-prices`, match: `${localePrefix}/bottle-prices` },
     { name: 'DRESS CODE', href: `${localePrefix}/door-policy`, match: `${localePrefix}/door-policy` },

@@ -1614,3 +1614,1393 @@ export function SanSiroMatchAfterpartyFinder({ locale = 'it' }: { locale?: strin
   );
 }
 
+type CheckerVenueKey =
+  | 'just-me'
+  | 'pineta'
+  | 'aria'
+  | 'fiftyfive'
+  | 'voya'
+  | 'repvblic'
+  | 'underground';
+
+type CheckerGroupKey = 'balanced' | 'mixed-male' | 'all-male' | 'post-event';
+type CheckerOutfitKey = 'smart-luxury' | 'smart-casual' | 'streetwear';
+
+interface CheckerVenueDef {
+  rankLabelIt: string;
+  rankLabelEn: string;
+  name: string;
+  slug: string;
+  zoneIt: string;
+  zoneEn: string;
+  minAge: string;
+  strictnessLevel: 'strict-luxury' | 'smart-glam' | 'underground';
+  dressRuleIt: string;
+  dressRuleEn: string;
+}
+
+const CHECKER_VENUES: Record<CheckerVenueKey, CheckerVenueDef> = {
+  'just-me': {
+    rankLabelIt: '1. Just Me (#1)',
+    rankLabelEn: '1. Just Me (#1)',
+    name: 'Just Me Milano (Torre Branca)',
+    slug: 'just-me-milano',
+    zoneIt: 'Parco Sempione (Viale Luigi Camoens 2)',
+    zoneEn: 'Parco Sempione (Viale Luigi Camoens 2)',
+    minAge: '21+',
+    strictnessLevel: 'strict-luxury',
+    dressRuleIt: 'Camicia/Blazer o look sartoriale uomo, abito/tacco donna. Vietate tute, borselli, cappellini e sneakers sportive.',
+    dressRuleEn: 'Collared shirt/Blazer or tailored look for men, chic dress/heels for women. No tracksuits, pouches, caps, or gym sneakers.',
+  },
+  pineta: {
+    rankLabelIt: '2. Pineta (#2)',
+    rankLabelEn: '2. Pineta (#2)',
+    name: 'Pineta Club Milano',
+    slug: 'pineta-club-milano',
+    zoneIt: 'Corso Como / Garibaldi (Via Messina 38)',
+    zoneEn: 'Corso Como / Garibaldi (Via Messina 38)',
+    minAge: '20+',
+    strictnessLevel: 'strict-luxury',
+    dressRuleIt: 'Smart Elegance & Glamour per Aperitivo Cantato e Club. Camicia o polo sartoriale consigliata, zero abbigliamento sportivo.',
+    dressRuleEn: 'Smart Elegance & Glamour for Singing Aperitivo and Club. Collared shirt or tailored polo recommended, zero sportswear.',
+  },
+  aria: {
+    rankLabelIt: '3. Aria Club (#3)',
+    rankLabelEn: '3. Aria Club (#3)',
+    name: 'Aria Club Milano',
+    slug: 'aria-club-milano',
+    zoneIt: 'San Siro / Ippodromo (Piazzale dello Sport 14)',
+    zoneEn: 'San Siro / Ippodromo (Piazzale dello Sport 14)',
+    minAge: '19+',
+    strictnessLevel: 'smart-glam',
+    dressRuleIt: 'Smart Chic & Urban Curato. Nei dopo-partita da San Siro (150m) lasciare sciarpe e maglie da gara in auto o al guardaroba.',
+    dressRuleEn: 'Smart Chic & Curated Urban. On San Siro match nights (150m away) leave team scarves and jerseys in your car or cloakroom.',
+  },
+  fiftyfive: {
+    rankLabelIt: '4. 55 Milano (#4)',
+    rankLabelEn: '4. 55 Milano (#4)',
+    name: '55 Milano (FiftyFive)',
+    slug: '55-milano',
+    zoneIt: 'Arco della Pace / Sempione (Via Piero della Francesca 55)',
+    zoneEn: 'Arco della Pace / Sempione (Via Piero della Francesca 55)',
+    minAge: '20+',
+    strictnessLevel: 'smart-glam',
+    dressRuleIt: 'Smart Casual Curato & Elegante per Apericena XL, Lauree, Dinner Show e serata The Wall del sabato.',
+    dressRuleEn: 'Curated Smart Casual & Elegant for XXL Apericena, Graduations, Dinner Show, and Saturday The Wall party.',
+  },
+  voya: {
+    rankLabelIt: '5. Voya Rooftop (#5)',
+    rankLabelEn: '5. Voya Rooftop (#5)',
+    name: 'Voya Rooftop Milan (20° Piano)',
+    slug: 'voya-rooftop-milan',
+    zoneIt: 'Isola / Portello (Via Achille Papa 30)',
+    zoneEn: 'Isola / Portello (Via Achille Papa 30)',
+    minAge: '21+',
+    strictnessLevel: 'strict-luxury',
+    dressRuleIt: 'Sky Lounge Chic al 20° piano. Camicia, blazer o maglia fine scura; mocassino o sneaker in pelle minimal.',
+    dressRuleEn: '20th-Floor Sky Lounge Chic. Collared shirt, blazer, or fine dark knitwear; loafers or minimal leather sneakers.',
+  },
+  repvblic: {
+    rankLabelIt: '6. Repvblic (#6)',
+    rankLabelEn: '6. Repvblic (#6)',
+    name: 'Repvblic Milano',
+    slug: 'repvblic-milano',
+    zoneIt: 'Piazza della Repubblica / Mecenate',
+    zoneEn: 'Piazza della Repubblica / Mecenate',
+    minAge: '20+',
+    strictnessLevel: 'smart-glam',
+    dressRuleIt: 'Fashion Forward & Total Black Chic per Dirty Monday e weekend House/Hip-Hop. Vietati borselli e tute.',
+    dressRuleEn: 'Fashion Forward & Total Black Chic for Dirty Monday and House/Hip-Hop weekends. No crossbody bags or tracksuits.',
+  },
+  underground: {
+    rankLabelIt: 'Club Underground (Tunnel/Volt/Amnesia)',
+    rankLabelEn: 'Underground Clubs (Tunnel/Volt/Amnesia)',
+    name: 'Tunnel / Volt / Amnesia Milano',
+    slug: 'volt-club-milano',
+    zoneIt: 'Stazione Centrale / Corso Como / Mecenate',
+    zoneEn: 'Central Station / Corso Como / Mecenate',
+    minAge: '18+',
+    strictnessLevel: 'underground',
+    dressRuleIt: 'Estetica Total Black, Minimal Industrial e Streetwear pulito. Vietate maglie da calcio e gruppi molesti.',
+    dressRuleEn: 'Total Black aesthetic, Minimal Industrial, and clean Streetwear. Football jerseys and disruptive groups refused.',
+  },
+};
+
+const CHECKER_GROUPS: Record<
+  CheckerGroupKey,
+  { labelIt: string; labelEn: string; subIt: string; subEn: string }
+> = {
+  balanced: {
+    labelIt: 'Coppia / Misto Equilibrato (50%+ donne)',
+    labelEn: 'Couple / Balanced Mixed Group (50%+ women)',
+    subIt: 'Proporzione ideale per liste nominali e tavoli',
+    subEn: 'Ideal ratio for nominal guestlists and VIP tables',
+  },
+  'mixed-male': {
+    labelIt: 'Gruppo Misto (più uomini che donne)',
+    labelEn: 'Mixed Group (more men than women)',
+    subIt: 'Richiede arrivo entro le 00:15 o prenotazione tavolo',
+    subEn: 'Requires arrival before 00:15 or table reservation',
+  },
+  'all-male': {
+    labelIt: 'Gruppo Solo Uomini (3+ uomini)',
+    labelEn: 'All-Male Group (3+ men)',
+    subIt: 'Alto rischio rimbalzo in lista standard; consigliato Tavolo VIP o Aperitivo',
+    subEn: 'High refusal risk on standard guestlist; VIP Table or Aperitivo recommended',
+  },
+  'post-event': {
+    labelIt: 'Ospiti Post-Partita / Post-Concerto',
+    labelEn: 'Post-Match / Post-Concert Guests',
+    subIt: 'Arrivo da San Siro o Ippodromo dopo le 22:45',
+    subEn: 'Arriving from San Siro or Ippodromo after 22:45',
+  },
+};
+
+const CHECKER_OUTFITS: Record<
+  CheckerOutfitKey,
+  { labelIt: string; labelEn: string; detailIt: string; detailEn: string }
+> = {
+  'smart-luxury': {
+    labelIt: 'Smart Luxury / Elegante (Camicia, Blazer, Abito/Tacco)',
+    labelEn: 'Smart Luxury / Elegant (Collared Shirt, Blazer, Dress/Heels)',
+    detailIt: 'Camicia con colletto, giacca/blazer, pantalone sartoriale, mocassini o abito elegante/tacchi',
+    detailEn: 'Collared shirt, blazer/jacket, tailored trousers, loafers or cocktail dress/heels',
+  },
+  'smart-casual': {
+    labelIt: 'Smart Casual Curato (Polo/T-shirt nera minimal, pantalone lungo, sneaker pulita)',
+    labelEn: 'Curated Smart Casual (Polo/minimal black tee, long trousers, clean leather sneaker)',
+    detailIt: 'Total black curato, polo o t-shirt premium senza maxi-loghi, jeans scuri, sneaker in pelle bianca o nera',
+    detailEn: 'Curated total black, polo or logo-free premium tee, dark jeans, clean white or black leather sneakers',
+  },
+  streetwear: {
+    labelIt: 'Streetwear / Sportivo (Tuta, borsello, felpa cappuccio, maglietta calcio, cappellino)',
+    labelEn: 'Streetwear / Sporty (Tracksuit, crossbody bag, hoodie, football jersey, cap)',
+    detailIt: 'Capi sportivi, scarpe da ginnastica tecniche, borsello a tracolla, cappellino o maglia da gara',
+    detailEn: 'Athletic wear, running trainers, crossbody pouch, baseball cap, or team jersey',
+  },
+};
+
+export function DressCodeInstantChecker({ locale }: { locale: string }) {
+  const isIt = locale === 'it';
+  const lp = localePrefix(locale);
+
+  const [venueKey, setVenueKey] = useState<CheckerVenueKey>('just-me');
+  const [groupKey, setGroupKey] = useState<CheckerGroupKey>('balanced');
+  const [outfitKey, setOutfitKey] = useState<CheckerOutfitKey>('smart-luxury');
+
+  const venue = CHECKER_VENUES[venueKey];
+  const group = CHECKER_GROUPS[groupKey];
+  const outfit = CHECKER_OUTFITS[outfitKey];
+
+  let score = 90;
+  if (outfitKey === 'smart-luxury') {
+    score = venue.strictnessLevel === 'underground' ? 88 : 96;
+  } else if (outfitKey === 'smart-casual') {
+    if (venue.strictnessLevel === 'strict-luxury') score = 74;
+    else if (venue.strictnessLevel === 'smart-glam') score = 88;
+    else score = 95;
+  } else {
+    if (venue.strictnessLevel === 'strict-luxury') score = 8;
+    else if (venue.strictnessLevel === 'smart-glam') score = 18;
+    else score = 68;
+  }
+
+  if (groupKey === 'mixed-male') {
+    score -= venue.strictnessLevel === 'strict-luxury' ? 18 : 12;
+  } else if (groupKey === 'all-male') {
+    score -= venue.strictnessLevel === 'strict-luxury' ? 42 : venue.strictnessLevel === 'smart-glam' ? 32 : 20;
+  } else if (groupKey === 'post-event') {
+    score -= outfitKey === 'streetwear' ? 25 : 14;
+  }
+
+  const clampedScore = Math.max(5, Math.min(99, score));
+  const vipTableScore = outfitKey === 'streetwear' && venue.strictnessLevel !== 'underground' ? 25 : Math.min(99, Math.max(94, clampedScore + 28));
+
+  const statusTier: 'green' | 'amber' | 'red' =
+    clampedScore >= 78 ? 'green' : clampedScore >= 45 ? 'amber' : 'red';
+
+  const statusBadge = {
+    green: {
+      labelIt: 'Verde: Ingresso Fluido',
+      labelEn: 'Green: Smooth Entry',
+      classes: 'bg-emerald-500/20 border-emerald-400/50 text-emerald-300',
+      barClass: 'bg-emerald-400',
+    },
+    amber: {
+      labelIt: 'Ambra: Rischio Selezione in Lista',
+      labelEn: 'Amber: Guestlist Selection Risk',
+      classes: 'bg-amber-500/20 border-amber-400/50 text-amber-300',
+      barClass: 'bg-amber-400',
+    },
+    red: {
+      labelIt: 'Rosso: Alto Rischio Rimbalzo in Lista',
+      labelEn: 'Red: High Guestlist Refusal Risk',
+      classes: 'bg-rose-500/20 border-rose-400/50 text-rose-300',
+      barClass: 'bg-rose-500',
+    },
+  }[statusTier];
+
+  const getInsiderDiagnosis = (): { titleIt: string; titleEn: string; bodyIt: string; bodyEn: string } => {
+    if (outfitKey === 'streetwear' && venue.strictnessLevel !== 'underground') {
+      return {
+        titleIt: 'Allerta Porta: Abbigliamento Sportivo / Borsello / Maglia Calcio Rifiutati',
+        titleEn: 'Door Alert: Sportswear / Crossbody Bag / Football Jersey Refused',
+        bodyIt: `Da ${venue.name} i direttori di porta bloccano tassativamente tute, borselli a tracolla, cappellini, felpe con cappuccio e maglie da calcio, anche in presenza di prenotazione. Soluzione immediata: sostituisci con camicia o polo scura e pantalone lungo, lascia eventuali sciarpe in auto e richiedi l'accredito con il nostro Concierge.`,
+        bodyEn: `At ${venue.name}, door directors strictly refuse tracksuits, crossbody bags, caps, hoodies, and football jerseys, even with a reservation. Immediate fix: switch to a collared shirt or dark smart polo with long trousers, leave scarves in your car, and get accredited via our Concierge.`,
+      };
+    }
+    if (groupKey === 'all-male') {
+      return {
+        titleIt: 'Diagnosi Insider per Gruppi di Soli Uomini: Prenota Tavolo VIP o Royal Aperitivo',
+        titleEn: 'Insider Diagnosis for All-Male Groups: Book a VIP Table or Royal Aperitivo',
+        bodyIt: `A Parco Sempione, Corso Como e Isola (${venue.name}), un gruppo di 3 o più uomini in semplice Lista Nominale dopo le 23:30 rischia il rimbalzo alla corda per mantenere il bilanciamento uomo/donna in pista. Prenotare un Tavolo VIP (da 250-500 euro 100% in bottiglie) o un Tavolo Royal Aperitivo dalle 19:30 porta l'indice di ingresso al ${vipTableScore}% con accoglienza diretta della Hostess VIP.`,
+        bodyEn: `In Parco Sempione, Corso Como, and Isola (${venue.name}), a group of 3+ men on the standard Guest List after 23:30 faces a high risk of refusal at the velvet rope due to gender-ratio rules. Booking a VIP Table (from EUR 250-500, 100% in bottles) or a Royal Aperitivo Table from 19:30 boosts your entry index to ${vipTableScore}% with direct VIP Hostess escort.`,
+      };
+    }
+    if (groupKey === 'post-event') {
+      return {
+        titleIt: 'Protocollo Post-Partita San Siro / Post-Concerto Ippodromo',
+        titleEn: 'San Siro Post-Match / Ippodromo Post-Concert Protocol',
+        bodyIt: `In uscita dallo Stadio Meazza o dall'Ippodromo verso ${venue.name}, ricorda due regole d'oro: 1) nessuna maglia da gara o sciarpa visibile all'ingresso (indossa camicia o maglia nera sotto la giacca); 2) blocca in anticipo il Tavolo VIP o Royal Aperitivo su WhatsApp (+39 351 912 7047) per saltare la fila post-evento.`,
+        bodyEn: `Heading from San Siro Stadium or Ippodromo to ${venue.name}, follow two golden rules: 1) no visible team jerseys or scarves at the door (wear a collared shirt or black knit under your jacket); 2) lock in your VIP Table or Royal Aperitivo on WhatsApp (+39 351 912 7047) to bypass the post-event queue.`,
+      };
+    }
+    if (outfitKey === 'smart-casual' && venue.strictnessLevel === 'strict-luxury') {
+      return {
+        titleIt: 'Attenzione alle Scarpe e al Colletto nei Top Club di Lusso',
+        titleEn: 'Watch Footwear & Collar Rules at Flagship Luxury Venues',
+        bodyIt: `Da ${venue.name} il look Smart Casual passa in lista solo se estremamente curato (total black sartoriale e scarpa in pelle pulita) ed entro le 00:00. Con una camicia o un blazer e l'inserimento nominale del Concierge su WhatsApp azzeri ogni incertezza alla selezione.`,
+        bodyEn: `At ${venue.name}, a Smart Casual look passes on the guestlist only if impeccably styled (tailored total black and clean leather footwear) before midnight. Adding a collared shirt or blazer plus nominal WhatsApp Concierge accreditation removes any door uncertainty.`,
+      };
+    }
+    return {
+      titleIt: 'Profilo Ottimale per Superare la Selezione alla Porta',
+      titleEn: 'Optimal Profile to Pass Milan Velvet-Rope Selection',
+      bodyIt: `La tua combinazione per ${venue.name} rispetta pienamente gli standard richiesti dal direttore di porta (età minima ${venue.minAge}). Presentati tra le 19:30 e le 20:30 per il Royal Aperitivo oppure entro le 00:15 per la serata club con il nome in Lista Concierge o Tavolo VIP riservato.`,
+      bodyEn: `Your combination for ${venue.name} fully meets the door director's standards (minimum age ${venue.minAge}). Arrive between 19:30 and 20:30 for the Royal Aperitivo or before 00:15 for clubbing with your name on the Concierge Guestlist or a reserved VIP Table.`,
+    };
+  };
+
+  const diagnosis = getInsiderDiagnosis();
+
+  const waMessage = isIt
+    ? `Ciao Concierge Nightlife Milan! Ho usato il Dress Code & Door Selection Checker:\n• Locale: ${venue.name}\n• Gruppo: ${group.labelIt}\n• Outfit: ${outfit.labelIt}\n• Indice Lista calcolato: ${clampedScore}% (con Tavolo VIP: ${vipTableScore}%)\nVorrei ricevere accredito in lista o bloccare un Tavolo VIP / Royal Aperitivo garantito!`
+    : `Hi Nightlife Milan Concierge! I used the Dress Code & Door Selection Checker:\n• Venue: ${venue.name}\n• Group: ${group.labelEn}\n• Outfit: ${outfit.labelEn}\n• Calculated Guestlist Score: ${clampedScore}% (with VIP Table: ${vipTableScore}%)\nI would like guestlist accreditation or a guaranteed VIP Table / Royal Aperitivo!`;
+
+  const waUrl = `${CONTACT.whatsapp.link}?text=${encodeURIComponent(waMessage)}`;
+
+  return (
+    <section
+      id="dress-code-instant-checker"
+      aria-label={
+        isIt
+          ? 'Verificatore Istantaneo Dress Code e Selezione alla Porta Milano'
+          : 'Milan Instant Dress Code & Door Selection Checker'
+      }
+      className="my-14 rounded-2xl border border-champagne/35 bg-gradient-to-b from-[#18130b] via-[#110e09] to-[#0b0906] p-6 sm:p-10 shadow-[0_20px_60px_rgba(0,0,0,0.7)]"
+    >
+      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8 pb-6 border-b border-white/10">
+        <div>
+          <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-champagne/15 border border-champagne/40 text-champagne text-[11px] font-bold tracking-[0.22em] uppercase mb-3">
+            <ShieldCheck className="w-3.5 h-3.5" />
+            {isIt ? 'SIMULATORE SELEZIONE ALLA PORTA 2026/2027' : '2026/2027 VELVET ROPE & DRESS CODE SIMULATOR'}
+          </span>
+          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white tracking-tight">
+            {isIt
+              ? 'Dress Code & Door Selection Instant Checker'
+              : 'Dress Code & Door Selection Instant Checker'}
+          </h2>
+          <p className="text-white/65 text-sm sm:text-base mt-2 max-w-3xl">
+            {isIt
+              ? 'Seleziona il locale target, la composizione del tuo gruppo e l’outfit scelto per calcolare in tempo reale la probabilità di superare la selezione in lista o con Tavolo VIP nei 6 Club Prioritari di Milano.'
+              : 'Select your target club, group composition, and outfit to calculate in real time your probability of passing velvet-rope selection on the guestlist vs. a VIP Table across Milan’s Top 6 Priority Clubs.'}
+          </p>
+        </div>
+        <div className="flex items-center gap-2.5 text-xs text-champagne bg-champagne/10 border border-champagne/30 px-4 py-2.5 rounded-xl shrink-0">
+          <Users className="w-4 h-4 text-champagne shrink-0" />
+          <span>
+            {isIt
+              ? 'Desk Accrediti Diretto: +39 351 912 7047'
+              : 'Direct Accreditation Desk: +39 351 912 7047'}
+          </span>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* Left Interactive Controls */}
+        <div className="lg:col-span-7 space-y-6">
+          {/* A) Target Venue */}
+          <div>
+            <label className="block font-sans text-xs font-bold tracking-[0.18em] uppercase text-champagne mb-2.5">
+              {isIt ? 'A) Seleziona il Locale Target' : 'A) Select Target Venue'}
+            </label>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              {(Object.keys(CHECKER_VENUES) as CheckerVenueKey[]).map((k) => {
+                const v = CHECKER_VENUES[k];
+                const active = venueKey === k;
+                return (
+                  <button
+                    key={k}
+                    type="button"
+                    onClick={() => setVenueKey(k)}
+                    className={`text-left px-4 py-3 rounded-xl border transition-all ${
+                      active
+                        ? 'bg-champagne text-black border-champagne font-bold shadow-[0_0_20px_rgba(201,168,106,0.3)]'
+                        : 'bg-white/[0.03] text-white/85 border-white/10 hover:border-champagne/40'
+                    }`}
+                  >
+                    <div className="text-xs sm:text-sm font-semibold">
+                      {isIt ? v.rankLabelIt : v.rankLabelEn}
+                    </div>
+                    <div className={`text-[11px] mt-0.5 ${active ? 'text-black/75' : 'text-white/50'}`}>
+                      {isIt ? v.zoneIt : v.zoneEn}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* B) Group Composition */}
+          <div>
+            <label className="block font-sans text-xs font-bold tracking-[0.18em] uppercase text-champagne mb-2.5">
+              {isIt ? 'B) Composizione del Gruppo' : 'B) Group Composition'}
+            </label>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              {(Object.keys(CHECKER_GROUPS) as CheckerGroupKey[]).map((k) => {
+                const g = CHECKER_GROUPS[k];
+                const active = groupKey === k;
+                return (
+                  <button
+                    key={k}
+                    type="button"
+                    onClick={() => setGroupKey(k)}
+                    className={`text-left p-3.5 rounded-xl border transition-all ${
+                      active
+                        ? 'bg-champagne/15 border-champagne text-white font-semibold'
+                        : 'bg-white/[0.02] border-white/10 text-white/75 hover:border-champagne/40'
+                    }`}
+                  >
+                    <div className="text-xs sm:text-sm text-white">
+                      {isIt ? g.labelIt : g.labelEn}
+                    </div>
+                    <div className="text-[11px] text-white/50 mt-1">
+                      {isIt ? g.subIt : g.subEn}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* C) Chosen Outfit */}
+          <div>
+            <label className="block font-sans text-xs font-bold tracking-[0.18em] uppercase text-champagne mb-2.5">
+              {isIt ? 'C) Outfit Scelto per la Serata' : 'C) Chosen Outfit for the Night'}
+            </label>
+            <div className="space-y-2.5">
+              {(Object.keys(CHECKER_OUTFITS) as CheckerOutfitKey[]).map((k) => {
+                const o = CHECKER_OUTFITS[k];
+                const active = outfitKey === k;
+                return (
+                  <button
+                    key={k}
+                    type="button"
+                    onClick={() => setOutfitKey(k)}
+                    className={`w-full text-left p-3.5 rounded-xl border transition-all ${
+                      active
+                        ? 'bg-white text-black border-white font-bold'
+                        : 'bg-white/[0.03] text-white/80 border-white/10 hover:border-champagne/40'
+                    }`}
+                  >
+                    <div className="text-xs sm:text-sm">
+                      {isIt ? o.labelIt : o.labelEn}
+                    </div>
+                    <div className={`text-[11px] mt-1 font-normal ${active ? 'text-black/75' : 'text-white/50'}`}>
+                      {isIt ? o.detailIt : o.detailEn}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* Right Live Diagnosis & Traffic-Light Output */}
+        <div className="lg:col-span-5 rounded-2xl border border-champagne/40 bg-black/65 p-6 sm:p-8 flex flex-col justify-between">
+          <div>
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
+              <span className="text-[10px] font-bold tracking-[0.24em] uppercase text-champagne/80">
+                {isIt ? 'INDICE SUPERAMENTO SELEZIONE' : 'DOOR SELECTION PASS INDEX'}
+              </span>
+              <span className={`px-3 py-1 rounded-full border text-[11px] font-bold uppercase tracking-wider ${statusBadge.classes}`}>
+                {isIt ? statusBadge.labelIt : statusBadge.labelEn}
+              </span>
+            </div>
+
+            <div className="flex items-baseline gap-4 mb-3">
+              <span className="font-serif text-5xl sm:text-6xl font-bold text-white">
+                {clampedScore}%
+              </span>
+              <div className="text-xs text-white/60">
+                <span className="block uppercase tracking-wider text-[10px] text-white/45">
+                  {isIt ? 'In Lista Standard' : 'On Standard Guestlist'}
+                </span>
+                <span className="text-champagne font-semibold">
+                  {isIt
+                    ? `Fino al ${vipTableScore}% con Tavolo VIP / Aperitivo`
+                    : `Up to ${vipTableScore}% with VIP Table / Aperitivo`}
+                </span>
+              </div>
+            </div>
+
+            {/* Progress bar */}
+            <div className="w-full h-2.5 rounded-full bg-white/10 overflow-hidden mb-6">
+              <div
+                className={`h-full transition-all duration-500 ${statusBadge.barClass}`}
+                style={{ width: `${clampedScore}%` }}
+              />
+            </div>
+
+            {/* Venue Standard Rule */}
+            <div className="p-3.5 rounded-xl bg-white/[0.03] border border-white/10 mb-4 text-xs">
+              <div className="flex items-center justify-between text-champagne font-bold uppercase tracking-wider text-[10px] mb-1">
+                <span>{venue.name}</span>
+                <span>{isIt ? `Età Minima: ${venue.minAge}` : `Min Age: ${venue.minAge}`}</span>
+              </div>
+              <p className="text-white/75 leading-relaxed">
+                {isIt ? venue.dressRuleIt : venue.dressRuleEn}
+              </p>
+            </div>
+
+            {/* Insider Specific Diagnosis */}
+            <div className="p-4 rounded-xl border border-champagne/30 bg-champagne/[0.06] mb-6">
+              <div className="flex items-center gap-2 text-champagne font-bold text-xs uppercase tracking-wider mb-1.5">
+                {statusTier === 'red' ? (
+                  <XCircle className="w-4 h-4 text-rose-400 shrink-0" />
+                ) : (
+                  <CheckCircle2 className="w-4 h-4 text-champagne shrink-0" />
+                )}
+                <span>{isIt ? diagnosis.titleIt : diagnosis.titleEn}</span>
+              </div>
+              <p className="text-xs text-white/85 leading-relaxed">
+                {isIt ? diagnosis.bodyIt : diagnosis.bodyEn}
+              </p>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <a
+              href={waUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 rounded-xl bg-champagne text-black font-sans font-bold text-xs sm:text-sm tracking-[0.14em] uppercase hover:bg-white transition-colors shadow-[0_0_30px_rgba(201,168,106,0.35)]"
+            >
+              <MessageCircle className="w-4 h-4" />
+              {isIt
+                ? 'Invia Profilo al Concierge (+39 351 912 7047)'
+                : 'Send Profile to Concierge (+39 351 912 7047)'}
+            </a>
+            <div className="flex items-center justify-between text-[11px] text-white/45 px-1">
+              <Link href={`${lp}/clubs/${venue.slug}`} className="text-champagne hover:underline">
+                {isIt ? `Scheda ${venue.name} →` : `${venue.name} Guide →`}
+              </Link>
+              <span>concierge@nightlifemilan.com</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+type CommuteOriginKey =
+  | 'duomo'
+  | 'san-siro'
+  | 'centrale'
+  | 'corso-como'
+  | 'navigli'
+  | 'brera'
+  | 'citylife'
+  | 'airports';
+
+interface ClubCommuteRoute {
+  priorityRank: number;
+  name: string;
+  slug: string;
+  districtIt: string;
+  districtEn: string;
+  daytimeIt: string;
+  daytimeEn: string;
+  nightReturnIt: string;
+  nightReturnEn: string;
+  taxiEstimate: string;
+}
+
+interface CommuteOriginDef {
+  labelIt: string;
+  labelEn: string;
+  hubTipIt: string;
+  hubTipEn: string;
+  routes: ClubCommuteRoute[];
+}
+
+const COMMUTE_ORIGINS: Record<CommuteOriginKey, CommuteOriginDef> = {
+  duomo: {
+    labelIt: '1. Piazza Duomo / Centro Storico',
+    labelEn: '1. Piazza Duomo / Historic Center',
+    hubTipIt: 'Snodo principale M1 Rossa e M3 Gialla; dopo le 00:30 attive le linee notturne NM1 e NM3 da Piazza Duomo.',
+    hubTipEn: 'Main M1 Red and M3 Yellow hub; after 00:30 night buses NM1 and NM3 depart directly from Piazza Duomo.',
+    routes: [
+      {
+        priorityRank: 1,
+        name: '1. Just Me Milano',
+        slug: 'just-me-milano',
+        districtIt: 'Parco Sempione (Torre Branca)',
+        districtEn: 'Parco Sempione (Torre Branca)',
+        daytimeIt: '8 min con M1 Rossa (fermata Cadorna) + 6 min a piedi nel Parco Sempione',
+        daytimeEn: '8 min via M1 Red Line (Cadorna stop) + 6 min walk to Torre Branca',
+        nightReturnIt: 'Bus Notturno NM1 fino a Duomo · Taxi / Uber Black / NCC: 7 min',
+        nightReturnEn: 'Night Bus NM1 to Duomo · Taxi / Uber Black / NCC: 7 min',
+        taxiEstimate: '€12 - €16',
+      },
+      {
+        priorityRank: 2,
+        name: '2. Pineta Club Milano',
+        slug: 'pineta-club-milano',
+        districtIt: 'Corso Como / Via Messina 38',
+        districtEn: 'Corso Como / Via Messina 38',
+        daytimeIt: '11 min con M3 Gialla (Zara/Repubblica) + M5 Lilla (fermata Cenisio)',
+        daytimeEn: '11 min via M3 Yellow Line + M5 Purple Line (Cenisio stop)',
+        nightReturnIt: 'Filobus 90/91 h24 + NM3 da Repubblica · Taxi / NCC: 10 min',
+        nightReturnEn: '24/7 Trolleybus 90/91 + NM3 from Repubblica · Taxi / NCC: 10 min',
+        taxiEstimate: '€15 - €20',
+      },
+      {
+        priorityRank: 3,
+        name: '3. Aria Club Milano',
+        slug: 'aria-club-milano',
+        districtIt: 'San Siro (Piazzale dello Sport 14)',
+        districtEn: 'San Siro (Piazzale dello Sport 14)',
+        daytimeIt: '14 min con M1 Rossa diretta da Duomo a Lotto + 5 min a piedi',
+        daytimeEn: '14 min via direct M1 Red Line from Duomo to Lotto + 5 min walk',
+        nightReturnIt: 'Bus Notturno NM1 da Piazzale Lotto a Duomo · Taxi / NCC: 14 min',
+        nightReturnEn: 'Night Bus NM1 from Piazzale Lotto to Duomo · Taxi / NCC: 14 min',
+        taxiEstimate: '€18 - €24',
+      },
+      {
+        priorityRank: 4,
+        name: '4. 55 Milano (FiftyFive)',
+        slug: '55-milano',
+        districtIt: 'Arco della Pace / Sempione',
+        districtEn: 'Arco della Pace / Sempione',
+        daytimeIt: '12 min con M1 Rossa (Cadorna) + M2/M5 fino a Domodossola o Gerusalemme',
+        daytimeEn: '12 min via M1 Red Line + M5 Purple Line (Domodossola / Gerusalemme)',
+        nightReturnIt: 'Filobus 90/91 h24 o NM1 da Cadorna · Taxi / NCC: 9 min',
+        nightReturnEn: '24/7 Trolleybus 90/91 or NM1 from Cadorna · Taxi / NCC: 9 min',
+        taxiEstimate: '€14 - €18',
+      },
+      {
+        priorityRank: 5,
+        name: '5. Voya Rooftop Milan',
+        slug: 'voya-rooftop-milan',
+        districtIt: 'Isola / Portello (20° Piano)',
+        districtEn: 'Isola / Portello (20th Floor)',
+        daytimeIt: '13 min con M1 Rossa (Lotto) + 1 fermata M5 Lilla (Portello)',
+        daytimeEn: '13 min via M1 Red Line (Lotto) + 1 stop M5 Purple Line (Portello)',
+        nightReturnIt: 'Filobus 90/91 h24 da Viale Serra + NM1 · Taxi / NCC: 12 min',
+        nightReturnEn: '24/7 Trolleybus 90/91 from Viale Serra + NM1 · Taxi / NCC: 12 min',
+        taxiEstimate: '€16 - €22',
+      },
+      {
+        priorityRank: 6,
+        name: '6. Repvblic Milano',
+        slug: 'repvblic-milano',
+        districtIt: 'Piazza della Repubblica',
+        districtEn: 'Piazza della Repubblica',
+        daytimeIt: '5 min con M3 Gialla diretta da Duomo (fermata Repubblica)',
+        daytimeEn: '5 min via direct M3 Yellow Line from Duomo (Repubblica stop)',
+        nightReturnIt: 'Bus Notturno NM3 diretto verso Duomo · Taxi / NCC: 6 min',
+        nightReturnEn: 'Direct Night Bus NM3 to Duomo · Taxi / NCC: 6 min',
+        taxiEstimate: '€12 - €15',
+      },
+    ],
+  },
+  'san-siro': {
+    labelIt: '2. Stadio San Siro / Ippodromo',
+    labelEn: '2. San Siro Stadium / Ippodromo',
+    hubTipIt: 'Dallo Stadio Meazza raggiungi Aria Club in 2 min a piedi (150m) oppure usi la M5 Lilla diretta verso Portello, Sempione e Garibaldi.',
+    hubTipEn: 'From San Siro Stadium walk 2 min (150m) to Aria Club or take the direct M5 Purple Line to Portello, Sempione, and Garibaldi.',
+    routes: [
+      {
+        priorityRank: 1,
+        name: '1. Just Me Milano',
+        slug: 'just-me-milano',
+        districtIt: 'Parco Sempione (Torre Branca)',
+        districtEn: 'Parco Sempione (Torre Branca)',
+        daytimeIt: '10 min con M5 Lilla (fermata Domodossola) + 4 min in auto/piedi verso Torre Branca',
+        daytimeEn: '10 min via M5 Purple Line (Domodossola stop) + 4 min to Torre Branca',
+        nightReturnIt: 'Filobus 90/91 h24 fino a Lotto + NM1 · Taxi / Uber Black / NCC: 10 min',
+        nightReturnEn: '24/7 Trolleybus 90/91 to Lotto + NM1 · Taxi / Uber Black / NCC: 10 min',
+        taxiEstimate: '€15 - €20',
+      },
+      {
+        priorityRank: 2,
+        name: '2. Pineta Club Milano',
+        slug: 'pineta-club-milano',
+        districtIt: 'Corso Como / Via Messina 38',
+        districtEn: 'Corso Como / Via Messina 38',
+        daytimeIt: '12 min con M5 Lilla diretta da San Siro Stadio (fermata Cenisio)',
+        daytimeEn: '12 min via direct M5 Purple Line from San Siro Stadio (Cenisio stop)',
+        nightReturnIt: 'Filobus 90/91 h24 diretto fino a Piazzale Lotto · Taxi / NCC: 11 min',
+        nightReturnEn: 'Direct 24/7 Trolleybus 90/91 to Piazzale Lotto · Taxi / NCC: 11 min',
+        taxiEstimate: '€16 - €22',
+      },
+      {
+        priorityRank: 3,
+        name: '3. Aria Club Milano',
+        slug: 'aria-club-milano',
+        districtIt: 'San Siro (Piazzale dello Sport 14)',
+        districtEn: 'San Siro (Piazzale dello Sport 14)',
+        daytimeIt: '2 min a piedi / 150 metri dai cancelli dello Stadio San Siro (M5 San Siro Stadio / Lotto)',
+        daytimeEn: '2 min walk / 150 meters from San Siro Stadium gates (M5 San Siro Stadio / Lotto)',
+        nightReturnIt: 'A piedi in 2 min · Bus Notturno NM1 da Lotto verso il centro · Taxi / NCC: 2 min',
+        nightReturnEn: '2 min on foot · Night Bus NM1 from Lotto to city center · Taxi / NCC: 2 min',
+        taxiEstimate: '€12 - €14',
+      },
+      {
+        priorityRank: 4,
+        name: '4. 55 Milano (FiftyFive)',
+        slug: '55-milano',
+        districtIt: 'Arco della Pace / Sempione',
+        districtEn: 'Arco della Pace / Sempione',
+        daytimeIt: '8 min con M5 Lilla fermata Gerusalemme/Cenisio (oppure Domodossola)',
+        daytimeEn: '8 min via M5 Purple Line to Gerusalemme/Cenisio (or Domodossola stop)',
+        nightReturnIt: 'Filobus 90/91 h24 fino a Piazzale Lotto · Taxi / NCC: 8 min',
+        nightReturnEn: '24/7 Trolleybus 90/91 to Piazzale Lotto · Taxi / NCC: 8 min',
+        taxiEstimate: '€14 - €18',
+      },
+      {
+        priorityRank: 5,
+        name: '5. Voya Rooftop Milan',
+        slug: 'voya-rooftop-milan',
+        districtIt: 'Isola / Portello (20° Piano)',
+        districtEn: 'Isola / Portello (20th Floor)',
+        daytimeIt: '6 min con M5 Lilla fermata Portello + 3 min a piedi a Via Achille Papa 30',
+        daytimeEn: '6 min via M5 Purple Line (Portello stop) + 3 min walk to Via Achille Papa 30',
+        nightReturnIt: 'Filobus 90/91 h24 (Viale Serra / Lotto) · Taxi / NCC: 6 min',
+        nightReturnEn: '24/7 Trolleybus 90/91 (Viale Serra / Lotto) · Taxi / NCC: 6 min',
+        taxiEstimate: '€12 - €16',
+      },
+      {
+        priorityRank: 6,
+        name: '6. Repvblic Milano',
+        slug: 'repvblic-milano',
+        districtIt: 'Piazza della Repubblica',
+        districtEn: 'Piazza della Repubblica',
+        daytimeIt: '15 min con M5 Lilla fino a Garibaldi + 1 fermata M2/M3 (Repubblica)',
+        daytimeEn: '15 min via M5 Purple Line to Garibaldi + 1 stop M2/M3 (Repubblica)',
+        nightReturnIt: 'Filobus 90/91 h24 + NM1 da Lotto · Taxi / NCC: 15 min',
+        nightReturnEn: '24/7 Trolleybus 90/91 + NM1 from Lotto · Taxi / NCC: 15 min',
+        taxiEstimate: '€18 - €25',
+      },
+    ],
+  },
+  centrale: {
+    labelIt: '3. Stazione Centrale / Repubblica',
+    labelEn: '3. Central Station / Repubblica',
+    hubTipIt: 'Collegamento diretto con M2 Verde, M3 Gialla e circolare 90/91 attiva 24 ore su 24 tutta la notte.',
+    hubTipEn: 'Direct connection with M2 Green, M3 Yellow, and the 24/7 circular trolleybus 90/91 all night long.',
+    routes: [
+      {
+        priorityRank: 1,
+        name: '1. Just Me Milano',
+        slug: 'just-me-milano',
+        districtIt: 'Parco Sempione (Torre Branca)',
+        districtEn: 'Parco Sempione (Torre Branca)',
+        daytimeIt: '9 min con M2 Verde da Centrale (fermata Cadorna/Lanza) + 5 min',
+        daytimeEn: '9 min via M2 Green Line from Centrale (Cadorna/Lanza stop) + 5 min',
+        nightReturnIt: 'Bus Notturno NM2 fino a Centrale · Taxi / Uber Black / NCC: 9 min',
+        nightReturnEn: 'Night Bus NM2 to Central Station · Taxi / Uber Black / NCC: 9 min',
+        taxiEstimate: '€14 - €18',
+      },
+      {
+        priorityRank: 2,
+        name: '2. Pineta Club Milano',
+        slug: 'pineta-club-milano',
+        districtIt: 'Corso Como / Via Messina 38',
+        districtEn: 'Corso Como / Via Messina 38',
+        daytimeIt: '7 min con M2 Verde (Garibaldi) + M5 Lilla (Cenisio)',
+        daytimeEn: '7 min via M2 Green Line (Garibaldi) + M5 Purple Line (Cenisio)',
+        nightReturnIt: 'Filobus 90/91 h24 diretto a Stazione Centrale · Taxi / NCC: 7 min',
+        nightReturnEn: 'Direct 24/7 Trolleybus 90/91 to Central Station · Taxi / NCC: 7 min',
+        taxiEstimate: '€12 - €16',
+      },
+      {
+        priorityRank: 3,
+        name: '3. Aria Club Milano',
+        slug: 'aria-club-milano',
+        districtIt: 'San Siro (Piazzale dello Sport 14)',
+        districtEn: 'San Siro (Piazzale dello Sport 14)',
+        daytimeIt: '16 min con M2 Verde (Garibaldi) + M5 Lilla (Lotto / San Siro)',
+        daytimeEn: '16 min via M2 Green Line (Garibaldi) + M5 Purple Line (Lotto / San Siro)',
+        nightReturnIt: 'Filobus 90/91 h24 diretto da Lotto a Centrale · Taxi / NCC: 15 min',
+        nightReturnEn: 'Direct 24/7 Trolleybus 90/91 from Lotto to Centrale · Taxi / NCC: 15 min',
+        taxiEstimate: '€18 - €24',
+      },
+      {
+        priorityRank: 4,
+        name: '4. 55 Milano (FiftyFive)',
+        slug: '55-milano',
+        districtIt: 'Arco della Pace / Sempione',
+        districtEn: 'Arco della Pace / Sempione',
+        daytimeIt: '9 min con M2 Verde (Garibaldi) + M5 Lilla (Gerusalemme)',
+        daytimeEn: '9 min via M2 Green Line (Garibaldi) + M5 Purple Line (Gerusalemme)',
+        nightReturnIt: 'Filobus 90/91 h24 diretto a Centrale · Taxi / NCC: 9 min',
+        nightReturnEn: 'Direct 24/7 Trolleybus 90/91 to Central Station · Taxi / NCC: 9 min',
+        taxiEstimate: '€14 - €18',
+      },
+      {
+        priorityRank: 5,
+        name: '5. Voya Rooftop Milan',
+        slug: 'voya-rooftop-milan',
+        districtIt: 'Isola / Portello (20° Piano)',
+        districtEn: 'Isola / Portello (20th Floor)',
+        daytimeIt: '11 min con M2 Verde (Garibaldi) + M5 Lilla (fermata Portello)',
+        daytimeEn: '11 min via M2 Green Line (Garibaldi) + M5 Purple Line (Portello stop)',
+        nightReturnIt: 'Filobus 90/91 h24 diretto da Viale Serra a Centrale · Taxi / NCC: 10 min',
+        nightReturnEn: 'Direct 24/7 Trolleybus 90/91 from Viale Serra to Centrale · Taxi / NCC: 10 min',
+        taxiEstimate: '€15 - €20',
+      },
+      {
+        priorityRank: 6,
+        name: '6. Repvblic Milano',
+        slug: 'repvblic-milano',
+        districtIt: 'Piazza della Repubblica',
+        districtEn: 'Piazza della Repubblica',
+        daytimeIt: '3 min con 1 fermata M3 Gialla (Repubblica) o 6 min a piedi',
+        daytimeEn: '3 min via 1 stop M3 Yellow Line (Repubblica) or 6 min walk',
+        nightReturnIt: 'Bus Notturno NM3 / N25-N26 o 6 min a piedi · Taxi / NCC: 4 min',
+        nightReturnEn: 'Night Bus NM3 / N25-N26 or 6 min walk · Taxi / NCC: 4 min',
+        taxiEstimate: '€12 - €14',
+      },
+    ],
+  },
+  'corso-como': {
+    labelIt: '4. Corso Como / Porta Garibaldi',
+    labelEn: '4. Corso Como / Porta Garibaldi',
+    hubTipIt: 'Epicentro della movida milanese con M2 Verde e M5 Lilla sotto Piazza Gae Aulenti e linee notturne N25/N26 + NM2.',
+    hubTipEn: 'Epicenter of Milan nightlife with M2 Green and M5 Purple under Piazza Gae Aulenti plus night buses N25/N26 + NM2.',
+    routes: [
+      {
+        priorityRank: 1,
+        name: '1. Just Me Milano',
+        slug: 'just-me-milano',
+        districtIt: 'Parco Sempione (Torre Branca)',
+        districtEn: 'Parco Sempione (Torre Branca)',
+        daytimeIt: '6 min con M2 Verde (Lanza/Cadorna) + breve tratto nel Parco Sempione',
+        daytimeEn: '6 min via M2 Green Line (Lanza/Cadorna) + short walk to Torre Branca',
+        nightReturnIt: 'Bus Notturno NM2 / N25 fino a Garibaldi · Taxi / Uber Black / NCC: 6 min',
+        nightReturnEn: 'Night Bus NM2 / N25 to Garibaldi · Taxi / Uber Black / NCC: 6 min',
+        taxiEstimate: '€12 - €15',
+      },
+      {
+        priorityRank: 2,
+        name: '2. Pineta Club Milano',
+        slug: 'pineta-club-milano',
+        districtIt: 'Corso Como / Via Messina 38',
+        districtEn: 'Corso Como / Via Messina 38',
+        daytimeIt: '4 min con M5 Lilla (2 fermate fino a Cenisio) o 10 min a piedi',
+        daytimeEn: '4 min via M5 Purple Line (2 stops to Cenisio) or 10 min walk',
+        nightReturnIt: 'Notturna N25/N26 o 10 min a piedi · Taxi / NCC: 4 min',
+        nightReturnEn: 'Night Bus N25/N26 or 10 min walk · Taxi / NCC: 4 min',
+        taxiEstimate: '€12 - €14',
+      },
+      {
+        priorityRank: 3,
+        name: '3. Aria Club Milano',
+        slug: 'aria-club-milano',
+        districtIt: 'San Siro (Piazzale dello Sport 14)',
+        districtEn: 'San Siro (Piazzale dello Sport 14)',
+        daytimeIt: '12 min con M5 Lilla diretta da Garibaldi a Lotto / San Siro',
+        daytimeEn: '12 min via direct M5 Purple Line from Garibaldi to Lotto / San Siro',
+        nightReturnIt: 'Filobus 90/91 h24 + N25/N26 · Taxi / NCC: 12 min',
+        nightReturnEn: '24/7 Trolleybus 90/91 + N25/N26 · Taxi / NCC: 12 min',
+        taxiEstimate: '€16 - €22',
+      },
+      {
+        priorityRank: 4,
+        name: '4. 55 Milano (FiftyFive)',
+        slug: '55-milano',
+        districtIt: 'Arco della Pace / Sempione',
+        districtEn: 'Arco della Pace / Sempione',
+        daytimeIt: '5 min con M5 Lilla diretta da Garibaldi (fermata Gerusalemme)',
+        daytimeEn: '5 min via direct M5 Purple Line from Garibaldi (Gerusalemme stop)',
+        nightReturnIt: 'Notturna N25/N26 o Filobus 90/91 h24 · Taxi / NCC: 6 min',
+        nightReturnEn: 'Night Bus N25/N26 or 24/7 Trolleybus 90/91 · Taxi / NCC: 6 min',
+        taxiEstimate: '€12 - €15',
+      },
+      {
+        priorityRank: 5,
+        name: '5. Voya Rooftop Milan',
+        slug: 'voya-rooftop-milan',
+        districtIt: 'Isola / Portello (20° Piano)',
+        districtEn: 'Isola / Portello (20th Floor)',
+        daytimeIt: '8 min con M5 Lilla diretta da Garibaldi (fermata Portello)',
+        daytimeEn: '8 min via direct M5 Purple Line from Garibaldi (Portello stop)',
+        nightReturnIt: 'Filobus 90/91 h24 fino a Viale Marche/Zara · Taxi / NCC: 8 min',
+        nightReturnEn: '24/7 Trolleybus 90/91 to Viale Marche/Zara · Taxi / NCC: 8 min',
+        taxiEstimate: '€13 - €17',
+      },
+      {
+        priorityRank: 6,
+        name: '6. Repvblic Milano',
+        slug: 'repvblic-milano',
+        districtIt: 'Piazza della Repubblica',
+        districtEn: 'Piazza della Repubblica',
+        daytimeIt: '4 min a piedi da Corso Como o 1 fermata passante fino a Repubblica',
+        daytimeEn: '4 min walk from Corso Como or 1 rail stop to Repubblica',
+        nightReturnIt: 'A piedi in 5 min o Bus Notturno N25/N26 · Taxi / NCC: 3 min',
+        nightReturnEn: '5 min walk or Night Bus N25/N26 · Taxi / NCC: 3 min',
+        taxiEstimate: '€12 - €14',
+      },
+    ],
+  },
+  navigli: {
+    labelIt: '5. Navigli / Porta Genova',
+    labelEn: '5. Navigli / Porta Genova',
+    hubTipIt: 'Partendo dall’aperitivo sui Navigli usa la M2 Verde da Porta Genova o Sant’Agostino per salire verso Sempione e Corso Como.',
+    hubTipEn: 'Starting from aperitivo on the Navigli canals, take the M2 Green Line from Porta Genova or Sant’Agostino toward Sempione and Corso Como.',
+    routes: [
+      {
+        priorityRank: 1,
+        name: '1. Just Me Milano',
+        slug: 'just-me-milano',
+        districtIt: 'Parco Sempione (Torre Branca)',
+        districtEn: 'Parco Sempione (Torre Branca)',
+        daytimeIt: '7 min con M2 Verde diretta da Porta Genova a Cadorna + 5 min',
+        daytimeEn: '7 min via direct M2 Green Line from Porta Genova to Cadorna + 5 min',
+        nightReturnIt: 'Bus Notturno NM2 diretto da Cadorna a Porta Genova · Taxi / NCC: 9 min',
+        nightReturnEn: 'Direct Night Bus NM2 from Cadorna to Porta Genova · Taxi / NCC: 9 min',
+        taxiEstimate: '€14 - €18',
+      },
+      {
+        priorityRank: 2,
+        name: '2. Pineta Club Milano',
+        slug: 'pineta-club-milano',
+        districtIt: 'Corso Como / Via Messina 38',
+        districtEn: 'Corso Como / Via Messina 38',
+        daytimeIt: '14 min con M2 Verde fino a Garibaldi + 2 fermate M5 Lilla (Cenisio)',
+        daytimeEn: '14 min via M2 Green Line to Garibaldi + 2 stops M5 Purple Line (Cenisio)',
+        nightReturnIt: 'Filobus 90/91 h24 diretto fino a Viale Liguria/Romolo · Taxi / NCC: 14 min',
+        nightReturnEn: 'Direct 24/7 Trolleybus 90/91 to Viale Liguria/Romolo · Taxi / NCC: 14 min',
+        taxiEstimate: '€18 - €24',
+      },
+      {
+        priorityRank: 3,
+        name: '3. Aria Club Milano',
+        slug: 'aria-club-milano',
+        districtIt: 'San Siro (Piazzale dello Sport 14)',
+        districtEn: 'San Siro (Piazzale dello Sport 14)',
+        daytimeIt: '16 min con M2 Verde (Cadorna) + M1 Rossa (Lotto) + 5 min a piedi',
+        daytimeEn: '16 min via M2 Green (Cadorna) + M1 Red (Lotto) + 5 min walk',
+        nightReturnIt: 'Filobus 90/91 h24 diretto da Lotto ai Navigli · Taxi / NCC: 14 min',
+        nightReturnEn: 'Direct 24/7 Trolleybus 90/91 from Lotto to Navigli · Taxi / NCC: 14 min',
+        taxiEstimate: '€18 - €24',
+      },
+      {
+        priorityRank: 4,
+        name: '4. 55 Milano (FiftyFive)',
+        slug: '55-milano',
+        districtIt: 'Arco della Pace / Sempione',
+        districtEn: 'Arco della Pace / Sempione',
+        daytimeIt: '13 min con M2 Verde (Garibaldi) + M5 Lilla (Gerusalemme)',
+        daytimeEn: '13 min via M2 Green Line (Garibaldi) + M5 Purple Line (Gerusalemme)',
+        nightReturnIt: 'Filobus 90/91 h24 o NM2 da Cadorna · Taxi / NCC: 12 min',
+        nightReturnEn: '24/7 Trolleybus 90/91 or NM2 from Cadorna · Taxi / NCC: 12 min',
+        taxiEstimate: '€16 - €21',
+      },
+      {
+        priorityRank: 5,
+        name: '5. Voya Rooftop Milan',
+        slug: 'voya-rooftop-milan',
+        districtIt: 'Isola / Portello (20° Piano)',
+        districtEn: 'Isola / Portello (20th Floor)',
+        daytimeIt: '16 min con M2 Verde (Garibaldi) + M5 Lilla (fermata Portello)',
+        daytimeEn: '16 min via M2 Green Line (Garibaldi) + M5 Purple Line (Portello stop)',
+        nightReturnIt: 'Filobus 90/91 h24 diretto da Viale Serra ai Navigli · Taxi / NCC: 14 min',
+        nightReturnEn: 'Direct 24/7 Trolleybus 90/91 from Viale Serra to Navigli · Taxi / NCC: 14 min',
+        taxiEstimate: '€18 - €24',
+      },
+      {
+        priorityRank: 6,
+        name: '6. Repvblic Milano',
+        slug: 'repvblic-milano',
+        districtIt: 'Piazza della Repubblica',
+        districtEn: 'Piazza della Repubblica',
+        daytimeIt: '12 min con M2 Verde fino a Garibaldi/Centrale + 4 min a Repubblica',
+        daytimeEn: '12 min via M2 Green Line to Garibaldi/Centrale + 4 min to Repubblica',
+        nightReturnIt: 'Bus Notturno NM2 diretto verso Porta Genova · Taxi / NCC: 12 min',
+        nightReturnEn: 'Direct Night Bus NM2 toward Porta Genova · Taxi / NCC: 12 min',
+        taxiEstimate: '€16 - €22',
+      },
+    ],
+  },
+  brera: {
+    labelIt: '6. Brera / Moscova',
+    labelEn: '6. Brera / Moscova',
+    hubTipIt: 'Posizione centrale perfetta tra Parco Sempione e Corso Como: molti club sono raggiungibili in 5-8 minuti.',
+    hubTipEn: 'Prime central position between Parco Sempione and Corso Como: most clubs are 5-8 minutes away.',
+    routes: [
+      {
+        priorityRank: 1,
+        name: '1. Just Me Milano',
+        slug: 'just-me-milano',
+        districtIt: 'Parco Sempione (Torre Branca)',
+        districtEn: 'Parco Sempione (Torre Branca)',
+        daytimeIt: '4 min con 1 fermata M2 Verde (Moscova -> Lanza/Cadorna) o 12 min a piedi',
+        daytimeEn: '4 min via 1 stop M2 Green Line (Moscova -> Lanza/Cadorna) or 12 min walk',
+        nightReturnIt: 'Bus Notturno NM2 o 12 min a piedi · Taxi / Uber Black / NCC: 5 min',
+        nightReturnEn: 'Night Bus NM2 or 12 min walk · Taxi / Uber Black / NCC: 5 min',
+        taxiEstimate: '€12 - €14',
+      },
+      {
+        priorityRank: 2,
+        name: '2. Pineta Club Milano',
+        slug: 'pineta-club-milano',
+        districtIt: 'Corso Como / Via Messina 38',
+        districtEn: 'Corso Como / Via Messina 38',
+        daytimeIt: '7 min con M2 Verde (Garibaldi) + M5 Lilla (Cenisio)',
+        daytimeEn: '7 min via M2 Green Line (Garibaldi) + M5 Purple Line (Cenisio)',
+        nightReturnIt: 'Notturna N25/N26 fino a Moscova · Taxi / NCC: 6 min',
+        nightReturnEn: 'Night Bus N25/N26 to Moscova · Taxi / NCC: 6 min',
+        taxiEstimate: '€12 - €15',
+      },
+      {
+        priorityRank: 3,
+        name: '3. Aria Club Milano',
+        slug: 'aria-club-milano',
+        districtIt: 'San Siro (Piazzale dello Sport 14)',
+        districtEn: 'San Siro (Piazzale dello Sport 14)',
+        daytimeIt: '13 min con M2 Verde (Garibaldi) + M5 Lilla (Lotto / San Siro)',
+        daytimeEn: '13 min via M2 Green (Garibaldi) + M5 Purple (Lotto / San Siro)',
+        nightReturnIt: 'Bus Notturno NM1 fino a Cadorna + NM2 · Taxi / NCC: 12 min',
+        nightReturnEn: 'Night Bus NM1 to Cadorna + NM2 · Taxi / NCC: 12 min',
+        taxiEstimate: '€16 - €22',
+      },
+      {
+        priorityRank: 4,
+        name: '4. 55 Milano (FiftyFive)',
+        slug: '55-milano',
+        districtIt: 'Arco della Pace / Sempione',
+        districtEn: 'Arco della Pace / Sempione',
+        daytimeIt: '7 min con M2 Verde (Garibaldi) + M5 Lilla (Gerusalemme) o 15 min a piedi',
+        daytimeEn: '7 min via M2 Green + M5 Purple (Gerusalemme) or 15 min walk',
+        nightReturnIt: 'Notturna N25/N26 verso Moscova · Taxi / NCC: 6 min',
+        nightReturnEn: 'Night Bus N25/N26 to Moscova · Taxi / NCC: 6 min',
+        taxiEstimate: '€12 - €15',
+      },
+      {
+        priorityRank: 5,
+        name: '5. Voya Rooftop Milan',
+        slug: 'voya-rooftop-milan',
+        districtIt: 'Isola / Portello (20° Piano)',
+        districtEn: 'Isola / Portello (20th Floor)',
+        daytimeIt: '10 min con M2 Verde (Garibaldi) + M5 Lilla (Portello)',
+        daytimeEn: '10 min via M2 Green Line (Garibaldi) + M5 Purple Line (Portello)',
+        nightReturnIt: 'Filobus 90/91 h24 + NM2 · Taxi / NCC: 9 min',
+        nightReturnEn: '24/7 Trolleybus 90/91 + NM2 · Taxi / NCC: 9 min',
+        taxiEstimate: '€14 - €18',
+      },
+      {
+        priorityRank: 6,
+        name: '6. Repvblic Milano',
+        slug: 'repvblic-milano',
+        districtIt: 'Piazza della Repubblica',
+        districtEn: 'Piazza della Repubblica',
+        daytimeIt: '8 min a piedi lungo Via Turati / Bastioni di Porta Nuova',
+        daytimeEn: '8 min walk along Via Turati / Bastioni di Porta Nuova',
+        nightReturnIt: 'Notturna N25/N26 o 8 min a piedi · Taxi / NCC: 4 min',
+        nightReturnEn: 'Night Bus N25/N26 or 8 min walk · Taxi / NCC: 4 min',
+        taxiEstimate: '€12 - €14',
+      },
+    ],
+  },
+  citylife: {
+    labelIt: '7. CityLife / Tre Torri',
+    labelEn: '7. CityLife / Tre Torri',
+    hubTipIt: 'Servito direttamente dalla M5 Lilla (fermata Tre Torri): in 2-5 minuti sei a Voya Rooftop, 55 Milano, Aria Club o Parco Sempione.',
+    hubTipEn: 'Directly served by the M5 Purple Line (Tre Torri stop): reach Voya Rooftop, 55 Milano, Aria Club, or Sempione in 2-5 minutes.',
+    routes: [
+      {
+        priorityRank: 1,
+        name: '1. Just Me Milano',
+        slug: 'just-me-milano',
+        districtIt: 'Parco Sempione (Torre Branca)',
+        districtEn: 'Parco Sempione (Torre Branca)',
+        daytimeIt: '5 min con 1 fermata M5 Lilla (Domodossola) + 4 min a Torre Branca',
+        daytimeEn: '5 min via 1 stop M5 Purple Line (Domodossola) + 4 min to Torre Branca',
+        nightReturnIt: 'Notturna N25/N26 o 12 min a piedi da Sempione · Taxi / NCC: 5 min',
+        nightReturnEn: 'Night Bus N25/N26 or 12 min walk from Sempione · Taxi / NCC: 5 min',
+        taxiEstimate: '€12 - €15',
+      },
+      {
+        priorityRank: 2,
+        name: '2. Pineta Club Milano',
+        slug: 'pineta-club-milano',
+        districtIt: 'Corso Como / Via Messina 38',
+        districtEn: 'Corso Como / Via Messina 38',
+        daytimeIt: '5 min con M5 Lilla diretta (3 fermate fino a Cenisio)',
+        daytimeEn: '5 min via direct M5 Purple Line (3 stops to Cenisio)',
+        nightReturnIt: 'Filobus 90/91 h24 lungo la circolare · Taxi / NCC: 6 min',
+        nightReturnEn: '24/7 Trolleybus 90/91 along the ring road · Taxi / NCC: 6 min',
+        taxiEstimate: '€12 - €16',
+      },
+      {
+        priorityRank: 3,
+        name: '3. Aria Club Milano',
+        slug: 'aria-club-milano',
+        districtIt: 'San Siro (Piazzale dello Sport 14)',
+        districtEn: 'San Siro (Piazzale dello Sport 14)',
+        daytimeIt: '5 min con M5 Lilla diretta da Tre Torri a Lotto / San Siro Ippodromo',
+        daytimeEn: '5 min via direct M5 Purple Line from Tre Torri to Lotto / San Siro',
+        nightReturnIt: 'Bus Notturno NM1 da Lotto a Amendola/Buonarroti · Taxi / NCC: 6 min',
+        nightReturnEn: 'Night Bus NM1 from Lotto to Amendola/Buonarroti · Taxi / NCC: 6 min',
+        taxiEstimate: '€12 - €16',
+      },
+      {
+        priorityRank: 4,
+        name: '4. 55 Milano (FiftyFive)',
+        slug: '55-milano',
+        districtIt: 'Arco della Pace / Sempione',
+        districtEn: 'Arco della Pace / Sempione',
+        daytimeIt: '3 min con M5 Lilla (fermata Domodossola o Gerusalemme) o 10 min a piedi',
+        daytimeEn: '3 min via M5 Purple Line (Domodossola / Gerusalemme) or 10 min walk',
+        nightReturnIt: 'A piedi in 10 min o Filobus 90/91 h24 · Taxi / NCC: 4 min',
+        nightReturnEn: '10 min walk or 24/7 Trolleybus 90/91 · Taxi / NCC: 4 min',
+        taxiEstimate: '€12 - €14',
+      },
+      {
+        priorityRank: 5,
+        name: '5. Voya Rooftop Milan',
+        slug: 'voya-rooftop-milan',
+        districtIt: 'Isola / Portello (20° Piano)',
+        districtEn: 'Isola / Portello (20th Floor)',
+        daytimeIt: '2 min con 1 fermata M5 Lilla (Tre Torri -> Portello) o 8 min a piedi',
+        daytimeEn: '2 min via 1 stop M5 Purple Line (Tre Torri -> Portello) or 8 min walk',
+        nightReturnIt: 'A piedi in 8 min o Filobus 90/91 h24 · Taxi / NCC: 3 min',
+        nightReturnEn: '8 min walk or 24/7 Trolleybus 90/91 · Taxi / NCC: 3 min',
+        taxiEstimate: '€12 - €14',
+      },
+      {
+        priorityRank: 6,
+        name: '6. Repvblic Milano',
+        slug: 'repvblic-milano',
+        districtIt: 'Piazza della Repubblica',
+        districtEn: 'Piazza della Repubblica',
+        daytimeIt: '11 min con M5 Lilla (Garibaldi) + 1 fermata a Repubblica',
+        daytimeEn: '11 min via M5 Purple Line (Garibaldi) + 1 stop to Repubblica',
+        nightReturnIt: 'Notturna N25/N26 + NM1 · Taxi / NCC: 10 min',
+        nightReturnEn: 'Night Bus N25/N26 + NM1 · Taxi / NCC: 10 min',
+        taxiEstimate: '€15 - €20',
+      },
+    ],
+  },
+  airports: {
+    labelIt: '8. Aeroporto Milano Linate (LIN) / Malpensa Express (Cadorna)',
+    labelEn: '8. Milan Linate Airport (LIN) / Malpensa Express (Cadorna)',
+    hubTipIt: 'Da Linate la nuova M4 Blu porta in centro (San Babila) in 12 minuti; il Malpensa Express arriva direttamente a Cadorna (a 400m da Just Me) e Garibaldi.',
+    hubTipEn: 'From Linate the M4 Blue Line reaches downtown (San Babila) in 12 minutes; the Malpensa Express arrives directly at Cadorna (400m from Just Me) and Garibaldi.',
+    routes: [
+      {
+        priorityRank: 1,
+        name: '1. Just Me Milano',
+        slug: 'just-me-milano',
+        districtIt: 'Parco Sempione (Torre Branca)',
+        districtEn: 'Parco Sempione (Torre Branca)',
+        daytimeIt: 'Da Cadorna (Malpensa Express): 5 min a piedi · Da Linate: 18 min con M4 Blu (San Babila) + M1 Rossa (Cadorna)',
+        daytimeEn: 'From Cadorna (Malpensa Express): 5 min walk · From Linate: 18 min via M4 Blue (San Babila) + M1 Red (Cadorna)',
+        nightReturnIt: 'Bus Notturno NM1 + NM4 Linate · Taxi / Uber Black / NCC Concierge: 18 min da LIN',
+        nightReturnEn: 'Night Bus NM1 + NM4 Linate · Taxi / Uber Black / NCC Concierge: 18 min from LIN',
+        taxiEstimate: '€14 - €26',
+      },
+      {
+        priorityRank: 2,
+        name: '2. Pineta Club Milano',
+        slug: 'pineta-club-milano',
+        districtIt: 'Corso Como / Via Messina 38',
+        districtEn: 'Corso Como / Via Messina 38',
+        daytimeIt: 'Da Garibaldi (Malpensa Express): 4 min con M5 Lilla (Cenisio) · Da Linate: 22 min con M4 Blu + M1/M5',
+        daytimeEn: 'From Garibaldi (Malpensa Express): 4 min via M5 Purple (Cenisio) · From Linate: 22 min via M4 Blue + M1/M5',
+        nightReturnIt: 'Filobus 90/91 h24 + NM4 Linate · Taxi / NCC Concierge: 20 min da LIN',
+        nightReturnEn: '24/7 Trolleybus 90/91 + NM4 Linate · Taxi / NCC Concierge: 20 min from LIN',
+        taxiEstimate: '€16 - €28',
+      },
+      {
+        priorityRank: 3,
+        name: '3. Aria Club Milano',
+        slug: 'aria-club-milano',
+        districtIt: 'San Siro (Piazzale dello Sport 14)',
+        districtEn: 'San Siro (Piazzale dello Sport 14)',
+        daytimeIt: 'Da Cadorna: 9 min con M1 Rossa (Lotto) · Da Linate: 26 min con M4 Blu (San Babila) + M1 Rossa diretta (Lotto)',
+        daytimeEn: 'From Cadorna: 9 min via M1 Red (Lotto) · From Linate: 26 min via M4 Blue (San Babila) + M1 Red (Lotto)',
+        nightReturnIt: 'Bus Notturno NM1 da Lotto + NM4 · Taxi / NCC Concierge: 22 min da LIN',
+        nightReturnEn: 'Night Bus NM1 from Lotto + NM4 · Taxi / NCC Concierge: 22 min from LIN',
+        taxiEstimate: '€18 - €28',
+      },
+      {
+        priorityRank: 4,
+        name: '4. 55 Milano (FiftyFive)',
+        slug: '55-milano',
+        districtIt: 'Arco della Pace / Sempione',
+        districtEn: 'Arco della Pace / Sempione',
+        daytimeIt: 'Da Cadorna/Domodossola: 4 min · Da Linate: 22 min con M4 Blu + M1/M5 (Gerusalemme)',
+        daytimeEn: 'From Cadorna/Domodossola: 4 min · From Linate: 22 min via M4 Blue + M1/M5 (Gerusalemme)',
+        nightReturnIt: 'Filobus 90/91 h24 + NM4 · Taxi / NCC Concierge: 20 min da LIN',
+        nightReturnEn: '24/7 Trolleybus 90/91 + NM4 · Taxi / NCC Concierge: 20 min from LIN',
+        taxiEstimate: '€15 - €26',
+      },
+      {
+        priorityRank: 5,
+        name: '5. Voya Rooftop Milan',
+        slug: 'voya-rooftop-milan',
+        districtIt: 'Isola / Portello (20° Piano)',
+        districtEn: 'Isola / Portello (20th Floor)',
+        daytimeIt: 'Da Garibaldi/Cadorna: 8 min con M5 Lilla (Portello) · Da Linate: 24 min con M4 Blu + M1/M5',
+        daytimeEn: 'From Garibaldi/Cadorna: 8 min via M5 Purple (Portello) · From Linate: 24 min via M4 Blue + M1/M5',
+        nightReturnIt: 'Filobus 90/91 h24 + NM1/NM4 · Taxi / NCC Concierge: 20 min da LIN',
+        nightReturnEn: '24/7 Trolleybus 90/91 + NM1/NM4 · Taxi / NCC Concierge: 20 min from LIN',
+        taxiEstimate: '€16 - €28',
+      },
+      {
+        priorityRank: 6,
+        name: '6. Repvblic Milano',
+        slug: 'repvblic-milano',
+        districtIt: 'Piazza della Repubblica',
+        districtEn: 'Piazza della Repubblica',
+        daytimeIt: 'Da Garibaldi/Centrale: 4 min · Da Linate: 16 min con M4 Blu (San Babila/Tricolore) + collegamento a Repubblica',
+        daytimeEn: 'From Garibaldi/Centrale: 4 min · From Linate: 16 min via M4 Blue (San Babila) + connection to Repubblica',
+        nightReturnIt: 'Bus Notturno NM3 + NM4 Linate · Taxi / NCC Concierge: 15 min da LIN',
+        nightReturnEn: 'Night Bus NM3 + NM4 Linate · Taxi / NCC Concierge: 15 min from LIN',
+        taxiEstimate: '€14 - €24',
+      },
+    ],
+  },
+};
+
+export function NeighborhoodCommutePlanner({ locale }: { locale: string }) {
+  const isIt = locale === 'it';
+  const lp = localePrefix(locale);
+
+  const [originKey, setOriginKey] = useState<CommuteOriginKey>('duomo');
+  const origin = COMMUTE_ORIGINS[originKey];
+
+  return (
+    <section
+      id="neighborhood-commute-planner"
+      aria-label={
+        isIt
+          ? 'Pianificatore Spostamenti Quartieri, Metro M1-M5 e Taxi Notturni verso i 6 Club Prioritari'
+          : 'Milan Neighborhood Commute, Metro M1-M5 & Night Taxi Planner to Top 6 Priority Clubs'
+      }
+      className="my-14 rounded-2xl border border-champagne/30 bg-gradient-to-b from-[#16120b] to-[#0c0a07] p-6 sm:p-10 shadow-[0_20px_60px_rgba(0,0,0,0.65)]"
+    >
+      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8 pb-6 border-b border-white/10">
+        <div>
+          <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-champagne/15 border border-champagne/40 text-champagne text-[11px] font-bold tracking-[0.22em] uppercase mb-3">
+            <MapPin className="w-3.5 h-3.5" />
+            {isIt ? 'LOGISTICA NOTTURNA MILANO · METRO M1-M5 & NCC VIP' : 'MILAN NIGHTLIFE LOGISTICS · METRO M1-M5 & VIP CHAUFFEUR'}
+          </span>
+          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white tracking-tight">
+            {isIt
+              ? 'Calcolatore Spostamenti tra Quartieri, Metro & Taxi verso i 6 Club Prioritari'
+              : 'Neighborhood Commute, Metro & Night Taxi Planner to Milan’s Top 6 Clubs'}
+          </h2>
+          <p className="text-white/65 text-sm sm:text-base mt-2 max-w-3xl">
+            {isIt
+              ? 'Seleziona il tuo punto di partenza a Milano per visualizzare istantaneamente tempi a piedi o in metropolitana diurna (fino alle 00:30), linee sostitutive notturne ATM (00:30 - 05:00) e tariffe stimate Taxi / Uber Black / NCC Concierge.'
+              : 'Select your starting point in Milan to instantly view walking or daytime metro travel times (until 00:30), ATM night bus replacements (00:30 - 05:00), and estimated Taxi / Uber Black / Concierge Chauffeur fares.'}
+          </p>
+        </div>
+        <div className="flex items-center gap-2.5 text-xs text-champagne bg-champagne/10 border border-champagne/30 px-4 py-2.5 rounded-xl shrink-0">
+          <Clock className="w-4 h-4 text-champagne shrink-0" />
+          <span>
+            {isIt
+              ? 'Servizio Transfer NCC & Tavoli: +39 351 912 7047'
+              : 'Chauffeur Transfer & VIP Tables: +39 351 912 7047'}
+          </span>
+        </div>
+      </div>
+
+      {/* Origin Selector Grid */}
+      <div className="mb-8">
+        <label className="block font-sans text-xs font-bold tracking-[0.18em] uppercase text-champagne mb-3">
+          {isIt ? 'Seleziona il Tuo Punto di Partenza a Milano (8 Hub Principali)' : 'Select Your Starting Hub in Milan (8 Major Hubs)'}
+        </label>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
+          {(Object.keys(COMMUTE_ORIGINS) as CommuteOriginKey[]).map((k) => {
+            const item = COMMUTE_ORIGINS[k];
+            const active = originKey === k;
+            return (
+              <button
+                key={k}
+                type="button"
+                onClick={() => setOriginKey(k)}
+                className={`text-left px-4 py-3 rounded-xl border text-xs sm:text-sm font-medium transition-all ${
+                  active
+                    ? 'bg-champagne text-black border-champagne font-bold shadow-[0_0_20px_rgba(201,168,106,0.3)]'
+                    : 'bg-white/[0.03] text-white/80 border-white/10 hover:border-champagne/40'
+                }`}
+              >
+                {isIt ? item.labelIt : item.labelEn}
+              </button>
+            );
+          })}
+        </div>
+        <div className="mt-3 p-3.5 rounded-xl bg-champagne/[0.06] border border-champagne/25 text-xs text-white/80 flex items-center gap-2.5">
+          <Sparkles className="w-4 h-4 text-champagne shrink-0" />
+          <span>{isIt ? origin.hubTipIt : origin.hubTipEn}</span>
+        </div>
+      </div>
+
+      {/* 6 Priority Clubs Commute Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {origin.routes.map((route) => {
+          const waTransferMsg = isIt
+            ? `Ciao Concierge Nightlife Milan! Partiamo da "${origin.labelIt}" e vorremmo prenotare Tavolo VIP + eventuale Transfer NCC per ${route.name}.`
+            : `Hi Nightlife Milan Concierge! We are departing from "${origin.labelEn}" and would like to book a VIP Table + optional Chauffeur Transfer to ${route.name}.`;
+
+          return (
+            <div
+              key={route.slug}
+              className="rounded-xl border border-white/10 bg-black/50 p-5 flex flex-col justify-between hover:border-champagne/45 transition-all"
+            >
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-2.5">
+                  <span className="px-2.5 py-0.5 rounded-full bg-champagne/20 border border-champagne/40 text-champagne text-[10px] font-bold uppercase tracking-wider">
+                    {isIt ? `#${route.priorityRank} Club Prioritario` : `#${route.priorityRank} Priority Club`}
+                  </span>
+                  <span className="px-2.5 py-0.5 rounded-md bg-white/10 text-white text-xs font-mono font-bold">
+                    Taxi {route.taxiEstimate}
+                  </span>
+                </div>
+
+                <h3 className="font-serif text-xl font-bold text-white mb-0.5">{route.name}</h3>
+                <p className="text-[11px] text-champagne/85 mb-4">
+                  {isIt ? route.districtIt : route.districtEn}
+                </p>
+
+                <div className="space-y-3 text-xs border-t border-white/10 pt-3.5 mb-5">
+                  <div>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400 block mb-0.5">
+                      {isIt ? 'A Piedi / Metro Diurna (fino alle 00:30)' : 'Walk / Daytime Metro (until 00:30)'}
+                    </span>
+                    <p className="text-white/85 leading-relaxed">
+                      {isIt ? route.daytimeIt : route.daytimeEn}
+                    </p>
+                  </div>
+
+                  <div>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-amber-300 block mb-0.5">
+                      {isIt ? 'Rientro Notturno (00:30 - 05:00) & Taxi' : 'Night Return (00:30 - 05:00) & Taxi'}
+                    </span>
+                    <p className="text-white/75 leading-relaxed">
+                      {isIt ? route.nightReturnIt : route.nightReturnEn} ({route.taxiEstimate})
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2 pt-3 border-t border-white/10">
+                <Link
+                  href={`${lp}/clubs/${route.slug}`}
+                  className="text-xs font-semibold text-white/85 hover:text-champagne transition-colors"
+                >
+                  {isIt ? 'Scheda Club →' : 'Club Profile →'}
+                </Link>
+                <a
+                  href={`${CONTACT.whatsapp.link}?text=${encodeURIComponent(waTransferMsg)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ml-auto inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-champagne text-black text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
+                >
+                  <MessageCircle className="w-3.5 h-3.5" />
+                  <span>{isIt ? 'Tavolo / NCC' : 'Table / NCC'}</span>
+                </a>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+export function VelvetRopeChecklist({ locale = 'it' }: { locale?: string }) {
+  const isIt = locale === 'it';
+  const items = [
+    {
+      titleIt: '1. Documento Fisico Originale (18+ / 21+)',
+      titleEn: '1. Physical Original ID (18+ / 21+)',
+      descIt: 'Carta d’identità, passaporto o patente in originale. Nei top club come Just Me, Pineta e Voya Rooftop è preferita clientela 21+.',
+      descEn: 'Original national ID, passport, or driving license. Flagship clubs like Just Me, Pineta, and Voya Rooftop prefer a 21+ crowd.',
+    },
+    {
+      titleIt: '2. Camicia, Blazer o Smart Total Black',
+      titleEn: '2. Collared Shirt, Blazer, or Smart Total Black',
+      descIt: 'Evita tute, borselli a tracolla, cappellini, felpe sportive e maglie da calcio. Scarpa in pelle o sneaker minimal immacolata.',
+      descEn: 'Avoid tracksuits, crossbody pouches, caps, athletic hoodies, and football jerseys. Wear leather shoes or immaculate minimal sneakers.',
+    },
+    {
+      titleIt: '3. Orario d’Ingresso Strategico (19:30 o entro le 00:15)',
+      titleEn: '3. Strategic Arrival Window (19:30 or before 00:15)',
+      descIt: 'Entra dalle 19:30 per il Royal Aperitivo oppure entro mezzanotte e un quarto per la lista serale prima del picco di affluenza.',
+      descEn: 'Arrive at 19:30 for the Royal Aperitivo or before 00:15 for the night guestlist ahead of peak door congestion.',
+    },
+    {
+      titleIt: '4. Accredito Nominale o Tavolo VIP Riservato',
+      titleEn: '4. Nominal Accreditation or Reserved VIP Table',
+      descIt: 'I gruppi di soli uomini o numerosi superano la selezione con certezza prenotando un Tavolo VIP o Royal Aperitivo tramite WhatsApp (+39 351 912 7047).',
+      descEn: 'All-male or large groups pass selection reliably by reserving a VIP Table or Royal Aperitivo via WhatsApp (+39 351 912 7047).',
+    },
+  ];
+
+  return (
+    <section
+      aria-label={isIt ? 'Checklist Selezione alla Porta Milano' : 'Milan Velvet Rope Door Selection Checklist'}
+      className="my-10 rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-8"
+    >
+      <div className="mb-6">
+        <p className="font-sans text-champagne text-[10px] font-bold tracking-[0.28em] uppercase mb-2">
+          {isIt ? 'PROTOCOLLO VELVET ROPE · 4 REGOLE D’ORO' : 'VELVET ROPE PROTOCOL · 4 GOLDEN RULES'}
+        </p>
+        <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white">
+          {isIt
+            ? 'Checklist Anti-Rimbalzo prima di Arrivare al Locale'
+            : 'Pre-Arrival Velvet Rope Checklist'}
+        </h3>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {items.map((item) => (
+          <div
+            key={item.titleEn}
+            className="p-4 rounded-xl border border-white/10 bg-black/40 flex items-start gap-3"
+          >
+            <CheckCircle2 className="w-5 h-5 text-champagne shrink-0 mt-0.5" />
+            <div>
+              <h4 className="font-serif text-base font-bold text-white mb-1">
+                {isIt ? item.titleIt : item.titleEn}
+              </h4>
+              <p className="text-xs text-white/65 leading-relaxed">
+                {isIt ? item.descIt : item.descEn}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+
+
