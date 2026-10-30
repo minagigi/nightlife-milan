@@ -134,7 +134,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data: https://images.unsplash.com https://storage.googleapis.com https://www.googletagmanager.com https://img.magnific.com https://img.freepik.com https://ai-images.freepik.com https://*.tile.openstreetmap.org; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://*.tile.openstreetmap.org;",
+            value: "default-src 'self'; frame-src https://www.google.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data: https://images.unsplash.com https://storage.googleapis.com https://www.googletagmanager.com https://img.magnific.com https://img.freepik.com https://ai-images.freepik.com https://*.tile.openstreetmap.org; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://*.tile.openstreetmap.org;",
           }
         ],
       },
@@ -142,7 +142,7 @@ const nextConfig: NextConfig = {
   },
   images: {
     formats: ['image/avif', 'image/webp'],
-    qualities: [40, 50, 65, 75, 80, 85, 92, 95],
+    qualities: [40, 45, 50, 65, 75, 80, 85, 92, 95],
     minimumCacheTTL: 86400,
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     remotePatterns: [
@@ -163,7 +163,7 @@ const nextConfig: NextConfig = {
     optimizeCss: true,
     // Inline the compact critical stylesheet to remove the mobile render-blocking
     // round trip. Revalidate this choice if the global stylesheet grows again.
-    inlineCss: true,
+    inlineCss: false,
   },
   webpack: (config, {dev}) => {
     // HMR is disabled in AI Studio via DISABLE_HMR env var.

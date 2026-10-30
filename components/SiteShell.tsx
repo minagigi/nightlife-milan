@@ -17,6 +17,8 @@ import { editorialValue, type EditorialFields } from '@/lib/editorialPresentatio
 import { getSkipToMainContent } from '@/lib/i18n/skipLink';
 import { getBackToTopLabel } from '@/lib/i18n/backToTopCopy';
 import { getScriptFont } from '@/lib/scriptFonts';
+import '@/app/globals.css';
+import 'flag-icons/css/flag-icons.min.css';
 import '@/app/locale-flags.css';
 import GlobalPriorityRecommendations from '@/components/GlobalPriorityRecommendations';
 import { getTopPriorityVenueRecommendations } from '@/lib/priorityVenueRecommendations';

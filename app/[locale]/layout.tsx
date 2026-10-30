@@ -1,3 +1,5 @@
+import '@/app/globals.css';
+import 'flag-icons/css/flag-icons.min.css';
 import type { Metadata, Viewport } from 'next';
 import { tr } from '@/lib/i18n/t';
 import { notFound } from 'next/navigation';
