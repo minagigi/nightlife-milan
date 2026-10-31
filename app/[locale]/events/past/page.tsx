@@ -1,3 +1,6 @@
+import EditorialPageSections from '@/components/EditorialPageSections';
+import type { LocaleCode } from '@/lib/i18n/locales';
+import Image from 'next/image';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import EventCard from '@/components/EventCard';
@@ -118,6 +121,7 @@ export default async function PastEventsPage({ params }: Props) {
           ← {tr(locale, 'Upcoming events', 'Eventi in programma')}
         </Link>
       </div>
+      <EditorialPageSections locale={locale as LocaleCode} path={`${localePrefix(locale)}/events/past`} />
     </main>
   );
 }

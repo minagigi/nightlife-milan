@@ -74,7 +74,7 @@ export async function generateMetadata({
       locale: getLocaleDef(locale)?.ogLocale || 'it_IT',
       images: [
         {
-          url: `${baseUrl}/images/venues/aria-club-milano/aria-club-milano-interior-01.webp`,
+          url: `${baseUrl}/images/pillars/football-afterparties-01.webp`,
           width: 1200,
           height: 630,
           alt: title,
@@ -85,7 +85,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title,
       description,
-      images: [`${baseUrl}/images/venues/aria-club-milano/aria-club-milano-interior-01.webp`],
+      images: [`${baseUrl}/images/pillars/football-afterparties-01.webp`],
     },
   };
 }
@@ -108,7 +108,7 @@ const POST_MATCH_CLUBS = [
     hoursEn: 'Thursday, Friday, Saturday & Big Match Nights (19:30 Royal Aperitivo · 23:00–05:00 Club)',
     pricesIt: 'Royal Aperitivo 15–25€ · Tavoli VIP Pista da 250€ · Privé Aria 400€ · Super Privé Console DJ 600€',
     pricesEn: 'Royal Aperitivo €15–25 · Dancefloor VIP from €250 · Privé Aria €400 · DJ Console Super Privé €600',
-    image: '/images/venues/aria-club-milano/aria-club-milano-interior-01.webp',
+    image: '/images/pillars/football-afterparties-01.webp',
     descriptionIt:
       'Aria Club Milano è il quartier generale assoluto del Terzo Tempo calcistico a Milano. Situato letteralmente di fronte allo Stadio Giuseppe Meazza in Piazzale dello Sport 14, a soli 150 metri reali dai varchi di uscita e dall’Ippodromo Snai San Siro, permette agli ospiti delle tribune VIP, agli Skybox aziendali e ai gruppi di tifosi eleganti di evitare completamente i 90 minuti di paralisi del traffico post-partita. Per le gare delle 15:00 o delle 18:00 puoi entrare direttamente alle 19:30 per il Royal Aperitivo con isole buffet e drink; per i posticipi serali delle 20:45 (fischio finale ore 22:40) attraversi la piazza a piedi e alle 22:50 sei già seduto nel tuo divanetto riservato con bottiglie di vodka Belvedere, Grey Goose o Champagne Moët & Chandon servite al tavolo.',
     descriptionEn:
@@ -131,7 +131,7 @@ const POST_MATCH_CLUBS = [
     hoursEn: 'Open 7 Days a Week (Mon–Sun): Royal Aperitivo 19:30–22:30 · Luxury Club 23:30–05:00',
     pricesIt: 'Royal Aperitivo 20–30€ (con salita Torre Branca) · Tavoli VIP Pista 350–500€ · Privé Branca 1.000–3.000€',
     pricesEn: 'Royal Aperitivo €20–30 (with Torre Branca lift) · Dancefloor VIP €350–500 · Privé Branca €1,000–3,000',
-    image: '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp',
+    image: '/images/pillars/football-afterparties-02.webp',
     descriptionIt:
       'Firmato dallo stilista Italo Rota ai piedi della monumentale Torre Branca (108 metri d’altezza nel cuore del Parco Sempione), Just Me Milano è la Scelta N° 1 assoluta della vita notturna milanese e presenta un vantaggio decisivo per chi assiste alle partite a San Siro: è l’unico top club di lusso aperto 7 notti su 7, 365 giorni l’anno. Quando Inter o Milan giocano il Martedì o Mercoledì sera in UEFA Champions League (fischio finale ore 22:55), la Domenica sera alle 20:45 o il posticipo del Lunedì, mentre la maggior parte delle discoteche tradizionali è chiusa, il Just Me garantisce sempre il party internazionale più esclusivo della città, frequentato da calciatori, dirigenti UEFA, modelli, ospiti degli Skybox e tifosi VIP in trasferta.',
     descriptionEn:
@@ -154,7 +154,7 @@ const POST_MATCH_CLUBS = [
     hoursEn: 'Friday, Saturday & Pre-Holiday Big Matches (19:30 Singing Buffet · 23:30–05:00 Club)',
     pricesIt: 'Aperitivo Cantato con Tavolo 20–25€ · Tavoli VIP Pista 300–400€ · Privé Rialzato 500–800€',
     pricesEn: 'Singing Aperitivo with Table €20–25 · Dancefloor VIP €300–400 · Elevated Privé €500–800',
-    image: '/images/venues/pineta-milano/pineta-milano-ingresso-01.webp',
+    image: '/images/pillars/football-afterparties-03.webp',
     descriptionIt:
       'Situato in Via Messina 38 a pochi passi da Corso Como e collegato in linea retta dallo Stadio San Siro tramite la metropolitana M5 Lilla (fermata Cenisio o Garibaldi in soli 12 minuti), il Pineta Club Milano (#2 Priorità ufficiale) è la meta perfetta per festeggiare una vittoria negli anticipi del Venerdì e del Sabato. Dalle 19:30 alle 23:00 il locale esplode con il celebre Aperitivo Cantato: grandi tavolate conviviali, hit italiane e internazionali cantate a squarciagola da tutto il locale, show di bottiglie luminose e un’energia travolgente che a mezzanotte si trasforma in una vera discoteca reggaeton, urban e commerciale fino alle 05:00.',
     descriptionEn:
@@ -177,7 +177,7 @@ const POST_MATCH_CLUBS = [
     hoursEn: 'Tuesday–Sunday (19:30 XXL Apericena & Dinner Show · 23:30–04:30 Club)',
     pricesIt: 'Apericena Riservata 20–30€ · Dinner Show 50€ · Tavoli Dopocena VIP da 250–350€',
     pricesEn: 'Reserved Apericena €20–30 · Dinner Show €50 · Post-Dinner VIP Tables from €250–350',
-    image: '/images/55-milano.webp',
+    image: '/images/pillars/football-afterparties-04.webp',
     descriptionIt:
       'Ricavato all’interno di uno storico deposito ferroviario di oltre 1.000 metri quadri con soffitti industrial-chic e una spettacolare terrazza all’aperto in Via Piero della Francesca 55, il 55 Milano (FiftyFive, #4 Priorità) dista appena 4 fermate di metropolitana M5 dallo Stadio San Siro (6 minuti esatti di treno fino a Domodossola o Gerusalemme). È la soluzione regina per i gruppi numerosi di tifosi, gli addii al celibato calcistici e le comitive post-partita delle ore 15:00 o 18:00 che cercano un’Apericena XL con tavolo riservato tutta la sera, il Dinner Show del venerdì, il grande party "The Wall" del sabato notte o la celebre Domenica sera dopo il posticipo.',
     descriptionEn:
@@ -200,7 +200,7 @@ const POST_MATCH_CLUBS = [
     hoursEn: 'Tuesday–Sunday (18:30 Sunset & Post-Match Aperitivo · 22:30–02:30 Sky Lounge DJ Set)',
     pricesIt: 'Aperitivo Panoramico 20–30€ · Tavoli VIP Vetrata Skyline 250–400€',
     pricesEn: 'Panoramic Aperitivo €20–30 · Skyline Glass Window VIP Tables €250–400',
-    image: '/images/voya-rooftop-milan.webp',
+    image: '/images/pillars/football-afterparties-05.webp',
     descriptionIt:
       'Sospeso al 20° piano a 85 metri d’altezza in Viale Achille Papa 30 (quartiere Portello/CityLife, a sole 3 fermate di M5 Lilla da San Siro), Voya Rooftop Milan (#5 Priorità) offre uno spettacolo visivo unico a Milano: dalle sue vetrate a 360 gradi puoi letteralmente ammirare dall’alto i fasci di luce rossa e blu dello Stadio Giuseppe Meazza illuminato e le Tre Torri di CityLife. È il salotto panoramico prediletto dagli ospiti Corporate Hospitality, dagli sponsor di Inter e Milan, dalle coppie e dai professionisti che dopo il fischio finale desiderano alta mixology, tapas gourmet e un DJ set deep-house in quota senza il caos della folla.',
     descriptionEn:
@@ -223,7 +223,7 @@ const POST_MATCH_CLUBS = [
     hoursEn: 'Monday (Dirty Monday), Friday & Saturday (23:30–05:00)',
     pricesIt: 'Tavoli VIP Pista da 300€ · Tavoli Privé Rialzato 500–800€ · Super Privé Console da 1.000€',
     pricesEn: 'Dancefloor VIP from €300 · Elevated Privé €500–800 · Console Super Privé from €1,000',
-    image: '/images/repvblic-milano.webp',
+    image: '/images/pillars/football-afterparties-06.webp',
     descriptionIt:
       'Quando il calendario di Serie A programma il posticipo di Inter o Milan il Lunedì sera alle 20:45 (Monday Night), Repvblic Milano (#6 Priorità) insieme al Just Me è la risposta assoluta: la sua celebre serata "Dirty Monday" è l’appuntamento hip-hop, urban e house più famoso del lunedì milanese, frequentato da modelli, PR, calciatori e turisti internazionali alloggiati negli hotel 5 stelle di Porta Nuova e Piazza della Repubblica. Nel weekend (venerdì e sabato) Repvblic offre un impianto audio-luci d’avanguardia e tavoli Privé ad altissimo tasso scenografico.',
     descriptionEn:

@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       siteName: 'Nightlife Milan',
       locale: isIt ? 'it_IT' : 'en_US',
       images: [{
-        url: `${baseUrl}/images/clubs-hero.webp`,
+        url: `${baseUrl}/images/pillars/clubs-hero.webp`,
         width: 1200,
         height: 630,
         alt: tr(locale, 'Best clubs in Milan 2026 — curated selection', 'Migliori club di Milano 2026 — selezione curata'),
@@ -55,7 +55,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       card: 'summary_large_image',
       title,
       description,
-      images: [`${baseUrl}/images/clubs-hero.webp`],
+      images: [`${baseUrl}/images/pillars/clubs-hero.webp`],
       site: '@nightlifemilan',
     },
   };
@@ -155,7 +155,7 @@ export default async function ClubsPage({
       <section className="relative min-h-[75vh] flex items-end overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/clubs-hero.webp"
+            src="/images/pillars/clubs-hero.webp"
             alt="Milan clubbing scene — elite nightclubs and dancefloors"
             fill
             quality={85}
@@ -187,28 +187,6 @@ export default async function ClubsPage({
                 Underground
               </button>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured "Vibe Check" (Top 3) */}
-      <section className="bg-[#131009] py-20 border-y border-white/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-end justify-between mb-12">
-            <div>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-champagne mb-4">
-                The Weekend Radar
-              </h2>
-              <p className="text-white/40 text-lg">
-                Our Editor&apos;s top picks for an unforgettable night.
-              </p>
-            </div>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {topVenues.map((venue) => (
-              <VenueCard key={venue.id} {...venue} lang={locale} />
-            ))}
           </div>
         </div>
       </section>

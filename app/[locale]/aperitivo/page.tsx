@@ -59,7 +59,7 @@ const bars = [
     name: 'Pineta Club',
     slug: 'pineta-club-milano',
     zone: 'Corso Como',
-    image: '/images/aperitivo-milan-cocktails-bar.webp',
+    image: '/images/pillars/aperitivo-02.webp',
     hours: '18:00 – 21:00',
     vibe: 'Singing Aperitivo',
     price: '€15–20 per person',
@@ -71,7 +71,7 @@ const bars = [
     name: 'Voya Rooftop',
     slug: 'voya-rooftop',
     zone: 'Isola',
-    image: '/images/milan-rooftop-aperitivo-panoramic-view.webp',
+    image: '/images/pillars/aperitivo-03.webp',
     hours: '17:30 – 21:00',
     vibe: 'Sky Lounge Aperitivo',
     price: '€20–30 per person',
@@ -83,7 +83,7 @@ const bars = [
     name: 'Lacerba',
     slug: 'lacerba-milano',
     zone: 'Navigli',
-    image: '/images/aperitivo-milan-navigli-evening.webp',
+    image: '/images/pillars/aperitivo-04.webp',
     hours: '18:00 – 22:00',
     vibe: 'Bohemian Canal-Side',
     price: '€10–15 per person',
@@ -95,7 +95,7 @@ const bars = [
     name: 'Brera Social Club',
     slug: 'brera-social-club',
     zone: 'Brera',
-    image: '/images/bottle-service-milan-vip-nightclub.webp',
+    image: '/images/pillars/aperitivo-05.webp',
     hours: '17:00 – 21:00',
     vibe: 'Fashion Elite Aperitivo',
     price: '€18–25 per person',
@@ -193,6 +193,18 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
     <main className="min-h-screen bg-[#131009]">
+      <div data-aperitivo-top-hero="true" className="max-w-6xl mx-auto px-6 pt-24">
+        <div className="relative h-64 sm:h-80 w-full rounded-2xl overflow-hidden border border-champagne/30">
+          <Image
+            src="/images/pillars/aperitivo-01.webp"
+            alt="Milan Royal Aperitivo Sunset Terrace & Cocktails"
+            fill
+            priority
+            className="object-cover"
+            sizes="100vw"
+          />
+        </div>
+      </div>
 
       {/* Hero */}
       <section className="relative pt-32 pb-20 px-6 text-center overflow-hidden">

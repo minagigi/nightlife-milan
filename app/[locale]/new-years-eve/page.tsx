@@ -176,7 +176,7 @@ const NYE_CLUBS = [
     slug: 'just-me-milano',
     priorityBadgeIt: '#1 Priorità Assoluta · Fuochi sotto la Torre Branca',
     priorityBadgeEn: '#1 Top Priority · Fireworks Under Torre Branca',
-    nameIt: '1. Just Me Milano (Torre Branca, Parco Sempione: Gran Cenone Cavalli e Fuochi d Artificio)',
+    nameIt: '1. Just Me Milano (Torre Branca, Parco Sempione: Gran Cenone Italo Rota e Fuochi d Artificio)',
     nameEn: '1. Just Me Milano (Torre Branca, Parco Sempione: Gatsby Gala Dinner & Midnight Fireworks)',
     address: 'Viale Luigi Camoens, 2 (Parco Sempione / Torre Branca) - 20121 Milano',
     formulasIt:

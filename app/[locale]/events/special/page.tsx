@@ -392,11 +392,11 @@ export default async function SpecialEventsPage({ params }: Props) {
         {/* Gallery: 5 images */}
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
           {[
-            { src: '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp', alt: 'Milan VIP event luxury nightclub exclusive party' },
-            { src: '/images/milan-nightclub-bottle-service-vip-table.webp', alt: 'Milan nightclub bottle service VIP table special event' },
-            { src: '/images/milan-just-me-vip-tables-nightclub-2026.webp', alt: 'Just Me Milano VIP tables special event' },
-            { src: '/images/milan-voya-rooftop-exclusive-party.webp', alt: 'Voya Rooftop Milan exclusive party special evening' },
-            { src: '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp', alt: 'Milan luxury nightclub VIP champagne special night' },
+            { src: '/images/pillars/events-special-01.webp', alt: 'Milan VIP event luxury nightclub exclusive party' },
+            { src: '/images/pillars/events-special-02.webp', alt: 'Milan nightclub bottle service VIP table special event' },
+            { src: '/images/pillars/events-special-03.webp', alt: 'Just Me Milano VIP tables special event' },
+            { src: '/images/pillars/events-special-04.webp', alt: 'Voya Rooftop Milan exclusive party special evening' },
+            { src: '/images/pillars/events-special-05.webp', alt: 'Milan luxury nightclub VIP champagne special night' },
           ].map((img, i) => (
             <div key={i} className="relative h-32 rounded-xl overflow-hidden border border-white/8">
               <Image src={img.src} alt={img.alt} fill quality={85} className="object-cover" sizes="(max-width: 768px) 50vw, 20vw" />

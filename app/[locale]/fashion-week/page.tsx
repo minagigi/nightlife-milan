@@ -115,13 +115,13 @@ const LUXURY_WEEKS = [
     minSpendIt: 'Tavoli Pista €800 - €1.500 · Privé Branca / Console DJ €2.000 - €10.000',
     minSpendEn: 'Dancefloor VIP €800 - €1,500 · Privé Branca / DJ Console €2,000 - €10,000',
     summaryIt:
-      'Durante le due edizioni principali della Milano Fashion Week Donna (Febbraio e Settembre), la città accoglie oltre 150.000 buyer internazionali, supermodelle, direttori creativi, celebrity e stampa mondiale. Ogni sera, dal Martedì alla Domenica fino al Lunedì di chiusura, i 6 locali prioritari ospitano gli after-show party più esclusivi: 1. Just Me Milano (firmato Roberto Cavalli sotto la Torre Branca, aperto 7 notti su 7) è il cuore pulsante assoluto di MFW; 2. Pineta Corso Como accoglie le grandi cene cantate delle agenzie; 3. Aria Club, 4. 55 Milano, 5. Voya Rooftop (20° piano) e 6. Repvblic ospitano international guest DJs di calibro mondiale.',
+      'Durante le due edizioni principali della Milano Fashion Week Donna (Febbraio e Settembre), la città accoglie oltre 150.000 buyer internazionali, supermodelle, direttori creativi, celebrity e stampa mondiale. Ogni sera, dal Martedì alla Domenica fino al Lunedì di chiusura, i 6 locali prioritari ospitano gli after-show party più esclusivi: 1. Just Me Milano (firmato Italo Rota sotto la Torre Branca, aperto 7 notti su 7) è il cuore pulsante assoluto di MFW; 2. Pineta Corso Como accoglie le grandi cene cantate delle agenzie; 3. Aria Club, 4. 55 Milano, 5. Voya Rooftop (20° piano) e 6. Repvblic ospitano international guest DJs di calibro mondiale.',
     summaryEn:
-      'During the two flagship editions of Milan Fashion Week Womenswear (February and September), the city welcomes over 150,000 international buyers, supermodels, creative directors, celebrities, and global press. Every night from Tuesday through Monday, our 6 priority venues host the weeks flagship after-show parties: 1. Just Me Milano (designed by Roberto Cavalli beneath Torre Branca, open 7 nights a week) is the undisputed epicenter of MFW; 2. Pineta Corso Como hosts high-energy agency dinners; while 3. Aria Club, 4. 55 Milano, 5. Voya Rooftop (20th floor), and 6. Repvblic feature global headliner DJs.',
+      'During the two flagship editions of Milan Fashion Week Womenswear (February and September), the city welcomes over 150,000 international buyers, supermodels, creative directors, celebrities, and global press. Every night from Tuesday through Monday, our 6 priority venues host the weeks flagship after-show parties: 1. Just Me Milano (designed by Italo Rota beneath Torre Branca, open 7 nights a week) is the undisputed epicenter of MFW; 2. Pineta Corso Como hosts high-energy agency dinners; while 3. Aria Club, 4. 55 Milano, 5. Voya Rooftop (20th floor), and 6. Repvblic feature global headliner DJs.',
     clubsIt:
-      '1. Just Me Milano (7/7 Icona Roberto Cavalli) · 2. Pineta Corso Como · 5. Voya Rooftop 20° Piano · 6. Repvblic · 3. Aria Club · 4. 55 Milano · Tocqueville 13',
+      '1. Just Me Milano (7/7 Icona Italo Rota) · 2. Pineta Corso Como · 5. Voya Rooftop 20° Piano · 6. Repvblic · 3. Aria Club · 4. 55 Milano · Tocqueville 13',
     clubsEn:
-      '1. Just Me Milano (7/7 Roberto Cavalli Icon) · 2. Pineta Corso Como · 5. Voya Rooftop 20th Floor · 6. Repvblic · 3. Aria Club · 4. 55 Milano · Tocqueville 13',
+      '1. Just Me Milano (7/7 Italo Rota Icon) · 2. Pineta Corso Como · 5. Voya Rooftop 20th Floor · 6. Repvblic · 3. Aria Club · 4. 55 Milano · Tocqueville 13',
   },
   {
     id: 'mfw-menswear',
@@ -186,13 +186,13 @@ const PRIORITY_FASHION_VENUES = [
   {
     rank: 1,
     slug: 'just-me-milano',
-    badgeIt: '#1 Priorità Assoluta · Fondato da Roberto Cavalli · Aperto 7/7',
-    badgeEn: '#1 Top Priority · Founded by Roberto Cavalli · Open 7/7',
+    badgeIt: '#1 Priorità Assoluta · Fondato da Italo Rota · Aperto 7/7',
+    badgeEn: '#1 Top Priority · Founded by Italo Rota · Open 7/7',
     name: '1. Just Me Milano (Torre Branca, Parco Sempione)',
     roleIt: 'Quartier Generale Ufficiale After-Show MFW, Fuorisalone & F1 Monza (Lun-Dom)',
     roleEn: 'Official Flagship Hub for MFW After-Shows, Fuorisalone & F1 Monza (Mon-Sun)',
-    specsIt: 'Capacità Buyout: fino a 800 ospiti · Privé Branca + Giardino + Ristorante Cavalli',
-    specsEn: 'Buyout Capacity: up to 800 guests · Privé Branca + Garden + Cavalli Restaurant',
+    specsIt: 'Capacità Buyout: fino a 800 ospiti · Privé Branca + Giardino + Ristorante Italo Rota',
+    specsEn: 'Buyout Capacity: up to 800 guests · Privé Branca + Garden + Italo Rota Restaurant',
     image: '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp',
   },
   {
@@ -273,8 +273,8 @@ export default async function FashionWeekPage({
         ? 'Dove si tengono i migliori afterparty della Milano Fashion Week (Febbraio e Settembre)?'
         : 'Where are the best Milan Fashion Week afterparties held in February and September?',
       a: isIt
-        ? 'Il punto di riferimento #1 assoluto durante tutta la Milano Fashion Week (dal Martedì al Lunedì, 7 notti su 7) è Just Me Milano sotto la Torre Branca in Parco Sempione (Viale Luigi Camoens 2), fondato dallo stilista Roberto Cavalli. Insieme al Just Me, gli eventi e tavoli VIP più ambiti si svolgono da 2. Pineta Club (Corso Como), 3. Aria Club, 4. 55 Milano, 5. Voya Rooftop (20° piano vista skyline) e 6. Repvblic (Piazza della Repubblica).'
-        : 'The #1 flagship venue throughout Milan Fashion Week (open Tuesday through Monday, 7 nights a week) is Just Me Milano beneath Torre Branca in Parco Sempione (Viale Luigi Camoens 2), founded by designer Roberto Cavalli. Alongside Just Me, the most sought-after VIP tables and after-shows take place at 2. Pineta Club (Corso Como), 3. Aria Club, 4. 55 Milano, 5. Voya Rooftop (20th floor skyline), and 6. Repvblic.',
+        ? 'Il punto di riferimento #1 assoluto durante tutta la Milano Fashion Week (dal Martedì al Lunedì, 7 notti su 7) è Just Me Milano sotto la Torre Branca in Parco Sempione (Viale Luigi Camoens 2), fondato dallo stilista Italo Rota. Insieme al Just Me, gli eventi e tavoli VIP più ambiti si svolgono da 2. Pineta Club (Corso Como), 3. Aria Club, 4. 55 Milano, 5. Voya Rooftop (20° piano vista skyline) e 6. Repvblic (Piazza della Repubblica).'
+        : 'The #1 flagship venue throughout Milan Fashion Week (open Tuesday through Monday, 7 nights a week) is Just Me Milano beneath Torre Branca in Parco Sempione (Viale Luigi Camoens 2), founded by designer Italo Rota. Alongside Just Me, the most sought-after VIP tables and after-shows take place at 2. Pineta Club (Corso Como), 3. Aria Club, 4. 55 Milano, 5. Voya Rooftop (20th floor skyline), and 6. Repvblic.',
     },
     {
       q: isIt
@@ -459,7 +459,7 @@ export default async function FashionWeekPage({
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-9">
             <div className="rounded-2xl border border-champagne/30 bg-black/55 p-4">
               <div className="text-[11px] font-mono uppercase tracking-widest text-champagne mb-1">
-                {isIt ? '#1 Icona Roberto Cavalli' : '#1 Roberto Cavalli Icon'}
+                {isIt ? '#1 Icona Italo Rota' : '#1 Italo Rota Icon'}
               </div>
               <div className="font-serif text-2xl font-bold text-white">Just Me (7/7 MFW Hub)</div>
               <p className="text-xs text-white/60 mt-1">

@@ -1115,7 +1115,8 @@ export default async function ClubPage({ params }: Props) {
   const dressCode = (getLocalizedText(venue.localizedContent.dressCode, locale) || "Smart Casual").replace(/[—–]/g, ' - ');
   const insiderTip = (venue.localizedContent.insiderTip ? getLocalizedText(venue.localizedContent.insiderTip, locale) : '').replace(/[—–]/g, ' - ');
   const image = venue.image || venue.gallery?.[0] || '/images/milan-nightclub-luxury-vip-champagne.webp';
-  const gallery = venue.gallery?.length ? venue.gallery : [image];
+  const rawGallery = venue.gallery?.length ? venue.gallery.filter((g) => g !== image) : [];
+  const gallery = rawGallery.length ? rawGallery : [];
   
   const waLink = venue.id === 'v-pineta' 
     ? `${CONTACT.whatsapp.link}?text=Ciao,%20vorrei%20informazioni%20per%20un%20tavolo%20al%20Pineta%20Club%20Milano`

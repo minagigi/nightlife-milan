@@ -281,7 +281,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       siteName: 'Nightlife Milan',
       locale: getLocaleDef(locale)?.ogLocale || 'en_US',
       images: [{
-        url: `${baseUrl}/images/milan-nightclub-dancefloor-vip.webp`,
+        url: `${baseUrl}/images/pillars/vip-tables-hero.webp`,
         width: 768,
         height: 1024,
         alt: copy.title,
@@ -291,7 +291,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       card: 'summary_large_image',
       title,
       description,
-      images: [`${baseUrl}/images/milan-nightclub-dancefloor-vip.webp`],
+      images: [`${baseUrl}/images/pillars/vip-tables-hero.webp`],
       site: '@nightlifemilan',
     },
   };
@@ -332,7 +332,7 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
             {SITE_CONTACT.whatsapp.number} · {copy.responseNote}
           </p>
 
-          <div className="mx-auto mt-8 max-w-2xl overflow-hidden rounded-xl border border-champagne/25"><Image src="/images/milan-nightclub-dancefloor-vip.webp" alt={copy.title} width={768} height={1024} priority className="h-64 w-full object-cover" /></div>
+          <div className="mx-auto mt-8 max-w-2xl overflow-hidden rounded-xl border border-champagne/25"><Image src="/images/pillars/vip-tables-hero.webp" alt={copy.title} width={768} height={1024} priority className="h-64 w-full object-cover" /></div>
           <div className="mx-auto mt-8 max-w-2xl rounded-xl border border-champagne/25 bg-champagne/[0.05] p-6 text-left sm:mt-10">
             <p className="mb-3 font-sans text-[10px] uppercase tracking-[0.3em] text-champagne/75">
               {copy.answerLabel}

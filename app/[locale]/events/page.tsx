@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       url: canonical,
       images: [{
-        url: `${SITE_URL}/images/clubs-hero.webp`,
+        url: `${SITE_URL}/images/pillars/events-hub-hero.webp`,
         width: 1344,
         height: 752,
         alt: editorial.ogImageAlt,
@@ -75,7 +75,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: 'summary_large_image',
       title,
       description,
-      images: [`${SITE_URL}/images/clubs-hero.webp`],
+      images: [`${SITE_URL}/images/pillars/events-hub-hero.webp`],
     },
   };
 }
@@ -119,7 +119,7 @@ export default async function EventsHubPage({ params }: Props) {
         </div>
 
         <header className="relative overflow-hidden border-b border-[#F6F1E7]/14 bg-[#0B0A09]">
-          <Image src="/images/clubs-hero.webp" alt={editorial.heading} fill priority sizes="100vw" className="object-cover opacity-25 pointer-events-none" />
+          <Image src="/images/pillars/events-hub-hero.webp" alt={editorial.heading} fill priority sizes="100vw" className="object-cover opacity-25 pointer-events-none" />
           <div className="relative z-10 mx-auto max-w-[1440px] border-x border-[#F6F1E7]/14 px-5 pb-14 pt-14 sm:px-14">
             <p className="mb-4 font-mono text-xs uppercase tracking-[0.26em] text-[#D6BE96]">
               {editorial.eyebrow}

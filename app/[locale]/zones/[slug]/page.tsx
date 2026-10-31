@@ -16,6 +16,41 @@ import type { LocaleCode } from '@/lib/i18n/locales';
 
 export const revalidate = 3600;
 
+const ZONE_HERO_MAP: Record<string, string> = {
+  'brera': '/images/pillars/zone-hero-01.webp',
+  'navigli': '/images/pillars/zone-hero-02.webp',
+  'corso-como': '/images/pillars/zone-hero-03.webp',
+  'isola': '/images/pillars/zone-hero-04.webp',
+  'porta-venezia': '/images/pillars/zone-hero-05.webp',
+  'arco-della-pace': '/images/pillars/zone-hero-06.webp',
+  'ripamonti': '/images/pillars/zone-hero-07.webp',
+  'nolo': '/images/pillars/zone-hero-08.webp',
+  'porta-romana': '/images/pillars/zone-hero-09.webp',
+  'lambrate': '/images/pillars/zone-hero-10.webp',
+  'parco-sempione': '/images/pillars/zone-hero-11.webp',
+  'duomo-san-babila': '/images/pillars/zone-hero-12.webp',
+  'citylife-portello': '/images/pillars/zone-hero-13.webp',
+  'san-siro': '/images/pillars/zone-hero-14.webp',
+};
+
+const ZONE_INLINE_MAP: Record<string, string[]> = {
+  'brera': ['/images/pillars/zone-inline-01-a.webp', '/images/pillars/zone-inline-01-b.webp', '/images/pillars/zone-inline-01-c.webp', '/images/pillars/zone-inline-01-d.webp'],
+  'navigli': ['/images/pillars/zone-inline-02-a.webp', '/images/pillars/zone-inline-02-b.webp', '/images/pillars/zone-inline-02-c.webp', '/images/pillars/zone-inline-02-d.webp'],
+  'corso-como': ['/images/pillars/zone-inline-03-a.webp', '/images/pillars/zone-inline-03-b.webp', '/images/pillars/zone-inline-03-c.webp', '/images/pillars/zone-inline-03-d.webp'],
+  'isola': ['/images/pillars/zone-inline-04-a.webp', '/images/pillars/zone-inline-04-b.webp', '/images/pillars/zone-inline-04-c.webp', '/images/pillars/zone-inline-04-d.webp'],
+  'porta-venezia': ['/images/pillars/zone-inline-05-a.webp', '/images/pillars/zone-inline-05-b.webp', '/images/pillars/zone-inline-05-c.webp', '/images/pillars/zone-inline-05-d.webp'],
+  'arco-della-pace': ['/images/pillars/zone-inline-06-a.webp', '/images/pillars/zone-inline-06-b.webp', '/images/pillars/zone-inline-06-c.webp', '/images/pillars/zone-inline-06-d.webp'],
+  'ripamonti': ['/images/pillars/zone-inline-07-a.webp', '/images/pillars/zone-inline-07-b.webp', '/images/pillars/zone-inline-07-c.webp', '/images/pillars/zone-inline-07-d.webp'],
+  'nolo': ['/images/pillars/zone-inline-08-a.webp', '/images/pillars/zone-inline-08-b.webp', '/images/pillars/zone-inline-08-c.webp', '/images/pillars/zone-inline-08-d.webp'],
+  'porta-romana': ['/images/pillars/zone-inline-09-a.webp', '/images/pillars/zone-inline-09-b.webp', '/images/pillars/zone-inline-09-c.webp', '/images/pillars/zone-inline-09-d.webp'],
+  'lambrate': ['/images/pillars/zone-inline-10-a.webp', '/images/pillars/zone-inline-10-b.webp', '/images/pillars/zone-inline-10-c.webp', '/images/pillars/zone-inline-10-d.webp'],
+  'parco-sempione': ['/images/pillars/zone-inline-11-a.webp', '/images/pillars/zone-inline-11-b.webp', '/images/pillars/zone-inline-11-c.webp', '/images/pillars/zone-inline-11-d.webp'],
+  'duomo-san-babila': ['/images/pillars/zone-inline-12-a.webp', '/images/pillars/zone-inline-12-b.webp', '/images/pillars/zone-inline-12-c.webp', '/images/pillars/zone-inline-12-d.webp'],
+  'citylife-portello': ['/images/pillars/zone-inline-13-a.webp', '/images/pillars/zone-inline-13-b.webp', '/images/pillars/zone-inline-13-c.webp', '/images/pillars/zone-inline-13-d.webp'],
+  'san-siro': ['/images/pillars/zone-inline-14-a.webp', '/images/pillars/zone-inline-14-b.webp', '/images/pillars/zone-inline-14-c.webp', '/images/pillars/zone-inline-14-d.webp'],
+};
+
+
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
 };
@@ -46,8 +81,8 @@ const ZONE_LOGISTICS: Record<
     metroIt: 'M1 Cadorna / Conciliazione, M2 Lanza, M5 Domodossola + Tram 1 e 10',
     parkingEn: 'Viale Alemagna / Piazza Sempione parking + dedicated VIP Valet at Torre Branca',
     parkingIt: 'Parcheggio Viale Alemagna / Arco della Pace + Valet VIP dedicato sotto Torre Branca',
-    preDrinkEn: '55 Milano (Via Piero della Francesca 55), Just Me Royal Cavalli Aperitivo, Arco della Pace lounges',
-    preDrinkIt: '55 Milano (Via Piero della Francesca 55), Just Me Royal Aperitivo Cavalli, lounge Arco della Pace',
+    preDrinkEn: '55 Milano (Via Piero della Francesca 55), Just Me Royal Italo Rota Aperitivo, Arco della Pace lounges',
+    preDrinkIt: '55 Milano (Via Piero della Francesca 55), Just Me Royal Aperitivo Italo Rota, lounge Arco della Pace',
     flagshipClubs: ['Just Me Milano', '55 Milano', 'Old Fashion Garden'],
   },
   'san-siro': {
@@ -167,9 +202,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const canonical = `${baseUrl}${localePrefix(locale)}/zones/${slug}`;
 
-  const ogImage = zone.image
-    ? `${baseUrl}${zone.image}`
-    : `${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`;
+  const heroImg = ZONE_HERO_MAP[slug] || zone.image || '/images/pillars/zone-hero-01.webp';
+  const ogImage = `${baseUrl}${heroImg}`;
 
   return {
     title,
@@ -267,7 +301,7 @@ export default async function ZonePage({ params }: Props) {
       <div data-zone-top-hero="true" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
         <div className="relative h-64 sm:h-80 w-full rounded-2xl overflow-hidden border border-champagne/30">
           <Image
-            src={zone.image || '/images/milan-nightclub-luxury-vip-champagne.webp'}
+            src={ZONE_HERO_MAP[slug] || zone.image || '/images/pillars/zone-hero-01.webp'}
             alt={`${zone.name} Milan Nightlife District`}
             fill
             priority
@@ -444,6 +478,20 @@ export default async function ZonePage({ params }: Props) {
               </div>
             </div>
 
+                        {/* District Atmosphere Gallery (4 Unique Images) */}
+            <div className="mb-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {(ZONE_INLINE_MAP[slug] || ZONE_INLINE_MAP['brera']).map((imgSrc, idx) => (
+                <div key={imgSrc} className="relative aspect-[16/9] w-full rounded-xl overflow-hidden border border-white/10">
+                  <Image
+                    src={imgSrc}
+                    alt={`${zone.name} Milan Nightlife Atmosphere ${idx + 1}`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover"
+                  />
+                </div>
+              ))}
+            </div>
             {/* Venues in this District */}
             <div className="mb-12">
               <h2 className="text-2xl font-serif text-white mb-6">
@@ -452,7 +500,7 @@ export default async function ZonePage({ params }: Props) {
                   : `Top Clubs & Rooftops for a Night Out in ${zone.name}`}
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {displayedVenues.slice(0, 6).map((v) => {
+                {displayedVenues.slice(0, 6).map((v, idx) => {
                   const vName = v.localizedContent.name[typedLocale] || v.localizedContent.name.en;
                   const vDesc =
                     v.localizedContent.description[typedLocale] || v.localizedContent.description.en;
@@ -463,15 +511,7 @@ export default async function ZonePage({ params }: Props) {
                       href={`${localePrefix(locale)}/clubs/${vSlug}`}
                       className="group flex items-start gap-4 p-4 rounded-xl border border-white/10 bg-white/[0.02] hover:border-champagne/50 transition-all"
                     >
-                      <div className="relative w-20 h-20 rounded-lg overflow-hidden shrink-0">
-                        <Image
-                          src={v.image || '/images/milan-nightclub-luxury-vip-champagne.webp'}
-                          alt={vName}
-                          fill
-                          sizes="80px"
-                          className="object-cover group-hover:scale-105 transition-transform"
-                        />
-                      </div>
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-champagne/40 bg-champagne/10 font-serif text-lg font-bold text-champagne">#{idx + 1}</div>
                       <div className="min-w-0">
                         <div className="text-[10px] font-mono uppercase tracking-wider text-champagne mb-1">
                           {v.category.replace(/_/g, ' ')} · {v.priceRange}

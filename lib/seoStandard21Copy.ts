@@ -366,10 +366,105 @@ const ENGLISH_SECTIONS_TEXT: readonly [
   ],
 ];
 
-export function getSeoStandard21Copy(lang: LocaleCode): SeoStandard21Copy {
+const PAGE_KEY_SEO_IMAGES: Record<string, readonly string[]> = {
+  '/guest-lists': [
+    '/images/pillars/guest-lists-01.webp',
+    '/images/pillars/guest-lists-02.webp',
+    '/images/pillars/guest-lists-03.webp',
+    '/images/pillars/guest-lists-04.webp',
+  ],
+  '/vip-tables': [
+    '/images/pillars/vip-tables-01.webp',
+    '/images/pillars/vip-tables-02.webp',
+    '/images/pillars/vip-tables-03.webp',
+    '/images/pillars/vip-tables-04.webp',
+  ],
+  '/bottle-prices': [
+    '/images/pillars/bottle-prices-01.webp',
+    '/images/pillars/bottle-prices-02.webp',
+    '/images/pillars/bottle-prices-03.webp',
+    '/images/pillars/bottle-prices-04.webp',
+  ],
+  '/door-policy': [
+    '/images/pillars/door-policy-01.webp',
+    '/images/pillars/door-policy-02.webp',
+    '/images/pillars/door-policy-03.webp',
+    '/images/pillars/door-policy-04.webp',
+  ],
+  '/faq': [
+    '/images/pillars/faq-01.webp',
+    '/images/pillars/faq-02.webp',
+    '/images/pillars/faq-03.webp',
+    '/images/pillars/faq-04.webp',
+  ],
+  '/private-parties': [
+    '/images/pillars/private-parties-01.webp',
+    '/images/pillars/private-parties-02.webp',
+    '/images/pillars/private-parties-03.webp',
+    '/images/pillars/private-parties-04.webp',
+  ],
+  '/events': [
+    '/images/pillars/events-hub-01.webp',
+    '/images/pillars/events-hub-02.webp',
+    '/images/pillars/events-hub-03.webp',
+    '/images/pillars/events-hub-04.webp',
+  ],
+  '/events/tonight': [
+    '/images/pillars/events-tonight-01.webp',
+    '/images/pillars/events-tonight-02.webp',
+    '/images/pillars/events-tonight-03.webp',
+    '/images/pillars/events-tonight-04.webp',
+  ],
+  '/events/this-week': [
+    '/images/pillars/events-this-week-01.webp',
+    '/images/pillars/events-this-week-02.webp',
+    '/images/pillars/events-this-week-03.webp',
+    '/images/pillars/events-this-week-04.webp',
+  ],
+  '/events/past': [
+    '/images/pillars/events-past-01.webp',
+    '/images/pillars/events-past-02.webp',
+    '/images/pillars/events-past-03.webp',
+    '/images/pillars/events-past-04.webp',
+  ],
+  '/events/international': [
+    '/images/pillars/intent-international-01.webp',
+    '/images/pillars/intent-international-02.webp',
+    '/images/pillars/intent-international-03.webp',
+    '/images/pillars/intent-international-04.webp',
+  ],
+  '/events/university-erasmus': [
+    '/images/pillars/intent-erasmus-01.webp',
+    '/images/pillars/intent-erasmus-02.webp',
+    '/images/pillars/intent-erasmus-03.webp',
+    '/images/pillars/intent-erasmus-04.webp',
+  ],
+  '/events/18-plus': [
+    '/images/pillars/intent-18plus-01.webp',
+    '/images/pillars/intent-18plus-02.webp',
+    '/images/pillars/intent-18plus-03.webp',
+    '/images/pillars/intent-18plus-04.webp',
+  ],
+  '/events/21-plus': [
+    '/images/pillars/intent-21plus-01.webp',
+    '/images/pillars/intent-21plus-02.webp',
+    '/images/pillars/intent-21plus-03.webp',
+    '/images/pillars/intent-21plus-04.webp',
+  ],
+  '/seo-landing': [
+    '/images/pillars/seo-landing-01.webp',
+    '/images/pillars/seo-landing-02.webp',
+    '/images/pillars/seo-landing-03.webp',
+    '/images/pillars/seo-landing-04.webp',
+    '/images/pillars/seo-landing-05.webp',
+  ],
+};
+
+export function getSeoStandard21Copy(lang: LocaleCode, pageKey?: string): SeoStandard21Copy {
   const lp = localePrefix(lang);
   const pack = getHeaderPack(lang);
   const baseParagraphs = lang === 'it' ? ITALIAN_SECTIONS_TEXT : ENGLISH_SECTIONS_TEXT;
+  const pageImages = pageKey ? PAGE_KEY_SEO_IMAGES[pageKey] : undefined;
 
   const titles: readonly [string, string, string, string, string] = [
     pack.s1Title,
@@ -414,7 +509,7 @@ export function getSeoStandard21Copy(lang: LocaleCode): SeoStandard21Copy {
       index,
       h3Title,
       anchorId: slug,
-      imageSrc: `/media-seo/0${index}/${slug}.webp`,
+      imageSrc: pageImages?.[idx] ?? '',
       imageAlt: h3Title,
       paragraphs: baseParagraphs[idx],
       contextualLinks: contextualPerSection[idx],

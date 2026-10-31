@@ -1021,18 +1021,13 @@ export function PrioritySixShowcase({ locale }: { locale: string }) {
             key={club.slug}
             className="group rounded-2xl overflow-hidden border border-white/10 bg-[#15110b] hover:border-champagne/50 transition-all flex flex-col"
           >
-            <div className="relative h-52 w-full overflow-hidden">
-              <Image
-                src={club.image}
-                alt={club.name}
-                fill
-                sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#15110b] via-black/30 to-transparent" />
-              <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-champagne text-black text-[10px] font-extrabold tracking-wider uppercase">
+            <div className="relative px-6 py-4 bg-gradient-to-r from-champagne/15 via-champagne/5 to-transparent border-b border-white/10 flex items-center justify-between gap-3">
+              <div className="px-3 py-1 rounded-full bg-champagne text-black text-[10px] font-extrabold tracking-wider uppercase">
                 {isIt ? club.badgeIt : club.badgeEn}
               </div>
+              <span className="font-serif italic text-2xl font-bold text-champagne">
+                0{club.rank}
+              </span>
             </div>
             <div className="p-6 flex-1 flex flex-col justify-between">
               <div>

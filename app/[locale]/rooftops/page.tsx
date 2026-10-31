@@ -1,3 +1,5 @@
+import EditorialPageSections from '@/components/EditorialPageSections';
+import type { LocaleCode } from '@/lib/i18n/locales';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -79,7 +81,7 @@ const ROOFTOPS = [
     priceIt: 'Aperitivo €20–€25 · Tavolo VIP Sky Lounge da €200–€350',
     seasonEn: 'Year-Round (360° glass sky lounge + open-air summer terrace)',
     seasonIt: 'Tutto l’Anno (sky lounge vetrata 360° + terrazza estiva open-air)',
-    image: '/images/venues/voya-rooftop-milan/voya-rooftop-milan-interior-01.webp',
+    image: '/images/pillars/rooftops-02.webp',
   },
   {
     rank: 2,
@@ -97,7 +99,7 @@ const ROOFTOPS = [
     priceIt: 'Signature Cocktail €22–€25 · Prenotazione Tavolo Obbligatoria',
     seasonEn: 'Year-Round (Heated indoor dining rooms + heated outdoor terraces)',
     seasonIt: 'Tutto l’Anno (Sale interne Dsquared2 + terrazze esterne riscaldate)',
-    image: '/images/venues/ceresio-7/ceresio-7-interior-01.webp',
+    image: '/images/pillars/rooftops-03.webp',
   },
   {
     rank: 3,
@@ -115,7 +117,7 @@ const ROOFTOPS = [
     priceIt: 'Aperitivo €20–€25 · Tavolo VIP Terrazza da €250–€400',
     seasonEn: 'Year-Round (Indoor panoramic salon + open balcony on Piazza Duomo)',
     seasonIt: 'Tutto l’Anno (Salone panoramico interno + balconata su Piazza Duomo)',
-    image: '/images/venues/terrazza-21/terrazza-21-interior-01.webp',
+    image: '/images/pillars/rooftops-04.webp',
   },
   {
     rank: 4,
@@ -133,7 +135,7 @@ const ROOFTOPS = [
     priceIt: 'Aperitivo €20–€25 · Tavoli VIP da €300–€600',
     seasonEn: 'Year-Round (Glass winter dome + lush summer garden)',
     seasonIt: 'Tutto l’Anno (Cupola vetrata invernale + giardino estivo)',
-    image: '/images/venues/just-me-milano/just-me-milano-interior-01.webp',
+    image: '/images/pillars/rooftops-05.webp',
   },
 ];
 
@@ -208,6 +210,18 @@ export default async function RooftopsPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
 
+      <div data-rooftops-top-hero="true" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+        <div className="relative h-64 sm:h-80 w-full rounded-2xl overflow-hidden border border-champagne/30">
+          <Image
+            src="/images/pillars/rooftops-01.webp"
+            alt="Milan Panoramic Rooftop Bars & Skyline Lounges"
+            fill
+            priority
+            className="object-cover"
+            sizes="100vw"
+          />
+        </div>
+      </div>
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-champagne/30 bg-champagne/10 mb-5">
           <Sparkles className="w-3.5 h-3.5 text-champagne" />
@@ -234,8 +248,8 @@ export default async function RooftopsPage({
           </p>
           <p className="text-sm text-white/75 leading-relaxed">
             {isIt
-              ? '1. Voya Rooftop (20° piano, 85m, vista 360° CityLife e Alpi, aperitivo + DJ set fino alle 02:30). 2. Ceresio 7 (piscine in quota in Porta Volta, alta cucina e mixology). 3. Terrazza Duomo 21 (affaccio frontale sulle guglie del Duomo). 4. Just Me & Torre Branca (giardino Cavalli + vista a 108m nel Parco Sempione). Prenotazione diretta: WhatsApp +39 351 912 7047.'
-              : '1. Voya Rooftop (20th floor, 85m, 360° CityLife & Alps view, aperitivo + DJ set until 02:30). 2. Ceresio 7 (rooftop pools in Porta Volta, fine dining & mixology). 3. Terrazza Duomo 21 (direct view of the Duomo spires). 4. Just Me & Torre Branca (Cavalli garden + 108m view in Parco Sempione). Direct booking: WhatsApp +39 351 912 7047.'}
+              ? '1. Voya Rooftop (20° piano, 85m, vista 360° CityLife e Alpi, aperitivo + DJ set fino alle 02:30). 2. Ceresio 7 (piscine in quota in Porta Volta, alta cucina e mixology). 3. Terrazza Duomo 21 (affaccio frontale sulle guglie del Duomo). 4. Just Me & Torre Branca (giardino Italo Rota + vista a 108m nel Parco Sempione). Prenotazione diretta: WhatsApp +39 351 912 7047.'
+              : '1. Voya Rooftop (20th floor, 85m, 360° CityLife & Alps view, aperitivo + DJ set until 02:30). 2. Ceresio 7 (rooftop pools in Porta Volta, fine dining & mixology). 3. Terrazza Duomo 21 (direct view of the Duomo spires). 4. Just Me & Torre Branca (Italo Rota garden + 108m view in Parco Sempione). Direct booking: WhatsApp +39 351 912 7047.'}
           </p>
         </div>
       </section>
@@ -352,6 +366,7 @@ export default async function RooftopsPage({
           ))}
         </div>
       </section>
+      <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/rooftops`} />
     </main>
   );
 }

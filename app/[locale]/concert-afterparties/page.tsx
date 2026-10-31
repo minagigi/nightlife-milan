@@ -85,7 +85,7 @@ export async function generateMetadata({
       locale: getLocaleDef(locale)?.ogLocale || 'it_IT',
       images: [
         {
-          url: `${baseUrl}/images/venues/aria-club-milano/aria-club-milano-interior-01.webp`,
+          url: `${baseUrl}/images/pillars/concert-afterparties-01.webp`,
           width: 1200,
           height: 630,
           alt: title,
@@ -96,7 +96,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title,
       description,
-      images: [`${baseUrl}/images/venues/aria-club-milano/aria-club-milano-interior-01.webp`],
+      images: [`${baseUrl}/images/pillars/concert-afterparties-01.webp`],
     },
   };
 }
@@ -208,7 +208,7 @@ const PRIORITY_CONCERT_CLUBS = [
     distanceEn: '10 min from San Siro/Ippodromo · 18 min direct M2 from Forum Assago (Cadorna)',
     pricesIt: 'Royal Aperitivo Pre-Concerto €20-30 · Tavoli VIP Post-Concerto €350 - €500 · Privé Branca €1.000+',
     pricesEn: 'Pre-Concert Royal Aperitivo €20-30 · Post-Concert VIP Tables €350 - €500 · Privé Branca €1,000+',
-    image: '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp',
+    image: '/images/pillars/concert-afterparties-01.webp',
     descIt:
       'Aperto 7 notti su 7 fino alle 05:00, il Just Me di Italo Rota sotto la Torre Branca è il locale scelto dalle produzioni internazionali per gli afterparty ufficiali e informali dopo gli show a San Siro, La Maura e Forum Assago.',
     descEn:
@@ -225,7 +225,7 @@ const PRIORITY_CONCERT_CLUBS = [
     distanceEn: '12 min M5 from San Siro · 22 min M2 from Assago Forum · 3 min from Alcatraz',
     pricesIt: 'Aperitivo Cantato Pre-Show €20-25 · Tavoli VIP Post-Concerto €300 - €800 (100% in bottiglie)',
     pricesEn: 'Pre-Show Singing Aperitivo €20-25 · Post-Concert VIP Tables €300 - €800 (100% in bottles)',
-    image: '/images/venues/pineta-milano/pineta-milano-ingresso-01.webp',
+    image: '/images/pillars/concert-afterparties-02.webp',
     descIt:
       'Il tempio del divertimento cantato e del clubbing reggaeton/commerciale in zona Corso Como: perfetto per continuare a cantare dopo un grande live del venerdì o sabato sera.',
     descEn:
@@ -242,7 +242,7 @@ const PRIORITY_CONCERT_CLUBS = [
     distanceEn: '2-minute walk (150m from San Siro Stadium & Snai Hippodrome gates)',
     pricesIt: 'Royal Aperitivo Pre-Live €15-25 · Tavoli VIP Pista €250 · Privé Aria €400 · Console €600',
     pricesEn: 'Pre-Live Royal Aperitivo €15-25 · Dancefloor VIP €250 · Privé Aria €400 · Console €600',
-    image: '/images/venues/aria-club-milano/aria-club-milano-interior-01.webp',
+    image: '/images/pillars/concert-afterparties-03.webp',
     descIt:
       'Quando 75.000 persone escono da un concerto a San Siro o agli I-Days dell Ippodromo, Aria Club ti permette di entrare in discoteca a piedi in 120 secondi, saltando 90 minuti di paralisi del traffico.',
     descEn:
@@ -259,7 +259,7 @@ const PRIORITY_CONCERT_CLUBS = [
     distanceEn: '6 min M5 from San Siro (Domodossola) · 18 min from Forum Assago',
     pricesIt: 'Apericena XL Pre-Concerto €20-30 · Tavoli VIP Dopocena da €250 - €400',
     pricesEn: 'Pre-Concert XXL Apericena €20-30 · Post-Concert VIP Tables from €250 - €400',
-    image: '/images/55-milano.webp',
+    image: '/images/pillars/concert-afterparties-04.webp',
     descIt:
       'Oltre 1.000 mq in zona Sempione: punto strategico sia per fare Apericena XL alle 18:30 prima di andare a San Siro in 4 fermate di metro, sia per tornare a ballare dopo il concerto.',
     descEn:
@@ -276,7 +276,7 @@ const PRIORITY_CONCERT_CLUBS = [
     distanceEn: '4 min (3 M5 stops Lotto/Portello) from San Siro & La Maura Hippodrome',
     pricesIt: 'Sunset Drink Pre-Show €20-30 · Tavoli Vetrata Skyline Post-Concerto €250 - €450',
     pricesEn: 'Pre-Show Sunset Drinks €20-30 · Post-Concert Skyline Glass VIP Tables €250 - €450',
-    image: '/images/voya-rooftop-milan.webp',
+    image: '/images/pillars/concert-afterparties-05.webp',
     descIt:
       'Dal 20° piano vedi letteralmente il palco e i fasci di luce dello Stadio San Siro illuminato: il salotto panoramico perfetto per un drink pre-concerto o un afterparty raffinato lontano dalla calca.',
     descEn:
@@ -293,7 +293,7 @@ const PRIORITY_CONCERT_CLUBS = [
     distanceEn: '15 min M5/M2 from San Siro & Assago · 10 min from Fabrique Milano',
     pricesIt: 'Tavoli VIP Pista da €300 · Privé Rialzato €500 - €800 · Console da €1.000',
     pricesEn: 'Dancefloor VIP from €300 · Elevated Privé €500 - €800 · Console from €1,000',
-    image: '/images/repvblic-milano.webp',
+    image: '/images/pillars/concert-afterparties-06.webp',
     descIt:
       'Perfetto dopo i grandi concerti hip-hop, urban, pop ed elettronici del venerdì, sabato e lunedì sera (Dirty Monday), con impianto audio-luci da club internazionale.',
     descEn:

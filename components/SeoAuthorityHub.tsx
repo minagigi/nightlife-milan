@@ -5,10 +5,11 @@ import { getSeoStandard21Copy } from '@/lib/seoStandard21Copy';
 
 interface SeoAuthorityHubProps {
   lang: LocaleCode;
+  pageKey?: string;
 }
 
-export default function SeoAuthorityHub({ lang }: SeoAuthorityHubProps) {
-  const copy = getSeoStandard21Copy(lang);
+export default function SeoAuthorityHub({ lang, pageKey }: SeoAuthorityHubProps) {
+  const copy = getSeoStandard21Copy(lang, pageKey);
   const mapsDirectionsUrl = new URL('https://www.google.com/maps/dir/');
   mapsDirectionsUrl.searchParams.set('api', '1');
   mapsDirectionsUrl.searchParams.set('destination', 'Milano, Italia');
@@ -70,7 +71,7 @@ export default function SeoAuthorityHub({ lang }: SeoAuthorityHubProps) {
               key={sec.anchorId}
               className="grid grid-cols-1 gap-8 bg-[#050505] p-6 sm:p-10 lg:grid-cols-12"
             >
-              <div className="space-y-4 lg:col-span-7">
+              <div className={sec.imageSrc ? 'space-y-4 lg:col-span-7' : 'space-y-4 lg:col-span-12'}>
                 <div className="flex items-baseline gap-3">
                   <span className="font-serif italic text-3xl text-[#D6BE96]">0{sec.index}</span>
                   <h3
@@ -107,21 +108,23 @@ export default function SeoAuthorityHub({ lang }: SeoAuthorityHubProps) {
                 </div>
               </div>
 
-              <figure className="flex flex-col justify-between overflow-hidden border border-[#F6F1E7]/14 bg-[#0B0A09] lg:col-span-5">
-                <img
-                  src={sec.imageSrc}
-                  alt={sec.imageAlt}
-                  title={sec.h3Title}
-                  width={1600}
-                  height={899}
-                  loading="lazy"
-                  decoding="async"
-                  className="aspect-[16/9] h-auto w-full object-cover border-b border-[#F6F1E7]/14"
-                />
-                <figcaption className="p-4 font-mono text-[11px] uppercase tracking-[0.14em] leading-relaxed text-[#847C6F]">
-                  {sec.h3Title}
-                </figcaption>
-              </figure>
+              {sec.imageSrc ? (
+                <figure className="flex flex-col justify-between overflow-hidden border border-[#F6F1E7]/14 bg-[#0B0A09] lg:col-span-5">
+                  <img
+                    src={sec.imageSrc}
+                    alt={sec.imageAlt}
+                    title={sec.h3Title}
+                    width={1600}
+                    height={899}
+                    loading="lazy"
+                    decoding="async"
+                    className="aspect-[16/9] h-auto w-full object-cover border-b border-[#F6F1E7]/14"
+                  />
+                  <figcaption className="p-4 font-mono text-[11px] uppercase tracking-[0.14em] leading-relaxed text-[#847C6F]">
+                    {sec.h3Title}
+                  </figcaption>
+                </figure>
+              ) : null}
             </article>
           ))}
         </div>

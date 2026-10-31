@@ -54,7 +54,7 @@ export async function generateMetadata({
       locale: getLocaleDef(locale)?.ogLocale || 'en_US',
       images: [
         {
-          url: `${baseUrl}/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp`,
+          url: `${baseUrl}/images/pillars/guest-lists-hero.webp`,
           width: 1200,
           height: 630,
           alt: title,
@@ -65,7 +65,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title,
       description,
-      images: [`${baseUrl}/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp`],
+      images: [`${baseUrl}/images/pillars/guest-lists-hero.webp`],
     },
   };
 }
@@ -157,6 +157,7 @@ export default async function GuestListsPage({
 
   return (
     <main className="flex-grow pt-24 pb-20 bg-[#131009]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10"><div className="relative h-64 md:h-80 w-full rounded-2xl overflow-hidden border border-champagne/25"><Image src="/images/pillars/guest-lists-hero.webp" alt="Milan Nightclub Guest Lists 2026" title="Milan Nightclub Guest Lists 2026" fill priority sizes="100vw" className="object-cover" /></div></div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

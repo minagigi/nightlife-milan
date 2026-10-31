@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
   const title = seoTitle(tr(locale, 'Milan Nightlife Zones 2026 | Best Nightlife Districts & Areas | Nightlife Milan', 'Zone Vita Notturna Milano 2026 | Migliori Quartieri | Nightlife Milan'));
   const description = withWhatsApp(tr(locale, 'Explore Milan\'s top nightlife districts: Corso Como, Navigli, Brera, Isola, Sempione, Porta Romana. Find the best clubs, bars and events by zone. Updated 2026.', 'Esplora i migliori quartieri della vita notturna milanese: Corso Como, Navigli, Brera, Isola, Sempione, Porta Romana. Scopri club, bar ed eventi per zona. Aggiornato 2026.'), locale);
-  const ogImage = `${baseUrl}/images/zones/zone-brera.jpg`;
+  const ogImage = `${baseUrl}/images/pillars/zone-01.webp`;
 
   return {
     title,
@@ -57,18 +57,18 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 const zoneImages: Record<string, string> = {
-  corso_como: '/images/milan-nightlife-corso-como-district-clubs.webp',
-  navigli: '/images/milan-navigli-nightlife-canal-bars.webp',
-  brera: '/images/milan-brera-nightlife-luxury-bars.webp',
-  isola: '/images/milan-isola-nightlife-rooftop-bars.webp',
-  sempione: '/images/milan-sempione-nightlife-just-me-club.webp',
-  porta_romana: '/images/milan-porta-romana-nightlife-magazzini.webp',
-  citylife: '/images/milan-citylife-nightlife-clubs.webp',
-  centro: '/images/milan-centro-nightlife-duomo-bars.webp',
-  'parco-sempione': '/images/venues/just-me-milano/just-me-milano-interior-01.webp',
-  'citylife-portello': '/images/venues/voya-rooftop-milan/voya-rooftop-milan-interior-01.webp',
-  'duomo-san-babila': '/images/venues/terrazza-21/terrazza-21-interior-01.webp',
-  'san-siro': '/images/venues/aria-club-milano/aria-club-milano-interior-01.webp',
+  corso_como: '/images/pillars/zone-01.webp',
+  navigli: '/images/pillars/zone-02.webp',
+  brera: '/images/pillars/zone-03.webp',
+  isola: '/images/pillars/zone-04.webp',
+  sempione: '/images/pillars/zone-05.webp',
+  porta_romana: '/images/pillars/zone-06.webp',
+  citylife: '/images/pillars/zone-07.webp',
+  centro: '/images/pillars/zone-08.webp',
+  'parco-sempione': '/images/pillars/zone-09.webp',
+  'citylife-portello': '/images/pillars/zone-10.webp',
+  'duomo-san-babila': '/images/pillars/zone-11.webp',
+  'san-siro': '/images/pillars/zone-12.webp',
 };
 
 export default async function ZonesPage({

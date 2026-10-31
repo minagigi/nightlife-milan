@@ -290,7 +290,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
           </div>
         </div>
       </aside>
-      <SeoAuthorityHub lang={locale} />
+      <SeoAuthorityHub lang={locale} pageKey={cleanPath} />
     </>
   );
   }
@@ -413,7 +413,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
           </section>
         </div>
       </aside>
-      <SeoAuthorityHub lang={locale} />
+      <SeoAuthorityHub lang={locale} pageKey={cleanPath} />
     </>
   );
   }
@@ -463,7 +463,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
           </section>
         </div>
       </aside>
-      <SeoAuthorityHub lang={locale} />
+      <SeoAuthorityHub lang={locale} pageKey={cleanPath} />
     </>
   );
   }
@@ -623,7 +623,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
           </section>
         </div>
       </aside>
-      <SeoAuthorityHub lang={locale} />
+      <SeoAuthorityHub lang={locale} pageKey={cleanPath} />
     </>
   );
   }
@@ -744,7 +744,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
           </section>
         </div>
       </aside>
-      <SeoAuthorityHub lang={locale} />
+      <SeoAuthorityHub lang={locale} pageKey={cleanPath} />
     </>
   );
   }
@@ -842,7 +842,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
           </section>
         </div>
       </aside>
-      <SeoAuthorityHub lang={locale} />
+      <SeoAuthorityHub lang={locale} pageKey={cleanPath} />
     </>
   );
   }
@@ -898,7 +898,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
         </div>
       </div>
     </aside>
-      <SeoAuthorityHub lang={locale} />
+      <SeoAuthorityHub lang={locale} pageKey={cleanPath} />
     </>
   );
 }

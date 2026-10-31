@@ -18,6 +18,33 @@ import type { LocaleCode } from '@/lib/i18n/locales';
 // ISR Configuration
 export const revalidate = 3600;
 
+const GENRE_HERO_MAP: Record<string, string> = {
+  techno: '/images/pillars/genre-hero-01.webp',
+  house: '/images/pillars/genre-hero-02.webp',
+  'afro-house': '/images/pillars/genre-hero-03.webp',
+  'hip-hop': '/images/pillars/genre-hero-04.webp',
+  reggaeton: '/images/pillars/genre-hero-05.webp',
+  'dinner-show': '/images/pillars/genre-hero-06.webp',
+  commercial: '/images/pillars/genre-hero-07.webp',
+  latin: '/images/pillars/genre-hero-08.webp',
+  afrobeats: '/images/pillars/genre-hero-09.webp',
+  'open-format': '/images/pillars/genre-hero-10.webp',
+};
+
+const GENRE_INLINE_MAP: Record<string, string[]> = {
+  techno: ['/images/pillars/genre-inline-01-a.webp', '/images/pillars/genre-inline-01-b.webp', '/images/pillars/genre-inline-01-c.webp', '/images/pillars/genre-inline-01-d.webp'],
+  house: ['/images/pillars/genre-inline-02-a.webp', '/images/pillars/genre-inline-02-b.webp', '/images/pillars/genre-inline-02-c.webp', '/images/pillars/genre-inline-02-d.webp'],
+  'afro-house': ['/images/pillars/genre-inline-03-a.webp', '/images/pillars/genre-inline-03-b.webp', '/images/pillars/genre-inline-03-c.webp', '/images/pillars/genre-inline-03-d.webp'],
+  'hip-hop': ['/images/pillars/genre-inline-04-a.webp', '/images/pillars/genre-inline-04-b.webp', '/images/pillars/genre-inline-04-c.webp', '/images/pillars/genre-inline-04-d.webp'],
+  reggaeton: ['/images/pillars/genre-inline-05-a.webp', '/images/pillars/genre-inline-05-b.webp', '/images/pillars/genre-inline-05-c.webp', '/images/pillars/genre-inline-05-d.webp'],
+  'dinner-show': ['/images/pillars/genre-inline-06-a.webp', '/images/pillars/genre-inline-06-b.webp', '/images/pillars/genre-inline-06-c.webp', '/images/pillars/genre-inline-06-d.webp'],
+  commercial: ['/images/pillars/genre-inline-07-a.webp', '/images/pillars/genre-inline-07-b.webp', '/images/pillars/genre-inline-07-c.webp', '/images/pillars/genre-inline-07-d.webp'],
+  latin: ['/images/pillars/genre-inline-08-a.webp', '/images/pillars/genre-inline-08-b.webp', '/images/pillars/genre-inline-08-c.webp', '/images/pillars/genre-inline-08-d.webp'],
+  afrobeats: ['/images/pillars/genre-inline-09-a.webp', '/images/pillars/genre-inline-09-b.webp', '/images/pillars/genre-inline-09-c.webp', '/images/pillars/genre-inline-09-d.webp'],
+  'open-format': ['/images/pillars/genre-inline-10-a.webp', '/images/pillars/genre-inline-10-b.webp', '/images/pillars/genre-inline-10-c.webp', '/images/pillars/genre-inline-10-d.webp'],
+};
+
+
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
 };
@@ -313,15 +340,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const canonical = `${baseUrl}${localePrefix(locale)}/genres/${slug}`;
 
   const isIt = locale === 'it';
-  const genreImages: Record<string, string> = {
-    techno: '/images/club-techno.webp',
-    house: '/images/milan-nightclub-luxury-vip-champagne.webp',
-    'afro-house': '/images/venues/aria-club-milano/aria-club-milano-interior-01.webp',
-    'hip-hop': '/images/milan-nightclub-dancefloor-vip.webp',
-    reggaeton: '/images/milan-club-crowd-dancefloor-night.webp',
-    'dinner-show': '/images/aperitivo-milan-navigli-evening.webp',
-  };
-  const ogImage = `${baseUrl}${genreImages[slug] || '/images/milan-nightclub-luxury-vip-champagne.webp'}`;
+  const ogImage = `${baseUrl}${GENRE_HERO_MAP[slug] || '/images/pillars/genre-hero-01.webp'}`;
 
   return {
     title,
@@ -355,16 +374,8 @@ export default async function GenrePage({ params }: Props) {
   const typedLocale = (locale === 'it' ? 'it' : 'en') as 'en' | 'it';
   const isIt = typedLocale === 'it';
   const lp = localePrefix(locale);
-  const genreHeroMap: Record<string, string> = {
-    'hip-hop': '/images/genres/hip-hop-hero.webp',
-    'techno': '/images/genres/techno-hero.webp',
-    'house': '/images/genres/house-hero.webp',
-    'commercial': '/images/genres/commercial-hero.webp',
-    'latin': '/images/genres/latin-hero.webp',
-    'afrobeats': '/images/genres/afrobeats-hero.webp',
-    'open-format': '/images/genres/open-format-hero.webp',
-  };
-  const genreHeroImg = genreHeroMap[slug] || '/images/milan-nightclub-luxury-vip-champagne.webp';
+  const genreHeroImg = GENRE_HERO_MAP[slug] || '/images/pillars/genre-hero-01.webp';
+  const genreInlineImgs = GENRE_INLINE_MAP[slug] || GENRE_INLINE_MAP.techno;
 
   const genre = genreData[slug];
 
@@ -440,6 +451,18 @@ export default async function GenrePage({ params }: Props) {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <div className="flex flex-col lg:flex-row gap-12 items-start">
           <div className="flex-1">
+            <div className="relative h-64 md:h-80 w-full rounded-2xl overflow-hidden border border-champagne/25 mb-8">
+              <Image
+                src={genreHeroImg}
+                alt={genre.heroTitle[typedLocale]}
+                title={genre.heroTitle[typedLocale]}
+                fill
+                priority
+                quality={85}
+                sizes="(max-width: 1024px) 100vw, 60vw"
+                className="object-cover"
+              />
+            </div>
             <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-champagne tracking-tighter mb-6">
               {genre.heroTitle[typedLocale]}
             </h1>
@@ -491,19 +514,19 @@ export default async function GenrePage({ params }: Props) {
             <div className="grid grid-cols-2 gap-2 mb-6">
               {[
                 {
-                  src: '/images/milan-nightclub-dancefloor-vip.webp',
+                  src: genreInlineImgs[0],
                   alt: `${genre.name} club Milan dancefloor crowd`,
                 },
                 {
-                  src: '/images/milan-club-crowd-dancefloor-night.webp',
+                  src: genreInlineImgs[1],
                   alt: `${genre.name} night Milan club atmosphere`,
                 },
                 {
-                  src: '/images/bottle-service-milan-vip-nightclub.webp',
+                  src: genreInlineImgs[2],
                   alt: `VIP bottle service ${genre.name} club Milan`,
                 },
                 {
-                  src: '/images/milan-nightclub-luxury-vip-champagne.webp',
+                  src: genreInlineImgs[3],
                   alt: `${genre.name} event Milan luxury nightclub`,
                 },
               ].map((img, i) => (

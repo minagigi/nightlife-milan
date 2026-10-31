@@ -72,13 +72,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'website',
       siteName: 'Nightlife Milan',
       locale: isIt ? 'it_IT' : 'en_US',
-      images: [{ url: `${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`, width: 1200, height: 630 }],
+      images: [{ url: `${baseUrl}/images/pillars/events-tonight-hero.webp`, width: 1200, height: 630 }],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: [`${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`],
+      images: [`${baseUrl}/images/pillars/events-tonight-hero.webp`],
     },
   };
 }
@@ -231,7 +231,7 @@ export default async function EventsTonightPage({ params }: Props) {
         </div>
         <div className="relative w-full h-56 sm:h-72 rounded-2xl overflow-hidden mb-6 border border-champagne/25">
           <Image
-            src="/images/milan-nightclub-luxury-vip-champagne.webp"
+            src="/images/pillars/events-tonight-hero.webp"
             alt={tr(locale, 'Tonight in Milan', 'Stasera a Milano')}
             fill
             priority

@@ -802,7 +802,7 @@ export const venuesData: Venue[] = [
       altTextImg: { en: "Tocqueville 13 Corso Como Milan VIP tables and dinner show", it: "Tocqueville 13 Corso Como Milano tavoli VIP e dinner show" },
       insiderTip: { en: "Book the Friday or Saturday Dinner Show to keep your table as the room converts into a full nightclub at midnight.", it: "Prenota il Dinner Show del venerdì o sabato per mantenere la tua base tavolo quando a mezzanotte la sala diventa discoteca." }
     },
-    image: "/images/11-clubroom-milan.webp",
+    image: "/images/pillars/venue-tocqueville.webp",
     isManaged: true,
     isPriority: false,
     isFeatured: false,
@@ -834,7 +834,7 @@ export const venuesData: Venue[] = [
       altTextImg: { en: "Alcatraz Milano mega club 3 dancefloors", it: "Alcatraz Milano mega club 3 piste da ballo" },
       insiderTip: { en: "Ideal for large university groups, graduation parties, Halloween, and New Year's Eve — book the elevated VIP balcony overlooking the main stage.", it: "Ideale per grandi gruppi universitari, feste di laurea, Halloween e Capodanno — prenota la balconata VIP rialzata sul palco centrale." }
     },
-    image: "/images/milan-club-crowd-dancefloor-night.webp",
+    image: "/images/pillars/venue-alcatraz.webp",
     isManaged: true,
     isPriority: false,
     isFeatured: false,
@@ -866,7 +866,7 @@ export const venuesData: Venue[] = [
       altTextImg: { en: "Fabrique Milano warehouse electronic festival", it: "Fabrique Milano warehouse festival elettronico" },
       insiderTip: { en: "Reserve the elevated VIP ring to enjoy international headliners with dedicated bottle service and private bar access.", it: "Prenota il ring VIP rialzato per goderti gli headliner internazionali con bottle service dedicato e bar privato." }
     },
-    image: "/images/club-techno.webp",
+    image: "/images/pillars/venue-fabrique.webp",
     isManaged: true,
     isPriority: false,
     isFeatured: false,
@@ -898,7 +898,7 @@ export const venuesData: Venue[] = [
       altTextImg: { en: "Amnesia Milano techno and house club", it: "Amnesia Milano club techno e house" },
       insiderTip: { en: "The Backstage Console Privé puts you directly behind the world's top Techno and Tech-House selectors.", it: "Il Privé Console Backstage ti posiziona esattamente dietro i migliori DJ Techno e Tech-House del mondo." }
     },
-    image: "/images/club-techno.webp",
+    image: "/images/pillars/venue-amnesia.webp",
     isManaged: true,
     isPriority: false,
     isFeatured: false,

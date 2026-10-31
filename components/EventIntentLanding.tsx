@@ -123,7 +123,7 @@ const INTENTS: Record<EventIntent, {
     },
     heading: { en: 'International Parties Milan', it: 'Serate Internazionali Milano', es: 'Fiestas Internacionales Milan', fr: 'Soirees Internationales Milan', de: 'Internationale Partys Mailand', pt: 'Festas Internacionais Milao' },
     audience: { en: 'International crowd, expats, visitors and mixed groups looking for premium Milan nightlife.', it: 'Pubblico internazionale, expat, visitatori e gruppi misti che cercano la nightlife premium di Milano.', es: 'Publico internacional, expatriados, visitantes y grupos mixtos que buscan nightlife premium.', fr: 'Public international, expatries, visiteurs et groupes mixtes recherchant une nightlife premium.', de: 'Internationales Publikum, Expats, Besucher und gemischte Gruppen fur gehobenes Nachtleben.', pt: 'Publico internacional, expatriados, visitantes e grupos mistos que procuram nightlife premium.' },
-    hero: '/images/venues/just-me-milano/just-me-milano-interior-01.webp',
+    hero: '/images/pillars/intent-international-hero.webp',
     venueIds: ['v-justme', 'v-pineta'],
   },
   'university-erasmus': {
@@ -145,7 +145,7 @@ const INTENTS: Record<EventIntent, {
     },
     heading: { en: 'University & Erasmus Parties Milan', it: 'Serate Universitarie ed Erasmus Milano', es: 'Fiestas Universitarias y Erasmus Milan', fr: 'Soirees Etudiantes et Erasmus Milan', de: 'Studenten- und Erasmus-Partys Mailand', pt: 'Festas Universitarias e Erasmus Milao' },
     audience: { en: 'University students, Erasmus groups and international students who want a social, energetic club night.', it: 'Studenti universitari, gruppi Erasmus e studenti internazionali che cercano una serata sociale ed energica.', es: 'Universitarios, grupos Erasmus y estudiantes internacionales que buscan una noche social y energica.', fr: 'Etudiants, groupes Erasmus et internationaux qui recherchent une soiree sociale et energique.', de: 'Studierende, Erasmus-Gruppen und internationale Studierende fur eine lebhafte Clubnacht.', pt: 'Universitarios, grupos Erasmus e estudantes internacionais que procuram uma noite social e energica.' },
-    hero: '/images/venues/just-me-milano/just-me-milano-interior-01.webp',
+    hero: '/images/pillars/intent-erasmus-hero.webp',
     venueIds: ['v-justme', 'v-pineta', 'v-aria'],
     terms: ['university', 'universitario', 'universitaria', 'erasmus', 'student', 'college'],
   },
@@ -168,7 +168,7 @@ const INTENTS: Record<EventIntent, {
     },
     heading: { en: '18+ Parties Milan', it: 'Serate 18+ Milano', es: 'Fiestas 18+ Milan', fr: 'Soirees 18+ Milan', de: 'Partys ab 18 in Mailand', pt: 'Festas 18+ Milao' },
     audience: { en: 'Guests aged 18 and over. Always check the individual event and bring a valid original ID.', it: 'Pubblico dai 18 anni. Controlla sempre il singolo evento e porta un documento originale valido.', es: 'Publico desde 18 anos. Comprueba siempre el evento y lleva un documento original valido.', fr: 'Public a partir de 18 ans. Verifiez l’evenement et apportez une piece d’identite originale valide.', de: 'Gaste ab 18 Jahren. Prufen Sie das einzelne Event und bringen Sie einen gultigen Originalausweis mit.', pt: 'Publico a partir dos 18 anos. Confirme sempre o evento e leve um documento original valido.' },
-    hero: '/images/venues/pineta-milano/pineta-milano-interior-01.webp',
+    hero: '/images/pillars/intent-18plus-hero.webp',
     venueIds: ['v-pineta', 'v-aria'],
   },
   '21-plus': {
@@ -190,7 +190,7 @@ const INTENTS: Record<EventIntent, {
     },
     heading: { en: '21+ Parties Milan', it: 'Serate 21+ Milano', es: 'Fiestas 21+ Milan', fr: 'Soirees 21+ Milan', de: 'Partys ab 21 in Mailand', pt: 'Festas 21+ Milao' },
     audience: { en: 'A mature international 21+ crowd, with elegant dress code and premium table service.', it: 'Pubblico internazionale adulto 21+, dress code elegante e servizio tavoli premium.', es: 'Publico internacional adulto 21+, codigo elegante y servicio de mesas premium.', fr: 'Public international adulte 21+, tenue elegante et service de tables premium.', de: 'Internationales Publikum ab 21, eleganter Dresscode und Premium-Tischservice.', pt: 'Publico internacional adulto 21+, dress code elegante e servico de mesas premium.' },
-    hero: '/images/venues/just-me-milano/just-me-milano-interior-01.webp',
+    hero: '/images/pillars/intent-21plus-hero.webp',
     venueIds: ['v-justme'],
   },
 };
@@ -344,10 +344,10 @@ export default async function EventIntentLanding({ intent, locale }: { intent: E
         <div className="max-w-6xl mx-auto px-5 sm:px-8 py-16">
           <h2 className="font-serif text-3xl sm:text-4xl font-bold mb-10">{COMMON.venues[lang]}</h2>
           <div className="divide-y divide-white/10 border-y border-white/10">
-            {venues.map((venue) => (
-              <article key={venue.id} className="grid md:grid-cols-[220px_1fr_auto] gap-6 py-7 items-center">
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <Image src={venue.image || config.hero} alt={getLocalizedText(venue.localizedContent.name, locale)} fill sizes="220px" className="object-cover" />
+            {venues.map((venue, idx) => (
+              <article key={venue.id} className="grid md:grid-cols-[80px_1fr_auto] gap-6 py-7 items-center">
+                <div className="h-16 w-16 rounded-2xl border border-champagne/30 bg-champagne/10 flex items-center justify-center">
+                  <span className="font-serif text-2xl font-bold text-champagne">#{idx + 1}</span>
                 </div>
                 <div>
                   <h3 className="font-serif text-2xl font-bold mb-2">{getLocalizedText(venue.localizedContent.name, locale)}</h3>

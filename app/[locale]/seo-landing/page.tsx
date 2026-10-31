@@ -32,7 +32,7 @@ export default async function LandingPage({ params }: Props) {
     '@context': 'https://schema.org',
     '@type': 'EntertainmentBusiness',
     name: 'Just Me Milano & Nightlife Milan VIP Concierge',
-    image: 'https://nightlifemilan.com/images/just-me-milano.webp',
+    image: 'https://nightlifemilan.com/images/pillars/seo-landing-01.webp',
     '@id': 'https://nightlifemilan.com/clubs/just-me-milano',
     url: 'https://nightlifemilan.com/clubs/just-me-milano',
     telephone: '+393519127047',
@@ -76,7 +76,7 @@ export default async function LandingPage({ params }: Props) {
         }
         ctaText={isIt ? 'Prenota ora su WhatsApp +39 351 912 7047' : 'Book via WhatsApp +39 351 912 7047'}
         ctaLink="https://wa.me/393519127047"
-        imageUrl="/images/just-me-milano.webp"
+        imageUrl="/images/pillars/seo-landing-01.webp"
       />
 
       <section id="eventi" className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-14">

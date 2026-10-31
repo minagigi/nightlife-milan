@@ -87,7 +87,7 @@ export async function generateMetadata({
       locale: getLocaleDef(locale)?.ogLocale || 'it_IT',
       images: [
         {
-          url: `${baseUrl}/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp`,
+          url: `${baseUrl}/images/pillars/mfw-01.webp`,
           width: 1200,
           height: 630,
           alt: title,
@@ -98,7 +98,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title,
       description,
-      images: [`${baseUrl}/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp`],
+      images: [`${baseUrl}/images/pillars/mfw-01.webp`],
     },
   };
 }
@@ -193,7 +193,7 @@ const PRIORITY_FASHION_VENUES = [
     roleEn: 'Official Flagship Hub for MFW After-Shows, Fuorisalone & F1 Monza (Mon-Sun)',
     specsIt: 'Capacità Buyout: fino a 800 ospiti · Privé Branca + Giardino + Ristorante Cavalli',
     specsEn: 'Buyout Capacity: up to 800 guests · Privé Branca + Garden + Cavalli Restaurant',
-    image: '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp',
+    image: '/images/pillars/mfw-01.webp',
   },
   {
     rank: 2,
@@ -205,7 +205,7 @@ const PRIORITY_FASHION_VENUES = [
     roleEn: 'Singing Dinners for Showrooms, Model Agencies & High-Energy Clubbing',
     specsIt: 'Capacità Buyout: fino a 650 ospiti · Brandizzazione LED Wall & Bottle Show',
     specsEn: 'Buyout Capacity: up to 650 guests · Custom LED Wall Branding & Bottle Shows',
-    image: '/images/venues/pineta-milano/pineta-milano-ingresso-01.webp',
+    image: '/images/pillars/mfw-02.webp',
   },
   {
     rank: 3,
@@ -217,7 +217,7 @@ const PRIORITY_FASHION_VENUES = [
     roleEn: 'Large-Scale International Showcases, Summer Garden (Jun/Sep) & 3 VIP Zones',
     specsIt: 'Capacità Buyout: fino a 1.200 ospiti · Parcheggio VIP & Super Privé Console',
     specsEn: 'Buyout Capacity: up to 1,200 guests · VIP Valet Parking & DJ Console Super Privé',
-    image: '/images/venues/aria-club-milano/aria-club-milano-interior-01.webp',
+    image: '/images/pillars/mfw-03.webp',
   },
   {
     rank: 4,
@@ -229,7 +229,7 @@ const PRIORITY_FASHION_VENUES = [
     roleEn: 'Independent Runways, Fuorisalone Product Launches, Corporate Cocktails & Dinner Shows',
     specsIt: 'Capacità Buyout: fino a 1.000 ospiti · Ex Deposito Storico + Terrazza',
     specsEn: 'Buyout Capacity: up to 1,000 guests · Historic Depot + Open-Air Terrace',
-    image: '/images/55-milano.webp',
+    image: '/images/pillars/mfw-04.webp',
   },
   {
     rank: 5,
@@ -241,7 +241,7 @@ const PRIORITY_FASHION_VENUES = [
     roleEn: 'Press Days, Luxury Brand Sunset Cocktails & Private 360° Skyline Parties',
     specsIt: 'Capacità Buyout: fino a 300 ospiti al 20° piano · Vista CityLife & Duomo/San Siro',
     specsEn: 'Buyout Capacity: up to 300 guests on the 20th floor · 360° Skyline Glass Walls',
-    image: '/images/voya-rooftop-milan.webp',
+    image: '/images/pillars/mfw-05.webp',
   },
   {
     rank: 6,
@@ -253,7 +253,7 @@ const PRIORITY_FASHION_VENUES = [
     roleEn: 'Streetwear & Urban Capsule Afterparties, Dirty Monday & Fashion Weekends',
     specsIt: 'Capacità Buyout: fino a 600 ospiti · Lighting Rig Immersivo & Console Privé',
     specsEn: 'Buyout Capacity: up to 600 guests · Immersive Lighting Rig & Console Privé',
-    image: '/images/repvblic-milano.webp',
+    image: '/images/pillars/mfw-06.webp',
   },
 ];
 

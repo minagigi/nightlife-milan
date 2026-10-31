@@ -12,7 +12,7 @@ export const mockZones: Zone[] = [
       en: 'The historic heart of Milan, known for its cobbled streets, high-end boutiques, and exclusive lounges frequented by the fashion elite.',
       it: 'Il cuore storico di Milano, noto per le sue strade acciottolate, boutique di lusso e lounge esclusive frequentate dall\'élite della moda.'
     },
-    image: '/images/zones/zone-brera.jpg',
+    image: '/images/pillars/zone-01.webp',
     stats: '8 Clubs, 12 Lounges',
     slug: 'brera',
     tags: ['#Luxury', '#Fashion', '#Exclusive'],
@@ -33,7 +33,7 @@ export const mockZones: Zone[] = [
       en: 'The picturesque canal district, famous for its vibrant aperitivo scene, historic cocktail bars, and energetic, youthful crowds.',
       it: 'Il pittoresco quartiere dei canali, famoso per la sua vivace scena dell\'aperitivo, gli storici cocktail bar e la folla giovane ed energica.'
     },
-    image: '/images/zones/zone-navigli.jpg',
+    image: '/images/pillars/zone-02.webp',
     stats: '15 Bars, 5 Clubs',
     slug: 'navigli',
     tags: ['#Aperitivo', '#Bohemian', '#Cocktails'],
@@ -54,7 +54,7 @@ export const mockZones: Zone[] = [
       en: 'The epicenter of Milanese VIP nightlife, featuring massive commercial clubs, strict door policies, and international DJ sets.',
       it: 'L\'epicentro della vita notturna VIP milanese, con enormi club commerciali, rigide selezioni all\'ingresso e DJ set internazionali.'
     },
-    image: '/images/zones/zone-corso-como.png',
+    image: '/images/pillars/zone-03.webp',
     stats: '10 Clubs, 4 Rooftops',
     slug: 'corso-como',
     tags: ['#VIP', '#Commercial', '#Glamour'],
@@ -75,7 +75,7 @@ export const mockZones: Zone[] = [
       en: 'A rapidly gentrifying neighborhood blending futuristic skyscrapers with hidden speakeasies and cutting-edge electronic music venues.',
       it: 'Un quartiere in rapida gentrificazione che fonde grattacieli futuristici con speakeasy nascosti e locali di musica elettronica all\'avanguardia.'
     },
-    image: '/images/zones/zone-isola.jpg',
+    image: '/images/pillars/zone-04.webp',
     stats: '6 Clubs, 10 Bars',
     slug: 'isola',
     tags: ['#Underground', '#Trendy', '#Speakeasy'],
@@ -96,7 +96,7 @@ export const mockZones: Zone[] = [
       en: 'The most colorful and inclusive district in Milan, known for its historic architecture, LGBTQ+ friendly bars, and lively street atmosphere.',
       it: 'Il quartiere più colorato e inclusivo di Milano, noto per la sua architettura storica, i bar LGBTQ+ friendly e la vivace atmosfera di strada.'
     },
-    image: '/images/zones/zone-porta-venezia.png',
+    image: '/images/pillars/zone-05.webp',
     stats: '12 Bars, 3 Clubs',
     slug: 'porta-venezia',
     tags: ['#LGBTQ+', '#Inclusive', '#Vibrant'],
@@ -117,7 +117,7 @@ export const mockZones: Zone[] = [
       en: 'A stunning backdrop for Milan\'s chicest aperitivos. Expect elegant outdoor seating, premium cocktails, and a sophisticated crowd.',
       it: 'Uno scenario mozzafiato per gli aperitivi più chic di Milano. Aspettati eleganti posti a sedere all\'aperto, cocktail premium e un pubblico sofisticato.'
     },
-    image: '/images/zones/zone-arco-della-pace.jpg',
+    image: '/images/pillars/zone-06.webp',
     stats: '14 Bars, 2 Clubs',
     slug: 'arco-della-pace',
     tags: ['#Chic', '#Aperitivo', '#Outdoor'],
@@ -138,7 +138,7 @@ export const mockZones: Zone[] = [
       en: 'The industrial outskirts where the real underground scene thrives. Massive warehouses, heavy techno, and parties that last until dawn.',
       it: 'La periferia industriale dove prospera la vera scena underground. Enormi magazzini, techno pesante e feste che durano fino all\'alba.'
     },
-    image: '/images/zones/zone-ripamonti.png',
+    image: '/images/pillars/zone-07.webp',
     stats: '4 Clubs, 2 Warehouses',
     slug: 'ripamonti',
     tags: ['#Techno', '#Industrial', '#Afterhours'],
@@ -159,7 +159,7 @@ export const mockZones: Zone[] = [
       en: 'The neighborhood that never sleeps, where creativity meets experimental clubbing. Expect indie venues, art spaces, and a diverse crowd.',
       it: 'Il quartiere che non dorme mai, dove la creatività incontra il clubbing sperimentale. Aspettati locali indie, spazi d\'arte e un pubblico eterogeneo.'
     },
-    image: '/images/zones/zone-nolo.png',
+    image: '/images/pillars/zone-08.webp',
     stats: '7 Bars, 3 Clubs',
     slug: 'nolo',
     tags: ['#Creative', '#Experimental', '#Indie'],
@@ -180,7 +180,7 @@ export const mockZones: Zone[] = [
       en: 'A refined residential area offering a mix of high-quality dining, elegant wine bars, and exclusive, intimate clubbing experiences.',
       it: 'Una raffinata zona residenziale che offre un mix di ristorazione di alta qualità, eleganti enoteche ed esperienze di clubbing esclusive e intime.'
     },
-    image: '/images/zones/zone-porta-romana.png',
+    image: '/images/pillars/zone-09.webp',
     stats: '10 Bars, 2 Clubs',
     slug: 'porta-romana',
     tags: ['#Elegant', '#WineBars', '#Intimate'],
@@ -201,7 +201,7 @@ export const mockZones: Zone[] = [
       en: 'The historic brewing district turned alternative hotspot. Famous for craft beer pubs, live music venues, and a laid-back, post-industrial vibe.',
       it: 'Lo storico quartiere della birra trasformato in hotspot alternativo. Famoso per i pub di birra artigianale, i locali di musica dal vivo e un\'atmosfera rilassata e post-industriale.'
     },
-    image: '/images/zones/zone-lambrate.png',
+    image: '/images/pillars/zone-10.webp',
     stats: '8 Pubs, 4 Live Venues',
     slug: 'lambrate',
     tags: ['#CraftBeer', '#Alternative', '#LiveMusic'],
@@ -222,7 +222,7 @@ export const mockZones: Zone[] = [
       en: 'Milan\'s green monumental heart between Castello Sforzesco and Arco della Pace. Home to #1 Priority club Just Me Milano beneath the illuminated Torre Branca and historic garden clubs with open-air summer and heated winter domes.',
       it: 'Il cuore monumentale nel verde tra il Castello Sforzesco e l\'Arco della Pace. Casa del club Priorità #1 Just Me Milano sotto la Torre Branca illuminata e dei grandi club nel parco con giardino estivo e cupole riscaldate in inverno.'
     },
-    image: '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp',
+    image: '/images/pillars/zone-11.webp',
     stats: '3 Mega-Clubs, 8 Lounges',
     slug: 'parco-sempione',
     tags: ['#JustMe', '#TorreBranca', '#LuxuryClub', '#VIPTables'],
@@ -243,7 +243,7 @@ export const mockZones: Zone[] = [
       en: 'The golden triangle of Milanese high fashion and panoramic terraces. Sip sunset cocktails at eye level with the Cathedral spires at Terrazza Duomo 21 or MIB, then dance inside Armani/Privé on Via Pisoni.',
       it: 'Il triangolo d\'oro dell\'alta moda milanese e delle terrazze panoramiche. Sorseggia un cocktail all\'altezza delle guglie alla Terrazza Duomo 21 o al MIB, poi balla nel tempio sartoriale di Armani/Privé in Via Pisoni.'
     },
-    image: '/images/terrazza-duomo-21.webp',
+    image: '/images/pillars/zone-12.webp',
     stats: '6 Rooftops, 4 Luxury Clubs',
     slug: 'duomo-san-babila',
     tags: ['#DuomoView', '#FashionDistrict', '#Rooftop', '#HauteCouture'],
@@ -264,7 +264,7 @@ export const mockZones: Zone[] = [
       en: 'Futuristic towers meet historic converted tram depots along Via Piero della Francesca. Home to #4 Priority 55 Milano (1,000 sqm Apericena & Dinner Show), #5 Priority Voya Rooftop (20th floor skyline lounge), and Gattopardo.',
       it: 'I grattacieli futuristici incontrano gli storici depositi di Via Piero della Francesca. Casa del #4 Priorità 55 Milano (1.000 mq di Apericena e Dinner Show), del #5 Priorità Voya Rooftop (20° piano vista skyline) e del Gattopardo.'
     },
-    image: '/images/voya-rooftop-milan.webp',
+    image: '/images/pillars/zone-13.webp',
     stats: '5 Clubs, 4 Sky Lounges',
     slug: 'citylife-portello',
     tags: ['#VoyaRooftop', '#55Milano', '#Gattopardo', '#DinnerShow'],
@@ -285,7 +285,7 @@ export const mockZones: Zone[] = [
       en: 'Home to the legendary Giuseppe Meazza San Siro Stadium (Inter & AC Milan), Ippodromo Snai, and the Tortona design district. Centered around #3 Priority Aria Club Milano on Piazzale dello Sport 14—literally 150 meters on foot from the stadium gates—it is the #1 destination in Milan for Serie A, UEFA Champions League, Derby della Madonnina, Coppa Italia, and stadium concert afterparties.',
       it: 'Il distretto dello Stadio Giuseppe Meazza di San Siro (Inter e Milan), dell\'Ippodromo Snai e degli showroom di Zona Tortona. Ruota attorno al #3 Priorità Aria Club Milano in Piazzale dello Sport 14—letteralmente a 150 metri a piedi dai cancelli dello stadio—meta n°1 a Milano per il terzo tempo dopo le partite di Serie A, UEFA Champions League, Derby della Madonnina, Coppa Italia e grandi concerti.'
     },
-    image: '/images/venues/aria-club-milano/aria-club-milano-interior-01.webp',
+    image: '/images/pillars/zone-14.webp',
     stats: '4 Clubs, 10 Cocktail Lounges',
     slug: 'san-siro',
     tags: ['#AriaClub150m', '#SanSiroAfterparty', '#InterMilanPostMatch', '#ChampionsLeagueNight'],
@@ -1665,7 +1665,7 @@ export const mockGuides: Guide[] = [
     author: "Nightlife Milan Concierge Team",
     datePublished: "2026-01-10T08:00:00Z",
     dateModified: "2026-10-30T08:00:00Z",
-    image: "/images/venues/armani-prive-milano/armani-prive-milano-interior-04.webp",
+    image: "/images/pillars/guide-01.webp",
     sections: [
       {
         id: "the-golden-rule",
@@ -1770,7 +1770,7 @@ export const mockGuides: Guide[] = [
     author: "Nightlife Milan Mixology Desk",
     datePublished: "2026-01-20T08:00:00Z",
     dateModified: "2026-10-30T08:00:00Z",
-    image: "/images/aperitivo-milan-navigli-evening.webp",
+    image: "/images/pillars/guide-02.webp",
     sections: [
       {
         id: "navigli-secrets",
@@ -1839,7 +1839,7 @@ export const mockGuides: Guide[] = [
     author: "Nightlife Milan VIP Desk",
     datePublished: "2026-02-01T08:00:00Z",
     dateModified: "2026-10-30T08:00:00Z",
-    image: "/images/vip-table-milan-nightclub-just-me.webp",
+    image: "/images/pillars/guide-03.webp",
     sections: [
       {
         id: "table-booking-basics",
@@ -1908,7 +1908,7 @@ export const mockGuides: Guide[] = [
     author: "Nightlife Milan Editorial Team",
     datePublished: "2026-03-01T08:00:00Z",
     dateModified: "2026-10-30T08:00:00Z",
-    image: "/images/milan-club-crowd-dancefloor-night.webp",
+    image: "/images/pillars/guide-04.webp",
     sections: [
       {
         id: "sound-architecture",
@@ -1970,7 +1970,7 @@ export const mockGuides: Guide[] = [
     author: "Underground & Electronic Editor",
     datePublished: "2026-03-01T08:00:00Z",
     dateModified: "2026-10-30T08:00:00Z",
-    image: "/images/club-techno.webp",
+    image: "/images/pillars/guide-05.webp",
     relatedGenres: [MusicGenre.TECHNO, MusicGenre.HOUSE],
     sections: [
       {
@@ -2036,7 +2036,7 @@ export const mockGuides: Guide[] = [
     author: "Nightlife Milan VIP Concierge",
     datePublished: "2026-10-15T08:00:00Z",
     dateModified: "2026-10-30T08:00:00Z",
-    image: "/images/bottle-prices-hero.webp",
+    image: "/images/pillars/guide-06.webp",
     sections: [
       {
         id: "minimum-spend-table-2026",
@@ -2101,7 +2101,7 @@ export const mockGuides: Guide[] = [
     author: "Nightlife Milan Editorial Team",
     datePublished: "2026-10-15T08:00:00Z",
     dateModified: "2026-10-30T08:00:00Z",
-    image: "/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp",
+    image: "/images/pillars/guide-07.webp",
     sections: [
       {
         id: "monday-tuesday-wednesday",
@@ -2155,7 +2155,7 @@ export const mockGuides: Guide[] = [
     author: "Nightlife Milan Rooftop & Aperitivo Desk",
     datePublished: "2026-10-18T08:00:00Z",
     dateModified: "2026-10-30T08:00:00Z",
-    image: "/images/voya-rooftop-milan.webp",
+    image: "/images/pillars/guide-08.webp",
     sections: [
       {
         id: "rooftop-ranking-milan",
@@ -2209,7 +2209,7 @@ export const mockGuides: Guide[] = [
     author: "Nightlife Milan Private Events Desk",
     datePublished: "2026-10-20T08:00:00Z",
     dateModified: "2026-10-30T08:00:00Z",
-    image: "/images/55-milano.webp",
+    image: "/images/pillars/guide-09.webp",
     sections: [
       {
         id: "graduation-party-formulas",
@@ -2263,7 +2263,7 @@ export const mockGuides: Guide[] = [
     author: "Nightlife Milan Special Events Desk",
     datePublished: "2026-10-22T08:00:00Z",
     dateModified: "2026-10-30T08:00:00Z",
-    image: "/images/venues/just-me-milano/just-me-milano-lounge-01.webp",
+    image: "/images/pillars/guide-10.webp",
     sections: [
       {
         id: "mfw-and-fuorisalone",
@@ -2324,7 +2324,7 @@ export const mockGuides: Guide[] = [
     author: "Nightlife Milan Stadium & VIP Concierge Desk",
     datePublished: "2026-10-30T08:00:00Z",
     dateModified: "2026-10-30T08:00:00Z",
-    image: "/images/venues/aria-club-milano/aria-club-milano-interior-01.webp",
+    image: "/images/pillars/guide-11.webp",
     sections: [
       {
         id: "aria-club-150m-san-siro",
@@ -2433,7 +2433,7 @@ export const mockGuides: Guide[] = [
     author: "Nightlife Milan Capodanno & VIP Concierge Desk",
     datePublished: "2026-10-30T08:00:00Z",
     dateModified: "2026-10-30T08:00:00Z",
-    image: "/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp",
+    image: "/images/pillars/guide-12.webp",
     sections: [
       {
         id: "nye-2027-three-formulas",
@@ -2541,7 +2541,7 @@ export const mockGuides: Guide[] = [
     author: "Nightlife Milan Live & Stadium Concierge Desk",
     datePublished: "2026-10-30T08:00:00Z",
     dateModified: "2026-10-30T08:00:00Z",
-    image: "/images/venues/aria-club-milano/aria-club-milano-interior-01.webp",
+    image: "/images/pillars/guide-13.webp",
     sections: [
       {
         id: "san-siro-and-ippodromo-concert-afterparty",
@@ -2649,7 +2649,7 @@ export const mockGuides: Guide[] = [
     author: "Nightlife Milan VIP Celebrations Concierge",
     datePublished: "2026-10-30T08:00:00Z",
     dateModified: "2026-10-30T08:00:00Z",
-    image: "/images/venues/pineta-milano/pineta-milano-lounge-01.webp",
+    image: "/images/pillars/guide-14.webp",
     sections: [
       {
         id: "bachelorette-party-milan-itineraries",

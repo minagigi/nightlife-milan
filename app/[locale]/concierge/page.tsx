@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
   const title = seoTitle(tr(locale, 'Milan Nightlife Concierge | Personal Table & Guestlist Service | Nightlife Milan', 'Concierge Vita Notturna Milano | Tavoli VIP & Guestlist | Nightlife Milan'));
   const description = withWhatsApp(tr(locale, 'Your personal Milan nightlife concierge. VIP table booking, guestlist access, bottle service, and insider advice — all via WhatsApp. Free service for guests.', 'Il tuo concierge personale per la vita notturna milanese. Tavoli VIP, guestlist, bottle service e consigli insider — tutto via WhatsApp. Servizio gratuito.'), locale);
-  const ogImage = `${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`;
+  const ogImage = `${baseUrl}/images/pillars/concierge-hero.webp`;
 
   return {
     title,
@@ -209,7 +209,7 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
     <main className="min-h-screen bg-[#131009]">
       <div className="relative h-64 sm:h-80 w-full overflow-hidden">
         <Image
-          src="/images/milan-nightclub-luxury-vip-champagne.webp"
+          src="/images/pillars/concierge-hero.webp"
           alt="Milan Nightlife VIP Concierge Desk"
           fill
           priority
@@ -407,11 +407,11 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
           </p>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 mb-10">
             {[
-              { src: '/images/vip-table-milan-nightclub-just-me.webp', alt: 'Just Me Milano — VIP table booking luxury club Sempione', label: 'Just Me' },
-              { src: '/images/aperitivo-milan-cocktails-bar.webp', alt: 'Pineta Club Milano — singing aperitivo Corso Como', label: 'Pineta Club' },
-              { src: '/images/rooftop-bar-milan-voya-skyline.webp', alt: 'Voya Rooftop Milan — sky lounge 20th floor Isola', label: 'Voya Rooftop' },
-              { src: '/images/milan-nightclub-dancefloor-vip.webp', alt: 'Play Club Milano — hip hop afrobeats Corso Como', label: 'Play Club' },
-              { src: '/images/milan-club-crowd-dancefloor-night.webp', alt: 'Magazzini Generali Milano — techno club Porta Romana', label: 'Magazzini' },
+              { src: '/images/pillars/concierge-01.webp', alt: 'Just Me Milano — VIP table booking luxury club Sempione', label: 'Just Me' },
+              { src: '/images/pillars/concierge-02.webp', alt: 'Pineta Club Milano — singing aperitivo Corso Como', label: 'Pineta Club' },
+              { src: '/images/pillars/concierge-03.webp', alt: 'Voya Rooftop Milan — sky lounge 20th floor Isola', label: 'Voya Rooftop' },
+              { src: '/images/pillars/concierge-04.webp', alt: 'Play Club Milano — hip hop afrobeats Corso Como', label: 'Play Club' },
+              { src: '/images/pillars/concierge-05.webp', alt: 'Magazzini Generali Milano — techno club Porta Romana', label: 'Magazzini' },
             ].map((img) => (
               <div key={img.label} className="relative group">
                 <div className="relative h-36 rounded-xl overflow-hidden border border-white/8">

@@ -1,3 +1,6 @@
+import EditorialPageSections from '@/components/EditorialPageSections';
+import type { LocaleCode } from '@/lib/i18n/locales';
+import Image from 'next/image';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { tr } from '@/lib/i18n/t';
@@ -100,8 +103,8 @@ export default async function PrivatePartiesPage({
       titleIt: 'Cena Spettacolo Servita + Tavolo che Diventa Privé Discoteca',
       priceEn: '€50 – €80 / person',
       priceIt: '€50 – €80 a persona',
-      venuesEn: '55 Milano, Pineta Singing Aperitivo, Just Me Cavalli Restaurant, Tocqueville 13, Church 81',
-      venuesIt: '55 Milano, Pineta Aperitivo Cantato, Ristorante Just Me Cavalli, Tocqueville 13, Church 81',
+      venuesEn: '55 Milano, Pineta Singing Aperitivo, Just Me Italo Rota Restaurant, Tocqueville 13, Church 81',
+      venuesIt: '55 Milano, Pineta Aperitivo Cantato, Ristorante Just Me Italo Rota, Tocqueville 13, Church 81',
       includesEn: [
         '3-course seated menu with wine pairing (20:30)',
         'Live vocalist, saxophonist & sing-along entertainment during dinner',
@@ -202,6 +205,18 @@ export default async function PrivatePartiesPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
 
+      <div data-privateparties-top-hero="true" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+        <div className="relative h-64 sm:h-80 w-full rounded-2xl overflow-hidden border border-champagne/30">
+          <Image
+            src="/images/pillars/private-parties-hero.webp"
+            alt="Milan Graduation Parties, 18th Birthdays & Private Events"
+            fill
+            priority
+            className="object-cover"
+            sizes="100vw"
+          />
+        </div>
+      </div>
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-champagne/30 bg-champagne/10 mb-5">
           <PartyPopper className="w-3.5 h-3.5 text-champagne" />
@@ -314,6 +329,7 @@ export default async function PrivatePartiesPage({
           ))}
         </div>
       </section>
+      <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/private-parties`} />
     </main>
   );
 }

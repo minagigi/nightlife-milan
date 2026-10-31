@@ -17,6 +17,41 @@ import type { LocaleCode } from '@/lib/i18n/locales';
 // ISR Configuration (1 hour)
 export const revalidate = 3600;
 
+const GUIDE_HERO_IMAGES: Record<string, string> = {
+  'g-vip': '/images/pillars/guide-hero-01.webp',
+  'g-1': '/images/pillars/guide-hero-02.webp',
+  'g-2': '/images/pillars/guide-hero-03.webp',
+  'g-3': '/images/pillars/guide-hero-04.webp',
+  'g-4': '/images/pillars/guide-hero-05.webp',
+  'g-5': '/images/pillars/guide-hero-06.webp',
+  'g-6': '/images/pillars/guide-hero-07.webp',
+  'g-7': '/images/pillars/guide-hero-08.webp',
+  'g-8': '/images/pillars/guide-hero-09.webp',
+  'g-9': '/images/pillars/guide-hero-10.webp',
+  'g-10': '/images/pillars/guide-hero-11.webp',
+  'g-11': '/images/pillars/guide-hero-12.webp',
+  'g-12': '/images/pillars/guide-hero-13.webp',
+  'g-13': '/images/pillars/guide-hero-14.webp',
+};
+
+const GUIDE_INLINE_IMAGES: Record<string, string[]> = {
+  'g-vip': ['/images/pillars/guide-inline-01-a.webp', '/images/pillars/guide-inline-01-b.webp', '/images/pillars/guide-inline-01-c.webp', '/images/pillars/guide-inline-01-d.webp'],
+  'g-1': ['/images/pillars/guide-inline-02-a.webp', '/images/pillars/guide-inline-02-b.webp', '/images/pillars/guide-inline-02-c.webp', '/images/pillars/guide-inline-02-d.webp'],
+  'g-2': ['/images/pillars/guide-inline-03-a.webp', '/images/pillars/guide-inline-03-b.webp', '/images/pillars/guide-inline-03-c.webp', '/images/pillars/guide-inline-03-d.webp'],
+  'g-3': ['/images/pillars/guide-inline-04-a.webp', '/images/pillars/guide-inline-04-b.webp', '/images/pillars/guide-inline-04-c.webp', '/images/pillars/guide-inline-04-d.webp'],
+  'g-4': ['/images/pillars/guide-inline-05-a.webp', '/images/pillars/guide-inline-05-b.webp', '/images/pillars/guide-inline-05-c.webp', '/images/pillars/guide-inline-05-d.webp'],
+  'g-5': ['/images/pillars/guide-inline-06-a.webp', '/images/pillars/guide-inline-06-b.webp', '/images/pillars/guide-inline-06-c.webp', '/images/pillars/guide-inline-06-d.webp'],
+  'g-6': ['/images/pillars/guide-inline-07-a.webp', '/images/pillars/guide-inline-07-b.webp', '/images/pillars/guide-inline-07-c.webp', '/images/pillars/guide-inline-07-d.webp'],
+  'g-7': ['/images/pillars/guide-inline-08-a.webp', '/images/pillars/guide-inline-08-b.webp', '/images/pillars/guide-inline-08-c.webp', '/images/pillars/guide-inline-08-d.webp'],
+  'g-8': ['/images/pillars/guide-inline-09-a.webp', '/images/pillars/guide-inline-09-b.webp', '/images/pillars/guide-inline-09-c.webp', '/images/pillars/guide-inline-09-d.webp'],
+  'g-9': ['/images/pillars/guide-inline-10-a.webp', '/images/pillars/guide-inline-10-b.webp', '/images/pillars/guide-inline-10-c.webp', '/images/pillars/guide-inline-10-d.webp'],
+  'g-10': ['/images/pillars/guide-inline-11-a.webp', '/images/pillars/guide-inline-11-b.webp', '/images/pillars/guide-inline-11-c.webp', '/images/pillars/guide-inline-11-d.webp'],
+  'g-11': ['/images/pillars/guide-inline-12-a.webp', '/images/pillars/guide-inline-12-b.webp', '/images/pillars/guide-inline-12-c.webp', '/images/pillars/guide-inline-12-d.webp'],
+  'g-12': ['/images/pillars/guide-inline-13-a.webp', '/images/pillars/guide-inline-13-b.webp', '/images/pillars/guide-inline-13-c.webp', '/images/pillars/guide-inline-13-d.webp'],
+  'g-13': ['/images/pillars/guide-inline-14-a.webp', '/images/pillars/guide-inline-14-b.webp', '/images/pillars/guide-inline-14-c.webp', '/images/pillars/guide-inline-14-d.webp'],
+};
+
+
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
 };
@@ -75,7 +110,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: canonical,
       images: [
         {
-          url: guide.image ? `${baseUrl}${guide.image}` : `${baseUrl}/images/guides-hero.webp`,
+          url: guide.image ? `${baseUrl}${GUIDE_HERO_IMAGES[guide.id] || guide.image}` : `${baseUrl}/images/guides-hero.webp`,
           width: 1200,
           height: 630,
           alt: title,
@@ -92,7 +127,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: 'summary_large_image',
       title,
       description,
-      images: [guide.image ? `${baseUrl}${guide.image}` : `${baseUrl}/images/guides-hero.webp`],
+      images: [guide.image ? `${baseUrl}${GUIDE_HERO_IMAGES[guide.id] || guide.image}` : `${baseUrl}/images/guides-hero.webp`],
       site: '@nightlifemilan',
     },
   };
@@ -149,7 +184,7 @@ export default async function GuidePage({ params }: Props) {
     '@type': 'Article',
     headline: title,
     image: guide.image
-      ? [guide.image.startsWith('http') ? guide.image : `${baseUrl}${guide.image}`]
+      ? [guide.image.startsWith('http') ? guide.image : `${baseUrl}${GUIDE_HERO_IMAGES[guide.id] || guide.image}`]
       : [],
     datePublished: guide.datePublished,
     dateModified: guide.dateModified,
@@ -215,7 +250,7 @@ export default async function GuidePage({ params }: Props) {
         <section className="relative w-full h-[60vh] min-h-[500px] flex items-end pb-16">
           <div className="absolute inset-0 z-0">
             <Image
-              src={guide.image || '/images/guides-hero.webp'}
+              src={GUIDE_HERO_IMAGES[guide.id] || guide.image || '/images/guides-hero.webp'}
               alt={title}
               fill
               quality={85}
@@ -308,6 +343,19 @@ export default async function GuidePage({ params }: Props) {
                   className="text-white/75 leading-relaxed font-light space-y-5 text-base [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-2 [&_strong]:text-white [&_strong]:font-semibold"
                   dangerouslySetInnerHTML={{ __html: getLocalizedText(section.content, locale) }}
                 />
+                {GUIDE_INLINE_IMAGES[guide.id]?.[index] && (
+                  <div className="my-8 relative h-64 md:h-80 w-full rounded-2xl overflow-hidden border border-white/10">
+                    <Image
+                      src={GUIDE_INLINE_IMAGES[guide.id][index]}
+                      alt={`${getLocalizedText(section.heading, locale)} — ${title}`}
+                      title={`${getLocalizedText(section.heading, locale)} — ${title}`}
+                      fill
+                      quality={85}
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-cover"
+                    />
+                  </div>
+                )}
 
                 {index === 0 && (
                   <div className="my-10 p-6 bg-white/[0.03] border border-champagne/30 rounded-xl relative overflow-hidden">
@@ -392,15 +440,8 @@ export default async function GuidePage({ params }: Props) {
                       href={venueHref}
                       className="group flex items-center gap-3.5 p-3 bg-white/[0.03] border border-white/10 rounded-xl hover:border-champagne/50 transition-colors"
                     >
-                      <div className="relative h-16 w-16 rounded-lg overflow-hidden shrink-0">
-                        <Image
-                          src={venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp'}
-                          alt={venueName}
-                          fill
-                          quality={85}
-                          sizes="64px"
-                          className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
+                      <div className="h-12 w-12 rounded-lg bg-champagne/10 border border-champagne/30 flex items-center justify-center shrink-0">
+                        <span className="font-serif font-bold text-champagne text-lg">#{idx + 1}</span>
                       </div>
                       <div className="min-w-0">
                         <div className="text-[10px] font-mono uppercase tracking-wider text-champagne">
