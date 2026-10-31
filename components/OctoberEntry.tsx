@@ -166,7 +166,7 @@ export function HomeHalloweenAndCapodannoSections({
       priceLabel: isIt
         ? 'Prezzi passati: da 50€ (Dopocena) · 160€ (Gran Cenone Servito) · Tavoli VIP da 500€'
         : 'Past prices: from €50 (Party) · €160 (Served Gala Dinner) · VIP Tables from €500',
-      posterSrc: '/images/events/october-2026/repvblic-halloween-poster.webp',
+      posterSrc: '/images/events/capodanno-2027-posters/capodanno-repvblic-milano.webp',
       href: capodannoEventPath('capodanno-repvblic-milano', locale),
       highlight: false,
     },
@@ -233,7 +233,7 @@ export function HomeHalloweenAndCapodannoSections({
                       src={card.posterSrc}
                       alt={card.title}
                       loading="lazy"
-                      className="block h-auto w-full object-contain"
+                      className="block h-80 w-full object-contain"
                     />
                   </Link>
                   <div className="p-6 pb-2">

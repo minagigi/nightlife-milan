@@ -131,7 +131,7 @@ function DateSensitiveGalleryCard({
           className="block flex-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#D6BE96]"
           data-date-sensitive-detail-cta
         >
-          <span className={`relative block ${fullPoster ? 'aspect-[4/5]' : 'aspect-video'} border-b border-[#F6F1E7]/14 bg-[#050505]`} aria-hidden={fullPoster ? undefined : true}>
+          <span className={`relative block ${fullPoster && event.image.includes('/halloween/') ? 'aspect-[4/5]' : 'aspect-video'} border-b border-[#F6F1E7]/14 bg-[#050505]`} aria-hidden={fullPoster ? undefined : true}>
             <Image
               src={event.image}
               alt={event.title}
