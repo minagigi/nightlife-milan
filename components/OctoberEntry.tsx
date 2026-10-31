@@ -101,7 +101,7 @@ export function HomeHalloweenAndCapodannoSections({
       priceLabel: isIt
         ? 'Prezzi passati: da 50€ (Ingresso) · 100€ (Royal Buffet) · 250€ (Gran Cenone)'
         : 'Past prices: from €50 (Entry) · €100 (Royal Buffet) · €250 (Gala Dinner)',
-      posterSrc: '/images/events/october-2026/243586-1f0d06ea2a0d.webp',
+      posterSrc: '/images/events/october-2026/248439-68f2dbbf4405.webp',
       href: capodannoEventPath('capodanno-justme-milano-torre-branca', locale),
       highlight: false,
     },
@@ -114,7 +114,7 @@ export function HomeHalloweenAndCapodannoSections({
       priceLabel: isIt
         ? 'Prezzi passati: da 40€ (Dopocena) · 70€ (Buffet) · 130€ (Gran Cenone Servito)'
         : 'Past prices: from €40 (Party) · €70 (Buffet) · €130 (Served Gala Dinner)',
-      posterSrc: '/images/events/october-2026/243813-bc8ee4fe45f9.webp',
+      posterSrc: '/images/events/capodanno-2027-posters/capodanno-pineta-milano.webp',
       href: capodannoEventPath('capodanno-pineta-milano', locale),
       highlight: false,
     },
@@ -127,7 +127,7 @@ export function HomeHalloweenAndCapodannoSections({
       priceLabel: isIt
         ? 'Prezzi passati: da 35€ (Dopocena) · 90€ (Royal Buffet + Party) · Tavoli da 350€'
         : 'Past prices: from €35 (Entry) · €90 (Royal Buffet + Party) · Tables from €350',
-      posterSrc: '/images/events/october-2026/245966-dc9e6be51fd6.webp',
+      posterSrc: '/images/events/capodanno-2027-posters/capodanno-aria-club-milano.webp',
       href: capodannoEventPath('capodanno-aria-club-milano', locale),
       highlight: false,
     },
@@ -140,7 +140,7 @@ export function HomeHalloweenAndCapodannoSections({
       priceLabel: isIt
         ? 'Prezzi passati: da 40€ (Dopocena) · 75€ (Gran Buffet) · 130€ (Cenone Servito)'
         : 'Past prices: from €40 (Party) · €75 (Grand Buffet) · €130 (Served Dinner)',
-      posterSrc: '/images/events/october-2026/55-milano-friday-regular.webp',
+      posterSrc: '/images/events/capodanno-2027-posters/capodanno-55-milano.webp',
       href: capodannoEventPath('capodanno-55-milano', locale),
       highlight: false,
     },
@@ -153,7 +153,7 @@ export function HomeHalloweenAndCapodannoSections({
       priceLabel: isIt
         ? 'Menu completo di tutto: 300€ a persona (Gran Cenone Panoramico + Vini + Brindisi + Party)'
         : 'Full all-inclusive menu: €300 per person (Panoramic Gala Dinner + Wines + Midnight Toast + Party)',
-      posterSrc: '/images/events/october-2026/voya-rooftop-saturday-regular.webp',
+      posterSrc: '/images/events/capodanno-2027-posters/capodanno-voya-rooftop-milano.webp',
       href: capodannoEventPath('capodanno-voya-rooftop-milano', locale),
       highlight: true,
     },

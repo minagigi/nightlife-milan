@@ -38,19 +38,19 @@ export const HALLOWEEN_CONTENT = { en, it, es, fr, de, pt, nl, ru, tr, zh, ar, b
 export const HALLOWEEN_ASSETS: readonly HalloweenAsset[] = [
   {
     "src": "/images/events/october-2026/alcatraz-dia-de-los-muertos-a9c89f9ef751.webp",
-    "width": 1080,
-    "height": 1350,
-    "bytes": 173704,
-    "sha256": "b529103cdcfca9373abd74999667f5ef1ea1698cd877e207c26e2bbaeec5f0a8",
+    "width": 684,
+    "height": 358,
+    "bytes": 90680,
+    "sha256": "a3e893ebc46e2522d13f8419b9f86432c3ee80dbb5537036bba500b2c1291759",
     "sourceRef": "https://www.alcatrazmilano.it/ · official Halloween listing",
     "kind": "programme-artwork"
   },
   {
     "src": "/images/events/october-2026/halloween-aria-243203.webp",
-    "width": 1080,
-    "height": 1350,
-    "bytes": 164412,
-    "sha256": "7e4f874b60b45f919f9fb4f67d2be57d2b211c290a8c6166f94902763d3a7061",
+    "width": 1600,
+    "height": 920,
+    "bytes": 218078,
+    "sha256": "5979d0f8592aa96115dc3def1e8d63a3276a0ec5078e9b4f54aa1d17f0bc7a2d",
     "sourceRef": "https://xceed.me/en/milano/event/halloween-party-65/243203 · official Aria Halloween listing",
     "kind": "programme-artwork"
   },
@@ -58,8 +58,8 @@ export const HALLOWEEN_ASSETS: readonly HalloweenAsset[] = [
     "src": "/images/events/october-2026/halloween-gate-240984.webp",
     "width": 1080,
     "height": 1080,
-    "bytes": 203550,
-    "sha256": "ee4c044e37bee97a480e3c372437884d25ce3e8dba945d17f7242f37abb56770",
+    "bytes": 205742,
+    "sha256": "0c759551aa8bc1d4b87efe1dff261e4fc476faf59c9ba9303b43cc1863593e50",
     "sourceRef": "https://www.gatemilano.it/events · official Gate Halloween listing",
     "kind": "programme-artwork"
   },
@@ -67,17 +67,17 @@ export const HALLOWEEN_ASSETS: readonly HalloweenAsset[] = [
     "src": "/images/events/october-2026/halloween-amnesia-leon-2026.webp",
     "width": 1080,
     "height": 1350,
-    "bytes": 190070,
-    "sha256": "4f8437c8ae025e43bae5f67b851ea7beb2d08b3bbf37611673d611b4fe2a3ac4",
+    "bytes": 165882,
+    "sha256": "ccf71f68f20e80050ed97b6a162d2a130cd7d1e6b08c69abb51aac53a87bd191",
     "sourceRef": "https://amnesiamilano.com/ · official Amnesia Halloween listing",
     "kind": "programme-artwork"
   },
   {
     "src": "/images/venues/editorial/amnesia-milano.webp",
-    "width": 1600,
-    "height": 899,
-    "bytes": 261550,
-    "sha256": "68ce6b5b5525138cfe84a55d5e73d6956aabac38e9ef1ab631d949f0a2ca2760",
+    "width": 1376,
+    "height": 768,
+    "bytes": 233834,
+    "sha256": "74810efa42387034ecfffef224a71a3c4e70c66ccb02fb3043048f65f363506b",
     "sourceRef": "https://nightlifemilan.com/ · Nightlife Milan editorial illustration",
     "kind": "editorial-illustration"
   }
