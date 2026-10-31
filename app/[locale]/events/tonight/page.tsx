@@ -74,6 +74,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       locale: isIt ? 'it_IT' : 'en_US',
       images: [{ url: `${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`, width: 1200, height: 630 }],
     },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [`${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`],
+    },
   };
 }
 
