@@ -78,8 +78,8 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Strettamente Elegante. Pantaloni lunghi per uomo obbligatori. No sneakers tecniche, no cappelli, no tute.'
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '21+', 'Strictly Elegant. Long trousers for men are mandatory.', 'House and Urban'),
-    image: '/images/events/xceed-justme-mfw-monday-night.jpg',
-    xceedLink: 'https://xceed.me/en/milano/event/monday-night-255/213618/channel/nightlifemilan-1',
+    image: '/images/events/october-2026/249146-bbdee1490af9.webp',
+    xceedLink: 'https://xceed.me/en/milano/event/monday-night-281/249159/channel/nightlifemilan-1',
     priority: 100
   },
   {
@@ -102,8 +102,8 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Smart Casual. Camicia elegante per gli uomini. No abbigliamento sportivo.'
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '18+', 'Smart Casual', 'Commercial and Reggaeton'),
-    image: '/images/events/xceed-justme-mfw-university-party.jpg',
-    xceedLink: 'https://xceed.me/en/milano/event/mfw-university-party-1/220716/channel/nightlifemilan-1',
+    image: '/images/events/october-2026/249182-aa34ab79100b.webp',
+    xceedLink: 'https://xceed.me/en/milano/event/university-party-56/249182/channel/nightlifemilan-1',
     priority: 100
   },
   {
@@ -126,8 +126,8 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Elegante e alla moda.'
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '25+', 'Elegant and Fashion-forward', 'Deep House and Lounge'),
-    image: '/images/events/xceed-justme-wednesday-night.jpg',
-    xceedLink: 'https://xceed.me/en/milano/event/wednesday-night-211/220729/channel/nightlifemilan-1',
+    image: '/images/events/october-2026/249189-e2b7683e02e3.webp',
+    xceedLink: 'https://xceed.me/en/milano/event/wednesday-night-226/249170/channel/nightlifemilan-1',
     priority: 100
   },
   {
@@ -150,7 +150,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Strettamente Elegante.'
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '25+', 'Strictly Elegant', 'Live Music and Commercial'),
-    image: '/images/venues/just-me-milano/just-me-milano-interior-04.webp',
+    image: '/images/events/october-2026/249192-8d811d65d7c5.webp',
     priority: 100
   },
   {
@@ -173,8 +173,8 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Strettamente Elegante. Vestiti per impressionare.'
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '21+', 'Strictly Elegant', 'House and Electronic'),
-    image: '/images/events/xceed-justme-friday-night.jpg',
-    xceedLink: 'https://xceed.me/en/milano/event/friday-night-669/220759/channel/nightlifemilan-1',
+    image: '/images/events/october-2026/249204-fcb5bf6cc4be.webp',
+    xceedLink: 'https://xceed.me/en/milano/event/friday-night-726/249215/channel/nightlifemilan-1',
     priority: 100
   },
   {
@@ -197,8 +197,8 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Strettamente Elegante. Vestiti per impressionare.'
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '21+', 'Strictly Elegant', 'Commercial and House'),
-    image: '/images/events/xceed-justme-saturday-night.jpg',
-    xceedLink: 'https://xceed.me/en/milano/event/saturday-night-686/220770/channel/nightlifemilan-1',
+    image: '/images/events/october-2026/249213-e2755e4bf02c.webp',
+    xceedLink: 'https://xceed.me/en/milano/event/saturday-night-784/249196/channel/nightlifemilan-1',
     priority: 100
   },
   {
@@ -221,12 +221,36 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Urban Chic. Lo streetwear elegante è consentito, ma mantienilo premium.'
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '21+', 'Urban Chic', 'Hip-Hop and R&B'),
-    image: '/images/events/xceed-justme-sunday-night.jpg',
-    xceedLink: 'https://xceed.me/en/milano/event/sunday-night-215/220786/channel/nightlifemilan-1',
+    image: '/images/events/october-2026/249199-9373e4ee381b.webp',
+    xceedLink: 'https://xceed.me/en/milano/event/sunday-night-198/249201/channel/nightlifemilan-1',
     priority: 100
   },
 
-  // --- PINETA CLUB (Fri-Sat) ---
+  // --- PINETA CLUB (Thu-Sat) ---
+  {
+    id: 'pineta-thursday',
+    clubSlug: 'pineta',
+    clubName: 'Pineta Club',
+    day: 'thursday',
+    dayOfWeek: 4,
+    eventSlug: 'thursday-night',
+    name: 'Tr3ndy Society · Thursday Night',
+    genres: ['Hip-Hop', 'Reggaeton', 'Commercial'],
+    target: '20+, University & Fashion Crowd, International',
+    description: {
+      en: 'Thursday night at Pineta Club Milano brings the iconic Tr3ndy Society format under the crystal chandeliers of Via Messina 38. Expect an electric mix of Hip-Hop, Reggaeton, and commercial hits with VIP bottle service.',
+      it: 'Il giovedì notte al Pineta Club Milano porta l\'iconico format Tr3ndy Society sotto i lampadari di cristallo di Via Messina 38. Un mix esplosivo di Hip-Hop, Reggaeton e hit commerciali con servizio tavoli VIP.'
+    },
+    pricing: { aperitif: 'From €15', club: 'From €20', tables: 'From €250 to €1,500' },
+    dressCode: {
+      en: 'Smart Elegant. Collared shirts recommended for men.',
+      it: 'Smart Elegant. Camicia consigliata per gli uomini.'
+    },
+    faqs: defaultFaqs('Pineta Club', 'Via Messina 38, Milan', '20+', 'Smart Elegant', 'Hip-Hop, Reggaeton and Commercial'),
+    image: '/images/events/october-2026/249230-f6b0d6c67b51.webp',
+    xceedLink: 'https://xceed.me/en/milano/event/tr3ndy-society-thursday-night-5/250753/channel/nightlifemilan-1',
+    priority: 95
+  },
   {
     id: 'pineta-friday',
     clubSlug: 'pineta',
@@ -247,9 +271,9 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Elegante e Chic. Camicia con colletto per gli uomini.'
     },
     faqs: defaultFaqs('Pineta Club', 'Via Privata Giovanni Ventura 15, Milan', '25+', 'Elegant and Chic', 'Live Music and Commercial'),
-    image: '/images/events/xceed-pineta-milan8mile.jpg',
-    xceedLink: 'https://xceed.me/en/milano/event/milan8mile-3/231334/channel/nightlifemilan-1',
-    priority: 90
+    image: '/images/events/october-2026/243822-fa1698470cb9.webp',
+    xceedLink: 'https://xceed.me/en/milano/event/friday-night-725/243822/channel/nightlifemilan-1',
+    priority: 95
   },
   {
     id: 'pineta-saturday',
@@ -271,9 +295,9 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Strettamente Elegante.'
     },
     faqs: defaultFaqs('Pineta Club', 'Via Privata Giovanni Ventura 15, Milan', '25+', 'Strictly Elegant', 'Live Music and Commercial'),
-    image: '/images/events/xceed-pineta-bocconi.jpg',
-    xceedLink: 'https://xceed.me/en/milano/event/bocconi-welcome-week-welcome-to-pineta/234651/channel/nightlifemilan-1',
-    priority: 90
+    image: '/images/events/october-2026/243815-e33432d48dd4.webp',
+    xceedLink: 'https://xceed.me/en/milano/event/saturday-night-783/243828/channel/nightlifemilan-1',
+    priority: 95
   },
 
   // --- ARIA CLUB MILANO (Thu-Sat) ---
@@ -294,9 +318,9 @@ export const weeklyEvents: WeeklyEvent[] = [
     pricing: { aperitif: 'From €15', club: 'From €15', tables: 'From €200 to €1,500' },
     dressCode: { en: 'Smart Casual. No sportswear.', it: 'Smart Casual. No abbigliamento sportivo.' },
     faqs: defaultFaqs('Aria Club Milano', 'Piazzale dello Sport 14, Milan', '21+', 'Smart Casual', 'Hits, EDM and Dance'),
-    image: '/images/events/xceed-aria-summer-party.png',
+    image: '/images/venues/aria-club-milano/aria-club-milano-buffet-01.webp',
     xceedLink: 'https://xceed.me/en/milano/event/thursday-night-362/229397/channel/nightlifemilan-1',
-    priority: 60
+    priority: 90
   },
   {
     id: 'aria-friday',
@@ -315,9 +339,9 @@ export const weeklyEvents: WeeklyEvent[] = [
     pricing: { aperitif: 'From €15', club: 'From €15', tables: 'From €200 to €1,500' },
     dressCode: { en: 'Smart Casual. No sportswear.', it: 'Smart Casual. No abbigliamento sportivo.' },
     faqs: defaultFaqs('Aria Club Milano', 'Piazzale dello Sport 14, Milan', '21+', 'Smart Casual', 'Hits, EDM and Dance'),
-    image: '/images/events/xceed-aria-friday-night.jpg',
+    image: '/images/events/october-2026/242611-d6dfa52deb0b.webp',
     xceedLink: 'https://xceed.me/en/milano/event/friday-night-697/229412/channel/nightlifemilan-1',
-    priority: 60
+    priority: 90
   },
   {
     id: 'aria-saturday',
@@ -336,9 +360,9 @@ export const weeklyEvents: WeeklyEvent[] = [
     pricing: { aperitif: 'From €15', club: 'From €20', tables: 'From €250 to €2,000' },
     dressCode: { en: 'Smart Casual. No sportswear.', it: 'Smart Casual. No abbigliamento sportivo.' },
     faqs: defaultFaqs('Aria Club Milano', 'Piazzale dello Sport 14, Milan', '21+', 'Smart Casual', 'Hits, EDM and Dance'),
-    image: '/images/events/xceed-aria-saturday-night.jpg',
-    xceedLink: 'https://xceed.me/en/milano/event/saturday-night-717/229432/channel/nightlifemilan-1',
-    priority: 60
+    image: '/images/events/october-2026/242617-59f08f112437.webp',
+    xceedLink: 'https://xceed.me/en/milano/event/saturday-night-717/242617/channel/nightlifemilan-1',
+    priority: 90
   },
 
   // --- VOYA ROOFTOP (Tue-Sun) ---
@@ -481,7 +505,67 @@ export const weeklyEvents: WeeklyEvent[] = [
     priority: 80
   },
 
-  // --- 55 MILANO (Fri-Sun) ---
+  // --- 55 MILANO (Tue-Sun) ---
+  {
+    id: '55milano-tuesday',
+    clubSlug: '55milano',
+    clubName: '55 Milano',
+    day: 'tuesday',
+    dayOfWeek: 2,
+    eventSlug: 'royal-apericena-lounge',
+    name: 'Royal Apericena XL & Lounge',
+    genres: ['Lounge', 'Commercial', 'Deep House'],
+    target: '25+, Professionals, Graduations & Birthdays',
+    description: {
+      en: 'Experience Milan\'s most spacious historic tram depot loft on Tuesday evenings: Royal Apericena XL from 7:30 PM, reserved group tables, signature cocktails, and lounge DJ sets.',
+      it: 'Vivi il più grande loft ricavato da uno storico deposito ATM di Milano il martedì sera: Royal Apericena XL dalle 19:30, tavoli riservati per gruppi, cocktail d\'autore e lounge DJ set.'
+    },
+    pricing: { aperitif: 'From €20', club: 'From €20', tables: 'From €200' },
+    dressCode: { en: 'Smart Casual.', it: 'Smart Casual.' },
+    faqs: defaultFaqs('55 Milano', 'Via Piero della Francesca 55, Milan', '23+', 'Smart Casual', 'Lounge and Commercial'),
+    image: '/images/venues/55-milano/55-milano-interior-01.webp',
+    priority: 85
+  },
+  {
+    id: '55milano-wednesday',
+    clubSlug: '55milano',
+    clubName: '55 Milano',
+    day: 'wednesday',
+    dayOfWeek: 3,
+    eventSlug: 'royal-apericena-lounge',
+    name: 'Royal Apericena XL & Midweek Sound',
+    genres: ['Lounge', 'Commercial', 'House'],
+    target: '25+, Professionals, Groups',
+    description: {
+      en: 'Midweek at 55 Milano features an expansive buffet apericena, outdoor terrace seating, and curated DJ sets in the heart of the Sempione / Arco della Pace district.',
+      it: 'Il mercoledì sera al 55 Milano offre un ricco buffet apericena, tavoli riservati tra loft e terrazza e DJ set selezionati nel cuore di Sempione / Arco della Pace.'
+    },
+    pricing: { aperitif: 'From €20', club: 'From €20', tables: 'From €200' },
+    dressCode: { en: 'Smart Casual.', it: 'Smart Casual.' },
+    faqs: defaultFaqs('55 Milano', 'Via Piero della Francesca 55, Milan', '23+', 'Smart Casual', 'Lounge and House'),
+    image: '/images/venues/55-milano/55-milano-interior-02.webp',
+    priority: 85
+  },
+  {
+    id: '55milano-thursday',
+    clubSlug: '55milano',
+    clubName: '55 Milano',
+    day: 'thursday',
+    dayOfWeek: 4,
+    eventSlug: 'dinner-show-thursday',
+    name: 'Apericena & Pre-Weekend Party',
+    genres: ['Live Music', 'Commercial', 'Hits'],
+    target: '25+, Locals, Celebrations & Groups',
+    description: {
+      en: 'Kick off the weekend on Thursday at 55 Milano with reserved Apericena tables, live dinner entertainment, and DJ sets until late on Via Piero della Francesca 55.',
+      it: 'Inizia il weekend il giovedì sera al 55 Milano con tavoli apericena riservati, intrattenimento musicale a cena e DJ set fino a tardi in Via Piero della Francesca 55.'
+    },
+    pricing: { aperitif: 'From €20', club: 'From €20', tables: 'From €250' },
+    dressCode: { en: 'Smart Casual.', it: 'Smart Casual.' },
+    faqs: defaultFaqs('55 Milano', 'Via Piero della Francesca 55, Milan', '25+', 'Smart Casual', 'Live Music and Commercial'),
+    image: '/images/venues/55-milano/55-milano-interior-03.webp',
+    priority: 85
+  },
   {
     id: '55milano-friday',
     clubSlug: '55milano',
@@ -503,7 +587,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('55 Milano', 'Via Piero della Francesca 55, Milan', '25+', 'Smart Casual', 'Live Music and Commercial'),
     image: '/images/venues/55-milano/55-milano-friday-dinner-show-01.webp',
-    priority: 70
+    priority: 85
   },
   {
     id: '55milano-saturday',
@@ -526,7 +610,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('55 Milano', 'Via Piero della Francesca 55, Milan', '25+', 'Smart Casual', 'Live Music and Commercial'),
     image: '/images/venues/55-milano/55-milano-saturday-the-wall-01.webp',
-    priority: 70
+    priority: 85
   },
   {
     id: '55milano-sunday',
@@ -549,7 +633,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('55 Milano', 'Via Piero della Francesca 55, Milan', '21+', 'Smart Casual', 'Reggaeton and Latin'),
     image: '/images/venues/55-milano/55-milano-sunday-latino-americano-01.webp',
-    priority: 70
+    priority: 85
   },
 
   // --- PLAY CLUB ---
@@ -671,6 +755,26 @@ export const weeklyEvents: WeeklyEvent[] = [
 
   // --- REPVBLIC ---
   {
+    id: 'repvblic-monday',
+    clubSlug: 'repvblic',
+    clubName: 'Repvblic',
+    day: 'monday',
+    dayOfWeek: 1,
+    eventSlug: 'dirty-monday',
+    name: 'Dirty Monday',
+    genres: ['Hip-Hop', 'House', 'Urban'],
+    target: '21+, Fashion Crowd, Models & Industry',
+    description: {
+      en: 'Milan\'s legendary Monday night industry party at Repvblic in Piazza della Repubblica 12. Expect top Hip-Hop and House selectors, fashion insiders, and high-energy VIP tables.',
+      it: 'Il leggendario lunedì notte milanese al Repvblic in Piazza della Repubblica 12. DJ set Hip-Hop e House d\'avanguardia, pubblico fashion internazionale e tavoli VIP.'
+    },
+    pricing: { club: 'From €15', tables: 'From €250' },
+    dressCode: { en: 'Fashion Chic.', it: 'Fashion Chic.' },
+    faqs: defaultFaqs('Repvblic', 'Piazza della Repubblica 12, Milan', '21+', 'Fashion Chic', 'Hip-Hop and House'),
+    image: '/images/venues/repvblic-milano/repvblic-milano-interior-04.webp',
+    priority: 75
+  },
+  {
     id: 'repvblic-wednesday',
     clubSlug: 'repvblic',
     clubName: 'Repvblic',
@@ -691,7 +795,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Repvblic', 'Piazza della Repubblica 12, Milan', '18+', 'Casual Chic', 'Commercial and Reggaeton'),
     image: '/images/venues/repvblic-milano/repvblic-milano-interior-01.webp',
-    priority: 40
+    priority: 75
   },
   {
     id: 'repvblic-thursday',
@@ -714,7 +818,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Repvblic', 'Piazza della Repubblica 12, Milan', '18+', 'Urban Casual', 'Hip-Hop and Trap'),
     image: '/images/venues/repvblic-milano/repvblic-milano-interior-02.webp',
-    priority: 40
+    priority: 75
   },
   {
     id: 'repvblic-friday',
@@ -737,6 +841,26 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Repvblic', 'Piazza della Repubblica 12, Milan', '21+', 'Alternative Chic', 'Indie, Rock, and Electronic'),
     image: '/images/venues/repvblic-milano/repvblic-milano-interior-03.webp',
-    priority: 40
+    priority: 75
+  },
+  {
+    id: 'repvblic-saturday',
+    clubSlug: 'repvblic',
+    clubName: 'Repvblic',
+    day: 'saturday',
+    dayOfWeek: 6,
+    eventSlug: 'saturday-night',
+    name: 'Saturday Luxury Dinner Show & Club',
+    genres: ['House', 'Commercial', 'Hip-Hop'],
+    target: '21+, VIPs, International Crowd',
+    description: {
+      en: 'Saturday night at Repvblic Milano combines a refined Dinner Show with a cutting-edge sound and lighting clubbing experience in Piazza della Repubblica 12.',
+      it: 'Il sabato notte al Repvblic Milano unisce un raffinato Dinner Show a un\'esperienza di clubbing con impianto audio-luci d\'avanguardia in Piazza della Repubblica 12.'
+    },
+    pricing: { aperitif: 'From €25', club: 'From €25', tables: 'From €300' },
+    dressCode: { en: 'Strictly Elegant.', it: 'Strettamente Elegante.' },
+    faqs: defaultFaqs('Repvblic', 'Piazza della Repubblica 12, Milan', '21+', 'Strictly Elegant', 'House, Commercial and Hip-Hop'),
+    image: '/images/venues/repvblic-milano/repvblic-milano-interior-05.webp',
+    priority: 75
   }
 ];

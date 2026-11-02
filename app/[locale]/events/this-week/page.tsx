@@ -9,7 +9,7 @@ import { Clock, MapPin, Calendar } from 'lucide-react';
 import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset, dayOfWeekForKey } from '@/lib/calendarEvents';
 import type { Event, Venue } from '@/lib/types';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
-import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
+import { compareEventbriteDiscoveryItems, getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 import { WeeklyNightlifeNavigator, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
@@ -189,7 +189,7 @@ export default async function EventsThisWeekPage({ params }: Props) {
       const key = romeDayKey(event.dateISO);
       return key >= todayKey && key <= sundayKey;
     })
-    .sort((a, b) => new Date(a.event.dateISO).getTime() - new Date(b.event.dateISO).getTime());
+    .sort((a, b) => romeDayKey(a.event.dateISO).localeCompare(romeDayKey(b.event.dateISO)) || compareEventbriteDiscoveryItems(a, b));
 
   // Group by day of week
   const byDay: Record<number, { event: Event; venue: Venue }[]> = {};

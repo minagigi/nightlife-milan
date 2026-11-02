@@ -198,8 +198,10 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
     const filtered = rawNavLinks.filter(
       (item) => item.href !== halloweenHref && item.href !== capodannoHref && item.id !== 'mfw',
     );
+    const weeklyHref = `${localePrefix}/events/this-week`;
+    const weeklyLabel = currentLocale === 'it' ? 'SERATE SETTIMANA' : 'THIS WEEK';
     const seasonalPair = [
-      { id: 'mfw' as const, label: halloweenLabel, name: halloweenLabel, href: halloweenHref, match: halloweenHref, gold: true },
+      { id: 'events' as const, label: weeklyLabel, name: weeklyLabel, href: weeklyHref, match: weeklyHref, gold: true },
       { id: 'events' as const, label: capodannoLabel, name: capodannoLabel, href: capodannoHref, match: capodannoHref, gold: true },
       { id: 'events' as const, label: currentLocale === 'it' ? 'DOPO-PARTITA SAN SIRO' : 'SAN SIRO AFTERPARTIES', name: currentLocale === 'it' ? 'DOPO-PARTITA SAN SIRO' : 'SAN SIRO AFTERPARTIES', href: `${localePrefix}/football-afterparties`, match: `${localePrefix}/football-afterparties`, gold: false },
     ];
