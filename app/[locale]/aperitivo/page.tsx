@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
   const title = seoTitle(tr(locale, 'Best Aperitivo in Milan 2026 | Top Bars & Where to Go | Nightlife Milan', 'Migliore Aperitivo Milano 2026 | Bar, Orari e Zone | Nightlife Milan'));
   const description = withWhatsApp(tr(locale, 'Find the best aperitivo spots in Milan. Opening hours, what to order, dress code, and the top bars by zone — Navigli, Corso Como, Brera. Updated 2026.', 'I migliori locali per l\'aperitivo a Milano: orari, cosa ordinare, dress code e top bar per zona — Navigli, Corso Como, Brera. Guida aggiornata 2026.'), locale);
-  const ogImage = `${baseUrl}/images/aperitivo-milan-cocktails-bar.webp`;
+  const ogImage = `${baseUrl}/images/pillars/aperitivo-01.webp`;
 
   const keywordsEn = ['aperitivo milan', 'best aperitivo milan', 'milan aperitivo bars', 'where to do aperitivo milan', 'navigli aperitivo'];
   const keywordsIt = ['aperitivo milano', 'migliore aperitivo milano', 'bar aperitivo milano', 'dove fare aperitivo milano', 'aperitivo navigli'];

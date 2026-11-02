@@ -254,6 +254,7 @@ export default async function DoorPolicyPage({ params }: Props) {
 
         {/* Hero */}
         <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="relative h-64 md:h-80 w-full rounded-2xl overflow-hidden border border-white/10 mb-8"><Image src="/images/door-policy-hero.webp" alt={tr(locale, "Milan clubs dress code and door policy selection guide", "Guida dress code e selezione door policy club Milano")} title={tr(locale, "Dress Code and Door Policy Milan Clubs", "Dress Code e Door Policy Club Milano")} fill priority quality={85} sizes="(max-width: 1024px) 100vw, 896px" className="object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-[#131009] via-[#131009]/40 to-transparent" /></div>
           <h1 className="font-serif text-5xl md:text-6xl font-bold text-champagne tracking-tight mb-6">
             {tr(locale, 'Dress Code & Door Policy', 'Dress Code & Door Policy')}
           </h1>

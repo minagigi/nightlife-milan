@@ -192,6 +192,7 @@ export default async function FAQPage({ params }: Props) {
 
         {/* Hero */}
         <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="relative h-64 md:h-80 w-full rounded-2xl overflow-hidden border border-white/10 mb-8"><Image src="/images/faq-hero.webp" alt={tr(locale, "Milan Nightlife Frequently Asked Questions and VIP Concierge Guide", "Domande Frequenti Vita Notturna Milano e Guida Concierge VIP")} title={tr(locale, "Milan Nightlife FAQ 2026", "FAQ Vita Notturna Milano 2026")} fill priority quality={85} sizes="(max-width: 1024px) 100vw, 896px" className="object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-[#131009] via-[#131009]/40 to-transparent" /></div>
           <h1 className="font-serif text-5xl md:text-6xl font-bold text-champagne tracking-tight mb-6">
             {tr(locale, 'Frequently Asked Questions', 'Domande Frequenti')}
           </h1>

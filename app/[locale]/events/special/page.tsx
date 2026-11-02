@@ -67,13 +67,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description,
       url: canonical,
-      images: [{ url: `${baseUrl}/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp` }],
+      images: [{ url: `${baseUrl}/images/pillars/events-special-01.webp` }],
     },
   twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: [`${baseUrl}/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp`],
+      images: [`${baseUrl}/images/pillars/events-special-01.webp`],
     },
   };
 }

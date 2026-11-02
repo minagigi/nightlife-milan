@@ -18,37 +18,37 @@ import type { LocaleCode } from '@/lib/i18n/locales';
 export const revalidate = 3600;
 
 const GUIDE_HERO_IMAGES: Record<string, string> = {
-  'g-vip': '/images/pillars/guide-hero-01.webp',
-  'g-1': '/images/pillars/guide-hero-02.webp',
-  'g-2': '/images/pillars/guide-hero-03.webp',
-  'g-3': '/images/pillars/guide-hero-04.webp',
-  'g-4': '/images/pillars/guide-hero-05.webp',
-  'g-5': '/images/pillars/guide-hero-06.webp',
-  'g-6': '/images/pillars/guide-hero-07.webp',
-  'g-7': '/images/pillars/guide-hero-08.webp',
-  'g-8': '/images/pillars/guide-hero-09.webp',
-  'g-9': '/images/pillars/guide-hero-10.webp',
-  'g-10': '/images/pillars/guide-hero-11.webp',
-  'g-11': '/images/pillars/guide-hero-12.webp',
-  'g-12': '/images/pillars/guide-hero-13.webp',
-  'g-13': '/images/pillars/guide-hero-14.webp',
+  'g-dress-code': '/images/pillars/guide-hero-01.webp', 'g-vip': '/images/pillars/guide-hero-01.webp',
+  'g-secret-bars': '/images/pillars/guide-hero-02.webp', 'g-1': '/images/pillars/guide-hero-02.webp',
+  'g-vip-tables': '/images/pillars/guide-hero-03.webp', 'g-2': '/images/pillars/guide-hero-03.webp',
+  'g-dj-interview': '/images/pillars/guide-hero-04.webp', 'g-3': '/images/pillars/guide-hero-04.webp',
+  'g-techno-2026': '/images/pillars/guide-hero-05.webp', 'g-4': '/images/pillars/guide-hero-05.webp',
+  'g-vip-bottle-prices': '/images/pillars/guide-hero-06.webp', 'g-5': '/images/pillars/guide-hero-06.webp',
+  'g-weekly-calendar': '/images/pillars/guide-hero-07.webp', 'g-6': '/images/pillars/guide-hero-07.webp',
+  'g-rooftops-milan': '/images/pillars/guide-hero-08.webp', 'g-7': '/images/pillars/guide-hero-08.webp',
+  'g-private-parties': '/images/pillars/guide-hero-09.webp', 'g-8': '/images/pillars/guide-hero-09.webp',
+  'g-mfw-fuorisalone-f1': '/images/pillars/guide-hero-10.webp', 'g-9': '/images/pillars/guide-hero-10.webp',
+  'g-san-siro-football-afterparties': '/images/pillars/guide-hero-11.webp', 'g-10': '/images/pillars/guide-hero-11.webp',
+  'g-new-years-eve-2027': '/images/pillars/guide-hero-12.webp', 'g-11': '/images/pillars/guide-hero-12.webp',
+  'g-concert-afterparties-milan': '/images/pillars/guide-hero-13.webp', 'g-12': '/images/pillars/guide-hero-13.webp',
+  'g-bachelor-bachelorette-vip-milan': '/images/pillars/guide-hero-14.webp', 'g-13': '/images/pillars/guide-hero-14.webp',
 };
 
 const GUIDE_INLINE_IMAGES: Record<string, string[]> = {
-  'g-vip': ['/images/pillars/guide-inline-01-a.webp', '/images/pillars/guide-inline-01-b.webp', '/images/pillars/guide-inline-01-c.webp', '/images/pillars/guide-inline-01-d.webp'],
-  'g-1': ['/images/pillars/guide-inline-02-a.webp', '/images/pillars/guide-inline-02-b.webp', '/images/pillars/guide-inline-02-c.webp', '/images/pillars/guide-inline-02-d.webp'],
-  'g-2': ['/images/pillars/guide-inline-03-a.webp', '/images/pillars/guide-inline-03-b.webp', '/images/pillars/guide-inline-03-c.webp', '/images/pillars/guide-inline-03-d.webp'],
-  'g-3': ['/images/pillars/guide-inline-04-a.webp', '/images/pillars/guide-inline-04-b.webp', '/images/pillars/guide-inline-04-c.webp', '/images/pillars/guide-inline-04-d.webp'],
-  'g-4': ['/images/pillars/guide-inline-05-a.webp', '/images/pillars/guide-inline-05-b.webp', '/images/pillars/guide-inline-05-c.webp', '/images/pillars/guide-inline-05-d.webp'],
-  'g-5': ['/images/pillars/guide-inline-06-a.webp', '/images/pillars/guide-inline-06-b.webp', '/images/pillars/guide-inline-06-c.webp', '/images/pillars/guide-inline-06-d.webp'],
-  'g-6': ['/images/pillars/guide-inline-07-a.webp', '/images/pillars/guide-inline-07-b.webp', '/images/pillars/guide-inline-07-c.webp', '/images/pillars/guide-inline-07-d.webp'],
-  'g-7': ['/images/pillars/guide-inline-08-a.webp', '/images/pillars/guide-inline-08-b.webp', '/images/pillars/guide-inline-08-c.webp', '/images/pillars/guide-inline-08-d.webp'],
-  'g-8': ['/images/pillars/guide-inline-09-a.webp', '/images/pillars/guide-inline-09-b.webp', '/images/pillars/guide-inline-09-c.webp', '/images/pillars/guide-inline-09-d.webp'],
-  'g-9': ['/images/pillars/guide-inline-10-a.webp', '/images/pillars/guide-inline-10-b.webp', '/images/pillars/guide-inline-10-c.webp', '/images/pillars/guide-inline-10-d.webp'],
-  'g-10': ['/images/pillars/guide-inline-11-a.webp', '/images/pillars/guide-inline-11-b.webp', '/images/pillars/guide-inline-11-c.webp', '/images/pillars/guide-inline-11-d.webp'],
-  'g-11': ['/images/pillars/guide-inline-12-a.webp', '/images/pillars/guide-inline-12-b.webp', '/images/pillars/guide-inline-12-c.webp', '/images/pillars/guide-inline-12-d.webp'],
-  'g-12': ['/images/pillars/guide-inline-13-a.webp', '/images/pillars/guide-inline-13-b.webp', '/images/pillars/guide-inline-13-c.webp', '/images/pillars/guide-inline-13-d.webp'],
-  'g-13': ['/images/pillars/guide-inline-14-a.webp', '/images/pillars/guide-inline-14-b.webp', '/images/pillars/guide-inline-14-c.webp', '/images/pillars/guide-inline-14-d.webp'],
+  'g-dress-code': ['/images/pillars/guide-inline-01-a.webp', '/images/pillars/guide-inline-01-b.webp', '/images/pillars/guide-inline-01-c.webp', '/images/pillars/guide-inline-01-d.webp'], 'g-vip': ['/images/pillars/guide-inline-01-a.webp', '/images/pillars/guide-inline-01-b.webp', '/images/pillars/guide-inline-01-c.webp', '/images/pillars/guide-inline-01-d.webp'],
+  'g-secret-bars': ['/images/pillars/guide-inline-02-a.webp', '/images/pillars/guide-inline-02-b.webp', '/images/pillars/guide-inline-02-c.webp', '/images/pillars/guide-inline-02-d.webp'], 'g-1': ['/images/pillars/guide-inline-02-a.webp', '/images/pillars/guide-inline-02-b.webp', '/images/pillars/guide-inline-02-c.webp', '/images/pillars/guide-inline-02-d.webp'],
+  'g-vip-tables': ['/images/pillars/guide-inline-03-a.webp', '/images/pillars/guide-inline-03-b.webp', '/images/pillars/guide-inline-03-c.webp', '/images/pillars/guide-inline-03-d.webp'], 'g-2': ['/images/pillars/guide-inline-03-a.webp', '/images/pillars/guide-inline-03-b.webp', '/images/pillars/guide-inline-03-c.webp', '/images/pillars/guide-inline-03-d.webp'],
+  'g-dj-interview': ['/images/pillars/guide-inline-04-a.webp', '/images/pillars/guide-inline-04-b.webp', '/images/pillars/guide-inline-04-c.webp', '/images/pillars/guide-inline-04-d.webp'], 'g-3': ['/images/pillars/guide-inline-04-a.webp', '/images/pillars/guide-inline-04-b.webp', '/images/pillars/guide-inline-04-c.webp', '/images/pillars/guide-inline-04-d.webp'],
+  'g-techno-2026': ['/images/pillars/guide-inline-05-a.webp', '/images/pillars/guide-inline-05-b.webp', '/images/pillars/guide-inline-05-c.webp', '/images/pillars/guide-inline-05-d.webp'], 'g-4': ['/images/pillars/guide-inline-05-a.webp', '/images/pillars/guide-inline-05-b.webp', '/images/pillars/guide-inline-05-c.webp', '/images/pillars/guide-inline-05-d.webp'],
+  'g-vip-bottle-prices': ['/images/pillars/guide-inline-06-a.webp', '/images/pillars/guide-inline-06-b.webp', '/images/pillars/guide-inline-06-c.webp', '/images/pillars/guide-inline-06-d.webp'], 'g-5': ['/images/pillars/guide-inline-06-a.webp', '/images/pillars/guide-inline-06-b.webp', '/images/pillars/guide-inline-06-c.webp', '/images/pillars/guide-inline-06-d.webp'],
+  'g-weekly-calendar': ['/images/pillars/guide-inline-07-a.webp', '/images/pillars/guide-inline-07-b.webp', '/images/pillars/guide-inline-07-c.webp', '/images/pillars/guide-inline-07-d.webp'], 'g-6': ['/images/pillars/guide-inline-07-a.webp', '/images/pillars/guide-inline-07-b.webp', '/images/pillars/guide-inline-07-c.webp', '/images/pillars/guide-inline-07-d.webp'],
+  'g-rooftops-milan': ['/images/pillars/guide-inline-08-a.webp', '/images/pillars/guide-inline-08-b.webp', '/images/pillars/guide-inline-08-c.webp', '/images/pillars/guide-inline-08-d.webp'], 'g-7': ['/images/pillars/guide-inline-08-a.webp', '/images/pillars/guide-inline-08-b.webp', '/images/pillars/guide-inline-08-c.webp', '/images/pillars/guide-inline-08-d.webp'],
+  'g-private-parties': ['/images/pillars/guide-inline-09-a.webp', '/images/pillars/guide-inline-09-b.webp', '/images/pillars/guide-inline-09-c.webp', '/images/pillars/guide-inline-09-d.webp'], 'g-8': ['/images/pillars/guide-inline-09-a.webp', '/images/pillars/guide-inline-09-b.webp', '/images/pillars/guide-inline-09-c.webp', '/images/pillars/guide-inline-09-d.webp'],
+  'g-mfw-fuorisalone-f1': ['/images/pillars/guide-inline-10-a.webp', '/images/pillars/guide-inline-10-b.webp', '/images/pillars/guide-inline-10-c.webp', '/images/pillars/guide-inline-10-d.webp'], 'g-9': ['/images/pillars/guide-inline-10-a.webp', '/images/pillars/guide-inline-10-b.webp', '/images/pillars/guide-inline-10-c.webp', '/images/pillars/guide-inline-10-d.webp'],
+  'g-san-siro-football-afterparties': ['/images/pillars/guide-inline-11-a.webp', '/images/pillars/guide-inline-11-b.webp', '/images/pillars/guide-inline-11-c.webp', '/images/pillars/guide-inline-11-d.webp'], 'g-10': ['/images/pillars/guide-inline-11-a.webp', '/images/pillars/guide-inline-11-b.webp', '/images/pillars/guide-inline-11-c.webp', '/images/pillars/guide-inline-11-d.webp'],
+  'g-new-years-eve-2027': ['/images/pillars/guide-inline-12-a.webp', '/images/pillars/guide-inline-12-b.webp', '/images/pillars/guide-inline-12-c.webp', '/images/pillars/guide-inline-12-d.webp'], 'g-11': ['/images/pillars/guide-inline-12-a.webp', '/images/pillars/guide-inline-12-b.webp', '/images/pillars/guide-inline-12-c.webp', '/images/pillars/guide-inline-12-d.webp'],
+  'g-concert-afterparties-milan': ['/images/pillars/guide-inline-13-a.webp', '/images/pillars/guide-inline-13-b.webp', '/images/pillars/guide-inline-13-c.webp', '/images/pillars/guide-inline-13-d.webp'], 'g-12': ['/images/pillars/guide-inline-13-a.webp', '/images/pillars/guide-inline-13-b.webp', '/images/pillars/guide-inline-13-c.webp', '/images/pillars/guide-inline-13-d.webp'],
+  'g-bachelor-bachelorette-vip-milan': ['/images/pillars/guide-inline-14-a.webp', '/images/pillars/guide-inline-14-b.webp', '/images/pillars/guide-inline-14-c.webp', '/images/pillars/guide-inline-14-d.webp'], 'g-13': ['/images/pillars/guide-inline-14-a.webp', '/images/pillars/guide-inline-14-b.webp', '/images/pillars/guide-inline-14-c.webp', '/images/pillars/guide-inline-14-d.webp'],
 };
 
 
@@ -374,6 +374,15 @@ export default async function GuidePage({ params }: Props) {
               </div>
             ))}
 
+            {(GUIDE_INLINE_IMAGES[guide.id] || []).slice(guide.sections.length).length > 0 && (
+              <div className="my-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {(GUIDE_INLINE_IMAGES[guide.id] || []).slice(guide.sections.length).map((extraImg, extraIdx) => (
+                  <div key={extraImg} className="relative h-56 md:h-64 w-full rounded-2xl overflow-hidden border border-white/10">
+                    <Image src={extraImg} alt={`${title} — ${extraIdx + 1}`} title={`${title} — ${extraIdx + 1}`} fill quality={85} sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+                  </div>
+                ))}
+              </div>
+            )}
             {/* FAQs if any */}
             {guide.faqs && guide.faqs.length > 0 && (
               <div className="mt-16 pt-12 border-t border-white/10">
