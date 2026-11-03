@@ -31,7 +31,7 @@ export function HomeHalloweenAndCapodannoSections({
         ? 'Dal Lunedì alla Domenica sotto la Torre Branca: Monday Night, Martedì Universitario, Mercoledì Absolutely, Giovedì Viziatissima, Friday Night, Saturday Night & Sunday Uptown. Royal Aperitivo dalle 19:30 e Club fino alle 05:00.'
         : 'Monday through Sunday beneath Torre Branca in Parco Sempione: Monday Night, University Tuesday, Absolutely Wednesday, Viziatissima Thursday, Friday Night, Saturday Night & Uptown Sunday. Royal Aperitivo from 19:30 & Club until 05:00.',
       badge: isIt ? 'Royal Aperitivo da 15–20€ · Tavoli VIP da 320€ a 5.000€' : 'Royal Aperitivo from €15–20 · VIP Tables €320 to €5,000',
-      posterSrc: '/images/events/october-2026/249213-e2755e4bf02c.webp',
+      posterSrc: '/images/venues/just-me-milano/just-me-milano-party-01.webp',
       href: `${prefix}/events/justme-saturday-saturday-night`,
     },
     {
@@ -44,7 +44,7 @@ export function HomeHalloweenAndCapodannoSections({
         ? 'Giovedì Tr3ndy Society, Venerdì Aperitivo Cantato & Live Music e Sabato Luxury Dinner Show & Club tra i lampadari di cristallo di Via Messina 38.'
         : 'Thursday Tr3ndy Society, Friday Singing Aperitivo & Live Music, and Saturday Luxury Dinner Show & Club under crystal chandeliers at Via Messina 38.',
       badge: isIt ? 'Aperitivo Cantato da 20€ · Tavoli VIP & Dinner da 300€' : 'Singing Aperitivo from €20 · VIP Tables & Dinner from €300',
-      posterSrc: '/images/events/october-2026/243822-fa1698470cb9.webp',
+      posterSrc: '/images/venues/pineta-milano/pineta-milano-aperitivo-01.webp',
       href: `${prefix}/events/pineta-friday-aperitivo-cantato`,
     },
     {
@@ -57,7 +57,7 @@ export function HomeHalloweenAndCapodannoSections({
         ? 'A 150 metri dallo Stadio San Siro (Piazzale dello Sport 14): Giovedì, Venerdì e Sabato con Royal Aperitivo dalle 19:30, Hip-Hop, Reggaeton, Urban & Commercial Arena e 3 aree Privé.'
         : 'Just 150 meters from San Siro Stadium (Piazzale dello Sport 14): Thursday, Friday & Saturday with Royal Aperitivo from 19:30, Hip-Hop, Reggaeton, Urban & Commercial Arena and 3 VIP Privé zones.',
       badge: isIt ? 'Royal Aperitivo da 15€ · Tavoli Pista, Privé Aria & Console da 200€' : 'Royal Aperitivo from €15 · Dancefloor, Privé & DJ Tables from €200',
-      posterSrc: '/images/events/october-2026/242617-59f08f112437.webp',
+      posterSrc: '/images/venues/aria-club-milano/aria-club-milano-garden-01.webp',
       href: `${prefix}/events/aria-saturday-saturday-night`,
     },
     {
@@ -83,7 +83,7 @@ export function HomeHalloweenAndCapodannoSections({
         ? 'Da Martedì a Domenica al 20° piano con vista a 360° sullo skyline di Milano: Sunset Aperitivo dalle 18:30, cena panoramica à la carte, mixology d’autore e Sky Clubbing fino a tardi.'
         : 'Tuesday through Sunday on the 20th floor with 360° Milan skyline views: Sunset Aperitivo from 18:30, panoramic à la carte dinner, signature mixology & Sky Clubbing until late.',
       badge: isIt ? 'Sunset Aperitivo da 20€ · Cena Vista Skyline & Tavoli VIP Rooftop' : 'Sunset Aperitivo from €20 · Skyline Dinner & Rooftop VIP Tables',
-      posterSrc: '/images/venues/voya-rooftop-milan/voya-rooftop-milan-interior-01.webp',
+      posterSrc: '/images/venues/voya-rooftop-milan/voya-rooftop-milan-interior-02.webp',
       href: `${prefix}/events/voya-saturday-rooftop-experience`,
     },
     {
@@ -250,7 +250,7 @@ export function HomeHalloweenAndCapodannoSections({
                       src={card.posterSrc}
                       alt={card.title}
                       loading="lazy"
-                      className="block h-80 w-full object-contain"
+                      className="block aspect-[16/9] w-full object-cover"
                     />
                   </Link>
                   <div className="p-6 pb-2">
