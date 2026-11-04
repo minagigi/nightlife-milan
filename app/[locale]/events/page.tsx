@@ -119,7 +119,7 @@ export default async function EventsHubPage({ params }: Props) {
         </div>
 
         <header className="relative overflow-hidden border-b border-[#F6F1E7]/14 bg-[#0B0A09]">
-          <Image src="/images/pillars/events-hub-hero.webp" alt={editorial.heading} fill priority sizes="100vw" className="object-cover opacity-25 pointer-events-none" />
+          <Image quality={92} src="/images/pillars/events-hub-hero.webp" alt={editorial.heading} fill priority sizes="100vw" className="object-cover opacity-25 pointer-events-none" />
           <div className="relative z-10 mx-auto max-w-[1440px] border-x border-[#F6F1E7]/14 px-5 pb-14 pt-14 sm:px-14">
             <p className="mb-4 font-mono text-xs uppercase tracking-[0.26em] text-[#D6BE96]">
               {editorial.eyebrow}

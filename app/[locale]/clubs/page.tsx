@@ -158,7 +158,7 @@ export default async function ClubsPage({
             src="/images/pillars/clubs-hero.webp"
             alt="Milan clubbing scene — elite nightclubs and dancefloors"
             fill
-            quality={85}
+            quality={92}
             sizes="100vw"
             className="object-cover object-center"
             priority

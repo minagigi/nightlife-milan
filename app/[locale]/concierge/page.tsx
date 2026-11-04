@@ -208,7 +208,7 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
     <main className="min-h-screen bg-[#131009]">
       <div className="relative h-64 sm:h-80 w-full overflow-hidden">
-        <Image
+        <Image quality={92}
           src="/images/pillars/concierge-hero.webp"
           alt="Milan Nightlife VIP Concierge Desk"
           fill
@@ -415,7 +415,7 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
             ].map((img) => (
               <div key={img.label} className="relative group">
                 <div className="relative h-36 rounded-xl overflow-hidden border border-white/8">
-                  <Image src={img.src} alt={img.alt} fill quality={85} className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width: 768px) 50vw, 20vw" />
+                  <Image src={img.src} alt={img.alt} fill quality={92} className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width: 768px) 50vw, 40vw" />
                 </div>
                 <p className="font-sans text-white/40 text-xs text-center mt-2 tracking-widest uppercase">{img.label}</p>
               </div>

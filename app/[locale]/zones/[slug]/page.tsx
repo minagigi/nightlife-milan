@@ -300,7 +300,7 @@ export default async function ZonePage({ params }: Props) {
     <main className="flex-grow pt-24 pb-20 bg-[#131009]">
       <div data-zone-top-hero="true" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
         <div className="relative h-64 sm:h-80 w-full rounded-2xl overflow-hidden border border-champagne/30">
-          <Image
+          <Image quality={92}
             src={ZONE_HERO_MAP[slug] || zone.image || '/images/pillars/zone-hero-01.webp'}
             alt={`${zone.name} Milan Nightlife District`}
             fill
@@ -482,7 +482,7 @@ export default async function ZonePage({ params }: Props) {
             <div className="mb-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {(ZONE_INLINE_MAP[slug] || ZONE_INLINE_MAP['brera']).map((imgSrc, idx) => (
                 <div key={imgSrc} className="relative aspect-[16/9] w-full rounded-xl overflow-hidden border border-white/10">
-                  <Image
+                  <Image quality={92}
                     src={imgSrc}
                     alt={`${zone.name} Milan Nightlife Atmosphere ${idx + 1}`}
                     fill

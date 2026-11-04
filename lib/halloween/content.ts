@@ -38,37 +38,37 @@ export const HALLOWEEN_CONTENT = { en, it, es, fr, de, pt, nl, ru, tr, zh, ar, b
 export const HALLOWEEN_ASSETS: readonly HalloweenAsset[] = [
   {
     "src": "/images/events/october-2026/alcatraz-dia-de-los-muertos-a9c89f9ef751.webp",
-    "width": 684,
-    "height": 358,
-    "bytes": 90680,
-    "sha256": "a3e893ebc46e2522d13f8419b9f86432c3ee80dbb5537036bba500b2c1291759",
+    "width": 1376,
+    "height": 768,
+    "bytes": 197516,
+    "sha256": "95ae6a625b15b2d743246e1dc0c6e709a9d0e4066a4dd6fbe53b54be4e2464b1",
     "sourceRef": "https://www.alcatrazmilano.it/ · official Halloween listing",
     "kind": "programme-artwork"
   },
   {
     "src": "/images/events/october-2026/halloween-aria-243203.webp",
-    "width": 1600,
-    "height": 920,
-    "bytes": 218078,
-    "sha256": "5979d0f8592aa96115dc3def1e8d63a3276a0ec5078e9b4f54aa1d17f0bc7a2d",
+    "width": 1376,
+    "height": 768,
+    "bytes": 253502,
+    "sha256": "d89063cf0c6119fb02c7bc19ed314aa50d3f46cc1187316378f7ca88ac9d7adb",
     "sourceRef": "https://xceed.me/en/milano/event/halloween-party-65/243203 · official Aria Halloween listing",
     "kind": "programme-artwork"
   },
   {
     "src": "/images/events/october-2026/halloween-gate-240984.webp",
-    "width": 1080,
-    "height": 1080,
-    "bytes": 205742,
-    "sha256": "0c759551aa8bc1d4b87efe1dff261e4fc476faf59c9ba9303b43cc1863593e50",
+    "width": 1376,
+    "height": 768,
+    "bytes": 210008,
+    "sha256": "a60f6bdce21d0fc309098c9f506d5156620ad49dce2b6f150b6d5f37c0a355bd",
     "sourceRef": "https://www.gatemilano.it/events · official Gate Halloween listing",
     "kind": "programme-artwork"
   },
   {
     "src": "/images/events/october-2026/halloween-amnesia-leon-2026.webp",
-    "width": 1080,
-    "height": 1350,
-    "bytes": 165882,
-    "sha256": "ccf71f68f20e80050ed97b6a162d2a130cd7d1e6b08c69abb51aac53a87bd191",
+    "width": 1376,
+    "height": 768,
+    "bytes": 241618,
+    "sha256": "ad347a03f063f3931a29b0cd0219fcd25bc9562df7bf91b200d4e0e9ea8dec58",
     "sourceRef": "https://amnesiamilano.com/ · official Amnesia Halloween listing",
     "kind": "programme-artwork"
   },
@@ -78,7 +78,7 @@ export const HALLOWEEN_ASSETS: readonly HalloweenAsset[] = [
     "height": 768,
     "bytes": 233834,
     "sha256": "74810efa42387034ecfffef224a71a3c4e70c66ccb02fb3043048f65f363506b",
-    "sourceRef": "https://nightlifemilan.com/ · Nightlife Milan editorial illustration",
+    "sourceRef": "Nightlife Milan editorial illustration · Amnesia Milano",
     "kind": "editorial-illustration"
   }
 ];

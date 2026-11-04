@@ -400,11 +400,11 @@ export default function CapodannoInteractiveFilter({
               >
                 <div>
                   <div className="relative h-52 w-full overflow-hidden">
-                    <Image
+                    <Image quality={92}
                       src={event.image}
                       alt={title}
                       fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
                       className="object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#18140c] via-[#18140c]/40 to-transparent" />

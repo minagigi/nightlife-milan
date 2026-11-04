@@ -195,7 +195,7 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
     <main className="min-h-screen bg-[#131009]">
       <div data-aperitivo-top-hero="true" className="max-w-6xl mx-auto px-6 pt-24">
         <div className="relative h-64 sm:h-80 w-full rounded-2xl overflow-hidden border border-champagne/30">
-          <Image
+          <Image quality={92}
             src="/images/pillars/aperitivo-01.webp"
             alt="Milan Royal Aperitivo Sunset Terrace & Cocktails"
             fill
@@ -293,7 +293,7 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
                       src={bar.image}
                       alt={bar.name}
                       fill
-                      quality={85}
+                      quality={92}
                       className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />

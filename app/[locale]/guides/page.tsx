@@ -391,7 +391,7 @@ export default async function GuidesPage({
               src={featuredGuide.image || '/images/bottle-service-milan-vip-nightclub.webp'}
               alt={getLocalizedText(featuredGuide.title, locale).replace(/[—–]/g, ' - ')}
               fill
-              quality={85}
+              quality={92}
               sizes="100vw"
               className="object-cover transition-transform duration-700 group-hover:scale-105"
               referrerPolicy="no-referrer"
@@ -493,7 +493,7 @@ export default async function GuidesPage({
                     src={guide.image || '/images/milan-nightclub-luxury-vip-champagne.webp'}
                     alt={guideTitle}
                     fill
-                    quality={85}
+                    quality={92}
                     sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     referrerPolicy="no-referrer"

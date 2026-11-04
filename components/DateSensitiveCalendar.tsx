@@ -70,8 +70,8 @@ function DateSensitiveCard({
             src={event.image}
             alt={event.title}
             fill
-            sizes="(max-width: 639px) calc(100vw - 4rem), (max-width: 1023px) calc((100vw - 5.5rem) / 2), calc((100vw - 8rem) / 3)"
-            quality={75}
+            sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 40vw"
+            quality={92}
             priority={prioritizeImage}
             fetchPriority={prioritizeImage ? 'high' : undefined}
             loading={prioritizeImage ? undefined : 'lazy'}
@@ -137,8 +137,8 @@ function DateSensitiveGalleryCard({
               alt={event.title}
               title={fullPoster ? event.title : undefined}
               fill
-              sizes="(max-width: 639px) calc(100vw - 4rem), (max-width: 1023px) calc((100vw - 5.5rem) / 2), calc((100vw - 8rem) / 3)"
-              quality={75}
+              sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 40vw"
+              quality={92}
               priority={prioritizeImage}
               fetchPriority={prioritizeImage ? 'high' : undefined}
               loading={prioritizeImage ? undefined : 'lazy'}

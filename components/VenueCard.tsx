@@ -62,9 +62,9 @@ export default function VenueCard({
         src={image}
         alt={name}
         fill
-        quality={85}
+        quality={92}
         className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.07]"
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 60vw, 45vw"
         decoding="async"
       />
 

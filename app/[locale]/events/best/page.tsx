@@ -346,7 +346,7 @@ export default async function EventsBestPage({ params }: Props) {
                   alt={v.name[lang]}
                   fill
                   sizes="(max-width: 768px) 100vw, 1024px"
-                  quality={85}
+                  quality={92}
                   className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#131009] via-[#131009]/60 to-transparent" />

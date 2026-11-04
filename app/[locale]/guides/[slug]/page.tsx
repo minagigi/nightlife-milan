@@ -253,7 +253,7 @@ export default async function GuidePage({ params }: Props) {
               src={GUIDE_HERO_IMAGES[guide.id] || guide.image || '/images/guides-hero.webp'}
               alt={title}
               fill
-              quality={85}
+              quality={92}
               sizes="100vw"
               className="object-cover"
               priority
@@ -350,7 +350,7 @@ export default async function GuidePage({ params }: Props) {
                       alt={`${getLocalizedText(section.heading, locale)} — ${title}`}
                       title={`${getLocalizedText(section.heading, locale)} — ${title}`}
                       fill
-                      quality={85}
+                      quality={92}
                       sizes="(max-width: 1024px) 100vw, 50vw"
                       className="object-cover"
                     />
@@ -378,7 +378,7 @@ export default async function GuidePage({ params }: Props) {
               <div className="my-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {(GUIDE_INLINE_IMAGES[guide.id] || []).slice(guide.sections.length).map((extraImg, extraIdx) => (
                   <div key={extraImg} className="relative h-56 md:h-64 w-full rounded-2xl overflow-hidden border border-white/10">
-                    <Image src={extraImg} alt={`${title} — ${extraIdx + 1}`} title={`${title} — ${extraIdx + 1}`} fill quality={85} sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+                    <Image src={extraImg} alt={`${title} — ${extraIdx + 1}`} title={`${title} — ${extraIdx + 1}`} fill quality={92} sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
                   </div>
                 ))}
               </div>

@@ -775,7 +775,7 @@ export default async function FootballAfterpartiesPage({
             >
               <div className="grid grid-cols-1 lg:grid-cols-12">
                 <div className="relative h-72 lg:h-auto lg:col-span-4">
-                  <Image
+                  <Image quality={92}
                     src={club.image}
                     alt={isIt ? club.name : club.nameEn}
                     fill

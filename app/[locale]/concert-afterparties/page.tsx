@@ -763,7 +763,7 @@ export default async function ConcertAfterpartiesPage({
                     src={club.image}
                     alt={isIt ? club.nameIt : club.nameEn}
                     fill
-                    quality={85}
+                    quality={92}
                     sizes="(max-width: 1024px) 100vw, 33vw"
                     className="object-cover"
                   />

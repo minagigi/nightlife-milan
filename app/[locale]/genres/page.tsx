@@ -152,7 +152,7 @@ export default async function GenresIndexPage({
                 src={GENRE_IMAGES[slug] || '/images/milan-nightclub-luxury-vip-champagne.webp'}
                 alt={g.heroTitle[typedLocale]}
                 fill
-                quality={85}
+                quality={92}
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />

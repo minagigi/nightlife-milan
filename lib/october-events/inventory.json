@@ -33,8 +33,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/fabrique-fred-de-palma-16a3bcffe1e3.webp",
-        "width": 1080,
-        "height": 1440,
+        "width": 1376,
+        "height": 768,
         "bytes": 254976,
         "sha256": "4cfd670c8834b47349f1f6bd52783ca556164a892b32cff25a4b49861dfff27e"
       }
@@ -62,8 +62,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243599-8d811d65d7c5.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 189888,
         "sha256": "b38ad060ac9dedbe75af2ff811c8a1a2063ed49ea2aca30f6a836938e2fbb47b"
       },
@@ -198,8 +198,8 @@
       "imageSubjects": "Tempio Radio Notturna",
       "image": {
         "src": "/images/events/october-2026/tempio-20261001-0e2fac8ce38e.webp",
-        "width": 1200,
-        "height": 1208,
+        "width": 1376,
+        "height": 768,
         "bytes": 296154,
         "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
       },
@@ -291,8 +291,8 @@
       "doorTime": "2026-10-01T20:00:00+02:00",
       "image": {
         "src": "/images/events/october-2026/alcatraz-dargen-damico-5e4480373551.webp",
-        "width": 1278,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 212650,
         "sha256": "a0bdf6f9d0c2887ffacf1f09e76e41131f6855f1f3b5ecca7a6f5bc6dac575ce"
       }
@@ -357,8 +357,8 @@
       ],
       "image": {
         "src": "/images/events/october-2026/department-disco-rotten-2026-10-01-b8a69e7eae70.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 289286,
         "sha256": "40ae0c5ea25f9a8486c309f75ac51198fdf57e4d57909548d548ba18d0dbe16a"
       }
@@ -394,8 +394,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/magazzini-entropia-2-d4f987e96cef.webp",
-        "width": 1080,
-        "height": 1350,
+        "width": 1376,
+        "height": 768,
         "bytes": 176598,
         "sha256": "926d3c4d77136d399cfc5d74d3b65c6cdc3efe0ec081cc5301229d8edd3c5b2c"
       }
@@ -434,8 +434,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/theclub-20261001-3fd44825ead2.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 24218,
         "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
       }
@@ -463,8 +463,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/239849-77ca7ffa4b9e.webp",
-        "width": 1600,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 294746,
         "sha256": "35ecabd79e9c3761235d4aee2057bba83207c26c3300f2c8d7c3d4afe42ce441"
       },
@@ -571,8 +571,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243589-5b4f80bbdcb7.webp",
-        "width": 600,
-        "height": 600,
+        "width": 1376,
+        "height": 768,
         "bytes": 26566,
         "sha256": "3582261a1bfaaebc8d697eb911da5a6beb77809f06c7a552d259f68530f96ca4"
       },
@@ -687,8 +687,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/mib-billions-venerdi-2-ottobre-2026-69472ba4c13b.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 51026,
         "sha256": "e90f3133aeaca83339862022a7f90b74779acdf8f802f2fe4a86f7eebccbf328"
       }
@@ -736,8 +736,8 @@
       "sourceConflict": true,
       "image": {
         "src": "/images/events/october-2026/tempio-20261002-87919b0665fe.webp",
-        "width": 1200,
-        "height": 1208,
+        "width": 1376,
+        "height": 768,
         "bytes": 296154,
         "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
       }
@@ -823,8 +823,8 @@
       "admissionStatus": "sold_out",
       "image": {
         "src": "/images/events/october-2026/santeria-pierc-i-live-b495d76acf03.webp",
-        "width": 1080,
-        "height": 1350,
+        "width": 1376,
+        "height": 768,
         "bytes": 318484,
         "sha256": "a1e553888b2093702bf3b4d5cb8013ff8749f764b9f4c4764e64d64821d513b1"
       }
@@ -898,8 +898,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/236320-fc49385c7f62.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 195552,
         "sha256": "946554f7e1e332c97e6b2031ec38d80a7d6cefb0eb904b1321eb054f3d7adcbf"
       },
@@ -1077,8 +1077,8 @@
       "room": "Club Room",
       "image": {
         "src": "/images/events/october-2026/243205-a63266b5c354.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 85276,
         "sha256": "a44b6a1dbe3a941070234f4148c69fbe7ef1a596b0314b3e5d013f613fdb5abb"
       }
@@ -1115,8 +1115,8 @@
       "timeKind": "doors",
       "image": {
         "src": "/images/events/october-2026/alcatraz-wtf-fluo-carnival-night-50833b263cd6.webp",
-        "width": 960,
-        "height": 1200,
+        "width": 1376,
+        "height": 768,
         "bytes": 318776,
         "sha256": "3389960e813cacc52c153f1d1f12e558e0dd4955dee429b2d954e7cc2912532d"
       }
@@ -1152,8 +1152,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/apollo-ciao-discoteca-italiana-1430277493a3.webp",
-        "width": 1224,
-        "height": 1530,
+        "width": 1376,
+        "height": 768,
         "bytes": 102308,
         "sha256": "1431ef5656894356b1ecfdb0a9d0ab2c5aaec9efd1952c918797d98408b909b0"
       }
@@ -1235,8 +1235,8 @@
       "doorTime": "2026-10-02T23:00:00+02:00",
       "image": {
         "src": "/images/events/october-2026/fabrique-chainsaw-extreme-1-ebc7f5eaeded.webp",
-        "width": 1275,
-        "height": 1593,
+        "width": 1376,
+        "height": 768,
         "bytes": 308382,
         "sha256": "1c464032b73dee9c42ac2f0a7995ebdc3a2ca3d0da4234e4c6c273709ce359a8"
       }
@@ -1272,8 +1272,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/magazzini-the-blaze-caee25d0b744.webp",
-        "width": 1200,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 206724,
         "sha256": "0ddcaf79ac4cb2f816e48d50e31a2420a34b634ed9e41b6735628123d23b3a29"
       }
@@ -1309,8 +1309,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/theclub-20261002-a17dd723c2c8.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 24218,
         "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
       }
@@ -1461,8 +1461,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/242611-d6dfa52deb0b.webp",
-        "width": 1254,
-        "height": 1254,
+        "width": 1376,
+        "height": 768,
         "bytes": 222268,
         "sha256": "eae068d6b0bfa374878f09d861ab11fe1c4faeb316b76a22d89a1d2cf4e987f7"
       },
@@ -1526,8 +1526,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243582-e2755e4bf02c.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 116888,
         "sha256": "00bf0f0bbe678f9651187612f126860d4b5f683f6a88f46dc0374c39479b596c"
       },
@@ -1680,8 +1680,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/mib-love-affair-sabato-3-ottobre-2026-9b1477fa6da2.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 29060,
         "sha256": "26d45b1aaa32a4871fd57db6d76a347d971e30b8f9e4f36071ef3af39d221637"
       }
@@ -1762,8 +1762,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/245082-7df7b115fc2d.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 57748,
         "sha256": "ab3000d06f622b1743f0336e457c5474ef11aa08a87b3697cabeab44f2ed90d7"
       },
@@ -1822,8 +1822,8 @@
       "doorTime": "2026-10-03T22:00:00+02:00",
       "image": {
         "src": "/images/events/october-2026/fabrique-80s-never-die-9-c8a78cbf65c0.webp",
-        "width": 1600,
-        "height": 1067,
+        "width": 1376,
+        "height": 768,
         "bytes": 307832,
         "sha256": "cc59c0d64c0ea3db0d3d021f5aab484aeda383ac022ce54b4af7068d9345e75a"
       }
@@ -1850,8 +1850,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/238347-d469c46f29b4.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 168250,
         "sha256": "5408d59092eda258eea054cdc48ef4f346e2503e9fd5126520b945c4f7fbd233"
       },
@@ -1933,8 +1933,8 @@
       "room": "Main Room",
       "image": {
         "src": "/images/events/october-2026/240980-429ae995518c.webp",
-        "width": 1500,
-        "height": 1500,
+        "width": 1376,
+        "height": 768,
         "bytes": 291710,
         "sha256": "fe1663d7b0e4ca6f00536af8b3d84acf65aacfbc0b511b79c4b635aaa2fa062d"
       }
@@ -1971,8 +1971,8 @@
       "timeKind": "doors",
       "image": {
         "src": "/images/events/october-2026/alcatraz-we-are-young-2010s-party-3-586cde7ef1a5.webp",
-        "width": 1080,
-        "height": 1350,
+        "width": 1376,
+        "height": 768,
         "bytes": 380378,
         "sha256": "fd036526bdc20af05c2b8aedcd0dd3245fde15690333c7a65e3a77dd873152e0"
       }
@@ -2031,8 +2031,8 @@
       "shortName": "Trance Gate · Andrew Rayel",
       "image": {
         "src": "/images/events/october-2026/ra-2531416-d9ad139b7613.webp",
-        "width": 1080,
-        "height": 1174,
+        "width": 1376,
+        "height": 768,
         "bytes": 385432,
         "sha256": "9bab297f33e977515defa313b10dfe08f2d571337f407daa7f2f9ca307c06c73"
       }
@@ -2080,8 +2080,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/tempio-20261003-b239248c5c37.webp",
-        "width": 1200,
-        "height": 1208,
+        "width": 1376,
+        "height": 768,
         "bytes": 296154,
         "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
       }
@@ -2131,8 +2131,8 @@
       "timeKind": "doors",
       "image": {
         "src": "/images/events/october-2026/amnesia-rossi-vithz-sean-afful-b2b-garon-amnesia-milano-b0586c8c794e.webp",
-        "width": 1080,
-        "height": 1350,
+        "width": 1376,
+        "height": 768,
         "bytes": 146692,
         "sha256": "56b181279cc4708dc01aa097624cb47a91139be191b41232f466cb148d8ff4e6"
       }
@@ -2235,8 +2235,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/theclub-20261003-e234ca417202.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 40738,
         "sha256": "4b8810f4b595b0e055435b00e0d2167f4fe9b56d4d030ef27cad752df29512a0"
       }
@@ -2295,8 +2295,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/ra-2538629-935e1a0d50cd.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 37648,
         "sha256": "a329a209a23b34751f4a749420e626b1e6c27d3f6558b63dd3fb28b34b6c192c"
       }
@@ -2324,8 +2324,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243578-6c9b7c8de685.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 96634,
         "sha256": "7d5555682cd9db4e5c9d3f6e6213f76a6f8c9e3902cc790f5165204aeff39bd6"
       },
@@ -2479,8 +2479,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/theclub-20261004-0349c50fe330.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 40738,
         "sha256": "4b8810f4b595b0e055435b00e0d2167f4fe9b56d4d030ef27cad752df29512a0"
       }
@@ -2508,8 +2508,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243612-bbdee1490af9.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 150112,
         "sha256": "efee0066aaf05141f307325ffd85ff06064c7f34c42d36a88786a52b5f9ba05c"
       },
@@ -2655,8 +2655,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/santeria-the-lemon-twings-live-53cf3681b4be.webp",
-        "width": 1080,
-        "height": 1350,
+        "width": 1376,
+        "height": 768,
         "bytes": 632800,
         "sha256": "4a85a150978f92255a89687a77706512454bd89d650c262387ecd1a32f9f5ab0"
       }
@@ -2684,8 +2684,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243608-aa34ab79100b.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 121514,
         "sha256": "fd955a74a75ce54c0c051be65105fd6f03edb385d78f2a3bb1f72330eb17a770"
       },
@@ -2820,8 +2820,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243604-e2b7683e02e3.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 214548,
         "sha256": "42b8cb28482ca3fe9a528171407a39dac8e118c793d488979bb5ed8e88fbd568"
       },
@@ -3013,8 +3013,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/mib-internationalweek-mercoledi-7-ottobre-2026-5b99ec18bc20.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 61802,
         "sha256": "974ec1b18044e13b856dd025e3ffa02e40262c470b722b1d353ab491b45484ab"
       }
@@ -3050,8 +3050,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/theclub-20261007-0e69f2fb29b8.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 24218,
         "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
       }
@@ -3079,8 +3079,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243600-8d811d65d7c5.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 189888,
         "sha256": "b38ad060ac9dedbe75af2ff811c8a1a2063ed49ea2aca30f6a836938e2fbb47b"
       },
@@ -3188,8 +3188,8 @@
       "sourceConflict": true,
       "image": {
         "src": "/images/events/october-2026/mib-albicocca-student-s-party-giovedi-8-ottobre-2026-0e9b237acc21.webp",
-        "width": 1131,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 253724,
         "sha256": "dc3d9deaeae6f62e6d41fafd6dda25214ee17fa456115c8e508ae67153a01d77"
       }
@@ -3254,8 +3254,8 @@
       "imageSubjects": "Tempio Radio Notturna",
       "image": {
         "src": "/images/events/october-2026/tempio-20261008-0e2fac8ce38e.webp",
-        "width": 1200,
-        "height": 1208,
+        "width": 1376,
+        "height": 768,
         "bytes": 296154,
         "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
       },
@@ -3347,8 +3347,8 @@
       "doorTime": "2026-10-08T20:00:00+02:00",
       "image": {
         "src": "/images/events/october-2026/alcatraz-babyshambles-5602500e081f.webp",
-        "width": 828,
-        "height": 1047,
+        "width": 1376,
+        "height": 768,
         "bytes": 127382,
         "sha256": "f54a748425cd268c64dfa9a01c2066d24faa379a7cee35494f7f1636f14cac7e"
       }
@@ -3384,8 +3384,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/santeria-will-live-af772f76fea0.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 423568,
         "sha256": "99f377aa322a06e1cf01cd071c8cce98c104e34841913531a6ef419d6d3dfbc9"
       }
@@ -3424,8 +3424,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/theclub-20261008-6b9b5d1f874e.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 24218,
         "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
       }
@@ -3479,8 +3479,8 @@
       ],
       "image": {
         "src": "/images/events/october-2026/department-oktoberfast-2026-10-09-7c40343f7504.webp",
-        "width": 1600,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 157300,
         "sha256": "98ce29afac2406c706d9b67d9ee9c002e6b01f3c48b4b68a0725b49b83f1f202"
       },
@@ -3521,8 +3521,8 @@
       "timeKind": "doors",
       "image": {
         "src": "/images/events/october-2026/alcatraz-i-prevail-2-7a1480bb883a.webp",
-        "width": 1200,
-        "height": 628,
+        "width": 1376,
+        "height": 768,
         "bytes": 231722,
         "sha256": "a512211068005a40171df441ad8950bed93f25de9a824ec7137ea3b4eea948d2"
       }
@@ -3550,8 +3550,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243590-3d2820d9f0ee.webp",
-        "width": 720,
-        "height": 720,
+        "width": 1376,
+        "height": 768,
         "bytes": 56800,
         "sha256": "e1a466a9e988671509fc112b8d50b4e20a65071782f138be6cc72152a53878a5"
       },
@@ -3646,8 +3646,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243818-4cb1a6cdf184.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 138666,
         "sha256": "97af5f58ddd898f6c304d4f34256342c584ae2309ca072a0625e89f7fc308178"
       },
@@ -3758,8 +3758,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/mib-billions-venerdi-9-ottobre-2026-51bf08feb599.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 51026,
         "sha256": "e90f3133aeaca83339862022a7f90b74779acdf8f802f2fe4a86f7eebccbf328"
       }
@@ -3832,8 +3832,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/236321-ea27dd42c00f.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 163888,
         "sha256": "05c70733455191f61cfdd3b3c3aa0c74c8266242838610b3d15e660cb1ad1968"
       },
@@ -4046,8 +4046,8 @@
       "room": "Club Room",
       "image": {
         "src": "/images/events/october-2026/240520-08d882a833db.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 117928,
         "sha256": "3d651b0399c48d3027b991a7cee9c8a7537175bf135442bb3df95fbbe4e60174"
       }
@@ -4084,8 +4084,8 @@
       "timeKind": "doors",
       "image": {
         "src": "/images/events/october-2026/alcatraz-wtf-xoxo-gossip-girl-party-90f4459b53fb.webp",
-        "width": 1200,
-        "height": 628,
+        "width": 1376,
+        "height": 768,
         "bytes": 295684,
         "sha256": "68c79b711554457671db1b504bbc9a607591e65ca366182cda3d73feacfc8cf1"
       }
@@ -4177,8 +4177,8 @@
       "imageSubjects": "Oriental Techno Club",
       "image": {
         "src": "/images/events/october-2026/tempio-20261009-87919b0665fe.webp",
-        "width": 1200,
-        "height": 1208,
+        "width": 1376,
+        "height": 768,
         "bytes": 296154,
         "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
       }
@@ -4214,8 +4214,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/theclub-20261009-4925bccc5b34.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 24218,
         "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
       }
@@ -4269,8 +4269,8 @@
       ],
       "image": {
         "src": "/images/events/october-2026/department-oktoberfast-2026-10-10-7c40343f7504.webp",
-        "width": 1600,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 157300,
         "sha256": "98ce29afac2406c706d9b67d9ee9c002e6b01f3c48b4b68a0725b49b83f1f202"
       },
@@ -4428,8 +4428,8 @@
       ],
       "image": {
         "src": "/images/events/october-2026/ra-2513228-635c8ab6043f.webp",
-        "width": 1055,
-        "height": 1490,
+        "width": 1376,
+        "height": 768,
         "bytes": 29092,
         "sha256": "5d54f30368261203c9d81900b655a6448b0807f33df31e9fe4b4c2df385eb64e"
       }
@@ -4473,8 +4473,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/santeria-cyn-cyn-aperitivo-and-live-music-11-c4544ab49e20.webp",
-        "width": 1081,
-        "height": 1441,
+        "width": 1376,
+        "height": 768,
         "bytes": 159162,
         "sha256": "61ca7982d1d753a3c8339766ac9044e337459d872e56f78f102ac4cfc53149cd"
       }
@@ -4502,8 +4502,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/242373-e8e2974f685b.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 123952,
         "sha256": "cc6567293b976f6983b01e00d7e9d2cae5ddc03c73faa4a782ce6a1da21d2a97"
       },
@@ -4562,8 +4562,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/242612-d6dfa52deb0b.webp",
-        "width": 1254,
-        "height": 1254,
+        "width": 1376,
+        "height": 768,
         "bytes": 222268,
         "sha256": "eae068d6b0bfa374878f09d861ab11fe1c4faeb316b76a22d89a1d2cf4e987f7"
       },
@@ -4627,8 +4627,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243583-e2755e4bf02c.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 116888,
         "sha256": "00bf0f0bbe678f9651187612f126860d4b5f683f6a88f46dc0374c39479b596c"
       },
@@ -4738,8 +4738,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/mib-love-affair-sabato-10-ottobre-2026-743801cc21f2.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 29060,
         "sha256": "26d45b1aaa32a4871fd57db6d76a347d971e30b8f9e4f36071ef3af39d221637"
       }
@@ -4821,8 +4821,8 @@
       "admissionStatus": "sold_out",
       "image": {
         "src": "/images/events/october-2026/fabrique-j-ax-a5177b3a2e54.webp",
-        "width": 1124,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 268032,
         "sha256": "58004c3f199b1cef73c40a61b77559ed9ba462054df74e122ae58636349c5f54"
       }
@@ -4858,8 +4858,8 @@
       "room": "Main Room",
       "image": {
         "src": "/images/events/october-2026/240981-429ae995518c.webp",
-        "width": 1500,
-        "height": 1500,
+        "width": 1376,
+        "height": 768,
         "bytes": 291710,
         "sha256": "fe1663d7b0e4ca6f00536af8b3d84acf65aacfbc0b511b79c4b635aaa2fa062d"
       }
@@ -4896,8 +4896,8 @@
       "timeKind": "doors",
       "image": {
         "src": "/images/events/october-2026/alcatraz-la-vita-a-30-anni-c0dd0bf5554a.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 359830,
         "sha256": "f6009381d6cb3e82305bdd62a8a30b3dd74c71312915728766d1c29c69704e7f"
       }
@@ -4939,8 +4939,8 @@
       "sourceScope": "dated-calendar",
       "image": {
         "src": "/images/events/october-2026/duro-moab-daniel-avery-fd482ec00ac4.webp",
-        "width": 1100,
-        "height": 1100,
+        "width": 1376,
+        "height": 768,
         "bytes": 166918,
         "sha256": "e4cc7c7baa5ccff733f925e5acdc38a2757db0e264b41ff5ab9f295d3e36a11e"
       }
@@ -5061,8 +5061,8 @@
       "imageSubjects": "Resistance",
       "image": {
         "src": "/images/events/october-2026/tempio-20261010-c159898504a1.webp",
-        "width": 1200,
-        "height": 1208,
+        "width": 1376,
+        "height": 768,
         "bytes": 296154,
         "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
       }
@@ -5103,8 +5103,8 @@
       "timeKind": "doors",
       "image": {
         "src": "/images/events/october-2026/amnesia-amnesia-milano-24-years-anniversary-w-adam-beyer-cd1f96eea982.webp",
-        "width": 1080,
-        "height": 1350,
+        "width": 1376,
+        "height": 768,
         "bytes": 220408,
         "sha256": "bb26dbdfadcbaee57c74e34cb2b6330263eddf9cc04c7159d62505cb74b9a840"
       }
@@ -5140,8 +5140,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/theclub-20261010-62c9a04ff94b.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 40738,
         "sha256": "4b8810f4b595b0e055435b00e0d2167f4fe9b56d4d030ef27cad752df29512a0"
       }
@@ -5195,8 +5195,8 @@
       ],
       "image": {
         "src": "/images/events/october-2026/department-oktoberfast-2026-10-11-7c40343f7504.webp",
-        "width": 1600,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 157300,
         "sha256": "98ce29afac2406c706d9b67d9ee9c002e6b01f3c48b4b68a0725b49b83f1f202"
       },
@@ -5229,8 +5229,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243579-204f76e66003.webp",
-        "width": 1600,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 205000,
         "sha256": "bfb6af7e1bcd478b647997963a11f43d609558b3c759252ebe1ec07ad7764db6"
       },
@@ -5327,8 +5327,8 @@
       "doorTime": "2026-10-11T19:00:00+02:00",
       "image": {
         "src": "/images/events/october-2026/alcatraz-autechre-331f89706969.webp",
-        "width": 1280,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 77536,
         "sha256": "790dbc52c989a03c914f357e92bd613ce31add0f331a363e1a4c4ea1648963c2"
       }
@@ -5450,8 +5450,8 @@
       "admissionStatus": "sold_out",
       "image": {
         "src": "/images/events/october-2026/fabrique-j-ax2-a5177b3a2e54.webp",
-        "width": 1124,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 267906,
         "sha256": "161699cdc8a07ca03f5fa6adfa772f7bc191f77a14bbc6dda20cc0bfad9b0d74"
       }
@@ -5490,8 +5490,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/theclub-20261011-d9d13fa6c595.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 40738,
         "sha256": "4b8810f4b595b0e055435b00e0d2167f4fe9b56d4d030ef27cad752df29512a0"
       }
@@ -5528,8 +5528,8 @@
       "timeKind": "announced",
       "image": {
         "src": "/images/events/october-2026/alcatraz-lake-street-dive-1a8eeace72fa.webp",
-        "width": 1280,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 296940,
         "sha256": "92d509dfdcc0dfc499b534c23c2cf550059899b8434348f5c9d87aaebd6bf361"
       }
@@ -5565,8 +5565,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/fabrique-flaco-g-0c31b0071ec7.webp",
-        "width": 1280,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 301134,
         "sha256": "eef04d6e770674f865650920321eebd8beeaf3021df822b06ffe64541fc7cb95"
       }
@@ -5595,8 +5595,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243613-bbdee1490af9.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 150112,
         "sha256": "efee0066aaf05141f307325ffd85ff06064c7f34c42d36a88786a52b5f9ba05c"
       },
@@ -5697,8 +5697,8 @@
       "doorTime": "2026-10-13T18:00:00+02:00",
       "image": {
         "src": "/images/events/october-2026/alcatraz-behemoth-e-dimmu-borgir-835b5876c18b.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 484700,
         "sha256": "09b8fb7c8b19e8234b0134c11e8b5692be17296a23ec0eef75417c1bb68871c2"
       }
@@ -5727,8 +5727,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243609-aa34ab79100b.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 121514,
         "sha256": "fd955a74a75ce54c0c051be65105fd6f03edb385d78f2a3bb1f72330eb17a770"
       },
@@ -5801,8 +5801,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/239850-287177819d54.webp",
-        "width": 1600,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 343892,
         "sha256": "d14ee4e9751e16107c1f79f8edf7e129e40ae7ed015486902aa80d30f7775e5e"
       },
@@ -5897,8 +5897,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243605-e2b7683e02e3.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 214548,
         "sha256": "42b8cb28482ca3fe9a528171407a39dac8e118c793d488979bb5ed8e88fbd568"
       },
@@ -5995,8 +5995,8 @@
       "doorTime": "2026-10-14T19:00:00+02:00",
       "image": {
         "src": "/images/events/october-2026/alcatraz-europe-the-final-countdown-40th-anniversary-tour-908966b301ae.webp",
-        "width": 960,
-        "height": 540,
+        "width": 1376,
+        "height": 768,
         "bytes": 67894,
         "sha256": "a41bc298d4bbc1b878a5746ebed325d95fe3545cb2862941416472e63b6130b9"
       }
@@ -6037,8 +6037,8 @@
       "admissionStatus": "sold_out",
       "image": {
         "src": "/images/events/october-2026/santeria-leo-middea-live-1beb0d154fde.webp",
-        "width": 1280,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 148492,
         "sha256": "343a4e120fc915047a8c7a1dfc07d38023553280294a52976f7840a89cf149e8"
       }
@@ -6098,8 +6098,8 @@
       ],
       "image": {
         "src": "/images/events/october-2026/department-la-meneghina-il-tango-a-milano-2026-10-14-45ca87312602.webp",
-        "width": 1600,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 196682,
         "sha256": "7becea37956ae9f203e5820ac4ef564137794ab5a09083095f1b9abd80c61ce5"
       }
@@ -6143,8 +6143,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/mib-internationalweek-mercoledi-14-ottobre-2026-14eb51d181b3.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 64060,
         "sha256": "1fefb1c02bc83ddc608bce6250eb1cd6b88f622b23d64eb1b0899e9545ba40a2"
       }
@@ -6180,8 +6180,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/theclub-20261014-edab5e915afa.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 24218,
         "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
       }
@@ -6217,8 +6217,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/fabrique-jack-savoretti-1-b33fed73dfa3.webp",
-        "width": 1065,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 259076,
         "sha256": "ca488edc4c6b30a91b23ca451aaf7510fc187be5fac39aae8ff6e1c267ac79de"
       }
@@ -6273,8 +6273,8 @@
       ],
       "image": {
         "src": "/images/events/october-2026/department-aperitivo-con-delitto-2026-10-15-1c6416d37406.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 98968,
         "sha256": "24468ca6feda4d4564d6be72b6335926157bef7008c4602c3a79f9d92c249d89"
       }
@@ -6303,8 +6303,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243601-8d811d65d7c5.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 189888,
         "sha256": "b38ad060ac9dedbe75af2ff811c8a1a2063ed49ea2aca30f6a836938e2fbb47b"
       },
@@ -6428,8 +6428,8 @@
       "imageSubjects": "Tempio Radio Notturna",
       "image": {
         "src": "/images/events/october-2026/tempio-20261015-0e2fac8ce38e.webp",
-        "width": 1200,
-        "height": 1208,
+        "width": 1376,
+        "height": 768,
         "bytes": 296154,
         "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
       },
@@ -6566,8 +6566,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/theclub-20261015-2b4055b23772.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 24218,
         "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
       }
@@ -6596,8 +6596,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243592-3d2820d9f0ee.webp",
-        "width": 720,
-        "height": 720,
+        "width": 1376,
+        "height": 768,
         "bytes": 56800,
         "sha256": "e1a466a9e988671509fc112b8d50b4e20a65071782f138be6cc72152a53878a5"
       },
@@ -6684,8 +6684,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243819-4cb1a6cdf184.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 142936,
         "sha256": "489dfe8e50f202e47cda255bddac9bf3bb37690f70b1e525e5c7f58f0c7fc2aa"
       },
@@ -6796,8 +6796,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/mib-billions-venerdi-16-ottobre-2026-e445cc564365.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 51026,
         "sha256": "e90f3133aeaca83339862022a7f90b74779acdf8f802f2fe4a86f7eebccbf328"
       }
@@ -6835,8 +6835,8 @@
       "doorTime": "2026-10-16T19:00:00+02:00",
       "image": {
         "src": "/images/events/october-2026/alcatraz-immanuel-casto-2-367ae5e10de2.webp",
-        "width": 1600,
-        "height": 838,
+        "width": 1376,
+        "height": 768,
         "bytes": 62106,
         "sha256": "cf70fc9229f0dcd341996066168475b104625bb58823068633d86047b2a69a34"
       }
@@ -6918,8 +6918,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/fabrique-mylessmith-8f670fc9e279.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 235072,
         "sha256": "874769e6fc8aa6ec7371f9e754617733f72ccf99a171351fa1466b2e19525272"
       }
@@ -6991,8 +6991,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/236322-382a996a4cbf.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 43636,
         "sha256": "d836a2a7ee9ec5392f439a4c2d351d6e99b00645f824e164abd8eeda56336811"
       },
@@ -7155,8 +7155,8 @@
       "timeKind": "doors",
       "image": {
         "src": "/images/events/october-2026/alcatraz-wtf-fonk-the-favela-2-323870b55c3d.webp",
-        "width": 1200,
-        "height": 628,
+        "width": 1376,
+        "height": 768,
         "bytes": 375860,
         "sha256": "28f2addfc38b71478b0342ca2f00153afb2547df80ead88f44919b6b29b47c2a"
       }
@@ -7221,8 +7221,8 @@
       ],
       "image": {
         "src": "/images/events/october-2026/department-indie-power-2026-10-16-27719638d4eb.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 241844,
         "sha256": "1e09dfba02a4892065aa8ef8eac82cb8a83a1eb4ce683c790ec4e945ab42b5f2"
       }
@@ -7264,8 +7264,8 @@
       "sourceScope": "dated-calendar",
       "image": {
         "src": "/images/events/october-2026/duro-sottosuono-gene-on-earth-9d8f2e2ed54e.webp",
-        "width": 1600,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 234756,
         "sha256": "141e94b5eadc5128ceba59d7ec951d7045332daecc1d308b13abdd7eb47d50ce"
       }
@@ -7312,8 +7312,8 @@
       "imageSubjects": "Oriental Techno Club",
       "image": {
         "src": "/images/events/october-2026/tempio-20261016-87919b0665fe.webp",
-        "width": 1200,
-        "height": 1208,
+        "width": 1376,
+        "height": 768,
         "bytes": 296154,
         "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
       }
@@ -7351,8 +7351,8 @@
       "room": "Club Dept 184",
       "image": {
         "src": "/images/events/october-2026/department-inner-circle-5-2026-10-16-6a794b3def2d.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 87458,
         "sha256": "a6f4bc0275b683ef096ba8eb76462f56665d0abb860cab52c118746a605f9f09"
       }
@@ -7388,8 +7388,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/theclub-20261016-f30e22e73f3f.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 24218,
         "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
       }
@@ -7425,8 +7425,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/fabrique-jay-park-ft-lngshot-serenades-and-body-rolls-tour-e5574164cc74.webp",
-        "width": 316,
-        "height": 400,
+        "width": 1376,
+        "height": 768,
         "bytes": 44382,
         "sha256": "2f3032b2617aa6bceb55b11a08838cace9652955b4855b8f0aecb460bb739bc0"
       }
@@ -7454,8 +7454,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/242614-d6dfa52deb0b.webp",
-        "width": 1254,
-        "height": 1254,
+        "width": 1376,
+        "height": 768,
         "bytes": 222268,
         "sha256": "eae068d6b0bfa374878f09d861ab11fe1c4faeb316b76a22d89a1d2cf4e987f7"
       },
@@ -7520,8 +7520,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243585-e2755e4bf02c.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 116888,
         "sha256": "00bf0f0bbe678f9651187612f126860d4b5f683f6a88f46dc0374c39479b596c"
       },
@@ -7608,8 +7608,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243815-e33432d48dd4.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 114104,
         "sha256": "322a6eb81322911e507b6781f084e36645f4920c6a3825d538c2da3825ca87aa"
       },
@@ -7720,8 +7720,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/mib-love-affair-sabato-17-ottobre-2026-e9b062aa5c0b.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 29060,
         "sha256": "26d45b1aaa32a4871fd57db6d76a347d971e30b8f9e4f36071ef3af39d221637"
       }
@@ -7918,8 +7918,8 @@
       "room": "Main Room",
       "image": {
         "src": "/images/events/october-2026/240982-429ae995518c.webp",
-        "width": 1500,
-        "height": 1500,
+        "width": 1376,
+        "height": 768,
         "bytes": 291710,
         "sha256": "fe1663d7b0e4ca6f00536af8b3d84acf65aacfbc0b511b79c4b635aaa2fa062d"
       }
@@ -7965,8 +7965,8 @@
       "room": "Club Room",
       "image": {
         "src": "/images/events/october-2026/244293-3bd30fe68d6e.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 103396,
         "sha256": "dd21b332a8f30b70f3632a7fcc73015348284528619ec11e9b62f69246bd0276"
       }
@@ -8003,8 +8003,8 @@
       "timeKind": "doors",
       "image": {
         "src": "/images/events/october-2026/alcatraz-duemilaz-13-4e7789fbbbb8.webp",
-        "width": 684,
-        "height": 358,
+        "width": 1376,
+        "height": 768,
         "bytes": 81974,
         "sha256": "fb323e049d049249598b22290c697f4d77dedabc7faa9938e53b95f878817e44"
       }
@@ -8104,8 +8104,8 @@
       "imageSubjects": "Disco Felina",
       "image": {
         "src": "/images/events/october-2026/tempio-20261017-c52bd5327d6d.webp",
-        "width": 1200,
-        "height": 1208,
+        "width": 1376,
+        "height": 768,
         "bytes": 296154,
         "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
       }
@@ -8142,8 +8142,8 @@
       "doorTime": "2026-10-17T23:30:00+02:00",
       "image": {
         "src": "/images/events/october-2026/fabrique-maledetta-nostalgia-6-34091dabc908.webp",
-        "width": 1600,
-        "height": 1540,
+        "width": 1376,
+        "height": 768,
         "bytes": 356678,
         "sha256": "558fbd2ab1abb2c93a1f03aef7997590c23610377ccc678d3ff36dd0af1947d9"
       }
@@ -8179,8 +8179,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/theclub-20261017-0c33f722b16e.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 40738,
         "sha256": "4b8810f4b595b0e055435b00e0d2167f4fe9b56d4d030ef27cad752df29512a0"
       }
@@ -8250,8 +8250,8 @@
       "shortName": "Technocrazia",
       "image": {
         "src": "/images/events/october-2026/ra-2538483-13786ddfff73.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 214378,
         "sha256": "a75b9eda55451d3c685b412b23489a04272d50f00444ae8018487fb627997206"
       }
@@ -8279,8 +8279,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243580-292f42b9b15f.webp",
-        "width": 1600,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 205200,
         "sha256": "4e5f4f0b64fe9aa2f369809707fefdadf1af7540a52344c52077aa5f6e14f4b4"
       },
@@ -8393,8 +8393,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/magnolia-alex-cameron-afff7b806095.webp",
-        "width": 1080,
-        "height": 1350,
+        "width": 1376,
+        "height": 768,
         "bytes": 327324,
         "sha256": "1f6587dc3442b040dd0a79560638c7c1e352e661f35b297fbe76730a7498e42e"
       }
@@ -8480,8 +8480,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/theclub-20261018-2aba96d9cc32.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 40738,
         "sha256": "4b8810f4b595b0e055435b00e0d2167f4fe9b56d4d030ef27cad752df29512a0"
       }
@@ -8509,8 +8509,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243614-81b948f891ff.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 148022,
         "sha256": "d7ee9f8c54f995caaf0be94dad7035f976f5607b154e06b78003de1e1a61c2bd"
       },
@@ -8708,8 +8708,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/fabrique-williepeyote-45a742016d9c.webp",
-        "width": 1600,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 358674,
         "sha256": "546e8f76840933e491d22fad959064f00888d40dfd2f2ef187363c19388a026e"
       }
@@ -8737,8 +8737,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243610-fe0fbef3aec9.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 124064,
         "sha256": "89ed98bacfd9192b20076c50d565ee70e8fc2e8574482cff03d11c8fd10f08ba"
       },
@@ -8846,8 +8846,8 @@
       "imageSubjects": "Dub Pistols",
       "image": {
         "src": "/images/events/october-2026/magnolia-dub-pistols-3ef70171f3fe.webp",
-        "width": 1153,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 241026,
         "sha256": "a6eccb1c03192f74df5472fdc5267db93efbd2e316101b6a21f2f76016c0a6af"
       }
@@ -8875,8 +8875,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/240627-c57aeedf6442.webp",
-        "width": 1600,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 385994,
         "sha256": "061ccf5c51b490369d266b01448f7173b1c4f6d8b11f6157fff1b404d0e53beb"
       },
@@ -8936,8 +8936,8 @@
       "doorTime": "2026-10-20T19:00:00+02:00",
       "image": {
         "src": "/images/events/october-2026/alcatraz-nerissima-serpe-51bde3a29344.webp",
-        "width": 1600,
-        "height": 1068,
+        "width": 1376,
+        "height": 768,
         "bytes": 164368,
         "sha256": "168d787840d898afb4fe6b63f0c3f3e6ac369df89eca3c5b61db3c3492c75efb"
       }
@@ -9007,8 +9007,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243606-7d88f9d4637a.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 218502,
         "sha256": "925aeb2cab313b2d7012b1423ec356a705a8befb5d014a76733ac830ed3af9a0"
       },
@@ -9113,8 +9113,8 @@
       "doorTime": "2026-10-21T19:00:00+02:00",
       "image": {
         "src": "/images/events/october-2026/alcatraz-sayf-1f0ea38539b8.webp",
-        "width": 1080,
-        "height": 1350,
+        "width": 1376,
+        "height": 768,
         "bytes": 360614,
         "sha256": "debd8b4a2b687fee04599397e412a5bbfe55b2ec904978de725c6ac585cb6b57"
       }
@@ -9160,8 +9160,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/magnolia-temples-a117b9c0d1e6.webp",
-        "width": 600,
-        "height": 750,
+        "width": 1376,
+        "height": 768,
         "bytes": 76328,
         "sha256": "2c151c36904b9c081ecd6b081c41e4399ed4983feb4448af1c8b2fba4d37b45b"
       }
@@ -9205,8 +9205,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/mib-internationalweek-mercoledi-21-ottobre-2026-951bb73fe309.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 45658,
         "sha256": "6f233fe584dcf78053afd6aeb04dfc151f0a23fbc3463ec4ef1312bfc6f72c41"
       }
@@ -9242,8 +9242,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/theclub-20261021-6eab10dce0c0.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 24218,
         "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
       }
@@ -9271,8 +9271,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243602-60a2ee4a5c94.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 251850,
         "sha256": "b1b2fc4496c038e7536461e202d238a7f43e5e5b64edcb005293b159997803c9"
       },
@@ -9385,8 +9385,8 @@
       "imageSubjects": "Stormy",
       "image": {
         "src": "/images/events/october-2026/magnolia-stormy-desperado-world-tour-b11a640b194d.webp",
-        "width": 1280,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 226680,
         "sha256": "01425b41777d85882b307ce39a2c0c82e8871ea8f9a9b4cc1fdf0f7e37dd3512"
       }
@@ -9451,8 +9451,8 @@
       "imageSubjects": "Tempio Radio Notturna",
       "image": {
         "src": "/images/events/october-2026/tempio-20261022-0e2fac8ce38e.webp",
-        "width": 1200,
-        "height": 1208,
+        "width": 1376,
+        "height": 768,
         "bytes": 296154,
         "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
       },
@@ -9543,8 +9543,8 @@
       "doorTime": "2026-10-22T20:00:00+02:00",
       "image": {
         "src": "/images/events/october-2026/alcatraz-sayf-2-131ba51ece5e.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 309368,
         "sha256": "fa9504cf4239e2e164b44f4af2492c2ef3b3f34e28524cab293e2efebd22e30e"
       }
@@ -9580,8 +9580,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/santeria-lantidote-jazzmi-5d0ad259d432.webp",
-        "width": 1200,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 230502,
         "sha256": "79cb5b6428f6d9c78a91566d9bbd3462c791785b9ce83898e0c521535b1b9e28"
       }
@@ -9653,8 +9653,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/246848-e66d29de0ed9.webp",
-        "width": 1600,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 401262,
         "sha256": "1221f5bba41be53fb0e171657efd637f8e9d94e33a67b0a3d462f39f85261299"
       },
@@ -9704,8 +9704,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/theclub-20261022-2c8e69ad4023.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 24218,
         "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
       }
@@ -9733,8 +9733,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243593-c9378c1af8b2.webp",
-        "width": 720,
-        "height": 720,
+        "width": 1376,
+        "height": 768,
         "bytes": 59610,
         "sha256": "ea36d97602a5a4f4d5bfa38cd590a4d514e7448bf94f12df841ac2660e4b66ac"
       },
@@ -9829,8 +9829,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243820-4cb1a6cdf184.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 142936,
         "sha256": "489dfe8e50f202e47cda255bddac9bf3bb37690f70b1e525e5c7f58f0c7fc2aa"
       },
@@ -9945,8 +9945,8 @@
       "imageSubjects": "Stormy",
       "image": {
         "src": "/images/events/october-2026/magnolia-stormy-desperado-world-tour-sold-out-b11a640b194d.webp",
-        "width": 1280,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 226680,
         "sha256": "01425b41777d85882b307ce39a2c0c82e8871ea8f9a9b4cc1fdf0f7e37dd3512"
       }
@@ -9989,8 +9989,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/mib-billions-venerdi-23-ottobre-2026-24fd9cdb8f09.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 51026,
         "sha256": "e90f3133aeaca83339862022a7f90b74779acdf8f802f2fe4a86f7eebccbf328"
       }
@@ -10130,8 +10130,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/santeria-eman-fccaec24c47b.webp",
-        "width": 1080,
-        "height": 1350,
+        "width": 1376,
+        "height": 768,
         "bytes": 251838,
         "sha256": "2cb548b83339de262272e3472223649e8f47dd3e89e21bca1a643d54af74db84"
       }
@@ -10158,8 +10158,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/236323-761b32310614.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 93620,
         "sha256": "99519c13373d939105881c743c939f246f0b9750f6854a1df3d01593e28147dc"
       },
@@ -10314,8 +10314,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/245673-658f33246202.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 80470,
         "sha256": "9547866d4808837f2b31a1478e438f680e74c1af5119b4067309674361a79970"
       },
@@ -10363,8 +10363,8 @@
       "timeKind": "doors",
       "image": {
         "src": "/images/events/october-2026/alcatraz-wtf-jersey-sport-13c9a0322478.webp",
-        "width": 1200,
-        "height": 628,
+        "width": 1376,
+        "height": 768,
         "bytes": 294884,
         "sha256": "3470ead50b130058116dee0b9fd83efd3a9d32bc3ca3dd65423d5271b4e6d03b"
       }
@@ -10411,8 +10411,8 @@
       "imageSubjects": "Oriental Techno Club",
       "image": {
         "src": "/images/events/october-2026/tempio-20261023-87919b0665fe.webp",
-        "width": 1200,
-        "height": 1208,
+        "width": 1376,
+        "height": 768,
         "bytes": 296154,
         "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
       }
@@ -10448,8 +10448,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/theclub-20261023-2c14b3b09ca0.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 24218,
         "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
       }
@@ -10536,8 +10536,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/242615-d6dfa52deb0b.webp",
-        "width": 1254,
-        "height": 1254,
+        "width": 1376,
+        "height": 768,
         "bytes": 222268,
         "sha256": "eae068d6b0bfa374878f09d861ab11fe1c4faeb316b76a22d89a1d2cf4e987f7"
       },
@@ -10601,8 +10601,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243586-d063422914a8.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 112700,
         "sha256": "c5ae7c9c40e70b2fce6dec05c89bad47dcb2482d746ef0d1d384008703e553c0"
       },
@@ -10690,8 +10690,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243816-e33432d48dd4.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 114104,
         "sha256": "322a6eb81322911e507b6781f084e36645f4920c6a3825d538c2da3825ca87aa"
       },
@@ -10787,8 +10787,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/248677-8b6b5e2ed973.webp",
-        "width": 1557,
-        "height": 1557,
+        "width": 1376,
+        "height": 768,
         "bytes": 274328,
         "sha256": "2bfb91dd679459f27d77213df863e35c0da419d6fbba7017663077400aa4d355"
       },
@@ -10885,8 +10885,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/248724-2e95b922fdcd.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 142862,
         "sha256": "d0a5e05497f93c5fe2f42db1f97d737c214d85d0a53d305736369c60a17d5688"
       },
@@ -10992,8 +10992,8 @@
       "doorTime": "2026-10-24T19:00:00+02:00",
       "image": {
         "src": "/images/events/october-2026/alcatraz-simple-plan-2f29a5911d5a.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 231988,
         "sha256": "b94992124c27ae20aa357422138c273573be3578432cdb5ed4b4dbd46b6b187e"
       }
@@ -11036,8 +11036,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/mib-love-affair-sabato-24-ottobre-2026-64a33dbcace7.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 29060,
         "sha256": "26d45b1aaa32a4871fd57db6d76a347d971e30b8f9e4f36071ef3af39d221637"
       }
@@ -11134,8 +11134,8 @@
       "room": "Club Room",
       "image": {
         "src": "/images/events/october-2026/239512-5747a600625d.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 89912,
         "sha256": "3c1f0bfea00bf1894799d5d066a55655fff3fbc7954c95f01501bc15f4ce6bb0"
       }
@@ -11171,8 +11171,8 @@
       "room": "Main Room",
       "image": {
         "src": "/images/events/october-2026/240983-429ae995518c.webp",
-        "width": 1500,
-        "height": 1500,
+        "width": 1376,
+        "height": 768,
         "bytes": 291710,
         "sha256": "fe1663d7b0e4ca6f00536af8b3d84acf65aacfbc0b511b79c4b635aaa2fa062d"
       }
@@ -11209,8 +11209,8 @@
       "timeKind": "doors",
       "image": {
         "src": "/images/events/october-2026/alcatraz-duemilaz-12-d58b3b745f6f.webp",
-        "width": 1200,
-        "height": 628,
+        "width": 1376,
+        "height": 768,
         "bytes": 218076,
         "sha256": "927f72b8217605a7fd32a41963ec7239ac6808870c7d584375a0ad260cc71656"
       }
@@ -11246,8 +11246,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/theclub-20261024-17ce6f600196.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 40738,
         "sha256": "4b8810f4b595b0e055435b00e0d2167f4fe9b56d4d030ef27cad752df29512a0"
       }
@@ -11283,8 +11283,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/fabrique-astro-1-3ec494bb3cd5.webp",
-        "width": 1072,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 255244,
         "sha256": "67377da294e0f76da76dcecbac897c49dddb0077022315d3a6751b33346c5747"
       }
@@ -11312,8 +11312,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243581-3bca4d22b015.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 97054,
         "sha256": "51c900f5b6fbdd813050bffc3ac77b91a2db5ae70fe18c8187112ce750027f3f"
       },
@@ -11470,8 +11470,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/theclub-20261025-ad6a17fafd7e.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 40738,
         "sha256": "4b8810f4b595b0e055435b00e0d2167f4fe9b56d4d030ef27cad752df29512a0"
       }
@@ -11507,8 +11507,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/fabrique-fkj-c0a86dcaf7f5.webp",
-        "width": 1280,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 299608,
         "sha256": "b2f15fe48a18bb25339d34007623747eb0c677192f6769f4d38615886dc82cd8"
       }
@@ -11536,8 +11536,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243615-81b948f891ff.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 148022,
         "sha256": "d7ee9f8c54f995caaf0be94dad7035f976f5607b154e06b78003de1e1a61c2bd"
       },
@@ -11679,8 +11679,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243611-fe0fbef3aec9.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 124064,
         "sha256": "89ed98bacfd9192b20076c50d565ee70e8fc2e8574482cff03d11c8fd10f08ba"
       },
@@ -11794,8 +11794,8 @@
       "imageSubjects": "And So I Watch You From Afar",
       "image": {
         "src": "/images/events/october-2026/magnolia-and-so-i-watch-you-from-afar-c39052506132.webp",
-        "width": 1600,
-        "height": 933,
+        "width": 1376,
+        "height": 768,
         "bytes": 109742,
         "sha256": "53a8e8389d0bc71b9a95a00f7d5c5da1bfca9bcbdc612496641e20e632d15adf"
       }
@@ -11833,8 +11833,8 @@
       "doorTime": "2026-10-27T19:00:00+01:00",
       "image": {
         "src": "/images/events/october-2026/alcatraz-rokia-traore-4fa29feb44ff.webp",
-        "width": 1280,
-        "height": 670,
+        "width": 1376,
+        "height": 768,
         "bytes": 79808,
         "sha256": "a7ad13410b185a51efebf63d318c8dc670644aa92f80c80ac4cd533ce357d0da"
       }
@@ -11917,8 +11917,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/fabrique-fabrizio-moro-1-7e2095bfac67.webp",
-        "width": 1600,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 359026,
         "sha256": "3b30bea9755037ea4183b6a07ca5ae997e6aec564e3a75a91b611382f25bd1f3"
       }
@@ -11946,8 +11946,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243607-7d88f9d4637a.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 218502,
         "sha256": "925aeb2cab313b2d7012b1423ec356a705a8befb5d014a76733ac830ed3af9a0"
       },
@@ -12158,8 +12158,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/mib-internationalweek-mercoledi-28-ottobre-2026-ddf756db51b8.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 69760,
         "sha256": "51fa0ca12d4f33b206ea3d1df5dad6d5f4b57773669e6cff29b0d5b1a54d5277"
       }
@@ -12195,8 +12195,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/theclub-20261028-d139ac02c32d.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 24218,
         "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
       }
@@ -12224,8 +12224,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243603-b677b0db7807.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 188824,
         "sha256": "b601eb850b6615b0a219bc2677c2d26323643a776c2463d3a2d41f1f0c8fd092"
       },
@@ -12357,8 +12357,8 @@
       "imageSubjects": "Tempio Radio Notturna",
       "image": {
         "src": "/images/events/october-2026/tempio-20261029-0e2fac8ce38e.webp",
-        "width": 1200,
-        "height": 1208,
+        "width": 1376,
+        "height": 768,
         "bytes": 296154,
         "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
       },
@@ -12455,8 +12455,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/fabrique-le-vibrazioni-1-dd7e5d92d5ff.webp",
-        "width": 1080,
-        "height": 1350,
+        "width": 1376,
+        "height": 768,
         "bytes": 250090,
         "sha256": "16a239a38596bc250f9de97a1daf969eab9a918c8cfc86209bda6198c741ad8e"
       }
@@ -12492,8 +12492,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/santeria-sissi-c5b12a7a80f1.webp",
-        "width": 1080,
-        "height": 1350,
+        "width": 1376,
+        "height": 768,
         "bytes": 137744,
         "sha256": "efaf40560cf4ede3495faa08ffb8e6f3a66dd30baf1cc3d85feca6bb00ec337d"
       }
@@ -12532,8 +12532,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/theclub-20261029-f44ec8b4731e.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 24218,
         "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
       }
@@ -12569,8 +12569,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/fabrique-jimmysax-c111b881b4e3.webp",
-        "width": 640,
-        "height": 640,
+        "width": 1376,
+        "height": 768,
         "bytes": 118748,
         "sha256": "5126db4acd3318fec1d2b0dfa041d5627a7e38856aab3795d579d90d5dbb7116"
       }
@@ -12598,8 +12598,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243594-c1b959c5bc40.webp",
-        "width": 900,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 120824,
         "sha256": "025efa438bed9846c6d72d48125d348ea41931e7029e2469186aa9b5ac66a783"
       },
@@ -12694,8 +12694,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243821-4cb1a6cdf184.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 142936,
         "sha256": "489dfe8e50f202e47cda255bddac9bf3bb37690f70b1e525e5c7f58f0c7fc2aa"
       },
@@ -12810,8 +12810,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/magnolia-oranssi-pazuzu-mur-87887723d11b.webp",
-        "width": 1080,
-        "height": 1350,
+        "width": 1376,
+        "height": 768,
         "bytes": 220782,
         "sha256": "7cb36efd8cef6814c242fd5484eb64f22542346a8d83dd7b73766dfb571cd684"
       }
@@ -12854,8 +12854,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/mib-billions-venerd-30-ottobre-2026-c9664221a082.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 51026,
         "sha256": "e90f3133aeaca83339862022a7f90b74779acdf8f802f2fe4a86f7eebccbf328"
       }
@@ -12984,8 +12984,8 @@
       "timeKind": "doors",
       "image": {
         "src": "/images/events/october-2026/alcatraz-wtf-black-out-47b060c4fdb2.webp",
-        "width": 1200,
-        "height": 628,
+        "width": 1376,
+        "height": 768,
         "bytes": 195044,
         "sha256": "a44e51a27863c98947681f58843da6470f4bf033b8eed608dcedd2b7f97b38dd"
       }
@@ -13032,8 +13032,8 @@
       "imageSubjects": "Oriental Techno Club",
       "image": {
         "src": "/images/events/october-2026/tempio-20261030-87919b0665fe.webp",
-        "width": 1200,
-        "height": 1208,
+        "width": 1376,
+        "height": 768,
         "bytes": 296154,
         "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
       }
@@ -13071,8 +13071,8 @@
       "room": "Club Dept 184",
       "image": {
         "src": "/images/events/october-2026/department-inner-circle-5-copy-2026-10-30-c23994635213.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 57906,
         "sha256": "cc7f3cd7e187fdb2575148f32aafed9c73dfa5eb3ad1f8fed3803cf701e5fde9"
       }
@@ -13108,8 +13108,8 @@
       "halloween": false,
       "image": {
         "src": "/images/events/october-2026/theclub-20261030-16ca9e262357.webp",
-        "width": 615,
-        "height": 450,
+        "width": 1376,
+        "height": 768,
         "bytes": 24218,
         "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
       }
@@ -13136,8 +13136,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/240901-d72957c6b118.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 103902,
         "sha256": "a7bc143f2303f4c05a0891c1ce3b403017a817f4b99613566ecc94719f5c38c9"
       },
@@ -13208,8 +13208,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243574-26f2849423c9.webp",
-        "width": 1600,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 234330,
         "sha256": "1561b600f65568eddd73900eb425877aeb970c25a923a9775c8676abfc79f71d"
       },
@@ -13305,8 +13305,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243812-9425b71cf329.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 79746,
         "sha256": "70e7b48dd3c5670807cdbc1d5c72ea9d4a889867ac230fe797b339841651fb45"
       },
@@ -13447,8 +13447,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/246936-0cc8dc50a2d4.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 84066,
         "sha256": "3e7cd04fdf177b7bbb2456405e2c751e261ac81cd5d30e0956cb4d6482607459"
       },
@@ -13581,8 +13581,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/halloween-aria-243203.webp",
-        "width": 1600,
-        "height": 920,
+        "width": 1376,
+        "height": 768,
         "bytes": 218078,
         "sha256": "5979d0f8592aa96115dc3def1e8d63a3276a0ec5078e9b4f54aa1d17f0bc7a2d"
       },
@@ -13649,8 +13649,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/halloween-alcatraz-dia-de-los-muertos-2026.webp",
-        "width": 684,
-        "height": 358,
+        "width": 1376,
+        "height": 768,
         "bytes": 90680,
         "sha256": "a3e893ebc46e2522d13f8419b9f86432c3ee80dbb5537036bba500b2c1291759"
       },
@@ -13705,8 +13705,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/halloween-gate-240984.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 205742,
         "sha256": "0c759551aa8bc1d4b87efe1dff261e4fc476faf59c9ba9303b43cc1863593e50"
       },
@@ -13753,8 +13753,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/248051-ab5ba84051dd.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 89398,
         "sha256": "ca574e9e7c6cdd5503a4773a20a0953726205b839fa5a2dfeceaa0a8591c2b23"
       },
@@ -13795,8 +13795,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/halloween-amnesia-leon-2026.webp",
-        "width": 1080,
-        "height": 1350,
+        "width": 1376,
+        "height": 768,
         "bytes": 165882,
         "sha256": "ccf71f68f20e80050ed97b6a162d2a130cd7d1e6b08c69abb51aac53a87bd191"
       },
@@ -13850,8 +13850,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243822-fa1698470cb9.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 138666,
         "sha256": "97af5f58ddd898f6c304d4f34256342c584ae2309ca072a0625e89f7fc308178"
       },
@@ -13947,8 +13947,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/242617-59f08f112437.webp",
-        "width": 1254,
-        "height": 1254,
+        "width": 1376,
+        "height": 768,
         "bytes": 222584,
         "sha256": "c8e0ecea04484042fe827bbccfd2dddea1f5b3ffb87077e0c4848f926f672f63"
       },
@@ -14012,8 +14012,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243828-5645e7e45ddb.webp",
-        "width": 1600,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 310766,
         "sha256": "0c01fcfc6207fbe26480426f5c7de4e25371e8214d56e30d71fb4bb215ab9382"
       },
@@ -14109,8 +14109,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/248805-f4aa81a5ec27.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 131464,
         "sha256": "c46bb422e28152cfee0aba8f9e0996cdee7bade8ef2a48108d0cc449ab3ad975"
       },
@@ -14205,8 +14205,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/240985-428350ebb671.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 244088,
         "sha256": "7d47bce8e608f498e3d4e33b6c835694fc7e4d04aebd14a2390f8ba80c4ca2a5"
       },
@@ -14245,8 +14245,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243823-fa1698470cb9.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 138666,
         "sha256": "97af5f58ddd898f6c304d4f34256342c584ae2309ca072a0625e89f7fc308178"
       },
@@ -14342,8 +14342,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/236325-f6ca617afe9f.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 74148,
         "sha256": "d49ac40ad0c83b998d212e6b59d3adcf52068756030339bf27ff736810920534"
       },
@@ -14382,8 +14382,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/247839-0a54db738c7d.webp",
-        "width": 1254,
-        "height": 1254,
+        "width": 1376,
+        "height": 768,
         "bytes": 309724,
         "sha256": "e975f5965a00614522dfa79826a7873ef2fde39ebc8124d0d81329975c857548"
       },
@@ -14422,8 +14422,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243829-5645e7e45ddb.webp",
-        "width": 1600,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 310766,
         "sha256": "0c01fcfc6207fbe26480426f5c7de4e25371e8214d56e30d71fb4bb215ab9382"
       },
@@ -14519,8 +14519,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/240986-29b7b3d6e082.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 150660,
         "sha256": "97dd3bf5a9200507d3c705183fc539ea22bc69cb8c753a8f285e58c486a581eb"
       },
@@ -14559,8 +14559,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/242644-61cbf1bbf29a.webp",
-        "width": 1600,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 222850,
         "sha256": "c1106e769912f3e6de61c1e248fed76ee07d02d098866109ef9cd17155170d13"
       },
@@ -14600,8 +14600,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/242062-86878c016c8f.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 123366,
         "sha256": "43fc021b62c226909dac9a540b2745544553ef4ab536327bcd8e87451c3055c8"
       },
@@ -14640,8 +14640,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243824-fa1698470cb9.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 138666,
         "sha256": "97af5f58ddd898f6c304d4f34256342c584ae2309ca072a0625e89f7fc308178"
       },
@@ -14737,8 +14737,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243830-5645e7e45ddb.webp",
-        "width": 1600,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 310766,
         "sha256": "0c01fcfc6207fbe26480426f5c7de4e25371e8214d56e30d71fb4bb215ab9382"
       },
@@ -14835,8 +14835,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/238652-5c0f62540791.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 110020,
         "sha256": "64f1660c9433a06d977c5e84cdf40429211142909b486e63a30eb111fd1d0bf6"
       },
@@ -14875,8 +14875,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/240987-7df90f3be756.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 148356,
         "sha256": "7325171c074594dba858953f424cb14b33dbc54b4a8f44eefb6dd7d90b240c43"
       },
@@ -14915,8 +14915,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243825-fa1698470cb9.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 138666,
         "sha256": "97af5f58ddd898f6c304d4f34256342c584ae2309ca072a0625e89f7fc308178"
       },
@@ -15012,8 +15012,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/236326-c7288fd1c403.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 79268,
         "sha256": "31a9162a5cb7dcf21e7b94e97a63c5b77aa8c3471b7d8cd8c7537a080943af63"
       },
@@ -15052,8 +15052,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/243831-5645e7e45ddb.webp",
-        "width": 1600,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 310766,
         "sha256": "0c01fcfc6207fbe26480426f5c7de4e25371e8214d56e30d71fb4bb215ab9382"
       },
@@ -15149,8 +15149,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/240988-a10209e5b015.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 192994,
         "sha256": "c94d9515b7a9496c4773aed968b8dafa1f4780b7a9f45baeeb616cb4828d4c0e"
       },
@@ -15189,8 +15189,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/248439-68f2dbbf4405.webp",
-        "width": 1600,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 274874,
         "sha256": "6735dc9f22f2206cf9c52b3fa539689e61dde4a7f354e4c06f414b78a906b26e"
       },
@@ -15823,8 +15823,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/tempio-20261030-87919b0665fe.webp",
-        "width": 1200,
-        "height": 1208,
+        "width": 1376,
+        "height": 768,
         "bytes": 296154,
         "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
       },
@@ -16093,8 +16093,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/venues/arca-1-b0f7e1886421.webp",
-        "width": 1600,
-        "height": 1064
+        "width": 1376,
+        "height": 768
       },
       "age": "21+",
       "dressCode": null,
@@ -16689,8 +16689,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/249198-c610114fd55b.webp",
-        "width": 1600,
-        "height": 1600,
+        "width": 1376,
+        "height": 768,
         "bytes": 205000,
         "sha256": "bfb6af7e1bcd478b647997963a11f43d609558b3c759252ebe1ec07ad7764db6"
       },
@@ -16787,8 +16787,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/249146-bbdee1490af9.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 150502,
         "sha256": "5f7335ec05362c4607d634bf8ccb1cf69e1227b0939b9661a17c56781499cef6"
       },
@@ -16885,8 +16885,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/249182-aa34ab79100b.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 122596,
         "sha256": "62ca3466a88b821d00ea2986229439eda7e244485ae7bea55339ce2a513ed945"
       },
@@ -16968,8 +16968,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/249189-e2b7683e02e3.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 215018,
         "sha256": "f6fb81f8b23118e84636110cd39adfbf123d428f73692c48aad4bc43bedbe1a5"
       },
@@ -17066,8 +17066,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/249192-8d811d65d7c5.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 192824,
         "sha256": "991374972e7802ffabf907b2e639df70d217e399f4c06bd403e02fd0b18a98fc"
       },
@@ -17164,8 +17164,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/249204-fcb5bf6cc4be.webp",
-        "width": 720,
-        "height": 720,
+        "width": 1376,
+        "height": 768,
         "bytes": 56800,
         "sha256": "e1a466a9e988671509fc112b8d50b4e20a65071782f138be6cc72152a53878a5"
       },
@@ -17262,8 +17262,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/249199-9373e4ee381b.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 96634,
         "sha256": "7d5555682cd9db4e5c9d3f6e6213f76a6f8c9e3902cc790f5165204aeff39bd6"
       },
@@ -17360,8 +17360,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/249156-bbdee1490af9.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 150502,
         "sha256": "5f7335ec05362c4607d634bf8ccb1cf69e1227b0939b9661a17c56781499cef6"
       },
@@ -17441,8 +17441,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/249210-aa34ab79100b.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 122596,
         "sha256": "62ca3466a88b821d00ea2986229439eda7e244485ae7bea55339ce2a513ed945"
       },
@@ -17515,8 +17515,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/249211-e2b7683e02e3.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 215018,
         "sha256": "f6fb81f8b23118e84636110cd39adfbf123d428f73692c48aad4bc43bedbe1a5"
       },
@@ -17613,8 +17613,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/249212-8d811d65d7c5.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 192824,
         "sha256": "991374972e7802ffabf907b2e639df70d217e399f4c06bd403e02fd0b18a98fc"
       },
@@ -17711,8 +17711,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/249206-1a12c4867f4c.webp",
-        "width": 600,
-        "height": 600,
+        "width": 1376,
+        "height": 768,
         "bytes": 36832,
         "sha256": "c198cc30ad7df2f24f87399850920cc8c2d15e3baa5499f78f3e19da40e21aee"
       },
@@ -17809,8 +17809,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/249213-e2755e4bf02c.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 120192,
         "sha256": "d2481f95362209a850f034bb1061cde565033f13a45b8aa3f694c685ad7b374a"
       },
@@ -17907,8 +17907,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/249200-9373e4ee381b.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 96634,
         "sha256": "7d5555682cd9db4e5c9d3f6e6213f76a6f8c9e3902cc790f5165204aeff39bd6"
       },
@@ -18005,8 +18005,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/249158-bbdee1490af9.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 150502,
         "sha256": "5f7335ec05362c4607d634bf8ccb1cf69e1227b0939b9661a17c56781499cef6"
       },
@@ -18103,8 +18103,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/249130-4cb1a6cdf184.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 142936,
         "sha256": "489dfe8e50f202e47cda255bddac9bf3bb37690f70b1e525e5c7f58f0c7fc2aa"
       },
@@ -18182,8 +18182,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/249139-e33432d48dd4.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 113958,
         "sha256": "e005b70bba38db90a6d48eae393851682743caf5775f7bb1095be8e098ddbc6a"
       },
@@ -18270,8 +18270,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/249132-4cb1a6cdf184.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 142936,
         "sha256": "489dfe8e50f202e47cda255bddac9bf3bb37690f70b1e525e5c7f58f0c7fc2aa"
       },
@@ -18358,8 +18358,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/249144-e33432d48dd4.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 113958,
         "sha256": "e005b70bba38db90a6d48eae393851682743caf5775f7bb1095be8e098ddbc6a"
       },
@@ -18446,8 +18446,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/249135-4cb1a6cdf184.webp",
-        "width": 1600,
-        "height": 900,
+        "width": 1376,
+        "height": 768,
         "bytes": 142936,
         "sha256": "489dfe8e50f202e47cda255bddac9bf3bb37690f70b1e525e5c7f58f0c7fc2aa"
       },
@@ -18534,8 +18534,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/249142-e33432d48dd4.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 113958,
         "sha256": "e005b70bba38db90a6d48eae393851682743caf5775f7bb1095be8e098ddbc6a"
       },
@@ -18622,8 +18622,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/249067-e1a5b3ae8f30.webp",
-        "width": 1408,
-        "height": 1408,
+        "width": 1376,
+        "height": 768,
         "bytes": 157616,
         "sha256": "0cabc3b32082dc23e3b5416310137a731ca6fc38360e17b3d58adba897273fbb"
       },
@@ -18680,8 +18680,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/249230-f6b0d6c67b51.webp",
-        "width": 1080,
-        "height": 608,
+        "width": 1376,
+        "height": 768,
         "bytes": 292128,
         "sha256": "53746b9c1f5c96dea27e543971321b6cc3e20ded5a68164d8314c7b48d65ce04"
       },
@@ -18723,8 +18723,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/248553-7ee294113782.webp",
-        "width": 1254,
-        "height": 1254,
+        "width": 1376,
+        "height": 768,
         "bytes": 108428,
         "sha256": "09cce3f432cff9cb96c53b93aaa2fbc7d31bd3b5f48ef66e09d7f1a9989ed096"
       },
@@ -18823,8 +18823,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/249060-b09c1092099f.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 103922,
         "sha256": "fea18c680db0b0d898ca13a76f851317f3ab83496911dc5c540d7ae243512227"
       },
@@ -18935,8 +18935,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/236327-9b4a355b9374.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 187404,
         "sha256": "72804e689bc3d99ba43c200e5971f2d49a20862c47e7f628364aa6c669a755ca"
       },
@@ -19026,8 +19026,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/248680-1588f16cd942.webp",
-        "width": 1080,
-        "height": 1080,
+        "width": 1376,
+        "height": 768,
         "bytes": 193478,
         "sha256": "6684daba5b6ecd5c7fb3926c8da8d806eaf0d1876a6b43fca39cca77bb500bfe"
       },
@@ -19075,8 +19075,8 @@
       },
       "image": {
         "src": "/images/events/october-2026/240989-b4c99750b409.webp",
-        "width": 1500,
-        "height": 1500,
+        "width": 1376,
+        "height": 768,
         "bytes": 586112,
         "sha256": "a64c8c8b322a5ccbfee7c60b83c7ef43634b10e77130dd254ca9dccdec2b4ebe"
       },

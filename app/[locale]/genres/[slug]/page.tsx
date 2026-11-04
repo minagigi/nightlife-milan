@@ -458,8 +458,8 @@ export default async function GenrePage({ params }: Props) {
                 title={genre.heroTitle[typedLocale]}
                 fill
                 priority
-                quality={85}
-                sizes="(max-width: 1024px) 100vw, 60vw"
+                quality={92}
+                sizes="(max-width: 1024px) 100vw, 65vw"
                 className="object-cover"
               />
             </div>
@@ -538,9 +538,9 @@ export default async function GenrePage({ params }: Props) {
                     src={img.src}
                     alt={img.alt}
                     fill
-                    quality={85}
+                    quality={92}
                     className="object-cover"
-                    sizes="(max-width: 768px) 40vw, 140px"
+                    sizes="(max-width: 768px) 50vw, 512px"
                   />
                 </div>
               ))}

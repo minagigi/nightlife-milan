@@ -24,7 +24,7 @@ export default function EventCoverHero({ src, alt, imageTitle, title, titleNode,
   return (
     <figure className="border-y border-white/10 bg-black" data-event-cover-hero={eventId}>
       <div className="relative flex min-h-[max(400px,60vh)] items-end overflow-hidden bg-black px-5 py-10 sm:px-8 sm:py-14">
-        <Image src={src} alt={alt} title={imageTitle} width={width} height={height} priority fetchPriority="high" sizes="100vw"
+        <Image quality={92} src={src} alt={alt} title={imageTitle} width={width} height={height} priority fetchPriority="high" sizes="100vw"
           className="absolute inset-0 h-full w-full object-contain" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#131009] via-[#131009]/60 to-transparent" aria-hidden="true" />
         <div className="relative z-10 mx-auto w-full max-w-7xl">

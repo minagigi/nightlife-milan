@@ -239,7 +239,7 @@ export default async function BottlePricesPage({ params }: Props) {
         {/* Hero */}
         <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="relative h-56 md:h-72 w-full mb-8 rounded-2xl overflow-hidden border border-white/10">
-            <Image src="/images/pillars/bottle-prices-hero.webp" alt="Bottle Prices Milan Clubs" fill priority sizes="100vw" className="object-cover" />
+            <Image quality={92} src="/images/pillars/bottle-prices-hero.webp" alt="Bottle Prices Milan Clubs" fill priority sizes="100vw" className="object-cover" />
           </div>
           <h1 className="font-serif text-5xl md:text-6xl font-bold text-champagne tracking-tight mb-6">
             {tr(locale, 'Milan Bottle Prices 2026', 'Prezzi Bottiglie Milano 2026')}

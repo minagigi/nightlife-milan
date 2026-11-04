@@ -109,6 +109,7 @@ export default function TableConcierge({ locale, events, initialNow, copy, surfa
             src="/images/table-concierge/justme-night.webp"
             alt={copy.title}
             fill
+            quality={92}
             sizes="100vw"
             priority={surface === 'home'}
             fetchPriority={surface === 'home' ? 'high' : undefined}
@@ -131,7 +132,8 @@ export default function TableConcierge({ locale, events, initialNow, copy, surfa
             alt={copy.title}
             width={1200}
             height={900}
-            sizes="(max-width: 760px) calc(100vw - 40px), 1px"
+            quality={92}
+            sizes="(max-width: 760px) 100vw, 50vw"
             className={styles.mobileHeroPhoto}
           />}
           {homeIntro && <div className={styles.heroLinks}>
@@ -220,7 +222,7 @@ export default function TableConcierge({ locale, events, initialNow, copy, surfa
               <p className={styles.venue}>{event.venueName}</p>
             </div>
             <div className={styles.eventArt}>
-              <Image src={event.image} alt={event.venueAltText || event.title} fill sizes="(max-width: 680px) 100vw, 180px" className={styles.eventPhoto} />
+              <Image src={event.image} alt={event.venueAltText || event.title} fill quality={92} sizes="(max-width: 680px) 100vw, 480px" className={styles.eventPhoto} />
             </div>
             <div className={styles.eventActions}>
               <button type="button" onClick={() => choose(event)}>{copy.requestAction} ↗</button>

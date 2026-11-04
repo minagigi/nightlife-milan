@@ -426,7 +426,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                         alt={v.name}
                         fill
                         sizes="58vw"
-                        quality={85}
+                        quality={92}
                         className="object-cover group-hover:scale-[1.04] transition-transform duration-700"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
@@ -513,8 +513,8 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                         src={v.image}
                         alt={v.name}
                         fill
-                        sizes="260px"
-                        quality={75}
+                        sizes="(max-width: 1024px) 100vw, 48vw"
+                        quality={92}
                         className="object-cover group-hover:scale-105 transition-transform duration-700"
                       />
                     </Link>
@@ -592,8 +592,8 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                           src={v.image}
                           alt={v.name}
                           fill
-                          sizes="290px"
-                          quality={75}
+                          sizes="(max-width: 1024px) 90vw, 48vw"
+                          quality={92}
                           className="object-cover"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
@@ -708,9 +708,9 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                       src="/images/vip-table-milan-nightclub-just-me.webp"
                       alt={homeGridAlts[0]}
                       fill
-                      quality={85}
+                      quality={92}
                       className="object-cover hover:scale-105 transition-transform duration-700"
-                      sizes="(max-width: 1024px) 100vw, 55vw"
+                      sizes="(max-width: 1024px) 100vw, 65vw"
                     />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   </div>
@@ -726,9 +726,9 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                       src="/images/milan-club-crowd-dancefloor-night.webp"
                       alt={homeGridAlts[3]}
                       fill
-                      quality={75}
+                      quality={92}
                       className="object-cover hover:scale-105 transition-transform duration-700"
-                      sizes="(max-width: 1024px) 50vw, 28vw"
+                      sizes="(max-width: 1024px) 50vw, 45vw"
                     />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   </div>
@@ -743,9 +743,9 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                       src="/images/bottle-service-milan-vip-nightclub.webp"
                       alt={homeGridAlts[4]}
                       fill
-                      quality={75}
+                      quality={92}
                       className="object-cover hover:scale-105 transition-transform duration-700"
-                      sizes="(max-width: 1024px) 50vw, 28vw"
+                      sizes="(max-width: 1024px) 50vw, 45vw"
                     />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   </div>

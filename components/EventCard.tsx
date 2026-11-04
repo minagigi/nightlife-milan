@@ -66,7 +66,7 @@ export default function EventCard({ event, venue, lang, priority = false, isToni
         src={event.image || venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp'}
         alt={altText}
         fill
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 60vw, 45vw"
         priority={priority}
         quality={92}
         placeholder="blur"

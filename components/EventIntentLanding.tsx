@@ -296,7 +296,7 @@ export default async function EventIntentLanding({ intent, locale }: { intent: E
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       <section className="relative min-h-[620px] h-[78svh] max-h-[840px] flex items-end overflow-hidden">
-        <Image src={config.hero} alt={config.heading[lang]} fill priority quality={85} sizes="100vw" className="object-cover" />
+        <Image src={config.hero} alt={config.heading[lang]} fill priority quality={92} sizes="100vw" className="object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#131009] via-[#131009]/65 to-black/15" />
         <div className="relative z-10 w-full max-w-6xl mx-auto px-5 sm:px-8 pb-14 sm:pb-20">
           <nav className="text-xs text-white/50 mb-8" aria-label="Breadcrumb">

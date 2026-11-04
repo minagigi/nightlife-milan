@@ -888,7 +888,7 @@ export default async function NewYearsEvePage({
                     src={club.image}
                     alt={isIt ? club.nameIt : club.nameEn}
                     fill
-                    quality={85}
+                    quality={92}
                     sizes="(max-width: 1024px) 100vw, 35vw"
                     className="object-cover"
                   />

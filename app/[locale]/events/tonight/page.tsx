@@ -230,7 +230,7 @@ export default async function EventsTonightPage({ params }: Props) {
           </span>
         </div>
         <div className="relative w-full h-56 sm:h-72 rounded-2xl overflow-hidden mb-6 border border-champagne/25">
-          <Image
+          <Image quality={92}
             src="/images/pillars/events-tonight-hero.webp"
             alt={tr(locale, 'Tonight in Milan', 'Stasera a Milano')}
             fill
@@ -478,8 +478,8 @@ function TimeSlot({
                   src={event.image || venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp'}
                   alt={title}
                   fill
-                  sizes="(max-width: 640px) 100vw, 33vw"
-                  quality={85}
+                  sizes="(max-width: 640px) 100vw, 45vw"
+                  quality={92}
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-[#131009] via-[#131009]/40 to-transparent" />
