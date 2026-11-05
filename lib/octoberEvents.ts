@@ -4,7 +4,7 @@ import { enabledLocaleCodes, type LocaleCode } from '@/lib/i18n/locales';
 import type { OctoberEventRecord, OctoberInventory } from '@/lib/october-events/types';
 
 const OCTOBER_START = Date.parse('2026-10-01T00:00:00+02:00');
-const NOVEMBER_START = Date.parse('2027-01-02T00:00:00+01:00');
+const NOVEMBER_START = Date.parse('2028-01-02T00:00:00+01:00');
 
 export const OCTOBER_EVENTS_INVENTORY = inventory as OctoberInventory;
 

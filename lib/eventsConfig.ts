@@ -79,7 +79,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '21+', 'Strictly Elegant. Long trousers for men are mandatory.', 'House and Urban'),
     image: '/images/events/october-2026/249146-bbdee1490af9.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/monday-night-281/249159/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/monday-night-279/249156/channel/nightlifemilan-1',
     priority: 100
   },
   {
@@ -96,14 +96,14 @@ export const weeklyEvents: WeeklyEvent[] = [
       en: 'The most exclusive university party in Milan. Just Me transforms its elegant venue into an energetic dancefloor for international students and the young Milanese crowd. Expect a vibrant atmosphere, premium drinks, and the best commercial hits.',
       it: 'Il party universitario più esclusivo di Milano. Just Me trasforma la sua elegante location in un dancefloor energico per studenti internazionali e giovani milanesi. Aspettati un\'atmosfera vibrante, drink premium e le migliori hit commerciali.'
     },
-    pricing: { aperitif: 'From €15', club: 'From €15', tables: 'From €250 to €3,000' },
+    pricing: { aperitif: 'From €13', club: 'From €0', tables: 'From €200 to €960' },
     dressCode: {
       en: 'Smart Casual. Elegant shirt for men. No sportswear.',
       it: 'Smart Casual. Camicia elegante per gli uomini. No abbigliamento sportivo.'
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '18+', 'Smart Casual', 'Commercial and Reggaeton'),
     image: '/images/events/october-2026/249182-aa34ab79100b.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/university-party-56/249182/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/university-party-57/249210/channel/nightlifemilan-1',
     priority: 100
   },
   {
@@ -120,14 +120,14 @@ export const weeklyEvents: WeeklyEvent[] = [
       en: 'Midweek magic at Just Me. "Absolutely" brings a unique vibe with deep house music and mystical entertainment including a fortune teller. The perfect blend of a sophisticated dinner and an elegant party.',
       it: 'Magia di metà settimana al Just Me. "Absolutely" porta una vibrazione unica con musica deep house e intrattenimento mistico, inclusa una cartomante. Il mix perfetto tra una cena sofisticata e un party elegante.'
     },
-    pricing: { aperitif: 'From €20', club: 'From €20', tables: 'From €320 to €5,000' },
+    pricing: { aperitif: 'From €15', club: 'From €15', tables: 'From €320 to €5,000' },
     dressCode: {
       en: 'Elegant and Fashion-forward.',
       it: 'Elegante e alla moda.'
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '25+', 'Elegant and Fashion-forward', 'Deep House and Lounge'),
     image: '/images/events/october-2026/249189-e2b7683e02e3.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/wednesday-night-226/249170/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/wednesday-night-228/249211/channel/nightlifemilan-1',
     priority: 100
   },
   {
@@ -144,13 +144,14 @@ export const weeklyEvents: WeeklyEvent[] = [
       en: 'The famous singing dinner "VIZIATISSIMA" featuring live performances by Benny Camaro. Start with a premium dining experience and seamlessly transition into a high-energy party where everyone sings along to timeless hits.',
       it: 'La famosa cena cantata "VIZIATISSIMA" con esibizioni dal vivo di Benny Camaro. Inizia con un\'esperienza culinaria premium e passa senza interruzioni a una festa ad alta energia dove tutti cantano i successi senza tempo.'
     },
-    pricing: { aperitif: 'From €20', club: 'From €20', tables: 'From €320 to €5,000' },
+    pricing: { aperitif: 'From €15', club: 'From €15', tables: 'From €320 to €5,000' },
     dressCode: {
       en: 'Strictly Elegant.',
       it: 'Strettamente Elegante.'
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '25+', 'Strictly Elegant', 'Live Music and Commercial'),
     image: '/images/events/october-2026/249192-8d811d65d7c5.webp',
+    xceedLink: 'https://xceed.me/en/milano/event/thursday-night-342/249192/channel/nightlifemilan-1',
     priority: 100
   },
   {
@@ -167,14 +168,14 @@ export const weeklyEvents: WeeklyEvent[] = [
       en: 'Kick off the weekend at Milan\'s most glamorous venue. Friday Night at Just Me regularly features international guest DJs, stunning performances, and the city\'s elite crowd. Booking a table in advance is highly recommended.',
       it: 'Dai il via al weekend nel locale più glamour di Milano. Il venerdì sera al Just Me ospita regolarmente DJ internazionali, performance mozzafiato e l\'élite della città. La prenotazione anticipata del tavolo è vivamente consigliata.'
     },
-    pricing: { aperitif: 'From €20', club: 'From €30', tables: 'From €500 to €5,000' },
+    pricing: { aperitif: 'From €15', club: 'From €20', tables: 'From €320 to €5,000' },
     dressCode: {
       en: 'Strictly Elegant. Dress to impress.',
       it: 'Strettamente Elegante. Vestiti per impressionare.'
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '21+', 'Strictly Elegant', 'House and Electronic'),
     image: '/images/events/october-2026/249204-fcb5bf6cc4be.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/friday-night-726/249215/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/friday-night-724/249204/channel/nightlifemilan-1',
     priority: 100
   },
   {
@@ -191,14 +192,14 @@ export const weeklyEvents: WeeklyEvent[] = [
       en: 'The pinnacle of Milanese nightlife. Saturday Night at Just Me offers spectacular themed parties, premium bottle service, and an unforgettable atmosphere under the Torre Branca. The ultimate luxury clubbing experience.',
       it: 'L\'apice della vita notturna milanese. Il sabato sera al Just Me offre spettacolari feste a tema, servizio bottiglie premium e un\'atmosfera indimenticabile sotto la Torre Branca. L\'esperienza di clubbing di lusso per eccellenza.'
     },
-    pricing: { aperitif: 'From €20', club: 'From €30', tables: 'From €500 to €5,000' },
+    pricing: { aperitif: 'From €20', club: 'From €20', tables: 'From €320 to €5,000' },
     dressCode: {
       en: 'Strictly Elegant. Dress to impress.',
       it: 'Strettamente Elegante. Vestiti per impressionare.'
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '21+', 'Strictly Elegant', 'Commercial and House'),
     image: '/images/events/october-2026/249213-e2755e4bf02c.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/saturday-night-784/249196/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/swae-lee-1/248805/channel/nightlifemilan-1',
     priority: 100
   },
   {
@@ -215,14 +216,14 @@ export const weeklyEvents: WeeklyEvent[] = [
       en: 'End the week with the best urban party in Milan. "Uptown" brings premium Hip-Hop and R&B vibes to the luxurious setting of Just Me. A favorite among athletes, artists, and fashion insiders.',
       it: 'Concludi la settimana con il miglior party urban di Milano. "Uptown" porta vibrazioni Hip-Hop e R&B premium nella lussuosa cornice del Just Me. Uno dei preferiti da atleti, artisti e addetti ai lavori della moda.'
     },
-    pricing: { aperitif: 'From €20', club: 'From €20', tables: 'From €320 to €3,000' },
+    pricing: { aperitif: 'From €15', club: 'From €15', tables: 'From €320 to €5,000' },
     dressCode: {
       en: 'Urban Chic. Stylish streetwear is allowed, but keep it premium.',
       it: 'Urban Chic. Lo streetwear elegante è consentito, ma mantienilo premium.'
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '21+', 'Urban Chic', 'Hip-Hop and R&B'),
     image: '/images/events/october-2026/249199-9373e4ee381b.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/sunday-night-198/249201/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/sunday-night-166/249199/channel/nightlifemilan-1',
     priority: 100
   },
 
@@ -241,7 +242,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       en: 'Thursday night at Pineta Club Milano brings the iconic Tr3ndy Society format under the crystal chandeliers of Via Messina 38. Expect an electric mix of Hip-Hop, Reggaeton, and commercial hits with VIP bottle service.',
       it: 'Il giovedì notte al Pineta Club Milano porta l\'iconico format Tr3ndy Society sotto i lampadari di cristallo di Via Messina 38. Un mix esplosivo di Hip-Hop, Reggaeton e hit commerciali con servizio tavoli VIP.'
     },
-    pricing: { aperitif: 'From €15', club: 'From €20', tables: 'From €250 to €1,500' },
+    pricing: { aperitif: 'From €15', club: 'From €15', tables: 'From €250 to €1,200' },
     dressCode: {
       en: 'Smart Elegant. Collared shirts recommended for men.',
       it: 'Smart Elegant. Camicia consigliata per gli uomini.'
@@ -265,14 +266,14 @@ export const weeklyEvents: WeeklyEvent[] = [
       en: 'The iconic Pineta experience arrives in Milan. Start your Friday with a sophisticated singing aperitivo, enjoying live music and great food, before the venue transforms into an elegant club for the night.',
       it: 'L\'iconica esperienza Pineta arriva a Milano. Inizia il tuo venerdì con un sofisticato aperitivo cantato, godendoti musica dal vivo e ottimo cibo, prima che il locale si trasformi in un club elegante per la notte.'
     },
-    pricing: { aperitif: 'From €20', club: 'From €25', tables: 'From €300 to €2,000' },
+    pricing: { aperitif: 'From €15', club: 'From €15', tables: 'From €250 to €1,200' },
     dressCode: {
       en: 'Elegant and Chic. Collared shirts for men.',
       it: 'Elegante e Chic. Camicia con colletto per gli uomini.'
     },
     faqs: defaultFaqs('Pineta Club', 'Via Privata Giovanni Ventura 15, Milan', '25+', 'Elegant and Chic', 'Live Music and Commercial'),
     image: '/images/events/october-2026/243822-fa1698470cb9.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/friday-night-725/243822/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/friday-night-720/243822/channel/nightlifemilan-1',
     priority: 95
   },
   {
@@ -289,14 +290,14 @@ export const weeklyEvents: WeeklyEvent[] = [
       en: 'Saturday night at Pineta is synonymous with exclusivity. A premium dinner show followed by a high-end clubbing experience. The perfect choice for celebrations and VIP table bookings.',
       it: 'Il sabato sera al Pineta è sinonimo di esclusività. Un dinner show premium seguito da un\'esperienza di clubbing di alto livello. La scelta perfetta per celebrazioni e prenotazioni di tavoli VIP.'
     },
-    pricing: { aperitif: 'From €20', club: 'From €30', tables: 'From €300 to €2,000' },
+    pricing: { aperitif: 'From €15', club: 'From €15', tables: 'From €250 to €1,200' },
     dressCode: {
       en: 'Strictly Elegant.',
       it: 'Strettamente Elegante.'
     },
     faqs: defaultFaqs('Pineta Club', 'Via Privata Giovanni Ventura 15, Milan', '25+', 'Strictly Elegant', 'Live Music and Commercial'),
     image: '/images/events/october-2026/243815-e33432d48dd4.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/saturday-night-783/243828/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/saturday-night-774/243828/channel/nightlifemilan-1',
     priority: 95
   },
 
@@ -357,11 +358,11 @@ export const weeklyEvents: WeeklyEvent[] = [
       en: 'Saturday Night at Aria Club Milano is the weekend highlight for the San Siro neighbourhood. A full evening starting with a buffet aperitivo at 7:30 PM and ending well past midnight. Dance Floor Tables and Privé areas available for groups.',
       it: 'Il Saturday Night all\'Aria Club Milano è il punto di riferimento del weekend per il quartiere San Siro. Una serata completa che parte dall\'aperitivo a buffet alle 19:30 e si conclude a notte fonda. Dance Floor Table e aree Privé disponibili per i gruppi.'
     },
-    pricing: { aperitif: 'From €15', club: 'From €20', tables: 'From €250 to €2,000' },
+    pricing: { aperitif: 'From €15', club: 'From €20', tables: 'From €200 to €600' },
     dressCode: { en: 'Smart Casual. No sportswear.', it: 'Smart Casual. No abbigliamento sportivo.' },
     faqs: defaultFaqs('Aria Club Milano', 'Piazzale dello Sport 14, Milan', '21+', 'Smart Casual', 'Hits, EDM and Dance'),
     image: '/images/events/october-2026/242617-59f08f112437.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/saturday-night-717/242617/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/saturday-night-761/242617/channel/nightlifemilan-1',
     priority: 90
   },
 
