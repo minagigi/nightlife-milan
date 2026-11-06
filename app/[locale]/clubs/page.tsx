@@ -145,7 +145,7 @@ export default async function ClubsPage({
       // Bug fix: prima si ricostruiva l'URL dentro VenueMap con la stessa
       // logica it/en-only del bug IntentCards — ora l'href è già corretto
       // qui, con la locale REALE, non quella collassata a testo it/en.
-      href: `${localePrefix(locale)}/clubs/${v.slugs[typedLocale] || v.slugs.en}`,
+      href: `${localePrefix(locale)}/clubs/${v.slugs[locale as LocaleCode] || v.slugs[typedLocale] || v.slugs.en}`,
       latitude: v.coordinates!.latitude,
       longitude: v.coordinates!.longitude,
     }));

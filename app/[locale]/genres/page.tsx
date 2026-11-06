@@ -2,7 +2,8 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { tr } from '@/lib/i18n/t';
-import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { getLocaleDef, hreflangAlternates, localePrefix, type LocaleCode } from '@/lib/i18n/locales';
+import { getLocalizedGenreSlug35 } from '@/lib/i18n/localizedSlugs35';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { genreData } from './[slug]/page';
 import { Music, Sparkles, ArrowUpRight } from 'lucide-react';
@@ -145,7 +146,7 @@ export default async function GenresIndexPage({
           {entries.map(([slug, g]) => (
             <Link
               key={slug}
-              href={`${lp}/genres/${slug}`}
+              href={`${lp}/genres/${getLocalizedGenreSlug35(slug, (locale as LocaleCode) || 'en')}`}
               className="group relative h-[360px] rounded-2xl overflow-hidden border border-white/10 hover:border-champagne/50 transition-all duration-500 block"
             >
               <Image

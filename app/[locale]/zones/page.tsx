@@ -3,6 +3,7 @@ import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import { tr } from '@/lib/i18n/t';
 import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { getLocalizedZoneSlug35 } from '@/lib/i18n/localizedSlugs35';
 import Link from 'next/link';
 import Image from 'next/image';
 import { mockZones } from '@/lib/data';
@@ -184,7 +185,7 @@ export default async function ZonesPage({
             return (
               <Link
                 key={zone.id}
-                href={`${localePrefix(locale)}/zones/${zone.slug}`}
+                href={`${localePrefix(locale)}/zones/${getLocalizedZoneSlug35(zone.slug, (locale as LocaleCode) || 'en')}`}
                 className="group relative h-[400px] rounded-lg overflow-hidden border border-white/10 hover:border-champagne/50 transition-colors duration-500 block"
               >
                 {/* Background Image or Gradient */}
