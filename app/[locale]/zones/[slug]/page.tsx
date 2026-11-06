@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { tr } from '@/lib/i18n/t';
-import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { getLocaleDef, hreflangAlternates, localePrefix, indexedLocaleCodes } from '@/lib/i18n/locales';
+import { resolveZoneSlug, getLocalizedZoneSlug35 } from '@/lib/i18n/localizedSlugs35';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -189,7 +190,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   const typedLocale = (locale === 'it' ? 'it' : 'en') as 'en' | 'it';
 
-  const zone = mockZones.find((z) => z.slug === slug);
+  const canonicalZoneSlug = resolveZoneSlug(slug);
+  const zone = mockZones.find((z) => z.slug === canonicalZoneSlug || z.slug === slug);
 
   if (!zone) return notFound();
 
@@ -200,9 +202,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   );
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const canonical = `${baseUrl}${localePrefix(locale)}/zones/${slug}`;
+  const localizedZoneSlug = getLocalizedZoneSlug35(zone.slug, (locale as LocaleCode) || 'en');
+  const canonical = `${baseUrl}${localePrefix(locale)}/zones/${localizedZoneSlug}`;
+  const zoneLangAlternates: Record<string, string> = {
+    'x-default': `${baseUrl}/zones/${getLocalizedZoneSlug35(zone.slug, 'en')}`,
+  };
+  for (const loc of indexedLocaleCodes) {
+    zoneLangAlternates[loc] = `${baseUrl}${localePrefix(loc)}/zones/${getLocalizedZoneSlug35(zone.slug, loc)}`;
+  }
 
-  const heroImg = ZONE_HERO_MAP[slug] || zone.image || '/images/pillars/zone-hero-01.webp';
+  const heroImg = ZONE_HERO_MAP[zone.slug] || zone.image || '/images/pillars/zone-hero-01.webp';
   const ogImage = `${baseUrl}${heroImg}`;
 
   return {
@@ -211,7 +220,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     robots: seoRobots(locale),
     alternates: {
       canonical,
-      languages: hreflangAlternates(baseUrl, `/zones/${slug}`),
+      languages: zoneLangAlternates,
     },
     openGraph: {
       title,
@@ -237,7 +246,8 @@ export default async function ZonePage({ params }: Props) {
   const typedLocale = (locale === 'it' ? 'it' : 'en') as 'en' | 'it';
   const isIt = typedLocale === 'it';
 
-  const zone = mockZones.find((z) => z.slug === slug);
+  const canonicalZoneSlug = resolveZoneSlug(slug);
+  const zone = mockZones.find((z) => z.slug === canonicalZoneSlug || z.slug === slug);
 
   if (!zone) return notFound();
 
@@ -253,7 +263,7 @@ export default async function ZonePage({ params }: Props) {
   const venuesInZone = zoneVenues.length;
   const eventsTonight = items.length;
 
-  const logistics = ZONE_LOGISTICS[slug] || {
+  const logistics = ZONE_LOGISTICS[zone.slug] || ZONE_LOGISTICS[slug] || {
     metroEn: 'Served by M1/M2/M3/M5 Metro lines until 00:30 + ATM Night Bus network (NM1–NM4, N90/N91)',
     metroIt: 'Servito dalle linee Metro M1/M2/M3/M5 fino alle 00:30 + Rete Notturna ATM (NM1–NM4, N90/N91)',
     parkingEn: 'Guarded 24h municipal garages and official Radiotaxi / Uber Black drop-off points',
@@ -301,7 +311,7 @@ export default async function ZonePage({ params }: Props) {
       <div data-zone-top-hero="true" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
         <div className="relative h-64 sm:h-80 w-full rounded-2xl overflow-hidden border border-champagne/30">
           <Image quality={92}
-            src={ZONE_HERO_MAP[slug] || zone.image || '/images/pillars/zone-hero-01.webp'}
+            src={ZONE_HERO_MAP[zone.slug] || ZONE_HERO_MAP[slug] || zone.image || '/images/pillars/zone-hero-01.webp'}
             alt={`${zone.name} Milan Nightlife District`}
             fill
             priority
@@ -480,7 +490,7 @@ export default async function ZonePage({ params }: Props) {
 
                         {/* District Atmosphere Gallery (4 Unique Images) */}
             <div className="mb-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {(ZONE_INLINE_MAP[slug] || ZONE_INLINE_MAP['brera']).map((imgSrc, idx) => (
+              {(ZONE_INLINE_MAP[zone.slug] || ZONE_INLINE_MAP[slug] || ZONE_INLINE_MAP['brera']).map((imgSrc, idx) => (
                 <div key={imgSrc} className="relative aspect-[16/9] w-full rounded-xl overflow-hidden border border-white/10">
                   <Image quality={92}
                     src={imgSrc}

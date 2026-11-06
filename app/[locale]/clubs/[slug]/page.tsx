@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { tr } from '@/lib/i18n/t';
-import { hreflangAlternates, localePrefix, getLocaleDef } from '@/lib/i18n/locales';
+import { hreflangAlternates, localePrefix, getLocaleDef, indexedLocaleCodes } from '@/lib/i18n/locales';
+import { getLocalizedVenueSlug35 } from '@/lib/i18n/localizedSlugs35';
 import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,6 +15,15 @@ import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
 import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 import { VipQuoteCalculator, EntryFormulaMatrix, SanSiroMatchAfterpartyFinder } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
+import VenueEventsAutoCarousel from '@/components/VenueEventsAutoCarousel';
+import {
+  getVenueUi35,
+  getVenueTargetProfile,
+  getVenueCelebrations,
+  getVenueServices10,
+  resolveVenueEventsForCarousel,
+  getEnhancedVenueGallery,
+} from '@/lib/venueDossiers35';
 import type { LocaleCode } from '@/lib/i18n/locales';
 
 export const revalidate = 3600;
@@ -1014,7 +1024,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const enSlug = venue.slugs.en;
   const itSlug = venue.slugs.it || enSlug;
   const ogImage = venue.image || venue.gallery?.[0] || '/images/milan-nightclub-luxury-vip-champagne.webp';
-  const canonicalUrl = `${baseUrl}${localePrefix(locale)}/clubs/${slug}`;
+  const canonicalSlug = getLocalizedVenueSlug35(venue.id, (locale as LocaleCode) || 'en');
+  const canonicalUrl = `${baseUrl}${localePrefix(locale)}/clubs/${canonicalSlug}`;
+  const clubLangAlternates: Record<string, string> = {
+    'x-default': `${baseUrl}/clubs/${getLocalizedVenueSlug35(venue.id, 'en')}`,
+  };
+  for (const loc of indexedLocaleCodes) {
+    clubLangAlternates[loc] = `${baseUrl}${localePrefix(loc)}/clubs/${getLocalizedVenueSlug35(venue.id, loc)}`;
+  }
 
   return {
     title,
@@ -1025,7 +1042,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       : { index: true, follow: true, googleBot: { index: true, follow: true } },
     alternates: {
       canonical: canonicalUrl,
-      languages: { ...hreflangAlternates(baseUrl, `/clubs/${enSlug}`), it: `${baseUrl}/it/clubs/${itSlug}` },
+      languages: clubLangAlternates,
     },
     openGraph: {
       title,
@@ -1115,8 +1132,14 @@ export default async function ClubPage({ params }: Props) {
   const dressCode = (getLocalizedText(venue.localizedContent.dressCode, locale) || "Smart Casual").replace(/[—–]/g, ' - ');
   const insiderTip = (venue.localizedContent.insiderTip ? getLocalizedText(venue.localizedContent.insiderTip, locale) : '').replace(/[—–]/g, ' - ');
   const image = venue.image || venue.gallery?.[0] || '/images/milan-nightclub-luxury-vip-champagne.webp';
-  const rawGallery = venue.gallery?.length ? venue.gallery.filter((g) => g !== image) : [];
-  const gallery = rawGallery.length ? rawGallery : [];
+  const enhancedGallery = getEnhancedVenueGallery(venue);
+  const rawGallery = enhancedGallery.filter((g) => g !== image);
+  const gallery = rawGallery.length >= 4 ? rawGallery : enhancedGallery;
+  const venueUi = getVenueUi35(locale);
+  const venueCarouselEvents = resolveVenueEventsForCarousel(venue, locale);
+  const venueTargetProfile = getVenueTargetProfile(venue, locale);
+  const venueCelebrations = getVenueCelebrations(venue, locale);
+  const venueServices = getVenueServices10(venue, locale);
   
   const waLink = venue.id === 'v-pineta' 
     ? `${CONTACT.whatsapp.link}?text=Ciao,%20vorrei%20informazioni%20per%20un%20tavolo%20al%20Pineta%20Club%20Milano`
@@ -1784,6 +1807,17 @@ export default async function ClubPage({ params }: Props) {
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 space-y-12">
+        <VenueEventsAutoCarousel
+          venueName={name}
+          ui={venueUi}
+          tonight={venueCarouselEvents.tonight}
+          thisWeek={venueCarouselEvents.thisWeek}
+          curatedProposals={venueCarouselEvents.curatedProposals}
+          future={venueCarouselEvents.future}
+          targetProfile={venueTargetProfile}
+          celebrations={venueCelebrations}
+          services={venueServices}
+        />
         <EntryFormulaMatrix locale={locale} />
         {(slug.includes('aria') || slug.includes('just-me') || slug.includes('voya') || slug.includes('55-milano') || slug.includes('pineta') || slug.includes('repvblic')) && (
           <SanSiroMatchAfterpartyFinder locale={locale} />

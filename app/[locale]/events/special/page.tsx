@@ -11,6 +11,7 @@ import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 import { PrioritySixShowcase, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
+import VerticalHubsAndEventsSection from '@/components/VerticalHubsAndEventsSection';
 import type { LocaleCode } from '@/lib/i18n/locales';
 
 // ISR Configuration
@@ -434,6 +435,7 @@ export default async function SpecialEventsPage({ params }: Props) {
           </Link>
         </div>
       </section>
+      <VerticalHubsAndEventsSection locale={locale} initialTab="fairs" eventFocus="all" />
             <OctoberEntry locale={locale} />
         <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/events/special`} />
       </main>

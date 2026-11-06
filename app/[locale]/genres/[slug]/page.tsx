@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { tr } from '@/lib/i18n/t';
-import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { hreflangAlternates, localePrefix, indexedLocaleCodes } from '@/lib/i18n/locales';
+import { resolveGenreSlug, getLocalizedGenreSlug35 } from '@/lib/i18n/localizedSlugs35';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -329,7 +330,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   const typedLocale = (locale === 'it' ? 'it' : 'en') as 'en' | 'it';
 
-  const genre = genreData[slug];
+  const canonicalGenreSlug = resolveGenreSlug(slug);
+  const genre = genreData[canonicalGenreSlug] || genreData[slug];
 
   if (!genre) return notFound();
 
@@ -337,10 +339,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const description = withWhatsApp(genre.metaDescription[typedLocale], locale);
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const canonical = `${baseUrl}${localePrefix(locale)}/genres/${slug}`;
+  const localizedGenreSlug = getLocalizedGenreSlug35(canonicalGenreSlug, (locale as LocaleCode) || 'en');
+  const canonical = `${baseUrl}${localePrefix(locale)}/genres/${localizedGenreSlug}`;
+  const genreLangAlternates: Record<string, string> = {
+    'x-default': `${baseUrl}/genres/${getLocalizedGenreSlug35(canonicalGenreSlug, 'en')}`,
+  };
+  for (const loc of indexedLocaleCodes) {
+    genreLangAlternates[loc] = `${baseUrl}${localePrefix(loc)}/genres/${getLocalizedGenreSlug35(canonicalGenreSlug, loc)}`;
+  }
 
   const isIt = locale === 'it';
-  const ogImage = `${baseUrl}${GENRE_HERO_MAP[slug] || '/images/pillars/genre-hero-01.webp'}`;
+  const ogImage = `${baseUrl}${GENRE_HERO_MAP[canonicalGenreSlug] || GENRE_HERO_MAP[slug] || '/images/pillars/genre-hero-01.webp'}`;
 
   return {
     title,
@@ -348,7 +357,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     robots: seoRobots(locale),
     alternates: {
       canonical,
-      languages: hreflangAlternates(baseUrl, `/genres/${slug}`),
+      languages: genreLangAlternates,
     },
     openGraph: {
       title,
@@ -374,10 +383,11 @@ export default async function GenrePage({ params }: Props) {
   const typedLocale = (locale === 'it' ? 'it' : 'en') as 'en' | 'it';
   const isIt = typedLocale === 'it';
   const lp = localePrefix(locale);
-  const genreHeroImg = GENRE_HERO_MAP[slug] || '/images/pillars/genre-hero-01.webp';
-  const genreInlineImgs = GENRE_INLINE_MAP[slug] || GENRE_INLINE_MAP.techno;
+  const canonicalGenreSlug = resolveGenreSlug(slug);
+  const genreHeroImg = GENRE_HERO_MAP[canonicalGenreSlug] || GENRE_HERO_MAP[slug] || '/images/pillars/genre-hero-01.webp';
+  const genreInlineImgs = GENRE_INLINE_MAP[canonicalGenreSlug] || GENRE_INLINE_MAP[slug] || GENRE_INLINE_MAP.techno;
 
-  const genre = genreData[slug];
+  const genre = genreData[canonicalGenreSlug] || genreData[slug];
 
   if (!genre) return notFound();
 

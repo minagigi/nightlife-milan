@@ -27,6 +27,7 @@ import {
   EntryFormulaMatrix,
   PrioritySixShowcase,
 } from '@/components/NightlifeExpansionModules';
+import VerticalHubsAndEventsSection from '@/components/VerticalHubsAndEventsSection';
 
 export const revalidate = 3600;
 
@@ -1300,6 +1301,7 @@ export default async function NewYearsEvePage({
           </div>
         </div>
       </section>
+      <VerticalHubsAndEventsSection locale={locale} initialTab="holidays" eventFocus="holidays" />
     </main>
   );
 }

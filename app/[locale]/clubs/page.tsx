@@ -11,6 +11,7 @@ import { weeklyEvents } from '@/lib/eventsConfig';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { PrioritySixShowcase, WeeklyNightlifeNavigator, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
+import VerticalHubsAndEventsSection from '@/components/VerticalHubsAndEventsSection';
 import type { LocaleCode } from '@/lib/i18n/locales';
 
 export const revalidate = 3600;
@@ -307,6 +308,7 @@ export default async function ClubsPage({
           </section>
         );
       })()}
+      <VerticalHubsAndEventsSection locale={locale} initialTab="occasions" eventFocus="all" />
             <EditorialPageSections locale={locale as LocaleCode} path={`${localePrefix(locale)}/clubs`} />
       </main>
   );

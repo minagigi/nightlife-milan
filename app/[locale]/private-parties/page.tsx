@@ -8,6 +8,7 @@ import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/local
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { Sparkles, PartyPopper, Crown, Users, MessageCircle, CheckCircle2 } from 'lucide-react';
 import { VipQuoteCalculator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
+import VerticalHubsAndEventsSection from '@/components/VerticalHubsAndEventsSection';
 
 export const revalidate = 3600;
 
@@ -329,6 +330,7 @@ export default async function PrivatePartiesPage({
           ))}
         </div>
       </section>
+      <VerticalHubsAndEventsSection locale={locale} initialTab="occasions" eventFocus="occasions" />
       <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/private-parties`} />
     </main>
   );

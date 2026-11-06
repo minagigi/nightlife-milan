@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation';
 import { tr } from '@/lib/i18n/t';
-import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { getLocaleDef, hreflangAlternates, localePrefix, indexedLocaleCodes } from '@/lib/i18n/locales';
+import { GUIDE_HERO_IMAGES_114, GUIDE_INLINE_IMAGES_114 } from '@/lib/guideImagesMap114';
+import { getLocalizedGuideSlug35 } from '@/lib/guides100Catalog';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -17,7 +19,9 @@ import type { LocaleCode } from '@/lib/i18n/locales';
 // ISR Configuration (1 hour)
 export const revalidate = 3600;
 
-const GUIDE_HERO_IMAGES: Record<string, string> = {
+const GUIDE_HERO_IMAGES: Record<string, string> = GUIDE_HERO_IMAGES_114;
+const GUIDE_INLINE_IMAGES: Record<string, string[]> = GUIDE_INLINE_IMAGES_114;
+const _LEGACY_GUIDE_HERO_IMAGES: Record<string, string> = {
   'g-dress-code': '/images/pillars/guide-hero-01.webp', 'g-vip': '/images/pillars/guide-hero-01.webp',
   'g-secret-bars': '/images/pillars/guide-hero-02.webp', 'g-1': '/images/pillars/guide-hero-02.webp',
   'g-vip-tables': '/images/pillars/guide-hero-03.webp', 'g-2': '/images/pillars/guide-hero-03.webp',
@@ -34,7 +38,7 @@ const GUIDE_HERO_IMAGES: Record<string, string> = {
   'g-bachelor-bachelorette-vip-milan': '/images/pillars/guide-hero-14.webp', 'g-13': '/images/pillars/guide-hero-14.webp',
 };
 
-const GUIDE_INLINE_IMAGES: Record<string, string[]> = {
+const _LEGACY_GUIDE_INLINE_IMAGES: Record<string, string[]> = {
   'g-dress-code': ['/images/pillars/guide-inline-01-a.webp', '/images/pillars/guide-inline-01-b.webp', '/images/pillars/guide-inline-01-c.webp', '/images/pillars/guide-inline-01-d.webp'], 'g-vip': ['/images/pillars/guide-inline-01-a.webp', '/images/pillars/guide-inline-01-b.webp', '/images/pillars/guide-inline-01-c.webp', '/images/pillars/guide-inline-01-d.webp'],
   'g-secret-bars': ['/images/pillars/guide-inline-02-a.webp', '/images/pillars/guide-inline-02-b.webp', '/images/pillars/guide-inline-02-c.webp', '/images/pillars/guide-inline-02-d.webp'], 'g-1': ['/images/pillars/guide-inline-02-a.webp', '/images/pillars/guide-inline-02-b.webp', '/images/pillars/guide-inline-02-c.webp', '/images/pillars/guide-inline-02-d.webp'],
   'g-vip-tables': ['/images/pillars/guide-inline-03-a.webp', '/images/pillars/guide-inline-03-b.webp', '/images/pillars/guide-inline-03-c.webp', '/images/pillars/guide-inline-03-d.webp'], 'g-2': ['/images/pillars/guide-inline-03-a.webp', '/images/pillars/guide-inline-03-b.webp', '/images/pillars/guide-inline-03-c.webp', '/images/pillars/guide-inline-03-d.webp'],
@@ -86,19 +90,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const enSlug = guide.slugs.en;
   const itSlug = guide.slugs.it || enSlug;
 
-  const currentSlug = locale === 'it' ? itSlug : enSlug;
+  const currentSlug = getLocalizedGuideSlug35(guide, (locale as LocaleCode) || 'en');
   const path = `${localePrefix(locale)}/guides/${currentSlug}`;
   const canonical = `${baseUrl}${path}`;
+  const langAlternates: Record<string, string> = {
+    'x-default': `${baseUrl}/guides/${getLocalizedGuideSlug35(guide, 'en')}`,
+  };
+  for (const loc of indexedLocaleCodes) {
+    langAlternates[loc] = `${baseUrl}${localePrefix(loc)}/guides/${getLocalizedGuideSlug35(guide, loc)}`;
+  }
 
   return {
     title,
     description,
     alternates: {
       canonical,
-      languages: {
-        ...hreflangAlternates(baseUrl, `/guides/${enSlug}`),
-        it: `${baseUrl}/it/guides/${itSlug}`,
-      },
+      languages: langAlternates,
     },
     robots:
       getLocaleDef(locale)?.indexed === false
@@ -482,7 +489,7 @@ export default async function GuidePage({ params }: Props) {
           <h2 className="font-serif text-2xl md:text-3xl text-white mb-8">{t.otherGuides}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {otherGuides.map((g) => {
-              const gSlug = isIt ? g.slugs.it || g.slugs.en : g.slugs.en;
+              const gSlug = getLocalizedText(g.slugs, locale);
               const gTitle = getLocalizedText(g.title, locale);
               return (
                 <Link

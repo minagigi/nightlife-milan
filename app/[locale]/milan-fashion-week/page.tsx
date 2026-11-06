@@ -28,6 +28,7 @@ import {
   EntryFormulaMatrix,
   PrioritySixShowcase,
 } from '@/components/NightlifeExpansionModules';
+import VerticalHubsAndEventsSection from '@/components/VerticalHubsAndEventsSection';
 
 export const revalidate = 3600;
 
@@ -1038,6 +1039,7 @@ export default async function FashionWeekPage({
           </div>
         </div>
       </section>
+      <VerticalHubsAndEventsSection locale={locale} initialTab="fairs" eventFocus="tradeFairs" />
             <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/milan-fashion-week`} />
       </main>
   );

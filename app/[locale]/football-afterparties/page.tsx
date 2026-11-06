@@ -25,6 +25,7 @@ import {
   VipQuoteCalculator,
   PrioritySixShowcase,
 } from '@/components/NightlifeExpansionModules';
+import VerticalHubsAndEventsSection from '@/components/VerticalHubsAndEventsSection';
 
 export const revalidate = 3600;
 
@@ -1266,6 +1267,7 @@ export default async function FootballAfterpartiesPage({
           </div>
         </div>
       </section>
+      <VerticalHubsAndEventsSection locale={locale} initialTab="occasions" eventFocus="sanSiro" />
             <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/football-afterparties`} />
       </main>
   );

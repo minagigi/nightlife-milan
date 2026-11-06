@@ -26,6 +26,7 @@ import {
   WeeklyNightlifeNavigator,
   PrioritySixShowcase,
 } from '@/components/NightlifeExpansionModules';
+import VerticalHubsAndEventsSection from '@/components/VerticalHubsAndEventsSection';
 
 export const revalidate = 3600;
 
@@ -1032,6 +1033,7 @@ export default async function ConcertAfterpartiesPage({
           </div>
         </div>
       </section>
+      <VerticalHubsAndEventsSection locale={locale} initialTab="occasions" eventFocus="concerts" />
     </main>
   );
 }

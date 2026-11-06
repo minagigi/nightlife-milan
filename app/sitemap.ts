@@ -11,6 +11,7 @@ import { CAPODANNO_CATEGORY_IDS, capodannoCategoryPath, capodannoEventPath } fro
 import { halloweenPath } from '@/lib/halloween/routes';
 import { OCTOBER_EVENTS } from '@/lib/octoberEvents';
 import { getOctoberEventCopy } from '@/lib/october-events/copy';
+import { getLocalizedZoneSlug35, getLocalizedGenreSlug35 } from '@/lib/i18n/localizedSlugs35';
 
 export const revalidate = false;
 
@@ -183,7 +184,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     locales.forEach((locale) => {
       const langPrefix = localePrefix(locale);
       sitemapEntries.push({
-        url: `${baseUrl}${langPrefix}/zones/${zone.slug}`,
+        url: `${baseUrl}${langPrefix}/zones/${getLocalizedZoneSlug35(zone.slug, locale)}`,
         lastModified: contentModified,
         changeFrequency: 'monthly',
         priority: 0.75,
@@ -197,7 +198,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     locales.forEach((locale) => {
       const langPrefix = localePrefix(locale);
       sitemapEntries.push({
-        url: `${baseUrl}${langPrefix}/genres/${slug}`,
+        url: `${baseUrl}${langPrefix}/genres/${getLocalizedGenreSlug35(slug, locale)}`,
         lastModified: contentModified,
         changeFrequency: 'weekly',
         priority: 0.7,

@@ -1,6 +1,9 @@
 import { Event, Venue, Performer, MusicGenre, MilanZone, VenueCategory, Guide, Zone } from '@/lib/types';
 import { MOCK_EVENT_I18N } from '@/lib/mockEventI18n';
 import { GUIDE_I18N } from '@/lib/guideI18n.generated';
+import { EXTRA_100_GUIDES, populateGuideSlugs35 } from '@/lib/guides100Catalog';
+import { VENUE_SLUGS_35, resolveVenueSlug, ALL_35_LOCALES, sanitizeAsciiSlug, SLUG_TOKENS_35 } from '@/lib/i18n/localizedSlugs35';
+import { GUIDE_HERO_IMAGES_114 } from '@/lib/guideImagesMap114';
 
 // Mock Data for Zones
 export const mockZones: Zone[] = [
@@ -1618,7 +1621,7 @@ export const getEventBySlug = (slug: string, lang: string): Event | undefined =>
   // controllato. Ora riconosce entrambi gli slug a prescindere da lang.
   return mockEvents.find(e =>
     e.localizedContent.slug.en === slug ||
-    e.localizedContent.slug.it === slug
+    e.localizedContent.slug.it === slug || Object.values(e.localizedContent.slug).includes(slug)
   );
 };
 
@@ -1639,7 +1642,7 @@ export const getVenueBySlug = (slug: string, lang: string): Venue | undefined =>
   // === slugs.it, ma stessa classe di bug se in futuro divergessero).
   return mockVenues.find(v =>
     v.slugs.en === slug ||
-    v.slugs.it === slug
+    v.slugs.it === slug || v.slugs.en === resolveVenueSlug(slug) || Object.values(v.slugs).includes(slug)
   );
 };
 
@@ -2740,6 +2743,28 @@ export const mockGuides: Guide[] = [
   }
 ];
 
+mockGuides.push(...EXTRA_100_GUIDES);
+populateGuideSlugs35(mockGuides);
+for (const g of mockGuides) {
+  if (GUIDE_HERO_IMAGES_114[g.id]) {
+    g.image = GUIDE_HERO_IMAGES_114[g.id];
+  }
+}
+for (const v of mockVenues) {
+  const map35 = VENUE_SLUGS_35[v.id] || VENUE_SLUGS_35[v.slugs.en];
+  if (map35) {
+    v.slugs = { ...map35, ...v.slugs };
+  }
+}
+for (const ev of mockEvents) {
+  for (const loc of ALL_35_LOCALES) {
+    if (!ev.localizedContent.slug[loc]) {
+      const tk = SLUG_TOKENS_35[loc];
+      const baseSlug = ev.localizedContent.slug.en || ev.id;
+      ev.localizedContent.slug[loc] = sanitizeAsciiSlug(`${baseSlug}-${tk.milan}-${tk.party}`);
+    }
+  }
+}
 export const events: Event[] = mockEvents;
 export const guides: Guide[] = mockGuides;
 
@@ -2773,7 +2798,7 @@ export const getGuideBySlug = (slug: string, lang: string): Guide | undefined =>
   // Stesso bug fix di getEventBySlug: riconosce entrambi gli slug a prescindere da lang.
   return mockGuides.find(g =>
     g.slugs.en === slug ||
-    g.slugs.it === slug
+    g.slugs.it === slug || Object.values(g.slugs).includes(slug)
   );
 };
 

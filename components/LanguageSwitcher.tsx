@@ -2,7 +2,14 @@
 
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { ENABLED_LOCALES, LOCALES, localePrefix } from '@/lib/i18n/locales';
+import { ENABLED_LOCALES, LOCALES, localePrefix, type LocaleCode } from '@/lib/i18n/locales';
+import {
+  getLocalizedVenueSlug35,
+  getLocalizedZoneSlug35,
+  getLocalizedGenreSlug35,
+  getExistingGuideSlug35,
+  resolveExistingGuideId,
+} from '@/lib/i18n/localizedSlugs35';
 
 // Il prefisso va riconosciuto per TUTTI i codici del registry (anche i path
 // interni riscritti dal middleware, es. /en/...).
@@ -29,7 +36,28 @@ export default function LanguageSwitcher({ currentLocale }: { currentLocale: str
 
   const getAlternatePath = (targetLocale: string) => {
     if (!pathname) return localePrefix(targetLocale) || '/';
-    const pathWithoutLocale = pathname.replace(anyLocaleRe, '/');
+    let pathWithoutLocale = pathname.replace(anyLocaleRe, '/');
+    const loc = targetLocale as LocaleCode;
+    const clubMatch = pathWithoutLocale.match(/^\/clubs\/([^/]+)$/);
+    const zoneMatch = pathWithoutLocale.match(/^\/zones\/([^/]+)$/);
+    const genreMatch = pathWithoutLocale.match(/^\/genres\/([^/]+)$/);
+    const guideMatch = pathWithoutLocale.match(/^\/guides\/([^/]+)$/);
+    if (clubMatch) {
+      pathWithoutLocale = `/clubs/${getLocalizedVenueSlug35(clubMatch[1], loc)}`;
+    } else if (zoneMatch) {
+      pathWithoutLocale = `/zones/${getLocalizedZoneSlug35(zoneMatch[1], loc)}`;
+    } else if (genreMatch) {
+      pathWithoutLocale = `/genres/${getLocalizedGenreSlug35(genreMatch[1], loc)}`;
+    } else if (guideMatch && resolveExistingGuideId(guideMatch[1])) {
+      pathWithoutLocale = `/guides/${getExistingGuideSlug35(guideMatch[1], loc)}`;
+    } else if (guideMatch && typeof document !== 'undefined') {
+      const altLink = document.querySelector(`link[rel="alternate"][hreflang="${targetLocale}"]`) as HTMLLinkElement | null;
+      if (altLink?.href) {
+        try {
+          return new URL(altLink.href).pathname;
+        } catch {}
+      }
+    }
     const prefix = localePrefix(targetLocale);
     if (!prefix) return pathWithoutLocale;
     return pathWithoutLocale === '/' ? prefix : `${prefix}${pathWithoutLocale}`;

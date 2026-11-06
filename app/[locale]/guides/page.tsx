@@ -10,6 +10,7 @@ import { mockGuides } from '@/lib/data';
 import { getLocalizedText } from '@/lib/seo';
 import { VipQuoteCalculator, WeeklyNightlifeNavigator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
+import VerticalHubsAndEventsSection from '@/components/VerticalHubsAndEventsSection';
 import type { LocaleCode } from '@/lib/i18n/locales';
 
 export const revalidate = 3600;
@@ -328,7 +329,7 @@ export default async function GuidesPage({
         '@type': 'ListItem',
         position: idx + 1,
         name: getLocalizedText(g.title, locale).replace(/[—–]/g, ' - '),
-        url: `${baseUrl}${localePrefix}/guides/${isIt ? g.slugs.it || g.slugs.en : g.slugs.en}`,
+        url: `${baseUrl}${localePrefix}/guides/${getLocalizedText(g.slugs, locale)}`,
       })),
     },
   };
@@ -346,7 +347,7 @@ export default async function GuidesPage({
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-champagne/30 bg-champagne/10 mb-5">
             <Sparkles className="w-3.5 h-3.5 text-champagne" />
             <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-champagne">
-              {isIt ? '14 Guide Pillar Ufficiali · Edizione 2026/2027' : '14 Official Pillar Guides · 2026/2027 Edition'}
+              {isIt ? '114 Guide Pillar Ufficiali · Edizione 2026/2027' : '114 Official Pillar Guides · 2026/2027 Edition'}
             </span>
           </div>
           <h1 className="font-serif text-5xl md:text-7xl font-bold text-champagne tracking-tighter mb-6">
@@ -384,7 +385,7 @@ export default async function GuidesPage({
       {featuredGuide && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
           <Link
-            href={`${localePrefix}/guides/${isIt ? featuredGuide.slugs.it || featuredGuide.slugs.en : featuredGuide.slugs.en}`}
+            href={`${localePrefix}/guides/${getLocalizedText(featuredGuide.slugs, locale)}`}
             className="group relative block w-full h-[500px] md:h-[580px] rounded-2xl overflow-hidden border border-white/15 hover:border-champagne/60 transition-all duration-500"
           >
             <Image
@@ -440,10 +441,10 @@ export default async function GuidesPage({
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
           <div>
             <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-champagne mb-2">
-              {isIt ? 'Libreria Editoriale Completa · 14 Guide Pillar' : 'Complete Editorial Library · 14 Pillar Guides'}
+              {isIt ? 'Libreria Editoriale Completa · 114 Guide Pillar' : 'Complete Editorial Library · 114 Pillar Guides'}
             </p>
             <h2 className="font-serif text-3xl md:text-4xl text-white">
-              {isIt ? 'Tutte le 14 Guide Pillar 2026/2027' : 'All 14 Flagship Pillar Guides 2026/2027'}
+              {isIt ? 'Tutte le 114 Guide Pillar 2026/2027' : 'All 114 Flagship Pillar Guides 2026/2027'}
             </h2>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -477,7 +478,7 @@ export default async function GuidesPage({
               readTimeEn: '8 min read',
               readTimeIt: '8 min di lettura',
             };
-            const guideSlug = isIt ? guide.slugs.it || guide.slugs.en : guide.slugs.en;
+            const guideSlug = getLocalizedText(guide.slugs, locale);
             const guideTitle = getLocalizedText(guide.title, locale).replace(/[—–]/g, ' - ');
             const guideExcerpt = getLocalizedText(guide.excerpt, locale).replace(/[—–]/g, ' - ');
             const highlights = isIt ? meta.highlightsIt : meta.highlightsEn;
@@ -522,7 +523,7 @@ export default async function GuidesPage({
                 <div className="p-6 flex flex-col flex-grow justify-between">
                   <div>
                     <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/40 mb-2">
-                      Pillar #{index + 2} / 14
+                      Pillar #{index + 2} / {sortedGuides.length}
                     </div>
                     <h3 className="font-serif text-xl font-bold text-white mb-3 group-hover:text-champagne transition-colors leading-snug">
                       {guideTitle}
@@ -635,6 +636,7 @@ export default async function GuidesPage({
         </div>
       </section>
 
+      <VerticalHubsAndEventsSection locale={locale} initialTab="blueprints" eventFocus="all" />
       {/* Newsletter Hub */}
       <NewsletterHub lang={locale} />
             <EditorialPageSections locale={locale as LocaleCode} path={`${localePrefix}/guides`} />

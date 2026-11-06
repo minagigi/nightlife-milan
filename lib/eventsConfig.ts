@@ -151,7 +151,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '25+', 'Strictly Elegant', 'Live Music and Commercial'),
     image: '/images/events/october-2026/249192-8d811d65d7c5.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/thursday-night-342/249192/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/thursday-night-340/249212/channel/nightlifemilan-1',
     priority: 100
   },
   {
