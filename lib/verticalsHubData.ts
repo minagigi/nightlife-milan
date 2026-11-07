@@ -1,5 +1,5 @@
 import { getLocalizedSeoPagePath35 } from '@/lib/i18n/localizedSlugs35';
-import type { LocaleCode } from '@/lib/i18n/locales';
+
 import type { LocaleCode } from './i18n/locales';
 import { isEnabledLocale } from './i18n/locales';
 import { OCTOBER_EVENTS } from './octoberEvents';
