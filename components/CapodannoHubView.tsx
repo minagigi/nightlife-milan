@@ -7,7 +7,7 @@ import {
   getCapodannoLocalizedEventTitle,
   getCapodannoUiCopy,
 } from '@/lib/capodanno/i18n';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { SITE_CONTACT } from '@/config/contact';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { localePrefix } from '@/lib/i18n/locales';

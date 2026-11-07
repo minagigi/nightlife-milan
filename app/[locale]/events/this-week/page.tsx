@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import { tr } from '@/lib/i18n/t';
 import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import { generateEventListSchema, getLocalizedText, jsonLdString } from '@/lib/seo';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
 import { Clock, MapPin, Calendar } from 'lucide-react';
 import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset, dayOfWeekForKey } from '@/lib/calendarEvents';

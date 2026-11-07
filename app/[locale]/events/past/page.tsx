@@ -2,7 +2,7 @@ import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import Image from 'next/image';
 import { Metadata } from 'next';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import EventCard from '@/components/EventCard';
 import { fetchEventbriteEvents } from '@/lib/eventbriteSync';
 import { getVenueById, mockEvents } from '@/lib/data';

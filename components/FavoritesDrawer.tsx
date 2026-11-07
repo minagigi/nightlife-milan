@@ -4,7 +4,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Trash2 } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { useFavorites } from './FavoritesContext';
 
 export default function FavoritesDrawer({ lang }: { lang: string }) {

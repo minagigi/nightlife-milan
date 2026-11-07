@@ -1,3 +1,4 @@
+import { getLocalizedEventSlug35 } from '@/lib/i18n/localizedSlugs35';
 import type { Metadata } from 'next';
 import { getLocaleDef, indexedLocaleCodes, localePrefix, type LocaleCode } from '@/lib/i18n/locales';
 import { getOctoberEventCopy, getOctoberHubCopy, getOctoberEventSlug } from '@/lib/october-events/copy';
@@ -8,7 +9,7 @@ import { getRaConditionTexts } from '@/lib/october-events/raConditionsAdapter';
 const BASE_URL = 'https://nightlifemilan.com';
 
 export function octoberEventCanonical(event: OctoberEventRecord, locale: LocaleCode): string {
-  return `${BASE_URL}${localePrefix(locale)}/events/${getOctoberEventSlug(event)}`;
+  return `${BASE_URL}${localePrefix(locale)}/events/${getLocalizedEventSlug35(getOctoberEventSlug(event), locale)}`;
 }
 
 export function formatOctoberEventDate(locale: LocaleCode, startISO: string): string {

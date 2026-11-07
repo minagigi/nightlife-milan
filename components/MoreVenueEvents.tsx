@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { buildMoreVenueEventsHeading } from '@/lib/eventPageLocale';
 
 export interface MoreVenueEventItem {

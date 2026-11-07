@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { ArrowLeft, Mail, MessageCircle, Save } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import { readCrmDatabase } from '@/lib/crmStore';

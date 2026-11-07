@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import type { PriorityRecommendationPresentation } from '@/lib/priorityVenueRecommendations';
 import { localePrefix } from '@/lib/i18n/locales';
 

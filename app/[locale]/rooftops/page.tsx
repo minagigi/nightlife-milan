@@ -1,7 +1,7 @@
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import { Metadata } from 'next';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
 import { tr } from '@/lib/i18n/t';
 import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/locales';

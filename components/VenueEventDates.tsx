@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { Calendar, Clock } from 'lucide-react';
 import type { DateSensitiveEventPresentation } from '@/lib/dateSensitiveInventory';
 import { getDateSensitiveEvents } from '@/lib/dateSensitiveView';

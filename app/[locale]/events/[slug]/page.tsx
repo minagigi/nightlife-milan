@@ -31,7 +31,7 @@ import { tr } from '@/lib/i18n/t';
 import { getLocaleDef, hreflangAlternates, indexedLocaleCodes, localePrefix, type LocaleCode } from '@/lib/i18n/locales';
 import { Metadata } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { getEventBySlug, getVenueById, getPerformerById } from '@/lib/data';
 import { getWeeklyEventBySlug } from '@/lib/eventsConfig';
 import { getLocalizedText, generateEventSchema, generateBreadcrumbSchema } from '@/lib/seo';

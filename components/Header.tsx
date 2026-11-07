@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { usePathname } from 'next/navigation';
 import { Heart, MessageCircle, X } from 'lucide-react';
 import { useFavorites } from './FavoritesContext';

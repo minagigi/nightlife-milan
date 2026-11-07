@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import type { ReactNode } from 'react';
 import Image from 'next/image';
 import { MessageCircle, Ticket } from 'lucide-react';

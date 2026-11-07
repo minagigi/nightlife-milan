@@ -106,7 +106,7 @@ export function middleware(request: NextRequest) {
     }
     const firstSegment = pathname.split('/')[1];
     const restPath = pathname.slice(firstSegment.length + 1) || '/';
-    const canonicalSeoPath = resolveSeoHubPathToCanonical(restPath);
+    const canonicalSeoPath = resolveSeoHubPathToCanonical(restPath, firstSegment as any);
     let res: NextResponse;
     if (canonicalSeoPath && canonicalSeoPath !== restPath) {
       const rewriteUrl = new URL(`/${firstSegment}${canonicalSeoPath}`, request.url);

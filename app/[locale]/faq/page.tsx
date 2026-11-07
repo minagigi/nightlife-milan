@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Metadata } from 'next';
 import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { EntryFormulaMatrix, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';

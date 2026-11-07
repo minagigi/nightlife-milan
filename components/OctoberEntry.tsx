@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { CalendarDays, ArrowRight, Sparkles } from 'lucide-react';
 import { readOctoberHubCopy } from '@/lib/octoberEditorial';
 import { isEnabledLocale, localePrefix } from '@/lib/i18n/locales';

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { localizeInternalHref } from '@/lib/i18n/localizedSlugs35';
 import 'leaflet/dist/leaflet.css';
 
 interface VenuePin {
@@ -60,7 +61,7 @@ export default function VenueMap({ venues }: VenueMapProps) {
 
       venues.forEach((venue) => {
         const gmUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(venue.address + ', Milan, Italy')}`;
-        const clubUrl = venue.href;
+        const clubUrl = localizeInternalHref(venue.href);
 
         const popup = L.popup({ className: 'venue-popup', maxWidth: 220 }).setContent(`
           <div style="font-family:sans-serif;color:#fff;background:#1a1610;padding:12px 14px;border-radius:8px;min-width:180px">

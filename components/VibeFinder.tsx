@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'motion/react';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import {
   Zap,
   Sparkles,

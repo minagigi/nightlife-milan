@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { Event, Venue } from '@/lib/types';
 import { getLocalizedText } from '@/lib/seo';
 import { localePrefix } from '@/lib/i18n/locales';

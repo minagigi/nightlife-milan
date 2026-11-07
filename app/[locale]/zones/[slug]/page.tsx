@@ -3,7 +3,7 @@ import { tr } from '@/lib/i18n/t';
 import { getLocaleDef, hreflangAlternates, localePrefix, indexedLocaleCodes } from '@/lib/i18n/locales';
 import { resolveZoneSlug, getLocalizedZoneSlug35 } from '@/lib/i18n/localizedSlugs35';
 import { Metadata } from 'next';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
 import { mockZones, getVenues } from '@/lib/data';
 import DiscoveryGrid from '@/components/DiscoveryGrid';

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { Calendar, CheckCircle2, Clock3, MapPin } from 'lucide-react';
 import type { DateSensitiveEventPresentation } from '@/lib/dateSensitiveInventory';
 import {

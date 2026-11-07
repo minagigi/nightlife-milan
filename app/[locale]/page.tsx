@@ -9,7 +9,7 @@ import TableConcierge from '@/components/TableConcierge';
 import DateSensitiveCalendar from '@/components/DateSensitiveCalendar';
 import { getEventCalendarCopy } from '@/lib/eventCalendarCopy';
 import Image from 'next/image';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { notFound } from 'next/navigation';
 import { SITE_CONTACT } from '@/config/contact';
 import { localePrefix, hreflangAlternates, getLocaleDef, isEnabledLocale } from '@/lib/i18n/locales';

@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
 import VenueCard from '@/components/VenueCard';
 import VenueMapToggle from '@/components/VenueMapToggle';

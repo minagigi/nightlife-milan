@@ -1,4 +1,5 @@
-import { localePrefix } from './i18n/locales';
+import { localePrefix, type LocaleCode } from './i18n/locales';
+import { localizeInternalHref } from './i18n/localizedSlugs35';
 import type { EditorialFields } from './editorialPresentation';
 
 export type MenuRouteId =
@@ -68,13 +69,18 @@ export function footerMenuFromFields(_fields: EditorialFields, fallback: FooterM
 
 export function resolveMenuItems(items: readonly { id: string; label: string }[], locale: string): ResolvedMenuItem[] {
   const prefix = localePrefix(locale);
+  const loc = (locale || 'en') as LocaleCode;
   return items
     .filter((item) => item.id !== 'pastEvents' && item.id !== 'mfw')
-    .map((item) => ({
-      id: item.id as MenuRouteId,
-      label: item.label,
-      href: `${prefix}${ROUTES[item.id] || '/events'}`,
-      match: `${prefix}${ROUTES[item.id] || '/events'}`,
-      gold: item.id === 'vip',
-    }));
+    .map((item) => {
+      const rawHref = `${prefix}${ROUTES[item.id] || '/events'}`;
+      const localized = localizeInternalHref(rawHref, loc);
+      return {
+        id: item.id as MenuRouteId,
+        label: item.label,
+        href: localized,
+        match: localized,
+        gold: item.id === 'vip',
+      };
+    });
 }

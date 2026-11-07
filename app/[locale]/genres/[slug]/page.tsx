@@ -3,7 +3,7 @@ import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix, indexedLocaleCodes } from '@/lib/i18n/locales';
 import { resolveGenreSlug, getLocalizedGenreSlug35 } from '@/lib/i18n/localizedSlugs35';
 import { Metadata } from 'next';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
 import { MusicGenre } from '@/lib/types';
 import DiscoveryGrid from '@/components/DiscoveryGrid';

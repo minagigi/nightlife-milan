@@ -2,7 +2,7 @@
 
 import { motion } from 'motion/react';
 import Image from 'next/image';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { MapPin, Clock, Shirt, Music, MessageCircle, Star, Calendar, ArrowLeft, ShieldCheck, Check, CreditCard } from 'lucide-react';
 import { Dictionary } from '@/lib/get-dictionary';
 

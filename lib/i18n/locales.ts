@@ -117,16 +117,16 @@ export function localePrefix(code: string): string {
 }
 
 /** Mappa hreflang → URL per alternates.languages (SOLO lingue indexed + x-default) */
-import { getLocalizedSeoPagePath35 } from './localizedSlugs35';
+import { getLocalizedSeoPagePath35, localizeInternalHref } from './localizedSlugs35';
 
 export function hreflangAlternates(baseUrl: string, path: string): Record<string, string> {
   const out: Record<string, string> = {};
   for (const l of INDEXED_LOCALES) {
-    const locPath = path ? getLocalizedSeoPagePath35(path, l.code) : '';
-    out[l.hreflang] = `${baseUrl}${localePrefix(l.code)}${locPath}` || `${baseUrl}/`;
+    const locFull = path ? localizeInternalHref(`${localePrefix(l.code)}${path}`, l.code) : localePrefix(l.code);
+    out[l.hreflang] = `${baseUrl}${locFull === '/' ? '' : locFull}` || `${baseUrl}/`;
   }
-  const enPath = path ? getLocalizedSeoPagePath35(path, 'en') : '';
-  out['x-default'] = `${baseUrl}${enPath}` || `${baseUrl}/`;
+  const enFull = path ? localizeInternalHref(path, 'en') : '';
+  out['x-default'] = `${baseUrl}${enFull === '/' ? '' : enFull}` || `${baseUrl}/`;
   return out;
 }
 

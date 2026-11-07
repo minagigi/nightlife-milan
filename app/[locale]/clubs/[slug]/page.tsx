@@ -4,7 +4,7 @@ import { hreflangAlternates, localePrefix, getLocaleDef, indexedLocaleCodes } fr
 import { getLocalizedVenueSlug35 } from '@/lib/i18n/localizedSlugs35';
 import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import Image from 'next/image';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { MapPin, Clock, Shirt, MessageCircle, Star, Calendar, ArrowLeft, Music, Wine, Utensils, ShieldCheck, Check, CreditCard, Sparkles, Train, Users, HelpCircle } from 'lucide-react';
 import { getDictionary } from '../../../../dictionaries/get-dictionary';
 import { CONTACT } from '@/config/contact';

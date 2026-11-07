@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import NewsletterHub from './NewsletterHub';
 import Logo from './Logo';
 import FooterWhatsAppContact from './FooterWhatsAppContact';

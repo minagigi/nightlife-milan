@@ -1,3 +1,4 @@
+import { resolveEventSlugToCanonical } from '@/lib/i18n/localizedSlugs35';
 import inventory from '@/lib/october-events/inventory.json';
 import { getOctoberEventCopy, getOctoberEventSlug } from '@/lib/october-events/copy';
 import { enabledLocaleCodes, type LocaleCode } from '@/lib/i18n/locales';
@@ -87,7 +88,7 @@ export function getOctoberEventById(id: string): OctoberEventRecord | undefined 
 
 /** Slugs belong to the native copy factory, while the source identity remains one shared exact ID. */
 export function getOctoberEventBySlug(slug: string, locale: LocaleCode): OctoberEventRecord | undefined {
-  return enabledLocaleCodes.includes(locale) ? BY_SLUG.get(slug) : undefined;
+  return enabledLocaleCodes.includes(locale) ? (BY_SLUG.get(slug) || BY_SLUG.get(resolveEventSlugToCanonical(slug))) : undefined;
 }
 
 export function getOctoberEventPaths(locale: LocaleCode): readonly { slug: string }[] {

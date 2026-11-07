@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import OctoberCalendarClient, { type OctoberCalendarCard } from './OctoberCalendarClient';
 import HeadingIndex from './HeadingIndex';
 import EditorialPageSections from './EditorialPageSections';

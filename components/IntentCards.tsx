@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { ArrowRight, MessageCircle, Wine, Music2, Gem } from 'lucide-react';
 import { getIntentCardsCopy } from '@/lib/i18n/intentCardsCopy';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';

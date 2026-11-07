@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { capodannoCategoryPath, capodannoEventPath } from '@/lib/capodanno/routes';
 import { getCapodannoLocalizedEventTitle, getCapodannoUiCopy } from '@/lib/capodanno/i18n';

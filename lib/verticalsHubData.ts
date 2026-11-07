@@ -933,7 +933,7 @@ export function resolveSuggestedEventsForVertical(
       categoryLabel: w.clubName,
       genres: (w.genres && w.genres.length > 0 ? w.genres : ['Aperitivo & Club', 'VIP Tables']).slice(0, 3),
       imageSrc: w.image || '/images/venues/pineta-milano/pineta-milano-interior-01.webp',
-      href: `/${locale}/events/${w.eventSlug || w.id}`,
+      href: `/${locale}/events/${w.clubSlug}-${w.day}-${w.eventSlug}`,
       whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
         isIt
           ? `Ciao Nightlife Milan, vorrei info per la serata ${w.name} (${w.clubName})`

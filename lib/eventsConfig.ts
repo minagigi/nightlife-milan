@@ -1,3 +1,4 @@
+import { resolveEventSlugToCanonical } from './i18n/localizedSlugs35';
 export interface WeeklyEvent {
   id: string;
   clubSlug: string;
@@ -54,7 +55,16 @@ const defaultFaqs = (clubName: string, address: string, age: string, dressCode: 
 ];
 
 export const getWeeklyEventBySlug = (slug: string): WeeklyEvent | undefined => {
-  return weeklyEvents.find(e => `${e.clubSlug}-${e.day}-${e.eventSlug}` === slug);
+  const canon = resolveEventSlugToCanonical(slug);
+  return weeklyEvents.find(
+    (e) =>
+      `${e.clubSlug}-${e.day}-${e.eventSlug}` === canon ||
+      `${e.clubSlug}-${e.day}-${e.eventSlug}` === slug ||
+      e.id === canon ||
+      e.id === slug ||
+      e.eventSlug === canon ||
+      e.eventSlug === slug
+  );
 };
 
 export const weeklyEvents: WeeklyEvent[] = [

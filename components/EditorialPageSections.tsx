@@ -1,6 +1,6 @@
 import SeoAuthorityHub from './SeoAuthorityHub';
 import React from 'react';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { SITE_CONTACT } from '@/config/contact';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { mockVenues, mockZones } from '@/lib/data';

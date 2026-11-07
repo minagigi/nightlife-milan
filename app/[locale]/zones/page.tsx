@@ -4,7 +4,7 @@ import type { LocaleCode } from '@/lib/i18n/locales';
 import { tr } from '@/lib/i18n/t';
 import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import { getLocalizedZoneSlug35 } from '@/lib/i18n/localizedSlugs35';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
 import { mockZones } from '@/lib/data';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';

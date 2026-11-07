@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import Hero from '@/components/seo-landing/Hero';
 import { localePrefix } from '@/lib/i18n/locales';
 import {

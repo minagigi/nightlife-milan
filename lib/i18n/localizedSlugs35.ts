@@ -1,4 +1,5 @@
 import type { LocaleCode } from './locales';
+import { GUIDE_100_SLUGS_MAP, CAPODANNO_NAV_35 } from './guideSlugs100Map';
 
 export const ALL_35_LOCALES: readonly LocaleCode[] = [
   'en', 'it', 'es', 'fr', 'de', 'pt', 'nl', 'ru', 'tr', 'zh', 'ar',
@@ -224,7 +225,7 @@ export const SLUG_TOKENS_35: Record<LocaleCode, SlugLangTokens> = {
   lt: {
     guide: 'gidas', milan: 'milanas', vipTables: 'vip-stalai', dressCode: 'aprangos-kodas',
     club: 'naktinis-klubas', nightlife: 'naktinis-gyvenimas', zone: 'rajonas', music: 'muzika-klubai',
-    party: 'vakarėlis'.replace('ė', 'e'), prices: 'kainos', afterparty: 'afterparty', rooftop: 'stogo-terasa',
+    party: 'vakarelis', prices: 'kainos', afterparty: 'afterparty', rooftop: 'stogo-terasa',
     dinnerShow: 'vakariene-sou', graduation: 'isankstinis-diplomas', birthday: 'gimtadienio-svente',
     bachelorette: 'bernvakaris-mergvakaris', corporate: 'imoniu-renginiai',
     fashionWeek: 'mados-savaite', designWeek: 'dizaino-savaite-fuorisalone',
@@ -299,7 +300,7 @@ export const SLUG_TOKENS_35: Record<LocaleCode, SlugLangTokens> = {
     party: 'veisla', prices: 'verd', afterparty: 'eftirparty', rooftop: 'thakbar-rooftop',
     dinnerShow: 'kvoldverdur-syning', graduation: 'utskriftarveisla', birthday: 'afmaelisveisla',
     bachelorette: 'steggja-gaesaveisla', corporate: 'fyrirtaekjavidburdir',
-    fashionWeek: 'tiskuVika'.toLowerCase(), designWeek: 'honnunarvika-fuorisalone',
+    fashionWeek: 'tiskuvika', designWeek: 'honnunarvika-fuorisalone',
     newYearsEve: 'gamlarskvold', halloween: 'hlekkjavaka',
   },
   uk: {
@@ -367,7 +368,7 @@ function build35SlugMap(builder: (locale: LocaleCode, tk: SlugLangTokens) => str
   return out;
 }
 
-// ─── 1. VENUE SLUGS (All 26 Core Venues + Additional Catalog Venues) ─────────
+// ─── 1. VENUE SLUGS (All Core Venues + Additional Catalog Venues) ────────────
 const CANONICAL_VENUE_BASES: Array<{
   canonicalSlug: string;
   id: string;
@@ -377,7 +378,7 @@ const CANONICAL_VENUE_BASES: Array<{
   { canonicalSlug: 'just-me-milano', id: 'v-justme', brandSlug: 'just-me', aliases: ['just-me', 'just-me-milan', 'justme-milano'] },
   { canonicalSlug: 'pineta-club-milano', id: 'v-pineta', brandSlug: 'pineta-club', aliases: ['pineta', 'pineta-milano'] },
   { canonicalSlug: 'aria-club-milano', id: 'v-aria', brandSlug: 'aria-club', aliases: ['aria', 'aria-milano'] },
-  { canonicalSlug: 'voya-rooftop-milan', id: 'v-voya', brandSlug: 'voya-rooftop', aliases: ['voya', 'voya-rooftop', 'voya-rooftop-milano'] },
+  { canonicalSlug: 'voya-rooftop-milan', id: 'v-voya', brandSlug: 'voya-rooftop', aliases: ['voya', 'voya-rooftop', 'voya-rooftop-milano', 'voya-club-milano'] },
   { canonicalSlug: '55-milano', id: 'v-55milano', brandSlug: '55', aliases: ['fiftysix-milano', 'cinquantacinque-milano'] },
   { canonicalSlug: 'repvblic-milano', id: 'v-repvblic', brandSlug: 'repvblic', aliases: ['repvblic', 'republic-milano'] },
   { canonicalSlug: 'tocqueville-13-milano', id: 'v-tocqueville', brandSlug: 'tocqueville-13', aliases: ['tocqueville-13', 'tocqueville'] },
@@ -388,7 +389,7 @@ const CANONICAL_VENUE_BASES: Array<{
   { canonicalSlug: 'amnesia-milano', id: 'v-amnesia', brandSlug: 'amnesia', aliases: ['amnesia'] },
   { canonicalSlug: 'hollywood-club-milano', id: 'v-hollywood', brandSlug: 'hollywood-club', aliases: ['hollywood', 'hollywood-milano'] },
   { canonicalSlug: 'the-club-milano', id: 'v-theclub', brandSlug: 'the-club', aliases: ['the-club'] },
-  { canonicalSlug: '11-clubroom', id: 'v-11clubroom', brandSlug: '11-clubroom', aliases: ['11-clubroom-milano', 'eleven-clubroom'] },
+  { canonicalSlug: '11-clubroom', id: 'v-11clubroom', brandSlug: '11-clubroom', aliases: ['11-clubroom-milano', 'eleven-clubroom', '11clubroom-milano'] },
   { canonicalSlug: 'gattopardo-milano', id: 'v-gattopardo', brandSlug: 'gattopardo', aliases: ['gattopardo', 'il-gattopardo-milano'] },
   { canonicalSlug: 'mib-milano', id: 'v-mibmilano', brandSlug: 'mib', aliases: ['mib'] },
   { canonicalSlug: 'terrazza-21', id: 'v-terrazza21', brandSlug: 'terrazza-duomo-21', aliases: ['terrazza-duomo-21', 'terrazza-duomo-21-milano'] },
@@ -399,7 +400,7 @@ const CANONICAL_VENUE_BASES: Array<{
   { canonicalSlug: 'loolapaloosa-milano', id: 'v-loolapaloosa', brandSlug: 'loolapaloosa', aliases: ['loolapaloosa'] },
   { canonicalSlug: 'bobino-milano', id: 'v-bobino', brandSlug: 'bobino', aliases: ['bobino', 'bobino-club-milano'] },
   { canonicalSlug: 'old-fashion-milano', id: 'v-oldfashion', brandSlug: 'old-fashion', aliases: ['old-fashion'] },
-  { canonicalSlug: 'grace-club-milano', id: 'v-graceclub', brandSlug: 'grace-club', aliases: ['grace-club', 'grace-milano'] },
+  { canonicalSlug: 'grace-club-milano', id: 'v-graceclub', brandSlug: 'grace-club', aliases: ['grace-club', 'grace-milano', 'the-grace-club-milano'] },
   // Extra venues in catalog
   { canonicalSlug: 'play-club-milano', id: 'v-playclub', brandSlug: 'play-club', aliases: ['play-club'] },
   { canonicalSlug: 'radio-rooftop-bar-milano', id: 'v-radio-rooftop-bar-milano', brandSlug: 'radio-rooftop-bar', aliases: ['radio-rooftop'] },
@@ -409,6 +410,21 @@ const CANONICAL_VENUE_BASES: Array<{
   { canonicalSlug: 'ristorante-torre-milano', id: 'v-ristorante-torre-milano', brandSlug: 'ristorante-torre', aliases: ['ristorante-torre'] },
   { canonicalSlug: 'innocenti-evasioni-terrazza-triennale', id: 'v-innocenti-evasioni-terrazza-triennale', brandSlug: 'terrazza-triennale', aliases: ['terrazza-triennale'] },
   { canonicalSlug: 'super-club-milano', id: 'v-super-club-milano', brandSlug: 'super-club', aliases: ['super-club'] },
+  { canonicalSlug: 'the-beach-milano', id: 'v-the-beach-milano', brandSlug: 'the-beach', aliases: ['the-beach', 'the-beach-club-milano'] },
+  { canonicalSlug: 'gate-milano', id: 'v-gate-milano', brandSlug: 'gate-club', aliases: ['gate', 'gate-club-milano'] },
+  { canonicalSlug: 'lime-milano', id: 'v-lime-milano', brandSlug: 'lime-club', aliases: ['lime', 'lime-club-milano'] },
+  { canonicalSlug: 'the-sanctuary-milano', id: 'v-the-sanctuary-milano', brandSlug: 'the-sanctuary', aliases: ['the-sanctuary', 'sanctuary-milano'] },
+  { canonicalSlug: 'apophis-club-milano', id: 'v-apophis-club-milano', brandSlug: 'apophis-club', aliases: ['apophis', 'apophis-milano'] },
+  { canonicalSlug: 'tunnel-club-milano', id: 'v-tunnel-club-milano', brandSlug: 'tunnel-club', aliases: ['tunnel', 'tunnel-milano'] },
+  { canonicalSlug: 'plastic-milano', id: 'v-plastic-milano', brandSlug: 'plastic-club', aliases: ['plastic', 'plastic-club-milano'] },
+  { canonicalSlug: 'dazi-milano', id: 'v-dazi-milano', brandSlug: 'dazi', aliases: ['dazi'] },
+  { canonicalSlug: 'nepentha-milano', id: 'v-nepentha-milano', brandSlug: 'nepentha', aliases: ['nepentha'] },
+  { canonicalSlug: 'twiga-milano', id: 'v-twiga-milano', brandSlug: 'twiga', aliases: ['twiga'] },
+  { canonicalSlug: 'vibe-room-milano', id: 'v-vibe-room-milano', brandSlug: 'vibe-room', aliases: ['vibe-room'] },
+  { canonicalSlug: 'hotel-costez-milano', id: 'v-hotel-costez-milano', brandSlug: 'hotel-costez', aliases: ['hotel-costez'] },
+  { canonicalSlug: 'cost-milano', id: 'v-cost-milano', brandSlug: 'cost-dining-club', aliases: ['cost', 'cost-dining-club'] },
+  { canonicalSlug: 'rocca-brivio-sforza-milano', id: 'v-rocca-brivio-sforza-milano', brandSlug: 'rocca-brivio-sforza', aliases: ['rocca-brivio-sforza'] },
+  { canonicalSlug: 'social-music-city-milano', id: 'v-social-music-city-milano', brandSlug: 'social-music-city', aliases: ['social-music-city'] },
 ];
 
 export const VENUE_SLUGS_35: Record<string, Record<LocaleCode, string>> = {};
@@ -436,12 +452,28 @@ for (const v of CANONICAL_VENUE_BASES) {
 
 export function resolveVenueSlug(slug: string): string {
   const clean = sanitizeAsciiSlug(slug);
-  return venueSlugToCanonical.get(clean) || venueSlugToCanonical.get(slug) || slug;
+  const direct = venueSlugToCanonical.get(clean) || venueSlugToCanonical.get(slug);
+  if (direct) return direct;
+  for (const loc of ALL_35_LOCALES) {
+    const tk = SLUG_TOKENS_35[loc];
+    if (!tk) continue;
+    const suffix = `-${tk.milan}-${tk.vipTables}`;
+    if (clean.endsWith(suffix)) {
+      const base = clean.slice(0, -suffix.length);
+      return venueSlugToCanonical.get(base) || `${base}-milano`;
+    }
+  }
+  return slug;
 }
 
 export function getLocalizedVenueSlug35(venueSlugOrId: string, locale: LocaleCode): string {
   const canonical = resolveVenueSlug(venueSlugOrId);
-  return VENUE_SLUGS_35[canonical]?.[locale] || canonical;
+  const mapped = VENUE_SLUGS_35[canonical]?.[locale];
+  if (mapped) return mapped;
+  if (locale === 'en') return canonical;
+  const tk = SLUG_TOKENS_35[locale] || SLUG_TOKENS_35.en;
+  const brand = canonical.replace(/-milano$/, '').replace(/-milan$/, '');
+  return sanitizeAsciiSlug(`${brand}-${tk.milan}-${tk.vipTables}`);
 }
 
 // ─── 2. ZONE SLUGS (All 14 Milan Zones) ──────────────────────────────────────
@@ -457,8 +489,8 @@ const CANONICAL_ZONES: Array<{ canonicalSlug: string; id: string; aliases: strin
   { canonicalSlug: 'porta-romana', id: 'PORTA_ROMANA', aliases: ['porta-romana-bocconi', 'porta-romana-milano'] },
   { canonicalSlug: 'lambrate', id: 'LAMBRATE', aliases: ['lambrate-milano', 'lambrate-citta-studi'] },
   { canonicalSlug: 'parco-sempione', id: 'SEMPIONE', aliases: ['sempione', 'parco-sempione-torre-branca'] },
-  { canonicalSlug: 'duomo-san-babila', id: 'CENTRO_STORICO', aliases: ['centro-storico', 'duomo-milano', 'quadrilatero-moda'] },
-  { canonicalSlug: 'citylife-portello', id: 'CITY_LIFE', aliases: ['city-life', 'citylife', 'portello'] },
+  { canonicalSlug: 'duomo-san-babila', id: 'CENTRO_STORICO', aliases: ['centro-storico', 'duomo-milano', 'quadrilatero-moda', 'duomo-centro'] },
+  { canonicalSlug: 'citylife-portello', id: 'CITY_LIFE', aliases: ['city-life', 'citylife', 'portello', 'citylife-sempione'] },
   { canonicalSlug: 'san-siro', id: 'TORTONA', aliases: ['san-siro-ippodromo', 'tortona', 'san-siro-lotto'] },
 ];
 
@@ -487,15 +519,30 @@ for (const z of CANONICAL_ZONES) {
 
 export function resolveZoneSlug(slug: string): string {
   const clean = sanitizeAsciiSlug(slug);
-  return zoneSlugToCanonical.get(clean) || zoneSlugToCanonical.get(slug) || slug;
+  const direct = zoneSlugToCanonical.get(clean) || zoneSlugToCanonical.get(slug);
+  if (direct) return direct;
+  for (const loc of ALL_35_LOCALES) {
+    const tk = SLUG_TOKENS_35[loc];
+    if (!tk) continue;
+    const suffix = `-${tk.milan}-${tk.nightlife}`;
+    if (clean.endsWith(suffix)) {
+      const base = clean.slice(0, -suffix.length);
+      return zoneSlugToCanonical.get(base) || base;
+    }
+  }
+  return slug;
 }
 
 export function getLocalizedZoneSlug35(zoneSlug: string, locale: LocaleCode): string {
   const canonical = resolveZoneSlug(zoneSlug);
-  return ZONE_SLUGS_35[canonical]?.[locale] || canonical;
+  const mapped = ZONE_SLUGS_35[canonical]?.[locale];
+  if (mapped) return mapped;
+  if (locale === 'en') return canonical;
+  const tk = SLUG_TOKENS_35[locale] || SLUG_TOKENS_35.en;
+  return sanitizeAsciiSlug(`${canonical}-${tk.milan}-${tk.nightlife}`);
 }
 
-// ─── 3. GENRE SLUGS (All 10 Music Genres + Format Aliases) ───────────────────
+// ─── 3. GENRE SLUGS (All Music Genres + Format Aliases) ──────────────────────
 const CANONICAL_GENRES: Array<{ canonicalSlug: string; aliases: string[] }> = [
   { canonicalSlug: 'techno', aliases: ['techno-clubs-milan', 'techno-milano'] },
   { canonicalSlug: 'house', aliases: ['house-music-milan', 'house-milano'] },
@@ -507,6 +554,11 @@ const CANONICAL_GENRES: Array<{ canonicalSlug: string; aliases: string[] }> = [
   { canonicalSlug: 'edm', aliases: ['edm-festival', 'edm-milano'] },
   { canonicalSlug: 'live-music', aliases: ['live-music-concerts', 'musica-dal-vivo-milano'] },
   { canonicalSlug: 'indie', aliases: ['indie-nu-disco', 'indie-milano'] },
+  { canonicalSlug: 'latin', aliases: ['latin-milano', 'musica-latina-milano'] },
+  { canonicalSlug: 'afrobeats', aliases: ['afrobeats-milano'] },
+  { canonicalSlug: 'open-format', aliases: ['open-format-milano'] },
+  { canonicalSlug: 'tech-house', aliases: ['tech-house-milano'] },
+  { canonicalSlug: 'melodic-techno', aliases: ['melodic-techno-milano'] },
 ];
 
 export const GENRE_SLUGS_35: Record<string, Record<LocaleCode, string>> = {};
@@ -532,15 +584,30 @@ for (const g of CANONICAL_GENRES) {
 
 export function resolveGenreSlug(slug: string): string {
   const clean = sanitizeAsciiSlug(slug);
-  return genreSlugToCanonical.get(clean) || genreSlugToCanonical.get(slug) || slug;
+  const direct = genreSlugToCanonical.get(clean) || genreSlugToCanonical.get(slug);
+  if (direct) return direct;
+  for (const loc of ALL_35_LOCALES) {
+    const tk = SLUG_TOKENS_35[loc];
+    if (!tk) continue;
+    const suffix = `-${tk.milan}-${tk.music}`;
+    if (clean.endsWith(suffix)) {
+      const base = clean.slice(0, -suffix.length);
+      return genreSlugToCanonical.get(base) || base;
+    }
+  }
+  return slug;
 }
 
 export function getLocalizedGenreSlug35(genreSlug: string, locale: LocaleCode): string {
   const canonical = resolveGenreSlug(genreSlug);
-  return GENRE_SLUGS_35[canonical]?.[locale] || canonical;
+  const mapped = GENRE_SLUGS_35[canonical]?.[locale];
+  if (mapped) return mapped;
+  if (locale === 'en') return canonical;
+  const tk = SLUG_TOKENS_35[locale] || SLUG_TOKENS_35.en;
+  return sanitizeAsciiSlug(`${canonical}-${tk.milan}-${tk.music}`);
 }
 
-// ─── 4. EXISTING 14 PILLAR GUIDES SLUGS (All 35 Languages) ───────────────────
+// ─── 4. ALL 114 PILLAR GUIDES SLUGS (14 Core + 100 Expansion Guides) ─────────
 const EXISTING_14_SPECS: Array<{
   id: string;
   en: string;
@@ -651,6 +718,17 @@ for (const spec of EXISTING_14_SPECS) {
   }
 }
 
+for (const [gid, locMap] of Object.entries(GUIDE_100_SLUGS_MAP)) {
+  EXISTING_14_GUIDE_SLUGS_35[gid] = locMap;
+  existingGuideSlugToId.set(gid, gid);
+  for (const locSlug of Object.values(locMap)) {
+    if (locSlug) {
+      EXISTING_14_GUIDE_SLUGS_35[locSlug] = locMap;
+      existingGuideSlugToId.set(locSlug, gid);
+    }
+  }
+}
+
 export function resolveExistingGuideId(slugOrId: string): string | undefined {
   const clean = sanitizeAsciiSlug(slugOrId);
   return existingGuideSlugToId.get(clean) || existingGuideSlugToId.get(slugOrId);
@@ -661,20 +739,206 @@ export function getExistingGuideSlug35(guideIdOrSlug: string, locale: LocaleCode
   return EXISTING_14_GUIDE_SLUGS_35[id]?.[locale] || guideIdOrSlug;
 }
 
-// ─── 5. SEO HUB PAGES SLUGS (All 22 Static SEO Pages Across All 35 Languages) ─
+// ─── 5. WEEKLY EVENTS, HALLOWEEN, CAPODANNO & DATED EVENTS ───────────────────
+const WEEKDAY_TOKENS_35: Record<LocaleCode, Record<string, string>> = {
+  en: { monday: 'monday', tuesday: 'tuesday', wednesday: 'wednesday', thursday: 'thursday', friday: 'friday', saturday: 'saturday', sunday: 'sunday' },
+  it: { monday: 'lunedi', tuesday: 'martedi', wednesday: 'mercoledi', thursday: 'giovedi', friday: 'venerdi', saturday: 'sabato', sunday: 'domenica' },
+  es: { monday: 'lunes', tuesday: 'martes', wednesday: 'miercoles', thursday: 'jueves', friday: 'viernes', saturday: 'sabado', sunday: 'domingo' },
+  fr: { monday: 'lundi', tuesday: 'mardi', wednesday: 'mercredi', thursday: 'jeudi', friday: 'vendredi', saturday: 'samedi', sunday: 'dimanche' },
+  de: { monday: 'montag', tuesday: 'dienstag', wednesday: 'mittwoch', thursday: 'donnerstag', friday: 'freitag', saturday: 'samstag', sunday: 'sonntag' },
+  pt: { monday: 'segunda', tuesday: 'terca', wednesday: 'quarta', thursday: 'quinta', friday: 'sexta', saturday: 'sabado', sunday: 'domingo' },
+  nl: { monday: 'maandag', tuesday: 'dinsdag', wednesday: 'woensdag', thursday: 'donderdag', friday: 'vrijdag', saturday: 'zaterdag', sunday: 'zondag' },
+  ru: { monday: 'ponedelnik', tuesday: 'vtornik', wednesday: 'sreda', thursday: 'chetverg', friday: 'pyatnitsa', saturday: 'subbota', sunday: 'voskresene' },
+  tr: { monday: 'pazartesi', tuesday: 'sali', wednesday: 'carsamba', thursday: 'persembe', friday: 'cuma', saturday: 'cumartesi', sunday: 'pazar' },
+  zh: { monday: 'zhouyi', tuesday: 'zhouer', wednesday: 'zhousan', thursday: 'zhousi', friday: 'zhouwu', saturday: 'zhouliu', sunday: 'zhouri' },
+  ar: { monday: 'al-ithnayn', tuesday: 'al-thulatha', wednesday: 'al-arbia', thursday: 'al-khamis', friday: 'al-juma', saturday: 'al-sabt', sunday: 'al-ahad' },
+  bg: { monday: 'ponedelnik', tuesday: 'vtornik', wednesday: 'sryada', thursday: 'chetvartak', friday: 'petak', saturday: 'sabota', sunday: 'nedelya' },
+  hr: { monday: 'ponedjeljak', tuesday: 'utorak', wednesday: 'srijeda', thursday: 'cetvrtak', friday: 'petak', saturday: 'subota', sunday: 'nedjelja' },
+  cs: { monday: 'pondeli', tuesday: 'utery', wednesday: 'streda', thursday: 'ctvrtek', friday: 'patek', saturday: 'sobota', sunday: 'nedele' },
+  da: { monday: 'mandag', tuesday: 'tirsdag', wednesday: 'onsdag', thursday: 'torsdag', friday: 'fredag', saturday: 'lordag', sunday: 'sondag' },
+  et: { monday: 'esmaspaev', tuesday: 'teisipaev', wednesday: 'kolmapaev', thursday: 'neljapaev', friday: 'reede', saturday: 'laupaev', sunday: 'puhapaev' },
+  fi: { monday: 'maanantai', tuesday: 'tiistai', wednesday: 'keskiviikko', thursday: 'torstai', friday: 'perjantai', saturday: 'lauantai', sunday: 'sunnuntai' },
+  el: { monday: 'deftera', tuesday: 'triti', wednesday: 'tetarti', thursday: 'pempti', friday: 'paraskevi', saturday: 'savvato', sunday: 'kyriaki' },
+  hu: { monday: 'hetfo', tuesday: 'kedd', wednesday: 'szerda', thursday: 'csutortok', friday: 'pentek', saturday: 'szombat', sunday: 'vasarnap' },
+  ga: { monday: 'an-luain', tuesday: 'an-mhairt', wednesday: 'an-cheadaoin', thursday: 'an-deardaoin', friday: 'an-aoine', saturday: 'an-satharn', sunday: 'an-domhnach' },
+  lv: { monday: 'pirmdiena', tuesday: 'otrdiena', wednesday: 'tresdiena', thursday: 'ceturtdiena', friday: 'piektdiena', saturday: 'sestdiena', sunday: 'svetdiena' },
+  lt: { monday: 'pirmadienis', tuesday: 'antradienis', wednesday: 'treciadienis', thursday: 'ketvirtadienis', friday: 'penktadienis', saturday: 'sestadienis', sunday: 'sekmadienis' },
+  mt: { monday: 'it-tnejn', tuesday: 'it-tlieta', wednesday: 'l-erbgha', thursday: 'il-hamis', friday: 'il-gimgha', saturday: 'is-sibt', sunday: 'il-hadd' },
+  pl: { monday: 'poniedzialek', tuesday: 'wtorek', wednesday: 'sroda', thursday: 'czwartek', friday: 'piatek', saturday: 'sobota', sunday: 'niedziela' },
+  ro: { monday: 'luni', tuesday: 'marti', wednesday: 'miercuri', thursday: 'joi', friday: 'vineri', saturday: 'sambata', sunday: 'duminica' },
+  sk: { monday: 'pondelok', tuesday: 'utorok', wednesday: 'streda', thursday: 'stvrtok', friday: 'piatok', saturday: 'sobota', sunday: 'nedela' },
+  sl: { monday: 'ponedeljek', tuesday: 'torek', wednesday: 'sreda', thursday: 'cetrtek', friday: 'petek', saturday: 'sobota', sunday: 'nedelja' },
+  sv: { monday: 'mandag', tuesday: 'tisdag', wednesday: 'onsdag', thursday: 'torsdag', friday: 'fredag', saturday: 'lordag', sunday: 'sondag' },
+  no: { monday: 'mandag', tuesday: 'tirsdag', wednesday: 'onsdag', thursday: 'torsdag', friday: 'fredag', saturday: 'lordag', sunday: 'sondag' },
+  is: { monday: 'manudagur', tuesday: 'thridjudagur', wednesday: 'midvikudagur', thursday: 'fimmtudagur', friday: 'fostudagur', saturday: 'laugardagur', sunday: 'sunnudagur' },
+  uk: { monday: 'ponedilok', tuesday: 'vivtorok', wednesday: 'sereda', thursday: 'chetver', friday: 'pyatnytsya', saturday: 'subota', sunday: 'nedilya' },
+  sq: { monday: 'e-hene', tuesday: 'e-marte', wednesday: 'e-merkure', thursday: 'e-enjte', friday: 'e-premte', saturday: 'e-shtune', sunday: 'e-diel' },
+  sr: { monday: 'ponedeljak', tuesday: 'utorak', wednesday: 'sreda', thursday: 'cetvrtak', friday: 'petak', saturday: 'subota', sunday: 'nedelja' },
+  bs: { monday: 'ponedjeljak', tuesday: 'utorak', wednesday: 'srijeda', thursday: 'cetvrtak', friday: 'petak', saturday: 'subota', sunday: 'nedjelja' },
+  mk: { monday: 'ponedelnik', tuesday: 'vtornik', wednesday: 'sreda', thursday: 'cetvrtok', friday: 'petok', saturday: 'sabota', sunday: 'nedela' },
+};
+
+const WEEKLY_EVENT_DEFS: Array<{ canonicalSlug: string; clubKey: string; day: string; partyName: string; shortAliases?: string[] }> = [
+  { canonicalSlug: 'justme-monday-monday-night', clubKey: 'just-me', day: 'monday', partyName: 'monday-night', shortAliases: ['monday-night', 'justme-monday'] },
+  { canonicalSlug: 'justme-tuesday-martedi-universitario', clubKey: 'just-me', day: 'tuesday', partyName: 'university-party', shortAliases: ['martedi-universitario', 'justme-tuesday', 'justme-tuesday-Reset'] },
+  { canonicalSlug: 'justme-wednesday-absolutely', clubKey: 'just-me', day: 'wednesday', partyName: 'absolutely', shortAliases: ['absolutely', 'justme-wednesday', 'justme-wednesday-one-night'] },
+  { canonicalSlug: 'justme-thursday-viziatissima', clubKey: 'just-me', day: 'thursday', partyName: 'viziatissima', shortAliases: ['viziatissima', 'justme-thursday', 'justme-thursday-secret-garden'] },
+  { canonicalSlug: 'justme-friday-friday-night', clubKey: 'just-me', day: 'friday', partyName: 'friday-night', shortAliases: ['justme-friday', 'justme-friday-if-holding'] },
+  { canonicalSlug: 'justme-saturday-saturday-night', clubKey: 'just-me', day: 'saturday', partyName: 'saturday-night', shortAliases: ['justme-saturday'] },
+  { canonicalSlug: 'justme-sunday-uptown', clubKey: 'just-me', day: 'sunday', partyName: 'uptown', shortAliases: ['uptown', 'justme-sunday', 'justme-sunday-sunday-night'] },
+  { canonicalSlug: 'pineta-thursday-thursday-night', clubKey: 'pineta', day: 'thursday', partyName: 'trendy-society', shortAliases: ['pineta-thursday'] },
+  { canonicalSlug: 'pineta-friday-aperitivo-cantato', clubKey: 'pineta', day: 'friday', partyName: 'aperitivo-cantato', shortAliases: ['aperitivo-cantato', 'pineta-friday', 'pineta-friday-bella-vita'] },
+  { canonicalSlug: 'pineta-saturday-saturday-live', clubKey: 'pineta', day: 'saturday', partyName: 'saturday-live', shortAliases: ['saturday-live', 'pineta-saturday', 'pineta-saturday-viziatissima'] },
+  { canonicalSlug: 'aria-thursday-thursday-night', clubKey: 'aria-club', day: 'thursday', partyName: 'thursday-night', shortAliases: ['aria-thursday'] },
+  { canonicalSlug: 'aria-friday-friday-night', clubKey: 'aria-club', day: 'friday', partyName: 'friday-night', shortAliases: ['aria-friday', 'aria-friday-absolutely'] },
+  { canonicalSlug: 'aria-saturday-saturday-night', clubKey: 'aria-club', day: 'saturday', partyName: 'saturday-night', shortAliases: ['aria-saturday', 'aria-saturday-showtime'] },
+  { canonicalSlug: 'voya-tuesday-rooftop-experience', clubKey: 'voya-rooftop', day: 'tuesday', partyName: 'rooftop-experience', shortAliases: ['rooftop-experience', 'voya-tuesday'] },
+  { canonicalSlug: 'voya-wednesday-rooftop-experience', clubKey: 'voya-rooftop', day: 'wednesday', partyName: 'rooftop-experience', shortAliases: ['voya-wednesday'] },
+  { canonicalSlug: 'voya-thursday-rooftop-experience', clubKey: 'voya-rooftop', day: 'thursday', partyName: 'rooftop-experience', shortAliases: ['voya-thursday', 'voya-thursday-desacato'] },
+  { canonicalSlug: 'voya-friday-rooftop-experience', clubKey: 'voya-rooftop', day: 'friday', partyName: 'rooftop-experience', shortAliases: ['voya-friday', 'voya-friday-friday-night'] },
+  { canonicalSlug: 'voya-saturday-rooftop-experience', clubKey: 'voya-rooftop', day: 'saturday', partyName: 'rooftop-experience', shortAliases: ['voya-saturday', 'voya-saturday-rehab'] },
+  { canonicalSlug: 'voya-sunday-skyline-brunch', clubKey: 'voya-rooftop', day: 'sunday', partyName: 'skyline-brunch', shortAliases: ['skyline-brunch', 'voya-sunday'] },
+  { canonicalSlug: '55milano-tuesday-royal-apericena-lounge', clubKey: '55', day: 'tuesday', partyName: 'royal-apericena-lounge', shortAliases: ['royal-apericena-lounge', '55milano-tuesday', '55milano-tuesday-martedi-universitario'] },
+  { canonicalSlug: '55milano-wednesday-royal-apericena-lounge', clubKey: '55', day: 'wednesday', partyName: 'royal-apericena-wednesday', shortAliases: ['55milano-wednesday'] },
+  { canonicalSlug: '55milano-thursday-dinner-show-thursday', clubKey: '55', day: 'thursday', partyName: 'dinner-show-thursday', shortAliases: ['dinner-show-thursday', '55milano-thursday', '55milano-thursday-aperitivo-cena-cantata'] },
+  { canonicalSlug: '55milano-friday-aperitivo-cena-cantata', clubKey: '55', day: 'friday', partyName: 'aperitivo-dinner-show', shortAliases: ['55milano-friday'] },
+  { canonicalSlug: '55milano-saturday-aperitivo-cena-cantata', clubKey: '55', day: 'saturday', partyName: 'aperitivo-dinner-show', shortAliases: ['aperitivo-cena-cantata', '55milano-saturday'] },
+  { canonicalSlug: '55milano-sunday-latin-night', clubKey: '55', day: 'sunday', partyName: 'latin-night', shortAliases: ['latin-night', '55milano-sunday', '55milano-sunday-aperitivo-domenicale'] },
+  { canonicalSlug: 'playclub-tuesday-esplicito', clubKey: 'play-club', day: 'tuesday', partyName: 'esplicito', shortAliases: ['esplicito', 'playclub-tuesday'] },
+  { canonicalSlug: 'playclub-thursday-shakara', clubKey: 'play-club', day: 'thursday', partyName: 'shakara', shortAliases: ['shakara', 'playclub-thursday'] },
+  { canonicalSlug: 'playclub-friday-flexx', clubKey: 'play-club', day: 'friday', partyName: 'flexx', shortAliases: ['flexx', 'playclub-friday'] },
+  { canonicalSlug: 'playclub-saturday-golden-society', clubKey: 'play-club', day: 'saturday', partyName: 'golden-society', shortAliases: ['golden-society', 'playclub-saturday'] },
+  { canonicalSlug: 'playclub-sunday-demontime', clubKey: 'play-club', day: 'sunday', partyName: 'demontime', shortAliases: ['demontime', 'playclub-sunday'] },
+  { canonicalSlug: 'repvblic-monday-dirty-monday', clubKey: 'repvblic', day: 'monday', partyName: 'dirty-monday', shortAliases: ['dirty-monday', 'repvblic-monday'] },
+  { canonicalSlug: 'repvblic-wednesday-home', clubKey: 'repvblic', day: 'wednesday', partyName: 'home', shortAliases: ['home', 'repvblic-wednesday'] },
+  { canonicalSlug: 'repvblic-thursday-sbraake', clubKey: 'repvblic', day: 'thursday', partyName: 'sbraake', shortAliases: ['sbraake', 'repvblic-thursday'] },
+  { canonicalSlug: 'repvblic-friday-dirty-monday-edition', clubKey: 'repvblic', day: 'friday', partyName: 'dirty-monday-edition', shortAliases: ['dirty-monday-edition', 'repvblic-friday'] },
+  { canonicalSlug: 'repvblic-saturday-saturday-night', clubKey: 'repvblic', day: 'saturday', partyName: 'saturday-night', shortAliases: ['repvblic-saturday'] },
+];
+
+export const WEEKLY_EVENT_SLUGS_35: Record<string, Record<LocaleCode, string>> = {};
+const weeklyEventSlugToCanonical = new Map<string, string>();
+
+for (const def of WEEKLY_EVENT_DEFS) {
+  const canon = def.canonicalSlug;
+  const map35 = build35SlugMap((locale, tk) => {
+    const dayToken = WEEKDAY_TOKENS_35[locale]?.[def.day] || def.day;
+    return `${def.clubKey}-${tk.milan}-${dayToken}-${def.partyName}-${tk.party}`;
+  });
+  WEEKLY_EVENT_SLUGS_35[canon] = map35;
+  weeklyEventSlugToCanonical.set(canon, canon);
+  weeklyEventSlugToCanonical.set(canon.toLowerCase(), canon);
+  if (def.shortAliases) {
+    for (const alias of def.shortAliases) {
+      WEEKLY_EVENT_SLUGS_35[alias] = map35;
+      weeklyEventSlugToCanonical.set(alias, canon);
+      weeklyEventSlugToCanonical.set(alias.toLowerCase(), canon);
+    }
+  }
+  for (const locSlug of Object.values(map35)) {
+    weeklyEventSlugToCanonical.set(locSlug, canon);
+  }
+}
+
+const HALLOWEEN_SLUGS_35: Record<LocaleCode, string> = {
+  en: 'halloween-milan-2026', it: 'halloween-milano-2026', es: 'halloween-milan-2026', fr: 'halloween-milan-2026',
+  de: 'halloween-mailand-2026', pt: 'halloween-milao-2026', nl: 'halloween-milaan-2026', ru: 'hellouin-milan-2026',
+  tr: 'cadilar-bayrami-milano-2026', zh: 'milan-wanshengjie-paidui-2026', ar: 'halowin-milan-2026',
+  bg: 'helouin-milano-2026', hr: 'noc-vjestica-milano-2026', cs: 'halloween-milan-2026', da: 'halloween-milano-2026',
+  et: 'halloween-milano-2026', fi: 'halloween-milano-2026', el: 'halloween-milano-2026', hu: 'halloween-milano-2026',
+  ga: 'halloween-milano-2026', lv: 'helovins-milana-2026', lt: 'helovinas-milanas-2026', mt: 'halloween-milan-2026',
+  pl: 'halloween-mediolan-2026', ro: 'halloween-milano-2026', sk: 'halloween-milano-2026', sl: 'noc-carovnic-milano-2026',
+  sv: 'halloween-milano-2026', no: 'halloween-milano-2026', is: 'hlekkjavaka-milano-2026', uk: 'hellovin-milan-2026',
+  sq: 'halloween-milano-2026', sr: 'noc-vestica-milano-2026', bs: 'noc-vjestica-milano-2026', mk: 'nokj-na-vesticite-milano-2026',
+};
+const HALLOWEEN_SET = new Set(Object.values(HALLOWEEN_SLUGS_35));
+
+const CAPODANNO_VENUE_PREFIXES = [
+  '55-milano', 'just-me-milano', 'tocqueville-13-milano', 'armani-prive-milano',
+  'the-club-milano', 'hollywood-milano', 'pineta-milano', 'voya-club-milano',
+  'aria-club-milano', 'rocca-brivio-sforza-milano', 'fabrique-milano',
+  'magazzini-generali-milano', 'alcatraz-milano', 'gattopardo-milano',
+  'the-grace-club-milano', 'twiga-milano',
+];
+
+const CAPODANNO_REVERSE_TO_EN: Record<string, { type: 'hub' } | { type: 'cat'; catId: string } | { type: 'venue'; venueSlug: string; catId: string }> = {};
+
+for (const loc of ALL_35_LOCALES) {
+  const nav = CAPODANNO_NAV_35[loc];
+  if (!nav) continue;
+  CAPODANNO_REVERSE_TO_EN[nav.slug] = { type: 'hub' };
+  for (const [catId, catSlug] of Object.entries(nav.categories)) {
+    CAPODANNO_REVERSE_TO_EN[catSlug] = { type: 'cat', catId };
+    for (const vSlug of CAPODANNO_VENUE_PREFIXES) {
+      const vKey = vSlug.replace(/-milano$/, '');
+      const fullSlug = `${nav.nyePrefix}-${vKey}-${nav.citySlug}-2027-${catSlug}`;
+      CAPODANNO_REVERSE_TO_EN[fullSlug] = { type: 'venue', venueSlug: vSlug, catId };
+    }
+  }
+}
+
+export function resolveEventSlugToCanonical(slug: string): string {
+  const directWeekly = weeklyEventSlugToCanonical.get(slug) || weeklyEventSlugToCanonical.get(slug.toLowerCase());
+  if (directWeekly) return directWeekly;
+  if (HALLOWEEN_SET.has(slug) || CAPODANNO_REVERSE_TO_EN[slug]) return slug;
+
+  for (const loc of ALL_35_LOCALES) {
+    const tk = SLUG_TOKENS_35[loc];
+    if (!tk) continue;
+    const prefix = `${tk.party}-${tk.milan}-`;
+    if (slug.startsWith(prefix)) {
+      const stripped = slug.slice(prefix.length);
+      return weeklyEventSlugToCanonical.get(stripped) || stripped;
+    }
+  }
+  return slug;
+}
+
+export function getLocalizedEventSlug35(rawSlug: string, locale: LocaleCode): string {
+  if (HALLOWEEN_SET.has(rawSlug)) {
+    return HALLOWEEN_SLUGS_35[locale] || HALLOWEEN_SLUGS_35.en;
+  }
+  const capMatch = CAPODANNO_REVERSE_TO_EN[rawSlug];
+  const targetNav = CAPODANNO_NAV_35[locale] || CAPODANNO_NAV_35.en;
+  if (capMatch && targetNav) {
+    if (capMatch.type === 'hub') return targetNav.slug;
+    if (capMatch.type === 'cat') return targetNav.categories[capMatch.catId] || rawSlug;
+    if (capMatch.type === 'venue') {
+      const vKey = capMatch.venueSlug.replace(/-milano$/, '');
+      const catSlug = targetNav.categories[capMatch.catId] || capMatch.catId;
+      return `${targetNav.nyePrefix}-${vKey}-${targetNav.citySlug}-2027-${catSlug}`;
+    }
+  }
+  const canonWeekly = weeklyEventSlugToCanonical.get(rawSlug) || weeklyEventSlugToCanonical.get(rawSlug.toLowerCase());
+  if (canonWeekly && WEEKLY_EVENT_SLUGS_35[canonWeekly]?.[locale]) {
+    return WEEKLY_EVENT_SLUGS_35[canonWeekly][locale];
+  }
+  const canonEvent = resolveEventSlugToCanonical(rawSlug);
+  if (/-(2026-(?:10|11|12)-\d{2}|2027-\d{2}-\d{2})$/.test(canonEvent)) {
+    if (locale === 'en') return canonEvent;
+    const tk = SLUG_TOKENS_35[locale] || SLUG_TOKENS_35.en;
+    const prefix = `${tk.party}-${tk.milan}-`;
+    return canonEvent.startsWith(prefix) ? canonEvent : `${prefix}${canonEvent}`;
+  }
+  return canonEvent;
+}
+
+// ─── 6. SEO HUB PAGES SLUGS (All Static SEO Pages Across All 35 Languages) ───
 const SEO_HUB_SPECS: Array<{
   canonicalPath: string;
   itPath: string;
   build: (tk: SlugLangTokens) => string;
+  aliases?: string[];
 }> = [
   { canonicalPath: '/vip-tables', itPath: '/tavoli-vip-milano', build: (tk) => `/${tk.vipTables}-${tk.milan}` },
   { canonicalPath: '/private-parties', itPath: '/feste-private-laurea-compleanno-milano', build: (tk) => `/${tk.graduation}-${tk.birthday}-${tk.milan}` },
   { canonicalPath: '/football-afterparties', itPath: '/dopo-partita-calcio-san-siro-milano', build: (tk) => `/san-siro-${tk.afterparty}-${tk.milan}` },
-  { canonicalPath: '/concert-afterparties', itPath: '/dopo-concerto-san-siro-milano', build: (tk) => `/concerts-${tk.afterparty}-${tk.milan}` },
+  { canonicalPath: '/concert-afterparties', itPath: '/dopo-concerto-san-siro-milano', build: (tk) => `/concerts-${tk.afterparty}-${tk.milan}`, aliases: ['/san-siro-concerts'] },
   { canonicalPath: '/new-years-eve', itPath: '/capodanno-milano-discoteche', build: (tk) => `/${tk.newYearsEve}-${tk.milan}` },
-  { canonicalPath: '/fashion-week', itPath: '/settimana-della-moda-milano', build: (tk) => `/${tk.fashionWeek}-${tk.milan}` },
+  { canonicalPath: '/fashion-week', itPath: '/settimana-della-moda-milano', build: (tk) => `/${tk.fashionWeek}-${tk.milan}`, aliases: ['/design-week', '/formula-1-monza'] },
   { canonicalPath: '/milan-fashion-week', itPath: '/milano-fashion-week-eventi', build: (tk) => `/${tk.milan}-${tk.fashionWeek}-${tk.party}` },
-  { canonicalPath: '/rooftops', itPath: '/rooftop-terrazze-panoramiche-milano', build: (tk) => `/${tk.rooftop}-${tk.milan}` },
+  { canonicalPath: '/milan-fashion-week/calendar', itPath: '/milano-fashion-week/calendario', build: (tk) => `/${tk.milan}-${tk.fashionWeek}/calendar` },
+  { canonicalPath: '/rooftops', itPath: '/rooftop-terrazze-panoramiche-milano', build: (tk) => `/${tk.rooftop}-${tk.milan}`, aliases: ['/rooftop-bars'] },
   { canonicalPath: '/bottle-prices', itPath: '/listino-prezzi-bottiglie-tavoli-vip', build: (tk) => `/${tk.prices}-${tk.vipTables}-${tk.milan}` },
   { canonicalPath: '/door-policy', itPath: '/selezione-ingresso-dress-code-milano', build: (tk) => `/${tk.dressCode}-${tk.club}-${tk.milan}` },
   { canonicalPath: '/guest-lists', itPath: '/liste-ingresso-discoteche-milano', build: (tk) => `/guestlist-${tk.club}-${tk.milan}` },
@@ -687,8 +951,23 @@ const SEO_HUB_SPECS: Array<{
   { canonicalPath: '/events/tonight', itPath: '/eventi/stasera-milano', build: (tk) => `/events/tonight-${tk.milan}-${tk.party}` },
   { canonicalPath: '/events/this-week', itPath: '/eventi/questa-settimana-milano', build: (tk) => `/events/this-week-${tk.milan}-${tk.party}` },
   { canonicalPath: '/events/special', itPath: '/eventi/eventi-speciali-milano', build: (tk) => `/events/special-${tk.party}-${tk.milan}` },
-  { canonicalPath: '/concierge', itPath: '/concierge-vip-milano', build: (tk) => `/concierge-${tk.vipTables}-${tk.milan}` },
+  { canonicalPath: '/events/best', itPath: '/eventi/migliori-serate-milano', build: (tk) => `/events/best-${tk.party}-${tk.milan}` },
+  { canonicalPath: '/events/past', itPath: '/eventi/archivio-serate-milano', build: (tk) => `/events/archive-${tk.party}-${tk.milan}` },
+  { canonicalPath: '/events/october-2026', itPath: '/eventi/calendario-2026-milano', build: (tk) => `/events/2026-${tk.party}-${tk.milan}` },
+  { canonicalPath: '/events/18-plus', itPath: '/eventi/serate-18-anni-milano', build: (tk) => `/events/18-plus-${tk.party}-${tk.milan}` },
+  { canonicalPath: '/events/21-plus', itPath: '/eventi/serate-21-anni-milano', build: (tk) => `/events/21-plus-${tk.party}-${tk.milan}` },
+  { canonicalPath: '/events/international', itPath: '/eventi/serate-internazionali-milano', build: (tk) => `/events/international-${tk.party}-${tk.milan}` },
+  { canonicalPath: '/events/university-erasmus', itPath: '/eventi/serate-universitarie-erasmus-milano', build: (tk) => `/events/erasmus-university-${tk.party}-${tk.milan}` },
+  { canonicalPath: '/events/halloween-2026', itPath: '/eventi/halloween-milano-2026', build: (tk) => `/events/${tk.halloween}-${tk.milan}-2026` },
+  { canonicalPath: '/events/capodanno-2027', itPath: '/eventi/capodanno-milano-2027', build: (tk) => `/events/${tk.newYearsEve}-${tk.milan}-2027` },
+  { canonicalPath: '/calendar/tonight', itPath: '/calendario/stasera-milano', build: (tk) => `/calendar/tonight-${tk.milan}-${tk.party}` },
+  { canonicalPath: '/calendar/this-week', itPath: '/calendario/questa-settimana-milano', build: (tk) => `/calendar/this-week-${tk.milan}-${tk.party}` },
+  { canonicalPath: '/concierge', itPath: '/concierge-vip-milano', build: (tk) => `/concierge-${tk.vipTables}-${tk.milan}`, aliases: ['/contact', '/booking', '/about'] },
+  { canonicalPath: '/booking/success', itPath: '/prenotazione/confermata-milano', build: (tk) => `/booking/confirmed-${tk.vipTables}-${tk.milan}` },
   { canonicalPath: '/faq', itPath: '/domande-frequenti-discoteche-milano', build: (tk) => `/faq-${tk.nightlife}-${tk.milan}` },
+  { canonicalPath: '/privacy', itPath: '/privacy-vita-notturna-milano', build: (tk) => `/privacy-${tk.nightlife}-${tk.milan}` },
+  { canonicalPath: '/terms', itPath: '/termini-servizio-milano', build: (tk) => `/terms-${tk.nightlife}-${tk.milan}` },
+  { canonicalPath: '/seo-landing', itPath: '/guida-completa-vita-notturna-milano', build: (tk) => `/${tk.guide}-${tk.vipTables}-${tk.nightlife}-${tk.milan}` },
 ];
 
 export const SEO_HUB_PATHS_35: Record<string, Record<LocaleCode, string>> = {};
@@ -710,6 +989,12 @@ for (const spec of SEO_HUB_SPECS) {
   }
   SEO_HUB_PATHS_35[spec.canonicalPath] = map;
   localizedSeoPathToCanonical.set(spec.canonicalPath, spec.canonicalPath);
+  if (spec.aliases) {
+    for (const alias of spec.aliases) {
+      SEO_HUB_PATHS_35[alias] = map;
+      localizedSeoPathToCanonical.set(alias, spec.canonicalPath);
+    }
+  }
 }
 
 export function getLocalizedSeoPagePath35(canonicalPath: string, locale: LocaleCode): string {
@@ -717,18 +1002,129 @@ export function getLocalizedSeoPagePath35(canonicalPath: string, locale: LocaleC
   return SEO_HUB_PATHS_35[norm]?.[locale] || norm;
 }
 
-export function resolveSeoHubPathToCanonical(pathWithoutLocale: string): string | undefined {
-  const norm = pathWithoutLocale.startsWith('/') ? pathWithoutLocale : `/${pathWithoutLocale}`;
+const RESERVED_EVENT_SUBPATHS = new Set([
+  'tonight', 'this-week', 'special', 'best', 'past', 'october-2026',
+  '18-plus', '21-plus', 'international', 'university-erasmus',
+  'halloween-2026', 'capodanno-2027',
+]);
+
+export function resolveSeoHubPathToCanonical(pathWithoutLocale: string, locale?: LocaleCode): string | undefined {
+  const norm = (pathWithoutLocale.startsWith('/') ? pathWithoutLocale : `/${pathWithoutLocale}`).replace(/\/$/, '') || '/';
   if (localizedSeoPathToCanonical.has(norm)) {
     return localizedSeoPathToCanonical.get(norm);
   }
-  // Check if first segment is a localized collection prefix (/discoteche-locali-milano/slug -> /clubs/slug)
   const segments = norm.split('/').filter(Boolean);
   if (segments.length === 2) {
-    const parentCanonical = localizedSeoPathToCanonical.get(`/${segments[0]}`);
-    if (parentCanonical && ['/clubs', '/guides', '/zones', '/genres', '/events'].includes(parentCanonical)) {
-      return `${parentCanonical}/${segments[1]}`;
+    const parentCanonical = localizedSeoPathToCanonical.get(`/${segments[0]}`) || `/${segments[0]}`;
+    const itemSlug = segments[1];
+    if (parentCanonical === '/clubs') {
+      return `/clubs/${resolveVenueSlug(itemSlug)}`;
+    }
+    if (parentCanonical === '/zones') {
+      return `/zones/${resolveZoneSlug(itemSlug)}`;
+    }
+    if (parentCanonical === '/genres') {
+      return `/genres/${resolveGenreSlug(itemSlug)}`;
+    }
+    if (parentCanonical === '/guides') {
+      return `/guides/${itemSlug}`;
+    }
+    if (parentCanonical === '/events' && !RESERVED_EVENT_SUBPATHS.has(itemSlug)) {
+      return `/events/${resolveEventSlugToCanonical(itemSlug)}`;
+    }
+    if (parentCanonical === '/new-years-eve') {
+      const targetLocale = locale || 'en';
+      return `/events/${getLocalizedEventSlug35(itemSlug, targetLocale)}`;
     }
   }
   return undefined;
+}
+
+export function localizeInternalHref(rawHref: string, fallbackLocale: LocaleCode = 'en'): string {
+  if (!rawHref || typeof rawHref !== 'string') return rawHref;
+  if (
+    rawHref.startsWith('http://') ||
+    rawHref.startsWith('https://') ||
+    rawHref.startsWith('mailto:') ||
+    rawHref.startsWith('tel:') ||
+    rawHref.startsWith('whatsapp:') ||
+    rawHref.startsWith('#')
+  ) {
+    return rawHref;
+  }
+
+  let pathname = rawHref;
+  let suffix = '';
+  const hashIdx = pathname.indexOf('#');
+  if (hashIdx !== -1) {
+    suffix = pathname.slice(hashIdx);
+    pathname = pathname.slice(0, hashIdx);
+  }
+  const queryIdx = pathname.indexOf('?');
+  if (queryIdx !== -1) {
+    suffix = pathname.slice(queryIdx) + suffix;
+    pathname = pathname.slice(0, queryIdx);
+  }
+
+  if (!pathname.startsWith('/')) return rawHref;
+
+  const segments = pathname.split('/').filter(Boolean);
+  if (segments.length === 0) {
+    return fallbackLocale === 'en' ? `/${suffix}` : `/${fallbackLocale}${suffix}`;
+  }
+
+  let locale: LocaleCode = fallbackLocale;
+  let restSegments = segments;
+  if ((ALL_35_LOCALES as readonly string[]).includes(segments[0])) {
+    locale = segments[0] as LocaleCode;
+    restSegments = segments.slice(1);
+  }
+
+  const lp = locale === 'en' ? '' : `/${locale}`;
+
+  if (restSegments.length === 0) {
+    return (lp || '/') + suffix;
+  }
+
+  const restPath = '/' + restSegments.join('/');
+
+  // 1. Static hub path (canonical or already localized in any locale)
+  const canonicalHub = localizedSeoPathToCanonical.get(restPath);
+  if (canonicalHub) {
+    const locHub = getLocalizedSeoPagePath35(canonicalHub, locale);
+    return `${lp}${locHub}${suffix}`;
+  }
+
+  // 2. Dynamic 2-segment routes (/clubs/<slug>, /zones/<slug>, /genres/<slug>, /guides/<slug>, /events/<slug>, /new-years-eve/<slug>)
+  if (restSegments.length === 2) {
+    const parentCanonical = localizedSeoPathToCanonical.get(`/${restSegments[0]}`) || `/${restSegments[0]}`;
+    const rawItemSlug = restSegments[1];
+
+    if (parentCanonical === '/clubs') {
+      const locVenue = getLocalizedVenueSlug35(rawItemSlug, locale);
+      return `${lp}/clubs/${locVenue}${suffix}`;
+    }
+    if (parentCanonical === '/zones') {
+      const locZone = getLocalizedZoneSlug35(rawItemSlug, locale);
+      return `${lp}/zones/${locZone}${suffix}`;
+    }
+    if (parentCanonical === '/genres') {
+      const locGenre = getLocalizedGenreSlug35(rawItemSlug, locale);
+      return `${lp}/genres/${locGenre}${suffix}`;
+    }
+    if (parentCanonical === '/guides') {
+      const locGuide = getExistingGuideSlug35(rawItemSlug, locale);
+      return `${lp}/guides/${locGuide}${suffix}`;
+    }
+    if (parentCanonical === '/events' && !RESERVED_EVENT_SUBPATHS.has(rawItemSlug)) {
+      const locEvent = getLocalizedEventSlug35(rawItemSlug, locale);
+      return `${lp}/events/${locEvent}${suffix}`;
+    }
+    if (parentCanonical === '/new-years-eve') {
+      const locEvent = getLocalizedEventSlug35(rawItemSlug, locale);
+      return `${lp}/events/${locEvent}${suffix}`;
+    }
+  }
+
+  return `${lp}${restPath}${suffix}`;
 }

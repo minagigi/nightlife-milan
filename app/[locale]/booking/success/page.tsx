@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { tr } from '@/lib/i18n/t';
 import { localePrefix } from '@/lib/i18n/locales';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { Calendar, Share2, MapPin, Clock, ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {

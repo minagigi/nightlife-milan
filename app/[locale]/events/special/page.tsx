@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Image from 'next/image';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
 import { generateEventListSchema, jsonLdString } from '@/lib/seo';
 import DiscoveryGrid from '@/components/DiscoveryGrid';
@@ -217,15 +217,11 @@ export default async function SpecialEventsPage({ params }: Props) {
         <nav className="text-sm text-white/40" aria-label="Breadcrumb">
           <ol className="list-none p-0 inline-flex">
             <li className="flex items-center">
-              <a href={lp || '/'} className="hover:text-champagne transition-colors">
-                Home
-              </a>
+              <Link href={lp || '/'} className="hover:text-champagne transition-colors">Home</Link>
               <span className="mx-2">/</span>
             </li>
             <li className="flex items-center">
-              <a href={`${lp}/events`} className="hover:text-champagne transition-colors">
-                {tr(locale, 'Events', 'Eventi')}
-              </a>
+              <Link href={`${lp}/events`} className="hover:text-champagne transition-colors">{tr(locale, 'Events', 'Eventi')}</Link>
               <span className="mx-2">/</span>
             </li>
             <li className="text-champagne" aria-current="page">

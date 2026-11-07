@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import {
   getVerticalHubUi35,
   getOccasionsCatalog,

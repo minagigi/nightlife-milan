@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { hreflangAlternates } from '@/lib/i18n/locales';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
 import NewsletterHub from '@/components/NewsletterHub';
 import { Clock, Sparkles, Compass, CheckCircle2, ArrowUpRight } from 'lucide-react';

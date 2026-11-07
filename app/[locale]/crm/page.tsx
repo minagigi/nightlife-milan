@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { Download, Eye, Mail, RefreshCw, Search, ShieldCheck, UserRoundCheck } from 'lucide-react';
 import { crmFilterOptions, filterCrmContacts, type CrmPermissionStatus } from '@/lib/crmModel';
 import { crmStorageConfigured, readCrmDatabase } from '@/lib/crmStore';

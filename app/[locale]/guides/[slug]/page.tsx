@@ -5,7 +5,7 @@ import { GUIDE_HERO_IMAGES_114, GUIDE_INLINE_IMAGES_114 } from '@/lib/guideImage
 import { getLocalizedGuideSlug35 } from '@/lib/guides100Catalog';
 import { Metadata } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { getGuideBySlug, getVenues, mockGuides } from '@/lib/data';
 import { getLocalizedText } from '@/lib/seo';
 import { ArrowLeft, Calendar, User, MapPin, MessageCircle, Sparkles, BookOpen } from 'lucide-react';

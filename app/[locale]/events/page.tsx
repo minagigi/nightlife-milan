@@ -2,7 +2,7 @@ import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { ArrowRight } from 'lucide-react';
 import MfwEntry from '@/components/MfwEntry';
 import OctoberEntry from '@/components/OctoberEntry';

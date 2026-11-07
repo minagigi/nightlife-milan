@@ -18,7 +18,7 @@ import {
   MessageCircle,
   ArrowUpRight,
 } from 'lucide-react';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { usePathname } from 'next/navigation';
 import { mockVenues, mockZones, mockGuides } from '@/lib/data';
 import { CONTACT } from '@/config/contact';

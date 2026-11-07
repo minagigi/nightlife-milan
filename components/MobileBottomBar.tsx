@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { usePathname } from 'next/navigation';
 import { tr } from '@/lib/i18n/t';
 import { MessageCircle, Sparkles, Calendar, Crown, BookOpen } from 'lucide-react';

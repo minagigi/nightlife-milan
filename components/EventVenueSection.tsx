@@ -1,3 +1,4 @@
+import { localizeInternalHref } from '@/lib/i18n/localizedSlugs35';
 import EventVenueMap from '@/components/EventVenueMap';
 import React from 'react';
 import {
@@ -66,7 +67,7 @@ export default function EventVenueSection({ locale, venue }: EventVenueSectionPr
             </a>
             {venue.href ? (
               <a
-                href={venue.href}
+                href={localizeInternalHref(venue.href, locale as any)}
                 className="inline-flex min-h-11 items-center justify-center rounded-full border border-champagne/70 px-5 py-2.5 text-base font-semibold tracking-wide text-champagne transition-colors hover:bg-champagne/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                 data-event-venue-details
               >

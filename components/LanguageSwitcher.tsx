@@ -11,6 +11,7 @@ import {
   resolveExistingGuideId,
   getLocalizedSeoPagePath35,
   resolveSeoHubPathToCanonical,
+  localizeInternalHref,
 } from '@/lib/i18n/localizedSlugs35';
 
 // Il prefisso va riconosciuto per TUTTI i codici del registry (anche i path
@@ -37,35 +38,22 @@ export default function LanguageSwitcher({ currentLocale }: { currentLocale: str
   }, [open]);
 
   const getAlternatePath = (targetLocale: string) => {
+    const loc = (targetLocale || 'en') as LocaleCode;
     if (!pathname) return localePrefix(targetLocale) || '/';
-    let pathWithoutLocale = pathname.replace(anyLocaleRe, '/');
-    const loc = targetLocale as LocaleCode;
-    const clubMatch = pathWithoutLocale.match(/^\/clubs\/([^/]+)$/);
-    const zoneMatch = pathWithoutLocale.match(/^\/zones\/([^/]+)$/);
-    const genreMatch = pathWithoutLocale.match(/^\/genres\/([^/]+)$/);
-    const guideMatch = pathWithoutLocale.match(/^\/guides\/([^/]+)$/);
-    const canonicalHub = resolveSeoHubPathToCanonical(pathWithoutLocale);
-    if (canonicalHub && !clubMatch && !zoneMatch && !genreMatch && !guideMatch) {
-      pathWithoutLocale = getLocalizedSeoPagePath35(canonicalHub, loc);
-    } else if (clubMatch) {
-      pathWithoutLocale = `/clubs/${getLocalizedVenueSlug35(clubMatch[1], loc)}`;
-    } else if (zoneMatch) {
-      pathWithoutLocale = `/zones/${getLocalizedZoneSlug35(zoneMatch[1], loc)}`;
-    } else if (genreMatch) {
-      pathWithoutLocale = `/genres/${getLocalizedGenreSlug35(genreMatch[1], loc)}`;
-    } else if (guideMatch && resolveExistingGuideId(guideMatch[1])) {
-      pathWithoutLocale = `/guides/${getExistingGuideSlug35(guideMatch[1], loc)}`;
-    } else if (guideMatch && typeof document !== 'undefined') {
+    if (typeof document !== 'undefined') {
       const altLink = document.querySelector(`link[rel="alternate"][hreflang="${targetLocale}"]`) as HTMLLinkElement | null;
       if (altLink?.href) {
         try {
-          return new URL(altLink.href).pathname;
+          const parsed = new URL(altLink.href).pathname;
+          if (parsed && parsed !== '/') return localizeInternalHref(parsed, loc);
         } catch {}
       }
     }
+    const pathWithoutLocale = pathname.replace(anyLocaleRe, '/');
+    const canonicalOrRaw = resolveSeoHubPathToCanonical(pathWithoutLocale, loc) || pathWithoutLocale;
     const prefix = localePrefix(targetLocale);
-    if (!prefix) return pathWithoutLocale;
-    return pathWithoutLocale === '/' ? prefix : `${prefix}${pathWithoutLocale}`;
+    const candidate = !prefix ? canonicalOrRaw : (canonicalOrRaw === '/' ? prefix : `${prefix}${canonicalOrRaw}`);
+    return localizeInternalHref(candidate, loc);
   };
 
   const current = ENABLED_LOCALES.find((l) => l.code === currentLocale) || ENABLED_LOCALES[0];

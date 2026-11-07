@@ -1077,7 +1077,7 @@ export function resolveVenueEventsForCarousel(venue: Venue, locale: string): {
     categoryLabel: vName,
     genres: (w.genres && w.genres.length > 0 ? w.genres : vTags).slice(0, 3),
     imageSrc: w.image || fallbackImg,
-    href: `/${locale}/events/${w.eventSlug || w.id}`,
+    href: `/${locale}/events/${w.clubSlug}-${w.day}-${w.eventSlug}`,
     whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
       isIt
         ? `Ciao Nightlife Milan, vorrei prenotare per la serata ${w.name} da ${vName}`

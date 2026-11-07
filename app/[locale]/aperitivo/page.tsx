@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Image from 'next/image';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { ArrowRight, Clock, MapPin, MessageCircle } from 'lucide-react';
 import { CONTACT } from '@/config/contact';
 import { tr } from '@/lib/i18n/t';

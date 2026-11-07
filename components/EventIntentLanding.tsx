@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { CalendarDays, Check, Clock, MessageCircle, Users } from 'lucide-react';
 import EventCard from '@/components/EventCard';
 import { CONTACT } from '@/config/contact';

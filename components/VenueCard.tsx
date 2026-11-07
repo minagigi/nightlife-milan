@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { MapPin, ArrowUpRight } from 'lucide-react';
 import FavoriteButton from './FavoriteButton';
 import { localePrefix, type LocaleCode } from '@/lib/i18n/locales';

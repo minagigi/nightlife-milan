@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { tr } from '@/lib/i18n/t';
 import Image from 'next/image';
-import Link from 'next/link';
+import Link from '@/components/LocalizedLink';
 import { ArrowRight } from 'lucide-react';
 import type { Venue } from '@/lib/types';
 import NightTicker from './NightTicker';
