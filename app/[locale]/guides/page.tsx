@@ -636,7 +636,7 @@ export default async function GuidesPage({
         </div>
       </section>
 
-      <VerticalHubsAndEventsSection locale={locale} initialTab="blueprints" eventFocus="all" />
+      <VerticalHubsAndEventsSection locale={locale} initialTab="occasions" eventFocus="all" />
       {/* Newsletter Hub */}
       <NewsletterHub lang={locale} />
             <EditorialPageSections locale={locale as LocaleCode} path={`${localePrefix}/guides`} />

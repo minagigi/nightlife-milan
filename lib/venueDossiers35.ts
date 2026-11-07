@@ -109,16 +109,16 @@ export interface VenueUi35 {
 }
 
 const UI_BASE_EN: VenueUi35 = {
-  eventsEyebrow: 'LIVE AUTO-UPDATED CALENDAR & AXEL CURATION',
+  eventsEyebrow: 'LIVE AUTO-UPDATED CALENDAR & Nightlife Milan CURATION',
   eventsTitle: 'Tonight, This Week, Curated Picks & Upcoming Events',
   eventsSubtitle: 'Automatically synchronized with the official Xceed calendar, weekly recurring club nights, and special seasonal events.',
   tabTonight: 'Tonight',
   tabThisWeek: 'This Week',
-  tabCurated: 'My Weekly Proposals (Axel)',
+  tabCurated: 'My Weekly Proposals (Concierge)',
   tabFuture: 'Future & Seasonal Events',
   viewCarousel: 'Carousel',
   viewGrid: 'Grid',
-  tonightFallbackNotice: 'No scheduled ticketed event for tonight — showing Axel’s weekly proposals and upcoming dates. Private buyouts and VIP tables available on request.',
+  tonightFallbackNotice: 'No scheduled ticketed event for tonight — showing Nightlife Milan Concierge’s weekly proposals and upcoming dates. Private buyouts and VIP tables available on request.',
   bookWhatsApp: 'Book on WhatsApp',
   viewEvent: 'Event Sheet & Guest List',
   fromPrice: 'From',
@@ -136,7 +136,7 @@ const UI_BASE_EN: VenueUi35 = {
   celebrationsSubtitle: 'This venue is officially available for private and semi-private bookings across all year-round celebrations, trade fairs, and holidays with dedicated areas.',
   servicesEyebrow: 'TURNKEY CONCIERGE & VENUE SERVICES',
   servicesTitle: 'All Services We Offer at This Venue',
-  servicesSubtitle: 'Single point of contact (Axel), written all-inclusive per-person or per-table quote, and full on-site coordination from arrival to the final toast.',
+  servicesSubtitle: 'Single point of contact (Concierge), written all-inclusive per-person or per-table quote, and full on-site coordination from arrival to the final toast.',
   galleryEyebrow: 'VERIFIED VENUE GALLERY',
   galleryTitle: 'Spaces, Aperitivo Buffet, Dancefloor & VIP Privé',
   askQuoteCta: 'Request Quote on WhatsApp',
@@ -145,12 +145,12 @@ const UI_BASE_EN: VenueUi35 = {
 
 const UI_OVERRIDES: Partial<Record<LocaleCode, Partial<VenueUi35>>> = {
   it: {
-    eventsEyebrow: 'CALENDARIO AUTOAGGIORNATO & SELEZIONE AXEL',
+    eventsEyebrow: 'CALENDARIO AUTOAGGIORNATO & SELEZIONE Nightlife Milan',
     eventsTitle: 'Eventi Stasera, in Settimana, le Mie Proposte e nel Futuro',
     eventsSubtitle: 'Sincronizzato in automatico con il calendario ufficiale Xceed, le serate fisse settimanali e gli eventi speciali in programma.',
     tabTonight: 'Stasera',
     tabThisWeek: 'In Settimana',
-    tabCurated: 'Le Mie Proposte in Settimana (Axel)',
+    tabCurated: 'Le Mie Proposte in Settimana (Concierge)',
     tabFuture: 'Eventi nel Futuro & Feste',
     viewCarousel: 'Carosello',
     viewGrid: 'Griglia',
@@ -172,14 +172,14 @@ const UI_OVERRIDES: Partial<Record<LocaleCode, Partial<VenueUi35>>> = {
     celebrationsSubtitle: 'Il locale è ufficialmente disponibile per tutte le ricorrenze dell’anno, le fiere internazionali e le feste comandate con aree riservate su misura.',
     servicesEyebrow: 'SERVIZI CHIAVI IN MANO SUL LOCALE',
     servicesTitle: 'Tutti i Servizi che Possiamo Offrire in Questo Locale',
-    servicesSubtitle: 'Unico referente (Axel), preventivo scritto tutto incluso a persona o a tavolo e coordinamento diretto in sala dall’arrivo al brindisi finale.',
+    servicesSubtitle: 'Unico referente (Concierge), preventivo scritto tutto incluso a persona o a tavolo e coordinamento diretto in sala dall’arrivo al brindisi finale.',
     galleryEyebrow: 'GALLERIA FOTOGRAFICA VERIFICATA',
     galleryTitle: 'Spazi, Isola Aperitivo, Pista, Giardino e Tavoli Privé',
     askQuoteCta: 'Chiedi Preventivo su WhatsApp',
     availableBadge: 'Disponibile · Prenotazione Diretta',
   },
   es: {
-    eventsEyebrow: 'CALENDARIO AUTOACTUALIZADO Y SELECCIÓN AXEL',
+    eventsEyebrow: 'CALENDARIO AUTOACTUALIZADO Y SELECCIÓN Nightlife Milan',
     eventsTitle: 'Eventos Esta Noche, Esta Semana, Mis Propuestas y Futuro',
     tabTonight: 'Esta Noche',
     tabThisWeek: 'Esta Semana',
@@ -197,7 +197,7 @@ const UI_OVERRIDES: Partial<Record<LocaleCode, Partial<VenueUi35>>> = {
     availableBadge: 'Disponible · Reserva Directa',
   },
   fr: {
-    eventsEyebrow: 'CALENDRIER AUTO-ACTUALISÉ & SÉLECTION AXEL',
+    eventsEyebrow: 'CALENDRIER AUTO-ACTUALISÉ & SÉLECTION Nightlife Milan',
     eventsTitle: 'Soirées Ce Soir, Cette Semaine, Mes Propositions et à Venir',
     tabTonight: 'Ce Soir',
     tabThisWeek: 'Cette Semaine',
@@ -215,7 +215,7 @@ const UI_OVERRIDES: Partial<Record<LocaleCode, Partial<VenueUi35>>> = {
     availableBadge: 'Disponible · Réservation Directe',
   },
   de: {
-    eventsEyebrow: 'AUTOMATISCH AKTUALISIERTER KALENDER & AXEL-AUSWAHL',
+    eventsEyebrow: 'AUTOMATISCH AKTUALISIERTER KALENDER & Nightlife Milan-AUSWAHL',
     eventsTitle: 'Events Heute Abend, Diese Woche, Meine Empfehlungen & Zukunft',
     tabTonight: 'Heute Abend',
     tabThisWeek: 'Diese Woche',
@@ -253,7 +253,7 @@ const UI_OVERRIDES: Partial<Record<LocaleCode, Partial<VenueUi35>>> = {
     eventsTitle: 'Evenementen Vanavond, Deze Week, Mijn Selectie & Toekomst',
     tabTonight: 'Vanavond',
     tabThisWeek: 'Deze Week',
-    tabCurated: 'Mijn Weekselectie (Axel)',
+    tabCurated: 'Mijn Weekselectie (Concierge)',
     tabFuture: 'Toekomstige Events',
     viewCarousel: 'Carrousel',
     viewGrid: 'Raster',
@@ -287,7 +287,7 @@ const UI_OVERRIDES: Partial<Record<LocaleCode, Partial<VenueUi35>>> = {
     eventsTitle: 'Bu Gece, Bu Hafta, Haftalık Önerilerim ve Gelecek Etkinlikler',
     tabTonight: 'Bu Gece',
     tabThisWeek: 'Bu Hafta',
-    tabCurated: 'Haftalık Önerilerim (Axel)',
+    tabCurated: 'Haftalık Önerilerim (Concierge)',
     tabFuture: 'Gelecek Etkinlikler',
     viewCarousel: 'Karusel',
     viewGrid: 'Izgara',
@@ -318,10 +318,10 @@ const UI_OVERRIDES: Partial<Record<LocaleCode, Partial<VenueUi35>>> = {
     availableBadge: 'متاح · حجز مباشر',
   },
   zh: {
-    eventsTitle: '今晚、本周、Axel 本周精选及未来活动日历',
+    eventsTitle: '今晚、本周、Nightlife Milan Concierge 本周精选及未来活动日历',
     tabTonight: '今晚活动',
     tabThisWeek: '本周活动',
-    tabCurated: '本周精选推荐 (Axel)',
+    tabCurated: '本周精选推荐 (Concierge)',
     tabFuture: '未来与节日活动',
     viewCarousel: '轮播视图',
     viewGrid: '网格视图',
@@ -338,7 +338,7 @@ const UI_OVERRIDES: Partial<Record<LocaleCode, Partial<VenueUi35>>> = {
     eventsTitle: 'Събития тази вечер, тази седмица, моите предложения и бъдещи дати',
     tabTonight: 'Тази вечер',
     tabThisWeek: 'Тази седмица',
-    tabCurated: 'Моите предложения (Axel)',
+    tabCurated: 'Моите предложения (Concierge)',
     tabFuture: 'Предстоящи събития',
     viewCarousel: 'Въртележка',
     viewGrid: 'Мрежа',
@@ -366,7 +366,7 @@ const UI_OVERRIDES: Partial<Record<LocaleCode, Partial<VenueUi35>>> = {
     eventsTitle: 'Akce dnes večer, tento týden, moje tipy a budoucí události',
     tabTonight: 'Dnes večer',
     tabThisWeek: 'Tento týden',
-    tabCurated: 'Moje týdenní tipy (Axel)',
+    tabCurated: 'Moje týdenní tipy (Concierge)',
     tabFuture: 'Budoucí akce',
     viewCarousel: 'Karusel',
     viewGrid: 'Mřížka',
@@ -408,7 +408,7 @@ const UI_OVERRIDES: Partial<Record<LocaleCode, Partial<VenueUi35>>> = {
     eventsTitle: 'Tapahtumat tänä iltana, tällä viikolla, suositukseni ja tulevat',
     tabTonight: 'Tänä iltana',
     tabThisWeek: 'Tällä viikolla',
-    tabCurated: 'Viikon suositukseni (Axel)',
+    tabCurated: 'Viikon suositukseni (Concierge)',
     tabFuture: 'Tulevat tapahtumat',
     viewCarousel: 'Karuselli',
     viewGrid: 'Ruudukko',
@@ -436,7 +436,7 @@ const UI_OVERRIDES: Partial<Record<LocaleCode, Partial<VenueUi35>>> = {
     eventsTitle: 'Események ma este, ezen a héten, heti ajánlataim és jövőbeli bulik',
     tabTonight: 'Ma este',
     tabThisWeek: 'Ezen a héten',
-    tabCurated: 'Heti ajánlataim (Axel)',
+    tabCurated: 'Heti ajánlataim (Concierge)',
     tabFuture: 'Közelgő események',
     viewCarousel: 'Körhinta',
     viewGrid: 'Rács',
@@ -534,7 +534,7 @@ const UI_OVERRIDES: Partial<Record<LocaleCode, Partial<VenueUi35>>> = {
     eventsTitle: 'Podujatia dnes večer, tento týždeň, moje tipy a budúce akcie',
     tabTonight: 'Dnes večer',
     tabThisWeek: 'Tento týždeň',
-    tabCurated: 'Moje týždenné tipy (Axel)',
+    tabCurated: 'Moje týždenné tipy (Concierge)',
     tabFuture: 'Budúce podujatia',
     viewCarousel: 'Karusel',
     viewGrid: 'Mriežka',
@@ -562,7 +562,7 @@ const UI_OVERRIDES: Partial<Record<LocaleCode, Partial<VenueUi35>>> = {
     eventsTitle: 'Evenemang ikväll, denna vecka, mina förslag och kommande datum',
     tabTonight: 'Ikväll',
     tabThisWeek: 'Denna vecka',
-    tabCurated: 'Mina veckoförslag (Axel)',
+    tabCurated: 'Mina veckoförslag (Concierge)',
     tabFuture: 'Kommande evenemang',
     viewCarousel: 'Karusell',
     viewGrid: 'Rutnät',
@@ -590,7 +590,7 @@ const UI_OVERRIDES: Partial<Record<LocaleCode, Partial<VenueUi35>>> = {
     eventsTitle: 'Viðburðir í kvöld, í þessari viku, mínar tillögur og framundan',
     tabTonight: 'Í kvöld',
     tabThisWeek: 'Í þessari viku',
-    tabCurated: 'Mínar vikutillögur (Axel)',
+    tabCurated: 'Mínar vikutillögur (Concierge)',
     tabFuture: 'Viðburðir framundan',
     viewCarousel: 'Hringekja',
     viewGrid: 'grind',
@@ -824,7 +824,7 @@ export function getVenueCelebrations(venue: Venue, locale: string): CelebrationO
         formula: 'Isola Aperitivo Royal + Combo Serata Club',
         priceIndication: 'Da 20–25€ a persona (1–2 drink + buffet illimitato + area d’appoggio)',
         details: `Ideale per Bocconi, Cattolica, Statale, Politecnico (Leonardo/Bovisa), Bicocca, IULM e NABA/Brera. Orario flessibile per chi discute nel pomeriggio, parenti benvenuti dalle 19:30 e taglio torta con fontane luminose.`,
-        whatsappText: `Ciao Axel, vorrei un preventivo per una Festa di Laurea da ${vName}`,
+        whatsappText: `Ciao Nightlife Milan, vorrei un preventivo per una Festa di Laurea da ${vName}`,
       },
       {
         id: 'compleanno',
@@ -832,7 +832,7 @@ export function getVenueCelebrations(venue: Venue, locale: string): CelebrationO
         formula: 'Aperitivo Riservato, Cena Cantata o Tavolo Privé',
         priceIndication: 'Da 20€ in aperitivo · Tavoli dopocena da 200–300€ (100% in bottiglie)',
         details: `Zona riservata con divanetti per tutta la sera, servizio torta artigianale con certificazione HACCP o pasticceria convenzionata, bottiglie di spumante/champagne per il brindisi di mezzanotte.`,
-        whatsappText: `Ciao Axel, vorrei organizzare una Festa di Compleanno da ${vName}`,
+        whatsappText: `Ciao Nightlife Milan, vorrei organizzare una Festa di Compleanno da ${vName}`,
       },
       {
         id: 'celibato-nubilato',
@@ -840,7 +840,7 @@ export function getVenueCelebrations(venue: Venue, locale: string): CelebrationO
         formula: 'Cena Spettacolo + Tavolo Pista/Privé (Festeggiato/a Omaggio >10 pax)',
         priceIndication: 'Pacchetti completi da 45–80€ a persona tutto incluso',
         details: `Programma su misura dal tardo pomeriggio alle 05:00: aperitivo o cena cantata, bottle show con sparklers al tavolo e possibilità di unire il gruppo sposo e sposa nel privé a mezzanotte.`,
-        whatsappText: `Ciao Axel, vorrei un preventivo per Addio al Celibato/Nubilato da ${vName}`,
+        whatsappText: `Ciao Nightlife Milan, vorrei un preventivo per Addio al Celibato/Nubilato da ${vName}`,
       },
       {
         id: 'divorzio-sorpresa',
@@ -848,7 +848,7 @@ export function getVenueCelebrations(venue: Venue, locale: string): CelebrationO
         formula: 'Regia Complice con Ingresso Dedicato + Tavolo VIP',
         priceIndication: 'Da 25€ a persona o Tavolo VIP da 250€',
         details: `Coordinamento via WhatsApp con l’organizzatore per l’effetto sorpresa («finto aperitivo a due»), torta ironica personalizzata e bottle service dedicato.`,
-        whatsappText: `Ciao Axel, vorrei organizzare una Festa a Sorpresa / Nuovo Inizio da ${vName}`,
+        whatsappText: `Ciao Nightlife Milan, vorrei organizzare una Festa a Sorpresa / Nuovo Inizio da ${vName}`,
       },
       {
         id: 'aziendali-fiere',
@@ -856,7 +856,7 @@ export function getVenueCelebrations(venue: Venue, locale: string): CelebrationO
         formula: 'Area Riservata, Cena 4 Portate o Buyout Sala Privata',
         priceIndication: 'Da 35€ cocktail networking · Da 65€ cena servita (Fattura SDI inclusa)',
         details: `Soluzione chiavi in mano per aziende ed espositori Rho Fiera / MiCo: menù carne/pesce/vegetariano, gestione allergie, impianto audio/microfoni, SIAE e fatturazione elettronica immediata.`,
-        whatsappText: `Ciao Axel, richiedo preventivo aziendale con fattura per evento da ${vName}`,
+        whatsappText: `Ciao Nightlife Milan, richiedo preventivo aziendale con fattura per evento da ${vName}`,
       },
       {
         id: 'feste-comandate',
@@ -864,7 +864,7 @@ export function getVenueCelebrations(venue: Venue, locale: string): CelebrationO
         formula: 'Cenone / Royal Buffet + Serata Club o Tavolo Dopo-Partita San Siro',
         priceIndication: 'Prezzi ufficiali bloccati in prevendita con conferma scritta',
         details: `Disponibilità garantita per tutte le feste comandate (31 Dicembre, 31 Ottobre, 7–8 Dicembre, 14 Febbraio, 8 Marzo, Ponti e Ferragosto) e per i terzi tempi post Inter/Milan e grandi concerti.`,
-        whatsappText: `Ciao Axel, vorrei info e tavoli per una data speciale / festa comandata da ${vName}`,
+        whatsappText: `Ciao Nightlife Milan, vorrei info e tavoli per una data speciale / festa comandata da ${vName}`,
       },
     ];
   }
@@ -875,7 +875,7 @@ export function getVenueCelebrations(venue: Venue, locale: string): CelebrationO
       formula: 'Reserved Royal Aperitivo Island + Club Transition',
       priceIndication: 'From €20–€25/person (1–2 drinks + unlimited buffet + reserved area)',
       details: `Tailored for Bocconi, Cattolica, Statale, Politecnico, Bicocca, IULM & NABA. Flexible arrival for afternoon proclamations, family-friendly early slot (19:30–22:00), and midnight sparkler cake moment.`,
-      whatsappText: `Hi Axel, I'd like a quote for a Graduation Party at ${vName}`,
+      whatsappText: `Hi Nightlife Milan, I'd like a quote for a Graduation Party at ${vName}`,
     },
     {
       id: 'compleanno',
@@ -883,7 +883,7 @@ export function getVenueCelebrations(venue: Venue, locale: string): CelebrationO
       formula: 'Reserved Aperitivo Lounge, Singing Dinner or VIP Table',
       priceIndication: 'From €20 aperitivo · Club VIP Tables from €200–€300 (100% bottle credit)',
       details: `Private sofa island, certified HACCP pastry cake service, custom sparkler presentation, and seamless transition from aperitivo/dinner to the dancefloor.`,
-      whatsappText: `Hi Axel, I'd like to book a Birthday Celebration at ${vName}`,
+      whatsappText: `Hi Nightlife Milan, I'd like to book a Birthday Celebration at ${vName}`,
     },
     {
       id: 'celibato-nubilato',
@@ -891,7 +891,7 @@ export function getVenueCelebrations(venue: Venue, locale: string): CelebrationO
       formula: 'Dinner Show + VIP Privé Table (Guest of Honor Free for 10+ guests)',
       priceIndication: 'All-inclusive packages from €45–€80/person',
       details: `Full itinerary from aperitivo or singing dinner to midnight bottle show, with the option to merge bachelor and bachelorette crews at midnight.`,
-      whatsappText: `Hi Axel, I need a Bachelor/Bachelorette package at ${vName}`,
+      whatsappText: `Hi Nightlife Milan, I need a Bachelor/Bachelorette package at ${vName}`,
     },
     {
       id: 'divorzio-sorpresa',
@@ -899,7 +899,7 @@ export function getVenueCelebrations(venue: Venue, locale: string): CelebrationO
       formula: 'Secret Guest Arrival + Dedicated VIP Table & Bottle Show',
       priceIndication: 'From €25/person or VIP Table from €250',
       details: `Synchronized arrival timing with our door hostess so guests are hidden inside before the guest of honor walks in, plus custom cake and sparkler show.`,
-      whatsappText: `Hi Axel, I'd like to plan a Surprise / New Beginning Party at ${vName}`,
+      whatsappText: `Hi Nightlife Milan, I'd like to plan a Surprise / New Beginning Party at ${vName}`,
     },
     {
       id: 'aziendali-fiere',
@@ -907,7 +907,7 @@ export function getVenueCelebrations(venue: Venue, locale: string): CelebrationO
       formula: 'Standing Networking Cocktail, 4-Course Seated Dinner or Full Venue Buyout',
       priceIndication: 'From €35 networking · From €65 seated dinner (Corporate Invoice included)',
       details: `Turnkey B2B hospitality during Fashion Week, Salone del Mobile, MIDO, MICAM, HostMilano and EICMA: dietary management, AV/microphone setup, SIAE, and instant corporate invoicing.`,
-      whatsappText: `Hi Axel, I need a corporate event quote at ${vName}`,
+      whatsappText: `Hi Nightlife Milan, I need a corporate event quote at ${vName}`,
     },
     {
       id: 'feste-comandate',
@@ -915,7 +915,7 @@ export function getVenueCelebrations(venue: Venue, locale: string): CelebrationO
       formula: 'Gala Dinner / Royal Buffet + Club Entry or San Siro After-Match VIP Table',
       priceIndication: 'Official early-bird & VIP table rates with written confirmation',
       details: `Guaranteed priority access for NYE (31 Dec), Halloween (31 Oct), Christmas corporate dinners, Valentine's Day, Women's Day, and San Siro football/concert afterparties.`,
-      whatsappText: `Hi Axel, I'd like availability for a holiday / special night at ${vName}`,
+      whatsappText: `Hi Nightlife Milan, I'd like availability for a holiday / special night at ${vName}`,
     },
   ];
 }
@@ -933,7 +933,7 @@ export function getVenueServices10(venue: Venue, locale: string): VenueServiceIt
       { id: 's6', title: 'Allestimenti, Scritte LED, Palloncini & Fotografo', spec: 'Personalizzazione Area Festa & Photo Corner', description: 'Allestimento con numeri luminosi, backdrop fotografico, gadget a tema e servizio fotografico/video professionale con consegna rapida.' },
       { id: 's7', title: 'Transfer NCC, Minivan di Gruppo & Party Bus', spec: 'Navetta da/per Casa, Hotel, San Siro o Fiera', description: 'Coordinamento minivan Mercedes V-Class (7–8 posti), minibus 16–20 posti o limousine con conducente per andata e ritorno in totale sicurezza.' },
       { id: 's8', title: 'Supporto Tecnico Audio/Video, Microfoni & SIAE', spec: 'Proiettore, Impianto Voce, DJ Set & Pratiche SIAE', description: 'Dotazione tecnica per speech aziendali, video dei ricordi per lauree/compleanni, DJ set su misura e assistenza completa per i permessi musicali SIAE.' },
-      { id: 's9', title: 'Accoglienza Fast-Track & Unico Referente (Axel)', spec: 'Assistenza WhatsApp 7/7 Fino a Fine Serata', description: 'Nessun rimpallo tra PR: Axel segue personalmente la tua prenotazione dal primo messaggio fino all’ingresso dell’ultimo invitato.' },
+      { id: 's9', title: 'Accoglienza Fast-Track & Unico Referente (Concierge)', spec: 'Assistenza WhatsApp 7/7 Fino a Fine Serata', description: 'Nessun rimpallo tra PR: Nightlife Milan Concierge segue personalmente la tua prenotazione dal primo messaggio fino all’ingresso dell’ultimo invitato.' },
       { id: 's10', title: 'Preventivo Scritto Tutto Incluso & Fattura SDI', spec: 'Zero Costi Nascosti · Quota Fissa a Persona', description: 'Riepilogo scritto su WhatsApp o PDF con quota esatta a persona (guardaroba, SIAE e servizio torta specificati prima) e fatturazione elettronica per le aziende.' },
     ];
   }
@@ -946,7 +946,7 @@ export function getVenueServices10(venue: Venue, locale: string): VenueServiceIt
     { id: 's6', title: 'Custom LED Signs, Decor & Event Photographer', spec: 'Branded Backdrops, Balloons & Media Crew', description: 'Custom neon/LED numbers, floral or balloon installations, branded corporate step-and-repeat walls, and dedicated photographer/videographer.' },
     { id: 's7', title: 'Private NCC Chauffeur, Group Minivans & Shuttles', spec: 'Mercedes V-Class, 16-Seat Sprinters & Limousines', description: 'Door-to-door transfers connecting hotels, universities, San Siro Stadium, Rho Fiera, and the club safely until 05:00.' },
     { id: 's8', title: 'AV Equipment, Screens, Microphones & SIAE Licensing', spec: 'Projectors, LED Walls, Speeches & Custom DJ Sets', description: 'Full technical setup for corporate presentations, graduation/birthday tribute videos, live musicians, and SIAE music license management.' },
-    { id: 's9', title: 'VIP Fast-Track Hostess & Single Point of Contact (Axel)', spec: '7/7 Direct WhatsApp Concierge Support', description: 'One senior coordinator (Axel) manages your guest list, table placement, and late arrivals in real time until the party ends.' },
+    { id: 's9', title: 'VIP Fast-Track Hostess & Single Point of Contact (Concierge)', spec: '7/7 Direct WhatsApp Concierge Support', description: 'One senior coordinator (Concierge) manages your guest list, table placement, and late arrivals in real time until the party ends.' },
     { id: 's10', title: 'Written All-Inclusive Quote & Corporate Invoicing', spec: 'Zero Hidden Fees · Clear Per-Person Pricing', description: 'Transparent written summary detailing drinks, buffet, cake fee, and cloakroom upfront, plus electronic invoicing (SDI/EU VAT) for corporate clients.' },
   ];
 }
@@ -1035,8 +1035,8 @@ export function resolveVenueEventsForCarousel(venue: Venue, locale: string): {
       href: `/${locale}/events/${slug}`,
       whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
         isIt
-          ? `Ciao Axel, vorrei info/lista/tavolo per ${ev.officialName || vName} da ${vName} (${dStr})`
-          : `Hi Axel, I'd like guest list / VIP table info for ${ev.officialName || vName} at ${vName} (${dStr})`
+          ? `Ciao Nightlife Milan, vorrei info/lista/tavolo per ${ev.officialName || vName} da ${vName} (${dStr})`
+          : `Hi Nightlife Milan, I'd like guest list / VIP table info for ${ev.officialName || vName} at ${vName} (${dStr})`
       )}`,
       badge,
     };
@@ -1080,10 +1080,10 @@ export function resolveVenueEventsForCarousel(venue: Venue, locale: string): {
     href: `/${locale}/events/${w.eventSlug || w.id}`,
     whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
       isIt
-        ? `Ciao Axel, vorrei prenotare per la serata ${w.name} da ${vName}`
-        : `Hi Axel, I'd like to book for ${w.name} at ${vName}`
+        ? `Ciao Nightlife Milan, vorrei prenotare per la serata ${w.name} da ${vName}`
+        : `Hi Nightlife Milan, I'd like to book for ${w.name} at ${vName}`
       )}`,
-    badge: isIt ? 'PROPOSTA AXEL' : 'AXEL PICK',
+    badge: isIt ? 'PROPOSTA Nightlife Milan' : 'Nightlife Milan PICK',
     isRecurring: true,
   }));
 
@@ -1101,10 +1101,10 @@ export function resolveVenueEventsForCarousel(venue: Venue, locale: string): {
       href: `/${locale}/private-parties`,
       whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
         isIt
-          ? `Ciao Axel, vorrei riservare un'isola aperitivo / festa questa settimana da ${vName}`
-          : `Hi Axel, I'd like to reserve an aperitivo island this week at ${vName}`
+          ? `Ciao Nightlife Milan, vorrei riservare un'isola aperitivo / festa questa settimana da ${vName}`
+          : `Hi Nightlife Milan, I'd like to reserve an aperitivo island this week at ${vName}`
       )}`,
-      badge: isIt ? 'PROPOSTA AXEL #1' : 'AXEL PROPOSAL #1',
+      badge: isIt ? 'PROPOSTA Nightlife Milan #1' : 'Nightlife Milan PROPOSAL #1',
       isRecurring: true,
     },
     {
@@ -1119,10 +1119,10 @@ export function resolveVenueEventsForCarousel(venue: Venue, locale: string): {
       href: `/${locale}/vip-tables`,
       whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
         isIt
-          ? `Ciao Axel, vorrei il listino tavoli e bottiglie per questa settimana da ${vName}`
-          : `Hi Axel, I'd like the VIP table & bottle menu for this week at ${vName}`
+          ? `Ciao Nightlife Milan, vorrei il listino tavoli e bottiglie per questa settimana da ${vName}`
+          : `Hi Nightlife Milan, I'd like the VIP table & bottle menu for this week at ${vName}`
       )}`,
-      badge: isIt ? 'PROPOSTA AXEL #2' : 'AXEL PROPOSAL #2',
+      badge: isIt ? 'PROPOSTA Nightlife Milan #2' : 'Nightlife Milan PROPOSAL #2',
       isRecurring: true,
     },
     {
@@ -1139,10 +1139,10 @@ export function resolveVenueEventsForCarousel(venue: Venue, locale: string): {
       href: `/${locale}/private-parties`,
       whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
         isIt
-          ? `Ciao Axel, vorrei organizzare una festa privata da ${vName}`
-          : `Hi Axel, I'd like to organize a private celebration at ${vName}`
+          ? `Ciao Nightlife Milan, vorrei organizzare una festa privata da ${vName}`
+          : `Hi Nightlife Milan, I'd like to organize a private celebration at ${vName}`
       )}`,
-      badge: isIt ? 'PROPOSTA AXEL #3' : 'AXEL PROPOSAL #3',
+      badge: isIt ? 'PROPOSTA Nightlife Milan #3' : 'Nightlife Milan PROPOSAL #3',
       isRecurring: true,
     },
   ];
@@ -1165,8 +1165,8 @@ export function resolveVenueEventsForCarousel(venue: Venue, locale: string): {
       href: `/${locale}/new-years-eve/${capEvent.slug}`,
       whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
         isIt
-          ? `Ciao Axel, vorrei info e prevendite per Capodanno da ${vName}`
-          : `Hi Axel, I'd like NYE tickets / tables info for ${vName}`
+          ? `Ciao Nightlife Milan, vorrei info e prevendite per Capodanno da ${vName}`
+          : `Hi Nightlife Milan, I'd like NYE tickets / tables info for ${vName}`
       )}`,
       badge: isIt ? 'CAPODANNO 31 DIC' : 'NYE 31 DEC',
     });

@@ -3,6 +3,7 @@ import type { NextRequest } from 'next/server';
 import { enabledLocaleCodes, LOCALES } from '@/lib/i18n/locales';
 import { isEventBatchLocaleHttpIndexable } from '@/lib/eventBatchProfiles';
 import { isRemovedCuratedSitePath } from '@/lib/eventVisibility';
+import { resolveSeoHubPathToCanonical } from '@/lib/i18n/localizedSlugs35';
 
 // Lingue attive dal registry unico (lib/i18n/locales.ts): attivare una lingua lì
 // la rende automaticamente instradabile qui, senza toccare il middleware.
@@ -104,7 +105,16 @@ export function middleware(request: NextRequest) {
       return NextResponse.redirect(url);
     }
     const firstSegment = pathname.split('/')[1];
-    const res = NextResponse.next();
+    const restPath = pathname.slice(firstSegment.length + 1) || '/';
+    const canonicalSeoPath = resolveSeoHubPathToCanonical(restPath);
+    let res: NextResponse;
+    if (canonicalSeoPath && canonicalSeoPath !== restPath) {
+      const rewriteUrl = new URL(`/${firstSegment}${canonicalSeoPath}`, request.url);
+      rewriteUrl.search = request.nextUrl.search;
+      res = NextResponse.rewrite(rewriteUrl);
+    } else {
+      res = NextResponse.next();
+    }
     // Visitare una pagina con prefisso lingua memorizza la scelta: da qui in poi
     // il cookie vince sull'auto-rilevamento (il selettore lo setta anche lato client).
     res.cookies.set('NEXT_LOCALE', firstSegment, { path: '/', maxAge: 31536000, sameSite: 'lax' });

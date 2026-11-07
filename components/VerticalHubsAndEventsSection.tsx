@@ -8,13 +8,12 @@ import {
   getOccasionsCatalog,
   getTradeFairsCatalog,
   getHolidaysCatalog,
-  getAxelNetworkBlueprints,
   resolveSuggestedEventsForVertical,
 } from '@/lib/verticalsHubData';
 
 interface VerticalHubsAndEventsSectionProps {
   locale: string;
-  initialTab?: 'occasions' | 'fairs' | 'holidays' | 'blueprints';
+  initialTab?: 'occasions' | 'fairs' | 'holidays';
   eventFocus?: 'all' | 'occasions' | 'tradeFairs' | 'holidays' | 'sanSiro' | 'concerts';
 }
 
@@ -23,7 +22,7 @@ export default function VerticalHubsAndEventsSection({
   initialTab = 'occasions',
   eventFocus = 'all',
 }: VerticalHubsAndEventsSectionProps) {
-  const [activeTab, setActiveTab] = useState<'occasions' | 'fairs' | 'holidays' | 'blueprints'>(
+  const [activeTab, setActiveTab] = useState<'occasions' | 'fairs' | 'holidays'>(
     initialTab
   );
   const carouselRef = useRef<HTMLDivElement | null>(null);
@@ -32,7 +31,6 @@ export default function VerticalHubsAndEventsSection({
   const occasions = getOccasionsCatalog(locale);
   const fairs = getTradeFairsCatalog(locale);
   const holidays = getHolidaysCatalog(locale);
-  const blueprints = getAxelNetworkBlueprints(locale);
   const suggestedEvents = resolveSuggestedEventsForVertical(eventFocus, locale);
 
   const activeCards =
@@ -64,14 +62,13 @@ export default function VerticalHubsAndEventsSection({
           <p className="mt-2 text-sm sm:text-base text-zinc-300">{ui.mainSubtitle}</p>
         </div>
 
-        {/* 4 Pillar Tabs */}
+        {/* 3 Pillar Tabs */}
         <div className="mt-6 flex flex-wrap gap-2 border-b border-white/10 pb-5" role="tablist">
           {(
             [
               { key: 'occasions', label: ui.tabOccasions, count: occasions.length },
               { key: 'fairs', label: ui.tabFairs, count: fairs.length },
               { key: 'holidays', label: ui.tabHolidays, count: holidays.length },
-              { key: 'blueprints', label: ui.tabBlueprints, count: blueprints.length },
             ] as const
           ).map((t) => {
             const active = activeTab === t.key;
@@ -101,44 +98,8 @@ export default function VerticalHubsAndEventsSection({
           })}
         </div>
 
-        {/* Tab Content: Cards or CRO/UX/Storytelling Blueprints */}
-        {activeTab === 'blueprints' ? (
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-            {blueprints.map((bp) => (
-              <div
-                key={bp.id}
-                className="rounded-2xl border border-white/12 bg-zinc-900/85 p-6 flex flex-col justify-between"
-              >
-                <div>
-                  <span className="inline-block rounded-lg bg-amber-500/15 border border-amber-400/30 px-3 py-1 text-xs font-semibold text-amber-300">
-                    {bp.portalCluster}
-                  </span>
-                  <h3 className="mt-3 text-xl font-bold text-white">{bp.title}</h3>
-                  <div className="mt-4 space-y-3 text-xs sm:text-sm">
-                    <div className="rounded-xl bg-zinc-950/80 border border-white/10 p-3.5">
-                      <span className="font-bold text-emerald-400 uppercase text-[11px] tracking-wider block">
-                        CRO & Conversion Architecture
-                      </span>
-                      <p className="mt-1 text-zinc-200">{bp.croPrinciple}</p>
-                    </div>
-                    <div className="rounded-xl bg-zinc-950/80 border border-white/10 p-3.5">
-                      <span className="font-bold text-amber-300 uppercase text-[11px] tracking-wider block">
-                        UX / UI & Interactive Template
-                      </span>
-                      <p className="mt-1 text-zinc-200">{bp.uxUiPattern}</p>
-                    </div>
-                    <div className="rounded-xl bg-zinc-950/80 border border-white/10 p-3.5">
-                      <span className="font-bold text-sky-300 uppercase text-[11px] tracking-wider block">
-                        Copywriting & Storytelling Standard
-                      </span>
-                      <p className="mt-1 text-zinc-200">{bp.copyStorytellingRule}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
+        {/* Tab Content: Cards */}
+        {(
           <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
             {activeCards.map((card) => (
               <article

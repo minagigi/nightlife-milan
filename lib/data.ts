@@ -2753,7 +2753,7 @@ for (const g of mockGuides) {
 for (const v of mockVenues) {
   const map35 = VENUE_SLUGS_35[v.id] || VENUE_SLUGS_35[v.slugs.en];
   if (map35) {
-    v.slugs = { ...map35, ...v.slugs };
+    v.slugs = { ...v.slugs, ...map35, en: v.slugs.en };
   }
 }
 for (const ev of mockEvents) {

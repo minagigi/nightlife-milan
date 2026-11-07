@@ -9,6 +9,8 @@ import {
   getLocalizedGenreSlug35,
   getExistingGuideSlug35,
   resolveExistingGuideId,
+  getLocalizedSeoPagePath35,
+  resolveSeoHubPathToCanonical,
 } from '@/lib/i18n/localizedSlugs35';
 
 // Il prefisso va riconosciuto per TUTTI i codici del registry (anche i path
@@ -42,7 +44,10 @@ export default function LanguageSwitcher({ currentLocale }: { currentLocale: str
     const zoneMatch = pathWithoutLocale.match(/^\/zones\/([^/]+)$/);
     const genreMatch = pathWithoutLocale.match(/^\/genres\/([^/]+)$/);
     const guideMatch = pathWithoutLocale.match(/^\/guides\/([^/]+)$/);
-    if (clubMatch) {
+    const canonicalHub = resolveSeoHubPathToCanonical(pathWithoutLocale);
+    if (canonicalHub && !clubMatch && !zoneMatch && !genreMatch && !guideMatch) {
+      pathWithoutLocale = getLocalizedSeoPagePath35(canonicalHub, loc);
+    } else if (clubMatch) {
       pathWithoutLocale = `/clubs/${getLocalizedVenueSlug35(clubMatch[1], loc)}`;
     } else if (zoneMatch) {
       pathWithoutLocale = `/zones/${getLocalizedZoneSlug35(zoneMatch[1], loc)}`;

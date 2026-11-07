@@ -303,7 +303,7 @@ export default function VenueEventsAutoCarousel({
           </div>
           <a
             href={`https://wa.me/393519127047?text=${encodeURIComponent(
-              `Ciao Axel, vorrei info e prezzi aggiornati per ${venueName}`
+              `Ciao Nightlife Milan, vorrei info e prezzi aggiornati per ${venueName}`
             )}`}
             target="_blank"
             rel="noopener noreferrer"

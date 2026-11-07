@@ -1,3 +1,5 @@
+import { getLocalizedSeoPagePath35 } from '@/lib/i18n/localizedSlugs35';
+import type { LocaleCode } from '@/lib/i18n/locales';
 import type { LocaleCode } from './i18n/locales';
 import { isEnabledLocale } from './i18n/locales';
 import { OCTOBER_EVENTS } from './octoberEvents';
@@ -24,7 +26,7 @@ export interface VerticalHubUi35 {
 }
 
 const HUB_UI_EN: VerticalHubUi35 = {
-  eyebrow: 'AXEL 360° MILAN NIGHTLIFE & HOSPITALITY ECOSYSTEM',
+  eyebrow: 'Nightlife Milan 360° MILAN NIGHTLIFE & HOSPITALITY ECOSYSTEM',
   mainTitle: 'Year-Round Celebrations, Trade Fairs, Major Holidays & Concierge Guides',
   mainSubtitle:
     'Complete vertical dossiers, official calendars, turnkey packages, and auto-updated event suggestions across all 26 Milan venues.',
@@ -44,17 +46,17 @@ const HUB_UI_EN: VerticalHubUi35 = {
 
 const HUB_UI_OVERRIDES: Partial<Record<LocaleCode, Partial<VerticalHubUi35>>> = {
   it: {
-    eyebrow: 'ECOSISTEMA COMPLETO EVENTI, FIERE, FESTE & LOCALI DI AXEL A MILANO',
+    eyebrow: 'ECOSISTEMA COMPLETO EVENTI, FIERE, FESTE & LOCALI NIGHTLIFE MILAN',
     mainTitle: 'Tutte le Evenienze dell’Anno, le Fiere Internazionali, le Feste Comandate e le Guide',
     mainSubtitle:
-      'Sezioni verticali complete con schede dedicate, pacchetti chiavi in mano dai 17 portali Top Player Eventi di Axel ed eventi suggeriti autoaggiornati.',
+      'Sezioni verticali complete con schede dedicate, pacchetti chiavi in mano dal Concierge Ufficiale Nightlife Milan ed eventi suggeriti autoaggiornati.',
     tabOccasions: 'Evenienze Tutto l’Anno & Feste Private',
     tabFairs: 'Fiere di Milano, Fashion & Design Week',
     tabHolidays: 'Feste Comandate & Ricorrenze',
-    tabBlueprints: 'Standard CRO, UX/UI, Copy & 17 Siti Axel',
+    tabBlueprints: 'Standard CRO, UX/UI, Copy & Nightlife Milan Concierge',
     suggestedEventsTitle: 'Eventi Suggeriti e Prossime Date in Automatico',
     suggestedEventsSubtitle:
-      'Eventi in programma, serate settimanali proposte da Axel e date future aggiornate automaticamente su template.',
+      'Eventi in programma, serate settimanali proposte dal Concierge Nightlife Milan e date future aggiornate automaticamente su template.',
     bookWhatsApp: 'Preventivo WhatsApp (+39 351 912 7047)',
     exploreGuide: 'Apri Pagina Verticale',
     venuesLabel: 'Locali Consigliati',
@@ -362,7 +364,7 @@ export function getOccasionsCatalog(locale: string): VerticalCardItem[] {
             'Screen/projector support for tribute videos and microphone toast',
           ],
       href: `/${locale}/private-parties`,
-      whatsappText: 'Ciao Axel, vorrei organizzare una Festa di Laurea a Milano: mi mandi le proposte locali e prezzi?',
+      whatsappText: 'Ciao Nightlife Milan, vorrei organizzare una Festa di Laurea a Milano: mi mandi le proposte locali e prezzi?',
       imageSrc: '/images/venues/55-milano/55-milano-interior-01.webp',
     },
     {
@@ -393,7 +395,7 @@ export function getOccasionsCatalog(locale: string): VerticalCardItem[] {
             'Split per-guest fixed package or single prepaid bottle tab',
           ],
       href: `/${locale}/private-parties`,
-      whatsappText: 'Ciao Axel, vorrei un preventivo per una Festa di Compleanno a Milano',
+      whatsappText: 'Ciao Nightlife Milan, vorrei un preventivo per una Festa di Compleanno a Milano',
       imageSrc: '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp',
     },
     {
@@ -414,7 +416,7 @@ export function getOccasionsCatalog(locale: string): VerticalCardItem[] {
       recommendedVenues: ['Pineta Milano', 'Tocqueville 13', 'Just Me Milano', '55 Milano', 'Hollywood', 'The Club'],
       highlights: isIt
         ? [
-            'Regola d’oro Top Player: nei gruppi da almeno 10 persone la quota dello sposo o della sposa è omaggio',
+            'Regola d’oro Nightlife Milan: nei gruppi da almeno 10 persone la quota dello sposo o della sposa è omaggio',
             'Tavolo della cena che si trasforma direttamente nella vostra base privata per la discoteca',
             'Transfer in Limousine Lincoln/Hummer o Party Bus tra ristorante e club',
           ]
@@ -424,7 +426,7 @@ export function getOccasionsCatalog(locale: string): VerticalCardItem[] {
             'Private Limousine or Party Bus transfer across Milan',
           ],
       href: `/${locale}/private-parties`,
-      whatsappText: 'Ciao Axel, vorrei i pacchetti per Addio al Celibato / Nubilato a Milano',
+      whatsappText: 'Ciao Nightlife Milan, vorrei i pacchetti per Addio al Celibato / Nubilato a Milano',
       imageSrc: '/images/venues/pineta-milano/pineta-milano-interior-01.webp',
     },
     {
@@ -445,17 +447,17 @@ export function getOccasionsCatalog(locale: string): VerticalCardItem[] {
       recommendedVenues: ['Just Me Milano', '55 Milano', 'Pineta Milano', 'Voya Milano', 'MIB Milano'],
       highlights: isIt
         ? [
-            'Protocollo zero-spoiler: lista nominale segreta gestita direttamente da Axel con lo staff d’ingresso',
+            'Protocollo zero-spoiler: lista nominale segreta gestita direttamente da Nightlife Milan Concierge con lo staff d’ingresso',
             'Torte ironiche «Finalmente Libero/a» e bottle show con scritte luminose al tavolo',
             'Fotografo pronto a immortalare il momento esatto dell’arrivo',
           ]
         : [
-            'Zero-spoiler protocol: secret guest list coordinated by Axel with the door team',
+            'Zero-spoiler protocol: secret guest list coordinated by Nightlife Milan Concierge with the door team',
             'Custom themed cakes and LED message boards delivered with sparklers',
             'Photographer positioned to capture the exact surprise reveal',
           ],
       href: `/${locale}/private-parties`,
-      whatsappText: 'Ciao Axel, vorrei organizzare una Festa a Sorpresa / Festa Nuovo Inizio a Milano',
+      whatsappText: 'Ciao Nightlife Milan, vorrei organizzare una Festa a Sorpresa / Festa Nuovo Inizio a Milano',
       imageSrc: '/images/venues/voya-milano/voya-milano-interior-01.webp',
     },
     {
@@ -486,7 +488,7 @@ export function getOccasionsCatalog(locale: string): VerticalCardItem[] {
             'Singing Dinner Show format transitioning directly into the after-dinner party under one roof',
           ],
       href: `/${locale}/private-parties`,
-      whatsappText: 'Ciao Axel, richiedo preventivo con fattura per un Evento Aziendale / Cena Spettacolo a Milano',
+      whatsappText: 'Ciao Nightlife Milan, richiedo preventivo con fattura per un Evento Aziendale / Cena Spettacolo a Milano',
       imageSrc: '/images/venues/gattopardo/gattopardo-interior-01.webp',
     },
     {
@@ -517,7 +519,7 @@ export function getOccasionsCatalog(locale: string): VerticalCardItem[] {
             'Just Me is open 7 nights a week for Tuesday/Wednesday Champions League and midweek arena concerts',
           ],
       href: `/${locale}/football-afterparties`,
-      whatsappText: 'Ciao Axel, vorrei prenotare lista/tavolo per il Dopo-Partita / Dopo-Concerto a Milano',
+      whatsappText: 'Ciao Nightlife Milan, vorrei prenotare lista/tavolo per il Dopo-Partita / Dopo-Concerto a Milano',
       imageSrc: '/images/venues/aria-club-milano/aria-club-milano-interior-01.webp',
     },
   ];
@@ -554,7 +556,7 @@ export function getTradeFairsCatalog(locale: string): VerticalCardItem[] {
             'Priority door coordination on sold-out Fashion Week peak nights',
           ],
       href: `/${locale}/milan-fashion-week`,
-      whatsappText: 'Ciao Axel, vorrei il calendario eventi e listino tavoli per la Milan Fashion Week',
+      whatsappText: 'Ciao Nightlife Milan, vorrei il calendario eventi e listino tavoli per la Milan Fashion Week',
       imageSrc: '/images/venues/armani-prive-milano/armani-prive-milano-interior-01.webp',
     },
     {
@@ -585,7 +587,7 @@ export function getTradeFairsCatalog(locale: string): VerticalCardItem[] {
             'Backstage VIP tables for Design Week electronic music showcases at Fabrique, Amnesia, and Just Me',
           ],
       href: `/${locale}/events/special`,
-      whatsappText: 'Ciao Axel, vorrei organizzare cena/tavoli durante il Salone del Mobile & Fuorisalone',
+      whatsappText: 'Ciao Nightlife Milan, vorrei organizzare cena/tavoli durante il Salone del Mobile & Fuorisalone',
       imageSrc: '/images/venues/ceresio-7/ceresio-7-interior-01.webp',
     },
     {
@@ -616,7 +618,7 @@ export function getTradeFairsCatalog(locale: string): VerticalCardItem[] {
             'Instant corporate VAT invoicing for domestic and international exhibitors',
           ],
       href: `/${locale}/events/special`,
-      whatsappText: 'Ciao Axel, siamo espositori/visitatori fiera (MIDO/BIT/MICAM/Lineapelle) e cerchiamo cena/tavolo a Milano',
+      whatsappText: 'Ciao Nightlife Milan, siamo espositori/visitatori fiera (MIDO/BIT/MICAM/Lineapelle) e cerchiamo cena/tavolo a Milano',
       imageSrc: '/images/venues/mib-milano/mib-milano-interior-01.webp',
     },
     {
@@ -647,7 +649,7 @@ export function getTradeFairsCatalog(locale: string): VerticalCardItem[] {
             'EICMA November: high-energy automotive and motorsport afterparties across Milan',
           ],
       href: `/${locale}/events/special`,
-      whatsappText: 'Ciao Axel, vorrei prenotare per il weekend F1 Monza / HostMilano / EICMA / TuttoFood',
+      whatsappText: 'Ciao Nightlife Milan, vorrei prenotare per il weekend F1 Monza / HostMilano / EICMA / TuttoFood',
       imageSrc: '/images/venues/terrazza-21/terrazza-21-interior-01.webp',
     },
   ];
@@ -684,7 +686,7 @@ export function getHolidaysCatalog(locale: string): VerticalCardItem[] {
             'Live December 31st WhatsApp concierge support for door entry and group arrivals',
           ],
       href: `/${locale}/new-years-eve`,
-      whatsappText: 'Ciao Axel, vorrei il catalogo completo e i prezzi di Capodanno a Milano (Cenone, Buffet e Tavoli)',
+      whatsappText: 'Ciao Nightlife Milan, vorrei il catalogo completo e i prezzi di Capodanno a Milano (Cenone, Buffet e Tavoli)',
       imageSrc: '/images/venues/just-me-milano/just-me-milano-lounge-01.webp',
     },
     {
@@ -715,7 +717,7 @@ export function getHolidaysCatalog(locale: string): VerticalCardItem[] {
             'Guaranteed skip-the-line entry with official presale or VIP table wristbands',
           ],
       href: `/${locale}/events/special`,
-      whatsappText: 'Ciao Axel, vorrei prevendite o tavolo VIP per la notte di Halloween (31 Ottobre) a Milano',
+      whatsappText: 'Ciao Nightlife Milan, vorrei prevendite o tavolo VIP per la notte di Halloween (31 Ottobre) a Milano',
       imageSrc: '/images/pillars/venue-alcatraz.webp',
     },
     {
@@ -746,7 +748,7 @@ export function getHolidaysCatalog(locale: string): VerticalCardItem[] {
             'Special club nights on December 6, 7, and 8 for the Sant’Ambrogio and Immacolata holiday bridge',
           ],
       href: `/${locale}/private-parties`,
-      whatsappText: 'Ciao Axel, vorrei un preventivo per Cena di Natale Aziendale / Ponte Sant’Ambrogio a Milano',
+      whatsappText: 'Ciao Nightlife Milan, vorrei un preventivo per Cena di Natale Aziendale / Ponte Sant’Ambrogio a Milano',
       imageSrc: '/images/venues/55-milano/55-milano-friday-dinner-show-01.webp',
     },
     {
@@ -777,13 +779,13 @@ export function getHolidaysCatalog(locale: string): VerticalCardItem[] {
             'August 15th Ferragosto: open-air garden parties under Torre Branca (Just Me) and at Aria Club',
           ],
       href: `/${locale}/events/special`,
-      whatsappText: 'Ciao Axel, vorrei informazioni per San Valentino / Festa della Donna / Carnevale / Ferragosto a Milano',
+      whatsappText: 'Ciao Nightlife Milan, vorrei informazioni per San Valentino / Festa della Donna / Carnevale / Ferragosto a Milano',
       imageSrc: '/images/venues/aria-club-milano/aria-club-milano-garden-01.webp',
     },
   ];
 }
 
-export interface AxelBlueprintItem {
+export interface NightlifeBlueprintItem {
   id: string;
   portalCluster: string;
   title: string;
@@ -792,13 +794,13 @@ export interface AxelBlueprintItem {
   copyStorytellingRule: string;
 }
 
-export function getAxelNetworkBlueprints(locale: string): AxelBlueprintItem[] {
+export function getNightlifeBlueprints(locale: string): NightlifeBlueprintItem[] {
   const isIt = locale === 'it';
   if (isIt) {
     return [
       {
         id: 'bp-1',
-        portalCluster: 'Feste di Laurea · Compleanni · Top Player Eventi',
+        portalCluster: 'Feste di Laurea · Compleanni · Nightlife Milan Concierge',
         title: 'Chiarezza Prezzi a Persona & Zero Costi Nascosti',
         croPrinciple: 'Dichiarare subito le 3 fasce reali (20€ aperitivo, 25€ pacchetto 2 drink + zona riservata, 35–50€ cena) elimina l’ansia da preventivo e raddoppia i contatti qualificati.',
         uxUiPattern: 'Tabella comparativa a 3 colonne + selettore dei 7 Atenei Milanesi con tempi reali di metropolitana.',
@@ -818,14 +820,14 @@ export function getAxelNetworkBlueprints(locale: string): AxelBlueprintItem[] {
         title: 'Fattura Elettronica SDI, Sopralluogo & Logistica M1/M5 Fiera',
         croPrinciple: 'Per HR, Office Manager ed espositori fieristici i fattori decisivi sono fatturazione immediata, gestione intolleranze e vicinanza alla metro M1 (Rho) / M5 (MiCo).',
         uxUiPattern: 'Scheda tecnica con capienze reali (seduti vs standing cocktail), dotazione audio/video/SIAE e bottone richiesta PDF aziendale.',
-        copyStorytellingRule: 'Linguaggio esecutivo: un unico referente (Axel) dal sopralluogo tecnico fino alla chiusura della sala.',
+        copyStorytellingRule: 'Linguaggio esecutivo: un unico referente (Concierge) dal sopralluogo tecnico fino alla chiusura della sala.',
       },
       {
         id: 'bp-4',
         portalCluster: 'Capodanno · Feste di Natale · San Valentino · Discoteche & Rooftop',
         title: 'Locandina Integrale (`object-contain`) & Contatto Ufficiale Unico',
         croPrinciple: 'Mostrare sempre la locandina ufficiale intera non tagliata insieme a data, orario, prezzo minimo e bottone WhatsApp `+39 351 912 7047` massimizza la fiducia.',
-        uxUiPattern: 'Carosello interattivo con filtro Stasera / In Settimana / Proposte Axel / Futuro + vista Griglia.',
+        uxUiPattern: 'Carosello interattivo con filtro Stasera / In Settimana / Proposte Nightlife Milan Concierge / Futuro + vista Griglia.',
         copyStorytellingRule: 'Zero frasi generiche da intelligenza artificiale: solo indirizzi veri, fermate metro esatte e consigli pratici da chi vive la porta dei club ogni sera.',
       },
     ];
@@ -833,7 +835,7 @@ export function getAxelNetworkBlueprints(locale: string): AxelBlueprintItem[] {
   return [
     {
       id: 'bp-1',
-      portalCluster: 'Graduations · Milestone Birthdays · Top Player Eventi',
+      portalCluster: 'Graduations · Milestone Birthdays · Nightlife Milan Concierge',
       title: 'Transparent Per-Person Pricing & Zero Hidden Fees',
       croPrinciple: 'Publishing exact per-person tiers upfront (€20 aperitivo, €25 2-drink party package, €35–€50 seated dinner) removes friction and doubles qualified WhatsApp leads.',
       uxUiPattern: '3-tier comparison matrix + 7-University campus proximity table with exact Metro lines.',
@@ -853,14 +855,14 @@ export function getAxelNetworkBlueprints(locale: string): AxelBlueprintItem[] {
       title: 'Instant Corporate Invoicing, Site Visits & Rho/MiCo M1/M5 Transit',
       croPrinciple: 'Corporate planners and trade fair exhibitors prioritize single-invoice billing, dietary safety, AV/SIAE compliance, and 15-minute M1/M5 metro access.',
       uxUiPattern: 'Technical spec cards listing seated vs. standing capacities, AV equipment, and 1-click corporate quote requests.',
-      copyStorytellingRule: 'Executive precision: one senior point of contact (Axel) from technical walkthrough to final toast.',
+      copyStorytellingRule: 'Executive precision: one senior point of contact (Concierge) from technical walkthrough to final toast.',
     },
     {
       id: 'bp-4',
       portalCluster: 'New Year’s Eve · Holidays · Clubs, Rooftops & Aperitivo',
       title: 'Uncropped Official Flyers (`object-contain`) & Verified Concierge Desk',
       croPrinciple: 'Displaying full uncropped event posters alongside verified dates, minimum prices, and direct WhatsApp booking (+39 351 912 7047) builds instant trust.',
-      uxUiPattern: 'Auto-updating Carousel + Grid toggle with Tonight, This Week, Axel’s Proposals, and Future tabs.',
+      uxUiPattern: 'Auto-updating Carousel + Grid toggle with Tonight, This Week, Nightlife Milan Concierge’s Proposals, and Future tabs.',
       copyStorytellingRule: 'Zero generic filler: only real Milan street addresses, exact metro stops, door policies, and authentic insider tips.',
     },
   ];
@@ -913,8 +915,8 @@ export function resolveSuggestedEventsForVertical(
       href: `/${locale}/events/${slug}`,
       whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
         isIt
-          ? `Ciao Axel, vorrei prenotare lista/tavolo per ${ev.officialName || ev.venue.name} da ${ev.venue.name} (${dStr})`
-          : `Hi Axel, I'd like to book guest list / VIP table for ${ev.officialName || ev.venue.name} at ${ev.venue.name} (${dStr})`
+          ? `Ciao Nightlife Milan, vorrei prenotare lista/tavolo per ${ev.officialName || ev.venue.name} da ${ev.venue.name} (${dStr})`
+          : `Hi Nightlife Milan, I'd like to book guest list / VIP table for ${ev.officialName || ev.venue.name} at ${ev.venue.name} (${dStr})`
       )}`,
       badge: isIt ? 'PROSSIMO EVENTO' : 'UPCOMING LIVE',
     };
@@ -934,10 +936,10 @@ export function resolveSuggestedEventsForVertical(
       href: `/${locale}/events/${w.eventSlug || w.id}`,
       whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
         isIt
-          ? `Ciao Axel, vorrei info per la serata ${w.name} (${w.clubName})`
-          : `Hi Axel, I'd like info for ${w.name} (${w.clubName})`
+          ? `Ciao Nightlife Milan, vorrei info per la serata ${w.name} (${w.clubName})`
+          : `Hi Nightlife Milan, I'd like info for ${w.name} (${w.clubName})`
       )}`,
-      badge: isIt ? 'SERATA PROPOSTA' : 'AXEL WEEKLY PICK',
+      badge: isIt ? 'SERATA PROPOSTA' : 'CONCIERGE WEEKLY PICK',
       isRecurring: true,
     });
   }
@@ -957,8 +959,8 @@ export function resolveSuggestedEventsForVertical(
         href: `/${locale}/new-years-eve/${cap.slug}`,
         whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
           isIt
-            ? `Ciao Axel, vorrei info per Capodanno da ${cap.venueName}`
-            : `Hi Axel, I'd like NYE info for ${cap.venueName}`
+            ? `Ciao Nightlife Milan, vorrei info per Capodanno da ${cap.venueName}`
+            : `Hi Nightlife Milan, I'd like NYE info for ${cap.venueName}`
         )}`,
         badge: isIt ? 'CAPODANNO 31 DIC' : 'NYE 31 DEC',
       });

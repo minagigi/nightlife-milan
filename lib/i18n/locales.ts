@@ -117,12 +117,16 @@ export function localePrefix(code: string): string {
 }
 
 /** Mappa hreflang → URL per alternates.languages (SOLO lingue indexed + x-default) */
+import { getLocalizedSeoPagePath35 } from './localizedSlugs35';
+
 export function hreflangAlternates(baseUrl: string, path: string): Record<string, string> {
   const out: Record<string, string> = {};
   for (const l of INDEXED_LOCALES) {
-    out[l.hreflang] = `${baseUrl}${localePrefix(l.code)}${path}` || `${baseUrl}/`;
+    const locPath = path ? getLocalizedSeoPagePath35(path, l.code) : '';
+    out[l.hreflang] = `${baseUrl}${localePrefix(l.code)}${locPath}` || `${baseUrl}/`;
   }
-  out['x-default'] = `${baseUrl}${path}` || `${baseUrl}/`;
+  const enPath = path ? getLocalizedSeoPagePath35(path, 'en') : '';
+  out['x-default'] = `${baseUrl}${enPath}` || `${baseUrl}/`;
   return out;
 }
 
@@ -137,6 +141,7 @@ export function hreflangAlternatesForLocales(
     if (!locale) continue;
     out[locale.hreflang] = `${baseUrl}${localePrefix(code)}${path}` || `${baseUrl}/`;
   }
-  out['x-default'] = `${baseUrl}${path}` || `${baseUrl}/`;
+  const enPath = path ? getLocalizedSeoPagePath35(path, 'en') : '';
+  out['x-default'] = `${baseUrl}${enPath}` || `${baseUrl}/`;
   return out;
 }

@@ -175,7 +175,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '21+', 'Strictly Elegant', 'House and Electronic'),
     image: '/images/events/october-2026/249204-fcb5bf6cc4be.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/friday-night-724/249204/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/friday-night-groove-feat-damante-1/249206/channel/nightlifemilan-1',
     priority: 100
   },
   {
@@ -192,7 +192,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       en: 'The pinnacle of Milanese nightlife. Saturday Night at Just Me offers spectacular themed parties, premium bottle service, and an unforgettable atmosphere under the Torre Branca. The ultimate luxury clubbing experience.',
       it: 'L\'apice della vita notturna milanese. Il sabato sera al Just Me offre spettacolari feste a tema, servizio bottiglie premium e un\'atmosfera indimenticabile sotto la Torre Branca. L\'esperienza di clubbing di lusso per eccellenza.'
     },
-    pricing: { aperitif: 'From €20', club: 'From €20', tables: 'From €320 to €5,000' },
+    pricing: { aperitif: 'From €25', club: 'From €25', tables: 'From €320 to €5,000' },
     dressCode: {
       en: 'Strictly Elegant. Dress to impress.',
       it: 'Strettamente Elegante. Vestiti per impressionare.'
@@ -273,7 +273,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Pineta Club', 'Via Privata Giovanni Ventura 15, Milan', '25+', 'Elegant and Chic', 'Live Music and Commercial'),
     image: '/images/events/october-2026/243822-fa1698470cb9.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/friday-night-720/243822/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/friday-night-721/243823/channel/nightlifemilan-1',
     priority: 95
   },
   {

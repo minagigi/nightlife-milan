@@ -11,7 +11,7 @@ import { CAPODANNO_CATEGORY_IDS, capodannoCategoryPath, capodannoEventPath } fro
 import { halloweenPath } from '@/lib/halloween/routes';
 import { OCTOBER_EVENTS } from '@/lib/octoberEvents';
 import { getOctoberEventCopy } from '@/lib/october-events/copy';
-import { getLocalizedZoneSlug35, getLocalizedGenreSlug35 } from '@/lib/i18n/localizedSlugs35';
+import { getLocalizedZoneSlug35, getLocalizedGenreSlug35, getLocalizedSeoPagePath35 } from '@/lib/i18n/localizedSlugs35';
 
 export const revalidate = false;
 
@@ -86,12 +86,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   locales.forEach((locale) => {
     const langPrefix = localePrefix(locale);
     staticRoutes.forEach((route) => {
+      const locPath = route.path ? getLocalizedSeoPagePath35(route.path, locale) : '';
       sitemapEntries.push({
-        url: `${baseUrl}${langPrefix}${route.path}`,
+        url: `${baseUrl}${langPrefix}${locPath}`,
         lastModified: contentModified,
         changeFrequency: route.changeFrequency,
         priority: route.priority,
       });
+      if (locPath !== route.path && route.path === '/football-afterparties') {
+        sitemapEntries.push({
+          url: `${baseUrl}${langPrefix}${route.path}`,
+          lastModified: contentModified,
+          changeFrequency: route.changeFrequency,
+          priority: route.priority,
+        });
+      }
     });
   });
 

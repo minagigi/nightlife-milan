@@ -416,7 +416,7 @@ const venueSlugToCanonical = new Map<string, string>();
 
 for (const v of CANONICAL_VENUE_BASES) {
   const map35 = build35SlugMap((locale, tk) => {
-    if (locale === 'en' || locale === 'it') return v.canonicalSlug;
+    if (locale === 'en') return v.canonicalSlug;
     return `${v.brandSlug}-${tk.milan}-${tk.vipTables}`;
   });
   VENUE_SLUGS_35[v.canonicalSlug] = map35;
@@ -467,7 +467,7 @@ const zoneSlugToCanonical = new Map<string, string>();
 
 for (const z of CANONICAL_ZONES) {
   const map35 = build35SlugMap((locale, tk) => {
-    if (locale === 'en' || locale === 'it') return z.canonicalSlug;
+    if (locale === 'en') return z.canonicalSlug;
     return `${z.canonicalSlug}-${tk.milan}-${tk.nightlife}`;
   });
   ZONE_SLUGS_35[z.canonicalSlug] = map35;
@@ -514,7 +514,7 @@ const genreSlugToCanonical = new Map<string, string>();
 
 for (const g of CANONICAL_GENRES) {
   const map35 = build35SlugMap((locale, tk) => {
-    if (locale === 'en' || locale === 'it') return g.canonicalSlug;
+    if (locale === 'en') return g.canonicalSlug;
     return `${g.canonicalSlug}-${tk.milan}-${tk.music}`;
   });
   GENRE_SLUGS_35[g.canonicalSlug] = map35;
@@ -659,4 +659,76 @@ export function resolveExistingGuideId(slugOrId: string): string | undefined {
 export function getExistingGuideSlug35(guideIdOrSlug: string, locale: LocaleCode): string {
   const id = resolveExistingGuideId(guideIdOrSlug) || guideIdOrSlug;
   return EXISTING_14_GUIDE_SLUGS_35[id]?.[locale] || guideIdOrSlug;
+}
+
+// ─── 5. SEO HUB PAGES SLUGS (All 22 Static SEO Pages Across All 35 Languages) ─
+const SEO_HUB_SPECS: Array<{
+  canonicalPath: string;
+  itPath: string;
+  build: (tk: SlugLangTokens) => string;
+}> = [
+  { canonicalPath: '/vip-tables', itPath: '/tavoli-vip-milano', build: (tk) => `/${tk.vipTables}-${tk.milan}` },
+  { canonicalPath: '/private-parties', itPath: '/feste-private-laurea-compleanno-milano', build: (tk) => `/${tk.graduation}-${tk.birthday}-${tk.milan}` },
+  { canonicalPath: '/football-afterparties', itPath: '/dopo-partita-calcio-san-siro-milano', build: (tk) => `/san-siro-${tk.afterparty}-${tk.milan}` },
+  { canonicalPath: '/concert-afterparties', itPath: '/dopo-concerto-san-siro-milano', build: (tk) => `/concerts-${tk.afterparty}-${tk.milan}` },
+  { canonicalPath: '/new-years-eve', itPath: '/capodanno-milano-discoteche', build: (tk) => `/${tk.newYearsEve}-${tk.milan}` },
+  { canonicalPath: '/fashion-week', itPath: '/settimana-della-moda-milano', build: (tk) => `/${tk.fashionWeek}-${tk.milan}` },
+  { canonicalPath: '/milan-fashion-week', itPath: '/milano-fashion-week-eventi', build: (tk) => `/${tk.milan}-${tk.fashionWeek}-${tk.party}` },
+  { canonicalPath: '/rooftops', itPath: '/rooftop-terrazze-panoramiche-milano', build: (tk) => `/${tk.rooftop}-${tk.milan}` },
+  { canonicalPath: '/bottle-prices', itPath: '/listino-prezzi-bottiglie-tavoli-vip', build: (tk) => `/${tk.prices}-${tk.vipTables}-${tk.milan}` },
+  { canonicalPath: '/door-policy', itPath: '/selezione-ingresso-dress-code-milano', build: (tk) => `/${tk.dressCode}-${tk.club}-${tk.milan}` },
+  { canonicalPath: '/guest-lists', itPath: '/liste-ingresso-discoteche-milano', build: (tk) => `/guestlist-${tk.club}-${tk.milan}` },
+  { canonicalPath: '/aperitivo', itPath: '/aperitivo-cena-cantata-milano', build: (tk) => `/${tk.dinnerShow}-${tk.milan}` },
+  { canonicalPath: '/clubs', itPath: '/discoteche-locali-milano', build: (tk) => `/${tk.club}-${tk.milan}` },
+  { canonicalPath: '/guides', itPath: '/guide-vita-notturna-milano', build: (tk) => `/${tk.guide}-${tk.nightlife}-${tk.milan}` },
+  { canonicalPath: '/zones', itPath: '/quartieri-vita-notturna-milano', build: (tk) => `/${tk.zone}-${tk.nightlife}-${tk.milan}` },
+  { canonicalPath: '/genres', itPath: '/generi-musicali-discoteche-milano', build: (tk) => `/${tk.music}-${tk.milan}` },
+  { canonicalPath: '/events', itPath: '/eventi-serate-milano', build: (tk) => `/${tk.party}-${tk.nightlife}-${tk.milan}` },
+  { canonicalPath: '/events/tonight', itPath: '/eventi/stasera-milano', build: (tk) => `/events/tonight-${tk.milan}-${tk.party}` },
+  { canonicalPath: '/events/this-week', itPath: '/eventi/questa-settimana-milano', build: (tk) => `/events/this-week-${tk.milan}-${tk.party}` },
+  { canonicalPath: '/events/special', itPath: '/eventi/eventi-speciali-milano', build: (tk) => `/events/special-${tk.party}-${tk.milan}` },
+  { canonicalPath: '/concierge', itPath: '/concierge-vip-milano', build: (tk) => `/concierge-${tk.vipTables}-${tk.milan}` },
+  { canonicalPath: '/faq', itPath: '/domande-frequenti-discoteche-milano', build: (tk) => `/faq-${tk.nightlife}-${tk.milan}` },
+];
+
+export const SEO_HUB_PATHS_35: Record<string, Record<LocaleCode, string>> = {};
+const localizedSeoPathToCanonical = new Map<string, string>();
+
+for (const spec of SEO_HUB_SPECS) {
+  const map = {} as Record<LocaleCode, string>;
+  for (const locale of ALL_35_LOCALES) {
+    if (locale === 'en') {
+      map[locale] = spec.canonicalPath;
+    } else if (locale === 'it') {
+      map[locale] = spec.itPath;
+    } else {
+      const raw = spec.build(SLUG_TOKENS_35[locale]);
+      const parts = raw.split('/').filter(Boolean).map(sanitizeAsciiSlug);
+      map[locale] = '/' + parts.join('/');
+    }
+    localizedSeoPathToCanonical.set(map[locale], spec.canonicalPath);
+  }
+  SEO_HUB_PATHS_35[spec.canonicalPath] = map;
+  localizedSeoPathToCanonical.set(spec.canonicalPath, spec.canonicalPath);
+}
+
+export function getLocalizedSeoPagePath35(canonicalPath: string, locale: LocaleCode): string {
+  const norm = canonicalPath.startsWith('/') ? canonicalPath : `/${canonicalPath}`;
+  return SEO_HUB_PATHS_35[norm]?.[locale] || norm;
+}
+
+export function resolveSeoHubPathToCanonical(pathWithoutLocale: string): string | undefined {
+  const norm = pathWithoutLocale.startsWith('/') ? pathWithoutLocale : `/${pathWithoutLocale}`;
+  if (localizedSeoPathToCanonical.has(norm)) {
+    return localizedSeoPathToCanonical.get(norm);
+  }
+  // Check if first segment is a localized collection prefix (/discoteche-locali-milano/slug -> /clubs/slug)
+  const segments = norm.split('/').filter(Boolean);
+  if (segments.length === 2) {
+    const parentCanonical = localizedSeoPathToCanonical.get(`/${segments[0]}`);
+    if (parentCanonical && ['/clubs', '/guides', '/zones', '/genres', '/events'].includes(parentCanonical)) {
+      return `${parentCanonical}/${segments[1]}`;
+    }
+  }
+  return undefined;
 }

@@ -66,7 +66,7 @@ interface CompactLangPack {
   pricesNote: string;
   doorNote: string;
   logisticsNote: string;
-  axelNote: string;
+  conciergeNote: string;
   faqQ1: string;
   faqQ2: string;
   faqQ3: string;
@@ -83,7 +83,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "h2": "2. Precios Oficiales 2026/2027: Aperitivo Real, Cena Espectáculo, Mesas VIP y Botellas",
     "h3": "3. Dress Code, Selección en Puerta y Acceso Garantizado para Grupos de Hombres",
     "h4": "4. Metro, Parking Vigilado 24h, Conexión San Siro / Ferias y Cronograma (19:30–05:00)",
-    "h5": "5. Los 10 Servicios Gratuitos del Concierge Axel (+39 351 912 7047) y Top 6 Clubs de Milán",
+    "h5": "5. Los 10 Servicios Gratuitos del Concierge Nightlife Milan Concierge (+39 351 912 7047) y Top 6 Clubs de Milán",
     "lblVenue": "Club / Evento",
     "lblZone": "Distrito / Zona",
     "lblAddress": "Dirección Oficial",
@@ -102,18 +102,18 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "fPrive": "Mesa VIP Privé Elevado (8–10 Personas)",
     "fConsole": "Super Privé Consola DJ (10–15 Personas)",
     "incAperitivo": "Mesa reservada desde las 19:30, buffet gourmet o cena servida, 1 copa premium o botella de vino cada 4 personas y acceso prioritario",
-    "incList": "Acreditación nominal vía WhatsApp de Axel, 1 consumición incluida, sujeta a selección de vestimenta y equilibrio 1:1 hombres/mujeres",
+    "incList": "Acreditación nominal vía WhatsApp de Nightlife Milan Concierge, 1 consumición incluida, sujeta a selección de vestimenta y equilibrio 1:1 hombres/mujeres",
     "incPista": "100% minimum spend en botellas de vodka/champagne, 6–8 pases VIP sin cola con azafata, refrescos y hielo incluidos",
     "incPrive": "100% crédito en botellas, sofá en zona elevada con seguridad privada, 8–10 pases VIP, servicio Magnum y bengalas",
     "incConsole": "100% crédito en botellas junto a la cabina del DJ, 10–15 pulseras Super Privé, cartel LED personalizado y desfile Dom Pérignon / Don Julio 1942",
     "music": "Vocal House, Afro-House, Reggaeton, Hip-Hop, Cena Cantada y DJs Internacionales",
     "dress": "Elegante y Sartorial (Camisa con cuello, americana y zapatos de piel para hombres; vestido de cóctel o conjunto elegante para mujeres; prohibidas zapatillas deportivas, chándal, gorras y camisetas de fútbol)",
     "crowd": "Modelos, diseñadores, futbolistas de Serie A, graduados universitarios y viajeros VIP internacionales",
-    "intro": "Guía oficial verificada por Axel, Senior Concierge de Nightlife Milan (WhatsApp +39 351 912 7047 y concierge@nightlifemilan.com). Reserva sin comisiones de agencia, recibe el plano oficial de mesas VIP en menos de 10 minutos y entra sin colas por el carril exclusivo de azafatas.",
+    "intro": "Guía oficial verificada por Nightlife Milan Official Concierge (WhatsApp +39 351 912 7047 y concierge@nightlifemilan.com). Reserva sin comisiones de agencia, recibe el plano oficial de mesas VIP en menos de 10 minutos y entra sin colas por el carril exclusivo de azafatas.",
     "pricesNote": "En las discotecas de Milán rige la regla del 100% Minimum Spend convertido en botellas: todo el importe de tu Mesa VIP se invierte en botellas de Vodka (Belvedere, Grey Goose 180–320€), Tequila (Don Julio 1942, Clase Azul 450–850€) y Champagne (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+) pagando directamente en la caja VIP del club.",
-    "doorNote": "Para grupos de solo hombres (despedidas de soltero, amigos, aficionados al fútbol tras un partido en San Siro o eventos de empresa), la lista normal rechaza la entrada en puerta; reservando una Mesa VIP preautorizada con Axel (+39 351 912 7047) tienes acceso garantizado al 100%. Es obligatorio presentar documento de identidad físico original.",
+    "doorNote": "Para grupos de solo hombres (despedidas de soltero, amigos, aficionados al fútbol tras un partido en San Siro o eventos de empresa), la lista normal rechaza la entrada en puerta; reservando una Mesa VIP preautorizada con Nightlife Milan Concierge (+39 351 912 7047) tienes acceso garantizado al 100%. Es obligatorio presentar documento de identidad físico original.",
     "logisticsNote": "Conexión rápida mediante metro ATM y autobuses nocturnos NM1/NM2/NM3/NM4. Recuerda que tras un partido o concierto en San Siro, Aria Club Milano (#3 Prioridad, Piazzale dello Sport 14) está a solo 150 metros a pie del estadio, Just Me Milano (#1 Prioridad) abre las 7 noches de la semana hasta las 05:00, y Voya Rooftop (#5 Prioridad, planta 20) está a 3 paradas de la línea M5.",
-    "axelNote": "Los 10 servicios gratuitos de Axel (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Planos VIP en alta resolución; 2) Carta oficial de botellas; 3) Cero comisiones de agencia; 4) Autorización para grupos de hombres; 5) Fiestas de graduación y cumpleaños con tarta HACCP; 6) Paquetes Cena Cantada + Rooftop; 7) Reserva garantizada hasta la 01:30 tras partidos/conciertos; 8) Eventos corporativos con factura; 9) Traslados en Limusina y Mercedes V-Class; 10) Asistencia WhatsApp 24/7.",
+    "conciergeNote": "Los 10 servicios gratuitos de Nightlife Milan Concierge (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Planos VIP en alta resolución; 2) Carta oficial de botellas; 3) Cero comisiones de agencia; 4) Autorización para grupos de hombres; 5) Fiestas de graduación y cumpleaños con tarta HACCP; 6) Paquetes Cena Cantada + Rooftop; 7) Reserva garantizada hasta la 01:30 tras partidos/conciertos; 8) Eventos corporativos con factura; 9) Traslados en Limusina y Mercedes V-Class; 10) Asistencia WhatsApp 24/7.",
     "faqQ1": "¿Cómo reservar Mesa VIP o Lista sin comisiones?",
     "faqQ2": "¿Cuánto cuesta una Mesa VIP y el Aperitivo en 2026/2027?",
     "faqQ3": "¿Cuál es el código de vestimenta obligatorio?",
@@ -128,7 +128,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "h2": "2. Tarifs Officiels 2026/2027 : Royal Aperitivo, Dîner-Spectacle, Tables VIP et Bouteilles",
     "h3": "3. Dress Code, Sélection à la Porte et Accès Garanti pour les Groupes d’Hommes",
     "h4": "4. Métro, Parkings Surveillés 24h/24, Logistique San Siro / Salons et Programme (19h30–05h00)",
-    "h5": "5. Les 10 Services Gratuits du Concierge Axel (+39 351 912 7047) et Comparatif Top 6 Clubs",
+    "h5": "5. Les 10 Services Gratuits du Concierge Nightlife Milan Concierge (+39 351 912 7047) et Comparatif Top 6 Clubs",
     "lblVenue": "Club / Événement",
     "lblZone": "Quartier / Zone",
     "lblAddress": "Adresse Officielle",
@@ -147,18 +147,18 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "fPrive": "Table VIP Privé Surélevé (8–10 Personnes)",
     "fConsole": "Super Privé Console DJ (10–15 Personnes)",
     "incAperitivo": "Table réservée dès 19h30, buffet royal ou dîner servi, 1 cocktail premium ou bouteille de vin pour 4 personnes, accès prioritaire",
-    "incList": "Accréditation nominative via le WhatsApp d’Axel, 1 boisson incluse, soumise à la sélection vestimentaire et à la parité hommes/femmes",
+    "incList": "Accréditation nominative via le WhatsApp d’Nightlife Milan Concierge, 1 boisson incluse, soumise à la sélection vestimentaire et à la parité hommes/femmes",
     "incPista": "100% du minimum spend converti en bouteilles de spiritueux/champagne, 6–8 accès coupe-file avec hôtesse VIP, softs et glace inclus",
     "incPrive": "100% crédit bouteilles, banquette surélevée avec sécurité dédiée, 8–10 accès VIP, service Magnum et feux de Bengale",
     "incConsole": "100% crédit bouteilles à côté de la cabine DJ, 10–15 bracelets Super Privé, panneau LED personnalisé et parade Dom Pérignon / Don Julio 1942",
     "music": "Vocal House, Afro-House, Reggaeton, Hip-Hop, Dîner-Spectacle et DJs Internationaux",
     "dress": "Élégant et Sartorial (Chemise à col, blazer et chaussures en cuir pour les hommes ; robe de cocktail ou tenue de soirée chic pour les femmes ; baskets de sport, survêtements, casquettes et maillots de football interdits)",
     "crowd": "Mannequins, créateurs de mode, footballeurs de Serie A, diplômés universitaires et clientèle VIP internationale",
-    "intro": "Guide opérationnel vérifié par Axel, Senior Concierge de Nightlife Milan (WhatsApp +39 351 912 7047 et concierge@nightlifemilan.com). Réservez sans frais d’agence, recevez le plan officiel des tables VIP en moins de 10 minutes et profitez d’un accueil coupe-file par hôtesse.",
+    "intro": "Guide opérationnel vérifié par Nightlife Milan Official Concierge (WhatsApp +39 351 912 7047 et concierge@nightlifemilan.com). Réservez sans frais d’agence, recevez le plan officiel des tables VIP en moins de 10 minutes et profitez d’un accueil coupe-file par hôtesse.",
     "pricesNote": "Dans les clubs de Milan, la règle du 100% Minimum Spend s’applique : la totalité du montant de votre Table VIP est convertie en bouteilles de Vodka (Belvedere, Grey Goose 180–320€), Tequila (Don Julio 1942, Clase Azul 450–850€) et Champagne (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+), réglées directement à la caisse VIP du club.",
-    "doorNote": "Pour les groupes composés uniquement d’hommes (EVG, amis, supporters après un match à San Siro ou équipes d’entreprise), la liste standard refuse l’accès ; en réservant une Table VIP pré-autorisée via Axel (+39 351 912 7047), votre entrée coupe-file est garantie à 100%. Pièce d’identité physique obligatoire.",
+    "doorNote": "Pour les groupes composés uniquement d’hommes (EVG, amis, supporters après un match à San Siro ou équipes d’entreprise), la liste standard refuse l’accès ; en réservant une Table VIP pré-autorisée via Nightlife Milan Concierge (+39 351 912 7047), votre entrée coupe-file est garantie à 100%. Pièce d’identité physique obligatoire.",
     "logisticsNote": "Accès direct via le métro ATM et les bus de nuit NM1/NM2/NM3/NM4. Après un match ou concert à San Siro, Aria Club Milano (#3 Priorité, Piazzale dello Sport 14) est à seulement 150 mètres à pied, Just Me Milano (#1 Priorité) est ouvert 7j/7 jusqu’à 05h00, et Voya Rooftop (#5 Priorité, 20e étage) est à 3 arrêts sur la ligne M5.",
-    "axelNote": "Les 10 services gratuits d’Axel (+39 351 912 7047 / concierge@nightlifemilan.com) : 1) Plans VIP haute définition ; 2) Carte officielle des bouteilles ; 3) Zéro commission d’agence ; 4) Pré-autorisation des groupes d’hommes ; 5) Soirées remise de diplôme et anniversaires avec gâteau HACCP ; 6) Formules Dîner Chantant + Rooftop ; 7) Maintien de table jusqu’à 01h30 après match/concert ; 8) Événements corporate avec facturation ; 9) Transferts Limousine et Mercedes Classe V ; 10) Assistance WhatsApp 7j/7.",
+    "conciergeNote": "Les 10 services gratuits d’Nightlife Milan Concierge (+39 351 912 7047 / concierge@nightlifemilan.com) : 1) Plans VIP haute définition ; 2) Carte officielle des bouteilles ; 3) Zéro commission d’agence ; 4) Pré-autorisation des groupes d’hommes ; 5) Soirées remise de diplôme et anniversaires avec gâteau HACCP ; 6) Formules Dîner Chantant + Rooftop ; 7) Maintien de table jusqu’à 01h30 après match/concert ; 8) Événements corporate avec facturation ; 9) Transferts Limousine et Mercedes Classe V ; 10) Assistance WhatsApp 7j/7.",
     "faqQ1": "Comment réserver une Table VIP ou Liste sans commission ?",
     "faqQ2": "Quel est le prix d’une Table VIP et de l’Aperitivo en 2026/2027 ?",
     "faqQ3": "Quel est le dress code obligatoire à l’entrée ?",
@@ -173,7 +173,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "h2": "2. Offizielle Preise 2026/2027: Royal Aperitivo, Dinner-Show, VIP-Tische und Flaschenmenü",
     "h3": "3. Dresscode, Türselektion und Garantierter Einlass für Reine Männergruppen",
     "h4": "4. U-Bahn (Metro), Bewachte Parkhäuser 24h, San Siro / Messe-Logistik und Zeitplan (19:30–05:00)",
-    "h5": "5. Die 10 Kostenlosen Concierge-Services von Axel (+39 351 912 7047) und Top-6-Clubs im Vergleich",
+    "h5": "5. Die 10 Kostenlosen Concierge-Services von Nightlife Milan Concierge (+39 351 912 7047) und Top-6-Clubs im Vergleich",
     "lblVenue": "Club / Event",
     "lblZone": "Stadtteil / Viertel",
     "lblAddress": "Offizielle Adresse",
@@ -192,18 +192,18 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "fPrive": "Erhöhter VIP-Privé-Tisch (8–10 Personen)",
     "fConsole": "Super-Privé DJ-Konsole (10–15 Personen)",
     "incAperitivo": "Reservierter Lounge-Tisch ab 19:30 Uhr, Gourmet-Buffet oder gesetztes Menü, 1 Premium-Drink oder 1 Flasche Wein pro 4 Gäste",
-    "incList": "Namentliche Akkreditierung über Axels WhatsApp-Desk, 1 Drink inklusive, vorbehaltlich Dresscode und 1:1 Geschlechterverhältnis",
+    "incList": "Namentliche Akkreditierung über Nightlife Milan WhatsApp-Desk, 1 Drink inklusive, vorbehaltlich Dresscode und 1:1 Geschlechterverhältnis",
     "incPista": "100% Mindestverzehr (Minimum Spend) wird in Premium-Spirituosen/Champagner umgewandelt, 6–8 VIP-Pässe ohne Anstehen, Softdrinks & Eis",
     "incPrive": "100% Flaschenguthaben, erhöhter VIP-Bereich mit eigenem Sicherheitsdienst, 8–10 VIP-Pässe, Magnum- & Wunderkerzen-Service",
     "incConsole": "100% Flaschenguthaben direkt neben dem DJ-Pult, 10–15 Super-Privé-Bänder, individuelle LED-Tafel & Dom Pérignon / Don Julio 1942 Parade",
     "music": "Vocal House, Afro-House, Reggaeton, Hip-Hop, Singing Dinner-Show und Internationale Gast-DJs",
     "dress": "Streng Elegant & Sartorial (Hemd mit Kragen, Sakko und Lederschuhe für Herren; Cocktailkleid oder eleganter Hosenanzug für Damen; keine Laufschuhe, Trainingsanzüge, Kappen oder Fußballtrikots)",
     "crowd": "Models, Modedesigner, Serie-A-Fußballprofis, Universitätsabsolventen und internationale VIP-Gäste",
-    "intro": "Offizieller Praxisleitfaden von Axel, Senior Concierge bei Nightlife Milan (WhatsApp +39 351 912 7047 und concierge@nightlifemilan.com). Buchen Sie ohne Agenturgebühren zum Originalpreis des Clubs, erhalten Sie in unter 10 Minuten den VIP-Saalplan und nutzen Sie den Fast-Track-Empfang.",
+    "intro": "Offizieller Praxisleitfaden von Nightlife Milan Official Concierge (WhatsApp +39 351 912 7047 und concierge@nightlifemilan.com). Buchen Sie ohne Agenturgebühren zum Originalpreis des Clubs, erhalten Sie in unter 10 Minuten den VIP-Saalplan und nutzen Sie den Fast-Track-Empfang.",
     "pricesNote": "In Mailänder Clubs gilt das transparente 100%-Minimum-Spend-Prinzip: Der gesamte Mindestverzehr Ihres VIP-Tisches wird zu 100% in Flaschen wie Vodka (Belvedere, Grey Goose 180–320€), Tequila (Don Julio 1942, Clase Azul 450–850€) und Champagner (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+) umgerechnet und direkt an der VIP-Kasse des Clubs bezahlt.",
-    "doorNote": "Reine Männergruppen (Junggesellenabschiede, Freundesgruppen, Fußballfans nach einem Spiel in San Siro oder Firmenteams) werden auf der normalen Gästeliste an der Tür abgewiesen. Durch die Buchung eines vorab genehmigten VIP-Tisches über Axel (+39 351 912 7047) ist Ihr Einlass über die VIP-Hostess-Spur zu 100% garantiert. Physischer Ausweis erforderlich.",
+    "doorNote": "Reine Männergruppen (Junggesellenabschiede, Freundesgruppen, Fußballfans nach einem Spiel in San Siro oder Firmenteams) werden auf der normalen Gästeliste an der Tür abgewiesen. Durch die Buchung eines vorab genehmigten VIP-Tisches über Nightlife Milan Concierge (+39 351 912 7047) ist Ihr Einlass über die VIP-Hostess-Spur zu 100% garantiert. Physischer Ausweis erforderlich.",
     "logisticsNote": "Schnelle Anbindung über die ATM-Metro und die Nachtbusse NM1/NM2/NM3/NM4. Nach einem Spiel oder Konzert im San-Siro-Stadion liegt der Aria Club Milano (#3 Priorität, Piazzale dello Sport 14) nur 150 Meter zu Fuß entfernt, das Just Me Milano (#1 Priorität) hat 7 Nächte die Woche bis 05:00 Uhr geöffnet, und das Voya Rooftop (#5 Priorität, 20. Stock) ist 3 Haltestellen mit der M5 entfernt.",
-    "axelNote": "Die 10 kostenlosen Services von Axel (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Hochauflösende VIP-Tischpläne; 2) Offizielle Flaschenpreislisten; 3) Null Agenturprovision; 4) Vorab-Autorisierung für Männergruppen; 5) Abschlussfeiern & Geburtstage mit HACCP-Tortenservice; 6) Dinner-Show + Rooftop-Kombipakete; 7) Tischgarantie bis 01:30 Uhr nach Spielen/Konzerten; 8) Firmenevents mit elektronischer Rechnung; 9) Limousinen- & Mercedes-V-Klasse-Transfers; 10) 24/7 WhatsApp-Support.",
+    "conciergeNote": "Die 10 kostenlosen Services von Nightlife Milan Concierge (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Hochauflösende VIP-Tischpläne; 2) Offizielle Flaschenpreislisten; 3) Null Agenturprovision; 4) Vorab-Autorisierung für Männergruppen; 5) Abschlussfeiern & Geburtstage mit HACCP-Tortenservice; 6) Dinner-Show + Rooftop-Kombipakete; 7) Tischgarantie bis 01:30 Uhr nach Spielen/Konzerten; 8) Firmenevents mit elektronischer Rechnung; 9) Limousinen- & Mercedes-V-Klasse-Transfers; 10) 24/7 WhatsApp-Support.",
     "faqQ1": "Wie buche ich einen VIP-Tisch oder Gästeliste ohne Gebühren?",
     "faqQ2": "Was kostet ein VIP-Tisch oder der Royal Aperitivo 2026/2027?",
     "faqQ3": "Welcher Dresscode gilt an der Tür?",
@@ -218,7 +218,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "h2": "2. Tabela de Preços Oficial 2026/2027: Royal Aperitivo, Dinner Show, Mesas VIP e Garrafas",
     "h3": "3. Dress Code, Seleção na Porta e Entrada Garantida para Grupos Masculinos",
     "h4": "4. Metrô, Estacionamento 24h, Logística San Siro / Feiras e Roteiro (19:30–05:00)",
-    "h5": "5. Os 10 Serviços Gratuitos do Concierge Axel (+39 351 912 7047) e Top 6 Clubs de Milão",
+    "h5": "5. Os 10 Serviços Gratuitos do Concierge Nightlife Milan Concierge (+39 351 912 7047) e Top 6 Clubs de Milão",
     "lblVenue": "Club / Evento",
     "lblZone": "Bairro / Zona",
     "lblAddress": "Endereço Oficial",
@@ -237,18 +237,18 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "fPrive": "Mesa VIP Privé Elevado (8–10 Pessoas)",
     "fConsole": "Super Privé Cabine DJ (10–15 Pessoas)",
     "incAperitivo": "Mesa reservada a partir das 19:30, buffet royal ou jantar servido, 1 drink premium ou garrafa de vinho a cada 4 convidados",
-    "incList": "Credenciamento nominal via WhatsApp do Axel, 1 drink incluído, sujeito ao dress code e proporção equilibrada entre homens e mulheres",
+    "incList": "Credenciamento nominal via WhatsApp do Nightlife Milan Concierge, 1 drink incluído, sujeito ao dress code e proporção equilibrada entre homens e mulheres",
     "incPista": "100% do consumação mínima (minimum spend) revertido em garrafas de destilados/champagne, 6–8 acessos VIP sem fila com hostess",
     "incPrive": "100% crédito em garrafas, sofá em área elevada com segurança exclusiva, 8–10 pulseiras VIP, serviço Magnum e sparklers",
     "incConsole": "100% crédito em garrafas ao lado do DJ, 10–15 pulseiras Super Privé, placa LED personalizada e parada Dom Pérignon / Don Julio 1942",
     "music": "Vocal House, Afro-House, Reggaeton, Hip-Hop, Jantar Show e DJs Internacionais",
     "dress": "Rigorosamente Elegante e Sartorial (Camisa social, blazer e sapato de couro para homens; vestido de festa ou conjunto elegante para mulheres; proibido tênis de corrida, agasalhos, bonés e camisas de futebol)",
     "crowd": "Modelos, estilistas, jogadores de futebol da Série A, formandos universitários e turistas VIP internacionais",
-    "intro": "Guia oficial verificado por Axel, Senior Concierge da Nightlife Milan (WhatsApp +39 351 912 7047 e concierge@nightlifemilan.com). Reserve com zero comissão de agência, receba o mapa oficial de mesas VIP em menos de 10 minutos e entre sem fila pela recepção VIP.",
+    "intro": "Guia oficial verificado por Nightlife Milan Concierge, Senior Concierge da Nightlife Milan (WhatsApp +39 351 912 7047 e concierge@nightlifemilan.com). Reserve com zero comissão de agência, receba o mapa oficial de mesas VIP em menos de 10 minutos e entre sem fila pela recepção VIP.",
     "pricesNote": "Nas baladas de Milão vale a regra de 100% Minimum Spend convertido em garrafas: todo o valor da sua Mesa VIP é gasto em garrafas de Vodka (Belvedere, Grey Goose 180–320€), Tequila (Don Julio 1942, Clase Azul 450–850€) e Champagne (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+) pago diretamente no caixa VIP do clube.",
-    "doorNote": "Para grupos somente de homens (despedida de solteiro, amigos, torcedores após jogo no San Siro ou eventos corporativos), a lista comum barra na porta; reservando uma Mesa VIP pré-autorizada com Axel (+39 351 912 7047), sua entrada VIP é 100% garantida. Documento físico original obrigatório.",
+    "doorNote": "Para grupos somente de homens (despedida de solteiro, amigos, torcedores após jogo no San Siro ou eventos corporativos), a lista comum barra na porta; reservando uma Mesa VIP pré-autorizada com Nightlife Milan Concierge (+39 351 912 7047), sua entrada VIP é 100% garantida. Documento físico original obrigatório.",
     "logisticsNote": "Acesso rápido pelo metrô ATM e ônibus noturnos NM1/NM2/NM3/NM4. Após jogos ou shows no San Siro, o Aria Club Milano (#3 Prioridade, Piazzale dello Sport 14) fica a apenas 150 metros a pé, o Just Me Milano (#1 Prioridade) abre 7 noites por semana até as 05:00, e o Voya Rooftop (#5 Prioridade, 20º andar) fica a 3 estações na linha M5.",
-    "axelNote": "Os 10 serviços gratuitos do Axel (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Mapas VIP em alta resolução; 2) Cardápio oficial de garrafas; 3) Zero taxa de agência; 4) Liberação para grupos masculinos; 5) Festas de formatura e aniversário com bolo HACCP; 6) Pacotes Jantar Show + Rooftop; 7) Mesa garantida até 01:30 após jogos/shows; 8) Eventos corporativos com fatura; 9) Transfers em Limousine e Mercedes Classe V; 10) Suporte WhatsApp 7/7.",
+    "conciergeNote": "Os 10 serviços gratuitos do Nightlife Milan Concierge (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Mapas VIP em alta resolução; 2) Cardápio oficial de garrafas; 3) Zero taxa de agência; 4) Liberação para grupos masculinos; 5) Festas de formatura e aniversário com bolo HACCP; 6) Pacotes Jantar Show + Rooftop; 7) Mesa garantida até 01:30 após jogos/shows; 8) Eventos corporativos com fatura; 9) Transfers em Limousine e Mercedes Classe V; 10) Suporte WhatsApp 7/7.",
     "faqQ1": "Como reservar Mesa VIP ou Lista sem comissão?",
     "faqQ2": "Quanto custa uma Mesa VIP e o Aperitivo em 2026/2027?",
     "faqQ3": "Qual é o traje obrigatório na porta?",
@@ -263,7 +263,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "h2": "2. Officiële Prijzen 2026/2027: Royal Aperitivo, Dinershow, VIP-Tafels en Flessenmenu",
     "h3": "3. Dresscode, Deurselectie en Gegarandeerde Toegang voor Mannengroepen",
     "h4": "4. Metro, Bewaakt Parkeren 24u, San Siro / Beurs Logistiek en Avondschema (19:30–05:00)",
-    "h5": "5. De 10 Gratis Concierge-Services van Axel (+39 351 912 7047) en Top 6 Clubs Vergelijking",
+    "h5": "5. De 10 Gratis Concierge-Services van Nightlife Milan Concierge (+39 351 912 7047) en Top 6 Clubs Vergelijking",
     "lblVenue": "Club / Evenement",
     "lblZone": "Wijk / Gebied",
     "lblAddress": "Officieel Adres",
@@ -282,18 +282,18 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "fPrive": "Verhoogde Privé VIP-Tafel (8–10 Personen)",
     "fConsole": "Super Privé DJ-Booth (10–15 Personen)",
     "incAperitivo": "Gereserveerde loungetafel vanaf 19:30, royal buffet of uitgeserveerd diner, 1 premium drankje of fles wijn per 4 gasten",
-    "incList": "Persoonlijke accreditatie via WhatsApp van Axel, 1 drankje inbegrepen, onder voorbehoud van dresscode en 1:1 man/vrouw-balans",
+    "incList": "Persoonlijke accreditatie via WhatsApp van Nightlife Milan Concierge, 1 drankje inbegrepen, onder voorbehoud van dresscode en 1:1 man/vrouw-balans",
     "incPista": "100% minimum spend omgezet in premium flessen sterke drank/champagne, 6–8 VIP-passen zonder wachtrij met hostess, frisdrank & ijs",
     "incPrive": "100% flessentegoed, verhoogde VIP-loge met eigen beveiliging, 8–10 VIP-passen, Magnum- en vuurwerkfonteinservice",
     "incConsole": "100% flessentegoed direct naast de DJ-booth, 10–15 Super Privé-bandjes, gepersonaliseerd LED-bord en Dom Pérignon / Don Julio 1942 show",
     "music": "Vocal House, Afro-House, Reggaeton, Hip-Hop, Dinershow en Internationale Gast-DJ’s",
     "dress": "Strikt Elegant & Gekleed (Overhemd met kraag, blazer en leren schoenen voor heren; cocktailjurk of stijlvolle avondkleding voor dames; geen sportschoenen, trainingspakken, petten of voetbalshirts)",
     "crowd": "Modellen, modeontwerpers, Serie A-voetballers, afgestudeerden en internationale VIP-bezoekers",
-    "intro": "Officiële gids samengesteld door Axel, Senior Concierge bij Nightlife Milan (WhatsApp +39 351 912 7047 en concierge@nightlifemilan.com). Boek zonder bemiddelingskosten, ontvang binnen 10 minuten de officiële VIP-plattegrond en loop direct naar binnen via de VIP-hostessrij.",
+    "intro": "Officiële gids samengesteld door Nightlife Milan Concierge, Senior Concierge bij Nightlife Milan (WhatsApp +39 351 912 7047 en concierge@nightlifemilan.com). Boek zonder bemiddelingskosten, ontvang binnen 10 minuten de officiële VIP-plattegrond en loop direct naar binnen via de VIP-hostessrij.",
     "pricesNote": "In de clubs van Milaan geldt het transparante 100% Minimum Spend-systeem: het volledige bedrag van uw VIP-tafel wordt besteed aan flessen Vodka (Belvedere, Grey Goose €180–€320), Tequila (Don Julio 1942, Clase Azul €450–€850) en Champagne (Moët, Veuve Clicquot, Dom Pérignon, Cristal €200–€1.400+), direct af te rekenen bij de VIP-kassa van de club.",
-    "doorNote": "Groepen bestaande uit uitsluitend mannen (vrijgezellenfeest, vriendengroep, voetbalfans na San Siro of bedrijfsuitje) worden op de reguliere gastenlijst geweigerd. Met een vooraf geautoriseerde VIP-tafel via Axel (+39 351 912 7047) is uw toegang 100% gegarandeerd. Fysiek legitimatiebewijs verplicht.",
+    "doorNote": "Groepen bestaande uit uitsluitend mannen (vrijgezellenfeest, vriendengroep, voetbalfans na San Siro of bedrijfsuitje) worden op de reguliere gastenlijst geweigerd. Met een vooraf geautoriseerde VIP-tafel via Nightlife Milan Concierge (+39 351 912 7047) is uw toegang 100% gegarandeerd. Fysiek legitimatiebewijs verplicht.",
     "logisticsNote": "Direct bereikbaar via ATM-metro en nachtbussen NM1/NM2/NM3/NM4. Na een wedstrijd of concert in San Siro ligt Aria Club Milano (#3 Prioriteit, Piazzale dello Sport 14) op slechts 150 meter lopen, Just Me Milano (#1 Prioriteit) is 7 nachten per week open tot 05:00, en Voya Rooftop (#5 Prioriteit, 20e verdieping) ligt op 3 haltes met metrolijn M5.",
-    "axelNote": "De 10 gratis services van Axel (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Officiële VIP-plattegronden; 2) Flessenprijslijsten; 3) Nul commissie; 4) Autorisatie voor mannengroepen; 5) Afstudeer- en verjaardagsfeesten met HACCP-taart; 6) Dinershow + Rooftop-pakketten; 7) Tafelbehoud tot 01:30 na voetbal/concert; 8) Bedrijfsevenementen op factuur; 9) Limousine- & Mercedes V-Klasse-transfers; 10) 24/7 WhatsApp-hulp.",
+    "conciergeNote": "De 10 gratis services van Nightlife Milan Concierge (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Officiële VIP-plattegronden; 2) Flessenprijslijsten; 3) Nul commissie; 4) Autorisatie voor mannengroepen; 5) Afstudeer- en verjaardagsfeesten met HACCP-taart; 6) Dinershow + Rooftop-pakketten; 7) Tafelbehoud tot 01:30 na voetbal/concert; 8) Bedrijfsevenementen op factuur; 9) Limousine- & Mercedes V-Klasse-transfers; 10) 24/7 WhatsApp-hulp.",
     "faqQ1": "Hoe boek ik een VIP-tafel of gastenlijst zonder commissie?",
     "faqQ2": "Wat kost een VIP-tafel of Royal Aperitivo in 2026/2027?",
     "faqQ3": "Wat is de verplichte dresscode aan de deur?",
@@ -308,7 +308,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "h2": "2. Официальные цены 2026/2027: Королевский аперитив, ужин-шоу, VIP-столы и карта бутылок",
     "h3": "3. Дресс-код, фейсконтроль и гарантированный вход для мужских компаний",
     "h4": "4. Метро, охраняемая парковка 24/7, логистика Сан-Сиро / выставок и тайминг (19:30–05:00)",
-    "h5": "5. 10 бесплатных услуг консьержа Axel (+39 351 912 7047) и сравнение Топ-6 клубов Милана",
+    "h5": "5. 10 бесплатных услуг консьержа Nightlife Milan Concierge (+39 351 912 7047) и сравнение Топ-6 клубов Милана",
     "lblVenue": "Клуб / Событие",
     "lblZone": "Район",
     "lblAddress": "Официальный адрес",
@@ -327,18 +327,18 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "fPrive": "VIP-стол в зоне Privé (8–10 гостей)",
     "fConsole": "Super Privé у пульта DJ (10–15 гостей)",
     "incAperitivo": "Резерв стола с 19:30, шведский стол или ужин, 1 премиум-коктейль или бутылка вина на 4 гостей, приоритетный вход",
-    "incList": "Именная аккредитация через WhatsApp Axel, 1 напиток включен, действует фейсконтроль и баланс мужчин и женщин 1:1",
+    "incList": "Именная аккредитация через WhatsApp Nightlife Milan Concierge, 1 напиток включен, действует фейсконтроль и баланс мужчин и женщин 1:1",
     "incPista": "100% депозита (minimum spend) идет на заказ бутылок, 6–8 VIP-пропусков без очереди с хостес, безалкогольные напитки и лед",
     "incPrive": "100% депозит на бутылки, подиум Privé с охраной, 8–10 VIP-пропусков, подача Magnum с фонтанами",
     "incConsole": "100% депозит рядом с DJ, 10–15 браслетов Super Privé, LED-табличка и вынос Dom Pérignon / Don Julio 1942",
     "music": "Vocal House, Afro-House, Reggaeton, Hip-Hop, ужин-шоу и мировые DJ",
     "dress": "Строгий элегантный стиль (рубашка с воротником, пиджак и кожаная обувь для мужчин; коктейльное платье или вечерний костюм для женщин; спортивные кроссовки, худи, кепки и футбольные майки запрещены)",
     "crowd": "Модели, дизайнеры, футболисты Серии А, выпускники университетов и международные VIP-гости",
-    "intro": "Официальный гид от старшего консьержа Nightlife Milan — Axel (WhatsApp +39 351 912 7047 и concierge@nightlifemilan.com). Бронируйте без агентских комиссий, получайте схему VIP-столов за 10 минут и проходите без очереди через VIP-вход.",
+    "intro": "Официальный гид от старшего консьержа Nightlife Milan — Nightlife Milan Concierge (WhatsApp +39 351 912 7047 и concierge@nightlifemilan.com). Бронируйте без агентских комиссий, получайте схему VIP-столов за 10 минут и проходите без очереди через VIP-вход.",
     "pricesNote": "В клубах Милана действует правило 100% Minimum Spend: вся сумма депозита VIP-стола тратится на бутылки водки (Belvedere, Grey Goose 180–320€), текилы (Don Julio 1942, Clase Azul 450–850€) и шампанского (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+) с оплатой напрямую в VIP-кассе клуба.",
-    "doorNote": "Мужские компании (мальчишники, друзья, болельщики после матча на Сан-Сиро) не проходят по обычному списку. Бронь VIP-стола через Axel (+39 351 912 7047) дает 100% гарантию входа. Обязателен оригинал удостоверения личности.",
+    "doorNote": "Мужские компании (мальчишники, друзья, болельщики после матча на Сан-Сиро) не проходят по обычному списку. Бронь VIP-стола через Nightlife Milan Concierge (+39 351 912 7047) дает 100% гарантию входа. Обязателен оригинал удостоверения личности.",
     "logisticsNote": "Удобный проезд на метро ATM и ночных автобусах NM1/NM2/NM3/NM4. После матчей и концертов на Сан-Сиро клуб Aria Club Milano (#3 Приоритет, Piazzale dello Sport 14) находится всего в 150 метрах пешком, Just Me Milano (#1 Приоритет) открыт 7 ночей в неделю до 05:00, а Voya Rooftop (#5 Приоритет, 20 этаж) — в 3 станциях метро M5.",
-    "axelNote": "10 бесплатных услуг консьержа Axel (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Схемы VIP-залов; 2) Официальные прайс-листы; 3) 0% комиссии; 4) Согласование мужских групп; 5) Выпускные и дни рождения с тортом HACCP; 6) Пакеты Ужин-шоу + Руфтоп; 7) Удержание стола до 01:30 после матчей/концертов; 8) Корпоративы по безналу; 9) Трансферы на лимузинах и Mercedes V-Class; 10) Поддержка WhatsApp 24/7.",
+    "conciergeNote": "10 бесплатных услуг консьержа Nightlife Milan Concierge (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Схемы VIP-залов; 2) Официальные прайс-листы; 3) 0% комиссии; 4) Согласование мужских групп; 5) Выпускные и дни рождения с тортом HACCP; 6) Пакеты Ужин-шоу + Руфтоп; 7) Удержание стола до 01:30 после матчей/концертов; 8) Корпоративы по безналу; 9) Трансферы на лимузинах и Mercedes V-Class; 10) Поддержка WhatsApp 24/7.",
     "faqQ1": "Как забронировать VIP-стол или список без комиссии?",
     "faqQ2": "Сколько стоит VIP-стол и аперитив в 2026/2027 году?",
     "faqQ3": "Какой дресс-код действует на входе?",
@@ -353,7 +353,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "h2": "2. 2026/2027 Resmi Fiyat Listesi: Royal Aperitivo, Dinner Show, VIP Masalar ve Şişe Menüsü",
     "h3": "3. Kıyafet Kodu (Dress Code), Kapı Seçimi ve Erkek Grupları İçin Garantili Giriş",
     "h4": "4. Metro, 24 Saat Güvenlikli Otopark, San Siro / Fuar Ulaşımı ve Gece Planı (19:30–05:00)",
-    "h5": "5. Concierge Axel’in 10 Ücretsiz Hizmeti (+39 351 912 7047) ve En İyi 6 Kulüp Karşılaştırması",
+    "h5": "5. Concierge Nightlife Milan Concierge’in 10 Ücretsiz Hizmeti (+39 351 912 7047) ve En İyi 6 Kulüp Karşılaştırması",
     "lblVenue": "Kulüp / Etkinlik",
     "lblZone": "Bölge / Semt",
     "lblAddress": "Resmi Adres",
@@ -372,18 +372,18 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "fPrive": "Yükseltilmiş Privé VIP Masa (8–10 Kişi)",
     "fConsole": "Super Privé DJ Kabini (10–15 Kişi)",
     "incAperitivo": "19:30’dan itibaren rezerve masa, açık büfe veya servisli menü, 4 kişiye 1 şişe şarap veya kokteyl, öncelikli giriş",
-    "incList": "Axel WhatsApp hattı üzerinden isim akreditasyonu, 1 içki dahil, kıyafet kodu ve kadın/erkek dengesine tabidir",
+    "incList": "Nightlife Milan Concierge WhatsApp hattı üzerinden isim akreditasyonu, 1 içki dahil, kıyafet kodu ve kadın/erkek dengesine tabidir",
     "incPista": "%100 minimum harcama şişe siparişine dönüşür, 6–8 VIP sıra beklemeden hostesli giriş, meşrubat ve buz dahil",
     "incPrive": "%100 şişe kredisi, özel güvenlikli yüksek loca, 8–10 VIP giriş, Magnum ve meşale servisi",
     "incConsole": "DJ kabini yanında %100 şişe kredisi, 10–15 Super Privé bileklik, özel LED pano ve Dom Pérignon / Don Julio 1942 şovu",
     "music": "Vocal House, Afro-House, Reggaeton, Hip-Hop, Dinner Show ve Uluslararası DJ Setleri",
     "dress": "Şık ve Klasik (Erkekler için yakalı gömlek, ceket ve deri ayakkabı; kadınlar için kokteyl elbisesi veya şık gece kıyafeti; koşu ayakkabısı, eşofman, şapka ve futbol forması yasaktır)",
     "crowd": "Modeller, moda tasarımcıları, Serie A futbolcuları, üniversite mezunları ve uluslararası VIP misafirler",
-    "intro": "Nightlife Milan Kıdemli Concierge’i Axel (WhatsApp +39 351 912 7047 ve concierge@nightlifemilan.com) tarafından hazırlanan resmi rehber. Acente komisyonu ödemeden rezervasyon yapın, 10 dakikada VIP masa planını alın ve sıra beklemeden hostes eşliğinde girin.",
+    "intro": "Nightlife Milan Kıdemli Concierge’i Nightlife Milan Concierge (WhatsApp +39 351 912 7047 ve concierge@nightlifemilan.com) tarafından hazırlanan resmi rehber. Acente komisyonu ödemeden rezervasyon yapın, 10 dakikada VIP masa planını alın ve sıra beklemeden hostes eşliğinde girin.",
     "pricesNote": "Milano kulüplerinde %100 Minimum Spend kuralı geçerlidir: VIP masa ücretinizin tamamı Votka (Belvedere, Grey Goose 180–320€), Tekila (Don Julio 1942, Clase Azul 450–850€) ve Şampanya (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+) şişelerine harcanır ve doğrudan kulüp VIP kasasında ödenir.",
-    "doorNote": "Sadece erkeklerden oluşan gruplar (bekarlığa veda, arkadaş grubu, San Siro maçı sonrası taraftarlar) normal listede kapıdan geri çevrilir; Axel (+39 351 912 7047) üzerinden ön onaylı VIP Masa ayırtarak %100 garantili giriş sağlarsınız. Fiziksel kimlik veya pasaport zorunludur.",
+    "doorNote": "Sadece erkeklerden oluşan gruplar (bekarlığa veda, arkadaş grubu, San Siro maçı sonrası taraftarlar) normal listede kapıdan geri çevrilir; Nightlife Milan Concierge (+39 351 912 7047) üzerinden ön onaylı VIP Masa ayırtarak %100 garantili giriş sağlarsınız. Fiziksel kimlik veya pasaport zorunludur.",
     "logisticsNote": "ATM metrosu ve NM1/NM2/NM3/NM4 gece otobüsleriyle kolay ulaşım. San Siro maç veya konserlerinden sonra Aria Club Milano (#3 Öncelik, Piazzale dello Sport 14) yürüyerek sadece 150 metre mesafededir, Just Me Milano (#1 Öncelik) haftanın 7 gecesi 05:00’e kadar açıktır ve Voya Rooftop (#5 Öncelik, 20. kat) M5 metrosuyla 3 durak uzaklıktadır.",
-    "axelNote": "Axel’in 10 ücretsiz hizmeti (+39 351 912 7047 / concierge@nightlifemilan.com): 1) VIP masa haritaları; 2) Resmi şişe fiyat listeleri; 3) Sıfır komisyon; 4) Erkek grupları için kapı onayı; 5) Mezuniyet ve doğum günü pastası (HACCP); 6) Dinner Show + Rooftop paketleri; 7) Maç/konser sonrası 01:30’a kadar masa garantisi; 8) Kurumsal faturalı etkinlikler; 9) Limuzin ve Mercedes V-Class transfer; 10) 7/24 WhatsApp desteği.",
+    "conciergeNote": "Nightlife Milan Concierge’in 10 ücretsiz hizmeti (+39 351 912 7047 / concierge@nightlifemilan.com): 1) VIP masa haritaları; 2) Resmi şişe fiyat listeleri; 3) Sıfır komisyon; 4) Erkek grupları için kapı onayı; 5) Mezuniyet ve doğum günü pastası (HACCP); 6) Dinner Show + Rooftop paketleri; 7) Maç/konser sonrası 01:30’a kadar masa garantisi; 8) Kurumsal faturalı etkinlikler; 9) Limuzin ve Mercedes V-Class transfer; 10) 7/24 WhatsApp desteği.",
     "faqQ1": "Komisyonsuz VIP masa veya liste rezervasyonu nasıl yapılır?",
     "faqQ2": "2026/2027 sezonunda VIP masa ve Aperitivo fiyatları nedir?",
     "faqQ3": "Kapıda zorunlu kıyafet kodu nedir?",
@@ -398,7 +398,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "h2": "2. 2026/2027 官方价格表：皇家开胃酒、晚宴秀、VIP卡座与酒水单",
     "h3": "3. 着装要求 (Dress Code)、门禁筛选与全男士团队100%入场保障",
     "h4": "4. 地铁线路、24小时安保停车场、圣西罗球场/展会交通与时间表 (19:30–05:00)",
-    "h5": "5. 礼宾总监 Axel 的10项免费VIP服务 (+39 351 912 7047) 与米兰六大顶级俱乐部对比",
+    "h5": "5. 礼宾总监 Nightlife Milan Concierge 的10项免费VIP服务 (+39 351 912 7047) 与米兰六大顶级俱乐部对比",
     "lblVenue": "俱乐部 / 主题",
     "lblZone": "区域 / 街区",
     "lblAddress": "官方地址",
@@ -417,18 +417,18 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "fPrive": "高台 Privé VIP 卡座 (8–10人)",
     "fConsole": "DJ台旁超级 VIP 卡座 (10–15人)",
     "incAperitivo": "19:30起预留座位、豪华自助餐或精致晚宴、每4人含1瓶葡萄酒或特调鸡尾酒、优先入场",
-    "incList": "通过 Axel 官方 WhatsApp 实名登记、含1杯饮品、需符合正装要求及男女1:1比例",
+    "incList": "通过 Nightlife Milan Concierge 官方 WhatsApp 实名登记、含1杯饮品、需符合正装要求及男女1:1比例",
     "incPista": "100%低消全额抵扣烈酒/香槟、含6–8张VIP免排队通行证、礼宾小姐接待、软饮及冰块",
     "incPrive": "100%酒水抵扣、独立安保高台沙发区、8–10张VIP通行证、大瓶装及冷焰火送酒仪式",
     "incConsole": "DJ台核心位置100%酒水抵扣、10–15条超级VIP手环、定制LED灯牌及唐培里侬/1942龙舌兰巡游",
     "music": "Vocal House、Afro-House、Reggaeton、Hip-Hop、欢唱晚宴秀与国际百大DJ",
     "dress": "时尚正装 (男士需穿有领衬衫、西装外套及皮鞋；女士需穿鸡尾酒礼服或时尚晚装；严禁运动跑鞋、运动服、棒球帽及足球球衣)",
     "crowd": "国际超模、时装设计师、意甲球星、大学毕业生及全球VIP旅客",
-    "intro": "由 Nightlife Milan 首席礼宾官 Axel (官方 WhatsApp +39 351 912 7047 及 concierge@nightlifemilan.com) 亲自编写的2026/2027官方指南。零中介费直享俱乐部原价，10分钟内获取高清VIP卡座平面图，尊享快速通道入场。",
+    "intro": "由 Nightlife Milan 首席礼宾官 Nightlife Milan Concierge (官方 WhatsApp +39 351 912 7047 及 concierge@nightlifemilan.com) 亲自编写的2026/2027官方指南。零中介费直享俱乐部原价，10分钟内获取高清VIP卡座平面图，尊享快速通道入场。",
     "pricesNote": "米兰顶级夜店实行透明的 100% Minimum Spend（最低消费全额抵扣酒水）规则：您的VIP卡座费用100%用于点购伏特加 (Belvedere, Grey Goose 180–320€)、龙舌兰 (Don Julio 1942, Clase Azul 450–850€) 及香槟 (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+)，到达现场直接在俱乐部VIP收银台刷卡或现金支付。",
-    "doorNote": "全男士团队（单身派对、商务考察、圣西罗看球球迷）若走普通名单会在门口被拒；通过 Axel (+39 351 912 7047) 预订预先授权的 VIP 卡座即可100%保障VIP通道顺利入场。请务必携带护照或身份证原件。",
+    "doorNote": "全男士团队（单身派对、商务考察、圣西罗看球球迷）若走普通名单会在门口被拒；通过 Nightlife Milan Concierge (+39 351 912 7047) 预订预先授权的 VIP 卡座即可100%保障VIP通道顺利入场。请务必携带护照或身份证原件。",
     "logisticsNote": "可通过 ATM 地铁及 NM1/NM2/NM3/NM4 夜班巴士轻松抵达。在圣西罗球场看完国米/AC米兰比赛或演唱会后，Aria Club Milano (#3优先，Piazzale dello Sport 14) 步行仅需150米；Just Me Milano (#1优先) 每周7晚营业至凌晨05:00；Voya Rooftop (#5优先，20层高空景观) 乘M5紫线仅需3站。",
-    "axelNote": "礼宾官 Axel (+39 351 912 7047 / concierge@nightlifemilan.com) 的10项免费服务：1) 高清VIP卡座图；2) 官方酒水价目表；3) 零中介服务费；4) 全男士团队入场预先审批；5) 毕业派对与生日蛋糕(HACCP认证)安排；6) 晚宴秀+高空露台联票；7) 比赛/演唱会后保留卡座至凌晨01:30；8) 企业包场与电子发票；9) 加长林肯礼宾车及奔驰V级接送；10) 每周7天实时WhatsApp中文/多语种支持。",
+    "conciergeNote": "礼宾官 Nightlife Milan Concierge (+39 351 912 7047 / concierge@nightlifemilan.com) 的10项免费服务：1) 高清VIP卡座图；2) 官方酒水价目表；3) 零中介服务费；4) 全男士团队入场预先审批；5) 毕业派对与生日蛋糕(HACCP认证)安排；6) 晚宴秀+高空露台联票；7) 比赛/演唱会后保留卡座至凌晨01:30；8) 企业包场与电子发票；9) 加长林肯礼宾车及奔驰V级接送；10) 每周7天实时WhatsApp中文/多语种支持。",
     "faqQ1": "如何零佣金预订 VIP 卡座或嘉宾名单？",
     "faqQ2": "2026/2027 赛季 VIP 卡座和开胃酒多少钱？",
     "faqQ3": "俱乐部入口的严格着装要求是什么？",
@@ -443,7 +443,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "h2": "2. الأسعار الرسمية 2026/2027: أبيريتيفو ملكي، عشاء استعراضي، طاولات VIP وقائمة الزجاجات",
     "h3": "3. قواعد اللباس (Dress Code)، اختيار البوابة وضمان الدخول لمجموعات الرجال",
     "h4": "4. المترو، مواقف السيارات المحروسة 24 ساعة، لوجستيات سان سيرو والمعارض والجدول الزمني (19:30–05:00)",
-    "h5": "5. خدمات الكونسيرج Axel العشر المجانية (+39 351 912 7047) ومقارنة أفضل 6 نوادي في ميلانو",
+    "h5": "5. خدمات الكونسيرج Nightlife Milan Concierge العشر المجانية (+39 351 912 7047) ومقارنة أفضل 6 نوادي في ميلانو",
     "lblVenue": "النادي / الحدث",
     "lblZone": "المنطقة / الحي",
     "lblAddress": "العنوان الرسمي",
@@ -462,18 +462,18 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "fPrive": "طاولة VIP بريفه مرتفعة (8–10 أشخاص)",
     "fConsole": "طاولة سوبر بريفه بجانب الدي جي (10–15 شخصاً)",
     "incAperitivo": "طاولة محجوزة من الساعة 19:30، بوفيه ملكي أو عشاء فاخر، مشروب ممتاز أو زجاجة لكل 4 ضيوف، دخول ذو أولوية",
-    "incList": "اعتماد بالاسم عبر واتساب Axel، يشمل مشروباً واحداً، يخضع لقواعد اللباس وتوازن نسبة الرجال والنساء",
+    "incList": "اعتماد بالاسم عبر واتساب Nightlife Milan Concierge، يشمل مشروباً واحداً، يخضع لقواعد اللباس وتوازن نسبة الرجال والنساء",
     "incPista": "تحويل 100% من الحد الأدنى للإنفاق إلى زجاجات فاخرة، 6–8 بطاقات دخول VIP بدون طابور مع مضيفة، مشروبات غازية وثلج",
     "incPrive": "رصيد زجاجات 100%، جناح مرتفع بحراسة خاصة، 8–10 بطاقات VIP، خدمة زجاجات ماغنوم وشرارات ضوئية",
     "incConsole": "رصيد زجاجات 100% بجوار كابينة الدي جي، 10–15 سوار سوبر بريفه، لوحة LED مخصصة واستعراض فاخر",
     "music": "فوكال هاوس، أفرو هاوس، ريغيتون، هيب هوب، عشاء استعراضي ودي جي عالميين",
     "dress": "أناقة رسمية راقية (قميص بياقة وبليزر وحذاء جلدي للرجال؛ فستان سهرة أنيق للنساء؛ يُمنع تماماً الأحذية الرياضية والملابس الرياضية والقبعات وقمصان كرة القدم)",
     "crowd": "عارضو أزياء، مصممون، نجوم الدوري الإيطالي، خريجو الجامعات وضيوف VIP دوليون",
-    "intro": "دليل رسمي بإشراف Axel، كبير مستشاري الكونسيرج في Nightlife Milan (واتساب +39 351 912 7047 والبريد concierge@nightlifemilan.com). احجز بدون أي عمولة وكالة، واحصل على خريطة طاولات VIP خلال 10 دقائق مع استقبال سريع بدون انتظار.",
+    "intro": "دليل رسمي بإشراف Nightlife Milan Concierge، كبير مستشاري الكونسيرج في Nightlife Milan (واتساب +39 351 912 7047 والبريد concierge@nightlifemilan.com). احجز بدون أي عمولة وكالة، واحصل على خريطة طاولات VIP خلال 10 دقائق مع استقبال سريع بدون انتظار.",
     "pricesNote": "تطبق نوادي ميلانو نظام 100% Minimum Spend الشفاف: يتم تحويل كامل مبلغ طاولة VIP إلى زجاجات فاخرة من القائمة الرسمية للنادي (تبدأ الطاولات من 250–500 يورو وتصل إلى 1500–5000 يورو في السوبر بريفه) وتُدفع مباشرة في صندوق VIP داخل النادي.",
-    "doorNote": "مجموعات الرجال فقط (حفلات توديع العزوبية، الأصدقاء، مشجعي كرة القدم بعد مباريات سان سيرو) يتم رفضها في قوائم الدخول العادية؛ عبر حجز طاولة VIP معتمدة مسبقاً من خلال Axel (+39 351 912 7047) نضمن لك دخولاً مؤكداً 100%. يجب إحضار جواز السفر أو الهوية الأصلية.",
+    "doorNote": "مجموعات الرجال فقط (حفلات توديع العزوبية، الأصدقاء، مشجعي كرة القدم بعد مباريات سان سيرو) يتم رفضها في قوائم الدخول العادية؛ عبر حجز طاولة VIP معتمدة مسبقاً من خلال Nightlife Milan Concierge (+39 351 912 7047) نضمن لك دخولاً مؤكداً 100%. يجب إحضار جواز السفر أو الهوية الأصلية.",
     "logisticsNote": "وصول سريع عبر مترو ATM والحافلات الليلية. بعد مباريات أو حفلات ملعب سان سيرو، يقع نادي Aria Club Milano (#3 أولوية، Piazzale dello Sport 14) على بُعد 150 متراً فقط سيراً على الأقدام، بينما يفتح نادي Just Me Milano (#1 أولوية) طوال أيام الأسبوع السبعة حتى 05:00 صباحاً، ويقع Voya Rooftop (#5 أولوية، الطابق 20) على بُعد 3 محطات مترو M5.",
-    "axelNote": "خدمات الكونسيرج Axel العشر المجانية (+39 351 912 7047 / concierge@nightlifemilan.com): 1) خرائط طاولات VIP عالية الدقة؛ 2) قوائم الأسعار الرسمية؛ 3) صفر عمولة وكالة؛ 4) تصريح دخول لمجموعات الرجال؛ 5) تنظيم حفلات التخرج وأعياد الميلاد مع كعكة معتمدة؛ 6) باقات العشاء الغنائي والروفتوب؛ 7) الاحتفاظ بالطاولة حتى 01:30 صباحاً بعد المباريات والحفلات؛ 8) فعاليات الشركات مع الفواتير؛ 9) نقل بسيارات ليموزين ومرسيدس V-Class؛ 10) دعم واتساب طوال الأسبوع.",
+    "conciergeNote": "خدمات الكونسيرج Nightlife Milan Concierge العشر المجانية (+39 351 912 7047 / concierge@nightlifemilan.com): 1) خرائط طاولات VIP عالية الدقة؛ 2) قوائم الأسعار الرسمية؛ 3) صفر عمولة وكالة؛ 4) تصريح دخول لمجموعات الرجال؛ 5) تنظيم حفلات التخرج وأعياد الميلاد مع كعكة معتمدة؛ 6) باقات العشاء الغنائي والروفتوب؛ 7) الاحتفاظ بالطاولة حتى 01:30 صباحاً بعد المباريات والحفلات؛ 8) فعاليات الشركات مع الفواتير؛ 9) نقل بسيارات ليموزين ومرسيدس V-Class؛ 10) دعم واتساب طوال الأسبوع.",
     "faqQ1": "كيف أحجز طاولة VIP أو قائمة ضيوف بدون عمولة؟",
     "faqQ2": "كم سعر طاولة VIP والأبيريتيفو في موسم 2026/2027؟",
     "faqQ3": "ما هي قواعد اللباس الإلزامية عند البوابة؟",
@@ -488,7 +488,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "h2": "2. Официални Цени 2026/2027: Кралски Аперитив, Вечеря-Шоу, VIP Маси и Бутилки",
     "h3": "3. Дрескод, Селекция на Входа и Гарантиран Достъп за Мъжки Компании",
     "h4": "4. Метро, Денонощен Паркинг, Логистика Сан Сиро / Панаири и График (19:30–05:00)",
-    "h5": "5. 10-те Безплатни Услуги на Консиерж Axel (+39 351 912 7047) и Топ 6 Клуба в Милано",
+    "h5": "5. 10-те Безплатни Услуги на Консиерж Nightlife Milan Concierge (+39 351 912 7047) и Топ 6 Клуба в Милано",
     "lblVenue": "Клуб / Събитие",
     "lblZone": "Квартал / Зона",
     "lblAddress": "Официален Адрес",
@@ -507,18 +507,18 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "fPrive": "VIP Маса Високо Privé (8–10 Гости)",
     "fConsole": "Super Privé DJ Конзола (10–15 Гости)",
     "incAperitivo": "Резервирана маса от 19:30, гурме бюфет или сервирана вечеря, 1 премиум напитка или бутилка вино на 4 гости",
-    "incList": "Поименна акредитация чрез WhatsApp на Axel, 1 напитка включена, при спазване на дрескод и баланс 1:1 мъже/жени",
+    "incList": "Поименна акредитация чрез WhatsApp на Nightlife Milan Concierge, 1 напитка включена, при спазване на дрескод и баланс 1:1 мъже/жени",
     "incPista": "100% минимална консумация в бутилки водка/шампанско, 6–8 VIP пропуска без опашка с хостеса, безалкохолни и лед",
     "incPrive": "100% кредит в бутилки, подиум Privé с охрана, 8–10 VIP пропуска, сервиз Magnum и фонтани",
     "incConsole": "100% кредит в бутилки до DJ пулта, 10–15 гривни Super Privé, LED табло и парад Dom Pérignon / Don Julio 1942",
     "music": "Vocal House, Afro-House, Reggaeton, Hip-Hop, Вечеря-Шоу и Международни DJ",
     "dress": "Елегантен Стил (риза с яка, сако и кожени обувки за мъже; коктейлна рокля или елегантен сет за жени; забранени са маратонки за бягане, анцузи, шапки и футболни фланелки)",
     "crowd": "Модели, дизайнери, футболисти от Серия А, абсолвенти и международни VIP гости",
-    "intro": "Официален наръчник от Axel, главен консиерж на Nightlife Milan (WhatsApp +39 351 912 7047 и concierge@nightlifemilan.com). Резервирайте без комисиона, получете карта на VIP масите до 10 минути и влезте без чакане.",
+    "intro": "Официален наръчник от Nightlife Milan Concierge, главен консиерж на Nightlife Milan (WhatsApp +39 351 912 7047 и concierge@nightlifemilan.com). Резервирайте без комисиона, получете карта на VIP масите до 10 минути и влезте без чакане.",
     "pricesNote": "В клубовете на Милано важи правилото 100% Minimum Spend: цялата сума за вашата VIP маса се превръща в бутилки Водка (Belvedere, Grey Goose 180–320€), Текила (Don Julio 1942, Clase Azul 450–850€) и Шампанско (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+), платими директно на VIP касата.",
-    "doorNote": "Само мъжки компании (ергенско парти, приятели, фенове след мач на Сан Сиро) не се допускат по обикновен списък; с предварително одобрена VIP маса чрез Axel (+39 351 912 7047) имате 100% гарантиран вход. Задължителен е оригинален документ за самоличност.",
+    "doorNote": "Само мъжки компании (ергенско парти, приятели, фенове след мач на Сан Сиро) не се допускат по обикновен списък; с предварително одобрена VIP маса чрез Nightlife Milan Concierge (+39 351 912 7047) имате 100% гарантиран вход. Задължителен е оригинален документ за самоличност.",
     "logisticsNote": "Бърз достъп с метро ATM и нощни автобуси NM1/NM2/NM3/NM4. След мач или концерт на Сан Сиро, Aria Club Milano (#3 Приоритет, Piazzale dello Sport 14) е само на 150 метра пеша, Just Me Milano (#1 Приоритет) работи 7 нощи в седмицата до 05:00, а Voya Rooftop (#5 Приоритет, 20 етаж) е на 3 спирки с метро M5.",
-    "axelNote": "10 безплатни услуги от Axel (+39 351 912 7047 / concierge@nightlifemilan.com): 1) VIP карти на залите; 2) Официални ценоразписи; 3) Нула комисиона; 4) Одобрение за мъжки групи; 5) Дипломиране и рожден ден с HACCP торта; 6) Пакети Вечеря + Руфтоп; 7) Запазване на маса до 01:30 след мач/концерт; 8) Фирмени партита с фактура; 9) Трансфери с лимузина и Mercedes V-Class; 10) Поддръжка в WhatsApp 24/7.",
+    "conciergeNote": "10 безплатни услуги от Nightlife Milan Concierge (+39 351 912 7047 / concierge@nightlifemilan.com): 1) VIP карти на залите; 2) Официални ценоразписи; 3) Нула комисиона; 4) Одобрение за мъжки групи; 5) Дипломиране и рожден ден с HACCP торта; 6) Пакети Вечеря + Руфтоп; 7) Запазване на маса до 01:30 след мач/концерт; 8) Фирмени партита с фактура; 9) Трансфери с лимузина и Mercedes V-Class; 10) Поддръжка в WhatsApp 24/7.",
     "faqQ1": "Как да резервирам VIP маса или списък без комисиона?",
     "faqQ2": "Колко струва VIP маса и аперитив през 2026/2027?",
     "faqQ3": "Какъв е задължителният дрескод на входа?",
@@ -552,18 +552,18 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "fPrive": "Povišeni Privé VIP Stol (8–10 Osoba)",
     "fConsole": "Super Privé DJ Pult (10–15 Osoba)",
     "incAperitivo": "Rezervirani stol od 19:30, bogati buffet ili večera u sljedovima, 1 premium piće ili boca vina na 4 osobe",
-    "incList": "Imenična akreditacija putem Axel WhatsAppa, 1 piće uključeno, uz obvezan dress code i omjer muškaraca i žena 1:1",
+    "incList": "Imenična akreditacija putem Nightlife Milan Concierge WhatsAppa, 1 piće uključeno, uz obvezan dress code i omjer muškaraca i žena 1:1",
     "incPista": "100% minimalne potrošnje (minimum spend) u bocama žestokih pića/šampanjca, 6–8 VIP ulaza bez čekanja uz hostesu, sokovi i led",
     "incPrive": "100% kredit u bocama, povišeni separe uz privatno osiguranje, 8–10 VIP ulaza, Magnum servis i prskalice",
     "incConsole": "100% kredit u bocama pokraj DJ pulta, 10–15 Super Privé narukvica, LED natpis i parada Dom Pérignon / Don Julio 1942",
     "music": "Vocal House, Afro-House, Reggaeton, Hip-Hop, Dinner Show i Međunarodni DJ-evi",
     "dress": "Strogo Elegantno (košulja s ovratnikom, sako i kožne cipele za muškarce; koktel haljina ili večernji komplet za žene; zabranjene su tenisice za trčanje, trenirke, kape i nogometni dresovi)",
     "crowd": "Modeli, modni dizajneri, nogometaši Serie A, diplomanti i međunarodni VIP gosti",
-    "intro": "Službeni vodič koji potpisuje Axel, Senior Concierge za Nightlife Milan (WhatsApp +39 351 912 7047 i concierge@nightlifemilan.com). Rezervirajte bez agencijske provizije, primite tlocrt VIP stolova za 10 minuta i uđite bez čekanja u redu.",
+    "intro": "Službeni vodič koji potpisuje Nightlife Milan Concierge, Senior Concierge za Nightlife Milan (WhatsApp +39 351 912 7047 i concierge@nightlifemilan.com). Rezervirajte bez agencijske provizije, primite tlocrt VIP stolova za 10 minuta i uđite bez čekanja u redu.",
     "pricesNote": "U milanskim klubovima vrijedi pravilo 100% Minimum Spend: cijeli iznos vašeg VIP stola troši se na boce Vodke (Belvedere, Grey Goose 180–320€), Tekile (Don Julio 1942, Clase Azul 450–850€) i Šampanjca (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+) uz plaćanje izravno na VIP blagajni kluba.",
     "doorNote": "Isključivo muške grupe (momačke večeri, prijatelji, navijači nakon utakmice na San Siru) ne mogu ući preko obične liste; rezervacijom unaprijed odobrenog VIP stola preko Axela (+39 351 912 7047) imate 100% zajamčen VIP ulaz. Obvezna je fizička osobna iskaznica ili putovnica.",
     "logisticsNote": "Brz dolazak ATM metroom i noćnim autobusima NM1/NM2/NM3/NM4. Nakon utakmice ili koncerta na San Siru, Aria Club Milano (#3 Prioritet, Piazzale dello Sport 14) udaljen je samo 150 metara pješice, Just Me Milano (#1 Prioritet) radi 7 noći u tjednu do 05:00, a Voya Rooftop (#5 Prioritet, 20. kat) udaljen je 3 stanice linijom M5.",
-    "axelNote": "10 besplatnih usluga Axela (+39 351 912 7047 / concierge@nightlifemilan.com): 1) VIP tlocrti klubova; 2) Službeni cjenici boca; 3) Nula provizije; 4) Odobrenje za muške grupe; 5) Promocije diplome i rođendani uz HACCP tortu; 6) Dinner Show + Rooftop paketi; 7) Čuvanje stola do 01:30 nakon utakmice/koncerta; 8) Poslovni domjenci uz račun; 9) Prijevoz limuzinom i Mercedes V-klasom; 10) 24/7 WhatsApp podrška.",
+    "conciergeNote": "10 besplatnih usluga Axela (+39 351 912 7047 / concierge@nightlifemilan.com): 1) VIP tlocrti klubova; 2) Službeni cjenici boca; 3) Nula provizije; 4) Odobrenje za muške grupe; 5) Promocije diplome i rođendani uz HACCP tortu; 6) Dinner Show + Rooftop paketi; 7) Čuvanje stola do 01:30 nakon utakmice/koncerta; 8) Poslovni domjenci uz račun; 9) Prijevoz limuzinom i Mercedes V-klasom; 10) 24/7 WhatsApp podrška.",
     "faqQ1": "Kako rezervirati VIP stol ili listu bez provizije?",
     "faqQ2": "Koliko košta VIP stol i Aperitivo u sezoni 2026/2027?",
     "faqQ3": "Koji je obvezni dress code na ulazu?",
@@ -608,7 +608,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "pricesNote": "V milánských klubech platí pravidlo 100% Minimum Spend: celá částka vašeho VIP stolu se promění v láhve Vodky (Belvedere, Grey Goose 180–320€), Tequily (Don Julio 1942, Clase Azul 450–850€) a Šampaňského (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+) a platí se přímo na VIP pokladně klubu.",
     "doorNote": "Čistě mužské skupiny (rozlučky se svobodou, přátelé, fotbaloví fanoušci po zápase na San Siru) nejsou přes běžný guestlist vpuštěny; rezervací předem schváleného VIP stolu přes Axela (+39 351 912 7047) máte 100% garantovaný vstup. Nutný fyzický průkaz totožnosti.",
     "logisticsNote": "Rychlé spojení metrem ATM a nočními autobusy NM1/NM2/NM3/NM4. Po zápase nebo koncertu na San Siru je Aria Club Milano (#3 Priorita, Piazzale dello Sport 14) jen 150 metrů pěšky, Just Me Milano (#1 Priorita) má otevřeno 7 nocí v týdnu do 05:00 a Voya Rooftop (#5 Priorita, 20. patro) je 3 stanice metrem M5.",
-    "axelNote": "10 bezplatných služeb Axela (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Plánky VIP stolů; 2) Oficiální ceníky lahví; 3) Nulová provize; 4) Schválení pánských skupin; 5) Promoce a narozeniny s HACCP dortem; 6) Balíčky Dinner Show + Rooftop; 7) Držení stolu do 01:30 po zápase/koncertu; 8) Firemní akce na fakturu; 9) Transfery limuzínou a Mercedes V-Class; 10) Podpora na WhatsAppu 24/7.",
+    "conciergeNote": "10 bezplatných služeb Axela (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Plánky VIP stolů; 2) Oficiální ceníky lahví; 3) Nulová provize; 4) Schválení pánských skupin; 5) Promoce a narozeniny s HACCP dortem; 6) Balíčky Dinner Show + Rooftop; 7) Držení stolu do 01:30 po zápase/koncertu; 8) Firemní akce na fakturu; 9) Transfery limuzínou a Mercedes V-Class; 10) Podpora na WhatsAppu 24/7.",
     "faqQ1": "Jak rezervovat VIP stůl nebo guestlist bez provize?",
     "faqQ2": "Kolik stojí VIP stůl a Aperitivo v sezóně 2026/2027?",
     "faqQ3": "Jaký je povinný dress code u vstupu?",
@@ -653,7 +653,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "pricesNote": "W klubach Mediolanu obowiązuje zasada 100% Minimum Spend: cała kwota stolika VIP przeznaczana jest na butelki Wódki (Belvedere, Grey Goose 180–320€), Tequili (Don Julio 1942, Clase Azul 450–850€) oraz Szampana (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+) płatne bezpośrednio w kasie VIP klubu.",
     "doorNote": "Grupy złożone wyłącznie z mężczyzn (wieczory kawalerskie, koledzy, kibice po meczu na San Siro) są odrzucane na zwykłej liście gości; rezerwacja autoryzowanego stolika VIP przez Axela (+39 351 912 7047) gwarantuje 100% pewne wejście. Wymagany fizyczny dokument tożsamości.",
     "logisticsNote": "Szybki dojazd metrem ATM i autobusami nocnymi NM1/NM2/NM3/NM4. Po meczu lub koncercie na San Siro klub Aria Club Milano (#3 Priorytet, Piazzale dello Sport 14) znajduje się zaledwie 150 metrów pieszo, Just Me Milano (#1 Priorytet) działa 7 nocy w tygodniu do 05:00, a Voya Rooftop (#5 Priorytet, 20. piętro) leży 3 przystanki linią M5.",
-    "axelNote": "10 darmowych usług Axela (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Plany stolików VIP; 2) Oficjalne cenniki butelek; 3) Zero prowizji; 4) Autoryzacja grup męskich; 5) Obrony dyplomu i urodziny z tortem HACCP; 6) Pakiety Kolacja Show + Rooftop; 7) Gwarancja stolika do 01:30 po meczu/koncercie; 8) Imprezy firmowe z fakturą; 9) Transfery limuzyną i Mercedesem Klasy V; 10) Wsparcie WhatsApp 24/7.",
+    "conciergeNote": "10 darmowych usług Axela (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Plany stolików VIP; 2) Oficjalne cenniki butelek; 3) Zero prowizji; 4) Autoryzacja grup męskich; 5) Obrony dyplomu i urodziny z tortem HACCP; 6) Pakiety Kolacja Show + Rooftop; 7) Gwarancja stolika do 01:30 po meczu/koncercie; 8) Imprezy firmowe z fakturą; 9) Transfery limuzyną i Mercedesem Klasy V; 10) Wsparcie WhatsApp 24/7.",
     "faqQ1": "Jak zarezerwować stolik VIP lub listę gości bez prowizji?",
     "faqQ2": "Ile kosztuje stolik VIP i Aperitivo w sezonie 2026/2027?",
     "faqQ3": "Jaki dress code obowiązuje przy wejściu?",
@@ -668,7 +668,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "h2": "2. Lista Oficială de Prețuri 2026/2027: Royal Aperitivo, Dinner Show, Mese VIP și Sticle",
     "h3": "3. Dress Code, Selecția la Intrare și Acces Garantat pentru Grupuri de Bărbați",
     "h4": "4. Metrou, Parcare Păzită 24/7, Logistică San Siro / Târguri și Program (19:30–05:00)",
-    "h5": "5. Cele 10 Servicii Gratuite ale Concierge-ului Axel (+39 351 912 7047) și Top 6 Cluburi",
+    "h5": "5. Cele 10 Servicii Gratuite ale Concierge-ului Nightlife Milan Concierge (+39 351 912 7047) și Top 6 Cluburi",
     "lblVenue": "Club / Eveniment",
     "lblZone": "Cartier / Zonă",
     "lblAddress": "Adresă Oficială",
@@ -687,18 +687,18 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "fPrive": "Masă VIP Privé Înălțat (8–10 Persoane)",
     "fConsole": "Super Privé Pupitru DJ (10–15 Persoane)",
     "incAperitivo": "Masă rezervată de la 19:30, bufet regal sau cină servită, 1 băutură premium sau o sticlă de vin la 4 persoane",
-    "incList": "Acreditare nominală prin WhatsApp Axel, 1 băutură inclusă, supusă selecției vestimentare și raportului 1:1 bărbați/femei",
+    "incList": "Acreditare nominală prin WhatsApp Nightlife Milan Concierge, 1 băutură inclusă, supusă selecției vestimentare și raportului 1:1 bărbați/femei",
     "incPista": "100% consumație minimă (minimum spend) în sticle de spirtoase/șampanie, 6–8 intrări VIP fără coadă cu hostess, răcoritoare și gheață",
     "incPrive": "100% credit în sticle, canapea în zonă Privé cu pază proprie, 8–10 intrări VIP, serviciu Magnum și artificii",
     "incConsole": "100% credit în sticle lângă DJ, 10–15 brățări Super Privé, panou LED personalizat și paradă Dom Pérignon / Don Julio 1942",
     "music": "Vocal House, Afro-House, Reggaeton, Hip-Hop, Cină Spectacol și DJ Internaționali",
     "dress": "Strict Elegant și Sartorial (cămașă cu guler, sacou și pantofi din piele pentru bărbați; rochie de cocktail sau ținută chic de seară pentru femei; interzise încălțămintea sport de alergare, treningurile, șepcile și tricourile de fotbal)",
     "crowd": "Modele, designeri vestimentari, fotbaliști din Serie A, absolvenți și oaspeți VIP internaționali",
-    "intro": "Ghid oficial verificat de Axel, Senior Concierge la Nightlife Milan (WhatsApp +39 351 912 7047 și concierge@nightlifemilan.com). Rezervă cu zero comision de agenție, primește harta meselor VIP în 10 minute și intră fără coadă pe culoarul VIP.",
+    "intro": "Ghid oficial verificat de Nightlife Milan Concierge, Senior Concierge la Nightlife Milan (WhatsApp +39 351 912 7047 și concierge@nightlifemilan.com). Rezervă cu zero comision de agenție, primește harta meselor VIP în 10 minute și intră fără coadă pe culoarul VIP.",
     "pricesNote": "În cluburile din Milano se aplică regula 100% Minimum Spend: întreaga sumă a mesei VIP se transformă în sticle de Vodcă (Belvedere, Grey Goose 180–320€), Tequila (Don Julio 1942, Clase Azul 450–850€) și Șampanie (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+) achitate direct la casa VIP a clubului.",
-    "doorNote": "Grupurile formate exclusiv din bărbați (petrecerea burlacilor, prieteni, suporteri după meci pe San Siro) sunt refuzate pe lista standard; rezervând o Masă VIP pre-autorizată prin Axel (+39 351 912 7047) ai acces 100% garantat. Actul de identitate fizic este obligatoriu.",
+    "doorNote": "Grupurile formate exclusiv din bărbați (petrecerea burlacilor, prieteni, suporteri după meci pe San Siro) sunt refuzate pe lista standard; rezervând o Masă VIP pre-autorizată prin Nightlife Milan Concierge (+39 351 912 7047) ai acces 100% garantat. Actul de identitate fizic este obligatoriu.",
     "logisticsNote": "Acces direct cu metroul ATM și autobuzele de noapte NM1/NM2/NM3/NM4. După un meci sau concert pe San Siro, Aria Club Milano (#3 Prioritate, Piazzale dello Sport 14) este la doar 150 de metri pe jos, Just Me Milano (#1 Prioritate) este deschis 7 nopți pe săptămână până la 05:00, iar Voya Rooftop (#5 Prioritate, etajul 20) este la 3 stații pe linia M5.",
-    "axelNote": "Cele 10 servicii gratuite oferite de Axel (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Hărți VIP de înaltă rezoluție; 2) Liste oficiale de sticle; 3) Zero comision; 4) Aprobare pentru grupuri de bărbați; 5) Petreceri de absolvire și aniversări cu tort HACCP; 6) Pachete Cină Spectacol + Rooftop; 7) Păstrarea mesei până la 01:30 după meci/concert; 8) Evenimente corporate cu factură; 9) Transfer cu Limuzina și Mercedes V-Class; 10) Asistență WhatsApp 24/7.",
+    "conciergeNote": "Cele 10 servicii gratuite oferite de Nightlife Milan Concierge (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Hărți VIP de înaltă rezoluție; 2) Liste oficiale de sticle; 3) Zero comision; 4) Aprobare pentru grupuri de bărbați; 5) Petreceri de absolvire și aniversări cu tort HACCP; 6) Pachete Cină Spectacol + Rooftop; 7) Păstrarea mesei până la 01:30 după meci/concert; 8) Evenimente corporate cu factură; 9) Transfer cu Limuzina și Mercedes V-Class; 10) Asistență WhatsApp 24/7.",
     "faqQ1": "Cum rezerv o Masă VIP sau listă fără comision?",
     "faqQ2": "Cât costă o Masă VIP și Aperitivo în sezonul 2026/2027?",
     "faqQ3": "Care este dress code-ul obligatoriu la intrare?",
@@ -713,7 +713,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "h2": "2. Officielle Priser 2026/2027: Royal Aperitivo, Dinner Show, VIP-Borde og Flaskemenu",
     "h3": "3. Dresscode, Dørselektion og Garanteret Adgang for Mandegrupper",
     "h4": "4. Metro, Overvåget Parkering 24/7, San Siro / Messe Logistik og Tidsplan (19:30–05:00)",
-    "h5": "5. De 10 Gratis Concierge-Services fra Axel (+39 351 912 7047) og Top 6 Klubber i Milano",
+    "h5": "5. De 10 Gratis Concierge-Services fra Nightlife Milan Concierge (+39 351 912 7047) og Top 6 Klubber i Milano",
     "lblVenue": "Klub / Event",
     "lblZone": "Bydel / Område",
     "lblAddress": "Officiel Adresse",
@@ -732,18 +732,18 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "fPrive": "Forhøjet Privé VIP-Bord (8–10 Personer)",
     "fConsole": "Super Privé DJ-Pult (10–15 Personer)",
     "incAperitivo": "Reserveret bord fra 19:30, royal buffet eller serveret middag, 1 premium drink eller flaske vin pr. 4 gæster",
-    "incList": "Navneakkreditering via Axels WhatsApp, 1 drink inkluderet, kræver dresscode og 1:1 balance mellem mænd og kvinder",
+    "incList": "Navneakkreditering via Nightlife Milan WhatsApp, 1 drink inkluderet, kræver dresscode og 1:1 balance mellem mænd og kvinder",
     "incPista": "100% minimum spend konverteret til flasker spiritus/champagne, 6–8 VIP-pas uden kø med værtinde, mixers og is",
     "incPrive": "100% flaskekredit, forhøjet VIP-sektion med egen vagt, 8–10 VIP-pas, Magnum- og stjernekaster-service",
     "incConsole": "100% flaskekredit ved DJ-pulten, 10–15 Super Privé-armbånd, LED-skilt og Dom Pérignon / Don Julio 1942 parade",
     "music": "Vocal House, Afro-House, Reggaeton, Hip-Hop, Dinner Show og Internationale DJs",
     "dress": "Strengt Elegant (skjorte med krave, blazer og lædersko til mænd; cocktailkjole eller elegant aftensæt til kvinder; løbesko, træningstøj, kasketter og fodboldtrøjer er forbudt)",
     "crowd": "Modeller, modedesignere, Serie A-fodboldspillere, dimittender og internationale VIP-gæster",
-    "intro": "Officiel guide udarbejdet af Axel, Senior Concierge hos Nightlife Milan (WhatsApp +39 351 912 7047 og concierge@nightlifemilan.com). Book uden gebyr, modtag VIP-bordplan inden for 10 minutter og gå direkte ind via VIP-køen.",
+    "intro": "Officiel guide udarbejdet af Nightlife Milan Concierge, Senior Concierge hos Nightlife Milan (WhatsApp +39 351 912 7047 og concierge@nightlifemilan.com). Book uden gebyr, modtag VIP-bordplan inden for 10 minutter og gå direkte ind via VIP-køen.",
     "pricesNote": "I Milanos klubber gælder reglen om 100% Minimum Spend: hele beløbet for dit VIP-bord bruges på flasker Vodka (Belvedere, Grey Goose 180–320€), Tequila (Don Julio 1942, Clase Azul 450–850€) og Champagne (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+), som betales direkte i klubbens VIP-kasse.",
-    "doorNote": "Rene mandegrupper (polterabend, venner, fodboldfans efter kamp på San Siro) afvises på almindelig gæsteliste; ved at booke et forhåndsgodkendt VIP-bord via Axel (+39 351 912 7047) er jeres adgang 100% garanteret. Fysisk ID er påkrævet.",
+    "doorNote": "Rene mandegrupper (polterabend, venner, fodboldfans efter kamp på San Siro) afvises på almindelig gæsteliste; ved at booke et forhåndsgodkendt VIP-bord via Nightlife Milan Concierge (+39 351 912 7047) er jeres adgang 100% garanteret. Fysisk ID er påkrævet.",
     "logisticsNote": "Hurtig adgang med ATM-metro og natbusser NM1/NM2/NM3/NM4. Efter kamp eller koncert på San Siro ligger Aria Club Milano (#3 Prioritet, Piazzale dello Sport 14) kun 150 meter væk til fods, Just Me Milano (#1 Prioritet) har åbent alle ugens 7 nætter til kl. 05:00, og Voya Rooftop (#5 Prioritet, 20. etage) ligger 3 stop med M5.",
-    "axelNote": "Axels 10 gratis services (+39 351 912 7047 / concierge@nightlifemilan.com): 1) VIP-bordplaner; 2) Officielle flaskelister; 3) Nul kommission; 4) Forhåndsgodkendelse af mandegrupper; 5) Dimissions- og fødselsdagsfester med HACCP-kage; 6) Dinner Show + Rooftop-pakker; 7) Bordgaranti til kl. 01:30 efter kamp/koncert; 8) Firmaevents med faktura; 9) Limousine- og Mercedes V-Class-transfer; 10) 24/7 WhatsApp-hjælp.",
+    "conciergeNote": "Nightlife Milan 10 gratis services (+39 351 912 7047 / concierge@nightlifemilan.com): 1) VIP-bordplaner; 2) Officielle flaskelister; 3) Nul kommission; 4) Forhåndsgodkendelse af mandegrupper; 5) Dimissions- og fødselsdagsfester med HACCP-kage; 6) Dinner Show + Rooftop-pakker; 7) Bordgaranti til kl. 01:30 efter kamp/koncert; 8) Firmaevents med faktura; 9) Limousine- og Mercedes V-Class-transfer; 10) 24/7 WhatsApp-hjælp.",
     "faqQ1": "Hvordan booker jeg VIP-bord eller gæsteliste uden kommission?",
     "faqQ2": "Hvad koster et VIP-bord og Aperitivo i 2026/2027?",
     "faqQ3": "Hvad er den obligatoriske dresscode i døren?",
@@ -758,7 +758,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "h2": "2. Officiella Priser 2026/2027: Royal Aperitivo, Middagsshow, VIP-Bord och Flaskmeny",
     "h3": "3. Klädkod, Dörrselektion och Garanterat Inträde för Killgrupper",
     "h4": "4. Tunnelbana (Metro), Bevakad Parkering 24/7, San Siro / Mässlogistik och Schema (19:30–05:00)",
-    "h5": "5. De 10 Kostnadsfria Conciergetjänsterna från Axel (+39 351 912 7047) och Topp 6 Klubbar",
+    "h5": "5. De 10 Kostnadsfria Conciergetjänsterna från Nightlife Milan Concierge (+39 351 912 7047) och Topp 6 Klubbar",
     "lblVenue": "Klubb / Event",
     "lblZone": "Stadsdel / Område",
     "lblAddress": "Officiell Adress",
@@ -777,18 +777,18 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "fPrive": "Upphöjt Privé VIP-Bord (8–10 Personer)",
     "fConsole": "Super Privé DJ-Bås (10–15 Personer)",
     "incAperitivo": "Reserverat bord från 19:30, royal buffé eller serverad middag, 1 premiumdrink eller flaska vin per 4 gäster",
-    "incList": "Namnackreditering via Axels WhatsApp, 1 drink ingår, kräver klädkod och 1:1 fördelning mellan män och kvinnor",
+    "incList": "Namnackreditering via Nightlife Milan WhatsApp, 1 drink ingår, kräver klädkod och 1:1 fördelning mellan män och kvinnor",
     "incPista": "100% minimum spend omvandlas till flaskor sprit/champagne, 6–8 VIP-pass utan kö med värdinna, läsk och is",
     "incPrive": "100% flaskkredit, upphöjd VIP-loge med egen vakt, 8–10 VIP-pass, Magnum- och isfackelservice",
     "incConsole": "100% flaskkredit bredvid DJ-båset, 10–15 Super Privé-armband, LED-skylt och Dom Pérignon / Don Julio 1942 show",
     "music": "Vocal House, Afro-House, Reggaeton, Hip-Hop, Middagsshow och Internationella DJs",
     "dress": "Strikt Elegant (skjorta med krage, kavaj och läderskor för män; cocktailklänning eller elegant kvällsoutfit för kvinnor; löparskor, mjukiskläder, kepsar och fotbollströjor är förbjudna)",
     "crowd": "Modeller, modeskapare, Serie A-fotbollsspelare, universitetsstudenter och internationella VIP-gäster",
-    "intro": "Officiell guide sammanställd av Axel, Senior Concierge på Nightlife Milan (WhatsApp +39 351 912 7047 och concierge@nightlifemilan.com). Boka utan agentavgift, få VIP-bordsplanen inom 10 minuter och gå in utan kö.",
+    "intro": "Officiell guide sammanställd av Nightlife Milan Official Concierge (WhatsApp +39 351 912 7047 och concierge@nightlifemilan.com). Boka utan agentavgift, få VIP-bordsplanen inom 10 minuter och gå in utan kö.",
     "pricesNote": "På Milanos nattklubbar gäller 100% Minimum Spend: hela beloppet för ditt VIP-bord används till flaskor Vodka (Belvedere, Grey Goose 180–320€), Tequila (Don Julio 1942, Clase Azul 450–850€) och Champagne (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+) som betalas direkt i klubbens VIP-kassa.",
-    "doorNote": "Grupper med enbart män (svensexa, kompisgäng, fotbollsfans efter match på San Siro) nekas på vanlig gästlista; genom att boka ett förhandsgodkänt VIP-bord via Axel (+39 351 912 7047) är ert inträde 100% garanterat. Fysiskt ID-kort krävs.",
+    "doorNote": "Grupper med enbart män (svensexa, kompisgäng, fotbollsfans efter match på San Siro) nekas på vanlig gästlista; genom att boka ett förhandsgodkänt VIP-bord via Nightlife Milan Concierge (+39 351 912 7047) är ert inträde 100% garanterat. Fysiskt ID-kort krävs.",
     "logisticsNote": "Snabb anslutning med ATM-tunnelbana och nattbussar NM1/NM2/NM3/NM4. Efter match eller konsert på San Siro ligger Aria Club Milano (#3 Prioritet, Piazzale dello Sport 14) bara 150 meter bort till fots, Just Me Milano (#1 Prioritet) har öppet 7 nätter i veckan till 05:00 och Voya Rooftop (#5 Prioritet, våning 20) ligger 3 stationer bort med M5.",
-    "axelNote": "Axels 10 kostnadsfria tjänster (+39 351 912 7047 / concierge@nightlifemilan.com): 1) VIP-bordsplaner; 2) Officiella flaskprislistor; 3) Noll provision; 4) Förhandsgodkännande för killgrupper; 5) Examens- och födelsedagsfester med HACCP-tårta; 6) Middagsshow + Rooftop-paket; 7) Bordsgaranti till 01:30 efter match/konsert; 8) Företagsevent mot faktura; 9) Limousine- och Mercedes V-Klass-transfer; 10) 24/7 WhatsApp-support.",
+    "conciergeNote": "Nightlife Milan 10 kostnadsfria tjänster (+39 351 912 7047 / concierge@nightlifemilan.com): 1) VIP-bordsplaner; 2) Officiella flaskprislistor; 3) Noll provision; 4) Förhandsgodkännande för killgrupper; 5) Examens- och födelsedagsfester med HACCP-tårta; 6) Middagsshow + Rooftop-paket; 7) Bordsgaranti till 01:30 efter match/konsert; 8) Företagsevent mot faktura; 9) Limousine- och Mercedes V-Klass-transfer; 10) 24/7 WhatsApp-support.",
     "faqQ1": "Hur bokar jag VIP-bord eller gästlista utan avgift?",
     "faqQ2": "Vad kostar ett VIP-bord och Aperitivo under 2026/2027?",
     "faqQ3": "Vilken klädkod gäller i dörren?",
@@ -803,7 +803,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "h2": "2. Offisielle Priser 2026/2027: Royal Aperitivo, Middagsshow, VIP-Bord og Flaskemeny",
     "h3": "3. Kleskode, Dørseleksjon og Garantert Inngang for Guttegrupper",
     "h4": "4. T-Bane (Metro), Bevoktet Parkering 24/7, San Siro / Messelogistikk og Tidsplan (19:30–05:00)",
-    "h5": "5. De 10 Gratis Conciergetjenestene fra Axel (+39 351 912 7047) og Topp 6 Klubber",
+    "h5": "5. De 10 Gratis Conciergetjenestene fra Nightlife Milan Concierge (+39 351 912 7047) og Topp 6 Klubber",
     "lblVenue": "Klubb / Event",
     "lblZone": "Bydel / Område",
     "lblAddress": "Offisiell Adresse",
@@ -822,18 +822,18 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "fPrive": "Opphøyd Privé VIP-Bord (8–10 Personer)",
     "fConsole": "Super Privé DJ-Boks (10–15 Personer)",
     "incAperitivo": "Reservert bord fra 19:30, royal buffet eller servert middag, 1 premium drink eller flaske vin per 4 gjester",
-    "incList": "Navneakkreditering via Axels WhatsApp, 1 drink inkludert, krever kleskode og 1:1 balanse mellom menn og kvinner",
+    "incList": "Navneakkreditering via Nightlife Milan WhatsApp, 1 drink inkludert, krever kleskode og 1:1 balanse mellom menn og kvinner",
     "incPista": "100% minimum spend konvertert til flasker brennevin/champagne, 6–8 VIP-pass uten kø med vertinne, blandevann og is",
     "incPrive": "100% flaskekreditt, opphøyd VIP-seksjon med egen vakt, 8–10 VIP-pass, Magnum- og stjerneskuddservice",
     "incConsole": "100% flaskekreditt ved DJ-boksen, 10–15 Super Privé-bånd, LED-skilt og Dom Pérignon / Don Julio 1942 parade",
     "music": "Vocal House, Afro-House, Reggaeton, Hip-Hop, Middagsshow og Internasjonale DJs",
     "dress": "Strengt Elegant (skjorte med krage, blazer og skinnsko for menn; cocktailkjole eller elegant kveldsantrekk for kvinner; joggesko, treningsklær, caps og fotballdrakter er forbudt)",
     "crowd": "Modeller, motedesignere, Serie A-fotballspillere, nyutdannede og internasjonale VIP-gjester",
-    "intro": "Offisiell guide utarbeidet av Axel, Senior Concierge hos Nightlife Milan (WhatsApp +39 351 912 7047 og concierge@nightlifemilan.com). Bestill uten gebyr, motta VIP-bordkart innen 10 minutter og gå rett inn via VIP-inngangen.",
+    "intro": "Offisiell guide utarbeidet av Nightlife Milan Concierge, Senior Concierge hos Nightlife Milan (WhatsApp +39 351 912 7047 og concierge@nightlifemilan.com). Bestill uten gebyr, motta VIP-bordkart innen 10 minutter og gå rett inn via VIP-inngangen.",
     "pricesNote": "På Milanos nattklubber gjelder 100% Minimum Spend: hele beløpet for VIP-bordet brukes på flasker Vodka (Belvedere, Grey Goose 180–320€), Tequila (Don Julio 1942, Clase Azul 450–850€) og Champagne (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+) som betales direkte i klubbens VIP-kasse.",
-    "doorNote": "Rene guttegrupper (utdrikningslag, vennegjenger, fotballfans etter kamp på San Siro) avvises på vanlig gjesteliste; ved å bestille et forhåndsgodkjent VIP-bord via Axel (+39 351 912 7047) er inngangen 100% garantert. Fysisk ID kreves.",
+    "doorNote": "Rene guttegrupper (utdrikningslag, vennegjenger, fotballfans etter kamp på San Siro) avvises på vanlig gjesteliste; ved å bestille et forhåndsgodkjent VIP-bord via Nightlife Milan Concierge (+39 351 912 7047) er inngangen 100% garantert. Fysisk ID kreves.",
     "logisticsNote": "Rask adkomst med ATM-metro og nattbusser NM1/NM2/NM3/NM4. Etter kamp eller konsert på San Siro ligger Aria Club Milano (#3 Prioritet, Piazzale dello Sport 14) kun 150 meter unna til fots, Just Me Milano (#1 Prioritet) holder åpent 7 netter i uken til 05:00, og Voya Rooftop (#5 Prioritet, 20. etasje) ligger 3 stopp unna med M5.",
-    "axelNote": "Axels 10 gratis tjenester (+39 351 912 7047 / concierge@nightlifemilan.com): 1) VIP-bordkart; 2) Offisielle flaskelister; 3) Null provisjon; 4) Forhåndsgodkjenning for guttegrupper; 5) Eksamens- og bursdagsfester med HACCP-kake; 6) Middagsshow + Rooftop-pakker; 7) Bordgaranti til 01:30 etter kamp/konsert; 8) Bedriftsarrangementer med faktura; 9) Limousine- og Mercedes V-Klasse-transport; 10) 24/7 WhatsApp-hjelp.",
+    "conciergeNote": "Nightlife Milan 10 gratis tjenester (+39 351 912 7047 / concierge@nightlifemilan.com): 1) VIP-bordkart; 2) Offisielle flaskelister; 3) Null provisjon; 4) Forhåndsgodkjenning for guttegrupper; 5) Eksamens- og bursdagsfester med HACCP-kake; 6) Middagsshow + Rooftop-pakker; 7) Bordgaranti til 01:30 etter kamp/konsert; 8) Bedriftsarrangementer med faktura; 9) Limousine- og Mercedes V-Klasse-transport; 10) 24/7 WhatsApp-hjelp.",
     "faqQ1": "Hvordan bestiller jeg VIP-bord eller gjesteliste uten gebyr?",
     "faqQ2": "Hva koster et VIP-bord og Aperitivo i 2026/2027?",
     "faqQ3": "Hvilken kleskode gjelder i døren?",
@@ -878,7 +878,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "pricesNote": "Milanon yökerhoissa noudatetaan 100% Minimum Spend -sääntöä: koko VIP-pöydän summa käytetään Vodka- (Belvedere, Grey Goose 180–320€), Tequila- (Don Julio 1942, Clase Azul 450–850€) ja Samppanjapulloihin (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+) ja maksetaan suoraan klubin VIP-kassalle.",
     "doorNote": "Pelkästään miehistä koostuvat seurueet (polttarit, kaveriporukat, jalkapallofanit San Siron ottelun jälkeen) käännytetään tavalliselta vieraslistalta; varaamalla ennakkohyväksytyn VIP-pöydän Axelin (+39 351 912 7047) kautta sisäänpääsy on 100% taattu. Fyysinen henkilöllisyystodistus vaaditaan.",
     "logisticsNote": "Helppo yhteys ATM-metrolla ja NM1/NM2/NM3/NM4-yöbusseilla. San Siron ottelun tai konsertin jälkeen Aria Club Milano (#3 Prioriteetti, Piazzale dello Sport 14) on vain 150 metrin kävelymatkan päässä, Just Me Milano (#1 Prioriteetti) on avoinna 7 iltaa viikossa klo 05:00 asti ja Voya Rooftop (#5 Prioriteetti, 20. kerros) on 3 M5-metropysäkin päässä.",
-    "axelNote": "Axelin 10 maksutonta palvelua (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Tarkat VIP-pöytäkartat; 2) Viralliset pullohinnastot; 3) Nolla välityspalkkiota; 4) Miesseurueiden ennakkovaltuutus; 5) Valmistujais- ja syntymäpäiväjuhlat HACCP-kakulla; 6) Dinner Show + Rooftop -paketit; 7) Pöytävarauksen pito klo 01:30 asti ottelun/konsertin jälkeen; 8) Yritystilaisuudet laskulla; 9) Limusiini- ja Mercedes V-sarjan kuljetukset; 10) 24/7 WhatsApp-tuki.",
+    "conciergeNote": "Axelin 10 maksutonta palvelua (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Tarkat VIP-pöytäkartat; 2) Viralliset pullohinnastot; 3) Nolla välityspalkkiota; 4) Miesseurueiden ennakkovaltuutus; 5) Valmistujais- ja syntymäpäiväjuhlat HACCP-kakulla; 6) Dinner Show + Rooftop -paketit; 7) Pöytävarauksen pito klo 01:30 asti ottelun/konsertin jälkeen; 8) Yritystilaisuudet laskulla; 9) Limusiini- ja Mercedes V-sarjan kuljetukset; 10) 24/7 WhatsApp-tuki.",
     "faqQ1": "Miten varaan VIP-pöydän tai vieraslistan ilman välityspalkkiota?",
     "faqQ2": "Paljonko VIP-pöytä ja Aperitivo maksavat kaudella 2026/2027?",
     "faqQ3": "Mikä on pakollinen pukukoodi ovella?",
@@ -893,7 +893,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "h2": "2. Επίσημος Τιμοκατάλογος 2026/2027: Royal Aperitivo, Dinner Show, Τραπέζια VIP και Φιάλες",
     "h3": "3. Dress Code, Επιλογή στην Είσοδο (Face Control) και Εγγυημένη Είσοδος για Ανδρικές Παρέες",
     "h4": "4. Μετρό, Φυλασσόμενο Πάρκινγκ 24/7, Πρόσβαση από San Siro / Εκθέσεις και Χρονοδιάγραμμα (19:30–05:00)",
-    "h5": "5. Οι 10 Δωρεάν Υπηρεσίες του Concierge Axel (+39 351 912 7047) και Σύγκριση των Top 6 Κλαμπ",
+    "h5": "5. Οι 10 Δωρεάν Υπηρεσίες του Concierge Nightlife Milan Concierge (+39 351 912 7047) και Σύγκριση των Top 6 Κλαμπ",
     "lblVenue": "Κλαμπ / Εκδήλωση",
     "lblZone": "Περιοχή / Συνοικία",
     "lblAddress": "Επίσημη Διεύθυνση",
@@ -912,18 +912,18 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "fPrive": "Υπερυψωμένο Τραπέζι VIP Privé (8–10 Άτομα)",
     "fConsole": "Super Privé Κονσόλα DJ (10–15 Άτομα)",
     "incAperitivo": "Κρατημένο τραπέζι από τις 19:30, βασιλικός μπουφές ή σερβιριστό δείπνο, 1 premium ποτό ή φιάλη κρασί ανά 4 άτομα",
-    "incList": "Ονομαστική κράτηση μέσω WhatsApp του Axel, 1 ποτό περιλαμβάνεται, ισχύει αυστηρό dress code και αναλογία ανδρών/γυναικών 1:1",
+    "incList": "Ονομαστική κράτηση μέσω WhatsApp του Nightlife Milan Concierge, 1 ποτό περιλαμβάνεται, ισχύει αυστηρό dress code και αναλογία ανδρών/γυναικών 1:1",
     "incPista": "100% της ελάχιστης κατανάλωσης (minimum spend) σε φιάλες βότκας/σαμπάνιας, 6–8 VIP πάσα χωρίς ουρά με υποδοχή, αναψυκτικά & πάγος",
     "incPrive": "100% πίστωση σε φιάλες, υπερυψωμένος χώρος Privé με προσωπική ασφάλεια, 8–10 VIP πάσα, σέρβις Magnum και βεγγαλικά",
     "incConsole": "100% πίστωση σε φιάλες δίπλα στον DJ, 10–15 βραχιόλια Super Privé, πινακίδα LED και παρέλαση Dom Pérignon / Don Julio 1942",
     "music": "Vocal House, Afro-House, Reggaeton, Hip-Hop, Dinner Show και Διεθνείς DJs",
     "dress": "Αυστηρά Κομψό (πουκάμισο με γιακά, σακάκι και δερμάτινα παπούτσια για τους άνδρες· κοκτέιλ φόρεμα ή βραδινό σύνολο για τις γυναίκες· απαγορεύονται αθλητικά παπούτσια τρεξίματος, φόρμες, καπέλα και ποδοσφαιρικές φανέλες)",
     "crowd": "Μοντέλα, σχεδιαστές μόδας, ποδοσφαιριστές της Serie A, απόφοιτοι πανεπιστημίων και διεθνείς VIP επισκέπτες",
-    "intro": "Επίσημος οδηγός από τον Axel, Senior Concierge του Nightlife Milan (WhatsApp +39 351 912 7047 και concierge@nightlifemilan.com). Κάντε κράτηση χωρίς προμήθεια πρακτορείου, λάβετε το σχεδιάγραμμα τραπεζιών VIP σε 10 λεπτά και μπείτε χωρίς αναμονή.",
+    "intro": "Επίσημος οδηγός από τον Nightlife Milan Concierge, Senior Concierge του Nightlife Milan (WhatsApp +39 351 912 7047 και concierge@nightlifemilan.com). Κάντε κράτηση χωρίς προμήθεια πρακτορείου, λάβετε το σχεδιάγραμμα τραπεζιών VIP σε 10 λεπτά και μπείτε χωρίς αναμονή.",
     "pricesNote": "Στα κλαμπ του Μιλάνου ισχύει ο κανόνας 100% Minimum Spend: ολόκληρο το ποσό του τραπεζιού VIP καταναλώνεται σε φιάλες Βότκα (Belvedere, Grey Goose 180–320€), Τεκίλα (Don Julio 1942, Clase Azul 450–850€) και Σαμπάνια (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+) και πληρώνεται απευθείας στο ταμείο VIP του κλαμπ.",
-    "doorNote": "Οι αποκλειστικά ανδρικές παρέες (bachelor party, φίλοι, φίλαθλοι μετά από αγώνα στο San Siro) δεν γίνονται δεκτές με απλή λίστα· με κράτηση προεγκεκριμένου τραπεζιού VIP μέσω του Axel (+39 351 912 7047) έχετε 100% εγγυημένη είσοδο. Απαραίτητη η φυσική ταυτότητα ή διαβατήριο.",
+    "doorNote": "Οι αποκλειστικά ανδρικές παρέες (bachelor party, φίλοι, φίλαθλοι μετά από αγώνα στο San Siro) δεν γίνονται δεκτές με απλή λίστα· με κράτηση προεγκεκριμένου τραπεζιού VIP μέσω του Nightlife Milan Concierge (+39 351 912 7047) έχετε 100% εγγυημένη είσοδο. Απαραίτητη η φυσική ταυτότητα ή διαβατήριο.",
     "logisticsNote": "Άμεση πρόσβαση με το μετρό ATM και τα νυχτερινά λεωφορεία NM1/NM2/NM3/NM4. Μετά από αγώνα ή συναυλία στο San Siro, το Aria Club Milano (#3 Προτεραιότητα, Piazzale dello Sport 14) απέχει μόλις 150 μέτρα με τα πόδια, το Just Me Milano (#1 Προτεραιότητα) είναι ανοιχτό 7 βράδια την εβδομάδα έως τις 05:00 και το Voya Rooftop (#5 Προτεραιότητα, 20ός όροφος) απέχει 3 στάσεις με τη γραμμή M5.",
-    "axelNote": "Οι 10 δωρεάν υπηρεσίες του Axel (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Κατόψεις τραπεζιών VIP· 2) Επίσημοι τιμοκατάλογοι φιαλών· 3) Μηδενική προμήθεια· 4) Έγκριση εισόδου για ανδρικές παρέες· 5) Πάρτι αποφοίτησης και γενεθλίων με τούρτα HACCP· 6) Πακέτα Dinner Show + Rooftop· 7) Κράτηση τραπεζιού έως τις 01:30 μετά από αγώνα/συναυλία· 8) Εταιρικές εκδηλώσεις με τιμολόγιο· 9) Μεταφορές με Λιμουζίνα και Mercedes V-Class· 10) Υποστήριξη WhatsApp 24/7.",
+    "conciergeNote": "Οι 10 δωρεάν υπηρεσίες του Nightlife Milan Concierge (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Κατόψεις τραπεζιών VIP· 2) Επίσημοι τιμοκατάλογοι φιαλών· 3) Μηδενική προμήθεια· 4) Έγκριση εισόδου για ανδρικές παρέες· 5) Πάρτι αποφοίτησης και γενεθλίων με τούρτα HACCP· 6) Πακέτα Dinner Show + Rooftop· 7) Κράτηση τραπεζιού έως τις 01:30 μετά από αγώνα/συναυλία· 8) Εταιρικές εκδηλώσεις με τιμολόγιο· 9) Μεταφορές με Λιμουζίνα και Mercedes V-Class· 10) Υποστήριξη WhatsApp 24/7.",
     "faqQ1": "Πώς κάνω κράτηση τραπεζιού VIP ή λίστας χωρίς προμήθεια;",
     "faqQ2": "Πόσο κοστίζει ένα τραπέζι VIP και το Aperitivo το 2026/2027;",
     "faqQ3": "Ποιο είναι το υποχρεωτικό dress code στην είσοδο;",
@@ -938,7 +938,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "h2": "2. Hivatalos Árlista 2026/2027: Royal Aperitivo, Dinner Show, VIP Asztalok és Italválaszték",
     "h3": "3. Dress Code, Beléptetés és Garantált Bejutás Férfi Társaságoknak",
     "h4": "4. Metró, Őrzött Parkoló 0–24, San Siro / Vásár Logisztika és Menetrend (19:30–05:00)",
-    "h5": "5. Axel Concierge 10 Ingyenes Szolgáltatása (+39 351 912 7047) és a Top 6 Klub Összehasonlítása",
+    "h5": "5. Nightlife Milan Concierge Concierge 10 Ingyenes Szolgáltatása (+39 351 912 7047) és a Top 6 Klub Összehasonlítása",
     "lblVenue": "Klub / Esemény",
     "lblZone": "Negyed / Zóna",
     "lblAddress": "Hivatalos Cím",
@@ -957,7 +957,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "fPrive": "Emelt Privé VIP Asztal (8–10 Fő)",
     "fConsole": "Super Privé DJ Pult (10–15 Fő)",
     "incAperitivo": "Foglalt asztal 19:30-tól, prémium svédasztal vagy felszolgált vacsora, 1 koktél vagy 4 főre 1 üveg bor",
-    "incList": "Névre szóló akkreditáció Axel WhatsAppján, 1 ital az árban, dress code és 1:1 férfi/női arány mellett",
+    "incList": "Névre szóló akkreditáció Nightlife Milan Concierge WhatsAppján, 1 ital az árban, dress code és 1:1 férfi/női arány mellett",
     "incPista": "100% minimum fogyasztás (minimum spend) prémium palackokra, 6–8 soron kívüli VIP belépő hostessel, üdítők és jég",
     "incPrive": "100% palackkeret, emelt Privé páholy külön biztonsági őrrel, 8–10 VIP belépő, Magnum és csillagszóró szerviz",
     "incConsole": "100% palackkeret közvetlenül a DJ pult mellett, 10–15 Super Privé karszalag, LED tábla és Dom Pérignon / Don Julio 1942 show",
@@ -966,9 +966,9 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "crowd": "Modellek, divattervezők, Serie A labdarúgók, végzős egyetemisták és nemzetközi VIP vendégek",
     "intro": "Hivatalos útmutató Axeltől, a Nightlife Milan vezető concierge-étől (WhatsApp +39 351 912 7047 és concierge@nightlifemilan.com). Foglaljon ügynökségi jutalék nélkül, kérje a VIP asztaltérképet 10 percen belül és lépjen be sorban állás nélkül.",
     "pricesNote": "A milánói klubokban a 100% Minimum Spend szabály érvényes: a VIP asztal teljes összege Vodka (Belvedere, Grey Goose 180–320€), Tequila (Don Julio 1942, Clase Azul 450–850€) és Pezsgő (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+) palackokra fordítható, fizetés közvetlenül a klub VIP kasszájánál.",
-    "doorNote": "Kizárólag férfiakból álló társaságokat (legénybúcsú, baráti társaság, szurkolók San Siro meccs után) a normál vendéglistán elutasítanak; Axel (+39 351 912 7047) előre engedélyezett VIP asztalfoglalásával a bejutás 100%-ig garantált. Fizikai személyi igazolvány vagy útlevél kötelező.",
+    "doorNote": "Kizárólag férfiakból álló társaságokat (legénybúcsú, baráti társaság, szurkolók San Siro meccs után) a normál vendéglistán elutasítanak; Nightlife Milan Concierge (+39 351 912 7047) előre engedélyezett VIP asztalfoglalásával a bejutás 100%-ig garantált. Fizikai személyi igazolvány vagy útlevél kötelező.",
     "logisticsNote": "Gyors megközelítés ATM metróval és NM1/NM2/NM3/NM4 éjszakai buszokkal. San Siro mérkőzés vagy koncert után az Aria Club Milano (#3 Prioritás, Piazzale dello Sport 14) mindössze 150 méterre van gyalog, a Just Me Milano (#1 Prioritás) a hét minden napján 05:00-ig nyitva tart, a Voya Rooftop (#5 Prioritás, 20. emelet) pedig 3 megálló az M5 metróval.",
-    "axelNote": "Axel 10 ingyenes szolgáltatása (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Nagy felbontású VIP asztaltérképek; 2) Hivatalos itallapok; 3) Nulla jutalék; 4) Férfi csoportok előzetes engedélyezése; 5) Diplomaosztó és születésnap HACCP tortával; 6) Dinner Show + Rooftop csomagok; 7) Asztaltartás 01:30-ig meccs/koncert után; 8) Céges rendezvények számlával; 9) Limuzin és Mercedes V-osztály transzfer; 10) 0–24 WhatsApp ügyfélszolgálat.",
+    "conciergeNote": "Nightlife Milan Concierge 10 ingyenes szolgáltatása (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Nagy felbontású VIP asztaltérképek; 2) Hivatalos itallapok; 3) Nulla jutalék; 4) Férfi csoportok előzetes engedélyezése; 5) Diplomaosztó és születésnap HACCP tortával; 6) Dinner Show + Rooftop csomagok; 7) Asztaltartás 01:30-ig meccs/koncert után; 8) Céges rendezvények számlával; 9) Limuzin és Mercedes V-osztály transzfer; 10) 0–24 WhatsApp ügyfélszolgálat.",
     "faqQ1": "Hogyan foglalhatok VIP asztalt vagy vendéglistát jutalék nélkül?",
     "faqQ2": "Mennyibe kerül egy VIP asztal és az Aperitivo 2026/2027-ben?",
     "faqQ3": "Mi a kötelező dress code a bejáratnál?",
@@ -983,7 +983,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "h2": "2. Офіційні Ціни 2026/2027: Королівський Аперитив, Вечеря-Шоу, VIP-Столи та Карта Пляшок",
     "h3": "3. Дрескод, Фейсконтроль та Гарантований Вхід для Чоловічих Компаній",
     "h4": "4. Метро, Охоронюваний Паркінг 24/7, Логістика Сан-Сіро / Виставок і Таймінг (19:30–05:00)",
-    "h5": "5. 10 Безкоштовних Послуг Консьєржа Axel (+39 351 912 7047) та Порівняння Топ-6 Клубів",
+    "h5": "5. 10 Безкоштовних Послуг Консьєржа Nightlife Milan Concierge (+39 351 912 7047) та Порівняння Топ-6 Клубів",
     "lblVenue": "Клуб / Подія",
     "lblZone": "Район / Зона",
     "lblAddress": "Офіційна Адреса",
@@ -1002,18 +1002,18 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "fPrive": "Підвищений Privé VIP-Стіл (8–10 Гостей)",
     "fConsole": "Super Privé Пульт DJ (10–15 Гостей)",
     "incAperitivo": "Резерв столу з 19:30, королівський фуршет або вечеря, 1 преміум-коктейль або пляшка вина на 4 гостей",
-    "incList": "Іменна акредитація через WhatsApp Axel, 1 напій включено, діє дрескод та баланс чоловіків і жінок 1:1",
+    "incList": "Іменна акредитація через WhatsApp Nightlife Milan Concierge, 1 напій включено, діє дрескод та баланс чоловіків і жінок 1:1",
     "incPista": "100% депозиту (minimum spend) йде на пляшки міцного алкоголю/шампанського, 6–8 VIP-перепусток без черги з хостес, безалкогольні напої та лід",
     "incPrive": "100% кредит на пляшки, подіум Privé з охороною, 8–10 VIP-перепусток, подача Magnum з фонтанами",
     "incConsole": "100% кредит на пляшки поруч із DJ, 10–15 браслетів Super Privé, LED-табличка та винос Dom Pérignon / Don Julio 1942",
     "music": "Vocal House, Afro-House, Reggaeton, Hip-Hop, Вечеря-Шоу та Світові DJ",
     "dress": "Суворий Елегантний Стиль (сорочка з коміром, піджак і шкіряне взуття для чоловіків; коктейльна сукня або вечірній костюм для жінок; спортивні кросівки, худі, кепки та футбольні футболки заборонені)",
     "crowd": "Моделі, дизайнери, футболісти Серії А, випускники університетів та міжнародні VIP-гості",
-    "intro": "Офіційний путівник від старшого консьєржа Nightlife Milan — Axel (WhatsApp +39 351 912 7047 та concierge@nightlifemilan.com). Бронюйте без агентських комісій, отримуйте схему VIP-столів за 10 хвилин і проходьте без черги через VIP-коридор.",
+    "intro": "Офіційний путівник від старшого консьєржа Nightlife Milan — Nightlife Milan Concierge (WhatsApp +39 351 912 7047 та concierge@nightlifemilan.com). Бронюйте без агентських комісій, отримуйте схему VIP-столів за 10 хвилин і проходьте без черги через VIP-коридор.",
     "pricesNote": "У клубах Мілана діє правило 100% Minimum Spend: уся сума депозиту VIP-столу витрачається на пляшки Горілки (Belvedere, Grey Goose 180–320€), Текіли (Don Julio 1942, Clase Azul 450–850€) та Шампанського (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+) з оплатою безпосередньо у VIP-касі клубу.",
-    "doorNote": "Чоловічі компанії (парубоцькі вечірки, друзі, уболівальники після матчу на Сан-Сіро) не проходять за звичайним списком; бронювання попередньо погодженого VIP-столу через Axel (+39 351 912 7047) дає 100% гарантію входу. Обов’язковий оригінал документа.",
+    "doorNote": "Чоловічі компанії (парубоцькі вечірки, друзі, уболівальники після матчу на Сан-Сіро) не проходять за звичайним списком; бронювання попередньо погодженого VIP-столу через Nightlife Milan Concierge (+39 351 912 7047) дає 100% гарантію входу. Обов’язковий оригінал документа.",
     "logisticsNote": "Зручний доїзд на метро ATM та нічних автобусах NM1/NM2/NM3/NM4. Після матчів і концертів на Сан-Сіро клуб Aria Club Milano (#3 Пріоритет, Piazzale dello Sport 14) розташований лише за 150 метрів пішки, Just Me Milano (#1 Пріоритет) відкритий 7 ночей на тиждень до 05:00, а Voya Rooftop (#5 Пріоритет, 20 поверх) — за 3 зупинки метро M5.",
-    "axelNote": "10 безкоштовних послуг Axel (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Схеми VIP-залів; 2) Офіційні прайс-листи; 3) 0% комісії; 4) Погодження чоловічих груп; 5) Випускні та дні народження з тортом HACCP; 6) Пакети Вечеря-шоу + Руфтоп; 7) Утримання столу до 01:30 після матчів/концертів; 8) Корпоративи з рахунком; 9) Трансфери лімузином і Mercedes V-Class; 10) Підтримка WhatsApp 24/7.",
+    "conciergeNote": "10 безкоштовних послуг Nightlife Milan Concierge (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Схеми VIP-залів; 2) Офіційні прайс-листи; 3) 0% комісії; 4) Погодження чоловічих груп; 5) Випускні та дні народження з тортом HACCP; 6) Пакети Вечеря-шоу + Руфтоп; 7) Утримання столу до 01:30 після матчів/концертів; 8) Корпоративи з рахунком; 9) Трансфери лімузином і Mercedes V-Class; 10) Підтримка WhatsApp 24/7.",
     "faqQ1": "Як забронювати VIP-стіл або список без комісії?",
     "faqQ2": "Скільки коштує VIP-стіл та аперитив у сезоні 2026/2027?",
     "faqQ3": "Який дрескод діє на вході?",
@@ -1028,7 +1028,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "h2": "2. Çmimet Zyrtare 2026/2027: Royal Aperitivo, Dinner Show, Tavolina VIP dhe Shishet",
     "h3": "3. Kodi i Veshjes (Dress Code), Seleksioni në Derë dhe Hyrje e Garantuar për Grupet e Djemve",
     "h4": "4. Metro, Parkim i Ruajtur 24/7, Logjistika San Siro / Panaire dhe Orari (19:30–05:00)",
-    "h5": "5. 10 Shërbimet Falas të Concierge Axel (+39 351 912 7047) dhe Krahasimi i Top 6 Klubeve",
+    "h5": "5. 10 Shërbimet Falas të Concierge Nightlife Milan Concierge (+39 351 912 7047) dhe Krahasimi i Top 6 Klubeve",
     "lblVenue": "Klubi / Eventi",
     "lblZone": "Lagjja / Zona",
     "lblAddress": "Adresa Zyrtare",
@@ -1047,18 +1047,18 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "fPrive": "Tavolinë VIP Privé e Ngritur (8–10 Persona)",
     "fConsole": "Super Privé Konsola DJ (10–15 Persona)",
     "incAperitivo": "Tavolinë e rezervuar nga ora 19:30, bufe mbretërore ose darkë e shërbyer, 1 pije premium ose shishe vere për çdo 4 persona",
-    "incList": "Akreditim emëror përmes WhatsApp të Axel, 1 pije e përfshirë, subjekt i dress code dhe balancës 1:1 djem/vajza",
+    "incList": "Akreditim emëror përmes WhatsApp të Nightlife Milan Concierge, 1 pije e përfshirë, subjekt i dress code dhe balancës 1:1 djem/vajza",
     "incPista": "100% minimum spend i konvertuar në shishe alkooli/shampanje, 6–8 hyrje VIP pa radhë me hostese, pije freskuese dhe akull",
     "incPrive": "100% kredit në shishe, zonë e ngritur Privé me siguri private, 8–10 hyrje VIP, shërbim Magnum dhe fishekzjarrë tavoline",
     "incConsole": "100% kredit në shishe pranë DJ, 10–15 byzylykë Super Privé, tabelë LED e personalizuar dhe paradë Dom Pérignon / Don Julio 1942",
     "music": "Vocal House, Afro-House, Reggaeton, Hip-Hop, Dinner Show dhe DJ Ndërkombëtarë",
     "dress": "Strikt Elegant (këmishë me jakë, xhaketë dhe këpucë lëkure për meshkujt; fustan koktejli ose veshje elegante mbrëmjeje për femrat; ndalohen atletet sportive, tutat, kapelet dhe fanellat e futbollit)",
     "crowd": "Modele, stilistë mode, futbollistë të Serie A, të diplomuar dhe mysafirë VIP ndërkombëtarë",
-    "intro": "Udhëzues zyrtar i përgatitur nga Axel, Senior Concierge i Nightlife Milan (WhatsApp +39 351 912 7047 dhe concierge@nightlifemilan.com). Rezervoni me zero komision agjencie, merrni planimetrinë e tavolinave VIP brenda 10 minutave dhe hyni pa radhë.",
+    "intro": "Udhëzues zyrtar i përgatitur nga Nightlife Milan Official Concierge (WhatsApp +39 351 912 7047 dhe concierge@nightlifemilan.com). Rezervoni me zero komision agjencie, merrni planimetrinë e tavolinave VIP brenda 10 minutave dhe hyni pa radhë.",
     "pricesNote": "Në klubet e Milanos zbatohet rregulli 100% Minimum Spend: e gjithë shuma e tavolinës suaj VIP shpenzohet në shishe Vodka (Belvedere, Grey Goose 180–320€), Tekila (Don Julio 1942, Clase Azul 450–850€) dhe Shampanjë (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+), duke paguar direkt në arkën VIP të klubit.",
-    "doorNote": "Grupet vetëm me djem (festë beqarie, shokë, tifozë pas ndeshjes në San Siro) refuzohen në listën normale; duke rezervuar një Tavolinë VIP të para-autorizuar përmes Axel (+39 351 912 7047) keni hyrje 100% të garantuar. Dokumenti fizik i identitetit është i detyrueshëm.",
+    "doorNote": "Grupet vetëm me djem (festë beqarie, shokë, tifozë pas ndeshjes në San Siro) refuzohen në listën normale; duke rezervuar një Tavolinë VIP të para-autorizuar përmes Nightlife Milan Concierge (+39 351 912 7047) keni hyrje 100% të garantuar. Dokumenti fizik i identitetit është i detyrueshëm.",
     "logisticsNote": "Lidhje e shpejtë me metronë ATM dhe autobusët e natës NM1/NM2/NM3/NM4. Pas një ndeshjeje ose koncerti në San Siro, Aria Club Milano (#3 Prioritet, Piazzale dello Sport 14) ndodhet vetëm 150 metra në këmbë, Just Me Milano (#1 Prioritet) është hapur 7 netë në javë deri në 05:00, dhe Voya Rooftop (#5 Prioritet, kati 20) është 3 stacione me linjën M5.",
-    "axelNote": "10 shërbimet falas të Axel (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Harta VIP të klubeve; 2) Çmimet zyrtare të shisheve; 3) Zero komision; 4) Autorizim për grupet e djemve; 5) Festa diplomimi dhe ditëlindjeje me tortë HACCP; 6) Paketa Dinner Show + Rooftop; 7) Mbajtje tavoline deri në 01:30 pas ndeshjes/koncertit; 8) Evente korporative me faturë; 9) Transferta me Limuzinë dhe Mercedes V-Class; 10) Asistencë WhatsApp 24/7.",
+    "conciergeNote": "10 shërbimet falas të Nightlife Milan Concierge (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Harta VIP të klubeve; 2) Çmimet zyrtare të shisheve; 3) Zero komision; 4) Autorizim për grupet e djemve; 5) Festa diplomimi dhe ditëlindjeje me tortë HACCP; 6) Paketa Dinner Show + Rooftop; 7) Mbajtje tavoline deri në 01:30 pas ndeshjes/koncertit; 8) Evente korporative me faturë; 9) Transferta me Limuzinë dhe Mercedes V-Class; 10) Asistencë WhatsApp 24/7.",
     "faqQ1": "Si të rezervoj një Tavolinë VIP ose listë pa komision?",
     "faqQ2": "Sa kushton një Tavolinë VIP dhe Aperitivo në 2026/2027?",
     "faqQ3": "Cili është kodi i detyrueshëm i veshjes në hyrje?",
@@ -1092,18 +1092,18 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "fPrive": "Izdignuti Privé VIP Sto (8–10 Osoba)",
     "fConsole": "Super Privé DJ Pult (10–15 Osoba)",
     "incAperitivo": "Rezervisan sto od 19:30, kraljevski bife ili servirana večera, 1 premijum piće ili flaša vina na 4 gosta",
-    "incList": "Imenična akreditacija preko Axel WhatsApp-a, 1 piće uključeno, uz obavezan dres kod i odnos muškaraca i žena 1:1",
+    "incList": "Imenična akreditacija preko Nightlife Milan Concierge WhatsApp-a, 1 piće uključeno, uz obavezan dres kod i odnos muškaraca i žena 1:1",
     "incPista": "100% minimalne potrošnje (minimum spend) u flašama žestokog pića/šampanjca, 6–8 VIP ulaza bez reda sa hostesom, sokovi i led",
     "incPrive": "100% kredit u flašama, izdignuti separe sa obezbeđenjem, 8–10 VIP ulaza, Magnum servis i prskalice",
     "incConsole": "100% kredit u flašama pored DJ pulta, 10–15 Super Privé narukvica, LED tabla i parada Dom Pérignon / Don Julio 1942",
     "music": "Vocal House, Afro-House, Reggaeton, Hip-Hop, Večera-Šou i Internacionalni DJ-evi",
     "dress": "Strogo Elegantno (košulja sa kragnom, sako i kožne cipele za muškarce; koktel haljina ili večernji komplet za dame; zabranjene su patike za trčanje, trenerke, kačketi i fudbalski dresovi)",
     "crowd": "Modeli, modni kreatori, fudbaleri Serije A, diplomci i internacionalni VIP gosti",
-    "intro": "Zvanični vodič koji uređuje Axel, Senior Concierge za Nightlife Milan (WhatsApp +39 351 912 7047 i concierge@nightlifemilan.com). Rezervišite bez agencijske provizije, dobijte mapu VIP stolova za 10 minuta i uđite bez čekanja.",
+    "intro": "Zvanični vodič koji uređuje Nightlife Milan Concierge, Senior Concierge za Nightlife Milan (WhatsApp +39 351 912 7047 i concierge@nightlifemilan.com). Rezervišite bez agencijske provizije, dobijte mapu VIP stolova za 10 minuta i uđite bez čekanja.",
     "pricesNote": "U milanskim klubovima važi pravilo 100% Minimum Spend: ceo iznos vašeg VIP stola troši se na flaše Vodke (Belvedere, Grey Goose 180–320€), Tekile (Don Julio 1942, Clase Azul 450–850€) i Šampanjca (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+) uz plaćanje direktno na VIP blagajni kluba.",
     "doorNote": "Isključivo muške ekipe (momačke večeri, drugovi, navijači posle utakmice na San Siru) ne mogu ući preko obične liste; rezervacijom unapred odobrenog VIP stola preko Axela (+39 351 912 7047) imate 100% garantovan ulaz. Obavezan je fizički dokument.",
     "logisticsNote": "Brz dolazak ATM metroom i noćnim autobusima NM1/NM2/NM3/NM4. Posle utakmice ili koncerta na San Siru, Aria Club Milano (#3 Prioritet, Piazzale dello Sport 14) udaljen je samo 150 metara peške, Just Me Milano (#1 Prioritet) radi 7 noći nedeljno do 05:00, a Voya Rooftop (#5 Prioritet, 20. sprat) je na 3 stanice linijom M5.",
-    "axelNote": "10 besplatnih usluga Axela (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Mape VIP stolova; 2) Zvanični cenovnici flaša; 3) Nula provizije; 4) Odobrenje za muške ekipe; 5) Diplomske žurke i rođendani uz HACCP tortu; 6) Večera-Šou + Rooftop paketi; 7) Čuvanje stola do 01:30 posle utakmice/koncerta; 8) Korporativni događaji uz fakturu; 9) Prevoz limuzinom i Mercedes V-klasom; 10) 24/7 WhatsApp podrška.",
+    "conciergeNote": "10 besplatnih usluga Axela (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Mape VIP stolova; 2) Zvanični cenovnici flaša; 3) Nula provizije; 4) Odobrenje za muške ekipe; 5) Diplomske žurke i rođendani uz HACCP tortu; 6) Večera-Šou + Rooftop paketi; 7) Čuvanje stola do 01:30 posle utakmice/koncerta; 8) Korporativni događaji uz fakturu; 9) Prevoz limuzinom i Mercedes V-klasom; 10) 24/7 WhatsApp podrška.",
     "faqQ1": "Kako rezervisati VIP sto ili listu bez provizije?",
     "faqQ2": "Koliko košta VIP sto i Aperitiv u sezoni 2026/2027?",
     "faqQ3": "Koji je obavezni dres kod na ulazu?",
@@ -1137,18 +1137,18 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "fPrive": "Izdignuti Privé VIP Sto (8–10 Osoba)",
     "fConsole": "Super Privé DJ Pult (10–15 Osoba)",
     "incAperitivo": "Rezervisan sto od 19:30, kraljevski bife ili servirana večera, 1 premijum piće ili flaša vina na 4 gosta",
-    "incList": "Imenična akreditacija preko Axel WhatsApp-a, 1 piće uključeno, uz obavezan dres kod i odnos muškaraca i žena 1:1",
+    "incList": "Imenična akreditacija preko Nightlife Milan Concierge WhatsApp-a, 1 piće uključeno, uz obavezan dres kod i odnos muškaraca i žena 1:1",
     "incPista": "100% minimalne potrošnje (minimum spend) u flašama žestokog pića/šampanjca, 6–8 VIP ulaza bez reda sa hostesom, sokovi i led",
     "incPrive": "100% kredit u flašama, izdignuti separe sa obezbeđenjem, 8–10 VIP ulaza, Magnum servis i prskalice",
     "incConsole": "100% kredit u flašama pored DJ pulta, 10–15 Super Privé narukvica, LED tabla i parada Dom Pérignon / Don Julio 1942",
     "music": "Vocal House, Afro-House, Reggaeton, Hip-Hop, Večera-Šou i Internacionalni DJ-evi",
     "dress": "Strogo Elegantno (košulja sa kragnom, sako i kožne cipele za muškarce; koktel haljina ili večernji komplet za dame; zabranjene su patike za trčanje, trenerke, kačketi i fudbalski dresovi)",
     "crowd": "Modeli, modni kreatori, fudbaleri Serije A, diplomci i internacionalni VIP gosti",
-    "intro": "Zvanični vodič koji uređuje Axel, Senior Concierge za Nightlife Milan (WhatsApp +39 351 912 7047 i concierge@nightlifemilan.com). Rezervišite bez agencijske provizije, dobijte mapu VIP stolova za 10 minuta i uđite bez čekanja.",
+    "intro": "Zvanični vodič koji uređuje Nightlife Milan Concierge, Senior Concierge za Nightlife Milan (WhatsApp +39 351 912 7047 i concierge@nightlifemilan.com). Rezervišite bez agencijske provizije, dobijte mapu VIP stolova za 10 minuta i uđite bez čekanja.",
     "pricesNote": "U milanskim klubovima važi pravilo 100% Minimum Spend: ceo iznos vašeg VIP stola troši se na flaše Vodke (Belvedere, Grey Goose 180–320€), Tekile (Don Julio 1942, Clase Azul 450–850€) i Šampanjca (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+) uz plaćanje direktno na VIP blagajni kluba.",
     "doorNote": "Isključivo muške ekipe (momačke večeri, drugovi, navijači posle utakmice na San Siru) ne mogu ući preko obične liste; rezervacijom unapred odobrenog VIP stola preko Axela (+39 351 912 7047) imate 100% garantovan ulaz. Obavezan je fizički dokument.",
     "logisticsNote": "Brz dolazak ATM metroom i noćnim autobusima NM1/NM2/NM3/NM4. Posle utakmice ili koncerta na San Siru, Aria Club Milano (#3 Prioritet, Piazzale dello Sport 14) udaljen je samo 150 metara peške, Just Me Milano (#1 Prioritet) radi 7 noći nedeljno do 05:00, a Voya Rooftop (#5 Prioritet, 20. sprat) je na 3 stanice linijom M5.",
-    "axelNote": "10 besplatnih usluga Axela (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Mape VIP stolova; 2) Zvanični cenovnici flaša; 3) Nula provizije; 4) Odobrenje za muške ekipe; 5) Diplomske žurke i rođendani uz HACCP tortu; 6) Večera-Šou + Rooftop paketi; 7) Čuvanje stola do 01:30 posle utakmice/koncerta; 8) Korporativni događaji uz fakturu; 9) Prevoz limuzinom i Mercedes V-klasom; 10) 24/7 WhatsApp podrška.",
+    "conciergeNote": "10 besplatnih usluga Axela (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Mape VIP stolova; 2) Zvanični cenovnici flaša; 3) Nula provizije; 4) Odobrenje za muške ekipe; 5) Diplomske žurke i rođendani uz HACCP tortu; 6) Večera-Šou + Rooftop paketi; 7) Čuvanje stola do 01:30 posle utakmice/koncerta; 8) Korporativni događaji uz fakturu; 9) Prevoz limuzinom i Mercedes V-klasom; 10) 24/7 WhatsApp podrška.",
     "faqQ1": "Kako rezervisati VIP sto ili listu bez provizije?",
     "faqQ2": "Koliko košta VIP sto i Aperitiv u sezoni 2026/2027?",
     "faqQ3": "Koji je obavezni dres kod na ulazu?",
@@ -1163,7 +1163,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "h2": "2. Официјален Ценовник 2026/2027: Кралски Аперитив, Вечера-Шоу, VIP Маси и Шишиња",
     "h3": "3. Дрес Код, Селекција на Влез и Гарантиран Влез за Машки Друштва",
     "h4": "4. Метро, Паркинг 24/7, Логистика Сан Сиро / Саеми и Распоред (19:30–05:00)",
-    "h5": "5. 10 Бесплатни Услуги на Консиерж Axel (+39 351 912 7047) и Споредба на Топ 6 Клубови",
+    "h5": "5. 10 Бесплатни Услуги на Консиерж Nightlife Milan Concierge (+39 351 912 7047) и Споредба на Топ 6 Клубови",
     "lblVenue": "Клуб / Настан",
     "lblZone": "Населба / Зона",
     "lblAddress": "Официјална Адреса",
@@ -1182,18 +1182,18 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "fPrive": "Издигнато Privé VIP Маса (8–10 Лица)",
     "fConsole": "Super Privé DJ Пулт (10–15 Лица)",
     "incAperitivo": "Резервирана маса од 19:30, кралска шведска маса или сервирана вечера, 1 премиум пијалок или шише вино на 4 гости",
-    "incList": "Именична акредитација преку WhatsApp на Axel, 1 пијалок вклучен, со задолжителен дрес код и сооднос 1:1 мажи/жени",
+    "incList": "Именична акредитација преку WhatsApp на Nightlife Milan Concierge, 1 пијалок вклучен, со задолжителен дрес код и сооднос 1:1 мажи/жени",
     "incPista": "100% минимална потрошувачка во шишиња вотка/шампањ, 6–8 VIP влезови без чекање со хостеса, сокови и мраз",
     "incPrive": "100% кредит во шишиња, издигнато Privé со обезбедување, 8–10 VIP влезови, Magnum сервис и прскалки",
     "incConsole": "100% кредит во шишиња до DJ пултот, 10–15 Super Privé алки, LED табла и парада Dom Pérignon / Don Julio 1942",
     "music": "Vocal House, Afro-House, Reggaeton, Hip-Hop, Вечера-Шоу и Меѓународни DJ-и",
     "dress": "Строго Елегантно (кошула со јака, сако и кожни чевли за мажи; коктел фустан или елегантен вечерен комплет за жени; забранети се патики за трчање, тренерки, капи и фудбалски дресови)",
     "crowd": "Модели, модни дизајнери, фудбалери од Серија А, дипломци и меѓународни VIP гости",
-    "intro": "Официјален водич од Axel, Senior Concierge на Nightlife Milan (WhatsApp +39 351 912 7047 и concierge@nightlifemilan.com). Резервирајте без провизија, добијте мапа на VIP маси за 10 минути и влезете без чекање во ред.",
+    "intro": "Официјален водич од Nightlife Milan Concierge, Senior Concierge на Nightlife Milan (WhatsApp +39 351 912 7047 и concierge@nightlifemilan.com). Резервирајте без провизија, добијте мапа на VIP маси за 10 минути и влезете без чекање во ред.",
     "pricesNote": "Во клубовите во Милано важи правилото 100% Minimum Spend: целиот износ на вашата VIP маса се троши за шишиња Вотка (Belvedere, Grey Goose 180–320€), Текила (Don Julio 1942, Clase Azul 450–850€) и Шампањ (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+) со плаќање директно на VIP касата.",
-    "doorNote": "Машки друштва (ергенска вечер, пријатели, навивачи по натпревар на Сан Сиро) не влегуваат преку обична листа; со однапред одобрена VIP маса преку Axel (+39 351 912 7047) имате 100% гарантиран влез. Задолжителен е оригинален документ за идентификација.",
+    "doorNote": "Машки друштва (ергенска вечер, пријатели, навивачи по натпревар на Сан Сиро) не влегуваат преку обична листа; со однапред одобрена VIP маса преку Nightlife Milan Concierge (+39 351 912 7047) имате 100% гарантиран влез. Задолжителен е оригинален документ за идентификација.",
     "logisticsNote": "Брз пристап со ATM метро и ноќни автобуси NM1/NM2/NM3/NM4. По натпревар или концерт на Сан Сиро, Aria Club Milano (#3 Приоритет, Piazzale dello Sport 14) е на само 150 метри пеш, Just Me Milano (#1 Приоритет) работи 7 ноќи неделно до 05:00, а Voya Rooftop (#5 Приоритет, 20. кат) е на 3 станици со линијата M5.",
-    "axelNote": "10 бесплатни услуги од Axel (+39 351 912 7047 / concierge@nightlifemilan.com): 1) VIP мапи на клубовите; 2) Официјални ценовници; 3) Нула провизија; 4) Одобрување за машки групи; 5) Дипломски и родендени со HACCP торта; 6) Вечера-Шоу + Rooftop пакети; 7) Чување маса до 01:30 по натпревар/концерт; 8) Корпоративни настани со фактура; 9) Трансфер со лимузина и Mercedes V-Class; 10) 24/7 WhatsApp поддршка.",
+    "conciergeNote": "10 бесплатни услуги од Nightlife Milan Concierge (+39 351 912 7047 / concierge@nightlifemilan.com): 1) VIP мапи на клубовите; 2) Официјални ценовници; 3) Нула провизија; 4) Одобрување за машки групи; 5) Дипломски и родендени со HACCP торта; 6) Вечера-Шоу + Rooftop пакети; 7) Чување маса до 01:30 по натпревар/концерт; 8) Корпоративни настани со фактура; 9) Трансфер со лимузина и Mercedes V-Class; 10) 24/7 WhatsApp поддршка.",
     "faqQ1": "Како да резервирам VIP маса или листа без провизија?",
     "faqQ2": "Колку чини VIP маса и Аперитив во 2026/2027?",
     "faqQ3": "Кој е задолжителниот дрес код на влезот?",
@@ -1238,7 +1238,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "pricesNote": "Milano ööklubides kehtib 100% Minimum Spend reegel: kogu teie VIP-laua summa kulutatakse Viina (Belvedere, Grey Goose 180–320€), Tekiila (Don Julio 1942, Clase Azul 450–850€) ja Šampanja (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+) pudelitele, makstes otse klubi VIP-kassas.",
     "doorNote": "Ainult meestest koosnevad seltskonnad (poissmeesteõhtud, sõbrad, jalgpallifännid pärast San Siro mängu) lükatakse tavalisest nimekirjast tagasi; broneerides eelnevalt kinnitatud VIP-laua Axeli (+39 351 912 7047) kaudu, on teie sissepääs 100% garanteeritud. Füüsiline dokument on kohustuslik.",
     "logisticsNote": "Kiire ligipääs ATM metroo ja ööbussidega NM1/NM2/NM3/NM4. Pärast San Siro mängu või kontserti asub Aria Club Milano (#3 Prioriteet, Piazzale dello Sport 14) vaid 150 meetri jalutuskäigu kaugusel, Just Me Milano (#1 Prioriteet) on avatud 7 ööd nädalas kuni 05:00 ning Voya Rooftop (#5 Prioriteet, 20. korrus) on 3 M5 metroopeatuse kaugusel.",
-    "axelNote": "Axeli 10 tasuta teenust (+39 351 912 7047 / concierge@nightlifemilan.com): 1) VIP-laudade plaanid; 2) Ametlikud pudelihinnakirjad; 3) Null vahendustasu; 4) Meestegruppide eelkinnitus; 5) Lõpupeod ja sünnipäevad HACCP tordiga; 6) Õhtusöögishow + Rooftopi paketid; 7) Laua hoidmine kuni 01:30 pärast mängu/kontserti; 8) Firmaüritused arvega; 9) Limusiini ja Mercedes V-klassi transfeer; 10) 24/7 WhatsAppi tugi.",
+    "conciergeNote": "Axeli 10 tasuta teenust (+39 351 912 7047 / concierge@nightlifemilan.com): 1) VIP-laudade plaanid; 2) Ametlikud pudelihinnakirjad; 3) Null vahendustasu; 4) Meestegruppide eelkinnitus; 5) Lõpupeod ja sünnipäevad HACCP tordiga; 6) Õhtusöögishow + Rooftopi paketid; 7) Laua hoidmine kuni 01:30 pärast mängu/kontserti; 8) Firmaüritused arvega; 9) Limusiini ja Mercedes V-klassi transfeer; 10) 24/7 WhatsAppi tugi.",
     "faqQ1": "Kuidas broneerida VIP-lauda või külaliste nimekirja ilma vahendustasuta?",
     "faqQ2": "Kui palju maksab VIP-laud ja Aperitivo hooajal 2026/2027?",
     "faqQ3": "Milline on kohustuslik riietusstiil uksel?",
@@ -1253,7 +1253,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "h2": "2. Oficiālais Cenrādis 2026/2027: Royal Aperitivo, Vakariņu Šovs, VIP Galdiņi un Pudeles",
     "h3": "3. Dreskods, Atlase pie Durvīm un Garantēta Ieeja Vīriešu Kompānijām",
     "h4": "4. Metro, Apsargāta Stāvvieta 24/7, San Siro / Izstāžu Loģistika un Plāns (19:30–05:00)",
-    "h5": "5. Konsjerža Axel 10 Bezmaksas Pakalpojumi (+39 351 912 7047) un Top 6 Klubu Salīdzinājums",
+    "h5": "5. Konsjerža Nightlife Milan Concierge 10 Bezmaksas Pakalpojumi (+39 351 912 7047) un Top 6 Klubu Salīdzinājums",
     "lblVenue": "Klubs / Pasākums",
     "lblZone": "Rajons / Zona",
     "lblAddress": "Oficiālā Adrese",
@@ -1272,18 +1272,18 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "fPrive": "Paaugstināts Privé VIP Galdiņš (8–10 Personas)",
     "fConsole": "Super Privé DJ Pults (10–15 Personas)",
     "incAperitivo": "Rezervēts galdiņš no 19:30, karaliskā bufete vai vakariņas, 1 premium kokteilis vai vīna pudele uz 4 viesiem",
-    "incList": "Vārdiska akreditācija caur Axel WhatsApp, 1 dzēriens iekļauts, ievērojot dreskodu un 1:1 vīriešu/sieviešu proporciju",
+    "incList": "Vārdiska akreditācija caur Nightlife Milan Concierge WhatsApp, 1 dzēriens iekļauts, ievērojot dreskodu un 1:1 vīriešu/sieviešu proporciju",
     "incPista": "100% minimālā tēriņa (minimum spend) stipro dzērienu/šampanieša pudelēs, 6–8 VIP ieejas bez rindas ar hostesi, bezalkoholiskie dzērieni un ledus",
     "incPrive": "100% pudeļu kredīts, paaugstināta Privé loža ar apsardzi, 8–10 VIP ieejas, Magnum un brīnumsvecīšu serviss",
     "incConsole": "100% pudeļu kredīts blakus DJ pultij, 10–15 Super Privé aproces, LED tablo un Dom Pérignon / Don Julio 1942 parāde",
     "music": "Vocal House, Afro-House, Reggaeton, Hip-Hop, Vakariņu Šovs un Starptautiski DJ",
     "dress": "Stingri Elegants (krekls ar apkakli, žakete un ādas apavi vīriešiem; kokteiļkleita vai vakara tērps sievietēm; skriešanas apavi, treniņtērpi, cepures un futbola krekli ir aizliegti)",
     "crowd": "Modeles, modes dizaineri, A Sērijas futbolisti, absolventi un starptautiski VIP viesi",
-    "intro": "Oficiālais ceļvedis, ko sagatavojis Axel, Nightlife Milan vecākais konsjeržs (WhatsApp +39 351 912 7047 un concierge@nightlifemilan.com). Rezervējiet bez komisijas maksas, saņemiet VIP galdiņu plānu 10 minūtēs un ieejiet bez rindas.",
+    "intro": "Oficiālais ceļvedis, ko sagatavojis Nightlife Milan Concierge, Nightlife Milan vecākais konsjeržs (WhatsApp +39 351 912 7047 un concierge@nightlifemilan.com). Rezervējiet bez komisijas maksas, saņemiet VIP galdiņu plānu 10 minūtēs un ieejiet bez rindas.",
     "pricesNote": "Milānas naktsklubos darbojas 100% Minimum Spend noteikums: visa jūsu VIP galdiņa summa tiek izmantota Degvīna (Belvedere, Grey Goose 180–320€), Tekilas (Don Julio 1942, Clase Azul 450–850€) un Šampanieša (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+) pudelēm, maksājot tieši kluba VIP kasē.",
-    "doorNote": "Tikai vīriešu kompānijas (vecpuišu ballītes, draugi, līdzjutēji pēc San Siro spēles) netiek ielaistas pēc parastā saraksta; rezervējot iepriekš apstiprinātu VIP galdiņu caur Axel (+39 351 912 7047), ieeja ir 100% garantēta. Obligāts fizisks personu apliecinošs dokuments.",
+    "doorNote": "Tikai vīriešu kompānijas (vecpuišu ballītes, draugi, līdzjutēji pēc San Siro spēles) netiek ielaistas pēc parastā saraksta; rezervējot iepriekš apstiprinātu VIP galdiņu caur Nightlife Milan Concierge (+39 351 912 7047), ieeja ir 100% garantēta. Obligāts fizisks personu apliecinošs dokuments.",
     "logisticsNote": "Ātra nokļūšana ar ATM metro un nakts autobusiem NM1/NM2/NM3/NM4. Pēc spēles vai koncerta San Siro stadionā Aria Club Milano (#3 Prioritāte, Piazzale dello Sport 14) atrodas tikai 150 metru gājienā, Just Me Milano (#1 Prioritāte) ir atvērts 7 naktis nedēļā līdz 05:00, bet Voya Rooftop (#5 Prioritāte, 20. stāvs) ir 3 M5 metro pieturu attālumā.",
-    "axelNote": "Axel 10 bezmaksas pakalpojumi (+39 351 912 7047 / concierge@nightlifemilan.com): 1) VIP galdiņu kartes; 2) Oficiālās pudeļu cenas; 3) Nulle komisijas; 4) Vīriešu grupu iepriekšēja apstiprināšana; 5) Izlaidumi un dzimšanas dienas ar HACCP torti; 6) Vakariņu šova + Rooftop paketes; 7) Galdiņa saglabāšana līdz 01:30 pēc spēles/koncerta; 8) Korporatīvie pasākumi ar rēķinu; 9) Limuzīnu un Mercedes V-klases трансfēri; 10) 24/7 WhatsApp atbalsts.",
+    "conciergeNote": "Nightlife Milan Concierge 10 bezmaksas pakalpojumi (+39 351 912 7047 / concierge@nightlifemilan.com): 1) VIP galdiņu kartes; 2) Oficiālās pudeļu cenas; 3) Nulle komisijas; 4) Vīriešu grupu iepriekšēja apstiprināšana; 5) Izlaidumi un dzimšanas dienas ar HACCP torti; 6) Vakariņu šova + Rooftop paketes; 7) Galdiņa saglabāšana līdz 01:30 pēc spēles/koncerta; 8) Korporatīvie pasākumi ar rēķinu; 9) Limuzīnu un Mercedes V-klases трансfēri; 10) 24/7 WhatsApp atbalsts.",
     "faqQ1": "Kā rezervēt VIP galdiņu vai viesu sarakstu bez komisijas?",
     "faqQ2": "Cik maksā VIP galdiņš un Aperitivo 2026/2027 sezonā?",
     "faqQ3": "Kāds ir obligātais dreskods pie ieejas?",
@@ -1298,7 +1298,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "h2": "2. Oficialus Kainoraštis 2026/2027: Royal Aperitivo, Vakarienės Šou, VIP Staliukai ir Buteliai",
     "h3": "3. Aprangos Kodas (Dress Code), Atranka prie Durų ir Garantuotas Įėjimas Vyrų Kompanijoms",
     "h4": "4. Metro, Saugoma Automobilių Aikštelė 24/7, San Siro / Parodų Logistika ir Grafikas (19:30–05:00)",
-    "h5": "5. Konsjeržo Axel 10 Nemokamų Paslaugų (+39 351 912 7047) ir Top 6 Klubų Palyginimas",
+    "h5": "5. Konsjeržo Nightlife Milan Concierge 10 Nemokamų Paslaugų (+39 351 912 7047) ir Top 6 Klubų Palyginimas",
     "lblVenue": "Klubas / Renginys",
     "lblZone": "Rajonas / Zona",
     "lblAddress": "Oficialus Adresas",
@@ -1317,18 +1317,18 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "fPrive": "Pakeltas Privé VIP Staliukas (8–10 Asmenų)",
     "fConsole": "Super Privé DJ Pultas (10–15 Asmenų)",
     "incAperitivo": "Rezervuotas staliukas nuo 19:30, karališkas furšetas arba vakarienė, 1 premium kokteilis arba vyno butelis 4 svečiams",
-    "incList": "Vardinė akreditacija per Axel WhatsApp, 1 gėrimas įskaičiuotas, galioja aprangos kodas ir 1:1 vyrų/moterų santykis",
+    "incList": "Vardinė akreditacija per Nightlife Milan Concierge WhatsApp, 1 gėrimas įskaičiuotas, galioja aprangos kodas ir 1:1 vyrų/moterų santykis",
     "incPista": "100% minimalios sumos (minimum spend) skiriama stipriųjų gėrimų/šampano buteliams, 6–8 VIP įėjimai be eilės su hostese, gaivieji gėrimai ir ledas",
     "incPrive": "100% butelių kreditas, pakelta Privé ložė su apsauga, 8–10 VIP leidimų, Magnum ir šaltosios ugnies aptarnavimas",
     "incConsole": "100% butelių kreditas šalia DJ pulto, 10–15 Super Privé apyrankių, LED švieslentė ir Dom Pérignon / Don Julio 1942 paradas",
     "music": "Vocal House, Afro-House, Reggaeton, Hip-Hop, Vakarienės Šou ir Tarptautiniai DJ",
     "dress": "Griežtai Elegantiškas (marškiniai su apykakle, švarkas ir odiniai batai vyrams; kokteilinė suknelė arba vakarinis derinys moterims; bėgimo bateliai, treningai, kepurėlės ir futbolo marškinėliai draudžiami)",
     "crowd": "Modeliai, mados dizaineriai, Serie A futbolininkai, absolventai ir tarptautiniai VIP svečiai",
-    "intro": "Oficialus gidas, kurį parengė Axel, Nightlife Milan vyriausiasis konsjeržas (WhatsApp +39 351 912 7047 ir concierge@nightlifemilan.com). Rezervuokite be komisinių, gaukite VIP staliukų planą per 10 minučių ir užeikite be eilės.",
+    "intro": "Oficialus gidas, kurį parengė Nightlife Milan Concierge, Nightlife Milan vyriausiasis konsjeržas (WhatsApp +39 351 912 7047 ir concierge@nightlifemilan.com). Rezervuokite be komisinių, gaukite VIP staliukų planą per 10 minučių ir užeikite be eilės.",
     "pricesNote": "Milano klubuose galioja 100% Minimum Spend taisyklė: visa jūsų VIP staliuko suma išleidžiama Degtinės (Belvedere, Grey Goose 180–320€), Tekilos (Don Julio 1942, Clase Azul 450–850€) ir Šampano (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+) buteliams, atsiskaitant tiesiogiai klubo VIP kasoje.",
-    "doorNote": "Vien vyrų kompanijos (bernvakariai, draugai, sirgaliai po San Siro rungtynių) pagal įprastą sąrašą neįleidžiamos; rezervavus iš anksto patvirtintą VIP staliuką per Axel (+39 351 912 7047), įėjimas yra 100% garantuotas. Privalomas fizinis asmens dokumentas.",
+    "doorNote": "Vien vyrų kompanijos (bernvakariai, draugai, sirgaliai po San Siro rungtynių) pagal įprastą sąrašą neįleidžiamos; rezervavus iš anksto patvirtintą VIP staliuką per Nightlife Milan Concierge (+39 351 912 7047), įėjimas yra 100% garantuotas. Privalomas fizinis asmens dokumentas.",
     "logisticsNote": "Greitas susisiekimas ATM metro ir naktiniais autobusais NM1/NM2/NM3/NM4. Po rungtynių ar koncerto San Siro stadione Aria Club Milano (#3 Prioritetas, Piazzale dello Sport 14) yra vos už 150 metrų pėsčiomis, Just Me Milano (#1 Prioritetas) dirba 7 naktis per savaitę iki 05:00, o Voya Rooftop (#5 Prioritetas, 20 aukštas) – už 3 M5 metro stotelių.",
-    "axelNote": "10 nemokamų Axel paslaugų (+39 351 912 7047 / concierge@nightlifemilan.com): 1) VIP staliukų schemos; 2) Oficialūs butelių kainoraščiai; 3) Nulis komisinių; 4) Vyrų grupių išankstinis patvirtinimas; 5) Diplomų įteikimo ir gimtadienių šventės su HACCP tortu; 6) Vakarienės šou + Rooftop paketai; 7) Staliuko išlaikymas iki 01:30 po rungtynių/koncerto; 8) Įmonių renginiai su sąskaita faktūra; 9) Limuzinų ir Mercedes V klasės pervežimai; 10) 24/7 WhatsApp pagalba.",
+    "conciergeNote": "10 nemokamų Nightlife Milan Concierge paslaugų (+39 351 912 7047 / concierge@nightlifemilan.com): 1) VIP staliukų schemos; 2) Oficialūs butelių kainoraščiai; 3) Nulis komisinių; 4) Vyrų grupių išankstinis patvirtinimas; 5) Diplomų įteikimo ir gimtadienių šventės su HACCP tortu; 6) Vakarienės šou + Rooftop paketai; 7) Staliuko išlaikymas iki 01:30 po rungtynių/koncerto; 8) Įmonių renginiai su sąskaita faktūra; 9) Limuzinų ir Mercedes V klasės pervežimai; 10) 24/7 WhatsApp pagalba.",
     "faqQ1": "Kaip rezervuoti VIP staliuką ar svečių sąrašą be komisinių?",
     "faqQ2": "Kiek kainuoja VIP staliukas ir Aperitivo 2026/2027 m.?",
     "faqQ3": "Koks yra privalomas aprangos kodas prie įėjimo?",
@@ -1373,7 +1373,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "pricesNote": "V milánskych kluboch platí pravidlo 100% Minimum Spend: celá suma vášho VIP stola sa premení na fľaše Vodky (Belvedere, Grey Goose 180–320€), Tequily (Don Julio 1942, Clase Azul 450–850€) a Šampanského (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+) s platbou priamo na VIP pokladni klubu.",
     "doorNote": "Čisto mužské skupiny (rozlúčky so slobodou, kamaráti, fanúšikovia po zápase na San Siro) sú na bežnom guestliste odmietnuté; rezerváciou vopred schváleného VIP stola cez Axela (+39 351 912 7047) máte 100% garantovaný vstup. Vyžaduje sa fyzický doklad totožnosti.",
     "logisticsNote": "Rýchle spojenie metrom ATM a nočnými autobusmi NM1/NM2/NM3/NM4. Po zápase alebo koncerte na San Siro je Aria Club Milano (#3 Priorita, Piazzale dello Sport 14) vzdialený len 150 metrov pešo, Just Me Milano (#1 Priorita) je otvorený 7 nocí v týždni do 05:00 a Voya Rooftop (#5 Priorita, 20. poschodie) je 3 zastávky linkou M5.",
-    "axelNote": "10 bezplatných služieb Axela (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Plániky VIP stolov; 2) Oficiálne nápojové lístky; 3) Nulová provízia; 4) Predschválenie mužských skupín; 5) Promócie a narodeniny s HACCP tortou; 6) Balíčky Dinner Show + Rooftop; 7) Podržanie stola do 01:30 po zápase/koncerte; 8) Firemné akcie na faktúru; 9) Transfery limuzínou a Mercedes V-Class; 10) 24/7 WhatsApp podpora.",
+    "conciergeNote": "10 bezplatných služieb Axela (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Plániky VIP stolov; 2) Oficiálne nápojové lístky; 3) Nulová provízia; 4) Predschválenie mužských skupín; 5) Promócie a narodeniny s HACCP tortou; 6) Balíčky Dinner Show + Rooftop; 7) Podržanie stola do 01:30 po zápase/koncerte; 8) Firemné akcie na faktúru; 9) Transfery limuzínou a Mercedes V-Class; 10) 24/7 WhatsApp podpora.",
     "faqQ1": "Ako rezervovať VIP stôl alebo guestlist bez provízie?",
     "faqQ2": "Koľko stojí VIP stôl a Aperitivo v sezóne 2026/2027?",
     "faqQ3": "Aký je povinný dress code pri vstupe?",
@@ -1414,11 +1414,11 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "music": "Vocal House, Afro-House, Reggaeton, Hip-Hop, Dinner Show in Mednarodni DJ-ji",
     "dress": "Strogo Elegantno (srajca z ovratnikom, suknjič in usnjeni čevlji za moške; koktajl obleka ali večerni komplet za ženske; tekaške superge, trenirke, kape s šiltom in nogometni dresi so prepovedani)",
     "crowd": "Manekenke, modni oblikovalci, nogometaši Serie A, diplomanti in mednarodni VIP gostje",
-    "intro": "Uradni vodnik, ki ga ureja Axel, Senior Concierge pri Nightlife Milan (WhatsApp +39 351 912 7047 in concierge@nightlifemilan.com). Rezervirajte brez agencijske provizije, prejmite načrt VIP miz v 10 minutah in vstopite brez čakanja.",
+    "intro": "Uradni vodnik, ki ga ureja Nightlife Milan Concierge, Senior Concierge pri Nightlife Milan (WhatsApp +39 351 912 7047 in concierge@nightlifemilan.com). Rezervirajte brez agencijske provizije, prejmite načrt VIP miz v 10 minutah in vstopite brez čakanja.",
     "pricesNote": "V milanskih klubih velja pravilo 100% Minimum Spend: celoten znesek vaše VIP mize porabite za steklenice Vodke (Belvedere, Grey Goose 180–320€), Tekile (Don Julio 1942, Clase Azul 450–850€) in Šampanjca (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+) s plačilom neposredno na VIP blagajni kluba.",
     "doorNote": "Izključno moške družbe (fantovščine, prijatelji, navijači po tekmi na San Siru) na običajni listi niso sprejete; z rezervacijo vnaprej odobrene VIP mize prek Axela (+39 351 912 7047) imate 100% zagotovljen vstop. Obvezen je fizični osebni dokument.",
     "logisticsNote": "Hiter dostop z metrojem ATM in nočnimi avtobusi NM1/NM2/NM3/NM4. Po tekmi ali koncertu na San Siru je Aria Club Milano (#3 Prioriteta, Piazzale dello Sport 14) oddaljen le 150 metrov peš, Just Me Milano (#1 Prioriteta) je odprt 7 noči v tednu do 05:00, Voya Rooftop (#5 Prioriteta, 20. nadstropje) pa je 3 postaje z linijo M5.",
-    "axelNote": "10 brezplačnih storitev Axela (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Načrti VIP miz; 2) Uradni ceniki steklenic; 3) Nič provizije; 4) Odobritev za moške skupine; 5) Diplomske zabave in rojstni dnevi s HACCP torto; 6) Paketi Dinner Show + Rooftop; 7) Ohranitev mize do 01:30 po tekmi/koncertu; 8) Poslovni dogodki z računom; 9) Prevozi z limuzino in Mercedesom razreda V; 10) 24/7 WhatsApp podpora.",
+    "conciergeNote": "10 brezplačnih storitev Axela (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Načrti VIP miz; 2) Uradni ceniki steklenic; 3) Nič provizije; 4) Odobritev za moške skupine; 5) Diplomske zabave in rojstni dnevi s HACCP torto; 6) Paketi Dinner Show + Rooftop; 7) Ohranitev mize do 01:30 po tekmi/koncertu; 8) Poslovni dogodki z računom; 9) Prevozi z limuzino in Mercedesom razreda V; 10) 24/7 WhatsApp podpora.",
     "faqQ1": "Kako rezervirati VIP mizo ali listo gostov brez provizije?",
     "faqQ2": "Koliko stane VIP miza in Aperitiv v sezoni 2026/2027?",
     "faqQ3": "Kakšen je obvezen kodeks oblačenja na vhodu?",
@@ -1433,7 +1433,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "h2": "2. Praghsanna Oifigiúla 2026/2027: Aperitivo Ríoga, Dinner Show, Boird VIP agus Biachlár Buidéal",
     "h3": "3. Cód Gléasta (Dress Code), Roghnú ag an Doras agus Iontráil Ráthaithe do Ghrúpaí Fear",
     "h4": "4. Metro, Páirceáil Сlúdaithe 24/7, Loighistic San Siro / Aonaigh agus Amchlár (19:30–05:00)",
-    "h5": "5. Na 10 Seirbhís Saor in Aisce ó Concierge Axel (+39 351 912 7047) agus Na 6 Chlub Is Fearr",
+    "h5": "5. Na 10 Seirbhís Saor in Aisce ó Concierge Nightlife Milan Concierge (+39 351 912 7047) agus Na 6 Chlub Is Fearr",
     "lblVenue": "Club / Ócáid",
     "lblZone": "Ceantar / Crios",
     "lblAddress": "Seoladh Oifigiúil",
@@ -1452,18 +1452,18 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "fPrive": "Bord VIP Privé Ardaithe (8–10 Duine)",
     "fConsole": "Super Privé Consól DJ (10–15 Duine)",
     "incAperitivo": "Bord in áirithe ó 19:30, buifé ríoga nó dinnéar freastail, 1 deoch préimhe nó buidéal fíona in aghaidh gach 4 aoi",
-    "incList": "Creidiúnú ainmniúil trí WhatsApp Axel, 1 deoch san áireamh, faoi réir cód gléasta agus cothromaíocht 1:1 fear/bean",
+    "incList": "Creidiúnú ainmniúil trí WhatsApp Nightlife Milan Concierge, 1 deoch san áireamh, faoi réir cód gléasta agus cothromaíocht 1:1 fear/bean",
     "incPista": "100% íoschaiteachas (minimum spend) i mbuidéil biotáille/seaimpéin, 6–8 pas VIP gan scuaine le bean tí, meascthóirí agus oighear",
     "incPrive": "100% creidmheas buidéal, limistéar Privé ardaithe le slándáil phríobháideach, 8–10 pas VIP, seirbhís Magnum agus spréachóirí",
     "incConsole": "100% creidmheas buidéal in aice leis an DJ, 10–15 banda láimhe Super Privé, clár LED agus paráid Dom Pérignon / Don Julio 1942",
     "music": "Vocal House, Afro-House, Reggaeton, Hip-Hop, Dinner Show agus DJanna Idirnáisiúnta",
     "dress": "Galánta Dian (léine le coiléar, seaicéad agus bróga leathair d’fhir; gúna cóisir nó feisteas galánta tráthnóna do mhná; tá bróga reatha, cultacha spóirt, caipíní agus geansaithe peile toirmiscthe)",
     "crowd": "Mainicíní, dearthóirí faisin, imreoirí peile Serie A, céimithe ollscoile agus aíonna VIP idirnáisiúnta",
-    "intro": "Treoir oifigiúil ullmhaithe ag Axel, Senior Concierge ag Nightlife Milan (WhatsApp +39 351 912 7047 agus concierge@nightlifemilan.com). Cuir in áirithe le coimisiún nialasach, faigh léarscáil na mbord VIP laistigh de 10 nóiméad agus téigh isteach gan scuaine.",
+    "intro": "Treoir oifigiúil ullmhaithe ag Nightlife Milan Concierge, Senior Concierge ag Nightlife Milan (WhatsApp +39 351 912 7047 agus concierge@nightlifemilan.com). Cuir in áirithe le coimisiún nialasach, faigh léarscáil na mbord VIP laistigh de 10 nóiméad agus téigh isteach gan scuaine.",
     "pricesNote": "I gclubanna Milano tá an riail 100% Minimum Spend i bhfeidhm: caitear suim iomlán do bhoird VIP ar bhuidéil Vodca (Belvedere, Grey Goose 180–320€), Tequila (Don Julio 1942, Clase Azul 450–850€) agus Seaimpéin (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+) a íoctar go díreach ag deasc airgid VIP an chlub.",
-    "doorNote": "Diúltaítear do ghrúpaí fear amháin (cóisirí stags, cairde, lucht leanúna peile tar éis cluiche i San Siro) ar an ngnáthliosta aíonna; trí Bhord VIP réamhúdaraithe a chur in áirithe trí Axel (+39 351 912 7047) tá bhur n-iontráil 100% ráthaithe. Ní mór ID fisiciúil a bheith agat.",
+    "doorNote": "Diúltaítear do ghrúpaí fear amháin (cóisirí stags, cairde, lucht leanúna peile tar éis cluiche i San Siro) ar an ngnáthliosta aíonna; trí Bhord VIP réamhúdaraithe a chur in áirithe trí Nightlife Milan Concierge (+39 351 912 7047) tá bhur n-iontráil 100% ráthaithe. Ní mór ID fisiciúil a bheith agat.",
     "logisticsNote": "Rochtain thapa le Metro ATM agus busanna oíche NM1/NM2/NM3/NM4. Tar éis cluiche nó ceolchoirme i San Siro, níl Aria Club Milano (#3 Tosaíocht, Piazzale dello Sport 14) ach 150 méadar ar shiúl de shiúl na gcos, tá Just Me Milano (#1 Tosaíocht) oscailte 7 n-oíche sa tseachtain go 05:00, agus tá Voya Rooftop (#5 Tosaíocht, 20ú hurlár) 3 stad ar líne M5.",
-    "axelNote": "Na 10 seirbhís saor in aisce ó Axel (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Léarscáileanna bord VIP; 2) Liostaí praghsanna oifigiúla buidéal; 3) Coimisiún nialasach; 4) Réamhúdarú do ghrúpaí fear; 5) Cóisirí céime agus breithe le cáca HACCP; 6) Pacáistí Dinner Show + Rooftop; 7) Coimeád boird go 01:30 tar éis cluiche/ceolchoirme; 8) Imeachtaí corparáideacha le sonrasc; 9) Aistrithe Limisín agus Mercedes V-Class; 10) Tacaíocht WhatsApp 24/7.",
+    "conciergeNote": "Na 10 seirbhís saor in aisce ó Nightlife Milan Concierge (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Léarscáileanna bord VIP; 2) Liostaí praghsanna oifigiúla buidéal; 3) Coimisiún nialasach; 4) Réamhúdarú do ghrúpaí fear; 5) Cóisirí céime agus breithe le cáca HACCP; 6) Pacáistí Dinner Show + Rooftop; 7) Coimeád boird go 01:30 tar éis cluiche/ceolchoirme; 8) Imeachtaí corparáideacha le sonrasc; 9) Aistrithe Limisín agus Mercedes V-Class; 10) Tacaíocht WhatsApp 24/7.",
     "faqQ1": "Conas a chuirim Bord VIP nó liosta aíonna in áirithe gan choimisiún?",
     "faqQ2": "Cé mhéad a chosnaíonn Bord VIP agus Aperitivo in 2026/2027?",
     "faqQ3": "Cad é an cód gléasta éigeantach ag an doras?",
@@ -1478,7 +1478,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "h2": "2. Prezzijiet Uffiċjali 2026/2027: Royal Aperitivo, Dinner Show, Imwejjed VIP u Fliexken",
     "h3": "3. Dress Code, Selezzjoni fil-Bieb u Dħul Garantit għal Gruppi ta’ Rġiel",
     "h4": "4. Metro, Parkeġġ bl-Għassa 24/7, Loġistika San Siro / Fieri u Skeda (19:30–05:00)",
-    "h5": "5. L-10 Servizzi Bla Ħlas ta’ Concierge Axel (+39 351 912 7047) u t-Top 6 Klabbs f’Milan",
+    "h5": "5. L-10 Servizzi Bla Ħlas ta’ Concierge Nightlife Milan Concierge (+39 351 912 7047) u t-Top 6 Klabbs f’Milan",
     "lblVenue": "Klabb / Avveniment",
     "lblZone": "Distrett / Żona",
     "lblAddress": "Indirizz Uffiċjali",
@@ -1497,18 +1497,18 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "fPrive": "Mejda VIP Privé Mgħollija (8–10 Persuni)",
     "fConsole": "Super Privé DJ Console (10–15 Persuni)",
     "incAperitivo": "Mejda riservata mis-19:30, royal buffet jew ċena servuta, 1 xarba premium jew flixkun inbid għal kull 4 mistednin",
-    "incList": "Akkreditazzjoni bl-isem permezz ta’ WhatsApp ta’ Axel, 1 xarba inkluża, suġġett għal dress code u bilanċ 1:1 irġiel/nisa",
+    "incList": "Akkreditazzjoni bl-isem permezz ta’ WhatsApp ta’ Nightlife Milan Concierge, 1 xarba inkluża, suġġett għal dress code u bilanċ 1:1 irġiel/nisa",
     "incPista": "100% minimum spend konvertit fi fliexken ta’ spirti/xampanja, 6–8 passes VIP mingħajr kju ma’ hostess, mixers u silġ",
     "incPrive": "100% kreditu fi fliexken, żona Privé mgħollija b’sigurtà privata, 8–10 passes VIP, servizz Magnum u sparklers",
     "incConsole": "100% kreditu fi fliexken ħdejn id-DJ, 10–15 wristbands Super Privé, tabella LED u parata Dom Pérignon / Don Julio 1942",
     "music": "Vocal House, Afro-House, Reggaeton, Hip-Hop, Dinner Show u DJs Internazzjonali",
     "dress": "Strettament Eleganti (qmis bl-għonq, ġlekk u żraben tal-ġilda għall-irġiel; libsa cocktail jew ilbies eleganti ta’ filgħaxija għan-nisa; żraben tal-ġiri, tracksuits, brieret u flokkijiet tal-futbol huma pprojbiti)",
     "crowd": "Mudelli, disinjaturi tal-moda, plejers tal-futbol tas-Serie A, gradwati u mistednin VIP internazzjonali",
-    "intro": "Gwida uffiċjali mħejjija minn Axel, Senior Concierge ta’ Nightlife Milan (WhatsApp +39 351 912 7047 u concierge@nightlifemilan.com). Ibbukkja b’żero kummissjoni, irċievi l-mappa tal-imwejjed VIP f’10 minuti u idħol mingħajr kju.",
+    "intro": "Gwida uffiċjali mħejjija minn Nightlife Milan Concierge, Senior Concierge ta’ Nightlife Milan (WhatsApp +39 351 912 7047 u concierge@nightlifemilan.com). Ibbukkja b’żero kummissjoni, irċievi l-mappa tal-imwejjed VIP f’10 minuti u idħol mingħajr kju.",
     "pricesNote": "Fil-klabbs ta’ Milan tapplika r-regola 100% Minimum Spend: l-ammont kollu tal-mejda VIP tiegħek jintefaq fuq fliexken ta’ Vodka (Belvedere, Grey Goose 180–320€), Tequila (Don Julio 1942, Clase Azul 450–850€) u Xampanja (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+) imħallsa direttament fil-kaxxa VIP tal-klabb.",
-    "doorNote": "Gruppi ta’ rġiel biss (bachelor parties, ħbieb, partitarji wara logħba f’San Siro) jiġu rrifjutati fuq il-guestlist normali; billi tibbukkja Mejda VIP pre-awtorizzata permezz ta’ Axel (+39 351 912 7047) id-dħul tiegħek huwa 100% garantit. Dokument tal-identità fiżiku huwa obbligatorju.",
+    "doorNote": "Gruppi ta’ rġiel biss (bachelor parties, ħbieb, partitarji wara logħba f’San Siro) jiġu rrifjutati fuq il-guestlist normali; billi tibbukkja Mejda VIP pre-awtorizzata permezz ta’ Nightlife Milan Concierge (+39 351 912 7047) id-dħul tiegħek huwa 100% garantit. Dokument tal-identità fiżiku huwa obbligatorju.",
     "logisticsNote": "Aċċess veloċi bil-metro ATM u karozzi tal-linja ta’ bil-lejl NM1/NM2/NM3/NM4. Wara logħba jew kunċert f’San Siro, Aria Club Milano (#3 Prijorità, Piazzale dello Sport 14) jinsab biss 150 metru bil-mixi, Just Me Milano (#1 Prijorità) huwa miftuħ 7 iljieli fil-ġimgħa sal-05:00, u Voya Rooftop (#5 Prijorità, l-20 sular) jinsab 3 waqfiet bil-linja M5.",
-    "axelNote": "L-10 servizzi bla ħlas ta’ Axel (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Mapep tal-imwejjed VIP; 2) Listi uffiċjali tal-prezzijiet tal-fliexken; 3) Żero kummissjoni; 4) Pre-awtorizzazzjoni għal gruppi ta’ rġiel; 5) Festi ta’ gradwazzjoni u għeluq is-snin b’kejk HACCP; 6) Pakketti Dinner Show + Rooftop; 7) Żamma tal-mejda sas-01:30 wara logħba/kunċert; 8) Avvenimenti korporattivi b’fattura; 9) Trasferimenti b’Limousine u Mercedes V-Class; 10) Assistenza WhatsApp 24/7.",
+    "conciergeNote": "L-10 servizzi bla ħlas ta’ Nightlife Milan Concierge (+39 351 912 7047 / concierge@nightlifemilan.com): 1) Mapep tal-imwejjed VIP; 2) Listi uffiċjali tal-prezzijiet tal-fliexken; 3) Żero kummissjoni; 4) Pre-awtorizzazzjoni għal gruppi ta’ rġiel; 5) Festi ta’ gradwazzjoni u għeluq is-snin b’kejk HACCP; 6) Pakketti Dinner Show + Rooftop; 7) Żamma tal-mejda sas-01:30 wara logħba/kunċert; 8) Avvenimenti korporattivi b’fattura; 9) Trasferimenti b’Limousine u Mercedes V-Class; 10) Assistenza WhatsApp 24/7.",
     "faqQ1": "Kif nibbukkja Mejda VIP jew guestlist mingħajr kummissjoni?",
     "faqQ2": "Kemm tiswa Mejda VIP u Aperitivo fl-2026/2027?",
     "faqQ3": "X’inhu d-dress code obbligatorju fil-bieb?",
@@ -1523,7 +1523,7 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "h2": "2. Opinber Verðskrá 2026/2027: Royal Aperitivo, Kvöldverðarsýning, VIP-Borð og Flöskuseðill",
     "h3": "3. Klæðaburður (Dress Code), Dyraeftirlit og Tryggður Aðgangur fyrir Karlahópa",
     "h4": "4. Neðanjarðarlest (Metro), Vöktuð Bílastæði 24/7, San Siro / Sýningarsamgöngur og Tímaáætlun (19:30–05:00)",
-    "h5": "5. 10 Ókeypis Concierge-Þjónustur Axel (+39 351 912 7047) og Samanburður á Topp 6 Klúbbum",
+    "h5": "5. 10 Ókeypis Concierge-Þjónustur Nightlife Milan Concierge (+39 351 912 7047) og Samanburður á Topp 6 Klúbbum",
     "lblVenue": "Klúbbur / Viðburður",
     "lblZone": "Hverfi / Svæði",
     "lblAddress": "Opinbert Heimilisfang",
@@ -1542,18 +1542,18 @@ const COMPACT_33_DICTS: Record<string, CompactLangPack> = {
     "fPrive": "Upphækkað Privé VIP-Borð (8–10 Manns)",
     "fConsole": "Super Privé DJ-Borð (10–15 Manns)",
     "incAperitivo": "Frátekið borð frá 19:30, konunglegt hlaðborð eða borðhald, 1 úrvalsdrykkur eða vínflaska á hverja 4 gesti",
-    "incList": "Nafnskráning í gegnum WhatsApp hjá Axel, 1 drykkur innifalinn, háð klæðaburði og 1:1 hlutfalli karla og kvenna",
+    "incList": "Nafnskráning í gegnum WhatsApp hjá Nightlife Milan Concierge, 1 drykkur innifalinn, háð klæðaburði og 1:1 hlutfalli karla og kvenna",
     "incPista": "100% lágmarksupphæð (minimum spend) breytist í flöskur af sterku áfengi/kampavíni, 6–8 VIP-passar framhjá röð með gestgjafa, bland og klaki",
     "incPrive": "100% flöskuinneign, upphækkað Privé-svæði með einkavörslu, 8–10 VIP-passar, Magnum- og stjörnuljósaþjónusta",
     "incConsole": "100% flöskuinneign við hlið plötusnúðs, 10–15 Super Privé-armbönd, LED-skilti og Dom Pérignon / Don Julio 1942 sýning",
     "music": "Vocal House, Afro-House, Reggaeton, Hip-Hop, Kvöldverðarsýning og Alþjóðlegir Plötusnúðar",
     "dress": "Stranglega Glæsilegur (kragaskyrtur, jakki og leðurskór fyrir karla; kokteilkjóll eða glæsilegur kvöldfatnaður fyrir konur; hlaupaskór, íþróttagallar, derhúfur og fótboltatreyjur eru bannaðar)",
     "crowd": "Fyrirsætur, fatahönnuðir, Serie A knattspyrnumenn, útskriftarnemar og alþjóðlegir VIP-gestir",
-    "intro": "Opinber handbók tekin saman af Axel, Senior Concierge hjá Nightlife Milan (WhatsApp +39 351 912 7047 og concierge@nightlifemilan.com). Bókaðu án þóknunar, fáðu VIP-borðakort innan 10 mínútna og gakktu beint inn án biðraðar.",
+    "intro": "Opinber handbók tekin saman af Nightlife Milan Concierge, Senior Concierge hjá Nightlife Milan (WhatsApp +39 351 912 7047 og concierge@nightlifemilan.com). Bókaðu án þóknunar, fáðu VIP-borðakort innan 10 mínútna og gakktu beint inn án biðraðar.",
     "pricesNote": "Í næturklúbbum Mílanó gildir reglan um 100% Minimum Spend: öll upphæð VIP-borðsins fer í flöskur af Vodka (Belvedere, Grey Goose 180–320€), Tequila (Don Julio 1942, Clase Azul 450–850€) og Kampavíni (Moët, Veuve Clicquot, Dom Pérignon, Cristal 200–1.400€+) sem greitt er beint í VIP-afgreiðslu klúbbsins.",
-    "doorNote": "Hreinum karlahópum (steggjapartý, vinahópar, fótboltaaðdáendur eftir leik á San Siro) er vísað frá á venjulegum gestalista; með því að bóka fyrirfram samþykkt VIP-borð í gegnum Axel (+39 351 912 7047) er aðgangur ykkar 100% tryggður. Framvísa þarf gildu skilríki.",
+    "doorNote": "Hreinum karlahópum (steggjapartý, vinahópar, fótboltaaðdáendur eftir leik á San Siro) er vísað frá á venjulegum gestalista; með því að bóka fyrirfram samþykkt VIP-borð í gegnum Nightlife Milan Concierge (+39 351 912 7047) er aðgangur ykkar 100% tryggður. Framvísa þarf gildu skilríki.",
     "logisticsNote": "Fljótleg tenging með ATM-neðanjarðarlest og næturstrætóum NM1/NM2/NM3/NM4. Eftir leik eða tónleika á San Siro er Aria Club Milano (#3 Forgangur, Piazzale dello Sport 14) í aðeins 150 metra göngufæri, Just Me Milano (#1 Forgangur) er opinn 7 kvöld í viku til 05:00 og Voya Rooftop (#5 Forgangur, 20. hæð) er í 3 stoppa fjarlægð með M5.",
-    "axelNote": "10 ókeypis þjónustur Axel (+39 351 912 7047 / concierge@nightlifemilan.com): 1) VIP-borðakort; 2) Opinberir flöskuverðlistar; 3) Engin þóknun; 4) For-samþykki fyrir karlahópa; 5) Útskriftar- og afmælisveislur með HACCP-tertu; 6) Kvöldverðarsýning + Rooftop-pakkar; 7) Borðhald til 01:30 eftir leik/tónleika; 8) Fyrirtækjaviðburðir með reikningi; 9) Limmósínu- og Mercedes V-Class-akstur; 10) 24/7 WhatsApp-þjónusta.",
+    "conciergeNote": "10 ókeypis þjónustur Nightlife Milan Concierge (+39 351 912 7047 / concierge@nightlifemilan.com): 1) VIP-borðakort; 2) Opinberir flöskuverðlistar; 3) Engin þóknun; 4) For-samþykki fyrir karlahópa; 5) Útskriftar- og afmælisveislur með HACCP-tertu; 6) Kvöldverðarsýning + Rooftop-pakkar; 7) Borðhald til 01:30 eftir leik/tónleika; 8) Fyrirtækjaviðburðir með reikningi; 9) Limmósínu- og Mercedes V-Class-akstur; 10) 24/7 WhatsApp-þjónusta.",
     "faqQ1": "Hvernig bóka ég VIP-borð eða gestalista án þóknunar?",
     "faqQ2": "Hvað kostar VIP-borð og Aperitivo tímabilið 2026/2027?",
     "faqQ3": "Hver er skyldubundinn klæðaburður við dyrnar?",
@@ -4263,7 +4263,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "metro": "M5 Cenisio/Portello, M2 Garibaldi, M1/M3 Duomo + Pink/White Limousine Tour",
     "parking": "Guarded parking + Limousine red-carpet stop at club entrance",
     "aperitivoPrice": "35€–65€/person Singing Dinner Show (Table Dance on Napkins & Bride Tribute)",
-    "listPrice": "Complimentary / Priority Ladies Accreditation with Axel",
+    "listPrice": "Complimentary / Priority Ladies Accreditation with Nightlife Milan Concierge",
     "pistaPrice": "250€–320€ (6–8 girls, 100% Champagne/Belvedere bottle credit)",
     "privePrice": "450€–750€ (8–12 girls, VIP Privé + Sparkler Show + Bride LED Sign)",
     "consolePrice": "850€–1.600€+ (Full Limo Tour + Singing Dinner + VIP Privé Package)",
@@ -4464,7 +4464,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "id": "g-56",
     "cluster": "occasion",
     "slugKey": "surprise-party-club-rooftop-milan",
-    "name": "Festa a Sorpresa in Discoteca e sui Rooftop a Milano (Regia Segreta Axel, Torta & Privé)",
+    "name": "Festa a Sorpresa in Discoteca e sui Rooftop a Milano (Regia Segreta Nightlife Milan Concierge, Torta & Privé)",
     "shortName": "Festa a Sorpresa",
     "zone": "CityLife, Sempione, Corso Como & Duomo",
     "address": "Voya Rooftop, 55 Milano, Just Me, Pineta, Il Gattopardo, Terrazza Duomo 21",
@@ -4473,7 +4473,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "metro": "All Metro Lines M1/M2/M3/M4/M5",
     "parking": "24h guarded garages + Coordinated Limousine Surprise Arrival",
     "aperitivoPrice": "20€–35€/person Reserved Surprise Area (Aperitivo or Dinner)",
-    "listPrice": "Secret Guest Accreditation List managed by Axel without notifying the guest of honor",
+    "listPrice": "Secret Guest Accreditation List managed by Nightlife Milan Concierge without notifying the guest of honor",
     "pistaPrice": "250€–350€ (6–8 guests, 100% bottle credit)",
     "privePrice": "500€–850€ (10–15 guests, Private Curtained/Elevated Privé + Cake & Sparklers)",
     "consolePrice": "900€–1.800€+ (20–40 guests Exclusive Surprise Zone + LED Screen Reveal)",
@@ -4888,7 +4888,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "shortName": "Dopo-Partita AC Milan San Siro",
     "zone": "San Siro, Portello (Casa Milan), Sempione & Corso Como",
     "address": "Stadio San Siro → Aria Club (Piazzale dello Sport 14), Voya Rooftop (Portello), Just Me, 55 Milano, Pineta",
-    "hours": "22:45 – 05:00 (Late Arrival Hold Until 01:30 AM via Axel)",
+    "hours": "22:45 – 05:00 (Late Arrival Hold Until 01:30 AM via Nightlife Milan Concierge)",
     "age": "21+ Rossoneri Hospitality Guests, International Fans & Friends",
     "metro": "Walk 150m to Aria Club or take M5 Lilla 3 stops to Portello (Casa Milan / Voya Rooftop)",
     "parking": "Piazzale dello Sport & Portello 24h guarded garages",
@@ -5173,7 +5173,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "metro": "M3 Montenapoleone/Repubblica, M2 Garibaldi, M1 Cadorna/Duomo + Chauffeur Fleet",
     "parking": "VIP Valet & Guarded Fashion District Garages",
     "aperitivoPrice": "50€–120€ Fashion Week Dinner Show & Runway Cocktail",
-    "listPrice": "Strictly by Nominal Accreditation / Model & Buyer Pass via Axel",
+    "listPrice": "Strictly by Nominal Accreditation / Model & Buyer Pass via Nightlife Milan Concierge",
     "pistaPrice": "500€–800€ (Fashion Week Dancefloor Table)",
     "privePrice": "1.200€–2.500€ (Runway & Model Privé Booth)",
     "consolePrice": "3.000€–8.000€+ (Backstage DJ Console next to Special Guest Headliners)",
@@ -5243,7 +5243,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "metro": "M3 Montenapoleone/Duomo, M5 Monumentale/Portello, M2 Garibaldi",
     "parking": "VIP Valet & 24h guarded underground parking",
     "aperitivoPrice": "45€–110€ Open-Air Garden & Rooftop Fashion Dinner",
-    "listPrice": "Selective Fashion Week Accreditation via Axel",
+    "listPrice": "Selective Fashion Week Accreditation via Nightlife Milan Concierge",
     "pistaPrice": "500€–800€ (6–8 guests, 100% bottle credit)",
     "privePrice": "1.200€–2.500€ (8–10 guests, Garden & Runway Privé)",
     "consolePrice": "3.000€–8.000€+ (10–15 guests, Super Privé & Artist Console)",
@@ -5523,7 +5523,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "metro": "Garibaldi FS / Centrale FS (15 min train from Monza) + Helicopter/Mercedes V-Class Transfer",
     "parking": "VIP Valet & Chauffeur Security Drop-Off",
     "aperitivoPrice": "60€–150€ F1 Weekend Gala Dinner & Rooftop Sunset Cocktail",
-    "listPrice": "Priority Paddock & Hospitality Accreditation via Axel",
+    "listPrice": "Priority Paddock & Hospitality Accreditation via Nightlife Milan Concierge",
     "pistaPrice": "500€–900€ (6–8 guests, 100% bottle credit)",
     "privePrice": "1.500€–3.500€ (8–12 guests, F1 Paddock VIP Privé)",
     "consolePrice": "4.000€–12.000€+ (10–15 guests, Dom Pérignon / Cristal Methuselah Parade)",
@@ -6433,7 +6433,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "metro": "M3 Montenapoleone/Repubblica, M2 Garibaldi, M1 Cadorna",
     "parking": "VIP Valet & Chauffeur Service",
     "aperitivoPrice": "45€–90€ Fashion Dinner Show & Backstage Cocktail",
-    "listPrice": "Agency / Booker & VIP Accreditation via Axel",
+    "listPrice": "Agency / Booker & VIP Accreditation via Nightlife Milan Concierge",
     "pistaPrice": "350€–550€ (6–8 guests, 100% bottle credit)",
     "privePrice": "750€–1.600€ (8–10 guests, Model & Agency Privé)",
     "consolePrice": "1.800€–5.000€+ (10–15 guests, Super Privé DJ Console)",
@@ -7203,7 +7203,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "metro": "M5 Cenisio/Portello/Gerusalemme, M2 Garibaldi, M1 Cadorna/Duomo + Limousine Tour",
     "parking": "24h guarded parking + Pink/White Limousine Drop-off",
     "aperitivoPrice": "35€–65€/person 8 Marzo Singing Dinner Show with Live Performers & Mimosa Drink",
-    "listPrice": "Complimentary / Priority Ladies Accreditation after 23:00 via Axel",
+    "listPrice": "Complimentary / Priority Ladies Accreditation after 23:00 via Nightlife Milan Concierge",
     "pistaPrice": "250€–320€ (6–8 girls, 100% bottle credit)",
     "privePrice": "450€–750€ (8–12 girls, Elevated Privé + Sparkler Show)",
     "consolePrice": "850€–1.600€+ (Dinner + Limousine + VIP Privé Package)",
@@ -8253,7 +8253,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "metro": "Direct S-Trains to Porta Garibaldi FS (12 min from Monza) + M5 Lilla Bignami",
     "parking": "Zero ZTL / Area C Off at Night! Direct 24h guarded parking in Via Messina, Via Achille Papa & Piazzale dello Sport",
     "aperitivoPrice": "20€–25€ Royal Aperitivo / 40€–70€ Singing Dinner Show (Pineta, Grace, Tocqueville, Gattopardo)",
-    "listPrice": "15€–25€ Accredited Guestlist via Axel WhatsApp",
+    "listPrice": "15€–25€ Accredited Guestlist via Nightlife Milan Concierge WhatsApp",
     "pistaPrice": "250€–400€ (6–8 guests, 100% bottle credit + guaranteed entry for Brianza groups)",
     "privePrice": "500€–950€ (8–10 guests, Elevated Privé)",
     "consolePrice": "1.000€–2.500€+ (10–15 guests, Super Privé + Optional Van Transfer from Brianza)",
@@ -8393,7 +8393,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "metro": "A9/A8 Viale Certosa exit (3 min to Voya Rooftop & Aria Club; 6 min to 55 Milano & Pineta) or Trenord to Cadorna/Garibaldi",
     "parking": "Guarded 24h underground garages for Swiss & Italian luxury cars (Via Achille Papa, Via Messina, Viale Alemagna)",
     "aperitivoPrice": "35€–80€ Singing Dinner Show or Panoramic Rooftop Dinner",
-    "listPrice": "20€–30€ Priority Accreditation via Axel",
+    "listPrice": "20€–30€ Priority Accreditation via Nightlife Milan Concierge",
     "pistaPrice": "300€–450€ (6–8 guests, 100% bottle credit)",
     "privePrice": "600€–1.200€ (8–10 guests, Luxury Privé)",
     "consolePrice": "1.200€–3.500€+ (10–15 guests, Super Privé & Chauffeur Option from Como/Lugano)",
@@ -8616,9 +8616,9 @@ function localizeSeedField(raw: string, locale: LocaleCode): string {
 
 function renderEnGuide(seed: GuideSeed100) {
   const title = `${seed.name}: Complete 2026/2027 VIP Tables, Prices, Dress Code & Insider Guide`;
-  const excerpt = `Definitive 2026/2027 guide to ${seed.name} in ${seed.zone}, Milan (${seed.address}): official VIP table prices (${seed.pistaPrice}), Royal Aperitivo & Dinner Show (${seed.aperitivoPrice}), dress code, metro (${seed.metro}), 24h parking and zero-commission WhatsApp booking with Senior Concierge Axel (+39 351 912 7047).`;
+  const excerpt = `Definitive 2026/2027 guide to ${seed.name} in ${seed.zone}, Milan (${seed.address}): official VIP table prices (${seed.pistaPrice}), Royal Aperitivo & Dinner Show (${seed.aperitivoPrice}), dress code, metro (${seed.metro}), 24h parking and zero-commission WhatsApp booking with Senior Concierge Nightlife Milan Concierge (+39 351 912 7047).`;
 
-  const s1 = `<p>Welcome to the official 2026/2027 insider pillar guide dedicated to <strong>${seed.name}</strong> in <strong>${seed.zone}</strong>, Milan, curated directly by <strong>Axel</strong>, Senior Nightlife Concierge at <em>Nightlife Milan</em> (<a href="https://wa.me/393519127047" target="_blank" rel="noopener noreferrer">WhatsApp +39 351 912 7047</a> and <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a>). Whether you are organizing an elevated VIP bottle service table, a Royal Aperitivo, a Singing Dinner Show, a university graduation party, a birthday celebration, a pre-authorized all-male stag night, a post-match celebration after San Siro, or a corporate hospitality night during Milan Fashion Week or Salone del Mobile, this comprehensive reference gives you verified 2026/2027 floor maps, transparent minimum spend tables, door selection rules, and step-by-step metro and parking logistics.</p>
+  const s1 = `<p>Welcome to the official 2026/2027 insider pillar guide dedicated to <strong>${seed.name}</strong> in <strong>${seed.zone}</strong>, Milan, curated directly by <strong>Nightlife Milan Concierge</strong>, Senior Nightlife Concierge at <em>Nightlife Milan</em> (<a href="https://wa.me/393519127047" target="_blank" rel="noopener noreferrer">WhatsApp +39 351 912 7047</a> and <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a>). Whether you are organizing an elevated VIP bottle service table, a Royal Aperitivo, a Singing Dinner Show, a university graduation party, a birthday celebration, a pre-authorized all-male stag night, a post-match celebration after San Siro, or a corporate hospitality night during Milan Fashion Week or Salone del Mobile, this comprehensive reference gives you verified 2026/2027 floor maps, transparent minimum spend tables, door selection rules, and step-by-step metro and parking logistics.</p>
 <p>Located at <strong>${seed.address}</strong> in the heart of <strong>${seed.zone}</strong>, <strong>${seed.shortName}</strong> stands out as one of the cornerstones of the Milanese evening and late-night ecosystem. Operating on schedule <strong>${seed.hours}</strong> with an age policy of <strong>${seed.age}</strong>, the venue brings together models, fashion executives, Serie A footballers, international entrepreneurs, and university graduates in a setting engineered for high-energy socializing from 19:30 aperitivo through 05:00 clubbing.</p>
 <div class="overflow-x-auto my-6"><table class="min-w-full border border-white/15 text-sm">
 <thead><tr class="bg-white/10 text-left"><th class="p-3">Venue / Experience</th><th class="p-3">Official 2026/2027 Specification</th></tr></thead>
@@ -8630,7 +8630,7 @@ function renderEnGuide(seed: GuideSeed100) {
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">Target Age & Crowd</td><td class="p-3">${seed.age} — Models, designers, footballers, graduates & international VIPs</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">Metro & Night Transit</td><td class="p-3">${seed.metro}</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">24/7 Guarded Parking</td><td class="p-3">${seed.parking}</td></tr>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">Official VIP Concierge</td><td class="p-3">Axel — WhatsApp <a href="https://wa.me/393519127047">+39 351 912 7047</a> / <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a> (Zero Agency Fee)</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">Official VIP Concierge</td><td class="p-3">Nightlife Milan Concierge — WhatsApp <a href="https://wa.me/393519127047">+39 351 912 7047</a> / <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a> (Zero Agency Fee)</td></tr>
 </tbody></table></div>
 <p>What makes <strong>${seed.shortName}</strong> uniquely effective in Milan is its multi-phase evening architecture. Phase 1 begins at 19:30–20:30 with the Milanese Royal Aperitivo or Seated Singing Dinner Show, where guests enjoy gourmet Mediterranean and international dishes, signature mixology, and live vocal performers without having to change venue later in the night. Phase 2 transitions at 23:00–23:30 as the lights dim, the sound system shifts to full club power, and the VIP hostess team opens the dedicated bottle service corridor. Phase 3 peaks between 01:00 and 03:30 with Magnum Champagne parades, LED name boards, and resident + international guest DJs spinning Vocal House, Afro-House, Hip-Hop, Reggaeton, and Commercial hits until 05:00 AM.</p>`;
 
@@ -8639,18 +8639,18 @@ function renderEnGuide(seed: GuideSeed100) {
 <thead><tr class="bg-white/10 text-left"><th class="p-3">Booking Formula</th><th class="p-3">2026/2027 Official Price</th><th class="p-3">What Is Included</th><th class="p-3">Recommended Arrival</th></tr></thead>
 <tbody>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">Royal Aperitivo / Singing Dinner Table</td><td class="p-3">${seed.aperitivoPrice}</td><td class="p-3">Reserved table from 19:30/20:30, royal buffet or 3-course dinner, 1 cocktail or 1 bottle of wine per 4 guests, free stay for the club night</td><td class="p-3">19:30 – 21:00</td></tr>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">Accredited Guestlist / Evening Entry</td><td class="p-3">${seed.listPrice}</td><td class="p-3">Nominal accreditation via Axel WhatsApp, 1 drink included, subject to dress code and 1:1 gender balance at the door</td><td class="p-3">23:00 – 00:30</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">Accredited Guestlist / Evening Entry</td><td class="p-3">${seed.listPrice}</td><td class="p-3">Nominal accreditation via Nightlife Milan Concierge WhatsApp, 1 drink included, subject to dress code and 1:1 gender balance at the door</td><td class="p-3">23:00 – 00:30</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">Dancefloor VIP Table (Pista)</td><td class="p-3">${seed.pistaPrice}</td><td class="p-3">100% bottle credit, 6–8 skip-the-line VIP passes, hostess escort, unlimited soft drink mixers (tonic, lemon, Red Bull), ice & fresh fruit</td><td class="p-3">23:30 – 01:00</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">Elevated Privé VIP Table</td><td class="p-3">${seed.privePrice}</td><td class="p-3">100% bottle credit, raised Privé booth with private security, 8–10 VIP passes, dedicated waiter, Magnum & sparkler show</td><td class="p-3">23:30 – 01:15</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">Super Privé DJ Console / Stage</td><td class="p-3">${seed.consolePrice}</td><td class="p-3">100% bottle credit next to the DJ booth, 10–15 Super Privé wristbands, custom LED sign & Dom Pérignon / Don Julio 1942 parade</td><td class="p-3">00:00 – 01:30</td></tr>
 </tbody></table></div>
-<p><strong>Bottle Menu Reference Prices (2026/2027 Season):</strong> Standard 0.70L premium spirits (Belvedere, Grey Goose, Bombay Sapphire, Hendrick's, Patrón Silver) range from <strong>180€ to 250€</strong> per bottle; 1.75L Magnum Vodka bottles range from <strong>450€ to 600€</strong>; 3L Jeroboam bottles start at <strong>950€–1.300€</strong>; Non-Vintage Champagne (Moët & Chandon, Veuve Clicquot) starts at <strong>200€–250€</strong>; Ruinart Blanc de Blancs and Rosé range from <strong>320€ to 380€</strong>; Dom Pérignon Vintage is <strong>550€–700€</strong>; Cristal and Armand de Brignac range from <strong>850€ to 1.500€+</strong>; Don Julio 1942 and Clase Azul Reposado range from <strong>450€ to 850€</strong>. Contact Axel on WhatsApp at <strong>+39 351 912 7047</strong> to receive the PDF bottle list and high-resolution floor plan in under 10 minutes.</p>`;
+<p><strong>Bottle Menu Reference Prices (2026/2027 Season):</strong> Standard 0.70L premium spirits (Belvedere, Grey Goose, Bombay Sapphire, Hendrick's, Patrón Silver) range from <strong>180€ to 250€</strong> per bottle; 1.75L Magnum Vodka bottles range from <strong>450€ to 600€</strong>; 3L Jeroboam bottles start at <strong>950€–1.300€</strong>; Non-Vintage Champagne (Moët & Chandon, Veuve Clicquot) starts at <strong>200€–250€</strong>; Ruinart Blanc de Blancs and Rosé range from <strong>320€ to 380€</strong>; Dom Pérignon Vintage is <strong>550€–700€</strong>; Cristal and Armand de Brignac range from <strong>850€ to 1.500€+</strong>; Don Julio 1942 and Clase Azul Reposado range from <strong>450€ to 850€</strong>. Contact Nightlife Milan Concierge on WhatsApp at <strong>+39 351 912 7047</strong> to receive the PDF bottle list and high-resolution floor plan in under 10 minutes.</p>`;
 
   const s3 = `<p>Door selection (<em>selezione all'ingresso</em>) in Milan is famously strict, and understanding how the door directors evaluate groups is essential to guarantee a smooth night at <strong>${seed.shortName}</strong>. Below are the exact rules enforced for the 2026/2027 season:</p>
 <ul>
 <li><strong>Mandatory Dress Code for Men:</strong> A collared shirt (white, black, or tailored pattern), blazer or structured jacket, dark tailored trousers or clean dark designer denim without rips, and leather loafers, Chelsea boots, or pristine luxury low-top leather shoes. <strong>Strictly forbidden:</strong> running or gym sneakers (Nike Air Max, TN, Jordan, New Balance running), tracksuits, hoodies, baseball caps, Crossbody pouches/marsupi, chains over t-shirts, shorts, and football jerseys (even after a Serie A or Champions League match at San Siro).</li>
 <li><strong>Mandatory Dress Code for Women:</strong> Cocktail dress, silk slip dress, tailored evening jumpsuit, or chic blazer-and-trouser ensemble paired with heels, heeled boots, or elegant evening flats.</li>
-<li><strong>The Golden Rule for All-Male Groups (Stag Parties, Friends, Corporate Teams, Football Fans):</strong> In Milan, groups composed exclusively of men or with a heavy male majority (e.g., 5–10 men and 0 women) are systematically turned away on the standard guestlist queue on Friday and Saturday nights. However, by booking a <strong>pre-authorized VIP Table through Axel (+39 351 912 7047)</strong>, your group is registered directly on the VIP Door Director's tablet with guaranteed 100% entry via the dedicated VIP lane—provided every guest respects the dress code and arrives sober.</li>
+<li><strong>The Golden Rule for All-Male Groups (Stag Parties, Friends, Corporate Teams, Football Fans):</strong> In Milan, groups composed exclusively of men or with a heavy male majority (e.g., 5–10 men and 0 women) are systematically turned away on the standard guestlist queue on Friday and Saturday nights. However, by booking a <strong>pre-authorized VIP Table through Nightlife Milan Concierge (+39 351 912 7047)</strong>, your group is registered directly on the VIP Door Director's tablet with guaranteed 100% entry via the dedicated VIP lane—provided every guest respects the dress code and arrives sober.</li>
 <li><strong>Physical ID Document Required:</strong> Italian law requires a physical Passport, National ID Card, or Driving License at the entrance (${seed.age}). Photos of documents on smartphones are not accepted by security.</li>
 </ul>`;
 
@@ -8658,11 +8658,11 @@ function renderEnGuide(seed: GuideSeed100) {
 <ul>
 <li><strong>By Metro & Night Bus:</strong> ${seed.metro}. On Friday and Saturday nights, after the metro closes around 00:30–01:00, ATM operates the substitute Night Bus lines <strong>NM1, NM2, NM3, and NM4</strong> every 15–20 minutes along the exact metro routes all night long.</li>
 <li><strong>By Car & 24/7 Guarded Parking:</strong> ${seed.parking}. Remember that Milan's central Area C congestion charge is inactive on weekday evenings after 19:30 and all day Saturday and Sunday, and Corso Sempione / Portello / San Siro / Via Messina lie outside ZTL camera traps.</li>
-<li><strong>Post-Match & Post-Concert San Siro / Trade Fair Fast-Track:</strong> Coming from Stadio Giuseppe Meazza (San Siro), Ippodromo Snai La Maura, Fiera Milano Rho (M1), or Allianz MiCo Portello (M5)? <strong>Aria Club Milano</strong> (#3 Priority, Piazzale dello Sport 14) is just 150 meters on foot from San Siro Stadium; <strong>Just Me Milano</strong> (#1 Priority, Parco Sempione) is open 7 nights a week (Monday to Sunday) until 05:00; and <strong>Voya Rooftop Milano</strong> (#5 Priority, 20th floor Via Achille Papa 30) is 3 stops away on Metro M5 Portello. When you book through Axel (+39 351 912 7047), your table is held until <strong>01:30 AM</strong> even if a match goes to extra time or a concert encore finishes late.</li>
+<li><strong>Post-Match & Post-Concert San Siro / Trade Fair Fast-Track:</strong> Coming from Stadio Giuseppe Meazza (San Siro), Ippodromo Snai La Maura, Fiera Milano Rho (M1), or Allianz MiCo Portello (M5)? <strong>Aria Club Milano</strong> (#3 Priority, Piazzale dello Sport 14) is just 150 meters on foot from San Siro Stadium; <strong>Just Me Milano</strong> (#1 Priority, Parco Sempione) is open 7 nights a week (Monday to Sunday) until 05:00; and <strong>Voya Rooftop Milano</strong> (#5 Priority, 20th floor Via Achille Papa 30) is 3 stops away on Metro M5 Portello. When you book through Nightlife Milan Concierge (+39 351 912 7047), your table is held until <strong>01:30 AM</strong> even if a match goes to extra time or a concert encore finishes late.</li>
 </ul>
 <p><strong>Recommended Minute-by-Minute Timeline:</strong> <strong>19:30–20:30</strong> Arrival for Royal Aperitivo or Seated Singing Dinner; <strong>22:45–23:30</strong> Pre-club transition & guestlist window opens; <strong>23:45–00:30</strong> Optimal arrival window for VIP Table guests via the zero-queue hostess lane; <strong>01:15–03:00</strong> Peak main-room show, Magnum bottle parades & international DJ set; <strong>04:30–05:00</strong> Closing tracks, taxi rank & Mercedes V-Class chauffeur pickup.</p>`;
 
-  const s5 = `<p>Booking through <strong>Axel</strong> (<a href="https://wa.me/393519127047" target="_blank" rel="noopener noreferrer">WhatsApp +39 351 912 7047</a> | <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a>) costs <strong>0€ in agency fees</strong>—you pay the exact official club price directly at the venue cashier while unlocking 10 complimentary VIP concierge privileges:</p>
+  const s5 = `<p>Booking through <strong>Nightlife Milan Concierge</strong> (<a href="https://wa.me/393519127047" target="_blank" rel="noopener noreferrer">WhatsApp +39 351 912 7047</a> | <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a>) costs <strong>0€ in agency fees</strong>—you pay the exact official club price directly at the venue cashier while unlocking 10 complimentary VIP concierge privileges:</p>
 <ol>
 <li><strong>High-Resolution VIP Floor Plans:</strong> Receive the updated 2026/2027 map showing exact table numbers on the Dancefloor, Elevated Privé, and DJ Console before you choose.</li>
 <li><strong>Official Bottle Lists & Price Lock:</strong> Full PDF bottle list with zero hidden markups.</li>
@@ -8673,7 +8673,7 @@ function renderEnGuide(seed: GuideSeed100) {
 <li><strong>Corporate Events & Trade Fair Invoicing:</strong> Full Italian/EU VAT invoice (<em>fattura elettronica</em>), drink tokens, open bar, and semi-buyout or full venue buyout up to 1,000 guests.</li>
 <li><strong>Fashion Week, Design Week & Monza F1 Priority Access:</strong> Table allocation during sold-out international weeks.</li>
 <li><strong>Limousine, Party Bus & Mercedes V-Class Chauffeur Fleet:</strong> 1-hour panoramic Milan tour with prosecco or point-to-point hotel/stadium transfer.</li>
-<li><strong>Real-Time 24/7 WhatsApp Assistance at the Door:</strong> If a guest arrives late or needs immediate assistance at the VIP barrier, Axel's team resolves it in seconds.</li>
+<li><strong>Real-Time 24/7 WhatsApp Assistance at the Door:</strong> If a guest arrives late or needs immediate assistance at the VIP barrier, Nightlife Milan Concierge's team resolves it in seconds.</li>
 </ol>
 <div class="overflow-x-auto my-6"><table class="min-w-full border border-white/15 text-sm">
 <thead><tr class="bg-white/10 text-left"><th class="p-3">Priority Rank</th><th class="p-3">Club Name & Zone</th><th class="p-3">Signature Strength</th><th class="p-3">VIP Table Starting Price</th></tr></thead>
@@ -8689,7 +8689,7 @@ function renderEnGuide(seed: GuideSeed100) {
   const faqs = [
     {
       q: `How do I book a VIP table, Aperitivo, or Guestlist for ${seed.shortName} with zero agency fees?`,
-      a: `Message Senior Concierge Axel directly on WhatsApp at +39 351 912 7047 (https://wa.me/393519127047) or email concierge@nightlifemilan.com with your date, venue/event (${seed.shortName}), total number of men and women, and preferred formula (Aperitivo, Dinner Show, Guestlist, or VIP Table). Within 10 minutes you receive the official floor plan, bottle list, and written VIP confirmation at zero agency commission.`,
+      a: `Message Senior Concierge Nightlife Milan Concierge directly on WhatsApp at +39 351 912 7047 (https://wa.me/393519127047) or email concierge@nightlifemilan.com with your date, venue/event (${seed.shortName}), total number of men and women, and preferred formula (Aperitivo, Dinner Show, Guestlist, or VIP Table). Within 10 minutes you receive the official floor plan, bottle list, and written VIP confirmation at zero agency commission.`,
     },
     {
       q: `What are the official 2026/2027 prices for VIP tables and Aperitivo at ${seed.shortName}?`,
@@ -8701,15 +8701,15 @@ function renderEnGuide(seed: GuideSeed100) {
     },
     {
       q: `Can an all-male group (stag party, friends, corporate team, football fans) get into ${seed.shortName}?`,
-      a: `All-male groups are turned away on the normal guestlist queue in Milan. However, by booking a pre-authorized VIP Table through Axel (+39 351 912 7047), your male group is approved in advance with the Door Director and enjoys 100% guaranteed skip-the-line entry, provided everyone respects the elegant dress code.`,
+      a: `All-male groups are turned away on the normal guestlist queue in Milan. However, by booking a pre-authorized VIP Table through Nightlife Milan Concierge (+39 351 912 7047), your male group is approved in advance with the Door Director and enjoys 100% guaranteed skip-the-line entry, provided everyone respects the elegant dress code.`,
     },
     {
       q: `How do we reach ${seed.shortName} by metro or car, and where can we park safely?`,
-      a: `Address: ${seed.address} (${seed.zone}). Metro & transit: ${seed.metro}. Guarded 24/7 parking: ${seed.parking}. Axel (+39 351 912 7047) can also arrange private Mercedes V-Class vans or stretched limousines for door-to-door transfers.`,
+      a: `Address: ${seed.address} (${seed.zone}). Metro & transit: ${seed.metro}. Guarded 24/7 parking: ${seed.parking}. Nightlife Milan Concierge (+39 351 912 7047) can also arrange private Mercedes V-Class vans or stretched limousines for door-to-door transfers.`,
     },
     {
       q: `Can we organize a graduation party, birthday, stag/hen night, or corporate event with cake and invoice?`,
-      a: `Yes! Through Axel (+39 351 912 7047 / concierge@nightlifemilan.com) you can combine Royal Aperitivo or Singing Dinner Show with an after-dinner VIP Privé table, bring a certified pastry cake (with fridge storage and sparkler service), customize LED name boards, or request a full VAT invoice for corporate hospitality events.`,
+      a: `Yes! Through Nightlife Milan Concierge (+39 351 912 7047 / concierge@nightlifemilan.com) you can combine Royal Aperitivo or Singing Dinner Show with an after-dinner VIP Privé table, bring a certified pastry cake (with fridge storage and sparkler service), customize LED name boards, or request a full VAT invoice for corporate hospitality events.`,
     },
   ];
 
@@ -8721,7 +8721,7 @@ function renderEnGuide(seed: GuideSeed100) {
       { h: `2. Official 2026/2027 Prices: Royal Aperitivo, Dinner Show, VIP Tables & Bottle Menu`, b: s2 },
       { h: `3. Dress Code, Door Selection & 100% Guaranteed Entry for All-Male Groups`, b: s3 },
       { h: `4. Metro, 24/7 Guarded Parking, San Siro / Trade Fair Logistics & Night Timeline`, b: s4 },
-      { h: `5. Axel's 10 Free Concierge Services (+39 351 912 7047) & Top 6 Priority Clubs`, b: s5 },
+      { h: `5. Nightlife Milan Concierge's 10 Free Concierge Services (+39 351 912 7047) & Top 6 Priority Clubs`, b: s5 },
     ],
     faqs,
   };
@@ -8739,9 +8739,9 @@ function renderItGuide(seed: GuideSeed100) {
   const pCo = localizeSeedField(seed.consolePrice, 'it');
 
   const title = `${seed.name}: Guida Completa 2026/2027 a Tavoli VIP, Prezzi, Dress Code e Liste`;
-  const excerpt = `Guida ufficiale 2026/2027 a ${seed.name} in zona ${seed.zone} a Milano (${seed.address}): prezzi aggiornati Tavoli VIP (${pPi}), Aperitivo Royal e Cena Cantata (${pAp}), dress code, metro (${metro}), parcheggi custoditi 24h e prenotazione gratuita su WhatsApp con il Senior Concierge Axel (+39 351 912 7047).`;
+  const excerpt = `Guida ufficiale 2026/2027 a ${seed.name} in zona ${seed.zone} a Milano (${seed.address}): prezzi aggiornati Tavoli VIP (${pPi}), Aperitivo Royal e Cena Cantata (${pAp}), dress code, metro (${metro}), parcheggi custoditi 24h e prenotazione gratuita su WhatsApp con il Senior Concierge Nightlife Milan Concierge (+39 351 912 7047).`;
 
-  const s1 = `<p>Benvenuto nella guida pillar ufficiale 2026/2027 dedicata a <strong>${seed.name}</strong> in zona <strong>${seed.zone}</strong> a Milano, curata in prima persona da <strong>Axel</strong>, Senior Nightlife Concierge di <em>Nightlife Milan</em> (<a href="https://wa.me/393519127047" target="_blank" rel="noopener noreferrer">WhatsApp +39 351 912 7047</a> e <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a>). Che tu stia organizzando un Tavolo VIP nel Privé con bottiglie, un Aperitivo Royal con tavolo d'appoggio, una Cena Spettacolo Cantata, una festa di laurea (Bocconi, Cattolica, Statale, Politecnico, Bicocca, IULM/NABA), un compleanno (18, 25, 30, 40 o 50 anni), un addio al celibato per gruppi di soli uomini con ingresso garantito, un dopo-partita o dopo-concerto a San Siro o un evento aziendale con fattura durante Fashion Week e Salone del Mobile, qui trovi tutte le informazioni reali e verificate per vivere una serata impeccabile senza sorprese all'ingresso.</p>
+  const s1 = `<p>Benvenuto nella guida pillar ufficiale 2026/2027 dedicata a <strong>${seed.name}</strong> in zona <strong>${seed.zone}</strong> a Milano, curata in prima persona da <strong>Nightlife Milan Concierge</strong>, Senior Nightlife Concierge di <em>Nightlife Milan</em> (<a href="https://wa.me/393519127047" target="_blank" rel="noopener noreferrer">WhatsApp +39 351 912 7047</a> e <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a>). Che tu stia organizzando un Tavolo VIP nel Privé con bottiglie, un Aperitivo Royal con tavolo d'appoggio, una Cena Spettacolo Cantata, una festa di laurea (Bocconi, Cattolica, Statale, Politecnico, Bicocca, IULM/NABA), un compleanno (18, 25, 30, 40 o 50 anni), un addio al celibato per gruppi di soli uomini con ingresso garantito, un dopo-partita o dopo-concerto a San Siro o un evento aziendale con fattura durante Fashion Week e Salone del Mobile, qui trovi tutte le informazioni reali e verificate per vivere una serata impeccabile senza sorprese all'ingresso.</p>
 <p>Situato in <strong>${seed.address}</strong> nel cuore di <strong>${seed.zone}</strong>, <strong>${seed.shortName}</strong> rappresenta un punto di riferimento assoluto della nightlife milanese. Operativo con orario <strong>${hrs}</strong> e target d'età <strong>${age}</strong>, accoglie modelle, stilisti, calciatori di Serie A, imprenditori, laureati e ospiti internazionali dalla fascia pre-serale delle 19:30 fino alle 05:00 del mattino.</p>
 <div class="overflow-x-auto my-6"><table class="min-w-full border border-white/15 text-sm">
 <thead><tr class="bg-white/10 text-left"><th class="p-3">Locale / Esperienza</th><th class="p-3">Scheda Tecnica Ufficiale 2026/2027</th></tr></thead>
@@ -8753,7 +8753,7 @@ function renderItGuide(seed: GuideSeed100) {
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">Target ed Età Minima</td><td class="p-3">${age} — Modelle, professionisti, calciatori, universitari e clientela VIP internazionale</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">Metropolitana e Mezzi Notturni</td><td class="p-3">${metro}</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">Parcheggio Custodito 24/7</td><td class="p-3">${park}</td></tr>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">Concierge Ufficiale (Zero Commissioni)</td><td class="p-3">Axel — WhatsApp <a href="https://wa.me/393519127047">+39 351 912 7047</a> / <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a></td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">Concierge Ufficiale (Zero Commissioni)</td><td class="p-3">Nightlife Milan Concierge — WhatsApp <a href="https://wa.me/393519127047">+39 351 912 7047</a> / <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a></td></tr>
 </tbody></table></div>
 <p>Il segreto del successo di <strong>${seed.shortName}</strong> risiede nella sua architettura serale in tre atti. Il primo atto (19:30–22:30) è dedicato all'Aperitivo Royal con isole gastronomiche calde e fredde o alla Cena Spettacolo Cantata con performer dal vivo, violinisti luminosi e vocalist che trasformano la sala in un coro collettivo prima ancora della mezzanotte. Il secondo atto (23:00–00:30) segna l'apertura delle liste accreditate e l'accoglienza dei clienti Tavolo VIP lungo la corsia prioritaria dedicata con accompagnamento hostess. Il terzo atto (01:00–05:00) esplode nel clubbing puro con sfilate di Magnum e Jeroboam accompagnate da fontane luminose, schermi LED personalizzati e DJ set di caratura internazionale.</p>`;
 
@@ -8762,18 +8762,18 @@ function renderItGuide(seed: GuideSeed100) {
 <thead><tr class="bg-white/10 text-left"><th class="p-3">Formula di Prenotazione</th><th class="p-3">Prezzo Ufficiale 2026/2027</th><th class="p-3">Cosa Include</th><th class="p-3">Orario Consigliato</th></tr></thead>
 <tbody>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">Tavolo Aperitivo Royal / Cena Cantata</td><td class="p-3">${pAp}</td><td class="p-3">Tavolo riservato dalle 19:30/20:30, royal buffet o cena servita, 1 drink premium o 1 bottiglia di vino ogni 4 ospiti, permanenza inclusa per la discoteca</td><td class="p-3">19:30 – 21:00</td></tr>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">Ingresso in Lista Nominale Accreditata</td><td class="p-3">${pLi}</td><td class="p-3">Accredito nominativo tramite WhatsApp di Axel, 1 drink incluso, soggetto a selezione dress code e bilanciamento 1:1 uomo/donna</td><td class="p-3">23:00 – 00:30</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">Ingresso in Lista Nominale Accreditata</td><td class="p-3">${pLi}</td><td class="p-3">Accredito nominativo tramite WhatsApp di Nightlife Milan Concierge, 1 drink incluso, soggetto a selezione dress code e bilanciamento 1:1 uomo/donna</td><td class="p-3">23:00 – 00:30</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">Tavolo VIP Pista (6–8 Ospiti)</td><td class="p-3">${pPi}</td><td class="p-3">100% minimum spend in bottiglie, 6–8 pass salta-fila in corsia VIP con hostess, analcolici/mixer illimitati (tonica, lemon, Red Bull), ghiaccio e frutta</td><td class="p-3">23:30 – 01:00</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">Tavolo VIP Privé Rialzato (8–10 Ospiti)</td><td class="p-3">${pPr}</td><td class="p-3">100% credito bottiglie, salottino rialzato nel Privé con sicurezza dedicata, 8–10 pass VIP, cameriere dedicato, servizio Magnum e fontane luminose</td><td class="p-3">23:30 – 01:15</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">Super Privé Console DJ (10–15 Ospiti)</td><td class="p-3">${pCo}</td><td class="p-3">100% credito bottiglie a fianco della console DJ, 10–15 bracciali Super Privé, lavagna LED personalizzata e parata Dom Pérignon / Don Julio 1942</td><td class="p-3">00:00 – 01:30</td></tr>
 </tbody></table></div>
-<p><strong>Listino Bottiglie Indicativo (Stagione 2026/2027):</strong> Distillati Premium 0,70L (Vodka Belvedere, Grey Goose, Gin Hendrick's, Tequila Patrón) da <strong>180€ a 250€</strong>; Formati Magnum 1,75L da <strong>450€ a 600€</strong>; Jeroboam 3L da <strong>950€ a 1.300€</strong>; Champagne Brut e Rosé (Moët & Chandon, Veuve Clicquot) da <strong>200€ a 250€</strong>; Ruinart Blanc de Blancs da <strong>320€ a 380€</strong>; Dom Pérignon Vintage da <strong>550€ a 700€</strong>; Louis Roederer Cristal e Armand de Brignac da <strong>850€ a 1.500€+</strong>; Don Julio 1942 e Clase Azul Reposado da <strong>450€ a 850€</strong>. Scrivendo ad Axel su WhatsApp al <strong>+39 351 912 7047</strong> ricevi in meno di 10 minuti il listino PDF completo e la mappa aggiornata dei tavoli.</p>`;
+<p><strong>Listino Bottiglie Indicativo (Stagione 2026/2027):</strong> Distillati Premium 0,70L (Vodka Belvedere, Grey Goose, Gin Hendrick's, Tequila Patrón) da <strong>180€ a 250€</strong>; Formati Magnum 1,75L da <strong>450€ a 600€</strong>; Jeroboam 3L da <strong>950€ a 1.300€</strong>; Champagne Brut e Rosé (Moët & Chandon, Veuve Clicquot) da <strong>200€ a 250€</strong>; Ruinart Blanc de Blancs da <strong>320€ a 380€</strong>; Dom Pérignon Vintage da <strong>550€ a 700€</strong>; Louis Roederer Cristal e Armand de Brignac da <strong>850€ a 1.500€+</strong>; Don Julio 1942 e Clase Azul Reposado da <strong>450€ a 850€</strong>. Scrivendo ad Nightlife Milan Concierge su WhatsApp al <strong>+39 351 912 7047</strong> ricevi in meno di 10 minuti il listino PDF completo e la mappa aggiornata dei tavoli.</p>`;
 
   const s3 = `<p>La selezione all'ingresso nei top club di Milano è rigorosa e premia l'eleganza e l'atteggiamento educato. Ecco le regole d'oro da rispettare per entrare senza intoppi da <strong>${seed.shortName}</strong>:</p>
 <ul>
 <li><strong>Dress Code Obbligatorio Uomo:</strong> Camicia con colletto (bianca, nera o sartoriale), blazer o giacca strutturata, pantalone lungo sartoriale o jeans scuro pulito senza strappi, mocassini in pelle, stivaletti Chelsea o scarpa bassa in pelle scura/bianca perfettamente pulita. <strong>Assolutamente vietati:</strong> scarpe da ginnastica sportive/running (Nike Air Max, TN, Jordan, New Balance da corsa), tute, felpe con cappuccio, cappellini, borselli/marsupi a tracolla, collane vistose sopra t-shirt, pantaloni corti e maglie da calcio (anche dopo le partite a San Siro).</li>
 <li><strong>Dress Code Obbligatorio Donna:</strong> Abito da cocktail, tubino, tailleur serale o completo elegante con tacco, stivale elegante o calzatura gioiello.</li>
-<li><strong>Regola per Gruppi di Soli Uomini (Addio al Celibato, Amici, Tifosi, Aziende):</strong> Nelle code delle liste normali i gruppi composti da soli ragazzi vengono sistematicamente respinti per mantenere il bilanciamento uomo/donna in pista. Prenotando invece un <strong>Tavolo VIP pre-autorizzato tramite Axel (+39 351 912 7047)</strong>, il nome del vostro gruppo viene inserito direttamente sul tablet del Direttore di Porta con ingresso garantito al 100% attraverso la corsia VIP (a condizione che tutti rispettino il dress code con camicia).</li>
+<li><strong>Regola per Gruppi di Soli Uomini (Addio al Celibato, Amici, Tifosi, Aziende):</strong> Nelle code delle liste normali i gruppi composti da soli ragazzi vengono sistematicamente respinti per mantenere il bilanciamento uomo/donna in pista. Prenotando invece un <strong>Tavolo VIP pre-autorizzato tramite Nightlife Milan Concierge (+39 351 912 7047)</strong>, il nome del vostro gruppo viene inserito direttamente sul tablet del Direttore di Porta con ingresso garantito al 100% attraverso la corsia VIP (a condizione che tutti rispettino il dress code con camicia).</li>
 <li><strong>Documento d'Identità Fisico:</strong> È obbligatorio esibire Carta d'Identità, Passaporto o Patente in originale (${age}). Le foto sul telefono non sono accettate dalla sicurezza.</li>
 </ul>`;
 
@@ -8781,11 +8781,11 @@ function renderItGuide(seed: GuideSeed100) {
 <ul>
 <li><strong>Metropolitana ATM e Linee Notturne:</strong> ${metro}. Dopo la chiusura della metropolitana (intorno alle 00:30–01:00 nel weekend), sono attive tutta la notte le linee sostitutive <strong>NM1, NM2, NM3 e NM4</strong> con passaggi ogni 15–20 minuti lungo gli stessi percorsi della metro.</li>
 <li><strong>In Auto e Parcheggi Custoditi H24:</strong> ${park}. Ricorda che l'Area C di Milano è spenta dopo le 19:30 nei giorni feriali e tutto il giorno il sabato e la domenica, e i poli di Corso Sempione, Portello, Via Messina e San Siro sono raggiungibili direttamente dalle autostrade A4/A8/A9 senza attraversare varchi ZTL.</li>
-<li><strong>Logistica Post-Partita e Post-Concerto a San Siro / Fiere:</strong> Esci dallo Stadio Giuseppe Meazza di San Siro, dall'Ippodromo Snai La Maura, da Fiera Milano Rho (M1) o da Allianz MiCo Portello (M5)? <strong>Aria Club Milano</strong> (#3 Priorità, Piazzale dello Sport 14) dista solo 150 metri a piedi dallo Stadio; <strong>Just Me Milano</strong> (#1 Priorità, Torre Branca Parco Sempione) è aperto 7 sere su 7 da lunedì a domenica fino alle 05:00; <strong>Voya Rooftop Milano</strong> (#5 Priorità, 20° piano Via Achille Papa 30) si trova a sole 3 fermate di Metro M5 Lilla da San Siro. Prenotando con Axel (+39 351 912 7047), il tuo tavolo viene mantenuto garantito fino alle <strong>01:30 di notte</strong> anche in caso di tempi supplementari o bis ai concerti.</li>
+<li><strong>Logistica Post-Partita e Post-Concerto a San Siro / Fiere:</strong> Esci dallo Stadio Giuseppe Meazza di San Siro, dall'Ippodromo Snai La Maura, da Fiera Milano Rho (M1) o da Allianz MiCo Portello (M5)? <strong>Aria Club Milano</strong> (#3 Priorità, Piazzale dello Sport 14) dista solo 150 metri a piedi dallo Stadio; <strong>Just Me Milano</strong> (#1 Priorità, Torre Branca Parco Sempione) è aperto 7 sere su 7 da lunedì a domenica fino alle 05:00; <strong>Voya Rooftop Milano</strong> (#5 Priorità, 20° piano Via Achille Papa 30) si trova a sole 3 fermate di Metro M5 Lilla da San Siro. Prenotando con Nightlife Milan Concierge (+39 351 912 7047), il tuo tavolo viene mantenuto garantito fino alle <strong>01:30 di notte</strong> anche in caso di tempi supplementari o bis ai concerti.</li>
 </ul>
 <p><strong>Cronoprogramma Consigliato della Serata:</strong> <strong>19:30–20:30</strong> Ingresso per Aperitivo Royal o Cena Spettacolo Cantata; <strong>22:45–23:30</strong> Transizione club e apertura liste serali; <strong>23:45–00:30</strong> Finestra ideale per l'ingresso Tavoli VIP in corsia salta-fila con hostess; <strong>01:15–03:00</strong> Clou dello show con parate bottiglie Magnum e special guest DJ; <strong>04:30–05:00</strong> Chiusura serata e rientro con taxi o van NCC Mercedes Classe V.</p>`;
 
-  const s5 = `<p>Affidarsi ad <strong>Axel</strong> (<a href="https://wa.me/393519127047" target="_blank" rel="noopener noreferrer">WhatsApp +39 351 912 7047</a> | <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a>) è un servizio <strong>100% gratuito (zero commissioni d'agenzia)</strong>: paghi esattamente il listino ufficiale alla cassa del club e ottieni 10 vantaggi esclusivi:</p>
+  const s5 = `<p>Affidarsi ad <strong>Nightlife Milan Concierge</strong> (<a href="https://wa.me/393519127047" target="_blank" rel="noopener noreferrer">WhatsApp +39 351 912 7047</a> | <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a>) è un servizio <strong>100% gratuito (zero commissioni d'agenzia)</strong>: paghi esattamente il listino ufficiale alla cassa del club e ottieni 10 vantaggi esclusivi:</p>
 <ol>
 <li><strong>Planimetrie Tavoli VIP in Alta Risoluzione:</strong> Scegli la posizione esatta del tuo tavolo tra Pista, Privé Rialzato e Console DJ prima di confermare.</li>
 <li><strong>Listini Bottiglie Ufficiali Aggiornati:</strong> Prezzi chiari al centesimo senza rincari d'intermediazione.</li>
@@ -8812,7 +8812,7 @@ function renderItGuide(seed: GuideSeed100) {
   const faqs = [
     {
       q: `Come prenoto un Tavolo VIP, l'Aperitivo o la Lista per ${seed.shortName} senza pagare commissioni?`,
-      a: `Scrivi direttamente al Senior Concierge Axel su WhatsApp al +39 351 912 7047 (https://wa.me/393519127047) o via email a concierge@nightlifemilan.com indicando data, evento/locale (${seed.shortName}), numero di ragazzi e ragazze e formula scelta (Aperitivo, Cena Cantata, Lista o Tavolo VIP). In meno di 10 minuti ricevi mappa tavoli, listino bottiglie e conferma ufficiale a zero commissioni.`,
+      a: `Scrivi direttamente al Senior Concierge Nightlife Milan Concierge su WhatsApp al +39 351 912 7047 (https://wa.me/393519127047) o via email a concierge@nightlifemilan.com indicando data, evento/locale (${seed.shortName}), numero di ragazzi e ragazze e formula scelta (Aperitivo, Cena Cantata, Lista o Tavolo VIP). In meno di 10 minuti ricevi mappa tavoli, listino bottiglie e conferma ufficiale a zero commissioni.`,
     },
     {
       q: `Quali sono i prezzi ufficiali 2026/2027 di Tavoli VIP e Aperitivo da ${seed.shortName}?`,
@@ -8824,15 +8824,15 @@ function renderItGuide(seed: GuideSeed100) {
     },
     {
       q: `Un gruppo di soli ragazzi (addio al celibato, amici, tifosi) può entrare venerdì o sabato?`,
-      a: `In lista normale i gruppi di soli uomini vengono respinti alla porta. Prenotando invece un Tavolo VIP pre-autorizzato tramite Axel (+39 351 912 7047), il vostro gruppo viene approvato in anticipo con il Direttore di Porta e accede al 100% dalla corsia VIP riservata.`,
+      a: `In lista normale i gruppi di soli uomini vengono respinti alla porta. Prenotando invece un Tavolo VIP pre-autorizzato tramite Nightlife Milan Concierge (+39 351 912 7047), il vostro gruppo viene approvato in anticipo con il Direttore di Porta e accede al 100% dalla corsia VIP riservata.`,
     },
     {
       q: `Come si arriva in metro o in auto e dove conviene parcheggiare?`,
-      a: `Indirizzo: ${seed.address} (${seed.zone}). Metro e mezzi: ${metro}. Parcheggio custodito 24h: ${park}. Su richiesta Axel (+39 351 912 7047) organizza anche transfer in Limousine o Van Mercedes Classe V con autista.`,
+      a: `Indirizzo: ${seed.address} (${seed.zone}). Metro e mezzi: ${metro}. Parcheggio custodito 24h: ${park}. Su richiesta Nightlife Milan Concierge (+39 351 912 7047) organizza anche transfer in Limousine o Van Mercedes Classe V con autista.`,
     },
     {
       q: `Possiamo festeggiare laurea, compleanno, addio al celibato/nubilato o evento aziendale con torta e fattura?`,
-      a: `Certamente! Con Axel (+39 351 912 7047 / concierge@nightlifemilan.com) puoi abbinare Aperitivo Royal o Cena Cantata al Tavolo VIP in discoteca, consegnare la torta con certificato HACCP per il servizio a mezzanotte con fontane luminose o richiedere fattura elettronica per eventi aziendali.`,
+      a: `Certamente! Con Nightlife Milan Concierge (+39 351 912 7047 / concierge@nightlifemilan.com) puoi abbinare Aperitivo Royal o Cena Cantata al Tavolo VIP in discoteca, consegnare la torta con certificato HACCP per il servizio a mezzanotte con fontane luminose o richiedere fattura elettronica per eventi aziendali.`,
     },
   ];
 
@@ -8844,7 +8844,7 @@ function renderItGuide(seed: GuideSeed100) {
       { h: `2. Prezzi Ufficiali 2026/2027: Aperitivo Royal, Cena Cantata, Tavoli VIP e Listino Bottiglie`, b: s2 },
       { h: `3. Dress Code, Selezione alla Porta e Ingresso Garantito per Gruppi di Soli Uomini`, b: s3 },
       { h: `4. Metropolitana, Parcheggi Custoditi 24/7, Logistica San Siro / Fiere e Orari della Serata`, b: s4 },
-      { h: `5. I 10 Servizi Gratuiti del Concierge Axel (+39 351 912 7047) e Confronto Top 6 Club`, b: s5 },
+      { h: `5. I 10 Servizi Gratuiti del Concierge Nightlife Milan Concierge (+39 351 912 7047) e Confronto Top 6 Club`, b: s5 },
     ],
     faqs,
   };
@@ -8878,9 +8878,9 @@ function renderCompactGuide(seed: GuideSeed100, locale: LocaleCode, d: CompactLa
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">${d.lblDress}</td><td class="p-3">${d.dress}</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">${d.lblMetro}</td><td class="p-3">${metro}</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">${d.lblParking}</td><td class="p-3">${park}</td></tr>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">VIP Concierge Axel</td><td class="p-3">WhatsApp <a href="https://wa.me/393519127047">+39 351 912 7047</a> | <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a></td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">VIP Concierge Nightlife Milan Concierge</td><td class="p-3">WhatsApp <a href="https://wa.me/393519127047">+39 351 912 7047</a> | <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a></td></tr>
 </tbody></table></div>
-<p>${d.logisticsNote} ${d.axelNote}</p>
+<p>${d.logisticsNote} ${d.conciergeNote}</p>
 <p><strong>${seed.shortName} (${seed.zone}, ${d.city}):</strong> 19:30–22:30 ${d.fAperitivo} (${pAp} — ${d.incAperitivo}); 23:00–00:30 ${d.fList} (${pLi} — ${d.incList}); 23:30–05:00 ${d.fPista} (${pPi} — ${d.incPista}), ${d.fPrive} (${pPr} — ${d.incPrive}) & ${d.fConsole} (${pCo} — ${d.incConsole}). ${d.intro} ${d.pricesNote}</p>`;
 
   const s2 = `<p>${d.pricesNote}</p>
@@ -8905,7 +8905,7 @@ function renderCompactGuide(seed: GuideSeed100, locale: LocaleCode, d: CompactLa
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">Dom Pérignon Vintage / Luminous</td><td class="p-3">550€ – 750€</td><td class="p-3">1.350€ – 1.800€</td><td class="p-3">3.200€ – 5.500€</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">Louis Roederer Cristal / Armand de Brignac</td><td class="p-3">850€ – 1.500€</td><td class="p-3">2.200€ – 3.500€</td><td class="p-3">5.000€ – 9.500€</td></tr>
 </tbody></table></div>
-<p>${d.pricesNote} ${d.axelNote} ${d.intro}</p>`;
+<p>${d.pricesNote} ${d.conciergeNote} ${d.intro}</p>`;
 
   const s3 = `<p><strong>${d.lblDress} (${seed.name} — ${seed.address}):</strong> ${d.dress}.</p>
 <p>${d.doorNote}</p>
@@ -8919,9 +8919,9 @@ function renderCompactGuide(seed: GuideSeed100, locale: LocaleCode, d: CompactLa
 <li><strong>${d.fPista}:</strong> ${pPi} — ${d.incPista}.</li>
 <li><strong>${d.fPrive}:</strong> ${pPr} — ${d.incPrive}.</li>
 <li><strong>${d.fConsole}:</strong> ${pCo} — ${d.incConsole}.</li>
-<li><strong>WhatsApp Concierge Axel:</strong> <a href="https://wa.me/393519127047">+39 351 912 7047</a> / <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a>.</li>
+<li><strong>WhatsApp Concierge Nightlife Milan Concierge:</strong> <a href="https://wa.me/393519127047">+39 351 912 7047</a> / <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a>.</li>
 </ul>
-<p>${d.doorNote} ${d.axelNote} ${d.intro}</p>`;
+<p>${d.doorNote} ${d.conciergeNote} ${d.intro}</p>`;
 
   const s4 = `<p><strong>${d.lblAddress}:</strong> ${seed.address} (${seed.zone}, ${d.city}). ${d.logisticsNote}</p>
 <ul>
@@ -8941,7 +8941,7 @@ function renderCompactGuide(seed: GuideSeed100, locale: LocaleCode, d: CompactLa
 </tbody></table></div>
 <p>${d.logisticsNote} ${d.doorNote} ${d.pricesNote}</p>`;
 
-  const s5 = `<p>${d.axelNote}</p>
+  const s5 = `<p>${d.conciergeNote}</p>
 <p>${d.intro} ${d.pricesNote}</p>
 <div class="overflow-x-auto my-6"><table class="min-w-full border border-white/15 text-sm">
 <thead><tr class="bg-white/10 text-left"><th class="p-3">#</th><th class="p-3">${d.lblVenue} (${d.city})</th><th class="p-3">${d.lblZone} & ${d.lblAddress}</th><th class="p-3">${d.lblPrice}</th></tr></thead>
@@ -8953,15 +8953,15 @@ function renderCompactGuide(seed: GuideSeed100, locale: LocaleCode, d: CompactLa
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">#5</td><td class="p-3">Voya Rooftop Milano (20° Piano M5)</td><td class="p-3">Portello / CityLife — Via Achille Papa 30 (M5 Portello)</td><td class="p-3">300€–350€ / 500€–1.800€+</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">#6</td><td class="p-3">Repvblic / Tocqueville 13 / Armani Privé / Gattopardo</td><td class="p-3">Piazza Repubblica 12 / Via Tocqueville 13 / Via Pisoni 1 / Piero della Francesca 47</td><td class="p-3">300€–500€ / 600€–3.000€+</td></tr>
 </tbody></table></div>
-<p>${d.intro} ${d.pricesNote} ${d.doorNote} ${d.logisticsNote} ${d.axelNote}</p>`;
+<p>${d.intro} ${d.pricesNote} ${d.doorNote} ${d.logisticsNote} ${d.conciergeNote}</p>`;
 
   const faqs = [
-    { q: `${d.faqQ1} (${seed.shortName})`, a: `${d.intro} ${d.axelNote} WhatsApp: +39 351 912 7047 (https://wa.me/393519127047) | Email: concierge@nightlifemilan.com.` },
+    { q: `${d.faqQ1} (${seed.shortName})`, a: `${d.intro} ${d.conciergeNote} WhatsApp: +39 351 912 7047 (https://wa.me/393519127047) | Email: concierge@nightlifemilan.com.` },
     { q: `${d.faqQ2} (${seed.shortName})`, a: `${d.fAperitivo}: ${pAp} (${d.incAperitivo}). ${d.fList}: ${pLi} (${d.incList}). ${d.fPista}: ${pPi} (${d.incPista}). ${d.fPrive}: ${pPr} (${d.incPrive}). ${d.fConsole}: ${pCo} (${d.incConsole}). ${d.pricesNote}` },
     { q: `${d.faqQ3} (${seed.shortName})`, a: `${d.dress}. ${d.lblAge}: ${age} (${d.crowd}). ${d.doorNote}` },
     { q: `${d.faqQ4} (${seed.shortName})`, a: `${d.doorNote} ${d.pricesNote}` },
     { q: `${d.faqQ5} (${seed.shortName})`, a: `${d.lblAddress}: ${seed.address} (${seed.zone}, ${d.city}). ${d.lblMetro}: ${metro}. ${d.lblParking}: ${park}. ${d.logisticsNote}` },
-    { q: `${d.faqQ6} (${seed.shortName})`, a: `${d.axelNote} ${d.intro}` },
+    { q: `${d.faqQ6} (${seed.shortName})`, a: `${d.conciergeNote} ${d.intro}` },
   ];
 
   return {
@@ -9039,7 +9039,7 @@ function buildGuideFromSeed(seed: GuideSeed100): Guide {
     sections,
     faqs,
     relatedGenres: defaultGenres,
-    author: 'Axel — Senior Nightlife Concierge (+39 351 912 7047)',
+    author: 'Nightlife Milan Official Concierge (+39 351 912 7047)',
     datePublished: '2026-10-01',
     dateModified: '2026-11-06',
   };
