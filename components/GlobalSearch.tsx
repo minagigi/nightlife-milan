@@ -648,7 +648,7 @@ const PRIORITY_CLUBS_QUICK = [
     id: 'v-justme',
     slug: 'just-me-milano',
     name: 'Just Me Milano',
-    image: '/images/clubs/just-me-1.webp',
+    image: '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp',
     zone: {
       en: 'Parco Sempione · Torre Branca (Viale Luigi Camoens 2)',
       it: 'Parco Sempione · Torre Branca (Viale Luigi Camoens 2)',
@@ -669,7 +669,7 @@ const PRIORITY_CLUBS_QUICK = [
     id: 'v-pineta',
     slug: 'pineta-club-milano',
     name: 'Pineta Club Milano',
-    image: '/images/clubs/pineta-1.webp',
+    image: '/images/venues/pineta-milano/pineta-milano-ingresso-01.webp',
     zone: {
       en: 'Corso Como / Garibaldi · Via Messina 38',
       it: 'Corso Como / Garibaldi · Via Messina 38',
@@ -690,7 +690,7 @@ const PRIORITY_CLUBS_QUICK = [
     id: 'v-aria',
     slug: 'aria-club-milano',
     name: 'Aria Club Milano',
-    image: '/images/clubs/aria-1.webp',
+    image: '/images/venues/aria-club-milano/aria-club-milano-interior-01.webp',
     zone: {
       en: 'San Siro · Piazzale dello Sport 14 (150m from Stadium)',
       it: 'San Siro · Piazzale dello Sport 14 (a 150m dallo Stadio)',
@@ -711,7 +711,7 @@ const PRIORITY_CLUBS_QUICK = [
     id: 'v-55milano',
     slug: '55-milano',
     name: '55 Milano',
-    image: '/images/clubs/55-milano-1.webp',
+    image: '/images/55-milano.webp',
     zone: {
       en: 'Arco della Pace / Sempione · Via Piero della Francesca 55',
       it: 'Arco della Pace / Sempione · Via Piero della Francesca 55',
@@ -732,7 +732,7 @@ const PRIORITY_CLUBS_QUICK = [
     id: 'v-voya',
     slug: 'voya-rooftop-milan',
     name: 'Voya Rooftop',
-    image: '/images/clubs/voya-1.webp',
+    image: '/images/voya-rooftop-milan.webp',
     zone: {
       en: 'Portello / CityLife · 20th Floor Skyline (Via Achille Papa 30)',
       it: 'Portello / CityLife · 20° Piano Skyline (Via Achille Papa 30)',
@@ -753,7 +753,7 @@ const PRIORITY_CLUBS_QUICK = [
     id: 'v-repvblic',
     slug: 'repvblic-milano',
     name: 'Repvblic Milano',
-    image: '/images/clubs/repvblic-1.webp',
+    image: '/images/repvblic-milano.webp',
     zone: {
       en: 'Piazza della Repubblica / Centro · Piazza della Repubblica 12',
       it: 'Piazza della Repubblica / Centro · Piazza della Repubblica 12',
@@ -988,7 +988,7 @@ const CAPODANNO_FLAGSHIP_EVENTS_FALLBACK = [
     venueName: 'Voya Rooftop Milano (20° Piano)',
     city: 'Milano',
     address: 'Via Achille Papa 30 · Portello / CityLife',
-    image: '/images/clubs/voya-1.webp',
+    image: '/images/voya-rooftop-milan.webp',
     priceFromEur: 300,
     titleIt: 'Capodanno 2027 Voya Rooftop Milano · 20° Piano Skyline All-Inclusive',
     titleEn: 'NYE 2027 Voya Rooftop Milan · 20th Floor Skyline All-Inclusive Gala',
@@ -1001,7 +1001,7 @@ const CAPODANNO_FLAGSHIP_EVENTS_FALLBACK = [
     venueName: 'Just Me Milano · Torre Branca',
     city: 'Milano',
     address: 'Viale Luigi Camoens 2 · Parco Sempione',
-    image: '/images/clubs/just-me-1.webp',
+    image: '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp',
     priceFromEur: 80,
     titleIt: 'Capodanno 2027 Just Me Milano · Gala Dinner & Party sotto la Torre Branca',
     titleEn: 'NYE 2027 Just Me Milan · Gala Dinner & VIP Party under Torre Branca',
@@ -1014,7 +1014,7 @@ const CAPODANNO_FLAGSHIP_EVENTS_FALLBACK = [
     venueName: 'Pineta Club Milano',
     city: 'Milano',
     address: 'Via Messina 38 · Corso Como / Garibaldi',
-    image: '/images/clubs/pineta-1.webp',
+    image: '/images/venues/pineta-milano/pineta-milano-ingresso-01.webp',
     priceFromEur: 50,
     titleIt: 'Capodanno 2027 Pineta Club Milano · Cenone Cantato & Noche de Perreo',
     titleEn: 'NYE 2027 Pineta Club Milan · Singing Dinner Show & Reggaeton Party',
@@ -1027,7 +1027,7 @@ const CAPODANNO_FLAGSHIP_EVENTS_FALLBACK = [
     venueName: 'Aria Club Milano · San Siro',
     city: 'Milano',
     address: 'Piazzale dello Sport 14 · San Siro',
-    image: '/images/clubs/aria-1.webp',
+    image: '/images/venues/aria-club-milano/aria-club-milano-interior-01.webp',
     priceFromEur: 50,
     titleIt: 'Capodanno 2027 Aria Club Milano · Gran Veglione San Siro & Tavoli VIP',
     titleEn: 'NYE 2027 Aria Club Milan · San Siro Arena Gala & VIP Club Night',
@@ -1040,7 +1040,7 @@ const CAPODANNO_FLAGSHIP_EVENTS_FALLBACK = [
     venueName: '55 Milano · Sempione',
     city: 'Milano',
     address: 'Via Piero della Francesca 55 · Sempione / Arco della Pace',
-    image: '/images/clubs/55-milano-1.webp',
+    image: '/images/55-milano.webp',
     priceFromEur: 50,
     titleIt: 'Capodanno 2027 al 55 Milano · 1.000 mq Cenone Spettacolo & Open Wine',
     titleEn: 'NYE 2027 at 55 Milano · 1,000 sqm Dinner Show & Party in Sempione',
@@ -1053,7 +1053,7 @@ const CAPODANNO_FLAGSHIP_EVENTS_FALLBACK = [
     venueName: 'Repvblic Milano',
     city: 'Milano',
     address: 'Piazza della Repubblica 12 · Centro / Porta Nuova',
-    image: '/images/clubs/repvblic-1.webp',
+    image: '/images/repvblic-milano.webp',
     priceFromEur: 60,
     titleIt: 'Capodanno 2027 Repvblic Milano · Fashion Party Hip-Hop & House',
     titleEn: 'NYE 2027 Repvblic Milan · Fashion Crowd Hip-Hop & House Party',
@@ -1068,7 +1068,7 @@ const searchableEventbriteEvents = [
     id: 'eb-1994392210790',
     dateISO: '2026-11-25T19:30:00+02:00',
     venueName: 'Just Me Milano · Torre Branca',
-    image: '/images/clubs/just-me-1.webp',
+    image: '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp',
     priceLabel: 'Da 20€ · Tavoli VIP 350€+',
     genre: ['HOUSE', 'HIP_HOP', 'COMMERCIAL'],
     searchTerms: 'gue guè gue pequeno guè pequeno just me milano live performance concerto',
@@ -1088,7 +1088,7 @@ const searchableEventbriteEvents = [
     id: 'eb-1994228700727',
     dateISO: '2026-11-19T19:30:00+02:00',
     venueName: 'Just Me Milano · Torre Branca',
-    image: '/images/clubs/just-me-2.webp',
+    image: '/images/venues/just-me-milano/just-me-milano-lounge-01.webp',
     priceLabel: 'Aperitivo 20€ · Tavoli VIP',
     genre: ['HOUSE', 'HIP_HOP', 'REGGAETON', 'EDM', 'COMMERCIAL'],
     searchTerms: 'world cup coppa del mondo finale spagna argentina maxischermo just me milano',
@@ -1650,12 +1650,13 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
             <div className="w-full border-b border-[#F6F1E7]/14 bg-[#0B0A09]">
               <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-8 pt-4 pb-3">
                 {/* Input Bar */}
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 shrink-0 whitespace-nowrap">
                   <div className="flex-1 relative flex items-center border border-[#D6BE96]/45 bg-[#050505] px-3.5 sm:px-4 min-h-[54px] focus-within:border-[#D6BE96]">
                     <Search className="w-5 h-5 text-[#D6BE96] shrink-0 mr-3" />
                     <input
                       ref={inputRef}
-                      type="search"
+                      type="text"
+                      role="searchbox"
                       value={query}
                       onChange={(e) => setQuery(e.target.value)}
                       onKeyDown={(e) => {
@@ -1668,7 +1669,8 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                       }}
                       placeholder={ui.placeholder}
                       aria-label={ui.placeholder}
-                      className="w-full bg-transparent border-none text-base sm:text-xl font-serif text-[#F6F1E7] placeholder:text-[#C2B9AA]/55 focus:outline-none focus:ring-0 py-2.5"
+                      style={{ outline: "none", boxShadow: "none" }}
+                      className="w-full bg-transparent border-none text-base sm:text-xl font-serif text-[#F6F1E7] placeholder:text-[#C2B9AA]/55 focus:outline-none focus-visible:outline-none focus:ring-0 py-2.5"
                     />
                     {query.length > 0 && (
                       <button
@@ -1775,7 +1777,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                         <Crown className="w-4 h-4" />
                         {ui.sections.priorityClubs}
                       </h2>
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-3 shrink-0 whitespace-nowrap">
                         <button
                           type="button"
                           onClick={() => setActiveTab('clubs')}
@@ -1786,7 +1788,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                         <Link
                           href={`${langPrefix}/clubs`}
                           onClick={handleClose}
-                          className="font-mono text-[11px] text-[#D6BE96] hover:underline uppercase tabular-nums tracking-[0.06em] flex items-center gap-1"
+                          className="font-mono text-[11px] text-[#D6BE96] hover:underline uppercase tabular-nums tracking-[0.06em] flex items-center gap-1 shrink-0 whitespace-nowrap"
                         >
                           /clubs
                           <ArrowUpRight className="w-3.5 h-3.5" />
@@ -1889,7 +1891,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                         <PartyPopper className="w-4 h-4" />
                         {ui.sections.capodanno}
                       </h2>
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-3 shrink-0 whitespace-nowrap">
                         <button
                           type="button"
                           onClick={() => setActiveTab('capodanno')}
@@ -1900,7 +1902,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                         <Link
                           href={capodannoPath(currentLocale)}
                           onClick={handleClose}
-                          className="font-mono text-[11px] text-[#D6BE96] hover:underline uppercase tabular-nums tracking-[0.06em] flex items-center gap-1"
+                          className="font-mono text-[11px] text-[#D6BE96] hover:underline uppercase tabular-nums tracking-[0.06em] flex items-center gap-1 shrink-0 whitespace-nowrap"
                         >
                           2027
                           <ArrowUpRight className="w-3.5 h-3.5" />
@@ -2072,7 +2074,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                         <Link
                           href={`${langPrefix}/clubs`}
                           onClick={handleClose}
-                          className="font-mono text-[11px] text-[#C2B9AA] hover:text-[#D6BE96] uppercase tabular-nums tracking-[0.06em] flex items-center gap-1"
+                          className="font-mono text-[11px] text-[#C2B9AA] hover:text-[#D6BE96] uppercase tabular-nums tracking-[0.06em] flex items-center gap-1 shrink-0 whitespace-nowrap"
                         >
                           {ui.sections.allClubsLink}
                           <ArrowUpRight className="w-3.5 h-3.5" />
@@ -2098,7 +2100,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                                 className="w-16 h-16 sm:w-20 sm:h-20 shrink-0 overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]"
                               >
                                 <img
-                                  src={pQuick?.image || venue.image || '/images/clubs/just-me-1.webp'}
+                                  src={pQuick?.image || venue.image || '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp'}
                                   alt={name}
                                   loading="lazy"
                                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -2115,7 +2117,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                                     <HighlightText text={name} query={query} />
                                   </Link>
                                   <span className="font-mono text-[10px] px-2 py-0.5 border border-[#D6BE96]/40 text-[#D6BE96] shrink-0">
-                                    {venue.priceRange || '€€€'}
+                                    {(venue.priceRange || '€€€').replace(/\$/g, '€')}
                                   </span>
                                 </div>
 
@@ -2164,7 +2166,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                           <Link
                             href={capodannoPath(currentLocale)}
                             onClick={handleClose}
-                            className="font-mono text-[11px] text-[#D6BE96] hover:underline uppercase tabular-nums tracking-[0.06em] flex items-center gap-1"
+                            className="font-mono text-[11px] text-[#D6BE96] hover:underline uppercase tabular-nums tracking-[0.06em] flex items-center gap-1 shrink-0 whitespace-nowrap"
                           >
                             {ui.sections.capodannoAllLink}
                             <ArrowUpRight className="w-3.5 h-3.5" />
@@ -2244,7 +2246,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                         <Link
                           href={`${langPrefix}/events`}
                           onClick={handleClose}
-                          className="font-mono text-[11px] text-[#C2B9AA] hover:text-[#D6BE96] uppercase tabular-nums tracking-[0.06em] flex items-center gap-1"
+                          className="font-mono text-[11px] text-[#C2B9AA] hover:text-[#D6BE96] uppercase tabular-nums tracking-[0.06em] flex items-center gap-1 shrink-0 whitespace-nowrap"
                         >
                           {ui.sections.eventsAllLink}
                           <ArrowUpRight className="w-3.5 h-3.5" />
@@ -2348,7 +2350,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                         <Link
                           href={`${langPrefix}/guides`}
                           onClick={handleClose}
-                          className="font-mono text-[11px] text-[#C2B9AA] hover:text-[#D6BE96] uppercase tabular-nums tracking-[0.06em] flex items-center gap-1"
+                          className="font-mono text-[11px] text-[#C2B9AA] hover:text-[#D6BE96] uppercase tabular-nums tracking-[0.06em] flex items-center gap-1 shrink-0 whitespace-nowrap"
                         >
                           {ui.sections.guidesAllLink}
                           <ArrowUpRight className="w-3.5 h-3.5" />
@@ -2461,7 +2463,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                   </a>
                 </div>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 shrink-0 whitespace-nowrap">
                   <div className="hidden lg:flex items-center gap-3 font-mono text-[10px] text-[#C2B9AA]">
                     <span>
                       <kbd className="px-1.5 py-0.5 border border-[#F6F1E7]/20 bg-[#050505] text-[#D6BE96] mr-1">↵</kbd>
