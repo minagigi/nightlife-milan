@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { createPortal } from 'react-dom';
@@ -1344,7 +1344,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
           ? 100 - (priorityRankMap[v.id] ?? 50)
           : matchTokensScore(
               `${name} ${zoneLabel}`,
-              `${desc} ${dressCode} ${v.category} ${v.address || ''} ${extra}`,
+              `${desc} ${dressCode} ${v.category} ${v.address?.streetAddress || ''} ${extra}`,
               qTokens,
               fullQuery,
             );
@@ -2098,7 +2098,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                                 className="w-16 h-16 sm:w-20 sm:h-20 shrink-0 overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]"
                               >
                                 <img
-                                  src={pQuick?.image || venue.image}
+                                  src={pQuick?.image || venue.image || '/images/clubs/just-me-1.webp'}
                                   alt={name}
                                   loading="lazy"
                                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -2115,7 +2115,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                                     <HighlightText text={name} query={query} />
                                   </Link>
                                   <span className="font-mono text-[10px] px-2 py-0.5 border border-[#D6BE96]/40 text-[#D6BE96] shrink-0">
-                                    {'€'.repeat(venue.priceRange || 3)}
+                                    {venue.priceRange || '€€€'}
                                   </span>
                                 </div>
 
