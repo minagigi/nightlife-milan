@@ -368,14 +368,10 @@ export default async function GuidesPage({
             {tr(locale, 'Quick Answer · Executive Summary', 'Risposta Rapida · Sintesi Esecutiva')}
           </p>
           <p className="font-sans text-white/75 text-sm leading-relaxed">
-            {isIt ? (
-              <>
-                La nostra libreria comprende <strong className="text-white">14 Guide Pillar complete</strong> aggiornate per la stagione <strong className="text-white">2026/2027</strong>: <strong className="text-white">Dress Code e Selezione</strong>, <strong className="text-white">Listino Prezzi Tavoli VIP e Bottiglie</strong> (da €150 per gli aperitivi a €250-€5.000 nei club), <strong className="text-white">Capodanno Milano 2027 (Gran Cenone, Royal Buffet e Tavoli nei 19 Club)</strong>, <strong className="text-white">Dopo-Partita Calcio a San Siro (Inter & Milan: Aria Club a 150m, Just Me 7/7, Voya Rooftop, 55 Milano)</strong>, <strong className="text-white">Afterparty Concerti San Siro, Ippodromo, Forum e Fabrique</strong>, <strong className="text-white">Addio al Celibato e Nubilato VIP</strong>, <strong className="text-white">Calendario Settimanale Lunedi-Domenica</strong>, <strong className="text-white">Migliori Rooftop Bar</strong>, <strong className="text-white">Speakeasy Segreti</strong>, <strong className="text-white">Club Techno & Warehouse</strong>, <strong className="text-white">Feste di Laurea / 18 Anni</strong> e <strong className="text-white">Fashion Week, Fuorisalone & Monza F1</strong>. Prenotazione diretta garantita via WhatsApp <strong className="text-champagne">+39 351 912 7047</strong> o <strong className="text-champagne">concierge@nightlifemilan.com</strong>.
-              </>
-            ) : (
-              <>
-                Our library features <strong className="text-white">14 exhaustive Pillar Guides</strong> updated for the <strong className="text-white">2026/2027</strong> season: <strong className="text-white">Door Policy & Dress Codes</strong>, <strong className="text-white">VIP Table & Bottle Service Price List</strong> (from €150 for aperitivo tables to €250-€5,000 in clubs), <strong className="text-white">New Year Eve Milan 2027 (Gala Dinners, Royal Buffets & VIP Tables across 19 Clubs)</strong>, <strong className="text-white">San Siro Football Match Afterparties (Inter & AC Milan: Aria Club 150m away, Just Me 7/7, Voya Rooftop, 55 Milano)</strong>, <strong className="text-white">San Siro, Ippodromo, Forum & Fabrique Concert Afterparties</strong>, <strong className="text-white">VIP Bachelor & Bachelorette Parties</strong>, <strong className="text-white">Monday-to-Sunday Weekly Calendar</strong>, <strong className="text-white">Best Rooftop Bars</strong>, <strong className="text-white">Hidden Navigli Speakeasies</strong>, <strong className="text-white">Techno & Underground Warehouses</strong>, <strong className="text-white">Graduation / 18th Parties</strong>, and <strong className="text-white">Fashion Week, Design Week & Monza F1 Afterparties</strong>. Direct booking via WhatsApp <strong className="text-champagne">+39 351 912 7047</strong> or <strong className="text-champagne">concierge@nightlifemilan.com</strong>.
-              </>
+            {tr(
+              locale,
+              'Our library features 14 exhaustive Pillar Guides updated for the 2026/2027 season: Door Policy & Dress Codes, VIP Table & Bottle Service Price List (from €150 for aperitivo tables to €250-€5,000 in clubs), New Year Eve Milan 2027 (Gala Dinners, Royal Buffets & VIP Tables across 19 Clubs), San Siro Football Match Afterparties (Inter & AC Milan: Aria Club 150m away, Just Me 7/7, Voya Rooftop, 55 Milano), San Siro, Ippodromo, Forum & Fabrique Concert Afterparties, VIP Bachelor & Bachelorette Parties, Monday-to-Sunday Weekly Calendar, Best Rooftop Bars, Hidden Navigli Speakeasies, Techno & Underground Warehouses, Graduation / 18th Parties, and Fashion Week, Design Week & Monza F1 Afterparties. Direct booking via WhatsApp +39 351 912 7047 or concierge@nightlifemilan.com.',
+              'La nostra libreria comprende 14 Guide Pillar complete aggiornate per la stagione 2026/2027: Dress Code e Selezione, Listino Prezzi Tavoli VIP e Bottiglie (da €150 per gli aperitivi a €250-€5.000 nei club), Capodanno Milano 2027 (Gran Cenone, Royal Buffet e Tavoli nei 19 Club), Dopo-Partita Calcio a San Siro (Inter & Milan: Aria Club a 150m, Just Me 7/7, Voya Rooftop, 55 Milano), Afterparty Concerti San Siro, Ippodromo, Forum e Fabrique, Addio al Celibato e Nubilato VIP, Calendario Settimanale Lunedi-Domenica, Migliori Rooftop Bar, Speakeasy Segreti, Club Techno & Warehouse, Feste di Laurea / 18 Anni e Fashion Week, Fuorisalone & Monza F1. Prenotazione diretta garantita via WhatsApp +39 351 912 7047 o concierge@nightlifemilan.com.'
             )}
           </p>
         </div>
@@ -402,21 +398,15 @@ export default async function GuidesPage({
             <div className="absolute inset-0 p-8 md:p-14 flex flex-col justify-end">
               <div className="flex flex-wrap items-center gap-3 mb-4">
                 <span className="bg-champagne text-black px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase">
-                  {isIt
-                    ? GUIDE_META[featuredGuide.id]?.badgeIt || 'Guida in Evidenza'
-                    : GUIDE_META[featuredGuide.id]?.badgeEn || 'Featured Guide'}
+                  {tr(locale, GUIDE_META[featuredGuide.id]?.badgeEn || 'Featured Guide', GUIDE_META[featuredGuide.id]?.badgeIt || 'Guida in Evidenza')}
                 </span>
                 <span className="text-champagne text-xs font-medium tracking-wider uppercase border border-champagne/30 px-4 py-1.5 rounded-full backdrop-blur-sm">
-                  {isIt
-                    ? GUIDE_META[featuredGuide.id]?.categoryIt || 'Guida Insider'
-                    : GUIDE_META[featuredGuide.id]?.categoryEn || 'Insider Guide'}
+                  {tr(locale, GUIDE_META[featuredGuide.id]?.categoryEn || 'Insider Guide', GUIDE_META[featuredGuide.id]?.categoryIt || 'Guida Insider')}
                 </span>
                 <div className="flex items-center space-x-1.5 text-white/75 text-xs font-mono">
                   <Clock className="w-3.5 h-3.5 text-champagne" />
                   <span>
-                    {isIt
-                      ? GUIDE_META[featuredGuide.id]?.readTimeIt || '8 min di lettura'
-                      : GUIDE_META[featuredGuide.id]?.readTimeEn || '8 min read'}
+                    {tr(locale, GUIDE_META[featuredGuide.id]?.readTimeEn || '8 min read', GUIDE_META[featuredGuide.id]?.readTimeIt || '8 min di lettura')}
                   </span>
                 </div>
               </div>
@@ -428,7 +418,7 @@ export default async function GuidesPage({
                 {getLocalizedText(featuredGuide.excerpt, locale).replace(/[—–]/g, ' - ')}
               </p>
               <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-champagne">
-                <span>{isIt ? 'Leggi la Guida Completa' : 'Read Complete Pillar Guide'}</span>
+                <span>{tr(locale, 'Read Complete Pillar Guide', 'Leggi la Guida Completa')}</span>
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
             </div>
@@ -441,23 +431,23 @@ export default async function GuidesPage({
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
           <div>
             <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-champagne mb-2">
-              {isIt ? 'Libreria Editoriale Completa · 114 Guide Pillar' : 'Complete Editorial Library · 114 Pillar Guides'}
+              {tr(locale, 'Complete Editorial Library · 14 Pillar Guides', 'Libreria Editoriale Completa · 14 Guide Pillar')}
             </p>
             <h2 className="font-serif text-3xl md:text-4xl text-white">
-              {isIt ? 'Tutte le 114 Guide Pillar 2026/2027' : 'All 114 Flagship Pillar Guides 2026/2027'}
+              {tr(locale, 'All 14 Flagship Pillar Guides 2026/2027', 'Tutte le 14 Guide Pillar 2026/2027')}
             </h2>
           </div>
           <div className="flex flex-wrap gap-2">
             {[
-              { href: `${localePrefix}/new-years-eve`, label: isIt ? 'Capodanno 2027' : 'New Year Eve 2027' },
-              { href: `${localePrefix}/football-afterparties`, label: isIt ? 'Dopo-Partita San Siro' : 'San Siro Football' },
-              { href: `${localePrefix}/concert-afterparties`, label: isIt ? 'Dopo-Concerto' : 'Concert Afterparties' },
-              { href: `${localePrefix}/fashion-week`, label: isIt ? 'Fashion Week & Fuorisalone' : 'Fashion & Design Week' },
-              { href: `${localePrefix}/vip-tables`, label: isIt ? 'Tavoli VIP' : 'VIP Tables' },
-              { href: `${localePrefix}/bottle-prices`, label: isIt ? 'Listino Bottiglie' : 'Bottle Prices' },
-              { href: `${localePrefix}/rooftops`, label: isIt ? 'Rooftop Bar' : 'Rooftop Bars' },
-              { href: `${localePrefix}/private-parties`, label: isIt ? 'Lauree, 18 Anni & Nubilato' : 'Private & Bachelor Parties' },
-              { href: `${localePrefix}/guest-lists`, label: isIt ? 'Liste & Ingressi' : 'Guest Lists' },
+              { href: `${localePrefix}/new-years-eve`, label: tr(locale, 'New Year Eve 2027', 'Capodanno 2027') },
+              { href: `${localePrefix}/football-afterparties`, label: tr(locale, 'San Siro Football', 'Dopo-Partita San Siro') },
+              { href: `${localePrefix}/concert-afterparties`, label: tr(locale, 'Concert Afterparties', 'Dopo-Concerto') },
+              { href: `${localePrefix}/fashion-week`, label: tr(locale, 'Fashion & Design Week', 'Fashion Week & Fuorisalone') },
+              { href: `${localePrefix}/vip-tables`, label: tr(locale, 'VIP Tables', 'Tavoli VIP') },
+              { href: `${localePrefix}/bottle-prices`, label: tr(locale, 'Bottle Prices', 'Listino Bottiglie') },
+              { href: `${localePrefix}/rooftops`, label: tr(locale, 'Rooftop Bars', 'Rooftop Bar') },
+              { href: `${localePrefix}/private-parties`, label: tr(locale, 'Private & Bachelor Parties', 'Lauree, 18 Anni & Nubilato') },
+              { href: `${localePrefix}/guest-lists`, label: tr(locale, 'Guest Lists', 'Liste & Ingressi') },
             ].map((chip) => (
               <Link
                 key={chip.href}
@@ -502,20 +492,20 @@ export default async function GuidesPage({
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   <div className="absolute top-3.5 left-3.5 flex flex-wrap gap-2">
                     <span className="bg-black/70 backdrop-blur-md border border-white/15 text-white px-3 py-1 rounded-full text-[10px] font-mono tracking-wider uppercase">
-                      {isIt ? meta.categoryIt : meta.categoryEn}
+                      {tr(locale, meta.categoryEn, meta.categoryIt)}
                     </span>
-                    {(isIt ? meta.badgeIt : meta.badgeEn) && (
+                    {meta.badgeEn && (
                       <span className="bg-champagne text-black px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase">
-                        {isIt ? meta.badgeIt : meta.badgeEn}
+                        {tr(locale, meta.badgeEn, meta.badgeIt || meta.badgeEn)}
                       </span>
                     )}
                   </div>
                   <div className="absolute bottom-3 left-3.5 flex items-center gap-2 text-champagne text-xs font-mono">
                     <Clock className="w-3.5 h-3.5" />
-                    <span>{isIt ? meta.readTimeIt : meta.readTimeEn}</span>
+                    <span>{tr(locale, meta.readTimeEn, meta.readTimeIt)}</span>
                     <span className="text-white/40">·</span>
                     <span className="text-white/60">
-                      {guide.sections?.length || 4} {isIt ? 'capitoli' : 'chapters'}
+                      {guide.sections?.length || 4} {tr(locale, 'chapters', 'capitoli')}
                     </span>
                   </div>
                 </div>
@@ -544,7 +534,7 @@ export default async function GuidesPage({
                   </div>
 
                   <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono uppercase tracking-wider text-champagne">
-                    <span>{isIt ? 'Approfondisci' : 'Read Guide'}</span>
+                    <span>{tr(locale, 'Read Guide', 'Approfondisci')}</span>
                     <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </div>
                 </div>
@@ -574,7 +564,7 @@ export default async function GuidesPage({
         <div className="flex items-center gap-2 mb-3">
           <Compass className="w-4 h-4 text-champagne" />
           <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-champagne">
-            {isIt ? 'Regole d’Oro del Concierge' : 'Concierge Golden Rules'}
+            {tr(locale, 'Concierge Golden Rules', 'Regole d’Oro del Concierge')}
           </span>
         </div>
         <h2 className="font-serif text-3xl md:text-4xl text-white mb-8">
@@ -589,8 +579,8 @@ export default async function GuidesPage({
             <p className="font-sans text-white/60 text-sm leading-relaxed">
               {tr(
                 locale,
-                'Milan enforces strict door selection. At Just Me, Pineta, Aria, and 55 Milano: smart-glamour minimum, collared shirt and dark blazer for men, evening chic for women (no gym sneakers, sportswear, or chains). At Volt, Amnesia, Fabrique, and Magazzini Generali: contemporary total-black clubwear. At Voya Rooftop: panoramic cocktail attire.',
-                'Milano applica una selezione rigorosa alla porta. Da Just Me, Pineta, Aria e 55 Milano: minimo smart-glamour, camicia e blazer scuro per gli uomini, abito da sera o tailleur chic per le donne (vietate sneaker sportive, tute e borselli). Da Volt, Amnesia, Fabrique e Magazzini Generali: total-black contemporaneo. Da Voya Rooftop: cocktail chic.'
+                'Milan enforces strict door selection. At Just Me, Pineta, Aria, and 55 Milano: smart-glamour minimum, collared shirt and dark blazer for men, evening chic for women (no gym sneakers, sportswear, or chains). At Amnesia, Fabrique, and Magazzini Generali: contemporary total-black clubwear. At Voya Rooftop and Repvblic: panoramic cocktail chic.',
+                'Milano applica una selezione rigorosa alla porta. Da Just Me, Pineta, Aria e 55 Milano: minimo smart-glamour, camicia e blazer scuro per gli uomini, abito da sera o tailleur chic per le donne (vietate sneaker sportive, tute e borselli). Da Amnesia, Fabrique e Magazzini Generali: total-black contemporaneo. Da Voya Rooftop e Repvblic: cocktail chic.'
               )}
             </p>
           </div>
@@ -628,8 +618,8 @@ export default async function GuidesPage({
             <p className="font-sans text-white/60 text-sm leading-relaxed">
               {tr(
                 locale,
-                'Explore all 14 Milan nightlife zones: Parco Sempione (Just Me, 55 Milano), San Siro (Aria Club 150m from Stadium), Portello/CityLife (Voya Rooftop 20th Floor), Corso Como & Garibaldi (Pineta, Repvblic, Hollywood, Play, Volt, 11 Clubroom, Tocqueville 13), Isola (Alcatraz, Ceresio 7), Mecenate/Forlanini (Fabrique, Amnesia), Brera, Navigli, Porta Venezia, Porta Romana, Ripamonti, Duomo, NoLo, and Lambrate.',
-                'Esplora tutti i 14 quartieri della notte milanese: Parco Sempione (Just Me, 55 Milano), San Siro (Aria Club a 150m dallo Stadio), Portello/CityLife (Voya Rooftop 20° Piano), Corso Como & Garibaldi (Pineta, Repvblic, Hollywood, Play, Volt, 11 Clubroom, Tocqueville 13), Isola (Alcatraz, Ceresio 7), Mecenate/Forlanini (Fabrique, Amnesia), Brera, Navigli, Porta Venezia, Porta Romana, Ripamonti, Duomo, NoLo e Lambrate.'
+                'Explore all 14 Milan nightlife zones: Parco Sempione (Just Me, 55 Milano), San Siro (Aria Club 150m from Stadium), Portello/CityLife (Voya Rooftop 20th Floor), Corso Como & Garibaldi (Pineta, Repvblic, Hollywood, Play, Tocqueville 13), Isola (Alcatraz, Ceresio 7), Mecenate/Forlanini (Fabrique, Amnesia), Brera, Navigli, Porta Venezia, Porta Romana, Ripamonti, Duomo, NoLo, and Lambrate.',
+                'Esplora tutti i 14 quartieri della notte milanese: Parco Sempione (Just Me, 55 Milano), San Siro (Aria Club a 150m dallo Stadio), Portello/CityLife (Voya Rooftop 20° Piano), Corso Como & Garibaldi (Pineta, Repvblic, Hollywood, Play, Tocqueville 13), Isola (Alcatraz, Ceresio 7), Mecenate/Forlanini (Fabrique, Amnesia), Brera, Navigli, Porta Venezia, Porta Romana, Ripamonti, Duomo, NoLo e Lambrate.'
               )}
             </p>
           </div>

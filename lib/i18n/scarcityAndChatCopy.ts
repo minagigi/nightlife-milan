@@ -23,7 +23,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   it: {
     almostSoldOutBadge: '🔥 QUASI SOLD OUT · IN ESAURIMENTO',
     sellingFastBadge: '🔥 IN ESAURIMENTO',
-    urgencyAlertTitle: '⚠️ ATTENZIONE — POSTI E TAVOLI MIGLIORI IN ESAURIMENTO',
+    urgencyAlertTitle: '⚠️ ATTENZIONE · POSTI E TAVOLI MIGLIORI IN ESAURIMENTO',
     urgencyAlertBody:
       'I posti migliori, le prevendite e i tavoli VIP stanno andando sold out rapidamente. Se desideri acquistare biglietti, cenoni o riservare un tavolo ti consigliamo di farlo ora, perché una volta esauriti non potranno essere fatti miracoli.',
     openEventCardCta: 'Vai alla Scheda Evento & Prezzi →',
@@ -38,9 +38,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   en: {
     almostSoldOutBadge: '🔥 ALMOST SOLD OUT · SELLING FAST',
     sellingFastBadge: '🔥 SELLING FAST',
-    urgencyAlertTitle: '⚠️ HIGH DEMAND — BEST SPOTS & VIP TABLES ALMOST SOLD OUT',
+    urgencyAlertTitle: '⚠️ HIGH DEMAND · BEST SPOTS & VIP TABLES ALMOST SOLD OUT',
     urgencyAlertBody:
-      'The best spots, tickets, and VIP tables are selling out fast. If you want to buy tickets, gala dinners, or reserve a VIP table, do it now — once sold out, no miracles can be done at the last minute.',
+      'The best spots, tickets, and VIP tables are selling out fast. If you want to buy tickets, gala dinners, or reserve a VIP table, do it now: once sold out, no miracles can be done at the last minute.',
     openEventCardCta: 'Open Event Guide & Prices →',
     xceedPriorityCta: 'Buy Tickets / Book on Xceed →',
     floatingChatLabel: (eventName) =>
@@ -53,7 +53,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   es: {
     almostSoldOutBadge: '🔥 CASI AGOTADO · ÚLTIMAS PLAZAS',
     sellingFastBadge: '🔥 AGOTÁNDOSE',
-    urgencyAlertTitle: '⚠️ ATENCIÓN — LAS MEJORES MESAS Y ENTRADAS SE ESTÁN AGOTANDO',
+    urgencyAlertTitle: '⚠️ ATENCIÓN · LAS MEJORES MESAS Y ENTRADAS SE ESTÁN AGOTANDO',
     urgencyAlertBody:
       'Los mejores sitios, entradas anticipadas y mesas VIP se están agotando rápidamente. Si quieres comprar entradas, cenas o reservar una mesa debes hacerlo ahora, porque una vez agotados no se podrán hacer milagros.',
     openEventCardCta: 'Ver Ficha del Evento y Precios →',
@@ -68,7 +68,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   fr: {
     almostSoldOutBadge: '🔥 PRESQUE COMPLET · DERNIÈRES PLACES',
     sellingFastBadge: '🔥 PRESQUE COMPLET',
-    urgencyAlertTitle: '⚠️ ATTENTION — LES MEILLEURES PLACES ET TABLES VIP SONT PRESQUE COMPLÈTES',
+    urgencyAlertTitle: '⚠️ ATTENTION · LES MEILLEURES PLACES ET TABLES VIP SONT PRESQUE COMPLÈTES',
     urgencyAlertBody:
       'Les meilleures places, préventes et tables VIP partent très vite. Si vous souhaitez acheter des billets, un dîner ou réserver une table, faites-le maintenant : une fois complet, aucun miracle ne sera possible.',
     openEventCardCta: 'Voir la Fiche Événement & Tarifs →',
@@ -83,9 +83,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   de: {
     almostSoldOutBadge: '🔥 FAST AUSVERKAUFT · NUR NOCH WENIGE PLÄTZE',
     sellingFastBadge: '🔥 FAST AUSVERKAUFT',
-    urgencyAlertTitle: '⚠️ ACHTUNG — DIE BESTEN PLÄTZE & VIP-TISCHE SIND FAST AUSVERKAUFT',
+    urgencyAlertTitle: '⚠️ ACHTUNG · DIE BESTEN PLÄTZE & VIP-TISCHE SIND FAST AUSVERKAUFT',
     urgencyAlertBody:
-      'Die besten Plätze, Tickets und VIP-Tische sind schnell ausverkauft. Wenn Sie Tickets, Galadinner oder einen VIP-Tisch buchen möchten, tun Sie es jetzt — sobald alles ausverkauft ist, können keine Wunder mehr vollbracht werden.',
+      'Die besten Plätze, Tickets und VIP-Tische sind schnell ausverkauft. Wenn Sie Tickets, Galadinner oder einen VIP-Tisch buchen möchten, tun Sie es jetzt: sobald alles ausverkauft ist, können keine Wunder mehr vollbracht werden.',
     openEventCardCta: 'Zur Event-Seite & Preisen →',
     xceedPriorityCta: 'Tickets kaufen / Auf Xceed buchen →',
     floatingChatLabel: (eventName) =>
@@ -98,9 +98,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   pt: {
     almostSoldOutBadge: '🔥 QUASE ESGOTADO · ÚLTIMOS LUGARES',
     sellingFastBadge: '🔥 QUASE ESGOTADO',
-    urgencyAlertTitle: '⚠️ ATENÇÃO — OS MELHORES LUGARES E MESAS VIP ESTÃO QUASE ESGOTADOS',
+    urgencyAlertTitle: '⚠️ ATENÇÃO · OS MELHORES LUGARES E MESAS VIP ESTÃO QUASE ESGOTADOS',
     urgencyAlertBody:
-      'Os melhores lugares, ingressos e mesas VIP estão esgotando rapidamente. Se quiser comprar ingressos, ceias ou reservar uma mesa, faça isso agora — depois de esgotados, não será possível fazer milagres.',
+      'Os melhores lugares, ingressos e mesas VIP estão esgotando rapidamente. Se quiser comprar ingressos, ceias ou reservar uma mesa, faça isso agora: depois de esgotados, não será possível fazer milagres.',
     openEventCardCta: 'Ver Página do Evento e Preços →',
     xceedPriorityCta: 'Comprar Ingressos / Reservar na Xceed →',
     floatingChatLabel: (eventName) =>
@@ -113,9 +113,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   nl: {
     almostSoldOutBadge: '🔥 BIJNA UITVERKOCHT · LAATSTE PLAATSEN',
     sellingFastBadge: '🔥 BIJNA UITVERKOCHT',
-    urgencyAlertTitle: '⚠️ LET OP — DE BESTE PLAATSEN EN VIP-TAFELS RAKEN UITVERKOCHT',
+    urgencyAlertTitle: '⚠️ LET OP · DE BESTE PLAATSEN EN VIP-TAFELS RAKEN UITVERKOCHT',
     urgencyAlertBody:
-      'De beste plaatsen, tickets en VIP-tafels raken snel uitverkocht. Als je tickets of een VIP-tafel wilt reserveren, doe dat dan nu — zodra het uitverkocht is, kunnen er geen wonderen meer worden verricht.',
+      'De beste plaatsen, tickets en VIP-tafels raken snel uitverkocht. Als je tickets of een VIP-tafel wilt reserveren, doe dat dan nu: zodra het uitverkocht is, kunnen er geen wonderen meer worden verricht.',
     openEventCardCta: 'Bekijk Eventpagina & Prijzen →',
     xceedPriorityCta: 'Koop Tickets / Boek op Xceed →',
     floatingChatLabel: (eventName) =>
@@ -128,9 +128,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   ru: {
     almostSoldOutBadge: '🔥 ПОЧТИ РАСПРОДАНО · ПОСЛЕДНИЕ МЕСТА',
     sellingFastBadge: '🔥 ПОЧТИ РАСПРОДАНО',
-    urgencyAlertTitle: '⚠️ ВНИМАНИЕ — ЛУЧШИЕ МЕСТА И VIP-СТОЛЫ ЗАКАНЧИВАЮТСЯ',
+    urgencyAlertTitle: '⚠️ ВНИМАНИЕ · ЛУЧШИЕ МЕСТА И VIP-СТОЛЫ ЗАКАНЧИВАЮТСЯ',
     urgencyAlertBody:
-      'Лучшие места, билеты и VIP-столы быстро раскупаются. Если вы хотите купить билеты или забронировать стол, сделайте это сейчас — когда места закончатся, сотворить чудо уже не получится.',
+      'Лучшие места, билеты и VIP-столы быстро раскупаются. Если вы хотите купить билеты или забронировать стол, сделайте это сейчас: когда места закончатся, сотворить чудо уже не получится.',
     openEventCardCta: 'Открыть страницу события и цены →',
     xceedPriorityCta: 'Купить билеты / Бронь на Xceed →',
     floatingChatLabel: (eventName) =>
@@ -143,7 +143,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   tr: {
     almostSoldOutBadge: '🔥 TÜKENMEK ÜZERE · SON YERLER',
     sellingFastBadge: '🔥 TÜKENMEK ÜZERE',
-    urgencyAlertTitle: '⚠️ DİKKAT — EN İYİ YERLER VE VIP MASALAR TÜKENİYOR',
+    urgencyAlertTitle: '⚠️ DİKKAT · EN İYİ YERLER VE VIP MASALAR TÜKENİYOR',
     urgencyAlertBody:
       'En iyi yerler, biletler ve VIP masalar hızla tükeniyor. Bilet almak veya masa ayırtmak istiyorsanız şimdi yapmalısınız; yerler tükendikten sonra mucize yaratmak mümkün olmayacaktır.',
     openEventCardCta: 'Etkinlik Detayları ve Fiyatlar →',
@@ -158,9 +158,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   zh: {
     almostSoldOutBadge: '🔥 即将售罄 · 最后名额',
     sellingFastBadge: '🔥 即将售罄',
-    urgencyAlertTitle: '⚠️ 注意 — 最佳位置与VIP卡座即将售罄',
+    urgencyAlertTitle: '⚠️ 注意 · 最佳位置与VIP卡座即将售罄',
     urgencyAlertBody:
-      '最佳位置、门票和VIP卡座正在迅速售罄。如果您想购买门票、晚宴或预订VIP卡座，请立即行动——一旦售罄，临时将无法再创造奇迹。',
+      '最佳位置、门票和VIP卡座正在迅速售罄。如果您想购买门票、晚宴或预订VIP卡座，请立即行动 -  - 一旦售罄，临时将无法再创造奇迹。',
     openEventCardCta: '查看活动详情与价格 →',
     xceedPriorityCta: '在 Xceed 购票 / 预订 →',
     floatingChatLabel: (eventName) =>
@@ -173,9 +173,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   ar: {
     almostSoldOutBadge: '🔥 أوشكت على النفاد · آخر الأماكن',
     sellingFastBadge: '🔥 أوشكت على النفاد',
-    urgencyAlertTitle: '⚠️ تنبيه — أفضل الأماكن وطاولات VIP أوشكت على النفاد',
+    urgencyAlertTitle: '⚠️ تنبيه · أفضل الأماكن وطاولات VIP أوشكت على النفاد',
     urgencyAlertBody:
-      'أفضل الأماكن والتذاكر وطاولات VIP تنفد بسرعة. إذا كنت ترغب في شراء التذاكر أو حجز طاولة، يجب القيام بذلك الآن — فبمجرد نفادها لن يكون بالإمكان صنع المعجزات.',
+      'أفضل الأماكن والتذاكر وطاولات VIP تنفد بسرعة. إذا كنت ترغب في شراء التذاكر أو حجز طاولة، يجب القيام بذلك الآن: فبمجرد نفادها لن يكون بالإمكان صنع المعجزات.',
     openEventCardCta: 'عرض تفاصيل الفعالية والأسعار ←',
     xceedPriorityCta: 'شراء التذاكر / الحجز عبر Xceed ←',
     floatingChatLabel: (eventName) =>
@@ -188,9 +188,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   bg: {
     almostSoldOutBadge: '🔥 ПОЧТИ ИЗЧЕРПАНО · ПОСЛЕДНИ МЕСТА',
     sellingFastBadge: '🔥 В ИЗЧЕРПВАНЕ',
-    urgencyAlertTitle: '⚠️ ВНИМАНИЕ — НАЙ-ДОБРИТЕ МЕСТА И VIP МАСИ СЕ ИЗЧЕРПВАТ',
+    urgencyAlertTitle: '⚠️ ВНИМАНИЕ · НАЙ-ДОБРИТЕ МЕСТА И VIP МАСИ СЕ ИЗЧЕРПВАТ',
     urgencyAlertBody:
-      'Най-добрите места, билети и VIP маси се разпродават бързо. Ако искате да закупите билети или да резервирате маса, направете го сега — след изчерпване чудеса не са възможни.',
+      'Най-добрите места, билети и VIP маси се разпродават бързо. Ако искате да закупите билети или да резервирате маса, направете го сега: след изчерпване чудеса не са възможни.',
     openEventCardCta: 'Към събитието и цените →',
     xceedPriorityCta: 'Купи билети / Резервирай в Xceed →',
     floatingChatLabel: (eventName) =>
@@ -203,9 +203,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   hr: {
     almostSoldOutBadge: '🔥 SKORO RASPRODANO · ZADNJA MJESTA',
     sellingFastBadge: '🔥 U ISTEKNUĆU',
-    urgencyAlertTitle: '⚠️ PAŽNJA — NAJBOLJA MJESTA I VIP STOLOVI SE BRZO RASPRODAJU',
+    urgencyAlertTitle: '⚠️ PAŽNJA · NAJBOLJA MJESTA I VIP STOLOVI SE BRZO RASPRODAJU',
     urgencyAlertBody:
-      'Najbolja mjesta, ulaznice i VIP stolovi brzo planu. Ako želite kupiti ulaznice ili rezervirati stol, učinite to sada — kad se rasprodaju, čuda više nisu moguća.',
+      'Najbolja mjesta, ulaznice i VIP stolovi brzo planu. Ako želite kupiti ulaznice ili rezervirati stol, učinite to sada: kad se rasprodaju, čuda više nisu moguća.',
     openEventCardCta: 'Detalji događaja i cijene →',
     xceedPriorityCta: 'Kupi ulaznice / Rezerviraj na Xceed →',
     floatingChatLabel: (eventName) =>
@@ -218,9 +218,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   cs: {
     almostSoldOutBadge: '🔥 TÉMĚŘ VYPRODÁNO · POSLEDNÍ MÍSTA',
     sellingFastBadge: '🔥 TÉMĚŘ VYPRODÁNO',
-    urgencyAlertTitle: '⚠️ POZOR — NEJLEPŠÍ MÍSTA A VIP STOLY SE RYCHLE VYPRODÁVAJÍ',
+    urgencyAlertTitle: '⚠️ POZOR · NEJLEPŠÍ MÍSTA A VIP STOLY SE RYCHLE VYPRODÁVAJÍ',
     urgencyAlertBody:
-      'Nejlepší místa, vstupenky a VIP stoly mizí velmi rychle. Pokud chcete koupit vstupenky nebo rezervovat stůl, udělejte to hned — po vyprodání už zázraky dělat nelze.',
+      'Nejlepší místa, vstupenky a VIP stoly mizí velmi rychle. Pokud chcete koupit vstupenky nebo rezervovat stůl, udělejte to hned: po vyprodání už zázraky dělat nelze.',
     openEventCardCta: 'Detail akce a ceny →',
     xceedPriorityCta: 'Koupit vstupenky / Xceed →',
     floatingChatLabel: (eventName) =>
@@ -233,9 +233,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   da: {
     almostSoldOutBadge: '🔥 NÆSTEN UDSOLGT · FÅ PLADSER',
     sellingFastBadge: '🔥 NÆSTEN UDSOLGT',
-    urgencyAlertTitle: '⚠️ BEMÆRK — DE BEDSTE PLADSER OG VIP-BORDE ER VED AT VÆRE UDSOLGT',
+    urgencyAlertTitle: '⚠️ BEMÆRK · DE BEDSTE PLADSER OG VIP-BORDE ER VED AT VÆRE UDSOLGT',
     urgencyAlertBody:
-      'De bedste pladser, billetter og VIP-borde bliver hurtigt udsolgt. Hvis du vil købe billetter eller reservere et bord, skal det gøres nu — når der er udsolgt, kan der ikke gøres mirakler.',
+      'De bedste pladser, billetter og VIP-borde bliver hurtigt udsolgt. Hvis du vil købe billetter eller reservere et bord, skal det gøres nu: når der er udsolgt, kan der ikke gøres mirakler.',
     openEventCardCta: 'Se eventdetaljer og priser →',
     xceedPriorityCta: 'Køb billetter / Book på Xceed →',
     floatingChatLabel: (eventName) =>
@@ -248,9 +248,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   et: {
     almostSoldOutBadge: '🔥 PEAAEGU VÄLJA MÜÜDUD',
     sellingFastBadge: '🔥 LÕPPEMAS',
-    urgencyAlertTitle: '⚠️ TÄHELEPANU — PARIMAD KOHAD JA VIP-LAUAD ON LÕPPEMAS',
+    urgencyAlertTitle: '⚠️ TÄHELEPANU · PARIMAD KOHAD JA VIP-LAUAD ON LÕPPEMAS',
     urgencyAlertBody:
-      'Parimad kohad, piletid ja VIP-lauad müüakse kiiresti läbi. Kui soovid osta pileteid või broneerida lauda, tee seda kohe — kui kohad on otsas, ei saa enam imesid teha.',
+      'Parimad kohad, piletid ja VIP-lauad müüakse kiiresti läbi. Kui soovid osta pileteid või broneerida lauda, tee seda kohe: kui kohad on otsas, ei saa enam imesid teha.',
     openEventCardCta: 'Vaata ürituse infot ja hindu →',
     xceedPriorityCta: 'Osta piletid / Broneeri Xceedis →',
     floatingChatLabel: (eventName) =>
@@ -263,9 +263,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   fi: {
     almostSoldOutBadge: '🔥 MELKEIN LOPPUUNMYYTY',
     sellingFastBadge: '🔥 LOPPUUNMYYNTI LÄHELLÄ',
-    urgencyAlertTitle: '⚠️ HUOMIO — PARHAAT PAIKAT JA VIP-PÖYDÄT MYYDÄÄN LOPPUUN',
+    urgencyAlertTitle: '⚠️ HUOMIO · PARHAAT PAIKAT JA VIP-PÖYDÄT MYYDÄÄN LOPPUUN',
     urgencyAlertBody:
-      'Parhaat paikat, liput ja VIP-pöydät myydään nopeasti loppuun. Jos haluat ostaa liput tai varata pöydän, tee se nyt — kun paikat loppuvat, ihmeitä ei voida enää tehdä.',
+      'Parhaat paikat, liput ja VIP-pöydät myydään nopeasti loppuun. Jos haluat ostaa liput tai varata pöydän, tee se nyt: kun paikat loppuvat, ihmeitä ei voida enää tehdä.',
     openEventCardCta: 'Katso tapahtuman tiedot ja hinnat →',
     xceedPriorityCta: 'Osta liput / Varaa Xceedissä →',
     floatingChatLabel: (eventName) =>
@@ -278,9 +278,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   el: {
     almostSoldOutBadge: '🔥 ΣΧΕΔΟΝ ΕΞΑΝΤΛΗΜΕΝΑ · ΤΕΛΕΥΤΑΙΕΣ ΘΕΣΕΙΣ',
     sellingFastBadge: '🔥 ΕΞΑΝΤΛΟΥΝΤΑΙ',
-    urgencyAlertTitle: '⚠️ ΠΡΟΣΟΧΗ — ΟΙ ΚΑΛΥΤΕΡΕΣ ΘΕΣΕΙΣ ΚΑΙ ΤΑ VIP ΤΡΑΠΕΖΙΑ ΕΞΑΝΤΛΟΥΝΤΑΙ',
+    urgencyAlertTitle: '⚠️ ΠΡΟΣΟΧΗ · ΟΙ ΚΑΛΥΤΕΡΕΣ ΘΕΣΕΙΣ ΚΑΙ ΤΑ VIP ΤΡΑΠΕΖΙΑ ΕΞΑΝΤΛΟΥΝΤΑΙ',
     urgencyAlertBody:
-      'Οι καλύτερες θέσεις, τα εισιτήρια και τα VIP τραπέζια εξαντλούνται γρήγορα. Αν θέλετε να αγοράσετε εισιτήρια ή να κλείσετε τραπέζι, κάντε το τώρα — μόλις εξαντληθούν δεν μπορούν να γίνουν θαύματα.',
+      'Οι καλύτερες θέσεις, τα εισιτήρια και τα VIP τραπέζια εξαντλούνται γρήγορα. Αν θέλετε να αγοράσετε εισιτήρια ή να κλείσετε τραπέζι, κάντε το τώρα: μόλις εξαντληθούν δεν μπορούν να γίνουν θαύματα.',
     openEventCardCta: 'Δείτε την εκδήλωση & τιμές →',
     xceedPriorityCta: 'Αγορά Εισιτηρίων / Κράτηση στο Xceed →',
     floatingChatLabel: (eventName) =>
@@ -293,9 +293,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   hu: {
     almostSoldOutBadge: '🔥 MAJDNEM TELTHÁZ · UTOLSÓ HELYEK',
     sellingFastBadge: '🔥 FOGYÓBAN',
-    urgencyAlertTitle: '⚠️ FIGYELEM — A LEGJOBB HELYEK ÉS VIP ASZTALOK GYORSAN FOGYNAK',
+    urgencyAlertTitle: '⚠️ FIGYELEM · A LEGJOBB HELYEK ÉS VIP ASZTALOK GYORSAN FOGYNAK',
     urgencyAlertBody:
-      'A legjobb helyek, elővételes jegyek és VIP asztalok gyorsan elfogynak. Ha jegyet vagy VIP asztalt szeretnél foglalni, tedd meg most — teltház után már nem tudunk csodát tenni.',
+      'A legjobb helyek, elővételes jegyek és VIP asztalok gyorsan elfogynak. Ha jegyet vagy VIP asztalt szeretnél foglalni, tedd meg most: teltház után már nem tudunk csodát tenni.',
     openEventCardCta: 'Esemény részletei és árak →',
     xceedPriorityCta: 'Jegyvásárlás / Foglalás Xceeden →',
     floatingChatLabel: (eventName) =>
@@ -308,9 +308,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   ga: {
     almostSoldOutBadge: '🔥 BEAGNACH DÍOLTA AMACH',
     sellingFastBadge: '🔥 AG DÍOL GO TAPA',
-    urgencyAlertTitle: '⚠️ FÓGairt — NA HÁITEANNA IS FEARR AG DÍOL AMACH GO TAPA',
+    urgencyAlertTitle: '⚠️ FÓGairt · NA HÁITEANNA IS FEARR AG DÍOL AMACH GO TAPA',
     urgencyAlertBody:
-      'Tá na háiteanna is fearr, ticéid agus boird VIP ag díol amach go tapa. Más mian leat ticéid a cheannach nó bord a chur in áirithe, déan anois é — nuair a bheidh siad díolta amach ní féidir míorúiltí a dhéanamh.',
+      'Tá na háiteanna is fearr, ticéid agus boird VIP ag díol amach go tapa. Más mian leat ticéid a cheannach nó bord a chur in áirithe, déan anois é: nuair a bheidh siad díolta amach ní féidir míorúiltí a dhéanamh.',
     openEventCardCta: 'Féach Eolas & Praghsanna →',
     xceedPriorityCta: 'Ceannaigh Ticéid ar Xceed →',
     floatingChatLabel: (eventName) =>
@@ -323,9 +323,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   lv: {
     almostSoldOutBadge: '🔥 GANDRĪZ IZPĀRDOTS · PĒDĒJĀS VIETAS',
     sellingFastBadge: '🔥 GANDRĪZ IZPĀRDOTS',
-    urgencyAlertTitle: '⚠️ UZMANĪBU — LABĀKĀS VIETAS UN VIP GALDIŅI ĀTRI BEIDZAS',
+    urgencyAlertTitle: '⚠️ UZMANĪBU · LABĀKĀS VIETAS UN VIP GALDIŅI ĀTRI BEIDZAS',
     urgencyAlertBody:
-      'Labākās vietas, biļetes un VIP galdiņi tiek ātri izpārdoti. Ja vēlaties iegādāties biļetes vai rezervēt galdiņu, dariet to tagad — kad vietas būs izpārdotas, brīnumus vairs nebūs iespējams paveikt.',
+      'Labākās vietas, biļetes un VIP galdiņi tiek ātri izpārdoti. Ja vēlaties iegādāties biļetes vai rezervēt galdiņu, dariet to tagad: kad vietas būs izpārdotas, brīnumus vairs nebūs iespējams paveikt.',
     openEventCardCta: 'Skatīt pasākumu un cenas →',
     xceedPriorityCta: 'Pirkt biļetes / Xceed →',
     floatingChatLabel: (eventName) =>
@@ -338,9 +338,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   lt: {
     almostSoldOutBadge: '🔥 BEVEIK IŠPARDUOTA · PASKUTINĖS VIETOS',
     sellingFastBadge: '🔥 BEVEIK IŠPARDUOTA',
-    urgencyAlertTitle: '⚠️ DĖMESIO — GERIAUSIOS VIETOS IR VIP STALIUKAI GREITAI IŠPERKAMI',
+    urgencyAlertTitle: '⚠️ DĖMESIO · GERIAUSIOS VIETOS IR VIP STALIUKAI GREITAI IŠPERKAMI',
     urgencyAlertBody:
-      'Geriausios vietos, bilietai ir VIP staliukai greitai išperkami. Jei norite įsigyti bilietus ar rezervuoti staliuką, padarykite tai dabar — kai vietos baigsis, stebuklų padaryti nebegalėsime.',
+      'Geriausios vietos, bilietai ir VIP staliukai greitai išperkami. Jei norite įsigyti bilietus ar rezervuoti staliuką, padarykite tai dabar: kai vietos baigsis, stebuklų padaryti nebegalėsime.',
     openEventCardCta: 'Renginio informacija ir kainos →',
     xceedPriorityCta: 'Pirkti bilietus / Xceed →',
     floatingChatLabel: (eventName) =>
@@ -353,9 +353,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   mt: {
     almostSoldOutBadge: '🔥 KWAŻI SOLD OUT · L-AĦĦAR POSTIJIET',
     sellingFastBadge: '🔥 KWAŻI SOLD OUT',
-    urgencyAlertTitle: '⚠️ ATTENZJONI — L-AĦJAR POSTIJIET U IMWEJJED VIP QED JISPIĊĊAW',
+    urgencyAlertTitle: '⚠️ ATTENZJONI · L-AĦJAR POSTIJIET U IMWEJJED VIP QED JISPIĊĊAW',
     urgencyAlertBody:
-      'L-aħjar postijiet, biljetti u imwejjed VIP qed jinbiegħu malajr. Jekk trid tixtri biljetti jew tibbukkja mejda, agħmel dan issa — ladarba jispiċċaw ma jkunux jistgħu jsiru mirakli.',
+      'L-aħjar postijiet, biljetti u imwejjed VIP qed jinbiegħu malajr. Jekk trid tixtri biljetti jew tibbukkja mejda, agħmel dan issa: ladarba jispiċċaw ma jkunux jistgħu jsiru mirakli.',
     openEventCardCta: 'Ara d-Dettalji u l-Prezzijiet →',
     xceedPriorityCta: 'Ixtri Biljetti fuq Xceed →',
     floatingChatLabel: (eventName) =>
@@ -368,9 +368,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   pl: {
     almostSoldOutBadge: '🔥 PRAWIE WYPRZEDANE · OSTATNIE MIEJSCA',
     sellingFastBadge: '🔥 KOŃCÓWKA MIEJSC',
-    urgencyAlertTitle: '⚠️ UWAGA — NAJLEPSZE MIEJSCA I STOLIKI VIP SZYBKO SIĘ WYPRZEDAJĄ',
+    urgencyAlertTitle: '⚠️ UWAGA · NAJLEPSZE MIEJSCA I STOLIKI VIP SZYBKO SIĘ WYPRZEDAJĄ',
     urgencyAlertBody:
-      'Najlepsze miejsca, bilety i stoliki VIP wyprzedają się błyskawicznie. Jeśli chcesz kupić bilety, kolację lub zarezerwować stolik, zrób to teraz — po wyprzedaniu miejsc nie będziemy w stanie zdziałać cudów.',
+      'Najlepsze miejsca, bilety i stoliki VIP wyprzedają się błyskawicznie. Jeśli chcesz kupić bilety, kolację lub zarezerwować stolik, zrób to teraz: po wyprzedaniu miejsc nie będziemy w stanie zdziałać cudów.',
     openEventCardCta: 'Zobacz szczegóły i ceny →',
     xceedPriorityCta: 'Kup bilety / Rezerwuj na Xceed →',
     floatingChatLabel: (eventName) =>
@@ -383,9 +383,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   ro: {
     almostSoldOutBadge: '🔥 APROAPE EPUIZAT · ULTIMELE LOCURI',
     sellingFastBadge: '🔥 ÎN CURS DE EPUIZARE',
-    urgencyAlertTitle: '⚠️ ATENȚIE — CELE MAI BUNE LOCURI ȘI MESE VIP SE EPUIZEAZĂ RAPID',
+    urgencyAlertTitle: '⚠️ ATENȚIE · CELE MAI BUNE LOCURI ȘI MESE VIP SE EPUIZEAZĂ RAPID',
     urgencyAlertBody:
-      'Cele mai bune locuri, biletele și mesele VIP se vând foarte repede. Dacă dorești să cumperi bilete, revelionul sau să rezervi o masă VIP, fă-o acum — odată epuizate, nu se mai pot face miracole.',
+      'Cele mai bune locuri, biletele și mesele VIP se vând foarte repede. Dacă dorești să cumperi bilete, revelionul sau să rezervi o masă VIP, fă-o acum: odată epuizate, nu se mai pot face miracole.',
     openEventCardCta: 'Vezi Detalii Eveniment & Prețuri →',
     xceedPriorityCta: 'Cumpără Bilete / Rezervă pe Xceed →',
     floatingChatLabel: (eventName) =>
@@ -398,9 +398,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   sk: {
     almostSoldOutBadge: '🔥 TAKMER VYPREDANÉ · POSLEDNÉ MIESTA',
     sellingFastBadge: '🔥 TAKMER VYPREDANÉ',
-    urgencyAlertTitle: '⚠️ POZOR — NAJLEPŠIE MIESTA A VIP STOLY SA RÝCHLO VYPREDÁVAJÚ',
+    urgencyAlertTitle: '⚠️ POZOR · NAJLEPŠIE MIESTA A VIP STOLY SA RÝCHLO VYPREDÁVAJÚ',
     urgencyAlertBody:
-      'Najlepšie miesta, vstupenky a VIP stoly sa rýchlo míňajú. Ak si chcete kúpiť vstupenky alebo rezervovať stôl, urobte to teraz — po vypredaní už zázraky robiť nemožno.',
+      'Najlepšie miesta, vstupenky a VIP stoly sa rýchlo míňajú. Ak si chcete kúpiť vstupenky alebo rezervovať stôl, urobte to teraz: po vypredaní už zázraky robiť nemožno.',
     openEventCardCta: 'Detail podujatia a ceny →',
     xceedPriorityCta: 'Kúpiť vstupenky / Xceed →',
     floatingChatLabel: (eventName) =>
@@ -413,9 +413,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   sl: {
     almostSoldOutBadge: '🔥 SKORAJ RAZPRODANO · ZADNJA MESTA',
     sellingFastBadge: '🔥 SKORAJ RAZPRODANO',
-    urgencyAlertTitle: '⚠️ POZOR — NAJBOLJŠA MESTA IN VIP MIZE GREDO HITRO V PROMET',
+    urgencyAlertTitle: '⚠️ POZOR · NAJBOLJŠA MESTA IN VIP MIZE GREDO HITRO V PROMET',
     urgencyAlertBody:
-      'Najboljša mesta, vstopnice in VIP mize se hitro razprodajo. Če želite kupiti vstopnice ali rezervirati mizo, storite to zdaj — ko bodo места razprodana, čudežev ne bo več mogoče delati.',
+      'Najboljša mesta, vstopnice in VIP mize se hitro razprodajo. Če želite kupiti vstopnice ali rezervirati mizo, storite to zdaj: ko bodo места razprodana, čudežev ne bo več mogoče delati.',
     openEventCardCta: 'Podrobnosti dogodka in cene →',
     xceedPriorityCta: 'Kupi vstopnice / Xceed →',
     floatingChatLabel: (eventName) =>
@@ -428,9 +428,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   sv: {
     almostSoldOutBadge: '🔥 NÄSTAN SLUTSÅLT · FÅ PLATSER KVAR',
     sellingFastBadge: '🔥 NÄSTAN SLUTSÅLT',
-    urgencyAlertTitle: '⚠️ OBS — DE BÄSTA PLATSERNA OCH VIP-BORDEN TAR SNART SLUT',
+    urgencyAlertTitle: '⚠️ OBS · DE BÄSTA PLATSERNA OCH VIP-BORDEN TAR SNART SLUT',
     urgencyAlertBody:
-      'De bästa platserna, biljetterna och VIP-borden säljer slut snabbt. Om du vill köpa biljetter eller boka ett VIP-bord, gör det nu — när det är slutsålt kan inga mirakel göras.',
+      'De bästa platserna, biljetterna och VIP-borden säljer slut snabbt. Om du vill köpa biljetter eller boka ett VIP-bord, gör det nu: när det är slutsålt kan inga mirakel göras.',
     openEventCardCta: 'Se eventguide & priser →',
     xceedPriorityCta: 'Köp biljetter / Boka på Xceed →',
     floatingChatLabel: (eventName) =>
@@ -443,9 +443,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   no: {
     almostSoldOutBadge: '🔥 NESTEN UTSOLGT · FÅ PLASSER IGJEN',
     sellingFastBadge: '🔥 NESTEN UTSOLGT',
-    urgencyAlertTitle: '⚠️ OBS — DE BESTE PLASSENE OG VIP-BORDENE BLIR RASKT UTSOLGT',
+    urgencyAlertTitle: '⚠️ OBS · DE BESTE PLASSENE OG VIP-BORDENE BLIR RASKT UTSOLGT',
     urgencyAlertBody:
-      'De beste plassene, billettene og VIP-bordene selges raskt ut. Hvis du vil kjøpe billetter eller reservere bord, gjør det nå — når det er utsolgt, kan det ikke gjøres mirakler.',
+      'De beste plassene, billettene og VIP-bordene selges raskt ut. Hvis du vil kjøpe billetter eller reservere bord, gjør det nå: når det er utsolgt, kan det ikke gjøres mirakler.',
     openEventCardCta: 'Se arrangement & priser →',
     xceedPriorityCta: 'Kjøp billetter / Bestill på Xceed →',
     floatingChatLabel: (eventName) =>
@@ -458,9 +458,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   is: {
     almostSoldOutBadge: '🔥 NÆSTUM UPPSELT · FÁ SÆTI EFTIR',
     sellingFastBadge: '🔥 NÆSTUM UPPSELT',
-    urgencyAlertTitle: '⚠️ ATHUGIÐ — BESTU SÆTIN OG VIP-BORÐIN ERU AÐ SELJAST UPP',
+    urgencyAlertTitle: '⚠️ ATHUGIÐ · BESTU SÆTIN OG VIP-BORÐIN ERU AÐ SELJAST UPP',
     urgencyAlertBody:
-      'Bestu sætin, miðarnir og VIP-borðin seljast hratt upp. Ef þú vilt kaupa miða eða bóka borð skaltu gera það núna — þegar uppselt er verða engin kraftaverk gerð.',
+      'Bestu sætin, miðarnir og VIP-borðin seljast hratt upp. Ef þú vilt kaupa miða eða bóka borð skaltu gera það núna: þegar uppselt er verða engin kraftaverk gerð.',
     openEventCardCta: 'Skoða viðburð og verð →',
     xceedPriorityCta: 'Kaupa miða á Xceed →',
     floatingChatLabel: (eventName) =>
@@ -473,9 +473,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   uk: {
     almostSoldOutBadge: '🔥 МАЙЖЕ РОЗПРОДАНО · ОСТАННІ МІСЦЯ',
     sellingFastBadge: '🔥 МАЙЖЕ РОЗПРОДАНО',
-    urgencyAlertTitle: '⚠️ УВАГА — НАЙКРАЩІ МІСЦЯ ТА VIP-СТОЛИ ШВИДКО ЗАКІНЧУЮТЬСЯ',
+    urgencyAlertTitle: '⚠️ УВАГА · НАЙКРАЩІ МІСЦЯ ТА VIP-СТОЛИ ШВИДКО ЗАКІНЧУЮТЬСЯ',
     urgencyAlertBody:
-      'Найкращі місця, квитки та VIP-столи швидко розкуповуються. Якщо ви хочете придбати квитки або забронювати стіл, зробіть це зараз — коли місця закінчаться, дива вже не станеться.',
+      'Найкращі місця, квитки та VIP-столи швидко розкуповуються. Якщо ви хочете придбати квитки або забронювати стіл, зробіть це зараз: коли місця закінчаться, дива вже не станеться.',
     openEventCardCta: 'Деталі події та ціни →',
     xceedPriorityCta: 'Купити квитки / Xceed →',
     floatingChatLabel: (eventName) =>
@@ -488,9 +488,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   sq: {
     almostSoldOutBadge: '🔥 SHUMË PRANË SOLD OUT · VENDET E FUNDIT',
     sellingFastBadge: '🔥 NË MBARIM',
-    urgencyAlertTitle: '⚠️ KUJDES — VENDET DHE TAVOLINAT VIP MË TË MIRA PO MBAROJNË',
+    urgencyAlertTitle: '⚠️ KUJDES · VENDET DHE TAVOLINAT VIP MË TË MIRA PO MBAROJNË',
     urgencyAlertBody:
-      'Vendet më të mira, biletat dhe tavolinat VIP po shiten me shpejtësi. Nëse dëshironi të blini bileta ose të rezervoni një tavolinë, bëjeni tani — kur të mbarojnë nuk mund të bëhen mrekulli.',
+      'Vendet më të mira, biletat dhe tavolinat VIP po shiten me shpejtësi. Nëse dëshironi të blini bileta ose të rezervoni një tavolinë, bëjeni tani: kur të mbarojnë nuk mund të bëhen mrekulli.',
     openEventCardCta: 'Shiko Detajet e Eventit & Çmimet →',
     xceedPriorityCta: 'Bli Bileta / Rezervo në Xceed →',
     floatingChatLabel: (eventName) =>
@@ -503,9 +503,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   sr: {
     almostSoldOutBadge: '🔥 SKORO RASPRODATO · POSLEDNJA MESTA',
     sellingFastBadge: '🔥 PRI KRAJU ZALIHA',
-    urgencyAlertTitle: '⚠️ PAŽNJA — NAJBOLJA MESTA I VIP STOLOVI SE BRZO RASPRODAJU',
+    urgencyAlertTitle: '⚠️ PAŽNJA · NAJBOLJA MESTA I VIP STOLOVI SE BRZO RASPRODAJU',
     urgencyAlertBody:
-      'Najbolja mesta, karte i VIP stolovi odlaze veoma brzo. Ako želite da kupite karte ili rezervišete sto, uradite to sada — kada se rasprodaju, čuda više nisu moguća.',
+      'Najbolja mesta, karte i VIP stolovi odlaze veoma brzo. Ako želite da kupite karte ili rezervišete sto, uradite to sada: kada se rasprodaju, čuda više nisu moguća.',
     openEventCardCta: 'Detalji događaja i cene →',
     xceedPriorityCta: 'Kupi karte / Rezerviši na Xceed →',
     floatingChatLabel: (eventName) =>
@@ -518,9 +518,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   bs: {
     almostSoldOutBadge: '🔥 SKORO RASPRODANO · ZADNJA MJESTA',
     sellingFastBadge: '🔥 PRI KRAJU',
-    urgencyAlertTitle: '⚠️ PAŽNJA — NAJBOLJA MJESTA I VIP STOLOVI SE BRZO RASPRODAJU',
+    urgencyAlertTitle: '⚠️ PAŽNJA · NAJBOLJA MJESTA I VIP STOLOVI SE BRZO RASPRODAJU',
     urgencyAlertBody:
-      'Najbolja mjesta, ulaznice i VIP stolovi brzo se rasprodaju. Ako želite kupiti ulaznice ili rezervisati sto, uradite to sada — nakon što se rasprodaju, čuda nisu moguća.',
+      'Najbolja mjesta, ulaznice i VIP stolovi brzo se rasprodaju. Ako želite kupiti ulaznice ili rezervisati sto, uradite to sada: nakon što se rasprodaju, čuda nisu moguća.',
     openEventCardCta: 'Detalji događaja i cijene →',
     xceedPriorityCta: 'Kupi ulaznice / Rezerviši na Xceed →',
     floatingChatLabel: (eventName) =>
@@ -533,9 +533,9 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
   mk: {
     almostSoldOutBadge: '🔥 СКОРО РАСПРОДАДЕНО · ПОСЛЕДНИ МЕСТА',
     sellingFastBadge: '🔥 ПРЕД ИСЦРПУВАЊЕ',
-    urgencyAlertTitle: '⚠️ ВНИМАНИЕ — НАЈДОБРИТЕ МЕСТА И VIP МАСИ БРЗО СЕ РАСПРОДАВААТ',
+    urgencyAlertTitle: '⚠️ ВНИМАНИЕ · НАЈДОБРИТЕ МЕСТА И VIP МАСИ БРЗО СЕ РАСПРОДАВААТ',
     urgencyAlertBody:
-      'Најдобрите места, билети и VIP маси брзо се трошат. Ако сакате да купите билети или да резервирате маса, направете го тоа сега — откако ќе се распродадат, чуда не се возможни.',
+      'Најдобрите места, билети и VIP маси брзо се трошат. Ако сакате да купите билети или да резервирате маса, направете го тоа сега: откако ќе се распродадат, чуда не се возможни.',
     openEventCardCta: 'Детали за настанот и цени →',
     xceedPriorityCta: 'Купи билети / Резервирај на Xceed →',
     floatingChatLabel: (eventName) =>
