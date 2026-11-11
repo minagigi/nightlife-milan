@@ -347,7 +347,7 @@ export const mockEvents: Event[] = [
         it: 'keinemusik-milan-25-september-2026',
       },
     },
-    image: '/images/venues/editorial/01-milano-nightclubs-rooftops.webp',
+    image: '/images/club-techno.webp',
     isSpecial: true,
   },
 

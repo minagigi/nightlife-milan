@@ -1274,7 +1274,7 @@ export default async function ClubPage({ params }: Props) {
                   </span>
                 )}
                 <span className="px-3 py-1 border border-white/20 text-white/70 text-xs uppercase tracking-widest rounded-full">
-                  {venue.category}
+                  {venue.category.replace(/_/g, ' ')}
                 </span>
               </div>
               <h1 className="font-serif text-6xl md:text-8xl font-bold text-white tracking-tight mb-4 drop-shadow-lg">

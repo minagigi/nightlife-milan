@@ -856,7 +856,7 @@ export default async function EventPage({ params }: Props) {
           
           <div className="absolute bottom-0 left-0 w-full p-6 md:p-12 max-w-7xl mx-auto">
             <div className="flex items-center gap-3 mb-4">
-              <span className="bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+              <span className="border border-[#F6F1E7]/35 bg-[#0B0A09]/90 text-[#F6F1E7] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
                 {venueName}
               </span>
               <span className="text-white/70 text-sm font-medium">
@@ -877,36 +877,10 @@ export default async function EventPage({ params }: Props) {
         <section className="max-w-7xl mx-auto w-full px-6 md:px-12 py-12 grid grid-cols-1 lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2 max-w-none">
 
-            {/* AI Trafiletto */}
-            <div className="not-prose mb-8 p-5 rounded-xl border border-champagne/20 bg-champagne/[0.04] text-left">
-              <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">{eventText(locale, 'Quick Answer', 'Risposta rapida', 'Resposta rapida')}</p>
-              <p className="font-sans text-white/70 text-sm leading-relaxed">
-                {localizedEventContent?.seoSummary || buildEventQuickAnswer({ locale, title, venueName, formattedDate, pricePhrase })}
-              </p>
-            </div>
-
-            {/* Tags */}
-            <div className="not-prose flex flex-wrap gap-2 mb-8">
-              {[
-                venueName,
-                ...event.genre.map(g => formatEventGenre(locale, g)),
-                eventText(locale, 'Milan Events', 'Serate Milano', 'Eventos em Milão'),
-                eventText(locale, 'VIP Tables', 'Tavoli VIP', 'Mesas VIP'),
-                eventText(locale, 'Book Now', 'Prenotazione', 'Reservar agora'),
-              ].map(tag => (
-                <span key={tag} className="px-3 py-1.5 rounded-full border border-white/10 text-white/40 text-xs font-sans tracking-wider">
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            <h2 className="text-2xl font-serif font-bold text-champagne mb-4">
-              {eventText(locale, 'About the event', 'Informazioni sull\'evento', 'Sobre o evento')}
-            </h2>
             {Date.parse(event.endDateISO || event.dateISO) < Date.now() && (
               <div
                 data-past-event-conversion-banner
-                className="not-prose mb-6 border border-[#F6F1E7]/25 bg-[#0B0A09] p-5"
+                className="not-prose mb-8 border border-[#F6F1E7]/25 bg-[#0B0A09] p-5"
               >
                 <p className="text-sm font-semibold text-[#F6F1E7]">
                   {getEventTemporalCopy(locale as LocaleCode, event.dateISO.slice(0, 10)).endedNotice}
@@ -935,6 +909,33 @@ export default async function EventPage({ params }: Props) {
                 </div>
               </div>
             )}
+
+            {/* AI Trafiletto */}
+            <div className="not-prose mb-8 p-5 rounded-xl border border-champagne/20 bg-champagne/[0.04] text-left">
+              <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">{eventText(locale, 'Quick Answer', 'Risposta rapida', 'Resposta rapida')}</p>
+              <p className="font-sans text-white/70 text-sm leading-relaxed">
+                {localizedEventContent?.seoSummary || buildEventQuickAnswer({ locale, title, venueName, formattedDate, pricePhrase })}
+              </p>
+            </div>
+
+            {/* Tags */}
+            <div className="not-prose flex flex-wrap gap-2 mb-8">
+              {[
+                venueName,
+                ...event.genre.map(g => formatEventGenre(locale, g)),
+                eventText(locale, 'Milan Events', 'Serate Milano', 'Eventos em Milão'),
+                eventText(locale, 'VIP Tables', 'Tavoli VIP', 'Mesas VIP'),
+                eventText(locale, 'Book Now', 'Prenotazione', 'Reservar agora'),
+              ].map(tag => (
+                <span key={tag} className="px-3 py-1.5 rounded-full border border-white/10 text-white/40 text-xs font-sans tracking-wider">
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            <h2 className="text-2xl font-serif font-bold text-champagne mb-4">
+              {eventText(locale, 'About the event', 'Informazioni sull\'evento', 'Sobre o evento')}
+            </h2>
             <p className="text-lg text-white/70 leading-relaxed">
               {eventIntroduction}
             </p>
