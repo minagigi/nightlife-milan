@@ -83,18 +83,13 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: '/:locale/calendar/this-week',
-        destination: '/:locale/events/this-week',
-        permanent: true,
-      },
-      {
         source: '/pt/events/justme-tuesday-martedi-universitario',
         destination: '/pt/events/university-party-just-me-tuesday-july-14-2026-2026-07-14',
         permanent: true,
       },
       ...eventRedirects.flatMap(([from, to]) => [
         { source: `/events/${from}`, destination: `/events/${to}`, permanent: true },
-        { source: `/it/events/${from}`, destination: `/it/events/${to}`, permanent: true },
+        { source: `/it/events/${from}`, destination: `/it/eventi/${to}`, permanent: true },
       ]),
     ];
   },
@@ -134,7 +129,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; frame-src https://www.google.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data: https://images.unsplash.com https://storage.googleapis.com https://www.googletagmanager.com https://img.magnific.com https://img.freepik.com https://ai-images.freepik.com https://*.tile.openstreetmap.org; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://*.tile.openstreetmap.org;",
+            value: "default-src 'self'; frame-src https://www.google.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data: https://images.unsplash.com https://storage.googleapis.com https://www.googletagmanager.com https://img.magnific.com https://img.freepik.com https://ai-images.freepik.com https://img.evbuc.com https://cdn.evbuc.com https://*.tile.openstreetmap.org; font-src 'self' data:; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://stats.g.doubleclick.net https://*.tile.openstreetmap.org;",
           }
         ],
       },

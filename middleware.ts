@@ -1,10 +1,16 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { enabledLocaleCodes, LOCALES, type LocaleCode } from '@/lib/i18n/locales';
-import { isEventBatchLocaleHttpIndexable } from '@/lib/eventBatchProfiles';
+import { getEventBatchProfile, isEventBatchLocaleHttpIndexable } from '@/lib/eventBatchProfiles';
 import { isRemovedCuratedSitePath } from '@/lib/eventVisibility';
-import { ALL_EVENT_DIR_TOKENS } from '@/lib/i18n/dirTokens35';
-import { localizeInternalHref, resolveSeoHubPathToCanonical } from '@/lib/i18n/localizedSlugs35';
+import { ALL_EVENT_DIR_TOKENS, resolveLocalizedDirToCanonical } from '@/lib/i18n/dirTokens35';
+import {
+  isKnownActiveVenueSlug,
+  isLegacyUnlistedClubSlug,
+  localizeInternalHref,
+  resolveLegacyOrExpiredEventRedirect,
+  resolveSeoHubPathToCanonical,
+} from '@/lib/i18n/localizedSlugs35';
 import {
   capodannoCategoryPath,
   capodannoEventPath,
@@ -12,11 +18,12 @@ import {
   resolveCapodannoEventBaseSlugByLocalizedSlug,
 } from '@/lib/capodanno/routes';
 import { halloweenPath } from '@/lib/halloween/routes';
+import { UNIVERSITY_PARTY_CANONICAL_SLUG } from '@/lib/universityPartyPt';
 
-// Lingue attive dal registry unico (lib/i18n/locales.ts): attivare una lingua lì
+// Lingue attive dal registry unico (lib/i18n/locales.ts): attivare una lingua li
 // la rende automaticamente instradabile qui, senza toccare il middleware.
 const locales: string[] = enabledLocaleCodes;
-// Lingue navigabili ma senza contenuto tradotto: noindex via header HTTP —
+// Lingue navigabili ma senza contenuto tradotto: noindex via header HTTP -
 // vince su qualsiasi metadata di pagina (che altrimenti sovrascrive il layout).
 const nonIndexedLocales = new Set(LOCALES.filter((l) => l.enabled && !l.indexed).map((l) => l.code as string));
 const localePrefixPattern = `(?:${locales.map((l) => `\\/${l}`).join('|')})?`;
@@ -28,8 +35,11 @@ const localizedEventPageRe = new RegExp(`^\\/([^/]+)\\/(?:${eventDirGroup})\\/([
 const capodannoDirectRe = new RegExp(`^\\/(?:(?:${eventDirGroup})\\/)?(?:capodanno-2027|new-years-eve-2027)\\/?$`, 'i');
 const capodannoNestedRe = new RegExp(`^\\/(?:${eventDirGroup})\\/(?:capodanno-2027|new-years-eve-2027)\\/([^/]+)\\/?$`, 'i');
 const halloweenDirectRe = new RegExp(`^\\/(?:(?:${eventDirGroup})\\/)?halloween-2026\\/?$`, 'i');
-const mfwNestedGuideRe = /^\/(?:milan-fashion-week|settimana-della-moda-milano|[^/]*fashion-week[^/]*)\/guides\/[^/]+\/?$/i;
+const mfwNestedSubpathRe = /^\/(?:milan-fashion-week|milano-fashion-week|milano-fashion-week-eventi|settimana-della-moda-milano|[^/]*fashion-week[^/]*)\/(?:guides|events|guide|eventi)\/[^/]+\/?$/i;
 const deprecatedLocalePrefixRe = /^\/(zh-tw|zh-hk|pt-br|es-mx|es-ar|es-co|en-gb|en-us|ko-kr|ko|ja|jp|he|iw|hi)(?:\/(.*))?$/i;
+
+const BOT_OR_AUDITOR_UA_RE =
+  /bot|crawl|spider|slurp|bingpreview|yandex|baidu|duckduck|google-inspectiontool|googleother|adsbot|storebot-google|mediapartners-google|google-read-aloud|apis-google|chrome-lighthouse|lighthouse|pagespeed|ptst|gtmetrix|pingdom|headlesschrome|whatsapp|facebookexternalhit|facebot|instagram|twitterbot|linkedinbot|telegrambot|discordbot|slackbot|pinterest|applebot|gptbot|oai-searchbot|chatgpt-user|claudebot|perplexitybot|bytespider|amazonbot/i;
 
 const DEPRECATED_LOCALE_MAP: Readonly<Record<string, LocaleCode>> = {
   'zh-tw': 'zh',
@@ -49,13 +59,32 @@ const DEPRECATED_LOCALE_MAP: Readonly<Record<string, LocaleCode>> = {
   hi: 'en',
 };
 
+function maybePersistLocaleCookie(
+  request: NextRequest,
+  response: NextResponse,
+  localeValue: string,
+  isBot: boolean,
+): void {
+  if (isBot) return;
+  if (request.cookies.get('NEXT_LOCALE')?.value === localeValue) return;
+  response.cookies.set('NEXT_LOCALE', localeValue, { path: '/', maxAge: 31536000, sameSite: 'lax' });
+}
+
+function safeDecodeSegment(seg: string): string {
+  try {
+    return decodeURIComponent(seg);
+  } catch {
+    return seg;
+  }
+}
+
 function resolveLegacySubpathForLocale(subPath: string, targetLocale: LocaleCode): string | null {
   if (capodannoDirectRe.test(subPath)) {
     return capodannoCategoryPath('capodanno-2027', targetLocale);
   }
   const nestedCapMatch = subPath.match(capodannoNestedRe);
   if (nestedCapMatch) {
-    const rawSubSlug = decodeURIComponent(nestedCapMatch[1]);
+    const rawSubSlug = safeDecodeSegment(nestedCapMatch[1]);
     const evBase = resolveCapodannoEventBaseSlugByLocalizedSlug(rawSubSlug, targetLocale);
     if (evBase) return capodannoEventPath(evBase, targetLocale);
     const catId = resolveCapodannoCategoryIdByLocalizedSlug(rawSubSlug, targetLocale);
@@ -65,9 +94,24 @@ function resolveLegacySubpathForLocale(subPath: string, targetLocale: LocaleCode
   if (halloweenDirectRe.test(subPath)) {
     return halloweenPath(targetLocale);
   }
-  if (mfwNestedGuideRe.test(subPath)) {
+  if (mfwNestedSubpathRe.test(subPath)) {
     const mfwHref = targetLocale === 'en' ? '/milan-fashion-week' : `/${targetLocale}/milan-fashion-week`;
     return localizeInternalHref(mfwHref, targetLocale);
+  }
+  const cleanSub = subPath !== '/' && subPath.endsWith('/') ? subPath.slice(0, -1) : subPath;
+  const segs = cleanSub.split('/').filter(Boolean);
+  if (segs.length === 2) {
+    const parentCanonical = resolveLocalizedDirToCanonical(segs[0]);
+    const rawLeaf = safeDecodeSegment(segs[1]);
+    if (parentCanonical === '/clubs') {
+      if (!isKnownActiveVenueSlug(rawLeaf) && isLegacyUnlistedClubSlug(rawLeaf)) {
+        const clubsHub = targetLocale === 'en' ? '/clubs' : `/${targetLocale}/clubs`;
+        return localizeInternalHref(clubsHub, targetLocale);
+      }
+    } else if (parentCanonical === '/events') {
+      const eventDest = resolveLegacyOrExpiredEventRedirect(rawLeaf, targetLocale);
+      if (eventDest) return eventDest;
+    }
   }
   return null;
 }
@@ -115,9 +159,24 @@ function crmAuth(request: NextRequest): NextResponse | null {
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const cleanTopPathname = pathname !== '/' && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+  const isBot = BOT_OR_AUDITOR_UA_RE.test(request.headers.get('user-agent') || '');
 
   if (/^\/sitemap(-[a-z0-9-]+)?\.xml$/i.test(pathname)) {
     return NextResponse.next();
+  }
+
+  // Le vecchie pagine generate dalle collection Eventbrite non appartengono al
+  // sito. Un 410 esplicito evita il falso 200 del fallback App Router e accelera
+  // la loro rimozione dagli indici di ricerca (precede i redirect legacy).
+  if (isRemovedCuratedSitePath(pathname)) {
+    return new NextResponse(null, {
+      status: 410,
+      headers: {
+        'Cache-Control': 'public, max-age=0, s-maxage=86400',
+        'X-Robots-Tag': 'noindex, nofollow, noarchive',
+      },
+    });
   }
 
   // 1-hop HTTP 308 per prefissi lingua/regione deprecati o non attivi (es. /zh-tw/*, /pt-br/*, /es-mx/*, /ja/*, /he/*)
@@ -139,14 +198,14 @@ export function middleware(request: NextRequest) {
         destination = localizeInternalHref(targetHref, mappedLocale);
       }
     }
-    if (destination && destination !== pathname) {
+    if (destination && destination !== cleanTopPathname) {
       const url = new URL(destination, request.url);
       url.search = request.nextUrl.search;
       return NextResponse.redirect(url, 308);
     }
   }
 
-  // Redirect HTTP 308 diretto (1-hop, anti-loop) per gli alias legacy Capodanno 2027 (diretti + 553 annidati), Halloween 2026 e guide MFW
+  // Redirect HTTP 308 diretto (1-hop, anti-loop) per gli alias legacy Capodanno 2027, Halloween 2026, MFW, club non listati ed eventi storici
   const rawFirstSeg = pathname.split('/')[1] || '';
   const hasLeadingActiveLocale = locales.includes(rawFirstSeg);
   const legacyTargetLocale: LocaleCode = hasLeadingActiveLocale
@@ -156,26 +215,13 @@ export function middleware(request: NextRequest) {
     ? (pathname.slice(rawFirstSeg.length + 1) || '/')
     : pathname;
   const legacyDestination = resolveLegacySubpathForLocale(legacySubPath, legacyTargetLocale);
-  if (legacyDestination && legacyDestination !== pathname) {
+  if (legacyDestination && legacyDestination !== cleanTopPathname) {
     const url = new URL(legacyDestination, request.url);
     url.search = request.nextUrl.search;
     return NextResponse.redirect(url, 308);
   }
 
-  // Le vecchie pagine generate dalle collection Eventbrite non appartengono al
-  // sito. Un 410 esplicito evita il falso 200 del fallback App Router e accelera
-  // la loro rimozione dagli indici di ricerca.
-  if (isRemovedCuratedSitePath(pathname)) {
-    return new NextResponse(null, {
-      status: 410,
-      headers: {
-        'Cache-Control': 'public, max-age=0, s-maxage=86400',
-        'X-Robots-Tag': 'noindex, nofollow, noarchive',
-      },
-    });
-  }
-
-  // Typo comune → path canonico
+  // Typo comune -> path canonico
   if (analyticsTypoRe.test(pathname)) {
     const url = request.nextUrl.clone();
     url.pathname = pathname.replace('/analitycs', '/analytics');
@@ -205,11 +251,13 @@ export function middleware(request: NextRequest) {
       const newPath = canonicalEnRest === '/' ? '/' : localizeInternalHref(canonicalEnRest, 'en');
       const url = new URL(newPath, request.url);
       url.search = request.nextUrl.search;
-      return NextResponse.redirect(url, 308);
+      const enRedirectRes = NextResponse.redirect(url, 308);
+      maybePersistLocaleCookie(request, enRedirectRes, 'en', isBot);
+      return enRedirectRes;
     }
     const firstSegment = pathname.split('/')[1] as LocaleCode;
     const rawRestPath = pathname.slice(firstSegment.length + 1) || '/';
-    const cleanPathname = pathname !== '/' && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+    const cleanPathname = cleanTopPathname;
     const isInternalAdmin = analyticsRe.test(cleanPathname) || crmRe.test(cleanPathname);
 
     if (!isInternalAdmin && rawRestPath !== '/') {
@@ -222,7 +270,7 @@ export function middleware(request: NextRequest) {
         const redirectUrl = new URL(expectedLocalizedFull, request.url);
         redirectUrl.search = request.nextUrl.search;
         const redirectRes = NextResponse.redirect(redirectUrl, 308);
-        redirectRes.cookies.set('NEXT_LOCALE', firstSegment, { path: '/', maxAge: 31536000, sameSite: 'lax' });
+        maybePersistLocaleCookie(request, redirectRes, firstSegment, isBot);
         return redirectRes;
       }
       let res: NextResponse;
@@ -233,7 +281,7 @@ export function middleware(request: NextRequest) {
       } else {
         res = NextResponse.next();
       }
-      res.cookies.set('NEXT_LOCALE', firstSegment, { path: '/', maxAge: 31536000, sameSite: 'lax' });
+      maybePersistLocaleCookie(request, res, firstSegment, isBot);
       const localizedEventPage = cleanPathname.match(localizedEventPageRe);
       const hasEventScopedHttpIndexability = localizedEventPage
         && isEventBatchLocaleHttpIndexable(localizedEventPage[1], localizedEventPage[2]);
@@ -244,7 +292,7 @@ export function middleware(request: NextRequest) {
     }
 
     const res = NextResponse.next();
-    res.cookies.set('NEXT_LOCALE', firstSegment, { path: '/', maxAge: 31536000, sameSite: 'lax' });
+    maybePersistLocaleCookie(request, res, firstSegment, isBot);
     if (nonIndexedLocales.has(firstSegment)) {
       res.headers.set('X-Robots-Tag', 'noindex, follow');
     }
@@ -252,9 +300,8 @@ export function middleware(request: NextRequest) {
   }
 
   // Spazio EN (nessun prefisso): auto-switch alla lingua del browser al primo
-  // accesso; una scelta manuale (cookie NEXT_LOCALE) vince per sempre. I bot
-  // NON vengono mai rediretti (SEO: ogni URL serve sempre lo stesso contenuto).
-  const isBot = /bot|crawl|spider|slurp|bingpreview|yandex|baidu|duckduck/i.test(request.headers.get('user-agent') || '');
+  // accesso; una scelta manuale (cookie NEXT_LOCALE) vince per sempre. I bot,
+  // gli auditor e gli unfurler social NON vengono mai rediretti.
   if (!isBot) {
     const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value;
     const target =
@@ -265,12 +312,30 @@ export function middleware(request: NextRequest) {
           : matchBrowserLocale(request.headers.get('accept-language'));
     if (target && target !== 'en') {
       const targetCode = target as LocaleCode;
-      const destPath = pathname === '/'
-        ? `/${targetCode}`
-        : localizeInternalHref(`/${targetCode}${pathname}`, targetCode);
-      const url = new URL(destPath, request.url);
-      url.search = request.nextUrl.search;
-      return NextResponse.redirect(url);
+      const rootSegs = cleanTopPathname.split('/').filter(Boolean);
+      const rootParentDir = rootSegs.length === 2 ? resolveLocalizedDirToCanonical(rootSegs[0]) : undefined;
+      const rootLeaf = rootSegs.length === 2 ? safeDecodeSegment(rootSegs[1]) : '';
+      let skipLocaleSwitch = false;
+      if (rootParentDir === '/clubs' && !isKnownActiveVenueSlug(rootLeaf)) {
+        skipLocaleSwitch = true;
+      } else if (rootParentDir === '/events') {
+        if (rootLeaf === UNIVERSITY_PARTY_CANONICAL_SLUG && targetCode !== 'pt') {
+          skipLocaleSwitch = true;
+        } else {
+          const evProfile = getEventBatchProfile(rootLeaf);
+          if (evProfile?.siteLocales && !evProfile.siteLocales.includes(targetCode)) {
+            skipLocaleSwitch = true;
+          }
+        }
+      }
+      if (!skipLocaleSwitch) {
+        const destPath = pathname === '/'
+          ? `/${targetCode}`
+          : localizeInternalHref(`/${targetCode}${pathname}`, targetCode);
+        const url = new URL(destPath, request.url);
+        url.search = request.nextUrl.search;
+        return NextResponse.redirect(url);
+      }
     }
   }
 

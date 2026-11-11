@@ -22,6 +22,8 @@ import {
   getLocalizedZoneSlug35,
   getLocalizedGenreSlug35,
   getLocalizedEventSlug35,
+  isKnownActiveVenueSlug,
+  isLegacyUnlistedClubSlug,
 } from '../lib/i18n/localizedSlugs35';
 import {
   CAPODANNO_CATEGORY_IDS,
@@ -288,4 +290,170 @@ test('middleware issues 1-hop 308 redirects on legacy English paths and rewrites
     new URL(r8.headers.get('x-middleware-rewrite')!).pathname,
     `/es/events/${octEnSlug}`,
   );
+});
+
+test('anti-sabotage: bots, auditors and social unfurlers never trigger 307 or Set-Cookie', () => {
+  const botUAs = [
+    'Mozilla/5.0 (compatible; Google-InspectionTool/1.0;)',
+    'Mozilla/5.0 (Linux; Android 11; moto g power) AppleWebKit/537.36 Chrome-Lighthouse',
+    'WhatsApp/2.24.10.76 A',
+    'facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)',
+    'Twitterbot/1.0',
+    'Mozilla/5.0 (compatible; GPTBot/1.0; +https://openai.com/gptbot)',
+    'Mozilla/5.0 (compatible; PerplexityBot/1.0)',
+  ];
+  for (const ua of botUAs) {
+    const rootRes = middleware(
+      new NextRequest('https://nightlifemilan.com/', {
+        headers: { 'user-agent': ua, 'accept-language': 'it-IT,it;q=0.9' },
+      }),
+    );
+    assert.equal(rootRes.status, 200, `Bot UA "${ua}" was redirected on /`);
+    assert.equal(rootRes.headers.get('location'), null);
+    assert.equal(rootRes.headers.get('set-cookie'), null, `Bot UA "${ua}" received Set-Cookie on /`);
+
+    const itRes = middleware(
+      new NextRequest('https://nightlifemilan.com/it/tavoli-vip-milano', {
+        headers: { 'user-agent': ua, 'accept-language': 'it-IT,it;q=0.9' },
+      }),
+    );
+    assert.equal(itRes.status, 200);
+    assert.equal(itRes.headers.get('set-cookie'), null, `Bot UA "${ua}" received Set-Cookie on /it/tavoli-vip-milano`);
+  }
+
+  // Human visiting /en/clubs with NEXT_LOCALE=it persists NEXT_LOCALE=en on 308 redirect (no bounce back to /it)
+  const enSwitch = middleware(
+    new NextRequest('https://nightlifemilan.com/en/clubs', {
+      headers: {
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0.0.0',
+        'accept-language': 'it-IT,it;q=0.9',
+        cookie: 'NEXT_LOCALE=it',
+      },
+    }),
+  );
+  assert.equal(enSwitch.status, 308);
+  assert.equal(new URL(enSwitch.headers.get('location')!).pathname, '/clubs');
+  assert.match(enSwitch.headers.get('set-cookie') || '', /NEXT_LOCALE=en/);
+});
+
+test('anti-sabotage: bare dirs, unlisted clubs, past GSC events, mockEvents and fake 404s resolve cleanly in <= 1 hop', () => {
+  const mkBotReq = (pathname: string, acceptLang = 'it-IT,it;q=0.9') =>
+    new NextRequest(`https://nightlifemilan.com${pathname}`, {
+      headers: {
+        'user-agent': 'Mozilla/5.0 (compatible; Google-InspectionTool/1.0;)',
+        'accept-language': acceptLang,
+      },
+    });
+
+  // Bare localized directories and short aliases -> 1-hop 308 to 200 OK canonical hub
+  for (const [src, dest] of [
+    ['/it/locali', '/it/discoteche-locali-milano'],
+    ['/it/eventi', '/it/eventi-serate-milano'],
+    ['/it/guide', '/it/guide-vita-notturna-milano'],
+    ['/it/quartieri', '/it/quartieri-vita-notturna-milano'],
+    ['/it/generi', '/it/generi-musicali-discoteche-milano'],
+    ['/it/calendario', '/it/eventi/questa-settimana-milano'],
+    ['/it/prenotazione', '/it/concierge-vip-milano'],
+    ['/it/prenota', '/it/concierge-vip-milano'],
+    ['/it/eventi/stasera', '/it/eventi/stasera-milano'],
+    ['/it/capodanno-milano', '/it/capodanno-milano-discoteche'],
+    ['/sr/klub-milano', '/sr/klub-milano'],
+    ['/it/milan-fashion-week/events/some-runway-party', '/it/milano-fashion-week-eventi'],
+  ] as const) {
+    const r = middleware(mkBotReq(src));
+    if (src === dest) {
+      assert.equal(r.status, 200, `${src} should serve 200`);
+    } else {
+      assert.equal(r.status, 308, `${src} expected 308, got ${r.status}`);
+      assert.equal(new URL(r.headers.get('location')!).pathname, dest, `${src} wrong target`);
+      const hop2 = middleware(mkBotReq(dest));
+      assert.equal(hop2.status, 200, `${dest} (from ${src}) did not settle to 200 on hop 2`);
+      assert.equal(hop2.headers.get('location'), null);
+    }
+  }
+
+  // Unlisted catalog + historical GSC clubs -> 1-hop 308 to localized /clubs hub (both /clubs/* and localized dir)
+  assert.equal(isKnownActiveVenueSlug('just-me-milano'), true);
+  assert.equal(isKnownActiveVenueSlug('bobino-milano'), true);
+  assert.equal(isKnownActiveVenueSlug('gate-milano'), false);
+  assert.equal(isLegacyUnlistedClubSlug('gate-club-milano-tavoli-vip'), true);
+  assert.equal(isLegacyUnlistedClubSlug('encanto-club-latino'), true);
+
+  for (const [src, dest] of [
+    ['/clubs/gate-milano', '/clubs'],
+    ['/it/clubs/gate-milano', '/it/discoteche-locali-milano'],
+    ['/it/locali/gate-club-milano-tavoli-vip', '/it/discoteche-locali-milano'],
+    ['/it/clubs/encanto-club-latino', '/it/discoteche-locali-milano'],
+    ['/es/discotecas/old-fashion-milan-mesas-vip', '/es/discoteca-milan'],
+  ] as const) {
+    const r = middleware(mkBotReq(src));
+    assert.equal(r.status, 308, `${src} expected 308`);
+    assert.equal(new URL(r.headers.get('location')!).pathname, dest);
+  }
+
+  // Static mockEvents pre-registered at module load (Edge == Node parity, e.g. keinemusik on /ro/)
+  const roKeine = middleware(mkBotReq('/ro/events/keinemusik-milano-25-settembre-2026'));
+  assert.equal(roKeine.status, 308);
+  assert.equal(
+    new URL(roKeine.headers.get('location')!).pathname,
+    '/ro/evenimente/keinemusik-milan-25-september-2026-milano-petrecere',
+  );
+  const roKeine2 = middleware(mkBotReq('/ro/evenimente/keinemusik-milan-25-september-2026-milano-petrecere'));
+  assert.equal(roKeine2.status, 200);
+  assert.equal(roKeine2.headers.get('location'), null);
+
+  // MONDAY_NIGHT_PROFILE (siteLocales: ['en', 'it']) does NOT loop when Accept-Language is 'es'
+  const esMonday = middleware(
+    new NextRequest('https://nightlifemilan.com/es/eventos/just-me-milano-monday-night-july-20-2026', {
+      headers: {
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0.0.0',
+        'accept-language': 'es-ES,es;q=0.9',
+      },
+    }),
+  );
+  assert.equal(esMonday.status, 308);
+  const esMondayTarget = new URL(esMonday.headers.get('location')!).pathname;
+  assert.equal(esMondayTarget, '/events/just-me-milano-monday-night-july-20-2026');
+  const enMondayFollow = middleware(
+    new NextRequest(`https://nightlifemilan.com${esMondayTarget}`, {
+      headers: {
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130.0.0.0',
+        'accept-language': 'es-ES,es;q=0.9',
+      },
+    }),
+  );
+  assert.equal(enMondayFollow.status, 200);
+  assert.equal(enMondayFollow.headers.get('location'), null);
+
+  // University Party PT serves 200 on /pt/eventos/... and 1-hop 308s from non-PT locales
+  const ptUni = middleware(mkBotReq('/pt/eventos/university-party-just-me-tuesday-july-14-2026-2026-07-14'));
+  assert.equal(ptUni.status, 200);
+  assert.equal(ptUni.headers.get('location'), null);
+  const itUni = middleware(mkBotReq('/it/eventi/university-party-just-me-tuesday-july-14-2026-2026-07-14'));
+  assert.equal(itUni.status, 308);
+  assert.equal(
+    new URL(itUni.headers.get('location')!).pathname,
+    '/pt/eventos/university-party-just-me-tuesday-july-14-2026-2026-07-14',
+  );
+
+  // Past historical dated GSC event -> 1-hop 308 to localized active venue page
+  const pastJustMe = middleware(mkBotReq('/it/events/andrea-damante-justme-milano-2026-09-18'));
+  assert.equal(pastJustMe.status, 308);
+  assert.equal(
+    new URL(pastJustMe.headers.get('location')!).pathname,
+    '/it/locali/just-me-milano-tavoli-vip',
+  );
+
+  // Genuinely fake club & fake event URLs -> 0 redirects (fall through directly to real HTTP 404)
+  for (const fakeUrl of [
+    '/clubs/non-existent-fake-club-xyz-999',
+    '/it/clubs/non-existent-fake-club-xyz-999',
+    '/it/locali/non-existent-fake-club-xyz-999',
+    '/events/non-existent-fake-event-xyz-999',
+    '/it/eventi/non-existent-fake-event-xyz-999',
+  ]) {
+    const fakeRes = middleware(mkBotReq(fakeUrl));
+    assert.equal(fakeRes.status, 200, `Fake URL ${fakeUrl} must not redirect (${fakeRes.status})`);
+    assert.equal(fakeRes.headers.get('location'), null, `Fake URL ${fakeUrl} must not have Location header`);
+  }
 });

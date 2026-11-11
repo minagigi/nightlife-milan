@@ -7,13 +7,20 @@ import {
   type DirAndSubTokens,
 } from './dirTokens35';
 import { HALLOWEEN_NAVIGATION } from '@/lib/halloween/navigation';
+import { halloweenPath } from '@/lib/halloween/routes';
 import {
+  CAPODANNO_CATEGORY_IDS,
+  CAPODANNO_EVENT_BASE_SLUGS,
+  capodannoCategoryPath,
   capodannoCategorySlug,
+  capodannoEventPath,
   capodannoEventSlug,
   resolveCapodannoCategoryIdByLocalizedSlug,
   resolveCapodannoEventBaseSlugByLocalizedSlug,
 } from '@/lib/capodanno/routes';
 import { getEventBatchProfile, getEventBatchSlug } from '@/lib/eventBatchProfiles';
+import { UNIVERSITY_PARTY_CANONICAL_SLUG } from '@/lib/universityPartyPt';
+import routeSlugsJson from '@/lib/october-events/routeSlugs.json';
 
 export const ALL_35_LOCALES: readonly LocaleCode[] = [
   'en', 'it', 'es', 'fr', 'de', 'pt', 'nl', 'ru', 'tr', 'zh', 'ar',
@@ -414,9 +421,7 @@ const CANONICAL_VENUE_BASES: Array<{
   { canonicalSlug: 'loolapaloosa-milano', id: 'v-loolapaloosa', brandSlug: 'loolapaloosa', aliases: ['loolapaloosa', 'loolapaloosa-corso-como'] },
   { canonicalSlug: 'bobino-milano', id: 'v-bobino', brandSlug: 'bobino', aliases: ['bobino', 'bobino-club', 'bobino-club-milano', 'bobino-navigli'] },
   { canonicalSlug: 'dock-22-milano', id: 'v-dock22', brandSlug: 'dock-22', aliases: ['dock22', 'dock-22', 'dock22-milano', 'dock-22-milan'] },
-  { canonicalSlug: 'old-fashion-milano', id: 'v-oldfashion', brandSlug: 'old-fashion', aliases: ['old-fashion'] },
-  { canonicalSlug: 'grace-club-milano', id: 'v-graceclub', brandSlug: 'grace-club', aliases: ['grace-club', 'grace-milano', 'the-grace-club-milano'] },
-  // Extra venues in catalog
+  // Extra active venues in catalog (backed 1:1 by mockVenues)
   { canonicalSlug: 'play-club-milano', id: 'v-playclub', brandSlug: 'play-club', aliases: ['play-club'] },
   { canonicalSlug: 'radio-rooftop-bar-milano', id: 'v-radio-rooftop-bar-milano', brandSlug: 'radio-rooftop-bar', aliases: ['radio-rooftop'] },
   { canonicalSlug: 'the-roof-milano', id: 'v-the-roof-milano', brandSlug: 'the-roof', aliases: ['the-roof'] },
@@ -424,22 +429,7 @@ const CANONICAL_VENUE_BASES: Array<{
   { canonicalSlug: 'terrazza-gallia-milano', id: 'v-terrazza-gallia-milano', brandSlug: 'terrazza-gallia', aliases: ['terrazza-gallia'] },
   { canonicalSlug: 'ristorante-torre-milano', id: 'v-ristorante-torre-milano', brandSlug: 'ristorante-torre', aliases: ['ristorante-torre'] },
   { canonicalSlug: 'innocenti-evasioni-terrazza-triennale', id: 'v-innocenti-evasioni-terrazza-triennale', brandSlug: 'terrazza-triennale', aliases: ['terrazza-triennale'] },
-  { canonicalSlug: 'super-club-milano', id: 'v-super-club-milano', brandSlug: 'super-club', aliases: ['super-club'] },
-  { canonicalSlug: 'the-beach-milano', id: 'v-the-beach-milano', brandSlug: 'the-beach', aliases: ['the-beach', 'the-beach-club-milano'] },
-  { canonicalSlug: 'gate-milano', id: 'v-gate-milano', brandSlug: 'gate-club', aliases: ['gate', 'gate-club-milano'] },
-  { canonicalSlug: 'lime-milano', id: 'v-lime-milano', brandSlug: 'lime-club', aliases: ['lime', 'lime-club-milano'] },
-  { canonicalSlug: 'the-sanctuary-milano', id: 'v-the-sanctuary-milano', brandSlug: 'the-sanctuary', aliases: ['the-sanctuary', 'sanctuary-milano'] },
-  { canonicalSlug: 'apophis-club-milano', id: 'v-apophis-club-milano', brandSlug: 'apophis-club', aliases: ['apophis', 'apophis-milano'] },
-  { canonicalSlug: 'tunnel-club-milano', id: 'v-tunnel-club-milano', brandSlug: 'tunnel-club', aliases: ['tunnel', 'tunnel-milano'] },
-  { canonicalSlug: 'plastic-milano', id: 'v-plastic-milano', brandSlug: 'plastic-club', aliases: ['plastic', 'plastic-club-milano'] },
-  { canonicalSlug: 'dazi-milano', id: 'v-dazi-milano', brandSlug: 'dazi', aliases: ['dazi'] },
-  { canonicalSlug: 'nepentha-milano', id: 'v-nepentha-milano', brandSlug: 'nepentha', aliases: ['nepentha'] },
-  { canonicalSlug: 'twiga-milano', id: 'v-twiga-milano', brandSlug: 'twiga', aliases: ['twiga'] },
-  { canonicalSlug: 'vibe-room-milano', id: 'v-vibe-room-milano', brandSlug: 'vibe-room', aliases: ['vibe-room'] },
-  { canonicalSlug: 'hotel-costez-milano', id: 'v-hotel-costez-milano', brandSlug: 'hotel-costez', aliases: ['hotel-costez'] },
-  { canonicalSlug: 'cost-milano', id: 'v-cost-milano', brandSlug: 'cost-dining-club', aliases: ['cost', 'cost-dining-club'] },
-  { canonicalSlug: 'rocca-brivio-sforza-milano', id: 'v-rocca-brivio-sforza-milano', brandSlug: 'rocca-brivio-sforza', aliases: ['rocca-brivio-sforza'] },
-  { canonicalSlug: 'social-music-city-milano', id: 'v-social-music-city-milano', brandSlug: 'social-music-city', aliases: ['social-music-city'] },
+  { canonicalSlug: 'super-club-milano', id: 'v-super-club-milano', brandSlug: 'super-club', aliases: ['super-club', 'superclub', 'superclub-milano', 'superclub-milano-tortona'] },
 ];
 
 export const VENUE_SLUGS_35: Record<string, Record<LocaleCode, string>> = {};
@@ -454,6 +444,7 @@ for (const v of CANONICAL_VENUE_BASES) {
   VENUE_SLUGS_35[v.id] = map35;
   venueSlugToCanonical.set(v.canonicalSlug, v.canonicalSlug);
   venueSlugToCanonical.set(v.id, v.canonicalSlug);
+  venueSlugToCanonical.set(v.brandSlug, v.canonicalSlug);
   venueSlugToCanonical.set(`${v.brandSlug}-milano-tavoli-vip`, v.canonicalSlug);
   venueSlugToCanonical.set(`${v.brandSlug}-milan-vip-tables`, v.canonicalSlug);
   for (const alias of v.aliases) {
@@ -465,35 +456,91 @@ for (const v of CANONICAL_VENUE_BASES) {
   }
 }
 
+const VENUE_SUFFIXES: readonly string[] = (() => {
+  const s = new Set<string>();
+  for (const loc of ALL_35_LOCALES) {
+    const tk = SLUG_TOKENS_35[loc];
+    if (!tk) continue;
+    s.add(`-${tk.milan}-${tk.vipTables}`);
+    s.add(`-${tk.vipTables}`);
+    s.add(`-${tk.milan}`);
+  }
+  s.add('-milano');
+  s.add('-milan');
+  return [...s].sort((a, b) => b.length - a.length);
+})();
+
+const LEGACY_UNLISTED_CLUB_SET: ReadonlySet<string> = new Set([
+  // 17 removed catalog entries + brandSlugs + historical aliases
+  'old-fashion', 'old-fashion-milano', 'old-fashion-milan', 'old-fashion-triennale',
+  'grace-club', 'grace-milano', 'grace-club-milano', 'grace-club-milan', 'the-grace-club', 'the-grace-club-milano',
+  'the-beach', 'the-beach-milano', 'the-beach-milan', 'the-beach-club', 'the-beach-club-milano',
+  'gate', 'gate-club', 'gate-milano', 'gate-milan', 'gate-club-milano',
+  'lime', 'lime-club', 'lime-milano', 'lime-milan', 'lime-club-milano',
+  'the-sanctuary', 'the-sanctuary-milano', 'the-sanctuary-milan', 'sanctuary', 'sanctuary-milano', 'sanctuary-eco-retreat',
+  'apophis', 'apophis-club', 'apophis-milano', 'apophis-milan', 'apophis-club-milano',
+  'tunnel', 'tunnel-club', 'tunnel-milano', 'tunnel-milan', 'tunnel-club-milano',
+  'plastic', 'plastic-club', 'plastic-milano', 'plastic-milan', 'plastic-club-milano',
+  'dazi', 'dazi-milano', 'dazi-milan', 'dazi-arco-della-pace',
+  'nepentha', 'nepentha-club', 'nepentha-milano', 'nepentha-milan',
+  'twiga', 'twiga-club', 'twiga-milano', 'twiga-milan',
+  'vibe-room', 'vibe-room-milano', 'vibe-room-milan', 'viberoom', 'viberoom-milano',
+  'hotel-costez', 'hotel-costez-milano', 'costez', 'costez-milano',
+  'cost', 'cost-milano', 'cost-milan', 'cost-22', 'cost-22-milano', 'cost-dining-club', 'cost-dining-club-milano',
+  'rocca-brivio', 'rocca-brivio-sforza', 'rocca-brivio-sforza-milano',
+  'social-music-city', 'social-music-city-milano',
+  // Historical GSC Milan & Lombardy clubs without standalone venue detail pages
+  'shillings', 'shillings-milano', 'shillings-club', 'shillings-club-milano',
+  'duro', 'duro-club', 'duro-milano', 'duro-club-milano',
+  'encanto', 'encanto-club', 'encanto-club-latino', 'encanto-club-latino-milano', 'encanto-milano',
+  'philipps', 'philipps-club', 'philipps-milano', 'philipps-club-milano',
+  'pelledoca', 'pelledoca-milano', 'pelledoca-music-and-food',
+  'live-club', 'live-club-trezzo', 'live-club-trezzo-milano', 'live-music-club-trezzo',
+  'noir-club', 'noir-club-lissone', 'noir-lissone', 'noir-club-monza',
+  'rock-n-roll', 'rock-n-roll-milano', 'rocknroll-milano',
+  'legend-club', 'legend-club-milano',
+  'biko', 'biko-club', 'biko-milano',
+  'santeria', 'santeria-toscana-31', 'santeria-paladini-8', 'santeria-milano',
+  'nidaba', 'nidaba-theatre', 'nidaba-theatre-milano',
+  'la-cripta', 'la-cripta-club', 'la-cripta-club-milano',
+  'black-hole', 'black-hole-milano', 'blackhole-milano',
+  'kozel-carroponte', 'carroponte', 'carroponte-sesto-san-giovanni', 'carroponte-milano',
+  'molto-club', 'molto-carate-brianza', 'molto-club-milano',
+  'zoo-club', 'zoo-club-cinisello', 'zoo-club-milano',
+  'circolo-magnolia', 'magnolia-milano', 'circolo-magnolia-idroscalo',
+  'blue-note', 'blue-note-milano',
+  'movie-club', 'movie-club-desio', 'movie-club-milano',
+  'arci-bellezza', 'arci-bellezza-milano',
+  'oneway', 'oneway-sesto', 'oneway-club', 'oneway-club-milano',
+  'sali-milano', 'sali-e-tabacchi-milano',
+  'balera-dell-ortica', 'balera-ortica-milano',
+  'mood-live', 'mood-live-milano',
+  'spirit-de-milan', 'spirit-de-milan-milano',
+  'department-184', 'department-184-milano',
+  'ahynama', 'ahynama-club', 'ahynama-club-latino', 'ahynama-club-latino-milano',
+  'ciq', 'ciq-milano', 'ciq-milano-corvetto',
+  'the-dome', 'the-dome-milano',
+  'tambourine', 'tambourine-seregno', 'tambourine-seregno-brianza',
+  'bloom', 'bloom-mezzago', 'bloom-mezzago-brianza',
+  'q-club', 'q-club-milano',
+  'sio-cafe', 'sio-cafe-milano', 'sio-cafe-milano-bicocca',
+  'le-jardin', 'le-jardin-milano', 'le-jardin-au-bord-du-lac',
+  'rocket', 'rocket-club', 'rocket-club-milano',
+  'tempio-del-futuro-perduto', 'tempio-futuro-perduto-milano',
+  'base-milano', 'base-milano-tortona',
+  'jazz-cafe', 'jazz-cafe-milano',
+  'masada', 'masada-milano', 'circolo-amelia', 'amelia-milano',
+  'divina-milano', 'divina-club-milano', 'karma-milano', 'karma-borgo-milano',
+  'fura-desenzano', 'sesto-senso-desenzano', 'bolgia-bergamo', 'setai-bergamo', 'number-one-franciacorta',
+]);
+
 export function resolveVenueSlug(slug: string): string {
   const clean = sanitizeAsciiSlug(slug);
   const direct = venueSlugToCanonical.get(clean) || venueSlugToCanonical.get(slug);
   if (direct) return direct;
-  for (const loc of ALL_35_LOCALES) {
-    const tk = SLUG_TOKENS_35[loc];
-    if (!tk) continue;
-    const suffix = `-${tk.milan}-${tk.vipTables}`;
-    if (clean.endsWith(suffix)) {
+  for (const suffix of VENUE_SUFFIXES) {
+    if (clean.endsWith(suffix) && clean.length > suffix.length) {
       const base = clean.slice(0, -suffix.length);
-      return venueSlugToCanonical.get(base) || `${base}-milano`;
-    }
-  }
-  for (const loc of ALL_35_LOCALES) {
-    const tk = SLUG_TOKENS_35[loc];
-    if (!tk) continue;
-    const vipOnlySuffix = `-${tk.vipTables}`;
-    if (clean.endsWith(vipOnlySuffix)) {
-      const base = clean.slice(0, -vipOnlySuffix.length);
-      const hit = venueSlugToCanonical.get(base);
-      if (hit) return hit;
-    }
-  }
-  for (const loc of ALL_35_LOCALES) {
-    const tk = SLUG_TOKENS_35[loc];
-    if (!tk) continue;
-    const cityOnlySuffix = `-${tk.milan}`;
-    if (clean.endsWith(cityOnlySuffix)) {
-      const base = clean.slice(0, -cityOnlySuffix.length);
       const hit = venueSlugToCanonical.get(base);
       if (hit) return hit;
     }
@@ -501,14 +548,30 @@ export function resolveVenueSlug(slug: string): string {
   return slug;
 }
 
+export function isKnownActiveVenueSlug(slug: string): boolean {
+  const resolved = resolveVenueSlug(slug);
+  return Boolean(VENUE_SLUGS_35[resolved]);
+}
+
+export function isLegacyUnlistedClubSlug(slug: string): boolean {
+  if (isKnownActiveVenueSlug(slug)) return false;
+  const clean = sanitizeAsciiSlug(slug);
+  if (!clean) return false;
+  if (LEGACY_UNLISTED_CLUB_SET.has(clean)) return true;
+  for (const suffix of VENUE_SUFFIXES) {
+    if (clean.endsWith(suffix) && clean.length > suffix.length) {
+      const base = clean.slice(0, -suffix.length);
+      if (LEGACY_UNLISTED_CLUB_SET.has(base)) return true;
+    }
+  }
+  return false;
+}
+
 export function getLocalizedVenueSlug35(venueSlugOrId: string, locale: LocaleCode): string {
   const canonical = resolveVenueSlug(venueSlugOrId);
   const mapped = VENUE_SLUGS_35[canonical]?.[locale];
   if (mapped) return mapped;
-  if (locale === 'en') return canonical;
-  const tk = SLUG_TOKENS_35[locale] || SLUG_TOKENS_35.en;
-  const brand = canonical.replace(/-milano$/, '').replace(/-milan$/, '');
-  return sanitizeAsciiSlug(`${brand}-${tk.milan}-${tk.vipTables}`);
+  return canonical;
 }
 
 // ─── 2. ZONE SLUGS (All 14 Milan Zones) ──────────────────────────────────────
@@ -577,23 +640,18 @@ export function getLocalizedZoneSlug35(zoneSlug: string, locale: LocaleCode): st
   return sanitizeAsciiSlug(`${canonical}-${tk.milan}-${tk.nightlife}`);
 }
 
-// ─── 3. GENRE SLUGS (All Music Genres + Format Aliases) ──────────────────────
+// ─── 3. GENRE SLUGS (All 10 Backed Music Genres + Format Aliases) ────────────
 const CANONICAL_GENRES: Array<{ canonicalSlug: string; aliases: string[] }> = [
   { canonicalSlug: 'techno', aliases: ['techno-clubs-milan', 'techno-milano'] },
-  { canonicalSlug: 'house', aliases: ['house-music-milan', 'house-milano'] },
-  { canonicalSlug: 'afro-house', aliases: ['afro-house-melodic', 'afro-house-milano'] },
-  { canonicalSlug: 'hip-hop', aliases: ['hip-hop-urban', 'hip-hop-trap-milano'] },
-  { canonicalSlug: 'reggaeton', aliases: ['reggaeton-latin', 'reggaeton-milano'] },
-  { canonicalSlug: 'commercial', aliases: ['commercial-sing-along', 'commerciale-milano'] },
+  { canonicalSlug: 'house', aliases: ['house-music-milan', 'house-milano', 'tech-house', 'tech-house-milano'] },
+  { canonicalSlug: 'afro-house', aliases: ['afro-house-melodic', 'afro-house-milano', 'melodic-techno', 'melodic-techno-milano'] },
+  { canonicalSlug: 'hip-hop', aliases: ['hip-hop-urban', 'hip-hop-trap-milano', 'afrobeats', 'afrobeats-milano', 'rnb', 'trap'] },
+  { canonicalSlug: 'reggaeton', aliases: ['reggaeton-latin', 'reggaeton-milano', 'latin', 'latin-milano', 'musica-latina-milano'] },
+  { canonicalSlug: 'commercial', aliases: ['commercial-sing-along', 'commerciale-milano', 'open-format', 'open-format-milano', 'pop', 'disco'] },
   { canonicalSlug: 'dinner-show', aliases: ['dinner-show-aperitivo-cantato', 'cena-spettacolo-milano'] },
   { canonicalSlug: 'edm', aliases: ['edm-festival', 'edm-milano'] },
   { canonicalSlug: 'live-music', aliases: ['live-music-concerts', 'musica-dal-vivo-milano'] },
   { canonicalSlug: 'indie', aliases: ['indie-nu-disco', 'indie-milano'] },
-  { canonicalSlug: 'latin', aliases: ['latin-milano', 'musica-latina-milano'] },
-  { canonicalSlug: 'afrobeats', aliases: ['afrobeats-milano'] },
-  { canonicalSlug: 'open-format', aliases: ['open-format-milano'] },
-  { canonicalSlug: 'tech-house', aliases: ['tech-house-milano'] },
-  { canonicalSlug: 'melodic-techno', aliases: ['melodic-techno-milano'] },
 ];
 
 export const GENRE_SLUGS_35: Record<string, Record<LocaleCode, string>> = {};
@@ -611,6 +669,12 @@ for (const g of CANONICAL_GENRES) {
   for (const alias of g.aliases) {
     GENRE_SLUGS_35[alias] = map35;
     genreSlugToCanonical.set(alias, g.canonicalSlug);
+    for (const loc of ALL_35_LOCALES) {
+      const tk = SLUG_TOKENS_35[loc];
+      if (tk) {
+        genreSlugToCanonical.set(sanitizeAsciiSlug(`${alias}-${tk.milan}-${tk.music}`), g.canonicalSlug);
+      }
+    }
   }
   for (const locSlug of Object.values(map35)) {
     genreSlugToCanonical.set(locSlug, g.canonicalSlug);
@@ -627,19 +691,23 @@ export function resolveGenreSlug(slug: string): string {
     const suffix = `-${tk.milan}-${tk.music}`;
     if (clean.endsWith(suffix)) {
       const base = clean.slice(0, -suffix.length);
-      return genreSlugToCanonical.get(base) || base;
+      const hit = genreSlugToCanonical.get(base);
+      if (hit) return hit;
     }
   }
   return slug;
+}
+
+export function isKnownActiveGenreSlug(slug: string): boolean {
+  const resolved = resolveGenreSlug(slug);
+  return Boolean(GENRE_SLUGS_35[resolved]);
 }
 
 export function getLocalizedGenreSlug35(genreSlug: string, locale: LocaleCode): string {
   const canonical = resolveGenreSlug(genreSlug);
   const mapped = GENRE_SLUGS_35[canonical]?.[locale];
   if (mapped) return mapped;
-  if (locale === 'en') return canonical;
-  const tk = SLUG_TOKENS_35[locale] || SLUG_TOKENS_35.en;
-  return sanitizeAsciiSlug(`${canonical}-${tk.milan}-${tk.music}`);
+  return canonical;
 }
 
 // ─── 4. ALL 114 PILLAR GUIDES SLUGS (14 Core + 100 Expansion Guides) ─────────
@@ -951,11 +1019,102 @@ export function registerMockEventSlugs35(slugMap: Partial<Record<LocaleCode, str
   }
 }
 
-function stripDatedPartyPrefix(slug: string): string {
+// Pre-register all 66 static mockEvents at module load so Edge Runtime middleware
+// and Node SSR share 100% identical slug maps (eliminating Edge-vs-Node canonical mismatch).
+const STATIC_MOCK_EVENT_SPECS: ReadonlyArray<readonly [string, string]> = [
+  ['keinemusik-milan-25-september-2026', 'keinemusik-milan-25-september-2026'],
+  ['flower-power-ibiza-justme-12-06-2026', 'flower-power-ibiza-justme-12-06-2026'],
+  ['fashion-week-night-justme-20-06-2026', 'fashion-week-justme-20-06-2026'],
+  ['uncle-waffles-tyga-justme-25-06-2026', 'uncle-waffles-tyga-justme-25-06-2026'],
+  ['noche-de-perreo-pineta-12-06-2026', 'noche-de-perreo-pineta-12-06-2026'],
+  ['mfw-friday-pineta-19-06-2026', 'mfw-friday-pineta-19-06-2026'],
+  ['mfw-perreo-night-pineta-20-06-2026', 'mfw-perreo-night-pineta-20-06-2026'],
+  ['milan8mile-pineta-26-06-2026', 'milan8mile-pineta-26-06-2026'],
+  ['basement-magazzini-23-06-2026', 'basement-magazzini-23-06-2026'],
+  ['hatebreed-magazzini-24-06-2026', 'hatebreed-magazzini-24-06-2026'],
+  ['la-boum-magazzini-26-06-2026', 'la-boum-magazzini-26-06-2026'],
+  ['emergenza-live-final-magazzini-27-06-2026', 'emergenza-live-finale-magazzini-27-06-2026'],
+  ['volt-friday-techno-19-06-2026', 'volt-venerdi-techno-19-06-2026'],
+  ['volt-saturday-techno-20-06-2026', 'volt-sabato-techno-20-06-2026'],
+  ['gattopardo-saturday-06-06-2026', 'gattopardo-sabato-06-06-2026'],
+  ['gattopardo-friday-12-06-2026', 'gattopardo-venerdi-12-06-2026'],
+  ['armani-prive-mfw-opening-19-06-2026', 'armani-prive-apertura-mfw-19-06-2026'],
+  ['armani-prive-mfw-saturday-20-06-2026', 'armani-prive-sabato-mfw-20-06-2026'],
+  ['hollywood-friday-03-07-2026', 'hollywood-venerdi-03-07-2026'],
+  ['hollywood-saturday-04-07-2026', 'hollywood-sabato-04-07-2026'],
+  ['mib-gala-saturday-04-07-2026', 'mib-gala-sabato-04-07-2026'],
+  ['mib-monday-night-06-07-2026', 'mib-lunedi-notte-06-07-2026'],
+  ['girls-republic-theclub-18-07-2026', 'girls-republic-theclub-18-07-2026'],
+  ['superbe-theclub-19-07-2026', 'superbe-theclub-19-07-2026'],
+  ['atlanta-theclub-25-06-2026', 'atlanta-theclub-25-06-2026'],
+  ['aura-theclub-26-06-2026', 'aura-theclub-26-06-2026'],
+  ['girls-republic-theclub-27-06-2026', 'girls-republic-theclub-27-06-2026'],
+  ['ceresio-pool-saturday-04-07-2026', 'ceresio-piscine-sabato-04-07-2026'],
+  ['ceresio-poolside-aperitivo-11-07-2026', 'ceresio-aperitivo-bordo-piscina-11-07-2026'],
+  ['elite-playclub-19-07-2026', 'elite-playclub-19-07-2026'],
+  ['dinner-show-friday-55-milano-03-07-2026', 'dinner-show-venerdi-55-milano-03-07-2026'],
+  ['studio-55-saturday-04-07-2026', 'studio-55-sabato-04-07-2026'],
+  ['dirty-monday-repvblic-06-07-2026', 'dirty-monday-repvblic-06-07-2026'],
+  ['repvblic-saturday-04-07-2026', 'repvblic-sabato-04-07-2026'],
+  ['11clubroom-saturday-04-07-2026', '11clubroom-sabato-04-07-2026'],
+  ['11clubroom-saturday-18-07-2026', '11clubroom-sabato-18-07-2026'],
+  ['church81-friday-dinner-show-03-07-2026', 'church81-dinner-show-venerdi-03-07-2026'],
+  ['church81-saturday-dinner-show-04-07-2026', 'church81-dinner-show-sabato-04-07-2026'],
+  ['terrazza21-sunset-aperitivo-04-07-2026', 'terrazza21-aperitivo-tramonto-04-07-2026'],
+  ['terrazza21-summer-aperitivo-18-07-2026', 'terrazza21-aperitivo-estivo-18-07-2026'],
+  ['voya-rooftop-dj-night-05-07-2026', 'voya-rooftop-dj-night-05-07-2026'],
+  ['voya-rooftop-saturday-18-07-2026', 'voya-rooftop-sabato-18-07-2026'],
+  ['apollo-friday-navigli-03-07-2026', 'apollo-venerdi-navigli-03-07-2026'],
+  ['summer-nights-independence-day-justme-04-07-2026', 'summer-nights-4-luglio-justme-04-07-2026'],
+  ['noche-de-perreo-summer-pineta-04-07-2026', 'noche-de-perreo-estate-pineta-04-07-2026'],
+  ['volt-summer-techno-special-10-07-2026', 'volt-estate-techno-speciale-10-07-2026'],
+  ['voya-summer-sunset-july-11-07-2026', 'voya-estate-tramonto-luglio-11-07-2026'],
+  ['play-club-summer-hiphop-17-07-2026', 'play-club-estate-hiphop-17-07-2026'],
+  ['just-me-saturday-luxury-18-07-2026', 'just-me-sabato-lusso-18-07-2026'],
+  ['magazzini-generali-summer-rave-19-07-2026', 'magazzini-generali-summer-rave-19-07-2026'],
+  ['ceresio-7-summer-rooftop-aperitivo-25-07-2026', 'ceresio-7-aperitivo-estivo-rooftop-25-07-2026'],
+  ['pineta-summer-saturday-special-26-07-2026', 'pineta-sabato-speciale-estivo-26-07-2026'],
+  ['ferragosto-luxury-night-just-me-14-08-2026', 'notte-ferragosto-just-me-14-08-2026'],
+  ['volt-ferragosto-techno-marathon-14-08-2026', 'volt-ferragosto-marathon-techno-14-08-2026'],
+  ['pineta-ferragosto-aperitivo-club-15-08-2026', 'pineta-ferragosto-aperitivo-club-15-08-2026'],
+  ['play-club-end-of-summer-22-08-2026', 'play-club-fine-estate-22-08-2026'],
+  ['armani-prive-late-summer-gala-29-08-2026', 'armani-prive-gala-fine-estate-29-08-2026'],
+  ['san-siro-derby-inter-milan-official-afterparty-aria-club', 'dopo-partita-derby-inter-milan-san-siro-aria-club'],
+  ['derby-della-madonnina-vip-afterparty-just-me-milano', 'dopo-partita-derby-milano-tavoli-vip-just-me'],
+  ['champions-league-night-afterparty-just-me-milano', 'dopo-partita-champions-league-san-siro-just-me-milano'],
+  ['san-siro-post-match-skyline-party-voya-rooftop', 'terzo-tempo-san-siro-aperitivo-djset-voya-rooftop'],
+  ['saturday-serie-a-post-match-party-pineta-milano', 'dopo-partita-sabato-serie-a-pineta-club-milano'],
+  ['san-siro-post-match-dinner-show-55-milano', 'cena-e-serata-dopo-partita-san-siro-55-milano'],
+  ['new-years-eve-2027-grand-gala-just-me-milano', 'capodanno-2027-gran-gala-torre-branca-just-me-milano'],
+  ['new-years-eve-2027-winter-dome-aria-club-milano', 'capodanno-2027-san-siro-winter-dome-aria-club-milano'],
+  ['new-years-eve-2027-skyline-fireworks-voya-rooftop-milan', 'capodanno-2027-vista-fuochi-skyline-voya-rooftop-milano'],
+];
+
+for (const [enSlug, itSlug] of STATIC_MOCK_EVENT_SPECS) {
+  const map35 = build35SlugMap((locale, tk) => {
+    if (locale === 'en') return enSlug;
+    if (locale === 'it') return itSlug;
+    return `${enSlug}-${tk.milan}-${tk.party}`;
+  });
+  registerMockEventSlugs35(map35);
+  if (enSlug === 'keinemusik-milan-25-september-2026') {
+    mockEventSlugToMap.set('keinemusik-milano-25-settembre-2026', map35);
+  }
+}
+
+const DATED_PARTY_PREFIXES: readonly string[] = (() => {
+  const s = new Set<string>();
   for (const loc of ALL_35_LOCALES) {
     const tk = SLUG_TOKENS_35[loc];
-    if (!tk) continue;
-    const prefix = `${tk.party}-${tk.milan}-`;
+    if (tk) s.add(`${tk.party}-${tk.milan}-`);
+  }
+  return [...s].sort((a, b) => b.length - a.length);
+})();
+
+const OCTOBER_ROUTE_SLUGS_SET: ReadonlySet<string> = new Set(routeSlugsJson as string[]);
+
+function stripDatedPartyPrefix(slug: string): string {
+  for (const prefix of DATED_PARTY_PREFIXES) {
     if (slug.startsWith(prefix)) {
       return slug.slice(prefix.length);
     }
@@ -1247,6 +1406,54 @@ for (const spec of SEO_HUB_SPECS) {
   }
 }
 
+function addHubAliasIfMissing(rawAlias: string, canonicalPath: string): void {
+  const parts = rawAlias.split('/').filter(Boolean).map(sanitizeAsciiSlug);
+  if (parts.length === 0) return;
+  const cleanAlias = '/' + parts.join('/');
+  if (!localizedSeoPathToCanonical.has(cleanAlias)) {
+    localizedSeoPathToCanonical.set(cleanAlias, canonicalPath);
+  }
+}
+
+addHubAliasIfMissing('/prenota', '/concierge');
+addHubAliasIfMissing('/prenotazioni', '/concierge');
+addHubAliasIfMissing('/prenotazione', '/concierge');
+addHubAliasIfMissing('/calendario', '/events/this-week');
+addHubAliasIfMissing('/calendar', '/events/this-week');
+
+for (const locale of ALL_35_LOCALES) {
+  const tk = SLUG_TOKENS_35[locale];
+  const dt = DIR_AND_SUB_TOKENS_35[locale];
+  if (!tk || !dt) continue;
+  // Bare localized parent directories -> canonical hubs (1-hop 308)
+  addHubAliasIfMissing(`/${dt.clubsDir}`, '/clubs');
+  addHubAliasIfMissing(`/${dt.eventsDir}`, '/events');
+  addHubAliasIfMissing(`/${dt.guidesDir}`, '/guides');
+  addHubAliasIfMissing(`/${dt.zonesDir}`, '/zones');
+  addHubAliasIfMissing(`/${dt.genresDir}`, '/genres');
+  addHubAliasIfMissing(`/${dt.calendarDir}`, '/events/this-week');
+  addHubAliasIfMissing(`/${dt.bookingDir}`, '/concierge');
+  // Short localized event & calendar subpaths -> canonical sub-hubs
+  addHubAliasIfMissing(`/${dt.eventsDir}/${dt.tonight}`, '/events/tonight');
+  addHubAliasIfMissing(`/${dt.eventsDir}/${dt.thisWeek}`, '/events/this-week');
+  addHubAliasIfMissing(`/${dt.eventsDir}/${dt.special}`, '/events/special');
+  addHubAliasIfMissing(`/${dt.eventsDir}/${dt.best}`, '/events/best');
+  addHubAliasIfMissing(`/${dt.eventsDir}/${dt.archive}`, '/events/past');
+  addHubAliasIfMissing(`/${dt.eventsDir}/${dt.age18}`, '/events/18-plus');
+  addHubAliasIfMissing(`/${dt.eventsDir}/${dt.age21}`, '/events/21-plus');
+  addHubAliasIfMissing(`/${dt.eventsDir}/${dt.international}`, '/events/international');
+  addHubAliasIfMissing(`/${dt.eventsDir}/${dt.university}`, '/events/university-erasmus');
+  addHubAliasIfMissing(`/${dt.calendarDir}/${dt.tonight}`, '/events/tonight');
+  addHubAliasIfMissing(`/${dt.calendarDir}/${dt.thisWeek}`, '/events/this-week');
+  addHubAliasIfMissing(`/${dt.bookingDir}/${dt.confirmed}`, '/booking/success');
+  // Short localized hub stems without extra suffix
+  addHubAliasIfMissing(`/${tk.newYearsEve}-${tk.milan}`, '/new-years-eve');
+  addHubAliasIfMissing(`/${tk.club}-${tk.milan}`, '/clubs');
+  addHubAliasIfMissing(`/${tk.party}-${tk.milan}`, '/events');
+  addHubAliasIfMissing(`/${tk.guide}-${tk.milan}`, '/guides');
+  addHubAliasIfMissing(`/${tk.zone}-${tk.milan}`, '/zones');
+}
+
 export function getLocalizedSeoPagePath35(canonicalPath: string, locale: LocaleCode): string {
   const norm = canonicalPath.startsWith('/') ? canonicalPath : `/${canonicalPath}`;
   if (norm === '/events/halloween-2026') {
@@ -1277,13 +1484,13 @@ export function resolveSeoHubPathToCanonical(pathWithoutLocale: string, locale?:
     const parentCanonical = resolveParentDirSegment(segments[0]);
     const itemSlug = segments[1];
     if (parentCanonical === '/clubs') {
-      return `/clubs/${resolveVenueSlug(itemSlug)}`;
+      return isKnownActiveVenueSlug(itemSlug) ? `/clubs/${resolveVenueSlug(itemSlug)}` : undefined;
     }
     if (parentCanonical === '/zones') {
       return `/zones/${resolveZoneSlug(itemSlug)}`;
     }
     if (parentCanonical === '/genres') {
-      return `/genres/${resolveGenreSlug(itemSlug)}`;
+      return isKnownActiveGenreSlug(itemSlug) ? `/genres/${resolveGenreSlug(itemSlug)}` : undefined;
     }
     if (parentCanonical === '/guides') {
       const gid = resolveExistingGuideId(itemSlug);
@@ -1368,6 +1575,9 @@ export function localizeInternalHref(rawHref: string, fallbackLocale: LocaleCode
     const rawItemSlug = restSegments[1];
 
     if (parentCanonical === '/clubs') {
+      if (!isKnownActiveVenueSlug(rawItemSlug)) {
+        return `${lp}${restPath}${suffix}`;
+      }
       const locVenue = getLocalizedVenueSlug35(rawItemSlug, locale);
       return `${lp}/${getLocalizedDir35('clubs', locale)}/${locVenue}${suffix}`;
     }
@@ -1376,6 +1586,9 @@ export function localizeInternalHref(rawHref: string, fallbackLocale: LocaleCode
       return `${lp}/${getLocalizedDir35('zones', locale)}/${locZone}${suffix}`;
     }
     if (parentCanonical === '/genres') {
+      if (!isKnownActiveGenreSlug(rawItemSlug)) {
+        return `${lp}${restPath}${suffix}`;
+      }
       const locGenre = getLocalizedGenreSlug35(rawItemSlug, locale);
       return `${lp}/${getLocalizedDir35('genres', locale)}/${locGenre}${suffix}`;
     }
@@ -1406,4 +1619,198 @@ export function localizeInternalHref(rawHref: string, fallbackLocale: LocaleCode
   }
 
   return `${lp}${restPath}${suffix}`;
+}
+
+const LEGACY_NYE_VENUE_TO_BASE: Readonly<Record<string, string>> = {
+  '55-milano': 'capodanno-55-milano',
+  'just-me-milano': 'capodanno-justme-milano-torre-branca',
+  'tocqueville-13-milano': 'capodanno-tocqueville-13-milano',
+  'armani-prive-milano': 'capodanno-armani-prive-milano',
+  'the-club-milano': 'capodanno-the-club-milano',
+  'hollywood-milano': 'capodanno-hollywood-milano',
+  'pineta-milano': 'capodanno-pineta-milano',
+  'voya-club-milano': 'capodanno-voya-rooftop-milano',
+  'aria-club-milano': 'capodanno-aria-club-milano',
+  'rocca-brivio-sforza-milano': 'capodanno-in-castello-tolcinasco-malpaga-chignolo-po',
+  'fabrique-milano': 'capodanno-fabrique-milano',
+  'magazzini-generali-milano': 'capodanno-magazzini-generali-milano',
+  'alcatraz-milano': 'capodanno-alcatraz-milano',
+  'gattopardo-milano': 'capodanno-il-gattopardo-milano',
+  'the-grace-club-milano': 'capodanno-grace-club-milano',
+};
+
+const NYE_EVENT_STEM_MATCHERS: ReadonlyArray<readonly [RegExp, string]> = CAPODANNO_EVENT_BASE_SLUGS.map((base) => {
+  const core = base
+    .replace(/^capodanno-/, '')
+    .replace(/-milano(?:-.*)?$/, '')
+    .replace(/^(?:in-|il-|la-|le-|the-)/, '');
+  const escaped = core.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return [new RegExp(`(?:^|-)${escaped}(?:-|$)`, 'i'), base] as const;
+});
+
+const NYE_CAT_STEM_MATCHERS: ReadonlyArray<readonly [RegExp, string]> = [
+  [/(?:^|-)(?:rooftop|terrazz|terrace|skyline)(?:-|$)/i, 'capodanno-rooftop-milano'],
+  [/(?:^|-)(?:hotel-5|ville-castelli|villas-castles|luxury-hotel|castell|villa)(?:-|$)/i, 'capodanno-hotel-5-stelle-ville-castelli'],
+  [/(?:^|-)(?:cenone|gala-dinner|dinner-show|cena)(?:-|$)/i, 'capodanno-locali-cenone-milano'],
+  [/(?:^|-)(?:coppie|couples|romantic)(?:-|$)/i, 'capodanno-coppie-romantico-milano'],
+  [/(?:^|-)(?:single|singles|solter)(?:-|$)/i, 'capodanno-single-milano'],
+  [/(?:^|-)(?:famigli|family|bambini|kids)(?:-|$)/i, 'capodanno-famiglie-bambini-milano'],
+  [/(?:^|-)(?:over-30|over-40|30-40)(?:-|$)/i, 'capodanno-over-30-40-milano'],
+  [/(?:^|-)(?:techno|elettronic|electronic)(?:-|$)/i, 'capodanno-techno-elettronica-milano'],
+  [/(?:^|-)(?:latino|reggaeton|hip-?hop)(?:-|$)/i, 'capodanno-latino-reggaeton-hiphop-milano'],
+  [/(?:^|-)(?:economico|low-cost|budget|cheap)(?:-|$)/i, 'capodanno-economico-low-cost-milano'],
+  [/(?:^|-)(?:terme|spa|baita|chalet|montagna)(?:-|$)/i, 'capodanno-terme-spa-baita-montagna'],
+  [/(?:^|-)(?:piazza|square|free-public)(?:-|$)/i, 'capodanno-in-piazza'],
+  [/(?:^|-)(?:lombardia|lombardy|como|garda|bergamo|brescia|livigno)(?:-|$)/i, 'capodanno-lombardia'],
+  [/(?:^|-)(?:discotec|nightclub|clubs)(?:-|$)/i, 'capodanno-discoteche-milano'],
+];
+
+const ACTIVE_VENUE_EVENT_MATCHERS: ReadonlyArray<readonly [RegExp, string]> = [
+  [/(?:^|-)(?:just-me|justme)(?:-|$)/i, 'just-me-milano'],
+  [/(?:^|-)(?:pineta)(?:-|$)/i, 'pineta-club-milano'],
+  [/(?:^|-)(?:aria-club|aria-milano|aria-milan)(?:-|$)/i, 'aria-club-milano'],
+  [/(?:^|-)(?:voya)(?:-|$)/i, 'voya-rooftop-milan'],
+  [/(?:^|-)(?:55-milano|55milano|studio-55|cinquantacinque)(?:-|$)/i, '55-milano'],
+  [/(?:^|-)(?:repvblic|republic-milano)(?:-|$)/i, 'repvblic-milano'],
+  [/(?:^|-)(?:tocqueville)(?:-|$)/i, 'tocqueville-13-milano'],
+  [/(?:^|-)(?:armani-prive)(?:-|$)/i, 'armani-prive-milano'],
+  [/(?:^|-)(?:volt-club|volt-milano|volt)(?:-|$)/i, 'volt-club-milano'],
+  [/(?:^|-)(?:alcatraz)(?:-|$)/i, 'alcatraz-milano'],
+  [/(?:^|-)(?:fabrique)(?:-|$)/i, 'fabrique-milano'],
+  [/(?:^|-)(?:amnesia)(?:-|$)/i, 'amnesia-milano'],
+  [/(?:^|-)(?:hollywood)(?:-|$)/i, 'hollywood-club-milano'],
+  [/(?:^|-)(?:the-club|theclub)(?:-|$)/i, 'the-club-milano'],
+  [/(?:^|-)(?:11-clubroom|11clubroom|eleven-clubroom)(?:-|$)/i, '11-clubroom'],
+  [/(?:^|-)(?:gattopardo)(?:-|$)/i, 'gattopardo-milano'],
+  [/(?:^|-)(?:mib-milano|mib)(?:-|$)/i, 'mib-milano'],
+  [/(?:^|-)(?:terrazza-21|terrazza21|terrazza-duomo)(?:-|$)/i, 'terrazza-21'],
+  [/(?:^|-)(?:ceresio-7|ceresio)(?:-|$)/i, 'ceresio-7-milano'],
+  [/(?:^|-)(?:apollo-club|apollo-milano|apollo)(?:-|$)/i, 'apollo-club-milano'],
+  [/(?:^|-)(?:magazzini-generali|magazzini)(?:-|$)/i, 'magazzini-generali-milano'],
+  [/(?:^|-)(?:church-81|church81)(?:-|$)/i, 'church-81'],
+  [/(?:^|-)(?:loolapaloosa)(?:-|$)/i, 'loolapaloosa-milano'],
+  [/(?:^|-)(?:bobino)(?:-|$)/i, 'bobino-milano'],
+  [/(?:^|-)(?:dock-22|dock22)(?:-|$)/i, 'dock-22-milano'],
+  [/(?:^|-)(?:play-club|playclub)(?:-|$)/i, 'play-club-milano'],
+  [/(?:^|-)(?:radio-rooftop)(?:-|$)/i, 'radio-rooftop-bar-milano'],
+  [/(?:^|-)(?:the-roof)(?:-|$)/i, 'the-roof-milano'],
+  [/(?:^|-)(?:terrazza-aperol)(?:-|$)/i, 'terrazza-aperol-milano'],
+  [/(?:^|-)(?:terrazza-gallia)(?:-|$)/i, 'terrazza-gallia-milano'],
+  [/(?:^|-)(?:ristorante-torre)(?:-|$)/i, 'ristorante-torre-milano'],
+  [/(?:^|-)(?:terrazza-triennale|innocenti-evasioni)(?:-|$)/i, 'innocenti-evasioni-terrazza-triennale'],
+  [/(?:^|-)(?:super-club|superclub)(?:-|$)/i, 'super-club-milano'],
+];
+
+const LEGACY_HALLOWEEN_2026_RE = /(?:^|-)(?:halloween|noc-vjestica|noc-vestica|noc-carovnic|cadilar-bayrami|wanshengjie|halowin|helouin|hellouin|helovins|helovinas|hellovin|hlekkjavaka|oiche-shamhna|nokj-na-vesticite)(?:-|$)/i;
+const LEGACY_NYE_2027_RE = /(?:^|-)(?:capodanno|new-years-eve|nye|nochevieja|ano-nuevo|reveillon|nouvel-an|silvester|sylwester|silvestr|revelion|szilveszter|uusivuosi|nytaarsaften|nyarsafton|nyttarsaften|oud-en-nieuw|novyy-god|novyy-rik|nova-godina|kuanian|ras-alsana|yilbasi|protochronia|gamlarskvold|aastavahetus|jaunais-gads|naujieji-metai|viti-i-ri|docek-nove-godine|silvestrovanje|oiche-chinn-bliana|lejlet-l-ewwel-tas-sena)(?:-|$)/i;
+const HISTORICAL_PAST_EVENT_DATE_RE = /(?:^|-)(?:202[45]-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\d|3[01])|2026-0[1-9]-(?:0[1-9]|[12]\d|3[01])|(?:0[1-9]|[12]\d|3[01])-0[1-9]-2026|(?:0[1-9]|[12]\d|3[01])-(?:0[1-9]|1[0-2])-202[45]|(?:january|february|march|april|may|june|july|august|september|gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre)-\d{1,2}-202[456]|\d{1,2}-(?:january|february|march|april|may|june|july|august|september|gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre)-202[456])(?:$|-)/i;
+
+export function resolveLegacyOrExpiredEventRedirect(rawSlug: string, targetLocale: LocaleCode): string | null {
+  if (!rawSlug) return null;
+  const slug = sanitizeAsciiSlug(rawSlug) || rawSlug;
+  const stripped = stripDatedPartyPrefix(slug);
+
+  // 1. University Party PT editorial page: serve 200 on PT, 1-hop 308 to PT from any other locale
+  if (slug === UNIVERSITY_PARTY_CANONICAL_SLUG || stripped === UNIVERSITY_PARTY_CANONICAL_SLUG) {
+    return targetLocale === 'pt'
+      ? null
+      : `/pt/${getLocalizedDir35('events', 'pt')}/${UNIVERSITY_PARTY_CANONICAL_SLUG}`;
+  }
+
+  // 2. Active batch/site-only event profiles (including July 2026 profiles)
+  const batchProfile = getEventBatchProfile(rawSlug) || getEventBatchProfile(slug) || getEventBatchProfile(stripped);
+  if (batchProfile) {
+    const destLocale: LocaleCode = batchProfile.siteLocales
+      ? (batchProfile.siteLocales.includes(targetLocale) ? targetLocale : batchProfile.siteLocales[0])
+      : targetLocale;
+    const destSlug = getEventBatchSlug(batchProfile, destLocale);
+    const lp = destLocale === 'en' ? '' : `/${destLocale}`;
+    return `${lp}/${getLocalizedDir35('events', destLocale)}/${destSlug}`;
+  }
+
+  // 3. Old Capodanno venue-category compound slugs from guideSlugs100Map
+  const capLegacy = CAPODANNO_REVERSE_TO_EN[rawSlug] || CAPODANNO_REVERSE_TO_EN[slug];
+  if (capLegacy?.type === 'venue') {
+    const mappedBase = LEGACY_NYE_VENUE_TO_BASE[capLegacy.venueSlug];
+    if (mappedBase) {
+      return capodannoEventPath(mappedBase, targetLocale);
+    }
+    return capodannoCategoryPath(capLegacy.catId || 'capodanno-discoteche-milano', targetLocale);
+  }
+
+  // 4. Protect all live/editorial event slugs (sub-hubs, Halloween, Capodanno, Weekly, MockEvents, October+ Xceed)
+  if (
+    RESERVED_EVENT_SUBPATHS.has(rawSlug) ||
+    RESERVED_EVENT_SUBPATHS.has(slug) ||
+    HALLOWEEN_SET.has(rawSlug) ||
+    HALLOWEEN_SET.has(slug) ||
+    CAPODANNO_LEGACY_SET.has(rawSlug) ||
+    CAPODANNO_LEGACY_SET.has(slug) ||
+    Boolean(resolveCapodannoCategoryIdByLocalizedSlug(rawSlug, targetLocale)) ||
+    Boolean(resolveCapodannoEventBaseSlugByLocalizedSlug(rawSlug, targetLocale)) ||
+    capLegacy?.type === 'hub' ||
+    capLegacy?.type === 'cat' ||
+    weeklyEventSlugToCanonical.has(rawSlug) ||
+    weeklyEventSlugToCanonical.has(slug) ||
+    weeklyEventSlugToCanonical.has(stripped) ||
+    mockEventSlugToMap.has(rawSlug) ||
+    mockEventSlugToMap.has(slug) ||
+    mockEventSlugToMap.has(stripped) ||
+    OCTOBER_ROUTE_SLUGS_SET.has(rawSlug) ||
+    OCTOBER_ROUTE_SLUGS_SET.has(slug) ||
+    OCTOBER_ROUTE_SLUGS_SET.has(stripped)
+  ) {
+    return null;
+  }
+
+  // 4b. Known GSC typo/renamed variants of live October & Keinemusik events
+  if (/^manhattan-project-pineta-club-2026-10-02(?:-[a-z]{2})?$/i.test(stripped)) {
+    const destHref = targetLocale === 'en'
+      ? '/events/manhattan-project-pineta-milano-2026-10-02'
+      : `/${targetLocale}/events/manhattan-project-pineta-milano-2026-10-02`;
+    return localizeInternalHref(destHref, targetLocale);
+  }
+  if (/^keinemusik-.*2026$/i.test(stripped)) {
+    const destHref = targetLocale === 'en'
+      ? '/events/keinemusik-milan-25-september-2026'
+      : `/${targetLocale}/events/keinemusik-milan-25-september-2026`;
+    return localizeInternalHref(destHref, targetLocale);
+  }
+
+  // 5. Legacy flat Halloween 2026 event slugs crawled by GSC
+  if (stripped.includes('2026') && LEGACY_HALLOWEEN_2026_RE.test(stripped)) {
+    return halloweenPath(targetLocale);
+  }
+
+  // 6. Legacy flat Capodanno / NYE 2027 event slugs crawled by GSC
+  if (stripped.includes('2027') && LEGACY_NYE_2027_RE.test(stripped)) {
+    for (const [re, baseSlug] of NYE_EVENT_STEM_MATCHERS) {
+      if (re.test(stripped)) {
+        return capodannoEventPath(baseSlug, targetLocale);
+      }
+    }
+    for (const [re, catId] of NYE_CAT_STEM_MATCHERS) {
+      if (re.test(stripped)) {
+        return capodannoCategoryPath(catId, targetLocale);
+      }
+    }
+    return capodannoCategoryPath('capodanno-2027', targetLocale);
+  }
+
+  // 7. Historical dated events prior to October 2026 OR truncated legacy Eventbrite venue-prefixed imports
+  const isTruncatedLegacyVenueEvent =
+    stripped.length >= 60 && /^(?:just-me-|55-milano-|pineta-|aria-club-|voya-)/i.test(stripped);
+  if (HISTORICAL_PAST_EVENT_DATE_RE.test(stripped) || isTruncatedLegacyVenueEvent) {
+    for (const [re, venueCanonicalSlug] of ACTIVE_VENUE_EVENT_MATCHERS) {
+      if (re.test(stripped)) {
+        const destHref = targetLocale === 'en' ? `/clubs/${venueCanonicalSlug}` : `/${targetLocale}/clubs/${venueCanonicalSlug}`;
+        return localizeInternalHref(destHref, targetLocale);
+      }
+    }
+    const fallbackHref = targetLocale === 'en' ? '/events/this-week' : `/${targetLocale}/events/this-week`;
+    return localizeInternalHref(fallbackHref, targetLocale);
+  }
+
+  // 8. Unknown / genuinely fake event URL -> fall through to real HTTP 404
+  return null;
 }
