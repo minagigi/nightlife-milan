@@ -1,5 +1,6 @@
 import { getEventCalendarCopy } from './eventCalendarCopy';
+import { withWhatsApp } from './seoMetadata';
 
 export function getEventHubSerpDecisionDescription(locale: string, _kind: string): string {
-  return getEventCalendarCopy(locale).verifiedNote;
+  return withWhatsApp(getEventCalendarCopy(locale).verifiedNote, locale);
 }

@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { hreflangAlternates } from '@/lib/i18n/locales';
+import { getLocaleDef, hreflangAlternates } from '@/lib/i18n/locales';
 import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
 import NewsletterHub from '@/components/NewsletterHub';
@@ -81,7 +81,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       type: 'website',
       url: canonical,
       siteName: 'Nightlife Milan',
-      locale: isIt ? 'it_IT' : 'en_US',
+      locale: getLocaleDef(locale)?.ogLocale || 'en_US',
       images: [
         {
           url: ogImage,
@@ -347,7 +347,7 @@ export default async function GuidesPage({
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-champagne/30 bg-champagne/10 mb-5">
             <Sparkles className="w-3.5 h-3.5 text-champagne" />
             <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-champagne">
-              {isIt ? '114 Guide Pillar Ufficiali · Edizione 2026/2027' : '114 Official Pillar Guides · 2026/2027 Edition'}
+              {tr(locale, '14 Official Pillar Guides · 2026/2027 Edition', '14 Guide Pillar Ufficiali · Edizione 2026/2027')}
             </span>
           </div>
           <h1 className="font-serif text-5xl md:text-7xl font-bold text-champagne tracking-tighter mb-6">

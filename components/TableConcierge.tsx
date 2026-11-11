@@ -17,6 +17,8 @@ export type TableConciergeCopy = {
   requestTitle: string;
   eventLabel: string;
   requestAction: string;
+  heroAnchorAction?: string;
+  trustBadges?: readonly [string, string, string];
   detailAction: string;
   disclaimer: string;
   eventsTitle: string;
@@ -35,6 +37,13 @@ type Props = {
   showEventList?: boolean;
 };
 
+const GROUP_PRESETS = [
+  { label: '2–4', value: 4 },
+  { label: '5–8', value: 6 },
+  { label: '9–12', value: 10 },
+  { label: '15+', value: 15 },
+] as const;
+
 function eventSelectLabel(event: TableConciergeEvent, locale: string): string {
   const localizedTitle = locale === 'ar'
     ? /^(.*)\s+في\s+[^—–]+\s+[—–]\s+[^—–]+$/u.exec(event.title)?.[1]
@@ -48,7 +57,7 @@ export default function TableConcierge({ locale, events, initialNow, copy, surfa
   const [now, setNow] = useState(() => new Date(initialNow));
   const [requestedDay, setRequestedDay] = useState('');
   const [requestedEvent, setRequestedEvent] = useState('');
-  const [groupSize, setGroupSize] = useState(2);
+  const [groupSize, setGroupSize] = useState(4);
   const [preference, setPreference] = useState('');
   const requestRef = useRef<HTMLDivElement>(null);
   const selectRef = useRef<HTMLSelectElement>(null);
@@ -119,14 +128,14 @@ export default function TableConcierge({ locale, events, initialNow, copy, surfa
         <div className={styles.heroCopy}>
           <p className={styles.eyebrow}>{copy.eyebrow}</p>
           {surface === 'home'
-            ? <h1 id={`tc-title-${surface}`} className={styles.title}>{locale === 'it' && copy.title === 'La notte parte dal tavolo.' ? <>La notte <br />parte dal <br /><span className={styles.titleAccent}>tavolo.</span></> : copy.title}</h1>
+            ? <h1 id={`tc-title-${surface}`} className={styles.title}>{copy.title}</h1>
             : <h2 id={`tc-title-${surface}`} className={styles.title}>{copy.title}</h2>}
           <p className={styles.lead}>{copy.lead}</p>
           {homeIntro && <>
             <p className={styles.legacyIntro}>{homeIntro.sub}</p>
             <p className={styles.pills}>{homeIntro.pills}</p>
           </>}
-          <a className={styles.primaryLink} href={`#tc-request-${surface}`}>{copy.requestAction}<span aria-hidden="true">↗</span></a>
+          <a className={styles.primaryLink} href={`#tc-request-${surface}`}>{copy.heroAnchorAction || copy.requestAction}<span aria-hidden="true">↓</span></a>
           {homeIntro && <div className={styles.heroLinks}>
             <Link href={`${lp}/events/tonight`} prefetch={false}>{homeIntro.ctaSub} ↓</Link>
             <Link href={`${lp}/clubs`} prefetch={false}>{homeIntro.allVenues} ↗</Link>
@@ -163,14 +172,42 @@ export default function TableConcierge({ locale, events, initialNow, copy, surfa
                 {dayEvents.map((event) => <option key={event.id} value={event.id} dir="auto" title={`${event.title} · ${event.venueName}`}>{eventSelectLabel(event, locale)}</option>)}
               </select>
               <label className={styles.fieldLabel} htmlFor={`tc-group-${surface}`}>{controlCopy.group}</label>
-              <input id={`tc-group-${surface}`} className={styles.input} type="number" inputMode="numeric" min={1} max={99}
-                value={groupSize} onChange={(event) => setGroupSize(Math.max(1, Math.min(99, Number(event.currentTarget.value) || 1)))} />
+              <div className={styles.groupRow}>
+                <div className={styles.groupChips} role="group" aria-label={controlCopy.group}>
+                  {GROUP_PRESETS.map((preset) => {
+                    const active = (preset.value === 4 && groupSize >= 2 && groupSize <= 4)
+                      || (preset.value === 6 && groupSize >= 5 && groupSize <= 8)
+                      || (preset.value === 10 && groupSize >= 9 && groupSize <= 14)
+                      || (preset.value === 15 && groupSize >= 15);
+                    return (
+                      <button
+                        key={preset.label}
+                        type="button"
+                        className={styles.groupChip}
+                        aria-pressed={active}
+                        onClick={() => setGroupSize(preset.value)}
+                      >
+                        {preset.label}
+                      </button>
+                    );
+                  })}
+                </div>
+                <input id={`tc-group-${surface}`} className={styles.groupNumber} type="number" inputMode="numeric" min={1} max={99}
+                  value={groupSize} onChange={(event) => setGroupSize(Math.max(1, Math.min(99, Number(event.currentTarget.value) || 1)))} />
+              </div>
               <label className={styles.fieldLabel} htmlFor={`tc-preference-${surface}`}>{controlCopy.preference}</label>
               <input id={`tc-preference-${surface}`} className={styles.input} type="text" maxLength={120} autoComplete="off"
                 value={preference} onChange={(event) => setPreference(event.currentTarget.value)} />
               <a className={styles.requestLink} href={waUrl} target="_blank" rel="noopener noreferrer">
                 {copy.requestAction}<span aria-hidden="true">↗</span>
               </a>
+              {copy.trustBadges && (
+                <div className={styles.trustRow}>
+                  {copy.trustBadges.map((badge) => (
+                    <span key={badge} className={styles.trustBadge}>✓ {badge}</span>
+                  ))}
+                </div>
+              )}
               {selected && <Link className={styles.detailLink} href={`${lp}/events/${selected.slug}`} prefetch={false}>{copy.detailAction} ↗</Link>}
             </>
           ) : (

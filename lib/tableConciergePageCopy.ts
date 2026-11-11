@@ -1,6 +1,4 @@
-import type { LocaleCode } from './i18n/locales';
-import { currentHomeDict, currentVipTablesDict } from './i18n/currentSafePageCopy';
-import { resolveStrictPageCopy } from './i18n/strictPageCopy';
+import { isEnabledLocale, type LocaleCode } from './i18n/locales';
 import { getEventCardCopy } from './i18n/eventCardCopy';
 import { getHeroCopy } from './i18n/heroCopy';
 import type { TableConciergeCopy } from '@/components/TableConcierge';
@@ -43,36 +41,105 @@ const GENERIC_EVENT_COPY: Record<LocaleCode, { eventsTitle: string; empty: strin
   mk: { eventsTitle: 'Следни клубски настани во Милано', empty: 'Контактирајте на WhatsApp +39 351 912 7047 за VIP маси и списоци.' },
 };
 
+const LEAD_COPY: Record<LocaleCode, string> = {
+  en: 'Select your club, date and group size: our 7/7 Milan Concierge desk (+39 351 912 7047) sends floor plans, bottle lists, minimum spend options and fast-track VIP table or nominal guest-list access.',
+  it: 'Seleziona locale, data e numero di ospiti: il nostro Concierge Milano attivo 7 giorni su 7 (+39 351 912 7047) invia planimetrie privé, listini bottiglie, minimum spend e accredito in lista nominale o tavolo VIP.',
+  es: 'Selecciona club, fecha y número de personas: nuestro Concierge en Milán 7/7 (+39 351 912 7047) te envía planos VIP, cartas de botellas, consumo mínimo y acceso en lista o mesa VIP.',
+  fr: 'Sélectionnez le club, la date et la taille du groupe : notre Conciergerie Milan 7j/7 (+39 351 912 7047) transmet les plans des carrés VIP, cartes des bouteilles, minimum spend et guest list ou table VIP.',
+  de: 'Wählen Sie Club, Datum und Gruppengröße: Unser 7/7 Mailand-Concierge (+39 351 912 7047) sendet Ihnen VIP-Tischpläne, Flaschenkarten, Mindestverzehr sowie Gästelisten- und VIP-Tisch-Service.',
+  pt: 'Selecione clube, data e número de convidados: o nosso Concierge em Milão 7/7 (+39 351 912 7047) envia plantas das áreas VIP, cartas de garrafas, consumo mínimo e lista nominal ou mesa VIP.',
+  nl: 'Kies uw club, datum en groepsgrootte: onze 7/7 Milaan Concierge (+39 351 912 7047) stuurt plattegronden, flessenlijsten, minimum spend en directe VIP-tafel of gastenlijsttoegang.',
+  ru: 'Выберите клуб, дату и размер компании: наш консьерж в Милане 7/7 (+39 351 912 7047) отправит схемы залов, барные карты, условия депозита и оформит VIP-стол или гостевой список.',
+  tr: 'Kulüp, tarih ve kişi sayısını seçin: 7/7 Milano Concierge ekibimiz (+39 351 912 7047) masa planlarını, şişe listelerini, minimum harcama seçeneklerini ve VIP masa veya davetli listesi girişini iletir.',
+  zh: '选择夜店、日期与同行人数：米兰 7/7 礼宾部 (+39 351 912 7047) 即刻发送卡座平面图、酒水单、最低消费标准，并安排 VIP 卡座或嘉宾名单快速入场。',
+  ar: 'اختر النادي والتاريخ وعدد الضيوف: يرسل مكتب كونسيرج ميلانو 7/7 (+39 351 912 7047) مخططات الطاولات وقوائم المشروبات والحد الأدنى للإنفاق وتأكيد طاولة VIP أو قائمة الضيوف.',
+  bg: 'Изберете клуб, дата и брой гости: нашият консиерж в Милано 7/7 (+39 351 912 7047) изпраща схеми на масите, ценови листи за бутилки и резервация на VIP маса или списък.',
+  hr: 'Odaberite klub, datum i broj osoba: naš 7/7 Milano Concierge (+39 351 912 7047) šalje tlocrte separea, cjenike boca, minimalnu potrošnju i prijavu na popis gostiju ili VIP stol.',
+  cs: 'Vyberte klub, datum a počet osob: náš 7/7 milánský concierge (+39 351 912 7047) zašle plánky VIP zón, nápojové lístky, minimální útratu a zajistí VIP stůl či guestlist.',
+  da: 'Vælg klub, dato og gruppestørrelse: vores 7/7 Milano Concierge (+39 351 912 7047) sender bordplaner, flaskelister, minimum spend og hurtig adgang via VIP-bord eller gæsteliste.',
+  et: 'Valige klubi, kuupäev ja seltskonna suurus: meie 7/7 Milano Concierge (+39 351 912 7047) saadab saaliplaanid, pudelikirjad, miinimumkulu ja VIP-laua või külalistenimekirja kinnituse.',
+  fi: 'Valitse klubi, päivämäärä ja seurueen koko: 7/7 Milano Concierge (+39 351 912 7047) lähettää pöytäkartat, pullolistat, minimikulutuksen sekä VIP-pöytä- tai vieraslistavarauksen.',
+  el: 'Επιλέξτε κλαμπ, ημερομηνία και αριθμό ατόμων: το 7/7 Concierge Μιλάνου (+39 351 912 7047) αποστέλλει κατόψεις privé, καταλόγους φιαλών, ελάχιστη κατανάλωση και κράτηση VIP τραπεζιού ή λίστας.',
+  hu: 'Válassza ki a klubot, a dátumot és a létszámot: 7/7 milánói concierge-szolgálatunk (+39 351 912 7047) elküldi az asztaltérképeket, itallapokat, minimum fogyasztást és a VIP asztal vagy vendéglista visszaigazolását.',
+  ga: 'Roghnaigh club, dáta agus líon na n-aíonna: seolann ár Concierge Milano 7/7 (+39 351 912 7047) pleananna urláir, liostaí buidéal agus rochtain ar bhord VIP nó liosta aíonna.',
+  lv: 'Izvēlieties klubu, datumu un viesu skaitu: mūsu 7/7 Milānas Concierge (+39 351 912 7047) nosūta zāles plānus, pudeļu kartes, minimālo pasūtījumu un VIP galdiņa vai viesu saraksta rezervāciju.',
+  lt: 'Pasirinkite klubą, datą ir žmonių skaičių: mūsų 7/7 Milano Concierge (+39 351 912 7047) atsiųs salės planus, gėrimų kainoraščius, minimalią sumą ir VIP staliuko ar svečių sąrašo patvirtinimą.',
+  mt: 'Agħżel il-klabb, id-data u n-numru ta’ mistednin: il-Concierge tagħna f’Milan 7/7 (+39 351 912 7047) jibgħat pjanti tal-imwejjed, listi tal-fliexken u aċċess VIP jew lista.',
+  pl: 'Wybierz klub, datę i liczbę gości: nasz 7/7 Concierge w Mediolanie (+39 351 912 7047) wyśle plany stref VIP, karty butelek, kwoty minimum spend oraz rezerwację stolika VIP lub listy gości.',
+  ro: 'Selectează clubul, data și numărul de persoane: serviciul nostru Concierge Milano 7/7 (+39 351 912 7047) trimite planul meselor VIP, lista de sticle, consumul minim și rezervarea mesei sau listei.',
+  sk: 'Vyberte klub, dátum a počet osôb: náš 7/7 milánsky concierge (+39 351 912 7047) pošle plániky VIP zón, cenníky fliaš, minimálnu útratu a rezerváciu VIP stola alebo guestlistu.',
+  sl: 'Izberite klub, datum in število oseb: naš 7/7 Milano Concierge (+39 351 912 7047) pošlje načrte VIP miz, cenike pijač, minimalno porabo ter rezervacijo VIP mize ali seznama gostov.',
+  sv: 'Välj klubb, datum och sällskapets storlek: vår 7/7 Milano Concierge (+39 351 912 7047) skickar bordsplaner, flasklistor, minimum spend och snabb bokning av VIP-bord eller gästlista.',
+  no: 'Velg klubb, dato og antall gjester: vår 7/7 Milano Concierge (+39 351 912 7047) sender bordkart, flaskelister, minimum spend og rask reservasjon av VIP-bord eller gjesteliste.',
+  is: 'Veldu klúbb, dagsetningu og fjölda: 7/7 Mílanó Concierge (+39 351 912 7047) sendir borðaskipan, flöskulista, lágmarksupphæð og bókun á VIP-borði eða gestalista.',
+  uk: 'Оберіть клуб, дату та кількість гостей: наш консьєрж у Мілані 7/7 (+39 351 912 7047) надішле схеми залів, карти напоїв, умови депозиту та оформить VIP-стіл або список гостей.',
+  sq: 'Zgjidhni klubin, datën dhe numrin e personave: Concierge ynë 7/7 në Milano (+39 351 912 7047) dërgon planimetritë VIP, listat e pijeve, konsumin minimal dhe rezervimin e tavolinës VIP ose listës.',
+  sr: 'Izaberite klub, datum i broj gostiju: naš 7/7 Milano Concierge (+39 351 912 7047) šalje mape separea, cenovnike flaša, minimalnu potrošnju i rezervaciju VIP stola ili spiska gostiju.',
+  bs: 'Odaberite klub, datum i broj gostiju: naš 7/7 Milano Concierge (+39 351 912 7047) šalje mape separea, cjenovnike boca, minimalnu potrošnju i rezervaciju VIP stola ili liste gostiju.',
+  mk: 'Изберете клуб, датум и број на гости: нашиот 7/7 Милано Concierge (+39 351 912 7047) испраќа распоред на маси, ценовници за шишиња и резервација на VIP маса или список.',
+};
+
+const SHARED_UI_COPY: Record<LocaleCode, { eyebrow: string; disclaimer: string; eventsLead: string; allEvents: string }> = {
+  en: { eyebrow: 'Official Concierge Desk · 18:00–05:00 CET', disclaimer: 'Direct WhatsApp assistance 7/7 (+39 351 912 7047) for VIP tables, bottle service, aperitivo and nominal guest lists.', eventsLead: 'Upcoming club nights & DJ sets in Milan', allEvents: 'View full calendar' },
+  it: { eyebrow: 'Desk Concierge Ufficiale · 18:00–05:00 CET', disclaimer: 'Assistenza diretta WhatsApp 7/7 (+39 351 912 7047) per tavoli VIP, bottle service, aperitivo royal e accredito in lista nominale.', eventsLead: 'Serate, DJ set e format nei club di Milano', allEvents: 'Vedi calendario completo' },
+  es: { eyebrow: 'Desk Concierge Oficial · 18:00–05:00 CET', disclaimer: 'Asistencia directa por WhatsApp 7/7 (+39 351 912 7047) para mesas VIP, botellas, aperitivo y listas de invitados.', eventsLead: 'Fiestas y DJ sets en los clubes de Milán', allEvents: 'Ver calendario completo' },
+  fr: { eyebrow: 'Conciergerie Officielle · 18h00–05h00 CET', disclaimer: 'Assistance directe WhatsApp 7j/7 (+39 351 912 7047) pour tables VIP, bouteilles, aperitivo et listes d’invités.', eventsLead: 'Soirées club et DJ sets à Milan', allEvents: 'Voir tout le calendrier' },
+  de: { eyebrow: 'Offizieller Concierge-Desk · 18:00–05:00 CET', disclaimer: 'Direkter WhatsApp-Support 7/7 (+39 351 912 7047) für VIP-Tische, Flaschenservice, Aperitivo und Gästelisten.', eventsLead: 'Clubnächte und DJ-Sets in Mailand', allEvents: 'Gesamten Kalender ansehen' },
+  pt: { eyebrow: 'Desk Concierge Oficial · 18:00–05:00 CET', disclaimer: 'Atendimento direto no WhatsApp 7/7 (+39 351 912 7047) para mesas VIP, garrafas, aperitivo e listas de convidados.', eventsLead: 'Festas e DJ sets nos clubes de Milão', allEvents: 'Ver calendário completo' },
+  nl: { eyebrow: 'Officiële Concierge Desk · 18:00–05:00 CET', disclaimer: 'Directe WhatsApp-service 7/7 (+39 351 912 7047) voor VIP-tafels, bottle service, aperitivo en gastenlijsten.', eventsLead: 'Clubavonden en DJ-sets in Milaan', allEvents: 'Volledige kalender bekijken' },
+  ru: { eyebrow: 'Официальный консьерж · 18:00–05:00 CET', disclaimer: 'Прямая поддержка в WhatsApp 7/7 (+39 351 912 7047): VIP-столы, депозиты, аперитиво и списки гостей.', eventsLead: 'Клубные ночи и DJ-сеты в Милане', allEvents: 'Весь календарь событий' },
+  tr: { eyebrow: 'Resmi Concierge Masası · 18:00–05:00 CET', disclaimer: 'VIP masalar, şişe servisi, aperitivo ve davetli listeleri için 7/7 doğrudan WhatsApp desteği (+39 351 912 7047).', eventsLead: 'Milano kulüp geceleri ve DJ setleri', allEvents: 'Tüm takvimi gör' },
+  zh: { eyebrow: '官方礼宾台 · 18:00–05:00 CET', disclaimer: '7/7 全天候 WhatsApp 专线 (+39 351 912 7047)，提供 VIP 卡座、酒水套餐、开胃酒与嘉宾名单预订。', eventsLead: '米兰近期夜店派对与 DJ 演出', allEvents: '查看完整日历' },
+  ar: { eyebrow: 'مكتب الكونسيرج الرسمي · 18:00–05:00 CET', disclaimer: 'خدمة مباشرة عبر واتساب 7/7 (+39 351 912 7047) لطاولات VIP وخدمة الزجاجات والأبيريتيفو وقوائم الضيوف.', eventsLead: 'سهرات النوادي وعروض الدي جي في ميلانو', allEvents: 'عرض التقويم الكامل' },
+  bg: { eyebrow: 'Официален консиерж · 18:00–05:00 CET', disclaimer: 'Директно съдействие в WhatsApp 7/7 (+39 351 912 7047) за VIP маси, бутилки, аперитиво и списъци с гости.', eventsLead: 'Клубни вечери и DJ сетове в Милано', allEvents: 'Виж целия календар' },
+  hr: { eyebrow: 'Službeni Concierge Desk · 18:00–05:00 CET', disclaimer: 'Izravna WhatsApp podrška 7/7 (+39 351 912 7047) za VIP stolove, boce, aperitivo i popise gostiju.', eventsLead: 'Klupske večeri i DJ setovi u Milanu', allEvents: 'Pogledaj cijeli kalendar' },
+  cs: { eyebrow: 'Oficiální Concierge Desk · 18:00–05:00 CET', disclaimer: 'Přímá podpora přes WhatsApp 7/7 (+39 351 912 7047) pro VIP stoly, bottle service, aperitivo a guestlisty.', eventsLead: 'Klubové noci a DJ sety v Miláně', allEvents: 'Zobrazit celý kalendář' },
+  da: { eyebrow: 'Officiel Concierge Desk · 18:00–05:00 CET', disclaimer: 'Direkte WhatsApp-hjælp 7/7 (+39 351 912 7047) til VIP-borde, bottle service, aperitivo og gæstelister.', eventsLead: 'Klubaftener og DJ-sets i Milano', allEvents: 'Se hele kalenderen' },
+  et: { eyebrow: 'Ametlik Concierge · 18:00–05:00 CET', disclaimer: 'Otseabi WhatsAppis 7/7 (+39 351 912 7047) VIP-laudade, pudeliteeninduse, aperitivo ja nimekirjade jaoks.', eventsLead: 'Klubiõhtud ja DJ-setid Milanos', allEvents: 'Vaata kogu kalendrit' },
+  fi: { eyebrow: 'Virallinen Concierge · 18:00–05:00 CET', disclaimer: 'Suora WhatsApp-palvelu 7/7 (+39 351 912 7047) VIP-pöytiin, pullopalveluun, aperitivoon ja vieraslistoihin.', eventsLead: 'Klubi-illat ja DJ-setit Milanossa', allEvents: 'Katso koko kalenteri' },
+  el: { eyebrow: 'Επίσημο Concierge Desk · 18:00–05:00 CET', disclaimer: 'Άμεση εξυπηρέτηση WhatsApp 7/7 (+39 351 912 7047) για VIP τραπέζια, φιάλες, aperitivo και λίστες.', eventsLead: 'Βραδιές κλαμπ και DJ sets στο Μιλάνο', allEvents: 'Πλήρες ημερολόγιο' },
+  hu: { eyebrow: 'Hivatalos Concierge Desk · 18:00–05:00 CET', disclaimer: 'Közvetlen WhatsApp-segítség 7/7 (+39 351 912 7047) VIP asztalokhoz, italszervizhez, aperitivóhoz és vendéglistákhoz.', eventsLead: 'Klubestek és DJ-szettek Milánóban', allEvents: 'Teljes naptár megtekintése' },
+  ga: { eyebrow: 'Deasc Oifigiúil Concierge · 18:00–05:00 CET', disclaimer: 'Cúnamh díreach WhatsApp 7/7 (+39 351 912 7047) do bhoird VIP, seirbhís buidéal, aperitivo agus liostaí aíonna.', eventsLead: 'Oícheanta club agus tacair DJ i Milano', allEvents: 'Féach ar an bhféilire iomlán' },
+  lv: { eyebrow: 'Oficiālais Concierge · 18:00–05:00 CET', disclaimer: 'Tiešs WhatsApp atbalsts 7/7 (+39 351 912 7047) VIP galdiņiem, pudeļu servisam, aperitivo un viesu sarakstiem.', eventsLead: 'Klubu vakari un DJ seti Milānā', allEvents: 'Skatīt pilnu kalendāru' },
+  lt: { eyebrow: 'Oficialus Concierge · 18:00–05:00 CET', disclaimer: 'Tiesioginė pagalba per WhatsApp 7/7 (+39 351 912 7047) dėl VIP staliukų, gėrimų, aperityvo ir svečių sąrašų.', eventsLead: 'Klubų vakarai ir DJ pasirodymai Milane', allEvents: 'Peržiūrėti visą kalendorių' },
+  mt: { eyebrow: 'Desk Uffiċjali Concierge · 18:00–05:00 CET', disclaimer: 'Assistenza diretta fuq WhatsApp 7/7 (+39 351 912 7047) għal imwejjed VIP, fliexken, aperitivo u listi.', eventsLead: 'Serati fil-klabbs u DJ sets f’Milan', allEvents: 'Ara l-kalendarju kollu' },
+  pl: { eyebrow: 'Oficjalny Concierge Desk · 18:00–05:00 CET', disclaimer: 'Bezpośrednia pomoc na WhatsApp 7/7 (+39 351 912 7047): stoliki VIP, serwis butelkowy, aperitivo i listy gości.', eventsLead: 'Imprezy klubowe i sety DJ-skie w Mediolanie', allEvents: 'Zobacz pełny kalendarz' },
+  ro: { eyebrow: 'Concierge Oficial · 18:00–05:00 CET', disclaimer: 'Asistență directă pe WhatsApp 7/7 (+39 351 912 7047) pentru mese VIP, bottle service, aperitivo și liste.', eventsLead: 'Seri de club și DJ seturi în Milano', allEvents: 'Vezi calendarul complet' },
+  sk: { eyebrow: 'Oficiálny Concierge Desk · 18:00–05:00 CET', disclaimer: 'Priama podpora cez WhatsApp 7/7 (+39 351 912 7047) pre VIP stoly, fľaše, aperitivo a zoznamy hostí.', eventsLead: 'Klubové noci a DJ sety v Miláne', allEvents: 'Zobraziť celý kalendár' },
+  sl: { eyebrow: 'Uradni Concierge Desk · 18:00–05:00 CET', disclaimer: 'Neposredna pomoč na WhatsAppu 7/7 (+39 351 912 7047) za VIP mize, pijačo, aperitivo in sezname gostov.', eventsLead: 'Klubski večeri in DJ seti v Milanu', allEvents: 'Poglej celoten koledar' },
+  sv: { eyebrow: 'Officiell Concierge Desk · 18:00–05:00 CET', disclaimer: 'Direkt WhatsApp-service 7/7 (+39 351 912 7047) för VIP-bord, flaskservice, aperitivo och gästlistor.', eventsLead: 'Klubbkvällar och DJ-set i Milano', allEvents: 'Visa hela kalendern' },
+  no: { eyebrow: 'Offisiell Concierge Desk · 18:00–05:00 CET', disclaimer: 'Direkte WhatsApp-hjelp 7/7 (+39 351 912 7047) for VIP-bord, flaskeservice, aperitivo og gjestelister.', eventsLead: 'Klubbkvelder og DJ-sets i Milano', allEvents: 'Se hele kalenderen' },
+  is: { eyebrow: 'Opinbert Concierge-borð · 18:00–05:00 CET', disclaimer: 'Bein WhatsApp-þjónusta 7/7 (+39 351 912 7047) fyrir VIP-borð, flöskuþjónustu, aperitivo og gestalista.', eventsLead: 'Klúbbakvöld og plötusnúðar í Mílanó', allEvents: 'Skoða allt dagatalið' },
+  uk: { eyebrow: 'Офіційний консьєрж · 18:00–05:00 CET', disclaimer: 'Пряма підтримка у WhatsApp 7/7 (+39 351 912 7047): VIP-столи, депозити, аперитиво та списки гостей.', eventsLead: 'Клубні ночі та DJ-сети в Мілані', allEvents: 'Увесь календар подій' },
+  sq: { eyebrow: 'Desk Zyrtar Concierge · 18:00–05:00 CET', disclaimer: 'Asistencë direkte në WhatsApp 7/7 (+39 351 912 7047) për tavolina VIP, shishe, aperitivo dhe lista.', eventsLead: 'Mbrëmje klubi dhe DJ set në Milano', allEvents: 'Shiko kalendarin e plotë' },
+  sr: { eyebrow: 'Zvanični Concierge Desk · 18:00–05:00 CET', disclaimer: 'Direktna WhatsApp podrška 7/7 (+39 351 912 7047) za VIP stolove, flaše, aperitivo i spiskove gostiju.', eventsLead: 'Klupske večeri i DJ setovi u Milanu', allEvents: 'Pogledaj ceo kalendar' },
+  bs: { eyebrow: 'Zvanični Concierge Desk · 18:00–05:00 CET', disclaimer: 'Direktna WhatsApp podrška 7/7 (+39 351 912 7047) za VIP stolove, boce, aperitivo i liste gostiju.', eventsLead: 'Klupske večeri i DJ setovi u Milanu', allEvents: 'Pogledaj cijeli kalendar' },
+  mk: { eyebrow: 'Официјален Concierge Desk · 18:00–05:00 CET', disclaimer: 'Директна WhatsApp поддршка 7/7 (+39 351 912 7047) за VIP маси, шишиња, аперитиво и списоци на гости.', eventsLead: 'Клупски вечери и DJ сетови во Милано', allEvents: 'Види го целиот календар' },
+};
+
 export function getTableConciergeLead(locale: string): string {
-  return resolveStrictPageCopy(locale, {
-    en: 'Select your preferred club, date and group size: our 7/7 Milan Concierge desk (+39 351 912 7047) provides floor plans, bottle menus, minimum spend options and fast-track VIP table or nominal guest-list assistance.',
-    it: 'Seleziona locale, data e numero di ospiti: il nostro Concierge Milano attivo 7 giorni su 7 (+39 351 912 7047) ti invia planimetrie privé, listini bottiglie, minimum spend e accredito nominale in lista o tavolo VIP.',
-    es: 'Selecciona club, fecha y número de personas: nuestro Concierge en Milán 7/7 (+39 351 912 7047) te envía planos de zonas VIP, cartas de botellas, consumo mínimo y acceso en lista o mesa VIP.',
-    fr: 'Sélectionnez le club, la date et la taille du groupe : notre Conciergerie Milan 7j/7 (+39 351 912 7047) vous transmet les plans des carrés VIP, cartes des bouteilles, minimum spend et accréditation liste ou table VIP.',
-    de: 'Wählen Sie Club, Datum und Gruppengröße: Unser 7/7 Mailand-Concierge (+39 351 912 7047) sendet Ihnen VIP-Tischpläne, Flaschenkarten, Mindestverzehr-Optionen sowie Gästelisten- und VIP-Tisch-Service.',
-    pt: 'Selecione clube, data e número de convidados: o nosso Concierge em Milão 7/7 (+39 351 912 7047) envia plantas das áreas VIP, cartas de garrafas, consumo mínimo e acreditação em lista ou mesa VIP.',
-  }, currentVipTablesDict, { trace: 'table-concierge.lead' });
+  const code = (isEnabledLocale(locale) ? locale : 'en') as LocaleCode;
+  return LEAD_COPY[code];
 }
 
 export function getTableConciergeSharedCopy(locale: string): Pick<TableConciergeCopy,
-  'eyebrow' | 'requestTitle' | 'eventLabel' | 'requestAction' | 'detailAction' | 'disclaimer' | 'eventsTitle' | 'eventsLead' | 'empty' | 'allEvents'> {
-  const home = resolveStrictPageCopy(locale, {
-    en: { eyebrow: 'Official Concierge Desk · 18:00–05:00 CET', eventLabel: 'Milan Nightlife — Tonight & This Week', requestAction: 'Book / Inquire on WhatsApp', disclaimer: 'Direct WhatsApp assistance 7/7 (+39 351 912 7047) for VIP tables, bottle service, aperitivo and nominal guest lists.', eventsTitle: 'Upcoming Nights This Week', eventsLead: 'Upcoming club nights & DJ sets in Milan', empty: 'Contact WhatsApp +39 351 912 7047 for tonight’s full line-up and VIP availability.', allEvents: 'View full calendar' },
-    it: { eyebrow: 'Desk Concierge Ufficiale · 18:00–05:00 CET', eventLabel: 'Serate Milano — Stasera e Questa Settimana', requestAction: 'Prenota / Chiedi su WhatsApp', disclaimer: 'Assistenza diretta WhatsApp 7/7 (+39 351 912 7047) per tavoli VIP, bottle service, aperitivo royal e accredito in lista nominale.', eventsTitle: 'Prossime Serate della Settimana', eventsLead: 'Serate, DJ set e format nei club di Milano', empty: 'Scrivi su WhatsApp +39 351 912 7047 per la line-up completa e la disponibilità tavoli di stasera.', allEvents: 'Vedi calendario completo' },
-    es: { eyebrow: 'Desk Concierge Oficial · 18:00–05:00 CET', eventLabel: 'Eventos en Milán — Esta Noche y Esta Semana', requestAction: 'Reservar por WhatsApp', disclaimer: 'Asistencia directa por WhatsApp 7/7 (+39 351 912 7047) para mesas VIP, botellas, aperitivo y listas de invitados.', eventsTitle: 'Próximos Eventos de Esta Semana', eventsLead: 'Fiestas y DJ sets en los clubes de Milán', empty: 'Escribe por WhatsApp +39 351 912 7047 para conocer la programación de esta noche.', allEvents: 'Ver calendario completo' },
-    fr: { eyebrow: 'Conciergerie Officielle · 18h00–05h00 CET', eventLabel: 'Soirées à Milan — Ce Soir et Cette Semaine', requestAction: 'Réserver sur WhatsApp', disclaimer: 'Assistance directe WhatsApp 7j/7 (+39 351 912 7047) pour tables VIP, bouteilles, aperitivo et listes d’invités.', eventsTitle: 'Soirées à Venir Cette Semaine', eventsLead: 'Soirées club et DJ sets à Milan', empty: 'Écrivez sur WhatsApp +39 351 912 7047 pour la programmation complète de ce soir.', allEvents: 'Voir tout le calendrier' },
-    de: { eyebrow: 'Offizieller Concierge-Desk · 18:00–05:00 CET', eventLabel: 'Events in Mailand — Heute Abend & Diese Woche', requestAction: 'Per WhatsApp reservieren', disclaimer: 'Direkter WhatsApp-Support 7/7 (+39 351 912 7047) für VIP-Tische, Flaschenservice, Aperitivo und Gästelisten.', eventsTitle: 'Kommende Events Diese Woche', eventsLead: 'Clubnächte und DJ-Sets in Mailand', empty: 'Schreiben Sie uns per WhatsApp +39 351 912 7047 für das aktuelle Line-up.', allEvents: 'Gesamten Kalender ansehen' },
-    pt: { eyebrow: 'Desk Concierge Oficial · 18:00–05:00 CET', eventLabel: 'Eventos em Milão — Hoje e Esta Semana', requestAction: 'Reservar pelo WhatsApp', disclaimer: 'Atendimento direto no WhatsApp 7/7 (+39 351 912 7047) para mesas VIP, garrafas, aperitivo e listas de convidados.', eventsTitle: 'Próximos Eventos Desta Semana', eventsLead: 'Festas e DJ sets nos clubes de Milão', empty: 'Envie mensagem no WhatsApp +39 351 912 7047 para a programação completa de hoje.', allEvents: 'Ver calendário completo' },
-  }, currentHomeDict, { trace: 'table-concierge.home' });
-  const hero = getHeroCopy(locale);
-  const generic = GENERIC_EVENT_COPY[locale as LocaleCode] || GENERIC_EVENT_COPY.en;
+  'eyebrow' | 'requestTitle' | 'eventLabel' | 'requestAction' | 'heroAnchorAction' | 'trustBadges' | 'detailAction' | 'disclaimer' | 'eventsTitle' | 'eventsLead' | 'empty' | 'allEvents'> {
+  const code = (isEnabledLocale(locale) ? locale : 'en') as LocaleCode;
+  const ui = SHARED_UI_COPY[code];
+  const hero = getHeroCopy(code);
+  const generic = GENERIC_EVENT_COPY[code];
   return {
-    ...home,
+    eyebrow: ui.eyebrow,
     requestTitle: hero.cta,
     requestAction: hero.cta,
+    heroAnchorAction: hero.heroAnchor,
+    trustBadges: hero.trustBadges,
     eventLabel: generic.eventsTitle,
-    detailAction: getEventCardCopy(locale).viewEvent,
+    detailAction: getEventCardCopy(code).viewEvent,
+    disclaimer: ui.disclaimer,
     eventsTitle: generic.eventsTitle,
+    eventsLead: ui.eventsLead,
     empty: generic.empty,
+    allEvents: ui.allEvents,
   };
 }

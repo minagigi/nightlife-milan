@@ -198,12 +198,10 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
     const filtered = rawNavLinks.filter(
       (item) => item.href !== halloweenHref && item.href !== capodannoHref && item.id !== 'mfw',
     );
-    const weeklyHref = `${localePrefix}/events/this-week`;
-    const weeklyLabel = currentLocale === 'it' ? 'SERATE SETTIMANA' : 'THIS WEEK';
+    const sanSiroDesktopLabel = currentLocale === 'it' ? 'SAN SIRO' : 'SAN SIRO';
     const seasonalPair = [
-      { id: 'events' as const, label: weeklyLabel, name: weeklyLabel, href: weeklyHref, match: weeklyHref, gold: true },
       { id: 'events' as const, label: capodannoLabel, name: capodannoLabel, href: capodannoHref, match: capodannoHref, gold: true },
-      { id: 'events' as const, label: currentLocale === 'it' ? 'DOPO-PARTITA SAN SIRO' : 'SAN SIRO AFTERPARTIES', name: currentLocale === 'it' ? 'DOPO-PARTITA SAN SIRO' : 'SAN SIRO AFTERPARTIES', href: `${localePrefix}/football-afterparties`, match: `${localePrefix}/football-afterparties`, gold: false },
+      { id: 'events' as const, label: sanSiroDesktopLabel, name: sanSiroDesktopLabel, href: `${localePrefix}/football-afterparties`, match: `${localePrefix}/football-afterparties`, gold: false },
     ];
     const eventsIdx = filtered.findIndex((item) => item.id === 'events');
     if (eventsIdx !== -1) {
@@ -212,9 +210,20 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
     }
     return [...seasonalPair, ...filtered];
   })();
-  const mobileExtraLinks = resolveSeasonalHeaderLinks(menu.mobileExtra, currentLocale).filter(
-    (item) => item.href !== halloweenHref && item.href !== capodannoHref && item.id !== 'mfw',
-  );
+  const weeklyMobileItem = {
+    id: 'events' as const,
+    label: currentLocale === 'it' ? 'SERATE SETTIMANA' : 'THIS WEEK',
+    name: currentLocale === 'it' ? 'SERATE SETTIMANA' : 'THIS WEEK',
+    href: `${localePrefix}/events/this-week`,
+    match: `${localePrefix}/events/this-week`,
+    gold: false,
+  };
+  const mobileExtraLinks = [
+    weeklyMobileItem,
+    ...resolveSeasonalHeaderLinks(menu.mobileExtra, currentLocale).filter(
+      (item) => item.href !== halloweenHref && item.href !== capodannoHref && item.id !== 'mfw',
+    ),
+  ];
 
   const waMenuLink = informationOnlyClub ? SITE_CONTACT.whatsapp.link : getConciergeBookingUrl(currentLocale);
 
@@ -225,17 +234,17 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
         <div className="nlm-header-inner flex justify-between items-center min-h-[72px]">
           
           {/* Desktop Nav (Left) */}
-          <nav className="hidden lg:flex xl:flex nlm-header-nav flex-1 items-center gap-1" aria-label={menuCopy.menu}>
+          <nav className="hidden xl:flex nlm-header-nav items-center gap-1 shrink-0" aria-label={menuCopy.menu}>
             {navLinks.map((link) => {
               const isActive = pathname?.startsWith(link.match);
               const isGold = (link as { gold?: boolean }).gold;
               return (
-                <div key={link.name} className="relative flex items-center">
+                <div key={link.name} className="relative flex items-center shrink-0">
                   <Link
                     href={link.href}
                     prefetch={false}
                     aria-current={isActive ? 'page' : undefined}
-                    className={`nlm-header-link font-mono text-[11px] tracking-[0.18em] uppercase focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D6BE96] ${isGold ? 'is-accent text-[#D6BE96]' : 'text-[#C2B9AA] hover:text-[#F6F1E7]'}`}
+                    className={`nlm-header-link whitespace-nowrap font-mono text-[10.5px] tracking-[0.11em] uppercase focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D6BE96] ${isGold ? 'is-accent text-[#D6BE96]' : 'text-[#C2B9AA] hover:text-[#F6F1E7]'}`}
                   >
                     {link.name}
                   </Link>
@@ -286,12 +295,12 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
           </div>
 
           {/* International & Search (Right) */}
-          <div className="nlm-header-actions flex flex-1 justify-end items-center gap-3">
+          <div className="nlm-header-actions flex shrink-0 justify-end items-center gap-2.5">
             <a
               href={waMenuLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="nlm-header-action hidden min-h-11 shrink-0 lg:flex xl:flex items-center gap-2.5 border border-[#D6BE96]/55 bg-[#0B0A09] px-4 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-[#F6F1E7] hover:bg-[#F6F1E7] hover:text-[#050505] transition-colors group"
+              className="nlm-header-action hidden min-h-11 shrink-0 xl:flex items-center gap-2 border border-[#D6BE96]/55 bg-[#0B0A09] px-3 py-1.5 font-mono text-[10.5px] whitespace-nowrap uppercase tracking-[0.11em] text-[#F6F1E7] hover:bg-[#F6F1E7] hover:text-[#050505] transition-colors group"
               aria-label={bookingLabel}
             >
               <MessageCircle className="w-4 h-4 text-[#D6BE96] group-hover:text-[#050505]" />

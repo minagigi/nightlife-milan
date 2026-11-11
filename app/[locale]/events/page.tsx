@@ -35,7 +35,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const canonical = `${SITE_URL}${localePrefix(locale)}/events`;
   const editorial = applyEditorialFields({
-    metaTitle: locale === 'it' ? 'Tutti gli eventi a Milano 2026' : locale === 'en' ? 'All Events in Milan 2026' : getEventCalendarCopy(locale).verified,
+    metaTitle: locale === 'it'
+      ? 'Calendario Eventi e Serate Milano 2026/2027 | Club e Tavoli VIP'
+      : locale === 'en'
+        ? 'Milan Club Events Calendar 2026/2027 | Tonight, Parties & VIP'
+        : `${getEventCalendarCopy(locale).verified} 2026/2027 | Nightlife Milan`,
     metaDescription: getEventHubSerpDecisionDescription(locale, 'all'),
     ogImageAlt: tr(locale, 'Milan nightlife events', 'Eventi della vita notturna di Milano'),
   }, await readEditorialFields('events', locale));

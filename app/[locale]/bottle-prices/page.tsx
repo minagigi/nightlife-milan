@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const canonical = `${baseUrl}${localePrefix(locale)}/bottle-prices`;
 
   const title = seoTitle(tr(locale, 'Milan Club Bottle Prices 2026 | VIP Table Price List | Nightlife Milan', 'Prezzi Bottiglie Discoteche Milano 2026 | Listino VIP | Nightlife Milan'));
-  const description = withWhatsApp(tr(locale, 'Updated bottle price list for all Milan clubs: Just Me, Armani Privé, Play Club, Volt, Pineta. VIP table prices, champagne, vodka. Book via WhatsApp.', 'Listino prezzi bottiglie aggiornato per tutti i club di Milano: Just Me, Armani Privé, Play Club, Volt, Pineta. Prezzi tavoli VIP, champagne, vodka. Prenota via WhatsApp.'), locale);
+  const description = withWhatsApp(tr(locale, 'Updated bottle price list for all Milan clubs: Just Me, Armani Privé, Play Club, Voya Rooftop, Pineta. VIP table prices, champagne, vodka. Book via WhatsApp.', 'Listino prezzi bottiglie aggiornato per i principali club di Milano: Just Me, Pineta, Aria Club, 55 Milano, Voya Rooftop, Repvblic. Prezzi tavoli VIP, champagne, vodka.'), locale);
 
   return {
     title,
@@ -67,91 +67,113 @@ const bottleData: Record<string, {
   tier: 'luxury' | 'premium' | 'mid';
 }> = {
   'v-justme': {
-    standardBottle: '€180–220',
-    premiumBottle: '€280–380',
-    champagneEntry: '€250–350',
-    champagnePremium: '€500–900',
+    standardBottle: '€180-220',
+    premiumBottle: '€280-380',
+    champagneEntry: '€250-350',
+    champagnePremium: '€500-900',
     tableMinWeekday: '€320',
     tableMinWeekend: '€500',
-    bestFor: 'Fashion Week crowd, international jet-set',
-    bestForIt: 'Fashion Week, jet-set internazionale',
+    bestFor: 'Fashion Week crowd, international jet-set, open 7/7',
+    bestForIt: 'Fashion Week, clientela internazionale, aperto 7/7',
     tier: 'luxury',
   },
+  'v-pineta': {
+    standardBottle: '€160-200',
+    premiumBottle: '€240-340',
+    champagneEntry: '€220-320',
+    champagnePremium: '€480-900',
+    tableMinWeekday: '€300',
+    tableMinWeekend: '€500',
+    bestFor: 'Singing dinner show, glamour & fashion crowd',
+    bestForIt: 'Cena cantata, pubblico glamour e fashion',
+    tier: 'luxury',
+  },
+  'v-aria': {
+    standardBottle: '€160-210',
+    premiumBottle: '€250-350',
+    champagneEntry: '€220-320',
+    champagnePremium: '€500-950',
+    tableMinWeekday: '€300',
+    tableMinWeekend: '€500',
+    bestFor: 'San Siro garden sanctuary, Afro-House & Hip-Hop',
+    bestForIt: 'Parco Ippodromo San Siro, Afro-House e Hip-Hop',
+    tier: 'luxury',
+  },
+  'v-55milano': {
+    standardBottle: '€150-190',
+    premiumBottle: '€220-300',
+    champagneEntry: '€200-290',
+    champagnePremium: '€450-850',
+    tableMinWeekday: '€250',
+    tableMinWeekend: '€400',
+    bestFor: 'Arco della Pace loft, Royal Aperitivo & adult crowd',
+    bestForIt: 'Loft Arco della Pace, Royal Aperitivo e pubblico adulto',
+    tier: 'premium',
+  },
+  'v-voya': {
+    standardBottle: '€160-210',
+    premiumBottle: '€240-340',
+    champagneEntry: '€230-330',
+    champagnePremium: '€500-900',
+    tableMinWeekday: '€300',
+    tableMinWeekend: '€500',
+    bestFor: '20th-floor panoramic skyline rooftop & DJ sets',
+    bestForIt: 'Rooftop panoramico al 20° piano con DJ set',
+    tier: 'luxury',
+  },
+  'v-repvblic': {
+    standardBottle: '€140-180',
+    premiumBottle: '€220-300',
+    champagneEntry: '€200-280',
+    champagnePremium: '€400-750',
+    tableMinWeekday: '€300',
+    tableMinWeekend: '€500',
+    bestFor: 'Porta Nuova clubbing, Dirty Mondays & weekend Privé',
+    bestForIt: 'Porta Nuova clubbing, Dirty Monday e Privé weekend',
+    tier: 'premium',
+  },
   'v-armani-prive': {
-    standardBottle: '€200–300',
-    premiumBottle: '€350–500',
-    champagneEntry: '€350–450',
-    champagnePremium: '€700–1500',
+    standardBottle: '€200-300',
+    premiumBottle: '€350-500',
+    champagneEntry: '€350-450',
+    champagnePremium: '€700-1500',
     tableMinWeekday: '€500',
     tableMinWeekend: '€1000',
-    bestFor: 'Luxury brand events, VIP nights',
-    bestForIt: 'Serate di lusso, eventi di moda',
+    bestFor: 'Quadrilatero della Moda events, VIP nights',
+    bestForIt: 'Quadrilatero della Moda, serate VIP',
     tier: 'luxury',
   },
   'v-gattopardo': {
-    standardBottle: '€160–200',
-    premiumBottle: '€250–350',
-    champagneEntry: '€250–350',
-    champagnePremium: '€500–900',
+    standardBottle: '€160-200',
+    premiumBottle: '€250-350',
+    champagneEntry: '€250-350',
+    champagnePremium: '€500-900',
     tableMinWeekday: '€400',
     tableMinWeekend: '€600',
-    bestFor: 'Chic evenings, elegant mixed crowd',
-    bestForIt: 'Serate chic, pubblico misto elegante',
+    bestFor: 'Deconsecrated church setting, gala & commercial nights',
+    bestForIt: 'Chiesa sconsacrata monumentale, serate eleganti',
     tier: 'luxury',
   },
-  'v-theclub': {
-    standardBottle: '€150–200',
-    premiumBottle: '€250–350',
-    champagneEntry: '€200–300',
-    champagnePremium: '€450–800',
-    tableMinWeekday: '€300',
-    tableMinWeekend: '€500',
-    bestFor: 'High-energy commercial music nights',
-    bestForIt: 'Serate commercial ad alta energia',
-    tier: 'premium',
-  },
   'v-playclub': {
-    standardBottle: '€120–160',
-    premiumBottle: '€200–280',
-    champagneEntry: '€180–250',
-    champagnePremium: '€350–600',
-    tableMinWeekday: '€200',
+    standardBottle: '€120-160',
+    premiumBottle: '€200-280',
+    champagneEntry: '€180-250',
+    champagnePremium: '€350-600',
+    tableMinWeekday: '€250',
     tableMinWeekend: '€400',
-    bestFor: 'Young crowd, hip-hop & commercial',
-    bestForIt: 'Crowd giovane, hip-hop e commercial',
+    bestFor: 'Viale Monte Grappa, Hip-Hop, Reggaeton & Commercial',
+    bestForIt: 'Viale Monte Grappa, Hip-Hop, Reggaeton e Commercial',
     tier: 'mid',
   },
-  'v-volt': {
-    standardBottle: '€150–200',
-    premiumBottle: '€220–300',
-    champagneEntry: '€220–300',
-    champagnePremium: '€450–700',
-    tableMinWeekday: '€300',
-    tableMinWeekend: '€500',
-    bestFor: 'Techno & electronic music lovers',
-    bestForIt: 'Amanti di techno e musica elettronica',
-    tier: 'premium',
-  },
   'v-hollywood': {
-    standardBottle: '€140–180',
-    premiumBottle: '€220–300',
-    champagneEntry: '€200–280',
-    champagnePremium: '€400–700',
+    standardBottle: '€140-180',
+    premiumBottle: '€220-300',
+    champagneEntry: '€200-280',
+    champagnePremium: '€400-700',
     tableMinWeekday: '€300',
     tableMinWeekend: '€500',
-    bestFor: 'Mixed commercial & Latin nights',
-    bestForIt: 'Serate commercial e Latin',
-    tier: 'premium',
-  },
-  'v-repvblic': {
-    standardBottle: '€130–170',
-    premiumBottle: '€200–280',
-    champagneEntry: '€180–250',
-    champagnePremium: '€350–600',
-    tableMinWeekday: '€300',
-    tableMinWeekend: '€500',
-    bestFor: 'EDM & house underground crowd',
-    bestForIt: 'Crowd EDM e house underground',
+    bestFor: 'Corso Como historic club, commercial & Latin nights',
+    bestForIt: 'Storico club di Corso Como, commercial e Latin',
     tier: 'premium',
   },
 };
@@ -172,7 +194,10 @@ export default async function BottlePricesPage({ params }: Props) {
   const isIt = locale === 'it';
   const lp = localePrefix(locale);
 
-  const venuesWithPrices = mockVenues.filter(v => bottleData[v.id]);
+  const venueOrder = ['v-justme', 'v-pineta', 'v-aria', 'v-55milano', 'v-voya', 'v-repvblic', 'v-armani-prive', 'v-gattopardo', 'v-playclub', 'v-hollywood'];
+  const venuesWithPrices = mockVenues
+    .filter(v => bottleData[v.id])
+    .sort((a, b) => venueOrder.indexOf(a.id) - venueOrder.indexOf(b.id));
 
   const faqSchema = {
     '@context': 'https://schema.org',
@@ -200,8 +225,8 @@ export default async function BottlePricesPage({ params }: Props) {
         acceptedAnswer: {
           '@type': 'Answer',
           text: isIt
-            ? 'Sì, nella quasi totalità dei club di Milano il tavolo VIP include un "minimo di spesa" da soddisfare in bottiglie e consumazioni. Non puoi prenotare un tavolo e non ordinare bottiglie — il minimo è la garanzia per il locale.'
-            : "Yes, in nearly all Milan clubs a VIP table includes a minimum spend to be met in bottles and drinks. You cannot book a table without ordering bottles — the minimum spend is the venue's guarantee.",
+            ? 'Sì, nella quasi totalità dei club di Milano il tavolo VIP include un "minimo di spesa" da soddisfare in bottiglie e consumazioni. Non puoi prenotare un tavolo senza ordinare bottiglie: il minimo di spesa corrisponde al 100% di credito al tavolo.'
+            : "Yes, in nearly all Milan clubs a VIP table includes a minimum spend redeemed 100% in bottles and drinks. You cannot book a table without bottle service, as the minimum spend is your table credit.",
         },
       },
     ],
@@ -222,7 +247,7 @@ export default async function BottlePricesPage({ params }: Props) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <main className="flex-1 bg-[#131009] w-full pt-20 pb-20">
+      <main className="flex-1 bg-[#050505] text-[#F6F1E7] w-full pt-20 pb-20">
         {/* Breadcrumb */}
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <nav className="text-sm text-white/40">
@@ -244,8 +269,8 @@ export default async function BottlePricesPage({ params }: Props) {
           <h1 className="font-serif text-5xl md:text-6xl font-bold text-champagne tracking-tight mb-6">
             {tr(locale, 'Milan Bottle Prices 2026', 'Prezzi Bottiglie Milano 2026')}
           </h1>
-          <p className="text-xl text-white/40 font-light leading-relaxed mb-8 max-w-3xl">
-            {tr(locale, 'The updated price list for bottles and VIP tables at Milan\'s top clubs. Indicative prices — contact us for exact personalised quotes.', 'Il listino prezzi aggiornato per bottiglie e tavoli VIP nei principali club di Milano. Prezzi indicativi — contattaci per preventivi precisi e personalizzati.')}
+          <p className="text-xl text-white/65 font-light leading-relaxed mb-8 max-w-3xl">
+            {tr(locale, 'The updated price list for bottles and VIP tables at Milan\'s top clubs: contact us on WhatsApp for exact quotes by date.', 'Il listino prezzi aggiornato per bottiglie e tavoli VIP nei principali club di Milano: contattaci su WhatsApp per il preventivo esatto per la tua data.')}
           </p>
 
           {/* Quick Answer */}
@@ -313,11 +338,11 @@ export default async function BottlePricesPage({ params }: Props) {
                     </div>
                     <div className="p-4 col-span-2">
                       <p className="text-white/40 text-[10px] uppercase tracking-wider mb-1">{tr(locale, 'VIP Table Min. (weekday)', 'Min. Tavolo VIP (infrasettimanale)')}</p>
-                      <p className="text-white font-semibold">{data.tableMinWeekday ?? '—'}</p>
+                      <p className="text-white font-semibold">{data.tableMinWeekday ?? '-'}</p>
                     </div>
                     <div className="p-4 col-span-2">
                       <p className="text-white/40 text-[10px] uppercase tracking-wider mb-1">{tr(locale, 'VIP Table Min. (weekend)', 'Min. Tavolo VIP (weekend)')}</p>
-                      <p className="text-white font-semibold">{data.tableMinWeekend ?? '—'}</p>
+                      <p className="text-white font-semibold">{data.tableMinWeekend ?? '-'}</p>
                     </div>
                   </div>
 

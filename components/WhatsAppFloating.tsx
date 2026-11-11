@@ -32,6 +32,7 @@ export default function WhatsAppFloating({ locale: explicitLocale }: { locale?: 
   const locale = explicitLocale ?? (isEnabledLocale(firstSegment) ? firstSegment : 'en');
   const [searchOpen, setSearchOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showBubble, setShowBubble] = useState(false);
   const [eventTitle, setEventTitle] = useState<string | undefined>(undefined);
   const informationOnly = isInformationOnlyClubPath(pathname);
   const scarcity = getScarcityAndChatCopy(locale);
@@ -46,6 +47,37 @@ export default function WhatsAppFloating({ locale: explicitLocale }: { locale?: 
       window.removeEventListener('nlm:mobile-menu', menu);
     };
   }, []);
+
+  useEffect(() => {
+    let formVisible = false;
+    const evaluate = () => {
+      const scrolledPastHero = window.scrollY > 320;
+      setShowBubble(scrolledPastHero && !formVisible);
+    };
+    const forms = Array.from(document.querySelectorAll<HTMLElement>('[id^="tc-request-"]'));
+    let io: IntersectionObserver | null = null;
+    if (forms.length > 0 && 'IntersectionObserver' in window) {
+      const visibleSet = new Set<Element>();
+      io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) visibleSet.add(entry.target);
+            else visibleSet.delete(entry.target);
+          }
+          formVisible = visibleSet.size > 0;
+          evaluate();
+        },
+        { threshold: 0.15 },
+      );
+      forms.forEach((el) => io?.observe(el));
+    }
+    evaluate();
+    window.addEventListener('scroll', evaluate, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', evaluate);
+      io?.disconnect();
+    };
+  }, [pathname]);
 
   useEffect(() => {
     const refresh = () => {
@@ -103,40 +135,42 @@ export default function WhatsAppFloating({ locale: explicitLocale }: { locale?: 
       }}
       aria-label={label}
     >
-      <span
-        data-floating-whatsapp-bubble
-        style={{
-          position: 'relative',
-          background: '#14120d',
-          color: '#F6F1E7',
-          border: '1px solid rgba(214, 190, 150, 0.75)',
-          borderRadius: '14px',
-          padding: '7px 11px',
-          fontSize: '11.5px',
-          fontWeight: 600,
-          lineHeight: 1.25,
-          maxWidth: '220px',
-          boxShadow: '0 6px 20px rgba(0,0,0,0.7)',
-          textAlign: 'left',
-        }}
-      >
-        <span>{label}</span>
+      {showBubble && (
         <span
-          aria-hidden="true"
+          data-floating-whatsapp-bubble
           style={{
-            position: 'absolute',
-            right: '-5px',
-            top: '50%',
-            marginTop: '-4px',
-            width: '8px',
-            height: '8px',
+            position: 'relative',
             background: '#14120d',
-            borderTop: '1px solid rgba(214, 190, 150, 0.75)',
-            borderRight: '1px solid rgba(214, 190, 150, 0.75)',
-            transform: 'rotate(45deg)',
+            color: '#F6F1E7',
+            border: '1px solid rgba(214, 190, 150, 0.75)',
+            borderRadius: '14px',
+            padding: '7px 11px',
+            fontSize: '11.5px',
+            fontWeight: 600,
+            lineHeight: 1.25,
+            maxWidth: '220px',
+            boxShadow: '0 6px 20px rgba(0,0,0,0.7)',
+            textAlign: 'left',
           }}
-        />
-      </span>
+        >
+          <span>{label}</span>
+          <span
+            aria-hidden="true"
+            style={{
+              position: 'absolute',
+              right: '-5px',
+              top: '50%',
+              marginTop: '-4px',
+              width: '8px',
+              height: '8px',
+              background: '#14120d',
+              borderTop: '1px solid rgba(214, 190, 150, 0.75)',
+              borderRight: '1px solid rgba(214, 190, 150, 0.75)',
+              transform: 'rotate(45deg)',
+            }}
+          />
+        </span>
+      )}
       <span
         data-floating-whatsapp-icon
         style={{

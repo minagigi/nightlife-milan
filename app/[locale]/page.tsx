@@ -69,8 +69,8 @@ const HOME_SAFE_COPY: Record<HomeIndexedLocale, {
   nightSteps: readonly { label: string; title: string; body: string }[];
 }> = {
   en: {
-    title: 'Milan Nightlife 2026 | Best Clubs, VIP Tables, Guest Lists & Events',
-    description: 'Official guide to Milan nightlife: compare the 20 best clubs (JustMe, Armani Privé, 11Clubroom, Tocqueville 13, Volt), VIP table minimum spend, guest lists, and tonight’s events.',
+    title: 'Milan Nightlife 2026/2027 | Best Clubs, VIP Tables, Guest Lists & Events',
+    description: 'Official guide to Milan nightlife: compare the 20 top clubs (Just Me, Pineta, Aria Club, 55 Milano, Voya Rooftop, Repvblic), VIP table minimum spend, guest lists and events.',
     venueLabel: 'Official Club Guide',
     venueDescription: 'Explore address, music format, dress code, VIP table minimum spend, and upcoming club nights with instant WhatsApp Concierge assistance.',
     venueTags: ['District & Address', 'Music & Format', 'VIP & Guest List'],
@@ -80,25 +80,25 @@ const HOME_SAFE_COPY: Record<HomeIndexedLocale, {
     requestLabel: 'VIP Concierge Desk',
     requestAction: 'Book via WhatsApp Concierge',
     requestDisclaimer: 'Fast-track VIP table quotes, bottle lists, and nominal guest list registration via WhatsApp +39 351 912 7047.',
-    quickLabel: '24/7 WhatsApp Desk',
+    quickLabel: '7/7 WhatsApp Desk',
     whatsAppMessage: 'Hi Nightlife Milan! I would like to check VIP table / guest list options in Milan for my date.',
     nightLabel: 'The Three Acts of the Night', nightTitle: 'How a Night Out in Milan Works',
-    curatedLabel: 'Iconic Venues Selection', topVenuesTitle: 'Top Nightclubs & Lounges in Milan', allVenues: 'Explore all 20 clubs', allVenuesMobile: 'See all 20 clubs →',
+    curatedLabel: 'Priority Six Club Selection', topVenuesTitle: 'Top Nightclubs & Lounges in Milan', allVenues: 'Explore all 20 clubs', allVenuesMobile: 'See all 20 clubs →',
     tonightLabel: 'Tonight in Milan', tonightTitle: "Tonight's Club Events", tonightSubtitle: 'Upcoming club nights & DJ sets in Milan', seeAll: 'View full calendar',
     noTonight: 'Explore upcoming weekend and special events or message our WhatsApp Concierge for tonight’s best tables.', discoverBest: 'Compare all 20 Milan clubs →', allTonight: "All tonight's events →",
     availabilityCta: 'Request instant VIP table & guest list availability on WhatsApp.', weekLabel: 'Upcoming Calendar', weekTitle: 'This Week & Weekend in Milan',
     noWeek: 'Message our WhatsApp Concierge (+39 351 912 7047) for private events, aperitivo tables, and weekend VIP reservations.', allWeek: "Full Milan events calendar →",
     discoverLabel: 'Explore Milan by Style', categoriesTitle: 'Browse Nightlife by Category & District',
-    categoryLabels: ['Techno & Underground', 'VIP Tables & Privé', 'Royal Aperitivo', 'Navigli District', 'Corso Como & Garibaldi', '2026 Insider Guides', 'VIP Concierge Desk', 'All 20 Milan Clubs'],
+    categoryLabels: ['Techno & Underground', 'VIP Tables & Privé', 'Royal Aperitivo', 'Navigli District', 'Corso Como & Garibaldi', '2026/2027 Guides', 'VIP Concierge Desk', 'All 20 Milan Clubs'],
     nightSteps: [
-      { label: 'Act I · 19:30 – 22:30', title: 'Royal Aperitivo & Sunset Rooftops', body: 'Start your evening in Parco Sempione, Brera, Corso Como, or Navigli with signature cocktails, gourmet platters, and warm-up DJ sets.' },
-      { label: 'Act II · 23:30 – 01:15', title: 'Club Doors, Guest Lists & Selection', body: 'Arrive before 00:45 for nominal guest-list entry or walk straight to the VIP Host desk with your confirmed table reservation.' },
-      { label: 'Act III · 01:15 – 05:00', title: 'Peak-Time Dancefloor & VIP Privé', body: 'Experience international guest DJs, sparkler bottle shows, and private banquette service across Milan’s flagship sanctuaries.' },
+      { label: 'Act I · 19:30 - 22:30', title: 'Royal Aperitivo & Sunset Rooftops', body: 'Start your evening in Parco Sempione, Brera, Corso Como, or CityLife with signature cocktails, dinner platters, and warm-up DJ sets.' },
+      { label: 'Act II · 23:30 - 01:15', title: 'Club Doors, Guest Lists & Selection', body: 'Arrive before 00:45 for nominal guest-list entry or walk straight to the VIP Host desk with your confirmed table reservation.' },
+      { label: 'Act III · 01:15 - 05:00', title: 'Peak-Time Dancefloor & VIP Privé', body: 'Enjoy international guest DJs, sparkler bottle service, and private banquette tables across Milan’s six flagship clubs.' },
     ],
   },
   it: {
-    title: 'Vita Notturna Milano 2026 | Migliori Club, Tavoli VIP, Liste ed Eventi',
-    description: 'Guida ufficiale alla nightlife di Milano: confronta i 20 migliori club (JustMe, Armani Privé, 11Clubroom, Tocqueville 13, Volt), prezzi tavoli VIP, liste nominali e serate.',
+    title: 'Vita Notturna Milano 2026/2027 | Migliori Club, Tavoli VIP, Liste ed Eventi',
+    description: 'Guida ufficiale alla nightlife di Milano: confronta i 20 migliori club (Just Me, Pineta, Aria Club, 55 Milano, Voya Rooftop, Repvblic), prezzi tavoli VIP, liste ed eventi.',
     venueLabel: 'Scheda Ufficiale Club',
     venueDescription: 'Scopri indirizzo, genere musicale, dress code, minimum spend tavoli VIP e prossime serate con assistenza immediata WhatsApp Concierge.',
     venueTags: ['Quartiere & Indirizzo', 'Musica & Format', 'Tavoli VIP & Lista'],
@@ -108,25 +108,25 @@ const HOME_SAFE_COPY: Record<HomeIndexedLocale, {
     requestLabel: 'Concierge Tavoli & Liste',
     requestAction: 'Prenota su WhatsApp Concierge',
     requestDisclaimer: 'Preventivi rapidi tavoli VIP, listini bottiglie e accredito in lista nominale su WhatsApp +39 351 912 7047.',
-    quickLabel: 'Desk WhatsApp Attivo',
+    quickLabel: 'Desk WhatsApp 7/7',
     whatsAppMessage: 'Ciao Nightlife Milan! Vorrei ricevere le opzioni tavoli VIP e lista per la mia serata a Milano.',
     nightLabel: 'I Tre Atti della Notte', nightTitle: 'Come Funziona la Serata Perfetta a Milano',
-    curatedLabel: 'I Santuari della Notte', topVenuesTitle: 'I Migliori Club e Discoteche di Milano', allVenues: 'Tutti i 20 club di Milano', allVenuesMobile: 'Vedi tutti i 20 club →',
+    curatedLabel: 'Selezione Ufficiale 6 Club', topVenuesTitle: 'I Migliori Club e Discoteche di Milano', allVenues: 'Tutti i 20 club di Milano', allVenuesMobile: 'Vedi tutti i 20 club →',
     tonightLabel: 'Stasera a Milano', tonightTitle: 'Eventi e Serate di Stasera', tonightSubtitle: 'Serate in programma e DJ set nei club di Milano', seeAll: 'Calendario completo',
     noTonight: 'Scopri i prossimi eventi in calendario o scrivi su WhatsApp per i tavoli e le serate consigliate stasera.', discoverBest: 'Confronta i 20 club di Milano →', allTonight: 'Tutti gli eventi di stasera →',
     availabilityCta: 'Richiedi disponibilità tavoli VIP e liste su WhatsApp.', weekLabel: 'Calendario Settimanale', weekTitle: 'Prossime Serate della Settimana a Milano',
     noWeek: 'Scrivi al Concierge WhatsApp (+39 351 912 7047) per prenotare Royal Aperitivo, liste e Tavoli Privé nel weekend.', allWeek: 'Calendario completo eventi →',
     discoverLabel: 'Esplora per Stile e Quartiere', categoriesTitle: 'Scegli la Tua Esperienza Notturna a Milano',
-    categoryLabels: ['Club Techno & Underground', 'Tavoli VIP & Privé', 'Royal Aperitivo Milano', 'Quartiere Navigli', 'Corso Como & Garibaldi', 'Guide Ufficiali 2026', 'Servizio VIP Concierge', 'Tutti i 20 Club Milano'],
+    categoryLabels: ['Club Techno & Underground', 'Tavoli VIP & Privé', 'Royal Aperitivo Milano', 'Quartiere Navigli', 'Corso Como & Garibaldi', 'Guide Ufficiali 2026/2027', 'Servizio VIP Concierge', 'Tutti i 20 Club Milano'],
     nightSteps: [
-      { label: 'Atto I · 19:30 – 22:30', title: 'Royal Aperitivo & Rooftop al Tramonto', body: 'Inizia la serata tra Parco Sempione, Brera, Corso Como o i Navigli con signature cocktail, buffet gourmet o tavolo aperitivo con DJ set.' },
-      { label: 'Atto II · 23:30 – 01:15', title: 'Apertura Club, Liste & Selezione Porta', body: 'Entra entro le 00:45 in lista nominale oppure accedi dalla corsia prioritaria VIP Host con il tuo tavolo riservato.' },
-      { label: 'Atto III · 01:15 – 05:00', title: 'Peak-Time in Pista & Tavoli Privé', body: 'Vivi il clou della notte tra guest DJ internazionali, bottle show al tavolo e aree Privé nei club iconici della capitale della moda.' },
+      { label: 'Atto I · 19:30 - 22:30', title: 'Royal Aperitivo & Rooftop al Tramonto', body: 'Inizia la serata tra Parco Sempione, Brera, Corso Como o CityLife con signature cocktail, buffet gourmet o tavolo aperitivo con DJ set.' },
+      { label: 'Atto II · 23:30 - 01:15', title: 'Apertura Club, Liste & Selezione Porta', body: 'Entra entro le 00:45 in lista nominale oppure accedi dalla corsia prioritaria VIP Host con il tuo tavolo riservato.' },
+      { label: 'Atto III · 01:15 - 05:00', title: 'Peak-Time in Pista & Tavoli Privé', body: 'Vivi il clou della notte tra guest DJ internazionali, bottle show al tavolo e aree Privé nei sei club di riferimento di Milano.' },
     ],
   },
   es: {
-    title: 'Vida Nocturna Milán 2026 | Mejores Discotecas, Mesas VIP y Eventos',
-    description: 'Guía oficial de la noche en Milán: compara los 20 mejores clubes (JustMe, Armani Privé, 11Clubroom, Tocqueville 13, Volt), mesas VIP, listas y eventos.',
+    title: 'Vida Nocturna Milán 2026/2027 | Mejores Discotecas, Mesas VIP y Eventos',
+    description: 'Guía oficial de la noche en Milán: compara los 20 mejores clubes (Just Me, Pineta, Aria Club, 55 Milano, Voya Rooftop, Repvblic), mesas VIP, listas y eventos.',
     venueLabel: 'Guía Oficial del Club',
     venueDescription: 'Consulta dirección, estilo musical, dress code, consumo mínimo de mesas VIP y próximos eventos con asistencia por WhatsApp.',
     venueTags: ['Barrio y Dirección', 'Música y Formato', 'Mesas VIP y Lista'],
@@ -136,25 +136,25 @@ const HOME_SAFE_COPY: Record<HomeIndexedLocale, {
     requestLabel: 'Concierge VIP Milán',
     requestAction: 'Reservar por WhatsApp',
     requestDisclaimer: 'Presupuestos de mesas VIP, cartas de botellas y listas nominales por WhatsApp +39 351 912 7047.',
-    quickLabel: 'Atención WhatsApp',
+    quickLabel: 'Atención WhatsApp 7/7',
     whatsAppMessage: '¡Hola Nightlife Milan! Quiero consultar opciones de mesa VIP y lista en Milán para mi fecha.',
     nightLabel: 'Los Tres Actos de la Noche', nightTitle: 'Cómo Funciona la Noche en Milán',
-    curatedLabel: 'Selección de Clubes', topVenuesTitle: 'Los Mejores Clubes y Discotecas de Milán', allVenues: 'Todos los 20 clubes', allVenuesMobile: 'Ver todos los clubes →',
+    curatedLabel: 'Selección Oficial 6 Clubes', topVenuesTitle: 'Los Mejores Clubes y Discotecas de Milán', allVenues: 'Todos los 20 clubes', allVenuesMobile: 'Ver todos los clubes →',
     tonightLabel: 'Esta Noche', tonightTitle: 'Eventos de Esta Noche', tonightSubtitle: 'Fiestas y sesiones DJ en Milán', seeAll: 'Ver calendario',
     noTonight: 'Consulta los próximos eventos de la semana o escríbenos por WhatsApp para reservar mesa VIP.', discoverBest: 'Comparar clubes de Milán →', allTonight: 'Todos los eventos de hoy →',
     availabilityCta: 'Consulta disponibilidad de mesas VIP por WhatsApp.', weekLabel: 'Esta Semana', weekTitle: 'Próximos Eventos en Milán',
     noWeek: 'Escríbenos por WhatsApp (+39 351 912 7047) para reservar mesas VIP y listas este fin de semana.', allWeek: 'Calendario completo →',
     discoverLabel: 'Explorar por Categoría', categoriesTitle: 'Descubre Milán por Estilo y Zona',
-    categoryLabels: ['Clubes de Techno', 'Mesas VIP y Privé', 'Aperitivo en Milán', 'Zona Navigli', 'Zona Corso Como', 'Guías Oficiales 2026', 'Servicio Concierge', 'Los 20 Clubes de Milán'],
+    categoryLabels: ['Clubes de Techno', 'Mesas VIP y Privé', 'Aperitivo en Milán', 'Zona Navigli', 'Zona Corso Como', 'Guías Oficiales 2026/2027', 'Servicio Concierge', 'Los 20 Clubes de Milán'],
     nightSteps: [
-      { label: 'Acto I · 19:30 – 22:30', title: 'Royal Aperitivo y Terrazas', body: 'Empieza la tarde en Parco Sempione, Brera, Corso Como o Navigli con cócteles de autor, buffet gourmet y DJ set.' },
-      { label: 'Acto II · 23:30 – 01:15', title: 'Entrada en Lista y Selección', body: 'Accede antes de las 00:45 por lista nominal o entra sin cola por el acceso VIP Host con tu mesa reservada.' },
-      { label: 'Acto III · 01:15 – 05:00', title: 'Privé, Bottle Show y DJ Sets', body: 'Disfruta del momento cumbre de la noche con DJs internacionales y servicio de botellas en los clubes más exclusivos.' },
+      { label: 'Acto I · 19:30 - 22:30', title: 'Royal Aperitivo y Terrazas', body: 'Empieza la tarde en Parco Sempione, Brera, Corso Como o CityLife con cócteles de autor, buffet gourmet y DJ set.' },
+      { label: 'Acto II · 23:30 - 01:15', title: 'Entrada en Lista y Selección', body: 'Accede antes de las 00:45 por lista nominal o entra sin cola por el acceso VIP Host con tu mesa reservada.' },
+      { label: 'Acto III · 01:15 - 05:00', title: 'Privé, Bottle Show y DJ Sets', body: 'Disfruta del momento cumbre de la noche con DJs internacionales y servicio de botellas en los seis clubes de referencia de Milán.' },
     ],
   },
   fr: {
-    title: "Vie Nocturne à Milan 2026 | Meilleurs Clubs, Tables VIP et Soirées",
-    description: "Guide officiel de la nuit à Milan : comparez les 20 meilleurs clubs (JustMe, Armani Privé, 11Clubroom, Tocqueville 13, Volt), tables VIP, guest lists et soirées.",
+    title: "Vie Nocturne à Milan 2026/2027 | Meilleurs Clubs, Tables VIP et Soirées",
+    description: "Guide officiel de la nuit à Milan : comparez les 20 meilleurs clubs (Just Me, Pineta, Aria Club, 55 Milano, Voya Rooftop, Repvblic), tables VIP, guest lists et soirées.",
     venueLabel: 'Fiche Officielle Club',
     venueDescription: 'Découvrez l’adresse, le style musical, le dress code, les tarifs tables VIP et les prochaines soirées avec notre Concierge WhatsApp.',
     venueTags: ['Quartier & Adresse', 'Musique & Format', 'Tables VIP & Liste'],
@@ -164,25 +164,25 @@ const HOME_SAFE_COPY: Record<HomeIndexedLocale, {
     requestLabel: 'Conciergerie VIP Milan',
     requestAction: 'Réserver sur WhatsApp',
     requestDisclaimer: 'Devis tables VIP, cartes des bouteilles et guest lists sur WhatsApp +39 351 912 7047.',
-    quickLabel: 'Concierge WhatsApp',
+    quickLabel: 'Concierge WhatsApp 7/7',
     whatsAppMessage: 'Bonjour Nightlife Milan ! Je souhaite connaître les options de table VIP et guest list à Milan pour ma date.',
     nightLabel: 'Les Trois Actes de la Nuit', nightTitle: 'Comment Fonctionne la Nuit à Milan',
-    curatedLabel: 'Sélection de Clubs', topVenuesTitle: 'Les Meilleurs Clubs et Discothèques de Milan', allVenues: 'Les 20 clubs de Milan', allVenuesMobile: 'Voir tous les clubs →',
+    curatedLabel: 'Sélection Officielle 6 Clubs', topVenuesTitle: 'Les Meilleurs Clubs et Discothèques de Milan', allVenues: 'Les 20 clubs de Milan', allVenuesMobile: 'Voir tous les clubs →',
     tonightLabel: 'Ce Soir', tonightTitle: 'Soirées de Ce Soir', tonightSubtitle: 'Programmation clubs et DJ sets à Milan', seeAll: 'Voir le calendrier',
     noTonight: 'Découvrez les prochaines soirées de la semaine ou contactez notre Concierge WhatsApp.', discoverBest: 'Comparer les clubs de Milan →', allTonight: 'Toutes les soirées de ce soir →',
     availabilityCta: 'Demandez la disponibilité des tables VIP sur WhatsApp.', weekLabel: 'Cette Semaine', weekTitle: 'Prochaines Soirées à Milan',
     noWeek: 'Contactez-nous sur WhatsApp (+39 351 912 7047) pour vos réservations de tables VIP ce week-end.', allWeek: 'Calendrier complet →',
     discoverLabel: 'Explorer par Catégorie', categoriesTitle: 'Choisissez Votre Ambiance à Milan',
-    categoryLabels: ['Clubs Techno', 'Tables VIP & Privé', 'Aperitivo à Milan', 'Quartier Navigli', 'Quartier Corso Como', 'Guides Officiels 2026', 'Service Concierge', 'Les 20 Clubs de Milan'],
+    categoryLabels: ['Clubs Techno', 'Tables VIP & Privé', 'Aperitivo à Milan', 'Quartier Navigli', 'Quartier Corso Como', 'Guides Officiels 2026/2027', 'Service Concierge', 'Les 20 Clubs de Milan'],
     nightSteps: [
-      { label: 'Acte I · 19:30 – 22:30', title: 'Royal Aperitivo & Rooftops', body: 'Commencez la soirée à Parco Sempione, Brera, Corso Como ou Navigli avec cocktails signature, buffet gourmet et DJ set.' },
-      { label: 'Acte II · 23:30 – 01:15', title: 'Guest Lists & Sélection Porte', body: 'Arrivez avant 00h45 en guest list nominative ou profitez de l’accueil prioritaire VIP Host avec votre table réservée.' },
-      { label: 'Acte III · 01:15 – 05:00', title: 'Peak-Time & Carré VIP Privé', body: 'Vivez l’apogée de la nuit milanaise avec DJs internationaux et service bouteille dans les clubs iconiques.' },
+      { label: 'Acte I · 19:30 - 22:30', title: 'Royal Aperitivo & Rooftops', body: 'Commencez la soirée à Parco Sempione, Brera, Corso Como ou CityLife avec cocktails signature, buffet gourmet et DJ set.' },
+      { label: 'Acte II · 23:30 - 01:15', title: 'Guest Lists & Sélection Porte', body: 'Arrivez avant 00h45 en guest list nominative ou profitez de l’accueil prioritaire VIP Host avec votre table réservée.' },
+      { label: 'Acte III · 01:15 - 05:00', title: 'Peak-Time & Carré VIP Privé', body: 'Vivez l’apogée de la nuit milanaise avec DJs internationaux et service bouteille dans les six clubs phares de Milan.' },
     ],
   },
   de: {
-    title: 'Nachtleben Mailand 2026 | Beste Clubs, VIP-Tische, Gästelisten & Events',
-    description: 'Offizieller Guide für das Mailänder Nachtleben: die 20 besten Clubs (JustMe, Armani Privé, 11Clubroom, Tocqueville 13, Volt), VIP-Tische, Mindestverzehr & Partys.',
+    title: 'Nachtleben Mailand 2026/2027 | Beste Clubs, VIP-Tische, Gästelisten & Events',
+    description: 'Offizieller Guide für das Mailänder Nachtleben: die 20 besten Clubs (Just Me, Pineta, Aria Club, 55 Milano, Voya Rooftop, Repvblic), VIP-Tische, Mindestverzehr & Partys.',
     venueLabel: 'Offizielles Club-Profil',
     venueDescription: 'Adresse, Musikstil, Dresscode, VIP-Tisch-Mindestverzehr und kommende Partys mit direktem WhatsApp-Concierge.',
     venueTags: ['Viertel & Adresse', 'Musik & Format', 'VIP-Tisch & Liste'],
@@ -192,25 +192,25 @@ const HOME_SAFE_COPY: Record<HomeIndexedLocale, {
     requestLabel: 'VIP-Concierge Mailand',
     requestAction: 'Per WhatsApp reservieren',
     requestDisclaimer: 'VIP-Tisch-Angebote, Flaschenpreislisten und Gästelisten per WhatsApp +39 351 912 7047.',
-    quickLabel: 'WhatsApp-Desk',
+    quickLabel: 'WhatsApp-Desk 7/7',
     whatsAppMessage: 'Hallo Nightlife Milan! Ich möchte VIP-Tisch- und Gästelisten-Optionen in Mailand für mein Datum anfragen.',
     nightLabel: 'Die Drei Akte der Nacht', nightTitle: 'So Funktioniert die Perfekte Nacht in Mailand',
-    curatedLabel: 'Top-Locations', topVenuesTitle: 'Die Besten Clubs & Lounges in Mailand', allVenues: 'Alle 20 Clubs', allVenuesMobile: 'Alle 20 Clubs ansehen →',
+    curatedLabel: 'Offizielle Top-6-Auswahl', topVenuesTitle: 'Die Besten Clubs & Lounges in Mailand', allVenues: 'Alle 20 Clubs', allVenuesMobile: 'Alle 20 Clubs ansehen →',
     tonightLabel: 'Heute Abend', tonightTitle: 'Events Heute Abend', tonightSubtitle: 'Kommende Clubnächte & DJ-Sets in Mailand', seeAll: 'Kalender ansehen',
     noTonight: 'Entdecken Sie die kommenden Wochenend-Events oder schreiben Sie unserem WhatsApp-Concierge.', discoverBest: 'Mailänder Clubs vergleichen →', allTonight: 'Alle heutigen Events →',
     availabilityCta: 'VIP-Tisch-Verfügbarkeit direkt per WhatsApp anfragen.', weekLabel: 'Diese Woche', weekTitle: 'Kommende Events in Mailand',
     noWeek: 'Schreiben Sie uns per WhatsApp (+39 351 912 7047) für VIP-Tische und Gästelisten am Wochenende.', allWeek: 'Vollständiger Kalender →',
     discoverLabel: 'Nach Stil Entdecken', categoriesTitle: 'Nachtleben nach Kategorie & Viertel',
-    categoryLabels: ['Techno & Underground', 'VIP-Tische & Privé', 'Royal Aperitivo', 'Navigli-Viertel', 'Corso Como & Garibaldi', 'Club-Guides 2026', 'Concierge-Service', 'Alle 20 Mailänder Clubs'],
+    categoryLabels: ['Techno & Underground', 'VIP-Tische & Privé', 'Royal Aperitivo', 'Navigli-Viertel', 'Corso Como & Garibaldi', 'Club-Guides 2026/2027', 'Concierge-Service', 'Alle 20 Mailänder Clubs'],
     nightSteps: [
-      { label: 'Akt I · 19:30 – 22:30', title: 'Royal Aperitivo & Sunset-Terrassen', body: 'Starten Sie im Parco Sempione, Brera, Corso Como oder Navigli mit Drinks, Gourmet-Buffet und Warm-up-DJ-Sets.' },
-      { label: 'Akt II · 23:30 – 01:15', title: 'Club-Einlass, Gästeliste & Dresscode', body: 'Kommen Sie vor 00:45 Uhr über die Gästeliste oder nutzen Sie den direkten VIP-Host-Empfang mit reserviertem Tisch.' },
-      { label: 'Akt III · 01:15 – 05:00', title: 'Peak-Time Dancefloor & VIP-Privé', body: 'Erleben Sie internationale DJs und exklusiven Bottle-Service in Mailands berühmtesten Clubs.' },
+      { label: 'Akt I · 19:30 - 22:30', title: 'Royal Aperitivo & Sunset-Terrassen', body: 'Starten Sie im Parco Sempione, Brera, Corso Como oder CityLife mit Drinks, Gourmet-Buffet und Warm-up-DJ-Sets.' },
+      { label: 'Akt II · 23:30 - 01:15', title: 'Club-Einlass, Gästeliste & Dresscode', body: 'Kommen Sie vor 00:45 Uhr über die Gästeliste oder nutzen Sie den direkten VIP-Host-Empfang mit reserviertem Tisch.' },
+      { label: 'Akt III · 01:15 - 05:00', title: 'Peak-Time Dancefloor & VIP-Privé', body: 'Erleben Sie internationale DJs und Bottle-Service in Mailands sechs führenden Clubs.' },
     ],
   },
   pt: {
-    title: 'Vida Noturna Milão 2026 | Melhores Clubes, Mesas VIP, Listas e Eventos',
-    description: 'Guia oficial da noite em Milão: compare os 20 melhores clubes (JustMe, Armani Privé, 11Clubroom, Tocqueville 13, Volt), mesas VIP, listas e festas.',
+    title: 'Vida Noturna Milão 2026/2027 | Melhores Clubes, Mesas VIP, Listas e Eventos',
+    description: 'Guia oficial da noite em Milão: compare os 20 melhores clubes (Just Me, Pineta, Aria Club, 55 Milano, Voya Rooftop, Repvblic), mesas VIP, listas e festas.',
     venueLabel: 'Guia Oficial do Clube',
     venueDescription: 'Confira endereço, estilo musical, dress code, consumação mínima de mesas VIP e próximas festas com suporte via WhatsApp.',
     venueTags: ['Bairro e Endereço', 'Música e Formato', 'Mesas VIP e Lista'],
@@ -220,20 +220,20 @@ const HOME_SAFE_COPY: Record<HomeIndexedLocale, {
     requestLabel: 'Concierge VIP Milão',
     requestAction: 'Reservar pelo WhatsApp',
     requestDisclaimer: 'Cotações de mesas VIP, cartas de garrafas e listas nominais pelo WhatsApp +39 351 912 7047.',
-    quickLabel: 'Atendimento WhatsApp',
+    quickLabel: 'Atendimento WhatsApp 7/7',
     whatsAppMessage: 'Olá Nightlife Milan! Quero consultar opções de mesa VIP e lista em Milão para a minha data.',
     nightLabel: 'Os Três Atos da Noite', nightTitle: 'Como Funciona a Noite em Milão',
-    curatedLabel: 'Seleção de Clubes', topVenuesTitle: 'Os Melhores Clubes e Discotecas de Milão', allVenues: 'Todos os 20 clubes', allVenuesMobile: 'Ver todos os clubes →',
+    curatedLabel: 'Seleção Oficial 6 Clubes', topVenuesTitle: 'Os Melhores Clubes e Discotecas de Milão', allVenues: 'Todos os 20 clubes', allVenuesMobile: 'Ver todos os clubes →',
     tonightLabel: 'Hoje à Noite', tonightTitle: 'Eventos de Hoje', tonightSubtitle: 'Festas e DJ sets em Milão', seeAll: 'Ver calendário',
     noTonight: 'Veja os próximos eventos da semana ou fale com nosso Concierge no WhatsApp.', discoverBest: 'Comparar clubes de Milão →', allTonight: 'Todos os eventos de hoje →',
     availabilityCta: 'Peça a disponibilidade de mesas VIP pelo WhatsApp.', weekLabel: 'Esta Semana', weekTitle: 'Próximos Eventos Desta Semana',
     noWeek: 'Fale conosco no WhatsApp (+39 351 912 7047) para reservar mesas VIP neste fim de semana.', allWeek: 'Calendário completo →',
     discoverLabel: 'Explorar por Categoria', categoriesTitle: 'Descubra Milão por Estilo e Bairro',
-    categoryLabels: ['Clubes de Techno', 'Mesas VIP e Privé', 'Aperitivo em Milão', 'Zona Navigli', 'Zona Corso Como', 'Guias Oficiais 2026', 'Serviço de Concierge', 'Os 20 Clubes de Milão'],
+    categoryLabels: ['Clubes de Techno', 'Mesas VIP e Privé', 'Aperitivo em Milão', 'Zona Navigli', 'Zona Corso Como', 'Guias Oficiais 2026/2027', 'Serviço de Concierge', 'Os 20 Clubes de Milão'],
     nightSteps: [
-      { label: 'Ato I · 19:30 – 22:30', title: 'Royal Aperitivo e Terraços', body: 'Comece a noite no Parco Sempione, Brera, Corso Como ou Navigli com drinks autorais, buffet gourmet e DJ set.' },
-      { label: 'Ato II · 23:30 – 01:15', title: 'Abertura, Listas e Seleção', body: 'Chegue antes das 00:45 na lista nominal ou entre sem fila pelo acesso VIP Host com sua mesa reservada.' },
-      { label: 'Ato III · 01:15 – 05:00', title: 'Peak-Time, Privé e Bottle Show', body: 'Viva o auge da noite milanesa com DJs internacionais e serviço de garrafas nos clubes mais icônicos.' },
+      { label: 'Ato I · 19:30 - 22:30', title: 'Royal Aperitivo e Terraços', body: 'Comece a noite no Parco Sempione, Brera, Corso Como ou CityLife com drinks autorais, buffet gourmet e DJ set.' },
+      { label: 'Ato II · 23:30 - 01:15', title: 'Abertura, Listas e Seleção', body: 'Chegue antes das 00:45 na lista nominal ou entre sem fila pelo acesso VIP Host com sua mesa reservada.' },
+      { label: 'Ato III · 01:15 - 05:00', title: 'Peak-Time, Privé e Bottle Show', body: 'Viva o auge da noite milanesa com DJs internacionais e serviço de garrafas nos seis principais clubes de Milão.' },
     ],
   },
 };
@@ -347,6 +347,94 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 
   const waLink = getConciergeBookingUrl(locale);
   const formerHeroCopy = getHeroCopy(locale);
+  const uiLabels = (() => {
+    switch (locale) {
+      case 'it':
+        return {
+          details: 'SCHEDA',
+          vipBtn: 'TAVOLO VIP ↗',
+          swipe: 'SCORRI I 6 CLUB →',
+          formulaVal: 'Aperitivo · Lista · Privé',
+          sanSiroEye: 'STADIO SAN SIRO · SERIE A & CHAMPIONS LEAGUE 2026/2027',
+          sanSiroTitle: 'Guida Ufficiale Dopo-Partita Calcio Milano (Inter & Milan)',
+          sanSiroBody: 'Aria Club a 150m dallo stadio, Just Me Torre Branca aperto 7/7, Voya Rooftop via M5, 55 Milano, Pineta e Repvblic: calcola il piano post-match e prenota Tavolo VIP su WhatsApp +39 351 912 7047.',
+          sanSiroCta: 'SCOPRI I DOPO-PARTITA ↗',
+          act1: 'ATTO I · H 19:30 ROYAL APERITIVO & ROOFTOP',
+          act2: 'ATTO II · H 23:30 APERTURA & LISTA',
+          act3: 'ATTO III · H 01:30 PRIVÉ & BOTTLE SERVICE',
+        };
+      case 'es':
+        return {
+          details: 'FICHA',
+          vipBtn: 'MESA VIP ↗',
+          swipe: 'DESLIZA LOS 6 CLUBES →',
+          formulaVal: 'Aperitivo · Lista · Privé',
+          sanSiroEye: 'ESTADIO SAN SIRO · SERIE A & CHAMPIONS LEAGUE 2026/2027',
+          sanSiroTitle: 'Guía Oficial Post-Partido San Siro Milán (Inter y AC Milan)',
+          sanSiroBody: 'Aria Club a 150m del estadio, Just Me Torre Branca abierto 7/7, Voya Rooftop vía M5, 55 Milano, Pineta y Repvblic: organiza tu noche post-partido y reserva Mesa VIP por WhatsApp +39 351 912 7047.',
+          sanSiroCta: 'VER GUÍA POST-PARTIDO ↗',
+          act1: 'ACTO I · H 19:30 ROYAL APERITIVO & ROOFTOP',
+          act2: 'ACTO II · H 23:30 ENTRADA & LISTA',
+          act3: 'ACTO III · H 01:30 PRIVÉ & BOTTLE SERVICE',
+        };
+      case 'fr':
+        return {
+          details: 'FICHE',
+          vipBtn: 'TABLE VIP ↗',
+          swipe: 'FAITES DÉFILER LES 6 CLUBS →',
+          formulaVal: 'Aperitivo · Liste · Privé',
+          sanSiroEye: 'STADE SAN SIRO · SERIE A & CHAMPIONS LEAGUE 2026/2027',
+          sanSiroTitle: 'Guide Officiel Après-Match San Siro Milan (Inter & AC Milan)',
+          sanSiroBody: 'Aria Club à 150m du stade, Just Me Torre Branca ouvert 7j/7, Voya Rooftop via M5, 55 Milano, Pineta et Repvblic : préparez votre soirée d’après-match et réservez sur WhatsApp +39 351 912 7047.',
+          sanSiroCta: 'VOIR LES APRÈS-MATCHS ↗',
+          act1: 'ACTE I · 19H30 ROYAL APERITIVO & ROOFTOP',
+          act2: 'ACTE II · 23H30 OUVERTURE & GUEST LIST',
+          act3: 'ACTE III · 01H30 PRIVÉ & BOTTLE SERVICE',
+        };
+      case 'de':
+        return {
+          details: 'PROFIL',
+          vipBtn: 'VIP-TISCH ↗',
+          swipe: '6 CLUBS DURCHWISCHEN →',
+          formulaVal: 'Aperitivo · Liste · Privé',
+          sanSiroEye: 'SAN-SIRO-STADION · SERIE A & CHAMPIONS LEAGUE 2026/2027',
+          sanSiroTitle: 'Offizieller San-Siro-Afterparty-Guide Mailand (Inter & AC Milan)',
+          sanSiroBody: 'Aria Club 150m vom Stadion, Just Me Torre Branca 7/7 geöffnet, Voya Rooftop via M5, 55 Milano, Pineta & Repvblic: planen Sie Ihre Afterparty und buchen Sie VIP-Tische per WhatsApp +39 351 912 7047.',
+          sanSiroCta: 'AFTERPARTYS ANSEHEN ↗',
+          act1: 'AKT I · 19:30 ROYAL APERITIVO & ROOFTOP',
+          act2: 'AKT II · 23:30 EINLASS & GÄSTELISTE',
+          act3: 'AKT III · 01:30 PRIVÉ & BOTTLE SERVICE',
+        };
+      case 'pt':
+        return {
+          details: 'PERFIL',
+          vipBtn: 'MESA VIP ↗',
+          swipe: 'DESLIZE OS 6 CLUBES →',
+          formulaVal: 'Aperitivo · Lista · Privé',
+          sanSiroEye: 'ESTÁDIO SAN SIRO · SERIE A & CHAMPIONS LEAGUE 2026/2027',
+          sanSiroTitle: 'Guia Oficial Pós-Jogo San Siro Milão (Inter e AC Milan)',
+          sanSiroBody: 'Aria Club a 150m do estádio, Just Me Torre Branca aberto 7/7, Voya Rooftop via M5, 55 Milano, Pineta e Repvblic: planeje a noite pós-jogo e reserve Mesa VIP no WhatsApp +39 351 912 7047.',
+          sanSiroCta: 'VER PÓS-JOGO ↗',
+          act1: 'ATO I · 19:30 ROYAL APERITIVO & ROOFTOP',
+          act2: 'ATO II · 23:30 ABERTURA & GUEST LIST',
+          act3: 'ATO III · 01:30 PRIVÉ & BOTTLE SERVICE',
+        };
+      default:
+        return {
+          details: 'PROFILE',
+          vipBtn: 'VIP TABLE ↗',
+          swipe: 'SWIPE THE 6 CLUBS →',
+          formulaVal: 'Aperitivo · Guest List · VIP',
+          sanSiroEye: 'SAN SIRO STADIUM · SERIE A & CHAMPIONS LEAGUE 2026/2027',
+          sanSiroTitle: 'Official San Siro Football Afterparty Guide (Inter & AC Milan)',
+          sanSiroBody: 'Aria Club 150m from the stadium, Just Me Torre Branca open 7/7, Voya Rooftop via M5, 55 Milano, Pineta & Repvblic: plan your post-match night and book VIP tables via WhatsApp +39 351 912 7047.',
+          sanSiroCta: 'EXPLORE AFTERPARTIES ↗',
+          act1: 'ACT I · 19:30 ROYAL APERITIVO & SUNSET',
+          act2: 'ACT II · 23:30 DOORS & GUEST LIST',
+          act3: 'ACT III · 01:30 PRIVÉ & BOTTLE SERVICE',
+        };
+    }
+  })();
 
   return (
     <>
@@ -368,10 +456,9 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           }}
           copy={{
             ...getTableConciergeSharedCopy(locale),
-            title: locale === 'it' ? 'Vita Notturna a Milano: Club Iconici, Tavoli VIP, Rooftop e Serate' : formerHeroCopy.cta,
+            title: formerHeroCopy.h1,
             lead: getTableConciergeLead(locale),
-            eyebrow: locale === 'it' ? 'GUIDA INSIDER & CONCIERGE UFFICIALE · MILANO 2026' : homeCopy.requestLabel,
-            ...(locale === 'it' ? { requestTitle: 'Prenota Tavolo VIP o Lista Nominale', requestAction: 'Richiedi Prezzi Tavoli & Liste su WhatsApp' } : {}),
+            eyebrow: formerHeroCopy.label,
             disclaimer: homeCopy.requestDisclaimer,
             eventsLead: homeCopy.weekTitle,
             allEvents: homeCopy.seeAll,
@@ -471,7 +558,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                         </div>
                         <div className="py-4 pr-5 border-r border-[#F6F1E7]/14">
                           <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#847C6F]">FORMULA</div>
-                          <div className="text-[15px] text-[#F6F1E7] font-medium mt-1.5">Aperitivo · Lista · Privé</div>
+                          <div className="text-[15px] text-[#F6F1E7] font-medium mt-1.5">{uiLabels.formulaVal}</div>
                         </div>
                         <div className="py-4 pl-5">
                           <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#847C6F]">{homeCopy.venueTags[2]}</div>
@@ -494,7 +581,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                         rel="noopener noreferrer"
                         className="min-h-[48px] px-5 py-3.5 bg-[#F6F1E7] text-[#050505] hover:bg-[#D6BE96] font-mono text-xs font-semibold tracking-[0.2em] uppercase flex items-center justify-center gap-2 transition-colors"
                       >
-                        PRIVÉ VIP ↗
+                        {uiLabels.vipBtn}
                       </a>
                     </div>
                   </div>
@@ -547,7 +634,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                           </div>
                           <div className="flex justify-between gap-4 py-2 border-b border-[#F6F1E7]/14">
                             <span className="font-mono text-[11px] tracking-[0.16em] uppercase text-[#847C6F]">{homeCopy.venueTags[2]}</span>
-                            <span className="text-[#D6BE96] font-medium text-right">Aperitivo · Lista · Privé</span>
+                            <span className="text-[#D6BE96] font-medium text-right">{uiLabels.formulaVal}</span>
                           </div>
                         </div>
                       </div>
@@ -557,7 +644,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                           prefetch={false}
                           className="min-h-[46px] px-4 py-3 border border-[#D6BE96]/45 text-[#F6F1E7] hover:border-[#F6F1E7] font-mono text-[11px] tracking-[0.16em] uppercase flex items-center justify-center transition-colors"
                         >
-                          SCHEDA
+                          {uiLabels.details}
                         </Link>
                         <a
                           href={waLink}
@@ -565,7 +652,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                           rel="noopener noreferrer"
                           className="min-h-[46px] px-4 py-3 bg-[#F6F1E7] text-[#050505] hover:bg-[#D6BE96] font-mono text-[11px] font-semibold tracking-[0.18em] uppercase flex items-center justify-center transition-colors"
                         >
-                          PRIVÉ ↗
+                          {uiLabels.vipBtn}
                         </a>
                       </div>
                     </div>
@@ -577,7 +664,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
             {/* VISTA MOBILE 390PX: SWIPE ORIZZONTALE TATTILE SNAP-X */}
             <div className="lg:hidden py-8">
               <div className="px-5 mb-3 flex justify-between items-baseline">
-                <span className="font-mono text-[11px] tracking-[0.22em] uppercase text-[#D6BE96]">SWIPE ORIZZONTALE →</span>
+                <span className="font-mono text-[11px] tracking-[0.22em] uppercase text-[#D6BE96]">{uiLabels.swipe}</span>
                 <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#847C6F]">01 / 0{featuredVenues.length}</span>
               </div>
               <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory px-5 pb-4 scrollbar-hide">
@@ -615,7 +702,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                         prefetch={false}
                         className="min-h-[44px] font-mono text-[11px] tracking-[0.16em] uppercase text-[#F6F1E7] flex items-center justify-center border-r border-[#F6F1E7]/14"
                       >
-                        SCHEDA
+                        {uiLabels.details}
                       </Link>
                       <a
                         href={waLink}
@@ -623,7 +710,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                         rel="noopener noreferrer"
                         className="min-h-[44px] bg-[#F6F1E7] text-[#050505] font-mono text-[11px] font-semibold tracking-[0.16em] uppercase flex items-center justify-center"
                       >
-                        PRIVÉ ↗
+                        {uiLabels.vipBtn}
                       </a>
                     </div>
                   </article>
@@ -638,15 +725,13 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           <div className="max-w-[1440px] mx-auto border-x border-[#F6F1E7]/14 px-5 sm:px-14 py-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 bg-[#0B0A09]">
             <div>
               <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[#D6BE96] mb-2">
-                {locale === 'it' ? 'STADIO SAN SIRO · SERIE A & CHAMPIONS LEAGUE 2026/2027' : 'SAN SIRO STADIUM · SERIE A & CHAMPIONS LEAGUE 2026/2027'}
+                {uiLabels.sanSiroEye}
               </p>
               <h2 className="font-serif text-2xl sm:text-3xl text-[#F6F1E7]">
-                {locale === 'it' ? 'Guida Ufficiale Dopo-Partita Calcio Milano (Inter & Milan)' : 'Official San Siro Football Afterparty Guide (Inter & AC Milan)'}
+                {uiLabels.sanSiroTitle}
               </h2>
               <p className="font-sans text-sm text-[#C2B9AA] mt-1 max-w-3xl">
-                {locale === 'it'
-                  ? 'Aria Club a 150m dallo stadio, Just Me Torre Branca aperto 7/7, Voya Rooftop via M5, 55 Milano, Pineta e Repvblic: calcola il piano post-match e prenota Tavolo VIP su WhatsApp +39 351 912 7047.'
-                  : 'Aria Club 150m from the stadium, Just Me Torre Branca open 7/7, Voya Rooftop via M5, 55 Milano, Pineta & Repvblic: plan your post-match night and book VIP tables via WhatsApp +39 351 912 7047.'}
+                {uiLabels.sanSiroBody}
               </p>
             </div>
             <Link
@@ -654,32 +739,32 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
               prefetch={false}
               className="shrink-0 min-h-[48px] px-6 py-3.5 border border-[#D6BE96] bg-[#D6BE96] text-[#050505] hover:bg-[#F6F1E7] font-mono text-xs font-semibold tracking-[0.2em] uppercase inline-flex items-center gap-2 transition-colors"
             >
-              {locale === 'it' ? 'SCOPRI I DOPO-PARTITA ↗' : 'EXPLORE AFTERPARTIES ↗'}
+              {uiLabels.sanSiroCta}
             </Link>
           </div>
         </section>
 
-        {/* ── 3. I Tre Atti della Notte Milanese (Drammaturgia Oraria) ─── */}
+        {/* ── 3. I Tre Atti della Notte Milanese (Capitolo Editoriale Avorio Caldo + Trittico Noir) ─── */}
         <section className="w-full bg-[#050505] border-b border-[#F6F1E7]/14">
           <div className="max-w-[1440px] mx-auto border-x border-[#F6F1E7]/14 grid grid-cols-1 lg:grid-cols-12">
-            {/* Colonna Sinistra (5/12): I 3 Atti */}
-            <div className="lg:col-span-5 p-6 sm:p-14 border-b lg:border-b-0 lg:border-r border-[#F6F1E7]/14 flex flex-col justify-between">
+            {/* Colonna Sinistra (5/12): Capitolo Avorio Sartoriale #F6F1E7 */}
+            <div className="lg:col-span-5 p-6 sm:p-14 bg-[#F6F1E7] text-[#050505] border-b lg:border-b-0 lg:border-r border-[#050505]/15 flex flex-col justify-between">
               <div>
-                <p className="font-mono text-[#D6BE96] text-xs tracking-[0.26em] uppercase mb-3">
+                <p className="font-mono text-[#5C4624] text-xs font-semibold tracking-[0.26em] uppercase mb-3">
                   N° 03 · {homeCopy.nightLabel}
                 </p>
-                <h2 className="font-serif text-4xl sm:text-5xl font-normal italic text-[#F6F1E7] tracking-[-0.03em] leading-[0.92] mb-10">
+                <h2 className="font-serif text-4xl sm:text-5xl font-normal italic text-[#050505] tracking-[-0.03em] leading-[0.92] mb-10">
                   {homeCopy.nightTitle}
                 </h2>
-                <div className="divide-y divide-[#F6F1E7]/14 border-t border-b border-[#F6F1E7]/14">
+                <div className="divide-y divide-[#050505]/15 border-t border-b border-[#050505]/15">
                   {homeCopy.nightSteps.map((step: { label: string; title: string; body: string }, i: number) => (
                     <div key={i} className="py-6 flex justify-between items-start gap-6">
                       <div>
-                        <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-[#D6BE96] mb-2">{step.label}</p>
-                        <h3 className="font-serif text-2xl sm:text-[28px] text-[#F6F1E7] font-normal leading-tight mb-2">{step.title}</h3>
-                        <p className="font-sans text-sm text-[#C2B9AA] leading-relaxed">{step.body}</p>
+                        <p className="font-mono text-[11px] font-semibold tracking-[0.2em] uppercase text-[#5C4624] mb-2">{step.label}</p>
+                        <h3 className="font-serif text-2xl sm:text-[28px] text-[#050505] font-normal leading-tight mb-2">{step.title}</h3>
+                        <p className="font-sans text-sm text-[#2C2823] leading-relaxed">{step.body}</p>
                       </div>
-                      <span className="font-serif italic text-4xl text-[#D6BE96] shrink-0">
+                      <span className="font-serif italic text-4xl text-[#7A5E30] shrink-0">
                         {i === 0 ? 'I' : i === 1 ? 'II' : 'III'}
                       </span>
                     </div>
@@ -691,7 +776,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                   href={waLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full min-h-[50px] px-7 py-4 bg-[#F6F1E7] text-[#050505] hover:bg-[#D6BE96] font-mono text-xs font-semibold tracking-[0.2em] uppercase flex items-center justify-between transition-colors"
+                  className="w-full min-h-[50px] px-7 py-4 bg-[#050505] text-[#F6F1E7] hover:bg-[#1C1915] font-mono text-xs font-semibold tracking-[0.2em] uppercase flex items-center justify-between transition-colors"
                 >
                   <span>{homeCopy.requestAction}</span>
                   <span aria-hidden="true">↗</span>
@@ -715,7 +800,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                     <div className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(to top, #05050599, transparent)' }} />
                   </div>
                   <div className="flex justify-between mt-2.5 font-mono text-[11px] tracking-[0.16em] uppercase text-[#847C6F]">
-                    <span>ATTO I · H 19:30 ROYAL APERITIVO &amp; SUNSET</span>
+                    <span>{uiLabels.act1}</span>
                     <span>PARCO SEMPIONE &amp; PORTA NUOVA</span>
                   </div>
                 </div>
@@ -733,7 +818,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                     <div className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(to top, #05050599, transparent)' }} />
                   </div>
                   <div className="mt-2 font-mono text-[11px] tracking-[0.16em] uppercase text-[#847C6F]">
-                    ATTO II · H 23:30 OPENING &amp; LISTA
+                    {uiLabels.act2}
                   </div>
                 </div>
 
@@ -750,7 +835,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                     <div className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(to top, #05050599, transparent)' }} />
                   </div>
                   <div className="mt-2 font-mono text-[11px] tracking-[0.16em] uppercase text-[#847C6F]">
-                    ATTO III · H 01:30 PRIVÉ &amp; BOTTLE SHOW
+                    {uiLabels.act3}
                   </div>
                 </div>
               </div>

@@ -406,19 +406,20 @@ body.nlm-search-open {
 .nlm-header.is-scrolled {
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
 }
-.nlm-header-inner { min-height: 72px; gap: 1rem; }
-.nlm-header-nav { gap: clamp(0.55rem, 1.2vw, 1.15rem); }
+.nlm-header-inner { min-height: 72px; gap: 0.75rem; }
+.nlm-header-nav { gap: clamp(0.45rem, 0.85vw, 0.9rem); }
 .nlm-header .nlm-header-link {
   min-height: 44px;
   display: inline-flex;
   align-items: center;
+  white-space: nowrap;
   border-radius: 0;
   padding: 0.25rem 0.15rem;
   color: #eeeae2;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 800;
   line-height: 1.2;
-  letter-spacing: 0.065em;
+  letter-spacing: 0.055em;
   text-transform: uppercase;
 }
 .nlm-header .nlm-header-link::before { display: none; }

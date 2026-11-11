@@ -73,43 +73,55 @@ export async function generateMetadata({
 const VENUE_LIST_RULES = [
   {
     name: '1. Just Me Milano (Torre Branca)',
-    aperitivoWindow: '19:30 – 22:15 (€20–€25 w/ 1 drink & Royal Buffet)',
-    clubWindow: '23:30 – 00:45 (€20–€35 w/ 1 drink)',
+    aperitivoEn: '19:30 - 22:15 (€20-€25 w/ 1 drink & Royal Buffet)',
+    aperitivoIt: '19:30 - 22:15 (20-25 € con 1 drink e Royal Buffet)',
+    clubEn: '23:30 - 00:45 (€20-€35 w/ 1 drink)',
+    clubIt: '23:30 - 00:45 (20-35 € con 1 drink)',
     dressCodeEn: 'High Fashion & Smart Glamour (Strict door selection)',
     dressCodeIt: 'Alta Moda & Smart Glamour (Selezione rigorosa alla porta)',
   },
   {
-    name: '2. Pineta Milano (Corso Como)',
-    aperitivoWindow: '19:30 – 22:00 (€15–€20 Singing Aperitivo + Buffet)',
-    clubWindow: '23:30 – 01:00 (Ladies Free/€15 · Men €20–€25 w/ drink)',
+    name: '2. Pineta Milano (Porta Garibaldi)',
+    aperitivoEn: '19:30 - 22:00 (€15-€20 Singing Aperitivo + Buffet)',
+    aperitivoIt: '19:30 - 22:00 (15-20 € Aperitivo Cantato + Buffet)',
+    clubEn: '23:30 - 01:00 (Ladies Free/€15 · Men €20-€25 w/ drink)',
+    clubIt: '23:30 - 01:00 (Donna Omaggio/15 € · Uomo 20-25 € con drink)',
     dressCodeEn: 'Glamour & Trendy Chic (Collared shirt for men)',
     dressCodeIt: 'Glamour & Trendy Chic (Camicia richiesta per gli uomini)',
   },
   {
     name: '3. Aria Club Milano (San Siro)',
-    aperitivoWindow: 'Open-Air / Indoor Main Room from 23:30',
-    clubWindow: '23:30 – 01:00 (Ladies €15–€20 · Men €20–€25 w/ drink)',
+    aperitivoEn: 'Open-Air / Indoor Main Room from 23:30',
+    aperitivoIt: 'Giardino / Main Room dalle 23:30',
+    clubEn: '23:30 - 01:00 (Ladies €15-€20 · Men €20-€25 w/ drink)',
+    clubIt: '23:30 - 01:00 (Donna 15-20 € · Uomo 20-25 € con drink)',
     dressCodeEn: 'Smart Glamour & Contemporary Fashion',
     dressCodeIt: 'Smart Glamour & Moda Contemporanea',
   },
   {
     name: '4. 55 Milano (Arco della Pace)',
-    aperitivoWindow: '19:30 – 22:30 (€20 w/ 1 drink & Grand Royal Buffet)',
-    clubWindow: '23:00 – 01:00 (€20 w/ 1 drink)',
+    aperitivoEn: '19:30 - 22:30 (€20 w/ 1 drink & Grand Royal Buffet)',
+    aperitivoIt: '19:30 - 22:30 (20 € con 1 drink e Grand Royal Buffet)',
+    clubEn: '23:00 - 01:00 (€20 w/ 1 drink)',
+    clubIt: '23:00 - 01:00 (20 € con 1 drink)',
     dressCodeEn: 'Smart Elegant & Chic',
     dressCodeIt: 'Smart Elegant & Chic',
   },
   {
     name: '5. Voya Rooftop (20th Floor · Portello)',
-    aperitivoWindow: '19:00 – 22:00 (€20–€25 Sunset Skyline Aperitivo)',
-    clubWindow: '22:30 – 01:00 (€20 w/ cocktail · Panoramic DJ Set)',
+    aperitivoEn: '19:00 - 22:00 (€20-€25 Sunset Skyline Aperitivo)',
+    aperitivoIt: '19:00 - 22:00 (20-25 € Aperitivo Skyline al Tramonto)',
+    clubEn: '22:30 - 01:00 (€20 w/ cocktail · Panoramic DJ Set)',
+    clubIt: '22:30 - 01:00 (20 € con cocktail · DJ Set Panoramico)',
     dressCodeEn: 'Panoramic Cocktail Attire',
     dressCodeIt: 'Cocktail Chic Panoramico',
   },
   {
     name: '6. Repvblic Milano (Piazza della Repubblica)',
-    aperitivoWindow: 'Club Doors Open at 23:00 (Mon, Fri, Sat)',
-    clubWindow: '23:00 – 01:00 (€15–€20 w/ 1 drink)',
+    aperitivoEn: 'Club Doors Open at 23:00 (Mon, Fri, Sat)',
+    aperitivoIt: 'Apertura Club alle 23:00 (Lun, Ven, Sab)',
+    clubEn: '23:00 - 01:00 (€15-€20 w/ 1 drink)',
+    clubIt: '23:00 - 01:00 (15-20 € con 1 drink)',
     dressCodeEn: 'Fashion Forward / Rock Chic on Dirty Mondays',
     dressCodeIt: 'Fashion Forward / Rock Chic il Lunedì (Dirty Monday)',
   },
@@ -125,20 +137,28 @@ export default async function GuestListsPage({
 
   const faqs = [
     {
-      q: isIt
-        ? 'Come funziona l’accredito in Lista NIGHTLIFE MILAN?'
-        : 'How does the NIGHTLIFE MILAN Guest List accreditation work?',
-      a: isIt
-        ? 'Invia un messaggio WhatsApp al +39 351 912 7047 indicando: locale scelto, data, tuo Nome e Cognome + numero di donne e uomini (es. "Lista NIGHTLIFE MILAN — Pineta Sabato — Marco Rossi + 4 donne + 3 uomini"). L’accredito è gratuito e si paga direttamente alla cassa del locale.'
-        : 'Send a WhatsApp message to +39 351 912 7047 with: chosen venue, date, your Full Name + number of women and men (e.g., "List NIGHTLIFE MILAN — Pineta Saturday — Alex Smith + 4 women + 3 men"). Accreditation is free and you pay directly at the club cashier.',
+      q: tr(
+        locale,
+        'How does the NIGHTLIFE MILAN Guest List accreditation work?',
+        'Come funziona l’accredito in Lista NIGHTLIFE MILAN?'
+      ),
+      a: tr(
+        locale,
+        'Send a WhatsApp message to +39 351 912 7047 with: chosen venue, date, your Full Name + number of women and men (e.g., "List NIGHTLIFE MILAN · Pineta Saturday · Alex Smith + 4 women + 3 men"). Accreditation is free and you pay directly at the club cashier.',
+        'Invia un messaggio WhatsApp al +39 351 912 7047 indicando: locale scelto, data, tuo Nome e Cognome + numero di donne e uomini (es. "Lista NIGHTLIFE MILAN · Pineta Sabato · Marco Rossi + 4 donne + 3 uomini"). L’accredito è gratuito e si paga direttamente alla cassa del locale.'
+      ),
     },
     {
-      q: isIt
-        ? 'Essere in lista garantisce l’ingresso se siamo un gruppo di soli uomini?'
-        : 'Does being on the guest list guarantee entry for an all-male group?',
-      a: isIt
-        ? 'No: a Milano la lista nominale dà diritto alla fila agevolata e alla tariffa ridotta, ma la selezione alla porta richiede gruppi misti uomo/donna e dress code curato. Per gruppi di soli uomini (4+ persone) è sempre raccomandata la prenotazione di un Tavolo VIP per avere l’ingresso garantito.'
-        : 'No: in Milan, a guest list grants access to the priority line and reduced entry rate, but door selection requires a balanced male/female ratio and proper dress code. For all-male groups (4+ guests), booking a VIP Table is strongly recommended to guarantee entry.',
+      q: tr(
+        locale,
+        'Does being on the guest list guarantee entry for an all-male group?',
+        'Essere in lista garantisce l’ingresso se siamo un gruppo di soli uomini?'
+      ),
+      a: tr(
+        locale,
+        'No: in Milan, a guest list grants access to the priority line and reduced entry rate, but door selection requires a balanced male/female ratio and proper dress code. For all-male groups (4+ guests), booking a VIP Table is strongly recommended to guarantee entry.',
+        'No: a Milano la lista nominale dà diritto alla fila agevolata e alla tariffa ridotta, ma la selezione alla porta richiede gruppi misti uomo/donna e dress code curato. Per gruppi di soli uomini (4+ persone) è sempre raccomandata la prenotazione di un Tavolo VIP per avere l’ingresso garantito.'
+      ),
     },
   ];
 
@@ -156,7 +176,7 @@ export default async function GuestListsPage({
   };
 
   return (
-    <main className="flex-grow pt-24 pb-20 bg-[#131009]">
+    <main className="flex-grow pt-24 pb-20 bg-[#050505] text-[#F6F1E7]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10"><div className="relative h-64 md:h-80 w-full rounded-2xl overflow-hidden border border-champagne/25"><Image quality={92} src="/images/pillars/guest-lists-hero.webp" alt="Milan Nightclub Guest Lists 2026" title="Milan Nightclub Guest Lists 2026" fill priority sizes="100vw" className="object-cover" /></div></div>
       <script
         type="application/ld+json"
@@ -214,23 +234,23 @@ export default async function GuestListsPage({
                   <div className="p-3 rounded-lg bg-black/40 border border-white/10">
                     <div className="font-mono text-[10px] uppercase tracking-wider text-champagne mb-1 flex items-center gap-1.5">
                       <Clock className="w-3 h-3" />
-                      {isIt ? 'Fascia Aperitivo in Lista' : 'Aperitivo Guestlist Window'}
+                      {tr(locale, 'Aperitivo Guestlist Window', 'Fascia Aperitivo in Lista')}
                     </div>
-                    <div>{v.aperitivoWindow}</div>
+                    <div>{tr(locale, v.aperitivoEn, v.aperitivoIt)}</div>
                   </div>
                   <div className="p-3 rounded-lg bg-black/40 border border-white/10">
                     <div className="font-mono text-[10px] uppercase tracking-wider text-champagne mb-1 flex items-center gap-1.5">
                       <Clock className="w-3 h-3" />
-                      {isIt ? 'Fascia Club Dopocena' : 'Nightclub Guestlist Window'}
+                      {tr(locale, 'Nightclub Guestlist Window', 'Fascia Club Dopocena')}
                     </div>
-                    <div>{v.clubWindow}</div>
+                    <div>{tr(locale, v.clubEn, v.clubIt)}</div>
                   </div>
                   <div className="p-3 rounded-lg bg-black/40 border border-white/10">
                     <div className="font-mono text-[10px] uppercase tracking-wider text-emerald-400 mb-1 flex items-center gap-1.5">
                       <ShieldCheck className="w-3 h-3" />
                       Dress Code
                     </div>
-                    <div>{isIt ? v.dressCodeIt : v.dressCodeEn}</div>
+                    <div>{tr(locale, v.dressCodeEn, v.dressCodeIt)}</div>
                   </div>
                 </div>
               </div>

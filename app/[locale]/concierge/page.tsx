@@ -2,11 +2,12 @@ import { Metadata } from 'next';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import { tr } from '@/lib/i18n/t';
-import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
 import Image from 'next/image';
 import { MessageCircle, Star, Clock, Shield, Zap, MapPin, Calendar, CheckCircle } from 'lucide-react';
 import { CONTACT } from '@/config/contact';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import {
   VipQuoteCalculator,
   PrioritySixShowcase,
@@ -23,8 +24,21 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const isIt = locale === 'it';
   const canonical = `${baseUrl}${localePrefix(locale)}/concierge`;
 
-  const title = seoTitle(tr(locale, 'Milan Nightlife Concierge | Personal Table & Guestlist Service | Nightlife Milan', 'Concierge Vita Notturna Milano | Tavoli VIP & Guestlist | Nightlife Milan'));
-  const description = withWhatsApp(tr(locale, 'Your personal Milan nightlife concierge. VIP table booking, guestlist access, bottle service, and insider advice — all via WhatsApp. Free service for guests.', 'Il tuo concierge personale per la vita notturna milanese. Tavoli VIP, guestlist, bottle service e consigli insider — tutto via WhatsApp. Servizio gratuito.'), locale);
+  const title = seoTitle(
+    tr(
+      locale,
+      'Milan Nightlife Concierge | Personal Table & Guestlist Service | Nightlife Milan',
+      'Concierge Vita Notturna Milano | Tavoli VIP & Guestlist | Nightlife Milan'
+    )
+  );
+  const description = withWhatsApp(
+    tr(
+      locale,
+      'Your personal Milan nightlife concierge. VIP table booking, guestlist access, bottle service, and insider advice via WhatsApp. Free service for guests.',
+      'Il tuo concierge personale per la vita notturna milanese. Tavoli VIP, guestlist, bottle service e consigli insider su WhatsApp. Servizio gratuito.'
+    ),
+    locale
+  );
   const ogImage = `${baseUrl}/images/pillars/concierge-hero.webp`;
 
   return {
@@ -39,12 +53,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       languages: hreflangAlternates(baseUrl, '/concierge'),
     },
     openGraph: {
-      title: tr(locale, 'Personal Milan Nightlife Concierge — Nightlife Milan', 'Concierge Vita Notturna Milano — Nightlife Milan'),
+      title: tr(locale, 'Personal Milan Nightlife Concierge · Nightlife Milan', 'Concierge Vita Notturna Milano · Nightlife Milan'),
       description,
       type: 'website',
       url: canonical,
       siteName: 'Nightlife Milan',
-      locale: isIt ? 'it_IT' : 'en_US',
+      locale: getLocaleDef(locale)?.ogLocale || 'en_US',
       images: [{ url: ogImage, width: 1200, height: 630, alt: tr(locale, 'Milan nightlife concierge VIP table service', 'Concierge nightlife Milano tavolo VIP') }],
     },
     twitter: {
@@ -57,419 +71,459 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-const services = [
-  {
-    icon: Star,
-    title: 'VIP Table Booking',
-    desc: 'Reserved tables at Milan\'s most exclusive clubs. Best spots in the house, guaranteed.',
-  },
-  {
-    icon: CheckCircle,
-    title: 'Guestlist Access',
-    desc: 'Skip the queue with free or reduced entry guestlist at top venues. We add your name directly.',
-  },
-  {
-    icon: Zap,
-    title: 'Bottle Service',
-    desc: 'Premium spirits, champagne, mixers — curated for your group. We negotiate the best package.',
-  },
-  {
-    icon: MapPin,
-    title: 'Venue Recommendations',
-    desc: 'Not sure where to go? Tell us your vibe and we\'ll match you with the perfect spot.',
-  },
-  {
-    icon: Calendar,
-    title: 'Event Calendar',
-    desc: 'We keep track of the best parties, DJ sets, and special events every week.',
-  },
-  {
-    icon: Shield,
-    title: 'Dress Code Briefing',
-    desc: 'Avoid door policy issues — we tell you exactly what to wear for each venue.',
-  },
-];
-
-const testimonials = [
-  {
-    text: 'We were 8 people visiting for Fashion Week. They got us the best table at Just Me in under an hour. Absolute legends.',
-    name: 'James K.',
-    city: 'London',
-    night: 'Just Me — Fashion Week',
-  },
-  {
-    text: 'Told them our budget and they came back with 3 options. Ended up at Pineta — best aperitivo of my life.',
-    name: 'Sofia R.',
-    city: 'New York',
-    night: 'Pineta Club',
-  },
-  {
-    text: 'Organized a birthday for 12 people. Everything was perfect — table, bottles, even birthday cake coordination. Zero stress.',
-    name: 'Marco & Anna',
-    city: 'Dubai',
-    night: 'Voya Rooftop',
-  },
-];
-
 export default async function ConciergePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const waMsg = encodeURIComponent("Hi! I need help planning a night out in Milan. Can you assist me?");
-  const waLink = `https://wa.me/393519127047?text=${waMsg}`;
+  const waLink = getConciergeBookingUrl(locale);
+
+  const services = [
+    {
+      icon: Star,
+      title: tr(locale, 'VIP Table Booking', 'Prenotazione Tavoli VIP'),
+      desc: tr(
+        locale,
+        'Reserved Dancefloor, Privé, and DJ Console tables with 100% bottle credit and priority VIP Host entry.',
+        'Tavoli riservati in Pista, Privé e Console DJ con 100% credito bottiglie e ingresso prioritario VIP Host.'
+      ),
+    },
+    {
+      icon: CheckCircle,
+      title: tr(locale, 'Guestlist Access', 'Accredito in Lista Ufficiale'),
+      desc: tr(
+        locale,
+        'Nominal accreditation on Lista NIGHTLIFE MILAN for Royal Aperitivo (19:30-22:15) and Club Night entry.',
+        'Accredito nominale nella Lista NIGHTLIFE MILAN per il Royal Aperitivo (19:30-22:15) e l’ingresso dopocena.'
+      ),
+    },
+    {
+      icon: Zap,
+      title: tr(locale, 'Bottle Service & Menus', 'Listini Bottiglie Ufficiali'),
+      desc: tr(
+        locale,
+        'Verified champagne, vodka, and tequila bottle menus sent on WhatsApp before you confirm your table.',
+        'Carte ufficiali di champagne, vodka e tequila inviate su WhatsApp prima della conferma del tavolo.'
+      ),
+    },
+    {
+      icon: MapPin,
+      title: tr(locale, 'Venue Matching', 'Scelta del Club Ideale'),
+      desc: tr(
+        locale,
+        'Share your group age, music taste, and budget: we match you with the right club for that exact night.',
+        'Indicaci età media, genere musicale e budget: ti abbiniamo al club perfetto per quella serata.'
+      ),
+    },
+    {
+      icon: Calendar,
+      title: tr(locale, 'Live Weekly Lineup', 'Programmazione Settimanale'),
+      desc: tr(
+        locale,
+        'Updated 7/7 schedule covering guest DJs, Fashion Week, Fuorisalone, San Siro afterparties, and NYE.',
+        'Calendario aggiornato 7/7 tra special guest DJ, Fashion Week, Fuorisalone, dopo-partita San Siro e Capodanno.'
+      ),
+    },
+    {
+      icon: Shield,
+      title: tr(locale, 'Dress Code Briefing', 'Consulenza Dress Code & Porta'),
+      desc: tr(
+        locale,
+        'Clear guidance on attire, arrival cut-off times, and male/female group balance for smooth door entry.',
+        'Indicazioni chiare su abbigliamento, orario limite e bilanciamento del gruppo per superare la selezione.'
+      ),
+    },
+  ];
+
+  const testimonials = [
+    {
+      text: tr(
+        locale,
+        'We were 8 guests visiting for Fashion Week. They secured a raised Privé table at Just Me in under 20 minutes.',
+        'Eravamo in 8 durante la Fashion Week. Ci hanno riservato un tavolo Privé rialzato al Just Me in meno di 20 minuti.'
+      ),
+      name: 'James K.',
+      city: 'London',
+      night: 'Just Me · Fashion Week',
+    },
+    {
+      text: tr(
+        locale,
+        'Shared our budget on WhatsApp and received 3 clear options with bottle lists. Pineta singing dinner was unforgettable.',
+        'Abbiamo scritto il budget su WhatsApp ricevendo subito 3 opzioni chiare coi listini. Cena cantata al Pineta impeccabile.'
+      ),
+      name: 'Sofia R.',
+      city: 'Madrid',
+      night: 'Pineta Milano',
+    },
+    {
+      text: tr(
+        locale,
+        'Organized a birthday for 12 guests at Voya Rooftop: panoramic skyline table, bottles, and zero stress at the door.',
+        'Organizzato un compleanno per 12 persone al Voya Rooftop: tavolo vista skyline al 20° piano, bottiglie e zero coda.'
+      ),
+      name: 'Marco & Anna',
+      city: 'Zurich',
+      night: 'Voya Rooftop',
+    },
+  ];
+
+  const faqs = [
+    {
+      q: tr(locale, 'Is the Milan nightlife concierge service free?', 'Il servizio Concierge Nightlife Milan è davvero gratuito?'),
+      a: tr(
+        locale,
+        'Yes. Our concierge assistance is 100% free for guests with zero agency markup: you pay the official minimum spend or guest-list entry directly at the club cashier.',
+        'Sì. L’assistenza concierge è 100% gratuita e senza alcun sovrapprezzo di agenzia: paghi il minimum spend ufficiale o l’ingresso ridotto direttamente alla cassa del locale.'
+      ),
+    },
+    {
+      q: tr(locale, 'How quickly do you reply on WhatsApp?', 'In quanto tempo rispondete su WhatsApp?'),
+      a: tr(
+        locale,
+        'We reply within 10 minutes daily from 14:00 to 04:00 CET on +39 351 912 7047. For same-night weekend tables, message us before 22:00.',
+        'Rispondiamo entro 10 minuti tutti i giorni dalle 14:00 alle 04:00 al +39 351 912 7047. Per tavoli nella stessa sera del weekend consigliamo di scrivere entro le 22:00.'
+      ),
+    },
+    {
+      q: tr(locale, 'Can you assist groups of 8+ guests or all-male groups?', 'Potete assistere gruppi numerosi o di soli uomini?'),
+      a: tr(
+        locale,
+        'Yes. Large groups and all-male groups (4+ men) are guided toward dedicated VIP Tables at Just Me, Pineta, Aria Club, 55 Milano, Voya Rooftop, and Repvblic for priority VIP Host entry.',
+        'Sì. Per gruppi numerosi o gruppi di soli uomini (4+ persone) coordiniamo Tavoli VIP dedicati da Just Me, Pineta, Aria Club, 55 Milano, Voya Rooftop e Repvblic con ingresso VIP Host.'
+      ),
+    },
+    {
+      q: tr(locale, 'What is the minimum spend for a VIP table in Milan?', 'Qual è il minimum spend per un tavolo VIP a Milano?'),
+      a: tr(
+        locale,
+        'Dancefloor VIP tables start at €250-€400 (5-6 passes), Privé tables run €500-€1,000 (8-10 passes), and DJ Console tables start at €1,200-€5,000+ in 100% bottle credit.',
+        'I tavoli VIP Pista partono da 250-400 € (5-6 pass), i tavoli Privé da 500-1.000 € (8-10 pass) e i tavoli Console DJ da 1.200-5.000+ € interamente in credito bottiglie.'
+      ),
+    },
+  ];
 
   const conciergeSchema = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "name": "Milan Nightlife Concierge Service",
-    "description": "Personal concierge service for VIP table booking, guestlist access, bottle service reservations, and nightlife planning in Milan. Free service for guests, reply guaranteed in under 10 minutes.",
-    "provider": {
-      "@type": "Organization",
-      "name": "Nightlife Milan",
-      "url": "https://nightlifemilan.com",
-      "telephone": "+39-351-912-7047",
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+39-351-912-7047",
-        "contactType": "customer service",
-        "availableLanguage": ["English", "Italian"],
-        "hoursAvailable": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-          "opens": "14:00",
-          "closes": "04:00"
-        }
-      }
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: tr(locale, 'Milan Nightlife Concierge Service', 'Servizio Concierge Vita Notturna Milano'),
+    description: tr(
+      locale,
+      'Official WhatsApp concierge desk for VIP table reservations, nominal guest lists, bottle service menus, and nightlife planning in Milan. Free service for guests.',
+      'Desk WhatsApp ufficiale per prenotazione tavoli VIP, liste nominali, listini bottiglie e organizzazione serate a Milano. Servizio gratuito per gli ospiti.'
+    ),
+    provider: {
+      '@type': 'Organization',
+      name: 'Nightlife Milan',
+      url: 'https://nightlifemilan.com',
+      telephone: '+39-351-912-7047',
+      contactPoint: {
+        '@type': 'ContactPoint',
+        telephone: '+39-351-912-7047',
+        contactType: 'customer service',
+        availableLanguage: ['English', 'Italian', 'Spanish', 'French', 'German', 'Portuguese'],
+        hoursAvailable: {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+          opens: '14:00',
+          closes: '04:00',
+        },
+      },
     },
-    "areaServed": {
-      "@type": "City",
-      "name": "Milan",
-      "addressCountry": "IT"
+    areaServed: {
+      '@type': 'City',
+      name: 'Milan',
+      addressCountry: 'IT',
     },
-    "serviceType": "Nightlife Concierge",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "EUR",
-      "description": "Free concierge service — no booking fees for guests"
+    serviceType: 'Nightlife Concierge',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'EUR',
+      description: 'Free concierge service with zero agency booking fees',
     },
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Concierge Services",
-      "itemListElement": [
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "VIP Table Booking Milan" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Guestlist Access Milan Clubs" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Bottle Service Milan" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Nightclub Recommendations Milan" } }
-      ]
-    }
   };
 
   const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Is the Milan nightlife concierge service free?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, the concierge service is completely free for guests. We earn a commission from partner venues, so there are no booking fees or service charges for you."
-        }
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.a,
       },
-      {
-        "@type": "Question",
-        "name": "How quickly do you reply on WhatsApp?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "We guarantee a reply within 10 minutes during operating hours (2 PM to 4 AM daily). For same-night requests, contact us before 10 PM."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can you get us into exclusive Milan clubs without a reservation?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. We have direct contacts at Milan's top venues including Just Me, Pineta, Voya Rooftop, Play Club, and more. We can add you to the guestlist or reserve a VIP table even on the same day in most cases."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What is the minimum spend for a VIP table in Milan?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Minimum spends vary by venue: Just Me from €500, Voya Rooftop from €400, Pineta from €300, Play Club from €200. Contact us via WhatsApp for current prices and availability."
-        }
-      }
-    ]
+    })),
   };
 
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(conciergeSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-    <main className="min-h-screen bg-[#131009]">
-      <div className="relative h-64 sm:h-80 w-full overflow-hidden">
-        <Image quality={92}
-          src="/images/pillars/concierge-hero.webp"
-          alt="Milan Nightlife VIP Concierge Desk"
-          fill
-          priority
-          className="object-cover opacity-50"
-          sizes="100vw"
-        />
-      </div>
+      <main className="min-h-screen bg-[#050505] text-[#F6F1E7]">
+        {/* 1st Body Image == og:image */}
+        <div className="relative h-64 sm:h-80 w-full overflow-hidden border-b border-[#F6F1E7]/14">
+          <Image
+            quality={92}
+            src="/images/pillars/concierge-hero.webp"
+            alt={tr(locale, 'Milan nightlife concierge VIP table service', 'Concierge nightlife Milano tavolo VIP')}
+            fill
+            priority
+            className="object-cover opacity-65"
+            sizes="100vw"
+          />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/35 to-transparent" />
+        </div>
 
-      {/* Hero */}
-      <section className="relative pt-32 pb-24 px-6 text-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-champagne/5 via-transparent to-transparent pointer-events-none" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full bg-champagne/6 blur-[140px] pointer-events-none" />
-
-        <div className="relative max-w-3xl mx-auto">
-          <p className="font-sans text-champagne/60 text-[10px] tracking-[0.4em] uppercase mb-6">
-            FREE PERSONAL SERVICE
-          </p>
-          <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-none mb-6"
-            style={{ textShadow: '0 0 80px rgba(201,168,106,0.15)' }}>
-            Your Milan<br />
-            <span className="text-champagne">Nightlife Concierge</span>
-          </h1>
-          <p className="font-sans text-white/50 text-lg leading-relaxed max-w-2xl mx-auto mb-8">
-            Planning a night out in Milan? We handle everything — from finding the right club
-            to reserving your VIP table and making sure you get in. All via WhatsApp. All free.
-          </p>
-
-          {/* AI Trafiletto */}
-          <div className="max-w-2xl mx-auto mb-10 p-5 rounded-xl border border-champagne/20 bg-champagne/[0.04] text-left">
-            <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">Quick Answer</p>
-            <p className="font-sans text-white/70 text-sm leading-relaxed">
-              Our <strong className="text-white">free Milan nightlife concierge</strong> handles VIP table reservations, guestlist access, bottle service, and dress code advice at Milan&apos;s top clubs. Contact via <strong className="text-white">WhatsApp +39 351 912 7047</strong> — reply guaranteed in under 10 minutes, 2 PM to 4 AM daily. We cover Just Me, Pineta, Voya Rooftop, Play Club, Magazzini Generali, and 12 more venues.
+        {/* Hero */}
+        <section className="relative pt-16 pb-20 px-6 text-center border-b border-[#F6F1E7]/14">
+          <div className="relative max-w-3xl mx-auto">
+            <p className="font-mono text-[#D6BE96] text-[11px] tracking-[0.28em] uppercase mb-5">
+              {tr(locale, 'OFFICIAL CONCIERGE DESK · 7/7 WHATSAPP · ZERO FEES', 'DESK CONCIERGE UFFICIALE · WHATSAPP 7/7 · ZERO COMMISSIONI')}
             </p>
-          </div>
+            <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-normal text-[#F6F1E7] leading-[0.96] mb-6">
+              {tr(locale, 'Milan Nightlife VIP Concierge', 'Concierge Ufficiale Vita Notturna Milano')}
+            </h1>
+            <p className="font-sans text-[#C2B9AA] text-lg leading-relaxed max-w-2xl mx-auto mb-8">
+              {tr(
+                locale,
+                'Planning a night out in Milan? We coordinate club matching, VIP table reservations, official bottle lists, and nominal guest-list access via WhatsApp at zero extra cost.',
+                'Organizzi una serata a Milano? Coordiniamo scelta del club, prenotazione Tavoli VIP, listini bottiglie ufficiali e accredito in lista nominale su WhatsApp a costo zero.'
+              )}
+            </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-            <a
-              href={waLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-champagne text-black
-                font-sans font-bold text-sm tracking-[0.15em] uppercase
-                hover:bg-white transition-colors duration-300"
-            >
-              <MessageCircle className="w-4 h-4" />
-              Start Planning Now
-            </a>
-          </div>
-
-          <div className="flex flex-wrap items-center justify-center gap-6 text-sm">
-            <div className="flex items-center gap-2 text-white/30">
-              <Clock className="w-3.5 h-3.5 text-champagne/50" />
-              <span className="font-sans text-xs tracking-wider">Reply &lt; 10 minutes</span>
+            {/* Quick Answer */}
+            <div className="max-w-2xl mx-auto mb-10 p-6 border border-[#D6BE96]/35 bg-[#0B0A09] text-left">
+              <p className="font-mono text-[#D6BE96] text-[10px] tracking-[0.28em] uppercase mb-2.5">
+                {tr(locale, 'DIRECT ANSWER · CONCIERGE DESK', 'RISPOSTA IMMEDIATA · COME OPERIAMO')}
+              </p>
+              <p className="font-sans text-[#E4DDD0] text-sm leading-relaxed">
+                {tr(
+                  locale,
+                  'Nightlife Milan Concierge handles VIP table bookings (€250-€5,000+ 100% bottle credit), nominal guest lists, and dress code briefings across Just Me, Pineta, Aria Club, 55 Milano, Voya Rooftop, Repvblic, and 14 partner venues via WhatsApp +39 351 912 7047 (reply in under 10 minutes, 14:00-04:00 daily).',
+                  'Il Concierge Nightlife Milan gestisce Tavoli VIP (250-5.000+ € in 100% credito bottiglie), liste nominali e briefing dress code per Just Me, Pineta, Aria Club, 55 Milano, Voya Rooftop, Repvblic e altri 14 club partner su WhatsApp +39 351 912 7047 (risposta entro 10 minuti, 14:00-04:00 7/7).'
+                )}
+              </p>
             </div>
-            <div className="flex items-center gap-2 text-white/30">
-              <CheckCircle className="w-3.5 h-3.5 text-champagne/50" />
-              <span className="font-sans text-xs tracking-wider">Completely free service</span>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
+              <a
+                href={waLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-[48px] items-center gap-3 px-8 py-4 bg-[#F6F1E7] text-[#050505] font-mono font-semibold text-xs tracking-[0.18em] uppercase hover:bg-[#D6BE96] transition-colors"
+              >
+                <MessageCircle className="w-4 h-4" />
+                {tr(locale, 'Message WhatsApp Concierge', 'Scrivi al Concierge su WhatsApp')}
+              </a>
             </div>
-            <div className="flex items-center gap-2 text-white/30">
-              <Shield className="w-3.5 h-3.5 text-champagne/50" />
-              <span className="font-sans text-xs tracking-wider">7 days a week</span>
+
+            <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-[#C2B9AA]">
+              <div className="flex items-center gap-2">
+                <Clock className="w-3.5 h-3.5 text-[#D6BE96]" />
+                <span className="font-mono text-[11px] uppercase tracking-wider">{tr(locale, 'Reply < 10 min', 'Risposta < 10 min')}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="w-3.5 h-3.5 text-[#D6BE96]" />
+                <span className="font-mono text-[11px] uppercase tracking-wider">{tr(locale, 'Zero Agency Markup', 'Zero Sovrapprezzo')}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Shield className="w-3.5 h-3.5 text-[#D6BE96]" />
+                <span className="font-mono text-[11px] uppercase tracking-wider">{tr(locale, 'Active 7/7', 'Attivo 7 Giorni su 7')}</span>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* How it works */}
-      <section className="px-6 pb-24 border-t border-white/5 pt-20">
-        <div className="max-w-5xl mx-auto">
-          <p className="font-sans text-champagne/50 text-[10px] tracking-[0.4em] uppercase mb-12 text-center">
-            HOW IT WORKS
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/5 rounded-lg overflow-hidden">
-            {[
-              {
-                step: '01',
-                title: 'Tell us your night',
-                desc: 'Date, group size, budget, vibe. Send it on WhatsApp — no forms, no calls.',
-              },
-              {
-                step: '02',
-                title: 'We find the best option',
-                desc: 'We match you with the right venue, check availability, and negotiate the best deal.',
-              },
-              {
-                step: '03',
-                title: 'Show up and enjoy',
-                desc: 'Your name is on the list, your table is reserved. Just arrive and have the best night.',
-              },
-            ].map((item) => (
-              <div key={item.step} className="bg-[#131009] p-10 text-center">
-                <span className="font-serif text-6xl text-champagne/15 font-bold block mb-6">{item.step}</span>
-                <h3 className="font-serif text-xl text-white mb-3">{item.title}</h3>
-                <p className="font-sans text-white/40 text-sm leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Services */}
-      <section className="px-6 pb-24">
-        <div className="max-w-5xl mx-auto">
-          <p className="font-sans text-champagne/50 text-[10px] tracking-[0.4em] uppercase mb-3">
-            WHAT WE DO
-          </p>
-          <h2 className="font-serif text-4xl text-white mb-12">
-            Everything for Your Night Out
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {services.map((service) => (
-              <div key={service.title}
-                className="p-7 rounded-lg border border-white/8 bg-white/[0.02]
-                  hover:border-champagne/20 hover:bg-white/[0.04] transition-all duration-300 group">
-                <div className="w-10 h-10 rounded-full bg-champagne/10 border border-champagne/20
-                  flex items-center justify-center mb-5
-                  group-hover:bg-champagne/15 transition-colors duration-300">
-                  <service.icon className="w-4 h-4 text-champagne" />
+        {/* How it works (Warm Ivory Chapter #F6F1E7) */}
+        <section className="px-6 py-20 bg-[#F6F1E7] text-[#050505] border-b border-[#050505]/15">
+          <div className="max-w-5xl mx-auto">
+            <p className="font-mono text-[#5C4624] text-xs font-semibold tracking-[0.28em] uppercase mb-10 text-center">
+              {tr(locale, 'N° 01 · HOW IT WORKS IN 3 STEPS', 'N° 01 · COME FUNZIONA IN 3 PASSI')}
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 border-t border-l border-[#050505]/15">
+              {[
+                {
+                  step: '01',
+                  title: tr(locale, 'Send date & group size', 'Invia data e numero ospiti'),
+                  desc: tr(
+                    locale,
+                    'Share your date, male/female count, preferred music vibe, and budget directly on WhatsApp.',
+                    'Scrivici data, numero di uomini e donne, musica preferita e fascia di budget su WhatsApp.'
+                  ),
+                },
+                {
+                  step: '02',
+                  title: tr(locale, 'Compare verified options', 'Confronta le opzioni reali'),
+                  desc: tr(
+                    locale,
+                    'Receive live table positions, official bottle menus, and guest-list cut-off times in under 10 minutes.',
+                    'Ricevi in meno di 10 minuti posizioni tavolo reali, listini bottiglie ufficiali e orari lista.'
+                  ),
+                },
+                {
+                  step: '03',
+                  title: tr(locale, 'Arrive at the VIP Host desk', 'Accedi dal desk VIP Host'),
+                  desc: tr(
+                    locale,
+                    'Your reservation name is registered at the door: skip the general queue and pay directly at the club.',
+                    'Il tuo nome è registrato alla porta VIP: entri dalla corsia dedicata e paghi direttamente al club.'
+                  ),
+                },
+              ].map((item) => (
+                <div key={item.step} className="border-r border-b border-[#050505]/15 p-9 text-left bg-[#F6F1E7]">
+                  <span className="font-serif italic text-5xl text-[#7A5E30] block mb-4">{item.step}</span>
+                  <h2 className="font-serif text-2xl text-[#050505] mb-2.5">{item.title}</h2>
+                  <p className="font-sans text-[#2C2823] text-sm leading-relaxed">{item.desc}</p>
                 </div>
-                <h3 className="font-serif text-lg text-white mb-2">{service.title}</h3>
-                <p className="font-sans text-white/40 text-sm leading-relaxed">{service.desc}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Testimonials */}
-      <section className="px-6 pb-24 border-t border-white/5 pt-20">
-        <div className="max-w-5xl mx-auto">
-          <p className="font-sans text-champagne/50 text-[10px] tracking-[0.4em] uppercase mb-12 text-center">
-            WHAT GUESTS SAY
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {testimonials.map((t, i) => (
-              <div key={i} className="p-7 rounded-lg border border-white/8 bg-white/[0.02]">
-                <div className="flex gap-1 mb-5">
-                  {[1, 2, 3, 4, 5].map((s) => (
-                    <Star key={s} className="w-3 h-3 text-champagne fill-champagne" />
-                  ))}
-                </div>
-                <p className="font-sans text-white/60 text-sm leading-relaxed italic mb-6">
-                  &ldquo;{t.text}&rdquo;
-                </p>
-                <div className="border-t border-white/8 pt-4">
-                  <p className="font-sans text-white text-sm font-medium">{t.name}</p>
-                  <p className="font-sans text-white/30 text-xs">{t.city} · {t.night}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="px-6 pb-24">
-        <div className="max-w-3xl mx-auto">
-          <p className="font-sans text-champagne/50 text-[10px] tracking-[0.4em] uppercase mb-12 text-center">
-            QUESTIONS
-          </p>
-          <div className="space-y-8">
-            {[
-              {
-                q: 'Is this service really free?',
-                a: 'Yes. We earn a commission from the venues — you pay nothing extra beyond the normal minimum spend or entry fee. In fact, we often negotiate better rates than you\'d get directly.',
-              },
-              {
-                q: 'How quickly do you respond?',
-                a: 'We guarantee a reply within 10 minutes during operating hours (12:00 PM – 4:00 AM Italian time, 7 days a week). For urgent last-minute requests, we\'re usually faster.',
-              },
-              {
-                q: 'What languages do you speak?',
-                a: 'We serve guests in English, Italian, French, Spanish, and Arabic. If you\'re visiting from abroad, just write to us in your preferred language.',
-              },
-              {
-                q: 'Can you help with groups larger than 10?',
-                a: 'Absolutely — large groups are our specialty. We can organize private areas, multiple tables, or even private events for groups of 20+.',
-              },
-            ].map((item, i) => (
-              <div key={i} className="border-b border-white/8 pb-8">
-                <h3 className="font-serif text-lg text-white mb-3">{item.q}</h3>
-                <p className="font-sans text-white/50 text-sm leading-relaxed">{item.a}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Venues we cover — image gallery H2 */}
-      <section className="px-6 pb-24 border-t border-white/5 pt-16">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="font-serif text-4xl text-white mb-4">Venues We Cover</h2>
-          <p className="font-sans text-white/40 text-sm mb-8 max-w-xl">
-            Direct partnerships with Milan&apos;s top clubs — guaranteed access, no surprises.
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 mb-10">
-            {[
-              { src: '/images/pillars/concierge-01.webp', alt: 'Just Me Milano — VIP table booking luxury club Sempione', label: 'Just Me' },
-              { src: '/images/pillars/concierge-02.webp', alt: 'Pineta Club Milano — singing aperitivo Corso Como', label: 'Pineta Club' },
-              { src: '/images/pillars/concierge-03.webp', alt: 'Voya Rooftop Milan — sky lounge 20th floor Isola', label: 'Voya Rooftop' },
-              { src: '/images/pillars/concierge-04.webp', alt: 'Play Club Milano — hip hop afrobeats Corso Como', label: 'Play Club' },
-              { src: '/images/pillars/concierge-05.webp', alt: 'Magazzini Generali Milano — techno club Porta Romana', label: 'Magazzini' },
-            ].map((img) => (
-              <div key={img.label} className="relative group">
-                <div className="relative h-36 rounded-xl overflow-hidden border border-white/8">
-                  <Image src={img.src} alt={img.alt} fill quality={92} className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width: 768px) 50vw, 40vw" />
-                </div>
-                <p className="font-sans text-white/40 text-xs text-center mt-2 tracking-widest uppercase">{img.label}</p>
-              </div>
-            ))}
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {['Just Me', 'Pineta Club', 'Voya Rooftop', 'Play Club', 'Magazzini Generali', '55 Milano', 'Repvblic', 'Church 81', 'Apollo', 'Hollywood', 'Volt', 'Armani Privé', 'The Club', 'Terrazza 21', 'Gattopardo', 'Ceresio 7', 'MiB Milano'].map((v) => (
-              <span key={v} className="px-3 py-1.5 rounded-full border border-white/10 text-white/40 text-xs font-sans tracking-wider">
-                {v}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Interactive Dress Code Checker, Neighborhood Commute Planner, VIP Quote Calculator & Priority 6 */}
-      <section className="px-6 pb-20 max-w-7xl mx-auto space-y-16">
-        <DressCodeInstantChecker locale={locale} />
-        <NeighborhoodCommutePlanner locale={locale} />
-        <VipQuoteCalculator locale={locale} />
-        <PrioritySixShowcase locale={locale} />
-      </section>
-
-      {/* Final CTA */}
-      <section className="px-6 pb-24">
-        <div className="max-w-3xl mx-auto">
-          <div className="relative p-12 rounded-xl border border-champagne/20 bg-champagne/[0.04] text-center overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-champagne/8 via-transparent to-transparent pointer-events-none" />
-            <h2 className="font-serif text-4xl text-white mb-4 relative">
-              Ready for the best<br />night of your trip?
+        {/* Services */}
+        <section className="px-6 py-20 border-b border-[#F6F1E7]/14">
+          <div className="max-w-5xl mx-auto">
+            <p className="font-mono text-[#D6BE96] text-xs tracking-[0.28em] uppercase mb-3">
+              {tr(locale, 'N° 02 · CONCIERGE SERVICES', 'N° 02 · SERVIZI CONCIERGE')}
+            </p>
+            <h2 className="font-serif text-4xl text-[#F6F1E7] mb-12">
+              {tr(locale, 'Everything Coordinated Before You Step Out', 'Tutto Coordinato Prima di Uscire')}
             </h2>
-            <p className="font-sans text-white/40 text-sm mb-8 relative">
-              Send us a WhatsApp right now — tell us when and how many people,<br />
-              and we&apos;ll take care of everything else.
-            </p>
-            <a
-              href={waLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative inline-flex items-center gap-3 px-10 py-5 bg-champagne text-black
-                font-sans font-bold text-sm tracking-[0.2em] uppercase
-                hover:bg-white transition-colors duration-300"
-            >
-              <MessageCircle className="w-5 h-5" />
-              {CONTACT.whatsapp.number}
-            </a>
-            <p className="font-sans text-white/20 text-xs mt-5 relative">
-              Free service · No registration · Instant reply
-            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {services.map((service) => (
+                <div
+                  key={service.title}
+                  className="p-7 border border-[#F6F1E7]/14 bg-[#0B0A09] hover:border-[#D6BE96]/45 transition-colors"
+                >
+                  <div className="w-10 h-10 border border-[#D6BE96]/35 bg-[#050505] flex items-center justify-center mb-5">
+                    <service.icon className="w-4 h-4 text-[#D6BE96]" />
+                  </div>
+                  <h3 className="font-serif text-xl text-[#F6F1E7] mb-2">{service.title}</h3>
+                  <p className="font-sans text-[#C2B9AA] text-sm leading-relaxed">{service.desc}</p>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-            <EditorialPageSections locale={locale as LocaleCode} path={`${localePrefix(locale)}/concierge`} />
+        {/* Testimonials */}
+        <section className="px-6 py-20 border-b border-[#F6F1E7]/14">
+          <div className="max-w-5xl mx-auto">
+            <p className="font-mono text-[#D6BE96] text-xs tracking-[0.28em] uppercase mb-10 text-center">
+              {tr(locale, 'N° 03 · INTERNATIONAL GUEST FEEDBACK', 'N° 03 · FEEDBACK OSPITI INTERNAZIONALI')}
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {testimonials.map((t, i) => (
+                <div key={i} className="p-7 border border-[#F6F1E7]/14 bg-[#0B0A09]">
+                  <div className="flex gap-1 mb-5">
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <Star key={s} className="w-3.5 h-3.5 text-[#D6BE96] fill-[#D6BE96]" />
+                    ))}
+                  </div>
+                  <p className="font-sans text-[#E4DDD0] text-sm leading-relaxed italic mb-6">
+                    &ldquo;{t.text}&rdquo;
+                  </p>
+                  <div className="border-t border-[#F6F1E7]/12 pt-4">
+                    <p className="font-sans text-[#F6F1E7] text-sm font-medium">{t.name}</p>
+                    <p className="font-mono text-[#847C6F] text-[11px] uppercase tracking-wider">{t.city} · {t.night}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section className="px-6 py-20 border-b border-[#F6F1E7]/14">
+          <div className="max-w-3xl mx-auto">
+            <p className="font-mono text-[#D6BE96] text-xs tracking-[0.28em] uppercase mb-10 text-center">
+              FAQ
+            </p>
+            <div className="space-y-6">
+              {faqs.map((item, i) => (
+                <div key={i} className="border-b border-[#F6F1E7]/14 pb-6">
+                  <h3 className="font-serif text-xl text-[#F6F1E7] mb-2.5">{item.q}</h3>
+                  <p className="font-sans text-[#C2B9AA] text-sm leading-relaxed">{item.a}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Venues we cover */}
+        <section className="px-6 py-20 border-b border-[#F6F1E7]/14">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="font-serif text-4xl text-[#F6F1E7] mb-3">
+              {tr(locale, '20 Verified Milan Clubs Covered', 'I 20 Club di Milano Coperti dal Servizio')}
+            </h2>
+            <p className="font-sans text-[#C2B9AA] text-sm mb-8 max-w-xl">
+              {tr(
+                locale,
+                'Direct desk coordination with Milan’s six priority clubs and 14 partner venues.',
+                'Coordinamento diretto con i 6 club prioritari di Milano e 14 locali partner selezionati.'
+              )}
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 mb-10">
+              {[
+                { src: '/images/pillars/concierge-01.webp', alt: 'Just Me Milano Torre Branca VIP Table', label: 'Just Me' },
+                { src: '/images/pillars/concierge-02.webp', alt: 'Pineta Milano Singing Dinner & Club', label: 'Pineta Club' },
+                { src: '/images/pillars/concierge-03.webp', alt: 'Voya Rooftop Milan 20th Floor Skyline', label: 'Voya Rooftop' },
+                { src: '/images/pillars/concierge-04.webp', alt: 'Play Club Milano Viale Monte Grappa', label: 'Play Club' },
+                { src: '/images/pillars/concierge-05.webp', alt: 'Magazzini Generali Milano Electronic Arena', label: 'Magazzini' },
+              ].map((img) => (
+                <div key={img.label} className="relative group">
+                  <div className="relative h-36 overflow-hidden border border-[#F6F1E7]/14">
+                    <Image src={img.src} alt={img.alt} fill quality={92} className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width: 768px) 50vw, 25vw" />
+                  </div>
+                  <p className="font-mono text-[#C2B9AA] text-[11px] text-center mt-2 tracking-widest uppercase">{img.label}</p>
+                </div>
+              ))}
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {['Just Me', 'Pineta Club', 'Aria Club', '55 Milano', 'Voya Rooftop', 'Repvblic', 'Armani Privé', 'Play Club', 'Magazzini Generali', 'Hollywood', 'Gattopardo', 'Tocqueville 13', 'Alcatraz', 'Fabrique', 'Ceresio 7', 'Terrazza Duomo 21'].map((v) => (
+                <span key={v} className="px-3.5 py-1.5 border border-[#F6F1E7]/14 bg-[#0B0A09] text-[#E4DDD0] text-xs font-mono tracking-wider">
+                  {v}
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Interactive Modules */}
+        <section className="px-6 py-20 max-w-7xl mx-auto space-y-16">
+          <DressCodeInstantChecker locale={locale} />
+          <NeighborhoodCommutePlanner locale={locale} />
+          <VipQuoteCalculator locale={locale} />
+          <PrioritySixShowcase locale={locale} />
+        </section>
+
+        {/* Final CTA */}
+        <section className="px-6 pb-24">
+          <div className="max-w-3xl mx-auto">
+            <div className="p-10 sm:p-12 border border-[#D6BE96]/35 bg-[#0B0A09] text-center">
+              <h2 className="font-serif text-3xl sm:text-4xl text-[#F6F1E7] mb-4">
+                {tr(locale, 'Ready to Plan Your Night in Milan?', 'Pronto a Organizzare la Tua Serata a Milano?')}
+              </h2>
+              <p className="font-sans text-[#C2B9AA] text-sm mb-8 max-w-xl mx-auto">
+                {tr(
+                  locale,
+                  'Send us your date and group size on WhatsApp: receive verified VIP table quotes and guest-list access in under 10 minutes.',
+                  'Scrivici data e numero di persone su WhatsApp: ricevi disponibilità tavoli VIP e accredito lista in meno di 10 minuti.'
+                )}
+              </p>
+              <a
+                href={waLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-[48px] items-center gap-3 px-10 py-4 bg-[#F6F1E7] text-[#050505] font-mono font-semibold text-xs tracking-[0.2em] uppercase hover:bg-[#D6BE96] transition-colors"
+              >
+                <MessageCircle className="w-5 h-5" />
+                WhatsApp {CONTACT.whatsapp.number}
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <EditorialPageSections locale={locale as LocaleCode} path={`${localePrefix(locale)}/concierge`} />
       </main>
     </>
   );

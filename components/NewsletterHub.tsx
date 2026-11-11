@@ -16,7 +16,6 @@ interface NewsletterHubProps {
 }
 
 export default function NewsletterHub({ lang, labels }: NewsletterHubProps) {
-  const isIt = lang === 'it';
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
@@ -27,9 +26,12 @@ export default function NewsletterHub({ lang, labels }: NewsletterHubProps) {
       return;
     }
 
-    const message = isIt
-      ? `Ciao! Voglio entrare nell'Inner Circle per ricevere i migliori tavoli ogni giovedì. Email: ${email}`
-      : `Hi! I'd like to join the Inner Circle for the best tables every Thursday. Email: ${email}`;
+    const prefix = tr(
+      lang,
+      "Hi! I'd like to join the Inner Circle for Thursday VIP table and guest list updates.",
+      "Ciao! Voglio entrare nell'Inner Circle per ricevere gli aggiornamenti del giovedì su tavoli VIP e liste."
+    );
+    const message = `${prefix} Email: ${email}`;
 
     window.open(
       `${CONTACT.whatsapp.link}?text=${encodeURIComponent(message)}`,
@@ -41,34 +43,44 @@ export default function NewsletterHub({ lang, labels }: NewsletterHubProps) {
     setEmail('');
   };
 
+  const placeholderText = labels?.emailPlaceholder || tr(lang, 'Your email address', 'La tua email');
+
   return (
-    <div className="w-full bg-[#131009] border-t border-white/5 py-20 px-4 sm:px-6 lg:px-8 mt-12">
+    <div className="w-full bg-[#050505] border-t border-[#F6F1E7]/14 py-20 px-4 sm:px-6 lg:px-8 mt-12">
       <div className="max-w-3xl mx-auto text-center">
-        <h2 className="font-serif text-3xl md:text-4xl font-bold text-champagne mb-4">
-          Join the Inner Circle
+        <p className="text-[11px] font-semibold tracking-[0.28em] uppercase text-[#C9A96E] mb-3">
+          NIGHTLIFE MILAN · CONCIERGE DISPATCH
+        </p>
+        <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#F6F1E7] mb-4">
+          {tr(lang, 'Join the Inner Circle', "Entra nell'Inner Circle")}
         </h2>
-        <p className="text-white/60 text-lg mb-8">
+        <p className="text-[#F6F1E7]/70 text-lg mb-8">
           {labels?.description || tr(lang, 'Get the best tables and secret guestlists every Thursday.', 'Ricevi i migliori tavoli e le liste segrete ogni giovedì.')}
         </p>
 
         {status === 'success' ? (
-          <div className="bg-white/[0.03] border border-champagne/30 rounded-xl p-6 inline-block">
-            <p className="text-champagne font-serif text-xl">
+          <div className="bg-[#0F0F0F] border border-[#C9A96E]/40 rounded-xl p-6 inline-block">
+            <p className="text-[#C9A96E] font-serif text-xl">
               {labels?.welcome || tr(lang, 'Welcome to the club.', 'Benvenuto nel club.')}
             </p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
             <div className="flex-1 relative">
+              <label htmlFor="newsletter-email-input" className="sr-only">
+                {placeholderText}
+              </label>
               <input
+                id="newsletter-email-input"
                 type="email"
+                aria-label={placeholderText}
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);
                   if (status === 'error') setStatus('idle');
                 }}
-                placeholder={labels?.emailPlaceholder || tr(lang, 'Your email address', 'La tua email')}
-                className={`w-full bg-white/[0.03] border ${status === 'error' ? 'border-red-500/50' : 'border-white/10'} rounded-xl px-6 py-4 text-white focus:outline-none focus:border-champagne focus:ring-1 focus:ring-champagne transition-colors`}
+                placeholder={placeholderText}
+                className={`w-full min-h-[48px] bg-[#0F0F0F] border ${status === 'error' ? 'border-red-500/60' : 'border-[#F6F1E7]/20'} rounded-xl px-6 py-3.5 text-[#F6F1E7] placeholder:text-[#F6F1E7]/45 focus:outline-none focus:border-[#C9A96E] focus:ring-1 focus:ring-[#C9A96E] transition-colors`}
                 required
               />
               {status === 'error' && (
@@ -80,7 +92,7 @@ export default function NewsletterHub({ lang, labels }: NewsletterHubProps) {
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="bg-champagne text-zinc-950 font-bold px-8 py-4 rounded-xl hover:bg-white transition-all duration-300 disabled:opacity-70 whitespace-nowrap"
+              className="min-h-[48px] bg-[#F6F1E7] text-[#050505] font-bold px-8 py-3.5 rounded-xl hover:bg-[#C9A96E] hover:text-[#050505] transition-all duration-300 disabled:opacity-70 whitespace-nowrap"
             >
               {status === 'loading' ? '...' : (labels?.subscribe || tr(lang, 'Subscribe', 'Iscriviti'))}
             </button>

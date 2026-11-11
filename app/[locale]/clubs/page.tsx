@@ -22,7 +22,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const hubCopy = getClubsHubCopy(code);
   const canonicalUrl = `${baseUrl}${localePrefix(code)}/clubs`;
 
-  const title = seoTitle(hubCopy.heroTitle);
+  const rawTitle = hubCopy.heroTitle.length < 44
+    ? `${hubCopy.heroTitle} 2026/2027 | Nightlife Milan`
+    : hubCopy.heroTitle;
+  const title = seoTitle(rawTitle);
   const description = withWhatsApp(hubCopy.heroLead, code);
 
   return {

@@ -192,6 +192,62 @@
   font-size: 0.875rem;
   margin-bottom: 1rem;
 }
+.groupRow {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.groupChips {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.35rem;
+  flex: 1;
+}
+.groupChip {
+  min-height: 44px;
+  border: 1px solid rgba(246, 241, 231, 0.22);
+  background: #050505;
+  color: #c2b9aa;
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.groupChip:hover {
+  border-color: #d6be96;
+  color: #f6f1e7;
+}
+.groupChip[aria-pressed='true'] {
+  background: #f6f1e7;
+  color: #050505;
+  border-color: #f6f1e7;
+  font-weight: 700;
+}
+.groupNumber {
+  width: 4.5rem;
+  min-height: 44px;
+  background: #050505;
+  border: 1px solid rgba(246, 241, 231, 0.22);
+  color: #f6f1e7;
+  padding: 0.6rem 0.5rem;
+  font-size: 0.875rem;
+  text-align: center;
+}
+.trustRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.85rem;
+  margin-top: 0.7rem;
+}
+.trustBadge {
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #d6be96;
+}
 .dayChoices {
   display: flex;
   flex-wrap: wrap;
