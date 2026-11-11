@@ -102,7 +102,7 @@ test('Bad Bunny Aria galleries use 210 exact localized assets', async () => {
 
 test('Bad Bunny Aria contributes exactly 35 canonical URLs to the sitemap', async () => {
   const rows = await sitemap();
-  const matches = rows.filter((row) => row.url.includes(`/events/${BAD_BUNNY_ARIA_CANONICAL_SLUG}`));
+  const matches = rows.filter((row) => row.url.endsWith(`/${BAD_BUNNY_ARIA_CANONICAL_SLUG}`));
   assert.equal(matches.length, 35);
   assert.equal(new Set(matches.map((row) => row.url)).size, 35);
 });

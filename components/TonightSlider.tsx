@@ -95,7 +95,7 @@ export default function TonightSlider({ items, lang }: TonightSliderProps) {
         <div
           className="absolute left-0 top-0 bottom-8 w-16 z-10 pointer-events-none transition-opacity duration-300"
           style={{
-            background: 'linear-gradient(to right, #131009, transparent)',
+            background: 'linear-gradient(to right, #050505, transparent)',
             opacity: canScrollLeft ? 1 : 0,
           }}
         />
@@ -103,7 +103,7 @@ export default function TonightSlider({ items, lang }: TonightSliderProps) {
         <div
           className="absolute right-0 top-0 bottom-8 w-16 z-10 pointer-events-none transition-opacity duration-300"
           style={{
-            background: 'linear-gradient(to left, #131009, transparent)',
+            background: 'linear-gradient(to left, #050505, transparent)',
             opacity: canScrollRight ? 1 : 0,
           }}
         />

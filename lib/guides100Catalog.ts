@@ -2,7 +2,7 @@
 // Zero English residue on non-English routes. All 100 guides (g-15..g-114) + 14 existing guides = 114 total pillar guides.
 
 import type { LocaleCode } from './i18n/locales';
-import { ALL_35_LOCALES, EXISTING_14_GUIDE_SLUGS_35 } from './i18n/localizedSlugs35';
+import { ALL_35_LOCALES, EXISTING_14_GUIDE_SLUGS_35, registerExtraGuideSlugs35 } from './i18n/localizedSlugs35';
 import { MusicGenre, type FAQ, type Guide, type GuideSection, type LocalizedString } from './types';
 
 export interface GuideSeed100 {
@@ -9060,6 +9060,7 @@ export const GUIDE_100_RELATED_VENUES: Record<string, string[]> = Object.fromEnt
 );
 
 const SEED_BY_ID = new Map<string, GuideSeed100>(GUIDE_100_SEEDS.map((s) => [s.id, s]));
+registerExtraGuideSlugs35(GUIDE_100_SEEDS);
 
 /**
  * Ensures guide.slugs is populated for all 35 languages (both for the 14 existing guides in mockGuides

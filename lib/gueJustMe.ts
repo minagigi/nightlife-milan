@@ -1,4 +1,4 @@
-import { enabledLocaleCodes, localePrefix, type LocaleCode } from './i18n/locales';
+import { enabledLocaleCodes, localePrefix, type LocaleCode } from './i18n/localeRegistry';
 import type { EventBatchProfile } from './eventBatchProfiles';
 
 export const GUE_JUST_ME_BASE_ID = 'nlm-gue-just-me-2026-07-25';

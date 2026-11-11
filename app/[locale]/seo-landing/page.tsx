@@ -61,7 +61,7 @@ export default async function LandingPage({ params }: Props) {
   };
 
   return (
-    <main id="main-content" className="flex-1 flex flex-col w-full bg-[#131009]">
+    <main id="main-content" className="flex-1 flex flex-col w-full bg-[#050505]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

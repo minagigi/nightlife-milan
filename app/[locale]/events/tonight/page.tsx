@@ -1,7 +1,7 @@
 import OctoberEntry from '@/components/OctoberEntry';
 import { Metadata } from 'next';
 import { tr } from '@/lib/i18n/t';
-import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { hreflangAlternates, canonicalPageUrl, localePrefix } from '@/lib/i18n/locales';
 import { generateEventListSchema, getLocalizedText, jsonLdString } from '@/lib/seo';
 import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const isIt = locale === 'it';
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const canonical = `${baseUrl}${localePrefix(locale)}/events/tonight`;
+  const canonical = canonicalPageUrl(baseUrl, locale, '/events/tonight');
 
   const title = seoTitle(
     tr(
@@ -202,7 +202,7 @@ export default async function EventsTonightPage({ params }: Props) {
       : null;
 
   return (
-    <main className="flex-1 bg-[#131009] w-full pt-20 pb-20">
+    <main className="flex-1 bg-[#050505] w-full pt-20 pb-20">
       {eventListSchema && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(eventListSchema) }} />
       )}
@@ -482,7 +482,7 @@ function TimeSlot({
                   quality={92}
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-[#131009] via-[#131009]/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-[#050505] via-[#050505]/40 to-transparent" />
                 {event.isSpecial && (
                   <div className="absolute top-3 left-3 bg-champagne text-black text-[9px] font-bold px-2 py-1 rounded uppercase tracking-wider">
                     {tr(locale, 'Special', 'Speciale')}

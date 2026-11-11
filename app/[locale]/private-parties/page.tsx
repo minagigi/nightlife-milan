@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Metadata } from 'next';
 import Link from '@/components/LocalizedLink';
 import { tr } from '@/lib/i18n/t';
-import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { getLocaleDef, hreflangAlternates, canonicalPageUrl, localePrefix } from '@/lib/i18n/locales';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { Sparkles, PartyPopper, Crown, Users, MessageCircle, CheckCircle2 } from 'lucide-react';
 import { VipQuoteCalculator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
@@ -20,7 +20,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const canonical = `${baseUrl}${localePrefix(locale)}/private-parties`;
+  const canonical = canonicalPageUrl(baseUrl, locale, '/private-parties');
 
   const title = seoTitle(
     tr(
@@ -200,7 +200,7 @@ export default async function PrivatePartiesPage({
   ];
 
   return (
-    <main className="flex-grow pt-24 pb-20 bg-[#131009]">
+    <main className="flex-grow pt-24 pb-20 bg-[#050505]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}

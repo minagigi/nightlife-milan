@@ -174,7 +174,7 @@ export function VipQuoteCalculator({ locale = 'it', initialVenueSlug }: { locale
   return (
     <section
       aria-label={isIt ? 'Calcolatore Preventivo Tavolo VIP e Feste Private' : 'VIP Table & Private Party Quote Calculator'}
-      className="my-14 rounded-2xl border border-champagne/30 bg-gradient-to-b from-[#1a150c] to-[#0d0b07] p-6 sm:p-10 shadow-[0_20px_60px_rgba(0,0,0,0.65)]"
+      className="my-14 rounded-2xl border border-champagne/30 bg-[#0B0A09] p-6 sm:p-10 shadow-[0_20px_60px_rgba(0,0,0,0.65)]"
     >
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8 pb-6 border-b border-white/10">
         <div>
@@ -219,7 +219,7 @@ export function VipQuoteCalculator({ locale = 'it', initialVenueSlug }: { locale
                     onClick={() => setOccasion(k)}
                     className={`text-left px-4 py-3 rounded-xl border text-xs sm:text-sm font-medium transition-all ${
                       active
-                        ? 'bg-champagne text-black border-champagne font-bold shadow-[0_0_20px_rgba(201,168,106,0.3)]'
+                        ? 'bg-[#25D366] text-[#050505] border-champagne font-bold shadow-[0_0_20px_rgba(201,168,106,0.3)]'
                         : 'bg-white/[0.03] text-white/80 border-white/10 hover:border-champagne/40'
                     }`}
                   >
@@ -308,7 +308,7 @@ export function VipQuoteCalculator({ locale = 'it', initialVenueSlug }: { locale
               step={1}
               value={guests}
               onChange={(e: { target: { value: string } }) => setGuests(Number(e.target.value))}
-              className="w-full accent-[#C9A86A] cursor-pointer h-2 bg-white/15 rounded-lg"
+              className="w-full accent-[#F6F1E7] cursor-pointer h-2 bg-white/15 rounded-lg"
             />
             <div className="flex justify-between text-[11px] text-white/40 mt-1">
               <span>4 {isIt ? 'ospiti (min)' : 'guests (min)'}</span>
@@ -373,7 +373,7 @@ export function VipQuoteCalculator({ locale = 'it', initialVenueSlug }: { locale
             href={waHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 rounded-xl bg-champagne text-black font-sans font-bold text-xs sm:text-sm tracking-[0.15em] uppercase hover:bg-white transition-colors shadow-[0_0_30px_rgba(201,168,106,0.35)]"
+            className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 rounded-xl bg-[#25D366] text-[#050505] font-sans font-bold text-xs sm:text-sm tracking-[0.15em] uppercase hover:bg-white transition-colors shadow-[0_0_30px_rgba(201,168,106,0.35)]"
           >
             <MessageCircle className="w-4 h-4" />
             {isIt ? 'Ricevi Mappa Tavoli & Listino su WhatsApp' : 'Get Floorplan & Bottle Menu on WhatsApp'}
@@ -714,7 +714,7 @@ export function WeeklyNightlifeNavigator({ locale }: { locale: string }) {
               onClick={() => setActiveDay(day.dayKey)}
               className={`px-4 py-2.5 rounded-full text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all ${
                 isSelected
-                  ? 'bg-champagne text-black shadow-[0_0_20px_rgba(201,168,106,0.35)]'
+                  ? 'bg-[#25D366] text-[#050505] shadow-[0_0_20px_rgba(201,168,106,0.35)]'
                   : 'bg-white/[0.04] text-white/70 border border-white/10 hover:border-champagne/40 hover:text-white'
               }`}
             >
@@ -856,13 +856,13 @@ export function EntryFormulaMatrix({ locale }: { locale: string }) {
   return (
     <section
       aria-label={isIt ? 'Confronto Formule Ingresso Discoteche Milano' : 'Milan Nightclub Entry Formulas Comparison'}
-      className="my-14 rounded-2xl border border-white/10 bg-[#100d08] p-6 sm:p-10"
+      className="my-14 border border-[#050505]/15 bg-[#F6F1E7] text-[#050505] p-6 sm:p-10"
     >
       <div className="mb-8">
-        <p className="font-sans text-champagne text-[10px] font-bold tracking-[0.28em] uppercase mb-2">
+        <p className="font-mono text-[#3D372E] text-[10px] font-bold tracking-[0.28em] uppercase mb-2">
           {isIt ? 'TRASPARENZA TOTALE · SCEGLI LA FORMULA GIUSTA' : 'TOTAL TRANSPARENCY · CHOOSE THE RIGHT FORMULA'}
         </p>
-        <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white">
+        <h2 className="font-serif text-3xl sm:text-4xl font-normal text-[#050505]">
           {isIt
             ? 'Le 5 Formule d’Ingresso a Milano: Lista, Aperitivo, Cena Cantata o Tavolo VIP?'
             : 'The 5 Milan Entry Formulas: Guest List, Aperitivo, Dinner Show or VIP Table?'}
@@ -872,7 +872,7 @@ export function EntryFormulaMatrix({ locale }: { locale: string }) {
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse min-w-[720px]">
           <thead>
-            <tr className="border-b border-champagne/30 text-[11px] font-bold uppercase tracking-wider text-champagne">
+            <tr className="border-b border-[#050505]/25 font-mono text-[11px] font-bold uppercase tracking-wider text-[#050505]">
               <th className="py-3.5 pr-4">{isIt ? 'Formula' : 'Formula'}</th>
               <th className="py-3.5 px-4">{isIt ? 'Orario' : 'Hours'}</th>
               <th className="py-3.5 px-4">{isIt ? 'Fascia Prezzo' : 'Price Range'}</th>
@@ -881,19 +881,19 @@ export function EntryFormulaMatrix({ locale }: { locale: string }) {
               <th className="py-3.5 pl-4">{isIt ? 'Ideale Per' : 'Best For'}</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-white/10 text-xs sm:text-sm text-white/80">
+          <tbody className="divide-y divide-[#050505]/14 text-xs sm:text-sm text-[#1F1C18]">
             {formulas.map((f) => (
-              <tr key={f.nameEn} className="hover:bg-white/[0.02]">
-                <td className="py-4 pr-4 font-serif font-bold text-white text-base">
+              <tr key={f.nameEn} className="hover:bg-[#EFE9DC]/70">
+                <td className="py-4 pr-4 font-serif font-semibold text-[#050505] text-base">
                   {isIt ? f.nameIt : f.nameEn}
                 </td>
-                <td className="py-4 px-4 text-champagne font-mono text-xs whitespace-nowrap">{f.time}</td>
-                <td className="py-4 px-4 font-semibold text-white whitespace-nowrap">
+                <td className="py-4 px-4 text-[#3D372E] font-mono text-xs whitespace-nowrap">{f.time}</td>
+                <td className="py-4 px-4 font-semibold text-[#050505] whitespace-nowrap">
                   {isIt ? f.priceIt : f.priceEn}
                 </td>
-                <td className="py-4 px-4 text-white/70">{isIt ? f.queueIt : f.queueEn}</td>
-                <td className="py-4 px-4 text-white/70">{isIt ? f.seatingIt : f.seatingEn}</td>
-                <td className="py-4 pl-4 text-white/60 text-xs leading-relaxed">
+                <td className="py-4 px-4 text-[#1F1C18]">{isIt ? f.queueIt : f.queueEn}</td>
+                <td className="py-4 px-4 text-[#1F1C18]">{isIt ? f.seatingIt : f.seatingEn}</td>
+                <td className="py-4 pl-4 text-[#3D372E] text-xs leading-relaxed">
                   {isIt ? f.idealIt : f.idealEn}
                 </td>
               </tr>
@@ -1019,10 +1019,10 @@ export function PrioritySixShowcase({ locale }: { locale: string }) {
         {priorityClubs.map((club) => (
           <div
             key={club.slug}
-            className="group rounded-2xl overflow-hidden border border-white/10 bg-[#15110b] hover:border-champagne/50 transition-all flex flex-col"
+            className="group rounded-2xl overflow-hidden border border-white/10 bg-[#0B0A09] hover:border-champagne/50 transition-all flex flex-col"
           >
             <div className="relative px-6 py-4 bg-gradient-to-r from-champagne/15 via-champagne/5 to-transparent border-b border-white/10 flex items-center justify-between gap-3">
-              <div className="px-3 py-1 rounded-full bg-champagne text-black text-[10px] font-extrabold tracking-wider uppercase">
+              <div className="px-3 py-1 rounded-full bg-[#25D366] text-[#050505] text-[10px] font-extrabold tracking-wider uppercase">
                 {isIt ? club.badgeIt : club.badgeEn}
               </div>
               <span className="font-serif italic text-2xl font-bold text-champagne">
@@ -1054,7 +1054,7 @@ export function PrioritySixShowcase({ locale }: { locale: string }) {
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="ml-auto px-4 py-2 rounded-lg bg-champagne text-black text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
+                  className="ml-auto px-4 py-2 rounded-lg bg-[#25D366] text-[#050505] text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
                 >
                   WhatsApp VIP
                 </a>
@@ -1315,7 +1315,7 @@ export function SanSiroMatchAfterpartyFinder({ locale = 'it' }: { locale?: strin
           ? 'Configuratore Interattivo Dopo-Partita San Siro Inter e Milan'
           : 'Interactive San Siro Inter & AC Milan Match Afterparty Finder'
       }
-      className="my-14 rounded-2xl border border-champagne/35 bg-gradient-to-b from-[#17130b] via-[#100d08] to-[#0a0805] p-6 sm:p-10 shadow-[0_25px_70px_rgba(0,0,0,0.75)]"
+      className="my-14 rounded-2xl border border-champagne/35 bg-[#0B0A09] p-6 sm:p-10 shadow-[0_25px_70px_rgba(0,0,0,0.75)]"
     >
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8 pb-6 border-b border-white/10">
         <div>
@@ -1364,7 +1364,7 @@ export function SanSiroMatchAfterpartyFinder({ locale = 'it' }: { locale?: strin
                     onClick={() => setCompetition(k)}
                     className={`text-left p-3.5 rounded-xl border transition-all ${
                       active
-                        ? 'bg-champagne text-black border-champagne font-bold shadow-[0_0_20px_rgba(201,168,106,0.3)]'
+                        ? 'bg-[#25D366] text-[#050505] border-champagne font-bold shadow-[0_0_20px_rgba(201,168,106,0.3)]'
                         : 'bg-white/[0.03] text-white/85 border-white/10 hover:border-champagne/40'
                     }`}
                   >
@@ -1450,7 +1450,7 @@ export function SanSiroMatchAfterpartyFinder({ locale = 'it' }: { locale?: strin
               step={1}
               value={guests}
               onChange={(e: { target: { value: string } }) => setGuests(Number(e.target.value))}
-              className="w-full accent-[#C9A86A] cursor-pointer h-2 bg-white/15 rounded-lg"
+              className="w-full accent-[#F6F1E7] cursor-pointer h-2 bg-white/15 rounded-lg"
             />
           </div>
         </div>
@@ -1490,14 +1490,14 @@ export function SanSiroMatchAfterpartyFinder({ locale = 'it' }: { locale?: strin
             </div>
 
             {/* Mandatory Dress Code Warning Box */}
-            <div className="rounded-xl border border-amber-500/40 bg-amber-500/10 p-4 mb-6">
-              <div className="flex items-center gap-2 text-amber-300 font-bold text-xs uppercase tracking-wider mb-1">
+            <div className="rounded-xl border border-[#050505]/20 bg-[#F6F1E7] text-[#050505] p-4 mb-6">
+              <div className="flex items-center gap-2 text-[#050505] font-bold text-xs uppercase tracking-wider mb-1">
                 <ShieldCheck className="w-4 h-4 shrink-0" />
                 <span>
                   {isIt ? 'Regola Dress Code Post-Partita' : 'Mandatory Post-Match Dress Code Rule'}
                 </span>
               </div>
-              <p className="text-xs text-amber-100/90 leading-relaxed">
+              <p className="text-xs text-[#1F1C18] leading-relaxed">
                 {isIt
                   ? 'Attenzione: niente maglie da calcio o sciarpe nei club VIP dopo le 23:00; indossa camicia/polo o maglia scura sotto la giacca per superare la selezione alla porta senza problemi (la sciarpa va lasciata in auto o al guardaroba).'
                   : 'Important: no football jerseys, team scarves, or tracksuits inside VIP clubs after 23:00; wear a collared shirt, polo, or dark smart knit under your jacket to pass door selection smoothly.'}
@@ -1510,7 +1510,7 @@ export function SanSiroMatchAfterpartyFinder({ locale = 'it' }: { locale?: strin
               href={waHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 rounded-xl bg-champagne text-black font-sans font-bold text-xs sm:text-sm tracking-[0.14em] uppercase hover:bg-white transition-colors shadow-[0_0_30px_rgba(201,168,106,0.35)]"
+              className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 rounded-xl bg-[#25D366] text-[#050505] font-sans font-bold text-xs sm:text-sm tracking-[0.14em] uppercase hover:bg-white transition-colors shadow-[0_0_30px_rgba(201,168,106,0.35)]"
             >
               <MessageCircle className="w-4 h-4" />
               {isIt
@@ -1596,7 +1596,7 @@ export function SanSiroMatchAfterpartyFinder({ locale = 'it' }: { locale?: strin
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="ml-auto px-3 py-1.5 rounded-lg bg-champagne text-black text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
+                  className="ml-auto px-3 py-1.5 rounded-lg bg-[#25D366] text-[#050505] text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
                 >
                   WhatsApp VIP
                 </a>
@@ -1824,8 +1824,8 @@ export function DressCodeInstantChecker({ locale }: { locale: string }) {
     amber: {
       labelIt: 'Ambra: Rischio Selezione in Lista',
       labelEn: 'Amber: Guestlist Selection Risk',
-      classes: 'bg-amber-500/20 border-amber-400/50 text-amber-300',
-      barClass: 'bg-amber-400',
+      classes: 'bg-[#F6F1E7]/15 border-[#F6F1E7]/45 text-[#F6F1E7]',
+      barClass: 'bg-[#F6F1E7]',
     },
     red: {
       labelIt: 'Rosso: Alto Rischio Rimbalzo in Lista',
@@ -1940,7 +1940,7 @@ export function DressCodeInstantChecker({ locale }: { locale: string }) {
                     onClick={() => setVenueKey(k)}
                     className={`text-left px-4 py-3 rounded-xl border transition-all ${
                       active
-                        ? 'bg-champagne text-black border-champagne font-bold shadow-[0_0_20px_rgba(201,168,106,0.3)]'
+                        ? 'bg-[#25D366] text-[#050505] border-champagne font-bold shadow-[0_0_20px_rgba(201,168,106,0.3)]'
                         : 'bg-white/[0.03] text-white/85 border-white/10 hover:border-champagne/40'
                     }`}
                   >
@@ -2089,7 +2089,7 @@ export function DressCodeInstantChecker({ locale }: { locale: string }) {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 rounded-xl bg-champagne text-black font-sans font-bold text-xs sm:text-sm tracking-[0.14em] uppercase hover:bg-white transition-colors shadow-[0_0_30px_rgba(201,168,106,0.35)]"
+              className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 rounded-xl bg-[#25D366] text-[#050505] font-sans font-bold text-xs sm:text-sm tracking-[0.14em] uppercase hover:bg-white transition-colors shadow-[0_0_30px_rgba(201,168,106,0.35)]"
             >
               <MessageCircle className="w-4 h-4" />
               {isIt
@@ -2843,7 +2843,7 @@ export function NeighborhoodCommutePlanner({ locale }: { locale: string }) {
                 onClick={() => setOriginKey(k)}
                 className={`text-left px-4 py-3 rounded-xl border text-xs sm:text-sm font-medium transition-all ${
                   active
-                    ? 'bg-champagne text-black border-champagne font-bold shadow-[0_0_20px_rgba(201,168,106,0.3)]'
+                    ? 'bg-[#25D366] text-[#050505] border-champagne font-bold shadow-[0_0_20px_rgba(201,168,106,0.3)]'
                     : 'bg-white/[0.03] text-white/80 border-white/10 hover:border-champagne/40'
                 }`}
               >
@@ -2896,7 +2896,7 @@ export function NeighborhoodCommutePlanner({ locale }: { locale: string }) {
                   </div>
 
                   <div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-amber-300 block mb-0.5">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#EAE3D5] block mb-0.5">
                       {isIt ? 'Rientro Notturno (00:30 - 05:00) & Taxi' : 'Night Return (00:30 - 05:00) & Taxi'}
                     </span>
                     <p className="text-white/75 leading-relaxed">
@@ -2917,7 +2917,7 @@ export function NeighborhoodCommutePlanner({ locale }: { locale: string }) {
                   href={`${CONTACT.whatsapp.link}?text=${encodeURIComponent(waTransferMsg)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="ml-auto inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-champagne text-black text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
+                  className="ml-auto inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#25D366] text-[#050505] text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
                 >
                   <MessageCircle className="w-3.5 h-3.5" />
                   <span>{isIt ? 'Tavolo / NCC' : 'Table / NCC'}</span>

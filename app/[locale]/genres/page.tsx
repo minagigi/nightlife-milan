@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
 import { tr } from '@/lib/i18n/t';
-import { getLocaleDef, hreflangAlternates, localePrefix, type LocaleCode } from '@/lib/i18n/locales';
+import { getLocaleDef, hreflangAlternates, canonicalPageUrl, localePrefix, type LocaleCode } from '@/lib/i18n/locales';
 import { getLocalizedGenreSlug35 } from '@/lib/i18n/localizedSlugs35';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { genreData } from './[slug]/page';
@@ -19,7 +19,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const canonical = `${baseUrl}${localePrefix(locale)}/genres`;
+  const canonical = canonicalPageUrl(baseUrl, locale, '/genres');
 
   const title = seoTitle(
     tr(
@@ -104,7 +104,7 @@ export default async function GenresIndexPage({
   };
 
   return (
-    <main className="flex-grow pt-24 pb-20 bg-[#131009]">
+    <main className="flex-grow pt-24 pb-20 bg-[#050505]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}

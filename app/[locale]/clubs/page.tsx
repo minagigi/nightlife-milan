@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { getLocaleDef, hreflangAlternates, isEnabledLocale, localePrefix, DEFAULT_LOCALE, type LocaleCode } from '@/lib/i18n/locales';
+import { getLocaleDef, hreflangAlternates, canonicalPageUrl, isEnabledLocale, localePrefix, DEFAULT_LOCALE, type LocaleCode } from '@/lib/i18n/locales';
 import { getClubsHubCopy } from '@/lib/i18n/clubsHubCopy';
 import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const code = (isEnabledLocale(locale) ? locale : DEFAULT_LOCALE) as LocaleCode;
   const localeDef = getLocaleDef(code) || getLocaleDef(DEFAULT_LOCALE)!;
   const hubCopy = getClubsHubCopy(code);
-  const canonicalUrl = `${baseUrl}${localePrefix(code)}/clubs`;
+  const canonicalUrl = canonicalPageUrl(baseUrl, code, '/clubs');
 
   const rawTitle = hubCopy.heroTitle.length < 44
     ? `${hubCopy.heroTitle} 2026/2027 | Nightlife Milan`

@@ -198,9 +198,11 @@ export default function TableConcierge({ locale, events, initialNow, copy, surfa
               <label className={styles.fieldLabel} htmlFor={`tc-preference-${surface}`}>{controlCopy.preference}</label>
               <input id={`tc-preference-${surface}`} className={styles.input} type="text" maxLength={120} autoComplete="off"
                 value={preference} onChange={(event) => setPreference(event.currentTarget.value)} />
-              <a className={styles.requestLink} href={waUrl} target="_blank" rel="noopener noreferrer">
-                {copy.requestAction}<span aria-hidden="true">↗</span>
-              </a>
+              <div className={styles.requestCtaDock}>
+                <a className={styles.requestLink} href={waUrl} target="_blank" rel="noopener noreferrer">
+                  {copy.requestAction}<span aria-hidden="true">↗</span>
+                </a>
+              </div>
               {copy.trustBadges && (
                 <div className={styles.trustRow}>
                   {copy.trustBadges.map((badge) => (
@@ -213,7 +215,9 @@ export default function TableConcierge({ locale, events, initialNow, copy, surfa
           ) : (
             <>
               <p className={styles.empty}>{copy.empty}</p>
-              <a className={styles.requestLink} href={waUrl} target="_blank" rel="noopener noreferrer">{copy.requestAction}<span aria-hidden="true">↗</span></a>
+              <div className={styles.requestCtaDock}>
+                <a className={styles.requestLink} href={waUrl} target="_blank" rel="noopener noreferrer">{copy.requestAction}<span aria-hidden="true">↗</span></a>
+              </div>
             </>
           )}
           <p className={styles.disclaimer} aria-live="polite">{copy.disclaimer}</p>

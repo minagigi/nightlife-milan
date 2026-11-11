@@ -67,8 +67,12 @@ export function isEventbriteOnlyCuratedListing(event: {
   return EVENTBRITE_ONLY_CURATED_MARKER_RE.test(description);
 }
 
+import { ALL_EVENT_DIR_TOKENS } from './i18n/dirTokens35';
+
+const REMOVED_EVENT_PATH_RE = new RegExp(`\\/(?:${ALL_EVENT_DIR_TOKENS.join('|')})\\/([^/?#]+)`, 'i');
+
 export function isRemovedCuratedSitePath(pathname: string): boolean {
-  const slug = pathname.toLowerCase().match(/\/events\/([^/?#]+)/)?.[1];
+  const slug = pathname.toLowerCase().match(REMOVED_EVENT_PATH_RE)?.[1];
   return Boolean(
     slug && EVENTBRITE_ONLY_CURATED_SLUG_FRAGMENTS.some((fragment) => slug.includes(fragment)),
   );

@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { tr } from '@/lib/i18n/t';
-import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { hreflangAlternates, canonicalPageUrl, localePrefix } from '@/lib/i18n/locales';
 import { generateEventListSchema, getLocalizedText, jsonLdString } from '@/lib/seo';
 import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const isIt = locale === 'it';
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const canonical = `${baseUrl}${localePrefix(locale)}/events/best`;
+  const canonical = canonicalPageUrl(baseUrl, locale, '/events/best');
 
   const title = seoTitle(
     tr(
@@ -91,7 +91,7 @@ const BEST_VENUES = [
   {
     id: 'v-justme',
     slug: 'just-me-milano',
-    color: '#C9A86A',
+    color: '#EAE3D5',
     image: '/images/pillars/events-best-01.webp',
     name: { en: '1. Just Me Milano', it: '1. Just Me Milano' },
     zone: { en: 'Parco Sempione (Torre Branca)', it: 'Parco Sempione (Torre Branca)' },
@@ -248,7 +248,7 @@ export default async function EventsBestPage({ params }: Props) {
       : null;
 
   return (
-    <main className="flex-1 bg-[#131009] w-full pt-20 pb-20">
+    <main className="flex-1 bg-[#050505] w-full pt-20 pb-20">
       {eventListSchema && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(eventListSchema) }} />
       )}
@@ -349,7 +349,7 @@ export default async function EventsBestPage({ params }: Props) {
                   quality={92}
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#131009] via-[#131009]/60 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent" />
 
                 <div className="absolute bottom-0 left-0 right-0 p-6 flex items-end justify-between">
                   <div>

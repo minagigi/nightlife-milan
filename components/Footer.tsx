@@ -78,22 +78,22 @@ export default function Footer({ lang, editorialFields = {}, copyrightYear }: Fo
 
             {/* Col 2: Navigation */}
             <div className="flex flex-col space-y-4 p-8 sm:p-12">
-              <h3 className="font-mono text-[#D6BE96] tracking-[0.22em] uppercase text-xs">{t.nav}</h3>
-              <ul className="flex flex-col space-y-3">{navigation.map((item) => <li key={item.id}><Link href={item.href} prefetch={false} className={item.gold ? 'text-[#D6BE96] hover:text-[#F6F1E7] transition-colors text-sm font-medium' : 'text-[#C2B9AA] hover:text-[#D6BE96] transition-colors text-sm'}>{item.label}</Link></li>)}<li><Link href={`${lp}/football-afterparties`} prefetch={false} className="text-[#D6BE96] hover:text-[#F6F1E7] transition-colors text-sm font-medium">{lang === 'it' ? 'Dopo-Partita Calcio San Siro (Inter & Milan)' : 'San Siro Football Afterparties (Inter & AC Milan)'}</Link></li></ul>
+              <h3 className="font-mono text-[#EAE3D5] tracking-[0.14em] uppercase text-xs">{t.nav}</h3>
+              <ul className="flex flex-col space-y-3">{navigation.map((item) => <li key={item.id}><Link href={item.href} prefetch={false} className={item.gold ? 'text-[#F6F1E7] hover:underline transition-colors text-sm font-medium' : 'text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm'}>{item.label}</Link></li>)}<li><Link href={`${lp}/football-afterparties`} prefetch={false} className="text-[#F6F1E7] hover:underline transition-colors text-sm font-medium">{lang === 'it' ? 'Dopo-Partita Calcio San Siro (Inter & Milan)' : 'San Siro Football Afterparties (Inter & AC Milan)'}</Link></li></ul>
             </div>
 
             {/* Col 3: Zone Hotspots */}
             <div className="flex flex-col space-y-4 p-8 sm:p-12">
-              <h3 className="font-mono text-[#D6BE96] tracking-[0.22em] uppercase text-xs">{t.zones}</h3>
-              <ul className="flex flex-col space-y-3">{zones.map((item) => <li key={item.id}><Link href={item.href} prefetch={false} className="text-[#C2B9AA] hover:text-[#D6BE96] transition-colors text-sm">{item.label}</Link></li>)}</ul>
+              <h3 className="font-mono text-[#EAE3D5] tracking-[0.14em] uppercase text-xs">{t.zones}</h3>
+              <ul className="flex flex-col space-y-3">{zones.map((item) => <li key={item.id}><Link href={item.href} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">{item.label}</Link></li>)}</ul>
               <details className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-3" data-footer-city-map>
-                <summary className="cursor-pointer font-mono text-xs uppercase tracking-[0.18em] text-[#F6F1E7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D6BE96]">
+                <summary className="cursor-pointer font-mono text-xs uppercase tracking-[0.14em] text-[#F6F1E7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F1E7]">
                   {t.zones} · Milano
                 </summary>
                 <div className="mt-3 space-y-3">
                   <a href={cityDirections.toString()} target="_blank" rel="noopener noreferrer"
                     aria-label={`${mapCopy.directions}: Milano`}
-                    className="inline-flex min-h-11 items-center font-mono text-xs uppercase tracking-[0.16em] text-[#D6BE96] hover:text-[#F6F1E7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D6BE96]">
+                    className="inline-flex min-h-11 items-center font-mono text-xs uppercase tracking-[0.14em] text-[#EAE3D5] hover:text-[#F6F1E7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F1E7]">
                     Milano
                   </a>
                   <EventVenueMap purpose="city" id={`footer-city-map-${lang}`} mapUrl={cityMap.toString()}
@@ -104,15 +104,15 @@ export default function Footer({ lang, editorialFields = {}, copyrightYear }: Fo
 
             {/* Col 4: Legal & Social */}
             <div className="flex flex-col space-y-4 p-8 sm:p-12">
-              <h3 className="font-mono text-[#D6BE96] tracking-[0.22em] uppercase text-xs">{t.legal}</h3>
+              <h3 className="font-mono text-[#EAE3D5] tracking-[0.14em] uppercase text-xs">{t.legal}</h3>
               <ul className="flex flex-col space-y-3 mb-4">
                 <li>
-                  <Link href={links.terms} prefetch={false} className="text-[#C2B9AA] hover:text-[#D6BE96] transition-colors text-sm">
+                  <Link href={links.terms} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
                     {utilityText(lang, 'Terms of Service', 'Termini di Servizio')}
                   </Link>
                 </li>
                 <li>
-                  <Link href={links.privacy} prefetch={false} className="text-[#C2B9AA] hover:text-[#D6BE96] transition-colors text-sm">
+                  <Link href={links.privacy} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
                     {t.privacy}
                   </Link>
                 </li>
@@ -120,7 +120,7 @@ export default function Footer({ lang, editorialFields = {}, copyrightYear }: Fo
             </div>
           </div>
 
-          {/* Editorial wordmark — rendered via ::after (see .deco-wordmark) so contrast scanners skip it */}
+          {/* Editorial wordmark - rendered via ::after (see .deco-wordmark) so contrast scanners skip it */}
           <div className="overflow-hidden border-t border-[#F6F1E7]/14 py-10">
             <div className="deco-wordmark" data-text="NIGHTLIFE MILAN" aria-hidden="true" />
             <p className="text-center font-mono text-[10px] tracking-[0.3em] text-[#847C6F] tabular-nums -mt-2" aria-hidden="true">
@@ -139,7 +139,7 @@ export default function Footer({ lang, editorialFields = {}, copyrightYear }: Fo
                   href={localePrefix(l.code) || '/'}
                   prefetch={false}
                   lang={l.hreflang}
-                  className="inline-flex min-h-6 min-w-6 items-center justify-center px-1 hover:text-[#D6BE96] transition-colors uppercase focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D6BE96]"
+                  className="inline-flex min-h-6 min-w-6 items-center justify-center px-1 hover:text-[#F6F1E7] transition-colors uppercase focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F1E7]"
                   aria-label={l.nativeName}
                 >
                   {l.code}

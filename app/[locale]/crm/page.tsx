@@ -31,7 +31,7 @@ function formatDate(value: string | null): string {
 
 const permissionLabels: Record<CrmPermissionStatus, { label: string; color: string }> = {
   opted_in: { label: 'Marketing consentito', color: 'bg-emerald-400' },
-  not_opted_in: { label: 'Solo transazionale', color: 'bg-amber-300' },
+  not_opted_in: { label: 'Solo transazionale', color: 'bg-[#EAE3D5]' },
   opted_out: { label: 'Disiscritto', color: 'bg-rose-400' },
 };
 
@@ -106,7 +106,7 @@ export default async function CrmPage({
         </header>
 
         {!crmStorageConfigured() && (
-          <div className="mt-5 border border-amber-300/40 bg-amber-300/10 px-4 py-3 text-sm text-amber-100">
+          <div className="mt-5 border border-[#F6F1E7]/30 bg-[#0B0A09] px-4 py-3 text-sm text-[#EAE3D5]">
             Archivio CRM non configurato in questo ambiente: manca BLOB_READ_WRITE_TOKEN.
           </div>
         )}

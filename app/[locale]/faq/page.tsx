@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { Metadata } from 'next';
 import { tr } from '@/lib/i18n/t';
-import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { hreflangAlternates, canonicalPageUrl, localePrefix } from '@/lib/i18n/locales';
 import Link from '@/components/LocalizedLink';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { EntryFormulaMatrix, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const isIt = locale === 'it';
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const canonical = `${baseUrl}${localePrefix(locale)}/faq`;
+  const canonical = canonicalPageUrl(baseUrl, locale, '/faq');
 
   const title = seoTitle(tr(locale, 'Milan Nightlife FAQ 2026 | Frequently Asked Questions | Nightlife Milan', 'FAQ Vita Notturna Milano 2026 | Domande Frequenti | Nightlife Milan'));
   const description = withWhatsApp(tr(locale, 'All answers about Milan nightclubs: VIP table prices, dress code, guestlist, minimum age, opening hours, bookings. The complete guide to going out in Milan in 2026.', 'Tutte le risposte sulle discoteche di Milano: prezzi tavoli VIP, dress code, guestlist, età minima, orari, prenotazioni. La guida completa per uscire a Milano nel 2026.'), locale);
@@ -176,7 +176,7 @@ export default async function FAQPage({ params }: Props) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <main className="flex-1 bg-[#131009] w-full pt-20 pb-20">
+      <main className="flex-1 bg-[#050505] w-full pt-20 pb-20">
         {/* Breadcrumb */}
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <nav className="text-sm text-white/40" aria-label="Breadcrumb">
@@ -192,7 +192,7 @@ export default async function FAQPage({ params }: Props) {
 
         {/* Hero */}
         <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="relative h-64 md:h-80 w-full rounded-2xl overflow-hidden border border-white/10 mb-8"><Image src="/images/faq-hero.webp" alt={tr(locale, "Milan Nightlife Frequently Asked Questions and VIP Concierge Guide", "Domande Frequenti Vita Notturna Milano e Guida Concierge VIP")} title={tr(locale, "Milan Nightlife FAQ 2026", "FAQ Vita Notturna Milano 2026")} fill priority quality={92} sizes="(max-width: 1024px) 100vw, 896px" className="object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-[#131009] via-[#131009]/40 to-transparent" /></div>
+          <div className="relative h-64 md:h-80 w-full rounded-2xl overflow-hidden border border-white/10 mb-8"><Image src="/images/faq-hero.webp" alt={tr(locale, "Milan Nightlife Frequently Asked Questions and VIP Concierge Guide", "Domande Frequenti Vita Notturna Milano e Guida Concierge VIP")} title={tr(locale, "Milan Nightlife FAQ 2026", "FAQ Vita Notturna Milano 2026")} fill priority quality={92} sizes="(max-width: 1024px) 100vw, 896px" className="object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent" /></div>
           <h1 className="font-serif text-5xl md:text-6xl font-bold text-champagne tracking-tight mb-6">
             {tr(locale, 'Frequently Asked Questions', 'Domande Frequenti')}
           </h1>

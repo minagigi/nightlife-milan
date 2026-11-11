@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { tr } from '@/lib/i18n/t';
-import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { hreflangAlternates, canonicalPageUrl, localePrefix } from '@/lib/i18n/locales';
 import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
 import { Calendar, Clock, MapPin } from 'lucide-react';
@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   );
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const canonical = `${baseUrl}${localePrefix(locale)}/calendar/tonight`;
+  const canonical = canonicalPageUrl(baseUrl, locale, '/calendar/tonight');
 
   const isIt = locale === 'it';
   const ogImage = `${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`;
@@ -235,7 +235,7 @@ export default async function TonightPage({ params }: Props) {
       {eventListSchema && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(eventListSchema) }} />
       )}
-      <main className="flex-1 bg-[#131009] w-full pt-20 pb-20">
+      <main className="flex-1 bg-[#050505] w-full pt-20 pb-20">
         {/* Header */}
         <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <h1 className="font-serif text-5xl md:text-7xl font-bold text-champagne tracking-tighter mb-6">{t.title}</h1>
@@ -524,7 +524,7 @@ function EventCard({ item, locale, renderedAtMs }: { item: { event: Event; venue
           quality={92}
           className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#131009] via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#050505] via-transparent to-transparent" />
 
         <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md border border-white/10 text-white px-3 py-1 rounded-full text-xs font-medium tracking-wider uppercase">
           {category}

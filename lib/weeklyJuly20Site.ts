@@ -4,7 +4,7 @@ import type { EventLocalePack, EventOfferKey } from './eventBatchLocaleTypes';
 import { getEventLocalePack } from './eventLocalePacks';
 import { getEventbriteConfirmationPlainText } from './eventbriteConfirmation';
 import { GUE_JUST_ME_EDITORIAL_COPY } from './gueJustMeEditorialCopy';
-import { enabledLocaleCodes, type LocaleCode } from './i18n/locales';
+import { enabledLocaleCodes, type LocaleCode } from './i18n/localeRegistry';
 import type { LocalizedEventContent, LocalizedEventOffer } from './localizedEventContent';
 import { WEEKLY_JULY20_BATCH_EVENTS, WEEKLY_JULY20_PHONE, type WeeklyJuly20BatchEvent, type WeeklyLocale } from './weeklyJuly20Batch';
 

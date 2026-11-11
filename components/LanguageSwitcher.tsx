@@ -2,14 +2,8 @@
 
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { ENABLED_LOCALES, LOCALES, localePrefix, type LocaleCode } from '@/lib/i18n/locales';
+import { ENABLED_LOCALES, LOCALES, getLocaleDef, localePrefix, type LocaleCode } from '@/lib/i18n/locales';
 import {
-  getLocalizedVenueSlug35,
-  getLocalizedZoneSlug35,
-  getLocalizedGenreSlug35,
-  getExistingGuideSlug35,
-  resolveExistingGuideId,
-  getLocalizedSeoPagePath35,
   resolveSeoHubPathToCanonical,
   localizeInternalHref,
 } from '@/lib/i18n/localizedSlugs35';
@@ -39,18 +33,21 @@ export default function LanguageSwitcher({ currentLocale }: { currentLocale: str
 
   const getAlternatePath = (targetLocale: string) => {
     const loc = (targetLocale || 'en') as LocaleCode;
+    const hreflangCode = getLocaleDef(loc)?.hreflang || targetLocale;
     if (!pathname) return localePrefix(targetLocale) || '/';
     if (typeof document !== 'undefined') {
-      const altLink = document.querySelector(`link[rel="alternate"][hreflang="${targetLocale}"]`) as HTMLLinkElement | null;
+      const altLink = (document.querySelector(`link[rel="alternate"][hreflang="${hreflangCode}"]`)
+        || document.querySelector(`link[rel="alternate"][hreflang="${targetLocale}"]`)) as HTMLLinkElement | null;
       if (altLink?.href) {
         try {
           const parsed = new URL(altLink.href).pathname;
           if (parsed && parsed !== '/') return localizeInternalHref(parsed, loc);
+          if (parsed === '/' && loc === 'en') return '/';
         } catch {}
       }
     }
     const pathWithoutLocale = pathname.replace(anyLocaleRe, '/');
-    const canonicalOrRaw = resolveSeoHubPathToCanonical(pathWithoutLocale, loc) || pathWithoutLocale;
+    const canonicalOrRaw = resolveSeoHubPathToCanonical(pathWithoutLocale, currentLocale as LocaleCode) || pathWithoutLocale;
     const prefix = localePrefix(targetLocale);
     const candidate = !prefix ? canonicalOrRaw : (canonicalOrRaw === '/' ? prefix : `${prefix}${canonicalOrRaw}`);
     return localizeInternalHref(candidate, loc);

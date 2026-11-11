@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Link from '@/components/LocalizedLink';
 import { tr } from '@/lib/i18n/t';
-import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { getLocaleDef, hreflangAlternates, canonicalPageUrl, localePrefix } from '@/lib/i18n/locales';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { Sparkles, CheckCircle2, MessageCircle, Clock, ShieldCheck } from 'lucide-react';
 import { EntryFormulaMatrix, VipQuoteCalculator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
@@ -19,7 +19,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const canonical = `${baseUrl}${localePrefix(locale)}/guest-lists`;
+  const canonical = canonicalPageUrl(baseUrl, locale, '/guest-lists');
 
   const title = seoTitle(
     tr(

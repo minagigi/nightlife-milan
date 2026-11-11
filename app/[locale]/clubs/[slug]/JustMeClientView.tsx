@@ -7,12 +7,12 @@ import { MapPin, Clock, Shirt, Music, MessageCircle, Star, Calendar, ArrowLeft, 
 import { Dictionary } from '@/lib/get-dictionary';
 
 export default function JustMeClientView({ dict, locale }: { dict: Dictionary, locale: string }) {
-  const waLink = "https://wa.me/393000000000?text=Hi,%20I'd%20like%20to%20book%20VIP%20access%20at%20Just%20Me%20Milano";
+  const waLink = "https://wa.me/393519127047?text=Hi,%20I'd%20like%20to%20book%20VIP%20access%20at%20Just%20Me%20Milano";
 
   const servicesTags = dict.labels.services.split(',').map(s => s.trim());
 
   return (
-    <main className="bg-[#131009] min-h-screen text-white font-sans selection:bg-champagne selection:text-white pb-20">
+    <main className="bg-[#050505] min-h-screen text-[#F6F1E7] font-sans selection:bg-[#F6F1E7] selection:text-[#050505] pb-20">
       {/* Hero Section */}
       <section className="relative w-full h-[70vh] min-h-[600px] flex items-end pb-16">
         <div className="absolute inset-0 z-0">
@@ -25,7 +25,7 @@ export default function JustMeClientView({ dict, locale }: { dict: Dictionary, l
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#131009] via-[#131009]/60 to-black/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-black/30" />
         </div>
         
         <motion.div 
@@ -66,7 +66,7 @@ export default function JustMeClientView({ dict, locale }: { dict: Dictionary, l
       </section>
 
       {/* QuickInfoBar (4 Info Blocks) */}
-      <section className="border-y border-white/10 bg-[#131009]/80 backdrop-blur-md sticky top-0 z-40">
+      <section className="border-y border-white/10 bg-[#050505]/80 backdrop-blur-md sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 divide-x divide-white/10">
             <div className="flex flex-col px-4 first:pl-0">
@@ -143,7 +143,7 @@ export default function JustMeClientView({ dict, locale }: { dict: Dictionary, l
                   </div>
                   <div className="shrink-0">
                     <a 
-                      href={`https://wa.me/393000000000?text=Hi,%20I'd%20like%20to%20book%20for%20${event.title}%20(${event.day})%20at%20Just%20Me%20Milano`} 
+                      href={`https://wa.me/393519127047?text=Hi,%20I'd%20like%20to%20book%20for%20${event.title}%20(${event.day})%20at%20Just%20Me%20Milano`} 
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="inline-flex items-center justify-center px-4 py-2 bg-[#25D366]/10 text-[#25D366] border border-[#25D366]/30 rounded-sm hover:bg-[#25D366] hover:text-white transition-colors text-xs font-bold uppercase tracking-wider w-full md:w-auto"

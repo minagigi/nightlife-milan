@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import { tr } from '@/lib/i18n/t';
-import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { getLocaleDef, hreflangAlternates, canonicalPageUrl, localePrefix } from '@/lib/i18n/locales';
 import Image from 'next/image';
 import { MessageCircle, Star, Clock, Shield, Zap, MapPin, Calendar, CheckCircle } from 'lucide-react';
 import { CONTACT } from '@/config/contact';
@@ -22,7 +22,7 @@ const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const isIt = locale === 'it';
-  const canonical = `${baseUrl}${localePrefix(locale)}/concierge`;
+  const canonical = canonicalPageUrl(baseUrl, locale, '/concierge');
 
   const title = seoTitle(
     tr(
@@ -276,7 +276,7 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
         {/* Hero */}
         <section className="relative pt-16 pb-20 px-6 text-center border-b border-[#F6F1E7]/14">
           <div className="relative max-w-3xl mx-auto">
-            <p className="font-mono text-[#D6BE96] text-[11px] tracking-[0.28em] uppercase mb-5">
+            <p className="font-mono text-[#EAE3D5] text-[11px] tracking-[0.28em] uppercase mb-5">
               {tr(locale, 'OFFICIAL CONCIERGE DESK · 7/7 WHATSAPP · ZERO FEES', 'DESK CONCIERGE UFFICIALE · WHATSAPP 7/7 · ZERO COMMISSIONI')}
             </p>
             <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-normal text-[#F6F1E7] leading-[0.96] mb-6">
@@ -291,8 +291,8 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
             </p>
 
             {/* Quick Answer */}
-            <div className="max-w-2xl mx-auto mb-10 p-6 border border-[#D6BE96]/35 bg-[#0B0A09] text-left">
-              <p className="font-mono text-[#D6BE96] text-[10px] tracking-[0.28em] uppercase mb-2.5">
+            <div className="max-w-2xl mx-auto mb-10 p-6 border border-[#EAE3D5]/35 bg-[#0B0A09] text-left">
+              <p className="font-mono text-[#EAE3D5] text-[10px] tracking-[0.28em] uppercase mb-2.5">
                 {tr(locale, 'DIRECT ANSWER · CONCIERGE DESK', 'RISPOSTA IMMEDIATA · COME OPERIAMO')}
               </p>
               <p className="font-sans text-[#E4DDD0] text-sm leading-relaxed">
@@ -309,7 +309,7 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
                 href={waLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-[48px] items-center gap-3 px-8 py-4 bg-[#F6F1E7] text-[#050505] font-mono font-semibold text-xs tracking-[0.18em] uppercase hover:bg-[#D6BE96] transition-colors"
+                className="inline-flex min-h-[48px] items-center gap-3 px-8 py-4 bg-[#25D366] text-[#050505] font-mono font-bold text-xs tracking-[0.18em] uppercase hover:bg-[#20bd5a] transition-colors"
               >
                 <MessageCircle className="w-4 h-4" />
                 {tr(locale, 'Message WhatsApp Concierge', 'Scrivi al Concierge su WhatsApp')}
@@ -318,15 +318,15 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
 
             <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-[#C2B9AA]">
               <div className="flex items-center gap-2">
-                <Clock className="w-3.5 h-3.5 text-[#D6BE96]" />
+                <Clock className="w-3.5 h-3.5 text-[#EAE3D5]" />
                 <span className="font-mono text-[11px] uppercase tracking-wider">{tr(locale, 'Reply < 10 min', 'Risposta < 10 min')}</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle className="w-3.5 h-3.5 text-[#D6BE96]" />
+                <CheckCircle className="w-3.5 h-3.5 text-[#EAE3D5]" />
                 <span className="font-mono text-[11px] uppercase tracking-wider">{tr(locale, 'Zero Agency Markup', 'Zero Sovrapprezzo')}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Shield className="w-3.5 h-3.5 text-[#D6BE96]" />
+                <Shield className="w-3.5 h-3.5 text-[#EAE3D5]" />
                 <span className="font-mono text-[11px] uppercase tracking-wider">{tr(locale, 'Active 7/7', 'Attivo 7 Giorni su 7')}</span>
               </div>
             </div>
@@ -336,7 +336,7 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
         {/* How it works (Warm Ivory Chapter #F6F1E7) */}
         <section className="px-6 py-20 bg-[#F6F1E7] text-[#050505] border-b border-[#050505]/15">
           <div className="max-w-5xl mx-auto">
-            <p className="font-mono text-[#5C4624] text-xs font-semibold tracking-[0.28em] uppercase mb-10 text-center">
+            <p className="font-mono text-[#3D372E] text-xs font-semibold tracking-[0.28em] uppercase mb-10 text-center">
               {tr(locale, 'N° 01 · HOW IT WORKS IN 3 STEPS', 'N° 01 · COME FUNZIONA IN 3 PASSI')}
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 border-t border-l border-[#050505]/15">
@@ -370,7 +370,7 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
                 },
               ].map((item) => (
                 <div key={item.step} className="border-r border-b border-[#050505]/15 p-9 text-left bg-[#F6F1E7]">
-                  <span className="font-serif italic text-5xl text-[#7A5E30] block mb-4">{item.step}</span>
+                  <span className="font-serif italic text-5xl text-[#050505] block mb-4">{item.step}</span>
                   <h2 className="font-serif text-2xl text-[#050505] mb-2.5">{item.title}</h2>
                   <p className="font-sans text-[#2C2823] text-sm leading-relaxed">{item.desc}</p>
                 </div>
@@ -382,7 +382,7 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
         {/* Services */}
         <section className="px-6 py-20 border-b border-[#F6F1E7]/14">
           <div className="max-w-5xl mx-auto">
-            <p className="font-mono text-[#D6BE96] text-xs tracking-[0.28em] uppercase mb-3">
+            <p className="font-mono text-[#EAE3D5] text-xs tracking-[0.28em] uppercase mb-3">
               {tr(locale, 'N° 02 · CONCIERGE SERVICES', 'N° 02 · SERVIZI CONCIERGE')}
             </p>
             <h2 className="font-serif text-4xl text-[#F6F1E7] mb-12">
@@ -392,10 +392,10 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
               {services.map((service) => (
                 <div
                   key={service.title}
-                  className="p-7 border border-[#F6F1E7]/14 bg-[#0B0A09] hover:border-[#D6BE96]/45 transition-colors"
+                  className="p-7 border border-[#F6F1E7]/14 bg-[#0B0A09] hover:border-[#EAE3D5]/45 transition-colors"
                 >
-                  <div className="w-10 h-10 border border-[#D6BE96]/35 bg-[#050505] flex items-center justify-center mb-5">
-                    <service.icon className="w-4 h-4 text-[#D6BE96]" />
+                  <div className="w-10 h-10 border border-[#EAE3D5]/35 bg-[#050505] flex items-center justify-center mb-5">
+                    <service.icon className="w-4 h-4 text-[#EAE3D5]" />
                   </div>
                   <h3 className="font-serif text-xl text-[#F6F1E7] mb-2">{service.title}</h3>
                   <p className="font-sans text-[#C2B9AA] text-sm leading-relaxed">{service.desc}</p>
@@ -408,7 +408,7 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
         {/* Testimonials */}
         <section className="px-6 py-20 border-b border-[#F6F1E7]/14">
           <div className="max-w-5xl mx-auto">
-            <p className="font-mono text-[#D6BE96] text-xs tracking-[0.28em] uppercase mb-10 text-center">
+            <p className="font-mono text-[#EAE3D5] text-xs tracking-[0.28em] uppercase mb-10 text-center">
               {tr(locale, 'N° 03 · INTERNATIONAL GUEST FEEDBACK', 'N° 03 · FEEDBACK OSPITI INTERNAZIONALI')}
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -416,7 +416,7 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
                 <div key={i} className="p-7 border border-[#F6F1E7]/14 bg-[#0B0A09]">
                   <div className="flex gap-1 mb-5">
                     {[1, 2, 3, 4, 5].map((s) => (
-                      <Star key={s} className="w-3.5 h-3.5 text-[#D6BE96] fill-[#D6BE96]" />
+                      <Star key={s} className="w-3.5 h-3.5 text-[#EAE3D5] fill-[#EAE3D5]" />
                     ))}
                   </div>
                   <p className="font-sans text-[#E4DDD0] text-sm leading-relaxed italic mb-6">
@@ -435,7 +435,7 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
         {/* FAQ */}
         <section className="px-6 py-20 border-b border-[#F6F1E7]/14">
           <div className="max-w-3xl mx-auto">
-            <p className="font-mono text-[#D6BE96] text-xs tracking-[0.28em] uppercase mb-10 text-center">
+            <p className="font-mono text-[#EAE3D5] text-xs tracking-[0.28em] uppercase mb-10 text-center">
               FAQ
             </p>
             <div className="space-y-6">
@@ -499,7 +499,7 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
         {/* Final CTA */}
         <section className="px-6 pb-24">
           <div className="max-w-3xl mx-auto">
-            <div className="p-10 sm:p-12 border border-[#D6BE96]/35 bg-[#0B0A09] text-center">
+            <div className="p-10 sm:p-12 border border-[#EAE3D5]/35 bg-[#0B0A09] text-center">
               <h2 className="font-serif text-3xl sm:text-4xl text-[#F6F1E7] mb-4">
                 {tr(locale, 'Ready to Plan Your Night in Milan?', 'Pronto a Organizzare la Tua Serata a Milano?')}
               </h2>
@@ -514,7 +514,7 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
                 href={waLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-[48px] items-center gap-3 px-10 py-4 bg-[#F6F1E7] text-[#050505] font-mono font-semibold text-xs tracking-[0.2em] uppercase hover:bg-[#D6BE96] transition-colors"
+                className="inline-flex min-h-[48px] items-center gap-3 px-10 py-4 bg-[#25D366] text-[#050505] font-mono font-bold text-xs tracking-[0.2em] uppercase hover:bg-[#20bd5a] transition-colors"
               >
                 <MessageCircle className="w-5 h-5" />
                 WhatsApp {CONTACT.whatsapp.number}

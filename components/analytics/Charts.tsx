@@ -155,7 +155,7 @@ export function LineChart({ data, ariaLabel }: { data: Point[]; ariaLabel: strin
           <g>
             <line x1={xAt(hover)} x2={xAt(hover)} y1={8} y2={8 + plotH} stroke="rgba(255,255,255,0.25)" />
             {/* anello superficie 2px attorno al marker */}
-            <circle cx={xAt(hover)} cy={yAt(data[hover].value)} r="5" fill={CHAMPAGNE} stroke="#131009" strokeWidth="2" />
+            <circle cx={xAt(hover)} cy={yAt(data[hover].value)} r="5" fill={CHAMPAGNE} stroke="#050505" strokeWidth="2" />
           </g>
         )}
       </svg>

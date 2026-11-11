@@ -1,5 +1,12 @@
 import { Event, Venue, Performer, LocalizedString } from './types';
-import { localePrefix } from './i18n/locales';
+import { localePrefix, type LocaleCode } from './i18n/locales';
+import { getLocalizedDir35 } from './i18n/dirTokens35';
+import {
+  getLocalizedEventSlug35,
+  getLocalizedVenueSlug35,
+  getLocalizedZoneSlug35,
+  localizeInternalHref,
+} from './i18n/localizedSlugs35';
 
 // Helper to get localized string — qualsiasi locale del registry, fallback a 'en'
 export const getLocalizedText = (text: LocalizedString, lang: string): string => {
@@ -21,7 +28,10 @@ export const generateEventSchema = (
 ) => {
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const langPrefix = localePrefix(lang);
-  const eventUrl = `${baseUrl}${langPrefix}/events/${getLocalizedText(event.localizedContent.slug, lang)}`;
+  const locCode = (lang || 'en') as LocaleCode;
+  const rawEventSlug = getLocalizedText(event.localizedContent.slug, lang);
+  const eventSlug = getLocalizedEventSlug35(rawEventSlug, locCode);
+  const eventUrl = `${baseUrl}${langPrefix}/${getLocalizedDir35('events', lang)}/${eventSlug}`;
 
   const schema: any = {
     '@context': 'https://schema.org',
@@ -152,15 +162,19 @@ export const generateBreadcrumbSchema = (
 ) => {
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const langPrefix = localePrefix(lang);
+  const locCode = (lang || 'en') as LocaleCode;
   
   const zoneName = formatZoneName(venue.zone);
-  const zoneSlug = venue.zone.toLowerCase().replace('_', '-');
+  const rawZoneSlug = venue.zone.toLowerCase().replace('_', '-');
+  const zoneSlug = getLocalizedZoneSlug35(rawZoneSlug, locCode);
   
   const venueName = getLocalizedText(venue.localizedContent.name, lang);
-  const venueSlug = getLocalizedText(venue.slugs, lang);
+  const rawVenueSlug = getLocalizedText(venue.slugs, lang);
+  const venueSlug = getLocalizedVenueSlug35(rawVenueSlug, locCode);
   
   const eventName = getLocalizedText(event.localizedContent.title, lang);
-  const eventSlug = getLocalizedText(event.localizedContent.slug, lang);
+  const rawEventSlug = getLocalizedText(event.localizedContent.slug, lang);
+  const eventSlug = getLocalizedEventSlug35(rawEventSlug, locCode);
 
   return {
     '@context': 'https://schema.org',
@@ -170,25 +184,25 @@ export const generateBreadcrumbSchema = (
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: `${baseUrl}${langPrefix}`,
+        item: `${baseUrl}${langPrefix}` || `${baseUrl}/`,
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: zoneName,
-        item: `${baseUrl}${langPrefix}/zones/${zoneSlug}`,
+        item: `${baseUrl}${langPrefix}/${getLocalizedDir35('zones', lang)}/${zoneSlug}`,
       },
       {
         '@type': 'ListItem',
         position: 3,
         name: venueName,
-        item: `${baseUrl}${langPrefix}/clubs/${venueSlug}`,
+        item: `${baseUrl}${langPrefix}/${getLocalizedDir35('clubs', lang)}/${venueSlug}`,
       },
       {
         '@type': 'ListItem',
         position: 4,
         name: eventName,
-        item: `${baseUrl}${langPrefix}/events/${eventSlug}`,
+        item: `${baseUrl}${langPrefix}/${getLocalizedDir35('events', lang)}/${eventSlug}`,
       },
     ],
   };
@@ -200,14 +214,20 @@ export const generatePageBreadcrumbSchema = (
 ) => {
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const langPrefix = localePrefix(lang);
+  const locCode = (lang || 'en') as LocaleCode;
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: items.map((item, idx) => ({
-      '@type': 'ListItem',
-      position: idx + 1,
-      name: item.name,
-      item: `${baseUrl}${langPrefix}${item.path}` || `${baseUrl}/`,
-    })),
+    itemListElement: items.map((item, idx) => {
+      const locPath = item.path
+        ? localizeInternalHref(`${langPrefix}${item.path}`, locCode)
+        : langPrefix;
+      return {
+        '@type': 'ListItem',
+        position: idx + 1,
+        name: item.name,
+        item: `${baseUrl}${locPath === '/' ? '' : locPath}` || `${baseUrl}/`,
+      };
+    }),
   };
 };

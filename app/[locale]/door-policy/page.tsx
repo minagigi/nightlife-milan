@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import { tr } from '@/lib/i18n/t';
-import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { hreflangAlternates, canonicalPageUrl, localePrefix } from '@/lib/i18n/locales';
 import Link from '@/components/LocalizedLink';
 import { mockVenues } from '@/lib/data';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const isIt = locale === 'it';
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const canonical = `${baseUrl}${localePrefix(locale)}/door-policy`;
+  const canonical = canonicalPageUrl(baseUrl, locale, '/door-policy');
 
   const title = seoTitle(tr(locale, 'Dress Code & Door Policy Milan Clubs 2026 | Nightlife Milan', 'Dress Code & Door Policy Discoteche Milano 2026 | Nightlife Milan'));
   const description = withWhatsApp(tr(locale, 'Complete guide to Milan club dress codes 2026: what to wear, what to avoid, minimum age, door selection. Just Me, Armani Privé, Play Club and all major venues.', 'Guida completa al dress code dei club di Milano 2026: cosa indossare, cosa evitare, età minima, selezione all\'ingresso. Just Me, Armani Privé, Play Club e tutti i principali locali.'), locale);
@@ -238,7 +238,7 @@ export default async function DoorPolicyPage({ params }: Props) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <main className="flex-1 bg-[#131009] w-full pt-20 pb-20">
+      <main className="flex-1 bg-[#050505] w-full pt-20 pb-20">
         {/* Breadcrumb */}
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <nav className="text-sm text-white/40">
@@ -254,7 +254,7 @@ export default async function DoorPolicyPage({ params }: Props) {
 
         {/* Hero */}
         <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="relative h-64 md:h-80 w-full rounded-2xl overflow-hidden border border-white/10 mb-8"><Image src="/images/door-policy-hero.webp" alt={tr(locale, "Milan clubs dress code and door policy selection guide", "Guida dress code e selezione door policy club Milano")} title={tr(locale, "Dress Code and Door Policy Milan Clubs", "Dress Code e Door Policy Club Milano")} fill priority quality={92} sizes="(max-width: 1024px) 100vw, 896px" className="object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-[#131009] via-[#131009]/40 to-transparent" /></div>
+          <div className="relative h-64 md:h-80 w-full rounded-2xl overflow-hidden border border-white/10 mb-8"><Image src="/images/door-policy-hero.webp" alt={tr(locale, "Milan clubs dress code and door policy selection guide", "Guida dress code e selezione door policy club Milano")} title={tr(locale, "Dress Code and Door Policy Milan Clubs", "Dress Code e Door Policy Club Milano")} fill priority quality={92} sizes="(max-width: 1024px) 100vw, 896px" className="object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/40 to-transparent" /></div>
           <h1 className="font-serif text-5xl md:text-6xl font-bold text-champagne tracking-tight mb-6">
             {tr(locale, 'Dress Code & Door Policy', 'Dress Code & Door Policy')}
           </h1>

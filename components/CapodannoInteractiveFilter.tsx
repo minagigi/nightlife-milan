@@ -189,14 +189,14 @@ export default function CapodannoInteractiveFilter({
 
   return (
     <div className="mt-10 space-y-10" data-capodanno-interactive-filter>
-      {/* 16 Dedicated SEO Category Pages Grid */}
-      <div id="categorie-capodanno" className="rounded-2xl border border-champagne/30 bg-[#18140c] p-5 sm:p-7">
+      {/* 16 Dedicated SEO Category Pages Grid (#F6F1E7 Avorio Caldo) */}
+      <div id="categorie-capodanno" className="border border-[#050505]/15 bg-[#F6F1E7] text-[#050505] p-5 sm:p-7">
         <div className="mb-4 flex flex-col justify-between gap-2 sm:flex-row sm:items-center">
           <div>
-            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-champagne">
+            <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#3D3830]">
               {ui.categoryBoxEyebrow}
             </p>
-            <h2 className="mt-1 font-serif text-xl font-bold text-white sm:text-2xl">
+            <h2 className="mt-1 font-serif text-xl font-bold text-[#050505] sm:text-2xl">
               {ui.categoryBoxHeading}
             </h2>
           </div>
@@ -209,13 +209,13 @@ export default function CapodannoInteractiveFilter({
                 key={cat.slug}
                 href={capodannoCategoryPath(cat.slug, locale)}
                 prefetch={false}
-                className={`flex flex-col justify-between rounded-xl border p-3 transition ${
+                className={`flex flex-col justify-between border p-3 transition ${
                   isCurrent
-                    ? 'border-champagne bg-champagne text-black shadow-md'
-                    : 'border-white/12 bg-black/40 text-white hover:border-champagne/60 hover:bg-white/[0.06]'
+                    ? 'border-[#050505] bg-[#050505] text-[#F6F1E7]'
+                    : 'border-[#050505]/18 bg-[#EFE9DC] text-[#050505] hover:border-[#050505]'
                 }`}
               >
-                <span className={`text-[10px] font-bold uppercase tracking-wider ${isCurrent ? 'text-black/75' : 'text-champagne'}`}>
+                <span className={`text-[10px] font-bold uppercase tracking-wider ${isCurrent ? 'text-[#EAE3D5]' : 'text-[#3D3830]'}`}>
                   {isIt ? cat.badgeIt : cat.badgeEn}
                 </span>
                 <span className="mt-1 text-xs font-bold leading-snug sm:text-sm">
@@ -228,7 +228,7 @@ export default function CapodannoInteractiveFilter({
       </div>
 
       {/* Interactive Multi-Filter Controls */}
-      <div id="filtro-eventi" className="rounded-2xl border border-champagne/40 bg-gradient-to-b from-[#1f190e] to-[#141009] p-5 sm:p-7 shadow-xl">
+      <div id="filtro-eventi" className="border border-[#F6F1E7]/25 bg-[#0B0A09] p-5 sm:p-7">
         <div className="flex flex-col justify-between gap-4 border-b border-white/10 pb-4 sm:flex-row sm:items-center">
           <div>
             <p className="text-xs font-bold uppercase tracking-widest text-champagne">
@@ -374,11 +374,11 @@ export default function CapodannoInteractiveFilter({
 
       {/* Filtered Results Grid */}
       {filtered.length === 0 ? (
-        <div className="rounded-2xl border border-white/15 bg-[#18140c] p-10 text-center">
-          <p className="font-serif text-2xl font-bold text-white">
+        <div className="border border-[#F6F1E7]/15 bg-[#0B0A09] p-10 text-center">
+          <p className="font-serif text-2xl font-bold text-[#F6F1E7]">
             {isIt ? 'Nessun evento corrisponde esattamente a tutti i filtri selezionati' : 'No events match all selected filters'}
           </p>
-          <p className="mt-2 text-sm text-white/65">
+          <p className="mt-2 text-sm text-[#C2B9AA]">
             {isIt
               ? 'Prova ad allargare un filtro oppure clicca qui sotto per rivedere tutti gli eventi della pagina.'
               : 'Try broadening one filter or click below to view all events in this category.'}
@@ -386,7 +386,7 @@ export default function CapodannoInteractiveFilter({
           <button
             type="button"
             onClick={resetFilters}
-            className="mt-5 rounded-xl bg-champagne px-6 py-3 text-xs font-bold uppercase tracking-wider text-black hover:bg-white"
+            className="mt-5 bg-[#F6F1E7] px-6 py-3 text-xs font-bold uppercase tracking-wider text-[#050505] hover:bg-[#EAE3D5]"
           >
             {isIt ? 'Mostra Tutti gli Eventi' : 'Show All Events'}
           </button>
@@ -404,7 +404,7 @@ export default function CapodannoInteractiveFilter({
               return (
                 <article
                   key={event.slug}
-                  className="flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-[#18140c] shadow-lg transition hover:border-champagne/40"
+                  className="flex flex-col justify-between overflow-hidden border border-[#F6F1E7]/14 bg-[#0B0A09] transition hover:border-[#F6F1E7]/45"
                 >
                   <div>
                     <div className="relative h-52 w-full overflow-hidden">
@@ -415,12 +415,12 @@ export default function CapodannoInteractiveFilter({
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
                         className="object-cover"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#18140c] via-[#18140c]/40 to-transparent" />
+                      <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, #0B0A09, #0B0A0966 50%, transparent)' }} />
                       <div className="absolute left-3 top-3 flex flex-wrap gap-2">
-                        <span className="rounded-full bg-black/80 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-champagne backdrop-blur-sm">
+                        <span className="border border-[#F6F1E7]/30 bg-[#050505]/90 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#F6F1E7]">
                           {event.city} ({event.province})
                         </span>
-                        <span className="rounded-full bg-champagne px-3 py-1 text-xs font-bold text-black">
+                        <span className="bg-[#F6F1E7] px-3 py-1 text-xs font-bold text-[#050505]">
                           {event.priceFromEur === 0
                             ? isIt
                               ? 'INGRESSO GRATUITO'
@@ -429,14 +429,14 @@ export default function CapodannoInteractiveFilter({
                               ? `Da ${event.priceFromEur}€`
                               : `From €${event.priceFromEur}`}
                         </span>
-                        <span className="rounded-full border border-amber-400/80 bg-black/85 px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-amber-300 backdrop-blur-sm" data-selling-fast-badge>
+                        <span className="border border-[#F6F1E7]/50 bg-[#050505]/90 px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-[#F6F1E7]" data-selling-fast-badge>
                           {scarcity.sellingFastBadge}
                         </span>
                       </div>
                       <div className="absolute bottom-3 left-3 right-3">
-                        <p className="text-xs font-medium text-champagne/90">{event.venueName}</p>
-                        <h3 className="mt-0.5 font-serif text-xl font-bold leading-snug text-white">
-                          <Link href={detailHref} className="hover:text-champagne">
+                        <p className="text-xs font-medium text-[#EAE3D5]">{event.venueName}</p>
+                        <h3 className="mt-0.5 font-serif text-xl font-bold leading-snug text-[#F6F1E7]">
+                          <Link href={detailHref} className="hover:underline">
                             {title}
                           </Link>
                         </h3>
@@ -444,45 +444,45 @@ export default function CapodannoInteractiveFilter({
                     </div>
 
                     <div className="p-5">
-                      <p className="text-xs text-white/60">
-                        <strong className="text-white/85">{isIt ? 'Indirizzo:' : 'Address:'}</strong> {event.address} ·{' '}
-                        <strong className="text-white/85">{isIt ? 'Orari:' : 'Hours:'}</strong> {event.hours}
+                      <p className="text-xs text-[#C2B9AA]">
+                        <strong className="text-[#F6F1E7]">{isIt ? 'Indirizzo:' : 'Address:'}</strong> {event.address} ·{' '}
+                        <strong className="text-[#F6F1E7]">{isIt ? 'Orari:' : 'Hours:'}</strong> {event.hours}
                       </p>
-                      <p className="mt-2.5 text-sm leading-relaxed text-white/75">{description}</p>
+                      <p className="mt-2.5 text-sm leading-relaxed text-[#C2B9AA]">{description}</p>
 
-                      <div className="mt-4 rounded-xl border border-white/10 bg-black/30 p-3.5">
-                        <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-champagne">
+                      <div className="mt-4 border border-[#F6F1E7]/12 bg-[#050505] p-3.5">
+                        <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-[#EAE3D5]">
                           {isIt ? 'Formule e Prezzi Ufficiali / Storico:' : 'Official & Benchmark Price Tiers:'}
                         </p>
                         <ul className="space-y-2 text-xs">
                           {tiers.map((tier) => (
-                            <li key={tier.label} className="border-b border-white/5 pb-1.5 last:border-0 last:pb-0">
+                            <li key={tier.label} className="border-b border-[#F6F1E7]/8 pb-1.5 last:border-0 last:pb-0">
                               <div className="flex items-baseline justify-between gap-2">
-                                <span className="font-semibold text-white/90">{tier.label}</span>
-                                <span className="shrink-0 font-bold text-champagne">{tier.price}</span>
+                                <span className="font-semibold text-[#F6F1E7]">{tier.label}</span>
+                                <span className="shrink-0 font-bold text-[#EAE3D5]">{tier.price}</span>
                               </div>
-                              <p className="mt-0.5 text-[11px] text-white/55">{tier.details}</p>
+                              <p className="mt-0.5 text-[11px] text-[#C2B9AA]">{tier.details}</p>
                             </li>
                           ))}
                         </ul>
                       </div>
 
-                      <div className="mt-3 flex flex-wrap gap-2 text-[11px] text-white/65">
-                        <span className="rounded-md border border-white/10 bg-white/[0.03] px-2.5 py-1">
-                          <strong className="text-white/85">Format:</strong> {music}
+                      <div className="mt-3 flex flex-wrap gap-2 text-[11px] text-[#C2B9AA]">
+                        <span className="border border-[#F6F1E7]/12 bg-[#050505] px-2.5 py-1">
+                          <strong className="text-[#F6F1E7]">Format:</strong> {music}
                         </span>
-                        <span className="rounded-md border border-white/10 bg-white/[0.03] px-2.5 py-1">
-                          <strong className="text-white/85">Dress Code:</strong> {dress}
+                        <span className="border border-[#F6F1E7]/12 bg-[#050505] px-2.5 py-1">
+                          <strong className="text-[#F6F1E7]">Dress Code:</strong> {dress}
                         </span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="border-t border-white/10 bg-black/20 px-5 py-3.5">
+                  <div className="border-t border-[#F6F1E7]/12 bg-[#050505] px-5 py-3.5">
                     <Link
                       href={detailHref}
                       data-capodanno-open-event={event.slug}
-                      className="inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-champagne px-4 py-2.5 text-center text-xs font-bold uppercase tracking-wider text-black transition hover:bg-white sm:text-sm"
+                      className="inline-flex min-h-11 w-full items-center justify-center bg-[#F6F1E7] px-4 py-2.5 text-center text-xs font-bold uppercase tracking-wider text-[#050505] transition hover:bg-[#EAE3D5] sm:text-sm"
                     >
                       {scarcity.openEventCardCta}
                     </Link>
@@ -493,8 +493,8 @@ export default function CapodannoInteractiveFilter({
           </div>
 
           {!hasActiveFilter && !showAll && filtered.length > 24 && (
-            <div className="mt-8 rounded-2xl border border-champagne/35 bg-[#120f0a] p-6 text-center">
-              <p className="mb-3 font-sans text-sm text-white/75">
+            <div className="mt-8 border border-[#F6F1E7]/25 bg-[#0B0A09] p-6 text-center">
+              <p className="mb-3 font-sans text-sm text-[#C2B9AA]">
                 {isIt
                   ? `Stai visualizzando i primi 24 eventi in evidenza su ${filtered.length} serate verificate di Capodanno.`
                   : `Showing the top 24 featured events out of ${filtered.length} verified New Year's Eve nights.`}
@@ -502,7 +502,7 @@ export default function CapodannoInteractiveFilter({
               <button
                 type="button"
                 onClick={() => setShowAll(true)}
-                className="inline-flex min-h-[48px] items-center justify-center rounded-xl bg-champagne px-8 py-3.5 font-mono text-xs font-bold uppercase tracking-[0.16em] text-black transition hover:bg-white"
+                className="inline-flex min-h-[48px] items-center justify-center bg-[#F6F1E7] px-8 py-3.5 font-mono text-xs font-bold uppercase tracking-[0.12em] text-[#050505] transition hover:bg-[#EAE3D5]"
               >
                 {isIt
                   ? `Mostra tutti i ${filtered.length} eventi di Capodanno (+${filtered.length - 24})`

@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { tr } from '@/lib/i18n/t';
 import { getLocaleDef, hreflangAlternates, localePrefix, indexedLocaleCodes } from '@/lib/i18n/locales';
 import { resolveZoneSlug, getLocalizedZoneSlug35 } from '@/lib/i18n/localizedSlugs35';
+import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
 import { Metadata } from 'next';
 import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
@@ -203,12 +204,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const localizedZoneSlug = getLocalizedZoneSlug35(zone.slug, (locale as LocaleCode) || 'en');
-  const canonical = `${baseUrl}${localePrefix(locale)}/zones/${localizedZoneSlug}`;
+  const canonical = `${baseUrl}${localePrefix(locale)}/${getLocalizedDir35('zones', locale)}/${localizedZoneSlug}`;
   const zoneLangAlternates: Record<string, string> = {
-    'x-default': `${baseUrl}/zones/${getLocalizedZoneSlug35(zone.slug, 'en')}`,
+    'x-default': `${baseUrl}/${getLocalizedDir35('zones', 'en')}/${getLocalizedZoneSlug35(zone.slug, 'en')}`,
   };
   for (const loc of indexedLocaleCodes) {
-    zoneLangAlternates[loc] = `${baseUrl}${localePrefix(loc)}/zones/${getLocalizedZoneSlug35(zone.slug, loc)}`;
+    zoneLangAlternates[getLocaleDef(loc)!.hreflang] = `${baseUrl}${localePrefix(loc)}/${getLocalizedDir35('zones', loc)}/${getLocalizedZoneSlug35(zone.slug, loc)}`;
   }
 
   const heroImg = ZONE_HERO_MAP[zone.slug] || zone.image || '/images/pillars/zone-hero-01.webp';
@@ -307,7 +308,7 @@ export default async function ZonePage({ params }: Props) {
   )}`;
 
   return (
-    <main className="flex-grow pt-24 pb-20 bg-[#131009]">
+    <main className="flex-grow pt-24 pb-20 bg-[#050505]">
       <div data-zone-top-hero="true" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
         <div className="relative h-64 sm:h-80 w-full rounded-2xl overflow-hidden border border-champagne/30">
           <Image quality={92}

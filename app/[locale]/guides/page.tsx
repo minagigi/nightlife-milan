@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { getLocaleDef, hreflangAlternates } from '@/lib/i18n/locales';
+import { getLocaleDef, hreflangAlternates, canonicalPageUrl } from '@/lib/i18n/locales';
 import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
 import NewsletterHub from '@/components/NewsletterHub';
@@ -20,7 +20,7 @@ const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const isIt = locale === 'it';
-  const canonical = `${baseUrl}${locale === 'en' ? '' : `/${locale}`}/guides`;
+  const canonical = canonicalPageUrl(baseUrl, locale, '/guides');
 
   const title = seoTitle(
     tr(

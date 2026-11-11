@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { hreflangAlternates, canonicalPageUrl, localePrefix } from '@/lib/i18n/locales';
 import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
 import { ArrowRight, Clock, MapPin, MessageCircle } from 'lucide-react';
@@ -17,7 +17,7 @@ const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const isIt = locale === 'it';
-  const canonical = `${baseUrl}${localePrefix(locale)}/aperitivo`;
+  const canonical = canonicalPageUrl(baseUrl, locale, '/aperitivo');
 
   const title = seoTitle(tr(locale, 'Best Aperitivo in Milan 2026 | Top Bars & Where to Go | Nightlife Milan', 'Migliore Aperitivo Milano 2026 | Bar, Orari e Zone | Nightlife Milan'));
   const description = withWhatsApp(tr(locale, 'Find the best aperitivo spots in Milan. Opening hours, what to order, dress code, and the top bars by zone — Navigli, Corso Como, Brera. Updated 2026.', 'I migliori locali per l\'aperitivo a Milano: orari, cosa ordinare, dress code e top bar per zona — Navigli, Corso Como, Brera. Guida aggiornata 2026.'), locale);
@@ -192,7 +192,7 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-    <main className="min-h-screen bg-[#131009]">
+    <main className="min-h-screen bg-[#050505]">
       <div data-aperitivo-top-hero="true" className="max-w-6xl mx-auto px-6 pt-24">
         <div className="relative h-64 sm:h-80 w-full rounded-2xl overflow-hidden border border-champagne/30">
           <Image quality={92}
@@ -208,8 +208,8 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
 
       {/* Hero */}
       <section className="relative pt-32 pb-20 px-6 text-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-amber-900/10 via-transparent to-transparent pointer-events-none" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full bg-amber-700/8 blur-[120px] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#F6F1E7]/[0.03] via-transparent to-transparent pointer-events-none" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full bg-[#F6F1E7]/[0.03] blur-[120px] pointer-events-none" />
 
         <div className="relative max-w-3xl mx-auto">
           <p className="font-sans text-champagne/60 text-[10px] tracking-[0.4em] uppercase mb-6">
@@ -297,7 +297,7 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
                       className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#131009] via-black/30 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-black/30 to-transparent" />
                     {bar.isTop && (
                       <div className="absolute top-4 right-4">
                         <span className="font-sans text-[9px] font-bold tracking-[0.2em] uppercase px-2.5 py-1.5 rounded-full bg-champagne text-black">

@@ -268,11 +268,11 @@ export default function EditorialPageSections({ locale, path }: Props) {
   if (cleanPath.startsWith('/guides/') && cleanPath !== '/guides') {
     return (
     <>
-      <aside className="w-full border-t border-[#F6F1E7]/14 bg-[#050505] text-[#F6F1E7]" aria-label={isIt ? 'Assistenza Concierge Guida' : 'Guide Concierge Desk'}>
-        <div className="mx-auto max-w-[1280px] border-x border-[#F6F1E7]/14 px-6 py-12 sm:px-12">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border border-[#D6BE96]/40 bg-[#0B0A09] p-7">
+      <aside className="w-full border-t border-[#050505]/16 bg-[#F6F1E7] text-[#050505]" aria-label={isIt ? 'Assistenza Concierge Guida' : 'Guide Concierge Desk'}>
+        <div className="mx-auto max-w-[1280px] border-x border-[#050505]/16 px-6 py-12 sm:px-12">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border border-[#050505] bg-[#050505] p-7 text-[#F6F1E7]">
             <div className="max-w-2xl">
-              <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-[#D6BE96] mb-2">
+              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#EAE3D5] mb-2">
                 {isIt ? 'DESK UFFICIALE NIGHTLIFE MILAN · SUPPORTO IMMEDIATO' : 'OFFICIAL NIGHTLIFE MILAN DESK · INSTANT SUPPORT'}
               </p>
               <h2 className="font-serif text-2xl text-[#F6F1E7] mb-2">
@@ -284,7 +284,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
                   : `Message us on WhatsApp at ${SITE_CONTACT.whatsapp.number} with your date, preferred venue, and group size for instant VIP Table floorplans, bottle menus, and guest-list access.`}
               </p>
             </div>
-            <a href={waHref} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 shrink-0 items-center justify-center bg-[#F6F1E7] px-7 py-3.5 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-[#050505] hover:bg-[#D6BE96]">
+            <a href={waHref} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 shrink-0 items-center justify-center bg-[#25D366] px-7 py-3.5 font-mono text-xs font-bold uppercase tracking-[0.18em] text-[#050505] hover:bg-[#2EE472]">
               WhatsApp {SITE_CONTACT.whatsapp.number} ↗
             </a>
           </div>
@@ -325,7 +325,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
       <aside className="w-full border-t border-[#F6F1E7]/14 bg-[#050505] text-[#F6F1E7]" aria-label={`Dossier ${venueName}`}>
         <div className="mx-auto max-w-[1280px] border-x border-[#F6F1E7]/14 divide-y divide-[#F6F1E7]/14">
           <section className="px-6 py-12 sm:px-12" data-aiso-direct-answer="true">
-            <p className="mb-2 font-mono text-xs uppercase tracking-[0.26em] text-[#D6BE96]">
+            <p className="mb-2 font-mono text-xs uppercase tracking-[0.22em] text-[#EAE3D5]">
               {isIt ? `DOSSIER TECNICO & VIP CONCIERGE · ${venueName.toUpperCase()}` : `TECHNICAL & VIP CONCIERGE DOSSIER · ${venueName.toUpperCase()}`}
             </p>
             <h2 className="mb-5 font-serif text-3xl text-[#F6F1E7] sm:text-4xl">
@@ -340,44 +340,44 @@ export default function EditorialPageSections({ locale, path }: Props) {
             </p>
           </section>
 
-          <section className="bg-[#0B0A09] px-6 py-12 sm:px-12">
-            <h2 className="mb-6 font-serif text-2xl text-[#F6F1E7] sm:text-3xl">
+          <section className="bg-[#F6F1E7] px-6 py-12 text-[#050505] sm:px-12">
+            <h2 className="mb-6 font-serif text-2xl text-[#050505] sm:text-3xl">
               {isIt ? `Tabella Operativa ${venueName}: Zone Tavoli, Prezzi, Orari e Mobilità` : `${venueName} Operational Matrix: Table Zones, Pricing, Hours & Transport`}
             </h2>
-            <div className="overflow-x-auto border border-[#F6F1E7]/14">
+            <div className="overflow-x-auto border border-[#050505]/18">
               <table className="w-full text-left border-collapse text-sm">
-                <tbody className="divide-y divide-[#F6F1E7]/14">
-                  <tr className="bg-[#050505]">
-                    <th className="p-4 font-mono text-xs uppercase tracking-[0.18em] text-[#D6BE96] w-1/3">{isIt ? 'Indirizzo & Coordinate' : 'Official Address'}</th>
-                    <td className="p-4 text-[#F6F1E7] font-semibold">{street}, {postal} {locality}</td>
+                <tbody className="divide-y divide-[#050505]/16">
+                  <tr className="bg-[#F6F1E7]">
+                    <th className="p-4 font-mono text-xs font-bold uppercase tracking-[0.16em] text-[#050505] w-1/3">{isIt ? 'Indirizzo & Coordinate' : 'Official Address'}</th>
+                    <td className="p-4 text-[#050505] font-semibold">{street}, {postal} {locality}</td>
                   </tr>
-                  <tr className="bg-[#0B0A09]">
-                    <th className="p-4 font-mono text-xs uppercase tracking-[0.18em] text-[#D6BE96]">{isIt ? 'Metro & Parcheggio Consigliato' : 'Nearest Metro & Parking'}</th>
-                    <td className="p-4 text-[#C2B9AA]">{meta.metro} · {meta.parking}</td>
+                  <tr className="bg-[#EFE9DC]">
+                    <th className="p-4 font-mono text-xs font-bold uppercase tracking-[0.16em] text-[#050505]">{isIt ? 'Metro & Parcheggio Consigliato' : 'Nearest Metro & Parking'}</th>
+                    <td className="p-4 text-[#3D3830]">{meta.metro} · {meta.parking}</td>
                   </tr>
-                  <tr className="bg-[#050505]">
-                    <th className="p-4 font-mono text-xs uppercase tracking-[0.18em] text-[#D6BE96]">{isIt ? 'Generi Musicali & Format' : 'Music Genres & Formats'}</th>
-                    <td className="p-4 text-[#C2B9AA]">{isIt ? meta.soundIt : meta.soundEn}</td>
+                  <tr className="bg-[#F6F1E7]">
+                    <th className="p-4 font-mono text-xs font-bold uppercase tracking-[0.16em] text-[#050505]">{isIt ? 'Generi Musicali & Format' : 'Music Genres & Formats'}</th>
+                    <td className="p-4 text-[#3D3830]">{isIt ? meta.soundIt : meta.soundEn}</td>
                   </tr>
-                  <tr className="bg-[#0B0A09]">
-                    <th className="p-4 font-mono text-xs uppercase tracking-[0.18em] text-[#D6BE96]">{isIt ? 'Zone Tavoli VIP & Privé' : 'VIP Table & Privé Zones'}</th>
-                    <td className="p-4 text-[#C2B9AA]">{isIt ? meta.vipZonesIt : meta.vipZonesEn}</td>
+                  <tr className="bg-[#EFE9DC]">
+                    <th className="p-4 font-mono text-xs font-bold uppercase tracking-[0.16em] text-[#050505]">{isIt ? 'Zone Tavoli VIP & Privé' : 'VIP Table & Privé Zones'}</th>
+                    <td className="p-4 text-[#3D3830]">{isIt ? meta.vipZonesIt : meta.vipZonesEn}</td>
                   </tr>
-                  <tr className="bg-[#050505]">
-                    <th className="p-4 font-mono text-xs uppercase tracking-[0.18em] text-[#D6BE96]">{isIt ? 'Fascia Minimum Spend (100% Bottiglie)' : 'Minimum Spend Tiers (100% Bottle Credit)'}</th>
-                    <td className="p-4 text-[#D6BE96] font-semibold">{meta.minSpend}</td>
+                  <tr className="bg-[#F6F1E7]">
+                    <th className="p-4 font-mono text-xs font-bold uppercase tracking-[0.16em] text-[#050505]">{isIt ? 'Fascia Minimum Spend (100% Bottiglie)' : 'Minimum Spend Tiers (100% Bottle Credit)'}</th>
+                    <td className="p-4 text-[#050505] font-bold">{meta.minSpend}</td>
                   </tr>
-                  <tr className="bg-[#0B0A09]">
-                    <th className="p-4 font-mono text-xs uppercase tracking-[0.18em] text-[#D6BE96]">{isIt ? 'Dress Code & Selezione Porta' : 'Dress Code & Door Policy'}</th>
-                    <td className="p-4 text-[#C2B9AA]">{dress}</td>
+                  <tr className="bg-[#EFE9DC]">
+                    <th className="p-4 font-mono text-xs font-bold uppercase tracking-[0.16em] text-[#050505]">{isIt ? 'Dress Code & Selezione Porta' : 'Dress Code & Door Policy'}</th>
+                    <td className="p-4 text-[#3D3830]">{dress}</td>
                   </tr>
-                  <tr className="bg-[#050505]">
-                    <th className="p-4 font-mono text-xs uppercase tracking-[0.18em] text-[#D6BE96]">{isIt ? 'Pre-Clubbing & Aperitivo in Zona' : 'Nearby Pre-Clubbing & Aperitivo'}</th>
-                    <td className="p-4 text-[#C2B9AA]">{isIt ? meta.preClubIt : meta.preClubEn}</td>
+                  <tr className="bg-[#F6F1E7]">
+                    <th className="p-4 font-mono text-xs font-bold uppercase tracking-[0.16em] text-[#050505]">{isIt ? 'Pre-Clubbing & Aperitivo in Zona' : 'Nearby Pre-Clubbing & Aperitivo'}</th>
+                    <td className="p-4 text-[#3D3830]">{isIt ? meta.preClubIt : meta.preClubEn}</td>
                   </tr>
-                  <tr className="bg-[#0B0A09]">
-                    <th className="p-4 font-mono text-xs uppercase tracking-[0.18em] text-[#D6BE96]">{isIt ? 'Giorni di Punta' : 'Peak Nights'}</th>
-                    <td className="p-4 text-[#C2B9AA]">{isIt ? meta.bestNightsIt : meta.bestNightsEn}</td>
+                  <tr className="bg-[#EFE9DC]">
+                    <th className="p-4 font-mono text-xs font-bold uppercase tracking-[0.16em] text-[#050505]">{isIt ? 'Giorni di Punta' : 'Peak Nights'}</th>
+                    <td className="p-4 text-[#3D3830]">{isIt ? meta.bestNightsIt : meta.bestNightsEn}</td>
                   </tr>
                 </tbody>
               </table>
@@ -427,37 +427,37 @@ export default function EditorialPageSections({ locale, path }: Props) {
     const zoneName = zoneObj?.name || zoneSlug.replace(/-/g, ' ');
     return (
     <>
-      <aside className="w-full border-t border-[#F6F1E7]/14 bg-[#050505] text-[#F6F1E7]" aria-label={`Guida Quartiere ${zoneName}`}>
-        <div className="mx-auto max-w-[1280px] border-x border-[#F6F1E7]/14 divide-y divide-[#F6F1E7]/14">
+      <aside className="w-full border-t border-[#050505]/16 bg-[#F6F1E7] text-[#050505]" aria-label={`Guida Quartiere ${zoneName}`}>
+        <div className="mx-auto max-w-[1280px] border-x border-[#050505]/16 divide-y divide-[#050505]/16">
           <section className="px-6 py-12 sm:px-12" data-aiso-direct-answer="true">
-            <p className="mb-2 font-mono text-xs uppercase tracking-[0.26em] text-[#D6BE96]">
+            <p className="mb-2 font-mono text-xs font-bold uppercase tracking-[0.22em] text-[#5C5446]">
               {isIt ? `ITINERARIO SERALE & LOGISTICA · QUARTIERE ${zoneName.toUpperCase()}` : `NIGHT ITINERARY & LOGISTICS · ${zoneName.toUpperCase()} DISTRICT`}
             </p>
-            <h2 className="mb-4 font-serif text-3xl text-[#F6F1E7] sm:text-4xl">
+            <h2 className="mb-4 font-serif text-3xl text-[#050505] sm:text-4xl">
               {isIt
                 ? `Come Organizzare la Serata in Zona ${zoneName}: Dall’Aperitivo e Speakeasy fino ai Club Notturni`
                 : `How to Plan Your Night in ${zoneName}: From Aperitivo & Speakeasies to Late-Night Clubs`}
             </h2>
-            <p className="font-sans text-base leading-relaxed text-[#C2B9AA] max-w-4xl mb-6">
+            <p className="font-sans text-base leading-relaxed text-[#3D3830] max-w-4xl mb-6">
               {isIt
                 ? `Il distretto di ${zoneName} offre una sequenza completa per la serata milanese: 1) Fascia 19:30–21:30 con Royal Aperitivo o cocktail sartoriale nei lounge bar del quartiere; 2) Fascia 21:30–23:30 con cena cantata o degustazione in speakeasy; 3) Fascia 23:30–05:00 con ingresso in lista nominale (entro le 00:30) o Tavolo VIP Privé nei club di ${zoneName} e dei distretti limitrofi.`
                 : `The ${zoneName} district offers a seamless three-stage Milanese evening: 1) 19:30–21:30 Royal Aperitivo or craft cocktails at neighborhood lounges; 2) 21:30–23:30 singing dinner show or speakeasy tasting; 3) 23:30–05:00 nominal guest-list entry (before 00:30) or VIP Privé Table service across ${zoneName} and adjacent nightlife hubs.`}
             </p>
             <div className="grid gap-4 sm:grid-cols-3">
-              <div className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-5">
-                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#D6BE96] mb-1">19:30 – 22:00</p>
-                <h3 className="font-serif text-xl text-[#F6F1E7] mb-2">{isIt ? `Aperitivo & Lounge a ${zoneName}` : `${zoneName} Aperitivo & Lounges`}</h3>
-                <p className="text-sm text-[#C2B9AA]">{isIt ? 'Prenota un tavolo d’appoggio entro le 20:00 per iniziare la serata con cocktail d’autore e finger food gourmet.' : 'Reserve an aperitivo table before 20:00 for craft cocktails and gourmet platters.'}</p>
+              <div className="border border-[#050505]/16 bg-[#EFE9DC] p-5">
+                <p className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#5C5446] mb-1">19:30 – 22:00</p>
+                <h3 className="font-serif text-xl text-[#050505] mb-2">{isIt ? `Aperitivo & Lounge a ${zoneName}` : `${zoneName} Aperitivo & Lounges`}</h3>
+                <p className="text-sm text-[#3D3830]">{isIt ? 'Prenota un tavolo d’appoggio entro le 20:00 per iniziare la serata con cocktail d’autore e finger food gourmet.' : 'Reserve an aperitivo table before 20:00 for craft cocktails and gourmet platters.'}</p>
               </div>
-              <div className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-5">
-                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#D6BE96] mb-1">22:00 – 23:45</p>
-                <h3 className="font-serif text-xl text-[#F6F1E7] mb-2">{isIt ? 'Speakeasy & Pre-Clubbing' : 'Speakeasies & Pre-Clubbing'}</h3>
-                <p className="text-sm text-[#C2B9AA]">{isIt ? 'Ideale per un secondo drink di alta miscelazione prima di raggiungere il desk d’ingresso della discoteca.' : 'Ideal for a high-mixology second drink before heading to the club velvet rope.'}</p>
+              <div className="border border-[#050505]/16 bg-[#EFE9DC] p-5">
+                <p className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#5C5446] mb-1">22:00 – 23:45</p>
+                <h3 className="font-serif text-xl text-[#050505] mb-2">{isIt ? 'Speakeasy & Pre-Clubbing' : 'Speakeasies & Pre-Clubbing'}</h3>
+                <p className="text-sm text-[#3D3830]">{isIt ? 'Ideale per un secondo drink di alta miscelazione prima di raggiungere il desk d’ingresso della discoteca.' : 'Ideal for a high-mixology second drink before heading to the club velvet rope.'}</p>
               </div>
-              <div className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-5">
-                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#D6BE96] mb-1">23:45 – 05:00</p>
-                <h3 className="font-serif text-xl text-[#F6F1E7] mb-2">{isIt ? `Clubbing & Tavoli VIP ${zoneName}` : `${zoneName} Clubbing & VIP Tables`}</h3>
-                <p className="text-sm text-[#C2B9AA]">{isIt ? `Accreditati in lista nominale o prenota il tuo Tavolo Privé su WhatsApp al ${SITE_CONTACT.whatsapp.number}.` : `Register on the nominal guest list or book your VIP Privé table on WhatsApp at ${SITE_CONTACT.whatsapp.number}.`}</p>
+              <div className="border border-[#050505]/16 bg-[#EFE9DC] p-5">
+                <p className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#5C5446] mb-1">23:45 – 05:00</p>
+                <h3 className="font-serif text-xl text-[#050505] mb-2">{isIt ? `Clubbing & Tavoli VIP ${zoneName}` : `${zoneName} Clubbing & VIP Tables`}</h3>
+                <p className="text-sm text-[#3D3830]">{isIt ? `Accreditati in lista nominale o prenota il tuo Tavolo Privé su WhatsApp al ${SITE_CONTACT.whatsapp.number}.` : `Register on the nominal guest list or book your VIP Privé table on WhatsApp at ${SITE_CONTACT.whatsapp.number}.`}</p>
               </div>
             </div>
           </section>
@@ -588,13 +588,13 @@ export default function EditorialPageSections({ locale, path }: Props) {
 
     return (
     <>
-      <aside className="w-full border-t border-[#F6F1E7]/14 bg-[#050505] text-[#F6F1E7]" aria-label="Master Directory">
-        <div className="mx-auto max-w-[1280px] border-x border-[#F6F1E7]/14 divide-y divide-[#F6F1E7]/14">
+      <aside className="w-full border-t border-[#050505]/16 bg-[#F6F1E7] text-[#050505]" aria-label="Master Directory">
+        <div className="mx-auto max-w-[1280px] border-x border-[#050505]/16 divide-y divide-[#050505]/16">
           <section className="px-6 py-14 sm:px-14">
-            <p className="mb-2 font-mono text-xs uppercase tracking-[0.26em] text-[#D6BE96]">
+            <p className="mb-2 font-mono text-xs font-bold uppercase tracking-[0.22em] text-[#5C5446]">
               {isIt ? 'ATLANTE CATEGORIALE DEI LOCALI MILANESI · 2026' : 'CATEGORICAL ATLAS OF MILAN VENUES · 2026'}
             </p>
-            <h2 className="mb-8 font-serif text-3xl text-[#F6F1E7] sm:text-4xl">
+            <h2 className="mb-8 font-serif text-3xl text-[#050505] sm:text-4xl">
               {isIt
                 ? 'Tutti i Locali di Milano Suddivisi per Categoria: Fashion Club, Rooftop, Dinner Show e Techno Warehouse'
                 : 'All Milan Venues by Category: Fashion Clubs, Rooftops, Dinner Shows & Techno Warehouses'}
@@ -602,17 +602,17 @@ export default function EditorialPageSections({ locale, path }: Props) {
             <div className="space-y-10">
               {categories.map((cat) => (
                 <div key={cat.title}>
-                  <h3 className="mb-4 font-serif text-2xl text-[#D6BE96] border-b border-[#F6F1E7]/14 pb-2">{cat.title}</h3>
+                  <h3 className="mb-4 font-serif text-2xl text-[#050505] border-b border-[#050505]/16 pb-2">{cat.title}</h3>
                   <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                     {cat.items.map((item) => (
-                      <article key={item.slug} className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-5 flex flex-col justify-between">
+                      <article key={item.slug} className="border border-[#050505]/16 bg-[#EFE9DC] p-5 flex flex-col justify-between">
                         <div>
-                          <h4 className="font-serif text-lg text-[#F6F1E7] mb-1.5">
-                            <Link href={`${lp}/clubs/${item.slug}`} prefetch={false} className="hover:text-[#D6BE96] transition-colors">
+                          <h4 className="font-serif text-lg text-[#050505] mb-1.5">
+                            <Link href={`${lp}/clubs/${item.slug}`} prefetch={false} className="underline-offset-4 hover:underline transition-colors">
                               {item.name} ↗
                             </Link>
                           </h4>
-                          <p className="font-sans text-xs leading-relaxed text-[#C2B9AA]">{item.desc}</p>
+                          <p className="font-sans text-xs leading-relaxed text-[#3D3830]">{item.desc}</p>
                         </div>
                       </article>
                     ))}
@@ -644,7 +644,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
         <div className="mx-auto max-w-[1280px] border-x border-[#F6F1E7]/14 divide-y divide-[#F6F1E7]/14">
           {/* Pillar 1: Speakeasies & Secret Bars */}
           <section className="px-6 py-14 sm:px-14">
-            <p className="mb-2 font-mono text-xs uppercase tracking-[0.26em] text-[#D6BE96]">
+            <p className="mb-2 font-mono text-xs uppercase tracking-[0.22em] text-[#EAE3D5]">
               {isIt ? 'SEZIONE SPECIALE · SPEAKEASY & SECRET BARS MILANO' : 'SPECIAL HUB · MILAN SPEAKEASIES & SECRET BARS'}
             </p>
             <h2 className="mb-4 font-serif text-3xl text-[#F6F1E7] sm:text-4xl">
@@ -659,84 +659,84 @@ export default function EditorialPageSections({ locale, path }: Props) {
             </p>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-6">
               <div className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-5">
-                <p className="font-mono text-[10px] text-[#D6BE96] uppercase mb-1">01 · CINQUE GIORNATE</p>
+                <p className="font-mono text-[10px] text-[#EAE3D5] uppercase mb-1">01 · CINQUE GIORNATE</p>
                 <h3 className="font-serif text-lg text-[#F6F1E7] mb-1">1930 Secret Bar</h3>
                 <p className="text-xs text-[#C2B9AA]">{isIt ? 'World’s 50 Best Bars · Ingresso su invito tramite MAG Cafè · Cocktail concettuali 18–25 €.' : 'World’s 50 Best Bars · Invitation access via MAG Cafè · Conceptual cocktails €18–€25.'}</p>
               </div>
               <div className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-5">
-                <p className="font-mono text-[10px] text-[#D6BE96] uppercase mb-1">02 · NAVIGLI (RIPA TICINESE 43)</p>
+                <p className="font-mono text-[10px] text-[#EAE3D5] uppercase mb-1">02 · NAVIGLI (RIPA TICINESE 43)</p>
                 <h3 className="font-serif text-lg text-[#F6F1E7] mb-1">Backdoor 43</h3>
                 <p className="text-xs text-[#C2B9AA]">{isIt ? 'Il bar più piccolo del mondo (4 mq) · Bartender mascherato · Slot privato o take-away 12–18 €.' : 'World’s smallest bar (4 sqm) · Masked bartender · Private slot or window cocktail €12–€18.'}</p>
               </div>
               <div className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-5">
-                <p className="font-mono text-[10px] text-[#D6BE96] uppercase mb-1">03 · PORTA VENEZIA (VIALE PIAVE 1)</p>
+                <p className="font-mono text-[10px] text-[#EAE3D5] uppercase mb-1">03 · PORTA VENEZIA (VIALE PIAVE 1)</p>
                 <h3 className="font-serif text-lg text-[#F6F1E7] mb-1">Nottingham Forest</h3>
                 <p className="text-xs text-[#C2B9AA]">{isIt ? 'Mixology molecolare di Dario Comini · Niente prenotazione, arrivo entro le 19:15 o dopo le 23:00 (15–20 €).' : 'Dario Comini’s molecular mixology · Walk-in only, arrive by 19:15 or after 23:00 (€15–€20).'}</p>
               </div>
               <div className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-5">
-                <p className="font-mono text-[10px] text-[#D6BE96] uppercase mb-1">04 · NAVIGLI & ISOLA</p>
+                <p className="font-mono text-[10px] text-[#EAE3D5] uppercase mb-1">04 · NAVIGLI & ISOLA</p>
                 <h3 className="font-serif text-lg text-[#F6F1E7] mb-1">Officina, Moebius & Iter</h3>
                 <p className="text-xs text-[#C2B9AA]">{isIt ? 'Via Giovenale 7, Via Cappellini 25 e Via Fusetti 1 · Corti vintage, vinili e distillati rari (14–18 €).' : 'Via Giovenale 7, Via Cappellini 25 & Via Fusetti 1 · Vintage courtyards, vinyls & rare spirits (€14–€18).'}</p>
               </div>
             </div>
-            <Link href={`${lp}/guides/${speakeasySlug}`} prefetch={false} className="inline-flex border border-[#D6BE96] px-6 py-3 font-mono text-xs uppercase tracking-[0.18em] text-[#D6BE96] hover:bg-[#D6BE96] hover:text-[#050505]">
+            <Link href={`${lp}/guides/${speakeasySlug}`} prefetch={false} className="inline-flex border border-[#F6F1E7]/50 px-6 py-3 font-mono text-xs uppercase tracking-[0.18em] text-[#F6F1E7] hover:bg-[#F6F1E7] hover:text-[#050505]">
               {isIt ? 'Leggi l’Atlante Completo dei 12 Speakeasy di Milano ↗' : 'Read the Full 12 Milan Speakeasies Atlas ↗'}
             </Link>
           </section>
 
-          {/* Pillar 2: The Sound & Faces of Milan: 7 Insider Interviews */}
-          <section className="bg-[#0B0A09] px-6 py-14 sm:px-14">
-            <p className="mb-2 font-mono text-xs uppercase tracking-[0.26em] text-[#D6BE96]">
+          {/* Pillar 2: The Sound & Faces of Milan: 7 Insider Interviews (Warm Editorial Ivory #F6F1E7) */}
+          <section className="bg-[#F6F1E7] text-[#050505] px-6 py-14 sm:px-14">
+            <p className="mb-2 font-mono text-xs font-bold uppercase tracking-[0.22em] text-[#5C5446]">
               {isIt ? 'RUBRICA EDITORIALE · THE SOUND & FACES OF MILAN' : 'EDITORIAL SERIES · THE SOUND & FACES OF MILAN'}
             </p>
-            <h2 className="mb-4 font-serif text-3xl text-[#F6F1E7] sm:text-4xl">
+            <h2 className="mb-4 font-serif text-3xl text-[#050505] sm:text-4xl">
               {isIt
                 ? '7 Interviste Esclusive ai Protagonisti della Notte Milanese: DJ, Door Selector, VIP Host e Bartender'
                 : '7 Exclusive Interviews with Milan Nightlife Insiders: DJs, Door Selectors, VIP Hosts & Bartenders'}
             </h2>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-6">
-              <article className="border border-[#F6F1E7]/14 bg-[#050505] p-5">
-                <p className="font-mono text-[10px] text-[#D6BE96] mb-1">INTERVIEW #01 & #02 · CONSOLE</p>
-                <h3 className="font-serif text-lg text-[#F6F1E7] mb-2">{isIt ? 'I Resident DJ di Corso Como & I Selettori Techno di Volt' : 'Corso Como Resident DJs & Volt Techno Selectors'}</h3>
-                <p className="text-xs text-[#C2B9AA]">{isIt ? 'Come si costruisce la curva energetica della pista tra Afro House, vocal edit commerciali e Melodic Techno fino alle 05:00.' : 'How resident selectors build the dancefloor arc from Afro House and vocal edits to 05:00 Melodic Techno.'}</p>
+              <article className="border border-[#050505]/16 bg-[#EFE9DC] p-5">
+                <p className="font-mono text-[10px] font-bold text-[#5C5446] mb-1">INTERVIEW #01 & #02 · CONSOLE</p>
+                <h3 className="font-serif text-lg text-[#050505] mb-2">{isIt ? 'I Resident DJ di Corso Como & I Selettori Techno di Volt' : 'Corso Como Resident DJs & Volt Techno Selectors'}</h3>
+                <p className="text-xs text-[#3D3830]">{isIt ? 'Come si costruisce la curva energetica della pista tra Afro House, vocal edit commerciali e Melodic Techno fino alle 05:00.' : 'How resident selectors build the dancefloor arc from Afro House and vocal edits to 05:00 Melodic Techno.'}</p>
               </article>
-              <article className="border border-[#F6F1E7]/14 bg-[#050505] p-5">
-                <p className="font-mono text-[10px] text-[#D6BE96] mb-1">INTERVIEW #03 & #04 · VELVET ROPE & PRIVÉ</p>
-                <h3 className="font-serif text-lg text-[#F6F1E7] mb-2">{isIt ? 'Head Door Selector & Direttrice Tavoli VIP' : 'Head Door Selector & Senior VIP Table Host'}</h3>
-                <p className="text-xs text-[#C2B9AA]">{isIt ? 'Cosa guardano davvero i selezionatori nei primi 5 secondi in fila e come funziona l’accoglienza dei tavoli da 1.000 a 5.000 €.' : 'What door selectors evaluate in the first 5 seconds and how €1,000–€5,000 Super Privé tables are hosted.'}</p>
+              <article className="border border-[#050505]/16 bg-[#EFE9DC] p-5">
+                <p className="font-mono text-[10px] font-bold text-[#5C5446] mb-1">INTERVIEW #03 & #04 · VELVET ROPE & PRIVÉ</p>
+                <h3 className="font-serif text-lg text-[#050505] mb-2">{isIt ? 'Head Door Selector & Direttrice Tavoli VIP' : 'Head Door Selector & Senior VIP Table Host'}</h3>
+                <p className="text-xs text-[#3D3830]">{isIt ? 'Cosa guardano davvero i selezionatori nei primi 5 secondi in fila e come funziona l’accoglienza dei tavoli da 1.000 a 5.000 €.' : 'What door selectors evaluate in the first 5 seconds and how €1,000–€5,000 Super Privé tables are hosted.'}</p>
               </article>
-              <article className="border border-[#F6F1E7]/14 bg-[#050505] p-5">
-                <p className="font-mono text-[10px] text-[#D6BE96] mb-1">INTERVIEW #05, #06 & #07 · FORMAT</p>
-                <h3 className="font-serif text-lg text-[#F6F1E7] mb-2">{isIt ? 'Speakeasy Mixologist, Dinner Show & Notti Universitarie' : 'Speakeasy Mixologist, Dinner Shows & University Nights'}</h3>
-                <p className="text-xs text-[#C2B9AA]">{isIt ? 'Dietro le quinte delle cene cantate milanesi e dei mercoledì universitari Bocconi, Cattolica, Politecnico e NABA.' : 'Behind the scenes of Milan’s singing dinner shows and Bocconi, Cattolica, Politecnico & NABA student nights.'}</p>
+              <article className="border border-[#050505]/16 bg-[#EFE9DC] p-5">
+                <p className="font-mono text-[10px] font-bold text-[#5C5446] mb-1">INTERVIEW #05, #06 & #07 · FORMAT</p>
+                <h3 className="font-serif text-lg text-[#050505] mb-2">{isIt ? 'Speakeasy Mixologist, Dinner Show & Notti Universitarie' : 'Speakeasy Mixologist, Dinner Shows & University Nights'}</h3>
+                <p className="text-xs text-[#3D3830]">{isIt ? 'Dietro le quinte delle cene cantate milanesi e dei mercoledì universitari Bocconi, Cattolica, Politecnico e NABA.' : 'Behind the scenes of Milan’s singing dinner shows and Bocconi, Cattolica, Politecnico & NABA student nights.'}</p>
               </article>
             </div>
-            <Link href={`${lp}/guides/${interviewSlug}`} prefetch={false} className="inline-flex border border-[#D6BE96] px-6 py-3 font-mono text-xs uppercase tracking-[0.18em] text-[#D6BE96] hover:bg-[#D6BE96] hover:text-[#050505]">
+            <Link href={`${lp}/guides/${interviewSlug}`} prefetch={false} className="inline-flex border border-[#050505] bg-[#050505] px-6 py-3 font-mono text-xs uppercase tracking-[0.18em] text-[#F6F1E7] hover:bg-[#3D3830]">
               {isIt ? 'Leggi Tutte le 7 Interviste "The Sound & Faces of Milan" ↗' : 'Read All 7 "The Sound & Faces of Milan" Interviews ↗'}
             </Link>
           </section>
 
           {/* Pillar 3: Complete Guide Clusters */}
           <section className="px-6 py-14 sm:px-14">
-            <p className="mb-2 font-mono text-xs uppercase tracking-[0.26em] text-[#D6BE96]">
+            <p className="mb-2 font-mono text-xs uppercase tracking-[0.22em] text-[#EAE3D5]">
               {isIt ? 'PERCORSI GUIDATI PER OBIETTIVO · 2026' : 'GUIDED PLANNING PATHS · 2026'}
             </p>
             <h2 className="mb-6 font-serif text-3xl text-[#F6F1E7] sm:text-4xl">
               {isIt ? 'Guide Pratiche per Lauree, Compleanni, Età (18+/21+/Over 30) e Budget' : 'Practical Guides for Graduations, Birthdays, Age Brackets (18+/21+/30+) & Budgets'}
             </h2>
             <div className="grid gap-4 sm:grid-cols-3">
-              <Link href={`${lp}/guides/${vipSlug}`} prefetch={false} className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-6 hover:border-[#D6BE96]">
-                <span className="block font-mono text-[10px] text-[#D6BE96] mb-1">CLUSTER 01 · VIP & PARTY</span>
+              <Link href={`${lp}/guides/${vipSlug}`} prefetch={false} className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-6 hover:border-[#F6F1E7]">
+                <span className="block font-mono text-[10px] text-[#EAE3D5] mb-1">CLUSTER 01 · VIP & PARTY</span>
                 <h3 className="font-serif text-xl text-[#F6F1E7] mb-2">{isIt ? 'Guida Tavoli VIP, Feste di Laurea & Compleanni ↗' : 'VIP Tables, Graduations & Birthday Parties Guide ↗'}</h3>
                 <p className="text-xs text-[#C2B9AA]">{isIt ? 'Come scegliere tra Royal Aperitivo riservato, Cena Cantata e Tavolo Pista/Privé con pacchetti bottiglie per 6–25 invitati.' : 'How to choose between reserved Royal Aperitivo, Singing Dinner Show, and VIP Tables for 6–25 guests.'}</p>
               </Link>
-              <Link href={`${lp}/guides/${dressSlug}`} prefetch={false} className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-6 hover:border-[#D6BE96]">
-                <span className="block font-mono text-[10px] text-[#D6BE96] mb-1">CLUSTER 02 · DOOR POLICY</span>
+              <Link href={`${lp}/guides/${dressSlug}`} prefetch={false} className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-6 hover:border-[#F6F1E7]">
+                <span className="block font-mono text-[10px] text-[#EAE3D5] mb-1">CLUSTER 02 · DOOR POLICY</span>
                 <h3 className="font-serif text-xl text-[#F6F1E7] mb-2">{isIt ? 'Guida Dress Code Uomo/Donna & Fasce d’Età ↗' : 'Men & Women Dress Code & Age Brackets Guide ↗'}</h3>
                 <p className="text-xs text-[#C2B9AA]">{isIt ? 'Cosa indossare nei club 18+, 21+, 23+ e Over 30 tra Corso Como, Sempione e Quadrilatero della Moda.' : 'What to wear across 18+, 21+, 23+, and 30+ clubs in Corso Como, Sempione, and the Fashion Quadrilatero.'}</p>
               </Link>
-              <Link href={`${lp}/guides/${technoSlug}`} prefetch={false} className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-6 hover:border-[#D6BE96]">
-                <span className="block font-mono text-[10px] text-[#D6BE96] mb-1">CLUSTER 03 · ELECTRONIC</span>
+              <Link href={`${lp}/guides/${technoSlug}`} prefetch={false} className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-6 hover:border-[#F6F1E7]">
+                <span className="block font-mono text-[10px] text-[#EAE3D5] mb-1">CLUSTER 03 · ELECTRONIC</span>
                 <h3 className="font-serif text-xl text-[#F6F1E7] mb-2">{isIt ? 'Guida Techno, Afro House & Warehouse 2026 ↗' : 'Techno, Afro House & Warehouses 2026 Guide ↗'}</h3>
                 <p className="text-xs text-[#C2B9AA]">{isIt ? 'Mappa dei migliori sound system di Milano: Volt, Tunnel Club, Fabrique, Magazzini Generali, Gate e The Sanctuary.' : 'Map of Milan’s top sound systems: Volt, Tunnel Club, Fabrique, Magazzini Generali, Gate, and The Sanctuary.'}</p>
               </Link>
@@ -755,84 +755,84 @@ export default function EditorialPageSections({ locale, path }: Props) {
   if (cleanPath.startsWith('/events')) {
     return (
     <>
-      <aside className="w-full border-t border-[#F6F1E7]/14 bg-[#050505] text-[#F6F1E7]" aria-label="Special & Thematic Events Hub">
-        <div className="mx-auto max-w-[1280px] border-x border-[#F6F1E7]/14 divide-y divide-[#F6F1E7]/14">
+      <aside className="w-full border-t border-[#050505]/16 bg-[#F6F1E7] text-[#050505]" aria-label="Special & Thematic Events Hub">
+        <div className="mx-auto max-w-[1280px] border-x border-[#050505]/16 divide-y divide-[#050505]/16">
           <section className="px-6 py-14 sm:px-14" data-aiso-direct-answer="true">
-            <p className="mb-2 font-mono text-xs uppercase tracking-[0.26em] text-[#D6BE96]">
+            <p className="mb-2 font-mono text-xs font-bold uppercase tracking-[0.22em] text-[#5C5446]">
               {isIt ? 'CALENDARIO GRANDI EVENTI & SERATE TEMATICHE · MILANO 2026/2027' : 'MAJOR EVENTS & THEMATIC NIGHTS CALENDAR · MILAN 2026/2027'}
             </p>
-            <h2 className="mb-4 font-serif text-3xl text-[#F6F1E7] sm:text-4xl">
+            <h2 className="mb-4 font-serif text-3xl text-[#050505] sm:text-4xl">
               {isIt
                 ? 'Guida agli Eventi Speciali e Tematici a Milano: Halloween 2026, Capodanno 2027, Fashion Week, Design Week, F1 ed Erasmus'
                 : 'Milan Special & Thematic Events Guide: Halloween 2026, NYE 2027, Fashion Week, Design Week, Monza F1 & Erasmus'}
             </h2>
-            <p className="mb-8 font-sans text-base text-[#C2B9AA] max-w-4xl">
+            <p className="mb-8 font-sans text-base text-[#3D3830] max-w-4xl">
               {isIt
                 ? 'Durante i grandi appuntamenti internazionali e le notti tematiche settimanali, la domanda per i Tavoli VIP e le liste nominali a Milano raddoppia. Qui trovi il calendario operativo diviso per evento speciale, università e fascia d’età.'
                 : 'During major international weeks and weekly thematic club nights, demand for Milan VIP Tables and guest lists doubles. Below is the complete operational breakdown by special event, university, and age bracket.'}
             </p>
             <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              <article className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-6">
-                <p className="font-mono text-[10px] text-[#D6BE96] uppercase mb-1">30 OTT – 1 NOV 2026</p>
-                <h3 className="font-serif text-xl text-[#F6F1E7] mb-2">
-                  <Link href={`${lp}/events/halloween-2026`} prefetch={false} className="hover:text-[#D6BE96]">Halloween 2026 Milano ↗</Link>
+              <article className="border border-[#050505]/16 bg-[#EFE9DC] p-6">
+                <p className="font-mono text-[10px] font-bold text-[#5C5446] uppercase mb-1">30 OTT – 1 NOV 2026</p>
+                <h3 className="font-serif text-xl text-[#050505] mb-2">
+                  <Link href={`${lp}/events/halloween-2026`} prefetch={false} className="underline-offset-4 hover:underline">Halloween 2026 Milano ↗</Link>
                 </h3>
-                <p className="text-xs text-[#C2B9AA] leading-relaxed">
+                <p className="text-xs text-[#3D3830] leading-relaxed">
                   {isIt
                     ? 'Tre notti di produzioni scenografiche tra JustMe, Alcatraz (3 piste Horror Show), Fabrique, Old Fashion, Tocqueville 13 e Magazzini Generali. Nei fashion club è gradito il tema Dark Elegance; nei warehouse maschere e costumi completi.'
                     : 'Three nights of immersive productions across JustMe, Alcatraz (3-stage Horror Show), Fabrique, Old Fashion, Tocqueville 13, and Magazzini Generali. Dark Elegance in luxury clubs; full costumes at warehouse parties.'}
                 </p>
               </article>
-              <article className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-6">
-                <p className="font-mono text-[10px] text-[#D6BE96] uppercase mb-1">31 DICEMBRE 2026 / 1 GENNAIO 2027</p>
-                <h3 className="font-serif text-xl text-[#F6F1E7] mb-2">{isIt ? 'Capodanno a Milano (NYE 2027)' : 'New Year’s Eve Milan (NYE 2027)'}</h3>
-                <p className="text-xs text-[#C2B9AA] leading-relaxed">
+              <article className="border border-[#050505]/16 bg-[#EFE9DC] p-6">
+                <p className="font-mono text-[10px] font-bold text-[#5C5446] uppercase mb-1">31 DICEMBRE 2026 / 1 GENNAIO 2027</p>
+                <h3 className="font-serif text-xl text-[#050505] mb-2">{isIt ? 'Capodanno a Milano (NYE 2027)' : 'New Year’s Eve Milan (NYE 2027)'}</h3>
+                <p className="text-xs text-[#3D3830] leading-relaxed">
                   {isIt
                     ? 'Cenoni di Gala, Royal Buffet e Tavoli Privé di Capodanno da JustMe (Torre Branca), Armani Privé, Il Gattopardo, Tocqueville 13, Hollywood e The Sanctuary. Prenotazione Early-Bird consigliata entro fine novembre via WhatsApp.'
                     : 'Gala Dinners, Royal Buffets, and NYE VIP Privé Tables at JustMe (Torre Branca), Armani Privé, Il Gattopardo, Tocqueville 13, Hollywood, and The Sanctuary. Early-Bird booking recommended via WhatsApp.'}
                 </p>
               </article>
-              <article className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-6">
-                <p className="font-mono text-[10px] text-[#D6BE96] uppercase mb-1">SETTEMBRE & FEBBRAIO · APRILE · SETTEMBRE F1</p>
-                <h3 className="font-serif text-xl text-[#F6F1E7] mb-2">
-                  <Link href={`${lp}/milan-fashion-week`} prefetch={false} className="hover:text-[#D6BE96]">Fashion Week, Fuorisalone & Monza F1 ↗</Link>
+              <article className="border border-[#050505]/16 bg-[#EFE9DC] p-6">
+                <p className="font-mono text-[10px] font-bold text-[#5C5446] uppercase mb-1">SETTEMBRE & FEBBRAIO · APRILE · SETTEMBRE F1</p>
+                <h3 className="font-serif text-xl text-[#050505] mb-2">
+                  <Link href={`${lp}/milan-fashion-week`} prefetch={false} className="underline-offset-4 hover:underline">Fashion Week, Fuorisalone & Monza F1 ↗</Link>
                 </h3>
-                <p className="text-xs text-[#C2B9AA] leading-relaxed">
+                <p className="text-xs text-[#3D3830] leading-relaxed">
                   {isIt
                     ? 'Gli afterparty ufficiali delle sfilate (Armani Privé, JustMe, Volt, 11Clubroom), le feste del Salone del Mobile tra Tortona, Brera e Lambrate (The Sanctuary) e i party piloti/sponsor del GP di Monza.'
                     : 'Official runway afterparties (Armani Privé, JustMe, Volt, 11Clubroom), Salone del Mobile Design Week parties across Tortona, Brera & Lambrate, and Monza F1 GP weekend celebrations.'}
                 </p>
               </article>
-              <article className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-6">
-                <p className="font-mono text-[10px] text-[#D6BE96] uppercase mb-1">MARTEDÌ · MERCOLEDÌ · GIOVEDÌ · VENERDÌ</p>
-                <h3 className="font-serif text-xl text-[#F6F1E7] mb-2">
-                  <Link href={`${lp}/events/university-erasmus`} prefetch={false} className="hover:text-[#D6BE96]">{isIt ? 'Notti Universitarie & Erasmus ↗' : 'University & Erasmus Nights ↗'}</Link>
+              <article className="border border-[#050505]/16 bg-[#EFE9DC] p-6">
+                <p className="font-mono text-[10px] font-bold text-[#5C5446] uppercase mb-1">MARTEDÌ · MERCOLEDÌ · GIOVEDÌ · VENERDÌ</p>
+                <h3 className="font-serif text-xl text-[#050505] mb-2">
+                  <Link href={`${lp}/events/university-erasmus`} prefetch={false} className="underline-offset-4 hover:underline">{isIt ? 'Notti Universitarie & Erasmus ↗' : 'University & Erasmus Nights ↗'}</Link>
                 </h3>
-                <p className="text-xs text-[#C2B9AA] leading-relaxed">
+                <p className="text-xs text-[#3D3830] leading-relaxed">
                   {isIt
                     ? 'Il calendario per gli studenti di Bocconi, Cattolica, Politecnico, Statale, IULM, NABA e Marangoni: Martedì/Mercoledì International Night (The Club, Old Fashion, Hollywood), Giovedì Universitario e Venerdì Alcatraz/Magazzini.'
                     : 'Weekly calendar for Bocconi, Cattolica, Politecnico, Statale, IULM, NABA & Marangoni students: Tue/Wed International Nights (The Club, Old Fashion, Hollywood), Thursday Student Nights & Friday Alcatraz/Magazzini.'}
                 </p>
               </article>
-              <article className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-6">
-                <p className="font-mono text-[10px] text-[#D6BE96] uppercase mb-1">SELEZIONE ANAGRAFICA · 18+ VS 21+</p>
-                <h3 className="font-serif text-xl text-[#F6F1E7] mb-2">
-                  <Link href={`${lp}/events/18-plus`} prefetch={false} className="hover:text-[#D6BE96]">Serate 18+</Link>
+              <article className="border border-[#050505]/16 bg-[#EFE9DC] p-6">
+                <p className="font-mono text-[10px] font-bold text-[#5C5446] uppercase mb-1">SELEZIONE ANAGRAFICA · 18+ VS 21+</p>
+                <h3 className="font-serif text-xl text-[#050505] mb-2">
+                  <Link href={`${lp}/events/18-plus`} prefetch={false} className="underline-offset-4 hover:underline">Serate 18+</Link>
                   {' · '}
-                  <Link href={`${lp}/events/21-plus`} prefetch={false} className="hover:text-[#D6BE96]">Club 21+ & 23+ ↗</Link>
+                  <Link href={`${lp}/events/21-plus`} prefetch={false} className="underline-offset-4 hover:underline">Club 21+ & 23+ ↗</Link>
                 </h3>
-                <p className="text-xs text-[#C2B9AA] leading-relaxed">
+                <p className="text-xs text-[#3D3830] leading-relaxed">
                   {isIt
                     ? 'Confronta i locali accessibili dai 18 anni compiuti (Alcatraz, Fabrique, Magazzini Generali, Lime, serate studentesche) con i club 21+/23+ (Armani Privé, JustMe, 11Clubroom, Volt, Tocqueville 13).'
                     : 'Compare 18+ accessible venues (Alcatraz, Fabrique, Magazzini Generali, Lime, student nights) with strict 21+/23+ luxury doors (Armani Privé, JustMe, 11Clubroom, Volt, Tocqueville 13).'}
                 </p>
               </article>
-              <article className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-6">
-                <p className="font-mono text-[10px] text-[#D6BE96] uppercase mb-1">GUEST DJ & JET-SET GLOBALE</p>
-                <h3 className="font-serif text-xl text-[#F6F1E7] mb-2">
-                  <Link href={`${lp}/events/international`} prefetch={false} className="hover:text-[#D6BE96]">{isIt ? 'Eventi & DJ Internazionali ↗' : 'International DJs & Global Nights ↗'}</Link>
+              <article className="border border-[#050505]/16 bg-[#EFE9DC] p-6">
+                <p className="font-mono text-[10px] font-bold text-[#5C5446] uppercase mb-1">GUEST DJ & JET-SET GLOBALE</p>
+                <h3 className="font-serif text-xl text-[#050505] mb-2">
+                  <Link href={`${lp}/events/international`} prefetch={false} className="underline-offset-4 hover:underline">{isIt ? 'Eventi & DJ Internazionali ↗' : 'International DJs & Global Nights ↗'}</Link>
                 </h3>
-                <p className="text-xs text-[#C2B9AA] leading-relaxed">
+                <p className="text-xs text-[#3D3830] leading-relaxed">
                   {isIt
                     ? 'Showcase con special guest mondiali Afro House, Melodic Techno, Hip-Hop e Reggaeton, con assistenza Concierge multilingue e fatturazione aziendale per tavoli corporate.'
                     : 'Showcases with global Afro House, Melodic Techno, Hip-Hop, and Reggaeton headliners, complete with multilingual VIP Concierge support and corporate table invoicing.'}
@@ -849,15 +849,15 @@ export default function EditorialPageSections({ locale, path }: Props) {
 
   // ---------------------------------------------------------------------------
   // CASE 7: Homepage (/), Service Pages (/vip-tables, /bottle-prices, /guest-lists, /concierge, /aperitivo, /door-policy, /faq, /zones)
-  // Render a concise, high-impact Quick Navigation Matrix without repeating the 5,000-word club wall!
+  // Render a concise, high-impact Quick Navigation Matrix on Warm Editorial Ivory (#F6F1E7)
   // ---------------------------------------------------------------------------
   return (
     <>
-      <aside className="w-full border-t border-[#F6F1E7]/14 bg-[#050505] text-[#F6F1E7]" aria-label={isIt ? 'Mappa Servizi Nightlife Milan' : 'Nightlife Milan Service Matrix'}>
-      <div className="mx-auto max-w-[1280px] border-x border-[#F6F1E7]/14 px-6 py-12 sm:px-14">
-        <div className="mb-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6 border border-[#D6BE96]/40 bg-[#0B0A09] p-7">
+      <aside className="w-full border-t border-[#050505]/16 bg-[#F6F1E7] text-[#050505]" aria-label={isIt ? 'Mappa Servizi Nightlife Milan' : 'Nightlife Milan Service Matrix'}>
+      <div className="mx-auto max-w-[1280px] border-x border-[#050505]/16 px-6 py-12 sm:px-14">
+        <div className="mb-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6 border border-[#050505] bg-[#050505] p-7 text-[#F6F1E7]">
           <div className="max-w-2xl">
-            <p className="font-mono text-[10px] uppercase tracking-[0.26em] text-[#D6BE96] mb-2">
+            <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#EAE3D5] mb-2">
               {isIt ? 'CONCIERGE UFFICIALE NIGHTLIFE MILAN · ATTIVO 18:00–05:00' : 'OFFICIAL NIGHTLIFE MILAN CONCIERGE · ACTIVE 18:00–05:00'}
             </p>
             <h2 className="font-serif text-2xl text-[#F6F1E7] mb-2">
@@ -871,28 +871,28 @@ export default function EditorialPageSections({ locale, path }: Props) {
                 : `Send your date, preferred club or district, and group size to ${SITE_CONTACT.whatsapp.number} for instant VIP Privé floorplans, 2026 bottle menus, and priority entry.`}
             </p>
           </div>
-          <a href={waHref} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 shrink-0 items-center justify-center bg-[#F6F1E7] px-7 py-3.5 font-mono text-xs font-semibold uppercase tracking-[0.2em] text-[#050505] hover:bg-[#D6BE96]">
+          <a href={waHref} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 shrink-0 items-center justify-center bg-[#25D366] px-7 py-3.5 font-mono text-xs font-bold uppercase tracking-[0.18em] text-[#050505] hover:bg-[#2EE472]">
             WhatsApp {SITE_CONTACT.whatsapp.number} ↗
           </a>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6 font-mono text-[11px] uppercase tracking-[0.16em]">
-          <Link href={`${lp}/clubs`} prefetch={false} className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-3.5 text-[#F6F1E7] hover:border-[#D6BE96] hover:text-[#D6BE96]">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6 font-mono text-[11px] font-bold uppercase tracking-[0.16em]">
+          <Link href={`${lp}/clubs`} prefetch={false} className="border border-[#050505]/18 bg-[#EFE9DC] p-3.5 text-[#050505] hover:bg-[#050505] hover:text-[#F6F1E7] transition-colors">
             {isIt ? 'Directory 40+ Club ↗' : '40+ Clubs Directory ↗'}
           </Link>
-          <Link href={`${lp}/vip-tables`} prefetch={false} className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-3.5 text-[#F6F1E7] hover:border-[#D6BE96] hover:text-[#D6BE96]">
+          <Link href={`${lp}/vip-tables`} prefetch={false} className="border border-[#050505]/18 bg-[#EFE9DC] p-3.5 text-[#050505] hover:bg-[#050505] hover:text-[#F6F1E7] transition-colors">
             {isIt ? 'Tavoli VIP & Privé ↗' : 'VIP Tables & Privé ↗'}
           </Link>
-          <Link href={`${lp}/bottle-prices`} prefetch={false} className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-3.5 text-[#F6F1E7] hover:border-[#D6BE96] hover:text-[#D6BE96]">
+          <Link href={`${lp}/bottle-prices`} prefetch={false} className="border border-[#050505]/18 bg-[#EFE9DC] p-3.5 text-[#050505] hover:bg-[#050505] hover:text-[#F6F1E7] transition-colors">
             {isIt ? 'Listino Bottiglie ↗' : 'Bottle Prices ↗'}
           </Link>
-          <Link href={`${lp}/guides/${isIt ? 'speakeasy-nascosti-navigli' : 'navigli-hidden-speakeasies'}`} prefetch={false} className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-3.5 text-[#F6F1E7] hover:border-[#D6BE96] hover:text-[#D6BE96]">
+          <Link href={`${lp}/guides/${isIt ? 'speakeasy-nascosti-navigli' : 'navigli-hidden-speakeasies'}`} prefetch={false} className="border border-[#050505]/18 bg-[#EFE9DC] p-3.5 text-[#050505] hover:bg-[#050505] hover:text-[#F6F1E7] transition-colors">
             {isIt ? '12 Speakeasy Segreti ↗' : '12 Secret Speakeasies ↗'}
           </Link>
-          <Link href={`${lp}/guides/${isIt ? 'intervista-sound-of-milan' : 'the-sound-of-milan-dj-interview'}`} prefetch={false} className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-3.5 text-[#F6F1E7] hover:border-[#D6BE96] hover:text-[#D6BE96]">
+          <Link href={`${lp}/guides/${isIt ? 'intervista-sound-of-milan' : 'the-sound-of-milan-dj-interview'}`} prefetch={false} className="border border-[#050505]/18 bg-[#EFE9DC] p-3.5 text-[#050505] hover:bg-[#050505] hover:text-[#F6F1E7] transition-colors">
             {isIt ? '7 Interviste Insider ↗' : '7 Insider Interviews ↗'}
           </Link>
-          <Link href={`${lp}/events/special`} prefetch={false} className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-3.5 text-[#F6F1E7] hover:border-[#D6BE96] hover:text-[#D6BE96]">
+          <Link href={`${lp}/events/special`} prefetch={false} className="border border-[#050505]/18 bg-[#EFE9DC] p-3.5 text-[#050505] hover:bg-[#050505] hover:text-[#F6F1E7] transition-colors">
             {isIt ? 'Eventi Speciali ↗' : 'Special Events ↗'}
           </Link>
         </div>

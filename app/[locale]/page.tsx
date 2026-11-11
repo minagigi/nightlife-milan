@@ -466,7 +466,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         />
         {/* ── Fascia Sartoriale dei Quartieri Notturni ─────────────────── */}
         <div className="w-full bg-[#050505] border-b border-[#F6F1E7]/14">
-          <div className="max-w-[1440px] mx-auto border-x border-[#F6F1E7]/14 px-5 sm:px-14 py-4 flex flex-wrap items-center justify-between gap-4 font-mono text-[11px] tracking-[0.22em] uppercase text-[#C2B9AA]">
+          <div className="max-w-[1440px] mx-auto border-x border-[#F6F1E7]/14 px-5 sm:px-14 py-4 flex flex-wrap items-center justify-between gap-4 font-mono text-[11px] tracking-[0.12em] uppercase text-[#C2B9AA]">
             <span>01 · PARCO SEMPIONE</span>
             <span>02 · PORTA GARIBALDI</span>
             <span className="hidden sm:inline">03 · PORTA NUOVA SKYLINE</span>
@@ -482,7 +482,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
             {/* Header Editoriale della Collezione */}
             <div className="px-5 sm:px-14 pt-16 sm:pt-20 pb-10 sm:pb-12 border-b border-[#F6F1E7]/14 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
               <div>
-                <p className="font-mono text-[#D6BE96] text-xs tracking-[0.26em] uppercase mb-3">
+                <p className="font-mono text-[#EAE3D5] text-xs tracking-[0.14em] uppercase mb-3">
                   N° 02 · {homeCopy.curatedLabel}
                 </p>
                 <h2 className="font-serif text-4xl sm:text-5xl lg:text-[62px] font-normal text-[#F6F1E7] tracking-[-0.032em] leading-[0.90]">
@@ -492,7 +492,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
               <Link
                 href={`${lp}/clubs`}
                 prefetch={false}
-                className="inline-flex items-center justify-center min-h-[48px] px-7 py-3.5 border border-[#D6BE96]/45 text-[#F6F1E7] hover:bg-[#F6F1E7] hover:text-[#050505] font-mono text-xs tracking-[0.2em] uppercase transition-colors shrink-0"
+                className="inline-flex items-center justify-center min-h-[48px] px-7 py-3.5 border border-[#F6F1E7]/40 text-[#F6F1E7] hover:bg-[#F6F1E7] hover:text-[#050505] font-mono text-xs tracking-[0.12em] uppercase transition-colors shrink-0"
               >
                 {homeCopy.allVenues} ↗
               </Link>
@@ -518,7 +518,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                       />
                       <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, #0505058c, transparent)' }} />
                     </Link>
-                    <div className="flex justify-between items-center mt-4 font-mono text-[11px] tracking-[0.18em] uppercase text-[#847C6F]">
+                    <div className="flex justify-between items-center mt-4 font-mono text-[11px] tracking-[0.12em] uppercase text-[#847C6F]">
                       <span>FIG. 0{idx + 1} · {v.zone}</span>
                       <span>{homeCopy.venueLabel} · MILANO</span>
                     </div>
@@ -528,16 +528,16 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                   <div className={`col-span-5 p-14 flex flex-col justify-between bg-[#050505] ${idx === 1 ? 'order-1' : ''}`}>
                     <div>
                       <div className="flex justify-between items-baseline">
-                        <span className="font-serif italic text-[74px] leading-[0.85] text-[#D6BE96] font-normal">
+                        <span className="font-serif italic text-[74px] leading-[0.85] text-[#F6F1E7] font-normal">
                           0{idx + 1}
                         </span>
-                        <span className="font-mono text-xs tracking-[0.22em] uppercase text-[#D6BE96]">
+                        <span className="font-mono text-xs tracking-[0.12em] uppercase text-[#EAE3D5]">
                           {v.zone}
                         </span>
                       </div>
 
                       <h3 className="font-serif text-[52px] font-normal text-[#F6F1E7] leading-[0.95] tracking-[-0.03em] mt-5 mb-4">
-                        <Link href={`${lp}/clubs/${v.slug}`} prefetch={false} className="hover:text-[#D6BE96] transition-colors">
+                        <Link href={`${lp}/clubs/${v.slug}`} prefetch={false} className="hover:underline transition-colors">
                           {v.name}
                         </Link>
                       </h3>
@@ -549,20 +549,20 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                       {/* Griglia Specifiche 2x2 con linee da 1px */}
                       <div className="grid grid-cols-2 border-y border-[#F6F1E7]/14 my-7">
                         <div className="py-4 pr-5 border-r border-b border-[#F6F1E7]/14">
-                          <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#847C6F]">{homeCopy.venueTags[0]}</div>
+                          <div className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#847C6F]">{homeCopy.venueTags[0]}</div>
                           <div className="text-[15px] text-[#F6F1E7] font-medium mt-1.5">{v.street}</div>
                         </div>
                         <div className="py-4 pl-5 border-b border-[#F6F1E7]/14">
-                          <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#847C6F]">{homeCopy.venueTags[1]}</div>
+                          <div className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#847C6F]">{homeCopy.venueTags[1]}</div>
                           <div className="text-[15px] text-[#F6F1E7] font-medium mt-1.5">{v.genres}</div>
                         </div>
                         <div className="py-4 pr-5 border-r border-[#F6F1E7]/14">
-                          <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#847C6F]">FORMULA</div>
+                          <div className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#847C6F]">FORMULA</div>
                           <div className="text-[15px] text-[#F6F1E7] font-medium mt-1.5">{uiLabels.formulaVal}</div>
                         </div>
                         <div className="py-4 pl-5">
-                          <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#847C6F]">{homeCopy.venueTags[2]}</div>
-                          <div className="text-[15px] text-[#D6BE96] font-semibold mt-1.5">WhatsApp Concierge</div>
+                          <div className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#847C6F]">{homeCopy.venueTags[2]}</div>
+                          <div className="text-[15px] text-[#EAE3D5] font-semibold mt-1.5">WhatsApp Concierge</div>
                         </div>
                       </div>
                     </div>
@@ -571,7 +571,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                       <Link
                         href={`${lp}/clubs/${v.slug}`}
                         prefetch={false}
-                        className="min-h-[48px] px-5 py-3.5 border border-[#D6BE96]/45 text-[#F6F1E7] hover:border-[#F6F1E7] font-mono text-xs tracking-[0.18em] uppercase flex items-center justify-center transition-colors"
+                        className="min-h-[48px] px-5 py-3.5 border border-[#F6F1E7]/40 text-[#F6F1E7] hover:bg-[#F6F1E7] hover:text-[#050505] font-mono text-xs tracking-[0.12em] uppercase flex items-center justify-center transition-colors"
                       >
                         {homeCopy.venueLabel}
                       </Link>
@@ -579,7 +579,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                         href={waLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="min-h-[48px] px-5 py-3.5 bg-[#F6F1E7] text-[#050505] hover:bg-[#D6BE96] font-mono text-xs font-semibold tracking-[0.2em] uppercase flex items-center justify-center gap-2 transition-colors"
+                        className="min-h-[48px] px-5 py-3.5 bg-[#25D366] text-[#050505] hover:bg-[#2EE472] font-mono text-xs font-bold tracking-[0.12em] uppercase flex items-center justify-center gap-2 transition-colors"
                       >
                         {uiLabels.vipBtn}
                       </a>
@@ -608,15 +608,15 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                     <div className="flex flex-col justify-between">
                       <div>
                         <div className="flex justify-between items-baseline">
-                          <span className="font-serif italic text-[46px] leading-none text-[#D6BE96]">
+                          <span className="font-serif italic text-[46px] leading-none text-[#F6F1E7]">
                             0{idx + 3}
                           </span>
-                          <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#847C6F]">
+                          <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#847C6F]">
                             {v.zone}
                           </span>
                         </div>
                         <h3 className="font-serif text-[34px] font-normal text-[#F6F1E7] leading-tight mt-2.5 mb-2">
-                          <Link href={`${lp}/clubs/${v.slug}`} prefetch={false} className="hover:text-[#D6BE96] transition-colors">
+                          <Link href={`${lp}/clubs/${v.slug}`} prefetch={false} className="hover:underline transition-colors">
                             {v.name}
                           </Link>
                         </h3>
@@ -625,16 +625,16 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                         </p>
                         <div className="border-t border-[#F6F1E7]/14 text-[13px]">
                           <div className="flex justify-between gap-4 py-2 border-b border-[#F6F1E7]/14">
-                            <span className="font-mono text-[11px] tracking-[0.16em] uppercase text-[#847C6F]">{homeCopy.venueTags[0]}</span>
+                            <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#847C6F]">{homeCopy.venueTags[0]}</span>
                             <span className="text-[#F6F1E7] font-medium text-right">{v.street}</span>
                           </div>
                           <div className="flex justify-between gap-4 py-2 border-b border-[#F6F1E7]/14">
-                            <span className="font-mono text-[11px] tracking-[0.16em] uppercase text-[#847C6F]">{homeCopy.venueTags[1]}</span>
+                            <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#847C6F]">{homeCopy.venueTags[1]}</span>
                             <span className="text-[#F6F1E7] font-medium text-right">{v.genres}</span>
                           </div>
                           <div className="flex justify-between gap-4 py-2 border-b border-[#F6F1E7]/14">
-                            <span className="font-mono text-[11px] tracking-[0.16em] uppercase text-[#847C6F]">{homeCopy.venueTags[2]}</span>
-                            <span className="text-[#D6BE96] font-medium text-right">{uiLabels.formulaVal}</span>
+                            <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#847C6F]">{homeCopy.venueTags[2]}</span>
+                            <span className="text-[#EAE3D5] font-medium text-right">{uiLabels.formulaVal}</span>
                           </div>
                         </div>
                       </div>
@@ -642,7 +642,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                         <Link
                           href={`${lp}/clubs/${v.slug}`}
                           prefetch={false}
-                          className="min-h-[46px] px-4 py-3 border border-[#D6BE96]/45 text-[#F6F1E7] hover:border-[#F6F1E7] font-mono text-[11px] tracking-[0.16em] uppercase flex items-center justify-center transition-colors"
+                          className="min-h-[46px] px-4 py-3 border border-[#F6F1E7]/40 text-[#F6F1E7] hover:bg-[#F6F1E7] hover:text-[#050505] font-mono text-[11px] tracking-[0.12em] uppercase flex items-center justify-center transition-colors"
                         >
                           {uiLabels.details}
                         </Link>
@@ -650,7 +650,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                           href={waLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="min-h-[46px] px-4 py-3 bg-[#F6F1E7] text-[#050505] hover:bg-[#D6BE96] font-mono text-[11px] font-semibold tracking-[0.18em] uppercase flex items-center justify-center transition-colors"
+                          className="min-h-[46px] px-4 py-3 bg-[#25D366] text-[#050505] hover:bg-[#2EE472] font-mono text-[11px] font-bold tracking-[0.12em] uppercase flex items-center justify-center transition-colors"
                         >
                           {uiLabels.vipBtn}
                         </a>
@@ -664,8 +664,8 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
             {/* VISTA MOBILE 390PX: SWIPE ORIZZONTALE TATTILE SNAP-X */}
             <div className="lg:hidden py-8">
               <div className="px-5 mb-3 flex justify-between items-baseline">
-                <span className="font-mono text-[11px] tracking-[0.22em] uppercase text-[#D6BE96]">{uiLabels.swipe}</span>
-                <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#847C6F]">01 / 0{featuredVenues.length}</span>
+                <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#EAE3D5]">{uiLabels.swipe}</span>
+                <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#847C6F]">01 / 0{featuredVenues.length}</span>
               </div>
               <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory px-5 pb-4 scrollbar-hide">
                 {featuredVenues.map((v, i) => (
@@ -683,12 +683,12 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                           quality={92}
                           className="object-cover"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-                        <span className="absolute top-3 left-3 px-2.5 py-1 bg-[#050505]/90 border border-[#D6BE96]/40 font-mono text-[10px] tracking-[0.2em] uppercase text-[#D6BE96]">
+                        <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, #050505d9, transparent)' }} />
+                        <span className="absolute top-3 left-3 px-2.5 py-1 bg-[#050505]/90 border border-[#F6F1E7]/35 font-mono text-[10px] tracking-[0.12em] uppercase text-[#F6F1E7]">
                           0{i + 1} · {homeCopy.venueLabel}
                         </span>
                         <div className="absolute bottom-3 left-4 right-4">
-                          <p className="font-mono text-[10px] tracking-[0.2em] uppercase text-[#D6BE96]">{v.zone}</p>
+                          <p className="font-mono text-[10px] tracking-[0.12em] uppercase text-[#EAE3D5]">{v.zone}</p>
                           <h3 className="font-serif text-2xl text-[#F6F1E7] mt-0.5">{v.name}</h3>
                         </div>
                       </Link>
@@ -700,7 +700,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                       <Link
                         href={`${lp}/clubs/${v.slug}`}
                         prefetch={false}
-                        className="min-h-[44px] font-mono text-[11px] tracking-[0.16em] uppercase text-[#F6F1E7] flex items-center justify-center border-r border-[#F6F1E7]/14"
+                        className="min-h-[44px] font-mono text-[11px] tracking-[0.12em] uppercase text-[#F6F1E7] flex items-center justify-center border-r border-[#F6F1E7]/14"
                       >
                         {uiLabels.details}
                       </Link>
@@ -708,7 +708,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                         href={waLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="min-h-[44px] bg-[#F6F1E7] text-[#050505] font-mono text-[11px] font-semibold tracking-[0.16em] uppercase flex items-center justify-center"
+                        className="min-h-[44px] bg-[#25D366] text-[#050505] font-mono text-[11px] font-bold tracking-[0.12em] uppercase flex items-center justify-center"
                       >
                         {uiLabels.vipBtn}
                       </a>
@@ -724,7 +724,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         <section className="w-full bg-[#050505] border-b border-[#F6F1E7]/14">
           <div className="max-w-[1440px] mx-auto border-x border-[#F6F1E7]/14 px-5 sm:px-14 py-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 bg-[#0B0A09]">
             <div>
-              <p className="font-mono text-[11px] tracking-[0.24em] uppercase text-[#D6BE96] mb-2">
+              <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[#EAE3D5] mb-2">
                 {uiLabels.sanSiroEye}
               </p>
               <h2 className="font-serif text-2xl sm:text-3xl text-[#F6F1E7]">
@@ -737,7 +737,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
             <Link
               href={`${lp}/football-afterparties`}
               prefetch={false}
-              className="shrink-0 min-h-[48px] px-6 py-3.5 border border-[#D6BE96] bg-[#D6BE96] text-[#050505] hover:bg-[#F6F1E7] font-mono text-xs font-semibold tracking-[0.2em] uppercase inline-flex items-center gap-2 transition-colors"
+              className="shrink-0 min-h-[48px] px-6 py-3.5 border border-[#F6F1E7] bg-[#F6F1E7] text-[#050505] hover:bg-[#EAE3D5] font-mono text-xs font-semibold tracking-[0.12em] uppercase inline-flex items-center gap-2 transition-colors"
             >
               {uiLabels.sanSiroCta}
             </Link>
@@ -750,7 +750,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
             {/* Colonna Sinistra (5/12): Capitolo Avorio Sartoriale #F6F1E7 */}
             <div className="lg:col-span-5 p-6 sm:p-14 bg-[#F6F1E7] text-[#050505] border-b lg:border-b-0 lg:border-r border-[#050505]/15 flex flex-col justify-between">
               <div>
-                <p className="font-mono text-[#5C4624] text-xs font-semibold tracking-[0.26em] uppercase mb-3">
+                <p className="font-mono text-[#3D3830] text-xs font-semibold tracking-[0.14em] uppercase mb-3">
                   N° 03 · {homeCopy.nightLabel}
                 </p>
                 <h2 className="font-serif text-4xl sm:text-5xl font-normal italic text-[#050505] tracking-[-0.03em] leading-[0.92] mb-10">
@@ -760,23 +760,23 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                   {homeCopy.nightSteps.map((step: { label: string; title: string; body: string }, i: number) => (
                     <div key={i} className="py-6 flex justify-between items-start gap-6">
                       <div>
-                        <p className="font-mono text-[11px] font-semibold tracking-[0.2em] uppercase text-[#5C4624] mb-2">{step.label}</p>
+                        <p className="font-mono text-[11px] font-semibold tracking-[0.12em] uppercase text-[#3D3830] mb-2">{step.label}</p>
                         <h3 className="font-serif text-2xl sm:text-[28px] text-[#050505] font-normal leading-tight mb-2">{step.title}</h3>
-                        <p className="font-sans text-sm text-[#2C2823] leading-relaxed">{step.body}</p>
+                        <p className="font-sans text-sm text-[#24201B] leading-relaxed">{step.body}</p>
                       </div>
-                      <span className="font-serif italic text-4xl text-[#7A5E30] shrink-0">
+                      <span className="font-serif italic text-4xl text-[#050505] shrink-0">
                         {i === 0 ? 'I' : i === 1 ? 'II' : 'III'}
                       </span>
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="mt-8">
+              <div className="mt-8 bg-[#050505] p-3">
                 <a
                   href={waLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full min-h-[50px] px-7 py-4 bg-[#050505] text-[#F6F1E7] hover:bg-[#1C1915] font-mono text-xs font-semibold tracking-[0.2em] uppercase flex items-center justify-between transition-colors"
+                  className="w-full min-h-[48px] px-6 py-3.5 bg-[#25D366] text-[#050505] hover:bg-[#2EE472] font-mono text-xs font-bold tracking-[0.12em] uppercase flex items-center justify-between transition-colors"
                 >
                   <span>{homeCopy.requestAction}</span>
                   <span aria-hidden="true">↗</span>
@@ -799,7 +799,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                     />
                     <div className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(to top, #05050599, transparent)' }} />
                   </div>
-                  <div className="flex justify-between mt-2.5 font-mono text-[11px] tracking-[0.16em] uppercase text-[#847C6F]">
+                  <div className="flex justify-between mt-2.5 font-mono text-[11px] tracking-[0.12em] uppercase text-[#847C6F]">
                     <span>{uiLabels.act1}</span>
                     <span>PARCO SEMPIONE &amp; PORTA NUOVA</span>
                   </div>
@@ -817,7 +817,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                     />
                     <div className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(to top, #05050599, transparent)' }} />
                   </div>
-                  <div className="mt-2 font-mono text-[11px] tracking-[0.16em] uppercase text-[#847C6F]">
+                  <div className="mt-2 font-mono text-[11px] tracking-[0.12em] uppercase text-[#847C6F]">
                     {uiLabels.act2}
                   </div>
                 </div>
@@ -834,7 +834,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                     />
                     <div className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(to top, #05050599, transparent)' }} />
                   </div>
-                  <div className="mt-2 font-mono text-[11px] tracking-[0.16em] uppercase text-[#847C6F]">
+                  <div className="mt-2 font-mono text-[11px] tracking-[0.12em] uppercase text-[#847C6F]">
                     {uiLabels.act3}
                   </div>
                 </div>
@@ -844,7 +844,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                 <p className="font-serif italic text-lg text-[#C2B9AA]">
                   {homeCopy.description} · {SITE_CONTACT.whatsapp.number}
                 </p>
-                <span className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#D6BE96] shrink-0">
+                <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#EAE3D5] shrink-0">
                   {homeCopy.quickLabel}
                 </span>
               </div>
@@ -853,34 +853,34 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         </section>
 
         {/* ── 4. Le Tre Formule d'Accesso (Intent Cards) ───────────────── */}
-        <div className="w-full bg-[#050505] border-b border-[#F6F1E7]/14">
-          <div className="max-w-[1440px] mx-auto border-x border-[#F6F1E7]/14">
+        <div className="w-full bg-[#F6F1E7] border-b border-[#050505]/15">
+          <div className="max-w-[1440px] mx-auto border-x border-[#050505]/15">
             <IntentCards locale={locale} />
           </div>
         </div>
 
         {/* ── 5. Calendario Eventi Verificati della Settimana ──────────── */}
-        <section className="w-full bg-[#0B0A09] border-b border-[#F6F1E7]/14 px-4 py-16 sm:px-14" data-home-week-events>
+        <section className="w-full bg-[#050505] border-b border-[#F6F1E7]/14 px-4 py-16 sm:px-14" data-home-week-events>
           <div className="mx-auto max-w-[1328px]">
-            <p className="mb-3 font-mono text-xs tracking-[0.24em] uppercase text-[#D6BE96]">{homeCopy.weekLabel}</p>
+            <p className="mb-3 font-mono text-xs tracking-[0.14em] uppercase text-[#EAE3D5]">{homeCopy.weekLabel}</p>
             <h2 className="mb-5 font-serif text-4xl text-[#F6F1E7] md:text-5xl">{homeCopy.weekTitle}</h2>
-            <Link href={`${lp}/events`} prefetch={false} className="mb-8 inline-flex min-h-11 items-center text-base font-semibold text-champagne underline underline-offset-4">{homeCopy.seeAll}</Link>
+            <Link href={`${lp}/events`} prefetch={false} className="mb-8 inline-flex min-h-11 items-center text-base font-semibold text-[#F6F1E7] underline underline-offset-4">{homeCopy.seeAll}</Link>
             <DateSensitiveCalendar events={dateSensitiveEvents} initialNow={initialNow.toISOString()} mode="calendar-week" localeTag={getLocaleDef(locale)!.hreflang} localePrefix={lp} copy={{ ...getEventCalendarCopy(locale), empty: homeCopy.noWeek }} schemaName={homeCopy.weekTitle} emptyHref={`${lp}/events`} emptyLinkLabel={homeCopy.seeAll} groupByDay variant="gallery" bookingLocale={locale} />
           </div>
         </section>
 
         <MfwEntry locale={locale} />
 
-        {/* ── 6. Esplora per Categoria e Quartiere ─────────────────────── */}
-        <section className="w-full bg-[#050505] border-b border-[#F6F1E7]/14">
-          <div className="max-w-[1440px] mx-auto border-x border-[#F6F1E7]/14 px-5 sm:px-14 py-20">
-            <p className="font-mono text-[#D6BE96] text-xs tracking-[0.26em] uppercase mb-3">
+        {/* ── 6. Esplora per Categoria e Quartiere (#F6F1E7 Capitolo Avorio Caldo) ── */}
+        <section className="w-full bg-[#F6F1E7] text-[#050505] border-b border-[#050505]/15">
+          <div className="max-w-[1440px] mx-auto border-x border-[#050505]/15 px-5 sm:px-14 py-20">
+            <p className="font-mono text-[#3D3830] text-xs font-semibold tracking-[0.14em] uppercase mb-3">
               N° 05 · {homeCopy.discoverLabel}
             </p>
-            <h2 className="font-serif text-4xl md:text-5xl font-normal text-[#F6F1E7] tracking-[-0.03em] mb-10">
+            <h2 className="font-serif text-4xl md:text-5xl font-normal text-[#050505] tracking-[-0.03em] mb-10">
               {homeCopy.categoriesTitle}
             </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-4 border-t border-l border-[#F6F1E7]/14">
+            <div className="grid grid-cols-2 sm:grid-cols-4 border-t border-l border-[#050505]/15 bg-[#EFE9DC]">
               {[
                 { label: homeCopy.categoryLabels[0], href: `${lp}/genres/techno`, num: '01' },
                 { label: homeCopy.categoryLabels[1], href: `${lp}/vip-tables`, num: '02' },
@@ -895,10 +895,10 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                   key={tag.label}
                   href={tag.href}
                   prefetch={false}
-                  className="p-6 border-r border-b border-[#F6F1E7]/14 hover:bg-[#0B0A09] group transition-colors min-h-[88px] flex flex-col justify-between"
+                  className="p-6 border-r border-b border-[#050505]/15 hover:bg-[#050505] group transition-colors min-h-[88px] flex flex-col justify-between"
                 >
-                  <span className="font-serif italic text-2xl text-[#D6BE96]">{tag.num}</span>
-                  <span className="font-mono text-xs tracking-[0.18em] uppercase text-[#F6F1E7] group-hover:text-[#D6BE96] transition-colors mt-3">
+                  <span className="font-serif italic text-2xl text-[#050505] group-hover:text-[#F6F1E7] transition-colors">{tag.num}</span>
+                  <span className="font-mono text-xs font-semibold tracking-[0.12em] uppercase text-[#050505] group-hover:text-[#F6F1E7] transition-colors mt-3">
                     {tag.label} ↗
                   </span>
                 </Link>

@@ -7,7 +7,7 @@ import EventCard from '@/components/EventCard';
 import { fetchEventbriteEvents } from '@/lib/eventbriteSync';
 import { getVenueById, mockEvents } from '@/lib/data';
 import { romeDayKey, romeDayKeyOffset, dedupeEventsByIdentity } from '@/lib/calendarEvents';
-import { hreflangAlternates, localePrefix, getLocaleDef, DEFAULT_LOCALE } from '@/lib/i18n/locales';
+import { hreflangAlternates, canonicalPageUrl, localePrefix, getLocaleDef, DEFAULT_LOCALE } from '@/lib/i18n/locales';
 import { tr } from '@/lib/i18n/t';
 import type { Event, Venue } from '@/lib/types';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const def = getLocaleDef(locale) || getLocaleDef(DEFAULT_LOCALE)!;
-  const canonical = `${baseUrl}${localePrefix(locale)}/events/past`;
+  const canonical = canonicalPageUrl(baseUrl, locale, '/events/past');
   const title = seoTitle(tr(locale, 'Past Events in Milan | Nightlife Milan Archive', 'Eventi Passati a Milano | Archivio Nightlife Milan'));
   const description = withWhatsApp(tr(
     locale,

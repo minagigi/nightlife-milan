@@ -1,4 +1,5 @@
 import type { LocaleCode } from '@/lib/i18n/locales';
+import { getLocalizedEventSlug35 } from '@/lib/i18n/localizedSlugs35';
 import { getIntlLocale, formatEventGenre } from '@/lib/eventPageLocale';
 import { getMonthEventLocalePack } from '@/lib/month-events/locales';
 import { getEventLocaleLabels } from '@/lib/eventLocaleLabels';
@@ -145,7 +146,7 @@ export function getOctoberEventCopy(event:OctoberEventRecord, locale:LocaleCode)
   const metaDescription=descriptions.find(s=>s.length<=158);
   if(!metaDescription)throw new Error(`October description exceeds bound: ${event.id}/${locale}`);
   const result = {locale,slug:getOctoberEventSlug(event),title,summary:lead,metaTitle,metaDescription,imageAlt:getOctoberPosterLabel(event,locale),introduction:lead,headings:{overview:fill(p.headings.overview),booking:fill(p.headings.booking),faq:fill(p.headings.faq)},sections,faqs,labels:{source:u.source,venue:v.heading,date:u.date,time:startLabel,music:l.music,age:l.minimumAge,dressCode:l.dressCode,offers:p.labels.offers,faq:p.headings.faq.replace('{event}',official).replace('{venue}',event.venue.name).replace('{city}',p.city),venueSection:v.heading,recommendations:p.labels.related.replace('{city}',p.city),askWhatsApp:p.labels.inquiry,openSource:u.source,noKnownValue:u.unknown}};
-  const finalResult=applyJustmePage(result,event,locale);
+  const finalResult={...applyJustmePage(result,event,locale),slug:getLocalizedEventSlug35(getOctoberEventSlug(event),locale)};
   if(!COPY_CACHE.has(event)) COPY_CACHE.set(event,new Map());
   COPY_CACHE.get(event)!.set(locale,finalResult);
   return finalResult;

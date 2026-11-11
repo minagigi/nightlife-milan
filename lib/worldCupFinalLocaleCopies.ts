@@ -1,4 +1,4 @@
-import { enabledLocaleCodes, type LocaleCode } from './i18n/locales';
+import { enabledLocaleCodes, type LocaleCode } from './i18n/localeRegistry';
 import { WORLD_CUP_FINAL_EN_SLUG } from './worldCupFinalEn';
 import { WORLD_CUP_FINAL_IT_SLUG } from './worldCupFinalIt';
 import { worldCupFinalLocalesWestWorld } from './worldCupFinalLocalesWestWorld';

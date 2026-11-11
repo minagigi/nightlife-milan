@@ -3,7 +3,7 @@ import type {
   EventOfferKey,
   EventProgrammeKey,
 } from './eventBatchLocaleTypes';
-import { enabledLocaleCodes, type LocaleCode } from './i18n/locales';
+import { enabledLocaleCodes, type LocaleCode } from './i18n/localeRegistry';
 import {
   WORLD_CUP_FINAL_AFFILIATE_URL,
   WORLD_CUP_FINAL_CANONICAL_SLUG,

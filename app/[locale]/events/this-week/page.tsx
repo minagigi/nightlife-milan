@@ -1,7 +1,7 @@
 import OctoberEntry from '@/components/OctoberEntry';
 import { Metadata } from 'next';
 import { tr } from '@/lib/i18n/t';
-import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { getLocaleDef, hreflangAlternates, canonicalPageUrl, localePrefix } from '@/lib/i18n/locales';
 import { generateEventListSchema, getLocalizedText, jsonLdString } from '@/lib/seo';
 import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const isIt = locale === 'it';
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const canonical = `${baseUrl}${localePrefix(locale)}/events/this-week`;
+  const canonical = canonicalPageUrl(baseUrl, locale, '/events/this-week');
   const todayKey = romeDayKeyOffset(0);
   const todayDow = dayOfWeekForKey(todayKey);
   const daysToSunday = todayDow === 0 ? 0 : 7 - todayDow;
@@ -218,7 +218,7 @@ export default async function EventsThisWeekPage({ params }: Props) {
       {eventListSchema && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(eventListSchema) }} />
       )}
-      <main className="flex-1 bg-[#131009] w-full pt-20 pb-20">
+      <main className="flex-1 bg-[#050505] w-full pt-20 pb-20">
         {/* Breadcrumb */}
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
           <nav className="text-xs text-white/30 flex gap-2">
@@ -382,7 +382,7 @@ export default async function EventsThisWeekPage({ params }: Props) {
                                 quality={92}
                                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                               />
-                              <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-[#131009] via-[#131009]/40 to-transparent" />
+                              <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-[#050505] via-[#050505]/40 to-transparent" />
                               {event.isSpecial && (
                                 <span className="absolute top-3 left-3 bg-champagne text-black text-[9px] font-bold px-2 py-1 rounded uppercase tracking-wider">
                                   {tr(locale, 'Special', 'Speciale')}

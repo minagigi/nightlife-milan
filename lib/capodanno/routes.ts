@@ -1,4 +1,5 @@
-import { enabledLocaleCodes, getLocaleDef, localePrefix, type LocaleCode } from '@/lib/i18n/locales';
+import { enabledLocaleCodes, getLocaleDef, localePrefix, type LocaleCode } from '@/lib/i18n/localeRegistry';
+import { ALL_EVENT_DIR_TOKENS, getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
 
 export type CapodannoLocaleNav = Readonly<{
   h1: string;
@@ -904,7 +905,7 @@ export function capodannoCategorySlug(categoryId: string, locale: string): strin
 }
 
 export function capodannoCategoryPath(categoryId: string, locale: string): string {
-  return `${localePrefix(locale)}/events/${capodannoCategorySlug(categoryId, locale)}`;
+  return `${localePrefix(locale)}/${getLocalizedDir35('events', locale)}/${capodannoCategorySlug(categoryId, locale)}`;
 }
 
 export function capodannoPath(locale: string): string {
@@ -933,7 +934,7 @@ export function capodannoEventSlug(baseSlug: string, locale: string): string {
 }
 
 export function capodannoEventPath(baseSlug: string, locale: string): string {
-  return `${localePrefix(locale)}/events/${capodannoEventSlug(baseSlug, locale)}`;
+  return `${localePrefix(locale)}/${getLocalizedDir35('events', locale)}/${capodannoEventSlug(baseSlug, locale)}`;
 }
 
 export function capodannoEventLanguagePaths(baseSlug: string): Record<LocaleCode, string> {
@@ -949,17 +950,19 @@ export function capodannoEventHreflangAlternates(siteUrl: string, baseSlug: stri
   ]);
 }
 
+const CAPODANNO_LOCALE_KEYS = Object.keys(CAPODANNO_NAVIGATION) as LocaleCode[];
+
 const SLUG_TO_CAPODANNO_TARGET: ReadonlyMap<string, { type: 'category' | 'event'; id: string }> = (() => {
   const map = new Map<string, { type: 'category' | 'event'; id: string }>();
   for (const catId of CAPODANNO_CATEGORY_IDS) {
     map.set(catId, { type: 'category', id: catId });
-    for (const locale of enabledLocaleCodes) {
+    for (const locale of CAPODANNO_LOCALE_KEYS) {
       map.set(capodannoCategorySlug(catId, locale), { type: 'category', id: catId });
     }
   }
   for (const baseSlug of CAPODANNO_EVENT_BASE_SLUGS) {
     map.set(baseSlug, { type: 'event', id: baseSlug });
-    for (const locale of enabledLocaleCodes) {
+    for (const locale of CAPODANNO_LOCALE_KEYS) {
       map.set(capodannoEventSlug(baseSlug, locale), { type: 'event', id: baseSlug });
     }
   }
@@ -968,7 +971,7 @@ const SLUG_TO_CAPODANNO_TARGET: ReadonlyMap<string, { type: 'category' | 'event'
 
 const LOCALIZED_SLUGS_BY_LOCALE: ReadonlyMap<string, readonly string[]> = (() => {
   const map = new Map<string, readonly string[]>();
-  for (const locale of enabledLocaleCodes) {
+  for (const locale of CAPODANNO_LOCALE_KEYS) {
     const categorySlugs = CAPODANNO_CATEGORY_IDS.map((catId) => capodannoCategorySlug(catId, locale));
     const eventSlugs = CAPODANNO_EVENT_BASE_SLUGS.map((baseSlug) => capodannoEventSlug(baseSlug, locale));
     map.set(locale, [...categorySlugs, ...eventSlugs]);
@@ -988,10 +991,14 @@ export function resolveCapodannoEventBaseSlugByLocalizedSlug(slug: string, local
   return undefined;
 }
 
-export function capodannoAlternatePath(pathname: string, targetLocale: string): string | null {
-  if (!enabledLocaleCodes.includes(targetLocale as LocaleCode)) return null;
+const CAPODANNO_EV_DIR_PATTERN = ALL_EVENT_DIR_TOKENS.join('|');
+const CAPODANNO_LEGACY_DETAIL_RE = new RegExp(`^(?:\\/[a-z]{2})?\\/(?:${CAPODANNO_EV_DIR_PATTERN})\\/capodanno-2027\\/([^/]+)\\/?$`, 'u');
+const CAPODANNO_SINGLE_RE = new RegExp(`^(?:\\/[a-z]{2})?\\/(?:${CAPODANNO_EV_DIR_PATTERN})\\/([^/]+)\\/?$`, 'u');
 
-  const legacyDetailMatch = pathname.match(/^(?:\/[a-z]{2})?\/events\/capodanno-2027\/([^/]+)\/?$/u);
+export function capodannoAlternatePath(pathname: string, targetLocale: string): string | null {
+  if (!CAPODANNO_LOCALE_KEYS.includes(targetLocale as LocaleCode)) return null;
+
+  const legacyDetailMatch = pathname.match(CAPODANNO_LEGACY_DETAIL_RE);
   if (legacyDetailMatch) {
     const hit = SLUG_TO_CAPODANNO_TARGET.get(legacyDetailMatch[1]);
     if (hit && hit.type === 'event') {
@@ -999,7 +1006,7 @@ export function capodannoAlternatePath(pathname: string, targetLocale: string): 
     }
   }
 
-  const singleMatch = pathname.match(/^(?:\/[a-z]{2})?\/events\/([^/]+)\/?$/u);
+  const singleMatch = pathname.match(CAPODANNO_SINGLE_RE);
   if (!singleMatch) return null;
   const hit = SLUG_TO_CAPODANNO_TARGET.get(singleMatch[1]);
   if (!hit) return null;
@@ -1009,6 +1016,6 @@ export function capodannoAlternatePath(pathname: string, targetLocale: string): 
 }
 
 export function capodannoAllLocalizedSlugsForLocale(locale: string): string[] {
-  const code = enabledLocaleCodes.includes(locale as LocaleCode) ? locale : 'en';
+  const code = CAPODANNO_LOCALE_KEYS.includes(locale as LocaleCode) ? locale : 'en';
   return [...(LOCALIZED_SLUGS_BY_LOCALE.get(code) || [])];
 }

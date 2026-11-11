@@ -9,7 +9,7 @@ import { tr } from '@/lib/i18n/t';
 import {
   INDEXED_LOCALES,
   getLocaleDef,
-  hreflangAlternates,
+  hreflangAlternates, canonicalPageUrl,
   localePrefix,
 } from '@/lib/i18n/locales';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
@@ -51,7 +51,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const canonical = `${baseUrl}${localePrefix(locale)}/milan-fashion-week/calendar`;
+  const canonical = canonicalPageUrl(baseUrl, locale, '/milan-fashion-week/calendar');
 
   const title = seoTitle(
     tr(
@@ -268,7 +268,7 @@ export default async function FashionWeekPage({
   const isIt = locale === 'it';
   const venueMapCopy = getEventVenueCopy(locale as LocaleCode);
   const lp = localePrefix(locale);
-  const canonicalUrl = `${baseUrl}${lp}/milan-fashion-week/calendar`;
+  const canonicalUrl = canonicalPageUrl(baseUrl, locale, '/milan-fashion-week/calendar');
 
   const faqs = [
     {
@@ -772,7 +772,7 @@ export default async function FashionWeekPage({
 
       {/* SEZIONE 3: CORPORATE BUYOUT, BRAND PRIVATIZATION & MODEL AGENCY ACCREDITATION */}
       <section id="corporate-buyout-brand-privatization" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-        <div className="rounded-3xl border border-champagne/40 bg-gradient-to-br from-[#1d160c] via-[#120e08] to-[#0a0805] p-7 sm:p-12">
+        <div className="rounded-3xl border border-champagne/40 bg-[#0B0A09] p-7 sm:p-12">
           <span className="font-mono text-xs uppercase tracking-[0.25em] text-champagne block mb-2">
             {isIt
               ? 'SEZIONE 3 · DIVISIONE B2B MAISON MODA, DESIGN BRAND, F1 SPONSOR & AGENZIE'

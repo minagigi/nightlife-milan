@@ -170,24 +170,24 @@ export default function CapodannoDetailView({ locale, event }: Props) {
   const mapQuery = encodeURIComponent(`${event.venueName}, ${event.address}, ${event.city}`);
 
   return (
-    <main className="min-h-screen bg-[#131009] pb-24 pt-24 text-white">
+    <main className="min-h-screen bg-[#050505] pb-24 pt-24 text-[#F6F1E7]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
       <article className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <nav className="mb-6 flex flex-wrap items-center gap-2 text-xs uppercase tracking-widest text-white/50">
-          <Link href={prefix || '/'} className="hover:text-champagne">Home</Link>
+        <nav className="mb-6 flex flex-wrap items-center gap-2 text-xs uppercase tracking-widest text-[#C2B9AA]">
+          <Link href={prefix || '/'} className="hover:text-[#F6F1E7]">Home</Link>
           <span>/</span>
-          <Link href={capodannoPath(locale)} className="hover:text-champagne">
+          <Link href={capodannoPath(locale)} className="hover:text-[#F6F1E7]">
             {nav.menuLabel} 2027
           </Link>
           <span>/</span>
-          <span className="text-champagne">{event.venueName}</span>
+          <span className="text-[#F6F1E7]">{event.venueName}</span>
         </nav>
 
-        <div className="overflow-hidden rounded-3xl border border-champagne/30 bg-[#18140c]">
+        <div className="overflow-hidden border border-[#F6F1E7]/20 bg-[#0B0A09]">
           <div className="relative h-72 w-full sm:h-96">
             <img
               src={seoPack.poster.src}
@@ -197,71 +197,71 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               decoding="async"
               className="h-full w-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#18140c] via-[#18140c]/50 to-transparent" />
+            <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, #0B0A09, #0B0A0980 55%, transparent)' }} />
             <div className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8 sm:right-8">
               <div className="flex flex-wrap gap-2">
-                <span className="rounded-full bg-champagne px-3 py-1 text-xs font-bold text-black">
+                <span className="bg-[#F6F1E7] px-3 py-1 text-xs font-bold text-[#050505]">
                   {ui.dateBadge}
                 </span>
-                <span className="rounded-full bg-black/80 px-3 py-1 text-xs font-semibold text-champagne">
+                <span className="border border-[#F6F1E7]/35 bg-[#050505]/90 px-3 py-1 text-xs font-semibold text-[#F6F1E7]">
                   {event.city} ({event.province})
                 </span>
-                <span className="rounded-full border border-amber-400/80 bg-black/85 px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-amber-300" data-almost-sold-out-badge>
+                <span className="border border-[#F6F1E7]/50 bg-[#050505]/90 px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-[#F6F1E7]" data-almost-sold-out-badge>
                   {scarcity.almostSoldOutBadge}
                 </span>
               </div>
-              <h1 data-event-title={title} className="mt-3 font-serif text-3xl font-bold text-white sm:text-5xl">
+              <h1 data-event-title={title} className="mt-3 font-serif text-3xl font-bold text-[#F6F1E7] sm:text-5xl">
                 {title}
               </h1>
-              <p className="mt-2 text-sm text-white/75 sm:text-base">{subtitle}</p>
+              <p className="mt-2 text-sm text-[#EAE3D5] sm:text-base">{subtitle}</p>
             </div>
           </div>
 
           <div className="p-6 sm:p-10">
-            <div role="alert" data-urgency-alert className="mb-8 rounded-2xl border-2 border-amber-400/70 bg-gradient-to-r from-amber-500/20 via-amber-500/10 to-transparent p-5 shadow-lg">
-              <p className="text-xs font-extrabold uppercase tracking-wider text-amber-300 sm:text-sm">
+            <div role="alert" data-urgency-alert className="mb-8 border border-[#050505]/15 bg-[#F6F1E7] p-5 text-[#050505]">
+              <p className="text-xs font-extrabold uppercase tracking-wider text-[#050505] sm:text-sm">
                 {scarcity.urgencyAlertTitle}
               </p>
-              <p className="mt-1.5 text-sm leading-relaxed text-white/90">
+              <p className="mt-1.5 text-sm leading-relaxed text-[#24201B]">
                 {scarcity.urgencyAlertBody}
               </p>
             </div>
-            {/* Clickable Table of Contents (TOC) */}
+            {/* Clickable Table of Contents (TOC) (#F6F1E7 Avorio Caldo) */}
             <nav
               aria-label={ui.tocTitle}
-              className="mb-8 rounded-2xl border border-white/12 bg-black/40 p-4 sm:p-5"
+              className="mb-8 border border-[#050505]/15 bg-[#F6F1E7] text-[#050505] p-5"
             >
-              <p className="text-xs font-bold uppercase tracking-widest text-champagne">
+              <p className="text-xs font-bold uppercase tracking-widest text-[#3D3830]">
                 {ui.tocTitle}
               </p>
-              <ul className="mt-3 grid gap-2 text-xs sm:grid-cols-2 lg:grid-cols-3 sm:text-sm">
+              <ul className="mt-3 grid gap-2 text-xs font-medium sm:grid-cols-2 lg:grid-cols-3 sm:text-sm">
                 <li>
-                  <a href="#programma-serata" className="text-white/85 hover:text-champagne hover:underline">
+                  <a href="#programma-serata" className="text-[#050505] hover:underline">
                     {ui.tocProgram}
                   </a>
                 </li>
                 <li>
-                  <a href="#prezzi-formule" className="text-white/85 hover:text-champagne hover:underline">
+                  <a href="#prezzi-formule" className="text-[#050505] hover:underline">
                     {ui.tocPrices}
                   </a>
                 </li>
                 <li>
-                  <a href="#prenota-concierge" className="text-white/85 hover:text-champagne hover:underline">
+                  <a href="#prenota-concierge" className="text-[#050505] hover:underline">
                     {ui.tocBooking}
                   </a>
                 </li>
                 <li>
-                  <a href="#mappa-locale" className="text-white/85 hover:text-champagne hover:underline">
+                  <a href="#mappa-locale" className="text-[#050505] hover:underline">
                     4. {ui.mapHeadingEvent}
                   </a>
                 </li>
                 <li>
-                  <a href="#faq-evento" className="text-white/85 hover:text-champagne hover:underline">
+                  <a href="#faq-evento" className="text-[#050505] hover:underline">
                     5. {ui.faqHeadingPrefix}
                   </a>
                 </li>
                 <li>
-                  <a href="#eventi-correlati" className="text-white/85 hover:text-champagne hover:underline">
+                  <a href="#eventi-correlati" className="text-[#050505] hover:underline">
                     {ui.tocRelated}
                   </a>
                 </li>
@@ -269,68 +269,68 @@ export default function CapodannoDetailView({ locale, event }: Props) {
             </nav>
 
             {/* Key Highlights */}
-            <div className="grid gap-4 rounded-2xl border border-white/10 bg-black/30 p-5 sm:grid-cols-2">
+            <div className="grid gap-4 border border-[#F6F1E7]/14 bg-[#050505] p-5 sm:grid-cols-2">
               {highlights.map((item) => (
-                <div key={item} className="text-sm text-white/85">
+                <div key={item} className="text-sm text-[#EAE3D5]">
                   • {item}
                 </div>
               ))}
             </div>
 
             <div id="programma-serata" className="mt-8 space-y-4">
-              <h2 className="font-serif text-2xl font-bold text-champagne">
+              <h2 className="font-serif text-2xl font-bold text-[#F6F1E7]">
                 {ui.programHeading}
               </h2>
-              <p className="text-base leading-relaxed text-white/80">{description}</p>
-              <p className="text-sm leading-relaxed text-white/65">
-                <strong className="text-white">{ui.musicLabel}:</strong> {music} ·{' '}
-                <strong className="text-white">Dress Code:</strong> {dress}
+              <p className="text-base leading-relaxed text-[#C2B9AA]">{description}</p>
+              <p className="text-sm leading-relaxed text-[#C2B9AA]">
+                <strong className="text-[#F6F1E7]">{ui.musicLabel}:</strong> {music} ·{' '}
+                <strong className="text-[#F6F1E7]">Dress Code:</strong> {dress}
               </p>
             </div>
 
             {/* Official Remediated Event Poster (Uncropped object-contain) */}
             <figure
               data-capodanno-poster-detail
-              className="mt-8 overflow-hidden rounded-2xl border border-champagne/30 bg-black/55 p-4 sm:p-6"
+              className="mt-8 overflow-hidden border border-[#F6F1E7]/25 bg-[#050505] p-4 sm:p-6"
             >
               <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-                <span className="rounded-full bg-champagne/20 px-3 py-1 text-xs font-bold uppercase tracking-wider text-champagne">
+                <span className="border border-[#F6F1E7]/35 bg-[#0B0A09] px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#F6F1E7]">
                   {seoPack.poster.badgeLabel}
                 </span>
                 <div className="flex flex-wrap gap-2 text-xs">
-                  <span className="rounded-full border border-white/15 bg-black/60 px-3 py-1 text-white/85">
-                    <strong className="text-champagne">{seoPack.targetPrefix}:</strong> {seoPack.targetLabel}
+                  <span className="border border-[#F6F1E7]/15 bg-[#0B0A09] px-3 py-1 text-[#EAE3D5]">
+                    <strong className="text-[#F6F1E7]">{seoPack.targetPrefix}:</strong> {seoPack.targetLabel}
                   </span>
-                  <span className="rounded-full border border-white/15 bg-black/60 px-3 py-1 text-white/85">
-                    <strong className="text-champagne">{seoPack.outfitPrefix}:</strong> {seoPack.outfitLabel}
+                  <span className="border border-[#F6F1E7]/15 bg-[#0B0A09] px-3 py-1 text-[#EAE3D5]">
+                    <strong className="text-[#F6F1E7]">{seoPack.outfitPrefix}:</strong> {seoPack.outfitLabel}
                   </span>
                 </div>
               </div>
-              <div className="flex justify-center rounded-xl bg-black/70 p-2">
+              <div className="flex justify-center bg-[#050505] p-2">
                 <img
                   src={seoPack.poster.src}
                   title={seoPack.poster.title}
                   alt={seoPack.poster.alt}
                   loading="lazy"
                   decoding="async"
-                  className="max-h-[540px] w-auto max-w-full rounded-lg object-contain"
+                  className="max-h-[540px] w-auto max-w-full object-contain"
                 />
               </div>
-              <figcaption className="mt-3 text-xs leading-relaxed text-white/75 sm:text-sm">
-                <strong className="text-champagne">{seoPack.poster.title}</strong> · {seoPack.poster.description}
+              <figcaption className="mt-3 text-xs leading-relaxed text-[#C2B9AA] sm:text-sm">
+                <strong className="text-[#F6F1E7]">{seoPack.poster.title}</strong> · {seoPack.poster.description}
               </figcaption>
             </figure>
 
             {/* Ad-Hoc Google Flow SEO Gallery (4 Images combining Event + Target Crowd + Event Outfit + H1/H2/H3) */}
             <section id="galleria-seo-flow" data-seo-flow-gallery className="mt-10 space-y-5">
               <div>
-                <p className="text-xs font-bold uppercase tracking-widest text-champagne">
+                <p className="text-xs font-bold uppercase tracking-widest text-[#EAE3D5]">
                   {seoPack.eyebrow}
                 </p>
-                <h2 className="mt-1 font-serif text-2xl font-bold text-white">
+                <h2 className="mt-1 font-serif text-2xl font-bold text-[#F6F1E7]">
                   {seoPack.sectionHeading}
                 </h2>
-                <p className="mt-1.5 text-sm leading-relaxed text-white/75">
+                <p className="mt-1.5 text-sm leading-relaxed text-[#C2B9AA]">
                   {seoPack.sectionSubtitle}
                 </p>
               </div>
@@ -338,9 +338,9 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 {seoPack.gallery.map((img) => (
                   <figure
                     key={img.src}
-                    className="overflow-hidden rounded-2xl border border-white/15 bg-black/45 transition hover:border-champagne/40"
+                    className="overflow-hidden border border-[#F6F1E7]/15 bg-[#050505] transition hover:border-[#F6F1E7]/45"
                   >
-                    <div className="relative h-56 w-full bg-black">
+                    <div className="relative h-56 w-full bg-[#050505]">
                       <img
                         src={img.src}
                         title={img.title}
@@ -349,21 +349,21 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                         decoding="async"
                         className="h-full w-full object-cover"
                       />
-                      <span className="absolute left-3 top-3 rounded-full bg-black/80 px-2.5 py-1 text-[11px] font-semibold text-champagne">
+                      <span className="absolute left-3 top-3 border border-[#F6F1E7]/30 bg-[#050505]/90 px-2.5 py-1 text-[11px] font-semibold text-[#F6F1E7]">
                         {img.shotLabel}
                       </span>
                     </div>
                     <figcaption className="space-y-2 p-4">
                       <div className="flex flex-wrap gap-1.5 text-[11px]">
-                        <span className="rounded-md bg-champagne/15 px-2 py-0.5 font-medium text-champagne">
+                        <span className="border border-[#F6F1E7]/25 bg-[#0B0A09] px-2 py-0.5 font-medium text-[#EAE3D5]">
                           {img.targetBadge}
                         </span>
-                        <span className="rounded-md bg-white/10 px-2 py-0.5 text-white/85">
+                        <span className="border border-[#F6F1E7]/15 bg-[#0B0A09] px-2 py-0.5 text-[#C2B9AA]">
                           {img.outfitBadge}
                         </span>
                       </div>
-                      <p className="text-xs leading-relaxed text-white/80">
-                        <strong className="text-white">{img.title}</strong> · {img.description}
+                      <p className="text-xs leading-relaxed text-[#C2B9AA]">
+                        <strong className="text-[#F6F1E7]">{img.title}</strong> · {img.description}
                       </p>
                     </figcaption>
                   </figure>
@@ -371,32 +371,32 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               </div>
             </section>
 
-            {/* Price Tiers Table */}
-            <div id="prezzi-formule" className="mt-10">
+            {/* Price Tiers Table (#F6F1E7 Capitolo Avorio Caldo) */}
+            <div id="prezzi-formule" className="mt-10 border border-[#050505]/15 bg-[#F6F1E7] text-[#050505] p-6 sm:p-8">
               <div className="flex flex-wrap items-center gap-3">
-                <h2 className="font-serif text-2xl font-bold text-champagne">
+                <h2 className="font-serif text-2xl font-bold text-[#050505]">
                   {ui.pricesHeadingPrefix} · {event.venueName}
                 </h2>
-                <span className="rounded-full border border-amber-400/70 bg-amber-500/20 px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-amber-300" data-selling-fast-badge>
+                <span className="border border-[#050505] bg-[#050505] px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-[#F6F1E7]" data-selling-fast-badge>
                   {scarcity.sellingFastBadge}
                 </span>
               </div>
-              <p className="mt-1 text-xs text-white/55">{sourceBasis}</p>
+              <p className="mt-1 text-xs text-[#3D3830]">{sourceBasis}</p>
 
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
                 {tiers.map((tier) => (
                   <div
                     key={tier.label}
-                    className="flex flex-col justify-between rounded-2xl border border-champagne/25 bg-black/40 p-5"
+                    className="flex flex-col justify-between border border-[#050505]/15 bg-[#EFE9DC] p-5"
                   >
                     <div>
                       <div className="flex items-start justify-between gap-3">
-                        <h3 className="font-serif text-lg font-bold text-white">{tier.label}</h3>
-                        <span className="shrink-0 rounded-lg bg-champagne/15 px-3 py-1 text-sm font-bold text-champagne">
+                        <h3 className="font-serif text-lg font-bold text-[#050505]">{tier.label}</h3>
+                        <span className="shrink-0 bg-[#050505] px-3 py-1 text-sm font-bold text-[#F6F1E7]">
                           {tier.price}
                         </span>
                       </div>
-                      <p className="mt-2 text-sm text-white/70">{tier.details}</p>
+                      <p className="mt-2 text-sm text-[#24201B]">{tier.details}</p>
                     </div>
                   </div>
                 ))}
@@ -406,51 +406,50 @@ export default function CapodannoDetailView({ locale, event }: Props) {
             {/* CTA Box with WhatsApp, Tel, Email */}
             <div
               id="prenota-concierge"
-              className="mt-10 rounded-2xl border border-champagne/40 bg-gradient-to-r from-champagne/15 via-champagne/5 to-transparent p-6 sm:p-8"
+              className="mt-10 border border-[#F6F1E7]/25 bg-[#050505] p-6 sm:p-8"
             >
-              <h2 className="font-serif text-2xl font-bold text-white">
+              <h2 className="font-serif text-2xl font-bold text-[#F6F1E7]">
                 {ui.bookingHeading}
               </h2>
-              <p className="mt-2 text-sm text-white/75">
+              <p className="mt-2 text-sm text-[#C2B9AA]">
                 {ui.bookingSubtitle}
               </p>
               <div className="mt-5 flex flex-wrap gap-3">
+                <a
+                  href={getConciergeBookingUrl(locale, `${title} (${event.venueName} - 31/12/2026)`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-event-cta-kind="table"
+                  className="inline-flex items-center bg-[#25D366] px-6 py-3.5 text-sm font-bold text-[#050505] transition hover:bg-[#2EE472]"
+                >
+                  WhatsApp {SITE_CONTACT.whatsapp.number}
+                </a>
                 {event.xceedUrl ? (
                   <a
                     href={event.xceedUrl}
                     target="_blank"
                     rel="sponsored noopener noreferrer"
                     data-event-cta-kind="admission"
-                    className="inline-flex items-center rounded-xl bg-champagne px-6 py-3.5 text-sm font-bold text-black transition hover:bg-white"
+                    className="inline-flex items-center bg-[#F6F1E7] px-6 py-3.5 text-sm font-bold text-[#050505] transition hover:bg-[#EAE3D5]"
                   >
                     {scarcity.xceedPriorityCta}
                   </a>
-                ) : (
-                  <a
-                    href={getConciergeBookingUrl(locale, `${title} (${event.venueName} - 31/12/2026)`)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-event-cta-kind="table"
-                    className="inline-flex items-center rounded-xl bg-champagne px-6 py-3.5 text-sm font-bold text-black transition hover:bg-white"
-                  >
-                    WhatsApp {SITE_CONTACT.whatsapp.number}
-                  </a>
-                )}
+                ) : null}
                 <a
                   href="tel:+393519127047"
-                  className="inline-flex items-center rounded-xl border border-champagne/50 bg-black/50 px-5 py-3.5 text-sm font-semibold text-champagne transition hover:bg-champagne hover:text-black"
+                  className="inline-flex items-center border border-[#F6F1E7]/40 bg-[#0B0A09] px-5 py-3.5 text-sm font-semibold text-[#F6F1E7] transition hover:bg-[#F6F1E7] hover:text-[#050505]"
                 >
                   {ui.callNowBtn}
                 </a>
                 <a
                   href="mailto:concierge@nightlifemilan.com"
-                  className="inline-flex items-center rounded-xl border border-white/20 bg-black/40 px-5 py-3.5 text-sm font-semibold text-white/85 transition hover:border-champagne hover:text-champagne"
+                  className="inline-flex items-center border border-[#F6F1E7]/20 bg-[#0B0A09] px-5 py-3.5 text-sm font-semibold text-[#C2B9AA] transition hover:border-[#F6F1E7] hover:text-[#F6F1E7]"
                 >
                   concierge@nightlifemilan.com
                 </a>
                 <Link
                   href={capodannoPath(locale)}
-                  className="inline-flex items-center rounded-xl border border-white/20 px-5 py-3.5 text-sm font-semibold text-white hover:border-champagne hover:text-champagne"
+                  className="inline-flex items-center border border-[#F6F1E7]/20 px-5 py-3.5 text-sm font-semibold text-[#F6F1E7] hover:bg-[#F6F1E7] hover:text-[#050505]"
                 >
                   {ui.backToAllBtn}
                 </Link>
@@ -459,10 +458,10 @@ export default function CapodannoDetailView({ locale, event }: Props) {
 
             {/* Embedded Google Map for Venue */}
             <div id="mappa-locale" className="mt-12">
-              <h2 className="font-serif text-2xl font-bold text-champagne">
+              <h2 className="font-serif text-2xl font-bold text-[#F6F1E7]">
                 {ui.mapHeadingEvent} · {event.venueName}
               </h2>
-              <p className="mt-1 text-sm text-white/70">
+              <p className="mt-1 text-sm text-[#C2B9AA]">
                 {event.venueName} · {event.address}, {event.city} ({event.province}) · {event.hours}
               </p>
               <div className="mt-4">
@@ -478,15 +477,15 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               </div>
             </div>
 
-            {/* FAQs */}
-            <div id="faq-evento" className="mt-12 space-y-4">
-              <h2 className="font-serif text-2xl font-bold text-champagne">
+            {/* FAQs (#F6F1E7 Capitolo Avorio Caldo) */}
+            <div id="faq-evento" className="mt-12 border border-[#050505]/15 bg-[#F6F1E7] text-[#050505] p-6 sm:p-8 space-y-4">
+              <h2 className="font-serif text-2xl font-bold text-[#050505]">
                 {ui.faqHeadingPrefix}
               </h2>
               {faqs.map((faq) => (
-                <div key={faq.q} className="rounded-xl border border-white/10 bg-black/30 p-5">
-                  <h3 className="font-semibold text-white">{faq.q}</h3>
-                  <p className="mt-1.5 text-sm text-white/70">{faq.a}</p>
+                <div key={faq.q} className="border border-[#050505]/15 bg-[#EFE9DC] p-5">
+                  <h3 className="font-semibold text-[#050505]">{faq.q}</h3>
+                  <p className="mt-1.5 text-sm text-[#24201B]">{faq.a}</p>
                 </div>
               ))}
             </div>
@@ -496,7 +495,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
         {/* Related Events */}
         {related.length > 0 && (
           <section id="eventi-correlati" className="mt-14">
-            <h2 className="font-serif text-2xl font-bold text-champagne">
+            <h2 className="font-serif text-2xl font-bold text-[#F6F1E7]">
               {ui.relatedHeading}
             </h2>
             <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -504,15 +503,15 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 <Link
                   key={item.slug}
                   href={capodannoEventPath(item.slug, locale)}
-                  className="rounded-2xl border border-white/10 bg-[#18140c] p-5 transition hover:border-champagne/40"
+                  className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-5 transition hover:border-[#F6F1E7]/45"
                 >
-                  <p className="text-xs font-semibold text-champagne">
+                  <p className="text-xs font-semibold text-[#EAE3D5]">
                     {item.city} ({item.province})
                   </p>
-                  <h3 className="mt-1 font-serif text-lg font-bold text-white">
+                  <h3 className="mt-1 font-serif text-lg font-bold text-[#F6F1E7]">
                     {getCapodannoLocalizedEventTitle(item, locale)}
                   </h3>
-                  <p className="mt-2 text-xs text-white/65">
+                  <p className="mt-2 text-xs text-[#C2B9AA]">
                     {isIt ? item.priceSummaryIt : item.priceSummaryEn}
                   </p>
                 </Link>

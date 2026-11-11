@@ -6,7 +6,7 @@ import type { LocaleCode } from '@/lib/i18n/locales';
 import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
 import { tr } from '@/lib/i18n/t';
-import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { getLocaleDef, hreflangAlternates, canonicalPageUrl, localePrefix } from '@/lib/i18n/locales';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { CONTACT } from '@/config/contact';
 import {
@@ -39,7 +39,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const canonical = `${baseUrl}${localePrefix(locale)}/football-afterparties`;
+  const canonical = canonicalPageUrl(baseUrl, locale, '/football-afterparties');
 
   const title = seoTitle(
     tr(
@@ -342,7 +342,7 @@ export default async function FootballAfterpartiesPage({
   const isIt = locale === 'it';
   const venueMapCopy = getEventVenueCopy(locale as LocaleCode);
   const lp = localePrefix(locale);
-  const canonicalUrl = `${baseUrl}${lp}/football-afterparties`;
+  const canonicalUrl = canonicalPageUrl(baseUrl, locale, '/football-afterparties');
 
   const faqs = [
     {
@@ -1004,9 +1004,9 @@ export default async function FootballAfterpartiesPage({
           {/* H2/H3 Dress Code */}
           <div
             id="dress-code-stadio-discoteca"
-            className="rounded-3xl border border-amber-500/35 bg-gradient-to-b from-[#1b1409] to-[#0e0b06] p-7 sm:p-10"
+            className="border border-[#F6F1E7]/20 bg-[#0B0A09] p-7 sm:p-10"
           >
-            <span className="font-mono text-xs uppercase tracking-[0.22em] text-amber-300 block mb-2">
+            <span className="font-mono text-xs uppercase tracking-[0.22em] text-[#EAE3D5] block mb-2">
               {isIt ? 'SEZIONE 4A · SELEZIONE ALLA PORTA' : 'SECTION 4A · DOOR SELECTION POLICY'}
             </span>
             <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-4">
@@ -1074,7 +1074,7 @@ export default async function FootballAfterpartiesPage({
           {/* H2/H3 Logistica Anti-Ingorgo */}
           <div
             id="logistica-anti-ingorgo-m5"
-            className="rounded-3xl border border-champagne/35 bg-gradient-to-b from-[#17130b] to-[#0c0a06] p-7 sm:p-10"
+            className="rounded-3xl border border-champagne/35 bg-[#0B0A09] p-7 sm:p-10"
           >
             <span className="font-mono text-xs uppercase tracking-[0.22em] text-champagne block mb-2">
               {isIt ? 'SEZIONE 4B · MOBILITÀ NOTTURNA SAN SIRO' : 'SECTION 4B · SAN SIRO NIGHT MOBILITY'}

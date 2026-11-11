@@ -1,5 +1,5 @@
 import { BAD_BUNNY_ARIA_EDITORIAL_COPY } from './badBunnyAriaEditorialCopy';
-import { enabledLocaleCodes, type LocaleCode } from './i18n/locales';
+import { enabledLocaleCodes, type LocaleCode } from './i18n/localeRegistry';
 
 export const BAD_BUNNY_ARIA_BASE_ID = 'xc-229435';
 export const BAD_BUNNY_ARIA_CANONICAL_SLUG = 'saturday-night-aria-club-milano-saturday-july-18-2026-2026-07-18';

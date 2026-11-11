@@ -8,7 +8,7 @@ import { tr } from '@/lib/i18n/t';
 import {
   INDEXED_LOCALES,
   getLocaleDef,
-  hreflangAlternates,
+  hreflangAlternates, canonicalPageUrl,
   localePrefix,
 } from '@/lib/i18n/locales';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
@@ -51,7 +51,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const canonical = `${baseUrl}${localePrefix(locale)}/concert-afterparties`;
+  const canonical = canonicalPageUrl(baseUrl, locale, '/concert-afterparties');
 
   const title = seoTitle(
     tr(
@@ -314,7 +314,7 @@ export default async function ConcertAfterpartiesPage({
   const isIt = locale === 'it';
   const venueMapCopy = getEventVenueCopy(locale as LocaleCode);
   const lp = localePrefix(locale);
-  const canonicalUrl = `${baseUrl}${lp}/concert-afterparties`;
+  const canonicalUrl = canonicalPageUrl(baseUrl, locale, '/concert-afterparties');
 
   const faqs = [
     {
@@ -822,8 +822,8 @@ export default async function ConcertAfterpartiesPage({
 
       {/* SEZIONE 3: GUIDA DRESS CODE CONCERTO -> CLUB VIP */}
       <section id="dress-code-concerto-club-vip" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-        <div className="rounded-3xl border border-amber-500/35 bg-gradient-to-b from-[#1b1409] to-[#0e0b06] p-7 sm:p-10">
-          <span className="font-mono text-xs uppercase tracking-[0.22em] text-amber-300 block mb-2">
+        <div className="border border-[#F6F1E7]/20 bg-[#0B0A09] p-7 sm:p-10">
+          <span className="font-mono text-xs uppercase tracking-[0.22em] text-[#EAE3D5] block mb-2">
             {isIt ? 'SEZIONE 3 · SELEZIONE ALLA PORTA POST-LIVE' : 'SECTION 3 · POST-SHOW DOOR SELECTION'}
           </span>
           <h2 className="font-serif text-2xl sm:text-4xl font-bold text-white mb-4">

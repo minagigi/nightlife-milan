@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 import { tr } from '@/lib/i18n/t';
-import { hreflangAlternates, localePrefix, getLocaleDef, indexedLocaleCodes } from '@/lib/i18n/locales';
+import { hreflangAlternates, localePrefix, getLocaleDef, indexedLocaleCodes, canonicalPageUrl } from '@/lib/i18n/locales';
 import { getLocalizedVenueSlug35 } from '@/lib/i18n/localizedSlugs35';
+import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
 import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
@@ -1025,12 +1026,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const itSlug = venue.slugs.it || enSlug;
   const ogImage = venue.image || venue.gallery?.[0] || '/images/milan-nightclub-luxury-vip-champagne.webp';
   const canonicalSlug = getLocalizedVenueSlug35(venue.id, (locale as LocaleCode) || 'en');
-  const canonicalUrl = `${baseUrl}${localePrefix(locale)}/clubs/${canonicalSlug}`;
+  const canonicalUrl = `${baseUrl}${localePrefix(locale)}/${getLocalizedDir35('clubs', locale)}/${canonicalSlug}`;
   const clubLangAlternates: Record<string, string> = {
-    'x-default': `${baseUrl}/clubs/${getLocalizedVenueSlug35(venue.id, 'en')}`,
+    'x-default': `${baseUrl}/${getLocalizedDir35('clubs', 'en')}/${getLocalizedVenueSlug35(venue.id, 'en')}`,
   };
   for (const loc of indexedLocaleCodes) {
-    clubLangAlternates[loc] = `${baseUrl}${localePrefix(loc)}/clubs/${getLocalizedVenueSlug35(venue.id, loc)}`;
+    clubLangAlternates[getLocaleDef(loc)!.hreflang] = `${baseUrl}${localePrefix(loc)}/${getLocalizedDir35('clubs', loc)}/${getLocalizedVenueSlug35(venue.id, loc)}`;
   }
 
   return {
@@ -1184,7 +1185,8 @@ export default async function ClubPage({ params }: Props) {
     .sort((a, b) => new Date(b.dateISO).getTime() - new Date(a.dateISO).getTime());
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const currentVenueSlug = getLocalizedText(venue.slugs, locale);
+  const currentVenueSlug = getLocalizedVenueSlug35(venue.id, (locale as LocaleCode) || 'en');
+  const clubsDir = getLocalizedDir35('clubs', locale);
   const toAbsoluteUrl = (src: string) => (src.startsWith('http') ? src : `${baseUrl}${src}`);
   const jsonLd: any = {
     "@context": "https://schema.org",
@@ -1205,7 +1207,7 @@ export default async function ClubPage({ params }: Props) {
       "latitude": venue.coordinates?.latitude || 45.4642,
       "longitude": venue.coordinates?.longitude || 9.1900
     },
-    "url": `${baseUrl}${localePrefix(locale)}/clubs/${currentVenueSlug}`,
+    "url": `${baseUrl}${localePrefix(locale)}/${clubsDir}/${currentVenueSlug}`,
     "telephone": "+393519127047",
     ...(venue.priceRange ? { "priceRange": venue.priceRange } : {}),
     ...(venue.sameAs?.length ? { "sameAs": venue.sameAs } : {}),
@@ -1221,9 +1223,9 @@ export default async function ClubPage({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": `${baseUrl}${localePrefix(locale)}` },
-      { "@type": "ListItem", "position": 2, "name": locale === 'it' ? "Club Milano" : "Milan Clubs", "item": `${baseUrl}${localePrefix(locale)}/clubs` },
-      { "@type": "ListItem", "position": 3, "name": name, "item": `${baseUrl}${localePrefix(locale)}/clubs/${currentVenueSlug}` },
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": canonicalPageUrl(baseUrl, locale, '') },
+      { "@type": "ListItem", "position": 2, "name": locale === 'it' ? "Club Milano" : "Milan Clubs", "item": canonicalPageUrl(baseUrl, locale, '/clubs') },
+      { "@type": "ListItem", "position": 3, "name": name, "item": `${baseUrl}${localePrefix(locale)}/${clubsDir}/${currentVenueSlug}` },
     ],
   };
 
@@ -1251,7 +1253,7 @@ export default async function ClubPage({ params }: Props) {
     : null;
 
   return (
-    <main className="bg-[#131009] min-h-screen text-white font-sans selection:bg-champagne selection:text-white pb-20">
+    <main className="bg-[#050505] min-h-screen text-white font-sans selection:bg-champagne selection:text-white pb-20">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       {faqLd && (
@@ -1273,7 +1275,7 @@ export default async function ClubPage({ params }: Props) {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#131009] via-[#131009]/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/50 to-transparent" />
         </div>
         
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1321,7 +1323,7 @@ export default async function ClubPage({ params }: Props) {
       </section>
 
       {/* QuickInfoBar (4 Info Blocks) */}
-      <section className="border-y border-white/10 bg-[#131009]">
+      <section className="border-y border-white/10 bg-[#050505]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 divide-x divide-white/10">
             <div className="flex flex-col px-4 first:pl-0">
@@ -1576,7 +1578,7 @@ export default async function ClubPage({ params }: Props) {
                   const isFirst = idx === 0;
                   return (
                     <div key={idx} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                      <div className={`flex items-center justify-center w-12 h-12 rounded-full border-4 border-[#131009] ${isFirst ? 'bg-champagne text-black' : 'bg-white/[0.08] text-champagne'} shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10`}>
+                      <div className={`flex items-center justify-center w-12 h-12 rounded-full border-4 border-[#050505] ${isFirst ? 'bg-champagne text-black' : 'bg-white/[0.08] text-champagne'} shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10`}>
                         <Icon className="w-5 h-5" />
                       </div>
                       <div className="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] p-6 rounded-lg bg-white/[0.03] border border-white/10 hover:border-champagne/50 transition-colors">

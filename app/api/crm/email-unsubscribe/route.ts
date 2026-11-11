@@ -98,7 +98,7 @@ function unsubscribePage(locale: LocaleCode): string {
 <style>
   body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; box-sizing: border-box; padding: 24px; background: #0B0B10; color: #EDEDF2; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
   .card { background: #14141C; border-radius: 12px; padding: 32px; max-width: 420px; width: 100%; text-align: center; }
-  h1 { margin: 0 0 12px; color: #C9A86A; font-size: 20px; }
+  h1 { margin: 0 0 12px; color: #EAE3D5; font-size: 20px; }
   p { margin: 0; line-height: 1.5; font-size: 15px; }
 </style>
 </head>

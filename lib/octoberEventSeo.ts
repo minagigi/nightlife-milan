@@ -1,4 +1,5 @@
-import { getLocalizedEventSlug35 } from '@/lib/i18n/localizedSlugs35';
+import { getLocalizedEventSlug35, localizeInternalHref } from '@/lib/i18n/localizedSlugs35';
+import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
 import type { Metadata } from 'next';
 import { getLocaleDef, indexedLocaleCodes, localePrefix, type LocaleCode } from '@/lib/i18n/locales';
 import { getOctoberEventCopy, getOctoberHubCopy, getOctoberEventSlug } from '@/lib/october-events/copy';
@@ -9,7 +10,7 @@ import { getRaConditionTexts } from '@/lib/october-events/raConditionsAdapter';
 const BASE_URL = 'https://nightlifemilan.com';
 
 export function octoberEventCanonical(event: OctoberEventRecord, locale: LocaleCode): string {
-  return `${BASE_URL}${localePrefix(locale)}/events/${getLocalizedEventSlug35(getOctoberEventSlug(event), locale)}`;
+  return `${BASE_URL}${localePrefix(locale)}/${getLocalizedDir35('events', locale)}/${getLocalizedEventSlug35(getOctoberEventSlug(event), locale)}`;
 }
 
 export function formatOctoberEventDate(locale: LocaleCode, startISO: string): string {
@@ -87,7 +88,7 @@ export function buildOctoberEventGraph(event: OctoberEventRecord, locale: Locale
       { '@type': 'FAQPage', '@id': `${canonical}#faq`, inLanguage: getLocaleDef(locale)?.hreflang || locale, mainEntity: copy.faqs.map((faq) => ({ '@type': 'Question', name: faq.question, acceptedAnswer: { '@type': 'Answer', text: faq.answer } })) },
       { '@type': 'BreadcrumbList', '@id': `${canonical}#breadcrumb`, itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Nightlife Milan', item: `${BASE_URL}${localePrefix(locale) || '/'}` },
-        { '@type': 'ListItem', position: 2, name: getOctoberHubCopy(locale).labels.heading, item: `${BASE_URL}${localePrefix(locale)}/events/october-2026` },
+        { '@type': 'ListItem', position: 2, name: getOctoberHubCopy(locale).labels.heading, item: `${BASE_URL}${localizeInternalHref(`${localePrefix(locale)}/events/october-2026`, locale)}` },
         { '@type': 'ListItem', position: 3, name: copy.title, item: canonical },
       ] },
     ],

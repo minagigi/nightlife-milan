@@ -1,7 +1,8 @@
 import { notFound } from 'next/navigation';
 import { tr } from '@/lib/i18n/t';
-import { hreflangAlternates, localePrefix, indexedLocaleCodes } from '@/lib/i18n/locales';
+import { getLocaleDef, hreflangAlternates, localePrefix, indexedLocaleCodes } from '@/lib/i18n/locales';
 import { resolveGenreSlug, getLocalizedGenreSlug35 } from '@/lib/i18n/localizedSlugs35';
+import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
 import { Metadata } from 'next';
 import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
@@ -340,12 +341,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const localizedGenreSlug = getLocalizedGenreSlug35(canonicalGenreSlug, (locale as LocaleCode) || 'en');
-  const canonical = `${baseUrl}${localePrefix(locale)}/genres/${localizedGenreSlug}`;
+  const canonical = `${baseUrl}${localePrefix(locale)}/${getLocalizedDir35('genres', locale)}/${localizedGenreSlug}`;
   const genreLangAlternates: Record<string, string> = {
-    'x-default': `${baseUrl}/genres/${getLocalizedGenreSlug35(canonicalGenreSlug, 'en')}`,
+    'x-default': `${baseUrl}/${getLocalizedDir35('genres', 'en')}/${getLocalizedGenreSlug35(canonicalGenreSlug, 'en')}`,
   };
   for (const loc of indexedLocaleCodes) {
-    genreLangAlternates[loc] = `${baseUrl}${localePrefix(loc)}/genres/${getLocalizedGenreSlug35(canonicalGenreSlug, loc)}`;
+    genreLangAlternates[getLocaleDef(loc)!.hreflang] = `${baseUrl}${localePrefix(loc)}/${getLocalizedDir35('genres', loc)}/${getLocalizedGenreSlug35(canonicalGenreSlug, loc)}`;
   }
 
   const isIt = locale === 'it';
@@ -428,7 +429,7 @@ export default async function GenrePage({ params }: Props) {
   };
 
   return (
-    <main className="flex-grow pt-24 pb-20 bg-[#131009]">
+    <main className="flex-grow pt-24 pb-20 bg-[#050505]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

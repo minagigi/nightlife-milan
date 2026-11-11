@@ -3,8 +3,10 @@ import type { NextRequest } from 'next/server';
 import { enabledLocaleCodes, LOCALES, type LocaleCode } from '@/lib/i18n/locales';
 import { isEventBatchLocaleHttpIndexable } from '@/lib/eventBatchProfiles';
 import { isRemovedCuratedSitePath } from '@/lib/eventVisibility';
-import { resolveSeoHubPathToCanonical } from '@/lib/i18n/localizedSlugs35';
+import { ALL_EVENT_DIR_TOKENS } from '@/lib/i18n/dirTokens35';
+import { localizeInternalHref, resolveSeoHubPathToCanonical } from '@/lib/i18n/localizedSlugs35';
 import { capodannoCategoryPath } from '@/lib/capodanno/routes';
+import { halloweenPath } from '@/lib/halloween/routes';
 
 // Lingue attive dal registry unico (lib/i18n/locales.ts): attivare una lingua lì
 // la rende automaticamente instradabile qui, senza toccare il middleware.
@@ -13,10 +15,13 @@ const locales: string[] = enabledLocaleCodes;
 // vince su qualsiasi metadata di pagina (che altrimenti sovrascrive il layout).
 const nonIndexedLocales = new Set(LOCALES.filter((l) => l.enabled && !l.indexed).map((l) => l.code as string));
 const localePrefixPattern = `(?:${locales.map((l) => `\\/${l}`).join('|')})?`;
+const eventDirGroup = ALL_EVENT_DIR_TOKENS.join('|');
 const analyticsRe = new RegExp(`^${localePrefixPattern}\\/analytics(\\/|$)`);
 const analyticsTypoRe = new RegExp(`^${localePrefixPattern}\\/analitycs(\\/|$)`);
 const crmRe = new RegExp(`^${localePrefixPattern}\\/crm(\\/|$)`);
-const localizedEventPageRe = /^\/([^/]+)\/events\/([^/]+)$/;
+const localizedEventPageRe = new RegExp(`^\\/([^/]+)\\/(?:${eventDirGroup})\\/([^/]+)$`);
+const capodannoLegacyRe = new RegExp(`^(?:\\/([a-z]{2}))?\\/(?:${eventDirGroup})\\/capodanno-2027\\/?$`);
+const halloweenLegacyRe = new RegExp(`^(?:\\/([a-z]{2}))?\\/(?:${eventDirGroup})\\/halloween-2026\\/?$`);
 
 // Dashboard interna /analytics: Basic Auth con ANALYTICS_USER / ANALYTICS_PASSWORD.
 // Protegge anche le Server Action della pagina (stesso path → il browser riallega
@@ -62,13 +67,26 @@ function crmAuth(request: NextRequest): NextResponse | null {
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Redirect HTTP 308 diretto (1-hop, anti-loop) per l'alias legacy Capodanno 2027
-  const capodannoLegacyMatch = pathname.match(/^(?:\/([a-z]{2}))?\/events\/capodanno-2027\/?$/);
+  // Redirect HTTP 308 diretto (1-hop, anti-loop) per gli alias legacy Capodanno 2027 e Halloween 2026
+  const capodannoLegacyMatch = pathname.match(capodannoLegacyRe);
   if (capodannoLegacyMatch) {
     const matchedLocale = capodannoLegacyMatch[1];
     const targetLocale: LocaleCode =
       matchedLocale && locales.includes(matchedLocale) ? (matchedLocale as LocaleCode) : 'en';
     const destination = capodannoCategoryPath('capodanno-2027', targetLocale);
+    if (destination && destination !== pathname) {
+      const url = new URL(destination, request.url);
+      url.search = request.nextUrl.search;
+      return NextResponse.redirect(url, 308);
+    }
+  }
+
+  const halloweenLegacyMatch = pathname.match(halloweenLegacyRe);
+  if (halloweenLegacyMatch) {
+    const matchedLocale = halloweenLegacyMatch[1];
+    const targetLocale: LocaleCode =
+      matchedLocale && locales.includes(matchedLocale) ? (matchedLocale as LocaleCode) : 'en';
+    const destination = halloweenPath(targetLocale);
     if (destination && destination !== pathname) {
       const url = new URL(destination, request.url);
       url.search = request.nextUrl.search;
@@ -112,31 +130,54 @@ export function middleware(request: NextRequest) {
   );
 
   if (pathnameHasLocale) {
-    // If it's the default locale (en), redirect to root to keep URLs clean
+    // If it's the default locale (en), redirect 1-hop to canonical root English path
     if (pathname.startsWith('/en/') || pathname === '/en') {
-      const newPath = pathname.replace(/^\/en/, '') || '/';
+      const rawEnRest = pathname.replace(/^\/en/, '') || '/';
+      const canonicalEnRest = rawEnRest === '/' ? '/' : (resolveSeoHubPathToCanonical(rawEnRest, 'en') || rawEnRest);
+      const newPath = canonicalEnRest === '/' ? '/' : localizeInternalHref(canonicalEnRest, 'en');
       const url = new URL(newPath, request.url);
       url.search = request.nextUrl.search;
-      return NextResponse.redirect(url);
+      return NextResponse.redirect(url, 308);
     }
-    const firstSegment = pathname.split('/')[1];
-    const restPath = pathname.slice(firstSegment.length + 1) || '/';
-    const canonicalSeoPath = resolveSeoHubPathToCanonical(restPath, firstSegment as any);
-    let res: NextResponse;
-    if (canonicalSeoPath && canonicalSeoPath !== restPath) {
-      const rewriteUrl = new URL(`/${firstSegment}${canonicalSeoPath}`, request.url);
-      rewriteUrl.search = request.nextUrl.search;
-      res = NextResponse.rewrite(rewriteUrl);
-    } else {
-      res = NextResponse.next();
+    const firstSegment = pathname.split('/')[1] as LocaleCode;
+    const rawRestPath = pathname.slice(firstSegment.length + 1) || '/';
+    const cleanPathname = pathname !== '/' && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+    const isInternalAdmin = analyticsRe.test(cleanPathname) || crmRe.test(cleanPathname);
+
+    if (!isInternalAdmin && rawRestPath !== '/') {
+      const canonicalSeoPath = resolveSeoHubPathToCanonical(rawRestPath, firstSegment);
+      const expectedLocalizedFull = localizeInternalHref(
+        `/${firstSegment}${canonicalSeoPath || rawRestPath}`,
+        firstSegment,
+      );
+      if (expectedLocalizedFull && expectedLocalizedFull !== cleanPathname) {
+        const redirectUrl = new URL(expectedLocalizedFull, request.url);
+        redirectUrl.search = request.nextUrl.search;
+        const redirectRes = NextResponse.redirect(redirectUrl, 308);
+        redirectRes.cookies.set('NEXT_LOCALE', firstSegment, { path: '/', maxAge: 31536000, sameSite: 'lax' });
+        return redirectRes;
+      }
+      let res: NextResponse;
+      if (canonicalSeoPath && canonicalSeoPath !== rawRestPath) {
+        const rewriteUrl = new URL(`/${firstSegment}${canonicalSeoPath}`, request.url);
+        rewriteUrl.search = request.nextUrl.search;
+        res = NextResponse.rewrite(rewriteUrl);
+      } else {
+        res = NextResponse.next();
+      }
+      res.cookies.set('NEXT_LOCALE', firstSegment, { path: '/', maxAge: 31536000, sameSite: 'lax' });
+      const localizedEventPage = cleanPathname.match(localizedEventPageRe);
+      const hasEventScopedHttpIndexability = localizedEventPage
+        && isEventBatchLocaleHttpIndexable(localizedEventPage[1], localizedEventPage[2]);
+      if (nonIndexedLocales.has(firstSegment) && !hasEventScopedHttpIndexability) {
+        res.headers.set('X-Robots-Tag', 'noindex, follow');
+      }
+      return res;
     }
-    // Visitare una pagina con prefisso lingua memorizza la scelta: da qui in poi
-    // il cookie vince sull'auto-rilevamento (il selettore lo setta anche lato client).
+
+    const res = NextResponse.next();
     res.cookies.set('NEXT_LOCALE', firstSegment, { path: '/', maxAge: 31536000, sameSite: 'lax' });
-    const localizedEventPage = pathname.match(localizedEventPageRe);
-    const hasEventScopedHttpIndexability = localizedEventPage
-      && isEventBatchLocaleHttpIndexable(localizedEventPage[1], localizedEventPage[2]);
-    if (nonIndexedLocales.has(firstSegment) && !hasEventScopedHttpIndexability) {
+    if (nonIndexedLocales.has(firstSegment)) {
       res.headers.set('X-Robots-Tag', 'noindex, follow');
     }
     return res;
@@ -155,9 +196,32 @@ export function middleware(request: NextRequest) {
           ? null
           : matchBrowserLocale(request.headers.get('accept-language'));
     if (target && target !== 'en') {
-      const url = new URL(`/${target}${pathname === '/' ? '' : pathname}`, request.url);
+      const targetCode = target as LocaleCode;
+      const destPath = pathname === '/'
+        ? `/${targetCode}`
+        : localizeInternalHref(`/${targetCode}${pathname}`, targetCode);
+      const url = new URL(destPath, request.url);
       url.search = request.nextUrl.search;
       return NextResponse.redirect(url);
+    }
+  }
+
+  // Canonicalize non-EN localized paths visited without locale prefix on root EN
+  if (pathname !== '/' && !analyticsRe.test(pathname) && !crmRe.test(pathname)) {
+    const cleanRootPath = pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+    const canonicalEnPath = resolveSeoHubPathToCanonical(cleanRootPath, 'en');
+    if (canonicalEnPath) {
+      const expectedEnPath = localizeInternalHref(canonicalEnPath, 'en');
+      if (expectedEnPath !== cleanRootPath) {
+        const redirectUrl = new URL(expectedEnPath, request.url);
+        redirectUrl.search = request.nextUrl.search;
+        return NextResponse.redirect(redirectUrl, 308);
+      }
+      if (canonicalEnPath !== cleanRootPath) {
+        const rewriteUrl = new URL(`/en${canonicalEnPath}`, request.url);
+        rewriteUrl.search = request.nextUrl.search;
+        return NextResponse.rewrite(rewriteUrl);
+      }
     }
   }
 

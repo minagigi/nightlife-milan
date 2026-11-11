@@ -1,7 +1,7 @@
 import OctoberEntry from '@/components/OctoberEntry';
 import { Metadata } from 'next';
 import { tr } from '@/lib/i18n/t';
-import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { hreflangAlternates, canonicalPageUrl, localePrefix } from '@/lib/i18n/locales';
 import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
 import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   );
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const canonical = `${baseUrl}${localePrefix(locale)}/events/special`;
+  const canonical = canonicalPageUrl(baseUrl, locale, '/events/special');
 
   return {
     title,
@@ -208,7 +208,7 @@ export default async function SpecialEventsPage({ params }: Props) {
       : null;
 
   return (
-    <main className="flex-1 bg-[#131009] w-full pt-20">
+    <main className="flex-1 bg-[#050505] w-full pt-20">
       {eventListSchema && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(eventListSchema) }} />
       )}

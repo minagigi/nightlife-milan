@@ -4,7 +4,7 @@ import { Metadata } from 'next';
 import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
 import { tr } from '@/lib/i18n/t';
-import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { getLocaleDef, hreflangAlternates, canonicalPageUrl, localePrefix } from '@/lib/i18n/locales';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { Sparkles, MapPin, Clock, MessageCircle, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { VipQuoteCalculator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
@@ -19,7 +19,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const canonical = `${baseUrl}${localePrefix(locale)}/rooftops`;
+  const canonical = canonicalPageUrl(baseUrl, locale, '/rooftops');
 
   const title = seoTitle(
     tr(
@@ -204,7 +204,7 @@ export default async function RooftopsPage({
   ];
 
   return (
-    <main className="flex-grow pt-24 pb-20 bg-[#131009]">
+    <main className="flex-grow pt-24 pb-20 bg-[#050505]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}

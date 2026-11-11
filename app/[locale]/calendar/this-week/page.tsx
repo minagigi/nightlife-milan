@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { tr } from '@/lib/i18n/t';
-import { hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { hreflangAlternates, canonicalPageUrl, localePrefix } from '@/lib/i18n/locales';
 import Link from '@/components/LocalizedLink';
 import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset, romeUpcomingSundayKey } from '@/lib/calendarEvents';
 import { generateEventListSchema, jsonLdString } from '@/lib/seo';
@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   );
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const canonical = `${baseUrl}${localePrefix(locale)}/calendar/this-week`;
+  const canonical = canonicalPageUrl(baseUrl, locale, '/calendar/this-week');
 
   const isIt = locale === 'it';
   const ogImage = `${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`;
@@ -190,7 +190,7 @@ export default async function ThisWeekPage({ params }: Props) {
       {eventListSchema && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(eventListSchema) }} />
       )}
-      <main className="flex-1 bg-[#131009] w-full pt-20">
+      <main className="flex-1 bg-[#050505] w-full pt-20">
         {/* Breadcrumb */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <nav className="text-sm text-white/40" aria-label="Breadcrumb">

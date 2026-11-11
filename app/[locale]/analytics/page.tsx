@@ -159,7 +159,7 @@ export default async function AnalyticsPage() {
   const waBySource = topByPrefix(daily, 'wa:src:', 8);
 
   return (
-    <main className="flex-1 bg-[#131009] min-h-screen py-14 px-4 sm:px-6">
+    <main className="flex-1 bg-[#050505] min-h-screen py-14 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto space-y-8">
         <header className="flex flex-wrap items-end justify-between gap-4">
           <div>

@@ -10,7 +10,8 @@ import GlobalSearch from './GlobalSearch';
 import LanguageSwitcher from './LanguageSwitcher';
 import { SITE_CONTACT } from '@/config/contact';
 import Logo from './Logo';
-import { LOCALES, localePrefix as urlLocalePrefix, type LocaleCode } from '@/lib/i18n/locales';
+import { LOCALES, getLocaleDef, localePrefix as urlLocalePrefix, type LocaleCode } from '@/lib/i18n/locales';
+import { localizeInternalHref, resolveSeoHubPathToCanonical } from '@/lib/i18n/localizedSlugs35';
 import { getChrome } from '@/lib/i18n/chrome';
 import { editorialValue, type EditorialFields } from '@/lib/editorialPresentation';
 import { BAR_COPY } from '@/lib/i18n/mobileBarCopy';
@@ -149,14 +150,27 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
     };
   }, [isMobileMenuOpen]);
 
-  // Helper to get the alternate path for the language switcher — registry-driven:
-  // strippa QUALSIASI prefisso lingua e applica quello del locale target.
   const getAlternatePath = (targetLocale: string) => {
+    const loc = (targetLocale || 'en') as LocaleCode;
+    if (languagePaths?.[loc]) return languagePaths[loc]!;
     const targetPrefix = urlLocalePrefix(targetLocale);
     if (!pathname) return targetPrefix || '/';
+    if (typeof document !== 'undefined') {
+      const hreflangCode = getLocaleDef(loc)?.hreflang || targetLocale;
+      const altLink = (document.querySelector(`link[rel="alternate"][hreflang="${hreflangCode}"]`)
+        || document.querySelector(`link[rel="alternate"][hreflang="${targetLocale}"]`)) as HTMLLinkElement | null;
+      if (altLink?.href) {
+        try {
+          const parsed = new URL(altLink.href).pathname;
+          if (parsed && parsed !== '/') return localizeInternalHref(parsed, loc);
+          if (parsed === '/' && loc === 'en') return '/';
+        } catch {}
+      }
+    }
     const pathWithoutLocale = pathname.replace(anyLocalePrefixRe, '/');
-    if (!targetPrefix) return pathWithoutLocale;
-    return pathWithoutLocale === '/' ? targetPrefix : `${targetPrefix}${pathWithoutLocale}`;
+    const canonicalOrRaw = resolveSeoHubPathToCanonical(pathWithoutLocale, currentLocale as LocaleCode) || pathWithoutLocale;
+    const candidate = !targetPrefix ? canonicalOrRaw : (canonicalOrRaw === '/' ? targetPrefix : `${targetPrefix}${canonicalOrRaw}`);
+    return localizeInternalHref(candidate, loc);
   };
 
   // Chrome UI in tutte le 35 lingue del registry (fallback EN campo per campo)
@@ -199,9 +213,10 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
       (item) => item.href !== halloweenHref && item.href !== capodannoHref && item.id !== 'mfw',
     );
     const sanSiroDesktopLabel = currentLocale === 'it' ? 'SAN SIRO' : 'SAN SIRO';
+    const sanSiroHref = localizeInternalHref(`${localePrefix}/football-afterparties`, currentLocale as LocaleCode);
     const seasonalPair = [
       { id: 'events' as const, label: capodannoLabel, name: capodannoLabel, href: capodannoHref, match: capodannoHref, gold: true },
-      { id: 'events' as const, label: sanSiroDesktopLabel, name: sanSiroDesktopLabel, href: `${localePrefix}/football-afterparties`, match: `${localePrefix}/football-afterparties`, gold: false },
+      { id: 'events' as const, label: sanSiroDesktopLabel, name: sanSiroDesktopLabel, href: sanSiroHref, match: sanSiroHref, gold: false },
     ];
     const eventsIdx = filtered.findIndex((item) => item.id === 'events');
     if (eventsIdx !== -1) {
@@ -210,12 +225,13 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
     }
     return [...seasonalPair, ...filtered];
   })();
+  const weeklyHref = localizeInternalHref(`${localePrefix}/events/this-week`, currentLocale as LocaleCode);
   const weeklyMobileItem = {
     id: 'events' as const,
     label: currentLocale === 'it' ? 'SERATE SETTIMANA' : 'THIS WEEK',
     name: currentLocale === 'it' ? 'SERATE SETTIMANA' : 'THIS WEEK',
-    href: `${localePrefix}/events/this-week`,
-    match: `${localePrefix}/events/this-week`,
+    href: weeklyHref,
+    match: weeklyHref,
     gold: false,
   };
   const mobileExtraLinks = [
@@ -228,7 +244,7 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
   const waMenuLink = informationOnlyClub ? SITE_CONTACT.whatsapp.link : getConciergeBookingUrl(currentLocale);
 
   return (
-    <header className={`nlm-header sticky top-0 z-50 w-full border-b border-[#F6F1E7]/14 bg-[#050505]/92 backdrop-blur-md ${scrolled ? 'is-scrolled' : ''}`}>
+    <header className={`nlm-header sticky top-0 z-50 w-full border-b border-[#F6F1E7]/14 bg-[#050505] ${scrolled ? 'is-scrolled' : ''}`}>
       <div className="max-w-[1440px] mx-auto border-x border-[#F6F1E7]/14">
       <div className="px-4 sm:px-10">
         <div className="nlm-header-inner flex justify-between items-center min-h-[72px]">
@@ -244,14 +260,14 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
                     href={link.href}
                     prefetch={false}
                     aria-current={isActive ? 'page' : undefined}
-                    className={`nlm-header-link whitespace-nowrap font-mono text-[10.5px] tracking-[0.11em] uppercase focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D6BE96] ${isGold ? 'is-accent text-[#D6BE96]' : 'text-[#C2B9AA] hover:text-[#F6F1E7]'}`}
+                    className={`nlm-header-link whitespace-nowrap font-mono text-[10.5px] tracking-[0.11em] uppercase focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F1E7] ${isGold ? 'is-accent text-[#F6F1E7] font-semibold' : 'text-[#C2B9AA] hover:text-[#F6F1E7]'}`}
                   >
                     {link.name}
                   </Link>
                   {link.name === t.clubs && mounted && favorites.length > 0 && (
                     <button
                       onClick={() => setDrawerOpen(true)}
-                      className="ml-2 flex items-center justify-center w-5 h-5 bg-[#D6BE96] text-[#050505] font-mono text-[10px] font-bold hover:scale-105 transition-transform"
+                      className="ml-2 flex items-center justify-center w-5 h-5 bg-[#F6F1E7] text-[#050505] font-mono text-[10px] font-bold hover:scale-105 transition-transform"
                       aria-label={favoritesTitle}
                     >
                       {favorites.length}
@@ -267,7 +283,7 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
             <button
               ref={mobileMenuTriggerRef}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="nlm-menu-toggle flex items-center justify-center -ml-2.5 w-11 h-11 text-[#F6F1E7] hover:text-[#D6BE96] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D6BE96] active:bg-white/5 transition-colors"
+              className="nlm-menu-toggle flex items-center justify-center -ml-2.5 w-11 h-11 text-[#F6F1E7] hover:text-[#EAE3D5] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F1E7] active:bg-white/5 transition-colors"
               aria-label={menuCopy.menu}
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-menu"
@@ -287,7 +303,7 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
             <Link
               href={localePrefix || '/'}
               prefetch={false}
-              className="relative z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D6BE96]"
+              className="relative z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F1E7]"
               aria-label="Nightlife Milan"
             >
               <Logo className="h-9 w-auto" />
@@ -300,13 +316,13 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
               href={waMenuLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="nlm-header-action hidden min-h-11 shrink-0 xl:flex items-center gap-2 border border-[#D6BE96]/55 bg-[#0B0A09] px-3 py-1.5 font-mono text-[10.5px] whitespace-nowrap uppercase tracking-[0.11em] text-[#F6F1E7] hover:bg-[#F6F1E7] hover:text-[#050505] transition-colors group"
+              className="nlm-header-action hidden min-h-11 shrink-0 xl:flex items-center gap-2 border border-[#25D366] bg-[#25D366] px-3 py-1.5 font-mono text-[10.5px] whitespace-nowrap uppercase tracking-[0.11em] text-[#050505] hover:bg-[#2EE472] transition-colors group"
               aria-label={bookingLabel}
             >
-              <MessageCircle className="w-4 h-4 text-[#D6BE96] group-hover:text-[#050505]" />
+              <MessageCircle className="w-4 h-4 text-[#050505]" />
               <div className="flex flex-col leading-none">
-                <span className="text-center font-semibold leading-tight tracking-[0.16em] text-[11px]">{bookingLabel}</span>
-                <span className="text-center text-[10px] leading-tight tracking-[0.14em] text-[#D6BE96] group-hover:text-[#050505]"><bdi dir="ltr">{SITE_CONTACT.whatsapp.number}</bdi></span>
+                <span className="text-center font-bold leading-tight tracking-[0.12em] text-[11px]">{bookingLabel}</span>
+                <span className="text-center text-[10px] font-semibold leading-tight tracking-[0.1em] text-[#050505]"><bdi dir="ltr">{SITE_CONTACT.whatsapp.number}</bdi></span>
               </div>
             </a>
             <GlobalSearch currentLocale={currentLocale} />
@@ -319,7 +335,7 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
       {/* Mobile navigation modal */}
       {isMobileMenuOpen && createPortal(
         <div
-          className="fixed inset-0 z-[100] bg-black/80 px-3 pb-3 pt-[4.5rem] backdrop-blur-sm xl:hidden"
+          className="fixed inset-0 z-[100] bg-black/85 px-3 pb-3 pt-[4.5rem] xl:hidden"
           onMouseDown={(event) => {
             if (event.target !== event.currentTarget) return;
             setIsMobileMenuOpen(false);
@@ -332,17 +348,17 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
             role="dialog"
             aria-modal="true"
             aria-label={menuCopy.menu}
-            className="nlm-mobile-menu animate-menu-drop mx-auto max-h-[calc(100vh-5.25rem)] max-w-xl overflow-y-auto overscroll-contain border border-white/15 bg-surface-1 shadow-2xl"
+            className="nlm-mobile-menu animate-menu-drop mx-auto max-h-[calc(100vh-5.25rem)] max-w-xl overflow-y-auto overscroll-contain border border-[#F6F1E7]/15 bg-[#050505]"
           >
-          <div className="flex items-center justify-between border-b border-white/10 px-5 py-3">
-            <span className="font-sans text-xs font-semibold uppercase tracking-[0.16em] text-champagne">{menuCopy.menu}</span>
+          <div className="flex items-center justify-between border-b border-[#F6F1E7]/12 px-5 py-3">
+            <span className="font-sans text-xs font-semibold uppercase tracking-[0.14em] text-[#EAE3D5]">{menuCopy.menu}</span>
             <button
               type="button"
               onClick={() => {
                 setIsMobileMenuOpen(false);
                 window.requestAnimationFrame(() => mobileMenuTriggerRef.current?.focus());
               }}
-              className="flex h-11 w-11 items-center justify-center rounded-lg text-white/75 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne"
+              className="flex h-11 w-11 items-center justify-center rounded-lg text-[#F6F1E7]/75 transition-colors hover:bg-white/10 hover:text-[#F6F1E7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F1E7]"
               aria-label={menuCopy.close}
             >
               <X className="h-5 w-5" aria-hidden="true" />
@@ -355,7 +371,7 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
               return (
                 <div
                   key={link.name}
-                  className="animate-menu-item flex items-center justify-between border-b border-white/5 last:border-0"
+                  className="animate-menu-item flex items-center justify-between border-b border-[#F6F1E7]/8 last:border-0"
                   style={{ animationDelay: `${Math.min(i, 6) * 30}ms` }}
                 >
                   <Link
@@ -365,8 +381,8 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
                     aria-current={isActive ? 'page' : undefined}
                     className={`flex-1 text-base font-medium tracking-widest transition-colors duration-300 block py-3.5 min-h-[44px] ${
                       isGold
-                        ? 'text-champagne'
-                        : isActive ? 'text-champagne' : 'text-white hover:text-champagne active:text-champagne'
+                        ? 'text-[#F6F1E7] font-semibold'
+                        : isActive ? 'text-[#F6F1E7]' : 'text-[#C2B9AA] hover:text-[#F6F1E7]'
                     }`}
                   >
                     {link.name}
@@ -377,7 +393,7 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
                         setIsMobileMenuOpen(false);
                         setDrawerOpen(true);
                       }}
-                      className="flex items-center justify-center w-8 h-8 rounded-full bg-champagne text-charcoal text-xs font-bold"
+                      className="flex items-center justify-center w-8 h-8 rounded-full bg-[#F6F1E7] text-[#050505] text-xs font-bold"
                       aria-label={favoritesTitle}
                     >
                       {favorites.length}
@@ -393,12 +409,12 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="mt-4 flex items-center justify-center gap-2 bg-champagne text-black font-bold text-sm tracking-[0.08em] uppercase py-3.5 min-h-[48px] active:scale-[0.98] transition-transform"
+              className="mt-4 flex items-center justify-center gap-2 bg-[#25D366] text-[#050505] font-bold text-sm tracking-[0.08em] uppercase py-3.5 min-h-[48px] active:scale-[0.98] transition-transform"
             >
               <MessageCircle className="w-4 h-4" />
               {bookingLabel}
             </a>
-            <p className="text-center text-white/50 text-[11px] tracking-widest mt-2.5">
+            <p className="text-center text-[#C2B9AA] text-[11px] tracking-widest mt-2.5">
               <bdi dir="ltr">{SITE_CONTACT.whatsapp.number}</bdi> · {infoCopy.disclaimer}
             </p>
           </nav>

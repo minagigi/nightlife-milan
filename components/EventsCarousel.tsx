@@ -49,7 +49,7 @@ function CarouselInner({ items, lang, showTonightTag }: EventsCarouselProps) {
   return (
     <div className="relative max-w-7xl mx-auto">
       {/* Fade — right edge (indica che si può scorrere) */}
-      <div className="pointer-events-none absolute right-0 top-0 bottom-4 w-16 bg-gradient-to-l from-[#131009] to-transparent z-10 hidden sm:block" />
+      <div className="pointer-events-none absolute right-0 top-0 bottom-4 w-16 bg-gradient-to-l from-[#050505] to-transparent z-10 hidden sm:block" />
 
       {/* Scroll track */}
       <div

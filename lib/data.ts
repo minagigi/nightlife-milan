@@ -2,7 +2,7 @@ import { Event, Venue, Performer, MusicGenre, MilanZone, VenueCategory, Guide, Z
 import { MOCK_EVENT_I18N } from '@/lib/mockEventI18n';
 import { GUIDE_I18N } from '@/lib/guideI18n.generated';
 import { EXTRA_100_GUIDES, populateGuideSlugs35 } from '@/lib/guides100Catalog';
-import { VENUE_SLUGS_35, resolveVenueSlug, ALL_35_LOCALES, sanitizeAsciiSlug, SLUG_TOKENS_35 } from '@/lib/i18n/localizedSlugs35';
+import { VENUE_SLUGS_35, resolveVenueSlug, ALL_35_LOCALES, sanitizeAsciiSlug, SLUG_TOKENS_35, registerMockEventSlugs35 } from '@/lib/i18n/localizedSlugs35';
 import { GUIDE_HERO_IMAGES_114 } from '@/lib/guideImagesMap114';
 
 // Mock Data for Zones
@@ -2764,6 +2764,7 @@ for (const ev of mockEvents) {
       ev.localizedContent.slug[loc] = sanitizeAsciiSlug(`${baseSlug}-${tk.milan}-${tk.party}`);
     }
   }
+  registerMockEventSlugs35(ev.localizedContent.slug);
 }
 export const events: Event[] = mockEvents;
 export const guides: Guide[] = mockGuides;
@@ -2795,6 +2796,9 @@ for (const guide of mockGuides) {
 }
 
 export const getGuideBySlug = (slug: string, lang: string): Guide | undefined => {
+  if (slug === 'san-siro-football-afterparties-guide') {
+    slug = 'san-siro-football-match-afterparties-inter-ac-milan';
+  }
   // Stesso bug fix di getEventBySlug: riconosce entrambi gli slug a prescindere da lang.
   return mockGuides.find(g =>
     g.slugs.en === slug ||

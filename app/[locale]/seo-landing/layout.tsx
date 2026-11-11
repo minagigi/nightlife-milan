@@ -57,7 +57,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="it" className={`${inter.variable} scroll-smooth`}>
-      <body className="font-sans antialiased bg-[#131009] text-white min-h-screen flex flex-col">
+      <body className="font-sans antialiased bg-[#050505] text-white min-h-screen flex flex-col">
         {/* Skip to main content per accessibilità (A11y) */}
         <a 
           href="#main-content" 
@@ -66,7 +66,7 @@ export default function RootLayout({
           Salta al contenuto principale
         </a>
         
-        <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-[#131009]/80 border-b border-white/10">
+        <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-[#050505]/80 border-b border-white/10">
           <div className="container mx-auto px-4 h-16 flex items-center justify-between">
             <span className="text-xl font-bold text-champagne">Nightlife Milan</span>
             <nav aria-label="Navigazione principale">

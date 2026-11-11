@@ -13,7 +13,7 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 import { SITE_CONTACT } from '@/config/contact';
-import { getLocaleDef, hreflangAlternates, isEnabledLocale, localePrefix } from '@/lib/i18n/locales';
+import { getLocaleDef, hreflangAlternates, canonicalPageUrl, isEnabledLocale, localePrefix } from '@/lib/i18n/locales';
 import { notFound } from 'next/navigation';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
@@ -477,7 +477,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   if (!isEnabledLocale(locale)) notFound();
   const copy = getCopy(locale);
-  const canonicalUrl = `${baseUrl}${localePrefix(locale)}/vip-tables`;
+  const canonicalUrl = canonicalPageUrl(baseUrl, locale, '/vip-tables');
   const title = seoTitle(copy.metaTitle);
   const description = withWhatsApp(copy.metaDescription, locale);
 
@@ -515,7 +515,7 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
   if (!isEnabledLocale(locale)) notFound();
   const copy = getCopy(locale);
   const lp = localePrefix(locale);
-  const canonicalUrl = `${baseUrl}${lp}/vip-tables`;
+  const canonicalUrl = canonicalPageUrl(baseUrl, locale, '/vip-tables');
   const whatsappUrl = getConciergeBookingUrl(locale);
   const stepIcons = [Send, ClipboardCheck, CheckCircle2];
   const initialNow = new Date();
@@ -580,7 +580,7 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
       <section className="border-b border-[#F6F1E7]/14 px-5 pb-14 pt-20 sm:px-14 sm:pb-20 sm:pt-28">
         <div className="mx-auto max-w-[1328px] grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-7">
-            <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.24em] text-[#D6BE96]">
+            <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.24em] text-[#EAE3D5]">
               {copy.eyebrow}
             </p>
             <h1 className="mb-5 font-serif text-4xl font-normal leading-[0.96] tracking-[-0.025em] text-[#F6F1E7] sm:text-6xl">
@@ -593,7 +593,7 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
             <div className="flex flex-wrap items-center gap-4">
               <a
                 href="#tc-request-vip"
-                className="inline-flex min-h-[48px] items-center justify-center gap-3 bg-[#F6F1E7] px-8 py-4 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#050505] transition-colors hover:bg-[#D6BE96]"
+                className="inline-flex min-h-[48px] items-center justify-center gap-3 bg-[#25D366] px-8 py-4 font-mono text-xs font-bold uppercase tracking-[0.18em] text-[#050505] transition-colors hover:bg-[#20bd5a]"
               >
                 <MessageCircle className="h-4 w-4" aria-hidden="true" />
                 {copy.cta} ↓
@@ -602,7 +602,7 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-[48px] items-center justify-center gap-2 border border-[#D6BE96]/50 px-6 py-4 font-mono text-xs uppercase tracking-[0.18em] text-[#F6F1E7] transition-colors hover:border-[#F6F1E7]"
+                className="inline-flex min-h-[48px] items-center justify-center gap-2 border border-[#EAE3D5]/50 px-6 py-4 font-mono text-xs uppercase tracking-[0.18em] text-[#F6F1E7] transition-colors hover:border-[#F6F1E7]"
               >
                 WhatsApp {SITE_CONTACT.whatsapp.number} ↗
               </a>
@@ -611,8 +611,8 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
               {copy.responseNote}
             </p>
 
-            <div className="mt-8 border border-[#D6BE96]/35 bg-[#0B0A09] p-6">
-              <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.26em] text-[#D6BE96]">
+            <div className="mt-8 border border-[#EAE3D5]/35 bg-[#0B0A09] p-6">
+              <p className="mb-2 font-mono text-[10px] uppercase tracking-[0.26em] text-[#EAE3D5]">
                 {copy.answerLabel}
               </p>
               <p className="font-sans text-sm leading-relaxed text-[#E4DDD0] sm:text-base">
@@ -641,7 +641,7 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
       {/* ── WARM IVORY CHAPTER: 3-TIER BOTTLE CREDIT BAND (#F6F1E7) ──────── */}
       <section className="border-b border-[#050505]/15 bg-[#F6F1E7] text-[#050505] px-5 py-14 sm:px-14 sm:py-20">
         <div className="mx-auto max-w-[1328px]">
-          <p className="mb-2 font-mono text-xs font-semibold uppercase tracking-[0.26em] text-[#5C4624]">
+          <p className="mb-2 font-mono text-xs font-semibold uppercase tracking-[0.26em] text-[#3D372E]">
             {copy.tiersEyebrow}
           </p>
           <h2 className="mb-10 font-serif text-3xl font-normal tracking-[-0.02em] text-[#050505] sm:text-5xl">
@@ -654,7 +654,7 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
                 className="border-r border-b border-[#050505]/15 p-7 sm:p-9 flex flex-col justify-between bg-[#F6F1E7]"
               >
                 <div>
-                  <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-[#5C4624]">
+                  <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-[#3D372E]">
                     {tier.badge}
                   </p>
                   <h3 className="mt-2 font-serif text-2xl text-[#050505] sm:text-3xl">
@@ -663,7 +663,7 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
                   <p className="mt-4 font-serif text-3xl font-bold text-[#050505] sm:text-4xl">
                     {tier.price}
                   </p>
-                  <p className="mt-1 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[#5C4624]">
+                  <p className="mt-1 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[#3D372E]">
                     {tier.passes}
                   </p>
                   <p className="mt-4 font-sans text-sm leading-relaxed text-[#2C2823]">
@@ -683,23 +683,23 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
         </div>
       </section>
 
-      {/* ── PRIORITY 6 VIP TABLE MINIMUM SPEND MATRIX ────────────────────── */}
-      <section className="border-b border-[#F6F1E7]/14 bg-[#050505] px-5 py-16 sm:px-14">
+      {/* ── PRIORITY 6 VIP TABLE MINIMUM SPEND MATRIX (#F6F1E7 Avorio Caldo) ── */}
+      <section className="border-b border-[#050505]/15 bg-[#F6F1E7] text-[#050505] px-5 py-16 sm:px-14">
         <div className="mx-auto max-w-[1328px]">
-          <p className="mb-2 font-mono text-xs uppercase tracking-[0.26em] text-[#D6BE96]">
+          <p className="mb-2 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#3D3830]">
             {copy.matrixEyebrow}
           </p>
-          <h2 className="mb-3 font-serif text-3xl text-[#F6F1E7] sm:text-5xl">
+          <h2 className="mb-3 font-serif text-3xl text-[#050505] sm:text-5xl">
             {copy.matrixTitle}
           </h2>
-          <p className="mb-8 max-w-3xl font-sans text-sm text-[#C2B9AA] sm:text-base">
+          <p className="mb-8 max-w-3xl font-sans text-sm text-[#24201B] sm:text-base">
             {copy.matrixSub}
           </p>
 
-          <div className="overflow-x-auto border border-[#F6F1E7]/14 bg-[#0B0A09]">
+          <div className="overflow-x-auto border border-[#050505]/15 bg-[#EFE9DC]">
             <table className="w-full min-w-[720px] border-collapse text-left">
               <thead>
-                <tr className="border-b border-[#F6F1E7]/14 font-mono text-[11px] uppercase tracking-[0.18em] text-[#D6BE96]">
+                <tr className="border-b border-[#050505]/15 bg-[#050505] font-mono text-[11px] uppercase tracking-[0.14em] text-[#F6F1E7]">
                   <th className="py-4 px-5">{copy.colClub}</th>
                   <th className="py-4 px-5">{copy.colDancefloor}</th>
                   <th className="py-4 px-5">{copy.colPrive}</th>
@@ -707,25 +707,25 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
                   <th className="py-4 px-5 text-right">{copy.colAction}</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#F6F1E7]/10 text-sm">
+              <tbody className="divide-y divide-[#050505]/10 text-sm">
                 {matrixRows.map((row) => (
-                  <tr key={row.id} className="hover:bg-[#12100E] transition-colors">
+                  <tr key={row.id} className="hover:bg-[#E7E0D0] transition-colors">
                     <td className="py-4 px-5">
-                      <Link href={`${lp}/clubs/${row.slug}`} prefetch={false} className="font-serif text-xl text-[#F6F1E7] hover:text-[#D6BE96] transition-colors">
+                      <Link href={`${lp}/clubs/${row.slug}`} prefetch={false} className="font-serif text-xl text-[#050505] hover:underline transition-colors">
                         {row.name}
                       </Link>
-                      <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-[#847C6F] mt-0.5">
+                      <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#3D3830] mt-0.5">
                         {row.zone}
                       </p>
                     </td>
-                    <td className="py-4 px-5 font-semibold text-[#F6F1E7]">{row.dancefloor}</td>
-                    <td className="py-4 px-5 font-semibold text-[#D6BE96]">{row.prive}</td>
-                    <td className="py-4 px-5 font-semibold text-[#F6F1E7]">{row.console}</td>
+                    <td className="py-4 px-5 font-semibold text-[#050505]">{row.dancefloor}</td>
+                    <td className="py-4 px-5 font-bold text-[#050505]">{row.prive}</td>
+                    <td className="py-4 px-5 font-semibold text-[#050505]">{row.console}</td>
                     <td className="py-4 px-5 text-right">
                       <Link
                         href={`${lp}/clubs/${row.slug}`}
                         prefetch={false}
-                        className="inline-flex min-h-[40px] items-center justify-center border border-[#D6BE96]/40 px-3.5 py-2 font-mono text-[11px] uppercase tracking-[0.16em] text-[#F6F1E7] hover:bg-[#F6F1E7] hover:text-[#050505] transition-colors"
+                        className="inline-flex min-h-[40px] items-center justify-center bg-[#050505] px-3.5 py-2 font-mono text-[11px] uppercase tracking-[0.12em] text-[#F6F1E7] hover:bg-[#1C1A17] transition-colors"
                       >
                         {copy.colAction} ↗
                       </Link>
@@ -747,19 +747,19 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
         copy={{ ...getTableConciergeSharedCopy(locale), title: copy.title, lead: copy.lead }}
       />
 
-      {/* ── WHAT EVERY VIP TABLE INCLUDES ────────────────────────────────── */}
-      <section className="px-5 py-16 sm:px-14 border-b border-[#F6F1E7]/14">
-        <div className="mx-auto max-w-[1328px] border border-[#F6F1E7]/14 bg-[#0B0A09] p-7 sm:p-12">
-          <p className="mb-3 font-mono text-xs uppercase tracking-[0.26em] text-[#D6BE96]">
+      {/* ── WHAT EVERY VIP TABLE INCLUDES (#F6F1E7 Avorio Caldo) ─────────── */}
+      <section className="px-5 py-16 sm:px-14 border-b border-[#050505]/15 bg-[#F6F1E7] text-[#050505]">
+        <div className="mx-auto max-w-[1328px]">
+          <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#3D3830]">
             {copy.factorsEyebrow}
           </p>
-          <h2 className="mb-3 font-serif text-3xl text-[#F6F1E7] sm:text-4xl">{copy.factorsTitle}</h2>
-          <p className="mb-8 max-w-2xl font-sans text-base leading-relaxed text-[#C2B9AA]">{copy.factorsLead}</p>
+          <h2 className="mb-3 font-serif text-3xl text-[#050505] sm:text-4xl">{copy.factorsTitle}</h2>
+          <p className="mb-8 max-w-2xl font-sans text-base leading-relaxed text-[#24201B]">{copy.factorsLead}</p>
           <ul className="grid gap-4 md:grid-cols-2">
             {copy.factors.map((factor) => (
-              <li key={factor} className="flex items-start gap-3 border border-[#F6F1E7]/12 bg-[#050505] p-4">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none text-[#D6BE96]" aria-hidden="true" />
-                <span className="font-sans text-sm leading-relaxed text-[#E4DDD0]">{factor}</span>
+              <li key={factor} className="flex items-start gap-3 border border-[#050505]/15 bg-[#EFE9DC] p-4">
+                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none text-[#050505]" aria-hidden="true" />
+                <span className="font-sans text-sm leading-relaxed text-[#050505]">{factor}</span>
               </li>
             ))}
           </ul>
@@ -767,9 +767,9 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
       </section>
 
       {/* ── 3-STEP BOOKING PROTOCOL ──────────────────────────────────────── */}
-      <section className="px-5 py-16 sm:px-14 border-b border-[#F6F1E7]/14">
+      <section className="px-5 py-16 sm:px-14 border-b border-[#F6F1E7]/14 bg-[#050505]">
         <div className="mx-auto max-w-[1328px]">
-          <p className="mb-3 text-center font-mono text-xs uppercase tracking-[0.26em] text-[#D6BE96]">
+          <p className="mb-3 text-center font-mono text-xs uppercase tracking-[0.14em] text-[#EAE3D5]">
             {copy.stepsEyebrow}
           </p>
           <h2 className="mb-10 text-center font-serif text-3xl text-[#F6F1E7] sm:text-4xl">{copy.stepsTitle}</h2>
@@ -779,10 +779,10 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
               return (
                 <article key={step.title} className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-7">
                   <div className="mb-5 flex items-center justify-between">
-                    <span className="flex h-11 w-11 items-center justify-center border border-[#D6BE96]/40 bg-[#050505]">
-                      <Icon className="h-5 w-5 text-[#D6BE96]" aria-hidden="true" />
+                    <span className="flex h-11 w-11 items-center justify-center border border-[#F6F1E7]/35 bg-[#050505]">
+                      <Icon className="h-5 w-5 text-[#F6F1E7]" aria-hidden="true" />
                     </span>
-                    <span className="font-serif italic text-3xl text-[#D6BE96]">0{index + 1}</span>
+                    <span className="font-serif italic text-3xl text-[#F6F1E7]">0{index + 1}</span>
                   </div>
                   <h3 className="mb-3 font-serif text-2xl text-[#F6F1E7]">{step.title}</h3>
                   <p className="font-sans text-sm leading-relaxed text-[#C2B9AA]">{step.description}</p>
@@ -791,17 +791,17 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
             })}
           </div>
 
-          <div className="mt-6 flex items-start gap-4 border border-[#D6BE96]/25 bg-[#0B0A09] p-5">
-            <ShieldCheck className="mt-0.5 h-5 w-5 flex-none text-[#D6BE96]" aria-hidden="true" />
+          <div className="mt-6 flex items-start gap-4 border border-[#F6F1E7]/20 bg-[#0B0A09] p-5">
+            <ShieldCheck className="mt-0.5 h-5 w-5 flex-none text-[#F6F1E7]" aria-hidden="true" />
             <p className="font-sans text-sm leading-relaxed text-[#C2B9AA]">{copy.notice}</p>
           </div>
         </div>
       </section>
 
       {/* ── FINAL CONCIERGE CTA ──────────────────────────────────────────── */}
-      <section className="px-5 py-20 sm:px-14">
-        <div className="mx-auto max-w-3xl border border-[#D6BE96]/35 bg-[#0B0A09] p-8 text-center sm:p-12">
-          <p className="mb-3 font-mono text-xs uppercase tracking-[0.26em] text-[#D6BE96]">
+      <section className="px-5 py-20 sm:px-14 bg-[#050505]">
+        <div className="mx-auto max-w-3xl border border-[#F6F1E7]/25 bg-[#0B0A09] p-8 text-center sm:p-12">
+          <p className="mb-3 font-mono text-xs uppercase tracking-[0.14em] text-[#EAE3D5]">
             {copy.finalEyebrow}
           </p>
           <h2 className="mb-4 font-serif text-3xl text-[#F6F1E7] sm:text-4xl">{copy.finalTitle}</h2>
@@ -811,7 +811,7 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-[48px] items-center justify-center gap-3 bg-[#F6F1E7] px-8 py-4 font-mono text-xs font-semibold uppercase tracking-[0.18em] text-[#050505] transition-colors hover:bg-[#D6BE96]"
+              className="inline-flex min-h-[48px] items-center justify-center gap-3 bg-[#25D366] px-8 py-4 font-mono text-xs font-bold uppercase tracking-[0.12em] text-[#050505] transition-colors hover:bg-[#2EE472]"
             >
               <MessageCircle className="h-5 w-5" aria-hidden="true" />
               WhatsApp {SITE_CONTACT.whatsapp.number}
@@ -819,7 +819,7 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
             <Link
               href={`${lp}/clubs`}
               prefetch={false}
-              className="inline-flex min-h-[48px] items-center justify-center gap-2 border border-[#F6F1E7]/25 px-7 py-4 font-mono text-xs uppercase tracking-[0.18em] text-[#F6F1E7] transition-colors hover:border-[#D6BE96] hover:text-[#D6BE96]"
+              className="inline-flex min-h-[48px] items-center justify-center gap-2 border border-[#F6F1E7]/30 px-7 py-4 font-mono text-xs uppercase tracking-[0.12em] text-[#F6F1E7] transition-colors hover:bg-[#F6F1E7] hover:text-[#050505]"
             >
               {copy.clubsLink}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />

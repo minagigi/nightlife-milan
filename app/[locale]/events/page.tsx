@@ -11,7 +11,7 @@ import { getCalendarControlsCopy } from '@/lib/calendarControlsCopy';
 import { getDateSensitiveInventory } from '@/lib/dateSensitiveInventory';
 import {
   getLocaleDef,
-  hreflangAlternates,
+  hreflangAlternates, canonicalPageUrl,
   localePrefix,
 } from '@/lib/i18n/locales';
 import { getEventCalendarCopy } from '@/lib/eventCalendarCopy';
@@ -33,7 +33,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const canonical = `${SITE_URL}${localePrefix(locale)}/events`;
+  const canonical = canonicalPageUrl(SITE_URL, locale, '/events');
   const editorial = applyEditorialFields({
     metaTitle: locale === 'it'
       ? 'Calendario Eventi e Serate Milano 2026/2027 | Club e Tavoli VIP'
@@ -111,12 +111,12 @@ export default async function EventsHubPage({ params }: Props) {
             <nav className="font-mono text-xs uppercase tracking-[0.18em] text-[#847C6F]" aria-label={`${labels.home} / ${labels.events}`}>
               <ol className="inline-flex list-none p-0">
                 <li className="flex items-center">
-                  <Link href={lp || '/'} prefetch={false} className="transition-colors hover:text-[#D6BE96]">
+                  <Link href={lp || '/'} prefetch={false} className="transition-colors hover:text-[#EAE3D5]">
                     {breadcrumbItems[0].name}
                   </Link>
                   <span className="mx-2" aria-hidden="true">/</span>
                 </li>
-                <li className="text-[#D6BE96]" aria-current="page">{breadcrumbItems[1].name}</li>
+                <li className="text-[#EAE3D5]" aria-current="page">{breadcrumbItems[1].name}</li>
               </ol>
             </nav>
           </div>
@@ -125,7 +125,7 @@ export default async function EventsHubPage({ params }: Props) {
         <header className="relative overflow-hidden border-b border-[#F6F1E7]/14 bg-[#0B0A09]">
           <Image quality={92} src="/images/pillars/events-hub-hero.webp" alt={editorial.heading} fill priority sizes="100vw" className="object-cover opacity-25 pointer-events-none" />
           <div className="relative z-10 mx-auto max-w-[1440px] border-x border-[#F6F1E7]/14 px-5 pb-14 pt-14 sm:px-14">
-            <p className="mb-4 font-mono text-xs uppercase tracking-[0.26em] text-[#D6BE96]">
+            <p className="mb-4 font-mono text-xs uppercase tracking-[0.26em] text-[#EAE3D5]">
               {editorial.eyebrow}
             </p>
             <h1 className="max-w-5xl font-serif text-5xl font-normal tracking-[-0.032em] leading-[0.92] text-[#F6F1E7] md:text-7xl">
@@ -134,7 +134,7 @@ export default async function EventsHubPage({ params }: Props) {
             <p className="mt-6 max-w-3xl font-sans text-base leading-relaxed text-[#C2B9AA] md:text-lg">
               {editorial.intro}
             </p>
-            <Link href={`${lp}/guest-lists`} prefetch={false} className="mt-7 inline-flex min-h-[46px] items-center gap-2 border border-[#D6BE96]/45 px-6 py-3 font-mono text-xs uppercase tracking-[0.2em] text-[#F6F1E7] transition-colors hover:bg-[#F6F1E7] hover:text-[#050505]">
+            <Link href={`${lp}/guest-lists`} prefetch={false} className="mt-7 inline-flex min-h-[46px] items-center gap-2 border border-[#EAE3D5]/45 px-6 py-3 font-mono text-xs uppercase tracking-[0.2em] text-[#F6F1E7] transition-colors hover:bg-[#F6F1E7] hover:text-[#050505]">
               {guestListsCopy.title}<ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>

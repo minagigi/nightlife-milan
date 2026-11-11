@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import { tr } from '@/lib/i18n/t';
-import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { getLocaleDef, hreflangAlternates, canonicalPageUrl, localePrefix } from '@/lib/i18n/locales';
 import { getLocalizedZoneSlug35 } from '@/lib/i18n/localizedSlugs35';
 import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
@@ -21,7 +21,7 @@ const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const isIt = locale === 'it';
-  const canonical = `${baseUrl}${localePrefix(locale)}/zones`;
+  const canonical = canonicalPageUrl(baseUrl, locale, '/zones');
 
   const title = seoTitle(tr(locale, 'Milan Nightlife Zones 2026 | Best Nightlife Districts & Areas | Nightlife Milan', 'Zone Vita Notturna Milano 2026 | Migliori Quartieri | Nightlife Milan'));
   const description = withWhatsApp(tr(locale, 'Explore Milan\'s top nightlife districts: Corso Como, Navigli, Brera, Isola, Sempione, Porta Romana. Find the best clubs, bars and events by zone. Updated 2026.', 'Esplora i migliori quartieri della vita notturna milanese: Corso Como, Navigli, Brera, Isola, Sempione, Porta Romana. Scopri club, bar ed eventi per zona. Aggiornato 2026.'), locale);
@@ -106,7 +106,7 @@ export default async function ZonesPage({
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(zonesSchema) }} />
-    <main className="flex-grow pt-24 pb-20 bg-[#131009]">
+    <main className="flex-grow pt-24 pb-20 bg-[#050505]">
       {/* Breadcrumbs */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
         <nav className="text-sm text-white/40" aria-label="Breadcrumb">

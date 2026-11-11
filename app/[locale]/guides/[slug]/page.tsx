@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { tr } from '@/lib/i18n/t';
 import { getLocaleDef, hreflangAlternates, localePrefix, indexedLocaleCodes } from '@/lib/i18n/locales';
+import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
 import { GUIDE_HERO_IMAGES_114, GUIDE_INLINE_IMAGES_114 } from '@/lib/guideImagesMap114';
 import { getLocalizedGuideSlug35 } from '@/lib/guides100Catalog';
 import { Metadata } from 'next';
@@ -91,13 +92,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const itSlug = guide.slugs.it || enSlug;
 
   const currentSlug = getLocalizedGuideSlug35(guide, (locale as LocaleCode) || 'en');
-  const path = `${localePrefix(locale)}/guides/${currentSlug}`;
+  const path = `${localePrefix(locale)}/${getLocalizedDir35('guides', locale)}/${currentSlug}`;
   const canonical = `${baseUrl}${path}`;
   const langAlternates: Record<string, string> = {
-    'x-default': `${baseUrl}/guides/${getLocalizedGuideSlug35(guide, 'en')}`,
+    'x-default': `${baseUrl}/${getLocalizedDir35('guides', 'en')}/${getLocalizedGuideSlug35(guide, 'en')}`,
   };
   for (const loc of indexedLocaleCodes) {
-    langAlternates[loc] = `${baseUrl}${localePrefix(loc)}/guides/${getLocalizedGuideSlug35(guide, loc)}`;
+    langAlternates[getLocaleDef(loc)!.hreflang] = `${baseUrl}${localePrefix(loc)}/${getLocalizedDir35('guides', loc)}/${getLocalizedGuideSlug35(guide, loc)}`;
   }
 
   return {
@@ -152,8 +153,8 @@ export default async function GuidePage({ params }: Props) {
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const langPrefix = localePrefix(locale);
-  const currentSlug = isIt ? guide.slugs.it || guide.slugs.en : guide.slugs.en;
-  const guideUrl = `${baseUrl}${langPrefix}/guides/${currentSlug}`;
+  const currentSlug = getLocalizedGuideSlug35(guide, (locale as LocaleCode) || 'en');
+  const guideUrl = `${baseUrl}${langPrefix}/${getLocalizedDir35('guides', locale)}/${currentSlug}`;
 
   const t = {
     back: tr(locale, 'Back to Guides', 'Torna alle Guide'),
@@ -252,7 +253,7 @@ export default async function GuidePage({ params }: Props) {
         />
       )}
 
-      <main className="flex-1 bg-[#131009] w-full">
+      <main className="flex-1 bg-[#050505] w-full">
         {/* Hero Article */}
         <section className="relative w-full h-[60vh] min-h-[500px] flex items-end pb-16">
           <div className="absolute inset-0 z-0">
@@ -266,7 +267,7 @@ export default async function GuidePage({ params }: Props) {
               priority
               referrerPolicy="no-referrer"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#131009] via-[#131009]/80 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent" />
           </div>
 
           <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

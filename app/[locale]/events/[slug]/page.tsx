@@ -28,7 +28,9 @@ import EditorialPageSections from '@/components/EditorialPageSections';
 import { seoRobots } from '@/lib/seoMetadata';
 import { notFound, permanentRedirect } from 'next/navigation';
 import { tr } from '@/lib/i18n/t';
-import { getLocaleDef, hreflangAlternates, indexedLocaleCodes, localePrefix, type LocaleCode } from '@/lib/i18n/locales';
+import { getLocaleDef, hreflangAlternates, indexedLocaleCodes, localePrefix, canonicalPageUrl, type LocaleCode } from '@/lib/i18n/locales';
+import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
+import { getLocalizedEventSlug35 } from '@/lib/i18n/localizedSlugs35';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
@@ -251,11 +253,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const requestedProfile = getEventBatchProfile(slug);
   if (requestedProfile?.siteLocales && !requestedProfile.siteLocales.some((siteLocale) => siteLocale === locale)) {
     const targetLocale = requestedProfile.siteLocales[0];
-    permanentRedirect(`${localePrefix(targetLocale)}/events/${getEventBatchSlug(requestedProfile, targetLocale)}`);
+    permanentRedirect(`${localePrefix(targetLocale)}/${getLocalizedDir35('events', targetLocale)}/${getEventBatchSlug(requestedProfile, targetLocale)}`);
   }
   if (requestedProfile?.siteLocales?.includes(locale as LocaleCode)) {
     const canonicalSlug = getEventBatchSlug(requestedProfile, locale as LocaleCode);
-    if (normalizeEventBatchSlug(slug) !== canonicalSlug) permanentRedirect(`${localePrefix(locale)}/events/${canonicalSlug}`);
+    if (normalizeEventBatchSlug(slug) !== canonicalSlug) permanentRedirect(`${localePrefix(locale)}/${getLocalizedDir35('events', locale)}/${canonicalSlug}`);
   }
   
   const weeklyEvent = getWeeklyEventBySlug(slug);
@@ -273,15 +275,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       dateISO: nextDateISO,
       summary: locale === 'it' ? weeklyEvent.description.it : weeklyEvent.description.en,
     });
+    const weeklyCanonicalSlug = `${weeklyEvent.clubSlug}-${weeklyEvent.day}-${weeklyEvent.eventSlug}`;
     const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-    const canonical = `${baseUrl}${localePrefix(locale)}/events/${slug}`;
+    const canonical = canonicalPageUrl(baseUrl, locale, `/events/${weeklyCanonicalSlug}`);
 
     return {
       title,
       description,
       alternates: {
         canonical,
-        languages: hreflangAlternates(baseUrl, `/events/${slug}`),
+        languages: hreflangAlternates(baseUrl, `/events/${weeklyCanonicalSlug}`),
       },
       robots: getLocaleDef(locale)?.indexed === false ? { index: false, follow: true } : { index: true, follow: true },
       openGraph: {
@@ -339,8 +342,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   
   const currentSlug = eventProfile && eventProfile.siteLocales?.includes(locale as LocaleCode)
     ? getEventBatchSlug(eventProfile, locale as LocaleCode)
-    : locale === 'it' ? itSlug : enSlug;
-  const path = `${localePrefix(locale)}/events/${currentSlug}`;
+    : getLocalizedEventSlug35(enSlug, (locale as LocaleCode) || 'en');
+  const path = `${localePrefix(locale)}/${getLocalizedDir35('events', locale)}/${currentSlug}`;
   const canonical = `${baseUrl}${path}`;
   const indexedSiteLocales = eventProfile?.indexedLocales
     || eventProfile?.siteLocales?.filter((siteLocale) => indexedLocaleCodes.includes(siteLocale));
@@ -348,14 +351,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ? Object.fromEntries([
         ...(indexedSiteLocales || []).map((siteLocale) => [
           getLocaleDef(siteLocale)?.hreflang || siteLocale,
-          `${baseUrl}${localePrefix(siteLocale)}/events/${getEventBatchSlug(eventProfile, siteLocale)}`,
+          `${baseUrl}${localePrefix(siteLocale)}/${getLocalizedDir35('events', siteLocale)}/${getEventBatchSlug(eventProfile, siteLocale)}`,
         ] as const),
         [
           'x-default',
-          `${baseUrl}${localePrefix(eventProfile.siteLocales[0])}/events/${getEventBatchSlug(eventProfile, eventProfile.siteLocales[0])}`,
+          `${baseUrl}${localePrefix(eventProfile.siteLocales[0])}/${getLocalizedDir35('events', eventProfile.siteLocales[0])}/${getEventBatchSlug(eventProfile, eventProfile.siteLocales[0])}`,
         ] as const,
       ])
-    : { ...hreflangAlternates(baseUrl, `/events/${enSlug}`), it: `${baseUrl}/it/events/${itSlug}` };
+    : hreflangAlternates(baseUrl, `/events/${enSlug}`);
   const socialImageDimensions = socialImage?.src.includes('just-me-world-cup-final-cover-2x1-')
     || socialImage?.src.includes('gue-just-me-2026-07-25-cover-2x1-')
     ? { width: 2000, height: 1000 }
@@ -420,16 +423,16 @@ export default async function EventPage({ params }: Props) {
   }
   const octoberEvent = getOctoberEventBySlug(slug, locale as LocaleCode);
   if (octoberEvent) return <OctoberEventPage event={octoberEvent} locale={locale as LocaleCode} initialNow={new Date().toISOString()}>
-    <EditorialPageSections locale={locale as LocaleCode} path={`${localePrefix(locale)}/events/${slug}`} />
+    <EditorialPageSections locale={locale as LocaleCode} path={`${localePrefix(locale)}/${getLocalizedDir35('events', locale)}/${slug}`} />
   </OctoberEventPage>;
   const requestedProfile = getEventBatchProfile(slug);
   if (requestedProfile?.siteLocales && !requestedProfile.siteLocales.some((siteLocale) => siteLocale === locale)) {
     const targetLocale = requestedProfile.siteLocales[0];
-    permanentRedirect(`${localePrefix(targetLocale)}/events/${getEventBatchSlug(requestedProfile, targetLocale)}`);
+    permanentRedirect(`${localePrefix(targetLocale)}/${getLocalizedDir35('events', targetLocale)}/${getEventBatchSlug(requestedProfile, targetLocale)}`);
   }
   if (requestedProfile?.siteLocales?.includes(locale as LocaleCode)) {
     const canonicalSlug = getEventBatchSlug(requestedProfile, locale as LocaleCode);
-    if (normalizeEventBatchSlug(slug) !== canonicalSlug) permanentRedirect(`${localePrefix(locale)}/events/${canonicalSlug}`);
+    if (normalizeEventBatchSlug(slug) !== canonicalSlug) permanentRedirect(`${localePrefix(locale)}/${getLocalizedDir35('events', locale)}/${canonicalSlug}`);
   }
   
   const weeklyEvent = getWeeklyEventBySlug(slug);
@@ -457,6 +460,7 @@ export default async function EventPage({ params }: Props) {
       '@type': 'Event',
       name: title,
       description: description,
+      url: canonicalPageUrl(baseUrl, locale, `/events/${weeklyEvent.clubSlug}-${weeklyEvent.day}-${weeklyEvent.eventSlug}`),
       startDate: startDateISO,
       endDate: endDateISO,
       eventStatus: 'https://schema.org/EventScheduled',
@@ -502,7 +506,7 @@ export default async function EventPage({ params }: Props) {
     };
 
     return (
-      <main className="min-h-screen bg-[#131009] text-white">
+      <main className="min-h-screen bg-[#050505] text-white">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -844,7 +848,7 @@ export default async function EventPage({ params }: Props) {
             className={eventVisualGallery ? 'object-contain bg-black' : 'object-cover'}
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#131009] via-[#131009]/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent" />
           
           <div className="absolute bottom-0 left-0 w-full p-6 md:p-12 max-w-7xl mx-auto">
             <div className="flex items-center gap-3 mb-4">

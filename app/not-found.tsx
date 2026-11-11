@@ -2,7 +2,7 @@ import Link from '@/components/LocalizedLink';
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen bg-[#131009] flex items-center justify-center px-4">
+    <main className="min-h-screen bg-[#050505] flex items-center justify-center px-4">
       <div className="text-center max-w-lg">
         <p className="text-champagne/40 font-sans text-[11px] tracking-[0.4em] uppercase mb-6">
           Error 404

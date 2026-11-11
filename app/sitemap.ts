@@ -10,8 +10,16 @@ import { CAPODANNO_EVENTS } from '@/lib/capodannoEvents';
 import { CAPODANNO_CATEGORY_IDS, capodannoCategoryPath, capodannoEventPath } from '@/lib/capodanno/routes';
 import { halloweenPath } from '@/lib/halloween/routes';
 import { OCTOBER_EVENTS } from '@/lib/octoberEvents';
-import { getOctoberEventCopy } from '@/lib/october-events/copy';
-import { getLocalizedZoneSlug35, getLocalizedGenreSlug35, getLocalizedSeoPagePath35 } from '@/lib/i18n/localizedSlugs35';
+import { octoberEventCanonical } from '@/lib/octoberEventSeo';
+import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
+import {
+  getExistingGuideSlug35,
+  getLocalizedEventSlug35,
+  getLocalizedGenreSlug35,
+  getLocalizedSeoPagePath35,
+  getLocalizedVenueSlug35,
+  getLocalizedZoneSlug35,
+} from '@/lib/i18n/localizedSlugs35';
 
 export const revalidate = false;
 
@@ -77,8 +85,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: '/fashion-week', priority: 0.9, changeFrequency: 'weekly' as const },
     { path: '/milan-fashion-week', priority: 0.9, changeFrequency: 'weekly' as const },
     { path: '/milan-fashion-week/calendar', priority: 0.85, changeFrequency: 'weekly' as const },
-    { path: '/guides/san-siro-football-afterparties-guide', priority: 0.92, changeFrequency: 'weekly' as const },
-    { path: '/guides/san-siro-football-match-afterparties-inter-ac-milan', priority: 0.9, changeFrequency: 'weekly' as const },
     { path: '/privacy', priority: 0.2, changeFrequency: 'yearly' as const },
     { path: '/terms', priority: 0.2, changeFrequency: 'yearly' as const },
   ];
@@ -93,14 +99,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         changeFrequency: route.changeFrequency,
         priority: route.priority,
       });
-      if (locPath !== route.path && route.path === '/football-afterparties') {
-        sitemapEntries.push({
-          url: `${baseUrl}${langPrefix}${route.path}`,
-          lastModified: contentModified,
-          changeFrequency: route.changeFrequency,
-          priority: route.priority,
-        });
-      }
     });
   });
 
@@ -108,9 +106,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   mockVenues.forEach((venue) => {
     locales.forEach((locale) => {
       const langPrefix = localePrefix(locale);
-      const slug = getLocalizedText(venue.slugs, locale);
+      const slug = getLocalizedVenueSlug35(venue.slugs.en, locale);
       sitemapEntries.push({
-        url: `${baseUrl}${langPrefix}/clubs/${slug}`,
+        url: `${baseUrl}${langPrefix}/${getLocalizedDir35('clubs', locale)}/${slug}`,
         lastModified: contentModified,
         changeFrequency: 'weekly',
         priority: 0.85,
@@ -122,9 +120,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   mockGuides.forEach((guide) => {
     locales.forEach((locale) => {
       const langPrefix = localePrefix(locale);
-      const slug = getLocalizedText(guide.slugs, locale);
+      const slug = getExistingGuideSlug35(guide.id, locale) || getLocalizedText(guide.slugs, locale);
       sitemapEntries.push({
-        url: `${baseUrl}${langPrefix}/guides/${slug}`,
+        url: `${baseUrl}${langPrefix}/${getLocalizedDir35('guides', locale)}/${slug}`,
         lastModified: guide.dateModified ? new Date(guide.dateModified) : new Date(guide.datePublished),
         changeFrequency: 'weekly',
         priority: 0.85,
@@ -138,7 +136,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const langPrefix = localePrefix(locale);
       const slug = getLocalizedText(event.localizedContent.slug, locale);
       sitemapEntries.push({
-        url: `${baseUrl}${langPrefix}/events/${slug}`,
+        url: `${baseUrl}${langPrefix}/${getLocalizedDir35('events', locale)}/${slug}`,
         lastModified: new Date(event.dateISO),
         changeFrequency: 'daily',
         priority: 0.9,
@@ -150,7 +148,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   OCTOBER_EVENTS.forEach((event) => {
     locales.forEach((locale) => {
       sitemapEntries.push({
-        url: `${baseUrl}${localePrefix(locale)}/events/${getOctoberEventCopy(event, locale).slug}`,
+        url: octoberEventCanonical(event, locale),
         lastModified: contentModified,
         changeFrequency: 'daily',
         priority: 0.9,
@@ -180,7 +178,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       || (profile.siteLocales || []).filter((siteLocale) => indexedLocaleCodes.includes(siteLocale));
     indexedSiteLocales.forEach((siteLocale) => {
       sitemapEntries.push({
-        url: `${baseUrl}${localePrefix(siteLocale)}/events/${getEventBatchSlug(profile, siteLocale)}`,
+        url: `${baseUrl}${localePrefix(siteLocale)}/${getLocalizedDir35('events', siteLocale)}/${getEventBatchSlug(profile, siteLocale)}`,
         lastModified: new Date(`${profile.dateISO}T00:00:00+02:00`),
         changeFrequency: 'daily',
         priority: 0.9,
@@ -193,7 +191,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     locales.forEach((locale) => {
       const langPrefix = localePrefix(locale);
       sitemapEntries.push({
-        url: `${baseUrl}${langPrefix}/zones/${getLocalizedZoneSlug35(zone.slug, locale)}`,
+        url: `${baseUrl}${langPrefix}/${getLocalizedDir35('zones', locale)}/${getLocalizedZoneSlug35(zone.slug, locale)}`,
         lastModified: contentModified,
         changeFrequency: 'monthly',
         priority: 0.75,
@@ -207,7 +205,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     locales.forEach((locale) => {
       const langPrefix = localePrefix(locale);
       sitemapEntries.push({
-        url: `${baseUrl}${langPrefix}/genres/${getLocalizedGenreSlug35(slug, locale)}`,
+        url: `${baseUrl}${langPrefix}/${getLocalizedDir35('genres', locale)}/${getLocalizedGenreSlug35(slug, locale)}`,
         lastModified: contentModified,
         changeFrequency: 'weekly',
         priority: 0.7,
@@ -219,9 +217,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   weeklyEvents.forEach((event) => {
     locales.forEach((locale) => {
       const langPrefix = localePrefix(locale);
-      const slug = `${event.clubSlug}-${event.day}-${event.eventSlug}`;
+      const rawSlug = `${event.clubSlug}-${event.day}-${event.eventSlug}`;
+      const locSlug = getLocalizedEventSlug35(rawSlug, locale);
       sitemapEntries.push({
-        url: `${baseUrl}${langPrefix}/events/${slug}`,
+        url: `${baseUrl}${langPrefix}/${getLocalizedDir35('events', locale)}/${locSlug}`,
         lastModified: contentModified,
         changeFrequency: 'weekly',
         priority: 0.85,

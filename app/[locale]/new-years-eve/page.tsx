@@ -8,7 +8,7 @@ import { tr } from '@/lib/i18n/t';
 import {
   INDEXED_LOCALES,
   getLocaleDef,
-  hreflangAlternates,
+  hreflangAlternates, canonicalPageUrl,
   localePrefix,
 } from '@/lib/i18n/locales';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
@@ -52,7 +52,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const canonical = `${baseUrl}${localePrefix(locale)}/new-years-eve`;
+  const canonical = canonicalPageUrl(baseUrl, locale, '/new-years-eve');
 
   const title = seoTitle(
     tr(
@@ -383,7 +383,7 @@ export default async function NewYearsEvePage({
   const isIt = locale === 'it';
   const venueMapCopy = getEventVenueCopy(locale as LocaleCode);
   const lp = localePrefix(locale);
-  const canonicalUrl = `${baseUrl}${lp}/new-years-eve`;
+  const canonicalUrl = canonicalPageUrl(baseUrl, locale, '/new-years-eve');
 
   const faqs = [
     {
@@ -1061,9 +1061,9 @@ export default async function NewYearsEvePage({
           </div>
 
           {/* Dress Code Black Tie / Cocktail Elegante */}
-          <div className="rounded-3xl border border-amber-500/35 bg-gradient-to-b from-[#1b1409] to-[#0e0b06] p-7 sm:p-10 flex flex-col justify-between">
+          <div className="border border-[#F6F1E7]/20 bg-[#0B0A09] p-7 sm:p-10 flex flex-col justify-between">
             <div>
-              <span className="font-mono text-xs uppercase tracking-[0.22em] text-amber-300 block mb-2">
+              <span className="font-mono text-xs uppercase tracking-[0.22em] text-[#EAE3D5] block mb-2">
                 {isIt ? 'SEZIONE 3B · SELEZIONE DI GALA ALLA PORTA' : 'SECTION 3B · NYE GALA DOOR POLICY'}
               </span>
               <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-4">
@@ -1107,7 +1107,7 @@ export default async function NewYearsEvePage({
                   </span>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <ShieldCheck className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                  <ShieldCheck className="w-4 h-4 text-[#EAE3D5] shrink-0 mt-0.5" />
                   <span>
                     {isIt ? (
                       <>

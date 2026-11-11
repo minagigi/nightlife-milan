@@ -5,7 +5,7 @@ import { CalendarDays, Check, Clock, MessageCircle, Users } from 'lucide-react';
 import EventCard from '@/components/EventCard';
 import { CONTACT } from '@/config/contact';
 import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
-import { getLocaleDef, hreflangAlternates, localePrefix } from '@/lib/i18n/locales';
+import { getLocaleDef, hreflangAlternates, localePrefix, canonicalPageUrl } from '@/lib/i18n/locales';
 import { generateEventListSchema, getLocalizedText, jsonLdString } from '@/lib/seo';
 import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
@@ -226,7 +226,7 @@ export function buildIntentMetadata(intent: EventIntent, locale: string): Metada
   const config = INTENTS[intent];
   const lang = coreLocale(locale);
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const canonical = `${baseUrl}${localePrefix(locale)}/events/${intent}`;
+  const canonical = canonicalPageUrl(baseUrl, locale, `/events/${intent}`);
   const title = seoTitle(config.title[lang]);
   const description = withWhatsApp(config.description[lang], locale);
   return {
@@ -289,7 +289,7 @@ export default async function EventIntentLanding({ intent, locale }: { intent: E
   };
 
   return (
-    <main className="min-h-screen bg-[#131009] text-white pb-20">
+    <main className="min-h-screen bg-[#050505] text-white pb-20">
       {itemListSchema && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(itemListSchema) }} />
       )}
@@ -297,7 +297,7 @@ export default async function EventIntentLanding({ intent, locale }: { intent: E
 
       <section className="relative min-h-[620px] h-[78svh] max-h-[840px] flex items-end overflow-hidden">
         <Image src={config.hero} alt={config.heading[lang]} fill priority quality={92} sizes="100vw" className="object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#131009] via-[#131009]/65 to-black/15" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/65 to-black/15" />
         <div className="relative z-10 w-full max-w-6xl mx-auto px-5 sm:px-8 pb-14 sm:pb-20">
           <nav className="text-xs text-white/50 mb-8" aria-label="Breadcrumb">
             <Link href={lp || '/'} className="hover:text-champagne">Home</Link>

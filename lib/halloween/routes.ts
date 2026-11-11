@@ -1,8 +1,13 @@
-import { enabledLocaleCodes, localePrefix, type LocaleCode } from '@/lib/i18n/locales';
+import { enabledLocaleCodes, localePrefix, type LocaleCode } from '@/lib/i18n/localeRegistry';
+import { getLocalizedDir35, isLocalizedEventsDir } from '@/lib/i18n/dirTokens35';
 import { HALLOWEEN_NAVIGATION } from './navigation';
 import type { HalloweenNavigation, HalloweenNavigationPack } from './types';
 
 export const HALLOWEEN_LEGACY_SLUG = 'halloween-2026';
+const ALL_HALLOWEEN_SLUGS = new Set<string>([
+  HALLOWEEN_LEGACY_SLUG,
+  ...Object.values(HALLOWEEN_NAVIGATION).map((v) => v.slug),
+]);
 export function validateHalloweenNavigation(pack: Partial<HalloweenNavigationPack>): HalloweenNavigationPack {
   if (Object.keys(pack).length !== enabledLocaleCodes.length) throw new Error('Halloween requires all 35 native navigation entries');
   for (const locale of enabledLocaleCodes) {
@@ -21,15 +26,27 @@ export function halloweenNavigation(locale: string): HalloweenNavigation {
   return value;
 }
 export function halloweenPath(locale: string): string {
-  return `${localePrefix(locale)}/events/${halloweenNavigation(locale).slug}`;
+  return `${localePrefix(locale)}/${getLocalizedDir35('events', locale)}/${halloweenNavigation(locale).slug}`;
 }
 export function halloweenLanguagePaths(): Record<LocaleCode, string> {
   return Object.fromEntries(enabledLocaleCodes.map(locale => [locale, halloweenPath(locale)])) as Record<LocaleCode, string>;
 }
 /** Resolve only an exact native destination or the already published alias. */
 export function isHalloweenPath(pathname: string): boolean {
-  return enabledLocaleCodes.some(locale => pathname === halloweenPath(locale)
-    || pathname === `${localePrefix(locale)}/events/${HALLOWEEN_LEGACY_SLUG}`);
+  const clean = pathname.replace(/\/$/, '');
+  const parts = clean.split('/').filter(Boolean);
+  if (parts.length === 2 && isLocalizedEventsDir(parts[0]) && ALL_HALLOWEEN_SLUGS.has(parts[1])) {
+    return true;
+  }
+  if (
+    parts.length === 3
+    && enabledLocaleCodes.includes(parts[0] as LocaleCode)
+    && isLocalizedEventsDir(parts[1])
+    && ALL_HALLOWEEN_SLUGS.has(parts[2])
+  ) {
+    return true;
+  }
+  return false;
 }
 export function halloweenAlternatePath(pathname: string, targetLocale: string): string | null {
   return enabledLocaleCodes.includes(targetLocale as LocaleCode) && isHalloweenPath(pathname)

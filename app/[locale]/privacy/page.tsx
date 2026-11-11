@@ -1,18 +1,39 @@
 import { Metadata } from 'next';
 import { tr } from '@/lib/i18n/t';
+import { canonicalPageUrl, getLocaleDef, hreflangAlternates } from '@/lib/i18n/locales';
 
 export const revalidate = 86400;
 
-export const metadata: Metadata = {
-  title: 'Privacy Policy | Nightlife Milan',
-  description: 'Privacy Policy for Nightlife Milan.',
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
+  const canonical = canonicalPageUrl(baseUrl, locale, '/privacy');
+  const title = tr(locale, 'Privacy Policy | Nightlife Milan', 'Informativa sulla Privacy | Nightlife Milan');
+  const description = tr(locale, 'Privacy Policy for Nightlife Milan.', 'Informativa sulla Privacy di Nightlife Milan.');
+  return {
+    title,
+    description,
+    robots: getLocaleDef(locale)?.indexed === false ? { index: false, follow: true } : { index: true, follow: true },
+    alternates: {
+      canonical,
+      languages: hreflangAlternates(baseUrl, '/privacy'),
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      type: 'website',
+      siteName: 'Nightlife Milan',
+      locale: getLocaleDef(locale)?.ogLocale || 'en_US',
+    },
+  };
+}
 
 export default async function PrivacyPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
 
   return (
-    <main className="flex-1 bg-[#131009] w-full py-24 px-4 sm:px-6 lg:px-8">
+    <main className="flex-1 bg-[#050505] w-full py-24 px-4 sm:px-6 lg:px-8">
       <article className="max-w-3xl mx-auto prose prose-invert prose-lg">
         <h1 className="font-serif text-4xl md:text-5xl font-bold text-champagne mb-8">
           {tr(locale, 'Privacy Policy', 'Informativa sulla Privacy')}

@@ -7,6 +7,7 @@ import HeadingIndex from './HeadingIndex';
 import EditorialPageSections from './EditorialPageSections';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { enabledLocaleCodes, getLocaleDef, localePrefix, type LocaleCode } from '@/lib/i18n/locales';
+import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
 import { getHalloween2026Copy } from '@/lib/halloween2026';
 import { HALLOWEEN_CONTENT, HALLOWEEN_ASSETS } from '@/lib/halloween/content';
 import { validateHalloweenContent } from '@/lib/halloween/contract';
@@ -78,7 +79,7 @@ export default async function HalloweenHub({ locale }: { locale: LocaleCode }) {
     const text = canonical ? await readOctoberEventCopy(canonical, locale) : null;
     const affiliate = event.affiliateUrl;
     const dateLabels = event.dates.map(date => new Intl.DateTimeFormat(locale, {dateStyle:'long',timeZone:'UTC'}).format(new Date(date+'T12:00:00Z')));
-    return { id: event.id, href: text ? `${localePrefix(locale)}/events/${text.slug}` : `#${halloweenEventAnchor(event.id)}`, title: event.title,
+    return { id: event.id, href: text ? `${localePrefix(locale)}/${getLocalizedDir35('events', locale)}/${text.slug}` : `#${halloweenEventAnchor(event.id)}`, title: event.title,
       canonicalDetail: Boolean(canonical), anchorId: halloweenEventAnchor(event.id),
       statusBadge: scarcity.almostSoldOutBadge,
       openEventCtaLabel: scarcity.openEventCardCta,
@@ -107,14 +108,14 @@ export default async function HalloweenHub({ locale }: { locale: LocaleCode }) {
     halloweenItemList(body.h1, halloweenPath(locale), cards),
     { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: body.faqs.map(faq => ({ '@type': 'Question', name: faq.question, acceptedAnswer: { '@type': 'Answer', text: faq.answer } })) },
   ];
-  return <main className="tc-page min-h-screen bg-[#131009] pb-24 text-white" data-halloween-hub>
+  return <main className="tc-page min-h-screen bg-[#050505] pb-24 text-white" data-halloween-hub>
     {graph.map((item, index) => <script key={index} type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(item) }} />)}
     <div className="mx-auto max-w-7xl px-5 py-12 lg:px-8">
       <nav aria-label={homeLabel} className="mb-8 text-base"><Link href={localePrefix(locale) || '/'} className="underline underline-offset-4">{homeLabel}</Link><span aria-hidden="true"> / </span><span aria-current="page">{body.h1}</span></nav>
       <header><p className="text-base font-semibold text-champagne">Nightlife Milan</p><h1 data-event-title={body.h1} className="mt-4 max-w-4xl font-serif text-4xl font-bold leading-tight sm:text-5xl">{body.h1}</h1></header>
-      <div role="alert" data-urgency-alert className="mt-8 rounded-2xl border-2 border-amber-400/70 bg-gradient-to-r from-amber-500/20 via-amber-500/10 to-transparent p-5 sm:p-6 shadow-lg">
-        <p className="text-sm font-extrabold uppercase tracking-wider text-amber-300 sm:text-base">{scarcity.urgencyAlertTitle}</p>
-        <p className="mt-2 text-sm leading-relaxed text-white/90 sm:text-base">{scarcity.urgencyAlertBody}</p>
+      <div role="alert" data-urgency-alert className="mt-8 border border-[#050505]/20 bg-[#F6F1E7] text-[#050505] p-5 sm:p-6">
+        <p className="text-sm font-extrabold uppercase tracking-wider text-[#050505] sm:text-base">{scarcity.urgencyAlertTitle}</p>
+        <p className="mt-2 text-sm leading-relaxed text-[#1F1C18] sm:text-base">{scarcity.urgencyAlertBody}</p>
       </div>
     </div>
     {featuredCards.length && selection ? <section className="mx-auto max-w-7xl px-5 lg:px-8" aria-labelledby="halloween-featured-heading" data-halloween-featured>
@@ -123,7 +124,7 @@ export default async function HalloweenHub({ locale }: { locale: LocaleCode }) {
       <ol className="mt-8 grid items-start gap-6 sm:grid-cols-2 xl:grid-cols-4">{featuredCards.map(card => {
         const details = <>
           {card.image ? <Image quality={92} src={card.image.src} alt={card.image.alt} title={card.image.alt} width={card.image.width} height={card.image.height} priority={card.id===featuredCards[0].id} sizes="(max-width: 639px) 100vw, (max-width: 1279px) 50vw, 38vw" className="block h-auto w-full bg-black/30 object-contain"/> : null}
-          <div className="p-5"><div className="flex flex-wrap gap-2"><span className="inline-flex rounded-full bg-champagne px-3 py-1 text-sm font-semibold text-black">{selection.recommendedLabel}</span><span className="inline-flex rounded-full border border-amber-400/70 bg-amber-500/20 px-3 py-1 text-xs font-bold uppercase tracking-wider text-amber-300" data-selling-fast-badge>{scarcity.almostSoldOutBadge}</span></div><p className="mt-4 text-base text-champagne">{card.dateLabel}</p><p data-halloween-featured-hours={card.id} className="mt-2 text-base text-white/80">{featuredViews.get(card.id)!.labels.hours}: {featuredViews.get(card.id)!.hours}</p><h3 className="mt-3 font-serif text-2xl font-bold leading-tight">{card.title}</h3><p className="mt-3 text-base text-white/80">{card.venueName}</p><p data-halloween-featured-summary={card.id} className="mt-4 text-base leading-7 text-white/75">{card.summary}</p></div>
+          <div className="p-5"><div className="flex flex-wrap gap-2"><span className="inline-flex rounded-full bg-champagne px-3 py-1 text-sm font-semibold text-black">{selection.recommendedLabel}</span><span className="inline-flex rounded-full border border-[#F6F1E7]/35 bg-[#050505]/90 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#EAE3D5]" data-selling-fast-badge>{scarcity.almostSoldOutBadge}</span></div><p className="mt-4 text-base text-champagne">{card.dateLabel}</p><p data-halloween-featured-hours={card.id} className="mt-2 text-base text-white/80">{featuredViews.get(card.id)!.labels.hours}: {featuredViews.get(card.id)!.hours}</p><h3 className="mt-3 font-serif text-2xl font-bold leading-tight">{card.title}</h3><p className="mt-3 text-base text-white/80">{card.venueName}</p><p data-halloween-featured-summary={card.id} className="mt-4 text-base leading-7 text-white/75">{card.summary}</p></div>
         </>;
         return <li key={card.id}><article id={halloweenEventAnchor(card.id)} className="overflow-hidden rounded-2xl border border-champagne/30 bg-white/[0.035]" data-halloween-featured-card={card.id}>
           {card.canonicalDetail

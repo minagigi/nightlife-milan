@@ -46,26 +46,26 @@ export default function NewsletterHub({ lang, labels }: NewsletterHubProps) {
   const placeholderText = labels?.emailPlaceholder || tr(lang, 'Your email address', 'La tua email');
 
   return (
-    <div className="w-full bg-[#050505] border-t border-[#F6F1E7]/14 py-20 px-4 sm:px-6 lg:px-8 mt-12">
+    <div className="w-full bg-[#F6F1E7] text-[#050505] border-t border-[#050505]/16 py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto text-center">
-        <p className="text-[11px] font-semibold tracking-[0.28em] uppercase text-[#C9A96E] mb-3">
+        <p className="font-mono text-[11px] font-bold tracking-[0.22em] uppercase text-[#5C5446] mb-3">
           NIGHTLIFE MILAN · CONCIERGE DISPATCH
         </p>
-        <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#F6F1E7] mb-4">
+        <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#050505] mb-4">
           {tr(lang, 'Join the Inner Circle', "Entra nell'Inner Circle")}
         </h2>
-        <p className="text-[#F6F1E7]/70 text-lg mb-8">
+        <p className="text-[#3D3830] text-lg mb-8">
           {labels?.description || tr(lang, 'Get the best tables and secret guestlists every Thursday.', 'Ricevi i migliori tavoli e le liste segrete ogni giovedì.')}
         </p>
 
         {status === 'success' ? (
-          <div className="bg-[#0F0F0F] border border-[#C9A96E]/40 rounded-xl p-6 inline-block">
-            <p className="text-[#C9A96E] font-serif text-xl">
+          <div className="bg-[#050505] border border-[#050505] p-6 inline-block">
+            <p className="text-[#25D366] font-serif text-xl">
               {labels?.welcome || tr(lang, 'Welcome to the club.', 'Benvenuto nel club.')}
             </p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto bg-[#050505] p-2.5 border border-[#050505]">
             <div className="flex-1 relative">
               <label htmlFor="newsletter-email-input" className="sr-only">
                 {placeholderText}
@@ -80,11 +80,11 @@ export default function NewsletterHub({ lang, labels }: NewsletterHubProps) {
                   if (status === 'error') setStatus('idle');
                 }}
                 placeholder={placeholderText}
-                className={`w-full min-h-[48px] bg-[#0F0F0F] border ${status === 'error' ? 'border-red-500/60' : 'border-[#F6F1E7]/20'} rounded-xl px-6 py-3.5 text-[#F6F1E7] placeholder:text-[#F6F1E7]/45 focus:outline-none focus:border-[#C9A96E] focus:ring-1 focus:ring-[#C9A96E] transition-colors`}
+                className={`w-full min-h-[48px] bg-[#0B0A09] border ${status === 'error' ? 'border-red-500/60' : 'border-[#F6F1E7]/25'} px-5 py-3.5 text-[#F6F1E7] placeholder:text-[#C2B9AA] focus:outline-none focus:border-[#25D366] focus:ring-1 focus:ring-[#25D366] transition-colors`}
                 required
               />
               {status === 'error' && (
-                <p className="absolute -bottom-6 left-2 text-red-400 text-xs">
+                <p className="mt-2 text-left text-red-400 text-xs">
                   {labels?.invalidEmail || tr(lang, 'Please enter a valid email address.', 'Inserisci un indirizzo email valido.')}
                 </p>
               )}
@@ -92,7 +92,7 @@ export default function NewsletterHub({ lang, labels }: NewsletterHubProps) {
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="min-h-[48px] bg-[#F6F1E7] text-[#050505] font-bold px-8 py-3.5 rounded-xl hover:bg-[#C9A96E] hover:text-[#050505] transition-all duration-300 disabled:opacity-70 whitespace-nowrap"
+              className="min-h-[48px] bg-[#25D366] text-[#050505] font-mono text-xs font-bold uppercase tracking-[0.18em] px-8 py-3.5 hover:bg-[#2EE472] transition-colors duration-200 disabled:opacity-70 whitespace-nowrap"
             >
               {status === 'loading' ? '...' : (labels?.subscribe || tr(lang, 'Subscribe', 'Iscriviti'))}
             </button>

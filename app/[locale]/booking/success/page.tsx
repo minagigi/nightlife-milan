@@ -63,7 +63,7 @@ export default async function BookingSuccessPage({
         }}
       />
 
-      <main className="flex-1 bg-[#131009] min-h-screen flex items-center justify-center py-20 px-4 sm:px-6">
+      <main className="flex-1 bg-[#050505] min-h-screen flex items-center justify-center py-20 px-4 sm:px-6">
         <div className="max-w-md w-full space-y-8">
           
           {/* Digital Ticket Card */}
@@ -88,8 +88,8 @@ export default async function BookingSuccessPage({
               {/* Ticket Details with dashed border */}
               <div className="relative border-t-2 border-dashed border-champagne/30 pt-8 mt-4">
                 {/* Cutouts for ticket effect */}
-                <div className="absolute -top-3 -left-11 w-6 h-6 bg-[#131009] rounded-full" />
-                <div className="absolute -top-3 -right-11 w-6 h-6 bg-[#131009] rounded-full" />
+                <div className="absolute -top-3 -left-11 w-6 h-6 bg-[#050505] rounded-full" />
+                <div className="absolute -top-3 -right-11 w-6 h-6 bg-[#050505] rounded-full" />
                 
                 <h2 className="text-2xl font-bold text-white mb-4 tracking-tight">
                   {eventName}
