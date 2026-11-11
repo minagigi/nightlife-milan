@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import { EVENT_BATCH_PROFILES, getEventBatchSlug, SITE_ONLY_EVENT_PROFILES } from '@/lib/eventBatchProfiles';
 import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
+import { getLocalizedSeoPagePath35 } from '@/lib/i18n/localizedSlugs35';
 import { indexedLocaleCodes, localePrefix } from '@/lib/i18n/locales';
 import {
   buildAllSitemapEntries,
@@ -17,6 +18,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...SITE_ONLY_EVENT_PROFILES,
     ...EVENT_BATCH_PROFILES.filter((profile) => profile.indexedLocales && profile.indexedLocales.length > 0),
   ];
+
+  const pillarEntries: MetadataRoute.Sitemap = indexedLocaleCodes.map((locale) => ({
+    url: `${baseUrl}${localePrefix(locale)}${getLocalizedSeoPagePath35('/football-afterparties', locale)}`,
+    lastModified: SITEMAP_LAST_MODIFIED,
+    changeFrequency: 'daily' as const,
+    priority: 0.95,
+  }));
 
   const batchEntries: MetadataRoute.Sitemap = [];
   editorialEventProfiles.forEach((profile) => {
@@ -36,6 +44,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return dedupeAndSortSitemap([
     ...buildAllSitemapEntries(),
+    ...pillarEntries,
     ...batchEntries,
   ]);
 }
