@@ -30,7 +30,14 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: 'CCBot', allow: ['/', '/llms.txt', '/llms-full.txt'] },
       { userAgent: 'YouBot', allow: ['/', '/llms.txt', '/llms-full.txt'] },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: [
+      `${baseUrl}/sitemap.xml`,
+      `${baseUrl}/sitemap-core.xml`,
+      `${baseUrl}/sitemap-clubs.xml`,
+      `${baseUrl}/sitemap-capodanno.xml`,
+      `${baseUrl}/sitemap-events.xml`,
+      `${baseUrl}/sitemap-guides.xml`,
+    ],
     host: baseUrl,
   };
 }

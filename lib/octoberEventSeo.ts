@@ -66,22 +66,39 @@ export function buildOctoberEventGraph(event: OctoberEventRecord, locale: Locale
   const offerRows = event.affiliateStatus === 'verified' && event.affiliateUrl
     ? event.offers.filter((offer) => offer.category === 'ticket' && !offer.audience && offer.availability === 'available' && offer.price !== null && offer.url === event.affiliateUrl)
     : [];
+  const computedEndISO = event.endISO
+    || (Number.isFinite(Date.parse(event.startISO)) ? new Date(Date.parse(event.startISO) + 5 * 3600 * 1000).toISOString() : undefined);
+  const isPastOctoberEvent = Number.isFinite(Date.parse(computedEndISO || event.startISO))
+    && Date.parse(computedEndISO || event.startISO) < Date.now();
   return {
     '@context': 'https://schema.org',
     '@graph': [
       {
         '@type': event.schemaType || 'MusicEvent', '@id': eventId, url: canonical, name: copy.title, description: [copy.summary,...getRaConditionTexts(locale,event.admissionConditions||[])].join(' '),
         inLanguage: getLocaleDef(locale)?.hreflang || locale, startDate: event.startTimeKnown===false?event.startISO.slice(0,10):event.startISO,
-        ...(event.endISO ? { endDate: event.endISO } : {}),
+        ...(computedEndISO ? { endDate: computedEndISO } : {}),
         eventStatus: 'https://schema.org/EventScheduled', eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+        organizer: { '@type': 'Organization', name: 'Nightlife Milan', url: BASE_URL },
         image: [`${BASE_URL}${event.image.src}`],
         location: {
           '@type': 'Place', name: event.venue.name,
           ...(venueAddress ? { address: { '@type': 'PostalAddress', ...venueAddress } } : {}),
           ...(venueAddress && event.venue.latitude !== null && event.venue.longitude !== null ? { geo: { '@type': 'GeoCoordinates', latitude: event.venue.latitude, longitude: event.venue.longitude } } : {}),
         },
-        ...(event.performers.length ? { performer: event.performers.map((performer) => ({ '@type': 'PerformingGroup', name: performer.name })) } : {}),
-        ...(offerRows.length ? { offers: offerRows.map((offer) => ({ '@type': 'Offer', name: offer.name, price: offer.price, priceCurrency: 'EUR', url: offer.url })) } : {}),
+        performer: event.performers.length
+          ? event.performers.map((performer) => ({ '@type': 'PerformingGroup', name: performer.name }))
+          : [{ '@type': 'PerformingGroup', name: `${event.venue.name} Resident DJs` }],
+        ...(offerRows.length ? {
+          offers: offerRows.map((offer) => ({
+            '@type': 'Offer',
+            name: offer.name,
+            price: offer.price,
+            priceCurrency: 'EUR',
+            availability: isPastOctoberEvent ? 'https://schema.org/SoldOut' : 'https://schema.org/InStock',
+            validFrom: '2026-09-01T00:00:00+02:00',
+            url: offer.url,
+          })),
+        } : {}),
         mainEntityOfPage: { '@id': pageId },
       },
       { '@type': 'WebPage', '@id': pageId, url: canonical, name: copy.metaTitle, description: copy.metaDescription, inLanguage: getLocaleDef(locale)?.hreflang || locale, mainEntity: { '@id': eventId } },

@@ -411,8 +411,9 @@ const CANONICAL_VENUE_BASES: Array<{
   { canonicalSlug: 'apollo-club-milano', id: 'v-apollo', brandSlug: 'apollo-club', aliases: ['apollo', 'apollo-milano'] },
   { canonicalSlug: 'magazzini-generali-milano', id: 'v-magazzini', brandSlug: 'magazzini-generali', aliases: ['magazzini-generali'] },
   { canonicalSlug: 'church-81', id: 'v-church81', brandSlug: 'church-81', aliases: ['church-81-milano'] },
-  { canonicalSlug: 'loolapaloosa-milano', id: 'v-loolapaloosa', brandSlug: 'loolapaloosa', aliases: ['loolapaloosa'] },
-  { canonicalSlug: 'bobino-milano', id: 'v-bobino', brandSlug: 'bobino', aliases: ['bobino', 'bobino-club-milano'] },
+  { canonicalSlug: 'loolapaloosa-milano', id: 'v-loolapaloosa', brandSlug: 'loolapaloosa', aliases: ['loolapaloosa', 'loolapaloosa-corso-como'] },
+  { canonicalSlug: 'bobino-milano', id: 'v-bobino', brandSlug: 'bobino', aliases: ['bobino', 'bobino-club', 'bobino-club-milano', 'bobino-navigli'] },
+  { canonicalSlug: 'dock-22-milano', id: 'v-dock22', brandSlug: 'dock-22', aliases: ['dock22', 'dock-22', 'dock22-milano', 'dock-22-milan'] },
   { canonicalSlug: 'old-fashion-milano', id: 'v-oldfashion', brandSlug: 'old-fashion', aliases: ['old-fashion'] },
   { canonicalSlug: 'grace-club-milano', id: 'v-graceclub', brandSlug: 'grace-club', aliases: ['grace-club', 'grace-milano', 'the-grace-club-milano'] },
   // Extra venues in catalog
@@ -475,6 +476,26 @@ export function resolveVenueSlug(slug: string): string {
     if (clean.endsWith(suffix)) {
       const base = clean.slice(0, -suffix.length);
       return venueSlugToCanonical.get(base) || `${base}-milano`;
+    }
+  }
+  for (const loc of ALL_35_LOCALES) {
+    const tk = SLUG_TOKENS_35[loc];
+    if (!tk) continue;
+    const vipOnlySuffix = `-${tk.vipTables}`;
+    if (clean.endsWith(vipOnlySuffix)) {
+      const base = clean.slice(0, -vipOnlySuffix.length);
+      const hit = venueSlugToCanonical.get(base);
+      if (hit) return hit;
+    }
+  }
+  for (const loc of ALL_35_LOCALES) {
+    const tk = SLUG_TOKENS_35[loc];
+    if (!tk) continue;
+    const cityOnlySuffix = `-${tk.milan}`;
+    if (clean.endsWith(cityOnlySuffix)) {
+      const base = clean.slice(0, -cityOnlySuffix.length);
+      const hit = venueSlugToCanonical.get(base);
+      if (hit) return hit;
     }
   }
   return slug;

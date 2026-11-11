@@ -308,10 +308,48 @@ import { venuesData } from './venuesData';
 
 export const mockVenues: Venue[] = venuesData;
 
-export const mockPerformers: Performer[] = [];
+export const mockPerformers: Performer[] = [
+  {
+    id: 'p-keinemusik',
+    name: 'Keinemusik',
+    type: 'PerformingGroup',
+    sameAs: [],
+    localizedContent: {
+      bio: {
+        en: 'Berlin electronic music collective and record label founded by &ME, Rampa, and Adam Port, celebrated worldwide for open-air afro-house and melodic electronic showcases.',
+        it: 'Collettivo e label di musica elettronica berlinese fondato da &ME, Rampa e Adam Port, celebre a livello mondiale per gli showcase open-air di afro-house ed elettronica melodica.',
+      },
+    },
+  },
+];
 
 // June 2026 Events — verified from official venue websites and ticketing platforms
 export const mockEvents: Event[] = [
+  {
+    id: 'e-keinemusik-milan-2026-09-25',
+    venueId: 'v-dock22',
+    performerId: 'p-keinemusik',
+    genre: [MusicGenre.HOUSE, MusicGenre.TECHNO],
+    dateISO: '2026-09-25T18:00:00+02:00',
+    endDateISO: '2026-09-26T02:00:00+02:00',
+    pricing: { entry: null, currency: 'EUR', tableMinSpend: null },
+    localizedContent: {
+      title: {
+        en: 'Keinemusik Milan - 25 September 2026 at Dock 22',
+        it: 'Keinemusik Milano - 25 Settembre 2026 al Dock 22',
+      },
+      shortDescription: {
+        en: 'Keinemusik showcase in Milan on Friday, 25 September 2026 at Dock 22 during Milan Fashion Week. This event date has concluded; contact the official Nightlife Milan WhatsApp Concierge (+39 351 912 7047) for upcoming melodic house and techno nights, VIP tables, and guest lists in Milan.',
+        it: 'Showcase di Keinemusik a Milano venerdì 25 settembre 2026 presso Dock 22 durante la Milano Fashion Week. Questa data si è conclusa; contatta il Concierge ufficiale Nightlife Milan su WhatsApp (+39 351 912 7047) per le prossime serate melodic house e techno, i tavoli VIP e le liste a Milano.',
+      },
+      slug: {
+        en: 'keinemusik-milan-25-september-2026',
+        it: 'keinemusik-milan-25-september-2026',
+      },
+    },
+    image: '/images/venues/editorial/01-milano-nightclubs-rooftops.webp',
+    isSpecial: true,
+  },
 
   // ─── JUST ME MILANO ────────────────────────────────────────────────────────
   {

@@ -51,7 +51,10 @@ import GoldEventHtml from '@/components/GoldEventHtml';
 import EventImageGallery from '@/components/EventImageGallery';
 import MoreVenueEvents, { MoreVenueEventItem } from '@/components/MoreVenueEvents';
 import EventsCarousel from '@/components/EventsCarousel';
+import EventMoneyPillarsStrip from '@/components/EventMoneyPillarsStrip';
 import { VipQuoteCalculator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
+import { getEventTemporalCopy } from '@/lib/i18n/eventTemporalCopy';
+import { getVenueUi35 } from '@/lib/venueDossiers35';
 import { getEventVisualGallery } from '@/lib/eventVisualGallery';
 import { getLocalizedEventContent, getLocalizedEventSeed } from '@/lib/localizedEventContent';
 import { getEventBatchProfile, getEventBatchSlug, normalizeEventBatchSlug } from '@/lib/eventBatchProfiles';
@@ -81,10 +84,7 @@ async function getEbEventBySlug(slug: string): Promise<Event | undefined> {
   if (hit) return hit;
   // Evento passato: NON è nel set current_future, ma la sua pagina deve restare
   // raggiungibile (SEO: link accessibili anche quando l'evento è uscito dalla
-  // lista "Eventi passati"). Percorso VELOCE (ended,completed + start_desc, ~400
-  // listing più recenti): copre gli eventi passati recenti in pochi secondi,
-  // senza scansionare tutta la storia (start_asc completo = ~60s → timeout →
-  // pagina mai renderizzata). Gli eventi molto vecchi restano nella sitemap.
+  // lista "Eventi passati"). Si interroga la finestra recente limitata a 30 giorni.
   const withPast = await fetchEventbriteEvents(true, 30);
   return withPast.find(match);
 }
@@ -236,7 +236,8 @@ function buildCapodannoEventMetadata(baseSlug: string, locale: string): Metadata
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale, slug } = await params;
+  const { locale, slug: rawSlug } = await params;
+  const slug = rawSlug === 'keinemusik-milano-25-settembre-2026' ? 'keinemusik-milan-25-september-2026' : rawSlug;
   if (slug === halloweenNavigation(locale).slug) return halloweenMetadata(locale as LocaleCode);
   const capCatId = resolveCapodannoCategoryIdByLocalizedSlug(slug, locale);
   if (capCatId) {
@@ -408,6 +409,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function EventPage({ params }: Props) {
   const { locale, slug } = await params;
+  if (slug === 'keinemusik-milano-25-settembre-2026') {
+    permanentRedirect(`${localePrefix(locale)}/${getLocalizedDir35('events', locale)}/keinemusik-milan-25-september-2026`);
+  }
   if (slug === halloweenNavigation(locale).slug) return <HalloweenHub locale={locale as LocaleCode} />;
   const capCatId = resolveCapodannoCategoryIdByLocalizedSlug(slug, locale);
   if (capCatId) {
@@ -899,6 +903,38 @@ export default async function EventPage({ params }: Props) {
             <h2 className="text-2xl font-serif font-bold text-champagne mb-4">
               {eventText(locale, 'About the event', 'Informazioni sull\'evento', 'Sobre o evento')}
             </h2>
+            {Date.parse(event.endDateISO || event.dateISO) < Date.now() && (
+              <div
+                data-past-event-conversion-banner
+                className="not-prose mb-6 border border-[#F6F1E7]/25 bg-[#0B0A09] p-5"
+              >
+                <p className="text-sm font-semibold text-[#F6F1E7]">
+                  {getEventTemporalCopy(locale as LocaleCode, event.dateISO.slice(0, 10)).endedNotice}
+                </p>
+                <div className="mt-4 flex flex-wrap gap-3">
+                  <a
+                    href={CONTACT.whatsapp.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center bg-[#25D366] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#050505] transition hover:bg-[#2EE472]"
+                  >
+                    {getVenueUi35(locale as LocaleCode).bookWhatsApp} · {CONTACT.whatsapp.number}
+                  </a>
+                  <Link
+                    href={`${localePrefix(locale)}/events/tonight`}
+                    className="inline-flex items-center justify-center border border-[#F6F1E7]/40 bg-[#050505] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#F6F1E7] transition hover:border-[#F6F1E7]"
+                  >
+                    {getVenueUi35(locale as LocaleCode).tabTonight}
+                  </Link>
+                  <Link
+                    href={`${localePrefix(locale)}/vip-tables`}
+                    className="inline-flex items-center justify-center border border-[#F6F1E7]/25 bg-[#050505] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#C2B9AA] transition hover:text-[#F6F1E7]"
+                  >
+                    {getVenueUi35(locale as LocaleCode).labelPrices}
+                  </Link>
+                </div>
+              </div>
+            )}
             <p className="text-lg text-white/70 leading-relaxed">
               {eventIntroduction}
             </p>
@@ -1098,6 +1134,7 @@ export default async function EventPage({ params }: Props) {
             </div>
           </section>
         )}
+        <EventMoneyPillarsStrip locale={locale} />
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 border-t border-white/10 space-y-12">
           <VipQuoteCalculator locale={locale} />
           <PrioritySixShowcase locale={locale} />

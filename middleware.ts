@@ -5,7 +5,12 @@ import { isEventBatchLocaleHttpIndexable } from '@/lib/eventBatchProfiles';
 import { isRemovedCuratedSitePath } from '@/lib/eventVisibility';
 import { ALL_EVENT_DIR_TOKENS } from '@/lib/i18n/dirTokens35';
 import { localizeInternalHref, resolveSeoHubPathToCanonical } from '@/lib/i18n/localizedSlugs35';
-import { capodannoCategoryPath } from '@/lib/capodanno/routes';
+import {
+  capodannoCategoryPath,
+  capodannoEventPath,
+  resolveCapodannoCategoryIdByLocalizedSlug,
+  resolveCapodannoEventBaseSlugByLocalizedSlug,
+} from '@/lib/capodanno/routes';
 import { halloweenPath } from '@/lib/halloween/routes';
 
 // Lingue attive dal registry unico (lib/i18n/locales.ts): attivare una lingua lì
@@ -20,8 +25,52 @@ const analyticsRe = new RegExp(`^${localePrefixPattern}\\/analytics(\\/|$)`);
 const analyticsTypoRe = new RegExp(`^${localePrefixPattern}\\/analitycs(\\/|$)`);
 const crmRe = new RegExp(`^${localePrefixPattern}\\/crm(\\/|$)`);
 const localizedEventPageRe = new RegExp(`^\\/([^/]+)\\/(?:${eventDirGroup})\\/([^/]+)$`);
-const capodannoLegacyRe = new RegExp(`^(?:\\/([a-z]{2}))?\\/(?:${eventDirGroup})\\/capodanno-2027\\/?$`);
-const halloweenLegacyRe = new RegExp(`^(?:\\/([a-z]{2}))?\\/(?:${eventDirGroup})\\/halloween-2026\\/?$`);
+const capodannoDirectRe = new RegExp(`^\\/(?:(?:${eventDirGroup})\\/)?(?:capodanno-2027|new-years-eve-2027)\\/?$`, 'i');
+const capodannoNestedRe = new RegExp(`^\\/(?:${eventDirGroup})\\/(?:capodanno-2027|new-years-eve-2027)\\/([^/]+)\\/?$`, 'i');
+const halloweenDirectRe = new RegExp(`^\\/(?:(?:${eventDirGroup})\\/)?halloween-2026\\/?$`, 'i');
+const mfwNestedGuideRe = /^\/(?:milan-fashion-week|settimana-della-moda-milano|[^/]*fashion-week[^/]*)\/guides\/[^/]+\/?$/i;
+const deprecatedLocalePrefixRe = /^\/(zh-tw|zh-hk|pt-br|es-mx|es-ar|es-co|en-gb|en-us|ko-kr|ko|ja|jp|he|iw|hi)(?:\/(.*))?$/i;
+
+const DEPRECATED_LOCALE_MAP: Readonly<Record<string, LocaleCode>> = {
+  'zh-tw': 'zh',
+  'zh-hk': 'zh',
+  'pt-br': 'pt',
+  'es-mx': 'es',
+  'es-ar': 'es',
+  'es-co': 'es',
+  'en-gb': 'en',
+  'en-us': 'en',
+  'ko-kr': 'en',
+  ko: 'en',
+  ja: 'en',
+  jp: 'en',
+  he: 'en',
+  iw: 'en',
+  hi: 'en',
+};
+
+function resolveLegacySubpathForLocale(subPath: string, targetLocale: LocaleCode): string | null {
+  if (capodannoDirectRe.test(subPath)) {
+    return capodannoCategoryPath('capodanno-2027', targetLocale);
+  }
+  const nestedCapMatch = subPath.match(capodannoNestedRe);
+  if (nestedCapMatch) {
+    const rawSubSlug = decodeURIComponent(nestedCapMatch[1]);
+    const evBase = resolveCapodannoEventBaseSlugByLocalizedSlug(rawSubSlug, targetLocale);
+    if (evBase) return capodannoEventPath(evBase, targetLocale);
+    const catId = resolveCapodannoCategoryIdByLocalizedSlug(rawSubSlug, targetLocale);
+    if (catId) return capodannoCategoryPath(catId, targetLocale);
+    return capodannoCategoryPath('capodanno-2027', targetLocale);
+  }
+  if (halloweenDirectRe.test(subPath)) {
+    return halloweenPath(targetLocale);
+  }
+  if (mfwNestedGuideRe.test(subPath)) {
+    const mfwHref = targetLocale === 'en' ? '/milan-fashion-week' : `/${targetLocale}/milan-fashion-week`;
+    return localizeInternalHref(mfwHref, targetLocale);
+  }
+  return null;
+}
 
 // Dashboard interna /analytics: Basic Auth con ANALYTICS_USER / ANALYTICS_PASSWORD.
 // Protegge anche le Server Action della pagina (stesso path → il browser riallega
@@ -67,13 +116,29 @@ function crmAuth(request: NextRequest): NextResponse | null {
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Redirect HTTP 308 diretto (1-hop, anti-loop) per gli alias legacy Capodanno 2027 e Halloween 2026
-  const capodannoLegacyMatch = pathname.match(capodannoLegacyRe);
-  if (capodannoLegacyMatch) {
-    const matchedLocale = capodannoLegacyMatch[1];
-    const targetLocale: LocaleCode =
-      matchedLocale && locales.includes(matchedLocale) ? (matchedLocale as LocaleCode) : 'en';
-    const destination = capodannoCategoryPath('capodanno-2027', targetLocale);
+  if (/^\/sitemap(-[a-z0-9-]+)?\.xml$/i.test(pathname)) {
+    return NextResponse.next();
+  }
+
+  // 1-hop HTTP 308 per prefissi lingua/regione deprecati o non attivi (es. /zh-tw/*, /pt-br/*, /es-mx/*, /ja/*, /he/*)
+  const deprecatedLocaleMatch = pathname.match(deprecatedLocalePrefixRe);
+  if (deprecatedLocaleMatch) {
+    const rawTag = deprecatedLocaleMatch[1].toLowerCase();
+    const mappedLocale: LocaleCode = DEPRECATED_LOCALE_MAP[rawTag] || 'en';
+    const rawRemainder = deprecatedLocaleMatch[2] ? `/${deprecatedLocaleMatch[2].replace(/\/+$/, '')}` : '/';
+    let destination: string;
+    if (rawRemainder === '/' || rawRemainder === '') {
+      destination = mappedLocale === 'en' ? '/' : `/${mappedLocale}`;
+    } else {
+      const legacyResolved = resolveLegacySubpathForLocale(rawRemainder, mappedLocale);
+      if (legacyResolved) {
+        destination = legacyResolved;
+      } else {
+        const canonicalRest = resolveSeoHubPathToCanonical(rawRemainder, mappedLocale) || rawRemainder;
+        const targetHref = mappedLocale === 'en' ? canonicalRest : `/${mappedLocale}${canonicalRest}`;
+        destination = localizeInternalHref(targetHref, mappedLocale);
+      }
+    }
     if (destination && destination !== pathname) {
       const url = new URL(destination, request.url);
       url.search = request.nextUrl.search;
@@ -81,17 +146,20 @@ export function middleware(request: NextRequest) {
     }
   }
 
-  const halloweenLegacyMatch = pathname.match(halloweenLegacyRe);
-  if (halloweenLegacyMatch) {
-    const matchedLocale = halloweenLegacyMatch[1];
-    const targetLocale: LocaleCode =
-      matchedLocale && locales.includes(matchedLocale) ? (matchedLocale as LocaleCode) : 'en';
-    const destination = halloweenPath(targetLocale);
-    if (destination && destination !== pathname) {
-      const url = new URL(destination, request.url);
-      url.search = request.nextUrl.search;
-      return NextResponse.redirect(url, 308);
-    }
+  // Redirect HTTP 308 diretto (1-hop, anti-loop) per gli alias legacy Capodanno 2027 (diretti + 553 annidati), Halloween 2026 e guide MFW
+  const rawFirstSeg = pathname.split('/')[1] || '';
+  const hasLeadingActiveLocale = locales.includes(rawFirstSeg);
+  const legacyTargetLocale: LocaleCode = hasLeadingActiveLocale
+    ? (rawFirstSeg === 'en' ? 'en' : (rawFirstSeg as LocaleCode))
+    : 'en';
+  const legacySubPath = hasLeadingActiveLocale
+    ? (pathname.slice(rawFirstSeg.length + 1) || '/')
+    : pathname;
+  const legacyDestination = resolveLegacySubpathForLocale(legacySubPath, legacyTargetLocale);
+  if (legacyDestination && legacyDestination !== pathname) {
+    const url = new URL(legacyDestination, request.url);
+    url.search = request.nextUrl.search;
+    return NextResponse.redirect(url, 308);
   }
 
   // Le vecchie pagine generate dalle collection Eventbrite non appartengono al
@@ -252,7 +320,7 @@ function matchBrowserLocale(header: string | null): string | null {
 
 export const config = {
   matcher: [
-    // Skip all internal paths (_next, api, static files)
-    '/((?!_next|api|favicon.ico|robots.txt|sitemap.xml|.*\\..*).*)',
+    // Skip all internal paths (_next, api, static files, and XML sitemaps)
+    '/((?!_next|api|favicon.ico|robots.txt|sitemap.*\\.xml|.*\\..*).*)',
   ],
 };

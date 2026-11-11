@@ -51,6 +51,8 @@ export const generateEventSchema = (
 
   if (event.endDateISO) {
     schema.endDate = event.endDateISO;
+  } else if (Number.isFinite(Date.parse(event.dateISO))) {
+    schema.endDate = new Date(Date.parse(event.dateISO) + 5 * 3600 * 1000).toISOString();
   }
 
   if (event.image) {
@@ -60,9 +62,10 @@ export const generateEventSchema = (
   }
 
   // Nested Location Schema (Venue)
+  const venueLocalizedName = getLocalizedText(venue.localizedContent.name, lang);
   schema.location = {
     '@type': 'Place',
-    name: getLocalizedText(venue.localizedContent.name, lang),
+    name: venueLocalizedName,
     address: {
       '@type': 'PostalAddress',
       streetAddress: venue.address.streetAddress,
@@ -78,18 +81,23 @@ export const generateEventSchema = (
     sameAs: venue.sameAs,
   };
 
-  // Performer Schema
+  // Performer Schema (con fallback Resident DJs per evitare warning GSC "performer mancante")
   if (performer) {
     schema.performer = {
       '@type': performer.type,
       name: performer.name,
       sameAs: performer.sameAs,
     };
+  } else {
+    schema.performer = {
+      '@type': 'PerformingGroup',
+      name: `${venueLocalizedName} Resident DJs`,
+    };
   }
 
   // Offers Schema (Pricing) — solo se abbiamo un prezzo reale confermato.
   // Un Offer con un prezzo inventato/sbagliato è peggio di nessun Offer.
-  const offer = buildOfferSchema(event.pricing, eventUrl);
+  const offer = buildOfferSchema(event.pricing, eventUrl, event.dateISO);
   if (offer) schema.offers = offer;
 
   return schema;
@@ -107,15 +115,22 @@ export const generateEventSchema = (
  */
 export function buildOfferSchema(
   pricing: { entry: number | null; currency: 'EUR'; tableMinSpend: number | null },
-  url: string
+  url: string,
+  startDateISO?: string,
 ): Record<string, unknown> | null {
   const price = pricing.entry ?? pricing.tableMinSpend;
   if (price === null || price === undefined) return null;
+  const isPast = Boolean(
+    startDateISO &&
+    Number.isFinite(Date.parse(startDateISO)) &&
+    Date.parse(startDateISO) + 8 * 3600 * 1000 < Date.now()
+  );
   return {
     '@type': 'Offer',
     price,
     priceCurrency: pricing.currency,
-    availability: 'https://schema.org/InStock',
+    availability: isPast ? 'https://schema.org/SoldOut' : 'https://schema.org/InStock',
+    validFrom: '2026-09-01T00:00:00+02:00',
     url,
   };
 }

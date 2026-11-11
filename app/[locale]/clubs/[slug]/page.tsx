@@ -1,9 +1,11 @@
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix, getLocaleDef, indexedLocaleCodes, canonicalPageUrl } from '@/lib/i18n/locales';
 import { getLocalizedVenueSlug35 } from '@/lib/i18n/localizedSlugs35';
 import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
 import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { buildClubHighCtrDescription, buildClubHighCtrTitle } from '@/lib/clubSeoMeta35';
 import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
 import { MapPin, Clock, Shirt, MessageCircle, Star, Calendar, ArrowLeft, Music, Wine, Utensils, ShieldCheck, Check, CreditCard, Sparkles, Train, Users, HelpCircle } from 'lucide-react';
@@ -1005,16 +1007,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   const venue = getVenueBySlug(slug, locale);
 
-  if (!venue) return {};
+  if (!venue) notFound();
 
   const name = getLocalizedText(venue.localizedContent.name, locale);
   const rawDescription = getLocalizedText(venue.localizedContent.description, locale);
-  const metaDescription = withWhatsApp(rawDescription, locale);
+  const metaDescription = buildClubHighCtrDescription(venue, locale, name, rawDescription);
 
-  const title = seoTitle(venueTitles[venue.id]?.[locale as 'en' | 'it']
-    ?? (locale === 'it'
-      ? `${name} Milano | Prezzi, Tavoli e Liste 2026/2027`
-      : `${name} Milan | Prices, Tables and Guestlists 2026/2027`));
+  const title = buildClubHighCtrTitle(venue, locale, name);
 
   const keywords = venueKeywords[venue.id]?.[locale as 'en' | 'it']
     ?? (locale === 'it'
@@ -1075,28 +1074,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ClubPage({ params }: Props) {
   const { locale, slug } = await params;
   const venue = getVenueBySlug(slug, locale);
-  
+
   if (!venue) {
-    return (
-      <main className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-4">
-        <div className="max-w-md text-center space-y-6">
-          <h1 className="text-4xl font-bold tracking-tight text-white mb-4">VIP Access Only</h1>
-          <p className="text-white/40 text-lg">
-            {locale === 'it' 
-              ? "Questo locale è accessibile solo tramite prenotazione privata. Contattaci per verificare la disponibilità e i prezzi."
-              : "This venue is accessible via private booking only. Contact us to check availability and pricing."}
-          </p>
-          <a
-            href={`${CONTACT.whatsapp.link}?text=${encodeURIComponent(locale === 'it' ? "Ciao, vorrei informazioni per l'accesso VIP ad un locale esclusivo." : "Hi, I'm looking for VIP access to an exclusive venue.")}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-black bg-white rounded-full hover:bg-gray-200 transition-colors w-full sm:w-auto"
-          >
-            {locale === 'it' ? "Richiedi Accesso VIP" : "Request VIP Access"}
-          </a>
-        </div>
-      </main>
-    );
+    notFound();
   }
 
   const dict = await getDictionary(locale as 'en' | 'it');

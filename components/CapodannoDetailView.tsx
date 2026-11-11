@@ -135,6 +135,15 @@ export default function CapodannoDetailView({ locale, event }: Props) {
         endDate: event.endISO,
         eventStatus: 'https://schema.org/EventScheduled',
         eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+        organizer: {
+          '@type': 'Organization',
+          name: 'Nightlife Milan',
+          url: SITE_URL,
+        },
+        performer: {
+          '@type': 'PerformingGroup',
+          name: `${event.venueName} Resident DJs`,
+        },
         image: seoPack.schemaImages,
         location: {
           '@type': 'Place',

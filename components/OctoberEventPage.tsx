@@ -5,6 +5,7 @@ import { MessageCircle, Ticket } from 'lucide-react';
 import EventCoverHero from '@/components/EventCoverHero';
 import EventVenueSection from '@/components/EventVenueSection';
 import CuratedSpecialEvents from '@/components/CuratedSpecialEvents';
+import EventMoneyPillarsStrip from '@/components/EventMoneyPillarsStrip';
 import { getOctoberVenue } from '@/lib/octoberVenue';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { jsonLdString } from '@/lib/seo';
@@ -93,6 +94,7 @@ export default async function OctoberEventPage({event,locale,initialNow,children
           {venue?<EventVenueSection locale={locale} venue={venue}/>:<section className="mt-12 border-t border-[#F6F1E7]/14 pt-10" aria-label={copy.labels.venueSection}><h3 className={h3}>{event.venue.name}</h3><p className={paragraph} data-event-venue-unavailable={locale}>{octoberAddressConflict(event,locale)}</p></section>}
         </div>
         <CuratedSpecialEvents locale={locale} surface="event" excludeEventId={`october-${event.id}`} headingLevel={3}/>
+        <EventMoneyPillarsStrip locale={locale}/>
         {children}
       </div>
     </main>
