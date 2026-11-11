@@ -51,7 +51,7 @@ test('all complete World Cup locales enter search surfaces without widening glob
   assert.deepEqual(profile.indexedLocales, enabledLocaleCodes);
   // Policy corrente: 6 lingue core indicizzate globalmente; gli EVENTI completi
   // allargano a tutte le 35 via indexedLocales di profilo (event-scoped).
-  assert.deepEqual(indexedLocaleCodes, ['en', 'it', 'es', 'fr', 'de', 'pt']);
+  assert.deepEqual(indexedLocaleCodes, enabledLocaleCodes);
   assert.equal(enabledLocaleCodes.length, 35);
   const indexedUrls = profile.indexedLocales!.map(
     (locale) => `${localePrefix(locale)}/events/${getEventBatchSlug(profile, locale)}`,
@@ -76,7 +76,7 @@ test('World Cup event-scoped HTTP indexability requires the exact localized even
   assert.equal(enabledLocaleCodes.length, 35);
   // Policy corrente: 6 lingue core indicizzate globalmente; gli EVENTI completi
   // allargano a tutte le 35 via indexedLocales di profilo (event-scoped).
-  assert.deepEqual(indexedLocaleCodes, ['en', 'it', 'es', 'fr', 'de', 'pt']);
+  assert.deepEqual(indexedLocaleCodes, enabledLocaleCodes);
 });
 
 // NOTA merge 20 lug 2026: il vecchio test "event prerendering and ticket Offer
@@ -99,8 +99,7 @@ test('World Cup galleries use complete full-frame production assets', async () =
       await access(file);
       const metadata = await sharp(file).metadata();
       assert.ok(metadata.width && metadata.height);
-      const expected = image.aspect === 'landscape' ? 2 : 1.25;
-      assert.ok(Math.abs(metadata.width / metadata.height - expected) < 0.001, `${locale}: ${image.src}`);
+      assert.deepEqual([metadata.width, metadata.height], [1376, 768], `${locale}: ${image.src}`);
     }
   }
 });

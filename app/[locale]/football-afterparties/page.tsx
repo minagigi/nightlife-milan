@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
-import EditorialPageSections from '@/components/EditorialPageSections';
+
+import EventVenueMap from '@/components/EventVenueMap';
+import { getEventVenueCopy } from '@/lib/i18n/eventVenueCopy';import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
@@ -234,70 +236,52 @@ const POST_MATCH_CLUBS = [
 
 const SAN_SIRO_MATCH_CALENDAR = [
   {
-    matchIt: 'Derby della Madonnina: Inter vs AC Milan / AC Milan vs Inter',
-    matchEn: 'Derby della Madonnina: Inter vs AC Milan / AC Milan vs Inter',
-    competition: 'Serie A Enilive / Coppa Italia / UEFA',
-    kickoff: 'Domenica 20:45 (Fischio finale ~22:40)',
-    whistleEn: 'Sunday 20:45 (Final Whistle ~22:40)',
-    bestClubsIt: '#1 Just Me (7/7), #3 Aria Club (150m), #4 55 Milano, #5 Voya Rooftop',
-    bestClubsEn: '#1 Just Me (7/7), #3 Aria Club (150m), #4 55 Milano, #5 Voya Rooftop',
-    minSpend: '€350 – €1.500 (Prenota 7gg prima)',
-    isoDate: '2026-11-22T20:45:00+01:00',
-  },
-  {
-    matchIt: 'UEFA Champions League Night — FC Internazionale Milano in Casa',
-    matchEn: 'UEFA Champions League Night — FC Internazionale Milano Home Fixture',
-    competition: 'UEFA Champions League (League Phase & Knockout)',
-    kickoff: 'Martedì o Mercoledì 21:00 (Fischio finale ~22:55)',
-    whistleEn: 'Tuesday or Wednesday 21:00 (Final Whistle ~22:55)',
-    bestClubsIt: '#1 Just Me Torre Branca (Aperto 7/7), #5 Voya Rooftop (20° Piano), #4 55 Milano',
-    bestClubsEn: '#1 Just Me Torre Branca (Open 7/7), #5 Voya Rooftop (20th Floor), #4 55 Milano',
-    minSpend: '€300 – €1.000 (100% in bottiglie)',
-    isoDate: '2026-11-04T21:00:00+01:00',
-  },
-  {
-    matchIt: 'UEFA Champions League Night — AC Milan in Casa a San Siro',
-    matchEn: 'UEFA Champions League Night — AC Milan Home Fixture at San Siro',
-    competition: 'UEFA Champions League (League Phase & Knockout)',
-    kickoff: 'Martedì o Mercoledì 21:00 (Fischio finale ~22:55)',
-    whistleEn: 'Tuesday or Wednesday 21:00 (Final Whistle ~22:55)',
-    bestClubsIt: '#1 Just Me Milano (Aperto 7/7), #5 Voya Rooftop (3 fermate M5), #4 55 Milano',
-    bestClubsEn: '#1 Just Me Milano (Open 7/7), #5 Voya Rooftop (3 M5 stops), #4 55 Milano',
-    minSpend: '€300 – €1.000 (100% in bottiglie)',
-    isoDate: '2026-11-25T21:00:00+01:00',
-  },
-  {
-    matchIt: 'Big Match Sabato Sera (Inter/Milan vs Juventus, Napoli, Roma, Atalanta)',
-    matchEn: 'Saturday Night Big Match (Inter/Milan vs Juventus, Napoli, Roma, Atalanta)',
-    competition: 'Serie A — Anticipo Serale del Sabato',
+    matchIt: 'Big Match Serie A Sabato Sera: AC Milan vs Juventus / Napoli / Roma a San Siro',
+    matchEn: 'Saturday Night Serie A Big Match: AC Milan vs Juventus / Napoli / Roma at San Siro',
+    competition: 'Serie A Enilive — Anticipo Serale del Sabato',
     kickoff: 'Sabato 20:45 (Fischio finale ~22:40)',
     whistleEn: 'Saturday 20:45 (Final Whistle ~22:40)',
     bestClubsIt: '#3 Aria Club (150m a piedi), #1 Just Me, #2 Pineta Corso Como, #4 55 Milano, #5 Voya, #6 Repvblic',
     bestClubsEn: '#3 Aria Club (150m walk), #1 Just Me, #2 Pineta Corso Como, #4 55 Milano, #5 Voya, #6 Repvblic',
     minSpend: '€250 – €1.200 (Salta-Fila Hostess)',
-    isoDate: '2026-11-14T20:45:00+01:00',
+    isoDate: '2026-11-23T20:45:00+01:00',
+    endIsoDate: '2026-11-23T23:00:00+01:00',
   },
   {
-    matchIt: 'Partita Pomeridiana / Pre-Serale (Sabato o Domenica ore 15:00 / 18:00)',
-    matchEn: 'Afternoon / Early Evening Match (Saturday or Sunday 15:00 / 18:00)',
-    competition: 'Serie A — Slot Pomeridiano & Sunset',
-    kickoff: '15:00 o 18:00 (Fischio finale 17:00 / 20:00)',
-    whistleEn: '15:00 or 18:00 (Final Whistle 17:00 / 20:00)',
-    bestClubsIt: 'Royal Aperitivo & Cena Cantata: #2 Pineta (19:30), #3 Aria (150m), #4 55 Milano, #5 Voya Rooftop, #1 Just Me',
-    bestClubsEn: 'Royal Aperitivo & Singing Dinner: #2 Pineta (19:30), #3 Aria (150m), #4 55 Milano, #5 Voya Rooftop, #1 Just Me',
-    minSpend: 'Aperitivo €20–30 · Tavolo Sera €250+',
-    isoDate: '2026-11-08T18:00:00+01:00',
+    matchIt: 'UEFA Champions League Night — FC Internazionale Milano in Casa a San Siro',
+    matchEn: 'UEFA Champions League Night — FC Internazionale Milano Home Fixture at San Siro',
+    competition: 'UEFA Champions League (League Phase & Knockout)',
+    kickoff: 'Martedì 21:00 (Fischio finale ~22:55)',
+    whistleEn: 'Tuesday 21:00 (Final Whistle ~22:55)',
+    bestClubsIt: '#1 Just Me Torre Branca (Aperto 7/7), #5 Voya Rooftop (20° Piano), #4 55 Milano',
+    bestClubsEn: '#1 Just Me Torre Branca (Open 7/7), #5 Voya Rooftop (20th Floor), #4 55 Milano',
+    minSpend: '€300 – €1.000 (100% in bottiglie)',
+    isoDate: '2026-11-26T21:00:00+01:00',
+    endIsoDate: '2026-11-26T23:15:00+01:00',
   },
   {
-    matchIt: 'Monday Night Serie A (Posticipo del Lunedì Sera a San Siro)',
-    matchEn: 'Serie A Monday Night Football at San Siro',
+    matchIt: 'UEFA Champions League Night — AC Milan in Casa a San Siro',
+    matchEn: 'UEFA Champions League Night — AC Milan Home Fixture at San Siro',
+    competition: 'UEFA Champions League (League Phase & Knockout)',
+    kickoff: 'Mercoledì 21:00 (Fischio finale ~22:55)',
+    whistleEn: 'Wednesday 21:00 (Final Whistle ~22:55)',
+    bestClubsIt: '#1 Just Me Milano (Aperto 7/7), #5 Voya Rooftop (3 fermate M5), #4 55 Milano',
+    bestClubsEn: '#1 Just Me Milano (Open 7/7), #5 Voya Rooftop (3 M5 stops), #4 55 Milano',
+    minSpend: '€300 – €1.000 (100% in bottiglie)',
+    isoDate: '2026-12-11T21:00:00+01:00',
+    endIsoDate: '2026-12-11T23:15:00+01:00',
+  },
+  {
+    matchIt: 'Monday Night Serie A (Posticipo del Lunedì Sera di Inter o AC Milan a San Siro)',
+    matchEn: 'Serie A Monday Night Football (Inter or AC Milan at San Siro)',
     competition: 'Serie A — Posticipo del Lunedì',
     kickoff: 'Lunedì 20:45 (Fischio finale ~22:40)',
     whistleEn: 'Monday 20:45 (Final Whistle ~22:40)',
     bestClubsIt: '#6 Repvblic Milano (Dirty Monday Hip-Hop/House) & #1 Just Me Torre Branca (Aperto 7/7)',
     bestClubsEn: '#6 Repvblic Milano (Dirty Monday Hip-Hop/House) & #1 Just Me Torre Branca (Open 7/7)',
     minSpend: '€300 – €600 (Ingresso VIP 23:15)',
-    isoDate: '2026-11-30T20:45:00+01:00',
+    isoDate: '2026-12-23T20:45:00+01:00',
+    endIsoDate: '2026-12-23T23:00:00+01:00',
   },
   {
     matchIt: 'Quarti & Semifinali Coppa Italia (Notte Infrasettimanale a San Siro)',
@@ -308,7 +292,44 @@ const SAN_SIRO_MATCH_CALENDAR = [
     bestClubsIt: '#1 Just Me (7/7), #3 Aria Club (se Giovedì), #4 55 Milano, #5 Voya Rooftop',
     bestClubsEn: '#1 Just Me (7/7), #3 Aria Club (if Thursday), #4 55 Milano, #5 Voya Rooftop',
     minSpend: '€250 – €800 (Tavolo Garantito anche coi Supplementari)',
-    isoDate: '2027-01-13T21:00:00+01:00',
+    isoDate: '2027-02-04T21:00:00+01:00',
+    endIsoDate: '2027-02-04T23:30:00+01:00',
+  },
+  {
+    matchIt: 'Derby della Madonnina di Ritorno: AC Milan vs Inter / Inter vs AC Milan',
+    matchEn: 'Derby della Madonnina Return Clash: AC Milan vs Inter / Inter vs AC Milan',
+    competition: 'Serie A Enilive / Coppa Italia / UEFA',
+    kickoff: 'Domenica 20:45 (Fischio finale ~22:40)',
+    whistleEn: 'Sunday 20:45 (Final Whistle ~22:40)',
+    bestClubsIt: '#1 Just Me (7/7), #3 Aria Club (150m), #4 55 Milano, #5 Voya Rooftop',
+    bestClubsEn: '#1 Just Me (7/7), #3 Aria Club (150m), #4 55 Milano, #5 Voya Rooftop',
+    minSpend: '€350 – €1.500 (Prenota 7gg prima)',
+    isoDate: '2027-02-07T20:45:00+01:00',
+    endIsoDate: '2027-02-07T23:00:00+01:00',
+  },
+  {
+    matchIt: 'UEFA Champions League Ottavi & Quarti di Finale a San Siro (Primavera 2027)',
+    matchEn: 'UEFA Champions League Round of 16 & Quarter-Finals at San Siro (Spring 2027)',
+    competition: 'UEFA Champions League Knockout Stage',
+    kickoff: 'Martedì / Mercoledì 21:00 (Fischio finale ~22:55)',
+    whistleEn: 'Tuesday / Wednesday 21:00 (Final Whistle ~22:55)',
+    bestClubsIt: '#1 Just Me Parco Sempione (7/7), #3 Aria Club, #5 Voya Rooftop, #4 55 Milano',
+    bestClubsEn: '#1 Just Me Parco Sempione (7/7), #3 Aria Club, #5 Voya Rooftop, #4 55 Milano',
+    minSpend: '€350 – €1.500 (100% in bottiglie)',
+    isoDate: '2027-03-10T21:00:00+01:00',
+    endIsoDate: '2027-03-10T23:30:00+01:00',
+  },
+  {
+    matchIt: 'Rush Finale Scudetto & Champions Serie A a San Siro (Aprile – Maggio 2027)',
+    matchEn: 'Serie A Title Run-In & Final Home Fixtures at San Siro (April – May 2027)',
+    competition: 'Serie A Enilive — Giornate Finali Stagione 2026/2027',
+    kickoff: 'Sabato o Domenica 18:00 / 20:45',
+    whistleEn: 'Saturday or Sunday 18:00 / 20:45',
+    bestClubsIt: 'Royal Aperitivo & Festa Scudetto: #3 Aria (150m), #1 Just Me Garden, #2 Pineta, #4 55 Milano, #5 Voya',
+    bestClubsEn: 'Royal Aperitivo & Season Finale: #3 Aria (150m), #1 Just Me Garden, #2 Pineta, #4 55 Milano, #5 Voya',
+    minSpend: 'Aperitivo €20–30 · Tavolo Sera €250+',
+    isoDate: '2027-05-23T20:45:00+02:00',
+    endIsoDate: '2027-05-23T23:00:00+02:00',
   },
 ];
 
@@ -319,6 +340,7 @@ export default async function FootballAfterpartiesPage({
 }) {
   const { locale } = await params;
   const isIt = locale === 'it';
+  const venueMapCopy = getEventVenueCopy(locale as LocaleCode);
   const lp = localePrefix(locale);
   const canonicalUrl = `${baseUrl}${lp}/football-afterparties`;
 
@@ -449,11 +471,23 @@ export default async function FootballAfterpartiesPage({
           description: isIt ? club.descriptionIt : club.descriptionEn,
         })),
       },
-      ...SAN_SIRO_MATCH_CALENDAR.slice(0, 4).map((m, idx) => ({
+      ...(() => {
+        const nowIso = new Date().toISOString();
+        const upcoming = SAN_SIRO_MATCH_CALENDAR.filter((m) => m.endIsoDate >= nowIso);
+        const list = upcoming.length > 0 ? upcoming.slice(0, 5) : [
+          {
+            matchIt: 'Stagione Serie A & Coppe Europee a San Siro: Inter & AC Milan Matchday',
+            matchEn: 'Serie A & European Nights at San Siro: Inter & AC Milan Matchday',
+            isoDate: '2027-05-30T20:45:00+02:00',
+            endIsoDate: '2027-05-30T23:00:00+02:00',
+          },
+        ];
+        return list.map((m, idx) => ({
         '@type': 'SportsEvent',
         '@id': `${canonicalUrl}#sportsevent-${idx + 1}`,
         name: isIt ? m.matchIt : m.matchEn,
         startDate: m.isoDate,
+        endDate: m.endIsoDate,
         eventStatus: 'https://schema.org/EventScheduled',
         eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
         location: {
@@ -473,7 +507,8 @@ export default async function FootballAfterpartiesPage({
           telephone: '+39 351 912 7047',
           email: 'concierge@nightlifemilan.com',
         },
-      })),
+      }));
+      })(),
       {
         '@type': 'FAQPage',
         '@id': `${canonicalUrl}#faq`,
@@ -1141,21 +1176,15 @@ export default async function FootballAfterpartiesPage({
             </a>
           </div>
 
-          <div className="rounded-2xl overflow-hidden border border-white/15 h-80 sm:h-96 w-full bg-black">
-            <iframe
-              title={
-                isIt
-                  ? 'Mappa Stadio San Siro e Piazzale dello Sport 14 Milano (Aria Club)'
-                  : 'Map of San Siro Stadium and Piazzale dello Sport 14 Milan (Aria Club)'
-              }
-              src="https://www.google.com/maps?q=Piazzale+dello+Sport+14,+20151+Milano+MI,+Italy&output=embed"
-              width="100%"
-              height="100%"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="w-full h-full border-0"
-            />
-          </div>
+          <EventVenueMap
+            id="san-siro-aria-club-map"
+            mapUrl="https://www.google.com/maps?q=Piazzale+dello+Sport+14,+20151+Milano+MI,+Italy&output=embed"
+            labels={{
+              loadMap: venueMapCopy.loadMap,
+              mapTitle: venueMapCopy.mapTitle.replace('{venue}', 'Stadio San Siro & Aria Club Milano'),
+              privacyLoadNotice: venueMapCopy.privacyLoadNotice,
+            }}
+          />
         </div>
 
         {/* 8 FAQ Visibili */}

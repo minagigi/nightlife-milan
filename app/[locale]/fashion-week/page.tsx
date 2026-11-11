@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
-import EditorialPageSections from '@/components/EditorialPageSections';
+
+import EventVenueMap from '@/components/EventVenueMap';
+import { getEventVenueCopy } from '@/lib/i18n/eventVenueCopy';import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
@@ -134,7 +136,7 @@ const LUXURY_WEEKS = [
     minSpendIt: 'Royal Cocktail & Dinner Show €50 - €120 · Tavoli VIP €500 - €3.000',
     minSpendEn: 'Royal Cocktail & Dinner Show €50 - €120 · VIP Tables €500 - €3,000',
     summaryIt:
-      'La Milano Fashion Week Uomo di Gennaio e Giugno unisce presentazioni sartoriali, street-luxury brand, cocktail party al tramonto e clubbing d avanguardia. A Giugno brillano i giardini estivi di 1. Just Me Parco Sempione e 3. Aria Club San Siro insieme al tramonto panoramico al 20° piano di 5. Voya Rooftop; a Gennaio i Dinner Show di 4. 55 Milano, 2. Pineta Corso Como e il Dirty Monday del lunedì di chiusura da 6. Repvblic sono tappe fisse per buyer e talent.',
+      'La Milano Fashion Week Uomo di Gennaio e Giugno unisce presentazioni sartoriali, street-luxury brand, cocktail party al tramonto e clubbing d’avanguardia. A Giugno brillano i giardini estivi di 1. Just Me Parco Sempione e 3. Aria Club San Siro insieme al tramonto panoramico al 20° piano di 5. Voya Rooftop; a Gennaio i Dinner Show di 4. 55 Milano, 2. Pineta Corso Como e il Dirty Monday del lunedì di chiusura da 6. Repvblic sono tappe fisse per buyer e talent.',
     summaryEn:
       'Milan Fashion Week Menswear in January and June blends luxury tailoring presentations, streetwear capsules, sunset cocktail receptions, and late-night clubbing. In June, the open-air gardens of 1. Just Me Parco Sempione and 3. Aria Club San Siro shine alongside sunset views on the 20th floor at 5. Voya Rooftop; in January, the Dinner Shows at 4. 55 Milano and 2. Pineta Corso Como plus the closing Monday party at 6. Repvblic draw buyers and talent.',
     clubsIt:
@@ -153,7 +155,7 @@ const LUXURY_WEEKS = [
     minSpendIt: 'Sunset Rooftop Table €400 - €1.000 · Super Privé Club €1.000 - €6.000',
     minSpendEn: 'Sunset Rooftop Table €400 - €1,000 · Club Super Privé €1,000 - €6,000',
     summaryIt:
-      'La settimana del Salone del Mobile e del Fuorisalone (Aprile) è la settimana con la più alta densità di eventi, collezionisti, architetti e VIP internazionali dell intero anno milanese. Quando alle 21:00 chiudono le installazioni di Brera, Tortona, Isola e Porta Venezia, il flusso VIP converge verso il 20° piano di 5. Voya Rooftop, i 1.000 mq di 4. 55 Milano in Sempione, i showcase Afro-House e Melodic Techno di 1. Just Me sotto la Torre Branca, 2. Pineta, 3. Aria Club e i grandi palchi di Fabrique e Alcatraz.',
+      'La settimana del Salone del Mobile e del Fuorisalone (Aprile) è la settimana con la più alta densità di eventi, collezionisti, architetti e VIP internazionali dell’intero anno milanese. Quando alle 21:00 chiudono le installazioni di Brera, Tortona, Isola e Porta Venezia, il flusso VIP converge verso il 20° piano di 5. Voya Rooftop, i 1.000 mq di 4. 55 Milano in Sempione, i showcase Afro-House e Melodic Techno di 1. Just Me sotto la Torre Branca, 2. Pineta, 3. Aria Club e i grandi palchi di Fabrique e Alcatraz.',
     summaryEn:
       'Salone del Mobile and Fuorisalone Design Week in April is the single highest-demand week of the entire calendar year in Milan. When the design installations across Brera, Tortona, Isola, and Porta Venezia close at 21:00, the international crowd converges on the 20th floor of 5. Voya Rooftop, the 1,000-sqm industrial space of 4. 55 Milano, the Afro-House and Melodic Techno showcases at 1. Just Me under Torre Branca, 2. Pineta, 3. Aria Club, and the mega-stages of Fabrique and Alcatraz.',
     clubsIt:
@@ -163,16 +165,16 @@ const LUXURY_WEEKS = [
   },
   {
     id: 'monza-f1-grand-prix',
-    badgeIt: 'SETTIMANA #4 · SETTEMBRE · FORMULA 1 GRAN PREMIO D ITALIA MONZA WEEKEND',
+    badgeIt: 'SETTIMANA #4 · SETTEMBRE · FORMULA 1 GRAN PREMIO D’ITALIA MONZA WEEKEND',
     badgeEn: 'LUXURY WEEK #4 · SEPTEMBER · FORMULA 1 ITALIAN GRAND PRIX MONZA WEEKEND',
-    titleIt: '4. Gran Premio d Italia F1 Monza Weekend (Settembre): Official Drivers, Paddock Club & VIP Afterparties',
+    titleIt: '4. Gran Premio d’Italia F1 Monza Weekend (Settembre): Official Drivers, Paddock Club & VIP Afterparties',
     titleEn: '4. Formula 1 Italian Grand Prix Monza Weekend (September): Drivers, Paddock Club & VIP Afterparties',
     datesIt: 'Primo Weekend di Settembre (Giovedì - Domenica Notte)',
     datesEn: 'First Weekend of September (Thursday - Sunday Night)',
     minSpendIt: 'Tavoli VIP Pista €600 - €1.200 · Privé Paddock / Console €1.500 - €8.000',
     minSpendEn: 'Dancefloor VIP €600 - €1,200 · Paddock Privé / Console €1,500 - €8,000',
     summaryIt:
-      'Durante il weekend del Gran Premio d Italia di Formula 1 all Autodromo Nazionale di Monza, tutti i team F1, gli sponsor del Paddock Club, i piloti, gli armatori e i clienti UHNW alloggiano negli hotel 5 stelle di Milano. Dal Giovedì alla Domenica notte (celebrando il podio della gara domenicale), 1. Just Me Milano, 5. Voya Rooftop 20° Piano, 2. Pineta Corso Como, 3. Aria Club, 4. 55 Milano e 6. Repvblic mettono in scena sfilate di Jeroboam e Mathusalem di Dom Pérignon e Armand de Brignac.',
+      'Durante il weekend del Gran Premio d’Italia di Formula 1 all’Autodromo Nazionale di Monza, tutti i team F1, gli sponsor del Paddock Club, i piloti, gli armatori e i clienti UHNW alloggiano negli hotel 5 stelle di Milano. Dal Giovedì alla Domenica notte (celebrando il podio della gara domenicale), 1. Just Me Milano, 5. Voya Rooftop 20° Piano, 2. Pineta Corso Como, 3. Aria Club, 4. 55 Milano e 6. Repvblic mettono in scena sfilate di Jeroboam e Mathusalem di Dom Pérignon e Armand de Brignac.',
     summaryEn:
       'During the Formula 1 Italian Grand Prix weekend at Monza Circuit, F1 teams, Paddock Club sponsors, drivers, and UHNW guests stay across Milans 5-star hotels. From Thursday night through the Sunday Race Podium celebration, 1. Just Me Milano, 5. Voya Rooftop 20th Floor, 2. Pineta Corso Como, 3. Aria Club, 4. 55 Milano, and 6. Repvblic stage legendary bottle parades featuring Jeroboam and Methuselah formats of Dom Pérignon and Armand de Brignac.',
     clubsIt:
@@ -234,7 +236,7 @@ const PRIORITY_FASHION_VENUES = [
   {
     rank: 5,
     slug: 'voya-rooftop-milan',
-    badgeIt: '#5 Priorità · 20° Piano Sky Lounge (85m d Altezza)',
+    badgeIt: '#5 Priorità · 20° Piano Sky Lounge (85m d’Altezza)',
     badgeEn: '#5 Priority · 20th-Floor Sky Lounge (85m High)',
     name: '5. Voya Rooftop Milan (Via Achille Papa 30, Portello/CityLife)',
     roleIt: 'Press Days, Sunset Cocktail per Brand del Lusso & Private Skyline Party',
@@ -264,6 +266,7 @@ export default async function FashionWeekPage({
 }) {
   const { locale } = await params;
   const isIt = locale === 'it';
+  const venueMapCopy = getEventVenueCopy(locale as LocaleCode);
   const lp = localePrefix(locale);
   const canonicalUrl = `${baseUrl}${lp}/fashion-week`;
 
@@ -281,7 +284,7 @@ export default async function FashionWeekPage({
         ? 'Come funziona la prenotazione di un Tavolo VIP o Console DJ durante Fashion Week, Fuorisalone e GP F1 Monza?'
         : 'How does booking a VIP Table or DJ Console booth work during Fashion Week, Fuorisalone, and Monza F1?',
       a: isIt
-        ? 'Durante le 4 settimane mondiali del lusso a Milano i minimum spend dei tavoli subiscono l adeguamento "Special Event" (€600 - €1.500 in Pista, €1.500 - €10.000 nel Privé Branca / Console DJ, 100% convertito in bottiglie Dom Pérignon, Armand de Brignac, Cristal o Belvedere Magnum). Contatta il Desk Concierge su WhatsApp (+39 351 912 7047) per ricevere la mappa in tempo reale e bloccare la posizione con ingresso Hostess salta-fila.'
+        ? 'Durante le 4 settimane mondiali del lusso a Milano i minimum spend dei tavoli subiscono l’adeguamento "Special Event" (€600 - €1.500 in Pista, €1.500 - €10.000 nel Privé Branca / Console DJ, 100% convertito in bottiglie Dom Pérignon, Armand de Brignac, Cristal o Belvedere Magnum). Contatta il Desk Concierge su WhatsApp (+39 351 912 7047) per ricevere la mappa in tempo reale e bloccare la posizione con ingresso Hostess salta-fila.'
         : 'During Milans 4 global luxury weeks, VIP tables operate on Special Event minimum spends (€600 - €1,500 on the Dancefloor, €1,500 - €10,000 in the Privé Branca / DJ Console, 100% converted into Dom Pérignon, Armand de Brignac, Cristal, or Belvedere Magnum bottles). Message our Concierge Desk on WhatsApp (+39 351 912 7047) for live floor plans and fast-track VIP Hostess escort.',
     },
     {
@@ -313,7 +316,7 @@ export default async function FashionWeekPage({
         ? 'Dove festeggiare a Milano la Domenica sera del Gran Premio di Formula 1 di Monza?'
         : 'Where is the main Sunday night party in Milan after the Formula 1 Monza Grand Prix?',
       a: isIt
-        ? 'La Domenica sera del GP d Italia di Monza, il Closing Party ufficiale più richiesto da team, sponsor Paddock e fan internazionali si tiene da Just Me Milano (#1 Priorità sotto la Torre Branca, aperto tutta la notte fino alle 05:00), affiancato dal Sunset & Skyline Party al 20° piano di Voya Rooftop (#5) e dalla serata di 55 Milano (#4).'
+        ? 'La Domenica sera del GP d’Italia di Monza, il Closing Party ufficiale più richiesto da team, sponsor Paddock e fan internazionali si tiene da Just Me Milano (#1 Priorità sotto la Torre Branca, aperto tutta la notte fino alle 05:00), affiancato dal Sunset & Skyline Party al 20° piano di Voya Rooftop (#5) e dalla serata di 55 Milano (#4).'
         : 'On the Sunday night of the Formula 1 Italian Grand Prix, the flagship Closing Party favored by F1 paddock guests, sponsors, and international travelers takes place at Just Me Milano (#1 Priority beneath Torre Branca, open until 05:00), alongside the 20th-floor skyline party at Voya Rooftop (#5) and Sunday night at 55 Milano (#4).',
     },
     {
@@ -321,7 +324,7 @@ export default async function FashionWeekPage({
         ? 'Qual è il Dress Code richiesto durante la Milano Fashion Week e il Fuorisalone?'
         : 'What is the dress code at Milan VIP clubs during Fashion Week and Design Week?',
       a: isIt
-        ? 'Durante MFW e Design Week la selezione estetica all ingresso è ai massimi livelli mondiali: è richiesto un look High-Fashion, Editoriale o Sartoriale Contemporaneo (total black chic, blazer di taglio sartoriale, abiti da cocktail, accessori di ricerca). Anche per chi ha un Tavolo VIP è fondamentale che tutti gli ospiti del gruppo rispettino uno standard estetico curato.'
+        ? 'Durante MFW e Design Week la selezione estetica all’ingresso è ai massimi livelli mondiali: è richiesto un look High-Fashion, Editoriale o Sartoriale Contemporaneo (total black chic, blazer di taglio sartoriale, abiti da cocktail, accessori di ricerca). Anche per chi ha un Tavolo VIP è fondamentale che tutti gli ospiti del gruppo rispettino uno standard estetico curato.'
         : 'During MFW and Design Week, aesthetic door selection is at its highest level: High-Fashion, Editorial, or Contemporary Tailored attire is required (sharp all-black ensembles, tailored blazers, cocktail dresses, statement designer pieces). Even with a confirmed VIP Table, every guest in your party must meet the venues dress code.',
     },
   ];
@@ -451,7 +454,7 @@ export default async function FashionWeekPage({
 
           <p className="text-base sm:text-xl text-white/75 leading-relaxed max-w-4xl mb-8">
             {isIt
-              ? 'Accedi al circuito chiuso delle 4 Settimane Mondiali del Lusso a Milano: Milano Fashion Week Donna (Febbraio e Settembre), Fashion Week Uomo (Gennaio e Giugno), Salone del Mobile & Fuorisalone Design Week (Aprile) e Gran Premio d Italia F1 Monza (Settembre). Prenota Tavoli Backstage/Console, accrediti Model Agency o la privatizzazione completa del locale (Corporate Buyout) nei nostri 6 club prioritari: 1. Just Me Torre Branca, 2. Pineta Corso Como, 3. Aria Club, 4. 55 Milano, 5. Voya Rooftop 20° Piano e 6. Repvblic.'
+              ? 'Accedi al circuito chiuso delle 4 Settimane Mondiali del Lusso a Milano: Milano Fashion Week Donna (Febbraio e Settembre), Fashion Week Uomo (Gennaio e Giugno), Salone del Mobile & Fuorisalone Design Week (Aprile) e Gran Premio d’Italia F1 Monza (Settembre). Prenota Tavoli Backstage/Console, accrediti Model Agency o la privatizzazione completa del locale (Corporate Buyout) nei nostri 6 club prioritari: 1. Just Me Torre Branca, 2. Pineta Corso Como, 3. Aria Club, 4. 55 Milano, 5. Voya Rooftop 20° Piano e 6. Repvblic.'
               : 'Step inside Milans 4 Global Luxury Weeks: Milan Fashion Week Womenswear (February & September), Menswear (January & June), Salone del Mobile & Fuorisalone Design Week (April), and the Formula 1 Monza Italian Grand Prix (September). Reserve Backstage/DJ Console VIP booths, Model Agency accreditations, or full-venue Corporate Buyouts across our 6 priority clubs: 1. Just Me Torre Branca, 2. Pineta Corso Como, 3. Aria Club, 4. 55 Milano, 5. Voya Rooftop 20th Floor, and 6. Repvblic.'}
           </p>
 
@@ -584,7 +587,7 @@ export default async function FashionWeekPage({
                 <li>
                   <a href="#calcolatore-vip-fashion-week" className="hover:text-champagne transition-colors">
                     4. {isIt
-                      ? 'Calcolatore Preventivo Tavoli VIP & Matrice Formule d Ingresso'
+                      ? 'Calcolatore Preventivo Tavoli VIP & Matrice Formule d’Ingresso'
                       : 'Interactive VIP Table Quote Calculator & Entry Formula Matrix'}
                   </a>
                 </li>
@@ -816,7 +819,7 @@ export default async function FashionWeekPage({
               </h3>
               <p className="text-xs sm:text-sm text-white/70 leading-relaxed">
                 {isIt
-                  ? 'Vuoi l energia del club pieno ma con un area 100% riservata al tuo brand o al tuo team F1? Blocchiamo per voi l intero Privé Branca da Just Me, la Balconata VIP di Pineta/Repvblic o il Super Privé Console di Aria Club con bodyguard dedicato, bracciali personalizzati e servizio Magnum.'
+                  ? 'Vuoi l’energia del club pieno ma con un’area 100% riservata al tuo brand o al tuo team F1? Blocchiamo per voi l’intero Privé Branca da Just Me, la Balconata VIP di Pineta/Repvblic o il Super Privé Console di Aria Club con bodyguard dedicato, bracciali personalizzati e servizio Magnum.'
                   : 'Want the electric energy of a packed club while keeping a 100% cordoned space for your brand or F1 team? We reserve the entire Privé Branca at Just Me, the VIP Balcony at Pineta/Repvblic, or the DJ Console Super Privé at Aria Club with dedicated security, custom wristbands, and Magnum service.'}
               </p>
             </div>
@@ -833,8 +836,8 @@ export default async function FashionWeekPage({
               </h3>
               <p className="text-xs sm:text-sm text-white/70 leading-relaxed">
                 {isIt
-                  ? 'Canale fast-track dedicato a booker, agenzie di moda milanesi e internazionali, talent manager e PR per l accredito di modelle/i, l organizzazione di tavoli Royal Aperitivo / Cena Cantata e l accesso prioritario ai party ufficiali.'
-                  : 'Dedicated fast-track desk for Milanese and international model agency bookers, talent managers, and PR directors to arrange model accreditations, Royal Aperitivo / Singing Dinner hospitality tables, and priority entry to official after-shows.'}
+                  ? 'Canale fast-track dedicato a booker, agenzie di moda milanesi e internazionali, talent manager e PR per l’accredito di modelle/i, l’organizzazione di tavoli Royal’Aperitivo / Cena Cantata e l’accesso prioritario ai party ufficiali.'
+                  : 'Dedicated fast-track desk for Milanese and international model agency bookers, talent managers, and PR directors to arrange model accreditations, Royal’Aperitivo / Singing Dinner hospitality tables, and priority entry to official after-shows.'}
               </p>
             </div>
           </div>
@@ -912,21 +915,15 @@ export default async function FashionWeekPage({
             </a>
           </div>
 
-          <div className="rounded-2xl overflow-hidden border border-white/15 h-80 sm:h-96 w-full bg-black">
-            <iframe
-              title={
-                isIt
-                  ? 'Mappa Milano Fashion Week e Fuorisalone: Just Me Torre Branca Parco Sempione'
-                  : 'Map of Milan Fashion Week and Fuorisalone: Just Me Torre Branca Parco Sempione'
-              }
-              src="https://www.google.com/maps?q=Viale+Luigi+Camoens+2,+20121+Milano+MI,+Italy&output=embed"
-              width="100%"
-              height="100%"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="w-full h-full border-0"
-            />
-          </div>
+          <EventVenueMap
+            id="fashion-week-just-me-map"
+            mapUrl="https://www.google.com/maps?q=Viale+Luigi+Camoens+2,+20121+Milano+MI,+Italy&output=embed"
+            labels={{
+              loadMap: venueMapCopy.loadMap,
+              mapTitle: venueMapCopy.mapTitle.replace('{venue}', 'Just Me Milano — Torre Branca Parco Sempione'),
+              privacyLoadNotice: venueMapCopy.privacyLoadNotice,
+            }}
+          />
         </div>
 
         {/* 7 FAQ Strategiche */}

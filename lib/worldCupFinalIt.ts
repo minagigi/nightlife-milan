@@ -11,8 +11,8 @@ export const WORLD_CUP_FINAL_COVER_IT = {
   title: 'Finale Coppa del Mondo su maxischermo al Just Me Milano',
   alt: 'Cover di Spagna-Argentina al Just Me Milano: domenica 19 luglio, apertura 19:30 e diretta alle 21:00',
   description: 'Cover 2:1 ricomposta dalla locandina originale con Just Me, i due giocatori, data e orari italiani verificati.',
-  width: 2752,
-  height: 1376,
+  width: 1376,
+  height: 768,
 } as const;
 
 export const WORLD_CUP_FINAL_POSTER_IT = {
@@ -20,8 +20,8 @@ export const WORLD_CUP_FINAL_POSTER_IT = {
   title: 'Locandina finale Spagna-Argentina al Just Me Milano',
   alt: 'Locandina 5:4 di Spagna-Argentina al Just Me Milano con i due giocatori, Torre Branca, data, orari e contatti',
   description: 'Ricomposizione 5:4 della locandina originale, con artwork a pieno formato, data, orari, WhatsApp e sito corretti.',
-  width: 1600,
-  height: 1280,
+  width: 1376,
+  height: 768,
 } as const;
 
 export const WORLD_CUP_FINAL_MOOD_IMAGES_IT = [
@@ -30,32 +30,32 @@ export const WORLD_CUP_FINAL_MOOD_IMAGES_IT = [
     title: 'Torre Branca accanto al Just Me Milano',
     alt: 'Torre Branca illuminata di rosa tra alberi e cielo serale nel Parco Sempione a Milano',
     description: 'Ricomposizione 5:4 da fotografia reale della Torre Branca illuminata nel Parco Sempione.',
-    width: 1400,
-    height: 1120,
+    width: 1376,
+    height: 768,
   },
   {
     src: '/images/events/generated/just-me-finale-coppa-mondo-aperitivo-real-5x4-it-v5.jpg',
     title: 'Buffet aperitivo al Just Me Milano',
     alt: 'Buffet del Just Me Milano con pietanze, dessert e due addette al servizio',
     description: 'Ricomposizione 5:4 da fotografia reale del buffet aperitivo interno del Just Me Milano.',
-    width: 1400,
-    height: 1120,
+    width: 1376,
+    height: 768,
   },
   {
     src: '/images/events/generated/just-me-finale-coppa-mondo-lounge-tavoli-real-5x4-it-v5.jpg',
     title: 'Lounge e tavoli del Just Me Milano',
     alt: 'Lounge del Just Me Milano con divani neri, tavolini, luci rosa e insegne del locale',
     description: 'Fotografia reale dell’area lounge e dei tavoli del Just Me Milano.',
-    width: 1400,
-    height: 1120,
+    width: 1376,
+    height: 768,
   },
   {
     src: '/images/events/generated/just-me-finale-coppa-mondo-sala-musica-real-5x4-it-v5.jpg',
     title: 'Atmosfera serale sotto la Torre Branca',
     alt: 'Lounge esterna con ospiti, divani e tavolo apparecchiato davanti alla Torre Branca illuminata di rosa',
     description: 'Fotografia reale dell’atmosfera serale nella lounge esterna accanto alla Torre Branca.',
-    width: 1400,
-    height: 1120,
+    width: 1376,
+    height: 768,
   },
 ] as const;
 

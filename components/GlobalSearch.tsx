@@ -662,7 +662,7 @@ const PRIORITY_CLUBS_QUICK = [
       it: ['Parco Sempione', 'House & Commerciale', 'Eleganza Curata', 'Aperitivo 20–25€ · VIP 350€+'],
     },
     searchTerms:
-      'just me milano italo rota torre branca parco sempione viale luigi camoens 2 royal aperitivo tavoli vip cavalli',
+      'just me milano italo rota torre branca parco sempione viale luigi camoens 2 royal aperitivo tavoli vip grande gatsby',
   },
   {
     rank: 2,
@@ -1245,14 +1245,25 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
 
   const prevPathname = useRef(pathname);
   useEffect(() => {
+    const urlQuery = new URLSearchParams(window.location.search).get('q')?.trim() || '';
     if (prevPathname.current !== pathname) {
       prevPathname.current = pathname;
-      if (isOpen) {
+      if (urlQuery) {
+        ensureExtendedCatalogs();
+        setQuery(urlQuery.replace(/-/g, ' '));
+        setIsOpen(true);
+      } else if (isOpen) {
         setIsOpen(false);
         setQuery('');
       }
+      return;
     }
-  }, [pathname, isOpen]);
+    if (urlQuery && !isOpen && !query) {
+      ensureExtendedCatalogs();
+      setQuery(urlQuery.replace(/-/g, ' '));
+      setIsOpen(true);
+    }
+  }, [pathname, isOpen, query, ensureExtendedCatalogs]);
 
   const handleClose = useCallback(() => {
     setIsOpen(false);
@@ -1621,6 +1632,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
         onFocus={ensureExtendedCatalogs}
         className="nlm-search-trigger flex items-center justify-center md:justify-between gap-2.5 min-h-11 min-w-11 md:px-3.5 py-2 border border-[#F6F1E7]/20 bg-[#0B0A09] text-[#F6F1E7] hover:border-[#D6BE96] hover:text-[#D6BE96] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D6BE96]"
         aria-label={ui.triggerAria}
+        aria-keyshortcuts="Control+K Meta+K"
         aria-expanded={isOpen}
         aria-haspopup="dialog"
       >

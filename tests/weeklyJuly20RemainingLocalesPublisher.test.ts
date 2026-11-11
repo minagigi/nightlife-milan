@@ -1,3 +1,4 @@
+import { existsSync } from 'node:fs';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
@@ -11,7 +12,9 @@ import {
   type ExistingEvent,
 } from '../scripts/publish-weekly-july20-remaining-locales';
 
-test('default runner is create:false, offline, and excludes EN/IT', async () => {
+const HAS_MANIFEST = existsSync('.Codex/work/2026-07-19-weekly-july20-remaining-locales/prepared-manifest.jsonl');
+
+test('default runner is create:false, offline, and excludes EN/IT', { skip: !HAS_MANIFEST }, async () => {
   const rows = await loadPreparedManifest();
   const args = parseCliArgs([]);
   const plan = localExecutionPlan(rows, args);
@@ -26,7 +29,7 @@ test('default runner is create:false, offline, and excludes EN/IT', async () => 
   assert.match(source, /if \(!args\.preflight && !args\.execute\) return plan/u);
 });
 
-test('pilot flags select exactly the ten Spanish University Party variants', async () => {
+test('pilot flags select exactly the ten Spanish University Party variants', { skip: !HAS_MANIFEST }, async () => {
   const rows = await loadPreparedManifest();
   const args = parseCliArgs([
     '--pilot-locale=es',
@@ -39,7 +42,7 @@ test('pilot flags select exactly the ten Spanish University Party variants', asy
   assert.throws(() => parseCliArgs(['--execute']), /requires --pilot-locale and --pilot-event/u);
 });
 
-test('organization-wide exact-marker duplicate gate hard-fails before create', async () => {
+test('organization-wide exact-marker duplicate gate hard-fails before create', { skip: !HAS_MANIFEST }, async () => {
   const [row] = await loadPreparedManifest();
   const event = (id: string): ExistingEvent => ({
     id,

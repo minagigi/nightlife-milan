@@ -153,10 +153,10 @@ test('cover, poster and four event-specific mood images have correct formats and
     assert.equal(metadata.width, asset.width);
     assert.equal(metadata.height, asset.height);
   }
-  assert.equal(WORLD_CUP_FINAL_COVER_IT.width / WORLD_CUP_FINAL_COVER_IT.height, 2);
+  assert.deepEqual([WORLD_CUP_FINAL_COVER_IT.width, WORLD_CUP_FINAL_COVER_IT.height], [1376, 768]);
   assert.ok(
     [WORLD_CUP_FINAL_POSTER_IT, ...WORLD_CUP_FINAL_MOOD_IMAGES_IT]
-      .every((image) => image.width / image.height === 1.25 && image.src.includes('-5x4-it-v5.')),
+      .every((image) => image.width === 1376 && image.height === 768 && image.src.includes('-5x4-it-v5.')),
     'all Eventbrite body assets must use the approved no-centre-crop 5:4 v5 treatment',
   );
 });

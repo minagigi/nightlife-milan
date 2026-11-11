@@ -1569,7 +1569,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "cluster": "venue",
     "slugKey": "just-me-milan",
     "venueSlug": "just-me-milan",
-    "name": "Just Me Milano ( Roberto Cavalli Club — Torre Branca )",
+    "name": "Just Me Milano ( Icona Italo Rota — Torre Branca )",
     "shortName": "Just Me",
     "zone": "Parco Sempione",
     "address": "Viale Luigi Camusso (presso Torre Branca), 20121 Milano MI",
@@ -1581,7 +1581,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "listPrice": "20€–30€ Accredited Guestlist (19:30–00:30)",
     "pistaPrice": "320€–400€ (up to 6–8 guests, 100% bottle credit)",
     "privePrice": "600€–1.000€ (up to 8–10 guests, elevated Privé)",
-    "consolePrice": "1.200€–3.000€+ (10–15 guests, Super Privé & Roberto Cavalli Stage)",
+    "consolePrice": "1.200€–3.000€+ (10–15 guests, Super Privé & Main Console Stage)",
     "image": "/images/venues/just-me-milano/just-me-milano-aperitivo-01.webp",
     "inlineImages": [
       "/images/pillars/aperitivo-01.webp",
@@ -4117,7 +4117,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "name": "Festa di Compleanno 50 Anni a Milano (Terrazze Panoramice, Cena Cantata & Sale Riservate)",
     "shortName": "Compleanno 50 Anni",
     "zone": "Duomo, Porta Volta, CityLife & Sempione",
-    "address": "Ceresio 7, Terrazza Duomo 21, Voya Rooftop, 55 Milano, Just Me Roberto Cavalli, MIB",
+    "address": "Ceresio 7, Terrazza Duomo 21, Voya Rooftop, 55 Milano, Just Me Torre Branca, MIB",
     "hours": "19:00 – 03:30",
     "age": "35+ / 50+ Exclusive Private Celebration",
     "metro": "M1/M3 Duomo, M5 Monumentale/Portello/Gerusalemme",
@@ -4814,7 +4814,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "id": "g-61",
     "cluster": "occasion",
     "slugKey": "inter-san-siro-afterparty-milan",
-    "name": "Dopo-Partita Inter a San Siro: Dove Andare a Ballare (Aria Club a 150m, Just Me 7/7, Voya M5)",
+    "name": "Dopo-Partita Inter a San Siro: Dove Uscire la Sera e Ballare (Aria Club a 150m, Just Me 7/7, Voya M5)",
     "shortName": "Dopo-Partita Inter San Siro",
     "zone": "San Siro, Portello, Parco Sempione & Corso Como",
     "address": "Stadio Giuseppe Meazza San Siro → Aria Club (150m), Voya Rooftop (M5 Portello), Just Me (Open 7/7)",
@@ -5167,7 +5167,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "name": "Milano Fashion Week Donna Febbraio: Calendario Party, Aftershow Sfilate & Tavoli VIP",
     "shortName": "Fashion Week Donna Febbraio",
     "zone": "Quadrilatero della Moda, Brera, Parco Sempione & Corso Como",
-    "address": "Just Me Roberto Cavalli, Armani Privé, Repvblic, Pineta, Volt Club, Ceresio 7, Tocqueville 13",
+    "address": "Just Me Torre Branca, Armani Privé, Repvblic, Pineta, Volt Club, Ceresio 7, Tocqueville 13",
     "hours": "19:00 Cocktail – 05:30 Official & Runway Afterparties",
     "age": "21+ / 23+ Models, Designers, Buyers, Press & VIP Guests",
     "metro": "M3 Montenapoleone/Repubblica, M2 Garibaldi, M1 Cadorna/Duomo + Chauffeur Fleet",
@@ -5517,7 +5517,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "name": "Formula 1 Gran Premio d’Italia Monza: Guida ai Party Ufficiali F1 e Tavoli VIP a Milano",
     "shortName": "Formula 1 Monza GP Party",
     "zone": "Parco Sempione, Brera, Corso Como, Porta Nuova & CityLife",
-    "address": "Just Me Roberto Cavalli, Armani Privé, Pineta, Repvblic, Voya Rooftop, Ceresio 7, Terrazza Duomo 21",
+    "address": "Just Me Torre Branca, Armani Privé, Pineta, Repvblic, Voya Rooftop, Ceresio 7, Terrazza Duomo 21",
     "hours": "19:30 Post-Qualifying/Race Dinner – 05:30 F1 Paddock Afterparties",
     "age": "23+ F1 Paddock Club Guests, Sponsors, Drivers & International Jet-Set",
     "metro": "Garibaldi FS / Centrale FS (15 min train from Monza) + Helicopter/Mercedes V-Class Transfer",
@@ -8678,7 +8678,7 @@ function renderEnGuide(seed: GuideSeed100) {
 <div class="overflow-x-auto my-6"><table class="min-w-full border border-white/15 text-sm">
 <thead><tr class="bg-white/10 text-left"><th class="p-3">Priority Rank</th><th class="p-3">Club Name & Zone</th><th class="p-3">Signature Strength</th><th class="p-3">VIP Table Starting Price</th></tr></thead>
 <tbody>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">#1 Priority</td><td class="p-3">Just Me Milano (Parco Sempione — Torre Branca)</td><td class="p-3">Open 7/7 Mon–Sun, Roberto Cavalli luxury club & garden</td><td class="p-3">320€ Pista / 600€+ Privé</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">#1 Priority</td><td class="p-3">Just Me Milano (Parco Sempione — Torre Branca)</td><td class="p-3">Open 7/7 Mon–Sun, Italo Rota luxury club & garden</td><td class="p-3">320€ Pista / 600€+ Privé</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">#2 Priority</td><td class="p-3">Pineta Milano (Via Messina 38 — Corso Como)</td><td class="p-3">Crystal chandeliers, Singing Dinner Show & luxury Privé</td><td class="p-3">320€ Pista / 600€+ Privé</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">#3 Priority</td><td class="p-3">Aria Club Milano (Piazzale dello Sport 14 — San Siro)</td><td class="p-3">150m from San Siro Stadium, huge summer garden & indoor arena</td><td class="p-3">250€ Pista / 500€+ Privé</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">#4 Priority</td><td class="p-3">55 Milano (Via Piero della Francesca 55 — Sempione)</td><td class="p-3">1,000m² loft & terrace, #1 for graduations, birthdays & aperitivo</td><td class="p-3">200€ Pista / 350€+ Privé</td></tr>
@@ -8801,7 +8801,7 @@ function renderItGuide(seed: GuideSeed100) {
 <div class="overflow-x-auto my-6"><table class="min-w-full border border-white/15 text-sm">
 <thead><tr class="bg-white/10 text-left"><th class="p-3">Priorità</th><th class="p-3">Club e Quartiere</th><th class="p-3">Punto di Forza</th><th class="p-3">Prezzo Tavolo VIP</th></tr></thead>
 <tbody>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">#1 Priorità</td><td class="p-3">Just Me Milano (Parco Sempione — Torre Branca)</td><td class="p-3">Aperto 7 sere su 7 (Lun–Dom), club Roberto Cavalli con giardino estivo</td><td class="p-3">320€ Pista / 600€+ Privé</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">#1 Priorità</td><td class="p-3">Just Me Milano (Parco Sempione — Torre Branca)</td><td class="p-3">Aperto 7 sere su 7 (Lun–Dom), club firmato Italo Rota con giardino estivo</td><td class="p-3">320€ Pista / 600€+ Privé</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">#2 Priorità</td><td class="p-3">Pineta Milano (Via Messina 38 — Corso Como)</td><td class="p-3">Lampadari di cristallo, Cena Cantata spettacolare e Privé di lusso</td><td class="p-3">320€ Pista / 600€+ Privé</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">#3 Priorità</td><td class="p-3">Aria Club Milano (Piazzale dello Sport 14 — San Siro)</td><td class="p-3">A 150 metri dallo Stadio San Siro, immenso giardino e sala club</td><td class="p-3">250€ Pista / 500€+ Privé</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">#4 Priorità</td><td class="p-3">55 Milano (Via Piero della Francesca 55 — Sempione)</td><td class="p-3">1.000m² di loft e terrazza, #1 per lauree, compleanni e aperitivi</td><td class="p-3">200€ Pista / 350€+ Privé</td></tr>
@@ -8946,7 +8946,7 @@ function renderCompactGuide(seed: GuideSeed100, locale: LocaleCode, d: CompactLa
 <div class="overflow-x-auto my-6"><table class="min-w-full border border-white/15 text-sm">
 <thead><tr class="bg-white/10 text-left"><th class="p-3">#</th><th class="p-3">${d.lblVenue} (${d.city})</th><th class="p-3">${d.lblZone} & ${d.lblAddress}</th><th class="p-3">${d.lblPrice}</th></tr></thead>
 <tbody>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">#1</td><td class="p-3">Just Me Milano (7/7 — Roberto Cavalli)</td><td class="p-3">Parco Sempione — Viale Luigi Camusso (Torre Branca)</td><td class="p-3">320€–400€ / 600€–3.000€+</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">#1</td><td class="p-3">Just Me Milano (7/7 — Torre Branca)</td><td class="p-3">Parco Sempione — Viale Luigi Camusso (Torre Branca)</td><td class="p-3">320€–400€ / 600€–3.000€+</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">#2</td><td class="p-3">Pineta Milano Luxury Hall</td><td class="p-3">Corso Como — Via Messina 38 (M5 Cenisio)</td><td class="p-3">320€–400€ / 600€–2.000€+</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">#3</td><td class="p-3">Aria Club Milano (150m San Siro)</td><td class="p-3">San Siro — Piazzale dello Sport 14 (M5 San Siro)</td><td class="p-3">250€–320€ / 500€–1.800€+</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">#4</td><td class="p-3">55 Milano (1.000m² Loft & Terrace)</td><td class="p-3">Corso Sempione — Via Piero della Francesca 55 (M5)</td><td class="p-3">200€–300€ / 350€–1.200€+</td></tr>

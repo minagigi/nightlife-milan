@@ -89,7 +89,7 @@ const FAQ_COPY = {
     it: 'Si. Sono disponibili tavoli pista, prive e super prive in base al locale e alla serata.',
     es: 'Si. Las mesas de pista, prive y super-prive dependen del local y de la noche.',
     fr: 'Oui. Les tables piste, prive et super-prive dependent du lieu et de la soiree.',
-    de: 'Ja. Dancefloor-, Prive- und Super-Prive-Tische hangen vom Club und der jeweiligen Nacht ab.',
+    de: 'Ja. Dancefloor-, Privé- und Super-Privé-Tische hangen vom Club und der jeweiligen Nacht ab.',
     pt: 'Sim. Mesas de pista, prive e super-prive dependem do local e da noite.',
   },
   afterPurchase: { en: 'What should I send after buying?', it: "Cosa devo inviare dopo l'acquisto?", es: 'Que debo enviar despues de comprar?', fr: "Que dois-je envoyer apres l'achat ?", de: 'Was soll ich nach dem Kauf senden?', pt: 'O que devo enviar depois da compra?' },
@@ -201,7 +201,7 @@ const VENUE_SERVICES: Record<string, LocalizedCopy> = {
     it: 'Aperitivo, cena, cena cantata show dinner il giovedì, discoteca, tavoli pista, privé e super privé.',
     es: 'Aperitivo, cena, show dinner el jueves, discoteca, mesas de pista, prive y super-prive.',
     fr: 'Aperitivo, diner, show dinner le jeudi, club, tables piste, prive et super-prive.',
-    de: 'Aperitivo, Dinner, Show Dinner donnerstags, Club, Dancefloor-, Prive- und Super-Prive-Tische.',
+    de: 'Aperitivo, Dinner, Show Dinner donnerstags, Club, Dancefloor-, Privé- und Super-Privé-Tische.',
     pt: 'Aperitivo, jantar, show dinner a quinta, discoteca, mesas de pista, prive e super-prive.',
   },
   'v-pineta': {
@@ -209,7 +209,7 @@ const VENUE_SERVICES: Record<string, LocalizedCopy> = {
     it: 'Aperitivo, discoteca e, quando confermata nel singolo evento, cena spettacolo. Tavoli pista, privé e super privé.',
     es: 'Aperitivo, discoteca y, cuando el evento lo confirme, cena espectaculo. Mesas de pista, prive y super-prive.',
     fr: 'Aperitivo, club et, si l’evenement le confirme, diner spectacle. Tables piste, prive et super-prive.',
-    de: 'Aperitivo, Club und, wenn im Event bestatigt, Dinner-Show. Dancefloor-, Prive- und Super-Prive-Tische.',
+    de: 'Aperitivo, Club und, wenn im Event bestatigt, Dinner-Show. Dancefloor-, Privé- und Super-Privé-Tische.',
     pt: 'Aperitivo, discoteca e, quando confirmado no evento, jantar-espetaculo. Mesas de pista, prive e super-prive.',
   },
   'v-aria': {
@@ -217,7 +217,7 @@ const VENUE_SERVICES: Record<string, LocalizedCopy> = {
     it: 'Aperitivo, discoteca, tavoli pista, privé e super privé per un pubblico italiano 18+.',
     es: 'Aperitivo, discoteca, mesas de pista, prive y super-prive para publico italiano 18+.',
     fr: 'Aperitivo, club, tables piste, prive et super-prive pour un public italien 18+.',
-    de: 'Aperitivo, Club, Dancefloor-, Prive- und Super-Prive-Tische fur italienisches Publikum ab 18.',
+    de: 'Aperitivo, Club, Dancefloor-, Privé- und Super-Privé-Tische fur italienisches Publikum ab 18.',
     pt: 'Aperitivo, discoteca, mesas de pista, prive e super-prive para publico italiano 18+.',
   },
 };

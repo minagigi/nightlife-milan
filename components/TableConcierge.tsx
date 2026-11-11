@@ -127,15 +127,6 @@ export default function TableConcierge({ locale, events, initialNow, copy, surfa
             <p className={styles.pills}>{homeIntro.pills}</p>
           </>}
           <a className={styles.primaryLink} href={`#tc-request-${surface}`}>{copy.requestAction}<span aria-hidden="true">↗</span></a>
-          {surface === 'home' && <Image
-            src="/images/table-concierge/justme-night.webp"
-            alt={copy.title}
-            width={1200}
-            height={900}
-            quality={92}
-            sizes="(max-width: 760px) 100vw, 50vw"
-            className={styles.mobileHeroPhoto}
-          />}
           {homeIntro && <div className={styles.heroLinks}>
             <Link href={`${lp}/events/tonight`} prefetch={false}>{homeIntro.ctaSub} ↓</Link>
             <Link href={`${lp}/clubs`} prefetch={false}>{homeIntro.allVenues} ↗</Link>

@@ -400,7 +400,7 @@ test('Guè cover and body assets use exact 2:1 and 5:4 canvases without tiny fil
       const relative = getGueJustMeGeneratedImagePath(locale, kind).replace(/^\//, '');
       const file = path.join(process.cwd(), 'public', ...relative.split('/'));
       const [metadata, info] = await Promise.all([sharp(file).metadata(), stat(file)]);
-      const expected = kind === 'cover' ? [2000, 1000] : [1600, 1280];
+      const expected = [1376, 768];
       assert.deepEqual([metadata.width, metadata.height], expected, `${locale} ${kind}`);
       assert.ok(info.size > 100_000, `${locale} ${kind} is unexpectedly small`);
     }

@@ -89,7 +89,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '21+', 'Strictly Elegant. Long trousers for men are mandatory.', 'House and Urban'),
     image: '/images/events/october-2026/249146-bbdee1490af9.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/monday-night-279/249156/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/monday-night-280/249158/channel/nightlifemilan-1',
     priority: 100
   },
   {
@@ -106,14 +106,14 @@ export const weeklyEvents: WeeklyEvent[] = [
       en: 'The most exclusive university party in Milan. Just Me transforms its elegant venue into an energetic dancefloor for international students and the young Milanese crowd. Expect a vibrant atmosphere, premium drinks, and the best commercial hits.',
       it: 'Il party universitario più esclusivo di Milano. Just Me trasforma la sua elegante location in un dancefloor energico per studenti internazionali e giovani milanesi. Aspettati un\'atmosfera vibrante, drink premium e le migliori hit commerciali.'
     },
-    pricing: { aperitif: 'From €13', club: 'From €0', tables: 'From €200 to €960' },
+    pricing: { aperitif: 'From €13', club: 'From €0', tables: 'From €320 to €5,000' },
     dressCode: {
       en: 'Smart Casual. Elegant shirt for men. No sportswear.',
       it: 'Smart Casual. Camicia elegante per gli uomini. No abbigliamento sportivo.'
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '18+', 'Smart Casual', 'Commercial and Reggaeton'),
     image: '/images/events/october-2026/249182-aa34ab79100b.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/university-party-57/249210/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/university-party-55/249163/channel/nightlifemilan-1',
     priority: 100
   },
   {
@@ -202,14 +202,14 @@ export const weeklyEvents: WeeklyEvent[] = [
       en: 'The pinnacle of Milanese nightlife. Saturday Night at Just Me offers spectacular themed parties, premium bottle service, and an unforgettable atmosphere under the Torre Branca. The ultimate luxury clubbing experience.',
       it: 'L\'apice della vita notturna milanese. Il sabato sera al Just Me offre spettacolari feste a tema, servizio bottiglie premium e un\'atmosfera indimenticabile sotto la Torre Branca. L\'esperienza di clubbing di lusso per eccellenza.'
     },
-    pricing: { aperitif: 'From €25', club: 'From €25', tables: 'From €320 to €5,000' },
+    pricing: { aperitif: 'From €15', club: 'From €20', tables: 'From €320 to €5,000' },
     dressCode: {
       en: 'Strictly Elegant. Dress to impress.',
       it: 'Strettamente Elegante. Vestiti per impressionare.'
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '21+', 'Strictly Elegant', 'Commercial and House'),
     image: '/images/events/october-2026/249213-e2755e4bf02c.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/swae-lee-1/248805/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/saturday-night-783/249213/channel/nightlifemilan-1',
     priority: 100
   },
   {
@@ -233,7 +233,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '21+', 'Urban Chic', 'Hip-Hop and R&B'),
     image: '/images/events/october-2026/249199-9373e4ee381b.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/sunday-night-166/249199/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/sunday-night-181/249200/channel/nightlifemilan-1',
     priority: 100
   },
 
@@ -259,7 +259,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Pineta Club', 'Via Messina 38, Milan', '20+', 'Smart Elegant', 'Hip-Hop, Reggaeton and Commercial'),
     image: '/images/events/october-2026/249230-f6b0d6c67b51.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/tr3ndy-society-thursday-night-5/250753/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/tr3ndy-society-thursday-night-6/251806/channel/nightlifemilan-1',
     priority: 95
   },
   {
@@ -307,7 +307,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Pineta Club', 'Via Privata Giovanni Ventura 15, Milan', '25+', 'Strictly Elegant', 'Live Music and Commercial'),
     image: '/images/events/october-2026/243815-e33432d48dd4.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/saturday-night-774/243828/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/saturday-night-775/243829/channel/nightlifemilan-1',
     priority: 95
   },
 

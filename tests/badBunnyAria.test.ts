@@ -87,8 +87,8 @@ test('Bad Bunny Aria galleries use 210 exact localized assets', async () => {
     assert.ok(gallery?.hero);
     assert.equal(gallery.images.length, 5);
     const plans = [
-      { src: getBadBunnyAriaImagePath(locale, 'cover'), width: 2000, height: 1000 },
-      ...(['poster', 'venue', 'aperitivo', 'club', 'tables'] as const).map((kind) => ({ src: getBadBunnyAriaImagePath(locale, kind), width: 1600, height: 1280 })),
+      { src: getBadBunnyAriaImagePath(locale, 'cover'), width: 1376, height: 768 },
+      ...(['poster', 'venue', 'aperitivo', 'club', 'tables'] as const).map((kind) => ({ src: getBadBunnyAriaImagePath(locale, kind), width: 1376, height: 768 })),
     ];
     for (const plan of plans) {
       const file = path.join(process.cwd(), 'public', plan.src.replace(/^\//, ''));

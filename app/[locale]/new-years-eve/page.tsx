@@ -1,5 +1,8 @@
 import { Metadata } from 'next';
-import Link from '@/components/LocalizedLink';
+
+import EventVenueMap from '@/components/EventVenueMap';
+import { getEventVenueCopy } from '@/lib/i18n/eventVenueCopy';
+import type { LocaleCode } from '@/lib/i18n/locales';import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
 import { tr } from '@/lib/i18n/t';
 import {
@@ -144,7 +147,7 @@ const NYE_FORMULAS = [
     priceIt: '€50 - €90 / persona',
     priceEn: '€50 - €90 / person',
     includedIt:
-      'Bracciale o QR code ufficiale in prevendita nominale con corsia prioritaria dopo il brindisi di mezzanotte, 1 drink incluso e accesso completo alle piste da ballo fino all alba del 1 Gennaio 2027.',
+      'Bracciale o QR code ufficiale in prevendita nominale con corsia prioritaria dopo il brindisi di mezzanotte, 1 drink incluso e accesso completo alle piste da ballo fino all’alba del 1 Gennaio 2027.',
     includedEn:
       'Official nominal presale QR pass with fast-track entry after midnight, 1 welcome drink included, and full access to the main dancefloors until sunrise on January 1, 2027.',
     bestVenuesIt:
@@ -160,7 +163,7 @@ const NYE_FORMULAS = [
     priceIt: '€600 - €5.000 (fino a 8-12 pass inclusi)',
     priceEn: '€600 - €5,000 (up to 8-12 VIP passes included)',
     includedIt:
-      'Ingresso immediato zero-coda con Hostess VIP, divanetto riservato in Pista, Balconata o Console DJ, 100% dell importo convertito in bottiglie premium e formati Magnum/Jeroboam (Dom Pérignon, Armand de Brignac, Belvedere Magnum, Moët Ice).',
+      'Ingresso immediato zero-coda con Hostess VIP, divanetto riservato in Pista, Balconata o Console DJ, 100% dell’importo convertito in bottiglie premium e formati Magnum/Jeroboam (Dom Pérignon, Armand de Brignac, Belvedere Magnum, Moët Ice).',
     includedEn:
       'Immediate zero-queue escort with VIP Hostess, private booth on the Dancefloor, Balcony, or DJ Console, 100% of minimum spend converted into premium & Magnum/Jeroboam bottles (Dom Pérignon, Armand de Brignac, Belvedere Magnum, Moët Ice).',
     bestVenuesIt:
@@ -188,7 +191,7 @@ const NYE_CLUBS = [
     fireworksVibeEn: 'Heated crystal dome beneath the illuminated 108-meter Torre Branca in Parco Sempione',
     image: '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp',
     descriptionIt:
-      'Just Me Milano (#1 Priorità Nightlife Milan), firmato da Italo Rota ai piedi della monumentale Torre Branca in Parco Sempione, ospita il Capodanno più iconico e fotografato d Italia. La serata del 31 Dicembre 2026 inizia alle 20:30 con il Gran Cenone di Gala servito o alle 21:00 con il Royal Buffet Imperiale. Allo scoccare della mezzanotte la struttura vetrata permette di ammirare i fuochi d artificio sopra Parco Sempione e la Torre Branca illuminata, prima di scatenarsi fino alle 05:30 con DJ set internazionali, sfilate di Dom Pérignon luminosi e il leggendario Privé Branca.',
+      'Just Me Milano (#1 Priorità Nightlife Milan), firmato da Italo Rota ai piedi della monumentale Torre Branca in Parco Sempione, ospita il Capodanno più iconico e fotografato d’Italia. La serata del 31 Dicembre 2026 inizia alle 20:30 con il Gran Cenone di Gala servito o alle 21:00 con il Royal Buffet Imperiale. Allo scoccare della mezzanotte la struttura vetrata permette di ammirare i fuochi d’artificio sopra Parco Sempione e la Torre Branca illuminata, prima di scatenarsi fino alle 05:30 con DJ set internazionali, sfilate di Dom Pérignon luminosi e il leggendario Privé Branca.',
     descriptionEn:
       'Just Me Milano (#1 Official Priority), designed by Italo Rota at the base of the 108-meter Torre Branca in Parco Sempione, hosts Italys most glamorous New Years Eve gala. On December 31, 2026, festivities begin at 20:30 with the Seated Italo Rota Gala Dinner or at 21:00 with the Imperial Royal Buffet. At midnight, guests watch the fireworks light up Parco Sempione and Torre Branca through the heated glass dome before partying until 05:30 with international guest DJs, Dom Pérignon sparkler parades, and the ultra-exclusive Privé Branca.',
   },
@@ -261,7 +264,7 @@ const NYE_CLUBS = [
     slug: 'voya-rooftop-milan',
     priorityBadgeIt: '#5 Priorità · 20° Piano Vista Fuochi d Artificio a 360°',
     priorityBadgeEn: '#5 Priority · 20th Floor 360° Fireworks Skyline View',
-    nameIt: '5. Voya Rooftop Milan (Via Achille Papa 30, 20° Piano: Capodanno a 85 Metri d Altezza Vista Fuochi su Tutta Milano)',
+    nameIt: '5. Voya Rooftop Milan (Via Achille Papa 30, 20° Piano: Capodanno a 85 Metri d’Altezza Vista Fuochi su Tutta Milano)',
     nameEn: '5. Voya Rooftop Milan (Via Achille Papa 30, 20th Floor: NYE at 85 Meters Overlooking All Milan Fireworks)',
     address: 'Viale Achille Papa, 30 (20° Piano, Portello / CityLife / Isola) - 20149 Milano',
     formulasIt:
@@ -272,7 +275,7 @@ const NYE_CLUBS = [
     fireworksVibeEn: 'The only 20th-floor floor-to-ceiling glass sky lounge with a 360-degree view of Milans midnight fireworks',
     image: '/images/voya-rooftop-milan.webp',
     descriptionIt:
-      'Vivere il conto alla rovescia del 31 Dicembre al 20° piano di Voya Rooftop Milan (#5 Priorità, Viale Achille Papa 30) è un esperienza visiva senza paragoni: a mezzanotte, dalle immense vetrate panoramiche a 85 metri d altezza, vedi letteralmente esplodere sotto i tuoi occhi tutti i fuochi d artificio dello skyline di Milano, dalle Tre Torri di CityLife a Porta Nuova fino a San Siro. Ideale per coppie eleganti, clientela internazionale e gruppi VIP che cercano alta mixology, Champagne Dom Pérignon e DJ set in quota.',
+      'Vivere il conto alla rovescia del 31 Dicembre al 20° piano di Voya Rooftop Milan (#5 Priorità, Viale Achille Papa 30) è un’esperienza visiva senza paragoni: a mezzanotte, dalle immense vetrate panoramiche a 85 metri d’altezza, vedi letteralmente esplodere sotto i tuoi occhi tutti i fuochi d’artificio dello skyline di Milano, dalle Tre Torri di CityLife a Porta Nuova fino a San Siro. Ideale per coppie eleganti, clientela internazionale e gruppi VIP che cercano alta mixology, Champagne Dom Pérignon e DJ set in quota.',
     descriptionEn:
       'Counting down to midnight on the 20th floor at Voya Rooftop Milan (#5 Priority, Viale Achille Papa 30) is an unmatched visual spectacle: at 00:00, through floor-to-ceiling glass walls 85 meters above the street, you watch the entire Milan skyline erupt in fireworks from CityLifes Three Towers to Porta Nuova and San Siro. Ideal for couples, international travelers, and VIP groups seeking fine dining, Dom Pérignon, and panoramic house DJ sets.',
   },
@@ -355,7 +358,7 @@ const BOOKING_TIMELINE = [
     statusIt: 'Esaurimento Cenoni Serviti & Ultimi Tavoli Privé Rialzati',
     statusEn: 'Seated Dinners Filling Up & Final Elevated Privé Tables',
     detailIt:
-      'I posti per il Gran Cenone Servito e i tavoli fronte-vetrata per i fuochi d artificio vanno in rapido esaurimento. Le tariffe salgono allo scaglione intermedio e resta obbligatorio il versamento dell acconto per emettere i voucher nominali.',
+      'I posti per il Gran Cenone Servito e i tavoli fronte-vetrata per i fuochi d’artificio vanno in rapido esaurimento. Le tariffe salgono allo scaglione intermedio e resta obbligatorio il versamento dell’acconto per emettere i voucher nominali.',
     detailEn:
       'Seated Gala Dinner spots and window tables for midnight fireworks sell out rapidly. Pricing moves to the second tier and deposit confirmation is required to issue nominal vouchers.',
   },
@@ -378,6 +381,7 @@ export default async function NewYearsEvePage({
 }) {
   const { locale } = await params;
   const isIt = locale === 'it';
+  const venueMapCopy = getEventVenueCopy(locale as LocaleCode);
   const lp = localePrefix(locale);
   const canonicalUrl = `${baseUrl}${lp}/new-years-eve`;
 
@@ -392,10 +396,10 @@ export default async function NewYearsEvePage({
     },
     {
       q: isIt
-        ? 'Qual è il miglior locale di Milano per vedere i fuochi d artificio di mezzanotte a Capodanno?'
+        ? 'Qual è il miglior locale di Milano per vedere i fuochi d’artificio di mezzanotte a Capodanno?'
         : 'Which Milan venue offers the best view of the midnight fireworks on New Years Eve?',
       a: isIt
-        ? 'Le due scelte regine per i fuochi d artificio di mezzanotte sono: (1) Voya Rooftop Milan (#5 Priorità, Viale Achille Papa 30), situato al 20° piano a 85 metri d altezza con vetrate a 360 gradi che dominano l intero skyline di Milano da CityLife a San Siro; e (2) Just Me Milano (#1 Priorità, Viale Luigi Camoens 2), con la sua cupola di cristallo riscaldata ai piedi dei 108 metri della Torre Branca nel cuore di Parco Sempione.'
+        ? 'Le due scelte regine per i fuochi d’artificio di mezzanotte sono: (1) Voya Rooftop Milan (#5 Priorità, Viale Achille Papa 30), situato al 20° piano a 85 metri d’altezza con vetrate a 360 gradi che dominano l’intero skyline di Milano da CityLife a San Siro; e (2) Just Me Milano (#1 Priorità, Viale Luigi Camoens 2), con la sua cupola di cristallo riscaldata ai piedi dei 108 metri della Torre Branca nel cuore di Parco Sempione.'
         : 'The top two choices for midnight fireworks are: (1) Voya Rooftop Milan (#5 Priority, Viale Achille Papa 30), perched on the 20th floor at 85 meters high with 360-degree glass walls overlooking the entire Milan skyline from CityLife to San Siro; and (2) Just Me Milano (#1 Priority, Viale Luigi Camoens 2), featuring a heated glass dome right beneath the 108-meter Torre Branca in Parco Sempione.',
     },
     {
@@ -435,7 +439,7 @@ export default async function NewYearsEvePage({
         ? 'Come muoversi a Milano la notte di Capodanno tra Cenone, Duomo, Sempione e San Siro?'
         : 'How to get around Milan on New Years Eve between Parco Sempione, Corso Como, and San Siro?',
       a: isIt
-        ? 'La notte del 31 Dicembre la metropolitana ATM di Milano (incluse le linee M1, M2, M3, M4 e la M5 Lilla che collega Garibaldi/Corso Como, Sempione/Domodossola, Portello/Voya e San Siro/Aria Club) effettua orario prolungato notturno. Il consiglio d oro è scegliere una formula Cenone o Royal Buffet + Serata nello stesso club così da non dover cercare un taxi a mezzanotte, oppure prenotare in anticipo un transfer NCC privato tramite il nostro Desk.'
+        ? 'La notte del 31 Dicembre la metropolitana ATM di Milano (incluse le linee M1, M2, M3, M4 e la M5 Lilla che collega Garibaldi/Corso Como, Sempione/Domodossola, Portello/Voya e San Siro/Aria Club) effettua orario prolungato notturno. Il consiglio d’oro è scegliere una formula Cenone o Royal Buffet + Serata nello stesso club così da non dover cercare un taxi a mezzanotte, oppure prenotare in anticipo un transfer NCC privato tramite il nostro Desk.'
         : 'On December 31, Milans ATM metro network (including the M5 Purple Line connecting Garibaldi/Corso Como, Sempione/Domodossola, Portello/Voya, and San Siro/Aria Club) runs extended late-night service. Our #1 insider tip is booking a Gala Dinner or Royal Buffet + Club package inside the same venue so you never have to hunt for a taxi at midnight, or pre-arranging a private chauffeur (NCC) through our Desk.',
     },
   ];
@@ -592,7 +596,7 @@ export default async function NewYearsEvePage({
 
           <p className="text-base sm:text-xl text-white/75 leading-relaxed max-w-4xl mb-8">
             {isIt
-              ? 'Festeggia la notte di San Silvestro (31 Dicembre 2026 -> 1 Gennaio 2027) nei templi dell intrattenimento milanese con voucher nominale garantito e corsia salta-fila. Confronta le 4 formule ufficiali di Capodanno e prenota il tuo tavolo nei 6 locali prioritari: 1. Just Me Milano sotto i fuochi della Torre Branca, 2. Pineta Corso Como Gala, 3. Aria Club San Siro Winter Dome, 4. 55 Milano Sempione, 5. Voya Rooftop al 20° piano con vista fuochi a 360 gradi su tutto lo skyline di Milano e 6. Repvblic.'
+              ? 'Festeggia la notte di San Silvestro (31 Dicembre 2026 -> 1 Gennaio 2027) nei templi dell’intrattenimento milanese con voucher nominale garantito e corsia salta-fila. Confronta le 4 formule ufficiali di Capodanno e prenota il tuo tavolo nei 6 locali prioritari: 1. Just Me Milano sotto i fuochi della Torre Branca, 2. Pineta Corso Como Gala, 3. Aria Club San Siro Winter Dome, 4. 55 Milano Sempione, 5. Voya Rooftop al 20° piano con vista fuochi a 360 gradi su tutto lo skyline di Milano e 6. Repvblic.'
               : 'Celebrate New Years Eve (December 31, 2026 -> January 1, 2027) inside Milans flagship clubs and sky lounges with guaranteed nominal vouchers and fast-track VIP entry. Compare the 4 official NYE formulas and lock in your table across our 6 priority venues: 1. Just Me Milano under the Torre Branca fireworks, 2. Pineta Corso Como Gala, 3. Aria Club San Siro Winter Dome, 4. 55 Milano Sempione, 5. Voya Rooftop on the 20th floor overlooking the citywide midnight fireworks, and 6. Repvblic.'}
           </p>
 
@@ -617,7 +621,7 @@ export default async function NewYearsEvePage({
               <div className="font-serif text-2xl font-bold text-white">Voya Rooftop Fuochi 360°</div>
               <p className="text-xs text-white/60 mt-1">
                 {isIt
-                  ? 'Vetrate panoramiche sul 20° piano per ammirare i fuochi d artificio di tutta Milano.'
+                  ? 'Vetrate panoramiche sul 20° piano per ammirare i fuochi d’artificio di tutta Milano.'
                   : 'Floor-to-ceiling 20th-floor glass overlooking all of Milans midnight fireworks.'}
               </p>
             </div>
@@ -725,7 +729,7 @@ export default async function NewYearsEvePage({
                 <li>
                   <a href="#calcolatore-vip-capodanno" className="hover:text-champagne transition-colors">
                     4. {isIt
-                      ? 'Calcolatore Preventivo Tavoli VIP & Matrice Formule d Ingresso'
+                      ? 'Calcolatore Preventivo Tavoli VIP & Matrice Formule d’Ingresso'
                       : 'Interactive VIP Table Quote Calculator & Entry Formula Matrix'}
                   </a>
                 </li>
@@ -836,7 +840,7 @@ export default async function NewYearsEvePage({
               </div>
               <p className="text-xs sm:text-sm text-white/75 leading-relaxed">
                 {isIt
-                  ? 'Nei Tavoli VIP di Capodanno (€600 - €5.000) l intero importo include da 8 a 12 pass salta-fila ed è convertito al 100% in bottiglie dal listino ufficiale di San Silvestro (Champagne Prestige, Vodka Magnum 1.75L, Jeroboam 3L e Gin Premium).'
+                  ? 'Nei Tavoli VIP di Capodanno (€600 - €5.000) l’intero importo include da 8 a 12 pass salta-fila ed è convertito al 100% in bottiglie dal listino ufficiale di San Silvestro (Champagne Prestige, Vodka Magnum 1.75L, Jeroboam 3L e Gin Premium).'
                   : 'For NYE VIP Tables (€600 - €5,000), the full table price includes 8 to 12 fast-track passes and is 100% credited toward official NYE bottle menu selections (Prestige Champagne, 1.75L Magnums, 3L Jeroboams, and Premium Spirits).'}
               </p>
             </div>
@@ -848,7 +852,7 @@ export default async function NewYearsEvePage({
               </div>
               <p className="text-xs sm:text-sm text-white/75 leading-relaxed">
                 {isIt
-                  ? 'Per i gruppi di amici uomini o le comitive oltre le 8 persone, il Tavolo VIP o il tavolo riservato al Royal Buffet prenotato via WhatsApp (+39 351 912 7047) assicura l ingresso prioritario con Hostess dedicata.'
+                  ? 'Per i gruppi di amici uomini o le comitive oltre le 8 persone, il Tavolo VIP o il tavolo riservato al Royal Buffet prenotato via WhatsApp (+39 351 912 7047) assicura l’ingresso prioritario con Hostess dedicata.'
                   : 'For all-male groups or parties of 8+ guests, pre-booking a VIP Table or reserved Royal Buffet booth via WhatsApp (+39 351 912 7047) guarantees smooth priority entry with a dedicated VIP Hostess.'}
               </p>
             </div>
@@ -1069,7 +1073,7 @@ export default async function NewYearsEvePage({
               </h2>
               <p className="text-sm sm:text-base text-white/75 leading-relaxed mb-5">
                 {isIt
-                  ? 'La notte del 31 Dicembre i door-selector di 1. Just Me, 2. Pineta, 3. Aria Club, 4. 55 Milano, 5. Voya Rooftop e 6. Repvblic richiedono un look all altezza del Gran Gala di San Silvestro. Anche con prevendita o tavolo riservato è indispensabile rispettare il codice di abbigliamento:'
+                  ? 'La notte del 31 Dicembre i door-selector di 1. Just Me, 2. Pineta, 3. Aria Club, 4. 55 Milano, 5. Voya Rooftop e 6. Repvblic richiedono un look all’altezza del Gran Gala di San Silvestro. Anche con prevendita o tavolo riservato è indispensabile rispettare il codice di abbigliamento:'
                   : 'On December 31, door selectors at 1. Just Me, 2. Pineta, 3. Aria Club, 4. 55 Milano, 5. Voya Rooftop, and 6. Repvblic enforce a strict New Years Eve Gala dress code. Even with a presale voucher or VIP table, proper formal attire is mandatory:'}
               </p>
 
@@ -1175,21 +1179,15 @@ export default async function NewYearsEvePage({
             </a>
           </div>
 
-          <div className="rounded-2xl overflow-hidden border border-white/15 h-80 sm:h-96 w-full bg-black">
-            <iframe
-              title={
-                isIt
-                  ? 'Mappa Capodanno Milano 2027: Parco Sempione, Torre Branca e Corso Como'
-                  : 'Map of New Years Eve Milan 2027: Parco Sempione, Torre Branca and Corso Como'
-              }
-              src="https://www.google.com/maps?q=Viale+Luigi+Camoens+2,+20121+Milano+MI,+Italy&output=embed"
-              width="100%"
-              height="100%"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="w-full h-full border-0"
-            />
-          </div>
+          <EventVenueMap
+            id="new-years-eve-milan-map"
+            mapUrl="https://www.google.com/maps?q=Viale+Luigi+Camoens+2,+20121+Milano+MI,+Italy&output=embed"
+            labels={{
+              loadMap: venueMapCopy.loadMap,
+              mapTitle: venueMapCopy.mapTitle.replace('{venue}', 'Capodanno Milano 2027 — Parco Sempione & Torre Branca'),
+              privacyLoadNotice: venueMapCopy.privacyLoadNotice,
+            }}
+          />
         </div>
 
         {/* 7 FAQ Strategiche */}

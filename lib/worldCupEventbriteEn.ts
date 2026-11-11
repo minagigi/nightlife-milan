@@ -179,8 +179,8 @@ export function validateWorldCupEventbriteEnPayload(payload: WorldCupEventbriteE
   const keywordCount = payload.descriptionHtml.toLocaleLowerCase('en').split(payload.keyword.toLocaleLowerCase('en')).length - 1;
   if (keywordCount < 3) throw new Error(`${payload.base} primary keyword is not supported by lead and FAQs`);
   if (payload.descriptionHtml.length > 16_000) throw new Error(`${payload.base} exceeds the 16000-character Eventbrite safety budget`);
-  if (payload.imagePlan.some((image) => image.width / image.height !== 1 && image.width / image.height !== 1.25)) {
-    throw new Error(`${payload.base} body media must be 1:1 or 5:4`);
+  if (payload.imagePlan.some((image) => image.width / image.height !== 1 && image.width / image.height !== 1.25 && !(image.width === 1376 && image.height === 768))) {
+    throw new Error(`${payload.base} body media must be 1:1, 5:4 or Flow 1376x768`);
   }
   if (!payload.orderConfirmation.includes('not an admission ticket')
     || !payload.orderConfirmation.includes(WORLD_CUP_FINAL_AFFILIATE_URL)

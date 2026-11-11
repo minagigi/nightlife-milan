@@ -721,7 +721,7 @@ export interface VenueTargetProfile {
 const VENUE_TARGET_IT: Record<string, VenueTargetProfile> = {
   'v-justme': {
     ageRange: '21–45+ anni (pubblico internazionale, moda, hospitality e gruppi selezionati)',
-    crowdVibe: 'Elegante e cosmopolita ai piedi della Torre Branca nel Parco Sempione, firmato Roberto Cavalli',
+    crowdVibe: 'Elegante e cosmopolita ai piedi della Torre Branca nel Parco Sempione, firmato Italo Rota',
     dressCode: 'Smart Elegant / Cocktail Chic (camicia o polo curata per uomo, vietato abbigliamento sportivo)',
     musicStyle: 'Commercial House, Afro-House, Hip-Hop & Hits internazionali con DJ guest e sax/percussioni live',
     metroAndParking: 'M2 Lanza / M1 Cairoli / M5 Tre Torri (8–10 min), taxi point viale Alemagna e parcheggio custodito',

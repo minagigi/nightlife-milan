@@ -97,18 +97,25 @@
   align-self: flex-start;
   min-height: 50px;
   padding: 0.875rem 1.75rem;
-  background: #f6f1e7;
-  color: #050505;
+  background: transparent;
+  border: 1px solid rgba(246, 241, 231, 0.38);
+  color: #f6f1e7;
   font-family: var(--font-jetbrains), monospace;
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  transition: background-color 0.2s ease;
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
   margin-bottom: 1.5rem;
 }
 .primaryLink:hover {
-  background: #d6be96;
+  border-color: #d6be96;
+  color: #d6be96;
+  background: rgba(246, 241, 231, 0.05);
+}
+.primaryLink:focus-visible {
+  outline: 2px solid #f6f1e7;
+  outline-offset: 2px;
 }
 .mobileHeroPhoto {
   display: none;
@@ -192,10 +199,47 @@
 }
 .choice {
   padding: 0.5rem 0.75rem;
-  border: 1px solid rgba(246, 241, 231, 0.2);
+  border: 1px solid rgba(246, 241, 231, 0.24);
   background: #050505;
   color: #f6f1e7;
   font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.choice:hover {
+  border-color: #d6be96;
+}
+.choice[aria-pressed='true'] {
+  background: #f6f1e7;
+  color: #050505;
+  border-color: #f6f1e7;
+  font-weight: 700;
+}
+.choice:focus-visible,
+.dayTab:focus-visible {
+  outline: 2px solid #f6f1e7;
+  outline-offset: 2px;
+}
+.dayTab {
+  padding: 0.5rem 0.85rem;
+  border: 1px solid rgba(246, 241, 231, 0.22);
+  background: #050505;
+  color: #f6f1e7;
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.dayTab:hover {
+  border-color: #d6be96;
+}
+.dayTab[aria-pressed='true'] {
+  background: #f6f1e7;
+  color: #050505;
+  border-color: #f6f1e7;
+  font-weight: 700;
 }
 .requestLink {
   display: inline-flex;
@@ -203,15 +247,25 @@
   justify-content: center;
   gap: 0.5rem;
   min-height: 48px;
-  background: #d6be96;
+  background: #25d366;
+  border: 1px solid #25d366;
   color: #050505;
   font-family: var(--font-jetbrains), monospace;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   padding: 0.75rem 1.25rem;
   margin-top: 0.25rem;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+.requestLink:hover {
+  background: #2ee472;
+  border-color: #2ee472;
+}
+.requestLink:focus-visible {
+  outline: 2px solid #f6f1e7;
+  outline-offset: 2px;
 }
 .detailLink {
   display: inline-block;

@@ -135,9 +135,9 @@ test('the English publication route is protected and exposes the validated five-
 test('English poster paths, dimensions and literal image metadata match the localized assets', async () => {
   assert.equal(WORLD_CUP_FINAL_COVER_EN.src, '/images/events/generated/just-me-world-cup-final-cover-2x1-en-v1.jpg');
   assert.equal(WORLD_CUP_FINAL_POSTER_EN.src, '/images/events/generated/just-me-world-cup-final-poster-5x4-en-v1.jpg');
-  assert.equal(WORLD_CUP_FINAL_COVER_EN.width / WORLD_CUP_FINAL_COVER_EN.height, 2);
-  assert.equal(WORLD_CUP_FINAL_POSTER_EN.width / WORLD_CUP_FINAL_POSTER_EN.height, 1.25);
-  assert.ok(WORLD_CUP_FINAL_MOOD_IMAGES_EN.every((image) => image.width / image.height === 1.25));
+  assert.deepEqual([WORLD_CUP_FINAL_COVER_EN.width, WORLD_CUP_FINAL_COVER_EN.height], [1376, 768]);
+  assert.deepEqual([WORLD_CUP_FINAL_POSTER_EN.width, WORLD_CUP_FINAL_POSTER_EN.height], [1376, 768]);
+  assert.ok(WORLD_CUP_FINAL_MOOD_IMAGES_EN.every((image) => image.width === 1376 && image.height === 768));
   assert.ok(WORLD_CUP_FINAL_MOOD_IMAGES_EN.every((image) => /just-me-finale-coppa-mondo-.+-5x4-it-v5\.jpg$/.test(image.src)));
 
   for (const asset of [WORLD_CUP_FINAL_COVER_EN, WORLD_CUP_FINAL_POSTER_EN, ...WORLD_CUP_FINAL_MOOD_IMAGES_EN]) {

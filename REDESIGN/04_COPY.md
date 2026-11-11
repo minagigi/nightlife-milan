@@ -14,8 +14,8 @@
 ## PARTE A — LOCALI (18)
 
 ### v-justme — Just Me Milano
-- description.en: "Designed by Roberto Cavalli, Just Me sits beneath the Torre Branca in Sempione. Fashion crowd, house and commercial sets, velvet and steel. The door reads the room — arrive in a small, sharp group."
-- description.it: "Firmato Roberto Cavalli, il Just Me è sotto la Torre Branca, in Sempione. Crowd fashion, house e commerciale, velluto e acciaio. La selezione legge la sala — presentati in un gruppo piccolo e curato."
+- description.en: "Designed by Italo Rota, Just Me sits beneath the Torre Branca in Sempione. Fashion crowd, house and commercial sets, velvet and steel. The door reads the room — arrive in a small, sharp group."
+- description.it: "Firmato Italo Rota, il Just Me è sotto la Torre Branca, in Sempione. Crowd fashion, house e commerciale, velluto e acciaio. La selezione legge la sala — presentati in un gruppo piccolo e curato."
 - insiderTip.en: "Ask for Privé Branca: you dance directly under the tower's lit steel pillars. It fills first during Fashion Week."
 - insiderTip.it: "Chiedi il Privé Branca: balli sotto i pilastri d'acciaio illuminati della torre. Si riempie per primo durante la Fashion Week."
 

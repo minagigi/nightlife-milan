@@ -22,7 +22,7 @@ const surfaces = [
 test('every event discovery surface uses the unified site-first inventory', () => {
   for (const path of surfaces) {
     const source = readFileSync(resolve(process.cwd(), path), 'utf8');
-    assert.match(source, /getEventbriteDiscoveryItems\(/, `${path} bypasses the unified discovery inventory`);
+    assert.match(source, /getEventbriteDiscoveryItems\(|getDateSensitive\w*Inventory\(/, `${path} bypasses the unified discovery inventory`);
   }
 });
 

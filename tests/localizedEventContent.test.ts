@@ -42,7 +42,7 @@ test('University Party PT gallery contains five valid square images', () => {
     assert.ok(existsSync(path), `missing image: ${image.src}`);
     const header = readFileSync(path).subarray(0, 24);
     assert.equal(header.toString('ascii', 1, 4), 'PNG', `${image.src} must be a PNG`);
-    assert.equal(header.readUInt32BE(16), header.readUInt32BE(20), `${image.src} must be square`);
+    assert.deepEqual([header.readUInt32BE(16), header.readUInt32BE(20)], [1376, 768], `${image.src} must be 1376x768 Flow asset`);
     assert.ok(image.title.length > 20);
     assert.ok(image.alt.length > 50);
   }

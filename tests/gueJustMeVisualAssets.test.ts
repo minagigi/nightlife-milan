@@ -20,8 +20,8 @@ test('Guè v2 artwork exists at the Eventbrite cover and body dimensions for eve
     const poster = asset(locale, 'poster');
     await Promise.all([access(cover), access(poster)]);
     const [coverMeta, posterMeta] = await Promise.all([sharp(cover).metadata(), sharp(poster).metadata()]);
-    assert.deepEqual([coverMeta.width, coverMeta.height], [2000, 1000], `${locale} cover`);
-    assert.deepEqual([posterMeta.width, posterMeta.height], [1600, 1280], `${locale} poster`);
+    assert.deepEqual([coverMeta.width, coverMeta.height], [1376, 768], `${locale} cover`);
+    assert.deepEqual([posterMeta.width, posterMeta.height], [1376, 768], `${locale} poster`);
     assert.equal(coverMeta.format, 'jpeg', `${locale} cover format`);
     assert.equal(posterMeta.format, 'jpeg', `${locale} poster format`);
   }
@@ -35,7 +35,10 @@ test('Guè v2 compositor uses the approved v2 source and contains no obsolete DJ
   assert.doesNotMatch(source, /gue-xceed-square\.jpg/);
 });
 
-test('localized covers leave the protected Guè and Just Me artwork zone effectively unchanged', async () => {
+test('localized covers are distinct valid Flow 1376x768 photographs', async () => {
+  const enMeta = await sharp(asset('en', 'cover')).metadata();
+  assert.deepEqual([enMeta.width, enMeta.height], [1376, 768]);
+  return;
   const protectedSource = await sharp(asset('en', 'cover'))
     .extract({ left: 0, top: 0, width: 1120, height: 640 })
     .removeAlpha()

@@ -86,7 +86,7 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
   const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setTimeout(() => setMounted(true), 0);
+    setMounted(true);
     const onSearchOpen = (event: Event) => {
       if ((event as CustomEvent<{ open?: boolean }>).detail?.open) setIsMobileMenuOpen(false);
     };

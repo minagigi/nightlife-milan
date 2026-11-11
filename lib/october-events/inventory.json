@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceCheckedAt": "2026-11-07T05:00:03.000Z",
+  "sourceCheckedAt": "2026-11-11T11:14:08.000Z",
   "events": [
     {
       "id": "fabrique-fred-de-palma",
@@ -17427,28 +17427,28 @@
       "performers": [],
       "offers": [
         {
-          "name": "Dance Floor Table",
+          "name": "Dehor Table",
           "price": 320,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/wednesday-night-228/249211/channel/nightlifemilan-1"
         },
         {
-          "name": "VIP Area Table",
+          "name": "Dance Floor Table",
           "price": 640,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/wednesday-night-228/249211/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Back Line]",
+          "name": "Central Table",
           "price": 1280,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/wednesday-night-228/249211/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Front Line]",
+          "name": "VIP Front Table",
           "price": 3200,
           "category": "table",
           "availability": "available",
@@ -17479,10 +17479,10 @@
           "admissionFrom": "22:30"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/wednesday-night-228/249211 · owned affiliate HTML SHA-256 06f1056d639fd3c47ed68ce0c59d8e7916d23111bb285fe160f2f425d732a2cc · checked 2026-11-07T05:00:03.000Z",
+      "provenance": "https://xceed.me/en/milano/event/wednesday-night-228/249211 · owned affiliate HTML SHA-256 21a161de1c4a9a3ba10d28e40a87f71e990ad1fb6a43939dfd447093e77f2886 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-07T05:00:03.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -17525,28 +17525,28 @@
       "performers": [],
       "offers": [
         {
-          "name": "Dance Floor Table",
+          "name": "Dehor Table",
           "price": 320,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/thursday-night-340/249212/channel/nightlifemilan-1"
         },
         {
-          "name": "VIP Area Table",
+          "name": "Dance Floor Table",
           "price": 640,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/thursday-night-340/249212/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Back Line]",
+          "name": "Central Table",
           "price": 1280,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/thursday-night-340/249212/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Front Line]",
+          "name": "VIP Front Table",
           "price": 3200,
           "category": "table",
           "availability": "available",
@@ -17577,10 +17577,107 @@
           "admissionFrom": "22:30"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/thursday-night-340/249212 · owned affiliate HTML SHA-256 8aa52503bd65d31ed36cbe3646c99420b47d6f088b7a5c550a9a2a97bc62624f · checked 2026-11-07T05:00:03.000Z",
+      "provenance": "https://xceed.me/en/milano/event/thursday-night-340/249212 · owned affiliate HTML SHA-256 86d06bf1c4eeeebecd9d02e5a3788a3ebbb85342e90eedd22af10b6b428a0233 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-07T05:00:03.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
+      "dressCodeDetail": "men-long-trousers"
+    },
+    {
+      "id": "251806",
+      "sourceUrl": "https://xceed.me/en/milano/event/tr3ndy-society-thursday-night-6/251806",
+      "affiliateUrl": "https://xceed.me/en/milano/event/tr3ndy-society-thursday-night-6/251806/channel/nightlifemilan-1",
+      "affiliateStatus": "verified",
+      "officialName": "Tr3ndy Society - Thursday Night",
+      "startISO": "2026-11-12T23:30:00+01:00",
+      "endISO": "2026-11-13T05:00:00+01:00",
+      "venue": {
+        "id": "v-pineta",
+        "name": "Pineta Milano",
+        "address": "Via Messina, 38, 20154 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Messina, 38",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20154"
+        },
+        "latitude": null,
+        "longitude": null
+      },
+      "image": {
+        "src": "/images/events/october-2026/251806-e2ff6cba5735.webp",
+        "width": 1376,
+        "height": 768,
+        "bytes": 224704,
+        "sha256": "0b73409457ff480bb97c506f7a2ba66ab98e93491f19afe2856904346893fa1a"
+      },
+      "age": "18+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Hip-hop",
+        "Reggaeton"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Dance Floor Table",
+          "price": 250,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/tr3ndy-society-thursday-night-6/251806/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Prive Dance Floor Table",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/tr3ndy-society-thursday-night-6/251806/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Prive Balcony Table",
+          "price": 750,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/tr3ndy-society-thursday-night-6/251806/channel/nightlifemilan-1"
+        },
+        {
+          "name": "VIP Prive Table",
+          "price": 1200,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/tr3ndy-society-thursday-night-6/251806/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Aperitif + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/tr3ndy-society-thursday-night-6/251806/channel/nightlifemilan-1",
+          "admissionFrom": "19:30",
+          "admissionUntil": "22:30"
+        },
+        {
+          "name": "Ticket + 2 Drinks",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/tr3ndy-society-thursday-night-6/251806/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Aperitif + Open Wine",
+          "price": 20,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/tr3ndy-society-thursday-night-6/251806/channel/nightlifemilan-1",
+          "admissionFrom": "19:30",
+          "admissionUntil": "22:30"
+        }
+      ],
+      "provenance": "https://xceed.me/en/milano/event/tr3ndy-society-thursday-night-6/251806 · owned affiliate HTML SHA-256 8bbd70a2bc80798880f30ace5acb34c5cd7714cc2bc07b052d638ee76c17a842 · checked 2026-11-11T11:14:08.000Z",
+      "halloween": false,
+      "startTimeKnown": true,
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -17674,10 +17771,10 @@
           "admissionUntil": "22:30"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/friday-night-721/243823 · owned affiliate HTML SHA-256 a050c4bdbb94524ea0ccd0d514c20692f080f14e0f25a2f38a53d82ece74da80 · checked 2026-11-07T05:00:03.000Z",
+      "provenance": "https://xceed.me/en/milano/event/friday-night-721/243823 · owned affiliate HTML SHA-256 e68340eb664fd996f99736572897c0ee49d79c1c546c90e7dcfd82b0096698da · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-07T05:00:03.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -17720,28 +17817,28 @@
       "performers": [],
       "offers": [
         {
-          "name": "Dance Floor Table",
+          "name": "Dehor Table",
           "price": 320,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/friday-night-groove-feat-damante-1/249206/channel/nightlifemilan-1"
         },
         {
-          "name": "VIP Area Table",
+          "name": "Dance Floor Table",
           "price": 640,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/friday-night-groove-feat-damante-1/249206/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Back Line]",
+          "name": "Central Table",
           "price": 1280,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/friday-night-groove-feat-damante-1/249206/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Front Line]",
+          "name": "VIP Front Table",
           "price": 3200,
           "category": "table",
           "availability": "available",
@@ -17772,10 +17869,10 @@
           "admissionFrom": "22:30"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/friday-night-groove-feat-damante-1/249206 · owned affiliate HTML SHA-256 c96f3764cce7d270555b7d4478b9e2f26e7e0651a5f0d9b44c726108dab2ca65 · checked 2026-11-07T05:00:03.000Z",
+      "provenance": "https://xceed.me/en/milano/event/friday-night-groove-feat-damante-1/249206 · owned affiliate HTML SHA-256 d40009563875abad3127b2f2cb0b60cff132624156bb09bd803f0ebed453e8b8 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-07T05:00:03.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -17869,10 +17966,10 @@
           "admissionUntil": "22:30"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/malafama-1/250821 · owned affiliate HTML SHA-256 0ebe080cc40fcd5df5088d5d9b55469f1b57b5c8750b7f3d3cebd2476484dd5a · checked 2026-11-07T05:00:03.000Z",
+      "provenance": "https://xceed.me/en/milano/event/malafama-1/250821 · owned affiliate HTML SHA-256 6c8441b0040033f560ef9385b1761ea7dec39c583e4d318b783fb6080d9b4688 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-07T05:00:03.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -17975,10 +18072,10 @@
           "url": "https://xceed.me/en/milano/event/funk-tribu-1/236325"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/funk-tribu-1/236325 · public HTML SHA-256 718fbe446402a33593c9196150c6a0026795ec89acb3f2eb23c8137a52418d28 · checked 2026-11-07T05:00:03.000Z",
+      "provenance": "https://xceed.me/en/milano/event/funk-tribu-1/236325 · public HTML SHA-256 42975722934570b4ff621624e60ac68cf4395d4258ffcc1eafb88ea0dbe2007a · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-07T05:00:03.000Z"
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z"
     },
     {
       "id": "247839",
@@ -18041,11 +18138,46 @@
           "name": "R4",
           "price": 500,
           "category": "ticket",
-          "availability": "available",
+          "availability": "sold_out",
           "url": "https://xceed.me/en/milano/event/bhc-milan-1/247839"
         },
         {
           "name": "R5",
+          "price": 500,
+          "category": "ticket",
+          "availability": "sold_out",
+          "url": "https://xceed.me/en/milano/event/bhc-milan-1/247839"
+        },
+        {
+          "name": "R6",
+          "price": 500,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/bhc-milan-1/247839"
+        },
+        {
+          "name": "R7",
+          "price": 500,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/bhc-milan-1/247839"
+        },
+        {
+          "name": "R8",
+          "price": 500,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/bhc-milan-1/247839"
+        },
+        {
+          "name": "R9",
+          "price": 500,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/bhc-milan-1/247839"
+        },
+        {
+          "name": "R10",
           "price": 500,
           "category": "ticket",
           "availability": "available",
@@ -18062,7 +18194,7 @@
           "name": "First Release",
           "price": 20,
           "category": "ticket",
-          "availability": "available",
+          "availability": "sold_out",
           "url": "https://xceed.me/en/milano/event/bhc-milan-1/247839"
         },
         {
@@ -18094,10 +18226,10 @@
           "url": "https://xceed.me/en/milano/event/bhc-milan-1/247839"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/bhc-milan-1/247839 · public HTML SHA-256 e6eda7615a5033bac499d8e92f9b207325656b6f14e2d9fc8559d890236fa66e · checked 2026-11-07T05:00:03.000Z",
+      "provenance": "https://xceed.me/en/milano/event/bhc-milan-1/247839 · public HTML SHA-256 abd5b1690772835e337558a3886b116fba49aa828645dea119531650450dbd79 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-07T05:00:03.000Z"
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z"
     },
     {
       "id": "243829",
@@ -18190,10 +18322,10 @@
           "admissionUntil": "22:30"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/saturday-night-775/243829 · owned affiliate HTML SHA-256 49e3940a8216db6a6cd84e5c4505f3dcfe8a6d78c0de1a418c6f0be98bb9ac00 · checked 2026-11-07T05:00:03.000Z",
+      "provenance": "https://xceed.me/en/milano/event/saturday-night-775/243829 · owned affiliate HTML SHA-256 066ed730f2bc66f0aaf4829847e7142c21bdbc8e1da52c53fb5a52228f43f091 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-07T05:00:03.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -18236,28 +18368,28 @@
       "performers": [],
       "offers": [
         {
-          "name": "Dance Floor Table",
+          "name": "Dehor Table",
           "price": 320,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/saturday-night-783/249213/channel/nightlifemilan-1"
         },
         {
-          "name": "VIP Area Table",
+          "name": "Dance Floor Table",
           "price": 640,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/saturday-night-783/249213/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Back Line]",
+          "name": "Central Table",
           "price": 1280,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/saturday-night-783/249213/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Front Line]",
+          "name": "VIP Front Table",
           "price": 3200,
           "category": "table",
           "availability": "available",
@@ -18288,10 +18420,10 @@
           "admissionFrom": "22:30"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/saturday-night-783/249213 · owned affiliate HTML SHA-256 626624879589a77f5e7f71a1dbda38b03614b1982ae84969fd32a113fe83ba65 · checked 2026-11-07T05:00:03.000Z",
+      "provenance": "https://xceed.me/en/milano/event/saturday-night-783/249213 · owned affiliate HTML SHA-256 762d90c294533c55819fd41a7a1ff3546670c2c36d6372b38c26f8be22e64b43 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-07T05:00:03.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -18392,10 +18524,10 @@
           "admissionUntil": "22:30"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/kickstart-saturday-2/251459 · owned affiliate HTML SHA-256 9e0971ce7266b120dbef5f41a059d4e7f5d8b519d77c2d4536a94dd61f71b9ab · checked 2026-11-07T05:00:03.000Z",
+      "provenance": "https://xceed.me/en/milano/event/kickstart-saturday-2/251459 · owned affiliate HTML SHA-256 f3c2cb8099f34151eacce7b139869e0a3bf588affc0eacf73731afe7b5746dfd · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-07T05:00:03.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -18624,6 +18756,27 @@
           "url": "https://xceed.me/en/milano/event/perreo-xl-21/240986"
         },
         {
+          "name": "C1",
+          "price": 500,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-21/240986"
+        },
+        {
+          "name": "C2",
+          "price": 500,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-21/240986"
+        },
+        {
+          "name": "C3",
+          "price": 500,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-21/240986"
+        },
+        {
           "name": "Women General Admission",
           "price": 10,
           "category": "ticket",
@@ -18639,10 +18792,10 @@
           "url": "https://xceed.me/en/milano/event/perreo-xl-21/240986"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/perreo-xl-21/240986 · public HTML SHA-256 109d4483c31c95c48d72462744a2d3b50b8de5309c0ac27272d7006510ec66ba · checked 2026-11-07T05:00:03.000Z",
+      "provenance": "https://xceed.me/en/milano/event/perreo-xl-21/240986 · public HTML SHA-256 ca1dd48e6be349b11e7c51afa6ec1bd6459500c3364b086756ed2923238cb56d · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-07T05:00:03.000Z"
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z"
     },
     {
       "id": "242644",
@@ -18744,10 +18897,10 @@
           "url": "https://xceed.me/en/milano/event/mantikore-per-pleks/242644"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/mantikore-per-pleks/242644 · public HTML SHA-256 4b5149a9add19bdaa2a07e3e0cf1595d14d615de6eac7673b87d93cd9dc3489e · checked 2026-11-07T05:00:03.000Z",
+      "provenance": "https://xceed.me/en/milano/event/mantikore-per-pleks/242644 · public HTML SHA-256 31708f00b2fc3f0c4a110f60f309b8d406c179625d95411f0511bc5c8c19a801 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-07T05:00:03.000Z"
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z"
     },
     {
       "id": "242062",
@@ -18794,10 +18947,10 @@
           "url": "https://xceed.me/en/milano/event/satoshi-viva-moldova-europe-tour/242062"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/satoshi-viva-moldova-europe-tour/242062 · public HTML SHA-256 a3c288b6ee45668eef012b46584559bffd308095e3fd8f9defe99340738fc72b · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/satoshi-viva-moldova-europe-tour/242062 · public HTML SHA-256 826225f238d4f0ea82301a8a631d188a7d0b8469f88e407fdcee1e84dc6c86b0 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z"
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z"
     },
     {
       "id": "249200",
@@ -18839,28 +18992,28 @@
       "performers": [],
       "offers": [
         {
-          "name": "Dance Floor Table",
+          "name": "Dehor Table",
           "price": 320,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/sunday-night-181/249200/channel/nightlifemilan-1"
         },
         {
-          "name": "VIP Area Table",
+          "name": "Dance Floor Table",
           "price": 640,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/sunday-night-181/249200/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Back Line]",
+          "name": "Central Table",
           "price": 1280,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/sunday-night-181/249200/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Front Line]",
+          "name": "VIP Front Table",
           "price": 3200,
           "category": "table",
           "availability": "available",
@@ -18891,10 +19044,10 @@
           "admissionFrom": "22:30"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/sunday-night-181/249200 · owned affiliate HTML SHA-256 e44551db6df549a736f2bb387647f85b146a53edfa314dcc937da486cac223e4 · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/sunday-night-181/249200 · owned affiliate HTML SHA-256 e1cb8bcdcbe0443ca707ff841c45d1bb66a6b8771b13cf6077a88cc1f67ea01d · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -18937,28 +19090,28 @@
       "performers": [],
       "offers": [
         {
-          "name": "Dance Floor Table",
+          "name": "Dehor Table",
           "price": 320,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/monday-night-280/249158/channel/nightlifemilan-1"
         },
         {
-          "name": "VIP Area Table",
+          "name": "Dance Floor Table",
           "price": 640,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/monday-night-280/249158/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Back Line]",
+          "name": "Central Table",
           "price": 1280,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/monday-night-280/249158/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Front Line]",
+          "name": "VIP Front Table",
           "price": 3200,
           "category": "table",
           "availability": "available",
@@ -18989,10 +19142,10 @@
           "admissionFrom": "22:30"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/monday-night-280/249158 · owned affiliate HTML SHA-256 287b73177837411dfd2f245168876a560ca0740a6f4c6c216595e0278acc2cff · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/monday-night-280/249158 · owned affiliate HTML SHA-256 56834cf9e3fc8758dd72e5a760e0ffe65c91f3cc018b4ecb82b245b50404e925 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -19033,8 +19186,8 @@
       "performers": [],
       "offers": [
         {
-          "name": "Dance Floor Table",
-          "price": 200,
+          "name": "Dehor Table",
+          "price": 320,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/university-party-55/249163/channel/nightlifemilan-1"
@@ -19047,8 +19200,22 @@
           "url": "https://xceed.me/en/milano/event/university-party-55/249163/channel/nightlifemilan-1"
         },
         {
-          "name": "VIP Area Table",
-          "price": 960,
+          "name": "Central Table",
+          "price": 1280,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/university-party-55/249163/channel/nightlifemilan-1"
+        },
+        {
+          "name": "VIP Front Table",
+          "price": 3200,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/university-party-55/249163/channel/nightlifemilan-1"
+        },
+        {
+          "name": "DJ Table",
+          "price": 5000,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/university-party-55/249163/channel/nightlifemilan-1"
@@ -19078,10 +19245,10 @@
           "admissionFrom": "22:30"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/university-party-55/249163 · owned affiliate HTML SHA-256 4dda29011549a51cfb29466bcd76cef588af8691677e5137fc79cb686e9dfea5 · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/university-party-55/249163 · owned affiliate HTML SHA-256 def555f280ba934e0151e34c72a9cc2610ba21d06a3b98e2aa9bc34990f48866 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -19121,10 +19288,10 @@
       ],
       "performers": [],
       "offers": [],
-      "provenance": "https://xceed.me/en/milano/event/bonx-up-by-dj-traccia/250464 · owned affiliate HTML SHA-256 0d56b030ae50ea5f9bff4a75ff6be641b6efc770ce4f9b61ace4df76e3ecc312 · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/bonx-up-by-dj-traccia/250464 · owned affiliate HTML SHA-256 a23d860f19ee2eb26c2ba800eaf9ff4dc812248bd06952784b427daf1941670a · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -19165,28 +19332,28 @@
       "performers": [],
       "offers": [
         {
-          "name": "Dance Floor Table",
+          "name": "Dehor Table",
           "price": 320,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/wednesday-night-226/249170/channel/nightlifemilan-1"
         },
         {
-          "name": "VIP Area Table",
+          "name": "Dance Floor Table",
           "price": 640,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/wednesday-night-226/249170/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Back Line]",
+          "name": "Central Table",
           "price": 1280,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/wednesday-night-226/249170/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Front Line]",
+          "name": "VIP Front Table",
           "price": 3200,
           "category": "table",
           "availability": "available",
@@ -19217,10 +19384,10 @@
           "admissionFrom": "22:30"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/wednesday-night-226/249170 · owned affiliate HTML SHA-256 e872ba6e92885090ec7fa368fd6c7acf52668348ad1cda4b1a8b3b4bc57f8860 · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/wednesday-night-226/249170 · owned affiliate HTML SHA-256 00cc638436f55657e3cbd3db00e8b8458af20635499c2e7f652fd4d1a263213e · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -19261,28 +19428,28 @@
       "performers": [],
       "offers": [
         {
-          "name": "Dance Floor Table",
+          "name": "Dehor Table",
           "price": 320,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/thursday-night-345/249214/channel/nightlifemilan-1"
         },
         {
-          "name": "VIP Area Table",
+          "name": "Dance Floor Table",
           "price": 640,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/thursday-night-345/249214/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Back Line]",
+          "name": "Central Table",
           "price": 1280,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/thursday-night-345/249214/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Front Line]",
+          "name": "VIP Front Table",
           "price": 3200,
           "category": "table",
           "availability": "available",
@@ -19313,10 +19480,10 @@
           "admissionFrom": "22:30"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/thursday-night-345/249214 · owned affiliate HTML SHA-256 ced8e28874e1511d281405ac4a717faca73ba5257a318a6d3b832be38404574e · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/thursday-night-345/249214 · owned affiliate HTML SHA-256 f245d1241d6b5e969bbe33d4084c357289c205e5a6e68783853658812b7fb207 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -19410,10 +19577,10 @@
           "admissionUntil": "22:30"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/friday-night-722/243824 · owned affiliate HTML SHA-256 78683b560593fcb221fb919b9a4b2d4c527f00c288e4ca691049311748b65d96 · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/friday-night-722/243824 · owned affiliate HTML SHA-256 094873c5b6a070a85f176a562b700d2989f7809eb741491dd37e02ba4fac5a9a · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -19454,28 +19621,28 @@
       "performers": [],
       "offers": [
         {
-          "name": "Dance Floor Table",
+          "name": "Dehor Table",
           "price": 320,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/friday-night-726/249215/channel/nightlifemilan-1"
         },
         {
-          "name": "VIP Area Table",
+          "name": "Dance Floor Table",
           "price": 640,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/friday-night-726/249215/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Back Line]",
+          "name": "Central Table",
           "price": 1280,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/friday-night-726/249215/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Front Line]",
+          "name": "VIP Front Table",
           "price": 3200,
           "category": "table",
           "availability": "available",
@@ -19506,10 +19673,107 @@
           "admissionFrom": "22:30"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/friday-night-726/249215 · owned affiliate HTML SHA-256 261dcc3d189e3570c7f16bd65be4584b859f57b05764a73ba926dc2549e77533 · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/friday-night-726/249215 · owned affiliate HTML SHA-256 bbdcc326eb21488a2d8fd87c9ff71cfc78326defc6f684b6f64ed2086cf0a9b8 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
+      "dressCodeDetail": "men-long-trousers"
+    },
+    {
+      "id": "251746",
+      "sourceUrl": "https://xceed.me/en/milano/event/vibez-11/251746",
+      "affiliateUrl": "https://xceed.me/en/milano/event/vibez-11/251746/channel/nightlifemilan-1",
+      "affiliateStatus": "verified",
+      "officialName": "Vibez",
+      "startISO": "2026-11-20T19:30:00+01:00",
+      "endISO": "2026-11-21T05:00:00+01:00",
+      "venue": {
+        "id": "v-pineta",
+        "name": "Pineta Milano",
+        "address": "Via Messina, 38, 20154 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Messina, 38",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20154"
+        },
+        "latitude": null,
+        "longitude": null
+      },
+      "image": {
+        "src": "/images/events/october-2026/251746-c989b0961ed1.webp",
+        "width": 1376,
+        "height": 768,
+        "bytes": 241192,
+        "sha256": "2d84dfbcb9a4e03328adc0eca6d17d9420b5514f997bc4e2480c80008f7492a4"
+      },
+      "age": "18+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Hip-hop",
+        "Reggaeton"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Dance Floor Table",
+          "price": 250,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/vibez-11/251746/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Prive Dance Floor Table",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/vibez-11/251746/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Prive Balcony Table",
+          "price": 750,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/vibez-11/251746/channel/nightlifemilan-1"
+        },
+        {
+          "name": "VIP Prive Table",
+          "price": 1200,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/vibez-11/251746/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Aperitif + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/vibez-11/251746/channel/nightlifemilan-1",
+          "admissionFrom": "19:30",
+          "admissionUntil": "22:30"
+        },
+        {
+          "name": "Ticket + 2 Drinks",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/vibez-11/251746/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Aperitif + Open Wine",
+          "price": 20,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/vibez-11/251746/channel/nightlifemilan-1",
+          "admissionFrom": "19:30",
+          "admissionUntil": "22:30"
+        }
+      ],
+      "provenance": "https://xceed.me/en/milano/event/vibez-11/251746 · owned affiliate HTML SHA-256 b439883be4136122f6e0d382e2118390b4aeff50175607e0e2c7ae8141abfa70 · checked 2026-11-11T11:14:08.000Z",
+      "halloween": false,
+      "startTimeKnown": true,
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -19603,10 +19867,10 @@
           "admissionUntil": "22:30"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/saturday-night-776/243830 · owned affiliate HTML SHA-256 ae086bf284c3757152d542b22b376893454066b42fecefbbc4b76e0478de7f98 · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/saturday-night-776/243830 · owned affiliate HTML SHA-256 028268818762f332fbef5b1e6762197e8dce92943a419961d79285e66fcc7921 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -19647,28 +19911,28 @@
       "performers": [],
       "offers": [
         {
-          "name": "Dance Floor Table",
+          "name": "Dehor Table",
           "price": 320,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/saturday-night-784/249196/channel/nightlifemilan-1"
         },
         {
-          "name": "VIP Area Table",
+          "name": "Dance Floor Table",
           "price": 640,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/saturday-night-784/249196/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Back Line]",
+          "name": "Central Table",
           "price": 1280,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/saturday-night-784/249196/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Front Line]",
+          "name": "VIP Front Table",
           "price": 3200,
           "category": "table",
           "availability": "available",
@@ -19699,10 +19963,10 @@
           "admissionFrom": "22:30"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/saturday-night-784/249196 · owned affiliate HTML SHA-256 ee413dafc527c0e00c92f6d2bad16586877b62da05e9edf5112fc47f1144fb59 · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/saturday-night-784/249196 · owned affiliate HTML SHA-256 e2635ca181148a8265b89e0cc1c77b84ee51eccd74288e47e297c1a6e707b5b1 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -19806,10 +20070,10 @@
           "url": "https://xceed.me/en/milano/event/schranz-movement-obscure-shape/238652"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/schranz-movement-obscure-shape/238652 · public HTML SHA-256 6aa4372310dae5bb11b01e840206f0271755ad1f51b88a59dad7b859346a69d7 · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/schranz-movement-obscure-shape/238652 · public HTML SHA-256 b0a215f9e1d4c31ce1cbbfcc33759e55c786831ada7de35c1caf043c9327a053 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z"
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z"
     },
     {
       "id": "240987",
@@ -20037,6 +20301,27 @@
           "url": "https://xceed.me/en/milano/event/perreo-xl-22/240987"
         },
         {
+          "name": "C1",
+          "price": 500,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-22/240987"
+        },
+        {
+          "name": "C2",
+          "price": 500,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-22/240987"
+        },
+        {
+          "name": "C3",
+          "price": 500,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-22/240987"
+        },
+        {
           "name": "Women General Admission",
           "price": 10,
           "category": "ticket",
@@ -20052,10 +20337,10 @@
           "url": "https://xceed.me/en/milano/event/perreo-xl-22/240987"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/perreo-xl-22/240987 · public HTML SHA-256 70461f2053a7cd13cb01af0e64f1e73d2713d44d01934e1f91d75d6b868534dd · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/perreo-xl-22/240987 · public HTML SHA-256 b8799748b1ec9f8fc4ee7780bd27b3ab77317957534a467c6ac4ee886ca774c3 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z"
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z"
     },
     {
       "id": "249201",
@@ -20095,28 +20380,28 @@
       "performers": [],
       "offers": [
         {
-          "name": "Dance Floor Table",
+          "name": "Dehor Table",
           "price": 320,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/sunday-night-198/249201/channel/nightlifemilan-1"
         },
         {
-          "name": "VIP Area Table",
+          "name": "Dance Floor Table",
           "price": 640,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/sunday-night-198/249201/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Back Line]",
+          "name": "Central Table",
           "price": 1280,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/sunday-night-198/249201/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Front Line]",
+          "name": "VIP Front Table",
           "price": 3200,
           "category": "table",
           "availability": "available",
@@ -20147,10 +20432,10 @@
           "admissionFrom": "22:30"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/sunday-night-198/249201 · owned affiliate HTML SHA-256 fde1763bf402f373a39f9e6069dfcf08f83da1fe35eb2a82759d4842dd684ffc · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/sunday-night-198/249201 · owned affiliate HTML SHA-256 238b64f906646889794d4f210eabd7ad19489561a6581f22fbc459e70bde41a9 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -20191,28 +20476,28 @@
       "performers": [],
       "offers": [
         {
-          "name": "Dance Floor Table",
+          "name": "Dehor Table",
           "price": 320,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/monday-night-281/249159/channel/nightlifemilan-1"
         },
         {
-          "name": "VIP Area Table",
+          "name": "Dance Floor Table",
           "price": 640,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/monday-night-281/249159/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Back Line]",
+          "name": "Central Table",
           "price": 1280,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/monday-night-281/249159/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Front Line]",
+          "name": "VIP Front Table",
           "price": 3200,
           "category": "table",
           "availability": "available",
@@ -20243,10 +20528,10 @@
           "admissionFrom": "22:30"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/monday-night-281/249159 · owned affiliate HTML SHA-256 6da8e1d61f719b3cd89e719fa7a10f6f45d57b8a4f03b111fd26ca98bb1c11f6 · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/monday-night-281/249159 · owned affiliate HTML SHA-256 25f72fd656d9e66b4570d3d44308c79f5f786c308232fa20eeb37ec6408d4094 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -20287,8 +20572,8 @@
       "performers": [],
       "offers": [
         {
-          "name": "Dance Floor Table",
-          "price": 200,
+          "name": "Dehor Table",
+          "price": 320,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/university-party-54/249161/channel/nightlifemilan-1"
@@ -20301,8 +20586,22 @@
           "url": "https://xceed.me/en/milano/event/university-party-54/249161/channel/nightlifemilan-1"
         },
         {
-          "name": "VIP Area Table",
-          "price": 960,
+          "name": "Central Table",
+          "price": 1280,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/university-party-54/249161/channel/nightlifemilan-1"
+        },
+        {
+          "name": "VIP Front Table",
+          "price": 3200,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/university-party-54/249161/channel/nightlifemilan-1"
+        },
+        {
+          "name": "DJ Table",
+          "price": 5000,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/university-party-54/249161/channel/nightlifemilan-1"
@@ -20332,10 +20631,10 @@
           "admissionFrom": "22:30"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/university-party-54/249161 · owned affiliate HTML SHA-256 d55c26ac6f3f4eb48bad7e19965e8d37495ec8234b33c66a7e9c950e37827575 · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/university-party-54/249161 · owned affiliate HTML SHA-256 32fa0648795f77e41f6b61d9013f8376615c4594ad2b640efc2ce17a656643d7 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -20376,28 +20675,28 @@
       "performers": [],
       "offers": [
         {
-          "name": "Dance Floor Table",
+          "name": "Dehor Table",
           "price": 320,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/wednesday-night-225/249169/channel/nightlifemilan-1"
         },
         {
-          "name": "VIP Area Table",
+          "name": "Dance Floor Table",
           "price": 640,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/wednesday-night-225/249169/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Back Line]",
+          "name": "Central Table",
           "price": 1280,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/wednesday-night-225/249169/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Front Line]",
+          "name": "VIP Front Table",
           "price": 3200,
           "category": "table",
           "availability": "available",
@@ -20428,10 +20727,10 @@
           "admissionFrom": "22:30"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/wednesday-night-225/249169 · owned affiliate HTML SHA-256 68c9ca180f1b9c11e2b46806ef21c09c434ffe63ec8e38351ebc9990f1233478 · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/wednesday-night-225/249169 · owned affiliate HTML SHA-256 c778bbf10ca3b38da8757f6e9c7010e9457b6a518f551f8cf1ce58333c15e916 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -20472,28 +20771,28 @@
       "performers": [],
       "offers": [
         {
-          "name": "Dance Floor Table",
+          "name": "Dehor Table",
           "price": 320,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/thursday-night-348/249216/channel/nightlifemilan-1"
         },
         {
-          "name": "VIP Area Table",
+          "name": "Dance Floor Table",
           "price": 640,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/thursday-night-348/249216/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Back Line]",
+          "name": "Central Table",
           "price": 1280,
           "category": "table",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/thursday-night-348/249216/channel/nightlifemilan-1"
         },
         {
-          "name": "Super VIP Area Table [Front Line]",
+          "name": "VIP Front Table",
           "price": 3200,
           "category": "table",
           "availability": "available",
@@ -20524,10 +20823,10 @@
           "admissionFrom": "22:30"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/thursday-night-348/249216 · owned affiliate HTML SHA-256 66b136e27d0171f295f237fece079af3341a456195c0aea446ca6f944c9c54da · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/thursday-night-348/249216 · owned affiliate HTML SHA-256 2cadb9c677e21ba0be9d0b7feabd9d66a3667b720c18dd7547ede1792f8b9d61 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -20621,10 +20920,106 @@
           "admissionUntil": "22:30"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/friday-night-723/243825 · owned affiliate HTML SHA-256 ef9c03f19f977e918777a03ade5b4bf79b302d5d32f3915a1d1e86bcd6f1fb40 · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/friday-night-723/243825 · owned affiliate HTML SHA-256 e042a905a75c806fb81f7ea8d533dfc7fca4848677ea49bf0df2639940d7e8a4 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
+      "dressCodeDetail": "men-long-trousers"
+    },
+    {
+      "id": "249217",
+      "sourceUrl": "https://xceed.me/en/milano/event/friday-night-727/249217",
+      "affiliateUrl": "https://xceed.me/en/milano/event/friday-night-727/249217/channel/nightlifemilan-1",
+      "affiliateStatus": "verified",
+      "officialName": "Friday Night",
+      "startISO": "2026-11-27T19:30:00+01:00",
+      "endISO": "2026-11-28T05:00:00+01:00",
+      "venue": {
+        "id": "v-justme",
+        "name": "Justme Milano",
+        "address": "Viale Luigi Camoens, 2, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Viale Luigi Camoens, 2",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": null,
+        "longitude": null
+      },
+      "image": {
+        "src": "/images/events/october-2026/249217-8fff9d2f3fe4.webp",
+        "width": 1376,
+        "height": 768,
+        "bytes": 241192,
+        "sha256": "2d84dfbcb9a4e03328adc0eca6d17d9420b5514f997bc4e2480c80008f7492a4"
+      },
+      "age": "21+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Hip-hop",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Dehor Table",
+          "price": 320,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/friday-night-727/249217/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Dance Floor Table",
+          "price": 640,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/friday-night-727/249217/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Central Table",
+          "price": 1280,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/friday-night-727/249217/channel/nightlifemilan-1"
+        },
+        {
+          "name": "VIP Front Table",
+          "price": 3200,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/friday-night-727/249217/channel/nightlifemilan-1"
+        },
+        {
+          "name": "DJ Table",
+          "price": 5000,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/friday-night-727/249217/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Aperitif + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/friday-night-727/249217/channel/nightlifemilan-1",
+          "admissionFrom": "19:30",
+          "admissionUntil": "22:00"
+        },
+        {
+          "name": "Club + 1 Drink",
+          "price": 20,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/friday-night-727/249217/channel/nightlifemilan-1",
+          "admissionFrom": "22:30"
+        }
+      ],
+      "provenance": "https://xceed.me/en/milano/event/friday-night-727/249217 · owned affiliate HTML SHA-256 1e2ad8e7b8501831da256708fb3abe50ec48ea1bd76cb115cd8e57590a61cb28 · checked 2026-11-11T11:14:08.000Z",
+      "halloween": false,
+      "startTimeKnown": true,
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -20713,27 +21108,6 @@
           "url": "https://xceed.me/en/milano/event/trym-1/236326"
         },
         {
-          "name": "GA - Second Release",
-          "price": 20,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://xceed.me/en/milano/event/trym-1/236326"
-        },
-        {
-          "name": "GA - Third Release",
-          "price": 23,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://xceed.me/en/milano/event/trym-1/236326"
-        },
-        {
-          "name": "GA - Final Release",
-          "price": 25,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://xceed.me/en/milano/event/trym-1/236326"
-        },
-        {
           "name": "BACKSTAGE - Early Bird",
           "price": 25,
           "category": "ticket",
@@ -20746,33 +21120,12 @@
           "category": "ticket",
           "availability": "available",
           "url": "https://xceed.me/en/milano/event/trym-1/236326"
-        },
-        {
-          "name": "BACKSTAGE - Second Release",
-          "price": 30,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://xceed.me/en/milano/event/trym-1/236326"
-        },
-        {
-          "name": "BACKSTAGE - Third Release",
-          "price": 35,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://xceed.me/en/milano/event/trym-1/236326"
-        },
-        {
-          "name": "BACKSTAGE - Final Release",
-          "price": 40,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://xceed.me/en/milano/event/trym-1/236326"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/trym-1/236326 · public HTML SHA-256 54bd8d0fdf9109e97fabe3938163ecdf3218d821b89cb88130ef1463423e4409 · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/trym-1/236326 · public HTML SHA-256 7bca770c38e51055976140334c960aa1f0d4ec698fec8436da8f8b4d0f316457 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z"
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z"
     },
     {
       "id": "249060",
@@ -20882,10 +21235,10 @@
           "url": "https://xceed.me/en/milano/event/180bpm/249060"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/180bpm/249060 · public HTML SHA-256 824dce01879211a0a5ffd443a01cb0b00b255dcdd8681322e4f8932e1ad1dec7 · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/180bpm/249060 · public HTML SHA-256 bd094c470d2567be39a1c5b498ec0e3958e131843c29e84bcec557251d04b344 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z"
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z"
     },
     {
       "id": "243831",
@@ -20978,10 +21331,106 @@
           "admissionUntil": "22:30"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/saturday-night-777/243831 · owned affiliate HTML SHA-256 b16e9465bf4d6c05c528ec7bd248ee20cd98be159845d6bf624efbf0be9de395 · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/saturday-night-777/243831 · owned affiliate HTML SHA-256 3a67fa3d6b75e8c06c35e365d424be0bb4f4ecfbeda5d3d683651c80380803d0 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
+      "dressCodeDetail": "men-long-trousers"
+    },
+    {
+      "id": "249197",
+      "sourceUrl": "https://xceed.me/en/milano/event/saturday-night-785/249197",
+      "affiliateUrl": "https://xceed.me/en/milano/event/saturday-night-785/249197/channel/nightlifemilan-1",
+      "affiliateStatus": "verified",
+      "officialName": "Saturday Night",
+      "startISO": "2026-11-28T19:30:00+01:00",
+      "endISO": "2026-11-29T05:00:00+01:00",
+      "venue": {
+        "id": "v-justme",
+        "name": "Justme Milano",
+        "address": "Viale Luigi Camoens, 2, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Viale Luigi Camoens, 2",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": null,
+        "longitude": null
+      },
+      "image": {
+        "src": "/images/events/october-2026/249197-a9e4bf6c46ee.webp",
+        "width": 1376,
+        "height": 768,
+        "bytes": 224704,
+        "sha256": "0b73409457ff480bb97c506f7a2ba66ab98e93491f19afe2856904346893fa1a"
+      },
+      "age": "21+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Hip-hop",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Dehor Table",
+          "price": 320,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/saturday-night-785/249197/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Dance Floor Table",
+          "price": 640,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/saturday-night-785/249197/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Central Table",
+          "price": 1280,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/saturday-night-785/249197/channel/nightlifemilan-1"
+        },
+        {
+          "name": "VIP Front Table",
+          "price": 3200,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/saturday-night-785/249197/channel/nightlifemilan-1"
+        },
+        {
+          "name": "DJ Table",
+          "price": 5000,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/saturday-night-785/249197/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Aperitif + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/saturday-night-785/249197/channel/nightlifemilan-1",
+          "admissionFrom": "19:30",
+          "admissionUntil": "22:00"
+        },
+        {
+          "name": "Club + 1 Drink",
+          "price": 20,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/saturday-night-785/249197/channel/nightlifemilan-1",
+          "admissionFrom": "22:30"
+        }
+      ],
+      "provenance": "https://xceed.me/en/milano/event/saturday-night-785/249197 · owned affiliate HTML SHA-256 26dc4fdde86c5f60a5120b1e8149cfe05a083320fd4184aa60246c2cc86e1df1 · checked 2026-11-11T11:14:08.000Z",
+      "halloween": false,
+      "startTimeKnown": true,
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -21210,6 +21659,27 @@
           "url": "https://xceed.me/en/milano/event/perreo-xl-23/240988"
         },
         {
+          "name": "C1",
+          "price": 500,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-23/240988"
+        },
+        {
+          "name": "C2",
+          "price": 500,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-23/240988"
+        },
+        {
+          "name": "C3",
+          "price": 500,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-23/240988"
+        },
+        {
           "name": "Women General Admission",
           "price": 10,
           "category": "ticket",
@@ -21225,10 +21695,497 @@
           "url": "https://xceed.me/en/milano/event/perreo-xl-23/240988"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/perreo-xl-23/240988 · public HTML SHA-256 294da626f43d06e8b28dda5dd694d9bab69403ede1b9094eeec8daf1b849585a · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/perreo-xl-23/240988 · public HTML SHA-256 ec2a4c0922b4d02457e167ba73911cad9af353db5ff879f4650003ca782b779d · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z"
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z"
+    },
+    {
+      "id": "249203",
+      "sourceUrl": "https://xceed.me/en/milano/event/sunday-night-211/249203",
+      "affiliateUrl": "https://xceed.me/en/milano/event/sunday-night-211/249203/channel/nightlifemilan-1",
+      "affiliateStatus": "verified",
+      "officialName": "Sunday Night",
+      "startISO": "2026-11-29T19:30:00+01:00",
+      "endISO": "2026-11-30T05:00:00+01:00",
+      "venue": {
+        "id": "v-justme",
+        "name": "Justme Milano",
+        "address": "Viale Luigi Camoens, 2, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Viale Luigi Camoens, 2",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": null,
+        "longitude": null
+      },
+      "image": {
+        "src": "/images/events/october-2026/249203-a38c231f85ac.webp",
+        "width": 1376,
+        "height": 768,
+        "bytes": 210008,
+        "sha256": "a60f6bdce21d0fc309098c9f506d5156620ad49dce2b6f150b6d5f37c0a355bd"
+      },
+      "age": "21+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Hip-hop",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Dehor Table",
+          "price": 320,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/sunday-night-211/249203/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Dance Floor Table",
+          "price": 640,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/sunday-night-211/249203/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Central Table",
+          "price": 1280,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/sunday-night-211/249203/channel/nightlifemilan-1"
+        },
+        {
+          "name": "VIP Front Table",
+          "price": 3200,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/sunday-night-211/249203/channel/nightlifemilan-1"
+        },
+        {
+          "name": "DJ Table",
+          "price": 5000,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/sunday-night-211/249203/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Aperitif + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/sunday-night-211/249203/channel/nightlifemilan-1",
+          "admissionFrom": "19:30",
+          "admissionUntil": "22:00"
+        },
+        {
+          "name": "Club + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/sunday-night-211/249203/channel/nightlifemilan-1",
+          "admissionFrom": "22:30"
+        }
+      ],
+      "provenance": "https://xceed.me/en/milano/event/sunday-night-211/249203 · owned affiliate HTML SHA-256 3a33ef973ebf7d95f866858aa258fd59f4246800107b325cb117a5ac71339dc4 · checked 2026-11-11T11:14:08.000Z",
+      "halloween": false,
+      "startTimeKnown": true,
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
+      "dressCodeDetail": "men-long-trousers"
+    },
+    {
+      "id": "249160",
+      "sourceUrl": "https://xceed.me/en/milano/event/monday-night-282/249160",
+      "affiliateUrl": "https://xceed.me/en/milano/event/monday-night-282/249160/channel/nightlifemilan-1",
+      "affiliateStatus": "verified",
+      "officialName": "Monday Night",
+      "startISO": "2026-11-30T19:30:00+01:00",
+      "endISO": "2026-12-01T05:00:00+01:00",
+      "venue": {
+        "id": "v-justme",
+        "name": "Justme Milano",
+        "address": "Viale Luigi Camoens, 2, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Viale Luigi Camoens, 2",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": null,
+        "longitude": null
+      },
+      "image": {
+        "src": "/images/events/october-2026/249160-ead790986e88.webp",
+        "width": 1376,
+        "height": 768,
+        "bytes": 224704,
+        "sha256": "0b73409457ff480bb97c506f7a2ba66ab98e93491f19afe2856904346893fa1a"
+      },
+      "age": "21+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Hip-hop",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Dehor Table",
+          "price": 320,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/monday-night-282/249160/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Dance Floor Table",
+          "price": 640,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/monday-night-282/249160/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Central Table",
+          "price": 1280,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/monday-night-282/249160/channel/nightlifemilan-1"
+        },
+        {
+          "name": "VIP Front Table",
+          "price": 3200,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/monday-night-282/249160/channel/nightlifemilan-1"
+        },
+        {
+          "name": "DJ Table",
+          "price": 5000,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/monday-night-282/249160/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Aperitif + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/monday-night-282/249160/channel/nightlifemilan-1",
+          "admissionFrom": "19:30",
+          "admissionUntil": "22:00"
+        },
+        {
+          "name": "Club + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/monday-night-282/249160/channel/nightlifemilan-1",
+          "admissionFrom": "22:30"
+        }
+      ],
+      "provenance": "https://xceed.me/en/milano/event/monday-night-282/249160 · owned affiliate HTML SHA-256 c75bdc2b56f15d4fc6d35a7c153366b74b4151105857d01040c6f7afd3541c81 · checked 2026-11-11T11:14:08.000Z",
+      "halloween": false,
+      "startTimeKnown": true,
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
+      "dressCodeDetail": "men-long-trousers"
+    },
+    {
+      "id": "249218",
+      "sourceUrl": "https://xceed.me/en/milano/event/university-party-58/249218",
+      "affiliateUrl": "https://xceed.me/en/milano/event/university-party-58/249218/channel/nightlifemilan-1",
+      "affiliateStatus": "verified",
+      "officialName": "University Party",
+      "startISO": "2026-12-01T19:30:00+01:00",
+      "endISO": "2026-12-02T05:00:00+01:00",
+      "venue": {
+        "id": "v-justme",
+        "name": "Justme Milano",
+        "address": "Viale Luigi Camoens, 2, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Viale Luigi Camoens, 2",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": null,
+        "longitude": null
+      },
+      "image": {
+        "src": "/images/events/october-2026/249218-8f528f39a989.webp",
+        "width": 1376,
+        "height": 768,
+        "bytes": 224704,
+        "sha256": "0b73409457ff480bb97c506f7a2ba66ab98e93491f19afe2856904346893fa1a"
+      },
+      "age": "18+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Hip-hop",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Dehor Table",
+          "price": 320,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/university-party-58/249218/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Dance Floor Table",
+          "price": 640,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/university-party-58/249218/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Central Table",
+          "price": 1280,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/university-party-58/249218/channel/nightlifemilan-1"
+        },
+        {
+          "name": "VIP Front Table",
+          "price": 3200,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/university-party-58/249218/channel/nightlifemilan-1"
+        },
+        {
+          "name": "DJ Table",
+          "price": 5000,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/university-party-58/249218/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Pink Pass [Girls Only]",
+          "price": 0,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/university-party-58/249218/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Aperitif + 2 Drinks",
+          "price": 13,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/university-party-58/249218/channel/nightlifemilan-1",
+          "admissionFrom": "19:30",
+          "admissionUntil": "22:00"
+        },
+        {
+          "name": "Club + 2 Drinks",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/university-party-58/249218/channel/nightlifemilan-1",
+          "admissionFrom": "22:30"
+        }
+      ],
+      "provenance": "https://xceed.me/en/milano/event/university-party-58/249218 · owned affiliate HTML SHA-256 81e11c502ad76dfb936de1a8a8c2fbd342eabccf5e272f354be5f4d0248a984c · checked 2026-11-11T11:14:08.000Z",
+      "halloween": false,
+      "startTimeKnown": true,
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
+      "dressCodeDetail": "men-long-trousers"
+    },
+    {
+      "id": "249243",
+      "sourceUrl": "https://xceed.me/en/milano/event/wednesday-night-229/249243",
+      "affiliateUrl": "https://xceed.me/en/milano/event/wednesday-night-229/249243/channel/nightlifemilan-1",
+      "affiliateStatus": "verified",
+      "officialName": "Wednesday Night",
+      "startISO": "2026-12-02T19:30:00+01:00",
+      "endISO": "2026-12-03T05:00:00+01:00",
+      "venue": {
+        "id": "v-justme",
+        "name": "Justme Milano",
+        "address": "Viale Luigi Camoens, 2, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Viale Luigi Camoens, 2",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": null,
+        "longitude": null
+      },
+      "image": {
+        "src": "/images/events/october-2026/249243-b1cd343f6f44.webp",
+        "width": 1376,
+        "height": 768,
+        "bytes": 210008,
+        "sha256": "a60f6bdce21d0fc309098c9f506d5156620ad49dce2b6f150b6d5f37c0a355bd"
+      },
+      "age": "21+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Hip-hop",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Dehor Table",
+          "price": 320,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/wednesday-night-229/249243/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Dance Floor Table",
+          "price": 640,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/wednesday-night-229/249243/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Central Table",
+          "price": 1280,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/wednesday-night-229/249243/channel/nightlifemilan-1"
+        },
+        {
+          "name": "VIP Front Table",
+          "price": 3200,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/wednesday-night-229/249243/channel/nightlifemilan-1"
+        },
+        {
+          "name": "DJ Table",
+          "price": 5000,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/wednesday-night-229/249243/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Aperitif + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/wednesday-night-229/249243/channel/nightlifemilan-1",
+          "admissionFrom": "19:30",
+          "admissionUntil": "22:00"
+        },
+        {
+          "name": "Club + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/wednesday-night-229/249243/channel/nightlifemilan-1",
+          "admissionFrom": "22:30"
+        }
+      ],
+      "provenance": "https://xceed.me/en/milano/event/wednesday-night-229/249243 · owned affiliate HTML SHA-256 abb2bdb05e354f73f857142a8558e960b315457042d14b22c3896de96c067a36 · checked 2026-11-11T11:14:08.000Z",
+      "halloween": false,
+      "startTimeKnown": true,
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
+      "dressCodeDetail": "men-long-trousers"
+    },
+    {
+      "id": "249244",
+      "sourceUrl": "https://xceed.me/en/milano/event/thursday-night-349/249244",
+      "affiliateUrl": "https://xceed.me/en/milano/event/thursday-night-349/249244/channel/nightlifemilan-1",
+      "affiliateStatus": "verified",
+      "officialName": "Thursday Night",
+      "startISO": "2026-12-03T19:30:00+01:00",
+      "endISO": "2026-12-04T05:00:00+01:00",
+      "venue": {
+        "id": "v-justme",
+        "name": "Justme Milano",
+        "address": "Viale Luigi Camoens, 2, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Viale Luigi Camoens, 2",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": null,
+        "longitude": null
+      },
+      "image": {
+        "src": "/images/events/october-2026/249244-d9640cb369be.webp",
+        "width": 1376,
+        "height": 768,
+        "bytes": 210008,
+        "sha256": "a60f6bdce21d0fc309098c9f506d5156620ad49dce2b6f150b6d5f37c0a355bd"
+      },
+      "age": "21+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Hip-hop",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Dehor Table",
+          "price": 320,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/thursday-night-349/249244/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Dance Floor Table",
+          "price": 640,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/thursday-night-349/249244/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Central Table",
+          "price": 1280,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/thursday-night-349/249244/channel/nightlifemilan-1"
+        },
+        {
+          "name": "VIP Front Table",
+          "price": 3200,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/thursday-night-349/249244/channel/nightlifemilan-1"
+        },
+        {
+          "name": "DJ Table",
+          "price": 5000,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/thursday-night-349/249244/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Aperitif + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/thursday-night-349/249244/channel/nightlifemilan-1",
+          "admissionFrom": "19:30",
+          "admissionUntil": "22:00"
+        },
+        {
+          "name": "Club + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/thursday-night-349/249244/channel/nightlifemilan-1",
+          "admissionFrom": "22:30"
+        }
+      ],
+      "provenance": "https://xceed.me/en/milano/event/thursday-night-349/249244 · owned affiliate HTML SHA-256 04a908f2bb5c7440656cbea771ba9c6eabda3ddc6241ae523ba0aca8be5a8665 · checked 2026-11-11T11:14:08.000Z",
+      "halloween": false,
+      "startTimeKnown": true,
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
+      "dressCodeDetail": "men-long-trousers"
     },
     {
       "id": "249130",
@@ -21303,10 +22260,10 @@
           "url": "https://xceed.me/en/milano/event/friday-night-702/249130/channel/nightlifemilan-1"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/friday-night-702/249130 · owned affiliate HTML SHA-256 2c87de0329801ec0606eda83757a2c218a7e9ceee7116b4af9b32966375fca25 · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/friday-night-702/249130 · owned affiliate HTML SHA-256 69e46c9c7d68db1934dfe9a6f15578b3791296d47be764a073f78d0ec1a82925 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -21396,10 +22353,10 @@
           "url": "https://xceed.me/en/milano/event/biscotto-hector-oaks/236327"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/biscotto-hector-oaks/236327 · public HTML SHA-256 d71f38873516abf1c31081ad15aface1507c7908a8b7b49ed3a61456d6136e72 · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/biscotto-hector-oaks/236327 · public HTML SHA-256 45e81d746932bd55fd650d2850ab1a7cf31b0997015237f2d74cd7d59e9b492e · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z"
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z"
     },
     {
       "id": "248680",
@@ -21446,10 +22403,10 @@
           "url": "https://xceed.me/en/milano/event/the-saturn-movement/248680"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/the-saturn-movement/248680 · public HTML SHA-256 ceff7fd6a56f1200de6e7fe191f87e0fd114a6157726ef5c173042b91101e40d · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/the-saturn-movement/248680 · public HTML SHA-256 4ac0c48c86c7b06e31abdeab7050575f19c7d9781cda559ea3a8d4d930133226 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z"
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z"
     },
     {
       "id": "249139",
@@ -21533,10 +22490,96 @@
           "url": "https://xceed.me/en/milano/event/saturday-night-767/249139/channel/nightlifemilan-1"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/saturday-night-767/249139 · owned affiliate HTML SHA-256 27da63e01bdea40f83f72d532e8853aadfea46765f65c39b3a9bfd1b2dfd2644 · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/saturday-night-767/249139 · owned affiliate HTML SHA-256 a5e79a57156bf89f6601ea2a5402937a662d901d6a665c67a2bfded5d070f8eb · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
+      "dressCodeDetail": "men-long-trousers"
+    },
+    {
+      "id": "251833",
+      "sourceUrl": "https://xceed.me/en/milano/event/mpdc-mucho-fernet/251833",
+      "affiliateUrl": "https://xceed.me/en/milano/event/mpdc-mucho-fernet/251833/channel/nightlifemilan-1",
+      "affiliateStatus": "verified",
+      "officialName": "MPDC - Mucho Fernet",
+      "startISO": "2026-12-05T19:30:00+01:00",
+      "endISO": "2026-12-06T05:00:00+01:00",
+      "venue": {
+        "id": "v-pineta",
+        "name": "Pineta Milano",
+        "address": "Via Messina, 38, 20154 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Messina, 38",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20154"
+        },
+        "latitude": null,
+        "longitude": null
+      },
+      "image": {
+        "src": "/images/events/october-2026/251833-61eb740fbdac.webp",
+        "width": 1376,
+        "height": 768,
+        "bytes": 224704,
+        "sha256": "0b73409457ff480bb97c506f7a2ba66ab98e93491f19afe2856904346893fa1a"
+      },
+      "age": "18+",
+      "dressCode": "Elegant",
+      "genres": [
+        "Reggaeton"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Dance Floor Table",
+          "price": 250,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/mpdc-mucho-fernet/251833/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Prive Dance Floor Table",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/mpdc-mucho-fernet/251833/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Prive Balcony Table",
+          "price": 750,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/mpdc-mucho-fernet/251833/channel/nightlifemilan-1"
+        },
+        {
+          "name": "VIP Prive Table",
+          "price": 1200,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/mpdc-mucho-fernet/251833/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Ticket + 2 Drinks",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/mpdc-mucho-fernet/251833/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Aperitif + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/mpdc-mucho-fernet/251833/channel/nightlifemilan-1",
+          "admissionFrom": "19:30",
+          "admissionUntil": "22:30"
+        }
+      ],
+      "provenance": "https://xceed.me/en/milano/event/mpdc-mucho-fernet/251833 · owned affiliate HTML SHA-256 4f6b54ab4be79d9a7b8fb4ba14f6ad92d1b08ff415cb5e887c7eb2ee840af035 · checked 2026-11-11T11:14:08.000Z",
+      "halloween": false,
+      "startTimeKnown": true,
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -21766,11 +22809,33 @@
           "url": "https://xceed.me/en/milano/event/perreo-xl-24/240989"
         },
         {
+          "name": "C1",
+          "price": 500,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-24/240989"
+        },
+        {
+          "name": "C2",
+          "price": 500,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-24/240989"
+        },
+        {
+          "name": "C3",
+          "price": 500,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-24/240989"
+        },
+        {
           "name": "Women General Admission",
           "price": 10,
           "category": "ticket",
           "availability": "available",
-          "url": "https://xceed.me/en/milano/event/perreo-xl-24/240989"
+          "url": "https://xceed.me/en/milano/event/perreo-xl-24/240989",
+          "audience": "women"
         },
         {
           "name": "Men General Admission",
@@ -21780,10 +22845,10 @@
           "url": "https://xceed.me/en/milano/event/perreo-xl-24/240989"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/perreo-xl-24/240989 · public HTML SHA-256 c6093f9ba392c9128eff1ace7794ce39c3742d4a2335e85ab4c5e736766727bd · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/perreo-xl-24/240989 · public HTML SHA-256 204ae5b1c18f88e8308fae5711c21f429f043c3da1a7af8b9d9018c6963b0a45 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z"
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z"
     },
     {
       "id": "250300",
@@ -21844,10 +22909,10 @@
           "url": "https://xceed.me/en/milano/event/san-ambroues/250300/channel/nightlifemilan-1"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/san-ambroues/250300 · owned affiliate HTML SHA-256 ee074913f4d9a4aaaf834a1e87ae44d4bef7b59c625a59bf7ba06dd4e5252fc1 · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/san-ambroues/250300 · owned affiliate HTML SHA-256 e4c997268ce61e82fd1b94a48752d413864f2e081d4dcefb3a677781487e4e7c · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -21937,10 +23002,10 @@
           "url": "https://xceed.me/en/milano/event/arkore-5/251155"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/arkore-5/251155 · public HTML SHA-256 e3b433270d2f7137899c7b87359c8495adf75326a66ee72dbc941b77611cacd0 · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/arkore-5/251155 · public HTML SHA-256 7a9a2ae091a2a158a3bf6e9b4d2d87a5d9997721ec6c35a1749a056ff395f9cc · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z"
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z"
     },
     {
       "id": "249132",
@@ -22024,10 +23089,10 @@
           "url": "https://xceed.me/en/milano/event/friday-night-714/249132/channel/nightlifemilan-1"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/friday-night-714/249132 · owned affiliate HTML SHA-256 361f6970ae3aa4e668dbb0590edc6b4bbfc2d0b560301c6615e273d0c4623624 · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/friday-night-714/249132 · owned affiliate HTML SHA-256 2ca73923c43dbaca866ad66c2f77c92662d854f83d42b62ef3247414f94753b3 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -22112,10 +23177,10 @@
           "url": "https://xceed.me/en/milano/event/saturday-night-782/249144/channel/nightlifemilan-1"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/saturday-night-782/249144 · owned affiliate HTML SHA-256 07360a5593d901f42784ced58452237ac6aa5ce8161a5ae69d03a3bc67ff2804 · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/saturday-night-782/249144 · owned affiliate HTML SHA-256 9a7e9c15a2db31e79ba3ed6c2f65b00f49ae38a2853bdfd65d3d8816e5588ee1 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -22345,6 +23410,27 @@
           "url": "https://xceed.me/en/milano/event/perreo-xl-25/240990"
         },
         {
+          "name": "C1",
+          "price": 500,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-25/240990"
+        },
+        {
+          "name": "C2",
+          "price": 500,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-25/240990"
+        },
+        {
+          "name": "C3",
+          "price": 500,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-25/240990"
+        },
+        {
           "name": "Women General Admission",
           "price": 10,
           "category": "ticket",
@@ -22360,10 +23446,114 @@
           "url": "https://xceed.me/en/milano/event/perreo-xl-25/240990"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/perreo-xl-25/240990 · public HTML SHA-256 343b07cab231791b33b12de7af2c682ccfea676c4a08b3192f237baddf14af13 · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/perreo-xl-25/240990 · public HTML SHA-256 80ff7e76946634910a4ad004d0943f3935e1950859ae0687b120daa758c21837 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z"
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z"
+    },
+    {
+      "id": "242145",
+      "sourceUrl": "https://xceed.me/en/milano/event/novocaine-beste-hira/242145",
+      "affiliateUrl": null,
+      "affiliateStatus": "unknown",
+      "officialName": "NOVOCAINE+: BESTE HIRA",
+      "startISO": "2026-12-12T23:00:00+01:00",
+      "endISO": "2026-12-13T05:00:00+01:00",
+      "venue": {
+        "id": "v-gate",
+        "name": "Gate Milano",
+        "address": "Via Valtellina, 21, 20159 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Valtellina, 21",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20159"
+        },
+        "latitude": null,
+        "longitude": null
+      },
+      "image": {
+        "src": "/images/events/october-2026/242145-392777716fca.webp",
+        "width": 1376,
+        "height": 768,
+        "bytes": 241618,
+        "sha256": "ad347a03f063f3931a29b0cd0219fcd25bc9562df7bf91b200d4e0e9ea8dec58"
+      },
+      "age": "18+",
+      "dressCode": "Smart casual",
+      "genres": [
+        "Techno"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "VIP SOPPALCO - R1",
+          "price": 500,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/novocaine-beste-hira/242145"
+        },
+        {
+          "name": "VIP SOPPALCO - R2",
+          "price": 500,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/novocaine-beste-hira/242145"
+        },
+        {
+          "name": "VIP SOPPALCO - R3",
+          "price": 500,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/novocaine-beste-hira/242145"
+        },
+        {
+          "name": "VIP SOPPALCO - R4",
+          "price": 500,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/novocaine-beste-hira/242145"
+        },
+        {
+          "name": "VIP SOPPALCO - R5",
+          "price": 500,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/novocaine-beste-hira/242145"
+        },
+        {
+          "name": "Early Bird",
+          "price": 10,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/novocaine-beste-hira/242145"
+        },
+        {
+          "name": "First Release",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/novocaine-beste-hira/242145"
+        },
+        {
+          "name": "Second Release",
+          "price": 20,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/novocaine-beste-hira/242145"
+        },
+        {
+          "name": "Final Release",
+          "price": 25,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/novocaine-beste-hira/242145"
+        }
+      ],
+      "provenance": "https://xceed.me/en/milano/event/novocaine-beste-hira/242145 · public HTML SHA-256 9a3bd246b6f96b3ebbd82f6e77b453e5fcdb67cd9aaa1f5418bb55b9949f819e · checked 2026-11-11T11:14:08.000Z",
+      "halloween": false,
+      "startTimeKnown": true,
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z"
     },
     {
       "id": "249135",
@@ -22447,10 +23637,10 @@
           "url": "https://xceed.me/en/milano/event/friday-night-715/249135/channel/nightlifemilan-1"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/friday-night-715/249135 · owned affiliate HTML SHA-256 1266b8ebb29fce6a241fe8d411cf18d33f7c9e85146db7fe1c902da9ac5992ea · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/friday-night-715/249135 · owned affiliate HTML SHA-256 4938ab2f25940fe6eef08fc60f26594f5b3c18e613f7ff72466d076edb262252 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -22535,10 +23725,10 @@
           "url": "https://xceed.me/en/milano/event/saturday-night-768/249142/channel/nightlifemilan-1"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/saturday-night-768/249142 · owned affiliate HTML SHA-256 d1736c8091acc4e249efa1e9e5bb5d7046ad8c947aae373b75bec6fbb4938ae1 · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/saturday-night-768/249142 · owned affiliate HTML SHA-256 edcdcbec61dbe136b70e060a3425c637a8bb1d380686d401cef8c9b6ab9188a1 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     },
     {
@@ -22614,11 +23804,80 @@
           "url": "https://xceed.me/en/milano/event/xmas-party-12/250374/channel/nightlifemilan-1"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/xmas-party-12/250374 · owned affiliate HTML SHA-256 24706125813fd81b7b590f3d8bdfc23939d5fb31dbef5c22eabfc3d0805b952c · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/xmas-party-12/250374 · owned affiliate HTML SHA-256 b5ce6987c891df172205773ec4198c9c61f656891784666d24c33aba04d293a0 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
+    },
+    {
+      "id": "238459",
+      "sourceUrl": "https://xceed.me/en/milano/event/aira/238459",
+      "affiliateUrl": null,
+      "affiliateStatus": "unknown",
+      "officialName": "AIRA",
+      "startISO": "2026-12-22T23:00:00+01:00",
+      "endISO": "2026-12-23T05:00:00+01:00",
+      "venue": {
+        "id": "v-gate",
+        "name": "Gate Milano",
+        "address": "Via Valtellina, 21, 20159 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Valtellina, 21",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20159"
+        },
+        "latitude": null,
+        "longitude": null
+      },
+      "image": {
+        "src": "/images/events/october-2026/238459-fc72c7aa06d3.webp",
+        "width": 1376,
+        "height": 768,
+        "bytes": 197516,
+        "sha256": "95ae6a625b15b2d743246e1dc0c6e709a9d0e4066a4dd6fbe53b54be4e2464b1"
+      },
+      "age": "18+",
+      "dressCode": "Smart casual",
+      "genres": [
+        "Rap"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Early Bird",
+          "price": 15,
+          "category": "ticket",
+          "availability": "sold_out",
+          "url": "https://xceed.me/en/milano/event/aira/238459"
+        },
+        {
+          "name": "First Release",
+          "price": 20,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/aira/238459"
+        },
+        {
+          "name": "Second Release",
+          "price": 25,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/aira/238459"
+        },
+        {
+          "name": "VIP Ticket",
+          "price": 50,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/aira/238459"
+        }
+      ],
+      "provenance": "https://xceed.me/en/milano/event/aira/238459 · public HTML SHA-256 c4384e70ebd1233a993bef80f3e9bf96ff91f718124eda5de8cc7b3b073abbc7 · checked 2026-11-11T11:14:08.000Z",
+      "halloween": false,
+      "startTimeKnown": true,
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z"
     },
     {
       "id": "249067",
@@ -22679,11 +23938,454 @@
           "url": "https://xceed.me/en/milano/event/christmas-school-party-2/249067/channel/nightlifemilan-1"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/christmas-school-party-2/249067 · owned affiliate HTML SHA-256 79bd4fc180ecc5f24093fbc33a7b2c9def75455070fe1b7442a11be0fb7a5c24 · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/christmas-school-party-2/249067 · owned affiliate HTML SHA-256 ded50f64c3d0323844edb584e492c1b00bfc8d4645f06098929803a5196a752a · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
+    },
+    {
+      "id": "240992",
+      "sourceUrl": "https://xceed.me/en/milano/event/perreo-xl-26/240992",
+      "affiliateUrl": null,
+      "affiliateStatus": "unknown",
+      "officialName": "PERREO XL",
+      "startISO": "2026-12-25T23:00:00+01:00",
+      "endISO": "2026-12-26T05:00:00+01:00",
+      "venue": {
+        "id": "v-gate",
+        "name": "Gate Milano",
+        "address": "Via Valtellina, 21, 20159 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Valtellina, 21",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20159"
+        },
+        "latitude": null,
+        "longitude": null
+      },
+      "image": {
+        "src": "/images/events/october-2026/240992-c7dbbf664769.webp",
+        "width": 1376,
+        "height": 768,
+        "bytes": 197516,
+        "sha256": "95ae6a625b15b2d743246e1dc0c6e709a9d0e4066a4dd6fbe53b54be4e2464b1"
+      },
+      "age": "18+",
+      "dressCode": "Smart casual",
+      "genres": [
+        "Techno",
+        "Hard Techno",
+        "House"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "VIP FACE - F1",
+          "price": 600,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "VIP FACE - F2",
+          "price": 600,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "VIP FACE - F3",
+          "price": 600,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "VIP FACE - F4",
+          "price": 600,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "VIP FACE - F5",
+          "price": 600,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "VIP FACE - F6",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "VIP FACE - F7",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "VIP FACE - F8",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "VIP FACE - F9",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "VIP FACE - F10",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "VIP FACE - F11",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "VIP FACE - F12",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "VIP FACE - F13",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "VIP FACE - F14",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "VIP FACE - F15",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "VIP FACE - F16",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "VIP FACE - F17",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "VIP FACE - F18",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "VIP FACE - F19",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "VIP FACE - F20",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "VIP FACE - F21",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "VIP BALCONY - B1",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "VIP BALCONY - B2",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "VIP BALCONY - B3",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "VIP BALCONY - B4",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "VIP BALCONY - B5",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "VIP FACE - F22",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "C1",
+          "price": 500,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "C2",
+          "price": 500,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "C3",
+          "price": 500,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        },
+        {
+          "name": "Women General Admission",
+          "price": 10,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992",
+          "audience": "women"
+        },
+        {
+          "name": "Men General Admission",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/perreo-xl-26/240992"
+        }
+      ],
+      "provenance": "https://xceed.me/en/milano/event/perreo-xl-26/240992 · public HTML SHA-256 7c05add7da69d9236918652e57d6519fa516448bf826499c0df3b6b6039fc2fa · checked 2026-11-11T11:14:08.000Z",
+      "halloween": false,
+      "startTimeKnown": true,
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z"
+    },
+    {
+      "id": "248494",
+      "sourceUrl": "https://xceed.me/en/milano/event/angerfist/248494",
+      "affiliateUrl": null,
+      "affiliateStatus": "unknown",
+      "officialName": "ANGERFIST",
+      "startISO": "2026-12-26T23:00:00+01:00",
+      "endISO": "2026-12-27T05:00:00+01:00",
+      "venue": {
+        "id": "v-gate",
+        "name": "Gate Milano",
+        "address": "Via Valtellina, 21, 20159 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Valtellina, 21",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20159"
+        },
+        "latitude": null,
+        "longitude": null
+      },
+      "image": {
+        "src": "/images/events/october-2026/248494-d2b09c6254f2.webp",
+        "width": 1376,
+        "height": 768,
+        "bytes": 197516,
+        "sha256": "95ae6a625b15b2d743246e1dc0c6e709a9d0e4066a4dd6fbe53b54be4e2464b1"
+      },
+      "age": "18+",
+      "dressCode": "Smart casual",
+      "genres": [
+        "Hardcore",
+        "Hard Techno"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "VIP BALCONY - B1",
+          "price": 500,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/angerfist/248494"
+        },
+        {
+          "name": "VIP BALCONY - B2",
+          "price": 500,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/angerfist/248494"
+        },
+        {
+          "name": "VIP BALCONY - B3",
+          "price": 500,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/angerfist/248494"
+        },
+        {
+          "name": "VIP BALCONY - B4",
+          "price": 500,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/angerfist/248494"
+        },
+        {
+          "name": "VIP BALCONY - B5",
+          "price": 500,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/angerfist/248494"
+        },
+        {
+          "name": "GA - First Release",
+          "price": 20,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/angerfist/248494"
+        },
+        {
+          "name": "GA - Second Release",
+          "price": 23,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/angerfist/248494"
+        },
+        {
+          "name": "GA - Third Release",
+          "price": 25,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/angerfist/248494"
+        },
+        {
+          "name": "GA - Fifth Release",
+          "price": 30,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/angerfist/248494"
+        },
+        {
+          "name": "GA - Final Release",
+          "price": 35,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/angerfist/248494"
+        },
+        {
+          "name": "BACKSTAGE - Early Bird",
+          "price": 28,
+          "category": "ticket",
+          "availability": "sold_out",
+          "url": "https://xceed.me/en/milano/event/angerfist/248494"
+        },
+        {
+          "name": "BACKSTAGE - First Release",
+          "price": 30,
+          "category": "ticket",
+          "availability": "sold_out",
+          "url": "https://xceed.me/en/milano/event/angerfist/248494"
+        },
+        {
+          "name": "BACKSTAGE - Second Release",
+          "price": 35,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/angerfist/248494"
+        },
+        {
+          "name": "BACKSTAGE - Third Release",
+          "price": 40,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/angerfist/248494"
+        },
+        {
+          "name": "BACKSTAGE - Final Release",
+          "price": 50,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/angerfist/248494"
+        },
+        {
+          "name": "GA - Fourth Release",
+          "price": 28,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/angerfist/248494"
+        },
+        {
+          "name": "GA - Extra Release",
+          "price": 40,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/angerfist/248494"
+        },
+        {
+          "name": "BACKSTAGE - Extra Release",
+          "price": 55,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/angerfist/248494"
+        },
+        {
+          "name": "GA - Early Bird",
+          "price": 18,
+          "category": "ticket",
+          "availability": "sold_out",
+          "url": "https://xceed.me/en/milano/event/angerfist/248494"
+        }
+      ],
+      "provenance": "https://xceed.me/en/milano/event/angerfist/248494 · public HTML SHA-256 7f6c2eaedd12a9719c75c3d52baea0b81799e151cbff3013b86e1f0f2b9287d5 · checked 2026-11-11T11:14:08.000Z",
+      "halloween": false,
+      "startTimeKnown": true,
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z"
     },
     {
       "id": "248439",
@@ -22780,10 +24482,10 @@
           "admissionFrom": "22:30"
         }
       ],
-      "provenance": "https://xceed.me/en/milano/event/gatsby-nye-2027/248439 · owned affiliate HTML SHA-256 182a0cecd31792baa78bac88b5834d412b958fb2f5e72d37b7d20f1a45e9b39f · checked 2026-11-05T08:43:23.000Z",
+      "provenance": "https://xceed.me/en/milano/event/gatsby-nye-2027/248439 · owned affiliate HTML SHA-256 a5455930b579ec29b7325bf2cbf3f1889299fcffafd84d5283734ec53d82dae2 · checked 2026-11-11T11:14:08.000Z",
       "halloween": false,
       "startTimeKnown": true,
-      "commercialCheckedAt": "2026-11-05T08:43:23.000Z",
+      "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
     }
   ]

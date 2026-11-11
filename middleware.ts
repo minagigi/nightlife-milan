@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { enabledLocaleCodes, LOCALES } from '@/lib/i18n/locales';
+import { enabledLocaleCodes, LOCALES, type LocaleCode } from '@/lib/i18n/locales';
 import { isEventBatchLocaleHttpIndexable } from '@/lib/eventBatchProfiles';
 import { isRemovedCuratedSitePath } from '@/lib/eventVisibility';
 import { resolveSeoHubPathToCanonical } from '@/lib/i18n/localizedSlugs35';
+import { capodannoCategoryPath } from '@/lib/capodanno/routes';
 
 // Lingue attive dal registry unico (lib/i18n/locales.ts): attivare una lingua lì
 // la rende automaticamente instradabile qui, senza toccare il middleware.
@@ -60,6 +61,20 @@ function crmAuth(request: NextRequest): NextResponse | null {
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // Redirect HTTP 308 diretto (1-hop, anti-loop) per l'alias legacy Capodanno 2027
+  const capodannoLegacyMatch = pathname.match(/^(?:\/([a-z]{2}))?\/events\/capodanno-2027\/?$/);
+  if (capodannoLegacyMatch) {
+    const matchedLocale = capodannoLegacyMatch[1];
+    const targetLocale: LocaleCode =
+      matchedLocale && locales.includes(matchedLocale) ? (matchedLocale as LocaleCode) : 'en';
+    const destination = capodannoCategoryPath('capodanno-2027', targetLocale);
+    if (destination && destination !== pathname) {
+      const url = new URL(destination, request.url);
+      url.search = request.nextUrl.search;
+      return NextResponse.redirect(url, 308);
+    }
+  }
 
   // Le vecchie pagine generate dalle collection Eventbrite non appartengono al
   // sito. Un 410 esplicito evita il falso 200 del fallback App Router e accelera

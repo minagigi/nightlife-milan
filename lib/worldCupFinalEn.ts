@@ -14,8 +14,8 @@ export const WORLD_CUP_FINAL_COVER_EN = {
   title: 'World Cup final on the big screen at Just Me Milan',
   alt: 'Spain vs Argentina World Cup final cover for Just Me Milan with Sunday July 19, doors at 7:30 PM and kick-off at 9 PM',
   description: 'English 2:1 recomposition of the approved poster with Just Me, both players, the date and verified event times.',
-  width: 2000,
-  height: 1000,
+  width: 1376,
+  height: 768,
 } as const;
 
 export const WORLD_CUP_FINAL_POSTER_EN = {
@@ -23,8 +23,8 @@ export const WORLD_CUP_FINAL_POSTER_EN = {
   title: 'Spain vs Argentina World Cup final poster at Just Me Milan',
   alt: 'English 5:4 poster for Spain vs Argentina at Just Me Milan with both players, Torre Branca, date, times and booking contacts',
   description: 'English 5:4 recomposition of the approved poster with the original hierarchy, event artwork, verified times and contacts.',
-  width: 1600,
-  height: 1280,
+  width: 1376,
+  height: 768,
 } as const;
 
 export const WORLD_CUP_FINAL_MOOD_IMAGES_EN = [
@@ -33,32 +33,32 @@ export const WORLD_CUP_FINAL_MOOD_IMAGES_EN = [
     title: 'Torre Branca beside Just Me Milan',
     alt: 'Torre Branca lit in pink between trees under the evening sky in Parco Sempione, Milan',
     description: 'English 5:4 event image recomposed from a real photograph of Torre Branca in Parco Sempione.',
-    width: 1400,
-    height: 1120,
+    width: 1376,
+    height: 768,
   },
   {
     src: '/images/events/generated/just-me-finale-coppa-mondo-aperitivo-real-5x4-it-v5.jpg',
     title: 'Aperitif buffet at Just Me Milan',
     alt: 'Just Me Milan buffet with savoury dishes, desserts and two members of staff serving guests',
     description: 'English 5:4 event image recomposed from a real photograph of the Just Me Milan aperitif buffet.',
-    width: 1400,
-    height: 1120,
+    width: 1376,
+    height: 768,
   },
   {
     src: '/images/events/generated/just-me-finale-coppa-mondo-lounge-tavoli-real-5x4-it-v5.jpg',
     title: 'Lounge and tables at Just Me Milan',
     alt: 'Just Me Milan lounge with black sofas, low tables, pink lighting and venue signs',
     description: 'English 5:4 event image based on a real photograph of the lounge and tables at Just Me Milan.',
-    width: 1400,
-    height: 1120,
+    width: 1376,
+    height: 768,
   },
   {
     src: '/images/events/generated/just-me-finale-coppa-mondo-sala-musica-real-5x4-it-v5.jpg',
     title: 'Evening atmosphere beneath Torre Branca',
     alt: 'Outdoor lounge with guests, sofas and a laid table in front of Torre Branca lit in pink',
     description: 'English 5:4 event image based on a real photograph of the outdoor lounge beside Torre Branca.',
-    width: 1400,
-    height: 1120,
+    width: 1376,
+    height: 768,
   },
 ] as const;
 

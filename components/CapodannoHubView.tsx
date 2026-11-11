@@ -1,5 +1,7 @@
 import SeoAuthorityHub from '@/components/SeoAuthorityHub';
-import type { LocaleCode } from '@/lib/i18n/locales';
+
+import EventVenueMap from '@/components/EventVenueMap';
+import { getEventVenueCopy } from '@/lib/i18n/eventVenueCopy';import type { LocaleCode } from '@/lib/i18n/locales';
 import { capodannoEventPath, capodannoNavigation, capodannoPath } from '@/lib/capodanno/routes';
 import {
   getCapodannoLocalizedCategorySubtitle,
@@ -35,6 +37,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
   const nav = capodannoNavigation(locale);
   const ui = getCapodannoUiCopy(locale);
   const scarcity = getScarcityAndChatCopy(locale);
+  const venueMapCopy = getEventVenueCopy(locale as LocaleCode);
 
   const title = getCapodannoLocalizedCategoryTitle(pageDef, locale, events.length);
   const subtitle = getCapodannoLocalizedCategorySubtitle(pageDef, locale, events.length);
@@ -336,15 +339,16 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
           <p className="mt-2 text-sm text-white/70">
             {ui.mapSubtitleHub}
           </p>
-          <div className="mt-5 overflow-hidden rounded-xl border border-white/10">
-            <iframe
-              title={ui.mapHeadingHub}
-              src="https://www.google.com/maps?q=Milano+Piazza+del+Duomo+Corso+Como+Parco+Sempione+Navigli&output=embed"
-              width="100%"
-              height="380"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="block w-full border-0"
+          <div className="mt-5">
+            <EventVenueMap
+              id={`capodanno-city-map-${mode}`}
+              purpose="city"
+              mapUrl="https://www.google.com/maps?q=Milano+Piazza+del+Duomo+Corso+Como+Parco+Sempione+Navigli&output=embed"
+              labels={{
+                loadMap: venueMapCopy.loadMap,
+                mapTitle: ui.mapHeadingHub,
+                privacyLoadNotice: venueMapCopy.privacyLoadNotice,
+              }}
             />
           </div>
         </div>

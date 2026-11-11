@@ -1,7 +1,7 @@
 import MainContent from '@/components/MainContent';
 import { Montserrat, Cormorant_Garamond, Bodoni_Moda, Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
 import dynamic from 'next/dynamic';
-import { getLocaleDef, DEFAULT_LOCALE, type LocaleCode } from '@/lib/i18n/locales';
+import { ENABLED_LOCALES, getLocaleDef, localePrefix, DEFAULT_LOCALE, type LocaleCode } from '@/lib/i18n/locales';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import BackToTop from '@/components/BackToTop';
@@ -19,7 +19,6 @@ import { getBackToTopLabel } from '@/lib/i18n/backToTopCopy';
 import { getScriptFont } from '@/lib/scriptFonts';
 import '@/app/globals.css';
 import 'flag-icons/css/flag-icons.min.css';
-import '@/app/locale-flags.css';
 import GlobalPriorityRecommendations from '@/components/GlobalPriorityRecommendations';
 import { getTopPriorityVenueRecommendations } from '@/lib/priorityVenueRecommendations';
 import { getEventSelectionCopy } from '@/lib/i18n/eventSelectionCopy';
@@ -39,11 +38,13 @@ const montserrat = Montserrat({
   subsets: ['latin'],
   variable: '--font-montserrat',
   display: 'swap',
+  preload: false,
 });
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
   variable: '--font-cormorant',
   display: 'swap',
+  preload: false,
 });
 const bodoni = Bodoni_Moda({
   subsets: ['latin'],
@@ -98,8 +99,9 @@ export default async function SiteShell({ locale, editorialFields, copyrightYear
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: SITE_CONTACT.whatsapp.number,
+      email: SITE_CONTACT.email,
       contactType: 'customer service',
-      availableLanguage: ['English', 'Italian', 'Spanish', 'French', 'German', 'Portuguese'],
+      availableLanguage: ENABLED_LOCALES.map((item) => item.englishName),
     },
     areaServed: { '@type': 'City', name: 'Milan' },
     description: editorialValue(editorialFields, 'footer.desc', getFooterCopy(locale).desc),
@@ -108,8 +110,19 @@ export default async function SiteShell({ locale, editorialFields, copyrightYear
   const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
+    '@id': `${baseUrl}/#website`,
     name: 'Nightlife Milan',
     url: baseUrl,
+    inLanguage: localeDef.hreflang,
+    publisher: { '@id': `${baseUrl}/#organization` },
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${baseUrl}${localePrefix(locale)}/clubs?q={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
   };
 
   return (

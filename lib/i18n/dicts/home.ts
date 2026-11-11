@@ -1020,7 +1020,7 @@ export const homeDict: Record<string, Partial<Record<LocaleCode, string>>> = {
   "Italo Rota design, velvet booths, fashion crowd. The Milan door that reads the room.": {
     es: "Diseño de Italo Rota, reservados de terciopelo, público fashion. La puerta de Milan que lee el ambiente.",
     fr: "Design Italo Rota, banquettes en velours, foule fashion. La porte de Milan qui lit la salle.",
-    de: "Roberto-Cavalli-Design, Samtlounges, Fashion-Crowd. Die Mailänder Tür, die den Raum liest.",
+    de: "Italo-Rota-Architektur, Samtlounges, Fashion-Crowd. Die Mailänder Tür, die den Raum liest.",
     pt: "Design Italo Rota, camarotes de veludo, público fashion. A porta de Milan que lê o ambiente.",
     nl: "Italo Rota-design, fluwelen loges, fashion crowd. De Milanese deur die de sfeer aanvoelt.",
     ru: "Дизайн Italo Rota, бархатные ложи, fashion-тусовка. Дверь Milan, которая считывает зал.",

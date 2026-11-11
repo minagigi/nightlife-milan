@@ -608,7 +608,7 @@ export const zonesDict: Record<string, Partial<Record<LocaleCode, string>>> = {
     "zh": "毗邻 Castello Sforzesco 的高端街区。Just Me Milano 就在这里 — 全城最时尚的夜店，由 Italo Rota 设计，VIP 桌台 €500 起，汇聚国际 DJ 阵容。",
     "ar": "حي حصري بالقرب من Castello Sforzesco. يقع هنا Just Me Milano — أكثر نوادي المدينة أناقة، بتصميم Italo Rota وطاولات VIP تبدأ من €500 وعروض DJ عالمية.",
     "bg": "Ексклузивен квартал близо до Castello Sforzesco. Just Me Milano е тук — най-модният клуб в града с дизайн от Italo Rota, VIP маси от €500 и международни DJ сетове.",
-    "hr": "Ekskluzivna četvrt blizu Castello Sforzesco. Ovdje je Just Me Milano — najotmjeniji klub u gradu s dizajnom Roberta Cavallija, VIP stolovima od €500 i međunarodnim DJ setovima.",
+    "hr": "Ekskluzivna četvrt blizu Castello Sforzesco. Ovdje je Just Me Milano — najotmjeniji klub u gradu s dizajnom arhitekta Itala Rote, VIP stolovima od €500 i međunarodnim DJ setovima.",
     "cs": "Exkluzivní čtvrť poblíž Castello Sforzesco. Právě zde je Just Me Milano — nejmódnější klub ve městě s designem Italo Rota, VIP stoly od €500 a mezinárodními DJ sety.",
     "da": "Eksklusivt distrikt nær Castello Sforzesco. Just Me Milano ligger her — byens mest fashionable klub med Italo Rota-design, VIP-borde fra €500 og internationale DJ-sets.",
     "et": "Eksklusiivne linnaosa Castello Sforzesco lähedal. Siin asub Just Me Milano — linna kõige moekam klubi Italo Rota disainiga, VIP-lauad alates €500 ja rahvusvahelised DJ-setid.",
@@ -628,8 +628,8 @@ export const zonesDict: Record<string, Partial<Record<LocaleCode, string>>> = {
     "is": "Eksklúsíft hverfi nálægt Castello Sforzesco. Hér er Just Me Milano — tískulegasti klúbbur borgarinnar með hönnun frá Italo Rota, VIP-borð frá €500 og alþjóðleg DJ-sett.",
     "uk": "Ексклюзивний район поблизу Castello Sforzesco. Тут — Just Me Milano, наймодніший клуб міста з дизайном Italo Rota, VIP-столами від €500 та міжнародними діджей-сетами.",
     "sq": "Lagje ekskluzive pranë Castello Sforzesco. Just Me Milano ndodhet këtu — klubi më in i qytetit me dizajn Italo Rota, VIP table nga €500 dhe DJ set ndërkombëtarë.",
-    "sr": "Ekskluzivan kvart blizu Castello Sforzesco. Just Me Milano je ovde — najfensiji klub u gradu s dizajnom Roberta Cavallija, VIP stolovima od €500 i internacionalnim DJ setovima.",
-    "bs": "Ekskluzivna četvrt blizu Castello Sforzesco. Just Me Milano je ovdje — najfensiji klub u gradu s dizajnom Roberta Cavallija, VIP stolovima od €500 i internacionalnim DJ setovima.",
+    "sr": "Ekskluzivan kvart blizu Castello Sforzesco. Just Me Milano je ovde — najfensiji klub u gradu s dizajnom arhitekta Itala Rote, VIP stolovima od €500 i internacionalnim DJ setovima.",
+    "bs": "Ekskluzivna četvrt blizu Castello Sforzesco. Just Me Milano je ovdje — najfensiji klub u gradu s dizajnom arhitekta Itala Rote, VIP stolovima od €500 i internacionalnim DJ setovima.",
     "mk": "Ексклузивен кварт во близина на Castello Sforzesco. Just Me Milano е тука — најмодерниот клуб во градот со дизајн од Italo Rota, VIP маси од €500 и меѓународни DJ сетови."
   },
   "Milan's canals at night. Magazzini Generali (techno and live music), Hollywood Club (historic), dozens of canal-side bars for aperitivo. Bohemian atmosphere, mixed crowd.": {

@@ -1,4 +1,5 @@
 export const CONTACT = {
+  email: 'concierge@nightlifemilan.com',
   whatsapp: {
     number: '+39 351 912 7047',
     link: 'https://wa.me/393519127047',

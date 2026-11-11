@@ -1,5 +1,8 @@
 import { Metadata } from 'next';
-import Link from '@/components/LocalizedLink';
+
+import EventVenueMap from '@/components/EventVenueMap';
+import { getEventVenueCopy } from '@/lib/i18n/eventVenueCopy';
+import type { LocaleCode } from '@/lib/i18n/locales';import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
 import { tr } from '@/lib/i18n/t';
 import {
@@ -114,11 +117,11 @@ const CONCERT_ARENAS = [
     endTimeIt: 'Fine concerto ore 23:00 - 23:30 · Ingresso Club 23:15 - 05:00',
     endTimeEn: 'Encore ends 23:00 - 23:30 · Club Entry 23:15 - 05:00',
     headlineClubIt:
-      'Aria Club Milano (#3 Priorità, Piazzale dello Sport 14) è a soli 150 metri da San Siro e a pochi minuti a piedi dall Ippodromo!',
+      'Aria Club Milano (#3 Priorità, Piazzale dello Sport 14) è a soli 150 metri da San Siro e a pochi minuti a piedi dall’Ippodromo!',
     headlineClubEn:
       'Aria Club Milano (#3 Priority, Piazzale dello Sport 14) is just 150 meters from San Siro and a short walk from the Hippodrome!',
     logisticsIt:
-      'Zero attesa taxi, zero calca ai tornelli della M5 Lilla: quando finisce il bis (encore) a San Siro o all Ippodromo Snai, attraversi Piazzale dello Sport a piedi e in 120 secondi entri nell Official Concert Afterparty di Aria Club (#3 Priorità) con giardino estivo, main room climatizzata e 3 livelli di Tavoli VIP (da €250 a €600). In alternativa, in 3 fermate di M5 raggiungi il 20° piano di Voya Rooftop (#5 Priorità) o in 4 fermate 55 Milano (#4 Priorità) e Just Me (#1 Priorità).',
+      'Zero attesa taxi, zero calca ai tornelli della M5 Lilla: quando finisce il bis (encore) a San Siro o all’Ippodromo Snai, attraversi Piazzale dello Sport a piedi e in 120 secondi entri nell’Official Concert Afterparty di Aria Club (#3 Priorità) con giardino estivo, main room climatizzata e 3 livelli di Tavoli VIP (da €250 a €600). In alternativa, in 3 fermate di M5 raggiungi il 20° piano di Voya Rooftop (#5 Priorità) o in 4 fermate 55 Milano (#4 Priorità) e Just Me (#1 Priorità).',
     logisticsEn:
       'Zero taxi wait, zero M5 subway crush: as soon as the final encore ends at San Siro or Snai Hippodrome, walk straight across Piazzale dello Sport and step into Aria Club (#3 Priority) in 120 seconds for the Official Concert Afterparty in its open-air garden and main room (VIP tables from €250 to €600). Or hop on the M5 Purple Line for 3 stops to Voya Rooftop (#5 Priority, 20th floor) and 4 stops to 55 Milano (#4 Priority) and Just Me (#1 Priority).',
     pairedClubsIt:
@@ -141,7 +144,7 @@ const CONCERT_ARENAS = [
     headlineClubEn:
       'Just Me Milano (#1 Priority, Viale Luigi Camoens 2, Torre Branca) is open 7 nights a week until 05:00!',
     logisticsIt:
-      ' oltre il 60% dei tour mondiali a San Siro, Ippodromo e Forum di Assago fa tappa a Milano il Lunedì, Martedì, Mercoledì o Domenica sera. In queste notti Just Me Milano (#1 Priorità assoluta sotto la Torre Branca in Parco Sempione) è il quartier generale incontrastato di artisti internazionali, tour crew, ballerini, VIP guest dell area Pit/Gold Circle e fan eleganti. Per il Lunedì notte (Monday Night) è imperdibile anche il leggendario Dirty Monday di Repvblic Milano (#6 Priorità).',
+      ' oltre il 60% dei tour mondiali a San Siro, Ippodromo e Forum di Assago fa tappa a Milano il Lunedì, Martedì, Mercoledì o Domenica sera. In queste notti Just Me Milano (#1 Priorità assoluta sotto la Torre Branca in Parco Sempione) è il quartier generale incontrastato di artisti internazionali, tour crew, ballerini, VIP guest dell’area Pit/Gold Circle e fan eleganti. Per il Lunedì notte (Monday Night) è imperdibile anche il leggendario Dirty Monday di Repvblic Milano (#6 Priorità).',
     logisticsEn:
       'Over 60% of world arena tours at San Siro, Ippodromo, and Unipol Forum play Milan on Monday, Tuesday, Wednesday, or Sunday nights. On these midweek dates, Just Me Milano (#1 Top Priority beneath Torre Branca in Parco Sempione) is the undisputed headquarters for international recording artists, tour crews, Gold Circle VIPs, and fans. On Monday nights, Repvblic Milano (#6 Priority) also hosts its iconic Dirty Monday hip-hop and house party.',
     pairedClubsIt:
@@ -164,7 +167,7 @@ const CONCERT_ARENAS = [
     headlineClubEn:
       'Direct M2 train from Assago Milanofiori Forum to Cadorna (Parco Sempione) & Porta Garibaldi (Corso Como)!',
     logisticsIt:
-      'Uscendo dai concerti indoor dell Unipol Forum di Assago, la linea metropolitana M2 Verde (stazione Assago Milanofiori Forum con corse potenziate post-concerto) ti porta senza cambi in 18 minuti a Cadorna per raggiungere in 2 minuti Just Me Milano (#1 Priorità, Torre Branca) e 55 Milano (#4 Priorità, Sempione), oppure in 22 minuti a Porta Garibaldi / Moscova per il Pineta Club Milano (#2 Priorità, Via Messina 38 / Corso Como), Tocqueville 13, Repvblic (#6 Priorità) e Voya Rooftop (#5 Priorità).',
+      'Uscendo dai concerti indoor dell’Unipol Forum di Assago, la linea metropolitana M2 Verde (stazione Assago Milanofiori Forum con corse potenziate post-concerto) ti porta senza cambi in 18 minuti a Cadorna per raggiungere in 2 minuti Just Me Milano (#1 Priorità, Torre Branca) e 55 Milano (#4 Priorità, Sempione), oppure in 22 minuti a Porta Garibaldi / Moscova per il Pineta Club Milano (#2 Priorità, Via Messina 38 / Corso Como), Tocqueville 13, Repvblic (#6 Priorità) e Voya Rooftop (#5 Priorità).',
     logisticsEn:
       'Leaving indoor arena shows at Unipol Forum Assago, the M2 Green Metro Line (Assago Milanofiori Forum station with extended post-concert trains) takes you directly in 18 minutes to Cadorna for Just Me Milano (#1 Priority, Torre Branca) and 55 Milano (#4 Priority, Sempione), or in 22 minutes to Porta Garibaldi / Moscova for Pineta Club Milano (#2 Priority, Corso Como), Tocqueville 13, Repvblic (#6 Priority), and Voya Rooftop (#5 Priority).',
     pairedClubsIt:
@@ -187,7 +190,7 @@ const CONCERT_ARENAS = [
     headlineClubEn:
       'Stay inside the arena as it transforms into a mega-club or transfer in 10 minutes to our 6 Priority Venues!',
     logisticsIt:
-      'Quando il concerto si tiene all Alcatraz (Via Valtellina 25, Isola/Farini) o al Fabrique (Via Fantoli 9, Mecenate), il venerdì e il sabato notte le strutture si trasformano a partire dalle 23:30 in enormi discoteche fino alle 05:00. Se invece desideri un vero Tavolo VIP di lusso o il concerto si svolge in settimana, da Alcatraz sei a soli 5 minuti da Pineta Corso Como (#2), Voya Rooftop (#5) e 55 Milano (#4), mentre da Fabrique raggiungi in 10 minuti Repvblic (#6) e Just Me (#1).',
+      'Quando il concerto si tiene all’Alcatraz (Via Valtellina 25, Isola/Farini) o al Fabrique (Via Fantoli 9, Mecenate), il venerdì e il sabato notte le strutture si trasformano a partire dalle 23:30 in enormi discoteche fino alle 05:00. Se invece desideri un vero Tavolo VIP di lusso o il concerto si svolge in settimana, da Alcatraz sei a soli 5 minuti da Pineta Corso Como (#2), Voya Rooftop (#5) e 55 Milano (#4), mentre da Fabrique raggiungi in 10 minuti Repvblic (#6) e Just Me (#1).',
     logisticsEn:
       'When your concert takes place at Alcatraz (Via Valtellina 25, Isola/Farini) or Fabrique (Via Fantoli 9, Mecenate), on Friday and Saturday nights the venues transform at 23:30 into massive clubs until 05:00. If you prefer an upscale luxury VIP Table or are attending a midweek gig, Alcatraz is just 5 minutes from Pineta Corso Como (#2), Voya Rooftop (#5), and 55 Milano (#4), while Fabrique is 10 minutes from Repvblic (#6) and Just Me (#1).',
     pairedClubsIt:
@@ -245,7 +248,7 @@ const PRIORITY_CONCERT_CLUBS = [
     pricesEn: 'Pre-Live Royal Aperitivo €15-25 · Dancefloor VIP €250 · Privé Aria €400 · Console €600',
     image: '/images/pillars/concert-afterparties-03.webp',
     descIt:
-      'Quando 75.000 persone escono da un concerto a San Siro o agli I-Days dell Ippodromo, Aria Club ti permette di entrare in discoteca a piedi in 120 secondi, saltando 90 minuti di paralisi del traffico.',
+      'Quando 75.000 persone escono da un concerto a San Siro o agli I-Days dell’Ippodromo, Aria Club ti permette di entrare in discoteca a piedi in 120 secondi, saltando 90 minuti di paralisi del traffico.',
     descEn:
       'When 75,000 fans exit a stadium concert at San Siro or I-Days at the Hippodrome, Aria Club lets you walk straight into your VIP booth in 120 seconds, bypassing 90 minutes of traffic gridlock.',
   },
@@ -309,16 +312,17 @@ export default async function ConcertAfterpartiesPage({
 }) {
   const { locale } = await params;
   const isIt = locale === 'it';
+  const venueMapCopy = getEventVenueCopy(locale as LocaleCode);
   const lp = localePrefix(locale);
   const canonicalUrl = `${baseUrl}${lp}/concert-afterparties`;
 
   const faqs = [
     {
       q: isIt
-        ? 'Qual è la discoteca più vicina per uscire la sera a piedi dopo un concerto allo Stadio San Siro o all Ippodromo Snai (I-Days)?'
+        ? 'Qual è la discoteca più vicina per uscire la sera a piedi dopo un concerto allo Stadio San Siro o all’Ippodromo Snai (I-Days)?'
         : 'Which nightclub is closest to walk to after a concert at San Siro Stadium or Ippodromo Snai (I-Days)?',
       a: isIt
-        ? 'Aria Club Milano (#3 Priorità Nightlife Milan) si trova in Piazzale dello Sport 14, a soli 150 metri reali (2 minuti a piedi) dai cancelli dello Stadio San Siro e dell Ippodromo Snai San Siro, e a pochi minuti da La Maura. Dalle 23:00 alle 05:00 ospita l Official Concert Afterparty nel giardino estivo e nella main room: entri a piedi senza aspettare taxi e senza fare coda alla metro M5.'
+        ? 'Aria Club Milano (#3 Priorità Nightlife Milan) si trova in Piazzale dello Sport 14, a soli 150 metri reali (2 minuti a piedi) dai cancelli dello Stadio San Siro e dell’Ippodromo Snai San Siro, e a pochi minuti da La Maura. Dalle 23:00 alle 05:00 ospita l Official Concert Afterparty nel giardino estivo e nella main room: entri a piedi senza aspettare taxi e senza fare coda alla metro M5.'
         : 'Aria Club Milano (#3 Priority) is located at Piazzale dello Sport 14, just 150 meters (a 2-minute walk) from the gates of San Siro Stadium and Ippodromo Snai San Siro, and minutes from La Maura. From 23:00 to 05:00 it hosts the Official Concert Afterparty in its garden and main room, letting you walk straight in with zero taxi wait and zero M5 subway queues.',
     },
     {
@@ -331,7 +335,7 @@ export default async function ConcertAfterpartiesPage({
     },
     {
       q: isIt
-        ? 'Come raggiungere i migliori club di Milano dopo un concerto all Unipol Forum di Assago?'
+        ? 'Come raggiungere i migliori club di Milano dopo un concerto all’Unipol Forum di Assago?'
         : 'How to reach Milans best clubs after an indoor concert at Unipol Forum Assago?',
       a: isIt
         ? 'Dalla stazione Assago Milanofiori Forum prendi la linea M2 Verde diretta: in 18 minuti scendi a Cadorna per arrivare in 2 minuti da Just Me Milano (#1 Priorità, Torre Branca) e 55 Milano (#4 Priorità, Sempione); oppure in 22 minuti scendi a Porta Garibaldi / Moscova per entrare da Pineta Club (#2 Priorità, Corso Como), Tocqueville 13, Repvblic (#6 Priorità) e Voya Rooftop (#5 Priorità).'
@@ -355,7 +359,7 @@ export default async function ConcertAfterpartiesPage({
     },
     {
       q: isIt
-        ? 'Dove fare Aperitivo o Cena vicino a San Siro o al Forum prima dell inizio del concerto?'
+        ? 'Dove fare Aperitivo o Cena vicino a San Siro o al Forum prima dell’inizio del concerto?'
         : 'Where should we go for pre-concert Aperitivo or Dinner before a show at San Siro or Forum Assago?',
       a: isIt
         ? 'Per il Pre-Concerto dalle 18:30 alle 20:30 consigliamo: (1) Aria Club a 150m da San Siro (Royal Aperitivo dalle 19:30); (2) Voya Rooftop al 20° piano a 3 fermate M5 da San Siro (Sunset Aperitivo dalle 18:30); (3) 55 Milano a 4 fermate M5 da San Siro e collegato a Cadorna M2 per Assago (Apericena XL dalle 19:30); (4) Just Me Parco Sempione (Royal Aperitivo + salita Torre Branca).'
@@ -494,7 +498,7 @@ export default async function ConcertAfterpartiesPage({
 
           <p className="text-base sm:text-xl text-white/75 leading-relaxed max-w-4xl mb-8">
             {isIt
-              ? 'Quando si spengono i riflettori del palco alle 23:15 e fino a 80.000 fan escono dallo Stadio San Siro, dall Ippodromo Snai La Maura o dall Unipol Forum di Assago, la notte milanese è appena iniziata. Scopri la mappa strategica post-concerto: cammina 150 metri a piedi fino ad Aria Club (#3 Priorità, Piazzale dello Sport 14), festeggia 7 notti su 7 con artisti e tour crew da Just Me sotto la Torre Branca (#1 Priorità), o raggiungi in metro Pineta Corso Como (#2), 55 Milano (#4), Voya Rooftop 20° Piano (#5) e Repvblic (#6).'
+              ? 'Quando si spengono i riflettori del palco alle 23:15 e fino a 80.000 fan escono dallo Stadio San Siro, dall’Ippodromo Snai La Maura o dall’Unipol Forum di Assago, la notte milanese è appena iniziata. Scopri la mappa strategica post-concerto: cammina 150 metri a piedi fino ad Aria Club (#3 Priorità, Piazzale dello Sport 14), festeggia 7 notti su 7 con artisti e tour crew da Just Me sotto la Torre Branca (#1 Priorità), o raggiungi in metro Pineta Corso Como (#2), 55 Milano (#4), Voya Rooftop 20° Piano (#5) e Repvblic (#6).'
               : 'When the stage lights go dark at 23:15 and up to 80,000 fans exit San Siro Stadium, Ippodromo Snai La Maura, or Unipol Forum Assago, the Milan night is just getting started. Explore our strategic post-concert blueprint: walk 150 meters straight into Aria Club (#3 Priority, Piazzale dello Sport 14), party 7 nights a week with artists and tour crews at Just Me under Torre Branca (#1 Priority), or ride the metro to Pineta Corso Como (#2), 55 Milano (#4), Voya Rooftop 20th Floor (#5), and Repvblic (#6).'}
           </p>
 
@@ -674,7 +678,7 @@ export default async function ConcertAfterpartiesPage({
           </h2>
           <p className="text-white/70 text-base sm:text-lg leading-relaxed max-w-4xl">
             {isIt
-              ? 'Ogni arena milanese ha tempi di deflusso e collegamenti notturni specifici. Ecco esattamente dove uscire la sera o bere un drink dopo l ultima canzone a San Siro, agli I-Days dell Ippodromo, all Unipol Forum di Assago o dopo i live di Fabrique e Alcatraz:'
+              ? 'Ogni arena milanese ha tempi di deflusso e collegamenti notturni specifici. Ecco esattamente dove uscire la sera o bere un drink dopo l’ultima canzone a San Siro, agli I-Days dell’Ippodromo, all’Unipol Forum di Assago o dopo i live di Fabrique e Alcatraz:'
               : 'Every Milan concert venue has specific exit flows and late-night transit corridors. Here is exactly where to party or book bottle service after the final song at San Siro, I-Days at the Hippodrome, Unipol Forum Assago, or Fabrique and Alcatraz:'}
           </p>
         </div>
@@ -829,7 +833,7 @@ export default async function ConcertAfterpartiesPage({
           </h2>
           <p className="text-sm sm:text-base text-white/75 leading-relaxed max-w-4xl mb-6">
             {isIt
-              ? 'Dopo un grande concerto estivo a San Siro / Ippodromo La Maura o uno show al Forum di Assago, molti gruppi vengono respinti all ingresso dei club perché si presentano in tenuta da prato/festival (pantaloncini corti, canotte, marsupi sportivi, scarpe sporche di terra o zaini). Ecco le 3 regole d oro del Concierge per passare dal Golden Circle al Privé VIP senza tornare in hotel:'
+              ? 'Dopo un grande concerto estivo a San Siro / Ippodromo La Maura o uno show al Forum di Assago, molti gruppi vengono respinti all’ingresso dei club perché si presentano in tenuta da prato/festival (pantaloncini corti, canotte, marsupi sportivi, scarpe sporche di terra o zaini). Ecco le 3 regole d’oro del Concierge per passare dal Golden Circle al Privé VIP senza tornare in hotel:'
               : 'After a major stadium show at San Siro / La Maura or an arena concert at Forum Assago, many concertgoers get turned away at club doors because they arrive in festival pit attire (shorts, tank tops, muddy shoes, or bulky backpacks). Follow these 3 Golden Rules to transition straight from the Golden Circle to your VIP booth without going back to your hotel:'}
           </p>
 
@@ -841,7 +845,7 @@ export default async function ConcertAfterpartiesPage({
               </div>
               <p className="text-xs sm:text-sm text-white/75 leading-relaxed">
                 {isIt
-                  ? 'Per gli uomini è tassativo il pantalone lungo (jeans nero/scuro o pantalone cargo/chino sartoriale) anche a Giugno, Luglio e Agosto. Abbina sneaker in pelle pulite o stivaletti (evita scarpe da running tecniche o infangate nel prato dell Ippodromo).'
+                  ? 'Per gli uomini è tassativo il pantalone lungo (jeans nero/scuro o pantalone cargo/chino sartoriale) anche a Giugno, Luglio e Agosto. Abbina sneaker in pelle pulite o stivaletti (evita scarpe da running tecniche o infangate nel prato dell’Ippodromo).'
                   : 'For men, full-length trousers (dark jeans or tailored chinos) are mandatory at Milan VIP clubs even in June, July, and August. Pair them with clean leather sneakers or boots (avoid running shoes or muddy festival footwear).'}
               </p>
             </div>
@@ -907,21 +911,15 @@ export default async function ConcertAfterpartiesPage({
             </a>
           </div>
 
-          <div className="rounded-2xl overflow-hidden border border-white/15 h-80 sm:h-96 w-full bg-black">
-            <iframe
-              title={
-                isIt
-                  ? 'Mappa Afterparty Concerti San Siro e Ippodromo Milano (Aria Club Piazzale dello Sport 14)'
-                  : 'Map of San Siro and Hippodrome Concert Afterparties Milan (Aria Club Piazzale dello Sport 14)'
-              }
-              src="https://www.google.com/maps?q=Piazzale+dello+Sport+14,+20151+Milano+MI,+Italy&output=embed"
-              width="100%"
-              height="100%"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="w-full h-full border-0"
-            />
-          </div>
+          <EventVenueMap
+            id="concert-afterparties-san-siro-map"
+            mapUrl="https://www.google.com/maps?q=Piazzale+dello+Sport+14,+20151+Milano+MI,+Italy&output=embed"
+            labels={{
+              loadMap: venueMapCopy.loadMap,
+              mapTitle: venueMapCopy.mapTitle.replace('{venue}', 'Stadio San Siro, Ippodromo & Aria Club Milano'),
+              privacyLoadNotice: venueMapCopy.privacyLoadNotice,
+            }}
+          />
         </div>
 
         {/* 7 FAQ Strategiche */}

@@ -266,13 +266,13 @@ const GUIDE_META: Record<
     highlightsEn: [
       'Singing Dinners at Pineta & 55 Milano',
       'All-male group VIP door clearance',
-      '20th-Floor Voya + Just Me Prive Combo',
+      '20th-Floor Voya + Just Me Privé Combo',
       'Limousine & Custom LED Bottle Shows',
     ],
     highlightsIt: [
       'Cena Cantata da Pineta e 55 Milano',
       'Ingresso garantito gruppi soli uomini',
-      'Combo Voya 20° Piano + Prive Just Me',
+      'Combo Voya 20° Piano + Privé Just Me',
       'Limousine & Bottle Show personalizzati',
     ],
   },

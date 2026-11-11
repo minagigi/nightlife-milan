@@ -60,7 +60,7 @@ const SIX_PRIORITY_CLUBS: PriorityClubRec[] = [
     },
     highlight: {
       en: '#1 Priority Club in Milan by Italo Rota. Open 7 days a week with Royal Aperitivo, panoramic Torre Branca elevator, and international VIP console tables.',
-      it: 'Club Priorità #1 a Milano firmato Italo Rota. Aperto 7 giorni su 7 con Royal Aperitivo, salita panoramica Torre Branca e tavoli VIP console internazionali.',
+      it: 'Club N.1 a Milano firmato Italo Rota. Aperto 7 giorni su 7 con Royal Aperitivo, salita panoramica Torre Branca e tavoli VIP console internazionali.',
     },
     bestForMoods: ['glamour', 'vip-bottle', 'football', 'chill', 'graduation'],
     bestForBudgets: ['vip', 'standard', 'free'],
@@ -87,7 +87,7 @@ const SIX_PRIORITY_CLUBS: PriorityClubRec[] = [
     },
     highlight: {
       en: '#2 Priority Club: Corso Como’s legendary Singing Aperitivo from 19:30 and Noche De Perreo Reggaeton & Commercial party until 05:00.',
-      it: 'Club Priorità #2: il celebre Aperitivo Cantato di Corso Como dalle 19:30 e i format Noche De Perreo Reggaeton & Commerciale fino alle 05:00.',
+      it: 'Club N.2: il celebre Aperitivo Cantato di Corso Como dalle 19:30 e i format Noche De Perreo Reggaeton & Commerciale fino alle 05:00.',
     },
     bestForMoods: ['aperitivo-cantato', 'glamour', 'graduation', 'techno'],
     bestForBudgets: ['free', 'standard', 'vip'],
@@ -114,7 +114,7 @@ const SIX_PRIORITY_CLUBS: PriorityClubRec[] = [
     },
     highlight: {
       en: '#3 Priority Club: 150 meters on foot from San Siro Stadium gates. The #1 destination for Inter & AC Milan post-match Third Half, concerts, and open-air garden nights.',
-      it: 'Club Priorità #3: a 150 metri a piedi dai cancelli di San Siro. Meta n°1 per il Dopo-Partita di Inter e Milan, post-concerto e serate in giardino.',
+      it: 'Club N.3: a 150 metri a piedi dai cancelli di San Siro. Meta n°1 per il Dopo-Partita di Inter e Milan, post-concerto e serate in giardino.',
     },
     bestForMoods: ['football', 'glamour', 'graduation', 'vip-bottle'],
     bestForBudgets: ['standard', 'vip', 'free'],
@@ -141,7 +141,7 @@ const SIX_PRIORITY_CLUBS: PriorityClubRec[] = [
     },
     highlight: {
       en: '#4 Priority Club: 1,000 sqm converted railway depot with massive terrace, live Dinner Show, and Milan’s #1 setup for Graduation, 18th & Birthday celebrations.',
-      it: 'Club Priorità #4: 1.000 mq di ex deposito storico con grande terrazza, Dinner Show e format n°1 a Milano per Feste di Laurea, 18 Anni e Compleanni.',
+      it: 'Club N.4: 1.000 mq di ex deposito storico con grande terrazza, Dinner Show e format n°1 a Milano per Feste di Laurea, 18 Anni e Compleanni.',
     },
     bestForMoods: ['graduation', 'aperitivo-cantato', 'chill', 'football'],
     bestForBudgets: ['free', 'standard', 'vip'],
@@ -168,7 +168,7 @@ const SIX_PRIORITY_CLUBS: PriorityClubRec[] = [
     },
     highlight: {
       en: '#5 Priority Club: 20th-floor 360° glass sky lounge overlooking the Milan skyline. Sunset cocktails that seamlessly turn into a high-altitude DJ set.',
-      it: 'Club Priorità #5: sky lounge panoramico al 20° piano con vetrate a 360° sullo skyline di Milano. Dal tramonto al DJ set ad alta quota.',
+      it: 'Club N.5: sky lounge panoramico al 20° piano con vetrate a 360° sullo skyline di Milano. Dal tramonto al DJ set ad alta quota.',
     },
     bestForMoods: ['chill', 'glamour', 'football', 'graduation'],
     bestForBudgets: ['standard', 'vip', 'free'],
@@ -195,7 +195,7 @@ const SIX_PRIORITY_CLUBS: PriorityClubRec[] = [
     },
     highlight: {
       en: '#6 Priority Club: Home of the legendary Dirty Monday (Hip-Hop, Trap, Afrobeats & House) and high-energy weekend club nights for fashion & music insiders.',
-      it: 'Club Priorità #6: casa del leggendario Dirty Monday (Hip-Hop, Trap, Afrobeats & House) e dei weekend ad alta energia per gli amanti del clubbing.',
+      it: 'Club N.6: casa del leggendario Dirty Monday (Hip-Hop, Trap, Afrobeats & House) e dei weekend ad alta energia per gli amanti del clubbing.',
     },
     bestForMoods: ['techno', 'vip-bottle', 'glamour'],
     bestForBudgets: ['standard', 'vip', 'free'],
@@ -552,7 +552,7 @@ export default function VibeFinder({ lang }: { lang: string }) {
               {recommendedClubs.map((club) => {
                 const waText = encodeURIComponent(
                   isIt
-                    ? `Ciao Concierge Nightlife Milan! Ho usato il VibeFinder e vorrei prenotare da ${club.name} (Priorità #${club.rank}). Potete inviarmi prezzi tavoli e lista?`
+                    ? `Ciao Concierge Nightlife Milan! Ho usato il VibeFinder e vorrei prenotare da ${club.name} (Scelta N.${club.rank}). Potete inviarmi prezzi tavoli e lista?`
                     : `Hi Nightlife Milan Concierge! I used VibeFinder and would like to book at ${club.name} (Priority #${club.rank}). Can you send me table prices and guest list info?`
                 );
                 return (
@@ -564,7 +564,7 @@ export default function VibeFinder({ lang }: { lang: string }) {
                       <div className="flex items-center justify-between gap-2 mb-2">
                         <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-champagne/15 text-champagne text-[11px] font-bold uppercase tracking-wider">
                           <CheckCircle2 className="w-3.5 h-3.5" />
-                          {isIt ? `Priorità #${club.rank}` : `#${club.rank} Priority`}
+                          {isIt ? `Scelta N.${club.rank}` : `#${club.rank} Priority`}
                         </span>
                         <Link
                           href={`${langPrefix}${club.hubHref}`}

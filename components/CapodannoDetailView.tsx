@@ -1,5 +1,7 @@
 import SeoAuthorityHub from '@/components/SeoAuthorityHub';
-import type { LocaleCode } from '@/lib/i18n/locales';
+
+import EventVenueMap from '@/components/EventVenueMap';
+import { getEventVenueCopy } from '@/lib/i18n/eventVenueCopy';import type { LocaleCode } from '@/lib/i18n/locales';
 import { capodannoEventPath, capodannoNavigation, capodannoPath } from '@/lib/capodanno/routes';
 import {
   getCapodannoLocalizedEventSubtitle,
@@ -34,6 +36,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
   const nav = capodannoNavigation(locale);
   const ui = getCapodannoUiCopy(locale);
   const scarcity = getScarcityAndChatCopy(locale);
+  const venueMapCopy = getEventVenueCopy(locale as LocaleCode);
 
   const title = getCapodannoLocalizedEventTitle(event, locale);
   const subtitle = getCapodannoLocalizedEventSubtitle(event, locale);
@@ -462,15 +465,15 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               <p className="mt-1 text-sm text-white/70">
                 {event.venueName} · {event.address}, {event.city} ({event.province}) · {event.hours}
               </p>
-              <div className="mt-4 overflow-hidden rounded-2xl border border-white/10">
-                <iframe
-                  title={`${event.venueName} Google Maps`}
-                  src={`https://www.google.com/maps?q=${mapQuery}&output=embed`}
-                  width="100%"
-                  height="340"
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="block w-full border-0"
+              <div className="mt-4">
+                <EventVenueMap
+                  id={`capodanno-venue-map-${event.slug}`}
+                  mapUrl={`https://www.google.com/maps?q=${mapQuery}&output=embed`}
+                  labels={{
+                    loadMap: venueMapCopy.loadMap,
+                    mapTitle: venueMapCopy.mapTitle.replace('{venue}', event.venueName),
+                    privacyLoadNotice: venueMapCopy.privacyLoadNotice,
+                  }}
                 />
               </div>
             </div>

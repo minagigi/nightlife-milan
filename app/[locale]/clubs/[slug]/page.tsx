@@ -101,8 +101,8 @@ const venueTitles: Record<string, { en: string; it: string }> = {
     it: 'Magazzini Generali Milano | Techno, Musica Live & Balconata VIP 2026/2027 | Porta Romana',
   },
   'v-armani-prive': {
-    en: 'Armani Prive Milan | Exclusive Luxury Club, Prices & Tables 2026/2027 | Fashion District',
-    it: 'Armani Prive Milano | Club Esclusivo, Prezzi Tavoli & Selezione 2026/2027 | Quadrilatero',
+    en: 'Armani Privé Milan | Exclusive Luxury Club, Prices & Tables 2026/2027 | Fashion District',
+    it: 'Armani Privé Milano | Club Esclusivo, Prezzi Tavoli & Selezione 2026/2027 | Quadrilatero',
   },
   'v-volt': {
     en: 'Volt Club Milan | Melodic Techno, Electronic Music & Tables 2026/2027 | Porta Venezia',
@@ -137,8 +137,8 @@ const venueTitles: Record<string, { en: string; it: string }> = {
     it: 'Fabrique Milano | Festival Elettronici Internazionali, Arena Live & Ring VIP 2026/2027',
   },
   'v-amnesia': {
-    en: 'Amnesia Milan | Tech-House & Techno Temple, Console Prive & Tickets 2026/2027',
-    it: 'Amnesia Milano | Tempio Tech-House & Techno, Prive Console & Biglietti 2026/2027',
+    en: 'Amnesia Milan | Tech-House & Techno Temple, Console Privé & Tickets 2026/2027',
+    it: 'Amnesia Milano | Tempio Tech-House & Techno, Privé Console & Biglietti 2026/2027',
   },
 };
 
@@ -256,7 +256,7 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
       highlights: [
         'Open 7 nights out of 7 (Monday to Sunday, 19:30 to 05:00 AM)',
         'Designed by Italo Rota at the base of the 108m Torre Branca in Parco Sempione',
-        'Royal Aperitivo with private panoramic elevator ticket to the top of Torre Branca',
+        'Royal’Aperitivo with private panoramic elevator ticket to the top of Torre Branca',
         '#1 destination for UEFA Champions League Tue/Wed afterparties, Fashion Week & international stars',
       ],
       musicStyle: 'Commercial Luxury House, Afro-House, Vocal House & International Hip-Hop/R&B Guest Sets',
@@ -264,25 +264,25 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
       bestNights: 'Open 7/7: Tue/Wed Champions League & International Nights, Thu Fashion Night, Fri/Sat Gran Gala, Sun Sempione Aperitivo & Party',
       nearestMetro: 'M1 / M2 Cadorna FN (6 min walk) or M5 / Tram 1 & 10 Arco della Pace / Viale Camoens 2',
       pricingTable: [
-        { zone: 'Royal Aperitivo + Torre Branca Ascent (19:30-22:30)', price: '€25 - €35 / person', details: 'Includes gourmet buffet, 1 drink, reserved lounge seating & panoramic tower ticket' },
+        { zone: 'Royal’Aperitivo + Torre Branca Ascent (19:30-22:30)', price: '€25 - €35 / person', details: 'Includes gourmet buffet, 1 drink, reserved lounge seating & panoramic tower ticket' },
         { zone: 'Dancefloor VIP Table (Mon-Thu / Sun)', price: '€320 - €400 (6-8 guests)', details: '100% bottle credit, skip-the-line hostess escort & central dancefloor sofa' },
         { zone: 'Dancefloor VIP Table (Fri-Sat & Big Matches)', price: '€500 - €600 (6-8 guests)', details: 'Full bottle service credit in the main Italo Rota crystal pavilion' },
-        { zone: 'Prive Branca Elevated VIP', price: '€800 - €1,200 (8-10 guests)', details: 'Roped-off luxury tier with dedicated security & premium magnum / Dom Perignon service' },
-        { zone: 'Super Prive DJ Console', price: '€1,500 - €5,000+ (10-15 guests)', details: 'Stage-level tables directly next to international guest DJs & celebrity performers' },
+        { zone: 'Privé Branca Elevated VIP', price: '€800 - €1,200 (8-10 guests)', details: 'Roped-off luxury tier with dedicated security & premium magnum / Dom Pérignon service' },
+        { zone: 'Super Privé DJ Console', price: '€1,500 - €5,000+ (10-15 guests)', details: 'Stage-level tables directly next to international guest DJs & celebrity performers' },
       ],
       insiderTips: [
         'Because Just Me is open 7 nights a week from Monday to Sunday, it is the undisputed #1 choice after Tuesday and Wednesday UEFA Champions League nights at San Siro (only 10 minutes away by taxi).',
-        'Arrive between 19:30 and 21:00 for the Royal Aperitivo to receive the complimentary ticket to ride the Torre Branca elevator 108 meters above the illuminated Milan skyline.',
+        'Arrive between 19:30 and 21:00 for the Royal’Aperitivo to receive the complimentary ticket to ride the Torre Branca elevator 108 meters above the illuminated Milan skyline.',
         'Door selection is strictly sartorial: men must wear a collared shirt, dark blazer, and leather loafers or dress shoes (zero athletic sneakers or streetwear).',
       ],
       faqs: [
         {
           q: 'Is Just Me Milano really open every night from Monday to Sunday?',
-          a: 'Yes. Just Me Milano (Viale Luigi Camoens 2, Parco Sempione) operates 7 nights a week, 365 days a year, with Royal Aperitivo from 19:30 and clubbing until 05:00 AM inside its heated winter glass dome or open-air summer garden.',
+          a: 'Yes. Just Me Milano (Viale Luigi Camoens 2, Parco Sempione) operates 7 nights a week, 365 days a year, with Royal’Aperitivo from 19:30 and clubbing until 05:00 AM inside its heated winter glass dome or open-air summer garden.',
         },
         {
           q: 'How much is a VIP table at Just Me Milano in 2026/2027?',
-          a: 'Midweek Dancefloor VIP tables start at €320-€400 for 6-8 guests; Friday and Saturday Dancefloor tables start at €500; Prive Branca tables range from €800 to €1,200; and Super Prive DJ Console tables start from €1,500 to €5,000+, 100% spendable in bottles.',
+          a: 'Midweek Dancefloor VIP tables start at €320-€400 for 6-8 guests; Friday and Saturday Dancefloor tables start at €500; Privé Branca tables range from €800 to €1,200; and Super Privé DJ Console tables start from €1,500 to €5,000+, 100% spendable in bottles.',
         },
         {
           q: 'Can we go to Just Me after a Champions League match or Derby at San Siro?',
@@ -291,37 +291,37 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
       ],
     },
     it: {
-      tagline: 'Priorita #1 Assoluta | Aperto 7 Notti su 7 (Lunedi-Domenica) Sotto la Torre Branca Illuminata nel Parco Sempione',
+      tagline: 'Scelta Top N.1 a Milano | Aperto 7 Notti su 7 (Lunedì-Domenica) Sotto la Torre Branca Illuminata nel Parco Sempione',
       highlights: [
         'Aperto 7 sere su 7 dal Lunedi alla Domenica (19:30 - 05:00 del mattino)',
         'Architettura firmata Italo Rota ai piedi della Torre Branca (108 metri) in Parco Sempione',
-        'Royal Aperitivo con biglietto ascensore panoramico per salire in cima alla Torre Branca',
+        'Royal’Aperitivo con biglietto ascensore panoramico per salire in cima alla Torre Branca',
         'Meta #1 per Dopo-Partita UEFA Champions League (Mar/Mer), Derby, Milano Fashion Week e superstar mondiali',
       ],
       musicStyle: 'Commercial Luxury House, Afro-House, Vocal House e Special Guest Internazionali Hip-Hop/R&B',
       crowdProfile: '23-45 anni | Modelle, calciatori di Serie A, stilisti della Fashion Week, jet-set internazionale e clientela VIP',
-      bestNights: 'Aperto 7/7: Mar/Mer Champions League & International Night, Gio Fashion Night, Ven/Sab Gran Gala, Dom Royal Aperitivo & Party',
+      bestNights: 'Aperto 7/7: Mar/Mer Champions League & International Night, Gio Fashion Night, Ven/Sab Gran Gala, Dom Royal’Aperitivo & Party',
       nearestMetro: 'M1 / M2 Cadorna FN (6 min a piedi) oppure M5 / Tram 1 e 10 Arco della Pace - Viale Luigi Camoens 2',
       pricingTable: [
-        { zone: 'Royal Aperitivo + Salita Torre Branca (19:30-22:30)', price: '€25 - €35 / persona', details: 'Include Royal Buffet, 1 drink premium, tavolo d appoggio riservato e salita panoramica' },
+        { zone: 'Royal’Aperitivo + Salita Torre Branca (19:30-22:30)', price: '€25 - €35 / persona', details: 'Include Royal Buffet, 1 drink premium, tavolo d appoggio riservato e salita panoramica' },
         { zone: 'Tavolo VIP Pista (Lun-Gio e Domenica)', price: '€320 - €400 (6-8 persone)', details: '100% spendibile in bottiglie, ingresso salta-fila con hostess e divanetto centrale' },
         { zone: 'Tavolo VIP Pista (Venerdi, Sabato e Big Match)', price: '€500 - €600 (6-8 persone)', details: 'Credito interamente convertito in bottiglie premium sotto la cupola di cristallo' },
-        { zone: 'Tavolo Prive Branca Rialzato', price: '€800 - €1.200 (8-10 persone)', details: 'Area VIP transennata con sicurezza dedicata e servizio Magnum / Dom Perignon' },
-        { zone: 'Super Prive Console DJ', price: '€1.500 - €5.000+ (10-15 persone)', details: 'I tavoli piu esclusivi di Milano a contatto diretto con il DJ e gli ospiti internazionali' },
+        { zone: 'Tavolo Privé Branca Rialzato', price: '€800 - €1.200 (8-10 persone)', details: 'Area VIP transennata con sicurezza dedicata e servizio Magnum / Dom Pérignon' },
+        { zone: 'Super Privé Console DJ', price: '€1.500 - €5.000+ (10-15 persone)', details: 'I tavoli piu esclusivi di Milano a contatto diretto con il DJ e gli ospiti internazionali' },
       ],
       insiderTips: [
         'Essendo aperto 7 notti su 7 dal lunedi alla domenica, il Just Me e la scelta n.1 assoluta dopo le partite di UEFA Champions League del martedi e mercoledi a San Siro (a soli 10 minuti di taxi).',
-        'Prenota l ingresso Royal Aperitivo tra le 19:30 e le 21:00 per ricevere il pass gratuito per salire in ascensore a 108 metri d altezza sulla Torre Branca.',
+        'Prenota l’ingresso Royal’Aperitivo tra le 19:30 e le 21:00 per ricevere il pass gratuito per salire in ascensore a 108 metri d’altezza sulla Torre Branca.',
         'Selezione sartoriale rigorosa: per gli uomini sono obbligatori camicia con colletto, blazer scuro e mocassini o scarpe eleganti in pelle (vietate sneakers sportive e tute).',
       ],
       faqs: [
         {
           q: 'Il Just Me Milano e davvero aperto tutte le sere dal lunedi alla domenica?',
-          a: 'Si. Il Just Me Milano (Viale Luigi Camoens 2, Parco Sempione) e l unico top club di Milano aperto 7 notti su 7, dalle 19:30 per il Royal Aperitivo fino alle 05:00 del mattino, sia nel giardino estivo sia nella cupola invernale riscaldata.',
+          a: 'Si. Il Just Me Milano (Viale Luigi Camoens 2, Parco Sempione) e l unico top club di Milano aperto 7 notti su 7, dalle 19:30 per il Royal’Aperitivo fino alle 05:00 del mattino, sia nel giardino estivo sia nella cupola invernale riscaldata.',
         },
         {
           q: 'Quanto costa un Tavolo VIP al Just Me Milano nel 2026/2027?',
-          a: 'I tavoli Pista partono da 320-400€ in settimana e 500€ nel weekend (6-8 persone); il Prive Branca richiede 800-1.200€; il Super Prive Console DJ parte da 1.500€ fino a oltre 5.000€, sempre 100% spendibili in bottiglie.',
+          a: 'I tavoli Pista partono da 320-400€ in settimana e 500€ nel weekend (6-8 persone); il Privé Branca richiede 800-1.200€; il Super Privé Console DJ parte da 1.500€ fino a oltre 5.000€, sempre 100% spendibili in bottiglie.',
         },
         {
           q: 'Possiamo andare al Just Me dopo una partita di Champions League o il Derby a San Siro?',
@@ -337,22 +337,22 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
         'Located at Piazzale dello Sport 14: literally 150 meters (2 minutes on foot) from San Siro Stadium gates',
         '#1 Official Third-Half Afterparty venue after Inter, AC Milan, Serie A, Champions League, Derby & Coppa Italia',
         '#1 Immediate walk-in club after summer & stadium concerts at San Siro and Ippodromo Snai La Maura',
-        'Three distinct VIP Table rings: Dancefloor Tables, Elevated Prive Aria & Super Prive DJ Console',
+        'Three distinct VIP Table rings: Dancefloor Tables, Elevated Privé Aria & Super Privé DJ Console',
       ],
       musicStyle: 'Commercial Hits, Vocal House, Reggaeton, Urban & Sing-Along Italian/International Anthems',
       crowdProfile: '20-38 | Stylish Italian crowd, San Siro Tribuna Rossa & Skybox guests, university celebrations & concertgoers',
       bestNights: 'Thursday to Sunday + Special Match/Concert Openings: Post-Match Serie A/Champions League & Weekend Gala',
       nearestMetro: 'M5 Purple Line San Siro Ippodromo / San Siro Stadio / Lotto (2 min walk across Piazzale dello Sport 14)',
       pricingTable: [
-        { zone: 'Post-Match & Pre-Club Royal Aperitivo (19:30-22:30)', price: '€20 - €35 / person', details: 'Unlimited gourmet buffet islands, 1 premium cocktail & reserved lounge table' },
+        { zone: 'Post-Match & Pre-Club Royal’Aperitivo (19:30-22:30)', price: '€20 - €35 / person', details: 'Unlimited gourmet buffet islands, 1 premium cocktail & reserved lounge table' },
         { zone: 'Dancefloor VIP Table (Thu-Sun)', price: '€250 - €350 (6-8 guests)', details: '100% spendable in premium spirit/champagne bottles right on the main dancefloor' },
-        { zone: 'Elevated Prive Aria Table', price: '€450 - €600 (8-10 guests)', details: 'Elevated VIP terrace overlooking the dancefloor with dedicated table waiter' },
-        { zone: 'Super Prive Console DJ Table', price: '€700 - €1,200 (10-12 guests)', details: 'Prime booth directly next to the DJ console, ideal for Derby & Post-Concert VIP groups' },
+        { zone: 'Elevated Privé Aria Table', price: '€450 - €600 (8-10 guests)', details: 'Elevated VIP terrace overlooking the dancefloor with dedicated table waiter' },
+        { zone: 'Super Privé Console DJ Table', price: '€700 - €1,200 (10-12 guests)', details: 'Prime booth directly next to the DJ console, ideal for Derby & Post-Concert VIP groups' },
       ],
       insiderTips: [
         'When 75,000 fans leave San Siro after an Inter or AC Milan match or a stadium concert, traffic freezes for 75 minutes. Walk 150 meters across Piazzale dello Sport straight into Aria Club at 22:45 to skip all queues and traffic.',
         'Going to San Siro first? Wear a collared shirt or smart dark knitwear under your coat and leave any football jersey or team scarf in your car trunk or bag before approaching Aria Club security.',
-        'For graduation parties, 18th/25th birthdays, or supporter groups of 10-30 friends, combine the 19:30 Royal Aperitivo table with an after-dinner bottle package.',
+        'For graduation parties, 18th/25th birthdays, or supporter groups of 10-30 friends, combine the 19:30 Royal’Aperitivo table with an after-dinner bottle package.',
       ],
       faqs: [
         {
@@ -370,32 +370,32 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
       ],
     },
     it: {
-      tagline: 'Priorita #3 Assoluta | A Soli 150 Metri (2 Minuti a Piedi) dallo Stadio San Siro e Ippodromo per Dopo-Partita Inter, Milan e Concerti',
+      tagline: 'Scelta Top N.3 a Milano | A Soli 150 Metri (2 Minuti a Piedi) dallo Stadio San Siro e Ippodromo per Dopo-Partita Inter, Milan e Concerti',
       highlights: [
         'Situato in Piazzale dello Sport 14: letteralmente a 150 metri (2 minuti a piedi) dai cancelli di San Siro',
         'Meta #1 per il Terzo Tempo dopo le partite di Inter e Milan (Serie A, Champions League, Derby e Coppa Italia)',
-        'Punto di riferimento immediato a piedi dopo i grandi concerti a San Siro e all Ippodromo Snai La Maura',
-        'Tre livelli di Tavoli VIP: Dance Floor Table in pista, Prive Aria rialzato e Super Prive Console DJ',
+        'Punto di riferimento immediato a piedi dopo i grandi concerti a San Siro e all’Ippodromo Snai La Maura',
+        'Tre livelli di Tavoli VIP: Dance Floor Table in pista, Privé Aria rialzato e Super Privé Console DJ',
       ],
       musicStyle: 'Commerciale, Vocal House, Reggaeton, Urban e Grandi Hit Italiane/Internazionali da cantare',
       crowdProfile: '20-38 anni | Elegante pubblico milanese, ospiti Tribuna Rossa/Skybox di San Siro, feste di laurea e pubblico concerti',
       bestNights: 'Dal Giovedi alla Domenica + Aperture Straordinarie Match/Concerti: Terzo Tempo San Siro & Weekend Gala',
       nearestMetro: 'M5 Lilla San Siro Ippodromo / San Siro Stadio / Lotto (2 minuti a piedi in Piazzale dello Sport 14)',
       pricingTable: [
-        { zone: 'Royal Aperitivo & Buffet Post-Partita (19:30-22:30)', price: '€20 - €35 / persona', details: 'Isole buffet gourmet illimitate, 1 drink premium e divanetto riservato' },
-        { zone: 'Tavolo VIP Pista (Dance Floor Table)', price: '€250 - €350 (6-8 persone)', details: '100% convertito in bottiglie premium nel cuore dell energia della pista' },
-        { zone: 'Tavolo Prive Aria Rialzato', price: '€450 - €600 (8-10 persone)', details: 'Area VIP sopraelevata con visuale dominante sulla sala e cameriere dedicato' },
-        { zone: 'Super Prive Console DJ', price: '€700 - €1.200 (10-12 persone)', details: 'I tavoli piu prestigiosi a fianco della console DJ per Derby, Champions e Dopo-Concerto' },
+        { zone: 'Royal’Aperitivo & Buffet Post-Partita (19:30-22:30)', price: '€20 - €35 / persona', details: 'Isole buffet gourmet illimitate, 1 drink premium e divanetto riservato' },
+        { zone: 'Tavolo VIP Pista (Dance Floor Table)', price: '€250 - €350 (6-8 persone)', details: '100% convertito in bottiglie premium nel cuore dell’energia della pista' },
+        { zone: 'Tavolo Privé Aria Rialzato', price: '€450 - €600 (8-10 persone)', details: 'Area VIP sopraelevata con visuale dominante sulla sala e cameriere dedicato' },
+        { zone: 'Super Privé Console DJ', price: '€700 - €1.200 (10-12 persone)', details: 'I tavoli piu prestigiosi a fianco della console DJ per Derby, Champions e Dopo-Concerto' },
       ],
       insiderTips: [
         'Quando 75.000 persone escono da San Siro dopo Inter, Milan o un concerto, Piazzale Lotto e la metro M5 restano bloccati per oltre un ora: fai 150 metri a piedi fino a Piazzale dello Sport 14 ed entra subito al tuo Tavolo VIP da Aria Club alle 22:45.',
         'Vieni direttamente dallo stadio? Indossa una camicia o un dolcevita scuro sotto la giacca e lascia eventuali maglie da calcio o sciarpe nel bagagliaio o in borsa prima di presentarti alla selezione.',
-        'Perfetto per feste di laurea, compleanni 18/25/30 anni e grandi tavolate di tifosi: puoi unire il tavolo Royal Aperitivo delle 19:30 con le bottiglie del dopocena.',
+        'Perfetto per feste di laurea, compleanni 18/25/30 anni e grandi tavolate di tifosi: puoi unire il tavolo Royal’Aperitivo delle 19:30 con le bottiglie del dopocena.',
       ],
       faqs: [
         {
-          q: 'Quanto dista Aria Club Milano dallo Stadio di San Siro e dall Ippodromo?',
-          a: 'Aria Club Milano si trova in Piazzale dello Sport 14, a soli 150 metri reali a piedi (2 minuti attraversando il piazzale) dai cancelli dello Stadio Giuseppe Meazza di San Siro e di fronte all Ippodromo Snai.',
+          q: 'Quanto dista Aria Club Milano dallo Stadio di San Siro e dall’Ippodromo?',
+          a: 'Aria Club Milano si trova in Piazzale dello Sport 14, a soli 150 metri reali a piedi (2 minuti attraversando il piazzale) dai cancelli dello Stadio Giuseppe Meazza di San Siro e di fronte all’Ippodromo Snai.',
         },
         {
           q: 'Possiamo entrare direttamente da Aria Club appena finisce la partita di Inter/Milan o un concerto?',
@@ -425,7 +425,7 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
         { zone: 'Singing Dinner Show Menu (21:00-23:30)', price: '€50 - €70 / person', details: 'Full seated multi-course dinner with wine/drinks & live vocal/artistic show' },
         { zone: 'Upper Ring VIP Table (After-Dinner)', price: '€300 - €400 (6-8 guests)', details: '100% bottle credit on the upper level overlooking the Corso Como crowd' },
         { zone: 'Main Dancefloor VIP Table', price: '€450 - €600 (8-10 guests)', details: 'Central sofa booth under the kinetic LED ceiling with skip-the-line hostess entry' },
-        { zone: 'Super Prive Console Booth', price: '€800 - €1,500 (10-12 guests)', details: 'VIP sanctuary directly beside the DJ booth for Magnum & Dom Perignon bottle parades' },
+        { zone: 'Super Privé Console Booth', price: '€800 - €1,500 (10-12 guests)', details: 'VIP sanctuary directly beside the DJ booth for Magnum & Dom Pérignon bottle parades' },
       ],
       insiderTips: [
         'Book the 21:00 Dinner Show + After-Dinner VIP Table combo so your group is already inside Corso Como before the midnight velvet-rope crowd builds up on Via de Tocqueville.',
@@ -439,7 +439,7 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
         },
         {
           q: 'How much does the Dinner Show and VIP Table cost at Tocqueville 13?',
-          a: 'The seated Singing Dinner Show costs €50-€70 per person including wine. After-dinner VIP tables start at €300-€400 on the upper ring, €450-€600 on the main floor, and €800-€1,500 in the Console Prive.',
+          a: 'The seated Singing Dinner Show costs €50-€70 per person including wine. After-dinner VIP tables start at €300-€400 on the upper ring, €450-€600 on the main floor, and €800-€1,500 in the Console Privé.',
         },
         {
           q: 'Can we keep our dinner table for the nightclub party after midnight?',
@@ -463,7 +463,7 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
         { zone: 'Cena Cantata Dinner Show (21:00-23:30)', price: '€50 - €70 / persona', details: 'Menu servito completo con vino/drink inclusi e live performance artistica ai tavoli' },
         { zone: 'Tavolo VIP Ring Superiore (Dopocena)', price: '€300 - €400 (6-8 persone)', details: '100% spendibile in bottiglie al piano superiore con affaccio sul locale' },
         { zone: 'Tavolo VIP Pista Centrale', price: '€450 - €600 (8-10 persone)', details: 'Divanetto riservato sotto il soffitto LED cinetico con ingresso salta-fila hostess' },
-        { zone: 'Super Prive Console DJ', price: '€800 - €1.500 (10-12 persone)', details: 'Area esclusiva a fianco del DJ per formati Magnum, Dom Perignon e Don Julio 1942' },
+        { zone: 'Super Privé Console DJ', price: '€800 - €1.500 (10-12 persone)', details: 'Area esclusiva a fianco del DJ per formati Magnum, Dom Pérignon e Don Julio 1942' },
       ],
       insiderTips: [
         'Prenota la formula combinata Dinner Show (ore 21:00) + Tavolo VIP Dopocena per entrare comodamente prima che si formi la ressa di mezzanotte in Via de Tocqueville.',
@@ -477,7 +477,7 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
         },
         {
           q: 'Quanto costa cenare o prenotare un Tavolo VIP al Tocqueville 13?',
-          a: 'Il Dinner Show servito costa 50-70€ a persona vini inclusi. Nel dopocena i Tavoli VIP partono da 300-400€ nel ring superiore, 450-600€ in pista centrale e 800-1.500€ nel Prive Console.',
+          a: 'Il Dinner Show servito costa 50-70€ a persona vini inclusi. Nel dopocena i Tavoli VIP partono da 300-400€ nel ring superiore, 450-600€ in pista centrale e 800-1.500€ nel Privé Console.',
         },
         {
           q: 'Possiamo tenere lo stesso tavolo della cena anche per la discoteca dopo mezzanotte?',
@@ -541,12 +541,12 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
         { zone: 'Ingresso in Lista / Prevendita (23:00-00:30)', price: '€12 - €20 / persona', details: 'Include 1 drink e libero accesso a tutte le 3 piste da ballo' },
         { zone: 'Tavolo VIP Arena Laterale', price: '€200 - €280 (6-8 persone)', details: '100% spendibile in bottiglie, ingresso salta-fila dedicato e base riservata' },
         { zone: 'Tavolo Balconata VIP Rialzata (Vista Main Stage)', price: '€300 - €450 (8-10 persone)', details: 'Affaccio panoramico dalla balconata superiore sulla pista centrale da 3.000 persone' },
-        { zone: 'Super Prive Palco / Console', price: '€500 - €800 (10-15 persone)', details: 'Ideale per grandi feste di laurea, 18 anni, addii al celibato, Halloween e Capodanno' },
+        { zone: 'Super Privé Palco / Console', price: '€500 - €800 (10-15 persone)', details: 'Ideale per grandi feste di laurea, 18 anni, addii al celibato, Halloween e Capodanno' },
       ],
       insiderTips: [
         'Grazie alle 3 piste musicali diverse sotto lo stesso tetto, l Alcatraz e il locale n.1 a Milano per mettere d accordo compagnie numerose da 10 a 40 persone.',
         'Con un Tavolo VIP in Balconata da 250-350€ diviso in 8 amici (circa 35€ a testa con bottiglia inclusa) salti completamente la lunghissima coda esterna di Via Valtellina.',
-        'Hai il biglietto per un concerto delle 21:00 all Alcatraz? Prenota su WhatsApp (+39 351 912 7047) il tuo Tavolo VIP in Balconata per il dopo-concerto delle 23:30 senza mai uscire dal locale.',
+        'Hai il biglietto per un concerto delle 21:00 all’Alcatraz? Prenota su WhatsApp (+39 351 912 7047) il tuo Tavolo VIP in Balconata per il dopo-concerto delle 23:30 senza mai uscire dal locale.',
       ],
       faqs: [
         {
@@ -554,8 +554,8 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
           a: 'Ogni venerdi e sabato dalle 23:00 l Alcatraz apre 3 sale indipendenti: Pista 1 Main Stage (Commerciale, Pop e Hit 90/2000), Pista 2 (Reggaeton, Latin e Urban) e Pista 3 (Rock e DJ set alternativo).',
         },
         {
-          q: 'Quanto costa prenotare un Tavolo VIP in Balconata all Alcatraz Milano?',
-          a: 'I tavoli VIP partono da 200-280€ nell arena laterale, 300-450€ sulla celebre Balconata VIP rialzata con vista palco e 500-800€ nell area Palco/Console, sempre 100% convertiti in bottiglie.',
+          q: 'Quanto costa prenotare un Tavolo VIP in Balconata all’Alcatraz Milano?',
+          a: 'I tavoli VIP partono da 200-280€ nell’arena laterale, 300-450€ sulla celebre Balconata VIP rialzata con vista palco e 500-800€ nell’area Palco/Console, sempre 100% convertiti in bottiglie.',
         },
         {
           q: 'L Alcatraz e adatto per feste dei 18 anni, feste di laurea o Capodanno?',
@@ -581,7 +581,7 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
         { zone: 'Early Bird / Standard Arena Ticket', price: '€25 - €45 / person', details: 'Main warehouse floor admission (varies by international headliner tier)' },
         { zone: 'Elevated VIP Ring Table (Tier 1)', price: '€400 - €600 (6-8 guests)', details: 'Fast-track VIP gate, elevated platform view of the mega-stage & 100% bottle credit' },
         { zone: 'VIP Ring Gold Table (Front View)', price: '€700 - €1,000 (8-10 guests)', details: 'Prime sightline on the massive LED wall with premium spirits & champagne service' },
-        { zone: 'Backstage / Stage Console Prive', price: '€1,200 - €2,500+ (10-12 guests)', details: 'Ultra-exclusive stage-side hospitality next to world-touring DJs & performers' },
+        { zone: 'Backstage / Stage Console Privé', price: '€1,200 - €2,500+ (10-12 guests)', details: 'Ultra-exclusive stage-side hospitality next to world-touring DJs & performers' },
       ],
       insiderTips: [
         'On international DJ nights (Peggy Gou, Paul Kalkbrenner, Fisher, Marco Carola, Deborah De Luca, or NYE marathons), general admission tickets sell out weeks ahead: booking an Elevated VIP Ring table via WhatsApp (+39 351 912 7047) guarantees immediate fast-track entry.',
@@ -619,7 +619,7 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
         { zone: 'Ticket Ingresso Parterre / Early Bird', price: '€25 - €45 / persona', details: 'Accesso al parterre principale (varia in base alla caratura del guest internazionale)' },
         { zone: 'Tavolo Ring VIP Rialzato (Fascia 1)', price: '€400 - €600 (6-8 persone)', details: 'Ingresso VIP salta-fila, pedana sopraelevata panoramica e 100% credito bottiglie' },
         { zone: 'Tavolo Ring VIP Gold (Prima Fila)', price: '€700 - €1.000 (8-10 persone)', details: 'Visuale frontale privilegiata sul mega palco LED con servizio spiriti e champagne' },
-        { zone: 'Super Prive Backstage / Stage Console', price: '€1.200 - €2.500+ (10-12 persone)', details: 'Hospitality esclusiva a bordo palco accanto ai top DJ mondiali' },
+        { zone: 'Super Privé Backstage / Stage Console', price: '€1.200 - €2.500+ (10-12 persone)', details: 'Hospitality esclusiva a bordo palco accanto ai top DJ mondiali' },
       ],
       insiderTips: [
         'Nelle date con superstar DJ internazionali (da Marco Carola, Fisher e Peggy Gou fino a Paul Kalkbrenner e Indira Paganotto) i ticket parterre vanno sold-out in anticipo: prenotare un Tavolo sul Ring VIP via WhatsApp (+39 351 912 7047) assicura ingresso prioritario immediato.',
@@ -644,12 +644,12 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
   },
   'v-amnesia': {
     en: {
-      tagline: 'Milan 20-Year Temple of Tech-House & Techno | Custom L-Acoustics Sound System & Backstage DJ Console Prive',
+      tagline: 'Milan 20-Year Temple of Tech-House & Techno | Custom L-Acoustics Sound System & Backstage DJ Console Privé',
       highlights: [
         'Located at Via Alfonso Gatto (corner Viale Forlanini), 5 minutes from M4 Repetti / Forlanini FS & Linate',
         'Over two decades as Milan #1 pure underground club for Tech-House, Melodic Techno & Minimal/Deep Tech',
         'Custom-calibrated L-Acoustics sound system, kinetic ceiling lighting & 360-degree DJ booth',
-        'Legendary Backstage Console Prive placing your VIP table directly behind the world top selectors',
+        'Legendary Backstage Console Privé placing your VIP table directly behind the world top selectors',
       ],
       musicStyle: 'Tech-House, Melodic Techno, Techno & Deep/Minimal Electronic by Resident & Global Headliner DJs',
       crowdProfile: '20-38 | Dedicated clubbers, DJs, fashion/design creatives & underground electronic music connoisseurs',
@@ -657,12 +657,12 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
       nearestMetro: 'M4 Blue Line Repetti / Stazione Forlanini FS (5 min walk to Via Alfonso Gatto / Viale Forlanini)',
       pricingTable: [
         { zone: 'Release Ticket / Guest List (23:30-01:00)', price: '€20 - €35 / person', details: 'Main dancefloor entry for international DJ nights' },
-        { zone: 'Prive Pista / Side Dancefloor Table', price: '€350 - €500 (6-8 guests)', details: '100% bottle credit, skip-the-line VIP admission & dancefloor-level booth' },
-        { zone: 'Prive Gold Elevated Balcony', price: '€600 - €900 (8-10 guests)', details: 'Elevated VIP zone with direct sightline to the LED wall and dedicated waiter' },
-        { zone: 'Backstage Console Super Prive (Behind DJ)', price: '€1,000 - €2,000+ (10-12 guests)', details: 'The most coveted electronic table in Milan: party inside the DJ booth area' },
+        { zone: 'Privé Pista / Side Dancefloor Table', price: '€350 - €500 (6-8 guests)', details: '100% bottle credit, skip-the-line VIP admission & dancefloor-level booth' },
+        { zone: 'Privé Gold Elevated Balcony', price: '€600 - €900 (8-10 guests)', details: 'Elevated VIP zone with direct sightline to the LED wall and dedicated waiter' },
+        { zone: 'Backstage Console Super Privé (Behind DJ)', price: '€1,000 - €2,000+ (10-12 guests)', details: 'The most coveted electronic table in Milan: party inside the DJ booth area' },
       ],
       insiderTips: [
-        'At Amnesia Milano, the Backstage Console Prive is where the magic happens: you stand literally one meter behind headliners from Ibiza, Berlin, and London until 06:00 AM.',
+        'At Amnesia Milano, the Backstage Console Privé is where the magic happens: you stand literally one meter behind headliners from Ibiza, Berlin, and London until 06:00 AM.',
         'Wear Total Black or minimalist dark clubwear with comfortable dark sneakers or boots; stiff corporate suits look out of place on this floor.',
         'Thanks to the M4 Blue metro line (Forlanini FS / Repetti), reaching Amnesia from Piazza San Babila takes just 10 minutes.',
       ],
@@ -673,7 +673,7 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
         },
         {
           q: 'How much does a Backstage Console VIP table cost at Amnesia Milano?',
-          a: 'Side dancefloor VIP tables start at €350-€500 (6-8 guests), Prive Gold tables cost €600-€900, and Backstage Console tables directly behind the DJ range from €1,000 to €2,000+ depending on the guest artist.',
+          a: 'Side dancefloor VIP tables start at €350-€500 (6-8 guests), Privé Gold tables cost €600-€900, and Backstage Console tables directly behind the DJ range from €1,000 to €2,000+ depending on the guest artist.',
         },
         {
           q: 'What should I wear to Amnesia Milano?',
@@ -682,12 +682,12 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
       ],
     },
     it: {
-      tagline: 'Il Tempio Milanese della Tech-House e della Techno da Oltre 20 Anni | Impianto L-Acoustics & Prive Console Backstage',
+      tagline: 'Il Tempio Milanese della Tech-House e della Techno da Oltre 20 Anni | Impianto L-Acoustics & Privé Console Backstage',
       highlights: [
         'Situato in Via Alfonso Gatto (angolo Viale Forlanini), a 5 minuti dalla Metro M4 Blu Forlanini FS / Repetti',
         'Da oltre vent anni il club di riferimento a Milano per Tech-House, Melodic Techno e grandi guest da Ibiza e Berlino',
         'Impianto acustico L-Acoustics tarato al millimetro, architettura luminosa immersiva e console centrale',
-        'Iconico Prive Console Backstage per vivere il DJ set a un metro dai migliori artisti elettronici del pianeta',
+        'Iconico Privé Console Backstage per vivere il DJ set a un metro dai migliori artisti elettronici del pianeta',
       ],
       musicStyle: 'Tech-House, Melodic Techno, Techno e Minimal/Deep Tech con Superstar DJ Internazionali',
       crowdProfile: '20-38 anni | Clubber esperti, creativi della moda e del design, producer e amanti della vera scena elettronica',
@@ -695,12 +695,12 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
       nearestMetro: 'M4 Blu Stazione Forlanini FS / Repetti (5 minuti a piedi fino a Via Alfonso Gatto / Viale Forlanini)',
       pricingTable: [
         { zone: 'Ticket Early Bird / Lista (23:30-01:00)', price: '€20 - €35 / persona', details: 'Ingresso pista per le notti con guest DJ internazionale' },
-        { zone: 'Tavolo Prive Pista Laterale', price: '€350 - €500 (6-8 persone)', details: '100% spendibile in bottiglie, ingresso VIP salta-fila e divanetto a bordo pista' },
-        { zone: 'Tavolo Prive Gold Sopraelevato', price: '€600 - €900 (8-10 persone)', details: 'Area VIP rialzata con visuale perfetta su console e LED wall e servizio dedicato' },
-        { zone: 'Super Prive Console Backstage (Dietro al DJ)', price: '€1.000 - €2.000+ (10-12 persone)', details: 'Il tavolo elettronico piu ambito di Milano: balli direttamente in console fino alle 06:00' },
+        { zone: 'Tavolo Privé Pista Laterale', price: '€350 - €500 (6-8 persone)', details: '100% spendibile in bottiglie, ingresso VIP salta-fila e divanetto a bordo pista' },
+        { zone: 'Tavolo Privé Gold Sopraelevato', price: '€600 - €900 (8-10 persone)', details: 'Area VIP rialzata con visuale perfetta su console e LED wall e servizio dedicato' },
+        { zone: 'Super Privé Console Backstage (Dietro al DJ)', price: '€1.000 - €2.000+ (10-12 persone)', details: 'Il tavolo elettronico piu ambito di Milano: balli direttamente in console fino alle 06:00' },
       ],
       insiderTips: [
-        'All Amnesia il vero status symbol e il Tavolo Prive Console Backstage: vivi tutta la notte a un metro dai grandi headliner di Ibiza e Berlino fino alle 06:00 del mattino.',
+        'All’Amnesia il vero status symbol è il Tavolo Privé Console Backstage: vivi tutta la notte a un metro dai grandi headliner di Ibiza e Berlino fino alle 06:00 del mattino.',
         'Il dress code ideale e Total Black o clubwear contemporaneo scuro con sneakers nere comode; evita completi formali da ufficio.',
         'Con la linea Metro M4 Blu arrivi alla fermata Forlanini FS da San Babila in soli 10 minuti.',
       ],
@@ -710,12 +710,12 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
           a: 'L Amnesia Milano si trova in Via Alfonso Gatto (angolo Viale Forlanini), a soli 5 minuti a piedi dalla fermata Forlanini FS / Repetti della Metro M4 Blu (10 minuti da Piazza San Babila).',
         },
         {
-          q: 'Quanto costa un Tavolo VIP in Console Backstage all Amnesia Milano?',
-          a: 'I tavoli Prive Pista partono da 350-500€ (6-8 persone), il Prive Gold da 600-900€ e il celebre Prive Console Backstage dietro al DJ varia da 1.000€ a 2.000€+ in base all ospite internazionale, 100% in bottiglie.',
+          q: 'Quanto costa un Tavolo VIP in Console Backstage all’Amnesia Milano?',
+          a: 'I tavoli Privé Pista partono da 350-500€ (6-8 persone), il Privé Gold da 600-900€ e il celebre Privé Console Backstage dietro al DJ varia da 1.000€ a 2.000€+ in base all’ospite internazionale, 100% in bottiglie.',
         },
         {
           q: 'Qual e il dress code consigliato per l Amnesia Milano?',
-          a: 'Total Black e Clubwear Contemporaneo: t-shirt o camicia nera, pantalone scuro e sneakers scure comode per ballare fino all alba.',
+          a: 'Total Black e Clubwear Contemporaneo: t-shirt o camicia nera, pantalone scuro e sneakers scure comode per ballare fino all’alba.',
         },
       ],
     },
@@ -736,8 +736,8 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
       pricingTable: [
         { zone: 'Singing Aperitivo Reserved Table (19:30-22:30)', price: '€20 - €35 / person', details: 'Includes royal buffet or gourmet platters, 1 cocktail or wine bottle per 4 guests' },
         { zone: 'Dancefloor VIP Table (After-Dinner)', price: '€300 - €400 (6-8 guests)', details: '100% bottle credit on the main crystal-chandelier floor with hostess entry' },
-        { zone: 'Elevated VIP Prive Booth', price: '€500 - €800 (8-10 guests)', details: 'Roped-off luxury velvet sofa area with dedicated waiter and premium bottles' },
-        { zone: 'Super Prive Console DJ', price: '€900 - €1,500 (10-12 guests)', details: 'Exclusive booth beside the console for Dom Perignon & Clase Azul parades' },
+        { zone: 'Elevated VIP Privé Booth', price: '€500 - €800 (8-10 guests)', details: 'Roped-off luxury velvet sofa area with dedicated waiter and premium bottles' },
+        { zone: 'Super Privé Console DJ', price: '€900 - €1,500 (10-12 guests)', details: 'Exclusive booth beside the console for Dom Pérignon & Clase Azul parades' },
       ],
       insiderTips: [
         'Book the 19:30 Singing Aperitivo + After-Dinner VIP Table combo to keep your sofa all night as Pineta transitions from live sing-along dinner vibe to full nightclub.',
@@ -751,7 +751,7 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
         },
         {
           q: 'How much is a VIP table at Pineta Club Milano?',
-          a: 'After-dinner Dancefloor VIP tables start at €300-€400 for 6-8 guests, Elevated VIP Prive tables cost €500-€800, and Console tables start from €900, 100% spendable in bottles.',
+          a: 'After-dinner Dancefloor VIP tables start at €300-€400 for 6-8 guests, Elevated VIP Privé tables cost €500-€800, and Console tables start from €900, 100% spendable in bottles.',
         },
         {
           q: 'How do I reach Pineta Club by metro?',
@@ -760,7 +760,7 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
       ],
     },
     it: {
-      tagline: 'Priorita #2 Assoluta | Il Tempio Milanese dell Aperitivo Cantato e delle Notti Reggaeton/Commercial sotto i Lampadari di Cristallo',
+      tagline: 'Scelta Top N.2 a Milano | Il Tempio Milanese dell’Aperitivo Cantato e delle Notti Reggaeton/Commercial sotto i Lampadari di Cristallo',
       highlights: [
         'Situato in Via Messina 38 (Cenisio / Corso Como), a 2 minuti a piedi dalla fermata Metro M5 Lilla Cenisio',
         'Casa del celebre Aperitivo Cantato dalle 19:30 e del format Noche De Perreo Reggaeton & Commerciale',
@@ -774,8 +774,8 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
       pricingTable: [
         { zone: 'Tavolo Riservato Aperitivo Cantato (19:30-22:30)', price: '€20 - €35 / persona', details: 'Include Royal Buffet, 1 drink premium o 1 bottiglia di vino/prosecco ogni 4 ospiti' },
         { zone: 'Tavolo VIP Pista (Dopocena)', price: '€300 - €400 (6-8 persone)', details: '100% spendibile in bottiglie sotto i lampadari di cristallo con ingresso salta-fila' },
-        { zone: 'Tavolo Prive VIP Rialzato', price: '€500 - €800 (8-10 persone)', details: 'Divano in velluto nell area Prive riservata con cameriere dedicato' },
-        { zone: 'Super Prive Console DJ', price: '€900 - €1.500 (10-12 persone)', details: 'Posizione dominante a fianco della console per Magnum, Dom Perignon e Clase Azul' },
+        { zone: 'Tavolo Privé VIP Rialzato', price: '€500 - €800 (8-10 persone)', details: 'Divano in velluto nell’area Privé riservata con cameriere dedicato' },
+        { zone: 'Super Privé Console DJ', price: '€900 - €1.500 (10-12 persone)', details: 'Posizione dominante a fianco della console per Magnum, Dom Pérignon e Clase Azul' },
       ],
       insiderTips: [
         'Prenota la formula Combo Aperitivo Cantato (19:30) + Tavolo Bottiglia Dopocena per assicurarti lo stesso divanetto per tutta la notte senza mai fare fila.',
@@ -784,12 +784,12 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
       ],
       faqs: [
         {
-          q: 'Come funziona l Aperitivo Cantato del Pineta Club Milano?',
+          q: 'Come funziona l’Aperitivo Cantato del Pineta Club Milano?',
           a: 'Dalle 19:30 alle 22:30 accedi al tuo tavolo riservato (20-35€ a persona) con buffet gourmet, drink o bottiglie di vino al tavolo e uno show vocale coinvolgente prima che la sala diventi discoteca fino alle 05:00.',
         },
         {
           q: 'Quanto costa un Tavolo VIP dopocena al Pineta Club?',
-          a: 'I tavoli Pista partono da 300-400€ per 6-8 persone, il Prive VIP richiede 500-800€ e il Super Prive Console parte da 900€, sempre 100% convertiti in bottiglie.',
+          a: 'I tavoli Pista partono da 300-400€ per 6-8 persone, il Privé VIP richiede 500-800€ e il Super Privé Console parte da 900€, sempre 100% convertiti in bottiglie.',
         },
         {
           q: 'Qual e la fermata della metro piu vicina al Pineta Club?',
@@ -832,7 +832,7 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
       ],
     },
     it: {
-      tagline: 'Priorita #4 Assoluta | 1.000 mq di Loft Industrial-Chic e 600 mq di Terrazza per Apericena XL, Cena Cantata e Feste di Laurea',
+      tagline: 'Scelta Top N.4 a Milano | 1.000 mq di Loft Industrial-Chic e 600 mq di Terrazza per Apericena XL, Cena Cantata e Feste di Laurea',
       highlights: [
         'Situato in Via Piero della Francesca 55 (Sempione / Arco della Pace) in uno storico ex deposito ferroviario',
         '1.000 mq di salone open-space + 600 mq di terrazza estiva, aperto dal Martedi alla Domenica (19:30-03:00)',
@@ -880,7 +880,7 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
       pricingTable: [
         { zone: 'Skyline Sunset Aperitivo Table (18:30-21:30)', price: '€20 - €35 / person', details: 'Panoramic window seating, gourmet finger food platter & signature cocktail' },
         { zone: 'After-Dinner Skyline Lounge Table', price: '€250 - €400 (6-8 guests)', details: '100% bottle credit at 85 meters altitude with private elevator access' },
-        { zone: 'First-Row Glass Window VIP Prive', price: '€450 - €800 (8-10 guests)', details: 'Front-row panoramic sofa overlooking the illuminated Milan skyscrapers' },
+        { zone: 'First-Row Glass Window VIP Privé', price: '€450 - €800 (8-10 guests)', details: 'Front-row panoramic sofa overlooking the illuminated Milan skyscrapers' },
       ],
       insiderTips: [
         'First-row window tables overlooking the CityLife and Porta Nuova towers sell out 48 hours ahead on Fridays and Saturdays: reserve early via WhatsApp (+39 351 912 7047).',
@@ -898,10 +898,10 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
       ],
     },
     it: {
-      tagline: 'Priorita #5 Assoluta | Sky Lounge Panoramico al 20° Piano (85 Metri d Altezza) con Vista a 360° sullo Skyline di Milano',
+      tagline: 'Scelta Top N.5 a Milano | Sky Lounge Panoramico al 20° Piano (85 Metri d’Altezza) con Vista a 360° sullo Skyline di Milano',
       highlights: [
-        'Sospeso al 20° piano (85 metri d altezza) in Viale Achille Papa 30 (distretto Portello / CityLife)',
-        'Salone panoramico climatizzato con vetrate a 360 gradi aperto 12 mesi l anno (anche in autunno/inverno e Capodanno)',
+        'Sospeso al 20° piano (85 metri d’altezza) in Viale Achille Papa 30 (distretto Portello / CityLife)',
+        'Salone panoramico climatizzato con vetrate a 360 gradi aperto 12 mesi l’anno (anche in autunno/inverno e Capodanno)',
         'Sunset Aperitivo al tramonto (dalle 18:30) seguito da elegante serata Lounge & Deep House con DJ set fino alle 02:30',
         'A sole 3 fermate di Metro M5 Lilla da San Siro (Lotto -> Portello) per il Terzo Tempo panoramico post-partita',
       ],
@@ -911,17 +911,17 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
       nearestMetro: 'M5 Lilla Portello (4 minuti a piedi) + M1 Rossa Lotto (Viale Achille Papa 30, 20° Piano)',
       pricingTable: [
         { zone: 'Tavolo Sunset Aperitivo Vista Skyline (18:30-21:30)', price: '€20 - €35 / persona', details: 'Tavolo riservato al 20° piano con finger food gourmet e signature cocktail' },
-        { zone: 'Tavolo VIP Lounge Dopocena', price: '€250 - €400 (6-8 persone)', details: '100% spendibile in bottiglie a 85 metri d altezza con ascensore diretto' },
-        { zone: 'Tavolo Prive Prima Fila Vetrata 360°', price: '€450 - €800 (8-10 persone)', details: 'Divanetto fronte vetrata affacciato sui grattacieli illuminati di CityLife e Porta Nuova' },
+        { zone: 'Tavolo VIP Lounge Dopocena', price: '€250 - €400 (6-8 persone)', details: '100% spendibile in bottiglie a 85 metri d’altezza con ascensore diretto' },
+        { zone: 'Tavolo Privé Prima Fila Vetrata 360°', price: '€450 - €800 (8-10 persone)', details: 'Divanetto fronte vetrata affacciato sui grattacieli illuminati di CityLife e Porta Nuova' },
       ],
       insiderTips: [
         'I tavoli in prima fila lungo la vetrata panoramica esauriscono i posti con 48 ore di anticipo nel weekend: bloccali su WhatsApp (+39 351 912 7047).',
-        'Essendo interamente avvolto da vetrate panoramiche climatizzate al 20° piano, Voya Rooftop e perfetto tutto l anno, inclusi autunno, inverno e la notte di Capodanno con vista fuochi d artificio.',
+        'Essendo interamente avvolto da vetrate panoramiche climatizzate al 20° piano, Voya Rooftop è perfetto tutto l’anno, inclusi autunno, inverno e la notte di Capodanno con vista fuochi d’artificio.',
       ],
       faqs: [
         {
           q: 'Voya Rooftop e aperto anche in autunno e in inverno?',
-          a: 'Si! Il 20° piano di Voya Rooftop (Viale Achille Papa 30) dispone di un salone interno climatizzato con vetrate a tutta altezza a 360 gradi aperto 12 mesi l anno.',
+          a: 'Sì! Il 20° piano di Voya Rooftop (Viale Achille Papa 30) dispone di un salone interno climatizzato con vetrate a tutta altezza a 360 gradi aperto 12 mesi l’anno.',
         },
         {
           q: 'Quanto costa prenotare un tavolo vista skyline da Voya Rooftop?',
@@ -937,7 +937,7 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
         'Central location at Piazza della Repubblica / Via Vittor Pisani near Stazione Centrale & Porta Nuova',
         'Home of Milan #1 Monday night party: Dirty Monday (The Rock n Roll & Urban Industry Night)',
         'Cutting-edge kinetic LED lighting grid, dark-luxury interiors & international guest selectors',
-        'Open Monday, Friday & Saturday until 04:30 AM with Dancefloor, Prive & Console VIP booths',
+        'Open Monday, Friday & Saturday until 04:30 AM with Dancefloor, Privé & Console VIP booths',
       ],
       musicStyle: 'House, Tech-House, Hip-Hop, Urban & Rock/Pop Mashups (Dirty Monday)',
       crowdProfile: '21-36 | Models, fashion industry insiders, international students & nocturnal clubbers',
@@ -946,8 +946,8 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
       pricingTable: [
         { zone: 'Guest List Entry (23:00-00:30)', price: '€15 - €25 / person', details: 'Includes 1 drink (mixed gender balance required at the door)' },
         { zone: 'Dancefloor VIP Table', price: '€250 - €350 (6-8 guests)', details: '100% bottle credit on the main floor with skip-the-line hostess entry' },
-        { zone: 'Elevated VIP Prive Booth', price: '€500 - €900 (8-10 guests)', details: 'Reserved luxury booth overlooking the LED dancefloor' },
-        { zone: 'Super Prive Console DJ', price: '€1,000 - €1,800 (10-12 guests)', details: 'Stage-level booth next to resident and international guest DJs' },
+        { zone: 'Elevated VIP Privé Booth', price: '€500 - €900 (8-10 guests)', details: 'Reserved luxury booth overlooking the LED dancefloor' },
+        { zone: 'Super Privé Console DJ', price: '€1,000 - €1,800 (10-12 guests)', details: 'Stage-level booth next to resident and international guest DJs' },
       ],
       insiderTips: [
         'In Milan on a Monday night (or after a Monday 20:45 Serie A match at San Siro)? Dirty Monday at Repvblic is the most famous Monday club party in Italy.',
@@ -960,15 +960,15 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
         },
         {
           q: 'How much is a VIP table at Repvblic Milano?',
-          a: 'Dancefloor VIP tables start at €250-€350, Elevated Prive tables range from €500 to €900, and DJ Console booths start at €1,000, 100% spendable in bottles.',
+          a: 'Dancefloor VIP tables start at €250-€350, Elevated Privé tables range from €500 to €900, and DJ Console booths start at €1,000, 100% spendable in bottles.',
         },
       ],
     },
     it: {
-      tagline: 'Priorita #6 Assoluta | Il Design Club di Piazza della Repubblica Casa del Celebre Dirty Monday e dei Weekend House/Urban',
+      tagline: 'Scelta Top N.6 a Milano | Il Design Club di Piazza della Repubblica Casa del Celebre Dirty Monday e dei Weekend House/Urban',
       highlights: [
         'Posizione centralissima in Piazza della Repubblica (a 1 minuto dalla Metro M3 Repubblica e Porta Nuova)',
-        'Casa della serata del lunedi piu famosa d Italia: Dirty Monday (Rock n Roll, Urban & Fashion Party)',
+        'Casa della serata del lunedì più famosa d’Italia: Dirty Monday (Rock n Roll, Urban & Fashion Party)',
         'Architettura luminosa LED immersiva, estetica dark-luxury e DJ internazionali nel weekend',
         'Ideale anche per il Dopo-Partita dei posticipi del lunedi sera a San Siro e per la Fashion Week',
       ],
@@ -979,21 +979,21 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
       pricingTable: [
         { zone: 'Ingresso in Lista Nominale (23:00-00:30)', price: '€15 - €25 / persona', details: 'Include 1 drink (richiesto equilibrio uomo/donna alla selezione)' },
         { zone: 'Tavolo VIP Pista', price: '€250 - €350 (6-8 persone)', details: '100% spendibile in bottiglie a bordo pista con ingresso salta-fila hostess' },
-        { zone: 'Tavolo Prive VIP Rialzato', price: '€500 - €900 (8-10 persone)', details: 'Divanetto riservato nell area VIP con visuale sull intera sala' },
-        { zone: 'Super Prive Console DJ', price: '€1.000 - €1.800 (10-12 persone)', details: 'Il tavolo piu esclusivo accanto alla console DJ' },
+        { zone: 'Tavolo Privé VIP Rialzato', price: '€500 - €900 (8-10 persone)', details: 'Divanetto riservato nell’area VIP con visuale sull’intera sala' },
+        { zone: 'Super Privé Console DJ', price: '€1.000 - €1.800 (10-12 persone)', details: 'Il tavolo piu esclusivo accanto alla console DJ' },
       ],
       insiderTips: [
-        'Sei a Milano di lunedi sera (o dopo il posticipo di Serie A del lunedi a San Siro)? Il Dirty Monday del Repvblic e l evento imperdibile del lunedi notte.',
+        'Sei a Milano di lunedì sera (o dopo il posticipo di Serie A del lunedì a San Siro)? Il Dirty Monday del Repvblic è l’evento imperdibile del lunedì notte.',
         'Prenota il Tavolo VIP su WhatsApp (+39 351 912 7047) per saltare la selezione alla porta in Piazza della Repubblica.',
       ],
       faqs: [
         {
           q: 'Cos e il Dirty Monday del Repvblic Milano?',
-          a: 'Il Dirty Monday e il party del lunedi notte piu famoso di Milano: ogni lunedi dalle 23:00 alle 04:30 il Repvblic (Piazza della Repubblica) ospita modelle, creativi e pubblico internazionale.',
+          a: 'Il Dirty Monday e il party del lunedì notte piu famoso di Milano: ogni lunedi dalle 23:00 alle 04:30 il Repvblic (Piazza della Repubblica) ospita modelle, creativi e pubblico internazionale.',
         },
         {
           q: 'Quanto costa un Tavolo VIP al Repvblic Milano?',
-          a: 'I tavoli Pista partono da 250-350€, il Prive rialzato da 500-900€ e il Super Prive Console da 1.000€, interamente convertiti in bottiglie.',
+          a: 'I tavoli Pista partono da 250-350€, il Privé rialzato da 500-900€ e il Super Privé Console da 1.000€, interamente convertiti in bottiglie.',
         },
       ],
     },
@@ -1443,7 +1443,7 @@ export default async function ClubPage({ params }: Props) {
                   <CreditCard className="w-5 h-5 text-champagne" />
                   {locale === 'it'
                     ? `Listino Ufficiale Tavoli VIP, Privé e Formule Ingresso (${name})`
-                    : `Official VIP Table, Prive & Entry Price List (${name})`}
+                    : `Official VIP Table, Privé & Entry Price List (${name})`}
                 </h3>
                 <div className="overflow-x-auto rounded-xl border border-white/10">
                   <table className="w-full text-left border-collapse text-sm">
