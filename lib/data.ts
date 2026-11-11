@@ -2095,7 +2095,7 @@ export const mockGuides: Guide[] = [
     },
     title: {
       en: "Milan Weekly Nightlife Calendar 2026/2027: Where to Party Every Night from Monday to Sunday",
-      it: "Calendario Settimanale Serate Milano 2026/2027: Dove Le Serate nei Club dal Lunedì alla Domenica"
+      it: "Calendario Settimanale Serate Milano 2026/2027: Dove Uscire nei Club dal Lunedì alla Domenica"
     },
     excerpt: {
       en: "Which clubs are open in Milan on Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, and Sunday? The definitive 7-day insider schedule.",

@@ -56,9 +56,9 @@ export default function CapodannoDetailView({ locale, event }: Props) {
     h1: title,
     h2List: [
       ui.programHeading,
-      `${ui.pricesHeadingPrefix} — ${event.venueName}`,
+      `${ui.pricesHeadingPrefix} · ${event.venueName}`,
       ui.bookingHeading,
-      `${ui.mapHeadingEvent} — ${event.venueName}`,
+      `${ui.mapHeadingEvent} · ${event.venueName}`,
     ],
     h3List: tiers.map((t) => t.label),
     categorySlug: event.category,
@@ -103,15 +103,15 @@ export default function CapodannoDetailView({ locale, event }: Props) {
         ]
       : [
           {
-            q: `${nav.menuLabel} 2027 @ ${event.venueName} (${event.city}) — EUR (€)?`,
+            q: `${nav.menuLabel} 2027 @ ${event.venueName} (${event.city}) · EUR (€)?`,
             a: `${event.venueName} (${event.address}, ${event.city}): ${event.priceSummaryEn}. ${sourceBasis}`,
           },
           {
-            q: `${event.venueName} (${event.address}, ${event.city}) — 31/12/2026 (${event.hours})?`,
+            q: `${event.venueName} (${event.address}, ${event.city}) · 31/12/2026 (${event.hours})?`,
             a: `${event.venueName}, ${event.address}, ${event.city} (${event.province}), ${event.hours}. Dress code: ${dress}.`,
           },
           {
-            q: `WhatsApp Concierge ${SITE_CONTACT.whatsapp.number} — ${event.venueName}?`,
+            q: `WhatsApp Concierge ${SITE_CONTACT.whatsapp.number} · ${event.venueName}?`,
             a: `${ui.bookingSubtitle}`,
           },
         ];
@@ -317,7 +317,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 />
               </div>
               <figcaption className="mt-3 text-xs leading-relaxed text-white/75 sm:text-sm">
-                <strong className="text-champagne">{seoPack.poster.title}</strong> — {seoPack.poster.description}
+                <strong className="text-champagne">{seoPack.poster.title}</strong> · {seoPack.poster.description}
               </figcaption>
             </figure>
 
@@ -363,7 +363,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                         </span>
                       </div>
                       <p className="text-xs leading-relaxed text-white/80">
-                        <strong className="text-white">{img.title}</strong> — {img.description}
+                        <strong className="text-white">{img.title}</strong> · {img.description}
                       </p>
                     </figcaption>
                   </figure>
@@ -375,7 +375,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
             <div id="prezzi-formule" className="mt-10">
               <div className="flex flex-wrap items-center gap-3">
                 <h2 className="font-serif text-2xl font-bold text-champagne">
-                  {ui.pricesHeadingPrefix} — {event.venueName}
+                  {ui.pricesHeadingPrefix} · {event.venueName}
                 </h2>
                 <span className="rounded-full border border-amber-400/70 bg-amber-500/20 px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-amber-300" data-selling-fast-badge>
                   {scarcity.sellingFastBadge}
@@ -460,7 +460,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
             {/* Embedded Google Map for Venue */}
             <div id="mappa-locale" className="mt-12">
               <h2 className="font-serif text-2xl font-bold text-champagne">
-                {ui.mapHeadingEvent} — {event.venueName}
+                {ui.mapHeadingEvent} · {event.venueName}
               </h2>
               <p className="mt-1 text-sm text-white/70">
                 {event.venueName} · {event.address}, {event.city} ({event.province}) · {event.hours}

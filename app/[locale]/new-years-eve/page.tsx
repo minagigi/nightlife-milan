@@ -596,7 +596,7 @@ export default async function NewYearsEvePage({
 
           <p className="text-base sm:text-xl text-white/75 leading-relaxed max-w-4xl mb-8">
             {isIt
-              ? 'Festeggia la notte di San Silvestro (31 Dicembre 2026 -> 1 Gennaio 2027) nei templi dell’intrattenimento milanese con voucher nominale garantito e corsia salta-fila. Confronta le 4 formule ufficiali di Capodanno e prenota il tuo tavolo nei 6 locali prioritari: 1. Just Me Milano sotto i fuochi della Torre Branca, 2. Pineta Corso Como Gala, 3. Aria Club San Siro Winter Dome, 4. 55 Milano Sempione, 5. Voya Rooftop al 20° piano con vista fuochi a 360 gradi su tutto lo skyline di Milano e 6. Repvblic.'
+              ? 'Festeggia la notte di San Silvestro (31 Dicembre 2026 -> 1 Gennaio 2027) nei templi dell’intrattenimento milanese con voucher nominale garantito e corsia salta-fila. Confronta le 4 formule ufficiali di Capodanno e prenota il tuo tavolo nei 6 club di riferimento: 1. Just Me Milano sotto i fuochi della Torre Branca, 2. Pineta Corso Como Gala, 3. Aria Club San Siro Winter Dome, 4. 55 Milano Sempione, 5. Voya Rooftop al 20° piano con vista fuochi a 360 gradi su tutto lo skyline di Milano e 6. Repvblic.'
               : 'Celebrate New Years Eve (December 31, 2026 -> January 1, 2027) inside Milans flagship clubs and sky lounges with guaranteed nominal vouchers and fast-track VIP entry. Compare the 4 official NYE formulas and lock in your table across our 6 priority venues: 1. Just Me Milano under the Torre Branca fireworks, 2. Pineta Corso Como Gala, 3. Aria Club San Siro Winter Dome, 4. 55 Milano Sempione, 5. Voya Rooftop on the 20th floor overlooking the citywide midnight fireworks, and 6. Repvblic.'}
           </p>
 

@@ -76,7 +76,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
         ]
       : [
           {
-            q: `${nav.h1} — ${events.length} Events (31/12/2026 – 01/01/2027)?`,
+            q: `${nav.h1} · ${events.length} Events (31/12/2026 – 01/01/2027)?`,
             a: `${subtitle} ${quickAnswer}`,
           },
           {
@@ -202,7 +202,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
 
           <div className="mt-6 rounded-2xl border border-champagne/25 bg-black/40 p-5">
             <p className="text-xs font-bold uppercase tracking-wider text-champagne">
-              {ui.quickGuideLabel} — {shortLabel}
+              {ui.quickGuideLabel} · {shortLabel}
             </p>
             <p className="mt-2 text-sm leading-relaxed text-white/80">{quickAnswer}</p>
           </div>
@@ -291,7 +291,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
         <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#18140c]">
           <div className="border-b border-white/10 p-6 sm:p-8">
             <h2 className="font-serif text-2xl font-bold text-champagne sm:text-3xl">
-              {ui.tableHeadingPrefix} — {shortLabel} ({events.length})
+              {ui.tableHeadingPrefix} · {shortLabel} ({events.length})
             </h2>
           </div>
           <div className="overflow-x-auto">
@@ -357,7 +357,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
       {/* FAQ Section */}
       <section id="faq-capodanno" className="mx-auto mt-16 max-w-5xl px-4 sm:px-6 lg:px-8">
         <h2 className="font-serif text-2xl font-bold text-champagne sm:text-3xl">
-          {ui.faqHeadingPrefix} — {shortLabel}
+          {ui.faqHeadingPrefix} · {shortLabel}
         </h2>
         <div className="mt-6 space-y-4">
           {faqs.map((f) => (

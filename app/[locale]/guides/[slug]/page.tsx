@@ -316,7 +316,7 @@ export default async function GuidePage({ params }: Props) {
               </p>
               <p className="font-sans text-white/75 text-sm leading-relaxed">
                 {isIt
-                  ? `${title}: guida operativa aggiornata al ${formattedDate} a cura di ${guide.author}. Include prezzi ufficiali 2026/2027, regole di selezione per i 6 locali prioritari (Just Me, Pineta, Aria, 55 Milano, Voya Rooftop, Repvblic) e prenotazione diretta garantita via WhatsApp +39 351 912 7047 (concierge@nightlifemilan.com).`
+                  ? `${title}: guida operativa aggiornata al ${formattedDate} a cura di ${guide.author}. Include prezzi ufficiali 2026/2027, regole di selezione per i 6 club di riferimento (Just Me, Pineta, Aria, 55 Milano, Voya Rooftop, Repvblic) e prenotazione diretta garantita via WhatsApp +39 351 912 7047 (concierge@nightlifemilan.com).`
                   : `${title}: actionable field guide updated ${formattedDate} by ${guide.author}. Includes verified 2026/2027 pricing, door rules for the Top 6 priority venues (Just Me, Pineta, Aria, 55 Milano, Voya Rooftop, Repvblic), and direct guaranteed booking via WhatsApp +39 351 912 7047 (concierge@nightlifemilan.com).`}
               </p>
             </div>

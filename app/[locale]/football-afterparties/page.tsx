@@ -45,7 +45,7 @@ export async function generateMetadata({
     tr(
       locale,
       'San Siro Football Match Afterparties Milan 2026/2027: Best Clubs, VIP Tables & Aperitivo After Inter & AC Milan (Serie A, Champions League & Derby)',
-      'Dopo Partita San Siro Milano 2026/2027: Dove Le Serate nei Club, Fare Aperitivo e Prenotare Tavoli VIP Dopo Inter e Milan (Serie A, Champions e Derby)'
+      'Dopo Partita San Siro Milano 2026/2027: Dove Uscire nei Club, Fare Aperitivo e Prenotare Tavoli VIP Dopo Inter e Milan (Serie A, Champions e Derby)'
     )
   );
 
@@ -100,9 +100,9 @@ const POST_MATCH_CLUBS = [
     priorityBadgeEn: '#3 Priority · 150m from San Siro Gates!',
     anchorId: 'aria-club-san-siro',
     slug: 'aria-club-milano',
-    name: '1. Aria Club Milano (#3 Priorità — Piazzale dello Sport 14, a 150 metri dai cancelli di San Siro!)',
-    nameEn: '1. Aria Club Milano (#3 Priority — Piazzale dello Sport 14, 150 meters from San Siro gates!)',
-    address: 'Piazzale dello Sport, 14 — 20151 Milano (Zona San Siro / Ippodromo)',
+    name: '1. Aria Club Milano (#3 Priorità · Piazzale dello Sport 14, a 150 metri dai cancelli di San Siro!)',
+    nameEn: '1. Aria Club Milano (#3 Priority · Piazzale dello Sport 14, 150 meters from San Siro gates!)',
+    address: 'Piazzale dello Sport, 14 · 20151 Milano (Zona San Siro / Ippodromo)',
     distanceIt: '2 minuti a piedi (150 metri reali dai cancelli Est dello Stadio Meazza)',
     distanceEn: '2 minutes on foot (150 meters from the East Gates of Giuseppe Meazza Stadium)',
     transitIt: 'Zero Taxi · Zero Coda M5 Lilla · Attraversi Piazzale dello Sport a piedi',
@@ -123,9 +123,9 @@ const POST_MATCH_CLUBS = [
     priorityBadgeEn: '#1 Top Priority · Open 7 Nights a Week',
     anchorId: 'just-me-milano-torre-branca',
     slug: 'just-me-milano',
-    name: '2. Just Me Milano (#1 Priorità — Viale Luigi Camoens 2, Parco Sempione — Aperto 7 sere su 7 inclusi Martedì/Mercoledì di Champions e Lunedì/Domenica sera!)',
-    nameEn: '2. Just Me Milano (#1 Priority — Viale Luigi Camoens 2, Parco Sempione — Open 7/7 including Tue/Wed Champions League & Mon/Sun nights!)',
-    address: 'Viale Luigi Camoens, 2 (Parco Sempione / Torre Branca) — 20121 Milano',
+    name: '2. Just Me Milano (#1 Priorità · Viale Luigi Camoens 2, Parco Sempione · Aperto 7 sere su 7 inclusi Martedì/Mercoledì di Champions e Lunedì/Domenica sera!)',
+    nameEn: '2. Just Me Milano (#1 Priority · Viale Luigi Camoens 2, Parco Sempione · Open 7/7 including Tue/Wed Champions League & Mon/Sun nights!)',
+    address: 'Viale Luigi Camoens, 2 (Parco Sempione / Torre Branca) · 20121 Milano',
     distanceIt: '10 minuti da San Siro in NCC/Taxi o M5 Lilla (Domodossola) + 3 min',
     distanceEn: '10 minutes from San Siro by Chauffeur/Taxi or M5 Line (Domodossola) + 3 min',
     transitIt: '10 min lungo l’asse Piazzale Lotto -> Corso Sempione -> Parco Sempione',
@@ -146,9 +146,9 @@ const POST_MATCH_CLUBS = [
     priorityBadgeEn: '#2 Priority · King of Singing Aperitivo & Corso Como',
     anchorId: 'pineta-club-corso-como',
     slug: 'pineta-club-milano',
-    name: '3. Pineta Club Milano (#2 Priorità — Via Messina 38 / Corso Como — Aperitivo Cantato e Privé del Venerdì e Sabato)',
-    nameEn: '3. Pineta Club Milano (#2 Priority — Via Messina 38 / Corso Como — Friday & Saturday Singing Aperitivo & VIP Privé)',
-    address: 'Via Messina, 38 (Area Corso Como / Porta Garibaldi / Cenisio) — 20154 Milano',
+    name: '3. Pineta Club Milano (#2 Priorità · Via Messina 38 / Corso Como · Aperitivo Cantato e Privé del Venerdì e Sabato)',
+    nameEn: '3. Pineta Club Milano (#2 Priority · Via Messina 38 / Corso Como · Friday & Saturday Singing Aperitivo & VIP Privé)',
+    address: 'Via Messina, 38 (Area Corso Como / Porta Garibaldi / Cenisio) · 20154 Milano',
     distanceIt: '12 min diretti con M5 Lilla (San Siro Stadio -> Cenisio / Garibaldi)',
     distanceEn: '12 min direct on M5 Purple Line (San Siro Stadio -> Cenisio / Garibaldi)',
     transitIt: 'Collegamento diretto metropolitana M5 senza cambi dallo Stadio',
@@ -169,9 +169,9 @@ const POST_MATCH_CLUBS = [
     priorityBadgeEn: '#4 Priority · 4 M5 Stops from San Siro',
     anchorId: '55-milano-sempione',
     slug: '55-milano',
-    name: '4. 55 Milano (#4 Priorità — Via Piero della Francesca 55, Sempione — A 4 fermate M5 da San Siro per Apericena XL e Dinner Show)',
-    nameEn: '4. 55 Milano (#4 Priority — Via Piero della Francesca 55, Sempione — 4 M5 stops from San Siro for XXL Apericena & Dinner Show)',
-    address: 'Via Piero della Francesca, 55 (Arco della Pace / Corso Sempione) — 20154 Milano',
+    name: '4. 55 Milano (#4 Priorità · Via Piero della Francesca 55, Sempione · A 4 fermate M5 da San Siro per Apericena XL e Dinner Show)',
+    nameEn: '4. 55 Milano (#4 Priority · Via Piero della Francesca 55, Sempione · 4 M5 stops from San Siro for XXL Apericena & Dinner Show)',
+    address: 'Via Piero della Francesca, 55 (Arco della Pace / Corso Sempione) · 20154 Milano',
     distanceIt: '6 minuti in M5 Lilla (4 fermate: San Siro -> Domodossola / Gerusalemme)',
     distanceEn: '6 minutes on M5 Purple Line (4 stops: San Siro -> Domodossola / Gerusalemme)',
     transitIt: '6 min M5 Lilla diretta dallo Stadio · Ideale per gruppi di 8–30 persone',
@@ -192,9 +192,9 @@ const POST_MATCH_CLUBS = [
     priorityBadgeEn: '#5 Priority · 20th Floor San Siro View, 3 M5 Stops',
     anchorId: 'voya-rooftop-portello',
     slug: 'voya-rooftop-milan',
-    name: '5. Voya Rooftop Milan (#5 Priorità — Via Achille Papa 30, 20° Piano Portello/Isola — A 3 fermate M5 da San Siro Lotto/Portello)',
-    nameEn: '5. Voya Rooftop Milan (#5 Priority — Via Achille Papa 30, 20th Floor Portello — 3 M5 stops from San Siro Lotto/Portello)',
-    address: 'Viale Achille Papa, 30 (20° Piano — Portello / CityLife) — 20149 Milano',
+    name: '5. Voya Rooftop Milan (#5 Priorità · Via Achille Papa 30, 20° Piano Portello/Isola · A 3 fermate M5 da San Siro Lotto/Portello)',
+    nameEn: '5. Voya Rooftop Milan (#5 Priority · Via Achille Papa 30, 20th Floor Portello · 3 M5 stops from San Siro Lotto/Portello)',
+    address: 'Viale Achille Papa, 30 (20° Piano · Portello / CityLife) · 20149 Milano',
     distanceIt: '4 min / 3 fermate M5 Lotto->Portello (1,8 km in linea d’aria da San Siro)',
     distanceEn: '4 min / 3 stops M5 Lotto->Portello (1.8 km from San Siro Stadium)',
     transitIt: '3 fermate M5 Lilla diretta da San Siro a Portello + ascensore rapido al 20° piano',
@@ -215,9 +215,9 @@ const POST_MATCH_CLUBS = [
     priorityBadgeEn: '#6 Priority · Dirty Monday & House/Urban Weekends',
     anchorId: 'repvblic-milano-repubblica',
     slug: 'repvblic-milano',
-    name: '6. Repvblic Milano (#6 Priorità — Piazza della Repubblica — Dirty Monday dopo i posticipi del lunedì e grandi weekend House/Urban)',
-    nameEn: '6. Repvblic Milano (#6 Priority — Piazza della Repubblica — Dirty Monday after Monday Night Football & House/Urban Weekends)',
-    address: 'Piazza della Repubblica / Via Mecenate — Milano',
+    name: '6. Repvblic Milano (#6 Priorità · Piazza della Repubblica · Dirty Monday dopo i posticipi del lunedì e grandi weekend House/Urban)',
+    nameEn: '6. Repvblic Milano (#6 Priority · Piazza della Repubblica · Dirty Monday after Monday Night Football & House/Urban Weekends)',
+    address: 'Piazza della Repubblica / Via Mecenate · Milano',
     distanceIt: '15 min da San Siro (M5 Lilla fino a Garibaldi + 1 fermata Repubblica o Taxi)',
     distanceEn: '15 min from San Siro (M5 Line to Garibaldi + 1 stop to Repubblica or Taxi)',
     transitIt: 'Asse diretto M5 Garibaldi -> Piazza della Repubblica (vicino agli hotel 5 stelle)',
@@ -238,7 +238,7 @@ const SAN_SIRO_MATCH_CALENDAR = [
   {
     matchIt: 'Big Match Serie A Sabato Sera: AC Milan vs Juventus / Napoli / Roma a San Siro',
     matchEn: 'Saturday Night Serie A Big Match: AC Milan vs Juventus / Napoli / Roma at San Siro',
-    competition: 'Serie A Enilive — Anticipo Serale del Sabato',
+    competition: 'Serie A Enilive · Anticipo Serale del Sabato',
     kickoff: 'Sabato 20:45 (Fischio finale ~22:40)',
     whistleEn: 'Saturday 20:45 (Final Whistle ~22:40)',
     bestClubsIt: '#3 Aria Club (150m a piedi), #1 Just Me, #2 Pineta Corso Como, #4 55 Milano, #5 Voya, #6 Repvblic',
@@ -248,8 +248,8 @@ const SAN_SIRO_MATCH_CALENDAR = [
     endIsoDate: '2026-11-23T23:00:00+01:00',
   },
   {
-    matchIt: 'UEFA Champions League Night — FC Internazionale Milano in Casa a San Siro',
-    matchEn: 'UEFA Champions League Night — FC Internazionale Milano Home Fixture at San Siro',
+    matchIt: 'UEFA Champions League Night · FC Internazionale Milano in Casa a San Siro',
+    matchEn: 'UEFA Champions League Night · FC Internazionale Milano Home Fixture at San Siro',
     competition: 'UEFA Champions League (League Phase & Knockout)',
     kickoff: 'Martedì 21:00 (Fischio finale ~22:55)',
     whistleEn: 'Tuesday 21:00 (Final Whistle ~22:55)',
@@ -260,8 +260,8 @@ const SAN_SIRO_MATCH_CALENDAR = [
     endIsoDate: '2026-11-26T23:15:00+01:00',
   },
   {
-    matchIt: 'UEFA Champions League Night — AC Milan in Casa a San Siro',
-    matchEn: 'UEFA Champions League Night — AC Milan Home Fixture at San Siro',
+    matchIt: 'UEFA Champions League Night · AC Milan in Casa a San Siro',
+    matchEn: 'UEFA Champions League Night · AC Milan Home Fixture at San Siro',
     competition: 'UEFA Champions League (League Phase & Knockout)',
     kickoff: 'Mercoledì 21:00 (Fischio finale ~22:55)',
     whistleEn: 'Wednesday 21:00 (Final Whistle ~22:55)',
@@ -274,7 +274,7 @@ const SAN_SIRO_MATCH_CALENDAR = [
   {
     matchIt: 'Monday Night Serie A (Posticipo del Lunedì Sera di Inter o AC Milan a San Siro)',
     matchEn: 'Serie A Monday Night Football (Inter or AC Milan at San Siro)',
-    competition: 'Serie A — Posticipo del Lunedì',
+    competition: 'Serie A · Posticipo del Lunedì',
     kickoff: 'Lunedì 20:45 (Fischio finale ~22:40)',
     whistleEn: 'Monday 20:45 (Final Whistle ~22:40)',
     bestClubsIt: '#6 Repvblic Milano (Dirty Monday Hip-Hop/House) & #1 Just Me Torre Branca (Aperto 7/7)',
@@ -322,7 +322,7 @@ const SAN_SIRO_MATCH_CALENDAR = [
   {
     matchIt: 'Rush Finale Scudetto & Champions Serie A a San Siro (Aprile – Maggio 2027)',
     matchEn: 'Serie A Title Run-In & Final Home Fixtures at San Siro (April – May 2027)',
-    competition: 'Serie A Enilive — Giornate Finali Stagione 2026/2027',
+    competition: 'Serie A Enilive · Giornate Finali Stagione 2026/2027',
     kickoff: 'Sabato o Domenica 18:00 / 20:45',
     whistleEn: 'Saturday or Sunday 18:00 / 20:45',
     bestClubsIt: 'Royal Aperitivo & Festa Scudetto: #3 Aria (150m), #1 Just Me Garden, #2 Pineta, #4 55 Milano, #5 Voya',
@@ -379,7 +379,7 @@ export default async function FootballAfterpartiesPage({
     },
     {
       q: isIt
-        ? 'Quanto costa un Tavolo VIP post-partita nei 6 locali prioritari di Milano?'
+        ? 'Quanto costa un Tavolo VIP post-partita nei 6 club di riferimento di Milano?'
         : 'How much does a post-match VIP Table cost across Milan’s 6 priority clubs?',
       a: isIt
         ? 'Il prezzo del Tavolo VIP (100% convertito in bottiglie dal listino ufficiale e comprensivo di 6–10 pass salta-fila) parte da: €250–€400 da Aria Club (a 150m da San Siro) e 55 Milano; €250–€400 al 20° piano di Voya Rooftop; €300–€600 da Pineta Club Corso Como e Repvblic; €350–€500 in pista e €1.000–€3.000 nel Privé Branca da Just Me Milano.'
@@ -419,7 +419,7 @@ export default async function FootballAfterpartiesPage({
         '@id': `${canonicalUrl}#webpage`,
         url: canonicalUrl,
         name: isIt
-          ? 'Dopo Partita San Siro Milano 2026/2027: Dove Le Serate nei Club, Aperitivo e Tavoli VIP Dopo Inter e Milan'
+          ? 'Dopo Partita San Siro Milano 2026/2027: Dove Uscire nei Club, Aperitivo e Tavoli VIP Dopo Inter e Milan'
           : 'San Siro Football Match Afterparties Milan 2026/2027: Best Clubs, VIP Tables & Aperitivo After Inter & AC Milan',
         description: isIt
           ? 'Hub ufficiale Dopo-Partita Stadio San Siro (Giuseppe Meazza) Milano: i 6 migliori club e rooftop per terzo tempo, cena cantata e tavoli VIP dopo Inter, Milan, Derby e Champions League.'
@@ -583,13 +583,13 @@ export default async function FootballAfterpartiesPage({
 
           <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-6">
             {isIt
-              ? 'Dopo Partita San Siro Milano 2026/2027: Dove Le Serate nei Club, Fare Aperitivo e Prenotare Tavoli VIP Dopo le Partite di Inter e Milan (Serie A, Champions League, Derby e Coppa Italia)'
+              ? 'Dopo Partita San Siro Milano 2026/2027: Dove Uscire nei Club, Fare Aperitivo e Prenotare Tavoli VIP Dopo le Partite di Inter e Milan (Serie A, Champions League, Derby e Coppa Italia)'
               : 'San Siro Football Match Afterparties Milan 2026/2027: Where to Party, Enjoy Royal Aperitivo & Book VIP Tables After Inter & AC Milan Matches (Serie A, Champions League, Derby & Coppa Italia)'}
           </h1>
 
           <p className="text-base sm:text-xl text-white/75 leading-relaxed max-w-4xl mb-8">
             {isIt
-              ? 'Quando l’arbitro fischia la fine allo Stadio Giuseppe Meazza e 75.000 spettatori si riversano su Piazzale dello Sport e Piazzale Lotto, avere già il tuo Tavolo VIP o Royal Aperitivo riservato trasforma il post-partita in una serata leggendaria. Scopri i 6 locali prioritari di Milano — da Aria Club a soli 150 metri a piedi dai cancelli di San Siro, a Just Me sotto la Torre Branca (aperto 7 sere su 7 anche il Martedì e Mercoledì di Champions League), fino a Voya Rooftop al 20° piano (3 fermate M5), 55 Milano (4 fermate M5), Pineta Corso Como e Repvblic.'
+              ? 'Quando l’arbitro fischia la fine allo Stadio Giuseppe Meazza e 75.000 spettatori si riversano su Piazzale dello Sport e Piazzale Lotto, avere già il tuo Tavolo VIP o Royal Aperitivo riservato trasforma il post-partita in una serata leggendaria. Scopri i 6 club di riferimento di Milano · da Aria Club a soli 150 metri a piedi dai cancelli di San Siro, a Just Me sotto la Torre Branca (aperto 7 sere su 7 anche il Martedì e Mercoledì di Champions League), fino a Voya Rooftop al 20° piano (3 fermate M5), 55 Milano (4 fermate M5), Pineta Corso Como e Repvblic.'
               : 'When the final whistle blows at Giuseppe Meazza Stadium and 75,000 fans pour into Piazzale dello Sport and Piazzale Lotto, having your VIP Table or Royal Aperitivo pre-reserved turns matchday into an unforgettable Milanese night. Compare our 6 priority venues—from Aria Club just 150 meters on foot from the stadium gates, to Just Me under Torre Branca (open 7 nights a week including Tuesday & Wednesday Champions League nights), Voya Rooftop on the 20th floor (3 M5 stops), 55 Milano (4 M5 stops), Pineta Corso Como, and Repvblic.'}
           </p>
 
@@ -694,7 +694,7 @@ export default async function FootballAfterpartiesPage({
           <h2 id="indice-guida-san-siro" className="font-serif text-2xl sm:text-3xl font-bold text-champagne mb-4">
             {isIt
               ? 'Indice della Guida Ufficiale Dopo-Partita San Siro 2026/2027'
-              : 'Table of Contents — Official San Siro Post-Match Guide 2026/2027'}
+              : 'Table of Contents · Official San Siro Post-Match Guide 2026/2027'}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs sm:text-sm">
             <div>
@@ -1101,11 +1101,11 @@ export default async function FootballAfterpartiesPage({
                 <span>
                   {isIt ? (
                     <>
-                      <strong>Opzione 1 — A Piedi in 120 Secondi (150 metri):</strong> Esci dai cancelli Est di San Siro, attraversa Piazzale dello Sport fino al civico 14 ed entra da <strong>Aria Club Milano (#3 Priorità)</strong>. Mentre gli altri aspettano in coda, tu sei già nel Privé.
+                      <strong>Opzione 1 · A Piedi in 120 Secondi (150 metri):</strong> Esci dai cancelli Est di San Siro, attraversa Piazzale dello Sport fino al civico 14 ed entra da <strong>Aria Club Milano (#3 Priorità)</strong>. Mentre gli altri aspettano in coda, tu sei già nel Privé.
                     </>
                   ) : (
                     <>
-                      <strong>Option 1 — 120-Second Walk (150 meters):</strong> Exit the East Gates of San Siro, walk across Piazzale dello Sport to number 14, and step inside <strong>Aria Club Milano (#3 Priority)</strong>.
+                      <strong>Option 1 · 120-Second Walk (150 meters):</strong> Exit the East Gates of San Siro, walk across Piazzale dello Sport to number 14, and step inside <strong>Aria Club Milano (#3 Priority)</strong>.
                     </>
                   )}
                 </span>
@@ -1115,11 +1115,11 @@ export default async function FootballAfterpartiesPage({
                 <span>
                   {isIt ? (
                     <>
-                      <strong>Opzione 2 — Direttrice M5 Lilla (4–6 Minuti):</strong> Dalla stazione <em>San Siro Ippodromo</em> o <em>Lotto</em>, i treni automatici M5 partono ogni 3 minuti: in <strong>3 fermate (4 min)</strong> scendi a <em>Portello</em> per il 20° piano di <strong>Voya Rooftop (#5)</strong>; in <strong>4 fermate (6 min)</strong> scendi a <em>Domodossola/Gerusalemme</em> per <strong>55 Milano (#4)</strong> e <strong>Just Me Torre Branca (#1)</strong>.
+                      <strong>Opzione 2 · Direttrice M5 Lilla (4–6 Minuti):</strong> Dalla stazione <em>San Siro Ippodromo</em> o <em>Lotto</em>, i treni automatici M5 partono ogni 3 minuti: in <strong>3 fermate (4 min)</strong> scendi a <em>Portello</em> per il 20° piano di <strong>Voya Rooftop (#5)</strong>; in <strong>4 fermate (6 min)</strong> scendi a <em>Domodossola/Gerusalemme</em> per <strong>55 Milano (#4)</strong> e <strong>Just Me Torre Branca (#1)</strong>.
                     </>
                   ) : (
                     <>
-                      <strong>Option 2 — Automated M5 Purple Line (4–6 Minutes):</strong> From <em>San Siro Ippodromo</em> or <em>Lotto</em>, automated M5 trains depart every 3 minutes: reach <em>Portello</em> in <strong>3 stops (4 min)</strong> for <strong>Voya Rooftop (#5)</strong>, or <em>Domodossola/Gerusalemme</em> in <strong>4 stops (6 min)</strong> for <strong>55 Milano (#4)</strong> and <strong>Just Me (#1)</strong>.
+                      <strong>Option 2 · Automated M5 Purple Line (4–6 Minutes):</strong> From <em>San Siro Ippodromo</em> or <em>Lotto</em>, automated M5 trains depart every 3 minutes: reach <em>Portello</em> in <strong>3 stops (4 min)</strong> for <strong>Voya Rooftop (#5)</strong>, or <em>Domodossola/Gerusalemme</em> in <strong>4 stops (6 min)</strong> for <strong>55 Milano (#4)</strong> and <strong>Just Me (#1)</strong>.
                     </>
                   )}
                 </span>
@@ -1129,11 +1129,11 @@ export default async function FootballAfterpartiesPage({
                 <span>
                   {isIt ? (
                     <>
-                      <strong>Opzione 3 — Corso Como &amp; Repubblica (12–15 Minuti):</strong> Proseguendo sulla stessa linea M5 Lilla senza cambi arrivi in 12 minuti a <em>Cenisio / Porta Garibaldi</em> per il <strong>Pineta Club (#2 Priorità)</strong> e in 15 minuti a <strong>Repvblic Milano (#6 Priorità)</strong>.
+                      <strong>Opzione 3 · Corso Como &amp; Repubblica (12–15 Minuti):</strong> Proseguendo sulla stessa linea M5 Lilla senza cambi arrivi in 12 minuti a <em>Cenisio / Porta Garibaldi</em> per il <strong>Pineta Club (#2 Priorità)</strong> e in 15 minuti a <strong>Repvblic Milano (#6 Priorità)</strong>.
                     </>
                   ) : (
                     <>
-                      <strong>Option 3 — Corso Como &amp; Repubblica (12–15 Minutes):</strong> Stay on the same M5 Purple Line with zero transfers to reach <em>Cenisio / Porta Garibaldi</em> in 12 minutes for <strong>Pineta Club (#2 Priority)</strong> and 15 minutes for <strong>Repvblic Milano (#6 Priority)</strong>.
+                      <strong>Option 3 · Corso Como &amp; Repubblica (12–15 Minutes):</strong> Stay on the same M5 Purple Line with zero transfers to reach <em>Cenisio / Porta Garibaldi</em> in 12 minutes for <strong>Pineta Club (#2 Priority)</strong> and 15 minutes for <strong>Repvblic Milano (#6 Priority)</strong>.
                     </>
                   )}
                 </span>
@@ -1192,7 +1192,7 @@ export default async function FootballAfterpartiesPage({
           <h2 className="font-serif text-3xl sm:text-4xl font-bold text-champagne mb-3">
             {isIt
               ? 'Domande Frequenti (FAQ) sul Dopo-Partita a San Siro Milano (Inter & Milan)'
-              : 'Frequently Asked Questions (FAQ) — San Siro Match Afterparties in Milan'}
+              : 'Frequently Asked Questions (FAQ) · San Siro Match Afterparties in Milan'}
           </h2>
           <p className="text-white/65 text-sm sm:text-base mb-8">
             {isIt

@@ -235,7 +235,7 @@ export default async function PrivatePartiesPage({
         </h1>
         <p className="text-xl text-white/65 max-w-3xl mb-8">
           {isIt
-            ? 'Pacchetti chiavi in mano nei 6 locali prioritari di Milano (Just Me, Pineta, Aria, 55 Milano, Voya Rooftop, Repvblic) senza alcun costo di agenzia: aree riservate per aperitivo e torta, cene spettacolo e privé dopocena con bottle parade.'
+            ? 'Pacchetti chiavi in mano nei 6 club di riferimento di Milano (Just Me, Pineta, Aria, 55 Milano, Voya Rooftop, Repvblic) senza alcun costo di agenzia: aree riservate per aperitivo e torta, cene spettacolo e privé dopocena con bottle parade.'
             : 'Turnkey packages at Milan’s Top 6 priority venues (Just Me, Pineta, Aria, 55 Milano, Voya Rooftop, Repvblic) with zero agency fees: private aperitivo & cake lounges, dinner shows, and nightclub VIP tables with sparkler parades.'}
         </p>
 
