@@ -242,14 +242,26 @@ export default function DateSensitiveCalendar({
   const dateFormatter = new Intl.DateTimeFormat(localeTag, { timeZone: 'Europe/Rome', weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
   const shortDateFormatter = new Intl.DateTimeFormat(localeTag, { timeZone: 'Europe/Rome', weekday: 'short', day: 'numeric', month: 'short' });
   const monthFormatter = new Intl.DateTimeFormat(localeTag, { timeZone: 'Europe/Rome', month: 'long', year: 'numeric' });
-  const isItLocale = localeTag.toLowerCase().startsWith('it');
+  const langKey = localeTag.toLowerCase().split('-')[0];
+  const featuredLabelByLang: Record<string, string> = {
+    en: 'Featured Nights', it: 'Serate in Programma', es: 'Noches Destacadas', fr: 'Soirées à l’Affiche',
+    de: 'Kommende Clubnächte', pt: 'Noites em Destaque', nl: 'Uitgelichte Avonden', ru: 'Ближайшие Вечеринки',
+    tr: 'Öne Çıkan Geceler', zh: '精选派对日程', ar: 'السهرات المميزة', bg: 'Избрани Вечери',
+    hr: 'Istaknute Večeri', cs: 'Vybrané Večery', da: 'Udvalgte Aftener', et: 'Valitud Peod',
+    fi: 'Valikoidut Illat', el: 'Επιλεγμένες Βραδιές', hu: 'Kiemelt Estek', ga: 'Oícheanta Roghnaithe',
+    lv: 'Izvēlētie Vakari', lt: 'Rinktiniai Vakarai', mt: 'Serati Magħżula', pl: 'Polecane Wieczory',
+    ro: 'Seri Recomandate', sk: 'Vybrané Večery', sl: 'Izbrani Večeri', sv: 'Utvalda Kvällar',
+    no: 'Utvalgte Kvelder', is: 'Valin Kvöld', uk: 'Обрані Вечірки', sq: 'Mbrëmjet e Përzgjedhura',
+    sr: 'Издвојене Вечери', bs: 'Izdvojene Večeri', mk: 'Издвоени Вечери',
+  };
+  const featuredSuffix = featuredLabelByLang[langKey] || featuredLabelByLang.en;
   const priorityGroups: Array<{ key: string; label: string; isDay: boolean; events: DateSensitiveEventPresentation[] }> = [
-    { venueId: 'v-justme', label: isItLocale ? '1. Just Me Milano (Torre Branca) — Serate in Programma' : '1. Just Me Milano (Torre Branca) — Featured Nights' },
-    { venueId: 'v-pineta', label: isItLocale ? '2. Pineta Club Milano — Serate in Programma' : '2. Pineta Club Milano — Featured Nights' },
-    { venueId: 'v-aria', label: isItLocale ? '3. Aria Club Milano — Serate in Programma' : '3. Aria Club Milano — Featured Nights' },
-    { venueId: 'v-55milano', label: isItLocale ? '4. 55 Milano — Serate in Programma' : '4. 55 Milano — Featured Nights' },
-    { venueId: 'v-voya', label: isItLocale ? '5. Voya Rooftop Milano — Serate in Programma' : '5. Voya Rooftop Milano — Featured Nights' },
-    { venueId: 'v-repvblic', label: isItLocale ? '6. Repvblic Milano — Serate in Programma' : '6. Repvblic Milano — Featured Nights' },
+    { venueId: 'v-justme', label: `1. Just Me Milano (Torre Branca) · ${featuredSuffix}` },
+    { venueId: 'v-pineta', label: `2. Pineta Club Milano · ${featuredSuffix}` },
+    { venueId: 'v-aria', label: `3. Aria Club Milano · ${featuredSuffix}` },
+    { venueId: 'v-55milano', label: `4. 55 Milano · ${featuredSuffix}` },
+    { venueId: 'v-voya', label: `5. Voya Rooftop Milano · ${featuredSuffix}` },
+    { venueId: 'v-repvblic', label: `6. Repvblic Milano · ${featuredSuffix}` },
   ].flatMap(({ venueId, label }) => {
     const venueEvents = visible
       .filter(event => getVenuePriorityRank(event.venueId || event.venueName) === getVenuePriorityRank(venueId))

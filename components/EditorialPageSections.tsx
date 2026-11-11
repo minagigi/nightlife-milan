@@ -72,7 +72,7 @@ const CLUB_DEEP_META: Record<string, {
     bestNightsEn: 'Tuesday through Sunday · Friday Dinner Show, Saturday The Wall, Sunday Latin Night',
   },
   'voya-rooftop-milan': {
-    metro: 'M5 Portello / M1 QT8 (Viale Achille Papa 30 — 20° Piano World Join Center)',
+    metro: 'M5 Portello / M1 QT8 (Viale Achille Papa 30: 20° Piano World Join Center)',
     parking: 'Parcheggio World Join Center / Viale Achille Papa 30',
     soundIt: 'Skyline Dinner Show, Vocal House, Commercial Elegance & Sunset DJ Set',
     soundEn: 'Skyline Dinner Show, Vocal House, Commercial Elegance & Sunset DJ Set',
@@ -98,7 +98,7 @@ const CLUB_DEEP_META: Record<string, {
     bestNightsEn: 'Friday and Saturday Luxury Dinner Show & Clubbing until 05:00',
   },
   'just-me-milano': {
-    metro: 'M2 Lanza / M1 Cairoli / M5 Tre Torri (Parco Sempione — Torre Branca)',
+    metro: 'M2 Lanza / M1 Cairoli / M5 Tre Torri (Parco Sempione: Torre Branca)',
     parking: 'Parcheggio Viale Alemagna / Piazzale Cadorna (300 m)',
     soundIt: 'Commercial Dance, Vocal House, Sing-Along & International Club Hits',
     soundEn: 'Commercial Dance, Vocal House, Sing-Along & International Club Hits',
@@ -228,7 +228,7 @@ const CLUB_DEEP_META: Record<string, {
     bestNightsEn: 'Thursday, Friday, Saturday, and Sunday (Afro House Rituals & Electronic Showcases)',
   },
   'fabrique-milano': {
-    metro: 'M4 Repetti + Bus/Tram 27 (Via Gaudenzio Fantoli 9 — Mecenate)',
+    metro: 'M4 Repetti + Bus/Tram 27 (Via Gaudenzio Fantoli 9: Mecenate)',
     parking: 'Ampio Parcheggio Via Fantoli / Mecenate adiacente alla venue',
     soundIt: 'Big-Room Techno, Hard Techno, Tech-House Festivals & International Live Tours',
     soundEn: 'Big-Room Techno, Hard Techno, Tech-House Festivals & International Live Tours',
@@ -241,7 +241,7 @@ const CLUB_DEEP_META: Record<string, {
     bestNightsEn: 'Major Friday, Saturday, and Holiday Showcases (Halloween, NYE, Fashion & Design Week)',
   },
   'magazzini-generali-milano': {
-    metro: 'M3 Lodi TIBB (600 m da Via Pietrasanta 16 — Porta Romana)',
+    metro: 'M3 Lodi TIBB (600 m da Via Pietrasanta 16: Porta Romana)',
     parking: 'Parcheggio Via Pietrasanta / Viale Toscana (150 m)',
     soundIt: 'Techno, Electronic Showcases, Format 90s/2000s & International Club Nights',
     soundEn: 'Techno, Electronic Showcases, 90s/2000s Formats & International Club Nights',
@@ -684,7 +684,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
             </Link>
           </section>
 
-          {/* Pillar 2: The Sound & Faces of Milan — 7 Insider Interviews */}
+          {/* Pillar 2: The Sound & Faces of Milan: 7 Insider Interviews */}
           <section className="bg-[#0B0A09] px-6 py-14 sm:px-14">
             <p className="mb-2 font-mono text-xs uppercase tracking-[0.26em] text-[#D6BE96]">
               {isIt ? 'RUBRICA EDITORIALE · THE SOUND & FACES OF MILAN' : 'EDITORIAL SERIES · THE SOUND & FACES OF MILAN'}

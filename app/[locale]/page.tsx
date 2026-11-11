@@ -76,7 +76,7 @@ const HOME_SAFE_COPY: Record<HomeIndexedLocale, {
     venueTags: ['District & Address', 'Music & Format', 'VIP & Guest List'],
     featuredImageAlts: ['JustMe Milano glass pavilion and illuminated garden at Parco Sempione', 'Rooftop aperitivo terrace in Milan at sunset', 'VIP bottle service table at a luxury Milan nightclub'],
     keywords: ['milan nightlife', 'best clubs milan', 'vip tables milan', 'guest list milan clubs', 'aperitivo milan', 'tonight events milan', 'bottle service milan'],
-    ogImageAlt: 'Milan Nightlife Official Guide — VIP Tables, Clubs & Events',
+    ogImageAlt: 'Milan Nightlife Official Guide: VIP Tables, Clubs & Events',
     requestLabel: 'VIP Concierge Desk',
     requestAction: 'Book via WhatsApp Concierge',
     requestDisclaimer: 'Fast-track VIP table quotes, bottle lists, and nominal guest list registration via WhatsApp +39 351 912 7047.',
@@ -104,7 +104,7 @@ const HOME_SAFE_COPY: Record<HomeIndexedLocale, {
     venueTags: ['Quartiere & Indirizzo', 'Musica & Format', 'Tavoli VIP & Lista'],
     featuredImageAlts: ['Padiglione in vetro e giardino illuminato del JustMe Milano a Parco Sempione', 'Terrazza aperitivo panoramica a Milano al tramonto', 'Servizio bottle show al tavolo VIP in un club di Milano'],
     keywords: ['vita notturna milano', 'migliori discoteche milano', 'tavoli vip milano', 'liste discoteche milano', 'aperitivo milano', 'serate milano stasera', 'bottle service milano'],
-    ogImageAlt: 'Guida Ufficiale Vita Notturna Milano — Tavoli VIP, Club ed Eventi',
+    ogImageAlt: 'Guida Ufficiale Vita Notturna Milano: Tavoli VIP, Club ed Eventi',
     requestLabel: 'Concierge Tavoli & Liste',
     requestAction: 'Prenota su WhatsApp Concierge',
     requestDisclaimer: 'Preventivi rapidi tavoli VIP, listini bottiglie e accredito in lista nominale su WhatsApp +39 351 912 7047.',
@@ -429,7 +429,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                         quality={92}
                         className="object-cover group-hover:scale-[1.04] transition-transform duration-700"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+                      <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, #0505058c, transparent)' }} />
                     </Link>
                     <div className="flex justify-between items-center mt-4 font-mono text-[11px] tracking-[0.18em] uppercase text-[#847C6F]">
                       <span>FIG. 0{idx + 1} · {v.zone}</span>
@@ -712,7 +712,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                       className="object-cover hover:scale-105 transition-transform duration-700"
                       sizes="(max-width: 1024px) 100vw, 65vw"
                     />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(to top, #05050599, transparent)' }} />
                   </div>
                   <div className="flex justify-between mt-2.5 font-mono text-[11px] tracking-[0.16em] uppercase text-[#847C6F]">
                     <span>ATTO I · H 19:30 ROYAL APERITIVO &amp; SUNSET</span>
@@ -730,7 +730,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                       className="object-cover hover:scale-105 transition-transform duration-700"
                       sizes="(max-width: 1024px) 50vw, 45vw"
                     />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(to top, #05050599, transparent)' }} />
                   </div>
                   <div className="mt-2 font-mono text-[11px] tracking-[0.16em] uppercase text-[#847C6F]">
                     ATTO II · H 23:30 OPENING &amp; LISTA
@@ -747,7 +747,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                       className="object-cover hover:scale-105 transition-transform duration-700"
                       sizes="(max-width: 1024px) 50vw, 45vw"
                     />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(to top, #05050599, transparent)' }} />
                   </div>
                   <div className="mt-2 font-mono text-[11px] tracking-[0.16em] uppercase text-[#847C6F]">
                     ATTO III · H 01:30 PRIVÉ &amp; BOTTLE SHOW

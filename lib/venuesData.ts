@@ -19,10 +19,10 @@ export const venuesData: Venue[] = [
     localizedContent: {
       name: { en: "Just Me", it: "Just Me" },
       description: {
-        en: "Designed by Italo Rota, Just Me sits beneath the Torre Branca in Sempione. Fashion crowd, house and commercial sets, velvet and steel. The door reads the room — arrive in a small, sharp group.",
-        it: "Firmato Italo Rota, il Just Me è sotto la Torre Branca, in Sempione. Crowd fashion, house e commerciale, velluto e acciaio. La selezione legge la sala — presentati in un gruppo piccolo e curato."
+        en: "Designed by Italo Rota, Just Me sits beneath the Torre Branca in Sempione. Fashion crowd, house and commercial sets, velvet and steel. The door reads the room: arrive in a small, sharp group.",
+        it: "Firmato Italo Rota, il Just Me è sotto la Torre Branca, in Sempione. Crowd fashion, house e commerciale, velluto e acciaio. La selezione legge la sala: presentati in un gruppo piccolo e curato."
       },
-      dressCode: { en: "Strictly Elegant — No sneakers, no casual, fashion-forward only", it: "Rigorosamente Elegante — No sneakers, no casual, solo moda" },
+      dressCode: { en: "Strictly Elegant: No sneakers, no casual, fashion-forward only", it: "Rigorosamente Elegante: No sneakers, no casual, solo moda" },
       altTextImg: { en: "Just Me Milan nightclub Italo Rota design Torre Branca Sempione VIP tables", it: "Just Me Milano discoteca design Italo Rota Torre Branca Sempione tavoli VIP" },
       insiderTip: { en: "Ask for Privé Branca: you dance directly under the tower's lit steel pillars. It fills first during Fashion Week.", it: "Chiedi il Privé Branca: balli sotto i pilastri d'acciaio illuminati della torre. Si riempie per primo durante la Fashion Week." }
     },
@@ -62,9 +62,9 @@ export const venuesData: Venue[] = [
         en: "Twentieth floor, Isola. The Milan skyline runs the length of the glass while the bar pours till late. Aperitivo turns into a DJ set without anyone noticing.",
         it: "Ventesimo piano, Isola. Lo skyline di Milano corre lungo le vetrate mentre il bar versa fino a tardi. L'aperitivo diventa DJ set senza che te ne accorga."
       },
-      dressCode: { en: "Smart Elegant — No sportswear, no shorts", it: "Smart Elegant — No abbigliamento sportivo" },
+      dressCode: { en: "Smart Elegant: No sportswear, no shorts", it: "Smart Elegant: No abbigliamento sportivo" },
       altTextImg: { en: "Voya Rooftop Milan skyline view from 20th floor at night", it: "Vista skyline di Milano dal Voya Rooftop al 20° piano" },
-      insiderTip: { en: "Go for sunset, stay for the night. Window tables go first — book a day ahead.", it: "Vai al tramonto, resta per la notte. I tavoli sulla vetrata vanno via subito — prenota con un giorno di anticipo." }
+      insiderTip: { en: "Go for sunset, stay for the night. Window tables go first: book a day ahead.", it: "Vai al tramonto, resta per la notte. I tavoli sulla vetrata vanno via subito: prenota con un giorno di anticipo." }
     },
     image: "/images/voya-rooftop-milan.webp",
     isManaged: true,
@@ -103,9 +103,9 @@ export const venuesData: Venue[] = [
         en: "Corso Como's singing aperitivo. Long shared tables, buffet from 19:30, everyone on their feet by midnight. Reggaeton and commercial, zero pretension.",
         it: "L'aperitivo cantato di Corso Como. Tavoli lunghi condivisi, buffet dalle 19:30, tutti in piedi entro mezzanotte. Reggaeton e commerciale, zero pretese."
       },
-      dressCode: { en: "Chic & Fashion — No sportswear, no sneakers", it: "Chic e Fashion — No sportswear, no sneakers" },
+      dressCode: { en: "Chic & Fashion: No sportswear, no sneakers", it: "Chic e Fashion: No sportswear, no sneakers" },
       altTextImg: { en: "Pineta Club Milan aperitivo cantato Via Messina 38 Corso Como nightclub", it: "Aperitivo Cantato Pineta Club Milano Via Messina 38 Corso Como" },
-      insiderTip: { en: "Come for the buffet at 19:30 to claim a table — by 22:00 it's standing room only.", it: "Arriva al buffet delle 19:30 per prendere il tavolo — alle 22:00 si sta solo in piedi." }
+      insiderTip: { en: "Come for the buffet at 19:30 to claim a table: by 22:00 it's standing room only.", it: "Arriva al buffet delle 19:30 per prendere il tavolo: alle 22:00 si sta solo in piedi." }
     },
     image: "/images/venues/pineta-milano/pineta-milano-ingresso-01.webp",
     isManaged: true,
@@ -145,7 +145,7 @@ export const venuesData: Venue[] = [
       },
       dressCode: { en: "Urban Chic", it: "Urban Chic" },
       altTextImg: { en: "Play Club Dancefloor", it: "Pista da ballo del Play Club" },
-      insiderTip: { en: "Clean fashion sneakers are fine here — leave the gym kit at home.", it: "Le sneakers fashion pulite vanno bene — lascia a casa il completo da palestra." }
+      insiderTip: { en: "Clean fashion sneakers are fine here: leave the gym kit at home.", it: "Le sneakers fashion pulite vanno bene: lascia a casa il completo da palestra." }
     },
     image: "/images/play-club-milano.webp",
     isManaged: true,
@@ -271,7 +271,7 @@ export const venuesData: Venue[] = [
       },
       dressCode: { en: "Elegant & Urban", it: "Elegante e Urbano" },
       altTextImg: { en: "11 Clubroom Interior", it: "Interno dell'11 Clubroom" },
-      insiderTip: { en: "Intimacy is the draw — a table here goes a long way.", it: "L'intimità è il punto forte — qui un tavolo fa la differenza." }
+      insiderTip: { en: "Intimacy is the draw: a table here goes a long way.", it: "L'intimità è il punto forte: qui un tavolo fa la differenza." }
     },
     image: "/images/11-clubroom-milan.webp",
     isManaged: true,
@@ -312,7 +312,7 @@ export const venuesData: Venue[] = [
       },
       dressCode: { en: "Avant-Garde & Fashion", it: "Avant-Garde e Fashion" },
       altTextImg: { en: "Church 81 Architecture", it: "Architettura del Church 81" },
-      insiderTip: { en: "A table under the arches is the seat in the house — ask for it.", it: "Un tavolo sotto gli archi è il posto migliore — chiedilo." }
+      insiderTip: { en: "A table under the arches is the seat in the house: ask for it.", it: "Un tavolo sotto gli archi è il posto migliore: chiedilo." }
     },
     image: "/images/church-81-milano.webp",
     isManaged: true,
@@ -353,7 +353,7 @@ export const venuesData: Venue[] = [
       },
       dressCode: { en: "Business Elegant", it: "Business Elegant" },
       altTextImg: { en: "MIB Milano Dinner Show", it: "Cena Spettacolo al MIB Milano" },
-      insiderTip: { en: "Golden hour is the window — get there by 18:30.", it: "L'ora d'oro è la finestra giusta — arriva entro le 18:30." }
+      insiderTip: { en: "Golden hour is the window: get there by 18:30.", it: "L'ora d'oro è la finestra giusta: arriva entro le 18:30." }
     },
     image: "/images/mib-milano.webp",
     isManaged: true,
@@ -394,7 +394,7 @@ export const venuesData: Venue[] = [
       },
       dressCode: { en: "Strictly Elegant (Collar required for men)", it: "Rigorosamente Elegante (Camicia obbligatoria per gli uomini)" },
       altTextImg: { en: "Gattopardo Chandelier", it: "Lampadario del Gattopardo" },
-      insiderTip: { en: "Dress the part — this is the one room where elegance isn't optional.", it: "Vestiti all'altezza — è l'unica sala dove l'eleganza non è opzionale." }
+      insiderTip: { en: "Dress the part: this is the one room where elegance isn't optional.", it: "Vestiti all'altezza: è l'unica sala dove l'eleganza non è opzionale." }
     },
     image: "/images/gattopardo-milano.webp",
     isManaged: true,
@@ -476,7 +476,7 @@ export const venuesData: Venue[] = [
       },
       dressCode: { en: "Dark & Edgy", it: "Scuro ed Edgy" },
       altTextImg: { en: "Magazzini Generali Club Interior", it: "Interno del Magazzini Generali" },
-      insiderTip: { en: "Check which floor your night is on before you go — they program independently.", it: "Controlla su quale piano è la tua serata prima di uscire — i due piani programmano in modo indipendente." }
+      insiderTip: { en: "Check which floor your night is on before you go: they program independently.", it: "Controlla su quale piano è la tua serata prima di uscire: i due piani programmano in modo indipendente." }
     },
     image: "/images/magazzini-generali-milano.webp",
     isPriority: false,
@@ -597,7 +597,7 @@ export const venuesData: Venue[] = [
       },
       dressCode: { en: "Glamour & Trendy", it: "Glamour e Trendy" },
       altTextImg: { en: "Hollywood Club Milan", it: "Club Hollywood Milano" },
-      insiderTip: { en: "It's a classic for a reason — dress sharp and lean into it.", it: "È un classico per un motivo — vestiti bene e assecondalo." }
+      insiderTip: { en: "It's a classic for a reason: dress sharp and lean into it.", it: "È un classico per un motivo: vestiti bene e assecondalo." }
     },
     image: "/images/hollywood-milano.webp",
     isPriority: false,
@@ -637,7 +637,7 @@ export const venuesData: Venue[] = [
       },
       dressCode: { en: "Alternative & Eclectic", it: "Alternativo ed Eclettico" },
       altTextImg: { en: "Apollo Club Milan", it: "Club Apollo Milano" },
-      insiderTip: { en: "Start at the bar before the floor fills — the cocktails are the point.", it: "Inizia al bancone prima che si riempia la pista — i cocktail sono il punto." }
+      insiderTip: { en: "Start at the bar before the floor fills: the cocktails are the point.", it: "Inizia al bancone prima che si riempia la pista: i cocktail sono il punto." }
     },
     image: "/images/apollo-club-milano.webp",
     isPriority: false,
@@ -677,7 +677,7 @@ export const venuesData: Venue[] = [
       },
       dressCode: { en: "Smart Elegant", it: "Smart Elegant" },
       altTextImg: { en: "Ceresio 7 Rooftop Pool", it: "Piscina sul Tetto del Ceresio 7" },
-      insiderTip: { en: "Sunset by the pool bar is the move. Reserve — it's tight in summer.", it: "Il tramonto al pool bar è la mossa giusta. Prenota — d'estate è pieno." }
+      insiderTip: { en: "Sunset by the pool bar is the move. Reserve: it's tight in summer.", it: "Il tramonto al pool bar è la mossa giusta. Prenota: d'estate è pieno." }
     },
     image: "/images/ceresio-7-milano.webp",
     isManaged: false,
@@ -757,9 +757,9 @@ export const venuesData: Venue[] = [
         en: "New concept club near San Siro. Aperitivo buffet from 19:30, then full club until dawn. Three separate areas: Dance Floor Tables, Privé Aria and Privé DJ. Thursday to Saturday.",
         it: "Nuovo concept club vicino a San Siro. Aperitivo a buffet dalle 19:30, poi club fino all'alba. Tre aree distinte: Dance Floor Table, Privé Aria e Privé DJ. Dal giovedì al sabato."
       },
-      dressCode: { en: "Smart Elegant — No sportswear, no sneakers", it: "Smart Elegant — No abbigliamento sportivo, no sneakers" },
+      dressCode: { en: "Smart Elegant: No sportswear, no sneakers", it: "Smart Elegant: No abbigliamento sportivo, no sneakers" },
       altTextImg: { en: "Aria Club Milano interior dancefloor San Siro nightclub", it: "Aria Club Milano interno pista da ballo San Siro discoteca" },
-      insiderTip: { en: "Arrive at aperitivo (19:30) to secure a Dance Floor Table — they book out fast on Fridays. The Privé DJ area is the quieter, more exclusive option.", it: "Arriva all'aperitivo (19:30) per assicurarti un Dance Floor Table — si esauriscono subito il venerdì. Il Privé DJ è l'opzione più tranquilla ed esclusiva." }
+      insiderTip: { en: "Arrive at aperitivo (19:30) to secure a Dance Floor Table: they book out fast on Fridays. The Privé DJ area is the quieter, more exclusive option.", it: "Arriva all'aperitivo (19:30) per assicurarti un Dance Floor Table: si esauriscono subito il venerdì. Il Privé DJ è l'opzione più tranquilla ed esclusiva." }
     },
     image: "/images/venues/aria-club-milano/aria-club-milano-interior-01.webp",
     gallery: [
@@ -832,7 +832,7 @@ export const venuesData: Venue[] = [
       },
       dressCode: { en: "Smart Casual / Theme Night", it: "Casual Curato / Tema Evento" },
       altTextImg: { en: "Alcatraz Milano mega club 3 dancefloors", it: "Alcatraz Milano mega club 3 piste da ballo" },
-      insiderTip: { en: "Ideal for large university groups, graduation parties, Halloween, and New Year's Eve — book the elevated VIP balcony overlooking the main stage.", it: "Ideale per grandi gruppi universitari, feste di laurea, Halloween e Capodanno — prenota la balconata VIP rialzata sul palco centrale." }
+      insiderTip: { en: "Ideal for large university groups, graduation parties, Halloween, and New Year's Eve: book the elevated VIP balcony overlooking the main stage.", it: "Ideale per grandi gruppi universitari, feste di laurea, Halloween e Capodanno: prenota la balconata VIP rialzata sul palco centrale." }
     },
     image: "/images/pillars/venue-alcatraz.webp",
     isManaged: true,

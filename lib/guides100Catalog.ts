@@ -7477,7 +7477,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "name": "Ferragosto Aperto a Milano (15 Agosto e tutto Agosto): Club Estivi, Giardini e Rooftop Aperti",
     "shortName": "Ferragosto Aperto a Milano",
     "zone": "Parco Sempione, San Siro, Corso Como & Duomo",
-    "address": "Just Me (Open 7/7 all August!), Aria Club Summer Garden, Old Fashion Park, Terrazza Duomo 21, Hollywood, Bobino",
+    "address": "Just Me Milano (7/7), Aria Club, Old Fashion, Terrazza Duomo 21, Hollywood, Bobino",
     "hours": "19:30 Ferragosto Garden Buffet & Dinner – 05:00 Open-Air Dancing",
     "age": "20+ International Tourists & Milan Summer Crowd",
     "metro": "M1 Cadorna/Duomo, M5 San Siro, M2 Garibaldi/Porta Genova",

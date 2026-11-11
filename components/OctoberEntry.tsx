@@ -313,8 +313,8 @@ export function HomeHalloweenAndCapodannoSections({
               </h2>
               <p className="mt-4 font-sans text-sm sm:text-base text-[#C2B9AA] leading-relaxed">
                 {isIt
-                  ? 'In prima fila i 6 club e rooftop simbolo di Milano (1. Just Me, 2. Pineta, 3. Aria, 4. 55 Milano, 5. Voya Rooftop — il Capodanno Rooftop Numero 1 di Milano con menu completo di tutto a 300€ a persona — e 6. Repvblic), seguiti da tutti i 112 eventi di San Silvestro.'
-                  : 'Starting with our 6 priority venues (1. Just Me, 2. Pineta, 3. Aria, 4. 55 Milano, 5. Voya Rooftop — Milan’s #1 Rooftop NYE with full all-inclusive menu at €300/person — and 6. Repvblic), followed by all 112 New Year’s Eve events.'}
+                  ? 'In prima fila i 6 club e rooftop simbolo di Milano (1. Just Me, 2. Pineta, 3. Aria, 4. 55 Milano, 5. Voya Rooftop, il Capodanno Rooftop Numero 1 di Milano con menu completo di tutto a 300€ a persona, e 6. Repvblic), seguiti da tutti i 112 eventi di San Silvestro.'
+                  : 'Starting with our 6 priority venues (1. Just Me, 2. Pineta, 3. Aria, 4. 55 Milano, 5. Voya Rooftop, Milan’s #1 Rooftop NYE with full all-inclusive menu at €300/person, and 6. Repvblic), followed by all 112 New Year’s Eve events.'}
               </p>
             </div>
             <div className="flex flex-wrap gap-3 shrink-0">
