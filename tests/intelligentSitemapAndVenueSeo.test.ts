@@ -61,7 +61,7 @@ test('Pillar A: all 33 active public venues have full authority specs, SERP meta
     const schema = generateClubSchema({
       venue,
       locale: 'it',
-      canonicalUrl: `https://nightlifemilan.com/it/discoteche/${venue.slugs.it}`,
+      canonicalUrl: `https://nightlifemilan.com/it/locali/${venue.slugs.it}`,
       name: h1It,
       description: getLocalizedText(venue.localizedContent.description, 'it'),
       schemaType: spec.schemaType,
