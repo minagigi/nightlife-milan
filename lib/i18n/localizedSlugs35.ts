@@ -1624,6 +1624,11 @@ export function localizeInternalHref(rawHref: string, fallbackLocale: LocaleCode
 const LEGACY_NYE_VENUE_TO_BASE: Readonly<Record<string, string>> = {
   '55-milano': 'capodanno-55-milano',
   'just-me-milano': 'capodanno-justme-milano-torre-branca',
+  'just-me-garda': 'capodanno-justme-garda-lake',
+  'justme-garda': 'capodanno-justme-garda-lake',
+  'justme-garda-lake': 'capodanno-justme-garda-lake',
+  'just-me-lago-di-garda': 'capodanno-justme-garda-lake',
+  'justme-lago-di-garda': 'capodanno-justme-garda-lake',
   'tocqueville-13-milano': 'capodanno-tocqueville-13-milano',
   'armani-prive-milano': 'capodanno-armani-prive-milano',
   'the-club-milano': 'capodanno-the-club-milano',
@@ -1784,6 +1789,9 @@ export function resolveLegacyOrExpiredEventRedirect(rawSlug: string, targetLocal
 
   // 6. Legacy flat Capodanno / NYE 2027 event slugs crawled by GSC
   if (stripped.includes('2027') && LEGACY_NYE_2027_RE.test(stripped)) {
+    if (/(?:just-?me.*(?:garda|lonato|desenzano)|(?:garda|lonato|desenzano).*just-?me)/i.test(stripped)) {
+      return capodannoEventPath('capodanno-justme-garda-lake', targetLocale);
+    }
     for (const [re, baseSlug] of NYE_EVENT_STEM_MATCHERS) {
       if (re.test(stripped)) {
         return capodannoEventPath(baseSlug, targetLocale);

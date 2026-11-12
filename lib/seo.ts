@@ -8,7 +8,7 @@ import {
   localizeInternalHref,
 } from './i18n/localizedSlugs35';
 
-// Helper to get localized string — qualsiasi locale del registry, fallback a 'en'
+// Helper to get localized string - qualsiasi locale del registry, fallback a 'en'
 export const getLocalizedText = (text: LocalizedString, lang: string): string => {
   const value = (text as Record<string, string | undefined>)[lang];
   return value || text.en;
@@ -56,7 +56,7 @@ export const generateEventSchema = (
   }
 
   if (event.image) {
-    // L'immagine nello schema deve sempre essere un URL assoluto — event.image
+    // L'immagine nello schema deve sempre essere un URL assoluto - event.image
     // arriva spesso come path relativo (es. '/images/events/...').
     schema.image = event.image.startsWith('http') ? event.image : `${baseUrl}${event.image}`;
   }
@@ -95,7 +95,7 @@ export const generateEventSchema = (
     };
   }
 
-  // Offers Schema (Pricing) — solo se abbiamo un prezzo reale confermato.
+  // Offers Schema (Pricing) - solo se abbiamo un prezzo reale confermato.
   // Un Offer con un prezzo inventato/sbagliato è peggio di nessun Offer.
   const offer = buildOfferSchema(event.pricing, eventUrl, event.dateISO);
   if (offer) schema.offers = offer;
@@ -104,12 +104,12 @@ export const generateEventSchema = (
 };
 
 /**
- * Offer reale a partire dai soli dati di pricing confermati sull'evento —
+ * Offer reale a partire dai soli dati di pricing confermati sull'evento -
  * mai un prezzo inventato. `entry` (ticket reale) ha priorità; se assente
  * (es. eventi Eventbrite: il ticket lì è sempre RSVP gratuito di comodo,
- * mai il vero prezzo — vedi commento su Event['pricing']) si usa
+ * mai il vero prezzo - vedi commento su Event['pricing']) si usa
  * `tableMinSpend` come prezzo "a partire da" quando è un dato reale
- * confermato. Se nessuno dei due è disponibile, niente Offer — evita il
+ * confermato. Se nessuno dei due è disponibile, niente Offer - evita il
  * campo "offers" mancante segnalato da Search Console senza fabbricare un
  * numero. Riusata da tutte le pagine che emettono schema.org Event.
  */
@@ -138,7 +138,7 @@ export function buildOfferSchema(
 /**
  * ItemList di Event COMPLETI per le superfici-lista (homepage, pagina venue,
  * genere, tonight/special/best e le landing intent). Ogni item riusa
- * generateEventSchema — mai un secondo Event scritto a mano — così tutte le
+ * generateEventSchema - mai un secondo Event scritto a mano - così tutte le
  * pagine emettono la stessa entità ricca (location con geo, organizer,
  * eventStatus, offers reali) e Google/AI vedono gli stessi dati ovunque.
  * Il @context resta solo sull'ItemList radice, mai sugli item annidati.
@@ -245,4 +245,100 @@ export const generatePageBreadcrumbSchema = (
       };
     }),
   };
+};
+
+export interface ClubSchemaOptions {
+  venue: Venue;
+  locale: string;
+  canonicalUrl: string;
+  name: string;
+  description: string;
+  schemaType?: 'NightClub' | 'BarOrPub' | 'Restaurant' | 'MusicVenue';
+  alternateNames?: readonly string[];
+  neighborhoodName?: string;
+  hasMapUrl?: string;
+  openingHoursSpec?: readonly {
+    dayOfWeek: readonly string[];
+    opens: string;
+    closes: string;
+  }[];
+}
+
+/**
+ * Generates clean, Google-compliant LocalBusiness / NightClub / BarOrPub / Restaurant JSON-LD
+ * WITHOUT self-serving aggregateRating or fabricated reviews.
+ */
+export const generateClubSchema = ({
+  venue,
+  locale,
+  canonicalUrl,
+  name,
+  description,
+  schemaType = 'NightClub',
+  alternateNames = [],
+  neighborhoodName,
+  hasMapUrl,
+  openingHoursSpec = [],
+}: ClubSchemaOptions) => {
+  const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
+  const imageUrl = venue.image
+    ? venue.image.startsWith('http')
+      ? venue.image
+      : `${baseUrl}${venue.image}`
+    : `${baseUrl}/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp`;
+
+  const schema: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': schemaType,
+    '@id': `${canonicalUrl}#venue`,
+    name,
+    description,
+    url: canonicalUrl,
+    inLanguage: locale,
+    image: [imageUrl, ...(venue.gallery || []).slice(0, 4).map((g) => (g.startsWith('http') ? g : `${baseUrl}${g}`))].filter(
+      (v, i, arr) => arr.indexOf(v) === i,
+    ),
+    telephone: '+393519127047',
+    email: 'concierge@nightlifemilan.com',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: venue.address.streetAddress,
+      addressLocality: venue.address.addressLocality || 'Milano',
+      addressRegion: 'MI',
+      postalCode: venue.address.postalCode,
+      addressCountry: venue.address.addressCountry || 'IT',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: venue.coordinates.latitude,
+      longitude: venue.coordinates.longitude,
+    },
+    priceRange: venue.priceRange || '$$$',
+  };
+
+  if (alternateNames.length > 0) {
+    schema.alternateName = [...alternateNames];
+  }
+  if (hasMapUrl) {
+    schema.hasMap = hasMapUrl;
+  }
+  if (neighborhoodName) {
+    schema.containedInPlace = {
+      '@type': 'AdministrativeArea',
+      name: `${neighborhoodName}, Milano`,
+    };
+  }
+  if (openingHoursSpec.length > 0) {
+    schema.openingHoursSpecification = openingHoursSpec.map((spec) => ({
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: [...spec.dayOfWeek],
+      opens: spec.opens,
+      closes: spec.closes,
+    }));
+  }
+  if (venue.sameAs && venue.sameAs.length > 0) {
+    schema.sameAs = venue.sameAs;
+  }
+
+  return schema;
 };

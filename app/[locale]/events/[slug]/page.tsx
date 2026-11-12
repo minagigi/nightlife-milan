@@ -74,7 +74,7 @@ import {
 
 /** Find a live Eventbrite event by its SEO slug (EN or IT).
  * NESSUN try/catch qui: se la fetch Eventbrite fallisce (dopo i retry
- * interni) l'errore DEVE propagarsi come 500 non cacheato — degradare a
+ * interni) l'errore DEVE propagarsi come 500 non cacheato - degradare a
  * undefined produceva notFound(), e Next cacheava quel 404 per l'intera
  * finestra ISR (bug reale: bandierina IT → 404 su pagina esistente). */
 async function getEbEventBySlug(slug: string): Promise<Event | undefined> {
@@ -112,12 +112,12 @@ const GALLERY_DESCRIPTORS: Record<'en' | 'it' | 'pt', string[]> = {
 };
 
 // FASE F3 (piano fix-i18n-posters-redo-justme): fino a 6 foto reali della
-// venue invece di 4 — più copertura visiva sulla pagina evento.
+// venue invece di 4 - più copertura visiva sulla pagina evento.
 const GALLERY_MAX = 6;
 
 /**
  * Galleria foto reali della venue (non più 4 foto stock identiche su ogni
- * pagina evento) — alt/title unico per immagine, SEO in chiave locale,
+ * pagina evento) - alt/title unico per immagine, SEO in chiave locale,
  * combina venue + descrittore posizionale + titolo evento specifico.
  */
 function buildVenueGalleryImages(venue: Venue, eventTitle: string, locale: string): { src: string; alt: string }[] {
@@ -130,10 +130,10 @@ function buildVenueGalleryImages(venue: Venue, eventTitle: string, locale: strin
   return sources.slice(0, GALLERY_MAX).map((src, i) => {
     const descriptor = descriptors[i % descriptors.length];
     const alt = isIt
-      ? `${venueName} Milano — ${descriptor} durante ${eventTitle}`
+      ? `${venueName} Milano - ${descriptor} durante ${eventTitle}`
       : isPt
-        ? `${venueName} Milão — ${descriptor} durante ${eventTitle}`
-      : `${venueName} Milan — ${descriptor} during ${eventTitle}`;
+        ? `${venueName} Milão - ${descriptor} durante ${eventTitle}`
+      : `${venueName} Milan - ${descriptor} during ${eventTitle}`;
     return { src, alt };
   });
 }
@@ -481,7 +481,7 @@ export default async function EventPage({ params }: Props) {
         }
       },
       // Prezzo reale dalle stringhe pricing ("From €15" -> 15, "Free Entry..." ->
-      // 0): mai un fallback fabbricato — se non si riesce a leggere un numero
+      // 0): mai un fallback fabbricato - se non si riesce a leggere un numero
       // reale né un "free" esplicito, niente offers piuttosto che un prezzo finto.
       ...(() => {
         const parsePriceEUR = (s?: string): number | null => {
@@ -516,19 +516,23 @@ export default async function EventPage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
 
-        <section className="relative h-screen flex items-center justify-center">
-          <Image
-            src={weeklyEvent.image}
-            alt={title}
-            fill
-            quality={95}
-            sizes="100vw"
-            className="object-cover"
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 bg-black/60" />
-          <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
-            <div className="flex justify-center gap-3 mb-6">
+        <section className="border-b border-white/10 bg-[#050505]">
+          <div className="mx-auto max-w-5xl px-4 pt-6 sm:px-6 lg:px-8">
+            <div className="relative aspect-[16/9] w-full overflow-hidden border border-white/15 bg-[#050505]">
+              <Image
+                src={weeklyEvent.image}
+                alt={title}
+                fill
+                quality={95}
+                priority
+                sizes="(max-width: 1280px) 100vw, 1024px"
+                className="object-contain p-1 sm:p-2"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+          </div>
+          <div className="relative z-10 text-center px-4 py-10 max-w-5xl mx-auto">
+            <div className="flex flex-wrap justify-center gap-3 mb-5">
               <span className="bg-champagne text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
                 {weeklyEvent.clubName}
               </span>
@@ -536,27 +540,29 @@ export default async function EventPage({ params }: Props) {
                 {weeklyEvent.genres.join(', ')}
               </span>
             </div>
-            <h1 className="text-5xl md:text-7xl font-serif font-bold text-white mb-6 tracking-tight">{title}</h1>
-            <p className="text-xl text-white/70 mb-8 max-w-2xl mx-auto">{weeklyEvent.target}</p>
-            {weeklyEvent.xceedLink && (
+            <h1 className="text-4xl md:text-6xl font-serif font-bold text-white mb-5 tracking-tight">{title}</h1>
+            <p className="text-lg md:text-xl text-white/70 mb-8 max-w-2xl mx-auto">{weeklyEvent.target}</p>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              {weeklyEvent.xceedLink && (
+                <a
+                  href={weeklyEvent.xceedLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 bg-champagne text-black px-8 py-4 rounded-full font-bold hover:bg-white transition-colors text-lg"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" /></svg>
+                  {tr(locale, 'Buy on Xceed', 'Acquista su Xceed')}
+                </a>
+              )}
               <a
-                href={weeklyEvent.xceedLink}
+                href={`https://wa.me/393519127047?text=Hi,%20I%20would%20like%20to%20book%20for%20${encodeURIComponent(weeklyEvent.name)}%20at%20${encodeURIComponent(weeklyEvent.clubName)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-champagne text-black px-8 py-4 rounded-full font-bold hover:bg-white transition-colors text-lg"
+                className={`inline-block ${weeklyEvent.xceedLink ? 'border border-white/40 text-white hover:border-champagne hover:text-champagne' : 'bg-champagne text-black hover:bg-white'} px-8 py-4 rounded-full font-bold transition-colors text-lg`}
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" /></svg>
-                {tr(locale, 'Buy on Xceed', 'Acquista su Xceed')}
+                {tr(locale, 'Book via WhatsApp', 'Prenota via WhatsApp')}
               </a>
-            )}
-            <a
-              href={`https://wa.me/393519127047?text=Hi,%20I%20would%20like%20to%20book%20for%20${weeklyEvent.name}%20at%20${weeklyEvent.clubName}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`inline-block ${weeklyEvent.xceedLink ? 'ml-4 border border-white/40 text-white hover:border-champagne hover:text-champagne' : 'bg-champagne text-black hover:bg-white'} px-8 py-4 rounded-full font-bold transition-colors text-lg`}
-            >
-              {tr(locale, 'Book via WhatsApp', 'Prenota via WhatsApp')}
-            </a>
+            </div>
           </div>
         </section>
 
@@ -663,7 +669,7 @@ export default async function EventPage({ params }: Props) {
 
   // FASE X2 (piano Xceed): contenuto gold-standard (sezioni/programma/25 FAQ/
   // listino reale) letto dal blob se questo evento è passato dalla pipeline
-  // Xceed — assente per tutti gli altri eventi, rendering base invariato.
+  // Xceed - assente per tutti gli altri eventi, rendering base invariato.
   // Prova il gold nel Blob sotto lo slug EN e, se assente, sotto lo slug IT: per
   // gli eventi pubblicati come due listing (EN/IT con slug diversi) il gold può
   // essere stato scritto sotto lo slug IT, mentre la card FUSA usa lo slug-en
@@ -689,7 +695,7 @@ export default async function EventPage({ params }: Props) {
   const richContent = localizedGold ? null : blobRich;
   const goldHtml = localizedEventContent ? null : localizedGold || (richContent ? null : await getEventGoldHtml(slug, locale));
 
-  // Internal linking: "More events at {venue}" — riusa la sorgente dati
+  // Internal linking: "More events at {venue}" - riusa la sorgente dati
   // unificata già usata da homepage/calendar (statici + Eventbrite/Xceed
   // reali). getAllCalendarEvents() degrada già da sola se Eventbrite non
   // risponde (vedi lib/calendarEvents.ts), quindi nessun try/catch qui.
@@ -797,7 +803,7 @@ export default async function EventPage({ params }: Props) {
     timeZone: 'Europe/Rome'
   }).format(dateObj);
 
-  // Format Price — null quando non c'è un prezzo reale confermato (vedi
+  // Format Price - null quando non c'è un prezzo reale confermato (vedi
   // lib/eventbriteSync.ts: il ticket Eventbrite non è mai il prezzo vero)
   const formattedPrice = event.pricing.entry === null
     ? null
@@ -807,7 +813,7 @@ export default async function EventPage({ params }: Props) {
         maximumFractionDigits: 0,
       }).format(event.pricing.entry);
 
-  // Frase prezzo per il trafiletto AI — omette del tutto la parte "Ingresso"
+  // Frase prezzo per il trafiletto AI - omette del tutto la parte "Ingresso"
   // quando il prezzo non è confermato, invece di affermare "Gratuito" a caso.
   const entryText = event.pricing.entry === null
     ? null
@@ -841,21 +847,38 @@ export default async function EventPage({ params }: Props) {
 
       <main className="flex-1 flex flex-col w-full">
         {/* Hero Section */}
-        <section className="relative w-full h-[60vh] min-h-[400px]">
-          <Image
-            src={eventHeroImage}
-            alt={eventVisualGallery?.hero?.alt || eventVisualGallery?.images[0]?.alt || title}
-            fill
-            quality={95}
-            priority={true} // Above the fold
-            sizes="100vw"
-            className={eventVisualGallery ? 'object-contain bg-black' : 'object-cover'}
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent" />
-          
-          <div className="absolute bottom-0 left-0 w-full p-6 md:p-12 max-w-7xl mx-auto">
-            <div className="flex items-center gap-3 mb-4">
+        <section className="w-full border-b border-[#F6F1E7]/14 bg-[#050505]">
+          <div className="mx-auto max-w-7xl px-6 pt-6 md:px-12">
+            <div className="relative aspect-[16/9] w-full overflow-hidden border border-[#F6F1E7]/18 bg-[#050505]">
+              <Image
+                src={eventHeroImage}
+                alt={eventVisualGallery?.hero?.alt || eventVisualGallery?.images[0]?.alt || title}
+                fill
+                quality={95}
+                priority={true}
+                sizes="(max-width: 1280px) 100vw, 1200px"
+                className="object-contain p-1 sm:p-2"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+            {!(
+              eventHeroImage.includes('/images/events/october-2026/') ||
+              eventHeroImage.includes('/images/events/capodanno-2027-posters/') ||
+              eventHeroImage.includes('/images/events/weekly-posters/') ||
+              eventHeroImage.includes('/images/events/halloween-2026/')
+            ) && (
+              <div className="flex flex-wrap items-center justify-between gap-2 border-x border-b border-[#F6F1E7]/18 bg-[#050505] px-4 py-2 font-mono text-[11px] font-bold tracking-[0.12em] text-[#F6F1E7]">
+                <span>WWW.NIGHTLIFEMILAN.COM</span>
+                <span className="inline-flex items-center gap-1.5 text-[#EAE3D5]">
+                  <span className="inline-block h-2 w-2 rounded-full bg-[#25D366]" aria-hidden="true" />
+                  +39 351 912 7047
+                </span>
+              </div>
+            )}
+          </div>
+
+          <div className="w-full px-6 py-8 md:px-12 max-w-7xl mx-auto">
+            <div className="flex flex-wrap items-center gap-3 mb-4">
               <span className="border border-[#F6F1E7]/35 bg-[#0B0A09]/90 text-[#F6F1E7] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
                 {venueName}
               </span>
@@ -863,10 +886,10 @@ export default async function EventPage({ params }: Props) {
                 {event.genre.map(g => formatEventGenre(locale, g)).join(', ')}
               </span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight">
               {title}
             </h1>
-            <time dateTime={event.dateISO} className="text-xl text-white/70 font-light flex items-center gap-2">
+            <time dateTime={event.dateISO} className="text-lg sm:text-xl text-white/70 font-light flex items-center gap-2">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
               {formattedDate}
             </time>

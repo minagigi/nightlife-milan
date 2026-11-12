@@ -20,8 +20,8 @@ export const superClubVenueBatch: Venue[] = [
       addressCountry: 'IT',
     },
     category: VenueCategory.CLUB,
-    coordinates: { latitude: 45.4642, longitude: 9.1900 },
-    zone: MilanZone.CORSO_COMO,
+    coordinates: { latitude: 45.4517, longitude: 9.1651 },
+    zone: MilanZone.NAVIGLI,
     sameAs: [],
     localizedContent: {
       name: {

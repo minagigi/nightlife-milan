@@ -109,9 +109,9 @@
     },
     "voya": {
       "subtitle": "Rooftop al 20° piano: cena e serata sopra le nuvole.",
-      "description": "Un'esperienza unica con vista panoramica su Milano. Cena e serata sopra le nuvole, nel cuore pulsante della città.",
-      "insiderTip": "Prenota in anticipo per assicurarti un tavolo con la migliore vista sullo skyline.",
-      "location": "Milano (Skyline view)",
+      "description": "Un'esperienza unica al 20° piano della Torre WJC al Portello, con vista panoramica sullo skyline di CityLife e Milano.",
+      "insiderTip": "Prenota in anticipo per assicurarti un tavolo in prima fila lungo la vetrata sullo skyline.",
+      "location": "Viale Achille Papa 30, Milano (Portello / CityLife)",
       "target": "28-45 anni",
       "dressCode": "Elegante / Smart Casual",
       "music": "Lounge, Deep House, Commercial",
@@ -231,7 +231,7 @@
       "subtitle": "Aperitivo e serate club 18+ per un pubblico italiano.",
       "description": "Aria Club Milano è pensato per un pubblico italiano 18+ che cerca un aperitivo seguito da una serata club ad alta energia. Il programma punta su hit italiane e internazionali, commercial, EDM e dance. Il locale offre ingresso in guest list e tavoli in pista, privé e super privé. Prezzi, musica e orari devono essere sempre verificati nel singolo evento datato prima della prenotazione.",
       "insiderTip": "Invia su WhatsApp data, numero di persone e zona tavolo preferita. Dopo l'acquisto del biglietto manda la conferma per verificare prenotazione e pagamento.",
-      "location": "Via Ippodromo 115, Milano",
+      "location": "Piazzale dello Sport 14, Milano (San Siro)",
       "target": "Pubblico italiano, 18+",
       "dressCode": "Curato e alla moda, 18+",
       "music": "Hit italiane, Commercial, EDM, Dance",
@@ -315,12 +315,12 @@
       ]
     },
     "repvblic": {
-      "subtitle": "Il punto d'incontro tra l'estetica industriale e il clubbing d'avanguardia.",
-      "description": "Repvblic Milano è il punto d'incontro tra l'estetica industriale e il clubbing d'avanguardia. Situato nel distretto creativo della città, il locale si distingue per una ricerca sonora costante: dalla house music più ricercata del mercoledì alle vibrazioni urban del giovedì, fino agli eventi speciali del venerdì. Un'atmosfera elettrica pensata per un pubblico che vive la notte per la sua musica.",
-      "insiderTip": "Controlla il loro programma settimanale, poiché il genere musicale cambia drasticamente a seconda della serata.",
-      "location": "Milano (Zona Lambrate / Est)",
-      "target": "25-40 anni",
-      "dressCode": "Casual / Trendy",
+      "subtitle": "Clubbing internazionale in Piazza della Repubblica.",
+      "description": "Repvblic Milano in Piazza della Repubblica 12 unisce design contemporaneo e ricerca sonora: dal Dirty Monday del lunedì alle notti house del mercoledì, urban del giovedì e format internazionali del weekend.",
+      "insiderTip": "Controlla il programma settimanale: il lunedì Dirty Monday e il weekend richiamano un pubblico molto selezionato.",
+      "location": "Piazza della Repubblica 12, Milano",
+      "target": "23-40 anni",
+      "dressCode": "Elegante / Trendy",
       "music": "House, Urban, Hip-Hop",
       "events": [
         {
@@ -336,7 +336,7 @@
         {
           "day": "VEN",
           "title": "DIRTY MONDAY",
-          "description": "Venerdì special — Dirty Monday edition."
+          "description": "Venerdì special: Dirty Monday edition."
         }
       ]
     },

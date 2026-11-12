@@ -1,7 +1,7 @@
-import { buildGuidesTaxonomySitemapEntries, xmlSitemapResponse } from '@/lib/sitemapBuilder';
+import { buildGuidesTaxonomySitemapEntriesAsync, xmlSitemapResponse } from '@/lib/sitemapBuilder';
 
-export const dynamic = 'force-static';
+export const revalidate = 3600;
 
 export async function GET(): Promise<Response> {
-  return xmlSitemapResponse(buildGuidesTaxonomySitemapEntries());
+  return xmlSitemapResponse(await buildGuidesTaxonomySitemapEntriesAsync());
 }

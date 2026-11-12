@@ -12,7 +12,7 @@ const ORG_ID = '2988002072164';
 // Map Eventbrite venue name → canonical internal venue id (matches venuesData ids).
 // Eventi della NOSTRA org sono sempre in uno dei 18 venue: se il nome non matcha
 // nessun alias noto (typo, nome leggermente diverso), il fallback a v-justme evita
-// di scartare l'evento — comportamento invariato rispetto a prima del refactor.
+// di scartare l'evento - comportamento invariato rispetto a prima del refactor.
 function mapVenueId(venueName: string): string {
   return matchVenueId(venueName) || 'v-justme';
 }
@@ -35,12 +35,12 @@ function detectGenre(text: string): MusicGenre[] {
 // nella description un marker (commento HTML) con lo slug canonico deciso
 // PRIMA del publish (necessario per il backlink Eventbrite→sito: il link
 // viene scritto nell'evento e va puntare a uno slug che il sito genererà
-// IDENTICO). Se presente, va usato verbatim al posto della rigenerazione AI —
+// IDENTICO). Se presente, va usato verbatim al posto della rigenerazione AI -
 // coerenza garantita sito↔Eventbrite.
 //
 // Bug reale corretto: questo regex cercava ancora il vecchio formato testuale
 // `[nlm:src=N;slug-en=...]` (con parentesi quadre, id solo numerico) di una
-// versione precedente di assembleGoldDescription — MAI aggiornato quando il
+// versione precedente di assembleGoldDescription - MAI aggiornato quando il
 // marker è diventato un commento HTML `<!-- nlm:src=X;slug-en=... -->` con id
 // anche non numerico (es. "xc-220757" per gli eventi Xceed, FASE X4). Il
 // meccanismo di backlink non ha mai effettivamente funzionato: ogni pagina
@@ -51,14 +51,14 @@ function detectGenre(text: string): MusicGenre[] {
 //
 // FASE F1 (2026-07-08): con l'architettura "eventi separati" (due listing
 // Eventbrite per serata, uno EN uno IT) il marker include anche la lingua
-// (`nlm:src={baseId}-{lang};slug-en=...`) — i marker dei 3 eventi legacy
+// (`nlm:src={baseId}-{lang};slug-en=...`) - i marker dei 3 eventi legacy
 // (pre-pivot) restano nel vecchio formato senza lingua. Bug reale riportato
 // dall'utente con screenshot: senza distinguere per lingua, ogni serata
-// produceva DUE card identiche su "Upcoming This Week" (una per listing) —
+// produceva DUE card identiche su "Upcoming This Week" (una per listing) -
 // la card IT mostrava comunque il titolo italiano ma affiancata alla EN,
 // invece di essercene una sola che cambia lingua col sito.
 // FASE L3 multilingua: il marker per-lingua ora usa QUALSIASI codice a 2 lettere
-// (`nlm:src={baseId}-{lang};slug-en=...`), non più solo en|it — ogni serata ha
+// (`nlm:src={baseId}-{lang};slug-en=...`), non più solo en|it - ogni serata ha
 // fino a 35 listing Eventbrite tradotti. Tutti condividono lo stesso baseId e
 // slug-en, così il sito li raggruppa in UNA sola card che mostra la lingua
 // selezionata (vedi fetchEventbriteEvents).
@@ -82,13 +82,13 @@ export function parseMarker(text: string | undefined): ParsedMarker | undefined 
 
 /**
  * Contenuto gold-standard (sezioni + programma + 25 FAQ) di un evento, letto
- * DIRETTAMENTE dalla description HTML dei listing Eventbrite via API — NON dal
+ * DIRETTAMENTE dalla description HTML dei listing Eventbrite via API - NON dal
  * Vercel Blob (che è andato in 403/sospeso per overage quota, azzerando il
  * contenuto gold del sito). Riusa i listing tradotti: ritorna l'HTML nella
  * lingua richiesta, con fallback it→en. Idempotente e senza dipendenze a pagamento.
  *
  * `fetchOwnOrgEvents` (importLedger) pagina TUTTI i listing dell'org includendo
- * la description raw — necessario perché con ~200 listing la lingua giusta sta
+ * la description raw - necessario perché con ~200 listing la lingua giusta sta
  * spesso oltre la prima pagina.
  */
 // Cache in-memory dei listing org (paginati, ~260 con description completa):
@@ -159,7 +159,7 @@ function extractXceedUrl(text: string): string | undefined {
 
 function cleanTitle(raw: string): string {
   return raw
-    .replace(/[·•–—·]/g, '-')
+    .replace(/[·•–\u2014·]/g, '-')
     .replace(/Â·|â|Ã¬|â¬/g, '')
     .replace(/\s{2,}/g, ' ')
     .trim();
@@ -167,7 +167,7 @@ function cleanTitle(raw: string): string {
 
 /** Prezzo reale di ingresso per venue, MAI da Eventbrite: il nostro stesso
  * publisher (eventPublisher.ts) crea sempre un ticket_class `free: true` come
- * semplice RSVP — non è mai il prezzo vero (si paga alla porta o si prenota
+ * semplice RSVP - non è mai il prezzo vero (si paga alla porta o si prenota
  * via WhatsApp). Usare `ticket_classes` per il prezzo mostrerebbe "Gratis" su
  * OGNI evento importato (bug reale riportato dall'utente). L'unica fonte di
  * prezzo reale è il listino confermato in `venuePricing.ts`; se il venue non
@@ -213,21 +213,24 @@ interface RawEbEvent {
   description?: { text: string; html?: string };
   start: { local: string; utc: string };
   end: { local: string; utc: string };
+  changed?: string;
+  published?: string;
+  created?: string;
   status: string;
   logo?: { url: string; original?: { url: string } };
   venue?: { name: string };
   ticket_classes?: Array<{ free: boolean; cost?: { major_value: string } }>;
 }
 
-/** Costruisce l'Event condiviso da UN listing (venue/data/prezzo/immagine/xceedUrl —
+/** Costruisce l'Event condiviso da UN listing (venue/data/prezzo/immagine/xceedUrl -
  * identici tra i due listing EN/IT della stessa serata, quindi presi da uno qualsiasi).
  *
  * FASE C0 (2026-07-09, bug reale riportato dall'utente): `ev.start.local` NON ha
- * offset — costruire la data con un `+01:00` hardcoded (ora solare CET) fa
+ * offset - costruire la data con un `+01:00` hardcoded (ora solare CET) fa
  * slittare di un'ora OGNI evento durante l'ora legale (CEST, marzo-ottobre),
  * mostrando sul sito orari sbagliati (es. un doors-open reale delle 19:30
  * mostrato come 20:30). `ev.start.utc`/`ev.end.utc` sono già UTC vero
- * dall'API — usarli sempre, mai ricostruire l'offset a mano. */
+ * dall'API - usarli sempre, mai ricostruire l'offset a mano. */
 function buildSharedFields(ev: RawEbEvent, title: string, desc: string) {
   const venueId = mapVenueId(ev.venue?.name || '');
   return {
@@ -235,6 +238,7 @@ function buildSharedFields(ev: RawEbEvent, title: string, desc: string) {
     genre: detectGenre(title + ' ' + desc),
     dateISO: ev.start.utc,
     endDateISO: ev.end.utc,
+    updatedAt: ev.changed || ev.published || ev.created,
     pricing: { entry: realEntryPrice(venueId), currency: 'EUR' as const, tableMinSpend: realTableMinSpend(venueId) },
     image: ev.logo?.url || ev.logo?.original?.url,
     isSpecial: /live|special|vip/i.test(title),
@@ -246,7 +250,7 @@ function buildSharedFields(ev: RawEbEvent, title: string, desc: string) {
   };
 }
 
-/** Prima frase/paragrafo in chiaro dalla description — usata SOLO per i listing
+/** Prima frase/paragrafo in chiaro dalla description - usata SOLO per i listing
  * "eventi separati" (marker con lingua): sono già il nostro contenuto gold-standard,
  * riscriverli con l'AI generica sarebbe ridondante e, a credito API esaurito,
  * degraderebbe un testo già corretto al fallback rule-based. */
@@ -256,11 +260,11 @@ function shortDescFromText(text: string | undefined, fallback: string): string {
 }
 
 /**
- * Fetch della lista eventi live con retry — un fallimento transitorio
+ * Fetch della lista eventi live con retry - un fallimento transitorio
  * dell'API Eventbrite (rate limit/hiccup) non deve tradursi in una lista
  * vuota indistinguibile da "nessun evento": la pagina evento farebbe
  * notFound() e Next CACHEREBBE quel 404 per l'intera finestra di
- * revalidate (fino a 1h) — bug reale riportato dall'utente (bandierina
+ * revalidate (fino a 1h) - bug reale riportato dall'utente (bandierina
  * italiana → 404 su una pagina che pochi minuti dopo rispondeva 200).
  * Dopo i retry, fallisce con throw: i chiamanti tolleranti (homepage,
  * sync) degradano a [], la pagina evento propaga l'errore (500 non
@@ -324,7 +328,7 @@ export async function fetchEventbriteEvents(includePast = false, sinceDaysAgo?: 
         // quindi status=live da solo li escluderebbe → si aggiungono quegli stati.
         // Caso lista passati (sinceDaysAgo): SOLO ended,completed. Escludendo
         // live/started (i futuri) dalla query, con order_by=start_desc la serata
-        // di ieri è in cima alla pagina 1 — altrimenti i molti listing futuri
+        // di ieri è in cima alla pagina 1 - altrimenti i molti listing futuri
         // (Jul 11/12 × 35 lingue) riempivano le 2 pagine e ieri restava fuori.
         const status = sinceDaysAgo
           ? 'ended,completed'
@@ -367,7 +371,7 @@ export async function fetchEventbriteEvents(includePast = false, sinceDaysAgo?: 
     // lingua); senza raggruppare, ognuno diventava una Event a sé → 35 card
     // duplicate sullo stesso carosello. Qui diventano UNA sola card che mostra il
     // titolo/descrizione nella lingua selezionata dal sito (fallback EN).
-    // Raggruppamento per IDENTITÀ FISICA dell'evento — NON per baseId del marker
+    // Raggruppamento per IDENTITÀ FISICA dell'evento - NON per baseId del marker
     // (fragile). Due sorgenti reali di duplicati IT/EN sfuggivano al baseId:
     //   1) un listing che PERDE il marker (enrichment via browser) → orfano a sé;
     //   2) lo STESSO evento pubblicato come DUE listing con baseId e slug diversi
@@ -383,7 +387,7 @@ export async function fetchEventbriteEvents(includePast = false, sinceDaysAgo?: 
     interface Group { baseId: string; byLang: Map<string, RawEbEvent>; singles: RawEbEvent[] }
 
     // UNION-FIND: due listing sono lo STESSO evento se condividono UN QUALSIASI
-    // di questi segnali —
+    // di questi segnali -
     //   • stesso slug-en del marker → TUTTE le lingue di un evento lo condividono,
     //     quindi 13 lingue = UNA card ANCHE col titolo tradotto (dove il solo
     //     nucleo-nome fallisce: "Argentina vs Switzerland" ≠ "阿根廷vs瑞士" ≠ "Mecz…");
@@ -436,7 +440,7 @@ export async function fetchEventbriteEvents(includePast = false, sinceDaysAgo?: 
       };
 
       if (group.byLang.size > 0) {
-        // Serata gold multilingua — UNA sola card, titolo/descrizione per lingua,
+        // Serata gold multilingua - UNA sola card, titolo/descrizione per lingua,
         // niente riscrittura AI (il contenuto è già il nostro gold-standard).
         const primary = group.byLang.get('en') || group.byLang.get('it') || [...group.byLang.values()][0];
         // Slug per lingua dal marker di CIASCUN listing: se lo stesso evento è
@@ -464,7 +468,7 @@ export async function fetchEventbriteEvents(includePast = false, sinceDaysAgo?: 
         }
         // Fold dei listing orfani (senza marker) della STESSA serata come lingua
         // mancante: la loro presenza NON deve mai creare una seconda card. Riempie
-        // il primo slot vuoto tra en/it — di norma è la lingua dell'orfano, perché
+        // il primo slot vuoto tra en/it - di norma è la lingua dell'orfano, perché
         // il gruppo marcato ha già l'altra.
         for (const ev of group.singles) {
           const t = cleanTitle(ev.name.text);
@@ -491,7 +495,7 @@ export async function fetchEventbriteEvents(includePast = false, sinceDaysAgo?: 
       }
 
       // Gruppo di soli orfani (nessun marker-lingua): UNA sola card, MAI una per
-      // listing — i singoli sono la stessa serata in lingue diverse. Primario: chi
+      // listing - i singoli sono la stessa serata in lingue diverse. Primario: chi
       // ha un marker legacy (slug stabile), altrimenti il primo per id (deterministico).
       const singlesSorted = group.singles
         .slice()
@@ -509,7 +513,7 @@ export async function fetchEventbriteEvents(includePast = false, sinceDaysAgo?: 
       const slugEn = marker?.slug || seo.slugEn;
       const slugIt = marker?.slug || seo.slugIt;
       // Se c'è un secondo orfano (l'altra lingua), usa il suo titolo umano invece
-      // di quello riscritto — senza però creare una card extra.
+      // di quello riscritto - senza però creare una card extra.
       const other = singlesSorted.find((s) => s !== primary);
       const otherTitle = other ? cleanTitle(other.name.text) : '';
 

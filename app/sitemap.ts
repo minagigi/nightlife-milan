@@ -4,16 +4,19 @@ import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
 import { getLocalizedSeoPagePath35 } from '@/lib/i18n/localizedSlugs35';
 import { indexedLocaleCodes, localePrefix } from '@/lib/i18n/locales';
 import {
-  buildAllSitemapEntries,
+  buildAllSitemapEntriesAsync,
   dedupeAndSortSitemap,
-  SITEMAP_LAST_MODIFIED,
+  getCatalogLastModified,
+  toCompactSitemapEntries,
 } from '@/lib/sitemapBuilder';
 
-export const revalidate = false;
+// Intelligent hourly ISR auto-update (+ instant on-demand revalidateAllSitemapRoutes()).
+export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const nowMs = SITEMAP_LAST_MODIFIED.getTime();
+  const baseUrl = (process.env.APP_URL || 'https://nightlifemilan.com').replace(/\/+$/, '');
+  const catalogLastMod = getCatalogLastModified();
+  const nowMs = Date.now();
   const editorialEventProfiles = [
     ...SITE_ONLY_EVENT_PROFILES,
     ...EVENT_BATCH_PROFILES.filter((profile) => profile.indexedLocales && profile.indexedLocales.length > 0),
@@ -21,7 +24,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const pillarEntries: MetadataRoute.Sitemap = indexedLocaleCodes.map((locale) => ({
     url: `${baseUrl}${localePrefix(locale)}${getLocalizedSeoPagePath35('/football-afterparties', locale)}`,
-    lastModified: SITEMAP_LAST_MODIFIED,
+    lastModified: catalogLastMod,
     changeFrequency: 'daily' as const,
     priority: 0.95,
   }));
@@ -35,16 +38,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     indexedSiteLocales.forEach((siteLocale) => {
       batchEntries.push({
         url: `${baseUrl}${localePrefix(siteLocale)}/${getLocalizedDir35('events', siteLocale)}/${getEventBatchSlug(profile, siteLocale)}`,
-        lastModified: SITEMAP_LAST_MODIFIED,
+        lastModified: catalogLastMod,
         changeFrequency: isUpcoming ? 'daily' : 'monthly',
         priority: isUpcoming ? 0.9 : 0.6,
       });
     });
   });
 
-  return dedupeAndSortSitemap([
-    ...buildAllSitemapEntries(),
-    ...pillarEntries,
-    ...batchEntries,
-  ]);
+  const allEntries = await buildAllSitemapEntriesAsync();
+  return toCompactSitemapEntries(
+    dedupeAndSortSitemap([
+      ...allEntries,
+      ...pillarEntries,
+      ...batchEntries,
+    ]),
+  );
 }

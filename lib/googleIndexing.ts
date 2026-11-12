@@ -1,12 +1,13 @@
 import crypto from 'crypto';
+import { revalidatePath } from 'next/cache';
 
 /**
- * Google Indexing API client (zero external deps — signs the service-account
+ * Google Indexing API client (zero external deps - signs the service-account
  * JWT with Node's native crypto, exchanges it for an access token, then calls
  * urlNotifications:publish).
  *
  * Officially Google honors the Indexing API for pages with JobPosting or
- * BroadcastEvent structured data — which covers our /events/* pages.
+ * BroadcastEvent structured data - which covers our /events/* pages.
  *
  * Setup (see docs/google-indexing-setup.md):
  *   1. Create a GCP service account, enable the Indexing API.
@@ -39,7 +40,7 @@ function getCredentials(): ServiceAccount {
   if (!parsed.client_email || !parsed.private_key) {
     throw new Error('GOOGLE_INDEXING_CREDENTIALS is missing client_email or private_key');
   }
-  // Vercel stores newlines as literal "\n" — restore real newlines for the PEM key.
+  // Vercel stores newlines as literal "\n" - restore real newlines for the PEM key.
   parsed.private_key = parsed.private_key.replace(/\\n/g, '\n');
   return parsed;
 }
@@ -127,7 +128,7 @@ export function getSearchConsoleSiteUrl(): string {
 
 /**
  * Submit (or re-submit) a sitemap to Google Search Console.
- * Uses the webmasters scope — same service account as the Indexing API.
+ * Uses the webmasters scope - same service account as the Indexing API.
  *
  * siteUrl:    the verified property, e.g. "https://nightlifemilan.com/"
  * sitemapUrl: e.g. "https://nightlifemilan.com/sitemap.xml"
@@ -154,9 +155,62 @@ export async function submitSitemap(siteUrl: string, sitemapUrl: string): Promis
   }
 }
 
+export const ALL_PRODUCTION_SITEMAP_PATHS = [
+  '/sitemap.xml',
+  '/sitemap-core.xml',
+  '/sitemap-clubs.xml',
+  '/sitemap-capodanno.xml',
+  '/sitemap-events.xml',
+  '/sitemap-guides.xml',
+] as const;
+
+/**
+ * Purges Next.js / Vercel ISR cache for /sitemap.xml and all 5 segmented child sitemaps.
+ * Wrapped in try/catch so callers outside an active Next request store never throw.
+ */
+export function revalidateAllSitemapRoutes(): string[] {
+  const revalidated: string[] = [];
+  for (const path of ALL_PRODUCTION_SITEMAP_PATHS) {
+    try {
+      revalidatePath(path);
+      revalidated.push(path);
+    } catch {
+      // Safe no-op outside Next.js server runtime (e.g. CLI unit tests).
+    }
+  }
+  return revalidated;
+}
+
 /** Submit the production sitemap to the verified Search Console property. */
 export async function submitProductionSitemap(sitemapUrl: string): Promise<SitemapResult> {
   return submitSitemap(getSearchConsoleSiteUrl(), sitemapUrl);
+}
+
+/** Submit /sitemap.xml and all 5 segmented child sitemaps to Google Search Console. */
+export async function submitAllProductionSitemaps(
+  baseUrl = process.env.APP_URL || 'https://nightlifemilan.com',
+): Promise<{
+  ok: boolean;
+  status: number;
+  error?: string;
+  feeds: Array<{ sitemapUrl: string } & SitemapResult>;
+}> {
+  const cleanBase = baseUrl.replace(/\/+$/, '');
+  const feeds: Array<{ sitemapUrl: string } & SitemapResult> = [];
+  for (const path of ALL_PRODUCTION_SITEMAP_PATHS) {
+    const sitemapUrl = `${cleanBase}${path}`;
+    const res = await submitProductionSitemap(sitemapUrl);
+    feeds.push({ sitemapUrl, ...res });
+  }
+  const primary = feeds[0] || { ok: false, status: 0, error: 'No sitemaps configured' };
+  const allOk = feeds.every((f) => f.ok);
+  const firstError = feeds.find((f) => !f.ok)?.error;
+  return {
+    ok: allOk,
+    status: primary.status,
+    ...(firstError ? { error: firstError } : {}),
+    feeds,
+  };
 }
 
 /**

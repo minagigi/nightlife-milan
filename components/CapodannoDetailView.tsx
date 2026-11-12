@@ -16,8 +16,13 @@ import { localePrefix } from '@/lib/i18n/locales';
 import { getScarcityAndChatCopy } from '@/lib/i18n/scarcityAndChatCopy';
 import {
   CAPODANNO_EVENTS,
+  getCapodannoEventForClub,
   type CapodannoEventItem,
 } from '@/lib/capodannoEvents';
+import { mockVenues } from '@/lib/data';
+import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
+import { getLocalizedVenueSlug35 } from '@/lib/i18n/localizedSlugs35';
+import { getLocalizedText } from '@/lib/seo';
 import {
   buildSeoEventImagePack,
   getCapodannoOfficialPosterSrc,
@@ -48,6 +53,16 @@ export default function CapodannoDetailView({ locale, event }: Props) {
   const sourceBasis = isIt ? event.sourceBasisIt : event.sourceBasisEn;
   const canonicalPath = capodannoEventPath(event.slug, locale);
   const officialPosterSrc = getCapodannoOfficialPosterSrc(event.slug);
+  const isGardaSisterVenue = event.slug === 'capodanno-justme-garda-lake';
+  const matchedPublicVenue = isGardaSisterVenue
+    ? mockVenues.find((v) => v.id === 'v-justme')
+    : mockVenues.find((v) => getCapodannoEventForClub(v.slugs.en, getLocalizedText(v.localizedContent.name, 'en'))?.slug === event.slug);
+  const matchedPublicVenueName = matchedPublicVenue
+    ? getLocalizedText(matchedPublicVenue.localizedContent.name, locale)
+    : '';
+  const matchedPublicVenueHref = matchedPublicVenue
+    ? `${prefix}/${getLocalizedDir35('clubs', locale as LocaleCode)}/${getLocalizedVenueSlug35(matchedPublicVenue.slugs.en, locale as LocaleCode)}`
+    : null;
 
   const seoPack = buildSeoEventImagePack({
     locale,
@@ -197,33 +212,32 @@ export default function CapodannoDetailView({ locale, event }: Props) {
         </nav>
 
         <div className="overflow-hidden border border-[#F6F1E7]/20 bg-[#0B0A09]">
-          <div className="relative h-72 w-full sm:h-96">
+          <div className="border-b border-[#F6F1E7]/14 bg-[#050505]">
             <img
               src={seoPack.poster.src}
               title={seoPack.poster.title}
               alt={seoPack.poster.alt}
               loading="eager"
               decoding="async"
-              className="h-full w-full object-cover"
+              className="mx-auto block max-h-[620px] w-full object-contain"
             />
-            <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, #0B0A09, #0B0A0980 55%, transparent)' }} />
-            <div className="absolute bottom-6 left-6 right-6 sm:bottom-8 sm:left-8 sm:right-8">
-              <div className="flex flex-wrap gap-2">
-                <span className="bg-[#F6F1E7] px-3 py-1 text-xs font-bold text-[#050505]">
-                  {ui.dateBadge}
-                </span>
-                <span className="border border-[#F6F1E7]/35 bg-[#050505]/90 px-3 py-1 text-xs font-semibold text-[#F6F1E7]">
-                  {event.city} ({event.province})
-                </span>
-                <span className="border border-[#F6F1E7]/50 bg-[#050505]/90 px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-[#F6F1E7]" data-almost-sold-out-badge>
-                  {scarcity.almostSoldOutBadge}
-                </span>
-              </div>
-              <h1 data-event-title={title} className="mt-3 font-serif text-3xl font-bold text-[#F6F1E7] sm:text-5xl">
-                {title}
-              </h1>
-              <p className="mt-2 text-sm text-[#EAE3D5] sm:text-base">{subtitle}</p>
+          </div>
+          <div className="border-b border-[#F6F1E7]/14 bg-[#0B0A09] px-6 py-6 sm:px-10 sm:py-8">
+            <div className="flex flex-wrap gap-2">
+              <span className="bg-[#F6F1E7] px-3 py-1 text-xs font-bold text-[#050505]">
+                {ui.dateBadge}
+              </span>
+              <span className="border border-[#F6F1E7]/35 bg-[#050505]/90 px-3 py-1 text-xs font-semibold text-[#F6F1E7]">
+                {event.city} ({event.province})
+              </span>
+              <span className="border border-[#F6F1E7]/50 bg-[#050505]/90 px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-[#F6F1E7]" data-almost-sold-out-badge>
+                {scarcity.almostSoldOutBadge}
+              </span>
             </div>
+            <h1 data-event-title={title} className="mt-3 font-serif text-3xl font-bold text-[#F6F1E7] sm:text-5xl">
+              {title}
+            </h1>
+            <p className="mt-2 text-sm text-[#EAE3D5] sm:text-base">{subtitle}</p>
           </div>
 
           <div className="p-6 sm:p-10">
@@ -295,6 +309,35 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 <strong className="text-[#F6F1E7]">{ui.musicLabel}:</strong> {music} ·{' '}
                 <strong className="text-[#F6F1E7]">Dress Code:</strong> {dress}
               </p>
+              {matchedPublicVenue && matchedPublicVenueHref && (
+                <div
+                  data-venue-authority-backlink
+                  className="mt-4 flex flex-col gap-3 border border-[#C9A84C]/35 bg-[#050505] p-4 sm:flex-row sm:items-center sm:justify-between"
+                >
+                  <div>
+                    <p className="text-[11px] font-bold uppercase tracking-widest text-[#C9A84C]">
+                      {isGardaSisterVenue
+                        ? (isIt ? 'Sede Gemella a Milano' : 'Sister Flagship Venue in Milan')
+                        : (isIt ? 'Scheda Ufficiale Locale Tutto l\'Anno' : 'Official Year-Round Venue Guide')}
+                    </p>
+                    <p className="mt-1 text-sm text-[#EAE3D5]">
+                      {isGardaSisterVenue
+                        ? (isIt
+                            ? 'Scopri anche la sede milanese Just Me Milano (Torre Branca, Parco Sempione): prezzi tavoli VIP, serate 7/7 e lista.'
+                            : 'Explore our sister Milan flagship Just Me Milano (Torre Branca, Parco Sempione): VIP table prices, 7/7 nights and guest list.')
+                        : (isIt
+                            ? `Consulta prezzi tavoli VIP, dress code, orari metro e calendario settimanale completo di ${matchedPublicVenueName}.`
+                            : `Check year-round VIP table prices, dress code, metro directions and weekly calendar for ${matchedPublicVenueName}.`)}
+                    </p>
+                  </div>
+                  <Link
+                    href={matchedPublicVenueHref}
+                    className="inline-flex shrink-0 items-center justify-center border border-[#C9A84C] bg-[#C9A84C]/10 px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#F6F1E7] transition hover:bg-[#C9A84C] hover:text-[#050505]"
+                  >
+                    {matchedPublicVenueName} →
+                  </Link>
+                </div>
+              )}
             </div>
 
             {/* Official Remediated Event Poster (Uncropped object-contain) */}

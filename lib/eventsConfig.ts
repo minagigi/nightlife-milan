@@ -281,7 +281,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       en: 'Elegant and Chic. Collared shirts for men.',
       it: 'Elegante e Chic. Camicia con colletto per gli uomini.'
     },
-    faqs: defaultFaqs('Pineta Club', 'Via Privata Giovanni Ventura 15, Milan', '25+', 'Elegant and Chic', 'Live Music and Commercial'),
+    faqs: defaultFaqs('Pineta Club', 'Via Messina 38, Milan', '25+', 'Elegant and Chic', 'Live Music and Commercial'),
     image: '/images/events/october-2026/243822-fa1698470cb9.webp',
     xceedLink: 'https://xceed.me/en/milano/event/friday-night-721/243823/channel/nightlifemilan-1',
     priority: 95
@@ -305,7 +305,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       en: 'Strictly Elegant.',
       it: 'Strettamente Elegante.'
     },
-    faqs: defaultFaqs('Pineta Club', 'Via Privata Giovanni Ventura 15, Milan', '25+', 'Strictly Elegant', 'Live Music and Commercial'),
+    faqs: defaultFaqs('Pineta Club', 'Via Messina 38, Milan', '25+', 'Strictly Elegant', 'Live Music and Commercial'),
     image: '/images/events/october-2026/243815-e33432d48dd4.webp',
     xceedLink: 'https://xceed.me/en/milano/event/saturday-night-775/243829/channel/nightlifemilan-1',
     priority: 95
@@ -323,13 +323,13 @@ export const weeklyEvents: WeeklyEvent[] = [
     genres: ['Hits', 'EDM', 'Dance'],
     target: '21+, International, Fun crowd',
     description: {
-      en: 'Aria Club Milano opens the weekend early with the Thursday Night: a buffet aperitivo from 7:30 PM, premium cocktails, and a full party from 10:30 PM. New concept club in the heart of San Siro — expect the hits you know, the energy you crave.',
-      it: 'Aria Club Milano apre il weekend in anticipo con il Thursday Night: aperitivo a buffet dalle 19:30, cocktail premium e party dalle 22:30. Nuovo concept club nel cuore di San Siro — i tuoi brani preferiti, l\'energia che cerchi.'
+      en: 'Aria Club Milano opens the weekend early with the Thursday Night: a buffet aperitivo from 7:30 PM, premium cocktails, and a full party from 10:30 PM. New concept club in the heart of San Siro: expect the hits you know, the energy you crave.',
+      it: 'Aria Club Milano apre il weekend in anticipo con il Thursday Night: aperitivo a buffet dalle 19:30, cocktail premium e party dalle 22:30. Nuovo concept club nel cuore di San Siro: i tuoi brani preferiti, l\'energia che cerchi.'
     },
     pricing: { aperitif: 'From €15', club: 'From €15', tables: 'From €200 to €1,500' },
     dressCode: { en: 'Smart Casual. No sportswear.', it: 'Smart Casual. No abbigliamento sportivo.' },
     faqs: defaultFaqs('Aria Club Milano', 'Piazzale dello Sport 14, Milan', '21+', 'Smart Casual', 'Hits, EDM and Dance'),
-    image: '/images/venues/aria-club-milano/aria-club-milano-buffet-01.webp',
+    image: '/images/events/weekly-posters/aria-thursday.webp',
     xceedLink: 'https://xceed.me/en/milano/event/thursday-night-362/229397/channel/nightlifemilan-1',
     priority: 90
   },
@@ -396,8 +396,8 @@ export const weeklyEvents: WeeklyEvent[] = [
       en: 'Smart Casual. Elegant attire preferred.',
       it: 'Smart Casual. Abbigliamento elegante preferito.'
     },
-    faqs: defaultFaqs('Voya Rooftop', 'Via Mike Bongiorno 13, Milan', '25+', 'Smart Casual', 'Lounge and Deep House'),
-    image: '/images/venues/voya-rooftop-milan/voya-rooftop-milan-interior-01.webp',
+    faqs: defaultFaqs('Voya Rooftop', 'Viale Achille Papa 30, Milan', '25+', 'Smart Casual', 'Lounge and Deep House'),
+    image: '/images/events/weekly-posters/voya-tuesday.webp',
     priority: 80
   },
   {
@@ -419,8 +419,8 @@ export const weeklyEvents: WeeklyEvent[] = [
       en: 'Smart Casual. Elegant attire preferred.',
       it: 'Smart Casual. Abbigliamento elegante preferito.'
     },
-    faqs: defaultFaqs('Voya Rooftop', 'Via Mike Bongiorno 13, Milan', '25+', 'Smart Casual', 'Lounge and Deep House'),
-    image: '/images/venues/voya-rooftop-milan/voya-rooftop-milan-interior-02.webp',
+    faqs: defaultFaqs('Voya Rooftop', 'Viale Achille Papa 30, Milan', '25+', 'Smart Casual', 'Lounge and Deep House'),
+    image: '/images/events/weekly-posters/voya-wednesday.webp',
     priority: 80
   },
   {
@@ -442,8 +442,8 @@ export const weeklyEvents: WeeklyEvent[] = [
       en: 'Smart Casual. Elegant attire preferred.',
       it: 'Smart Casual. Abbigliamento elegante preferito.'
     },
-    faqs: defaultFaqs('Voya Rooftop', 'Via Mike Bongiorno 13, Milan', '25+', 'Smart Casual', 'Lounge and Deep House'),
-    image: '/images/venues/voya-rooftop-milan/voya-rooftop-milan-interior-03.webp',
+    faqs: defaultFaqs('Voya Rooftop', 'Viale Achille Papa 30, Milan', '25+', 'Smart Casual', 'Lounge and Deep House'),
+    image: '/images/events/weekly-posters/voya-thursday.webp',
     priority: 80
   },
   {
@@ -465,8 +465,8 @@ export const weeklyEvents: WeeklyEvent[] = [
       en: 'Smart Casual. Elegant attire preferred.',
       it: 'Smart Casual. Abbigliamento elegante preferito.'
     },
-    faqs: defaultFaqs('Voya Rooftop', 'Via Mike Bongiorno 13, Milan', '25+', 'Smart Casual', 'Lounge and Deep House'),
-    image: '/images/venues/voya-rooftop-milan/voya-rooftop-milan-interior-04.webp',
+    faqs: defaultFaqs('Voya Rooftop', 'Viale Achille Papa 30, Milan', '25+', 'Smart Casual', 'Lounge and Deep House'),
+    image: '/images/events/weekly-posters/voya-friday.webp',
     priority: 80
   },
   {
@@ -488,8 +488,8 @@ export const weeklyEvents: WeeklyEvent[] = [
       en: 'Smart Casual. Elegant attire preferred.',
       it: 'Smart Casual. Abbigliamento elegante preferito.'
     },
-    faqs: defaultFaqs('Voya Rooftop', 'Via Mike Bongiorno 13, Milan', '25+', 'Smart Casual', 'Lounge and Deep House'),
-    image: '/images/venues/voya-rooftop-milan/voya-rooftop-milan-interior-05.webp',
+    faqs: defaultFaqs('Voya Rooftop', 'Viale Achille Papa 30, Milan', '25+', 'Smart Casual', 'Lounge and Deep House'),
+    image: '/images/events/weekly-posters/voya-saturday.webp',
     priority: 80
   },
   {
@@ -511,8 +511,8 @@ export const weeklyEvents: WeeklyEvent[] = [
       en: 'Smart Casual.',
       it: 'Smart Casual.'
     },
-    faqs: defaultFaqs('Voya Rooftop', 'Via Mike Bongiorno 13, Milan', '25+', 'Smart Casual', 'Lounge and Chillout'),
-    image: '/images/venues/voya-rooftop-milan/voya-rooftop-milan-interior-06.webp',
+    faqs: defaultFaqs('Voya Rooftop', 'Viale Achille Papa 30, Milan', '25+', 'Smart Casual', 'Lounge and Chillout'),
+    image: '/images/events/weekly-posters/voya-sunday.webp',
     priority: 80
   },
 
@@ -534,7 +534,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     pricing: { aperitif: 'From €20', club: 'From €20', tables: 'From €200' },
     dressCode: { en: 'Smart Casual.', it: 'Smart Casual.' },
     faqs: defaultFaqs('55 Milano', 'Via Piero della Francesca 55, Milan', '23+', 'Smart Casual', 'Lounge and Commercial'),
-    image: '/images/venues/55-milano/55-milano-interior-01.webp',
+    image: '/images/events/weekly-posters/55milano-tuesday.webp',
     priority: 85
   },
   {
@@ -554,7 +554,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     pricing: { aperitif: 'From €20', club: 'From €20', tables: 'From €200' },
     dressCode: { en: 'Smart Casual.', it: 'Smart Casual.' },
     faqs: defaultFaqs('55 Milano', 'Via Piero della Francesca 55, Milan', '23+', 'Smart Casual', 'Lounge and House'),
-    image: '/images/venues/55-milano/55-milano-interior-02.webp',
+    image: '/images/events/weekly-posters/55milano-wednesday.webp',
     priority: 85
   },
   {
@@ -574,7 +574,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     pricing: { aperitif: 'From €20', club: 'From €20', tables: 'From €250' },
     dressCode: { en: 'Smart Casual.', it: 'Smart Casual.' },
     faqs: defaultFaqs('55 Milano', 'Via Piero della Francesca 55, Milan', '25+', 'Smart Casual', 'Live Music and Commercial'),
-    image: '/images/venues/55-milano/55-milano-interior-03.webp',
+    image: '/images/events/weekly-posters/55milano-thursday.webp',
     priority: 85
   },
   {
@@ -597,7 +597,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Smart Casual.'
     },
     faqs: defaultFaqs('55 Milano', 'Via Piero della Francesca 55, Milan', '25+', 'Smart Casual', 'Live Music and Commercial'),
-    image: '/images/venues/55-milano/55-milano-friday-dinner-show-01.webp',
+    image: '/images/events/weekly-posters/55milano-friday.webp',
     priority: 85
   },
   {
@@ -620,7 +620,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Smart Casual.'
     },
     faqs: defaultFaqs('55 Milano', 'Via Piero della Francesca 55, Milan', '25+', 'Smart Casual', 'Live Music and Commercial'),
-    image: '/images/venues/55-milano/55-milano-saturday-the-wall-01.webp',
+    image: '/images/events/weekly-posters/55milano-saturday.webp',
     priority: 85
   },
   {
@@ -643,7 +643,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Smart Casual. Comodo per ballare.'
     },
     faqs: defaultFaqs('55 Milano', 'Via Piero della Francesca 55, Milan', '21+', 'Smart Casual', 'Reggaeton and Latin'),
-    image: '/images/venues/55-milano/55-milano-sunday-latino-americano-01.webp',
+    image: '/images/events/weekly-posters/55milano-sunday.webp',
     priority: 85
   },
 
@@ -668,7 +668,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Casual Chic. Streetwear consentito.'
     },
     faqs: defaultFaqs('Play Club', 'Viale Monte Grappa 14, Milan', '18+', 'Casual Chic', 'Hip-Hop and Trap'),
-    image: '/images/venues/play-club-milano/play-club-milano-interior-01.webp',
+    image: '/images/events/weekly-posters/playclub-tuesday.webp',
     priority: 50
   },
   {
@@ -691,7 +691,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Casual Chic.'
     },
     faqs: defaultFaqs('Play Club', 'Viale Monte Grappa 14, Milan', '18+', 'Casual Chic', 'Reggaeton and Urban'),
-    image: '/images/venues/play-club-milano/play-club-milano-interior-02.webp',
+    image: '/images/events/weekly-posters/playclub-thursday.webp',
     priority: 50
   },
   {
@@ -714,7 +714,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Smart Casual.'
     },
     faqs: defaultFaqs('Play Club', 'Viale Monte Grappa 14, Milan', '21+', 'Smart Casual', 'Commercial and House'),
-    image: '/images/venues/play-club-milano/play-club-milano-interior-03.webp',
+    image: '/images/events/weekly-posters/playclub-friday.webp',
     priority: 50
   },
   {
@@ -737,7 +737,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Elegante. Vestiti per impressionare.'
     },
     faqs: defaultFaqs('Play Club', 'Viale Monte Grappa 14, Milan', '21+', 'Elegant', 'Commercial and House'),
-    image: '/images/venues/play-club-milano/play-club-milano-interior-04.webp',
+    image: '/images/events/weekly-posters/playclub-saturday.webp',
     priority: 50
   },
   {
@@ -760,7 +760,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Urban Chic. Streetwear consentito.'
     },
     faqs: defaultFaqs('Play Club', 'Viale Monte Grappa 14, Milan', '18+', 'Urban Chic', 'Hip-Hop and Trap'),
-    image: '/images/venues/play-club-milano/play-club-milano-interior-05.webp',
+    image: '/images/events/weekly-posters/playclub-sunday.webp',
     priority: 50
   },
 
@@ -782,7 +782,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     pricing: { club: 'From €15', tables: 'From €250' },
     dressCode: { en: 'Fashion Chic.', it: 'Fashion Chic.' },
     faqs: defaultFaqs('Repvblic', 'Piazza della Repubblica 12, Milan', '21+', 'Fashion Chic', 'Hip-Hop and House'),
-    image: '/images/venues/repvblic-milano/repvblic-milano-interior-04.webp',
+    image: '/images/events/weekly-posters/repvblic-monday.webp',
     priority: 75
   },
   {
@@ -805,7 +805,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Casual Chic.'
     },
     faqs: defaultFaqs('Repvblic', 'Piazza della Repubblica 12, Milan', '18+', 'Casual Chic', 'Commercial and Reggaeton'),
-    image: '/images/venues/repvblic-milano/repvblic-milano-interior-01.webp',
+    image: '/images/events/weekly-posters/repvblic-wednesday.webp',
     priority: 75
   },
   {
@@ -828,7 +828,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Urban Casual.'
     },
     faqs: defaultFaqs('Repvblic', 'Piazza della Repubblica 12, Milan', '18+', 'Urban Casual', 'Hip-Hop and Trap'),
-    image: '/images/venues/repvblic-milano/repvblic-milano-interior-02.webp',
+    image: '/images/events/weekly-posters/repvblic-thursday.webp',
     priority: 75
   },
   {
@@ -851,7 +851,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Alternative Chic. Esprimi te stesso.'
     },
     faqs: defaultFaqs('Repvblic', 'Piazza della Repubblica 12, Milan', '21+', 'Alternative Chic', 'Indie, Rock, and Electronic'),
-    image: '/images/venues/repvblic-milano/repvblic-milano-interior-03.webp',
+    image: '/images/events/weekly-posters/repvblic-friday.webp',
     priority: 75
   },
   {
@@ -871,7 +871,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     pricing: { aperitif: 'From €25', club: 'From €25', tables: 'From €300' },
     dressCode: { en: 'Strictly Elegant.', it: 'Strettamente Elegante.' },
     faqs: defaultFaqs('Repvblic', 'Piazza della Repubblica 12, Milan', '21+', 'Strictly Elegant', 'House, Commercial and Hip-Hop'),
-    image: '/images/venues/repvblic-milano/repvblic-milano-interior-05.webp',
+    image: '/images/events/weekly-posters/repvblic-saturday.webp',
     priority: 75
   }
 ];

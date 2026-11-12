@@ -30,8 +30,8 @@ export function HomeHalloweenAndCapodannoSections({
       desc: isIt
         ? 'Dal Lunedì alla Domenica sotto la Torre Branca: Monday Night, Martedì Universitario, Mercoledì Absolutely, Giovedì Viziatissima, Friday Night, Saturday Night & Sunday Uptown. Royal Aperitivo dalle 19:30 e Club fino alle 05:00.'
         : 'Monday through Sunday beneath Torre Branca in Parco Sempione: Monday Night, University Tuesday, Absolutely Wednesday, Viziatissima Thursday, Friday Night, Saturday Night & Uptown Sunday. Royal Aperitivo from 19:30 & Club until 05:00.',
-      badge: isIt ? 'Royal Aperitivo da 15–20€ · Tavoli VIP da 320€ a 5.000€' : 'Royal Aperitivo from €15–20 · VIP Tables €320 to €5,000',
-      posterSrc: '/images/venues/just-me-milano/just-me-milano-party-01.webp',
+      badge: isIt ? 'Royal Aperitivo da 15-20€ · Tavoli VIP da 320€ a 5.000€' : 'Royal Aperitivo from €15-20 · VIP Tables €320 to €5,000',
+      posterSrc: '/images/events/october-2026/249213-e2755e4bf02c.webp',
       href: `${prefix}/events/justme-saturday-saturday-night`,
     },
     {
@@ -44,7 +44,7 @@ export function HomeHalloweenAndCapodannoSections({
         ? 'Giovedì Tr3ndy Society, Venerdì Aperitivo Cantato & Live Music e Sabato Luxury Dinner Show & Club tra i lampadari di cristallo di Via Messina 38.'
         : 'Thursday Tr3ndy Society, Friday Singing Aperitivo & Live Music, and Saturday Luxury Dinner Show & Club under crystal chandeliers at Via Messina 38.',
       badge: isIt ? 'Aperitivo Cantato da 20€ · Tavoli VIP & Dinner da 300€' : 'Singing Aperitivo from €20 · VIP Tables & Dinner from €300',
-      posterSrc: '/images/venues/pineta-milano/pineta-milano-aperitivo-01.webp',
+      posterSrc: '/images/events/october-2026/243822-fa1698470cb9.webp',
       href: `${prefix}/events/pineta-friday-aperitivo-cantato`,
     },
     {
@@ -57,7 +57,7 @@ export function HomeHalloweenAndCapodannoSections({
         ? 'A 150 metri dallo Stadio San Siro (Piazzale dello Sport 14): Giovedì, Venerdì e Sabato con Royal Aperitivo dalle 19:30, Hip-Hop, Reggaeton, Urban & Commercial Arena e 3 aree Privé.'
         : 'Just 150 meters from San Siro Stadium (Piazzale dello Sport 14): Thursday, Friday & Saturday with Royal Aperitivo from 19:30, Hip-Hop, Reggaeton, Urban & Commercial Arena and 3 VIP Privé zones.',
       badge: isIt ? 'Royal Aperitivo da 15€ · Tavoli Pista, Privé Aria & Console da 200€' : 'Royal Aperitivo from €15 · Dancefloor, Privé & DJ Tables from €200',
-      posterSrc: '/images/venues/aria-club-milano/aria-club-milano-garden-01.webp',
+      posterSrc: '/images/events/october-2026/242617-59f08f112437.webp',
       href: `${prefix}/events/aria-saturday-saturday-night`,
     },
     {
@@ -70,7 +70,7 @@ export function HomeHalloweenAndCapodannoSections({
         ? 'Da Martedì a Domenica nello storico loft di Via Piero della Francesca 55: Royal Apericena XL per lauree e compleanni, Venerdì Dinner Show, Sabato The Wall e Domenica Latin Night.'
         : 'Tuesday through Sunday inside the historic loft at Via Piero della Francesca 55: Royal XXL Apericena for graduations and birthdays, Friday Dinner Show, Saturday The Wall & Sunday Latin Night.',
       badge: isIt ? 'Royal Apericena da 20€ · Cena Cantata & Tavoli VIP da 200€' : 'Royal Apericena from €20 · Dinner Show & VIP Tables from €200',
-      posterSrc: '/images/venues/55-milano/55-milano-saturday-the-wall-01.webp',
+      posterSrc: '/images/events/weekly-posters/55milano-saturday.webp',
       href: `${prefix}/events/55milano-saturday-aperitivo-cena-cantata`,
     },
     {
@@ -83,7 +83,7 @@ export function HomeHalloweenAndCapodannoSections({
         ? 'Da Martedì a Domenica al 20° piano con vista a 360° sullo skyline di Milano: Sunset Aperitivo dalle 18:30, cena panoramica à la carte, mixology d’autore e Sky Clubbing fino a tardi.'
         : 'Tuesday through Sunday on the 20th floor with 360° Milan skyline views: Sunset Aperitivo from 18:30, panoramic à la carte dinner, signature mixology & Sky Clubbing until late.',
       badge: isIt ? 'Sunset Aperitivo da 20€ · Cena Vista Skyline & Tavoli VIP Rooftop' : 'Sunset Aperitivo from €20 · Skyline Dinner & Rooftop VIP Tables',
-      posterSrc: '/images/venues/voya-rooftop-milan/voya-rooftop-milan-interior-02.webp',
+      posterSrc: '/images/events/weekly-posters/voya-saturday.webp',
       href: `${prefix}/events/voya-saturday-rooftop-experience`,
     },
     {
@@ -96,7 +96,7 @@ export function HomeHalloweenAndCapodannoSections({
         ? 'Lunedì Dirty Monday, Mercoledì Home, Giovedì Sbraake, Venerdì & Sabato Luxury Dinner Show & Club nel salotto internazionale di Piazza della Repubblica 12.'
         : 'Monday Dirty Monday, Wednesday Home, Thursday Sbraake, Friday & Saturday Luxury Dinner Show & Club at Piazza della Repubblica 12.',
       badge: isIt ? 'Accredito Lista da 15€ · Dinner Show & Tavoli Privé da 250€' : 'Guest List from €15 · Dinner Show & Privé Tables from €250',
-      posterSrc: '/images/venues/repvblic-milano/repvblic-milano-interior-01.webp',
+      posterSrc: '/images/events/weekly-posters/repvblic-saturday.webp',
       href: `${prefix}/events/repvblic-saturday-saturday-night`,
     },
   ];
@@ -109,11 +109,24 @@ export function HomeHalloweenAndCapodannoSections({
         ? 'Capodanno JustMe Milano 2027: Il Grande Gatsby sotto la Torre Branca'
         : 'JustMe Milan NYE 2027: The Great Gatsby beneath Torre Branca',
       priceLabel: isIt
-        ? 'Prezzi passati: da 50€ (Ingresso) · 100€ (Royal Buffet) · 250€ (Gran Cenone)'
-        : 'Past prices: from €50 (Entry) · €100 (Royal Buffet) · €250 (Gala Dinner)',
-      posterSrc: '/images/events/october-2026/248439-68f2dbbf4405.webp',
+        ? 'Prezzi ufficiali: da 50€ (Ingresso) · 100€ (Royal Buffet) · 250€ (Gran Cenone)'
+        : 'Official prices: from €50 (Entry) · €100 (Royal Buffet) · €250 (Gala Dinner)',
+      posterSrc: '/images/events/capodanno-2027-posters/capodanno-justme-milano-torre-branca.webp',
       href: capodannoEventPath('capodanno-justme-milano-torre-branca', locale),
       highlight: false,
+    },
+    {
+      rank: isIt ? '02 · GRAN GALÀ LAGO DI GARDA · DESENZANO / LONATO' : '02 · LAKE GARDA GALA · DESENZANO / LONATO',
+      venue: 'Just Me Garda Lake',
+      title: isIt
+        ? 'Capodanno Just Me Lago di Garda 2027: "Just Me in Rouge" Dinner & Dance'
+        : 'Just Me Garda Lake NYE 2027: "Just Me in Rouge" Dinner & Dance',
+      priceLabel: isIt
+        ? 'Prezzi Xceed verificati: 20€ (Club + Drink) · 70€ (Buffet) · 130€ (Gran Cenone) · Tavoli da 440€'
+        : 'Verified Xceed prices: €20 (Club + Drink) · €70 (Buffet) · €130 (Gala Dinner) · Tables from €440',
+      posterSrc: '/images/events/capodanno-2027-posters/capodanno-justme-garda-lake.webp',
+      href: capodannoEventPath('capodanno-justme-garda-lake', locale),
+      highlight: true,
     },
     {
       rank: isIt ? '02 · CLUB ICONICO · PORTA GARIBALDI' : '02 · FLAGSHIP CLUB · PORTA GARIBALDI',
@@ -250,7 +263,7 @@ export function HomeHalloweenAndCapodannoSections({
                       src={card.posterSrc}
                       alt={card.title}
                       loading="lazy"
-                      className="block aspect-[16/9] w-full object-cover"
+                      className="block aspect-[16/9] w-full object-contain"
                     />
                   </Link>
                   <div className="p-6 pb-2">
@@ -303,18 +316,18 @@ export function HomeHalloweenAndCapodannoSections({
               <p className="font-mono text-xs uppercase tracking-[0.14em] text-[#EAE3D5] flex items-center gap-2 mb-3">
                 <Sparkles aria-hidden="true" className="h-4 w-4 shrink-0 text-[#F6F1E7]" />
                 {isIt
-                  ? 'SEZIONE SPECIALE CAPODANNO 2027 · 112 EVENTI UFFICIALI (31 DICEMBRE 2026)'
-                  : 'NEW YEAR’S EVE 2027 DEDICATED SECTION · 112 OFFICIAL EVENTS (DEC 31, 2026)'}
+                  ? 'SEZIONE SPECIALE CAPODANNO 2027 · 113 EVENTI UFFICIALI (31 DICEMBRE 2026)'
+                  : 'NEW YEAR’S EVE 2027 DEDICATED SECTION · 113 OFFICIAL EVENTS (DEC 31, 2026)'}
               </p>
               <h2 className="font-serif text-3xl sm:text-5xl font-normal text-[#F6F1E7] tracking-[-0.025em] leading-[0.96]">
                 {isIt
-                  ? 'Tutti i 73 Locali e Discoteche di Milano, 15 Capodanni Speciali, 12 Province Lombarde & Piazze Gratis'
-                  : 'All 73 Milan Clubs & Venues, 15 Special NYE Experiences, All 12 Lombardy Provinces & Free Squares'}
+                  ? 'Tutti i 73 Locali e Discoteche di Milano, Just Me Lago di Garda, 15 Capodanni Speciali, 12 Province Lombarde & Piazze Gratis'
+                  : 'All 73 Milan Clubs & Venues, Just Me Lake Garda, 15 Special NYE Experiences, All 12 Lombardy Provinces & Free Squares'}
               </h2>
               <p className="mt-4 font-sans text-sm sm:text-base text-[#C2B9AA] leading-relaxed">
                 {isIt
-                  ? 'In prima fila i 6 club e rooftop simbolo di Milano (1. Just Me, 2. Pineta, 3. Aria, 4. 55 Milano, 5. Voya Rooftop, il Capodanno Rooftop Numero 1 di Milano con menu completo di tutto a 300€ a persona, e 6. Repvblic), seguiti da tutti i 112 eventi di San Silvestro.'
-                  : 'Starting with our 6 priority venues (1. Just Me, 2. Pineta, 3. Aria, 4. 55 Milano, 5. Voya Rooftop, Milan’s #1 Rooftop NYE with full all-inclusive menu at €300/person, and 6. Repvblic), followed by all 112 New Year’s Eve events.'}
+                  ? 'In prima fila i club e rooftop simbolo (Just Me Milano, Just Me Lago di Garda "Just Me in Rouge", Pineta, Aria, 55 Milano, Voya Rooftop con menu completo a 300€ a persona, e Repvblic), seguiti da tutti i 113 eventi di San Silvestro.'
+                  : 'Starting with our priority venues (Just Me Milan, Just Me Lake Garda "Just Me in Rouge", Pineta, Aria, 55 Milano, Voya Rooftop with full all-inclusive menu at €300/person, and Repvblic), followed by all 113 New Year’s Eve events.'}
               </p>
             </div>
             <div className="flex flex-wrap gap-3 shrink-0">
@@ -323,7 +336,7 @@ export function HomeHalloweenAndCapodannoSections({
                 prefetch={false}
                 className="inline-flex min-h-[48px] items-center justify-center bg-[#F6F1E7] px-6 py-3.5 font-mono text-xs font-bold uppercase tracking-[0.12em] text-[#050505] hover:bg-[#EAE3D5] transition-colors"
               >
-                {isIt ? 'Tutti i 112 Eventi di Capodanno ↗' : 'All 112 NYE 2027 Events ↗'}
+                {isIt ? 'Tutti i 113 Eventi di Capodanno ↗' : 'All 113 NYE 2027 Events ↗'}
               </Link>
               <Link
                 href={capodannoCategoryPath('capodanno-rooftop-milano', locale)}
@@ -399,7 +412,7 @@ export function HomeHalloweenAndCapodannoSections({
           {/* 4 Hub Principali Capodanno + 12 Categorie */}
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
             <Link href={capodannoPath(locale)} prefetch={false} className="bg-[#F6F1E7] p-4 text-center font-mono text-xs font-bold uppercase tracking-wider text-[#050505] hover:bg-[#EAE3D5] transition-colors">
-              {isIt ? '01 · Tutti i 112 Eventi Milano ↗' : '01 · All 112 Milan Events ↗'}
+              {isIt ? '01 · Tutti i 113 Eventi Ufficiali ↗' : '01 · All 113 Official Events ↗'}
             </Link>
             <Link href={capodannoCategoryPath('capodanno-speciale', locale)} prefetch={false} className="border border-[#F6F1E7]/35 bg-[#0B0A09] p-4 text-center font-mono text-xs uppercase tracking-wider text-[#F6F1E7] hover:border-[#F6F1E7] transition-colors">
               {isIt ? '02 · 15 Speciali, Tram & Terme ↗' : '02 · 15 Special, Tram & Spa ↗'}

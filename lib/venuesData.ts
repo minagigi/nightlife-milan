@@ -47,20 +47,20 @@ export const venuesData: Venue[] = [
     id: "v-voya",
     slugs: { en: "voya-rooftop-milan", it: "voya-rooftop-milan" },
     address: {
-      streetAddress: "Via Achille Papa, 30",
+      streetAddress: "Viale Achille Papa, 30",
       addressLocality: "Milano",
-      postalCode: "20154",
+      postalCode: "20149",
       addressCountry: "IT"
     },
-    coordinates: { latitude: 45.4910, longitude: 9.1870 },
+    coordinates: { latitude: 45.4893, longitude: 9.1510 },
     category: VenueCategory.ROOFTOP,
-    zone: MilanZone.ISOLA,
+    zone: MilanZone.CITY_LIFE,
     sameAs: ["https://instagram.com/voyarooftop", "https://voyarooftop.com"],
     localizedContent: {
       name: { en: "Voya Rooftop", it: "Voya Rooftop" },
       description: {
-        en: "Twentieth floor, Isola. The Milan skyline runs the length of the glass while the bar pours till late. Aperitivo turns into a DJ set without anyone noticing.",
-        it: "Ventesimo piano, Isola. Lo skyline di Milano corre lungo le vetrate mentre il bar versa fino a tardi. L'aperitivo diventa DJ set senza che te ne accorga."
+        en: "Twentieth floor of Torre WJC in Portello, facing the CityLife skyscrapers. Floor-to-ceiling glass walls frame the Milan skyline while sunset aperitivo flows into panoramic dinner and late-night DJ sets.",
+        it: "Ventesimo piano della Torre WJC al Portello, di fronte ai grattacieli di CityLife. Le vetrate a tutta altezza incorniciano lo skyline di Milano mentre l'aperitivo al tramonto sfuma nella cena panoramica e nel DJ set notturno."
       },
       dressCode: { en: "Smart Elegant: No sportswear, no shorts", it: "Smart Elegant: No abbigliamento sportivo" },
       altTextImg: { en: "Voya Rooftop Milan skyline view from 20th floor at night", it: "Vista skyline di Milano dal Voya Rooftop al 20° piano" },
@@ -93,7 +93,7 @@ export const venuesData: Venue[] = [
       postalCode: "20154",
       addressCountry: "IT"
     },
-    coordinates: { latitude: 45.4812, longitude: 9.1872 },
+    coordinates: { latitude: 45.4856, longitude: 9.1726 },
     category: VenueCategory.CLUB,
     zone: MilanZone.CORSO_COMO,
     sameAs: ["https://instagram.com/pinetamilano"],
@@ -213,14 +213,14 @@ export const venuesData: Venue[] = [
     id: "v-repvblic",
     slugs: { en: "repvblic-milano", it: "repvblic-milano" },
     address: {
-      streetAddress: "Via Giovanni Fantoli, 9",
+      streetAddress: "Piazza della Repubblica, 12",
       addressLocality: "Milano",
-      postalCode: "20138",
+      postalCode: "20124",
       addressCountry: "IT"
     },
-    coordinates: { latitude: 45.4560, longitude: 9.2400 },
+    coordinates: { latitude: 45.4779, longitude: 9.1965 },
     category: VenueCategory.CLUB,
-    zone: MilanZone.RIPAMONTI,
+    zone: MilanZone.PORTA_VENEZIA,
     sameAs: ["https://instagram.com/repvblicmilano"],
     localizedContent: {
       name: { en: "Repvblic", it: "Repvblic" },
@@ -540,14 +540,14 @@ export const venuesData: Venue[] = [
     id: "v-volt",
     slugs: { en: "volt-club-milano", it: "volt-club-milano" },
     address: {
-      streetAddress: "Via Filippo Turati, 30",
+      streetAddress: "Via Molino delle Armi, 16",
       addressLocality: "Milano",
-      postalCode: "20121",
+      postalCode: "20123",
       addressCountry: "IT"
     },
-    coordinates: { latitude: 45.4750, longitude: 9.2020 },
+    coordinates: { latitude: 45.4566, longitude: 9.1835 },
     category: VenueCategory.CLUB,
-    zone: MilanZone.PORTA_VENEZIA,
+    zone: MilanZone.NAVIGLI,
     sameAs: ["https://instagram.com/voltmilano"],
     localizedContent: {
       name: { en: "Volt", it: "Volt" },

@@ -3,9 +3,12 @@ import React from 'react';
 import Link from '@/components/LocalizedLink';
 import { SITE_CONTACT } from '@/config/contact';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
-import { mockVenues, mockZones } from '@/lib/data';
+import { getVenueBySlug, mockVenues, mockZones } from '@/lib/data';
+import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
+import { getLocalizedVenueSlug35 } from '@/lib/i18n/localizedSlugs35';
 import { localePrefix, type LocaleCode } from '@/lib/i18n/locales';
 import { getLocalizedText } from '@/lib/seo';
+import { getVenueAuthoritySpec } from '@/lib/venueAuthority33';
 
 type Props = {
   locale: LocaleCode;
@@ -300,25 +303,44 @@ export default function EditorialPageSections({ locale, path }: Props) {
   // ---------------------------------------------------------------------------
   if (cleanPath.startsWith('/clubs/') && cleanPath !== '/clubs') {
     const slug = cleanPath.replace('/clubs/', '').split('/')[0];
-    const venue = mockVenues.find((v) => v.slugs.en === slug || v.slugs.it === slug);
+    const venue =
+      getVenueBySlug(slug, locale) ||
+      mockVenues.find((v) => v.slugs.en === slug || v.slugs.it === slug);
     const venueName = venue ? getLocalizedText(venue.localizedContent.name, locale) : slug.replace(/-/g, ' ');
     const street = venue?.address?.streetAddress || 'Milano';
     const postal = venue?.address?.postalCode || '20121';
     const locality = venue?.address?.addressLocality || 'Milano';
-    const dress = venue ? getLocalizedText(venue.localizedContent.dressCode, locale) : (isIt ? 'Smart Chic & Curato' : 'Smart Chic & Polished');
-    const meta = CLUB_DEEP_META[venue?.slugs.en || slug] || {
-      metro: isIt ? `Fermate Metro M1/M2/M3/M4/M5 e Radiotaxi (${street}, ${locality})` : `M1/M2/M3/M4/M5 Metro & Taxi Stand (${street}, ${locality})`,
-      parking: isIt ? `Parcheggio custodito e stalli blu nelle vie adiacenti a ${street}` : `Guarded parking garage and street bays near ${street}`,
-      soundIt: 'House, Commercial Dance, Hip-Hop, Afro House & Format Speciali',
-      soundEn: 'House, Commercial Dance, Hip-Hop, Afro House & Special Formats',
-      vipZonesIt: 'Tavoli Pista, Area Lounge Riservata, Privé Rialzato e Super Privé Console DJ',
-      vipZonesEn: 'Dancefloor Tables, Reserved Lounge Area, Elevated Privé, and DJ Console Super Privé',
-      minSpend: 'Tavolo Pista 250–400 € · Privé 500–1.000 € · Super Privé Console 1.200–3.000 €',
-      preClubIt: `Aperitivo o cena nei cocktail bar e speakeasy del quartiere intorno a ${street} dalle 19:30 alle 22:30`,
-      preClubEn: `Aperitivo or dinner at cocktail bars and speakeasies around ${street} between 19:30 and 22:30`,
-      bestNightsIt: 'Venerdì, Sabato e Vigilie di Festa + Serate Infrasettimanali su Prenotazione',
-      bestNightsEn: 'Friday, Saturday, and Holiday Eves + Midweek Format Nights',
-    };
+    const dress = venue
+      ? getLocalizedText(venue.localizedContent.dressCode, locale).replace(/[\u2014–]/g, ' - ')
+      : (isIt ? 'Smart Chic & Curato' : 'Smart Chic & Polished');
+    const authSpec = venue ? getVenueAuthoritySpec(venue.id) : undefined;
+    const meta = authSpec
+      ? {
+          metro: isIt ? authSpec.metroIt : authSpec.metroEn,
+          parking: isIt ? authSpec.parkingIt : authSpec.parkingEn,
+          soundIt: authSpec.soundIt,
+          soundEn: authSpec.soundEn,
+          vipZonesIt: authSpec.vipZonesIt,
+          vipZonesEn: authSpec.vipZonesEn,
+          minSpend: isIt ? authSpec.minSpendIt : authSpec.minSpendEn,
+          preClubIt: authSpec.preClubIt,
+          preClubEn: authSpec.preClubEn,
+          bestNightsIt: authSpec.bestNightsIt,
+          bestNightsEn: authSpec.bestNightsEn,
+        }
+      : CLUB_DEEP_META[venue?.slugs.en || slug] || {
+          metro: isIt ? `Fermate Metro M1/M2/M3/M4/M5 e Radiotaxi (${street}, ${locality})` : `M1/M2/M3/M4/M5 Metro & Taxi Stand (${street}, ${locality})`,
+          parking: isIt ? `Parcheggio custodito e stalli blu nelle vie adiacenti a ${street}` : `Guarded parking garage and street bays near ${street}`,
+          soundIt: 'House, Commercial Dance, Hip-Hop, Afro House & Format Speciali',
+          soundEn: 'House, Commercial Dance, Hip-Hop, Afro House & Special Formats',
+          vipZonesIt: 'Tavoli Pista, Area Lounge Riservata, Privé Rialzato e Super Privé Console DJ',
+          vipZonesEn: 'Dancefloor Tables, Reserved Lounge Area, Elevated Privé, and DJ Console Super Privé',
+          minSpend: 'Tavolo Pista 250-400€ · Privé 500-1.000€ · Super Privé Console 1.200-3.000€',
+          preClubIt: `Aperitivo o cena nei cocktail bar e speakeasy del quartiere intorno a ${street} dalle 19:30 alle 22:30`,
+          preClubEn: `Aperitivo or dinner at cocktail bars and speakeasies around ${street} between 19:30 and 22:30`,
+          bestNightsIt: 'Venerdì, Sabato e Vigilie di Festa + Serate Infrasettimanali su Prenotazione',
+          bestNightsEn: 'Friday, Saturday, and Holiday Eves + Midweek Format Nights',
+        };
 
     return (
     <>
@@ -383,34 +405,6 @@ export default function EditorialPageSections({ locale, path }: Props) {
               </table>
             </div>
           </section>
-
-          <section className="px-6 py-12 sm:px-12">
-            <h2 className="mb-6 font-serif text-2xl text-[#F6F1E7] sm:text-3xl">
-              {isIt ? `Domande Frequenti su ${venueName}` : `Frequently Asked Questions About ${venueName}`}
-            </h2>
-            <div className="grid gap-5 md:grid-cols-2">
-              <article className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-6">
-                <h3 className="mb-2 font-serif text-xl text-[#F6F1E7]">
-                  {isIt ? `Quanto costa un Tavolo VIP da ${venueName}?` : `How much is a VIP Table at ${venueName}?`}
-                </h3>
-                <p className="text-sm text-[#C2B9AA] leading-relaxed">
-                  {isIt
-                    ? `Da ${venueName} le formule tavolo partono da ${meta.minSpend}, sempre con il 100% dell’importo convertito in bottiglie dal listino ufficiale e ingresso prioritario al desk VIP Host.`
-                    : `At ${venueName}, VIP table minimum spends run ${meta.minSpend}, with 100% of the amount credited toward bottles from the official menu and priority VIP Host admission.`}
-                </p>
-              </article>
-              <article className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-6">
-                <h3 className="mb-2 font-serif text-xl text-[#F6F1E7]">
-                  {isIt ? `Qual è il dress code richiesto all’ingresso di ${venueName}?` : `What is the dress code at ${venueName}?`}
-                </h3>
-                <p className="text-sm text-[#C2B9AA] leading-relaxed">
-                  {isIt
-                    ? `La regola di stile per ${venueName} è: ${dress}. Ricorda di portare sempre un documento d’identità fisico originale con foto.`
-                    : `The style policy at ${venueName} is: ${dress}. Always carry an original physical photo ID.`}
-                </p>
-              </article>
-            </div>
-          </section>
         </div>
       </aside>
       <SeoAuthorityHub lang={locale} pageKey={cleanPath} />
@@ -469,119 +463,116 @@ export default function EditorialPageSections({ locale, path }: Props) {
   }
 
   // ---------------------------------------------------------------------------
-  // CASE 4: /clubs -> Expanded 5-Category Master Directory (Clubs, Rooftops, Dinner Shows, Speakeasies, Underground)
+  // CASE 4: /clubs -> Complete 33-Venue Active Catalog Directory (Zero Dead Links)
   // ---------------------------------------------------------------------------
   if (cleanPath === '/clubs') {
+    const clubsDir = getLocalizedDir35('clubs', locale);
     const categories = isIt ? [
       {
-        title: '1. I 6 Club Iconici & Fashion VIP Club di Milano',
+        title: '1. I 12 Club Iconici & Fashion VIP Club di Milano',
         items: [
-          { name: '1. JustMe Milano (Torre Branca)', slug: 'just-me-milano', desc: 'Viale Luigi Camoens 2 · Royal Aperitivo, Dinner Show & Luxury Garden/Indoor Clubbing 7/7 (Tavoli 350–5.000 €)' },
-          { name: '2. Pineta Club Milano', slug: 'pineta-club-milano', desc: 'Via Messina 38 · Lampadari di cristallo, Dinner Show cantato, Reggaeton & Vocal House fino alle 05:00' },
-          { name: '3. Aria Club Milano (San Siro)', slug: 'aria-club-milano', desc: 'Piazzale dello Sport 14 · Il grande club nel parco di San Siro: Hip-Hop, Reggaeton, Urban & Commercial' },
-          { name: '4. 55 Milano (Sempione)', slug: '55-milano', desc: 'Via Piero della Francesca 55 · Loft industriale di 1.000 mq con grande terrazza, Royal Aperitivo, Dinner Show e Club' },
-          { name: '5. Voya Rooftop Milan (20° Piano)', slug: 'voya-rooftop-milan', desc: 'Viale Achille Papa 30 · Il Rooftop #1 di Milano a 85m d’altezza con ristorante panoramico e sky club' },
-          { name: '6. Repvblic Milano', slug: 'repvblic-milano', desc: 'Piazza della Repubblica 12 · Boutique club d’élite con Dinner Show e serate fashion nel cuore di Repubblica' },
-          { name: 'Armani Privé Milano', slug: 'armani-prive-milano', desc: 'Via Gastone Pisoni 1 · Il boutique club di Giorgio Armani sotto Nobu Milano (Ven–Sab · Tavoli 600–5.000 €)' },
-          { name: '11Clubroom Milano', slug: '11-clubroom-milano', desc: 'Via Alessio di Tocqueville 11 · Salotto internazionale Hip-Hop, R&B & Afro House (Tavoli 350–2.500 €)' },
-          { name: 'Tocqueville 13', slug: 'tocqueville-13', desc: 'Via Alessio di Tocqueville 13 · Club su 2 livelli con Singing Dinner Show & Console LED (Tavoli 350–3.500 €)' },
-          { name: 'Hollywood Rythmoteque', slug: 'hollywood-milano', desc: 'Corso Como 15 · Icona storica aperta 7 sere su 7 tra model night e feste internazionali (Tavoli 300–3.000 €)' },
-          { name: 'The Club Milano', slug: 'the-club-milano', desc: 'Largo La Foppa 4 (Moscova) · Punto di riferimento Hip-Hop, Reggaeton e serate internazionali da Martedì a Domenica' },
-          { name: 'Old Fashion Milano', slug: 'old-fashion-milano', desc: 'Viale Emilio Alemagna 6 · Giardino nel Parco Sempione e sala interna nel Palazzo della Triennale' },
-          { name: 'Loolapaloosa Corso Como', slug: 'loolapaloosa-milano', desc: 'Corso Como 15 · Dal Royal Aperitivo delle 19:30 al party cantato sui tavoli fino alle 04:30' },
+          { name: '1. JustMe Milano (Torre Branca)', venueId: 'v-justme', desc: 'Viale Luigi Camoens 2 · Aperto 7/7, Royal Aperitivo, Dinner Show & Luxury Clubbing in Parco Sempione (Tavoli 320-5.000€)' },
+          { name: '2. Pineta Club Milano', venueId: 'v-pineta', desc: 'Via Messina 38 · Lampadari di cristallo, Aperitivo Cantato, Reggaeton & Vocal House fino alle 05:00' },
+          { name: '3. Aria Club Milano (San Siro)', venueId: 'v-aria', desc: 'Piazzale dello Sport 14 · A 150m dallo Stadio San Siro: Dopo-Partita, Hip-Hop, Reggaeton & Commercial' },
+          { name: '4. 55 Milano (Sempione)', venueId: 'v-55milano', desc: 'Via Piero della Francesca 55 · Loft ferroviario di 1.000 mq con terrazza riscaldata, Apericena XL e Cena Cantata' },
+          { name: '5. Voya Rooftop Milan (20° Piano)', venueId: 'v-voya', desc: 'Viale Achille Papa 30 · Sky Lounge panoramico a 85m d’altezza con vetrate 360° aperto tutto l’anno' },
+          { name: '6. Repvblic Milano', venueId: 'v-repvblic', desc: 'Piazza della Repubblica 12 · Boutique club d’élite casa del celebre Dirty Monday e dei weekend House/Urban' },
+          { name: 'Armani Privé Milano', venueId: 'v-armani-prive', desc: 'Via Gastone Pisoni 1 · Il boutique club di Giorgio Armani sotto Nobu Milano nel Quadrilatero della Moda' },
+          { name: 'Play Club Milano', venueId: 'v-playclub', desc: 'Viale Monte Grappa 14 (Porta Nuova) · Ledwall immersivi e serate Hip-Hop, Afrobeats & Reggaeton' },
+          { name: '11Clubroom Milano', venueId: 'v-11clubroom', desc: 'Via Alessio di Tocqueville 11 · Salotto internazionale R&B, Hip-Hop & Afro House in Corso Como' },
+          { name: 'Tocqueville 13 Milano', venueId: 'v-tocqueville', desc: 'Via Alessio di Tocqueville 13 · Superclub su 2 livelli con Singing Dinner Show & Console LED' },
+          { name: 'Hollywood Rythmoteque', venueId: 'v-hollywood', desc: 'Corso Como 15 · Icona storica aperta 7 sere su 7 tra model night e feste internazionali' },
+          { name: 'The Club Milano', venueId: 'v-theclub', desc: 'Corso Garibaldi 97 (Brera/Moscova) · Club internazionale Hip-Hop, Commercial & Urban da Martedì a Domenica' },
         ],
       },
       {
-        title: '2. Rooftop Panoramici & Sky Lounge con DJ Set (Skyline Milano)',
+        title: '2. Gli 8 Rooftop Panoramici & Sky Lounge Vista Skyline',
         items: [
-          { name: 'Voya Rooftop Milan (#1 Rooftop Milano)', slug: 'voya-rooftop-milan', desc: 'Viale Achille Papa 30 (20° piano World Join Center) · Il Capodanno Rooftop Numero 1 di Milano (Menu completo 300€)' },
-          { name: 'Radio Rooftop Bar Milano', slug: 'radio-rooftop-bar-milano', desc: 'Via Marco Polo 18 (10° piano ME Milan Il Duca, Repubblica/Porta Nuova) · Vista grattacieli e DJ set' },
-          { name: 'The Roof Milano', slug: 'the-roof-milano', desc: 'Piazza Giuseppe Missori 1 · Terrazza panoramica a due passi dal Duomo per aperitivo e cocktail serali' },
-          { name: 'Terrazza Aperol', slug: 'terrazza-aperol-milano', desc: 'Galleria Vittorio Emanuele II · Affaccio diretto sulle guglie del Duomo di Milano' },
-          { name: 'Terrazza Gallia', slug: 'terrazza-gallia-milano', desc: 'Piazza Duca d’Aosta 9 (Excelsior Hotel Gallia) · Alta miscelazione e cucina d’autore al 7° piano' },
-          { name: 'Terrazza Triennale', slug: 'innocenti-evasioni-terrazza-triennale', desc: 'Viale Emilio Alemagna 6 · Serre sospese sul Parco Sempione e sul Castello Sforzesco' },
-          { name: 'Ristorante Torre (Fondazione Prada)', slug: 'ristorante-torre-milano', desc: 'Via Giovanni Lorenzini 14 · Design contemporaneo e vista sullo skyline sud di Milano' },
-          { name: 'The Dome & SALI Rooftop', slug: 'the-dome-milano', desc: 'Via Giuseppe Mazzini 2 · Rooftop centrale per aperitivo e dinner pre-clubbing' },
+          { name: 'Terrazza Duomo 21', venueId: 'v-terrazza21', desc: 'Piazza del Duomo 21 · Balconata panoramica fronte Cattedrale per sunset aperitivo e DJ set fino alle 02:00' },
+          { name: 'Ceresio 7 Pools & Restaurant', venueId: 'v-ceresio-7', desc: 'Via Ceresio 7 · Il rooftop Dsquared2 con due piscine gemelle riscaldate vista Porta Nuova' },
+          { name: 'Radio Rooftop Bar Milano', venueId: 'v-radio-rooftop-bar-milano', desc: 'Via Marco Polo 18 (10° piano ME Milan Il Duca) · Deep House e vista frontale sui grattacieli' },
+          { name: 'The Roof Milano', venueId: 'v-the-roof-milano', desc: 'Piazza Giuseppe Missori 1 (10° piano) · Terrazza panoramica tra Torre Velasca e le guglie del Duomo' },
+          { name: 'Terrazza Aperol Milano', venueId: 'v-terrazza-aperol-milano', desc: 'Galleria Vittorio Emanuele II · Affaccio iconico diretto sulle guglie marmoree del Duomo' },
+          { name: 'Terrazza Gallia Milano', venueId: 'v-terrazza-gallia-milano', desc: 'Piazza Duca d’Aosta 9 (7° piano Excelsior Gallia) · Alta miscelazione e cucina d’autore Cerea/Lebano' },
+          { name: 'Ristorante Torre (Fondazione Prada)', venueId: 'v-ristorante-torre-milano', desc: 'Via Giovanni Lorenzini 14 (6° piano) · Design Rem Koolhaas e vista sullo skyline sud di Milano' },
+          { name: 'Terrazza Triennale Milano', venueId: 'v-innocenti-evasioni-terrazza-triennale', desc: 'Viale Emilio Alemagna 6 · Serra in vetro sospesa sul Parco Sempione e sul Castello Sforzesco' },
         ],
       },
       {
-        title: '3. Dinner Show, Cene Cantate & Restaurant-Club Esclusivi',
+        title: '3. Dinner Show, Cene Cantate, Aperitivi & Cocktail Club',
         items: [
-          { name: 'Il Gattopardo Milano', slug: 'il-gattopardo-milano', desc: 'Via Piero della Francesca 47 (Sempione) · Chiesa sconsacrata del ’900 con lampadario monumentale, dinner show e club' },
-          { name: 'The Beach Luxury Club', slug: 'the-beach-milano', desc: 'Via Arcangelo Corelli 62 · Dinner show cantato, area estiva open-air e clubbing ricercato' },
-          { name: 'Cost Milano', slug: 'cost-milano', desc: 'Via Tito Speri 8 (Corso Como) · Ristorante con spettacolo live e lounge clubbing nel cuore di Porta Nuova' },
-          { name: 'Casa Fiori Chiari & Shilling’s', slug: 'casa-fiori-chiari-milano', desc: 'Brera & Centro Storico · Cena animata e pre-clubbing elegante nel cuore di Milano' },
-          { name: 'Dazi Milano (Arco della Pace)', slug: 'dazi-milano', desc: 'Piazza Sempione 1 · Nel casello neoclassico dell’Arco della Pace, dall’aperitivo fino a tarda notte' },
-          { name: 'Philipp’s Club & Pineta', slug: 'philipps-club-milano', desc: 'Via Daniele Manin 21 (Porta Venezia) & Via Messina 38 · Dinner club e format urban/latino' },
+          { name: 'Il Gattopardo Milano', venueId: 'v-gattopardo', desc: 'Via Piero della Francesca 47 · Chiesa sconsacrata di inizio ’900 con lampadario monumentale, dinner show e club' },
+          { name: 'MIB Milano (Piazza Affari)', venueId: 'v-mibmilano', desc: 'Via Gaetano Negri 10 · Live Dinner Show cantato e discoteca di fronte a Palazzo Mezzanotte (Duomo)' },
+          { name: 'Church 81 Milano', venueId: 'v-church81', desc: 'Via Enrico Pestalozzi 10 (Navigli) · Cena spettacolo scenografica e tavoli bottiglia da 200€' },
+          { name: 'Loolapaloosa Corso Como', venueId: 'v-loolapaloosa', desc: 'Corso Como 15 · Dal Royal Aperitivo delle 19:00 al party cantato sul bancone fino alle 04:30' },
+          { name: 'Bobino Club Navigli', venueId: 'v-bobino', desc: 'Alzaia Naviglio Grande 116 · Grande giardino estivo e sale storiche a Porta Genova tra aperitivo e DJ set' },
+          { name: 'Apollo Club Milano', venueId: 'v-apollo', desc: 'Via Giosuè Borsi 9/2 (Navigli) · Ex fabbrica creativa per cocktail, cena e serate House/Electronic' },
         ],
       },
       {
         title: '4. Techno, Melodic Electronic, Warehouse & Grandi Arene Live',
         items: [
-          { name: 'Volt Club Milano', slug: 'volt-club-milano', desc: 'Via Molino delle Armi 16 · Boutique club di culto per Melodic Techno, Afro House e DJ internazionali' },
-          { name: 'The Sanctuary Eco Retreat', slug: 'the-sanctuary-milano', desc: 'Via Privata Ventura 14 (Lambrate) · Ex scalo ferroviario: ristorante esotico, Afro House e rituali elettronici' },
-          { name: 'Fabrique Milano', slug: 'fabrique-milano', desc: 'Via Gaudenzio Fantoli 9 · La più grande arena indoor di Milano (2.500+ posti) per festival techno e concerti' },
-          { name: 'Magazzini Generali', slug: 'magazzini-generali-milano', desc: 'Via Pietrasanta 16 (Porta Romana) · Storico warehouse industriale con soppalco VIP per techno e format 90s/2000s' },
-          { name: 'Tunnel Club Milano', slug: 'tunnel-club-milano', desc: 'Via Giovanni Battista Sammartini 30 · Sotto i binari della Stazione Centrale con impianto Funktion-One' },
-          { name: 'Gate Milano & Amnesia', slug: 'gate-milano', desc: 'Via Valtellina 21 & Via Alfonso Gatto · Grandi produzioni techno, house e showcase elettronici' },
-          { name: 'Alcatraz Milano', slug: 'alcatraz-milano', desc: 'Via Valtellina 25 (Isola/Farini) · Arena multi-sala con 3 piste contemporanee il venerdì e sabato' },
-          { name: 'Super Club Tortona', slug: 'super-club-milano', desc: 'Via Tortona 27 · Spazio di 380 mq con impianto Void Acoustics e lighting immersivo' },
+          { name: 'Volt Club Milano', venueId: 'v-volt', desc: 'Via Molino delle Armi 16 · Boutique club di culto per Melodic Techno, Indie Dance e DJ internazionali' },
+          { name: 'Fabrique Milano', venueId: 'v-fabrique', desc: 'Via Gaudenzio Fantoli 9 · Arena post-industriale da 3.100 posti per festival techno e tour mondiali' },
+          { name: 'Alcatraz Milano', venueId: 'v-alcatraz', desc: 'Via Valtellina 25 (Isola/Farini) · La più grande arena multi-sala di Milano con 3 piste ogni weekend' },
+          { name: 'Amnesia Milano', venueId: 'v-amnesia', desc: 'Via Alfonso Gatto · Tempio milanese Tech-House e Techno con impianto Funktion-One e Privé Console' },
+          { name: 'Magazzini Generali', venueId: 'v-magazzini', desc: 'Via Pietrasanta 16 (Porta Romana) · Storico warehouse del 1995 con balconata VIP in ferro battuto' },
+          { name: 'Super Club Milano (Tortona)', venueId: 'v-super-club-milano', desc: 'Via Tortona 27 · Spazio design da 380 mq con scultoreo impianto audio Void Acoustics' },
+          { name: 'Dock 22 Navigli', venueId: 'v-dock22', desc: 'Alzaia Naviglio Grande 22 · Intimo club con volte in mattoni per Deep House e showcase underground' },
         ],
       },
     ] : [
       {
-        title: '1. Top 6 Priority Venues & Fashion VIP Clubs in Milan',
+        title: '1. Top 12 Flagship & Fashion VIP Clubs in Milan',
         items: [
-          { name: '1. JustMe Milano (Torre Branca)', slug: 'just-me-milano', desc: 'Viale Luigi Camoens 2 · Royal Aperitivo, Dinner Show & Luxury Garden/Indoor Clubbing 7/7 (Tables €350–€5,000)' },
-          { name: '2. Pineta Club Milano', slug: 'pineta-club-milano', desc: 'Via Messina 38 · Crystal chandeliers, Singing Dinner Show, Reggaeton & Vocal House until 05:00' },
-          { name: '3. Aria Club Milano (San Siro)', slug: 'aria-club-milano', desc: 'Piazzale dello Sport 14 · Flagship arena inside San Siro park: Hip-Hop, Reggaeton, Urban & Commercial' },
-          { name: '4. 55 Milano (Sempione)', slug: '55-milano', desc: 'Via Piero della Francesca 55 · 1,000 sqm industrial loft & heated terrace for Royal Aperitivo, Dinner Show & Club' },
-          { name: '5. Voya Rooftop Milan (20th Floor)', slug: 'voya-rooftop-milan', desc: 'Viale Achille Papa 30 · Milan’s #1 Panoramic Rooftop at 85m altitude with skyline dining and DJ sets' },
-          { name: '6. Repvblic Milano', slug: 'repvblic-milano', desc: 'Piazza della Repubblica 12 · Boutique luxury club featuring Dinner Shows and fashion nights in Repubblica' },
-          { name: 'Armani Privé Milano', slug: 'armani-prive-milano', desc: 'Via Gastone Pisoni 1 · Giorgio Armani’s ultra-exclusive boutique club beneath Nobu Milano (Fri–Sat · Tables €600–€5,000)' },
-          { name: '11Clubroom Milano', slug: '11-clubroom-milano', desc: 'Via Alessio di Tocqueville 11 · International Hip-Hop, R&B & Afro House luxury lounge (Tables €350–€2,500)' },
-          { name: 'Tocqueville 13', slug: 'tocqueville-13', desc: 'Via Alessio di Tocqueville 13 · Two-level superclub with Singing Dinner Show & LED Console (Tables €350–€3,500)' },
-          { name: 'Hollywood Rythmoteque', slug: 'hollywood-milano', desc: 'Corso Como 15 · Iconic club open 7 nights a week for model nights and global parties (Tables €300–€3,000)' },
-          { name: 'The Club Milano', slug: 'the-club-milano', desc: 'Largo La Foppa 4 (Moscova) · Flagship Hip-Hop, Reggaeton & International club open Tuesday through Sunday' },
-          { name: 'Old Fashion Milano', slug: 'old-fashion-milano', desc: 'Viale Emilio Alemagna 6 · Parco Sempione garden terrace & indoor Triennale room' },
-          { name: 'Loolapaloosa Corso Como', slug: 'loolapaloosa-milano', desc: 'Corso Como 15 · From 19:30 Royal Aperitivo to high-energy bar-top dancing until 04:30' },
+          { name: '1. JustMe Milan (Torre Branca)', venueId: 'v-justme', desc: 'Viale Luigi Camoens 2 · Open 7/7, Royal Aperitivo, Dinner Show & Parco Sempione Clubbing (Tables €320-€5,000)' },
+          { name: '2. Pineta Club Milan', venueId: 'v-pineta', desc: 'Via Messina 38 · Crystal chandeliers, Singing Dinner Show, Reggaeton & Vocal House until 05:00' },
+          { name: '3. Aria Club Milan (San Siro)', venueId: 'v-aria', desc: 'Piazzale dello Sport 14 · 150m from San Siro Stadium: Football Afterparties, Hip-Hop, Reggaeton & Commercial' },
+          { name: '4. 55 Milano (Sempione)', venueId: 'v-55milano', desc: 'Via Piero della Francesca 55 · 1,000 sqm railway loft & heated terrace for XXL Apericena & Singing Dinner' },
+          { name: '5. Voya Rooftop Milan (20th Floor)', venueId: 'v-voya', desc: 'Viale Achille Papa 30 · Panoramic 85m sky lounge with 360-degree glass walls open year-round' },
+          { name: '6. Repvblic Milan', venueId: 'v-repvblic', desc: 'Piazza della Repubblica 12 · Boutique dark-luxury club home to Dirty Monday and House/Urban weekends' },
+          { name: 'Armani Privé Milan', venueId: 'v-armani-prive', desc: 'Via Gastone Pisoni 1 · Giorgio Armani’s ultra-exclusive boutique club beneath Nobu Milano' },
+          { name: 'Play Club Milan', venueId: 'v-playclub', desc: 'Viale Monte Grappa 14 (Porta Nuova) · Custom LED visuals and international Hip-Hop, Afrobeats & Reggaeton' },
+          { name: '11Clubroom Milan', venueId: 'v-11clubroom', desc: 'Via Alessio di Tocqueville 11 · International R&B, Hip-Hop & Afro House velvet lounge off Corso Como' },
+          { name: 'Tocqueville 13 Milan', venueId: 'v-tocqueville', desc: 'Via Alessio di Tocqueville 13 · Two-level superclub with Singing Dinner Show & 360° LED Console' },
+          { name: 'Hollywood Rythmoteque', venueId: 'v-hollywood', desc: 'Corso Como 15 · Iconic celebrity & model club open 7 nights a week since 1986' },
+          { name: 'The Club Milan', venueId: 'v-theclub', desc: 'Corso Garibaldi 97 (Brera/Moscova) · Flagship Hip-Hop, Commercial & International club open Tue-Sun' },
         ],
       },
       {
-        title: '2. Panoramic Rooftops & Sky Bars with DJ Sets (Milan Skyline)',
+        title: '2. Top 8 Panoramic Rooftops & Skyline Cocktail Bars',
         items: [
-          { name: 'Voya Rooftop Milan (#1 Milan Rooftop)', slug: 'voya-rooftop-milan', desc: 'Viale Achille Papa 30 (20th floor World Join Center) · Milan’s #1 Rooftop NYE (All-Inclusive Full Menu €300)' },
-          { name: 'Radio Rooftop Bar Milano', slug: 'radio-rooftop-bar-milano', desc: 'Via Marco Polo 18 (10th floor ME Milan Il Duca, Porta Nuova) · Skyline views and international DJ sets' },
-          { name: 'The Roof Milano', slug: 'the-roof-milano', desc: 'Piazza Giuseppe Missori 1 · Panoramic terrace steps from the Duomo for sunset aperitivo and night cocktails' },
-          { name: 'Terrazza Aperol', slug: 'terrazza-aperol-milano', desc: 'Galleria Vittorio Emanuele II · Iconic terrace overlooking the spires of Milan Cathedral' },
-          { name: 'Terrazza Gallia', slug: 'terrazza-gallia-milano', desc: 'Piazza Duca d’Aosta 9 (Excelsior Hotel Gallia) · 7th-floor fine mixology and gourmet terrace' },
-          { name: 'Terrazza Triennale', slug: 'innocenti-evasioni-terrazza-triennale', desc: 'Viale Emilio Alemagna 6 · Glasshouse suspended above Parco Sempione and Sforza Castle' },
-          { name: 'Ristorante Torre (Fondazione Prada)', slug: 'ristorante-torre-milano', desc: 'Via Giovanni Lorenzini 14 · Architectural rooftop overlooking southern Milan' },
-          { name: 'The Dome & SALI Rooftop', slug: 'the-dome-milano', desc: 'Via Giuseppe Mazzini 2 · Central rooftop restaurant & pre-clubbing lounge' },
+          { name: 'Terrazza Duomo 21', venueId: 'v-terrazza21', desc: 'Piazza del Duomo 21 · Direct Cathedral-facing balcony for sunset aperitivo and DJ lounge sets until 02:00' },
+          { name: 'Ceresio 7 Pools & Restaurant', venueId: 'v-ceresio-7', desc: 'Via Ceresio 7 · Dsquared2’s iconic rooftop featuring twin heated pools overlooking Porta Nuova' },
+          { name: 'Radio Rooftop Bar Milan', venueId: 'v-radio-rooftop-bar-milano', desc: 'Via Marco Polo 18 (10th floor ME Milan Il Duca) · Ibiza-style Deep House and skyscraper views' },
+          { name: 'The Roof Milan', venueId: 'v-the-roof-milano', desc: 'Piazza Giuseppe Missori 1 (10th floor) · Wraparound terrace between Velasca Tower and Duomo spires' },
+          { name: 'Terrazza Aperol Milan', venueId: 'v-terrazza-aperol-milano', desc: 'Galleria Vittorio Emanuele II · Iconic orange design balcony staring straight at Milan Cathedral' },
+          { name: 'Terrazza Gallia Milan', venueId: 'v-terrazza-gallia-milano', desc: 'Piazza Duca d’Aosta 9 (7th floor Excelsior Gallia) · Five-star mixology and Cerea/Lebano fine dining' },
+          { name: 'Ristorante Torre (Fondazione Prada)', venueId: 'v-ristorante-torre-milano', desc: 'Via Giovanni Lorenzini 14 (6th floor) · Rem Koolhaas architecture overlooking southern Milan' },
+          { name: 'Terrazza Triennale Milan', venueId: 'v-innocenti-evasioni-terrazza-triennale', desc: 'Viale Emilio Alemagna 6 · Suspended glasshouse above Parco Sempione and Sforza Castle' },
         ],
       },
       {
-        title: '3. Singing Dinner Shows & Luxury Restaurant-Clubs',
+        title: '3. Singing Dinner Shows, Aperitivo Gardens & Party Bars',
         items: [
-          { name: 'Il Gattopardo Milano', slug: 'il-gattopardo-milano', desc: 'Via Piero della Francesca 47 (Sempione) · Deconsecrated 20th-century church with chandelier dinner show & club' },
-          { name: 'The Beach Luxury Club', slug: 'the-beach-milano', desc: 'Via Arcangelo Corelli 62 · Singing dinner show, open-air summer oasis, and VIP clubbing' },
-          { name: 'Cost Milano', slug: 'cost-milano', desc: 'Via Tito Speri 8 (Corso Como) · Live dinner show restaurant and late-night lounge in Porta Nuova' },
-          { name: 'Casa Fiori Chiari & Shilling’s', slug: 'casa-fiori-chiari-milano', desc: 'Brera & Historic Center · Festive dinner and sophisticated pre-clubbing' },
-          { name: 'Dazi Milano (Arco della Pace)', slug: 'dazi-milano', desc: 'Piazza Sempione 1 · Inside the neoclassical Arco della Pace tollhouse from aperitivo until late' },
-          { name: 'Philipp’s Club & Pineta', slug: 'philipps-club-milano', desc: 'Via Daniele Manin 21 (Porta Venezia) & Via Messina 38 · Dinner club and urban/Latin formats' },
+          { name: 'Il Gattopardo Milan', venueId: 'v-gattopardo', desc: 'Via Piero della Francesca 47 · Early-1900s deconsecrated church with giant crystal chandelier & dinner show' },
+          { name: 'MIB Milan (Piazza Affari)', venueId: 'v-mibmilano', desc: 'Via Gaetano Negri 10 · Live singing dinner show & nightclub facing the Italian Stock Exchange near Duomo' },
+          { name: 'Church 81 Milan', venueId: 'v-church81', desc: 'Via Enrico Pestalozzi 10 (Navigli) · Gothic-vault theatrical dinner show & accessible €200+ VIP tables' },
+          { name: 'Loolapaloosa Corso Como', venueId: 'v-loolapaloosa', desc: 'Corso Como 15 · From 19:00 aperitivo to legendary bar-top dancing until 04:30 AM' },
+          { name: 'Bobino Club Navigli', venueId: 'v-bobino', desc: 'Alzaia Naviglio Grande 116 · sprawling Porta Genova canal garden for gourmet buffet aperitivo & DJ sets' },
+          { name: 'Apollo Club Milan', venueId: 'v-apollo', desc: 'Via Giosuè Borsi 9/2 (Navigli) · Creative converted factory hosting fashion crowds and House/Electronic nights' },
         ],
       },
       {
         title: '4. Techno, Melodic Electronic, Warehouses & Live Arenas',
         items: [
-          { name: 'Volt Club Milano', slug: 'volt-club-milano', desc: 'Via Molino delle Armi 16 · Cult boutique club for Melodic Techno, Afro House, and international selectors' },
-          { name: 'The Sanctuary Eco Retreat', slug: 'the-sanctuary-milano', desc: 'Via Privata Ventura 14 (Lambrate) · Former rail depot featuring exotic dining, Afro House, and electronic rituals' },
-          { name: 'Fabrique Milano', slug: 'fabrique-milano', desc: 'Via Gaudenzio Fantoli 9 · Milan’s largest indoor arena (2,500+ capacity) for techno festivals and concerts' },
-          { name: 'Magazzini Generali', slug: 'magazzini-generali-milano', desc: 'Via Pietrasanta 16 (Porta Romana) · Historic industrial warehouse with VIP mezzanine' },
-          { name: 'Tunnel Club Milano', slug: 'tunnel-club-milano', desc: 'Via Giovanni Battista Sammartini 30 · Stone railway vaults beneath Central Station with Funktion-One sound' },
-          { name: 'Gate Milano & Amnesia', slug: 'gate-milano', desc: 'Via Valtellina 21 & Via Alfonso Gatto · Peak-time techno, house, and festival showcases' },
-          { name: 'Alcatraz Milano', slug: 'alcatraz-milano', desc: 'Via Valtellina 25 (Isola/Farini) · Multi-room arena running 3 simultaneous dancefloors on weekends' },
-          { name: 'Super Club Tortona', slug: 'super-club-milano', desc: 'Via Tortona 27 · 380 sqm venue with Void Acoustics sound system and immersive lighting' },
+          { name: 'Volt Club Milan', venueId: 'v-volt', desc: 'Via Molino delle Armi 16 · Cult boutique sanctuary for Melodic Techno, Indie Dance & global headliners' },
+          { name: 'Fabrique Milan', venueId: 'v-fabrique', desc: 'Via Gaudenzio Fantoli 9 · 3,100-capacity post-industrial hangar for techno festivals and world tours' },
+          { name: 'Alcatraz Milan', venueId: 'v-alcatraz', desc: 'Via Valtellina 25 (Isola/Farini) · Milan’s biggest multi-room arena running 3 dancefloors every weekend' },
+          { name: 'Amnesia Milan', venueId: 'v-amnesia', desc: 'Via Alfonso Gatto · 20-year Tech-House & Techno institution with Funktion-One sound & Console Privé' },
+          { name: 'Magazzini Generali', venueId: 'v-magazzini', desc: 'Via Pietrasanta 16 (Porta Romana) · Historic 1995 warehouse club with iron VIP mezzanine' },
+          { name: 'Super Club Milan (Tortona)', venueId: 'v-super-club-milano', desc: 'Via Tortona 27 · 380 sqm architectural club engineered around a sculpted Void Acoustics sound system' },
+          { name: 'Dock 22 Navigli', venueId: 'v-dock22', desc: 'Alzaia Naviglio Grande 22 · Canal-side brick-vault club for Deep House and underground selectors' },
         ],
       },
     ];
@@ -592,30 +583,33 @@ export default function EditorialPageSections({ locale, path }: Props) {
         <div className="mx-auto max-w-[1280px] border-x border-[#050505]/16 divide-y divide-[#050505]/16">
           <section className="px-6 py-14 sm:px-14">
             <p className="mb-2 font-mono text-xs font-bold uppercase tracking-[0.22em] text-[#5C5446]">
-              {isIt ? 'ATLANTE CATEGORIALE DEI LOCALI MILANESI · 2026' : 'CATEGORICAL ATLAS OF MILAN VENUES · 2026'}
+              {isIt ? 'ATLANTE CATEGORIALE DEI 33 LOCALI VERIFICATI · 2026/2027' : 'CATEGORICAL ATLAS OF ALL 33 VERIFIED MILAN VENUES · 2026/2027'}
             </p>
             <h2 className="mb-8 font-serif text-3xl text-[#050505] sm:text-4xl">
               {isIt
-                ? 'Tutti i Locali di Milano Suddivisi per Categoria: Fashion Club, Rooftop, Dinner Show e Techno Warehouse'
-                : 'All Milan Venues by Category: Fashion Clubs, Rooftops, Dinner Shows & Techno Warehouses'}
+                ? 'Tutti i 33 Locali di Milano Suddivisi per Categoria: Fashion Club, Rooftop, Dinner Show e Techno Warehouse'
+                : 'All 33 Milan Venues by Category: Fashion Clubs, Rooftops, Dinner Shows & Techno Warehouses'}
             </h2>
             <div className="space-y-10">
               {categories.map((cat) => (
                 <div key={cat.title}>
                   <h3 className="mb-4 font-serif text-2xl text-[#050505] border-b border-[#050505]/16 pb-2">{cat.title}</h3>
                   <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                    {cat.items.map((item) => (
-                      <article key={item.slug} className="border border-[#050505]/16 bg-[#EFE9DC] p-5 flex flex-col justify-between">
-                        <div>
-                          <h4 className="font-serif text-lg text-[#050505] mb-1.5">
-                            <Link href={`${lp}/clubs/${item.slug}`} prefetch={false} className="underline-offset-4 hover:underline transition-colors">
-                              {item.name} ↗
-                            </Link>
-                          </h4>
-                          <p className="font-sans text-xs leading-relaxed text-[#3D3830]">{item.desc}</p>
-                        </div>
-                      </article>
-                    ))}
+                    {cat.items.map((item) => {
+                      const canonicalVenueSlug = getLocalizedVenueSlug35(item.venueId, locale);
+                      return (
+                        <article key={item.venueId} className="border border-[#050505]/16 bg-[#EFE9DC] p-5 flex flex-col justify-between">
+                          <div>
+                            <h4 className="font-serif text-lg text-[#050505] mb-1.5">
+                              <Link href={`${lp}/${clubsDir}/${canonicalVenueSlug}`} prefetch={false} className="underline-offset-4 hover:underline transition-colors">
+                                {item.name} ↗
+                              </Link>
+                            </h4>
+                            <p className="font-sans text-xs leading-relaxed text-[#3D3830]">{item.desc}</p>
+                          </div>
+                        </article>
+                      );
+                    })}
                   </div>
                 </div>
               ))}

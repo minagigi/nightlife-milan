@@ -1,5 +1,6 @@
 import type { LocaleCode } from './i18n/locales';
-import { isEnabledLocale } from './i18n/locales';
+import { isEnabledLocale, localePrefix } from './i18n/locales';
+import { localizeInternalHref } from './i18n/localizedSlugs35';
 import { Venue, VenueCategory } from './types';
 import { OCTOBER_EVENTS } from './octoberEvents';
 import { getOctoberEventSlug } from './october-events/copy';
@@ -118,7 +119,7 @@ const UI_BASE_EN: VenueUi35 = {
   tabFuture: 'Future & Seasonal Events',
   viewCarousel: 'Carousel',
   viewGrid: 'Grid',
-  tonightFallbackNotice: 'No scheduled ticketed event for tonight — showing Nightlife Milan Concierge’s weekly proposals and upcoming dates. Private buyouts and VIP tables available on request.',
+  tonightFallbackNotice: 'No scheduled ticketed event for tonight: showing Nightlife Milan Concierge’s weekly proposals and upcoming dates. Private buyouts and VIP tables available on request.',
   bookWhatsApp: 'Book on WhatsApp',
   viewEvent: 'Event Sheet & Guest List',
   fromPrice: 'From',
@@ -756,13 +757,13 @@ const VENUE_TARGET_IT: Record<string, VenueTargetProfile> = {
     priceSummary: 'Aperitivo Royal con isola riservata 20–25€ (1–2 drink + buffet illimitato) · Cena da 45€ · Bottiglie da 120€',
   },
   'v-voya': {
-    ageRange: '21–40 anni (gruppi compleanno, celibato/nubilato, tifosi post-partita M5)',
-    crowdVibe: 'Club moderno e lounge con impianto LED wall in via Valtellina 6 (Scalo Farini / Isola)',
-    dressCode: 'Smart Casual / Elegante',
-    musicStyle: 'Urban, Reggaeton, Commercial House e format tematici del weekend',
-    metroAndParking: 'M5 Monumentale a 400 metri (3 fermate dirette da San Siro) / M3 Maciachini',
-    openingSchedule: 'Venerdì, Sabato e prefestivi 20:30–05:00',
-    priceSummary: 'Aperitivo 15–20€ · Festa 25€ con 2 drink + zona riservata · Tavoli pista da 200€ / Privé da 250€',
+    ageRange: '25-45 anni (coppie, compleanni panoramici, eventi aziendali, tifosi VIP post-partita M5)',
+    crowdVibe: 'Sky lounge panoramico al 20° piano della Torre WJC in Viale Achille Papa 30 (Portello / CityLife) con vetrate a tutta altezza sullo skyline di Milano',
+    dressCode: 'Smart Elegant / Cocktail Chic',
+    musicStyle: 'Sunset Lounge, Deep House, Afro-House e Commercial Chic dopo cena',
+    metroAndParking: 'M5 Portello / Lotto a pochi minuti (collegamento diretto da San Siro) · Ampio parcheggio area Portello / WJC',
+    openingSchedule: 'Martedì-Domenica 19:00-03:00 (aperitivo panoramico, cena vista skyline e DJ set)',
+    priceSummary: 'Aperitivo 20-30€ · Cena panoramica da 60-70€ · Tavoli vista skyline e VIP da 250€ a 1.000€+',
   },
   'v-repvblic': {
     ageRange: '21–38 anni (pubblico internazionale, moda, studenti Bocconi/Cattolica/IULM)',
@@ -784,7 +785,7 @@ export function getVenueTargetProfile(venue: Venue, locale: string): VenueTarget
   if (preset && !isIt) {
     return {
       ageRange: '21–45+ (international guests, fashion crowd, university graduates & corporate groups)',
-      crowdVibe: `${vName} in ${venue.zone} (${vAddr}) — verified Milan nightlife destination`,
+      crowdVibe: `${vName} in ${venue.zone} (${vAddr}): verified Milan nightlife destination`,
       dressCode: 'Smart Elegant / Cocktail Chic (collared shirt recommended for men, no athletic wear)',
       musicStyle: (venue.tags || ['House', 'Commercial', 'Hip-Hop']).join(' · '),
       metroAndParking: `Direct Metro access in ${venue.zone} (${vAddr}), taxi rank & nearby guarded parking`,
@@ -953,28 +954,38 @@ export function getVenueServices10(venue: Venue, locale: string): VenueServiceIt
 
 const VENUE_WORD_TO_CLUB_SLUG: Record<string, string> = {
   'v-justme': 'just-me-milano',
-  'v-pineta': 'pineta-milano',
+  'v-pineta': 'pineta-club-milano',
   'v-aria': 'aria-club-milano',
   'v-55milano': '55-milano',
-  'v-voya': 'voya-milano',
+  'v-voya': 'voya-rooftop-milan',
   'v-repvblic': 'repvblic-milano',
   'v-tocqueville': 'tocqueville-13-milano',
   'v-alcatraz': 'alcatraz-milano',
   'v-fabrique': 'fabrique-milano',
   'v-amnesia': 'amnesia-milano',
   'v-playclub': 'play-club-milano',
-  'v-11clubroom': '11-clubroom-milano',
-  'v-church81': 'the-church-81-milano',
+  'v-11clubroom': '11-clubroom',
+  'v-church81': 'church-81',
   'v-mibmilano': 'mib-milano',
-  'v-gattopardo': 'il-gattopardo-milano',
-  'v-terrazza21': 'terrazza-duomo-21',
+  'v-gattopardo': 'gattopardo-milano',
+  'v-terrazza21': 'terrazza-21',
   'v-magazzini': 'magazzini-generali-milano',
   'v-armani-prive': 'armani-prive-milano',
   'v-volt': 'volt-club-milano',
-  'v-hollywood': 'hollywood-rythmoteque-milano',
+  'v-hollywood': 'hollywood-club-milano',
   'v-apollo': 'apollo-club-milano',
   'v-ceresio-7': 'ceresio-7-milano',
   'v-theclub': 'the-club-milano',
+  'v-bobino': 'bobino-milano',
+  'v-dock22': 'dock-22-milano',
+  'v-loolapaloosa': 'loolapaloosa-milano',
+  'v-super-club-milano': 'super-club-milano',
+  'v-radio-rooftop-bar-milano': 'radio-rooftop-bar-milano',
+  'v-the-roof-milano': 'the-roof-milano',
+  'v-terrazza-aperol-milano': 'terrazza-aperol-milano',
+  'v-terrazza-gallia-milano': 'terrazza-gallia-milano',
+  'v-ristorante-torre-milano': 'ristorante-torre-milano',
+  'v-innocenti-evasioni-terrazza-triennale': 'innocenti-evasioni-terrazza-triennale',
 };
 
 function getMilanNightlifeDateISO(): { todayISO: string; endOfWeekISO: string } {
@@ -1003,8 +1014,14 @@ export function resolveVenueEventsForCarousel(venue: Venue, locale: string): {
   const clubSlug = VENUE_WORD_TO_CLUB_SLUG[venue.id] || venue.slugs.en;
   const venueNameLower = vName.toLowerCase();
 
+  const locCode = (isEnabledLocale(locale) ? locale : 'en') as LocaleCode;
+  const lp = localePrefix(locCode);
+  const toHref = (enPath: string) => localizeInternalHref(`${lp}${enPath}`, locCode);
+
   const matchedDated = OCTOBER_EVENTS.filter((ev) => {
     if (ev.venue.id === venue.id) return true;
+    if (venue.id === 'v-apollo' && ev.venue.id === 'apollo') return true;
+    if (venue.id === 'v-55milano' && ev.venue.id === 'v-55') return true;
     const evVenueLower = ev.venue.name.toLowerCase();
     return (
       evVenueLower.includes(venueNameLower.replace(' milano', '')) ||
@@ -1032,7 +1049,7 @@ export function resolveVenueEventsForCarousel(venue: Venue, locale: string): {
       categoryLabel: ev.venue.name,
       genres: ev.genres.slice(0, 3),
       imageSrc: ev.image?.src || fallbackImg,
-      href: `/${locale}/events/${slug}`,
+      href: toHref(`/events/${slug}`),
       whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
         isIt
           ? `Ciao Nightlife Milan, vorrei info/lista/tavolo per ${ev.officialName || vName} da ${vName} (${dStr})`
@@ -1077,7 +1094,7 @@ export function resolveVenueEventsForCarousel(venue: Venue, locale: string): {
     categoryLabel: vName,
     genres: (w.genres && w.genres.length > 0 ? w.genres : vTags).slice(0, 3),
     imageSrc: w.image || fallbackImg,
-    href: `/${locale}/events/${w.clubSlug}-${w.day}-${w.eventSlug}`,
+    href: toHref(`/events/${w.clubSlug}-${w.day}-${w.eventSlug}`),
     whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
       isIt
         ? `Ciao Nightlife Milan, vorrei prenotare per la serata ${w.name} da ${vName}`
@@ -1098,7 +1115,7 @@ export function resolveVenueEventsForCarousel(venue: Venue, locale: string): {
       categoryLabel: isIt ? 'Aperitivo & Lauree/Compleanni' : 'Aperitivo & Celebrations',
       genres: ['Royal Buffet', 'Cocktail Bar', 'DJ Set'],
       imageSrc: gallery[0] || fallbackImg,
-      href: `/${locale}/private-parties`,
+      href: toHref('/private-parties'),
       whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
         isIt
           ? `Ciao Nightlife Milan, vorrei riservare un'isola aperitivo / festa questa settimana da ${vName}`
@@ -1116,7 +1133,7 @@ export function resolveVenueEventsForCarousel(venue: Venue, locale: string): {
       categoryLabel: isIt ? 'Tavoli VIP & Club' : 'VIP Tables & Club',
       genres: vTags.slice(0, 3),
       imageSrc: gallery[1] || gallery[0] || fallbackImg,
-      href: `/${locale}/vip-tables`,
+      href: toHref('/vip-tables'),
       whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
         isIt
           ? `Ciao Nightlife Milan, vorrei il listino tavoli e bottiglie per questa settimana da ${vName}`
@@ -1136,7 +1153,7 @@ export function resolveVenueEventsForCarousel(venue: Venue, locale: string): {
       categoryLabel: isIt ? 'Feste Private & Gruppi' : 'Private Parties & Groups',
       genres: ['2 Drinks Included', 'Cake Service', 'Fast-Track'],
       imageSrc: gallery[2] || gallery[0] || fallbackImg,
-      href: `/${locale}/private-parties`,
+      href: toHref('/private-parties'),
       whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
         isIt
           ? `Ciao Nightlife Milan, vorrei organizzare una festa privata da ${vName}`
@@ -1162,7 +1179,7 @@ export function resolveVenueEventsForCarousel(venue: Venue, locale: string): {
       categoryLabel: isIt ? 'Capodanno 31 Dicembre' : 'New Year’s Eve 31 Dec',
       genres: ['Cenone / Buffet', 'Countdown', 'Open Format'],
       imageSrc: capEvent.image || fallbackImg,
-      href: `/${locale}/new-years-eve/${capEvent.slug}`,
+      href: toHref(`/new-years-eve/${capEvent.slug}`),
       whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
         isIt
           ? `Ciao Nightlife Milan, vorrei info e prevendite per Capodanno da ${vName}`

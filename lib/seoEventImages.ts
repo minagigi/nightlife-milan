@@ -38,7 +38,7 @@ const PACKS: Record<string, SeoLocalePack> = {
   it: {
     officialPosterBadge: 'Locandina Ufficiale Evento',
     galleryEyebrow: 'GALLERIA FOTOGRAFICA SEO GOOGLE FLOW · PUBBLICO TARGET & OUTFIT',
-    galleryHeadingTpl: 'Immagini dell’Evento, Pubblico Target e Outfit Consigliato — {venue}',
+    galleryHeadingTpl: 'Immagini dell’Evento, Pubblico Target e Outfit Consigliato - {venue}',
     gallerySubTpl: '{h1}: scopri l’atmosfera reale di {venue}, il pubblico target ({target}) e il dress code della serata ({outfit}). Prenotazioni ufficiali su WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}.',
     targetPrefix: 'Target Evento',
     outfitPrefix: 'Outfit Consigliato',
@@ -73,7 +73,7 @@ const PACKS: Record<string, SeoLocalePack> = {
   en: {
     officialPosterBadge: 'Official Event Poster',
     galleryEyebrow: 'GOOGLE FLOW SEO PHOTO GALLERY · TARGET CROWD & OUTFIT',
-    galleryHeadingTpl: 'Event Atmosphere, Target Crowd & Outfit Guide — {venue}',
+    galleryHeadingTpl: 'Event Atmosphere, Target Crowd & Outfit Guide - {venue}',
     gallerySubTpl: '{h1}: explore the real atmosphere of {venue}, the target crowd ({target}), and the event dress code ({outfit}). Official bookings at WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}.',
     targetPrefix: 'Target Crowd',
     outfitPrefix: 'Event Outfit',
@@ -108,7 +108,7 @@ const PACKS: Record<string, SeoLocalePack> = {
   es: {
     officialPosterBadge: 'Cartel Oficial del Evento',
     galleryEyebrow: 'GALERÍA FOTOGRÁFICA SEO GOOGLE FLOW · PÚBLICO Y OUTFIT',
-    galleryHeadingTpl: 'Fotos del Evento, Público Objetivo y Outfit Recomendado — {venue}',
+    galleryHeadingTpl: 'Fotos del Evento, Público Objetivo y Outfit Recomendado - {venue}',
     gallerySubTpl: '{h1}: descubre el ambiente real de {venue}, el público del evento ({target}) y el dress code ({outfit}). Reservas oficiales en WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}.',
     targetPrefix: 'Público Objetivo',
     outfitPrefix: 'Outfit del Evento',
@@ -143,7 +143,7 @@ const PACKS: Record<string, SeoLocalePack> = {
   fr: {
     officialPosterBadge: 'Affiche Officielle de la Soirée',
     galleryEyebrow: 'GALERIE PHOTO SEO GOOGLE FLOW · PUBLIC CIBLE & TENUE',
-    galleryHeadingTpl: 'Photos de la Soirée, Public Cible et Tenue Conseillée — {venue}',
+    galleryHeadingTpl: 'Photos de la Soirée, Public Cible et Tenue Conseillée - {venue}',
     gallerySubTpl: '{h1} : découvrez l’ambiance réelle de {venue}, la clientèle cible ({target}) et la tenue exigée ({outfit}). Réservations sur WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}.',
     targetPrefix: 'Public Cible',
     outfitPrefix: 'Tenue de Soirée',
@@ -178,7 +178,7 @@ const PACKS: Record<string, SeoLocalePack> = {
   de: {
     officialPosterBadge: 'Offizielles Event-Plakat',
     galleryEyebrow: 'GOOGLE FLOW SEO-FOTOGALERIE · ZIELGRUPPE & DRESSCODE',
-    galleryHeadingTpl: 'Event-Impressionen, Zielgruppe und Dresscode — {venue}',
+    galleryHeadingTpl: 'Event-Impressionen, Zielgruppe und Dresscode - {venue}',
     gallerySubTpl: '{h1}: Entdecken Sie das echte Ambiente von {venue}, das Zielpublikum ({target}) und das passende Event-Outfit ({outfit}). Buchung über WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}.',
     targetPrefix: 'Zielgruppe',
     outfitPrefix: 'Event-Outfit',
@@ -213,7 +213,7 @@ const PACKS: Record<string, SeoLocalePack> = {
   pt: {
     officialPosterBadge: 'Cartaz Oficial do Evento',
     galleryEyebrow: 'GALERIA DE FOTOS SEO GOOGLE FLOW · PÚBLICO E TRAJE',
-    galleryHeadingTpl: 'Fotos do Evento, Público-Alvo e Traje Recomendado — {venue}',
+    galleryHeadingTpl: 'Fotos do Evento, Público-Alvo e Traje Recomendado - {venue}',
     gallerySubTpl: '{h1}: conheça o ambiente real de {venue}, o público do evento ({target}) e o dress code ({outfit}). Reservas em WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}.',
     targetPrefix: 'Público-Alvo',
     outfitPrefix: 'Traje do Evento',
@@ -272,7 +272,7 @@ const COMPACT_LOCALE_OVERRIDES: Record<string, {
 }> = {
   nl: {
     badge: 'Officiële Eventposter', eyebrow: 'GOOGLE FLOW SEO FOTOGALERIJ · DOELGROEP & OUTFIT',
-    headingTpl: 'Sfeerbeelden, Doelgroep en Kledingvoorschrift — {venue}',
+    headingTpl: 'Sfeerbeelden, Doelgroep en Kledingvoorschrift - {venue}',
     targetPrefix: 'Doelgroep', outfitPrefix: 'Event Outfit',
     couples: 'Romantische Koppels & VIP-Gasten (25–45 jaar)', singles: 'Singles, Vriendengroepen & Social Tables (23–38 jaar)',
     over30: 'Stijlvol 30+ / 40+ Publiek', families: 'Gezinnen met Kinderen bij het Galadiner',
@@ -286,7 +286,7 @@ const COMPACT_LOCALE_OVERRIDES: Record<string, {
   },
   pl: {
     badge: 'Oficjalny Plakat Wydarzenia', eyebrow: 'GALERIA ZDJĘĆ SEO GOOGLE FLOW · GOŚCIE I DRESS CODE',
-    headingTpl: 'Zdjęcia Wydarzenia, Grupa Docelowa i Strój Wieczorowy — {venue}',
+    headingTpl: 'Zdjęcia Wydarzenia, Grupa Docelowa i Strój Wieczorowy - {venue}',
     targetPrefix: 'Grupa Docelowa', outfitPrefix: 'Strój na Wydarzenie',
     couples: 'Romantyczne Pary i Goście VIP (25–45 lat)', singles: 'Single, Grupy Znajomych i Stoliki Towarzyskie (23–38 lat)',
     over30: 'Elegancka Publiczność 30+ / 40+', families: 'Rodziny z Dziećmi na Kolacji Galowej',
@@ -300,7 +300,7 @@ const COMPACT_LOCALE_OVERRIDES: Record<string, {
   },
   ro: {
     badge: 'Afișul Oficial al Evenimentului', eyebrow: 'GALERIE FOTO SEO GOOGLE FLOW · PUBLIC ȚINTĂ ȘI ȚINUTĂ',
-    headingTpl: 'Imagini Eveniment, Publicul Țintă și Ținuta Recomandată — {venue}',
+    headingTpl: 'Imagini Eveniment, Publicul Țintă și Ținuta Recomandată - {venue}',
     targetPrefix: 'Public Țintă', outfitPrefix: 'Ținuta Evenimentului',
     couples: 'Cupluri Romantice și Oaspeți VIP (25–45 ani)', singles: 'Persoane Singure, Grupuri de Prieteni și Mese Sociale (23–38 ani)',
     over30: 'Public Matur Selectat 30+ / 40+', families: 'Familii cu Copii la Cina Festivă de Gală',
@@ -314,7 +314,7 @@ const COMPACT_LOCALE_OVERRIDES: Record<string, {
   },
   ru: {
     badge: 'Официальная Афиша Вечера', eyebrow: 'SEO-ФОТОГАЛЕРЕЯ GOOGLE FLOW · ПУБЛИКА И ДРЕСС-КОД',
-    headingTpl: 'Фотографии События, Целевая Публика и Дресс-Код — {venue}',
+    headingTpl: 'Фотографии События, Целевая Публика и Дресс-Код - {venue}',
     targetPrefix: 'Публика События', outfitPrefix: 'Дресс-Код Вечера',
     couples: 'Романтические Пары и VIP-Гости (25–45 лет)', singles: 'Компании Друзей и Новые Знакомства (23–38 лет)',
     over30: 'Изысканная Публика 30+ / 40+', families: 'Семьи с Детьми на Гала-Ужине',
@@ -328,7 +328,7 @@ const COMPACT_LOCALE_OVERRIDES: Record<string, {
   },
   tr: {
     badge: 'Resmi Etkinlik Afişi', eyebrow: 'GOOGLE FLOW SEO FOTOĞRAF GALERİSİ · HEDEF KİTLE VE KIYAFET',
-    headingTpl: 'Etkinlik Atmosferi, Katılımcı Profili ve Kıyafet Kodu — {venue}',
+    headingTpl: 'Etkinlik Atmosferi, Katılımcı Profili ve Kıyafet Kodu - {venue}',
     targetPrefix: 'Hedef Kitle', outfitPrefix: 'Etkinlik Kıyafeti',
     couples: 'Romantik Çiftler ve VIP Misafirler (25–45 Yaş)', singles: 'Bekarlar, Arkadaş Grupları ve Sosyal Masalar (23–38 Yaş)',
     over30: 'Seçkin 30+ / 40+ Yetişkin Kitle', families: 'Çocuklu Aileler ve Gala Yemeği Misafirleri',
@@ -342,7 +342,7 @@ const COMPACT_LOCALE_OVERRIDES: Record<string, {
   },
   zh: {
     badge: '官方活动海报', eyebrow: 'GOOGLE FLOW SEO 实景图集 · 目标客群与穿搭指南',
-    headingTpl: '活动实景、目标人群与着装要求 — {venue}',
+    headingTpl: '活动实景、目标人群与着装要求 - {venue}',
     targetPrefix: '目标客群', outfitPrefix: '活动着装',
     couples: '浪漫情侣与 VIP 贵宾（25–45岁）', singles: '单身人士、好友聚会与社交餐桌（23–38岁）',
     over30: '30+ / 40+ 成熟精英客群', families: '亲子家庭与跨年晚宴宾客',
@@ -356,7 +356,7 @@ const COMPACT_LOCALE_OVERRIDES: Record<string, {
   },
   ar: {
     badge: 'الملصق الرسمي للفعالية', eyebrow: 'معرض صور SEO GOOGLE FLOW · الجمهور المستهدف والأزياء',
-    headingTpl: 'صور الفعالية، الجمهور المستهدف والزي الرسمي — {venue}',
+    headingTpl: 'صور الفعالية، الجمهور المستهدف والزي الرسمي - {venue}',
     targetPrefix: 'الجمهور المستهدف', outfitPrefix: 'زي السهرة',
     couples: 'الأزواج الرومانسيون وضيوف VIP (25–45 سنة)', singles: 'مجموعات الأصدقاء والطاولات الاجتماعية (23–38 سنة)',
     over30: 'جمهور النخبة 30+ / 40+', families: 'العائلات مع الأطفال في عشاء الغالا',
@@ -402,14 +402,14 @@ export function getSeoLocalePack(locale: string): SeoLocalePack {
       },
       shots: ov.shots,
       posterDescTpl: `{h1} · {venue}: ${ov.badge} (WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}). ${ov.targetPrefix}: {target} · ${ov.outfitPrefix}: {outfit}.`,
-      shotDescTpl: `{h1} ({heading}) — {venue}: {target}, {outfit} ({shot}). WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}.`,
+      shotDescTpl: `{h1} ({heading}) - {venue}: {target}, {outfit} ({shot}). WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}.`,
     };
   }
   // For all other European / Balkan / Nordic locales (cs, sv, da, no, fi, el, hu, sk, bg, hr, sl, lt, lv, et, ga, mt, is, uk, sq, sr, bs, mk)
   return {
     officialPosterBadge: `${locale.toUpperCase()} · Official Event Poster`,
     galleryEyebrow: 'GOOGLE FLOW SEO PHOTO GALLERY · TARGET & OUTFIT',
-    galleryHeadingTpl: `{venue} — SEO Photo Gallery, Target & Outfit`,
+    galleryHeadingTpl: `{venue} - SEO Photo Gallery, Target & Outfit`,
     gallerySubTpl: `{h1} @ {venue}: {target} · {outfit}. WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}.`,
     targetPrefix: 'Target',
     outfitPrefix: 'Outfit',
@@ -554,9 +554,6 @@ export function selectMasterAssetKeys(slug: string, venueName = '', categorySlug
 }
 
 export function getCapodannoOfficialPosterSrc(eventSlug: string): string {
-  if (eventSlug === 'capodanno-justme-milano-torre-branca') {
-    return '/images/events/october-2026/248439-68f2dbbf4405.webp';
-  }
   return `/images/events/capodanno-2027-posters/${eventSlug}.webp`;
 }
 
@@ -701,13 +698,13 @@ const UX_COPY_BY_LOCALE: Record<string, {
 }> = {
   it: {
     tldrBadge: 'IN SINTESI · 5 PUNTI CHIAVE DELL’EVENTO',
-    tldrHeadingTpl: '{h1} — Guida Rapida & Riepilogo Ufficiale',
+    tldrHeadingTpl: '{h1} - Guida Rapida & Riepilogo Ufficiale',
     tldrLabels: ['1. Pubblico & Età', '2. Musica & Format', '3. Dress Code & Outfit', '4. Formule & Tavoli VIP', '5. Concierge Ufficiale Diretto'],
     tldrPricesVal: 'Lista / Prevendita Salta-Fila · Tavolo VIP da €300 (6–8 ospiti, ~€38–€50 a persona con bottiglie incluse)',
     tldrConciergeVal: 'WhatsApp +39 351 912 7047 · WWW.NIGHTLIFEMILAN.COM (Zero commissioni d’agenzia)',
     formulaCta: 'Prenota questa formula su WhatsApp →',
     vipEyebrow: 'CALCOLATORE PREVENTIVO TAVOLO VIP & BOTTIGLIE',
-    vipHeadingTpl: 'Calcola il Costo a Persona del Tavolo VIP — {venue}',
+    vipHeadingTpl: 'Calcola il Costo a Persona del Tavolo VIP - {venue}',
     vipSub: 'Dividi il tavolo con il tuo gruppo: ingresso prioritario salta-fila immediato, tavolo riservato tutta la notte e 100% dell’importo convertito in bottiglie servite al tavolo.',
     vipZones: ['Tavolo Pista / Dancefloor', 'Tavolo Privé Rialzato', 'Tavolo Super Privé VIP', 'Tavolo Console DJ / Backstage'],
     vipInclusions: [
@@ -719,7 +716,7 @@ const UX_COPY_BY_LOCALE: Record<string, {
     upsellTitle: 'Perché in 6 o più amici il Tavolo VIP conviene più dell’ingresso singolo?',
     upsellBody: 'Tra biglietto o ingresso in lista (€20–€30), guardaroba e secondo drink al bar (€15–€20), spendi già €40–€50 a testa facendo coda all’ingresso e restando in piedi. Con un Tavolo VIP da €300 diviso in 6–8 amici spendi la stessa cifra (€38–€50 a persona), entri subito dal varco VIP senza fila e hai seduta riservata con bottiglie al tavolo tutta la notte.',
     vipCtaBtn: 'Blocca Preventivo Tavolo VIP su WhatsApp (+39 351 912 7047) →',
-    dressHeadingTpl: 'Controllo Rapido Dress Code & Selezione all’Ingresso — {venue}',
+    dressHeadingTpl: 'Controllo Rapido Dress Code & Selezione all’Ingresso - {venue}',
     dressOkTitle: '✅ Outfit Consigliato (Ingresso Agevolato)',
     dressOkExtra1: 'Camicia, Blazer sartoriale o Abito da sera curato con calzature eleganti',
     dressOkExtra2: 'Gruppi misti uomo/donna o prenotazione nominale confermata via Concierge WhatsApp',
@@ -729,7 +726,7 @@ const UX_COPY_BY_LOCALE: Record<string, {
       'Cappellini con visiera, marsupi sportivi a tracolla o calzature da spiaggia',
       'Gruppi numerosi di soli uomini privi di tavolo VIP riservato',
     ],
-    logHeadingTpl: 'Logistica Notturna: Come Arrivare & Rientro alle 04:00 — {venue}',
+    logHeadingTpl: 'Logistica Notturna: Come Arrivare & Rientro alle 04:00 - {venue}',
     logLabels: ['Metro & Linee Notturne ATM', 'Taxi Ufficiali & NCC', 'Parcheggio & Viabilità'],
     logTexts: [
       'Linee M1/M2/M3/M4/M5 fino alle 00:30 + Rete Notturna ATM (NM1, NM2, NM3, NM4 e N25/N26 sui Navigli/Garibaldi) attiva tutta la notte.',
@@ -744,20 +741,20 @@ const UX_COPY_BY_LOCALE: Record<string, {
     nfHeading: 'Trova la Tua Serata Perfetta a Milano in 3 Click',
     nfSub: 'Filtra per data, genere musicale o formula d’ingresso oppure chiedi consiglio immediato su WhatsApp.',
     nfSteps: ['1. Quando vuoi uscire?', '2. Che musica e atmosfera cerchi?', '3. Quale formula preferisci?'],
-    nfChips1: ['Stasera a Milano', 'Questo Weekend', 'Speciale Halloween 2026', 'Capodanno 2027 (112 Eventi)'],
+    nfChips1: ['Stasera a Milano', 'Questo Weekend', 'Speciale Halloween 2026', 'Capodanno 2027 (113 Eventi)'],
     nfChips2: ['House, Rooftop & Luxury', 'Hip-Hop, Reggaeton & Urban', 'Techno & Electronic Club', 'Cena Cantata & Over 30'],
     nfChips3: ['Lista & Biglietti Salta-Fila', 'Aperitivo Royal con Tavolo', 'Tavolo VIP Privé & Bottiglie'],
     nfWaCta: 'Fatti Consigliare in 60 Secondi su WhatsApp (+39 351 912 7047) →',
   },
   en: {
     tldrBadge: 'TL;DR · 5 KEY EVENT ESSENTIALS',
-    tldrHeadingTpl: '{h1} — Quick Summary & Official Booking Guide',
+    tldrHeadingTpl: '{h1} - Quick Summary & Official Booking Guide',
     tldrLabels: ['1. Target Crowd & Age', '2. Music & Format', '3. Dress Code & Outfit', '4. Tickets & VIP Tables', '5. Official Direct Concierge'],
     tldrPricesVal: 'Guest List / Skip-the-Line Tickets · VIP Tables from €300 (6–8 guests, ~€38–€50/person with bottle credit included)',
     tldrConciergeVal: 'WhatsApp +39 351 912 7047 · WWW.NIGHTLIFEMILAN.COM (Zero agency markup)',
     formulaCta: 'Book this package on WhatsApp →',
     vipEyebrow: 'INTERACTIVE VIP TABLE & BOTTLE SPLITTER',
-    vipHeadingTpl: 'Calculate Your Per-Person VIP Table Cost — {venue}',
+    vipHeadingTpl: 'Calculate Your Per-Person VIP Table Cost - {venue}',
     vipSub: 'Split a VIP table with your group: instant skip-the-line VIP entry, reserved seating all night, and 100% of the table minimum spent on bottles.',
     vipZones: ['Dancefloor VIP Table', 'Elevated Privé Table', 'Super Privé VIP Table', 'DJ Console / Backstage Table'],
     vipInclusions: [
@@ -769,7 +766,7 @@ const UX_COPY_BY_LOCALE: Record<string, {
     upsellTitle: 'Why a VIP Table Is Smarter Than Individual Tickets for Groups of 6+',
     upsellBody: 'Between standard entry (€20–€30), coat check, and a second drink at the bar (€15–€20), you already spend €40–€50 per person while standing in line. Splitting a €300 VIP Table among 6–8 friends costs the exact same (€38–€50/person) and gives you instant VIP door entry, reserved seating, and bottle service all night.',
     vipCtaBtn: 'Lock In This VIP Table Quote on WhatsApp (+39 351 912 7047) →',
-    dressHeadingTpl: 'Quick Dress Code & Door Policy Checker — {venue}',
+    dressHeadingTpl: 'Quick Dress Code & Door Policy Checker - {venue}',
     dressOkTitle: '✅ Approved & Recommended Outfit (Smooth Door Entry)',
     dressOkExtra1: 'Collared shirt, tailored blazer, cocktail dress, or polished eveningwear with dress shoes',
     dressOkExtra2: 'Balanced mixed-gender groups or confirmed nominal reservation via WhatsApp Concierge',
@@ -779,7 +776,7 @@ const UX_COPY_BY_LOCALE: Record<string, {
       'Baseball caps, sporty crossbody bags, or flip-flops/slides',
       'Large all-male groups arriving late without a confirmed VIP Table reservation',
     ],
-    logHeadingTpl: 'Night Logistics: Getting There & 04:00 AM Return — {venue}',
+    logHeadingTpl: 'Night Logistics: Getting There & 04:00 AM Return - {venue}',
     logLabels: ['Metro & ATM Night Lines', 'Official Taxis & Chauffeur', 'Parking & ZTL Cameras'],
     logTexts: [
       'Metro M1/M2/M3/M4/M5 until 00:30 + ATM Night Buses (NM1, NM2, NM3, NM4) running all night on weekends.',
@@ -792,9 +789,9 @@ const UX_COPY_BY_LOCALE: Record<string, {
     privCta: 'Request Private Party / Corporate Quote on WhatsApp →',
     nfEyebrow: '3-CLICK MILAN NIGHT FINDER',
     nfHeading: 'Find Your Ideal Night Out in Milan in 3 Clicks',
-    nfSub: 'Filter by night, music vibe, or entry formula — or message our 24/7 WhatsApp Concierge for an instant match.',
+    nfSub: 'Filter by night, music vibe, or entry formula - or message our 24/7 WhatsApp Concierge for an instant match.',
     nfSteps: ['1. When are you going out?', '2. What music & vibe do you want?', '3. Preferred entry formula?'],
-    nfChips1: ['Tonight in Milan', 'This Weekend', 'Halloween 2026 Special', 'New Year’s Eve 2027 (112 Events)'],
+    nfChips1: ['Tonight in Milan', 'This Weekend', 'Halloween 2026 Special', 'New Year’s Eve 2027 (113 Events)'],
     nfChips2: ['House, Rooftop & Luxury', 'Hip-Hop, Reggaeton & Urban', 'Techno & Electronic Club', 'Dinner Show & 30+ Crowd'],
     nfChips3: ['Guest List & Tickets', 'Royal Aperitivo Table', 'VIP Privé Table & Bottles'],
     nfWaCta: 'Get a Tailored Club Match in 60s on WhatsApp (+39 351 912 7047) →',
@@ -972,8 +969,8 @@ export function buildSeoEventImagePack(params: {
 
   const assetKeys = params.customAssetKeys || selectMasterAssetKeys(params.eventSlug, params.venueName, params.categorySlug);
 
-  const posterTitle = `${params.h1} — ${pack.officialPosterBadge} · ${params.venueName}`;
-  const posterAlt = `${params.h1} — ${pack.officialPosterBadge} ${params.venueName} (${targetLabel} · ${outfitLabel})`;
+  const posterTitle = `${params.h1} - ${pack.officialPosterBadge} · ${params.venueName}`;
+  const posterAlt = `${params.h1} - ${pack.officialPosterBadge} ${params.venueName} (${targetLabel} · ${outfitLabel})`;
   const posterDesc = pack.posterDescTpl
     .replace('{h1}', params.h1)
     .replace('{venue}', params.venueName)
@@ -989,8 +986,8 @@ export function buildSeoEventImagePack(params: {
       82,
     );
     const src = `/images/seo-events/${params.locale}/${assetKey}--${seoFileSlug}.webp`;
-    const title = `${params.h1} · ${anchorHeading} — ${targetLabel} | ${outfitLabel}`;
-    const alt = `${params.h1} (${anchorHeading}) — ${params.venueName}: ${targetLabel}, ${outfitLabel} (${shotLabel})`;
+    const title = `${params.h1} · ${anchorHeading} - ${targetLabel} | ${outfitLabel}`;
+    const alt = `${params.h1} (${anchorHeading}) - ${params.venueName}: ${targetLabel}, ${outfitLabel} (${shotLabel})`;
     const description = pack.shotDescTpl
       .replace('{h1}', params.h1)
       .replace('{heading}', anchorHeading)

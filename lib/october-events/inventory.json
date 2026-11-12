@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceCheckedAt": "2026-11-11T11:14:08.000Z",
+  "sourceCheckedAt": "2026-11-12T11:35:00.000Z",
   "events": [
     {
       "id": "fabrique-fred-de-palma",
@@ -35,8 +35,8 @@
         "src": "/images/events/october-2026/fabrique-fred-de-palma-16a3bcffe1e3.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 254976,
-        "sha256": "4cfd670c8834b47349f1f6bd52783ca556164a892b32cff25a4b49861dfff27e"
+        "bytes": 101470,
+        "sha256": "0ef86f10194c5efa5a6d24bab7822cf26064f9cb8512affe2e5ca0f9c992d7a4"
       }
     },
     {
@@ -64,8 +64,8 @@
         "src": "/images/events/october-2026/243599-8d811d65d7c5.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 189888,
-        "sha256": "b38ad060ac9dedbe75af2ff811c8a1a2063ed49ea2aca30f6a836938e2fbb47b"
+        "bytes": 119378,
+        "sha256": "63e9d599e097f6c3f0f732c80718f2288d140f87bdc89895ea9f50876410cac4"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -200,8 +200,8 @@
         "src": "/images/events/october-2026/tempio-20261001-0e2fac8ce38e.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 296154,
-        "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
+        "bytes": 182542,
+        "sha256": "ebb252fea84661d91dbe3d0c62d39ed3734bc7cfee3c5c5b6d9e8e7a93ead383"
       },
       "programmeNotes": [
         {
@@ -254,8 +254,8 @@
         "src": "/images/events/october-2026/arci-gazebo-penguins-2-2c3dca55798a.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 184734,
-        "sha256": "a699efcfa02affdc85f662ffa1bde7f9344ca2743ef6aca080afcfd0d3344b59"
+        "bytes": 165450,
+        "sha256": "2985f1cee66e5c9d102923f861d97cfcbfb5df88f5c518b598b2169ffc7ab362"
       }
     },
     {
@@ -293,8 +293,8 @@
         "src": "/images/events/october-2026/alcatraz-dargen-damico-5e4480373551.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 212650,
-        "sha256": "a0bdf6f9d0c2887ffacf1f09e76e41131f6855f1f3b5ecca7a6f5bc6dac575ce"
+        "bytes": 67780,
+        "sha256": "a65a055cf0f399cddcd4ddd13fdaaa80a67d30c0dec30ca936b71020eb5eee0d"
       }
     },
     {
@@ -359,8 +359,8 @@
         "src": "/images/events/october-2026/department-disco-rotten-2026-10-01-b8a69e7eae70.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 289286,
-        "sha256": "40ae0c5ea25f9a8486c309f75ac51198fdf57e4d57909548d548ba18d0dbe16a"
+        "bytes": 142210,
+        "sha256": "562b55c9b6d966ab42436f71d4199e9ff4636ca58eb62d2709dbdc19fed5a699"
       }
     },
     {
@@ -396,8 +396,8 @@
         "src": "/images/events/october-2026/magazzini-entropia-2-d4f987e96cef.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 176598,
-        "sha256": "926d3c4d77136d399cfc5d74d3b65c6cdc3efe0ec081cc5301229d8edd3c5b2c"
+        "bytes": 93600,
+        "sha256": "8ef748fab97c973a73bb3a529bfce17b4f181a93ebf82ae25696eaf8e6358e5a"
       }
     },
     {
@@ -436,8 +436,8 @@
         "src": "/images/events/october-2026/theclub-20261001-3fd44825ead2.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 24218,
-        "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
+        "bytes": 49532,
+        "sha256": "484d71fde121a84320c2f8b70fc0859d4e2fec5e803193773a3007a54b315242"
       }
     },
     {
@@ -465,8 +465,8 @@
         "src": "/images/events/october-2026/239849-77ca7ffa4b9e.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 294746,
-        "sha256": "35ecabd79e9c3761235d4aee2057bba83207c26c3300f2c8d7c3d4afe42ce441"
+        "bytes": 120170,
+        "sha256": "6e901cb614bdebab1181f66eec7d6d8674957f91850a8090385d96755f6cbe52"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -573,8 +573,8 @@
         "src": "/images/events/october-2026/243589-5b4f80bbdcb7.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 26566,
-        "sha256": "3582261a1bfaaebc8d697eb911da5a6beb77809f06c7a552d259f68530f96ca4"
+        "bytes": 43624,
+        "sha256": "d8ea2d468d10118fb08b852d04f0d25bd2255b0248da0a3fadccf5077899e1ed"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -689,8 +689,8 @@
         "src": "/images/events/october-2026/mib-billions-venerdi-2-ottobre-2026-69472ba4c13b.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 51026,
-        "sha256": "e90f3133aeaca83339862022a7f90b74779acdf8f802f2fe4a86f7eebccbf328"
+        "bytes": 98416,
+        "sha256": "5a0a999ce11c0771218be6f5efd9c8d6338d526c8265499ba73f66d1f6f5f467"
       }
     },
     {
@@ -738,8 +738,8 @@
         "src": "/images/events/october-2026/tempio-20261002-87919b0665fe.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 296154,
-        "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
+        "bytes": 182542,
+        "sha256": "ebb252fea84661d91dbe3d0c62d39ed3734bc7cfee3c5c5b6d9e8e7a93ead383"
       }
     },
     {
@@ -783,8 +783,8 @@
         "src": "/images/events/october-2026/arci-apres-la-classe-f9a80af6bf13.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 183814,
-        "sha256": "2e21ddc2c85ed0f99d2aafb3fc30da50ea2acad69505338f8db13c7b714d8a0f"
+        "bytes": 164942,
+        "sha256": "143e74a0b5f4c25720b6fe569e40b34156f22d65f6d92b7d90d58e5d5ab7047d"
       }
     },
     {
@@ -825,8 +825,8 @@
         "src": "/images/events/october-2026/santeria-pierc-i-live-b495d76acf03.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 318484,
-        "sha256": "a1e553888b2093702bf3b4d5cb8013ff8749f764b9f4c4764e64d64821d513b1"
+        "bytes": 64004,
+        "sha256": "a603fb4afb31dbd3d6c9505b5026cde277edfd968231dc3b83988cdc1872d39c"
       }
     },
     {
@@ -875,8 +875,8 @@
         "src": "/images/events/october-2026/243205-a63266b5c354.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 85276,
-        "sha256": "a44b6a1dbe3a941070234f4148c69fbe7ef1a596b0314b3e5d013f613fdb5abb"
+        "bytes": 66080,
+        "sha256": "313b6b9d06d158e170ab96acf9a35077f559e5ce785538cce81877995baaf4bf"
       }
     },
     {
@@ -922,8 +922,8 @@
         "src": "/images/events/october-2026/arci-aka5ha-so-beast-3937a41ae6f0.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 184102,
-        "sha256": "a9dab067888f68a7a90633f898bc2f8cffa52ef0bc3e61c46faebfd04f2feb8c"
+        "bytes": 164820,
+        "sha256": "4db452301a582888357e64051a360ee4a7907460ac33a14be40e2c61966e0be2"
       }
     },
     {
@@ -950,8 +950,8 @@
         "src": "/images/events/october-2026/236320-fc49385c7f62.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 195552,
-        "sha256": "946554f7e1e332c97e6b2031ec38d80a7d6cefb0eb904b1321eb054f3d7adcbf"
+        "bytes": 99024,
+        "sha256": "44688c13355ea15e1c3d491ca2a4880a0144fd13670e46dea59b1fc6961df902"
       },
       "age": "18+",
       "dressCode": null,
@@ -1117,8 +1117,8 @@
         "src": "/images/events/october-2026/alcatraz-wtf-fluo-carnival-night-50833b263cd6.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 318776,
-        "sha256": "3389960e813cacc52c153f1d1f12e558e0dd4955dee429b2d954e7cc2912532d"
+        "bytes": 160772,
+        "sha256": "026490bbb45bd0727473fb58a8b04519b591d0ef5354e63ed682a721f40894a1"
       }
     },
     {
@@ -1154,8 +1154,8 @@
         "src": "/images/events/october-2026/apollo-ciao-discoteca-italiana-1430277493a3.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 102308,
-        "sha256": "1431ef5656894356b1ecfdb0a9d0ab2c5aaec9efd1952c918797d98408b909b0"
+        "bytes": 50124,
+        "sha256": "89f5e5407a1535d53da4c0ed1899f95f2b29150596db0a994a5be4cecb04735a"
       }
     },
     {
@@ -1199,8 +1199,8 @@
         "src": "/images/events/october-2026/duro-fluids-xdb-8e7938391261.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 181738,
-        "sha256": "7496ff704085f8f0fb34256bcaf852e68647176f4ba093c8547b685866dd3eb1"
+        "bytes": 163518,
+        "sha256": "ec99cded9abb663356cf9f5ec544cdf7153b9a039ba34f9472da8f4138eeba9c"
       }
     },
     {
@@ -1237,8 +1237,8 @@
         "src": "/images/events/october-2026/fabrique-chainsaw-extreme-1-ebc7f5eaeded.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 308382,
-        "sha256": "1c464032b73dee9c42ac2f0a7995ebdc3a2ca3d0da4234e4c6c273709ce359a8"
+        "bytes": 106110,
+        "sha256": "afa49ad9f955f14d60814d8e7fd954e7479732d663e13d96853f90d1d69289df"
       }
     },
     {
@@ -1274,8 +1274,8 @@
         "src": "/images/events/october-2026/magazzini-the-blaze-caee25d0b744.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 206724,
-        "sha256": "0ddcaf79ac4cb2f816e48d50e31a2420a34b634ed9e41b6735628123d23b3a29"
+        "bytes": 65446,
+        "sha256": "1c4c733f9eade8b42ad916f3f11923e7dd3408935037e09d4b9ab019dbeafbe8"
       }
     },
     {
@@ -1311,8 +1311,8 @@
         "src": "/images/events/october-2026/theclub-20261002-a17dd723c2c8.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 24218,
-        "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
+        "bytes": 49532,
+        "sha256": "484d71fde121a84320c2f8b70fc0859d4e2fec5e803193773a3007a54b315242"
       }
     },
     {
@@ -1365,8 +1365,8 @@
         "src": "/images/events/october-2026/department-young-signorino-futura-2026-10-02-01f9fe6a260e.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 185890,
-        "sha256": "0e162e645d8575593a665f1538d79c63b88d37b5c6af290994df7b4f335e4380"
+        "bytes": 166674,
+        "sha256": "00eee0db38f6f706d727aaf168fe6a550ed7daaa6fa69a9409ed5b0865746f94"
       }
     },
     {
@@ -1434,8 +1434,8 @@
         "src": "/images/events/october-2026/ra-2527763-b4d7d6fe0f2f.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 185472,
-        "sha256": "2be2ee8a68b188d9aaa0bfc90d9475ebfbc52f43f47874fee0c5cb39b19ffd20"
+        "bytes": 165936,
+        "sha256": "c272259f8b4934a69716349752277dd30260f2fa3a2ee2551ada97128cf25ad1"
       }
     },
     {
@@ -1463,8 +1463,8 @@
         "src": "/images/events/october-2026/242611-d6dfa52deb0b.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 222268,
-        "sha256": "eae068d6b0bfa374878f09d861ab11fe1c4faeb316b76a22d89a1d2cf4e987f7"
+        "bytes": 105112,
+        "sha256": "9bf1586ff7e7a9902ea78e71d47ec8299daf1fdcd359abbff52ab8d04a92eff8"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -1528,8 +1528,8 @@
         "src": "/images/events/october-2026/243582-e2755e4bf02c.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 116888,
-        "sha256": "00bf0f0bbe678f9651187612f126860d4b5f683f6a88f46dc0374c39479b596c"
+        "bytes": 74000,
+        "sha256": "4e382236fe54c7c65645b3335ce7f7ebb7fd0bd67746325ab9245c3ebfca8414"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -1638,8 +1638,8 @@
         "src": "/images/events/october-2026/arci-milano-cantautori-w-special-guest-scarda-b1b3e6ab1176.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 185934,
-        "sha256": "125711c0874a9957b0acdf1ccd95c425d95510e6c12ca674a283c2c4841aa83d"
+        "bytes": 167026,
+        "sha256": "1570f61491875a72258792621c38727ed236060c59db87a05f08d6262a95d644"
       }
     },
     {
@@ -1682,8 +1682,8 @@
         "src": "/images/events/october-2026/mib-love-affair-sabato-3-ottobre-2026-9b1477fa6da2.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 29060,
-        "sha256": "26d45b1aaa32a4871fd57db6d76a347d971e30b8f9e4f36071ef3af39d221637"
+        "bytes": 56148,
+        "sha256": "91ad4b3f261c7738395c0575b77fa359e84ed97df5fc77d982b83e2ae43e9ad5"
       }
     },
     {
@@ -1719,8 +1719,8 @@
         "src": "/images/events/october-2026/240980-429ae995518c.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 291710,
-        "sha256": "fe1663d7b0e4ca6f00536af8b3d84acf65aacfbc0b511b79c4b635aaa2fa062d"
+        "bytes": 90950,
+        "sha256": "96c284e7ca15ee0c57fa8beb2dff4603e195b554ef6a7f0d50e88f7c07c1c706"
       }
     },
     {
@@ -1772,8 +1772,8 @@
         "src": "/images/events/october-2026/arci-london-calling-uk-party-the-smiths-night-4cf8b100c4b7.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 185630,
-        "sha256": "06fd05cfb86e25673522b0d78fbe4cf54e9d1680e5802e0f922b2110ab3ad529"
+        "bytes": 166532,
+        "sha256": "8ccd34f3d09b2e5789fb9989aec385d61c8e3051fd2c7f04fe44ba37c5b5b2bf"
       }
     },
     {
@@ -1801,8 +1801,8 @@
         "src": "/images/events/october-2026/245082-7df7b115fc2d.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 57748,
-        "sha256": "ab3000d06f622b1743f0336e457c5474ef11aa08a87b3697cabeab44f2ed90d7"
+        "bytes": 48086,
+        "sha256": "800f3f7ab84f60e2d44c95110372ea83c4f90349eea45f888834d06d9bd72fb2"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -1861,8 +1861,8 @@
         "src": "/images/events/october-2026/fabrique-80s-never-die-9-c8a78cbf65c0.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 307832,
-        "sha256": "cc59c0d64c0ea3db0d3d021f5aab484aeda383ac022ce54b4af7068d9345e75a"
+        "bytes": 160462,
+        "sha256": "9c6d20c95fa07f25238b03600dc362f2504f7b1ccb3b7ac90feeca8f10b4e9f3"
       }
     },
     {
@@ -1889,8 +1889,8 @@
         "src": "/images/events/october-2026/238347-d469c46f29b4.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 168250,
-        "sha256": "5408d59092eda258eea054cdc48ef4f346e2503e9fd5126520b945c4f7fbd233"
+        "bytes": 107884,
+        "sha256": "b308b22d3e221504abf7650cab17e0191ff82c3090c5c58c5c7b6b22d2484635"
       },
       "age": "18+",
       "dressCode": null,
@@ -1973,8 +1973,8 @@
         "src": "/images/events/october-2026/alcatraz-we-are-young-2010s-party-3-586cde7ef1a5.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 380378,
-        "sha256": "fd036526bdc20af05c2b8aedcd0dd3245fde15690333c7a65e3a77dd873152e0"
+        "bytes": 135838,
+        "sha256": "6f785ea5ac88450da79ec20ac1884fcdf99971c75aec203ddbc3070b75324447"
       }
     },
     {
@@ -2033,8 +2033,8 @@
         "src": "/images/events/october-2026/ra-2531416-d9ad139b7613.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 385432,
-        "sha256": "9bab297f33e977515defa313b10dfe08f2d571337f407daa7f2f9ca307c06c73"
+        "bytes": 121742,
+        "sha256": "3b5efda74a1e7d31484ededdde2a247b5e12bafbc2e3d0ed646f602e195bcabd"
       }
     },
     {
@@ -2082,8 +2082,8 @@
         "src": "/images/events/october-2026/tempio-20261003-b239248c5c37.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 296154,
-        "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
+        "bytes": 182542,
+        "sha256": "ebb252fea84661d91dbe3d0c62d39ed3734bc7cfee3c5c5b6d9e8e7a93ead383"
       }
     },
     {
@@ -2133,8 +2133,8 @@
         "src": "/images/events/october-2026/amnesia-rossi-vithz-sean-afful-b2b-garon-amnesia-milano-b0586c8c794e.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 146692,
-        "sha256": "56b181279cc4708dc01aa097624cb47a91139be191b41232f466cb148d8ff4e6"
+        "bytes": 73604,
+        "sha256": "6745069a9b30316c9051738fce9a8f4fba612b9894e4f324a3ff48f1d09cca80"
       }
     },
     {
@@ -2200,8 +2200,8 @@
         "src": "/images/events/october-2026/ra-2527769-b4d7d6fe0f2f.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 185658,
-        "sha256": "06253c240537203172d4aecada140eb32dd27e99ba154f5e8e95cfb740c2c948"
+        "bytes": 166118,
+        "sha256": "f68f7a3ee424c42eec6a9afb1fd689e71ba529b13e620e174bcc4152c0d05814"
       }
     },
     {
@@ -2237,8 +2237,8 @@
         "src": "/images/events/october-2026/theclub-20261003-e234ca417202.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 40738,
-        "sha256": "4b8810f4b595b0e055435b00e0d2167f4fe9b56d4d030ef27cad752df29512a0"
+        "bytes": 79008,
+        "sha256": "90cdf18f97eef8c1ffae0f0586d41cf75675c4f49b7353e8e60009fd502adeb9"
       }
     },
     {
@@ -2297,8 +2297,8 @@
         "src": "/images/events/october-2026/ra-2538629-935e1a0d50cd.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 37648,
-        "sha256": "a329a209a23b34751f4a749420e626b1e6c27d3f6558b63dd3fb28b34b6c192c"
+        "bytes": 31924,
+        "sha256": "14749d336b91aa6f612bc9c5060cd8cfc3461e53ea8079046f8ad3a8bd55b053"
       }
     },
     {
@@ -2326,8 +2326,8 @@
         "src": "/images/events/october-2026/243578-6c9b7c8de685.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 96634,
-        "sha256": "7d5555682cd9db4e5c9d3f6e6213f76a6f8c9e3902cc790f5165204aeff39bd6"
+        "bytes": 78932,
+        "sha256": "891cbe11a0ed009fdc2789ea2e8a73baa8fc975c6204b5bb3504a543164d47df"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -2441,8 +2441,8 @@
         "src": "/images/events/october-2026/arci-the-sophs-6344d6adc965.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 182774,
-        "sha256": "4deb40d8dbc1dbe9789b57c5ea876e352608399bd0dd6ae8853440c097912429"
+        "bytes": 163760,
+        "sha256": "6b70b9320b49f2c1aac8312e31845a32245cef96bc18fe7825eb203bb2d9167a"
       }
     },
     {
@@ -2481,8 +2481,8 @@
         "src": "/images/events/october-2026/theclub-20261004-0349c50fe330.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 40738,
-        "sha256": "4b8810f4b595b0e055435b00e0d2167f4fe9b56d4d030ef27cad752df29512a0"
+        "bytes": 79008,
+        "sha256": "90cdf18f97eef8c1ffae0f0586d41cf75675c4f49b7353e8e60009fd502adeb9"
       }
     },
     {
@@ -2510,8 +2510,8 @@
         "src": "/images/events/october-2026/243612-bbdee1490af9.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 150112,
-        "sha256": "efee0066aaf05141f307325ffd85ff06064c7f34c42d36a88786a52b5f9ba05c"
+        "bytes": 115522,
+        "sha256": "6c7d88e5d9160ffafce00ff2755bdd0b4db6640440e202a0012fc231434e3816"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -2620,8 +2620,8 @@
         "src": "/images/events/october-2026/arci-liars-28d7b58ceb4f.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 180882,
-        "sha256": "ea5ea98c327cb5efce30763719458af29dee9c92803919d9bcff43b88337cf49"
+        "bytes": 162256,
+        "sha256": "b61e6aae6e4a4bf53c1ef493bab3ee39555677d4022125c4fa4c7352864f5d23"
       }
     },
     {
@@ -2657,8 +2657,8 @@
         "src": "/images/events/october-2026/santeria-the-lemon-twings-live-53cf3681b4be.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 632800,
-        "sha256": "4a85a150978f92255a89687a77706512454bd89d650c262387ecd1a32f9f5ab0"
+        "bytes": 144792,
+        "sha256": "b5a2f7e1a904421ab3f78543245086c599c1fd38ba21826cbe600408a7b41582"
       }
     },
     {
@@ -2686,8 +2686,8 @@
         "src": "/images/events/october-2026/243608-aa34ab79100b.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 121514,
-        "sha256": "fd955a74a75ce54c0c051be65105fd6f03edb385d78f2a3bb1f72330eb17a770"
+        "bytes": 102622,
+        "sha256": "dea359622a1e26b1e24846f87103568134c6bbc45b39077298372eeee08bedf7"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -2793,8 +2793,8 @@
         "src": "/images/events/october-2026/arci-planet-butter-98d72a0d6ec5.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 183278,
-        "sha256": "f83380331b2e8d8454d7762366e88e88240ea49a79722a12ec2d8799bb31b3bd"
+        "bytes": 164062,
+        "sha256": "4371fa34328345f6356f418743f58f6134e0ee44b3d01f21ad8ac93214bc528c"
       }
     },
     {
@@ -2830,8 +2830,8 @@
         "src": "/images/events/october-2026/gate-mateus-asato-tour-2026-16be9d71d571.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 184682,
-        "sha256": "ee28f3ce471e24d97fca832474ba68dc09ed1001936e62df6b6b6dd746f6b373"
+        "bytes": 166312,
+        "sha256": "b028b0d20e98ad732dafbb61303ecb4ce8b9ed993ac8d02a8519c8808d27b5e7"
       }
     },
     {
@@ -2859,8 +2859,8 @@
         "src": "/images/events/october-2026/243604-e2b7683e02e3.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 214548,
-        "sha256": "42b8cb28482ca3fe9a528171407a39dac8e118c793d488979bb5ed8e88fbd568"
+        "bytes": 88244,
+        "sha256": "888ad1ea1868fd609d2f6c00252b83331fabc558698f79ebb8d4a0dabbc84af3"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -2970,8 +2970,8 @@
         "src": "/images/events/october-2026/arci-laura-misch-2-cc80dcba0ccc.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 183080,
-        "sha256": "8a20f7e04a832f5dbd409b9e6e38857f5fb10f8e5390ffd598abfce359471415"
+        "bytes": 163892,
+        "sha256": "eb5e26ddd960e00be4cb05442652645813187283c7800bcad4969e32ddb30123"
       }
     },
     {
@@ -3015,8 +3015,8 @@
         "src": "/images/events/october-2026/mib-internationalweek-mercoledi-7-ottobre-2026-5b99ec18bc20.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 61802,
-        "sha256": "974ec1b18044e13b856dd025e3ffa02e40262c470b722b1d353ab491b45484ab"
+        "bytes": 97294,
+        "sha256": "35cefe2d6149de923b055d0236e8d67d034b18d9a028523fd60960d005d834c9"
       }
     },
     {
@@ -3052,8 +3052,8 @@
         "src": "/images/events/october-2026/theclub-20261007-0e69f2fb29b8.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 24218,
-        "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
+        "bytes": 49532,
+        "sha256": "484d71fde121a84320c2f8b70fc0859d4e2fec5e803193773a3007a54b315242"
       }
     },
     {
@@ -3081,8 +3081,8 @@
         "src": "/images/events/october-2026/243600-8d811d65d7c5.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 189888,
-        "sha256": "b38ad060ac9dedbe75af2ff811c8a1a2063ed49ea2aca30f6a836938e2fbb47b"
+        "bytes": 111820,
+        "sha256": "a6074396a20a07b9ddce45ee37a611eb7b54d24e3f252b34d000e292fc7fb6b6"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -3190,8 +3190,8 @@
         "src": "/images/events/october-2026/mib-albicocca-student-s-party-giovedi-8-ottobre-2026-0e9b237acc21.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 253724,
-        "sha256": "dc3d9deaeae6f62e6d41fafd6dda25214ee17fa456115c8e508ae67153a01d77"
+        "bytes": 71650,
+        "sha256": "18a9d159deb387b7b79fa6fe74896445353254ed89cb52f9dbcb12614564c3eb"
       }
     },
     {
@@ -3256,8 +3256,8 @@
         "src": "/images/events/october-2026/tempio-20261008-0e2fac8ce38e.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 296154,
-        "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
+        "bytes": 182542,
+        "sha256": "ebb252fea84661d91dbe3d0c62d39ed3734bc7cfee3c5c5b6d9e8e7a93ead383"
       },
       "programmeNotes": [
         {
@@ -3310,8 +3310,8 @@
         "src": "/images/events/october-2026/arci-sessa-bd85d59a056b.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 181584,
-        "sha256": "3d0f2bf191424a1c8f79f3d4fba84730e85a0c03393a327f24a9b45e7328f948"
+        "bytes": 162678,
+        "sha256": "6617d118d47b2f6376f1c3eb46dcd48730ee1162e469601bf641b0619e24b80d"
       }
     },
     {
@@ -3349,8 +3349,8 @@
         "src": "/images/events/october-2026/alcatraz-babyshambles-5602500e081f.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 127382,
-        "sha256": "f54a748425cd268c64dfa9a01c2066d24faa379a7cee35494f7f1636f14cac7e"
+        "bytes": 75508,
+        "sha256": "3add0a279ab67131045d85a9822f19fd96e9ff921c30ab1b5ef9b295f325d897"
       }
     },
     {
@@ -3386,8 +3386,8 @@
         "src": "/images/events/october-2026/santeria-will-live-af772f76fea0.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 423568,
-        "sha256": "99f377aa322a06e1cf01cd071c8cce98c104e34841913531a6ef419d6d3dfbc9"
+        "bytes": 150406,
+        "sha256": "de1ba30ed5846796d61cfe351f59ff0f2c9cb240f49d949a20071ba5ca2bf54d"
       }
     },
     {
@@ -3426,8 +3426,8 @@
         "src": "/images/events/october-2026/theclub-20261008-6b9b5d1f874e.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 24218,
-        "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
+        "bytes": 49532,
+        "sha256": "484d71fde121a84320c2f8b70fc0859d4e2fec5e803193773a3007a54b315242"
       }
     },
     {
@@ -3481,8 +3481,8 @@
         "src": "/images/events/october-2026/department-oktoberfast-2026-10-09-7c40343f7504.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 157300,
-        "sha256": "98ce29afac2406c706d9b67d9ee9c002e6b01f3c48b4b68a0725b49b83f1f202"
+        "bytes": 58904,
+        "sha256": "017caf44e0dd56b827f8e56ebc7cf49894454618a13b7b29c9828f5c5d43867e"
       },
       "programmeDateRange": {
         "startDate": "2026-10-09",
@@ -3523,8 +3523,8 @@
         "src": "/images/events/october-2026/alcatraz-i-prevail-2-7a1480bb883a.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 231722,
-        "sha256": "a512211068005a40171df441ad8950bed93f25de9a824ec7137ea3b4eea948d2"
+        "bytes": 205078,
+        "sha256": "accd69890ded5b9307cf009d78a9c8daea2b9ec50900c0e2960ca0cfd78e8a48"
       }
     },
     {
@@ -3552,8 +3552,8 @@
         "src": "/images/events/october-2026/243590-3d2820d9f0ee.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 56800,
-        "sha256": "e1a466a9e988671509fc112b8d50b4e20a65071782f138be6cc72152a53878a5"
+        "bytes": 106254,
+        "sha256": "830bc7bf889d1284f1b46f08648f8792e826a82e037fb9219e235377c1cd7018"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -3648,8 +3648,8 @@
         "src": "/images/events/october-2026/243818-4cb1a6cdf184.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 138666,
-        "sha256": "97af5f58ddd898f6c304d4f34256342c584ae2309ca072a0625e89f7fc308178"
+        "bytes": 122732,
+        "sha256": "d9c540ac1b8901c90a25c2bdbca5451b28f1fa4de6c9fce1f7807bc8ac3b8644"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -3760,8 +3760,8 @@
         "src": "/images/events/october-2026/mib-billions-venerdi-9-ottobre-2026-51bf08feb599.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 51026,
-        "sha256": "e90f3133aeaca83339862022a7f90b74779acdf8f802f2fe4a86f7eebccbf328"
+        "bytes": 98416,
+        "sha256": "5a0a999ce11c0771218be6f5efd9c8d6338d526c8265499ba73f66d1f6f5f467"
       }
     },
     {
@@ -3806,8 +3806,8 @@
         "src": "/images/events/october-2026/arci-deep-forest-0ebf7b4b0b98.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 183094,
-        "sha256": "3af8b36ebab202ea82301cedd6238aa84a542ea645b696d93180da2b0a37b95e"
+        "bytes": 164262,
+        "sha256": "98a802e61926a3bd8eb94baa1b2c8c57fe73fc954de4cefe4897200cf2d6a33d"
       }
     },
     {
@@ -3859,8 +3859,8 @@
         "src": "/images/events/october-2026/240520-08d882a833db.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 117928,
-        "sha256": "3d651b0399c48d3027b991a7cee9c8a7537175bf135442bb3df95fbbe4e60174"
+        "bytes": 85988,
+        "sha256": "400e6b908dec8f185b378c6996ebd2842d7d3d45d5c8f4e394a7e99c5fde8dce"
       }
     },
     {
@@ -3887,8 +3887,8 @@
         "src": "/images/events/october-2026/236321-ea27dd42c00f.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 163888,
-        "sha256": "05c70733455191f61cfdd3b3c3aa0c74c8266242838610b3d15e660cb1ad1968"
+        "bytes": 107316,
+        "sha256": "fbff11b98f7a91e3270d8f390552b02500d255b66e46b89db8f956fc1e9ad7ec"
       },
       "age": "18+",
       "dressCode": null,
@@ -4086,8 +4086,8 @@
         "src": "/images/events/october-2026/alcatraz-wtf-xoxo-gossip-girl-party-90f4459b53fb.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 295684,
-        "sha256": "68c79b711554457671db1b504bbc9a607591e65ca366182cda3d73feacfc8cf1"
+        "bytes": 257246,
+        "sha256": "ea1ac22149a5f5e1dd77453e499b2771f8b5f18128de564d0b8658ac15ca7d79"
       }
     },
     {
@@ -4131,8 +4131,8 @@
         "src": "/images/events/october-2026/duro-echo-shonky-b49e8b8f471e.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 182612,
-        "sha256": "96eeedab87a664bbd5327212d81d5071943035180916557b0faa77c6c3456b53"
+        "bytes": 164200,
+        "sha256": "a090cc04ede17cf0565cbb09336303b77e4d152903a85d1fdc92e8319b250a41"
       }
     },
     {
@@ -4179,8 +4179,8 @@
         "src": "/images/events/october-2026/tempio-20261009-87919b0665fe.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 296154,
-        "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
+        "bytes": 182542,
+        "sha256": "ebb252fea84661d91dbe3d0c62d39ed3734bc7cfee3c5c5b6d9e8e7a93ead383"
       }
     },
     {
@@ -4216,8 +4216,8 @@
         "src": "/images/events/october-2026/theclub-20261009-4925bccc5b34.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 24218,
-        "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
+        "bytes": 49532,
+        "sha256": "484d71fde121a84320c2f8b70fc0859d4e2fec5e803193773a3007a54b315242"
       }
     },
     {
@@ -4271,8 +4271,8 @@
         "src": "/images/events/october-2026/department-oktoberfast-2026-10-10-7c40343f7504.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 157300,
-        "sha256": "98ce29afac2406c706d9b67d9ee9c002e6b01f3c48b4b68a0725b49b83f1f202"
+        "bytes": 58904,
+        "sha256": "017caf44e0dd56b827f8e56ebc7cf49894454618a13b7b29c9828f5c5d43867e"
       },
       "programmeDateRange": {
         "startDate": "2026-10-09",
@@ -4340,8 +4340,8 @@
         "src": "/images/events/october-2026/ra-2532928-71a90b8eb82c.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 184742,
-        "sha256": "e93b63800afbef2e5974572309bb9b1faeeb56cb75e757c68b8d571440985f20"
+        "bytes": 165700,
+        "sha256": "8462bf8c7dd15e42784238d9164d1066347ca3f66858717520a9a7a9ae84420e"
       }
     },
     {
@@ -4430,8 +4430,8 @@
         "src": "/images/events/october-2026/ra-2513228-635c8ab6043f.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 29092,
-        "sha256": "5d54f30368261203c9d81900b655a6448b0807f33df31e9fe4b4c2df385eb64e"
+        "bytes": 18106,
+        "sha256": "7b72bbdd3d0f8e65927b7bc16d0916b17c90fa780507a1091dc44981cbdd734f"
       }
     },
     {
@@ -4475,8 +4475,8 @@
         "src": "/images/events/october-2026/santeria-cyn-cyn-aperitivo-and-live-music-11-c4544ab49e20.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 159162,
-        "sha256": "61ca7982d1d753a3c8339766ac9044e337459d872e56f78f102ac4cfc53149cd"
+        "bytes": 59502,
+        "sha256": "5c2983b1ebcc3310d892d69a08e35e97ee93e607d65ca4fe89e1169b2e5c4c54"
       }
     },
     {
@@ -4504,8 +4504,8 @@
         "src": "/images/events/october-2026/242373-e8e2974f685b.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 123952,
-        "sha256": "cc6567293b976f6983b01e00d7e9d2cae5ddc03c73faa4a782ce6a1da21d2a97"
+        "bytes": 81250,
+        "sha256": "ec5a6546c65c79b782b42b378716f5fd4bde131fd81425d2af3a22bf50378cf6"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -4564,8 +4564,8 @@
         "src": "/images/events/october-2026/242612-d6dfa52deb0b.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 222268,
-        "sha256": "eae068d6b0bfa374878f09d861ab11fe1c4faeb316b76a22d89a1d2cf4e987f7"
+        "bytes": 105112,
+        "sha256": "9bf1586ff7e7a9902ea78e71d47ec8299daf1fdcd359abbff52ab8d04a92eff8"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -4629,8 +4629,8 @@
         "src": "/images/events/october-2026/243583-e2755e4bf02c.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 116888,
-        "sha256": "00bf0f0bbe678f9651187612f126860d4b5f683f6a88f46dc0374c39479b596c"
+        "bytes": 111058,
+        "sha256": "afa3e514a32f3ce09be915f0ec894f315e24be6243b1d78323ac97de21786bf8"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -4740,8 +4740,8 @@
         "src": "/images/events/october-2026/mib-love-affair-sabato-10-ottobre-2026-743801cc21f2.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 29060,
-        "sha256": "26d45b1aaa32a4871fd57db6d76a347d971e30b8f9e4f36071ef3af39d221637"
+        "bytes": 56148,
+        "sha256": "91ad4b3f261c7738395c0575b77fa359e84ed97df5fc77d982b83e2ae43e9ad5"
       }
     },
     {
@@ -4785,8 +4785,8 @@
         "src": "/images/events/october-2026/arci-strawberry-guy-c190576032e0.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 184292,
-        "sha256": "6b4fc964185166b2eda714f393fd26399f9354f521a624ca7ecc307b9f2251ba"
+        "bytes": 165386,
+        "sha256": "2795a12dde41db3cb3d5cfa956b7322d1848ab27fb0de4b9cd754cb33db35479"
       }
     },
     {
@@ -4823,8 +4823,8 @@
         "src": "/images/events/october-2026/fabrique-j-ax-a5177b3a2e54.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 268032,
-        "sha256": "58004c3f199b1cef73c40a61b77559ed9ba462054df74e122ae58636349c5f54"
+        "bytes": 94282,
+        "sha256": "bb6157f27b0c22a219bd2622325e5d72ebb49d7743129c1279d02d9163a9e4fe"
       }
     },
     {
@@ -4860,8 +4860,8 @@
         "src": "/images/events/october-2026/240981-429ae995518c.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 291710,
-        "sha256": "fe1663d7b0e4ca6f00536af8b3d84acf65aacfbc0b511b79c4b635aaa2fa062d"
+        "bytes": 90950,
+        "sha256": "96c284e7ca15ee0c57fa8beb2dff4603e195b554ef6a7f0d50e88f7c07c1c706"
       }
     },
     {
@@ -4898,8 +4898,8 @@
         "src": "/images/events/october-2026/alcatraz-la-vita-a-30-anni-c0dd0bf5554a.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 359830,
-        "sha256": "f6009381d6cb3e82305bdd62a8a30b3dd74c71312915728766d1c29c69704e7f"
+        "bytes": 220774,
+        "sha256": "aa218024627e69ba3a2520fcead9299f38357838a17740ec1add58aa1b321fd8"
       }
     },
     {
@@ -4941,8 +4941,8 @@
         "src": "/images/events/october-2026/duro-moab-daniel-avery-fd482ec00ac4.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 166918,
-        "sha256": "e4cc7c7baa5ccff733f925e5acdc38a2757db0e264b41ff5ab9f295d3e36a11e"
+        "bytes": 67188,
+        "sha256": "ac250423fef31e9cd21f9f26de4486fa83e9b7dc8664ec8b798f5dfcff8c678a"
       }
     },
     {
@@ -5009,8 +5009,8 @@
         "src": "/images/events/october-2026/ra-2532937-71a90b8eb82c.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 185860,
-        "sha256": "f6982b8b8f824c986da7ab22897f2683f944bd67ccd92ea40a68f535d4b0fe88"
+        "bytes": 166738,
+        "sha256": "40d4e5f422c1b726c224feec6e7b55d86d7edc43b768c42ba8d9923d60a0718a"
       }
     },
     {
@@ -5063,8 +5063,8 @@
         "src": "/images/events/october-2026/tempio-20261010-c159898504a1.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 296154,
-        "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
+        "bytes": 182542,
+        "sha256": "ebb252fea84661d91dbe3d0c62d39ed3734bc7cfee3c5c5b6d9e8e7a93ead383"
       }
     },
     {
@@ -5105,8 +5105,8 @@
         "src": "/images/events/october-2026/amnesia-amnesia-milano-24-years-anniversary-w-adam-beyer-cd1f96eea982.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 220408,
-        "sha256": "bb26dbdfadcbaee57c74e34cb2b6330263eddf9cc04c7159d62505cb74b9a840"
+        "bytes": 86774,
+        "sha256": "dfe3c228d6fdfad050c39b5a4ada504f0cb8fc7ea3eec488383245f144ec46a9"
       }
     },
     {
@@ -5142,8 +5142,8 @@
         "src": "/images/events/october-2026/theclub-20261010-62c9a04ff94b.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 40738,
-        "sha256": "4b8810f4b595b0e055435b00e0d2167f4fe9b56d4d030ef27cad752df29512a0"
+        "bytes": 79008,
+        "sha256": "90cdf18f97eef8c1ffae0f0586d41cf75675c4f49b7353e8e60009fd502adeb9"
       }
     },
     {
@@ -5197,8 +5197,8 @@
         "src": "/images/events/october-2026/department-oktoberfast-2026-10-11-7c40343f7504.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 157300,
-        "sha256": "98ce29afac2406c706d9b67d9ee9c002e6b01f3c48b4b68a0725b49b83f1f202"
+        "bytes": 58904,
+        "sha256": "017caf44e0dd56b827f8e56ebc7cf49894454618a13b7b29c9828f5c5d43867e"
       },
       "programmeDateRange": {
         "startDate": "2026-10-09",
@@ -5242,8 +5242,8 @@
         "src": "/images/events/october-2026/gate-no-te-va-a-gustar-live-ba0db431336f.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 183786,
-        "sha256": "2ecbed3bc2440faa411c206b8caa4035ed39fddce4bb399f22692d74a63bf763"
+        "bytes": 165334,
+        "sha256": "72d0e6aab528b346240740c7deb1f51f42b71dbc5f8462233cb23c85bc22ffb8"
       }
     },
     {
@@ -5272,8 +5272,8 @@
         "src": "/images/events/october-2026/243579-204f76e66003.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 205000,
-        "sha256": "bfb6af7e1bcd478b647997963a11f43d609558b3c759252ebe1ec07ad7764db6"
+        "bytes": 82342,
+        "sha256": "fc9152ab766e5d2a0a3164466b90806504e730963543bf230ce287bb7c361f8f"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -5370,8 +5370,8 @@
         "src": "/images/events/october-2026/alcatraz-autechre-331f89706969.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 77536,
-        "sha256": "790dbc52c989a03c914f357e92bd613ce31add0f331a363e1a4c4ea1648963c2"
+        "bytes": 32002,
+        "sha256": "04f7ce0e327a71b8cea5288a58b7a3bdef56832b5c5bb1b54b93b6afc3256a8b"
       }
     },
     {
@@ -5414,8 +5414,8 @@
         "src": "/images/events/october-2026/arci-world-brain-824bdc93c47b.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 183078,
-        "sha256": "5771080495484590178c39a1ed7337ed20e82f33d88fd0bb2df5fbf11bafe54f"
+        "bytes": 163846,
+        "sha256": "1bd4dc43aea0b5377d6123b47af62fb878415fa56177f6b64f92e85fb12f1c60"
       }
     },
     {
@@ -5452,8 +5452,8 @@
         "src": "/images/events/october-2026/fabrique-j-ax2-a5177b3a2e54.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 267906,
-        "sha256": "161699cdc8a07ca03f5fa6adfa772f7bc191f77a14bbc6dda20cc0bfad9b0d74"
+        "bytes": 94250,
+        "sha256": "8a260388b2329426f858f4cf4d4931fda767cb8d16564ed8ebb49703b4c6dddf"
       }
     },
     {
@@ -5492,8 +5492,8 @@
         "src": "/images/events/october-2026/theclub-20261011-d9d13fa6c595.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 40738,
-        "sha256": "4b8810f4b595b0e055435b00e0d2167f4fe9b56d4d030ef27cad752df29512a0"
+        "bytes": 79008,
+        "sha256": "90cdf18f97eef8c1ffae0f0586d41cf75675c4f49b7353e8e60009fd502adeb9"
       }
     },
     {
@@ -5530,8 +5530,8 @@
         "src": "/images/events/october-2026/alcatraz-lake-street-dive-1a8eeace72fa.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 296940,
-        "sha256": "92d509dfdcc0dfc499b534c23c2cf550059899b8434348f5c9d87aaebd6bf361"
+        "bytes": 80692,
+        "sha256": "bffdf55a22321b3d55cbd6548191a77a29948fad618166230829eccd8a368d5d"
       }
     },
     {
@@ -5567,8 +5567,8 @@
         "src": "/images/events/october-2026/fabrique-flaco-g-0c31b0071ec7.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 301134,
-        "sha256": "eef04d6e770674f865650920321eebd8beeaf3021df822b06ffe64541fc7cb95"
+        "bytes": 104386,
+        "sha256": "ae0e4e7a271a2afe70bf16cd813054b311c87be896c1f992118464d24a5d8d3a"
       }
     },
     {
@@ -5597,8 +5597,8 @@
         "src": "/images/events/october-2026/243613-bbdee1490af9.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 150112,
-        "sha256": "efee0066aaf05141f307325ffd85ff06064c7f34c42d36a88786a52b5f9ba05c"
+        "bytes": 171450,
+        "sha256": "0fd1417a7679f722a61b82d407ec85f8f7eafc5aab6886a4f8ef5157ccea1c2f"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -5699,8 +5699,8 @@
         "src": "/images/events/october-2026/alcatraz-behemoth-e-dimmu-borgir-835b5876c18b.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 484700,
-        "sha256": "09b8fb7c8b19e8234b0134c11e8b5692be17296a23ec0eef75417c1bb68871c2"
+        "bytes": 286460,
+        "sha256": "3d5472b55fd73fcfd233fcb50e9c24c55dd439ffe47ec33d27acfda9249ec42e"
       }
     },
     {
@@ -5729,8 +5729,8 @@
         "src": "/images/events/october-2026/243609-aa34ab79100b.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 121514,
-        "sha256": "fd955a74a75ce54c0c051be65105fd6f03edb385d78f2a3bb1f72330eb17a770"
+        "bytes": 88796,
+        "sha256": "d40f62f6ac8ac69e7de30239237b4d073f06e9ce878ff9403bb28fcaae586498"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -5803,8 +5803,8 @@
         "src": "/images/events/october-2026/239850-287177819d54.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 343892,
-        "sha256": "d14ee4e9751e16107c1f79f8edf7e129e40ae7ed015486902aa80d30f7775e5e"
+        "bytes": 107450,
+        "sha256": "b22cd346745bc07bc451d9bd42a84d0457239e4e9b97705b8bb2c5637eeda80e"
       },
       "age": null,
       "dressCode": null,
@@ -5869,8 +5869,8 @@
         "src": "/images/events/october-2026/arci-im-not-a-blonde-2-e4de35204dd7.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 181746,
-        "sha256": "4e916c93dff93909961615aa66f5fef6b1b2a72d4192fd8b972a24c5b14e720d"
+        "bytes": 164860,
+        "sha256": "150e3d9f9e89b798582ba10eaca3fab63247242fa196e6426d6b7a9b31b1213d"
       }
     },
     {
@@ -5899,8 +5899,8 @@
         "src": "/images/events/october-2026/243605-e2b7683e02e3.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 214548,
-        "sha256": "42b8cb28482ca3fe9a528171407a39dac8e118c793d488979bb5ed8e88fbd568"
+        "bytes": 145664,
+        "sha256": "72c93a1f71e3505df04565c037944cc5b647f0f95de09a9dc094cdcf094cfaa1"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -5997,8 +5997,8 @@
         "src": "/images/events/october-2026/alcatraz-europe-the-final-countdown-40th-anniversary-tour-908966b301ae.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 67894,
-        "sha256": "a41bc298d4bbc1b878a5746ebed325d95fe3545cb2862941416472e63b6130b9"
+        "bytes": 92028,
+        "sha256": "d3f06e24de29d6c8d7e87b29e31ddf5d78e5dacf46709db7fc41adc20bdd2d50"
       }
     },
     {
@@ -6039,8 +6039,8 @@
         "src": "/images/events/october-2026/santeria-leo-middea-live-1beb0d154fde.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 148492,
-        "sha256": "343a4e120fc915047a8c7a1dfc07d38023553280294a52976f7840a89cf149e8"
+        "bytes": 49686,
+        "sha256": "084b2406d52d65b5c09d9f91456802c90d997c12d2a28518af806b438f943305"
       }
     },
     {
@@ -6100,8 +6100,8 @@
         "src": "/images/events/october-2026/department-la-meneghina-il-tango-a-milano-2026-10-14-45ca87312602.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 196682,
-        "sha256": "7becea37956ae9f203e5820ac4ef564137794ab5a09083095f1b9abd80c61ce5"
+        "bytes": 69580,
+        "sha256": "568162b7febbc73fd96e9d4aedb522dbe0bbc02c5e1ba47e4a0e23217bbed96f"
       }
     },
     {
@@ -6145,8 +6145,8 @@
         "src": "/images/events/october-2026/mib-internationalweek-mercoledi-14-ottobre-2026-14eb51d181b3.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 64060,
-        "sha256": "1fefb1c02bc83ddc608bce6250eb1cd6b88f622b23d64eb1b0899e9545ba40a2"
+        "bytes": 101402,
+        "sha256": "2f8a3620703272a1f1ea6df5fe9c991d25254626049cc2be6a8b13b4d3eda912"
       }
     },
     {
@@ -6182,8 +6182,8 @@
         "src": "/images/events/october-2026/theclub-20261014-edab5e915afa.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 24218,
-        "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
+        "bytes": 49532,
+        "sha256": "484d71fde121a84320c2f8b70fc0859d4e2fec5e803193773a3007a54b315242"
       }
     },
     {
@@ -6219,8 +6219,8 @@
         "src": "/images/events/october-2026/fabrique-jack-savoretti-1-b33fed73dfa3.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 259076,
-        "sha256": "ca488edc4c6b30a91b23ca451aaf7510fc187be5fac39aae8ff6e1c267ac79de"
+        "bytes": 92626,
+        "sha256": "915680f06e76ba214b66520d6ef92ee150bfc4cea763e444f825fa61b935ef64"
       }
     },
     {
@@ -6275,8 +6275,8 @@
         "src": "/images/events/october-2026/department-aperitivo-con-delitto-2026-10-15-1c6416d37406.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 98968,
-        "sha256": "24468ca6feda4d4564d6be72b6335926157bef7008c4602c3a79f9d92c249d89"
+        "bytes": 62944,
+        "sha256": "afb55012be148e3a83f6cf47f4c43ffa5fb7468630e882cc8b2c48bd341e4084"
       }
     },
     {
@@ -6305,8 +6305,8 @@
         "src": "/images/events/october-2026/243601-8d811d65d7c5.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 189888,
-        "sha256": "b38ad060ac9dedbe75af2ff811c8a1a2063ed49ea2aca30f6a836938e2fbb47b"
+        "bytes": 111162,
+        "sha256": "ed259bad66130e85b0c10b35b3bd0cf6edf801e42e617227a4e98693a21cec22"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -6430,8 +6430,8 @@
         "src": "/images/events/october-2026/tempio-20261015-0e2fac8ce38e.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 296154,
-        "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
+        "bytes": 182542,
+        "sha256": "ebb252fea84661d91dbe3d0c62d39ed3734bc7cfee3c5c5b6d9e8e7a93ead383"
       },
       "programmeNotes": [
         {
@@ -6482,8 +6482,8 @@
         "src": "/images/events/october-2026/arci-armani-doc-1aae653c0671.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 234014,
-        "sha256": "d46e91d918e32535a2309e28984a065ed0f932cb843684626daa4fd7356a83aa"
+        "bytes": 196030,
+        "sha256": "1099d6532569309b4e1d0245a59313e3e8c1d0c87276e3749a54d30206e4157c"
       }
     },
     {
@@ -6528,8 +6528,8 @@
         "src": "/images/events/october-2026/arci-deradoorian-d3664624cc53.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 183002,
-        "sha256": "114495a271b581552a8541a1ccb17c85f02608ceaa366b31fccba5d2210cb932"
+        "bytes": 163898,
+        "sha256": "096277befeb28ab68b9e4fbe4acd92809487075e195a0870a2dce39b8bd79e60"
       }
     },
     {
@@ -6568,8 +6568,8 @@
         "src": "/images/events/october-2026/theclub-20261015-2b4055b23772.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 24218,
-        "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
+        "bytes": 49532,
+        "sha256": "484d71fde121a84320c2f8b70fc0859d4e2fec5e803193773a3007a54b315242"
       }
     },
     {
@@ -6598,8 +6598,8 @@
         "src": "/images/events/october-2026/243592-3d2820d9f0ee.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 56800,
-        "sha256": "e1a466a9e988671509fc112b8d50b4e20a65071782f138be6cc72152a53878a5"
+        "bytes": 140046,
+        "sha256": "ff27dbf8e0d5a799784555aa07e5fe0a2530c3bf8ed2c7ebd66660cb934a655b"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -6686,8 +6686,8 @@
         "src": "/images/events/october-2026/243819-4cb1a6cdf184.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 142936,
-        "sha256": "489dfe8e50f202e47cda255bddac9bf3bb37690f70b1e525e5c7f58f0c7fc2aa"
+        "bytes": 122732,
+        "sha256": "d9c540ac1b8901c90a25c2bdbca5451b28f1fa4de6c9fce1f7807bc8ac3b8644"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -6798,8 +6798,8 @@
         "src": "/images/events/october-2026/mib-billions-venerdi-16-ottobre-2026-e445cc564365.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 51026,
-        "sha256": "e90f3133aeaca83339862022a7f90b74779acdf8f802f2fe4a86f7eebccbf328"
+        "bytes": 98416,
+        "sha256": "5a0a999ce11c0771218be6f5efd9c8d6338d526c8265499ba73f66d1f6f5f467"
       }
     },
     {
@@ -6837,8 +6837,8 @@
         "src": "/images/events/october-2026/alcatraz-immanuel-casto-2-367ae5e10de2.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 62106,
-        "sha256": "cf70fc9229f0dcd341996066168475b104625bb58823068633d86047b2a69a34"
+        "bytes": 45590,
+        "sha256": "b90490a007a095e3f963b677d68fd4feb042941a2913c177b4a9dc741081639a"
       }
     },
     {
@@ -6883,8 +6883,8 @@
         "src": "/images/events/october-2026/arci-jozef-van-wissem-8f7e173fc487.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 184388,
-        "sha256": "822c07348f9206137205751e43311d0ab15511c15b83b697f5a4aec8335b70dd"
+        "bytes": 165110,
+        "sha256": "0dcb6496bf8eeea8442aa4b79f8210e3441fa6dfdcd5ec137d6619e010aa8e74"
       }
     },
     {
@@ -6920,8 +6920,8 @@
         "src": "/images/events/october-2026/fabrique-mylessmith-8f670fc9e279.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 235072,
-        "sha256": "874769e6fc8aa6ec7371f9e754617733f72ccf99a171351fa1466b2e19525272"
+        "bytes": 121108,
+        "sha256": "45467868d553ff515b4b6b73310f8d8909103ee52a19090a6bbd2a156b23729b"
       }
     },
     {
@@ -6965,8 +6965,8 @@
         "src": "/images/events/october-2026/arci-popa-58d46498f376.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 180868,
-        "sha256": "365afabbda9ece0cdee85d873bf3d1397b9b9132b03d8f2c48df6e9e20f1dfd1"
+        "bytes": 161892,
+        "sha256": "ed3673bc9bf6e735879ecac8530c6caed756021e4a2bc973cfaee63d23707788"
       }
     },
     {
@@ -6993,8 +6993,8 @@
         "src": "/images/events/october-2026/236322-382a996a4cbf.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 43636,
-        "sha256": "d836a2a7ee9ec5392f439a4c2d351d6e99b00645f824e164abd8eeda56336811"
+        "bytes": 38242,
+        "sha256": "a9f8ea5585984dd7ccfdaee52036906aa601424300711af4494b5e6b2282dd87"
       },
       "age": "18+",
       "dressCode": null,
@@ -7157,8 +7157,8 @@
         "src": "/images/events/october-2026/alcatraz-wtf-fonk-the-favela-2-323870b55c3d.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 375860,
-        "sha256": "28f2addfc38b71478b0342ca2f00153afb2547df80ead88f44919b6b29b47c2a"
+        "bytes": 365578,
+        "sha256": "ecacb6a8e3d978c395be4a3de45ddc8825a455e1dd7735e6c68ccd02fb7f8416"
       }
     },
     {
@@ -7223,8 +7223,8 @@
         "src": "/images/events/october-2026/department-indie-power-2026-10-16-27719638d4eb.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 241844,
-        "sha256": "1e09dfba02a4892065aa8ef8eac82cb8a83a1eb4ce683c790ec4e945ab42b5f2"
+        "bytes": 121678,
+        "sha256": "111e0396cfcd74c4bc28a7bf7ba8bdd5ab7702383b3935aff529da01f8ccb525"
       }
     },
     {
@@ -7266,8 +7266,8 @@
         "src": "/images/events/october-2026/duro-sottosuono-gene-on-earth-9d8f2e2ed54e.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 234756,
-        "sha256": "141e94b5eadc5128ceba59d7ec951d7045332daecc1d308b13abdd7eb47d50ce"
+        "bytes": 85848,
+        "sha256": "272dc9ef282e0f20c4eeef03f3251e4f08d67c89db633e3e7e90aca58736de58"
       }
     },
     {
@@ -7314,8 +7314,8 @@
         "src": "/images/events/october-2026/tempio-20261016-87919b0665fe.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 296154,
-        "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
+        "bytes": 182542,
+        "sha256": "ebb252fea84661d91dbe3d0c62d39ed3734bc7cfee3c5c5b6d9e8e7a93ead383"
       }
     },
     {
@@ -7353,8 +7353,8 @@
         "src": "/images/events/october-2026/department-inner-circle-5-2026-10-16-6a794b3def2d.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 87458,
-        "sha256": "a6f4bc0275b683ef096ba8eb76462f56665d0abb860cab52c118746a605f9f09"
+        "bytes": 52336,
+        "sha256": "81054ae4b46c9932bfb56533aa37cf39601f3abff930e9f145bcf558dd56e8ad"
       }
     },
     {
@@ -7390,8 +7390,8 @@
         "src": "/images/events/october-2026/theclub-20261016-f30e22e73f3f.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 24218,
-        "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
+        "bytes": 49532,
+        "sha256": "484d71fde121a84320c2f8b70fc0859d4e2fec5e803193773a3007a54b315242"
       }
     },
     {
@@ -7427,8 +7427,8 @@
         "src": "/images/events/october-2026/fabrique-jay-park-ft-lngshot-serenades-and-body-rolls-tour-e5574164cc74.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 44382,
-        "sha256": "2f3032b2617aa6bceb55b11a08838cace9652955b4855b8f0aecb460bb739bc0"
+        "bytes": 85818,
+        "sha256": "c73333aa58b3ea86c3f796d5b3b89d9b882b9a8eb16197f207159798abafc54c"
       }
     },
     {
@@ -7456,8 +7456,8 @@
         "src": "/images/events/october-2026/242614-d6dfa52deb0b.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 222268,
-        "sha256": "eae068d6b0bfa374878f09d861ab11fe1c4faeb316b76a22d89a1d2cf4e987f7"
+        "bytes": 105112,
+        "sha256": "9bf1586ff7e7a9902ea78e71d47ec8299daf1fdcd359abbff52ab8d04a92eff8"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -7522,8 +7522,8 @@
         "src": "/images/events/october-2026/243585-e2755e4bf02c.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 116888,
-        "sha256": "00bf0f0bbe678f9651187612f126860d4b5f683f6a88f46dc0374c39479b596c"
+        "bytes": 120330,
+        "sha256": "e662bc8139757d7b401b6b9d6eef3a84207b4db23aec2b077769327663276381"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -7610,8 +7610,8 @@
         "src": "/images/events/october-2026/243815-e33432d48dd4.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 114104,
-        "sha256": "322a6eb81322911e507b6781f084e36645f4920c6a3825d538c2da3825ca87aa"
+        "bytes": 133934,
+        "sha256": "0f9a60c153cc737282de7426f43efe841088a19e7cc3e2aff9b36187aaa08ecd"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -7722,8 +7722,8 @@
         "src": "/images/events/october-2026/mib-love-affair-sabato-17-ottobre-2026-e9b062aa5c0b.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 29060,
-        "sha256": "26d45b1aaa32a4871fd57db6d76a347d971e30b8f9e4f36071ef3af39d221637"
+        "bytes": 56148,
+        "sha256": "91ad4b3f261c7738395c0575b77fa359e84ed97df5fc77d982b83e2ae43e9ad5"
       }
     },
     {
@@ -7773,8 +7773,8 @@
         "src": "/images/events/october-2026/arci-the-asteroid-no-4-2cd656e14cb3.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 184288,
-        "sha256": "2668e780a05339ce6acdecb197b6d4bc17167eb80eaa23f68c81605388fbc72f"
+        "bytes": 164972,
+        "sha256": "e902e48e0b85829a27381b0a66888dda1a94698cf09d72d2a7391aeb53ed3fc1"
       }
     },
     {
@@ -7839,8 +7839,8 @@
         "src": "/images/events/october-2026/ra-2540349-42c456383041.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 186766,
-        "sha256": "c7cd4d70461dafd78f919cee5fad3f3008441d35454b037609eebdb602f4a4cb"
+        "bytes": 167746,
+        "sha256": "fc495dc97e5cbe0bc716e8febfd01fe2db7d5bcc30af94e742d916839c6121fb"
       }
     },
     {
@@ -7883,8 +7883,8 @@
         "src": "/images/events/october-2026/arci-dj-krush-98c340a0fced.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 182128,
-        "sha256": "a41a7c734051b16f82507067e4f67c534be60725f8e074df8aa481f8cfe354a4"
+        "bytes": 163342,
+        "sha256": "f86dc5b96f8dbb9ba0b97e31a0a6c56f276abdde9f233859fc9cb9f82c9f8f59"
       }
     },
     {
@@ -7920,8 +7920,8 @@
         "src": "/images/events/october-2026/240982-429ae995518c.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 291710,
-        "sha256": "fe1663d7b0e4ca6f00536af8b3d84acf65aacfbc0b511b79c4b635aaa2fa062d"
+        "bytes": 90950,
+        "sha256": "96c284e7ca15ee0c57fa8beb2dff4603e195b554ef6a7f0d50e88f7c07c1c706"
       }
     },
     {
@@ -7967,8 +7967,8 @@
         "src": "/images/events/october-2026/244293-3bd30fe68d6e.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 103396,
-        "sha256": "dd21b332a8f30b70f3632a7fcc73015348284528619ec11e9b62f69246bd0276"
+        "bytes": 73852,
+        "sha256": "5209c33d0b748e6cf4bec5b02323fcd89661ed892549c6e6acd6041a1050d489"
       }
     },
     {
@@ -8005,8 +8005,8 @@
         "src": "/images/events/october-2026/alcatraz-duemilaz-13-4e7789fbbbb8.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 81974,
-        "sha256": "fb323e049d049249598b22290c697f4d77dedabc7faa9938e53b95f878817e44"
+        "bytes": 137532,
+        "sha256": "9f1314916656bf947104c0342bf3606c645a10cfc5e9e16c4203a366383e28f6"
       }
     },
     {
@@ -8052,8 +8052,8 @@
         "src": "/images/events/october-2026/duro-oxygene-caim-krijka-e006288542f8.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 183570,
-        "sha256": "7f85206838ae63deaac027478a08253e3978e8791c250cbc61481b17bcbdf1a9"
+        "bytes": 165396,
+        "sha256": "ab77b795f7ee20aa3d2df5ed520bd14c5cdc5e894390544964a4c1a316df22b7"
       }
     },
     {
@@ -8106,8 +8106,8 @@
         "src": "/images/events/october-2026/tempio-20261017-c52bd5327d6d.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 296154,
-        "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
+        "bytes": 182542,
+        "sha256": "ebb252fea84661d91dbe3d0c62d39ed3734bc7cfee3c5c5b6d9e8e7a93ead383"
       }
     },
     {
@@ -8144,8 +8144,8 @@
         "src": "/images/events/october-2026/fabrique-maledetta-nostalgia-6-34091dabc908.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 356678,
-        "sha256": "558fbd2ab1abb2c93a1f03aef7997590c23610377ccc678d3ff36dd0af1947d9"
+        "bytes": 126658,
+        "sha256": "75cbc750c620d35e0310a14abb134dd90a1cd7075ba242c852f2b309300969a9"
       }
     },
     {
@@ -8181,8 +8181,8 @@
         "src": "/images/events/october-2026/theclub-20261017-0c33f722b16e.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 40738,
-        "sha256": "4b8810f4b595b0e055435b00e0d2167f4fe9b56d4d030ef27cad752df29512a0"
+        "bytes": 79008,
+        "sha256": "90cdf18f97eef8c1ffae0f0586d41cf75675c4f49b7353e8e60009fd502adeb9"
       }
     },
     {
@@ -8252,8 +8252,8 @@
         "src": "/images/events/october-2026/ra-2538483-13786ddfff73.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 214378,
-        "sha256": "a75b9eda55451d3c685b412b23489a04272d50f00444ae8018487fb627997206"
+        "bytes": 107360,
+        "sha256": "44d0ed2029af2f3e791e1a5c7d96a81c15bdef2d74eeacf4aeee9e54927adc16"
       }
     },
     {
@@ -8281,8 +8281,8 @@
         "src": "/images/events/october-2026/243580-292f42b9b15f.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 205200,
-        "sha256": "4e5f4f0b64fe9aa2f369809707fefdadf1af7540a52344c52077aa5f6e14f4b4"
+        "bytes": 79706,
+        "sha256": "f7bdd9c9dc0e52ebae013c3442a4e3be4f82637065a6a8a819c10713ac76bc18"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -8395,8 +8395,8 @@
         "src": "/images/events/october-2026/magnolia-alex-cameron-afff7b806095.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 327324,
-        "sha256": "1f6587dc3442b040dd0a79560638c7c1e352e661f35b297fbe76730a7498e42e"
+        "bytes": 100668,
+        "sha256": "cede0cdb08987405a91d20a6d6908ce990b31c2ee8c2918b6cfae3d941fd8f82"
       }
     },
     {
@@ -8442,8 +8442,8 @@
         "src": "/images/events/october-2026/arci-stu-larsen-03740cdf0ef5.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 182862,
-        "sha256": "e7b5d97d9d7153d1dabe58eada7f6d327d647800012e4f7dbcc6c8114df0f4a6"
+        "bytes": 164036,
+        "sha256": "5405034f139fd59ae9b1c235bb938e9d7b583417cc58a4726fdc182a3aea8db4"
       }
     },
     {
@@ -8482,8 +8482,8 @@
         "src": "/images/events/october-2026/theclub-20261018-2aba96d9cc32.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 40738,
-        "sha256": "4b8810f4b595b0e055435b00e0d2167f4fe9b56d4d030ef27cad752df29512a0"
+        "bytes": 79008,
+        "sha256": "90cdf18f97eef8c1ffae0f0586d41cf75675c4f49b7353e8e60009fd502adeb9"
       }
     },
     {
@@ -8511,8 +8511,8 @@
         "src": "/images/events/october-2026/243614-81b948f891ff.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 148022,
-        "sha256": "d7ee9f8c54f995caaf0be94dad7035f976f5607b154e06b78003de1e1a61c2bd"
+        "bytes": 66100,
+        "sha256": "350ffd2c0fb7d686eb3201a7f199b8d0a7759bfc12620adb9e207497271994e7"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -8629,8 +8629,8 @@
         "src": "/images/events/october-2026/arci-glenn-jones-liam-grant-davide-cedolin-fbacffccbd73.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 185224,
-        "sha256": "d84e7f99d5308de7a1e34d857afcb8051b78d259099dd60df32f804dc15f0f5e"
+        "bytes": 166342,
+        "sha256": "9dcebea976f576dc2a3bca8e5428c11f4784e074087c44a72fef5e596ca1922d"
       }
     },
     {
@@ -8673,8 +8673,8 @@
         "src": "/images/events/october-2026/arci-tara-fe96301ccba6.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 181106,
-        "sha256": "adcfcf9815c007b7c45cb30792cd439945081436fd116bb9fd998a6eadcc6621"
+        "bytes": 162214,
+        "sha256": "1aef584562a2e7ede6fccfc988875bed93055cf5b54efc212f9a18fe323586cd"
       }
     },
     {
@@ -8710,8 +8710,8 @@
         "src": "/images/events/october-2026/fabrique-williepeyote-45a742016d9c.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 358674,
-        "sha256": "546e8f76840933e491d22fad959064f00888d40dfd2f2ef187363c19388a026e"
+        "bytes": 123140,
+        "sha256": "bd0f5d1863d6278b9ebd77b057df1859ddc8875aa4107ecfe1521fa78f4b4a73"
       }
     },
     {
@@ -8739,8 +8739,8 @@
         "src": "/images/events/october-2026/243610-fe0fbef3aec9.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 124064,
-        "sha256": "89ed98bacfd9192b20076c50d565ee70e8fc2e8574482cff03d11c8fd10f08ba"
+        "bytes": 78848,
+        "sha256": "053b50a02b7b59ef196defa54ee542439abdb7b8b4a99c25bce9cd17af952287"
       },
       "age": "18+",
       "dressCode": "Casual",
@@ -8848,8 +8848,8 @@
         "src": "/images/events/october-2026/magnolia-dub-pistols-3ef70171f3fe.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 241026,
-        "sha256": "a6eccb1c03192f74df5472fdc5267db93efbd2e316101b6a21f2f76016c0a6af"
+        "bytes": 81304,
+        "sha256": "b306e31d625e7f41a0586f85fcc437d50fdca846100f48492c7d14938adddbac"
       }
     },
     {
@@ -8877,8 +8877,8 @@
         "src": "/images/events/october-2026/240627-c57aeedf6442.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 385994,
-        "sha256": "061ccf5c51b490369d266b01448f7173b1c4f6d8b11f6157fff1b404d0e53beb"
+        "bytes": 108982,
+        "sha256": "89971eb1b187f50c50454afa566fda1792abbfe62050f965219f9cdb5324299e"
       },
       "age": null,
       "dressCode": null,
@@ -8938,8 +8938,8 @@
         "src": "/images/events/october-2026/alcatraz-nerissima-serpe-51bde3a29344.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 164368,
-        "sha256": "168d787840d898afb4fe6b63f0c3f3e6ac369df89eca3c5b61db3c3492c75efb"
+        "bytes": 83134,
+        "sha256": "7f84a2fddfb4297476db3575713d091f294a4b794297069a005808ced1141ed8"
       }
     },
     {
@@ -8980,8 +8980,8 @@
         "src": "/images/events/october-2026/arci-laura-stevenson-b5420a18cc2d.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 184706,
-        "sha256": "0b38dc87ca63a076968fba9838160406e762cbbfc6a11b543195c767f3010fc2"
+        "bytes": 165476,
+        "sha256": "22821ccdfbd99f73cda11c2f10580a66b4ece7277eaa708769ac09524096d1ff"
       }
     },
     {
@@ -9009,8 +9009,8 @@
         "src": "/images/events/october-2026/243606-7d88f9d4637a.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 218502,
-        "sha256": "925aeb2cab313b2d7012b1423ec356a705a8befb5d014a76733ac830ed3af9a0"
+        "bytes": 104586,
+        "sha256": "98f7421b6994e7e7a6d83c578e5351700963613133311de171c327c870db3da5"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -9115,8 +9115,8 @@
         "src": "/images/events/october-2026/alcatraz-sayf-1f0ea38539b8.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 360614,
-        "sha256": "debd8b4a2b687fee04599397e412a5bbfe55b2ec904978de725c6ac585cb6b57"
+        "bytes": 97670,
+        "sha256": "019628bb3d25304db3595e2a8797e4aa8f7b01b27f6b77644c0b2c59bfae3224"
       }
     },
     {
@@ -9162,8 +9162,8 @@
         "src": "/images/events/october-2026/magnolia-temples-a117b9c0d1e6.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 76328,
-        "sha256": "2c151c36904b9c081ecd6b081c41e4399ed4983feb4448af1c8b2fba4d37b45b"
+        "bytes": 69096,
+        "sha256": "9ec342023868fb3300bbc8459243f89445834e5cf3a1a9cdce8559d981356a3c"
       }
     },
     {
@@ -9207,8 +9207,8 @@
         "src": "/images/events/october-2026/mib-internationalweek-mercoledi-21-ottobre-2026-951bb73fe309.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 45658,
-        "sha256": "6f233fe584dcf78053afd6aeb04dfc151f0a23fbc3463ec4ef1312bfc6f72c41"
+        "bytes": 70528,
+        "sha256": "3ed2bd53d7b3225d92741b0074fe84a8d888347321d2246f132df6ca88c0cc03"
       }
     },
     {
@@ -9244,8 +9244,8 @@
         "src": "/images/events/october-2026/theclub-20261021-6eab10dce0c0.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 24218,
-        "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
+        "bytes": 49532,
+        "sha256": "484d71fde121a84320c2f8b70fc0859d4e2fec5e803193773a3007a54b315242"
       }
     },
     {
@@ -9273,8 +9273,8 @@
         "src": "/images/events/october-2026/243602-60a2ee4a5c94.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 251850,
-        "sha256": "b1b2fc4496c038e7536461e202d238a7f43e5e5b64edcb005293b159997803c9"
+        "bytes": 120444,
+        "sha256": "b8648cd67a6ab45d0f395d77b48d870472014a82bce779bf9598316c37d17c31"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -9387,8 +9387,8 @@
         "src": "/images/events/october-2026/magnolia-stormy-desperado-world-tour-b11a640b194d.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 226680,
-        "sha256": "01425b41777d85882b307ce39a2c0c82e8871ea8f9a9b4cc1fdf0f7e37dd3512"
+        "bytes": 46792,
+        "sha256": "89dcc1d7956b47af4d757209ee275a7f38c7a769f63e6b17de27e0104400bc1d"
       }
     },
     {
@@ -9453,8 +9453,8 @@
         "src": "/images/events/october-2026/tempio-20261022-0e2fac8ce38e.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 296154,
-        "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
+        "bytes": 182542,
+        "sha256": "ebb252fea84661d91dbe3d0c62d39ed3734bc7cfee3c5c5b6d9e8e7a93ead383"
       },
       "programmeNotes": [
         {
@@ -9506,8 +9506,8 @@
         "src": "/images/events/october-2026/arci-hugo-race-fatalists-2-3b6489a3a18d.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 184560,
-        "sha256": "fd9d7533190b6a52e88623ea4bb3b4e674319b5caac05d16254872ef0df42155"
+        "bytes": 165646,
+        "sha256": "9cafbbfd83eda023ffb8af2b7ea12f28b9c1ed7eab9a534238753a957aa076f5"
       }
     },
     {
@@ -9545,8 +9545,8 @@
         "src": "/images/events/october-2026/alcatraz-sayf-2-131ba51ece5e.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 309368,
-        "sha256": "fa9504cf4239e2e164b44f4af2492c2ef3b3f34e28524cab293e2efebd22e30e"
+        "bytes": 186410,
+        "sha256": "f94dc11dcb4f0c65c449ee3e9c87f25cc6f7d45912de2aa95f9563260f9b69f4"
       }
     },
     {
@@ -9582,8 +9582,8 @@
         "src": "/images/events/october-2026/santeria-lantidote-jazzmi-5d0ad259d432.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 230502,
-        "sha256": "79cb5b6428f6d9c78a91566d9bbd3462c791785b9ce83898e0c521535b1b9e28"
+        "bytes": 77218,
+        "sha256": "664c5035b1010f55b10aa7d1ea05e00ff1b87169791e018252e602e8fec266d2"
       }
     },
     {
@@ -9626,8 +9626,8 @@
         "src": "/images/events/october-2026/arci-panicbaby-6250b623725a.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 182784,
-        "sha256": "c5328accd6c76ffef055c636e603886997e44672ca9e75ab7ebfeeae19e26f6f"
+        "bytes": 163606,
+        "sha256": "6f8e06b3b09369bd5395cf28a2444f5f99712faaa37116ab11086319f43431a0"
       }
     },
     {
@@ -9655,8 +9655,8 @@
         "src": "/images/events/october-2026/246848-e66d29de0ed9.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 401262,
-        "sha256": "1221f5bba41be53fb0e171657efd637f8e9d94e33a67b0a3d462f39f85261299"
+        "bytes": 126208,
+        "sha256": "6693ae4ee922fb2b0d7d50e626e7030ea0c374636c9b586e5cb9befba12df5c9"
       },
       "age": "18+",
       "dressCode": null,
@@ -9695,8 +9695,8 @@
         "src": "/images/events/october-2026/249230-f6b0d6c67b51.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 292128,
-        "sha256": "53746b9c1f5c96dea27e543971321b6cc3e20ded5a68164d8314c7b48d65ce04"
+        "bytes": 306836,
+        "sha256": "51f7f0639ef908342a6198e93d556d5cae8596e19db2a5022b879708677e039f"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -9749,8 +9749,8 @@
         "src": "/images/events/october-2026/theclub-20261022-2c8e69ad4023.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 24218,
-        "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
+        "bytes": 49532,
+        "sha256": "484d71fde121a84320c2f8b70fc0859d4e2fec5e803193773a3007a54b315242"
       }
     },
     {
@@ -9778,8 +9778,8 @@
         "src": "/images/events/october-2026/243593-c9378c1af8b2.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 59610,
-        "sha256": "ea36d97602a5a4f4d5bfa38cd590a4d514e7448bf94f12df841ac2660e4b66ac"
+        "bytes": 123830,
+        "sha256": "c043c3968ddc2155cea0ba3450f8f03a045a99909ed9f7e88672efd250e99414"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -9874,8 +9874,8 @@
         "src": "/images/events/october-2026/243820-4cb1a6cdf184.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 142936,
-        "sha256": "489dfe8e50f202e47cda255bddac9bf3bb37690f70b1e525e5c7f58f0c7fc2aa"
+        "bytes": 99484,
+        "sha256": "59ce751e71976bd22391cc667eab1bddf2c82da4f66d709602e47df91b7b82c3"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -9990,8 +9990,8 @@
         "src": "/images/events/october-2026/magnolia-stormy-desperado-world-tour-sold-out-b11a640b194d.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 226680,
-        "sha256": "01425b41777d85882b307ce39a2c0c82e8871ea8f9a9b4cc1fdf0f7e37dd3512"
+        "bytes": 46792,
+        "sha256": "89dcc1d7956b47af4d757209ee275a7f38c7a769f63e6b17de27e0104400bc1d"
       }
     },
     {
@@ -10034,8 +10034,8 @@
         "src": "/images/events/october-2026/mib-billions-venerdi-23-ottobre-2026-24fd9cdb8f09.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 51026,
-        "sha256": "e90f3133aeaca83339862022a7f90b74779acdf8f802f2fe4a86f7eebccbf328"
+        "bytes": 98416,
+        "sha256": "5a0a999ce11c0771218be6f5efd9c8d6338d526c8265499ba73f66d1f6f5f467"
       }
     },
     {
@@ -10088,8 +10088,8 @@
         "src": "/images/events/october-2026/arci-shoegaza-vol-3-e4138dc9b5a2.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 183572,
-        "sha256": "c3ef368745a00fa4371e80eba00edb9ecd285ed4b47750d58a114b94d43df1bb"
+        "bytes": 164518,
+        "sha256": "936df75f013bfa0d62aa34622f4b0f5a6ea8a8747cc97661133ac31a568bf64b"
       }
     },
     {
@@ -10138,8 +10138,8 @@
         "src": "/images/events/october-2026/arci-don-letts-vitowar-djset-7742d245ffd3.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 185268,
-        "sha256": "b00041d64cd2b6dec98c84e98a497703f577d0d2eba230f8c2bd4e617539eb62"
+        "bytes": 166382,
+        "sha256": "2ee8048ad66db300c78a05f9f467f9e0bb3034c8e94bf2572f0cd6ba1ea5a98e"
       }
     },
     {
@@ -10175,8 +10175,8 @@
         "src": "/images/events/october-2026/santeria-eman-fccaec24c47b.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 251838,
-        "sha256": "2cb548b83339de262272e3472223649e8f47dd3e89e21bca1a643d54af74db84"
+        "bytes": 61104,
+        "sha256": "d7249f14db3a7d0c7574a45878e81f70f445e29be6f8e89e50f985307e9f74f1"
       }
     },
     {
@@ -10203,8 +10203,8 @@
         "src": "/images/events/october-2026/236323-761b32310614.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 93620,
-        "sha256": "99519c13373d939105881c743c939f246f0b9750f6854a1df3d01593e28147dc"
+        "bytes": 64222,
+        "sha256": "c3fdc91c3609b26f3d03b8740bbddeb4c1bf851b0af5e2e2e1063cdee77e4580"
       },
       "age": "18+",
       "dressCode": null,
@@ -10359,8 +10359,8 @@
         "src": "/images/events/october-2026/245673-658f33246202.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 80470,
-        "sha256": "9547866d4808837f2b31a1478e438f680e74c1af5119b4067309674361a79970"
+        "bytes": 61218,
+        "sha256": "a98b6416b1002f55cf5327087e3358f3390ca593ea243b1413c1b42e76fc96ce"
       },
       "age": "18+",
       "dressCode": null,
@@ -10408,8 +10408,8 @@
         "src": "/images/events/october-2026/alcatraz-wtf-jersey-sport-13c9a0322478.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 294884,
-        "sha256": "3470ead50b130058116dee0b9fd83efd3a9d32bc3ca3dd65423d5271b4e6d03b"
+        "bytes": 293872,
+        "sha256": "ad34f05bd849139b1df85748ae295bf75a73a2f320ea1cf853cb790768eedb1d"
       }
     },
     {
@@ -10456,8 +10456,8 @@
         "src": "/images/events/october-2026/tempio-20261023-87919b0665fe.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 296154,
-        "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
+        "bytes": 182542,
+        "sha256": "ebb252fea84661d91dbe3d0c62d39ed3734bc7cfee3c5c5b6d9e8e7a93ead383"
       }
     },
     {
@@ -10493,8 +10493,8 @@
         "src": "/images/events/october-2026/theclub-20261023-2c14b3b09ca0.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 24218,
-        "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
+        "bytes": 49532,
+        "sha256": "484d71fde121a84320c2f8b70fc0859d4e2fec5e803193773a3007a54b315242"
       }
     },
     {
@@ -10552,8 +10552,8 @@
         "src": "/images/events/october-2026/arci-nonsense-mag-la-festa-per-i-10-anni-68ff45888cf7.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 185382,
-        "sha256": "620f4aa38274e18f062fd8b7953fe7938c0d8d5549a169ae4ac0319268d69145"
+        "bytes": 166542,
+        "sha256": "8f59fc1d505be87500a78171d9ce108fa104cb99fa48fc020030ef184ce94d8d"
       }
     },
     {
@@ -10581,8 +10581,8 @@
         "src": "/images/events/october-2026/242615-d6dfa52deb0b.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 222268,
-        "sha256": "eae068d6b0bfa374878f09d861ab11fe1c4faeb316b76a22d89a1d2cf4e987f7"
+        "bytes": 105112,
+        "sha256": "9bf1586ff7e7a9902ea78e71d47ec8299daf1fdcd359abbff52ab8d04a92eff8"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -10646,8 +10646,8 @@
         "src": "/images/events/october-2026/243586-d063422914a8.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 112700,
-        "sha256": "c5ae7c9c40e70b2fce6dec05c89bad47dcb2482d746ef0d1d384008703e553c0"
+        "bytes": 131502,
+        "sha256": "7dce8e4d0efc8ded34486cd6dd2ca1814a45060823ecddaa373634ca2de35cde"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -10735,8 +10735,8 @@
         "src": "/images/events/october-2026/243816-e33432d48dd4.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 114104,
-        "sha256": "322a6eb81322911e507b6781f084e36645f4920c6a3825d538c2da3825ca87aa"
+        "bytes": 89600,
+        "sha256": "3069ca5ccde4ed2dd8bfe575134b87596bd817e2d0c9adbf744238670f323703"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -10832,8 +10832,8 @@
         "src": "/images/events/october-2026/248677-8b6b5e2ed973.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 274328,
-        "sha256": "2bfb91dd679459f27d77213df863e35c0da419d6fbba7017663077400aa4d355"
+        "bytes": 109562,
+        "sha256": "c184f7e5bf0132dbd7278aaceddfd9ad40439a7ab4d84b9a236bcada0a453ed6"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -10930,8 +10930,8 @@
         "src": "/images/events/october-2026/248724-2e95b922fdcd.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 142862,
-        "sha256": "d0a5e05497f93c5fe2f42db1f97d737c214d85d0a53d305736369c60a17d5688"
+        "bytes": 96966,
+        "sha256": "1a8bcdc696041267b4ce39ed047c2d99703e897a4af2601a162bb8458b1404cd"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -11037,8 +11037,8 @@
         "src": "/images/events/october-2026/alcatraz-simple-plan-2f29a5911d5a.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 231988,
-        "sha256": "b94992124c27ae20aa357422138c273573be3578432cdb5ed4b4dbd46b6b187e"
+        "bytes": 159128,
+        "sha256": "274adc19ba920aabf1aa160e86b20b3d0dc2e30948f50ed17196a4fcf7db007e"
       }
     },
     {
@@ -11081,8 +11081,8 @@
         "src": "/images/events/october-2026/mib-love-affair-sabato-24-ottobre-2026-64a33dbcace7.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 29060,
-        "sha256": "26d45b1aaa32a4871fd57db6d76a347d971e30b8f9e4f36071ef3af39d221637"
+        "bytes": 56148,
+        "sha256": "91ad4b3f261c7738395c0575b77fa359e84ed97df5fc77d982b83e2ae43e9ad5"
       }
     },
     {
@@ -11131,8 +11131,8 @@
         "src": "/images/events/october-2026/239512-5747a600625d.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 89912,
-        "sha256": "3c1f0bfea00bf1894799d5d066a55655fff3fbc7954c95f01501bc15f4ce6bb0"
+        "bytes": 71942,
+        "sha256": "2bc1b885e72b7050ceff706854270f8432a0a67ae358ea8b2f4435052b498add"
       }
     },
     {
@@ -11168,8 +11168,8 @@
         "src": "/images/events/october-2026/240983-429ae995518c.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 291710,
-        "sha256": "fe1663d7b0e4ca6f00536af8b3d84acf65aacfbc0b511b79c4b635aaa2fa062d"
+        "bytes": 90950,
+        "sha256": "96c284e7ca15ee0c57fa8beb2dff4603e195b554ef6a7f0d50e88f7c07c1c706"
       }
     },
     {
@@ -11216,8 +11216,8 @@
         "src": "/images/events/october-2026/arci-luca-dirisio-live-per-disco-anni-90-2000-c1d9cee8cbb2.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 185398,
-        "sha256": "1e051578fcbfec62dbe0ed36c8b809883d6a50f1b89ea2b0811fe5de67855484"
+        "bytes": 166226,
+        "sha256": "9d3040852b374e35eeb193950e384a23a61fa12490743f0eb0c319ee0ede973f"
       }
     },
     {
@@ -11254,8 +11254,8 @@
         "src": "/images/events/october-2026/alcatraz-duemilaz-12-d58b3b745f6f.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 218076,
-        "sha256": "927f72b8217605a7fd32a41963ec7239ac6808870c7d584375a0ad260cc71656"
+        "bytes": 216204,
+        "sha256": "a17087cdd7237fd01149c2c4c8edacde3321e07bb2e9333b5ac88785f925e98f"
       }
     },
     {
@@ -11291,8 +11291,8 @@
         "src": "/images/events/october-2026/theclub-20261024-17ce6f600196.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 40738,
-        "sha256": "4b8810f4b595b0e055435b00e0d2167f4fe9b56d4d030ef27cad752df29512a0"
+        "bytes": 79008,
+        "sha256": "90cdf18f97eef8c1ffae0f0586d41cf75675c4f49b7353e8e60009fd502adeb9"
       }
     },
     {
@@ -11328,8 +11328,8 @@
         "src": "/images/events/october-2026/fabrique-astro-1-3ec494bb3cd5.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 255244,
-        "sha256": "67377da294e0f76da76dcecbac897c49dddb0077022315d3a6751b33346c5747"
+        "bytes": 92580,
+        "sha256": "e2e052757e443caa385e47aa6e0f28dda6b5118e642f99af010a412e30a91240"
       }
     },
     {
@@ -11357,8 +11357,8 @@
         "src": "/images/events/october-2026/243581-3bca4d22b015.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 97054,
-        "sha256": "51c900f5b6fbdd813050bffc3ac77b91a2db5ae70fe18c8187112ce750027f3f"
+        "bytes": 88570,
+        "sha256": "53e02f81b91f7e33976e408413870bc48288b1d9f9f91f95603ba912215ee405"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -11475,8 +11475,8 @@
         "src": "/images/events/october-2026/arci-super-jet-kinoko-07c509b06fe2.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 184474,
-        "sha256": "521d8cfec55f20b181c3d5823dfd42c085076a1bd79c29492afb4fef4572d3ee"
+        "bytes": 165432,
+        "sha256": "6e3270c1fe3c51cca617a7dc92832a0bba33f9bd8b6d26d6543d72f5c9f02ebf"
       }
     },
     {
@@ -11515,8 +11515,8 @@
         "src": "/images/events/october-2026/theclub-20261025-ad6a17fafd7e.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 40738,
-        "sha256": "4b8810f4b595b0e055435b00e0d2167f4fe9b56d4d030ef27cad752df29512a0"
+        "bytes": 79008,
+        "sha256": "90cdf18f97eef8c1ffae0f0586d41cf75675c4f49b7353e8e60009fd502adeb9"
       }
     },
     {
@@ -11552,8 +11552,8 @@
         "src": "/images/events/october-2026/fabrique-fkj-c0a86dcaf7f5.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 299608,
-        "sha256": "b2f15fe48a18bb25339d34007623747eb0c677192f6769f4d38615886dc82cd8"
+        "bytes": 103936,
+        "sha256": "6842628d09aaf5c979f5f0a5b08cedff95475244c562fb181db3182217b053a7"
       }
     },
     {
@@ -11581,8 +11581,8 @@
         "src": "/images/events/october-2026/243615-81b948f891ff.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 148022,
-        "sha256": "d7ee9f8c54f995caaf0be94dad7035f976f5607b154e06b78003de1e1a61c2bd"
+        "bytes": 175552,
+        "sha256": "243de7092f8917d05c84e10cf326dd8c80cd9d55f1a07774a6d7b794de53a1f7"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -11695,8 +11695,8 @@
         "src": "/images/events/october-2026/arci-the-lemonheads-7f46f8213075.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 184700,
-        "sha256": "5705ebea68257c5562c39aa27e5f7b6b9e0422687c4b0c994520a6d3bb1cc75e"
+        "bytes": 165364,
+        "sha256": "83b4d842cae9b63ec793389405e39a5ddaa725dbc357377caed42db17eecf6e5"
       }
     },
     {
@@ -11724,8 +11724,8 @@
         "src": "/images/events/october-2026/243611-fe0fbef3aec9.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 124064,
-        "sha256": "89ed98bacfd9192b20076c50d565ee70e8fc2e8574482cff03d11c8fd10f08ba"
+        "bytes": 92302,
+        "sha256": "57e197db6e8e7de61faee8ae0df9fc5fcb0062b0e3f7874a2d094fc2e63599ae"
       },
       "age": "18+",
       "dressCode": "Casual",
@@ -11839,8 +11839,8 @@
         "src": "/images/events/october-2026/magnolia-and-so-i-watch-you-from-afar-c39052506132.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 109742,
-        "sha256": "53a8e8389d0bc71b9a95a00f7d5c5da1bfca9bcbdc612496641e20e632d15adf"
+        "bytes": 61248,
+        "sha256": "9a65ef62887a0f8080ffbc8fe5b34dc73926d0cae94401aa3c74dec9fd3b834d"
       }
     },
     {
@@ -11878,8 +11878,8 @@
         "src": "/images/events/october-2026/alcatraz-rokia-traore-4fa29feb44ff.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 79808,
-        "sha256": "a7ad13410b185a51efebf63d318c8dc670644aa92f80c80ac4cd533ce357d0da"
+        "bytes": 76022,
+        "sha256": "70ac05bbcab005573ea45762db5bfd334b5614df04efe50ca954169e4ee931ca"
       }
     },
     {
@@ -11925,8 +11925,8 @@
         "src": "/images/events/october-2026/arci-azymuth-x-jzrf-series-792ab095acc4.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 185048,
-        "sha256": "22a621144ecc4b0eef0778365631eaa3dbd861c4c293ecfa722eacef335411b0"
+        "bytes": 166004,
+        "sha256": "da8cbf5831f5c78d08501f58a2264def27f8e169e5b34869a696bfe73a2fc1c0"
       }
     },
     {
@@ -11962,8 +11962,8 @@
         "src": "/images/events/october-2026/fabrique-fabrizio-moro-1-7e2095bfac67.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 359026,
-        "sha256": "3b30bea9755037ea4183b6a07ca5ae997e6aec564e3a75a91b611382f25bd1f3"
+        "bytes": 122998,
+        "sha256": "c0d5d12d7103b5fb2fee8ad5ae40c151f6db4420599675d56347822f109772eb"
       }
     },
     {
@@ -11991,8 +11991,8 @@
         "src": "/images/events/october-2026/243607-7d88f9d4637a.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 218502,
-        "sha256": "925aeb2cab313b2d7012b1423ec356a705a8befb5d014a76733ac830ed3af9a0"
+        "bytes": 77218,
+        "sha256": "635f77b55e6bc9af4ba701e0968fe74633e6b8addd329f41f36d73a6652de060"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -12112,8 +12112,8 @@
         "src": "/images/events/october-2026/arci-swamp-fest-eab314b51ae0.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 182972,
-        "sha256": "7ba5c2d3d17161437597d32ee08e55a1ae62f6a86bfc76c38297673b6f785300"
+        "bytes": 163740,
+        "sha256": "fd5f6f6d3c606cf91bec059d141edb26a89de41d7c5b692b538cb330b8696a89"
       }
     },
     {
@@ -12158,8 +12158,8 @@
         "src": "/images/events/october-2026/arci-ao-cc2acf19f3ca.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 180322,
-        "sha256": "fb623b2069ea6a32753aecdb2786ae42bd9447ca6533e4fa8e8e85dba9d622f5"
+        "bytes": 161554,
+        "sha256": "44e34d68cc1a32f1fd6ab061ba155b64f92adf565e2661ca5e35c1a7accbafea"
       }
     },
     {
@@ -12203,8 +12203,8 @@
         "src": "/images/events/october-2026/mib-internationalweek-mercoledi-28-ottobre-2026-ddf756db51b8.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 69760,
-        "sha256": "51fa0ca12d4f33b206ea3d1df5dad6d5f4b57773669e6cff29b0d5b1a54d5277"
+        "bytes": 105836,
+        "sha256": "8704124fab03e3cfec67891a1fb1946bef2434fd06413226750404bd45439afb"
       }
     },
     {
@@ -12240,8 +12240,8 @@
         "src": "/images/events/october-2026/theclub-20261028-d139ac02c32d.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 24218,
-        "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
+        "bytes": 49532,
+        "sha256": "484d71fde121a84320c2f8b70fc0859d4e2fec5e803193773a3007a54b315242"
       }
     },
     {
@@ -12269,8 +12269,8 @@
         "src": "/images/events/october-2026/243603-b677b0db7807.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 188824,
-        "sha256": "b601eb850b6615b0a219bc2677c2d26323643a776c2463d3a2d41f1f0c8fd092"
+        "bytes": 97140,
+        "sha256": "39ea459cf7d197f0ae40a1ba96c114de6f1ba490a069f5d48250e7fafc3e278b"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -12368,8 +12368,8 @@
         "src": "/images/events/october-2026/halloween-tom-milano-2026.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 185360,
-        "sha256": "a55e5b9d8be72a53df95b2c26e8c761c434be9d1a05b9f0e5b83caa2a7047c29"
+        "bytes": 166058,
+        "sha256": "a2ab784a19ff98fa089bc92656d5e8a410dcdcbc8da9e95469c2ca1e4e458ddc"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -12461,8 +12461,8 @@
         "src": "/images/events/october-2026/tempio-20261029-0e2fac8ce38e.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 296154,
-        "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
+        "bytes": 182542,
+        "sha256": "ebb252fea84661d91dbe3d0c62d39ed3734bc7cfee3c5c5b6d9e8e7a93ead383"
       },
       "programmeNotes": [
         {
@@ -12522,8 +12522,8 @@
         "src": "/images/events/october-2026/arci-la-yegros-4c0fe69156c8.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 182694,
-        "sha256": "6b71fec45c4e9f4eef241d1af3b22d6a3b8fdf7e33c67ba317a31096e14ae946"
+        "bytes": 163760,
+        "sha256": "567d9d0c0f74ca777e7ad57c2e6049fe3733ded65e343a6e67411084c034449e"
       }
     },
     {
@@ -12559,8 +12559,8 @@
         "src": "/images/events/october-2026/fabrique-le-vibrazioni-1-dd7e5d92d5ff.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 250090,
-        "sha256": "16a239a38596bc250f9de97a1daf969eab9a918c8cfc86209bda6198c741ad8e"
+        "bytes": 105180,
+        "sha256": "9b9ce73937159a0b3b5b42231911eca6d0830388828f232469cd28ccc505456c"
       }
     },
     {
@@ -12596,8 +12596,8 @@
         "src": "/images/events/october-2026/santeria-sissi-c5b12a7a80f1.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 137744,
-        "sha256": "efaf40560cf4ede3495faa08ffb8e6f3a66dd30baf1cc3d85feca6bb00ec337d"
+        "bytes": 53306,
+        "sha256": "98e07215d4ae7867fae505741502ae64fc5f5bcc4ecb63ee435571477b7ec1bf"
       }
     },
     {
@@ -12636,8 +12636,8 @@
         "src": "/images/events/october-2026/theclub-20261029-f44ec8b4731e.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 24218,
-        "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
+        "bytes": 49532,
+        "sha256": "484d71fde121a84320c2f8b70fc0859d4e2fec5e803193773a3007a54b315242"
       }
     },
     {
@@ -12673,8 +12673,8 @@
         "src": "/images/events/october-2026/fabrique-jimmysax-c111b881b4e3.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 118748,
-        "sha256": "5126db4acd3318fec1d2b0dfa041d5627a7e38856aab3795d579d90d5dbb7116"
+        "bytes": 119680,
+        "sha256": "7fbb4600a51b99e86967aa37ef02bf352bf1377166eac50f2250b1a018e656e3"
       }
     },
     {
@@ -12702,8 +12702,8 @@
         "src": "/images/events/october-2026/243594-c1b959c5bc40.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 120824,
-        "sha256": "025efa438bed9846c6d72d48125d348ea41931e7029e2469186aa9b5ac66a783"
+        "bytes": 97262,
+        "sha256": "c27b0883007a7c13a607702eb1c70fa4c813d0ee9f2aae432bc611b5694ac1d2"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -12798,8 +12798,8 @@
         "src": "/images/events/october-2026/243821-4cb1a6cdf184.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 142936,
-        "sha256": "489dfe8e50f202e47cda255bddac9bf3bb37690f70b1e525e5c7f58f0c7fc2aa"
+        "bytes": 122732,
+        "sha256": "d9c540ac1b8901c90a25c2bdbca5451b28f1fa4de6c9fce1f7807bc8ac3b8644"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -12914,8 +12914,8 @@
         "src": "/images/events/october-2026/magnolia-oranssi-pazuzu-mur-87887723d11b.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 220782,
-        "sha256": "7cb36efd8cef6814c242fd5484eb64f22542346a8d83dd7b73766dfb571cd684"
+        "bytes": 65568,
+        "sha256": "3816baeddc3e0081d16bba275f2a24a9397339ca81f8fd2edbd2d951d245a812"
       }
     },
     {
@@ -12958,8 +12958,8 @@
         "src": "/images/events/october-2026/mib-billions-venerd-30-ottobre-2026-c9664221a082.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 51026,
-        "sha256": "e90f3133aeaca83339862022a7f90b74779acdf8f802f2fe4a86f7eebccbf328"
+        "bytes": 98416,
+        "sha256": "5a0a999ce11c0771218be6f5efd9c8d6338d526c8265499ba73f66d1f6f5f467"
       }
     },
     {
@@ -13003,8 +13003,8 @@
         "src": "/images/events/october-2026/arci-fan-fath-al-ce36f9bc7086.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 182752,
-        "sha256": "4591d8de29c3da5adb2c823f9e2de0d946f0f7a09c194c7d45e198fedacc315d"
+        "bytes": 163924,
+        "sha256": "b215ba3927a0c49524506be9dd2b60316e391398a74e1e553d143991d49cf434"
       }
     },
     {
@@ -13036,8 +13036,8 @@
         "src": "/images/events/october-2026/halloween-teatro-giorgio-gaber-2026.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 213218,
-        "sha256": "c69296685ce66d11b0a6a3ce2c630c5c4d60e1fbbab11d67db407b5c59d3c902"
+        "bytes": 192078,
+        "sha256": "9f78cb79b6bd3f263dbc912e4506b8d21c4264d5f319c11f79c5e2f2860317d5"
       },
       "age": null,
       "dressCode": null,
@@ -13102,8 +13102,8 @@
         "src": "/images/events/october-2026/arci-astore-e6fe9be05aab.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 181894,
-        "sha256": "c1c5535fd43412d2117d20f9a99a3ca14c84a93ddd42b1a7ae8526ef7bc719bd"
+        "bytes": 162948,
+        "sha256": "e32699a1c143ad6cba4d46691d54d1612dcfac43c9cfd861a403ddd5f8f55799"
       }
     },
     {
@@ -13140,8 +13140,8 @@
         "src": "/images/events/october-2026/alcatraz-wtf-black-out-47b060c4fdb2.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 195044,
-        "sha256": "a44e51a27863c98947681f58843da6470f4bf033b8eed608dcedd2b7f97b38dd"
+        "bytes": 195852,
+        "sha256": "a200e1a3647d7513ee61367d912c8d43c52819c335ba1f0097f519292feeca41"
       }
     },
     {
@@ -13188,8 +13188,8 @@
         "src": "/images/events/october-2026/tempio-20261030-87919b0665fe.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 296154,
-        "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
+        "bytes": 182542,
+        "sha256": "ebb252fea84661d91dbe3d0c62d39ed3734bc7cfee3c5c5b6d9e8e7a93ead383"
       }
     },
     {
@@ -13227,8 +13227,8 @@
         "src": "/images/events/october-2026/department-inner-circle-5-copy-2026-10-30-c23994635213.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 57906,
-        "sha256": "cc7f3cd7e187fdb2575148f32aafed9c73dfa5eb3ad1f8fed3803cf701e5fde9"
+        "bytes": 43816,
+        "sha256": "1b2f320382f673de5d22e9e9c54684265ccbbaa3fb7e78799411d8c502d76c2c"
       }
     },
     {
@@ -13264,8 +13264,8 @@
         "src": "/images/events/october-2026/theclub-20261030-16ca9e262357.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 24218,
-        "sha256": "321bc47015fb736c3171183c238704be86317b5546ee60e6d3a26af1ef4ec986"
+        "bytes": 49532,
+        "sha256": "484d71fde121a84320c2f8b70fc0859d4e2fec5e803193773a3007a54b315242"
       }
     },
     {
@@ -13297,8 +13297,8 @@
         "src": "/images/events/october-2026/halloween-museo-scienza-tecnologia-2026.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 181326,
-        "sha256": "9775f9404d131475671f066b17e8420d0659701cf9f0475879f7b83c1ca79d20"
+        "bytes": 164888,
+        "sha256": "c602f0c54ae0e91ed5aec98a8847d16d5abc60aab43dbee979972d29944b0a2c"
       },
       "age": "3–6",
       "dressCode": null,
@@ -13337,8 +13337,8 @@
         "src": "/images/events/october-2026/halloween-castello-delitto-2026.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 211468,
-        "sha256": "7cd765c1195b91089daf17f18f5c0bbf680f886704d22f2a718eef4f4ce2e88c"
+        "bytes": 185714,
+        "sha256": "02beb0c9a514f8c653480536c82892d896a293485f2b09de9bab11969b0d716b"
       },
       "age": null,
       "dressCode": null,
@@ -13377,8 +13377,8 @@
         "src": "/images/events/october-2026/halloween-planetario-cielo-sottosopra-2026.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 184368,
-        "sha256": "c775cbd7d8a095974a276d124943e71df22e0fa924868c6f048021c7dadaf3e5"
+        "bytes": 165290,
+        "sha256": "479a2f5deaf06345dd68aa612a588381800048d122cf57c3f69745541a5d4168"
       },
       "age": "6+",
       "dressCode": null,
@@ -13417,8 +13417,8 @@
         "src": "/images/events/october-2026/halloween-castello-mostri-2026.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 213316,
-        "sha256": "48916767022686bb5e86d52539d406febe8377a64b4eef7ab7c48ef15f1bbd6f"
+        "bytes": 187470,
+        "sha256": "913da26d7571826652be5c91b9a136041d475c293d3e6dfb7a426b7b249c75de"
       },
       "age": "4–5",
       "dressCode": null,
@@ -13457,8 +13457,8 @@
         "src": "/images/events/october-2026/halloween-castello-penombra-2026.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 214172,
-        "sha256": "50e7f834ccce746259118b2c9adf60806c212f675cbc397fa399176645e3d208"
+        "bytes": 188310,
+        "sha256": "6e8e167e274e71d4dec423665f2f0b26597805023801be267a4a60661e3b8954"
       },
       "age": "6–10",
       "dressCode": null,
@@ -13492,8 +13492,8 @@
         "src": "/images/events/october-2026/240901-d72957c6b118.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 103902,
-        "sha256": "a7bc143f2303f4c05a0891c1ce3b403017a817f4b99613566ecc94719f5c38c9"
+        "bytes": 98808,
+        "sha256": "08c608867c280200d6f98271eca19297d2ba603467406dc38e9873e477a2f2f3"
       },
       "age": null,
       "dressCode": null,
@@ -13567,8 +13567,8 @@
         "src": "/images/events/october-2026/halloween-cgm-milano-2026.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 185782,
-        "sha256": "7ff7937b3747f58894edaa870628139f5348044e6210836ea9c909c6117e9124"
+        "bytes": 166064,
+        "sha256": "be27d1f2fb658f62cbdd2fd31d9b0385bd15b4245140bdc54a7287276f41925a"
       },
       "age": "18+",
       "dressCode": null,
@@ -13637,8 +13637,8 @@
         "src": "/images/events/october-2026/halloween-nama-milano-2026.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 185922,
-        "sha256": "71e8cbbd83d75ae1143a80eac1dbdbbb162558bbd717581692368a1b92cbb12e"
+        "bytes": 166624,
+        "sha256": "41d0ed5d813356e0c6ac432ff489c7b33b1403ba190fcd8d750d503401db0550"
       },
       "age": "18+",
       "dressCode": null,
@@ -13704,8 +13704,8 @@
         "src": "/images/events/october-2026/halloween-parco-trotter-2026.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 180792,
-        "sha256": "ead0e10d1f3b191f379099a6b19ce604e142f7ee02d36aa7667d929e7b8ec200"
+        "bytes": 164306,
+        "sha256": "875065a536acc0c98dc4941079396a6506174186904c593aece3087ad35e6689"
       },
       "age": null,
       "dressCode": null,
@@ -13744,8 +13744,8 @@
         "src": "/images/events/october-2026/243574-26f2849423c9.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 234330,
-        "sha256": "1561b600f65568eddd73900eb425877aeb970c25a923a9775c8676abfc79f71d"
+        "bytes": 92112,
+        "sha256": "7479cbee22a31baf9c7831b58a79a3723a91653032445fe01472595d45653990"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -13841,8 +13841,8 @@
         "src": "/images/events/october-2026/243812-9425b71cf329.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 79746,
-        "sha256": "70e7b48dd3c5670807cdbc1d5c72ea9d4a889867ac230fe797b339841651fb45"
+        "bytes": 56616,
+        "sha256": "df7ebdd70660d9268fcc9a576ef6d67dbace60d831d458385d04491ddfb166e7"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -13983,8 +13983,8 @@
         "src": "/images/events/october-2026/246936-0cc8dc50a2d4.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 84066,
-        "sha256": "3e7cd04fdf177b7bbb2456405e2c751e261ac81cd5d30e0956cb4d6482607459"
+        "bytes": 57390,
+        "sha256": "4e6527c9a1fb0dbd64e76949c652fa50d5a701f6802780ec6340d51ba5ac473a"
       },
       "age": "18+",
       "dressCode": "Casual",
@@ -14117,8 +14117,10 @@
       },
       "image": {
         "src": "/images/halloween/2026/user-selection/55-poster.webp",
-        "width": 900,
-        "height": 1600
+        "width": 1376,
+        "height": 768,
+        "bytes": 82144,
+        "sha256": "49506c44ab1c30dbd8b8e10d1ed4fc7daca02ee7195ace28b7ee8be847ed4782"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -14211,8 +14213,10 @@
       },
       "image": {
         "src": "/images/halloween/2026/user-selection/voya-poster.webp",
-        "width": 900,
-        "height": 1600
+        "width": 1376,
+        "height": 768,
+        "bytes": 38528,
+        "sha256": "1f373cffbfd5a933e3787e6f3e938523473600acb50603f528fd864a4bbe769d"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -14271,8 +14275,8 @@
         "src": "/images/events/october-2026/halloween-museo-del-duomo-2026.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 185032,
-        "sha256": "7a48ec4713193ffe5955e2fc8b9afe791dab787896e6fb3a8dd1eeae8187587e"
+        "bytes": 165634,
+        "sha256": "d796239a945c99a3c6dfd974a15f24e28640a2340bf1dafa3fca7bf6fc07a608"
       },
       "age": "9–11",
       "dressCode": null,
@@ -14308,8 +14312,8 @@
         "src": "/images/events/october-2026/halloween-aria-243203.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 218078,
-        "sha256": "5979d0f8592aa96115dc3def1e8d63a3276a0ec5078e9b4f54aa1d17f0bc7a2d"
+        "bytes": 117372,
+        "sha256": "6e553f1ece107cae5dc612d1c28c39ac5ce03bd0f2cfd2cecf87b940bd61a136"
       },
       "age": "18+",
       "dressCode": null,
@@ -14378,8 +14382,8 @@
         "src": "/images/events/october-2026/halloween-cineteca-milano-arlecchino-2026.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 186880,
-        "sha256": "5c0c52116918079651c504759c1bf190fa1bd3bc30445f13ce16c20bf9a87441"
+        "bytes": 167618,
+        "sha256": "14e7e06b25b3dce622dae3e6d0674f9546ad3ed39008f598adcd0c3074574542"
       },
       "age": null,
       "dressCode": null,
@@ -14418,8 +14422,8 @@
         "src": "/images/events/october-2026/halloween-planetario-night-2026.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 185472,
-        "sha256": "4d5d73219428e972be4a58a727118dbadee3cf909f75fb11268eee5e3a8d0bc9"
+        "bytes": 165802,
+        "sha256": "b309ace2d8873703d3eac48ab7b58400cd34fd05071aee34abe2f81f9f5f6d39"
       },
       "age": null,
       "dressCode": null,
@@ -14460,8 +14464,8 @@
         "src": "/images/events/october-2026/halloween-alcatraz-dia-de-los-muertos-2026.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 90680,
-        "sha256": "a3e893ebc46e2522d13f8419b9f86432c3ee80dbb5537036bba500b2c1291759"
+        "bytes": 172986,
+        "sha256": "ab1fdcd42fee1aa64ed77d06aeec68db4b9ccfec69000266f475987d56727574"
       },
       "age": null,
       "dressCode": null,
@@ -14517,8 +14521,10 @@
       },
       "image": {
         "src": "/images/halloween/2026/user-selection/fabbrica-poster.webp",
-        "width": 900,
-        "height": 1600
+        "width": 1376,
+        "height": 768,
+        "bytes": 77496,
+        "sha256": "9bb532f31fe2fddd86a38853a5bedcdfffe4e9fd995095d236183402bd9dfbdd"
       },
       "age": "18+",
       "dressCode": null,
@@ -14579,8 +14585,8 @@
         "src": "/images/events/october-2026/halloween-pulse-cube-milano-2026.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 186346,
-        "sha256": "7e60a2c5b0b1e6ad250c3d71e7ef760d309cb9745465a16a1a9676e7a73a6230"
+        "bytes": 168100,
+        "sha256": "158824ace41c28a7189478b2032b6b226433505fbb58897623329b773be982f4"
       },
       "age": "18+",
       "dressCode": null,
@@ -14631,8 +14637,8 @@
         "src": "/images/events/october-2026/halloween-gate-240984.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 205742,
-        "sha256": "0c759551aa8bc1d4b87efe1dff261e4fc476faf59c9ba9303b43cc1863593e50"
+        "bytes": 109250,
+        "sha256": "5f03b96e38d2479db7f5aac3368c342f1bb271b04ee939895a708b93953d623f"
       },
       "age": null,
       "dressCode": "Casual",
@@ -14682,8 +14688,8 @@
         "src": "/images/events/october-2026/halloween-base-milano-2026.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 230804,
-        "sha256": "125a7e5de6b7b0277c38598ea7a465637a69100d5f0bd227e7a35484ba4a4e80"
+        "bytes": 204604,
+        "sha256": "3ef4a058b2f66f0f0bd2a635aa63bc40f9a2e0c011987efca841a07d4489f8f1"
       },
       "age": "18+",
       "dressCode": null,
@@ -14747,8 +14753,8 @@
         "src": "/images/events/october-2026/tempio-20261030-87919b0665fe.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 296154,
-        "sha256": "95ebfa29891b4043a39ea5e3c150c4f35cf4dea82f71ff0f7867948c2a890dd1"
+        "bytes": 182542,
+        "sha256": "ebb252fea84661d91dbe3d0c62d39ed3734bc7cfee3c5c5b6d9e8e7a93ead383"
       },
       "age": "18+",
       "dressCode": null,
@@ -14818,8 +14824,8 @@
         "src": "/images/events/october-2026/248051-ab5ba84051dd.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 89398,
-        "sha256": "ca574e9e7c6cdd5503a4773a20a0953726205b839fa5a2dfeceaa0a8591c2b23"
+        "bytes": 58158,
+        "sha256": "57a5105b2db9f9e96d1ae4602f105a3bf2ca5745ad5e7e9193665039c348d5ca"
       },
       "age": "18+",
       "dressCode": null,
@@ -14860,8 +14866,8 @@
         "src": "/images/events/october-2026/halloween-amnesia-leon-2026.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 165882,
-        "sha256": "ccf71f68f20e80050ed97b6a162d2a130cd7d1e6b08c69abb51aac53a87bd191"
+        "bytes": 66066,
+        "sha256": "cd3c0f1c4e0faadb8a48778f09109d3d93e1ff2a8d0b0409e39ebee055408210"
       },
       "age": null,
       "dressCode": null,
@@ -14916,8 +14922,10 @@
       },
       "image": {
         "src": "/images/halloween/2026/user-selection/magazzini-poster.webp",
-        "width": 1280,
-        "height": 1600
+        "width": 1376,
+        "height": 768,
+        "bytes": 73344,
+        "sha256": "ff365b0338d5a9d08cc6a4ae015efc3d031c928416bba4b8a12223b8692ed868"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -15010,8 +15018,8 @@
         "src": "/images/events/october-2026/halloween-mamacita-fabrique-2026.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 213748,
-        "sha256": "64f56912ff03a6e974dfdb360676f7b3f5ad7965eae37ee54e414f8ad9ae8794"
+        "bytes": 186078,
+        "sha256": "a7441d9aadaa8b43961c1b3ba7a69d21b29c8c791d14dde3fb682c807a626d33"
       },
       "age": "18+",
       "dressCode": null,
@@ -15060,8 +15068,10 @@
       },
       "image": {
         "src": "/images/halloween/2026/user-selection/tocqueville-poster.webp",
-        "width": 1080,
-        "height": 1350
+        "width": 1376,
+        "height": 768,
+        "bytes": 124088,
+        "sha256": "be78b5a155dab3905e87d82d770a6070e2ec6b95498c5f1144ede47eca1b11f6"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -15163,7 +15173,9 @@
       "image": {
         "src": "/images/events/october-2026/venues/arca-1-b0f7e1886421.webp",
         "width": 1376,
-        "height": 768
+        "height": 768,
+        "bytes": 229658,
+        "sha256": "45bf716d255c68d928d7ac5aea214ee4085d768547b8f4f7fe4ec5fc166e976e"
       },
       "age": "21+",
       "dressCode": null,
@@ -15236,8 +15248,8 @@
         "src": "/images/events/october-2026/halloween-volt-club-milano-2026.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 297830,
-        "sha256": "77ef320b619eb8349d5240332708bc14bbb3a938d1635ca3247533271621c42a"
+        "bytes": 255856,
+        "sha256": "f64394b32e139087e6a682fc089ebc024936a28f928d038cbb4f5094d31f1b0a"
       },
       "age": "21+",
       "dressCode": null,
@@ -15294,8 +15306,8 @@
         "src": "/images/events/october-2026/249198-c610114fd55b.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 205000,
-        "sha256": "bfb6af7e1bcd478b647997963a11f43d609558b3c759252ebe1ec07ad7764db6"
+        "bytes": 80248,
+        "sha256": "9646744b4ad59d960e4b6bf3c3cf7d37d52c02f91829a522607d35a90fe85685"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -15392,8 +15404,8 @@
         "src": "/images/events/october-2026/249146-bbdee1490af9.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 150502,
-        "sha256": "5f7335ec05362c4607d634bf8ccb1cf69e1227b0939b9661a17c56781499cef6"
+        "bytes": 176076,
+        "sha256": "24891be5bc9d1d13a6b5306ba03b84625f7970c8676f187df40fa8d3c2b43f55"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -15490,8 +15502,8 @@
         "src": "/images/events/october-2026/249182-aa34ab79100b.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 122596,
-        "sha256": "62ca3466a88b821d00ea2986229439eda7e244485ae7bea55339ce2a513ed945"
+        "bytes": 86932,
+        "sha256": "d91f6ff706123ba3c5b4cc11e55533560c3af5f8a7216843cfedcd31ad1d9c2a"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -15573,8 +15585,8 @@
         "src": "/images/events/october-2026/249189-e2b7683e02e3.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 215018,
-        "sha256": "f6fb81f8b23118e84636110cd39adfbf123d428f73692c48aad4bc43bedbe1a5"
+        "bytes": 55692,
+        "sha256": "ad33f3d1c10332c852f3f16756cadb26d5a3db8158085d76e0b5db6131163c48"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -15671,8 +15683,8 @@
         "src": "/images/events/october-2026/249192-8d811d65d7c5.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 192824,
-        "sha256": "991374972e7802ffabf907b2e639df70d217e399f4c06bd403e02fd0b18a98fc"
+        "bytes": 128978,
+        "sha256": "341e9fbb416288ada2c61fa697f6b36ff033ea99bc37afade812233d91e768da"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -15769,8 +15781,8 @@
         "src": "/images/events/october-2026/250753-4cd76c4bc143.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 224704,
-        "sha256": "0b73409457ff480bb97c506f7a2ba66ab98e93491f19afe2856904346893fa1a"
+        "bytes": 162836,
+        "sha256": "c50a537b0593095b3a8f2f572d6a7917d1a047992b23fe798835439e7897c351"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -15866,8 +15878,8 @@
         "src": "/images/events/october-2026/243822-fa1698470cb9.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 138666,
-        "sha256": "97af5f58ddd898f6c304d4f34256342c584ae2309ca072a0625e89f7fc308178"
+        "bytes": 113028,
+        "sha256": "1036a4035ce8e4e2cdfc58e5d0605d079dbdd9b84b8646cb08d4bdebb31cbcad"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -15963,8 +15975,8 @@
         "src": "/images/events/october-2026/249204-fcb5bf6cc4be.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 56800,
-        "sha256": "e1a466a9e988671509fc112b8d50b4e20a65071782f138be6cc72152a53878a5"
+        "bytes": 85748,
+        "sha256": "e3d0452fabef7f899d63a5c21b125ff7feaeedfc09007bf9b05bdb8eb31cb38c"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -16061,8 +16073,8 @@
         "src": "/images/events/october-2026/248553-7ee294113782.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 108428,
-        "sha256": "09cce3f432cff9cb96c53b93aaa2fbc7d31bd3b5f48ef66e09d7f1a9989ed096"
+        "bytes": 56494,
+        "sha256": "6429d6a7016287385b3dd28f4fd0daa59a6a0edac8f77abe4171417eb4fe2f37"
       },
       "age": "18+",
       "dressCode": "Smart casual",
@@ -16162,8 +16174,8 @@
         "src": "/images/events/october-2026/242617-59f08f112437.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 222584,
-        "sha256": "c8e0ecea04484042fe827bbccfd2dddea1f5b3ffb87077e0c4848f926f672f63"
+        "bytes": 103162,
+        "sha256": "75f89b54a917678a5eba7d103253aaed20816544b2593f272ab70dcd5af67524"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -16227,8 +16239,8 @@
         "src": "/images/events/october-2026/243828-5645e7e45ddb.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 310766,
-        "sha256": "0c01fcfc6207fbe26480426f5c7de4e25371e8214d56e30d71fb4bb215ab9382"
+        "bytes": 99710,
+        "sha256": "7edc2825ff1e1762c72a1ebb938632cae3898ebab60926e40d392d8e4d3f1176"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -16324,8 +16336,8 @@
         "src": "/images/events/october-2026/248805-f4aa81a5ec27.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 131464,
-        "sha256": "c46bb422e28152cfee0aba8f9e0996cdee7bade8ef2a48108d0cc449ab3ad975"
+        "bytes": 90732,
+        "sha256": "ea722a0b3026974f43b26fb9c95093d632f1bef789f1751723fa78ff45d8ac01"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -16454,8 +16466,8 @@
         "src": "/images/events/october-2026/250118-25c7ec9489e2.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 241192,
-        "sha256": "2d84dfbcb9a4e03328adc0eca6d17d9420b5514f997bc4e2480c80008f7492a4"
+        "bytes": 125884,
+        "sha256": "123b00759c7360d947fd48ba969b5fa0f5476adc9869e1f1933229f053d49ead"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -16533,8 +16545,8 @@
         "src": "/images/events/october-2026/250730-cacc7105eab7.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 241192,
-        "sha256": "2d84dfbcb9a4e03328adc0eca6d17d9420b5514f997bc4e2480c80008f7492a4"
+        "bytes": 113460,
+        "sha256": "2a3343acb9c96a99be00fccf59ae4108bcd6b859122e2fd99cf62e6acd15e580"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -16612,8 +16624,8 @@
         "src": "/images/events/october-2026/250841-d195b2aad686.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 210008,
-        "sha256": "a60f6bdce21d0fc309098c9f506d5156620ad49dce2b6f150b6d5f37c0a355bd"
+        "bytes": 97864,
+        "sha256": "c984a5a6c5a10fc481dd47880c3fc29330788827c70263ba62d54c75f19ba5c9"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -16698,8 +16710,8 @@
         "src": "/images/events/october-2026/240985-428350ebb671.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 244088,
-        "sha256": "7d47bce8e608f498e3d4e33b6c835694fc7e4d04aebd14a2390f8ba80c4ca2a5"
+        "bytes": 136020,
+        "sha256": "bd0b42e0def9be55ce04a741fb990572d576e42274ec5306b8249b6486d23e25"
       },
       "age": "18+",
       "dressCode": "Smart casual",
@@ -16944,8 +16956,8 @@
         "src": "/images/events/october-2026/249561-16305d9c37ec.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 197516,
-        "sha256": "95ae6a625b15b2d743246e1dc0c6e709a9d0e4066a4dd6fbe53b54be4e2464b1"
+        "bytes": 86590,
+        "sha256": "f7ebe2bc5460ee4c6afbfef58111207df42f23916c6a298037225eaae4b964f3"
       },
       "age": "18+",
       "dressCode": "Smart casual",
@@ -17036,8 +17048,8 @@
         "src": "/images/events/october-2026/249199-9373e4ee381b.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 96634,
-        "sha256": "7d5555682cd9db4e5c9d3f6e6213f76a6f8c9e3902cc790f5165204aeff39bd6"
+        "bytes": 84560,
+        "sha256": "7e72ae543662e5c0b2fb0a4b8736a4e8c7dd8ac4efc6475ae4072fb865876648"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -17134,8 +17146,8 @@
         "src": "/images/events/october-2026/249156-bbdee1490af9.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 150502,
-        "sha256": "5f7335ec05362c4607d634bf8ccb1cf69e1227b0939b9661a17c56781499cef6"
+        "bytes": 169562,
+        "sha256": "dd82028889addb19c24bdc88568ba198c0434d37a8804928ab7b73e345d97af8"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -17232,8 +17244,8 @@
         "src": "/images/events/october-2026/249210-aa34ab79100b.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 122596,
-        "sha256": "62ca3466a88b821d00ea2986229439eda7e244485ae7bea55339ce2a513ed945"
+        "bytes": 102622,
+        "sha256": "dea359622a1e26b1e24846f87103568134c6bbc45b39077298372eeee08bedf7"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -17323,8 +17335,8 @@
         "src": "/images/events/october-2026/250563-9c1090e6f713.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 210008,
-        "sha256": "a60f6bdce21d0fc309098c9f506d5156620ad49dce2b6f150b6d5f37c0a355bd"
+        "bytes": 42226,
+        "sha256": "3c44d8bf9f0cca0a71404f947d2d0888e33be51e5ea166633810afc9a3c02345"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -17412,8 +17424,8 @@
         "src": "/images/events/october-2026/249211-e2b7683e02e3.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 215018,
-        "sha256": "f6fb81f8b23118e84636110cd39adfbf123d428f73692c48aad4bc43bedbe1a5"
+        "bytes": 177172,
+        "sha256": "a1fde0d0d76faf587945d4dd3697d72ae36976429d464d377c7ad00801443625"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -17510,8 +17522,8 @@
         "src": "/images/events/october-2026/249212-8d811d65d7c5.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 192824,
-        "sha256": "991374972e7802ffabf907b2e639df70d217e399f4c06bd403e02fd0b18a98fc"
+        "bytes": 124240,
+        "sha256": "3e4d1cd57e2bf2e6d35692f637bfa4f6ce30fe62f22e057979811bafafbb08b2"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -17608,8 +17620,8 @@
         "src": "/images/events/october-2026/251806-e2ff6cba5735.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 224704,
-        "sha256": "0b73409457ff480bb97c506f7a2ba66ab98e93491f19afe2856904346893fa1a"
+        "bytes": 135834,
+        "sha256": "236ce0f6de244aca75669decd06e24c2929858162f8a2be422e526f85b404a49"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -17705,8 +17717,8 @@
         "src": "/images/events/october-2026/243823-fa1698470cb9.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 138666,
-        "sha256": "97af5f58ddd898f6c304d4f34256342c584ae2309ca072a0625e89f7fc308178"
+        "bytes": 127716,
+        "sha256": "a4bf6619d18adc9101fa1b13ae4dbefef67a419e259ca84b7eb49665b5deaf5b"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -17802,8 +17814,8 @@
         "src": "/images/events/october-2026/249206-1a12c4867f4c.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 36832,
-        "sha256": "c198cc30ad7df2f24f87399850920cc8c2d15e3baa5499f78f3e19da40e21aee"
+        "bytes": 44010,
+        "sha256": "80173bbf183f318ea824cff17dc6ad828969c6c9cbde04858e7de704e2e6aa93"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -17900,8 +17912,8 @@
         "src": "/images/events/october-2026/250821-6f192b4ba127.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 210008,
-        "sha256": "a60f6bdce21d0fc309098c9f506d5156620ad49dce2b6f150b6d5f37c0a355bd"
+        "bytes": 139194,
+        "sha256": "294d4b029049dc2a8ed31bda265fd875e1de87eaab709db43bf78fe2f2c72e6e"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -17997,8 +18009,8 @@
         "src": "/images/events/october-2026/236325-f6ca617afe9f.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 74148,
-        "sha256": "d49ac40ad0c83b998d212e6b59d3adcf52068756030339bf27ff736810920534"
+        "bytes": 54872,
+        "sha256": "597e31acdf43fab46baa16c1763602c2c7ff5aa754510fb354396eb3bbfb2901"
       },
       "age": "18+",
       "dressCode": null,
@@ -18102,8 +18114,8 @@
         "src": "/images/events/october-2026/247839-0a54db738c7d.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 309724,
-        "sha256": "e975f5965a00614522dfa79826a7873ef2fde39ebc8124d0d81329975c857548"
+        "bytes": 136392,
+        "sha256": "219a1ae59ed30ac03704373c6b0c97137b0e64668e2ddc99e5fd27475c1b2beb"
       },
       "age": "18+",
       "dressCode": null,
@@ -18256,8 +18268,8 @@
         "src": "/images/events/october-2026/243829-5645e7e45ddb.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 310766,
-        "sha256": "0c01fcfc6207fbe26480426f5c7de4e25371e8214d56e30d71fb4bb215ab9382"
+        "bytes": 115646,
+        "sha256": "835b8f65f5fe59ce70dba3de2904fc2316c5ff26cbc5c80acb2d820a28d164de"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -18353,8 +18365,8 @@
         "src": "/images/events/october-2026/249213-e2755e4bf02c.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 120192,
-        "sha256": "d2481f95362209a850f034bb1061cde565033f13a45b8aa3f694c685ad7b374a"
+        "bytes": 134408,
+        "sha256": "7483264782756d72caa85598122977e4e1df3332ecf908883a78f5395702fc8b"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -18451,8 +18463,8 @@
         "src": "/images/events/october-2026/251459-3724d8270c1e.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 210008,
-        "sha256": "a60f6bdce21d0fc309098c9f506d5156620ad49dce2b6f150b6d5f37c0a355bd"
+        "bytes": 73122,
+        "sha256": "b4f4fc32024b71d6e6eee56486c6e160525409a7e1f0964299ad8862381c2c1c"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -18531,6 +18543,62 @@
       "dressCodeDetail": "men-long-trousers"
     },
     {
+      "id": "251849",
+      "sourceUrl": "https://xceed.me/en/brescia/event/ritmo-x-gate-0/251849",
+      "affiliateUrl": "https://xceed.me/en/brescia/event/ritmo-x-gate-0/251849/channel/nightlifemilan-1",
+      "affiliateStatus": "verified",
+      "officialName": "Ritmo x Gate 0",
+      "startISO": "2026-11-14T22:30:00+01:00",
+      "endISO": "2026-11-15T05:00:00+01:00",
+      "venue": {
+        "id": "v-justme-garda",
+        "name": "Justme Garda Lake",
+        "address": "Via Lavagnone, 13, 25017 Lonato del Garda, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Lavagnone, 13",
+          "addressLocality": "Lonato del Garda",
+          "addressCountry": "IT",
+          "postalCode": "25017"
+        },
+        "latitude": 45.4380124,
+        "longitude": 10.5246051
+      },
+      "image": {
+        "src": "/images/events/october-2026/251849-garda-ritmo.webp",
+        "width": 1376,
+        "height": 768,
+        "bytes": 84720,
+        "sha256": "41736a98529b68e21307692d62c33e6a1156d2eafeb7fd13e80a4090185e8588"
+      },
+      "age": "21+",
+      "dressCode": "Elegant",
+      "genres": [
+        "Reggaeton",
+        "Commercial",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Admission + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/brescia/event/ritmo-x-gate-0/251849/channel/nightlifemilan-1",
+          "admissionFrom": "22:30"
+        },
+        {
+          "name": "VIP Table Reservation",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/brescia/event/ritmo-x-gate-0/251849/channel/nightlifemilan-1"
+        }
+      ],
+      "provenance": "https://xceed.me/en/brescia/event/ritmo-x-gate-0/251849 · checked 2026-11-12",
+      "halloween": false
+    },
+    {
       "id": "240986",
       "sourceUrl": "https://xceed.me/en/milano/event/perreo-xl-21/240986",
       "affiliateUrl": null,
@@ -18555,8 +18623,8 @@
         "src": "/images/events/october-2026/240986-29b7b3d6e082.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 150660,
-        "sha256": "97dd3bf5a9200507d3c705183fc539ea22bc69cb8c753a8f285e58c486a581eb"
+        "bytes": 97840,
+        "sha256": "04a248b59c25d88d68ee68180d358fdfbbb53659368c94c70ccae9523be32f2c"
       },
       "age": "18+",
       "dressCode": null,
@@ -18822,8 +18890,8 @@
         "src": "/images/events/october-2026/242644-61cbf1bbf29a.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 222850,
-        "sha256": "c1106e769912f3e6de61c1e248fed76ee07d02d098866109ef9cd17155170d13"
+        "bytes": 88548,
+        "sha256": "75f41331099ed9daf6ae56901097741a0679808dd2abe9049d4dee7bf37146e9"
       },
       "age": "18+",
       "dressCode": null,
@@ -18928,8 +18996,8 @@
         "src": "/images/events/october-2026/242062-86878c016c8f.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 123366,
-        "sha256": "43fc021b62c226909dac9a540b2745544553ef4ab536327bcd8e87451c3055c8"
+        "bytes": 64862,
+        "sha256": "25857aa906b037f3487dc9ef955e2fe15d8b486a6ae9a30335d3922e40a01d96"
       },
       "age": "18+",
       "dressCode": null,
@@ -18977,8 +19045,8 @@
         "src": "/images/events/october-2026/249200-9373e4ee381b.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 96634,
-        "sha256": "7d5555682cd9db4e5c9d3f6e6213f76a6f8c9e3902cc790f5165204aeff39bd6"
+        "bytes": 91958,
+        "sha256": "ae038703e74261be4233810d2f26c2197bcd3614248d305c0fedd9aa0f56f81f"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -19075,8 +19143,8 @@
         "src": "/images/events/october-2026/249158-bbdee1490af9.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 150502,
-        "sha256": "5f7335ec05362c4607d634bf8ccb1cf69e1227b0939b9661a17c56781499cef6"
+        "bytes": 126606,
+        "sha256": "b68e69a82f5b6716dd3a3be710c5d3ed46eb2b411f5eb27e0f30c40d09a6fbc8"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -19173,8 +19241,8 @@
         "src": "/images/events/october-2026/249163-6c8605aa6e14.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 224704,
-        "sha256": "0b73409457ff480bb97c506f7a2ba66ab98e93491f19afe2856904346893fa1a"
+        "bytes": 102622,
+        "sha256": "dea359622a1e26b1e24846f87103568134c6bbc45b39077298372eeee08bedf7"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -19276,8 +19344,8 @@
         "src": "/images/events/october-2026/250464-8e6624e362ac.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 210008,
-        "sha256": "a60f6bdce21d0fc309098c9f506d5156620ad49dce2b6f150b6d5f37c0a355bd"
+        "bytes": 60342,
+        "sha256": "8f8aacca28f7e6ae735b78fa29c11b84ae273e2c387d82772b833178092d8d4b"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -19319,8 +19387,8 @@
         "src": "/images/events/october-2026/249170-7bd33f9f51fc.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 241192,
-        "sha256": "2d84dfbcb9a4e03328adc0eca6d17d9420b5514f997bc4e2480c80008f7492a4"
+        "bytes": 177172,
+        "sha256": "a1fde0d0d76faf587945d4dd3697d72ae36976429d464d377c7ad00801443625"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -19415,8 +19483,8 @@
         "src": "/images/events/october-2026/249214-d7c8abbf2d2c.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 224704,
-        "sha256": "0b73409457ff480bb97c506f7a2ba66ab98e93491f19afe2856904346893fa1a"
+        "bytes": 97866,
+        "sha256": "a3e0f50fe97222cb656affb5710f0982038ca7a2b07f538b5b123e6f7145eb87"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -19511,8 +19579,8 @@
         "src": "/images/events/october-2026/243824-fa1698470cb9.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 138666,
-        "sha256": "97af5f58ddd898f6c304d4f34256342c584ae2309ca072a0625e89f7fc308178"
+        "bytes": 122732,
+        "sha256": "d9c540ac1b8901c90a25c2bdbca5451b28f1fa4de6c9fce1f7807bc8ac3b8644"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -19608,8 +19676,8 @@
         "src": "/images/events/october-2026/249215-4d8ce2f27e02.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 210008,
-        "sha256": "a60f6bdce21d0fc309098c9f506d5156620ad49dce2b6f150b6d5f37c0a355bd"
+        "bytes": 64484,
+        "sha256": "f2142ba98a118d50baefee38acd8bfc6e0261c723ab4bbbd2739c88f2494e684"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -19704,8 +19772,8 @@
         "src": "/images/events/october-2026/251746-c989b0961ed1.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 241192,
-        "sha256": "2d84dfbcb9a4e03328adc0eca6d17d9420b5514f997bc4e2480c80008f7492a4"
+        "bytes": 99296,
+        "sha256": "ce624ae28b6c9323130d71db78598c73e2d4821145041763cb831eeb65dd1660"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -19801,8 +19869,8 @@
         "src": "/images/events/october-2026/243830-5645e7e45ddb.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 310766,
-        "sha256": "0c01fcfc6207fbe26480426f5c7de4e25371e8214d56e30d71fb4bb215ab9382"
+        "bytes": 81636,
+        "sha256": "989e3474f38c516c0e4c0a8804216b130ed97b4adf22ed38ddb26ff7bb9e98b9"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -19898,8 +19966,8 @@
         "src": "/images/events/october-2026/249196-1702fe9d7b6f.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 224704,
-        "sha256": "0b73409457ff480bb97c506f7a2ba66ab98e93491f19afe2856904346893fa1a"
+        "bytes": 94726,
+        "sha256": "70cf3ef9e49f9c4b9bdcb38fe07bc03eaec0cd13c55436ba737b6fdb40c1f0cc"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -19995,8 +20063,8 @@
         "src": "/images/events/october-2026/238652-5c0f62540791.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 110020,
-        "sha256": "64f1660c9433a06d977c5e84cdf40429211142909b486e63a30eb111fd1d0bf6"
+        "bytes": 75992,
+        "sha256": "3d13429c612733f7c926b239f2dd44abcbcfd30c81601c930d407f5e294712ec"
       },
       "age": "18+",
       "dressCode": null,
@@ -20100,8 +20168,8 @@
         "src": "/images/events/october-2026/240987-7df90f3be756.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 148356,
-        "sha256": "7325171c074594dba858953f424cb14b33dbc54b4a8f44eefb6dd7d90b240c43"
+        "bytes": 93220,
+        "sha256": "09e0fe8e769779e086b6cf5ec9f7c9aeaddc46712743bbd9d77ab3bfaae06e05"
       },
       "age": "18+",
       "dressCode": null,
@@ -20367,8 +20435,8 @@
         "src": "/images/events/october-2026/249201-ad7571d3b1d1.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 224704,
-        "sha256": "0b73409457ff480bb97c506f7a2ba66ab98e93491f19afe2856904346893fa1a"
+        "bytes": 61888,
+        "sha256": "a66112f84f7a851d7ef74c934553b564c04c75eb2d309d3c716f9d7662816ca6"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -20463,8 +20531,8 @@
         "src": "/images/events/october-2026/249159-3cce760f0972.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 224704,
-        "sha256": "0b73409457ff480bb97c506f7a2ba66ab98e93491f19afe2856904346893fa1a"
+        "bytes": 126606,
+        "sha256": "b68e69a82f5b6716dd3a3be710c5d3ed46eb2b411f5eb27e0f30c40d09a6fbc8"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -20559,8 +20627,8 @@
         "src": "/images/events/october-2026/249161-014a4857fb70.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 241192,
-        "sha256": "2d84dfbcb9a4e03328adc0eca6d17d9420b5514f997bc4e2480c80008f7492a4"
+        "bytes": 102622,
+        "sha256": "dea359622a1e26b1e24846f87103568134c6bbc45b39077298372eeee08bedf7"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -20662,8 +20730,8 @@
         "src": "/images/events/october-2026/249169-02805d900826.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 224704,
-        "sha256": "0b73409457ff480bb97c506f7a2ba66ab98e93491f19afe2856904346893fa1a"
+        "bytes": 177172,
+        "sha256": "a1fde0d0d76faf587945d4dd3697d72ae36976429d464d377c7ad00801443625"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -20758,8 +20826,8 @@
         "src": "/images/events/october-2026/249216-a9a40338f294.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 210008,
-        "sha256": "a60f6bdce21d0fc309098c9f506d5156620ad49dce2b6f150b6d5f37c0a355bd"
+        "bytes": 119518,
+        "sha256": "649546de75129d69d928637741733161260d05024ed3f6f7658f42a3ef800c9a"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -20854,8 +20922,8 @@
         "src": "/images/events/october-2026/243825-fa1698470cb9.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 138666,
-        "sha256": "97af5f58ddd898f6c304d4f34256342c584ae2309ca072a0625e89f7fc308178"
+        "bytes": 122732,
+        "sha256": "d9c540ac1b8901c90a25c2bdbca5451b28f1fa4de6c9fce1f7807bc8ac3b8644"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -20951,8 +21019,8 @@
         "src": "/images/events/october-2026/249217-8fff9d2f3fe4.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 241192,
-        "sha256": "2d84dfbcb9a4e03328adc0eca6d17d9420b5514f997bc4e2480c80008f7492a4"
+        "bytes": 64484,
+        "sha256": "f2142ba98a118d50baefee38acd8bfc6e0261c723ab4bbbd2739c88f2494e684"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -21047,8 +21115,8 @@
         "src": "/images/events/october-2026/236326-c7288fd1c403.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 79268,
-        "sha256": "31a9162a5cb7dcf21e7b94e97a63c5b77aa8c3471b7d8cd8c7537a080943af63"
+        "bytes": 47980,
+        "sha256": "e3b32fe301a1e9179b9d9a771a894f24c2e3cb1cd0dcd461b676568c0f62dea4"
       },
       "age": "18+",
       "dressCode": null,
@@ -21152,8 +21220,8 @@
         "src": "/images/events/october-2026/249060-b09c1092099f.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 103922,
-        "sha256": "fea18c680db0b0d898ca13a76f851317f3ab83496911dc5c540d7ae243512227"
+        "bytes": 67116,
+        "sha256": "8269b843cafdf328feb425e85cbc8606079389816a4d49126746641e87380e14"
       },
       "age": "18+",
       "dressCode": null,
@@ -21265,8 +21333,8 @@
         "src": "/images/events/october-2026/243831-5645e7e45ddb.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 310766,
-        "sha256": "0c01fcfc6207fbe26480426f5c7de4e25371e8214d56e30d71fb4bb215ab9382"
+        "bytes": 81636,
+        "sha256": "989e3474f38c516c0e4c0a8804216b130ed97b4adf22ed38ddb26ff7bb9e98b9"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -21362,8 +21430,8 @@
         "src": "/images/events/october-2026/249197-a9e4bf6c46ee.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 224704,
-        "sha256": "0b73409457ff480bb97c506f7a2ba66ab98e93491f19afe2856904346893fa1a"
+        "bytes": 94726,
+        "sha256": "70cf3ef9e49f9c4b9bdcb38fe07bc03eaec0cd13c55436ba737b6fdb40c1f0cc"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -21458,8 +21526,8 @@
         "src": "/images/events/october-2026/240988-a10209e5b015.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 192994,
-        "sha256": "c94d9515b7a9496c4773aed968b8dafa1f4780b7a9f45baeeb616cb4828d4c0e"
+        "bytes": 114286,
+        "sha256": "2e85306bcf9d8f10f09a1709ac2e3871d38755f855abad4e2673a677ce072127"
       },
       "age": "18+",
       "dressCode": null,
@@ -21725,8 +21793,8 @@
         "src": "/images/events/october-2026/249203-a38c231f85ac.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 210008,
-        "sha256": "a60f6bdce21d0fc309098c9f506d5156620ad49dce2b6f150b6d5f37c0a355bd"
+        "bytes": 61888,
+        "sha256": "a66112f84f7a851d7ef74c934553b564c04c75eb2d309d3c716f9d7662816ca6"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -21821,8 +21889,8 @@
         "src": "/images/events/october-2026/249160-ead790986e88.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 224704,
-        "sha256": "0b73409457ff480bb97c506f7a2ba66ab98e93491f19afe2856904346893fa1a"
+        "bytes": 126606,
+        "sha256": "b68e69a82f5b6716dd3a3be710c5d3ed46eb2b411f5eb27e0f30c40d09a6fbc8"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -21917,8 +21985,8 @@
         "src": "/images/events/october-2026/249218-8f528f39a989.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 224704,
-        "sha256": "0b73409457ff480bb97c506f7a2ba66ab98e93491f19afe2856904346893fa1a"
+        "bytes": 102622,
+        "sha256": "dea359622a1e26b1e24846f87103568134c6bbc45b39077298372eeee08bedf7"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -22020,8 +22088,8 @@
         "src": "/images/events/october-2026/249243-b1cd343f6f44.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 210008,
-        "sha256": "a60f6bdce21d0fc309098c9f506d5156620ad49dce2b6f150b6d5f37c0a355bd"
+        "bytes": 177172,
+        "sha256": "a1fde0d0d76faf587945d4dd3697d72ae36976429d464d377c7ad00801443625"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -22116,8 +22184,8 @@
         "src": "/images/events/october-2026/249244-d9640cb369be.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 210008,
-        "sha256": "a60f6bdce21d0fc309098c9f506d5156620ad49dce2b6f150b6d5f37c0a355bd"
+        "bytes": 154732,
+        "sha256": "e13cdd814e1eac62e27fac27ae79f3f650adc2d17a5d7cdcbfa4b061842a4bb6"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -22212,8 +22280,8 @@
         "src": "/images/events/october-2026/249130-4cb1a6cdf184.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 142936,
-        "sha256": "489dfe8e50f202e47cda255bddac9bf3bb37690f70b1e525e5c7f58f0c7fc2aa"
+        "bytes": 122732,
+        "sha256": "d9c540ac1b8901c90a25c2bdbca5451b28f1fa4de6c9fce1f7807bc8ac3b8644"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -22291,8 +22359,8 @@
         "src": "/images/events/october-2026/236327-9b4a355b9374.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 187404,
-        "sha256": "72804e689bc3d99ba43c200e5971f2d49a20862c47e7f628364aa6c669a755ca"
+        "bytes": 105850,
+        "sha256": "d3701c26d9c9838e11537f75c198321e32720f4a5ffff68f51ab04290c58363d"
       },
       "age": "18+",
       "dressCode": "Smart casual",
@@ -22383,8 +22451,8 @@
         "src": "/images/events/october-2026/248680-1588f16cd942.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 193478,
-        "sha256": "6684daba5b6ecd5c7fb3926c8da8d806eaf0d1876a6b43fca39cca77bb500bfe"
+        "bytes": 107988,
+        "sha256": "122981d4a81700d9903b66aa41cf7310cbe63c22765c002842829739231f7719"
       },
       "age": "18+",
       "dressCode": null,
@@ -22433,8 +22501,8 @@
         "src": "/images/events/october-2026/249139-e33432d48dd4.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 113958,
-        "sha256": "e005b70bba38db90a6d48eae393851682743caf5775f7bb1095be8e098ddbc6a"
+        "bytes": 81636,
+        "sha256": "989e3474f38c516c0e4c0a8804216b130ed97b4adf22ed38ddb26ff7bb9e98b9"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -22521,8 +22589,8 @@
         "src": "/images/events/october-2026/251833-61eb740fbdac.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 224704,
-        "sha256": "0b73409457ff480bb97c506f7a2ba66ab98e93491f19afe2856904346893fa1a"
+        "bytes": 60360,
+        "sha256": "314e76b6331c6c52130b7c10e77a20c2a550fb3e99127150c5c385bdb6d797d0"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -22607,8 +22675,8 @@
         "src": "/images/events/october-2026/240989-b4c99750b409.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 586112,
-        "sha256": "a64c8c8b322a5ccbfee7c60b83c7ef43634b10e77130dd254ca9dccdec2b4ebe"
+        "bytes": 87384,
+        "sha256": "5194ee882f3be20582d9eb069851c655c1dbc45acb18e45e29174ec76e1314c0"
       },
       "age": "18+",
       "dressCode": "Smart casual",
@@ -22875,8 +22943,8 @@
         "src": "/images/events/october-2026/250300-e0a534b01c6e.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 210008,
-        "sha256": "a60f6bdce21d0fc309098c9f506d5156620ad49dce2b6f150b6d5f37c0a355bd"
+        "bytes": 131792,
+        "sha256": "dff672ea100a086a1ba020d7c6b2f79a8e9e95ecbd41b51c3f74486fb351828a"
       },
       "age": "16+",
       "dressCode": "Elegant",
@@ -22940,8 +23008,8 @@
         "src": "/images/events/october-2026/251155-73f80d68047c.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 197516,
-        "sha256": "95ae6a625b15b2d743246e1dc0c6e709a9d0e4066a4dd6fbe53b54be4e2464b1"
+        "bytes": 101322,
+        "sha256": "a5f38a80a803da9360717ff3a93a31d43f71c6d34a9e277bc6379dd546bc3248"
       },
       "age": "18+",
       "dressCode": "Smart casual",
@@ -23032,8 +23100,8 @@
         "src": "/images/events/october-2026/249132-4cb1a6cdf184.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 142936,
-        "sha256": "489dfe8e50f202e47cda255bddac9bf3bb37690f70b1e525e5c7f58f0c7fc2aa"
+        "bytes": 122732,
+        "sha256": "d9c540ac1b8901c90a25c2bdbca5451b28f1fa4de6c9fce1f7807bc8ac3b8644"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -23120,8 +23188,8 @@
         "src": "/images/events/october-2026/249144-e33432d48dd4.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 113958,
-        "sha256": "e005b70bba38db90a6d48eae393851682743caf5775f7bb1095be8e098ddbc6a"
+        "bytes": 81636,
+        "sha256": "989e3474f38c516c0e4c0a8804216b130ed97b4adf22ed38ddb26ff7bb9e98b9"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -23208,8 +23276,8 @@
         "src": "/images/events/october-2026/240990-b5b6192478a9.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 197516,
-        "sha256": "95ae6a625b15b2d743246e1dc0c6e709a9d0e4066a4dd6fbe53b54be4e2464b1"
+        "bytes": 87384,
+        "sha256": "5194ee882f3be20582d9eb069851c655c1dbc45acb18e45e29174ec76e1314c0"
       },
       "age": "18+",
       "dressCode": "Smart casual",
@@ -23476,8 +23544,8 @@
         "src": "/images/events/october-2026/242145-392777716fca.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 241618,
-        "sha256": "ad347a03f063f3931a29b0cd0219fcd25bc9562df7bf91b200d4e0e9ea8dec58"
+        "bytes": 68382,
+        "sha256": "a342a44e06e29fb9a72c6953ed4afcfd30373ffb468afd1a67532c0afe0b55ab"
       },
       "age": "18+",
       "dressCode": "Smart casual",
@@ -23580,8 +23648,8 @@
         "src": "/images/events/october-2026/249135-4cb1a6cdf184.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 142936,
-        "sha256": "489dfe8e50f202e47cda255bddac9bf3bb37690f70b1e525e5c7f58f0c7fc2aa"
+        "bytes": 122732,
+        "sha256": "d9c540ac1b8901c90a25c2bdbca5451b28f1fa4de6c9fce1f7807bc8ac3b8644"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -23668,8 +23736,8 @@
         "src": "/images/events/october-2026/249142-e33432d48dd4.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 113958,
-        "sha256": "e005b70bba38db90a6d48eae393851682743caf5775f7bb1095be8e098ddbc6a"
+        "bytes": 81636,
+        "sha256": "989e3474f38c516c0e4c0a8804216b130ed97b4adf22ed38ddb26ff7bb9e98b9"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -23756,8 +23824,8 @@
         "src": "/images/events/october-2026/250374-ad4d0b22e8ec.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 241192,
-        "sha256": "2d84dfbcb9a4e03328adc0eca6d17d9420b5514f997bc4e2480c80008f7492a4"
+        "bytes": 129404,
+        "sha256": "be86f4c9959d4b789e26b8a4d9ef5f4d8a0bb2e486244fc6eeda1bd37ed5c84c"
       },
       "age": "16+",
       "dressCode": "Elegant",
@@ -23835,8 +23903,8 @@
         "src": "/images/events/october-2026/238459-fc72c7aa06d3.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 197516,
-        "sha256": "95ae6a625b15b2d743246e1dc0c6e709a9d0e4066a4dd6fbe53b54be4e2464b1"
+        "bytes": 99228,
+        "sha256": "34e132d86cdfdaa8bb9a61fb2dcfd24f6756f15b5e9f80e09a82fd9484d64f13"
       },
       "age": "18+",
       "dressCode": "Smart casual",
@@ -23904,8 +23972,8 @@
         "src": "/images/events/october-2026/249067-e1a5b3ae8f30.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 157616,
-        "sha256": "0cabc3b32082dc23e3b5416310137a731ca6fc38360e17b3d58adba897273fbb"
+        "bytes": 54044,
+        "sha256": "d5dd79ab65da048e6aea518acbd367745c049a485acbb4c922c20d25a0275179"
       },
       "age": "16+",
       "dressCode": "Elegant",
@@ -23969,8 +24037,8 @@
         "src": "/images/events/october-2026/240992-c7dbbf664769.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 197516,
-        "sha256": "95ae6a625b15b2d743246e1dc0c6e709a9d0e4066a4dd6fbe53b54be4e2464b1"
+        "bytes": 87384,
+        "sha256": "5194ee882f3be20582d9eb069851c655c1dbc45acb18e45e29174ec76e1314c0"
       },
       "age": "18+",
       "dressCode": "Smart casual",
@@ -24237,8 +24305,8 @@
         "src": "/images/events/october-2026/248494-d2b09c6254f2.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 197516,
-        "sha256": "95ae6a625b15b2d743246e1dc0c6e709a9d0e4066a4dd6fbe53b54be4e2464b1"
+        "bytes": 62964,
+        "sha256": "ebee27b1a2fb203e2aa6e601997b4dca2d655dad79e2fc834c53632f3c30b40e"
       },
       "age": "18+",
       "dressCode": "Smart casual",
@@ -24412,8 +24480,8 @@
         "src": "/images/events/october-2026/248439-68f2dbbf4405.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 274874,
-        "sha256": "6735dc9f22f2206cf9c52b3fa539689e61dde4a7f354e4c06f414b78a906b26e"
+        "bytes": 127402,
+        "sha256": "ccf209c55cfcdad5b48f08705ae6988e7066d552ba0c7d77af951c065f8906b6"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -24487,6 +24555,114 @@
       "startTimeKnown": true,
       "commercialCheckedAt": "2026-11-11T11:14:08.000Z",
       "dressCodeDetail": "men-long-trousers"
+    },
+    {
+      "id": "250310",
+      "sourceUrl": "https://xceed.me/en/brescia/event/new-years-eve-42/250310",
+      "affiliateUrl": "https://xceed.me/en/brescia/event/new-years-eve-42/250310/channel/nightlifemilan-1",
+      "affiliateStatus": "verified",
+      "officialName": "Just Me in Rouge - New Year's Eve 2027",
+      "shortName": "Just Me in Rouge NYE",
+      "startISO": "2026-12-31T20:30:00+01:00",
+      "endISO": "2027-01-01T05:00:00+01:00",
+      "venue": {
+        "id": "v-justme-garda",
+        "name": "Justme Garda Lake",
+        "address": "Via Lavagnone, 13, 25017 Lonato del Garda, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Lavagnone, 13",
+          "addressLocality": "Lonato del Garda",
+          "addressCountry": "IT",
+          "postalCode": "25017"
+        },
+        "latitude": 45.4380124,
+        "longitude": 10.5246051
+      },
+      "image": {
+        "src": "/images/events/october-2026/250310-garda-nye-rouge.webp",
+        "width": 1376,
+        "height": 768,
+        "bytes": 158042,
+        "sha256": "9301f234708f4544f0bf379702b46dd31c24be032c6d3d780cc20f3d7cd493f0"
+      },
+      "age": "21+",
+      "dressCode": "Elegant",
+      "genres": [
+        "Commercial",
+        "House",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Early Bird Club Admission + 1 Drink",
+          "price": 20,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/brescia/event/new-years-eve-42/250310/channel/nightlifemilan-1",
+          "admissionFrom": "23:00"
+        },
+        {
+          "name": "Standing Royal Buffet + 1 Drink + Party",
+          "price": 70,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/brescia/event/new-years-eve-42/250310/channel/nightlifemilan-1",
+          "admissionFrom": "20:30"
+        },
+        {
+          "name": "Served Gala Dinner (Gran Cenone) + Live Show + Party",
+          "price": 130,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/brescia/event/new-years-eve-42/250310/channel/nightlifemilan-1",
+          "admissionFrom": "20:30"
+        },
+        {
+          "name": "Terrace VIP Table (8 passes)",
+          "price": 440,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/brescia/event/new-years-eve-42/250310/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Dance Floor VIP Table (8 passes)",
+          "price": 500,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/brescia/event/new-years-eve-42/250310/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Prive Ploom VIP Table (10 passes)",
+          "price": 700,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/brescia/event/new-years-eve-42/250310/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Stool Prive VIP Table (10 passes)",
+          "price": 800,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/brescia/event/new-years-eve-42/250310/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Prive Armand VIP Table (10 passes)",
+          "price": 900,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/brescia/event/new-years-eve-42/250310/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Super VIP Stage Table (12 passes)",
+          "price": 2000,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/brescia/event/new-years-eve-42/250310/channel/nightlifemilan-1"
+        }
+      ],
+      "provenance": "https://xceed.me/en/brescia/event/new-years-eve-42/250310 · checked 2026-11-12",
+      "halloween": false
     }
   ]
 }

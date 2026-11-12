@@ -23,11 +23,14 @@ type EventCoverHeroProps = {
 export default function EventCoverHero({ src, alt, imageTitle, title, titleNode, venue, date, dateTimeISO, genres, statusBadge, caption, width, height, eventId }: EventCoverHeroProps) {
   return (
     <figure className="border-y border-[#F6F1E7]/14 bg-[#050505]" data-event-cover-hero={eventId}>
-      <div className="relative flex min-h-[max(400px,60vh)] items-end overflow-hidden bg-[#050505] px-5 py-10 sm:px-8 sm:py-14">
-        <Image quality={92} src={src} alt={alt} title={imageTitle} width={width} height={height} priority fetchPriority="high" sizes="100vw"
-          className="absolute inset-0 h-full w-full object-contain" />
-        <div className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(to top, #050505e6, #05050580 55%, transparent)' }} aria-hidden="true" />
-        <div className="relative z-10 mx-auto w-full max-w-7xl">
+      <div className="border-b border-[#F6F1E7]/14 bg-[#050505]">
+        <div className="mx-auto max-w-6xl bg-[#050505]">
+          <Image quality={92} src={src} alt={alt} title={imageTitle} width={width} height={height} priority fetchPriority="high" sizes="100vw"
+            className="mx-auto block max-h-[620px] h-auto w-full object-contain" />
+        </div>
+      </div>
+      <div className="border-b border-[#F6F1E7]/14 bg-[#0B0A09] px-5 py-8 sm:px-8 sm:py-10">
+        <div className="mx-auto w-full max-w-7xl">
           <div className="mb-4 flex flex-wrap gap-2 text-xs font-bold uppercase tracking-wider">
             <span className="bg-[#F6F1E7] px-3 py-1 text-[#050505]">{venue}</span>
             {genres ? <span className="border border-[#F6F1E7]/30 bg-[#050505]/90 px-3 py-1 text-[#F6F1E7]">{genres}</span> : null}

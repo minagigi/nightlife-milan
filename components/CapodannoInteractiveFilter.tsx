@@ -407,20 +407,27 @@ export default function CapodannoInteractiveFilter({
                   className="flex flex-col justify-between overflow-hidden border border-[#F6F1E7]/14 bg-[#0B0A09] transition hover:border-[#F6F1E7]/45"
                 >
                   <div>
-                    <div className="relative h-52 w-full overflow-hidden">
-                      <Image quality={92}
+                    <Link
+                      href={detailHref}
+                      className="relative block aspect-[16/9] w-full overflow-hidden border-b border-[#F6F1E7]/14 bg-[#050505]"
+                      aria-label={title}
+                    >
+                      <Image
+                        quality={92}
                         src={event.image}
                         alt={title}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
-                        className="object-cover"
+                        className="object-contain"
                       />
-                      <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, #0B0A09, #0B0A0966 50%, transparent)' }} />
-                      <div className="absolute left-3 top-3 flex flex-wrap gap-2">
-                        <span className="border border-[#F6F1E7]/30 bg-[#050505]/90 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#F6F1E7]">
+                    </Link>
+
+                    <div className="p-5">
+                      <div className="mb-3 flex flex-wrap gap-2">
+                        <span className="border border-[#F6F1E7]/30 bg-[#050505] px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-[#F6F1E7]">
                           {event.city} ({event.province})
                         </span>
-                        <span className="bg-[#F6F1E7] px-3 py-1 text-xs font-bold text-[#050505]">
+                        <span className="bg-[#F6F1E7] px-2.5 py-1 text-[11px] font-bold text-[#050505]">
                           {event.priceFromEur === 0
                             ? isIt
                               ? 'INGRESSO GRATUITO'
@@ -429,21 +436,16 @@ export default function CapodannoInteractiveFilter({
                               ? `Da ${event.priceFromEur}€`
                               : `From €${event.priceFromEur}`}
                         </span>
-                        <span className="border border-[#F6F1E7]/50 bg-[#050505]/90 px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-[#F6F1E7]" data-selling-fast-badge>
+                        <span className="border border-[#F6F1E7]/50 bg-[#050505] px-2.5 py-1 text-[11px] font-extrabold uppercase tracking-wider text-[#F6F1E7]" data-selling-fast-badge>
                           {scarcity.sellingFastBadge}
                         </span>
                       </div>
-                      <div className="absolute bottom-3 left-3 right-3">
-                        <p className="text-xs font-medium text-[#EAE3D5]">{event.venueName}</p>
-                        <h3 className="mt-0.5 font-serif text-xl font-bold leading-snug text-[#F6F1E7]">
-                          <Link href={detailHref} className="hover:underline">
-                            {title}
-                          </Link>
-                        </h3>
-                      </div>
-                    </div>
-
-                    <div className="p-5">
+                      <p className="font-mono text-xs uppercase tracking-wider text-[#EAE3D5]">{event.venueName}</p>
+                      <h3 className="mt-1 mb-3 font-serif text-xl font-bold leading-snug text-[#F6F1E7]">
+                        <Link href={detailHref} className="hover:underline">
+                          {title}
+                        </Link>
+                      </h3>
                       <p className="text-xs text-[#C2B9AA]">
                         <strong className="text-[#F6F1E7]">{isIt ? 'Indirizzo:' : 'Address:'}</strong> {event.address} ·{' '}
                         <strong className="text-[#F6F1E7]">{isIt ? 'Orari:' : 'Hours:'}</strong> {event.hours}

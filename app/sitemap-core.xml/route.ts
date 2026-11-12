@@ -1,7 +1,7 @@
-import { buildCoreHubSitemapEntries, xmlSitemapResponse } from '@/lib/sitemapBuilder';
+import { buildCoreHubSitemapEntriesAsync, xmlSitemapResponse } from '@/lib/sitemapBuilder';
 
-export const dynamic = 'force-static';
+export const revalidate = 3600;
 
 export async function GET(): Promise<Response> {
-  return xmlSitemapResponse(buildCoreHubSitemapEntries());
+  return xmlSitemapResponse(await buildCoreHubSitemapEntriesAsync());
 }

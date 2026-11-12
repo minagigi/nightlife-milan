@@ -37,7 +37,7 @@ export enum VenueCategory {
   SPEAKEASY = 'SPEAKEASY',
 }
 
-// Localized Content Type — generalizzato a tutti i locali del registry
+// Localized Content Type - generalizzato a tutti i locali del registry
 // (lib/i18n/locales.ts). Retrocompatibile con gli oggetti {en, it} esistenti:
 // ogni lingua diversa da 'en' è opzionale, fallback a 'en' se mancante.
 export type LocalizedString = { en: string } & Partial<Record<Exclude<LocaleCode, 'en'>, string>>;
@@ -111,10 +111,11 @@ export interface Event {
   genre: MusicGenre[];
   dateISO: string; // ISO 8601 format (e.g., "2024-12-31T23:00:00+01:00")
   endDateISO?: string;
+  updatedAt?: string;
   pricing: {
     // null = nessun prezzo reale confermato (es. eventi Eventbrite: il ticket
     // pubblicato lì è sempre un RSVP gratuito di comodo, il pagamento reale
-    // avviene alla porta/via WhatsApp — non è mai il prezzo vero dell'evento).
+    // avviene alla porta/via WhatsApp - non è mai il prezzo vero dell'evento).
     // Non mostrare "Gratis" per null: nascondere il prezzo piuttosto che
     // inventarlo o affermare erroneamente che l'ingresso è gratuito.
     entry: number | null;

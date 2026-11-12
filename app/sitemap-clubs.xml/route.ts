@@ -1,7 +1,7 @@
-import { buildClubsSitemapEntries, xmlSitemapResponse } from '@/lib/sitemapBuilder';
+import { buildClubsSitemapEntriesAsync, xmlSitemapResponse } from '@/lib/sitemapBuilder';
 
-export const dynamic = 'force-static';
+export const revalidate = 3600;
 
 export async function GET(): Promise<Response> {
-  return xmlSitemapResponse(buildClubsSitemapEntries());
+  return xmlSitemapResponse(await buildClubsSitemapEntriesAsync());
 }

@@ -109,9 +109,9 @@
     },
     "voya": {
       "subtitle": "20th-floor rooftop: dinner and party above the clouds.",
-      "description": "A unique experience with a panoramic view of Milan. Dinner and party above the clouds, in the beating heart of the city.",
-      "insiderTip": "Book in advance to secure a table with the best skyline view.",
-      "location": "Milano (Skyline view)",
+      "description": "Panoramic 20th-floor sky lounge atop Torre WJC in Portello, overlooking the CityLife skyscrapers and Milan skyline.",
+      "insiderTip": "Book in advance to secure a front-row glass window table facing the skyline.",
+      "location": "Viale Achille Papa 30, Milan (Portello / CityLife)",
       "target": "28-45 years",
       "dressCode": "Elegant / Smart Casual",
       "music": "Lounge, Deep House, Commercial",
@@ -231,7 +231,7 @@
       "subtitle": "Italian 18+ aperitivo and club nights in Milan.",
       "description": "Aria Club Milano is designed for an Italian 18+ crowd looking for aperitivo followed by a high-energy club night. The programme focuses on current Italian and international hits, commercial music, EDM and dance. The venue offers guest-list entry and dance-floor, prive and super-prive tables. Prices, music format and opening times must always be checked on the individual dated event before booking.",
       "insiderTip": "Send the event date, group size and preferred table area on WhatsApp. After buying a ticket, send the purchase confirmation so the booking and payment can be checked.",
-      "location": "Via Ippodromo 115, Milan",
+      "location": "Piazzale dello Sport 14, Milan (San Siro)",
       "target": "Italian crowd, 18+",
       "dressCode": "Smart and fashionable, 18+",
       "music": "Italian hits, Commercial, EDM, Dance",
@@ -315,12 +315,12 @@
       ]
     },
     "repvblic": {
-      "subtitle": "Where industrial aesthetics meet avant-garde clubbing.",
-      "description": "Repvblic Milano is where industrial aesthetics meet avant-garde clubbing. Located in the city's creative district, the venue stands out for its constant sonic research: from the refined house music of Wednesdays to Thursday's urban vibes and Friday's special events. An electric atmosphere designed for an audience that lives for the music.",
-      "insiderTip": "Check their weekly schedule, as the music genre changes drastically depending on the night.",
-      "location": "Milano (Zona Lambrate / Est)",
-      "target": "25-40 years",
-      "dressCode": "Casual / Trendy",
+      "subtitle": "International boutique clubbing on Piazza della Repubblica.",
+      "description": "Repvblic Milano at Piazza della Repubblica 12 blends contemporary club design with curated sound: from iconic Dirty Monday nights to Wednesday house, Thursday urban formats, and weekend international guest DJs.",
+      "insiderTip": "Check the weekly calendar, as Dirty Monday and weekend nights draw a sharply dressed international crowd.",
+      "location": "Piazza della Repubblica 12, Milan",
+      "target": "23-40 years",
+      "dressCode": "Smart Elegant / Trendy",
       "music": "House, Urban, Hip-Hop",
       "events": [
         {
@@ -336,7 +336,7 @@
         {
           "day": "FRI",
           "title": "DIRTY MONDAY",
-          "description": "Friday special — Dirty Monday edition."
+          "description": "Friday special: Dirty Monday edition."
         }
       ]
     },

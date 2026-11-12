@@ -1,5 +1,13 @@
 import { NextResponse } from 'next/server';
-import { submitProductionSitemap } from '@/lib/googleIndexing';
+import {
+  revalidateAllSitemapRoutes,
+  submitAllProductionSitemaps,
+} from '@/lib/googleIndexing';
+import { pingIndexNowUrls } from '@/lib/indexNow';
+import {
+  buildAllSitemapEntriesAsync,
+  renderSitemapXml,
+} from '@/lib/sitemapBuilder';
 import {
   acquireSitemapWatchLease,
   extractSitemapUrls,
@@ -25,47 +33,94 @@ function authorized(request: Request): boolean {
   return cron || manual;
 }
 
-async function fetchLiveSitemap(): Promise<string> {
-  const response = await fetch(SITEMAP_URL, {
-    cache: 'no-store',
-    headers: { 'User-Agent': 'NightlifeMilan-Sitemap-Watcher/1.0' },
-  });
-  if (!response.ok) throw new Error(`Sitemap fetch failed (${response.status})`);
-  return response.text();
+async function buildFreshObservedSitemapXml(): Promise<string> {
+  const entries = await buildAllSitemapEntriesAsync();
+  return renderSitemapXml(entries, { compact: true });
 }
 
 export async function GET(request: Request) {
   if (!authorized(request)) {
     return NextResponse.json({ ok: false, error: 'Unauthorized' }, { status: 401 });
   }
-  if (!sitemapWatchStorageConfigured()) {
+
+  const { searchParams } = new URL(request.url);
+  const force = searchParams.get('force') === '1';
+  const revalidatedRoutes = revalidateAllSitemapRoutes();
+
+  if (!process.env.GOOGLE_INDEXING_CREDENTIALS) {
     return NextResponse.json(
-      { ok: false, error: 'Sitemap watcher storage is not configured' },
+      { ok: false, error: 'Google Search Console credentials are not configured', revalidatedRoutes },
       { status: 503 },
     );
   }
-  if (!process.env.GOOGLE_INDEXING_CREDENTIALS) {
-    return NextResponse.json(
-      { ok: false, error: 'Google Search Console credentials are not configured' },
-      { status: 503 },
-    );
+
+  if (!sitemapWatchStorageConfigured()) {
+    if (!force) {
+      return NextResponse.json(
+        { ok: false, error: 'Sitemap watcher storage is not configured', revalidatedRoutes },
+        { status: 503 },
+      );
+    }
+    try {
+      const checkedAt = new Date().toISOString();
+      const observedUrls = extractSitemapUrls(await buildFreshObservedSitemapXml(), BASE);
+      const submission = await submitAllProductionSitemaps(BASE);
+      const indexNow = await pingIndexNowUrls(observedUrls.slice(0, 500), BASE);
+      return NextResponse.json({
+        ok: submission.ok,
+        action: submission.ok ? 'submitted-stateless-force' : 'submission-failed',
+        checkedAt,
+        revalidatedRoutes,
+        observedUrlCount: observedUrls.length,
+        sitemaps: submission.feeds,
+        indexNow,
+      }, { status: submission.ok ? 200 : 502 });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      return NextResponse.json({ ok: false, error: message, revalidatedRoutes }, { status: 502 });
+    }
   }
 
   try {
     const checkedAt = new Date().toISOString();
+    let submittedFeeds: Awaited<ReturnType<typeof submitAllProductionSitemaps>>['feeds'] = [];
     const result = await runSitemapWatchCycle({
       acquire: acquireSitemapWatchLease,
-      observe: async () => extractSitemapUrls(await fetchLiveSitemap(), BASE),
-      read: readSitemapWatchState,
+      observe: async () => extractSitemapUrls(await buildFreshObservedSitemapXml(), BASE),
+      read: async () => {
+        const prev = await readSitemapWatchState();
+        if (force && prev) {
+          return { ...prev, submittedAt: undefined };
+        }
+        return prev;
+      },
       save: writeSitemapWatchState,
-      submit: () => submitProductionSitemap(SITEMAP_URL),
+      submit: async () => {
+        const batch = await submitAllProductionSitemaps(BASE);
+        submittedFeeds = batch.feeds;
+        return {
+          ok: batch.ok,
+          status: batch.status,
+          ...(batch.error ? { error: batch.error } : {}),
+        };
+      },
       sitemapUrl: SITEMAP_URL,
       now: () => checkedAt,
     });
 
+    const urlsForIndexNow = result.addedUrls.length > 0
+      ? result.addedUrls
+      : (force ? [BASE, `${BASE}/it`, `${BASE}/clubs`, `${BASE}/it/discoteche`] : []);
+    const indexNow = urlsForIndexNow.length > 0
+      ? await pingIndexNowUrls(urlsForIndexNow, BASE)
+      : { ok: true, submittedCount: 0, batches: 0, statuses: [] };
+
     return NextResponse.json({
       ...result,
       checkedAt,
+      revalidatedRoutes,
+      sitemaps: submittedFeeds,
+      indexNow,
       addedUrls: result.addedUrls.slice(0, 50),
       removedUrls: result.removedUrls.slice(0, 50),
       addedUrlCount: result.addedUrls.length,
@@ -74,6 +129,6 @@ export async function GET(request: Request) {
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     console.error('[sitemap-watch]', message);
-    return NextResponse.json({ ok: false, error: message }, { status: 502 });
+    return NextResponse.json({ ok: false, error: message, revalidatedRoutes }, { status: 502 });
   }
 }

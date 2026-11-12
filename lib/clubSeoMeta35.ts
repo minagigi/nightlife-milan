@@ -2,7 +2,7 @@ import type { LocaleCode } from './i18n/locales';
 import type { Venue } from './types';
 import { seoTitle, withWhatsApp } from './seoMetadata';
 
-interface ClubSerpPack {
+export interface ClubSerpPack {
   city: string;
   titlePricesVip: string;
   vipFrom: (eur: number) => string;
@@ -13,7 +13,7 @@ interface ClubSerpPack {
   whatsappCta: string;
 }
 
-const CLUB_SERP_35: Record<LocaleCode, ClubSerpPack> = {
+export const CLUB_SERP_35: Record<LocaleCode, ClubSerpPack> = {
   en: {
     city: 'Milan',
     titlePricesVip: 'VIP Tables, Prices & Guestlist 2026/2027',
@@ -383,7 +383,7 @@ const CONFIRMED_MIN_VIP_EUR: Readonly<Record<string, number>> = {
   'v-theclub': 250,
 };
 
-const FLAGSHIP_TITLES_EN_IT: Readonly<Record<string, { en: string; it: string }>> = {
+export const FLAGSHIP_TITLES_EN_IT: Readonly<Record<string, { en: string; it: string }>> = {
   'v-justme': {
     en: 'Just Me Milan: Open 7/7, VIP Tables from €320 & Prices',
     it: 'Just Me Milano: Aperto 7/7, Tavoli VIP da 320€ e Prezzi',
@@ -476,6 +476,46 @@ const FLAGSHIP_TITLES_EN_IT: Readonly<Record<string, { en: string; it: string }>
     en: 'Amnesia Milan: Tech-House & Techno Club, Tickets & Privé',
     it: 'Amnesia Milano: Club Tech-House e Techno, Biglietti e Privé',
   },
+  'v-bobino': {
+    en: 'Bobino Milan: Navigli Aperitivo Garden, DJ Sets & Tables',
+    it: 'Bobino Milano: Aperitivo Navigli, Giardino, DJ Set e Tavoli',
+  },
+  'v-dock22': {
+    en: 'Dock 22 Milan: Navigli Electronic Showcases & Event Guide',
+    it: 'Dock 22 Milano: Showcase Elettronici Navigli, Eventi e Tavoli',
+  },
+  'v-loolapaloosa': {
+    en: 'Loolapaloosa Milan: Corso Como Party Bar, Hours & Tables',
+    it: 'Loolapaloosa Milano: Party Bar Corso Como, Orari e Tavoli',
+  },
+  'v-super-club-milano': {
+    en: 'Super Club Milan: Via Tortona Void Sound, Events & Tables',
+    it: 'Super Club Milano: Club Via Tortona, Impianto Void ed Eventi',
+  },
+  'v-radio-rooftop-bar-milano': {
+    en: 'Radio Rooftop Bar Milan: 10th Floor Aperitivo & Skyline',
+    it: 'Radio Rooftop Bar Milano: 10° Piano Aperitivo e Skyline',
+  },
+  'v-the-roof-milano': {
+    en: 'The Roof Milan: Missori Panoramic Terrace, Dinner & Drinks',
+    it: 'The Roof Milano: Terrazza Missori Vista Duomo, Cena e Drink',
+  },
+  'v-terrazza-aperol-milano': {
+    en: 'Terrazza Aperol Milan: Duomo Balcony Spritz, Hours & Guide',
+    it: 'Terrazza Aperol Milano: Terrazza Vista Duomo, Orari e Guida',
+  },
+  'v-terrazza-gallia-milano': {
+    en: 'Terrazza Gallia Milan: 7th Floor Luxury Bar & Restaurant',
+    it: 'Terrazza Gallia Milano: 7° Piano Cocktail Bar e Ristorante',
+  },
+  'v-ristorante-torre-milano': {
+    en: 'Ristorante Torre Milan: Fondazione Prada Panoramic Dining',
+    it: 'Ristorante Torre Milano: Terrazza Fondazione Prada e Bar',
+  },
+  'v-innocenti-evasioni-terrazza-triennale': {
+    en: 'Terrazza Triennale Milan: Parco Sempione Rooftop & Dining',
+    it: 'Terrazza Triennale Milano: Ristorante Panoramico Sempione',
+  },
 };
 
 export function buildClubHighCtrTitle(venue: Venue, locale: string, localizedVenueName: string): string {
@@ -513,10 +553,10 @@ export function buildClubHighCtrDescription(
       return 'Just Me Milano (Torre Branca, Sempione): aperto 7/7 19:30-05:00. Aperitivo 20-35€, Tavoli VIP da 320€. Prenota su WhatsApp +39 351 912 7047.';
     }
     if (venue.id === 'v-aria') {
-      return 'Aria Club Milano (Piazzale dello Sport 16, a 150m da San Siro): dopo-partita, aperitivo e Tavoli VIP da 250€. WhatsApp +39 351 912 7047.';
+      return 'Aria Club Milano (Piazzale dello Sport 14, a 150m da San Siro): dopo-partita, aperitivo e Tavoli VIP da 250€. WhatsApp +39 351 912 7047.';
     }
     if (venue.id === 'v-voya') {
-      return 'Voya Rooftop Milano (20° piano, Via Achille Papa 30): aperitivo vista skyline e Tavoli VIP da 250€. Prenota su WhatsApp +39 351 912 7047.';
+      return 'Voya Rooftop Milano (20° piano, Viale Achille Papa 30): aperitivo vista skyline e Tavoli VIP da 250€. Prenota su WhatsApp +39 351 912 7047.';
     }
     if (minVip) {
       return withWhatsApp(`${localizedVenueName} (${street}, Milano): Tavoli VIP da ${minVip}€, prezzi bottiglie, dress code e lista.`, 'it', 158);

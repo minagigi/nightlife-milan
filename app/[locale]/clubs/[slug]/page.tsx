@@ -13,12 +13,20 @@ import { getDictionary } from '../../../../dictionaries/get-dictionary';
 import { CONTACT } from '@/config/contact';
 import { getVenueBySlug, mockVenues } from '@/lib/data';
 import { VenueCategory } from '@/lib/types';
-import { generateEventListSchema, getLocalizedText, jsonLdString } from '@/lib/seo';
+import { generateClubSchema, generateEventListSchema, getLocalizedText, jsonLdString } from '@/lib/seo';
 import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
 import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 import { VipQuoteCalculator, EntryFormulaMatrix, SanSiroMatchAfterpartyFinder } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import VenueEventsAutoCarousel from '@/components/VenueEventsAutoCarousel';
+import EventVenueMap from '@/components/EventVenueMap';
+import { getEventVenueCopy } from '@/lib/i18n/eventVenueCopy';
+import {
+  getVenueAuthoritySpec,
+  buildCityQualifiedVenueH1,
+  buildVenueAuthorityFaqs,
+  getRelatedNearbyVenues,
+} from '@/lib/venueAuthority33';
 import {
   getVenueUi35,
   getVenueTargetProfile,
@@ -1015,10 +1023,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const title = buildClubHighCtrTitle(venue, locale, name);
 
-  const keywords = venueKeywords[venue.id]?.[locale as 'en' | 'it']
+  const authoritySpec = getVenueAuthoritySpec(venue.id);
+  const baseKeywords = venueKeywords[venue.id]?.[locale as 'en' | 'it']
     ?? (locale === 'it'
       ? [`${name} milano`, 'prezzi tavoli', 'lista', 'vita notturna milano 2026']
       : [`${name} milan`, 'vip tables prices', 'guestlist', 'milan nightlife 2026']);
+  const keywords = Array.from(new Set([...baseKeywords, ...(authoritySpec?.alternateNames || [])]));
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const enSlug = venue.slugs.en;
@@ -1101,17 +1111,84 @@ export default async function ClubPage({ params }: Props) {
   
   const dictKey = dictKeyMap[venue.id];
   const c = dictKey ? (t as any)[dictKey] : null;
-  const editorial = clubContent[venue.id]?.[locale === 'it' ? 'it' : 'en'] || null;
+  const authoritySpec = getVenueAuthoritySpec(venue.id);
+  const name = getLocalizedText(venue.localizedContent.name, locale);
+  const cityQualifiedH1 = buildCityQualifiedVenueH1(venue, locale, name);
+  const description = getLocalizedText(venue.localizedContent.description, locale).replace(/[\u2014–]/g, ' - ');
+  const dressCode = (getLocalizedText(venue.localizedContent.dressCode, locale) || "Smart Casual").replace(/[\u2014–]/g, ' - ');
+  const insiderTip = (venue.localizedContent.insiderTip ? getLocalizedText(venue.localizedContent.insiderTip, locale) : '').replace(/[\u2014–]/g, ' - ');
+
+  const editorial: ClubEditorialData | null =
+    clubContent[venue.id]?.[locale === 'it' ? 'it' : 'en'] ||
+    (authoritySpec
+      ? locale === 'it'
+        ? {
+            tagline: `${authoritySpec.neighborhoodIt} · ${authoritySpec.signatureFactIt}`,
+            highlights: [
+              authoritySpec.signatureFactIt,
+              `Zone & spazi VIP: ${authoritySpec.vipZonesIt}`,
+              `Formule ingresso & aperitivo: ${authoritySpec.entryFormulaIt}`,
+              `Mobilita rapida: ${authoritySpec.metroIt}`,
+            ],
+            musicStyle: authoritySpec.soundIt,
+            crowdProfile: `${venue.ageRange || '20+'} · ${dressCode}`,
+            bestNights: authoritySpec.bestNightsIt,
+            nearestMetro: `${authoritySpec.metroIt} · ${authoritySpec.parkingIt}`,
+            pricingTable: [
+              {
+                zone: 'Ingresso / Aperitivo & Formule Serali',
+                price: authoritySpec.entryFormulaIt.split(' · ')[0] || authoritySpec.entryFormulaIt,
+                details: authoritySpec.entryFormulaIt,
+              },
+              {
+                zone: 'Tavoli VIP & Privé (100% Credito Bottiglie)',
+                price: authoritySpec.minSpendIt,
+                details: `${authoritySpec.vipZonesIt} · Ingresso prioritario salta-fila incluso`,
+              },
+            ],
+            insiderTips: [
+              `Pre-serata consigliato: ${authoritySpec.preClubIt}.`,
+              `Prenota tavolo VIP o richiedi disponibilita lista su WhatsApp al +39 351 912 7047 indicando data e numero di persone.`,
+            ],
+            faqs: [],
+          }
+        : {
+            tagline: `${authoritySpec.neighborhoodEn} · ${authoritySpec.signatureFactEn}`,
+            highlights: [
+              authoritySpec.signatureFactEn,
+              `VIP & lounge zones: ${authoritySpec.vipZonesEn}`,
+              `Entry & aperitivo formulas: ${authoritySpec.entryFormulaEn}`,
+              `Fast transit access: ${authoritySpec.metroEn}`,
+            ],
+            musicStyle: authoritySpec.soundEn,
+            crowdProfile: `${venue.ageRange || '20+'} · ${dressCode}`,
+            bestNights: authoritySpec.bestNightsEn,
+            nearestMetro: `${authoritySpec.metroEn} · ${authoritySpec.parkingEn}`,
+            pricingTable: [
+              {
+                zone: 'Entry / Aperitivo & Evening Access',
+                price: authoritySpec.entryFormulaEn.split(' · ')[0] || authoritySpec.entryFormulaEn,
+                details: authoritySpec.entryFormulaEn,
+              },
+              {
+                zone: 'VIP Tables & Privé (100% Bottle Credit)',
+                price: authoritySpec.minSpendEn,
+                details: `${authoritySpec.vipZonesEn} · Priority skip-the-line hostess entry included`,
+              },
+            ],
+            insiderTips: [
+              `Recommended warm-up: ${authoritySpec.preClubEn}.`,
+              `Confirm VIP table floorplans or guestlist availability via WhatsApp at +39 351 912 7047 with your date and group size.`,
+            ],
+            faqs: [],
+          }
+      : null);
 
   const isWhatsAppOnlyVenue = [
     'v-voya', 'v-11clubroom', 'v-church81', 'v-mibmilano', 
     'v-gattopardo', 'v-terrazza21', 'v-theclub', 'v-tocqueville', 'v-alcatraz', 'v-fabrique', 'v-amnesia'
   ].includes(venue.id);
 
-  const name = getLocalizedText(venue.localizedContent.name, locale);
-  const description = getLocalizedText(venue.localizedContent.description, locale).replace(/[—–]/g, ' - ');
-  const dressCode = (getLocalizedText(venue.localizedContent.dressCode, locale) || "Smart Casual").replace(/[—–]/g, ' - ');
-  const insiderTip = (venue.localizedContent.insiderTip ? getLocalizedText(venue.localizedContent.insiderTip, locale) : '').replace(/[—–]/g, ' - ');
   const image = venue.image || venue.gallery?.[0] || '/images/milan-nightclub-luxury-vip-champagne.webp';
   const enhancedGallery = getEnhancedVenueGallery(venue);
   const rawGallery = enhancedGallery.filter((g) => g !== image);
@@ -1165,39 +1242,31 @@ export default async function ClubPage({ params }: Props) {
     .sort((a, b) => new Date(b.dateISO).getTime() - new Date(a.dateISO).getTime());
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const currentVenueSlug = getLocalizedVenueSlug35(venue.id, (locale as LocaleCode) || 'en');
+  const currentVenueSlug = getLocalizedVenueSlug35(venue.slugs.en, (locale as LocaleCode) || 'en');
   const clubsDir = getLocalizedDir35('clubs', locale);
-  const toAbsoluteUrl = (src: string) => (src.startsWith('http') ? src : `${baseUrl}${src}`);
-  const jsonLd: any = {
-    "@context": "https://schema.org",
-    "@type": venue.id === 'v-55milano' ? ["NightClub", "Restaurant"] : venue.category === VenueCategory.CLUB ? "NightClub" : "LocalBusiness",
-    "name": name,
-    "image": gallery.length > 1 ? gallery.map(toAbsoluteUrl) : toAbsoluteUrl(image),
-    "description": description,
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": venue.address.streetAddress,
-      "addressLocality": "Milan",
-      "addressRegion": "MI",
-      "postalCode": venue.address.postalCode,
-      "addressCountry": "IT"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": venue.coordinates?.latitude || 45.4642,
-      "longitude": venue.coordinates?.longitude || 9.1900
-    },
-    "url": `${baseUrl}${localePrefix(locale)}/${clubsDir}/${currentVenueSlug}`,
-    "telephone": "+393519127047",
-    ...(venue.priceRange ? { "priceRange": venue.priceRange } : {}),
-    ...(venue.sameAs?.length ? { "sameAs": venue.sameAs } : {}),
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+39-351-912-7047",
-      "contactType": "reservations",
-      "availableLanguage": ["English", "Italian", "Spanish", "French", "German", "Portuguese"]
-    }
-  };
+  const canonicalClubUrl = `${baseUrl}${localePrefix(locale)}/${clubsDir}/${currentVenueSlug}`;
+  const hasMapUrl = venue.coordinates?.latitude
+    ? `https://www.google.com/maps/search/?api=1&query=${venue.coordinates.latitude},${venue.coordinates.longitude}`
+    : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${name} ${venue.address.streetAddress} Milano`)}`;
+  const embedMapUrl = venue.coordinates?.latitude
+    ? `https://www.google.com/maps?q=${venue.coordinates.latitude},${venue.coordinates.longitude}&output=embed`
+    : `https://www.google.com/maps?q=${encodeURIComponent(`${name} ${venue.address.streetAddress} Milano`)}&output=embed`;
+  const venueMapCopy = getEventVenueCopy((locale as LocaleCode) || 'en');
+  const nearbyVenues = getRelatedNearbyVenues(venue, mockVenues, 6);
+  const allVenueFaqs = buildVenueAuthorityFaqs(venue, locale, name, dressCode, editorial?.faqs);
+
+  const jsonLd = generateClubSchema({
+    venue,
+    locale,
+    canonicalUrl: canonicalClubUrl,
+    name: cityQualifiedH1,
+    description,
+    schemaType: authoritySpec?.schemaType,
+    alternateNames: authoritySpec?.alternateNames,
+    neighborhoodName: locale === 'it' ? authoritySpec?.neighborhoodIt : authoritySpec?.neighborhoodEn,
+    hasMapUrl,
+    openingHoursSpec: authoritySpec?.openingHoursSpec,
+  });
 
   const breadcrumbLd = {
     "@context": "https://schema.org",
@@ -1205,15 +1274,15 @@ export default async function ClubPage({ params }: Props) {
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": canonicalPageUrl(baseUrl, locale, '') },
       { "@type": "ListItem", "position": 2, "name": locale === 'it' ? "Club Milano" : "Milan Clubs", "item": canonicalPageUrl(baseUrl, locale, '/clubs') },
-      { "@type": "ListItem", "position": 3, "name": name, "item": `${baseUrl}${localePrefix(locale)}/${clubsDir}/${currentVenueSlug}` },
+      { "@type": "ListItem", "position": 3, "name": cityQualifiedH1, "item": `${baseUrl}${localePrefix(locale)}/${clubsDir}/${currentVenueSlug}` },
     ],
   };
 
-  const faqLd = editorial?.faqs?.length
+  const faqLd = allVenueFaqs.length
     ? {
         "@context": "https://schema.org",
         "@type": "FAQPage",
-        "mainEntity": editorial.faqs.map((faq) => ({
+        "mainEntity": allVenueFaqs.map((faq) => ({
           "@type": "Question",
           "name": faq.q,
           "acceptedAnswer": {
@@ -1277,11 +1346,11 @@ export default async function ClubPage({ params }: Props) {
                   {venue.category.replace(/_/g, ' ')}
                 </span>
               </div>
-              <h1 className="font-serif text-6xl md:text-8xl font-bold text-white tracking-tight mb-4 drop-shadow-lg">
-                {name}
+              <h1 className="font-serif text-5xl md:text-7xl font-bold text-white tracking-tight mb-4 drop-shadow-lg">
+                {cityQualifiedH1}
               </h1>
               <p className="text-xl md:text-2xl text-white/70 font-light tracking-wide">
-                {(editorial?.tagline || c?.subtitle || description.substring(0, 110) + '...').replace(/[—–]/g, ' - ')}
+                {(editorial?.tagline || c?.subtitle || description.substring(0, 110) + '...').replace(/[\u2014–]/g, ' - ')}
               </p>
             </div>
             
@@ -1303,13 +1372,13 @@ export default async function ClubPage({ params }: Props) {
       </section>
 
       {/* QuickInfoBar (4 Info Blocks) */}
-      <section className="border-y border-white/10 bg-[#050505]">
+      <section id="dress-code-hours" className="border-y border-white/10 bg-[#050505]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 divide-x divide-white/10">
             <div className="flex flex-col px-4 first:pl-0">
               <MapPin className="w-6 h-6 text-champagne mb-2" />
               <span className="text-xs text-white/40 uppercase tracking-wider mb-1">{t.labels.address}</span>
-              <span className="text-sm font-medium text-white/80">{c?.location || venue.address.streetAddress}</span>
+              <span className="text-sm font-medium text-white/80">{venue.address.streetAddress}</span>
               {venue.coordinates?.latitude && (
                 <a
                   href={`https://www.google.com/maps/search/?api=1&query=${venue.coordinates.latitude},${venue.coordinates.longitude}`}
@@ -1339,6 +1408,30 @@ export default async function ClubPage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      {/* Quick-Jump SEO Anchor Navigation (Sitelinks Trigger) */}
+      <nav
+        aria-label={tr(locale, 'Venue Sections', 'Sezioni Locale')}
+        className="border-b border-white/10 bg-[#0A0A0C]"
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center gap-2 sm:gap-3 text-xs font-mono uppercase tracking-wider">
+          <a href="#prices-tables" className="px-3 py-1.5 rounded-full border border-champagne/35 text-champagne hover:bg-champagne hover:text-black transition-colors">
+            {tr(locale, 'VIP Tables & Prices', 'Tavoli VIP & Prezzi')}
+          </a>
+          <a href="#dress-code-hours" className="px-3 py-1.5 rounded-full border border-white/15 text-white/80 hover:border-champagne hover:text-champagne transition-colors">
+            {tr(locale, 'Dress Code & Info', 'Dress Code & Info')}
+          </a>
+          <a href="#upcoming-events" className="px-3 py-1.5 rounded-full border border-white/15 text-white/80 hover:border-champagne hover:text-champagne transition-colors">
+            {tr(locale, 'Events Calendar', 'Calendario Eventi')}
+          </a>
+          <a href="#map-directions" className="px-3 py-1.5 rounded-full border border-white/15 text-white/80 hover:border-champagne hover:text-champagne transition-colors">
+            {tr(locale, 'Map & Metro', 'Mappa & Metro')}
+          </a>
+          <a href="#faq" className="px-3 py-1.5 rounded-full border border-white/15 text-white/80 hover:border-champagne hover:text-champagne transition-colors">
+            {tr(locale, 'FAQ', 'Domande Frequenti')}
+          </a>
+        </div>
+      </nav>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 lg:grid-cols-3 gap-16">
         
@@ -1420,7 +1513,7 @@ export default async function ClubPage({ params }: Props) {
               </div>
 
               {/* Editorial Pricing Table */}
-              <div>
+              <div id="prices-tables" className="scroll-mt-24">
                 <h3 className="text-xl font-serif font-bold text-white mb-4 flex items-center gap-2">
                   <CreditCard className="w-5 h-5 text-champagne" />
                   {locale === 'it'
@@ -1488,7 +1581,7 @@ export default async function ClubPage({ params }: Props) {
               </h2>
               <div className="space-y-3">
                 {futureVenueEvents.map((ev) => {
-                  const evTitle = getLocalizedText(ev.localizedContent.title, locale).replace(/[—–]/g, ' - ');
+                  const evTitle = getLocalizedText(ev.localizedContent.title, locale).replace(/[\u2014–]/g, ' - ');
                   const evSlug = getLocalizedText(ev.localizedContent.slug, locale);
                   const dateStr = new Intl.DateTimeFormat(locale, {
                     weekday: 'short', day: 'numeric', month: 'short', timeZone: 'Europe/Rome',
@@ -1523,7 +1616,7 @@ export default async function ClubPage({ params }: Props) {
               </h2>
               <div className="space-y-2">
                 {pastVenueEvents.slice(0, 12).map((ev) => {
-                  const evTitle = getLocalizedText(ev.localizedContent.title, locale).replace(/[—–]/g, ' - ');
+                  const evTitle = getLocalizedText(ev.localizedContent.title, locale).replace(/[\u2014–]/g, ' - ');
                   const evSlug = getLocalizedText(ev.localizedContent.slug, locale);
                   const dateStr = new Intl.DateTimeFormat(locale, {
                     day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Europe/Rome',
@@ -1662,17 +1755,42 @@ export default async function ClubPage({ params }: Props) {
                 </div>
               </div>
             </div>
+
+            <div id="map-directions" className="mt-8 scroll-mt-24">
+              <h3 className="font-serif text-xl font-bold text-white mb-2 flex items-center gap-2">
+                <MapPin className="w-5 h-5 text-champagne" />
+                {locale === 'it'
+                  ? `Mappa Interattiva & Indicazioni per ${name} (${venue.address.streetAddress})`
+                  : `Interactive Map & Directions to ${name} (${venue.address.streetAddress})`}
+              </h3>
+              {authoritySpec && (
+                <p className="text-sm text-white/65 mb-4">
+                  {locale === 'it'
+                    ? `${authoritySpec.metroIt} · ${authoritySpec.parkingIt}`
+                    : `${authoritySpec.metroEn} · ${authoritySpec.parkingEn}`}
+                </p>
+              )}
+              <EventVenueMap
+                id={`club-venue-map-${venue.id}`}
+                mapUrl={embedMapUrl}
+                labels={{
+                  loadMap: venueMapCopy.loadMap,
+                  mapTitle: venueMapCopy.mapTitle.replace('{venue}', name),
+                  privacyLoadNotice: venueMapCopy.privacyLoadNotice,
+                }}
+              />
+            </div>
           </section>
 
-          {/* Venue FAQs */}
-          {editorial?.faqs && editorial.faqs.length > 0 && (
-            <section className="space-y-4">
+          {/* Venue FAQs (All 33 Venues) */}
+          {allVenueFaqs.length > 0 && (
+            <section id="faq" className="space-y-4 scroll-mt-24">
               <h2 className="text-2xl font-serif font-bold text-white flex items-center gap-2.5">
                 <HelpCircle className="w-6 h-6 text-champagne" />
                 {locale === 'it' ? `Domande Frequenti su ${name}` : `Frequently Asked Questions About ${name}`}
               </h2>
               <div className="space-y-4">
-                {editorial.faqs.map((faq, idx) => (
+                {allVenueFaqs.map((faq, idx) => (
                   <div key={idx} className="p-5 rounded-xl border border-white/10 bg-white/[0.025]">
                     <h3 className="font-serif text-lg font-semibold text-champagne mb-2">{faq.q}</h3>
                     <p className="text-sm text-white/75 leading-relaxed">{faq.a}</p>
@@ -1788,7 +1906,7 @@ export default async function ClubPage({ params }: Props) {
           </div>
         </div>
       </div>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 space-y-12">
+      <div id="upcoming-events" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 space-y-12 scroll-mt-24">
         <VenueEventsAutoCarousel
           venueName={name}
           ui={venueUi}
@@ -1805,6 +1923,58 @@ export default async function ClubPage({ params }: Props) {
           <SanSiroMatchAfterpartyFinder locale={locale} />
         )}
         <VipQuoteCalculator locale={locale} initialVenueSlug={slug} />
+
+        {/* Haversine Nearby Clubs & Rooftops Internal-Link Mesh */}
+        {nearbyVenues.length > 0 && (
+          <section className="pt-8 border-t border-white/10">
+            <h2 className="text-2xl md:text-3xl font-serif font-bold text-white mb-2">
+              {locale === 'it'
+                ? `Altri Club e Rooftop Vicini a ${name} a Milano`
+                : `Nearby Clubs & Rooftops Close to ${name} in Milan`}
+            </h2>
+            <p className="text-sm text-white/60 mb-6">
+              {locale === 'it'
+                ? 'Esplora i locali più vicini calcolati in linea d’aria per combinare aperitivo panoramico, cena cantata e tavolo VIP.'
+                : 'Explore the closest verified Milan venues sorted by real distance to pair sunset aperitivo, dinner shows, and VIP clubbing.'}
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {nearbyVenues.map(({ venue: near, distanceLabel }) => {
+                const nearName = getLocalizedText(near.localizedContent.name, locale);
+                const nearSlug = getLocalizedVenueSlug35(near.id, (locale as LocaleCode) || 'en');
+                const nearSpec = getVenueAuthoritySpec(near.id);
+                const nearHref = `${lp}/${clubsDir}/${nearSlug}`;
+                return (
+                  <Link
+                    key={near.id}
+                    href={nearHref}
+                    prefetch={false}
+                    className="group p-5 rounded-xl border border-white/10 bg-white/[0.025] hover:border-champagne/50 transition-colors flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between gap-2 mb-2">
+                        <span className="text-[11px] font-mono uppercase tracking-wider text-champagne">
+                          {distanceLabel}
+                        </span>
+                        <span className="text-[11px] text-white/45 truncate">
+                          {locale === 'it' ? nearSpec?.neighborhoodIt : nearSpec?.neighborhoodEn}
+                        </span>
+                      </div>
+                      <h3 className="font-serif text-xl font-bold text-white group-hover:text-champagne transition-colors mb-1.5">
+                        {nearName} ↗
+                      </h3>
+                      <p className="text-xs text-white/65 mb-2">{near.address.streetAddress}</p>
+                      {nearSpec && (
+                        <p className="text-xs text-white/50 line-clamp-2">
+                          {locale === 'it' ? nearSpec.soundIt : nearSpec.soundEn}
+                        </p>
+                      )}
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
+        )}
       </div>
             <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/clubs/${slug}`} />
       </main>

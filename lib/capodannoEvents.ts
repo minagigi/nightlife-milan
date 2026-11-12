@@ -119,16 +119,16 @@ export const CAPODANNO_CATEGORY_PAGES: readonly CapodannoCategoryPageDef[] = [
     slug: 'capodanno-2027',
     path: '/events/capodanno-2027',
     group: 'hub',
-    badgeIt: 'Master Hub (112)',
-    badgeEn: 'Master Hub (112)',
-    shortLabelIt: 'Tutti i 112 Eventi',
-    shortLabelEn: 'All 112 Events',
-    titleIt: 'Capodanno 2027 Milano e Lombardia: Tutti i 112 Eventi, Locali, Discoteche, Rooftop, Cenoni, Speciali e Piazze',
-    titleEn: 'New Year’s Eve 2027 Milan & Lombardy: All 112 Club, Rooftop, Dinner Show, Special & Public Square Events',
+    badgeIt: 'Master Hub (113)',
+    badgeEn: 'Master Hub (113)',
+    shortLabelIt: 'Tutti i 113 Eventi',
+    shortLabelEn: 'All 113 Events',
+    titleIt: 'Capodanno 2027 Milano e Lombardia: Tutti i 113 Eventi, Locali, Discoteche, Rooftop, Cenoni, Speciali e Piazze',
+    titleEn: 'New Year’s Eve 2027 Milan & Lombardy: All 113 Club, Rooftop, Dinner Show, Special & Public Square Events',
     subtitleIt: 'Il catalogo completo con filtri interattivi per tipologia di locale, target (coppie, single, famiglie, over 30/40), genere musicale, quartiere e fascia di prezzo.',
     subtitleEn: 'The complete directory with interactive filters by venue type, target crowd (couples, singles, families, 30+ adults), music genre, district, and budget.',
-    quickAnswerIt: 'Usa i filtri interattivi o scegli una delle 16 pagine categoria dedicate per confrontare i 112 eventi di Capodanno 2027 tra Milano e Lombardia: Rooftop panoramici, Discoteche, Locali con Cenone Cantato, Hotel 5★ e Ville, Speakeasy, Terme e Baita in Motoslitta, oltre a selezioni su misura per Coppie, Single, Famiglie con bambini e Over 30/40.',
-    quickAnswerEn: 'Use our interactive filters or browse 16 dedicated category pages across 112 New Year’s Eve 2027 events in Milan and Lombardy: Panoramic Rooftops, Nightclubs, Singing Dinner Shows, 5★ Hotels & Villas, Speakeasies, Thermal Spas & Snowmobile Chalets, plus curated selections for Couples, Singles, Families, and 30+/40+ Adults.',
+    quickAnswerIt: 'Usa i filtri interattivi o scegli una delle 16 pagine categoria dedicate per confrontare i 113 eventi di Capodanno 2027 tra Milano, Lago di Garda e Lombardia: Rooftop panoramici, Discoteche (inclusi JustMe Milano e JustMe Garda Lake), Locali con Cenone Cantato, Hotel 5★ e Ville, Speakeasy, Terme e Baita in Motoslitta, oltre a selezioni su misura per Coppie, Single, Famiglie con bambini e Over 30/40.',
+    quickAnswerEn: 'Use our interactive filters or browse 16 dedicated category pages across 113 New Year’s Eve 2027 events in Milan, Lake Garda, and Lombardy: Panoramic Rooftops, Nightclubs (including JustMe Milan and JustMe Garda Lake), Singing Dinner Shows, 5★ Hotels & Villas, Speakeasies, Thermal Spas & Snowmobile Chalets, plus curated selections for Couples, Singles, Families, and 30+/40+ Adults.',
   },
   {
     slug: 'capodanno-rooftop-milano',
@@ -337,8 +337,8 @@ export const CAPODANNO_CATEGORY_PAGES: readonly CapodannoCategoryPageDef[] = [
     titleEn: 'Lombardy New Year’s Eve 2027 (All 12 Provinces): Bergamo, Brescia/Garda, Como, Monza, Varese, Pavia, Mantova, Livigno, Lecco, Cremona & Lodi',
     subtitleIt: 'Guida completa provincia per provincia a tutte le discoteche, ville, hotel, terme, piazze e baite delle 12 province lombarde.',
     subtitleEn: 'Complete province-by-province guide across all 12 provinces of Lombardy.',
-    quickAnswerIt: 'Copertura totale delle 12 province della Lombardia con i top club provinciali (Bolgia, Setai, Bobadilla, Sesto Senso, Coco Beach, Art Club, Number One, Made Club, Noir, Shed Club, Le Rotonde, Mascara, Stalet Livigno) più laghi, terme, ville e piazze.',
-    quickAnswerEn: 'Complete coverage across all 12 provinces of Lombardy featuring flagship provincial clubs, lakefront galas, thermal spas, Alpine chalets, and public squares.',
+    quickAnswerIt: 'Copertura totale delle 12 province della Lombardia con in testa JustMe Garda Lake (Lonato / Desenzano del Garda: Just Me in Rouge Dinner & Dance da 20€ dopocena, 70€ buffet, 130€ cenone servito, tavoli VIP 440–2.000€), più i top club provinciali (Bolgia, Setai, Bobadilla, Sesto Senso, Coco Beach, Art Club, Number One, Made Club, Noir, Shed Club, Le Rotonde, Mascara, Stalet Livigno), laghi, terme, ville e piazze.',
+    quickAnswerEn: 'Complete coverage across all 12 provinces of Lombardy led by JustMe Garda Lake (Lonato / Desenzano on Lake Garda: Just Me in Rouge Dinner & Dance from €20 ticket, €70 buffet, €130 Gala Dinner, €440–€2,000 VIP tables), plus flagship provincial clubs, lakefront galas, thermal spas, Alpine chalets, and public squares.',
   },
   {
     slug: 'capodanno-in-piazza',
@@ -364,8 +364,8 @@ export const CAPODANNO_HUB_ROUTES: Record<
   all: {
     path: '/events/capodanno-2027',
     slug: 'capodanno-2027',
-    labelIt: 'Tutti gli Eventi di Capodanno 2027 (112 Eventi)',
-    labelEn: 'All New Year’s Eve 2027 Events (112 Events)',
+    labelIt: 'Tutti gli Eventi di Capodanno 2027 (113 Eventi)',
+    labelEn: 'All New Year’s Eve 2027 Events (113 Events)',
     badgeIt: 'Guida Completa 31 Dicembre',
     badgeEn: 'Complete Dec 31 Guide',
   },
@@ -388,10 +388,10 @@ export const CAPODANNO_HUB_ROUTES: Record<
   lombardia: {
     path: '/events/capodanno-lombardia',
     slug: 'capodanno-lombardia',
-    labelIt: 'Tutta la Lombardia: Tutte le 12 Province, Laghi & Montagna (13)',
-    labelEn: 'All Lombardy: All 12 Provinces, Lakes & Alpine Resorts (13)',
-    badgeIt: '12 Province Lombarde',
-    badgeEn: '12 Lombardy Provinces',
+    labelIt: 'Tutta la Lombardia: Lago di Garda, 12 Province, Laghi & Montagna (14)',
+    labelEn: 'All Lombardy: Lake Garda, All 12 Provinces, Lakes & Alpine Resorts (14)',
+    badgeIt: '12 Province Lombarde + Garda',
+    badgeEn: '12 Lombardy Provinces + Garda',
   },
   piazza: {
     path: '/events/capodanno-in-piazza',
@@ -427,6 +427,33 @@ const SEEDS: any[] = [
     ],
     'Il Capodanno più iconico di Milano a tema Il Grande Gatsby nella cornice di cristallo progettata da Italo Rota ai piedi della Torre Branca in Parco Sempione. Dalle 19:30 / 20:00 Gran Cenone di Gala in stile ruggenti Anni ’20 con performer internazionali e spettacoli al tavolo; dalle 22:30 / 23:30 apertura del club con countdown monumentale e DJ set fino all’alba.',
     'Milan’s most iconic New Year’s Eve gala themed The Great Gatsby inside the crystal dome designed by Italo Rota at the foot of Torre Branca in Parco Sempione. Features a Roaring Twenties 5-course Gala Dinner Show from 19:30 / 20:00 and international House/Commercial clubbing until 05:30.'
+  ],
+  [
+    'capodanno-justme-garda-lake', 'lombardia', 'BS', 'Lonato del Garda / Desenzano (Lago di Garda)', 'JustMe Garda Lake',
+    'Via Lavagnone 13, 25017 Lonato del Garda (BS) - Lago di Garda', '20:30 – 05:00', '/images/events/capodanno-2027-posters/capodanno-justme-garda-lake.webp', 20,
+    'Ingresso + Drink 20€ · Buffet in Piedi 70€ · Gran Cenone Gala 130€ · Tavoli VIP 440–2.000€',
+    'Club Ticket + Drink €20 · Standing Buffet €70 · Gala Dinner €130 · VIP Tables €440–€2,000',
+    'Capodanno JustMe Lago di Garda 2027: Just Me in Rouge (Nuit du Nouvel An Dinner & Dance)',
+    'JustMe Lake Garda New Year’s Eve 2027: Just Me in Rouge (Nuit du Nouvel An Dinner & Dance)',
+    'Dinner Live, Dining & Singing Show, Spettacolo Rouge & Clubbing House / Commercial fino alle 05:00',
+    'Live Singing Gala Dinner, Rouge Cabaret Show & Luxury House / Commercial Clubbing until 05:00',
+    'Elegante / Tema Rouge Chic (pantalone lungo obbligatorio per l’uomo, selezione 21+)', 'Elegant / Rouge Chic Attire (long trousers mandatory for men, age 21+)',
+    [
+      ['Ticket Dopocena + 1 Drink (dalle 22:30)', '20€', 'Prevendita ufficiale salta-fila con 1 drink incluso e accesso al countdown e clubbing all night long'],
+      ['Buffet in Piedi di San Silvestro (dalle 20:30)', '70€', 'Royal buffet di gala dalle 20:30 con live show e accesso completo alla serata club'],
+      ['Gran Cenone Servito Gala Dinner (dalle 20:30)', '130€', 'Menu completo servito al tavolo con Dinner Live, Dining & Singing Show e serata inclusa'],
+      ['Tavolo VIP Terrazza / Pista (Terrace & Dancefloor)', '440€ – 500€', 'Tavolo riservato Terrace (440€) o Dance Floor (500€) con credito bottiglie e ingresso prioritario'],
+      ['Tavolo Privé Ploom / Stool / Privé Armand / Super VIP', '700€ – 2.000€', 'Postazioni esclusive Privé Ploom (700€), Stool (800€), Privé Armand (900€) e Super VIP Console (2.000€)']
+    ],
+    [
+      ['After-Dinner Ticket + 1 Drink (from 22:30)', '€20', 'Official skip-the-line pre-sale ticket including 1 drink, midnight countdown, and club access'],
+      ['Standing Gala Buffet (from 20:30)', '€70', 'New Year’s Eve standing buffet from 20:30 with live show entertainment and full club night'],
+      ['Served Gala Dinner Show (from 20:30)', '€130', 'Full multi-course Gala Dinner with Dinner Live, Dining & Singing Show, and full party access'],
+      ['Terrace / Dancefloor VIP Table', '€440 – €500', 'Reserved Terrace Table (€440) or Dance Floor Table (€500) with bottle credit and VIP fast-track'],
+      ['Privé Ploom / Stool / Privé Armand / Super VIP Table', '€700 – €2,000', 'Prime VIP booths: Privé Ploom (€700), Stool (€800), Privé Armand (€900), and Super VIP (€2,000)']
+    ],
+    'Il Capodanno ufficiale firmata Roberto Cavalli sul Lago di Garda: JustMe Garda Lake (Via Lavagnone 13, Lonato del Garda / Desenzano BS) presenta "Just Me in Rouge - Nuit du Nouvel An Dinner & Dance". Dalle 20:30 Gran Cenone Servito con Dinner Live, Dining & Singing Show (130€) o Buffet di Gala in piedi (70€); dalle 22:30 ingresso club con drink incluso (20€) e tavoli VIP da 440€ a 2.000€ fino alle 05:00. Prevendite ufficiali Xceed e tavoli via Concierge WhatsApp +39 351 912 7047.',
+    'Roberto Cavalli’s signature Lake Garda destination JustMe Garda Lake (Via Lavagnone 13, Lonato del Garda / Desenzano BS) presents "Just Me in Rouge - Nuit du Nouvel An Dinner & Dance" for New Year’s Eve 2027. Starts at 20:30 with a Live Singing Gala Dinner (€130) or Standing Gala Buffet (€70), followed from 22:30 by after-dinner club entry with 1 drink (€20) and VIP bottle tables from €440 to €2,000 until 05:00 AM. Official Xceed tickets and VIP reservations via WhatsApp Concierge +39 351 912 7047.'
   ],
   [
     'capodanno-armani-prive-milano', 'milano-club', 'MI', 'Milano', 'Armani/Privé Milano',
@@ -741,7 +768,7 @@ function classifyCapodannoSeed(
     venueType = 'locale-cenone';
   }
 
-  if (category === 'milano-club') {
+  if (category === 'milano-club' || slug === 'capodanno-justme-garda-lake') {
     subCategories.push('capodanno-discoteche-milano');
     subCategories.push('capodanno-locali-cenone-milano');
   }
@@ -793,6 +820,7 @@ function classifyCapodannoSeed(
 
 const PRIORITY_SLUGS = [
   'capodanno-justme-milano-torre-branca',
+  'capodanno-justme-garda-lake',
   'capodanno-voya-rooftop-milano',
   'capodanno-pineta-milano',
   'capodanno-aria-club-milano',
@@ -812,6 +840,7 @@ const PRIORITY_SLUGS = [
 
 export function getCapodannoPriorityRank(slug: string, mode?: string): number {
   if (mode === 'capodanno-rooftop-milano' && slug === 'capodanno-voya-rooftop-milano') return -1;
+  if ((mode === 'lombardia' || mode === 'capodanno-lombardia') && slug === 'capodanno-justme-garda-lake') return -1;
   const idx = PRIORITY_SLUGS.indexOf(slug);
   return idx === -1 ? 999 : idx;
 }
@@ -854,12 +883,9 @@ const UNSORTED_CAPODANNO_EVENTS: CapodannoEventItem[] = SEEDS.map((rawSeed: any[
     venueName,
     address,
     hours,
-    startISO: '2026-12-31T20:00:00+01:00',
-    endISO: '2027-01-01T05:30:00+01:00',
-    image:
-      slug === 'capodanno-justme-milano-torre-branca'
-        ? '/images/events/october-2026/248439-68f2dbbf4405.webp'
-        : `/images/events/capodanno-2027-posters/${slug}.webp`,
+    startISO: slug === 'capodanno-justme-garda-lake' ? '2026-12-31T20:30:00+01:00' : '2026-12-31T20:00:00+01:00',
+    endISO: slug === 'capodanno-justme-garda-lake' ? '2027-01-01T05:00:00+01:00' : '2027-01-01T05:30:00+01:00',
+    image: `/images/events/capodanno-2027-posters/${slug}.webp`,
     priceFromEur,
     priceSummaryIt,
     priceSummaryEn,
@@ -875,8 +901,14 @@ const UNSORTED_CAPODANNO_EVENTS: CapodannoEventItem[] = SEEDS.map((rawSeed: any[
     musicAndFormatEn,
     dressCodeIt,
     dressCodeEn,
-    sourceBasisIt: 'Prezzi passati: gli importi indicati riportano i listini della passata edizione; a fianco di ogni prezzo ricordiamo che potrebbero esserci cambiamenti di prezzo o aggiornamenti del tema della serata. Conferma disponibilità e listino aggiornato su WhatsApp +39 351 912 7047.',
-    sourceBasisEn: 'Past-edition prices: published amounts reflect the previous edition’s rates; please note right next to every price that there may be price changes or updates to the evening’s theme. Confirm live availability and updated rates via WhatsApp +39 351 912 7047.',
+    sourceBasisIt:
+      slug === 'capodanno-justme-milano-torre-branca' || slug === 'capodanno-justme-garda-lake'
+        ? 'Listino ufficiale verificato su Xceed (canale ufficiale nightlifemilan-1): prevendite, cenoni e tavoli VIP acquistabili direttamente online o tramite Concierge WhatsApp +39 351 912 7047.'
+        : 'Prezzi passati: gli importi indicati riportano i listini della passata edizione; a fianco di ogni prezzo ricordiamo che potrebbero esserci cambiamenti di prezzo o aggiornamenti del tema della serata. Conferma disponibilità e listino aggiornato su WhatsApp +39 351 912 7047.',
+    sourceBasisEn:
+      slug === 'capodanno-justme-milano-torre-branca' || slug === 'capodanno-justme-garda-lake'
+        ? 'Verified official Xceed rate card (official channel nightlifemilan-1): tickets, gala dinners, and VIP tables available online or via WhatsApp Concierge +39 351 912 7047.'
+        : 'Past-edition prices: published amounts reflect the previous edition’s rates; please note right next to every price that there may be price changes or updates to the evening’s theme. Confirm live availability and updated rates via WhatsApp +39 351 912 7047.',
     highlightsIt: [
       `Location: ${venueName} (${address})`,
       `Orari San Silvestro: ${hours}`,
@@ -892,7 +924,9 @@ const UNSORTED_CAPODANNO_EVENTS: CapodannoEventItem[] = SEEDS.map((rawSeed: any[
     xceedUrl:
       slug === 'capodanno-justme-milano-torre-branca'
         ? 'https://xceed.me/en/milano/event/gatsby-nye-2027/248439/channel/nightlifemilan-1'
-        : undefined,
+        : slug === 'capodanno-justme-garda-lake'
+          ? 'https://xceed.me/en/brescia/event/new-years-eve-42/250310/channel/nightlifemilan-1'
+          : undefined,
   };
 });
 

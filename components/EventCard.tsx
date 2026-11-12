@@ -14,10 +14,17 @@ interface EventCardProps {
   isTonight?: boolean;
 }
 
+function hasBakedContactStrip(src: string): boolean {
+  return (
+    src.startsWith('/images/events/october-2026/') ||
+    src.startsWith('/images/events/capodanno-2027-posters/') ||
+    src.startsWith('/images/events/weekly-posters/') ||
+    src.startsWith('/images/events/mock-posters/') ||
+    src.startsWith('/images/halloween')
+  );
+}
+
 export default function EventCard({ event, venue, lang, priority = false, isTonight = false }: EventCardProps) {
-  // Locale-aware su TUTTE le lingue (prima era forzato a solo en/it → gli eventi
-  // apparivano in inglese su /es, /fr, /de, ecc.). getLocalizedText ritorna il
-  // testo nella lingua selezionata con fallback automatico a 'en'.
   const lp = localePrefix(lang);
   const slug = getLocalizedText(event.localizedContent.slug, lang);
   const title = getLocalizedText(event.localizedContent.title, lang);
@@ -27,144 +34,133 @@ export default function EventCard({ event, venue, lang, priority = false, isToni
 
   const dateObj = new Date(event.dateISO);
   const timeStr = new Intl.DateTimeFormat(lang, {
-    hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Rome',
+    hour: '2-digit',
+    minute: '2-digit',
+    timeZone: 'Europe/Rome',
   }).format(dateObj);
   const dateStr = new Intl.DateTimeFormat(lang, {
-    weekday: 'short', day: 'numeric', month: 'short', timeZone: 'Europe/Rome',
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+    timeZone: 'Europe/Rome',
   }).format(dateObj);
 
   const isFree = event.pricing.entry === 0;
-  // entry === null: nessun prezzo reale confermato per questo evento (tipico
-  // per eventi importati da Eventbrite, dove il ticket pubblicato lì è solo
-  // un RSVP gratuito, non il prezzo reale) — niente badge piuttosto che un
-  // "Gratis" sbagliato.
   const formattedPrice = event.pricing.entry === null
     ? null
     : isFree
       ? tr(lang, 'FREE', 'GRATUITO')
       : new Intl.NumberFormat(lang, {
-          style: 'currency', currency: event.pricing.currency, maximumFractionDigits: 0,
+          style: 'currency',
+          currency: event.pricing.currency,
+          maximumFractionDigits: 0,
         }).format(event.pricing.entry);
 
   const genre = event.genre[0]?.replace(/_/g, ' ') ?? '';
   const href = `${lp}/events/${slug}`;
+  const imgSrc = event.image || venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp';
+  const showInlineContactBar = !hasBakedContactStrip(imgSrc);
 
   return (
-    <article className="group relative overflow-hidden rounded-lg cursor-pointer aspect-[3/4] img-maison
-      transition-all duration-500
-      border border-white/5
-      hover:border-champagne/30
-      hover:shadow-[0_0_0_1px_rgba(201,168,106,0.2),0_16px_48px_rgba(201,168,106,0.08)]">
-
-      {/* Full-card link */}
-      <Link href={href} className="absolute inset-0 z-20" aria-label={title}>
-        <span className="sr-only">{title}</span>
-      </Link>
-
-      {/* Image */}
-      <Image
-        src={event.image || venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp'}
-        alt={altText}
-        fill
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 60vw, 45vw"
-        priority={priority}
-        quality={92}
-        placeholder="blur"
-        blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiMxQzE4MTAiLz48L3N2Zz4="
-        className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
-        referrerPolicy="no-referrer"
-      />
-
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-black/5 z-10" />
-
-      {/* Gold shimmer top line on featured */}
+    <article
+      className="group relative flex h-full flex-col justify-between overflow-hidden rounded-lg border border-white/12 bg-[#0B0A09] transition-all duration-300 hover:border-champagne/45"
+      data-event-card={event.id}
+    >
       {venue.isFeatured && (
-        <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-champagne to-transparent z-20" />
+        <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-champagne to-transparent" />
       )}
 
-      {/* Genre badge top-left */}
-      <div className="absolute top-4 left-4 z-20">
-        <span className="font-sans text-[10px] font-semibold tracking-[0.2em] uppercase
-          bg-black/50 backdrop-blur-md border border-white/15
-          text-white/80 px-3 py-1.5 rounded-full">
-          {genre}
-        </span>
-      </div>
-
-      {/* Price badge top-right — nascosto se non c'è un prezzo reale confermato */}
-      {formattedPrice && (
-        <div className="absolute top-4 right-14 z-20">
-          <span className={`font-sans text-[10px] font-bold tracking-[0.15em] uppercase tabular-nums
-            px-2.5 py-1.5 rounded-full
-            ${isFree
-              ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-              : 'bg-champagne text-black'
-            }`}>
-            {formattedPrice}
-          </span>
-        </div>
-      )}
-
-      {/* Favorite */}
-      <div className="absolute top-4 right-4 z-20">
-        <FavoriteButton
-          item={{ id: event.id, type: 'event', title, image: event.image || venue.image || '', subtitle: dateStr, url: href }}
-        />
-      </div>
-
-      {/* Bottom content */}
-      <div className="absolute inset-x-0 bottom-0 z-20 p-5">
-
-        {/* Tonight tag — unico uso campari in questa sezione */}
-        {isTonight && (
-          <span className="flex items-center gap-1.5 text-[10px] font-sans font-semibold tracking-[0.2em] uppercase text-campari-hi mb-1.5">
-            <span className="live-dot inline-block w-1.5 h-1.5 rounded-full bg-campari" aria-hidden="true" />
-            {tr(lang, 'Tonight', 'Stasera')}
-          </span>
-        )}
-
-        {/* Time */}
-        <div className="flex items-center gap-2 mb-2">
-          <span className="font-sans text-champagne text-[11px] font-semibold tracking-[0.2em] uppercase tabular-nums">
-            {timeStr}
-          </span>
-          <span className="text-white/30 text-[10px]">·</span>
-          <span className="font-sans text-white/50 text-[11px] tracking-wider tabular-nums">{dateStr}</span>
-        </div>
-
-        {/* Title */}
-        <h3 className="font-serif text-xl font-semibold text-white leading-snug mb-1
-          group-hover:text-champagne transition-colors duration-300">
-          {title}
-        </h3>
-
-        {/* Venue name */}
-        <p className="font-sans text-white/50 text-[11px] tracking-[0.15em] uppercase mb-3">
-          {venueName}
-        </p>
-
-        {/* Trending badge — editorial curation, no fabricated attendance numbers */}
-        {event.isTrending && (
-          <div className="flex items-center gap-2 mb-3">
-            <span className="font-sans text-champagne text-[10px] font-bold tracking-[0.2em] uppercase">
-              {tr(lang, 'Trending', 'Di Tendenza')}
-            </span>
-          </div>
-        )}
-
-        {/* CTA — always visible on mobile, reveal on hover desktop.
-            Va alla pagina evento (NON più a #booking, che apriva a metà pagina). */}
-        <div className="overflow-hidden max-h-12 lg:max-h-0 lg:opacity-0 lg:translate-y-1 lg:group-hover:max-h-[60px] lg:group-hover:opacity-100 lg:group-hover:translate-y-0 transition-all duration-400 ease-out">
-          <Link
-            href={href}
-            className="block w-full text-center bg-champagne text-black
-              font-sans font-semibold text-xs py-3 tracking-[0.15em] uppercase
-              hover:bg-white active:scale-[0.98] transition-all duration-300 relative z-30 cursor-pointer rounded-lg"
-          >
-            {tr(lang, 'Book Now', 'Prenota Ora')}
+      <div>
+        <div className="relative border-b border-white/10 bg-[#050505]">
+          <Link href={href} className="relative block aspect-[16/9] w-full overflow-hidden bg-[#050505]" aria-label={title}>
+            <Image
+              src={imgSrc}
+              alt={altText}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw"
+              priority={priority}
+              quality={92}
+              placeholder="blur"
+              blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiMxQzE4MTAiLz48L3N2Zz4="
+              className="object-contain transition-opacity duration-300 group-hover:opacity-95"
+              referrerPolicy="no-referrer"
+            />
           </Link>
+          <div className="absolute right-3 top-3 z-20">
+            <FavoriteButton
+              item={{ id: event.id, type: 'event', title, image: imgSrc, subtitle: dateStr, url: href }}
+            />
+          </div>
+          {showInlineContactBar && (
+            <div className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-0.5 border-t border-champagne/45 bg-[#08080B] px-3 py-1.5 text-[10px] font-bold tracking-wider">
+              <span className="text-champagne">WWW.NIGHTLIFEMILAN.COM</span>
+              <span className="text-white/40">·</span>
+              <span className="inline-flex items-center gap-1 text-white">
+                <span className="inline-block h-2 w-2 rounded-full bg-[#25D366]" aria-hidden="true" />
+                +39 351 912 7047
+              </span>
+            </div>
+          )}
         </div>
+
+        <div className="p-5 pb-3">
+          <div className="mb-2.5 flex flex-wrap items-center gap-2">
+            {isTonight && (
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-campari/40 bg-campari/15 px-2.5 py-1 font-sans text-[10px] font-semibold uppercase tracking-[0.18em] text-campari-hi">
+                <span className="live-dot inline-block h-1.5 w-1.5 rounded-full bg-campari" aria-hidden="true" />
+                {tr(lang, 'Tonight', 'Stasera')}
+              </span>
+            )}
+            {genre && (
+              <span className="rounded-full border border-white/15 bg-[#050505] px-2.5 py-1 font-sans text-[10px] font-semibold uppercase tracking-[0.16em] text-white/80">
+                {genre}
+              </span>
+            )}
+            {formattedPrice && (
+              <span
+                className={`rounded-full px-2.5 py-1 font-sans text-[10px] font-bold uppercase tracking-[0.14em] tabular-nums ${
+                  isFree
+                    ? 'border border-emerald-500/30 bg-emerald-500/20 text-emerald-400'
+                    : 'bg-champagne text-black'
+                }`}
+              >
+                {formattedPrice}
+              </span>
+            )}
+            {event.isTrending && (
+              <span className="font-sans text-[10px] font-bold uppercase tracking-[0.16em] text-champagne">
+                {tr(lang, 'Trending', 'Di Tendenza')}
+              </span>
+            )}
+          </div>
+
+          <div className="mb-1.5 flex items-center gap-2">
+            <span className="font-sans text-[11px] font-semibold uppercase tracking-[0.18em] tabular-nums text-champagne">
+              {timeStr}
+            </span>
+            <span className="text-[10px] text-white/30">·</span>
+            <span className="font-sans text-[11px] tracking-wider tabular-nums text-white/60">{dateStr}</span>
+          </div>
+
+          <h3 className="mb-1 font-serif text-xl font-semibold leading-snug text-white transition-colors duration-300 group-hover:text-champagne">
+            <Link href={href} className="hover:underline">
+              {title}
+            </Link>
+          </h3>
+
+          <p className="font-sans text-[11px] uppercase tracking-[0.14em] text-white/60">
+            {venueName}
+          </p>
+        </div>
+      </div>
+
+      <div className="border-t border-white/10 p-5 pt-3.5">
+        <Link
+          href={href}
+          className="block w-full rounded-lg bg-champagne py-2.5 text-center font-sans text-xs font-semibold uppercase tracking-[0.15em] text-black transition-all duration-300 hover:bg-white"
+        >
+          {tr(lang, 'Book Now', 'Prenota Ora')}
+        </Link>
       </div>
     </article>
   );
