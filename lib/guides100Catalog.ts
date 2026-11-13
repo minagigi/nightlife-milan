@@ -2,6 +2,7 @@
 // Zero English residue on non-English routes. All 100 guides (g-15..g-114) + 14 existing guides = 114 total pillar guides.
 
 import type { LocaleCode } from './i18n/locales';
+import { getLocalizedGuideSeedNames } from './i18n/guideSeeds35Names';
 import { ALL_35_LOCALES, EXISTING_14_GUIDE_SLUGS_35, registerExtraGuideSlugs35 } from './i18n/localizedSlugs35';
 import { MusicGenre, type FAQ, type Guide, type GuideSection, type LocalizedString } from './types';
 
@@ -8589,6 +8590,146 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
       "bs": "vodic-da-varese-pavia-lodi-novara-a-milano-vip-stolovi",
       "mk": "vodic-da-varese-pavia-lodi-novara-a-milano-vip-masi"
     }
+  },
+  {
+    "id": "g-115",
+    "cluster": "geo",
+    "slugKey": "linate-m4-malpensa-airports-to-milan-clubs-vip",
+    "name": "Dagli Aeroporti di Linate (Metro M4) e Malpensa ai Club di Milano: Tempi, Bagagli e Tavoli VIP",
+    "shortName": "Aeroporti Linate & Malpensa",
+    "zone": "Aeroporto Linate (Metro M4 San Babila 12 min) & Malpensa Express (Cadorna / Centrale)",
+    "address": "Linate M4 -> San Babila 12 min | Malpensa Express -> Cadorna 37 min (10 min a piedi da Just Me)",
+    "hours": "20:00 Aperitivo / Dinner - 05:00 Clubbing",
+    "age": "21+ / 25+ International Business Travelers, Models & Weekend Fly-In VIPs",
+    "metro": "Metro M4 Blu Linate -> San Babila (12 min) -> M1 Cadorna / Porta Venezia; Malpensa Express -> Cadorna (5 min dal Just Me)",
+    "parking": "NCC Mercedes V-Class Chauffeur Pickup Terminal 1 & Linate Private Aviation (SEA Prime)",
+    "aperitivoPrice": "20€-30€ Royal Aperitivo / 45€-70€ Singing Dinner Show",
+    "listPrice": "15€-25€ Accredited Guestlist",
+    "pistaPrice": "250€-350€ (6-8 guests, 100% bottle credit)",
+    "privePrice": "500€-900€ (8-10 guests, Elevated VIP Privé)",
+    "consolePrice": "1.000€-2.500€+ (10-15 guests, Super Privé Stage)",
+    "image": "/images/pillars/concierge-hero.webp",
+    "inlineImages": [
+      "/images/pillars/concierge-01.webp",
+      "/images/pillars/concierge-02.webp",
+      "/images/pillars/concierge-03.webp",
+      "/images/pillars/concierge-05.webp"
+    ],
+    "relatedVenues": [
+      "just-me-milan",
+      "pineta-milano",
+      "aria-club-milan",
+      "55-milano",
+      "voya-rooftop-milan",
+      "armani-prive-milan"
+    ],
+    "slugs35": {
+      "en": "linate-m4-malpensa-airports-to-milan-clubs-vip-guide",
+      "it": "guida-aeroporti-linate-m4-malpensa-discoteche-milano-vip",
+      "es": "guia-aeropuertos-linate-m4-malpensa-clubes-milan-vip",
+      "fr": "guide-aeroports-linate-m4-malpensa-clubs-milan-vip",
+      "de": "guide-flughaefen-linate-m4-malpensa-mailand-vip-clubs",
+      "pt": "guia-aeroportos-linate-m4-malpensa-clubes-milao-vip",
+      "nl": "gids-luchthavens-linate-m4-malpensa-milaan-vip-clubs",
+      "ru": "gid-aeroporty-linate-m4-malpensa-kluby-milan-vip",
+      "tr": "rehber-linate-m4-malpensa-havalimanlari-milano-vip-kulup",
+      "zh": "zhinan-linate-m4-malpensa-jichang-milan-vip-yedians",
+      "ar": "dalil-matarat-linate-m4-malpensa-nawadi-milano-vip",
+      "bg": "gajd-letishta-linate-m4-malpensa-klubove-milano-vip",
+      "hr": "vodic-zracne-luke-linate-m4-malpensa-klubovi-milano-vip",
+      "cs": "pruvodce-letiste-linate-m4-malpensa-kluby-milan-vip",
+      "da": "guide-lufthavne-linate-m4-malpensa-klubber-milano-vip",
+      "et": "teejuht-lennujaamad-linate-m4-malpensa-klubid-milano-vip",
+      "fi": "opas-lentokentat-linate-m4-malpensa-klubit-milano-vip",
+      "el": "odigos-aerodromia-linate-m4-malpensa-klamp-milano-vip",
+      "hu": "utmutato-repuloterek-linate-m4-malpensa-klubok-milano-vip",
+      "ga": "treoir-aerfoirt-linate-m4-malpensa-clubanna-milano-vip",
+      "lv": "celvedis-lidostas-linate-m4-malpensa-klubi-milana-vip",
+      "lt": "gidas-oro-uostai-linate-m4-malpensa-klubai-milanas-vip",
+      "mt": "gwida-ajruporti-linate-m4-malpensa-klabbs-milan-vip",
+      "pl": "przewodnik-lotniska-linate-m4-malpensa-kluby-mediolan-vip",
+      "ro": "ghid-aeroporturi-linate-m4-malpensa-cluburi-milano-vip",
+      "sk": "sprievodca-letiska-linate-m4-malpensa-kluby-milano-vip",
+      "sl": "vodnik-letalisca-linate-m4-malpensa-klubi-milano-vip",
+      "sv": "guide-flygplatser-linate-m4-malpensa-klubbar-milano-vip",
+      "no": "guide-flyplasser-linate-m4-malpensa-klubber-milano-vip",
+      "is": "handbok-flugvellir-linate-m4-malpensa-klubbar-milano-vip",
+      "uk": "putivnyk-aeroporty-linate-m4-malpensa-kluby-milan-vip",
+      "sq": "udhezues-aeroportet-linate-m4-malpensa-klube-milano-vip",
+      "sr": "vodic-aerodromi-linate-m4-malpensa-klubovi-milano-vip",
+      "bs": "vodic-aerodromi-linate-m4-malpensa-klubovi-milano-vip",
+      "mk": "vodic-aerodromi-linate-m4-malpensa-klubovi-milano-vip"
+    }
+  },
+  {
+    "id": "g-116",
+    "cluster": "geo",
+    "slugKey": "milan-hinterland-rho-fiera-assago-forum-nightlife-vip",
+    "name": "Hinterland Milano, Rho Fiera (M1), Assago Forum (M2), Sesto, San Donato & Rozzano: Discoteche e Tavoli VIP",
+    "shortName": "Hinterland, Rho Fiera & Assago",
+    "zone": "Rho Fiera M1, Unipol Forum Assago M2, Sesto San Giovanni, San Donato, Cinisello & Rozzano",
+    "address": "Rho Fiera (M1 Rossa diretta 20 min) | Forum Assago (M2 Verde -> Navigli 12 min / Porta Genova)",
+    "hours": "20:00 Aperitivo / Dinner - 05:00 Clubbing",
+    "age": "21+ / 25+ Exhibitors, Concertgoers, Managers & Greater Milan VIPs",
+    "metro": "M1 Rho Fiera -> Cadorna / Pagano; M2 Assago Milanofiori Forum -> Porta Genova / Moscova; M3 San Donato",
+    "parking": "A4 Rho Fiera / Tangenziale Ovest Assago direct access + 24h guarded garages at San Siro & Portello",
+    "aperitivoPrice": "20€-28€ Royal Aperitivo / 40€-65€ Singing Dinner Show",
+    "listPrice": "15€-25€ Accredited Guestlist",
+    "pistaPrice": "250€-350€ (6-8 guests, 100% bottle credit)",
+    "privePrice": "500€-850€ (8-10 guests, Elevated VIP Privé)",
+    "consolePrice": "900€-2.200€+ (10-15 guests, Super Privé Stage)",
+    "image": "/images/pillars/zone-hero-13.webp",
+    "inlineImages": [
+      "/images/pillars/zone-inline-13-a.webp",
+      "/images/pillars/zone-inline-13-b.webp",
+      "/images/pillars/zone-inline-13-d.webp",
+      "/images/pillars/concert-afterparties-01.webp"
+    ],
+    "relatedVenues": [
+      "aria-club-milan",
+      "voya-rooftop-milan",
+      "just-me-milan",
+      "pineta-milano",
+      "55-milano",
+      "apollo-club-milan"
+    ],
+    "slugs35": {
+      "en": "milan-hinterland-rho-fiera-assago-forum-nightlife-vip-guide",
+      "it": "guida-hinterland-milano-rho-fiera-assago-forum-sesto-vip",
+      "es": "guia-hinterland-milan-rho-fiera-assago-forum-clubes-vip",
+      "fr": "guide-couronne-milan-rho-fiera-assago-forum-clubs-vip",
+      "de": "guide-umland-mailand-rho-fiera-assago-forum-vip-clubs",
+      "pt": "guia-regiao-milao-rho-fiera-assago-forum-clubes-vip",
+      "nl": "gids-regio-milaan-rho-fiera-assago-forum-vip-clubs",
+      "ru": "gid-prigorody-milan-rho-fiera-assago-forum-kluby-vip",
+      "tr": "rehber-milano-cevresi-rho-fiera-assago-forum-vip-kulup",
+      "zh": "zhinan-milan-zhoubian-rho-fiera-assago-forum-vip-yedians",
+      "ar": "dalil-dawahy-milano-rho-fiera-assago-forum-nawadi-vip",
+      "bg": "gajd-predgradiya-milano-rho-fiera-assago-forum-klubove-vip",
+      "hr": "vodic-okolica-milano-rho-fiera-assago-forum-klubovi-vip",
+      "cs": "pruvodce-okoli-milan-rho-fiera-assago-forum-kluby-vip",
+      "da": "guide-omegn-milano-rho-fiera-assago-forum-klubber-vip",
+      "et": "teejuht-lahivald-milano-rho-fiera-assago-forum-klubid-vip",
+      "fi": "opas-seutu-milano-rho-fiera-assago-forum-klubit-vip",
+      "el": "odigos-proastia-milano-rho-fiera-assago-forum-klamp-vip",
+      "hu": "utmutato-agglomeracio-milano-rho-fiera-assago-forum-vip",
+      "ga": "treoir-bruachbhailte-milano-rho-fiera-assago-forum-vip",
+      "lv": "celvedis-apkartne-milana-rho-fiera-assago-forum-klubi-vip",
+      "lt": "gidas-apylinkes-milanas-rho-fiera-assago-forum-klubai-vip",
+      "mt": "gwida-madwar-milan-rho-fiera-assago-forum-klabbs-vip",
+      "pl": "przewodnik-okolice-mediolan-rho-fiera-assago-forum-vip",
+      "ro": "ghid-imprejurimi-milano-rho-fiera-assago-forum-cluburi-vip",
+      "sk": "sprievodca-okolie-milano-rho-fiera-assago-forum-kluby-vip",
+      "sl": "vodnik-okolica-milano-rho-fiera-assago-forum-klubi-vip",
+      "sv": "guide-fororter-milano-rho-fiera-assago-forum-klubbar-vip",
+      "no": "guide-omegn-milano-rho-fiera-assago-forum-klubber-vip",
+      "is": "handbok-nagrenni-milano-rho-fiera-assago-forum-klubbar-vip",
+      "uk": "putivnyk-peredmistya-milan-rho-fiera-assago-forum-vip",
+      "sq": "udhezues-rrethinat-milano-rho-fiera-assago-forum-klube-vip",
+      "sr": "vodic-okolina-milano-rho-fiera-assago-forum-klubovi-vip",
+      "bs": "vodic-okolina-milano-rho-fiera-assago-forum-klubovi-vip",
+      "mk": "vodic-okolina-milano-rho-fiera-assago-forum-klubovi-vip"
+    }
   }
 ];
 
@@ -8615,26 +8756,30 @@ function localizeSeedField(raw: string, locale: LocaleCode): string {
 }
 
 function renderEnGuide(seed: GuideSeed100) {
-  const title = `${seed.name}: Complete 2026/2027 VIP Tables, Prices, Dress Code & Insider Guide`;
-  const excerpt = `Definitive 2026/2027 guide to ${seed.name} in ${seed.zone}, Milan (${seed.address}): official VIP table prices (${seed.pistaPrice}), Royal Aperitivo & Dinner Show (${seed.aperitivoPrice}), dress code, metro (${seed.metro}), 24h parking and zero-commission WhatsApp booking with Senior Concierge Nightlife Milan Concierge (+39 351 912 7047).`;
+  const locNames = getLocalizedGuideSeedNames(
+    { id: seed.id, category: seed.cluster, name: seed.name, shortName: seed.shortName, zone: seed.zone },
+    'en',
+  );
+  const title = `${locNames.name}: Complete 2026/2027 VIP Tables, Prices, Dress Code & Insider Guide`;
+  const excerpt = `Definitive 2026/2027 guide to ${locNames.name} in ${locNames.zone}, Milan (${seed.address}): official VIP table prices (${seed.pistaPrice}), Royal Aperitivo & Dinner Show (${seed.aperitivoPrice}), dress code, metro (${seed.metro}), 24h parking and zero-commission WhatsApp booking with Senior Concierge Nightlife Milan Concierge (+39 351 912 7047).`;
 
-  const s1 = `<p>Welcome to the official 2026/2027 insider pillar guide dedicated to <strong>${seed.name}</strong> in <strong>${seed.zone}</strong>, Milan, curated directly by <strong>Nightlife Milan Concierge</strong>, Senior Nightlife Concierge at <em>Nightlife Milan</em> (<a href="https://wa.me/393519127047" target="_blank" rel="noopener noreferrer">WhatsApp +39 351 912 7047</a> and <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a>). Whether you are organizing an elevated VIP bottle service table, a Royal Aperitivo, a Singing Dinner Show, a university graduation party, a birthday celebration, a pre-authorized all-male stag night, a post-match celebration after San Siro, or a corporate hospitality night during Milan Fashion Week or Salone del Mobile, this comprehensive reference gives you verified 2026/2027 floor maps, transparent minimum spend tables, door selection rules, and step-by-step metro and parking logistics.</p>
-<p>Located at <strong>${seed.address}</strong> in the heart of <strong>${seed.zone}</strong>, <strong>${seed.shortName}</strong> stands out as one of the cornerstones of the Milanese evening and late-night ecosystem. Operating on schedule <strong>${seed.hours}</strong> with an age policy of <strong>${seed.age}</strong>, the venue brings together models, fashion executives, Serie A footballers, international entrepreneurs, and university graduates in a setting engineered for high-energy socializing from 19:30 aperitivo through 05:00 clubbing.</p>
+  const s1 = `<p>Welcome to the official 2026/2027 insider pillar guide dedicated to <strong>${locNames.name}</strong> in <strong>${locNames.zone}</strong>, Milan, curated directly by <strong>Nightlife Milan Concierge</strong>, Senior Nightlife Concierge at <em>Nightlife Milan</em> (<a href="https://wa.me/393519127047" target="_blank" rel="noopener noreferrer">WhatsApp +39 351 912 7047</a> and <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a>). Whether you are organizing an elevated VIP bottle service table, a Royal Aperitivo, a Singing Dinner Show, a university graduation party, a birthday celebration, a pre-authorized all-male stag night, a post-match celebration after San Siro, or a corporate hospitality night during Milan Fashion Week or Salone del Mobile, this comprehensive reference gives you verified 2026/2027 floor maps, transparent minimum spend tables, door selection rules, and step-by-step metro and parking logistics.</p>
+<p>Located at <strong>${seed.address}</strong> in the heart of <strong>${locNames.zone}</strong>, <strong>${locNames.shortName}</strong> stands out as one of the cornerstones of the Milanese evening and late-night ecosystem. Operating on schedule <strong>${seed.hours}</strong> with an age policy of <strong>${seed.age}</strong>, the venue brings together models, fashion executives, Serie A footballers, international entrepreneurs, and university graduates in a setting engineered for high-energy socializing from 19:30 aperitivo through 05:00 clubbing.</p>
 <div class="overflow-x-auto my-6"><table class="min-w-full border border-white/15 text-sm">
 <thead><tr class="bg-white/10 text-left"><th class="p-3">Venue / Experience</th><th class="p-3">Official 2026/2027 Specification</th></tr></thead>
 <tbody>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">Official Name</td><td class="p-3">${seed.name}</td></tr>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">District / Zone</td><td class="p-3">${seed.zone}, Milan</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">Official Name</td><td class="p-3">${locNames.name}</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">District / Zone</td><td class="p-3">${locNames.zone}, Milan</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">Address</td><td class="p-3">${seed.address}</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">Opening Hours</td><td class="p-3">${seed.hours}</td></tr>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">Target Age & Crowd</td><td class="p-3">${seed.age} — Models, designers, footballers, graduates & international VIPs</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">Target Age & Crowd</td><td class="p-3">${seed.age} - Models, designers, footballers, graduates & international VIPs</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">Metro & Night Transit</td><td class="p-3">${seed.metro}</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">24/7 Guarded Parking</td><td class="p-3">${seed.parking}</td></tr>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">Official VIP Concierge</td><td class="p-3">Nightlife Milan Concierge — WhatsApp <a href="https://wa.me/393519127047">+39 351 912 7047</a> / <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a> (Zero Agency Fee)</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">Official VIP Concierge</td><td class="p-3">Nightlife Milan Concierge - WhatsApp <a href="https://wa.me/393519127047">+39 351 912 7047</a> / <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a> (Zero Agency Fee)</td></tr>
 </tbody></table></div>
-<p>What makes <strong>${seed.shortName}</strong> uniquely effective in Milan is its multi-phase evening architecture. Phase 1 begins at 19:30–20:30 with the Milanese Royal Aperitivo or Seated Singing Dinner Show, where guests enjoy gourmet Mediterranean and international dishes, signature mixology, and live vocal performers without having to change venue later in the night. Phase 2 transitions at 23:00–23:30 as the lights dim, the sound system shifts to full club power, and the VIP hostess team opens the dedicated bottle service corridor. Phase 3 peaks between 01:00 and 03:30 with Magnum Champagne parades, LED name boards, and resident + international guest DJs spinning Vocal House, Afro-House, Hip-Hop, Reggaeton, and Commercial hits until 05:00 AM.</p>`;
+<p>What makes <strong>${locNames.shortName}</strong> uniquely effective in Milan is its multi-phase evening architecture. Phase 1 begins at 19:30–20:30 with the Milanese Royal Aperitivo or Seated Singing Dinner Show, where guests enjoy gourmet Mediterranean and international dishes, signature mixology, and live vocal performers without having to change venue later in the night. Phase 2 transitions at 23:00–23:30 as the lights dim, the sound system shifts to full club power, and the VIP hostess team opens the dedicated bottle service corridor. Phase 3 peaks between 01:00 and 03:30 with Magnum Champagne parades, LED name boards, and resident + international guest DJs spinning Vocal House, Afro-House, Hip-Hop, Reggaeton, and Commercial hits until 05:00 AM.</p>`;
 
-  const s2 = `<p>Transparency on pricing is the #1 rule of our concierge desk. In every top Milan nightclub, VIP tables operate on the <strong>100% Minimum Spend</strong> principle: you do not pay an empty table rental fee—the entire amount of your table reservation is converted 100% into premium bottles of Vodka (Belvedere, Grey Goose), Gin (Hendrick's, Monkey 47), Tequila (Don Julio 1942, Clase Azul Reposado), Rum (Zacapa XO), or Champagne (Moët & Chandon, Veuve Clicquot, Ruinart Blanc de Blancs, Dom Pérignon Vintage, Louis Roederer Cristal, Armand de Brignac Ace of Spades) chosen directly from the club's official menu and paid at the venue's VIP cashier upon arrival.</p>
+  const s2 = `<p>Transparency on pricing is the #1 rule of our concierge desk. In every top Milan nightclub, VIP tables operate on the <strong>100% Minimum Spend</strong> principle: you do not pay an empty table rental fee: the entire amount of your table reservation is converted 100% into premium bottles of Vodka (Belvedere, Grey Goose), Gin (Hendrick's, Monkey 47), Tequila (Don Julio 1942, Clase Azul Reposado), Rum (Zacapa XO), or Champagne (Moët & Chandon, Veuve Clicquot, Ruinart Blanc de Blancs, Dom Pérignon Vintage, Louis Roederer Cristal, Armand de Brignac Ace of Spades) chosen directly from the club's official menu and paid at the venue's VIP cashier upon arrival.</p>
 <div class="overflow-x-auto my-6"><table class="min-w-full border border-white/15 text-sm">
 <thead><tr class="bg-white/10 text-left"><th class="p-3">Booking Formula</th><th class="p-3">2026/2027 Official Price</th><th class="p-3">What Is Included</th><th class="p-3">Recommended Arrival</th></tr></thead>
 <tbody>
@@ -8646,15 +8791,15 @@ function renderEnGuide(seed: GuideSeed100) {
 </tbody></table></div>
 <p><strong>Bottle Menu Reference Prices (2026/2027 Season):</strong> Standard 0.70L premium spirits (Belvedere, Grey Goose, Bombay Sapphire, Hendrick's, Patrón Silver) range from <strong>180€ to 250€</strong> per bottle; 1.75L Magnum Vodka bottles range from <strong>450€ to 600€</strong>; 3L Jeroboam bottles start at <strong>950€–1.300€</strong>; Non-Vintage Champagne (Moët & Chandon, Veuve Clicquot) starts at <strong>200€–250€</strong>; Ruinart Blanc de Blancs and Rosé range from <strong>320€ to 380€</strong>; Dom Pérignon Vintage is <strong>550€–700€</strong>; Cristal and Armand de Brignac range from <strong>850€ to 1.500€+</strong>; Don Julio 1942 and Clase Azul Reposado range from <strong>450€ to 850€</strong>. Contact Nightlife Milan Concierge on WhatsApp at <strong>+39 351 912 7047</strong> to receive the PDF bottle list and high-resolution floor plan in under 10 minutes.</p>`;
 
-  const s3 = `<p>Door selection (<em>selezione all'ingresso</em>) in Milan is famously strict, and understanding how the door directors evaluate groups is essential to guarantee a smooth night at <strong>${seed.shortName}</strong>. Below are the exact rules enforced for the 2026/2027 season:</p>
+  const s3 = `<p>Door selection (<em>selezione all'ingresso</em>) in Milan is famously strict, and understanding how the door directors evaluate groups is essential to guarantee a smooth night at <strong>${locNames.shortName}</strong>. Below are the exact rules enforced for the 2026/2027 season:</p>
 <ul>
 <li><strong>Mandatory Dress Code for Men:</strong> A collared shirt (white, black, or tailored pattern), blazer or structured jacket, dark tailored trousers or clean dark designer denim without rips, and leather loafers, Chelsea boots, or pristine luxury low-top leather shoes. <strong>Strictly forbidden:</strong> running or gym sneakers (Nike Air Max, TN, Jordan, New Balance running), tracksuits, hoodies, baseball caps, Crossbody pouches/marsupi, chains over t-shirts, shorts, and football jerseys (even after a Serie A or Champions League match at San Siro).</li>
 <li><strong>Mandatory Dress Code for Women:</strong> Cocktail dress, silk slip dress, tailored evening jumpsuit, or chic blazer-and-trouser ensemble paired with heels, heeled boots, or elegant evening flats.</li>
-<li><strong>The Golden Rule for All-Male Groups (Stag Parties, Friends, Corporate Teams, Football Fans):</strong> In Milan, groups composed exclusively of men or with a heavy male majority (e.g., 5–10 men and 0 women) are systematically turned away on the standard guestlist queue on Friday and Saturday nights. However, by booking a <strong>pre-authorized VIP Table through Nightlife Milan Concierge (+39 351 912 7047)</strong>, your group is registered directly on the VIP Door Director's tablet with guaranteed 100% entry via the dedicated VIP lane—provided every guest respects the dress code and arrives sober.</li>
+<li><strong>The Golden Rule for All-Male Groups (Stag Parties, Friends, Corporate Teams, Football Fans):</strong> In Milan, groups composed exclusively of men or with a heavy male majority (e.g., 5–10 men and 0 women) are systematically turned away on the standard guestlist queue on Friday and Saturday nights. However, by booking a <strong>pre-authorized VIP Table through Nightlife Milan Concierge (+39 351 912 7047)</strong>, your group is registered directly on the VIP Door Director's tablet with guaranteed 100% entry via the dedicated VIP lane, provided every guest respects the dress code and arrives sober.</li>
 <li><strong>Physical ID Document Required:</strong> Italian law requires a physical Passport, National ID Card, or Driving License at the entrance (${seed.age}). Photos of documents on smartphones are not accepted by security.</li>
 </ul>`;
 
-  const s4 = `<p>Reaching <strong>${seed.name}</strong> at <strong>${seed.address}</strong> (${seed.zone}) and returning safely at the end of the night is straightforward thanks to Milan's ATM metro network, night bus lines, and 24-hour guarded garages:</p>
+  const s4 = `<p>Reaching <strong>${locNames.name}</strong> at <strong>${seed.address}</strong> (${locNames.zone}) and returning safely at the end of the night is straightforward thanks to Milan's ATM metro network, night bus lines, and 24-hour guarded garages:</p>
 <ul>
 <li><strong>By Metro & Night Bus:</strong> ${seed.metro}. On Friday and Saturday nights, after the metro closes around 00:30–01:00, ATM operates the substitute Night Bus lines <strong>NM1, NM2, NM3, and NM4</strong> every 15–20 minutes along the exact metro routes all night long.</li>
 <li><strong>By Car & 24/7 Guarded Parking:</strong> ${seed.parking}. Remember that Milan's central Area C congestion charge is inactive on weekday evenings after 19:30 and all day Saturday and Sunday, and Corso Sempione / Portello / San Siro / Via Messina lie outside ZTL camera traps.</li>
@@ -8662,7 +8807,7 @@ function renderEnGuide(seed: GuideSeed100) {
 </ul>
 <p><strong>Recommended Minute-by-Minute Timeline:</strong> <strong>19:30–20:30</strong> Arrival for Royal Aperitivo or Seated Singing Dinner; <strong>22:45–23:30</strong> Pre-club transition & guestlist window opens; <strong>23:45–00:30</strong> Optimal arrival window for VIP Table guests via the zero-queue hostess lane; <strong>01:15–03:00</strong> Peak main-room show, Magnum bottle parades & international DJ set; <strong>04:30–05:00</strong> Closing tracks, taxi rank & Mercedes V-Class chauffeur pickup.</p>`;
 
-  const s5 = `<p>Booking through <strong>Nightlife Milan Concierge</strong> (<a href="https://wa.me/393519127047" target="_blank" rel="noopener noreferrer">WhatsApp +39 351 912 7047</a> | <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a>) costs <strong>0€ in agency fees</strong>—you pay the exact official club price directly at the venue cashier while unlocking 10 complimentary VIP concierge privileges:</p>
+  const s5 = `<p>Booking through <strong>Nightlife Milan Concierge</strong> (<a href="https://wa.me/393519127047" target="_blank" rel="noopener noreferrer">WhatsApp +39 351 912 7047</a> | <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a>) costs <strong>0€ in agency fees</strong>: you pay the exact official club price directly at the venue cashier while unlocking 10 complimentary VIP concierge privileges:</p>
 <ol>
 <li><strong>High-Resolution VIP Floor Plans:</strong> Receive the updated 2026/2027 map showing exact table numbers on the Dancefloor, Elevated Privé, and DJ Console before you choose.</li>
 <li><strong>Official Bottle Lists & Price Lock:</strong> Full PDF bottle list with zero hidden markups.</li>
@@ -8678,34 +8823,34 @@ function renderEnGuide(seed: GuideSeed100) {
 <div class="overflow-x-auto my-6"><table class="min-w-full border border-white/15 text-sm">
 <thead><tr class="bg-white/10 text-left"><th class="p-3">Priority Rank</th><th class="p-3">Club Name & Zone</th><th class="p-3">Signature Strength</th><th class="p-3">VIP Table Starting Price</th></tr></thead>
 <tbody>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">#1 Priority</td><td class="p-3">Just Me Milano (Parco Sempione — Torre Branca)</td><td class="p-3">Open 7/7 Mon–Sun, Italo Rota luxury club & garden</td><td class="p-3">320€ Pista / 600€+ Privé</td></tr>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">#2 Priority</td><td class="p-3">Pineta Milano (Via Messina 38 — Corso Como)</td><td class="p-3">Crystal chandeliers, Singing Dinner Show & luxury Privé</td><td class="p-3">320€ Pista / 600€+ Privé</td></tr>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">#3 Priority</td><td class="p-3">Aria Club Milano (Piazzale dello Sport 14 — San Siro)</td><td class="p-3">150m from San Siro Stadium, huge summer garden & indoor arena</td><td class="p-3">250€ Pista / 500€+ Privé</td></tr>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">#4 Priority</td><td class="p-3">55 Milano (Via Piero della Francesca 55 — Sempione)</td><td class="p-3">1,000m² loft & terrace, #1 for graduations, birthdays & aperitivo</td><td class="p-3">200€ Pista / 350€+ Privé</td></tr>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">#5 Priority</td><td class="p-3">Voya Rooftop Milano (Via Achille Papa 30 — Portello M5)</td><td class="p-3">20th-floor 360° panoramic sky club, 3 M5 stops from San Siro</td><td class="p-3">300€ Pista / 500€+ Privé</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">#1 Priority</td><td class="p-3">Just Me Milano (Parco Sempione - Torre Branca)</td><td class="p-3">Open 7/7 Mon-Sun, Italo Rota luxury club & garden</td><td class="p-3">320€ Pista / 600€+ Privé</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">#2 Priority</td><td class="p-3">Pineta Milano (Via Messina 38 - Corso Como)</td><td class="p-3">Crystal chandeliers, Singing Dinner Show & luxury Privé</td><td class="p-3">320€ Pista / 600€+ Privé</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">#3 Priority</td><td class="p-3">Aria Club Milano (Piazzale dello Sport 14 - San Siro)</td><td class="p-3">150m from San Siro Stadium, huge summer garden & indoor arena</td><td class="p-3">250€ Pista / 500€+ Privé</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">#4 Priority</td><td class="p-3">55 Milano (Via Piero della Francesca 55 - Sempione)</td><td class="p-3">1,000m² loft & terrace, #1 for graduations, birthdays & aperitivo</td><td class="p-3">200€ Pista / 350€+ Privé</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">#5 Priority</td><td class="p-3">Voya Rooftop Milano (Via Achille Papa 30 - Portello M5)</td><td class="p-3">20th-floor 360° panoramic sky club, 3 M5 stops from San Siro</td><td class="p-3">300€ Pista / 500€+ Privé</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">#6 Priority</td><td class="p-3">Repvblic / Tocqueville 13 / Armani Privé / Gattopardo</td><td class="p-3">Fashion Week runway crowd, deconsecrated church & Corso Como icons</td><td class="p-3">300€–500€ Pista / 600€+ Privé</td></tr>
 </tbody></table></div>`;
 
   const faqs = [
     {
-      q: `How do I book a VIP table, Aperitivo, or Guestlist for ${seed.shortName} with zero agency fees?`,
-      a: `Message Senior Concierge Nightlife Milan Concierge directly on WhatsApp at +39 351 912 7047 (https://wa.me/393519127047) or email concierge@nightlifemilan.com with your date, venue/event (${seed.shortName}), total number of men and women, and preferred formula (Aperitivo, Dinner Show, Guestlist, or VIP Table). Within 10 minutes you receive the official floor plan, bottle list, and written VIP confirmation at zero agency commission.`,
+      q: `How do I book a VIP table, Aperitivo, or Guestlist for ${locNames.shortName} with zero agency fees?`,
+      a: `Message Senior Concierge Nightlife Milan Concierge directly on WhatsApp at +39 351 912 7047 (https://wa.me/393519127047) or email concierge@nightlifemilan.com with your date, venue/event (${locNames.shortName}), total number of men and women, and preferred formula (Aperitivo, Dinner Show, Guestlist, or VIP Table). Within 10 minutes you receive the official floor plan, bottle list, and written VIP confirmation at zero agency commission.`,
     },
     {
-      q: `What are the official 2026/2027 prices for VIP tables and Aperitivo at ${seed.shortName}?`,
-      a: `For the 2026/2027 season at ${seed.shortName}: Royal Aperitivo / Dinner formulas are ${seed.aperitivoPrice}; Accredited Evening Entry is ${seed.listPrice}; Dancefloor VIP Tables (Pista) are ${seed.pistaPrice}; Elevated Privé VIP Tables are ${seed.privePrice}; and Super Privé DJ Console tables are ${seed.consolePrice}. 100% of your VIP table minimum spend is converted into bottles of spirits or champagne.`,
+      q: `What are the official 2026/2027 prices for VIP tables and Aperitivo at ${locNames.shortName}?`,
+      a: `For the 2026/2027 season at ${locNames.shortName}: Royal Aperitivo / Dinner formulas are ${seed.aperitivoPrice}; Accredited Evening Entry is ${seed.listPrice}; Dancefloor VIP Tables (Pista) are ${seed.pistaPrice}; Elevated Privé VIP Tables are ${seed.privePrice}; and Super Privé DJ Console tables are ${seed.consolePrice}. 100% of your VIP table minimum spend is converted into bottles of spirits or champagne.`,
     },
     {
-      q: `What is the mandatory dress code at the door of ${seed.shortName}?`,
+      q: `What is the mandatory dress code at the door of ${locNames.shortName}?`,
       a: `The dress code is Strictly Elegant / Smart Chic (${seed.age}). Men must wear a collared shirt, blazer or structured jacket, dark tailored trousers, and leather shoes. Women should wear a cocktail dress or elegant evening outfit. Running sneakers, tracksuits, hoodies, caps, crossbody bags, and football jerseys are strictly prohibited.`,
     },
     {
-      q: `Can an all-male group (stag party, friends, corporate team, football fans) get into ${seed.shortName}?`,
+      q: `Can an all-male group (stag party, friends, corporate team, football fans) get into ${locNames.shortName}?`,
       a: `All-male groups are turned away on the normal guestlist queue in Milan. However, by booking a pre-authorized VIP Table through Nightlife Milan Concierge (+39 351 912 7047), your male group is approved in advance with the Door Director and enjoys 100% guaranteed skip-the-line entry, provided everyone respects the elegant dress code.`,
     },
     {
-      q: `How do we reach ${seed.shortName} by metro or car, and where can we park safely?`,
-      a: `Address: ${seed.address} (${seed.zone}). Metro & transit: ${seed.metro}. Guarded 24/7 parking: ${seed.parking}. Nightlife Milan Concierge (+39 351 912 7047) can also arrange private Mercedes V-Class vans or stretched limousines for door-to-door transfers.`,
+      q: `How do we reach ${locNames.shortName} by metro or car, and where can we park safely?`,
+      a: `Address: ${seed.address} (${locNames.zone}). Metro & transit: ${seed.metro}. Guarded 24/7 parking: ${seed.parking}. Nightlife Milan Concierge (+39 351 912 7047) can also arrange private Mercedes V-Class vans or stretched limousines for door-to-door transfers.`,
     },
     {
       q: `Can we organize a graduation party, birthday, stag/hen night, or corporate event with cake and invoice?`,
@@ -8717,7 +8862,7 @@ function renderEnGuide(seed: GuideSeed100) {
     title,
     excerpt,
     sections: [
-      { h: `1. Architecture, Vibe, Crowd & Weekly Format at ${seed.name}`, b: s1 },
+      { h: `1. Architecture, Vibe, Crowd & Weekly Format at ${locNames.name}`, b: s1 },
       { h: `2. Official 2026/2027 Prices: Royal Aperitivo, Dinner Show, VIP Tables & Bottle Menu`, b: s2 },
       { h: `3. Dress Code, Door Selection & 100% Guaranteed Entry for All-Male Groups`, b: s3 },
       { h: `4. Metro, 24/7 Guarded Parking, San Siro / Trade Fair Logistics & Night Timeline`, b: s4 },
@@ -8728,6 +8873,10 @@ function renderEnGuide(seed: GuideSeed100) {
 }
 
 function renderItGuide(seed: GuideSeed100) {
+  const locNames = getLocalizedGuideSeedNames(
+    { id: seed.id, category: seed.cluster, name: seed.name, shortName: seed.shortName, zone: seed.zone },
+    'it',
+  );
   const hrs = localizeSeedField(seed.hours, 'it');
   const age = localizeSeedField(seed.age, 'it');
   const metro = localizeSeedField(seed.metro, 'it');
@@ -8738,24 +8887,24 @@ function renderItGuide(seed: GuideSeed100) {
   const pPr = localizeSeedField(seed.privePrice, 'it');
   const pCo = localizeSeedField(seed.consolePrice, 'it');
 
-  const title = `${seed.name}: Guida Completa 2026/2027 a Tavoli VIP, Prezzi, Dress Code e Liste`;
-  const excerpt = `Guida ufficiale 2026/2027 a ${seed.name} in zona ${seed.zone} a Milano (${seed.address}): prezzi aggiornati Tavoli VIP (${pPi}), Aperitivo Royal e Cena Cantata (${pAp}), dress code, metro (${metro}), parcheggi custoditi 24h e prenotazione gratuita su WhatsApp con il Senior Concierge Nightlife Milan Concierge (+39 351 912 7047).`;
+  const title = `${locNames.name}: Guida Completa 2026/2027 a Tavoli VIP, Prezzi, Dress Code e Liste`;
+  const excerpt = `Guida ufficiale 2026/2027 a ${locNames.name} in zona ${locNames.zone} a Milano (${seed.address}): prezzi aggiornati Tavoli VIP (${pPi}), Aperitivo Royal e Cena Cantata (${pAp}), dress code, metro (${metro}), parcheggi custoditi 24h e prenotazione gratuita su WhatsApp con il Senior Concierge Nightlife Milan Concierge (+39 351 912 7047).`;
 
-  const s1 = `<p>Benvenuto nella guida pillar ufficiale 2026/2027 dedicata a <strong>${seed.name}</strong> in zona <strong>${seed.zone}</strong> a Milano, curata in prima persona da <strong>Nightlife Milan Concierge</strong>, Senior Nightlife Concierge di <em>Nightlife Milan</em> (<a href="https://wa.me/393519127047" target="_blank" rel="noopener noreferrer">WhatsApp +39 351 912 7047</a> e <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a>). Che tu stia organizzando un Tavolo VIP nel Privé con bottiglie, un Aperitivo Royal con tavolo d'appoggio, una Cena Spettacolo Cantata, una festa di laurea (Bocconi, Cattolica, Statale, Politecnico, Bicocca, IULM/NABA), un compleanno (18, 25, 30, 40 o 50 anni), un addio al celibato per gruppi di soli uomini con ingresso garantito, un dopo-partita o dopo-concerto a San Siro o un evento aziendale con fattura durante Fashion Week e Salone del Mobile, qui trovi tutte le informazioni reali e verificate per vivere una serata impeccabile senza sorprese all'ingresso.</p>
-<p>Situato in <strong>${seed.address}</strong> nel cuore di <strong>${seed.zone}</strong>, <strong>${seed.shortName}</strong> rappresenta un punto di riferimento assoluto della nightlife milanese. Operativo con orario <strong>${hrs}</strong> e target d'età <strong>${age}</strong>, accoglie modelle, stilisti, calciatori di Serie A, imprenditori, laureati e ospiti internazionali dalla fascia pre-serale delle 19:30 fino alle 05:00 del mattino.</p>
+  const s1 = `<p>Benvenuto nella guida pillar ufficiale 2026/2027 dedicata a <strong>${locNames.name}</strong> in zona <strong>${locNames.zone}</strong> a Milano, curata in prima persona da <strong>Nightlife Milan Concierge</strong>, Senior Nightlife Concierge di <em>Nightlife Milan</em> (<a href="https://wa.me/393519127047" target="_blank" rel="noopener noreferrer">WhatsApp +39 351 912 7047</a> e <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a>). Che tu stia organizzando un Tavolo VIP nel Privé con bottiglie, un Aperitivo Royal con tavolo d'appoggio, una Cena Spettacolo Cantata, una festa di laurea (Bocconi, Cattolica, Statale, Politecnico, Bicocca, IULM/NABA), un compleanno (18, 25, 30, 40 o 50 anni), un addio al celibato per gruppi di soli uomini con ingresso garantito, un dopo-partita o dopo-concerto a San Siro o un evento aziendale con fattura durante Fashion Week e Salone del Mobile, qui trovi tutte le informazioni reali e verificate per vivere una serata impeccabile senza sorprese all'ingresso.</p>
+<p>Situato in <strong>${seed.address}</strong> nel cuore di <strong>${locNames.zone}</strong>, <strong>${locNames.shortName}</strong> rappresenta un punto di riferimento assoluto della nightlife milanese. Operativo con orario <strong>${hrs}</strong> e target d'età <strong>${age}</strong>, accoglie modelle, stilisti, calciatori di Serie A, imprenditori, laureati e ospiti internazionali dalla fascia pre-serale delle 19:30 fino alle 05:00 del mattino.</p>
 <div class="overflow-x-auto my-6"><table class="min-w-full border border-white/15 text-sm">
 <thead><tr class="bg-white/10 text-left"><th class="p-3">Locale / Esperienza</th><th class="p-3">Scheda Tecnica Ufficiale 2026/2027</th></tr></thead>
 <tbody>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">Nome Ufficiale</td><td class="p-3">${seed.name}</td></tr>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">Quartiere / Zona</td><td class="p-3">${seed.zone}, Milano</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">Nome Ufficiale</td><td class="p-3">${locNames.name}</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">Quartiere / Zona</td><td class="p-3">${locNames.zone}, Milano</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">Indirizzo</td><td class="p-3">${seed.address}</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">Orari di Apertura</td><td class="p-3">${hrs}</td></tr>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">Target ed Età Minima</td><td class="p-3">${age} — Modelle, professionisti, calciatori, universitari e clientela VIP internazionale</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">Target ed Età Minima</td><td class="p-3">${age} - Modelle, professionisti, calciatori, universitari e clientela VIP internazionale</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">Metropolitana e Mezzi Notturni</td><td class="p-3">${metro}</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">Parcheggio Custodito 24/7</td><td class="p-3">${park}</td></tr>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">Concierge Ufficiale (Zero Commissioni)</td><td class="p-3">Nightlife Milan Concierge — WhatsApp <a href="https://wa.me/393519127047">+39 351 912 7047</a> / <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a></td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">Concierge Ufficiale (Zero Commissioni)</td><td class="p-3">Nightlife Milan Concierge - WhatsApp <a href="https://wa.me/393519127047">+39 351 912 7047</a> / <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a></td></tr>
 </tbody></table></div>
-<p>Il segreto del successo di <strong>${seed.shortName}</strong> risiede nella sua architettura serale in tre atti. Il primo atto (19:30–22:30) è dedicato all'Aperitivo Royal con isole gastronomiche calde e fredde o alla Cena Spettacolo Cantata con performer dal vivo, violinisti luminosi e vocalist che trasformano la sala in un coro collettivo prima ancora della mezzanotte. Il secondo atto (23:00–00:30) segna l'apertura delle liste accreditate e l'accoglienza dei clienti Tavolo VIP lungo la corsia prioritaria dedicata con accompagnamento hostess. Il terzo atto (01:00–05:00) esplode nel clubbing puro con sfilate di Magnum e Jeroboam accompagnate da fontane luminose, schermi LED personalizzati e DJ set di caratura internazionale.</p>`;
+<p>Il segreto del successo di <strong>${locNames.shortName}</strong> risiede nella sua architettura serale in tre atti. Il primo atto (19:30–22:30) è dedicato all'Aperitivo Royal con isole gastronomiche calde e fredde o alla Cena Spettacolo Cantata con performer dal vivo, violinisti luminosi e vocalist che trasformano la sala in un coro collettivo prima ancora della mezzanotte. Il secondo atto (23:00–00:30) segna l'apertura delle liste accreditate e l'accoglienza dei clienti Tavolo VIP lungo la corsia prioritaria dedicata con accompagnamento hostess. Il terzo atto (01:00–05:00) esplode nel clubbing puro con sfilate di Magnum e Jeroboam accompagnate da fontane luminose, schermi LED personalizzati e DJ set di caratura internazionale.</p>`;
 
   const s2 = `<p>La chiarezza sui costi è il pilastro del nostro servizio concierge. Nei club di Milano vige la regola del <strong>100% Minimum Spend (Spesa Minima Interamente Convertita in Bottiglie)</strong>: non esiste alcun costo di "affitto del tavolo" a fondo perduto. L'intero importo del tuo Tavolo VIP diventa credito spendibile al 100% sul listino bottiglie ufficiale (Vodka Belvedere, Grey Goose, Gin Hendrick's, Tequila Don Julio 1942 e Clase Azul, Champagne Moët & Chandon, Veuve Clicquot, Ruinart, Dom Pérignon Vintage, Cristal e Armand de Brignac), con pagamento diretto alla cassa VIP del locale all'arrivo.</p>
 <div class="overflow-x-auto my-6"><table class="min-w-full border border-white/15 text-sm">
@@ -8769,7 +8918,7 @@ function renderItGuide(seed: GuideSeed100) {
 </tbody></table></div>
 <p><strong>Listino Bottiglie Indicativo (Stagione 2026/2027):</strong> Distillati Premium 0,70L (Vodka Belvedere, Grey Goose, Gin Hendrick's, Tequila Patrón) da <strong>180€ a 250€</strong>; Formati Magnum 1,75L da <strong>450€ a 600€</strong>; Jeroboam 3L da <strong>950€ a 1.300€</strong>; Champagne Brut e Rosé (Moët & Chandon, Veuve Clicquot) da <strong>200€ a 250€</strong>; Ruinart Blanc de Blancs da <strong>320€ a 380€</strong>; Dom Pérignon Vintage da <strong>550€ a 700€</strong>; Louis Roederer Cristal e Armand de Brignac da <strong>850€ a 1.500€+</strong>; Don Julio 1942 e Clase Azul Reposado da <strong>450€ a 850€</strong>. Scrivendo ad Nightlife Milan Concierge su WhatsApp al <strong>+39 351 912 7047</strong> ricevi in meno di 10 minuti il listino PDF completo e la mappa aggiornata dei tavoli.</p>`;
 
-  const s3 = `<p>La selezione all'ingresso nei top club di Milano è rigorosa e premia l'eleganza e l'atteggiamento educato. Ecco le regole d'oro da rispettare per entrare senza intoppi da <strong>${seed.shortName}</strong>:</p>
+  const s3 = `<p>La selezione all'ingresso nei top club di Milano è rigorosa e premia l'eleganza e l'atteggiamento educato. Ecco le regole d'oro da rispettare per entrare senza intoppi da <strong>${locNames.shortName}</strong>:</p>
 <ul>
 <li><strong>Dress Code Obbligatorio Uomo:</strong> Camicia con colletto (bianca, nera o sartoriale), blazer o giacca strutturata, pantalone lungo sartoriale o jeans scuro pulito senza strappi, mocassini in pelle, stivaletti Chelsea o scarpa bassa in pelle scura/bianca perfettamente pulita. <strong>Assolutamente vietati:</strong> scarpe da ginnastica sportive/running (Nike Air Max, TN, Jordan, New Balance da corsa), tute, felpe con cappuccio, cappellini, borselli/marsupi a tracolla, collane vistose sopra t-shirt, pantaloni corti e maglie da calcio (anche dopo le partite a San Siro).</li>
 <li><strong>Dress Code Obbligatorio Donna:</strong> Abito da cocktail, tubino, tailleur serale o completo elegante con tacco, stivale elegante o calzatura gioiello.</li>
@@ -8777,15 +8926,15 @@ function renderItGuide(seed: GuideSeed100) {
 <li><strong>Documento d'Identità Fisico:</strong> È obbligatorio esibire Carta d'Identità, Passaporto o Patente in originale (${age}). Le foto sul telefono non sono accettate dalla sicurezza.</li>
 </ul>`;
 
-  const s4 = `<p>Raggiungere <strong>${seed.name}</strong> in <strong>${seed.address}</strong> (${seed.zone}) e rientrare a fine serata è semplicissimo sia con i mezzi pubblici sia in auto:</p>
+  const s4 = `<p>Raggiungere <strong>${locNames.name}</strong> in <strong>${seed.address}</strong> (${locNames.zone}) e rientrare a fine serata è semplicissimo sia con i mezzi pubblici sia in auto:</p>
 <ul>
 <li><strong>Metropolitana ATM e Linee Notturne:</strong> ${metro}. Dopo la chiusura della metropolitana (intorno alle 00:30–01:00 nel weekend), sono attive tutta la notte le linee sostitutive <strong>NM1, NM2, NM3 e NM4</strong> con passaggi ogni 15–20 minuti lungo gli stessi percorsi della metro.</li>
 <li><strong>In Auto e Parcheggi Custoditi H24:</strong> ${park}. Ricorda che l'Area C di Milano è spenta dopo le 19:30 nei giorni feriali e tutto il giorno il sabato e la domenica, e i poli di Corso Sempione, Portello, Via Messina e San Siro sono raggiungibili direttamente dalle autostrade A4/A8/A9 senza attraversare varchi ZTL.</li>
-<li><strong>Logistica Post-Partita e Post-Concerto a San Siro / Fiere:</strong> Esci dallo Stadio Giuseppe Meazza di San Siro, dall'Ippodromo Snai La Maura, da Fiera Milano Rho (M1) o da Allianz MiCo Portello (M5)? <strong>Aria Club Milano</strong> (#3 Priorità, Piazzale dello Sport 14) dista solo 150 metri a piedi dallo Stadio; <strong>Just Me Milano</strong> (#1 Priorità, Torre Branca Parco Sempione) è aperto 7 sere su 7 da lunedì a domenica fino alle 05:00; <strong>Voya Rooftop Milano</strong> (#5 Priorità, 20° piano Via Achille Papa 30) si trova a sole 3 fermate di Metro M5 Lilla da San Siro. Prenotando con Nightlife Milan Concierge (+39 351 912 7047), il tuo tavolo viene mantenuto garantito fino alle <strong>01:30 di notte</strong> anche in caso di tempi supplementari o bis ai concerti.</li>
+<li><strong>Logistica Post-Partita e Post-Concerto a San Siro / Fiere:</strong> Esci dallo Stadio Giuseppe Meazza di San Siro, dall'Ippodromo Snai La Maura, da Fiera Milano Rho (M1) o da Allianz MiCo Portello (M5)? <strong>Aria Club Milano</strong> (#3, Piazzale dello Sport 14) dista solo 150 metri a piedi dallo Stadio; <strong>Just Me Milano</strong> (#1, Torre Branca Parco Sempione) è aperto 7 sere su 7 da lunedì a domenica fino alle 05:00; <strong>Voya Rooftop Milano</strong> (#5, 20° piano Via Achille Papa 30) si trova a sole 3 fermate di Metro M5 Lilla da San Siro. Prenotando con Nightlife Milan Concierge (+39 351 912 7047), il tuo tavolo viene mantenuto garantito fino alle <strong>01:30 di notte</strong> anche in caso di tempi supplementari o bis ai concerti.</li>
 </ul>
 <p><strong>Cronoprogramma Consigliato della Serata:</strong> <strong>19:30–20:30</strong> Ingresso per Aperitivo Royal o Cena Spettacolo Cantata; <strong>22:45–23:30</strong> Transizione club e apertura liste serali; <strong>23:45–00:30</strong> Finestra ideale per l'ingresso Tavoli VIP in corsia salta-fila con hostess; <strong>01:15–03:00</strong> Clou dello show con parate bottiglie Magnum e special guest DJ; <strong>04:30–05:00</strong> Chiusura serata e rientro con taxi o van NCC Mercedes Classe V.</p>`;
 
-  const s5 = `<p>Affidarsi ad <strong>Nightlife Milan Concierge</strong> (<a href="https://wa.me/393519127047" target="_blank" rel="noopener noreferrer">WhatsApp +39 351 912 7047</a> | <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a>) è un servizio <strong>100% gratuito (zero commissioni d'agenzia)</strong>: paghi esattamente il listino ufficiale alla cassa del club e ottieni 10 vantaggi esclusivi:</p>
+  const s5 = `<p>Affidarsi a <strong>Nightlife Milan Concierge</strong> (<a href="https://wa.me/393519127047" target="_blank" rel="noopener noreferrer">WhatsApp +39 351 912 7047</a> | <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a>) è un servizio <strong>100% gratuito (zero commissioni d'agenzia)</strong>: paghi esattamente il listino ufficiale alla cassa del club e ottieni 10 vantaggi esclusivi:</p>
 <ol>
 <li><strong>Planimetrie Tavoli VIP in Alta Risoluzione:</strong> Scegli la posizione esatta del tuo tavolo tra Pista, Privé Rialzato e Console DJ prima di confermare.</li>
 <li><strong>Listini Bottiglie Ufficiali Aggiornati:</strong> Prezzi chiari al centesimo senza rincari d'intermediazione.</li>
@@ -8799,27 +8948,27 @@ function renderItGuide(seed: GuideSeed100) {
 <li><strong>Assistenza Reale su WhatsApp 24/7:</strong> Supporto immediato anche a serata inoltrata per ritardi o cambi lista dell'ultimo minuto.</li>
 </ol>
 <div class="overflow-x-auto my-6"><table class="min-w-full border border-white/15 text-sm">
-<thead><tr class="bg-white/10 text-left"><th class="p-3">Priorità</th><th class="p-3">Club e Quartiere</th><th class="p-3">Punto di Forza</th><th class="p-3">Prezzo Tavolo VIP</th></tr></thead>
+<thead><tr class="bg-white/10 text-left"><th class="p-3">Selezione</th><th class="p-3">Club e Quartiere</th><th class="p-3">Punto di Forza</th><th class="p-3">Prezzo Tavolo VIP</th></tr></thead>
 <tbody>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">#1 Priorità</td><td class="p-3">Just Me Milano (Parco Sempione — Torre Branca)</td><td class="p-3">Aperto 7 sere su 7 (Lun–Dom), club firmato Italo Rota con giardino estivo</td><td class="p-3">320€ Pista / 600€+ Privé</td></tr>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">#2 Priorità</td><td class="p-3">Pineta Milano (Via Messina 38 — Corso Como)</td><td class="p-3">Lampadari di cristallo, Cena Cantata spettacolare e Privé di lusso</td><td class="p-3">320€ Pista / 600€+ Privé</td></tr>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">#3 Priorità</td><td class="p-3">Aria Club Milano (Piazzale dello Sport 14 — San Siro)</td><td class="p-3">A 150 metri dallo Stadio San Siro, immenso giardino e sala club</td><td class="p-3">250€ Pista / 500€+ Privé</td></tr>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">#4 Priorità</td><td class="p-3">55 Milano (Via Piero della Francesca 55 — Sempione)</td><td class="p-3">1.000m² di loft e terrazza, #1 per lauree, compleanni e aperitivi</td><td class="p-3">200€ Pista / 350€+ Privé</td></tr>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">#5 Priorità</td><td class="p-3">Voya Rooftop Milano (Via Achille Papa 30 — Portello M5)</td><td class="p-3">Sky club panoramico al 20° piano, a 3 fermate M5 da San Siro</td><td class="p-3">300€ Pista / 500€+ Privé</td></tr>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">#6 Priorità</td><td class="p-3">Repvblic / Tocqueville 13 / Armani Privé / Gattopardo</td><td class="p-3">Clientela sfilate, chiesa sconsacrata monumentale e icone di Corso Como</td><td class="p-3">300€–500€ Pista / 600€+ Privé</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">#1</td><td class="p-3">Just Me Milano (Parco Sempione - Torre Branca)</td><td class="p-3">Aperto 7 sere su 7 (Lun-Dom), club firmato Italo Rota con giardino estivo</td><td class="p-3">320€ Pista / 600€+ Privé</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">#2</td><td class="p-3">Pineta Milano (Via Messina 38 - Corso Como)</td><td class="p-3">Lampadari di cristallo, Cena Cantata spettacolare e Privé di lusso</td><td class="p-3">320€ Pista / 600€+ Privé</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">#3</td><td class="p-3">Aria Club Milano (Piazzale dello Sport 14 - San Siro)</td><td class="p-3">A 150 metri dallo Stadio San Siro, immenso giardino e sala club</td><td class="p-3">250€ Pista / 500€+ Privé</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">#4</td><td class="p-3">55 Milano (Via Piero della Francesca 55 - Sempione)</td><td class="p-3">1.000m² di loft e terrazza, #1 per lauree, compleanni e aperitivi</td><td class="p-3">200€ Pista / 350€+ Privé</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">#5</td><td class="p-3">Voya Rooftop Milano (Via Achille Papa 30 - Portello M5)</td><td class="p-3">Sky club panoramico al 20° piano, a 3 fermate M5 da San Siro</td><td class="p-3">300€ Pista / 500€+ Privé</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">#6</td><td class="p-3">Repvblic / Tocqueville 13 / Armani Privé / Gattopardo</td><td class="p-3">Clientela sfilate, chiesa sconsacrata monumentale e icone di Corso Como</td><td class="p-3">300€–500€ Pista / 600€+ Privé</td></tr>
 </tbody></table></div>`;
 
   const faqs = [
     {
-      q: `Come prenoto un Tavolo VIP, l'Aperitivo o la Lista per ${seed.shortName} senza pagare commissioni?`,
-      a: `Scrivi direttamente al Senior Concierge Nightlife Milan Concierge su WhatsApp al +39 351 912 7047 (https://wa.me/393519127047) o via email a concierge@nightlifemilan.com indicando data, evento/locale (${seed.shortName}), numero di ragazzi e ragazze e formula scelta (Aperitivo, Cena Cantata, Lista o Tavolo VIP). In meno di 10 minuti ricevi mappa tavoli, listino bottiglie e conferma ufficiale a zero commissioni.`,
+      q: `Come prenoto un Tavolo VIP, l'Aperitivo o la Lista per ${locNames.shortName} senza pagare commissioni?`,
+      a: `Scrivi direttamente al Senior Concierge Nightlife Milan Concierge su WhatsApp al +39 351 912 7047 (https://wa.me/393519127047) o via email a concierge@nightlifemilan.com indicando data, evento/locale (${locNames.shortName}), numero di ragazzi e ragazze e formula scelta (Aperitivo, Cena Cantata, Lista o Tavolo VIP). In meno di 10 minuti ricevi mappa tavoli, listino bottiglie e conferma ufficiale a zero commissioni.`,
     },
     {
-      q: `Quali sono i prezzi ufficiali 2026/2027 di Tavoli VIP e Aperitivo da ${seed.shortName}?`,
-      a: `Per la stagione 2026/2027 da ${seed.shortName}: Tavolo Aperitivo Royal / Cena ${pAp}; Ingresso in Lista ${pLi}; Tavolo VIP Pista ${pPi}; Tavolo VIP Privé Rialzato ${pPr}; Super Privé Console DJ ${pCo}. L'intero importo del Tavolo VIP è 100% spendibile in bottiglie.`,
+      q: `Quali sono i prezzi ufficiali 2026/2027 di Tavoli VIP e Aperitivo da ${locNames.shortName}?`,
+      a: `Per la stagione 2026/2027 da ${locNames.shortName}: Tavolo Aperitivo Royal / Cena ${pAp}; Ingresso in Lista ${pLi}; Tavolo VIP Pista ${pPi}; Tavolo VIP Privé Rialzato ${pPr}; Super Privé Console DJ ${pCo}. L'intero importo del Tavolo VIP è 100% spendibile in bottiglie.`,
     },
     {
-      q: `Qual è il dress code obbligatorio all'ingresso di ${seed.shortName}?`,
+      q: `Qual è il dress code obbligatorio all'ingresso di ${locNames.shortName}?`,
       a: `Il dress code è Elegante Curato (${age}). Per gli uomini sono richiesti camicia con colletto, giacca/blazer, pantalone lungo sartoriale e scarpe in pelle o mocassini; per le donne abito da sera o completo chic. Sono vietati sneaker da corsa, tute, felpe, cappellini, borselli e maglie da calcio.`,
     },
     {
@@ -8828,7 +8977,7 @@ function renderItGuide(seed: GuideSeed100) {
     },
     {
       q: `Come si arriva in metro o in auto e dove conviene parcheggiare?`,
-      a: `Indirizzo: ${seed.address} (${seed.zone}). Metro e mezzi: ${metro}. Parcheggio custodito 24h: ${park}. Su richiesta Nightlife Milan Concierge (+39 351 912 7047) organizza anche transfer in Limousine o Van Mercedes Classe V con autista.`,
+      a: `Indirizzo: ${seed.address} (${locNames.zone}). Metro e mezzi: ${metro}. Parcheggio custodito 24h: ${park}. Su richiesta Nightlife Milan Concierge (+39 351 912 7047) organizza anche transfer in Limousine o Van Mercedes Classe V con autista.`,
     },
     {
       q: `Possiamo festeggiare laurea, compleanno, addio al celibato/nubilato o evento aziendale con torta e fattura?`,
@@ -8840,7 +8989,7 @@ function renderItGuide(seed: GuideSeed100) {
     title,
     excerpt,
     sections: [
-      { h: `1. Architettura, Atmosfera, Pubblico e Format Settimanale: ${seed.name}`, b: s1 },
+      { h: `1. Architettura, Atmosfera, Pubblico e Format Settimanale: ${locNames.name}`, b: s1 },
       { h: `2. Prezzi Ufficiali 2026/2027: Aperitivo Royal, Cena Cantata, Tavoli VIP e Listino Bottiglie`, b: s2 },
       { h: `3. Dress Code, Selezione alla Porta e Ingresso Garantito per Gruppi di Soli Uomini`, b: s3 },
       { h: `4. Metropolitana, Parcheggi Custoditi 24/7, Logistica San Siro / Fiere e Orari della Serata`, b: s4 },
@@ -8851,6 +9000,10 @@ function renderItGuide(seed: GuideSeed100) {
 }
 
 function renderCompactGuide(seed: GuideSeed100, locale: LocaleCode, d: CompactLangPack) {
+  const locNames = getLocalizedGuideSeedNames(
+    { id: seed.id, category: seed.cluster, name: seed.name, shortName: seed.shortName, zone: seed.zone },
+    locale,
+  );
   const hrs = localizeSeedField(seed.hours, locale);
   const age = localizeSeedField(seed.age, locale);
   const metro = localizeSeedField(seed.metro, locale);
@@ -8861,30 +9014,30 @@ function renderCompactGuide(seed: GuideSeed100, locale: LocaleCode, d: CompactLa
   const pPr = localizeSeedField(seed.privePrice, locale);
   const pCo = localizeSeedField(seed.consolePrice, locale);
 
-  const title = `${seed.shortName} ${d.city} — ${d.guide}: ${d.fPista} & ${d.lblDress}`;
-  const excerpt = `${seed.name} (${seed.zone}, ${d.city} — ${seed.address}): ${d.intro} ${d.fAperitivo}: ${pAp} | ${d.fPista}: ${pPi} | ${d.fPrive}: ${pPr}.`;
+  const title = `${locNames.shortName} ${d.city} - ${d.guide}: ${d.fPista} & ${d.lblDress}`;
+  const excerpt = `${locNames.name} (${locNames.zone}, ${d.city} - ${seed.address}): ${d.intro} ${d.fAperitivo}: ${pAp} | ${d.fPista}: ${pPi} | ${d.fPrive}: ${pPr}.`;
 
-  const s1 = `<p><strong>${seed.name}</strong> (${seed.zone}, ${d.city} — <strong>${seed.address}</strong>): ${d.intro}</p>
+  const s1 = `<p><strong>${locNames.name}</strong> (${locNames.zone}, ${d.city} - <strong>${seed.address}</strong>): ${d.intro}</p>
 <p>${d.crowd}. ${d.music}. ${d.pricesNote}</p>
-<p><strong>${seed.name} (${seed.shortName} — ${seed.zone}, ${d.city}):</strong> ${d.intro} ${d.logisticsNote} ${d.doorNote}</p>
+<p><strong>${locNames.name} (${locNames.shortName} - ${locNames.zone}, ${d.city}):</strong> ${d.intro} ${d.logisticsNote} ${d.doorNote}</p>
 <div class="overflow-x-auto my-6"><table class="min-w-full border border-white/15 text-sm">
-<thead><tr class="bg-white/10 text-left"><th class="p-3">${d.lblVenue}</th><th class="p-3">2026/2027 — ${seed.shortName} (${d.city})</th></tr></thead>
+<thead><tr class="bg-white/10 text-left"><th class="p-3">${d.lblVenue}</th><th class="p-3">2026/2027 - ${locNames.shortName} (${d.city})</th></tr></thead>
 <tbody>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">${d.lblVenue}</td><td class="p-3">${seed.name} (${seed.shortName})</td></tr>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">${d.lblZone}</td><td class="p-3">${seed.zone}, ${d.city}</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">${d.lblVenue}</td><td class="p-3">${locNames.name} (${locNames.shortName})</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">${d.lblZone}</td><td class="p-3">${locNames.zone}, ${d.city}</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">${d.lblAddress}</td><td class="p-3">${seed.address}</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">${d.lblHours}</td><td class="p-3">${hrs}</td></tr>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">${d.lblAge}</td><td class="p-3">${age} — ${d.crowd}</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">${d.lblAge}</td><td class="p-3">${age} - ${d.crowd}</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">${d.lblDress}</td><td class="p-3">${d.dress}</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">${d.lblMetro}</td><td class="p-3">${metro}</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">${d.lblParking}</td><td class="p-3">${park}</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">VIP Concierge Nightlife Milan Concierge</td><td class="p-3">WhatsApp <a href="https://wa.me/393519127047">+39 351 912 7047</a> | <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a></td></tr>
 </tbody></table></div>
 <p>${d.logisticsNote} ${d.conciergeNote}</p>
-<p><strong>${seed.shortName} (${seed.zone}, ${d.city}):</strong> 19:30–22:30 ${d.fAperitivo} (${pAp} — ${d.incAperitivo}); 23:00–00:30 ${d.fList} (${pLi} — ${d.incList}); 23:30–05:00 ${d.fPista} (${pPi} — ${d.incPista}), ${d.fPrive} (${pPr} — ${d.incPrive}) & ${d.fConsole} (${pCo} — ${d.incConsole}). ${d.intro} ${d.pricesNote}</p>`;
+<p><strong>${locNames.shortName} (${locNames.zone}, ${d.city}):</strong> 19:30–22:30 ${d.fAperitivo} (${pAp} - ${d.incAperitivo}); 23:00–00:30 ${d.fList} (${pLi} - ${d.incList}); 23:30–05:00 ${d.fPista} (${pPi} - ${d.incPista}), ${d.fPrive} (${pPr} - ${d.incPrive}) & ${d.fConsole} (${pCo} - ${d.incConsole}). ${d.intro} ${d.pricesNote}</p>`;
 
   const s2 = `<p>${d.pricesNote}</p>
-<p><strong>${seed.name} (${seed.address}):</strong> ${d.intro}</p>
+<p><strong>${locNames.name} (${seed.address}):</strong> ${d.intro}</p>
 <div class="overflow-x-auto my-6"><table class="min-w-full border border-white/15 text-sm">
 <thead><tr class="bg-white/10 text-left"><th class="p-3">${d.lblFormula}</th><th class="p-3">${d.lblPrice}</th><th class="p-3">${d.lblIncluded}</th><th class="p-3">${d.lblArrival}</th></tr></thead>
 <tbody>
@@ -8895,7 +9048,7 @@ function renderCompactGuide(seed: GuideSeed100, locale: LocaleCode, d: CompactLa
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">${d.fConsole}</td><td class="p-3">${pCo}</td><td class="p-3">${d.incConsole}</td><td class="p-3">00:00 – 01:30</td></tr>
 </tbody></table></div>
 <div class="overflow-x-auto my-6"><table class="min-w-full border border-white/15 text-sm">
-<thead><tr class="bg-white/10 text-left"><th class="p-3">VIP Bottle Menu (${seed.shortName})</th><th class="p-3">0,70L / 0,75L</th><th class="p-3">1,5L / 1,75L Magnum</th><th class="p-3">3L / 6L Jeroboam</th></tr></thead>
+<thead><tr class="bg-white/10 text-left"><th class="p-3">VIP Bottle Menu (${locNames.shortName})</th><th class="p-3">0,70L / 0,75L</th><th class="p-3">1,5L / 1,75L Magnum</th><th class="p-3">3L / 6L Jeroboam</th></tr></thead>
 <tbody>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">Vodka Belvedere / Grey Goose</td><td class="p-3">180€ – 250€</td><td class="p-3">450€ – 600€</td><td class="p-3">950€ – 1.350€</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">Gin Hendrick's / Monkey 47 / Bombay</td><td class="p-3">180€ – 250€</td><td class="p-3">450€ – 600€</td><td class="p-3">950€ – 1.300€</td></tr>
@@ -8907,23 +9060,23 @@ function renderCompactGuide(seed: GuideSeed100, locale: LocaleCode, d: CompactLa
 </tbody></table></div>
 <p>${d.pricesNote} ${d.conciergeNote} ${d.intro}</p>`;
 
-  const s3 = `<p><strong>${d.lblDress} (${seed.name} — ${seed.address}):</strong> ${d.dress}.</p>
+  const s3 = `<p><strong>${d.lblDress} (${locNames.name} - ${seed.address}):</strong> ${d.dress}.</p>
 <p>${d.doorNote}</p>
 <p>${d.crowd}. ${d.music}. ${d.pricesNote}</p>
 <ul>
-<li><strong>${d.lblVenue}:</strong> ${seed.name} (${seed.shortName} — ${seed.zone}, ${d.city}).</li>
+<li><strong>${d.lblVenue}:</strong> ${locNames.name} (${locNames.shortName} - ${locNames.zone}, ${d.city}).</li>
 <li><strong>${d.lblAge}:</strong> ${age} (${d.crowd}).</li>
 <li><strong>${d.lblDress}:</strong> ${d.dress}.</li>
-<li><strong>${d.fAperitivo}:</strong> ${pAp} — ${d.incAperitivo}.</li>
-<li><strong>${d.fList}:</strong> ${pLi} — ${d.incList}.</li>
-<li><strong>${d.fPista}:</strong> ${pPi} — ${d.incPista}.</li>
-<li><strong>${d.fPrive}:</strong> ${pPr} — ${d.incPrive}.</li>
-<li><strong>${d.fConsole}:</strong> ${pCo} — ${d.incConsole}.</li>
+<li><strong>${d.fAperitivo}:</strong> ${pAp} - ${d.incAperitivo}.</li>
+<li><strong>${d.fList}:</strong> ${pLi} - ${d.incList}.</li>
+<li><strong>${d.fPista}:</strong> ${pPi} - ${d.incPista}.</li>
+<li><strong>${d.fPrive}:</strong> ${pPr} - ${d.incPrive}.</li>
+<li><strong>${d.fConsole}:</strong> ${pCo} - ${d.incConsole}.</li>
 <li><strong>WhatsApp Concierge Nightlife Milan Concierge:</strong> <a href="https://wa.me/393519127047">+39 351 912 7047</a> / <a href="mailto:concierge@nightlifemilan.com">concierge@nightlifemilan.com</a>.</li>
 </ul>
 <p>${d.doorNote} ${d.conciergeNote} ${d.intro}</p>`;
 
-  const s4 = `<p><strong>${d.lblAddress}:</strong> ${seed.address} (${seed.zone}, ${d.city}). ${d.logisticsNote}</p>
+  const s4 = `<p><strong>${d.lblAddress}:</strong> ${seed.address} (${locNames.zone}, ${d.city}). ${d.logisticsNote}</p>
 <ul>
 <li><strong>${d.lblMetro}:</strong> ${metro}.</li>
 <li><strong>${d.lblParking}:</strong> ${park}.</li>
@@ -8931,10 +9084,10 @@ function renderCompactGuide(seed: GuideSeed100, locale: LocaleCode, d: CompactLa
 <li><strong>${d.lblDress}:</strong> ${d.dress}.</li>
 </ul>
 <div class="overflow-x-auto my-6"><table class="min-w-full border border-white/15 text-sm">
-<thead><tr class="bg-white/10 text-left"><th class="p-3">${d.lblHours}</th><th class="p-3">${d.lblFormula} (${seed.shortName})</th><th class="p-3">${d.lblIncluded}</th></tr></thead>
+<thead><tr class="bg-white/10 text-left"><th class="p-3">${d.lblHours}</th><th class="p-3">${d.lblFormula} (${locNames.shortName})</th><th class="p-3">${d.lblIncluded}</th></tr></thead>
 <tbody>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">19:30 – 21:00</td><td class="p-3">${d.fAperitivo} (${pAp})</td><td class="p-3">${d.incAperitivo}</td></tr>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">21:00 – 23:00</td><td class="p-3">Dinner Show & Pre-Club (${seed.shortName})</td><td class="p-3">${d.music} — ${d.crowd}</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">21:00 – 23:00</td><td class="p-3">Dinner Show & Pre-Club (${locNames.shortName})</td><td class="p-3">${d.music} - ${d.crowd}</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">23:00 – 00:30</td><td class="p-3">${d.fList} (${pLi})</td><td class="p-3">${d.incList}</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">23:30 – 01:30</td><td class="p-3">${d.fPista} (${pPi}) / ${d.fPrive} (${pPr})</td><td class="p-3">${d.incPista} / ${d.incPrive}</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">01:30 – 05:00</td><td class="p-3">${d.fConsole} (${pCo})</td><td class="p-3">${d.incConsole}</td></tr>
@@ -8946,33 +9099,33 @@ function renderCompactGuide(seed: GuideSeed100, locale: LocaleCode, d: CompactLa
 <div class="overflow-x-auto my-6"><table class="min-w-full border border-white/15 text-sm">
 <thead><tr class="bg-white/10 text-left"><th class="p-3">#</th><th class="p-3">${d.lblVenue} (${d.city})</th><th class="p-3">${d.lblZone} & ${d.lblAddress}</th><th class="p-3">${d.lblPrice}</th></tr></thead>
 <tbody>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">#1</td><td class="p-3">Just Me Milano (7/7 — Torre Branca)</td><td class="p-3">Parco Sempione — Viale Luigi Camusso (Torre Branca)</td><td class="p-3">320€–400€ / 600€–3.000€+</td></tr>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">#2</td><td class="p-3">Pineta Milano Luxury Hall</td><td class="p-3">Corso Como — Via Messina 38 (M5 Cenisio)</td><td class="p-3">320€–400€ / 600€–2.000€+</td></tr>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">#3</td><td class="p-3">Aria Club Milano (150m San Siro)</td><td class="p-3">San Siro — Piazzale dello Sport 14 (M5 San Siro)</td><td class="p-3">250€–320€ / 500€–1.800€+</td></tr>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">#4</td><td class="p-3">55 Milano (1.000m² Loft & Terrace)</td><td class="p-3">Corso Sempione — Via Piero della Francesca 55 (M5)</td><td class="p-3">200€–300€ / 350€–1.200€+</td></tr>
-<tr class="border-t border-white/10"><td class="p-3 font-semibold">#5</td><td class="p-3">Voya Rooftop Milano (20° Piano M5)</td><td class="p-3">Portello / CityLife — Via Achille Papa 30 (M5 Portello)</td><td class="p-3">300€–350€ / 500€–1.800€+</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">#1</td><td class="p-3">Just Me Milano (7/7 - Torre Branca)</td><td class="p-3">Parco Sempione - Viale Luigi Camusso (Torre Branca)</td><td class="p-3">320€–400€ / 600€–3.000€+</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">#2</td><td class="p-3">Pineta Milano Luxury Hall</td><td class="p-3">Corso Como - Via Messina 38 (M5 Cenisio)</td><td class="p-3">320€–400€ / 600€–2.000€+</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">#3</td><td class="p-3">Aria Club Milano (150m San Siro)</td><td class="p-3">San Siro - Piazzale dello Sport 14 (M5 San Siro)</td><td class="p-3">250€–320€ / 500€–1.800€+</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">#4</td><td class="p-3">55 Milano (1.000m² Loft & Terrace)</td><td class="p-3">Corso Sempione - Via Piero della Francesca 55 (M5)</td><td class="p-3">200€–300€ / 350€–1.200€+</td></tr>
+<tr class="border-t border-white/10"><td class="p-3 font-semibold">#5</td><td class="p-3">Voya Rooftop Milano (20° Piano M5)</td><td class="p-3">Portello / CityLife - Via Achille Papa 30 (M5 Portello)</td><td class="p-3">300€–350€ / 500€–1.800€+</td></tr>
 <tr class="border-t border-white/10"><td class="p-3 font-semibold">#6</td><td class="p-3">Repvblic / Tocqueville 13 / Armani Privé / Gattopardo</td><td class="p-3">Piazza Repubblica 12 / Via Tocqueville 13 / Via Pisoni 1 / Piero della Francesca 47</td><td class="p-3">300€–500€ / 600€–3.000€+</td></tr>
 </tbody></table></div>
 <p>${d.intro} ${d.pricesNote} ${d.doorNote} ${d.logisticsNote} ${d.conciergeNote}</p>`;
 
   const faqs = [
-    { q: `${d.faqQ1} (${seed.shortName})`, a: `${d.intro} ${d.conciergeNote} WhatsApp: +39 351 912 7047 (https://wa.me/393519127047) | Email: concierge@nightlifemilan.com.` },
-    { q: `${d.faqQ2} (${seed.shortName})`, a: `${d.fAperitivo}: ${pAp} (${d.incAperitivo}). ${d.fList}: ${pLi} (${d.incList}). ${d.fPista}: ${pPi} (${d.incPista}). ${d.fPrive}: ${pPr} (${d.incPrive}). ${d.fConsole}: ${pCo} (${d.incConsole}). ${d.pricesNote}` },
-    { q: `${d.faqQ3} (${seed.shortName})`, a: `${d.dress}. ${d.lblAge}: ${age} (${d.crowd}). ${d.doorNote}` },
-    { q: `${d.faqQ4} (${seed.shortName})`, a: `${d.doorNote} ${d.pricesNote}` },
-    { q: `${d.faqQ5} (${seed.shortName})`, a: `${d.lblAddress}: ${seed.address} (${seed.zone}, ${d.city}). ${d.lblMetro}: ${metro}. ${d.lblParking}: ${park}. ${d.logisticsNote}` },
-    { q: `${d.faqQ6} (${seed.shortName})`, a: `${d.conciergeNote} ${d.intro}` },
+    { q: `${d.faqQ1} (${locNames.shortName})`, a: `${d.intro} ${d.conciergeNote} WhatsApp: +39 351 912 7047 (https://wa.me/393519127047) | Email: concierge@nightlifemilan.com.` },
+    { q: `${d.faqQ2} (${locNames.shortName})`, a: `${d.fAperitivo}: ${pAp} (${d.incAperitivo}). ${d.fList}: ${pLi} (${d.incList}). ${d.fPista}: ${pPi} (${d.incPista}). ${d.fPrive}: ${pPr} (${d.incPrive}). ${d.fConsole}: ${pCo} (${d.incConsole}). ${d.pricesNote}` },
+    { q: `${d.faqQ3} (${locNames.shortName})`, a: `${d.dress}. ${d.lblAge}: ${age} (${d.crowd}). ${d.doorNote}` },
+    { q: `${d.faqQ4} (${locNames.shortName})`, a: `${d.doorNote} ${d.pricesNote}` },
+    { q: `${d.faqQ5} (${locNames.shortName})`, a: `${d.lblAddress}: ${seed.address} (${locNames.zone}, ${d.city}). ${d.lblMetro}: ${metro}. ${d.lblParking}: ${park}. ${d.logisticsNote}` },
+    { q: `${d.faqQ6} (${locNames.shortName})`, a: `${d.conciergeNote} ${d.intro}` },
   ];
 
   return {
     title,
     excerpt,
     sections: [
-      { h: `${d.h1} — ${seed.shortName}`, b: s1 },
-      { h: `${d.h2} — ${seed.shortName}`, b: s2 },
-      { h: `${d.h3} — ${seed.shortName}`, b: s3 },
-      { h: `${d.h4} — ${seed.shortName}`, b: s4 },
-      { h: `${d.h5} — ${seed.shortName}`, b: s5 },
+      { h: `${d.h1} - ${locNames.shortName}`, b: s1 },
+      { h: `${d.h2} - ${locNames.shortName}`, b: s2 },
+      { h: `${d.h3} - ${locNames.shortName}`, b: s3 },
+      { h: `${d.h4} - ${locNames.shortName}`, b: s4 },
+      { h: `${d.h5} - ${locNames.shortName}`, b: s5 },
     ],
     faqs,
   };
@@ -8993,8 +9146,15 @@ function getRenderedGuideForLocale(seed: GuideSeed100, locale: LocaleCode) {
     const dict = COMPACT_33_DICTS[locale] || COMPACT_33_DICTS.es;
     rendered = renderCompactGuide(seed, locale, dict);
   }
-  RENDER_CACHE.set(key, rendered);
-  return rendered;
+  const cleanDash = (s: string) => s.replace(/\u2014/g, '-');
+  const sanitized = {
+    title: cleanDash(rendered.title),
+    excerpt: cleanDash(rendered.excerpt),
+    sections: rendered.sections.map((sec) => ({ h: cleanDash(sec.h), b: cleanDash(sec.b) })),
+    faqs: rendered.faqs.map((faq) => ({ q: cleanDash(faq.q), a: cleanDash(faq.a) })),
+  };
+  RENDER_CACHE.set(key, sanitized);
+  return sanitized;
 }
 
 function createLazyLocalizedString(getter: (locale: LocaleCode) => string): LocalizedString {
@@ -9041,7 +9201,7 @@ function buildGuideFromSeed(seed: GuideSeed100): Guide {
     relatedGenres: defaultGenres,
     author: 'Nightlife Milan Official Concierge (+39 351 912 7047)',
     datePublished: '2026-10-01',
-    dateModified: '2026-11-06',
+    dateModified: '2026-11-13',
   };
 }
 

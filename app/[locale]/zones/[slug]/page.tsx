@@ -1,8 +1,10 @@
 import { notFound } from 'next/navigation';
-import { tr } from '@/lib/i18n/t';
 import { getLocaleDef, hreflangAlternates, localePrefix, indexedLocaleCodes } from '@/lib/i18n/locales';
 import { resolveZoneSlug, getLocalizedZoneSlug35 } from '@/lib/i18n/localizedSlugs35';
 import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
+import { getZoneLocalized35 } from '@/lib/i18n/zonesAndGenres35';
+import { getLocalizedText } from '@/lib/seo';
+import GuideToc from '@/components/GuideToc';
 import { Metadata } from 'next';
 import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
@@ -11,7 +13,7 @@ import DiscoveryGrid from '@/components/DiscoveryGrid';
 import { MapPin, Calendar, GlassWater, Train, Car, Sparkles, MessageCircle } from 'lucide-react';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getAllCalendarEvents } from '@/lib/calendarEvents';
-import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
+import { getEventbriteDiscoveryItems, slimDiscoveryItemsForClient } from '@/lib/eventbriteDiscovery';
 import { VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
@@ -76,7 +78,7 @@ const ZONE_LOGISTICS: Record<
     parkingIt: 'Parcheggio Sotterraneo Porta Nuova Varesine (custodito H24) + Taxi Piazza XXV Aprile',
     preDrinkEn: '10 Corso Como Café, Loolapaloosa Aperitivo, Tocqueville 13 Dinner Show',
     preDrinkIt: '10 Corso Como Café, Loolapaloosa Aperitivo, Tocqueville 13 Dinner Show',
-    flagshipClubs: ['Pineta Milano', 'Repvblic Milano', 'Hollywood Rythmoteque', '11 Clubroom', 'Play Club', 'Volt Club', 'Tocqueville 13'],
+    flagshipClubs: ['Pineta Milano', 'Repvblic Milano', 'Hollywood Rythmoteque', '11 Clubroom', 'Tocqueville 13', 'Volt Club', 'The Club Milano'],
   },
   'parco-sempione': {
     metroEn: 'M1 Cadorna / Conciliazione, M2 Lanza, M5 Domodossola + Tram 1 & 10',
@@ -155,23 +157,23 @@ const ZONE_DEEP_META: Record<
   }
 > = {
   'san-siro': {
-    headlineEn: 'San Siro Football Afterparties (Inter & AC Milan) & Stadium Concerts — Aria Club 150m Away',
-    headlineIt: 'Dopo-Partita Calcio a San Siro (Inter & Milan) e Grandi Concerti — Aria Club a 150 Metri',
+    headlineEn: 'San Siro Football Afterparties (Inter & AC Milan) & Stadium Concerts - Aria Club 150m Away',
+    headlineIt: 'Dopo-Partita Calcio a San Siro (Inter & Milan) e Grandi Concerti - Aria Club a 150 Metri',
     bodyEn:
-      'Attending a Serie A, UEFA Champions League, Derby della Madonnina, or Coppa Italia match at Stadio Giuseppe Meazza (San Siro)—or a summer stadium concert at San Siro / Ippodromo Snai? Skip the 75-minute post-match traffic jam and walk 150 meters across the square to Piazzale dello Sport 14 into Aria Club Milano (#3 Priority), or ride the M5 Purple Line / 10-minute taxi to Just Me (#1), Voya Rooftop (#5), 55 Milano (#4), and Pineta (#2).',
+      'Attending a Serie A, UEFA Champions League, Derby della Madonnina, or Coppa Italia match at Stadio Giuseppe Meazza (San Siro) or a summer stadium concert at San Siro / Ippodromo Snai? Skip the 75-minute post-match traffic jam and walk 150 meters across the square to Piazzale dello Sport 14 into Aria Club Milano (#3), or ride the M5 Purple Line / 10-minute taxi to Just Me (#1), Voya Rooftop (#5), 55 Milano (#4), and Pineta (#2).',
     bodyIt:
-      'Assisti a una partita di Serie A, UEFA Champions League, Derby della Madonnina o Coppa Italia allo Stadio Giuseppe Meazza di San Siro—oppure a un concerto estivo a San Siro / Ippodromo Snai? Evita un’ora di blocco nel traffico post-partita e cammina per soli 150 metri fino a Piazzale dello Sport 14 entrando da Aria Club Milano (#3 Priorità), oppure raggiungi in 3–5 fermate di Metro M5 Lilla o 10 minuti di taxi Just Me (#1), Voya Rooftop (#5), 55 Milano (#4) e Pineta (#2).',
+      'Assisti a una partita di Serie A, UEFA Champions League, Derby della Madonnina o Coppa Italia allo Stadio Giuseppe Meazza di San Siro oppure a un concerto estivo a San Siro / Ippodromo Snai? Evita un’ora di blocco nel traffico post-partita e cammina per soli 150 metri fino a Piazzale dello Sport 14 entrando da Aria Club Milano (#3), oppure raggiungi in 3-5 fermate di Metro M5 Lilla o 10 minuti di taxi Just Me (#1), Voya Rooftop (#5), 55 Milano (#4) e Pineta (#2).',
     bulletsEn: [
-      'Aria Club Milano (#3 Priority, Piazzale dello Sport 14): 150m from San Siro gates — Royal Aperitivo from 19:30 after 15:00/18:00 kickoffs & Official Third-Half Club Party (22:45–05:00) after 20:45/21:00 night matches.',
-      'UEFA Champions League Tuesdays & Wednesdays + Sunday/Monday Post-Match: Just Me Milano (#1 Priority, open 7 nights/week until 05:00), Voya Rooftop (#5 Priority, 20th floor, 3 M5 stops to Portello), 55 Milano (#4 Priority) & Repvblic Dirty Monday.',
+      'Aria Club Milano (Piazzale dello Sport 14): 150m from San Siro gates - Royal Aperitivo from 19:30 after 15:00/18:00 kickoffs & Official Third-Half Club Party (22:45-05:00) after 20:45/21:00 night matches.',
+      'UEFA Champions League Tuesdays & Wednesdays + Sunday/Monday Post-Match: Just Me Milano (open 7 nights/week until 05:00), Voya Rooftop (20th floor, 3 M5 stops to Portello), 55 Milano & Repvblic Dirty Monday.',
       'Derby della Madonnina & Big Matches: Where players, Skybox Hospitality guests, and international fans book Privé Branca, Console DJ, and crystal-chandelier VIP tables.',
-      'Stadium-to-Club Dress Code Rule: Team jerseys and scarves are blocked at club doors after 23:00 — wear a collared shirt under your coat and book a VIP Table via WhatsApp (+39 351 912 7047) to get all-male fan groups approved.',
+      'Stadium-to-Club Dress Code Rule: Team jerseys and scarves are blocked at club doors after 23:00 - wear a collared shirt under your coat and book a VIP Table via WhatsApp (+39 351 912 7047) to get all-male fan groups approved.',
     ],
     bulletsIt: [
-      'Aria Club Milano (#3 Priorità, Piazzale dello Sport 14): a 150 metri dai cancelli di San Siro — Royal Aperitivo dalle 19:30 dopo i match delle 15:00/18:00 e Official Third-Half Party (22:45–05:00) dopo i posticipi delle 20:45/21:00.',
-      'Martedì e Mercoledì di UEFA Champions League + Posticipi Domenica/Lunedì: Just Me Milano (#1 Priorità, aperto 7 sere su 7 fino alle 05:00), Voya Rooftop (#5 Priorità, 20° piano a 3 fermate M5 Portello), 55 Milano (#4 Priorità) e Repvblic Dirty Monday.',
+      'Aria Club Milano (Piazzale dello Sport 14): a 150 metri dai cancelli di San Siro - Royal Aperitivo dalle 19:30 dopo i match delle 15:00/18:00 e Official Third-Half Party (22:45-05:00) dopo i posticipi delle 20:45/21:00.',
+      'Martedì e Mercoledì di UEFA Champions League + Posticipi Domenica/Lunedì: Just Me Milano (aperto 7 sere su 7 fino alle 05:00), Voya Rooftop (20° piano a 3 fermate M5 Portello), 55 Milano e Repvblic Dirty Monday.',
       'Derby della Madonnina & Big Match: Dove festeggiano calciatori, ospiti degli Skybox Hospitality di San Siro e tifosi internazionali nei Privé e in Console DJ.',
-      'Regola d’Oro Dress Code Stadio -> Discoteca: Maglie da calcio e sciarpe non passano la selezione dopo le 23:00 — indossa una camicia sotto il cappotto e prenota un Tavolo VIP su WhatsApp (+39 351 912 7047) per far entrare gruppi di soli uomini.',
+      'Regola d’Oro Dress Code Stadio -> Discoteca: Maglie da calcio e sciarpe non passano la selezione dopo le 23:00 - indossa una camicia sotto il cappotto e prenota un Tavolo VIP su WhatsApp (+39 351 912 7047) per far entrare gruppi di soli uomini.',
     ],
   },
 };
@@ -189,27 +191,25 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
-  const typedLocale = (locale === 'it' ? 'it' : 'en') as 'en' | 'it';
+  const loc = (locale as LocaleCode) || 'en';
 
   const canonicalZoneSlug = resolveZoneSlug(slug);
   const zone = mockZones.find((z) => z.slug === canonicalZoneSlug || z.slug === slug);
 
   if (!zone) return notFound();
 
-  const title = seoTitle(zone.metaTitle[typedLocale] || zone.metaTitle.en);
-  const description = withWhatsApp(
-    zone.metaDescription[typedLocale] || zone.metaDescription.en,
-    locale
-  );
+  const zLoc = getZoneLocalized35(zone.slug, loc);
+  const title = seoTitle(zLoc.seoTitle);
+  const description = withWhatsApp(zLoc.seoDescription, loc);
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const localizedZoneSlug = getLocalizedZoneSlug35(zone.slug, (locale as LocaleCode) || 'en');
-  const canonical = `${baseUrl}${localePrefix(locale)}/${getLocalizedDir35('zones', locale)}/${localizedZoneSlug}`;
+  const localizedZoneSlug = getLocalizedZoneSlug35(zone.slug, loc);
+  const canonical = `${baseUrl}${localePrefix(loc)}/${getLocalizedDir35('zones', loc)}/${localizedZoneSlug}`;
   const zoneLangAlternates: Record<string, string> = {
     'x-default': `${baseUrl}/${getLocalizedDir35('zones', 'en')}/${getLocalizedZoneSlug35(zone.slug, 'en')}`,
   };
-  for (const loc of indexedLocaleCodes) {
-    zoneLangAlternates[getLocaleDef(loc)!.hreflang] = `${baseUrl}${localePrefix(loc)}/${getLocalizedDir35('zones', loc)}/${getLocalizedZoneSlug35(zone.slug, loc)}`;
+  for (const l of indexedLocaleCodes) {
+    zoneLangAlternates[getLocaleDef(l)!.hreflang] = `${baseUrl}${localePrefix(l)}/${getLocalizedDir35('zones', l)}/${getLocalizedZoneSlug35(zone.slug, l)}`;
   }
 
   const heroImg = ZONE_HERO_MAP[zone.slug] || zone.image || '/images/pillars/zone-hero-01.webp';
@@ -218,7 +218,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title,
     description,
-    robots: seoRobots(locale),
+    robots: seoRobots(loc),
     alternates: {
       canonical,
       languages: zoneLangAlternates,
@@ -229,7 +229,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: canonical,
       type: 'website',
       siteName: 'Nightlife Milan',
-      locale: getLocaleDef(locale)?.ogLocale || 'en_US',
+      locale: getLocaleDef(loc)?.ogLocale || 'en_US',
       images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
     },
     twitter: {
@@ -244,29 +244,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ZonePage({ params }: Props) {
   const { locale, slug } = await params;
-  const typedLocale = (locale === 'it' ? 'it' : 'en') as 'en' | 'it';
-  const isIt = typedLocale === 'it';
+  const loc = (locale as LocaleCode) || 'en';
+  const isIt = loc === 'it';
+  const lp = localePrefix(loc);
 
   const canonicalZoneSlug = resolveZoneSlug(slug);
   const zone = mockZones.find((z) => z.slug === canonicalZoneSlug || z.slug === slug);
 
   if (!zone) return notFound();
 
+  const zLoc = getZoneLocalized35(zone.slug, loc);
   const allVenues = getVenues();
   const zoneVenues = allVenues.filter((v) => v.zone === zone.id);
   const displayedVenues = zoneVenues.length > 0 ? zoneVenues : allVenues.slice(0, 6);
 
   const venueIds = new Set(displayedVenues.map((v) => v.id));
-  const items = getEventbriteDiscoveryItems(await getAllCalendarEvents(), locale).filter(
+  const items = getEventbriteDiscoveryItems(await getAllCalendarEvents(), loc).filter(
     ({ event }) => venueIds.has(event.venueId)
   );
 
-  const venuesInZone = zoneVenues.length;
   const eventsTonight = items.length;
 
   const logistics = ZONE_LOGISTICS[zone.slug] || ZONE_LOGISTICS[slug] || {
-    metroEn: 'Served by M1/M2/M3/M5 Metro lines until 00:30 + ATM Night Bus network (NM1–NM4, N90/N91)',
-    metroIt: 'Servito dalle linee Metro M1/M2/M3/M5 fino alle 00:30 + Rete Notturna ATM (NM1–NM4, N90/N91)',
+    metroEn: 'Served by M1/M2/M3/M5 Metro lines until 00:30 + ATM Night Bus network (NM1-NM4, N90/N91)',
+    metroIt: 'Servito dalle linee Metro M1/M2/M3/M5 fino alle 00:30 + Rete Notturna ATM (NM1-NM4, N90/N91)',
     parkingEn: 'Guarded 24h municipal garages and official Radiotaxi / Uber Black drop-off points',
     parkingIt: 'Autorimesse custodite H24 e posteggi ufficiali Radiotaxi / Uber Black a meno di 150 metri',
     preDrinkEn: 'Start at 19:30 with a Royal Aperitivo or cocktail lounge before moving to the dancefloor at 23:30',
@@ -274,38 +275,16 @@ export default async function ZonePage({ params }: Props) {
     flagshipClubs: ['Just Me Milano', 'Pineta Milano', 'Aria Club', '55 Milano', 'Voya Rooftop', 'Repvblic Milano'],
   };
 
-  const zoneFaqs = [
-    {
-      q: isIt
-        ? `Quali sono i migliori club e locali in zona ${zone.name} a Milano?`
-        : `What are the best clubs and venues in ${zone.name}, Milan?`,
-      a: isIt
-        ? `Nel distretto ${zone.name} e nelle immediate adiacenze spiccano: ${logistics.flagshipClubs.join(', ')}. Prenota Tavolo VIP o Lista nominale via WhatsApp al +39 351 912 7047.`
-        : `Top venues in and around ${zone.name} include: ${logistics.flagshipClubs.join(', ')}. Book your VIP Table or nominal Guest List via WhatsApp at +39 351 912 7047.`,
-    },
-    {
-      q: isIt
-        ? `Come arrivare e dove parcheggiare a ${zone.name} la sera?`
-        : `How do I get to ${zone.name} at night and where can I park?`,
-      a: isIt
-        ? `Mezzi pubblici: ${logistics.metroIt}. Auto e Taxi: ${logistics.parkingIt}.`
-        : `Public transit: ${logistics.metroEn}. Car & Taxi: ${logistics.parkingEn}.`,
-    },
-    {
-      q: isIt
-        ? `Qual è il dress code richiesto nei locali di ${zone.name}?`
-        : `What is the dress code for clubs in ${zone.name}?`,
-      a: isIt
-        ? `L'atmosfera predominante a ${zone.name} è "${zone.vibe}". Nei club e rooftop premium è richiesto abbigliamento Smart Chic o Glamour (camicia per gli uomini, vietate tute o scarpe da ginnastica tecniche).`
-        : `The dominant vibe in ${zone.name} is "${zone.vibe}". Premium clubs and rooftops enforce a Smart Chic or Glamour dress code (collared shirt for men, no athletic sneakers or sportswear).`,
-    },
-  ];
+  const zoneFaqs = zLoc.faqs;
 
   const waUrl = `https://wa.me/393519127047?text=${encodeURIComponent(
     isIt
-      ? `Ciao Nightlife Milan! Vorrei consigli e prenotare una serata in zona ${zone.name}.`
-      : `Hi Nightlife Milan! I'd like advice and VIP Table / Guestlist booking in ${zone.name}.`
+      ? `Ciao Nightlife Milan! Vorrei consigli e prenotare una serata in zona ${zLoc.name}.`
+      : `Hi Nightlife Milan! ${zLoc.name} - WhatsApp VIP Concierge`
   )}`;
+
+  const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
+  const currentZoneUrl = `${baseUrl}${lp}/${getLocalizedDir35('zones', loc)}/${getLocalizedZoneSlug35(zone.slug, loc)}`;
 
   return (
     <main className="flex-grow pt-24 pb-20 bg-[#050505]">
@@ -313,7 +292,7 @@ export default async function ZonePage({ params }: Props) {
         <div className="relative h-64 sm:h-80 w-full rounded-2xl overflow-hidden border border-champagne/30">
           <Image quality={92}
             src={ZONE_HERO_MAP[zone.slug] || ZONE_HERO_MAP[slug] || zone.image || '/images/pillars/zone-hero-01.webp'}
-            alt={`${zone.name} Milan Nightlife District`}
+            alt={`${zLoc.name} - ${zLoc.vibe}`}
             fill
             priority
             className="object-cover"
@@ -326,22 +305,22 @@ export default async function ZonePage({ params }: Props) {
         <nav className="text-sm text-white/40" aria-label="Breadcrumb">
           <ol className="list-none p-0 inline-flex">
             <li className="flex items-center">
-              <Link href={localePrefix(locale) || '/'} className="hover:text-champagne transition-colors">
-                Home
+              <Link href={lp || '/'} className="hover:text-champagne transition-colors">
+                {zLoc.ui.home}
               </Link>
               <span className="mx-2">/</span>
             </li>
             <li className="flex items-center">
               <Link
-                href={`${localePrefix(locale)}/zones`}
+                href={`${lp}/zones`}
                 className="hover:text-champagne transition-colors"
               >
-                {tr(locale, 'Zones', 'Zone')}
+                {zLoc.ui.zonesHub}
               </Link>
               <span className="mx-2">/</span>
             </li>
             <li className="text-champagne" aria-current="page">
-              {zone.name}
+              {zLoc.name}
             </li>
           </ol>
         </nav>
@@ -354,16 +333,16 @@ export default async function ZonePage({ params }: Props) {
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-champagne/30 bg-champagne/10 mb-4">
               <Sparkles className="w-3.5 h-3.5 text-champagne" />
               <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-champagne">
-                {isIt ? 'Guida Ufficiale di Quartiere 2026/2027' : 'Official District Guide 2026/2027'}
+                {zLoc.ui.verifiedBadge}
               </span>
             </div>
 
             <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-champagne tracking-tighter mb-6">
-              {zone.name}: {zone.vibe}
+              {zLoc.name}: {zLoc.vibe}
             </h1>
 
             <div className="flex flex-wrap gap-2.5 mb-8">
-              {zone.tags.map((tag) => (
+              {[zLoc.metro.split('·')[0].trim(), zLoc.dressCode, zLoc.topClubs[0]].map((tag) => (
                 <span
                   key={tag}
                   className="px-4 py-1.5 rounded-full border border-champagne/30 text-champagne text-xs font-mono tracking-wider"
@@ -373,28 +352,45 @@ export default async function ZonePage({ params }: Props) {
               ))}
             </div>
 
-            {/* AI Trafiletto */}
+            {/* AI & Concierge Verified Brief */}
             <div className="mb-8 p-6 rounded-2xl border border-champagne/25 bg-champagne/[0.04]">
-              <p className="font-mono text-champagne text-[10px] tracking-[0.3em] uppercase mb-3">
-                {isIt ? 'Risposta Rapida · Sintesi del Quartiere' : 'Quick Answer · District Brief'}
+              <p className="font-mono text-champagne text-[10px] tracking-[0.3em] uppercase mb-2">
+                {zLoc.ui.quickAnswerTitle}
               </p>
-              <p className="font-sans text-white/75 text-sm leading-relaxed">
-                {isIt
-                  ? `${zone.name} (${zone.vibe}) è uno dei 14 distretti chiave della vita notturna di Milano. Locali di riferimento: ${logistics.flagshipClubs.join(', ')}. Come arrivare: ${logistics.metroIt}. Prenotazione Tavoli VIP e Liste: WhatsApp +39 351 912 7047.`
-                  : `${zone.name} (${zone.vibe}) is one of Milan's 14 core nightlife districts. Key venues: ${logistics.flagshipClubs.join(', ')}. Transit: ${logistics.metroEn}. Direct VIP Table & Guestlist desk: WhatsApp +39 351 912 7047.`}
+              <p className="font-sans text-white/80 text-sm leading-relaxed mb-2">
+                {zLoc.lead}
+              </p>
+              <p className="font-sans text-white/55 text-xs leading-relaxed">
+                {zLoc.ui.verifiedBody}
               </p>
             </div>
 
-            {/* The Insider Guide */}
-            <div className="text-white/75 leading-relaxed mb-12">
-              <h2 className="text-2xl md:text-3xl font-serif text-champagne mb-4">
-                {isIt
-                  ? `Guida Insider a ${zone.name}: Atmosfera, Orari e Locali`
-                  : `The Insider Guide to ${zone.name}: Vibe, Hours & Venues`}
-              </h2>
-              <p className="text-base md:text-lg leading-relaxed mb-4">
-                {zone.description[typedLocale]}
-              </p>
+            {/* Clickable TOC (>= 5 anchors) */}
+            <div className="mb-10">
+              <GuideToc sections={zLoc.sections.map((s) => ({ id: s.id, title: s.heading }))} title={zLoc.ui.tocTitle} />
+            </div>
+
+            {/* Localized 5-Chapter District Guide */}
+            <div className="text-white/75 leading-relaxed mb-12 space-y-8">
+              {zLoc.sections.map((sec) => (
+                <div key={sec.id} id={sec.id} className="scroll-mt-28">
+                  <h2 className="text-2xl md:text-3xl font-serif text-champagne mb-3">
+                    {sec.heading}
+                  </h2>
+                  {sec.paragraphs.map((p, pIdx) => (
+                    <p key={pIdx} className="text-base leading-relaxed mb-3">
+                      {p}
+                    </p>
+                  ))}
+                  {sec.bullets && (
+                    <ul className="list-disc pl-5 space-y-1.5 text-sm text-white/75">
+                      {sec.bullets.map((b, bIdx) => (
+                        <li key={bIdx}>{b}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
             </div>
 
             {/* San Siro Post-Match & Concert Deep-Dive Card */}
@@ -456,46 +452,46 @@ export default async function ZonePage({ params }: Props) {
             {/* Logistics & Practical Guide */}
             <div className="mb-12">
               <h2 className="text-2xl font-serif text-white mb-6">
-                {tr(locale, 'District Logistics, Transit & Pre-Clubbing', 'Logistica, Metro Notturna, Parcheggi e Pre-Serata')}
+                {zLoc.ui.metroLabel} · {zLoc.ui.priceRangeLabel}
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="p-5 rounded-xl border border-white/10 bg-white/[0.02]">
                   <h3 className="font-mono text-champagne text-xs font-bold tracking-widest uppercase mb-2 flex items-center gap-2">
                     <Train className="w-4 h-4" />
-                    {tr(locale, 'Metro & Night Bus', 'Metro & Mezzi Notturni')}
+                    {zLoc.ui.metroLabel}
                   </h3>
                   <p className="font-sans text-white/60 text-sm leading-relaxed">
-                    {isIt ? logistics.metroIt : logistics.metroEn}
+                    {isIt ? logistics.metroIt : zLoc.metro}
                   </p>
                 </div>
                 <div className="p-5 rounded-xl border border-white/10 bg-white/[0.02]">
                   <h3 className="font-mono text-champagne text-xs font-bold tracking-widest uppercase mb-2 flex items-center gap-2">
                     <Car className="w-4 h-4" />
-                    {tr(locale, 'Parking & Taxi Stands', 'Parcheggi & Posteggi Taxi')}
+                    {zLoc.ui.priceRangeLabel}
                   </h3>
                   <p className="font-sans text-white/60 text-sm leading-relaxed">
-                    {isIt ? logistics.parkingIt : logistics.parkingEn}
+                    {zLoc.priceRange}
                   </p>
                 </div>
                 <div className="p-5 rounded-xl border border-white/10 bg-white/[0.02]">
                   <h3 className="font-mono text-champagne text-xs font-bold tracking-widest uppercase mb-2 flex items-center gap-2">
                     <GlassWater className="w-4 h-4" />
-                    {tr(locale, 'Best Pre-Clubbing Spots', 'Dove Fare Aperitivo / Pre-Drink')}
+                    {zLoc.ui.dressCodeLabel}
                   </h3>
                   <p className="font-sans text-white/60 text-sm leading-relaxed">
-                    {isIt ? logistics.preDrinkIt : logistics.preDrinkEn}
+                    {zLoc.dressCode}
                   </p>
                 </div>
               </div>
             </div>
 
-                        {/* District Atmosphere Gallery (4 Unique Images) */}
+            {/* District Atmosphere Gallery (4 Unique Images) */}
             <div className="mb-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {(ZONE_INLINE_MAP[zone.slug] || ZONE_INLINE_MAP[slug] || ZONE_INLINE_MAP['brera']).map((imgSrc, idx) => (
                 <div key={imgSrc} className="relative aspect-[16/9] w-full rounded-xl overflow-hidden border border-white/10">
                   <Image quality={92}
                     src={imgSrc}
-                    alt={`${zone.name} Milan Nightlife Atmosphere ${idx + 1}`}
+                    alt={`${zLoc.name} Milan Nightlife Atmosphere ${idx + 1}`}
                     fill
                     sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover"
@@ -506,20 +502,17 @@ export default async function ZonePage({ params }: Props) {
             {/* Venues in this District */}
             <div className="mb-12">
               <h2 className="text-2xl font-serif text-white mb-6">
-                {isIt
-                  ? `I Migliori Club e Rooftop per una Serata a ${zone.name}`
-                  : `Top Clubs & Rooftops for a Night Out in ${zone.name}`}
+                {zLoc.ui.clubsInZone} ({zLoc.name})
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {displayedVenues.slice(0, 6).map((v, idx) => {
-                  const vName = v.localizedContent.name[typedLocale] || v.localizedContent.name.en;
-                  const vDesc =
-                    v.localizedContent.description[typedLocale] || v.localizedContent.description.en;
-                  const vSlug = v.slugs[typedLocale] || v.slugs.en;
+                  const vName = getLocalizedText(v.localizedContent.name, loc);
+                  const vDesc = getLocalizedText(v.localizedContent.description, loc);
+                  const vSlug = getLocalizedText(v.slugs, loc);
                   return (
                     <Link
                       key={v.id}
-                      href={`${localePrefix(locale)}/clubs/${vSlug}`}
+                      href={`${lp}/clubs/${vSlug}`}
                       className="group flex items-start gap-4 p-4 rounded-xl border border-white/10 bg-white/[0.02] hover:border-champagne/50 transition-all"
                     >
                       <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-champagne/40 bg-champagne/10 font-serif text-lg font-bold text-champagne">#{idx + 1}</div>
@@ -542,7 +535,7 @@ export default async function ZonePage({ params }: Props) {
           {/* District Stats Sidebar */}
           <div className="w-full lg:w-80 bg-white/[0.03] border border-white/10 rounded-2xl p-6 sticky top-32 space-y-6">
             <h3 className="font-serif text-xl text-white border-b border-white/10 pb-4">
-              {isIt ? `Scheda Tecnica · ${zone.name}` : `District Snapshot · ${zone.name}`}
+              {zLoc.name}
             </h3>
             <div className="space-y-5">
               <div className="flex items-center gap-4">
@@ -550,9 +543,9 @@ export default async function ZonePage({ params }: Props) {
                   <MapPin className="w-5 h-5 text-champagne" />
                 </div>
                 <div>
-                  <p className="text-xl font-bold text-white">{zone.stats}</p>
+                  <p className="text-sm font-bold text-white">{zLoc.metro}</p>
                   <p className="text-xs text-white/40 uppercase tracking-wider">
-                    {isIt ? 'Densità Locali' : 'Venue Density'}
+                    {zLoc.ui.metroLabel}
                   </p>
                 </div>
               </div>
@@ -563,7 +556,7 @@ export default async function ZonePage({ params }: Props) {
                 <div>
                   <p className="text-xl font-bold text-white">{eventsTonight}</p>
                   <p className="text-xs text-white/40 uppercase tracking-wider">
-                    {isIt ? 'Eventi Attivi' : 'Upcoming Events'}
+                    {zLoc.ui.upcomingEvents}
                   </p>
                 </div>
               </div>
@@ -572,9 +565,9 @@ export default async function ZonePage({ params }: Props) {
                   <GlassWater className="w-5 h-5 text-champagne" />
                 </div>
                 <div>
-                  <p className="text-lg font-bold text-white">{zone.vibe}</p>
+                  <p className="text-lg font-bold text-white">{zLoc.vibe}</p>
                   <p className="text-xs text-white/40 uppercase tracking-wider">
-                    {isIt ? 'Atmosfera Dominante' : 'Signature Vibe'}
+                    {zLoc.ui.dressCodeLabel}
                   </p>
                 </div>
               </div>
@@ -588,7 +581,7 @@ export default async function ZonePage({ params }: Props) {
                 className="w-full inline-flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl bg-champagne text-black font-mono text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
               >
                 <MessageCircle className="w-4 h-4" />
-                <span>{isIt ? 'Prenota via WhatsApp' : 'Book via WhatsApp'}</span>
+                <span>{zLoc.ui.bookVipCta}</span>
               </a>
               <p className="text-[11px] text-white/45 text-center mt-2">
                 +39 351 912 7047 · concierge@nightlifemilan.com
@@ -601,32 +594,28 @@ export default async function ZonePage({ params }: Props) {
       {/* Filtering Logic: DiscoveryGrid */}
       <div className="border-t border-white/5 bg-white/[0.03] pt-8">
         <DiscoveryGrid
-          items={items}
-          lang={locale}
-          title={typedLocale === 'it' ? `Eventi a ${zone.name}` : `Events in ${zone.name}`}
-          subtitle={tr(
-            locale,
-            `Discover what's happening in the district`,
-            `Scopri gli eventi in programma nel quartiere`
-          )}
+          items={slimDiscoveryItemsForClient(items, loc, 24)}
+          lang={loc}
+          title={`${zLoc.ui.upcomingEvents} (${zLoc.name})`}
+          subtitle={zLoc.lead}
         />
       </div>
 
       {/* Interactive VIP Table Quote Calculator */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <VipQuoteCalculator locale={locale} />
+        <VipQuoteCalculator locale={loc} />
       </section>
 
       {/* District FAQs */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         <h2 className="font-serif text-3xl text-champagne mb-6">
-          {isIt ? `Domande Frequenti su ${zone.name}` : `Frequently Asked Questions about ${zone.name}`}
+          {zLoc.ui.faqTitle} ({zLoc.name})
         </h2>
         <div className="space-y-4">
           {zoneFaqs.map((f, i) => (
             <div key={i} className="p-6 rounded-xl border border-white/10 bg-white/[0.02]">
-              <h3 className="font-serif text-lg text-white mb-2">{f.q}</h3>
-              <p className="text-sm text-white/65 leading-relaxed">{f.a}</p>
+              <h3 className="font-serif text-lg text-white mb-2">{f.question}</h3>
+              <p className="text-sm text-white/65 leading-relaxed">{f.answer}</p>
             </div>
           ))}
         </div>
@@ -635,10 +624,10 @@ export default async function ZonePage({ params }: Props) {
       {/* Cross-Linking SEO */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
         <Link
-          href={`${localePrefix(locale)}/zones`}
+          href={`${lp}/zones`}
           className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white hover:bg-champagne hover:text-black hover:border-champagne transition-all duration-300 font-bold tracking-widest uppercase text-sm"
         >
-          {tr(locale, 'Explore All 14 Milan Nightlife Zones', 'Esplora tutti i 14 Quartieri della Notte')}
+          {zLoc.ui.otherZones}
         </Link>
       </section>
 
@@ -649,14 +638,23 @@ export default async function ZonePage({ params }: Props) {
           __html: JSON.stringify([
             {
               '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                { '@type': 'ListItem', position: 1, name: zLoc.ui.home, item: `${baseUrl}${lp || '/'}` },
+                { '@type': 'ListItem', position: 2, name: zLoc.ui.zonesHub, item: `${baseUrl}${lp}/${getLocalizedDir35('zones', loc)}` },
+                { '@type': 'ListItem', position: 3, name: zLoc.name, item: currentZoneUrl },
+              ],
+            },
+            {
+              '@context': 'https://schema.org',
               '@type': 'TouristAttraction',
-              name: `${zone.name} Nightlife District — Milan`,
-              description: zone.description[typedLocale] || zone.description.en,
+              name: `${zLoc.name} - ${zLoc.vibe}`,
+              description: zLoc.lead,
               ...(zone.image
                 ? {
                     image: zone.image.startsWith('http')
                       ? zone.image
-                      : `https://nightlifemilan.com${zone.image}`,
+                      : `https://nightlifemilan.com${ZONE_HERO_MAP[zone.slug] || zone.image}`,
                   }
                 : {}),
               address: {
@@ -671,17 +669,14 @@ export default async function ZonePage({ params }: Props) {
             {
               '@context': 'https://schema.org',
               '@type': 'ItemList',
-              name:
-                typedLocale === 'it'
-                  ? `Locali a ${zone.name}, Milano`
-                  : `Venues in ${zone.name}, Milan`,
+              name: `${zLoc.ui.clubsInZone} (${zLoc.name})`,
               numberOfItems: displayedVenues.length,
               itemListElement: displayedVenues.map((venue, i) => ({
                 '@type': 'ListItem',
                 position: i + 1,
                 item: {
                   '@type': 'NightClub',
-                  name: venue.localizedContent.name[typedLocale] || venue.localizedContent.name.en,
+                  name: getLocalizedText(venue.localizedContent.name, loc),
                   ...(venue.image
                     ? {
                         image: venue.image.startsWith('http')
@@ -689,7 +684,7 @@ export default async function ZonePage({ params }: Props) {
                           : `https://nightlifemilan.com${venue.image}`,
                       }
                     : {}),
-                  url: `https://nightlifemilan.com${localePrefix(locale)}/clubs/${venue.slugs[typedLocale] || venue.slugs.en}`,
+                  url: `https://nightlifemilan.com${lp}/clubs/${getLocalizedText(venue.slugs, loc)}`,
                   address: {
                     '@type': 'PostalAddress',
                     addressLocality: 'Milan',
@@ -703,17 +698,17 @@ export default async function ZonePage({ params }: Props) {
               '@type': 'FAQPage',
               mainEntity: zoneFaqs.map((f) => ({
                 '@type': 'Question',
-                name: f.q,
+                name: f.question,
                 acceptedAnswer: {
                   '@type': 'Answer',
-                  text: f.a,
+                  text: f.answer,
                 },
               })),
             },
           ]),
         }}
       />
-            <EditorialPageSections locale={locale as LocaleCode} path={`${localePrefix(locale)}/zones/${slug}`} />
+            <EditorialPageSections locale={loc} path={`${lp}/zones/${slug}`} />
       </main>
   );
 }

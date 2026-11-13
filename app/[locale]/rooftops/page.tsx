@@ -6,6 +6,8 @@ import Image from 'next/image';
 import { tr } from '@/lib/i18n/t';
 import { getLocaleDef, hreflangAlternates, canonicalPageUrl, localePrefix } from '@/lib/i18n/locales';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { getHubSeoMeta35 } from '@/lib/i18n/hubSeoMeta35';
+import GuideToc from '@/components/GuideToc';
 import { Sparkles, MapPin, Clock, MessageCircle, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { VipQuoteCalculator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
 
@@ -21,21 +23,10 @@ export async function generateMetadata({
   const { locale } = await params;
   const canonical = canonicalPageUrl(baseUrl, locale, '/rooftops');
 
-  const title = seoTitle(
-    tr(
-      locale,
-      'Best Rooftop Bars & Panoramic Sky Lounges in Milan 2026/2027 | Voya 20th Floor, Ceresio 7 & Terrazza Duomo 21',
-      'Migliori Rooftop Bar e Terrazze Panoramiche Milano 2026/2027 | Voya 20° Piano, Ceresio 7 e Terrazza Duomo 21'
-    )
-  );
-  const description = withWhatsApp(
-    tr(
-      locale,
-      'Compare and book the best rooftop bars in Milan for sunset aperitivo, dinner shows & panoramic DJ sets: Voya Rooftop (85m), Ceresio 7 Pools, Terrazza Duomo 21 & Torre Branca.',
-      'Confronta e prenota i migliori rooftop bar e terrazze panoramiche di Milano per aperitivo al tramonto, cena e DJ set: Voya Rooftop (85m), Ceresio 7, Terrazza Duomo 21 e Torre Branca.'
-    ),
-    locale
-  );
+  const meta35 = getHubSeoMeta35('rooftops', locale);
+  const title = seoTitle(meta35.title);
+  const description = withWhatsApp(meta35.description, locale);
+  const heroUrl = `${baseUrl}/images/pillars/rooftops-01.webp`;
 
   return {
     title,
@@ -54,12 +45,19 @@ export async function generateMetadata({
       locale: getLocaleDef(locale)?.ogLocale || 'en_US',
       images: [
         {
-          url: `${baseUrl}/images/venues/voya-rooftop-milan/voya-rooftop-milan-interior-01.webp`,
+          url: heroUrl,
           width: 1200,
           height: 630,
           alt: title,
         },
       ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [heroUrl],
+      site: '@nightlifemilan',
     },
   };
 }
@@ -175,7 +173,22 @@ export default async function RooftopsPage({
     },
   ];
 
+  const rooftopUrl = canonicalPageUrl(baseUrl, locale, '/rooftops');
+  const rooftopToc = [
+    ...ROOFTOPS.map((r) => ({ id: r.slug, title: `${r.rank}. ${r.name}` })),
+    { id: 'rooftop-quote', title: isIt ? 'Calcolatore Preventivo Tavoli' : 'VIP Table Quote Calculator' },
+    { id: 'rooftops-faq', title: isIt ? 'Domande Frequenti Rooftop' : 'Milan Rooftop Bars FAQ' },
+  ];
+
   const schema = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${baseUrl}${lp || '/'}` },
+        { '@type': 'ListItem', position: 2, name: isIt ? 'Rooftop Bar Milano' : 'Milan Rooftop Bars', item: rooftopUrl },
+      ],
+    },
     {
       '@context': 'https://schema.org',
       '@type': 'ItemList',
@@ -242,7 +255,7 @@ export default async function RooftopsPage({
         </p>
 
         {/* AI Quick Answer */}
-        <div className="max-w-3xl p-6 rounded-2xl border border-champagne/25 bg-champagne/[0.04]">
+        <div className="max-w-3xl p-6 rounded-2xl border border-champagne/25 bg-champagne/[0.04] mb-6">
           <p className="font-mono text-champagne text-[10px] tracking-[0.3em] uppercase mb-2">
             {isIt ? 'Risposta Rapida · Top 4 Terrazze Milano' : 'Quick Answer · Top 4 Milan Rooftops'}
           </p>
@@ -252,6 +265,9 @@ export default async function RooftopsPage({
               : '1. Voya Rooftop (20th floor, 85m, 360° CityLife & Alps view, aperitivo + DJ set until 02:30). 2. Ceresio 7 (rooftop pools in Porta Volta, fine dining & mixology). 3. Terrazza Duomo 21 (direct view of the Duomo spires). 4. Just Me & Torre Branca (Italo Rota garden + 108m view in Parco Sempione). Direct booking: WhatsApp +39 351 912 7047.'}
           </p>
         </div>
+        <div className="max-w-3xl">
+          <GuideToc sections={rooftopToc} title={isIt ? 'Indice Rooftop Milano' : 'Milan Rooftops Index'} />
+        </div>
       </section>
 
       {/* Rooftops Showcase Cards */}
@@ -259,7 +275,8 @@ export default async function RooftopsPage({
         {ROOFTOPS.map((r) => (
           <div
             key={r.slug}
-            className="grid grid-cols-1 lg:grid-cols-12 rounded-2xl overflow-hidden border border-white/15 bg-white/[0.02] hover:border-champagne/50 transition-all"
+            id={r.slug}
+            className="scroll-mt-24 grid grid-cols-1 lg:grid-cols-12 rounded-2xl overflow-hidden border border-white/15 bg-white/[0.02] hover:border-champagne/50 transition-all"
           >
             <div className="relative h-72 lg:h-auto lg:col-span-5">
               <Image
@@ -340,7 +357,7 @@ export default async function RooftopsPage({
       </section>
 
       {/* Interactive VIP Quote Calculator */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <section id="rooftop-quote" className="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
         <VipQuoteCalculator locale={locale} />
       </section>
 
@@ -350,7 +367,7 @@ export default async function RooftopsPage({
       </section>
 
       {/* FAQs */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="rooftops-faq" className="scroll-mt-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="font-serif text-3xl text-champagne mb-6">
           {isIt ? 'Domande Frequenti sui Rooftop Bar di Milano' : 'Milan Rooftop Bars FAQ'}
         </h2>

@@ -1,9 +1,12 @@
 import { Metadata } from 'next';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
-import { tr } from '@/lib/i18n/t';
 import { getLocaleDef, hreflangAlternates, canonicalPageUrl, localePrefix } from '@/lib/i18n/locales';
 import { getLocalizedZoneSlug35 } from '@/lib/i18n/localizedSlugs35';
+import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
+import { getHubSeoMeta35 } from '@/lib/i18n/hubSeoMeta35';
+import { getZoneLocalized35, getTaxonomyHubUi35 } from '@/lib/i18n/zonesAndGenres35';
+import GuideToc from '@/components/GuideToc';
 import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
 import { mockZones } from '@/lib/data';
@@ -20,11 +23,13 @@ const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const isIt = locale === 'it';
-  const canonical = canonicalPageUrl(baseUrl, locale, '/zones');
+  const loc = (locale as LocaleCode) || 'en';
+  const isIt = loc === 'it';
+  const canonical = canonicalPageUrl(baseUrl, loc, '/zones');
+  const meta35 = getHubSeoMeta35('zones', loc);
 
-  const title = seoTitle(tr(locale, 'Milan Nightlife Zones 2026 | Best Nightlife Districts & Areas | Nightlife Milan', 'Zone Vita Notturna Milano 2026 | Migliori Quartieri | Nightlife Milan'));
-  const description = withWhatsApp(tr(locale, 'Explore Milan\'s top nightlife districts: Corso Como, Navigli, Brera, Isola, Sempione, Porta Romana. Find the best clubs, bars and events by zone. Updated 2026.', 'Esplora i migliori quartieri della vita notturna milanese: Corso Como, Navigli, Brera, Isola, Sempione, Porta Romana. Scopri club, bar ed eventi per zona. Aggiornato 2026.'), locale);
+  const title = seoTitle(meta35.title);
+  const description = withWhatsApp(meta35.description, loc);
   const ogImage = `${baseUrl}/images/pillars/zone-01.webp`;
 
   return {
@@ -33,19 +38,19 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     keywords: isIt
       ? ['zone vita notturna milano', 'quartieri notturni milano', 'corso como nightlife', 'bar navigli milano', 'brera nightlife', 'migliori zone milano notte']
       : ['milan nightlife zones', 'milan nightlife districts', 'corso como milan nightlife', 'navigli bars milan', 'brera nightlife milan', 'best areas nightlife milan'],
-    robots: seoRobots(locale),
+    robots: seoRobots(loc),
     alternates: {
       canonical,
       languages: hreflangAlternates(baseUrl, '/zones'),
     },
     openGraph: {
-      title: tr(locale, 'Milan Nightlife Zones 2026 — Best Districts for a Night Out', 'Zone Vita Notturna Milano 2026 — Nightlife Milan'),
+      title,
       description,
       type: 'website',
       url: canonical,
       siteName: 'Nightlife Milan',
-      locale: getLocaleDef(locale)?.ogLocale || 'en_US',
-      images: [{ url: ogImage, width: 1200, height: 630, alt: tr(locale, 'Milan nightlife districts clubs and bars', 'Vita notturna Milano quartieri club') }],
+      locale: getLocaleDef(loc)?.ogLocale || 'en_US',
+      images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -78,30 +83,55 @@ export default async function ZonesPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const typedLocale = (locale === 'it' ? 'it' : 'en') as 'en' | 'it';
-  const lp = localePrefix(locale);
+  const loc = (locale as LocaleCode) || 'en';
+  const lp = localePrefix(loc);
+  const hubUi = getTaxonomyHubUi35('zones', loc);
+  const zonesHubUrl = `${baseUrl}${lp}/${getLocalizedDir35('zones', loc)}`;
 
-  const zonesSchema = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": "Milan Nightlife Districts 2026",
-    "description": "Guide to the best nightlife zones in Milan, Italy",
-    "itemListElement": mockZones.map((zone, i) => ({
-      "@type": "ListItem",
-      "position": i + 1,
-      "item": {
-        "@type": "Place",
-        "name": zone.name,
-        "description": zone.description.en,
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Milan",
-          "addressRegion": "Lombardy",
-          "addressCountry": "IT"
-        }
-      }
-    }))
-  };
+  const zonesSchema = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: hubUi.home, item: `${baseUrl}${lp || '/'}` },
+        { '@type': 'ListItem', position: 2, name: hubUi.crumbLabel, item: zonesHubUrl },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: hubUi.h1,
+      description: hubUi.lead,
+      itemListElement: mockZones.map((zone, i) => {
+        const zLoc = getZoneLocalized35(zone.slug, loc);
+        return {
+          '@type': 'ListItem',
+          position: i + 1,
+          item: {
+            '@type': 'Place',
+            name: zLoc.name,
+            description: zLoc.lead,
+            url: `${zonesHubUrl}/${getLocalizedZoneSlug35(zone.slug, loc)}`,
+            address: {
+              '@type': 'PostalAddress',
+              addressLocality: 'Milan',
+              addressRegion: 'Lombardy',
+              addressCountry: 'IT',
+            },
+          },
+        };
+      }),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: hubUi.faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.question,
+        acceptedAnswer: { '@type': 'Answer', text: f.answer },
+      })),
+    },
+  ];
 
   return (
     <>
@@ -112,11 +142,11 @@ export default async function ZonesPage({
         <nav className="text-sm text-white/40" aria-label="Breadcrumb">
           <ol className="list-none p-0 inline-flex">
             <li className="flex items-center">
-              <Link href={localePrefix(locale) || '/'} className="hover:text-champagne transition-colors">Home</Link>
+              <Link href={lp || '/'} className="hover:text-champagne transition-colors">{hubUi.home}</Link>
               <span className="mx-2">/</span>
             </li>
             <li className="text-champagne" aria-current="page">
-              {tr(locale, 'Zones', 'Zone')}
+              {hubUi.crumbLabel}
             </li>
           </ol>
         </nav>
@@ -124,48 +154,54 @@ export default async function ZonesPage({
 
       {/* Header */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+        <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-champagne mb-4">
+          {hubUi.badge}
+        </p>
         <h1 className="font-serif text-5xl md:text-7xl font-bold text-champagne tracking-tighter mb-6">
-          {typedLocale === 'it' ? 'I Quartieri della Notte' : "Milan's Nightlife Districts"}
+          {hubUi.h1}
         </h1>
-        <p className="text-xl text-white/40 max-w-2xl mb-8">
-          {typedLocale === 'it'
-            ? "Ogni quartiere di Milano pulsa con un ritmo diverso. Scopri l'atmosfera unica di ogni zona e trova la serata perfetta per te."
-            : "Every neighborhood in Milan pulses with a different rhythm. Discover the unique vibe of each zone and find your perfect night out."}
+        <p className="text-xl text-white/60 max-w-2xl mb-8">
+          {hubUi.lead}
         </p>
 
         {/* AI Trafiletto */}
-        <div className="max-w-2xl p-5 rounded-xl border border-champagne/20 bg-champagne/[0.04]">
-          <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">Quick Answer</p>
-          <p className="font-sans text-white/70 text-sm leading-relaxed">
-            {tr(locale, 'The best zones for nightlife in Milan are: Corso Como (exclusive clubs, fashion crowd), Navigli (canal-side bars, bohemian vibe), Brera (luxury lounges), Isola (rooftops and cocktail bars), Sempione (mega-clubs like Just Me). Clubs open from 22:00 with peak between midnight and 3 AM.', 'I migliori quartieri per la vita notturna a Milano sono: Corso Como (club esclusivi, moda), Navigli (canal-side bars, atmosfera bohémien), Brera (lounge di lusso), Isola (rooftop e cocktail bar), Sempione (mega-club come Just Me). I club aprono dalle 22:00 con picco tra mezzanotte e le 3:00.')}
+        <div className="max-w-3xl p-5 rounded-xl border border-champagne/20 bg-champagne/[0.04] mb-8">
+          <p className="font-sans text-champagne/80 text-[10px] tracking-[0.3em] uppercase mb-3">{hubUi.quickAnswerTitle}</p>
+          <p className="font-sans text-white/75 text-sm leading-relaxed">
+            {hubUi.quickAnswerBody}
           </p>
+        </div>
+
+        {/* Clickable TOC (>= 5 anchors) */}
+        <div className="max-w-3xl">
+          <GuideToc sections={hubUi.tocItems} title={hubUi.tocTitle} />
         </div>
       </section>
 
       {/* How to Choose Your Zone — H2 section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 border-t border-white/5 pt-12">
+      <section id="choose-zone" className="scroll-mt-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 border-t border-white/5 pt-12">
         <h2 className="font-serif text-3xl md:text-4xl text-white mb-8">
-          {tr(locale, 'How to Choose the Right Zone', 'Scegli la Zona Giusta per Te')}
+          {hubUi.featuredHeading}
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {[
             {
-              label: tr(locale, 'For Luxury Clubs', 'Per i Club di Lusso'),
-              zone: tr(locale, 'Corso Como & Sempione', 'Corso Como & Sempione'),
-              desc: tr(locale, 'Mega-clubs with VIP tables, bottle service and top DJ line-ups. Just Me, Pineta, Play Club.', 'I mega-club con VIP table, bottle service e le migliori line-up. Just Me, Pineta, Play Club.'),
+              label: getZoneLocalized35('corso-como', loc).vibe,
+              zone: 'Corso Como · Sempione · San Siro',
+              desc: 'Just Me Milano (7/7), Pineta Milano, Aria Club (150m San Siro), Repvblic Milano & Tocqueville 13.',
             },
             {
-              label: tr(locale, 'For Aperitivo & Cocktails', 'Per L\'Aperitivo'),
-              zone: tr(locale, 'Navigli & Brera', 'Navigli & Brera'),
-              desc: tr(locale, 'Canal-side terraces, refined lounges and iconic cocktail bars. Relaxed vibe from sunset.', 'Canal-side terrazze, lounge ricercati e cocktail bar iconici. Atmosfera rilassata dal tramonto.'),
+              label: getZoneLocalized35('navigli', loc).vibe,
+              zone: 'Navigli · Brera · Arco della Pace',
+              desc: '55 Milano (Via Piero della Francesca 55), Volt Club, Il Gattopardo & canal cocktail terraces.',
             },
             {
-              label: tr(locale, 'For Rooftop Views', 'Per Le Viste Panoramiche'),
-              zone: 'Isola',
-              desc: tr(locale, 'Voya Rooftop on the 20th floor with views over the Milan skyline. Sky lounge until dawn.', 'Voya Rooftop al 20° piano con vista sullo skyline di Milano. Sky lounge fino all\'alba.'),
+              label: getZoneLocalized35('citylife-portello', loc).vibe,
+              zone: 'CityLife Portello · Isola · Duomo',
+              desc: 'Voya Rooftop Milan (20th Floor panoramic skyline), Terrazza Duomo 21 & Alcatraz live arena.',
             },
           ].map((item) => (
-            <div key={item.label} className="p-6 rounded-lg border border-white/8 bg-white/[0.02]">
+            <div key={item.zone} className="p-6 rounded-lg border border-white/8 bg-white/[0.02]">
               <h3 className="font-sans text-champagne text-[10px] tracking-[0.3em] uppercase mb-2">{item.label}</h3>
               <p className="font-serif text-lg text-white mb-2">{item.zone}</p>
               <p className="font-sans text-white/50 text-sm leading-relaxed">{item.desc}</p>
@@ -175,61 +211,46 @@ export default async function ZonesPage({
       </section>
 
       {/* Zones Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+      <section id="all-districts" className="scroll-mt-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <h2 className="font-serif text-3xl text-white mb-8">
-          {tr(locale, 'All Milan Nightlife Districts', 'Tutti i Quartieri')}
+          {hubUi.allItemsHeading}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {mockZones.map((zone) => {
-            const imgSrc = zone.image || zoneImages[zone.id] || zoneImages[zone.slug] || '';
+            const zLoc = getZoneLocalized35(zone.slug, loc);
+            const imgSrc = zone.image || zoneImages[zone.id] || zoneImages[zone.slug] || '/images/pillars/zone-01.webp';
             return (
               <Link
                 key={zone.id}
-                href={`${localePrefix(locale)}/zones/${getLocalizedZoneSlug35(zone.slug, (locale as LocaleCode) || 'en')}`}
+                href={`${lp}/zones/${getLocalizedZoneSlug35(zone.slug, loc)}`}
                 className="group relative h-[400px] rounded-lg overflow-hidden border border-white/10 hover:border-champagne/50 transition-colors duration-500 block"
               >
-                {/* Background Image or Gradient */}
-                {imgSrc ? (
-                  <Image
-                    src={imgSrc}
-                    alt={`Nightlife in ${zone.name}, Milan — ${zone.vibe}`}
-                    fill
-                    quality={92}
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                ) : (
-                  <div className="absolute inset-0 bg-gradient-to-br from-champagne/10 via-gray-900 to-black" />
-                )}
-
-                {/* Gradient Overlay */}
+                <Image
+                  src={imgSrc}
+                  alt={`${zLoc.name} - ${zLoc.vibe}`}
+                  fill
+                  quality={92}
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
 
-                {/* Content */}
                 <div className="absolute inset-0 p-8 flex flex-col justify-end">
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-serif text-4xl font-bold text-white group-hover:text-champagne transition-colors">
-                      {zone.name}
+                    <h3 className="font-serif text-3xl md:text-4xl font-bold text-white group-hover:text-champagne transition-colors">
+                      {zLoc.name}
                     </h3>
                     <span className="bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-medium tracking-wider uppercase text-champagne border border-white/10">
-                      {zone.stats}
+                      {zLoc.metro.split('·')[0].trim()}
                     </span>
                   </div>
 
-                  <div className="flex flex-wrap gap-2 mb-3">
-                    {zone.tags.map(tag => (
-                      <span key={tag} className="px-2.5 py-1 rounded-full border border-champagne/30 text-champagne/80 text-xs font-medium tracking-wide">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  <p className="text-lg font-medium text-white/70 mb-2 tracking-wide">
-                    {zone.vibe}
+                  <p className="text-lg font-medium text-white/80 mb-2 tracking-wide">
+                    {zLoc.vibe}
                   </p>
 
-                  <p className="text-white/40 line-clamp-2 group-hover:text-white/70 transition-colors text-sm">
-                    {zone.description[typedLocale]}
+                  <p className="text-white/55 line-clamp-2 group-hover:text-white/80 transition-colors text-sm">
+                    {zLoc.lead}
                   </p>
                 </div>
               </Link>
@@ -238,54 +259,49 @@ export default async function ZonesPage({
         </div>
       </section>
 
-      {/* Zone by Vibe — H3 section */}
+      {/* Localized Pricing & Concierge Chapters */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 border-t border-white/5 pt-12">
-        <div className="max-w-3xl">
-          <h2 className="font-serif text-3xl text-white mb-6">
-            {typedLocale === 'it' ? 'Milan Nightlife per Zona: Guida Rapida' : "Milan Nightlife by Zone: Quick Guide"}
+        <div className="max-w-3xl space-y-8">
+          <h2 className="font-serif text-3xl text-white">
+            {hubUi.editorialHeading}
           </h2>
-          <div className="space-y-6">
-            <div>
-              <h3 className="font-sans text-champagne text-sm font-semibold tracking-widest uppercase mb-2">Corso Como</h3>
-              <p className="font-sans text-white/50 text-sm leading-relaxed">
-                {tr(locale, 'The most glamorous zone in Milan. Home to Pineta Club (singing aperitivo, Fridays), Play Club (hip hop, afrobeats), Volt (underground techno). Strict dress code — total black or chic fashion.', 'La zona più glamour di Milano. Casa di Pineta Club (aperitivo cantato, venerdì), Play Club (hip hop, afrobeats), Volt (techno underground). Dress code rigoroso — total black o chic fashion.')}
-              </p>
+          {hubUi.sections.map((sec) => (
+            <div key={sec.id} id={sec.id} className="scroll-mt-28">
+              <h3 className="font-serif text-xl text-champagne mb-2">{sec.heading}</h3>
+              {sec.paragraphs.map((p, idx) => (
+                <p key={idx} className="font-sans text-white/65 text-sm leading-relaxed mb-2">{p}</p>
+              ))}
             </div>
-            <div>
-              <h3 className="font-sans text-champagne text-sm font-semibold tracking-widest uppercase mb-2">Sempione</h3>
-              <p className="font-sans text-white/50 text-sm leading-relaxed">
-                {tr(locale, 'Exclusive district near the Castello Sforzesco. Just Me Milano is here — the city\'s most fashionable club with Italo Rota design, VIP tables from €500 and international DJ sets.', 'Quartiere esclusivo vicino al Castello Sforzesco. Just Me Milano è qui — il club più in voga della città con design Italo Rota, VIP table da €500 e DJ set internazionali.')}
-              </p>
-            </div>
-            <div>
-              <h3 className="font-sans text-champagne text-sm font-semibold tracking-widest uppercase mb-2">Navigli</h3>
-              <p className="font-sans text-white/50 text-sm leading-relaxed">
-                {tr(locale, 'Milan\'s canals at night. Magazzini Generali (techno and live music), Hollywood Club (historic), dozens of canal-side bars for aperitivo. Bohemian atmosphere, mixed crowd.', 'I canali di Milano di notte. Magazzini Generali (techno e live music), Hollywood Club (storico), decine di bar lungo i canali per l\'aperitivo. Atmosfera bohémien, crowd misto.')}
-              </p>
-            </div>
-            <div>
-              <h3 className="font-sans text-champagne text-sm font-semibold tracking-widest uppercase mb-2">Isola</h3>
-              <p className="font-sans text-white/50 text-sm leading-relaxed">
-                {tr(locale, 'Milan\'s trendiest neighborhood with Voya Rooftop (sky lounge on the 20th floor, skyline view), hidden cocktail bars and design venues. Dream aperitivo with views of the skyscrapers.', 'Il quartiere più trendy di Milano con Voya Rooftop (sky lounge al 20° piano, vista skyline), cocktail bar nascosti e locali d\'autore. Aperitivo da sogno con vista sui grattacieli.')}
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
       </section>
 
       {/* Interactive Neighborhood Commute Planner (Metro M1-M5, Night Buses & Taxi to Top 6 Priority Clubs) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <NeighborhoodCommutePlanner locale={locale} />
+      <section id="metro-commute" className="scroll-mt-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <NeighborhoodCommutePlanner locale={loc} />
       </section>
 
       {/* Interactive Weekly Nightlife Navigator */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <WeeklyNightlifeNavigator locale={locale} />
+        <WeeklyNightlifeNavigator locale={loc} />
       </section>
 
       {/* Interactive VIP Quote Calculator */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <VipQuoteCalculator locale={locale} />
+        <VipQuoteCalculator locale={loc} />
+      </section>
+
+      {/* Localized FAQs */}
+      <section id="zones-faq" className="scroll-mt-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <h2 className="font-serif text-3xl text-champagne mb-6">{hubUi.faqTitle}</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {hubUi.faqs.map((faq, idx) => (
+            <div key={idx} className="p-6 rounded-xl border border-white/10 bg-white/[0.02]">
+              <h3 className="font-serif text-lg text-white mb-2">{faq.question}</h3>
+              <p className="text-sm text-white/65 leading-relaxed">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* VIP Tables CTA */}
@@ -293,10 +309,10 @@ export default async function ZonesPage({
         <div className="rounded-lg border border-champagne/20 bg-champagne/[0.04] p-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <h2 className="font-serif text-2xl md:text-3xl text-white mb-2">
-              {tr(locale, 'Found your zone? Book the table.', 'Trovata la zona? Prenota il tavolo.')}
+              {hubUi.ctaTitle}
             </h2>
-            <p className="font-sans text-white/40 text-sm">
-              {tr(locale, 'VIP tables from €200. WhatsApp concierge — reply in 10 minutes. Free service.', 'VIP table da €200. Concierge WhatsApp — risposta in 10 minuti. Servizio gratuito.')}
+            <p className="font-sans text-white/55 text-sm">
+              {hubUi.ctaDesc}
             </p>
           </div>
           <Link
@@ -305,11 +321,11 @@ export default async function ZonesPage({
               font-sans font-bold text-sm tracking-[0.15em] uppercase
               hover:bg-white transition-colors duration-300"
           >
-            {tr(locale, 'Book VIP Table', 'Prenota VIP Table')}
+            {hubUi.ctaBtn}
           </Link>
         </div>
       </section>
-            <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/zones`} />
+            <EditorialPageSections locale={loc} path={`${lp}/zones`} />
       </main>
     </>
   );

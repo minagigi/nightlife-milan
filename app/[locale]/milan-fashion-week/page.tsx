@@ -13,6 +13,7 @@ import {
   localePrefix,
 } from '@/lib/i18n/locales';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { getHubSeoMeta35 } from '@/lib/i18n/hubSeoMeta35';
 import {
   Sparkles,
   MapPin,
@@ -54,22 +55,9 @@ export async function generateMetadata({
   const { locale } = await params;
   const canonical = canonicalPageUrl(baseUrl, locale, '/milan-fashion-week');
 
-  const title = seoTitle(
-    tr(
-      locale,
-      'Milan Fashion Week, Fuorisalone Design Week & Monza F1 VIP Afterparties 2026/2027 | Tables & Brand Buyouts',
-      'Milano Fashion Week, Fuorisalone Design Week & Monza F1 Afterparty VIP 2026/2027 | Tavoli Console & Eventi Brand'
-    )
-  );
-
-  const description = withWhatsApp(
-    tr(
-      locale,
-      'Official Milan Fashion Week (MFW Feb/Sep/Jan/Jun), Salone del Mobile Fuorisalone (April) & Monza F1 Grand Prix VIP Afterparty Hub: book DJ Console tables, Brand Buyouts & Model Agency lists at 1. Just Me, 2. Pineta, 3. Aria, 4. 55 Milano, 5. Voya Rooftop & 6. Repvblic. WhatsApp +39 351 912 7047.',
-      'Hub ufficiale Milano Fashion Week (Febbraio/Settembre/Gennaio/Giugno), Fuorisalone Design Week (Aprile) e GP F1 Monza: prenota Tavoli Console, Corporate Buyout e accrediti agenzie da 1. Just Me, 2. Pineta, 3. Aria, 4. 55 Milano, 5. Voya Rooftop e 6. Repvblic. WhatsApp +39 351 912 7047.'
-    ),
-    locale
-  );
+  const meta35 = getHubSeoMeta35('milan-fashion-week', locale);
+  const title = seoTitle(meta35.title);
+  const description = withWhatsApp(meta35.description, locale);
 
   const languages = buildLanguageAlternates('/milan-fashion-week');
 

@@ -6,6 +6,8 @@ import Link from '@/components/LocalizedLink';
 import { tr } from '@/lib/i18n/t';
 import { getLocaleDef, hreflangAlternates, canonicalPageUrl, localePrefix } from '@/lib/i18n/locales';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { getHubSeoMeta35 } from '@/lib/i18n/hubSeoMeta35';
+import GuideToc from '@/components/GuideToc';
 import { Sparkles, PartyPopper, Crown, Users, MessageCircle, CheckCircle2 } from 'lucide-react';
 import { VipQuoteCalculator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
 import VerticalHubsAndEventsSection from '@/components/VerticalHubsAndEventsSection';
@@ -22,21 +24,10 @@ export async function generateMetadata({
   const { locale } = await params;
   const canonical = canonicalPageUrl(baseUrl, locale, '/private-parties');
 
-  const title = seoTitle(
-    tr(
-      locale,
-      'Graduation, 18th Birthday, Bachelorette & Corporate Parties in Milan 2026/2027 | Turnkey VIP Packages',
-      'Feste di Laurea, 18 Anni, Addio al Nubilato ed Eventi Aziendali Milano 2026/2027 | Pacchetti in Discoteca e Rooftop'
-    )
-  );
-  const description = withWhatsApp(
-    tr(
-      locale,
-      'Organize your graduation party, 18th/30th birthday, bachelorette or corporate event in Milan’s top clubs & rooftops (Just Me, Pineta, Aria, 55 Milano, Voya). Packages from €25/person.',
-      'Organizza la tua festa di laurea, 18esimo/30esimo compleanno, addio al nubilato o evento aziendale nei migliori club e rooftop di Milano (Just Me, Pineta, Aria, 55 Milano, Voya). Da €25/persona.'
-    ),
-    locale
-  );
+  const meta35 = getHubSeoMeta35('private-parties', locale);
+  const title = seoTitle(meta35.title);
+  const description = withWhatsApp(meta35.description, locale);
+  const heroUrl = `${baseUrl}/images/pillars/private-parties-hero.webp`;
 
   return {
     title,
@@ -55,12 +46,19 @@ export async function generateMetadata({
       locale: getLocaleDef(locale)?.ogLocale || 'en_US',
       images: [
         {
-          url: `${baseUrl}/images/bottle-service-milan-vip-nightclub.webp`,
+          url: heroUrl,
           width: 1200,
           height: 630,
           alt: title,
         },
       ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [heroUrl],
+      site: '@nightlifemilan',
     },
   };
 }
@@ -126,8 +124,8 @@ export default async function PrivatePartiesPage({
       titleIt: 'Tavolo Privé Discoteca + Lavagna LED Personalizzata + Bottle Service',
       priceEn: '€40 – €70 / person (from €250–€600/table)',
       priceIt: '€40 – €70 a persona (da €250–€600 a tavolo)',
-      venuesEn: 'Just Me Milano, Pineta Milano, Aria Club, Repvblic, Hollywood, Play Club',
-      venuesIt: 'Just Me Milano, Pineta Milano, Aria Club, Repvblic, Hollywood, Play Club',
+      venuesEn: 'Just Me Milano, Pineta Milano, Aria Club, Repvblic, Hollywood, Tocqueville 13',
+      venuesIt: 'Just Me Milano, Pineta Milano, Aria Club, Repvblic, Hollywood, Tocqueville 13',
       includesEn: [
         'Zero-queue VIP hostess escort at 23:30–01:00',
         '100% of table cost converted into premium bottles (Belvedere, Grey Goose, Dom Pérignon)',
@@ -165,12 +163,30 @@ export default async function PrivatePartiesPage({
         ? 'Quali locali accettano feste dei 18 anni a Milano?'
         : 'Which clubs in Milan host 18th birthday parties?',
       a: isIt
-        ? 'Per i 18esimi compleanni consigliamo 55 Milano (ampie terrazze e sale modulari), Pineta Milano, Play Club, Alcatraz e Loolapaloosa, oppure l’affitto di una sala/privé dedicato. Se tutti gli invitati hanno 18 anni compiuti con documento originale, sono accessibili tutti i club.'
-        : 'For 18th birthday parties we recommend 55 Milano (spacious terraces and modular rooms), Pineta Milano, Play Club, Alcatraz, and Loolapaloosa, or renting a dedicated private room. If all guests are 18+ with original physical ID, all clubs are accessible.',
+        ? 'Per i 18esimi compleanni consigliamo 55 Milano (ampie terrazze e sale modulari), Pineta Milano, Tocqueville 13, Alcatraz e Loolapaloosa, oppure l’affitto di una sala/privé dedicato. Se tutti gli invitati hanno 18 anni compiuti con documento originale, sono accessibili tutti i club.'
+        : 'For 18th birthday parties we recommend 55 Milano (spacious terraces and modular rooms), Pineta Milano, Tocqueville 13, Alcatraz, and Loolapaloosa, or renting a dedicated private room. If all guests are 18+ with original physical ID, all clubs are accessible.',
     },
   ];
 
+  const privatePartiesUrl = canonicalPageUrl(baseUrl, locale, '/private-parties');
+  const partyToc = [
+    { id: 'party-formulas', title: isIt ? 'Le 3 Formule Chiavi in Mano' : 'The 3 Turnkey Party Formulas' },
+    { id: 'formula-1', title: isIt ? 'Formula #1: Royal Aperitivo & Club' : 'Formula #1: Royal Aperitivo & Club' },
+    { id: 'formula-2', title: isIt ? 'Formula #2: Cena Spettacolo + Privé' : 'Formula #2: Dinner Show + Privé' },
+    { id: 'formula-3', title: isIt ? 'Formula #3: Tavolo VIP & Bottle Parade' : 'Formula #3: VIP Table & Bottle Parade' },
+    { id: 'party-quote', title: isIt ? 'Calcolatore Preventivo Festa' : 'Custom Party Quote Calculator' },
+    { id: 'private-parties-faq', title: isIt ? 'Domande Frequenti Eventi Privati' : 'Private Parties & Graduations FAQ' },
+  ];
+
   const schema = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${baseUrl}${lp || '/'}` },
+        { '@type': 'ListItem', position: 2, name: isIt ? 'Feste Private e Lauree' : 'Private Parties & Graduations', item: privatePartiesUrl },
+      ],
+    },
     {
       '@context': 'https://schema.org',
       '@type': 'Service',
@@ -240,7 +256,7 @@ export default async function PrivatePartiesPage({
         </p>
 
         {/* AI Quick Answer */}
-        <div className="max-w-3xl p-6 rounded-2xl border border-champagne/25 bg-champagne/[0.04]">
+        <div className="max-w-3xl p-6 rounded-2xl border border-champagne/25 bg-champagne/[0.04] mb-6">
           <p className="font-mono text-champagne text-[10px] tracking-[0.3em] uppercase mb-2">
             {isIt ? 'Risposta Rapida · Pacchetti Feste Milano 2026/2027' : 'Quick Answer · Milan Party Packages 2026/2027'}
           </p>
@@ -250,10 +266,13 @@ export default async function PrivatePartiesPage({
               : '1. Reserved Royal Aperitivo + Cake Toast + Club Entry: €25–€35/person (ideal for graduations and birthdays of 15–80 guests at 55 Milano, Just Me, Pineta, Voya Rooftop). 2. Seated Dinner Show + Club Table: €50–€80/person. 3. After-Dinner VIP Bottle Table with Custom LED Sign: €250–€600/table (€40–€65/person). Custom quote in 10 minutes via WhatsApp +39 351 912 7047.'}
           </p>
         </div>
+        <div className="max-w-3xl">
+          <GuideToc sections={partyToc} title={isIt ? 'Indice Feste ed Eventi' : 'Private Parties Index'} />
+        </div>
       </section>
 
       {/* 3 Turnkey Formulas */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <section id="party-formulas" className="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
         <h2 className="font-serif text-3xl md:text-4xl text-white mb-8">
           {isIt ? 'Le 3 Formule Ufficiali Chiavi in Mano' : 'The 3 Official Turnkey Party Formulas'}
         </h2>
@@ -261,7 +280,8 @@ export default async function PrivatePartiesPage({
           {packages.map((pkg, idx) => (
             <div
               key={idx}
-              className="flex flex-col justify-between p-7 rounded-2xl border border-white/15 bg-white/[0.025] hover:border-champagne/50 transition-all"
+              id={`formula-${idx + 1}`}
+              className="scroll-mt-24 flex flex-col justify-between p-7 rounded-2xl border border-white/15 bg-white/[0.025] hover:border-champagne/50 transition-all"
             >
               <div>
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-champagne/15 border border-champagne/40 text-champagne font-mono text-[10px] uppercase tracking-wider mb-4">
@@ -307,7 +327,7 @@ export default async function PrivatePartiesPage({
       </section>
 
       {/* Interactive Calculator */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      <section id="party-quote" className="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
         <VipQuoteCalculator locale={locale} />
       </section>
 
@@ -317,7 +337,7 @@ export default async function PrivatePartiesPage({
       </section>
 
       {/* FAQs */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="private-parties-faq" className="scroll-mt-24 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="font-serif text-3xl text-champagne mb-6">
           {isIt ? 'Domande Frequenti su Feste di Laurea e Compleanni' : 'Private Parties & Graduations FAQ'}
         </h2>

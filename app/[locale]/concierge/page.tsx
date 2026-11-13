@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { MessageCircle, Star, Clock, Shield, Zap, MapPin, Calendar, CheckCircle } from 'lucide-react';
 import { CONTACT } from '@/config/contact';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { getHubSeoMeta35 } from '@/lib/i18n/hubSeoMeta35';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import {
   VipQuoteCalculator,
@@ -24,21 +25,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const isIt = locale === 'it';
   const canonical = canonicalPageUrl(baseUrl, locale, '/concierge');
 
-  const title = seoTitle(
-    tr(
-      locale,
-      'Milan Nightlife Concierge | Personal Table & Guestlist Service | Nightlife Milan',
-      'Concierge Vita Notturna Milano | Tavoli VIP & Guestlist | Nightlife Milan'
-    )
-  );
-  const description = withWhatsApp(
-    tr(
-      locale,
-      'Your personal Milan nightlife concierge. VIP table booking, guestlist access, bottle service, and insider advice via WhatsApp. Free service for guests.',
-      'Il tuo concierge personale per la vita notturna milanese. Tavoli VIP, guestlist, bottle service e consigli insider su WhatsApp. Servizio gratuito.'
-    ),
-    locale
-  );
+  const meta35 = getHubSeoMeta35('concierge', locale);
+  const title = seoTitle(meta35.title);
+  const description = withWhatsApp(meta35.description, locale);
   const ogImage = `${baseUrl}/images/pillars/concierge-hero.webp`;
 
   return {
@@ -53,7 +42,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       languages: hreflangAlternates(baseUrl, '/concierge'),
     },
     openGraph: {
-      title: tr(locale, 'Personal Milan Nightlife Concierge · Nightlife Milan', 'Concierge Vita Notturna Milano · Nightlife Milan'),
+      title,
       description,
       type: 'website',
       url: canonical,
@@ -467,7 +456,7 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
                 { src: '/images/pillars/concierge-01.webp', alt: 'Just Me Milano Torre Branca VIP Table', label: 'Just Me' },
                 { src: '/images/pillars/concierge-02.webp', alt: 'Pineta Milano Singing Dinner & Club', label: 'Pineta Club' },
                 { src: '/images/pillars/concierge-03.webp', alt: 'Voya Rooftop Milan 20th Floor Skyline', label: 'Voya Rooftop' },
-                { src: '/images/pillars/concierge-04.webp', alt: 'Play Club Milano Viale Monte Grappa', label: 'Play Club' },
+                { src: '/images/pillars/concierge-04.webp', alt: 'Aria Club Milano San Siro Luxury Nightclub', label: 'Aria Club' },
                 { src: '/images/pillars/concierge-05.webp', alt: 'Magazzini Generali Milano Electronic Arena', label: 'Magazzini' },
               ].map((img) => (
                 <div key={img.label} className="relative group">
@@ -479,7 +468,7 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
               ))}
             </div>
             <div className="flex flex-wrap gap-2">
-              {['Just Me', 'Pineta Club', 'Aria Club', '55 Milano', 'Voya Rooftop', 'Repvblic', 'Armani Privé', 'Play Club', 'Magazzini Generali', 'Hollywood', 'Gattopardo', 'Tocqueville 13', 'Alcatraz', 'Fabrique', 'Ceresio 7', 'Terrazza Duomo 21'].map((v) => (
+              {['Just Me', 'Pineta Club', 'Aria Club', '55 Milano', 'Voya Rooftop', 'Repvblic', 'Armani Privé', 'Volt Club', 'Magazzini Generali', 'Hollywood', 'Gattopardo', 'Tocqueville 13', 'Alcatraz', 'Fabrique', 'Ceresio 7', 'Terrazza Duomo 21'].map((v) => (
                 <span key={v} className="px-3.5 py-1.5 border border-[#F6F1E7]/14 bg-[#0B0A09] text-[#E4DDD0] text-xs font-mono tracking-wider">
                   {v}
                 </span>

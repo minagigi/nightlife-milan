@@ -97,3 +97,67 @@ export function compareEventbriteDiscoveryItems(a: EventDiscoveryItem, b: EventD
   if (priorityA !== priorityB) return priorityA - priorityB;
   return new Date(a.event.dateISO).getTime() - new Date(b.event.dateISO).getTime();
 }
+
+function pickLocaleField(
+  map: Record<string, string | undefined> | undefined,
+  locale: string,
+): { en: string } & Record<string, string> {
+  const enVal = (map?.en || '').toString();
+  if (!locale || locale === 'en') {
+    return { en: enVal };
+  }
+  const locVal = map?.[locale];
+  if (locVal && locVal !== enVal) {
+    return { en: enVal, [locale]: locVal };
+  }
+  return { en: enVal };
+}
+
+/**
+ * Strip 35-language heavy descriptions, galleries, FAQs and unused locale dictionaries
+ * before passing discovery items into Client Components (`<DiscoveryGrid />`).
+ */
+export function slimDiscoveryItemsForClient(
+  items: EventDiscoveryItem[],
+  locale: string,
+  maxItems = 24,
+): EventDiscoveryItem[] {
+  return items.slice(0, maxItems).map(({ event, venue }) => ({
+    event: {
+      id: event.id,
+      venueId: event.venueId,
+      genre: event.genre,
+      dateISO: event.dateISO,
+      pricing: {
+        entry: event.pricing.entry,
+        currency: event.pricing.currency,
+        tableMinSpend: null,
+      },
+      image: event.image,
+      isTrending: event.isTrending,
+      localizedContent: {
+        title: pickLocaleField(event.localizedContent.title as Record<string, string>, locale) as Event['localizedContent']['title'],
+        slug: pickLocaleField(event.localizedContent.slug as Record<string, string>, locale) as Event['localizedContent']['slug'],
+        shortDescription: { en: '' },
+      },
+    },
+    venue: {
+      id: venue.id,
+      slugs: pickLocaleField(venue.slugs as Record<string, string>, locale) as Venue['slugs'],
+      address: venue.address,
+      coordinates: venue.coordinates,
+      category: venue.category,
+      zone: venue.zone,
+      sameAs: [],
+      localizedContent: {
+        name: pickLocaleField(venue.localizedContent.name as Record<string, string>, locale) as Venue['localizedContent']['name'],
+        description: { en: '' },
+        dressCode: { en: '' },
+        altTextImg: pickLocaleField(venue.localizedContent.altTextImg as Record<string, string>, locale) as Venue['localizedContent']['altTextImg'],
+      },
+      image: venue.image,
+      priorityScore: venue.priorityScore,
+      isFeatured: venue.isFeatured,
+    },
+  }));
+}

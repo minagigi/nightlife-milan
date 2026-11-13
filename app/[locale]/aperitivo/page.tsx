@@ -6,6 +6,7 @@ import { ArrowRight, Clock, MapPin, MessageCircle } from 'lucide-react';
 import { CONTACT } from '@/config/contact';
 import { tr } from '@/lib/i18n/t';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { getHubSeoMeta35, getAperitivoH1 } from '@/lib/i18n/hubSeoMeta35';
 import { VipQuoteCalculator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
@@ -19,8 +20,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const isIt = locale === 'it';
   const canonical = canonicalPageUrl(baseUrl, locale, '/aperitivo');
 
-  const title = seoTitle(tr(locale, 'Best Aperitivo in Milan 2026 | Top Bars & Where to Go | Nightlife Milan', 'Migliore Aperitivo Milano 2026 | Bar, Orari e Zone | Nightlife Milan'));
-  const description = withWhatsApp(tr(locale, 'Find the best aperitivo spots in Milan. Opening hours, what to order, dress code, and the top bars by zone — Navigli, Corso Como, Brera. Updated 2026.', 'I migliori locali per l\'aperitivo a Milano: orari, cosa ordinare, dress code e top bar per zona — Navigli, Corso Como, Brera. Guida aggiornata 2026.'), locale);
+  const meta35 = getHubSeoMeta35('aperitivo', locale);
+  const title = seoTitle(meta35.title);
+  const description = withWhatsApp(meta35.description, locale);
   const ogImage = `${baseUrl}/images/pillars/aperitivo-01.webp`;
 
   const keywordsEn = ['aperitivo milan', 'best aperitivo milan', 'milan aperitivo bars', 'where to do aperitivo milan', 'navigli aperitivo'];
@@ -36,7 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       languages: hreflangAlternates(baseUrl, '/aperitivo'),
     },
     openGraph: {
-      title: tr(locale, 'Best Aperitivo in Milan 2026 — Nightlife Milan', 'Migliore Aperitivo Milano 2026 — Nightlife Milan'),
+      title,
       description,
       type: 'article',
       url: canonical,
@@ -216,8 +218,7 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
             {tr(locale, 'THE MILANESE RITUAL')}
           </p>
           <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-none mb-6">
-            {tr(locale, 'Aperitivo')}<br />
-            <span className="text-champagne">{tr(locale, 'in Milan')}</span>
+            {getAperitivoH1(locale)}
           </h1>
           <p className="font-sans text-white/50 text-lg leading-relaxed max-w-2xl mx-auto mb-8">
             {tr(locale, "The Milanese aperitivo is more than a drink — it's the start of the evening. From canal-side Navigli to rooftop lounges, here's where to go and what to expect.")}

@@ -16,6 +16,7 @@ import { SITE_CONTACT } from '@/config/contact';
 import { getLocaleDef, hreflangAlternates, canonicalPageUrl, isEnabledLocale, localePrefix } from '@/lib/i18n/locales';
 import { notFound } from 'next/navigation';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { getHubSeoMeta35 } from '@/lib/i18n/hubSeoMeta35';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { getDateSensitiveCarouselInventory } from '@/lib/dateSensitiveInventory';
 import { selectPriorityVenueEvents } from '@/lib/priorityVenueEvents';
@@ -478,8 +479,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   if (!isEnabledLocale(locale)) notFound();
   const copy = getCopy(locale);
   const canonicalUrl = canonicalPageUrl(baseUrl, locale, '/vip-tables');
-  const title = seoTitle(copy.metaTitle);
-  const description = withWhatsApp(copy.metaDescription, locale);
+  const meta35 = getHubSeoMeta35('vip-tables', locale);
+  const title = seoTitle(meta35.title);
+  const description = withWhatsApp(meta35.description, locale);
 
   return {
     title,

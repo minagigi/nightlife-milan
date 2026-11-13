@@ -14,6 +14,7 @@ import { notFound } from 'next/navigation';
 import { SITE_CONTACT } from '@/config/contact';
 import { localePrefix, hreflangAlternates, getLocaleDef, isEnabledLocale } from '@/lib/i18n/locales';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { getHubSeoMeta35 } from '@/lib/i18n/hubSeoMeta35';
 import { applyEditorialFields, readEditorialFields } from '@/lib/editorialContent';
 import { currentHomeDict, currentHomeGridAlts } from '@/lib/i18n/currentSafePageCopy';
 import { getHeroCopy } from '@/lib/i18n/heroCopy';
@@ -258,8 +259,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const canonical = `${baseUrl}${localePrefix(locale)}` || baseUrl;
   const ogImage = `${baseUrl}/images/table-concierge/justme-night.webp`;
 
-  const title = seoTitle(copy.title);
-  const description = withWhatsApp(copy.description, locale);
+  const meta35 = getHubSeoMeta35('home', locale);
+  const title = seoTitle(meta35.title);
+  const description = withWhatsApp(meta35.description, locale);
 
   return {
     title,

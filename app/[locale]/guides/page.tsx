@@ -1,9 +1,15 @@
 import { Metadata } from 'next';
 import { getLocaleDef, hreflangAlternates, canonicalPageUrl } from '@/lib/i18n/locales';
+import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
+import { getHubSeoMeta35 } from '@/lib/i18n/hubSeoMeta35';
+import { getGuideUiLabels35 } from '@/lib/i18n/flagshipGuides35';
+import { getGuidesHubCopy35 } from '@/lib/i18n/guidesHub35';
+import { getLocalizedGuideSlug35 } from '@/lib/guides100Catalog';
+import GuideToc from '@/components/GuideToc';
 import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
 import NewsletterHub from '@/components/NewsletterHub';
-import { Clock, Sparkles, Compass, CheckCircle2, ArrowUpRight } from 'lucide-react';
+import { Clock, Sparkles, Compass, CheckCircle2, ArrowUpRight, ShieldCheck } from 'lucide-react';
 import { tr } from '@/lib/i18n/t';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { mockGuides } from '@/lib/data';
@@ -19,25 +25,14 @@ const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const isIt = locale === 'it';
-  const canonical = canonicalPageUrl(baseUrl, locale, '/guides');
+  const loc = (locale as LocaleCode) || 'en';
+  const canonical = canonicalPageUrl(baseUrl, loc, '/guides');
+  const meta35 = getHubSeoMeta35('guides', loc);
 
-  const title = seoTitle(
-    tr(
-      locale,
-      'Milan Nightlife Guides 2026/2027 | 14 Pillar Guides: Dress Code, VIP Tables, NYE 2027, San Siro & Concerts | Nightlife Milan',
-      'Guide Vita Notturna Milano 2026/2027 | 14 Guide Pillar: Dress Code, Tavoli VIP, Capodanno 2027, San Siro e Concerti | Nightlife Milan'
-    )
-  );
-  const description = withWhatsApp(
-    tr(
-      locale,
-      '14 Flagship Pillar Guides to Milan nightlife: door policies, VIP table prices, New Year Eve 2027, San Siro football & concert afterparties, bachelor/bachelorette VIP packages, Monday-to-Sunday calendar, rooftops, speakeasies & Fashion Week.',
-      '14 Guide Pillar complete alla vita notturna di Milano: dress code, listino tavoli VIP, Capodanno 2027, dopo-partita e dopo-concerto San Siro, addio al celibato/nubilato VIP, calendario lunedi-domenica, rooftop, speakeasy e Fashion Week.'
-    ),
-    locale
-  );
-  const ogImage = `${baseUrl}${mockGuides[0]?.image || '/images/guides-hero.webp'}`;
+  const title = seoTitle(meta35.title);
+  const description = withWhatsApp(meta35.description, loc);
+  const featuredGuide = mockGuides.find((g) => g.id === 'g-dress-code') || mockGuides[0];
+  const ogImage = `${baseUrl}${featuredGuide?.image || '/images/pillars/guide-hero-01.webp'}`;
 
   const keywordsEn = [
     'milan nightlife guide',
@@ -58,36 +53,32 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     'dopo partita san siro inter milan discoteche',
     'dopo concerto san siro ippodromo forum milano',
     'addio al celibato nubilato milano discoteche',
-    'serate milano lunedi domenica',
+    'serate milano lunedì domenica',
     'migliori rooftop bar milano',
   ];
 
   return {
     title,
     description,
-    keywords: keywordsEn.map((k, i) => tr(locale, k, keywordsIt[i])),
-    robots: seoRobots(locale),
+    keywords: keywordsEn.map((k, i) => tr(loc, k, keywordsIt[i])),
+    robots: seoRobots(loc),
     alternates: {
       canonical,
       languages: hreflangAlternates(baseUrl, '/guides'),
     },
     openGraph: {
-      title: tr(
-        locale,
-        'Milan Nightlife Guides 2026/2027 | The 14 Insider Pillar Guides',
-        'Guide Vita Notturna Milano 2026/2027 | Le 14 Guide Pillar Ufficiali'
-      ),
+      title,
       description,
       type: 'website',
       url: canonical,
       siteName: 'Nightlife Milan',
-      locale: getLocaleDef(locale)?.ogLocale || 'en_US',
+      locale: getLocaleDef(loc)?.ogLocale || 'en_US',
       images: [
         {
           url: ogImage,
           width: 1200,
           height: 630,
-          alt: tr(locale, 'Milan nightlife guides insider tips', 'Guide vita notturna Milano insider'),
+          alt: title,
         },
       ],
     },
@@ -122,7 +113,7 @@ const GUIDE_META: Record<
     readTimeEn: '8 min read',
     readTimeIt: '8 min di lettura',
     badgeEn: 'Pillar #1 · Most Read',
-    badgeIt: 'Pillar #1 · Piu Letta',
+    badgeIt: 'Pillar #1 · Più Letta',
   },
   'g-vip-bottle-prices': {
     categoryEn: 'VIP Tables & Bottle Service',
@@ -284,8 +275,13 @@ export default async function GuidesPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const isIt = locale === 'it';
-  const localePrefix = locale === 'en' ? '' : `/${locale}`;
+  const loc = (locale as LocaleCode) || 'en';
+  const isIt = loc === 'it';
+  const localePrefix = loc === 'en' ? '' : `/${loc}`;
+  const guidesDir = getLocalizedDir35('guides', loc);
+  const guidesHubUrl = `${baseUrl}${localePrefix}/${guidesDir}`;
+  const hubUi = getGuidesHubCopy35(loc);
+  const guideUi = getGuideUiLabels35(loc);
 
   const orderedIds = [
     'g-dress-code',
@@ -304,42 +300,122 @@ export default async function GuidesPage({
     'g-dj-interview',
   ];
 
-  const sortedGuides = [...mockGuides].sort((a, b) => {
-    const ia = orderedIds.indexOf(a.id);
-    const ib = orderedIds.indexOf(b.id);
-    return (ia === -1 ? 99 : ia) - (ib === -1 ? 99 : ib);
+  const orderedSet = new Set(orderedIds);
+  const flagshipGuides = orderedIds
+    .map((id) => mockGuides.find((g) => g.id === id))
+    .filter((g): g is NonNullable<typeof g> => Boolean(g));
+  const clusterGuides = mockGuides.filter((g) => !orderedSet.has(g.id));
+  const allGuidesOrdered = [...flagshipGuides, ...clusterGuides];
+
+  const featuredGuide = flagshipGuides[0];
+  const remainingFlagship = flagshipGuides.slice(1);
+
+  const parseClusterNum = (id: string) => parseInt(id.replace(/^g-/, ''), 10);
+  const venuesCluster = clusterGuides.filter((g) => {
+    const n = parseClusterNum(g.id);
+    return !Number.isNaN(n) && n >= 15 && n <= 40;
+  });
+  const occasionsCluster = clusterGuides.filter((g) => {
+    const n = parseClusterNum(g.id);
+    return !Number.isNaN(n) && n >= 41 && n <= 88;
+  });
+  const fairsCluster = clusterGuides.filter((g) => {
+    const n = parseClusterNum(g.id);
+    return !Number.isNaN(n) && n >= 89 && n <= 109;
+  });
+  const geoCluster = clusterGuides.filter((g) => {
+    const n = parseClusterNum(g.id);
+    return Number.isNaN(n) || n < 15 || n >= 110;
   });
 
-  const featuredGuide = sortedGuides[0];
-  const remainingGuides = sortedGuides.slice(1);
+  const cleanStr = (s: string) => s.replace(/[—–]/g, ' - ');
 
-  const collectionSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    name: isIt
-      ? 'Guide Vita Notturna Milano 2026/2027 | Nightlife Milan'
-      : 'Milan Nightlife Guides 2026/2027 | Nightlife Milan',
-    url: `${baseUrl}${localePrefix}/guides`,
-    description: isIt
-      ? 'Le 14 guide definitive alla vita notturna di Milano: dress code, listino tavoli VIP, Capodanno 2027, dopo-partita e dopo-concerto San Siro, addio al celibato/nubilato, calendario settimanale, rooftop, speakeasy, club techno e feste private.'
-      : 'The 14 definitive guides to Milan nightlife: dress code, VIP table price list, New Year Eve 2027, San Siro football & concert afterparties, bachelor/bachelorette VIP packages, weekly calendar, rooftops, speakeasies, techno clubs, and private parties.',
-    mainEntity: {
-      '@type': 'ItemList',
-      itemListElement: sortedGuides.map((g, idx) => ({
-        '@type': 'ListItem',
-        position: idx + 1,
-        name: getLocalizedText(g.title, locale).replace(/[—–]/g, ' - '),
-        url: `${baseUrl}${localePrefix}/guides/${getLocalizedText(g.slugs, locale)}`,
+  const schemas = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: guideUi.home, item: `${baseUrl}${localePrefix || '/'}` },
+        { '@type': 'ListItem', position: 2, name: guideUi.guides, item: guidesHubUrl },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: hubUi.h1,
+      url: guidesHubUrl,
+      description: hubUi.lead,
+      mainEntity: {
+        '@type': 'ItemList',
+        itemListElement: allGuidesOrdered.map((g, idx) => ({
+          '@type': 'ListItem',
+          position: idx + 1,
+          name: cleanStr(getLocalizedText(g.title, loc)),
+          url: `${guidesHubUrl}/${getLocalizedGuideSlug35(g, loc)}`,
+        })),
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: hubUi.faqs.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: { '@type': 'Answer', text: faq.answer },
       })),
     },
-  };
+  ];
+
+  const clusterSections = [
+    {
+      id: 'cluster-venues',
+      title: hubUi.clusterVenuesTitle,
+      desc: hubUi.clusterVenuesDesc,
+      items: venuesCluster,
+    },
+    {
+      id: 'cluster-occasions',
+      title: hubUi.clusterOccasionsTitle,
+      desc: hubUi.clusterOccasionsDesc,
+      items: occasionsCluster,
+    },
+    {
+      id: 'cluster-fairs-holidays',
+      title: hubUi.clusterFairsTitle,
+      desc: hubUi.clusterFairsDesc,
+      items: fairsCluster,
+    },
+    {
+      id: 'cluster-geo-hinterland',
+      title: hubUi.clusterGeoTitle,
+      desc: hubUi.clusterGeoDesc,
+      items: geoCluster,
+    },
+  ].filter((sec) => sec.items.length > 0);
 
   return (
     <main className="flex-grow pt-24 pb-20">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }}
       />
+
+      {/* Breadcrumbs */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+        <nav className="text-sm text-white/40" aria-label="Breadcrumb">
+          <ol className="list-none p-0 inline-flex items-center">
+            <li className="flex items-center">
+              <Link href={localePrefix || '/'} locale={loc} className="hover:text-champagne transition-colors">
+                {guideUi.home}
+              </Link>
+              <span className="mx-2">/</span>
+            </li>
+            <li className="text-champagne" aria-current="page">
+              {guideUi.guides}
+            </li>
+          </ol>
+        </nav>
+      </div>
 
       {/* Header */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
@@ -347,33 +423,49 @@ export default async function GuidesPage({
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-champagne/30 bg-champagne/10 mb-5">
             <Sparkles className="w-3.5 h-3.5 text-champagne" />
             <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-champagne">
-              {tr(locale, '14 Official Pillar Guides · 2026/2027 Edition', '14 Guide Pillar Ufficiali · Edizione 2026/2027')}
+              {hubUi.badge}
             </span>
           </div>
           <h1 className="font-serif text-5xl md:text-7xl font-bold text-champagne tracking-tighter mb-6">
-            {tr(locale, 'The Nightlife Magazine', 'L’Enciclopedia della Notte Milanese')}
+            {hubUi.h1}
           </h1>
           <p className="text-xl text-white/60 max-w-3xl mx-auto">
-            {tr(
-              locale,
-              'Authoritative insider guides, verified 2026/2027 VIP bottle lists, New Year Eve 2027 Gala Dinners, San Siro football & concert afterparties, bachelor/bachelorette packages, and neighborhood deep dives curated by the Nightlife Milan Concierge desk.',
-              'Guide insider autorevoli, listini bottiglie e tavoli VIP 2026/2027 verificati, Gran Cenoni di Capodanno 2027, dopo-partita e dopo-concerto San Siro, pacchetti celibato/nubilato e mappe di quartiere curate dal Concierge Nightlife Milan.'
-            )}
+            {hubUi.lead}
           </p>
         </div>
 
         {/* AI Answer Box */}
-        <div className="max-w-3xl mx-auto p-6 rounded-2xl border border-champagne/25 bg-champagne/[0.04]">
+        <div className="max-w-3xl mx-auto p-6 rounded-2xl border border-champagne/25 bg-champagne/[0.04] mb-6">
           <p className="font-mono text-champagne text-[10px] tracking-[0.3em] uppercase mb-3">
-            {tr(locale, 'Quick Answer · Executive Summary', 'Risposta Rapida · Sintesi Esecutiva')}
+            {hubUi.quickAnswerTitle}
           </p>
           <p className="font-sans text-white/75 text-sm leading-relaxed">
-            {tr(
-              locale,
-              'Our library features 14 exhaustive Pillar Guides updated for the 2026/2027 season: Door Policy & Dress Codes, VIP Table & Bottle Service Price List (from €150 for aperitivo tables to €250-€5,000 in clubs), New Year Eve Milan 2027 (Gala Dinners, Royal Buffets & VIP Tables across 19 Clubs), San Siro Football Match Afterparties (Inter & AC Milan: Aria Club 150m away, Just Me 7/7, Voya Rooftop, 55 Milano), San Siro, Ippodromo, Forum & Fabrique Concert Afterparties, VIP Bachelor & Bachelorette Parties, Monday-to-Sunday Weekly Calendar, Best Rooftop Bars, Hidden Navigli Speakeasies, Techno & Underground Warehouses, Graduation / 18th Parties, and Fashion Week, Design Week & Monza F1 Afterparties. Direct booking via WhatsApp +39 351 912 7047 or concierge@nightlifemilan.com.',
-              'La nostra libreria comprende 14 Guide Pillar complete aggiornate per la stagione 2026/2027: Dress Code e Selezione, Listino Prezzi Tavoli VIP e Bottiglie (da €150 per gli aperitivi a €250-€5.000 nei club), Capodanno Milano 2027 (Gran Cenone, Royal Buffet e Tavoli nei 19 Club), Dopo-Partita Calcio a San Siro (Inter & Milan: Aria Club a 150m, Just Me 7/7, Voya Rooftop, 55 Milano), Afterparty Concerti San Siro, Ippodromo, Forum e Fabrique, Addio al Celibato e Nubilato VIP, Calendario Settimanale Lunedi-Domenica, Migliori Rooftop Bar, Speakeasy Segreti, Club Techno & Warehouse, Feste di Laurea / 18 Anni e Fashion Week, Fuorisalone & Monza F1. Prenotazione diretta garantita via WhatsApp +39 351 912 7047 o concierge@nightlifemilan.com.'
-            )}
+            {hubUi.quickAnswerBody}
           </p>
+        </div>
+
+        {/* E-E-A-T Verified Concierge Bar */}
+        <div className="max-w-3xl mx-auto p-4 rounded-xl border border-white/10 bg-white/[0.02] mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-start gap-3">
+            <ShieldCheck className="w-5 h-5 text-champagne shrink-0 mt-0.5" />
+            <div>
+              <p className="text-xs font-mono uppercase tracking-wider text-white">{guideUi.verifiedTitle}</p>
+              <p className="text-xs text-white/60 mt-0.5">{guideUi.verifiedBody}</p>
+            </div>
+          </div>
+          <a
+            href="https://wa.me/393519127047"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="shrink-0 px-3.5 py-2 rounded-full bg-champagne text-black text-xs font-bold whitespace-nowrap hover:bg-champagne/90 transition-colors"
+          >
+            {guideUi.directDesk}
+          </a>
+        </div>
+
+        {/* Clickable TOC */}
+        <div className="max-w-3xl mx-auto">
+          <GuideToc sections={hubUi.tocItems} title={hubUi.tocTitle} />
         </div>
       </section>
 
@@ -381,12 +473,13 @@ export default async function GuidesPage({
       {featuredGuide && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
           <Link
-            href={`${localePrefix}/guides/${getLocalizedText(featuredGuide.slugs, locale)}`}
+            href={`${localePrefix}/${guidesDir}/${getLocalizedGuideSlug35(featuredGuide, loc)}`}
+            locale={loc}
             className="group relative block w-full h-[500px] md:h-[580px] rounded-2xl overflow-hidden border border-white/15 hover:border-champagne/60 transition-all duration-500"
           >
             <Image
-              src={featuredGuide.image || '/images/bottle-service-milan-vip-nightclub.webp'}
-              alt={getLocalizedText(featuredGuide.title, locale).replace(/[—–]/g, ' - ')}
+              src={featuredGuide.image || '/images/pillars/guide-hero-01.webp'}
+              alt={cleanStr(getLocalizedText(featuredGuide.title, loc))}
               fill
               quality={92}
               sizes="100vw"
@@ -398,27 +491,25 @@ export default async function GuidesPage({
             <div className="absolute inset-0 p-8 md:p-14 flex flex-col justify-end">
               <div className="flex flex-wrap items-center gap-3 mb-4">
                 <span className="bg-champagne text-black px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase">
-                  {tr(locale, GUIDE_META[featuredGuide.id]?.badgeEn || 'Featured Guide', GUIDE_META[featuredGuide.id]?.badgeIt || 'Guida in Evidenza')}
+                  {hubUi.featuredBadge}
                 </span>
                 <span className="text-champagne text-xs font-medium tracking-wider uppercase border border-champagne/30 px-4 py-1.5 rounded-full backdrop-blur-sm">
-                  {tr(locale, GUIDE_META[featuredGuide.id]?.categoryEn || 'Insider Guide', GUIDE_META[featuredGuide.id]?.categoryIt || 'Guida Insider')}
+                  {guideUi.officialBadge}
                 </span>
                 <div className="flex items-center space-x-1.5 text-white/75 text-xs font-mono">
                   <Clock className="w-3.5 h-3.5 text-champagne" />
-                  <span>
-                    {tr(locale, GUIDE_META[featuredGuide.id]?.readTimeEn || '8 min read', GUIDE_META[featuredGuide.id]?.readTimeIt || '8 min di lettura')}
-                  </span>
+                  <span>{featuredGuide.sections?.length || 5} {hubUi.chaptersLabel}</span>
                 </div>
               </div>
 
               <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 group-hover:text-champagne transition-colors max-w-4xl">
-                {getLocalizedText(featuredGuide.title, locale).replace(/[—–]/g, ' - ')}
+                {cleanStr(getLocalizedText(featuredGuide.title, loc))}
               </h2>
               <p className="text-base md:text-lg text-white/75 max-w-3xl line-clamp-3 mb-6">
-                {getLocalizedText(featuredGuide.excerpt, locale).replace(/[—–]/g, ' - ')}
+                {cleanStr(getLocalizedText(featuredGuide.excerpt, loc))}
               </p>
               <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-champagne">
-                <span>{tr(locale, 'Read Complete Pillar Guide', 'Leggi la Guida Completa')}</span>
+                <span>{hubUi.featuredCta}</span>
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
             </div>
@@ -426,32 +517,33 @@ export default async function GuidesPage({
         </section>
       )}
 
-      {/* All 13 Remaining Pillar Guides Grid (Total 14 Pillar Guides) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+      {/* Remaining 13 Flagship Pillar Guides (Total 14 Visual Cards) */}
+      <section id="flagship-pillars" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 scroll-mt-24">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
           <div>
             <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-champagne mb-2">
-              {tr(locale, 'Complete Editorial Library · 14 Pillar Guides', 'Libreria Editoriale Completa · 14 Guide Pillar')}
+              {hubUi.flagshipEyebrow}
             </p>
             <h2 className="font-serif text-3xl md:text-4xl text-white">
-              {tr(locale, 'All 14 Flagship Pillar Guides 2026/2027', 'Tutte le 14 Guide Pillar 2026/2027')}
+              {hubUi.flagshipTitle}
             </h2>
           </div>
           <div className="flex flex-wrap gap-2">
             {[
-              { href: `${localePrefix}/new-years-eve`, label: tr(locale, 'New Year Eve 2027', 'Capodanno 2027') },
-              { href: `${localePrefix}/football-afterparties`, label: tr(locale, 'San Siro Football', 'Dopo-Partita San Siro') },
-              { href: `${localePrefix}/concert-afterparties`, label: tr(locale, 'Concert Afterparties', 'Dopo-Concerto') },
-              { href: `${localePrefix}/fashion-week`, label: tr(locale, 'Fashion & Design Week', 'Fashion Week & Fuorisalone') },
-              { href: `${localePrefix}/vip-tables`, label: tr(locale, 'VIP Tables', 'Tavoli VIP') },
-              { href: `${localePrefix}/bottle-prices`, label: tr(locale, 'Bottle Prices', 'Listino Bottiglie') },
-              { href: `${localePrefix}/rooftops`, label: tr(locale, 'Rooftop Bars', 'Rooftop Bar') },
-              { href: `${localePrefix}/private-parties`, label: tr(locale, 'Private & Bachelor Parties', 'Lauree, 18 Anni & Nubilato') },
-              { href: `${localePrefix}/guest-lists`, label: tr(locale, 'Guest Lists', 'Liste & Ingressi') },
+              { href: `${localePrefix}/new-years-eve`, label: tr(loc, 'New Year Eve 2027', 'Capodanno 2027') },
+              { href: `${localePrefix}/football-afterparties`, label: tr(loc, 'San Siro Football', 'Dopo-Partita San Siro') },
+              { href: `${localePrefix}/concert-afterparties`, label: tr(loc, 'Concert Afterparties', 'Dopo-Concerto') },
+              { href: `${localePrefix}/fashion-week`, label: tr(loc, 'Fashion & Design Week', 'Fashion Week & Fuorisalone') },
+              { href: `${localePrefix}/vip-tables`, label: tr(loc, 'VIP Tables', 'Tavoli VIP') },
+              { href: `${localePrefix}/bottle-prices`, label: tr(loc, 'Bottle Prices', 'Listino Bottiglie') },
+              { href: `${localePrefix}/rooftops`, label: tr(loc, 'Rooftop Bars', 'Rooftop Bar') },
+              { href: `${localePrefix}/private-parties`, label: tr(loc, 'Private & Bachelor Parties', 'Lauree, 18 Anni & Nubilato') },
+              { href: `${localePrefix}/guest-lists`, label: tr(loc, 'Guest Lists', 'Liste & Ingressi') },
             ].map((chip) => (
               <Link
                 key={chip.href}
                 href={chip.href}
+                locale={loc}
                 className="px-3.5 py-1.5 rounded-full border border-white/15 bg-white/[0.03] hover:border-champagne/50 text-xs text-white/75 hover:text-champagne transition-colors"
               >
                 {chip.label}
@@ -461,22 +553,23 @@ export default async function GuidesPage({
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
-          {remainingGuides.map((guide, index) => {
+          {remainingFlagship.map((guide, index) => {
             const meta = GUIDE_META[guide.id] || {
               categoryEn: 'Insider Guide',
               categoryIt: 'Guida Insider',
               readTimeEn: '8 min read',
               readTimeIt: '8 min di lettura',
             };
-            const guideSlug = getLocalizedText(guide.slugs, locale);
-            const guideTitle = getLocalizedText(guide.title, locale).replace(/[—–]/g, ' - ');
-            const guideExcerpt = getLocalizedText(guide.excerpt, locale).replace(/[—–]/g, ' - ');
+            const guideSlug = getLocalizedGuideSlug35(guide, loc);
+            const guideTitle = cleanStr(getLocalizedText(guide.title, loc));
+            const guideExcerpt = cleanStr(getLocalizedText(guide.excerpt, loc));
             const highlights = isIt ? meta.highlightsIt : meta.highlightsEn;
 
             return (
               <Link
                 key={guide.id}
-                href={`${localePrefix}/guides/${guideSlug}`}
+                href={`${localePrefix}/${guidesDir}/${guideSlug}`}
+                locale={loc}
                 className="group flex flex-col bg-white/[0.025] rounded-2xl overflow-hidden border border-white/10 hover:border-champagne/45 transition-all duration-500"
               >
                 <div className="relative h-56 w-full overflow-hidden">
@@ -492,20 +585,20 @@ export default async function GuidesPage({
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                   <div className="absolute top-3.5 left-3.5 flex flex-wrap gap-2">
                     <span className="bg-black/70 backdrop-blur-md border border-white/15 text-white px-3 py-1 rounded-full text-[10px] font-mono tracking-wider uppercase">
-                      {tr(locale, meta.categoryEn, meta.categoryIt)}
+                      {tr(loc, meta.categoryEn, meta.categoryIt)}
                     </span>
                     {meta.badgeEn && (
                       <span className="bg-champagne text-black px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase">
-                        {tr(locale, meta.badgeEn, meta.badgeIt || meta.badgeEn)}
+                        {tr(loc, meta.badgeEn, meta.badgeIt || meta.badgeEn)}
                       </span>
                     )}
                   </div>
                   <div className="absolute bottom-3 left-3.5 flex items-center gap-2 text-champagne text-xs font-mono">
                     <Clock className="w-3.5 h-3.5" />
-                    <span>{tr(locale, meta.readTimeEn, meta.readTimeIt)}</span>
+                    <span>{tr(loc, meta.readTimeEn, meta.readTimeIt)}</span>
                     <span className="text-white/40">·</span>
                     <span className="text-white/60">
-                      {guide.sections?.length || 4} {tr(locale, 'chapters', 'capitoli')}
+                      {guide.sections?.length || 4} {hubUi.chaptersLabel}
                     </span>
                   </div>
                 </div>
@@ -513,7 +606,7 @@ export default async function GuidesPage({
                 <div className="p-6 flex flex-col flex-grow justify-between">
                   <div>
                     <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/40 mb-2">
-                      Pillar #{index + 2} / {sortedGuides.length}
+                      {hubUi.pillarLabel} #{index + 2} / {flagshipGuides.length}
                     </div>
                     <h3 className="font-serif text-xl font-bold text-white mb-3 group-hover:text-champagne transition-colors leading-snug">
                       {guideTitle}
@@ -534,7 +627,7 @@ export default async function GuidesPage({
                   </div>
 
                   <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono uppercase tracking-wider text-champagne">
-                    <span>{tr(locale, 'Read Guide', 'Approfondisci')}</span>
+                    <span>{hubUi.readGuideLabel}</span>
                     <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </div>
                 </div>
@@ -544,92 +637,105 @@ export default async function GuidesPage({
         </div>
       </section>
 
+      {/* 102 Cluster Guides: Compact Grouped Editorial Directory */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 space-y-14">
+        <div className="border-t border-white/10 pt-14">
+          <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-champagne mb-2">
+            {hubUi.clustersEyebrow}
+          </p>
+        </div>
+        {clusterSections.map((section) => (
+          <section key={section.id} id={section.id} className="scroll-mt-24">
+            <h2 className="font-serif text-2xl md:text-3xl text-white mb-2">
+              {section.title}
+            </h2>
+            <p className="text-sm text-white/60 max-w-3xl mb-6">{section.desc}</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
+              {section.items.map((guide) => {
+                const guideSlug = getLocalizedGuideSlug35(guide, loc);
+                const guideTitle = cleanStr(getLocalizedText(guide.title, loc));
+                return (
+                  <Link
+                    key={guide.id}
+                    href={`${localePrefix}/${guidesDir}/${guideSlug}`}
+                    locale={loc}
+                    className="group flex items-center justify-between gap-3 p-4 rounded-xl border border-white/10 bg-white/[0.02] hover:border-champagne/50 hover:bg-champagne/[0.04] transition-colors"
+                  >
+                    <div className="min-w-0">
+                      <span className="block font-serif text-base font-semibold text-white group-hover:text-champagne transition-colors leading-snug">
+                        {guideTitle}
+                      </span>
+                      <span className="mt-1 inline-block font-mono text-[10px] uppercase tracking-wider text-white/40">
+                        {hubUi.readGuideLabel}
+                      </span>
+                    </div>
+                    <ArrowUpRight className="w-4 h-4 text-champagne shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
+        ))}
+      </div>
+
       {/* Interactive Weekly Nightlife Navigator */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-        <WeeklyNightlifeNavigator locale={locale} />
+        <WeeklyNightlifeNavigator locale={loc} />
       </section>
 
       {/* Interactive VIP Table & Bottle Service Calculator */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-        <VipQuoteCalculator locale={locale} />
+        <VipQuoteCalculator locale={loc} />
       </section>
 
       {/* Priority 6 Venues Showcase */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-        <PrioritySixShowcase locale={locale} />
+        <PrioritySixShowcase locale={loc} />
       </section>
 
       {/* Essential Milan Nightlife Knowledge */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 border-t border-white/10 pt-16">
+      <section id="golden-rules" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 border-t border-white/10 pt-16 scroll-mt-24">
         <div className="flex items-center gap-2 mb-3">
           <Compass className="w-4 h-4 text-champagne" />
           <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-champagne">
-            {tr(locale, 'Concierge Golden Rules', 'Regole d’Oro del Concierge')}
+            {hubUi.goldenEyebrow}
           </span>
         </div>
         <h2 className="font-serif text-3xl md:text-4xl text-white mb-8">
-          {tr(locale, 'Essential Milan Nightlife Knowledge', 'Le 4 Regole Fondamentali della Notte a Milano')}
+          {hubUi.goldenTitle}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="p-7 rounded-2xl border border-white/10 bg-white/[0.02]">
-            <h3 className="font-serif text-xl text-white mb-3 flex items-center gap-2">
-              <CheckCircle2 className="w-5 h-5 text-champagne shrink-0" />
-              {tr(locale, 'Dress Code: What Actually Gets You In', 'Dress Code: Cosa Ti Fa Entrare Davvero')}
-            </h3>
-            <p className="font-sans text-white/60 text-sm leading-relaxed">
-              {tr(
-                locale,
-                'Milan enforces strict door selection. At Just Me, Pineta, Aria, and 55 Milano: smart-glamour minimum, collared shirt and dark blazer for men, evening chic for women (no gym sneakers, sportswear, or chains). At Amnesia, Fabrique, and Magazzini Generali: contemporary total-black clubwear. At Voya Rooftop and Repvblic: panoramic cocktail chic.',
-                'Milano applica una selezione rigorosa alla porta. Da Just Me, Pineta, Aria e 55 Milano: minimo smart-glamour, camicia e blazer scuro per gli uomini, abito da sera o tailleur chic per le donne (vietate sneaker sportive, tute e borselli). Da Amnesia, Fabrique e Magazzini Generali: total-black contemporaneo. Da Voya Rooftop e Repvblic: cocktail chic.'
-              )}
-            </p>
-          </div>
-          <div className="p-7 rounded-2xl border border-white/10 bg-white/[0.02]">
-            <h3 className="font-serif text-xl text-white mb-3 flex items-center gap-2">
-              <CheckCircle2 className="w-5 h-5 text-champagne shrink-0" />
-              {tr(locale, 'Exact Timing: Aperitivo vs Club Peak', 'Orari Esatti: Aperitivo vs Picco Club')}
-            </h3>
-            <p className="font-sans text-white/60 text-sm leading-relaxed">
-              {tr(
-                locale,
-                'Royal Aperitivo & Dinner Shows at 55 Milano, Just Me, Pineta, Tocqueville 13, and Voya Rooftop start at 19:30 and peak at 20:30-22:30. Nightclubs open their doors at 23:30: guest list privileges expire between 00:30 and 01:00, while VIP Table check-in is guaranteed until 01:30 with dedicated hostess escort.',
-                'Royal Aperitivo e Dinner Show da 55 Milano, Just Me, Pineta, Tocqueville 13 e Voya Rooftop iniziano alle 19:30 con picco tra le 20:30 e le 22:30. Le discoteche aprono alle 23:30: le agevolazioni in lista chiudono tra le 00:30 e l’01:00, mentre il check-in Tavolo VIP è garantito fino all’01:30 con accoglienza hostess dedicata.'
-              )}
-            </p>
-          </div>
-          <div className="p-7 rounded-2xl border border-white/10 bg-white/[0.02]">
-            <h3 className="font-serif text-xl text-white mb-3 flex items-center gap-2">
-              <CheckCircle2 className="w-5 h-5 text-champagne shrink-0" />
-              {tr(locale, 'Guestlist vs VIP Table: Transparent Math', 'Lista vs Tavolo VIP: Il Calcolo Trasparente')}
-            </h3>
-            <p className="font-sans text-white/60 text-sm leading-relaxed">
-              {tr(
-                locale,
-                'A guest list offers reduced entry (€15-€30) but requires queueing and mixed gender balance. For groups of 5-10 guests, a VIP Table (€250-€600 total, i.e. €35-€65 per person) is 100% spendable in premium bottles, skips all lines, guarantees door approval, and gives you a private base all night.',
-                'La lista nominale offre ingresso ridotto (€15-€30) ma richiede coda e bilanciamento uomo/donna. Per gruppi di 5-10 persone, il Tavolo VIP (€250-€600 totali, cioè €35-€65 a testa) è 100% spendibile in bottiglie premium, salta ogni fila, blinda l’ingresso alla porta e garantisce una base privata tutta la notte.'
-              )}
-            </p>
-          </div>
-          <div className="p-7 rounded-2xl border border-white/10 bg-white/[0.02]">
-            <h3 className="font-serif text-xl text-white mb-3 flex items-center gap-2">
-              <CheckCircle2 className="w-5 h-5 text-champagne shrink-0" />
-              {tr(locale, '14 Nightlife Districts & 19+ Venues Mapped', '14 Quartieri e 19+ Club Mappati')}
-            </h3>
-            <p className="font-sans text-white/60 text-sm leading-relaxed">
-              {tr(
-                locale,
-                'Explore all 14 Milan nightlife zones: Parco Sempione (Just Me, 55 Milano), San Siro (Aria Club 150m from Stadium), Portello/CityLife (Voya Rooftop 20th Floor), Corso Como & Garibaldi (Pineta, Repvblic, Hollywood, Play, Tocqueville 13), Isola (Alcatraz, Ceresio 7), Mecenate/Forlanini (Fabrique, Amnesia), Brera, Navigli, Porta Venezia, Porta Romana, Ripamonti, Duomo, NoLo, and Lambrate.',
-                'Esplora tutti i 14 quartieri della notte milanese: Parco Sempione (Just Me, 55 Milano), San Siro (Aria Club a 150m dallo Stadio), Portello/CityLife (Voya Rooftop 20° Piano), Corso Como & Garibaldi (Pineta, Repvblic, Hollywood, Play, Tocqueville 13), Isola (Alcatraz, Ceresio 7), Mecenate/Forlanini (Fabrique, Amnesia), Brera, Navigli, Porta Venezia, Porta Romana, Ripamonti, Duomo, NoLo e Lambrate.'
-              )}
-            </p>
-          </div>
+          {hubUi.goldenRules.map((rule) => (
+            <div key={rule.title} className="p-7 rounded-2xl border border-white/10 bg-white/[0.02]">
+              <h3 className="font-serif text-xl text-white mb-3 flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5 text-champagne shrink-0" />
+                {rule.title}
+              </h3>
+              <p className="font-sans text-white/60 text-sm leading-relaxed">
+                {rule.body}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
-      <VerticalHubsAndEventsSection locale={locale} initialTab="occasions" eventFocus="all" />
+      {/* Visible FAQ Section */}
+      <section id="guides-faq" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 border-t border-white/10 pt-14 scroll-mt-24">
+        <h2 className="font-serif text-3xl text-white mb-8">{hubUi.faqTitle}</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {hubUi.faqs.map((faq) => (
+            <div key={faq.question} className="p-6 rounded-2xl border border-white/10 bg-white/[0.02]">
+              <h3 className="font-serif text-lg text-champagne mb-2">{faq.question}</h3>
+              <p className="text-sm text-white/70 leading-relaxed">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <VerticalHubsAndEventsSection locale={loc} initialTab="occasions" eventFocus="all" />
       {/* Newsletter Hub */}
-      <NewsletterHub lang={locale} />
-            <EditorialPageSections locale={locale as LocaleCode} path={`${localePrefix}/guides`} />
-      </main>
+      <NewsletterHub lang={loc} />
+      <EditorialPageSections locale={loc} path={`${localePrefix}/guides`} />
+    </main>
   );
 }

@@ -3,6 +3,7 @@ import Link from '@/components/LocalizedLink';
 import { tr } from '@/lib/i18n/t';
 import { getLocaleDef, hreflangAlternates, canonicalPageUrl, localePrefix } from '@/lib/i18n/locales';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { getHubSeoMeta35 } from '@/lib/i18n/hubSeoMeta35';
 import { Sparkles, CheckCircle2, MessageCircle, Clock, ShieldCheck } from 'lucide-react';
 import { EntryFormulaMatrix, VipQuoteCalculator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
 import Image from 'next/image';
@@ -21,21 +22,9 @@ export async function generateMetadata({
   const { locale } = await params;
   const canonical = canonicalPageUrl(baseUrl, locale, '/guest-lists');
 
-  const title = seoTitle(
-    tr(
-      locale,
-      'Milan Nightclub Guest Lists 2026/2027 | Nominal Accreditation, Entry Prices & Cut-off Times | Nightlife Milan',
-      'Liste Discoteche Milano 2026/2027 | Accredito Nominale, Prezzi Ingresso Ridotto e Orari | Nightlife Milan'
-    )
-  );
-  const description = withWhatsApp(
-    tr(
-      locale,
-      'How to get on the official Guest List (Lista NIGHTLIFE MILAN) for Just Me, Pineta, Aria, 55 Milano, Voya Rooftop & Repvblic. Free accreditation via WhatsApp +39 351 912 7047.',
-      'Come accreditarsi in Lista Ufficiale (Lista NIGHTLIFE MILAN) per Just Me, Pineta, Aria, 55 Milano, Voya Rooftop e Repvblic. Accredito gratuito via WhatsApp +39 351 912 7047.'
-    ),
-    locale
-  );
+  const meta35 = getHubSeoMeta35('guest-lists', locale);
+  const title = seoTitle(meta35.title);
+  const description = withWhatsApp(meta35.description, locale);
 
   return {
     title,

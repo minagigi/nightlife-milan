@@ -133,6 +133,8 @@ export const GUIDE_HERO_IMAGES_114: Record<string, string> = {
   'g-112': '/images/pillars/zone-hero-06.webp',
   'g-113': '/images/pillars/zone-hero-12.webp',
   'g-114': '/images/pillars/zone-inline-10-a.webp',
+  'g-115': '/images/pillars/concierge-hero.webp',
+  'g-116': '/images/pillars/zone-hero-13.webp',
 };
 
 export const GUIDE_INLINE_IMAGES_114: Record<string, string[]> = {
@@ -265,6 +267,8 @@ export const GUIDE_INLINE_IMAGES_114: Record<string, string[]> = {
   'g-112': ['/images/pillars/zone-06.webp', '/images/pillars/zone-inline-06-a.webp', '/images/pillars/zone-inline-06-b.webp', '/images/pillars/zone-inline-06-c.webp'],
   'g-113': ['/images/pillars/zone-12.webp', '/images/pillars/zone-inline-12-a.webp', '/images/pillars/zone-inline-12-b.webp', '/images/pillars/zone-inline-12-c.webp'],
   'g-114': ['/images/pillars/zone-inline-10-b.webp', '/images/pillars/zone-inline-10-c.webp', '/images/pillars/zone-inline-12-d.webp', '/images/pillars/zone-inline-14-d.webp'],
+  'g-115': ['/images/pillars/concierge-01.webp', '/images/pillars/concierge-02.webp', '/images/pillars/concierge-03.webp', '/images/pillars/concierge-05.webp'],
+  'g-116': ['/images/pillars/zone-inline-13-a.webp', '/images/pillars/zone-inline-13-b.webp', '/images/pillars/zone-inline-13-d.webp', '/images/pillars/concert-afterparties-01.webp'],
 };
 
 export function getGuideHeroImage114(guideId: string, fallback?: string): string {

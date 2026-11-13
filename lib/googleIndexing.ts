@@ -156,6 +156,7 @@ export async function submitSitemap(siteUrl: string, sitemapUrl: string): Promis
 }
 
 export const ALL_PRODUCTION_SITEMAP_PATHS = [
+  '/sitemap-index.xml',
   '/sitemap.xml',
   '/sitemap-core.xml',
   '/sitemap-clubs.xml',

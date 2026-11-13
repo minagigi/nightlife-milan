@@ -15,6 +15,7 @@ import GuideShareButtons from '@/components/GuideShareButtons';
 import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
+import { getGuideUiLabels35 } from '@/lib/i18n/flagshipGuides35';
 import type { LocaleCode } from '@/lib/i18n/locales';
 
 // ISR Configuration (1 hour)
@@ -83,8 +84,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!guide) return notFound();
 
-  const title = seoTitle(`${getLocalizedText(guide.title, locale)} | Nightlife Milan Guides`);
-  const description = withWhatsApp(getLocalizedText(guide.excerpt, locale), locale);
+  const rawTitle = getLocalizedText(guide.title, locale).replace(/\u2014/g, ' - ');
+  const title = seoTitle(`${rawTitle} | Nightlife Milan`);
+  const description = withWhatsApp(getLocalizedText(guide.excerpt, locale).replace(/\u2014/g, ' - '), locale);
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
 
@@ -143,41 +145,49 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function GuidePage({ params }: Props) {
   const { locale, slug } = await params;
-  const isIt = locale === 'it';
-  const guide = getGuideBySlug(slug, locale);
+  const loc = (locale as LocaleCode) || 'en';
+  const isIt = loc === 'it';
+  const guide = getGuideBySlug(slug, loc);
 
   if (!guide) return notFound();
 
-  const title = getLocalizedText(guide.title, locale);
-  const excerpt = getLocalizedText(guide.excerpt, locale);
+  const ui = getGuideUiLabels35(loc);
+  const title = getLocalizedText(guide.title, loc).replace(/\u2014/g, ' - ');
+  const excerpt = getLocalizedText(guide.excerpt, loc).replace(/\u2014/g, ' - ');
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const langPrefix = localePrefix(locale);
-  const currentSlug = getLocalizedGuideSlug35(guide, (locale as LocaleCode) || 'en');
-  const guideUrl = `${baseUrl}${langPrefix}/${getLocalizedDir35('guides', locale)}/${currentSlug}`;
+  const langPrefix = localePrefix(loc);
+  const currentSlug = getLocalizedGuideSlug35(guide, loc);
+  const guideUrl = `${baseUrl}${langPrefix}/${getLocalizedDir35('guides', loc)}/${currentSlug}`;
+  const effectiveModified = guide.dateModified || '2026-11-13';
 
   const t = {
-    back: tr(locale, 'Back to Guides', 'Torna alle Guide'),
-    toc: tr(locale, 'Table of Contents', 'Indice dei Contenuti'),
-    relatedVenues: tr(locale, 'Priority Partner Venues', 'Top 6 Locali Partner Prioritari'),
-    proTip: tr(locale, 'Concierge Insider Tip', "Il Consiglio dell'Esperto Concierge"),
-    faq: tr(locale, 'Frequently Asked Questions', 'Domande Frequenti'),
-    otherGuides: tr(locale, 'Explore Other Pillar Guides', 'Esplora le Altre Guide Pillar'),
+    back: ui.guides,
+    toc: ui.tocHeading,
+    relatedVenues: ui.recommendedVenues,
+    proTip: ui.verifiedTitle,
+    faq: ui.faqHeading,
+    otherGuides: ui.allGuidesCta,
   };
 
-  // Format date
-  const dateObj = new Date(guide.dateModified || guide.datePublished);
-  const formattedDate = new Intl.DateTimeFormat(isIt ? 'it-IT' : 'en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    timeZone: 'Europe/Rome',
-  }).format(dateObj);
+  // Format date in user's locale
+  const dateObj = new Date(effectiveModified || guide.datePublished);
+  let formattedDate = effectiveModified;
+  try {
+    formattedDate = new Intl.DateTimeFormat(getLocaleDef(loc)?.hreflang || 'en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      timeZone: 'Europe/Rome',
+    }).format(dateObj);
+  } catch {
+    formattedDate = effectiveModified;
+  }
 
-  // Extract sections for TOC
+  // Extract sections for TOC (strip any raw markdown ## prefix)
   const tocSections = guide.sections.map((s) => ({
     id: s.id,
-    title: getLocalizedText(s.heading, locale),
+    title: getLocalizedText(s.heading, loc).replace(/^#+\s*/, '').replace(/\u2014/g, ' - '),
   }));
 
   // Priority Top 6 venues ordered by priorityScore (1. Just Me, 2. Pineta, 3. Aria, 4. 55 Milano, 5. Voya Rooftop, 6. Repvblic)
@@ -186,35 +196,75 @@ export default async function GuidePage({ params }: Props) {
   // Other guides for cross-linking
   const otherGuides = mockGuides.filter((g) => g.id !== guide.id).slice(0, 4);
 
-  // Generate Article JSON-LD Schema
+  // Generate Article JSON-LD Schema with E-E-A-T ContactPoint & NightClub mentions
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
+    inLanguage: getLocaleDef(loc)?.hreflang || loc,
     headline: title,
     image: guide.image
       ? [guide.image.startsWith('http') ? guide.image : `${baseUrl}${GUIDE_HERO_IMAGES[guide.id] || guide.image}`]
       : [],
     datePublished: guide.datePublished,
-    dateModified: guide.dateModified,
+    dateModified: effectiveModified,
     author: [
       {
         '@type': 'Organization',
-        name: guide.author,
+        name: guide.author || 'Nightlife Milan Concierge Editorial Desk',
+        url: baseUrl,
       },
     ],
     publisher: {
       '@type': 'Organization',
       name: 'Nightlife Milan',
+      url: baseUrl,
       logo: {
         '@type': 'ImageObject',
         url: `${baseUrl}/images/milan-nightclub-luxury-vip-champagne.webp`,
       },
+      contactPoint: {
+        '@type': 'ContactPoint',
+        telephone: '+39-351-912-7047',
+        contactType: 'customer support',
+        areaServed: 'IT',
+      },
     },
+    mentions: relatedVenues.map((v) => ({
+      '@type': 'NightClub',
+      '@id': `${baseUrl}${langPrefix}/${getLocalizedDir35('clubs', loc)}/${getLocalizedText(v.slugs, loc)}#nightclub`,
+      name: getLocalizedText(v.localizedContent.name, loc),
+      url: `${baseUrl}${langPrefix}/${getLocalizedDir35('clubs', loc)}/${getLocalizedText(v.slugs, loc)}`,
+    })),
     description: excerpt,
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': guideUrl,
     },
+  };
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: ui.home,
+        item: `${baseUrl}${langPrefix || '/'}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: ui.guides,
+        item: `${baseUrl}${langPrefix}/${getLocalizedDir35('guides', loc)}`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: title,
+        item: guideUrl,
+      },
+    ],
   };
 
   // Generate FAQPage JSON-LD Schema if FAQs exist
@@ -225,10 +275,10 @@ export default async function GuidePage({ params }: Props) {
       '@type': 'FAQPage',
       mainEntity: guide.faqs.map((faq) => ({
         '@type': 'Question',
-        name: getLocalizedText(faq.question, locale),
+        name: getLocalizedText(faq.question, loc).replace(/\u2014/g, ' - '),
         acceptedAnswer: {
           '@type': 'Answer',
-          text: getLocalizedText(faq.answer, locale),
+          text: getLocalizedText(faq.answer, loc).replace(/\u2014/g, ' - '),
         },
       })),
     };
@@ -237,11 +287,15 @@ export default async function GuidePage({ params }: Props) {
   const waUrl = `https://wa.me/393519127047?text=${encodeURIComponent(
     isIt
       ? `Ciao Nightlife Milan! Sto leggendo la guida "${title}" e vorrei prenotare un Tavolo VIP o Lista.`
-      : `Hi Nightlife Milan! I'm reading "${title}" and would like to book a VIP Table or Guest List.`
+      : `Hi Nightlife Milan! "${title}" - WhatsApp VIP Concierge`
   )}`;
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
@@ -294,7 +348,7 @@ export default async function GuidePage({ params }: Props) {
               </span>
               <span className="flex items-center text-champagne">
                 <BookOpen className="w-4 h-4 mr-2" />
-                {guide.sections.length} {isIt ? 'Capitoli' : 'Chapters'}
+                {guide.sections.length} · {ui.officialBadge}
               </span>
             </div>
           </div>
@@ -310,26 +364,28 @@ export default async function GuidePage({ params }: Props) {
           <article className="lg:col-span-6 max-w-3xl mx-auto w-full">
             <p className="text-xl text-white/80 leading-relaxed font-light mb-8">{excerpt}</p>
 
-            {/* AI Trafiletto */}
+            {/* E-E-A-T & Quick Answer Box */}
             <div className="not-prose mb-8 p-6 rounded-2xl border border-champagne/25 bg-champagne/[0.04] text-left">
-              <p className="font-mono text-champagne text-[10px] tracking-[0.3em] uppercase mb-3">
-                {isIt ? 'Risposta Rapida · Sintesi AI' : 'Quick Answer · AI Summary'}
+              <p className="font-mono text-champagne text-[10px] tracking-[0.3em] uppercase mb-2">
+                {ui.verifiedTitle} · {ui.updatedPrefix}: {formattedDate}
               </p>
-              <p className="font-sans text-white/75 text-sm leading-relaxed">
+              <p className="font-sans text-white/80 text-sm leading-relaxed mb-2">
+                {ui.verifiedBody}
+              </p>
+              <p className="font-sans text-white/65 text-xs leading-relaxed">
                 {isIt
-                  ? `${title}: guida operativa aggiornata al ${formattedDate} a cura di ${guide.author}. Include prezzi ufficiali 2026/2027, regole di selezione per i 6 club di riferimento (Just Me, Pineta, Aria, 55 Milano, Voya Rooftop, Repvblic) e prenotazione diretta garantita via WhatsApp +39 351 912 7047 (concierge@nightlifemilan.com).`
-                  : `${title}: actionable field guide updated ${formattedDate} by ${guide.author}. Includes verified 2026/2027 pricing, door rules for the Top 6 priority venues (Just Me, Pineta, Aria, 55 Milano, Voya Rooftop, Repvblic), and direct guaranteed booking via WhatsApp +39 351 912 7047 (concierge@nightlifemilan.com).`}
+                  ? `${title}: prezzi ufficiali 2026/2027, regole di selezione per i 6 club di riferimento (Just Me, Pineta, Aria, 55 Milano, Voya Rooftop, Repvblic) e prenotazione diretta via ${ui.whatsappCta}.`
+                  : `${title}: Just Me, Pineta, Aria, 55 Milano, Voya Rooftop, Repvblic - ${ui.bookHeading} (${ui.whatsappCta}, concierge@nightlifemilan.com).`}
               </p>
             </div>
 
             {/* Tags */}
             <div className="not-prose flex flex-wrap gap-2 mb-10">
               {[
-                tr(locale, 'Milan Guide 2026/2027', 'Guida Milano 2026/2027'),
-                tr(locale, 'Nightlife Milan', 'Vita Notturna Milano'),
+                ui.officialBadge,
+                'Nightlife Milan',
                 ...(guide.relatedGenres || []).map((g) => g.replace(/_/g, ' ')),
-                tr(locale, 'VIP Concierge', 'Concierge VIP'),
-                tr(locale, 'Insider Tips', 'Consigli Insider'),
+                ui.directDesk,
               ]
                 .slice(0, 6)
                 .map((tag) => (
@@ -342,21 +398,24 @@ export default async function GuidePage({ params }: Props) {
                 ))}
             </div>
 
-            {guide.sections.map((section, index) => (
+            {guide.sections.map((section, index) => {
+              const secHeading = getLocalizedText(section.heading, loc).replace(/^#+\s*/, '').replace(/\u2014/g, ' - ');
+              const secContent = getLocalizedText(section.content, loc).replace(/\u2014/g, ' - ');
+              return (
               <div key={section.id} id={section.id} className="scroll-mt-32 mb-12">
                 <h2 className="text-2xl md:text-3xl font-serif font-bold text-champagne mb-5">
-                  {getLocalizedText(section.heading, locale)}
+                  {secHeading}
                 </h2>
                 <div
                   className="text-white/75 leading-relaxed font-light space-y-5 text-base [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-2 [&_strong]:text-white [&_strong]:font-semibold"
-                  dangerouslySetInnerHTML={{ __html: getLocalizedText(section.content, locale) }}
+                  dangerouslySetInnerHTML={{ __html: secContent }}
                 />
                 {GUIDE_INLINE_IMAGES[guide.id]?.[index] && (
                   <div className="my-8 relative h-64 md:h-80 w-full rounded-2xl overflow-hidden border border-white/10">
                     <Image
                       src={GUIDE_INLINE_IMAGES[guide.id][index]}
-                      alt={`${getLocalizedText(section.heading, locale)} — ${title}`}
-                      title={`${getLocalizedText(section.heading, locale)} — ${title}`}
+                      alt={`${secHeading} - ${title}`}
+                      title={`${secHeading} - ${title}`}
                       fill
                       quality={92}
                       sizes="(max-width: 1024px) 100vw, 50vw"
@@ -370,23 +429,31 @@ export default async function GuidePage({ params }: Props) {
                     <div className="absolute top-0 left-0 w-1 h-full bg-champagne" />
                     <h3 className="text-champagne font-semibold uppercase tracking-wider text-xs mb-2 flex items-center gap-2">
                       <Sparkles className="w-4 h-4" />
-                      {t.proTip}
+                      {ui.directDesk}
                     </h3>
-                    <p className="text-white/75 italic m-0 text-sm leading-relaxed">
-                      {isIt
-                        ? "Invia sempre un messaggio WhatsApp al Concierge (+39 351 912 7047) entro le ore 19:00 della serata scelta: riceverai la planimetria aggiornata dei tavoli e l'accredito nominale prioritario senza sovrapprezzo."
-                        : 'Always message our WhatsApp Concierge (+39 351 912 7047) by 19:00 on the night of your event: you will receive the live VIP floor map and priority guest list accreditation at zero agency fee.'}
+                    <p className="text-white/75 italic m-0 text-sm leading-relaxed mb-3">
+                      {ui.bookDesc}
                     </p>
+                    <a
+                      href={waUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-wider text-champagne hover:underline"
+                    >
+                      <MessageCircle className="w-3.5 h-3.5" />
+                      <span>{ui.whatsappCta}</span>
+                    </a>
                   </div>
                 )}
               </div>
-            ))}
+              );
+            })}
 
             {(GUIDE_INLINE_IMAGES[guide.id] || []).slice(guide.sections.length).length > 0 && (
               <div className="my-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {(GUIDE_INLINE_IMAGES[guide.id] || []).slice(guide.sections.length).map((extraImg, extraIdx) => (
                   <div key={extraImg} className="relative h-56 md:h-64 w-full rounded-2xl overflow-hidden border border-white/10">
-                    <Image src={extraImg} alt={`${title} — ${extraIdx + 1}`} title={`${title} — ${extraIdx + 1}`} fill quality={92} sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+                    <Image src={extraImg} alt={`${title} - ${extraIdx + 1}`} title={`${title} - ${extraIdx + 1}`} fill quality={92} sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
                   </div>
                 ))}
               </div>
@@ -402,10 +469,10 @@ export default async function GuidePage({ params }: Props) {
                       className="p-6 rounded-xl border border-white/10 bg-white/[0.02]"
                     >
                       <h3 className="text-lg font-semibold text-white mb-2">
-                        {getLocalizedText(faq.question, locale)}
+                        {getLocalizedText(faq.question, loc).replace(/\u2014/g, ' - ')}
                       </h3>
                       <p className="text-white/70 leading-relaxed font-light text-sm">
-                        {getLocalizedText(faq.answer, locale)}
+                        {getLocalizedText(faq.answer, loc).replace(/\u2014/g, ' - ')}
                       </p>
                     </div>
                   ))}
@@ -420,15 +487,13 @@ export default async function GuidePage({ params }: Props) {
           <aside className="lg:col-span-3 space-y-6">
             <div className="p-5 rounded-2xl border border-champagne/30 bg-champagne/[0.05]">
               <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-champagne mb-2">
-                {isIt ? 'Assistenza Diretta 24/7' : '24/7 Direct Desk'}
+                {ui.directDesk}
               </p>
               <h3 className="font-serif text-xl text-white mb-2">
-                {isIt ? 'Prenota Tavolo VIP o Lista' : 'Book VIP Table or Guestlist'}
+                {ui.bookHeading}
               </h3>
               <p className="text-xs text-white/65 leading-relaxed mb-4">
-                {isIt
-                  ? 'Zero commissioni di agenzia. Risposta in meno di 10 minuti con planimetria e listino bottiglie ufficiale.'
-                  : 'Zero agency fees. Reply in under 10 minutes with floor map and official bottle service price list.'}
+                {ui.bookDesc}
               </p>
               <a
                 href={waUrl}
@@ -437,7 +502,7 @@ export default async function GuidePage({ params }: Props) {
                 className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-champagne text-black font-mono text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
               >
                 <MessageCircle className="w-4 h-4" />
-                <span>WhatsApp +39 351 912 7047</span>
+                <span>{ui.whatsappCta}</span>
               </a>
             </div>
 
@@ -447,8 +512,8 @@ export default async function GuidePage({ params }: Props) {
               </h3>
               <div className="flex flex-col gap-4">
                 {relatedVenues.map((venue, idx) => {
-                  const venueName = getLocalizedText(venue.localizedContent.name, locale);
-                  const venueSlug = getLocalizedText(venue.slugs, locale);
+                  const venueName = getLocalizedText(venue.localizedContent.name, loc);
+                  const venueSlug = getLocalizedText(venue.slugs, loc);
                   const venueHref = `${langPrefix}/clubs/${venueSlug}`;
 
                   return (
@@ -462,7 +527,7 @@ export default async function GuidePage({ params }: Props) {
                       </div>
                       <div className="min-w-0">
                         <div className="text-[10px] font-mono uppercase tracking-wider text-champagne">
-                          #{idx + 1} Priority · {venue.category.replace(/_/g, ' ')}
+                          #{idx + 1} · {venue.category.replace(/_/g, ' ')}
                         </div>
                         <h4 className="text-white font-serif font-bold text-sm truncate group-hover:text-champagne transition-colors">
                           {venueName}
@@ -482,7 +547,7 @@ export default async function GuidePage({ params }: Props) {
 
         {/* Interactive VIP Quote Calculator */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-          <VipQuoteCalculator locale={locale} />
+          <VipQuoteCalculator locale={loc} />
         </section>
 
         {/* Cross-Link to Other Pillar Guides */}
@@ -490,8 +555,8 @@ export default async function GuidePage({ params }: Props) {
           <h2 className="font-serif text-2xl md:text-3xl text-white mb-8">{t.otherGuides}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {otherGuides.map((g) => {
-              const gSlug = getLocalizedText(g.slugs, locale);
-              const gTitle = getLocalizedText(g.title, locale);
+              const gSlug = getLocalizedGuideSlug35(g, loc);
+              const gTitle = getLocalizedText(g.title, loc).replace(/\u2014/g, ' - ');
               return (
                 <Link
                   key={g.id}
@@ -499,20 +564,20 @@ export default async function GuidePage({ params }: Props) {
                   className="group p-5 rounded-xl border border-white/10 bg-white/[0.02] hover:border-champagne/40 transition-all"
                 >
                   <p className="font-mono text-[10px] uppercase tracking-widest text-champagne mb-2">
-                    Pillar Guide
+                    {ui.officialBadge}
                   </p>
                   <h3 className="font-serif text-lg text-white group-hover:text-champagne transition-colors leading-snug mb-2">
                     {gTitle}
                   </h3>
                   <p className="text-xs text-white/50 line-clamp-2">
-                    {getLocalizedText(g.excerpt, locale)}
+                    {getLocalizedText(g.excerpt, loc).replace(/\u2014/g, ' - ')}
                   </p>
                 </Link>
               );
             })}
           </div>
         </section>
-              <EditorialPageSections locale={locale as LocaleCode} path={`${langPrefix}/guides/${slug}`} />
+              <EditorialPageSections locale={loc} path={`${langPrefix}/guides/${slug}`} />
       </main>
     </>
   );

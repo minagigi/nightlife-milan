@@ -49,11 +49,15 @@ const MILAN_NAME: Record<string, string> = {
 };
 
 function normalize(value: string): string {
-  return value.replace(/\s+/g, ' ').trim();
+  return value
+    .replace(/\u2014/g, ' - ')
+    .replace(/\b(to|after|in|at|from|per|da|di|a|su)\s+\d+\.\s+(?=[A-ZÀ-Ý])/gu, '$1 ')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 function ensureSentence(value: string): string {
-  const clean = value.replace(/[\s,;:|-]+$/u, '').trim();
+  const clean = value.replace(/[\s,;:|\-–—&]+$/u, '').trim();
   if (!clean) return '';
   return /[.!?。]$/u.test(clean) ? clean : `${clean}.`;
 }
@@ -62,26 +66,66 @@ const DANGLING_WORDS = new Set([
   'sotto', 'vista', 'con', 'per', 'di', 'da', 'in', 'su', 'a', 'e', 'ed', 'o',
   'il', 'lo', 'la', 'i', 'gli', 'le', 'un', 'uno', 'una', 'del', 'della', 'dei', 'degli', 'delle',
   'al', 'allo', 'alla', 'ai', 'agli', 'alle', 'dal', 'dalla', 'nel', 'nella', 'sul', 'sulla',
-  'under', 'with', 'for', 'and', 'or', 'the', 'of', 'in', 'on', 'at', 'to', 'from', 'by', '&',
+  'under', 'with', 'for', 'and', 'or', 'the', 'of', 'on', 'at', 'to', 'from', 'by', '&',
   'avec', 'de', 'des', 'du', 'et', 'mais', 'ou', 'pour', 'sur', 'dans', 'sous',
-  'pero', 'para', 'y', 'bajo', 'sobre',
-  'aber', 'fur', 'für', 'mit', 'oder', 'und', 'von', 'zu', 'unter', 'auf', 'im',
+  'pero', 'para', 'y', 'bajo', 'sobre', 'en', 'el', 'los', 'las', 'del',
+  'aber', 'fur', 'für', 'mit', 'oder', 'und', 'von', 'zu', 'unter', 'auf', 'im', 'am',
+  // Incomplete phrase modifiers that never belong at the cut end of a title/description
+  'best', 'top', 'guest', 'priv', 'ac', 'inter', 'corso', 'porta', 'via', 'viale',
+  'piazza', 'piazzale', 'san', 'after', 'playing', 'just', 'tech', 'deep',
 ]);
 
+function balanceOpenDelimiters(text: string): string {
+  let out = text;
+  const pairs: ReadonlyArray<readonly [string, string]> = [
+    ['(', ')'],
+    ['[', ']'],
+  ];
+  for (const [open, close] of pairs) {
+    let balance = 0;
+    let lastUnmatchedIdx = -1;
+    for (let i = 0; i < out.length; i += 1) {
+      const ch = out[i];
+      if (ch === open) {
+        if (balance === 0) lastUnmatchedIdx = i;
+        balance += 1;
+      } else if (ch === close) {
+        if (balance > 0) balance -= 1;
+        if (balance === 0) lastUnmatchedIdx = -1;
+      }
+    }
+    if (balance > 0 && lastUnmatchedIdx >= 0) {
+      out = out.slice(0, lastUnmatchedIdx).trim();
+    }
+  }
+  return out;
+}
+
 function stripDanglingWords(text: string): string {
-  let out = text.replace(/[\s,;:|-–—&]+$/u, '').trim();
+  let out = balanceOpenDelimiters(text)
+    .replace(/\s+\b(?:to|in|at|after|per|a)\s+\d+\.?\s*$/iu, '')
+    .replace(/[\s,;:|\-–—&+/]+$/u, '')
+    .trim();
   while (out) {
+    const colonCut = out.replace(/:\s+[\p{L}\p{N}]{1,10}$/u, '').trim();
+    if (colonCut !== out && /\b(?:Best|Top)$/i.test(out)) {
+      out = colonCut.replace(/[\s,;:|\-–—&+/]+$/u, '').trim();
+      continue;
+    }
     const parts = out.split(/\s+/);
     if (parts.length <= 2) break;
-    const last = parts[parts.length - 1].replace(/^[,.:;|-–—]+|[,.:;|-–—]+$/g, '').toLowerCase();
-    if (DANGLING_WORDS.has(last)) {
+    const rawLast = parts[parts.length - 1];
+    const last = rawLast.replace(/^[,.:;|\-–—()[\]]+|[,.:;|\-–—()[\]]+$/g, '').toLowerCase();
+    if (DANGLING_WORDS.has(last) || /^\d+\.?$/.test(last)) {
       parts.pop();
-      out = parts.join(' ').replace(/[\s,;:|-–—&]+$/u, '').trim();
+      out = balanceOpenDelimiters(parts.join(' '))
+        .replace(/[\s,;:|\-–—&+/]+$/u, '')
+        .trim();
     } else {
       break;
     }
   }
-  return out;
+  return out.replace(/[\s,;:|\-–—&+/]+$/u, '').trim();
 }
 
 export function truncateSeoText(value: string, maxLength: number): string {
@@ -89,7 +133,8 @@ export function truncateSeoText(value: string, maxLength: number): string {
   if (clean.length <= maxLength) return stripDanglingWords(clean);
   const slice = clean.slice(0, maxLength + 1);
   const boundary = slice.lastIndexOf(' ');
-  const raw = (boundary > maxLength * 0.55 ? slice.slice(0, boundary) : clean.slice(0, maxLength)).replace(/[\s,;:|-–—&]+$/u, '');
+  const cut = boundary > 0 ? slice.slice(0, boundary) : clean.slice(0, maxLength);
+  const raw = cut.replace(/[\s,;:|\-–—&+/]+$/u, '').trim();
   return stripDanglingWords(raw);
 }
 

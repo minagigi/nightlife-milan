@@ -44,7 +44,7 @@ export default function GuideToc({ sections, title }: { sections: Section[], tit
                   : 'text-white/40 hover:text-white/70'
               }`}
             >
-              {section.title}
+              {section.title.replace(/^#+\s*/, '')}
             </a>
           </li>
         ))}

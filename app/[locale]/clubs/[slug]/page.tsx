@@ -2,8 +2,9 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix, getLocaleDef, indexedLocaleCodes, canonicalPageUrl } from '@/lib/i18n/locales';
-import { getLocalizedVenueSlug35 } from '@/lib/i18n/localizedSlugs35';
+import { getLocalizedVenueSlug35, getLocalizedZoneSlug35 } from '@/lib/i18n/localizedSlugs35';
 import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
+import { getLocalizedGuideSlug35 } from '@/lib/guides100Catalog';
 import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { buildClubHighCtrDescription, buildClubHighCtrTitle } from '@/lib/clubSeoMeta35';
 import Image from 'next/image';
@@ -11,7 +12,7 @@ import Link from '@/components/LocalizedLink';
 import { MapPin, Clock, Shirt, MessageCircle, Star, Calendar, ArrowLeft, Music, Wine, Utensils, ShieldCheck, Check, CreditCard, Sparkles, Train, Users, HelpCircle } from 'lucide-react';
 import { getDictionary } from '../../../../dictionaries/get-dictionary';
 import { CONTACT } from '@/config/contact';
-import { getVenueBySlug, mockVenues } from '@/lib/data';
+import { getVenueBySlug, mockVenues, mockZones, mockGuides } from '@/lib/data';
 import { VenueCategory } from '@/lib/types';
 import { generateClubSchema, generateEventListSchema, getLocalizedText, jsonLdString } from '@/lib/seo';
 import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
@@ -1254,6 +1255,28 @@ export default async function ClubPage({ params }: Props) {
   const venueMapCopy = getEventVenueCopy((locale as LocaleCode) || 'en');
   const nearbyVenues = getRelatedNearbyVenues(venue, mockVenues, 6);
   const allVenueFaqs = buildVenueAuthorityFaqs(venue, locale, name, dressCode, editorial?.faqs);
+  const locCode = (locale as LocaleCode) || 'en';
+  const zonesDir = getLocalizedDir35('zones', locCode);
+  const guidesDir = getLocalizedDir35('guides', locCode);
+  const priorityZoneByVenue: Record<string, string> = {
+    'v-aria': 'san-siro',
+    'v-voya': 'citylife-portello',
+    'v-justme': 'parco-sempione',
+    'v-55milano': 'parco-sempione',
+    'v-pineta': 'corso-como',
+    'v-repvblic': 'corso-como',
+    'v-tocqueville': 'corso-como',
+  };
+  const canonicalZoneSlug =
+    priorityZoneByVenue[venue.id] ||
+    mockZones.find((z) => z.id === venue.zone)?.slug ||
+    'corso-como';
+  const canonicalZone = mockZones.find((z) => z.slug === canonicalZoneSlug) || mockZones[0];
+  const localizedZoneSlug = getLocalizedZoneSlug35(canonicalZoneSlug, locCode);
+  const reciprocalGuideIds = ['g-dress-code', 'g-vip-bottle-prices', 'g-new-years-eve-2027', 'g-115', 'g-116'];
+  const reciprocalGuides = reciprocalGuideIds
+    .map((gid) => mockGuides.find((g) => g.id === gid))
+    .filter((g): g is NonNullable<typeof g> => Boolean(g));
 
   const jsonLd = generateClubSchema({
     venue,
@@ -1975,6 +1998,55 @@ export default async function ClubPage({ params }: Props) {
             </div>
           </section>
         )}
+
+        {/* Reciprocal District & Essential Insider Guides Silo */}
+        <section className="pt-8 border-t border-white/10">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+            <h2 className="text-2xl font-serif font-bold text-white">
+              {locale === 'it'
+                ? `Quartiere & Guide Ufficiali per ${name}`
+                : `District & Official Insider Guides for ${name}`}
+            </h2>
+            <span className="text-[11px] font-mono uppercase tracking-wider text-champagne">
+              {locale === 'it'
+                ? 'Listini Verificati Novembre 2026 · WhatsApp +39 351 912 7047'
+                : 'Verified November 2026 · Official Concierge Desk (+39 351 912 7047)'}
+            </span>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {canonicalZone && (
+              <Link
+                href={`${lp}/${zonesDir}/${localizedZoneSlug}`}
+                locale={locCode}
+                prefetch={false}
+                className="p-4 rounded-xl border border-champagne/35 bg-champagne/[0.06] hover:border-champagne transition-colors"
+              >
+                <span className="block text-[10px] font-mono uppercase tracking-wider text-champagne mb-1">
+                  {locale === 'it' ? 'Quartiere del Locale' : 'Venue District Guide'}
+                </span>
+                <span className="block font-serif text-base font-semibold text-white">
+                  {canonicalZone.name} · Milano ↗
+                </span>
+              </Link>
+            )}
+            {reciprocalGuides.map((g) => (
+              <Link
+                key={g.id}
+                href={`${lp}/${guidesDir}/${getLocalizedGuideSlug35(g, locCode)}`}
+                locale={locCode}
+                prefetch={false}
+                className="p-4 rounded-xl border border-white/10 bg-white/[0.025] hover:border-champagne/50 transition-colors"
+              >
+                <span className="block text-[10px] font-mono uppercase tracking-wider text-white/45 mb-1">
+                  {locale === 'it' ? 'Guida Ufficiale' : 'Official Guide'}
+                </span>
+                <span className="block font-serif text-base font-semibold text-white">
+                  {getLocalizedText(g.title, locCode).replace(/[—–]/g, ' - ')} ↗
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
       </div>
             <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/clubs/${slug}`} />
       </main>

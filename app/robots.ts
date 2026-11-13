@@ -31,6 +31,7 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: 'YouBot', allow: ['/', '/llms.txt', '/llms-full.txt'] },
     ],
     sitemap: [
+      `${baseUrl}/sitemap-index.xml`,
       `${baseUrl}/sitemap.xml`,
       `${baseUrl}/sitemap-core.xml`,
       `${baseUrl}/sitemap-clubs.xml`,

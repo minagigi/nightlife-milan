@@ -4,6 +4,7 @@ import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, canonicalPageUrl, localePrefix } from '@/lib/i18n/locales';
 import Link from '@/components/LocalizedLink';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { getHubSeoMeta35 } from '@/lib/i18n/hubSeoMeta35';
 import { EntryFormulaMatrix, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
@@ -20,8 +21,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const canonical = canonicalPageUrl(baseUrl, locale, '/faq');
 
-  const title = seoTitle(tr(locale, 'Milan Nightlife FAQ 2026 | Frequently Asked Questions | Nightlife Milan', 'FAQ Vita Notturna Milano 2026 | Domande Frequenti | Nightlife Milan'));
-  const description = withWhatsApp(tr(locale, 'All answers about Milan nightclubs: VIP table prices, dress code, guestlist, minimum age, opening hours, bookings. The complete guide to going out in Milan in 2026.', 'Tutte le risposte sulle discoteche di Milano: prezzi tavoli VIP, dress code, guestlist, età minima, orari, prenotazioni. La guida completa per uscire a Milano nel 2026.'), locale);
+  const meta35 = getHubSeoMeta35('faq', locale);
+  const title = seoTitle(meta35.title);
+  const description = withWhatsApp(meta35.description, locale);
 
   return {
     title,

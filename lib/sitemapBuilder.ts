@@ -515,3 +515,48 @@ export function xmlSitemapResponse(
     },
   });
 }
+
+export interface SitemapIndexEntry {
+  loc: string;
+  lastModified?: string | Date;
+}
+
+export function renderSitemapIndexXml(entries: SitemapIndexEntry[]): string {
+  const rows = entries.map((entry) => {
+    const loc = escapeXml(entry.loc);
+    const lastMod = clampLastModified(entry.lastModified).toISOString();
+    return `<sitemap><loc>${loc}</loc><lastmod>${escapeXml(lastMod)}</lastmod></sitemap>`;
+  });
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${rows.join('\n')}\n</sitemapindex>\n`;
+}
+
+export async function buildSitemapIndexEntriesAsync(): Promise<SitemapIndexEntry[]> {
+  const baseUrl = getBaseUrl();
+  const catalogDate = getCatalogLastModified();
+  let latestMs = catalogDate.getTime();
+  const ebEvents = await fetchLiveEbEventsForSitemap();
+  for (const ev of ebEvents) {
+    if (ev.updatedAt) {
+      const ms = clampLastModified(ev.updatedAt, latestMs).getTime();
+      if (ms > latestMs) latestMs = ms;
+    }
+  }
+  const latestEventDate = new Date(latestMs);
+  return [
+    { loc: `${baseUrl}/sitemap-core.xml`, lastModified: latestEventDate },
+    { loc: `${baseUrl}/sitemap-clubs.xml`, lastModified: latestEventDate },
+    { loc: `${baseUrl}/sitemap-events.xml`, lastModified: latestEventDate },
+    { loc: `${baseUrl}/sitemap-capodanno.xml`, lastModified: catalogDate },
+    { loc: `${baseUrl}/sitemap-guides.xml`, lastModified: catalogDate },
+  ];
+}
+
+export function xmlSitemapIndexResponse(entries: SitemapIndexEntry[]): Response {
+  return new Response(renderSitemapIndexXml(entries), {
+    status: 200,
+    headers: {
+      'Content-Type': 'application/xml; charset=utf-8',
+      'Cache-Control': 'public, max-age=900, s-maxage=3600, stale-while-revalidate=86400',
+    },
+  });
+}

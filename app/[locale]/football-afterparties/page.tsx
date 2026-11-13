@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { tr } from '@/lib/i18n/t';
 import { getLocaleDef, hreflangAlternates, canonicalPageUrl, localePrefix } from '@/lib/i18n/locales';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { getHubSeoMeta35 } from '@/lib/i18n/hubSeoMeta35';
 import { CONTACT } from '@/config/contact';
 import {
   Sparkles,
@@ -41,22 +42,9 @@ export async function generateMetadata({
   const { locale } = await params;
   const canonical = canonicalPageUrl(baseUrl, locale, '/football-afterparties');
 
-  const title = seoTitle(
-    tr(
-      locale,
-      'San Siro Football Match Afterparties Milan 2026/2027: Best Clubs, VIP Tables & Aperitivo After Inter & AC Milan (Serie A, Champions League & Derby)',
-      'Dopo Partita San Siro Milano 2026/2027: Dove Uscire nei Club, Fare Aperitivo e Prenotare Tavoli VIP Dopo Inter e Milan (Serie A, Champions e Derby)'
-    )
-  );
-
-  const description = withWhatsApp(
-    tr(
-      locale,
-      'Official San Siro post-match nightlife hub (2026/2027): book VIP tables, Royal Aperitivo & singing dinners after Inter & AC Milan matches. Aria Club (150m from San Siro), Just Me (open 7/7), Pineta, 55 Milano, Voya Rooftop (20th floor, 3 M5 stops) & Repvblic. WhatsApp +39 351 912 7047.',
-      'Guida ufficiale Dopo-Partita San Siro Milano 2026/2027: prenota Tavoli VIP, Royal Aperitivo e Cena Cantata dopo le partite di Inter e Milan. Aria Club (a 150m dallo stadio), Just Me (aperto 7/7), Pineta, 55 Milano, Voya Rooftop (20° piano a 3 fermate M5) e Repvblic. WhatsApp +39 351 912 7047.'
-    ),
-    locale
-  );
+  const meta35 = getHubSeoMeta35('football-afterparties', locale);
+  const title = seoTitle(meta35.title);
+  const description = withWhatsApp(meta35.description, locale);
 
   const languages = hreflangAlternates(baseUrl, '/football-afterparties');
 

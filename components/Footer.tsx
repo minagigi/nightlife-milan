@@ -9,6 +9,9 @@ import { footerMenuFromFields, resolveMenuItems, type FooterMenu } from '@/lib/e
 import { utilityText } from '@/lib/i18n/utilityCopy';
 import EventVenueMap from './EventVenueMap';
 import { getEventVenueCopy } from '@/lib/i18n/eventVenueCopy';
+import { mockGuides } from '@/lib/data';
+import { getLocalizedGuideSlug35 } from '@/lib/guides100Catalog';
+import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
 
 interface FooterProps {
   lang: LocaleCode;
@@ -46,6 +49,11 @@ export default function Footer({ lang, editorialFields = {}, copyrightYear }: Fo
   const menu = footerMenuFromFields(editorialFields, defaultMenu);
   const navigation = resolveMenuItems(menu.navigation, lang);
   const zones = resolveMenuItems(menu.zones, lang);
+  const guidesDir = getLocalizedDir35('guides', lang);
+  const g115 = mockGuides.find((g) => g.id === 'g-115');
+  const g116 = mockGuides.find((g) => g.id === 'g-116');
+  const g115Href = g115 ? `${lp}/${guidesDir}/${getLocalizedGuideSlug35(g115, lang)}` : `${lp}/guides`;
+  const g116Href = g116 ? `${lp}/${guidesDir}/${getLocalizedGuideSlug35(g116, lang)}` : `${lp}/guides`;
   const mapCopy = getEventVenueCopy(lang);
   // City context only: this query is not a Nightlife Milan business address.
   const cityMap = new URL('https://www.google.com/maps');
@@ -79,13 +87,69 @@ export default function Footer({ lang, editorialFields = {}, copyrightYear }: Fo
             {/* Col 2: Navigation */}
             <div className="flex flex-col space-y-4 p-8 sm:p-12">
               <h3 className="font-mono text-[#EAE3D5] tracking-[0.14em] uppercase text-xs">{t.nav}</h3>
-              <ul className="flex flex-col space-y-3">{navigation.map((item) => <li key={item.id}><Link href={item.href} prefetch={false} className={item.gold ? 'text-[#F6F1E7] hover:underline transition-colors text-sm font-medium' : 'text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm'}>{item.label}</Link></li>)}<li><Link href={`${lp}/football-afterparties`} prefetch={false} className="text-[#F6F1E7] hover:underline transition-colors text-sm font-medium">{lang === 'it' ? 'Dopo-Partita Calcio San Siro (Inter & Milan)' : 'San Siro Football Afterparties (Inter & AC Milan)'}</Link></li></ul>
+              <ul className="flex flex-col space-y-3">
+                {navigation.map((item) => (
+                  <li key={item.id}>
+                    <Link href={item.href} prefetch={false} className={item.gold ? 'text-[#F6F1E7] hover:underline transition-colors text-sm font-medium' : 'text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm'}>
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Link href={`${lp}/football-afterparties`} locale={lang} prefetch={false} className="text-[#F6F1E7] hover:underline transition-colors text-sm font-medium">
+                    {lang === 'it' ? 'Dopo-Partita Calcio San Siro (Inter & Milan)' : 'San Siro Football Afterparties (Inter & AC Milan)'}
+                  </Link>
+                </li>
+                <li>
+                  <Link href={`${lp}/concert-afterparties`} locale={lang} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
+                    {lang === 'it' ? 'Afterparty Concerti San Siro, Ippodromo & Forum' : 'Concert Afterparties (San Siro, Ippodromo & Forum)'}
+                  </Link>
+                </li>
+                <li>
+                  <Link href={`${lp}/new-years-eve`} locale={lang} prefetch={false} className="text-[#F6F1E7] hover:underline transition-colors text-sm font-medium">
+                    {lang === 'it' ? 'Capodanno Milano 2027 · Cenoni & Club' : 'New Year Eve Milan 2027 · Gala Dinners & Clubs'}
+                  </Link>
+                </li>
+                <li>
+                  <Link href={g115Href} locale={lang} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
+                    {lang === 'it' ? 'Rho Fiera, Forum Assago, Linate & Malpensa VIP' : 'Rho Fiera, Forum Assago, Linate & Malpensa Nightlife'}
+                  </Link>
+                </li>
+                <li>
+                  <Link href={g116Href} locale={lang} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
+                    {lang === 'it' ? 'Weekend VIP da Monza, Como, Bergamo, Brescia & Lugano' : 'Monza, Como, Bergamo, Brescia & Ticino VIP Guide'}
+                  </Link>
+                </li>
+              </ul>
             </div>
 
             {/* Col 3: Zone Hotspots */}
             <div className="flex flex-col space-y-4 p-8 sm:p-12">
               <h3 className="font-mono text-[#EAE3D5] tracking-[0.14em] uppercase text-xs">{t.zones}</h3>
-              <ul className="flex flex-col space-y-3">{zones.map((item) => <li key={item.id}><Link href={item.href} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">{item.label}</Link></li>)}</ul>
+              <ul className="flex flex-col space-y-3">
+                {zones.map((item) => (
+                  <li key={item.id}>
+                    <Link href={item.href} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+                <li>
+                  <Link href={`${lp}/zones/san-siro`} locale={lang} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
+                    San Siro & Ippodromo
+                  </Link>
+                </li>
+                <li>
+                  <Link href={`${lp}/zones/parco-sempione`} locale={lang} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
+                    Parco Sempione (Just Me / 55)
+                  </Link>
+                </li>
+                <li>
+                  <Link href={`${lp}/zones/citylife-portello`} locale={lang} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
+                    CityLife & Portello (Voya)
+                  </Link>
+                </li>
+              </ul>
               <details className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-3" data-footer-city-map>
                 <summary className="cursor-pointer font-mono text-xs uppercase tracking-[0.14em] text-[#F6F1E7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F1E7]">
                   {t.zones} · Milano

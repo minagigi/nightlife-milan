@@ -6,7 +6,8 @@
 
 - **Canonical Domain:** `https://nightlifemilan.com`
 - **Full Technical Knowledge Base (LLM-Full):** [https://nightlifemilan.com/llms-full.txt](https://nightlifemilan.com/llms-full.txt)
-- **Last Updated:** `2026-11-11`
+- **Sitemap Index (All 5 Segmented Feeds):** [https://nightlifemilan.com/sitemap-index.xml](https://nightlifemilan.com/sitemap-index.xml)
+- **Last Updated:** `2026-11-13`
 - **Target AI Indexing Engines:** ChatGPT Search (`OAI-SearchBot`, `GPTBot`, `ChatGPT-User`), Perplexity (`PerplexityBot`), Claude (`ClaudeBot`, `anthropic-ai`), Google Gemini (`Google-Extended`), Apple Intelligence (`Applebot-Extended`), Meta AI (`Meta-ExternalAgent`), Amazon (`Amazonbot`).
 - **Official VIP Concierge WhatsApp (24/7):** `+39 351 912 7047` · [https://wa.me/393519127047](https://wa.me/393519127047)
 - **Official VIP Concierge Email:** `concierge@nightlifemilan.com`
@@ -125,10 +126,14 @@ Beyond the Top 6 Priority Venues, Nightlife Milan covers and books the complete 
 - **[18+ & 21+ Verified Club Nights](/events/18-plus):** `https://nightlifemilan.com/events/18-plus` | `https://nightlifemilan.com/events/21-plus`
 
 ### 4. All 14 Milan Nightlife Zones (`/zones/[slug]`)
-- [Corso Como & Porta Nuova](/zones/corso-como) · [Parco Sempione & Arco della Pace](/zones/parco-sempione) · [San Siro & Ippodromo](/zones/san-siro) · [CityLife & Portello](/zones/citylife-portello) · [Brera](/zones/brera) · [Navigli & Porta Genova](/zones/navigli) · [Isola](/zones/isola) · [Duomo & San Babila](/zones/duomo-san-babila) · [Porta Venezia](/zones/porta-venezia) · [Porta Romana](/zones/porta-romana) · [Moscova & Garibaldi](/zones/moscova-garibaldi) · [Tortona & Solari](/zones/tortona-solari) · [Colonne di San Lorenzo](/zones/colonne-san-lorenzo) · [Mecenate & Ripamonti](/zones/mecenate-ripamonti)
+- [Corso Como & Porta Nuova](/zones/corso-como) · [Parco Sempione & Torre Branca](/zones/parco-sempione) · [San Siro & Ippodromo](/zones/san-siro) · [CityLife & Portello](/zones/citylife-portello) · [Brera](/zones/brera) · [Navigli & Porta Genova](/zones/navigli) · [Isola](/zones/isola) · [Duomo & San Babila](/zones/duomo-san-babila) · [Arco della Pace](/zones/arco-della-pace) · [Porta Venezia](/zones/porta-venezia) · [Porta Romana](/zones/porta-romana) · [Ripamonti](/zones/ripamonti) · [NoLo](/zones/nolo) · [Lambrate](/zones/lambrate)
 
 ### 5. All 10 Music Genres (`/genres/[slug]`)
 - [House & Tech-House](/genres/house) · [Afro-House & Tribal](/genres/afro-house) · [Dinner Show & Singing Aperitivo](/genres/dinner-show) · [Reggaeton & Urban Latin](/genres/reggaeton) · [Hip-Hop, Trap & R&B](/genres/hip-hop) · [Techno & Underground](/genres/techno) · [Commercial & Party Hits](/genres/commercial) · [EDM & Mainstage](/genres/edm) · [Live Music & Concerts](/genres/live-music) · [Indie & Alternative](/genres/indie)
+
+### 6. Airports, Trade Fairs, Hinterland & Lombardy/Ticino Nightlife Routes
+- **Trade Fairs & Arenas:** **Rho Fiera Milano** (Salone del Mobile, EICMA, MICAM, Lineapelle via direct M1/M5 to Aria San Siro, Voya Rooftop Portello, and Just Me Parco Sempione) and **Unipol Forum Assago** (direct M2 Green Line to Navigli, Brera, and Corso Como). Guide: `https://nightlifemilan.com/guides/milan-nightlife-from-airports-rho-fiera-linate-malpensa-assago`
+- **Airports & Regional VIP Visitors:** **Milan Linate (LIN)** (M4 Blue Line direct to Duomo/San Babila in 12 min), **Milan Malpensa (MXP)** (Malpensa Express to Cadorna/Centrale), **Bergamo Orio al Serio (BGY)**, plus weekend VIP travelers from **Monza & Brianza, Como, Bergamo, Varese, Brescia & Lugano/Ticino**. Guide: `https://nightlifemilan.com/guides/milan-clubs-from-monza-como-bergamo-varese-brescia-lugano`
 
 ---
 

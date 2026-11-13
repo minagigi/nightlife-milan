@@ -340,5 +340,21 @@ export const generateClubSchema = ({
     schema.sameAs = venue.sameAs;
   }
 
+  schema.potentialAction = {
+    '@type': 'ReserveAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: `https://wa.me/393519127047?text=${encodeURIComponent(`Hi Nightlife Milan! I'd like to book a VIP table or guest list at ${name}.`)}`,
+      actionPlatform: [
+        'https://schema.org/DesktopWebPlatform',
+        'https://schema.org/MobileWebPlatform',
+      ],
+    },
+    result: {
+      '@type': 'Reservation',
+      name: `VIP Table & Guestlist at ${name}`,
+    },
+  };
+
   return schema;
 };

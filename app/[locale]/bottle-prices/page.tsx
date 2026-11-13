@@ -4,6 +4,7 @@ import { hreflangAlternates, canonicalPageUrl, localePrefix } from '@/lib/i18n/l
 import Link from '@/components/LocalizedLink';
 import { mockVenues } from '@/lib/data';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { getHubSeoMeta35 } from '@/lib/i18n/hubSeoMeta35';
 import { VipQuoteCalculator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
 import Image from 'next/image';
 import EditorialPageSections from '@/components/EditorialPageSections';
@@ -21,8 +22,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const canonical = canonicalPageUrl(baseUrl, locale, '/bottle-prices');
 
-  const title = seoTitle(tr(locale, 'Milan Club Bottle Prices 2026 | VIP Table Price List | Nightlife Milan', 'Prezzi Bottiglie Discoteche Milano 2026 | Listino VIP | Nightlife Milan'));
-  const description = withWhatsApp(tr(locale, 'Updated bottle price list for all Milan clubs: Just Me, Armani Privé, Play Club, Voya Rooftop, Pineta. VIP table prices, champagne, vodka. Book via WhatsApp.', 'Listino prezzi bottiglie aggiornato per i principali club di Milano: Just Me, Pineta, Aria Club, 55 Milano, Voya Rooftop, Repvblic. Prezzi tavoli VIP, champagne, vodka.'), locale);
+  const meta35 = getHubSeoMeta35('bottle-prices', locale);
+  const title = seoTitle(meta35.title);
+  const description = withWhatsApp(meta35.description, locale);
 
   return {
     title,

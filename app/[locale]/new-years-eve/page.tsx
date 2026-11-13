@@ -12,6 +12,7 @@ import {
   localePrefix,
 } from '@/lib/i18n/locales';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { getHubSeoMeta35 } from '@/lib/i18n/hubSeoMeta35';
 import {
   Sparkles,
   MapPin,
@@ -54,22 +55,10 @@ export async function generateMetadata({
   const { locale } = await params;
   const canonical = canonicalPageUrl(baseUrl, locale, '/new-years-eve');
 
-  const title = seoTitle(
-    tr(
-      locale,
-      'New Years Eve Milan 2027 (NYE): Gala Dinner, Royal Buffet, Rooftops & VIP Tables (31 Dec 2026)',
-      'Capodanno Milano 2027 (NYE): Gran Cenone, Royal Buffet, Rooftop e Tavoli VIP in Discoteca (31 Dicembre 2026)'
-    )
-  );
+  const meta35 = getHubSeoMeta35('new-years-eve', locale);
+  const title = seoTitle(meta35.title);
 
-  const description = withWhatsApp(
-    tr(
-      locale,
-      'Official New Years Eve Milan 2027 (31 Dec 2026 to 1 Jan 2027) guide & booking desk: Gala Dinner, Royal Buffet, After-Midnight Club Tickets & VIP Tables at 1. Just Me, 2. Pineta, 3. Aria Club, 4. 55 Milano, 5. Voya Rooftop (20th floor fireworks) & 6. Repvblic. WhatsApp +39 351 912 7047.',
-      'Guida e prenotazioni ufficiali Capodanno Milano 2027 (31 Dicembre 2026 - 1 Gennaio 2027): Gran Cenone Servito, Royal Buffet, Ingresso Disco e Tavoli VIP da 1. Just Me, 2. Pineta, 3. Aria Club, 4. 55 Milano, 5. Voya Rooftop (20° piano vista fuochi) e 6. Repvblic. WhatsApp +39 351 912 7047.'
-    ),
-    locale
-  );
+  const description = withWhatsApp(meta35.description, locale);
 
   const languages = buildLanguageAlternates('/new-years-eve');
 

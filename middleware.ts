@@ -100,6 +100,22 @@ function resolveLegacySubpathForLocale(subPath: string, targetLocale: LocaleCode
   }
   const cleanSub = subPath !== '/' && subPath.endsWith('/') ? subPath.slice(0, -1) : subPath;
   const segs = cleanSub.split('/').filter(Boolean);
+  if (segs.length === 1) {
+    const rawSeg = safeDecodeSegment(segs[0]).toLowerCase();
+    const naturalHubAliases: Record<string, string> = {
+      zone: '/zones',
+      'aperitivo-milano': '/aperitivo',
+      'rooftop-milano': '/rooftops',
+      'prezzi-bottiglie-milano': '/bottle-prices',
+      'liste-discoteche-milano': '/guest-lists',
+      'feste-private-milano': '/private-parties',
+    };
+    const canonicalHub = naturalHubAliases[rawSeg];
+    if (canonicalHub) {
+      const hubDest = targetLocale === 'en' ? canonicalHub : `/${targetLocale}${canonicalHub}`;
+      return localizeInternalHref(hubDest, targetLocale);
+    }
+  }
   if (segs.length === 2) {
     const parentCanonical = resolveLocalizedDirToCanonical(segs[0]);
     const rawLeaf = safeDecodeSegment(segs[1]);
@@ -111,6 +127,18 @@ function resolveLegacySubpathForLocale(subPath: string, targetLocale: LocaleCode
     } else if (parentCanonical === '/events') {
       const eventDest = resolveLegacyOrExpiredEventRedirect(rawLeaf, targetLocale);
       if (eventDest) return eventDest;
+    } else if (parentCanonical === '/zones') {
+      const staleZoneAliases: Record<string, string> = {
+        'moscova-garibaldi': 'corso-como',
+        'tortona-solari': 'navigli',
+        'colonne-san-lorenzo': 'duomo-san-babila',
+        'mecenate-ripamonti': 'ripamonti',
+      };
+      const mappedZone = staleZoneAliases[rawLeaf.toLowerCase()];
+      if (mappedZone) {
+        const zoneDest = targetLocale === 'en' ? `/zones/${mappedZone}` : `/${targetLocale}/zones/${mappedZone}`;
+        return localizeInternalHref(zoneDest, targetLocale);
+      }
     }
   }
   return null;

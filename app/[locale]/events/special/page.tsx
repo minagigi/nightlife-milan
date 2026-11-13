@@ -8,7 +8,7 @@ import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
 import { generateEventListSchema, jsonLdString } from '@/lib/seo';
 import DiscoveryGrid from '@/components/DiscoveryGrid';
 import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
-import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
+import { getEventbriteDiscoveryItems, slimDiscoveryItemsForClient } from '@/lib/eventbriteDiscovery';
 import { PrioritySixShowcase, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import VerticalHubsAndEventsSection from '@/components/VerticalHubsAndEventsSection';
@@ -334,7 +334,7 @@ export default async function SpecialEventsPage({ params }: Props) {
       </section>
 
       {/* Discovery Grid */}
-      <DiscoveryGrid items={items} lang={locale} title={t.gridTitle} subtitle={t.gridSubtitle} />
+      <DiscoveryGrid items={slimDiscoveryItemsForClient(items, locale, 24)} lang={locale} title={t.gridTitle} subtitle={t.gridSubtitle} />
 
       {/* Priority 6 Showcase & VIP Calculator */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

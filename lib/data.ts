@@ -4,6 +4,7 @@ import { GUIDE_I18N } from '@/lib/guideI18n.generated';
 import { EXTRA_100_GUIDES, populateGuideSlugs35 } from '@/lib/guides100Catalog';
 import { VENUE_SLUGS_35, resolveVenueSlug, ALL_35_LOCALES, sanitizeAsciiSlug, SLUG_TOKENS_35, registerMockEventSlugs35 } from '@/lib/i18n/localizedSlugs35';
 import { GUIDE_HERO_IMAGES_114 } from '@/lib/guideImagesMap114';
+import { applyFlagshipGuides35 } from '@/lib/i18n/flagshipGuides35';
 
 // Mock Data for Zones
 export const mockZones: Zone[] = [
@@ -2479,8 +2480,8 @@ export const mockGuides: Guide[] = [
       {
         id: "nye-2027-three-formulas",
         heading: {
-          en: "## 1. The 3 Official New Year's Eve 2027 Formulas in Milan Clubs (December 31, 2026)",
-          it: "## 1. Le 3 Formule Ufficiali di Capodanno 2027 nelle Discoteche di Milano (31 Dicembre 2026)"
+          en: "1. The 3 Official New Year's Eve 2027 Formulas in Milan Clubs (December 31, 2026)",
+          it: "1. Le 3 Formule Ufficiali di Capodanno 2027 nelle Discoteche di Milano (31 Dicembre 2026)"
         },
         content: {
           en: "<p>On <strong>Thursday, December 31, 2026 (New Year's Eve 2027)</strong>, Milan's 19 flagship clubs and panoramic rooftops operate exclusively by advance reservation. There are no casual walk-in guest lists on December 31st. Every venue structures the night into three distinct formulas:</p><ul><li><strong>Formula 1 - Gran Cenone Servito (Seated Gala Dinner + Party | 20:30 - 05:00 | €130 - €250/person):</strong> Multi-course gourmet menu served at your reserved table (1 bottle of wine every 3-4 guests + midnight Champagne toast included), live Singing Dinner Show entertainment, and automatic access to the club night. You can upgrade to keep your table after midnight with a spirit/champagne bottle package.</li><li><strong>Formula 2 - Royal Buffet / Imperial Apericena (20:30 - 05:00 | €60 - €95/person):</strong> Access to gourmet buffet islands from 20:30, 1-2 drinks + midnight spumante/champagne flute, and full party entry until dawn (reserved support table option available).</li><li><strong>Formula 3 - Ingresso Dopocena o Tavolo VIP Bottiglia (After-Dinner Ticket or VIP Table | 23:30 - 06:00):</strong> Enter at 23:30 before the countdown or from 00:15 onwards. Standard tickets cost <strong>€45 - €90/person</strong>; <strong>VIP Tables start from €500 to €6,000+</strong> (100% spendable in premium Vodka, Tequila & Champagne bottles with fast-track hostess entry).</li></ul>",
@@ -2490,8 +2491,8 @@ export const mockGuides: Guide[] = [
       {
         id: "nye-2027-official-price-table",
         heading: {
-          en: "## 2. Complete 2027 New Year's Eve Price Matrix Across Milan's Top 9 Clubs",
-          it: "## 2. Tabella Prezzi Ufficiale Capodanno 2027 nei 9 Club Principali di Milano"
+          en: "2. Complete 2027 New Year's Eve Price Matrix Across Milan's Top 9 Clubs",
+          it: "2. Tabella Prezzi Ufficiale Capodanno 2027 nei 9 Club Principali di Milano"
         },
         content: {
           en: "<p>Compare the verified New Year's Eve 2027 rates across Milan's most requested clubs and rooftops (book via WhatsApp <strong>+39 351 912 7047</strong> or <strong>concierge@nightlifemilan.com</strong> before early-bird tiers sell out):</p><table><thead><tr><th>Club / Venue</th><th>Seated Gala Dinner</th><th>Royal Buffet</th><th>After-Dinner Ticket</th><th>VIP Table (6-10 Guests)</th></tr></thead><tbody><tr><td><strong>1. Just Me Milano</strong> (Torre Branca)</td><td>€220 / pax</td><td>€90 / pax</td><td>€80 (1 drink)</td><td>€1,000 Dancefloor · €2,000 Privé Branca · €3,500-€6,000 Console</td></tr><tr><td><strong>2. Pineta Club</strong> (Corso Como)</td><td>€150 / pax (Singing)</td><td>€70 / pax</td><td>€55 (1 drink)</td><td>€700 Dancefloor · €1,200 VIP Privé · €2,000 Console</td></tr><tr><td><strong>3. Aria Club</strong> (San Siro 150m)</td><td>€130 / pax</td><td>€65 / pax</td><td>€50 (1 drink)</td><td>€600 Dancefloor · €900 Privé Aria · €1,500 Console DJ</td></tr><tr><td><strong>4. 55 Milano</strong> (Sempione Loft)</td><td>€140 / pax (Dinner Show)</td><td>€65 / pax</td><td>€50 (1 drink)</td><td>€500 Lounge · €800 Main Floor · €1,200 Stage Privé</td></tr><tr><td><strong>5. Voya Rooftop</strong> (20th Floor 85m)</td><td>€180 / pax (Skyline)</td><td>€80 / pax</td><td>€70 (1 drink)</td><td>€800 Sky Lounge · €1,200-€1,600 First-Row Window</td></tr><tr><td><strong>6. Repvblic Milano</strong> (Repubblica)</td><td>N/A (Club Only)</td><td>€65 / pax</td><td>€50 (1 drink)</td><td>€600 Dancefloor · €1,000 Privé · €1,800 Console</td></tr><tr><td><strong>7. Tocqueville 13</strong> (Corso Como)</td><td>€160 / pax (Dinner Show)</td><td>€75 / pax</td><td>€60 (1 drink)</td><td>€700 Upper Ring · €1,000 Main Floor · €1,800 Console</td></tr><tr><td><strong>8. Alcatraz Milano</strong> (3 Rooms Arena)</td><td>N/A</td><td>€55 / pax</td><td>€40 - €50</td><td>€450 Arena · €700 VIP Balcony · €1,200 Stage</td></tr><tr><td><strong>9. Fabrique Milano</strong> (Warehouse Festival)</td><td>N/A</td><td>N/A</td><td>€50 - €70</td><td>€800 VIP Ring · €1,500 Gold Ring · €2,500 Backstage</td></tr></tbody></table>",
@@ -2501,8 +2502,8 @@ export const mockGuides: Guide[] = [
       {
         id: "nye-2027-booking-deadlines-and-tips",
         heading: {
-          en: "## 3. Early-Bird Deadlines, Deposit Rules & New Year's Eve Dress Code",
-          it: "## 3. Scadenze Prevendite Early-Bird, Caparre e Dress Code di San Silvestro"
+          en: "3. Early-Bird Deadlines, Deposit Rules & New Year's Eve Dress Code",
+          it: "3. Scadenze Prevendite Early-Bird, Caparre e Dress Code di San Silvestro"
         },
         content: {
           en: "<p>New Year's Eve pricing in Milan follows dynamic release tiers: <strong>Tier 1 (Early Bird until November 30)</strong>, <strong>Tier 2 (December 1 to December 20)</strong>, and <strong>Final Release (December 21 to 31, if any tables remain)</strong>. Locking in your Gala Dinner or VIP Table in November saves 20% to 35% and secures first-row Privé booths.</p><p><strong>How Reservations Work:</strong> Message our official Concierge on WhatsApp at <strong>+39 351 912 7047</strong> with your group size, male/female ratio, and preferred formula. A 30%-50% official deposit locks your table contract, with the balance settled at the VIP cashier on December 31st.</p>",
@@ -2587,8 +2588,8 @@ export const mockGuides: Guide[] = [
       {
         id: "san-siro-and-ippodromo-concert-afterparty",
         heading: {
-          en: "## 1. After San Siro Stadium & Ippodromo Snai / La Maura Concerts: Aria Club at 150 Meters + Direct M5 Line",
-          it: "## 1. Dopo i Concerti a San Siro e Ippodromo Snai / La Maura: Aria Club a 150 Metri + Direttrice Metro M5 Lilla"
+          en: "1. After San Siro Stadium & Ippodromo Snai / La Maura Concerts: Aria Club at 150 Meters + Direct M5 Line",
+          it: "1. Dopo i Concerti a San Siro e Ippodromo Snai / La Maura: Aria Club a 150 Metri + Direttrice Metro M5 Lilla"
         },
         content: {
           en: "<p>When 65,000 to 80,000 fans exit a stadium tour at <strong>Stadio Giuseppe Meazza (San Siro)</strong> or an open-air festival at <strong>Ippodromo Snai San Siro / La Maura (I-Days Milano)</strong> around 23:15, local streets and taxi queues lock up for over an hour. Here are the 4 fastest, zero-stress post-concert destinations:</p><ul><li><strong>1. Aria Club Milano (#3 Priority - Piazzale dello Sport 14):</strong> Located literally <strong>150 meters on foot (2-minute walk across the square)</strong> from the San Siro Stadium gates and Ippodromo Snai! Walk straight from the concert encore into your reserved VIP Table (€250-€350 Dancefloor, €450-€600 Privé Aria, €700-€1,200 Console DJ) and party until 05:00 AM while everyone else is stuck in traffic.</li><li><strong>2. Just Me Milano (#1 Priority - Parco Sempione / Torre Branca):</strong> Open <strong>7 nights a week (Monday to Sunday) until 05:00 AM</strong>. Because many mega-concerts take place on Monday, Tuesday, or Wednesday nights when 90% of clubs are closed, Just Me is the #1 guaranteed luxury afterparty every single night of the week (10 minutes from San Siro).</li><li><strong>3. Voya Rooftop (#5 Priority - 20th Floor, Viale Achille Papa 30):</strong> Just <strong>3 stops on the M5 Purple Line (Lotto -> Portello)</strong>. Ideal if you want a panoramic 85-meter-high skyline cocktail and Deep House DJ set until 02:30 AM.</li><li><strong>4. 55 Milano (#4 Priority) & Pineta Club (#2 Priority):</strong> Both located directly along the <strong>M5 Purple Line</strong> (Domodossola/Gerusalemme for 55 Milano's late kitchen & bottle service; Cenisio for Pineta's crystal-chandelier Reggaeton & Commercial party).</li></ul>",
@@ -2598,8 +2599,8 @@ export const mockGuides: Guide[] = [
       {
         id: "concert-arena-to-club-matrix",
         heading: {
-          en: "## 2. Arena-by-Arena Post-Concert Club Matrix: San Siro, Ippodromo, Unipol Forum Assago, Fabrique & Alcatraz",
-          it: "## 2. Tabella Dopo-Concerto per Ogni Arena: San Siro, Ippodromo, Unipol Forum Assago, Fabrique e Alcatraz"
+          en: "2. Arena-by-Arena Post-Concert Club Matrix: San Siro, Ippodromo, Unipol Forum Assago, Fabrique & Alcatraz",
+          it: "2. Tabella Dopo-Concerto per Ogni Arena: San Siro, Ippodromo, Unipol Forum Assago, Fabrique e Alcatraz"
         },
         content: {
           en: "<table><thead><tr><th>Concert Venue</th><th>Show Ends</th><th>Closest & Best Afterparty Clubs</th><th>Travel Time</th><th>VIP Table Min Spend</th></tr></thead><tbody><tr><td><strong>Stadio San Siro (Meazza)</strong></td><td>23:00 - 23:30</td><td><strong>Aria Club</strong> (150m walk) · <strong>Voya Rooftop</strong> · <strong>55 Milano</strong> · <strong>Just Me</strong> (7/7)</td><td>2 min walk (Aria) / 6-10 min</td><td>€250 - €500 (6-8 pax)</td></tr><tr><td><strong>Ippodromo Snai / La Maura</strong></td><td>23:00 - 23:30</td><td><strong>Aria Club</strong> (P.le dello Sport 14) · <strong>55 Milano</strong> · <strong>Pineta</strong> · <strong>Just Me</strong></td><td>2-8 min</td><td>€250 - €500 (6-8 pax)</td></tr><tr><td><strong>Unipol Forum Assago</strong></td><td>23:00 - 23:30</td><td><strong>Church 81</strong> & <strong>Apollo</strong> (Navigli M2) · <strong>Just Me</strong> (M2 Cadorna) · <strong>Magazzini Generali</strong></td><td>10-15 min via M2 Green Line / A7</td><td>€250 - €500 (6-8 pax)</td></tr><tr><td><strong>Alcatraz Milano</strong> (Via Valtellina 25)</td><td>22:45 - 23:00</td><td><strong>Stay inside Alcatraz</strong> (3-Room Mega Party starts at 23:15!) or <strong>Pineta / Tocqueville 13</strong></td><td>0 min (same venue) / 4 min</td><td>€200 - €450 Balcony</td></tr><tr><td><strong>Fabrique Milano</strong> (Via Fantoli 9)</td><td>23:00 - 23:30</td><td><strong>Stay inside Fabrique</strong> (Club night) or <strong>Amnesia Milano</strong> (3 min away)</td><td>0-3 min</td><td>€350 - €800 VIP Ring</td></tr></tbody></table>",
@@ -2609,8 +2610,8 @@ export const mockGuides: Guide[] = [
       {
         id: "concert-to-club-outfit-and-check-in",
         heading: {
-          en: "## 3. Late Check-In Guarantee (Up to 01:30 AM) & Concert-to-Club Outfit Tips",
-          it: "## 3. Check-In Garantito Fino all'01:30 e Come Vestirsi per Fare Concerto + Discoteca"
+          en: "3. Late Check-In Guarantee (Up to 01:30 AM) & Concert-to-Club Outfit Tips",
+          it: "3. Check-In Garantito Fino all'01:30 e Come Vestirsi per Fare Concerto + Discoteca"
         },
         content: {
           en: "<p>Standard club guest lists close around 00:30, which is impossible to make if a stadium encore finishes at 23:30 and you need to exit the arena. By booking a <strong>Post-Concert VIP Table via WhatsApp (+39 351 912 7047)</strong>, our Concierge guarantees your table hold and hostess check-in until <strong>01:30 AM</strong>.</p><p><strong>Outfit Rule:</strong> Avoid merch hoodies, cargo shorts, or muddy festival shoes if heading to Just Me, Pineta, Aria Club, or Voya Rooftop. Wear dark jeans or trousers, a clean shirt or dark tee under a light jacket, and clean leather sneakers or boots.</p>",
@@ -2695,8 +2696,8 @@ export const mockGuides: Guide[] = [
       {
         id: "bachelorette-party-milan-itineraries",
         heading: {
-          en: "## 1. Bachelorette Party (Addio al Nubilato) in Milan: Rooftop Sunset + Singing Dinner + VIP Privé",
-          it: "## 1. Addio al Nubilato VIP a Milano: Sunset Rooftop al 20° Piano + Cena Cantata + Tavolo Privé"
+          en: "1. Bachelorette Party (Addio al Nubilato) in Milan: Rooftop Sunset + Singing Dinner + VIP Privé",
+          it: "1. Addio al Nubilato VIP a Milano: Sunset Rooftop al 20° Piano + Cena Cantata + Tavolo Privé"
         },
         content: {
           en: "<p>Milan is Europe's most glamorous destination for a <strong>Bachelorette Party (Addio al Nubilato)</strong>. Instead of booking disconnected venues across town, our Concierge coordinates three turnkey itineraries tailored to the bride-to-be:</p><ul><li><strong>Itinerary A - The Singing Aperitivo & Crystal Privé Night (Pineta Club #2 Priority):</strong> Start at 19:30 at <strong>Pineta Club (Via Messina 38, Corso Como area)</strong> with a reserved Singing Aperitivo table (€25-€35/person) where the entire room stands on chairs waving napkins and singing Italian/Pop anthems. At 23:00, keep your VIP table for <em>Noche De Perreo</em> Reggaeton & Commercial bottle service with LED sparklers for the bride.</li><li><strong>Itinerary B - 20th-Floor Skyline Golden Hour + Torre Branca Luxury (Voya Rooftop #5 + Just Me #1):</strong> Toast at sunset 85 meters above Milan with a first-row glass window table at <strong>Voya Rooftop (20th floor)</strong>, followed by a private Mercedes V-Class or Limousine transfer to the <strong>Privé Branca at Just Me Milano</strong> under the illuminated Torre Branca.</li><li><strong>Itinerary C - The Dinner Show Spectacle (55 Milano #4 or Tocqueville 13):</strong> Full seated Singing Dinner Show (€50-€70/person wine included) with live performers and dancers at <strong>55 Milano</strong> (1,000 sqm Sempione loft) or <strong>Tocqueville 13</strong> (Corso Como), seamlessly transitioning into clubbing until 04:30 AM.</li></ul>",
@@ -2706,8 +2707,8 @@ export const mockGuides: Guide[] = [
       {
         id: "bachelor-party-milan-vip-strategy",
         heading: {
-          en: "## 2. Bachelor Party (Addio al Celibato) for All-Male Groups: How to Bypass Door Selection & Book Console Tables",
-          it: "## 2. Addio al Celibato per Gruppi di Soli Uomini: Come Blindare l'Ingresso e Prenotare il Super Privé"
+          en: "2. Bachelor Party (Addio al Celibato) for All-Male Groups: How to Bypass Door Selection & Book Console Tables",
+          it: "2. Addio al Celibato per Gruppi di Soli Uomini: Come Blindare l'Ingresso e Prenotare il Super Privé"
         },
         content: {
           en: "<p><strong>The #1 Rule for Bachelor Parties in Milan:</strong> A bachelor party is almost always an all-male group of 6 to 18 men. In Milan, arriving at a club on a normal guest list with 10 men and zero women guarantees an immediate rejection at the velvet rope. Here is how we guarantee 100% VIP access for the groom's squad:</p><table><thead><tr><th>Bachelor Package</th><th>Recommended Venues</th><th>Per-Person Budget (8-12 Men)</th><th>What's Included</th></tr></thead><tbody><tr><td><strong>1. Royal Buffet + Dancefloor VIP Table</strong></td><td><strong>Aria Club</strong> (#3) · <strong>55 Milano</strong> (#4) · <strong>Alcatraz</strong> (Balcony)</td><td>€55 - €75 / person</td><td>20:00 Buffet table + 23:30 VIP Table with 2 premium spirit bottles & fast-track entry</td></tr><tr><td><strong>2. Singing Dinner + Elevated Privé Booth</strong></td><td><strong>Pineta Club</strong> (#2) · <strong>Tocqueville 13</strong> · <strong>MIB Milano</strong></td><td>€90 - €120 / person</td><td>Full dinner with wine + Elevated VIP Privé booth with Belvedere Magnum / Don Julio 1942</td></tr><tr><td><strong>3. Super Privé DJ Console Experience</strong></td><td><strong>Just Me Milano</strong> (#1) · <strong>Aria Club</strong> · <strong>Repvblic</strong> (#6) · <strong>Amnesia</strong></td><td>€120 - €250 / person</td><td>Pre-cleared male group VIP lane, stage-level Console booth & Dom Perignon sparkler parade</td></tr></tbody></table>",
@@ -2717,8 +2718,8 @@ export const mockGuides: Guide[] = [
       {
         id: "costumes-gadgets-and-limo-rules",
         heading: {
-          en: "## 3. Crucial Dress Code Warning: Sashes, Costumes, Gadgets & Limousine Transfers",
-          it: "## 3. Regola Tassativa su Travestimenti, Fasce, Gadget e Noleggio Limousine"
+          en: "3. Crucial Dress Code Warning: Sashes, Costumes, Gadgets & Limousine Transfers",
+          it: "3. Regola Tassativa su Travestimenti, Fasce, Gadget e Noleggio Limousine"
         },
         content: {
           en: "<p><strong>Do NOT wear inflatable costumes or novelty outfits to the club door!</strong> Milan's luxury door selectors (Just Me, Pineta, Aria, Voya Rooftop, 55 Milano, Repvblic, Tocqueville 13) will refuse entry if the groom or bride is wearing funny costumes, masks, or beachwear at the entrance.</p><ul><li><strong>How to Do It Right:</strong> Have the groom/bride and the entire group arrive at the velvet rope dressed in sharp <strong>Smart Glamour attire</strong> (collared shirts and blazers for men; chic evening dresses for women). Once you are seated inside your private VIP Table area, brides can comfortably wear a refined <em>'Bride to Be'</em> sash or tiara for photos and the bottle sparkler show!</li><li><strong>Limousine & Luxury Van Add-On:</strong> Via WhatsApp (<strong>+39 351 912 7047</strong>) we can pair your dinner and VIP table reservation with a 1-hour panoramic tour in a Lincoln Stretch Limousine, Hummer Limo, or Mercedes Party Bus with prosecco on board, dropping you directly at the club's VIP carpet.</li></ul>",
@@ -2832,6 +2833,8 @@ for (const guide of mockGuides) {
     applyField(f.answer as Record<string, string>, `faq.${i}.a`);
   });
 }
+
+applyFlagshipGuides35(mockGuides);
 
 export const getGuideBySlug = (slug: string, lang: string): Guide | undefined => {
   if (slug === 'san-siro-football-afterparties-guide') {

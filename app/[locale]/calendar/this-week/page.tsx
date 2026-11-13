@@ -5,7 +5,7 @@ import Link from '@/components/LocalizedLink';
 import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset, romeUpcomingSundayKey } from '@/lib/calendarEvents';
 import { generateEventListSchema, jsonLdString } from '@/lib/seo';
 import DiscoveryGrid from '@/components/DiscoveryGrid';
-import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
+import { getEventbriteDiscoveryItems, slimDiscoveryItemsForClient } from '@/lib/eventbriteDiscovery';
 import { WeeklyNightlifeNavigator, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 
 export const dynamic = 'force-dynamic';
@@ -280,7 +280,7 @@ export default async function ThisWeekPage({ params }: Props) {
         </section>
 
         {/* Discovery Grid */}
-        <DiscoveryGrid items={items} lang={locale} title={t.gridTitle} subtitle={t.gridSubtitle} />
+        <DiscoveryGrid items={slimDiscoveryItemsForClient(items, locale, 24)} lang={locale} title={t.gridTitle} subtitle={t.gridSubtitle} />
 
         {/* Dove Ballare Questa Settimana nei 6 Club Prioritari */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-white/10">

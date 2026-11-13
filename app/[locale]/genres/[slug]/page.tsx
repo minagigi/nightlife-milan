@@ -1,8 +1,9 @@
 import { notFound } from 'next/navigation';
-import { tr } from '@/lib/i18n/t';
 import { getLocaleDef, hreflangAlternates, localePrefix, indexedLocaleCodes } from '@/lib/i18n/locales';
 import { resolveGenreSlug, getLocalizedGenreSlug35 } from '@/lib/i18n/localizedSlugs35';
 import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
+import { getGenreLocalized35 } from '@/lib/i18n/zonesAndGenres35';
+import GuideToc from '@/components/GuideToc';
 import { Metadata } from 'next';
 import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
@@ -12,7 +13,7 @@ import { Music, ArrowLeft, Calendar, MessageCircle } from 'lucide-react';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { generateEventListSchema, jsonLdString } from '@/lib/seo';
 import { getAllCalendarEvents } from '@/lib/calendarEvents';
-import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
+import { getEventbriteDiscoveryItems, slimDiscoveryItemsForClient } from '@/lib/eventbriteDiscovery';
 import { VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
@@ -147,21 +148,21 @@ export const genreData: Record<
       it: 'Hip Hop, Trap & Afrobeats: Il Ritmo Urban di Milano',
     },
     editorial: {
-      en: 'As the undisputed capital of the Italian recording industry, Milan’s Hip Hop, R&B, Trap, and Afrobeats nights attract international athletes, recording artists, and fashion creatives. Pineta Milano (Milan8Mile), Aria Club, Play Club, 11 Clubroom, and Hollywood Rythmoteque deliver heavy 808s, live showcases, and electric bottle service energy.',
-      it: 'Capitale indiscussa della discografia italiana, Milano offre serate Hip Hop, R&B, Trap e Afrobeats frequentate da calciatori di Serie A, rapper, producer e modelli internazionali. Pineta Milano (Milan8Mile), Aria Club, Play Club, 11 Clubroom e Hollywood Rythmoteque garantiscono 808 potenti, showcase dal vivo e bottle service spettacolare.',
+      en: 'As the undisputed capital of the Italian recording industry, Milan’s Hip Hop, R&B, Trap, and Afrobeats nights attract international athletes, recording artists, and fashion creatives. Repvblic Milano (Dirty Monday), Pineta Milano, Aria Club, Tocqueville 13, and Hollywood Rythmoteque deliver heavy 808s, live showcases, and electric bottle service energy.',
+      it: 'Capitale indiscussa della discografia italiana, Milano offre serate Hip Hop, R&B, Trap e Afrobeats frequentate da calciatori di Serie A, rapper, producer e modelli internazionali. Repvblic Milano (Dirty Monday), Pineta Milano, Aria Club, Tocqueville 13 e Hollywood Rythmoteque garantiscono 808 potenti, showcase dal vivo e bottle service spettacolare.',
     },
     soundOf: {
       en: 'Heavy 808s, US & Italian Rap, Afrobeats, luxury streetwear, and sparkler bottle parades.',
       it: '808 potenti, Rap USA & Italiano, Afrobeats, luxury streetwear e bottle parade scintillanti.',
     },
-    topClubs: ['Pineta Milano', 'Aria Club', 'Play Club', '11 Clubroom', 'Hollywood Rythmoteque'],
+    topClubs: ['Repvblic Milano', 'Pineta Milano', 'Aria Club', 'Tocqueville 13', 'Hollywood Rythmoteque'],
     metaTitle: {
       en: 'Best Hip Hop, R&B & Afrobeats Clubs in Milan | 2026/2027 Guide',
       it: 'I Migliori Club Hip Hop, Trap e Afrobeats a Milano | Guida 2026/2027',
     },
     metaDescription: {
-      en: 'Find the top hip hop, R&B, and Afrobeats clubs in Milan. VIP tables, urban vibes, and the best DJs at Pineta, Aria, Play Club, and 11 Clubroom.',
-      it: 'Trova i migliori club hip hop, R&B e afrobeats a Milano. Tavoli VIP, vibrazioni urban e i migliori DJ da Pineta, Aria, Play Club e 11 Clubroom.',
+      en: 'Find the top hip hop, R&B, and Afrobeats clubs in Milan. VIP tables, urban vibes, and the best DJs at Repvblic, Pineta, Aria & Tocqueville 13.',
+      it: 'Trova i migliori club hip hop, R&B e afrobeats a Milano. Tavoli VIP, vibrazioni urban e i migliori DJ da Repvblic, Pineta, Aria e Tocqueville 13.',
     },
   },
   reggaeton: {
@@ -172,21 +173,21 @@ export const genreData: Record<
       it: 'Reggaeton & Latin Urban: Le Notti Più Calienti di Milano',
     },
     editorial: {
-      en: 'When Milan wants pure, uninhibited dancefloor heat, Reggaeton and Latin Urban take over. Led by Pineta Milano’s legendary Noche de Perreo on Fridays and Saturdays, alongside Tocqueville 13, Play Club, and Alcatraz’s Latin arena, these nights feature dembow beats, confetti showers, choreography dancers, and sold-out VIP tables.',
-      it: 'Quando Milano vuole ballare senza freni fino all’alba, il Reggaeton e il Latin Urban dominano la scena. Guidate dalla leggendaria Noche de Perreo del Pineta Milano (venerdì e sabato), insieme a Tocqueville 13, Play Club e alla pista latina dell’Alcatraz, queste serate uniscono ritmi dembow, animazione, coriandoli e tavoli VIP sempre sold-out.',
+      en: 'When Milan wants pure, uninhibited dancefloor heat, Reggaeton and Latin Urban take over. Led by Pineta Milano’s legendary Noche de Perreo on Fridays and Saturdays, alongside Tocqueville 13, Aria Club, and Alcatraz’s Latin arena, these nights feature dembow beats, confetti showers, choreography dancers, and sold-out VIP tables.',
+      it: 'Quando Milano vuole ballare senza freni fino all’alba, il Reggaeton e il Latin Urban dominano la scena. Guidate dalla leggendaria Noche de Perreo del Pineta Milano (venerdì e sabato), insieme a Tocqueville 13, Aria Club e alla pista latina dell’Alcatraz, queste serate uniscono ritmi dembow, animazione, coriandoli e tavoli VIP sempre sold-out.',
     },
     soundOf: {
       en: 'Dembow rhythms, Bad Bunny & Karol G anthems, vibrant choreography, and electric dancefloors.',
       it: 'Ritmi dembow, hit di Bad Bunny, Feid e Karol G, animazione coreografica e piste incandescenti.',
     },
-    topClubs: ['Pineta Milano', 'Tocqueville 13', 'Play Club', 'Alcatraz Milano', 'Hollywood Rythmoteque'],
+    topClubs: ['Pineta Milano', 'Tocqueville 13', 'Aria Club Milano', 'Alcatraz Milano', 'Hollywood Rythmoteque'],
     metaTitle: {
       en: 'Top Reggaeton & Latin Clubs in Milan | 2026/2027 Guide',
       it: 'I Migliori Club Reggaeton e Latini a Milano | Guida 2026/2027',
     },
     metaDescription: {
-      en: "Dance the night away at Milan's best reggaeton and Latin urban clubs: Pineta Noche de Perreo, Tocqueville 13, Play Club, and Alcatraz.",
-      it: 'Balla tutta la notte nei migliori club reggaeton e latin urban di Milano: Pineta Noche de Perreo, Tocqueville 13, Play Club e Alcatraz.',
+      en: "Dance the night away at Milan's best reggaeton and Latin urban clubs: Pineta Noche de Perreo, Tocqueville 13, Aria Club & Alcatraz.",
+      it: 'Balla tutta la notte nei migliori club reggaeton e latin urban di Milano: Pineta Noche de Perreo, Tocqueville 13, Aria Club e Alcatraz.',
     },
   },
   commercial: {
@@ -329,33 +330,33 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
-  const typedLocale = (locale === 'it' ? 'it' : 'en') as 'en' | 'it';
+  const loc = (locale as LocaleCode) || 'en';
 
   const canonicalGenreSlug = resolveGenreSlug(slug);
   const genre = genreData[canonicalGenreSlug] || genreData[slug];
 
   if (!genre) return notFound();
 
-  const title = seoTitle(genre.metaTitle[typedLocale]);
-  const description = withWhatsApp(genre.metaDescription[typedLocale], locale);
+  const gLoc = getGenreLocalized35(canonicalGenreSlug, loc);
+  const title = seoTitle(gLoc.seoTitle);
+  const description = withWhatsApp(gLoc.seoDescription, loc);
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const localizedGenreSlug = getLocalizedGenreSlug35(canonicalGenreSlug, (locale as LocaleCode) || 'en');
-  const canonical = `${baseUrl}${localePrefix(locale)}/${getLocalizedDir35('genres', locale)}/${localizedGenreSlug}`;
+  const localizedGenreSlug = getLocalizedGenreSlug35(canonicalGenreSlug, loc);
+  const canonical = `${baseUrl}${localePrefix(loc)}/${getLocalizedDir35('genres', loc)}/${localizedGenreSlug}`;
   const genreLangAlternates: Record<string, string> = {
     'x-default': `${baseUrl}/${getLocalizedDir35('genres', 'en')}/${getLocalizedGenreSlug35(canonicalGenreSlug, 'en')}`,
   };
-  for (const loc of indexedLocaleCodes) {
-    genreLangAlternates[getLocaleDef(loc)!.hreflang] = `${baseUrl}${localePrefix(loc)}/${getLocalizedDir35('genres', loc)}/${getLocalizedGenreSlug35(canonicalGenreSlug, loc)}`;
+  for (const l of indexedLocaleCodes) {
+    genreLangAlternates[getLocaleDef(l)!.hreflang] = `${baseUrl}${localePrefix(l)}/${getLocalizedDir35('genres', l)}/${getLocalizedGenreSlug35(canonicalGenreSlug, l)}`;
   }
 
-  const isIt = locale === 'it';
   const ogImage = `${baseUrl}${GENRE_HERO_MAP[canonicalGenreSlug] || GENRE_HERO_MAP[slug] || '/images/pillars/genre-hero-01.webp'}`;
 
   return {
     title,
     description,
-    robots: seoRobots(locale),
+    robots: seoRobots(loc),
     alternates: {
       canonical,
       languages: genreLangAlternates,
@@ -366,7 +367,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: canonical,
       type: 'website',
       siteName: 'Nightlife Milan',
-      locale: isIt ? 'it_IT' : 'en_US',
+      locale: getLocaleDef(loc)?.ogLocale || 'en_US',
       images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
     },
     twitter: {
@@ -381,9 +382,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function GenrePage({ params }: Props) {
   const { locale, slug } = await params;
-  const typedLocale = (locale === 'it' ? 'it' : 'en') as 'en' | 'it';
-  const isIt = typedLocale === 'it';
-  const lp = localePrefix(locale);
+  const loc = (locale as LocaleCode) || 'en';
+  const isIt = loc === 'it';
+  const lp = localePrefix(loc);
   const canonicalGenreSlug = resolveGenreSlug(slug);
   const genreHeroImg = GENRE_HERO_MAP[canonicalGenreSlug] || GENRE_HERO_MAP[slug] || '/images/pillars/genre-hero-01.webp';
   const genreInlineImgs = GENRE_INLINE_MAP[canonicalGenreSlug] || GENRE_INLINE_MAP[slug] || GENRE_INLINE_MAP.techno;
@@ -392,38 +393,34 @@ export default async function GenrePage({ params }: Props) {
 
   if (!genre) return notFound();
 
-  const items = getEventbriteDiscoveryItems(await getAllCalendarEvents(), locale).filter(
+  const gLoc = getGenreLocalized35(canonicalGenreSlug, loc);
+  const items = getEventbriteDiscoveryItems(await getAllCalendarEvents(), loc).filter(
     ({ event }) => event.genre.includes(genre.id)
   );
 
-  const genreFaqs = [
-    {
-      q: isIt
-        ? `Quali sono i migliori club per ballare ${genre.name} a Milano?`
-        : `What are the best clubs for ${genre.name} in Milan?`,
-      a: isIt
-        ? `I locali di riferimento per ${genre.name} a Milano sono: ${genre.topClubs.join(', ')}. Contatta il Concierge su WhatsApp al +39 351 912 7047 per Tavoli VIP e Liste.`
-        : `The top venues for ${genre.name} in Milan are: ${genre.topClubs.join(', ')}. Contact our WhatsApp Concierge at +39 351 912 7047 for VIP Tables and Guest Lists.`,
-    },
-    {
-      q: isIt
-        ? `Quanto costa un Tavolo VIP per una serata ${genre.name} a Milano?`
-        : `How much does a VIP Table cost for a ${genre.name} night in Milan?`,
-      a: isIt
-        ? `I tavoli partono da €150–€250 per Royal Aperitivo / Pista fino a €500–€1.500 per i Privé Console e Backstage nei club di punta, 100% spendibili in bottiglie.`
-        : `VIP tables start from €150–€250 for Royal Aperitivo / Dancefloor tables up to €500–€1,500 for Console and Backstage Privé tables, 100% spendable in bottles.`,
-    },
-  ];
+  const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
+  const currentGenreUrl = `${baseUrl}${lp}/${getLocalizedDir35('genres', loc)}/${getLocalizedGenreSlug35(canonicalGenreSlug, loc)}`;
+  const genresHubUrl = `${baseUrl}${lp}/${getLocalizedDir35('genres', loc)}`;
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: gLoc.ui.home, item: `${baseUrl}${lp || '/'}` },
+      { '@type': 'ListItem', position: 2, name: gLoc.ui.genresHub, item: genresHubUrl },
+      { '@type': 'ListItem', position: 3, name: gLoc.name, item: currentGenreUrl },
+    ],
+  };
 
   const faqSchema = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: genreFaqs.map((f) => ({
+    mainEntity: gLoc.faqs.map((f) => ({
       '@type': 'Question',
-      name: f.q,
+      name: f.question,
       acceptedAnswer: {
         '@type': 'Answer',
-        text: f.a,
+        text: f.answer,
       },
     })),
   };
@@ -432,7 +429,7 @@ export default async function GenrePage({ params }: Props) {
     <main className="flex-grow pt-24 pb-20 bg-[#050505]">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([breadcrumbSchema, faqSchema]) }}
       />
 
       {/* Breadcrumbs */}
@@ -441,18 +438,18 @@ export default async function GenrePage({ params }: Props) {
           <ol className="list-none p-0 inline-flex">
             <li className="flex items-center">
               <Link href={lp || '/'} className="hover:text-champagne transition-colors">
-                Home
+                {gLoc.ui.home}
               </Link>
               <span className="mx-2">/</span>
             </li>
             <li className="flex items-center">
               <Link href={`${lp}/genres`} className="hover:text-champagne transition-colors">
-                {tr(locale, 'Music Genres', 'Generi Musicali')}
+                {gLoc.ui.genresHub}
               </Link>
               <span className="mx-2">/</span>
             </li>
             <li className="text-champagne" aria-current="page">
-              {genre.name}
+              {gLoc.name}
             </li>
           </ol>
         </nav>
@@ -465,8 +462,8 @@ export default async function GenrePage({ params }: Props) {
             <div className="relative h-64 md:h-80 w-full rounded-2xl overflow-hidden border border-champagne/25 mb-8">
               <Image
                 src={genreHeroImg}
-                alt={genre.heroTitle[typedLocale]}
-                title={genre.heroTitle[typedLocale]}
+                alt={gLoc.h1}
+                title={gLoc.h1}
                 fill
                 priority
                 quality={92}
@@ -474,13 +471,16 @@ export default async function GenrePage({ params }: Props) {
                 className="object-cover"
               />
             </div>
+            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-champagne mb-3">
+              {gLoc.ui.verifiedBadge}
+            </p>
             <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl font-bold text-champagne tracking-tighter mb-6">
-              {genre.heroTitle[typedLocale]}
+              {gLoc.h1}
             </h1>
 
             {/* Top Clubs Badges */}
             <div className="flex flex-wrap gap-2 mb-6">
-              {genre.topClubs.map((club) => (
+              {gLoc.topClubs.map((club) => (
                 <span
                   key={club}
                   className="px-3.5 py-1.5 rounded-full border border-champagne/30 bg-champagne/[0.06] text-champagne text-xs font-mono tracking-wide"
@@ -490,26 +490,43 @@ export default async function GenrePage({ params }: Props) {
               ))}
             </div>
 
-            {/* AI Trafiletto */}
+            {/* AI Trafiletto & Concierge Verified */}
             <div className="mb-8 p-6 rounded-2xl border border-champagne/25 bg-champagne/[0.04]">
-              <p className="font-mono text-champagne text-[10px] tracking-[0.3em] uppercase mb-3">
-                {isIt ? 'Risposta Rapida · Sintesi Genere' : 'Quick Answer · Genre Summary'}
+              <p className="font-mono text-champagne text-[10px] tracking-[0.3em] uppercase mb-2">
+                {gLoc.ui.quickAnswerTitle}
               </p>
-              <p className="font-sans text-white/75 text-sm leading-relaxed">
-                {isIt
-                  ? `I migliori locali per ${genre.name} a Milano nel 2026/2027 sono: ${genre.topClubs.join(', ')}. ${items.length} serate in calendario. Prenotazione Tavoli VIP e Liste con risposta in 10 minuti via WhatsApp +39 351 912 7047.`
-                  : `The best venues for ${genre.name} in Milan for 2026/2027 are: ${genre.topClubs.join(', ')}. ${items.length} scheduled nights. Direct VIP Table and Guestlist booking in under 10 minutes via WhatsApp +39 351 912 7047.`}
+              <p className="font-sans text-white/80 text-sm leading-relaxed mb-2">
+                {gLoc.lead} ({items.length} {gLoc.ui.upcomingEvents}).
+              </p>
+              <p className="font-sans text-white/55 text-xs leading-relaxed">
+                {gLoc.ui.verifiedBody}
               </p>
             </div>
 
-            {/* H2: About this genre */}
-            <h2 className="font-serif text-2xl md:text-3xl text-white mb-4">
-              {isIt
-                ? `${genre.name} a Milano: Guida ai Locali e all'Atmosfera`
-                : `${genre.name} in Milan: Venue & Atmosphere Guide`}
-            </h2>
-            <div className="text-white/75 leading-relaxed mb-10 text-base md:text-lg">
-              <p>{genre.editorial[typedLocale]}</p>
+            {/* Clickable TOC (>= 5 anchors) */}
+            <div className="mb-10">
+              <GuideToc sections={gLoc.sections.map((s) => ({ id: s.id, title: s.heading }))} title={gLoc.ui.tocTitle} />
+            </div>
+
+            {/* Localized 5-Chapter Genre Guide */}
+            <div className="text-white/75 leading-relaxed mb-10 space-y-8">
+              {gLoc.sections.map((sec) => (
+                <div key={sec.id} id={sec.id} className="scroll-mt-28">
+                  <h2 className="font-serif text-2xl md:text-3xl text-champagne mb-3">
+                    {sec.heading}
+                  </h2>
+                  {sec.paragraphs.map((p, idx) => (
+                    <p key={idx} className="text-base leading-relaxed mb-3">{p}</p>
+                  ))}
+                  {sec.bullets && (
+                    <ul className="list-disc pl-5 space-y-1.5 text-sm text-white/75">
+                      {sec.bullets.map((b, bIdx) => (
+                        <li key={bIdx}>{b}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
 
@@ -517,28 +534,28 @@ export default async function GenrePage({ params }: Props) {
           <div className="w-full lg:w-80 bg-white/[0.03] border border-white/10 rounded-2xl p-6 sticky top-32">
             <h3 className="font-serif text-xl text-white mb-4 border-b border-white/10 pb-4 flex items-center gap-2">
               <Music className="w-5 h-5 text-champagne" />
-              {isIt ? `Identità Sonora: ${genre.name}` : `Sonic Identity: ${genre.name}`}
+              {gLoc.name}
             </h3>
             <p className="text-white/65 leading-relaxed italic mb-6 text-sm">
-              &ldquo;{genre.soundOf[typedLocale]}&rdquo;
+              {gLoc.subtitle}
             </p>
             <div className="grid grid-cols-2 gap-2 mb-6">
               {[
                 {
                   src: genreInlineImgs[0],
-                  alt: `${genre.name} club Milan dancefloor crowd`,
+                  alt: `${gLoc.name} club Milan dancefloor crowd`,
                 },
                 {
                   src: genreInlineImgs[1],
-                  alt: `${genre.name} night Milan club atmosphere`,
+                  alt: `${gLoc.name} night Milan club atmosphere`,
                 },
                 {
                   src: genreInlineImgs[2],
-                  alt: `VIP bottle service ${genre.name} club Milan`,
+                  alt: `VIP bottle service ${gLoc.name} club Milan`,
                 },
                 {
                   src: genreInlineImgs[3],
-                  alt: `${genre.name} event Milan luxury nightclub`,
+                  alt: `${gLoc.name} event Milan luxury nightclub`,
                 },
               ].map((img, i) => (
                 <div
@@ -559,15 +576,15 @@ export default async function GenrePage({ params }: Props) {
             <a
               href={`https://wa.me/393519127047?text=${encodeURIComponent(
                 isIt
-                  ? `Ciao Nightlife Milan! Vorrei prenotare una serata ${genre.name} a Milano.`
-                  : `Hi Nightlife Milan! I'd like to book a ${genre.name} night in Milan.`
+                  ? `Ciao Nightlife Milan! Vorrei prenotare una serata ${gLoc.name} a Milano.`
+                  : `Hi Nightlife Milan! ${gLoc.name} - WhatsApp VIP Concierge`
               )}`}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-champagne text-black font-mono text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
             >
               <MessageCircle className="w-4 h-4" />
-              <span>WhatsApp +39 351 912 7047</span>
+              <span>{gLoc.ui.bookVipCta}</span>
             </a>
           </div>
         </div>
@@ -577,14 +594,10 @@ export default async function GenrePage({ params }: Props) {
       <div className="border-t border-white/5 bg-white/[0.03] pt-8">
         {items.length > 0 ? (
           <DiscoveryGrid
-            items={items}
-            lang={locale}
-            title={typedLocale === 'it' ? `Eventi ${genre.name}` : `${genre.name} Events`}
-            subtitle={tr(
-              locale,
-              `Upcoming nights and DJ sets for this sound`,
-              `Le prossime serate e DJ set con questo sound`
-            )}
+            items={slimDiscoveryItemsForClient(items, loc, 24)}
+            lang={loc}
+            title={`${gLoc.ui.upcomingEvents} (${gLoc.name})`}
+            subtitle={gLoc.lead}
           />
         ) : (
           <section className="max-w-3xl mx-auto px-4 py-20 text-center">
@@ -592,20 +605,16 @@ export default async function GenrePage({ params }: Props) {
               <Calendar className="w-8 h-8 text-champagne" />
             </div>
             <h2 className="font-serif text-3xl text-white mb-4">
-              {isIt ? `Prenota la tua serata ${genre.name}` : `Book Your ${genre.name} Night`}
+              {gLoc.ui.bookVipCta}
             </h2>
             <p className="text-white/50 mb-8 text-base">
-              {tr(
-                locale,
-                'Message our WhatsApp concierge for the updated guest list and VIP table map.',
-                'Contatta il nostro Concierge WhatsApp per la lista aggiornata e la mappa tavoli VIP.'
-              )}
+              {gLoc.ui.directDeskLabel}
             </p>
             <Link
               href={`${lp}/events`}
               className="px-8 py-3 rounded-full bg-champagne text-black font-medium tracking-wider uppercase text-sm"
             >
-              {tr(locale, 'See Full Events Calendar', 'Vedi Calendario Eventi Completo')}
+              {gLoc.ui.upcomingEvents}
             </Link>
           </section>
         )}
@@ -613,7 +622,22 @@ export default async function GenrePage({ params }: Props) {
 
       {/* Interactive VIP Quote Calculator */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <VipQuoteCalculator locale={locale} />
+        <VipQuoteCalculator locale={loc} />
+      </section>
+
+      {/* Genre FAQs */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <h2 className="font-serif text-3xl text-champagne mb-6">
+          {gLoc.ui.faqTitle} ({gLoc.name})
+        </h2>
+        <div className="space-y-4">
+          {gLoc.faqs.map((f, i) => (
+            <div key={i} className="p-6 rounded-xl border border-white/10 bg-white/[0.02]">
+              <h3 className="font-serif text-lg text-white mb-2">{f.question}</h3>
+              <p className="text-sm text-white/65 leading-relaxed">{f.answer}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* Cross-Linking SEO */}
@@ -623,7 +647,7 @@ export default async function GenrePage({ params }: Props) {
           className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white hover:bg-champagne hover:text-black hover:border-champagne transition-all duration-300 font-bold tracking-widest uppercase text-sm gap-2"
         >
           <ArrowLeft className="w-4 h-4" />
-          {tr(locale, 'Explore All 10 Music Genres & Formats', 'Esplora Tutti i 10 Generi Musicali')}
+          {gLoc.ui.otherGenres}
         </Link>
       </section>
 
@@ -632,12 +656,12 @@ export default async function GenrePage({ params }: Props) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: jsonLdString(
-              generateEventListSchema(items, locale, genre.heroTitle[typedLocale])
+              generateEventListSchema(items, loc, gLoc.h1)
             ),
           }}
         />
       )}
-            <EditorialPageSections locale={locale as LocaleCode} path={`${lp}/genres/${slug}`} />
+            <EditorialPageSections locale={loc} path={`${lp}/genres/${slug}`} />
       </main>
   );
 }

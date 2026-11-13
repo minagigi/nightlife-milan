@@ -109,8 +109,8 @@ const TIERS: Record<
   'urban-warehouse': {
     labelIt: 'House, Hip-Hop, Techno & Warehouse',
     labelEn: 'House, Hip-Hop, Techno & Warehouses',
-    venuesIt: '6. Repvblic · Play Club · Volt Club · Magazzini Generali · Hollywood · The Club',
-    venuesEn: '6. Repvblic · Play Club · Volt Club · Magazzini Generali · Hollywood · The Club',
+    venuesIt: '6. Repvblic · Tocqueville 13 · Volt Club · Magazzini Generali · Hollywood · The Club',
+    venuesEn: '6. Repvblic · Tocqueville 13 · Volt Club · Magazzini Generali · Hollywood · The Club',
     basePrices: {
       'aperitivo-table': 150,
       'dancefloor-vip': 250,

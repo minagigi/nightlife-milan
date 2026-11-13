@@ -12,6 +12,7 @@ import {
   localePrefix,
 } from '@/lib/i18n/locales';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { getHubSeoMeta35 } from '@/lib/i18n/hubSeoMeta35';
 import {
   Sparkles,
   MapPin,
@@ -53,22 +54,9 @@ export async function generateMetadata({
   const { locale } = await params;
   const canonical = canonicalPageUrl(baseUrl, locale, '/concert-afterparties');
 
-  const title = seoTitle(
-    tr(
-      locale,
-      'Milan Concert Afterparties 2026/2027: San Siro, Ippodromo I-Days, Unipol Forum Assago, Fabrique & Alcatraz',
-      'Afterparty Concerti Milano 2026/2027: Dove Uscire nei Club Dopo San Siro, Ippodromo I-Days, Forum Assago, Fabrique e Alcatraz'
-    )
-  );
-
-  const description = withWhatsApp(
-    tr(
-      locale,
-      'Official Milan Concert Afterparty Hub 2026/2027: walk 150m from San Siro & Ippodromo to 3. Aria Club, party 7/7 after midweek concerts at 1. Just Me, or ride M2/M5 from Unipol Forum Assago to 2. Pineta, 4. 55 Milano, 5. Voya Rooftop & 6. Repvblic. WhatsApp +39 351 912 7047.',
-      'Guida ufficiale Afterparty Concerti Milano 2026/2027: vai a piedi in 150m da San Siro e Ippodromo da 3. Aria Club, balla 7 notti su 7 da 1. Just Me, o raggiungi in metro da Unipol Forum Assago 2. Pineta, 4. 55 Milano, 5. Voya Rooftop e 6. Repvblic. WhatsApp +39 351 912 7047.'
-    ),
-    locale
-  );
+  const meta35 = getHubSeoMeta35('concert-afterparties', locale);
+  const title = seoTitle(meta35.title);
+  const description = withWhatsApp(meta35.description, locale);
 
   const languages = buildLanguageAlternates('/concert-afterparties');
 
