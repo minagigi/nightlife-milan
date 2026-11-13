@@ -5,6 +5,7 @@ import Link from '@/components/LocalizedLink';
 import { mockVenues } from '@/lib/data';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getHubSeoMeta35 } from '@/lib/i18n/hubSeoMeta35';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { VipQuoteCalculator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
 import Image from 'next/image';
 import EditorialPageSections from '@/components/EditorialPageSections';
@@ -431,7 +432,7 @@ export default async function BottlePricesPage({ params }: Props) {
               {tr(locale, 'Tell us the venue, date and group size. Reply with exact quote in 10 minutes. Free.', 'Dicci il locale, la data e il numero di persone. Risposta con preventivo preciso in 10 minuti. Gratis.')}
             </p>
             <a
-              href="https://wa.me/393519127047?text=Hi%2C%20I%20want%20a%20bottle%20price%20quote%20for%20a%20Milan%20club."
+              href={getConciergeBookingUrl(locale, 'Bottle Price List', `${lp}/bottle-prices`)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 bg-champagne text-black font-bold rounded-full hover:bg-white transition-colors text-sm uppercase tracking-wider"

@@ -6,6 +6,7 @@ import { getLocalizedVenueSlug35, getLocalizedZoneSlug35 } from '@/lib/i18n/loca
 import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
 import { getLocalizedGuideSlug35 } from '@/lib/guides100Catalog';
 import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { buildClubHighCtrDescription, buildClubHighCtrTitle } from '@/lib/clubSeoMeta35';
 import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
@@ -1195,40 +1196,17 @@ export default async function ClubPage({ params }: Props) {
   const rawGallery = enhancedGallery.filter((g) => g !== image);
   const gallery = rawGallery.length >= 4 ? rawGallery : enhancedGallery;
   const venueUi = getVenueUi35(locale);
-  const venueCarouselEvents = resolveVenueEventsForCarousel(venue, locale);
+  const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
+  const currentVenueSlug = getLocalizedVenueSlug35(venue.slugs.en, (locale as LocaleCode) || 'en');
+  const clubsDir = getLocalizedDir35('clubs', locale);
+  const canonicalClubUrl = `${baseUrl}${localePrefix(locale)}/${clubsDir}/${currentVenueSlug}`;
+
+  const venueCarouselEvents = resolveVenueEventsForCarousel(venue, locale, canonicalClubUrl);
   const venueTargetProfile = getVenueTargetProfile(venue, locale);
   const venueCelebrations = getVenueCelebrations(venue, locale);
   const venueServices = getVenueServices10(venue, locale);
-  
-  const waLink = venue.id === 'v-pineta' 
-    ? `${CONTACT.whatsapp.link}?text=Ciao,%20vorrei%20informazioni%20per%20un%20tavolo%20al%20Pineta%20Club%20Milano`
-    : venue.id === 'v-playclub'
-    ? `${CONTACT.whatsapp.link}?text=Ciao,%20vorrei%20prenotare%20un%20tavolo%20al%20Play%20Club`
-    : venue.id === 'v-55milano'
-    ? `${CONTACT.whatsapp.link}?text=Ciao,%20vorrei%20prenotare%20un%20tavolo%20per%20il%2055%20Milano`
-    : venue.id === 'v-repvblic'
-    ? `${CONTACT.whatsapp.link}?text=Ciao,%20vorrei%20informazioni%20per%20il%20Repvblic%20Milano`
-    : venue.id === 'v-11clubroom'
-    ? `${CONTACT.whatsapp.link}?text=Ciao,%20vorrei%20prenotare%20un%20tavolo%20all'11%20Clubroom`
-    : venue.id === 'v-church81'
-    ? `${CONTACT.whatsapp.link}?text=Ciao,%20vorrei%20prenotare%20un%20tavolo%20al%20Church%2081`
-    : venue.id === 'v-mibmilano'
-    ? `${CONTACT.whatsapp.link}?text=Ciao,%20vorrei%20prenotare%20un%20tavolo%20al%20MIB%20Milano`
-    : venue.id === 'v-gattopardo'
-    ? `${CONTACT.whatsapp.link}?text=Ciao,%20vorrei%20prenotare%20un%20tavolo%20al%20Gattopardo`
-    : venue.id === 'v-terrazza21'
-    ? `${CONTACT.whatsapp.link}?text=Ciao,%20vorrei%20prenotare%20un%20tavolo%20alla%20Terrazza%2021`
-    : venue.id === 'v-theclub'
-    ? `${CONTACT.whatsapp.link}?text=Ciao,%20vorrei%20prenotare%20un%20tavolo%20al%20The%20Club`
-    : venue.id === 'v-tocqueville'
-    ? `${CONTACT.whatsapp.link}?text=Ciao,%20vorrei%20prenotare%20un%20tavolo%20o%20cena%20al%20Tocqueville%2013%20Milano`
-    : venue.id === 'v-alcatraz'
-    ? `${CONTACT.whatsapp.link}?text=Ciao,%20vorrei%20prenotare%20un%20tavolo%20VIP%20all'Alcatraz%20Milano`
-    : venue.id === 'v-fabrique'
-    ? `${CONTACT.whatsapp.link}?text=Ciao,%20vorrei%20prenotare%20un%20tavolo%20VIP%20al%20Fabrique%20Milano`
-    : venue.id === 'v-amnesia'
-    ? `${CONTACT.whatsapp.link}?text=Ciao,%20vorrei%20prenotare%20un%20tavolo%20VIP%20all'Amnesia%20Milano`
-    : `${CONTACT.whatsapp.link}?text=Hi,%20I'd%20like%20to%20book%20at%20${encodeURIComponent(name)}`;
+
+  const waLink = getConciergeBookingUrl(locale, name, canonicalClubUrl);
   const servicesTags = venue.tags || [venue.category];
   
   const lp = localePrefix(locale);
@@ -1241,11 +1219,6 @@ export default async function ClubPage({ params }: Props) {
   const pastVenueEvents = venueEvents
     .filter((e) => !isUpcomingRome(e.dateISO))
     .sort((a, b) => new Date(b.dateISO).getTime() - new Date(a.dateISO).getTime());
-
-  const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const currentVenueSlug = getLocalizedVenueSlug35(venue.slugs.en, (locale as LocaleCode) || 'en');
-  const clubsDir = getLocalizedDir35('clubs', locale);
-  const canonicalClubUrl = `${baseUrl}${localePrefix(locale)}/${clubsDir}/${currentVenueSlug}`;
   const hasMapUrl = venue.coordinates?.latitude
     ? `https://www.google.com/maps/search/?api=1&query=${venue.coordinates.latitude},${venue.coordinates.longitude}`
     : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${name} ${venue.address.streetAddress} Milano`)}`;

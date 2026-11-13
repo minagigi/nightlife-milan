@@ -7,6 +7,7 @@ import { generateEventListSchema, jsonLdString } from '@/lib/seo';
 import DiscoveryGrid from '@/components/DiscoveryGrid';
 import { getEventbriteDiscoveryItems, slimDiscoveryItemsForClient } from '@/lib/eventbriteDiscovery';
 import { WeeklyNightlifeNavigator, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 
 export const dynamic = 'force-dynamic';
 
@@ -338,11 +339,7 @@ export default async function ThisWeekPage({ params }: Props) {
                     {tr(locale, 'Club Guide →', 'Scheda Club →')}
                   </Link>
                   <a
-                    href={`https://wa.me/393519127047?text=${encodeURIComponent(
-                      isIt
-                        ? `Ciao! Vorrei prenotare per questa settimana da ${club.name} a Milano.`
-                        : `Hi! I want to book for this week at ${club.name} in Milan.`,
-                    )}`}
+                    href={getConciergeBookingUrl(locale, club.name, `${lp}/calendar/this-week`)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="ml-auto px-4 py-2 rounded-full bg-champagne text-black text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"

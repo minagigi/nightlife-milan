@@ -15,7 +15,7 @@ import { localizeInternalHref, resolveSeoHubPathToCanonical } from '@/lib/i18n/l
 import { getChrome } from '@/lib/i18n/chrome';
 import { editorialValue, type EditorialFields } from '@/lib/editorialPresentation';
 import { BAR_COPY } from '@/lib/i18n/mobileBarCopy';
-import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
+import { getConciergeBookingUrl, resolveFullPageUrl } from '@/lib/conciergeBooking';
 import { getMfwBookingLabel, isMfwPathname } from '@/lib/mfw/bookingLabels';
 import { isInformationOnlyClubPath } from '@/lib/clubContactRoute';
 import { getClubInformationContactLabel } from '@/lib/clubOperationalStatus';
@@ -241,7 +241,9 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
     ),
   ];
 
-  const waMenuLink = informationOnlyClub ? SITE_CONTACT.whatsapp.link : getConciergeBookingUrl(currentLocale);
+  const waMenuLink = informationOnlyClub
+    ? SITE_CONTACT.whatsapp.link
+    : getConciergeBookingUrl(currentLocale, undefined, resolveFullPageUrl(pathname || '/', currentLocale));
 
   return (
     <header className={`nlm-header sticky top-0 z-50 w-full border-b border-[#F6F1E7]/14 bg-[#050505] ${scrolled ? 'is-scrolled' : ''}`}>

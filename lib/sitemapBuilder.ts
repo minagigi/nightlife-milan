@@ -9,6 +9,7 @@ import type { Event } from '@/lib/types';
 import { EVENT_BATCH_PROFILES, getEventBatchSlug, SITE_ONLY_EVENT_PROFILES } from '@/lib/eventBatchProfiles';
 import { CAPODANNO_EVENTS } from '@/lib/capodannoEvents';
 import { CAPODANNO_CATEGORY_IDS, capodannoCategoryPath, capodannoEventPath } from '@/lib/capodanno/routes';
+import { christmasVoyaPath } from '@/lib/christmas/voya35';
 import { halloweenPath } from '@/lib/halloween/routes';
 import { OCTOBER_EVENTS, OCTOBER_EVENTS_INVENTORY } from '@/lib/octoberEvents';
 import { octoberEventCanonical } from '@/lib/octoberEventSeo';
@@ -398,6 +399,15 @@ function buildEventsEntriesInternal(ebEvents: readonly Event[]): MetadataRoute.S
         changeFrequency: isUpcoming ? 'daily' : 'monthly',
         priority: isUpcoming ? 0.9 : 0.6,
       });
+    });
+  });
+
+  locales.forEach((locale) => {
+    entries.push({
+      url: `${baseUrl}${christmasVoyaPath(locale)}`,
+      lastModified: catalogLastMod,
+      changeFrequency: 'daily',
+      priority: 0.94,
     });
   });
 

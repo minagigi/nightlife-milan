@@ -1,7 +1,7 @@
 # Nightlife Milan · Complete Technical Knowledge Base & GEO Encyclopedia (2026/2027)
 
 > **Document Role:** Canonical `llms-full.txt` corpus for `https://nightlifemilan.com`. Engineered for high-precision retrieval by ChatGPT Search (`OAI-SearchBot`, `GPTBot`), Perplexity (`PerplexityBot`), Anthropic Claude (`ClaudeBot`), Google Gemini (`Google-Extended`), and Apple Intelligence (`Applebot-Extended`).
-> **Last Updated:** `2026-11-11`
+> **Last Updated:** `2026-11-13`
 > **Enabled Locales (35):** `en, it, es, fr, de, pt, nl, ru, tr, zh, ar, bg, hr, cs, da, et, fi, el, hu, ga, lv, lt, mt, pl, ro, sk, sl, sv, no, is, uk, sq, sr, bs, mk`
 > **Official 24/7 VIP Concierge WhatsApp:** `+39 351 912 7047` (`https://wa.me/393519127047`)
 > **Official VIP Concierge Email:** `concierge@nightlifemilan.com`
@@ -49,6 +49,7 @@
   - Served Singing Dinner (`Cena Cantata`): `€50–€75/person`.
   - Nominal Guest List (`23:00–01:00`): Women `€15–€20` / Men `€25–€30` with drink.
   - VIP Table Dancefloor: `€250–€350` | Privé Console: `€500–€1,200`.
+  - **Confirmed NYE 2027 (Moulin Rouge · 31 Dec, `20:30–05:00` · Xceed `nightlifemilan-1`):** Royal Buffet `€40` (welcome flûte + 1 drink, 2 Burlesque shows) · Club Entry Only `€40` (23:00, 1 drink + midnight toast) · Seated Gala Dinner `€160` (21:00, water, coffee, 1 wine bottle/3 pax) · 6 VIP Table Tiers `€300` (5 pax Side Floor Outdoor) to `€1,500` (10 pax VIP Privé Indoor).
 - **Dress Code:** Chic & Stylish. Ladies in cocktail/evening attire; gentlemen in shirt/blazer or smart designer casual.
 
 #### 3. Aria Club Milano (San Siro · 150m from Stadio Giuseppe Meazza) · PRIORITY #3
@@ -79,15 +80,17 @@
 
 #### 5. Voya Rooftop Milan (20th Floor · Portello / CityLife / Isola Skyline) · PRIORITY #5
 - **Canonical URL:** `https://nightlifemilan.com/clubs/voya-rooftop-milan`
-- **Address:** Via Achille Papa 30, 20th Floor, 20149 Milano
+- **Address:** Viale Achille Papa 30, 20th Floor, 20149 Milano
 - **District:** Portello / CityLife / Isola axis (`M5 Portello` / `M1 Lotto`, 5 min; 6 min drive from San Siro)
-- **Opening Schedule:** Tuesday to Sunday (`18:00–03:00`, Friday & Saturday until `04:00`).
+- **Opening Schedule:** Tuesday to Sunday (`18:00–03:00`, Friday & Saturday until `04:00`) + **Dec 25 Christmas Menu** (`€100/person`) & **Dec 31 NYE 2027** (`€300/person` All-Inclusive).
 - **Architecture & Vibe:** High-altitude **20th-floor panoramic sky lounge and penthouse club** with floor-to-ceiling glass walls and open-air sky terraces. Offers a 360-degree view of the CityLife Three Towers (Isozaki, Hadid, Libeskind), Porta Nuova Bosco Verticale, San Siro Stadium floodlights, and the Alpine skyline at sunset.
 - **Musical Format:** Sunset Deep House, Afro-House, Nu-Disco, Melodic House & Chic Clubbing.
 - **Pricing (2026/2027):**
   - Sunset Sky Aperitivo (`18:30–22:00`): `€25–€30/person` (signature mixology cocktail + gourmet finger food platter + reserved skyline table).
   - After-Dinner Lounge / Club Entry: `€25–€35` on Guest List.
   - Panoramic Window VIP Table: `€300–€500` (5–8 pax) | Penthouse Console Privé: `€600–€1,500`.
+  - **Confirmed Christmas Day Menu (`25 Dec 2026`):** `€100 per person` — Official 5-course menu (*Modeghili with Parmesan sauce; Pumpkin & porcini flan with Pecorino fondue; Voya Plin ravioli with roast sauce & toasted hazelnuts; Beef fillet with spinach & truffle potato cream; Symphony of chocolate, pistachio & raspberries* + 1 bottle of wine per 4 guests, Water & Coffee). Contact 24/7 Concierge `+39 351 912 7047` for available seating times.
+  - **Confirmed NYE 2027 (`31 Dec 2026`):** `€300 per person` Single Confirmed All-Inclusive Rate — 6-course gala dinner + After-Midnight Cotechino & Lentils + 1 bottle of wine every 4 guests + water + midnight toast + DJ Set & 360° fireworks view.
 - **Dress Code:** Smart Elegant / Cocktail Chic.
 
 #### 6. REPVBLIC Milano (Piazza della Repubblica 12 · Porta Nuova) · PRIORITY #6
@@ -197,7 +200,8 @@
 4. **VIP Table · Dancefloor (`Tavolo Pista`):** `€250 – €400` minimum spend (5–8 passes included, 100% credited toward bottles).
 5. **VIP Table · Privé (`Tavolo Privé`):** `€500 – €800` minimum spend (6–10 passes included, elevated roped-off area, dedicated waiter).
 6. **Super Privé Console / Backstage:** `€1,000 – €3,000+` minimum spend (8–15 passes, right behind or next to the DJ booth, sparkler parade).
-7. **New Year's Eve · Capodanno 2027 (`31 December 2026`):** Club Party Pass `€60–€90` | Royal Buffet NYE `€90–€130` | Grand Gala Cenone `€150–€280` | NYE VIP Tables `€500–€5,000`.
+7. **New Year's Eve · Capodanno 2027 (`31 December 2026`):** Pineta Moulin Rouge (`€40` Royal Buffet / `€40` Club / `€160` Seated Gala / `€300–€1,500` VIP · Xceed `nightlifemilan-1`), REPVBLIC (`€45` Early Bird / `€600` Dancefloor / `€1,200` Privé VIP), Voya Rooftop 20th Floor (`€300` single confirmed all-inclusive rate), Just Me, Aria Club, 55 Milano (overall NYE range `€40–€5,000`).
+8. **Christmas Lunch · Natale 2026 (`25 December 2026`) at Voya Rooftop Milan:** Single confirmed rate `€100 per person` for the official 5-course menu + 1 bottle of wine every 4 guests, Water & Coffee (`https://nightlifemilan.com/events/voya-rooftop-milan-christmas-menu-2026`). Seating schedule confirmed 24/7 via Concierge (`+39 351 912 7047`).
 
 ### B. Reference Bottle Service Menu (2026/2027 Average Club Prices)
 - **Premium Vodka (0.70L):** Belvedere / Grey Goose `€250 – €350` | Magnum (1.75L) `€550 – €700` | Jeroboam (3L) `€1,100 – €1,500` | Mathusalem (6L) `€2,400 – €3,200`.
@@ -242,7 +246,18 @@
 ## 6. New Year's Eve in Milan (Capodanno 2027) & Milan Fashion Week / Monza F1 Hubs
 
 - **New Year's Eve Hubs (`/new-years-eve` & `/events/new-years-eve-events-in-milan-2027`):** `https://nightlifemilan.com/new-years-eve` and `https://nightlifemilan.com/events/new-years-eve-events-in-milan-2027` (`/it/events/eventi-capodanno-milano-2027` · Just Me NYE 2027 theme: *The Great Gatsby / Il Grande Gatsby*)
-  - Complete guide to December 31, 2026 (`Capodanno 2027`) across **Just Me Torre Branca** (Royal Gala under the Tower), **Voya Rooftop 20th Floor** (360° Midnight Fireworks View over Milan Skyline), **Pineta Corso Como** (Singing Cenone & Reggaeton NYE), **Aria Club San Siro** (Grand Arena NYE Show), **55 Milano** (1,000 sqm Imperial Buffet & Cenone), and **Repvblic** (Urban Luxury NYE).
+  - **Pineta Club Milano (`capodanno-pineta-milano`, Moulin Rouge, `20:30–05:00`, Xceed `nightlifemilan-1`):** Royal Buffet `€40` · Club Entry Only `€40` · Seated Gala Dinner `€160` · 6 VIP Table Tiers `€300–€1,500` (2 Burlesque shows + DJ set).
+  - **Voya Rooftop 20th Floor (`capodanno-voya-rooftop-milano`):** Confirmed rate `€300/person` all-inclusive (6-course tasting, post-midnight cotechino & lentils, 1 wine bottle per 4 guests, water, midnight toast, 360° skyline fireworks & DJ set).
+  - **Voya Rooftop Christmas Menu (`voya-rooftop-milan-christmas-menu-2026`, `25 Dec 2026`):** Confirmed rate `€100/person` (official 5-course Christmas menu + 1 wine bottle per 4 guests, water & coffee; inquire via 24/7 WhatsApp `+39 351 912 7047` for exact seating times).
+  - **REPVBLIC Milano (`capodanno-repvblic-milano`, `23:00–05:00`):** Early Bird `€45` · Dancefloor Table `€600` (6 pax) · Privé `€1,200` (10 pax).
+  - Plus **Just Me Torre Branca**, **Aria Club San Siro**, and **55 Milano Sempione**.
+- **Official 6-Step Payment & Confirmation Order:**
+  1. Contact Concierge on WhatsApp (`+39 351 912 7047`) for live availability (`24/7` response).
+  2. Receive availability confirmation from Concierge.
+  3. Complete `100%` prepayment via Stripe, bank transfer, or payment link.
+  4. Send the payment receipt on WhatsApp to Concierge (`+39 351 912 7047`).
+  5. Receive official Concierge confirmation that payment was received.
+  6. Receive customer confirmation email with complete booking details & payment confirmation.
 - **Milan Fashion Week & F1 GP Hub (`/fashion-week`):** `https://nightlifemilan.com/fashion-week`
   - Covers Women's Fashion Week (February & September), Men's Fashion Week (January & June), Milan Design Week / Salone del Mobile & Fuorisalone (April), and Formula 1 Italian Grand Prix Monza Weekend (September).
   - Priority hospitality at **Just Me** (Italo Rota architectural flagship), **Voya Rooftop 20th Floor**, **Repvblic**, **Volt**, **Pineta**, and **Aria**.

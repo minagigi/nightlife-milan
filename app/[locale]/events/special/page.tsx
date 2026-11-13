@@ -8,6 +8,8 @@ import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
 import { generateEventListSchema, jsonLdString } from '@/lib/seo';
 import DiscoveryGrid from '@/components/DiscoveryGrid';
 import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
+import { christmasVoyaPath } from '@/lib/christmas/voya35';
 import { getEventbriteDiscoveryItems, slimDiscoveryItemsForClient } from '@/lib/eventbriteDiscovery';
 import { PrioritySixShowcase, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
@@ -88,9 +90,21 @@ const MAJOR_SPECIAL_EVENTS = [
     venuesIt: '1. Just Me Torre Branca · 2. Pineta Club · 3. Aria Club · 4. 55 Milano · 5. Voya Rooftop 20° Piano · 6. Repvblic',
     venuesEn: '1. Just Me Torre Branca · 2. Pineta Club · 3. Aria Club · 4. 55 Milano · 5. Voya Rooftop 20th Floor · 6. Repvblic',
     descIt:
-      'La notte più richiesta dell’anno con 3 formule ufficiali: Royal Buffet Imperiale (da 60–90€), Gran Cenone Servito con Live Show (da 130–250€) e Tavolo VIP Dopocena dalle 23:30 alle 06:00 (da 400€ a 5.000€+ con 100% in champagne e superalcolici).',
+      'La notte più richiesta dell’anno: Pineta Moulin Rouge (Royal Buffet 40€, Solo Disco 40€, Gala Servito 160€, VIP 300€–1.500€ · Xceed nightlifemilan-1), REPVBLIC (Early Bird 45€, Tavoli 600€–1.200€), Voya Rooftop 20° Piano (300€ All-Inclusive), Just Me, Aria Club e 55 Milano. Prepagamento 100% con ricevuta WhatsApp.',
     descEn:
-      'The most anticipated night of the year with 3 official packages: Imperial Buffet (€60–€90), Seated Gala Dinner Show (€130–€250), and After-Midnight VIP Table from 23:30 to 06:00 (€400 to €5,000+ with 100% champagne & spirits credit).',
+      'Milan’s flagship December 31 celebration: Pineta Moulin Rouge (Royal Buffet €40, Club €40, Seated Gala €160, VIP €300–€1,500 · Xceed nightlifemilan-1), REPVBLIC (Early Bird €45, Tables €600–€1,200), Voya Rooftop 20th Floor (€300 All-Inclusive), Just Me, Aria Club & 55 Milano. 100% prepayment with WhatsApp receipt confirmation.',
+  },
+  {
+    badgeIt: '25 Dicembre · Natale 2026',
+    badgeEn: 'December 25 · Christmas 2026',
+    titleIt: 'Pranzo di Natale 2026 al Voya Rooftop Milano (20° Piano · 100€)',
+    titleEn: 'Christmas Day Menu 2026 at Voya Rooftop Milan (20th Floor · €100)',
+    venuesIt: 'Voya Rooftop Milano · Viale Achille Papa 30, 20° Piano (85m)',
+    venuesEn: 'Voya Rooftop Milano · Viale Achille Papa 30, 20th Floor (85m)',
+    descIt:
+      'Menù ufficiale di Natale in 5 portate a 100€ a persona con 1 bottiglia di vino ogni 4 ospiti, acqua e caffè inclusi (Modeghili, Flan di zucca e porcini, Ravioli Plin Voya, Filetto di manzo con crema di patate al tartufo, Sinfonia cioccolato/pistacchio/lamponi). Richiedi turni e disponibilità 24/7 su WhatsApp.',
+    descEn:
+      'Official 5-course Christmas Day tasting menu at €100 per person including 1 bottle of wine per 4 guests, water & coffee (Modeghili, Pumpkin & porcini flan, Voya Plin ravioli, Beef fillet with truffle potato cream, Chocolate/pistachio/raspberry symphony). Check seating times 24/7 on WhatsApp.',
   },
   {
     badgeIt: '31 Ottobre · Peak Autunnale',
@@ -316,11 +330,7 @@ export default async function SpecialEventsPage({ params }: Props) {
                   {tr(locale, 'San Siro & VIP Info →', 'Info San Siro & VIP →')}
                 </Link>
                 <a
-                  href={`https://wa.me/393519127047?text=${encodeURIComponent(
-                    isIt
-                      ? `Ciao! Vorrei informazioni e prezzi Tavoli VIP per: ${ev.titleIt}`
-                      : `Hi! I would like VIP Table info and pricing for: ${ev.titleEn}`,
-                  )}`}
+                  href={getConciergeBookingUrl(locale, isIt ? ev.titleIt : ev.titleEn, `${lp}/events/special`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-4 py-2 rounded-full bg-champagne text-black text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
@@ -405,6 +415,18 @@ export default async function SpecialEventsPage({ params }: Props) {
       {/* Cross-links */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center border-t border-white/5">
         <div className="flex flex-wrap justify-center gap-4">
+          <Link
+            href={christmasVoyaPath(locale)}
+            className="px-6 py-3 rounded-full border border-emerald-400/40 text-emerald-300 text-sm font-medium tracking-wider hover:bg-emerald-400 hover:text-black transition-colors"
+          >
+            {tr(locale, 'Voya Christmas Menu · €100', 'Pranzo di Natale Voya · €100')}
+          </Link>
+          <Link
+            href={`${lp}/new-years-eve`}
+            className="px-6 py-3 rounded-full border border-champagne/40 text-champagne text-sm font-medium tracking-wider hover:bg-champagne hover:text-black transition-colors"
+          >
+            {tr(locale, 'New Years Eve 2027 Guide', 'Guida Capodanno Milano 2027')}
+          </Link>
           <Link
             href={`${lp}/football-afterparties`}
             className="px-6 py-3 rounded-full bg-champagne text-black text-sm font-bold tracking-wider hover:bg-white transition-colors"

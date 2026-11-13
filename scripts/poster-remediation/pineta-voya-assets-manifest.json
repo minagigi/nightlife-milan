@@ -1,0 +1,158 @@
+{
+  "plates": [
+    {
+      "file": "public/images/events/capodanno-2027-posters/capodanno-pineta-milano.webp",
+      "bytes": 102422,
+      "size": [
+        1376,
+        768
+      ],
+      "roi": [
+        90,
+        1218,
+        990,
+        1336
+      ],
+      "bg_laplacian_var": 0.054,
+      "post_sobel_p99": 947.38
+    },
+    {
+      "file": "public/images/events/capodanno-2027-menus/pineta-nye-2027-programma.webp",
+      "bytes": 73900,
+      "size": [
+        1376,
+        768
+      ],
+      "roi": [
+        80,
+        1528,
+        1000,
+        1696
+      ],
+      "bg_laplacian_var": 0.0367,
+      "post_sobel_p99": 956.74
+    },
+    {
+      "file": "public/images/events/capodanno-2027-menus/pineta-nye-2027-menu-gala-160.webp",
+      "bytes": 78102,
+      "size": [
+        1376,
+        768
+      ],
+      "roi": [
+        80,
+        1528,
+        1000,
+        1696
+      ],
+      "bg_laplacian_var": 0.0044,
+      "post_sobel_p99": 949.86
+    },
+    {
+      "file": "public/images/events/capodanno-2027-menus/pineta-nye-2027-menu-buffet-40.webp",
+      "bytes": 80122,
+      "size": [
+        1376,
+        768
+      ],
+      "roi": [
+        80,
+        1528,
+        1000,
+        1696
+      ],
+      "bg_laplacian_var": 0.0044,
+      "post_sobel_p99": 949.86,
+      "price_plate": {
+        "roi": [
+          270,
+          1372,
+          810,
+          1422
+        ],
+        "bg_laplacian_var": 0.0117,
+        "post_sobel_p99": 697.08
+      }
+    },
+    {
+      "file": "public/images/events/capodanno-2027-posters/capodanno-voya-rooftop-milano.webp",
+      "bytes": 61674,
+      "size": [
+        1376,
+        768
+      ],
+      "roi": [
+        180,
+        1406,
+        1100,
+        1538
+      ],
+      "bg_laplacian_var": 0.0013,
+      "post_sobel_p99": 978.63
+    },
+    {
+      "file": "public/images/events/capodanno-2027-menus/voya-nye-2027-menu-it.webp",
+      "bytes": 40536,
+      "size": [
+        1376,
+        768
+      ]
+    },
+    {
+      "file": "public/images/events/capodanno-2027-menus/voya-nye-2027-menu-en.webp",
+      "bytes": 42796,
+      "size": [
+        1376,
+        768
+      ]
+    },
+    {
+      "file": "public/images/events/christmas-2026-posters/natale-voya-rooftop-milano-2026.webp",
+      "bytes": 56736,
+      "size": [
+        1376,
+        768
+      ],
+      "roi": [
+        286,
+        1438,
+        984,
+        1524
+      ],
+      "bg_laplacian_var": 0.0,
+      "post_sobel_p99": 909.85
+    },
+    {
+      "file": "public/images/events/christmas-2026-menus/voya-natale-2026-menu-en.webp",
+      "bytes": 56736,
+      "size": [
+        1376,
+        768
+      ],
+      "roi": [
+        286,
+        1438,
+        984,
+        1524
+      ],
+      "bg_laplacian_var": 0.0,
+      "post_sobel_p99": 909.85
+    },
+    {
+      "file": "public/images/events/christmas-2026-menus/voya-natale-2026-menu-it.webp",
+      "bytes": 53232,
+      "size": [
+        1376,
+        768
+      ],
+      "roi": [
+        286,
+        1438,
+        984,
+        1524
+      ],
+      "bg_laplacian_var": 0.0,
+      "post_sobel_p99": 909.85
+    }
+  ]
+}

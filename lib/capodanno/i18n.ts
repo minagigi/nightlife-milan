@@ -3,6 +3,8 @@ import {
   getRepvblicNyeContent,
   type CapodannoLocalizedEventContent,
 } from '@/lib/capodanno/repvblic35';
+import { getPinetaNyeContent } from '@/lib/capodanno/pineta35';
+import { getVoyaNyeContent } from '@/lib/capodanno/voya35';
 import type { CapodannoCategoryPageDef, CapodannoEventItem } from '@/lib/capodannoEvents';
 import { SITE_CONTACT } from '@/config/contact';
 
@@ -512,13 +514,19 @@ export function getCapodannoLocalizedCategorySubtitle(
   return `${nav.h1} (${ui.dateBadge}): ${eventsCount} Voya Rooftop, JustMe Milano, Armani Privé, Pineta, Aria Club, QC Terme & Piazza Duomo. ${pageDef.subtitleEn}`;
 }
 
+function getOverrideEventContent(slug: string, locale: string): CapodannoLocalizedEventContent | null {
+  if (slug === 'capodanno-repvblic-milano') return getRepvblicNyeContent(locale);
+  if (slug === 'capodanno-pineta-milano') return getPinetaNyeContent(locale);
+  if (slug === 'capodanno-voya-rooftop-milano') return getVoyaNyeContent(locale);
+  return null;
+}
+
 export function getCapodannoLocalizedEventTitle(
   event: CapodannoEventItem,
   locale: string,
 ): string {
-  if (event.slug === 'capodanno-repvblic-milano') {
-    return getRepvblicNyeContent(locale).title;
-  }
+  const override = getOverrideEventContent(event.slug, locale);
+  if (override) return override.title;
   if (locale === 'it') return event.titleIt;
   if (locale === 'en') return event.titleEn;
   const nav = capodannoNavigation(locale);
@@ -532,9 +540,8 @@ export function getCapodannoLocalizedEventSubtitle(
   event: CapodannoEventItem,
   locale: string,
 ): string {
-  if (event.slug === 'capodanno-repvblic-milano') {
-    return getRepvblicNyeContent(locale).subtitle;
-  }
+  const override = getOverrideEventContent(event.slug, locale);
+  if (override) return override.subtitle;
   if (locale === 'it') return event.subtitleIt;
   if (locale === 'en') return event.subtitleEn;
   const nav = capodannoNavigation(locale);
@@ -545,9 +552,8 @@ export function getCapodannoLocalizedEventContent(
   event: CapodannoEventItem,
   locale: string,
 ): CapodannoLocalizedEventContent {
-  if (event.slug === 'capodanno-repvblic-milano') {
-    return getRepvblicNyeContent(locale);
-  }
+  const override = getOverrideEventContent(event.slug, locale);
+  if (override) return override;
   const isIt = locale === 'it';
   return {
     title: getCapodannoLocalizedEventTitle(event, locale),

@@ -5,12 +5,13 @@ import { usePathname } from 'next/navigation';
 import { tr } from '@/lib/i18n/t';
 import { MessageCircle, Sparkles, Calendar, Crown, BookOpen } from 'lucide-react';
 import { CONTACT } from '@/config/contact';
+import { getConciergeBookingUrl, resolveFullPageUrl } from '@/lib/conciergeBooking';
 import { mockVenues, mockEvents } from '@/lib/data';
 import { weeklyEvents } from '@/lib/eventsConfig';
 import { localePrefix } from '@/lib/i18n/locales';
 
 export default function MobileBottomBar({ currentLocale }: { currentLocale: string }) {
-  const pathname = usePathname();
+  const pathname = usePathname() || '/';
   const isIt = currentLocale === 'it';
   const isPt = currentLocale === 'pt';
   const loc = (isIt ? 'it' : isPt ? 'pt' : 'en') as 'en' | 'it' | 'pt';
@@ -22,22 +23,11 @@ export default function MobileBottomBar({ currentLocale }: { currentLocale: stri
   const seg = stripped.split('/').filter(Boolean);
 
   let contextName = '';
-  let bookingMsg = isIt
-    ? 'Ciao! Vorrei prenotare un tavolo VIP o lista nei 6 Club Prioritari a Milano (+39 351 912 7047). Puoi aiutarmi?'
-    : isPt
-      ? 'Olá! Gostaria de reservar uma mesa VIP em Milão (+39 351 912 7047). Podem ajudar?'
-      : "Hi! I'd like to book a VIP table or guest list in Milan (+39 351 912 7047). Can you help me?";
 
   if (seg[0] === 'clubs' && seg[1]) {
     const venue = mockVenues.find((v) => v.slugs.en === seg[1] || v.slugs.it === seg[1]);
     if (venue) {
-      const name = venue.localizedContent.name[loc] || venue.localizedContent.name.en;
-      contextName = name;
-      bookingMsg = isIt
-        ? `Ciao! Vorrei prenotare un tavolo VIP o lista da ${name} a Milano. Puoi aiutarmi?`
-        : isPt
-          ? `Olá! Gostaria de reservar uma mesa no ${name}, em Milão. Podem ajudar?`
-          : `Hi! I'd like to book a VIP table or guest list at ${name} in Milan. Can you help me?`;
+      contextName = venue.localizedContent.name[loc] || venue.localizedContent.name.en;
     }
   } else if (seg[0] === 'events' && seg[1] && seg[1] !== 'special') {
     const event = mockEvents.find(
@@ -47,39 +37,26 @@ export default function MobileBottomBar({ currentLocale }: { currentLocale: stri
       const title = event.localizedContent.title[loc] || event.localizedContent.title.en;
       const venue = mockVenues.find((v) => v.id === event.venueId);
       const vName = venue ? venue.localizedContent.name[loc] || venue.localizedContent.name.en : '';
-      contextName = title;
-      bookingMsg = isIt
-        ? `Ciao! Vorrei prenotare per "${title}"${vName ? ` da ${vName}` : ''} a Milano. Puoi aiutarmi?`
-        : isPt
-          ? `Olá! Gostaria de reservar para "${title}"${vName ? ` no ${vName}` : ''}, em Milão. Podem ajudar?`
-          : `Hi! I'd like to book for "${title}"${vName ? ` at ${vName}` : ''} in Milan. Can you help me?`;
+      contextName = vName ? `${title} · ${vName}` : title;
     } else {
       const weekly = weeklyEvents.find((w) => `${w.clubSlug}-${w.day}-${w.eventSlug}` === seg[1]);
       if (weekly) {
-        contextName = weekly.name;
-        bookingMsg = isIt
-          ? `Ciao! Vorrei prenotare per "${weekly.name}" da ${weekly.clubName} a Milano. Puoi aiutarmi?`
-          : isPt
-            ? `Olá! Gostaria de reservar para "${weekly.name}" no ${weekly.clubName}, em Milão. Podem ajudar?`
-            : `Hi! I'd like to book for "${weekly.name}" at ${weekly.clubName} in Milan. Can you help me?`;
+        contextName = `${weekly.name} · ${weekly.clubName}`;
       }
     }
   } else if (seg[0] === 'football-afterparties') {
-    contextName = isIt ? 'Dopo-Partita San Siro' : 'San Siro Afterparty';
-    bookingMsg = isIt
-      ? 'Ciao! Usciamo dalla partita a San Siro e vorremmo un tavolo VIP (Aria Club a 150m / Just Me / Voya / 55 Milano).'
-      : 'Hi! We are heading out from San Siro Stadium and would like a VIP table (Aria Club 150m / Just Me / Voya / 55 Milano).';
+    contextName = 'San Siro Afterparty';
   } else if (seg[0] === 'private-parties') {
-    contextName = isIt ? 'Festa Privata / Laurea' : 'Private Party';
-    bookingMsg = isIt
-      ? 'Ciao! Vorrei un preventivo per una festa di laurea / compleanno nei 6 Club Prioritari di Milano.'
-      : 'Hi! I would like a quote for a graduation / birthday party at the 6 Priority Clubs in Milan.';
+    contextName = 'Private Party · VIP';
   } else if (seg[0] === 'rooftops') {
     contextName = 'Rooftop VIP';
-    bookingMsg = isIt
-      ? 'Ciao! Vorrei prenotare un tavolo panoramico al Voya Rooftop 20° Piano / Terrazza Duomo 21.'
-      : 'Hi! I would like to book a panoramic table at Voya Rooftop 20th Floor / Terrazza Duomo 21.';
   }
+
+  const bookingUrl = getConciergeBookingUrl(
+    currentLocale,
+    contextName || undefined,
+    resolveFullPageUrl(pathname, currentLocale),
+  );
 
   const mainLabel = contextName
     ? `${isPt ? 'Reservar' : tr(currentLocale, 'Book', 'Prenota')}: ${contextName}`
@@ -150,7 +127,7 @@ export default function MobileBottomBar({ currentLocale }: { currentLocale: stri
 
         {/* Direct WhatsApp Concierge CTA (+39 351 912 7047) */}
         <a
-          href={`${CONTACT.whatsapp.link}?text=${encodeURIComponent(bookingMsg)}`}
+          href={bookingUrl}
           target="_blank"
           rel="noopener noreferrer"
           data-analytics-source="bottom_bar"

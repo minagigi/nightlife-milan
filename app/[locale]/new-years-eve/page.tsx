@@ -32,6 +32,10 @@ import {
   PrioritySixShowcase,
 } from '@/components/NightlifeExpansionModules';
 import VerticalHubsAndEventsSection from '@/components/VerticalHubsAndEventsSection';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
+import { getPaymentTerms35 } from '@/lib/capodanno/paymentTerms35';
+import { capodannoEventPath } from '@/lib/capodanno/routes';
+import { christmasVoyaPath } from '@/lib/christmas/voya35';
 
 export const revalidate = 3600;
 
@@ -101,64 +105,64 @@ const NYE_FORMULAS = [
     nameIt: '1. Gran Cenone Servito + Serata Club',
     nameEn: '1. Seated Gala Dinner + All-Night Club Party',
     hours: '20:30 - 05:00',
-    priceIt: '€150 - €350 / persona',
-    priceEn: '€150 - €350 / person',
+    priceIt: '€150 - €350 / persona (Pineta €160 · Voya €300 All-Inclusive)',
+    priceEn: '€150 - €350 / person (Pineta €160 · Voya €300 All-Inclusive)',
     includedIt:
-      'Menu degustazione gourmet a 4 o 5 portate, 1 bottiglia di vino o Champagne ogni 2/4 ospiti, brindisi di mezzanotte al tavolo, live show durante la cena e ingresso discoteca fino alle 05:00.',
+      'Menu degustazione gourmet da 4 a 6 portate (Voya Rooftop €300 All-Inclusive con vini, acqua, brindisi e cotechino; Pineta €160 Gala Servito con 1 bottiglia di vino ogni 3 ospiti), spettacoli dal vivo e serata discoteca fino alle 05:00.',
     includedEn:
-      '4 or 5-course gourmet tasting menu, 1 bottle of fine wine or Champagne per 2 to 4 guests, midnight countdown toast at your table, live dinner show entertainment, and clubbing until 05:00.',
+      '4 to 6-course gourmet tasting menu (Voya Rooftop €300 All-Inclusive with wines, water, midnight toast & cotechino; Pineta €160 Seated Gala with 1 bottle of wine per 3 guests), live dinner shows, and clubbing until 05:00.',
     bestVenuesIt:
-      '1. Just Me Milano (Ristorante Italo Rota), 4. 55 Milano (Gran Gala Show), 5. Voya Rooftop (20° Piano Skyline), Tocqueville 13',
+      '1. Just Me Milano (Ristorante Italo Rota), 2. Pineta Milano (€160 Gala Moulin Rouge), 4. 55 Milano (Gran Gala Show), 5. Voya Rooftop (€300 All-Inclusive)',
     bestVenuesEn:
-      '1. Just Me Milano (Italo Rota Restaurant), 4. 55 Milano (Grand Gala Show), 5. Voya Rooftop (20th Floor Skyline), Tocqueville 13',
+      '1. Just Me Milano (Italo Rota Restaurant), 2. Pineta Milano (€160 Moulin Rouge Gala), 4. 55 Milano (Grand Gala Show), 5. Voya Rooftop (€300 All-Inclusive)',
   },
   {
     id: 'royal-buffet',
     nameIt: '2. Royal Buffet / Imperial Apericena + Party',
     nameEn: '2. Royal Buffet / Imperial Apericena + Party',
-    hours: '21:00 - 05:00',
-    priceIt: '€60 - €95 / persona',
-    priceEn: '€60 - €95 / person',
+    hours: '20:30 - 05:00',
+    priceIt: '€40 - €95 / persona (Pineta €40 Royal Buffet)',
+    priceEn: '€40 - €95 / person (Pineta €40 Royal Buffet)',
     includedIt:
-      'Accesso al Gran Buffet Imperiale di San Silvestro con isole gastronomiche calde e fredde, 1 o 2 drink premium inclusi, flûte di spumante o Champagne per il conto alla rovescia di mezzanotte e serata club.',
+      'Accesso al Royal Buffet di San Silvestro (da €40 da Pineta Milano dalle 20:30 con flûte di benvenuto, 1 drink e 2 spettacoli Burlesque), isole gastronomiche calde e fredde, brindisi di mezzanotte e serata club.',
     includedEn:
-      'Access to the New Years Eve Imperial Buffet with hot and cold gourmet stations, 1 or 2 premium drinks included, midnight sparkling wine or Champagne flute, and full club access until dawn.',
+      'Access to the New Year’s Eve Royal Buffet (from €40 at Pineta Milano from 20:30 with welcome flûte, 1 drink, and 2 Burlesque shows), hot and cold gourmet stations, midnight toast, and full club access until dawn.',
     bestVenuesIt:
-      '2. Pineta Milano (Buffet Cantato di Capodanno), 3. Aria Club San Siro, 4. 55 Milano (Imperial Apericena), 1. Just Me Milano',
+      '2. Pineta Milano (€40 Royal Buffet Moulin Rouge), 3. Aria Club San Siro, 4. 55 Milano (Imperial Apericena), 1. Just Me Milano',
     bestVenuesEn:
-      '2. Pineta Milano (NYE Singing Buffet), 3. Aria Club San Siro, 4. 55 Milano (Imperial Apericena), 1. Just Me Milano',
+      '2. Pineta Milano (€40 Moulin Rouge Royal Buffet), 3. Aria Club San Siro, 4. 55 Milano (Imperial Apericena), 1. Just Me Milano',
   },
   {
     id: 'after-midnight',
-    nameIt: '3. Ingresso Festa & Early Bird (Prevendita Salta-Fila)',
-    nameEn: '3. Party & Early Bird Entry (Official Fast-Track Presale)',
+    nameIt: '3. Ingresso Festa & Solo Discoteca (Prevendita Salta-Fila)',
+    nameEn: '3. Party & Club-Only Entry (Official Fast-Track Presale)',
     hours: '23:00 / 00:30 - 05:30',
-    priceIt: '€45 - €90 / persona',
-    priceEn: '€45 - €90 / person',
+    priceIt: '€40 - €90 / persona (Pineta €40 · REPVBLIC Early Bird €45)',
+    priceEn: '€40 - €90 / person (Pineta €40 · REPVBLIC Early Bird €45)',
     includedIt:
-      'Bracciale o QR code ufficiale in prevendita nominale con corsia prioritaria (dalle 23:00 da REPVBLIC con flûte di mezzanotte + 1 drink a 45€, oppure dopo mezzanotte negli altri club), accesso completo alle piste da ballo fino all’alba del 1 Gennaio 2027.',
+      'Bracciale o QR code ufficiale in prevendita nominale con corsia prioritaria (dalle 23:00 da Pineta a €40 con 1 drink + brindisi, da REPVBLIC a €45 con flûte di mezzanotte + 1 drink, oppure dopo mezzanotte negli altri club), accesso completo alle piste da ballo fino al mattino del 1 Gennaio 2027.',
     includedEn:
-      'Official nominal presale QR pass with fast-track entry (from 23:00 at REPVBLIC with midnight flûte + 1 drink at €45, or after-midnight at other clubs), plus full access to the main dancefloors until sunrise on January 1, 2027.',
+      'Official nominal presale QR pass with fast-track entry (from 23:00 at Pineta for €40 with 1 drink + toast, at REPVBLIC for €45 with midnight flûte + 1 drink, or after midnight at other clubs), plus full access to the main dancefloors until morning on January 1, 2027.',
     bestVenuesIt:
-      '6. REPVBLIC Milano (Early Bird €45 dalle 23:00), 3. Aria Club, Alcatraz Milano (3 Piste XL), Fabrique Milano, 2. Pineta Milano',
+      '2. Pineta Milano (€40 dalle 23:00), 6. REPVBLIC Milano (Early Bird €45 dalle 23:00), 3. Aria Club, Alcatraz Milano (3 Piste XL), Fabrique Milano',
     bestVenuesEn:
-      '6. REPVBLIC Milano (Early Bird €45 from 23:00), 3. Aria Club, Alcatraz Milano (3 XXL Stages), Fabrique Milano, 2. Pineta Milano',
+      '2. Pineta Milano (€40 from 23:00), 6. REPVBLIC Milano (Early Bird €45 from 23:00), 3. Aria Club, Alcatraz Milano (3 XXL Stages), Fabrique Milano',
   },
   {
     id: 'vip-table-console',
     nameIt: '4. Tavolo VIP Pista / Super Privé Console Capodanno',
     nameEn: '4. NYE VIP Dancefloor Table / DJ Console Super Privé',
     hours: '23:00 / 00:15 - 05:30',
-    priceIt: '€600 - €5.000 (fino a 8-12 pass inclusi)',
-    priceEn: '€600 - €5,000 (up to 8-12 VIP passes included)',
+    priceIt: '€300 - €5.000 (fino a 5-12 pass inclusi)',
+    priceEn: '€300 - €5,000 (up to 5-12 VIP passes included)',
     includedIt:
-      'Ingresso immediato zero-coda con Hostess VIP, divanetto riservato in Pista, Balconata o Console DJ, 100% dell’importo convertito in bottiglie premium e formati Magnum/Jeroboam (Dom Pérignon, Armand de Brignac, Belvedere Magnum, Moët Ice).',
+      'Ingresso immediato zero-coda con Hostess VIP, divanetto riservato in Pista, Terrazza, Balconata o Console DJ (es. Pineta da €300/5 pax a €1.500/10 pax; REPVBLIC €600/6 pax o €1.200/10 pax; Just Me €800–€5.000), bottiglie premium servite al tavolo.',
     includedEn:
-      'Immediate zero-queue escort with VIP Hostess, private booth on the Dancefloor, Balcony, or DJ Console, 100% of minimum spend converted into premium & Magnum/Jeroboam bottles (Dom Pérignon, Armand de Brignac, Belvedere Magnum, Moët Ice).',
+      'Immediate zero-queue escort with VIP Hostess, private booth on the Dancefloor, Terrace, Balcony, or DJ Console (e.g., Pineta €300/5 guests to €1,500/10 guests; REPVBLIC €600/6 guests or €1,200/10 guests; Just Me €800–€5,000), premium bottle service at your table.',
     bestVenuesIt:
-      '1. Just Me (Privé Branca), 2. Pineta Corso Como, 3. Aria Club, 4. 55 Milano, 5. Voya Rooftop (20° Piano), 6. Repvblic',
+      '1. Just Me (Privé Branca), 2. Pineta Corso Como (€300–€1.500), 3. Aria Club, 4. 55 Milano, 6. REPVBLIC (€600 / €1.200)',
     bestVenuesEn:
-      '1. Just Me (Privé Branca), 2. Pineta Corso Como, 3. Aria Club, 4. 55 Milano, 5. Voya Rooftop (20th Floor), 6. Repvblic',
+      '1. Just Me (Privé Branca), 2. Pineta Corso Como (€300–€1,500), 3. Aria Club, 4. 55 Milano, 6. REPVBLIC (€600 / €1,200)',
   },
 ];
 
@@ -188,22 +192,22 @@ const NYE_CLUBS = [
     rank: 2,
     anchorId: 'nye-pineta-milano',
     slug: 'pineta-club-milano',
-    priorityBadgeIt: '#2 Priorità · Gran Cenone & Buffet Cantato Corso Como',
-    priorityBadgeEn: '#2 Priority · Corso Como Singing Gala & Club',
-    nameIt: '2. Pineta Club Milano (Via Messina 38 / Corso Como: Cenone Cantato e Party Reggaeton & Hits)',
-    nameEn: '2. Pineta Club Milano (Via Messina 38 / Corso Como: Singing Gala Buffet & Reggaeton/Hits Party)',
+    priorityBadgeIt: '#2 Priorità · Moulin Rouge NYE · Royal Buffet & Disco €40 · Gala €160',
+    priorityBadgeEn: '#2 Priority · Moulin Rouge NYE · Royal Buffet & Club €40 · Gala €160',
+    nameIt: '2. Pineta Club Milano (Via Messina 38 / Corso Como: Moulin Rouge NYE, Royal Buffet €40, Disco €40 & Gala €160)',
+    nameEn: '2. Pineta Club Milano (Via Messina 38 / Corso Como: Moulin Rouge NYE, Royal Buffet €40, Club €40 & Gala €160)',
     address: 'Via Messina, 38 (Area Corso Como / Porta Garibaldi) - 20154 Milano',
     formulasIt:
-      'Cenone Servito Cantato €160 - €210 · Royal Buffet con Tavolo €75 - €95 · Ingresso Disco €50 - €70 · Tavoli VIP €600 - €2.000',
+      'Royal Buffet €40 (20:30, flûte + 1 drink) · Solo Discoteca €40 (23:00, 1 drink + brindisi) · Cena di Gala Servita €160 (21:00, vino 1 ogni 3) · 6 Fasce Tavoli VIP €300 - €1.500 (5–10 pass)',
     formulasEn:
-      'Seated Singing Dinner €160 - €210 · Royal Buffet with Table €75 - €95 · Club Entry €50 - €70 · VIP Tables €600 - €2,000',
-    fireworksVibeIt: 'Il Capodanno più cantato e coinvolgente di Milano a due passi da Porta Nuova e Corso Como',
-    fireworksVibeEn: 'Milans most energetic sing-along New Years Eve party steps from Porta Nuova and Corso Como',
-    image: '/images/venues/pineta-milano/pineta-milano-ingresso-01.webp',
+      'Royal Buffet €40 (20:30, flûte + 1 drink) · Club Entry €40 (23:00, 1 drink + toast) · Seated Gala Dinner €160 (21:00, wine 1 per 3) · 6 VIP Table Tiers €300 - €1,500 (5–10 passes)',
+    fireworksVibeIt: 'Tema Moulin Rouge (20:30 – 05:00): 2 Burlesque Show dal vivo, brindisi e club fino alle 05:00',
+    fireworksVibeEn: 'Moulin Rouge Theme (20:30 – 05:00): 2 Live Burlesque Shows, midnight toast & club until 05:00',
+    image: '/images/events/capodanno-2027-posters/capodanno-pineta-milano.webp',
     descriptionIt:
-      'Per chi a Capodanno cerca un atmosfera esplosiva fin dalle 21:00, Pineta Club Milano (#2 Priorità) in zona Corso Como / Via Messina 38 trasforma il suo celebre format di Aperitivo e Cena Cantata in uno show di San Silvestro memorabile. Cori da stadio sulle migliori hit italiane e internazionali, vocalist dal vivo, cascate di coriandoli dorati a mezzanotte e, dalle 00:15 alle 05:30, una pista infuocata tra reggaeton, urban e musica commerciale con tavoli Privé ad altissima energia.',
+      'Capodanno 2027 Moulin Rouge al Pineta Club Milano (#2 Priorità · Via Messina 38, Corso Como): programma confermato dalle 20:30 alle 05:00 con 2 Burlesque Show dal vivo e DJ set. Royal Buffet a 40€ (20:30, welcome flûte e 1 drink), Solo Discoteca a 40€ (23:00, 1 drink e brindisi di mezzanotte), Cena di Gala Servita a 160€ (21:00, acqua, caffè e 1 bottiglia di vino ogni 3 persone) e 6 fasce Tavoli VIP da 300€ (5 pass Side Floor Outdoor) a 1.500€ (10 pass VIP Privé Indoor). Canale ufficiale Xceed nightlifemilan-1 o WhatsApp Concierge 24/7.',
     descriptionEn:
-      'For groups seeking explosive energy from 21:00 onwards, Pineta Club Milano (#2 Priority) near Corso Como / Via Messina 38 elevates its famous Singing Dinner & Aperitivo into a full-scale New Years Eve spectacle. Expect live vocalists, entire-room sing-alongs, golden confetti blasts at midnight, and from 00:15 to 05:30 a packed reggaeton, urban, and commercial dancefloor with high-energy VIP bottle service.',
+      'Capodanno 2027 Moulin Rouge at Pineta Club Milano (#2 Priority · Via Messina 38, Corso Como): confirmed program from 20:30 to 05:00 with 2 live Burlesque Shows and DJ set. Royal Buffet €40 (20:30, welcome flûte & 1 drink), Club Entry Only €40 (23:00, 1 drink & midnight toast), Seated Gala Dinner €160 (21:00, water, coffee & 1 wine bottle per 3 guests), and 6 VIP Table tiers from €300 (5 passes Side Floor Outdoor) up to €1,500 (10 passes VIP Privé Indoor).',
   },
   {
     rank: 3,
@@ -253,20 +257,20 @@ const NYE_CLUBS = [
     slug: 'voya-rooftop-milan',
     priorityBadgeIt: '#5 Priorità · 20° Piano Vista Fuochi d Artificio a 360°',
     priorityBadgeEn: '#5 Priority · 20th Floor 360° Fireworks Skyline View',
-    nameIt: '5. Voya Rooftop Milan (Via Achille Papa 30, 20° Piano: Capodanno a 85 Metri d’Altezza Vista Fuochi su Tutta Milano)',
-    nameEn: '5. Voya Rooftop Milan (Via Achille Papa 30, 20th Floor: NYE at 85 Meters Overlooking All Milan Fireworks)',
+    nameIt: '5. Voya Rooftop Milan (Viale Achille Papa 30, 20° Piano: Capodanno a 85 Metri Vista Fuochi · €300 All-Inclusive)',
+    nameEn: '5. Voya Rooftop Milan (Viale Achille Papa 30, 20th Floor: NYE at 85m Overlooking Fireworks · €300 All-Inclusive)',
     address: 'Viale Achille Papa, 30 (20° Piano, Portello / CityLife / Isola) - 20149 Milano',
     formulasIt:
-      'Skyline Gala Dinner €190 - €280 · Royal Cocktail Buffet €80 - €95 · Ingresso Panoramico €60 - €80 · Tavoli Vetrata VIP €700 - €2.500',
+      'Tariffa Unica Confermata All-Inclusive — 300€ a persona (Menù 6 portate + Cotechino e Lenticchie dopo mezzanotte, 1 bottiglia di vino ogni 4 persone, brindisi e acqua)',
     formulasEn:
-      'Skyline Gala Dinner €190 - €280 · Royal Cocktail Buffet €80 - €95 · Panoramic Entry €60 - €80 · Glass-Wall VIP Tables €700 - €2,500',
+      'Single Confirmed All-Inclusive Rate — €300 per person (6-course tasting + Post-Midnight Cotechino & Lentils, 1 bottle of wine every 4 guests, midnight toast & water)',
     fireworksVibeIt: 'L unico 20° piano con vetrate a tutta altezza da cui vedere simultaneamente i fuochi di tutta Milano',
     fireworksVibeEn: 'The only 20th-floor floor-to-ceiling glass sky lounge with a 360-degree view of Milans midnight fireworks',
-    image: '/images/voya-rooftop-milan.webp',
+    image: '/images/events/capodanno-2027-posters/capodanno-voya-rooftop-milano.webp',
     descriptionIt:
-      'Vivere il conto alla rovescia del 31 Dicembre al 20° piano di Voya Rooftop Milan (#5 Priorità, Viale Achille Papa 30) è un’esperienza visiva senza paragoni: a mezzanotte, dalle immense vetrate panoramiche a 85 metri d’altezza, vedi letteralmente esplodere sotto i tuoi occhi tutti i fuochi d’artificio dello skyline di Milano, dalle Tre Torri di CityLife a Porta Nuova fino a San Siro. Ideale per coppie eleganti, clientela internazionale e gruppi VIP che cercano alta mixology, Champagne Dom Pérignon e DJ set in quota.',
+      'Vivere il conto alla rovescia del 31 Dicembre al 20° piano di Voya Rooftop Milan (#5 Priorità, Viale Achille Papa 30) a 85 metri d’altezza è un’esperienza visiva impareggiabile: dalle immense vetrate a 360 gradi ammiri i fuochi d’artificio di tutta Milano mentre festeggi con Restaurant & DJ Set. Tariffa ufficiale confermata: 300€ a persona tutto incluso (menù completo 6 portate, cotechino e lenticchie dopo la mezzanotte, 1 bottiglia di vino ogni 4 ospiti, acqua e brindisi di mezzanotte). Disponibile anche il Pranzo di Natale Voya (25 Dicembre 2026, 100€ a persona).',
     descriptionEn:
-      'Counting down to midnight on the 20th floor at Voya Rooftop Milan (#5 Priority, Viale Achille Papa 30) is an unmatched visual spectacle: at 00:00, through floor-to-ceiling glass walls 85 meters above the street, you watch the entire Milan skyline erupt in fireworks from CityLifes Three Towers to Porta Nuova and San Siro. Ideal for couples, international travelers, and VIP groups seeking fine dining, Dom Pérignon, and panoramic house DJ sets.',
+      'Counting down to midnight on the 20th floor at Voya Rooftop Milan (#5 Priority, Viale Achille Papa 30, 85 meters high) offers an unmatched 360-degree view of Milan’s fireworks paired with Restaurant & DJ Set. Official confirmed rate: €300 per person all-inclusive (6-course tasting dinner, post-midnight cotechino & lentils, 1 bottle of wine every 4 guests, water & midnight toast). Also discover Voya Christmas (December 25, 2026, €100 per person).',
   },
   {
     rank: 6,
@@ -347,9 +351,9 @@ const BOOKING_TIMELINE = [
     statusIt: 'Esaurimento Cenoni Serviti & Ultimi Tavoli Privé Rialzati',
     statusEn: 'Seated Dinners Filling Up & Final Elevated Privé Tables',
     detailIt:
-      'I posti per il Gran Cenone Servito e i tavoli fronte-vetrata per i fuochi d’artificio vanno in rapido esaurimento. Le tariffe salgono allo scaglione intermedio e resta obbligatorio il versamento dell’acconto per emettere i voucher nominali.',
+      'I posti per il Gran Cenone Servito, i tavoli fronte-vetrata per i fuochi d’artificio e le formule Royal Buffet vanno in rapido esaurimento. Ogni conferma richiede prepagamento al 100% (Stripe, bonifico bancario o link di pagamento) e invio della ricevuta al Concierge (+39 351 912 7047) per emettere l’email di conferma.',
     detailEn:
-      'Seated Gala Dinner spots and window tables for midnight fireworks sell out rapidly. Pricing moves to the second tier and deposit confirmation is required to issue nominal vouchers.',
+      'Seated Gala Dinner spots, window tables for midnight fireworks, and Royal Buffet allocations fill up rapidly. All bookings require 100% prepayment (Stripe, bank transfer, or payment link) and sending your receipt to our 24/7 Concierge (+39 351 912 7047) before receiving your confirmation email.',
   },
   {
     phaseIt: 'Fase 3: Last Minute & Sold Out (19 - 31 Dicembre 2026)',
@@ -373,6 +377,10 @@ export default async function NewYearsEvePage({
   const venueMapCopy = getEventVenueCopy(locale as LocaleCode);
   const lp = localePrefix(locale);
   const canonicalUrl = canonicalPageUrl(baseUrl, locale, '/new-years-eve');
+  const paymentTerms = getPaymentTerms35(locale);
+  const pinetaEventHref = capodannoEventPath('capodanno-pineta-milano', locale);
+  const voyaNyeEventHref = capodannoEventPath('capodanno-voya-rooftop-milano', locale);
+  const voyaChristmasHref = christmasVoyaPath(locale);
 
   const faqs = [
     {
@@ -380,8 +388,8 @@ export default async function NewYearsEvePage({
         ? 'Quali sono le 4 formule per festeggiare il Capodanno 2027 nei club e rooftop di Milano?'
         : 'What are the 4 entry formulas for New Years Eve 2027 in Milan clubs and rooftops?',
       a: isIt
-        ? 'Per la notte del 31 Dicembre 2026 a Milano esistono 4 formule ufficiali: (1) Gran Cenone Servito + Serata Club (20:30 - 05:00, €150 - €350/persona con vini e tavolo); (2) Royal Buffet / Imperial Apericena + Party (21:00 - 05:00, €60 - €95/persona con buffet, drink e brindisi di mezzanotte); (3) Ingresso Disco Dopo Mezzanotte in prevendita salta-fila (00:30 - 05:30, €50 - €90/persona); (4) Tavolo VIP Pista o Super Privé Console (€600 - €5.000 fino a 8-12 pass inclusi, 100% spendibile in bottiglie Dom Pérignon, Armand de Brignac o Belvedere Magnum).'
-        : 'For December 31, 2026 in Milan, there are 4 official formulas: (1) Seated Gala Dinner + Club Night (20:30 - 05:00, €150 - €350/person including wine and table); (2) Royal Buffet / Imperial Apericena + Party (21:00 - 05:00, €60 - €95/person with buffet, drinks, and midnight toast); (3) After-Midnight Fast-Track Club Entry (00:30 - 05:30, €50 - €90/person); (4) VIP Dancefloor or DJ Console Super Privé Table (€600 - €5,000 including 8-12 passes, 100% spent on Dom Pérignon, Armand de Brignac, or Belvedere Magnum bottles).',
+        ? 'Per la notte del 31 Dicembre 2026 a Milano esistono 4 formule ufficiali: (1) Gran Cenone Servito + Serata Club (20:30 - 05:00, da €160 da Pineta e €300 All-Inclusive al Voya Rooftop); (2) Royal Buffet / Imperial Apericena + Party (€40 - €95/persona con drink e brindisi di mezzanotte); (3) Ingresso Disco in prevendita (Pineta €40, REPVBLIC Early Bird €45, fino a €90); (4) Tavolo VIP Pista o Super Privé (€300 - €1.500 da Pineta, €600 - €1.200 da REPVBLIC e fino a €5.000 nei Super Privé).'
+        : 'For December 31, 2026 in Milan, there are 4 official formulas: (1) Seated Gala Dinner + Club Night (from €160 at Pineta and €300 All-Inclusive at Voya Rooftop); (2) Royal Buffet / Imperial Apericena + Party (€40 - €95/person with drinks and midnight toast); (3) Presale Club Entry (Pineta €40, REPVBLIC Early Bird €45, up to €90); (4) VIP Dancefloor or Super Privé Table (€300 - €1,500 at Pineta, €600 - €1,200 at REPVBLIC, up to €5,000 in flagship booths).',
     },
     {
       q: isIt
@@ -416,12 +424,8 @@ export default async function NewYearsEvePage({
         : 'The best Early Bird rates and prime tables (Privé Branca at Just Me, 20th-floor window tables at Voya Rooftop, Singing Dinner tables at Pineta and 55 Milano) are allocated between October and November 20, 2026. By mid-December, over 85% of VIP booths and seated dinner spots are completely sold out.',
     },
     {
-      q: isIt
-        ? 'Come funziona il pagamento e la conferma del Tavolo VIP di Capodanno?'
-        : 'How do payment and confirmation work for a New Years Eve VIP Table?',
-      a: isIt
-        ? 'Scrivendo al Concierge Ufficiale su WhatsApp (+39 351 912 7047) o a concierge@nightlifemilan.com ricevi in tempo reale la mappa dei tavoli disponibili e il listino bottiglie (Dom Pérignon, Armand de Brignac, Cristal, Belvedere Magnum). Il tavolo viene bloccato con voucher ufficiale nominale e codice QR salta-fila; il 100% del minimum spend del tavolo è convertito in bottiglie servite al vostro divanetto.'
-        : 'Message our Official Concierge on WhatsApp (+39 351 912 7047) or concierge@nightlifemilan.com to receive real-time floor plans and bottle menus (Dom Pérignon, Armand de Brignac, Cristal, Belvedere Magnum). Your booth is secured with an official nominal voucher and fast-track QR pass, and 100% of the table minimum spend goes toward your chosen bottles.',
+      q: paymentTerms.heading,
+      a: `${paymentTerms.methodsBadge} — ${paymentTerms.steps.join(' ')}`,
     },
     {
       q: isIt
@@ -619,11 +623,11 @@ export default async function NewYearsEvePage({
               <div className="text-[11px] font-mono uppercase tracking-widest text-champagne mb-1">
                 {isIt ? '4 Formule Ufficiali NYE' : '4 Official NYE Formulas'}
               </div>
-              <div className="font-serif text-2xl font-bold text-white">Da €45 a €5.000 VIP</div>
+              <div className="font-serif text-2xl font-bold text-white">{isIt ? 'Da €40 a €5.000 VIP' : 'From €40 to €5,000 VIP'}</div>
               <p className="text-xs text-white/60 mt-1">
                 {isIt
-                  ? 'Gran Cenone (€150-350), Royal Buffet (€60-95), Early Bird & Disco (€45-90) e Tavoli VIP (€600-5.000).'
-                  : 'Gala Dinner (€150-350), Royal Buffet (€60-95), Early Bird & Club (€45-90) & VIP Tables (€600-5,000).'}
+                  ? 'Royal Buffet (€40-95), Early Bird & Disco (€40-90), Pineta Gala (€160), Voya All-Inclusive (€300).'
+                  : 'Royal Buffet (€40-95), Early Bird & Club (€40-90), Pineta Gala (€160), Voya All-Inclusive (€300).'}
               </p>
             </div>
 
@@ -643,11 +647,7 @@ export default async function NewYearsEvePage({
           {/* Dual CTA */}
           <div className="flex flex-wrap items-center gap-4">
             <a
-              href={`https://wa.me/393519127047?text=${encodeURIComponent(
-                isIt
-                  ? 'Ciao Concierge Nightlife Milan! Vorrei ricevere disponibilità e prezzi per Capodanno 2027 (31 Dicembre) a Milano (Cenone / Royal Buffet / Tavolo VIP).'
-                  : 'Hi Nightlife Milan Concierge! I would like to receive availability and pricing for New Years Eve 2027 (Dec 31) in Milan (Gala Dinner / Royal Buffet / VIP Table).'
-              )}`}
+              href={getConciergeBookingUrl(locale, 'Capodanno Milano 2027 (NYE)', canonicalUrl)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 px-7 py-4 rounded-xl bg-champagne text-black font-sans font-bold text-xs sm:text-sm uppercase tracking-[0.16em] hover:bg-white transition-all shadow-[0_0_35px_rgba(201,168,106,0.4)]"
@@ -723,8 +723,13 @@ export default async function NewYearsEvePage({
                   </a>
                 </li>
                 <li>
+                  <a href="#termini-pagamento" className="hover:text-champagne transition-colors">
+                    5. {paymentTerms.tocLabel}
+                  </a>
+                </li>
+                <li>
                   <a href="#mappa-e-faq-capodanno-milano" className="hover:text-champagne transition-colors">
-                    5. {isIt
+                    6. {isIt
                       ? 'Mappa dei Locali di Capodanno a Milano, 7 FAQ Strategiche e Link Interni'
                       : 'Milan NYE Venues Map, 7 Strategic FAQs & Internal Silo Links'}
                   </a>
@@ -924,11 +929,11 @@ export default async function NewYearsEvePage({
 
                   <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-white/10">
                     <a
-                      href={`https://wa.me/393519127047?text=${encodeURIComponent(
-                        isIt
-                          ? `Ciao Nightlife Milan! Vorrei prenotare Capodanno 2027 da ${club.nameIt.split('(')[0].trim()}.`
-                          : `Hi Nightlife Milan! I would like to book NYE 2027 at ${club.nameEn.split('(')[0].trim()}.`
-                      )}`}
+                      href={getConciergeBookingUrl(
+                        locale,
+                        `${club.nameIt.split('(')[0].replace(/^\d+\.\s*/, '').trim()} Capodanno 2027`,
+                        canonicalUrl
+                      )}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-champagne text-black font-sans text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
@@ -993,11 +998,7 @@ export default async function NewYearsEvePage({
                     {isIt ? 'Dettagli Locale →' : 'Venue Details →'}
                   </Link>
                   <a
-                    href={`https://wa.me/393519127047?text=${encodeURIComponent(
-                      isIt
-                        ? `Ciao! Vorrei info e prevendite/tavoli Capodanno 2027 per ${mc.name}.`
-                        : `Hi! I would like NYE 2027 tickets/VIP table info for ${mc.name}.`
-                    )}`}
+                    href={getConciergeBookingUrl(locale, `${mc.name} Capodanno 2027`, canonicalUrl)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="px-3.5 py-1.5 rounded-lg bg-champagne text-black text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
@@ -1122,7 +1123,7 @@ export default async function NewYearsEvePage({
                   : 'Need help matching your group with the right NYE venue? Message us on WhatsApp.'}
               </div>
               <a
-                href="https://wa.me/393519127047"
+                href={getConciergeBookingUrl(locale, 'Assistenza Capodanno Milano 2027', canonicalUrl)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-4 py-2.5 rounded-xl bg-champagne text-black font-bold text-xs uppercase tracking-wider whitespace-nowrap hover:bg-white transition-colors"
@@ -1139,6 +1140,110 @@ export default async function NewYearsEvePage({
         <VipQuoteCalculator locale={locale} />
         <EntryFormulaMatrix locale={locale} />
         <PrioritySixShowcase locale={locale} />
+      </section>
+
+      {/* SEZIONE 4B: TERMINI DI PAGAMENTO UFFICIALI & EVENTI CONFERMATI PINETA / VOYA */}
+      <section id="termini-pagamento" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 space-y-8">
+        <div className="rounded-3xl border border-champagne/35 bg-gradient-to-b from-[#17120a] to-[#0b0906] p-7 sm:p-10">
+          <span className="font-mono text-xs uppercase tracking-[0.22em] text-champagne block mb-2">
+            {paymentTerms.eyebrow}
+          </span>
+          <h2 className="font-serif text-2xl sm:text-4xl font-bold text-white mb-3">
+            {paymentTerms.heading}
+          </h2>
+          <p className="text-sm sm:text-base text-white/75 leading-relaxed max-w-4xl mb-4">
+            {paymentTerms.subtitle}
+          </p>
+          <span className="inline-block px-3.5 py-1.5 rounded-full bg-champagne/15 border border-champagne/35 text-champagne text-xs font-semibold mb-6">
+            {paymentTerms.methodsBadge}
+          </span>
+
+          <ol className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+            {paymentTerms.steps.map((step, index) => (
+              <li
+                key={index}
+                className="rounded-2xl border border-white/10 bg-black/55 p-4 text-xs sm:text-sm text-white/85 leading-relaxed"
+              >
+                {step}
+              </li>
+            ))}
+          </ol>
+
+          <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/10">
+            <p className="text-xs text-white/70">{paymentTerms.note}</p>
+            <a
+              href={getConciergeBookingUrl(locale, paymentTerms.heading, canonicalUrl)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-champagne text-black font-sans text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
+            >
+              <MessageCircle className="w-4 h-4" />
+              <span>+39 351 912 7047</span>
+            </a>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <Link
+            href={pinetaEventHref}
+            className="rounded-2xl border border-champagne/30 bg-black/50 p-6 hover:border-champagne transition-colors flex flex-col justify-between"
+          >
+            <div>
+              <span className="text-[11px] font-mono uppercase tracking-wider text-champagne">Pineta Moulin Rouge NYE 2027</span>
+              <h3 className="font-serif text-xl font-bold text-white mt-1 mb-2">
+                {isIt ? 'Pineta Club · Da 40€ (Xceed & Tavoli VIP)' : 'Pineta Club · From €40 (Xceed & VIP Tables)'}
+              </h3>
+              <p className="text-xs text-white/70">
+                {isIt
+                  ? 'Royal Buffet 40€, Solo Disco 40€, Cena di Gala Servita 160€, Tavoli VIP 300€–1.500€.'
+                  : 'Royal Buffet €40, Club Entry €40, Seated Gala €160, VIP Tables €300–€1,500.'}
+              </p>
+            </div>
+            <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-champagne">
+              {isIt ? 'Vedi Scheda Completa' : 'View Full Event'} <ArrowRight className="w-3.5 h-3.5" />
+            </span>
+          </Link>
+
+          <Link
+            href={voyaNyeEventHref}
+            className="rounded-2xl border border-champagne/30 bg-black/50 p-6 hover:border-champagne transition-colors flex flex-col justify-between"
+          >
+            <div>
+              <span className="text-[11px] font-mono uppercase tracking-wider text-champagne">Voya Rooftop NYE 2027</span>
+              <h3 className="font-serif text-xl font-bold text-white mt-1 mb-2">
+                {isIt ? 'Voya 20° Piano · 300€ All-Inclusive' : 'Voya 20th Floor · €300 All-Inclusive'}
+              </h3>
+              <p className="text-xs text-white/70">
+                {isIt
+                  ? 'Menù 6 portate, cotechino e lenticchie dopo mezzanotte, vino (1 ogni 4), vista fuochi 360°.'
+                  : '6-course tasting, post-midnight cotechino & lentils, wine (1 per 4), 360° fireworks view.'}
+              </p>
+            </div>
+            <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-champagne">
+              {isIt ? 'Vedi Scheda Completa' : 'View Full Event'} <ArrowRight className="w-3.5 h-3.5" />
+            </span>
+          </Link>
+
+          <Link
+            href={voyaChristmasHref}
+            className="rounded-2xl border border-emerald-400/35 bg-black/50 p-6 hover:border-emerald-300 transition-colors flex flex-col justify-between"
+          >
+            <div>
+              <span className="text-[11px] font-mono uppercase tracking-wider text-emerald-300">25 Dicembre 2026 · Voya Rooftop</span>
+              <h3 className="font-serif text-xl font-bold text-white mt-1 mb-2">
+                {isIt ? 'Pranzo di Natale al Voya · 100€' : 'Voya Christmas Day Menu · €100'}
+              </h3>
+              <p className="text-xs text-white/70">
+                {isIt
+                  ? 'Menù completo 5 portate con vini (1 bottiglia ogni 4 ospiti), acqua e caffè inclusi.'
+                  : 'Official 5-course Christmas menu with wine (1 bottle per 4 guests), water & coffee included.'}
+              </p>
+            </div>
+            <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-300">
+              {isIt ? 'Scopri il Menù di Natale' : 'View Christmas Menu'} <ArrowRight className="w-3.5 h-3.5" />
+            </span>
+          </Link>
+        </div>
       </section>
 
       {/* SEZIONE 5: MAPPA GOOGLE MAPS, 7 FAQ STRATEGICHE & SILO LINK INTERNI */}

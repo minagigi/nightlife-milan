@@ -7,6 +7,7 @@ import { CONTACT } from '@/config/contact';
 import { tr } from '@/lib/i18n/t';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getHubSeoMeta35, getAperitivoH1 } from '@/lib/i18n/hubSeoMeta35';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { VipQuoteCalculator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
@@ -129,8 +130,7 @@ const tips = [
 export default async function AperitivoPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const lp = localePrefix(locale);
-  const waMsg = encodeURIComponent("Hi! Can you help me book a spot for aperitivo in Milan?");
-  const waLink = `https://wa.me/393519127047?text=${waMsg}`;
+  const waLink = getConciergeBookingUrl(locale, 'Aperitivo Milan', `${lp}/aperitivo`);
 
   const articleSchema = {
     "@context": "https://schema.org",
@@ -276,8 +276,7 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {bars.map((bar) => {
-              const barWaMsg = encodeURIComponent(`Hi! I'd like to book a table for aperitivo at ${bar.name}. Can you help?`);
-              const barWaLink = `https://wa.me/393519127047?text=${barWaMsg}`;
+              const barWaLink = getConciergeBookingUrl(locale, `Aperitivo · ${bar.name}`, `${lp}/aperitivo`);
               return (
                 <div key={bar.name}
                   className={`group relative overflow-hidden rounded-lg border transition-all duration-400

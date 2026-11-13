@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import Link from '@/components/LocalizedLink';
 import { localePrefix } from '@/lib/i18n/locales';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
@@ -104,10 +105,9 @@ export default function TableConcierge({ locale, events, initialNow, copy, surfa
     selectRef.current?.focus({ preventScroll: true });
   };
 
+  const pathname = usePathname() || '/';
   const context = selected ? `${tableConciergeContext(selected, groupSize, locale)}${preference.trim() ? ` · ${controlCopy.preference}: ${preference.trim()}` : ''}` : undefined;
-  const waUrl = context
-    ? getConciergeBookingUrl(locale, context)
-    : getConciergeBookingUrl(locale);
+  const waUrl = getConciergeBookingUrl(locale, context, pathname);
 
   return (
     <section className={styles.shell} data-table-concierge={surface} data-variant={compact ? 'compact' : 'full'} aria-labelledby={compact ? `tc-request-title-${surface}` : `tc-title-${surface}`}>

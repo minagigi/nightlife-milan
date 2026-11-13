@@ -7,6 +7,9 @@ import { tr } from '@/lib/i18n/t';
 import { getLocaleDef, hreflangAlternates, canonicalPageUrl, localePrefix } from '@/lib/i18n/locales';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getHubSeoMeta35 } from '@/lib/i18n/hubSeoMeta35';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
+import { capodannoEventPath } from '@/lib/capodanno/routes';
+import { christmasVoyaPath } from '@/lib/christmas/voya35';
 import GuideToc from '@/components/GuideToc';
 import { Sparkles, MapPin, Clock, MessageCircle, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { VipQuoteCalculator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
@@ -75,8 +78,8 @@ const ROOFTOPS = [
     viewIt: 'Vista 360° su Tre Torri CityLife, San Siro e Arco Alpino',
     formulaEn: 'Sunset Aperitivo (19:00) · Dinner Show · Panoramic DJ Set (until 02:30)',
     formulaIt: 'Aperitivo al Tramonto (19:00) · Dinner Show · DJ Set Panoramico (fino alle 02:30)',
-    priceEn: 'Aperitivo €20–€25 · Sky Lounge VIP Table from €200–€350',
-    priceIt: 'Aperitivo €20–€25 · Tavolo VIP Sky Lounge da €200–€350',
+    priceEn: 'Aperitivo €20–€25 · Sky Lounge VIP Table from €200–€350 · Dec 25 Christmas €100 · Dec 31 NYE €300 All-Inclusive',
+    priceIt: 'Aperitivo €20–€25 · Tavolo VIP Sky Lounge da €200–€350 · Natale 25 Dic 100€ · Capodanno 31 Dic 300€ All-Inclusive',
     seasonEn: 'Year-Round (360° glass sky lounge + open-air summer terrace)',
     seasonIt: 'Tutto l’Anno (sky lounge vetrata 360° + terrazza estiva open-air)',
     image: '/images/pillars/rooftops-02.webp',
@@ -332,11 +335,7 @@ export default async function RooftopsPage({
 
               <div className="flex flex-wrap gap-3 pt-4 border-t border-white/10">
                 <a
-                  href={`https://wa.me/393519127047?text=${encodeURIComponent(
-                    isIt
-                      ? `Ciao Nightlife Milan! Vorrei prenotare un tavolo panoramico da ${r.name}.`
-                      : `Hi Nightlife Milan! I'd like to book a panoramic table at ${r.name}.`
-                  )}`}
+                  href={getConciergeBookingUrl(locale, `${r.name} Rooftop Table`, rooftopUrl)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-champagne text-black font-mono text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
@@ -350,6 +349,22 @@ export default async function RooftopsPage({
                 >
                   <span>{isIt ? 'Scheda Locale' : 'Venue Details'}</span>
                 </Link>
+                {r.slug === 'voya-rooftop-milan' && (
+                  <>
+                    <Link
+                      href={christmasVoyaPath(locale)}
+                      className="inline-flex items-center gap-2 px-4 py-3 rounded-xl border border-emerald-400/40 bg-emerald-950/30 text-emerald-200 hover:border-emerald-300 font-mono text-xs uppercase tracking-wider transition-colors"
+                    >
+                      {isIt ? 'Natale 25 Dic · €100' : 'Christmas 25 Dec · €100'}
+                    </Link>
+                    <Link
+                      href={capodannoEventPath('capodanno-voya-rooftop-milano', locale)}
+                      className="inline-flex items-center gap-2 px-4 py-3 rounded-xl border border-champagne/40 bg-champagne/10 text-champagne hover:border-champagne font-mono text-xs uppercase tracking-wider transition-colors"
+                    >
+                      {isIt ? 'Capodanno 31 Dic · €300' : 'NYE 31 Dec · €300'}
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </div>

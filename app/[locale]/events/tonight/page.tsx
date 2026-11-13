@@ -13,6 +13,7 @@ import { compareEventbriteDiscoveryItems, getEventbriteDiscoveryItems } from '@/
 import { WeeklyNightlifeNavigator, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 
 export const dynamic = 'force-dynamic';
 
@@ -379,11 +380,7 @@ export default async function EventsTonightPage({ params }: Props) {
                   {tr(locale, 'Club Guide →', 'Scheda Club →')}
                 </Link>
                 <a
-                  href={`https://wa.me/393519127047?text=${encodeURIComponent(
-                    isIt
-                      ? `Ciao! Vorrei prenotare per stasera da ${club.name} a Milano.`
-                      : `Hi! I want to book for tonight at ${club.name} in Milan.`,
-                  )}`}
+                  href={getConciergeBookingUrl(locale, club.name, `${lp}/events/tonight`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="ml-auto px-4 py-2 rounded-full bg-champagne text-black text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
@@ -416,9 +413,7 @@ export default async function EventsTonightPage({ params }: Props) {
             )}
           </p>
           <a
-            href={`https://wa.me/393519127047?text=${encodeURIComponent(
-              tr(locale, 'Hi! I want to book for tonight in Milan.', 'Ciao! Vorrei prenotare per stasera a Milano.'),
-            )}`}
+            href={getConciergeBookingUrl(locale, tr(locale, 'Events Tonight', 'Serate Stasera'), `${lp}/events/tonight`)}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-3.5 bg-champagne text-black font-bold rounded-full hover:bg-white transition-colors uppercase tracking-wider text-sm"

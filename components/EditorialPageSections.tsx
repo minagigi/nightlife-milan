@@ -261,7 +261,7 @@ const CLUB_DEEP_META: Record<string, {
 export default function EditorialPageSections({ locale, path }: Props) {
   const isIt = locale === 'it';
   const lp = localePrefix(locale);
-  const waHref = getConciergeBookingUrl(locale);
+  const waHref = getConciergeBookingUrl(locale, undefined, path);
   const cleanPath = stripLocalePrefix(path, locale);
 
   // ---------------------------------------------------------------------------
@@ -293,7 +293,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
           </div>
         </div>
       </aside>
-      <SeoAuthorityHub lang={locale} pageKey={cleanPath} />
+      <SeoAuthorityHub lang={locale} pageKey={cleanPath} pagePath={path} />
     </>
   );
   }
@@ -407,7 +407,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
           </section>
         </div>
       </aside>
-      <SeoAuthorityHub lang={locale} pageKey={cleanPath} />
+      <SeoAuthorityHub lang={locale} pageKey={cleanPath} pagePath={path} />
     </>
   );
   }
@@ -457,7 +457,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
           </section>
         </div>
       </aside>
-      <SeoAuthorityHub lang={locale} pageKey={cleanPath} />
+      <SeoAuthorityHub lang={locale} pageKey={cleanPath} pagePath={path} />
     </>
   );
   }
@@ -617,7 +617,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
           </section>
         </div>
       </aside>
-      <SeoAuthorityHub lang={locale} pageKey={cleanPath} />
+      <SeoAuthorityHub lang={locale} pageKey={cleanPath} pagePath={path} />
     </>
   );
   }
@@ -738,7 +738,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
           </section>
         </div>
       </aside>
-      <SeoAuthorityHub lang={locale} pageKey={cleanPath} />
+      <SeoAuthorityHub lang={locale} pageKey={cleanPath} pagePath={path} />
     </>
   );
   }
@@ -836,7 +836,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
           </section>
         </div>
       </aside>
-      <SeoAuthorityHub lang={locale} pageKey={cleanPath} />
+      <SeoAuthorityHub lang={locale} pageKey={cleanPath} pagePath={path} />
     </>
   );
   }
@@ -892,7 +892,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
         </div>
       </div>
     </aside>
-      <SeoAuthorityHub lang={locale} pageKey={cleanPath} />
+      <SeoAuthorityHub lang={locale} pageKey={cleanPath} pagePath={path} />
     </>
   );
 }

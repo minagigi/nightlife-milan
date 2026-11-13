@@ -8,6 +8,7 @@ import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
 import { getLocaleDef, hreflangAlternates, localePrefix, canonicalPageUrl } from '@/lib/i18n/locales';
 import { generateEventListSchema, getLocalizedText, jsonLdString } from '@/lib/seo';
 import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 import { VipQuoteCalculator, EntryFormulaMatrix, PrioritySixShowcase, SanSiroMatchAfterpartyFinder } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
@@ -317,7 +318,7 @@ export default async function EventIntentLanding({ intent, locale }: { intent: E
             <p className="text-white/75 leading-relaxed">{config.audience[lang]}</p>
             <p className="text-white/50 text-sm mt-2">{COMMON.confirm[lang]}</p>
           </div>
-          <a href={`${CONTACT.whatsapp.link}?text=${encodeURIComponent(`I want information about ${config.heading[lang]}.`)}`} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center justify-center gap-2 bg-champagne text-black px-6 py-3 font-semibold hover:bg-white transition-colors">
+          <a href={getConciergeBookingUrl(locale, config.heading[lang], `${lp}/events/${intent}`)} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center justify-center gap-2 bg-champagne text-black px-6 py-3 font-semibold hover:bg-white transition-colors">
             <MessageCircle className="w-5 h-5" /> {COMMON.book[lang]}
           </a>
         </div>

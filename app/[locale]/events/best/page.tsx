@@ -11,6 +11,7 @@ import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 import { PrioritySixShowcase, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 
 export const revalidate = 3600;
 
@@ -434,9 +435,7 @@ export default async function EventsBestPage({ params }: Props) {
 
                 <div className="flex flex-wrap gap-3">
                   <a
-                    href={`https://wa.me/393519127047?text=${encodeURIComponent(
-                      isIt ? `Ciao! Vorrei prenotare da ${v.name.it} a Milano.` : `Hi! I want to book at ${v.name.en} in Milan.`,
-                    )}`}
+                    href={getConciergeBookingUrl(locale, isIt ? v.name.it : v.name.en, `${lp}/events/best`)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="px-5 py-2.5 bg-champagne text-black font-bold rounded-full hover:bg-white transition-colors text-xs uppercase tracking-wider"
@@ -504,13 +503,7 @@ export default async function EventsBestPage({ params }: Props) {
             )}
           </p>
           <a
-            href={`https://wa.me/393519127047?text=${encodeURIComponent(
-              tr(
-                locale,
-                'Hi! Help me choose the right club for tonight in Milan.',
-                'Ciao! Aiutami a scegliere il club giusto per stasera a Milano.',
-              ),
-            )}`}
+            href={getConciergeBookingUrl(locale, tr(locale, 'Best Clubs in Milan', 'Migliori Club Milano'), `${lp}/events/best`)}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-3.5 bg-champagne text-black font-bold rounded-full hover:bg-white transition-colors uppercase tracking-wider text-sm"

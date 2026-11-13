@@ -1,10 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { CONTACT } from '@/config/contact';
 import { trackEvent } from '@/lib/analytics';
 import { buildBookingMessage, buildBookingSubtitle } from '@/lib/eventPageLocale';
 import { eventText } from '@/lib/eventPageLocale';
+import { resolveFullPageUrl } from '@/lib/conciergeBooking';
 
 interface BookingFormProps {
   lang: string;
@@ -14,6 +16,7 @@ interface BookingFormProps {
 }
 
 export default function BookingForm({ lang, prefilledDate, venueName, eventName }: BookingFormProps) {
+  const pathname = usePathname() || '/';
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -24,6 +27,9 @@ export default function BookingForm({ lang, prefilledDate, venueName, eventName 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    const pageUrl =
+      typeof window !== 'undefined' ? window.location.href : resolveFullPageUrl(pathname, lang);
+
     const message = buildBookingMessage({
       locale: lang,
       eventName,
@@ -33,6 +39,7 @@ export default function BookingForm({ lang, prefilledDate, venueName, eventName 
       name: formData.name,
       email: formData.email,
       fallbackContext: eventText(lang, 'a VIP table in Milan', 'un tavolo VIP a Milano', 'uma mesa VIP em Milão'),
+      pageUrl,
     });
 
     // window.open non è un click su <a>: la delega di AnalyticsTracker non lo

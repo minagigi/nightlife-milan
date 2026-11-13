@@ -144,6 +144,8 @@ export function buildBookingSubtitle(locale: string, venueName: string): string 
   return contextualLabel(locale, 'bookingSubtitle', venueName);
 }
 
+import { appendPageUrlToWhatsAppMessage, getWhatsAppPack, resolveWhatsAppLocale } from '@/lib/conciergeBooking';
+
 export function buildBookingMessage(input: {
   locale: string;
   eventName?: string;
@@ -153,16 +155,16 @@ export function buildBookingMessage(input: {
   name: string;
   email: string;
   fallbackContext: string;
+  pageUrl?: string;
 }): string {
-  const { locale, eventName, venueName, date, guests, name, email, fallbackContext } = input;
-  if (locale === 'it') {
-    const context = eventName ? `l'evento "${eventName}"` : venueName ? `un tavolo al ${venueName}` : fallbackContext;
-    return `Ciao! Vorrei prenotare ${context}${date ? ` per il ${date}` : ''} per ${guests} persone. Mi chiamo ${name} (${email}). Potete aiutarmi?`;
-  }
-  if (locale === 'pt') {
-    const context = eventName ? `o evento "${eventName}"` : venueName ? `uma mesa no ${venueName}` : fallbackContext;
-    return `Olá! Gostaria de reservar ${context}${date ? ` para ${date}` : ''} para ${guests} pessoas. Chamo-me ${name} (${email}). Podem ajudar?`;
-  }
-  const context = eventName ? `the event "${eventName}"` : venueName ? `a table at ${venueName}` : fallbackContext;
-  return `Hi! I'd like to book ${context}${date ? ` for ${date}` : ''} for ${guests} guests. My name is ${name} (${email}). Can you help?`;
+  const { locale, eventName, venueName, date, guests, name, email, fallbackContext, pageUrl } = input;
+  const code = resolveWhatsAppLocale(locale);
+  const pack = getWhatsAppPack(code);
+  const context = eventName
+    ? pack.bookingEventSubject(eventName)
+    : venueName
+      ? pack.bookingVenueSubject(venueName)
+      : fallbackContext;
+  const msg = pack.bookingFormMessage({ context, date, guests, name, email });
+  return appendPageUrlToWhatsAppMessage(msg, pageUrl, code);
 }

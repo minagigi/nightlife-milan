@@ -5,6 +5,7 @@ import { hreflangAlternates, canonicalPageUrl, localePrefix } from '@/lib/i18n/l
 import Link from '@/components/LocalizedLink';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getHubSeoMeta35 } from '@/lib/i18n/hubSeoMeta35';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { EntryFormulaMatrix, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
@@ -263,7 +264,7 @@ export default async function FAQPage({ params }: Props) {
               {tr(locale, 'Our concierge replies within 10 minutes, 7 days a week.', 'Il nostro concierge risponde entro 10 minuti, 7 giorni su 7.')}
             </p>
             <a
-              href="https://wa.me/393519127047"
+              href={getConciergeBookingUrl(locale, undefined, `${lp}/faq`)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 bg-champagne text-black font-bold rounded-full hover:bg-white transition-colors text-sm uppercase tracking-wider"

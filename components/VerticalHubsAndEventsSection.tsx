@@ -1,7 +1,9 @@
 'use client';
 
 import React, { useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import Link from '@/components/LocalizedLink';
 import {
   getVerticalHubUi35,
@@ -25,6 +27,7 @@ export default function VerticalHubsAndEventsSection({
   const [activeTab, setActiveTab] = useState<'occasions' | 'fairs' | 'holidays'>(
     initialTab
   );
+  const pathname = usePathname() || (locale === 'en' ? '/' : `/${locale}`);
   const carouselRef = useRef<HTMLDivElement | null>(null);
 
   const ui = getVerticalHubUi35(locale);
@@ -171,7 +174,7 @@ export default function VerticalHubsAndEventsSection({
               {/* Dark Dock for #25D366 CTA inside Warm Editorial Ivory card */}
               <div className="bg-[#050505] p-4 flex flex-col sm:flex-row gap-2.5 border-t border-[#050505]">
                 <a
-                  href={`https://wa.me/393519127047?text=${encodeURIComponent(card.whatsappText)}`}
+                  href={getConciergeBookingUrl(locale, card.title, pathname)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 inline-flex items-center justify-center bg-[#25D366] hover:bg-[#20bd5a] px-4 py-2.5 font-mono text-xs font-bold uppercase tracking-wider text-[#050505] transition"

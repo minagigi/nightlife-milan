@@ -29,6 +29,7 @@ import { formatOctoberProgrammeDateRange } from '@/lib/october-events/festivalPe
 import { sanitizePublicEventJsonLd } from '@/lib/publicOutboundLinks';
 import { getJustmePage, justmeBodyImages } from '@/lib/october-events/justmeContract';
 import { getScarcityAndChatCopy } from '@/lib/i18n/scarcityAndChatCopy';
+import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
 import { buildSeoEventImagePack } from '@/lib/seoEventImages';
 import { getOctoberEventSlug } from '@/lib/october-events/copy';
 
@@ -40,7 +41,8 @@ export default async function OctoberEventPage({event,locale,initialNow,children
   const copy=await readOctoberEventCopy(event,locale),hub=getOctoberHubCopy(locale),prefix=localePrefix(locale);
   const date=formatOctoberEventDate(locale,event.startISO),poster=copy.imageAlt;
   const programmePeriod=event.programmeDateRange?`${getMonthEventLocalePack(locale).labels.programme}: ${formatOctoberProgrammeDateRange(locale,event.programmeDateRange)}`:null;
-  const inquiry=getConciergeBookingUrl(locale,`${event.officialName} · ${date} · ${event.venue.name}`);
+  const eventPagePath=`${prefix}/${getLocalizedDir35('events',locale)}/${copy.slug}`;
+  const inquiry=getConciergeBookingUrl(locale,`${event.officialName} · ${date} · ${event.venue.name}`,eventPagePath);
   const money=new Intl.NumberFormat(getLocaleDef(locale)?.hreflang||locale,{style:'currency',currency:'EUR'});
   const checkedAt=event.commercialCheckedAt||OCTOBER_EVENTS_INVENTORY.sourceCheckedAt;
   const soldOut=currentOfferReadbackCopy(locale,checkedAt).soldOut;

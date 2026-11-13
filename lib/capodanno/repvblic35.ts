@@ -6,6 +6,35 @@ export interface CapodannoEventTier {
   details: string;
 }
 
+export interface CapodannoMenuCourse {
+  course: string;
+  dish: string;
+}
+
+export interface CapodannoMenuCard {
+  id: string;
+  title: string;
+  price: string;
+  subtitle?: string;
+  courses: CapodannoMenuCourse[];
+  beverages: string;
+  imageSrc?: string;
+  imageAlt?: string;
+}
+
+export interface CapodannoScheduleStep {
+  time: string;
+  label: string;
+}
+
+export interface CapodannoRelatedHolidayBanner {
+  badge: string;
+  title: string;
+  description: string;
+  ctaLabel: string;
+  href: string;
+}
+
 export interface CapodannoLocalizedEventContent {
   title: string;
   subtitle: string;
@@ -16,6 +45,12 @@ export interface CapodannoLocalizedEventContent {
   tiers: CapodannoEventTier[];
   highlights: string[];
   sourceBasis: string;
+  scheduleHeading?: string;
+  schedule?: CapodannoScheduleStep[];
+  programImageSrc?: string;
+  menusHeading?: string;
+  menus?: CapodannoMenuCard[];
+  relatedHolidayBanner?: CapodannoRelatedHolidayBanner;
 }
 
 const ADDR = 'Piazza della Repubblica, 12, 20124 Milano';

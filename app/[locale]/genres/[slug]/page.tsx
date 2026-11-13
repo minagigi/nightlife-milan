@@ -17,6 +17,7 @@ import { getEventbriteDiscoveryItems, slimDiscoveryItemsForClient } from '@/lib/
 import { VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 
 // ISR Configuration
 export const revalidate = 3600;
@@ -574,11 +575,7 @@ export default async function GenrePage({ params }: Props) {
               ))}
             </div>
             <a
-              href={`https://wa.me/393519127047?text=${encodeURIComponent(
-                isIt
-                  ? `Ciao Nightlife Milan! Vorrei prenotare una serata ${gLoc.name} a Milano.`
-                  : `Hi Nightlife Milan! ${gLoc.name} - WhatsApp VIP Concierge`
-              )}`}
+              href={getConciergeBookingUrl(loc, gLoc.name, currentGenreUrl)}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-champagne text-black font-mono text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"

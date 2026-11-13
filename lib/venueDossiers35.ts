@@ -6,6 +6,9 @@ import { OCTOBER_EVENTS } from './octoberEvents';
 import { getOctoberEventSlug } from './october-events/copy';
 import { weeklyEvents } from './eventsConfig';
 import { getCapodannoEventForClub } from './capodannoEvents';
+import { getConciergeBookingUrl } from './conciergeBooking';
+import { capodannoEventPath } from './capodanno/routes';
+import { christmasVoyaPath } from './christmas/voya35';
 
 function venueDisplayName(venue: Venue, locale: string): string {
   return (locale === 'it' ? venue.localizedContent?.name?.it : venue.localizedContent?.name?.en) || venue.localizedContent?.name?.en || 'Club Milano';
@@ -1001,7 +1004,11 @@ function getMilanNightlifeDateISO(): { todayISO: string; endOfWeekISO: string } 
   return { todayISO, endOfWeekISO };
 }
 
-export function resolveVenueEventsForCarousel(venue: Venue, locale: string): {
+export function resolveVenueEventsForCarousel(
+  venue: Venue,
+  locale: string,
+  sourcePageUrl?: string
+): {
   tonight: CarouselEventCard[];
   thisWeek: CarouselEventCard[];
   curatedProposals: CarouselEventCard[];
@@ -1040,6 +1047,7 @@ export function resolveVenueEventsForCarousel(venue: Venue, locale: string): {
     const tStr = ev.startISO.slice(11, 16) || '23:00';
     const endStr = ev.endISO ? ev.endISO.slice(11, 16) : '05:00';
     const fallbackImg = venue.image || '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp';
+    const cardHref = toHref(`/events/${slug}`);
     return {
       id: ev.id,
       title: ev.officialName || ev.shortName || vName,
@@ -1049,12 +1057,8 @@ export function resolveVenueEventsForCarousel(venue: Venue, locale: string): {
       categoryLabel: ev.venue.name,
       genres: ev.genres.slice(0, 3),
       imageSrc: ev.image?.src || fallbackImg,
-      href: toHref(`/events/${slug}`),
-      whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
-        isIt
-          ? `Ciao Nightlife Milan, vorrei info/lista/tavolo per ${ev.officialName || vName} da ${vName} (${dStr})`
-          : `Hi Nightlife Milan, I'd like guest list / VIP table info for ${ev.officialName || vName} at ${vName} (${dStr})`
-      )}`,
+      href: cardHref,
+      whatsappHref: getConciergeBookingUrl(locale, `${ev.officialName || vName} (${vName} ${dStr})`, sourcePageUrl || cardHref),
       badge,
     };
   };
@@ -1085,27 +1089,29 @@ export function resolveVenueEventsForCarousel(venue: Venue, locale: string): {
   });
 
   const fallbackImg = venue.image || '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp';
-  const curatedProposals: CarouselEventCard[] = matchedWeekly.map((w) => ({
-    id: `weekly-${w.id}`,
-    title: w.name,
-    dateLabel: isIt ? `Ogni Settimana (${w.day.toUpperCase()})` : `Weekly (${w.day.toUpperCase()})`,
-    timeLabel: '20:30 – 05:00',
-    priceLabel: w.pricing.club || w.pricing.aperitif || '€20',
-    categoryLabel: vName,
-    genres: (w.genres && w.genres.length > 0 ? w.genres : vTags).slice(0, 3),
-    imageSrc: w.image || fallbackImg,
-    href: toHref(`/events/${w.clubSlug}-${w.day}-${w.eventSlug}`),
-    whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
-      isIt
-        ? `Ciao Nightlife Milan, vorrei prenotare per la serata ${w.name} da ${vName}`
-        : `Hi Nightlife Milan, I'd like to book for ${w.name} at ${vName}`
-      )}`,
-    badge: isIt ? 'PROPOSTA Nightlife Milan' : 'Nightlife Milan PICK',
-    isRecurring: true,
-  }));
+  const curatedProposals: CarouselEventCard[] = matchedWeekly.map((w) => {
+    const weeklyHref = toHref(`/events/${w.clubSlug}-${w.day}-${w.eventSlug}`);
+    return {
+      id: `weekly-${w.id}`,
+      title: w.name,
+      dateLabel: isIt ? `Ogni Settimana (${w.day.toUpperCase()})` : `Weekly (${w.day.toUpperCase()})`,
+      timeLabel: '20:30 – 05:00',
+      priceLabel: w.pricing.club || w.pricing.aperitif || '€20',
+      categoryLabel: vName,
+      genres: (w.genres && w.genres.length > 0 ? w.genres : vTags).slice(0, 3),
+      imageSrc: w.image || fallbackImg,
+      href: weeklyHref,
+      whatsappHref: getConciergeBookingUrl(locale, `${w.name} (${vName})`, sourcePageUrl || weeklyHref),
+      badge: isIt ? 'PROPOSTA Nightlife Milan' : 'Nightlife Milan PICK',
+      isRecurring: true,
+    };
+  });
 
   const isRepvblic = venue.id === 'v-repvblic' || venue.slugs?.en === 'repvblic-milano';
   const gallery = getEnhancedVenueGallery(venue);
+  const repNyeHref = capodannoEventPath('capodanno-repvblic-milano', locale);
+  const aperitivoHref = toHref('/private-parties');
+  const vipHref = toHref('/vip-tables');
   const signatureProposals: CarouselEventCard[] = [
     isRepvblic
       ? {
@@ -1119,12 +1125,12 @@ export function resolveVenueEventsForCarousel(venue: Venue, locale: string): {
           categoryLabel: isIt ? 'Capodanno 2027 Ufficiale' : 'Official NYE 2027',
           genres: ['International Hits', 'Hip Hop', 'House'],
           imageSrc: '/images/events/capodanno-2027-posters/capodanno-repvblic-milano.webp',
-          href: toHref('/capodanno-milano-discoteche/capodanno-repvblic-milano'),
-          whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
-            isIt
-              ? 'Ciao Nightlife Milan, vorrei prenotare per NEW YEAR’S EVE AT REPVBLIC MILANO (31 dicembre, Piazza della Repubblica 12)'
-              : 'Hi Nightlife Milan, I would like to book for NEW YEAR’S EVE AT REPVBLIC MILANO (Dec 31, Piazza della Repubblica 12)'
-          )}`,
+          href: repNyeHref,
+          whatsappHref: getConciergeBookingUrl(
+            locale,
+            'NEW YEAR’S EVE AT REPVBLIC MILANO (31 Dec, Piazza della Repubblica 12)',
+            sourcePageUrl || repNyeHref
+          ),
           badge: isIt ? 'CAPODANNO CONFERMATO 2027' : 'CONFIRMED NYE 2027',
           isRecurring: false,
         }
@@ -1137,12 +1143,8 @@ export function resolveVenueEventsForCarousel(venue: Venue, locale: string): {
           categoryLabel: isIt ? 'Aperitivo & Lauree/Compleanni' : 'Aperitivo & Celebrations',
           genres: ['Royal Buffet', 'Cocktail Bar', 'DJ Set'],
           imageSrc: gallery[0] || fallbackImg,
-          href: toHref('/private-parties'),
-          whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
-            isIt
-              ? `Ciao Nightlife Milan, vorrei riservare un'isola aperitivo / festa questa settimana da ${vName}`
-              : `Hi Nightlife Milan, I'd like to reserve an aperitivo island this week at ${vName}`
-          )}`,
+          href: aperitivoHref,
+          whatsappHref: getConciergeBookingUrl(locale, `${vName} Royal Aperitivo`, sourcePageUrl || aperitivoHref),
           badge: isIt ? 'PROPOSTA Nightlife Milan #1' : 'Nightlife Milan PROPOSAL #1',
           isRecurring: true,
         },
@@ -1155,12 +1157,8 @@ export function resolveVenueEventsForCarousel(venue: Venue, locale: string): {
       categoryLabel: isIt ? 'Tavoli VIP & Club' : 'VIP Tables & Club',
       genres: vTags.slice(0, 3),
       imageSrc: gallery[1] || gallery[0] || fallbackImg,
-      href: toHref('/vip-tables'),
-      whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
-        isIt
-          ? `Ciao Nightlife Milan, vorrei il listino tavoli e bottiglie per questa settimana da ${vName}`
-          : `Hi Nightlife Milan, I'd like the VIP table & bottle menu for this week at ${vName}`
-      )}`,
+      href: vipHref,
+      whatsappHref: getConciergeBookingUrl(locale, `${vName} VIP Table`, sourcePageUrl || vipHref),
       badge: isIt ? 'PROPOSTA Nightlife Milan #2' : 'Nightlife Milan PROPOSAL #2',
       isRecurring: true,
     },
@@ -1175,12 +1173,8 @@ export function resolveVenueEventsForCarousel(venue: Venue, locale: string): {
       categoryLabel: isIt ? 'Feste Private & Gruppi' : 'Private Parties & Groups',
       genres: ['2 Drinks Included', 'Cake Service', 'Fast-Track'],
       imageSrc: gallery[2] || gallery[0] || fallbackImg,
-      href: toHref('/private-parties'),
-      whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
-        isIt
-          ? `Ciao Nightlife Milan, vorrei organizzare una festa privata da ${vName}`
-          : `Hi Nightlife Milan, I'd like to organize a private celebration at ${vName}`
-      )}`,
+      href: aperitivoHref,
+      whatsappHref: getConciergeBookingUrl(locale, `${vName} Private Party`, sourcePageUrl || aperitivoHref),
       badge: isIt ? 'PROPOSTA Nightlife Milan #3' : 'Nightlife Milan PROPOSAL #3',
       isRecurring: true,
     },
@@ -1192,22 +1186,38 @@ export function resolveVenueEventsForCarousel(venue: Venue, locale: string): {
 
   const capEvent = getCapodannoEventForClub(clubSlug);
   if (capEvent) {
+    const capHref = capodannoEventPath(capEvent.slug, locale);
     future.push({
       id: `cap-${capEvent.slug}`,
       title: isIt ? capEvent.titleIt : capEvent.titleEn,
       dateLabel: '2026-12-31',
       timeLabel: capEvent.hours || '20:30 – 06:00',
-      priceLabel: `€${capEvent.priceFromEur || 50}`,
+      priceLabel: `€${capEvent.priceFromEur || 40}`,
       categoryLabel: isIt ? 'Capodanno 31 Dicembre' : 'New Year’s Eve 31 Dec',
       genres: ['Cenone / Buffet', 'Countdown', 'Open Format'],
       imageSrc: capEvent.image || fallbackImg,
-      href: toHref(`/new-years-eve/${capEvent.slug}`),
-      whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
-        isIt
-          ? `Ciao Nightlife Milan, vorrei info e prevendite per Capodanno da ${vName}`
-          : `Hi Nightlife Milan, I'd like NYE tickets / tables info for ${vName}`
-      )}`,
+      href: capHref,
+      whatsappHref: getConciergeBookingUrl(locale, `${vName} Capodanno 2027`, sourcePageUrl || capHref),
       badge: isIt ? 'CAPODANNO 31 DIC' : 'NYE 31 DEC',
+    });
+  }
+
+  if (venue.id === 'v-voya' || clubSlug === 'voya-rooftop-milan') {
+    const xmasHref = christmasVoyaPath(locale);
+    future.unshift({
+      id: 'xmas-voya-rooftop-2026',
+      title: isIt
+        ? 'Pranzo di Natale 2026 · Voya Rooftop Milano (20° Piano)'
+        : 'Christmas Day Menu 2026 · Voya Rooftop Milan (20th Floor)',
+      dateLabel: '2026-12-25',
+      timeLabel: isIt ? '25 Dic · Orari 24/7 su WhatsApp' : 'Dec 25 · Hours via 24/7 WhatsApp',
+      priceLabel: '€100',
+      categoryLabel: isIt ? 'Natale 25 Dicembre · 5 Portate' : 'Christmas 25 Dec · 5 Courses',
+      genres: [isIt ? 'Menù Ufficiale 5 Portate' : 'Official 5-Course Menu', isIt ? 'Vini Inclusi' : 'Wine Included'],
+      imageSrc: '/images/events/christmas-2026-posters/natale-voya-rooftop-milano-2026.webp',
+      href: xmasHref,
+      whatsappHref: getConciergeBookingUrl(locale, 'Voya Rooftop Natale 25 Dicembre €100', sourcePageUrl || xmasHref),
+      badge: isIt ? 'NATALE 25 DIC · €100' : 'CHRISTMAS 25 DEC · €100',
     });
   }
 

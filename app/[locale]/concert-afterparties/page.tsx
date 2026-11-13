@@ -13,6 +13,7 @@ import {
 } from '@/lib/i18n/locales';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getHubSeoMeta35 } from '@/lib/i18n/hubSeoMeta35';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import {
   Sparkles,
   MapPin,
@@ -544,11 +545,13 @@ export default async function ConcertAfterpartiesPage({
           {/* Dual CTA */}
           <div className="flex flex-wrap items-center gap-4">
             <a
-              href={`https://wa.me/393519127047?text=${encodeURIComponent(
+              href={getConciergeBookingUrl(
+                locale,
                 isIt
-                  ? 'Ciao Concierge Nightlife Milan! Siamo a Milano per il concerto e vorremmo prenotare un Tavolo VIP / Afterparty Post-Concerto.'
-                  : 'Hi Nightlife Milan Concierge! We are in Milan for a concert and would like to book a Post-Concert VIP Table / Afterparty.'
-              )}`}
+                  ? 'Afterparty Concerti Milano (Tavolo VIP)'
+                  : 'Milan Concert Afterparty VIP Table',
+                canonicalUrl
+              )}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 px-7 py-4 rounded-xl bg-champagne text-black font-sans font-bold text-xs sm:text-sm uppercase tracking-[0.16em] hover:bg-white transition-all shadow-[0_0_35px_rgba(201,168,106,0.4)]"
@@ -709,11 +712,13 @@ export default async function ConcertAfterpartiesPage({
                   {isIt ? arena.pairedClubsIt : arena.pairedClubsEn}
                 </div>
                 <a
-                  href={`https://wa.me/393519127047?text=${encodeURIComponent(
+                  href={getConciergeBookingUrl(
+                    locale,
                     isIt
-                      ? `Ciao! Siamo al concerto (${arena.titleIt.split(':')[0]}) e vorremmo prenotare un Tavolo VIP post-concerto.`
-                      : `Hi! We are attending a concert (${arena.titleEn.split(':')[0]}) and would like to book a post-concert VIP Table.`
-                  )}`}
+                      ? `Post-Concerto · ${arena.titleIt.split(':')[0]}`
+                      : `Post-Concert · ${arena.titleEn.split(':')[0]}`,
+                    canonicalUrl
+                  )}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-champagne text-black font-sans text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
@@ -791,11 +796,13 @@ export default async function ConcertAfterpartiesPage({
                   {isIt ? 'Scheda Completa →' : 'Venue Guide →'}
                 </Link>
                 <a
-                  href={`https://wa.me/393519127047?text=${encodeURIComponent(
+                  href={getConciergeBookingUrl(
+                    locale,
                     isIt
-                      ? `Ciao! Vorrei prenotare il post-concerto da ${club.nameIt}.`
-                      : `Hi! I would like to book a post-concert table at ${club.nameEn}.`
-                  )}`}
+                      ? `Post-Concerto · ${club.nameIt}`
+                      : `Post-Concert · ${club.nameEn}`,
+                    canonicalUrl
+                  )}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-4 py-2 rounded-xl bg-champagne text-black text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"

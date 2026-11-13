@@ -11,6 +11,7 @@ import GuideToc from '@/components/GuideToc';
 import { Sparkles, PartyPopper, Crown, Users, MessageCircle, CheckCircle2 } from 'lucide-react';
 import { VipQuoteCalculator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
 import VerticalHubsAndEventsSection from '@/components/VerticalHubsAndEventsSection';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 
 export const revalidate = 3600;
 
@@ -309,11 +310,7 @@ export default async function PrivatePartiesPage({
               </div>
 
               <a
-                href={`https://wa.me/393519127047?text=${encodeURIComponent(
-                  isIt
-                    ? `Ciao Nightlife Milan! Vorrei un preventivo per "${pkg.titleIt}" (data, numero invitati e locale).`
-                    : `Hi Nightlife Milan! I'd like a quote for "${pkg.titleEn}" (date, guest count, and venue).`
-                )}`}
+                href={getConciergeBookingUrl(locale, isIt ? pkg.titleIt : pkg.titleEn, privatePartiesUrl)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-champagne text-black font-mono text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"

@@ -1,8 +1,10 @@
 import SeoAuthorityHub from '@/components/SeoAuthorityHub';
 
 import EventVenueMap from '@/components/EventVenueMap';
-import { getEventVenueCopy } from '@/lib/i18n/eventVenueCopy';import type { LocaleCode } from '@/lib/i18n/locales';
+import { getEventVenueCopy } from '@/lib/i18n/eventVenueCopy';
+import type { LocaleCode } from '@/lib/i18n/locales';
 import { capodannoEventPath, capodannoNavigation, capodannoPath } from '@/lib/capodanno/routes';
+import { getPaymentTerms35 } from '@/lib/capodanno/paymentTerms35';
 import {
   getCapodannoLocalizedCategorySubtitle,
   getCapodannoLocalizedCategoryTitle,
@@ -39,6 +41,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
   const ui = getCapodannoUiCopy(locale);
   const scarcity = getScarcityAndChatCopy(locale);
   const venueMapCopy = getEventVenueCopy(locale as LocaleCode);
+  const paymentTerms = getPaymentTerms35(locale);
 
   const title = getCapodannoLocalizedCategoryTitle(pageDef, locale, events.length);
   const subtitle = getCapodannoLocalizedCategorySubtitle(pageDef, locale, events.length);
@@ -57,7 +60,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
         },
         {
           q: 'Come prenotare prevendite Early Bird, cenoni o tavoli VIP senza commissioni extra?',
-          a: `Contatta il Concierge ufficiale Nightlife Milan su WhatsApp (${SITE_CONTACT.whatsapp.number}), telefono o email (concierge@nightlifemilan.com) indicando numero di persone, target (coppia, gruppo, famiglia) e formula preferita per ricevere disponibilità aggiornata e link/accredito ufficiale.`,
+          a: `Contatta il Concierge ufficiale Nightlife Milan su WhatsApp (${SITE_CONTACT.whatsapp.number}) attivo 24/24, 7 giorni su 7. ${paymentTerms.steps.join(' ')}`,
         },
       ]
     : locale === 'en'
@@ -72,7 +75,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
           },
           {
             q: 'How do I book early-bird tickets, gala dinners, or VIP tables?',
-            a: `Message our official Nightlife Milan WhatsApp Concierge (${SITE_CONTACT.whatsapp.number}), call us, or email concierge@nightlifemilan.com with your group size and preferred package for instant availability and official reservation links.`,
+            a: `Contact our official Nightlife Milan WhatsApp Concierge (${SITE_CONTACT.whatsapp.number}), available 24/7. ${paymentTerms.steps.join(' ')}`,
           },
         ]
       : [
@@ -86,7 +89,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
           },
           {
             q: `WhatsApp Concierge (${SITE_CONTACT.whatsapp.number}) & Email (concierge@nightlifemilan.com)?`,
-            a: `${ui.bookingSubtitle}`,
+            a: `${paymentTerms.steps.join(' ')}`,
           },
         ];
 
@@ -211,7 +214,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
           {/* Clickable Contacts: Catalogo Schede Evento, WhatsApp, Tel, Email */}
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <a
-              href={getConciergeBookingUrl(locale)}
+              href={getConciergeBookingUrl(locale, title, `${SITE_URL}${canonicalPath}`)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[#25D366] px-5 py-3 text-sm font-bold text-[#050505] transition hover:bg-[#2EE472]"
@@ -268,6 +271,11 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
               <li>
                 <a href="#tabella-prezzi" className="text-[#050505] hover:underline">
                   {ui.tocTable}
+                </a>
+              </li>
+              <li>
+                <a href="#termini-pagamento" className="text-[#050505] hover:underline">
+                  {paymentTerms.tocLabel}
                 </a>
               </li>
               <li>
@@ -329,13 +337,51 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
                     </td>
                     <td className="px-4 py-3 text-[#24201B]">{ev.hours}</td>
                     <td className="px-4 py-3 font-bold text-[#050505]">
-                      {isIt ? ev.priceSummaryIt : ev.priceSummaryEn}
+                      {getCapodannoLocalizedEventContent(ev, locale).priceSummary}
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
+        </div>
+      </section>
+
+      {/* Official 6-Step Prepayment & Booking Protocol */}
+      <section id="termini-pagamento" data-payment-terms-35 className="mx-auto mt-16 max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="border border-[#F6F1E7]/25 bg-[#0B0A09] p-6 sm:p-8">
+          <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#C9A84C]">
+            {paymentTerms.eyebrow}
+          </p>
+          <div className="mt-2 flex flex-wrap items-center justify-between gap-3">
+            <h2 className="font-serif text-2xl font-bold text-[#F6F1E7] sm:text-3xl">
+              {paymentTerms.heading}
+            </h2>
+            <span className="border border-[#F6F1E7]/35 bg-[#050505] px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#EAE3D5]">
+              {paymentTerms.methodsBadge}
+            </span>
+          </div>
+          <p className="mt-2 text-sm leading-relaxed text-[#C2B9AA]">
+            {paymentTerms.subtitle}
+          </p>
+          <ol className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {paymentTerms.steps.map((step, idx) => (
+              <li
+                key={step}
+                className="border border-[#F6F1E7]/15 bg-[#050505] p-4"
+              >
+                <span className="inline-flex h-6 w-6 items-center justify-center bg-[#F6F1E7] font-mono text-xs font-bold text-[#050505]">
+                  {idx + 1}
+                </span>
+                <p className="mt-2.5 text-xs leading-relaxed text-[#F6F1E7] sm:text-sm">
+                  {step}
+                </p>
+              </li>
+            ))}
+          </ol>
+          <p className="mt-4 border-l-2 border-[#C9A84C] pl-3 text-xs leading-relaxed text-[#C2B9AA]">
+            {paymentTerms.note}
+          </p>
         </div>
       </section>
 

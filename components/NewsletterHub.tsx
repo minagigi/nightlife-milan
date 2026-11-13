@@ -1,8 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { tr } from '@/lib/i18n/t';
-import { CONTACT } from '@/config/contact';
+import { getConciergeBookingUrl, resolveFullPageUrl } from '@/lib/conciergeBooking';
 
 interface NewsletterHubProps {
   lang: string;
@@ -16,6 +17,7 @@ interface NewsletterHubProps {
 }
 
 export default function NewsletterHub({ lang, labels }: NewsletterHubProps) {
+  const pathname = usePathname() || '/';
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
 
@@ -26,18 +28,11 @@ export default function NewsletterHub({ lang, labels }: NewsletterHubProps) {
       return;
     }
 
-    const prefix = tr(
-      lang,
-      "Hi! I'd like to join the Inner Circle for Thursday VIP table and guest list updates.",
-      "Ciao! Voglio entrare nell'Inner Circle per ricevere gli aggiornamenti del giovedì su tavoli VIP e liste."
-    );
-    const message = `${prefix} Email: ${email}`;
+    const pageUrl =
+      typeof window !== 'undefined' ? window.location.href : resolveFullPageUrl(pathname, lang);
+    const waUrl = getConciergeBookingUrl(lang, `Inner Circle Dispatch · Email: ${email}`, pageUrl);
 
-    window.open(
-      `${CONTACT.whatsapp.link}?text=${encodeURIComponent(message)}`,
-      '_blank',
-      'noopener,noreferrer'
-    );
+    window.open(waUrl, '_blank', 'noopener,noreferrer');
 
     setStatus('success');
     setEmail('');

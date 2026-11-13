@@ -6,6 +6,9 @@ import { OCTOBER_EVENTS } from './octoberEvents';
 import { getOctoberEventSlug } from './october-events/copy';
 import { weeklyEvents } from './eventsConfig';
 import { CAPODANNO_EVENTS } from './capodannoEvents';
+import { getConciergeBookingUrl } from './conciergeBooking';
+import { capodannoEventPath } from './capodanno/routes';
+import { christmasVoyaPath } from './christmas/voya35';
 import type { CarouselEventCard } from './venueDossiers35';
 
 export interface VerticalHubUi35 {
@@ -668,26 +671,57 @@ export function getHolidaysCatalog(locale: string): VerticalCardItem[] {
         ? 'Tutte le 21 serate ufficiali di Capodanno con menù di gala, buffet imperiale, brindisi di mezzanotte e club fino alle 06:00.'
         : 'All 21 official New Year’s Eve galas featuring seated menus, royal buffets, midnight countdowns, and clubbing until 06:00.',
       priceRange: isIt
-        ? 'Ingresso Dopocena da 40–60€ · Buffet Imperiale da 70–90€ · Cenone Gran Galà da 120–220€ · Tavoli VIP da 350€'
-        : 'Club Entry €40–€60 · Royal Buffet €70–€90 · Seated Gala Dinner €120–€220 · VIP Tables from €350',
+        ? 'Buffet & Club Pineta 40€ · Early Bird REPVBLIC 45€ · Gala Pineta 160€ · Voya Rooftop 300€ All-Inclusive · Tavoli VIP da 300€'
+        : 'Pineta Buffet/Club €40 · REPVBLIC Early Bird €45 · Pineta Gala €160 · Voya Rooftop €300 All-Inclusive · VIP Tables from €300',
       timingAndLogistics: isIt
-        ? '20:30 Cenone / Buffet · 23:30 Ingresso Dopocena · 00:00 Countdown & Fireworks · 06:00 Chiusura'
-        : '20:30 Gala Dinner / Buffet · 23:30 Club Entry · 00:00 Midnight Countdown · 06:00 Close',
-      recommendedVenues: ['Just Me Milano', '55 Milano', 'Pineta Milano', 'Aria Club', 'Voya Milano', 'Alcatraz', 'Fabrique'],
+        ? 'Pineta 20:30–05:00 · REPVBLIC 23:00–05:00 · Voya 20° Piano · Conferma con prepagamento 100% e ricevuta WhatsApp 24/7'
+        : 'Pineta 20:30–05:00 · REPVBLIC 23:00–05:00 · Voya 20th Floor · 100% prepayment & 24/7 WhatsApp receipt confirmation',
+      recommendedVenues: ['Just Me Milano', 'Pineta Milano', 'Voya Rooftop 20° Piano', 'REPVBLIC Milano', 'Aria Club', '55 Milano'],
       highlights: isIt
         ? [
-            'Prezzi early-bird bloccati con prevendita ufficiale e conferma scritta del tavolo su pianta',
-            'Possibilità di abbinare Cenone + Tavolo Privé mantenendo la stessa postazione tutta la notte',
-            'Assistenza WhatsApp diretta il 31 dicembre per ingressi, taxi e coordinamento gruppi',
+            'Pineta Moulin Rouge (Xceed nightlifemilan-1): Royal Buffet €40, Solo Disco €40, Gala Servito €160 e VIP €300–€1.500',
+            'Voya Rooftop 20° Piano (€300 All-Inclusive): menù 6 portate + cotechino e lenticchie, 1 bottiglia di vino ogni 4 ospiti, vista fuochi 360°',
+            'Termini ufficiali in 6 passi su WhatsApp (+39 351 912 7047) 24/24, 7 su 7 con prepagamento al 100%',
           ]
         : [
-            'Locked early-bird pricing with official vouchers and written floorplan table confirmation',
-            'Combo Gala Dinner + VIP Table keeping your private base all night until 06:00',
-            'Live December 31st WhatsApp concierge support for door entry and group arrivals',
+            'Pineta Moulin Rouge (Xceed nightlifemilan-1): Royal Buffet €40, Club Entry €40, Seated Gala €160 & VIP €300–€1,500',
+            'Voya Rooftop 20th Floor (€300 All-Inclusive): 6-course tasting + post-midnight cotechino & lentils, 1 wine bottle/4 guests, 360° fireworks',
+            'Official 6-step 24/7 WhatsApp booking protocol (+39 351 912 7047) with 100% prepayment confirmation',
           ],
       href: `/${locale}/new-years-eve`,
       whatsappText: 'Ciao Nightlife Milan, vorrei il catalogo completo e i prezzi di Capodanno a Milano (Cenone, Buffet e Tavoli)',
       imageSrc: '/images/venues/just-me-milano/just-me-milano-lounge-01.webp',
+    },
+    {
+      id: 'hol-natale-voya',
+      badge: isIt ? '25 DICEMBRE 2026 · NATALE AL VOYA ROOFTOP' : '25 DECEMBER 2026 · CHRISTMAS AT VOYA ROOFTOP',
+      title: isIt
+        ? 'Pranzo di Natale 2026 al Voya Rooftop Milano (20° Piano): Menù Ufficiale 5 Portate · 100€'
+        : 'Christmas Day Menu 2026 at Voya Rooftop Milan (20th Floor): Official 5-Course Menu · €100',
+      subtitle: isIt
+        ? 'Esperienza gastronomica panoramica a 85 metri d’altezza in Viale Achille Papa 30 con menù ufficiale delle Feste.'
+        : 'Elevated 20th-floor Christmas dining 85 meters above Milan at Viale Achille Papa 30 with the official festive menu.',
+      priceRange: isIt
+        ? '100€ a persona · 5 portate complete · 1 bottiglia di vino ogni 4 ospiti, acqua e caffè inclusi'
+        : '€100 per person · Full 5-course official menu · 1 bottle of wine per 4 guests, water & coffee included',
+      timingAndLogistics: isIt
+        ? '25 Dicembre 2026 · Orari e turni confermati direttamente 24/24, 7/7 con il Concierge WhatsApp'
+        : 'December 25, 2026 · Seating times & availability confirmed directly 24/7 via WhatsApp Concierge',
+      recommendedVenues: ['Voya Rooftop Milano (20° Piano · Viale Achille Papa 30)'],
+      highlights: isIt
+        ? [
+            '5 portate ufficiali: Modeghili, Flan di zucca e porcini, Plin Voya, Filetto di manzo, Sinfonia cioccolato/pistacchio/lamponi',
+            'Vini (1 bottiglia ogni 4 ospiti), acqua e caffè inclusi nella tariffa unica di 100€ a persona',
+            'Prenotazione 24/7 su WhatsApp (+39 351 912 7047) con conferma disponibilità e prepagamento al 100%',
+          ]
+        : [
+            'Official 5-course menu: Modeghili, Pumpkin & porcini flan, Voya Plin ravioli, Beef fillet, Chocolate/pistachio/raspberry symphony',
+            'Wine (1 bottle per 4 guests), water & coffee included in the confirmed €100 per-person rate',
+            '24/7 WhatsApp reservation (+39 351 912 7047) with availability confirmation & 100% prepayment',
+          ],
+      href: christmasVoyaPath(locale),
+      whatsappText: 'Ciao Nightlife Milan, vorrei prenotare il Menù di Natale al Voya Rooftop (25 Dicembre, €100 a persona)',
+      imageSrc: '/images/events/christmas-2026-posters/natale-voya-rooftop-milano-2026.webp',
     },
     {
       id: 'hol-halloween',
@@ -903,6 +937,7 @@ export function resolveSuggestedEventsForVertical(
     );
     const dStr = ev.startISO.slice(0, 10);
     const endStr = ev.endISO ? ev.endISO.slice(11, 16) : '05:00';
+    const cardHref = `/${locale}/events/${slug}`;
     return {
       id: `vert-${ev.id}`,
       title: ev.officialName || ev.shortName || ev.venue.name,
@@ -912,18 +947,15 @@ export function resolveSuggestedEventsForVertical(
       categoryLabel: ev.venue.name,
       genres: ev.genres.slice(0, 3),
       imageSrc: ev.image?.src || '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp',
-      href: `/${locale}/events/${slug}`,
-      whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
-        isIt
-          ? `Ciao Nightlife Milan, vorrei prenotare lista/tavolo per ${ev.officialName || ev.venue.name} da ${ev.venue.name} (${dStr})`
-          : `Hi Nightlife Milan, I'd like to book guest list / VIP table for ${ev.officialName || ev.venue.name} at ${ev.venue.name} (${dStr})`
-      )}`,
+      href: cardHref,
+      whatsappHref: getConciergeBookingUrl(locale, `${ev.officialName || ev.venue.name} (${ev.venue.name} ${dStr})`, cardHref),
       badge: isIt ? 'PROSSIMO EVENTO' : 'UPCOMING LIVE',
     };
   });
 
   // Add weekly curated proposals
   for (const w of weeklyEvents.slice(0, 4)) {
+    const weeklyHref = `/${locale}/events/${w.clubSlug}-${w.day}-${w.eventSlug}`;
     cards.push({
       id: `vert-weekly-${w.id}`,
       title: w.name,
@@ -933,35 +965,45 @@ export function resolveSuggestedEventsForVertical(
       categoryLabel: w.clubName,
       genres: (w.genres && w.genres.length > 0 ? w.genres : ['Aperitivo & Club', 'VIP Tables']).slice(0, 3),
       imageSrc: w.image || '/images/venues/pineta-milano/pineta-milano-interior-01.webp',
-      href: `/${locale}/events/${w.clubSlug}-${w.day}-${w.eventSlug}`,
-      whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
-        isIt
-          ? `Ciao Nightlife Milan, vorrei info per la serata ${w.name} (${w.clubName})`
-          : `Hi Nightlife Milan, I'd like info for ${w.name} (${w.clubName})`
-      )}`,
+      href: weeklyHref,
+      whatsappHref: getConciergeBookingUrl(locale, `${w.name} (${w.clubName})`, weeklyHref),
       badge: isIt ? 'SERATA PROPOSTA' : 'CONCIERGE WEEKLY PICK',
       isRecurring: true,
     });
   }
 
-  // Add NYE highlights if focus is holidays or all
+  // Add Holiday / NYE / Christmas highlights if focus is holidays or all
   if (focus === 'holidays' || focus === 'all') {
+    const christmasHref = christmasVoyaPath(locale);
+    cards.push({
+      id: 'vert-xmas-voya-2026',
+      title: isIt
+        ? 'Pranzo di Natale 2026 · Voya Rooftop Milano (20° Piano)'
+        : 'Christmas Day Menu 2026 · Voya Rooftop Milan (20th Floor)',
+      dateLabel: '2026-12-25',
+      timeLabel: isIt ? '25 Dic · Orari 24/7 su WhatsApp' : 'Dec 25 · Seating via 24/7 WhatsApp',
+      priceLabel: '€100',
+      categoryLabel: 'Voya Rooftop Milan',
+      genres: [isIt ? 'Menù 5 Portate' : '5-Course Menu', isIt ? 'Vini Inclusi' : 'Wine Included'],
+      imageSrc: '/images/events/christmas-2026-posters/natale-voya-rooftop-milano-2026.webp',
+      href: christmasHref,
+      whatsappHref: getConciergeBookingUrl(locale, 'Voya Rooftop Christmas Menu (25 Dec €100)', christmasHref),
+      badge: isIt ? 'NATALE 25 DIC · €100' : 'CHRISTMAS 25 DEC · €100',
+    });
+
     for (const cap of CAPODANNO_EVENTS.slice(0, 4)) {
+      const capHref = capodannoEventPath(cap.slug, locale);
       cards.push({
         id: `vert-cap-${cap.slug}`,
         title: isIt ? cap.titleIt : cap.titleEn,
         dateLabel: '2026-12-31',
         timeLabel: cap.hours || '20:30 – 06:00',
-        priceLabel: `€${cap.priceFromEur || 50}`,
+        priceLabel: `€${cap.priceFromEur || 40}`,
         categoryLabel: cap.venueName,
         genres: ['Cenone / Buffet', 'NYE Party'],
         imageSrc: cap.image,
-        href: `/${locale}/new-years-eve/${cap.slug}`,
-        whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
-          isIt
-            ? `Ciao Nightlife Milan, vorrei info per Capodanno da ${cap.venueName}`
-            : `Hi Nightlife Milan, I'd like NYE info for ${cap.venueName}`
-        )}`,
+        href: capHref,
+        whatsappHref: getConciergeBookingUrl(locale, `${cap.venueName} Capodanno 2027`, capHref),
         badge: isIt ? 'CAPODANNO 31 DIC' : 'NYE 31 DEC',
       });
     }

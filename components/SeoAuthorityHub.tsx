@@ -1,4 +1,6 @@
 import React from 'react';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
+import { localePrefix } from '@/lib/i18n/locales';
 import Link from '@/components/LocalizedLink';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import { getSeoStandard21Copy } from '@/lib/seoStandard21Copy';
@@ -6,9 +8,10 @@ import { getSeoStandard21Copy } from '@/lib/seoStandard21Copy';
 interface SeoAuthorityHubProps {
   lang: LocaleCode;
   pageKey?: string;
+  pagePath?: string;
 }
 
-export default function SeoAuthorityHub({ lang, pageKey }: SeoAuthorityHubProps) {
+export default function SeoAuthorityHub({ lang, pageKey, pagePath }: SeoAuthorityHubProps) {
   const copy = getSeoStandard21Copy(lang, pageKey);
   const mapsDirectionsUrl = new URL('https://www.google.com/maps/dir/');
   mapsDirectionsUrl.searchParams.set('api', '1');
@@ -302,7 +305,11 @@ export default function SeoAuthorityHub({ lang, pageKey }: SeoAuthorityHubProps)
               </dl>
               <div className="mt-5 flex flex-col gap-2.5">
                 <a
-                  href="https://wa.me/393519127047"
+                  href={getConciergeBookingUrl(
+                    lang,
+                    copy.h2Main,
+                    pagePath || `${localePrefix(lang)}${pageKey && pageKey !== '/' ? pageKey : ''}` || '/'
+                  )}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex min-h-[44px] items-center justify-center bg-[#25D366] px-4 py-2.5 font-mono text-xs font-bold uppercase tracking-[0.18em] text-[#050505] transition-colors hover:bg-[#2EE472]"

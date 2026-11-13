@@ -17,6 +17,7 @@ import { VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import { getGuideUiLabels35 } from '@/lib/i18n/flagshipGuides35';
 import type { LocaleCode } from '@/lib/i18n/locales';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 
 // ISR Configuration (1 hour)
 export const revalidate = 3600;
@@ -284,11 +285,7 @@ export default async function GuidePage({ params }: Props) {
     };
   }
 
-  const waUrl = `https://wa.me/393519127047?text=${encodeURIComponent(
-    isIt
-      ? `Ciao Nightlife Milan! Sto leggendo la guida "${title}" e vorrei prenotare un Tavolo VIP o Lista.`
-      : `Hi Nightlife Milan! "${title}" - WhatsApp VIP Concierge`
-  )}`;
+  const waUrl = getConciergeBookingUrl(loc, title, guideUrl);
 
   return (
     <>

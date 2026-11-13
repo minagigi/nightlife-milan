@@ -15,6 +15,7 @@ import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { mockGuides } from '@/lib/data';
 import { getLocalizedText } from '@/lib/seo';
 import type { LocaleCode } from '@/lib/i18n/locales';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 
 export const revalidate = 3600;
 
@@ -451,7 +452,7 @@ export default async function GuidesPage({
             </div>
           </div>
           <a
-            href="https://wa.me/393519127047"
+            href={getConciergeBookingUrl(loc, guideUi.verifiedTitle, guidesHubUrl)}
             target="_blank"
             rel="noopener noreferrer"
             className="shrink-0 px-3.5 py-2 rounded-full bg-champagne text-black text-xs font-bold whitespace-nowrap hover:bg-champagne/90 transition-colors"

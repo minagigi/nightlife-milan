@@ -9,6 +9,7 @@ import { tr } from '@/lib/i18n/t';
 import { getLocaleDef, hreflangAlternates, canonicalPageUrl, localePrefix } from '@/lib/i18n/locales';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getHubSeoMeta35 } from '@/lib/i18n/hubSeoMeta35';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { CONTACT } from '@/config/contact';
 import {
   Sparkles,
@@ -637,11 +638,13 @@ export default async function FootballAfterpartiesPage({
           {/* Dual CTA */}
           <div className="flex flex-wrap items-center gap-4">
             <a
-              href={`https://wa.me/393519127047?text=${encodeURIComponent(
+              href={getConciergeBookingUrl(
+                locale,
                 isIt
-                  ? 'Ciao Concierge Nightlife Milan! Siamo a San Siro per la partita e vorremmo prenotare un Tavolo VIP / Aperitivo Post-Partita.'
-                  : 'Hi Nightlife Milan Concierge! We are attending a match at San Siro and would like to book a Post-Match VIP Table / Aperitivo.'
-              )}`}
+                  ? 'Dopo-Partita San Siro (Tavolo VIP / Aperitivo)'
+                  : 'San Siro Post-Match VIP Table / Aperitivo',
+                canonicalUrl
+              )}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 px-7 py-4 rounded-xl bg-champagne text-black font-sans font-bold text-xs sm:text-sm uppercase tracking-[0.16em] hover:bg-white transition-all shadow-[0_0_35px_rgba(201,168,106,0.4)]"
@@ -851,11 +854,13 @@ export default async function FootballAfterpartiesPage({
 
                   <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-white/10">
                     <a
-                      href={`https://wa.me/393519127047?text=${encodeURIComponent(
+                      href={getConciergeBookingUrl(
+                        locale,
                         isIt
-                          ? `Ciao Nightlife Milan! Vorrei prenotare il Dopo-Partita San Siro da ${club.name.split('(')[0].trim()}.`
-                          : `Hi Nightlife Milan! I'd like to book a San Siro Post-Match table at ${club.nameEn.split('(')[0].trim()}.`
-                      )}`}
+                          ? `Dopo-Partita San Siro · ${club.name.split('(')[0].trim()}`
+                          : `San Siro Post-Match · ${club.nameEn.split('(')[0].trim()}`,
+                        canonicalUrl
+                      )}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-champagne text-black font-sans text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"

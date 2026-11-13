@@ -35,6 +35,8 @@ import {
 } from '@/lib/capodanno/routes';
 import type { CapodannoEventItem } from '@/lib/capodannoEvents';
 import type { OctoberEventRecord } from '@/lib/october-events/types';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
+import { christmasVoyaPath } from '@/lib/christmas/voya35';
 
 type SearchTabId = 'all' | 'clubs' | 'capodanno' | 'events' | 'hubs' | 'guides' | 'zones';
 
@@ -988,14 +990,14 @@ const CAPODANNO_FLAGSHIP_EVENTS_FALLBACK = [
     slug: 'capodanno-voya-rooftop-milano',
     venueName: 'Voya Rooftop Milano (20° Piano)',
     city: 'Milano',
-    address: 'Via Achille Papa 30 · Portello / CityLife',
-    image: '/images/voya-rooftop-milan.webp',
+    address: 'Viale Achille Papa 30 · Portello / CityLife',
+    image: '/images/events/capodanno-2027-posters/capodanno-voya-rooftop-milano.webp',
     priceFromEur: 300,
     titleIt: 'Capodanno 2027 Voya Rooftop Milano · 20° Piano Skyline All-Inclusive',
     titleEn: 'NYE 2027 Voya Rooftop Milan · 20th Floor Skyline All-Inclusive Gala',
-    summaryIt: 'Menu completo di tutto al 20° piano panoramico (300€ a persona) con vista fuochi su tutta Milano',
-    summaryEn: 'Full all-inclusive menu on the 20th panoramic floor (€300/person) overlooking Milan fireworks',
-    searchTerms: 'capodanno voya rooftop 20 piano ventesimo piano skyline fuochi 300 euro',
+    summaryIt: 'Tariffa unica confermata 300€ a persona · Menù 6 portate + Cotechino e Lenticchie · Vino 1 ogni 4 · Vista fuochi 360°',
+    summaryEn: 'Confirmed single rate €300 per person · 6-course menu + Cotechino & Lentils · Wine 1 per 4 · 360° fireworks view',
+    searchTerms: 'capodanno voya rooftop 20 piano ventesimo piano skyline fuochi 300 euro cotechino lenticchie',
   },
   {
     slug: 'capodanno-justme-milano-torre-branca',
@@ -1015,13 +1017,13 @@ const CAPODANNO_FLAGSHIP_EVENTS_FALLBACK = [
     venueName: 'Pineta Club Milano',
     city: 'Milano',
     address: 'Via Messina 38 · Corso Como / Garibaldi',
-    image: '/images/venues/pineta-milano/pineta-milano-ingresso-01.webp',
-    priceFromEur: 50,
-    titleIt: 'Capodanno 2027 Pineta Club Milano · Cenone Cantato & Noche de Perreo',
-    titleEn: 'NYE 2027 Pineta Club Milan · Singing Dinner Show & Reggaeton Party',
-    summaryIt: 'Ingresso Dopocena da 50€ · Cenone Cantato Servito · Tavoli Privé & Bottiglie',
-    summaryEn: 'After-dinner from €50 · Singing Gala Dinner · VIP Bottle Tables',
-    searchTerms: 'capodanno pineta club via messina 38 cenone cantato reggaeton',
+    image: '/images/events/capodanno-2027-posters/capodanno-pineta-milano.webp',
+    priceFromEur: 40,
+    titleIt: 'Capodanno 2027 Moulin Rouge Pineta Club Milano · Da 40€ (Xceed & Gala 160€)',
+    titleEn: 'NYE 2027 Moulin Rouge Pineta Club Milan · From €40 (Xceed & Gala €160)',
+    summaryIt: 'Royal Buffet 40€ · Solo Disco 40€ · Cena di Gala Servita 160€ · Tavoli VIP 300–1.500€ · 20:30–05:00',
+    summaryEn: 'Royal Buffet €40 · Club Entry €40 · Seated Gala €160 · VIP Tables €300–€1,500 · 20:30–05:00',
+    searchTerms: 'capodanno pineta club moulin rouge via messina 38 royal buffet 40 gala 160 xceed reggaeton',
   },
   {
     slug: 'capodanno-aria-club-milano',
@@ -1497,7 +1499,31 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
         };
       });
 
-    const scoredEvents = [...ebItems, ...xceedItems]
+    const voyaChristmasHref = christmasVoyaPath(currentLocale);
+    const voyaChristmasTitle = isIt
+      ? 'Pranzo di Natale 2026 al Voya Rooftop Milano (20° Piano · €100)'
+      : 'Christmas Day Menu 2026 at Voya Rooftop Milan (20th Floor · €100)';
+    const voyaChristmasScore = isBrowsingCategory
+      ? 95
+      : matchTokensScore(
+          `${voyaChristmasTitle} Voya Rooftop Milano`,
+          'natale christmas pranzo cena menu cenone 25 dicembre voya rooftop 20 piano 100 euro modeghili plin',
+          qTokens,
+          fullQuery,
+        );
+    const voyaChristmasItem = {
+      id: 'voya-christmas-2026',
+      title: voyaChristmasTitle,
+      venueName: 'Voya Rooftop Milano (20° Piano)',
+      dateISO: '2026-12-25T12:00:00+01:00',
+      image: '/images/events/christmas-2026-posters/natale-voya-rooftop-milano-2026.webp',
+      priceLabel: '€100',
+      genres: isIt ? 'Menù 5 Portate, Vini Inclusi' : '5-Course Menu, Wine Included',
+      href: voyaChristmasHref,
+      score: voyaChristmasScore,
+    };
+
+    const scoredEvents = [...(romeDayKey('2026-12-25') >= todayKey ? [voyaChristmasItem] : []), ...ebItems, ...xceedItems]
       .filter((item) => item.score > 0)
       .sort((a, b) => (b.score !== a.score ? b.score - a.score : Date.parse(a.dateISO) - Date.parse(b.dateISO)))
       .slice(0, activeTab === 'events' ? 24 : 6);
@@ -1882,7 +1908,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                                 <ArrowUpRight className="w-3.5 h-3.5" />
                               </Link>
                               <a
-                                href={`${CONTACT.whatsapp.link}?text=${encodeURIComponent(waText)}`}
+                                href={getConciergeBookingUrl(currentLocale, club.name, pathname)}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="inline-flex items-center justify-center gap-1.5 py-2 px-3 bg-[#25D366] text-[#050505] hover:bg-[#20bd5a] font-mono text-[10px] font-bold uppercase tabular-nums tracking-[0.06em] transition-colors"
@@ -2060,11 +2086,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                       {ui.empty.resetBtn}
                     </button>
                     <a
-                      href={`${CONTACT.whatsapp.link}?text=${encodeURIComponent(
-                        isIt
-                          ? `Ciao Concierge Nightlife Milan! Sto cercando "${query}" a Milano, potete aiutarmi?`
-                          : `Hi Nightlife Milan Concierge! I am looking for "${query}" in Milan, can you help me?`,
-                      )}`}
+                      href={getConciergeBookingUrl(currentLocale, query || 'Milan Nightlife', pathname)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#25D366] text-[#050505] hover:bg-[#20bd5a] font-mono font-bold uppercase tabular-nums tracking-[0.06em] text-xs hover:bg-[#F6F1E7] transition-colors"
@@ -2150,7 +2172,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                                     {ui.card.openSheet}
                                   </Link>
                                   <a
-                                    href={`${CONTACT.whatsapp.link}?text=${encodeURIComponent(waText)}`}
+                                    href={getConciergeBookingUrl(currentLocale, name, pathname)}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="inline-flex items-center gap-1 px-2.5 py-1 bg-[#25D366] text-[#050505] hover:bg-[#20bd5a] font-mono text-[10px] font-bold uppercase tabular-nums tracking-[0.06em]"
@@ -2488,11 +2510,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                     </span>
                   </div>
                   <a
-                    href={`${CONTACT.whatsapp.link}?text=${encodeURIComponent(
-                      isIt
-                        ? 'Ciao Concierge Nightlife Milan! Vorrei informazioni su tavoli VIP e liste.'
-                        : 'Hi Nightlife Milan Concierge! I would like info about VIP tables and guest lists.',
-                    )}`}
+                    href={getConciergeBookingUrl(currentLocale, undefined, pathname)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#25D366] text-[#050505] hover:bg-[#20bd5a] font-mono font-bold uppercase tabular-nums tracking-[0.06em] text-[11px] hover:bg-[#F6F1E7] transition-colors"

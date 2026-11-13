@@ -1,7 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import Link from '@/components/LocalizedLink';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import Image from 'next/image';
 import {
   MessageCircle,
@@ -149,6 +151,7 @@ const POSITIONS: Record<ZonePositionKey, { labelIt: string; labelEn: string; bot
 
 export function VipQuoteCalculator({ locale = 'it', initialVenueSlug }: { locale?: string; initialVenueSlug?: string }) {
   void initialVenueSlug;
+  const pathname = usePathname();
   const isIt = locale === 'it';
   const [occasion, setOccasion] = useState<OccasionKey>('club-vip');
   const [tier, setTier] = useState<TierKey>('luxury-flagship');
@@ -165,11 +168,11 @@ export function VipQuoteCalculator({ locale = 'it', initialVenueSlug }: { locale
   const tierObj = TIERS[tier];
   const posObj = POSITIONS[position];
 
-  const waText = isIt
-    ? `Ciao Concierge Nightlife Milan! Vorrei un preventivo ufficiale per:\n• Occasione: ${occasionObj.labelIt}\n• Fascia Locali: ${tierObj.labelIt} (${tierObj.venuesIt})\n• Posizione: ${posObj.labelIt}\n• Numero Ospiti: ${guests} persone\n• Budget stimato: ~€${totalEstimate} (€${perPerson}/persona in 100% credito bottiglie)`
-    : `Hi Nightlife Milan Concierge! I'd like an official quote for:\n• Occasion: ${occasionObj.labelEn}\n• Venue Tier: ${tierObj.labelEn} (${tierObj.venuesEn})\n• Table Area: ${posObj.labelEn}\n• Group Size: ${guests} guests\n• Estimated Spend: ~€${totalEstimate} (€${perPerson}/person in 100% bottle credit)`;
+  const quoteSummary = isIt
+    ? `${occasionObj.labelIt} · ${tierObj.labelIt} · ${posObj.labelIt} · ${guests} ospiti (~€${totalEstimate})`
+    : `${occasionObj.labelEn} · ${tierObj.labelEn} · ${posObj.labelEn} · ${guests} guests (~€${totalEstimate})`;
 
-  const waHref = `${CONTACT.whatsapp.link}?text=${encodeURIComponent(waText)}`;
+  const waHref = getConciergeBookingUrl(locale, quoteSummary, pathname || (locale === 'en' ? '/' : `/${locale}`));
 
   return (
     <section
@@ -673,6 +676,7 @@ const WEEKLY_SCHEDULE = [
 ];
 
 export function WeeklyNightlifeNavigator({ locale }: { locale: string }) {
+  const pathname = usePathname();
   const isIt = locale === 'it';
   const lp = localePrefix(locale);
   const [activeDay, setActiveDay] = useState<string>('fri');
@@ -764,11 +768,11 @@ export function WeeklyNightlifeNavigator({ locale }: { locale: string }) {
                 {isIt ? 'Scheda Club →' : 'Club Profile →'}
               </Link>
               <a
-                href={`${CONTACT.whatsapp.link}?text=${encodeURIComponent(
-                  isIt
-                    ? `Ciao! Vorrei prenotare per ${current.labelIt} sera da ${club.name}.`
-                    : `Hi! I'd like to book for ${current.labelEn} night at ${club.name}.`
-                )}`}
+                href={getConciergeBookingUrl(
+                  locale,
+                  `${isIt ? current.labelIt : current.labelEn} · ${club.name}`,
+                  pathname || lp || '/'
+                )}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="ml-auto text-xs font-bold text-champagne hover:text-white transition-colors"
@@ -906,6 +910,7 @@ export function EntryFormulaMatrix({ locale }: { locale: string }) {
 }
 
 export function PrioritySixShowcase({ locale }: { locale: string }) {
+  const pathname = usePathname();
   const isIt = locale === 'it';
   const lp = localePrefix(locale);
 
@@ -1047,11 +1052,7 @@ export function PrioritySixShowcase({ locale }: { locale: string }) {
                   {isIt ? 'Guida & Prezzi' : 'Guide & Prices'}
                 </Link>
                 <a
-                  href={`${CONTACT.whatsapp.link}?text=${encodeURIComponent(
-                    isIt
-                      ? `Ciao! Vorrei prenotare un Tavolo VIP o Aperitivo da ${club.name}.`
-                      : `Hi! I'd like to book a VIP Table or Aperitivo at ${club.name}.`
-                  )}`}
+                  href={getConciergeBookingUrl(locale, club.name, pathname || lp || '/')}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="ml-auto px-4 py-2 rounded-lg bg-[#25D366] text-[#050505] text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
@@ -1281,6 +1282,7 @@ const SAN_SIRO_VENUES = [
 ];
 
 export function SanSiroMatchAfterpartyFinder({ locale = 'it' }: { locale?: string }) {
+  const pathname = usePathname();
   const isIt = locale === 'it';
   const lp = localePrefix(locale);
 
@@ -1301,11 +1303,11 @@ export function SanSiroMatchAfterpartyFinder({ locale = 'it' }: { locale?: strin
 
   const topPick = orderedVenues[0];
 
-  const waText = isIt
-    ? `Ciao Concierge Nightlife Milan! Siamo a San Siro e vorremmo prenotare il Dopo-Partita:\n• Partita: ${compObj.labelIt}\n• Fascia Fischio Finale: ${whistleObj.labelIt}\n• Formula scelta: ${formulaObj.labelIt}\n• Locale top consigliato: ${topPick.name}\n• Ospiti: ${guests} persone\n• Orario arrivo stimato: ${whistleObj.arrivalWindow}`
-    : `Hi Nightlife Milan Concierge! We are attending a match at San Siro and would like to book our Afterparty:\n• Match: ${compObj.labelEn}\n• Final Whistle Slot: ${whistleObj.labelEn}\n• Preferred Formula: ${formulaObj.labelEn}\n• Top Recommended Venue: ${topPick.name}\n• Group Size: ${guests} guests\n• Estimated Arrival: ${whistleObj.arrivalWindow}`;
+  const afterpartyContext = isIt
+    ? `Dopo-Partita San Siro · ${compObj.labelIt} · ${topPick.name} (${guests} ospiti)`
+    : `San Siro Afterparty · ${compObj.labelEn} · ${topPick.name} (${guests} guests)`;
 
-  const waHref = `${CONTACT.whatsapp.link}?text=${encodeURIComponent(waText)}`;
+  const waHref = getConciergeBookingUrl(locale, afterpartyContext, pathname || lp || '/');
 
   return (
     <section
@@ -1589,11 +1591,11 @@ export function SanSiroMatchAfterpartyFinder({ locale = 'it' }: { locale?: strin
                   {isIt ? 'Scheda Club →' : 'Club Guide →'}
                 </Link>
                 <a
-                  href={`${CONTACT.whatsapp.link}?text=${encodeURIComponent(
-                    isIt
-                      ? `Ciao! Siamo alla partita a San Siro (${compObj.labelIt}) e vorremmo prenotare da ${v.name} per ${guests} persone.`
-                      : `Hi! We are at the San Siro match (${compObj.labelEn}) and would like to book at ${v.name} for ${guests} guests.`
-                  )}`}
+                  href={getConciergeBookingUrl(
+                    locale,
+                    `San Siro (${isIt ? compObj.labelIt : compObj.labelEn}) · ${v.name} (${guests})`,
+                    pathname || lp || '/'
+                  )}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="ml-auto px-3 py-1.5 rounded-lg bg-[#25D366] text-[#050505] text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
@@ -1776,6 +1778,7 @@ const CHECKER_OUTFITS: Record<
 };
 
 export function DressCodeInstantChecker({ locale }: { locale: string }) {
+  const pathname = usePathname();
   const isIt = locale === 'it';
   const lp = localePrefix(locale);
 
@@ -1878,11 +1881,11 @@ export function DressCodeInstantChecker({ locale }: { locale: string }) {
 
   const diagnosis = getInsiderDiagnosis();
 
-  const waMessage = isIt
-    ? `Ciao Concierge Nightlife Milan! Ho usato il Dress Code & Door Selection Checker:\n• Locale: ${venue.name}\n• Gruppo: ${group.labelIt}\n• Outfit: ${outfit.labelIt}\n• Indice Lista calcolato: ${clampedScore}% (con Tavolo VIP: ${vipTableScore}%)\nVorrei ricevere accredito in lista o bloccare un Tavolo VIP / Royal Aperitivo garantito!`
-    : `Hi Nightlife Milan Concierge! I used the Dress Code & Door Selection Checker:\n• Venue: ${venue.name}\n• Group: ${group.labelEn}\n• Outfit: ${outfit.labelEn}\n• Calculated Guestlist Score: ${clampedScore}% (with VIP Table: ${vipTableScore}%)\nI would like guestlist accreditation or a guaranteed VIP Table / Royal Aperitivo!`;
+  const checkerContext = isIt
+    ? `Dress Code ${venue.name} · ${group.labelIt} · ${outfit.labelIt}`
+    : `Dress Code ${venue.name} · ${group.labelEn} · ${outfit.labelEn}`;
 
-  const waUrl = `${CONTACT.whatsapp.link}?text=${encodeURIComponent(waMessage)}`;
+  const waUrl = getConciergeBookingUrl(locale, checkerContext, pathname || lp || '/');
 
   return (
     <section
@@ -2784,6 +2787,7 @@ const COMMUTE_ORIGINS: Record<CommuteOriginKey, CommuteOriginDef> = {
 };
 
 export function NeighborhoodCommutePlanner({ locale }: { locale: string }) {
+  const pathname = usePathname();
   const isIt = locale === 'it';
   const lp = localePrefix(locale);
 
@@ -2914,7 +2918,11 @@ export function NeighborhoodCommutePlanner({ locale }: { locale: string }) {
                   {isIt ? 'Scheda Club →' : 'Club Profile →'}
                 </Link>
                 <a
-                  href={`${CONTACT.whatsapp.link}?text=${encodeURIComponent(waTransferMsg)}`}
+                  href={getConciergeBookingUrl(
+                    locale,
+                    `VIP Table & Transfer -> ${route.name}`,
+                    pathname || lp || '/'
+                  )}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="ml-auto inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#25D366] text-[#050505] text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"

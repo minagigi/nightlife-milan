@@ -480,28 +480,38 @@ const SEEDS: any[] = [
   ],
   [
     'capodanno-pineta-milano', 'milano-club', 'MI', 'Milano', 'Pineta Milano',
-    'Via Messina 38 (Porta Garibaldi / Cenisio), 20154 Milano', '20:30 – 05:00', '/images/events/capodanno-2027-posters/capodanno-pineta-milano.webp', 50,
-    'Dopocena 50€ · Royal Buffet 70€ · Cenone Servito 140–160€ · Tavoli VIP 350–1.200€',
-    'After-Dinner €50 · Royal Buffet €70 · Served Dinner €140–€160 · VIP Tables €350–€1,200',
-    'Capodanno Pineta Milano 2027: Gran Galà Dinner Show & Luxury Club',
-    'Pineta Milan New Year’s Eve 2027: Crystal Gala Dinner Show & Luxury Club',
-    'Live Singing Dinner Show, Sax Performer & Commercial / Vocal House DJ Set',
-    'Live Singing Dinner Show, Sax Performer & Commercial / Vocal House DJ Set',
-    'Elegante Glamour (camicia obbligatoria uomo)', 'Glamour Elegant (collared shirt required for men)',
+    'Via Messina 38 (Porta Garibaldi / Cenisio), 20154 Milano', '20:30 – 05:00', '/images/events/capodanno-2027-posters/capodanno-pineta-milano.webp', 40,
+    'Royal Buffet 40€ · Solo Club (23:00) 40€ · Cena di Gala 160€ · Tavoli VIP 300–1.500€',
+    'Royal Buffet €40 · Club Entry (23:00) €40 · Seated Gala Dinner €160 · VIP Tables €300–€1,500',
+    'Capodanno 2027 Pineta Milano: Moulin Rouge NYE (Gala 160€, Buffet & Club 40€)',
+    'New Year’s Eve 2027 Pineta Milan: Moulin Rouge NYE (€160 Gala, €40 Buffet & Club)',
+    'Main Room (House, Commerciale, Hit 2000) & Urban Room (Hip-Hop, Reggaeton, Latin) · 2 Spettacoli Burlesque Dinner Show',
+    'Main Room (House, Commercial, 2000s Hits) & Urban Room (Hip-Hop, Reggaeton, Latin) · 2 Live Burlesque Shows',
+    'Elegante / Red & Black Glam Moulin Rouge', 'Smart Elegant / Moulin Rouge Red & Black Glam',
     [
-      ['Ingresso Dopocena (dalle 23:30)', '50€', 'Include 1 drink a scelta'],
-      ['Royal Buffet (dalle 20:30)', '70€', 'Gran buffet caldo/freddo, 1 drink e calice di spumante per il brindisi'],
-      ['Gran Cenone Servito Dinner Show (dalle 20:30)', '140€ – 160€', 'Menu completo di mare/terra, 1 bottiglia di vino ogni 3 persone, flûte di mezzanotte e serata'],
-      ['Tavolo VIP Pista / Privé', '350€ – 1.200€', 'Bottiglie incluse a scelta dal listino per 5–10 pass']
+      ['Cena di Gala Servita (ore 21:00)', '160€', 'Menu completo servito, acqua, caffè, 1 bottiglia di vino ogni 3 ospiti, 2 show Burlesque + DJ set'],
+      ['Royal Buffet (ore 20:30)', '40€', 'Buffet completo caldo/freddo con cotechino e lenticchie, flûte di benvenuto, 1 drink e 2 show Burlesque'],
+      ['Solo Discoteca (dalle 23:00)', '40€', 'Ingresso nelle 2 sale (Main Room & Urban Room) con 1 drink e brindisi di mezzanotte inclusi'],
+      ['Tavolo Side Floor Outdoor (5 pax)', '300€', 'Tavolo riservato area esterna con ingresso prioritario e servizio bottiglie'],
+      ['Tavolo Dance Floor (10 pax)', '600€', 'Tavolo riservato a bordo pista centrale Main Room'],
+      ['Tavolo Privé Balcony (10 pax)', '900€', 'Tavolo rialzato in balconata panoramica sugli spettacoli Burlesque'],
+      ['Tavolo Dom Pérignon Area (10 pax)', '1.000€', 'Area dedicata Dom Pérignon con concierge prioritario'],
+      ['Tavolo Terrace (10 pax)', '1.200€', 'Tavolo area terrazza riservata per 10 ospiti'],
+      ['Tavolo VIP Privé Indoor (10 pax)', '1.500€', 'Tavolo VIP top in area Privé interna del Pineta Milano'],
     ],
     [
-      ['After-Dinner Entry (from 23:30)', '€50', 'Includes 1 long drink'],
-      ['Royal Buffet (from 20:30)', '€70', 'Hot and cold gala buffet, 1 drink and midnight sparkling toast'],
-      ['Served Gala Dinner Show (from 20:30)', '€140 – €160', 'Full multi-course menu, 1 wine bottle per 3 guests, midnight toast and clubbing'],
-      ['Dancefloor / VIP Privé Table', '€350 – €1,200', '100% bottle credit for 5–10 VIP passes']
+      ['Seated Gala Dinner (from 21:00)', '€160', 'Full multi-course menu, water, coffee, 1 wine bottle per 3 guests, 2 Burlesque shows + DJ set'],
+      ['Royal Buffet (from 20:30)', '€40', 'Hot & cold royal buffet with cotechino & lentils, welcome flûte, 1 drink and 2 Burlesque shows'],
+      ['Club Entry Only (from 23:00)', '€40', 'Party entry across Main Room & Urban Room with 1 drink and midnight toast'],
+      ['Side Floor Outdoor Table (5 guests)', '€300', 'Reserved outdoor zone table with skip-the-line access and bottle service'],
+      ['Dance Floor Table (10 guests)', '€600', 'Reserved table on the Main Room central dance floor'],
+      ['Privé Balcony Table (10 guests)', '€900', 'Elevated balcony table overlooking the Burlesque stage'],
+      ['Dom Pérignon Area Table (10 guests)', '€1,000', 'Dedicated luxury Dom Pérignon zone with priority concierge'],
+      ['Terrace Table (10 guests)', '€1,200', 'Reserved terrace area table for 10 guests'],
+      ['VIP Privé Indoor Table (10 guests)', '€1,500', 'Flagship indoor VIP Privé booth inside Pineta Milano'],
     ],
-    'Lampadari di cristallo, specchi dorati e l’inconfondibile stile Pineta Milano Marittima nel cuore di Milano. Una notte di San Silvestro che unisce cena cantata ad altissimo coinvolgimento e clubbing glamour fino alle 05:00.',
-    'Crystal chandeliers, mirrored walls, and the signature Pineta glamour. Combines an interactive singing dinner show with a high-energy Commercial and Vocal House club night.'
+    'La notte di San Silvestro al Pineta Milano celebra il 2027 con l’esclusivo tema Moulin Rouge in Via Messina 38: Cena di Gala da 160€ con due spettacoli Burlesque dal vivo, Royal Buffet e ingresso party da 40€, doppia sala Main Room e Urban Room fino alle 05:00.',
+    'Pineta Milano hosts an exclusive Moulin Rouge New Year’s Eve 2027 production at Via Messina 38: €160 Seated Gala Dinner with 2 live Burlesque shows, €40 Royal Buffet and €40 Club Entry, Main Room & Urban Room until 05:00.'
   ],
   [
     'capodanno-aria-club-milano', 'milano-club', 'MI', 'Milano', 'Aria Club Milano',
@@ -652,7 +662,7 @@ const SEEDS: any[] = [
   ["capodanno-terrazza-duomo-21", "milano-club", "MI", "Milano", "Terrazza Duomo 21", "Centro / Distretto Eventi, Milano", "20:30 – 05:00", "/images/events/capodanno-2027-posters/capodanno-terrazza-duomo-21.webp", 40, "Dopocena 40–50€ · Royal Buffet 65€ · Cenone 130€ · Tavoli VIP 350–1.200€", "After-Dinner €40–€50 · Royal Buffet €65 · Gala Dinner €130 · VIP Tables €350–€1,200", "Capodanno Terrazza Duomo 21 2027: Gran Galà, Musica & Festa di San Silvestro", "Terrazza Duomo 21 New Year’s Eve 2027: Gala Dinner, Live Show & Countdown Party", "Dinner Show, DJ Set Commerciale, House & Party di Mezzanotte", "Dinner Show, Commercial, House & Midnight Countdown Party", "Elegante / Smart Chic di San Silvestro", "New Year’s Eve Smart Chic / Elegant", [["Ingresso Dopocena / Serata (dalle 23:00)", "40€", "Include 1 drink e accesso al countdown di mezzanotte"], ["Royal Buffet / Apericena di Gala (dalle 20:30)", "70€", "Buffet caldo/freddo, drink e flûte per il brindisi"], ["Gran Cenone Servito di San Silvestro (dalle 20:00)", "140€", "Menu completo servito al tavolo con vini inclusi e festa"], ["Tavolo VIP Privé con Bottiglie", "350€ – 1.200€", "100% credito in bottiglie premium e ingresso prioritario salta-fila"]], [["After-Dinner / Party Entry (from 23:00)", "€40", "Includes 1 drink and midnight countdown access"], ["Royal Gala Buffet (from 20:30)", "€70", "Gala buffet, drink and midnight sparkling toast"], ["Served New Year’s Eve Gala Dinner (from 20:00)", "€140", "Full multi-course menu with wines and party access"], ["VIP Privé Table with Bottle Service", "€350 – €1,200", "100% credit in premium bottles with skip-the-line VIP admission"]], "Capodanno Terrazza Duomo 21 2027: Gran Galà, Musica & Festa di San Silvestro presso Terrazza Duomo 21 (Centro / Distretto Eventi, Milano, Milano). Festeggia il 31 dicembre 2026 con cenone, spettacolo dal vivo, brindisi di mezzanotte e DJ set fino all’alba. Info e prenotazioni ufficiali via Concierge WhatsApp +39 351 912 7047.", "Terrazza Duomo 21 New Year’s Eve 2027: Gala Dinner, Live Show & Countdown Party at Terrazza Duomo 21 (Centro / Distretto Eventi, Milano, Milano). Celebrate December 31, 2026 with gala dining, live entertainment, midnight countdown, and DJ sets until dawn. Official bookings via WhatsApp Concierge +39 351 912 7047."],
   ["capodanno-ceresio-7-milano", "milano-club", "MI", "Milano", "Ceresio 7 Milano", "Centro / Distretto Eventi, Milano", "20:30 – 05:00", "/images/events/capodanno-2027-posters/capodanno-ceresio-7-milano.webp", 40, "Dopocena 40–50€ · Royal Buffet 65€ · Cenone 130€ · Tavoli VIP 350–1.200€", "After-Dinner €40–€50 · Royal Buffet €65 · Gala Dinner €130 · VIP Tables €350–€1,200", "Capodanno Ceresio 7 Milano 2027: Gran Galà, Musica & Festa di San Silvestro", "Ceresio 7 Milano New Year’s Eve 2027: Gala Dinner, Live Show & Countdown Party", "Dinner Show, DJ Set Commerciale, House & Party di Mezzanotte", "Dinner Show, Commercial, House & Midnight Countdown Party", "Elegante / Smart Chic di San Silvestro", "New Year’s Eve Smart Chic / Elegant", [["Ingresso Dopocena / Serata (dalle 23:00)", "40€", "Include 1 drink e accesso al countdown di mezzanotte"], ["Royal Buffet / Apericena di Gala (dalle 20:30)", "70€", "Buffet caldo/freddo, drink e flûte per il brindisi"], ["Gran Cenone Servito di San Silvestro (dalle 20:00)", "140€", "Menu completo servito al tavolo con vini inclusi e festa"], ["Tavolo VIP Privé con Bottiglie", "350€ – 1.200€", "100% credito in bottiglie premium e ingresso prioritario salta-fila"]], [["After-Dinner / Party Entry (from 23:00)", "€40", "Includes 1 drink and midnight countdown access"], ["Royal Gala Buffet (from 20:30)", "€70", "Gala buffet, drink and midnight sparkling toast"], ["Served New Year’s Eve Gala Dinner (from 20:00)", "€140", "Full multi-course menu with wines and party access"], ["VIP Privé Table with Bottle Service", "€350 – €1,200", "100% credit in premium bottles with skip-the-line VIP admission"]], "Capodanno Ceresio 7 Milano 2027: Gran Galà, Musica & Festa di San Silvestro presso Ceresio 7 Milano (Centro / Distretto Eventi, Milano, Milano). Festeggia il 31 dicembre 2026 con cenone, spettacolo dal vivo, brindisi di mezzanotte e DJ set fino all’alba. Info e prenotazioni ufficiali via Concierge WhatsApp +39 351 912 7047.", "Ceresio 7 Milano New Year’s Eve 2027: Gala Dinner, Live Show & Countdown Party at Ceresio 7 Milano (Centro / Distretto Eventi, Milano, Milano). Celebrate December 31, 2026 with gala dining, live entertainment, midnight countdown, and DJ sets until dawn. Official bookings via WhatsApp Concierge +39 351 912 7047."],
   ["capodanno-radio-rooftop-milano", "milano-club", "MI", "Milano", "Radio Rooftop Milano", "Centro / Distretto Eventi, Milano", "20:30 – 05:00", "/images/events/capodanno-2027-posters/capodanno-radio-rooftop-milano.webp", 40, "Dopocena 40–50€ · Royal Buffet 65€ · Cenone 130€ · Tavoli VIP 350–1.200€", "After-Dinner €40–€50 · Royal Buffet €65 · Gala Dinner €130 · VIP Tables €350–€1,200", "Capodanno Radio Rooftop Milano 2027: Gran Galà, Musica & Festa di San Silvestro", "Radio Rooftop Milano New Year’s Eve 2027: Gala Dinner, Live Show & Countdown Party", "Dinner Show, DJ Set Commerciale, House & Party di Mezzanotte", "Dinner Show, Commercial, House & Midnight Countdown Party", "Elegante / Smart Chic di San Silvestro", "New Year’s Eve Smart Chic / Elegant", [["Ingresso Dopocena / Serata (dalle 23:00)", "40€", "Include 1 drink e accesso al countdown di mezzanotte"], ["Royal Buffet / Apericena di Gala (dalle 20:30)", "70€", "Buffet caldo/freddo, drink e flûte per il brindisi"], ["Gran Cenone Servito di San Silvestro (dalle 20:00)", "140€", "Menu completo servito al tavolo con vini inclusi e festa"], ["Tavolo VIP Privé con Bottiglie", "350€ – 1.200€", "100% credito in bottiglie premium e ingresso prioritario salta-fila"]], [["After-Dinner / Party Entry (from 23:00)", "€40", "Includes 1 drink and midnight countdown access"], ["Royal Gala Buffet (from 20:30)", "€70", "Gala buffet, drink and midnight sparkling toast"], ["Served New Year’s Eve Gala Dinner (from 20:00)", "€140", "Full multi-course menu with wines and party access"], ["VIP Privé Table with Bottle Service", "€350 – €1,200", "100% credit in premium bottles with skip-the-line VIP admission"]], "Capodanno Radio Rooftop Milano 2027: Gran Galà, Musica & Festa di San Silvestro presso Radio Rooftop Milano (Centro / Distretto Eventi, Milano, Milano). Festeggia il 31 dicembre 2026 con cenone, spettacolo dal vivo, brindisi di mezzanotte e DJ set fino all’alba. Info e prenotazioni ufficiali via Concierge WhatsApp +39 351 912 7047.", "Radio Rooftop Milano New Year’s Eve 2027: Gala Dinner, Live Show & Countdown Party at Radio Rooftop Milano (Centro / Distretto Eventi, Milano, Milano). Celebrate December 31, 2026 with gala dining, live entertainment, midnight countdown, and DJ sets until dawn. Official bookings via WhatsApp Concierge +39 351 912 7047."],
-  ["capodanno-voya-rooftop-milano", "milano-club", "MI", "Milano", "Voya Rooftop Milan (20° Piano)", "Viale Achille Papa 30 (Portello / CityLife), 20149 Milano", "20:00 – 05:00", "/images/events/capodanno-2027-posters/capodanno-voya-rooftop-milano.webp", 80, "Dopocena 80€ · Menu Completo All-Inclusive 300€ · Tavoli VIP Sky 500–2.500€", "After-Dinner €80 · All-Inclusive Full Menu €300 · Sky VIP Tables €500–€2,500", "Capodanno Voya Rooftop Milano 2027: Il Capodanno Rooftop #1 al 20° Piano", "Voya Rooftop Milan NYE 2027: #1 Panoramic 20th-Floor Skyline Gala", "Skyline Gala Dinner Show al 20° Piano & DJ Set House / Commercial vista Grattacieli", "20th-Floor Skyline Gala Dinner Show & House / Commercial DJ Set", "Black Tie / Elegante Panoramico", "Black Tie / Skyline Elegance", [["Ingresso Dopocena / Serata (dalle 23:00)", "80€", "Include 1 drink e accesso al countdown di mezzanotte"], ["Royal Buffet / Apericena di Gala (dalle 20:30)", "70€", "Buffet caldo/freddo, drink e flûte per il brindisi"], ["Gran Cenone Servito di San Silvestro (dalle 20:00)", "140€", "Menu completo servito al tavolo con vini inclusi e festa"], ["Tavolo VIP Privé con Bottiglie", "350€ – 1.200€", "100% credito in bottiglie premium e ingresso prioritario salta-fila"]], [["After-Dinner / Party Entry (from 23:00)", "€80", "Includes 1 drink and midnight countdown access"], ["Royal Gala Buffet (from 20:30)", "€70", "Gala buffet, drink and midnight sparkling toast"], ["Served New Year’s Eve Gala Dinner (from 20:00)", "€140", "Full multi-course menu with wines and party access"], ["VIP Privé Table with Bottle Service", "€350 – €1,200", "100% credit in premium bottles with skip-the-line VIP admission"]], "Capodanno Voya Rooftop Milano 2027: Il Capodanno Rooftop #1 al 20° Piano presso Voya Rooftop Milan (20° Piano) (Viale Achille Papa 30 (Portello / CityLife), 20149 Milano, Milano). Festeggia il 31 dicembre 2026 con cenone, spettacolo dal vivo, brindisi di mezzanotte e DJ set fino all’alba. Info e prenotazioni ufficiali via Concierge WhatsApp +39 351 912 7047.", "Voya Rooftop Milan NYE 2027: #1 Panoramic 20th-Floor Skyline Gala at Voya Rooftop Milan (20° Piano) (Viale Achille Papa 30 (Portello / CityLife), 20149 Milano, Milano). Celebrate December 31, 2026 with gala dining, live entertainment, midnight countdown, and DJ sets until dawn. Official bookings via WhatsApp Concierge +39 351 912 7047."],
+  ["capodanno-voya-rooftop-milano", "milano-club", "MI", "Milano", "Voya Rooftop Milan (20° Piano)", "Viale Achille Papa 30 (Portello / CityLife), 20149 Milano", "20:00 – 05:00", "/images/events/capodanno-2027-posters/capodanno-voya-rooftop-milano.webp", 300, "Cenone Ufficiale di Capodanno & DJ Set 300€ a persona (All-Inclusive)", "Official New Year's Eve Dinner & DJ Set €300 per person (All-Inclusive)", "Capodanno Voya Rooftop Milano 2027: Cenone & DJ Set al 20° Piano (300€)", "Voya Rooftop Milan NYE 2027: 20th-Floor Dinner & DJ Set (€300)", "Restaurant & DJ Set al 20° Piano (85m) · Panorama a 360° sui Fuochi di Milano", "20th-Floor Restaurant & DJ Set (85m) · 360° Fireworks Skyline View", "Black Tie / Elegante Panoramico", "Black Tie / Skyline Elegance", [["Cenone Ufficiale di Capodanno & DJ Set", "300€", "Menu completo 6 portate + Cotechino e Lenticchie dopo la mezzanotte, 1 bottiglia di vino ogni 4 persone, brindisi di mezzanotte e acqua inclusi. Prepagamento 100% su disponibilità confermata via Concierge WhatsApp +39 351 912 7047."]], [["Official New Year's Eve Dinner & DJ Set", "€300", "Full 6-course gala menu + After-Midnight Cotechino & Lentils, 1 bottle of wine every 4 people, midnight toast & water included. 100% prepayment after availability check via Concierge WhatsApp +39 351 912 7047."]], "Capodanno 2027 al Voya Rooftop Milano (20° Piano, 85m di altezza, Viale Achille Papa 30): Restaurant & DJ Set con vista panoramica a 360° sui fuochi d'artificio di Milano. Tariffa ufficiale unica 300€ a persona con menu completo 6 portate, cotechino e lenticchie dopo la mezzanotte, brindisi, acqua e 1 bottiglia di vino ogni 4 persone. Disponibilità 24/7 su WhatsApp +39 351 912 7047 (prepagamento 100% dopo conferma).", "New Year's Eve 2027 at Voya Rooftop Milan (20th Floor, 85m, Viale Achille Papa 30): Restaurant & DJ Set with 360° panoramic view over Milan's fireworks. Single official rate €300 per person with full 6-course gala menu, after-midnight cotechino and lentils, midnight toast, water, and 1 bottle of wine every 4 people. 24/7 availability check on WhatsApp +39 351 912 7047 (100% prepayment after confirmation)."],
   ["capodanno-hotel-principe-di-savoia-milano", "milano-club", "MI", "Milano", "Hotel Principe Di Savoia Milano", "Centro / Distretto Eventi, Milano", "20:30 – 05:00", "/images/events/capodanno-2027-posters/capodanno-hotel-principe-di-savoia-milano.webp", 40, "Dopocena 40–50€ · Royal Buffet 65€ · Cenone 130€ · Tavoli VIP 350–1.200€", "After-Dinner €40–€50 · Royal Buffet €65 · Gala Dinner €130 · VIP Tables €350–€1,200", "Capodanno Hotel Principe Di Savoia Milano 2027: Gran Galà, Musica & Festa di San Silvestro", "Hotel Principe Di Savoia Milano New Year’s Eve 2027: Gala Dinner, Live Show & Countdown Party", "Dinner Show, DJ Set Commerciale, House & Party di Mezzanotte", "Dinner Show, Commercial, House & Midnight Countdown Party", "Elegante / Smart Chic di San Silvestro", "New Year’s Eve Smart Chic / Elegant", [["Ingresso Dopocena / Serata (dalle 23:00)", "40€", "Include 1 drink e accesso al countdown di mezzanotte"], ["Royal Buffet / Apericena di Gala (dalle 20:30)", "70€", "Buffet caldo/freddo, drink e flûte per il brindisi"], ["Gran Cenone Servito di San Silvestro (dalle 20:00)", "140€", "Menu completo servito al tavolo con vini inclusi e festa"], ["Tavolo VIP Privé con Bottiglie", "350€ – 1.200€", "100% credito in bottiglie premium e ingresso prioritario salta-fila"]], [["After-Dinner / Party Entry (from 23:00)", "€40", "Includes 1 drink and midnight countdown access"], ["Royal Gala Buffet (from 20:30)", "€70", "Gala buffet, drink and midnight sparkling toast"], ["Served New Year’s Eve Gala Dinner (from 20:00)", "€140", "Full multi-course menu with wines and party access"], ["VIP Privé Table with Bottle Service", "€350 – €1,200", "100% credit in premium bottles with skip-the-line VIP admission"]], "Capodanno Hotel Principe Di Savoia Milano 2027: Gran Galà, Musica & Festa di San Silvestro presso Hotel Principe Di Savoia Milano (Centro / Distretto Eventi, Milano, Milano). Festeggia il 31 dicembre 2026 con cenone, spettacolo dal vivo, brindisi di mezzanotte e DJ set fino all’alba. Info e prenotazioni ufficiali via Concierge WhatsApp +39 351 912 7047.", "Hotel Principe Di Savoia Milano New Year’s Eve 2027: Gala Dinner, Live Show & Countdown Party at Hotel Principe Di Savoia Milano (Centro / Distretto Eventi, Milano, Milano). Celebrate December 31, 2026 with gala dining, live entertainment, midnight countdown, and DJ sets until dawn. Official bookings via WhatsApp Concierge +39 351 912 7047."],
   ["capodanno-terrazza-gallia-excelsior-milano", "milano-club", "MI", "Milano", "Terrazza Gallia Excelsior Milano", "Centro / Distretto Eventi, Milano", "20:30 – 05:00", "/images/events/capodanno-2027-posters/capodanno-terrazza-gallia-excelsior-milano.webp", 40, "Dopocena 40–50€ · Royal Buffet 65€ · Cenone 130€ · Tavoli VIP 350–1.200€", "After-Dinner €40–€50 · Royal Buffet €65 · Gala Dinner €130 · VIP Tables €350–€1,200", "Capodanno Terrazza Gallia Excelsior Milano 2027: Gran Galà, Musica & Festa di San Silvestro", "Terrazza Gallia Excelsior Milano New Year’s Eve 2027: Gala Dinner, Live Show & Countdown Party", "Dinner Show, DJ Set Commerciale, House & Party di Mezzanotte", "Dinner Show, Commercial, House & Midnight Countdown Party", "Elegante / Smart Chic di San Silvestro", "New Year’s Eve Smart Chic / Elegant", [["Ingresso Dopocena / Serata (dalle 23:00)", "40€", "Include 1 drink e accesso al countdown di mezzanotte"], ["Royal Buffet / Apericena di Gala (dalle 20:30)", "70€", "Buffet caldo/freddo, drink e flûte per il brindisi"], ["Gran Cenone Servito di San Silvestro (dalle 20:00)", "140€", "Menu completo servito al tavolo con vini inclusi e festa"], ["Tavolo VIP Privé con Bottiglie", "350€ – 1.200€", "100% credito in bottiglie premium e ingresso prioritario salta-fila"]], [["After-Dinner / Party Entry (from 23:00)", "€40", "Includes 1 drink and midnight countdown access"], ["Royal Gala Buffet (from 20:30)", "€70", "Gala buffet, drink and midnight sparkling toast"], ["Served New Year’s Eve Gala Dinner (from 20:00)", "€140", "Full multi-course menu with wines and party access"], ["VIP Privé Table with Bottle Service", "€350 – €1,200", "100% credit in premium bottles with skip-the-line VIP admission"]], "Capodanno Terrazza Gallia Excelsior Milano 2027: Gran Galà, Musica & Festa di San Silvestro presso Terrazza Gallia Excelsior Milano (Centro / Distretto Eventi, Milano, Milano). Festeggia il 31 dicembre 2026 con cenone, spettacolo dal vivo, brindisi di mezzanotte e DJ set fino all’alba. Info e prenotazioni ufficiali via Concierge WhatsApp +39 351 912 7047.", "Terrazza Gallia Excelsior Milano New Year’s Eve 2027: Gala Dinner, Live Show & Countdown Party at Terrazza Gallia Excelsior Milano (Centro / Distretto Eventi, Milano, Milano). Celebrate December 31, 2026 with gala dining, live entertainment, midnight countdown, and DJ sets until dawn. Official bookings via WhatsApp Concierge +39 351 912 7047."],
   ["capodanno-hotel-all-inclusive-milano-sheraton-melia-ripamonti", "milano-club", "MI", "Milano", "Hotel All Inclusive Milano Sheraton Melia Ripamonti", "Centro / Distretto Eventi, Milano", "20:30 – 05:00", "/images/events/capodanno-2027-posters/capodanno-hotel-all-inclusive-milano-sheraton-melia-ripamonti.webp", 40, "Dopocena 40–50€ · Royal Buffet 65€ · Cenone 130€ · Tavoli VIP 350–1.200€", "After-Dinner €40–€50 · Royal Buffet €65 · Gala Dinner €130 · VIP Tables €350–€1,200", "Capodanno Hotel All Inclusive Milano Sheraton Melia Ripamonti 2027: Gran Galà, Musica & Festa di San Silvestro", "Hotel All Inclusive Milano Sheraton Melia Ripamonti New Year’s Eve 2027: Gala Dinner, Live Show & Countdown Party", "Dinner Show, DJ Set Commerciale, House & Party di Mezzanotte", "Dinner Show, Commercial, House & Midnight Countdown Party", "Elegante / Smart Chic di San Silvestro", "New Year’s Eve Smart Chic / Elegant", [["Ingresso Dopocena / Serata (dalle 23:00)", "40€", "Include 1 drink e accesso al countdown di mezzanotte"], ["Royal Buffet / Apericena di Gala (dalle 20:30)", "70€", "Buffet caldo/freddo, drink e flûte per il brindisi"], ["Gran Cenone Servito di San Silvestro (dalle 20:00)", "140€", "Menu completo servito al tavolo con vini inclusi e festa"], ["Tavolo VIP Privé con Bottiglie", "350€ – 1.200€", "100% credito in bottiglie premium e ingresso prioritario salta-fila"]], [["After-Dinner / Party Entry (from 23:00)", "€40", "Includes 1 drink and midnight countdown access"], ["Royal Gala Buffet (from 20:30)", "€70", "Gala buffet, drink and midnight sparkling toast"], ["Served New Year’s Eve Gala Dinner (from 20:00)", "€140", "Full multi-course menu with wines and party access"], ["VIP Privé Table with Bottle Service", "€350 – €1,200", "100% credit in premium bottles with skip-the-line VIP admission"]], "Capodanno Hotel All Inclusive Milano Sheraton Melia Ripamonti 2027: Gran Galà, Musica & Festa di San Silvestro presso Hotel All Inclusive Milano Sheraton Melia Ripamonti (Centro / Distretto Eventi, Milano, Milano). Festeggia il 31 dicembre 2026 con cenone, spettacolo dal vivo, brindisi di mezzanotte e DJ set fino all’alba. Info e prenotazioni ufficiali via Concierge WhatsApp +39 351 912 7047.", "Hotel All Inclusive Milano Sheraton Melia Ripamonti New Year’s Eve 2027: Gala Dinner, Live Show & Countdown Party at Hotel All Inclusive Milano Sheraton Melia Ripamonti (Centro / Distretto Eventi, Milano, Milano). Celebrate December 31, 2026 with gala dining, live entertainment, midnight countdown, and DJ sets until dawn. Official bookings via WhatsApp Concierge +39 351 912 7047."],
@@ -762,6 +772,38 @@ function classifyCapodannoSeed(
       formulas: ['dopocena', 'tavolo-vip'],
       musicTag: 'commerciale-house',
       zoneTag: 'duomo-centro-brera',
+    };
+  }
+  if (slug === 'capodanno-voya-rooftop-milano') {
+    return {
+      subCategories: [
+        'capodanno-rooftop-milano',
+        'capodanno-locali-cenone-milano',
+        'capodanno-coppie-romantico-milano',
+        'capodanno-over-30-40-milano',
+      ],
+      venueType: 'rooftop',
+      audiences: ['coppie', 'over30', 'vip'],
+      formulas: ['cenone'],
+      musicTag: 'commerciale-house',
+      zoneTag: 'corso-como-sempione',
+    };
+  }
+  if (slug === 'capodanno-pineta-milano') {
+    return {
+      subCategories: [
+        'capodanno-discoteche-milano',
+        'capodanno-locali-cenone-milano',
+        'capodanno-coppie-romantico-milano',
+        'capodanno-single-milano',
+        'capodanno-over-30-40-milano',
+        'capodanno-latino-reggaeton-hiphop-milano',
+      ],
+      venueType: 'discoteca',
+      audiences: ['coppie', 'single', 'over30', 'giovani', 'vip'],
+      formulas: ['cenone', 'buffet', 'dopocena', 'tavolo-vip'],
+      musicTag: 'cena-cantata-live',
+      zoneTag: 'corso-como-sempione',
     };
   }
 
@@ -901,13 +943,16 @@ const UNSORTED_CAPODANNO_EVENTS: CapodannoEventItem[] = SEEDS.map((rawSeed: any[
     address,
     hours,
     startISO:
-      slug === 'capodanno-justme-garda-lake'
+      slug === 'capodanno-justme-garda-lake' || slug === 'capodanno-pineta-milano'
         ? '2026-12-31T20:30:00+01:00'
         : slug === 'capodanno-repvblic-milano'
           ? '2026-12-31T23:00:00+01:00'
           : '2026-12-31T20:00:00+01:00',
     endISO:
-      slug === 'capodanno-justme-garda-lake' || slug === 'capodanno-repvblic-milano'
+      slug === 'capodanno-justme-garda-lake' ||
+      slug === 'capodanno-repvblic-milano' ||
+      slug === 'capodanno-pineta-milano' ||
+      slug === 'capodanno-voya-rooftop-milano'
         ? '2027-01-01T05:00:00+01:00'
         : '2027-01-01T05:30:00+01:00',
     image: `/images/events/capodanno-2027-posters/${slug}.webp`,
@@ -929,15 +974,23 @@ const UNSORTED_CAPODANNO_EVENTS: CapodannoEventItem[] = SEEDS.map((rawSeed: any[
     sourceBasisIt:
       slug === 'capodanno-justme-milano-torre-branca' || slug === 'capodanno-justme-garda-lake'
         ? 'Listino ufficiale verificato su Xceed (canale ufficiale nightlifemilan-1): prevendite, cenoni e tavoli VIP acquistabili direttamente online o tramite Concierge WhatsApp +39 351 912 7047.'
-        : slug === 'capodanno-repvblic-milano'
-          ? 'Listino ufficiale confermato 2026/2027 REPVBLIC Milano (Piazza della Repubblica, 12): Early Bird 45€ (flûte brindisi di mezzanotte + 1 drink inclusi), Tavolo Zona Dancefloor 600€ (6 persone) e Tavolo Zona Privé 1.200€ (10 persone). Ingresso dalle 23:00 fino al mattino. Prenotazioni via Concierge WhatsApp +39 351 912 7047.'
-          : 'Prezzi passati: gli importi indicati riportano i listini della passata edizione; a fianco di ogni prezzo ricordiamo che potrebbero esserci cambiamenti di prezzo o aggiornamenti del tema della serata. Conferma disponibilità e listino aggiornato su WhatsApp +39 351 912 7047.',
+        : slug === 'capodanno-pineta-milano'
+          ? 'Listino ufficiale Moulin Rouge Pineta Milano 2027 & Xceed (nightlifemilan-1): Royal Buffet 40€ (20:30), Solo Discoteca 40€ (23:00), Cena di Gala 160€ (21:00) e Tavoli VIP 300€–1.500€. Prepagamento 100% dopo conferma disponibilità via Concierge WhatsApp +39 351 912 7047.'
+          : slug === 'capodanno-voya-rooftop-milano'
+            ? 'Listino ufficiale confermato Voya Rooftop Milan (20° Piano, Viale Achille Papa 30): tariffa unica 300€ a persona (Menu 6 portate + Cotechino e Lenticchie dopo la mezzanotte, 1 bottiglia di vino ogni 4 persone, brindisi di mezzanotte e acqua). Prepagamento 100% dopo conferma disponibilità via Concierge WhatsApp +39 351 912 7047.'
+            : slug === 'capodanno-repvblic-milano'
+              ? 'Listino ufficiale confermato 2026/2027 REPVBLIC Milano (Piazza della Repubblica, 12): Early Bird 45€ (flûte brindisi di mezzanotte + 1 drink inclusi), Tavolo Zona Dancefloor 600€ (6 persone) e Tavolo Zona Privé 1.200€ (10 persone). Ingresso dalle 23:00 fino al mattino. Prenotazioni via Concierge WhatsApp +39 351 912 7047.'
+              : 'Prezzi passati: gli importi indicati riportano i listini della passata edizione; a fianco di ogni prezzo ricordiamo che potrebbero esserci cambiamenti di prezzo o aggiornamenti del tema della serata. Conferma disponibilità e listino aggiornato su WhatsApp +39 351 912 7047.',
     sourceBasisEn:
       slug === 'capodanno-justme-milano-torre-branca' || slug === 'capodanno-justme-garda-lake'
         ? 'Verified official Xceed rate card (official channel nightlifemilan-1): tickets, gala dinners, and VIP tables available online or via WhatsApp Concierge +39 351 912 7047.'
-        : slug === 'capodanno-repvblic-milano'
-          ? 'Confirmed official 2026/2027 REPVBLIC Milano rate card (Piazza della Repubblica, 12): Early Bird €45 (midnight toast flûte + 1 drink included), Dancefloor Table €600 (6 guests), and Privé VIP Table €1,200 (10 guests). Doors open 23:00 till morning. Official bookings via WhatsApp Concierge +39 351 912 7047.'
-          : 'Past-edition prices: published amounts reflect the previous edition’s rates; please note right next to every price that there may be price changes or updates to the evening’s theme. Confirm live availability and updated rates via WhatsApp +39 351 912 7047.',
+        : slug === 'capodanno-pineta-milano'
+          ? 'Official Moulin Rouge Pineta Milano 2027 & Xceed rate card (nightlifemilan-1): Royal Buffet €40 (20:30), Club Entry €40 (23:00), Gala Dinner €160 (21:00), and VIP Tables €300–€1,500. 100% prepayment after availability check via WhatsApp Concierge +39 351 912 7047.'
+          : slug === 'capodanno-voya-rooftop-milano'
+            ? 'Confirmed official Voya Rooftop Milan (20th Floor, Viale Achille Papa 30) rate card: single €300 per person rate (6-course gala menu + After-Midnight Cotechino & Lentils, 1 bottle of wine every 4 people, midnight toast & water). 100% prepayment after availability check via WhatsApp Concierge +39 351 912 7047.'
+            : slug === 'capodanno-repvblic-milano'
+              ? 'Confirmed official 2026/2027 REPVBLIC Milano rate card (Piazza della Repubblica, 12): Early Bird €45 (midnight toast flûte + 1 drink included), Dancefloor Table €600 (6 guests), and Privé VIP Table €1,200 (10 guests). Doors open 23:00 till morning. Official bookings via WhatsApp Concierge +39 351 912 7047.'
+              : 'Past-edition prices: published amounts reflect the previous edition’s rates; please note right next to every price that there may be price changes or updates to the evening’s theme. Confirm live availability and updated rates via WhatsApp +39 351 912 7047.',
     highlightsIt: [
       `Location: ${venueName} (${address})`,
       `Orari San Silvestro: ${hours}`,
@@ -955,7 +1008,9 @@ const UNSORTED_CAPODANNO_EVENTS: CapodannoEventItem[] = SEEDS.map((rawSeed: any[
         ? 'https://xceed.me/en/milano/event/gatsby-nye-2027/248439/channel/nightlifemilan-1'
         : slug === 'capodanno-justme-garda-lake'
           ? 'https://xceed.me/en/brescia/event/new-years-eve-42/250310/channel/nightlifemilan-1'
-          : undefined,
+          : slug === 'capodanno-pineta-milano'
+            ? 'https://xceed.me/en/milano/event/capodanno-2027-moulin-rouge-pineta-club-milano/252170/channel/nightlifemilan-1'
+            : undefined,
   };
 });
 

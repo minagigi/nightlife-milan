@@ -8,6 +8,7 @@ import {
 } from './dirTokens35';
 import { HALLOWEEN_NAVIGATION } from '@/lib/halloween/navigation';
 import { halloweenPath } from '@/lib/halloween/routes';
+import { christmasVoyaSlug, resolveChristmasVoyaSlug } from '@/lib/christmas/voya35';
 import {
   CAPODANNO_CATEGORY_IDS,
   CAPODANNO_EVENT_BASE_SLUGS,
@@ -1168,6 +1169,9 @@ export function resolveEventSlugToCanonical(slug: string, targetLocale?: LocaleC
 }
 
 export function getLocalizedEventSlug35(rawSlug: string, locale: LocaleCode): string {
+  if (resolveChristmasVoyaSlug(rawSlug)) {
+    return christmasVoyaSlug(locale);
+  }
   if (HALLOWEEN_SET.has(rawSlug)) {
     return HALLOWEEN_NAVIGATION[locale]?.slug || HALLOWEEN_NAVIGATION.en.slug;
   }

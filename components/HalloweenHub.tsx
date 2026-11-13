@@ -83,7 +83,7 @@ export default async function HalloweenHub({ locale }: { locale: LocaleCode }) {
       canonicalDetail: Boolean(canonical), anchorId: halloweenEventAnchor(event.id),
       statusBadge: scarcity.almostSoldOutBadge,
       openEventCtaLabel: scarcity.openEventCardCta,
-      booking: { href: affiliate || getConciergeBookingUrl(locale, `${event.title} · ${event.venueName}`), label: affiliate ? bookingLabels.offers : bookingLabels.inquiry, affiliate: Boolean(affiliate) },
+      booking: { href: affiliate || getConciergeBookingUrl(locale, `${event.title} · ${event.venueName}`, halloweenPath(locale)), label: affiliate ? bookingLabels.offers : bookingLabels.inquiry, affiliate: Boolean(affiliate) },
       summary: halloweenFeaturedView(event.id, locale)?.summary || '', dateKey: event.dates[0], dateKeys: event.dates, dateLabels, dateLabel: event.startISO ? formatOctoberEventDate(locale, event.startISO) : dateLabels.join(' · '),
       venueId: event.id, venueName: event.venueName, image: halloweenHubPoster(event.id,locale) || (canonical && text ? { ...canonical.image, alt: text.imageAlt } : undefined) };
   }));

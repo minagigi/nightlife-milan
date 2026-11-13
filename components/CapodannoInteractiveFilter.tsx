@@ -3,7 +3,6 @@
 import { useState, useMemo } from 'react';
 import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
-import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { capodannoCategoryPath, capodannoEventPath } from '@/lib/capodanno/routes';
 import { getCapodannoLocalizedEventContent, getCapodannoUiCopy } from '@/lib/capodanno/i18n';
 import { isRepvblicNyeSlug } from '@/lib/capodanno/repvblic35';

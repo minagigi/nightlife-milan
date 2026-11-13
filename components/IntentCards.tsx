@@ -19,7 +19,7 @@ export default function IntentCards({ locale }: { locale: string }) {
   // senza prefisso per tutte le altre 33 lingue).
   const lp = locale === 'en' ? '' : `/${locale}`;
   const copy = getIntentCardsCopy(locale);
-  const waLink = getConciergeBookingUrl(locale);
+  const waLink = getConciergeBookingUrl(locale, undefined, lp || '/');
 
   const cards: IntentCard[] = [
     { icon: <Gem className="w-5 h-5" />, title: copy.vipTitle, subtitle: copy.vipSubtitle, href: `${lp}/vip-tables`, isGold: true },

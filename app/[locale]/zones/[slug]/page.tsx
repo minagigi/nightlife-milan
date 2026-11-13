@@ -17,6 +17,7 @@ import { getEventbriteDiscoveryItems, slimDiscoveryItemsForClient } from '@/lib/
 import { VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 
 export const revalidate = 3600;
 
@@ -277,14 +278,10 @@ export default async function ZonePage({ params }: Props) {
 
   const zoneFaqs = zLoc.faqs;
 
-  const waUrl = `https://wa.me/393519127047?text=${encodeURIComponent(
-    isIt
-      ? `Ciao Nightlife Milan! Vorrei consigli e prenotare una serata in zona ${zLoc.name}.`
-      : `Hi Nightlife Milan! ${zLoc.name} - WhatsApp VIP Concierge`
-  )}`;
-
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const currentZoneUrl = `${baseUrl}${lp}/${getLocalizedDir35('zones', loc)}/${getLocalizedZoneSlug35(zone.slug, loc)}`;
+
+  const waUrl = getConciergeBookingUrl(loc, zLoc.name, currentZoneUrl);
 
   return (
     <main className="flex-grow pt-24 pb-20 bg-[#050505]">

@@ -21,6 +21,7 @@ import {
   CheckCircle2,
 } from 'lucide-react';
 import { CONTACT } from '@/config/contact';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 
 type Step = 1 | 2 | 3 | 4;
 
@@ -550,11 +551,6 @@ export default function VibeFinder({ lang }: { lang: string }) {
             {/* Cards of the 6 Priority Clubs */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
               {recommendedClubs.map((club) => {
-                const waText = encodeURIComponent(
-                  isIt
-                    ? `Ciao Concierge Nightlife Milan! Ho usato il VibeFinder e vorrei prenotare da ${club.name} (Scelta N.${club.rank}). Potete inviarmi prezzi tavoli e lista?`
-                    : `Hi Nightlife Milan Concierge! I used VibeFinder and would like to book at ${club.name} (Priority #${club.rank}). Can you send me table prices and guest list info?`
-                );
                 return (
                   <div
                     key={club.id}
@@ -593,7 +589,7 @@ export default function VibeFinder({ lang }: { lang: string }) {
 
                     <div className="mt-4 pt-3 flex items-center gap-2.5">
                       <a
-                        href={`${CONTACT.whatsapp.link}?text=${waText}`}
+                        href={getConciergeBookingUrl(lang, `#${club.rank} ${club.name}`, pathname || langPrefix || '/')}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex-1 inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg bg-champagne text-black font-bold text-xs uppercase tracking-wider hover:bg-champagne/90 transition-colors"
@@ -626,11 +622,7 @@ export default function VibeFinder({ lang }: { lang: string }) {
                 </a>
               </div>
               <a
-                href={`${CONTACT.whatsapp.link}?text=${encodeURIComponent(
-                  isIt
-                    ? 'Ciao! Vorrei un consiglio personalizzato sui 6 Club Prioritari di Milano per stasera.'
-                    : 'Hi! I would like a custom recommendation among the 6 Priority Clubs in Milan for tonight.'
-                )}`}
+                href={getConciergeBookingUrl(lang, undefined, pathname || langPrefix || '/')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-champagne text-black font-bold uppercase tracking-wider whitespace-nowrap"

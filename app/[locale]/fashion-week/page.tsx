@@ -13,6 +13,7 @@ import {
   localePrefix,
 } from '@/lib/i18n/locales';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import {
   Sparkles,
   MapPin,
@@ -512,11 +513,13 @@ export default async function FashionWeekPage({
           {/* Dual CTA */}
           <div className="flex flex-wrap items-center gap-4">
             <a
-              href={`https://wa.me/393519127047?text=${encodeURIComponent(
+              href={getConciergeBookingUrl(
+                locale,
                 isIt
-                  ? 'Ciao Concierge Nightlife Milan! Vorrei prenotare un Tavolo VIP / Afterparty per Fashion Week / Fuorisalone / F1 Monza.'
-                  : 'Hi Nightlife Milan Concierge! I would like to book a VIP Table / Afterparty for Fashion Week / Fuorisalone / Monza F1.'
-              )}`}
+                  ? 'Fashion Week / Fuorisalone / F1 Monza VIP'
+                  : 'Fashion Week / Fuorisalone / Monza F1 VIP',
+                canonicalUrl
+              )}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 px-7 py-4 rounded-xl bg-champagne text-black font-sans font-bold text-xs sm:text-sm uppercase tracking-[0.16em] hover:bg-white transition-all shadow-[0_0_35px_rgba(201,168,106,0.4)]"
@@ -677,11 +680,11 @@ export default async function FashionWeekPage({
                   {isIt ? w.clubsIt : w.clubsEn}
                 </div>
                 <a
-                  href={`https://wa.me/393519127047?text=${encodeURIComponent(
-                    isIt
-                      ? `Ciao! Vorrei prenotare un Tavolo VIP per ${w.titleIt.split(':')[0]}.`
-                      : `Hi! I would like to book a VIP Table for ${w.titleEn.split(':')[0]}.`
-                  )}`}
+                  href={getConciergeBookingUrl(
+                    locale,
+                    isIt ? w.titleIt.split(':')[0] : w.titleEn.split(':')[0],
+                    canonicalUrl
+                  )}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-champagne text-black font-sans text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
@@ -753,11 +756,11 @@ export default async function FashionWeekPage({
                   {isIt ? 'Scheda Club →' : 'Venue Profile →'}
                 </Link>
                 <a
-                  href={`https://wa.me/393519127047?text=${encodeURIComponent(
-                    isIt
-                      ? `Ciao! Vorrei prenotare un Tavolo VIP / evento Fashion Week da ${v.name}.`
-                      : `Hi! I would like to book a VIP Table / Fashion Week event at ${v.name}.`
-                  )}`}
+                  href={getConciergeBookingUrl(
+                    locale,
+                    `Fashion Week VIP · ${v.name}`,
+                    canonicalUrl
+                  )}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-4 py-2 rounded-xl bg-champagne text-black text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
@@ -859,11 +862,11 @@ export default async function FashionWeekPage({
 
             <div className="flex flex-wrap items-center gap-3">
               <a
-                href={`https://wa.me/393519127047?text=${encodeURIComponent(
-                  isIt
-                    ? 'Ciao Desk Corporate Nightlife Milan! Vorremmo richiedere un preventivo per Corporate Buyout / Tavolo Console VIP.'
-                    : 'Hi Nightlife Milan Corporate Desk! We would like to request a quote for a Corporate Buyout / DJ Console VIP Table.'
-                )}`}
+                href={getConciergeBookingUrl(
+                  locale,
+                  isIt ? 'Corporate Buyout / Tavolo Console VIP' : 'Corporate Buyout / DJ Console VIP Table',
+                  canonicalUrl
+                )}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-3.5 rounded-xl bg-champagne text-black font-sans text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"

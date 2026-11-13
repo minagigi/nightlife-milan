@@ -1,3 +1,4 @@
+import { appendPageUrlToWhatsAppMessage } from '@/lib/conciergeBooking';
 import { isEnabledLocale, type LocaleCode } from './locales';
 
 export type ScarcityAndChatStrings = {
@@ -15,8 +16,8 @@ export type ScarcityAndChatStrings = {
   xceedPriorityCta: string;
   /** Testo della chat flottante in basso a destra ("Vuoi prenotare per questo evento?") */
   floatingChatLabel: (eventName?: string) => string;
-  /** Messaggio precompilato WhatsApp personalizzato per l'evento */
-  floatingChatMessage: (eventName?: string) => string;
+  /** Messaggio precompilato WhatsApp personalizzato per l'evento con link della pagina */
+  floatingChatMessage: (eventName?: string, pageUrl?: string) => string;
 };
 
 const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
@@ -32,7 +33,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Vuoi prenotare per questo evento? (${eventName})` : 'Vuoi prenotare per questo evento?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Ciao Nightlife Milan! Vorrei prenotare (biglietti / cenone / tavolo VIP) per l’evento: ${eventName}. Potete confermarmi disponibilità e prezzi aggiornati?`
+        ? `Ciao Nightlife Milan! Vorrei prenotare (biglietti / lista / tavolo VIP) per l’evento: ${eventName}. Potete confermarmi disponibilità e prezzi aggiornati?`
         : 'Ciao Nightlife Milan! Vorrei prenotare biglietti o un tavolo VIP per questo evento a Milano. Potete confermarmi disponibilità e prezzi aggiornati?',
   },
   en: {
@@ -47,7 +48,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Want to book for this event? (${eventName})` : 'Want to book for this event?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Hi Nightlife Milan! I would like to book (tickets / dinner / VIP table) for the event: ${eventName}. Can you confirm current availability and prices?`
+        ? `Hi Nightlife Milan! I would like to book (tickets / guest list / VIP table) for the event: ${eventName}. Can you confirm current availability and prices?`
         : 'Hi Nightlife Milan! I would like to book tickets or a VIP table for this event in Milan. Can you confirm current availability and prices?',
   },
   es: {
@@ -62,7 +63,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `¿Quieres reservar para este evento? (${eventName})` : '¿Quieres reservar para este evento?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `¡Hola Nightlife Milan! Quiero reservar (entradas / cena / mesa VIP) para el evento: ${eventName}. ¿Podéis confirmarme disponibilidad y precios?`
+        ? `¡Hola Nightlife Milan! Quiero reservar (entradas / lista / mesa VIP) para el evento: ${eventName}. ¿Podéis confirmarme disponibilidad y precios?`
         : '¡Hola Nightlife Milan! Quiero reservar entradas o mesa VIP para este evento en Milán. ¿Podéis confirmarme disponibilidad y precios?',
   },
   fr: {
@@ -77,7 +78,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Vous voulez réserver pour cet événement ? (${eventName})` : 'Vous voulez réserver pour cet événement ?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Bonjour Nightlife Milan ! Je souhaite réserver (billets / dîner / table VIP) pour l’événement : ${eventName}. Pouvez-vous me confirmer les disponibilités et tarifs ?`
+        ? `Bonjour Nightlife Milan ! Je souhaite réserver (billets / guest list / table VIP) pour l’événement : ${eventName}. Pouvez-vous me confirmer les disponibilités et tarifs ?`
         : 'Bonjour Nightlife Milan ! Je souhaite réserver des billets ou une table VIP pour cet événement à Milan. Pouvez-vous me confirmer les disponibilités et tarifs ?',
   },
   de: {
@@ -92,7 +93,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Möchten Sie für dieses Event buchen? (${eventName})` : 'Möchten Sie für dieses Event buchen?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Hallo Nightlife Milan! Ich möchte für das Event buchen (Tickets / Dinner / VIP-Tisch): ${eventName}. Können Sie mir Verfügbarkeit und Preise bestätigen?`
+        ? `Hallo Nightlife Milan! Ich möchte für das Event buchen (Tickets / Gästeliste / VIP-Tisch): ${eventName}. Können Sie mir Verfügbarkeit und Preise bestätigen?`
         : 'Hallo Nightlife Milan! Ich möchte Tickets oder einen VIP-Tisch für dieses Event in Mailand buchen. Können Sie mir Verfügbarkeit und Preise bestätigen?',
   },
   pt: {
@@ -107,7 +108,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Quer reservar para este evento? (${eventName})` : 'Quer reservar para este evento?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Olá Nightlife Milan! Gostaria de reservar (ingressos / jantar / mesa VIP) para o evento: ${eventName}. Podem confirmar disponibilidade e preços?`
+        ? `Olá Nightlife Milan! Gostaria de reservar (ingressos / lista / mesa VIP) para o evento: ${eventName}. Podem confirmar disponibilidade e preços?`
         : 'Olá Nightlife Milan! Gostaria de reservar ingressos ou mesa VIP para este evento em Milão. Podem confirmar disponibilidade e preços?',
   },
   nl: {
@@ -122,7 +123,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Wil je reserveren voor dit evenement? (${eventName})` : 'Wil je reserveren voor dit evenement?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Hallo Nightlife Milan! Ik wil graag reserveren (tickets / diner / VIP-tafel) voor het evenement: ${eventName}. Kunnen jullie de beschikbaarheid en prijzen bevestigen?`
+        ? `Hallo Nightlife Milan! Ik wil graag reserveren (tickets / gastenlijst / VIP-tafel) voor het evenement: ${eventName}. Kunnen jullie de beschikbaarheid en prijzen bevestigen?`
         : 'Hallo Nightlife Milan! Ik wil graag tickets of een VIP-tafel reserveren voor dit evenement in Milaan.',
   },
   ru: {
@@ -137,7 +138,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Хотите забронировать на это событие? (${eventName})` : 'Хотите забронировать на это событие?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Здравствуйте, Nightlife Milan! Хочу забронировать (билеты / ужин / VIP-стол) на мероприятие: ${eventName}. Подскажите наличие и цены?`
+        ? `Здравствуйте, Nightlife Milan! Хочу забронировать (билеты / список гостей / VIP-стол) на мероприятие: ${eventName}. Подскажите наличие и цены?`
         : 'Здравствуйте, Nightlife Milan! Хочу забронировать билеты или VIP-стол на это мероприятие в Милане.',
   },
   tr: {
@@ -152,7 +153,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Bu etkinlik için rezervasyon yapmak ister misiniz? (${eventName})` : 'Bu etkinlik için rezervasyon yapmak ister misiniz?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Merhaba Nightlife Milan! Şu etkinlik için (bilet / akşam yemeği / VIP masa) rezervasyon yapmak istiyorum: ${eventName}. Müsaitlik ve fiyatları teyit edebilir misiniz?`
+        ? `Merhaba Nightlife Milan! Şu etkinlik için (bilet / giriş listesi / VIP masa) rezervasyon yapmak istiyorum: ${eventName}. Müsaitlik ve fiyatları teyit edebilir misiniz?`
         : 'Merhaba Nightlife Milan! Milano’daki bu etkinlik için bilet veya VIP masa rezervasyonu yapmak istiyorum.',
   },
   zh: {
@@ -167,7 +168,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `想预订此活动吗？(${eventName})` : '想预订此活动吗？',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `您好 Nightlife Milan！我想预订此活动的门票/晚宴/VIP卡座：${eventName}。请问目前还有位置和价格吗？`
+        ? `您好 Nightlife Milan！我想预订此活动的门票 / 嘉宾名单 / VIP卡座：${eventName}。请问目前还有位置和价格吗？`
         : '您好 Nightlife Milan！我想预订米兰此活动的门票或VIP卡座。',
   },
   ar: {
@@ -182,7 +183,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `هل ترغب في الحجز لهذه الفعالية؟ (${eventName})` : 'هل ترغب في الحجز لهذه الفعالية؟',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `مرحبًا Nightlife Milan! أود حجز (تذاكر / عشاء / طاولة VIP) لفعالية: ${eventName}. هل يمكنكم تأكيد التوافر والأسعار؟`
+        ? `مرحبًا Nightlife Milan! أود حجز (تذاكر / قائمة الدخول / طاولة VIP) لفعالية: ${eventName}. هل يمكنكم تأكيد التوافر والأسعار؟`
         : 'مرحبًا Nightlife Milan! أود حجز تذاكر أو طاولة VIP لهذه الفعالية في ميلانو.',
   },
   bg: {
@@ -212,7 +213,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Želite li rezervirati za ovaj događaj? (${eventName})` : 'Želite li rezervirati za ovaj događaj?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Pozdrav Nightlife Milan! Želim rezervirati (ulaznice / večeru / VIP stol) za događaj: ${eventName}. Možete li potvrditi dostupnost i cijene?`
+        ? `Pozdrav Nightlife Milan! Želim rezervirati (ulaznice / popis gostiju / VIP stol) za događaj: ${eventName}. Možete li potvrditi dostupnost i cijene?`
         : 'Pozdrav Nightlife Milan! Želim rezervirati ulaznice ili VIP stol za ovaj događaj u Milanu.',
   },
   cs: {
@@ -227,7 +228,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Chcete rezervovat na tuto akci? (${eventName})` : 'Chcete rezervovat na tuto akci?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Dobrý den Nightlife Milan! Chci rezervovat (vstupenky / večeři / VIP stůl) na akci: ${eventName}. Můžete mi potvrdit dostupnost a ceny?`
+        ? `Dobrý den Nightlife Milan! Chci rezervovat (vstupenky / guest list / VIP stůl) na akci: ${eventName}. Můžete mi potvrdit dostupnost a ceny?`
         : 'Dobrý den Nightlife Milan! Chci rezervovat vstupenky nebo VIP stůl na tuto akci v Miláně.',
   },
   da: {
@@ -242,7 +243,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Vil du booke til dette event? (${eventName})` : 'Vil du booke til dette event?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Hej Nightlife Milan! Jeg vil gerne booke (billetter / middag / VIP-bord) til eventet: ${eventName}. Kan I bekræfte ledighed og priser?`
+        ? `Hej Nightlife Milan! Jeg vil gerne booke (billetter / gjesteliste / VIP-bord) til eventet: ${eventName}. Kan I bekræfte ledighed og priser?`
         : 'Hej Nightlife Milan! Jeg vil gerne booke billetter eller VIP-bord til dette event i Milano.',
   },
   et: {
@@ -257,7 +258,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Kas soovid sellele üritusele broneerida? (${eventName})` : 'Kas soovid sellele üritusele broneerida?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Tere Nightlife Milan! Soovin broneerida (piletid / õhtusöök / VIP-laud) üritusele: ${eventName}.`
+        ? `Tere Nightlife Milan! Soovin broneerida (piletid / külalistenimekiri / VIP-laud) üritusele: ${eventName}.`
         : 'Tere Nightlife Milan! Soovin broneerida pileteid või VIP-lauda sellele üritusele Milanos.',
   },
   fi: {
@@ -272,7 +273,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Haluatko varata tähän tapahtumaan? (${eventName})` : 'Haluatko varata tähän tapahtumaan?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Hei Nightlife Milan! Haluaisin varata (liput / illallisen / VIP-pöydän) tapahtumaan: ${eventName}.`
+        ? `Hei Nightlife Milan! Haluaisin varata (liput / vieraslista / VIP-pöydän) tapahtumaan: ${eventName}.`
         : 'Hei Nightlife Milan! Haluaisin varata liput tai VIP-pöydän tähän tapahtumaan Milanossa.',
   },
   el: {
@@ -287,7 +288,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Θέλετε να κάνετε κράτηση για αυτή την εκδήλωση; (${eventName})` : 'Θέλετε να κάνετε κράτηση για αυτή την εκδήλωση;',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Γεια σας Nightlife Milan! Θα ήθελα να κάνω κράτηση (εισιτήρια / δείπνο / VIP τραπέζι) για την εκδήλωση: ${eventName}.`
+        ? `Γεια σας Nightlife Milan! Θα ήθελα να κάνω κράτηση (εισιτήρια / λίστα εισόδου / VIP τραπέζι) για την εκδήλωση: ${eventName}.`
         : 'Γεια σας Nightlife Milan! Θα ήθελα να κάνω κράτηση για αυτή την εκδήλωση στο Μιλάνο.',
   },
   hu: {
@@ -302,7 +303,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Szeretnél foglalni erre az eseményre? (${eventName})` : 'Szeretnél foglalni erre az eseményre?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Szia Nightlife Milan! Szeretnék foglalni (jegyek / vacsora / VIP asztal) erre az eseményre: ${eventName}.`
+        ? `Szia Nightlife Milan! Szeretnék foglalni (jegyek / vendéglista / VIP asztal) erre az eseményre: ${eventName}.`
         : 'Szia Nightlife Milan! Szeretnék jegyet vagy VIP asztalt foglalni erre a milánói eseményre.',
   },
   ga: {
@@ -332,7 +333,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Vēlaties rezervēt šim pasākumam? (${eventName})` : 'Vēlaties rezervēt šim pasākumam?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Sveiki Nightlife Milan! Vēlos rezervēt (biļetes / vakariņas / VIP galdiņu) pasākumam: ${eventName}.`
+        ? `Sveiki Nightlife Milan! Vēlos rezervēt (biļetes / viesu sarakstu / VIP galdiņu) pasākumam: ${eventName}.`
         : 'Sveiki Nightlife Milan! Vēlos rezervēt biļetes vai VIP galdiņu šim pasākumam Milānā.',
   },
   lt: {
@@ -347,7 +348,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Norite rezervuoti šiam renginiui? (${eventName})` : 'Norite rezervuoti šiam renginiui?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Sveiki Nightlife Milan! Norėčiau rezervuoti (bilietus / vakarienę / VIP staliuką) renginiui: ${eventName}.`
+        ? `Sveiki Nightlife Milan! Norėčiau rezervuoti (bilietus / svečių sąrašą / VIP staliuką) renginiui: ${eventName}.`
         : 'Sveiki Nightlife Milan! Norėčiau rezervuoti bilietus arba VIP staliuką šiam renginiui Milane.',
   },
   mt: {
@@ -377,7 +378,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Chcesz zarezerwować na to wydarzenie? (${eventName})` : 'Chcesz zarezerwować na to wydarzenie?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Cześć Nightlife Milan! Chcę zarezerwować (bilety / kolację / stolik VIP) na wydarzenie: ${eventName}. Czy możecie potwierdzić dostępność i ceny?`
+        ? `Cześć Nightlife Milan! Chcę zarezerwować (bilety / listę gości / stolik VIP) na wydarzenie: ${eventName}. Czy możecie potwierdzić dostępność i ceny?`
         : 'Cześć Nightlife Milan! Chcę zarezerwować bilety lub stolik VIP na to wydarzenie w Mediolanie.',
   },
   ro: {
@@ -392,7 +393,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Vrei să rezervi pentru acest eveniment? (${eventName})` : 'Vrei să rezervi pentru acest eveniment?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Salut Nightlife Milan! Aș dori să rezerv (bilete / cină / masă VIP) pentru evenimentul: ${eventName}. Îmi puteți confirma disponibilitatea și prețurile?`
+        ? `Salut Nightlife Milan! Aș dori să rezerv (bilete / listă / masă VIP) pentru evenimentul: ${eventName}. Îmi puteți confirma disponibilitatea și prețurile?`
         : 'Salut Nightlife Milan! Aș dori să rezerv bilete sau o masă VIP pentru acest eveniment în Milano.',
   },
   sk: {
@@ -407,7 +408,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Chcete si rezervovať na toto podujatie? (${eventName})` : 'Chcete si rezervovať na toto podujatie?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Dobrý deň Nightlife Milan! Chcem si rezervovať (vstupenky / večeru / VIP stôl) na podujatie: ${eventName}.`
+        ? `Dobrý deň Nightlife Milan! Chcem si rezervovať (vstupenky / guest list / VIP stôl) na podujatie: ${eventName}.`
         : 'Dobrý deň Nightlife Milan! Chcem si rezervovať vstupenky alebo VIP stôl na toto podujatie v Miláne.',
   },
   sl: {
@@ -415,14 +416,14 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
     sellingFastBadge: '🔥 SKORAJ RAZPRODANO',
     urgencyAlertTitle: '⚠️ POZOR · NAJBOLJŠA MESTA IN VIP MIZE GREDO HITRO V PROMET',
     urgencyAlertBody:
-      'Najboljša mesta, vstopnice in VIP mize se hitro razprodajo. Če želite kupiti vstopnice ali rezervirati mizo, storite to zdaj: ko bodo места razprodana, čudežev ne bo več mogoče delati.',
+      'Najboljša mesta, vstopnice in VIP mize se hitro razprodajo. Če želite kupiti vstopnice ali rezervirati mizo, storite to zdaj: ko bodo mesta razprodana, čudežev ne bo več mogoče delati.',
     openEventCardCta: 'Podrobnosti dogodka in cene →',
     xceedPriorityCta: 'Kupi vstopnice / Xceed →',
     floatingChatLabel: (eventName) =>
       eventName ? `Želite rezervirati za ta dogodek? (${eventName})` : 'Želite rezervirati za ta dogodek?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Pozdravljeni Nightlife Milan! Želim rezervirati (vstopnice / večerjo / VIP mizo) za dogodek: ${eventName}.`
+        ? `Pozdravljeni Nightlife Milan! Želim rezervirati (vstopnice / seznam gostov / VIP mizo) za dogodek: ${eventName}.`
         : 'Pozdravljeni Nightlife Milan! Želim rezervirati vstopnice ali VIP mizo za ta dogodek v Milanu.',
   },
   sv: {
@@ -437,7 +438,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Vill du boka till detta evenemang? (${eventName})` : 'Vill du boka till detta evenemang?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Hej Nightlife Milan! Jag vill boka (biljetter / middag / VIP-bord) till evenemanget: ${eventName}.`
+        ? `Hej Nightlife Milan! Jag vill boka (biljetter / gästlista / VIP-bord) till evenemanget: ${eventName}.`
         : 'Hej Nightlife Milan! Jag vill boka biljetter eller VIP-bord till detta evenemang i Milano.',
   },
   no: {
@@ -452,7 +453,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Vil du bestille til dette arrangementet? (${eventName})` : 'Vil du bestille til dette arrangementet?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Hei Nightlife Milan! Jeg vil gjerne bestille (billetter / middag / VIP-bord) til arrangementet: ${eventName}.`
+        ? `Hei Nightlife Milan! Jeg vil gjerne bestille (billetter / gjesteliste / VIP-bord) til arrangementet: ${eventName}.`
         : 'Hei Nightlife Milan! Jeg vil gjerne bestille billetter eller VIP-bord til dette arrangementet i Milano.',
   },
   is: {
@@ -467,7 +468,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Viltu bóka á þennan viðburð? (${eventName})` : 'Viltu bóka á þennan viðburð?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Hæ Nightlife Milan! Ég vil bóka (miða / kvöldverð / VIP-borð) á viðburðinn: ${eventName}.`
+        ? `Hæ Nightlife Milan! Ég vil bóka (miða / gestalista / VIP-borð) á viðburðinn: ${eventName}.`
         : 'Hæ Nightlife Milan! Ég vil bóka miða eða VIP-borð á þennan viðburð í Mílanó.',
   },
   uk: {
@@ -482,7 +483,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Хочете забронювати на цю подію? (${eventName})` : 'Хочете забронювати на цю подію?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Вітаю Nightlife Milan! Хочу забронювати (квитки / вечерю / VIP-стіл) на подію: ${eventName}.`
+        ? `Вітаю Nightlife Milan! Хочу забронювати (квитки / список гостей / VIP-стіл) на подію: ${eventName}.`
         : 'Вітаю Nightlife Milan! Хочу забронювати квитки або VIP-стіл на цю подію в Мілані.',
   },
   sq: {
@@ -497,7 +498,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Dëshiron të rezervosh për këtë event? (${eventName})` : 'Dëshiron të rezervosh për këtë event?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Përshëndetje Nightlife Milan! Dëshiroj të rezervoj (bileta / darkë / tavolinë VIP) për eventin: ${eventName}.`
+        ? `Përshëndetje Nightlife Milan! Dëshiroj të rezervoj (bileta / listë / tavolinë VIP) për eventin: ${eventName}.`
         : 'Përshëndetje Nightlife Milan! Dëshiroj të rezervoj bileta ose tavolinë VIP për këtë event në Milano.',
   },
   sr: {
@@ -512,7 +513,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Želite da rezervišete za ovaj događaj? (${eventName})` : 'Želite da rezervišete za ovaj događaj?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Pozdrav Nightlife Milan! Želim da rezervišem (karte / večeru / VIP sto) za događaj: ${eventName}.`
+        ? `Pozdrav Nightlife Milan! Želim da rezervišem (karte / listu gostiju / VIP sto) za događaj: ${eventName}.`
         : 'Pozdrav Nightlife Milan! Želim da rezervišem karte ili VIP sto za ovaj događaj u Milanu.',
   },
   bs: {
@@ -527,7 +528,7 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Želite li rezervisati za ovaj događaj? (${eventName})` : 'Želite li rezervisati za ovaj događaj?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Pozdrav Nightlife Milan! Želim rezervisati (ulaznice / večeru / VIP sto) za događaj: ${eventName}.`
+        ? `Pozdrav Nightlife Milan! Želim rezervisati (ulaznice / listu gostiju / VIP sto) za događaj: ${eventName}.`
         : 'Pozdrav Nightlife Milan! Želim rezervisati ulaznice ili VIP sto za ovaj događaj u Milanu.',
   },
   mk: {
@@ -542,12 +543,17 @@ const COPY: Record<LocaleCode, ScarcityAndChatStrings> = {
       eventName ? `Сакате да резервирате за овој настан? (${eventName})` : 'Сакате да резервирате за овој настан?',
     floatingChatMessage: (eventName) =>
       eventName
-        ? `Здраво Nightlife Milan! Сакам да резервирам (билети / вечера / VIP маса) за настанот: ${eventName}.`
+        ? `Здраво Nightlife Milan! Сакам да резервирам (билети / листа на гости / VIP маса) за настанот: ${eventName}.`
         : 'Здраво Nightlife Milan! Сакам да резервирам билети или VIP маса за овој настан во Милано.',
   },
 };
 
-export function getScarcityAndChatCopy(locale: string): ScarcityAndChatStrings {
+export function getScarcityAndChatCopy(locale: string, defaultPageUrl?: string): ScarcityAndChatStrings {
   const code = isEnabledLocale(locale) ? locale : 'en';
-  return COPY[code] || COPY.en;
+  const entry = COPY[code] || COPY.en;
+  return {
+    ...entry,
+    floatingChatMessage: (eventName?: string, pageUrl?: string) =>
+      appendPageUrlToWhatsAppMessage(entry.floatingChatMessage(eventName, pageUrl), pageUrl ?? defaultPageUrl, code),
+  };
 }

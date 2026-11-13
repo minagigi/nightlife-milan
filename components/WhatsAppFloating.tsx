@@ -10,6 +10,7 @@ import { SITE_CONTACT } from '@/config/contact';
 import { isInformationOnlyClubPath } from '@/lib/clubContactRoute';
 import { getClubInformationContactLabel } from '@/lib/clubOperationalStatus';
 import { getScarcityAndChatCopy } from '@/lib/i18n/scarcityAndChatCopy';
+import { appendPageUrlToWhatsAppMessage, resolveFullPageUrl } from '@/lib/conciergeBooking';
 
 function extractCurrentEventTitle(): string | undefined {
   if (typeof document === 'undefined') return undefined;
@@ -18,10 +19,13 @@ function extractCurrentEventTitle(): string | undefined {
     .replace(/\s+/g, ' ')
     .trim();
   if (fromAttr) return fromAttr;
-  if (typeof window !== 'undefined' && window.location.pathname.includes('/events/')) {
-    const h1 = document.querySelector<HTMLElement>('#main-content h1, main h1');
-    const h1Text = h1?.textContent?.replace(/\s+/g, ' ').trim();
-    if (h1Text) return h1Text;
+  if (typeof window !== 'undefined') {
+    const segments = window.location.pathname.split('/').filter(Boolean);
+    if (segments.length >= 2) {
+      const h1 = document.querySelector<HTMLElement>('#main-content h1, main h1');
+      const h1Text = h1?.textContent?.replace(/\s+/g, ' ').trim();
+      if (h1Text) return h1Text;
+    }
   }
   return undefined;
 }
@@ -110,13 +114,17 @@ export default function WhatsAppFloating({ locale: explicitLocale }: { locale?: 
       ? getMfwBookingLabel(locale)
       : scarcity.floatingChatLabel(shortTitle);
 
+  const pageUrl = resolveFullPageUrl(pathname, locale);
   const href = informationOnly
     ? SITE_CONTACT.whatsapp.link
     : `${SITE_CONTACT.whatsapp.link}?text=${encodeURIComponent(
-        // Party-only events (no dinner/show): use the tickets/VIP-table message and append the event name.
-        partyOnly && eventTitle
-          ? `${scarcity.floatingChatMessage()}\n${eventTitle}`
-          : scarcity.floatingChatMessage(eventTitle),
+        appendPageUrlToWhatsAppMessage(
+          partyOnly && eventTitle
+            ? `${scarcity.floatingChatMessage()}\n${eventTitle}`
+            : scarcity.floatingChatMessage(eventTitle),
+          pageUrl,
+          locale,
+        ),
       )}`;
 
   return (

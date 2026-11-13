@@ -1,8 +1,12 @@
+'use client';
+
+import { usePathname } from 'next/navigation';
 import { SITE_CONTACT } from '@/config/contact';
-import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
+import { getConciergeBookingUrl, resolveFullPageUrl } from '@/lib/conciergeBooking';
 
 export default function FooterWhatsAppContact({ lang }: { lang: string }) {
-  const waUrl = getConciergeBookingUrl(lang);
+  const pathname = usePathname() || '/';
+  const waUrl = getConciergeBookingUrl(lang, undefined, resolveFullPageUrl(pathname, lang));
   return (
     <div className="flex flex-col space-y-2.5 font-mono text-xs">
       <a

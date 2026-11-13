@@ -518,7 +518,7 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
   const copy = getCopy(locale);
   const lp = localePrefix(locale);
   const canonicalUrl = canonicalPageUrl(baseUrl, locale, '/vip-tables');
-  const whatsappUrl = getConciergeBookingUrl(locale);
+  const whatsappUrl = getConciergeBookingUrl(locale, undefined, canonicalUrl);
   const stepIcons = [Send, ClipboardCheck, CheckCircle2];
   const initialNow = new Date();
   const datedEvents = selectPriorityVenueEvents(await getDateSensitiveCarouselInventory(locale), initialNow);

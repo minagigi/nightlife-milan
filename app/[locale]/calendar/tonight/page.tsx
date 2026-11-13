@@ -9,6 +9,7 @@ import { generateEventListSchema, jsonLdString } from '@/lib/seo';
 import type { Event, Venue } from '@/lib/types';
 import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 import { WeeklyNightlifeNavigator, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 
 export const dynamic = 'force-dynamic';
 
@@ -468,11 +469,7 @@ export default async function TonightPage({ params }: Props) {
                     {tr(locale, 'Club Guide →', 'Scheda Club →')}
                   </Link>
                   <a
-                    href={`https://wa.me/393519127047?text=${encodeURIComponent(
-                      isIt
-                        ? `Ciao! Vorrei prenotare per stasera da ${club.name} a Milano.`
-                        : `Hi! I want to book for tonight at ${club.name} in Milan.`,
-                    )}`}
+                    href={getConciergeBookingUrl(locale, club.name, `${lp}/calendar/tonight`)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="ml-auto px-4 py-2 rounded-full bg-champagne text-black text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"

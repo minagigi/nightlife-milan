@@ -347,7 +347,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   const initialNow = new Date();
   const dateSensitiveEvents = selectPriorityVenueEvents(await getDateSensitiveCarouselInventory(locale), initialNow);
 
-  const waLink = getConciergeBookingUrl(locale);
+  const waLink = getConciergeBookingUrl(locale, undefined, lp || '/');
   const formerHeroCopy = getHeroCopy(locale);
   const uiLabels = (() => {
     switch (locale) {

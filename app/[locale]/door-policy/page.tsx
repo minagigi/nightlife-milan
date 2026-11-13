@@ -8,6 +8,7 @@ import Link from '@/components/LocalizedLink';
 import { mockVenues } from '@/lib/data';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getHubSeoMeta35 } from '@/lib/i18n/hubSeoMeta35';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import {
   DressCodeInstantChecker,
   VelvetRopeChecklist,
@@ -404,7 +405,7 @@ export default async function DoorPolicyPage({ params }: Props) {
                 : "Message us on WhatsApp. We'll tell you exactly what to wear for your chosen venue."}
             </p>
             <a
-              href="https://wa.me/393519127047?text=Hi%2C%20I%20have%20a%20question%20about%20the%20dress%20code%20for%20a%20Milan%20club."
+              href={getConciergeBookingUrl(locale, 'Dress Code & Door Policy', `${lp}/door-policy`)}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 bg-champagne text-black font-bold rounded-full hover:bg-white transition-colors text-sm uppercase tracking-wider"

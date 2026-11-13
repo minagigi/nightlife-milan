@@ -1,13 +1,16 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { motion } from 'motion/react';
 import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
 import { MapPin, Clock, Shirt, Music, MessageCircle, Star, Calendar, ArrowLeft, ShieldCheck, Check, CreditCard } from 'lucide-react';
 import { Dictionary } from '@/lib/get-dictionary';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 
 export default function JustMeClientView({ dict, locale }: { dict: Dictionary, locale: string }) {
-  const waLink = "https://wa.me/393519127047?text=Hi,%20I'd%20like%20to%20book%20VIP%20access%20at%20Just%20Me%20Milano";
+  const pathname = usePathname() || `/${locale === 'en' ? '' : `${locale}/`}clubs/just-me-milano`;
+  const waLink = getConciergeBookingUrl(locale, 'Just Me Milano', pathname);
 
   const servicesTags = dict.labels.services.split(',').map(s => s.trim());
 
@@ -143,7 +146,7 @@ export default function JustMeClientView({ dict, locale }: { dict: Dictionary, l
                   </div>
                   <div className="shrink-0">
                     <a 
-                      href={`https://wa.me/393519127047?text=Hi,%20I'd%20like%20to%20book%20for%20${event.title}%20(${event.day})%20at%20Just%20Me%20Milano`} 
+                      href={getConciergeBookingUrl(locale, `${event.title} (${event.day}) · Just Me Milano`, pathname)} 
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="inline-flex items-center justify-center px-4 py-2 bg-[#25D366]/10 text-[#25D366] border border-[#25D366]/30 rounded-sm hover:bg-[#25D366] hover:text-white transition-colors text-xs font-bold uppercase tracking-wider w-full md:w-auto"

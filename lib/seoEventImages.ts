@@ -1,5 +1,9 @@
 import { CAPODANNO_NAVIGATION } from '@/lib/capodanno/routes';
 import { SITE_CONTACT } from '@/config/contact';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
+import { isEnabledLocale, type LocaleCode } from '@/lib/i18n/localeRegistry';
+import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
+import { getLocalizedEventSlug35 } from '@/lib/i18n/localizedSlugs35';
 
 export type TargetArchetype =
   | 'couples_vip'
@@ -803,6 +807,7 @@ const UX_COPY_BY_LOCALE: Record<string, {
 
 function buildSeoEventUxPack(params: {
   locale: string;
+  eventSlug: string;
   venueName: string;
   h1: string;
   targetLabel: string;
@@ -810,11 +815,13 @@ function buildSeoEventUxPack(params: {
   music?: string;
 }): SeoEventUxPack {
   const loc = params.locale;
+  const locCode: LocaleCode = isEnabledLocale(loc) ? loc : 'en';
   const base = UX_COPY_BY_LOCALE[loc] || UX_COPY_BY_LOCALE.en;
-  const prefix = loc === 'en' ? '' : `/${loc}`;
-  const capHubHref = `${prefix}/events/${(CAPODANNO_NAVIGATION[loc as keyof typeof CAPODANNO_NAVIGATION] || CAPODANNO_NAVIGATION.en).slug}`;
-  const halHubHref = loc === 'it' ? '/it/events/eventi-halloween-milano-2026' : `${prefix}/events/halloween-events-in-milan-2026`;
-  const mkWa = (msg: string) => `https://wa.me/393519127047?text=${encodeURIComponent(msg)}`;
+  const prefix = locCode === 'en' ? '' : `/${locCode}`;
+  const capHubHref = `${prefix}/events/${(CAPODANNO_NAVIGATION[locCode as keyof typeof CAPODANNO_NAVIGATION] || CAPODANNO_NAVIGATION.en).slug}`;
+  const halHubHref = locCode === 'it' ? '/it/events/eventi-halloween-milano-2026' : `${prefix}/events/halloween-events-in-milan-2026`;
+  const eventPagePath = `${prefix}/${getLocalizedDir35('events', locCode)}/${getLocalizedEventSlug35(params.eventSlug, locCode)}`;
+  const mkWa = (context: string) => getConciergeBookingUrl(locCode, context, eventPagePath);
 
   const tiers: [SeoEventUxTier, SeoEventUxTier, SeoEventUxTier, SeoEventUxTier] = [
     {
@@ -824,7 +831,7 @@ function buildSeoEventUxPack(params: {
       guestsRange: '6–8 pax',
       perPersonRange: '€38 – €50 / pax',
       included: base.vipInclusions[0],
-      waUrl: mkWa(`Ciao Nightlife Milan! Vorrei bloccare un preventivo ${base.vipZones[0]} (€300 · 6-8 pax) per ${params.h1} presso ${params.venueName}.`),
+      waUrl: mkWa(`${base.vipZones[0]} (€300 · 6-8 pax) · ${params.h1} · ${params.venueName}`),
     },
     {
       id: 'prive',
@@ -833,7 +840,7 @@ function buildSeoEventUxPack(params: {
       guestsRange: '8–10 pax',
       perPersonRange: '€60 – €75 / pax',
       included: base.vipInclusions[1],
-      waUrl: mkWa(`Ciao Nightlife Milan! Vorrei bloccare un preventivo ${base.vipZones[1]} (€600 · 8-10 pax) per ${params.h1} presso ${params.venueName}.`),
+      waUrl: mkWa(`${base.vipZones[1]} (€600 · 8-10 pax) · ${params.h1} · ${params.venueName}`),
     },
     {
       id: 'super-prive',
@@ -842,7 +849,7 @@ function buildSeoEventUxPack(params: {
       guestsRange: '10–12 pax',
       perPersonRange: '€85 – €100 / pax',
       included: base.vipInclusions[2],
-      waUrl: mkWa(`Ciao Nightlife Milan! Vorrei bloccare un preventivo ${base.vipZones[2]} (€1.000 · 10-12 pax) per ${params.h1} presso ${params.venueName}.`),
+      waUrl: mkWa(`${base.vipZones[2]} (€1.000 · 10-12 pax) · ${params.h1} · ${params.venueName}`),
     },
     {
       id: 'console',
@@ -851,7 +858,7 @@ function buildSeoEventUxPack(params: {
       guestsRange: '12–15 pax',
       perPersonRange: '€100 – €125 / pax',
       included: base.vipInclusions[3],
-      waUrl: mkWa(`Ciao Nightlife Milan! Vorrei bloccare un preventivo ${base.vipZones[3]} (€1.500 · 12-15 pax) per ${params.h1} presso ${params.venueName}.`),
+      waUrl: mkWa(`${base.vipZones[3]} (€1.500 · 12-15 pax) · ${params.h1} · ${params.venueName}`),
     },
   ];
 
@@ -876,7 +883,7 @@ function buildSeoEventUxPack(params: {
       upsellTitle: base.upsellTitle,
       upsellBody: base.upsellBody,
       ctaBtn: base.vipCtaBtn,
-      waDefaultUrl: mkWa(`Ciao Nightlife Milan! Vorrei un preventivo Tavolo VIP per ${params.h1} (${params.venueName}).`),
+      waDefaultUrl: mkWa(`VIP Table Quote · ${params.h1} · ${params.venueName}`),
     },
     dressChecker: {
       heading: base.dressHeadingTpl.replace('{venue}', params.venueName),
@@ -898,7 +905,7 @@ function buildSeoEventUxPack(params: {
       heading: base.privHeadingTpl.replace('{venue}', params.venueName),
       body: base.privBody,
       ctaLabel: base.privCta,
-      waUrl: mkWa(`Ciao Nightlife Milan! Vorrei informazioni sui pacchetti Festa Privata / Laurea / Compleanno / Evento Aziendale presso ${params.venueName}.`),
+      waUrl: mkWa(`Private Party / Graduation / Corporate · ${params.venueName}`),
     },
     nightFinder: {
       eyebrow: base.nfEyebrow,
@@ -933,7 +940,7 @@ function buildSeoEventUxPack(params: {
         },
       ],
       waCtaLabel: base.nfWaCta,
-      waUrl: mkWa(`Ciao Nightlife Milan! Vorrei un consiglio rapido per scegliere locale, lista o tavolo VIP a Milano.`),
+      waUrl: mkWa(`${params.h1} · ${params.venueName}`),
     },
   };
 }
@@ -1060,6 +1067,7 @@ export function buildSeoEventImagePack(params: {
     schemaImages,
     ux: buildSeoEventUxPack({
       locale: params.locale,
+      eventSlug: params.eventSlug,
       venueName: params.venueName,
       h1: params.h1,
       targetLabel,

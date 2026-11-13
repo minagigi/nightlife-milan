@@ -1,8 +1,10 @@
 import SeoAuthorityHub from '@/components/SeoAuthorityHub';
 
 import EventVenueMap from '@/components/EventVenueMap';
-import { getEventVenueCopy } from '@/lib/i18n/eventVenueCopy';import type { LocaleCode } from '@/lib/i18n/locales';
+import { getEventVenueCopy } from '@/lib/i18n/eventVenueCopy';
+import type { LocaleCode } from '@/lib/i18n/locales';
 import { capodannoEventPath, capodannoNavigation, capodannoPath } from '@/lib/capodanno/routes';
+import { getPaymentTerms35 } from '@/lib/capodanno/paymentTerms35';
 import {
   getCapodannoLocalizedEventContent,
   getCapodannoLocalizedEventSubtitle,
@@ -63,6 +65,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
     ? { ...baseScarcity, urgencyAlertTitle: partyCopy.alertTitle, urgencyAlertBody: partyCopy.alertBody }
     : baseScarcity;
   const venueMapCopy = getEventVenueCopy(locale as LocaleCode);
+  const paymentTerms = getPaymentTerms35(locale);
 
   const localized = getCapodannoLocalizedEventContent(event, locale);
   const title = localized.title;
@@ -123,11 +126,11 @@ export default function CapodannoDetailView({ locale, event }: Props) {
         hasDinnerFormula
           ? {
               q: `Come posso prenotare prevendite, cenone o tavolo VIP per ${event.venueName}?`,
-              a: `Puoi verificare la disponibilità dei lotti Early Bird, i menu del Gran Cenone e le mappe dei tavoli Privé contattando direttamente il Concierge ufficiale Nightlife Milan su WhatsApp o telefono al numero ${SITE_CONTACT.whatsapp.number} oppure via email a concierge@nightlifemilan.com senza commissioni aggiuntive.`,
+              a: `Contatta il Concierge ufficiale Nightlife Milan su WhatsApp (${SITE_CONTACT.whatsapp.number}), attivo 24/24, 7 giorni su 7. ${paymentTerms.steps.join(' ')}`,
             }
           : {
               q: `Come posso prenotare l’ingresso Early Bird o il tavolo VIP per ${event.venueName}?`,
-              a: `Puoi verificare la disponibilità degli ingressi Early Bird e delle zone tavolo Dancefloor e Privé contattando direttamente il Concierge ufficiale Nightlife Milan su WhatsApp o telefono al numero ${SITE_CONTACT.whatsapp.number} oppure via email a concierge@nightlifemilan.com senza commissioni aggiuntive.`,
+              a: `Contatta il Concierge ufficiale Nightlife Milan su WhatsApp (${SITE_CONTACT.whatsapp.number}), attivo 24/24, 7 giorni su 7. ${paymentTerms.steps.join(' ')}`,
             },
       ]
     : locale === 'en'
@@ -143,11 +146,11 @@ export default function CapodannoDetailView({ locale, event }: Props) {
           hasDinnerFormula
             ? {
                 q: `How can I book tickets, gala dinner, or a VIP table for ${event.venueName}?`,
-                a: `You can check real-time early-bird ticket availability, gala menus, and VIP table floor plans via the official Nightlife Milan WhatsApp Concierge at ${SITE_CONTACT.whatsapp.number} or email concierge@nightlifemilan.com with zero agency markups.`,
+                a: `Contact our official Nightlife Milan WhatsApp Concierge (${SITE_CONTACT.whatsapp.number}), available 24/7. ${paymentTerms.steps.join(' ')}`,
               }
             : {
                 q: `How can I book Early Bird admission or a VIP table for ${event.venueName}?`,
-                a: `You can check real-time Early Bird ticket availability and Dancefloor / Privé VIP table options via the official Nightlife Milan WhatsApp Concierge at ${SITE_CONTACT.whatsapp.number} or email concierge@nightlifemilan.com with zero agency markups.`,
+                a: `Contact our official Nightlife Milan WhatsApp Concierge (${SITE_CONTACT.whatsapp.number}), available 24/7. ${paymentTerms.steps.join(' ')}`,
               },
         ]
       : [
@@ -161,7 +164,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
           },
           {
             q: `WhatsApp Concierge ${SITE_CONTACT.whatsapp.number} · ${event.venueName}?`,
-            a: `${ui.bookingSubtitle}`,
+            a: `${paymentTerms.steps.join(' ')}`,
           },
         ];
 
@@ -319,6 +322,18 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                     {ui.tocPrices}
                   </a>
                 </li>
+                {(localized.menus?.length ?? 0) > 0 && (
+                  <li>
+                    <a href="#menu-ufficiale" className="text-[#050505] hover:underline">
+                      {localized.menusHeading || 'Menu'}
+                    </a>
+                  </li>
+                )}
+                <li>
+                  <a href="#termini-pagamento" className="text-[#050505] hover:underline">
+                    {paymentTerms.tocLabel}
+                  </a>
+                </li>
                 <li>
                   <a href="#prenota-concierge" className="text-[#050505] hover:underline">
                     {ui.tocBooking}
@@ -326,12 +341,12 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 </li>
                 <li>
                   <a href="#mappa-locale" className="text-[#050505] hover:underline">
-                    4. {ui.mapHeadingEvent}
+                    {ui.mapHeadingEvent}
                   </a>
                 </li>
                 <li>
                   <a href="#faq-evento" className="text-[#050505] hover:underline">
-                    5. {ui.faqHeadingPrefix}
+                    {ui.faqHeadingPrefix}
                   </a>
                 </li>
                 <li>
@@ -387,6 +402,64 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                   >
                     {matchedPublicVenueName} →
                   </Link>
+                </div>
+              )}
+
+              {localized.relatedHolidayBanner && (
+                <div
+                  data-related-holiday-banner
+                  className="mt-4 flex flex-col gap-3 border border-[#EAE3D5]/40 bg-[#050505] p-4 sm:flex-row sm:items-center sm:justify-between"
+                >
+                  <div>
+                    <p className="text-[11px] font-bold uppercase tracking-widest text-[#EAE3D5]">
+                      {localized.relatedHolidayBanner.badge}
+                    </p>
+                    <p className="mt-1 font-serif text-lg font-bold text-[#F6F1E7]">
+                      {localized.relatedHolidayBanner.title}
+                    </p>
+                    <p className="mt-1 text-sm text-[#C2B9AA]">
+                      {localized.relatedHolidayBanner.description}
+                    </p>
+                  </div>
+                  <Link
+                    href={localized.relatedHolidayBanner.href}
+                    className="inline-flex shrink-0 items-center justify-center bg-[#F6F1E7] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#050505] transition hover:bg-[#EAE3D5]"
+                  >
+                    {localized.relatedHolidayBanner.ctaLabel} →
+                  </Link>
+                </div>
+              )}
+
+              {localized.schedule && localized.schedule.length > 0 && (
+                <div className="mt-6 border border-[#F6F1E7]/15 bg-[#050505] p-5">
+                  <h3 className="font-serif text-lg font-bold text-[#F6F1E7]">
+                    {localized.scheduleHeading || ui.programHeading}
+                  </h3>
+                  <ol className="mt-3 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
+                    {localized.schedule.map((step) => (
+                      <li
+                        key={`${step.time}-${step.label}`}
+                        className="border border-[#F6F1E7]/12 bg-[#0B0A09] p-3"
+                      >
+                        <span className="font-mono text-xs font-bold text-[#C9A84C]">{step.time}</span>
+                        <p className="mt-1 text-xs leading-relaxed text-[#F6F1E7] sm:text-sm">{step.label}</p>
+                      </li>
+                    ))}
+                  </ol>
+                  {localized.programImageSrc && (
+                    <div className="mt-4 flex justify-center border border-[#F6F1E7]/15 bg-[#0B0A09] p-2">
+                      <img
+                        src={localized.programImageSrc}
+                        alt={`${title} · ${localized.scheduleHeading || ui.programHeading}`}
+                        title={localized.scheduleHeading || title}
+                        width={1376}
+                        height={768}
+                        loading="lazy"
+                        decoding="async"
+                        className="max-h-[420px] w-auto max-w-full object-contain"
+                      />
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -508,6 +581,106 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               </div>
             </div>
 
+            {/* Official Menus (Pineta Gala / Buffet & Voya 20th Floor) */}
+            {localized.menus && localized.menus.length > 0 && (
+              <section
+                id="menu-ufficiale"
+                data-official-menus
+                className="mt-10 border border-[#F6F1E7]/20 bg-[#050505] p-6 sm:p-8"
+              >
+                <h2 className="font-serif text-2xl font-bold text-[#F6F1E7]">
+                  {localized.menusHeading || 'Menu'}
+                </h2>
+                <div className="mt-5 grid gap-6 lg:grid-cols-2">
+                  {localized.menus.map((menu) => (
+                    <article
+                      key={menu.id}
+                      className="flex flex-col justify-between border border-[#F6F1E7]/16 bg-[#0B0A09] p-5"
+                    >
+                      <div>
+                        <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-[#F6F1E7]/12 pb-3">
+                          <div>
+                            <h3 className="font-serif text-xl font-bold text-[#F6F1E7]">{menu.title}</h3>
+                            <p className="mt-1 text-xs text-[#C2B9AA]">{menu.subtitle}</p>
+                          </div>
+                          <span className="shrink-0 bg-[#F6F1E7] px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#050505]">
+                            {menu.price}
+                          </span>
+                        </div>
+                        <dl className="mt-4 space-y-2.5 text-sm">
+                          {menu.courses.map((c) => (
+                            <div key={`${menu.id}-${c.course}`} className="border-b border-[#F6F1E7]/10 pb-2 last:border-0">
+                              <dt className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#C9A84C]">
+                                {c.course}
+                              </dt>
+                              <dd className="mt-0.5 text-xs leading-relaxed text-[#EAE3D5] sm:text-sm">
+                                {c.dish}
+                              </dd>
+                            </div>
+                          ))}
+                        </dl>
+                        <p className="mt-3 border border-[#F6F1E7]/15 bg-[#050505] p-3 text-xs font-medium text-[#C2B9AA]">
+                          {menu.beverages}
+                        </p>
+                      </div>
+                      <div className="mt-4 flex justify-center border border-[#F6F1E7]/15 bg-[#050505] p-2">
+                        <img
+                          src={menu.imageSrc}
+                          alt={menu.imageAlt}
+                          title={menu.title}
+                          width={1376}
+                          height={768}
+                          loading="lazy"
+                          decoding="async"
+                          className="max-h-[380px] w-auto max-w-full object-contain"
+                        />
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {/* Official 6-Step Prepayment & Booking Protocol */}
+            <section
+              id="termini-pagamento"
+              data-payment-terms-35
+              className="mt-10 border border-[#F6F1E7]/25 bg-[#050505] p-6 sm:p-8"
+            >
+              <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#C9A84C]">
+                {paymentTerms.eyebrow}
+              </p>
+              <div className="mt-2 flex flex-wrap items-center justify-between gap-3">
+                <h2 className="font-serif text-2xl font-bold text-[#F6F1E7]">
+                  {paymentTerms.heading}
+                </h2>
+                <span className="border border-[#F6F1E7]/35 bg-[#0B0A09] px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#EAE3D5]">
+                  {paymentTerms.methodsBadge}
+                </span>
+              </div>
+              <p className="mt-2 text-sm leading-relaxed text-[#C2B9AA]">
+                {paymentTerms.subtitle}
+              </p>
+              <ol className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {paymentTerms.steps.map((step, idx) => (
+                  <li
+                    key={step}
+                    className="border border-[#F6F1E7]/15 bg-[#0B0A09] p-4"
+                  >
+                    <span className="inline-flex h-6 w-6 items-center justify-center bg-[#F6F1E7] font-mono text-xs font-bold text-[#050505]">
+                      {idx + 1}
+                    </span>
+                    <p className="mt-2.5 text-xs leading-relaxed text-[#F6F1E7] sm:text-sm">
+                      {step}
+                    </p>
+                  </li>
+                ))}
+              </ol>
+              <p className="mt-4 border-l-2 border-[#C9A84C] pl-3 text-xs leading-relaxed text-[#C2B9AA]">
+                {paymentTerms.note}
+              </p>
+            </section>
+
             {/* CTA Box with WhatsApp, Tel, Email */}
             <div
               id="prenota-concierge"
@@ -521,7 +694,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               </p>
               <div className="mt-5 flex flex-wrap gap-3">
                 <a
-                  href={getConciergeBookingUrl(locale, `${title} (${event.venueName} - 31/12/2026)`)}
+                  href={getConciergeBookingUrl(locale, `${title} (${event.venueName} - 31/12/2026)`, `${SITE_URL}${canonicalPath}`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   data-event-cta-kind="table"
@@ -617,7 +790,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                     {getCapodannoLocalizedEventTitle(item, locale)}
                   </h3>
                   <p className="mt-2 text-xs text-[#C2B9AA]">
-                    {isIt ? item.priceSummaryIt : item.priceSummaryEn}
+                    {getCapodannoLocalizedEventContent(item, locale).priceSummary}
                   </p>
                 </Link>
               ))}

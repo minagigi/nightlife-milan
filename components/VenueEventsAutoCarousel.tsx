@@ -1,8 +1,11 @@
 'use client';
 
 import React, { useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
+import { isEnabledLocale } from '@/lib/i18n/locales';
 import type {
   VenueUi35,
   CarouselEventCard,
@@ -45,6 +48,9 @@ export default function VenueEventsAutoCarousel({
           ? 'curated'
           : 'future';
 
+  const pathname = usePathname() || '/';
+  const firstSegment = pathname.split('/').filter(Boolean)[0] || '';
+  const activeLocale = isEnabledLocale(firstSegment) ? firstSegment : 'en';
   const [activeTab, setActiveTab] = useState<TabKey>(defaultTab);
   const [viewMode, setViewMode] = useState<'carousel' | 'grid'>('carousel');
   const scrollRef = useRef<HTMLDivElement | null>(null);
@@ -301,9 +307,7 @@ export default function VenueEventsAutoCarousel({
             <p className="text-sm text-[#F6F1E7] font-medium mt-1">{targetProfile.priceSummary}</p>
           </div>
           <a
-            href={`https://wa.me/393519127047?text=${encodeURIComponent(
-              `Ciao Nightlife Milan, vorrei info e prezzi aggiornati per ${venueName}`
-            )}`}
+            href={getConciergeBookingUrl(activeLocale, venueName, pathname)}
             target="_blank"
             rel="noopener noreferrer"
             className="shrink-0 inline-flex items-center justify-center bg-[#25D366] px-5 py-3 font-mono text-xs font-bold uppercase tracking-wider text-[#050505] hover:bg-[#20bd5a] transition"
@@ -350,7 +354,7 @@ export default function VenueEventsAutoCarousel({
                 </p>
               </div>
               <a
-                href={`https://wa.me/393519127047?text=${encodeURIComponent(cel.whatsappText)}`}
+                href={getConciergeBookingUrl(activeLocale, `${cel.title} · ${venueName}`, pathname)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-4 w-full inline-flex items-center justify-center bg-[#25D366] hover:bg-[#20bd5a] px-3.5 py-2.5 font-mono text-xs font-bold uppercase tracking-wider text-[#050505] transition"

@@ -1,5 +1,13 @@
 import CapodannoHubView from '@/components/CapodannoHubView';
 import CapodannoDetailView from '@/components/CapodannoDetailView';
+import ChristmasVoyaDetailView from '@/components/ChristmasVoyaDetailView';
+import {
+  christmasVoyaHreflangAlternates,
+  christmasVoyaPath,
+  christmasVoyaSlug,
+  getChristmasVoyaContent,
+  resolveChristmasVoyaSlug,
+} from '@/lib/christmas/voya35';
 import { getCapodannoCategoryPageDef, getCapodannoEventBySlug, getCapodannoEventsForMode } from '@/lib/capodannoEvents';
 import {
   buildCapodannoMetaDescription,
@@ -61,6 +69,7 @@ import { getEventBatchProfile, getEventBatchSlug, normalizeEventBatchSlug } from
 import { getBatchEventTemplateValues } from '@/lib/eventBatchContent';
 import { getEventLocalePack } from '@/lib/eventLocalePacks';
 import { buildEventSeoDescription, buildEventSeoTitle, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { CONTACT } from '@/config/contact';
 import { compareEventbriteDiscoveryItems, getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
 import {
@@ -239,6 +248,37 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug: rawSlug } = await params;
   const slug = rawSlug === 'keinemusik-milano-25-settembre-2026' ? 'keinemusik-milan-25-september-2026' : rawSlug;
   if (slug === halloweenNavigation(locale).slug) return halloweenMetadata(locale as LocaleCode);
+  if (resolveChristmasVoyaSlug(slug)) {
+    const canonicalSlug = christmasVoyaSlug(locale);
+    if (slug !== canonicalSlug) permanentRedirect(christmasVoyaPath(locale));
+    const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
+    const canonical = `${baseUrl}${christmasVoyaPath(locale)}`;
+    const xmas = getChristmasVoyaContent(locale);
+    return {
+      title: xmas.metaTitle,
+      description: xmas.metaDescription,
+      robots: seoRobots(locale, true, true),
+      alternates: {
+        canonical,
+        languages: christmasVoyaHreflangAlternates(baseUrl),
+      },
+      openGraph: {
+        title: xmas.metaTitle,
+        description: xmas.metaDescription,
+        url: canonical,
+        type: 'website',
+        siteName: 'Nightlife Milan',
+        locale: getLocaleDef(locale)?.ogLocale || 'en_US',
+        images: [{ url: `${baseUrl}${xmas.posterSrc}`, width: 1376, height: 768, alt: xmas.title }],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: xmas.metaTitle,
+        description: xmas.metaDescription,
+        images: [`${baseUrl}${xmas.posterSrc}`],
+      },
+    };
+  }
   const capCatId = resolveCapodannoCategoryIdByLocalizedSlug(slug, locale);
   if (capCatId) {
     if (slug !== capodannoCategorySlug(capCatId, locale)) permanentRedirect(capodannoCategoryPath(capCatId, locale));
@@ -413,6 +453,11 @@ export default async function EventPage({ params }: Props) {
     permanentRedirect(`${localePrefix(locale)}/${getLocalizedDir35('events', locale)}/keinemusik-milan-25-september-2026`);
   }
   if (slug === halloweenNavigation(locale).slug) return <HalloweenHub locale={locale as LocaleCode} />;
+  if (resolveChristmasVoyaSlug(slug)) {
+    const canonicalSlug = christmasVoyaSlug(locale);
+    if (slug !== canonicalSlug) permanentRedirect(christmasVoyaPath(locale));
+    return <ChristmasVoyaDetailView locale={locale} />;
+  }
   const capCatId = resolveCapodannoCategoryIdByLocalizedSlug(slug, locale);
   if (capCatId) {
     if (slug !== capodannoCategorySlug(capCatId, locale)) permanentRedirect(capodannoCategoryPath(capCatId, locale));
@@ -458,13 +503,16 @@ export default async function EventPage({ params }: Props) {
     const startDateISO = nextWeekdayISO(weeklyEvent.dayOfWeek, 23, 0);
     const endDateISO = new Date(new Date(startDateISO).getTime() + 4 * 60 * 60 * 1000).toISOString();
 
+    const weeklyUrl = canonicalPageUrl(baseUrl, locale, `/events/${weeklyEvent.clubSlug}-${weeklyEvent.day}-${weeklyEvent.eventSlug}`);
+    const weeklyWaHref = getConciergeBookingUrl(locale, `${weeklyEvent.name} · ${weeklyEvent.clubName}`, weeklyUrl);
+
     // Generate JSON-LD
     const jsonLd: any = {
       '@context': 'https://schema.org',
       '@type': 'Event',
       name: title,
       description: description,
-      url: canonicalPageUrl(baseUrl, locale, `/events/${weeklyEvent.clubSlug}-${weeklyEvent.day}-${weeklyEvent.eventSlug}`),
+      url: weeklyUrl,
       startDate: startDateISO,
       endDate: endDateISO,
       eventStatus: 'https://schema.org/EventScheduled',
@@ -495,7 +543,7 @@ export default async function EventPage({ params }: Props) {
         return {
           offers: {
             '@type': 'Offer',
-            url: weeklyEvent.xceedLink || `https://wa.me/393519127047?text=Booking%20for%20${weeklyEvent.name}`,
+            url: weeklyEvent.xceedLink || weeklyWaHref,
             price,
             priceCurrency: 'EUR',
             availability: 'https://schema.org/InStock',
@@ -555,7 +603,7 @@ export default async function EventPage({ params }: Props) {
                 </a>
               )}
               <a
-                href={`https://wa.me/393519127047?text=Hi,%20I%20would%20like%20to%20book%20for%20${encodeURIComponent(weeklyEvent.name)}%20at%20${encodeURIComponent(weeklyEvent.clubName)}`}
+                href={weeklyWaHref}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`inline-block ${weeklyEvent.xceedLink ? 'border border-white/40 text-white hover:border-champagne hover:text-champagne' : 'bg-champagne text-black hover:bg-white'} px-8 py-4 rounded-full font-bold transition-colors text-lg`}
@@ -642,7 +690,7 @@ export default async function EventPage({ params }: Props) {
                   </a>
                 )}
                 <a
-                  href={`https://wa.me/393519127047?text=Hi,%20I%20would%20like%20to%20book%20for%20${weeklyEvent.name}%20at%20${weeklyEvent.clubName}`}
+                  href={weeklyWaHref}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 w-full bg-[#25D366] text-white px-6 py-3 rounded-xl font-bold hover:bg-[#20bd5a] transition-colors"
@@ -827,6 +875,8 @@ export default async function EventPage({ params }: Props) {
       ? `mesas VIP a partir de €${event.pricing.tableMinSpend}`
       : tableText,
   ].filter(Boolean).join(', ');
+  const currentEventPath = `${localePrefix(locale)}/${getLocalizedDir35('events', locale)}/${slug}`;
+  const currentEventWaHref = getConciergeBookingUrl(locale, `${title} · ${venueName}`, currentEventPath);
 
   return (
     <>
@@ -910,7 +960,7 @@ export default async function EventPage({ params }: Props) {
                 </p>
                 <div className="mt-4 flex flex-wrap gap-3">
                   <a
-                    href={CONTACT.whatsapp.link}
+                    href={currentEventWaHref}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center bg-[#25D366] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#050505] transition hover:bg-[#2EE472]"
@@ -980,7 +1030,7 @@ export default async function EventPage({ params }: Props) {
                     {eventText(locale, 'Buy on Xceed', 'Acquista su Xceed', 'Comprar na Xceed')}
                   </a>
                   <a
-                    href={CONTACT.whatsapp.link}
+                    href={currentEventWaHref}
                     target="_blank"
                     rel="noopener noreferrer"
                     data-analytics-source="event_intro_whatsapp"

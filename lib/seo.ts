@@ -1,4 +1,5 @@
 import { Event, Venue, Performer, LocalizedString } from './types';
+import { getConciergeBookingUrl } from './conciergeBooking';
 import { localePrefix, type LocaleCode } from './i18n/locales';
 import { getLocalizedDir35 } from './i18n/dirTokens35';
 import {
@@ -344,7 +345,7 @@ export const generateClubSchema = ({
     '@type': 'ReserveAction',
     target: {
       '@type': 'EntryPoint',
-      urlTemplate: `https://wa.me/393519127047?text=${encodeURIComponent(`Hi Nightlife Milan! I'd like to book a VIP table or guest list at ${name}.`)}`,
+      urlTemplate: getConciergeBookingUrl(locale, name, canonicalUrl),
       actionPlatform: [
         'https://schema.org/DesktopWebPlatform',
         'https://schema.org/MobileWebPlatform',

@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import Link from '@/components/LocalizedLink';
 import Hero from '@/components/seo-landing/Hero';
 import { localePrefix } from '@/lib/i18n/locales';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import {
   VipQuoteCalculator,
   WeeklyNightlifeNavigator,
@@ -75,7 +76,7 @@ export default async function LandingPage({ params }: Props) {
             : 'Official VIP Table, Royal Aperitivo, Graduation Party & San Siro Match Afterparty Desk (+39 351 912 7047).'
         }
         ctaText={isIt ? 'Prenota ora su WhatsApp +39 351 912 7047' : 'Book via WhatsApp +39 351 912 7047'}
-        ctaLink="https://wa.me/393519127047"
+        ctaLink={getConciergeBookingUrl(locale, 'Just Me Milano & Top 6 VIP Clubs', `${lp}/seo-landing`)}
         imageUrl="/images/pillars/seo-landing-01.webp"
       />
 

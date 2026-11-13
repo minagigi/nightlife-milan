@@ -9,6 +9,7 @@ import { EntryFormulaMatrix, VipQuoteCalculator, PrioritySixShowcase } from '@/c
 import Image from 'next/image';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 
 export const revalidate = 3600;
 
@@ -245,11 +246,7 @@ export default async function GuestListsPage({
               </div>
 
               <a
-                href={`https://wa.me/393519127047?text=${encodeURIComponent(
-                  isIt
-                    ? `Ciao Nightlife Milan! Vorrei accreditarmi in Lista NIGHTLIFE MILAN per ${v.name}.`
-                    : `Hi Nightlife Milan! I'd like to get on the NIGHTLIFE MILAN Guest List for ${v.name}.`
-                )}`}
+                href={getConciergeBookingUrl(locale, `Guest List · ${v.name}`, `${localePrefix(locale)}/guest-lists`)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-champagne text-black font-mono text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"

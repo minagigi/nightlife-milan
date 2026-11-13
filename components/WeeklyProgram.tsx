@@ -1,7 +1,10 @@
+'use client';
+
 import React from 'react';
+import { usePathname } from 'next/navigation';
 import { tr } from '@/lib/i18n/t';
 import { MessageCircle } from 'lucide-react';
-import { CONTACT } from '@/config/contact';
+import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 
 interface WeeklyProgramProps {
   venueId: string;
@@ -10,6 +13,7 @@ interface WeeklyProgramProps {
 }
 
 export default function WeeklyProgram({ venueId, venueName, locale }: WeeklyProgramProps) {
+  const pathname = usePathname() || (locale === 'it' ? '/it' : '/');
   const programs: Record<string, { day: string; event: string }[]> = {
     'v-justme': [
       { day: tr(locale, 'Tue', 'Martedì'), event: 'University Night' },
@@ -78,8 +82,7 @@ export default function WeeklyProgram({ venueId, venueName, locale }: WeeklyProg
       </h3>
       <ul className="space-y-4">
         {program.map((item, idx) => {
-          const waText = `Hi, I'd like to book for ${item.event} (${item.day}) at ${venueName}`;
-          const waLink = `${CONTACT.whatsapp.link}?text=${encodeURIComponent(waText)}`;
+          const waLink = getConciergeBookingUrl(locale, `${item.event} (${item.day}) · ${venueName}`, pathname);
           
           return (
             <li key={idx} className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10 last:border-0 last:pb-0">
