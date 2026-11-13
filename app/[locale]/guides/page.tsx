@@ -14,9 +14,6 @@ import { tr } from '@/lib/i18n/t';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { mockGuides } from '@/lib/data';
 import { getLocalizedText } from '@/lib/seo';
-import { VipQuoteCalculator, WeeklyNightlifeNavigator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
-import EditorialPageSections from '@/components/EditorialPageSections';
-import VerticalHubsAndEventsSection from '@/components/VerticalHubsAndEventsSection';
 import type { LocaleCode } from '@/lib/i18n/locales';
 
 export const revalidate = 3600;
@@ -678,21 +675,6 @@ export default async function GuidesPage({
         ))}
       </div>
 
-      {/* Interactive Weekly Nightlife Navigator */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-        <WeeklyNightlifeNavigator locale={loc} />
-      </section>
-
-      {/* Interactive VIP Table & Bottle Service Calculator */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-        <VipQuoteCalculator locale={loc} />
-      </section>
-
-      {/* Priority 6 Venues Showcase */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-        <PrioritySixShowcase locale={loc} />
-      </section>
-
       {/* Essential Milan Nightlife Knowledge */}
       <section id="golden-rules" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 border-t border-white/10 pt-16 scroll-mt-24">
         <div className="flex items-center gap-2 mb-3">
@@ -732,10 +714,8 @@ export default async function GuidesPage({
         </div>
       </section>
 
-      <VerticalHubsAndEventsSection locale={loc} initialTab="occasions" eventFocus="all" />
       {/* Newsletter Hub */}
       <NewsletterHub lang={loc} />
-      <EditorialPageSections locale={loc} path={`${localePrefix}/guides`} />
     </main>
   );
 }

@@ -11,7 +11,7 @@ export default function NotFound() {
           Not Found
         </h1>
         <p className="text-white/40 text-lg font-light mb-10 leading-relaxed">
-          This page doesn&apos;t exist — or the event has moved to a new date.
+          This page doesn&apos;t exist, or the event has moved to a new date.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
