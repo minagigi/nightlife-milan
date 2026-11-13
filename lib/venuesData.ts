@@ -223,14 +223,14 @@ export const venuesData: Venue[] = [
     zone: MilanZone.PORTA_VENEZIA,
     sameAs: ["https://instagram.com/repvblicmilano"],
     localizedContent: {
-      name: { en: "Repvblic", it: "Repvblic" },
+      name: { en: "REPVBLIC Milano", it: "REPVBLIC Milano" },
       description: {
-        en: "House and EDM with an underground lean. Dirty Monday is the one locals actually clear their week for.",
-        it: "House ed EDM con piega underground. Il Dirty Monday è quello per cui i milanesi liberano davvero la settimana."
+        en: "International club at Piazza della Repubblica, 12 featuring Dirty Monday, weekend House, Hip-Hop & International Hits, and confirmed New Year's Eve 2027 from 23:00 till morning.",
+        it: "Club internazionale in Piazza della Repubblica 12 con pubblico da tutto il mondo: Dirty Monday, weekend House, Hip-Hop e Hit Internazionali, più Capodanno 2027 confermato dalle 23:00 al mattino."
       },
-      dressCode: { en: "Trendy & Edgy", it: "Trendy e Audace" },
-      altTextImg: { en: "Repvblic Club Lights", it: "Luci del Repvblic Club" },
-      insiderTip: { en: "Monday is the night, not the weekend. Go late.", it: "La serata è il lunedì, non il weekend. Vai tardi." }
+      dressCode: { en: "Elevated & Stylish", it: "Look curato & Fashion" },
+      altTextImg: { en: "REPVBLIC Milano Piazza della Repubblica 12", it: "REPVBLIC Milano Piazza della Repubblica 12" },
+      insiderTip: { en: "Open from 23:00 till morning. Confirmed NYE 2027: Early Bird €45 (flûte + 1 drink), Dancefloor €600 (6 guests), Privé €1,200 (10 guests).", it: "Aperto dalle 23:00 al mattino. Capodanno 2027 confermato: Early Bird 45€ (flûte + 1 drink), Tavolo Dancefloor 600€ (6 pax), Privé 1.200€ (10 pax)." }
     },
     image: "/images/repvblic-milano.webp",
     isManaged: true,

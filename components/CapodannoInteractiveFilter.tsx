@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { capodannoCategoryPath, capodannoEventPath } from '@/lib/capodanno/routes';
-import { getCapodannoLocalizedEventTitle, getCapodannoUiCopy } from '@/lib/capodanno/i18n';
+import { getCapodannoLocalizedEventContent, getCapodannoUiCopy } from '@/lib/capodanno/i18n';
 import { getScarcityAndChatCopy } from '@/lib/i18n/scarcityAndChatCopy';
 import type {
   CapodannoEventItem,
@@ -395,11 +395,12 @@ export default function CapodannoInteractiveFilter({
         <>
           <div id="catalogo-eventi" className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {(!hasActiveFilter && !showAll ? filtered.slice(0, 24) : filtered).map((event) => {
-              const title = getCapodannoLocalizedEventTitle(event, locale);
-              const description = isIt ? event.descriptionIt : event.descriptionEn;
-              const music = isIt ? event.musicAndFormatIt : event.musicAndFormatEn;
-              const dress = isIt ? event.dressCodeIt : event.dressCodeEn;
-              const tiers = isIt ? event.tiersIt : event.tiersEn;
+              const localized = getCapodannoLocalizedEventContent(event, locale);
+              const title = localized.title;
+              const description = localized.description;
+              const music = localized.musicAndFormat;
+              const dress = localized.dressCode;
+              const tiers = localized.tiers;
               const detailHref = capodannoEventPath(event.slug, locale);
               return (
                 <article
@@ -525,7 +526,7 @@ export default function CapodannoInteractiveFilter({
                         prefetch={false}
                         className="block rounded px-2 py-1 hover:bg-white/5 hover:text-champagne"
                       >
-                        {ev.venueName} · {getCapodannoLocalizedEventTitle(ev, locale)}
+                        {ev.venueName} · {getCapodannoLocalizedEventContent(ev, locale).title}
                       </Link>
                     </li>
                   ))}

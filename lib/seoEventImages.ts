@@ -467,6 +467,9 @@ export function inferTargetAndOutfit(params: {
   if (s.includes('rooftop') || s.includes('terrazza') || s.includes('ceresio') || s.includes('voya') || s.includes('dome') || s.includes('armani')) {
     return { target: 'fashion_international', outfit: 'haute_couture' };
   }
+  if (s.includes('repvblic')) {
+    return { target: 'fashion_international', outfit: 'sequins_evening' };
+  }
   if (s.includes('techno') || s.includes('amnesia') || s.includes('volt') || s.includes('gate') || s.includes('tempio') || s.includes('tunnel') || s.includes('masada') || s.includes('amelia') || s.includes('bolgia') || s.includes('duro') || s.includes('apophis')) {
     return { target: 'young_clubbers', outfit: 'techno_blackwear' };
   }

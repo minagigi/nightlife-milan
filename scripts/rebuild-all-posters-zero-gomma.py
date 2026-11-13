@@ -85,7 +85,6 @@ CAPODANNO_19F_PLATE_FIXES: dict[str, tuple[int, int, int, int]] = {
     "capodanno-55-milano.webp": (388, 696, 988, 762),
     "capodanno-aria-club-milano.webp": (388, 696, 988, 762),
     "capodanno-pineta-milano.webp": (388, 696, 988, 762),
-    "capodanno-repvblic-milano.webp": (388, 696, 988, 762),
     "capodanno-voya-rooftop-milano.webp": (388, 696, 988, 762),
 }
 
@@ -524,6 +523,16 @@ def main() -> int:
 
         if rel == "public/images/events/capodanno-2027-posters/capodanno-justme-garda-lake.webp":
             raw_p = raw_map["250310"]
+            cache_key = f"raw_B:{raw_p.name}"
+            rel_to_cache_key[rel] = cache_key
+            if cache_key not in card_bytes_cache and not any(k == cache_key for k, _, _, _ in tasks_to_encode):
+                art = Image.open(raw_p).convert("RGB")
+                tasks_to_encode.append((cache_key, art, None, True))
+            gruppo_b_untouched.append(rel)
+            continue
+
+        if rel == "public/images/events/capodanno-2027-posters/capodanno-repvblic-milano.webp":
+            raw_p = repo / "scripts" / "raw-masters" / "master_flyer_repvblic_nye_2027.jpg"
             cache_key = f"raw_B:{raw_p.name}"
             rel_to_cache_key[rel] = cache_key
             if cache_key not in card_bytes_cache and not any(k == cache_key for k, _, _, _ in tasks_to_encode):

@@ -1706,7 +1706,7 @@ export const mockGuides: Guide[] = [
     },
     author: "Nightlife Milan Concierge Team",
     datePublished: "2026-01-10T08:00:00Z",
-    dateModified: "2026-10-30T08:00:00Z",
+    dateModified: "2026-11-13T17:30:00Z",
     image: "/images/pillars/guide-01.webp",
     sections: [
       {
@@ -1811,7 +1811,7 @@ export const mockGuides: Guide[] = [
     },
     author: "Nightlife Milan Mixology Desk",
     datePublished: "2026-01-20T08:00:00Z",
-    dateModified: "2026-10-30T08:00:00Z",
+    dateModified: "2026-11-13T17:30:00Z",
     image: "/images/pillars/guide-02.webp",
     sections: [
       {
@@ -1880,7 +1880,7 @@ export const mockGuides: Guide[] = [
     },
     author: "Nightlife Milan VIP Desk",
     datePublished: "2026-02-01T08:00:00Z",
-    dateModified: "2026-10-30T08:00:00Z",
+    dateModified: "2026-11-13T17:30:00Z",
     image: "/images/pillars/guide-03.webp",
     sections: [
       {
@@ -1949,7 +1949,7 @@ export const mockGuides: Guide[] = [
     },
     author: "Nightlife Milan Editorial Team",
     datePublished: "2026-03-01T08:00:00Z",
-    dateModified: "2026-10-30T08:00:00Z",
+    dateModified: "2026-11-13T17:30:00Z",
     image: "/images/pillars/guide-04.webp",
     sections: [
       {
@@ -2011,7 +2011,7 @@ export const mockGuides: Guide[] = [
     },
     author: "Underground & Electronic Editor",
     datePublished: "2026-03-01T08:00:00Z",
-    dateModified: "2026-10-30T08:00:00Z",
+    dateModified: "2026-11-13T17:30:00Z",
     image: "/images/pillars/guide-05.webp",
     relatedGenres: [MusicGenre.TECHNO, MusicGenre.HOUSE],
     sections: [
@@ -2033,8 +2033,8 @@ export const mockGuides: Guide[] = [
           it: "2. La Classifica dei Migliori Locali Techno ed Elettronici di Milano"
         },
         content: {
-          en: "<ul><li><strong>1. Volt Club Milano:</strong> Intimate, dark, custom sound system, strict low-light policy, and world-class Melodic Techno / Afro-Tech bookings. VIP Backstage & Balcony tables from €400–€1,200.</li><li><strong>2. Magazzini Generali (Via Pietrasanta 16, Porta Romana / Ripamonti):</strong> Historic 1910 railway freight warehouse with towering iron trusses, mezzanine balcony VIP tables (€300–€800), and legendary Friday/Saturday international guest nights.</li><li><strong>3. Amnesia Milano (Via Gatto / Forlanini):</strong> Over two decades of pure Tech-House and Techno with L-Acoustics sound and Backstage Console Privé (€500–€1,500).</li><li><strong>4. Fabrique Milano (Via Fantoli 9, Mecenate):</strong> 3,000-capacity industrial arena hosting marathon electronic showcases and live tours.</li><li><strong>5. Repvblic Milano (#6 Priority):</strong> High-impact LED and sound architecture blending cutting-edge House, Tech-House, and urban grooves.</li></ul>",
-          it: "<ul><li><strong>1. Volt Club Milano:</strong> Intimo, minimale, impianto acustico calibrato al millimetro e programmazione Melodic Techno e Afro-Tech di livello mondiale. Tavoli Privé e Backstage da 400–1.200€.</li><li><strong>2. Magazzini Generali (Via Pietrasanta 16, Porta Romana / Ripamonti):</strong> Storico magazzino ferroviario del 1910 con balconata VIP rialzata sulla pista (tavoli 300–800€) e guest DJ internazionali ogni weekend.</li><li><strong>3. Amnesia Milano (Via Alfonso Gatto / Forlanini):</strong> Oltre vent'anni di storia Tech-House e Techno con impianto L-Acoustics e Privé Console dietro al DJ (500–1.500€).</li><li><strong>4. Fabrique Milano (Via Fantoli 9, Mecenate):</strong> Arena industriale da 3.000 persone per i grandi festival elettronici e le maratone notturne.</li><li><strong>5. Repvblic Milano (#6 Priorità):</strong> Design club d'avanguardia con architettura luminosa immersiva e sound House / Tech-House ad altissima energia.</li></ul>"
+          en: "<ul><li><strong>1. Volt Club Milano:</strong> Intimate, dark, custom sound system, strict low-light policy, and world-class Melodic Techno / Afro-Tech bookings. VIP Backstage & Balcony tables from €400–€1,200.</li><li><strong>2. Magazzini Generali (Via Pietrasanta 16, Porta Romana / Ripamonti):</strong> Historic 1910 railway freight warehouse with towering iron trusses, mezzanine balcony VIP tables (€300–€800), and legendary Friday/Saturday international guest nights.</li><li><strong>3. Amnesia Milano (Via Gatto / Forlanini):</strong> Over two decades of pure Tech-House and Techno with L-Acoustics sound and Backstage Console Privé (€500–€1,500).</li><li><strong>4. Fabrique Milano (Via Fantoli 9, Mecenate):</strong> 3,000-capacity industrial arena hosting marathon electronic showcases and live tours.</li><li><strong>5. REPVBLIC Milano (Piazza della Repubblica 12):</strong> High-impact LED and sound architecture blending international hits, House, and Hip-Hop.</li></ul>",
+          it: "<ul><li><strong>1. Volt Club Milano:</strong> Intimo, minimale, impianto acustico calibrato al millimetro e programmazione Melodic Techno e Afro-Tech di livello mondiale. Tavoli Privé e Backstage da 400–1.200€.</li><li><strong>2. Magazzini Generali (Via Pietrasanta 16, Porta Romana / Ripamonti):</strong> Storico magazzino ferroviario del 1910 con balconata VIP rialzata sulla pista (tavoli 300–800€) e guest DJ internazionali ogni weekend.</li><li><strong>3. Amnesia Milano (Via Alfonso Gatto / Forlanini):</strong> Oltre vent'anni di storia Tech-House e Techno con impianto L-Acoustics e Privé Console dietro al DJ (500–1.500€).</li><li><strong>4. Fabrique Milano (Via Fantoli 9, Mecenate):</strong> Arena industriale da 3.000 persone per i grandi festival elettronici e le maratone notturne.</li><li><strong>5. REPVBLIC Milano (Piazza della Repubblica 12):</strong> Design club d'avanguardia con architettura luminosa immersiva e sound tra hit internazionali, House e Hip-Hop.</li></ul>"
         }
       },
       {
@@ -2077,7 +2077,7 @@ export const mockGuides: Guide[] = [
     },
     author: "Nightlife Milan VIP Concierge",
     datePublished: "2026-10-15T08:00:00Z",
-    dateModified: "2026-10-30T08:00:00Z",
+    dateModified: "2026-11-13T17:30:00Z",
     image: "/images/pillars/guide-06.webp",
     sections: [
       {
@@ -2142,7 +2142,7 @@ export const mockGuides: Guide[] = [
     },
     author: "Nightlife Milan Editorial Team",
     datePublished: "2026-10-15T08:00:00Z",
-    dateModified: "2026-10-30T08:00:00Z",
+    dateModified: "2026-11-13T17:30:00Z",
     image: "/images/pillars/guide-07.webp",
     sections: [
       {
@@ -2196,7 +2196,7 @@ export const mockGuides: Guide[] = [
     },
     author: "Nightlife Milan Rooftop & Aperitivo Desk",
     datePublished: "2026-10-18T08:00:00Z",
-    dateModified: "2026-10-30T08:00:00Z",
+    dateModified: "2026-11-13T17:30:00Z",
     image: "/images/pillars/guide-08.webp",
     sections: [
       {
@@ -2250,7 +2250,7 @@ export const mockGuides: Guide[] = [
     },
     author: "Nightlife Milan Private Events Desk",
     datePublished: "2026-10-20T08:00:00Z",
-    dateModified: "2026-10-30T08:00:00Z",
+    dateModified: "2026-11-13T17:30:00Z",
     image: "/images/pillars/guide-09.webp",
     sections: [
       {
@@ -2304,7 +2304,7 @@ export const mockGuides: Guide[] = [
     },
     author: "Nightlife Milan Special Events Desk",
     datePublished: "2026-10-22T08:00:00Z",
-    dateModified: "2026-10-30T08:00:00Z",
+    dateModified: "2026-11-13T17:30:00Z",
     image: "/images/pillars/guide-10.webp",
     sections: [
       {
@@ -2365,7 +2365,7 @@ export const mockGuides: Guide[] = [
     },
     author: "Nightlife Milan Stadium & VIP Concierge Desk",
     datePublished: "2026-10-30T08:00:00Z",
-    dateModified: "2026-10-30T08:00:00Z",
+    dateModified: "2026-11-13T17:30:00Z",
     image: "/images/pillars/guide-11.webp",
     sections: [
       {
@@ -2474,7 +2474,7 @@ export const mockGuides: Guide[] = [
     },
     author: "Nightlife Milan Capodanno & VIP Concierge Desk",
     datePublished: "2026-10-30T08:00:00Z",
-    dateModified: "2026-10-30T08:00:00Z",
+    dateModified: "2026-11-13T17:30:00Z",
     image: "/images/pillars/guide-12.webp",
     sections: [
       {
@@ -2495,8 +2495,8 @@ export const mockGuides: Guide[] = [
           it: "2. Tabella Prezzi Ufficiale Capodanno 2027 nei 9 Club Principali di Milano"
         },
         content: {
-          en: "<p>Compare the verified New Year's Eve 2027 rates across Milan's most requested clubs and rooftops (book via WhatsApp <strong>+39 351 912 7047</strong> or <strong>concierge@nightlifemilan.com</strong> before early-bird tiers sell out):</p><table><thead><tr><th>Club / Venue</th><th>Seated Gala Dinner</th><th>Royal Buffet</th><th>After-Dinner Ticket</th><th>VIP Table (6-10 Guests)</th></tr></thead><tbody><tr><td><strong>1. Just Me Milano</strong> (Torre Branca)</td><td>€220 / pax</td><td>€90 / pax</td><td>€80 (1 drink)</td><td>€1,000 Dancefloor · €2,000 Privé Branca · €3,500-€6,000 Console</td></tr><tr><td><strong>2. Pineta Club</strong> (Corso Como)</td><td>€150 / pax (Singing)</td><td>€70 / pax</td><td>€55 (1 drink)</td><td>€700 Dancefloor · €1,200 VIP Privé · €2,000 Console</td></tr><tr><td><strong>3. Aria Club</strong> (San Siro 150m)</td><td>€130 / pax</td><td>€65 / pax</td><td>€50 (1 drink)</td><td>€600 Dancefloor · €900 Privé Aria · €1,500 Console DJ</td></tr><tr><td><strong>4. 55 Milano</strong> (Sempione Loft)</td><td>€140 / pax (Dinner Show)</td><td>€65 / pax</td><td>€50 (1 drink)</td><td>€500 Lounge · €800 Main Floor · €1,200 Stage Privé</td></tr><tr><td><strong>5. Voya Rooftop</strong> (20th Floor 85m)</td><td>€180 / pax (Skyline)</td><td>€80 / pax</td><td>€70 (1 drink)</td><td>€800 Sky Lounge · €1,200-€1,600 First-Row Window</td></tr><tr><td><strong>6. Repvblic Milano</strong> (Repubblica)</td><td>N/A (Club Only)</td><td>€65 / pax</td><td>€50 (1 drink)</td><td>€600 Dancefloor · €1,000 Privé · €1,800 Console</td></tr><tr><td><strong>7. Tocqueville 13</strong> (Corso Como)</td><td>€160 / pax (Dinner Show)</td><td>€75 / pax</td><td>€60 (1 drink)</td><td>€700 Upper Ring · €1,000 Main Floor · €1,800 Console</td></tr><tr><td><strong>8. Alcatraz Milano</strong> (3 Rooms Arena)</td><td>N/A</td><td>€55 / pax</td><td>€40 - €50</td><td>€450 Arena · €700 VIP Balcony · €1,200 Stage</td></tr><tr><td><strong>9. Fabrique Milano</strong> (Warehouse Festival)</td><td>N/A</td><td>N/A</td><td>€50 - €70</td><td>€800 VIP Ring · €1,500 Gold Ring · €2,500 Backstage</td></tr></tbody></table>",
-          it: "<p>Confronta i prezzi verificati di Capodanno 2027 nei 9 locali più richiesti di Milano (prenota su WhatsApp <strong>+39 351 912 7047</strong> o <strong>concierge@nightlifemilan.com</strong> prima del cambio tariffa):</p><table><thead><tr><th>Locale / Club</th><th>Gran Cenone Servito</th><th>Royal Buffet</th><th>Ingresso Dopocena</th><th>Tavolo VIP (6-10 Persone)</th></tr></thead><tbody><tr><td><strong>1. Just Me Milano</strong> (Torre Branca)</td><td>€220 / pax</td><td>€90 / pax</td><td>€80 (1 drink)</td><td>€1.000 Pista · €2.000 Privé Branca · €3.500-€6.000 Console</td></tr><tr><td><strong>2. Pineta Club</strong> (Corso Como)</td><td>€150 / pax (Cantato)</td><td>€70 / pax</td><td>€55 (1 drink)</td><td>€700 Pista · €1.200 Privé VIP · €2.000 Console</td></tr><tr><td><strong>3. Aria Club</strong> (San Siro 150m)</td><td>€130 / pax</td><td>€65 / pax</td><td>€50 (1 drink)</td><td>€600 Pista · €900 Privé Aria · €1.500 Console DJ</td></tr><tr><td><strong>4. 55 Milano</strong> (Sempione 1000mq)</td><td>€140 / pax (Dinner Show)</td><td>€65 / pax</td><td>€50 (1 drink)</td><td>€500 Lounge · €800 Pista · €1.200 Palco Privé</td></tr><tr><td><strong>5. Voya Rooftop</strong> (20° Piano 85m)</td><td>€180 / pax (Vista Skyline)</td><td>€80 / pax</td><td>€70 (1 drink)</td><td>€800 Sky Lounge · €1.200-€1.600 Prima Fila Vetrata</td></tr><tr><td><strong>6. Repvblic Milano</strong> (Repubblica)</td><td>Solo Buffet/Club</td><td>€65 / pax</td><td>€50 (1 drink)</td><td>€600 Pista · €1.000 Privé · €1.800 Console</td></tr><tr><td><strong>7. Tocqueville 13</strong> (Corso Como)</td><td>€160 / pax (Dinner Show)</td><td>€75 / pax</td><td>€60 (1 drink)</td><td>€700 Ring · €1.000 Pista · €1.800 Console</td></tr><tr><td><strong>8. Alcatraz Milano</strong> (3 Piste Arena)</td><td>Solo Buffet/Club</td><td>€55 / pax</td><td>€40 - €50</td><td>€450 Arena · €700 Balconata VIP · €1.200 Palco</td></tr><tr><td><strong>9. Fabrique Milano</strong> (Festival 3000p)</td><td>Solo Festival</td><td>N/A</td><td>€50 - €70</td><td>€800 Ring VIP · €1.500 Ring Gold · €2.500 Backstage</td></tr></tbody></table>"
+          en: "<p>Compare the verified New Year's Eve 2027 rates across Milan's most requested clubs and rooftops (book via WhatsApp <strong>+39 351 912 7047</strong> or <strong>concierge@nightlifemilan.com</strong> before early-bird tiers sell out):</p><table><thead><tr><th>Club / Venue</th><th>Seated Gala Dinner</th><th>Royal Buffet</th><th>After-Dinner Ticket</th><th>VIP Table (6-10 Guests)</th></tr></thead><tbody><tr><td><strong>1. Just Me Milano</strong> (Torre Branca)</td><td>€220 / pax</td><td>€90 / pax</td><td>€80 (1 drink)</td><td>€1,000 Dancefloor · €2,000 Privé Branca · €3,500-€6,000 Console</td></tr><tr><td><strong>2. Pineta Club</strong> (Corso Como)</td><td>€150 / pax (Singing)</td><td>€70 / pax</td><td>€55 (1 drink)</td><td>€700 Dancefloor · €1,200 VIP Privé · €2,000 Console</td></tr><tr><td><strong>3. Aria Club</strong> (San Siro 150m)</td><td>€130 / pax</td><td>€65 / pax</td><td>€50 (1 drink)</td><td>€600 Dancefloor · €900 Privé Aria · €1,500 Console DJ</td></tr><tr><td><strong>4. 55 Milano</strong> (Sempione Loft)</td><td>€140 / pax (Dinner Show)</td><td>€65 / pax</td><td>€50 (1 drink)</td><td>€500 Lounge · €800 Main Floor · €1,200 Stage Privé</td></tr><tr><td><strong>5. Voya Rooftop</strong> (20th Floor 85m)</td><td>€180 / pax (Skyline)</td><td>€80 / pax</td><td>€70 (1 drink)</td><td>€800 Sky Lounge · €1,200-€1,600 First-Row Window</td></tr><tr><td><strong>6. REPVBLIC Milano</strong> (Piazza della Repubblica 12)</td><td>N/A (Club Only from 23:00)</td><td>N/A</td><td>€45 Early Bird (flûte + 1 drink)</td><td>€600 Dancefloor (6 pax) · €1,200 Privé (10 pax)</td></tr><tr><td><strong>7. Tocqueville 13</strong> (Corso Como)</td><td>€160 / pax (Dinner Show)</td><td>€75 / pax</td><td>€60 (1 drink)</td><td>€700 Upper Ring · €1,000 Main Floor · €1,800 Console</td></tr><tr><td><strong>8. Alcatraz Milano</strong> (3 Rooms Arena)</td><td>N/A</td><td>€55 / pax</td><td>€40 - €50</td><td>€450 Arena · €700 VIP Balcony · €1,200 Stage</td></tr><tr><td><strong>9. Fabrique Milano</strong> (Warehouse Festival)</td><td>N/A</td><td>N/A</td><td>€50 - €70</td><td>€800 VIP Ring · €1,500 Gold Ring · €2,500 Backstage</td></tr></tbody></table>",
+          it: "<p>Confronta i prezzi verificati di Capodanno 2027 nei 9 locali più richiesti di Milano (prenota su WhatsApp <strong>+39 351 912 7047</strong> o <strong>concierge@nightlifemilan.com</strong> prima del cambio tariffa):</p><table><thead><tr><th>Locale / Club</th><th>Gran Cenone Servito</th><th>Royal Buffet</th><th>Ingresso Dopocena</th><th>Tavolo VIP (6-10 Persone)</th></tr></thead><tbody><tr><td><strong>1. Just Me Milano</strong> (Torre Branca)</td><td>€220 / pax</td><td>€90 / pax</td><td>€80 (1 drink)</td><td>€1.000 Pista · €2.000 Privé Branca · €3.500-€6.000 Console</td></tr><tr><td><strong>2. Pineta Club</strong> (Corso Como)</td><td>€150 / pax (Cantato)</td><td>€70 / pax</td><td>€55 (1 drink)</td><td>€700 Pista · €1.200 Privé VIP · €2.000 Console</td></tr><tr><td><strong>3. Aria Club</strong> (San Siro 150m)</td><td>€130 / pax</td><td>€65 / pax</td><td>€50 (1 drink)</td><td>€600 Pista · €900 Privé Aria · €1.500 Console DJ</td></tr><tr><td><strong>4. 55 Milano</strong> (Sempione 1000mq)</td><td>€140 / pax (Dinner Show)</td><td>€65 / pax</td><td>€50 (1 drink)</td><td>€500 Lounge · €800 Pista · €1.200 Palco Privé</td></tr><tr><td><strong>5. Voya Rooftop</strong> (20° Piano 85m)</td><td>€180 / pax (Vista Skyline)</td><td>€80 / pax</td><td>€70 (1 drink)</td><td>€800 Sky Lounge · €1.200-€1.600 Prima Fila Vetrata</td></tr><tr><td><strong>6. REPVBLIC Milano</strong> (Piazza della Repubblica 12)</td><td>Solo Club dalle 23:00</td><td>N/A</td><td>€45 Early Bird (flûte + 1 drink)</td><td>€600 Dancefloor (6 pax) · €1.200 Privé (10 pax)</td></tr><tr><td><strong>7. Tocqueville 13</strong> (Corso Como)</td><td>€160 / pax (Dinner Show)</td><td>€75 / pax</td><td>€60 (1 drink)</td><td>€700 Ring · €1.000 Pista · €1.800 Console</td></tr><tr><td><strong>8. Alcatraz Milano</strong> (3 Piste Arena)</td><td>Solo Buffet/Club</td><td>€55 / pax</td><td>€40 - €50</td><td>€450 Arena · €700 Balconata VIP · €1.200 Palco</td></tr><tr><td><strong>9. Fabrique Milano</strong> (Festival 3000p)</td><td>Solo Festival</td><td>N/A</td><td>€50 - €70</td><td>€800 Ring VIP · €1.500 Ring Gold · €2.500 Backstage</td></tr></tbody></table>"
         }
       },
       {
@@ -2518,8 +2518,8 @@ export const mockGuides: Guide[] = [
           it: "Quanto costa un Tavolo VIP a Capodanno 2027 nelle discoteche di Milano?"
         },
         answer: {
-          en: "On December 31, 2026, VIP Tables for 6-10 guests start at €450-€700 at Alcatraz, 55 Milano, and Aria Club; €700-€1,200 at Pineta, Tocqueville 13, Repvblic, and Voya Rooftop; and €1,000-€6,000+ at Just Me Milano and Armani Privé, 100% spendable in bottles.",
-          it: "Per la notte del 31 dicembre 2026 i Tavoli VIP (6-10 persone) partono da 450-700€ da Alcatraz, 55 Milano e Aria Club; 700-1.200€ da Pineta, Tocqueville 13, Repvblic e Voya Rooftop; e 1.000-6.000€+ da Just Me Milano e Armani Privé, 100% in bottiglie."
+          en: "On December 31, 2026, VIP Tables for 6-10 guests start at €450-€700 at Alcatraz, 55 Milano, Aria Club, and REPVBLIC Milano (€600 Dancefloor / €1,200 Privé); €700-€1,200 at Pineta, Tocqueville 13, and Voya Rooftop; and €1,000-€6,000+ at Just Me Milano and Armani Privé, 100% spendable in bottles.",
+          it: "Per la notte del 31 dicembre 2026 i Tavoli VIP (6-10 persone) partono da 450-700€ da Alcatraz, 55 Milano, Aria Club e REPVBLIC Milano (600€ Dancefloor / 1.200€ Privé); 700-1.200€ da Pineta, Tocqueville 13 e Voya Rooftop; e 1.000-6.000€+ da Just Me Milano e Armani Privé, 100% in bottiglie."
         }
       },
       {
@@ -2582,7 +2582,7 @@ export const mockGuides: Guide[] = [
     },
     author: "Nightlife Milan Live & Stadium Concierge Desk",
     datePublished: "2026-10-30T08:00:00Z",
-    dateModified: "2026-10-30T08:00:00Z",
+    dateModified: "2026-11-13T17:30:00Z",
     image: "/images/pillars/guide-13.webp",
     sections: [
       {
@@ -2690,7 +2690,7 @@ export const mockGuides: Guide[] = [
     },
     author: "Nightlife Milan VIP Celebrations Concierge",
     datePublished: "2026-10-30T08:00:00Z",
-    dateModified: "2026-10-30T08:00:00Z",
+    dateModified: "2026-11-13T17:30:00Z",
     image: "/images/pillars/guide-14.webp",
     sections: [
       {

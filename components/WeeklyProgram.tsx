@@ -30,8 +30,11 @@ export default function WeeklyProgram({ venueId, venueName, locale }: WeeklyProg
       { day: tr(locale, 'Sun', 'Domenica'), event: 'Latin Night' },
     ],
     'v-repvblic': [
-      { day: tr(locale, 'Wed', 'Mercoledì'), event: 'Home (House Music)' },
-      { day: tr(locale, 'Fri', 'Venerdì'), event: 'Dirty Monday Edition' },
+      { day: tr(locale, 'Mon', 'Lun'), event: 'Dirty Monday (23:00)' },
+      { day: tr(locale, 'Wed', 'Mer'), event: 'Home (Commercial & Reggaeton)' },
+      { day: tr(locale, 'Fri', 'Ven'), event: 'Dirty Monday Edition' },
+      { day: tr(locale, 'Sat', 'Sab'), event: tr(locale, 'Club Night · Hits, House & Hip-Hop', 'Club Night · Hit, House & Hip-Hop') },
+      { day: tr(locale, '31 Dec', '31 Dic'), event: 'NEW YEAR’S EVE 2027 (23:00 · 45€)' },
     ],
     'v-11clubroom': [
       { day: tr(locale, 'Fri', 'Venerdì'), event: 'Urban Night' },

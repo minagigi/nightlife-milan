@@ -145,9 +145,9 @@ const PRIORITY_SIX_TONIGHT = [
   },
   {
     rank: 6,
-    name: 'Repvblic Milano',
+    name: 'REPVBLIC Milano',
     slug: 'repvblic-milano',
-    zone: 'Piazza della Repubblica / Mecenate',
+    zone: 'Piazza della Repubblica, 12 · Porta Nuova',
     daysIt: 'Lunedì (Dirty Monday), Venerdì & Sabato',
     daysEn: 'Monday (Dirty Monday), Friday & Saturday',
     hoursIt: 'Ingresso 23:30 · Cut-Off Liste 01:00 · Clubbing 23:30–05:00',

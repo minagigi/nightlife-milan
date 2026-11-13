@@ -861,16 +861,16 @@ export const weeklyEvents: WeeklyEvent[] = [
     day: 'saturday',
     dayOfWeek: 6,
     eventSlug: 'saturday-night',
-    name: 'Saturday Luxury Dinner Show & Club',
+    name: 'Saturday Flagship Club Night',
     genres: ['House', 'Commercial', 'Hip-Hop'],
     target: '21+, VIPs, International Crowd',
     description: {
-      en: 'Saturday night at Repvblic Milano combines a refined Dinner Show with a cutting-edge sound and lighting clubbing experience in Piazza della Repubblica 12.',
-      it: 'Il sabato notte al Repvblic Milano unisce un raffinato Dinner Show a un\'esperienza di clubbing con impianto audio-luci d\'avanguardia in Piazza della Repubblica 12.'
+      en: 'Saturday night at REPVBLIC Milano delivers an international crowd and high-energy clubbing experience from 23:00 till morning in Piazza della Repubblica 12 with international hits, house, and hip hop.',
+      it: 'Il sabato notte al REPVBLIC Milano unisce pubblico internazionale e clubbing fino al mattino in Piazza della Repubblica 12, dalle 23:00 con hit internazionali, house e hip hop.'
     },
-    pricing: { aperitif: 'From €25', club: 'From €25', tables: 'From €300' },
+    pricing: { club: 'From €25', tables: 'From €300' },
     dressCode: { en: 'Strictly Elegant.', it: 'Strettamente Elegante.' },
-    faqs: defaultFaqs('Repvblic', 'Piazza della Repubblica 12, Milan', '21+', 'Strictly Elegant', 'House, Commercial and Hip-Hop'),
+    faqs: defaultFaqs('Repvblic', 'Piazza della Repubblica 12, Milan', '21+', 'Strictly Elegant', 'International Hits, House and Hip-Hop'),
     image: '/images/events/weekly-posters/repvblic-saturday.webp',
     priority: 75
   }

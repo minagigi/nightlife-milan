@@ -180,28 +180,28 @@ const SIX_PRIORITY_CLUBS: PriorityClubRec[] = [
     rank: 6,
     id: 'v-repvblic',
     slug: 'repvblic-milano',
-    name: 'Repvblic Milano',
+    name: 'REPVBLIC Milano',
     zoneLabel: {
-      en: 'Ripamonti / Mecenate · Via Giovanni Fantoli 9',
-      it: 'Ripamonti / Mecenate · Via Giovanni Fantoli 9',
+      en: 'Porta Nuova / Repubblica · Piazza della Repubblica, 12',
+      it: 'Porta Nuova / Repubblica · Piazza della Repubblica, 12',
     },
     dressCode: {
       en: 'Trendy & Urban Edgy',
       it: 'Trendy & Urban Audace',
     },
     priceInfo: {
-      en: 'Guest List €15–20 · VIP Bottle Tables €250–€500',
-      it: 'Lista Ingresso 15–20€ · Tavoli Bottiglia VIP 250–500€',
+      en: 'Club / Early Bird NYE €45 · Dancefloor €600 (6 pax) · Privé €1,200 (10 pax)',
+      it: 'Lista / Capodanno Early Bird 45€ · Tavolo Dancefloor 600€ (6 pax) · Privé 1.200€ (10 pax)',
     },
     highlight: {
-      en: '#6 Priority Club: Home of the legendary Dirty Monday (Hip-Hop, Trap, Afrobeats & House) and high-energy weekend club nights for fashion & music insiders.',
-      it: 'Club N.6: casa del leggendario Dirty Monday (Hip-Hop, Trap, Afrobeats & House) e dei weekend ad alta energia per gli amanti del clubbing.',
+      en: 'Home of the legendary Dirty Monday and confirmed NEW YEAR’S EVE 2027 (International Hits, Hip-Hop & House, 23:00 till morning).',
+      it: 'Casa del leggendario Dirty Monday e del Capodanno 2027 ufficiale (dalle 23:00 al mattino: hit internazionali, hip hop e house).',
     },
     bestForMoods: ['techno', 'vip-bottle', 'glamour'],
     bestForBudgets: ['standard', 'vip', 'free'],
-    bestForZones: ['navigli', 'corsocomo', 'isola'],
+    bestForZones: ['corsocomo', 'isola', 'navigli'],
     hubHref: '/bottle-prices',
-    hubLabel: { en: 'Bottle Prices & Dirty Monday', it: 'Listino Bottiglie & Dirty Monday' },
+    hubLabel: { en: 'Bottle Prices & NYE / Dirty Monday', it: 'Listino Bottiglie & Capodanno / Dirty Monday' },
   },
 ];
 
@@ -301,8 +301,8 @@ export default function VibeFinder({ lang }: { lang: string }) {
     },
     {
       id: 'navigli',
-      label: isIt ? 'Ripamonti / Mecenate / Sud' : 'Ripamonti / Mecenate / South',
-      sub: 'Repvblic Milano',
+      label: isIt ? 'Porta Nuova & Repubblica / Centro' : 'Porta Nuova & Repubblica / Central',
+      sub: 'REPVBLIC Milano',
       icon: MapPin,
     },
   ];

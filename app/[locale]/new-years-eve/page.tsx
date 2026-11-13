@@ -130,19 +130,19 @@ const NYE_FORMULAS = [
   },
   {
     id: 'after-midnight',
-    nameIt: '3. Ingresso Disco Dopo Mezzanotte (Prevendita Salta-Fila)',
-    nameEn: '3. After-Midnight Club Entry (Official Fast-Track Presale)',
-    hours: '00:30 - 05:30',
-    priceIt: '€50 - €90 / persona',
-    priceEn: '€50 - €90 / person',
+    nameIt: '3. Ingresso Festa & Early Bird (Prevendita Salta-Fila)',
+    nameEn: '3. Party & Early Bird Entry (Official Fast-Track Presale)',
+    hours: '23:00 / 00:30 - 05:30',
+    priceIt: '€45 - €90 / persona',
+    priceEn: '€45 - €90 / person',
     includedIt:
-      'Bracciale o QR code ufficiale in prevendita nominale con corsia prioritaria dopo il brindisi di mezzanotte, 1 drink incluso e accesso completo alle piste da ballo fino all’alba del 1 Gennaio 2027.',
+      'Bracciale o QR code ufficiale in prevendita nominale con corsia prioritaria (dalle 23:00 da REPVBLIC con flûte di mezzanotte + 1 drink a 45€, oppure dopo mezzanotte negli altri club), accesso completo alle piste da ballo fino all’alba del 1 Gennaio 2027.',
     includedEn:
-      'Official nominal presale QR pass with fast-track entry after midnight, 1 welcome drink included, and full access to the main dancefloors until sunrise on January 1, 2027.',
+      'Official nominal presale QR pass with fast-track entry (from 23:00 at REPVBLIC with midnight flûte + 1 drink at €45, or after-midnight at other clubs), plus full access to the main dancefloors until sunrise on January 1, 2027.',
     bestVenuesIt:
-      '3. Aria Club, 6. Repvblic Milano, Alcatraz Milano (3 Piste XL), Fabrique Milano, 2. Pineta Milano',
+      '6. REPVBLIC Milano (Early Bird €45 dalle 23:00), 3. Aria Club, Alcatraz Milano (3 Piste XL), Fabrique Milano, 2. Pineta Milano',
     bestVenuesEn:
-      '3. Aria Club, 6. Repvblic Milano, Alcatraz Milano (3 XXL Stages), Fabrique Milano, 2. Pineta Milano',
+      '6. REPVBLIC Milano (Early Bird €45 from 23:00), 3. Aria Club, Alcatraz Milano (3 XXL Stages), Fabrique Milano, 2. Pineta Milano',
   },
   {
     id: 'vip-table-console',
@@ -272,22 +272,22 @@ const NYE_CLUBS = [
     rank: 6,
     anchorId: 'nye-repvblic-milano',
     slug: 'repvblic-milano',
-    priorityBadgeIt: '#6 Priorità · Design Club Piazza della Repubblica',
-    priorityBadgeEn: '#6 Priority · Piazza della Repubblica Design Club',
-    nameIt: '6. Repvblic Milano (#6 Priorità, Piazza della Repubblica: NYE Fashion Clubbing, House & Hip-Hop)',
-    nameEn: '6. Repvblic Milano (#6 Priority, Piazza della Repubblica: NYE Fashion Clubbing, House & Hip-Hop)',
-    address: 'Piazza della Repubblica / Via Mecenate - Milano',
+    priorityBadgeIt: 'Top Club · Piazza della Repubblica 12 · Confermato 2027',
+    priorityBadgeEn: 'Confirmed 2027 · Piazza della Repubblica 12',
+    nameIt: '6. REPVBLIC Milano (Piazza della Repubblica 12: New Year’s Eve 2027 · Hit Internazionali, Hip Hop & House)',
+    nameEn: '6. REPVBLIC Milano (Piazza della Repubblica 12: New Year’s Eve 2027 · International Hits, Hip Hop & House)',
+    address: 'Piazza della Repubblica, 12, 20124 Milano (Porta Nuova / M3 Repubblica)',
     formulasIt:
-      'Royal Buffet €65 - €85 · Ingresso Dopo Mezzanotte €50 - €75 · Tavoli VIP Pista €600 - €900 · Super Privé Console €1.200 - €3.000',
+      'Early Bird 45€ a persona (dalle 23:00, flûte di mezzanotte + 1 drink inclusi) · Tavolo Zona Dancefloor 600€ (6 persone) · Tavolo Zona Privé VIP 1.200€ (10 persone)',
     formulasEn:
-      'Royal Buffet €65 - €85 · After-Midnight Entry €50 - €75 · Dancefloor VIP €600 - €900 · Console Super Privé €1,200 - €3,000',
-    fireworksVibeIt: 'Impianto luci immersivo vicino agli hotel 5 stelle di Porta Nuova e Repubblica',
-    fireworksVibeEn: 'Immersive lighting architecture steps from the 5-star hotels of Porta Nuova and Repubblica',
-    image: '/images/repvblic-milano.webp',
+      'Early Bird €45 per person (from 23:00, midnight flûte + 1 drink included) · Dancefloor Table €600 (6 guests) · VIP Privé Table €1,200 (10 guests)',
+    fireworksVibeIt: 'Countdown fino al mattino (23:00 – 05:00) nel cuore di Piazza della Repubblica 12',
+    fireworksVibeEn: 'Midnight countdown till morning (23:00 – 05:00) in the heart of Piazza della Repubblica 12',
+    image: '/images/events/capodanno-2027-posters/capodanno-repvblic-milano.webp',
     descriptionIt:
-      'Repvblic Milano (#6 Priorità) è il punto di riferimento per chi vuole festeggiare l arrivo del 2027 in un vero design club dal respiro internazionale, frequentato da modelli, PR e ospiti degli hotel 5 stelle di Piazza della Repubblica e Porta Nuova. Sound system potentissimo tra House, Tech-House, Hip-Hop e Urban, bottle show coreografici con Magnum illuminate e una selezione alla porta elegante e curata.',
+      'Una notte speciale, un pubblico internazionale e tutta l’energia di Milano per dare il benvenuto al 2027. A Capodanno, REPVBLIC Milano in Piazza della Repubblica 12 ti aspetta dalle 23:00 fino al mattino per vivere il countdown, i calici alzati a mezzanotte e le prime ore del nuovo anno in pista. La selezione musicale attraversa hit internazionali, hip hop e house per festeggiare con persone da tutto il mondo nel cuore della città. One night. All nations. A new beginning.',
     descriptionEn:
-      'Repvblic Milano (#6 Priority) is the benchmark for celebrating the arrival of 2027 inside an international design club frequented by models, creatives, and guests of the 5-star hotels around Piazza della Repubblica and Porta Nuova. Expect a powerhouse House, Tech-House, Hip-Hop, and Urban sound system, Magnum sparkler shows, and a sharp fashion-forward crowd.',
+      'A special night, an international crowd, and all the energy of Milan to welcome 2027. On New Year’s Eve, REPVBLIC Milano at Piazza della Repubblica 12 awaits from 23:00 till morning for the midnight countdown, raised flûtes, and a non-stop DJ selection spanning international hits, hip hop, and house. One night. All nations. A new beginning.',
   },
 ];
 
@@ -619,11 +619,11 @@ export default async function NewYearsEvePage({
               <div className="text-[11px] font-mono uppercase tracking-widest text-champagne mb-1">
                 {isIt ? '4 Formule Ufficiali NYE' : '4 Official NYE Formulas'}
               </div>
-              <div className="font-serif text-2xl font-bold text-white">Da €50 a €5.000 VIP</div>
+              <div className="font-serif text-2xl font-bold text-white">Da €45 a €5.000 VIP</div>
               <p className="text-xs text-white/60 mt-1">
                 {isIt
-                  ? 'Gran Cenone (€150-350), Royal Buffet (€60-95), Disco (€50-90) e Tavoli VIP (€600-5.000).'
-                  : 'Gala Dinner (€150-350), Royal Buffet (€60-95), Club (€50-90) & VIP Tables (€600-5,000).'}
+                  ? 'Gran Cenone (€150-350), Royal Buffet (€60-95), Early Bird & Disco (€45-90) e Tavoli VIP (€600-5.000).'
+                  : 'Gala Dinner (€150-350), Royal Buffet (€60-95), Early Bird & Club (€45-90) & VIP Tables (€600-5,000).'}
               </p>
             </div>
 

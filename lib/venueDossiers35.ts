@@ -767,12 +767,12 @@ const VENUE_TARGET_IT: Record<string, VenueTargetProfile> = {
   },
   'v-repvblic': {
     ageRange: '21–38 anni (pubblico internazionale, moda, studenti Bocconi/Cattolica/IULM)',
-    crowdVibe: 'Boutique club esclusivo in Piazza della Repubblica / Porta Nuova',
-    dressCode: 'Elegante / Fashion Forward',
-    musicStyle: 'Afro-House, Melodic House, Hip-Hop & R&B',
+    crowdVibe: 'Club internazionale in Piazza della Repubblica 12 (Porta Nuova)',
+    dressCode: 'Look curato / Fashion Forward',
+    musicStyle: 'Hit Internazionali, House, Hip-Hop & R&B',
     metroAndParking: 'M3 Repubblica a 150 metri / M2 Gioia / Stazione Centrale',
-    openingSchedule: 'Mercoledì, Venerdì, Sabato e serate Fashion Week 23:00–05:00',
-    priceSummary: 'Ingresso lista 15–20€ · Tavoli pista da 250€ · Tavoli Privé console da 500€',
+    openingSchedule: 'Lunedì (Dirty Monday), Venerdì, Sabato e Capodanno 31 Dicembre dalle 23:00 al mattino',
+    priceSummary: 'Lista / Early Bird Capodanno 45€ (flûte + 1 drink) · Tavoli Dancefloor 600€ (6 pax) · Privé 1.200€ (10 pax)',
   },
 };
 
@@ -1104,26 +1104,48 @@ export function resolveVenueEventsForCarousel(venue: Venue, locale: string): {
     isRecurring: true,
   }));
 
+  const isRepvblic = venue.id === 'v-repvblic' || venue.slugs?.en === 'repvblic-milano';
   const gallery = getEnhancedVenueGallery(venue);
   const signatureProposals: CarouselEventCard[] = [
-    {
-      id: `${venue.id}-prop-aperitivo`,
-      title: isIt ? `${vName} · Royal Aperitivo & Isola Riservata` : `${vName} · Royal Aperitivo & Reserved Island`,
-      dateLabel: isIt ? 'Questa Settimana · Su Prenotazione' : 'This Week · Direct Booking',
-      timeLabel: '20:00 – 22:30',
-      priceLabel: '€20 – €25',
-      categoryLabel: isIt ? 'Aperitivo & Lauree/Compleanni' : 'Aperitivo & Celebrations',
-      genres: ['Royal Buffet', 'Cocktail Bar', 'DJ Set'],
-      imageSrc: gallery[0] || fallbackImg,
-      href: toHref('/private-parties'),
-      whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
-        isIt
-          ? `Ciao Nightlife Milan, vorrei riservare un'isola aperitivo / festa questa settimana da ${vName}`
-          : `Hi Nightlife Milan, I'd like to reserve an aperitivo island this week at ${vName}`
-      )}`,
-      badge: isIt ? 'PROPOSTA Nightlife Milan #1' : 'Nightlife Milan PROPOSAL #1',
-      isRecurring: true,
-    },
+    isRepvblic
+      ? {
+          id: `${venue.id}-prop-nye-2027`,
+          title: isIt
+            ? 'NEW YEAR’S EVE AT REPVBLIC MILANO 2027 (Confermato)'
+            : 'NEW YEAR’S EVE AT REPVBLIC MILANO 2027 (Confirmed)',
+          dateLabel: isIt ? '31 Dicembre 2026 · Piazza della Repubblica 12' : 'Dec 31, 2026 · Piazza della Repubblica 12',
+          timeLabel: '23:00 – 05:00',
+          priceLabel: isIt ? 'Early Bird 45€ (flûte + 1 drink)' : 'Early Bird €45 (flûte + 1 drink)',
+          categoryLabel: isIt ? 'Capodanno 2027 Ufficiale' : 'Official NYE 2027',
+          genres: ['International Hits', 'Hip Hop', 'House'],
+          imageSrc: '/images/events/capodanno-2027-posters/capodanno-repvblic-milano.webp',
+          href: toHref('/capodanno-milano-discoteche/capodanno-repvblic-milano'),
+          whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
+            isIt
+              ? 'Ciao Nightlife Milan, vorrei prenotare per NEW YEAR’S EVE AT REPVBLIC MILANO (31 dicembre, Piazza della Repubblica 12)'
+              : 'Hi Nightlife Milan, I would like to book for NEW YEAR’S EVE AT REPVBLIC MILANO (Dec 31, Piazza della Repubblica 12)'
+          )}`,
+          badge: isIt ? 'CAPODANNO CONFERMATO 2027' : 'CONFIRMED NYE 2027',
+          isRecurring: false,
+        }
+      : {
+          id: `${venue.id}-prop-aperitivo`,
+          title: isIt ? `${vName} · Royal Aperitivo & Isola Riservata` : `${vName} · Royal Aperitivo & Reserved Island`,
+          dateLabel: isIt ? 'Questa Settimana · Su Prenotazione' : 'This Week · Direct Booking',
+          timeLabel: '20:00 – 22:30',
+          priceLabel: '€20 – €25',
+          categoryLabel: isIt ? 'Aperitivo & Lauree/Compleanni' : 'Aperitivo & Celebrations',
+          genres: ['Royal Buffet', 'Cocktail Bar', 'DJ Set'],
+          imageSrc: gallery[0] || fallbackImg,
+          href: toHref('/private-parties'),
+          whatsappHref: `https://wa.me/393519127047?text=${encodeURIComponent(
+            isIt
+              ? `Ciao Nightlife Milan, vorrei riservare un'isola aperitivo / festa questa settimana da ${vName}`
+              : `Hi Nightlife Milan, I'd like to reserve an aperitivo island this week at ${vName}`
+          )}`,
+          badge: isIt ? 'PROPOSTA Nightlife Milan #1' : 'Nightlife Milan PROPOSAL #1',
+          isRecurring: true,
+        },
     {
       id: `${venue.id}-prop-vip`,
       title: isIt ? `${vName} · Tavolo Privé, Pista & Bottle Show` : `${vName} · VIP Privé Table & Bottle Show`,

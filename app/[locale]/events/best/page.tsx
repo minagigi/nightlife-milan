@@ -173,8 +173,8 @@ const BEST_VENUES = [
     slug: 'repvblic-milano',
     color: '#CDB4DB',
     image: '/images/pillars/events-best-06.webp',
-    name: { en: '6. Repvblic Milano', it: '6. Repvblic Milano' },
-    zone: { en: 'Piazza della Repubblica / Mecenate', it: 'Piazza della Repubblica / Mecenate' },
+    name: { en: '6. REPVBLIC Milano', it: '6. REPVBLIC Milano' },
+    zone: { en: 'Piazza della Repubblica, 12 · Porta Nuova', it: 'Piazza della Repubblica, 12 · Porta Nuova' },
     label: { en: 'Dirty Monday + Friday & Saturday Clubbing', it: 'Dirty Monday + Venerdì e Sabato Club' },
     why: {
       en: 'Cutting-edge audio and lighting design hosting an international fashion crowd, the legendary "Dirty Monday" hip-hop/house night, and high-energy weekend parties.',

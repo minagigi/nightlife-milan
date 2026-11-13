@@ -90,17 +90,19 @@
   - Panoramic Window VIP Table: `€300–€500` (5–8 pax) | Penthouse Console Privé: `€600–€1,500`.
 - **Dress Code:** Smart Elegant / Cocktail Chic.
 
-#### 6. Repvblic Milano (Piazza della Repubblica / Fantoli Showcase) · PRIORITY #6
+#### 6. REPVBLIC Milano (Piazza della Repubblica 12 · Porta Nuova) · PRIORITY #6
 - **Canonical URL:** `https://nightlifemilan.com/clubs/repvblic-milano`
-- **Address:** Piazza della Repubblica / Via Gaetano Fantoli 9 showcase locations, Milano
-- **District:** Repubblica / Porta Nuova (`M3 Repubblica`) & Mecenate Arena
-- **Opening Schedule:** Monday (`Dirty Monday`), Wednesday, Friday, Saturday (`23:30–05:00`).
-- **Architecture & Vibe:** Ultra-sleek dark-luxury boutique club with custom kinetic lighting and Void Acoustics sound system. Globally recognized for **Dirty Monday**, the most exclusive Monday night urban & fashion party in Italy, drawing international models, rappers, NBA/Serie A stars, and fashion designers.
-- **Musical Format:** Hip-Hop, Trap, R&B, Afrobeats, Amapiano (Mondays & Fridays) + Tech-House / Afro-House (Saturdays).
-- **Pricing (2026/2027):**
-  - Accredited Guest List: `€20–€35`.
-  - Dancefloor VIP Table: `€300–€400` | Privé Console: `€600–€1,500`.
-- **Dress Code:** Street-Luxury & High Fashion. Designer streetwear (Balenciaga, Off-White, Chrome Hearts, Amiri) and luxury sneakers are welcomed alongside smart elegant attire.
+- **Address:** Piazza della Repubblica, 12, 20124 Milano
+- **District:** Repubblica / Porta Nuova (`M3 Repubblica`, `M2 Gioia`)
+- **Opening Schedule:** Monday (`Dirty Monday`), Friday, Saturday & Dec 31 NYE (`23:00–05:00`, till morning).
+- **Architecture & Vibe:** International dark-luxury club in Piazza della Repubblica 12 welcoming a cosmopolitan crowd. Globally recognized for **Dirty Monday**, weekend club nights, and the confirmed **NEW YEAR’S EVE AT REPVBLIC MILANO** (*One night. All nations. A new beginning.*).
+- **Musical Format:** International Hits, Hip-Hop, and House.
+- **Confirmed NYE 2027 Pricing (Dec 31, 2026):**
+  - Early Bird: `€45 per person` (admission from 23:00 with midnight countdown flûte and one drink included).
+  - Dancefloor Table Zone: `€600 for 6 guests`.
+  - Privé Table Zone: `€1,200 for 10 guests` (exclusive VIP area).
+- **Weekly VIP Tables:** Dancefloor from `€250–€350` | Privé from `€500–€1,200`.
+- **Dress Code:** Elevated & Stylish Nightlife Attire.
 
 ---
 
@@ -274,7 +276,7 @@
 11. **Moscova & Garibaldi (`/zones/moscova-garibaldi`):** High-energy late-night bar & club corridor (**The Club**).
 12. **Tortona & Solari (`/zones/tortona-solari`):** Fashion showrooms, Fuorisalone design lofts, and listening bars.
 13. **Colonne di San Lorenzo (`/zones/colonne-san-lorenzo`):** Roman ruins square, student street aperitivo, and boutique bars.
-14. **Mecenate & Ripamonti (`/zones/mecenate-ripamonti`):** East Milan mega-arena district (**Fabrique**, **Repvblic**, **Amnesia**).
+14. **Mecenate & Ripamonti (`/zones/mecenate-ripamonti`):** East Milan mega-arena district (**Fabrique**, **Amnesia**). *(Note: **REPVBLIC Milano** is centrally located at Piazza della Repubblica, 12 — Porta Nuova / M3 Repubblica).*
 
 ---
 

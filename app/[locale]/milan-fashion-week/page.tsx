@@ -237,9 +237,9 @@ const PRIORITY_FASHION_VENUES = [
   {
     rank: 6,
     slug: 'repvblic-milano',
-    badgeIt: '#6 Priorità · Piazza della Repubblica Design Club',
-    badgeEn: '#6 Priority · Piazza della Repubblica Design Club',
-    name: '6. Repvblic Milano (Piazza della Repubblica / Mecenate)',
+    badgeIt: 'Piazza della Repubblica 12 · Club Internazionale',
+    badgeEn: 'Piazza della Repubblica 12 · International Club',
+    name: '6. REPVBLIC Milano (Piazza della Repubblica, 12)',
     roleIt: 'Afterparty Streetwear & Urban Capsule, Dirty Monday & Fashion Weekends',
     roleEn: 'Streetwear & Urban Capsule Afterparties, Dirty Monday & Fashion Weekends',
     specsIt: 'Capacità Buyout: fino a 600 ospiti · Lighting Rig Immersivo & Console Privé',

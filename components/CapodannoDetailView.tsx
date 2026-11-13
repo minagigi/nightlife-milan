@@ -4,6 +4,7 @@ import EventVenueMap from '@/components/EventVenueMap';
 import { getEventVenueCopy } from '@/lib/i18n/eventVenueCopy';import type { LocaleCode } from '@/lib/i18n/locales';
 import { capodannoEventPath, capodannoNavigation, capodannoPath } from '@/lib/capodanno/routes';
 import {
+  getCapodannoLocalizedEventContent,
   getCapodannoLocalizedEventSubtitle,
   getCapodannoLocalizedEventTitle,
   getCapodannoUiCopy,
@@ -43,14 +44,16 @@ export default function CapodannoDetailView({ locale, event }: Props) {
   const scarcity = getScarcityAndChatCopy(locale);
   const venueMapCopy = getEventVenueCopy(locale as LocaleCode);
 
-  const title = getCapodannoLocalizedEventTitle(event, locale);
-  const subtitle = getCapodannoLocalizedEventSubtitle(event, locale);
-  const description = isIt ? event.descriptionIt : event.descriptionEn;
-  const music = isIt ? event.musicAndFormatIt : event.musicAndFormatEn;
-  const dress = isIt ? event.dressCodeIt : event.dressCodeEn;
-  const tiers = isIt ? event.tiersIt : event.tiersEn;
-  const highlights = isIt ? event.highlightsIt : event.highlightsEn;
-  const sourceBasis = isIt ? event.sourceBasisIt : event.sourceBasisEn;
+  const localized = getCapodannoLocalizedEventContent(event, locale);
+  const title = localized.title;
+  const subtitle = localized.subtitle;
+  const description = localized.description;
+  const music = localized.musicAndFormat;
+  const dress = localized.dressCode;
+  const tiers = localized.tiers;
+  const highlights = localized.highlights;
+  const sourceBasis = localized.sourceBasis;
+  const hasDinnerFormula = event.formulas.includes('cenone') || event.formulas.includes('buffet');
   const canonicalPath = capodannoEventPath(event.slug, locale);
   const officialPosterSrc = getCapodannoOfficialPosterSrc(event.slug);
   const isGardaSisterVenue = event.slug === 'capodanno-justme-garda-lake';
@@ -90,36 +93,46 @@ export default function CapodannoDetailView({ locale, event }: Props) {
     ? [
         {
           q: `Quanto costa il Capodanno 2027 presso ${event.venueName} (${event.city})?`,
-          a: `Le formule previste per la notte di San Silvestro (31 dicembre 2026 – 1 gennaio 2027) presso ${event.venueName} sono: ${event.priceSummaryIt}. ${sourceBasis}`,
+          a: `Le formule previste per la notte di San Silvestro (31 dicembre 2026 – 1 gennaio 2027) presso ${event.venueName} sono: ${localized.priceSummary}. ${sourceBasis}`,
         },
         {
           q: `Quali sono gli orari e l’indirizzo di ${event.venueName} per la notte di Capodanno?`,
-          a: `L’evento si svolge presso ${event.venueName} in ${event.address}, ${event.city} (${event.province}), con orario indicativo ${event.hours}. Il dress code richiesto è: ${dress}.`,
+          a: `L’evento si svolge presso ${event.venueName} in ${event.address}, ${event.city} (${event.province}), con orario ${event.hours}. Il dress code richiesto è: ${dress}.`,
         },
-        {
-          q: `Come posso prenotare prevendite, cenone o tavolo VIP per ${event.venueName}?`,
-          a: `Puoi verificare la disponibilità dei lotti Early Bird, i menu del Gran Cenone e le mappe dei tavoli Privé contattando direttamente il Concierge ufficiale Nightlife Milan su WhatsApp o telefono al numero ${SITE_CONTACT.whatsapp.number} oppure via email a concierge@nightlifemilan.com senza commissioni aggiuntive.`,
-        },
+        hasDinnerFormula
+          ? {
+              q: `Come posso prenotare prevendite, cenone o tavolo VIP per ${event.venueName}?`,
+              a: `Puoi verificare la disponibilità dei lotti Early Bird, i menu del Gran Cenone e le mappe dei tavoli Privé contattando direttamente il Concierge ufficiale Nightlife Milan su WhatsApp o telefono al numero ${SITE_CONTACT.whatsapp.number} oppure via email a concierge@nightlifemilan.com senza commissioni aggiuntive.`,
+            }
+          : {
+              q: `Come posso prenotare l’ingresso Early Bird o il tavolo VIP per ${event.venueName}?`,
+              a: `Puoi verificare la disponibilità degli ingressi Early Bird e delle zone tavolo Dancefloor e Privé contattando direttamente il Concierge ufficiale Nightlife Milan su WhatsApp o telefono al numero ${SITE_CONTACT.whatsapp.number} oppure via email a concierge@nightlifemilan.com senza commissioni aggiuntive.`,
+            },
       ]
     : locale === 'en'
       ? [
           {
             q: `How much does New Year’s Eve 2027 cost at ${event.venueName} (${event.city})?`,
-            a: `Official and benchmark packages for December 31, 2026 – January 1, 2027 at ${event.venueName} are: ${event.priceSummaryEn}. ${sourceBasis}`,
+            a: `Official packages for December 31, 2026 – January 1, 2027 at ${event.venueName} are: ${localized.priceSummary}. ${sourceBasis}`,
           },
           {
             q: `What are the hours, address, and dress code for ${event.venueName} on New Year’s Eve?`,
             a: `The celebration takes place at ${event.venueName}, ${event.address}, ${event.city} (${event.province}), operating ${event.hours}. Recommended dress code: ${dress}.`,
           },
-          {
-            q: `How can I book tickets, gala dinner, or a VIP table for ${event.venueName}?`,
-            a: `You can check real-time early-bird ticket availability, gala menus, and VIP table floor plans via the official Nightlife Milan WhatsApp Concierge at ${SITE_CONTACT.whatsapp.number} or email concierge@nightlifemilan.com with zero agency markups.`,
-          },
+          hasDinnerFormula
+            ? {
+                q: `How can I book tickets, gala dinner, or a VIP table for ${event.venueName}?`,
+                a: `You can check real-time early-bird ticket availability, gala menus, and VIP table floor plans via the official Nightlife Milan WhatsApp Concierge at ${SITE_CONTACT.whatsapp.number} or email concierge@nightlifemilan.com with zero agency markups.`,
+              }
+            : {
+                q: `How can I book Early Bird admission or a VIP table for ${event.venueName}?`,
+                a: `You can check real-time Early Bird ticket availability and Dancefloor / Privé VIP table options via the official Nightlife Milan WhatsApp Concierge at ${SITE_CONTACT.whatsapp.number} or email concierge@nightlifemilan.com with zero agency markups.`,
+              },
         ]
       : [
           {
             q: `${nav.menuLabel} 2027 @ ${event.venueName} (${event.city}) · EUR (€)?`,
-            a: `${event.venueName} (${event.address}, ${event.city}): ${event.priceSummaryEn}. ${sourceBasis}`,
+            a: `${event.venueName} (${event.address}, ${event.city}): ${localized.priceSummary}. ${sourceBasis}`,
           },
           {
             q: `${event.venueName} (${event.address}, ${event.city}) · 31/12/2026 (${event.hours})?`,

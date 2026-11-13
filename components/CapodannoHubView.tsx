@@ -6,6 +6,7 @@ import { capodannoEventPath, capodannoNavigation, capodannoPath } from '@/lib/ca
 import {
   getCapodannoLocalizedCategorySubtitle,
   getCapodannoLocalizedCategoryTitle,
+  getCapodannoLocalizedEventContent,
   getCapodannoLocalizedEventTitle,
   getCapodannoUiCopy,
 } from '@/lib/capodanno/i18n';
@@ -112,7 +113,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
           item: {
             '@type': 'Event',
             name: getCapodannoLocalizedEventTitle(ev, locale),
-            description: isIt ? ev.descriptionIt : ev.descriptionEn,
+            description: getCapodannoLocalizedEventContent(ev, locale).description,
             startDate: ev.startISO,
             endDate: ev.endISO,
             eventStatus: 'https://schema.org/EventScheduled',

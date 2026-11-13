@@ -1,4 +1,8 @@
 import { capodannoNavigation } from '@/lib/capodanno/routes';
+import {
+  getRepvblicNyeContent,
+  type CapodannoLocalizedEventContent,
+} from '@/lib/capodanno/repvblic35';
 import type { CapodannoCategoryPageDef, CapodannoEventItem } from '@/lib/capodannoEvents';
 import { SITE_CONTACT } from '@/config/contact';
 
@@ -512,6 +516,9 @@ export function getCapodannoLocalizedEventTitle(
   event: CapodannoEventItem,
   locale: string,
 ): string {
+  if (event.slug === 'capodanno-repvblic-milano') {
+    return getRepvblicNyeContent(locale).title;
+  }
   if (locale === 'it') return event.titleIt;
   if (locale === 'en') return event.titleEn;
   const nav = capodannoNavigation(locale);
@@ -525,8 +532,32 @@ export function getCapodannoLocalizedEventSubtitle(
   event: CapodannoEventItem,
   locale: string,
 ): string {
+  if (event.slug === 'capodanno-repvblic-milano') {
+    return getRepvblicNyeContent(locale).subtitle;
+  }
   if (locale === 'it') return event.subtitleIt;
   if (locale === 'en') return event.subtitleEn;
   const nav = capodannoNavigation(locale);
   return `${nav.h1} @ ${event.venueName} (${event.address}, ${event.city}). ${event.priceSummaryEn}. ${event.subtitleEn}`;
+}
+
+export function getCapodannoLocalizedEventContent(
+  event: CapodannoEventItem,
+  locale: string,
+): CapodannoLocalizedEventContent {
+  if (event.slug === 'capodanno-repvblic-milano') {
+    return getRepvblicNyeContent(locale);
+  }
+  const isIt = locale === 'it';
+  return {
+    title: getCapodannoLocalizedEventTitle(event, locale),
+    subtitle: getCapodannoLocalizedEventSubtitle(event, locale),
+    description: isIt ? event.descriptionIt : event.descriptionEn,
+    musicAndFormat: isIt ? event.musicAndFormatIt : event.musicAndFormatEn,
+    dressCode: isIt ? event.dressCodeIt : event.dressCodeEn,
+    priceSummary: isIt ? event.priceSummaryIt : event.priceSummaryEn,
+    tiers: isIt ? event.tiersIt : event.tiersEn,
+    highlights: isIt ? event.highlightsIt : event.highlightsEn,
+    sourceBasis: isIt ? event.sourceBasisIt : event.sourceBasisEn,
+  };
 }

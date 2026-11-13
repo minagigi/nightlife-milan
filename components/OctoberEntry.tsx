@@ -87,15 +87,15 @@ export function HomeHalloweenAndCapodannoSections({
       href: `${prefix}/events/voya-saturday-rooftop-experience`,
     },
     {
-      rank: '06 · DINNER SHOW & CLUB · REPUBBLICA',
-      venue: 'Repvblic Milano',
+      rank: '06 · INTERNATIONAL CLUB · REPUBBLICA',
+      venue: 'REPVBLIC Milano',
       title: isIt
-        ? 'Serate della Settimana Repvblic Milano: Dirty Monday, Home, Sbraake & Weekend'
-        : 'Repvblic Milan Weekly Nights: Dirty Monday, Home, Sbraake & Weekend',
+        ? 'Serate della Settimana REPVBLIC Milano: Dirty Monday, Home, Sbraake & Weekend'
+        : 'REPVBLIC Milan Weekly Nights: Dirty Monday, Home, Sbraake & Weekend',
       desc: isIt
-        ? 'Lunedì Dirty Monday, Mercoledì Home, Giovedì Sbraake, Venerdì & Sabato Luxury Dinner Show & Club nel salotto internazionale di Piazza della Repubblica 12.'
-        : 'Monday Dirty Monday, Wednesday Home, Thursday Sbraake, Friday & Saturday Luxury Dinner Show & Club at Piazza della Repubblica 12.',
-      badge: isIt ? 'Accredito Lista da 15€ · Dinner Show & Tavoli Privé da 250€' : 'Guest List from €15 · Dinner Show & Privé Tables from €250',
+        ? 'Lunedì Dirty Monday, Mercoledì Home, Giovedì Sbraake, Venerdì & Sabato hit internazionali, hip hop e house dalle 23:00 nel cuore di Piazza della Repubblica 12.'
+        : 'Monday Dirty Monday, Wednesday Home, Thursday Sbraake, Friday & Saturday international hits, hip hop and house from 23:00 at Piazza della Repubblica 12.',
+      badge: isIt ? 'Accredito Lista da 15€ · Tavoli Dancefloor & Privé VIP da 250€' : 'Guest List from €15 · Dancefloor & Privé VIP Tables from €250',
       posterSrc: '/images/events/weekly-posters/repvblic-saturday.webp',
       href: `${prefix}/events/repvblic-saturday-saturday-night`,
     },
@@ -181,14 +181,14 @@ export function HomeHalloweenAndCapodannoSections({
       highlight: true,
     },
     {
-      rank: '06 · DINNER SHOW & CLUB · REPUBBLICA',
-      venue: 'Repvblic Milano',
+      rank: '06 · CAPODANNO 2027 · REPUBBLICA',
+      venue: 'REPVBLIC Milano',
       title: isIt
-        ? 'Capodanno Repvblic Milano 2027: Luxury Dinner Show in Piazza della Repubblica'
-        : 'Repvblic Milan NYE 2027: Luxury Dinner Show in Piazza della Repubblica',
+        ? 'NEW YEAR’S EVE AT REPVBLIC MILANO 2027: Piazza della Repubblica 12'
+        : 'NEW YEAR’S EVE AT REPVBLIC MILANO 2027 · Piazza della Repubblica 12',
       priceLabel: isIt
-        ? 'Prezzi passati: da 50€ (Dopocena) · 160€ (Gran Cenone Servito) · Tavoli VIP da 500€'
-        : 'Past prices: from €50 (Party) · €160 (Served Gala Dinner) · VIP Tables from €500',
+        ? 'Tariffe ufficiali confermate: Early Bird 45€ (flûte + 1 drink) · Tavolo Dancefloor 600€ (6 pax) · Privé 1.200€ (10 pax)'
+        : 'Confirmed official rates: Early Bird €45 (flûte + 1 drink) · Dancefloor Table €600 (6 guests) · Privé €1,200 (10 guests)',
       posterSrc: '/images/events/capodanno-2027-posters/capodanno-repvblic-milano.webp',
       href: capodannoEventPath('capodanno-repvblic-milano', locale),
       highlight: false,
@@ -355,8 +355,8 @@ export function HomeHalloweenAndCapodannoSections({
             </span>
             <span>
               {isIt
-                ? 'Per tutti gli eventi di Capodanno sono pubblicati i prezzi passati e di fianco è indicato che potrebbero esserci cambiamenti di prezzo o aggiornamenti del tema della serata.'
-                : 'Past-edition prices are published for all New Year’s Eve events alongside the notice that there may be price changes or updates to the evening’s theme.'}
+                ? 'Gli eventi con programma ufficiale 2026/2027 (come REPVBLIC Milano) riportano tariffe e format confermati; le schede non ancora confermate indicano i prezzi della passata edizione soggetti ad aggiornamento.'
+                : 'Events with confirmed 2026/2027 programming (such as REPVBLIC Milano) display official confirmed rates; unconfirmed listings still display prior-edition prices subject to update.'}
             </span>
           </div>
 
