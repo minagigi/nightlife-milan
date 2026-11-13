@@ -116,7 +116,7 @@ function stripDanglingWords(text: string): string {
     if (parts.length <= 2) break;
     const rawLast = parts[parts.length - 1];
     const last = rawLast.replace(/^[,.:;|\-–—()[\]]+|[,.:;|\-–—()[\]]+$/g, '').toLowerCase();
-    if (DANGLING_WORDS.has(last) || /^\d+\.?$/.test(last)) {
+    if (DANGLING_WORDS.has(last) || /^\d{1,2}\.$/.test(rawLast)) {
       parts.pop();
       out = balanceOpenDelimiters(parts.join(' '))
         .replace(/[\s,;:|\-–—&+/]+$/u, '')

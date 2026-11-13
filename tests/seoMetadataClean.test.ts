@@ -44,4 +44,8 @@ test('withWhatsApp balances open parentheses, removes em-dash, and keeps clean s
 
   const noEmDash = truncateSeoText('Nightlife Milan \u2014 Brera & Corso Como Luxury Clubs', 62);
   assert.ok(!noEmDash.includes('\u2014'));
+
+  const octoberIt = withWhatsApp('Eventi e serate a Milano · ottobre 2026', 'it');
+  assert.ok(octoberIt.includes('2026'), `Year stripped unexpectedly: ${octoberIt}`);
+  assert.ok(octoberIt.length >= 75 && octoberIt.length <= 158, `octoberIt len=${octoberIt.length}: ${octoberIt}`);
 });
