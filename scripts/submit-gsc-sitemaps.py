@@ -46,7 +46,7 @@ STRATEGIC_INSPECT_URLS = [
     f"{SITE_ORIGIN}/events",
     f"{SITE_ORIGIN}/football-afterparties",
     f"{SITE_ORIGIN}/new-years-eve",
-    f"{SITE_ORIGIN}/clubs/justme-milano",
+    f"{SITE_ORIGIN}/clubs/just-me-milano",
 ]
 
 
@@ -147,9 +147,9 @@ def validate_live_sitemaps(min_release_date: str = "2026-11-13") -> dict:
 
         urls: set[str] = set()
         lastmods: list[str] = []
-        legal_bad: list[str] = []
         below_floor: list[str] = []
-        core_hub_too_old: list[str] = []
+        nov1_urls: list[str] = []
+        stale_non_nov1: list[str] = []
 
         for elem in root:
             if _local_tag(elem.tag) != "url":
@@ -167,21 +167,26 @@ def validate_live_sitemaps(min_release_date: str = "2026-11-13") -> dict:
             lm_day = lm_text[:10] if lm_text else ""
             if lm_day:
                 lastmods.append(lm_day)
-            is_legal = loc_text.endswith("/privacy") or loc_text.endswith("/terms") or "/legal" in loc_text
             if lm_day < "2026-11-01":
                 below_floor.append(f"{loc_text}={lm_day}")
-            elif is_legal and lm_day != "2026-11-01" and "/privacy" in loc_text:
-                legal_bad.append(f"{loc_text}={lm_day}")
-            elif not is_legal and lm_day < min_release_date:
-                core_hub_too_old.append(f"{loc_text}={lm_day}")
+            elif lm_day == "2026-11-01":
+                nov1_urls.append(loc_text)
+            elif lm_day < min_release_date:
+                stale_non_nov1.append(f"{loc_text}={lm_day}")
 
         if below_floor:
             errors.append(
                 f"{sitemap_url}: {len(below_floor)} URLs have lastmod < 2026-11-01 (sample: {below_floor[:3]})"
             )
-        if core_hub_too_old:
+        expects_70_legal = sitemap_url.endswith(("/sitemap.xml", "/sitemap-core.xml"))
+        expected_nov1 = 70 if expects_70_legal else 0
+        if len(nov1_urls) != expected_nov1:
             errors.append(
-                f"{sitemap_url}: {len(core_hub_too_old)} non-legal URLs have lastmod < {min_release_date} (sample: {core_hub_too_old[:3]})"
+                f"{sitemap_url}: expected {expected_nov1} URLs at 2026-11-01 (localized legal pages), got {len(nov1_urls)}"
+            )
+        if stale_non_nov1:
+            errors.append(
+                f"{sitemap_url}: {len(stale_non_nov1)} non-legal URLs have lastmod between 2026-11-01 and {min_release_date} (sample: {stale_non_nov1[:3]})"
             )
 
         urlsets_by_feed[sitemap_url] = urls
