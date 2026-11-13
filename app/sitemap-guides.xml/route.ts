@@ -3,5 +3,5 @@ import { buildGuidesTaxonomySitemapEntriesAsync, xmlSitemapResponse } from '@/li
 export const revalidate = 3600;
 
 export async function GET(): Promise<Response> {
-  return xmlSitemapResponse(await buildGuidesTaxonomySitemapEntriesAsync());
+  return xmlSitemapResponse(await buildGuidesTaxonomySitemapEntriesAsync(), { compact: true });
 }

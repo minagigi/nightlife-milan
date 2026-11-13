@@ -3,5 +3,5 @@ import { buildCoreHubSitemapEntriesAsync, xmlSitemapResponse } from '@/lib/sitem
 export const revalidate = 3600;
 
 export async function GET(): Promise<Response> {
-  return xmlSitemapResponse(await buildCoreHubSitemapEntriesAsync());
+  return xmlSitemapResponse(await buildCoreHubSitemapEntriesAsync(), { compact: true });
 }

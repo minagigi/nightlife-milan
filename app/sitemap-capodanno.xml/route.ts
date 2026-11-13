@@ -3,5 +3,5 @@ import { buildCapodannoSitemapEntriesAsync, xmlSitemapResponse } from '@/lib/sit
 export const revalidate = 3600;
 
 export async function GET(): Promise<Response> {
-  return xmlSitemapResponse(await buildCapodannoSitemapEntriesAsync());
+  return xmlSitemapResponse(await buildCapodannoSitemapEntriesAsync(), { compact: true });
 }

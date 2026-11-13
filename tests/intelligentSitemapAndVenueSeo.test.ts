@@ -16,6 +16,7 @@ import { getCapodannoOfficialPosterSrc } from '../lib/seoEventImages';
 import {
   buildAllSitemapEntries,
   clampLastModified,
+  getCatalogLastModified,
   renderSitemapXml,
   toCompactSitemapEntries,
 } from '../lib/sitemapBuilder';
@@ -78,9 +79,10 @@ test('Pillar A: all 33 active public venues have full authority specs, SERP meta
   }
 });
 
-test('Pillar B: all 6 sitemap routes auto-update via ISR (revalidate = 3600), clamp lastmod <= now, and stay < 3.8 MB', async () => {
+test('Pillar B: all 7 sitemap routes auto-update via ISR (revalidate = 3600), clamp lastmod <= now, and stay < 3.8 MB', async () => {
   const routes = [
     'app/sitemap.ts',
+    'app/sitemap-index.xml/route.ts',
     'app/sitemap-core.xml/route.ts',
     'app/sitemap-clubs.xml/route.ts',
     'app/sitemap-capodanno.xml/route.ts',
@@ -95,12 +97,18 @@ test('Pillar B: all 6 sitemap routes auto-update via ISR (revalidate = 3600), cl
     assert.doesNotMatch(src, /force-static/, `${rel} must not force-static`);
   }
 
+  assert.ok(
+    getCatalogLastModified().toISOString().slice(0, 10) >= '2026-11-13',
+    'Catalog lastModified must reflect >= 2026-11-13 SEO release',
+  );
+
   const futureClamped = clampLastModified('2099-12-31T23:59:59.000Z');
   assert.ok(futureClamped.getTime() <= Date.now() + 1000, 'clampLastModified must never emit a future timestamp');
 
   const allEntries = toCompactSitemapEntries(buildAllSitemapEntries());
   assert.ok(allEntries.length > 15000, `Expected > 15,000 multilingual URLs, got ${allEntries.length}`);
   const xml = renderSitemapXml(allEntries, { compact: true });
+  assert.ok(!xml.includes('<changefreq>') && !xml.includes('<priority>'), 'Compact XML must omit changefreq/priority');
   const byteLen = Buffer.byteLength(xml, 'utf8');
   assert.ok(byteLen < 3_800_000, `Compact /sitemap.xml (${byteLen} bytes) must stay safely below 3.8 MB`);
 

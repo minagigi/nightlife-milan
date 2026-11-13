@@ -3,5 +3,5 @@ import { buildClubsSitemapEntriesAsync, xmlSitemapResponse } from '@/lib/sitemap
 export const revalidate = 3600;
 
 export async function GET(): Promise<Response> {
-  return xmlSitemapResponse(await buildClubsSitemapEntriesAsync());
+  return xmlSitemapResponse(await buildClubsSitemapEntriesAsync(), { compact: true });
 }

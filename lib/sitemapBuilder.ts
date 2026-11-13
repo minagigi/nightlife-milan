@@ -22,7 +22,8 @@ import {
   getLocalizedZoneSlug35,
 } from '@/lib/i18n/localizedSlugs35';
 
-const FALLBACK_CATALOG_TIMESTAMP = '2026-11-12T11:35:00.000Z';
+const SITE_RELEASE_TIMESTAMP = '2026-11-13T12:00:00.000Z';
+const LEGAL_STATIC_TIMESTAMP = '2026-11-01T00:00:00.000Z';
 
 export function clampLastModified(
   candidate?: string | Date | number | null,
@@ -30,7 +31,7 @@ export function clampLastModified(
 ): Date {
   const nowMs = Date.now();
   const safeFallback = Math.min(
-    Number.isFinite(fallbackMs) ? (fallbackMs as number) : Date.parse(FALLBACK_CATALOG_TIMESTAMP),
+    Number.isFinite(fallbackMs) ? (fallbackMs as number) : Date.parse(SITE_RELEASE_TIMESTAMP),
     nowMs,
   );
   if (candidate === null || candidate === undefined || candidate === '') {
@@ -49,7 +50,35 @@ export function clampLastModified(
 }
 
 export function getCatalogLastModified(): Date {
-  return clampLastModified(OCTOBER_EVENTS_INVENTORY?.sourceCheckedAt || FALLBACK_CATALOG_TIMESTAMP);
+  const releaseMs = Date.parse(SITE_RELEASE_TIMESTAMP);
+  const rawCheckedAt = OCTOBER_EVENTS_INVENTORY?.sourceCheckedAt;
+  const inventoryMs = rawCheckedAt ? Date.parse(String(rawCheckedAt)) : 0;
+  return clampLastModified(
+    Math.max(
+      Number.isFinite(releaseMs) ? releaseMs : 0,
+      Number.isFinite(inventoryMs) ? inventoryMs : 0,
+    ),
+  );
+}
+
+export function getRollingMilanDayLastModified(extraMs = 0): Date {
+  const catalogMs = getCatalogLastModified().getTime();
+  let milanDayMs = 0;
+  try {
+    const ymd = new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'Europe/Rome',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    }).format(new Date());
+    const parsed = Date.parse(`${ymd}T00:05:00.000Z`);
+    if (Number.isFinite(parsed)) milanDayMs = parsed;
+  } catch {
+    milanDayMs = 0;
+  }
+  return clampLastModified(
+    Math.max(catalogMs, milanDayMs, Number.isFinite(extraMs) ? extraMs : 0),
+  );
 }
 
 export const SITEMAP_LAST_MODIFIED = getCatalogLastModified();
@@ -126,6 +155,9 @@ function buildCoreHubEntriesInternal(freshCatalogDate: Date): MetadataRoute.Site
   const locales: LocaleCode[] = indexedLocaleCodes;
   const entries: MetadataRoute.Sitemap = [];
   const evergreenDate = getCatalogLastModified();
+  const legalDate = clampLastModified(LEGAL_STATIC_TIMESTAMP);
+  const rollingHubDate = getRollingMilanDayLastModified(freshCatalogDate.getTime());
+  const legalPaths = new Set(['/privacy', '/terms']);
 
   for (const locale of locales) {
     entries.push({
@@ -196,7 +228,11 @@ function buildCoreHubEntriesInternal(freshCatalogDate: Date): MetadataRoute.Site
       const locPath = route.path ? getLocalizedSeoPagePath35(route.path, locale) : '';
       entries.push({
         url: `${baseUrl}${langPrefix}${locPath}`,
-        lastModified: dynamicHubPaths.has(route.path) ? freshCatalogDate : evergreenDate,
+        lastModified: legalPaths.has(route.path)
+          ? legalDate
+          : dynamicHubPaths.has(route.path)
+            ? rollingHubDate
+            : evergreenDate,
         changeFrequency: route.changeFrequency,
         priority: route.priority,
       });
@@ -542,8 +578,9 @@ export async function buildSitemapIndexEntriesAsync(): Promise<SitemapIndexEntry
     }
   }
   const latestEventDate = new Date(latestMs);
+  const rollingDate = getRollingMilanDayLastModified(latestMs);
   return [
-    { loc: `${baseUrl}/sitemap-core.xml`, lastModified: latestEventDate },
+    { loc: `${baseUrl}/sitemap-core.xml`, lastModified: rollingDate },
     { loc: `${baseUrl}/sitemap-clubs.xml`, lastModified: latestEventDate },
     { loc: `${baseUrl}/sitemap-events.xml`, lastModified: latestEventDate },
     { loc: `${baseUrl}/sitemap-capodanno.xml`, lastModified: catalogDate },
