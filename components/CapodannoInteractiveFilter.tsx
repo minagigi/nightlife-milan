@@ -6,6 +6,7 @@ import Link from '@/components/LocalizedLink';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { capodannoCategoryPath, capodannoEventPath } from '@/lib/capodanno/routes';
 import { getCapodannoLocalizedEventContent, getCapodannoUiCopy } from '@/lib/capodanno/i18n';
+import { isRepvblicNyeSlug } from '@/lib/capodanno/repvblic35';
 import { getScarcityAndChatCopy } from '@/lib/i18n/scarcityAndChatCopy';
 import type {
   CapodannoEventItem,
@@ -437,9 +438,11 @@ export default function CapodannoInteractiveFilter({
                               ? `Da ${event.priceFromEur}€`
                               : `From €${event.priceFromEur}`}
                         </span>
-                        <span className="border border-[#F6F1E7]/50 bg-[#050505] px-2.5 py-1 text-[11px] font-extrabold uppercase tracking-wider text-[#F6F1E7]" data-selling-fast-badge>
-                          {scarcity.sellingFastBadge}
-                        </span>
+                        {!isRepvblicNyeSlug(event.slug) && (
+                          <span className="border border-[#F6F1E7]/50 bg-[#050505] px-2.5 py-1 text-[11px] font-extrabold uppercase tracking-wider text-[#F6F1E7]" data-selling-fast-badge>
+                            {scarcity.sellingFastBadge}
+                          </span>
+                        )}
                       </div>
                       <p className="font-mono text-xs uppercase tracking-wider text-[#EAE3D5]">{event.venueName}</p>
                       <h3 className="mt-1 mb-3 font-serif text-xl font-bold leading-snug text-[#F6F1E7]">

@@ -9,6 +9,11 @@ import {
   getCapodannoLocalizedEventTitle,
   getCapodannoUiCopy,
 } from '@/lib/capodanno/i18n';
+import {
+  REPVBLIC_NYE_OFFER_PRICES_EUR,
+  getRepvblicNyePageCopy,
+  isRepvblicNyeSlug,
+} from '@/lib/capodanno/repvblic35';
 import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
 import { SITE_CONTACT } from '@/config/contact';
@@ -40,8 +45,23 @@ export default function CapodannoDetailView({ locale, event }: Props) {
   const isIt = locale === 'it';
   const prefix = localePrefix(locale);
   const nav = capodannoNavigation(locale);
-  const ui = getCapodannoUiCopy(locale);
-  const scarcity = getScarcityAndChatCopy(locale);
+  const baseUi = getCapodannoUiCopy(locale);
+  const baseScarcity = getScarcityAndChatCopy(locale);
+  // Party-only event (official REPVBLIC rate card): no dinner, no show, no bottle service,
+  // no "almost sold out" claim. Swap the generic Capodanno strings for event-specific copy.
+  const isPartyOnly = isRepvblicNyeSlug(event.slug);
+  const partyCopy = isPartyOnly ? getRepvblicNyePageCopy(locale) : null;
+  const ui = partyCopy
+    ? {
+        ...baseUi,
+        tocPrices: partyCopy.tocPrices,
+        bookingSubtitle: partyCopy.bookingSubtitle,
+        musicLabel: partyCopy.musicLabel,
+      }
+    : baseUi;
+  const scarcity = partyCopy
+    ? { ...baseScarcity, urgencyAlertTitle: partyCopy.alertTitle, urgencyAlertBody: partyCopy.alertBody }
+    : baseScarcity;
   const venueMapCopy = getEventVenueCopy(locale as LocaleCode);
 
   const localized = getCapodannoLocalizedEventContent(event, locale);
@@ -83,6 +103,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
     music,
     dressCode: dress,
     posterSrc: officialPosterSrc,
+    shotLabels: partyCopy?.shots,
   });
 
   const related = CAPODANNO_EVENTS.filter(
@@ -184,14 +205,25 @@ export default function CapodannoDetailView({ locale, event }: Props) {
             addressCountry: 'IT',
           },
         },
-        offers: {
-          '@type': 'Offer',
-          url: `${SITE_URL}${canonicalPath}`,
-          price: String(event.priceFromEur),
-          priceCurrency: 'EUR',
-          availability: 'https://schema.org/InStock',
-          validFrom: '2026-10-01T00:00:00+02:00',
-        },
+        offers: isPartyOnly
+          ? tiers.slice(0, REPVBLIC_NYE_OFFER_PRICES_EUR.length).map((tier, idx) => ({
+              '@type': 'Offer',
+              name: tier.label,
+              description: tier.details,
+              url: `${SITE_URL}${canonicalPath}`,
+              price: String(REPVBLIC_NYE_OFFER_PRICES_EUR[idx]),
+              priceCurrency: 'EUR',
+              availability: 'https://schema.org/InStock',
+              validFrom: '2026-10-01T00:00:00+02:00',
+            }))
+          : {
+              '@type': 'Offer',
+              url: `${SITE_URL}${canonicalPath}`,
+              price: String(event.priceFromEur),
+              priceCurrency: 'EUR',
+              availability: 'https://schema.org/InStock',
+              validFrom: '2026-10-01T00:00:00+02:00',
+            },
       },
       {
         '@type': 'FAQPage',
@@ -243,11 +275,17 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               <span className="border border-[#F6F1E7]/35 bg-[#050505]/90 px-3 py-1 text-xs font-semibold text-[#F6F1E7]">
                 {event.city} ({event.province})
               </span>
-              <span className="border border-[#F6F1E7]/50 bg-[#050505]/90 px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-[#F6F1E7]" data-almost-sold-out-badge>
-                {scarcity.almostSoldOutBadge}
-              </span>
+              {!isPartyOnly && (
+                <span className="border border-[#F6F1E7]/50 bg-[#050505]/90 px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-[#F6F1E7]" data-almost-sold-out-badge>
+                  {scarcity.almostSoldOutBadge}
+                </span>
+              )}
             </div>
-            <h1 data-event-title={title} className="mt-3 font-serif text-3xl font-bold text-[#F6F1E7] sm:text-5xl">
+            <h1
+              data-event-title={title}
+              data-event-party-only={isPartyOnly ? 'true' : undefined}
+              className="mt-3 font-serif text-3xl font-bold text-[#F6F1E7] sm:text-5xl"
+            >
               {title}
             </h1>
             <p className="mt-2 text-sm text-[#EAE3D5] sm:text-base">{subtitle}</p>
@@ -442,9 +480,11 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 <h2 className="font-serif text-2xl font-bold text-[#050505]">
                   {ui.pricesHeadingPrefix} · {event.venueName}
                 </h2>
-                <span className="border border-[#050505] bg-[#050505] px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-[#F6F1E7]" data-selling-fast-badge>
-                  {scarcity.sellingFastBadge}
-                </span>
+                {!isPartyOnly && (
+                  <span className="border border-[#050505] bg-[#050505] px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-[#F6F1E7]" data-selling-fast-badge>
+                    {scarcity.sellingFastBadge}
+                  </span>
+                )}
               </div>
               <p className="mt-1 text-xs text-[#3D3830]">{sourceBasis}</p>
 

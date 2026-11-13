@@ -951,8 +951,11 @@ export function buildSeoEventImagePack(params: {
   posterSrc: string;
   isHalloween?: boolean;
   customAssetKeys?: [string, string, string, string];
+  /** Event-specific shot labels (e.g. party-only events with no dinner/show). */
+  shotLabels?: [string, string, string, string];
 }): SeoEventImagePack {
   const pack = getSeoLocalePack(params.locale);
+  const shots = params.shotLabels || pack.shots;
   const { target, outfit } = inferTargetAndOutfit({
     slug: params.eventSlug,
     categorySlug: params.categorySlug,
@@ -983,7 +986,7 @@ export function buildSeoEventImagePack(params: {
 
   const gallery = assetKeys.map((assetKey, idx) => {
     const anchorHeading = anchors[idx] || params.h1;
-    const shotLabel = pack.shots[idx] || pack.shots[0];
+    const shotLabel = shots[idx] || shots[0];
     const seoFileSlug = slugifySeoSegment(
       `${params.h1}-${anchorHeading}-${params.venueName}-${targetLabel.split('(')[0]}-${outfitLabel.split('&')[0]}`,
       82,

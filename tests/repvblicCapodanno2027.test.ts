@@ -112,3 +112,38 @@ test('no stale Mecenate/Fantoli/Dinner Show strings remain on REPVBLIC cards acr
     }
   }
 });
+
+test('T-027: REPVBLIC NYE page copy is party-only and native in all 35 locales', async () => {
+  const { REPVBLIC_NYE_PAGE_COPY_35, REPVBLIC_NYE_OFFER_PRICES_EUR, getRepvblicNyePageCopy } = await import('../lib/capodanno/repvblic35');
+  const forbidden = /dinner|\bgala\b|galadinner|\bcena\b|cenone|sold[\s-]?out|esaurit|bottigli|bottle|flaschen|botella|bouteille|garrafa|flessen|бутыл|şişe|酒水|زجاجات|flaske|pudeli|flask|ausverkauft|presque complet|quase esgotad|uitverkocht|распродан|\bmenu\b|menü|spettacolo|spectacle|espectáculo|entertainment|entretenimento|\bshow\b/i;
+  const en = REPVBLIC_NYE_PAGE_COPY_35.en;
+  assert.deepEqual([...REPVBLIC_NYE_OFFER_PRICES_EUR], [45, 600, 1200]);
+  assert.equal(Object.keys(REPVBLIC_NYE_PAGE_COPY_35).length, 35);
+  for (const locale of ALL_35_LOCALES) {
+    const copy = getRepvblicNyePageCopy(locale);
+    assert.equal(copy, REPVBLIC_NYE_PAGE_COPY_35[locale], `Missing page copy for ${locale}`);
+    const all = [copy.musicLabel, copy.tocPrices, copy.alertTitle, copy.alertBody, copy.bookingSubtitle, ...copy.shots];
+    for (const s of all) assert.ok(s && s.trim().length >= 2, `Empty string for ${locale}`);
+    assert.doesNotMatch(all.join(' | '), forbidden, `Dinner/show/sold-out wording for ${locale}`);
+    assert.doesNotMatch(all.join(' '), /!/, `Exclamation mark for ${locale}`);
+    assert.match(copy.tocPrices, /^2\. /, `TOC numbering for ${locale}`);
+    assert.equal(copy.shots.length, 4);
+    if (locale !== 'en') {
+      assert.notEqual(copy.tocPrices, en.tocPrices, `English TOC left in ${locale}`);
+      assert.notEqual(copy.bookingSubtitle, en.bookingSubtitle, `English booking text left in ${locale}`);
+      assert.notEqual(copy.alertBody, en.alertBody, `English alert left in ${locale}`);
+      assert.notEqual(copy.shots[1], en.shots[1], `English shot label left in ${locale}`);
+    }
+    const ev = getCapodannoEventBySlug('capodanno-repvblic-milano');
+    assert.ok(ev);
+    const localized = getCapodannoLocalizedEventContent(ev, locale);
+    assert.doesNotMatch(localized.tiers.map((t) => t.details).join(' | '), forbidden, `Bottle/dinner tier wording for ${locale}`);
+  }
+});
+
+test('T-027: REPVBLIC base tiers (IT/EN) carry no bottle-service claim', () => {
+  const ev = getCapodannoEventBySlug('capodanno-repvblic-milano');
+  assert.ok(ev);
+  const details = [...ev.tiersIt, ...ev.tiersEn].map((t) => t.details).join(' | ');
+  assert.doesNotMatch(details, /bottle|bottigli/i);
+});

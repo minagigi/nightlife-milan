@@ -42,7 +42,7 @@ export const REPVBLIC_NYE_CONTENT_35: Record<LocaleCode, CapodannoLocalizedEvent
       {
         label: 'Tavolo Zona Dancefloor',
         price: '600€ per 6 persone',
-        details: 'Un tavolo riservato nel cuore della festa con servizio bottiglie',
+        details: 'Un tavolo riservato nel cuore della festa',
       },
       {
         label: 'Tavolo Zona Privé',
@@ -78,7 +78,7 @@ export const REPVBLIC_NYE_CONTENT_35: Record<LocaleCode, CapodannoLocalizedEvent
       {
         label: 'Dancefloor Table Zone',
         price: '€600 for 6 guests',
-        details: 'A reserved table right in the heart of the party with bottle service',
+        details: 'A reserved table right in the heart of the party',
       },
       {
         label: 'Privé VIP Table Zone',
@@ -105,7 +105,7 @@ export const REPVBLIC_NYE_CONTENT_35: Record<LocaleCode, CapodannoLocalizedEvent
     priceSummary: 'Early Bird 45€ (copa brindis + 1 consumición) · Mesa Dancefloor 600€ (6 pers.) · Mesa Privé 1.200€ (10 pers.)',
     tiers: [
       { label: 'Early Bird (desde 23:00)', price: '45€ / persona', details: 'Entrada con flûte para el brindis de medianoche y una consumición incluidas' },
-      { label: 'Mesa Zona Dancefloor', price: '600€ / 6 personas', details: 'Mesa reservada en el corazón de la pista con servicio de botellas' },
+      { label: 'Mesa Zona Dancefloor', price: '600€ / 6 personas', details: 'Mesa reservada en el corazón de la fiesta' },
       { label: 'Mesa Zona Privé VIP', price: '1.200€ / 10 personas', details: 'Mesa reservada en la zona VIP exclusiva Privé' },
     ],
     highlights: [`Club: REPVBLIC Milano (${ADDR})`, `Horario: 31/12 · ${HOURS}`, 'Música: International Hits, Hip Hop & House', PAYOFF],
@@ -121,7 +121,7 @@ export const REPVBLIC_NYE_CONTENT_35: Record<LocaleCode, CapodannoLocalizedEvent
     priceSummary: 'Early Bird 45€ (coupe + 1 verre) · Table Dancefloor 600€ (6 pers.) · Table Privé 1 200€ (10 pers.)',
     tiers: [
       { label: 'Early Bird (dès 23h00)', price: '45€ / pers.', details: 'Entrée avec coupe pour le toast de minuit et une consommation incluses' },
-      { label: 'Table Zone Dancefloor', price: '600€ / 6 pers.', details: 'Table réservée au cœur du dancefloor avec service bouteilles' },
+      { label: 'Table Zone Dancefloor', price: '600€ / 6 pers.', details: 'Table réservée au cœur de la fête' },
       { label: 'Table Zone Privé VIP', price: '1 200€ / 10 pers.', details: 'Table réservée dans l’espace VIP exclusif Privé' },
     ],
     highlights: [`Lieu : REPVBLIC Milano (${ADDR})`, `Horaires : 31 déc · ${HOURS}`, 'Musique : Hits internationaux, hip-hop & house', PAYOFF],
@@ -137,7 +137,7 @@ export const REPVBLIC_NYE_CONTENT_35: Record<LocaleCode, CapodannoLocalizedEvent
     priceSummary: 'Early Bird 45€ (Toast + 1 Drink) · Dancefloor-Tisch 600€ (6 Pers.) · Privé-Tisch 1.200€ (10 Pers.)',
     tiers: [
       { label: 'Early Bird (ab 23:00 Uhr)', price: '45€ pro Person', details: 'Eintritt inklusive Flûte für den Mitternachtstoast und 1 Drink' },
-      { label: 'Tisch Zone Dancefloor', price: '600€ für 6 Personen', details: 'Reservierter Tisch mitten im Geschehen inklusive Flaschenservice' },
+      { label: 'Tisch Zone Dancefloor', price: '600€ für 6 Personen', details: 'Reservierter Tisch mitten im Geschehen' },
       { label: 'Tisch Zone Privé VIP', price: '1.200€ für 10 Personen', details: 'Reservierter VIP-Tisch im exklusiven Privé-Bereich' },
     ],
     highlights: [`Location: REPVBLIC Milano (${ADDR})`, `Zeiten: 31.12. · ${HOURS}`, 'Musik: International Hits, Hip-Hop & House', PAYOFF],
@@ -153,7 +153,7 @@ export const REPVBLIC_NYE_CONTENT_35: Record<LocaleCode, CapodannoLocalizedEvent
     priceSummary: 'Early Bird 45€ (flûte + 1 bebida) · Mesa Dancefloor 600€ (6 pess.) · Mesa Privé 1.200€ (10 pess.)',
     tiers: [
       { label: 'Early Bird (das 23:00)', price: '45€ por pessoa', details: 'Entrada com flûte para o brinde da meia-noite e uma bebida incluídas' },
-      { label: 'Mesa Zona Dancefloor', price: '600€ para 6 pessoas', details: 'Mesa reservada no coração da pista com serviço de garrafas' },
+      { label: 'Mesa Zona Dancefloor', price: '600€ para 6 pessoas', details: 'Mesa reservada no coração da festa' },
       { label: 'Mesa Zona Privé VIP', price: '1.200€ para 10 pessoas', details: 'Mesa reservada na nossa área VIP exclusiva' },
     ],
     highlights: [`Local: REPVBLIC Milano (${ADDR})`, `Horário: 31/12 · ${HOURS}`, 'Música: Hits Internacionais, Hip Hop & House', PAYOFF],
@@ -169,7 +169,7 @@ export const REPVBLIC_NYE_CONTENT_35: Record<LocaleCode, CapodannoLocalizedEvent
     priceSummary: 'Early Bird €45 (flûte + 1 drankje) · Dancefloor-tafel €600 (6 pers.) · Privé-tafel €1.200 (10 pers.)',
     tiers: [
       { label: 'Early Bird (vanaf 23:00)', price: '€45 per persoon', details: 'Toegang inclusief flûte voor de middernachttoast en één drankje' },
-      { label: 'Tafel Zone Dancefloor', price: '€600 voor 6 personen', details: 'Gereserveerde tafel in het hart van het feest met flessenservice' },
+      { label: 'Tafel Zone Dancefloor', price: '€600 voor 6 personen', details: 'Gereserveerde tafel in het hart van het feest' },
       { label: 'Tafel Zone Privé VIP', price: '€1.200 voor 10 personen', details: 'Gereserveerde tafel in de exclusieve VIP Privé-zone' },
     ],
     highlights: [`Locatie: REPVBLIC Milano (${ADDR})`, `Tijden: 31 dec · ${HOURS}`, 'Muziek: International Hits, Hip Hop & House', PAYOFF],
@@ -185,7 +185,7 @@ export const REPVBLIC_NYE_CONTENT_35: Record<LocaleCode, CapodannoLocalizedEvent
     priceSummary: 'Early Bird 45€ (бокал + 1 напиток) · Стол Dancefloor 600€ (6 чел.) · Стол Privé 1.200€ (10 чел.)',
     tiers: [
       { label: 'Early Bird (с 23:00)', price: '45€ / чел.', details: 'Вход, бокал для полуночного тоста и 1 напиток включены' },
-      { label: 'Стол Dancefloor', price: '600€ / 6 гостей', details: 'Стол в центре танцпола с обслуживанием по меню бутылок' },
+      { label: 'Стол Dancefloor', price: '600€ / 6 гостей', details: 'Забронированный стол в самом центре вечеринки' },
       { label: 'VIP-стол Privé', price: '1.200€ / 10 гостей', details: 'Резерв стола в эксклюзивной VIP-зоне Privé' },
     ],
     highlights: [`Площадка: REPVBLIC Milano (${ADDR})`, `Время: 31 декабря · ${HOURS}`, 'Музыка: International Hits, Hip Hop & House', PAYOFF],
@@ -201,7 +201,7 @@ export const REPVBLIC_NYE_CONTENT_35: Record<LocaleCode, CapodannoLocalizedEvent
     priceSummary: 'Early Bird 45€ (kadeh + 1 içecek) · Dancefloor Masa 600€ (6 kişi) · Privé Masa 1.200€ (10 kişi)',
     tiers: [
       { label: 'Early Bird (23:00 itibarıyla)', price: 'Kişi başı 45€', details: 'Gece yarısı kadehi ve 1 içecek dahil giriş' },
-      { label: 'Dancefloor Masa Alanı', price: '6 kişi 600€', details: 'Partinin kalbinde şişe servisli rezerve masa' },
+      { label: 'Dancefloor Masa Alanı', price: '6 kişi 600€', details: 'Partinin kalbinde rezerve masa' },
       { label: 'Privé VIP Masa Alanı', price: '10 kişi 1.200€', details: 'Özel VIP Privé alanında rezerve masa' },
     ],
     highlights: [`Mekan: REPVBLIC Milano (${ADDR})`, `Saatler: 31 Aralık · ${HOURS}`, 'Müzik: International Hits, Hip Hop & House', PAYOFF],
@@ -217,7 +217,7 @@ export const REPVBLIC_NYE_CONTENT_35: Record<LocaleCode, CapodannoLocalizedEvent
     priceSummary: '早鸟门票 45€（含零点香槟+1杯饮品） · 舞池卡座 600€（6人） · Privé VIP卡座 1.200€（10人）',
     tiers: [
       { label: 'Early Bird 早鸟门票（23:00起）', price: '45€ / 位', details: '含跨年零点香槟祝酒杯及1杯饮品' },
-      { label: 'Dancefloor 舞池区卡座', price: '600€ / 6位', details: '舞池核心区专属预订卡座（含酒水套餐）' },
+      { label: 'Dancefloor 舞池区卡座', price: '600€ / 6位', details: '派对核心区专属预订卡座' },
       { label: 'Privé 尊享 VIP 卡座', price: '1.200€ / 10位', details: '专属 VIP Privé 区域预订卡座' },
     ],
     highlights: [`场馆：REPVBLIC Milano（${ADDR}）`, `时间：12月31日 · ${HOURS}`, '音乐：国际金曲、Hip Hop 与 House', PAYOFF],
@@ -233,7 +233,7 @@ export const REPVBLIC_NYE_CONTENT_35: Record<LocaleCode, CapodannoLocalizedEvent
     priceSummary: 'دخول Early Bird 45€ (كأس احتفال + مشروب) · طاولة Dancefloor 600€ (6 أشخاص) · طاولة Privé 1.200€ (10 أشخاص)',
     tiers: [
       { label: 'تذكرة Early Bird (من 23:00)', price: '45€ للشخص', details: 'دخول يشمل كأس نخب منتصف الليل ومشروباً واحداً' },
-      { label: 'طاولة منطقة Dancefloor', price: '600€ لـ 6 أشخاص', details: 'طاولة محجوزة في قلب الحفل مع خدمة الزجاجات' },
+      { label: 'طاولة منطقة Dancefloor', price: '600€ لـ 6 أشخاص', details: 'طاولة محجوزة في قلب الحفل' },
       { label: 'طاولة منطقة Privé VIP', price: '1.200€ لـ 10 أشخاص', details: 'طاولة محجوزة في منطقة VIP الحصرية' },
     ],
     highlights: [`المكان: REPVBLIC Milano (${ADDR})`, `الموعد: 31 ديسمبر · ${HOURS}`, 'الموسيقى: هيتس عالمية، هيب هوب وهاوس', PAYOFF],
@@ -297,7 +297,7 @@ export const REPVBLIC_NYE_CONTENT_35: Record<LocaleCode, CapodannoLocalizedEvent
     priceSummary: 'Early Bird €45 (bobler + 1 drink) · Dancefloor-bord €600 (6 gæster) · Privé-bord €1.200 (10 gæster)',
     tiers: [
       { label: 'Early Bird (fra kl. 23:00)', price: '€45 pr. person', details: 'Entré inklusiv flûte til midnatsskål og 1 drink' },
-      { label: 'Bord Dancefloor Zone', price: '€600 for 6 personer', details: 'Reserveret bord midt i festen med flaskeservice' },
+      { label: 'Bord Dancefloor Zone', price: '€600 for 6 personer', details: 'Reserveret bord midt i festen' },
       { label: 'Bord Privé VIP Zone', price: '€1.200 for 10 personer', details: 'Reserveret bord i det eksklusive VIP-område' },
     ],
     highlights: [`Sted: REPVBLIC Milano (${ADDR})`, `Tid: 31. dec · ${HOURS}`, 'Musik: International Hits, Hip Hop & House', PAYOFF],
@@ -313,7 +313,7 @@ export const REPVBLIC_NYE_CONTENT_35: Record<LocaleCode, CapodannoLocalizedEvent
     priceSummary: 'Early Bird 45€ (vahuvein + 1 jook) · Dancefloor laud 600€ (6 in.) · Privé laud 1.200€ (10 in.)',
     tiers: [
       { label: 'Early Bird (alates 23:00)', price: '45€ / inimene', details: 'Sissepääs kesköise toosti pokaali ja ühe joogiga' },
-      { label: 'Laud Dancefloor tsoonis', price: '600€ / 6 inimesele', details: 'Broneeritud laud peo südames pudeliteenindusega' },
+      { label: 'Laud Dancefloor tsoonis', price: '600€ / 6 inimesele', details: 'Broneeritud laud peo südames' },
       { label: 'Laud Privé VIP tsoonis', price: '1.200€ / 10 inimesele', details: 'Broneeritud laud eksklusiivses VIP-alas' },
     ],
     highlights: [`Klubi: REPVBLIC Milano (${ADDR})`, `Aeg: 31.12 · ${HOURS}`, 'Muusika: International Hits, Hip Hop & House', PAYOFF],
@@ -505,7 +505,7 @@ export const REPVBLIC_NYE_CONTENT_35: Record<LocaleCode, CapodannoLocalizedEvent
     priceSummary: 'Early Bird €45 (flûte + 1 drink) · Dancefloor-bord €600 (6 gäster) · Privé-bord €1.200 (10 gäster)',
     tiers: [
       { label: 'Early Bird (från 23:00)', price: '€45 per person', details: 'Entré med flûte till midnattsskålen och 1 drink inkluderat' },
-      { label: 'Bord Dancefloor Zone', price: '€600 för 6 personer', details: 'Reserverat bord mitt i festens hjärta med flaskservice' },
+      { label: 'Bord Dancefloor Zone', price: '€600 för 6 personer', details: 'Reserverat bord mitt i festens hjärta' },
       { label: 'Bord Privé VIP Zone', price: '€1.200 för 10 personer', details: 'Reserverat bord i vår exklusiva VIP-avdelning' },
     ],
     highlights: [`Klubb: REPVBLIC Milano (${ADDR})`, `Tid: 31 dec · ${HOURS}`, 'Musik: International Hits, Hip Hop & House', PAYOFF],
@@ -627,4 +627,314 @@ export const REPVBLIC_NYE_CONTENT_35: Record<LocaleCode, CapodannoLocalizedEvent
 
 export function getRepvblicNyeContent(locale: string): CapodannoLocalizedEventContent {
   return REPVBLIC_NYE_CONTENT_35[locale as LocaleCode] || REPVBLIC_NYE_CONTENT_35.en;
+}
+
+export const REPVBLIC_NYE_SLUG = 'capodanno-repvblic-milano';
+
+/** Official REPVBLIC NYE 2026/2027 rate card: Early Bird, Dancefloor table, Privé table (EUR). */
+export const REPVBLIC_NYE_OFFER_PRICES_EUR: readonly [number, number, number] = [45, 600, 1200];
+
+/**
+ * Party-only page copy for the REPVBLIC NYE detail page (T-027, 13 Nov 2026).
+ * Official source: party from 23:00 till morning, no dinner, no show, no bottle service,
+ * no "almost sold out" claim. Replaces the generic Capodanno strings that mention gala dinners.
+ */
+export interface RepvblicNyePageCopy {
+  musicLabel: string;
+  tocPrices: string;
+  alertTitle: string;
+  alertBody: string;
+  bookingSubtitle: string;
+  shots: [string, string, string, string];
+}
+
+export const REPVBLIC_NYE_PAGE_COPY_35: Record<LocaleCode, RepvblicNyePageCopy> = {
+  it: {
+    musicLabel: 'Musica',
+    tocPrices: '2. Prezzi Ufficiali, Biglietti e Tavoli VIP',
+    alertTitle: '⚠️ BIGLIETTI E TAVOLI VIP · MEGLIO PRENOTARE PRESTO',
+    alertBody: 'A Capodanno i posti migliori si prenotano per primi. Per comprare il biglietto Early Bird o riservare un tavolo al REPVBLIC, scrivi adesso al concierge su WhatsApp.',
+    bookingSubtitle: 'Ricevi subito su WhatsApp, telefono o email il link ufficiale per il biglietto o la mappa dei tavoli Privé.',
+    shots: ['Sala Principale e Atmosfera Reale', 'Countdown di Mezzanotte, Brindisi e Festa', 'Tavoli Dancefloor e Privé VIP', 'Pubblico Internazionale in Pista'],
+  },
+  en: {
+    musicLabel: 'Music',
+    tocPrices: '2. Official Prices, Tickets & VIP Tables',
+    alertTitle: '⚠️ TICKETS & VIP TABLES · BOOK EARLY',
+    alertBody: 'On New Year’s Eve the best spots are booked first. To buy an Early Bird ticket or reserve a table at REPVBLIC, message the concierge on WhatsApp now.',
+    bookingSubtitle: 'Receive the official ticket link or VIP table floor plan via WhatsApp, phone, or email.',
+    shots: ['Main Hall & Real Venue Atmosphere', 'Midnight Countdown, Toast & Party', 'Dancefloor & Privé VIP Tables', 'International Crowd on the Dancefloor'],
+  },
+  es: {
+    musicLabel: 'Música',
+    tocPrices: '2. Precios Oficiales, Entradas y Mesas VIP',
+    alertTitle: '⚠️ ENTRADAS Y MESAS VIP · RESERVA CON ANTELACIÓN',
+    alertBody: 'En Nochevieja los mejores sitios se reservan primero. Para comprar tu entrada Early Bird o reservar mesa en REPVBLIC, escribe ya al concierge por WhatsApp.',
+    bookingSubtitle: 'Recibe por WhatsApp, teléfono o email el enlace oficial de entradas o el plano de mesas VIP.',
+    shots: ['Sala Principal y Ambiente Real', 'Cuenta Atrás, Brindis de Medianoche y Fiesta', 'Mesas Dancefloor y Privé VIP', 'Público Internacional en la Pista'],
+  },
+  fr: {
+    musicLabel: 'Musique',
+    tocPrices: '2. Tarifs Officiels, Billets et Tables VIP',
+    alertTitle: '⚠️ BILLETS ET TABLES VIP · RÉSERVEZ TÔT',
+    alertBody: 'Pour le Nouvel An, les meilleures places partent en premier. Pour acheter votre billet Early Bird ou réserver une table au REPVBLIC, écrivez dès maintenant au concierge sur WhatsApp.',
+    bookingSubtitle: 'Recevez par WhatsApp, téléphone ou e-mail le lien officiel de billetterie ou le plan des tables VIP.',
+    shots: ['Salle Principale et Ambiance Réelle', 'Compte à Rebours, Toast de Minuit et Fête', 'Tables Dancefloor et Privé VIP', 'Public International sur le Dancefloor'],
+  },
+  de: {
+    musicLabel: 'Musik',
+    tocPrices: '2. Offizielle Preise, Tickets & VIP-Tische',
+    alertTitle: '⚠️ TICKETS & VIP-TISCHE · FRÜH BUCHEN',
+    alertBody: 'An Silvester sind die besten Plätze zuerst vergeben. Für ein Early-Bird-Ticket oder einen Tisch im REPVBLIC schreiben Sie dem Concierge jetzt auf WhatsApp.',
+    bookingSubtitle: 'Erhalten Sie per WhatsApp, Telefon oder E-Mail den offiziellen Ticketlink oder den VIP-Tischplan.',
+    shots: ['Hauptsaal & echte Club-Atmosphäre', 'Countdown, Mitternachtstoast & Party', 'Dancefloor- & Privé-VIP-Tische', 'Internationales Publikum auf dem Dancefloor'],
+  },
+  pt: {
+    musicLabel: 'Música',
+    tocPrices: '2. Preços Oficiais, Ingressos e Mesas VIP',
+    alertTitle: '⚠️ INGRESSOS E MESAS VIP · RESERVE CEDO',
+    alertBody: 'No Réveillon, os melhores lugares são reservados primeiro. Para comprar o ingresso Early Bird ou reservar uma mesa no REPVBLIC, fale agora com o concierge pelo WhatsApp.',
+    bookingSubtitle: 'Receba por WhatsApp, telefone ou e-mail o link oficial de ingressos ou o mapa de mesas VIP.',
+    shots: ['Salão Principal e Ambiente Real', 'Contagem Regressiva, Brinde da Meia-Noite e Festa', 'Mesas Dancefloor e Privé VIP', 'Público Internacional na Pista'],
+  },
+  nl: {
+    musicLabel: 'Muziek',
+    tocPrices: '2. Officiële Prijzen, Tickets en VIP-Tafels',
+    alertTitle: '⚠️ TICKETS EN VIP-TAFELS · BOEK OP TIJD',
+    alertBody: 'Met oud en nieuw zijn de beste plekken het eerst weg. Wil je een Early Bird-ticket kopen of een tafel reserveren bij REPVBLIC, stuur de concierge dan nu een WhatsApp.',
+    bookingSubtitle: 'Ontvang via WhatsApp, telefoon of e-mail de officiële ticketlink of de plattegrond van de VIP-tafels.',
+    shots: ['Hoofdzaal en Echte Sfeer', 'Aftellen, Proosten om Middernacht en Feest', 'Dancefloor- en Privé VIP-Tafels', 'Internationaal Publiek op de Dansvloer'],
+  },
+  ru: {
+    musicLabel: 'Музыка',
+    tocPrices: '2. Официальные цены, билеты и VIP-столы',
+    alertTitle: '⚠️ БИЛЕТЫ И VIP-СТОЛЫ · БРОНИРУЙТЕ ЗАРАНЕЕ',
+    alertBody: 'В новогоднюю ночь лучшие места бронируют первыми. Чтобы купить билет Early Bird или забронировать стол в REPVBLIC, напишите консьержу в WhatsApp прямо сейчас.',
+    bookingSubtitle: 'Получите в WhatsApp, по телефону или email официальную ссылку на билеты или схему VIP-столов.',
+    shots: ['Главный зал и атмосфера клуба', 'Обратный отсчёт, бокалы в полночь и вечеринка', 'Столы у танцпола и VIP Privé', 'Международная публика на танцполе'],
+  },
+  tr: {
+    musicLabel: 'Müzik',
+    tocPrices: '2. Resmî Fiyatlar, Biletler ve VIP Masalar',
+    alertTitle: '⚠️ BİLETLER VE VIP MASALAR · ERKEN REZERVASYON',
+    alertBody: 'Yılbaşı gecesi en iyi yerler önce dolar. Early Bird bilet almak ya da REPVBLIC’te masa ayırtmak için concierge’e hemen WhatsApp’tan yazın.',
+    bookingSubtitle: 'Resmî bilet bağlantısını veya VIP masa planını WhatsApp, telefon ya da e-posta ile hemen alın.',
+    shots: ['Ana Salon ve Gerçek Mekân Atmosferi', 'Geri Sayım, Gece Yarısı Kadeh Kaldırma ve Parti', 'Dancefloor ve Privé VIP Masalar', 'Pistte Uluslararası Kalabalık'],
+  },
+  zh: {
+    musicLabel: '音乐',
+    tocPrices: '2. 官方价格、门票与VIP卡座',
+    alertTitle: '⚠️ 门票与VIP卡座 · 建议尽早预订',
+    alertBody: '跨年夜最好的位置总是最先被订走。如需购买Early Bird门票或预订REPVBLIC卡座，请立即通过WhatsApp联系礼宾。',
+    bookingSubtitle: '通过WhatsApp、电话或电子邮件获取官方购票链接或VIP卡座平面图。',
+    shots: ['主厅与真实场地氛围', '午夜倒数、举杯与派对', '舞池卡座与Privé VIP卡座', '舞池中的国际宾客'],
+  },
+  ar: {
+    musicLabel: 'الموسيقى',
+    tocPrices: '2. الأسعار الرسمية والتذاكر وطاولات VIP',
+    alertTitle: '⚠️ التذاكر وطاولات VIP · احجز مبكرًا',
+    alertBody: 'في ليلة رأس السنة تُحجز أفضل الأماكن أولًا. لشراء تذكرة Early Bird أو حجز طاولة في REPVBLIC، راسل الكونسيرج عبر واتساب الآن.',
+    bookingSubtitle: 'احصل عبر واتساب أو الهاتف أو البريد الإلكتروني على رابط التذاكر الرسمي أو مخطط طاولات VIP.',
+    shots: ['القاعة الرئيسية والأجواء الحقيقية', 'العد التنازلي ونخب منتصف الليل والحفلة', 'طاولات حلبة الرقص وطاولات Privé VIP', 'جمهور دولي على حلبة الرقص'],
+  },
+  bg: {
+    musicLabel: 'Музика',
+    tocPrices: '2. Официални цени, билети и VIP маси',
+    alertTitle: '⚠️ БИЛЕТИ И VIP МАСИ · РЕЗЕРВИРАЙТЕ НАВРЕМЕ',
+    alertBody: 'В новогодишната нощ най-добрите места се запазват първи. За билет Early Bird или маса в REPVBLIC пишете на консиержа в WhatsApp още сега.',
+    bookingSubtitle: 'Получете по WhatsApp, телефон или имейл официалния линк за билети или плана на VIP масите.',
+    shots: ['Основна зала и истинска атмосфера', 'Обратно броене, наздравица в полунощ и парти', 'Маси на дансинга и Privé VIP маси', 'Международна публика на дансинга'],
+  },
+  hr: {
+    musicLabel: 'Glazba',
+    tocPrices: '2. Službene cijene, ulaznice i VIP stolovi',
+    alertTitle: '⚠️ ULAZNICE I VIP STOLOVI · REZERVIRAJTE NA VRIJEME',
+    alertBody: 'Za doček Nove godine najbolja se mjesta prva rezerviraju. Za ulaznicu Early Bird ili stol u REPVBLIC-u odmah pišite concierge službi na WhatsApp.',
+    bookingSubtitle: 'Primite putem WhatsAppa, telefona ili e-pošte službenu poveznicu za ulaznice ili raspored VIP stolova.',
+    shots: ['Glavna dvorana i stvarna atmosfera', 'Odbrojavanje, ponoćna zdravica i zabava', 'Stolovi uz plesni podij i Privé VIP', 'Međunarodna publika na plesnom podiju'],
+  },
+  cs: {
+    musicLabel: 'Hudba',
+    tocPrices: '2. Oficiální ceny, vstupenky a VIP stoly',
+    alertTitle: '⚠️ VSTUPENKY A VIP STOLY · REZERVUJTE VČAS',
+    alertBody: 'Na Silvestra se nejlepší místa rezervují jako první. Vstupenku Early Bird nebo stůl v REPVBLIC si zajistíte zprávou conciergeovi na WhatsApp ještě dnes.',
+    bookingSubtitle: 'Získejte přes WhatsApp, telefon nebo e-mail oficiální odkaz na vstupenky nebo plánek VIP stolů.',
+    shots: ['Hlavní sál a skutečná atmosféra', 'Odpočítávání, půlnoční přípitek a párty', 'Stoly u parketu a Privé VIP', 'Mezinárodní publikum na parketu'],
+  },
+  da: {
+    musicLabel: 'Musik',
+    tocPrices: '2. Officielle priser, billetter og VIP-borde',
+    alertTitle: '⚠️ BILLETTER OG VIP-BORDE · BOOK I GOD TID',
+    alertBody: 'Nytårsaften bliver de bedste pladser booket først. Vil du købe en Early Bird-billet eller reservere bord på REPVBLIC, så skriv til concierge på WhatsApp nu.',
+    bookingSubtitle: 'Få det officielle billetlink eller bordplanen for VIP-bordene på WhatsApp, telefon eller e-mail.',
+    shots: ['Hovedsal og ægte stemning', 'Nedtælling, skål ved midnat og fest', 'Dancefloor- og Privé VIP-borde', 'Internationalt publikum på dansegulvet'],
+  },
+  et: {
+    musicLabel: 'Muusika',
+    tocPrices: '2. Ametlikud hinnad, piletid ja VIP-lauad',
+    alertTitle: '⚠️ PILETID JA VIP-LAUAD · BRONEERI VARAKULT',
+    alertBody: 'Aastavahetusel broneeritakse parimad kohad esimesena. Early Bird pileti ostmiseks või REPVBLICus laua broneerimiseks kirjuta kohe concierge’ile WhatsAppis.',
+    bookingSubtitle: 'Saa WhatsAppis, telefoni teel või e-postiga ametlik piletilink või VIP-laudade plaan.',
+    shots: ['Peasaal ja tõeline õhkkond', 'Kesköö loendus, toost ja pidu', 'Tantsupõranda ja Privé VIP-lauad', 'Rahvusvaheline publik tantsupõrandal'],
+  },
+  fi: {
+    musicLabel: 'Musiikki',
+    tocPrices: '2. Viralliset hinnat, liput ja VIP-pöydät',
+    alertTitle: '⚠️ LIPUT JA VIP-PÖYDÄT · VARAA AJOISSA',
+    alertBody: 'Uudenvuodenaattona parhaat paikat varataan ensimmäisinä. Osta Early Bird -lippu tai varaa pöytä REPVBLICista kirjoittamalla conciergelle WhatsAppissa heti.',
+    bookingSubtitle: 'Saat virallisen lippulinkin tai VIP-pöytien pohjapiirroksen WhatsAppilla, puhelimitse tai sähköpostilla.',
+    shots: ['Pääsali ja aito tunnelma', 'Keskiyön lähtölaskenta, malja ja juhlat', 'Tanssilattian ja Privé VIP -pöydät', 'Kansainvälinen yleisö tanssilattialla'],
+  },
+  el: {
+    musicLabel: 'Μουσική',
+    tocPrices: '2. Επίσημες τιμές, εισιτήρια και τραπέζια VIP',
+    alertTitle: '⚠️ ΕΙΣΙΤΗΡΙΑ ΚΑΙ ΤΡΑΠΕΖΙΑ VIP · ΚΛΕΙΣΤΕ ΝΩΡΙΣ',
+    alertBody: 'Την παραμονή της Πρωτοχρονιάς οι καλύτερες θέσεις κλείνονται πρώτες. Για εισιτήριο Early Bird ή τραπέζι στο REPVBLIC, στείλτε τώρα μήνυμα στον concierge στο WhatsApp.',
+    bookingSubtitle: 'Λάβετε μέσω WhatsApp, τηλεφώνου ή email τον επίσημο σύνδεσμο εισιτηρίων ή την κάτοψη των τραπεζιών VIP.',
+    shots: ['Κεντρική αίθουσα και πραγματική ατμόσφαιρα', 'Αντίστροφη μέτρηση, πρόποση τα μεσάνυχτα και πάρτι', 'Τραπέζια πίστας και Privé VIP', 'Διεθνές κοινό στην πίστα'],
+  },
+  hu: {
+    musicLabel: 'Zene',
+    tocPrices: '2. Hivatalos árak, jegyek és VIP-asztalok',
+    alertTitle: '⚠️ JEGYEK ÉS VIP-ASZTALOK · FOGLALJ IDŐBEN',
+    alertBody: 'Szilveszterkor a legjobb helyeket foglalják le először. Early Bird jegyért vagy asztalfoglalásért a REPVBLIC-be írj most a conciergenek WhatsAppon.',
+    bookingSubtitle: 'Kérd WhatsAppon, telefonon vagy e-mailben a hivatalos jegylinket vagy a VIP-asztalok alaprajzát.',
+    shots: ['Nagyterem és valódi hangulat', 'Éjféli visszaszámlálás, koccintás és buli', 'Táncparkett melletti és Privé VIP-asztalok', 'Nemzetközi közönség a táncparketten'],
+  },
+  ga: {
+    musicLabel: 'Ceol',
+    tocPrices: '2. Praghsanna Oifigiúla, Ticéid agus Boird VIP',
+    alertTitle: '⚠️ TICÉID AGUS BOIRD VIP · CUIR IN ÁIRITHE GO LUATH',
+    alertBody: 'Oíche Chinn Bliana, cuirtear na háiteanna is fearr in áirithe ar dtús. Chun ticéad Early Bird a cheannach nó bord a chur in áirithe in REPVBLIC, seol teachtaireacht chuig an concierge ar WhatsApp anois.',
+    bookingSubtitle: 'Faigh an nasc oifigiúil ticéad nó plean urláir na mbord VIP trí WhatsApp, ar an bhfón nó trí ríomhphost.',
+    shots: ['An Phríomhhalla agus an tAtmaisféar Fíor', 'Comhaireamh Meánoíche, Sláinte agus Cóisir', 'Boird an Urláir Rince agus Privé VIP', 'Slua Idirnáisiúnta ar an Urlár Rince'],
+  },
+  lv: {
+    musicLabel: 'Mūzika',
+    tocPrices: '2. Oficiālās cenas, biļetes un VIP galdi',
+    alertTitle: '⚠️ BIĻETES UN VIP GALDI · REZERVĒ LAICĪGI',
+    alertBody: 'Vecgada vakarā labākās vietas tiek rezervētas pirmās. Lai iegādātos Early Bird biļeti vai rezervētu galdu REPVBLIC, raksti konsjeržam WhatsApp jau tagad.',
+    bookingSubtitle: 'Saņem WhatsApp, pa tālruni vai e-pastā oficiālo biļešu saiti vai VIP galdu plānu.',
+    shots: ['Galvenā zāle un īsta atmosfēra', 'Pusnakts atskaite, tosts un ballīte', 'Deju grīdas un Privé VIP galdi', 'Starptautiska publika uz deju grīdas'],
+  },
+  lt: {
+    musicLabel: 'Muzika',
+    tocPrices: '2. Oficialios kainos, bilietai ir VIP staliukai',
+    alertTitle: '⚠️ BILIETAI IR VIP STALIUKAI · REZERVUOKITE IŠ ANKSTO',
+    alertBody: 'Naujųjų metų naktį geriausios vietos rezervuojamos pirmiausia. Norėdami įsigyti Early Bird bilietą ar rezervuoti staliuką REPVBLIC, parašykite konsjeržui per WhatsApp dabar.',
+    bookingSubtitle: 'Gaukite oficialią bilietų nuorodą arba VIP staliukų planą per WhatsApp, telefonu ar el. paštu.',
+    shots: ['Pagrindinė salė ir tikra atmosfera', 'Vidurnakčio atgalinis skaičiavimas, tostas ir vakarėlis', 'Šokių aikštelės ir Privé VIP staliukai', 'Tarptautinė publika šokių aikštelėje'],
+  },
+  mt: {
+    musicLabel: 'Mużika',
+    tocPrices: '2. Prezzijiet Uffiċjali, Biljetti u Mwejjed VIP',
+    alertTitle: '⚠️ BILJETTI U MWEJJED VIP · IBBUKKJA KMIENI',
+    alertBody: 'Lejlet l-Ewwel tas-Sena, l-aħjar postijiet jiġu bbukkjati l-ewwel. Biex tixtri biljett Early Bird jew tirriżerva mejda f’REPVBLIC, ibgħat messaġġ lill-concierge fuq WhatsApp issa.',
+    bookingSubtitle: 'Irċievi l-link uffiċjali tal-biljetti jew il-pjanta tal-imwejjed VIP fuq WhatsApp, bit-telefon jew bl-email.',
+    shots: ['Is-Sala Prinċipali u l-Atmosfera Reali', 'Countdown ta’ Nofsillejl, Brindisi u Festa', 'Mwejjed tad-Dancefloor u Privé VIP', 'Folla Internazzjonali fuq id-Dancefloor'],
+  },
+  pl: {
+    musicLabel: 'Muzyka',
+    tocPrices: '2. Oficjalne ceny, bilety i stoliki VIP',
+    alertTitle: '⚠️ BILETY I STOLIKI VIP · ZAREZERWUJ WCZEŚNIEJ',
+    alertBody: 'W sylwestra najlepsze miejsca rezerwuje się najwcześniej. Aby kupić bilet Early Bird lub zarezerwować stolik w REPVBLIC, napisz od razu do konsjerża na WhatsAppie.',
+    bookingSubtitle: 'Otrzymaj przez WhatsApp, telefon lub e-mail oficjalny link do biletów albo plan stolików VIP.',
+    shots: ['Sala główna i prawdziwy klimat', 'Odliczanie, toast o północy i impreza', 'Stoliki przy parkiecie i Privé VIP', 'Międzynarodowa publiczność na parkiecie'],
+  },
+  ro: {
+    musicLabel: 'Muzică',
+    tocPrices: '2. Prețuri oficiale, bilete și mese VIP',
+    alertTitle: '⚠️ BILETE ȘI MESE VIP · REZERVĂ DIN TIMP',
+    alertBody: 'De Revelion, cele mai bune locuri se rezervă primele. Ca să cumperi un bilet Early Bird sau să rezervi o masă la REPVBLIC, scrie-i acum concierge-ului pe WhatsApp.',
+    bookingSubtitle: 'Primește pe WhatsApp, la telefon sau pe e-mail linkul oficial pentru bilete sau planul meselor VIP.',
+    shots: ['Sala principală și atmosfera reală', 'Numărătoarea inversă, toastul de la miezul nopții și petrecerea', 'Mese la ring și Privé VIP', 'Public internațional pe ringul de dans'],
+  },
+  sk: {
+    musicLabel: 'Hudba',
+    tocPrices: '2. Oficiálne ceny, vstupenky a VIP stoly',
+    alertTitle: '⚠️ VSTUPENKY A VIP STOLY · REZERVUJTE SI VČAS',
+    alertBody: 'Na Silvestra sa najlepšie miesta rezervujú ako prvé. Vstupenku Early Bird alebo stôl v REPVBLIC si zabezpečíte správou conciergeovi na WhatsApp ešte dnes.',
+    bookingSubtitle: 'Získajte cez WhatsApp, telefón alebo e-mail oficiálny odkaz na vstupenky alebo plánik VIP stolov.',
+    shots: ['Hlavná sála a skutočná atmosféra', 'Polnočné odpočítavanie, prípitok a párty', 'Stoly pri parkete a Privé VIP', 'Medzinárodné publikum na parkete'],
+  },
+  sl: {
+    musicLabel: 'Glasba',
+    tocPrices: '2. Uradne cene, vstopnice in VIP mize',
+    alertTitle: '⚠️ VSTOPNICE IN VIP MIZE · REZERVIRAJTE PRAVOČASNO',
+    alertBody: 'Na silvestrovo so najboljša mesta rezervirana prva. Za vstopnico Early Bird ali mizo v REPVBLIC takoj pišite conciergeu na WhatsApp.',
+    bookingSubtitle: 'Prejmite po WhatsAppu, telefonu ali e-pošti uradno povezavo do vstopnic ali tloris VIP miz.',
+    shots: ['Glavna dvorana in pravo vzdušje', 'Polnočno odštevanje, nazdravljanje in zabava', 'Mize ob plesišču in Privé VIP', 'Mednarodna publika na plesišču'],
+  },
+  sv: {
+    musicLabel: 'Musik',
+    tocPrices: '2. Officiella priser, biljetter och VIP-bord',
+    alertTitle: '⚠️ BILJETTER OCH VIP-BORD · BOKA I TID',
+    alertBody: 'På nyårsafton bokas de bästa platserna först. Vill du köpa en Early Bird-biljett eller boka bord på REPVBLIC, skriv till concierge på WhatsApp nu.',
+    bookingSubtitle: 'Få den officiella biljettlänken eller bordskartan för VIP-borden via WhatsApp, telefon eller e-post.',
+    shots: ['Stora salen och äkta stämning', 'Nedräkning, skål vid midnatt och fest', 'Dansgolvs- och Privé VIP-bord', 'Internationell publik på dansgolvet'],
+  },
+  no: {
+    musicLabel: 'Musikk',
+    tocPrices: '2. Offisielle priser, billetter og VIP-bord',
+    alertTitle: '⚠️ BILLETTER OG VIP-BORD · BESTILL I GOD TID',
+    alertBody: 'På nyttårsaften blir de beste plassene booket først. Vil du kjøpe en Early Bird-billett eller reservere bord på REPVBLIC, send concierge en melding på WhatsApp nå.',
+    bookingSubtitle: 'Få den offisielle billettlenken eller bordkartet for VIP-bordene på WhatsApp, telefon eller e-post.',
+    shots: ['Hovedsalen og ekte stemning', 'Nedtelling, skål ved midnatt og fest', 'Dansegulv- og Privé VIP-bord', 'Internasjonalt publikum på dansegulvet'],
+  },
+  is: {
+    musicLabel: 'Tónlist',
+    tocPrices: '2. Opinber verð, miðar og VIP-borð',
+    alertTitle: '⚠️ MIÐAR OG VIP-BORÐ · BÓKAÐU TÍMANLEGA',
+    alertBody: 'Á gamlárskvöld eru bestu sætin bókuð fyrst. Til að kaupa Early Bird miða eða taka frá borð á REPVBLIC skaltu senda móttökuþjónustunni skilaboð á WhatsApp núna.',
+    bookingSubtitle: 'Fáðu opinbera miðahlekkinn eða teikningu af VIP-borðunum á WhatsApp, í síma eða með tölvupósti.',
+    shots: ['Aðalsalurinn og raunveruleg stemning', 'Niðurtalning, skál á miðnætti og partý', 'Borð við dansgólfið og Privé VIP', 'Alþjóðlegur hópur á dansgólfinu'],
+  },
+  uk: {
+    musicLabel: 'Музика',
+    tocPrices: '2. Офіційні ціни, квитки та VIP-столи',
+    alertTitle: '⚠️ КВИТКИ ТА VIP-СТОЛИ · БРОНЮЙТЕ ЗАЗДАЛЕГІДЬ',
+    alertBody: 'У новорічну ніч найкращі місця бронюють першими. Щоб купити квиток Early Bird або забронювати стіл у REPVBLIC, напишіть консьєржу у WhatsApp просто зараз.',
+    bookingSubtitle: 'Отримайте у WhatsApp, телефоном або email офіційне посилання на квитки чи схему VIP-столів.',
+    shots: ['Головна зала та справжня атмосфера', 'Опівнічний відлік, келихи та вечірка', 'Столи біля танцполу та VIP Privé', 'Міжнародна публіка на танцполі'],
+  },
+  sq: {
+    musicLabel: 'Muzika',
+    tocPrices: '2. Çmimet zyrtare, biletat dhe tavolinat VIP',
+    alertTitle: '⚠️ BILETAT DHE TAVOLINAT VIP · REZERVO HERËT',
+    alertBody: 'Natën e Vitit të Ri, vendet më të mira rezervohen të parat. Për të blerë biletën Early Bird ose për të rezervuar një tavolinë në REPVBLIC, shkruaji tani concierge-it në WhatsApp.',
+    bookingSubtitle: 'Merr në WhatsApp, me telefon ose me email linkun zyrtar të biletave ose planin e tavolinave VIP.',
+    shots: ['Salla kryesore dhe atmosfera e vërtetë', 'Numërimi mbrapsht, dolli e mesnatës dhe festa', 'Tavolinat pranë pistës dhe Privé VIP', 'Publik ndërkombëtar në pistë'],
+  },
+  sr: {
+    musicLabel: 'Muzika',
+    tocPrices: '2. Zvanične cene, ulaznice i VIP stolovi',
+    alertTitle: '⚠️ ULAZNICE I VIP STOLOVI · REZERVIŠITE NA VREME',
+    alertBody: 'Za doček Nove godine najbolja mesta se prva rezervišu. Za ulaznicu Early Bird ili sto u REPVBLIC-u odmah pišite konsijerž službi na WhatsApp.',
+    bookingSubtitle: 'Dobijte putem WhatsApp-a, telefona ili mejla zvanični link za ulaznice ili raspored VIP stolova.',
+    shots: ['Glavna sala i prava atmosfera', 'Ponoćno odbrojavanje, zdravica i žurka', 'Stolovi pored podijuma i Privé VIP', 'Međunarodna publika na podijumu'],
+  },
+  bs: {
+    musicLabel: 'Muzika',
+    tocPrices: '2. Zvanične cijene, ulaznice i VIP stolovi',
+    alertTitle: '⚠️ ULAZNICE I VIP STOLOVI · REZERVIŠITE NA VRIJEME',
+    alertBody: 'Za doček Nove godine najbolja mjesta se prva rezervišu. Za ulaznicu Early Bird ili stol u REPVBLIC-u odmah pišite konsijerž službi na WhatsApp.',
+    bookingSubtitle: 'Dobijte putem WhatsAppa, telefona ili e-maila zvanični link za ulaznice ili raspored VIP stolova.',
+    shots: ['Glavna sala i prava atmosfera', 'Ponoćno odbrojavanje, zdravica i žurka', 'Stolovi uz plesni podij i Privé VIP', 'Međunarodna publika na plesnom podiju'],
+  },
+  mk: {
+    musicLabel: 'Музика',
+    tocPrices: '2. Официјални цени, билети и VIP маси',
+    alertTitle: '⚠️ БИЛЕТИ И VIP МАСИ · РЕЗЕРВИРАЈТЕ НАВРЕМЕ',
+    alertBody: 'За дочекот на Новата година најдобрите места први се резервираат. За билет Early Bird или маса во REPVBLIC, веднаш пишете му на консиержот на WhatsApp.',
+    bookingSubtitle: 'Добијте преку WhatsApp, телефон или е-пошта официјален линк за билети или распоред на VIP масите.',
+    shots: ['Главна сала и вистинска атмосфера', 'Полноќно одбројување, здравица и забава', 'Маси покрај подиумот и Privé VIP', 'Меѓународна публика на подиумот'],
+  },
+};
+
+export function isRepvblicNyeSlug(slug: string | undefined | null): boolean {
+  return slug === REPVBLIC_NYE_SLUG;
+}
+
+export function getRepvblicNyePageCopy(locale: string): RepvblicNyePageCopy {
+  return REPVBLIC_NYE_PAGE_COPY_35[locale as LocaleCode] || REPVBLIC_NYE_PAGE_COPY_35.en;
 }

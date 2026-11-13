@@ -34,6 +34,7 @@ export default function WhatsAppFloating({ locale: explicitLocale }: { locale?: 
   const [menuOpen, setMenuOpen] = useState(false);
   const [showBubble, setShowBubble] = useState(false);
   const [eventTitle, setEventTitle] = useState<string | undefined>(undefined);
+  const [partyOnly, setPartyOnly] = useState(false);
   const informationOnly = isInformationOnlyClubPath(pathname);
   const scarcity = getScarcityAndChatCopy(locale);
 
@@ -83,6 +84,8 @@ export default function WhatsAppFloating({ locale: explicitLocale }: { locale?: 
     const refresh = () => {
       const detected = extractCurrentEventTitle();
       setEventTitle((prev) => (prev === detected ? prev : detected));
+      const party = Boolean(document.querySelector('[data-event-party-only="true"]'));
+      setPartyOnly((prev) => (prev === party ? prev : party));
     };
     refresh();
     const main = document.getElementById('main-content') || document.body;
@@ -109,7 +112,12 @@ export default function WhatsAppFloating({ locale: explicitLocale }: { locale?: 
 
   const href = informationOnly
     ? SITE_CONTACT.whatsapp.link
-    : `${SITE_CONTACT.whatsapp.link}?text=${encodeURIComponent(scarcity.floatingChatMessage(eventTitle))}`;
+    : `${SITE_CONTACT.whatsapp.link}?text=${encodeURIComponent(
+        // Party-only events (no dinner/show): use the tickets/VIP-table message and append the event name.
+        partyOnly && eventTitle
+          ? `${scarcity.floatingChatMessage()}\n${eventTitle}`
+          : scarcity.floatingChatMessage(eventTitle),
+      )}`;
 
   return (
     <a
