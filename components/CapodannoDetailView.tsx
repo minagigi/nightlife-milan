@@ -291,7 +291,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
             >
               {title}
             </h1>
-            <p className="mt-2 text-sm text-[#EAE3D5] sm:text-base">{subtitle}</p>
+            <p className="mt-2 font-serif text-sm italic text-[#EAE3D5] sm:text-base">{subtitle}</p>
           </div>
 
           <div className="p-6 sm:p-10">
@@ -423,9 +423,9 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                   </div>
                   <Link
                     href={localized.relatedHolidayBanner.href}
-                    className="inline-flex shrink-0 items-center justify-center bg-[#F6F1E7] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#050505] transition hover:bg-[#EAE3D5]"
+                    className="inline-flex min-h-[44px] shrink-0 items-center justify-center bg-[#F6F1E7] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#050505] transition hover:bg-[#EAE3D5]"
                   >
-                    {localized.relatedHolidayBanner.ctaLabel} →
+                    {localized.relatedHolidayBanner.ctaLabel.replace(/\s*→+$/, '')} →
                   </Link>
                 </div>
               )}
@@ -698,7 +698,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                   target="_blank"
                   rel="noopener noreferrer"
                   data-event-cta-kind="table"
-                  className="inline-flex items-center bg-[#25D366] px-6 py-3.5 text-sm font-bold text-[#050505] transition hover:bg-[#2EE472]"
+                  className="inline-flex min-h-[44px] items-center bg-[#25D366] px-6 py-3 text-sm font-bold text-[#050505] transition hover:bg-[#2EE472]"
                 >
                   WhatsApp {SITE_CONTACT.whatsapp.number}
                 </a>
@@ -708,26 +708,26 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                     target="_blank"
                     rel="sponsored noopener noreferrer"
                     data-event-cta-kind="admission"
-                    className="inline-flex items-center bg-[#F6F1E7] px-6 py-3.5 text-sm font-bold text-[#050505] transition hover:bg-[#EAE3D5]"
+                    className="inline-flex min-h-[44px] items-center bg-[#F6F1E7] px-6 py-3 text-sm font-bold text-[#050505] transition hover:bg-[#EAE3D5]"
                   >
                     {scarcity.xceedPriorityCta}
                   </a>
                 ) : null}
                 <a
                   href="tel:+393519127047"
-                  className="inline-flex items-center border border-[#F6F1E7]/40 bg-[#0B0A09] px-5 py-3.5 text-sm font-semibold text-[#F6F1E7] transition hover:bg-[#F6F1E7] hover:text-[#050505]"
+                  className="inline-flex min-h-[44px] items-center border border-[#F6F1E7]/40 bg-[#0B0A09] px-5 py-3 text-sm font-semibold text-[#F6F1E7] transition hover:bg-[#F6F1E7] hover:text-[#050505]"
                 >
                   {ui.callNowBtn}
                 </a>
                 <a
                   href="mailto:concierge@nightlifemilan.com"
-                  className="inline-flex items-center border border-[#F6F1E7]/20 bg-[#0B0A09] px-5 py-3.5 text-sm font-semibold text-[#C2B9AA] transition hover:border-[#F6F1E7] hover:text-[#F6F1E7]"
+                  className="inline-flex min-h-[44px] items-center border border-[#F6F1E7]/20 bg-[#0B0A09] px-5 py-3 text-sm font-semibold text-[#C2B9AA] transition hover:border-[#F6F1E7] hover:text-[#F6F1E7]"
                 >
                   concierge@nightlifemilan.com
                 </a>
                 <Link
                   href={capodannoPath(locale)}
-                  className="inline-flex items-center border border-[#F6F1E7]/20 px-5 py-3.5 text-sm font-semibold text-[#F6F1E7] hover:bg-[#F6F1E7] hover:text-[#050505]"
+                  className="inline-flex min-h-[44px] items-center border border-[#F6F1E7]/20 px-5 py-3 text-sm font-semibold text-[#F6F1E7] hover:bg-[#F6F1E7] hover:text-[#050505]"
                 >
                   {ui.backToAllBtn}
                 </Link>

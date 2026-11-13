@@ -141,7 +141,7 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
         {/* Hero Couture Noir */}
         <div className="overflow-hidden border border-[#F6F1E7]/20 bg-[#0B0A09]">
           <div className="grid lg:grid-cols-5">
-            <div className="relative aspect-[16/9] min-h-[260px] w-full bg-[#050505] lg:col-span-2 lg:min-h-[380px]">
+            <div className="relative aspect-[16/9] w-full min-w-0 bg-[#050505] lg:col-span-2 lg:aspect-auto lg:min-h-[380px]">
               <Image
                 quality={92}
                 src={c.posterSrc}
@@ -154,7 +154,7 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
               />
             </div>
 
-            <div className="flex flex-col justify-between p-6 sm:p-8 lg:col-span-3">
+            <div className="flex min-w-0 flex-col justify-between p-6 sm:p-8 lg:col-span-3">
               <div>
                 <div className="flex flex-wrap gap-2">
                   <span className="bg-[#F6F1E7] px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#050505]">
@@ -174,7 +174,7 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
                 <h1 className="mt-4 font-serif text-3xl font-bold leading-tight text-[#F6F1E7] sm:text-4xl">
                   {c.title}
                 </h1>
-                <p className="mt-2 text-base text-[#EAE3D5]">{c.subtitle}</p>
+                <p className="mt-2 font-serif text-base italic text-[#EAE3D5]">{c.subtitle}</p>
                 <p className="mt-4 text-sm leading-relaxed text-[#C2B9AA]">{c.description}</p>
               </div>
 
@@ -184,27 +184,28 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
                   target="_blank"
                   rel="noopener noreferrer"
                   data-event-cta-kind="table"
-                  className="inline-flex items-center gap-2 bg-[#25D366] px-6 py-3.5 text-sm font-bold text-[#050505] transition hover:bg-[#2EE472]"
+                  aria-label={`WhatsApp ${SITE_CONTACT.whatsapp.number}`}
+                  className="inline-flex min-h-[44px] items-center gap-2 bg-[#25D366] px-6 py-3 text-sm font-bold text-[#050505] transition hover:bg-[#2EE472]"
                 >
                   WhatsApp {SITE_CONTACT.whatsapp.number}
                 </a>
                 <a
                   href="#menu-natale"
-                  className="inline-flex items-center border border-[#F6F1E7]/35 bg-[#050505] px-5 py-3.5 text-sm font-semibold text-[#F6F1E7] transition hover:bg-[#F6F1E7] hover:text-[#050505]"
+                  className="inline-flex min-h-[44px] items-center border border-[#F6F1E7]/35 bg-[#050505] px-5 py-3 text-sm font-semibold text-[#F6F1E7] transition hover:bg-[#F6F1E7] hover:text-[#050505]"
                 >
                   {c.tocMenu}
                 </a>
                 <Link
                   href={voyaNyeHref}
-                  className="inline-flex items-center border border-[#C9A84C]/60 bg-[#C9A84C]/10 px-5 py-3.5 text-sm font-bold text-[#F6F1E7] transition hover:bg-[#C9A84C] hover:text-[#050505]"
+                  className="inline-flex min-h-[44px] items-center border border-[#C9A84C]/60 bg-[#C9A84C]/10 px-5 py-3 text-sm font-bold text-[#F6F1E7] transition hover:bg-[#C9A84C] hover:text-[#050505]"
                 >
-                  {c.nyeCrossCta} →
+                  {c.nyeCrossCta.replace(/\s*→+$/, '')} →
                 </Link>
               </div>
             </div>
           </div>
 
-          <div className="p-6 sm:p-8">
+          <div className="min-w-0 p-6 sm:p-8">
             {/* TOC (#EFE9DC Avorio Caldo) */}
             <nav aria-label={c.tocTitle} className="mb-8 border border-[#050505]/15 bg-[#EFE9DC] p-5 text-[#050505]">
               <p className="text-xs font-bold uppercase tracking-widest text-[#3D3830]">
@@ -292,7 +293,7 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
                 </div>
                 <Link
                   href={voyaClubHref}
-                  className="inline-flex shrink-0 items-center justify-center border border-[#C9A84C] bg-[#C9A84C]/10 px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#F6F1E7] transition hover:bg-[#C9A84C] hover:text-[#050505]"
+                  className="inline-flex min-h-[44px] shrink-0 items-center justify-center border border-[#C9A84C] bg-[#C9A84C]/10 px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#F6F1E7] transition hover:bg-[#C9A84C] hover:text-[#050505]"
                 >
                   Voya Rooftop Milan →
                 </Link>
@@ -311,9 +312,9 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
                 </div>
                 <Link
                   href={voyaNyeHref}
-                  className="inline-flex shrink-0 items-center justify-center bg-[#F6F1E7] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#050505] transition hover:bg-[#EAE3D5]"
+                  className="inline-flex min-h-[44px] shrink-0 items-center justify-center bg-[#F6F1E7] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#050505] transition hover:bg-[#EAE3D5]"
                 >
-                  {c.nyeCrossCta} →
+                  {c.nyeCrossCta.replace(/\s*→+$/, '')} →
                 </Link>
               </div>
             </div>
@@ -391,7 +392,10 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
                   </p>
                 </div>
 
-                <div className="flex flex-col items-center justify-center border border-[#F6F1E7]/15 bg-[#0B0A09] p-3">
+                <figure
+                  data-menu-preview="/images/events/christmas-2026-menus/voya-natale-2026-menu-it.webp"
+                  className="flex flex-col items-center justify-center border border-[#F6F1E7]/15 bg-[#0B0A09] p-3"
+                >
                   <img
                     src={c.menuImageSrc}
                     alt={`${c.title} · ${c.menuHeading}`}
@@ -402,7 +406,7 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
                     decoding="async"
                     className="max-h-[460px] w-auto max-w-full object-contain"
                   />
-                </div>
+                </figure>
               </div>
             </section>
 
@@ -536,27 +540,28 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
                   target="_blank"
                   rel="noopener noreferrer"
                   data-event-cta-kind="table"
-                  className="inline-flex items-center bg-[#25D366] px-6 py-3.5 text-sm font-bold text-[#050505] transition hover:bg-[#2EE472]"
+                  aria-label={`WhatsApp ${SITE_CONTACT.whatsapp.number}`}
+                  className="inline-flex min-h-[44px] items-center bg-[#25D366] px-6 py-3 text-sm font-bold text-[#050505] transition hover:bg-[#2EE472]"
                 >
                   WhatsApp {SITE_CONTACT.whatsapp.number}
                 </a>
                 <a
                   href="tel:+393519127047"
-                  className="inline-flex items-center border border-[#F6F1E7]/40 bg-[#0B0A09] px-5 py-3.5 text-sm font-semibold text-[#F6F1E7] transition hover:bg-[#F6F1E7] hover:text-[#050505]"
+                  className="inline-flex min-h-[44px] items-center border border-[#F6F1E7]/40 bg-[#0B0A09] px-5 py-3 text-sm font-semibold text-[#F6F1E7] transition hover:bg-[#F6F1E7] hover:text-[#050505]"
                 >
                   {SITE_CONTACT.whatsapp.number}
                 </a>
                 <a
                   href="mailto:concierge@nightlifemilan.com"
-                  className="inline-flex items-center border border-[#F6F1E7]/20 bg-[#0B0A09] px-5 py-3.5 text-sm font-semibold text-[#C2B9AA] transition hover:border-[#F6F1E7] hover:text-[#F6F1E7]"
+                  className="inline-flex min-h-[44px] items-center border border-[#F6F1E7]/20 bg-[#0B0A09] px-5 py-3 text-sm font-semibold text-[#C2B9AA] transition hover:border-[#F6F1E7] hover:text-[#F6F1E7]"
                 >
                   concierge@nightlifemilan.com
                 </a>
                 <Link
                   href={voyaNyeHref}
-                  className="inline-flex items-center border border-[#C9A84C]/50 px-5 py-3.5 text-sm font-semibold text-[#F6F1E7] hover:bg-[#C9A84C] hover:text-[#050505]"
+                  className="inline-flex min-h-[44px] items-center border border-[#C9A84C]/50 px-5 py-3 text-sm font-semibold text-[#F6F1E7] hover:bg-[#C9A84C] hover:text-[#050505]"
                 >
-                  {c.nyeCrossCta} →
+                  {c.nyeCrossCta.replace(/\s*→+$/, '')} →
                 </Link>
               </div>
             </div>
