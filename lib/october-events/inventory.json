@@ -18971,6 +18971,109 @@
       "commercialCheckedAt": "2026-11-11T11:14:08.000Z"
     },
     {
+      "id": "55m-2026-11-14",
+      "sourceUrl": "https://nightlifemilan.com/clubs/55-milano",
+      "sourceScope": "dated-calendar",
+      "officialName": "Noche de Perreo",
+      "shortName": "Noche de Perreo",
+      "startISO": "2026-11-14T23:00:00+01:00",
+      "endISO": "2026-11-15T05:00:00+01:00",
+      "startTimeKnown": true,
+      "timeKind": "announced",
+      "venue": {
+        "id": "v-55milano",
+        "name": "55 Milano",
+        "address": "Via Piero della Francesca, 55, 20154 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Piero della Francesca, 55",
+          "addressLocality": "Milano",
+          "postalCode": "20154",
+          "addressCountry": "IT"
+        },
+        "latitude": 45.483,
+        "longitude": 9.167
+      },
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "image": {
+        "src": "/images/events/october-2026/noche-de-perreo-55-milano-2026-11-14.webp",
+        "width": 1376,
+        "height": 768,
+        "bytes": 97624,
+        "sha256": "7baf564a8ab5b6590fab0b39f3b1590be5d8888c08fc10e11dd54187719b2a5c"
+      },
+      "age": "18+",
+      "dressCode": "Elegant",
+      "genres": [
+        "Reggaeton",
+        "Latin"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Ingresso serata Donna",
+          "price": 15,
+          "category": "guestlist",
+          "availability": "available",
+          "audience": "women",
+          "url": "https://nightlifemilan.com/clubs/55-milano",
+          "admissionUntil": "01:00"
+        },
+        {
+          "name": "Ingresso serata Uomo",
+          "price": 20,
+          "category": "guestlist",
+          "availability": "available",
+          "url": "https://nightlifemilan.com/clubs/55-milano",
+          "admissionUntil": "01:00"
+        },
+        {
+          "name": "Ticket Online con 2 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://nightlifemilan.com/clubs/55-milano"
+        },
+        {
+          "name": "Tavolo Privé Pista",
+          "price": 250,
+          "category": "table",
+          "availability": "available",
+          "url": "https://nightlifemilan.com/clubs/55-milano"
+        },
+        {
+          "name": "Tavolo Privé Piper",
+          "price": 200,
+          "category": "table",
+          "availability": "available",
+          "url": "https://nightlifemilan.com/clubs/55-milano"
+        },
+        {
+          "name": "Privé Console",
+          "price": 500,
+          "category": "table",
+          "availability": "available",
+          "url": "https://nightlifemilan.com/clubs/55-milano"
+        },
+        {
+          "name": "Privé Pista",
+          "price": 750,
+          "category": "table",
+          "availability": "available",
+          "url": "https://nightlifemilan.com/clubs/55-milano"
+        },
+        {
+          "name": "Super Privé Palco",
+          "price": 900,
+          "category": "table",
+          "availability": "available",
+          "url": "https://nightlifemilan.com/clubs/55-milano"
+        }
+      ],
+      "provenance": "nightlifemilan-whatsapp-55milano · backfill-2026-11-14",
+      "commercialCheckedAt": "2026-11-14T01:50:08.000Z"
+    },
+    {
       "id": "242062",
       "sourceUrl": "https://xceed.me/en/milano/event/satoshi-viva-moldova-europe-tour/242062",
       "affiliateUrl": null,

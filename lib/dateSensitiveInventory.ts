@@ -63,11 +63,13 @@ function isCurrentOrUpcomingOccurrence(dateISO: string, endDateISO?: string | nu
   return false;
 }
 
-async function getOctoberDateSensitivePresentations(locale: string, venueId?: string): Promise<DateSensitiveEventPresentation[]> {
+export const normVenueId = (id: string) => (id === 'v-55' ? 'v-55milano' : id);
+
+export async function getOctoberDateSensitivePresentations(locale: string, venueId?: string): Promise<DateSensitiveEventPresentation[]> {
   if (!isEnabledLocale(locale)) return [];
   return Promise.all(
     OCTOBER_EVENTS
-      .filter((event) => (!venueId || event.venue.id === venueId) && isCurrentOrUpcomingOccurrence(event.startISO, event.endISO))
+      .filter((event) => (!venueId || normVenueId(event.venue.id) === normVenueId(venueId)) && isCurrentOrUpcomingOccurrence(event.startISO, event.endISO))
       .map(async (event) => {
         const card = await readOctoberEventCard(event, locale);
         const lowestVerifiedTicket =
@@ -77,18 +79,31 @@ async function getOctoberDateSensitivePresentations(locale: string, venueId?: st
                 .map((offer) => offer.price as number)
                 .sort((a, b) => a - b)[0] ?? null
             : null;
-        const formatted = formatEventPresentationLabels({ dateISO: event.startISO, price: lowestVerifiedTicket, currency: 'EUR', locale });
+        const normalizedVenueId = normVenueId(event.venue.id);
+        let displayPrice = lowestVerifiedTicket;
+        if (displayPrice === null && normalizedVenueId === 'v-55milano' && event.affiliateStatus === 'unavailable') {
+          const paidTickets = event.offers
+            .filter((offer) => offer.category === 'ticket' && offer.availability === 'available' && typeof offer.price === 'number' && offer.price > 0)
+            .map((offer) => offer.price as number)
+            .sort((a, b) => a - b);
+          const paidGuestlists = event.offers
+            .filter((offer) => offer.category === 'guestlist' && offer.availability === 'available' && typeof offer.price === 'number' && offer.price > 0)
+            .map((offer) => offer.price as number)
+            .sort((a, b) => a - b);
+          displayPrice = paidTickets[0] ?? paidGuestlists[0] ?? null;
+        }
+        const formatted = formatEventPresentationLabels({ dateISO: event.startISO, price: displayPrice, currency: 'EUR', locale });
         const labels = event.startTimeKnown === false ? { ...formatted, time: card.noKnownValue, dateTime: formatted.longDate } : formatted;
         return {
           id: `october-${event.id}`,
-          venueId: event.venue.id,
+          venueId: normalizedVenueId,
           dateISO: event.startISO,
           endDateISO: event.endISO,
           title: card.title,
           venueName: event.venue.name,
           slug: card.slug,
           image: event.image.src,
-          price: lowestVerifiedTicket,
+          price: displayPrice,
           currency: 'EUR' as const,
           labels,
           verificationExpiresAt: null,
@@ -103,14 +118,14 @@ function getPriorityVenueSupplementalPresentations(locale: string, venueId?: str
   const supplementalClubs = new Set(['justme', 'pineta', 'aria', '55milano', 'voya', 'repvblic']);
   const out: DateSensitiveEventPresentation[] = [];
   const seenSlugs = new Set<string>();
-  const octoberVenueDays = new Set(OCTOBER_EVENTS.map((e) => `${e.venue.id}|${e.startISO.slice(0, 10)}`));
+  const octoberVenueDays = new Set(OCTOBER_EVENTS.map((e) => `${normVenueId(e.venue.id)}|${e.startISO.slice(0, 10)}`));
   for (let offset = 0; offset < 7; offset++) {
     const dayKey = romeDayKeyOffset(offset);
     const dow = dayOfWeekForKey(dayKey);
     const candidates = weeklyEvents.filter((we) => supplementalClubs.has(we.clubSlug) && we.dayOfWeek === dow);
     for (const we of candidates) {
       const resolvedVenueId = `v-${we.clubSlug}`;
-      if (venueId && venueId !== resolvedVenueId) continue;
+      if (venueId && normVenueId(venueId) !== resolvedVenueId) continue;
       if (octoberVenueDays.has(`${resolvedVenueId}|${dayKey}`)) continue;
       const slug = `${we.clubSlug}-${we.day}-${we.eventSlug}`;
       if (seenSlugs.has(slug)) continue;
@@ -149,7 +164,7 @@ function getPriorityVenueSupplementalPresentations(locale: string, venueId?: str
 }
 
 export async function getDateSensitiveInventory(locale: string, venueId?: string): Promise<DateSensitiveEventPresentation[]> {
-  const cacheKey = `${locale}|${venueId || ''}`;
+  const cacheKey = `${locale}|${venueId ? normVenueId(venueId) : ''}`;
   const cached = inventoryCache.get(cacheKey);
   if (cached) return cached;
 
@@ -186,7 +201,7 @@ export async function getDateSensitiveCarouselInventory(
           .filter((card) => !matchesOctober || matchesOctober(OCTOBER_EVENTS.find((e) => `october-${e.id}` === card.id)!))
           .map((card) => {
             const event = OCTOBER_EVENTS.find((e) => `october-${e.id}` === card.id)!;
-            const venue = getVenueById(event.venue.id);
+            const venue = getVenueById(normVenueId(event.venue.id));
             const genreKeys: Record<string, string> = {
               'hip-hop': 'HIP_HOP',
               hits: 'COMMERCIAL',

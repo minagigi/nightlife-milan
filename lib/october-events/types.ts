@@ -36,6 +36,8 @@ export type OctoberEventImage = Readonly<{
   width: number;
   height: number;
   alt?: string;
+  bytes?: number;
+  sha256?: string;
 }>;
 
 export type OctoberEventRecord = Readonly<{

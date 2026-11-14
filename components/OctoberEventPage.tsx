@@ -61,6 +61,8 @@ export default async function OctoberEventPage({event,locale,initialNow,children
     locale,
     eventSlug,
     venueName: event.venue.name,
+    music: event.genres.length > 0 ? event.genres.join(', ') : undefined,
+    dressCode: event.dressCode || undefined,
     h1: copy.title,
     h2List: [copy.headings.overview, copy.headings.booking, copy.headings.faq],
     h3List: copy.sections.slice(0, 4).map((s) => s.heading),

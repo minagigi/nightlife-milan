@@ -49,10 +49,18 @@ const invPath = path.join(root, 'lib', 'october-events', 'inventory.json');
 const inv = JSON.parse(fs.readFileSync(invPath, 'utf8'));
 const events = Array.isArray(inv) ? inv : inv.events || [];
 for (const ev of events) {
+  const evLabel = ev.id || ev.slug || ev.xceedLegacyId || 'unknown';
   if (ev.flyerPath && ev.flyerPath.startsWith('/')) {
     const disk = path.join(root, 'public', ev.flyerPath.replace(/^\//, ''));
     if (!fs.existsSync(disk) || fs.statSync(disk).size < 512) {
-      errors.push(`inventory.json (${ev.slug || ev.xceedLegacyId}): flyer mancante o vuoto -> ${ev.flyerPath}`);
+      errors.push(`inventory.json (${evLabel}): flyer mancante o vuoto -> ${ev.flyerPath}`);
+    }
+  }
+  if (!ev.excluded && ev.image?.src?.startsWith('/')) {
+    const disk = path.join(root, 'public', ev.image.src.replace(/^\//, ''));
+    const stat = fs.existsSync(disk) ? fs.statSync(disk) : null;
+    if (!stat || stat.size < 512 || stat.size > 300_000) {
+      errors.push(`inventory.json (${evLabel}): poster mancante/fuori budget (${stat ? stat.size : 0}B) -> ${ev.image.src}`);
     }
   }
 }

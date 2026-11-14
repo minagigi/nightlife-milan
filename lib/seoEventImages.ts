@@ -447,12 +447,13 @@ export function slugifySeoSegment(input: string, maxLen = 78): string {
 
 export function inferTargetAndOutfit(params: {
   slug: string;
+  venueName?: string;
   categorySlug?: string;
   music?: string;
   dressCode?: string;
   isHalloween?: boolean;
 }): { target: TargetArchetype; outfit: OutfitArchetype } {
-  const s = `${params.slug} ${params.categorySlug || ''} ${params.music || ''} ${params.dressCode || ''}`.toLowerCase();
+  const s = `${params.slug} ${params.venueName || ''} ${params.categorySlug || ''} ${params.music || ''} ${params.dressCode || ''}`.toLowerCase();
   if (params.isHalloween || s.includes('halloween') || s.includes('muertos') || s.includes('vampir') || s.includes('streghe')) {
     return { target: 'fashion_international', outfit: 'halloween_dark_glam' };
   }
@@ -477,10 +478,10 @@ export function inferTargetAndOutfit(params: {
   if (s.includes('techno') || s.includes('amnesia') || s.includes('volt') || s.includes('gate') || s.includes('tempio') || s.includes('tunnel') || s.includes('masada') || s.includes('amelia') || s.includes('bolgia') || s.includes('duro') || s.includes('apophis')) {
     return { target: 'young_clubbers', outfit: 'techno_blackwear' };
   }
-  if (s.includes('reggaeton') || s.includes('latino') || s.includes('ahynama') || s.includes('encanto') || s.includes('aria-club') || s.includes('the-club') || s.includes('hollywood') || s.includes('play-club') || s.includes('lime') || s.includes('mamacita')) {
+  if (s.includes('reggaeton') || s.includes('latino') || s.includes('perreo') || s.includes('dembow') || s.includes('ahynama') || s.includes('encanto') || s.includes('aria-club') || s.includes('the-club') || s.includes('hollywood') || s.includes('play-club') || s.includes('lime') || s.includes('mamacita')) {
     return { target: 'singles_friends', outfit: 'urban_reggaeton' };
   }
-  if (s.includes('over-30') || s.includes('over-40') || s.includes('bobino') || s.includes('55-milano') || s.includes('nepentha') || s.includes('blue-note') || s.includes('spirit-de-milan') || s.includes('gattopardo') || s.includes('mib')) {
+  if (s.includes('over-30') || s.includes('over-40') || s.includes('bobino') || s.includes('55-milano') || s.includes('55 milano') || s.includes('55-club') || s.includes('55 club') || s.includes('nepentha') || s.includes('blue-note') || s.includes('spirit-de-milan') || s.includes('gattopardo') || s.includes('mib')) {
     return { target: 'over30_adults', outfit: 'sequins_evening' };
   }
   return { target: 'singles_friends', outfit: 'sequins_evening' };
@@ -522,7 +523,7 @@ export function selectMasterAssetKeys(slug: string, venueName = '', categorySlug
   if (s.includes('pineta')) return VENUE_MASTER_KEYS['pineta'];
   if (s.includes('aria-club') || s.includes('v-aria')) return VENUE_MASTER_KEYS['aria'];
   if (s.includes('voya')) return VENUE_MASTER_KEYS['voya'];
-  if (s.includes('55-milano') || s.includes('cinquanta5') || s.includes('fiftyfive')) return VENUE_MASTER_KEYS['55-milano'];
+  if (s.includes('55-milano') || s.includes('55 milano') || s.includes('55-club') || s.includes('55 club') || s.includes('cinquanta5') || s.includes('fiftyfive')) return VENUE_MASTER_KEYS['55-milano'];
   if (s.includes('hollywood')) return VENUE_MASTER_KEYS['hollywood'];
   if (s.includes('the-club') || s.includes('theclub')) return VENUE_MASTER_KEYS['the-club'];
   if (s.includes('11clubroom') || s.includes('11-clubroom')) return VENUE_MASTER_KEYS['11clubroom'];
@@ -965,6 +966,7 @@ export function buildSeoEventImagePack(params: {
   const shots = params.shotLabels || pack.shots;
   const { target, outfit } = inferTargetAndOutfit({
     slug: params.eventSlug,
+    venueName: params.venueName,
     categorySlug: params.categorySlug,
     music: params.music,
     dressCode: params.dressCode,
