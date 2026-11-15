@@ -10,6 +10,7 @@ import DiscoveryGrid from '@/components/DiscoveryGrid';
 import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { christmasVoyaPath } from '@/lib/christmas/voya35';
+import { orthodoxNyeJustMePath } from '@/lib/orthodox-nye/justme35';
 import { getEventDiscoveryItems, slimDiscoveryItemsForClient } from '@/lib/eventDiscovery';
 import { PrioritySixShowcase, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
@@ -81,7 +82,36 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-const MAJOR_SPECIAL_EVENTS = [
+type MajorSpecialEventCard = {
+  badgeIt: string;
+  badgeEn: string;
+  titleIt: string;
+  titleEn: string;
+  venuesIt: string;
+  venuesEn: string;
+  descIt: string;
+  descEn: string;
+  linkKind?: 'orthodox-nye';
+  linkLabelIt?: string;
+  linkLabelEn?: string;
+};
+
+const MAJOR_SPECIAL_EVENTS: MajorSpecialEventCard[] = [
+  {
+    badgeIt: '13 Gennaio 2027 · Capodanno Ortodosso',
+    badgeEn: 'January 13, 2027 · Orthodox New Year',
+    titleIt: 'Capodanno Ortodosso 2027 al JustMe Milano (Cappuccetto Rosso)',
+    titleEn: 'Orthodox New Year 2027 at JustMe Milano (Red Riding Hood)',
+    venuesIt: 'JustMe Milano · Viale Luigi Camoens 2 (Parco Sempione · Torre Branca)',
+    venuesEn: 'JustMe Milano · Viale Luigi Camoens 2 (Parco Sempione · Torre Branca)',
+    descIt:
+      'Mercoledì 13 gennaio 2027 dalle 19:30 alle 05:00 con Guest Star DJ Nazar Radchuk: Cena Servita Silver 60€, Cena Gold Pesce 80€, Club + 1 Drink 20€ (Xceed 251019) e concorso miglior look premio 1 settimana in residence 4* in montagna.',
+    descEn:
+      'Wednesday Jan 13, 2027 (19:30–05:00) with Guest Star DJ Nazar Radchuk: Silver Dinner €60, Gold Seafood Dinner €80, Club + 1 Drink €20 (Xceed 251019), and Best Look contest winning a 1-week 4-star mountain residence stay.',
+    linkKind: 'orthodox-nye',
+    linkLabelIt: 'Menu 60€/80€ & Pass Xceed 20€ →',
+    linkLabelEn: '€60/€80 Menus & €20 Xceed Pass →',
+  },
   {
     badgeIt: '31 Dicembre · Gran Galà',
     badgeEn: 'December 31 · Grand Gala',
@@ -324,10 +354,12 @@ export default async function SpecialEventsPage({ params }: Props) {
               </div>
               <div className="flex items-center justify-between pt-4 border-t border-white/10">
                 <Link
-                  href={`${lp}/football-afterparties`}
+                  href={ev.linkKind === 'orthodox-nye' ? orthodoxNyeJustMePath(locale) : `${lp}/football-afterparties`}
                   className="text-xs font-semibold text-white/75 hover:text-champagne transition-colors"
                 >
-                  {tr(locale, 'San Siro & VIP Info →', 'Info San Siro & VIP →')}
+                  {ev.linkKind === 'orthodox-nye'
+                    ? tr(locale, ev.linkLabelEn || 'Explore Orthodox NYE →', ev.linkLabelIt || 'Scopri Capodanno Ortodosso →')
+                    : tr(locale, 'San Siro & VIP Info →', 'Info San Siro & VIP →')}
                 </Link>
                 <a
                   href={getConciergeBookingUrl(locale, isIt ? ev.titleIt : ev.titleEn, `${lp}/events/special`)}

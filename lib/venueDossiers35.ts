@@ -9,6 +9,11 @@ import { getCapodannoEventForClub } from './capodannoEvents';
 import { getConciergeBookingUrl } from './conciergeBooking';
 import { capodannoEventPath } from './capodanno/routes';
 import { christmasVoyaPath } from './christmas/voya35';
+import {
+  getJustMeOrthodoxRelatedBanner,
+  ORTHODOX_NYE_JUSTME_POSTER_SRC,
+  orthodoxNyeJustMePath,
+} from './orthodox-nye/justme35';
 
 function venueDisplayName(venue: Venue, locale: string): string {
   return (locale === 'it' ? venue.localizedContent?.name?.it : venue.localizedContent?.name?.en) || venue.localizedContent?.name?.en || 'Club Milano';
@@ -1026,6 +1031,7 @@ export function resolveVenueEventsForCarousel(
   const toHref = (enPath: string) => localizeInternalHref(`${lp}${enPath}`, locCode);
 
   const matchedDated = OCTOBER_EVENTS.filter((ev) => {
+    if (ev.id === '251019') return false;
     if (ev.venue.id === venue.id) return true;
     if (venue.id === 'v-apollo' && ev.venue.id === 'apollo') return true;
     if (venue.id === 'v-55milano' && ev.venue.id === 'v-55') return true;
@@ -1218,6 +1224,28 @@ export function resolveVenueEventsForCarousel(
       href: xmasHref,
       whatsappHref: getConciergeBookingUrl(locale, 'Voya Rooftop Natale 25 Dicembre €100', sourcePageUrl || xmasHref),
       badge: isIt ? 'NATALE 25 DIC · €100' : 'CHRISTMAS 25 DEC · €100',
+    });
+  }
+
+  if (venue.id === 'v-justme' || clubSlug === 'just-me-milano' || clubSlug === 'just-me-milan') {
+    const orthodoxHref = orthodoxNyeJustMePath(locale);
+    const orthodoxBanner = getJustMeOrthodoxRelatedBanner(locale);
+    future.unshift({
+      id: 'orthodox-nye-justme-2027',
+      title: orthodoxBanner.title,
+      dateLabel: '2027-01-13',
+      timeLabel: isIt ? '13 Gen · Cena 19:30 · Party 23:30–05:00' : '13 Jan · Dinner 19:30 · Party 23:30–05:00',
+      priceLabel: '€20–€80',
+      categoryLabel: isIt ? 'Capodanno Ortodosso · JustMe Milano' : 'Orthodox NYE · JustMe Milan',
+      genres: ['DJ Nazar Radchuk', 'House', 'Hip-Hop', 'Hits'],
+      imageSrc: ORTHODOX_NYE_JUSTME_POSTER_SRC,
+      href: orthodoxHref,
+      whatsappHref: getConciergeBookingUrl(
+        locale,
+        'Capodanno Ortodosso 2027 @ JustMe Milano (13 Gennaio)',
+        sourcePageUrl || orthodoxHref,
+      ),
+      badge: isIt ? '13 GEN · ORTODOSSO' : '13 JAN · ORTHODOX NYE',
     });
   }
 

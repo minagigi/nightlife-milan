@@ -37,6 +37,10 @@ import type { CapodannoEventItem } from '@/lib/capodannoEvents';
 import type { OctoberEventRecord } from '@/lib/october-events/types';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { christmasVoyaPath } from '@/lib/christmas/voya35';
+import {
+  ORTHODOX_NYE_JUSTME_POSTER_SRC,
+  orthodoxNyeJustMePath,
+} from '@/lib/orthodox-nye/justme35';
 
 type SearchTabId = 'all' | 'clubs' | 'capodanno' | 'events' | 'hubs' | 'guides' | 'zones';
 
@@ -1468,7 +1472,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
       });
 
     const xceedItems = (octoberCatalog || [])
-      .filter((ev) => romeDayKey(ev.startISO) >= todayKey)
+      .filter((ev) => ev.id !== '251019' && romeDayKey(ev.startISO) >= todayKey)
       .map((ev) => {
         const title = `${ev.shortName || ev.officialName} · ${ev.venue.name}`;
         const performers = ev.performers.map((p) => p.name).join(' ');
@@ -1523,7 +1527,36 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
       score: voyaChristmasScore,
     };
 
-    const scoredEvents = [...(romeDayKey('2026-12-25') >= todayKey ? [voyaChristmasItem] : []), ...featuredItems, ...xceedItems]
+    const orthodoxNyeJustMeHref = orthodoxNyeJustMePath(currentLocale);
+    const orthodoxNyeJustMeTitle = isIt
+      ? 'Capodanno Ortodosso 2027 · JustMe Milano (Il ritorno di Cappuccetto Rosso · €20–€80)'
+      : 'Orthodox New Year 2027 · JustMe Milan (Il ritorno di Cappuccetto Rosso · €20–€80)';
+    const orthodoxNyeJustMeScore = isBrowsingCategory
+      ? 96
+      : matchTokensScore(
+          `${orthodoxNyeJustMeTitle} JustMe Milano Just Me`,
+          'capodanno ortodosso orthodox new year old new year staryj novyj god srpska nova godina vasilica revelion cappuccetto rosso 13 gennaio january 2027 nazar radchuk silver 60 gold 80 club 20 justme torre branca старый новый год православный новый год новый год 13 января',
+          qTokens,
+          fullQuery,
+        );
+    const orthodoxNyeJustMeItem = {
+      id: 'orthodox-nye-justme-2027',
+      title: orthodoxNyeJustMeTitle,
+      venueName: 'JustMe Milano · Parco Sempione / Torre Branca',
+      dateISO: '2027-01-13T19:30:00+01:00',
+      image: ORTHODOX_NYE_JUSTME_POSTER_SRC,
+      priceLabel: '€20–€80',
+      genres: 'DJ Nazar Radchuk · House, Hip-Hop, Hits',
+      href: orthodoxNyeJustMeHref,
+      score: orthodoxNyeJustMeScore,
+    };
+
+    const scoredEvents = [
+      ...(romeDayKey('2027-01-13') >= todayKey ? [orthodoxNyeJustMeItem] : []),
+      ...(romeDayKey('2026-12-25') >= todayKey ? [voyaChristmasItem] : []),
+      ...featuredItems,
+      ...xceedItems,
+    ]
       .filter((item) => item.score > 0)
       .sort((a, b) => (b.score !== a.score ? b.score - a.score : Date.parse(a.dateISO) - Date.parse(b.dateISO)))
       .slice(0, activeTab === 'events' ? 24 : 6);

@@ -1,6 +1,7 @@
 import CapodannoHubView from '@/components/CapodannoHubView';
 import CapodannoDetailView from '@/components/CapodannoDetailView';
 import ChristmasVoyaDetailView from '@/components/ChristmasVoyaDetailView';
+import OrthodoxNyeJustMeDetailView from '@/components/OrthodoxNyeJustMeDetailView';
 import {
   christmasVoyaHreflangAlternates,
   christmasVoyaPath,
@@ -8,6 +9,14 @@ import {
   getChristmasVoyaContent,
   resolveChristmasVoyaSlug,
 } from '@/lib/christmas/voya35';
+import {
+  getOrthodoxNyeJustMeContent,
+  ORTHODOX_NYE_JUSTME_POSTER_SRC,
+  orthodoxNyeJustMeHreflangAlternates,
+  orthodoxNyeJustMePath,
+  orthodoxNyeJustMeSlug,
+  resolveOrthodoxNyeJustMeSlug,
+} from '@/lib/orthodox-nye/justme35';
 import { getCapodannoCategoryPageDef, getCapodannoEventBySlug, getCapodannoEventsForMode } from '@/lib/capodannoEvents';
 import {
   buildCapodannoMetaDescription,
@@ -259,6 +268,37 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
     };
   }
+  if (resolveOrthodoxNyeJustMeSlug(slug)) {
+    const canonicalSlug = orthodoxNyeJustMeSlug(locale);
+    if (slug !== canonicalSlug) permanentRedirect(orthodoxNyeJustMePath(locale));
+    const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
+    const canonical = `${baseUrl}${orthodoxNyeJustMePath(locale)}`;
+    const ortho = getOrthodoxNyeJustMeContent(locale);
+    return {
+      title: ortho.metaTitle,
+      description: ortho.metaDescription,
+      robots: seoRobots(locale, true, true),
+      alternates: {
+        canonical,
+        languages: orthodoxNyeJustMeHreflangAlternates(baseUrl),
+      },
+      openGraph: {
+        title: ortho.metaTitle,
+        description: ortho.metaDescription,
+        url: canonical,
+        type: 'website',
+        siteName: 'Nightlife Milan',
+        locale: getLocaleDef(locale)?.ogLocale || 'en_US',
+        images: [{ url: `${baseUrl}${ORTHODOX_NYE_JUSTME_POSTER_SRC}`, width: 1376, height: 768, alt: ortho.h1 }],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: ortho.metaTitle,
+        description: ortho.metaDescription,
+        images: [`${baseUrl}${ORTHODOX_NYE_JUSTME_POSTER_SRC}`],
+      },
+    };
+  }
   const capCatId = resolveCapodannoCategoryIdByLocalizedSlug(slug, locale);
   if (capCatId) {
     if (slug !== capodannoCategorySlug(capCatId, locale)) permanentRedirect(capodannoCategoryPath(capCatId, locale));
@@ -436,6 +476,11 @@ export default async function EventPage({ params }: Props) {
     const canonicalSlug = christmasVoyaSlug(locale);
     if (slug !== canonicalSlug) permanentRedirect(christmasVoyaPath(locale));
     return <ChristmasVoyaDetailView locale={locale} />;
+  }
+  if (resolveOrthodoxNyeJustMeSlug(slug)) {
+    const canonicalSlug = orthodoxNyeJustMeSlug(locale);
+    if (slug !== canonicalSlug) permanentRedirect(orthodoxNyeJustMePath(locale));
+    return <OrthodoxNyeJustMeDetailView locale={locale} />;
   }
   const capCatId = resolveCapodannoCategoryIdByLocalizedSlug(slug, locale);
   if (capCatId) {

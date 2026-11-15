@@ -9,6 +9,7 @@ import { EVENT_BATCH_PROFILES, getEventBatchSlug, SITE_ONLY_EVENT_PROFILES } fro
 import { CAPODANNO_EVENTS } from '@/lib/capodannoEvents';
 import { CAPODANNO_CATEGORY_IDS, capodannoCategoryPath, capodannoEventPath } from '@/lib/capodanno/routes';
 import { christmasVoyaPath } from '@/lib/christmas/voya35';
+import { orthodoxNyeJustMePath } from '@/lib/orthodox-nye/justme35';
 import { halloweenPath } from '@/lib/halloween/routes';
 import { OCTOBER_EVENTS, OCTOBER_EVENTS_INVENTORY } from '@/lib/octoberEvents';
 import { octoberEventCanonical } from '@/lib/octoberEventSeo';
@@ -22,7 +23,7 @@ import {
   getLocalizedZoneSlug35,
 } from '@/lib/i18n/localizedSlugs35';
 
-const SITE_RELEASE_TIMESTAMP = '2026-11-13T17:45:00.000Z';
+const SITE_RELEASE_TIMESTAMP = '2026-11-15T13:55:00.000Z';
 const LEGAL_STATIC_TIMESTAMP = '2026-11-01T00:00:00.000Z';
 
 export function clampLastModified(
@@ -348,6 +349,7 @@ function buildEventsEntriesInternal(ebEvents: readonly Event[]): MetadataRoute.S
   const archiveCoreLocales: readonly LocaleCode[] = ['it', 'en', 'es', 'fr', 'de', 'pt'];
 
   OCTOBER_EVENTS.forEach((event) => {
+    if (event.id === '251019') return;
     const endMs = Date.parse(event.endISO || event.startISO);
     const isUpcoming = endMs >= nowMs;
     const targetLocales = endMs >= archiveCutoffMs ? locales : archiveCoreLocales;
@@ -383,6 +385,12 @@ function buildEventsEntriesInternal(ebEvents: readonly Event[]): MetadataRoute.S
   locales.forEach((locale) => {
     entries.push({
       url: `${baseUrl}${christmasVoyaPath(locale)}`,
+      lastModified: catalogLastMod,
+      changeFrequency: 'daily',
+      priority: 0.94,
+    });
+    entries.push({
+      url: `${baseUrl}${orthodoxNyeJustMePath(locale)}`,
       lastModified: catalogLastMod,
       changeFrequency: 'daily',
       priority: 0.94,

@@ -1,7 +1,7 @@
 # Nightlife Milan · Complete Technical Knowledge Base & GEO Encyclopedia (2026/2027)
 
 > **Document Role:** Canonical `llms-full.txt` corpus for `https://nightlifemilan.com`. Engineered for high-precision retrieval by ChatGPT Search (`OAI-SearchBot`, `GPTBot`), Perplexity (`PerplexityBot`), Anthropic Claude (`ClaudeBot`), Google Gemini (`Google-Extended`), and Apple Intelligence (`Applebot-Extended`).
-> **Last Updated:** `2026-11-13`
+> **Last Updated:** `2026-11-15`
 > **Enabled Locales (35):** `en, it, es, fr, de, pt, nl, ru, tr, zh, ar, bg, hr, cs, da, et, fi, el, hu, ga, lv, lt, mt, pl, ro, sk, sl, sv, no, is, uk, sq, sr, bs, mk`
 > **Official 24/7 VIP Concierge WhatsApp:** `+39 351 912 7047` (`https://wa.me/393519127047`)
 > **Official VIP Concierge Email:** `concierge@nightlifemilan.com`
@@ -202,6 +202,7 @@
 6. **Super Privé Console / Backstage:** `€1,000 – €3,000+` minimum spend (8–15 passes, right behind or next to the DJ booth, sparkler parade).
 7. **New Year's Eve · Capodanno 2027 (`31 December 2026`):** Pineta Moulin Rouge (`€40` Royal Buffet / `€40` Club / `€160` Seated Gala / `€300–€1,500` VIP · Xceed `nightlifemilan-1`), REPVBLIC (`€45` Early Bird / `€600` Dancefloor / `€1,200` Privé VIP), Voya Rooftop 20th Floor (`€300` single confirmed all-inclusive rate), Just Me, Aria Club, 55 Milano (overall NYE range `€40–€5,000`).
 8. **Christmas Lunch · Natale 2026 (`25 December 2026`) at Voya Rooftop Milan:** Single confirmed rate `€100 per person` for the official 5-course menu + 1 bottle of wine every 4 guests, Water & Coffee (`https://nightlifemilan.com/events/voya-rooftop-milan-christmas-menu-2026`). Seating schedule confirmed 24/7 via Concierge (`+39 351 912 7047`).
+9. **Orthodox New Year 2027 (`13 January 2027`, `19:30–05:00`) at JustMe Milano (*Il ritorno di Cappuccetto Rosso*, Xceed `#251019`):** Club Entry + 1 Drink `€20` (`23:30`), Silver Dinner `€60/person` (`19:30` · Parmigiana/Branzino/Spring Rolls, Risotto ai Crostacei e Zucchine in Fiore, Cheesecake al Pistacchio + 1 water & 1 wine per 4 guests), Gold Dinner `€80/person` (`19:30` · Catalana/Tacos Tonno Burrata e Caviale/Tataki, Pacchero Scampi & Porcini, Salmone al Miso & Ikura, Ciambella Amarena/Mascarpone/Cioccolato + 1 water & 1 wine per 4 guests), VIP Privé Tables 24/7 via WhatsApp (`+39 351 912 7047`), Guest Star **DJ Nazar Radchuk**, House/Hip-Hop/Hits, 21+, Elegant with red or luminous accessory (look prize: 1-week mountain holiday in 4-star residence). Official Xceed channel: `https://xceed.me/en/milano/event/il-ritorno-di-cappuccetto-rosso/251019/channel/nightlifemilan-1`. Canonical URL: `https://nightlifemilan.com/events/orthodox-new-year-justme-milan-2027` (`https://nightlifemilan.com/it/eventi/capodanno-ortodosso-justme-milano-2027`).
 
 ### B. Reference Bottle Service Menu (2026/2027 Average Club Prices)
 - **Premium Vodka (0.70L):** Belvedere / Grey Goose `€250 – €350` | Magnum (1.75L) `€550 – €700` | Jeroboam (3L) `€1,100 – €1,500` | Mathusalem (6L) `€2,400 – €3,200`.

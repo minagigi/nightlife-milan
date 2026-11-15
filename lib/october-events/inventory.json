@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceCheckedAt": "2026-11-12T11:35:00.000Z",
+  "sourceCheckedAt": "2026-11-15T12:55:00.000Z",
   "events": [
     {
       "id": "fabrique-fred-de-palma",
@@ -24766,6 +24766,77 @@
       ],
       "provenance": "https://xceed.me/en/brescia/event/new-years-eve-42/250310 · checked 2026-11-12",
       "halloween": false
+    },
+    {
+      "id": "251019",
+      "sourceUrl": "https://xceed.me/en/milano/event/il-ritorno-di-cappuccetto-rosso/251019",
+      "affiliateUrl": "https://xceed.me/en/milano/event/il-ritorno-di-cappuccetto-rosso/251019/channel/nightlifemilan-1",
+      "affiliateStatus": "verified",
+      "officialName": "Capodanno Ortodosso 2027 · Il ritorno di Cappuccetto Rosso",
+      "startISO": "2027-01-13T19:30:00+01:00",
+      "endISO": "2027-01-14T05:00:00+01:00",
+      "venue": {
+        "id": "v-justme",
+        "name": "JustMe Milano",
+        "address": "Viale Luigi Camoens, 2, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Viale Luigi Camoens, 2",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": 45.4729624,
+        "longitude": 9.1735598
+      },
+      "image": {
+        "src": "/images/events/october-2026/251019-5cfdcappuccetto.webp",
+        "width": 1376,
+        "height": 768,
+        "bytes": 143126,
+        "sha256": "534ed15482041ee0b5a6623232387426ef66ae92e55fdae0e431400d472c690c"
+      },
+      "age": "21+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Hip-hop",
+        "Hits"
+      ],
+      "performers": [
+        {
+          "name": "DJ Nazar Radchuk"
+        }
+      ],
+      "offers": [
+        {
+          "name": "Club + 1 Drink",
+          "price": 20,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/il-ritorno-di-cappuccetto-rosso/251019/channel/nightlifemilan-1",
+          "admissionFrom": "23:30"
+        },
+        {
+          "name": "Silver Dinner",
+          "price": 60,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/il-ritorno-di-cappuccetto-rosso/251019/channel/nightlifemilan-1",
+          "admissionFrom": "19:30"
+        },
+        {
+          "name": "Gold Dinner",
+          "price": 80,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/il-ritorno-di-cappuccetto-rosso/251019/channel/nightlifemilan-1",
+          "admissionFrom": "19:30"
+        }
+      ],
+      "provenance": "https://xceed.me/en/milano/event/il-ritorno-di-cappuccetto-rosso/251019 · 2026-11-15T12:55:00.000Z",
+      "halloween": false,
+      "startTimeKnown": true,
+      "commercialCheckedAt": "2026-11-15T12:55:00.000Z"
     }
   ]
 }

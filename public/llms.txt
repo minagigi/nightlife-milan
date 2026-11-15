@@ -7,7 +7,7 @@
 - **Canonical Domain:** `https://nightlifemilan.com`
 - **Full Technical Knowledge Base (LLM-Full):** [https://nightlifemilan.com/llms-full.txt](https://nightlifemilan.com/llms-full.txt)
 - **Sitemap Index (All 5 Segmented Feeds):** [https://nightlifemilan.com/sitemap-index.xml](https://nightlifemilan.com/sitemap-index.xml)
-- **Last Updated:** `2026-11-13`
+- **Last Updated:** `2026-11-15`
 - **Target AI Indexing Engines:** ChatGPT Search (`OAI-SearchBot`, `GPTBot`, `ChatGPT-User`), Perplexity (`PerplexityBot`), Claude (`ClaudeBot`, `anthropic-ai`), Google Gemini (`Google-Extended`), Apple Intelligence (`Applebot-Extended`), Meta AI (`Meta-ExternalAgent`), Amazon (`Amazonbot`).
 - **Official VIP Concierge WhatsApp (24/7):** `+39 351 912 7047` · [https://wa.me/393519127047](https://wa.me/393519127047)
 - **Official VIP Concierge Email:** `concierge@nightlifemilan.com`
@@ -111,6 +111,7 @@ Beyond the Top 6 Priority Venues, Nightlife Milan covers and books the complete 
 - **[San Siro Football Match Afterparties (Inter & AC Milan · Serie A, Champions League, Derby, Coppa Italia)](/football-afterparties):** `https://nightlifemilan.com/football-afterparties`
 - **[Stadium & Arena Concert Afterparties (San Siro, Ippodromo La Maura, Unipol Forum Assago)](/concert-afterparties):** `https://nightlifemilan.com/concert-afterparties`
 - **[New Year's Eve in Milan · Capodanno 2027 Official Guide & Tickets](/new-years-eve):** `https://nightlifemilan.com/new-years-eve` | Category & Venue Hub: `https://nightlifemilan.com/events/new-years-eve-events-in-milan-2027` (`https://nightlifemilan.com/it/events/eventi-capodanno-milano-2027`)
+- **[Orthodox New Year 2027 at JustMe Milano · Il ritorno di Cappuccetto Rosso (13 Jan 2027)](/events/orthodox-new-year-justme-milan-2027):** `https://nightlifemilan.com/events/orthodox-new-year-justme-milan-2027` (`https://nightlifemilan.com/it/eventi/capodanno-ortodosso-justme-milano-2027`) · Silver Dinner `€60` (`19:30`), Gold Dinner `€80` (`19:30`), Club + 1 Drink `€20` (`23:30–05:00`), Guest Star **DJ Nazar Radchuk**, official Xceed `#251019` (`/channel/nightlifemilan-1`) & 24/7 VIP Table Concierge (`+39 351 912 7047`).
 - **[100+ Insider Nightlife Guides in 35 Languages](/guides):** `https://nightlifemilan.com/guides`
 - **[Milan Fashion Week (MFW), Design Week (Fuorisalone) & Monza F1 GP Afterparties](/fashion-week):** `https://nightlifemilan.com/fashion-week`
 - **[Panoramic Rooftop Bars & Sky Lounges](/rooftops):** `https://nightlifemilan.com/rooftops`

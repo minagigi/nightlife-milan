@@ -9,6 +9,10 @@ import { CAPODANNO_EVENTS } from './capodannoEvents';
 import { getConciergeBookingUrl } from './conciergeBooking';
 import { capodannoEventPath } from './capodanno/routes';
 import { christmasVoyaPath } from './christmas/voya35';
+import {
+  ORTHODOX_NYE_JUSTME_POSTER_SRC,
+  orthodoxNyeJustMePath,
+} from './orthodox-nye/justme35';
 import type { CarouselEventCard } from './venueDossiers35';
 
 export interface VerticalHubUi35 {
@@ -724,6 +728,37 @@ export function getHolidaysCatalog(locale: string): VerticalCardItem[] {
       imageSrc: '/images/events/christmas-2026-posters/natale-voya-rooftop-milano-2026.webp',
     },
     {
+      id: 'hol-orthodox-nye-justme',
+      badge: isIt ? '13 GENNAIO 2027 · CAPODANNO ORTODOSSO MILANO' : '13 JANUARY 2027 · ORTHODOX NEW YEAR MILAN',
+      title: isIt
+        ? 'Capodanno Ortodosso 2027 al JustMe Milano: Il ritorno di Cappuccetto Rosso'
+        : 'Orthodox New Year 2027 at JustMe Milan: Il ritorno di Cappuccetto Rosso',
+      subtitle: isIt
+        ? 'Notte del Capodanno Giuliàno sotto la Torre Branca tra cene gala servite dalle 19:30 e club fino alle 05:00 con Guest Star DJ Nazar Radchuk.'
+        : 'Julian Calendar Orthodox New Year night beneath Torre Branca with seated gala dinners from 19:30 and clubbing until 05:00 featuring DJ Nazar Radchuk.',
+      priceRange: isIt
+        ? 'Club + 1 Drink 20€ · Silver Dinner 60€ · Gold Dinner 80€ · Tavoli VIP Privé su WhatsApp'
+        : 'Club + 1 Drink €20 · Silver Dinner €60 · Gold Dinner €80 · VIP Privé Tables via WhatsApp',
+      timingAndLogistics: isIt
+        ? 'Mercoledì 13 Gennaio 2027 · Cene 19:30 · Club 23:30–05:00 · 21+ Elegante con dettaglio rosso o luminoso'
+        : 'Wednesday, January 13, 2027 · Dinners 19:30 · Club 23:30–05:00 · 21+ Elegant with red or luminous detail',
+      recommendedVenues: ['JustMe Milano (Parco Sempione · Viale Luigi Camoens 2)'],
+      highlights: isIt
+        ? [
+            'Cena di Gala Silver (€60) e Gold (€80) dalle 19:30 con 1 bottiglia di acqua e 1 di vino ogni 4 ospiti + festa fino alle 05:00',
+            'Ingresso Club + 1 Drink (€20) dalle 23:30 con DJ Nazar Radchuk (House, Hip-Hop & Hits) e biglietti ufficiali Xceed #251019',
+            'Tavoli VIP Privé & Super Privé 24/7 su WhatsApp (+39 351 912 7047) con conferma disponibilità e prepagamento al 100%',
+          ]
+        : [
+            'Gala Silver (€60) & Gold (€80) seated dinners from 19:30 with 1 water + 1 wine bottle per 4 guests & all-night party to 05:00',
+            'Club Entry + 1 Drink (€20) from 23:30 with DJ Nazar Radchuk (House, Hip-Hop & Hits) & official Xceed #251019 attribution',
+            'VIP Privé tables via 24/7 WhatsApp concierge (+39 351 912 7047) with availability confirmation & 100% prepayment',
+          ],
+      href: orthodoxNyeJustMePath(locale),
+      whatsappText: 'Ciao Nightlife Milan, vorrei prenotare il Capodanno Ortodosso 2027 al JustMe Milano (13 Gennaio: Gold €80 / Silver €60 / Club €20 / Tavoli VIP)',
+      imageSrc: ORTHODOX_NYE_JUSTME_POSTER_SRC,
+    },
+    {
       id: 'hol-halloween',
       badge: isIt ? '31 OTTOBRE · HALLOWEEN NIGHT MILANO' : '31 OCTOBER · HALLOWEEN NIGHT MILAN',
       title: isIt
@@ -989,6 +1024,27 @@ export function resolveSuggestedEventsForVertical(
       href: christmasHref,
       whatsappHref: getConciergeBookingUrl(locale, 'Voya Rooftop Christmas Menu (25 Dec €100)', christmasHref),
       badge: isIt ? 'NATALE 25 DIC · €100' : 'CHRISTMAS 25 DEC · €100',
+    });
+
+    const orthodoxHref = orthodoxNyeJustMePath(locale);
+    cards.push({
+      id: 'vert-orthodox-nye-justme-2027',
+      title: isIt
+        ? 'Capodanno Ortodosso 2027 · JustMe Milano (Il ritorno di Cappuccetto Rosso)'
+        : 'Orthodox New Year 2027 · JustMe Milan (Il ritorno di Cappuccetto Rosso)',
+      dateLabel: '2027-01-13',
+      timeLabel: isIt ? '13 Gen · Cena 19:30 · Party 23:30–05:00' : 'Jan 13 · Dinner 19:30 · Party 23:30–05:00',
+      priceLabel: '€20–€80',
+      categoryLabel: 'JustMe Milano · Torre Branca',
+      genres: ['DJ Nazar Radchuk', isIt ? 'Silver €60 · Gold €80 · Club €20' : 'Silver €60 · Gold €80 · Club €20'],
+      imageSrc: ORTHODOX_NYE_JUSTME_POSTER_SRC,
+      href: orthodoxHref,
+      whatsappHref: getConciergeBookingUrl(
+        locale,
+        'Capodanno Ortodosso 2027 · JustMe Milano (13 Gennaio)',
+        orthodoxHref,
+      ),
+      badge: isIt ? '13 GEN · ORTODOSSO' : '13 JAN · ORTHODOX NYE',
     });
 
     for (const cap of CAPODANNO_EVENTS.slice(0, 4)) {

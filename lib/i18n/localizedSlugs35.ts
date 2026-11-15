@@ -9,6 +9,7 @@ import {
 import { HALLOWEEN_NAVIGATION } from '@/lib/halloween/navigation';
 import { halloweenPath } from '@/lib/halloween/routes';
 import { christmasVoyaSlug, resolveChristmasVoyaSlug } from '@/lib/christmas/voya35';
+import { orthodoxNyeJustMeSlug, resolveOrthodoxNyeJustMeSlug } from '@/lib/orthodox-nye/justme35';
 import {
   CAPODANNO_CATEGORY_IDS,
   CAPODANNO_EVENT_BASE_SLUGS,
@@ -1125,6 +1126,12 @@ function stripDatedPartyPrefix(slug: string): string {
 
 export function resolveEventSlugToCanonical(slug: string, targetLocale?: LocaleCode): string {
   const loc = targetLocale || 'en';
+  if (resolveChristmasVoyaSlug(slug)) {
+    return christmasVoyaSlug(loc);
+  }
+  if (resolveOrthodoxNyeJustMeSlug(slug)) {
+    return orthodoxNyeJustMeSlug(loc);
+  }
   if (HALLOWEEN_SET.has(slug)) {
     return HALLOWEEN_NAVIGATION[loc]?.slug || HALLOWEEN_NAVIGATION.en.slug;
   }
@@ -1171,6 +1178,9 @@ export function resolveEventSlugToCanonical(slug: string, targetLocale?: LocaleC
 export function getLocalizedEventSlug35(rawSlug: string, locale: LocaleCode): string {
   if (resolveChristmasVoyaSlug(rawSlug)) {
     return christmasVoyaSlug(locale);
+  }
+  if (resolveOrthodoxNyeJustMeSlug(rawSlug)) {
+    return orthodoxNyeJustMeSlug(locale);
   }
   if (HALLOWEEN_SET.has(rawSlug)) {
     return HALLOWEEN_NAVIGATION[locale]?.slug || HALLOWEEN_NAVIGATION.en.slug;
@@ -1755,6 +1765,12 @@ export function resolveLegacyOrExpiredEventRedirect(rawSlug: string, targetLocal
     HALLOWEEN_SET.has(slug) ||
     CAPODANNO_LEGACY_SET.has(rawSlug) ||
     CAPODANNO_LEGACY_SET.has(slug) ||
+    resolveChristmasVoyaSlug(rawSlug) ||
+    resolveChristmasVoyaSlug(slug) ||
+    resolveChristmasVoyaSlug(stripped) ||
+    resolveOrthodoxNyeJustMeSlug(rawSlug) ||
+    resolveOrthodoxNyeJustMeSlug(slug) ||
+    resolveOrthodoxNyeJustMeSlug(stripped) ||
     Boolean(resolveCapodannoCategoryIdByLocalizedSlug(rawSlug, targetLocale)) ||
     Boolean(resolveCapodannoEventBaseSlugByLocalizedSlug(rawSlug, targetLocale)) ||
     capLegacy?.type === 'hub' ||

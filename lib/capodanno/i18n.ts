@@ -5,6 +5,7 @@ import {
 } from '@/lib/capodanno/repvblic35';
 import { getPinetaNyeContent } from '@/lib/capodanno/pineta35';
 import { getVoyaNyeContent } from '@/lib/capodanno/voya35';
+import { getJustMeOrthodoxRelatedBanner } from '@/lib/orthodox-nye/justme35';
 import type { CapodannoCategoryPageDef, CapodannoEventItem } from '@/lib/capodannoEvents';
 import { SITE_CONTACT } from '@/config/contact';
 
@@ -565,5 +566,9 @@ export function getCapodannoLocalizedEventContent(
     tiers: isIt ? event.tiersIt : event.tiersEn,
     highlights: isIt ? event.highlightsIt : event.highlightsEn,
     sourceBasis: isIt ? event.sourceBasisIt : event.sourceBasisEn,
+    relatedHolidayBanner:
+      event.slug === 'capodanno-justme-milano-torre-branca'
+        ? getJustMeOrthodoxRelatedBanner(locale)
+        : undefined,
   };
 }
