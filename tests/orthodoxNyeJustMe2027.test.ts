@@ -177,6 +177,30 @@ test('Orthodox NYE 2027 @ JustMe Milano meets SEO metadata, pricing, menus, >=16
       segWords >= 1700,
       `Segmenter word count too low in ${loc}: ${segWords} < 1700`,
     );
+
+    if (loc !== 'en') {
+      const englishFallbackRe =
+        /frequently asked questions|page index|overview & night schedule|official gala menus|official tickets|getting to justme|new year['’]s eve 2027 milan/i;
+      const headingsToCheck = [
+        c.h1,
+        c.tocTitle,
+        c.overviewHeading,
+        c.menusHeading,
+        c.ticketsHeading,
+        c.contestHeading,
+        c.logisticsHeading,
+        c.mapHeading,
+        c.faqHeading,
+        ...c.tocItems.map((item) => item.label),
+      ];
+      for (const heading of headingsToCheck) {
+        assert.doesNotMatch(
+          heading,
+          englishFallbackRe,
+          `English fallback H2/TOC detected in ${loc}: ${heading}`,
+        );
+      }
+    }
   }
 });
 
