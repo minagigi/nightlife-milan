@@ -46,16 +46,13 @@ import { getEventBySlug, getVenueById, getPerformerById } from '@/lib/data';
 import { getWeeklyEventBySlug } from '@/lib/eventsConfig';
 import { getLocalizedText, generateEventSchema, generateBreadcrumbSchema } from '@/lib/seo';
 import { nextWeekdayISO } from '@/lib/calendarEvents';
-import { fetchEventbriteEvents } from '@/lib/eventbriteSync';
 import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
 import { getRichContent } from '@/lib/richContentStore';
-import { getEventGoldHtml } from '@/lib/eventbriteSync';
 import { Event, Venue } from '@/lib/types';
 import BookingForm from '@/components/BookingForm';
 import FAQAccordion from '@/components/FAQAccordion';
 import PricingGrid from '@/components/PricingGrid';
 import GoldEventContent from '@/components/GoldEventContent';
-import GoldEventHtml from '@/components/GoldEventHtml';
 import EventImageGallery from '@/components/EventImageGallery';
 import MoreVenueEvents, { MoreVenueEventItem } from '@/components/MoreVenueEvents';
 import EventsCarousel from '@/components/EventsCarousel';
@@ -71,7 +68,7 @@ import { getEventLocalePack } from '@/lib/eventLocalePacks';
 import { buildEventSeoDescription, buildEventSeoTitle, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { CONTACT } from '@/config/contact';
-import { compareEventbriteDiscoveryItems, getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
+import { compareEventDiscoveryItems, getEventDiscoveryItems } from '@/lib/eventDiscovery';
 import {
   buildEventQuickAnswer,
   buildVenueDescription,
@@ -80,23 +77,6 @@ import {
   getIntlLocale,
   getVenueHeadingParts,
 } from '@/lib/eventPageLocale';
-
-/** Find a live Eventbrite event by its SEO slug (EN or IT).
- * NESSUN try/catch qui: se la fetch Eventbrite fallisce (dopo i retry
- * interni) l'errore DEVE propagarsi come 500 non cacheato - degradare a
- * undefined produceva notFound(), e Next cacheava quel 404 per l'intera
- * finestra ISR (bug reale: bandierina IT → 404 su pagina esistente). */
-async function getEbEventBySlug(slug: string): Promise<Event | undefined> {
-  const match = (ev: Event) => ev.localizedContent.slug.en === slug || ev.localizedContent.slug.it === slug;
-  const events = await fetchEventbriteEvents();
-  const hit = events.find(match);
-  if (hit) return hit;
-  // Evento passato: NON è nel set current_future, ma la sua pagina deve restare
-  // raggiungibile (SEO: link accessibili anche quando l'evento è uscito dalla
-  // lista "Eventi passati"). Si interroga la finestra recente limitata a 30 giorni.
-  const withPast = await fetchEventbriteEvents(true, 30);
-  return withPast.find(match);
-}
 
 const FALLBACK_GALLERY = [
   '/images/milan-nightclub-luxury-vip-champagne.webp',
@@ -349,7 +329,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   let event = getEventBySlug(slug, locale);
   if (!event) event = getLocalizedEventSeed(slug, locale) || undefined;
-  if (!event) event = await getEbEventBySlug(slug);
   if (!event) return notFound();
 
   const venue = getVenueById(event.venueId);
@@ -707,7 +686,6 @@ export default async function EventPage({ params }: Props) {
 
   let event = getEventBySlug(slug, locale);
   if (!event) event = getLocalizedEventSeed(slug, locale) || undefined;
-  if (!event) event = await getEbEventBySlug(slug);
   if (!event) return notFound();
 
   const venue = getVenueById(event.venueId);
@@ -730,24 +708,9 @@ export default async function EventPage({ params }: Props) {
     : (await getRichContent(slugEnKey)) ||
       (slugItKey && slugItKey !== slugEnKey ? await getRichContent(slugItKey) : null);
 
-  // CORPO GOLD LOCALIZZATO (2026-07-12). Il Blob (GoldEventContent) contiene le
-  // sezioni/FAQ SOLO in en/it → su /es, /fr, ecc. il corpo restava in inglese.
-  // Per le lingue diverse da en/it si legge quindi il gold TRADOTTO direttamente
-  // dal listing Eventbrite nella lingua scelta (getEventGoldHtml → GoldEventHtml).
-  // Se quella lingua non ha un gold tradotto, si ripiega sul Blob en/it così il
-  // corpo non resta vuoto. Per en/it: Blob se presente, altrimenti gold dal listing
-  // (copre gli eventi pubblicati senza enrichment). getEventGoldHtml è cacheato
-  // (fetchOrgCached 5min) + ISR, e con Vercel Pro (maxDuration 300s) non va in timeout.
-  const isEnIt = locale === 'en' || locale === 'it';
-  const localizedGold = localizedEventContent || isEnIt ? null : await getEventGoldHtml(slug, locale);
-  const richContent = localizedGold ? null : blobRich;
-  const goldHtml = localizedEventContent ? null : localizedGold || (richContent ? null : await getEventGoldHtml(slug, locale));
+  const richContent = blobRich;
 
-  // Internal linking: "More events at {venue}" - riusa la sorgente dati
-  // unificata già usata da homepage/calendar (statici + Eventbrite/Xceed
-  // reali). getAllCalendarEvents() degrada già da sola se Eventbrite non
-  // risponde (vedi lib/calendarEvents.ts), quindi nessun try/catch qui.
-  const allVenueCalendarItems = getEventbriteDiscoveryItems(await getAllCalendarEvents(), locale);
+  const allVenueCalendarItems = getEventDiscoveryItems(await getAllCalendarEvents(), locale);
   const currentEventStartMs = new Date(event.dateISO).getTime();
   const isCurrentEvent = (candidate: Event) =>
     candidate.id === event.id ||
@@ -757,7 +720,7 @@ export default async function EventPage({ params }: Props) {
       ({ event: e }) =>
         e.venueId === event.venueId && !isCurrentEvent(e) && isUpcomingRome(e.dateISO)
     )
-    .sort(compareEventbriteDiscoveryItems)
+    .sort(compareEventDiscoveryItems)
     .slice(0, 4)
     .map(({ event: e }) => {
       const eSlug = locale === 'it' ? (e.localizedContent.slug.it || e.localizedContent.slug.en) : e.localizedContent.slug.en;
@@ -776,11 +739,10 @@ export default async function EventPage({ params }: Props) {
       };
     });
 
-  // One discovery gallery, limited to canonical site events backed by a
-  // verified live Eventbrite listing. Guè keeps priority 1; World Cup priority 2.
+  // One discovery gallery backed by verified editorial & Xceed inventory.
   const discoveryEvents = allVenueCalendarItems
     .filter(({ event: e }) => !isCurrentEvent(e) && isUpcomingRome(e.dateISO))
-    .sort(compareEventbriteDiscoveryItems);
+    .sort(compareEventDiscoveryItems);
 
   const eventVisualGallery = getEventVisualGallery(event.localizedContent.slug.en, locale);
   const eventBatchProfile = getEventBatchProfile(event.localizedContent.slug.en);
@@ -1128,8 +1090,7 @@ export default async function EventPage({ params }: Props) {
             {!localizedEventContent && richContent && (
               <GoldEventContent data={richContent} locale={locale} gallery={bodyVisualGallery} />
             )}
-            {!localizedEventContent && !richContent && goldHtml && <GoldEventHtml html={goldHtml} />}
-            {!localizedEventContent && !richContent && !goldHtml && bodyVisualGallery && (
+            {!localizedEventContent && !richContent && bodyVisualGallery && (
               <EventImageGallery gallery={bodyVisualGallery} locale={locale} />
             )}
 
@@ -1167,13 +1128,11 @@ export default async function EventPage({ params }: Props) {
               <a
                 href={event.xceedUrl}
                 target="_blank"
-                rel={event.xceedUrl.includes('eventbrite') ? 'noopener noreferrer' : 'noopener noreferrer sponsored'}
+                rel="noopener noreferrer sponsored"
                 className="flex items-center justify-center gap-2 w-full bg-champagne text-black px-6 py-4 font-sans font-bold text-sm tracking-[0.15em] uppercase hover:bg-white transition-colors duration-300 mb-4"
               >
                 <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" /></svg>
-                {event.xceedUrl.includes('eventbrite')
-                  ? eventText(locale, 'Buy Ticket', 'Compra il Biglietto', 'Comprar ingresso')
-                  : eventText(locale, 'Buy on Xceed', 'Acquista su Xceed', 'Comprar no Xceed')}
+                {eventText(locale, 'Buy on Xceed', 'Acquista su Xceed', 'Comprar no Xceed')}
               </a>
             )}
 
@@ -1192,7 +1151,7 @@ export default async function EventPage({ params }: Props) {
           </aside>
         </section>
 
-        {/* Discovery gallery: one verified Eventbrite-backed inventory. */}
+        {/* Discovery gallery: editorial and partner event inventory. */}
         {discoveryEvents.length > 0 && (
           <section className="py-16 border-t border-white/5">
             <div>

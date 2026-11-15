@@ -5,7 +5,7 @@ export const UNIVERSITY_PARTY_CANONICAL_SLUG = 'university-party-just-me-tuesday
 export const UNIVERSITY_PARTY_PT_LEGACY_SLUG = 'justme-tuesday-martedi-universitario';
 
 export const universityPartyEventSeed = {
-  id: 'eventbrite-1993899840096',
+  id: 'editorial-university-party-2026-07-14',
   venueId: 'v-justme',
   genre: [MusicGenre.HOUSE, MusicGenre.HIP_HOP, MusicGenre.REGGAETON, MusicGenre.EDM, MusicGenre.COMMERCIAL],
   dateISO: '2026-07-14T19:30:00+02:00',
@@ -86,7 +86,7 @@ export const universityPartyPt = {
     { question: 'A entrada é 18+?', answer: 'Sim. A University Party é 18+. Leve um documento de identificação válido porque a segurança pode verificar a idade.' },
     { question: 'Que música toca na University Party?', answer: 'A pista mistura house, hip hop, hits comerciais, EDM e reggaeton para estudantes e grupos internacionais.' },
     { question: 'Posso jantar antes da festa?', answer: 'Sim. Além do aperitivo buffet, há jantar opcional antes da abertura completa da pista. Confirme a reserva com antecedência.' },
-    { question: 'O Eventbrite é o bilhete real para entrar?', answer: 'A página Eventbrite funciona como informação ou pedido de reserva. Confirme o acesso pelo Xceed ou WhatsApp antes de chegar.' },
+    { question: 'Preciso de confirmar a entrada antes de chegar?', answer: 'Sim. Compre o bilhete oficial na Xceed ou confirme a lista de convidados e mesa VIP pelo WhatsApp +39 351 912 7047 antes de sair.' },
     { question: 'Onde compro os bilhetes oficiais?', answer: 'Use o link Xceed ou fale com a Nightlife Milan no WhatsApp para bilhetes, guest list e mesas VIP.' },
     { question: 'Como evitar fila no Just Me?', answer: 'Chegue cedo e confirme bilhete, guest list ou mesa. Uma reserva validada reduz dúvidas quando o clube começa a encher.' },
     { question: 'Qual é a melhor hora para chegar?', answer: 'Chegue às 19:30 para o aperitivo ou perto das 22:00 para o clubbing. Grupos com mesa devem alinhar o horário no WhatsApp.' },

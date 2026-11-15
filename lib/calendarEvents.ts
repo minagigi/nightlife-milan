@@ -1,5 +1,4 @@
 import { mockEvents, mockVenues } from './data';
-import { fetchEventbriteEvents } from './eventbriteSync';
 import { weeklyEvents, WeeklyEvent } from './eventsConfig';
 import { MusicGenre, type Event, type Venue } from './types';
 import { physicalEventKey, eventNameCore } from './eventIdentity';
@@ -178,17 +177,7 @@ function expandWeeklyEvents(): { event: Event; venue: Venue }[] {
  * quindi qui il catch è esplicito e degrada ai soli eventi statici.
  */
 export async function getAllCalendarEvents(): Promise<{ event: Event; venue: Venue }[]> {
-  let eventbriteEvents: Event[] = [];
-  try {
-    eventbriteEvents = await fetchEventbriteEvents();
-  } catch {
-    // degrado silenzioso: solo eventi statici
-  }
-
-  const allEvents = [
-    ...mockEvents,
-    ...eventbriteEvents.filter((eb) => !mockEvents.some((m) => m.id === eb.id)),
-  ];
+  const allEvents = [...mockEvents];
 
   const concreteItems = allEvents
     .map((event) => ({ event, venue: mockVenues.find((v) => v.id === event.venueId) }))

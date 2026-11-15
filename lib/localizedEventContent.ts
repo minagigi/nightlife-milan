@@ -141,7 +141,7 @@ export function getLocalizedEventSeed(slug: string, locale: string): Event | nul
   const venueId = profile.venue === 'Just Me Milano' ? 'v-justme' : profile.venue === 'Aria Club Milano' ? 'v-aria' : 'v-pineta';
 
   return {
-    id: profile.eventbriteIds?.en ? `eventbrite-${profile.eventbriteIds.en}` : `editorial-${profile.baseId}`,
+    id: `editorial-${profile.baseId}`,
     venueId,
     genre: genres.length > 0 ? genres : [MusicGenre.COMMERCIAL],
     dateISO: `${profile.dateISO}T${profile.start}:00+02:00`,

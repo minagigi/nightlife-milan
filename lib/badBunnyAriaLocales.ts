@@ -38,7 +38,7 @@ export function getBadBunnyAriaLocalizedContent(locale: LocaleCode): LocalizedEv
     metaDescription: clamp(`${EXACT_FACTS}. ${copy.independentNotice}`, 158),
     seoSummary: clamp(`${copy.eventName}. 18.07.2026 · Aria Club Milano · 18+. WhatsApp ${BAD_BUNNY_ARIA_PHONE}.`, 140),
     answerFirst: `${EXACT_FACTS}. ${copy.independentNotice}`,
-    bookingIntro: `${confirmation.notTicket} ${confirmation.purchase} ${confirmation.afterPurchase}`,
+    bookingIntro: `${confirmation.purchase} ${confirmation.afterPurchase}`,
     venueDescription: `${BAD_BUNNY_ARIA_ADDRESS}. ${base.sections[2].body}`,
     leadPosterAfterBooking: true,
     programmeBeforeSections: true,

@@ -81,7 +81,7 @@ const EN_FAQS: LocalizedEventFaq[] = [
   ['How much is the aperitivo offer?', 'The published Aperitif + 1 Drink offer is EUR 15.'],
   ['How much is club entry?', 'The published Club + 1 Drink offer is EUR 15.'],
   ['How do I buy the real ticket?', `Buy only through the official Nightlife Milan Xceed link: ${MONDAY_NIGHT_AFFILIATE_URL}.`],
-  ['Is Eventbrite registration an admission ticket?', 'No. Eventbrite registration is an information request and does not provide admission.'],
+  ['How is guest entry confirmed at the door?', 'Present your official Xceed ticket QR or confirmed table booking; reach our concierge on WhatsApp if your group plans change.'],
   ['What should I do after buying on Xceed?', `Send the Xceed purchase confirmation on WhatsApp to ${MONDAY_NIGHT_PHONE}, with your name and group size.`],
   ['Can I book a dance-floor table?', 'Yes. The published Dance Floor Table price is EUR 320, subject to current availability.'],
   ['How much is a VIP Area Table?', 'The published VIP Area Table price is EUR 640.'],
@@ -109,7 +109,7 @@ const IT_FAQS: LocalizedEventFaq[] = [
   ['Quanto costa la formula aperitivo?', 'La formula pubblicata Aperitivo + 1 drink costa 15 EUR.'],
   ['Quanto costa l’ingresso club?', 'La formula pubblicata Club + 1 drink costa 15 EUR.'],
   ['Come compro il vero biglietto?', `Acquista solo dal link Xceed ufficiale Nightlife Milan: ${MONDAY_NIGHT_AFFILIATE_URL}.`],
-  ['La registrazione Eventbrite vale come ingresso?', 'No. La registrazione Eventbrite è una richiesta di informazioni e non consente l’ingresso.'],
+  ['Come viene confermato l’ingresso alla porta?', 'Mostra il QR del biglietto ufficiale Xceed o la conferma del tavolo VIP; scrivi su WhatsApp per aggiornamenti sul gruppo.'],
   ['Cosa devo fare dopo l’acquisto su Xceed?', `Invia la conferma di acquisto Xceed su WhatsApp al ${MONDAY_NIGHT_PHONE}, indicando nome e numero di persone.`],
   ['Posso prenotare un tavolo dance floor?', 'Sì. Il prezzo pubblicato del tavolo dance floor è 320 EUR, salvo disponibilità.'],
   ['Quanto costa un tavolo area VIP?', 'Il prezzo pubblicato del tavolo area VIP è 640 EUR.'],
@@ -151,8 +151,8 @@ export function getMondayNightLocalizedContent(locale: LocaleCode): LocalizedEve
       ? 'Monday Night è la serata del lunedì al Just Me Milano, nel Parco Sempione: aperitivo buffet e cocktail premium dalle 19:30, poi musica house, hip-hop, hit, EDM e reggaeton fino alle 05:00.'
       : 'Monday Night is Just Me Milano’s Monday event in Parco Sempione: buffet aperitivo and premium cocktails from 19:30, followed by house, hip-hop, hits, EDM and reggaeton until 05:00.',
     bookingIntro: isIt
-      ? `Acquista biglietti o tavoli solo su Xceed. La registrazione Eventbrite non è un biglietto d’ingresso. Dopo l’acquisto invia la conferma Xceed su WhatsApp al ${MONDAY_NIGHT_PHONE}.`
-      : `Buy tickets or tables only on Xceed. Eventbrite registration is not an admission ticket. After purchase, send the Xceed confirmation on WhatsApp to ${MONDAY_NIGHT_PHONE}.`,
+      ? `Acquista biglietti o tavoli solo su Xceed. Dopo l’acquisto invia la conferma Xceed su WhatsApp al ${MONDAY_NIGHT_PHONE}.`
+      : `Buy tickets or tables only on Xceed. After purchase, send the Xceed confirmation on WhatsApp to ${MONDAY_NIGHT_PHONE}.`,
     venueDescription: isIt
       ? 'Il Just Me Milano si trova nel Parco Sempione accanto alla Torre Branca, in Viale Luigi Camoens 2. Cadorna, Cairoli e Lanza sono le fermate metro più pratiche.'
       : 'Just Me Milano is in Parco Sempione beside Torre Branca, at Viale Luigi Camoens 2. Cadorna, Cairoli and Lanza are the most practical nearby metro stations.',

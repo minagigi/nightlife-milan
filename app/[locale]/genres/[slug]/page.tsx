@@ -13,7 +13,7 @@ import { Music, ArrowLeft, Calendar, MessageCircle } from 'lucide-react';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { generateEventListSchema, jsonLdString } from '@/lib/seo';
 import { getAllCalendarEvents } from '@/lib/calendarEvents';
-import { getEventbriteDiscoveryItems, slimDiscoveryItemsForClient } from '@/lib/eventbriteDiscovery';
+import { getEventDiscoveryItems, slimDiscoveryItemsForClient } from '@/lib/eventDiscovery';
 import { VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
@@ -395,7 +395,7 @@ export default async function GenrePage({ params }: Props) {
   if (!genre) return notFound();
 
   const gLoc = getGenreLocalized35(canonicalGenreSlug, loc);
-  const items = getEventbriteDiscoveryItems(await getAllCalendarEvents(), loc).filter(
+  const items = getEventDiscoveryItems(await getAllCalendarEvents(), loc).filter(
     ({ event }) => event.genre.includes(genre.id)
   );
 

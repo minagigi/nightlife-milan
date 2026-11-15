@@ -61,7 +61,8 @@ test('the English canonical content is complete, native and within SEO limits', 
   assert.match(completeText, /Mood:/i);
   assert.match(completeText, /Music after the final/i);
   assert.match(worldCupFinalEn.answerFirst || '', /Spain vs Argentina/);
-  assert.match(worldCupFinalEn.bookingIntro || '', /Eventbrite registration is not an admission ticket/);
+  assert.doesNotMatch(worldCupFinalEn.bookingIntro || '', /Eventbrite/i);
+  assert.match(worldCupFinalEn.bookingIntro || '', /Xceed affiliate link/i);
   assert.equal(worldCupFinalEn.leadPosterAfterBooking, true);
   assert.equal(worldCupFinalEn.programmeBeforeSections, true);
   assert.doesNotMatch(completeText, /6:00 PM/i);
@@ -108,28 +109,13 @@ test('the five English search-intent satellites are unique and curated-only', ()
   }
 });
 
-test('the English publication route is protected and exposes the validated five-listing plan', async () => {
-  const previousSecret = process.env.CRON_SECRET;
-  process.env.CRON_SECRET = 'world-cup-en-test-secret';
-  try {
-    const unauthorized = await getWorldCupEnglishPublishPlan(new Request('http://localhost/api/events/publish-world-cup-en'));
-    assert.equal(unauthorized.status, 401);
-
-    const authorized = await getWorldCupEnglishPublishPlan(new Request('http://localhost/api/events/publish-world-cup-en', {
-      headers: { authorization: 'Bearer world-cup-en-test-secret' },
-    }));
-    assert.equal(authorized.status, 200);
-    const body = await authorized.json();
-    assert.equal(body.ok, true);
-    assert.equal(body.language, 'en');
-    assert.equal(body.count, 5);
-    assert.equal(body.bodyImageCount, 5);
-    assert.equal(body.canonicalSiteUrl, WORLD_CUP_FINAL_EN_URL);
-    assert.equal(new Set(body.listings.map((listing: { marker: string }) => listing.marker)).size, 5);
-  } finally {
-    if (previousSecret === undefined) delete process.env.CRON_SECRET;
-    else process.env.CRON_SECRET = previousSecret;
-  }
+test('the English publication route returns HTTP 410 after Eventbrite disconnection', async () => {
+  const response = await getWorldCupEnglishPublishPlan();
+  assert.equal(response.status, 410);
+  const body = await response.json();
+  assert.equal(body.ok, false);
+  assert.equal(body.disconnected, true);
+  assert.equal(body.code, 'EVENTBRITE_DISCONNECTED');
 });
 
 test('English poster paths, dimensions and literal image metadata match the localized assets', async () => {
@@ -176,10 +162,7 @@ test('the website keeps 5:4 media uncropped and localizes the English booking bl
   assert.match(gallerySource, /image\.aspect === 'five-four'/);
   assert.match(gallerySource, /'aspect-\[5\/4\]'/);
   assert.match(gallerySource, /className="object-contain/);
-  assert.match(publisherSource, /duplicate\?\.status === 'draft'/);
-  assert.match(publisherSource, /deleteStaleDraft\(token, duplicate\.id\)/);
-  assert.match(publisherSource, /method: 'DELETE'/);
-  assert.match(publisherSource, /body\.refreshExisting \? coverMedia : undefined/);
-  assert.match(publisherSource, /const needsMedia = body\.refreshExisting \|\| selected\.some/);
-  assert.match(publisherSource, /if \(needsMedia\)/);
+  assert.match(publisherSource, /eventbriteGoneResponse\('\/api\/events\/publish-world-cup-en'\)/);
+  assert.match(publisherSource, /export const GET = gone;/);
+  assert.match(publisherSource, /export const POST = gone;/);
 });

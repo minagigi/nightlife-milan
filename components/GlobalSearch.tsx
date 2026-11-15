@@ -1066,9 +1066,9 @@ const CAPODANNO_FLAGSHIP_EVENTS_FALLBACK = [
   },
 ] as const;
 
-const searchableEventbriteEvents = [
+const searchableFeaturedEvents = [
   {
-    id: 'eb-1994392210790',
+    id: 'editorial-nlm-gue-just-me-2026-07-25',
     dateISO: '2026-11-25T19:30:00+02:00',
     venueName: 'Just Me Milano · Torre Branca',
     image: '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp',
@@ -1088,7 +1088,7 @@ const searchableEventbriteEvents = [
     },
   },
   {
-    id: 'eb-1994228700727',
+    id: 'editorial-nlm-world-cup-final-2026',
     dateISO: '2026-11-19T19:30:00+02:00',
     venueName: 'Just Me Milano · Torre Branca',
     image: '/images/venues/just-me-milano/just-me-milano-lounge-01.webp',
@@ -1443,9 +1443,9 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
       .sort((a, b) => (a.rank !== b.rank && Math.abs(b.score - a.score) < 25 ? a.rank - b.rank : b.score - a.score))
       .slice(0, activeTab === 'capodanno' ? 24 : 6);
 
-    // 3. Upcoming Calendar Events (Master Eventbrite + Xceed Dated Inventory)
+    // 3. Upcoming Calendar Events (Featured Masters + Xceed Dated Inventory)
     const todayKey = romeDayKey(new Date());
-    const ebItems = searchableEventbriteEvents
+    const featuredItems = searchableFeaturedEvents
       .filter((e) => romeDayKey(e.dateISO) >= todayKey)
       .map((e) => {
         const title = e.localizedContent.title[typedLocale] || e.localizedContent.title.en;
@@ -1523,7 +1523,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
       score: voyaChristmasScore,
     };
 
-    const scoredEvents = [...(romeDayKey('2026-12-25') >= todayKey ? [voyaChristmasItem] : []), ...ebItems, ...xceedItems]
+    const scoredEvents = [...(romeDayKey('2026-12-25') >= todayKey ? [voyaChristmasItem] : []), ...featuredItems, ...xceedItems]
       .filter((item) => item.score > 0)
       .sort((a, b) => (b.score !== a.score ? b.score - a.score : Date.parse(a.dateISO) - Date.parse(b.dateISO)))
       .slice(0, activeTab === 'events' ? 24 : 6);

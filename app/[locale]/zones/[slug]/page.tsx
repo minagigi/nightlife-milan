@@ -13,7 +13,7 @@ import DiscoveryGrid from '@/components/DiscoveryGrid';
 import { MapPin, Calendar, GlassWater, Train, Car, Sparkles, MessageCircle } from 'lucide-react';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getAllCalendarEvents } from '@/lib/calendarEvents';
-import { getEventbriteDiscoveryItems, slimDiscoveryItemsForClient } from '@/lib/eventbriteDiscovery';
+import { getEventDiscoveryItems, slimDiscoveryItemsForClient } from '@/lib/eventDiscovery';
 import { VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
@@ -260,7 +260,7 @@ export default async function ZonePage({ params }: Props) {
   const displayedVenues = zoneVenues.length > 0 ? zoneVenues : allVenues.slice(0, 6);
 
   const venueIds = new Set(displayedVenues.map((v) => v.id));
-  const items = getEventbriteDiscoveryItems(await getAllCalendarEvents(), loc).filter(
+  const items = getEventDiscoveryItems(await getAllCalendarEvents(), loc).filter(
     ({ event }) => venueIds.has(event.venueId)
   );
 

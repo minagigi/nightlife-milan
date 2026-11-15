@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { Metadata } from 'next';
 import Link from '@/components/LocalizedLink';
 import EventCard from '@/components/EventCard';
-import { fetchEventbriteEvents } from '@/lib/eventbriteSync';
 import { getVenueById, mockEvents } from '@/lib/data';
 import { romeDayKey, romeDayKeyOffset, dedupeEventsByIdentity } from '@/lib/calendarEvents';
 import { hreflangAlternates, canonicalPageUrl, localePrefix, getLocaleDef, DEFAULT_LOCALE } from '@/lib/i18n/locales';
@@ -12,11 +11,6 @@ import { tr } from '@/lib/i18n/t';
 import type { Event, Venue } from '@/lib/types';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 
-// ISR invece di force-dynamic: la lista mostra solo la serata di ieri, ma il
-// fetch Eventbrite (anche limitato agli ultimi giorni) resta costoso →
-// force-dynamic lo rifaceva a OGNI richiesta e andava in timeout (lista vuota).
-// Con revalidate la pagina è cacheata e rigenerata ~ogni 30min: il confine
-// ieri/oggi si aggiorna con un ritardo trascurabile per un archivio.
 export const revalidate = 1800;
 export const maxDuration = 60;
 
@@ -59,21 +53,9 @@ export default async function PastEventsPage({ params }: Props) {
   const todayKey = romeDayKeyOffset(0);
   const yesterdayKey = romeDayKeyOffset(-1);
 
-  let live: Event[] = [];
-  try {
-    // includePast=true + bound agli ultimi 3 giorni: la lista mostra solo la
-    // serata di ieri, quindi non serve scaricare tutta la storia (che cresce e
-    // manda in timeout). Le pagine dei singoli eventi più vecchi restano
-    // raggiungibili via la route evento (fallback include-past) e la sitemap.
-    live = await fetchEventbriteEvents(true, 3);
-  } catch {
-    live = [];
-  }
+  const all: Event[] = [...mockEvents];
 
-  // Unione con i mockEvents (eventi one-off statici) senza duplicare.
-  const all: Event[] = [...live, ...mockEvents.filter((m) => !live.some((l) => l.id === m.id))];
-
-  // La sezione "Eventi passati" mostra SOLO la serata di ieri (da ieri sera in poi):
+  // La sezione "Eventi passati" mostra solo la serata di ieri (da ieri sera in poi):
   // >= ieri e < oggi nel fuso di Roma. Gli eventi PRECEDENTI a ieri sera NON
   // compaiono qui — ma le loro pagine restano online e indicizzate (sitemap +
   // route evento con fallback su include-past): i link esistono, fuori dalla lista.

@@ -70,7 +70,7 @@ export const worldCupFinalEn: LocalizedEventContent = {
   metaDescription: 'Watch Spain vs Argentina on the big screen at Just Me Milan on July 19 from 7:30 PM. Book via WhatsApp +39 351 912 7047 and confirm your place before arrival.',
   seoSummary: 'Spain vs Argentina on the big screen at Just Me Milan, July 19 from 7:30 PM. WhatsApp bookings: +39 351 912 7047.',
   answerFirst: 'On Sunday, July 19, 2026, Just Me Milan shows Spain vs Argentina, the 2026 World Cup final, live on the big screen in the garden beneath Torre Branca. Doors open at 7:30 PM, kick-off is at 9 PM, admission is 21+, and the dress code is elegant with long trousers required for men.',
-  bookingIntro: 'Buy your ticket or table only through the Nightlife Milan Xceed affiliate link. Eventbrite registration is not an admission ticket and does not guarantee entry. After payment, send your Xceed confirmation on WhatsApp to +39 351 912 7047 with your name, group size, selected option and arrival time.',
+  bookingIntro: 'Buy your ticket or table only through the Nightlife Milan Xceed affiliate link. After payment, send your Xceed confirmation on WhatsApp to +39 351 912 7047 with your name, group size, selected option and arrival time.',
   venueDescription: 'Just Me Milan is in Parco Sempione at the foot of Torre Branca. The garden hosts arrivals, the aperitif, the big-screen broadcast and tables. After the final, Uptown Nights continues inside the venue.',
   leadPosterAfterBooking: true,
   programmeBeforeSections: true,
@@ -81,7 +81,7 @@ export const worldCupFinalEn: LocalizedEventContent = {
     },
     {
       title: 'Target audience: guests aged 21 and over',
-      body: 'This event is for adults aged 21 and over. Bring valid photo ID. An Eventbrite registration, Xceed ticket or table booking does not replace the age check or the venue door policy.',
+      body: 'This event is for adults aged 21 and over. Bring valid photo ID. An Xceed ticket or table booking does not replace the age check or the venue door policy.',
     },
     {
       title: 'Mood: big-screen football, aperitif and tables',
@@ -130,7 +130,7 @@ export const worldCupFinalEn: LocalizedEventContent = {
     { question: 'How much are VIP tables at Just Me Milan?', answer: 'Xceed lists Dance Floor at EUR 320, VIP Area at EUR 640, Super VIP at EUR 1,280 or EUR 3,200, and the DJ Table at EUR 5,000.' },
     { question: 'Does a table guarantee a view of the big screen?', answer: 'The view depends on the assigned position. Before buying, ask for confirmation on WhatsApp at +39 351 912 7047.' },
     { question: 'Where do I buy tickets for Spain vs Argentina at Just Me?', answer: 'Use only the Nightlife Milan Xceed affiliate link on this page. Check the date, selected option and group size before payment.' },
-    { question: 'Is an Eventbrite registration an admission ticket?', answer: 'No. Eventbrite records your registration but does not grant admission. Buy a ticket or table through Xceed.' },
+    { question: 'Where can I get a valid admission ticket?', answer: 'Valid admission passes and VIP tables must be purchased through the official Xceed link or confirmed with Nightlife Milan on WhatsApp at +39 351 912 7047.' },
     { question: 'Why must I send my Xceed confirmation on WhatsApp?', answer: 'It lets Nightlife Milan check the date, selected option and payment. Send it to +39 351 912 7047 with your name and group size.' },
     { question: 'Where is Just Me Milan?', answer: 'Just Me is at Viale Luigi Camoens 2, 20121 Milan, in Parco Sempione beside Torre Branca.' },
     { question: 'How do I get to Just Me for the final?', answer: 'The address is Viale Luigi Camoens 2, 20121 Milan, inside Parco Sempione. Check current routes and transport before leaving.' },

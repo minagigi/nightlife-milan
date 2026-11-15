@@ -9,28 +9,13 @@ import {
   type WorldCupExistingEvent,
 } from '../lib/worldCupEventbriteRollout';
 
-test('multilingual World Cup publisher plan is protected and covers 33 x 5 listings', async () => {
-  const previousSecret = process.env.WORLD_CUP_ROLLOUT_SECRET;
-  process.env.WORLD_CUP_ROLLOUT_SECRET = 'world-cup-locale-test-secret';
-  try {
-    const unauthorized = await getWorldCupLocalePlan(new Request('http://localhost/api/events/publish-world-cup-locales'));
-    assert.equal(unauthorized.status, 401);
-
-    const authorized = await getWorldCupLocalePlan(new Request('http://localhost/api/events/publish-world-cup-locales', {
-      headers: { authorization: 'Bearer world-cup-locale-test-secret' },
-    }));
-    assert.equal(authorized.status, 200);
-    const body = await authorized.json();
-    assert.equal(body.ok, true);
-    assert.equal(body.localeCount, 33);
-    assert.equal(body.listingCount, 165);
-    assert.equal(body.plans.length, 33);
-    assert.ok(body.plans.every((plan: { count: number; markers: string[] }) => plan.count === 5 && plan.markers.length === 5));
-    assert.equal(new Set(body.plans.flatMap((plan: { markers: string[] }) => plan.markers)).size, 165);
-  } finally {
-    if (previousSecret === undefined) delete process.env.WORLD_CUP_ROLLOUT_SECRET;
-    else process.env.WORLD_CUP_ROLLOUT_SECRET = previousSecret;
-  }
+test('multilingual World Cup publisher route returns HTTP 410 after Eventbrite disconnection', async () => {
+  const response = await getWorldCupLocalePlan();
+  assert.equal(response.status, 410);
+  const body = await response.json();
+  assert.equal(body.ok, false);
+  assert.equal(body.disconnected, true);
+  assert.equal(body.code, 'EVENTBRITE_DISCONNECTED');
 });
 
 test('dedupe uses only the exact curated marker even when translated titles collide', () => {
@@ -79,48 +64,16 @@ test('Chinese variants use publish-safe bilingual titles while retaining Chinese
   });
 });
 
-test('multilingual World Cup publisher keeps CDN, lock, retry and live-readback hard gates', async () => {
+test('multilingual World Cup publisher route is disconnected fail-closed (HTTP 410)', async () => {
   const source = await readFile(
     path.join(process.cwd(), 'app', 'api', 'events', 'publish-world-cup-locales', 'route.ts'),
     'utf8',
   );
-  assert.match(source, /uploadMedia/);
-  assert.match(source, /programmeMedia/);
-  assert.match(source, /targetMedia/);
-  assert.match(source, /dressMedia/);
-  assert.match(source, /afterpartyMedia/);
-  assert.match(source, /validateWorldCupEventbriteLocalePayload\(payload, true\)/);
-  assert.match(source, /exactWorldCupMarkerMatches\(payload\.marker, existing\)/);
-  assert.doesNotMatch(source, /event\.name\?\.text === payload\.title && event\.start\?\.utc === START_UTC/);
-  assert.match(source, /deleteStaleDraft/);
-  assert.match(source, /response\.headers\.get\('retry-after'\)/);
-  assert.match(source, /acquireRolloutLease/);
-  assert.match(source, /BlobPreconditionFailedError/);
-  assert.match(source, /fromVariant/);
-  assert.match(source, /REQUEST_DEADLINE_MS/);
-  assert.match(source, /validateSavedDescription: \(savedHtml\) => descriptionGate\(payload, savedHtml\)/);
-  assert.match(source, /wrong body image sequence persisted/);
-  assert.match(source, /localized body image labels were not persisted/);
-  assert.match(source, /refreshLiveEvent/);
-  assert.match(source, /ensureLiveSettings/);
-  assert.match(source, /inspectLiveEvent/);
-  assert.match(source, /confirmationMessageNative/);
-  assert.match(source, /instructionsNative/);
-  assert.match(source, /ticketExact/);
-  assert.match(source, /doorTimeExact/);
-  assert.match(source, /if \(index < payloads\.length - 1\) await sleep\(3_000\)/);
-});
-
-test('rate-limit probe is protected, single-shot and exposes no Eventbrite body', async () => {
-  const route = await readFile(
-    path.join(process.cwd(), 'app', 'api', 'events', 'publish-world-cup-locales', 'route.ts'),
-    'utf8',
-  );
   const wrapper = await readFile(path.join(process.cwd(), 'scripts', 'run-world-cup-rollout.ps1'), 'utf8');
-  assert.match(route, /if \(!isAuthorized\(request\)\)/);
-  assert.match(route, /searchParams\.get\('rateProbe'\) === '1'/);
-  assert.match(route, /'rate-limit probe',[\s\S]*?1,/);
-  assert.match(route, /eventbriteStatus: response\.status/);
+  assert.match(source, /eventbriteGoneResponse\('\/api\/events\/publish-world-cup-locales'\)/);
+  assert.match(source, /export const GET = gone;/);
+  assert.match(source, /export const POST = gone;/);
+  assert.match(source, /export const DELETE = gone;/);
   assert.match(wrapper, /Wait-ForEventbriteRateLimit/);
   assert.match(wrapper, /Start-Sleep -Seconds 55/);
 });

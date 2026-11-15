@@ -2,7 +2,6 @@ import type { MetadataRoute } from 'next';
 import { mockVenues, mockGuides, mockEvents, mockZones } from '@/lib/data';
 import { weeklyEvents } from '@/lib/eventsConfig';
 import { dedupeEventsByIdentity } from '@/lib/calendarEvents';
-import { fetchEventbriteEvents } from '@/lib/eventbriteSync';
 import { indexedLocaleCodes, localePrefix, type LocaleCode } from '@/lib/i18n/locales';
 import { getLocalizedText } from '@/lib/seo';
 import type { Event } from '@/lib/types';
@@ -88,29 +87,8 @@ function getBaseUrl(): string {
   return (process.env.APP_URL || 'https://nightlifemilan.com').replace(/\/+$/, '');
 }
 
-let ebSitemapCache: { at: number; events: Event[] } | null = null;
-const EB_SITEMAP_CACHE_TTL_MS = 60 * 1000;
-
-export async function fetchLiveEbEventsForSitemap(timeoutMs = 4000): Promise<Event[]> {
-  if (ebSitemapCache && Date.now() - ebSitemapCache.at < EB_SITEMAP_CACHE_TTL_MS) {
-    return ebSitemapCache.events;
-  }
-  let timer: ReturnType<typeof setTimeout> | undefined;
-  try {
-    const events = await Promise.race<Event[]>([
-      fetchEventbriteEvents(),
-      new Promise<Event[]>((resolve) => {
-        timer = setTimeout(() => resolve([]), timeoutMs);
-      }),
-    ]);
-    const safeEvents = Array.isArray(events) ? events : [];
-    ebSitemapCache = { at: Date.now(), events: safeEvents };
-    return safeEvents;
-  } catch {
-    return [];
-  } finally {
-    if (timer) clearTimeout(timer);
-  }
+export async function fetchLiveEbEventsForSitemap(_timeoutMs = 4000): Promise<Event[]> {
+  return [];
 }
 
 function entryLastModMs(entry: MetadataRoute.Sitemap[number]): number {

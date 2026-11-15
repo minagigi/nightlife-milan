@@ -5,7 +5,7 @@ import Link from '@/components/LocalizedLink';
 import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset, romeUpcomingSundayKey } from '@/lib/calendarEvents';
 import { generateEventListSchema, jsonLdString } from '@/lib/seo';
 import DiscoveryGrid from '@/components/DiscoveryGrid';
-import { getEventbriteDiscoveryItems, slimDiscoveryItemsForClient } from '@/lib/eventbriteDiscovery';
+import { getEventDiscoveryItems, slimDiscoveryItemsForClient } from '@/lib/eventDiscovery';
 import { WeeklyNightlifeNavigator, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 
@@ -157,7 +157,7 @@ export default async function ThisWeekPage({ params }: Props) {
   const isIt = locale === 'it';
   const lp = localePrefix(locale);
 
-  const allItems = getEventbriteDiscoveryItems(await getAllCalendarEvents(), locale);
+  const allItems = getEventDiscoveryItems(await getAllCalendarEvents(), locale);
   const todayKey = romeDayKeyOffset(0);
   const sundayKey = romeUpcomingSundayKey();
 

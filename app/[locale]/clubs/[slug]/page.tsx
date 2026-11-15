@@ -17,7 +17,7 @@ import { getVenueBySlug, mockVenues, mockZones, mockGuides } from '@/lib/data';
 import { VenueCategory } from '@/lib/types';
 import { generateClubSchema, generateEventListSchema, getLocalizedText, jsonLdString } from '@/lib/seo';
 import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
-import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
+import { getEventDiscoveryItems } from '@/lib/eventDiscovery';
 import { VipQuoteCalculator, EntryFormulaMatrix, SanSiroMatchAfterpartyFinder } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import VenueEventsAutoCarousel from '@/components/VenueEventsAutoCarousel';
@@ -1210,7 +1210,7 @@ export default async function ClubPage({ params }: Props) {
   const servicesTags = venue.tags || [venue.category];
   
   const lp = localePrefix(locale);
-  const venueEvents = getEventbriteDiscoveryItems(await getAllCalendarEvents(), locale)
+  const venueEvents = getEventDiscoveryItems(await getAllCalendarEvents(), locale)
     .filter((item) => item.event.venueId === venue.id && !item.event.id.startsWith('weekly-'))
     .map((item) => item.event);
   const futureVenueEvents = venueEvents

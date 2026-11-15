@@ -23,8 +23,7 @@ export type AnalyticsEventName =
   | 'pageview'
   | 'whatsapp_click'
   | 'booking_form_submit'
-  | 'xceed_click'
-  | 'eventbrite_click';
+  | 'xceed_click';
 
 export function trackEvent(name: AnalyticsEventName, params: Record<string, string | number | undefined> = {}) {
   if (typeof window === 'undefined') return;

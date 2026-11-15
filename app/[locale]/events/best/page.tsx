@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { Star, Clock, ExternalLink } from 'lucide-react';
 import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
-import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
+import { getEventDiscoveryItems } from '@/lib/eventDiscovery';
 import { PrioritySixShowcase, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
@@ -222,7 +222,7 @@ export default async function EventsBestPage({ params }: Props) {
 
   const venueIds = BEST_VENUES.map((v) => v.id);
 
-  const allItems = getEventbriteDiscoveryItems(await getAllCalendarEvents(), locale);
+  const allItems = getEventDiscoveryItems(await getAllCalendarEvents(), locale);
   const upcomingByVenue: Record<string, typeof allItems[number]['event'][]> = {};
   allItems
     .map(({ event }) => event)

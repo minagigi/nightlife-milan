@@ -71,31 +71,31 @@ export const WORLD_CUP_EVENTBRITE_IT_LIVE_LISTINGS = [
   {
     key: 'finale-coppa-mondo-maxischermo-milano',
     eventId: '1994228700727',
-    url: 'https://www.eventbrite.it/e/biglietti-finale-mondiale-su-maxischermo-milano-just-me-1994228700727',
+    url: 'https://nightlifemilan.com/it/events/finale-coppa-del-mondo-maxischermo-milano-just-me-19-luglio-2026',
     status: 'live',
   },
   {
     key: 'dove-vedere-spagna-argentina-milano',
     eventId: '1994228704739',
-    url: 'https://www.eventbrite.it/e/biglietti-dove-vedere-spagna-argentina-a-milano-just-me-1994228704739',
+    url: 'https://nightlifemilan.com/it/events/finale-coppa-del-mondo-maxischermo-milano-just-me-19-luglio-2026',
     status: 'live',
   },
   {
     key: 'finale-mondiali-2026-milano',
     eventId: '1994228708751',
-    url: 'https://www.eventbrite.it/e/biglietti-finale-mondiali-2026-milano-just-me-19-luglio-1994228708751',
+    url: 'https://nightlifemilan.com/it/events/finale-coppa-del-mondo-maxischermo-milano-just-me-19-luglio-2026',
     status: 'live',
   },
   {
     key: 'partita-maxischermo-milano',
     eventId: '1994228714769',
-    url: 'https://www.eventbrite.it/e/biglietti-partita-su-maxischermo-milano-spagna-argentina-1994228714769',
+    url: 'https://nightlifemilan.com/it/events/finale-coppa-del-mondo-maxischermo-milano-just-me-19-luglio-2026',
     status: 'live',
   },
   {
     key: 'just-me-finale-mondiale',
     eventId: '1994228720787',
-    url: 'https://www.eventbrite.it/e/biglietti-just-me-milano-finale-mondiale-spagna-argentina-1994228720787',
+    url: 'https://nightlifemilan.com/it/events/finale-coppa-del-mondo-maxischermo-milano-just-me-19-luglio-2026',
     status: 'live',
   },
 ] as const satisfies readonly WorldCupEventbriteLiveListingIt[];

@@ -7,7 +7,7 @@ import { Calendar, Clock, MapPin } from 'lucide-react';
 import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset } from '@/lib/calendarEvents';
 import { generateEventListSchema, jsonLdString } from '@/lib/seo';
 import type { Event, Venue } from '@/lib/types';
-import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
+import { getEventDiscoveryItems } from '@/lib/eventDiscovery';
 import { WeeklyNightlifeNavigator, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 
@@ -163,7 +163,7 @@ export default async function TonightPage({ params }: Props) {
   const isIt = locale === 'it';
   const renderedAtMs = currentTimestamp();
 
-  const allItems = getEventbriteDiscoveryItems(await getAllCalendarEvents(), locale);
+  const allItems = getEventDiscoveryItems(await getAllCalendarEvents(), locale);
   const todayKey = romeDayKeyOffset(0);
   const tomorrowKey = romeDayKeyOffset(1);
 

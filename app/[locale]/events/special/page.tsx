@@ -10,7 +10,7 @@ import DiscoveryGrid from '@/components/DiscoveryGrid';
 import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { christmasVoyaPath } from '@/lib/christmas/voya35';
-import { getEventbriteDiscoveryItems, slimDiscoveryItemsForClient } from '@/lib/eventbriteDiscovery';
+import { getEventDiscoveryItems, slimDiscoveryItemsForClient } from '@/lib/eventDiscovery';
 import { PrioritySixShowcase, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import VerticalHubsAndEventsSection from '@/components/VerticalHubsAndEventsSection';
@@ -185,7 +185,7 @@ export default async function SpecialEventsPage({ params }: Props) {
   const isIt = locale === 'it';
   const lp = localePrefix(locale);
 
-  const allItems = getEventbriteDiscoveryItems(await getAllCalendarEvents(), locale);
+  const allItems = getEventDiscoveryItems(await getAllCalendarEvents(), locale);
   const items = allItems.filter(({ event: e }) => {
     if (!isUpcomingRome(e.dateISO)) return false;
     const isSpecialFlag = e.isSpecial === true;

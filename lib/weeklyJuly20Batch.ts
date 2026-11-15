@@ -101,7 +101,7 @@ function faqs(source: Source, locale: WeeklyLocale): WeeklyLocalizedPayload['faq
     { question: 'Is dinner included?', answer: 'A served dinner may be requested; it is not included unless the selected offer explicitly says so.' },
     { question: 'What offers are published?', answer: offersText },
     { question: 'How do I buy the actual ticket?', answer: `Use only the verified Nightlife Milan Xceed link: ${source.affiliateUrl}` },
-    { question: 'Is an Eventbrite registration an admission ticket?', answer: 'No. It is an information registration and does not grant entry.' },
+    { question: 'How do I confirm my entry and guest list?', answer: `Buy your official ticket on Xceed or confirm guest list and VIP tables on WhatsApp ${WEEKLY_JULY20_PHONE}.` },
     { question: 'What should I do after purchase?', answer: `Send the Xceed purchase confirmation to WhatsApp ${WEEKLY_JULY20_PHONE}, with your name and group size.` },
     { question: 'Can I book a table?', answer: `Yes. Choose a currently listed table option on Xceed or contact WhatsApp ${WEEKLY_JULY20_PHONE}.` },
     { question: 'Can I reserve VIP?', answer: 'Use the current Xceed offer list; VIP availability is confirmed only at purchase or by the booking team.' },
@@ -127,7 +127,7 @@ function faqs(source: Source, locale: WeeklyLocale): WeeklyLocalizedPayload['faq
     { question: 'La cena è inclusa?', answer: 'La cena servita può essere richiesta; non è inclusa salvo indicazione esplicita nella formula scelta.' },
     { question: 'Quali formule sono pubblicate?', answer: offersText },
     { question: 'Come compro il vero biglietto?', answer: `Usa solo il link Xceed Nightlife Milan verificato: ${source.affiliateUrl}` },
-    { question: 'La registrazione Eventbrite vale come ingresso?', answer: "No. È una registrazione informativa e non dà diritto all'ingresso." },
+    { question: 'Come confermo il mio ingresso o la lista?', answer: `Acquista il biglietto ufficiale su Xceed o conferma lista e tavoli VIP su WhatsApp ${WEEKLY_JULY20_PHONE}.` },
     { question: "Cosa faccio dopo l'acquisto?", answer: `Invia la conferma di acquisto Xceed su WhatsApp al ${WEEKLY_JULY20_PHONE}, con nome e numero di persone.` },
     { question: 'Posso prenotare un tavolo?', answer: `Sì. Scegli una formula tavolo attualmente pubblicata su Xceed o contatta WhatsApp ${WEEKLY_JULY20_PHONE}.` },
     { question: 'Posso prenotare il VIP?', answer: "Usa la lista offerte Xceed aggiornata; la disponibilità VIP è confermata solo all'acquisto o dal booking." },
@@ -153,18 +153,18 @@ function localized(source: Source, locale: WeeklyLocale): WeeklyLocalizedPayload
   if (summary.length > 140) throw new Error(`${source.eventKey}/${locale} summary exceeds Eventbrite limit`);
   const formats = textOfferList(source.offers);
   const contacts = isEn
-    ? [`Tickets: ${source.affiliateUrl}`, `VIP tables and bookings: WhatsApp ${WEEKLY_JULY20_PHONE}`, `After purchase, send the Xceed confirmation on WhatsApp.`, 'Eventbrite registration is not an admission ticket.']
-    : [`Biglietti: ${source.affiliateUrl}`, `Tavoli VIP e prenotazioni: WhatsApp ${WEEKLY_JULY20_PHONE}`, `Dopo l'acquisto invia la conferma Xceed su WhatsApp.`, "La registrazione Eventbrite non vale come biglietto d'ingresso."];
+    ? [`Tickets: ${source.affiliateUrl}`, `VIP tables and bookings: WhatsApp ${WEEKLY_JULY20_PHONE}`, `After purchase, send the Xceed confirmation on WhatsApp.`, 'Advance ticket or table confirmation is required for guaranteed entry.']
+    : [`Biglietti: ${source.affiliateUrl}`, `Tavoli VIP e prenotazioni: WhatsApp ${WEEKLY_JULY20_PHONE}`, `Dopo l'acquisto invia la conferma Xceed su WhatsApp.`, "È richiesta la conferma anticipata del biglietto o del tavolo."];
   const programme = isEn
     ? [{ start: '19:30', title: 'Buffet aperitif and premium cocktails' }, { start: 'After aperitif', title: `Club programme with ${source.genres.en}` }, { start: '05:00', title: 'Published event end' }]
     : [{ start: '19:30', title: 'Aperitivo buffet e cocktail premium' }, { start: 'Dopo l’aperitivo', title: `Programma club con ${source.genres.it}` }, { start: '05:00', title: 'Fine evento pubblicata' }];
   const target = isEn ? `For adults aged ${source.ageRestriction} who want the verified ${event} programme at ${venue}; group and table requests are handled through the official booking route.` : `Per adulti ${source.ageRestriction} interessati al programma verificato ${event} al ${venue}; richieste gruppi e tavoli passano dal booking ufficiale.`;
   const sections = isEn ? {
     target, dress: source.dressCode.en, mood: 'Aperitif followed by a club programme; the exact experience is determined by the selected official offer.', music: source.genres.en,
-    location: source.location.en, offers: formats, nonAdmission: 'Eventbrite registration is an information request only. It is not an admission ticket; purchase via the exact Xceed link and send confirmation on WhatsApp.',
+    location: source.location.en, offers: formats, nonAdmission: 'Purchase tickets or VIP tables via the official Xceed link and send your confirmation on WhatsApp before arrival.',
   } : {
     target, dress: source.dressCode.it, mood: 'Aperitivo seguito dal programma club; l’esperienza esatta dipende dalla formula ufficiale scelta.', music: source.genres.it,
-    location: source.location.it, offers: formats, nonAdmission: 'La registrazione Eventbrite è solo una richiesta informativa. Non è un biglietto: acquista dal link Xceed esatto e invia la conferma su WhatsApp.',
+    location: source.location.it, offers: formats, nonAdmission: 'Acquista biglietti o tavoli VIP tramite il link Xceed ufficiale e invia la conferma su WhatsApp prima dell’arrivo.',
   };
   const keywordPermutations = (isEn
     ? [`${event} tickets ${venue}`, `${event} Milan tickets`, `${venue} VIP table ${date}`, `${event} table booking Milan`, `${venue} nightlife ${date}`, `${event} aperitivo Milan`, `${event} club entry ${venue}`, `${venue} guest information`, `${event} ${source.genres.en} Milan`, `Milan nightlife ${event}`]
@@ -174,10 +174,10 @@ function localized(source: Source, locale: WeeklyLocale): WeeklyLocalizedPayload
     : `Organizza ${event} a Milano dal percorso di acquisto Xceed ufficiale, con età e dress code verificati e conferma su WhatsApp per il tuo gruppo.`;
   return {
     titles: titleSet, summary,
-    answerFirst: isEn ? `${event} takes place at ${venue} on ${date}, from 19:30 to 05:00 Milan time. Buy through the verified Xceed link; Eventbrite registration is not admission.` : `${event} si svolge al ${venue} ${date}, dalle 19:30 alle 05:00 ora di Milano. Acquista dal link Xceed verificato; la registrazione Eventbrite non è un ingresso.`,
+    answerFirst: isEn ? `${event} takes place at ${venue} on ${date}, from 19:30 to 05:00 Milan time. Buy through the verified Xceed link and confirm on WhatsApp.` : `${event} si svolge al ${venue} ${date}, dalle 19:30 alle 05:00 ora di Milano. Acquista dal link Xceed verificato e conferma su WhatsApp.`,
     contacts, programme, sections, faqs: faqs(source, locale), seoClosing, keywordPermutations,
-    ticket: isEn ? { name: `Information registration — ${event}`, description: `This Eventbrite registration is not admission. Buy only at ${source.affiliateUrl} and send purchase confirmation to WhatsApp ${WEEKLY_JULY20_PHONE}.` } : { name: `Registrazione informativa — ${event}`, description: `Questa registrazione Eventbrite non è un ingresso. Acquista solo su ${source.affiliateUrl} e invia la conferma su WhatsApp ${WEEKLY_JULY20_PHONE}.` },
-    confirmation: isEn ? { heading: `${event}: complete your ticket purchase`, details: `This Eventbrite registration is not an admission ticket. Complete purchase only here: ${source.affiliateUrl}. Then send the Xceed confirmation to WhatsApp ${WEEKLY_JULY20_PHONE}.` } : { heading: `${event}: completa l'acquisto del biglietto`, details: `Questa registrazione Eventbrite non è un biglietto d'ingresso. Completa l'acquisto solo qui: ${source.affiliateUrl}. Poi invia la conferma Xceed su WhatsApp ${WEEKLY_JULY20_PHONE}.` },
+    ticket: isEn ? { name: `Official booking — ${event}`, description: `Buy tickets at ${source.affiliateUrl} and send purchase confirmation to WhatsApp ${WEEKLY_JULY20_PHONE}.` } : { name: `Prenotazione ufficiale — ${event}`, description: `Acquista su ${source.affiliateUrl} e invia la conferma su WhatsApp ${WEEKLY_JULY20_PHONE}.` },
+    confirmation: isEn ? { heading: `${event}: complete your ticket purchase`, details: `Complete purchase only here: ${source.affiliateUrl}. Then send the Xceed confirmation to WhatsApp ${WEEKLY_JULY20_PHONE}.` } : { heading: `${event}: completa l'acquisto del biglietto`, details: `Completa l'acquisto solo qui: ${source.affiliateUrl}. Poi invia la conferma Xceed su WhatsApp ${WEEKLY_JULY20_PHONE}.` },
   };
 }
 

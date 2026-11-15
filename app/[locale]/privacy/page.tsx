@@ -77,8 +77,8 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
           <p className="text-zinc-300 font-light leading-relaxed">
             {tr(
               locale,
-              'When you register for or book an event managed by Nightlife Milan through Eventbrite, we may receive your name, email address, phone number if supplied, event and ticket details, registration status, check-in status, language of the event, and Eventbrite marketing preference. We do not import free-form answers, postal addresses, barcodes, birth dates, or other data that is not necessary for customer and booking management.',
-              'Quando ti registri o prenoti un evento gestito da Nightlife Milan tramite Eventbrite, possiamo ricevere nome, indirizzo email, numero di telefono se fornito, dati dell’evento e del titolo di accesso, stato della registrazione, check-in, lingua dell’evento e preferenza marketing registrata da Eventbrite. Non importiamo risposte libere, indirizzi postali, codici a barre, date di nascita o altri dati non necessari alla gestione del cliente e della prenotazione.',
+              'When you contact Nightlife Milan via WhatsApp or email, or request support for an event reservation or guest list booked through our official partners such as Xceed, we process only the contact details (such as your name, email address, or phone number) and booking details you voluntarily provide for guest list, VIP table, and customer assistance. We do not collect postal addresses, payment card details, barcodes, or birth dates on this site.',
+              'Quando contatti Nightlife Milan tramite WhatsApp o email, oppure richiedi assistenza per una prenotazione o lista evento tramite i nostri partner ufficiali come Xceed, trattiamo solo i dati di contatto (nome, indirizzo email o numero di telefono) e i dettagli della richiesta che fornisci volontariamente per la gestione di liste, tavoli VIP e supporto clienti. Non raccogliamo su questo sito indirizzi postali, dati di carte di pagamento, codici a barre o date di nascita.',
             )}
           </p>
         </section>

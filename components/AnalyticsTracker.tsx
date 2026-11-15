@@ -94,8 +94,6 @@ export default function AnalyticsTracker() {
         trackEvent('whatsapp_click', { source, page_path });
       } else if (href.includes('xceed.me')) {
         trackEvent('xceed_click', { source, page_path });
-      } else if (href.includes('eventbrite.')) {
-        trackEvent('eventbrite_click', { source, page_path });
       }
     }
     // capture: intercetta anche i link che aprono in nuova tab prima della navigazione

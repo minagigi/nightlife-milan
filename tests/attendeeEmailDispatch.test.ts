@@ -14,15 +14,9 @@ import type { AttendeeEmailEventInfo, DispatchCandidate, EligibilityContext } fr
 
 // --- validateOrderApiUrl ---
 
-test('validateOrderApiUrl accepts the order URL with and without a trailing slash', () => {
-  assert.equal(
-    validateOrderApiUrl('https://www.eventbriteapi.com/v3/orders/123456789/'),
-    'https://www.eventbriteapi.com/v3/orders/123456789/',
-  );
-  assert.equal(
-    validateOrderApiUrl('https://www.eventbriteapi.com/v3/orders/123456789'),
-    'https://www.eventbriteapi.com/v3/orders/123456789/',
-  );
+test('validateOrderApiUrl rejects Eventbrite order URLs after disconnection', () => {
+  assert.equal(validateOrderApiUrl('https://www.eventbriteapi.com/v3/orders/123456789/'), null);
+  assert.equal(validateOrderApiUrl('https://www.eventbriteapi.com/v3/orders/123456789'), null);
 });
 
 test('validateOrderApiUrl rejects http, other hosts, path traversal, non-numeric ids and extra suffixes', () => {

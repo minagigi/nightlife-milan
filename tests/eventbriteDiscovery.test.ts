@@ -43,8 +43,8 @@ test('site-first discovery includes mock and weekly inventory, keeps Bad Bunny o
   assert.equal(result.some(({ event }) => /bad-bunny/i.test(event.id)), false);
   assert.equal(VERIFIED_EVENTBRITE_MASTERS[0].priority, 1);
   assert.equal(VERIFIED_EVENTBRITE_MASTERS[1].priority, 2);
-  assert.ok(VERIFIED_EVENTBRITE_MASTERS.every((master) => master.publicUrls.length > 0));
-  assert.ok(VERIFIED_EVENTBRITE_MASTERS.every((master) => master.publicUrls.every((url) => url.startsWith('https://www.eventbrite.it/e/'))));
+  assert.ok(VERIFIED_EVENTBRITE_MASTERS.every((master) => !('publicUrls' in master)));
+  assert.ok(result.every(({ event }) => !JSON.stringify(event).includes('eventbrite.')));
   assert.ok(result.slice(0, 2).every(({ event }) => !event.image?.startsWith('https://nightlifemilan.com/')));
 });
 

@@ -180,7 +180,7 @@ export function getWeeklyJuly20LocalizedContent(profile: EventBatchProfile, loca
       // pilot, while every statement below remains sourced from this event's
       // own profile and its locale pack.
       answerFirst: base.seoSummary,
-      bookingIntro: `${confirmation.notTicket} ${confirmation.purchase} ${confirmation.afterPurchase}`,
+      bookingIntro: `${confirmation.purchase} ${confirmation.afterPurchase}`,
       venueDescription: base.sections[0]?.body,
       leadPosterAfterBooking: true,
       programmeBeforeSections: true,
@@ -216,8 +216,8 @@ export function getWeeklyJuly20LocalizedContent(profile: EventBatchProfile, loca
     seoSummary: copy.summary,
     answerFirst: copy.answerFirst,
     bookingIntro: isIt
-      ? `Biglietti e tavoli sono da acquistare solo dal link Xceed ufficiale. La registrazione Eventbrite non vale come ingresso. Dopo l'acquisto invia la conferma su WhatsApp al +39 351 912 7047.`
-      : `Tickets and tables must be bought only from the official Xceed link. Eventbrite registration is not admission. After purchase, send the confirmation on WhatsApp to +39 351 912 7047.`,
+      ? `Biglietti e tavoli sono da acquistare solo dal link Xceed ufficiale. Dopo l'acquisto invia la conferma su WhatsApp al +39 351 912 7047.`
+      : `Tickets and tables must be bought only from the official Xceed link. After purchase, send the confirmation on WhatsApp to +39 351 912 7047.`,
     venueDescription: copy.sections.location,
     leadPosterAfterBooking: true,
     programmeBeforeSections: true,

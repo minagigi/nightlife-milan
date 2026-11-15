@@ -48,7 +48,8 @@ test('World Cup final has one complete canonical website page in every enabled l
     assert.match(content.seoSummary, /\+39 351 912 7047/);
     assert.ok(content.answerFirst);
     assert.ok(content.bookingIntro);
-    assert.match(content.bookingIntro, /Eventbrite/i);
+    assert.doesNotMatch(content.bookingIntro, /Eventbrite/i);
+    assert.match(content.bookingIntro, /Xceed/i);
     assert.ok(content.bookingIntro.includes(WORLD_CUP_FINAL_PHONE));
     assert.ok(content.venueDescription);
     assert.equal(content.leadPosterAfterBooking, true);

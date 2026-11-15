@@ -58,7 +58,7 @@ export function getGueJustMeLocalizedContent(locale: LocaleCode) {
     metaDescription: clamp(`${exactFacts}. ${GUE_JUST_ME_EVENT_NAMES[locale]}. ${music}.`, 158),
     seoSummary: clamp(`${GUE_JUST_ME_EVENT_NAMES[locale]}. Just Me Milano, 25.07.2026. WhatsApp ${GUE_JUST_ME_PHONE}.`, 140),
     answerFirst,
-    bookingIntro: `${confirmation.notTicket} ${confirmation.purchase} ${confirmation.afterPurchase}`,
+    bookingIntro: `${confirmation.purchase} ${confirmation.afterPurchase}`,
     venueDescription: base.sections[2].body,
     leadPosterAfterBooking: true,
     programmeBeforeSections: true,

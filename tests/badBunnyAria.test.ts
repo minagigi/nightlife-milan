@@ -107,20 +107,12 @@ test('Bad Bunny Aria contributes exactly 35 canonical URLs to the sitemap', asyn
   assert.equal(new Set(matches.map((row) => row.url)).size, 35);
 });
 
-test('Bad Bunny publisher isolates cross-locale title collisions by exact marker', async () => {
+test('Bad Bunny publisher route is disconnected fail-closed (HTTP 410)', async () => {
   const route = await readFile(path.join(process.cwd(), 'app/api/events/publish-bad-bunny-aria/route.ts'), 'utf8');
   const runner = await readFile(path.join(process.cwd(), 'scripts/publish-bad-bunny-aria-locales.ps1'), 'utf8');
-  assert.match(route, /belongsToAnotherExpectedSatellite/);
-  assert.match(route, /nlm:curated=bad-bunny-aria-v\\d\+/);
-  assert.match(route, /hydrateStartCandidates\(token, inventory, sourcePayloads\)/);
-  assert.match(route, /titles\.has\(String\(event\.name\?\.text/);
-  assert.match(route, /refreshExistingLive/);
-  assert.match(route, /restoreLiveSnapshot/);
-  assert.match(route, /confirmation\/music\/final readback failed and the previous live state was restored/);
-  assert.match(route, /automatic rollback readback verification failed/);
-  assert.match(route, /requestUrl\.searchParams\.get\('audit'\) === '1'/);
-  assert.match(route, /expectedMarkerCount: expected\.length/);
-  assert.match(route, /\['live', 'started'\]\.includes\(String\(event\.status/);
+  assert.match(route, /eventbriteGoneResponse\('\/api\/events\/publish-bad-bunny-aria'\)/);
+  assert.match(route, /export const GET = gone;/);
+  assert.match(route, /export const POST = gone;/);
   assert.match(runner, /Invoke-AuditChunk/);
   assert.match(runner, /observedExpected\.Count -ne 350/);
   assert.match(runner, /Remove-EphemeralSecret/);

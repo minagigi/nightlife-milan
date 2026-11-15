@@ -77,26 +77,27 @@ test('the Italian canonical event has complete SEO, commercial and audience data
     assert.match(completeText, new RegExp(heading, 'i'));
   }
   assert.match(worldCupFinalIt.answerFirst || '', /Spagna-Argentina/);
-  assert.match(worldCupFinalIt.bookingIntro || '', /Eventbrite non è un biglietto/);
+  assert.doesNotMatch(worldCupFinalIt.bookingIntro || '', /Eventbrite/i);
+  assert.match(worldCupFinalIt.bookingIntro || '', /link Xceed affiliato Nightlife Milan/);
   assert.equal(worldCupFinalIt.leadPosterAfterBooking, true);
   assert.equal(worldCupFinalIt.programmeBeforeSections, true);
   assert.doesNotMatch(completeText, /18:00/i);
   assert.doesNotMatch(completeText, /pubblico internazionale/i);
 });
 
-test('the five Italian Eventbrite destinations are registered as live without placeholders', () => {
+test('the five Italian archive entries resolve to the canonical Nightlife Milan URL without Eventbrite links', () => {
   assert.equal(WORLD_CUP_EVENTBRITE_IT_LIVE_LISTINGS.length, 5);
   assert.equal(new Set(WORLD_CUP_EVENTBRITE_IT_LIVE_LISTINGS.map((listing) => listing.eventId)).size, 5);
-  assert.equal(new Set(WORLD_CUP_EVENTBRITE_IT_LIVE_LISTINGS.map((listing) => listing.url)).size, 5);
+  assert.equal(new Set(WORLD_CUP_EVENTBRITE_IT_LIVE_LISTINGS.map((listing) => listing.url)).size, 1);
   assert.equal(WORLD_CUP_EVENTBRITE_IT_SUPERSEDED_IDS.length, 5);
   assert.equal(new Set(WORLD_CUP_EVENTBRITE_IT_SUPERSEDED_IDS).size, 5);
   const liveIds = new Set<string>(WORLD_CUP_EVENTBRITE_IT_LIVE_LISTINGS.map((listing) => listing.eventId));
   assert.ok(WORLD_CUP_EVENTBRITE_IT_SUPERSEDED_IDS.every((id) => !liveIds.has(id)));
   for (const listing of WORLD_CUP_EVENTBRITE_IT_LIVE_LISTINGS) {
     assert.match(listing.eventId, /^\d+$/);
-    assert.match(listing.url, new RegExp(`^https://www\\.eventbrite\\.it/e/.+-${listing.eventId}$`));
+    assert.match(listing.url, /^https:\/\/nightlifemilan\.com\/it\/events\/finale-coppa-del-mondo-maxischermo-milano-just-me-19-luglio-2026$/);
     assert.equal(listing.status, 'live');
-    assert.doesNotMatch(JSON.stringify(listing), /pending-/i);
+    assert.doesNotMatch(JSON.stringify(listing), /pending-|eventbrite\./i);
   }
 });
 

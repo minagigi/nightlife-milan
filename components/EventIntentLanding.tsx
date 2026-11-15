@@ -9,7 +9,7 @@ import { getLocaleDef, hreflangAlternates, localePrefix, canonicalPageUrl } from
 import { generateEventListSchema, getLocalizedText, jsonLdString } from '@/lib/seo';
 import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
-import { getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
+import { getEventDiscoveryItems } from '@/lib/eventDiscovery';
 import { VipQuoteCalculator, EntryFormulaMatrix, PrioritySixShowcase, SanSiroMatchAfterpartyFinder } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
@@ -248,7 +248,7 @@ export default async function EventIntentLanding({ intent, locale }: { intent: E
   const config = INTENTS[intent];
   const lang = coreLocale(locale);
   const lp = localePrefix(locale);
-  const allItems = getEventbriteDiscoveryItems(await getAllCalendarEvents(), locale);
+  const allItems = getEventDiscoveryItems(await getAllCalendarEvents(), locale);
   const items = allItems
     .filter(({ event }) => isUpcomingRome(event.dateISO) && config.venueIds.includes(event.venueId))
     .filter(({ event }) => {

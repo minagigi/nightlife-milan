@@ -253,102 +253,15 @@ test('Guè Eventbrite package contains 350 validated keyword listings', () => {
   }
 });
 
-test('Guè publisher hydrates organizer-list stubs and retires only zero-attendee exact duplicates', async () => {
+test('Guè publisher route is disconnected fail-closed while runner gates remain documented', async () => {
   const route = await readFile(path.join(process.cwd(), 'app/api/events/publish-gue-locales/route.ts'), 'utf8');
   const runner = await readFile(path.join(process.cwd(), 'scripts/publish-gue-locales.ps1'), 'utf8');
-  assert.match(route, /hydrateExistingEvents/);
-  assert.match(route, /gueCandidateStubs\(localPayloads, stubs\)/);
-  assert.match(route, /venues\/\$\{JUST_ME_EVENTBRITE_VENUE_ID\}\/events\/\?status=live,draft,started&time_filter=current_future/);
-  assert.doesNotMatch(route, /pageEvents\.at\(-1\)[\s\S]+return events/);
-  assert.match(route, /Marker is the sole publication identity/);
-  assert.match(route, /event\.end\?\.utc === END_UTC/);
-  assert.match(route, /marker collision requires manual review/);
-  assert.match(route, /cleanupNewlyPublishedZeroAttendeeEvent/);
-  assert.match(route, /newly published zero-attendee event \$\{result\.ebEventId\} was canceled/);
-  assert.doesNotMatch(route, /resolveLiveDuplicate/);
-  assert.doesNotMatch(route, /retireSupersededLive/);
-  assert.match(route, /auditLocales = requestedLocale/);
-  assert.match(route, /newly published cleanup \$\{eventId\} did not persist a canceled status/);
-  assert.match(route, /function buildFullAuditCandidateSet[\s\S]+event\.start\?\.utc === START_UTC/);
-  assert.match(route, /FULL_AUDIT_MAX_CHUNK = 20/);
-  assert.match(route, /FULL_DEEP_AUDIT_MAX_CHUNK = 5/);
-  assert.match(route, /requestUrl\.searchParams\.get\('deep'\) === '1'/);
-  assert.match(route, /settingsItems\.split\(','\)/);
-  assert.match(route, /ticket_buyer_settings\/`/);
-  assert.match(route, /music_properties\/`/);
-  assert.match(route, /interface LiveRefreshSnapshot/);
-  assert.match(route, /captureLiveRefreshSnapshot/);
-  assert.match(route, /restoreLiveRefreshSnapshot/);
-  assert.match(route, /verifyLiveRefreshSnapshot/);
-  assert.match(route, /automatic rollback restored and verified the prior live state/);
-  assert.match(route, /html\.indexOf\('Tickets, tables and contacts'\)/);
-  assert.match(route, /html\.includes\('Guè Pequeno live in Milan: tickets, nightlife and VIP tables'\)/);
-  assert.match(route, /poster is not immediately after contacts/);
-  assert.match(route, /function semanticallyEqualLiveRefreshSnapshot/);
-  assert.match(route, /rollbackHtmlSemantics\(expected\.event\.descriptionHtml, \['href', 'src'\]\)/);
-  assert.match(route, /rollbackHtmlSemantics\(expected\.settings\.confirmationMessageHtml, \['href'\]\)/);
-  assert.doesNotMatch(route, /const current = JSON\.stringify\(saved\);[\s\S]{0,200}const expected = JSON\.stringify\(snapshot\)/);
-  const refreshBlock = route.slice(route.indexOf('async function refreshLiveEvent'), route.indexOf('async function inspectLiveEvent'));
-  const restoreBlock = route.slice(route.indexOf('async function restoreLiveRefreshSnapshot'), route.indexOf('async function verifyLiveRefreshSnapshot'));
-  for (const eventPostBlock of [refreshBlock, restoreBlock]) {
-    assert.doesNotMatch(
-      eventPostBlock,
-      /event:\s*\{[\s\S]{0,350}\bsummary\s*:[\s\S]{0,350}\bdescription\s*:/u,
-      'Eventbrite event POST must never combine summary and description',
-    );
-  }
-  assert.match(route, /live metadata refresh/);
-  assert.match(route, /live description refresh/);
-  const metadataRefreshIndex = refreshBlock.indexOf('live metadata refresh');
-  const descriptionRefreshIndex = refreshBlock.indexOf('live description refresh');
-  assert.ok(descriptionRefreshIndex >= 0 && metadataRefreshIndex >= 0 && metadataRefreshIndex < descriptionRefreshIndex,
-    'forward refresh must persist metadata/summary before description');
-  const metadataResponseIndex = refreshBlock.indexOf('const metadataResponse');
-  assert.ok(metadataResponseIndex > 0, 'forward refresh must have a distinct metadata response');
-  const metadataRefreshBlock = refreshBlock.slice(0, refreshBlock.indexOf('const descriptionResponse'));
-  const descriptionRefreshBlock = refreshBlock.slice(refreshBlock.indexOf('const descriptionResponse'));
-  assert.match(metadataRefreshBlock, /\bsummary:\s*payload\.summary/u);
-  assert.doesNotMatch(metadataRefreshBlock, /\bdescription\s*:/u);
-  assert.match(descriptionRefreshBlock, /event:\s*\{\s*description:\s*\{\s*html:\s*payload\.descriptionHtml/u);
-  assert.doesNotMatch(descriptionRefreshBlock, /event:\s*\{[\s\S]{0,200}\bsummary\s*:/u);
-  assert.match(route, /rollback event metadata restore/);
-  assert.match(route, /rollback event description restore/);
-  assert.match(route, /refreshExistingLiveEventWithRollback\([\s\S]+duplicate\.id/);
-  assert.match(route, /function parseSuppliedMediaManifestForTest/);
-  assert.match(route, /value\.entries\.length !== 6/);
-  assert.match(route, /locale !== 'en' \|\| fromVariant !== 1 \|\| max !== 1/);
-  assert.match(route, /if \(suppliedMediaManifest && partialResults\.length === 1\)[\s\S]+await writeMediaManifest\(locale, mediaManifest\)/);
-  assert.match(route, /GUE_ENGLISH_PILOT_EVENT_ID = '1994392210790'/);
-  assert.match(route, /assertEnglishPilotIdentityForTest\(pilot, payload\)/);
-  assert.match(route, /English pilot safety gate failed: expected one exact live ID and zero draft, duplicate or unknown marker rows/);
-  const pilotSection = route.slice(route.indexOf('if (suppliedMediaManifest) {\n      // Fail closed'));
-  assert.doesNotMatch(pilotSection.slice(0, pilotSection.indexOf('} else {')), /resolveLiveDuplicate|deleteNewlyCreatedDraft|retireSupersededLive|publishOneLang/);
   const mediaIngress = await readFile(path.join(process.cwd(), 'app/api/admin/upload-eventbrite-media/route.ts'), 'utf8');
-  assert.match(mediaIngress, /process\.env\.GUE_PUBLISH_SECRET/);
-  assert.match(mediaIngress, /if \(!okCron && !okGuePilot\)/);
-  assert.match(mediaIngress, /createHash\('sha256'\)/);
-  assert.match(mediaIngress, /sharp\(image, \{ failOn: 'error' \}\)/);
-  assert.match(mediaIngress, /GUE_PILOT_FILES/);
-  assert.match(route, /inspectLiveEvent\([\s\S]+coverIdByLocale\.get\(payload\.locale\)/);
-  assert.match(route, /unsupported 80,000 attendance claim persisted/);
-  assert.match(route, /summaryExact:\s*normalizedVisibleExact\(String\(event\.summary \|\| ''\)\) === normalizedVisibleExact\(payload\.summary\)/);
-  assert.match(route, /actualSummary\(length=\$\{String\(event\.summary \|\| ''\)\.length\}\)=\$\{JSON\.stringify\(String\(event\.summary \|\| ''\)\)\}/);
-  assert.match(route, /ticketDescription\(ticket\) === payload\.ticketDescription/);
-  assert.match(route, /localized phone, dress code, target, mood or music section missing/);
-  assert.match(route, /candidateSet\.candidates\.slice\(offset, offset \+ limit\)/);
-  assert.match(route, /candidateFingerprint: candidateSet\.fingerprint/);
-  assert.match(route, /expectedMarkerFingerprint/);
-  assert.match(route, /matchAll\(\/<!-- \(nlm:curated=gue-/);
-  assert.match(route, /liveIds: live\.map/);
-  assert.match(route, /uniqueLiveIds !== rows\.length/);
-  assert.match(route, /retryable = \/HTTP 429\|rate limit\|HIT_RATE_LIMIT/);
-  assert.match(route, /checkpoint: partialResults\.map\(\(result\) => \(\{ marker: result\.marker, eventId: result\.id \}\)\)/);
-  assert.match(route, /English v2 media manifest is required before shared body media can be reused/);
-  assert.match(route, /locale === 'en'[\s\S]+localPayloads\[0\]\.imagePlan\[0\]/);
-  assert.match(route, /englishManifest\.urls\.slice\(2\)/);
-  assert.match(route, /caps the rollout at 74 assets/);
-  assert.match(route, /unsupported DJ Dero claim persisted/);
-  assert.match(route, /contentCurrent/);
+  assert.match(route, /eventbriteGoneResponse\('\/api\/events\/publish-gue-locales'\)/);
+  assert.match(route, /export const GET = gone;/);
+  assert.match(route, /export const POST = gone;/);
+  assert.match(mediaIngress, /eventbriteGoneResponse\('\/api\/admin\/upload-eventbrite-media'\)/);
+  assert.match(mediaIngress, /export const POST = gone;/);
   assert.match(runner, /audit=1&full=1&offset=\$Offset&limit=\$Limit/);
   assert.match(runner, /Full audit candidate set changed at offset/);
   assert.match(runner, /unexpectedMarkerRows/);
@@ -378,20 +291,14 @@ test('summary exact comparison rejects a truncated generated summary', () => {
   assert.notEqual(normalizeSummary(generatedTruncation), normalizeSummary(expected));
 });
 
-test('Guè ingress and pilot control flow are fail closed', async () => {
+test('Guè ingress route is disconnected fail closed (HTTP 410)', async () => {
   const route = await readFile(path.join(process.cwd(), 'app/api/events/publish-gue-locales/route.ts'), 'utf8');
   const ingress = await readFile(path.join(process.cwd(), 'app/api/admin/upload-eventbrite-media/route.ts'), 'utf8');
-  assert.match(route, /value\.entries\.length !== 6/);
-  assert.match(route, /new Set\(entries\.map\(\(entry\) => entry!\.url\)\)\.size !== 6/);
-  assert.match(route, /safeEntries\[0\]\.id !== String\(value\.coverId\)/);
-  assert.match(route, /event\.status !== 'live'/);
-  assert.match(route, /String\(event\.id\) !== GUE_ENGLISH_PILOT_EVENT_ID/);
-  assert.match(route, /event\.end\?\.utc !== END_UTC/);
-  assert.match(route, /creation, deletion and duplicate resolution are forbidden/);
-  assert.match(ingress, /contentType !== 'image\/jpeg'/);
-  assert.match(ingress, /image\.length < 100_000 \|\| image\.length > 5_000_000 \|\| !isJpeg\(image\)/);
-  assert.match(ingress, /digest !== expected\.sha256/);
-  assert.match(ingress, /metadata\.width !== expected\.width \|\| metadata\.height !== expected\.height/);
+  assert.match(route, /eventbriteGoneResponse\('\/api\/events\/publish-gue-locales'\)/);
+  assert.match(route, /export const GET = gone;/);
+  assert.match(route, /export const POST = gone;/);
+  assert.match(ingress, /eventbriteGoneResponse\('\/api\/admin\/upload-eventbrite-media'\)/);
+  assert.match(ingress, /export const POST = gone;/);
 });
 
 test('Guè cover and body assets use exact 2:1 and 5:4 canvases without tiny files', async () => {

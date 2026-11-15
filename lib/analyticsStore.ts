@@ -132,7 +132,7 @@ export function counterKeysFor(evt: RawTrackedEvent): string[] {
     case 'xceed_click':
       return ['xc', `xc:src:${src}`, `xc:path:${path}`];
     case 'eventbrite_click':
-      return ['eb', `eb:src:${src}`, `eb:path:${path}`];
+      return [];
     default:
       return [];
   }
@@ -233,74 +233,17 @@ export async function readDailyStats(days: number): Promise<DailyStats[]> {
 }
 
 // ---------------------------------------------------------------------------
-// 2. Eventbrite
+// 2. Eventbrite (disconnected)
 // ---------------------------------------------------------------------------
 
-const EVENTBRITE_API = 'https://www.eventbriteapi.com/v3';
-const EB_ORG_ID = '2988002072164';
-// Stessi formati marker di eventbriteSync.ts (nuovo con lingua + legacy senza)
-const EB_MARKER_RE = /nlm:src=(.+?)-(en|it);slug-en=([a-z0-9-]+)/;
-const EB_MARKER_LEGACY_RE = /nlm:src=([^;]+);slug-en=([a-z0-9-]+)/;
-
-interface RawEbListEvent {
-  id: string;
-  name: { text: string };
-  url: string;
-  description?: { text?: string; html?: string };
-  start: { utc: string };
-  status: string;
-  capacity?: number;
-  ticket_classes?: Array<{ name: string; quantity_total?: number; quantity_sold?: number }>;
-}
-
-async function fetchEbPage(status: 'live' | 'ended'): Promise<RawEbListEvent[]> {
-  const token = getEventbriteToken();
-  if (!token) return [];
-  const url = `${EVENTBRITE_API}/organizations/${EB_ORG_ID}/events/?status=${status}&expand=ticket_classes&order_by=start_desc&page_size=50`;
-  const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` }, cache: 'no-store' });
-  if (!res.ok) return [];
-  const data = (await res.json()) as { events?: RawEbListEvent[] };
-  return data.events || [];
-}
-
-/** Stato live registrazioni/capienza per tutti gli eventi dell'org (live + terminati recenti). */
+/** Eventbrite integration disconnected: always returns an empty list with zero network calls. */
 export async function fetchEventbriteStats(): Promise<EbEventStats[]> {
-  const [live, ended] = await Promise.all([fetchEbPage('live'), fetchEbPage('ended')]);
-  const cutoff = new Date(Date.now() - 45 * 86400_000).toISOString();
-  const events = [...live, ...ended.filter((e) => e.start.utc >= cutoff)];
-
-  return events.map((ev) => {
-    const desc = ev.description?.html || ev.description?.text || '';
-    const fresh = desc.match(EB_MARKER_RE);
-    const legacy = fresh ? null : desc.match(EB_MARKER_LEGACY_RE);
-    const classes = (ev.ticket_classes || []).map((t) => ({
-      name: t.name,
-      sold: t.quantity_sold || 0,
-      total: t.quantity_total ?? null,
-    }));
-    return {
-      id: ev.id,
-      name: ev.name.text,
-      url: ev.url,
-      startUtc: ev.start.utc,
-      status: ev.status,
-      baseId: fresh?.[1] || legacy?.[1],
-      lang: fresh?.[2],
-      slugEn: fresh?.[3] || legacy?.[2],
-      capacity: ev.capacity ?? null,
-      sold: classes.reduce((s, t) => s + t.sold, 0),
-      ticketClasses: classes,
-    };
-  });
+  return [];
 }
 
-/** Snapshot giornaliero (cron): la serie di snapshot dà la curva di registrazione. */
+/** Snapshot giornaliero disabilitato dopo la disconnessione da Eventbrite. */
 export async function putEbSnapshot(): Promise<EbSnapshot | null> {
-  if (!hasBlob()) return null;
-  const events = await fetchEventbriteStats();
-  const snapshot: EbSnapshot = { date: romeDay(), takenAt: new Date().toISOString(), events };
-  await writeJson(`analytics/eventbrite/${snapshot.date}.json`, snapshot);
-  return snapshot;
+  return null;
 }
 
 /** Ultimi N snapshot (ordinati per data crescente). */

@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
 import Link from '@/components/LocalizedLink';
-import { Download, Eye, Mail, RefreshCw, Search, ShieldCheck, UserRoundCheck } from 'lucide-react';
+import { Download, Eye, Mail, Search, ShieldCheck, UserRoundCheck } from 'lucide-react';
 import { crmFilterOptions, filterCrmContacts, type CrmPermissionStatus } from '@/lib/crmModel';
 import { crmStorageConfigured, readCrmDatabase } from '@/lib/crmStore';
-import { syncCrmFromEventbrite } from './actions';
 
 export const dynamic = 'force-dynamic';
 
@@ -91,18 +90,9 @@ export default async function CrmPage({
             </div>
             <h1 className="text-3xl font-semibold">CRM clienti</h1>
             <p className="mt-2 max-w-3xl text-sm text-white/50">
-              Contatti deduplicati, storico Eventbrite e preferenze di comunicazione. I contatti senza consenso restano utilizzabili solo per comunicazioni relative alla prenotazione.
+              Contatti deduplicati, storico clienti e preferenze di comunicazione. I contatti senza consenso restano utilizzabili solo per comunicazioni relative alla prenotazione.
             </p>
           </div>
-          <form action={syncCrmFromEventbrite}>
-            <button
-              type="submit"
-              className="inline-flex h-10 items-center gap-2 border border-white/20 bg-white px-4 text-sm font-semibold text-black transition-colors hover:bg-emerald-200"
-            >
-              <RefreshCw className="h-4 w-4" aria-hidden="true" />
-              Sincronizza Eventbrite
-            </button>
-          </form>
         </header>
 
         {!crmStorageConfigured() && (
@@ -240,7 +230,7 @@ export default async function CrmPage({
 
         <footer className="mt-6 flex flex-col gap-2 border-t border-white/10 pt-5 text-xs text-white/40 md:flex-row md:items-center md:justify-between">
           <span className="inline-flex items-center gap-2"><UserRoundCheck className="h-4 w-4" aria-hidden="true" />Un profilo per email, anche quando partecipa a più eventi.</span>
-          <span>Fonte: Eventbrite API · archivio Vercel Blob privato</span>
+          <span>Archivio clienti Nightlife Milan · Vercel Blob privato</span>
         </footer>
       </div>
     </main>

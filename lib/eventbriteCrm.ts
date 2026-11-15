@@ -1,11 +1,7 @@
 import { enabledLocaleCodes } from './i18n/locales';
-import { getEventbriteToken } from './eventbriteToken';
-import { mergeCrmAttendances, type IncomingCrmAttendance, type CrmSyncRun } from './crmModel';
-import { readCrmDatabase, writeCrmDatabase } from './crmStore';
+import { EVENTBRITE_DISCONNECTED_MESSAGE } from './eventbriteDisconnected';
+import type { IncomingCrmAttendance } from './crmModel';
 
-const EVENTBRITE_API = 'https://www.eventbriteapi.com/v3';
-const EVENTBRITE_ORGANIZATION_ID = '2988002072164';
-const MAX_PAGES = 500;
 const LOCALES = new Set<string>(enabledLocaleCodes);
 
 interface RawEventbriteEvent {
@@ -122,71 +118,6 @@ export function mapEventbriteAttendee(attendee: RawEventbriteAttendee, syncedAt:
   };
 }
 
-async function fetchEventbriteAttendees(): Promise<RawEventbriteAttendee[]> {
-  const token = getEventbriteToken();
-  if (!token) throw new Error('EVENTBRITE_TOKEN is required for the CRM sync');
-
-  const attendees: RawEventbriteAttendee[] = [];
-  let continuation: string | undefined;
-  let page = 1;
-
-  for (let requestNumber = 0; requestNumber < MAX_PAGES; requestNumber += 1) {
-    const url = new URL(`${EVENTBRITE_API}/organizations/${EVENTBRITE_ORGANIZATION_ID}/attendees/`);
-    url.searchParams.set('expand', 'event,contact_list_preferences');
-    if (continuation) url.searchParams.set('continuation', continuation);
-    else if (page > 1) url.searchParams.set('page', String(page));
-
-    const response = await fetch(url, {
-      headers: { Authorization: `Bearer ${token}` },
-      cache: 'no-store',
-    });
-    if (!response.ok) {
-      const payload = await response.json().catch(() => null) as {
-        error?: string;
-        error_description?: string;
-      } | null;
-      const detail = clean(payload?.error_description || payload?.error, 240);
-      throw new Error(
-        `Eventbrite attendees request failed with HTTP ${response.status}${detail ? `: ${detail}` : ''}`,
-      );
-    }
-
-    const data = (await response.json()) as EventbriteAttendeePage;
-    attendees.push(...(data.attendees || []));
-    const pagination = data.pagination;
-    if (!pagination?.has_more_items) return attendees;
-    continuation = pagination.continuation;
-    page = (pagination.page_number || page) + 1;
-  }
-
-  throw new Error(`Eventbrite attendees pagination exceeded ${MAX_PAGES} pages`);
-}
-
 export async function syncEventbriteCrm(): Promise<EventbriteCrmSyncResult> {
-  const startedAt = new Date().toISOString();
-  let phase = 'lettura partecipanti Eventbrite';
-  try {
-    const rawAttendees = await fetchEventbriteAttendees();
-    const completedAt = new Date().toISOString();
-    const incoming = rawAttendees.map((attendee) => mapEventbriteAttendee(attendee, completedAt));
-    phase = 'lettura archivio CRM';
-    const current = await readCrmDatabase();
-    const { database, summary } = mergeCrmAttendances(current, incoming, completedAt);
-    const syncRun: CrmSyncRun = {
-      id: `eventbrite-${completedAt}`,
-      startedAt,
-      completedAt,
-      source: 'eventbrite',
-      importedAttendances: summary.importedAttendances,
-      totalContacts: summary.totalContacts,
-      totalAttendances: summary.totalAttendances,
-    };
-    database.syncRuns = [syncRun, ...database.syncRuns].slice(0, 30);
-    phase = 'scrittura archivio CRM';
-    await writeCrmDatabase(database);
-    return { ...summary, completedAt };
-  } catch (error) {
-    const message = error instanceof Error ? error.message : 'errore sconosciuto';
-    throw new Error(`Sincronizzazione CRM fallita durante ${phase}: ${message}`);
-  }
+  throw new Error(EVENTBRITE_DISCONNECTED_MESSAGE);
 }

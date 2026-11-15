@@ -10,7 +10,7 @@ const EN_FAQS: readonly EventLocaleFaqTemplate[] = [
   ['How much does entry to {event} cost?', 'Published entry starts from EUR {lowestPrice}; review the listed offer before booking.'],
   ['How do I buy official tickets for {event}?', 'Use the official booking link: {affiliateUrl}. Nightlife Milan can help on WhatsApp {phone}.'],
   ['Can I book a table at {venue}?', 'Published table offers are listed for this event where available. Confirm availability through {phone}.'],
-  ['Is the Eventbrite registration my entry ticket?', 'No. Eventbrite registrations are information requests; use the official booking link for entry or table booking.'],
+  ['How do I confirm my entry?', 'Buy your official ticket via the booking link or contact Nightlife Milan on WhatsApp {phone} to confirm guest list or VIP table entry.'],
   ['Can I arrive for the aperitif?', 'Check the programme: the event begins at {start}, with the listed first programme phase.'],
   ['Does {event} run after midnight?', 'Yes. {event} is scheduled from {start} until {end}.'],
   ['What is included in the entry offers?', 'Each offer is shown with its price and name. Confirm the selected formula before booking.'],
@@ -38,7 +38,7 @@ const IT_FAQS: readonly EventLocaleFaqTemplate[] = [
   ['Quanto costa l\'ingresso a {event}?', 'I prezzi pubblicati partono da EUR {lowestPrice}; verifica la formula scelta prima della prenotazione.'],
   ['Come acquisto i biglietti ufficiali per {event}?', 'Usa il link ufficiale: {affiliateUrl}. Nightlife Milan ti aiuta su WhatsApp {phone}.'],
   ['Posso prenotare un tavolo al {venue}?', 'Le formule tavolo pubblicate sono elencate quando disponibili. Conferma la disponibilita al {phone}.'],
-  ['La registrazione Eventbrite vale come biglietto?', 'No. La registrazione Eventbrite e una richiesta di informazioni; usa il link ufficiale per ingresso o tavolo.'],
+  ['Come confermo il mio ingresso?', 'Acquista il biglietto ufficiale dal link di prenotazione o scrivi a Nightlife Milan su WhatsApp {phone} per confermare lista o tavolo VIP.'],
   ['Posso arrivare per l\'aperitivo?', 'Controlla il programma: l\'evento parte alle {start}, con la prima fase indicata.'],
   ['{event} continua dopo mezzanotte?', 'Si. {event} e programmato dalle {start} alle {end}.'],
   ['Cosa includono le formule di ingresso?', 'Ogni formula mostra prezzo e nome. Conferma la soluzione selezionata prima di prenotare.'],
@@ -83,7 +83,7 @@ export const EVENT_LOCALE_PACK_EN = {
     moodTitles: ['Venue entrance', 'Venue lounge', 'Venue party room', 'Venue interior'], moodAlts: ['{venue} entrance', '{venue} lounge', '{venue} party room', '{venue} interior'],
   },
   eventbrite: {
-    contactsTitle: 'Contacts and booking', buyTickets: 'Buy tickets', bookTable: 'Book a table', fullGuide: 'Full event guide, programme and FAQ', importantTitle: 'Important', importantBody: 'Eventbrite registrations are information requests only and do not provide entry on their own.', programmeTitle: 'Programme', offersTitle: 'Offers and prices', faqTitle: 'FAQ', seoLabel: 'SEO keywords', ticketName: 'RESERVATION TICKET - PAY AT THE DOOR - NOT FREE', ticketDescription: 'This listing is a reservation request, not a ticket purchase. Contact Nightlife Milan on WhatsApp {phone} to confirm your booking.',
+    contactsTitle: 'Contacts and booking', buyTickets: 'Buy tickets', bookTable: 'Book a table', fullGuide: 'Full event guide, programme and FAQ', importantTitle: 'Important', importantBody: 'Tickets and VIP tables must be confirmed in advance via the official booking link or WhatsApp {phone}; entry remains subject to venue door policy.', programmeTitle: 'Programme', offersTitle: 'Offers and prices', faqTitle: 'FAQ', seoLabel: 'SEO keywords', ticketName: 'RESERVATION TICKET - PAY AT THE DOOR - NOT FREE', ticketDescription: 'Official event details and booking assistance. Contact Nightlife Milan on WhatsApp {phone} to confirm your entry or table.',
   },
   seoKeywords: [
     'Milan nightlife', 'nightlife Milan', 'best clubs in Milan', '{venue}', '{event}',
@@ -122,7 +122,7 @@ export const EVENT_LOCALE_PACK_IT = {
     moodTitles: ['Ingresso del locale', 'Lounge del locale', 'Sala della serata', 'Interno del locale'], moodAlts: ['Ingresso di {venue}', 'Lounge di {venue}', 'Sala della serata al {venue}', 'Interno di {venue}'],
   },
   eventbrite: {
-    contactsTitle: 'Contatti e prenotazioni', buyTickets: 'Acquista biglietti', bookTable: 'Prenota un tavolo', fullGuide: 'Guida completa, programma e FAQ', importantTitle: 'Importante', importantBody: 'Le registrazioni Eventbrite sono richieste di informazioni e non valgono da sole come ingresso.', programmeTitle: 'Programma', offersTitle: 'Formule e prezzi', faqTitle: 'FAQ', seoLabel: 'Parole chiave SEO', ticketName: 'RICHIESTA DI PRENOTAZIONE - PAGA ALLA PORTA - NON GRATUITA', ticketDescription: 'Questa pagina e una richiesta di prenotazione, non un acquisto di biglietto. Contatta Nightlife Milan su WhatsApp {phone} per confermare.',
+    contactsTitle: 'Contatti e prenotazioni', buyTickets: 'Acquista biglietti', bookTable: 'Prenota un tavolo', fullGuide: 'Guida completa, programma e FAQ', importantTitle: 'Importante', importantBody: 'Biglietti e tavoli VIP vanno confermati in anticipo tramite il link ufficiale o WhatsApp {phone}; ingresso soggetto alla selezione del locale.', programmeTitle: 'Programma', offersTitle: 'Formule e prezzi', faqTitle: 'FAQ', seoLabel: 'Parole chiave SEO', ticketName: 'RICHIESTA DI PRENOTAZIONE - PAGA ALLA PORTA - NON GRATUITA', ticketDescription: 'Dettagli ufficiali e supporto prenotazioni. Contatta Nightlife Milan su WhatsApp {phone} per confermare ingresso o tavolo.',
   },
   seoKeywords: [
     'vita notturna Milano', 'nightlife Milano', 'migliori discoteche Milano', 'discoteche Milano', '{venue}',

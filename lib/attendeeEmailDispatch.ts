@@ -2,7 +2,7 @@ import { timingSafeEqual } from 'node:crypto';
 import { crmContactId, normalizeCrmEmail } from './crmModel';
 import { crmStorageConfigured, readCrmDatabase } from './crmStore';
 import { detectEventLocale, extractXceedAffiliateUrls } from './eventbriteConfirmation';
-import { getEventbriteToken } from './eventbriteToken';
+import { EVENTBRITE_DISCONNECTED_MESSAGE } from './eventbriteDisconnected';
 import { isEnabledLocale, type LocaleCode } from './i18n/locales';
 import {
   claimLedgerEntry,
@@ -28,14 +28,8 @@ import type {
   EligibilityVerdict,
 } from './attendeeEmailTypes';
 
-const EVENTBRITE_API = 'https://www.eventbriteapi.com/v3';
-const ORG = '2988002072164';
-
-const ORDER_API_URL_RE = /^https:\/\/www\.eventbriteapi\.com\/v3\/orders\/(\d+)\/?$/;
-
-export function validateOrderApiUrl(raw: string): string | null {
-  const match = ORDER_API_URL_RE.exec(raw);
-  return match ? `https://www.eventbriteapi.com/v3/orders/${match[1]}/` : null;
+export function validateOrderApiUrl(_raw: string): string | null {
+  return null;
 }
 
 export function resolveVenueName(explicit: string | null | undefined, eventTitle: string): string | null {
@@ -338,80 +332,14 @@ export function raiseQuantityToEmailGroupSize(candidates: DispatchCandidate[]): 
 }
 
 export async function dispatchForOrderApiUrl(
-  apiUrl: string,
-  opts: DispatchOptions & { attendeeIndex?: number },
+  _apiUrl: string,
+  _opts: DispatchOptions & { attendeeIndex?: number },
 ): Promise<DispatchReport> {
-  const normalizedUrl = validateOrderApiUrl(apiUrl);
-  if (!normalizedUrl) throw new Error(`Invalid Eventbrite order API URL: ${apiUrl}`);
-
-  const token = getEventbriteToken();
-  if (!token) throw new Error('EVENTBRITE_TOKEN not set');
-
-  const orderRes = await fetch(`${normalizedUrl}?expand=attendees`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  if (!orderRes.ok) {
-    throw new Error(`Eventbrite order fetch failed: HTTP ${orderRes.status} ${(await orderRes.text()).slice(0, 200)}`);
-  }
-  const order = await orderRes.json();
-
-  const eventId: string | undefined = order.event_id;
-  if (!eventId) throw new Error('Eventbrite order response is missing event_id');
-
-  const eventRes = await fetch(`${EVENTBRITE_API}/events/${eventId}/?expand=venue`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  if (!eventRes.ok) {
-    throw new Error(`Eventbrite event fetch failed: HTTP ${eventRes.status} ${(await eventRes.text()).slice(0, 200)}`);
-  }
-  const rawEvent = await eventRes.json();
-
-  const info = resolveEventInfo(rawEvent, null);
-  const attendees: RawAttendee[] = order.attendees || [];
-  const candidates = raiseQuantityToEmailGroupSize(attendees.map((raw) => mapRawAttendee(raw, info)));
-
-  return dispatchCandidates(candidates, opts);
+  throw new Error(EVENTBRITE_DISCONNECTED_MESSAGE);
 }
 
-function sinceIsoNoMillis(hours: number): string {
-  const date = new Date(Date.now() - hours * 60 * 60 * 1000);
-  return date.toISOString().replace(/\.\d{3}Z$/, 'Z');
-}
-
-export async function sweepRecentAttendees(opts: DispatchOptions & { sinceHours?: number }): Promise<DispatchReport> {
-  const token = getEventbriteToken();
-  if (!token) throw new Error('EVENTBRITE_TOKEN not set');
-
-  const sinceHours = opts.sinceHours ?? (parseInt(process.env.EMAIL_SWEEP_SINCE_HOURS || '', 10) || 72);
-  const since = sinceIsoNoMillis(sinceHours);
-  const base = `${EVENTBRITE_API}/organizations/${ORG}/attendees/?expand=event&changed_since=${since}`;
-
-  const candidates: DispatchCandidate[] = [];
-  let continuation: string | undefined;
-
-  for (let page = 1; page <= 50; page += 1) {
-    const url = continuation ? `${base}&continuation=${encodeURIComponent(continuation)}` : base;
-    const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
-    if (!res.ok) {
-      throw new Error(`Eventbrite attendees sweep failed: HTTP ${res.status} ${(await res.text()).slice(0, 200)}`);
-    }
-
-    const body = await res.json();
-    const attendees: RawAttendee[] = body.attendees || [];
-
-    for (const attendee of attendees) {
-      // preferredLocale del contatto CRM non consultato qui per semplicita:
-      // resolveEventInfo ricade su 'en' in assenza di marker; se attendee.event
-      // manca, resolveEventInfo({}, null) ritorna null (id/name.text assenti).
-      const info = resolveEventInfo(attendee.event ?? {}, null);
-      candidates.push(mapRawAttendee(attendee, info));
-    }
-
-    continuation = body.pagination?.has_more_items ? body.pagination?.continuation : undefined;
-    if (!continuation) break;
-  }
-
-  return dispatchCandidates(candidates, opts);
+export async function sweepRecentAttendees(_opts: DispatchOptions & { sinceHours?: number }): Promise<DispatchReport> {
+  throw new Error(EVENTBRITE_DISCONNECTED_MESSAGE);
 }
 
 /** Confronto a tempo costante per secret passati in query. */
@@ -421,43 +349,14 @@ export function secureCompare(a: string, b: string): boolean {
   return bufferA.length === bufferB.length && timingSafeEqual(bufferA, bufferB);
 }
 
-function maskWebhookUrl(url: string): string {
-  return url.replace(/([?&]k=)[^&\s]+/g, '$1***');
-}
-
 export interface EventbriteWebhookSummary {
   id: string;
   actions: string;
   endpointUrl: string;
 }
 
-interface RawEventbriteWebhook {
-  id?: string | number;
-  endpoint_url?: string;
-  actions?: string | string[];
-}
-
-async function fetchEventbriteWebhooks(token: string): Promise<RawEventbriteWebhook[]> {
-  const res = await fetch(`${EVENTBRITE_API}/organizations/${ORG}/webhooks/`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  if (!res.ok) {
-    throw new Error(`Eventbrite webhooks list failed: HTTP ${res.status} ${(await res.text()).slice(0, 200)}`);
-  }
-  const body = await res.json();
-  return (body.webhooks || []) as RawEventbriteWebhook[];
-}
-
-/** Lista dei webhook Eventbrite dell'organizzazione, con secret mascherato. */
 export async function listEventbriteWebhooks(): Promise<EventbriteWebhookSummary[]> {
-  const token = getEventbriteToken();
-  if (!token) throw new Error('EVENTBRITE_TOKEN not set');
-  const webhooks = await fetchEventbriteWebhooks(token);
-  return webhooks.map((webhook) => ({
-    id: String(webhook.id ?? ''),
-    actions: Array.isArray(webhook.actions) ? webhook.actions.join(',') : (webhook.actions || ''),
-    endpointUrl: maskWebhookUrl(webhook.endpoint_url || ''),
-  }));
+  throw new Error(EVENTBRITE_DISCONNECTED_MESSAGE);
 }
 
 export interface EnsureWebhookResult {
@@ -466,48 +365,6 @@ export interface EnsureWebhookResult {
   endpointUrl: string;
 }
 
-/**
- * Auto-provisioning del webhook order.placed: idempotente, ruota i webhook
- * con stesso path ma secret diverso. Gira in produzione col token gia in env.
- */
-export async function ensureAttendeeEmailWebhook(endpointUrl: string): Promise<EnsureWebhookResult> {
-  const token = getEventbriteToken();
-  if (!token) throw new Error('EVENTBRITE_TOKEN not set');
-
-  const webhooks = await fetchEventbriteWebhooks(token);
-  const targetPath = endpointUrl.split('?')[0];
-
-  const identical = webhooks.find((webhook) => webhook.endpoint_url === endpointUrl
-    && (Array.isArray(webhook.actions) ? webhook.actions.join(',') : webhook.actions || '').includes('order.placed'));
-  if (identical?.id) {
-    return { outcome: 'exists', id: String(identical.id), endpointUrl: maskWebhookUrl(endpointUrl) };
-  }
-
-  const stale = webhooks.filter((webhook) => (webhook.endpoint_url || '').split('?')[0] === targetPath);
-  for (const webhook of stale) {
-    if (!webhook.id) continue;
-    const res = await fetch(`${EVENTBRITE_API}/webhooks/${webhook.id}/`, {
-      method: 'DELETE',
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    if (!res.ok && res.status !== 404) {
-      throw new Error(`Eventbrite webhook delete failed: HTTP ${res.status}`);
-    }
-  }
-
-  const createRes = await fetch(`${EVENTBRITE_API}/organizations/${ORG}/webhooks/`, {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${token}`, 'content-type': 'application/json' },
-    body: JSON.stringify({ endpoint_url: endpointUrl, actions: 'order.placed' }),
-  });
-  if (!createRes.ok) {
-    throw new Error(`Eventbrite webhook create failed: HTTP ${createRes.status} ${(await createRes.text()).slice(0, 200)}`);
-  }
-  const created = await createRes.json();
-
-  return {
-    outcome: stale.length > 0 ? 'rotated' : 'created',
-    id: String(created.id ?? ''),
-    endpointUrl: maskWebhookUrl(endpointUrl),
-  };
+export async function ensureAttendeeEmailWebhook(_endpointUrl: string): Promise<EnsureWebhookResult> {
+  throw new Error(EVENTBRITE_DISCONNECTED_MESSAGE);
 }

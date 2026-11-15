@@ -1,8 +1,8 @@
 import { CONTACT } from '@/config/contact';
 import { getEventLocalePack } from './eventLocalePacks';
 import { enabledLocaleCodes, isEnabledLocale, type LocaleCode } from './i18n/locales';
+import { EVENTBRITE_DISCONNECTED_CODE } from './eventbriteDisconnected';
 
-const EVENTBRITE_API = 'https://www.eventbriteapi.com/v3';
 const AFFILIATE_CHANNEL = 'nightlifemilan-1';
 
 interface ConfirmationCopy {
@@ -301,50 +301,14 @@ export interface EventbriteConfirmationResult {
   reason?: string;
 }
 
-export async function updateEventbriteConfirmation(params: {
+export async function updateEventbriteConfirmation(_params: {
   token: string;
   eventId: string;
   locale: LocaleCode;
   affiliateUrls: string[];
   context?: EventbriteConfirmationContext;
 }): Promise<EventbriteConfirmationResult> {
-  const html = buildEventbriteConfirmationHtml(params.locale, params.affiliateUrls, params.context);
-  const res = await fetch(`${EVENTBRITE_API}/events/${params.eventId}/ticket_buyer_settings/`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${params.token}`,
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify({
-      ticket_buyer_settings: {
-        confirmation_message: { html },
-        instructions: { html },
-      },
-    }),
-  });
-
-  if (!res.ok) {
-    return { ok: false, status: res.status, reason: (await res.text()).slice(0, 500) };
-  }
-
-  const verify = await fetch(`${EVENTBRITE_API}/events/${params.eventId}/ticket_buyer_settings/`, {
-    headers: { Authorization: `Bearer ${params.token}` },
-  });
-  if (!verify.ok) return { ok: false, status: verify.status, reason: 'Verification request failed' };
-
-  const current = await verify.json().catch(() => null);
-  const saved = `${current?.confirmation_message?.html || ''} ${current?.instructions?.html || ''}`;
-  const savedText = normalizeEventbriteConfirmationText(saved);
-  const verified = params.affiliateUrls.every((url) => saved.includes(url))
-    && saved.includes(CONTACT.whatsapp.number)
-    && (!params.context || (
-      savedText.includes(params.context.heading)
-      && savedText.includes(params.context.details)
-    ));
-
-  return verified
-    ? { ok: true, status: verify.status }
-    : { ok: false, status: verify.status, reason: 'Eventbrite did not persist the expected confirmation content' };
+  return { ok: false, status: 410, reason: EVENTBRITE_DISCONNECTED_CODE };
 }
 
 export function validateEventbriteConfirmationCoverage(): void {

@@ -22,7 +22,7 @@ const surfaces = [
 test('every event discovery surface uses the unified site-first inventory', () => {
   for (const path of surfaces) {
     const source = readFileSync(resolve(process.cwd(), path), 'utf8');
-    assert.match(source, /getEventbriteDiscoveryItems\(|getDateSensitive\w*Inventory\(/, `${path} bypasses the unified discovery inventory`);
+    assert.match(source, /getEventDiscoveryItems\(|getEventbriteDiscoveryItems\(|getDateSensitive\w*Inventory\(/, `${path} bypasses the unified discovery inventory`);
   }
 });
 
@@ -48,8 +48,9 @@ test('event detail pages expose one truthful discovery gallery with site-first c
 test('global navigation search exposes only the two verified master events', () => {
   const source = readFileSync(resolve(process.cwd(), 'components/GlobalSearch.tsx'), 'utf8');
   assert.doesNotMatch(source, /mockEvents/);
-  assert.match(source, /eb-1994392210790/);
-  assert.match(source, /eb-1994228700727/);
+  assert.doesNotMatch(source, /eb-1994\d+/);
+  assert.match(source, /editorial-nlm-gue-just-me-2026-07-25/);
+  assert.match(source, /editorial-nlm-world-cup-final-2026/);
   assert.match(source, /gue-live-performance-just-me-milan-july-25-2026/);
   assert.match(source, /finale-coppa-del-mondo-maxischermo-milano-just-me-19-luglio-2026/);
 });

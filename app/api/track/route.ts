@@ -15,7 +15,6 @@ const ALLOWED_NAMES = new Set([
   'whatsapp_click',
   'booking_form_submit',
   'xceed_click',
-  'eventbrite_click',
 ]);
 
 const BOT_RE = /bot|crawl|spider|slurp|lighthouse|headless|pingdom|monitor|preview|facebookexternalhit/i;
@@ -30,6 +29,12 @@ export async function POST(request: NextRequest) {
       params?: Record<string, string | number>;
       path?: string;
     };
+    if (body?.name === 'eventbrite_click') {
+      return NextResponse.json(
+        { ok: false, disconnected: true, code: 'EVENTBRITE_DISCONNECTED' },
+        { status: 400 },
+      );
+    }
     if (!body?.name || !ALLOWED_NAMES.has(body.name)) {
       return new NextResponse(null, { status: 204 });
     }
@@ -37,7 +42,7 @@ export async function POST(request: NextRequest) {
     // Quota Blob (Hobby) esaurita 10 lug 2026: i pageview NON si scrivono più su
     // Blob — sono già in GA4 (doppia scrittura di lib/analytics.ts) ed erano ~95%
     // del volume (1 put per visita × 35 lingue). Su Blob restano SOLO le conversioni
-    // (whatsapp/booking/xceed/eventbrite), poche e preziose per la dashboard.
+    // (whatsapp/booking/xceed), poche e preziose per la dashboard.
     if (body.name === 'pageview') {
       return new NextResponse(null, { status: 204 });
     }

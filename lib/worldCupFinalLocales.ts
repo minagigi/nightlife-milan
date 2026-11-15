@@ -303,7 +303,7 @@ export function getWorldCupFinalLocalizedContent(locale: LocaleCode): LocalizedE
   const afterpartyBody = cleanEventText(`${programme[4].title}. ${programme[5].title}.`);
 
   const answerFirst = cleanEventText(`${copy.eventName}. 19.07.2026, Just Me Milano: 19:30 — ${programme[0].title}; 21:00 — ${programme[3].title}. ${targetBody} ${dressRule}`);
-  const bookingIntro = `${confirmation.notTicket} ${confirmation.purchase} ${confirmation.afterPurchase}`;
+  const bookingIntro = `${confirmation.purchase} ${confirmation.afterPurchase}`;
   const venueDescription = cleanEventText(accessSection.body);
   const programmeText = programme.map((slot) => `${slot.start}${slot.end ? `–${slot.end}` : ''}: ${slot.title}`).join(' ');
   const faqs = buildSeoFaqs(base, locale, [

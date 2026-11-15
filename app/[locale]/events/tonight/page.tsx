@@ -9,7 +9,7 @@ import { Clock, MapPin, Calendar } from 'lucide-react';
 import { getAllCalendarEvents, romeDayKey, romeDayKeyOffset } from '@/lib/calendarEvents';
 import type { Event, Venue } from '@/lib/types';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
-import { compareEventbriteDiscoveryItems, getEventbriteDiscoveryItems } from '@/lib/eventbriteDiscovery';
+import { compareEventDiscoveryItems, getEventDiscoveryItems } from '@/lib/eventDiscovery';
 import { WeeklyNightlifeNavigator, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
@@ -165,12 +165,12 @@ export default async function EventsTonightPage({ params }: Props) {
   const lp = localePrefix(locale);
 
   const now = new Date();
-  const allItems = getEventbriteDiscoveryItems(await getAllCalendarEvents(), locale);
+  const allItems = getEventDiscoveryItems(await getAllCalendarEvents(), locale);
   const todayKey = romeDayKeyOffset(0);
 
   const items = allItems
     .filter(({ event }) => romeDayKey(event.dateISO) === todayKey)
-    .sort(compareEventbriteDiscoveryItems);
+    .sort(compareEventDiscoveryItems);
 
   const getMilanHour = (iso: string) =>
     parseInt(new Intl.DateTimeFormat('en-US', { hour: 'numeric', hour12: false, timeZone: 'Europe/Rome' }).format(new Date(iso)), 10);

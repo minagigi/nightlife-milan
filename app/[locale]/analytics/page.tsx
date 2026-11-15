@@ -1,24 +1,19 @@
 import type { Metadata } from 'next';
 import {
   readDailyStats,
-  fetchEventbriteStats,
-  readEbSnapshots,
   readXceedManual,
   romeDay,
   type DailyStats,
-  type EbEventStats,
 } from '@/lib/analyticsStore';
-import { BarChart, LineChart } from '@/components/analytics/Charts';
+import { BarChart } from '@/components/analytics/Charts';
 import { saveXceedEntry, removeXceedEntry } from './actions';
 
 /**
  * Dashboard analytics interna — nightlifemilan.com/analytics
  * Protetta da Basic Auth nel middleware (ANALYTICS_USER / ANALYTICS_PASSWORD).
  *
- * Fonti (vedi docs/analytics-strategy.md):
+ * Fonti:
  * - visite e click CTA: contatori first-party su Blob (/api/track);
- * - registrazioni Eventbrite: lettura LIVE dell'API a ogni apertura + curva
- *   dagli snapshot del cron;
  * - Xceed: click in uscita automatici + visite/vendite copiate a mano da
  *   pro.xceed.me (nessuna API pubblica) tramite il form in fondo.
  */
@@ -57,55 +52,6 @@ function topByPrefix(daily: DailyStats[], prefix: string, limit: number): Array<
   return [...acc.entries()].sort((a, b) => b[1] - a[1]).slice(0, limit);
 }
 
-interface EventRow {
-  name: string;
-  date: string;
-  slugEn?: string;
-  url: string;
-  sold: number;
-  capacity: number | null;
-  deltaSold: number | null;
-  sitePv: number;
-  ebClicks: number;
-  xcClicks: number;
-}
-
-/** Unisce i listing EN/IT della stessa serata (stesso baseId del marker) in una riga. */
-function buildEventRows(
-  ebLive: EbEventStats[],
-  prevByEventId: Map<string, number> | null,
-  daily: DailyStats[]
-): EventRow[] {
-  const groups = new Map<string, EbEventStats[]>();
-  for (const ev of ebLive) {
-    const key = ev.baseId || ev.id;
-    groups.set(key, [...(groups.get(key) || []), ev]);
-  }
-
-  const rows: EventRow[] = [];
-  for (const evs of groups.values()) {
-    const main = evs.find((e) => e.lang === 'en') || evs[0];
-    const slugEn = main.slugEn;
-    const sold = evs.reduce((s, e) => s + e.sold, 0);
-    const capacity = evs.some((e) => e.capacity != null) ? evs.reduce((s, e) => s + (e.capacity || 0), 0) : null;
-    const prevSold = prevByEventId ? evs.reduce((s, e) => s + (prevByEventId.get(e.id) ?? 0), 0) : null;
-    const pathKey = slugEn ? `/events/${slugEn}` : '__none__';
-    rows.push({
-      name: main.name,
-      date: new Intl.DateTimeFormat('it-IT', { timeZone: 'Europe/Rome', weekday: 'short', day: 'numeric', month: 'short' }).format(new Date(main.startUtc)),
-      slugEn,
-      url: main.url,
-      sold,
-      capacity,
-      deltaSold: prevSold != null ? sold - prevSold : null,
-      sitePv: sumKey(daily, `pv:path:${pathKey}`),
-      ebClicks: sumKey(daily, `eb:path:${pathKey}`),
-      xcClicks: sumKey(daily, `xc:path:${pathKey}`),
-    });
-  }
-  return rows.sort((a, b) => b.sold - a.sold);
-}
-
 // --- UI --------------------------------------------------------------------
 
 function StatCard({ label, value, sub }: { label: string; value: string | number; sub?: string }) {
@@ -130,10 +76,8 @@ function Panel({ title, children }: { title: string; children: React.ReactNode }
 const DAYS = 30;
 
 export default async function AnalyticsPage() {
-  const [daily, ebLive, ebSnapshots, xceedManual] = await Promise.all([
+  const [daily, xceedManual] = await Promise.all([
     readDailyStats(DAYS),
-    fetchEventbriteStats().catch(() => [] as EbEventStats[]),
-    readEbSnapshots(DAYS),
     readXceedManual(),
   ]);
 
@@ -141,18 +85,8 @@ export default async function AnalyticsPage() {
   const totWa = sumKey(daily, 'wa');
   const totBf = sumKey(daily, 'bf');
   const totXc = sumKey(daily, 'xc');
-  const totEbClicks = sumKey(daily, 'eb');
-  const totEbSold = ebLive.reduce((s, e) => s + e.sold, 0);
   const totXcSales = xceedManual.reduce((s, e) => s + (e.sales || 0), 0);
   const totXcViews = xceedManual.reduce((s, e) => s + (e.views || 0), 0);
-
-  // Delta registrazioni: ultimo snapshot PRIMA di oggi come riferimento
-  const today = romeDay();
-  const prevSnapshot = [...ebSnapshots].reverse().find((s) => s.date < today) || null;
-  const prevByEventId = prevSnapshot ? new Map(prevSnapshot.events.map((e) => [e.id, e.sold])) : null;
-
-  const eventRows = buildEventRows(ebLive, prevByEventId, daily);
-  const curve = ebSnapshots.map((s) => ({ label: s.date, value: s.events.reduce((t, e) => t + e.sold, 0) }));
 
   const topPages = topByPrefix(daily, 'pv:path:', 10);
   const topReferrers = topByPrefix(daily, 'pv:ref:', 8);
@@ -168,19 +102,16 @@ export default async function AnalyticsPage() {
           </div>
           <nav className="flex flex-wrap gap-2 text-xs">
             <a href="https://analytics.google.com" target="_blank" rel="noopener noreferrer" className="border border-white/15 text-white/60 hover:text-champagne hover:border-champagne/40 rounded-full px-4 py-2 transition-colors">Google Analytics ↗</a>
-            <a href="https://www.eventbrite.com/organizations/home" target="_blank" rel="noopener noreferrer" className="border border-white/15 text-white/60 hover:text-champagne hover:border-champagne/40 rounded-full px-4 py-2 transition-colors">Eventbrite ↗</a>
             <a href="https://pro.xceed.me/select-venue" target="_blank" rel="noopener noreferrer" className="border border-white/15 text-white/60 hover:text-champagne hover:border-champagne/40 rounded-full px-4 py-2 transition-colors">Xceed Pro ↗</a>
           </nav>
         </header>
 
         {/* Il funnel in numeri */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           <StatCard label="Visite sito" value={totPv} sub="pageview tracciate" />
           <StatCard label="Click WhatsApp" value={totWa} sub="tutte le CTA" />
           <StatCard label="Form prenotazione" value={totBf} sub="inviati" />
           <StatCard label="Click verso Xceed" value={totXc} sub="Buy Tickets / Book Table" />
-          <StatCard label="Click verso Eventbrite" value={totEbClicks} />
-          <StatCard label="Registrati Eventbrite" value={totEbSold} sub="eventi live + ultimi 45 gg" />
           <StatCard label="Visite pagine Xceed" value={totXcViews || '—'} sub="da pro.xceed.me (manuale)" />
           <StatCard label="Biglietti Xceed" value={totXcSales || '—'} sub="da pro.xceed.me (manuale)" />
         </div>
@@ -193,54 +124,6 @@ export default async function AnalyticsPage() {
             <BarChart data={seriesFor(daily, 'wa', DAYS)} ariaLabel={`Click WhatsApp giornalieri ultimi ${DAYS} giorni`} />
           </Panel>
         </div>
-
-        <Panel title="Curva registrazioni Eventbrite (totale eventi live)">
-          <LineChart data={curve} ariaLabel="Registrazioni Eventbrite cumulative per giorno di snapshot" />
-        </Panel>
-
-        {/* Funnel per evento */}
-        <Panel title="Funnel per evento">
-          {eventRows.length === 0 ? (
-            <p className="text-white/40 text-sm">Nessun evento Eventbrite live (o EVENTBRITE_TOKEN mancante).</p>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm text-left">
-                <thead>
-                  <tr className="text-white/40 text-xs uppercase tracking-wider border-b border-white/10">
-                    <th className="py-2 pr-4 font-medium">Evento</th>
-                    <th className="py-2 pr-4 font-medium">Data</th>
-                    <th className="py-2 pr-4 font-medium text-right">Visite sito</th>
-                    <th className="py-2 pr-4 font-medium text-right">Click EB</th>
-                    <th className="py-2 pr-4 font-medium text-right">Click Xceed</th>
-                    <th className="py-2 pr-4 font-medium text-right">Registrati</th>
-                    <th className="py-2 font-medium text-right">Δ oggi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {eventRows.map((r) => (
-                    <tr key={r.url} className="border-b border-white/5 text-white/80">
-                      <td className="py-2.5 pr-4 max-w-[280px]">
-                        <a href={r.url} target="_blank" rel="noopener noreferrer" className="hover:text-champagne transition-colors line-clamp-1">{r.name}</a>
-                        {r.slugEn && <span className="block text-[10px] text-white/35">/events/{r.slugEn}</span>}
-                      </td>
-                      <td className="py-2.5 pr-4 whitespace-nowrap capitalize">{r.date}</td>
-                      <td className="py-2.5 pr-4 text-right tabular-nums">{r.sitePv}</td>
-                      <td className="py-2.5 pr-4 text-right tabular-nums">{r.ebClicks}</td>
-                      <td className="py-2.5 pr-4 text-right tabular-nums">{r.xcClicks}</td>
-                      <td className="py-2.5 pr-4 text-right tabular-nums font-bold text-champagne">
-                        {r.sold}{r.capacity ? <span className="text-white/40 font-normal"> / {r.capacity}</span> : null}
-                      </td>
-                      <td className="py-2.5 text-right tabular-nums">
-                        {r.deltaSold == null ? '—' : r.deltaSold > 0 ? `+${r.deltaSold}` : r.deltaSold}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-          <p className="text-[11px] text-white/35 mt-3">Visite/click sito = ultimi {DAYS} giorni; Registrati = totale live da Eventbrite; Δ = dall&apos;ultimo snapshot notturno.</p>
-        </Panel>
 
         <div className="grid md:grid-cols-3 gap-6">
           <Panel title="Pagine più viste">
@@ -349,7 +232,7 @@ export default async function AnalyticsPage() {
         </Panel>
 
         <footer className="text-[11px] text-white/30 leading-relaxed">
-          <p>Fonti: visite e click = tracking first-party del sito (gli ad-blocker non lo bloccano, i bot sono filtrati); registrazioni = API Eventbrite in tempo reale; curva = snapshot notturno (cron 04:00 UTC); Xceed = inserimento manuale. GA4 resta attivo in parallelo per analisi avanzate.</p>
+          <p>Fonti: visite e click = tracking first-party del sito (gli ad-blocker non lo bloccano, i bot sono filtrati); Xceed = inserimento manuale. GA4 resta attivo in parallelo per analisi avanzate.</p>
         </footer>
       </div>
     </main>

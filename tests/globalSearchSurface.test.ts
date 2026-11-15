@@ -21,8 +21,9 @@ test('GlobalSearch synchronizes nlm:global-search custom event, route changes, a
 test('GlobalSearch indexes clubs, Capodanno 2027, Xceed events, VIP hubs, 114 guides, zones, and genres with category tabs', () => {
   const source = readFileSync(resolve(process.cwd(), 'components/GlobalSearch.tsx'), 'utf8');
   assert.doesNotMatch(source, /mockEvents/);
-  assert.match(source, /eb-1994392210790/);
-  assert.match(source, /eb-1994228700727/);
+  assert.doesNotMatch(source, /eb-1994\d+/);
+  assert.match(source, /editorial-nlm-gue-just-me-2026-07-25/);
+  assert.match(source, /editorial-nlm-world-cup-final-2026/);
   assert.match(source, /gue-live-performance-just-me-milan-july-25-2026/);
   assert.match(source, /finale-coppa-del-mondo-maxischermo-milano-just-me-19-luglio-2026/);
   assert.match(source, /import\(['"]@\/lib\/capodannoEvents['"]\)/);
