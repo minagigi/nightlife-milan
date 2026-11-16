@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Minus, Plus, ShoppingBag, Trash2, UserCheck, X } from 'lucide-react';
 import Link from '@/components/LocalizedLink';
@@ -30,6 +30,14 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
   const lp = localePrefix(lang);
   const isIt = lang === 'it';
 
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    window.dispatchEvent(new CustomEvent('nlm:cart-drawer', { detail: { open: isCartOpen } }));
+    return () => {
+      window.dispatchEvent(new CustomEvent('nlm:cart-drawer', { detail: { open: false } }));
+    };
+  }, [isCartOpen]);
+
   return (
     <AnimatePresence>
       {isCartOpen && (
@@ -39,7 +47,8 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setCartOpen(false)}
-            className="fixed inset-0 z-[105] bg-black/70 backdrop-blur-sm"
+            className="fixed inset-0 z-[10000] bg-black/70 backdrop-blur-sm"
+            style={{ zIndex: 10000 }}
           />
 
           <motion.div
@@ -50,7 +59,8 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
             role="dialog"
             aria-modal="true"
             aria-label={copy.drawerTitle}
-            className="fixed right-0 top-0 z-[106] flex h-full w-full flex-col border-l border-[#F6F1E7]/15 bg-[#050505] text-[#F6F1E7] shadow-2xl sm:w-[440px]"
+            className="fixed right-0 top-0 z-[10001] flex h-full w-full flex-col border-l border-[#F6F1E7]/15 bg-[#050505] text-[#F6F1E7] shadow-2xl sm:w-[440px]"
+            style={{ zIndex: 10001 }}
           >
             <div className="flex items-center justify-between border-b border-[#F6F1E7]/14 px-6 py-5">
               <div className="flex items-center gap-2.5">

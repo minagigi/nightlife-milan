@@ -36,6 +36,7 @@ export default function WhatsAppFloating({ locale: explicitLocale }: { locale?: 
   const locale = explicitLocale ?? (isEnabledLocale(firstSegment) ? firstSegment : 'en');
   const [searchOpen, setSearchOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
   const [showBubble, setShowBubble] = useState(false);
   const [eventTitle, setEventTitle] = useState<string | undefined>(undefined);
   const [partyOnly, setPartyOnly] = useState(false);
@@ -45,11 +46,14 @@ export default function WhatsAppFloating({ locale: explicitLocale }: { locale?: 
   useEffect(() => {
     const search = (event: Event) => setSearchOpen(Boolean((event as CustomEvent<{ open?: boolean }>).detail?.open));
     const menu = (event: Event) => setMenuOpen(Boolean((event as CustomEvent<{ open?: boolean }>).detail?.open));
+    const cart = (event: Event) => setCartOpen(Boolean((event as CustomEvent<{ open?: boolean }>).detail?.open));
     window.addEventListener('nlm:global-search', search);
     window.addEventListener('nlm:mobile-menu', menu);
+    window.addEventListener('nlm:cart-drawer', cart);
     return () => {
       window.removeEventListener('nlm:global-search', search);
       window.removeEventListener('nlm:mobile-menu', menu);
+      window.removeEventListener('nlm:cart-drawer', cart);
     };
   }, []);
 
@@ -103,7 +107,7 @@ export default function WhatsAppFloating({ locale: explicitLocale }: { locale?: 
     return () => observer.disconnect();
   }, [pathname]);
 
-  if (!isPublicBookingPath(pathname) || searchOpen || menuOpen) return null;
+  if (!isPublicBookingPath(pathname) || searchOpen || menuOpen || cartOpen) return null;
 
   const shortTitle =
     eventTitle && eventTitle.length > 32 ? `${eventTitle.slice(0, 30).trim()}…` : eventTitle;
