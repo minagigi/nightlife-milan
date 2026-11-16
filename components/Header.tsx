@@ -4,8 +4,10 @@ import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import Link from '@/components/LocalizedLink';
 import { usePathname } from 'next/navigation';
-import { Heart, MessageCircle, X } from 'lucide-react';
+import { Heart, MessageCircle, ShoppingBag, User, X } from 'lucide-react';
 import { useFavorites } from './FavoritesContext';
+import { useSinglePassCart } from './single-pass/SinglePassCartContext';
+import { getSinglePassCopy } from '@/lib/single-pass/i18n35';
 import GlobalSearch from './GlobalSearch';
 import LanguageSwitcher from './LanguageSwitcher';
 import { SITE_CONTACT } from '@/config/contact';
@@ -81,6 +83,7 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
   const pathname = publicPath ?? observedPathname;
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { favorites, setDrawerOpen } = useFavorites();
+  const { itemCount, setCartOpen } = useSinglePassCart();
   const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const mobileMenuTriggerRef = useRef<HTMLButtonElement>(null);
@@ -208,6 +211,9 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
   const halloweenLabel = halloweenNavigation(currentLocale).menuLabel;
   const capodannoHref = capodannoPath(currentLocale);
   const capodannoLabel = `${capodannoNavigation(currentLocale).menuLabel} 2027`;
+  const spCopy = getSinglePassCopy(currentLocale);
+  const singlePassHref = `${localePrefix}/single-pass`;
+  const accountHref = `${localePrefix}/account`;
   const navLinks = (() => {
     const filtered = rawNavLinks.filter(
       (item) => item.href !== halloweenHref && item.href !== capodannoHref && item.id !== 'mfw',
@@ -216,6 +222,7 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
     const sanSiroHref = localizeInternalHref(`${localePrefix}/football-afterparties`, currentLocale as LocaleCode);
     const seasonalPair = [
       { id: 'events' as const, label: capodannoLabel, name: capodannoLabel, href: capodannoHref, match: capodannoHref, gold: true },
+      { id: 'events' as const, label: spCopy.navShopLabel, name: spCopy.navShopLabel, href: singlePassHref, match: singlePassHref, gold: true },
       { id: 'events' as const, label: sanSiroDesktopLabel, name: sanSiroDesktopLabel, href: sanSiroHref, match: sanSiroHref, gold: false },
     ];
     const eventsIdx = filtered.findIndex((item) => item.id === 'events');
@@ -328,6 +335,30 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
               </div>
             </a>
             <GlobalSearch currentLocale={currentLocale} />
+            <Link
+              href={accountHref}
+              locale={currentLocale}
+              prefetch={false}
+              aria-label={spCopy.navAccountLabel}
+              title={spCopy.navAccountLabel}
+              className="flex min-h-[44px] min-w-[44px] items-center justify-center border border-[#F6F1E7]/20 bg-[#0B0A09] text-[#F6F1E7] transition-colors hover:border-[#F6F1E7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F1E7]"
+            >
+              <User className="h-4 w-4" aria-hidden="true" />
+            </Link>
+            <button
+              type="button"
+              onClick={() => setCartOpen(true)}
+              aria-label={spCopy.navCartLabel}
+              title={spCopy.navCartLabel}
+              className="relative flex min-h-[44px] min-w-[44px] items-center justify-center border border-[#F6F1E7]/25 bg-[#0B0A09] text-[#F6F1E7] transition-colors hover:border-[#F6F1E7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F1E7]"
+            >
+              <ShoppingBag className="h-4 w-4" aria-hidden="true" />
+              {mounted && itemCount > 0 && (
+                <span className="absolute -right-1.5 -top-1.5 flex h-5 min-w-[20px] items-center justify-center bg-[#F6F1E7] px-1 font-mono text-[10px] font-bold text-[#050505]">
+                  {itemCount}
+                </span>
+              )}
+            </button>
             <LanguageSwitcher currentLocale={currentLocale} />
           </div>
         </div>

@@ -40,6 +40,8 @@ import {
   buildSeoEventImagePack,
   getCapodannoOfficialPosterSrc,
 } from '@/lib/seoEventImages';
+import SinglePassVenueModule from '@/components/single-pass/SinglePassVenueModule';
+import { getVenueIdByEventSlug } from '@/lib/single-pass/catalog';
 
 type Props = {
   locale: string;
@@ -603,6 +605,14 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 ))}
               </div>
             </div>
+
+            {/* Single Pass E-Commerce Module for Eligible Venues */}
+            {(() => {
+              const singlePassVenueId = getVenueIdByEventSlug(event.slug);
+              return singlePassVenueId ? (
+                <SinglePassVenueModule locale={locale} venueId={singlePassVenueId} />
+              ) : null;
+            })()}
 
             {/* Official Menus (Pineta Gala / Buffet & Voya 20th Floor) */}
             {localized.menus && localized.menus.length > 0 && (

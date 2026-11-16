@@ -18,6 +18,8 @@ import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { localePrefix, canonicalPageUrl } from '@/lib/i18n/locales';
 import { getScarcityAndChatCopy } from '@/lib/i18n/scarcityAndChatCopy';
 import CapodannoInteractiveFilter from '@/components/CapodannoInteractiveFilter';
+import SinglePassStorefront from '@/components/single-pass/SinglePassStorefront';
+import { getSinglePassCopy } from '@/lib/single-pass/i18n35';
 import {
   CAPODANNO_CATEGORY_PAGES,
   getCapodannoCategoryPageDef,
@@ -42,6 +44,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
   const scarcity = getScarcityAndChatCopy(locale);
   const venueMapCopy = getEventVenueCopy(locale as LocaleCode);
   const paymentTerms = getPaymentTerms35(locale);
+  const spCopy = getSinglePassCopy(locale);
 
   const title = getCapodannoLocalizedCategoryTitle(pageDef, locale, events.length);
   const subtitle = getCapodannoLocalizedCategorySubtitle(pageDef, locale, events.length);
@@ -291,6 +294,37 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
             </ul>
           </nav>
         </div>
+
+        {/* Dedicated Single Pass E-Commerce Embed or Callout */}
+        {mode === 'capodanno-single-milano' && (
+          <div className="mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
+            <SinglePassStorefront locale={locale} embedded />
+          </div>
+        )}
+        {mode === 'capodanno-2027' && (
+          <div className="mx-auto mt-8 max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col gap-4 border border-[#F6F1E7]/25 bg-[#0B0A09] p-6 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[#EAE3D5]">
+                  {spCopy.heroEyebrow}
+                </p>
+                <p className="mt-1 font-serif text-xl font-bold text-[#F6F1E7]">
+                  {spCopy.embeddedBannerTitle}
+                </p>
+                <p className="mt-1 max-w-3xl text-xs leading-relaxed text-[#C2B9AA] sm:text-sm">
+                  {spCopy.embeddedBannerBody}
+                </p>
+              </div>
+              <Link
+                href={`${prefix}/single-pass`}
+                locale={locale}
+                className="inline-flex min-h-[44px] shrink-0 items-center justify-center bg-[#F6F1E7] px-5 py-3 text-xs font-extrabold uppercase tracking-wider text-[#050505] transition hover:bg-[#EAE3D5]"
+              >
+                {spCopy.embeddedBannerCta}
+              </Link>
+            </div>
+          </div>
+        )}
 
         {/* Interactive Filter + 16 Category Pages + Event Cards */}
         <CapodannoInteractiveFilter

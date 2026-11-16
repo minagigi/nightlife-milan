@@ -109,6 +109,10 @@ function resolveLegacySubpathForLocale(subPath: string, targetLocale: LocaleCode
       'prezzi-bottiglie-milano': '/bottle-prices',
       'liste-discoteche-milano': '/guest-lists',
       'feste-private-milano': '/private-parties',
+      carrello: '/cart',
+      'area-riservata': '/account',
+      'i-miei-pass': '/account',
+      'capodanno-single-pass': '/single-pass',
     };
     const canonicalHub = naturalHubAliases[rawSeg];
     if (canonicalHub) {

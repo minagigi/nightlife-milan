@@ -22,12 +22,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...EVENT_BATCH_PROFILES.filter((profile) => profile.indexedLocales && profile.indexedLocales.length > 0),
   ];
 
-  const pillarEntries: MetadataRoute.Sitemap = indexedLocaleCodes.map((locale) => ({
-    url: `${baseUrl}${localePrefix(locale)}${getLocalizedSeoPagePath35('/football-afterparties', locale)}`,
-    lastModified: catalogLastMod,
-    changeFrequency: 'daily' as const,
-    priority: 0.95,
-  }));
+  const pillarEntries: MetadataRoute.Sitemap = indexedLocaleCodes.flatMap((locale) => [
+    {
+      url: `${baseUrl}${localePrefix(locale)}${getLocalizedSeoPagePath35('/football-afterparties', locale)}`,
+      lastModified: catalogLastMod,
+      changeFrequency: 'daily' as const,
+      priority: 0.95,
+    },
+    {
+      url: `${baseUrl}${localePrefix(locale)}/single-pass`,
+      lastModified: catalogLastMod,
+      changeFrequency: 'daily' as const,
+      priority: 0.95,
+    },
+  ]);
 
   const batchEntries: MetadataRoute.Sitemap = [];
   editorialEventProfiles.forEach((profile) => {

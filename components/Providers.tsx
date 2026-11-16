@@ -3,16 +3,21 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 import { FavoritesProvider } from './FavoritesContext';
+import { SinglePassCartProvider } from './single-pass/SinglePassCartContext';
 
-// Code-split FavoritesDrawer (pulls in motion/react) out of the critical bundle —
-// it's a closed-by-default overlay, never needed for the initial paint.
+// Code-split FavoritesDrawer & SinglePassCartDrawer (pulls in motion/react) out of the critical bundle —
+// closed-by-default overlays, never needed for the initial paint.
 const FavoritesDrawer = dynamic(() => import('./FavoritesDrawer'));
+const SinglePassCartDrawer = dynamic(() => import('./single-pass/SinglePassCartDrawer'));
 
 export function Providers({ children, lang }: { children: React.ReactNode; lang: string }) {
   return (
     <FavoritesProvider>
-      {children}
-      <FavoritesDrawer lang={lang} />
+      <SinglePassCartProvider>
+        {children}
+        <FavoritesDrawer lang={lang} />
+        <SinglePassCartDrawer lang={lang} />
+      </SinglePassCartProvider>
     </FavoritesProvider>
   );
 }
