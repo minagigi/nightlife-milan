@@ -5,15 +5,22 @@ export type SinglePassVenueId =
   | 'pineta'
   | 'repvblic'
   | 'justme'
-  | '55-milano'
-  | 'bischeri';
+  | 'bischeri'
+  | 'bobino'
+  | 'voya'
+  | 'justme-garda'
+  | 'voya-christmas'
+  | 'justme-orthodox'
+  | 'club-event';
 
 export type SinglePassPackageCategory =
   | 'all-night-combo'
   | 'vip-table-share'
   | 'gala-dinner'
   | 'royal-buffet'
-  | 'club-entry';
+  | 'club-entry'
+  | 'vip-table-full'
+  | 'holiday-special';
 
 export type PriceBreakdown = {
   unitBaseCents: number;
@@ -56,15 +63,22 @@ export type SinglePassSku = {
   descriptionEn: string;
   arrivalTime: string;
   basePriceCents: number;
+  guestsPerUnit: number;
   genderPolicy: 'equal';
   requiresDietary?: boolean;
   dietaryPreset?: 'terra' | 'mare';
+  eventSlugOverride?: string;
+  eventDateLabel?: string;
+  venueNameOverride?: string;
+  confirmed?: true;
 };
 
 export type SinglePassCartItemInput = {
   skuId: string;
   quantity: number;
   dietaryChoice?: string;
+  addedFromPath?: string;
+  addedFromTitle?: string;
 };
 
 export type SinglePassOrderItem = {
@@ -76,6 +90,10 @@ export type SinglePassOrderItem = {
   title: string;
   arrivalTime: string;
   dietaryChoice?: string;
+  guestsPerUnit: number;
+  totalGuests: number;
+  addedFromPath?: string;
+  addedFromTitle?: string;
   unitBaseCents: number;
   unitFeeCents: number;
   unitTotalCents: number;
@@ -101,8 +119,29 @@ export type SinglePassCustomerInfo = {
   email: string;
   whatsapp: string;
   age: number;
+  country?: string;
   spokenLanguages: string[];
   dietaryNotes?: string;
+};
+
+export type OrderAttribution = {
+  firstLandingPath: string;
+  firstLandingAt: string;
+  initialReferrer: string;
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
+  utmTerm?: string;
+  utmContent?: string;
+  clickId?: string;
+  addedFromPaths: string[];
+  checkoutPath: string;
+  journeyPaths: string[];
+  ipCountry?: string;
+  ipCity?: string;
+  userAgent?: string;
+  deviceType?: 'mobile' | 'desktop';
+  browserLanguage?: string;
 };
 
 export type SinglePassOrder = {
@@ -116,16 +155,24 @@ export type SinglePassOrder = {
   locale: LocaleCode;
   customer: SinglePassCustomerInfo;
   items: SinglePassOrderItem[];
+  totalHeadcount: number;
   subtotalBaseCents: number;
   feeRate: 0.15;
   feeCents: number;
   totalCents: number;
   currency: 'eur';
+  presentmentCurrency: string;
+  presentmentSubtotalMinor: number;
+  presentmentFeeMinor: number;
+  presentmentTotalMinor: number;
+  fxRate: number;
+  fxTimestamp: string;
   stripeSessionId: string | null;
   stripePaymentIntentId: string | null;
   stripeCheckoutUrl: string | null;
   whatsappGroupStatus: WhatsappMiniGroupStatus;
   whatsappGroupInviteUrl: string | null;
+  attribution?: OrderAttribution;
   confirmationEmailSentAt: string | null;
   emailDeliveryError: string | null;
 };
@@ -136,6 +183,7 @@ export type SinglePassMember = {
   fullName: string;
   whatsapp: string;
   age: number;
+  country?: string;
   spokenLanguages: string[];
   dietaryNotes?: string;
   passwordSalt?: string;
@@ -151,12 +199,22 @@ export type SinglePassOrderSummary = {
   fullName: string;
   whatsapp: string;
   age: number;
+  country?: string;
   spokenLanguages: string[];
   venueIds: SinglePassVenueId[];
   itemSummary: string;
+  totalHeadcount?: number;
   subtotalBaseCents: number;
   feeCents: number;
   totalCents: number;
+  presentmentCurrency?: string;
+  presentmentTotalMinor?: number;
+  fxRate?: number;
+  firstLandingPath?: string;
+  addedFromPaths?: string[];
+  initialReferrer?: string;
+  utmSource?: string;
+  utmCampaign?: string;
   status: SinglePassOrderStatus;
   whatsappGroupStatus: WhatsappMiniGroupStatus;
   whatsappGroupInviteUrl: string | null;
@@ -195,6 +253,6 @@ export type SinglePassApiErrorCode =
   | 'INVALID_CREDENTIALS'
   | 'ORDER_NOT_FOUND'
   | 'UNAUTHORIZED'
-  | 'STRIPE_SESSION_ERROR'
+  | 'PAYMENT_SESSION_ERROR'
   | 'PAYMENT_NOT_CONFIRMED'
   | 'INTERNAL_ERROR';

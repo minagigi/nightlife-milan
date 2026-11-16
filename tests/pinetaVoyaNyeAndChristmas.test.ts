@@ -121,9 +121,9 @@ test('6-step 100% prepayment protocol is present and accurate across all 35 loca
     assert.ok(terms.steps[3].includes('+39 351 912 7047'), `Step 4 missing WhatsApp number in ${loc}`);
     assert.match(terms.steps[0], /24/, `Step 1 missing 24/7 response mention in ${loc}`);
     assert.match(terms.steps[2], /100%|%100/, `Step 3 missing 100% prepayment in ${loc}`);
-    assert.match(terms.steps[2], /Stripe/i, `Step 3 missing Stripe in ${loc}`);
+    assert.doesNotMatch(terms.steps[2], /\bstripe\b/i, `Step 3 must not mention Stripe in ${loc}`);
     assert.match(terms.methodsBadge, /100%|%100/, `methodsBadge missing 100% in ${loc}`);
-    assert.match(terms.methodsBadge, /Stripe/i, `methodsBadge missing Stripe in ${loc}`);
+    assert.doesNotMatch(terms.methodsBadge, /\bstripe\b/i, `methodsBadge must not mention Stripe in ${loc}`);
   }
 });
 

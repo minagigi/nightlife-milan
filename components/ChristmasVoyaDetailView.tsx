@@ -11,6 +11,7 @@ import { getScarcityAndChatCopy } from '@/lib/i18n/scarcityAndChatCopy';
 import { getEventVenueCopy } from '@/lib/i18n/eventVenueCopy';
 import { buildSeoEventImagePack } from '@/lib/seoEventImages';
 import { getPaymentTerms35 } from '@/lib/capodanno/paymentTerms35';
+import SinglePassVenueModule from '@/components/single-pass/SinglePassVenueModule';
 import {
   christmasVoyaPath,
   getChristmasVoyaContent,
@@ -353,6 +354,9 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
                 <strong className="text-[#F6F1E7]">{c.title}</strong> · {VOYA_ADDRESS}
               </figcaption>
             </figure>
+
+            {/* Official On-Site Confirmed Ticket Module (€100 Menu) */}
+            <SinglePassVenueModule locale={locale} venueId="voya-christmas" />
 
             {/* Official 5-Course Christmas Menu */}
             <section

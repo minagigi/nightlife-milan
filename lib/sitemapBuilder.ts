@@ -137,7 +137,7 @@ function buildCoreHubEntriesInternal(freshCatalogDate: Date): MetadataRoute.Site
   const evergreenDate = getCatalogLastModified();
   const legalDate = clampLastModified(LEGAL_STATIC_TIMESTAMP);
   const rollingHubDate = getRollingMilanDayLastModified(freshCatalogDate.getTime());
-  const legalPaths = new Set(['/privacy', '/terms']);
+  const legalPaths = new Set(['/privacy', '/terms', '/cookie-policy', '/refund-policy']);
 
   for (const locale of locales) {
     entries.push({
@@ -198,8 +198,11 @@ function buildCoreHubEntriesInternal(freshCatalogDate: Date): MetadataRoute.Site
     { path: '/fashion-week', priority: 0.9, changeFrequency: 'weekly' as const },
     { path: '/milan-fashion-week', priority: 0.9, changeFrequency: 'weekly' as const },
     { path: '/milan-fashion-week/calendar', priority: 0.85, changeFrequency: 'weekly' as const },
+    { path: '/single-pass', priority: 0.9, changeFrequency: 'daily' as const },
     { path: '/privacy', priority: 0.2, changeFrequency: 'yearly' as const },
     { path: '/terms', priority: 0.2, changeFrequency: 'yearly' as const },
+    { path: '/cookie-policy', priority: 0.2, changeFrequency: 'yearly' as const },
+    { path: '/refund-policy', priority: 0.2, changeFrequency: 'yearly' as const },
   ];
 
   locales.forEach((locale) => {

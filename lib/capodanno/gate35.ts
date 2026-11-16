@@ -77,7 +77,7 @@ const GATE_PACKS: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'nl' | 'ru', 
       'Biglietti e Tavoli 31/12 tramite Concierge +39 351 912 7047 (prepagamento 100%)',
     ],
     sourceBasis:
-      'Tariffe confermate PERREO XL Capodanno 2027 al Gate Milano: biglietti per fascia oraria 20€–45€/50€ e tavoli fino a 10 ospiti 500€ Pista / 600€ Privé VIP. Acquisto diretto via Concierge WhatsApp +39 351 912 7047 (prepagamento 100% Stripe, bonifico o link).',
+      'Tariffe confermate PERREO XL Capodanno 2027 al Gate Milano: biglietti per fascia oraria 20€–45€/50€ e tavoli fino a 10 ospiti 500€ Pista / 600€ Privé VIP. Acquisto diretto via Concierge WhatsApp +39 351 912 7047 (prepagamento 100% Carta / Online Card, bonifico o link).',
     pageCopy: {
       musicLabel: 'Genere e Format',
       tocPrices: '2. Biglietti a Fasce e Tavoli VIP Capodanno',
@@ -85,7 +85,7 @@ const GATE_PACKS: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'nl' | 'ru', 
       alertBody:
         'Per la notte di Capodanno al Gate Milano (PERREO XL) biglietti e tavoli Privé si prenotano direttamente con il Concierge Nightlife Milan su WhatsApp +39 351 912 7047 con prepagamento al 100%.',
       bookingSubtitle:
-        'Chiedi disponibilità su WhatsApp, completa il prepagamento via Stripe, bonifico o link e ricevi la conferma ufficiale per l’ingresso.',
+        'Chiedi disponibilità su WhatsApp, completa il prepagamento via Carta / Online Card, bonifico o link e ricevi la conferma ufficiale per l’ingresso.',
       shots: [
         'Main Room e Palco Gate Milano',
         'Atmosfera Reggaeton e Bar Mezzanotte',
@@ -130,7 +130,7 @@ const GATE_PACKS: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'nl' | 'ru', 
       'NYE Bookings via Concierge +39 351 912 7047 (100% Prepayment)',
     ],
     sourceBasis:
-      'Confirmed PERREO XL NYE 2027 pricing at Gate Milano: timed releases €20–€45/€50 and tables up to 10 guests (€500 Main Floor, €600 VIP Privé). Book directly with WhatsApp Concierge +39 351 912 7047 via 100% Stripe, wire, or payment link.',
+      'Confirmed PERREO XL NYE 2027 pricing at Gate Milano: timed releases €20–€45/€50 and tables up to 10 guests (€500 Main Floor, €600 VIP Privé). Book directly with WhatsApp Concierge +39 351 912 7047 via 100% Carta / Online Card, wire, or payment link.',
     pageCopy: {
       musicLabel: 'Music & Format',
       tocPrices: '2. NYE Timed Tickets & VIP Tables',
@@ -138,7 +138,7 @@ const GATE_PACKS: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'nl' | 'ru', 
       alertBody:
         'For New Year’s Eve at Gate Milano (PERREO XL), both tickets and VIP tables are booked directly through Nightlife Milan Concierge on WhatsApp +39 351 912 7047 with 100% prepayment.',
       bookingSubtitle:
-        'Check availability on WhatsApp, prepay 100% via Stripe, bank transfer, or payment link, and receive your booking confirmation.',
+        'Check availability on WhatsApp, prepay 100% via Carta / Online Card, bank transfer, or payment link, and receive your booking confirmation.',
       shots: [
         'Gate Milano Main Room & Stage',
         'Reggaeton Energy & Midnight Bar',
@@ -191,7 +191,7 @@ const GATE_PACKS: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'nl' | 'ru', 
       alertBody:
         'Para Nochevieja en Gate Milano (PERREO XL) tanto entradas como mesas VIP se reservan directamente con el Concierge Nightlife Milan por WhatsApp +39 351 912 7047 con prepago al 100%.',
       bookingSubtitle:
-        'Consulta disponibilidad en WhatsApp, completa el prepago por Stripe, transferencia o enlace y recibe tu confirmación.',
+        'Consulta disponibilidad en WhatsApp, completa el prepago por Carta / Online Card, transferencia o enlace y recibe tu confirmación.',
       shots: [
         'Sala Principal Gate Milano',
         'Ambiente Reggaetón y Barra Nocturna',
@@ -244,7 +244,7 @@ const GATE_PACKS: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'nl' | 'ru', 
       alertBody:
         'Pour la nuit du Réveillon à Gate Milano (PERREO XL), billets et tables VIP se réservent directement auprès du Concierge Nightlife Milan sur WhatsApp +39 351 912 7047 avec prépaiement 100%.',
       bookingSubtitle:
-        'Vérifiez la disponibilité sur WhatsApp, réglez à 100% par Stripe, virement ou lien et recevez votre confirmation.',
+        'Vérifiez la disponibilité sur WhatsApp, réglez à 100% par Carta / Online Card, virement ou lien et recevez votre confirmation.',
       shots: [
         'Grande Salle & Scène Gate Milano',
         'Ambiance Reggaeton & Bar de Minuit',
@@ -297,7 +297,7 @@ const GATE_PACKS: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'nl' | 'ru', 
       alertBody:
         'Für Silvester im Gate Milano (PERREO XL) werden Tickets und VIP-Tische direkt über den Nightlife Milan Concierge per WhatsApp +39 351 912 7047 mit 100% Vorauszahlung gebucht.',
       bookingSubtitle:
-        'Verfügbarkeit per WhatsApp prüfen, 100% über Stripe, Überweisung oder Zahlungslink begleichen und Bestätigung erhalten.',
+        'Verfügbarkeit per WhatsApp prüfen, 100% über Carta / Online Card, Überweisung oder Zahlungslink begleichen und Bestätigung erhalten.',
       shots: [
         'Haupthalle & Bühne Gate Milano',
         'Reggaeton-Atmosphäre & Mitternachtsbar',
@@ -350,7 +350,7 @@ const GATE_PACKS: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'nl' | 'ru', 
       alertBody:
         'Para a noite de Réveillon no Gate Milano (PERREO XL), ingressos e mesas VIP são reservados diretamente com o Concierge Nightlife Milan pelo WhatsApp +39 351 912 7047 com pré-pagamento de 100%.',
       bookingSubtitle:
-        'Consulte a disponibilidade no WhatsApp, pague 100% via Stripe, transferência ou link e receba a confirmação.',
+        'Consulte a disponibilidade no WhatsApp, pague 100% via Carta / Online Card, transferência ou link e receba a confirmação.',
       shots: [
         'Salão Principal e Palco Gate Milano',
         'Clima Reggaeton e Bar da Virada',
@@ -403,7 +403,7 @@ const GATE_PACKS: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'nl' | 'ru', 
       alertBody:
         'Voor Oud & Nieuw bij Gate Milano (PERREO XL) worden zowel tickets als VIP-tafels rechtstreeks via Nightlife Milan Concierge op WhatsApp +39 351 912 7047 geboekt met 100% vooruitbetaling.',
       bookingSubtitle:
-        'Controleer beschikbaarheid op WhatsApp, betaal vooraf via Stripe, overschrijving of betaallink en ontvang je bevestiging.',
+        'Controleer beschikbaarheid op WhatsApp, betaal vooraf via Carta / Online Card, overschrijving of betaallink en ontvang je bevestiging.',
       shots: [
         'Hoofdzaal & Podium Gate Milano',
         'Reggaeton-sfeer & Middernachtbar',
@@ -456,7 +456,7 @@ const GATE_PACKS: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'nl' | 'ru', 
       alertBody:
         'На новогоднюю ночь в Gate Milano (PERREO XL) билеты и VIP-столы оформляются напрямую через консьержа Nightlife Milan в WhatsApp +39 351 912 7047 со 100% предоплатой.',
       bookingSubtitle:
-        'Уточните наличие мест в WhatsApp, оплатите 100% через Stripe, перевод или платёжную ссылку и получите подтверждение.',
+        'Уточните наличие мест в WhatsApp, оплатите 100% через Carta / Online Card, перевод или платёжную ссылку и получите подтверждение.',
       shots: [
         'Главный зал и сцена Gate Milano',
         'Реггетон-вечеринка и бар в полночь',
@@ -560,7 +560,7 @@ const ALL_GATE_PACKS: Record<LocaleCode, GateLocalePack> = {
       alertTitle: '12月31日跨年夜官方礼宾预订',
       alertBody:
         'Gate Milano PERREO XL 跨年专场的门票及 VIP 卡座均须通过 Nightlife Milan 礼宾 WhatsApp +39 351 912 7047 全额预付预订。',
-      bookingSubtitle: '通过 WhatsApp 查询余位，使用 Stripe、银行转账或付款链接完成100%预付并获取确认。',
+      bookingSubtitle: '通过 WhatsApp 查询余位，使用 线上银行卡支付银行转账或付款链接完成100%预付并获取确认。',
       shots: ['Gate Milano 主厅舞台', 'Reggaeton 跨年吧台', '舞池及 Privé VIP 卡座区', 'Via Valtellina 俱乐部入口'],
     },
   ),
@@ -581,7 +581,7 @@ const ALL_GATE_PACKS: Record<LocaleCode, GateLocalePack> = {
       alertTitle: 'حجوزات رأس السنة الرسمية 31 ديسمبر',
       alertBody:
         'لليلة رأس السنة في Gate Milano (PERREO XL) يتم حجز التذاكر وطاولات VIP مباشرة عبر كونسيرج Nightlife Milan على واتساب +39 351 912 7047 بدفع مسبق 100%.',
-      bookingSubtitle: 'تحقق من التوفر عبر واتساب وأكمل الدفع المسبق عبر Stripe أو التحويل لاستلام التأكيد.',
+      bookingSubtitle: 'تحقق من التوفر عبر واتساب وأكمل الدفع المسبق عبر البطاقة البنكية أو التحويل لاستلام التأكيد.',
       shots: ['القاعة الرئيسية في Gate Milano', 'أجواء الريغيتون والبار', 'منطقة طاولات حلبة الرقص وVIP', 'مدخل Via Valtellina'],
     },
   ),
@@ -641,7 +641,7 @@ const ALL_GATE_PACKS: Record<LocaleCode, GateLocalePack> = {
       tocPrices: '2. Vstupenky dle času a VIP stoly',
       alertTitle: 'OFICIÁLNÍ SILVESTROVSKÉ REZERVACE 31. PROSINCE',
       alertBody: 'Na Silvestra v Gate Milano (PERREO XL) se vstupenky i VIP stoly rezervují přímo přes WhatsApp +39 351 912 7047 se 100% platbou předem.',
-      bookingSubtitle: 'Ověřte dostupnost na WhatsAppu a uhraďte 100% přes Stripe nebo převodem.',
+      bookingSubtitle: 'Ověřte dostupnost na WhatsAppu a uhraďte 100% platební kartou online nebo převodem.',
       shots: ['Hlavní sál Gate Milano', 'Reggaeton bar a atmosféra', 'Stoly na parketu a VIP Privé', 'Vstup Via Valtellina'],
     },
   ),
@@ -761,7 +761,7 @@ const ALL_GATE_PACKS: Record<LocaleCode, GateLocalePack> = {
       tocPrices: '2. Ticéid & Boird VIP',
       alertTitle: 'ÁIRITHINTÍ OIFIGIÚLA 31 NOLLAIG',
       alertBody: 'Chun ticéad nó bord VIP a chur in áirithe do Gate Milano (PERREO XL), scríobh ar WhatsApp +39 351 912 7047 le réamhíocaíocht 100%.',
-      bookingSubtitle: 'Fiafraigh ar WhatsApp agus íoc roimh ré le Stripe nó aistriú bainc.',
+      bookingSubtitle: 'Fiafraigh ar WhatsApp agus íoc roimh ré le Online Card nó aistriú bainc.',
       shots: ['Príomh-seomra Gate Milano', 'Atmaisféar Reggaeton', 'Boird Rince & VIP Privé', 'Bealach isteach Via Valtellina'],
     },
   ),

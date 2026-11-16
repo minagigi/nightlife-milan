@@ -1,5 +1,5 @@
 import crypto from 'node:crypto';
-import { get, list, put } from '@vercel/blob';
+import { del, get, list, put } from '@vercel/blob';
 import type {
   SinglePassMember,
   SinglePassOrder,
@@ -99,6 +99,21 @@ async function writePrivateJson(pathname: string, value: unknown): Promise<void>
   });
 }
 
+async function deletePrivateBlob(pathname: string): Promise<void> {
+  if (!singlePassBlobConfigured()) {
+    memoryBlobs.delete(pathname);
+    return;
+  }
+  const token = (process.env.BLOB_READ_WRITE_TOKEN || '').trim();
+  try {
+    await del(pathname, { token });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    if (/not found|404|BlobNotFoundError/i.test(message)) return;
+    throw error;
+  }
+}
+
 function getVaultMasterKey(): Buffer {
   const seed =
     (process.env.VAULT_ENCRYPTION_KEY || '').trim() ||
@@ -170,18 +185,39 @@ export function toOrderSummary(order: SinglePassOrder): SinglePassOrderSummary {
   const itemSummary = order.items
     .map((item) => `${item.quantity}x ${item.venueName} - ${item.title}`)
     .join(' | ');
+  const totalHeadcount =
+    typeof order.totalHeadcount === 'number' && order.totalHeadcount > 0
+      ? order.totalHeadcount
+      : order.items.reduce((sum, item) => sum + (item.totalGuests || item.quantity || 1), 0);
+
   return {
     id: order.id,
     email: normalizeEmail(order.customer.email),
     fullName: order.customer.fullName,
     whatsapp: order.customer.whatsapp,
     age: order.customer.age,
+    ...(order.customer.country ? { country: order.customer.country } : {}),
     spokenLanguages: order.customer.spokenLanguages,
     venueIds,
     itemSummary,
+    totalHeadcount,
     subtotalBaseCents: order.subtotalBaseCents,
     feeCents: order.feeCents,
     totalCents: order.totalCents,
+    presentmentCurrency: order.presentmentCurrency || 'EUR',
+    presentmentTotalMinor: order.presentmentTotalMinor ?? order.totalCents,
+    fxRate: order.fxRate ?? 1,
+    ...(order.attribution?.firstLandingPath
+      ? { firstLandingPath: order.attribution.firstLandingPath }
+      : {}),
+    ...(order.attribution?.addedFromPaths?.length
+      ? { addedFromPaths: order.attribution.addedFromPaths }
+      : {}),
+    ...(order.attribution?.initialReferrer
+      ? { initialReferrer: order.attribution.initialReferrer }
+      : {}),
+    ...(order.attribution?.utmSource ? { utmSource: order.attribution.utmSource } : {}),
+    ...(order.attribution?.utmCampaign ? { utmCampaign: order.attribution.utmCampaign } : {}),
     status: order.status,
     whatsappGroupStatus: order.whatsappGroupStatus,
     whatsappGroupInviteUrl: order.whatsappGroupInviteUrl,
@@ -217,6 +253,37 @@ export async function saveOrder(order: SinglePassOrder): Promise<SinglePassOrder
   await writePrivateJson(orderStorageKey(order.id), order);
   await upsertOrderIndex(order);
   return order;
+}
+
+export async function deleteOrderById(orderId: string): Promise<boolean> {
+  const cleanId = orderId.trim().toUpperCase();
+  if (!cleanId) return false;
+
+  const existingOrder = await getOrderById(cleanId);
+  await deletePrivateBlob(orderStorageKey(cleanId));
+
+  const current = await readPrivateJson<OrdersIndexDoc>(ORDERS_INDEX_PATH);
+  if (current) {
+    const nextOrders = current.orders.filter((entry) => entry.id.toUpperCase() !== cleanId);
+    await writePrivateJson(ORDERS_INDEX_PATH, {
+      version: 1 as const,
+      updatedAt: new Date().toISOString(),
+      orders: nextOrders,
+    });
+  }
+
+  if (existingOrder?.customer?.email) {
+    const member = await getMemberByEmail(existingOrder.customer.email);
+    if (member && member.orderIds.includes(existingOrder.id)) {
+      await saveMember({
+        ...member,
+        orderIds: member.orderIds.filter((id) => id !== existingOrder.id),
+        updatedAt: new Date().toISOString(),
+      });
+    }
+  }
+
+  return Boolean(existingOrder) || Boolean(current);
 }
 
 export async function getOrdersForMember(member: SinglePassMember): Promise<SinglePassOrder[]> {
@@ -275,4 +342,12 @@ export async function listAllOrderSummaries(): Promise<SinglePassOrderSummary[]>
   }
 
   return Array.from(byId.values()).sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+}
+
+export async function listAllOrders(limit = 500): Promise<SinglePassOrder[]> {
+  const summaries = await listAllOrderSummaries();
+  const orders = await Promise.all(summaries.slice(0, limit).map((s) => getOrderById(s.id)));
+  return orders
+    .filter((o): o is SinglePassOrder => Boolean(o))
+    .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 }

@@ -1,0 +1,68 @@
+{
+  "assets": [
+    {
+      "file": "public/images/events/capodanno-2027-posters/capodanno-bobino-milano.webp",
+      "bytes": 91200,
+      "size": [
+        1376,
+        768
+      ]
+    },
+    {
+      "file": "public/images/events/capodanno-2027-menus/bobino-nye-2027-menu-legends-120.webp",
+      "bytes": 94680,
+      "size": [
+        1376,
+        768
+      ]
+    },
+    {
+      "file": "public/images/events/capodanno-2027-menus/bobino-nye-2027-party-legends-30.webp",
+      "bytes": 96660,
+      "size": [
+        1376,
+        768
+      ],
+      "roi": [
+        220,
+        872,
+        860,
+        1020
+      ],
+      "bg_laplacian_var": 0.0029,
+      "post_sobel_p99": 966.18
+    },
+    {
+      "file": "public/images/seo-events/master/bobino-milano.webp",
+      "bytes": 250756,
+      "size": [
+        1376,
+        768
+      ]
+    },
+    {
+      "file": "public/images/seo-events/master/bobino-milano-cena-01.webp",
+      "bytes": 247396,
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "file": "public/images/seo-events/master/bobino-milano-live-01.webp",
+      "bytes": 231330,
+      "size": [
+        1376,
+        768
+      ]
+    },
+    {
+      "file": "public/images/seo-events/master/bobino-milano-party-01.webp",
+      "bytes": 237774,
+      "size": [
+        1920,
+        1080
+      ]
+    }
+  ]
+}

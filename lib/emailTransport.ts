@@ -52,6 +52,7 @@ export async function sendAttendeeEmail(message: EmailMessage): Promise<EmailTra
       headers: {
         Authorization: `Bearer ${apiKey}`,
         'content-type': 'application/json',
+        ...(message.idempotencyKey ? { 'Idempotency-Key': message.idempotencyKey } : {}),
       },
       body: JSON.stringify(body),
       signal: controller.signal,

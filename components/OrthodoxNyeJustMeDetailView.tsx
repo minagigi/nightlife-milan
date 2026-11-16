@@ -22,6 +22,7 @@ import {
   orthodoxNyeJustMePath,
 } from '@/lib/orthodox-nye/justme35';
 import { buildSeoEventImagePack } from '@/lib/seoEventImages';
+import SinglePassVenueModule from '@/components/single-pass/SinglePassVenueModule';
 
 function safeJsonLd(value: unknown): string {
   return JSON.stringify(value).replace(/</g, '\\u003c');
@@ -376,6 +377,9 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
             </div>
           </div>
         </section>
+
+        {/* Confirmed Direct E-Commerce Tickets */}
+        <SinglePassVenueModule locale={locale} venueId="justme-orthodox" />
 
         {/* 2. Silver €60 & Gold €80 Menus */}
         <section id="menus" className="mt-10 space-y-8 border border-[#24242C] bg-[#0B0C10] p-6 sm:p-10">

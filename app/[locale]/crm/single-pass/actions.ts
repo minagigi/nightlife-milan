@@ -1,8 +1,8 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { getOrderById, saveOrder } from '@/lib/single-pass/store';
-import { validateAndSaveStripeKey } from '@/lib/single-pass/stripe';
+import { deleteOrderById, getOrderById, saveOrder } from '@/lib/single-pass/store';
+import { syncPaymentWebhookEvents, validateAndSaveStripeKey } from '@/lib/single-pass/stripe';
 import type { WhatsappMiniGroupStatus } from '@/lib/single-pass/types';
 
 export async function saveStripeVaultAction(formData: FormData): Promise<void> {
@@ -12,6 +12,25 @@ export async function saveStripeVaultAction(formData: FormData): Promise<void> {
   if (!secretKey) return;
 
   await validateAndSaveStripeKey(secretKey, siteOrigin);
+  revalidatePath(`/${locale}/crm/single-pass`);
+  revalidatePath('/crm/single-pass');
+}
+
+export async function syncWebhookAction(formData: FormData): Promise<void> {
+  const siteOrigin = String(formData.get('siteOrigin') || 'https://nightlifemilan.com').trim();
+  const locale = String(formData.get('locale') || 'it').trim();
+
+  await syncPaymentWebhookEvents(siteOrigin);
+  revalidatePath(`/${locale}/crm/single-pass`);
+  revalidatePath('/crm/single-pass');
+}
+
+export async function deleteOrderAction(formData: FormData): Promise<void> {
+  const orderId = String(formData.get('orderId') || '').trim();
+  const locale = String(formData.get('locale') || 'it').trim();
+  if (!orderId) return;
+
+  await deleteOrderById(orderId);
   revalidatePath(`/${locale}/crm/single-pass`);
   revalidatePath('/crm/single-pass');
 }

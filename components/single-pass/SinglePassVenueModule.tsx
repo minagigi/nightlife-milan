@@ -23,7 +23,7 @@ export default function SinglePassVenueModule({
   venueId: SinglePassVenueId;
 }) {
   const router = useRouter();
-  const { addItem } = useSinglePassCart();
+  const { addItem, currency, formatConvertedEurCents } = useSinglePassCart();
   const venue = VENUE_BY_ID[venueId];
   const skus = getSkusForVenue(venueId);
   const copy = getSinglePassCopy(locale);
@@ -34,22 +34,22 @@ export default function SinglePassVenueModule({
 
   return (
     <section
-      id="single-pass-stripe"
+      id="official-tickets-ecommerce"
       data-single-pass-venue={venueId}
       className="mt-10 border border-[#050505]/20 bg-[#F6F1E7] p-6 text-[#050505] sm:p-8"
     >
       <div className="flex flex-col gap-3 border-b border-[#050505]/15 pb-5 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-[#3D3830]">
-            SINGLE PASS E-COMMERCE · {isIt ? venue.ageBandLabelIt : venue.ageBandLabelEn}
+            NIGHTLIFE MILAN E-COMMERCE · {isIt ? venue.ageBandLabelIt : venue.ageBandLabelEn}
           </p>
           <h2 className="mt-1 font-serif text-2xl font-bold text-[#050505]">
             {isIt
-              ? `Vieni da solo al ${venue.name}? Acquista il Single Pass su Stripe`
-              : `Coming solo to ${venue.name}? Buy your Single Pass on Stripe`}
+              ? `Acquista online i pacchetti confermati · ${venue.name}`
+              : `Book Official Confirmed Packages Online · ${venue.name}`}
           </h2>
           <p className="mt-1.5 text-sm text-[#24201B]">
-            {copy.trustStripe} · {copy.trustEqualPrice}
+            {copy.trustOnlinePayment} · {copy.trustEqualPrice}
           </p>
         </div>
         <Link
@@ -64,6 +64,7 @@ export default function SinglePassVenueModule({
       <div className="mt-5 grid gap-4 md:grid-cols-2">
         {skus.map((sku) => {
           const p = computeSinglePassPrice(sku.basePriceCents, 1);
+          const guests = sku.guestsPerUnit || 1;
           return (
             <div
               key={sku.id}
@@ -74,7 +75,10 @@ export default function SinglePassVenueModule({
                   <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#3D3830]">
                     {copy.categoryLabels[sku.category]}
                   </span>
-                  <span className="font-mono text-xs font-bold text-[#050505]">{sku.arrivalTime}</span>
+                  <span className="font-mono text-xs font-bold text-[#050505]">
+                    {guests > 1 ? `${guests} pax · ` : ''}
+                    {sku.arrivalTime}
+                  </span>
                 </div>
                 <h3 className="mt-1.5 font-serif text-lg font-bold text-[#050505]">
                   {isIt ? sku.titleIt : sku.titleEn}
@@ -89,7 +93,14 @@ export default function SinglePassVenueModule({
                   <span className="text-[#3D3830]">
                     {formatEurFromCents(p.unitBaseCents, locale)} + {formatEurFromCents(p.unitFeeCents, locale)} (15%) ={' '}
                   </span>
-                  <strong className="text-sm text-[#050505]">{formatEurFromCents(p.unitTotalCents, locale)}</strong>
+                  <strong className="text-sm text-[#050505]">
+                    {formatEurFromCents(p.unitTotalCents, locale)}
+                  </strong>
+                  {currency !== 'EUR' && (
+                    <span className="ml-1.5 text-[11px] font-bold text-[#5C4415]">
+                      (~{formatConvertedEurCents(p.unitTotalCents)})
+                    </span>
+                  )}
                 </div>
                 <div className="flex gap-2">
                   <button
@@ -104,7 +115,7 @@ export default function SinglePassVenueModule({
                     type="button"
                     onClick={() => {
                       addItem(sku.id, 1, sku.dietaryPreset, false);
-                      router.push(`${lp}/cart`);
+                      router.push(`${lp}/checkout`);
                     }}
                     className="inline-flex min-h-[40px] items-center bg-[#050505] px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-[#F6F1E7] hover:bg-[#24201B]"
                   >

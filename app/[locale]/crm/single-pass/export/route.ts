@@ -1,4 +1,5 @@
-import { listAllOrderSummaries } from '@/lib/single-pass/store';
+import { formatMinorCurrency } from '@/lib/single-pass/currency';
+import { listAllOrders } from '@/lib/single-pass/store';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -14,12 +15,12 @@ export async function GET(request: Request) {
   const venueFilter = (url.searchParams.get('venue') || 'all').trim();
   const statusFilter = (url.searchParams.get('status') || 'all').trim();
 
-  const summaries = await listAllOrderSummaries();
-  const filtered = summaries.filter((s) => {
-    if (venueFilter !== 'all' && !s.venueIds.includes(venueFilter as (typeof s.venueIds)[number])) {
+  const orders = await listAllOrders(500);
+  const filtered = orders.filter((o) => {
+    if (venueFilter !== 'all' && !o.items.some((i) => i.venueId === venueFilter)) {
       return false;
     }
-    if (statusFilter !== 'all' && s.status !== statusFilter) {
+    if (statusFilter !== 'all' && o.status !== statusFilter) {
       return false;
     }
     return true;
@@ -30,14 +31,25 @@ export async function GET(request: Request) {
     'Status',
     'Full Name',
     'Age',
-    'WhatsApp',
+    'Country',
+    'Phone / WhatsApp',
     'Email',
     'Spoken Languages',
+    'Headcount',
     'Venues',
     'Packages',
     'Base EUR',
     'Fee +15% EUR',
     'Total EUR',
+    'Presentment Currency',
+    'Presentment Total',
+    'FX Rate',
+    'First Landing Page',
+    'Added From Pages',
+    'Journey Trail',
+    'Initial Referrer',
+    'UTM Source',
+    'UTM Campaign',
     'WhatsApp Group Status',
     'Created At',
     'Paid At',
@@ -45,30 +57,50 @@ export async function GET(request: Request) {
 
   const rows = [
     headers.map(csvCell).join(','),
-    ...filtered.map((s) =>
-      [
-        s.id,
-        s.status,
-        s.fullName,
-        s.age,
-        s.whatsapp,
-        s.email,
-        s.spokenLanguages.join('; '),
-        s.venueIds.join('; '),
-        s.itemSummary,
-        (s.subtotalBaseCents / 100).toFixed(2),
-        (s.feeCents / 100).toFixed(2),
-        (s.totalCents / 100).toFixed(2),
-        s.whatsappGroupStatus,
-        s.createdAt,
-        s.paidAt || '',
+    ...filtered.map((o) => {
+      const venues = Array.from(new Set(o.items.map((i) => i.venueName))).join('; ');
+      const pkgs = o.items
+        .map((i) => `${i.quantity}x ${i.venueName} - ${i.title}`)
+        .join(' | ');
+      const headcount =
+        o.totalHeadcount || o.items.reduce((s, i) => s + (i.totalGuests || i.quantity), 0);
+      const cur = (o.presentmentCurrency || 'EUR').toUpperCase();
+      const presStr = formatMinorCurrency(o.presentmentTotalMinor ?? o.totalCents, cur, 'en');
+
+      return [
+        o.id,
+        o.status,
+        o.customer.fullName,
+        o.customer.age,
+        o.customer.country || o.attribution?.ipCountry || '',
+        o.customer.whatsapp,
+        o.customer.email,
+        o.customer.spokenLanguages.join('; '),
+        headcount,
+        venues,
+        pkgs,
+        (o.subtotalBaseCents / 100).toFixed(2),
+        (o.feeCents / 100).toFixed(2),
+        (o.totalCents / 100).toFixed(2),
+        cur,
+        presStr,
+        o.fxRate ?? 1,
+        o.attribution?.firstLandingPath || '',
+        (o.attribution?.addedFromPaths || []).join('; '),
+        (o.attribution?.journeyPaths || []).join(' -> '),
+        o.attribution?.initialReferrer || '',
+        o.attribution?.utmSource || '',
+        o.attribution?.utmCampaign || '',
+        o.whatsappGroupStatus,
+        o.createdAt,
+        o.paidAt || '',
       ]
         .map(csvCell)
-        .join(','),
-    ),
+        .join(',');
+    }),
   ];
 
-  const filename = `nightlife-milan-single-pass-${new Date().toISOString().slice(0, 10)}.csv`;
+  const filename = `nightlife-milan-ecommerce-${new Date().toISOString().slice(0, 10)}.csv`;
   return new Response(rows.join('\n'), {
     headers: {
       'Cache-Control': 'private, no-store',

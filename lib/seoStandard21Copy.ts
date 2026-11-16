@@ -549,7 +549,7 @@ export function getSeoStandard21Copy(lang: LocaleCode, pageKey?: string): SeoSta
           { href: `${lp}/clubs/alcatraz-milano`, label: 'Alcatraz Milano · Via Valtellina Live & Club' },
           { href: `${lp}/clubs/fabrique-milano`, label: 'Fabrique Milano · Via Fantoli Concert & Club Arena' },
           { href: `${lp}/clubs/the-beach-milano`, label: 'The Beach Club · Via Corelli Milano' },
-          { href: `${lp}/clubs/bobino-milano`, label: 'Bobino Milano · Alzaia Naviglio Grande & Porta Genova' },
+          { href: `${lp}/clubs/bobino-milano`, label: 'Bobino Milano · Piazzale Stazione Genova 4 & Porta Genova' },
         ],
       },
       {

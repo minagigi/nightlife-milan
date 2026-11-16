@@ -6,11 +6,12 @@ import { Minus, Plus, ShoppingBag, Trash2, UserCheck, X } from 'lucide-react';
 import Link from '@/components/LocalizedLink';
 import { localePrefix } from '@/lib/i18n/locales';
 import {
-  SKU_BY_ID,
   VENUE_BY_ID,
   computeSinglePassPrice,
   formatEurFromCents,
+  resolveCatalogSku,
 } from '@/lib/single-pass/catalog';
+import { formatMinorCurrency, type SupportedCurrency } from '@/lib/single-pass/currency';
 import { getSinglePassCopy } from '@/lib/single-pass/i18n35';
 import { useSinglePassCart } from './SinglePassCartContext';
 
@@ -24,6 +25,10 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
     subtotalBaseCents,
     totalFeeCents,
     grandTotalCents,
+    currency,
+    setCurrency,
+    convertedTotalMinor,
+    supportedCurrencies,
   } = useSinglePassCart();
 
   const copy = getSinglePassCopy(lang);
@@ -97,9 +102,11 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
               ) : (
                 <div className="space-y-4">
                   {items.map((item) => {
-                    const sku = SKU_BY_ID.get(item.skuId);
+                    const sku = resolveCatalogSku(item.skuId);
                     if (!sku) return null;
                     const venue = VENUE_BY_ID[sku.venueId];
+                    const venueName = sku.venueNameOverride || venue?.name || 'Nightlife Milan';
+                    const posterSrc = venue?.posterSrc || '/images/events/capodanno-2027-posters/capodanno-justme-milano-torre-branca.webp';
                     const pricing = computeSinglePassPrice(sku.basePriceCents, item.quantity);
                     const pkgTitle = isIt ? sku.titleIt : sku.titleEn;
 
@@ -110,13 +117,13 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
                       >
                         <div className="flex items-start gap-3">
                           <img
-                            src={venue.posterSrc}
-                            alt={venue.name}
+                            src={posterSrc}
+                            alt={venueName}
                             className="h-16 w-16 shrink-0 border border-[#F6F1E7]/15 bg-[#050505] object-contain"
                           />
                           <div className="min-w-0 flex-1">
                             <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#EAE3D5]">
-                              {venue.name} · {isIt ? venue.ageBandLabelIt : venue.ageBandLabelEn}
+                              {venueName} · {sku.arrivalTime}
                             </p>
                             <p className="mt-1 font-serif text-base font-bold leading-snug text-[#F6F1E7]">
                               {pkgTitle}
@@ -177,6 +184,23 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
             <div className="border-t border-[#F6F1E7]/14 bg-[#0B0A09] p-6">
               {items.length > 0 && (
                 <div className="mb-4 space-y-2 text-sm">
+                  <div className="flex items-center justify-between gap-2 pb-1">
+                    <label htmlFor="drawer-currency-select" className="text-xs text-[#C2B9AA]">
+                      {copy.currencySelectorLabel}
+                    </label>
+                    <select
+                      id="drawer-currency-select"
+                      value={currency}
+                      onChange={(e) => setCurrency(e.target.value as SupportedCurrency)}
+                      className="h-8 border border-[#F6F1E7]/25 bg-[#050505] px-2 font-mono text-xs font-bold text-[#F6F1E7]"
+                    >
+                      {supportedCurrencies.map((c) => (
+                        <option key={c} value={c}>
+                          {c}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                   <div className="flex justify-between text-[#C2B9AA]">
                     <span>{copy.drawerSubtotalLabel}</span>
                     <span className="font-mono">{formatEurFromCents(subtotalBaseCents, lang)}</span>
@@ -189,19 +213,37 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
                     <span>{copy.totalLabel}</span>
                     <span className="font-mono">{formatEurFromCents(grandTotalCents, lang)}</span>
                   </div>
+                  {currency !== 'EUR' && (
+                    <div className="flex justify-between text-xs font-bold text-[#C9A84C]">
+                      <span>{copy.chargedInCurrencyLabel} ({currency})</span>
+                      <span className="font-mono">
+                        ~{formatMinorCurrency(convertedTotalMinor, currency, lang)}
+                      </span>
+                    </div>
+                  )}
                 </div>
               )}
 
               <div className="grid gap-2.5">
                 {items.length > 0 && (
-                  <Link
-                    href={`${lp}/cart`}
-                    locale={lang}
-                    onClick={() => setCartOpen(false)}
-                    className="flex min-h-[48px] w-full items-center justify-center bg-[#F6F1E7] px-5 py-3 text-xs font-extrabold uppercase tracking-widest text-[#050505] transition hover:bg-[#EAE3D5]"
-                  >
-                    {copy.drawerCheckoutCta}
-                  </Link>
+                  <>
+                    <Link
+                      href={`${lp}/checkout`}
+                      locale={lang}
+                      onClick={() => setCartOpen(false)}
+                      className="flex min-h-[48px] w-full items-center justify-center bg-[#F6F1E7] px-5 py-3 text-xs font-extrabold uppercase tracking-widest text-[#050505] transition hover:bg-[#EAE3D5]"
+                    >
+                      {copy.drawerCheckoutCta}
+                    </Link>
+                    <Link
+                      href={`${lp}/cart`}
+                      locale={lang}
+                      onClick={() => setCartOpen(false)}
+                      className="flex min-h-[40px] w-full items-center justify-center border border-[#F6F1E7]/25 px-4 py-2 text-[11px] font-bold uppercase tracking-wider text-[#EAE3D5] transition hover:border-[#F6F1E7]"
+                    >
+                      {copy.drawerCartCta}
+                    </Link>
+                  </>
                 )}
                 <Link
                   href={`${lp}/account`}

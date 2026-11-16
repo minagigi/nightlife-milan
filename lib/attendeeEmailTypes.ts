@@ -76,6 +76,7 @@ export interface EmailMessage {
   html: string;
   text: string;
   listUnsubscribeUrl?: string;
+  idempotencyKey?: string;
 }
 
 export interface EmailTransportResult {

@@ -3203,7 +3203,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "cluster": "venue",
     "slugKey": "bobino-milan",
     "venueSlug": "bobino-milan",
-    "name": "Bobino Milano (Alzaia Naviglio Grande)",
+    "name": "Bobino Milano (Piazzale Stazione Genova 4)",
     "shortName": "Bobino",
     "zone": "Navigli, Porta Genova & Tortona",
     "address": "Piazzale Stazione Genova 4, 20144 Milano MI",

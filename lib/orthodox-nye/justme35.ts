@@ -760,7 +760,7 @@ const CORE_35: Record<LocaleCode, CoreLocalePack> = {
       '国际舞池 · Guest Star DJ Nazar Radchuk 带领现场狂欢至凌晨 05:00',
     ],
     extraNativeParagraph:
-      '本场 2027 年 1 月 13 日 东正教新年 派对 汇聚 米兰 本地 时尚 名流、在 意 留学生 与 来自 东欧、巴尔干 及 世界各地 的 国际 嘉宾。从 19:30 的 意式 精选 晚宴 到 23:30 后 开放 的 主舞池，DJ Nazar Radchuk 将 呈现 House 浩室、Hip-Hop 嘻哈 与 全球 流行 金曲 的 无缝 混音。场地 全程 配备 冬季 恒温 玻璃 顶棚 与 Torre Branca 夜间 照明，为 所有 年满 21 岁 以上 宾客 提供 零 寒冷 负担 的 奢华 夜生活 体验。晚餐 菜单 提供 Silver 60 欧元 与 Gold 80 欧元 两档 官方 套餐：Silver 含 茄子 帕玛森 芝士 千层、新派 鲈鱼、炸春卷、海鲜 意式 烩饭 与 开心果 芝士 蛋糕；Gold 含 意式 海鲜 沙律、金枪鱼 布拉塔 鱼子酱 塔可、炙烤 三文鱼、龙虾 意面、味噌 红鱼子 三文鱼 排 与 黑樱桃 巧克力 甜点，均 配每 4 人 1 瓶 水 与 1 瓶 葡萄酒。交通 可乘 地铁 M1 Cadorna 与 M2 Lanza 步行 抵达 Parco Sempione，VIP 卡座 通过 +39 351 912 7047 礼宾 24/7 预付 确认。礼宾 服务 涵盖 100% 在线 Stripe 支付 链接、银行 转账 及 实时 二维码 电子 确认 单，所有 入场 宾客 均 享 红色 或 发光 配饰 最佳 造型 4 星级 高山 度假 公寓 一周 住宿 评选 资格，从 20:00 入席 至 次日 05:00 全程 护航。',
+      '本场 2027 年 1 月 13 日 东正教新年 派对 汇聚 米兰 本地 时尚 名流、在 意 留学生 与 来自 东欧、巴尔干 及 世界各地 的 国际 嘉宾。从 19:30 的 意式 精选 晚宴 到 23:30 后 开放 的 主舞池，DJ Nazar Radchuk 将 呈现 House 浩室、Hip-Hop 嘻哈 与 全球 流行 金曲 的 无缝 混音。场地 全程 配备 冬季 恒温 玻璃 顶棚 与 Torre Branca 夜间 照明，为 所有 年满 21 岁 以上 宾客 提供 零 寒冷 负担 的 奢华 夜生活 体验。晚餐 菜单 提供 Silver 60 欧元 与 Gold 80 欧元 两档 官方 套餐：Silver 含 茄子 帕玛森 芝士 千层、新派 鲈鱼、炸春卷、海鲜 意式 烩饭 与 开心果 芝士 蛋糕；Gold 含 意式 海鲜 沙律、金枪鱼 布拉塔 鱼子酱 塔可、炙烤 三文鱼、龙虾 意面、味噌 红鱼子 三文鱼 排 与 黑樱桃 巧克力 甜点，均 配每 4 人 1 瓶 水 与 1 瓶 葡萄酒。交通 可乘 地铁 M1 Cadorna 与 M2 Lanza 步行 抵达 Parco Sempione，VIP 卡座 通过 +39 351 912 7047 礼宾 24/7 预付 确认。礼宾 服务 涵盖 100% 在线 线上银行卡支付 链接、银行 转账 及 实时 二维码 电子 确认 单，所有 入场 宾客 均 享 红色 或 发光 配饰 最佳 造型 4 星级 高山 度假 公寓 一周 住宿 评选 资格，从 20:00 入席 至 次日 05:00 全程 护航。',
     nativeFaqs: [
       {
         q: '1月13日 米兰 JustMe 东正教新年 晚宴 与 夜店 的 具体 入场 时间 是 什么？',
@@ -4025,7 +4025,7 @@ function buildMultilingualNarrativeAndFaqs(
         },
         {
           q: 'Come funziona la prenotazione dei Tavoli VIP Privé e i termini di pagamento?',
-          a: 'Si contatta il Concierge WhatsApp +39 351 912 7047 (attivo 24/24, 7 su 7) indicando numero di persone e orario: ricevuta conferma della disponibilità, la prenotazione si fissa con prepagamento al 100% via Stripe, bonifico bancario o link di pagamento, invio ricevuta al concierge, conferma di incasso ed email finale con i dati tavolo.',
+          a: 'Si contatta il Concierge WhatsApp +39 351 912 7047 (attivo 24/24, 7 su 7) indicando numero di persone e orario: ricevuta conferma della disponibilità, la prenotazione si fissa con prepagamento al 100% via Carta / Online Card, bonifico bancario o link di pagamento, invio ricevuta al concierge, conferma di incasso ed email finale con i dati tavolo.',
         },
         {
           q: 'Qual è l’età minima richiesta e quali documenti servono all’ingresso?',
@@ -4064,7 +4064,7 @@ function buildMultilingualNarrativeAndFaqs(
           },
           {
             q: '如何预订 VIP Privé 尊享卡座以及 100% 预付款确认流程是什么？',
-            a: '请 24/7 全天候联系 WhatsApp 礼宾专线 +39 351 912 7047 说明人数与到场时间；确认实时空位后通过 Stripe、银行转账或付款链接完成 100% 预付款并回传凭证，随后立即收到礼宾收款确认及官方邮件凭据。',
+            a: '请 24/7 全天候联系 WhatsApp 礼宾专线 +39 351 912 7047 说明人数与到场时间；确认实时空位后线上银行卡支付、银行转账或付款链接完成 100% 预付款并回传凭证，随后立即收到礼宾收款确认及官方邮件凭据。',
           },
           {
             q: '派对入场是否有最低年龄限制和证件要求？',
@@ -4102,7 +4102,7 @@ function buildMultilingualNarrativeAndFaqs(
           },
           {
             q: 'How do VIP Privé tables and the 6-step 100% prepayment confirmation work?',
-            a: 'Message our 24/7 Concierge on WhatsApp +39 351 912 7047 with your party size; once availability is confirmed, complete 100% prepayment via Stripe, bank transfer, or payment link, send your receipt on the same number, and receive immediate confirmation plus the official email voucher.',
+            a: 'Message our 24/7 Concierge on WhatsApp +39 351 912 7047 with your party size; once availability is confirmed, complete 100% prepayment via Carta / Online Card, bank transfer, or payment link, send your receipt on the same number, and receive immediate confirmation plus the official email voucher.',
           },
           {
             q: 'What are the age requirement and ID rules at the door?',

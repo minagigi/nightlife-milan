@@ -97,7 +97,7 @@ export default async function CrmPage({
             href={`${crmPath}/single-pass`}
             className="inline-flex h-10 shrink-0 items-center border border-emerald-400/50 bg-emerald-950/30 px-4 text-xs font-bold uppercase tracking-wider text-emerald-200 hover:bg-emerald-900/40"
           >
-            Single Pass Stripe (+15%) & Gruppi 20/12 →
+            E-Commerce &amp; Single Pass (+15%) Analytics →
           </Link>
         </header>
 

@@ -140,7 +140,12 @@ export const superClubVenueBatch: Venue[] = [
       },
     },
     image: '/images/seo-events/master/bobino-milano.webp',
-    gallery: ['/images/milan-navigli-nightlife-canal-bars.webp'],
+    gallery: [
+      '/images/seo-events/master/bobino-milano.webp',
+      '/images/seo-events/master/bobino-milano-cena-01.webp',
+      '/images/seo-events/master/bobino-milano-live-01.webp',
+      '/images/seo-events/master/bobino-milano-party-01.webp',
+    ],
     isManaged: false,
     isPriority: false,
     isFeatured: false,

@@ -15,7 +15,7 @@ import {
 import { seoTitle } from '@/lib/seoMetadata';
 import {
   SINGLE_PASS_SKUS,
-  SINGLE_PASS_VENUES,
+  STOREFRONT_VENUES,
   computeSinglePassPrice,
 } from '@/lib/single-pass/catalog';
 import { getSinglePassCopy } from '@/lib/single-pass/i18n35';
@@ -23,7 +23,7 @@ import { getSinglePassCopy } from '@/lib/single-pass/i18n35';
 export const revalidate = 600;
 
 const SITE_URL = 'https://nightlifemilan.com';
-const HERO_POSTER_PATH = SINGLE_PASS_VENUES[0].posterSrc;
+const HERO_POSTER_PATH = STOREFRONT_VENUES[0].posterSrc;
 
 export async function generateMetadata({
   params,
@@ -78,64 +78,61 @@ export default async function SinglePassPage({
   const faqs = isIt
     ? [
         {
-          q: 'Come funziona esattamente il Single Pass Capodanno Milano 2027 per chi viene da solo?',
-          a: 'Scegli uno o più pacchetti tra i 6 locali selezionati per fascia d’età, li aggiungi al carrello e completi il pagamento 100% su Stripe (+15% Booking, Concierge Service & Entry Fee). Subito dopo ricevi l’accesso alla tua Area Riservata e dal 20 dicembre 2026 in poi entri nel mini-gruppo WhatsApp ufficiale del tuo locale e della tua età.',
+          q: 'Come funziona il Single Pass Capodanno Milano 2027 per chi viene da solo?',
+          a: 'Scegli uno o più pacchetti tra i locali ufficiali confermati per fascia d’età, li aggiungi al carrello e completi il pagamento direttamente su questo sito (+15% Booking, Concierge Service & Entry Fee). Ricevi subito l’accesso alla tua Area Riservata e dal 20 dicembre 2026 entri nel mini-gruppo WhatsApp dedicato.',
         },
         {
-          q: 'Perché viene applicato il +15% di Booking, Concierge Service & Entry Fee su Stripe?',
-          a: 'Il supplemento fisso del +15% su Stripe copre gestione prenotazione, selezione manuale per fascia d’età e lingua, apertura e moderazione del mini-gruppo WhatsApp dal 20 dicembre, e accoglienza dedicata al locale in Lista o Tavolo NIGHTLIFE MILAN.',
+          q: 'Posso pagare direttamente sul sito nella mia valuta?',
+          a: 'Sì. I prezzi di listino sono espressi in Euro (EUR) e convertiti automaticamente in tempo reale nella tua valuta locale al checkout. Il pagamento avviene direttamente all’interno delle nostre pagine protette con carta, Apple Pay o Google Pay.',
+        },
+        {
+          q: 'Perché viene applicato il +15% di Booking, Concierge Service & Entry Fee?',
+          a: 'Il supplemento fisso del +15% copre gestione prenotazione, abbinamento manuale per fascia d’età e lingua, apertura e moderazione del mini-gruppo WhatsApp dal 20 dicembre e ingresso prioritario coordinato in Lista o Tavolo NIGHTLIFE MILAN.',
         },
         {
           q: 'Esiste uno sconto o incentivo donna sui pacchetti Single Pass?',
-          a: 'No. Tutti i pacchetti Single Pass hanno lo stesso identico prezzo per uomini e donne su tutte le formule (All-Night, Quote Tavolo VIP Condiviso, Cenone Social, Royal Buffet e Ingresso Club) per garantire tavoli equilibrati e chiari.',
-        },
-        {
-          q: 'Quando apre il mini-gruppo WhatsApp ufficiale?',
-          a: 'Tutti i mini-gruppi WhatsApp dei tavoli e delle liste Single Pass aprono a partire dal 20 dicembre 2026 in poi sui numeri WhatsApp verificati durante il checkout Stripe.',
+          a: 'No. Tutti i pacchetti hanno esattamente la stessa quota per uomini e donne per mantenere tavoli equilibrati, trasparenti e senza distinzioni di genere.',
         },
         {
           q: 'Chi ha più di 30 anni può acquistare il Single Pass al Pineta Milano?',
-          a: 'No. Pineta Milano applica una selezione rigorosamente Under 30 (18–29 anni). Il carrello e il checkout bloccano gli acquisti 30+ su Pineta proponendo subito Just Me (30–49), 55 Milano (30–50), REPVBLIC (22–40) o Bischeri Over 50.',
+          a: 'No. Pineta Milano applica una selezione rigorosamente Under 30 (18–29 anni). Il carrello e il checkout bloccano gli acquisti 30+ su Pineta proponendo Just Me (30–49), REPVBLIC (22–40), Voya Rooftop o Bischeri Over 50.',
         },
       ]
     : [
         {
           q: 'How does the Milan NYE 2027 Single Pass work for solo guests?',
-          a: 'Choose your club by age bracket among our 6 official venues, add any package to the cart and pay 100% via Stripe (+15% Booking, Concierge Service & Entry Fee). You gain immediate access to your Reserved Area pass and join the official venue WhatsApp mini-group from December 20, 2026 onwards.',
+          a: 'Choose your club by age bracket among our confirmed-price venues, add any package to the cart, and check out directly inside nightlifemilan.com (+15% Booking, Concierge Service & Entry Fee). You gain immediate Reserved Area access and join the venue WhatsApp mini-group from December 20, 2026.',
         },
         {
-          q: 'What does the +15% Booking, Concierge Service & Entry Fee include?',
-          a: 'The transparent 15% Stripe service fee covers reservation handling, age-bracket and language table curation, December 20 WhatsApp mini-group onboarding, and dedicated Lista / Tavolo NIGHTLIFE MILAN entrance hosting.',
+          q: 'Can I pay directly on nightlifemilan.com in my local currency?',
+          a: 'Yes. Original Euro prices convert live at checkout into your preferred currency using official reference rates. Card, Apple Pay, and Google Pay payments are completed right inside our checkout without external redirects.',
         },
         {
-          q: 'Are there female discounts or free guest-list incentives on Single Passes?',
-          a: 'No. Every Single Pass package has identical pricing for men and women across shared VIP tables, served gala dinners, buffets and club admission.',
+          q: 'Why is there a +15% Booking, Concierge Service & Entry Fee?',
+          a: 'The fixed +15% service fee covers confirmed reservation management, age and language table matching, December 20 WhatsApp mini-group moderation, and dedicated arrival coordination under Lista / Tavolo NIGHTLIFE MILAN.',
         },
         {
-          q: 'When do the official WhatsApp mini-groups launch?',
-          a: 'All official WhatsApp mini-groups open from December 20, 2026 onwards using the verified WhatsApp phone number saved in your Stripe order and Reserved Area.',
+          q: 'Is there any discounted rate or incentive for women?',
+          a: 'No. Every Single Pass package is priced identically for men and women across every dinner, VIP table share, buffet, and club admission tier.',
         },
         {
-          q: 'Which club should guests aged 50+ or 30+ choose instead of Pineta?',
-          a: 'Pineta Milano strictly enforces an Under 30 (18–29) door policy. Guests 30–49 match Just Me, 55 Milano or REPVBLIC (22–40), while Bischeri Milano features a dedicated Over 50 social table and DJ Gigi Zeus party.',
+          q: 'Can guests aged 30+ book Pineta Milano Moulin Rouge NYE?',
+          a: 'No. Pineta enforces a strict Under 30 (18–29) door policy. Ages 30+ are automatically guided during checkout toward Just Me Torre Branca (30–49), REPVBLIC (22–40), Voya Rooftop, or Bischeri Over 50.',
         },
       ];
 
-  const jsonLd = {
+  const schemaGraph = {
     '@context': 'https://schema.org',
     '@graph': [
       {
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
-          { '@type': 'ListItem', position: 2, name: copy.navShopLabel, item: canonical },
-        ],
+        '@type': 'WebPage',
+        name: copy.seoTitle,
+        description: copy.seoDescription,
+        url: canonical,
       },
       {
         '@type': 'ItemList',
         name: copy.heroH1,
-        description: copy.seoDescription,
-        numberOfItems: SINGLE_PASS_SKUS.length,
         itemListElement: SINGLE_PASS_SKUS.map((sku, idx) => {
           const p = computeSinglePassPrice(sku.basePriceCents, 1);
           return {
@@ -147,7 +144,6 @@ export default async function SinglePassPage({
               description: isIt ? sku.descriptionIt : sku.descriptionEn,
               offers: {
                 '@type': 'Offer',
-                url: canonical,
                 price: (p.unitTotalCents / 100).toFixed(2),
                 priceCurrency: 'EUR',
                 availability: 'https://schema.org/InStock',
@@ -169,25 +165,24 @@ export default async function SinglePassPage({
 
   return (
     <main className="min-h-screen bg-[#050505] text-[#F6F1E7]">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaGraph) }}
+      />
 
       <SinglePassStorefront locale={loc} />
 
-      {/* Editorial Comparison & Milan Club Map (Alternating Surface #F6F1E7 -> #050505) */}
-      <section
-        id="mappa-milano-single-pass"
-        data-surface="ivory"
-        className="border-b border-[#050505]/15 bg-[#F6F1E7] px-4 py-12 text-[#050505] sm:px-6 lg:px-8"
-      >
+      {/* Milan Age Map & Venue Matrix (#F6F1E7 Paper Surface) */}
+      <section className="border-b border-[#050505]/15 bg-[#F6F1E7] px-4 py-12 text-[#050505] sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl space-y-6">
           <div>
             <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#3D3830]">
-              GUIDA COMPLETA PER FASCIA D’ETÀ · MILANO 31/12/2026
+              MILANO · CONFIRMED VENUES BY AGE GROUP
             </p>
-            <h2 className="mt-1 font-serif text-3xl font-bold text-[#050505]">
+            <h2 className="mt-2 font-serif text-3xl font-bold text-[#050505]">
               {isIt
-                ? 'Confronto dei 6 locali e mappa dei quartieri di Capodanno 2027'
-                : '6-Venue Age Guide & Milan NYE 2027 Locations Map'}
+                ? 'Tabella comparativa dei locali confermati di Capodanno 2027'
+                : 'Confirmed-Price NYE 2027 Venues Age Matrix & Map'}
             </h2>
           </div>
 
@@ -197,12 +192,12 @@ export default async function SinglePassPage({
                 <tr>
                   <th className="p-3.5 font-serif">Locale</th>
                   <th className="p-3.5 font-serif">{isIt ? 'Fascia Età' : 'Age Target'}</th>
-                  <th className="p-3.5 font-serif">Format & Musica</th>
+                  <th className="p-3.5 font-serif">Format &amp; Musica</th>
                   <th className="p-3.5 font-serif">Zona</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#050505]/15">
-                {SINGLE_PASS_VENUES.map((v) => (
+                {STOREFRONT_VENUES.map((v) => (
                   <tr key={v.id}>
                     <td className="p-3.5 font-bold">{v.name}</td>
                     <td className="p-3.5 font-mono text-xs">{isIt ? v.ageBandLabelIt : v.ageBandLabelEn}</td>
@@ -230,7 +225,7 @@ export default async function SinglePassPage({
       <section id="faq-single-pass" className="border-b border-[#F6F1E7]/14 bg-[#050505] px-4 py-12 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl space-y-6">
           <h2 className="font-serif text-3xl font-bold text-[#F6F1E7]">
-            {isIt ? 'Domande frequenti Single Pass & Regolamento Stripe' : 'Single Pass FAQs & Stripe Policy'}
+            {isIt ? 'Domande frequenti Single Pass & Condizioni Ufficiali' : 'Single Pass FAQs & Official Policy'}
           </h2>
           <div className="grid gap-4 md:grid-cols-2">
             {faqs.map((faq) => (
@@ -244,13 +239,13 @@ export default async function SinglePassPage({
           <div className="border border-[#F6F1E7]/16 bg-[#0B0A09] p-6 text-sm leading-relaxed text-[#C2B9AA]">
             <h3 className="font-serif text-xl font-bold text-[#F6F1E7]">
               {isIt
-                ? 'Perché scegliere il Single Pass Ufficiale Nightlife Milan rispetto ai biglietti casuali'
-                : 'Why book the Official Nightlife Milan Single Pass instead of random tickets'}
+                ? 'Nightlife Milan · E-Commerce Ufficiale di Magister Mida LLC'
+                : 'Nightlife Milan · Official E-Commerce Platform by Magister Mida LLC'}
             </h3>
             <p className="mt-2">
               {isIt
-                ? `Festeggiare San Silvestro a Milano quando si è da soli oppure in due amici che non raggiungono la quota di un tavolo privato non significa doversi accontentare dell’ingresso anonimo o finire in un locale fuori età. Attraverso lo shop e-commerce di Nightlife Milan hai a disposizione sei esperienze complete e curate dall’apericena al Gran Cenone servito, dalle quote nei tavoli VIP Privé condivisi fino all’ingresso club guidato. Ogni pagamento è gestito tramite Stripe con la maggiorazione fissa trasparente del +15% per Booking, Concierge Service e Entry Fee, senza alcuna differenza tra quota uomo e quota donna. Dal 20 dicembre 2026 attiviamo i mini-gruppi WhatsApp ufficiali per ciascun locale così nessuno arriva da solo alle porte del Gate Milano, del Pineta Under 30, del REPVBLIC internazionale, del Just Me Torre Branca, del 55 Milano o della tavolata Over 50 da Bischeri Milano.`
-                : `Spending New Year’s Eve in Milan solo or as a duo who do not fill an entire private bottle booth should never mean entering an age-mismatched room alone. Through Nightlife Milan’s official Single Pass e-commerce platform, you can reserve shared VIP table shares, served five-course social dinners, royal buffets or group club entries across six curated clubs segmented strictly by age band and music vibe. All transactions process exclusively via Stripe with an explicit +15% Booking, Concierge Service & Entry Fee and equal male/female pricing. Starting December 20, 2026 onwards, our team activates dedicated WhatsApp mini-groups per venue and language so guests connect ahead of December 31 and walk in together under Lista / Tavolo NIGHTLIFE MILAN. Concierge 24/7: ${SITE_CONTACT.whatsapp.number} · concierge@nightlifemilan.com.`}
+                ? `Festeggiare San Silvestro o una serata speciale a Milano quando si è da soli oppure in due amici significa poter accedere solo a listini reali e trasparenti. Su nightlifemilan.com, marchio di Magister Mida LLC, ogni acquisto mostra l’importo base ufficiale in Euro più il +15% per Booking, Concierge Service & Entry Fee, convertito al momento del checkout nella tua valuta senza alcun costo nascosto. Assistenza 24/7: ${SITE_CONTACT.whatsapp.number} · concierge@nightlifemilan.com.`
+                : `Celebrating New Year’s Eve or flagship Milan nightlife dates on nightlifemilan.com (a brand owned and operated by Magister Mida LLC) guarantees verified official rate cards only. Every eligible ticket displays the canonical Euro tariff plus our transparent +15% Booking, Concierge Service & Entry Fee converted live at checkout, with dedicated WhatsApp concierge support on ${SITE_CONTACT.whatsapp.number} and concierge@nightlifemilan.com.`}
             </p>
           </div>
         </div>

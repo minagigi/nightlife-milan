@@ -516,6 +516,7 @@ const VENUE_MASTER_KEYS: Record<string, [string, string, string, string]> = {
   'ceresio-7': ['ceresio-7-interior-01', 'ceresio-7-interior-02', 'ceresio-7-interior-03', 'ceresio-7-interior-04'],
   'mib': ['mib-milano-interior-01', 'mib-milano-interior-02', 'mib-milano-interior-03', 'mib-milano-interior-04'],
   'church-81': ['church-81-interior-01', 'church-81-interior-02', 'church-81-interior-03', 'church-81-interior-04'],
+  'bobino': ['bobino-milano', 'bobino-milano-cena-01', 'bobino-milano-live-01', 'bobino-milano-party-01'],
   'terme': ['capodanno-terme-milano-flow-01', 'ceresio-7-interior-03', 'voya-rooftop-milan-drink-01', 'capodanno-rooftop-skyline-flow-01'],
   'baita': ['capodanno-baita-neve-flow-01', 'capodanno-villa-castello-flow-01', 'capodanno-cena-cantata-show-flow-01', 'fiftyfive-milano-cena-01'],
   'tram': ['capodanno-tram-storico-flow-01', 'capodanno-piazza-duomo-flow-01', 'terrazza-21-interior-04', 'just-me-milano-cena-01'],
@@ -560,7 +561,7 @@ export function selectMasterAssetKeys(slug: string, venueName = '', categorySlug
   if (s.includes('arci-bellezza')) return ['arci-bellezza-milano', 'arci-bellezza-2', 'santeria-toscana-31', 'mosso-milano-1'];
   if (s.includes('masada') || s.includes('amelia')) return ['masada-1', 'masada-2', 'amelia-1', 'amelia-2'];
   if (s.includes('tocqueville')) return ['tocqueville-13', '11-clubroom-interior-01', '11-clubroom-interior-03', 'play-club-milano-interior-02'];
-  if (s.includes('bobino')) return ['bobino-milano', 'fiftyfive-milano-lounge-01', 'apollo-milano-interior-03', 'fiftyfive-milano-cena-01'];
+  if (s.includes('bobino')) return VENUE_MASTER_KEYS['bobino'];
   if (s.includes('spirit-de-milan')) return ['spirit-de-milan', 'balera-dell-ortica', 'capodanno-cena-cantata-show-flow-01', 'fiftyfive-milano-cena-01'];
   if (s.includes('blue-note')) return ['blue-note-milano', 'nidaba-theatre', 'capodanno-cena-cantata-show-flow-01', 'gattopardo-interior-02'];
   if (s.includes('terme') || s.includes('aquaria') || s.includes('spa')) return VENUE_MASTER_KEYS['terme'];

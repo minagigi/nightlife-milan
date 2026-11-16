@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   AlertTriangle,
   ArrowRight,
-  CreditCard,
+  Lock,
   Minus,
   Plus,
   ShieldCheck,
@@ -14,32 +14,57 @@ import {
 import Link from '@/components/LocalizedLink';
 import { localePrefix } from '@/lib/i18n/locales';
 import {
-  SKU_BY_ID,
   SPOKEN_LANGUAGE_OPTIONS,
   VENUE_BY_ID,
   computeSinglePassPrice,
   formatEurFromCents,
+  resolveCatalogSku,
   validateAgeForSkus,
 } from '@/lib/single-pass/catalog';
+import { formatMinorCurrency, type SupportedCurrency } from '@/lib/single-pass/currency';
 import { getSinglePassCopy } from '@/lib/single-pass/i18n35';
 import type { SinglePassSku } from '@/lib/single-pass/types';
+import { readClientAttribution } from './AttributionTracker';
+import EmbeddedPaymentForm from './EmbeddedPaymentForm';
 import { useSinglePassCart } from './SinglePassCartContext';
+
+type PaymentIntentSession = {
+  orderId: string;
+  publishableKey: string;
+  clientSecret: string;
+  presentmentCurrency: string;
+  presentmentTotalMinor: number;
+  totalEurCents: number;
+  fxRate: number;
+  fullName: string;
+  email: string;
+  phone: string;
+};
 
 export default function SinglePassCheckoutView({
   locale,
-  cancelledOrderId,
+  resumeOrderId,
+  cancelled,
 }: {
   locale: string;
-  cancelledOrderId?: string;
+  resumeOrderId?: string;
+  cancelled?: boolean;
 }) {
   const {
     items,
     updateQuantity,
     updateDietary,
     removeItem,
+    clearCart,
     subtotalBaseCents,
     totalFeeCents,
     grandTotalCents,
+    totalGuests,
+    currency,
+    setCurrency,
+    convertedTotalMinor,
+    currentFxRate,
+    supportedCurrencies,
     mounted,
   } = useSinglePassCart();
 
@@ -47,10 +72,13 @@ export default function SinglePassCheckoutView({
   const lp = localePrefix(locale);
   const isIt = locale === 'it';
 
+  const [isSignedIn, setIsSignedIn] = useState(false);
   const [fullName, setFullName] = useState('');
   const [ageRaw, setAgeRaw] = useState('');
+  const [country, setCountry] = useState(isIt ? 'Italia' : '');
   const [whatsapp, setWhatsapp] = useState('+39 ');
   const [email, setEmail] = useState('');
+  const [createAccount, setCreateAccount] = useState(true);
   const [password, setPassword] = useState('');
   const [spokenLanguages, setSpokenLanguages] = useState<string[]>([
     locale === 'it' ? 'Italiano' : 'English',
@@ -59,11 +87,74 @@ export default function SinglePassCheckoutView({
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [paymentSession, setPaymentSession] = useState<PaymentIntentSession | null>(null);
+
+  useEffect(() => {
+    fetch('/api/single-pass/me', { cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        if (d?.ok && d?.member) {
+          setIsSignedIn(true);
+          setCreateAccount(false);
+          setFullName((prev) => prev || d.member.fullName || '');
+          setEmail((prev) => prev || d.member.email || '');
+          setWhatsapp((prev) => (prev === '+39 ' || !prev ? d.member.whatsapp || '+39 ' : prev));
+          setAgeRaw((prev) => prev || (d.member.age ? String(d.member.age) : ''));
+          setCountry((prev) => prev || d.member.country || '');
+          if (Array.isArray(d.member.spokenLanguages) && d.member.spokenLanguages.length > 0) {
+            setSpokenLanguages(d.member.spokenLanguages);
+          }
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    if (!resumeOrderId) return;
+    setSubmitting(true);
+    fetch(`/api/single-pass/orders/${encodeURIComponent(resumeOrderId)}/pay`, {
+      method: 'POST',
+    })
+      .then(async (res) => {
+        const data = (await res.json().catch(() => null)) as
+          | (PaymentIntentSession & {
+              ok?: boolean;
+              error?: string;
+              customer?: { fullName?: string; email?: string; whatsapp?: string };
+            })
+          | null;
+        if (!res.ok || !data?.ok || !data.clientSecret) {
+          setErrorMessage(
+            data?.error || 'Unable to resume payment right now. Sign in or open your Reserved Area.',
+          );
+          return;
+        }
+        setPaymentSession({
+          orderId: data.orderId,
+          publishableKey: data.publishableKey,
+          clientSecret: data.clientSecret,
+          presentmentCurrency: data.presentmentCurrency || 'EUR',
+          presentmentTotalMinor: data.presentmentTotalMinor,
+          totalEurCents: data.totalEurCents,
+          fxRate: data.fxRate || 1,
+          fullName: data.customer?.fullName || fullName,
+          email: data.customer?.email || email,
+          phone: data.customer?.whatsapp || whatsapp,
+        });
+      })
+      .catch(() => {
+        setErrorMessage('Connection error resuming payment.');
+      })
+      .finally(() => {
+        setSubmitting(false);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [resumeOrderId]);
 
   const parsedAge = Number(ageRaw);
   const cartSkus = useMemo(() => {
     return items
-      .map((item) => SKU_BY_ID.get(item.skuId))
+      .map((item) => resolveCatalogSku(item.skuId))
       .filter((s): s is SinglePassSku => Boolean(s));
   }, [items]);
 
@@ -78,7 +169,7 @@ export default function SinglePassCheckoutView({
     );
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleInitPayment = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage(null);
 
@@ -94,62 +185,92 @@ export default function SinglePassCheckoutView({
       return;
     }
 
+    if (createAccount && !isSignedIn && password.trim().length > 0 && password.trim().length < 8) {
+      setErrorMessage(
+        isIt
+          ? 'La password deve avere almeno 8 caratteri.'
+          : 'Password must be at least 8 characters.',
+      );
+      return;
+    }
+
     setSubmitting(true);
     try {
+      const attr = readClientAttribution();
       const res = await fetch('/api/single-pass/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           locale,
+          currency,
           items,
+          fullName,
+          email,
+          whatsapp,
+          age: parsedAge,
+          country,
+          password: createAccount && !isSignedIn ? password : '',
+          spokenLanguages,
+          dietaryNotes,
           acceptedTerms,
-          password: password.trim() || undefined,
-          customer: {
-            fullName: fullName.trim(),
-            email: email.trim(),
-            whatsapp: whatsapp.trim(),
-            age: Number(ageRaw),
-            spokenLanguages,
-            dietaryNotes: dietaryNotes.trim() || undefined,
+          attribution: {
+            ...attr,
+            checkoutPath: typeof window !== 'undefined' ? window.location.pathname : `/${locale}/checkout`,
           },
         }),
       });
       const data = (await res.json()) as {
         ok?: boolean;
         error?: string;
-        redirectUrl?: string;
-        checkoutUrl?: string | null;
+        orderId?: string;
+        clientSecret?: string;
+        publishableKey?: string;
+        totalEurCents?: number;
+        presentmentCurrency?: string;
+        presentmentTotalMinor?: number;
+        fxRate?: number;
       };
-      if (!res.ok || !data.ok) {
-        setErrorMessage(data.error || 'Unable to create Stripe checkout session.');
+
+      if (!res.ok || !data.ok || !data.clientSecret || !data.orderId || !data.publishableKey) {
+        setErrorMessage(
+          data.error || 'Unable to initialize secure payment.',
+        );
         setSubmitting(false);
         return;
       }
-      const targetUrl = data.checkoutUrl || data.redirectUrl || `${lp}/account`;
-      window.location.assign(targetUrl);
+
+      setPaymentSession({
+        orderId: data.orderId,
+        publishableKey: data.publishableKey,
+        clientSecret: data.clientSecret,
+        presentmentCurrency: data.presentmentCurrency || currency,
+        presentmentTotalMinor: data.presentmentTotalMinor ?? grandTotalCents,
+        totalEurCents: data.totalEurCents ?? grandTotalCents,
+        fxRate: data.fxRate ?? currentFxRate,
+        fullName,
+        email,
+        phone: whatsapp,
+      });
     } catch {
-      setErrorMessage(
-        isIt
-          ? 'Errore di connessione durante il checkout. Riprova oppure scrivi su WhatsApp +39 351 912 7047.'
-          : 'Connection error while creating checkout. Please try again or contact WhatsApp +39 351 912 7047.',
-      );
+      setErrorMessage('Network error during checkout initialization.');
+    } finally {
       setSubmitting(false);
     }
   };
 
-  if (!mounted) {
+  if (!mounted && !resumeOrderId) {
     return (
-      <div className="mx-auto max-w-5xl px-4 py-16 text-center font-mono text-xs uppercase tracking-widest text-[#C2B9AA]">
-        Loading Cart...
-      </div>
+      <section className="mx-auto max-w-6xl px-4 py-16 text-center text-sm text-[#C2B9AA]">
+        Loading...
+      </section>
     );
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+    <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="mb-8 border-b border-[#F6F1E7]/15 pb-6">
         <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#EAE3D5]">
-          NIGHTLIFE MILAN · STRIPE CHECKOUT (+15% FEE)
+          NIGHTLIFE MILAN · MAGISTER MIDA LLC · CHECKOUT (+15% FEE)
         </p>
         <h1 className="mt-2 font-serif text-3xl font-bold text-[#F6F1E7] sm:text-4xl">
           {copy.checkoutTitle}
@@ -157,335 +278,463 @@ export default function SinglePassCheckoutView({
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-[#C2B9AA]">
           {copy.checkoutSubtitle}
         </p>
+
+        {/* 2-Step Progress Strip */}
+        <div className="mt-5 flex flex-wrap gap-3 font-mono text-xs">
+          <span
+            className={`px-3 py-1.5 font-bold ${
+              !paymentSession ? 'bg-[#F6F1E7] text-[#050505]' : 'border border-[#F6F1E7]/25 text-[#C2B9AA]'
+            }`}
+          >
+            {copy.stepDetailsLabel}
+          </span>
+          <span
+            className={`px-3 py-1.5 font-bold ${
+              paymentSession ? 'bg-[#F6F1E7] text-[#050505]' : 'border border-[#F6F1E7]/25 text-[#C2B9AA]'
+            }`}
+          >
+            {copy.stepPaymentLabel}
+          </span>
+        </div>
+
+        {(cancelled || resumeOrderId) && (
+          <div className="mt-4 border border-amber-400/40 bg-amber-950/30 p-4 text-sm text-amber-200">
+            {cancelled
+              ? isIt
+                ? `Pagamento annullato per l’ordine ${resumeOrderId || ''}. Puoi completarlo subito qui sotto.`
+                : `Payment was cancelled for order ${resumeOrderId || ''}. You can complete it below.`
+              : isIt
+                ? `Riprendi il pagamento sicuro direttamente su Nightlife Milan per l’ordine ${resumeOrderId}.`
+                : `Completing on-site secure payment for order ${resumeOrderId}.`}
+          </div>
+        )}
       </div>
 
-      {cancelledOrderId && (
-        <div className="mb-6 border border-[#EAE3D5]/40 bg-[#0B0A09] p-4 text-sm text-[#EAE3D5]">
-          {isIt
-            ? `Pagamento Stripe interrotto per ordine ${cancelledOrderId}. Puoi completarlo ora oppure dalla tua Area Riservata.`
-            : `Stripe payment cancelled for order ${cancelledOrderId}. You can retry below or from your Reserved Area.`}
+      {paymentSession ? (
+        <div className="grid gap-8 lg:grid-cols-12">
+          <div className="lg:col-span-7">
+            <EmbeddedPaymentForm
+              publishableKey={paymentSession.publishableKey}
+              clientSecret={paymentSession.clientSecret}
+              orderId={paymentSession.orderId}
+              locale={locale}
+              fullName={paymentSession.fullName}
+              email={paymentSession.email}
+              phone={paymentSession.phone}
+              billingTotalDisplay={formatMinorCurrency(
+                paymentSession.presentmentTotalMinor,
+                paymentSession.presentmentCurrency,
+                locale,
+              )}
+              eurTotalDisplay={formatEurFromCents(paymentSession.totalEurCents, locale)}
+              showEurReference={paymentSession.presentmentCurrency !== 'EUR'}
+              onBack={resumeOrderId ? undefined : () => setPaymentSession(null)}
+              clearCart={clearCart}
+            />
+          </div>
+          <aside className="lg:col-span-5">
+            <div className="border border-[#F6F1E7]/20 bg-[#0B0A09] p-6 space-y-4">
+              <h2 className="font-serif text-xl font-bold text-[#F6F1E7]">
+                {copy.orderIdLabel}: {paymentSession.orderId}
+              </h2>
+              <div className="space-y-1 text-xs text-[#C2B9AA]">
+                <p>
+                  <strong className="text-[#F6F1E7]">{paymentSession.fullName}</strong>
+                </p>
+                <p>{paymentSession.email}</p>
+                <p className="font-mono">{paymentSession.phone}</p>
+              </div>
+              <div className="border-t border-[#F6F1E7]/12 pt-3 text-sm space-y-1.5">
+                <div className="flex justify-between font-mono text-[#EAE3D5]">
+                  <span>{copy.eurOriginalLabel}</span>
+                  <span>{formatEurFromCents(paymentSession.totalEurCents, locale)}</span>
+                </div>
+                <div className="flex justify-between font-mono text-base font-bold text-[#C9A84C]">
+                  <span>{paymentSession.presentmentCurrency}</span>
+                  <span>
+                    {formatMinorCurrency(
+                      paymentSession.presentmentTotalMinor,
+                      paymentSession.presentmentCurrency,
+                      locale,
+                    )}
+                  </span>
+                </div>
+                {paymentSession.presentmentCurrency !== 'EUR' && (
+                  <p className="text-right font-mono text-[11px] text-[#8E8577]">
+                    FX: 1 EUR = {paymentSession.fxRate.toFixed(4)} {paymentSession.presentmentCurrency}
+                  </p>
+                )}
+              </div>
+            </div>
+          </aside>
         </div>
-      )}
-
-      {items.length === 0 ? (
-        <div className="border border-[#F6F1E7]/20 bg-[#0B0A09] p-10 text-center">
-          <ShoppingBag className="mx-auto h-10 w-10 text-[#EAE3D5]" aria-hidden="true" />
+      ) : items.length === 0 ? (
+        <div className="border border-[#F6F1E7]/16 bg-[#0B0A09] p-10 text-center">
+          <ShoppingBag className="mx-auto h-10 w-10 text-[#EAE3D5]" />
           <h2 className="mt-4 font-serif text-2xl font-bold text-[#F6F1E7]">{copy.drawerEmptyTitle}</h2>
           <p className="mx-auto mt-2 max-w-md text-sm text-[#C2B9AA]">{copy.drawerEmptyBody}</p>
           <Link
             href={`${lp}/single-pass`}
             locale={locale}
-            className="mt-6 inline-flex min-h-[46px] items-center justify-center bg-[#F6F1E7] px-6 py-3 text-xs font-extrabold uppercase tracking-wider text-[#050505] hover:bg-[#EAE3D5]"
+            className="mt-6 inline-flex min-h-[46px] items-center justify-center bg-[#F6F1E7] px-6 py-3 text-xs font-extrabold uppercase tracking-wider text-[#050505]"
           >
             {copy.drawerExploreCta}
           </Link>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="grid gap-8 lg:grid-cols-[1fr_400px]">
-          <div className="space-y-8">
-            {/* Cart Items List */}
-            <section className="border border-[#F6F1E7]/16 bg-[#0B0A09] p-6">
-              <div className="flex items-center justify-between border-b border-[#F6F1E7]/12 pb-4">
-                <h2 className="font-serif text-xl font-bold text-[#F6F1E7]">{copy.drawerTitle}</h2>
-                <Link
-                  href={`${lp}/single-pass`}
-                  locale={locale}
-                  className="text-xs font-bold uppercase tracking-wider text-[#EAE3D5] hover:underline"
-                >
-                  + {copy.filterAllVenues}
-                </Link>
-              </div>
-              <div className="mt-4 divide-y divide-[#F6F1E7]/12">
-                {items.map((item) => {
-                  const sku = SKU_BY_ID.get(item.skuId);
-                  if (!sku) return null;
-                  const venue = VENUE_BY_ID[sku.venueId];
-                  const p = computeSinglePassPrice(sku.basePriceCents, item.quantity);
+        <div className="grid gap-8 lg:grid-cols-12">
+          <form onSubmit={handleInitPayment} className="space-y-6 lg:col-span-7">
+            {/* Compact Selected Items Recap */}
+            <div className="space-y-3">
+              {items.map((item) => {
+                const sku = resolveCatalogSku(item.skuId);
+                if (!sku) return null;
+                const venue = VENUE_BY_ID[sku.venueId];
+                const venueName = sku.venueNameOverride || venue?.name || 'Nightlife Milan';
+                const p = computeSinglePassPrice(sku.basePriceCents, item.quantity);
 
-                  return (
-                    <div key={item.skuId} className="flex flex-col gap-4 py-4 sm:flex-row sm:items-center">
-                      <img
-                        src={venue.posterSrc}
-                        alt={venue.name}
-                        className="h-20 w-20 shrink-0 border border-[#F6F1E7]/15 bg-[#050505] object-contain"
-                      />
-                      <div className="min-w-0 flex-1">
-                        <p className="font-mono text-[10px] font-bold uppercase tracking-widest text-[#EAE3D5]">
-                          {venue.name} · {isIt ? venue.ageBandLabelIt : venue.ageBandLabelEn}
-                        </p>
-                        <p className="mt-1 font-serif text-lg font-bold text-[#F6F1E7]">
-                          {isIt ? sku.titleIt : sku.titleEn}
-                        </p>
-                        <p className="mt-1 font-mono text-xs text-[#C2B9AA]">
-                          {formatEurFromCents(p.unitBaseCents, locale)} + {formatEurFromCents(p.unitFeeCents, locale)} (+15%)
-                        </p>
-                        {sku.requiresDietary && !sku.dietaryPreset && (
-                          <select
-                            value={item.dietaryChoice || ''}
-                            onChange={(e) => updateDietary(item.skuId, e.target.value)}
-                            className="mt-2 h-8 border border-[#F6F1E7]/25 bg-[#050505] px-2 text-xs text-[#F6F1E7]"
-                          >
-                            <option value="">Standard Gala Menu</option>
-                            <option value="Terra">Preferenza Terra</option>
-                            <option value="Mare">Preferenza Mare</option>
-                            <option value="Vegetariano">Vegetariano / Allergie</option>
-                          </select>
-                        )}
-                      </div>
-                      <div className="flex items-center justify-between gap-4 sm:flex-col sm:items-end">
-                        <div className="inline-flex items-center border border-[#F6F1E7]/20 bg-[#050505]">
-                          <button
-                            type="button"
-                            onClick={() => updateQuantity(item.skuId, item.quantity - 1)}
-                            className="flex h-9 w-9 items-center justify-center text-[#F6F1E7] hover:bg-white/10"
-                          >
-                            <Minus className="h-3.5 w-3.5" />
-                          </button>
-                          <span className="min-w-[2.2rem] text-center font-mono text-xs font-bold">
-                            {item.quantity}
-                          </span>
-                          <button
-                            type="button"
-                            onClick={() => updateQuantity(item.skuId, item.quantity + 1)}
-                            className="flex h-9 w-9 items-center justify-center text-[#F6F1E7] hover:bg-white/10"
-                          >
-                            <Plus className="h-3.5 w-3.5" />
-                          </button>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <span className="font-mono text-base font-bold text-[#F6F1E7]">
-                            {formatEurFromCents(p.lineTotalCents, locale)}
-                          </span>
-                          <button
-                            type="button"
-                            onClick={() => removeItem(item.skuId)}
-                            aria-label={copy.removeItemLabel}
-                            className="p-1.5 text-[#847C6F] hover:text-rose-300"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </button>
-                        </div>
-                      </div>
+                return (
+                  <div
+                    key={item.skuId}
+                    className="flex flex-wrap items-center justify-between gap-3 border border-[#F6F1E7]/16 bg-[#0B0A09] p-4"
+                  >
+                    <div className="min-w-0 flex-1">
+                      <p className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#C9A84C]">
+                        {venueName} · {sku.arrivalTime} · {(sku.guestsPerUnit || 1) * item.quantity} pax
+                      </p>
+                      <h2 className="font-serif text-base font-bold text-[#F6F1E7]">
+                        {isIt ? sku.titleIt : sku.titleEn}
+                      </h2>
+                      {sku.requiresDietary && (
+                        <select
+                          aria-label={copy.formDietary}
+                          value={item.dietaryChoice || 'Terra / Meat Menu'}
+                          onChange={(e) => updateDietary(item.skuId, e.target.value)}
+                          className="mt-2 h-8 border border-[#F6F1E7]/20 bg-[#050505] px-2 text-xs text-[#F6F1E7]"
+                        >
+                          <option value="Terra / Meat Menu">Menù di Terra / Meat</option>
+                          <option value="Mare / Seafood Menu">Menù di Mare / Seafood</option>
+                          <option value="Vegetarian / Vegan">Vegetariano / Vegano</option>
+                          <option value="Gluten-Free / Allergies">Senza Glutine</option>
+                        </select>
+                      )}
                     </div>
-                  );
-                })}
-              </div>
-            </section>
 
-            {/* Attendee & Reserved Area Profile Form (#F6F1E7 crisp form contrast) */}
-            <section className="border border-[#050505]/15 bg-[#F6F1E7] p-6 text-[#050505] sm:p-8">
-              <h2 className="font-serif text-2xl font-bold text-[#050505]">
-                {isIt ? 'Dati Partecipante e Area Riservata' : 'Attendee & Reserved Area Profile'}
-              </h2>
+                    <div className="flex items-center gap-3">
+                      <div className="inline-flex items-center border border-[#F6F1E7]/20 bg-[#050505]">
+                        <button
+                          type="button"
+                          onClick={() => updateQuantity(item.skuId, item.quantity - 1)}
+                          className="flex h-8 w-8 items-center justify-center hover:bg-white/10"
+                          aria-label="Decrease"
+                        >
+                          <Minus className="h-3.5 w-3.5" />
+                        </button>
+                        <span className="min-w-[2rem] text-center font-mono text-xs font-bold">
+                          {item.quantity}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => updateQuantity(item.skuId, item.quantity + 1)}
+                          className="flex h-8 w-8 items-center justify-center hover:bg-white/10"
+                          aria-label="Increase"
+                        >
+                          <Plus className="h-3.5 w-3.5" />
+                        </button>
+                      </div>
+                      <span className="min-w-[76px] text-right font-mono text-sm font-bold text-[#F6F1E7]">
+                        {formatEurFromCents(p.lineTotalCents, locale)}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => removeItem(item.skuId)}
+                        aria-label={copy.removeItemLabel}
+                        className="text-[#8E8577] hover:text-rose-300"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
 
-              <div className="mt-5 grid gap-4 sm:grid-cols-2">
-                <label className="text-xs font-bold text-[#24201B]">
-                  {copy.formFullName} *
+            {/* Guest Registration & Contact Fields */}
+            <div className="space-y-4 border border-[#F6F1E7]/16 bg-[#0B0A09] p-6">
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="sp-full-name" className="block text-xs font-bold text-[#EAE3D5]">
+                    {copy.formFullName} *
+                  </label>
                   <input
-                    type="text"
+                    id="sp-full-name"
                     required
+                    type="text"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    placeholder="Mario Rossi"
-                    className="mt-1.5 h-11 w-full border border-[#050505]/30 bg-white px-3 text-sm text-[#050505]"
+                    placeholder="Marco Rossi"
+                    className="mt-1.5 h-11 w-full border border-[#F6F1E7]/25 bg-[#050505] px-3 text-sm text-[#F6F1E7]"
                   />
-                </label>
-
-                <label className="text-xs font-bold text-[#24201B]">
-                  {copy.formAge} *
+                </div>
+                <div>
+                  <label htmlFor="sp-age" className="block text-xs font-bold text-[#EAE3D5]">
+                    {copy.formAge} *
+                  </label>
                   <input
-                    type="number"
+                    id="sp-age"
                     required
+                    type="number"
                     min={18}
                     max={99}
                     value={ageRaw}
                     onChange={(e) => setAgeRaw(e.target.value)}
-                    placeholder="34"
-                    className="mt-1.5 h-11 w-full border border-[#050505]/30 bg-white px-3 text-sm text-[#050505]"
+                    placeholder="28"
+                    className="mt-1.5 h-11 w-full border border-[#F6F1E7]/25 bg-[#050505] px-3 text-sm text-[#F6F1E7]"
                   />
-                </label>
+                </div>
+              </div>
 
-                <label className="text-xs font-bold text-[#24201B]">
-                  {copy.formWhatsapp} *
+              {liveAgeCheck && !liveAgeCheck.ok && (
+                <div className="flex items-start gap-2.5 border border-rose-500/50 bg-rose-950/40 p-3.5 text-xs text-rose-200">
+                  <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
+                  <span>
+                    {liveAgeCheck.errorCode === 'PINETA_STRICT_UNDER_30'
+                      ? copy.pinetaUnder30Error
+                      : copy.under18Error}
+                  </span>
+                </div>
+              )}
+              {liveAgeCheck?.ok && liveAgeCheck.advisoryCode === 'RECOMMEND_BISCHERI_50_PLUS' && (
+                <div className="border border-amber-400/40 bg-amber-950/30 p-3 text-xs text-amber-200">
+                  {copy.bischeriAdvisory}
+                </div>
+              )}
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="sp-whatsapp" className="block text-xs font-bold text-[#EAE3D5]">
+                    {copy.formWhatsapp} *
+                  </label>
                   <input
-                    type="tel"
+                    id="sp-whatsapp"
                     required
+                    type="tel"
                     value={whatsapp}
                     onChange={(e) => setWhatsapp(e.target.value)}
-                    placeholder="+39 347 000 0000"
-                    className="mt-1.5 h-11 w-full border border-[#050505]/30 bg-white px-3 text-sm text-[#050505]"
+                    placeholder="+39 340 123 4567"
+                    className="mt-1.5 h-11 w-full border border-[#F6F1E7]/25 bg-[#050505] px-3 text-sm text-[#F6F1E7]"
                   />
-                  <span className="mt-1 block text-[11px] font-normal text-[#3D3830]">
-                    {copy.formWhatsappHint}
-                  </span>
-                </label>
-
-                <label className="text-xs font-bold text-[#24201B]">
-                  {copy.formEmail} *
+                  <p className="mt-1 text-[11px] text-[#8E8577]">{copy.formWhatsappHint}</p>
+                </div>
+                <div>
+                  <label htmlFor="sp-email" className="block text-xs font-bold text-[#EAE3D5]">
+                    {copy.formEmail} *
+                  </label>
                   <input
-                    type="email"
+                    id="sp-email"
                     required
+                    type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="nome@email.com"
-                    className="mt-1.5 h-11 w-full border border-[#050505]/30 bg-white px-3 text-sm text-[#050505]"
+                    className="mt-1.5 h-11 w-full border border-[#F6F1E7]/25 bg-[#050505] px-3 text-sm text-[#F6F1E7]"
                   />
-                </label>
-
-                <label className="text-xs font-bold text-[#24201B] sm:col-span-2">
-                  {copy.formPassword}
-                  <input
-                    type="password"
-                    minLength={8}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Minimo 8 caratteri per accedere all’Area Riservata"
-                    className="mt-1.5 h-11 w-full border border-[#050505]/30 bg-white px-3 text-sm text-[#050505]"
-                  />
-                  <span className="mt-1 block text-[11px] font-normal text-[#3D3830]">
-                    {copy.formPasswordHint}
-                  </span>
-                </label>
+                </div>
               </div>
 
-              {/* Spoken Languages Picker */}
-              <div className="mt-5">
-                <p className="text-xs font-bold text-[#24201B]">{copy.formLanguages}</p>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="sp-country" className="block text-xs font-bold text-[#EAE3D5]">
+                    {copy.formCountry} *
+                  </label>
+                  <input
+                    id="sp-country"
+                    required
+                    type="text"
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
+                    placeholder="Italia / USA / UK..."
+                    className="mt-1.5 h-11 w-full border border-[#F6F1E7]/25 bg-[#050505] px-3 text-sm text-[#F6F1E7]"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="sp-currency" className="block text-xs font-bold text-[#EAE3D5]">
+                    {copy.currencySelectorLabel}
+                  </label>
+                  <select
+                    id="sp-currency"
+                    value={currency}
+                    onChange={(e) => setCurrency(e.target.value as SupportedCurrency)}
+                    className="mt-1.5 h-11 w-full border border-[#F6F1E7]/25 bg-[#050505] px-3 font-mono text-sm font-bold text-[#F6F1E7]"
+                  >
+                    {supportedCurrencies.map((c) => (
+                      <option key={c} value={c}>
+                        {c}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              {!isSignedIn && (
+                <div className="border border-[#F6F1E7]/15 bg-[#12100E] p-4 space-y-3">
+                  <label className="flex items-center gap-2.5 text-xs font-bold text-[#F6F1E7] cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={createAccount}
+                      onChange={(e) => setCreateAccount(e.target.checked)}
+                    />
+                    <span>{copy.formCreateAccountToggle}</span>
+                  </label>
+                  {createAccount && (
+                    <div>
+                      <label htmlFor="sp-password" className="block text-xs font-bold text-[#EAE3D5]">
+                        {copy.formPassword}
+                      </label>
+                      <input
+                        id="sp-password"
+                        type="password"
+                        minLength={8}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Min. 8 caratteri"
+                        className="mt-1.5 h-11 w-full border border-[#F6F1E7]/25 bg-[#050505] px-3 text-sm text-[#F6F1E7]"
+                      />
+                      <p className="mt-1 text-[11px] text-[#8E8577]">{copy.formPasswordHint}</p>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              <div>
+                <span className="block text-xs font-bold text-[#EAE3D5]">{copy.formLanguages}</span>
                 <div className="mt-2 flex flex-wrap gap-2">
-                  {SPOKEN_LANGUAGE_OPTIONS.map((langOpt) => {
-                    const active = spokenLanguages.includes(langOpt);
+                  {SPOKEN_LANGUAGE_OPTIONS.map((langOption) => {
+                    const active = spokenLanguages.includes(langOption);
                     return (
                       <button
-                        key={langOpt}
+                        key={langOption}
                         type="button"
-                        onClick={() => toggleLanguage(langOpt)}
-                        className={`border px-3 py-1.5 text-xs font-semibold transition ${
+                        onClick={() => toggleLanguage(langOption)}
+                        className={`min-h-[34px] border px-3 py-1 text-xs font-semibold transition ${
                           active
-                            ? 'border-[#050505] bg-[#050505] text-[#F6F1E7]'
-                            : 'border-[#050505]/25 bg-white text-[#24201B] hover:border-[#050505]'
+                            ? 'border-[#F6F1E7] bg-[#F6F1E7] text-[#050505]'
+                            : 'border-[#F6F1E7]/25 bg-[#050505] text-[#C2B9AA]'
                         }`}
                       >
-                        {langOpt}
+                        {langOption}
                       </button>
                     );
                   })}
                 </div>
               </div>
 
-              <label className="mt-5 block text-xs font-bold text-[#24201B]">
-                {copy.formDietary}
+              <div>
+                <label htmlFor="sp-notes" className="block text-xs font-bold text-[#EAE3D5]">
+                  {copy.formDietary}
+                </label>
                 <textarea
+                  id="sp-notes"
                   rows={2}
                   value={dietaryNotes}
                   onChange={(e) => setDietaryNotes(e.target.value)}
-                  className="mt-1.5 w-full border border-[#050505]/30 bg-white p-3 text-sm text-[#050505]"
+                  className="mt-1.5 w-full border border-[#F6F1E7]/25 bg-[#050505] p-3 text-sm text-[#F6F1E7]"
                 />
-              </label>
+              </div>
 
-              {/* Age Rule Live Warnings / Blocks */}
-              {liveAgeCheck && !liveAgeCheck.ok && (
-                <div role="alert" className="mt-5 border-2 border-rose-700 bg-rose-50 p-4 text-rose-950">
-                  <div className="flex items-start gap-2.5">
-                    <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-rose-700" aria-hidden="true" />
-                    <div className="text-xs leading-relaxed">
-                      <p className="font-bold">
-                        {liveAgeCheck.errorCode === 'PINETA_STRICT_UNDER_30'
-                          ? copy.pinetaUnder30Error
-                          : copy.under18Error}
-                      </p>
-                      {liveAgeCheck.suggestedVenueIds.length > 0 && (
-                        <div className="mt-2 flex flex-wrap gap-2">
-                          {liveAgeCheck.suggestedVenueIds.map((vid) => (
-                            <Link
-                              key={vid}
-                              href={`${lp}/single-pass#single-pass-${vid}`}
-                              locale={locale}
-                              className="border border-rose-800 bg-white px-2.5 py-1 font-bold text-rose-900 hover:bg-rose-100"
-                            >
-                              {VENUE_BY_ID[vid].name}
-                            </Link>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {liveAgeCheck?.ok && liveAgeCheck.advisoryCode === 'RECOMMEND_BISCHERI_50_PLUS' && (
-                <div className="mt-4 border border-[#050505]/30 bg-[#EFE9DC] p-3 text-xs text-[#24201B]">
-                  {copy.bischeriAdvisory}{' '}
-                  <Link href={`${lp}/single-pass#single-pass-bischeri`} locale={locale} className="font-bold underline">
-                    Bischeri Milano Over 50
+              <div className="space-y-2 border-t border-[#F6F1E7]/12 pt-4">
+                <label className="flex items-start gap-3 text-xs leading-relaxed text-[#C2B9AA] cursor-pointer">
+                  <input
+                    type="checkbox"
+                    required
+                    checked={acceptedTerms}
+                    onChange={(e) => setAcceptedTerms(e.target.checked)}
+                    className="mt-1 h-4 w-4 shrink-0 accent-[#F6F1E7]"
+                  />
+                  <span>{copy.formTermsLabel}</span>
+                </label>
+                <div className="flex flex-wrap gap-4 pl-7 text-[11px] font-semibold text-[#C9A84C]">
+                  <Link href={`${lp}/terms`} locale={locale} className="underline">
+                    {copy.termsPolicyLabel}
+                  </Link>
+                  <Link href={`${lp}/privacy`} locale={locale} className="underline">
+                    {copy.privacyPolicyLabel}
+                  </Link>
+                  <Link href={`${lp}/refund-policy`} locale={locale} className="underline">
+                    {copy.refundPolicyLabel}
                   </Link>
                 </div>
-              )}
-            </section>
-          </div>
-
-          {/* Right Column: Sticky Order Summary & Stripe Submit */}
-          <aside className="h-fit border border-[#F6F1E7]/20 bg-[#0B0A09] p-6 lg:sticky lg:top-24">
-            <h2 className="font-serif text-2xl font-bold text-[#F6F1E7]">
-              {isIt ? 'Riepilogo Ordine Stripe' : 'Stripe Order Summary'}
-            </h2>
-            <div className="mt-5 space-y-3 border-b border-[#F6F1E7]/15 pb-5 text-sm">
-              <div className="flex justify-between text-[#C2B9AA]">
-                <span>{copy.drawerSubtotalLabel}</span>
-                <span className="font-mono">{formatEurFromCents(subtotalBaseCents, locale)}</span>
-              </div>
-              <div className="flex justify-between text-[#EAE3D5]">
-                <span>{copy.feeLabel}</span>
-                <span className="font-mono">+{formatEurFromCents(totalFeeCents, locale)}</span>
-              </div>
-              <div className="flex items-baseline justify-between pt-2 text-xl font-bold text-[#F6F1E7]">
-                <span>{copy.totalLabel}</span>
-                <span className="font-mono">{formatEurFromCents(grandTotalCents, locale)}</span>
               </div>
             </div>
-
-            <div className="mt-5 space-y-3 text-xs leading-relaxed text-[#C2B9AA]">
-              <p className="flex items-start gap-2">
-                <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#EAE3D5]" aria-hidden="true" />
-                <span>{copy.trustEqualPrice}</span>
-              </p>
-              <p className="flex items-start gap-2">
-                <CreditCard className="mt-0.5 h-4 w-4 shrink-0 text-[#EAE3D5]" aria-hidden="true" />
-                <span>{copy.trustWhatsAppDate}</span>
-              </p>
-            </div>
-
-            <label className="mt-5 flex items-start gap-2.5 border border-[#F6F1E7]/15 bg-[#050505] p-3 text-xs leading-relaxed text-[#EAE3D5]">
-              <input
-                type="checkbox"
-                required
-                checked={acceptedTerms}
-                onChange={(e) => setAcceptedTerms(e.target.checked)}
-                className="mt-1 h-4 w-4 shrink-0 accent-[#F6F1E7]"
-              />
-              <span>{copy.formTermsLabel}</span>
-            </label>
 
             {errorMessage && (
-              <div role="alert" className="mt-4 border border-rose-400/50 bg-rose-950/50 p-3 text-xs text-rose-200">
+              <div className="border border-rose-500/50 bg-rose-950/40 p-4 text-sm text-rose-200">
                 {errorMessage}
               </div>
             )}
 
             <button
               type="submit"
-              disabled={submitting || (liveAgeCheck !== null && !liveAgeCheck.ok)}
-              className="mt-5 flex min-h-[52px] w-full items-center justify-center gap-2 bg-[#F6F1E7] px-5 py-3 text-xs font-extrabold uppercase tracking-widest text-[#050505] transition hover:bg-[#EAE3D5] disabled:cursor-not-allowed disabled:opacity-50"
+              disabled={submitting || Boolean(liveAgeCheck && !liveAgeCheck.ok)}
+              className="flex min-h-[52px] w-full items-center justify-center gap-2 bg-[#F6F1E7] px-5 py-3.5 text-xs font-extrabold uppercase tracking-widest text-[#050505] transition hover:bg-[#EAE3D5] disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {submitting ? (isIt ? 'Creazione sessione Stripe...' : 'Connecting to Stripe...') : copy.formPayStripeCta}
+              <Lock className="h-4 w-4" aria-hidden="true" />
+              <span>{submitting ? copy.paymentProcessingLabel : copy.formPayNowCta}</span>
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </button>
+          </form>
 
-            <p className="mt-3 text-center font-mono text-[11px] text-[#847C6F]">
-              Powered by Stripe · Concierge +39 351 912 7047
-            </p>
+          {/* Right Summary Card */}
+          <aside className="lg:col-span-5">
+            <div className="sticky top-24 space-y-5 border border-[#F6F1E7]/20 bg-[#0B0A09] p-6">
+              <h2 className="font-serif text-2xl font-bold text-[#F6F1E7]">
+                {isIt ? 'Riepilogo & Cambio Valuta Live' : 'Live Currency Order Summary'}
+              </h2>
+              <div className="space-y-2.5 text-sm">
+                <div className="flex justify-between text-[#C2B9AA]">
+                  <span>{copy.guestsLabel}</span>
+                  <span className="font-mono font-bold text-[#F6F1E7]">{totalGuests}</span>
+                </div>
+                <div className="flex justify-between text-[#C2B9AA]">
+                  <span>{copy.basePriceLabel}</span>
+                  <span className="font-mono">{formatEurFromCents(subtotalBaseCents, locale)}</span>
+                </div>
+                <div className="flex justify-between text-[#EAE3D5]">
+                  <span>{copy.feeLabel}</span>
+                  <span className="font-mono">+{formatEurFromCents(totalFeeCents, locale)}</span>
+                </div>
+                <div className="flex justify-between border-t border-[#F6F1E7]/15 pt-2.5 text-base font-bold text-[#F6F1E7]">
+                  <span>{copy.totalLabel} (EUR)</span>
+                  <span className="font-mono">{formatEurFromCents(grandTotalCents, locale)}</span>
+                </div>
+                {currency !== 'EUR' && (
+                  <div className="space-y-1 bg-[#141210] p-3">
+                    <div className="flex justify-between text-base font-extrabold text-[#C9A84C]">
+                      <span>
+                        {copy.chargedInCurrencyLabel} ({currency})
+                      </span>
+                      <span className="font-mono">
+                        {formatMinorCurrency(convertedTotalMinor, currency, locale)}
+                      </span>
+                    </div>
+                    <p className="text-right font-mono text-[11px] text-[#8E8577]">
+                      1 EUR = {currentFxRate.toFixed(4)} {currency}
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              <div className="border-t border-[#F6F1E7]/12 pt-4 text-xs text-[#C2B9AA] space-y-2">
+                <p className="flex items-center gap-2 font-semibold text-[#F6F1E7]">
+                  <ShieldCheck className="h-4 w-4 text-[#25D366]" aria-hidden="true" />
+                  nightlifemilan.com · Magister Mida LLC
+                </p>
+                <p>{copy.fxRateNotice}</p>
+              </div>
+            </div>
           </aside>
-        </form>
+        </div>
       )}
-    </div>
+    </section>
   );
 }

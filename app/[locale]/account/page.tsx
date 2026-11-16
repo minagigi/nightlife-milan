@@ -31,6 +31,11 @@ export default async function SinglePassAccountPage({
   const checkoutState = typeof sp.checkout === 'string' ? sp.checkout : undefined;
   const orderId = typeof sp.order === 'string' ? sp.order : undefined;
   const sessionId = typeof sp.session_id === 'string' ? sp.session_id : undefined;
+  const tabParam = typeof sp.tab === 'string' ? sp.tab : undefined;
+  const initialTab =
+    tabParam === 'register' || tabParam === 'lookup' || tabParam === 'login'
+      ? tabParam
+      : undefined;
 
   return (
     <main className="min-h-screen bg-[#050505] text-[#F6F1E7]">
@@ -39,6 +44,7 @@ export default async function SinglePassAccountPage({
         initialCheckoutState={checkoutState}
         initialOrderId={orderId}
         initialSessionId={sessionId}
+        initialTab={initialTab}
       />
     </main>
   );

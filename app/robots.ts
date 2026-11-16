@@ -8,7 +8,22 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: ['/', '/llms.txt', '/llms-full.txt'],
-        disallow: ['/api/', '/crm/', '/analytics/', '/private/'],
+        disallow: [
+          '/api/',
+          '/crm/',
+          '/*/crm/',
+          '/analytics/',
+          '/*/analytics/',
+          '/private/',
+          '/cart',
+          '/*/cart',
+          '/checkout',
+          '/*/checkout',
+          '/account',
+          '/*/account',
+          '/thank-you',
+          '/*/thank-you',
+        ],
       },
       // Explicitly allow all major search engines
       { userAgent: 'Googlebot', allow: ['/', '/llms.txt', '/llms-full.txt'] },

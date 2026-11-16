@@ -1,7 +1,10 @@
 import { checkOriginOrReject, jsonError, jsonOk } from '@/lib/single-pass/apiHelpers';
-import { readSessionFromRequest, resolveRequestOrigin } from '@/lib/single-pass/auth';
+import { readSessionFromRequest } from '@/lib/single-pass/auth';
 import { getOrderById, normalizeEmail, saveOrder } from '@/lib/single-pass/store';
-import { createStripeCheckoutSessionForOrder } from '@/lib/single-pass/stripe';
+import {
+  PUBLIC_PAYMENT_PUBLISHABLE_KEY,
+  createEmbeddedPaymentIntentForOrder,
+} from '@/lib/single-pass/stripe';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -29,16 +32,15 @@ export async function POST(
   }
 
   if (order.status === 'paid') {
-    return jsonOk({ orderId: order.id, status: order.status, checkoutUrl: null });
+    return jsonOk({ orderId: order.id, status: order.status, clientSecret: null });
   }
 
-  const origin = resolveRequestOrigin(request);
   try {
-    const stripeSession = await createStripeCheckoutSessionForOrder(order, origin);
-    if (!stripeSession) {
+    const pi = await createEmbeddedPaymentIntentForOrder(order);
+    if (!pi) {
       return jsonError(
-        'Stripe checkout is being finalized. Contact WhatsApp +39 351 912 7047 or retry shortly.',
-        'STRIPE_SESSION_ERROR',
+        'Online payment gateway is being finalized. Contact WhatsApp +39 351 912 7047 or retry shortly.',
+        'PAYMENT_SESSION_ERROR',
         503,
       );
     }
@@ -46,18 +48,30 @@ export async function POST(
     await saveOrder({
       ...order,
       status: 'awaiting_payment',
-      stripeSessionId: stripeSession.sessionId,
-      stripeCheckoutUrl: stripeSession.url,
+      stripePaymentIntentId: pi.paymentIntentId,
+      presentmentCurrency: pi.currencyUsed,
+      presentmentTotalMinor: pi.amountMinorUsed,
       updatedAt: new Date().toISOString(),
     });
 
     return jsonOk({
       orderId: order.id,
       status: 'awaiting_payment',
-      checkoutUrl: stripeSession.url,
+      clientSecret: pi.clientSecret,
+      publishableKey: PUBLIC_PAYMENT_PUBLISHABLE_KEY,
+      totalEurCents: order.totalCents,
+      presentmentCurrency: pi.currencyUsed,
+      presentmentTotalMinor: pi.amountMinorUsed,
+      fxRate: order.fxRate || 1,
+      items: order.items,
+      customer: {
+        fullName: order.customer.fullName,
+        email: order.customer.email,
+        whatsapp: order.customer.whatsapp,
+      },
     });
   } catch (error) {
-    const msg = error instanceof Error ? error.message : String(error);
-    return jsonError(`Stripe session error: ${msg}`, 'STRIPE_SESSION_ERROR', 502);
+    const msg = (error instanceof Error ? error.message : String(error)).replace(/stripe/gi, 'payment gateway');
+    return jsonError(`Payment initialization error: ${msg}`, 'PAYMENT_SESSION_ERROR', 502);
   }
 }

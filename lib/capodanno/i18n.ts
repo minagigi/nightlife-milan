@@ -6,6 +6,7 @@ import {
 import { getPinetaNyeContent } from '@/lib/capodanno/pineta35';
 import { getVoyaNyeContent } from '@/lib/capodanno/voya35';
 import { getBischeriNyeContent } from '@/lib/capodanno/bischeri35';
+import { getBobinoNyeContent } from '@/lib/capodanno/bobino35';
 import { getGateNyeContent } from '@/lib/capodanno/gate35';
 import { getTomNyeContent } from '@/lib/capodanno/tom35';
 import { getJustMeOrthodoxRelatedBanner } from '@/lib/orthodox-nye/justme35';
@@ -523,6 +524,7 @@ function getOverrideEventContent(slug: string, locale: string): CapodannoLocaliz
   if (slug === 'capodanno-pineta-milano') return getPinetaNyeContent(locale);
   if (slug === 'capodanno-voya-rooftop-milano') return getVoyaNyeContent(locale);
   if (slug === 'capodanno-bischeri-milano') return getBischeriNyeContent(locale);
+  if (slug === 'capodanno-bobino-milano') return getBobinoNyeContent(locale);
   if (slug === 'capodanno-gate-milano') return getGateNyeContent(locale);
   if (slug === 'capodanno-tom-the-ordinary-market-milano') return getTomNyeContent(locale);
   return null;

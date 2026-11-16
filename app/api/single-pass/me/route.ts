@@ -26,7 +26,7 @@ export async function GET(request: Request) {
   if (!member) {
     return jsonError('Member profile not found', 'UNAUTHORIZED', 401);
   }
-  const [orders, stripeStatus] = await Promise.all([
+  const [orders, gatewayStatus] = await Promise.all([
     getOrdersForMember(member),
     getStripeCredentialStatus(),
   ]);
@@ -38,13 +38,14 @@ export async function GET(request: Request) {
       fullName: member.fullName,
       whatsapp: member.whatsapp,
       age: member.age,
+      country: member.country || '',
       spokenLanguages: member.spokenLanguages,
       dietaryNotes: member.dietaryNotes || '',
       hasPassword: Boolean(member.passwordHash),
       createdAt: member.createdAt,
     },
     orders,
-    stripeConfigured: stripeStatus.configured,
+    paymentReady: gatewayStatus.configured,
   });
 }
 
@@ -74,7 +75,7 @@ export async function PATCH(request: Request) {
 
   const nextWhatsapp = body.whatsapp !== undefined ? sanitizeWhatsapp(body.whatsapp) : member.whatsapp;
   if (!isValidWhatsapp(nextWhatsapp)) {
-    return jsonError('Please provide a valid WhatsApp number', 'INVALID_CUSTOMER_DATA', 400);
+    return jsonError('Please provide a valid telephone / WhatsApp number', 'INVALID_CUSTOMER_DATA', 400);
   }
 
   const nextLanguages = Array.isArray(body.spokenLanguages)
@@ -100,7 +101,7 @@ export async function PATCH(request: Request) {
         ...order,
         customer: {
           ...order.customer,
-          whatsapp: updatedMember.whatsapp,
+          whatsapp: nextWhatsapp,
           spokenLanguages: updatedMember.spokenLanguages,
           dietaryNotes: updatedMember.dietaryNotes,
         },
@@ -116,9 +117,9 @@ export async function PATCH(request: Request) {
       fullName: updatedMember.fullName,
       whatsapp: updatedMember.whatsapp,
       age: updatedMember.age,
+      country: updatedMember.country || '',
       spokenLanguages: updatedMember.spokenLanguages,
       dietaryNotes: updatedMember.dietaryNotes || '',
-      hasPassword: Boolean(updatedMember.passwordHash),
     },
   });
 }

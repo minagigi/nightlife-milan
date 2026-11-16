@@ -18,10 +18,11 @@ import { localePrefix } from '@/lib/i18n/locales';
 import { capodannoEventPath } from '@/lib/capodanno/routes';
 import {
   SINGLE_PASS_SKUS,
-  SINGLE_PASS_VENUES,
+  STOREFRONT_VENUES,
   computeSinglePassPrice,
   formatEurFromCents,
 } from '@/lib/single-pass/catalog';
+import type { SupportedCurrency } from '@/lib/single-pass/currency';
 import { getSinglePassCopy } from '@/lib/single-pass/i18n35';
 import type { SinglePassPackageCategory, SinglePassVenueId } from '@/lib/single-pass/types';
 import { useSinglePassCart } from './SinglePassCartContext';
@@ -29,6 +30,7 @@ import { useSinglePassCart } from './SinglePassCartContext';
 const ALL_CATEGORIES: readonly SinglePassPackageCategory[] = [
   'all-night-combo',
   'vip-table-share',
+  'vip-table-full',
   'gala-dinner',
   'royal-buffet',
   'club-entry',
@@ -42,7 +44,17 @@ export default function SinglePassStorefront({
   embedded?: boolean;
 }) {
   const router = useRouter();
-  const { addItem, itemCount, grandTotalCents, setCartOpen, mounted } = useSinglePassCart();
+  const {
+    addItem,
+    itemCount,
+    grandTotalCents,
+    setCartOpen,
+    mounted,
+    currency,
+    setCurrency,
+    supportedCurrencies,
+    formatConvertedEurCents,
+  } = useSinglePassCart();
   const [selectedVenue, setSelectedVenue] = useState<'all' | SinglePassVenueId>('all');
   const [selectedCategory, setSelectedCategory] = useState<'all' | SinglePassPackageCategory>('all');
   const [justAddedId, setJustAddedId] = useState<string | null>(null);
@@ -53,7 +65,7 @@ export default function SinglePassStorefront({
   const isIt = locale === 'it';
 
   const visibleVenues = useMemo(() => {
-    return SINGLE_PASS_VENUES.filter((v) => {
+    return STOREFRONT_VENUES.filter((v) => {
       if (selectedVenue !== 'all' && v.id !== selectedVenue) return false;
       const skus = SINGLE_PASS_SKUS.filter(
         (s) => s.venueId === v.id && (selectedCategory === 'all' || s.category === selectedCategory),
@@ -74,7 +86,7 @@ export default function SinglePassStorefront({
   const handleBuyNow = (skuId: string, dietaryDefault?: string) => {
     const choice = menuChoices[skuId] || dietaryDefault;
     addItem(skuId, 1, choice, false);
-    router.push(`${lp}/cart`);
+    router.push(`${lp}/checkout`);
   };
 
   const shopUrl = `https://nightlifemilan.com${lp}/single-pass`;
@@ -101,7 +113,7 @@ export default function SinglePassStorefront({
               <div className="border border-[#F6F1E7]/18 bg-[#0B0A09] p-4">
                 <CreditCard className="h-5 w-5 text-[#EAE3D5]" aria-hidden="true" />
                 <p className="mt-2 text-xs font-semibold leading-relaxed text-[#F6F1E7]">
-                  {copy.trustStripe}
+                  {copy.trustOnlinePayment}
                 </p>
               </div>
               <div className="border border-[#F6F1E7]/18 bg-[#0B0A09] p-4">
@@ -130,7 +142,7 @@ export default function SinglePassStorefront({
                 href="#catalogo-single-pass"
                 className="inline-flex min-h-[46px] items-center gap-2 bg-[#F6F1E7] px-5 py-3 text-xs font-extrabold uppercase tracking-wider text-[#050505] transition hover:bg-[#EAE3D5]"
               >
-                {copy.filterAllVenues} · 6
+                {copy.filterAllVenues} · {STOREFRONT_VENUES.length}
               </a>
               <button
                 type="button"
@@ -202,7 +214,7 @@ export default function SinglePassStorefront({
                 </li>
                 <li>
                   <a href="#faq-single-pass" className="text-[#050505] underline-offset-4 hover:underline">
-                    5. Domande & Regole Stripe
+                    5. Domande &amp; Regole Ufficiali
                   </a>
                 </li>
               </ul>
@@ -227,7 +239,22 @@ export default function SinglePassStorefront({
                 {copy.filterHeading}
               </h2>
             </div>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <label className="inline-flex min-h-[44px] items-center gap-2 border border-[#050505]/25 bg-[#EFE9DC] px-3 text-xs font-bold text-[#050505]">
+                <span>EUR ⇄</span>
+                <select
+                  aria-label={copy.currencySelectorLabel}
+                  value={currency}
+                  onChange={(e) => setCurrency(e.target.value as SupportedCurrency)}
+                  className="bg-transparent font-mono text-xs font-bold text-[#050505] focus:outline-none"
+                >
+                  {supportedCurrencies.map((c) => (
+                    <option key={c} value={c}>
+                      {c}
+                    </option>
+                  ))}
+                </select>
+              </label>
               <button
                 type="button"
                 onClick={() => setCartOpen(true)}
@@ -238,7 +265,7 @@ export default function SinglePassStorefront({
                 {mounted && itemCount > 0 ? ` (${itemCount})` : ''}
               </button>
               <Link
-                href={`${lp}/cart`}
+                href={`${lp}/checkout`}
                 locale={locale}
                 className="inline-flex min-h-[44px] items-center border border-[#050505] bg-transparent px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#050505] transition hover:bg-[#050505] hover:text-[#F6F1E7]"
               >
@@ -261,7 +288,7 @@ export default function SinglePassStorefront({
               >
                 {copy.filterAllVenues}
               </button>
-              {SINGLE_PASS_VENUES.map((v) => (
+              {STOREFRONT_VENUES.map((v) => (
                 <button
                   key={v.id}
                   type="button"
@@ -434,7 +461,14 @@ export default function SinglePassStorefront({
                               </div>
                               <div className="flex items-baseline justify-between pt-1 text-base font-extrabold text-[#050505]">
                                 <span>{copy.totalLabel}</span>
-                                <span>{formatEurFromCents(price.unitTotalCents, locale)}</span>
+                                <span>
+                                  {formatEurFromCents(price.unitTotalCents, locale)}
+                                  {mounted && currency !== 'EUR' && (
+                                    <span className="ml-1.5 text-xs font-semibold text-[#5C4415]">
+                                      (~{formatConvertedEurCents(price.unitTotalCents)})
+                                    </span>
+                                  )}
+                                </span>
                               </div>
                             </div>
 

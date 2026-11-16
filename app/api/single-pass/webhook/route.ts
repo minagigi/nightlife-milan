@@ -9,12 +9,13 @@ import {
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-type StripeWebhookEvent = {
+type GatewayWebhookEvent = {
   id?: string;
   type?: string;
   data?: {
     object?: {
       id?: string;
+      status?: string;
       payment_status?: string;
       client_reference_id?: string | null;
       payment_intent?: string | { id?: string } | null;
@@ -29,16 +30,16 @@ export async function POST(request: Request) {
   const creds = await resolveStripeCredentials();
 
   if (!creds?.webhookSecret) {
-    return jsonError('Stripe webhook secret not configured', 'UNAUTHORIZED', 503);
+    return jsonError('Webhook secret not configured', 'UNAUTHORIZED', 503);
   }
 
   if (!verifyStripeWebhookSignature(rawBody, signature, creds.webhookSecret)) {
-    return jsonError('Invalid Stripe signature', 'UNAUTHORIZED', 400);
+    return jsonError('Invalid webhook signature', 'UNAUTHORIZED', 400);
   }
 
-  let event: StripeWebhookEvent;
+  let event: GatewayWebhookEvent;
   try {
-    event = JSON.parse(rawBody) as StripeWebhookEvent;
+    event = JSON.parse(rawBody) as GatewayWebhookEvent;
   } catch {
     return jsonError('Invalid webhook JSON', 'INVALID_JSON', 400);
   }
@@ -46,9 +47,22 @@ export async function POST(request: Request) {
   const obj = event.data?.object;
   const orderId = obj?.client_reference_id || obj?.metadata?.order_id || '';
 
-  if (
+  if (orderId && event.type === 'payment_intent.succeeded') {
+    await markOrderPaidIdempotently(orderId, {
+      stripePaymentIntentId: obj?.id || null,
+    });
+  } else if (orderId && event.type === 'payment_intent.payment_failed') {
+    const existing = await getOrderById(orderId);
+    if (existing && existing.status === 'awaiting_payment') {
+      await saveOrder({
+        ...existing,
+        updatedAt: new Date().toISOString(),
+      });
+    }
+  } else if (
     orderId &&
-    (event.type === 'checkout.session.completed' || event.type === 'checkout.session.async_payment_succeeded')
+    (event.type === 'checkout.session.completed' ||
+      event.type === 'checkout.session.async_payment_succeeded')
   ) {
     if (obj?.payment_status === 'paid' || event.type === 'checkout.session.async_payment_succeeded') {
       const piId =

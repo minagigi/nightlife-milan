@@ -1,5 +1,6 @@
-import { Metadata } from 'next';
-import { tr } from '@/lib/i18n/t';
+import type { Metadata } from 'next';
+import LegalDocumentPage from '@/components/LegalDocumentPage';
+import { getMagisterMidaLegalDocument } from '@/lib/legal/magisterMidaLegal35';
 import { canonicalPageUrl, getLocaleDef, hreflangAlternates } from '@/lib/i18n/locales';
 
 export const revalidate = 86400;
@@ -8,19 +9,18 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const canonical = canonicalPageUrl(baseUrl, locale, '/terms');
-  const title = tr(locale, 'Terms of Service | Nightlife Milan', 'Termini di Servizio | Nightlife Milan');
-  const description = tr(locale, 'Terms of Service for Nightlife Milan.', 'Termini di Servizio di Nightlife Milan.');
+  const doc = getMagisterMidaLegalDocument(locale, 'terms');
   return {
-    title,
-    description,
+    title: doc.metaTitle,
+    description: doc.metaDescription,
     robots: getLocaleDef(locale)?.indexed === false ? { index: false, follow: true } : { index: true, follow: true },
     alternates: {
       canonical,
       languages: hreflangAlternates(baseUrl, '/terms'),
     },
     openGraph: {
-      title,
-      description,
+      title: doc.metaTitle,
+      description: doc.metaDescription,
       url: canonical,
       type: 'website',
       siteName: 'Nightlife Milan',
@@ -31,46 +31,5 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function TermsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const isIt = locale === 'it';
-
-  return (
-    <main className="flex-1 bg-[#050505] w-full py-24 px-4 sm:px-6 lg:px-8">
-      <article className="max-w-3xl mx-auto prose prose-invert prose-lg">
-        <h1 className="font-serif text-4xl md:text-5xl font-bold text-champagne mb-8">
-          {tr(locale, 'Terms of Service', 'Termini di Servizio')}
-        </h1>
-        
-        <p className="text-zinc-300 font-light leading-relaxed">
-          {tr(locale, 'Last updated: March 9, 2026', 'Ultimo aggiornamento: 9 Marzo 2026')}
-        </p>
-
-        <section className="mt-12">
-          <h2 className="font-serif text-2xl font-bold text-champagne mb-4">
-            {tr(locale, '1. Acceptance of Terms', '1. Accettazione dei Termini')}
-          </h2>
-          <p className="text-zinc-300 font-light leading-relaxed">
-            {tr(locale, 'By accessing and using Nightlife Milan, you agree to be bound by these Terms of Service and all applicable laws and regulations.', 'Accedendo e utilizzando Nightlife Milan, accetti di essere vincolato da questi Termini di Servizio e da tutte le leggi e i regolamenti applicabili.')}
-          </p>
-        </section>
-
-        <section className="mt-12">
-          <h2 className="font-serif text-2xl font-bold text-champagne mb-4">
-            {tr(locale, '2. Use of Service', '2. Uso del Servizio')}
-          </h2>
-          <p className="text-zinc-300 font-light leading-relaxed">
-            {tr(locale, 'You agree to use the service only for lawful purposes, and in a way that does not infringe the rights of, restrict or inhibit anyone else\'s use and enjoyment of the service.', 'Ti impegni a utilizzare il servizio solo per scopi leciti e in un modo che non violi i diritti di, o limiti o inibisca l\'uso e il godimento del servizio da parte di terzi.')}
-          </p>
-        </section>
-
-        <section className="mt-12">
-          <h2 className="font-serif text-2xl font-bold text-champagne mb-4">
-            {tr(locale, '3. Disclaimer', '3. Esclusione di Garanzie')}
-          </h2>
-          <p className="text-zinc-300 font-light leading-relaxed">
-            {tr(locale, 'The materials on Nightlife Milan\'s website are provided on an \'as is\' basis. Nightlife Milan makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.', 'I materiali sul sito web di Nightlife Milan sono forniti "così come sono". Nightlife Milan non fornisce alcuna garanzia, espressa o implicita, e con la presente declina e nega tutte le altre garanzie, incluse, senza limitazione, garanzie implicite o condizioni di commerciabilità, idoneità per uno scopo particolare, o non violazione della proprietà intellettuale o altra violazione dei diritti.')}
-          </p>
-        </section>
-      </article>
-    </main>
-  );
+  return <LegalDocumentPage locale={locale} kind="terms" />;
 }

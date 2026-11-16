@@ -14,6 +14,7 @@ import {
 import Link from '@/components/LocalizedLink';
 import { localePrefix } from '@/lib/i18n/locales';
 import { SPOKEN_LANGUAGE_OPTIONS, VENUE_BY_ID, formatEurFromCents } from '@/lib/single-pass/catalog';
+import { formatMinorCurrency } from '@/lib/single-pass/currency';
 import { getSinglePassCopy } from '@/lib/single-pass/i18n35';
 import type { SinglePassOrder } from '@/lib/single-pass/types';
 import { useSinglePassCart } from './SinglePassCartContext';
@@ -34,11 +35,13 @@ export default function SinglePassAccountView({
   initialCheckoutState,
   initialOrderId,
   initialSessionId,
+  initialTab,
 }: {
   locale: string;
   initialCheckoutState?: string;
   initialOrderId?: string;
   initialSessionId?: string;
+  initialTab?: 'login' | 'register' | 'lookup';
 }) {
   const { clearCart } = useSinglePassCart();
   const copy = getSinglePassCopy(locale);
@@ -48,11 +51,11 @@ export default function SinglePassAccountView({
   const [loading, setLoading] = useState(true);
   const [member, setMember] = useState<MemberView | null>(null);
   const [orders, setOrders] = useState<SinglePassOrder[]>([]);
-  const [stripeConfigured, setStripeConfigured] = useState(false);
+  const [paymentReady, setPaymentReady] = useState(false);
   const [statusBanner, setStatusBanner] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  const [authTab, setAuthTab] = useState<'login' | 'register' | 'lookup'>('login');
+  const [authTab, setAuthTab] = useState<'login' | 'register' | 'lookup'>(initialTab || 'login');
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
 
@@ -83,12 +86,12 @@ export default function SinglePassAccountView({
         ok?: boolean;
         member?: MemberView;
         orders?: SinglePassOrder[];
-        stripeConfigured?: boolean;
+        paymentReady?: boolean;
       };
       if (data.ok && data.member) {
         setMember(data.member);
         setOrders(data.orders || []);
-        setStripeConfigured(Boolean(data.stripeConfigured));
+        setPaymentReady(Boolean(data.paymentReady));
         setEditWhatsapp(data.member.whatsapp);
         setEditLanguages(data.member.spokenLanguages || []);
       } else {
@@ -115,8 +118,8 @@ export default function SinglePassAccountView({
             clearCart();
             setStatusBanner(
               isIt
-                ? `Pagamento Stripe confermato per l’ordine ${initialOrderId}. Il tuo Single Pass è attivo nell’Area Riservata.`
-                : `Stripe payment confirmed for order ${initialOrderId}. Your Single Pass is ready below.`,
+                ? `Pagamento confermato per l’ordine ${initialOrderId}. Il tuo pass digitale è attivo nell’Area Riservata.`
+                : `Online payment confirmed for order ${initialOrderId}. Your digital pass is ready below.`,
             );
           }
         } catch {
@@ -192,23 +195,8 @@ export default function SinglePassAccountView({
   };
 
   const handlePayExistingOrder = async (orderId: string) => {
-    setErrorMsg(null);
     setPayingOrderId(orderId);
-    try {
-      const res = await fetch(`/api/single-pass/orders/${encodeURIComponent(orderId)}/pay`, {
-        method: 'POST',
-      });
-      const data = (await res.json()) as { ok?: boolean; checkoutUrl?: string; error?: string };
-      if (!res.ok || !data.ok || !data.checkoutUrl) {
-        setErrorMsg(data.error || 'Stripe checkout unavailable right now. Contact WhatsApp +39 351 912 7047.');
-        setPayingOrderId(null);
-        return;
-      }
-      window.location.assign(data.checkoutUrl);
-    } catch {
-      setErrorMsg('Connection error starting Stripe payment.');
-      setPayingOrderId(null);
-    }
+    window.location.assign(`${lp}/checkout?order=${encodeURIComponent(orderId)}`);
   };
 
   const handleSaveProfile = async (e: React.FormEvent) => {
@@ -595,11 +583,16 @@ export default function SinglePassAccountView({
                       </div>
                       <div className="font-bold text-[#F6F1E7] sm:text-right">
                         {copy.totalLabel}: {formatEurFromCents(order.totalCents, locale)}
+                        {order.presentmentCurrency && order.presentmentCurrency !== 'EUR' && (
+                          <span className="ml-2 text-[#C9A84C]">
+                            ({formatMinorCurrency(order.presentmentTotalMinor, order.presentmentCurrency, locale)})
+                          </span>
+                        )}
                       </div>
                     </div>
 
                     <div className="mt-4 flex flex-wrap items-center gap-3">
-                      {!isPaid && stripeConfigured && (
+                      {!isPaid && paymentReady && (
                         <button
                           type="button"
                           onClick={() => handlePayExistingOrder(order.id)}
@@ -607,7 +600,7 @@ export default function SinglePassAccountView({
                           className="inline-flex min-h-[44px] items-center gap-2 bg-[#F6F1E7] px-5 py-2.5 text-xs font-extrabold uppercase tracking-wider text-[#050505] hover:bg-[#EAE3D5]"
                         >
                           <CreditCard className="h-4 w-4" aria-hidden="true" />
-                          {payingOrderId === order.id ? '...' : copy.completeStripePaymentCta}
+                          {payingOrderId === order.id ? '...' : copy.completePaymentCta}
                         </button>
                       )}
                       {order.whatsappGroupInviteUrl && (

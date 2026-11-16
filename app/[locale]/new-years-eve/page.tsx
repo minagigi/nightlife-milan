@@ -351,9 +351,9 @@ const BOOKING_TIMELINE = [
     statusIt: 'Esaurimento Cenoni Serviti & Ultimi Tavoli Privé Rialzati',
     statusEn: 'Seated Dinners Filling Up & Final Elevated Privé Tables',
     detailIt:
-      'I posti per il Gran Cenone Servito, i tavoli fronte-vetrata per i fuochi d’artificio e le formule Royal Buffet vanno in rapido esaurimento. Ogni conferma richiede prepagamento al 100% (Stripe, bonifico bancario o link di pagamento) e invio della ricevuta al Concierge (+39 351 912 7047) per emettere l’email di conferma.',
+      'I posti per il Gran Cenone Servito, i tavoli fronte-vetrata per i fuochi d’artificio e le formule Royal Buffet vanno in rapido esaurimento. Ogni conferma richiede prepagamento al 100% (carta online, bonifico bancario o link di pagamento) e invio della ricevuta al Concierge (+39 351 912 7047) per emettere l’email di conferma.',
     detailEn:
-      'Seated Gala Dinner spots, window tables for midnight fireworks, and Royal Buffet allocations fill up rapidly. All bookings require 100% prepayment (Stripe, bank transfer, or payment link) and sending your receipt to our 24/7 Concierge (+39 351 912 7047) before receiving your confirmation email.',
+      'Seated Gala Dinner spots, window tables for midnight fireworks, and Royal Buffet allocations fill up rapidly. All bookings require 100% prepayment (online card, bank transfer, or payment link) and sending your receipt to our 24/7 Concierge (+39 351 912 7047) before receiving your confirmation email.',
   },
   {
     phaseIt: 'Fase 3: Last Minute & Sold Out (19 - 31 Dicembre 2026)',

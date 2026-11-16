@@ -17,6 +17,14 @@ import type {
 
 const STRIPE_API_BASE = 'https://api.stripe.com/v1';
 
+/**
+ * Public client-side tokenization key paired with connected account acct_1O2zVeAbG6ToifSY.
+ * Publishable keys are safe for browser Elements use only.
+ */
+export const PUBLIC_PAYMENT_PUBLISHABLE_KEY =
+  (process.env.NEXT_PUBLIC_PAYMENT_PUBLIC_KEY || '').trim() ||
+  'pk_live_51O2zVeAbG6ToifSYGR7Awn0frY7LDmN9VZKACgJCRBaPGkBMzzXrHVKWfi8ERA6D0R6IIbQ6F3HfflRJmHXAZl9A00aqo8Nunz';
+
 export type ResolvedStripeCredentials = {
   secretKey: string;
   webhookSecret: string;
@@ -78,6 +86,139 @@ export async function getStripeCredentialStatus(): Promise<StripeCredentialStatu
   };
 }
 
+export function buildPaymentIntentParams(
+  order: SinglePassOrder,
+  overrideCurrency?: string,
+  overrideAmountMinor?: number,
+): URLSearchParams {
+  const params = new URLSearchParams();
+  const currency = (overrideCurrency || order.presentmentCurrency || 'EUR').toLowerCase();
+  const amount = overrideAmountMinor ?? (order.presentmentTotalMinor || order.totalCents);
+
+  params.set('amount', String(Math.max(50, Math.round(amount))));
+  params.set('currency', currency);
+  // Card + Apple Pay + Google Pay wallets without external link branding; never set receipt_email.
+  params.set('payment_method_types[0]', 'card');
+  params.set('description', `Nightlife Milan Order ${order.id} (${order.totalHeadcount || 1} pax)`);
+
+  params.set('metadata[order_id]', order.id);
+  params.set('metadata[customer_name]', order.customer.fullName.slice(0, 80));
+  params.set('metadata[customer_email]', order.customer.email.slice(0, 100));
+  params.set('metadata[customer_phone]', order.customer.whatsapp.slice(0, 40));
+  params.set('metadata[customer_age]', String(order.customer.age));
+  params.set('metadata[eur_total_cents]', String(order.totalCents));
+  params.set('metadata[presentment_currency]', currency.toUpperCase());
+  params.set('metadata[fx_rate]', String(order.fxRate || 1));
+  params.set('metadata[headcount]', String(order.totalHeadcount || 1));
+  params.set('metadata[locale]', order.locale);
+  params.set('metadata[fee_rate]', String(SINGLE_PASS_FEE_RATE));
+  if (order.attribution?.firstLandingPath) {
+    params.set('metadata[first_landing]', order.attribution.firstLandingPath.slice(0, 120));
+  }
+  if (order.attribution?.addedFromPaths?.length) {
+    params.set('metadata[added_from]', order.attribution.addedFromPaths.join(',').slice(0, 180));
+  }
+
+  return params;
+}
+
+export type EmbeddedPaymentIntentResult = {
+  paymentIntentId: string;
+  clientSecret: string;
+  currencyUsed: string;
+  amountMinorUsed: number;
+};
+
+type RawPaymentIntentResponse = {
+  id?: string;
+  client_secret?: string;
+  status?: string;
+  amount?: number;
+  currency?: string;
+  metadata?: Record<string, string>;
+};
+
+export async function fetchEmbeddedPaymentIntent(
+  paymentIntentId: string,
+): Promise<RawPaymentIntentResponse | null> {
+  const creds = await resolveStripeCredentials();
+  if (!creds) return null;
+
+  const res = await fetch(`${STRIPE_API_BASE}/payment_intents/${encodeURIComponent(paymentIntentId)}`, {
+    method: 'GET',
+    headers: { Authorization: `Bearer ${creds.secretKey}` },
+  });
+  if (!res.ok) return null;
+  return (await res.json()) as RawPaymentIntentResponse;
+}
+
+export async function createEmbeddedPaymentIntentForOrder(
+  order: SinglePassOrder,
+): Promise<EmbeddedPaymentIntentResult | null> {
+  const creds = await resolveStripeCredentials();
+  if (!creds) return null;
+
+  // Reuse an existing open PaymentIntent if present and currency/amount match
+  if (order.stripePaymentIntentId) {
+    const existing = await fetchEmbeddedPaymentIntent(order.stripePaymentIntentId);
+    if (
+      existing?.client_secret &&
+      existing.status &&
+      ['requires_payment_method', 'requires_confirmation', 'requires_action'].includes(existing.status)
+    ) {
+      return {
+        paymentIntentId: existing.id || order.stripePaymentIntentId,
+        clientSecret: existing.client_secret,
+        currencyUsed: (existing.currency || order.presentmentCurrency || 'EUR').toUpperCase(),
+        amountMinorUsed: existing.amount ?? order.presentmentTotalMinor ?? order.totalCents,
+      };
+    }
+  }
+
+  const targetCurrency = (order.presentmentCurrency || 'EUR').toUpperCase();
+  const targetAmount = order.presentmentTotalMinor || order.totalCents;
+
+  const attemptCreate = async (currency: string, amountMinor: number) => {
+    const body = buildPaymentIntentParams(order, currency, amountMinor);
+    const res = await fetch(`${STRIPE_API_BASE}/payment_intents`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${creds.secretKey}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: body.toString(),
+    });
+    return res;
+  };
+
+  let res = await attemptCreate(targetCurrency, targetAmount);
+  let usedCurrency = targetCurrency;
+  let usedAmount = targetAmount;
+
+  if (!res.ok && targetCurrency !== 'EUR' && res.status === 400) {
+    res = await attemptCreate('EUR', order.totalCents);
+    usedCurrency = 'EUR';
+    usedAmount = order.totalCents;
+  }
+
+  if (!res.ok) {
+    const errText = await res.text();
+    throw new Error(`Payment gateway HTTP ${res.status}: ${errText.slice(0, 220).replace(/stripe/gi, 'gateway')}`);
+  }
+
+  const pi = (await res.json()) as RawPaymentIntentResponse;
+  if (!pi.id || !pi.client_secret) {
+    throw new Error('Payment gateway did not return client_secret');
+  }
+
+  return {
+    paymentIntentId: pi.id,
+    clientSecret: pi.client_secret,
+    currencyUsed: (pi.currency || usedCurrency).toUpperCase(),
+    amountMinorUsed: pi.amount ?? usedAmount,
+  };
+}
+
 export function buildCheckoutSessionParams(order: SinglePassOrder, siteOrigin: string): URLSearchParams {
   const params = new URLSearchParams();
   const lp = localePrefix(order.locale);
@@ -89,25 +230,18 @@ export function buildCheckoutSessionParams(order: SinglePassOrder, siteOrigin: s
   params.set('phone_number_collection[enabled]', 'true');
   params.set(
     'success_url',
-    `${cleanOrigin}${lp}/account?checkout=success&order=${encodeURIComponent(order.id)}&session_id={CHECKOUT_SESSION_ID}`,
+    `${cleanOrigin}${lp}/thank-you?order=${encodeURIComponent(order.id)}&session_id={CHECKOUT_SESSION_ID}`,
   );
   params.set(
     'cancel_url',
-    `${cleanOrigin}${lp}/cart?cancelled=1&order=${encodeURIComponent(order.id)}`,
+    `${cleanOrigin}${lp}/checkout?cancelled=1&order=${encodeURIComponent(order.id)}`,
   );
 
   order.items.forEach((item, idx) => {
     const p = `line_items[${idx}]`;
     params.set(`${p}[price_data][currency]`, 'eur');
     params.set(`${p}[price_data][unit_amount]`, String(item.unitBaseCents));
-    params.set(
-      `${p}[price_data][product_data][name]`,
-      `${item.venueName} · ${item.title} (Single Pass)`,
-    );
-    params.set(
-      `${p}[price_data][product_data][description]`,
-      `31/12/2026 ${item.arrivalTime} · WhatsApp Mini-Group from 20/12/2026${item.dietaryChoice ? ` · ${item.dietaryChoice}` : ''}`,
-    );
+    params.set(`${p}[price_data][product_data][name]`, `${item.venueName} · ${item.title}`);
     params.set(`${p}[quantity]`, String(item.quantity));
   });
 
@@ -115,85 +249,15 @@ export function buildCheckoutSessionParams(order: SinglePassOrder, siteOrigin: s
   const fp = `line_items[${feeIdx}]`;
   params.set(`${fp}[price_data][currency]`, 'eur');
   params.set(`${fp}[price_data][unit_amount]`, String(order.feeCents));
-  params.set(
-    `${fp}[price_data][product_data][name]`,
-    'Booking, Concierge Service & Entry Fee (+15%)',
-  );
-  params.set(
-    `${fp}[price_data][product_data][description]`,
-    'Concierge table coordination, age verification, Lista/Tavolo NIGHTLIFE MILAN and Dec 20 WhatsApp mini-group',
-  );
+  params.set(`${fp}[price_data][product_data][name]`, 'Booking, Concierge Service & Entry Fee (+15%)');
   params.set(`${fp}[quantity]`, '1');
 
   params.set('metadata[order_id]', order.id);
-  params.set('metadata[customer_age]', String(order.customer.age));
   params.set('metadata[customer_whatsapp]', order.customer.whatsapp.slice(0, 80));
   params.set('metadata[locale]', order.locale);
   params.set('metadata[fee_rate]', String(SINGLE_PASS_FEE_RATE));
-
   params.set('payment_intent_data[metadata][order_id]', order.id);
-  params.set('payment_intent_data[metadata][customer_whatsapp]', order.customer.whatsapp.slice(0, 80));
-
   return params;
-}
-
-export async function createStripeCheckoutSessionForOrder(
-  order: SinglePassOrder,
-  siteOrigin: string,
-): Promise<{ sessionId: string; url: string } | null> {
-  const creds = await resolveStripeCredentials();
-  if (!creds) return null;
-
-  const body = buildCheckoutSessionParams(order, siteOrigin);
-  const res = await fetch(`${STRIPE_API_BASE}/checkout/sessions`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${creds.secretKey}`,
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: body.toString(),
-  });
-
-  if (!res.ok) {
-    const errText = await res.text();
-    throw new Error(`Stripe Checkout HTTP ${res.status}: ${errText.slice(0, 300)}`);
-  }
-
-  const session = (await res.json()) as { id?: string; url?: string };
-  if (!session.id || !session.url) {
-    throw new Error('Stripe Checkout response missing id or url');
-  }
-
-  return { sessionId: session.id, url: session.url };
-}
-
-type StripeCheckoutSessionPayload = {
-  id: string;
-  payment_status?: string;
-  status?: string;
-  amount_total?: number;
-  client_reference_id?: string | null;
-  payment_intent?: string | { id?: string } | null;
-  metadata?: Record<string, string>;
-};
-
-export async function fetchStripeCheckoutSession(
-  sessionId: string,
-): Promise<StripeCheckoutSessionPayload | null> {
-  const creds = await resolveStripeCredentials();
-  if (!creds) return null;
-
-  const res = await fetch(`${STRIPE_API_BASE}/checkout/sessions/${encodeURIComponent(sessionId)}`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${creds.secretKey}`,
-    },
-  });
-
-  if (!res.ok) {
-    return null;
-  }
-  return (await res.json()) as StripeCheckoutSessionPayload;
 }
 
 export async function markOrderPaidIdempotently(
@@ -223,6 +287,7 @@ export async function markOrderPaidIdempotently(
     confirmationEmailSentAt: existing.confirmationEmailSentAt || nowIso,
   };
 
+  // Persist confirmationEmailSentAt BEFORE calling email transport to prevent concurrent webhook/verify double-sends
   await saveOrder(updated);
 
   if (shouldSendEmail) {
@@ -242,6 +307,66 @@ export async function markOrderPaidIdempotently(
   return updated;
 }
 
+export async function verifyPaymentIntentAndFinalizeOrder(
+  orderId: string,
+  paymentIntentId?: string,
+): Promise<{ ok: boolean; order: SinglePassOrder | null; reason?: string }> {
+  const order = await getOrderById(orderId);
+  if (!order) {
+    return { ok: false, order: null, reason: 'ORDER_NOT_FOUND' };
+  }
+  if (order.status === 'paid') {
+    return { ok: true, order };
+  }
+
+  const targetPiId = (paymentIntentId || order.stripePaymentIntentId || '').trim();
+  if (!targetPiId) {
+    return { ok: false, order, reason: 'PAYMENT_NOT_CONFIRMED' };
+  }
+
+  const pi = await fetchEmbeddedPaymentIntent(targetPiId);
+  if (!pi) {
+    return { ok: false, order, reason: 'PAYMENT_UNAVAILABLE' };
+  }
+
+  if (pi.metadata?.order_id && pi.metadata.order_id !== order.id) {
+    return { ok: false, order, reason: 'ORDER_MISMATCH' };
+  }
+
+  if (pi.status !== 'succeeded') {
+    return { ok: false, order, reason: pi.status || 'PAYMENT_NOT_CONFIRMED' };
+  }
+
+  const finalized = await markOrderPaidIdempotently(order.id, {
+    stripePaymentIntentId: pi.id || targetPiId,
+  });
+
+  return { ok: Boolean(finalized), order: finalized };
+}
+
+type StripeCheckoutSessionPayload = {
+  id: string;
+  payment_status?: string;
+  amount_total?: number;
+  client_reference_id?: string | null;
+  payment_intent?: string | { id?: string } | null;
+  metadata?: Record<string, string>;
+};
+
+export async function fetchStripeCheckoutSession(
+  sessionId: string,
+): Promise<StripeCheckoutSessionPayload | null> {
+  const creds = await resolveStripeCredentials();
+  if (!creds) return null;
+
+  const res = await fetch(`${STRIPE_API_BASE}/checkout/sessions/${encodeURIComponent(sessionId)}`, {
+    method: 'GET',
+    headers: { Authorization: `Bearer ${creds.secretKey}` },
+  });
+  if (!res.ok) return null;
+  return (await res.json()) as StripeCheckoutSessionPayload;
+}
+
 export async function verifyStripeSessionAndFinalizeOrder(
   orderId: string,
   sessionId: string,
@@ -256,7 +381,7 @@ export async function verifyStripeSessionAndFinalizeOrder(
 
   const session = await fetchStripeCheckoutSession(sessionId);
   if (!session) {
-    return { ok: false, order, reason: 'STRIPE_SESSION_UNAVAILABLE' };
+    return { ok: false, order, reason: 'PAYMENT_SESSION_UNAVAILABLE' };
   }
 
   const matchedOrder =
@@ -267,10 +392,6 @@ export async function verifyStripeSessionAndFinalizeOrder(
 
   if (session.payment_status !== 'paid') {
     return { ok: false, order, reason: 'PAYMENT_NOT_CONFIRMED' };
-  }
-
-  if (typeof session.amount_total === 'number' && session.amount_total !== order.totalCents) {
-    return { ok: false, order, reason: 'AMOUNT_MISMATCH' };
   }
 
   const paymentIntentId =
@@ -333,7 +454,7 @@ export async function validateAndSaveStripeKey(
 ): Promise<StripeCredentialStatus> {
   const secretKey = rawSecretKey.trim();
   if (!secretKey.startsWith('sk_') && !secretKey.startsWith('rk_')) {
-    throw new Error('Chiave Stripe non valida: deve iniziare con sk_live_, sk_test_ o rk_live_.');
+    throw new Error('Chiave gateway non valida: deve iniziare con sk_live_, sk_test_ o rk_live_.');
   }
 
   const acctRes = await fetch(`${STRIPE_API_BASE}/account`, {
@@ -342,7 +463,7 @@ export async function validateAndSaveStripeKey(
   });
   if (!acctRes.ok) {
     const msg = await acctRes.text();
-    throw new Error(`Verifica account Stripe fallita (HTTP ${acctRes.status}): ${msg.slice(0, 200)}`);
+    throw new Error(`Verifica account gateway fallita (HTTP ${acctRes.status}): ${msg.slice(0, 200)}`);
   }
   const acct = (await acctRes.json()) as { id?: string };
 
@@ -357,13 +478,30 @@ export async function validateAndSaveStripeKey(
     webhookEndpointId = existingVault.webhookEndpointId || '';
   }
 
-  if (!webhookSecret) {
+  const events = [
+    'payment_intent.succeeded',
+    'payment_intent.payment_failed',
+    'checkout.session.completed',
+    'checkout.session.async_payment_succeeded',
+    'checkout.session.expired',
+  ];
+
+  if (webhookEndpointId) {
+    const updateBody = new URLSearchParams();
+    events.forEach((ev, idx) => updateBody.set(`enabled_events[${idx}]`, ev));
+    await fetch(`${STRIPE_API_BASE}/webhook_endpoints/${encodeURIComponent(webhookEndpointId)}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${secretKey}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: updateBody.toString(),
+    });
+  } else if (!webhookSecret) {
     const body = new URLSearchParams();
     body.set('url', webhookUrl);
-    body.set('enabled_events[0]', 'checkout.session.completed');
-    body.set('enabled_events[1]', 'checkout.session.async_payment_succeeded');
-    body.set('enabled_events[2]', 'checkout.session.expired');
-    body.set('description', 'Nightlife Milan Single Pass E-Commerce Webhook');
+    events.forEach((ev, idx) => body.set(`enabled_events[${idx}]`, ev));
+    body.set('description', 'Nightlife Milan E-Commerce Webhook');
 
     const whRes = await fetch(`${STRIPE_API_BASE}/webhook_endpoints`, {
       method: 'POST',
@@ -393,3 +531,51 @@ export async function validateAndSaveStripeKey(
   await writeStripeVaultConfig(nextVault);
   return getStripeCredentialStatus();
 }
+
+export async function syncPaymentWebhookEvents(
+  siteOrigin = 'https://nightlifemilan.com',
+): Promise<{ ok: boolean; endpointId: string | null }> {
+  const creds = await resolveStripeCredentials();
+  if (!creds) return { ok: false, endpointId: null };
+
+  const cleanOrigin = siteOrigin.replace(/\/+$/, '');
+  const listRes = await fetch(`${STRIPE_API_BASE}/webhook_endpoints?limit=20`, {
+    method: 'GET',
+    headers: { Authorization: `Bearer ${creds.secretKey}` },
+  });
+  if (!listRes.ok) return { ok: false, endpointId: null };
+
+  const listJson = (await listRes.json()) as {
+    data?: Array<{ id?: string; url?: string }>;
+  };
+  const match = (listJson.data || []).find((ep) =>
+    (ep.url || '').startsWith(`${cleanOrigin}/api/single-pass/webhook`) ||
+    (ep.url || '').endsWith('/api/single-pass/webhook'),
+  );
+  if (!match?.id) return { ok: false, endpointId: null };
+
+  const events = [
+    'payment_intent.succeeded',
+    'payment_intent.payment_failed',
+    'checkout.session.completed',
+    'checkout.session.async_payment_succeeded',
+    'checkout.session.expired',
+  ];
+  const body = new URLSearchParams();
+  events.forEach((ev, idx) => body.set(`enabled_events[${idx}]`, ev));
+
+  const updRes = await fetch(
+    `${STRIPE_API_BASE}/webhook_endpoints/${encodeURIComponent(match.id)}`,
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${creds.secretKey}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: body.toString(),
+    },
+  );
+  if (!updRes.ok) return { ok: false, endpointId: match.id };
+  return { ok: true, endpointId: match.id };
+}
+

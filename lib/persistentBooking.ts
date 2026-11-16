@@ -3,7 +3,7 @@ import { isEnabledLocale } from '@/lib/i18n/locales';
 export function isPublicBookingPath(pathname: string): boolean {
   const segments = pathname.split('/').filter(Boolean);
   if (isEnabledLocale(segments[0])) segments.shift();
-  return !['crm', 'analytics', 'admin', 'api', 'auth', 'login', 'dashboard', 'cart', 'account'].includes(segments[0] || '');
+  return !['crm', 'analytics', 'admin', 'api', 'auth', 'login', 'dashboard', 'cart', 'checkout', 'thank-you', 'account'].includes(segments[0] || '');
 }
 
 export function isConciergeBookingHref(href: string): boolean {
