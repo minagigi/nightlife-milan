@@ -16,6 +16,11 @@ import {
   getRepvblicNyePageCopy,
   isRepvblicNyeSlug,
 } from '@/lib/capodanno/repvblic35';
+import {
+  GATE_NYE_OFFER_PRICES_EUR,
+  getGateNyePageCopy,
+  isGateNyeSlug,
+} from '@/lib/capodanno/gate35';
 import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
 import { SITE_CONTACT } from '@/config/contact';
@@ -49,10 +54,17 @@ export default function CapodannoDetailView({ locale, event }: Props) {
   const nav = capodannoNavigation(locale);
   const baseUi = getCapodannoUiCopy(locale);
   const baseScarcity = getScarcityAndChatCopy(locale);
-  // Party-only event (official REPVBLIC rate card): no dinner, no show, no bottle service,
-  // no "almost sold out" claim. Swap the generic Capodanno strings for event-specific copy.
-  const isPartyOnly = isRepvblicNyeSlug(event.slug);
-  const partyCopy = isPartyOnly ? getRepvblicNyePageCopy(locale) : null;
+  // Party-only events (official REPVBLIC and PERREO XL @ Gate Milano NYE rate cards):
+  // no dinner, no show, no bottle service, no "almost sold out" claim.
+  const isGate = isGateNyeSlug(event.slug);
+  const isRepvblic = isRepvblicNyeSlug(event.slug);
+  const isPartyOnly = isRepvblic || isGate;
+  const partyCopy = isGate
+    ? getGateNyePageCopy(locale)
+    : isRepvblic
+      ? getRepvblicNyePageCopy(locale)
+      : null;
+  const partyOfferPrices = isGate ? GATE_NYE_OFFER_PRICES_EUR : REPVBLIC_NYE_OFFER_PRICES_EUR;
   const ui = partyCopy
     ? {
         ...baseUi,
@@ -192,10 +204,21 @@ export default function CapodannoDetailView({ locale, event }: Props) {
           name: 'Nightlife Milan',
           url: SITE_URL,
         },
-        performer: {
-          '@type': 'PerformingGroup',
-          name: `${event.venueName} Resident DJs`,
-        },
+        performer:
+          event.slug === 'capodanno-bischeri-milano'
+            ? {
+                '@type': 'Person',
+                name: 'DJ Gigi Zeus',
+              }
+            : isGate
+              ? {
+                  '@type': 'PerformingGroup',
+                  name: 'PERREO XL DJs',
+                }
+              : {
+                  '@type': 'PerformingGroup',
+                  name: `${event.venueName} Resident DJs`,
+                },
         image: seoPack.schemaImages,
         location: {
           '@type': 'Place',
@@ -209,12 +232,12 @@ export default function CapodannoDetailView({ locale, event }: Props) {
           },
         },
         offers: isPartyOnly
-          ? tiers.slice(0, REPVBLIC_NYE_OFFER_PRICES_EUR.length).map((tier, idx) => ({
+          ? tiers.slice(0, partyOfferPrices.length).map((tier, idx) => ({
               '@type': 'Offer',
               name: tier.label,
               description: tier.details,
               url: `${SITE_URL}${canonicalPath}`,
-              price: String(REPVBLIC_NYE_OFFER_PRICES_EUR[idx]),
+              price: String(partyOfferPrices[idx]),
               priceCurrency: 'EUR',
               availability: 'https://schema.org/InStock',
               validFrom: '2026-10-01T00:00:00+02:00',

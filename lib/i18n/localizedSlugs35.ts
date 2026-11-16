@@ -1656,16 +1656,24 @@ const LEGACY_NYE_VENUE_TO_BASE: Readonly<Record<string, string>> = {
   'alcatraz-milano': 'capodanno-alcatraz-milano',
   'gattopardo-milano': 'capodanno-il-gattopardo-milano',
   'the-grace-club-milano': 'capodanno-grace-club-milano',
+  'bischeri-milano': 'capodanno-bischeri-milano',
+  'tom-milano': 'capodanno-tom-the-ordinary-market-milano',
+  'the-ordinary-market-milano': 'capodanno-tom-the-ordinary-market-milano',
+  'gate-milano': 'capodanno-gate-milano',
 };
 
-const NYE_EVENT_STEM_MATCHERS: ReadonlyArray<readonly [RegExp, string]> = CAPODANNO_EVENT_BASE_SLUGS.map((base) => {
-  const core = base
-    .replace(/^capodanno-/, '')
-    .replace(/-milano(?:-.*)?$/, '')
-    .replace(/^(?:in-|il-|la-|le-|the-)/, '');
-  const escaped = core.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return [new RegExp(`(?:^|-)${escaped}(?:-|$)`, 'i'), base] as const;
-});
+const NYE_EVENT_STEM_MATCHERS: ReadonlyArray<readonly [RegExp, string]> = [
+  ...CAPODANNO_EVENT_BASE_SLUGS.map((base) => {
+    const core = base
+      .replace(/^capodanno-/, '')
+      .replace(/-milano(?:-.*)?$/, '')
+      .replace(/^(?:in-|il-|la-|le-|the-)/, '');
+    const escaped = core.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return [new RegExp(`(?:^|-)${escaped}(?:-|$)`, 'i'), base] as const;
+  }),
+  [/(?:^|-)(?:tom-the-ordinary-market|ordinary-market|tom)(?:-|$)/i, 'capodanno-tom-the-ordinary-market-milano'],
+  [/(?:^|-)(?:bischeri)(?:-|$)/i, 'capodanno-bischeri-milano'],
+];
 
 const NYE_CAT_STEM_MATCHERS: ReadonlyArray<readonly [RegExp, string]> = [
   [/(?:^|-)(?:rooftop|terrazz|terrace|skyline)(?:-|$)/i, 'capodanno-rooftop-milano'],

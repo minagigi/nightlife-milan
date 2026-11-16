@@ -475,11 +475,17 @@ export function inferTargetAndOutfit(params: {
   if (s.includes('repvblic')) {
     return { target: 'fashion_international', outfit: 'sequins_evening' };
   }
+  if (s.includes('bischeri')) {
+    return { target: 'couples_vip', outfit: 'sequins_evening' };
+  }
+  if (s.includes('tom-the-ordinary-market') || s.includes('tom-milano') || s.includes('ordinary-market')) {
+    return { target: 'fashion_international', outfit: 'sequins_evening' };
+  }
+  if (s.includes('capodanno-gate-milano') || s.includes('reggaeton') || s.includes('latino') || s.includes('perreo') || s.includes('dembow') || s.includes('ahynama') || s.includes('encanto') || s.includes('aria-club') || s.includes('the-club') || s.includes('hollywood') || s.includes('play-club') || s.includes('lime') || s.includes('mamacita')) {
+    return { target: 'singles_friends', outfit: 'urban_reggaeton' };
+  }
   if (s.includes('techno') || s.includes('amnesia') || s.includes('volt') || s.includes('gate') || s.includes('tempio') || s.includes('tunnel') || s.includes('masada') || s.includes('amelia') || s.includes('bolgia') || s.includes('duro') || s.includes('apophis')) {
     return { target: 'young_clubbers', outfit: 'techno_blackwear' };
-  }
-  if (s.includes('reggaeton') || s.includes('latino') || s.includes('perreo') || s.includes('dembow') || s.includes('ahynama') || s.includes('encanto') || s.includes('aria-club') || s.includes('the-club') || s.includes('hollywood') || s.includes('play-club') || s.includes('lime') || s.includes('mamacita')) {
-    return { target: 'singles_friends', outfit: 'urban_reggaeton' };
   }
   if (s.includes('over-30') || s.includes('over-40') || s.includes('bobino') || s.includes('55-milano') || s.includes('55 milano') || s.includes('55-club') || s.includes('55 club') || s.includes('nepentha') || s.includes('blue-note') || s.includes('spirit-de-milan') || s.includes('gattopardo') || s.includes('mib')) {
     return { target: 'over30_adults', outfit: 'sequins_evening' };
@@ -501,6 +507,9 @@ const VENUE_MASTER_KEYS: Record<string, [string, string, string, string]> = {
   'magazzini': ['magazzini-generali-interior-01', 'magazzini-generali-interior-02', 'magazzini-generali-interior-03', 'magazzini-generali-interior-04'],
   'play-club': ['play-club-milano-interior-01', 'play-club-milano-interior-03', 'play-club-milano-interior-05', 'play-club-milano-interior-07'],
   'repvblic': ['repvblic-cover-16x9-v1', 'repvblic-gallery-01-v1', 'repvblic-gallery-02-v1', 'repvblic-gallery-03-v1'],
+  'bischeri': ['bischeri-milano-01', 'bischeri-milano-02', 'bischeri-milano-03', 'bischeri-milano-04'],
+  'tom-the-ordinary-market': ['tom-milano-01', 'tom-milano-02', 'tom-milano-03', 'tom-milano-04'],
+  'gate': ['gate-s02-architecture', 'gate-s04-tickets-aperitivo', 'gate-s05-vip-table-bottle', 'gate-s07-getting-there-exterior'],
   'gattopardo': ['gattopardo-interior-01', 'gattopardo-interior-02', 'gattopardo-interior-03', 'gattopardo-interior-04'],
   'apollo': ['apollo-milano-interior-01', 'apollo-milano-interior-02', 'apollo-milano-interior-03', 'apollo-milano-interior-04'],
   'terrazza-duomo-21': ['terrazza-21-interior-01', 'terrazza-21-interior-02', 'terrazza-21-interior-03', 'terrazza-21-interior-04'],
@@ -531,6 +540,8 @@ export function selectMasterAssetKeys(slug: string, venueName = '', categorySlug
   if (s.includes('magazzini')) return VENUE_MASTER_KEYS['magazzini'];
   if (s.includes('play-club')) return VENUE_MASTER_KEYS['play-club'];
   if (s.includes('repvblic')) return VENUE_MASTER_KEYS['repvblic'];
+  if (s.includes('bischeri')) return VENUE_MASTER_KEYS['bischeri'];
+  if (s.includes('tom-the-ordinary-market') || s.includes('tom-milano') || s.includes('ordinary-market')) return VENUE_MASTER_KEYS['tom-the-ordinary-market'];
   if (s.includes('gattopardo')) return VENUE_MASTER_KEYS['gattopardo'];
   if (s.includes('apollo')) return VENUE_MASTER_KEYS['apollo'];
   if (s.includes('terrazza-duomo') || s.includes('terrazza-21')) return VENUE_MASTER_KEYS['terrazza-duomo-21'];
@@ -540,7 +551,7 @@ export function selectMasterAssetKeys(slug: string, venueName = '', categorySlug
   if (s.includes('fabrique')) return ['fabrique-milano', 'v-fabrique-2', 'magazzini-generali-interior-02', 'capodanno-cena-cantata-show-flow-01'];
   if (s.includes('alcatraz')) return ['alcatraz-milano', 'v-alcatraz-2', 'magazzini-generali-interior-03', 'capodanno-cena-cantata-show-flow-01'];
   if (s.includes('amnesia')) return ['amnesia-milano', 'v-amnesia-2', 'volt-club-milano-interior-02', 'volt-club-milano-interior-03'];
-  if (s.includes('gate')) return ['gate-milano', 'v-gate-2', 'volt-club-milano-interior-01', 'magazzini-generali-interior-04'];
+  if (s.includes('gate')) return VENUE_MASTER_KEYS['gate'];
   if (s.includes('tempio')) return ['tempio-del-futuro-perduto-1', 'tempio-del-futuro-perduto-2', 'tunnel-1', 'tunnel-2'];
   if (s.includes('tunnel')) return ['tunnel-1', 'tunnel-2', 'volt-club-milano-interior-02', 'tempio-del-futuro-perduto-1'];
   if (s.includes('magnolia')) return ['circolo-magnolia', 'circolo-magnolia-2', 'base-milano-1', 'base-milano-2'];
@@ -749,7 +760,7 @@ const UX_COPY_BY_LOCALE: Record<string, {
     nfHeading: 'Trova la Tua Serata Perfetta a Milano in 3 Click',
     nfSub: 'Filtra per data, genere musicale o formula d’ingresso oppure chiedi consiglio immediato su WhatsApp.',
     nfSteps: ['1. Quando vuoi uscire?', '2. Che musica e atmosfera cerchi?', '3. Quale formula preferisci?'],
-    nfChips1: ['Stasera a Milano', 'Questo Weekend', 'Speciale Halloween 2026', 'Capodanno 2027 (113 Eventi)'],
+    nfChips1: ['Stasera a Milano', 'Questo Weekend', 'Speciale Halloween 2026', 'Capodanno 2027 (115 Eventi)'],
     nfChips2: ['House, Rooftop & Luxury', 'Hip-Hop, Reggaeton & Urban', 'Techno & Electronic Club', 'Cena Cantata & Over 30'],
     nfChips3: ['Lista & Biglietti Salta-Fila', 'Aperitivo Royal con Tavolo', 'Tavolo VIP Privé & Bottiglie'],
     nfWaCta: 'Fatti Consigliare in 60 Secondi su WhatsApp (+39 351 912 7047) →',
@@ -799,7 +810,7 @@ const UX_COPY_BY_LOCALE: Record<string, {
     nfHeading: 'Find Your Ideal Night Out in Milan in 3 Clicks',
     nfSub: 'Filter by night, music vibe, or entry formula - or message our 24/7 WhatsApp Concierge for an instant match.',
     nfSteps: ['1. When are you going out?', '2. What music & vibe do you want?', '3. Preferred entry formula?'],
-    nfChips1: ['Tonight in Milan', 'This Weekend', 'Halloween 2026 Special', 'New Year’s Eve 2027 (113 Events)'],
+    nfChips1: ['Tonight in Milan', 'This Weekend', 'Halloween 2026 Special', 'New Year’s Eve 2027 (115 Events)'],
     nfChips2: ['House, Rooftop & Luxury', 'Hip-Hop, Reggaeton & Urban', 'Techno & Electronic Club', 'Dinner Show & 30+ Crowd'],
     nfChips3: ['Guest List & Tickets', 'Royal Aperitivo Table', 'VIP Privé Table & Bottles'],
     nfWaCta: 'Get a Tailored Club Match in 60s on WhatsApp (+39 351 912 7047) →',
