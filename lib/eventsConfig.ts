@@ -137,7 +137,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '25+', 'Elegant and Fashion-forward', 'Deep House and Lounge'),
     image: '/images/events/october-2026/249189-e2b7683e02e3.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/wednesday-night-228/249211/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/wednesday-night-226/249170/channel/nightlifemilan-1',
     priority: 100
   },
   {
@@ -161,7 +161,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '25+', 'Strictly Elegant', 'Live Music and Commercial'),
     image: '/images/events/october-2026/249192-8d811d65d7c5.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/thursday-night-340/249212/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/thursday-night-345/249214/channel/nightlifemilan-1',
     priority: 100
   },
   {
@@ -185,7 +185,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '21+', 'Strictly Elegant', 'House and Electronic'),
     image: '/images/events/october-2026/249204-fcb5bf6cc4be.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/friday-night-groove-feat-damante-1/249206/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/friday-night-726/249215/channel/nightlifemilan-1',
     priority: 100
   },
   {
@@ -209,7 +209,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '21+', 'Strictly Elegant', 'Commercial and House'),
     image: '/images/events/october-2026/249213-e2755e4bf02c.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/saturday-night-783/249213/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/saturday-night-784/249196/channel/nightlifemilan-1',
     priority: 100
   },
   {
@@ -233,7 +233,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '21+', 'Urban Chic', 'Hip-Hop and R&B'),
     image: '/images/events/october-2026/249199-9373e4ee381b.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/sunday-night-181/249200/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/sunday-night-198/249201/channel/nightlifemilan-1',
     priority: 100
   },
 
@@ -283,7 +283,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Pineta Club', 'Via Messina 38, Milan', '25+', 'Elegant and Chic', 'Live Music and Commercial'),
     image: '/images/events/october-2026/243822-fa1698470cb9.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/friday-night-721/243823/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/friday-night-722/243824/channel/nightlifemilan-1',
     priority: 95
   },
   {
@@ -307,7 +307,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Pineta Club', 'Via Messina 38, Milan', '25+', 'Strictly Elegant', 'Live Music and Commercial'),
     image: '/images/events/october-2026/243815-e33432d48dd4.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/saturday-night-775/243829/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/saturday-night-776/243830/channel/nightlifemilan-1',
     priority: 95
   },
 
