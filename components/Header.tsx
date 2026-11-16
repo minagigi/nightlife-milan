@@ -255,7 +255,7 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
   return (
     <header className={`nlm-header sticky top-0 z-50 w-full border-b border-[#F6F1E7]/14 bg-[#050505] ${scrolled ? 'is-scrolled' : ''}`}>
       <div className="max-w-[1440px] mx-auto border-x border-[#F6F1E7]/14">
-      <div className="px-4 sm:px-10">
+      <div className="px-3 sm:px-10">
         <div className="nlm-header-inner flex justify-between items-center min-h-[72px]">
           
           {/* Desktop Nav (Left) */}
@@ -288,11 +288,11 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
           </nav>
 
           {/* Mobile Menu Toggle (Left on Mobile) */}
-          <div className="flex xl:hidden flex-1 items-center">
+          <div className="flex xl:hidden shrink-0 items-center">
             <button
               ref={mobileMenuTriggerRef}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="nlm-menu-toggle flex items-center justify-center -ml-2.5 w-11 h-11 text-[#F6F1E7] hover:text-[#EAE3D5] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F1E7] active:bg-white/5 transition-colors"
+              className="nlm-menu-toggle flex items-center justify-center -ml-1.5 h-10 w-10 sm:h-11 sm:w-11 text-[#F6F1E7] hover:text-[#EAE3D5] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F1E7] active:bg-white/5 transition-colors"
               aria-label={menuCopy.menu}
               aria-expanded={isMobileMenuOpen}
               aria-controls="mobile-menu"
@@ -315,12 +315,12 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
               className="relative z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F1E7]"
               aria-label="Nightlife Milan"
             >
-              <Logo className="h-9 w-auto" />
+              <Logo className="h-7 sm:h-9 w-auto" />
             </Link>
           </div>
 
           {/* International & Search (Right) */}
-          <div className="nlm-header-actions flex shrink-0 justify-end items-center gap-2.5">
+          <div className="nlm-header-actions flex shrink-0 justify-end items-center gap-1.5 sm:gap-2.5">
             <a
               href={waMenuLink}
               target="_blank"
@@ -341,7 +341,7 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
               prefetch={false}
               aria-label={spCopy.navAccountLabel}
               title={spCopy.navAccountLabel}
-              className="flex min-h-[44px] min-w-[44px] items-center justify-center border border-[#F6F1E7]/20 bg-[#0B0A09] text-[#F6F1E7] transition-colors hover:border-[#F6F1E7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F1E7]"
+              className="hidden sm:flex min-h-[44px] min-w-[44px] items-center justify-center border border-[#F6F1E7]/20 bg-[#0B0A09] text-[#F6F1E7] transition-colors hover:border-[#F6F1E7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F1E7]"
             >
               <User className="h-4 w-4" aria-hidden="true" />
             </Link>
@@ -350,7 +350,7 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
               onClick={() => setCartOpen(true)}
               aria-label={spCopy.navCartLabel}
               title={spCopy.navCartLabel}
-              className="relative flex min-h-[44px] min-w-[44px] items-center justify-center border border-[#F6F1E7]/25 bg-[#0B0A09] text-[#F6F1E7] transition-colors hover:border-[#F6F1E7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F1E7]"
+              className="relative flex h-10 w-10 sm:min-h-[44px] sm:min-w-[44px] items-center justify-center border border-[#F6F1E7]/25 bg-[#0B0A09] text-[#F6F1E7] transition-colors hover:border-[#F6F1E7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F1E7]"
             >
               <ShoppingBag className="h-4 w-4" aria-hidden="true" />
               {mounted && itemCount > 0 && (
@@ -398,6 +398,31 @@ export default function Header({ currentLocale, favoritesTitle, editorialFields 
             </button>
           </div>
           <nav className="px-5 pt-2 pb-5 flex flex-col" aria-label={menuCopy.menu}>
+            <div className="mb-2 grid grid-cols-2 gap-2.5 border-b border-[#F6F1E7]/12 pb-3 pt-1">
+              <Link
+                href={accountHref}
+                locale={currentLocale}
+                prefetch={false}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex min-h-[44px] items-center justify-center gap-2 border border-[#F6F1E7]/20 bg-[#0B0A09] px-3 py-2 text-xs font-semibold uppercase tracking-wider text-[#F6F1E7] hover:border-[#F6F1E7]"
+              >
+                <User className="h-4 w-4" aria-hidden="true" />
+                <span>{spCopy.navAccountLabel}</span>
+              </Link>
+              <Link
+                href={`${localePrefix}/cart`}
+                locale={currentLocale}
+                prefetch={false}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex min-h-[44px] items-center justify-center gap-2 border border-[#F6F1E7]/20 bg-[#0B0A09] px-3 py-2 text-xs font-semibold uppercase tracking-wider text-[#F6F1E7] hover:border-[#F6F1E7]"
+              >
+                <ShoppingBag className="h-4 w-4" aria-hidden="true" />
+                <span>
+                  {spCopy.navCartLabel}
+                  {mounted && itemCount > 0 ? ` (${itemCount})` : ''}
+                </span>
+              </Link>
+            </div>
             {[...navLinks, ...mobileExtraLinks].map((link, i) => {
               const isActive = pathname?.startsWith(link.match);
               const isGold = (link as { gold?: boolean }).gold;
