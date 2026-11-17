@@ -131,7 +131,20 @@ export default function SinglePassVenueModule({
       <div className="mt-5 flex flex-wrap gap-4 border-t border-[#050505]/12 pt-4 text-xs text-[#24201B]">
         <span className="inline-flex items-center gap-1.5">
           <Users className="h-4 w-4 text-[#050505]" aria-hidden="true" />
-          {copy.trustWhatsAppDate}
+          {[
+            'gate',
+            'pineta',
+            'repvblic',
+            'justme',
+            'bischeri',
+            'bobino',
+            'voya',
+            'justme-garda',
+          ].includes(venueId)
+            ? copy.trustWhatsAppDate
+            : locale === 'it'
+              ? 'Voucher email istantaneo · Concierge WhatsApp +39 351 912 7047 (24/7)'
+              : 'Instant email voucher · 24/7 WhatsApp Concierge +39 351 912 7047'}
         </span>
         <span className="inline-flex items-center gap-1.5">
           <ShieldCheck className="h-4 w-4 text-[#050505]" aria-hidden="true" />

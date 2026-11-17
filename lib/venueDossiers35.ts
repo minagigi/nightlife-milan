@@ -14,6 +14,7 @@ import {
   ORTHODOX_NYE_JUSTME_POSTER_SRC,
   orthodoxNyeJustMePath,
 } from './orthodox-nye/justme35';
+import { thanksgivingJustMePath, THANKSGIVING_JUSTME_POSTER_SRC } from './thanksgiving/justme35';
 
 function venueDisplayName(venue: Venue, locale: string): string {
   return (locale === 'it' ? venue.localizedContent?.name?.it : venue.localizedContent?.name?.en) || venue.localizedContent?.name?.en || 'Club Milano';
@@ -1031,7 +1032,7 @@ export function resolveVenueEventsForCarousel(
   const toHref = (enPath: string) => localizeInternalHref(`${lp}${enPath}`, locCode);
 
   const matchedDated = OCTOBER_EVENTS.filter((ev) => {
-    if (ev.id === '251019') return false;
+    if (ev.id === '251019' || ev.id === '249216') return false;
     if (ev.venue.id === venue.id) return true;
     if (venue.id === 'v-apollo' && ev.venue.id === 'apollo') return true;
     if (venue.id === 'v-55milano' && ev.venue.id === 'v-55') return true;
@@ -1228,6 +1229,11 @@ export function resolveVenueEventsForCarousel(
   }
 
   if (venue.id === 'v-justme' || clubSlug === 'just-me-milano' || clubSlug === 'just-me-milan') {
+    const romeNowDay = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Rome' }).format(new Date());
+    const romeEndWeekDay = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Rome' }).format(
+      new Date(Date.now() + 7 * 86_400_000),
+    );
+    const thanksgivingDay = '2026-11-26';
     const orthodoxHref = orthodoxNyeJustMePath(locale);
     const orthodoxBanner = getJustMeOrthodoxRelatedBanner(locale);
     future.unshift({
@@ -1247,6 +1253,37 @@ export function resolveVenueEventsForCarousel(
       ),
       badge: isIt ? '13 GEN · ORTODOSSO' : '13 JAN · ORTHODOX NYE',
     });
+    if (thanksgivingDay >= romeNowDay) {
+      const tgHref = thanksgivingJustMePath(locale);
+      const tgCard = {
+        id: 'thanksgiving-justme-2026',
+        title: isIt
+          ? 'Thanksgiving 2026 & Vida Loca · American Royal Buffet'
+          : 'Thanksgiving 2026 & Vida Loca · American Royal Buffet',
+        dateLabel: thanksgivingDay,
+        timeLabel: isIt
+          ? 'Gio 26 Nov · Royal Buffet 19:30 · Vida Loca 22:30–05:00'
+          : 'Thu 26 Nov · Royal Buffet 19:30 · Vida Loca 22:30–05:00',
+        priceLabel: '€15 · Tavoli €320–€5.000',
+        categoryLabel: isIt ? 'Speciale Thanksgiving · JustMe Milano' : 'Thanksgiving Special · JustMe Milan',
+        genres: ['House', 'Hip-Hop', 'Hits', 'EDM', 'Reggaeton'],
+        imageSrc: THANKSGIVING_JUSTME_POSTER_SRC,
+        href: tgHref,
+        whatsappHref: getConciergeBookingUrl(
+          locale,
+          'Thanksgiving 2026 & Vida Loca @ JustMe Milano (26 Novembre)',
+          sourcePageUrl || tgHref,
+        ),
+        badge: isIt ? '26 NOV · THANKSGIVING' : '26 NOV · THANKSGIVING',
+      };
+      future.unshift(tgCard);
+      if (thanksgivingDay <= romeEndWeekDay) {
+        thisWeek.unshift(tgCard);
+      }
+      if (thanksgivingDay === romeNowDay) {
+        tonight.unshift(tgCard);
+      }
+    }
   }
 
   if (thisWeek.length === 0) {

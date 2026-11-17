@@ -11,6 +11,7 @@ export type SinglePassVenueId =
   | 'justme-garda'
   | 'voya-christmas'
   | 'justme-orthodox'
+  | 'justme-thanksgiving'
   | 'club-event';
 
 export type SinglePassPackageCategory =

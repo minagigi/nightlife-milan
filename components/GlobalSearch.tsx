@@ -41,6 +41,7 @@ import {
   ORTHODOX_NYE_JUSTME_POSTER_SRC,
   orthodoxNyeJustMePath,
 } from '@/lib/orthodox-nye/justme35';
+import { thanksgivingJustMePath, THANKSGIVING_JUSTME_POSTER_SRC } from '@/lib/thanksgiving/justme35';
 
 type SearchTabId = 'all' | 'clubs' | 'capodanno' | 'events' | 'hubs' | 'guides' | 'zones';
 
@@ -1472,7 +1473,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
       });
 
     const xceedItems = (octoberCatalog || [])
-      .filter((ev) => ev.id !== '251019' && romeDayKey(ev.startISO) >= todayKey)
+      .filter((ev) => ev.id !== '251019' && ev.id !== '249216' && romeDayKey(ev.startISO) >= todayKey)
       .map((ev) => {
         const title = `${ev.shortName || ev.officialName} · ${ev.venue.name}`;
         const performers = ev.performers.map((p) => p.name).join(' ');
@@ -1551,7 +1552,32 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
       score: orthodoxNyeJustMeScore,
     };
 
+    const thanksgivingJustMeHref = thanksgivingJustMePath(currentLocale);
+    const thanksgivingJustMeTitle = isIt
+      ? 'Thanksgiving 2026 & Vida Loca · JustMe Milano (Royal Buffet 15€ · Club 15€)'
+      : 'Thanksgiving 2026 & Vida Loca · JustMe Milan (Royal Buffet €15 · Club €15)';
+    const thanksgivingJustMeScore = isBrowsingCategory
+      ? 99
+      : matchTokensScore(
+          `${thanksgivingJustMeTitle} JustMe Milano Just Me`,
+          'thanksgiving giorno ringraziamento azione gracias action de graces erntedank old turkey tacchino royal buffet american dessert vida loca radio 105 26 novembre november 2026 justme torre branca house hip-hop hits edm reggaeton 15 euro 320 640 1280',
+          qTokens,
+          fullQuery,
+        );
+    const thanksgivingJustMeItem = {
+      id: 'thanksgiving-justme-2026',
+      title: thanksgivingJustMeTitle,
+      venueName: 'JustMe Milano · Parco Sempione / Torre Branca',
+      dateISO: '2026-11-26T19:30:00+01:00',
+      image: THANKSGIVING_JUSTME_POSTER_SRC,
+      priceLabel: '€15 · Tavoli €320–€5.000',
+      genres: 'Vida Loca Radio 105 · House, Hip-Hop, Hits, EDM, Reggaeton',
+      href: thanksgivingJustMeHref,
+      score: thanksgivingJustMeScore,
+    };
+
     const scoredEvents = [
+      ...(romeDayKey('2026-11-26') >= todayKey ? [thanksgivingJustMeItem] : []),
       ...(romeDayKey('2027-01-13') >= todayKey ? [orthodoxNyeJustMeItem] : []),
       ...(romeDayKey('2026-12-25') >= todayKey ? [voyaChristmasItem] : []),
       ...featuredItems,

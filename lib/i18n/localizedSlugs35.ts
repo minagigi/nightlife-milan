@@ -10,6 +10,7 @@ import { HALLOWEEN_NAVIGATION } from '@/lib/halloween/navigation';
 import { halloweenPath } from '@/lib/halloween/routes';
 import { christmasVoyaSlug, resolveChristmasVoyaSlug } from '@/lib/christmas/voya35';
 import { orthodoxNyeJustMeSlug, resolveOrthodoxNyeJustMeSlug } from '@/lib/orthodox-nye/justme35';
+import { thanksgivingJustMeSlug, resolveThanksgivingJustMeSlug } from '@/lib/thanksgiving/justme35';
 import {
   CAPODANNO_CATEGORY_IDS,
   CAPODANNO_EVENT_BASE_SLUGS,
@@ -1132,6 +1133,9 @@ export function resolveEventSlugToCanonical(slug: string, targetLocale?: LocaleC
   if (resolveOrthodoxNyeJustMeSlug(slug)) {
     return orthodoxNyeJustMeSlug(loc);
   }
+  if (resolveThanksgivingJustMeSlug(slug)) {
+    return thanksgivingJustMeSlug(loc);
+  }
   if (HALLOWEEN_SET.has(slug)) {
     return HALLOWEEN_NAVIGATION[loc]?.slug || HALLOWEEN_NAVIGATION.en.slug;
   }
@@ -1181,6 +1185,9 @@ export function getLocalizedEventSlug35(rawSlug: string, locale: LocaleCode): st
   }
   if (resolveOrthodoxNyeJustMeSlug(rawSlug)) {
     return orthodoxNyeJustMeSlug(locale);
+  }
+  if (resolveThanksgivingJustMeSlug(rawSlug)) {
+    return thanksgivingJustMeSlug(locale);
   }
   if (HALLOWEEN_SET.has(rawSlug)) {
     return HALLOWEEN_NAVIGATION[locale]?.slug || HALLOWEEN_NAVIGATION.en.slug;
@@ -1779,6 +1786,9 @@ export function resolveLegacyOrExpiredEventRedirect(rawSlug: string, targetLocal
     resolveOrthodoxNyeJustMeSlug(rawSlug) ||
     resolveOrthodoxNyeJustMeSlug(slug) ||
     resolveOrthodoxNyeJustMeSlug(stripped) ||
+    resolveThanksgivingJustMeSlug(rawSlug) ||
+    resolveThanksgivingJustMeSlug(slug) ||
+    resolveThanksgivingJustMeSlug(stripped) ||
     Boolean(resolveCapodannoCategoryIdByLocalizedSlug(rawSlug, targetLocale)) ||
     Boolean(resolveCapodannoEventBaseSlugByLocalizedSlug(rawSlug, targetLocale)) ||
     capLegacy?.type === 'hub' ||

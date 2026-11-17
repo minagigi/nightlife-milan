@@ -11,6 +11,7 @@ import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { christmasVoyaPath } from '@/lib/christmas/voya35';
 import { orthodoxNyeJustMePath } from '@/lib/orthodox-nye/justme35';
+import { thanksgivingJustMePath, THANKSGIVING_JUSTME_POSTER_SRC } from '@/lib/thanksgiving/justme35';
 import { getEventDiscoveryItems, slimDiscoveryItemsForClient } from '@/lib/eventDiscovery';
 import { PrioritySixShowcase, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
@@ -91,12 +92,27 @@ type MajorSpecialEventCard = {
   venuesEn: string;
   descIt: string;
   descEn: string;
-  linkKind?: 'orthodox-nye';
+  linkKind?: 'orthodox-nye' | 'thanksgiving-justme';
   linkLabelIt?: string;
   linkLabelEn?: string;
 };
 
 const MAJOR_SPECIAL_EVENTS: MajorSpecialEventCard[] = [
+  {
+    badgeIt: '26 Novembre 2026 · Thanksgiving & Vida Loca',
+    badgeEn: 'November 26, 2026 · Thanksgiving & Vida Loca',
+    titleIt: 'Thanksgiving 2026 & Vida Loca al JustMe Milano (American Royal Buffet)',
+    titleEn: 'Thanksgiving 2026 & Vida Loca at JustMe Milano (American Royal Buffet)',
+    venuesIt: 'JustMe Milano · Viale Luigi Camoens 2 (Parco Sempione · Torre Branca)',
+    venuesEn: 'JustMe Milano · Viale Luigi Camoens 2 (Parco Sempione · Torre Branca)',
+    descIt:
+      'Giovedì 26 novembre 2026 (19:30–05:00): dalle 19:30 Full American Style Royal Buffet con Show Cooking dell’Old Turkey e American Dessert Selection (15€ con 1 drink), poi dalle 22:30 Vida Loca Radio 105 (15€ club, tavoli 320€–5.000€) e parcheggio con navetta gratuita.',
+    descEn:
+      'Thursday Nov 26, 2026 (19:30–05:00): 19:30 Full American Style Royal Buffet with live Old Turkey Show Cooking & American Dessert Selection (€15 w/ 1 drink), followed from 22:30 by Vida Loca Radio 105 (€15 club, tables €320–€5,000) & complimentary shuttle parking.',
+    linkKind: 'thanksgiving-justme',
+    linkLabelIt: 'Royal Buffet 15€ & Tavoli Vida Loca →',
+    linkLabelEn: '€15 Royal Buffet & Vida Loca Tables →',
+  },
   {
     badgeIt: '13 Gennaio 2027 · Capodanno Ortodosso',
     badgeEn: 'January 13, 2027 · Orthodox New Year',
@@ -354,7 +370,13 @@ export default async function SpecialEventsPage({ params }: Props) {
               </div>
               <div className="flex items-center justify-between pt-4 border-t border-white/10">
                 <Link
-                  href={ev.linkKind === 'orthodox-nye' ? orthodoxNyeJustMePath(locale) : `${lp}/football-afterparties`}
+                  href={
+                    ev.linkKind === 'orthodox-nye'
+                      ? orthodoxNyeJustMePath(locale)
+                      : ev.linkKind === 'thanksgiving-justme'
+                        ? thanksgivingJustMePath(locale)
+                        : `${lp}/football-afterparties`
+                  }
                   className="text-xs font-semibold text-white/75 hover:text-champagne transition-colors"
                 >
                   {ev.linkKind === 'orthodox-nye'

@@ -17,6 +17,15 @@ import {
   orthodoxNyeJustMeSlug,
   resolveOrthodoxNyeJustMeSlug,
 } from '@/lib/orthodox-nye/justme35';
+import ThanksgivingJustMeDetailView from '@/components/ThanksgivingJustMeDetailView';
+import {
+  getThanksgivingJustMeContent,
+  THANKSGIVING_JUSTME_POSTER_SRC,
+  thanksgivingJustMeHreflangAlternates,
+  thanksgivingJustMePath,
+  thanksgivingJustMeSlug,
+  resolveThanksgivingJustMeSlug,
+} from '@/lib/thanksgiving/justme35';
 import { getCapodannoCategoryPageDef, getCapodannoEventBySlug, getCapodannoEventsForMode } from '@/lib/capodannoEvents';
 import {
   buildCapodannoMetaDescription,
@@ -299,6 +308,37 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
     };
   }
+  if (resolveThanksgivingJustMeSlug(slug)) {
+    const canonicalSlug = thanksgivingJustMeSlug(locale);
+    if (slug !== canonicalSlug) permanentRedirect(thanksgivingJustMePath(locale));
+    const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
+    const canonical = `${baseUrl}${thanksgivingJustMePath(locale)}`;
+    const tg = getThanksgivingJustMeContent(locale);
+    return {
+      title: tg.metaTitle,
+      description: tg.metaDescription,
+      robots: seoRobots(locale, true, true),
+      alternates: {
+        canonical,
+        languages: thanksgivingJustMeHreflangAlternates(baseUrl),
+      },
+      openGraph: {
+        title: tg.metaTitle,
+        description: tg.metaDescription,
+        url: canonical,
+        type: 'website',
+        siteName: 'Nightlife Milan',
+        locale: getLocaleDef(locale)?.ogLocale || 'en_US',
+        images: [{ url: `${baseUrl}${THANKSGIVING_JUSTME_POSTER_SRC}`, width: 1376, height: 768, alt: tg.h1 }],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: tg.metaTitle,
+        description: tg.metaDescription,
+        images: [`${baseUrl}${THANKSGIVING_JUSTME_POSTER_SRC}`],
+      },
+    };
+  }
   const capCatId = resolveCapodannoCategoryIdByLocalizedSlug(slug, locale);
   if (capCatId) {
     if (slug !== capodannoCategorySlug(capCatId, locale)) permanentRedirect(capodannoCategoryPath(capCatId, locale));
@@ -481,6 +521,11 @@ export default async function EventPage({ params }: Props) {
     const canonicalSlug = orthodoxNyeJustMeSlug(locale);
     if (slug !== canonicalSlug) permanentRedirect(orthodoxNyeJustMePath(locale));
     return <OrthodoxNyeJustMeDetailView locale={locale} />;
+  }
+  if (resolveThanksgivingJustMeSlug(slug)) {
+    const canonicalSlug = thanksgivingJustMeSlug(locale);
+    if (slug !== canonicalSlug) permanentRedirect(thanksgivingJustMePath(locale));
+    return <ThanksgivingJustMeDetailView locale={locale} />;
   }
   const capCatId = resolveCapodannoCategoryIdByLocalizedSlug(slug, locale);
   if (capCatId) {

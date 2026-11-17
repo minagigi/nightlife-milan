@@ -1,6 +1,12 @@
 import { getCapodannoOfficialPosterSrc } from '@/lib/seoEventImages';
 import { OCTOBER_EVENTS_INVENTORY } from '@/lib/octoberEvents';
 import type { OctoberEventOffer, OctoberEventRecord } from '@/lib/october-events/types';
+import {
+  THANKSGIVING_JUSTME_LEGACY_RAW_SLUG,
+  THANKSGIVING_JUSTME_POSTER_SRC,
+  THANKSGIVING_JUSTME_SLUGS_35,
+  THANKSGIVING_JUSTME_XCEED_RAW_SLUG,
+} from '@/lib/thanksgiving/justme35';
 import type {
   PriceBreakdown,
   SinglePassPackageCategory,
@@ -241,6 +247,26 @@ export const SINGLE_PASS_VENUES: readonly SinglePassVenueSpec[] = [
     dressCodeIt: 'Elegante / Red & Luminous Glam',
     dressCodeEn: 'Smart Elegant / Red & Luminous Glam',
     posterSrc: '/images/events/orthodox-nye-2027/capodanno-ortodosso-justme-milano-2027.webp',
+  },
+  {
+    id: 'justme-thanksgiving',
+    eventSlug: THANKSGIVING_JUSTME_SLUGS_35.en,
+    name: 'Thanksgiving 2026 & Vida Loca @ JustMe Milano',
+    taglineIt: 'Giovedì 26 Novembre 2026 · Royal Buffet 15€, Club 15€, Tavoli 320€–1.280€',
+    taglineEn: 'Thursday Nov 26, 2026 · Royal Buffet €15, Club €15, Tables €320–€1,280',
+    district: 'Parco Sempione / Torre Branca',
+    address: 'Viale Luigi Camoens 2, 20121 Milano',
+    hours: '26 Novembre 2026 · 19:30 – 05:00',
+    ageBandLabelIt: '21+ anni · 26 Novembre 2026',
+    ageBandLabelEn: 'Ages 21+ · Nov 26, 2026',
+    recommendedMinAge: 21,
+    recommendedMaxAge: 55,
+    strictMaxAge: null,
+    musicIt: 'Vida Loca Radio 105 · House, Hip-Hop, Hits, EDM & Reggaeton',
+    musicEn: 'Vida Loca Radio 105 · House, Hip-Hop, Hits, EDM & Reggaeton',
+    dressCodeIt: 'Elegante (uomo: pantalone lungo obbligatorio)',
+    dressCodeEn: 'Smart Elegant (men: long trousers mandatory)',
+    posterSrc: THANKSGIVING_JUSTME_POSTER_SRC,
   },
   {
     id: 'club-event',
@@ -973,9 +999,102 @@ export const SINGLE_PASS_SKUS: readonly SinglePassSku[] = [
     eventDateLabel: '2027-01-13',
     confirmed: true,
   },
+  // THANKSGIVING 2026 & VIDA LOCA @ JUST ME MILANO (26 NOVEMBRE — CONFERMATO XCEED #249216)
+  {
+    id: 'justme-thanksgiving-buffet',
+    venueId: 'justme-thanksgiving',
+    category: 'royal-buffet',
+    featured: true,
+    titleIt: 'Aperitivo + 1 Drink · Royal Buffet (19:30–22:00) · 26 Nov',
+    titleEn: 'Aperitif + 1 Drink · Royal Buffet (19:30–22:00) · Nov 26',
+    descriptionIt:
+      'Ingresso 19:30–22:00 con 1 drink, Full American Style Royal Buffet, Show Cooking Old Turkey, American Dessert Selection e festa Vida Loca.',
+    descriptionEn:
+      '19:30–22:00 entry including 1 drink, Full American Style Royal Buffet, live Old Turkey Show Cooking, American Dessert Selection & Vida Loca party.',
+    arrivalTime: '19:30',
+    basePriceCents: 1500,
+    guestsPerUnit: 1,
+    genderPolicy: 'equal',
+    eventDateLabel: '2026-11-26',
+    confirmed: true,
+  },
+  {
+    id: 'justme-thanksgiving-club',
+    venueId: 'justme-thanksgiving',
+    category: 'club-entry',
+    featured: true,
+    titleIt: 'Ingresso Club + 1 Drink · Vida Loca (dalle 22:30) · 26 Nov',
+    titleEn: 'Club Entry + 1 Drink · Vida Loca (from 22:30) · Nov 26',
+    descriptionIt:
+      'Ingresso discoteca dalle 22:30 alle 05:00 con 1 drink per il party Vida Loca Radio 105 (House, Hip-Hop, Hits, EDM, Reggaeton).',
+    descriptionEn:
+      'Club admission from 22:30 to 05:00 with 1 drink for Vida Loca Radio 105 (House, Hip-Hop, Hits, EDM, Reggaeton).',
+    arrivalTime: '22:30',
+    basePriceCents: 1500,
+    guestsPerUnit: 1,
+    genderPolicy: 'equal',
+    eventDateLabel: '2026-11-26',
+    confirmed: true,
+  },
+  {
+    id: 'justme-thanksgiving-dehor-table',
+    venueId: 'justme-thanksgiving',
+    category: 'vip-table-share',
+    titleIt: 'Tavolo Dehor (ingresso entro le 23:00) · 6 Ospiti',
+    titleEn: 'Dehor Table (entry strictly by 23:00) · 6 Guests',
+    descriptionIt:
+      'Tavolo area Dehor JustMe Milano con bottiglie incluse per Thanksgiving & Vida Loca (accesso obbligatorio entro le 23:00).',
+    descriptionEn:
+      'Dehor VIP table at JustMe Milano with bottle service for Thanksgiving & Vida Loca (arrival strictly by 23:00).',
+    arrivalTime: '22:30',
+    basePriceCents: 32000,
+    guestsPerUnit: 6,
+    genderPolicy: 'equal',
+    eventDateLabel: '2026-11-26',
+    confirmed: true,
+  },
+  {
+    id: 'justme-thanksgiving-dancefloor-table',
+    venueId: 'justme-thanksgiving',
+    category: 'vip-table-share',
+    featured: true,
+    titleIt: 'Tavolo Dance Floor (Pista) · 6 Ospiti',
+    titleEn: 'Dance Floor Table (Main Room) · 6 Guests',
+    descriptionIt:
+      'Tavolo Privé in pista principale sotto la Torre Branca con servizio bottiglie per Vida Loca Radio 105.',
+    descriptionEn:
+      'Main room Dance Floor VIP table beneath Torre Branca with bottle service for Vida Loca Radio 105.',
+    arrivalTime: '23:00',
+    basePriceCents: 64000,
+    guestsPerUnit: 6,
+    genderPolicy: 'equal',
+    eventDateLabel: '2026-11-26',
+    confirmed: true,
+  },
+  {
+    id: 'justme-thanksgiving-central-table',
+    venueId: 'justme-thanksgiving',
+    category: 'vip-table-share',
+    titleIt: 'Tavolo Central (Area Centrale) · 8 Ospiti',
+    titleEn: 'Central Table (Elevated Central Zone) · 8 Guests',
+    descriptionIt:
+      'Postazione VIP area centrale ad alta visibilità su pista e console DJ con ingresso saltafoda dedicato.',
+    descriptionEn:
+      'Elevated high-visibility Central Zone VIP table overlooking dancefloor and DJ console with priority entry.',
+    arrivalTime: '23:00',
+    basePriceCents: 128000,
+    guestsPerUnit: 8,
+    genderPolicy: 'equal',
+    eventDateLabel: '2026-11-26',
+    confirmed: true,
+  },
 ];
 
 export const SKU_BY_ID = new Map<string, SinglePassSku>(SINGLE_PASS_SKUS.map((s) => [s.id, s]));
+
+const THANKSGIVING_SLUG_MAP = Object.fromEntries(
+  Object.values(THANKSGIVING_JUSTME_SLUGS_35).map((slug) => [slug, 'justme-thanksgiving' as const]),
+);
 
 const EVENT_SLUG_TO_VENUE_ID: Record<string, SinglePassVenueId> = {
   'capodanno-gate-milano': 'gate',
@@ -988,6 +1107,9 @@ const EVENT_SLUG_TO_VENUE_ID: Record<string, SinglePassVenueId> = {
   'capodanno-justme-garda-lake': 'justme-garda',
   'christmas-voya-rooftop-milan-2026': 'voya-christmas',
   'orthodox-new-year-justme-milan-2027': 'justme-orthodox',
+  ...THANKSGIVING_SLUG_MAP,
+  [THANKSGIVING_JUSTME_XCEED_RAW_SLUG]: 'justme-thanksgiving',
+  [THANKSGIVING_JUSTME_LEGACY_RAW_SLUG]: 'justme-thanksgiving',
 };
 
 export function getVenueIdByEventSlug(eventSlug: string): SinglePassVenueId | null {

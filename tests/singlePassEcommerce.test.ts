@@ -184,6 +184,8 @@ test('Zero public Stripe wording exists across all public pages, UI components, 
     'lib/capodanno/bobino35.ts',
     'lib/christmas/voya35.ts',
     'lib/orthodox-nye/justme35.ts',
+    'lib/thanksgiving/justme35.ts',
+    'components/ThanksgivingJustMeDetailView.tsx',
   ];
 
   const filesDisallowingMagisterAndNyAddress = new Set([
@@ -195,6 +197,8 @@ test('Zero public Stripe wording exists across all public pages, UI components, 
     'components/single-pass/EmbeddedPaymentForm.tsx',
     'lib/single-pass/i18n35.ts',
     'lib/single-pass/email.ts',
+    'lib/thanksgiving/justme35.ts',
+    'components/ThanksgivingJustMeDetailView.tsx',
   ]);
 
   for (const rel of publicFilesToScan) {

@@ -28,8 +28,8 @@ export function HomeHalloweenAndCapodannoSections({
         ? 'Serate della Settimana Just Me Milano: Aperto 7 Sere su 7 (Lun – Dom)'
         : 'Just Me Milan Weekly Nights: Open 7 Nights a Week (Mon – Sun)',
       desc: isIt
-        ? 'Dal Lunedì alla Domenica sotto la Torre Branca: Monday Night, Martedì Universitario, Mercoledì Absolutely, Giovedì Viziatissima, Friday Night, Saturday Night & Sunday Uptown. Royal Aperitivo dalle 19:30 e Club fino alle 05:00.'
-        : 'Monday through Sunday beneath Torre Branca in Parco Sempione: Monday Night, University Tuesday, Absolutely Wednesday, Viziatissima Thursday, Friday Night, Saturday Night & Uptown Sunday. Royal Aperitivo from 19:30 & Club until 05:00.',
+        ? 'Dal Lunedì alla Domenica sotto la Torre Branca: Monday Night, Martedì Universitario, Mercoledì Absolutely, Giovedì Special Night, Friday Night, Saturday Night & Sunday Uptown. Royal Aperitivo dalle 19:30 e Club fino alle 05:00.'
+        : 'Monday through Sunday beneath Torre Branca in Parco Sempione: Monday Night, University Tuesday, Absolutely Wednesday, Thursday Special Night, Friday Night, Saturday Night & Uptown Sunday. Royal Aperitivo from 19:30 & Club until 05:00.',
       badge: isIt ? 'Royal Aperitivo da 15-20€ · Tavoli VIP da 320€ a 5.000€' : 'Royal Aperitivo from €15-20 · VIP Tables €320 to €5,000',
       posterSrc: '/images/events/october-2026/249213-e2755e4bf02c.webp',
       href: `${prefix}/events/justme-saturday-saturday-night`,

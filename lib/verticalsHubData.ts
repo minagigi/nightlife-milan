@@ -1,7 +1,11 @@
-import { getLocalizedSeoPagePath35 } from '@/lib/i18n/localizedSlugs35';
+import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
+import {
+  getLocalizedEventSlug35,
+  getLocalizedSeoPagePath35,
+} from '@/lib/i18n/localizedSlugs35';
 
 import type { LocaleCode } from './i18n/locales';
-import { isEnabledLocale } from './i18n/locales';
+import { isEnabledLocale, localePrefix } from './i18n/locales';
 import { OCTOBER_EVENTS } from './octoberEvents';
 import { getOctoberEventSlug } from './october-events/copy';
 import { weeklyEvents } from './eventsConfig';
@@ -13,6 +17,7 @@ import {
   ORTHODOX_NYE_JUSTME_POSTER_SRC,
   orthodoxNyeJustMePath,
 } from './orthodox-nye/justme35';
+import { thanksgivingJustMePath, THANKSGIVING_JUSTME_POSTER_SRC } from './thanksgiving/justme35';
 import type { CarouselEventCard } from './venueDossiers35';
 
 export interface VerticalHubUi35 {
@@ -728,6 +733,37 @@ export function getHolidaysCatalog(locale: string): VerticalCardItem[] {
       imageSrc: '/images/events/christmas-2026-posters/natale-voya-rooftop-milano-2026.webp',
     },
     {
+      id: 'hol-thanksgiving-justme-2026',
+      badge: isIt ? '26 NOVEMBRE 2026 · THANKSGIVING & VIDA LOCA' : '26 NOVEMBER 2026 · THANKSGIVING & VIDA LOCA',
+      title: isIt
+        ? 'Thanksgiving 2026 & Vida Loca al JustMe Milano: American Royal Buffet'
+        : 'Thanksgiving 2026 & Vida Loca at JustMe Milan: American Royal Buffet',
+      subtitle: isIt
+        ? 'Giovedì 26 novembre 2026: dalle 19:30 Royal Buffet Americano con Show Cooking dell’Old Turkey e dalle 22:30 Vida Loca Radio 105 fino alle 05:00.'
+        : 'Thursday November 26, 2026: 19:30 Full American Style Royal Buffet with live Old Turkey Show Cooking and 22:30 Vida Loca Radio 105 until 05:00.',
+      priceRange: isIt
+        ? 'Royal Buffet 15€ · Club 15€ · Tavoli 320€–5.000€'
+        : 'Royal Buffet €15 · Club €15 · Tables €320–€5,000',
+      timingAndLogistics: isIt
+        ? 'Gio 26 Nov 2026 · Buffet 19:30 · Club 22:30–05:00 · 21+ Elegante (uomini pantalone lungo)'
+        : 'Thu Nov 26, 2026 · Buffet 19:30 · Club 22:30–05:00 · 21+ Elegant (men long trousers)',
+      recommendedVenues: ['JustMe Milano (Parco Sempione · Viale Luigi Camoens 2)'],
+      highlights: isIt
+        ? [
+            'Full American Style Royal Buffet (19:30–22:00) con Show Cooking Old Turkey e American Dessert Selection (15€ con 1 drink)',
+            'Serata Club Vida Loca Radio 105 (House, Hip-Hop, Hits, EDM, Reggaeton) dalle 22:30 alle 05:00 (15€ con 1 drink)',
+            'Parcheggio con servizio navetta gratuita + tavoli Dehor (320€ entro 23:00), Dance Floor (640€), Central (1.280€), VIP Front (3.200€) e DJ (5.000€)',
+          ]
+        : [
+            'Full American Style Royal Buffet (19:30–22:00) with live Old Turkey Show Cooking & American Dessert Selection (€15 w/ 1 drink)',
+            'Vida Loca Radio 105 tour from 22:30 to 05:00 (House, Hip-Hop, Hits, EDM, Reggaeton · €15 w/ 1 drink)',
+            'Partner car park with free shuttle service + tables from Dehor €320 (by 23:00) to DJ Table €5,000',
+          ],
+      href: thanksgivingJustMePath(locale),
+      whatsappText: 'Ciao Nightlife Milan, vorrei info per Thanksgiving 2026 & Vida Loca al JustMe Milano (26 Novembre · Royal Buffet 15€ / Tavoli VIP)',
+      imageSrc: THANKSGIVING_JUSTME_POSTER_SRC,
+    },
+    {
       id: 'hol-orthodox-nye-justme',
       badge: isIt ? '13 GENNAIO 2027 · CAPODANNO ORTODOSSO MILANO' : '13 JANUARY 2027 · ORTHODOX NEW YEAR MILAN',
       title: isIt
@@ -950,8 +986,9 @@ export function resolveSuggestedEventsForVertical(
     day: '2-digit',
   }).format(new Date(shiftedMs));
 
-  const upcomingDated = OCTOBER_EVENTS.filter((ev) => ev.startISO.slice(0, 10) >= todayISO)
-    .sort((a, b) => a.startISO.localeCompare(b.startISO));
+  const upcomingDated = OCTOBER_EVENTS.filter(
+    (ev) => ev.id !== '251019' && ev.id !== '249216' && ev.startISO.slice(0, 10) >= todayISO,
+  ).sort((a, b) => a.startISO.localeCompare(b.startISO));
 
   const filteredDated =
     focus === 'sanSiro'
@@ -972,7 +1009,7 @@ export function resolveSuggestedEventsForVertical(
     );
     const dStr = ev.startISO.slice(0, 10);
     const endStr = ev.endISO ? ev.endISO.slice(11, 16) : '05:00';
-    const cardHref = `/${locale}/events/${slug}`;
+    const cardHref = `${localePrefix(locale as LocaleCode)}/${getLocalizedDir35('events', locale as LocaleCode)}/${getLocalizedEventSlug35(slug, locale as LocaleCode)}`;
     return {
       id: `vert-${ev.id}`,
       title: ev.officialName || ev.shortName || ev.venue.name,
@@ -1007,8 +1044,33 @@ export function resolveSuggestedEventsForVertical(
     });
   }
 
-  // Add Holiday / NYE / Christmas highlights if focus is holidays or all
+  // Add Holiday / NYE / Christmas / Thanksgiving highlights if focus is holidays or all
   if (focus === 'holidays' || focus === 'all') {
+    if ('2026-11-26' >= todayISO) {
+      const thanksgivingHref = thanksgivingJustMePath(locale);
+      cards.unshift({
+        id: 'vert-thanksgiving-justme-2026',
+        title: isIt
+          ? 'Thanksgiving 2026 & Vida Loca · JustMe Milano (Royal Buffet 15€)'
+          : 'Thanksgiving 2026 & Vida Loca · JustMe Milan (Royal Buffet €15)',
+        dateLabel: '2026-11-26',
+        timeLabel: isIt
+          ? 'Gio 26 Nov · Buffet 19:30 · Vida Loca 22:30–05:00'
+          : 'Thu Nov 26 · Buffet 19:30 · Vida Loca 22:30–05:00',
+        priceLabel: '€15 · Tavoli €320–€5.000',
+        categoryLabel: 'JustMe Milano · Torre Branca',
+        genres: ['Vida Loca Radio 105', 'Old Turkey Royal Buffet', 'House & Hip-Hop'],
+        imageSrc: THANKSGIVING_JUSTME_POSTER_SRC,
+        href: thanksgivingHref,
+        whatsappHref: getConciergeBookingUrl(
+          locale,
+          'Thanksgiving 2026 & Vida Loca · JustMe Milano (26 Novembre)',
+          thanksgivingHref,
+        ),
+        badge: isIt ? '26 NOV · THANKSGIVING' : '26 NOV · THANKSGIVING',
+      });
+    }
+
     const christmasHref = christmasVoyaPath(locale);
     cards.push({
       id: 'vert-xmas-voya-2026',

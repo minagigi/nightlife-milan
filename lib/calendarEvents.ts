@@ -1,4 +1,5 @@
 import { mockEvents, mockVenues } from './data';
+import { OCTOBER_EVENTS } from './octoberEvents';
 import { weeklyEvents, WeeklyEvent } from './eventsConfig';
 import { MusicGenre, type Event, type Venue } from './types';
 import { physicalEventKey, eventNameCore } from './eventIdentity';
@@ -132,6 +133,7 @@ function expandWeeklyEvents(): { event: Event; venue: Venue }[] {
 
     for (const we of weeklyEvents as WeeklyEvent[]) {
       if (we.dayOfWeek !== dow) continue;
+      if (we.id === 'justme-thursday' && dayKey >= '2026-11-26') continue;
       const venue = mockVenues.find((v) => v.id === `v-${we.clubSlug}`);
       if (!venue) continue;
 
@@ -189,6 +191,9 @@ export async function getAllCalendarEvents(): Promise<{ event: Event; venue: Ven
   const bookedVenueNights = new Set(
     concreteItems.map(({ event }) => `${event.venueId}|${romeDayKey(event.dateISO)}`)
   );
+  for (const oe of OCTOBER_EVENTS) {
+    bookedVenueNights.add(`${oe.venue.id}|${romeDayKey(oe.startISO)}`);
+  }
   const weeklyItems = expandWeeklyEvents().filter(
     ({ event }) => !bookedVenueNights.has(`${event.venueId}|${romeDayKey(event.dateISO)}`)
   );

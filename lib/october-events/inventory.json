@@ -21253,10 +21253,10 @@
     },
     {
       "id": "249216",
-      "sourceUrl": "https://xceed.me/en/milano/event/thursday-night-348/249216",
-      "affiliateUrl": "https://xceed.me/en/milano/event/thursday-night-348/249216/channel/nightlifemilan-1",
+      "sourceUrl": "https://xceed.me/en/milano/event/vida-loca-13/249216",
+      "affiliateUrl": "https://xceed.me/en/milano/event/vida-loca-13/249216/channel/nightlifemilan-1",
       "affiliateStatus": "verified",
-      "officialName": "Thursday Night",
+      "officialName": "Thanksgiving & Vida Loca",
       "startISO": "2026-11-26T19:30:00+01:00",
       "endISO": "2026-11-27T05:00:00+01:00",
       "venue": {
@@ -21273,18 +21273,20 @@
         "longitude": null
       },
       "image": {
-        "src": "/images/events/october-2026/249216-a9a40338f294.webp",
+        "src": "/images/events/thanksgiving-2026/thanksgiving-justme-milano-2026.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 118332,
-        "sha256": "7e1de3307d740a3b3f958432f64f5c586f1ae12a93453fac0286157ea490e031"
+        "bytes": 160322,
+        "sha256": "3f5b5154f126fc51d0450ac1cc3d4fcc6db0abe9beec7eaf29a0469e7bccc480"
       },
       "age": "21+",
       "dressCode": "Elegant",
       "genres": [
         "House",
         "Hip-hop",
-        "Hits"
+        "Hits",
+        "EDM",
+        "Reggaeton"
       ],
       "performers": [],
       "offers": [
@@ -21293,42 +21295,42 @@
           "price": 320,
           "category": "table",
           "availability": "available",
-          "url": "https://xceed.me/en/milano/event/thursday-night-348/249216/channel/nightlifemilan-1"
+          "url": "https://xceed.me/en/milano/event/vida-loca-13/249216/channel/nightlifemilan-1"
         },
         {
           "name": "Dance Floor Table",
           "price": 640,
           "category": "table",
           "availability": "available",
-          "url": "https://xceed.me/en/milano/event/thursday-night-348/249216/channel/nightlifemilan-1"
+          "url": "https://xceed.me/en/milano/event/vida-loca-13/249216/channel/nightlifemilan-1"
         },
         {
           "name": "Central Table",
           "price": 1280,
           "category": "table",
           "availability": "available",
-          "url": "https://xceed.me/en/milano/event/thursday-night-348/249216/channel/nightlifemilan-1"
+          "url": "https://xceed.me/en/milano/event/vida-loca-13/249216/channel/nightlifemilan-1"
         },
         {
           "name": "VIP Front Table",
           "price": 3200,
           "category": "table",
           "availability": "available",
-          "url": "https://xceed.me/en/milano/event/thursday-night-348/249216/channel/nightlifemilan-1"
+          "url": "https://xceed.me/en/milano/event/vida-loca-13/249216/channel/nightlifemilan-1"
         },
         {
           "name": "DJ Table",
           "price": 5000,
           "category": "table",
           "availability": "available",
-          "url": "https://xceed.me/en/milano/event/thursday-night-348/249216/channel/nightlifemilan-1"
+          "url": "https://xceed.me/en/milano/event/vida-loca-13/249216/channel/nightlifemilan-1"
         },
         {
           "name": "Aperitif + 1 Drink",
           "price": 15,
           "category": "ticket",
           "availability": "available",
-          "url": "https://xceed.me/en/milano/event/thursday-night-348/249216/channel/nightlifemilan-1",
+          "url": "https://xceed.me/en/milano/event/vida-loca-13/249216/channel/nightlifemilan-1",
           "admissionFrom": "19:30",
           "admissionUntil": "22:00"
         },
@@ -21337,7 +21339,7 @@
           "price": 15,
           "category": "ticket",
           "availability": "available",
-          "url": "https://xceed.me/en/milano/event/thursday-night-348/249216/channel/nightlifemilan-1",
+          "url": "https://xceed.me/en/milano/event/vida-loca-13/249216/channel/nightlifemilan-1",
           "admissionFrom": "22:30"
         }
       ],
@@ -21345,7 +21347,8 @@
       "halloween": false,
       "startTimeKnown": true,
       "commercialCheckedAt": "2026-11-16T10:01:24.000Z",
-      "dressCodeDetail": "men-long-trousers"
+      "dressCodeDetail": "men-long-trousers",
+      "shortName": "Thanksgiving · Vida Loca"
     },
     {
       "id": "243825",
