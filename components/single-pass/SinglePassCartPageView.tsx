@@ -242,7 +242,7 @@ export default function SinglePassCartPageView({ locale }: { locale: string }) {
 
               <div className="flex items-center justify-center gap-1.5 text-[11px] text-[#8E8577]">
                 <ShieldCheck className="h-3.5 w-3.5 text-[#C9A84C]" aria-hidden="true" />
-                <span>Nightlife Milan · Magister Mida LLC</span>
+                <span>Nightlife Milan · Official E-Commerce</span>
               </div>
             </div>
           </aside>

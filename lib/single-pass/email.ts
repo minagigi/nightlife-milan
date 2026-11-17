@@ -60,7 +60,7 @@ export function buildSinglePassOrderEmail(
 <body style="margin:0;padding:24px;background:#050505;color:#F6F1E7;font-family:Arial,Helvetica,sans-serif;">
   <div style="max-width:600px;margin:0 auto;border:1px solid #2B2720;background:#0B0A09;padding:28px;">
     <p style="margin:0 0 8px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#EAE3D5;">
-      NIGHTLIFE MILAN · MAGISTER MIDA LLC
+      NIGHTLIFE MILAN · OFFICIAL VOUCHER
     </p>
     <h1 style="margin:0 0 16px;font-size:24px;color:#F6F1E7;">
       ${escapeHtml(isIt ? `Ordine confermato per ${order.customer.fullName}` : `Booking confirmed for ${order.customer.fullName}`)}
@@ -125,14 +125,14 @@ export function buildSinglePassOrderEmail(
       Concierge 24/7: ${escapeHtml(SITE_CONTACT.whatsapp.number)} · concierge@nightlifemilan.com
     </p>
     <p style="margin:0;font-size:11px;line-height:1.45;color:#6E675C;border-top:1px solid #222;padding-top:10px;">
-      nightlifemilan.com is a brand owned and operated by Magister Mida LLC · 447 Broadway, 2nd Floor #2242, New York, NY 10013, USA · Federal EIN 36-5071848 · Wyoming Filing ID 2023-001288676.
+      Nightlife Milan · ${escapeHtml(baseUrl)} · Terms &amp; Conditions: ${escapeHtml(`${baseUrl}${lp}/terms`)}
     </p>
   </div>
 </body>
 </html>`;
 
   const text = [
-    `NIGHTLIFE MILAN · MAGISTER MIDA LLC · ${order.id}`,
+    `NIGHTLIFE MILAN · ${order.id}`,
     `PIN: ${order.accessPin}`,
     `Guest: ${order.customer.fullName} (${order.customer.whatsapp}, ${order.customer.email})`,
     ...order.items.map(
@@ -146,7 +146,7 @@ export function buildSinglePassOrderEmail(
     `Voucher: ${thankYouUrl}`,
     `Reserved Area: ${accountUrl}`,
     `Concierge 24/7: ${SITE_CONTACT.whatsapp.number}`,
-    'nightlifemilan.com is a brand of Magister Mida LLC · 447 Broadway, 2nd Floor #2242, New York, NY 10013, USA · EIN 36-5071848',
+    `Nightlife Milan · ${baseUrl} · Terms & Conditions: ${baseUrl}${lp}/terms`,
   ].join('\n');
 
   return {

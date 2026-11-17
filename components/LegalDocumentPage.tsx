@@ -15,6 +15,7 @@ export default function LegalDocumentPage({
   kind: LegalDocKind;
 }) {
   const doc = getMagisterMidaLegalDocument(locale, kind);
+  const isTerms = kind === 'terms';
   const lp = localePrefix(locale);
   const links: Array<{ id: LegalDocKind; href: string; label: string }> = [
     { id: 'terms', href: `${lp}/terms`, label: doc.navLabels.terms },
@@ -41,7 +42,7 @@ export default function LegalDocumentPage({
           </div>
         </header>
 
-        {/* Corporate Identity Card */}
+        {/* Corporate / Office Identity Card */}
         <section
           aria-label={doc.corporateBlockTitle}
           className="border border-[#F6F1E7]/15 bg-[#0B0A09] p-6 sm:p-8"
@@ -50,46 +51,44 @@ export default function LegalDocumentPage({
             {doc.corporateBlockTitle}
           </h2>
           <dl className="mt-5 grid gap-4 text-sm sm:grid-cols-2">
-            <div className="border border-[#F6F1E7]/10 bg-[#12100E] p-4">
-              <dt className="font-mono text-[11px] uppercase tracking-wider text-[#8E8577]">
-                {doc.entityLabel}
-              </dt>
-              <dd className="mt-1 font-semibold text-[#F6F1E7]">
-                {MAGISTER_MIDA_COMPANY.legalName}
-              </dd>
-              <dd className="mt-0.5 text-xs text-[#C2B9AA]">
-                {MAGISTER_MIDA_COMPANY.entityType} · {MAGISTER_MIDA_COMPANY.formationDate}
-              </dd>
-            </div>
-            <div className="border border-[#F6F1E7]/10 bg-[#12100E] p-4">
-              <dt className="font-mono text-[11px] uppercase tracking-wider text-[#8E8577]">
-                {doc.registryLabel} &amp; {doc.einLabel}
-              </dt>
-              <dd className="mt-1 font-mono text-xs text-[#F6F1E7]">
-                Filing ID: {MAGISTER_MIDA_COMPANY.filingId}
-              </dd>
-              <dd className="mt-1 font-mono text-xs text-[#EAE3D5]">
-                Federal EIN: {MAGISTER_MIDA_COMPANY.ein}
-              </dd>
-            </div>
-            <div className="border border-[#F6F1E7]/10 bg-[#12100E] p-4">
+            {isTerms && (
+              <>
+                <div className="border border-[#F6F1E7]/10 bg-[#12100E] p-4">
+                  <dt className="font-mono text-[11px] uppercase tracking-wider text-[#8E8577]">
+                    {doc.entityLabel}
+                  </dt>
+                  <dd className="mt-1 font-semibold text-[#F6F1E7]">
+                    {MAGISTER_MIDA_COMPANY.legalName}
+                  </dd>
+                  <dd className="mt-0.5 text-xs text-[#C2B9AA]">
+                    {MAGISTER_MIDA_COMPANY.entityType} · {MAGISTER_MIDA_COMPANY.formationDate}
+                  </dd>
+                </div>
+                <div className="border border-[#F6F1E7]/10 bg-[#12100E] p-4">
+                  <dt className="font-mono text-[11px] uppercase tracking-wider text-[#8E8577]">
+                    {doc.registryLabel} &amp; {doc.einLabel}
+                  </dt>
+                  <dd className="mt-1 font-mono text-xs text-[#F6F1E7]">
+                    Filing ID: {MAGISTER_MIDA_COMPANY.filingId}
+                  </dd>
+                  <dd className="mt-1 font-mono text-xs text-[#EAE3D5]">
+                    Federal EIN: {MAGISTER_MIDA_COMPANY.ein}
+                  </dd>
+                </div>
+              </>
+            )}
+            <div className="border border-[#F6F1E7]/10 bg-[#12100E] p-4 sm:col-span-2">
               <dt className="font-mono text-[11px] uppercase tracking-wider text-[#8E8577]">
                 {doc.officeLabel}
               </dt>
               <dd className="mt-1 text-[#EAE3D5]">{MAGISTER_MIDA_COMPANY.principalAddress}</dd>
-            </div>
-            <div className="border border-[#F6F1E7]/10 bg-[#12100E] p-4">
-              <dt className="font-mono text-[11px] uppercase tracking-wider text-[#8E8577]">
-                {doc.agentLabel}
-              </dt>
-              <dd className="mt-1 text-[#EAE3D5]">{MAGISTER_MIDA_COMPANY.registeredAgent}</dd>
             </div>
             <div className="border border-[#F6F1E7]/10 bg-[#12100E] p-4 sm:col-span-2">
               <dt className="font-mono text-[11px] uppercase tracking-wider text-[#8E8577]">
                 {doc.contactLabel}
               </dt>
               <dd className="mt-1 flex flex-wrap gap-x-6 gap-y-1 text-[#EAE3D5]">
-                <span>{MAGISTER_MIDA_COMPANY.corporateEmail}</span>
+                {isTerms && <span>{MAGISTER_MIDA_COMPANY.corporateEmail}</span>}
                 <span>{MAGISTER_MIDA_COMPANY.conciergeEmail}</span>
                 <span className="font-mono">{MAGISTER_MIDA_COMPANY.phone}</span>
               </dd>

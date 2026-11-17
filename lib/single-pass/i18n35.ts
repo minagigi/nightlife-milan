@@ -194,7 +194,7 @@ const IT_PACK: SinglePassCopyPack = {
   formLanguages: 'Lingue parlate',
   formDietary: 'Preferenze menù (Terra/Mare) o allergie alimentari',
   formTermsLabel:
-    'Accetto Termini e Condizioni, Privacy Policy e Politica di Rimborso di Magister Mida LLC (titolare di nightlifemilan.com), confermo il +15% di Booking, Concierge & Entry Fee e i requisiti d’età del locale.',
+    'Accetto Termini e Condizioni, Privacy Policy e Politica di Rimborso di nightlifemilan.com, confermo il +15% di Booking, Concierge & Entry Fee e i requisiti d’età del locale.',
   termsPolicyLabel: 'Termini e Condizioni',
   privacyPolicyLabel: 'Privacy Policy',
   refundPolicyLabel: 'Politica di Rimborso',
@@ -228,7 +228,7 @@ const IT_PACK: SinglePassCopyPack = {
   openMiniGroupCta: 'Apri Mini-Gruppo WhatsApp',
   updateProfileCta: 'Aggiorna Contatti e Lingue',
   viewVoucherCta: 'Apri Voucher & Dettagli',
-  thankYouEyebrow: 'ORDINE CONFERMATO · NIGHTLIFE MILAN · MAGISTER MIDA LLC',
+  thankYouEyebrow: 'ORDINE CONFERMATO · NIGHTLIFE MILAN',
   thankYouHeading: 'Grazie, il tuo ordine è confermato',
   thankYouSubtitle:
     'Abbiamo registrato il pagamento sul nostro sistema sicuro e inviato il riepilogo ufficiale alla tua email. Qui sotto trovi tutti i dettagli d’ingresso.',
@@ -344,7 +344,7 @@ const EN_PACK: SinglePassCopyPack = {
   formLanguages: 'Spoken Languages',
   formDietary: 'Menu selection (Land/Sea) or dietary notes',
   formTermsLabel:
-    'I accept the Terms & Conditions, Privacy Policy, and Refund Policy of Magister Mida LLC (owner of nightlifemilan.com), acknowledge the +15% Booking, Concierge & Entry Fee, and confirm venue age requirements.',
+    'I accept the Terms & Conditions, Privacy Policy, and Refund Policy of nightlifemilan.com, acknowledge the +15% Booking, Concierge & Entry Fee, and confirm venue age requirements.',
   termsPolicyLabel: 'Terms & Conditions',
   privacyPolicyLabel: 'Privacy Policy',
   refundPolicyLabel: 'Refund Policy',
@@ -378,7 +378,7 @@ const EN_PACK: SinglePassCopyPack = {
   openMiniGroupCta: 'Join WhatsApp Group',
   updateProfileCta: 'Save Phone & Languages',
   viewVoucherCta: 'Open Order Voucher',
-  thankYouEyebrow: 'ORDER CONFIRMED · NIGHTLIFE MILAN · MAGISTER MIDA LLC',
+  thankYouEyebrow: 'ORDER CONFIRMED · NIGHTLIFE MILAN',
   thankYouHeading: 'Thank you, your booking is confirmed',
   thankYouSubtitle:
     'Your on-site payment has been verified and your digital confirmation has been dispatched by email. Keep your PIN and Order Reference below.',

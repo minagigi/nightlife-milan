@@ -161,7 +161,7 @@ export default async function CrmSinglePassPage({
         <header className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6">
           <div>
             <p className="font-mono text-xs uppercase tracking-widest text-white/50">
-              NIGHTLIFE MILAN CRM · MAGISTER MIDA LLC
+              NIGHTLIFE MILAN CRM · SINGLE PASS &amp; E-COMMERCE
             </p>
             <h1 className="mt-1 font-serif text-3xl font-bold text-white">
               E-Commerce Single Pass &amp; Eventi · Ordini, Persone &amp; Flusso Acquisizione

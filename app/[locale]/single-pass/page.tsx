@@ -239,13 +239,13 @@ export default async function SinglePassPage({
           <div className="border border-[#F6F1E7]/16 bg-[#0B0A09] p-6 text-sm leading-relaxed text-[#C2B9AA]">
             <h3 className="font-serif text-xl font-bold text-[#F6F1E7]">
               {isIt
-                ? 'Nightlife Milan · E-Commerce Ufficiale di Magister Mida LLC'
-                : 'Nightlife Milan · Official E-Commerce Platform by Magister Mida LLC'}
+                ? 'Nightlife Milan · E-Commerce Ufficiale Prezzi Confermati'
+                : 'Nightlife Milan · Official Confirmed-Price E-Commerce'}
             </h3>
             <p className="mt-2">
               {isIt
-                ? `Festeggiare San Silvestro o una serata speciale a Milano quando si è da soli oppure in due amici significa poter accedere solo a listini reali e trasparenti. Su nightlifemilan.com, marchio di Magister Mida LLC, ogni acquisto mostra l’importo base ufficiale in Euro più il +15% per Booking, Concierge Service & Entry Fee, convertito al momento del checkout nella tua valuta senza alcun costo nascosto. Assistenza 24/7: ${SITE_CONTACT.whatsapp.number} · concierge@nightlifemilan.com.`
-                : `Celebrating New Year’s Eve or flagship Milan nightlife dates on nightlifemilan.com (a brand owned and operated by Magister Mida LLC) guarantees verified official rate cards only. Every eligible ticket displays the canonical Euro tariff plus our transparent +15% Booking, Concierge Service & Entry Fee converted live at checkout, with dedicated WhatsApp concierge support on ${SITE_CONTACT.whatsapp.number} and concierge@nightlifemilan.com.`}
+                ? `Festeggiare San Silvestro o una serata speciale a Milano quando si è da soli oppure in due amici significa poter accedere solo a listini reali e trasparenti. Su nightlifemilan.com ogni acquisto mostra l’importo base ufficiale in Euro più il +15% per Booking, Concierge Service & Entry Fee, convertito al momento del checkout nella tua valuta senza alcun costo nascosto. Assistenza 24/7: ${SITE_CONTACT.whatsapp.number} · concierge@nightlifemilan.com.`
+                : `Celebrating New Year’s Eve or flagship Milan nightlife dates on nightlifemilan.com guarantees verified official rate cards only. Every eligible ticket displays the canonical Euro tariff plus our transparent +15% Booking, Concierge Service & Entry Fee converted live at checkout, with dedicated WhatsApp concierge support on ${SITE_CONTACT.whatsapp.number} and concierge@nightlifemilan.com.`}
             </p>
           </div>
         </div>

@@ -206,7 +206,7 @@ export default function Footer({ lang, editorialFields = {}, copyrightYear }: Fo
 
           <div className="px-6 sm:px-12 py-6 border-t border-[#F6F1E7]/14 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="font-mono text-[#847C6F] text-[11px] tracking-[0.12em]">
-              © {copyrightYear ?? new Date().getFullYear()} Nightlife Milan · Brand of Magister Mida LLC (447 Broadway, 2nd Floor #2242, New York, NY 10013, USA · EIN 36-5071848). {t.rights}
+              © {copyrightYear ?? new Date().getFullYear()} Nightlife Milan. {t.rights}
             </p>
             <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 font-mono text-[11px] text-[#847C6F]">
               {ENABLED_LOCALES.map((l) => (

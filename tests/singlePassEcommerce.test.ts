@@ -121,6 +121,9 @@ test('Multi-currency converter respects EUR, USD, JPY zero-decimal, and ISK/HUF 
 test('Zero public Stripe wording exists across all public pages, UI components, legal docs, email templates & 35 locales', () => {
   const stripeWordRe = /\bstripe\b/i;
 
+  const wyomingOrAgentRe =
+    /(wyoming|cheyenne|fbra|lincolnway|82001|вайоминг|вајоминг|уайоминг|怀俄明|وايومنغ|vaioming|vajoming)/i;
+
   for (const loc of ALL_35_LOCALES) {
     const pack = SINGLE_PASS_COPY_35[loc];
     assert.ok(pack, `Missing i18n pack for ${loc}`);
@@ -130,13 +133,20 @@ test('Zero public Stripe wording exists across all public pages, UI components, 
     assert.equal(serialized.includes('!'), false, `Exclamation mark found in ${loc}`);
     assert.equal(serialized.includes('\u2014'), false, `Em-dash found in ${loc}`);
     assert.equal(stripeWordRe.test(serialized), false, `Public Stripe mention in i18n35 ${loc}`);
+    assert.equal(/magister/i.test(serialized), false, `Magister Mida found in i18n35 ${loc}`);
 
     for (const kind of ['terms', 'privacy', 'cookies', 'refund'] as const) {
       const legal = getMagisterMidaLegalDocument(loc, kind);
       const legalJson = JSON.stringify(legal);
-      assert.ok(legalJson.includes('Magister Mida LLC'), `Missing Magister Mida LLC in ${loc} ${kind}`);
-      assert.ok(legalJson.includes(MAGISTER_MIDA_COMPANY.filingId));
-      assert.ok(legalJson.includes(MAGISTER_MIDA_COMPANY.ein));
+      assert.equal(wyomingOrAgentRe.test(legalJson), false, `Wyoming/agent ref found in ${loc} ${kind}`);
+      assert.ok(legalJson.includes('447 Broadway, 2nd Floor #2242, New York, NY 10013'), `Missing NY address in ${loc} ${kind}`);
+      if (kind === 'terms') {
+        assert.ok(legalJson.includes('Magister Mida LLC'), `Missing Magister Mida LLC in ${loc} terms`);
+        assert.ok(legalJson.includes(MAGISTER_MIDA_COMPANY.filingId));
+        assert.ok(legalJson.includes(MAGISTER_MIDA_COMPANY.ein));
+      } else {
+        assert.equal(/magister|36-5071848|2023-001288676/i.test(legalJson), false, `Magister Mida/ID leaked into non-terms ${loc} ${kind}`);
+      }
       assert.equal(stripeWordRe.test(legalJson), false, `Stripe mention in legal ${loc} ${kind}`);
     }
   }
@@ -163,6 +173,7 @@ test('Zero public Stripe wording exists across all public pages, UI components, 
     'components/single-pass/SinglePassCheckoutView.tsx',
     'components/single-pass/SinglePassThankYouView.tsx',
     'components/single-pass/SinglePassAccountView.tsx',
+    'components/single-pass/EmbeddedPaymentForm.tsx',
     'lib/single-pass/catalog.ts',
     'lib/single-pass/currency.ts',
     'lib/single-pass/email.ts',
@@ -175,9 +186,33 @@ test('Zero public Stripe wording exists across all public pages, UI components, 
     'lib/orthodox-nye/justme35.ts',
   ];
 
+  const filesDisallowingMagisterAndNyAddress = new Set([
+    'app/[locale]/single-pass/page.tsx',
+    'components/Footer.tsx',
+    'components/single-pass/SinglePassCartPageView.tsx',
+    'components/single-pass/SinglePassCheckoutView.tsx',
+    'components/single-pass/SinglePassThankYouView.tsx',
+    'components/single-pass/EmbeddedPaymentForm.tsx',
+    'lib/single-pass/i18n35.ts',
+    'lib/single-pass/email.ts',
+  ]);
+
   for (const rel of publicFilesToScan) {
     const content = fs.readFileSync(path.join(REPO_ROOT, rel), 'utf8');
-    assert.equal(stripeWordRe.test(content), false, `Found forbidden "Stripe" word in public file: ${rel}`);
+    const visibleTextContent =
+      rel === 'components/single-pass/EmbeddedPaymentForm.tsx'
+        ? content
+            .replace(/window\.Stripe/g, '')
+            .replace(/Stripe\?:/g, '')
+            .replace(/https:\/\/js\.stripe\.com\/v3\//g, '')
+            .replace(/\/stripe\/gi/g, '')
+        : content;
+    assert.equal(stripeWordRe.test(visibleTextContent), false, `Found forbidden "Stripe" word in public file: ${rel}`);
+    assert.equal(wyomingOrAgentRe.test(content), false, `Found forbidden Wyoming/Cheyenne/FBRA ref in public file: ${rel}`);
+    if (filesDisallowingMagisterAndNyAddress.has(rel)) {
+      assert.equal(/magister/i.test(content), false, `Found Magister Mida outside Terms in: ${rel}`);
+      assert.equal(/447\s+broadway/i.test(content), false, `Found street address outside legal pages in: ${rel}`);
+    }
   }
 });
 
@@ -338,7 +373,8 @@ test('Order persistence, multi-currency PaymentIntent params (no receipt_email),
     const emailMsg = buildSinglePassOrderEmail(loadedOrder);
     assert.equal(/\bstripe\b/i.test(emailMsg.html), false);
     assert.equal(/\bstripe\b/i.test(emailMsg.text), false);
-    assert.ok(emailMsg.html.includes('Magister Mida LLC'));
+    assert.equal(/magister|wyoming|447\s+broadway/i.test(emailMsg.html), false);
+    assert.equal(/magister|wyoming|447\s+broadway/i.test(emailMsg.text), false);
     assert.ok(emailMsg.idempotencyKey);
 
     const rawWebhook = JSON.stringify({ type: 'payment_intent.succeeded' });

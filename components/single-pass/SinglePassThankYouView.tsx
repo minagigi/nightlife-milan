@@ -274,7 +274,7 @@ export default function SinglePassThankYouView({
       <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#F6F1E7]/15 pt-6">
         <p className="inline-flex items-center gap-2 text-xs text-[#8E8577]">
           <ShieldCheck className="h-4 w-4 text-[#C9A84C]" aria-hidden="true" />
-          nightlifemilan.com is a brand of Magister Mida LLC · 447 Broadway, 2nd Floor #2242, New York, NY 10013 · EIN 36-5071848
+          Nightlife Milan · nightlifemilan.com · Official Digital Pass
         </p>
         <Link
           href={`${lp}/account`}

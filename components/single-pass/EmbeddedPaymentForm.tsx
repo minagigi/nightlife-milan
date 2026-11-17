@@ -317,7 +317,7 @@ export default function EmbeddedPaymentForm({
 
       <div className="flex items-center justify-center gap-2 text-center font-mono text-[11px] text-[#8E8577]">
         <ShieldCheck className="h-3.5 w-3.5 text-[#C9A84C]" aria-hidden="true" />
-        <span>PCI-DSS Level 1 Encrypted On-Site Payment · Magister Mida LLC</span>
+        <span>PCI-DSS Level 1 Encrypted On-Site Payment · Nightlife Milan</span>
       </div>
     </form>
   );

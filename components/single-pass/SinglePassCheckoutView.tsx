@@ -270,7 +270,7 @@ export default function SinglePassCheckoutView({
     <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="mb-8 border-b border-[#F6F1E7]/15 pb-6">
         <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#EAE3D5]">
-          NIGHTLIFE MILAN · MAGISTER MIDA LLC · CHECKOUT (+15% FEE)
+          NIGHTLIFE MILAN · OFFICIAL CHECKOUT (+15% FEE)
         </p>
         <h1 className="mt-2 font-serif text-3xl font-bold text-[#F6F1E7] sm:text-4xl">
           {copy.checkoutTitle}
@@ -727,7 +727,7 @@ export default function SinglePassCheckoutView({
               <div className="border-t border-[#F6F1E7]/12 pt-4 text-xs text-[#C2B9AA] space-y-2">
                 <p className="flex items-center gap-2 font-semibold text-[#F6F1E7]">
                   <ShieldCheck className="h-4 w-4 text-[#25D366]" aria-hidden="true" />
-                  nightlifemilan.com · Magister Mida LLC
+                  nightlifemilan.com · Official Concierge
                 </p>
                 <p>{copy.fxRateNotice}</p>
               </div>
