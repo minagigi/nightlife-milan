@@ -89,7 +89,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '21+', 'Strictly Elegant. Long trousers for men are mandatory.', 'House and Urban'),
     image: '/images/events/october-2026/249146-bbdee1490af9.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/monday-night-280/249158/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/monday-night-281/249159/channel/nightlifemilan-1',
     priority: 100
   },
   {
@@ -259,7 +259,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Pineta Club', 'Via Messina 38, Milan', '20+', 'Smart Elegant', 'Hip-Hop, Reggaeton and Commercial'),
     image: '/images/events/october-2026/249230-f6b0d6c67b51.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/tr3ndy-society-thursday-night-6/251806/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/tr3ndy-society-thursday-night-7/252514/channel/nightlifemilan-1',
     priority: 95
   },
   {
