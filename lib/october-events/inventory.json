@@ -21452,7 +21452,7 @@
       "sourceUrl": "https://xceed.me/en/milano/event/friday-night-727/249217",
       "affiliateUrl": "https://xceed.me/en/milano/event/friday-night-727/249217/channel/nightlifemilan-1",
       "affiliateStatus": "verified",
-      "officialName": "Friday Night",
+      "officialName": "Cena Spettacolo Partenopea",
       "startISO": "2026-11-27T19:30:00+01:00",
       "endISO": "2026-11-28T05:00:00+01:00",
       "venue": {
@@ -21469,11 +21469,11 @@
         "longitude": null
       },
       "image": {
-        "src": "/images/events/october-2026/249217-8fff9d2f3fe4.webp",
+        "src": "/images/events/partenopea-2026/cena-spettacolo-partenopea-justme-milano-2026.webp",
         "width": 1376,
         "height": 768,
-        "bytes": 66724,
-        "sha256": "4d16d1db33a9e6d7f34ca55615471d036cb7820a6010ea974751a128de797610"
+        "bytes": 122524,
+        "sha256": "12c42e03ae6d70a60ac1dbc2ce943468e6ce9f0e683545a5e6e5a5e4be2bcb02"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -21482,7 +21482,20 @@
         "Hip-hop",
         "Hits"
       ],
-      "performers": [],
+      "performers": [
+        {
+          "name": "Voice John Vaccaro"
+        },
+        {
+          "name": "DJ Franky Dee"
+        },
+        {
+          "name": "DJ Antonio Marigliano"
+        },
+        {
+          "name": "Pineta Napoli"
+        }
+      ],
       "offers": [
         {
           "name": "Dehor Table",

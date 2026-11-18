@@ -19,6 +19,7 @@ export default function WeeklyProgram({ venueId, venueName, locale }: WeeklyProg
       { day: tr(locale, 'Tue', 'Martedì'), event: 'University Night' },
       { day: tr(locale, 'Wed', 'Mercoledì'), event: 'Fortune Teller' },
       { day: tr(locale, 'Thu', 'Giovedì'), event: tr(locale, 'Special Format · Vida Loca (26 Nov: Thanksgiving)', 'Format Speciali · Vida Loca (26 Nov: Thanksgiving)') },
+      { day: tr(locale, 'Fri', 'Venerdì'), event: tr(locale, 'Friday Night (27 Nov: Cena Spettacolo Partenopea · 70€)', 'Friday Night (27 Nov: Cena Spettacolo Partenopea · 70€)') },
     ],
     'v-pineta': [
       { day: tr(locale, 'Fri', 'Venerdì'), event: 'Aperitivo Cantato & Live Music' },

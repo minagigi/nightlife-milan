@@ -3,6 +3,14 @@ import { OCTOBER_EVENTS } from './octoberEvents';
 import { weeklyEvents, WeeklyEvent } from './eventsConfig';
 import { MusicGenre, type Event, type Venue } from './types';
 import { physicalEventKey, eventNameCore } from './eventIdentity';
+import {
+  PARTENOPEA_JUSTME_POSTER_SRC,
+  partenopeaJustMeSlug,
+} from './partenopea/justme35';
+import {
+  THANKSGIVING_JUSTME_POSTER_SRC,
+  thanksgivingJustMeSlug,
+} from './thanksgiving/justme35';
 
 /** REGOLA (richiesta utente): ogni gallery/carosello/calendario mostra UNA sola
  * card per evento — mai due versioni (IT + EN) né due sorgenti (Eventbrite +
@@ -134,6 +142,7 @@ function expandWeeklyEvents(): { event: Event; venue: Venue }[] {
     for (const we of weeklyEvents as WeeklyEvent[]) {
       if (we.dayOfWeek !== dow) continue;
       if (we.id === 'justme-thursday' && dayKey >= '2026-11-26') continue;
+      if (we.id === 'justme-friday' && dayKey === '2026-11-27') continue;
       const venue = mockVenues.find((v) => v.id === `v-${we.clubSlug}`);
       if (!venue) continue;
 
@@ -179,15 +188,74 @@ function expandWeeklyEvents(): { event: Event; venue: Venue }[] {
  * quindi qui il catch è esplicito e degrada ai soli eventi statici.
  */
 export async function getAllCalendarEvents(): Promise<{ event: Event; venue: Venue }[]> {
-  const allEvents = [...mockEvents];
+  const justMeVenue = mockVenues.find((v) => v.id === 'v-justme');
+  const specialJustMeDays = new Set(['2026-11-26', '2026-11-27']);
+  const allEvents = mockEvents.filter(
+    (event) => !(event.venueId === 'v-justme' && specialJustMeDays.has(romeDayKey(event.dateISO))),
+  );
 
   const concreteItems = allEvents
     .map((event) => ({ event, venue: mockVenues.find((v) => v.id === event.venueId) }))
     .filter((item): item is { event: Event; venue: Venue } => item.venue !== undefined);
 
+  if (justMeVenue) {
+    concreteItems.push(
+      {
+        event: {
+          id: 'thanksgiving-justme-2026',
+          venueId: 'v-justme',
+          genre: [MusicGenre.HOUSE, MusicGenre.HIP_HOP, MusicGenre.COMMERCIAL],
+          dateISO: '2026-11-26T19:30:00+01:00',
+          pricing: { entry: 15, currency: 'EUR', tableMinSpend: 320 },
+          localizedContent: {
+            title: {
+              en: 'Thanksgiving 2026 & Vida Loca · American Royal Buffet',
+              it: 'Thanksgiving 2026 & Vida Loca · American Royal Buffet',
+            },
+            shortDescription: {
+              en: '19:30 American Royal Buffet (Old Turkey Show Cooking, €15) + 22:30 Vida Loca Radio 105.',
+              it: '19:30 Royal Buffet Americano (Old Turkey Show Cooking, 15€) + 22:30 Vida Loca Radio 105.',
+            },
+            slug: {
+              en: thanksgivingJustMeSlug('en'),
+              it: thanksgivingJustMeSlug('it'),
+            },
+          },
+          image: THANKSGIVING_JUSTME_POSTER_SRC,
+        },
+        venue: justMeVenue,
+      },
+      {
+        event: {
+          id: 'partenopea-justme-2026',
+          venueId: 'v-justme',
+          genre: [MusicGenre.HOUSE, MusicGenre.COMMERCIAL, MusicGenre.HIP_HOP],
+          dateISO: '2026-11-27T19:30:00+01:00',
+          pricing: { entry: 20, currency: 'EUR', tableMinSpend: 320 },
+          localizedContent: {
+            title: {
+              en: 'CSP · Cena Spettacolo Partenopea (Pineta Napoli)',
+              it: 'CSP · Cena Spettacolo Partenopea (Pineta Napoli)',
+            },
+            shortDescription: {
+              en: '19:30 Aperitif €15 · 21:30 Full €70 Neapolitan Dinner Show (John Vaccaro) · 23:00 Party (DJ Franky Dee & Antonio Marigliano).',
+              it: '19:30 Aperitivo 15€ · 21:30 Cena Menu Completo 70€ (John Vaccaro) · 23:00 Party (DJ Franky Dee & Antonio Marigliano).',
+            },
+            slug: {
+              en: partenopeaJustMeSlug('en'),
+              it: partenopeaJustMeSlug('it'),
+            },
+          },
+          image: PARTENOPEA_JUSTME_POSTER_SRC,
+        },
+        venue: justMeVenue,
+      },
+    );
+  }
+
   // Le serate ricorrenti riempiono solo le notti prive già di un evento
   // one-off/reale per la stessa venue — mai due card per la stessa venue
-  // la stessa sera (es. Just Me venerdì ha già "Flower Power Party").
+  // la stessa sera.
   const bookedVenueNights = new Set(
     concreteItems.map(({ event }) => `${event.venueId}|${romeDayKey(event.dateISO)}`)
   );

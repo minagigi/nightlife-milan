@@ -15,6 +15,7 @@ import {
   orthodoxNyeJustMePath,
 } from './orthodox-nye/justme35';
 import { thanksgivingJustMePath, THANKSGIVING_JUSTME_POSTER_SRC } from './thanksgiving/justme35';
+import { partenopeaJustMePath, PARTENOPEA_JUSTME_POSTER_SRC } from './partenopea/justme35';
 
 function venueDisplayName(venue: Venue, locale: string): string {
   return (locale === 'it' ? venue.localizedContent?.name?.it : venue.localizedContent?.name?.en) || venue.localizedContent?.name?.en || 'Club Milano';
@@ -1032,7 +1033,7 @@ export function resolveVenueEventsForCarousel(
   const toHref = (enPath: string) => localizeInternalHref(`${lp}${enPath}`, locCode);
 
   const matchedDated = OCTOBER_EVENTS.filter((ev) => {
-    if (ev.id === '251019' || ev.id === '249216') return false;
+    if (ev.id === '251019' || ev.id === '249216' || ev.id === '249217') return false;
     if (ev.venue.id === venue.id) return true;
     if (venue.id === 'v-apollo' && ev.venue.id === 'apollo') return true;
     if (venue.id === 'v-55milano' && ev.venue.id === 'v-55') return true;
@@ -1284,6 +1285,40 @@ export function resolveVenueEventsForCarousel(
         tonight.unshift(tgCard);
       }
     }
+    const partenopeaDay = '2026-11-27';
+    if (partenopeaDay >= romeNowDay) {
+      const cspHref = partenopeaJustMePath(locale);
+      const cspCard = {
+        id: 'partenopea-justme-2026',
+        title: isIt
+          ? 'CSP · Cena Spettacolo Partenopea · Menu 70€ (Pineta Napoli)'
+          : 'CSP · Cena Spettacolo Partenopea · €70 Menu (Pineta Napoli)',
+        dateLabel: partenopeaDay,
+        timeLabel: isIt
+          ? 'Ven 27 Nov · Aperitivo 19:30 · Dinner Show 21:30 · Party 23:00–05:00'
+          : 'Fri 27 Nov · Aperitif 19:30 · Dinner Show 21:30 · Party 23:00–05:00',
+        priceLabel: 'Menu €70 · €15/€20 · Tavoli €320–€5.000',
+        categoryLabel: isIt ? 'Speciale Partenopea · JustMe Milano' : 'Neapolitan Dinner Show · JustMe Milan',
+        genres: ['Live Music', 'John Vaccaro', 'DJ Franky Dee', 'Antonio Marigliano'],
+        imageSrc: PARTENOPEA_JUSTME_POSTER_SRC,
+        href: cspHref,
+        whatsappHref: getConciergeBookingUrl(
+          locale,
+          'CSP Cena Spettacolo Partenopea @ JustMe Milano (27 Novembre)',
+          sourcePageUrl || cspHref,
+        ),
+        badge: isIt ? '27 NOV · PARTENOPEA 70€' : '27 NOV · PARTENOPEA €70',
+      };
+      future.push(cspCard);
+      if (partenopeaDay <= romeEndWeekDay) {
+        thisWeek.push(cspCard);
+      }
+      if (partenopeaDay === romeNowDay) {
+        tonight.push(cspCard);
+      }
+    }
+    future.sort((a, b) => a.dateLabel.localeCompare(b.dateLabel));
+    thisWeek.sort((a, b) => a.dateLabel.localeCompare(b.dateLabel));
   }
 
   if (thisWeek.length === 0) {

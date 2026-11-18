@@ -186,6 +186,8 @@ test('Zero public Stripe wording exists across all public pages, UI components, 
     'lib/orthodox-nye/justme35.ts',
     'lib/thanksgiving/justme35.ts',
     'components/ThanksgivingJustMeDetailView.tsx',
+    'lib/partenopea/justme35.ts',
+    'components/PartenopeaJustMeDetailView.tsx',
   ];
 
   const filesDisallowingMagisterAndNyAddress = new Set([
@@ -199,6 +201,8 @@ test('Zero public Stripe wording exists across all public pages, UI components, 
     'lib/single-pass/email.ts',
     'lib/thanksgiving/justme35.ts',
     'components/ThanksgivingJustMeDetailView.tsx',
+    'lib/partenopea/justme35.ts',
+    'components/PartenopeaJustMeDetailView.tsx',
   ]);
 
   for (const rel of publicFilesToScan) {
@@ -442,3 +446,24 @@ test('Middleware routes /checkout, /thank-you, /cookie-policy, /refund-policy cl
   const crmProtected = middleware(mkReq('/it/crm/single-pass'));
   assert.equal(crmProtected.status, 401);
 });
+
+test('JustMe Partenopea (2026-11-27) confirmed 6 EUR SKUs and strict 21+ age check', () => {
+  const cspSkus = SINGLE_PASS_SKUS.filter((s) => s.venueId === 'justme-partenopea');
+  assert.equal(cspSkus.length, 6);
+  const dinner = cspSkus.find((s) => s.id === 'justme-partenopea-dinner');
+  assert.ok(dinner);
+  assert.equal(dinner.basePriceCents, 7000);
+  const breakdown = computeSinglePassPrice(dinner.basePriceCents, 1);
+  assert.equal(breakdown.unitTotalCents, 8050);
+
+  const under18 = validateAgeForSkus(cspSkus, 17);
+  assert.equal(under18.ok, false);
+  if (!under18.ok) assert.equal(under18.errorCode, 'UNDER_18');
+
+  const under21 = validateAgeForSkus(cspSkus, 20);
+  assert.equal(under21.ok, false);
+  if (!under21.ok) assert.equal(under21.errorCode, 'UNDER_21_JUSTME');
+
+  assert.equal(validateAgeForSkus(cspSkus, 21).ok, true);
+});
+

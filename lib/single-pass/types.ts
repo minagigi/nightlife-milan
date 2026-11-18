@@ -12,6 +12,7 @@ export type SinglePassVenueId =
   | 'voya-christmas'
   | 'justme-orthodox'
   | 'justme-thanksgiving'
+  | 'justme-partenopea'
   | 'club-event';
 
 export type SinglePassPackageCategory =
@@ -248,6 +249,7 @@ export type SinglePassApiErrorCode =
   | 'INVALID_SKU'
   | 'INVALID_CUSTOMER_DATA'
   | 'UNDER_18'
+  | 'UNDER_21_JUSTME'
   | 'PINETA_STRICT_UNDER_30'
   | 'TERMS_REQUIRED'
   | 'INVALID_PASSWORD'

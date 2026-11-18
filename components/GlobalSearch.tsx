@@ -42,6 +42,7 @@ import {
   orthodoxNyeJustMePath,
 } from '@/lib/orthodox-nye/justme35';
 import { thanksgivingJustMePath, THANKSGIVING_JUSTME_POSTER_SRC } from '@/lib/thanksgiving/justme35';
+import { partenopeaJustMePath, PARTENOPEA_JUSTME_POSTER_SRC } from '@/lib/partenopea/justme35';
 
 type SearchTabId = 'all' | 'clubs' | 'capodanno' | 'events' | 'hubs' | 'guides' | 'zones';
 
@@ -1473,7 +1474,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
       });
 
     const xceedItems = (octoberCatalog || [])
-      .filter((ev) => ev.id !== '251019' && ev.id !== '249216' && romeDayKey(ev.startISO) >= todayKey)
+      .filter((ev) => ev.id !== '251019' && ev.id !== '249216' && ev.id !== '249217' && romeDayKey(ev.startISO) >= todayKey)
       .map((ev) => {
         const title = `${ev.shortName || ev.officialName} · ${ev.venue.name}`;
         const performers = ev.performers.map((p) => p.name).join(' ');
@@ -1576,8 +1577,33 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
       score: thanksgivingJustMeScore,
     };
 
+    const partenopeaJustMeHref = partenopeaJustMePath(currentLocale);
+    const partenopeaJustMeTitle = isIt
+      ? 'CSP · Cena Spettacolo Partenopea · JustMe Milano (Menu 70€ · Party 20€)'
+      : 'CSP · Cena Spettacolo Partenopea · JustMe Milan (€70 Menu · €20 Party)';
+    const partenopeaJustMeScore = isBrowsingCategory
+      ? 98
+      : matchTokensScore(
+          `${partenopeaJustMeTitle} JustMe Milano Just Me`,
+          'cena spettacolo partenopea csp napoli pineta napoli john vaccaro franky dee antonio marigliano 27 novembre november 2026 venerdì friday dinner show live music mezzi paccheri parmigiana bufala sorbetto amalfi 70 euro 15 euro 20 euro 320 640 1280 torre branca justme',
+          qTokens,
+          fullQuery,
+        );
+    const partenopeaJustMeItem = {
+      id: 'partenopea-justme-2026',
+      title: partenopeaJustMeTitle,
+      venueName: 'JustMe Milano · Parco Sempione / Torre Branca',
+      dateISO: '2026-11-27T19:30:00+01:00',
+      image: PARTENOPEA_JUSTME_POSTER_SRC,
+      priceLabel: 'Menu €70 · €15/€20 · Tavoli €320–€5.000',
+      genres: 'Live Dinner Show · John Vaccaro, DJ Franky Dee & Antonio Marigliano',
+      href: partenopeaJustMeHref,
+      score: partenopeaJustMeScore,
+    };
+
     const scoredEvents = [
       ...(romeDayKey('2026-11-26') >= todayKey ? [thanksgivingJustMeItem] : []),
+      ...(romeDayKey('2026-11-27') >= todayKey ? [partenopeaJustMeItem] : []),
       ...(romeDayKey('2027-01-13') >= todayKey ? [orthodoxNyeJustMeItem] : []),
       ...(romeDayKey('2026-12-25') >= todayKey ? [voyaChristmasItem] : []),
       ...featuredItems,

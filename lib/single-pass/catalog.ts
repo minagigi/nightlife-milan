@@ -7,6 +7,12 @@ import {
   THANKSGIVING_JUSTME_SLUGS_35,
   THANKSGIVING_JUSTME_XCEED_RAW_SLUG,
 } from '@/lib/thanksgiving/justme35';
+import {
+  PARTENOPEA_JUSTME_LEGACY_RAW_SLUG,
+  PARTENOPEA_JUSTME_POSTER_SRC,
+  PARTENOPEA_JUSTME_SLUGS_35,
+  PARTENOPEA_JUSTME_XCEED_RAW_SLUG,
+} from '@/lib/partenopea/justme35';
 import type {
   PriceBreakdown,
   SinglePassPackageCategory,
@@ -267,6 +273,26 @@ export const SINGLE_PASS_VENUES: readonly SinglePassVenueSpec[] = [
     dressCodeIt: 'Elegante (uomo: pantalone lungo obbligatorio)',
     dressCodeEn: 'Smart Elegant (men: long trousers mandatory)',
     posterSrc: THANKSGIVING_JUSTME_POSTER_SRC,
+  },
+  {
+    id: 'justme-partenopea',
+    eventSlug: PARTENOPEA_JUSTME_SLUGS_35.en,
+    name: 'CSP · Cena Spettacolo Partenopea @ JustMe Milano (Pineta Napoli)',
+    taglineIt: 'Venerdì 27 Novembre 2026 · Cena Show 70€, Aperitivo 15€, Club 20€, Tavoli 320€–1.280€',
+    taglineEn: 'Friday Nov 27, 2026 · Dinner Show €70, Aperitif €15, Club €20, Tables €320–€1,280',
+    district: 'Parco Sempione / Torre Branca',
+    address: 'Viale Luigi Camoens 2, 20121 Milano',
+    hours: '27 Novembre 2026 · 19:30 – 05:00',
+    ageBandLabelIt: '21+ anni · 27 Novembre 2026',
+    ageBandLabelEn: 'Ages 21+ · Nov 27, 2026',
+    recommendedMinAge: 21,
+    recommendedMaxAge: 55,
+    strictMaxAge: null,
+    musicIt: 'Voice John Vaccaro · DJ Franky Dee & Antonio Marigliano · Live & Club',
+    musicEn: 'Voice John Vaccaro · DJ Franky Dee & Antonio Marigliano · Live & Club',
+    dressCodeIt: 'Elegante (uomo: pantalone lungo obbligatorio)',
+    dressCodeEn: 'Smart Elegant (men: long trousers mandatory)',
+    posterSrc: PARTENOPEA_JUSTME_POSTER_SRC,
   },
   {
     id: 'club-event',
@@ -1088,12 +1114,119 @@ export const SINGLE_PASS_SKUS: readonly SinglePassSku[] = [
     eventDateLabel: '2026-11-26',
     confirmed: true,
   },
+  // JUSTME MILANO — CENA SPETTACOLO PARTENOPEA (PINETA NAPOLI, VENERDI 27 NOV 2026)
+  {
+    id: 'justme-partenopea-dinner',
+    venueId: 'justme-partenopea',
+    category: 'gala-dinner',
+    titleIt: 'Cena Spettacolo Partenopea · Menu Completo + Party',
+    titleEn: 'Cena Spettacolo Partenopea · Full Menu + Club Party',
+    descriptionIt:
+      'Menu fisso 21:30 con antipasti al centro (Parmigiana, Bufala, Polipetti alla Luciana, Polpette al sugo), Mezzi Paccheri al ragù napoletano, Sorbetto al limone di Amalfi, acqua, vino della casa, caffè e accesso Party.',
+    descriptionEn:
+      '21:30 Dinner Show fixed menu with sharing antipasti (Parmigiana, Bufala, Polipetti alla Luciana, Polpette), Mezzi Paccheri al ragù napoletano, Amalfi lemon sorbet, water, house wine, coffee, and Party access.',
+    arrivalTime: '21:30',
+    basePriceCents: 7000,
+    guestsPerUnit: 1,
+    genderPolicy: 'equal',
+    eventDateLabel: '2026-11-27',
+    confirmed: true,
+  },
+  {
+    id: 'justme-partenopea-aperitif',
+    venueId: 'justme-partenopea',
+    category: 'holiday-special',
+    titleIt: 'Aperitif + 1 Drink (Ingresso 19:30–21:30)',
+    titleEn: 'Aperitif + 1 Drink (Entry 19:30–21:30)',
+    descriptionIt:
+      'Ingresso 19:30–21:30 al JustMe Milano con 1 drink incluso e permanenza gratuita al Friday Party fino alle 05:00.',
+    descriptionEn:
+      'Entry between 19:30 and 21:30 at JustMe Milano including 1 drink and continuous Friday Party access until 05:00.',
+    arrivalTime: '19:30–21:30',
+    basePriceCents: 1500,
+    guestsPerUnit: 1,
+    genderPolicy: 'equal',
+    eventDateLabel: '2026-11-27',
+    confirmed: true,
+  },
+  {
+    id: 'justme-partenopea-club',
+    venueId: 'justme-partenopea',
+    category: 'club-entry',
+    titleIt: 'Club + 1 Drink · Friday Party (dalle 22:30)',
+    titleEn: 'Club + 1 Drink · Friday Party (from 22:30)',
+    descriptionIt:
+      'Ingresso serale confermato su Xceed #249217 dalle 22:30 (Start Party 23:00) con 1 drink incluso per DJ Franky Dee e Antonio Marigliano.',
+    descriptionEn:
+      'Confirmed Friday Xceed #249217 club admission from 22:30 (Start Party 23:00) including 1 drink for DJ Franky Dee and Antonio Marigliano.',
+    arrivalTime: '22:30',
+    basePriceCents: 2000,
+    guestsPerUnit: 1,
+    genderPolicy: 'equal',
+    eventDateLabel: '2026-11-27',
+    confirmed: true,
+  },
+  {
+    id: 'justme-partenopea-dehor-table',
+    venueId: 'justme-partenopea',
+    category: 'vip-table-share',
+    titleIt: 'Tavolo Dehor (Ingresso tassativo entro le 23:00)',
+    titleEn: 'Dehor Table (Mandatory entry strictly by 23:00)',
+    descriptionIt:
+      'Tavolo riservato area Dehor JustMe Milano con servizio bottiglie al tavolo. Check-in tassativo entro le ore 23:00.',
+    descriptionEn:
+      'Reserved Dehor VIP booth with bottle service inside JustMe Milano. Guests must enter strictly by 23:00.',
+    arrivalTime: '23:00',
+    basePriceCents: 32000,
+    guestsPerUnit: 8,
+    genderPolicy: 'equal',
+    eventDateLabel: '2026-11-27',
+    confirmed: true,
+  },
+  {
+    id: 'justme-partenopea-dancefloor-table',
+    venueId: 'justme-partenopea',
+    category: 'vip-table-share',
+    titleIt: 'Tavolo Pista (Dance Floor Table)',
+    titleEn: 'Dance Floor Table · Main Room',
+    descriptionIt:
+      'Tavolo Privé a bordo pista principale sotto la cupola vetrata Italo Rota con servizio bottiglie dedicato.',
+    descriptionEn:
+      'Main room Dance Floor VIP booth beside the center floor beneath the heated glass canopy with dedicated bottle service.',
+    arrivalTime: '23:00',
+    basePriceCents: 64000,
+    guestsPerUnit: 8,
+    genderPolicy: 'equal',
+    eventDateLabel: '2026-11-27',
+    confirmed: true,
+  },
+  {
+    id: 'justme-partenopea-central-table',
+    venueId: 'justme-partenopea',
+    category: 'vip-table-share',
+    titleIt: 'Tavolo Central (Area Centrale Rialzata)',
+    titleEn: 'Central Table (Elevated Central Zone)',
+    descriptionIt:
+      'Tavolo VIP centrale panoramico su live Dinner Show, consolle DJ e pista principale con ingresso prioritario.',
+    descriptionEn:
+      'High-visibility elevated Central Zone VIP sofa table overlooking Dinner Show, DJ booth, and dancefloor.',
+    arrivalTime: '23:00',
+    basePriceCents: 128000,
+    guestsPerUnit: 8,
+    genderPolicy: 'equal',
+    eventDateLabel: '2026-11-27',
+    confirmed: true,
+  },
 ];
 
 export const SKU_BY_ID = new Map<string, SinglePassSku>(SINGLE_PASS_SKUS.map((s) => [s.id, s]));
 
 const THANKSGIVING_SLUG_MAP = Object.fromEntries(
   Object.values(THANKSGIVING_JUSTME_SLUGS_35).map((slug) => [slug, 'justme-thanksgiving' as const]),
+);
+
+const PARTENOPEA_SLUG_MAP = Object.fromEntries(
+  Object.values(PARTENOPEA_JUSTME_SLUGS_35).map((slug) => [slug, 'justme-partenopea' as const]),
 );
 
 const EVENT_SLUG_TO_VENUE_ID: Record<string, SinglePassVenueId> = {
@@ -1110,6 +1243,9 @@ const EVENT_SLUG_TO_VENUE_ID: Record<string, SinglePassVenueId> = {
   ...THANKSGIVING_SLUG_MAP,
   [THANKSGIVING_JUSTME_XCEED_RAW_SLUG]: 'justme-thanksgiving',
   [THANKSGIVING_JUSTME_LEGACY_RAW_SLUG]: 'justme-thanksgiving',
+  ...PARTENOPEA_SLUG_MAP,
+  [PARTENOPEA_JUSTME_XCEED_RAW_SLUG]: 'justme-partenopea',
+  [PARTENOPEA_JUSTME_LEGACY_RAW_SLUG]: 'justme-partenopea',
 };
 
 export function getVenueIdByEventSlug(eventSlug: string): SinglePassVenueId | null {
@@ -1277,7 +1413,7 @@ export type AgeValidationResult =
     }
   | {
       ok: false;
-      errorCode: 'UNDER_18' | 'PINETA_STRICT_UNDER_30';
+      errorCode: 'UNDER_18' | 'UNDER_21_JUSTME' | 'PINETA_STRICT_UNDER_30';
       suggestedVenueIds: SinglePassVenueId[];
     };
 
@@ -1295,6 +1431,16 @@ export function validateAgeForSkus(skus: readonly SinglePassSku[], age: number):
       ok: false,
       errorCode: 'PINETA_STRICT_UNDER_30',
       suggestedVenueIds: age >= 50 ? ['bischeri', 'bobino', 'justme', 'voya'] : ['justme', 'bobino', 'repvblic', 'voya'],
+    };
+  }
+  const hasJustMe21Plus = skus.some(
+    (s) => s.venueId === 'justme-partenopea' || s.venueId === 'justme-thanksgiving',
+  );
+  if (hasJustMe21Plus && age < 21) {
+    return {
+      ok: false,
+      errorCode: 'UNDER_21_JUSTME',
+      suggestedVenueIds: ['gate', 'pineta'],
     };
   }
   if (age >= 50 && skus.some((s) => s.venueId === 'gate' || s.venueId === 'repvblic')) {

@@ -12,6 +12,7 @@ import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { christmasVoyaPath } from '@/lib/christmas/voya35';
 import { orthodoxNyeJustMePath } from '@/lib/orthodox-nye/justme35';
 import { thanksgivingJustMePath, THANKSGIVING_JUSTME_POSTER_SRC } from '@/lib/thanksgiving/justme35';
+import { partenopeaJustMePath } from '@/lib/partenopea/justme35';
 import { getEventDiscoveryItems, slimDiscoveryItemsForClient } from '@/lib/eventDiscovery';
 import { PrioritySixShowcase, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
@@ -92,7 +93,7 @@ type MajorSpecialEventCard = {
   venuesEn: string;
   descIt: string;
   descEn: string;
-  linkKind?: 'orthodox-nye' | 'thanksgiving-justme';
+  linkKind?: 'orthodox-nye' | 'thanksgiving-justme' | 'partenopea-justme';
   linkLabelIt?: string;
   linkLabelEn?: string;
 };
@@ -112,6 +113,21 @@ const MAJOR_SPECIAL_EVENTS: MajorSpecialEventCard[] = [
     linkKind: 'thanksgiving-justme',
     linkLabelIt: 'Royal Buffet 15€ & Tavoli Vida Loca →',
     linkLabelEn: '€15 Royal Buffet & Vida Loca Tables →',
+  },
+  {
+    badgeIt: '27 Novembre 2026 · Cena Spettacolo Partenopea',
+    badgeEn: 'November 27, 2026 · Cena Spettacolo Partenopea',
+    titleIt: 'CSP · Cena Spettacolo Partenopea al JustMe Milano (Pineta Napoli)',
+    titleEn: 'CSP · Cena Spettacolo Partenopea at JustMe Milano (Pineta Napoli)',
+    venuesIt: 'JustMe Milano · Viale Luigi Camoens 2 (Parco Sempione · Torre Branca)',
+    venuesEn: 'JustMe Milano · Viale Luigi Camoens 2 (Parco Sempione · Torre Branca)',
+    descIt:
+      'Venerdì 27 novembre 2026 (19:30–05:00): dalle 19:30 Aperitivo (15€), dalle 21:30 Dinner Show con Voice John Vaccaro e menu completo napoletano da 70€ (Parmigiana, Bufala, Polipetti, Polpette, Mezzi Paccheri, Sorbetto, acqua, vino, caffè) e dalle 23:00 Party con DJ Franky Dee e Antonio Marigliano (20€ club, tavoli 320€–5.000€).',
+    descEn:
+      'Friday Nov 27, 2026 (19:30–05:00): 19:30 Aperitif (€15), 21:30 live Dinner Show hosted by Voice John Vaccaro with full €70 Neapolitan menu & party retention, followed at 23:00 by DJ Franky Dee & Antonio Marigliano (€20 club, tables €320–€5,000).',
+    linkKind: 'partenopea-justme',
+    linkLabelIt: 'Menu 70€, Party 20€ & Tavoli →',
+    linkLabelEn: '€70 Menu, €20 Party & Tables →',
   },
   {
     badgeIt: '13 Gennaio 2027 · Capodanno Ortodosso',
@@ -375,12 +391,14 @@ export default async function SpecialEventsPage({ params }: Props) {
                       ? orthodoxNyeJustMePath(locale)
                       : ev.linkKind === 'thanksgiving-justme'
                         ? thanksgivingJustMePath(locale)
-                        : `${lp}/football-afterparties`
+                        : ev.linkKind === 'partenopea-justme'
+                          ? partenopeaJustMePath(locale)
+                          : `${lp}/football-afterparties`
                   }
                   className="text-xs font-semibold text-white/75 hover:text-champagne transition-colors"
                 >
-                  {ev.linkKind === 'orthodox-nye'
-                    ? tr(locale, ev.linkLabelEn || 'Explore Orthodox NYE →', ev.linkLabelIt || 'Scopri Capodanno Ortodosso →')
+                  {ev.linkKind
+                    ? tr(locale, ev.linkLabelEn || 'Open Event →', ev.linkLabelIt || 'Scopri Evento →')
                     : tr(locale, 'San Siro & VIP Info →', 'Info San Siro & VIP →')}
                 </Link>
                 <a

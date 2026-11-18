@@ -180,7 +180,11 @@ export default function SinglePassCheckoutView({
 
     if (liveAgeCheck && !liveAgeCheck.ok) {
       setErrorMessage(
-        liveAgeCheck.errorCode === 'PINETA_STRICT_UNDER_30' ? copy.pinetaUnder30Error : copy.under18Error,
+        liveAgeCheck.errorCode === 'PINETA_STRICT_UNDER_30'
+          ? copy.pinetaUnder30Error
+          : liveAgeCheck.errorCode === 'UNDER_21_JUSTME'
+            ? copy.justme21PlusError
+            : copy.under18Error,
       );
       return;
     }
@@ -500,7 +504,9 @@ export default function SinglePassCheckoutView({
                   <span>
                     {liveAgeCheck.errorCode === 'PINETA_STRICT_UNDER_30'
                       ? copy.pinetaUnder30Error
-                      : copy.under18Error}
+                      : liveAgeCheck.errorCode === 'UNDER_21_JUSTME'
+                        ? copy.justme21PlusError
+                        : copy.under18Error}
                   </span>
                 </div>
               )}

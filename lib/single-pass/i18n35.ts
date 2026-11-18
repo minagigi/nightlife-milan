@@ -70,6 +70,7 @@ export type SinglePassCopyPack = {
   formPayNowCta: string;
   pinetaUnder30Error: string;
   under18Error: string;
+  justme21PlusError: string;
   bischeriAdvisory: string;
   accountTitle: string;
   accountSubtitle: string;
@@ -202,6 +203,8 @@ const IT_PACK: SinglePassCopyPack = {
   pinetaUnder30Error:
     'Pineta Milano ammette tassativamente solo pubblico Under 30 (18–29 anni). Per la tua età ti consigliamo Just Me (30–49), REPVBLIC (22–40), Voya Rooftop oppure Bischeri Over 50.',
   under18Error: 'L’acquisto e l’ingresso agli eventi serali in Italia sono riservati ai maggiorenni (18+ anni compiuti).',
+  justme21PlusError:
+    'JustMe Milano applica selezione 21+ per questa serata speciale: possono prenotare e accedere solo ospiti di età pari o superiore a 21 anni.',
   bischeriAdvisory: 'Per la fascia dai 50 anni in su consigliamo in particolare la tavolata Over 50 di Bischeri Milano oppure Voya Rooftop.',
   accountTitle: 'Area Riservata Clienti · Nightlife Milan',
   accountSubtitle:
@@ -245,6 +248,7 @@ const IT_PACK: SinglePassCopyPack = {
     'voya-christmas': 'Natale Voya Rooftop (25/12)',
     'justme-orthodox': 'Capodanno Ortodosso Just Me (13/01)',
     'justme-thanksgiving': 'JustMe · Thanksgiving & Vida Loca (26 Nov)',
+    'justme-partenopea': 'JustMe · Cena Spettacolo Partenopea (27 Nov)',
     'club-event': 'Serata Club Milano',
   },
   embeddedBannerTitle: 'Acquista online i biglietti ufficiali confermati',
@@ -353,6 +357,8 @@ const EN_PACK: SinglePassCopyPack = {
   pinetaUnder30Error:
     'Pineta Milano strictly admits Under 30 guests only (ages 18–29). For ages 30+, please select Just Me (30–49), REPVBLIC (22–40), Voya Rooftop, or Bischeri Over 50.',
   under18Error: 'Online ticket purchases and nightlife admissions strictly require guests to be 18 years or older.',
+  justme21PlusError:
+    'JustMe Milano strictly enforces a 21+ age policy for this special event: online bookings require guests to be at least 21 years old.',
   bischeriAdvisory: 'For guests aged 50 and above, Bischeri Navigli Over 50 Social Table and Voya Rooftop provide the ideal peer atmosphere.',
   accountTitle: 'Customer Reserved Area · Nightlife Milan',
   accountSubtitle:
@@ -396,6 +402,7 @@ const EN_PACK: SinglePassCopyPack = {
     'voya-christmas': 'Voya Christmas Menu (Dec 25)',
     'justme-orthodox': 'Just Me Orthodox NYE (Jan 13)',
     'justme-thanksgiving': 'JustMe · Thanksgiving & Vida Loca (Nov 26)',
+    'justme-partenopea': 'JustMe · Cena Spettacolo Partenopea (Nov 27)',
     'club-event': 'Milan Official Club Event',
   },
   embeddedBannerTitle: 'Buy confirmed-price tickets directly online',

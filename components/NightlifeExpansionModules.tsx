@@ -570,8 +570,8 @@ const WEEKLY_SCHEDULE = [
         slug: 'just-me-milano',
         zone: 'Parco Sempione',
         music: 'Luxury House & International Guest DJs',
-        formulaIt: 'Aperitivo 19:30 · Tavoli VIP 500–1.500€',
-        formulaEn: 'Aperitivo 19:30 · VIP Tables €500–€1,500',
+        formulaIt: 'Aperitivo 19:30 (15€) · Tavoli VIP 320–5.000€',
+        formulaEn: 'Aperitivo 19:30 (€15) · VIP Tables €320–€5,000',
       },
       {
         rank: '#2 Priority',

@@ -125,6 +125,7 @@ function getPriorityVenueSupplementalPresentations(locale: string, venueId?: str
     const candidates = weeklyEvents.filter((we) => supplementalClubs.has(we.clubSlug) && we.dayOfWeek === dow);
     for (const we of candidates) {
       if (we.id === 'justme-thursday' && dayKey >= '2026-11-26') continue;
+      if (we.id === 'justme-friday' && dayKey === '2026-11-27') continue;
       const resolvedVenueId = `v-${we.clubSlug}`;
       if (venueId && normVenueId(venueId) !== resolvedVenueId) continue;
       if (octoberVenueDays.has(`${resolvedVenueId}|${dayKey}`)) continue;

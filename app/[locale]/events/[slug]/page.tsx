@@ -26,6 +26,15 @@ import {
   thanksgivingJustMeSlug,
   resolveThanksgivingJustMeSlug,
 } from '@/lib/thanksgiving/justme35';
+import PartenopeaJustMeDetailView from '@/components/PartenopeaJustMeDetailView';
+import {
+  getPartenopeaJustMeContent,
+  PARTENOPEA_JUSTME_POSTER_SRC,
+  partenopeaJustMeHreflangAlternates,
+  partenopeaJustMePath,
+  partenopeaJustMeSlug,
+  resolvePartenopeaJustMeSlug,
+} from '@/lib/partenopea/justme35';
 import { getCapodannoCategoryPageDef, getCapodannoEventBySlug, getCapodannoEventsForMode } from '@/lib/capodannoEvents';
 import {
   buildCapodannoMetaDescription,
@@ -339,6 +348,37 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
     };
   }
+  if (resolvePartenopeaJustMeSlug(slug)) {
+    const canonicalSlug = partenopeaJustMeSlug(locale);
+    if (slug !== canonicalSlug) permanentRedirect(partenopeaJustMePath(locale));
+    const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
+    const canonical = `${baseUrl}${partenopeaJustMePath(locale)}`;
+    const pt = getPartenopeaJustMeContent(locale);
+    return {
+      title: pt.metaTitle,
+      description: pt.metaDescription,
+      robots: seoRobots(locale, true, true),
+      alternates: {
+        canonical,
+        languages: partenopeaJustMeHreflangAlternates(baseUrl),
+      },
+      openGraph: {
+        title: pt.metaTitle,
+        description: pt.metaDescription,
+        url: canonical,
+        type: 'website',
+        siteName: 'Nightlife Milan',
+        locale: getLocaleDef(locale)?.ogLocale || 'en_US',
+        images: [{ url: `${baseUrl}${PARTENOPEA_JUSTME_POSTER_SRC}`, width: 1376, height: 768, alt: pt.h1 }],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: pt.metaTitle,
+        description: pt.metaDescription,
+        images: [`${baseUrl}${PARTENOPEA_JUSTME_POSTER_SRC}`],
+      },
+    };
+  }
   const capCatId = resolveCapodannoCategoryIdByLocalizedSlug(slug, locale);
   if (capCatId) {
     if (slug !== capodannoCategorySlug(capCatId, locale)) permanentRedirect(capodannoCategoryPath(capCatId, locale));
@@ -526,6 +566,11 @@ export default async function EventPage({ params }: Props) {
     const canonicalSlug = thanksgivingJustMeSlug(locale);
     if (slug !== canonicalSlug) permanentRedirect(thanksgivingJustMePath(locale));
     return <ThanksgivingJustMeDetailView locale={locale} />;
+  }
+  if (resolvePartenopeaJustMeSlug(slug)) {
+    const canonicalSlug = partenopeaJustMeSlug(locale);
+    if (slug !== canonicalSlug) permanentRedirect(partenopeaJustMePath(locale));
+    return <PartenopeaJustMeDetailView locale={locale} />;
   }
   const capCatId = resolveCapodannoCategoryIdByLocalizedSlug(slug, locale);
   if (capCatId) {

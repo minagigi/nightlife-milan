@@ -152,7 +152,9 @@ export async function POST(request: Request) {
     return jsonError(
       ageCheck.errorCode === 'PINETA_STRICT_UNDER_30'
         ? 'Pineta Milano strictly admits Under 30 guests only (18-29).'
-        : 'All bookings require attendees to be at least 18 years old.',
+        : ageCheck.errorCode === 'UNDER_21_JUSTME'
+          ? 'JustMe Milano strictly admits guests aged 21 and over for this special event.'
+          : 'All bookings require attendees to be at least 18 years old.',
       ageCheck.errorCode,
       400,
       { suggestedVenueIds: ageCheck.suggestedVenueIds },

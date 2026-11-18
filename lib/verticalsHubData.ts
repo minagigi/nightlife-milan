@@ -18,6 +18,7 @@ import {
   orthodoxNyeJustMePath,
 } from './orthodox-nye/justme35';
 import { thanksgivingJustMePath, THANKSGIVING_JUSTME_POSTER_SRC } from './thanksgiving/justme35';
+import { partenopeaJustMePath, PARTENOPEA_JUSTME_POSTER_SRC } from './partenopea/justme35';
 import type { CarouselEventCard } from './venueDossiers35';
 
 export interface VerticalHubUi35 {
@@ -764,6 +765,37 @@ export function getHolidaysCatalog(locale: string): VerticalCardItem[] {
       imageSrc: THANKSGIVING_JUSTME_POSTER_SRC,
     },
     {
+      id: 'hol-partenopea-justme-2026',
+      badge: isIt ? '27 NOVEMBRE 2026 · CENA SPETTACOLO PARTENOPEA' : '27 NOVEMBER 2026 · CENA SPETTACOLO PARTENOPEA',
+      title: isIt
+        ? 'CSP · Cena Spettacolo Partenopea al JustMe Milano (Pineta Napoli)'
+        : 'CSP · Cena Spettacolo Partenopea at JustMe Milan (Pineta Napoli)',
+      subtitle: isIt
+        ? 'Venerdì 27 novembre 2026: 19:30 Aperitivo (15€), 21:30 Cena Show Napoletana con Voice John Vaccaro (menu completo 70€) e 23:00 Party con DJ Franky Dee e Antonio Marigliano.'
+        : 'Friday November 27, 2026: 19:30 Aperitif (€15), 21:30 live Neapolitan Dinner Show with Voice John Vaccaro (€70 full menu), and 23:00 Party with DJ Franky Dee & Antonio Marigliano.',
+      priceRange: isIt
+        ? 'Menu 70€ · Aperitivo 15€ · Club 20€ · Tavoli 320€–5.000€'
+        : 'Menu €70 · Aperitif €15 · Club €20 · Tables €320–€5,000',
+      timingAndLogistics: isIt
+        ? 'Ven 27 Nov 2026 · Aperitivo 19:30 · Dinner Show 21:30 · Party 23:00–05:00 · 21+ Elegante (uomini pantalone lungo)'
+        : 'Fri Nov 27, 2026 · Aperitif 19:30 · Dinner Show 21:30 · Party 23:00–05:00 · 21+ Elegant (men long trousers)',
+      recommendedVenues: ['JustMe Milano (Parco Sempione · Viale Luigi Camoens 2 · NON Via Messina 38)'],
+      highlights: isIt
+        ? [
+            'Menu 70€: Parmigiana, Mozzarella di bufala, Polipetti alla Luciana, Polpette al sugo, Mezzi Paccheri al ragù napoletano, Sorbetto di Amalfi, acqua, vino, caffè',
+            'In collaborazione con Pineta Napoli · Voice John Vaccaro, DJ Franky Dee e DJ Antonio Marigliano fino alle 05:00',
+            'Tavoli Dehor 320€ (entro 23:00), Pista 640€, Central 1.280€, VIP Front 3.200€, Console DJ 5.000€ + navetta gratuita',
+          ]
+        : [
+            'Confirmed €70 menu: 4 Neapolitan sharing antipasti, Mezzi Paccheri al ragù napoletano, Amalfi lemon sorbet, water, wine, coffee & club retention',
+            'In partnership with Pineta Napoli · Voice John Vaccaro, DJ Franky Dee & DJ Antonio Marigliano until 05:00',
+            'Tables from Dehor €320 (entry by 23:00) to DJ Table €5,000 + complimentary parking shuttle',
+          ],
+      href: partenopeaJustMePath(locale),
+      whatsappText: 'Ciao Nightlife Milan, vorrei info per CSP Cena Spettacolo Partenopea al JustMe Milano (27 Novembre · Menu 70€ / Tavoli VIP)',
+      imageSrc: PARTENOPEA_JUSTME_POSTER_SRC,
+    },
+    {
       id: 'hol-orthodox-nye-justme',
       badge: isIt ? '13 GENNAIO 2027 · CAPODANNO ORTODOSSO MILANO' : '13 JANUARY 2027 · ORTHODOX NEW YEAR MILAN',
       title: isIt
@@ -987,7 +1019,7 @@ export function resolveSuggestedEventsForVertical(
   }).format(new Date(shiftedMs));
 
   const upcomingDated = OCTOBER_EVENTS.filter(
-    (ev) => ev.id !== '251019' && ev.id !== '249216' && ev.startISO.slice(0, 10) >= todayISO,
+    (ev) => ev.id !== '251019' && ev.id !== '249216' && ev.id !== '249217' && ev.startISO.slice(0, 10) >= todayISO,
   ).sort((a, b) => a.startISO.localeCompare(b.startISO));
 
   const filteredDated =
@@ -1044,8 +1076,33 @@ export function resolveSuggestedEventsForVertical(
     });
   }
 
-  // Add Holiday / NYE / Christmas / Thanksgiving highlights if focus is holidays or all
+  // Add Holiday / NYE / Christmas / Thanksgiving / Partenopea highlights if focus is holidays or all
   if (focus === 'holidays' || focus === 'all') {
+    if ('2026-11-27' >= todayISO) {
+      const partenopeaHref = partenopeaJustMePath(locale);
+      cards.unshift({
+        id: 'vert-partenopea-justme-2026',
+        title: isIt
+          ? 'CSP · Cena Spettacolo Partenopea · JustMe Milano (Menu 70€)'
+          : 'CSP · Cena Spettacolo Partenopea · JustMe Milan (€70 Menu)',
+        dateLabel: '2026-11-27',
+        timeLabel: isIt
+          ? 'Ven 27 Nov · Dinner Show 21:30 · Party 23:00–05:00'
+          : 'Fri Nov 27 · Dinner Show 21:30 · Party 23:00–05:00',
+        priceLabel: 'Menu €70 · €15/€20 · Tavoli €320–€5.000',
+        categoryLabel: 'JustMe Milano · Torre Branca',
+        genres: ['Pineta Napoli', 'Voice John Vaccaro', 'DJ Franky Dee & Antonio Marigliano'],
+        imageSrc: PARTENOPEA_JUSTME_POSTER_SRC,
+        href: partenopeaHref,
+        whatsappHref: getConciergeBookingUrl(
+          locale,
+          'CSP Cena Spettacolo Partenopea · JustMe Milano (27 Novembre)',
+          partenopeaHref,
+        ),
+        badge: isIt ? '27 NOV · PARTENOPEA 70€' : '27 NOV · PARTENOPEA €70',
+      });
+    }
+
     if ('2026-11-26' >= todayISO) {
       const thanksgivingHref = thanksgivingJustMePath(locale);
       cards.unshift({

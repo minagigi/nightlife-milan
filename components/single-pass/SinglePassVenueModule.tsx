@@ -53,11 +53,21 @@ export default function SinglePassVenueModule({
           </p>
         </div>
         <Link
-          href={`${lp}/single-pass`}
+          href={
+            ['gate', 'pineta', 'repvblic', 'justme', 'bischeri', 'bobino', 'voya', 'justme-garda'].includes(
+              venueId,
+            )
+              ? `${lp}/single-pass`
+              : `${lp}/cart`
+          }
           locale={locale}
           className="inline-flex min-h-[44px] shrink-0 items-center justify-center border border-[#050505] px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#050505] transition hover:bg-[#050505] hover:text-[#F6F1E7]"
         >
-          {copy.embeddedBannerCta}
+          {['gate', 'pineta', 'repvblic', 'justme', 'bischeri', 'bobino', 'voya', 'justme-garda'].includes(
+            venueId,
+          )
+            ? copy.embeddedBannerCta
+            : copy.drawerCheckoutCta}
         </Link>
       </div>
 

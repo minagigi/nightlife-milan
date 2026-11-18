@@ -39,6 +39,7 @@ export function getTopPriorityVenueRecommendations(locale: string, limit = 6): P
     const candidates = weeklyEvents.filter((we) => PRIORITY_CLUBS.has(we.clubSlug) && we.dayOfWeek === dow);
     for (const we of candidates) {
       if (we.id === 'justme-thursday' && dayKey >= '2026-11-26') continue;
+      if (we.id === 'justme-friday' && dayKey === '2026-11-27') continue;
       const resolvedVenueId = `v-${we.clubSlug}`;
       if (seenVenues.has(resolvedVenueId)) continue;
       seenVenues.add(resolvedVenueId);

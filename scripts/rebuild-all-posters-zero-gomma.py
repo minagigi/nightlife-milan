@@ -56,7 +56,7 @@ RAW_GRUPPO_A_BOXES: dict[str, tuple[int, int, int, int, str | None]] = {
     "249201": (230, 1174, 1070, 1256, None),
     "249203": (230, 1174, 1070, 1256, None),
     "249215": (270, 1156, 1038, 1248, None),
-    "249217": (270, 1156, 1038, 1248, None),
+    # 249217: Cena Spettacolo Partenopea (27 Nov 2026) ha assets dedicati in scripts/build-partenopea-justme-2026-assets.py
     "250464": (330, 808, 970, 894, None),
     "250563": (330, 808, 970, 894, None),
     "250730": (290, 1184, 1010, 1260, "VIA MESSINA 38"),

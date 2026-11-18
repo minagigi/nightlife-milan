@@ -11,6 +11,7 @@ import { CAPODANNO_CATEGORY_IDS, capodannoCategoryPath, capodannoEventPath } fro
 import { christmasVoyaPath } from '@/lib/christmas/voya35';
 import { orthodoxNyeJustMePath } from '@/lib/orthodox-nye/justme35';
 import { thanksgivingJustMePath } from '@/lib/thanksgiving/justme35';
+import { partenopeaJustMePath } from '@/lib/partenopea/justme35';
 import { halloweenPath } from '@/lib/halloween/routes';
 import { OCTOBER_EVENTS, OCTOBER_EVENTS_INVENTORY } from '@/lib/octoberEvents';
 import { octoberEventCanonical } from '@/lib/octoberEventSeo';
@@ -353,7 +354,7 @@ function buildEventsEntriesInternal(ebEvents: readonly Event[]): MetadataRoute.S
   const archiveCoreLocales: readonly LocaleCode[] = ['it', 'en', 'es', 'fr', 'de', 'pt'];
 
   OCTOBER_EVENTS.forEach((event) => {
-    if (event.id === '251019' || event.id === '249216') return;
+    if (event.id === '251019' || event.id === '249216' || event.id === '249217') return;
     const endMs = Date.parse(event.endISO || event.startISO);
     const isUpcoming = endMs >= nowMs;
     const targetLocales = endMs >= archiveCutoffMs ? locales : archiveCoreLocales;
@@ -401,6 +402,12 @@ function buildEventsEntriesInternal(ebEvents: readonly Event[]): MetadataRoute.S
     });
     entries.push({
       url: `${baseUrl}${thanksgivingJustMePath(locale)}`,
+      lastModified: catalogLastMod,
+      changeFrequency: 'daily',
+      priority: 0.94,
+    });
+    entries.push({
+      url: `${baseUrl}${partenopeaJustMePath(locale)}`,
       lastModified: catalogLastMod,
       changeFrequency: 'daily',
       priority: 0.94,

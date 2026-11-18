@@ -66,7 +66,7 @@ function native(locale: LocaleCode): NativeCopy {
   return {title,intro,notice,unknown,date,time,source,filters,venues,dates,poster,lineup,inquiry};
 }
 const genericName = /^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday) Night$/u;
-const conciseNames: Record<string,string> = {'251019':'Cappuccetto Rosso','236320':'RAW: ANNĒ & ELLI ACULA','245082':'Fashion & Design Welcome Week','242373':'Matricole San Raffaele','239850':'Macello — Pensieri Cattivi','240627':'Macello — Pensieri Cattivi','alcatraz-europe-the-final-countdown-40th-anniversary-tour':'Europe — The Final Countdown','fabrique-jay-park-ft-lngshot-serenades-and-body-rolls-tour':'Jay Park ft. LNGSHOT'};
+const conciseNames: Record<string,string> = {'251019':'Cappuccetto Rosso','249217':'CSP Partenopea','236320':'RAW: ANNĒ & ELLI ACULA','245082':'Fashion & Design Welcome Week','242373':'Matricole San Raffaele','239850':'Macello — Pensieri Cattivi','240627':'Macello — Pensieri Cattivi','alcatraz-europe-the-final-countdown-40th-anniversary-tour':'Europe — The Final Countdown','fabrique-jay-park-ft-lngshot-serenades-and-body-rolls-tour':'Jay Park ft. LNGSHOT'};
 function date(value:string, locale:LocaleCode, short=false) { return new Intl.DateTimeFormat(getIntlLocale(locale), {timeZone:'Europe/Rome',day:'numeric',month:short?'short':'long',year:'numeric',...(short?{}:{weekday:'long' as const})}).format(new Date(value)); }
 function time(value:string) { return new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Rome',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date(value)); }
 export function getOctoberEventSlug(event:OctoberEventRecord) {
