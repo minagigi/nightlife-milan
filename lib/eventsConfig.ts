@@ -113,7 +113,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '18+', 'Smart Casual', 'Commercial and Reggaeton'),
     image: '/images/events/october-2026/249182-aa34ab79100b.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/university-party-55/249163/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/university-party-54/249161/channel/nightlifemilan-1',
     priority: 100
   },
   {
