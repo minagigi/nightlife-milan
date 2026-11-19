@@ -44,6 +44,7 @@ import {
 import SinglePassVenueModule from '@/components/single-pass/SinglePassVenueModule';
 import TerrazzaDuomoBookingModule from '@/components/single-pass/TerrazzaDuomoBookingModule';
 import { getVenueIdByEventSlug } from '@/lib/single-pass/catalog';
+import { getSinglePassCopy } from '@/lib/single-pass/i18n35';
 
 type Props = {
   locale: string;
@@ -95,10 +96,17 @@ export default function CapodannoDetailView({ locale, event }: Props) {
   const paymentTerms = getPaymentTerms35(locale);
 
   const localized = getCapodannoLocalizedEventContent(event, locale);
+  const singlePassCopy = getSinglePassCopy(locale);
   const isClosedForNye = Boolean(event.closedForNye || localized.closedForNye);
+  const isSoldOutForNye = Boolean(event.soldOutForNye || localized.soldOutForNye);
+  const isUnavailableForNye = isClosedForNye || isSoldOutForNye;
   const multiOfferPrices = isPartyOnly ? partyOfferPrices : localized.offerPricesEur;
-  const rooftopAlternatives = isClosedForNye
-    ? ['capodanno-terrazza-duomo-21', 'capodanno-voya-rooftop-milano']
+  const alternativeSlugList =
+    localized.alternativeSlugs && localized.alternativeSlugs.length > 0
+      ? localized.alternativeSlugs
+      : ['capodanno-terrazza-duomo-21', 'capodanno-voya-rooftop-milano'];
+  const rooftopAlternatives = isUnavailableForNye
+    ? alternativeSlugList
         .map((s) => getCapodannoEventBySlug(s))
         .filter((e): e is CapodannoEventItem => Boolean(e))
     : [];
@@ -144,7 +152,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
   });
 
   const related = CAPODANNO_EVENTS.filter(
-    (item) => !item.closedForNye && item.category === event.category && item.slug !== event.slug
+    (item) => !item.closedForNye && !item.soldOutForNye && item.category === event.category && item.slug !== event.slug
   ).slice(0, 6);
 
   const defaultFaqs = isIt
@@ -251,6 +259,10 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               name: `${event.venueName} Resident DJs`,
             };
 
+    const offerAvailability = isSoldOutForNye
+      ? 'https://schema.org/SoldOut'
+      : 'https://schema.org/InStock';
+
     eventSchemaNode.offers =
       multiOfferPrices && multiOfferPrices.length > 0
         ? tiers.slice(0, multiOfferPrices.length).map((tier, idx) => ({
@@ -260,7 +272,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
             url: `${SITE_URL}${canonicalPath}`,
             price: String(multiOfferPrices[idx]),
             priceCurrency: 'EUR',
-            availability: 'https://schema.org/InStock',
+            availability: offerAvailability,
             validFrom: '2026-10-01T00:00:00+02:00',
           }))
         : {
@@ -268,7 +280,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
             url: `${SITE_URL}${canonicalPath}`,
             price: String(event.priceFromEur),
             priceCurrency: 'EUR',
-            availability: 'https://schema.org/InStock',
+            availability: offerAvailability,
             validFrom: '2026-10-01T00:00:00+02:00',
           };
   }
@@ -335,14 +347,21 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               <span className="border border-[#F6F1E7]/35 bg-[#050505]/90 px-3 py-1 text-xs font-semibold text-[#F6F1E7]">
                 {event.city} ({event.province})
               </span>
-              {!isPartyOnly && !isClosedForNye && (
+              {!isPartyOnly && !isUnavailableForNye && (
                 <span className="border border-[#F6F1E7]/50 bg-[#050505]/90 px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-[#F6F1E7]" data-almost-sold-out-badge>
                   {scarcity.almostSoldOutBadge}
                 </span>
               )}
               {isClosedForNye && (
                 <span className="border border-rose-400/60 bg-rose-950/90 px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-rose-100" data-closed-for-nye-badge>
-                  {isIt ? 'CHIUSO 31 DIC – 3 GEN' : 'CLOSED DEC 31 – JAN 3'}
+                  {event.slug === 'capodanno-ceresio-7-milano'
+                    ? (isIt ? 'CHIUSO 31 DIC – 3 GEN' : 'CLOSED DEC 31 – JAN 3')
+                    : (isIt ? 'CHIUSO CAPODANNO 2027' : 'CLOSED FOR NYE 2027')}
+                </span>
+              )}
+              {isSoldOutForNye && !isClosedForNye && (
+                <span className="border border-amber-400/60 bg-amber-950/90 px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-amber-100" data-sold-out-for-nye-badge>
+                  {isIt ? 'SOLD OUT CAPODANNO 2027' : 'SOLD OUT NYE 2027'}
                 </span>
               )}
             </div>
@@ -350,6 +369,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               data-event-title={title}
               data-event-party-only={isPartyOnly ? 'true' : undefined}
               data-event-closed-nye={isClosedForNye ? 'true' : undefined}
+              data-event-sold-out-nye={isSoldOutForNye ? 'true' : undefined}
               className="mt-3 font-serif text-3xl font-bold text-[#F6F1E7] sm:text-5xl"
             >
               {title}
@@ -358,13 +378,21 @@ export default function CapodannoDetailView({ locale, event }: Props) {
           </div>
 
           <div className="p-6 sm:p-10">
-            {isClosedForNye ? (
+            {isUnavailableForNye ? (
               <div
                 role="status"
                 data-closure-notice
-                className="mb-8 border-2 border-rose-400/60 bg-rose-950/40 p-6 text-[#F6F1E7]"
+                className={`mb-8 border-2 p-6 text-[#F6F1E7] ${
+                  isSoldOutForNye && !isClosedForNye
+                    ? 'border-amber-400/60 bg-amber-950/40'
+                    : 'border-rose-400/60 bg-rose-950/40'
+                }`}
               >
-                <p className="font-mono text-xs font-extrabold uppercase tracking-wider text-rose-200 sm:text-sm">
+                <p
+                  className={`font-mono text-xs font-extrabold uppercase tracking-wider sm:text-sm ${
+                    isSoldOutForNye && !isClosedForNye ? 'text-amber-200' : 'text-rose-200'
+                  }`}
+                >
                   {localized.closureBannerTitle}
                 </p>
                 <p className="mt-2 text-sm leading-relaxed text-[#F6F1E7] sm:text-base">
@@ -395,10 +423,10 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                     {ui.tocProgram}
                   </a>
                 </li>
-                {isClosedForNye ? (
+                {isUnavailableForNye ? (
                   <li>
                     <a href="#alternative-rooftop" className="text-[#050505] hover:underline">
-                      {localized.alternativesHeading || (isIt ? 'Alternative Rooftop' : 'Rooftop Alternatives')}
+                      {localized.alternativesHeading || (isIt ? 'Alternative Confermate' : 'Confirmed Alternatives')}
                     </a>
                   </li>
                 ) : (
@@ -642,14 +670,14 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               </div>
             </section>
 
-            {isClosedForNye ? (
+            {isUnavailableForNye ? (
               <section
                 id="alternative-rooftop"
                 data-rooftop-alternatives
                 className="mt-10 border border-[#050505]/15 bg-[#F6F1E7] p-6 text-[#050505] sm:p-8"
               >
                 <p className="font-mono text-xs font-bold uppercase tracking-widest text-[#5C4415]">
-                  {isIt ? 'ROOFTOP CONFERMATI · 31 DICEMBRE 2026' : 'CONFIRMED MILAN ROOFTOPS · DEC 31, 2026'}
+                  {isIt ? 'LOCATION CONFERMATE · 31 DICEMBRE 2026' : 'CONFIRMED NYE 2027 VENUES · DEC 31, 2026'}
                 </p>
                 <h2 className="mt-1 font-serif text-2xl font-bold text-[#050505] sm:text-3xl">
                   {localized.alternativesHeading}
@@ -703,7 +731,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                     {ui.backToAllBtn}
                   </Link>
                   <a
-                    href={getConciergeBookingUrl(locale, `Milan NYE 2027 Rooftop Alternatives (Ceresio 7 Closed)`, `${SITE_URL}${canonicalPath}`)}
+                    href={getConciergeBookingUrl(locale, `NYE 2027 Alternatives (${event.venueName})`, `${SITE_URL}${canonicalPath}`)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex min-h-[44px] items-center bg-[#25D366] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[#050505]"
@@ -727,6 +755,11 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 )}
               </div>
               <p className="mt-1 text-xs text-[#3D3830]">{sourceBasis}</p>
+              {!event.partner && (
+                <p className="mt-1 text-xs font-semibold text-[#5C4415]" data-checkout-fee-note>
+                  {singlePassCopy.feeCalculatedAtCheckoutNote}
+                </p>
+              )}
 
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
                 {tiers.map((tier) => (

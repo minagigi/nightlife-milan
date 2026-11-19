@@ -294,10 +294,14 @@ export function buildSinglePassOrderEmail(
           <td style="padding:10px 8px;border-top:1px solid #333;color:#C2B9AA;">${escapeHtml(copy.basePriceLabel)}</td>
           <td style="padding:10px 8px;border-top:1px solid #333;text-align:right;color:#EAE3D5;">${escapeHtml(formatEurFromCents(order.subtotalBaseCents, order.locale))}</td>
         </tr>
-        <tr>
+        ${
+          order.feeCents > 0
+            ? `<tr>
           <td style="padding:10px 8px;color:#C2B9AA;">${escapeHtml(feeLabel)}</td>
           <td style="padding:10px 8px;text-align:right;color:#EAE3D5;">${escapeHtml(formatEurFromCents(order.feeCents, order.locale))}</td>
-        </tr>
+        </tr>`
+            : ''
+        }
         <tr>
           <td style="padding:12px 8px;border-top:1px solid #444;font-weight:bold;color:#F6F1E7;">${escapeHtml(copy.totalLabel)} (EUR)</td>
           <td style="padding:12px 8px;border-top:1px solid #444;text-align:right;font-weight:bold;color:#F6F1E7;">${escapeHtml(eurStr)}</td>
@@ -350,7 +354,7 @@ export function buildSinglePassOrderEmail(
       return `- ${i.venueName}: ${i.title} x${i.quantity} (${paxLabel})${i.dietaryChoice ? ` [${i.dietaryChoice}]` : ''} = ${formatEurFromCents(i.lineBaseCents, order.locale)}`;
     }),
     `${copy.basePriceLabel}: ${formatEurFromCents(order.subtotalBaseCents, order.locale)}`,
-    `${feeLabel}: ${formatEurFromCents(order.feeCents, order.locale)}`,
+    ...(order.feeCents > 0 ? [`${feeLabel}: ${formatEurFromCents(order.feeCents, order.locale)}`] : []),
     `${copy.totalLabel} (EUR): ${eurStr}`,
     ...(paidCur !== 'EUR' ? [`Charged in ${paidCur}: ${paidStr} (1 EUR = ${order.fxRate})`] : []),
     ...(hasCapodannoPass ? ['', copy.miniGroupNoticeBody] : []),

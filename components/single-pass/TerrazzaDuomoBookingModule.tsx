@@ -6,8 +6,6 @@ import { Check, Minus, Plus, ShieldCheck, ShoppingBag, Sparkles, Users } from 'l
 import { localePrefix } from '@/lib/i18n/locales';
 import {
   SKU_BY_ID,
-  TERRAZZA_DUOMO_FEE_RATE,
-  computeSinglePassPrice,
   formatEurFromCents,
 } from '@/lib/single-pass/catalog';
 
@@ -72,17 +70,14 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
 
   const bundlePricing = useMemo(() => {
     if (!tableSku || !pairedFormulaSku) return null;
-    const t = computeSinglePassPrice(tableSku.basePriceCents, 1, TERRAZZA_DUOMO_FEE_RATE);
-    const f = computeSinglePassPrice(
-      pairedFormulaSku.basePriceCents,
-      safeBundleGuests,
-      TERRAZZA_DUOMO_FEE_RATE,
-    );
+    const tableBaseCents = tableSku.basePriceCents;
+    const formulaUnitBaseCents = pairedFormulaSku.basePriceCents;
+    const formulaBaseCents = formulaUnitBaseCents * safeBundleGuests;
     return {
-      totalCents: t.lineTotalCents + f.lineTotalCents,
-      tableTotalCents: t.lineTotalCents,
-      formulaUnitTotalCents: f.unitTotalCents,
-      formulaTotalCents: f.lineTotalCents,
+      totalBaseCents: tableBaseCents + formulaBaseCents,
+      tableBaseCents,
+      formulaUnitBaseCents,
+      formulaBaseCents,
     };
   }, [tableSku, pairedFormulaSku, safeBundleGuests]);
 
@@ -99,8 +94,8 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
 
   const handleAddBundle = (goCheckout: boolean) => {
     if (!tableSku || !pairedFormulaSku) return;
-    addItem(pairedFormulaSku.id, safeBundleGuests, pairedFormulaSku.dietaryPreset, false);
-    addItem(tableSku.id, 1, undefined, !goCheckout);
+    addItem(pairedFormulaSku.id, safeBundleGuests, pairedFormulaSku.dietaryPreset, false, undefined, undefined, 'venue');
+    addItem(tableSku.id, 1, undefined, !goCheckout, undefined, undefined, 'venue');
     if (goCheckout) {
       router.push(`${lp}/checkout`);
     }
@@ -139,7 +134,7 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
             : 'Book Terrazza Duomo 21 (1st Floor) & Terrazza MA.RE (5th Floor)'}
         </h2>
         <p className="mt-1.5 text-sm text-[#24201B]">
-          {copy.trustOnlinePayment}
+          {copy.trustOnlinePayment} · <span className="font-semibold text-[#5C4415]">{copy.feeCalculatedAtCheckoutNote}</span>
         </p>
 
         {/* Floor Switcher Tabs */}
@@ -163,8 +158,8 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
             </span>
             <span className="mt-0.5 block text-xs opacity-80">
               {isIt
-                ? 'Cena Placé 360€, Buffet 240€, Brindisi 108€, Anno Nuovo 84€, Tavoli Terrazza'
-                : 'Seated Dinner €360, Buffet €240, Toast €108, After-Midnight €84, Terrace Tables'}
+                ? 'Cena Placé 300€, Buffet 200€, Brindisi 90€, Anno Nuovo 70€, Tavoli Terrazza'
+                : 'Seated Dinner €300, Buffet €200, Toast €90, After-Midnight €70, Terrace Tables'}
             </span>
           </button>
 
@@ -187,8 +182,8 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
             </span>
             <span className="mt-0.5 block text-xs opacity-80">
               {isIt
-                ? 'Cena Stellata 456€, Brindisi 108€, Anno Nuovo 84€, Tavolo Terrazza 5° Piano'
-                : 'Michelin Dinner €456, Toast €108, After-Midnight €84, 5th Floor Terrace Table'}
+                ? 'Cena Stellata 380€, Brindisi 90€, Anno Nuovo 70€, Tavolo Terrazza 5° Piano'
+                : 'Michelin Dinner €380, Toast €90, After-Midnight €70, 5th Floor Terrace Table'}
             </span>
           </button>
         </div>
@@ -209,7 +204,7 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
         <div className="mt-3 grid gap-4 md:grid-cols-2">
           {floor === 'f1' && f1PlaceSku && (() => {
             const qty = getQty('f1-place');
-            const p = computeSinglePassPrice(f1PlaceSku.basePriceCents, qty, TERRAZZA_DUOMO_FEE_RATE);
+            const lineBaseCents = f1PlaceSku.basePriceCents * qty;
             return (
               <div className="flex flex-col justify-between border border-[#050505]/20 bg-[#EFE9DC] p-4">
                 <div>
@@ -286,14 +281,14 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
                     </div>
                     <div className="text-right font-mono text-xs">
                       <span className="block text-[#3D3830]">
-                        <strong>{formatEurFromCents(p.unitTotalCents, locale)}</strong> / pax
+                        <strong>{formatEurFromCents(f1PlaceSku.basePriceCents, locale)}</strong> / pax
                       </span>
                       <strong className="text-sm text-[#050505]">
-                        {formatEurFromCents(p.lineTotalCents, locale)}
+                        {formatEurFromCents(lineBaseCents, locale)}
                       </strong>
                       {currency !== 'EUR' && (
                         <span className="ml-1 text-[11px] font-bold text-[#5C4415]">
-                          (~{formatConvertedEurCents(p.lineTotalCents)})
+                          (~{formatConvertedEurCents(lineBaseCents)})
                         </span>
                       )}
                     </div>
@@ -301,7 +296,7 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
                   <div className="flex gap-2">
                     <button
                       type="button"
-                      onClick={() => addItem(f1PlaceSku.id, qty, f1PlaceSku.dietaryPreset, true)}
+                      onClick={() => addItem(f1PlaceSku.id, qty, f1PlaceSku.dietaryPreset, true, undefined, undefined, 'venue')}
                       className="inline-flex min-h-[40px] flex-1 items-center justify-center gap-1.5 border border-[#050505] bg-white px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-[#050505] hover:bg-[#F6F1E7]"
                     >
                       <ShoppingBag className="h-3.5 w-3.5" aria-hidden="true" />
@@ -310,7 +305,7 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
                     <button
                       type="button"
                       onClick={() => {
-                        addItem(f1PlaceSku.id, qty, f1PlaceSku.dietaryPreset, false);
+                        addItem(f1PlaceSku.id, qty, f1PlaceSku.dietaryPreset, false, undefined, undefined, 'venue');
                         router.push(`${lp}/checkout`);
                       }}
                       className="inline-flex min-h-[40px] flex-1 items-center justify-center bg-[#050505] px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-[#F6F1E7] hover:bg-[#24201B]"
@@ -325,7 +320,7 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
 
           {(floor === 'f1' ? f1OtherSkus : f5Skus).map((sku) => {
             const qty = getQty(sku.id);
-            const p = computeSinglePassPrice(sku.basePriceCents, qty, TERRAZZA_DUOMO_FEE_RATE);
+            const lineBaseCents = sku.basePriceCents * qty;
             return (
               <div
                 key={sku.id}
@@ -371,14 +366,14 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
                     </div>
                     <div className="text-right font-mono text-xs">
                       <span className="block text-[#3D3830]">
-                        <strong>{formatEurFromCents(p.unitTotalCents, locale)}</strong> / pax
+                        <strong>{formatEurFromCents(sku.basePriceCents, locale)}</strong> / pax
                       </span>
                       <strong className="text-sm text-[#050505]">
-                        {formatEurFromCents(p.lineTotalCents, locale)}
+                        {formatEurFromCents(lineBaseCents, locale)}
                       </strong>
                       {currency !== 'EUR' && (
                         <span className="ml-1 text-[11px] font-bold text-[#5C4415]">
-                          (~{formatConvertedEurCents(p.lineTotalCents)})
+                          (~{formatConvertedEurCents(lineBaseCents)})
                         </span>
                       )}
                     </div>
@@ -386,7 +381,7 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
                   <div className="flex gap-2">
                     <button
                       type="button"
-                      onClick={() => addItem(sku.id, qty, sku.dietaryPreset, true)}
+                      onClick={() => addItem(sku.id, qty, sku.dietaryPreset, true, undefined, undefined, 'venue')}
                       className="inline-flex min-h-[40px] flex-1 items-center justify-center gap-1.5 border border-[#050505] bg-white px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-[#050505] hover:bg-[#F6F1E7]"
                     >
                       <ShoppingBag className="h-3.5 w-3.5" aria-hidden="true" />
@@ -395,7 +390,7 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
                     <button
                       type="button"
                       onClick={() => {
-                        addItem(sku.id, qty, sku.dietaryPreset, false);
+                        addItem(sku.id, qty, sku.dietaryPreset, false, undefined, undefined, 'venue');
                         router.push(`${lp}/checkout`);
                       }}
                       className="inline-flex min-h-[40px] flex-1 items-center justify-center bg-[#050505] px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-[#F6F1E7] hover:bg-[#24201B]"
@@ -461,7 +456,7 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
                       {isIt ? 'Tavolo in Terrazza (max 4 pax)' : 'Terrace Table (max 4 guests)'}
                     </strong>
                     <span className="font-mono text-[11px] text-[#C9A84C]">
-                      {isIt ? '720€' : '€720'}
+                      {isIt ? '600€' : '€600'}
                     </span>
                   </button>
                   <button
@@ -480,7 +475,7 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
                       {isIt ? 'Terrazzino Privato (max 8 pax)' : 'Private Terrace (max 8 guests)'}
                     </strong>
                     <span className="font-mono text-[11px] text-[#C9A84C]">
-                      {isIt ? '1.440€' : '€1,440'}
+                      {isIt ? '1.200€' : '€1,200'}
                     </span>
                   </button>
                 </div>
@@ -503,10 +498,9 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
                 {activeBundleFormulas.map((id) => {
                   const s = getSkuById(id);
                   if (!s) return null;
-                  const sp = computeSinglePassPrice(s.basePriceCents, 1, TERRAZZA_DUOMO_FEE_RATE);
                   return (
                     <option key={id} value={id}>
-                      {(isIt ? s.titleIt : s.titleEn)} ({formatEurFromCents(sp.unitTotalCents, locale)} / pax)
+                      {(isIt ? s.titleIt : s.titleEn)} ({formatEurFromCents(s.basePriceCents, locale)} / pax)
                     </option>
                   );
                 })}
@@ -549,21 +543,24 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
                         ? 'Tavolo in Terrazza'
                         : 'Terrace Table'}
                   </span>
-                  <span>{formatEurFromCents(bundlePricing.tableTotalCents, locale)}</span>
+                  <span>{formatEurFromCents(bundlePricing.tableBaseCents, locale)}</span>
                 </div>
                 <div className="flex justify-between text-[#C2B9AA]">
                   <span>
-                    {safeBundleGuests} × {formatEurFromCents(bundlePricing.formulaUnitTotalCents, locale)}
+                    {safeBundleGuests} × {formatEurFromCents(bundlePricing.formulaUnitBaseCents, locale)}
                   </span>
-                  <span>{formatEurFromCents(bundlePricing.formulaTotalCents, locale)}</span>
+                  <span>{formatEurFromCents(bundlePricing.formulaBaseCents, locale)}</span>
                 </div>
                 <div className="flex justify-between border-t border-[#F6F1E7]/15 pt-2 text-base font-bold text-[#F6F1E7]">
-                  <span>{copy.totalLabel}</span>
-                  <span>{formatEurFromCents(bundlePricing.totalCents, locale)}</span>
+                  <span>{copy.basePriceLabel}</span>
+                  <span>{formatEurFromCents(bundlePricing.totalBaseCents, locale)}</span>
                 </div>
+                <p className="text-right font-sans text-[11px] text-[#C2B9AA]">
+                  {copy.feeCalculatedAtCheckoutNote}
+                </p>
                 {currency !== 'EUR' && (
                   <p className="text-right text-[11px] font-bold text-[#C9A84C]">
-                    ~{formatConvertedEurCents(bundlePricing.totalCents)} ({currency})
+                    ~{formatConvertedEurCents(bundlePricing.totalBaseCents)} ({currency})
                   </p>
                 )}
               </div>

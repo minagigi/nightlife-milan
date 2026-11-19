@@ -20,6 +20,7 @@ export type SinglePassCopyPack = {
   categoryLabels: Record<SinglePassPackageCategory, string>;
   basePriceLabel: string;
   feeLabel: string;
+  feeCalculatedAtCheckoutNote: string;
   totalLabel: string;
   arrivalLabel: string;
   guestsLabel: string;
@@ -97,7 +98,7 @@ export type SinglePassCopyPack = {
   thankYouHeading: string;
   thankYouSubtitle: string;
   customerContactsHeading: string;
-  venueShortLabels: Record<SinglePassVenueId, string>;
+  venueShortLabels: Partial<Record<SinglePassVenueId, string>>;
   embeddedBannerTitle: string;
   embeddedBannerBody: string;
   embeddedBannerCta: string;
@@ -115,7 +116,7 @@ const IT_PACK: SinglePassCopyPack = {
   heroSubtitle:
     'Vuoi festeggiare il 31 dicembre nei migliori club di Milano ma non hai una compagnia numerosa o vuoi unirti a un tavolo della tua stessa fascia d’età? Scegli tra Gate, Pineta, REPVBLIC, Just Me Torre Branca, Bobino Legends, Voya Rooftop, JustMe Garda e Bischeri Over 50, aggiungi il pacchetto al carrello e completa il pagamento direttamente su Nightlife Milan.',
   trustOnlinePayment:
-    'Prezzi finali a persona, pagamento sicuro con carta direttamente sul sito',
+    'Prezzi di listino del locale, pagamento sicuro con carta direttamente sul sito',
   trustEqualPrice: 'Prezzo identico uomo e donna: nessuna tariffa ridotta o incentivo per genere',
   trustWhatsAppDate: 'Mini-gruppo WhatsApp ufficiale attivo dal 20 dicembre 2026 in poi',
   trustConciergeHost: 'Ingresso coordinato insieme al nostro referente in Lista o Tavolo NIGHTLIFE MILAN',
@@ -133,6 +134,7 @@ const IT_PACK: SinglePassCopyPack = {
   },
   basePriceLabel: 'Prezzo del locale (EUR)',
   feeLabel: 'Booking fee 20% · consulenza concierge e pagamento elettronico',
+  feeCalculatedAtCheckoutNote: 'Booking & concierge fee calcolata al checkout',
   totalLabel: 'Totale Ordine',
   arrivalLabel: 'Orario ingresso consigliato',
   guestsLabel: 'Ospiti inclusi',
@@ -149,7 +151,7 @@ const IT_PACK: SinglePassCopyPack = {
     },
     {
       title: '2. Paga sul sito in sicurezza nella tua valuta',
-      body: 'I prezzi finali in Euro possono essere pagati direttamente con carta, Apple Pay o Google Pay nella tua valuta locale al tasso di cambio ufficiale del checkout.',
+      body: 'I prezzi di listino in Euro possono essere pagati direttamente con carta, Apple Pay o Google Pay nella tua valuta locale al tasso di cambio ufficiale del checkout.',
     },
     {
       title: '3. Crea il tuo account e scarica il Pass',
@@ -254,14 +256,14 @@ const IT_PACK: SinglePassCopyPack = {
   },
   embeddedBannerTitle: 'Acquista online i biglietti ufficiali confermati',
   embeddedBannerBody:
-    'Prezzi finali a persona, pagamento sicuro con carta direttamente sul sito nella tua valuta senza reindirizzamenti esterni.',
+    'Prezzi di listino del locale, pagamento sicuro con carta direttamente sul sito nella tua valuta senza reindirizzamenti esterni.',
   embeddedBannerCta: 'Vedi Shop Single Pass',
 };
 
 const EN_PACK: SinglePassCopyPack = {
   seoTitle: 'Milan New Year’s Eve 2027 Single Pass · Direct Online Storefront',
   seoDescription:
-    'Official Milan NYE 2027 Single Pass e-commerce: 8 confirmed venues by age bracket, final per-person prices with secure on-site card payment, WhatsApp groups from Dec 20.',
+    'Official Milan NYE 2027 Single Pass e-commerce: 8 confirmed venues by age bracket, official venue list prices with secure on-site card payment, WhatsApp groups from Dec 20.',
   navShopLabel: 'SINGLE PASS',
   navCartLabel: 'Cart',
   navAccountLabel: 'Account',
@@ -270,7 +272,7 @@ const EN_PACK: SinglePassCopyPack = {
   heroSubtitle:
     'Celebrating New Year’s Eve solo or in a duo without booking an entire private booth? Select from Gate, Pineta Under 30, REPVBLIC, Just Me Torre Branca, Bobino Legends, Voya Rooftop, JustMe Garda Lake, and Bischeri Over 50, add your package to the cart, and check out seamlessly on nightlifemilan.com in your preferred currency.',
   trustOnlinePayment:
-    'Final per-person prices, secure card payment directly on site',
+    'Official venue list prices, secure card payment directly on site',
   trustEqualPrice: 'Identical male and female pricing: zero gender discounts or price differences',
   trustWhatsAppDate: 'Official WhatsApp mini-groups open progressively from December 20, 2026',
   trustConciergeHost: 'Priority coordinated entry under Lista / Tavolo NIGHTLIFE MILAN',
@@ -288,6 +290,7 @@ const EN_PACK: SinglePassCopyPack = {
   },
   basePriceLabel: 'Venue price (EUR)',
   feeLabel: 'Booking fee 20% · concierge & electronic payment',
+  feeCalculatedAtCheckoutNote: 'Booking & concierge fee calculated at checkout',
   totalLabel: 'Order Total',
   arrivalLabel: 'Recommended arrival',
   guestsLabel: 'Guests covered',
@@ -304,7 +307,7 @@ const EN_PACK: SinglePassCopyPack = {
     },
     {
       title: '2. Pay safely on site in your preferred currency',
-      body: 'Final Euro totals can be paid directly by card, Apple Pay, or Google Pay in your selected currency at official reference exchange rates shown at checkout.',
+      body: 'Official Euro venue prices can be paid directly by card, Apple Pay, or Google Pay in your selected currency at official reference exchange rates shown at checkout.',
     },
     {
       title: '3. Register your account and access instant digital passes',
@@ -409,7 +412,7 @@ const EN_PACK: SinglePassCopyPack = {
   },
   embeddedBannerTitle: 'Buy confirmed-price tickets directly online',
   embeddedBannerBody:
-    'Final per-person prices, secure card payment directly on nightlifemilan.com in your preferred currency.',
+    'Official venue list prices, secure card payment directly on nightlifemilan.com in your preferred currency.',
   embeddedBannerCta: 'Explore Single Pass Shop',
 };
 
@@ -431,16 +434,17 @@ export const SINGLE_PASS_COPY_35: Readonly<Record<LocaleCode, SinglePassCopyPack
   es: makeLocalePack({
     seoTitle: 'Single Pass Nochevieja Milán 2027 · Tienda Oficial Online',
     seoDescription:
-      'Single Pass Nochevieja Milán 2027 para quienes van solos: 8 clubes confirmados por edad, precios finales con pago seguro con tarjeta, mini-grupo WhatsApp desde el 20/12.',
+      'Single Pass Nochevieja Milán 2027 para quienes van solos: 8 clubes confirmados por edad, precios de lista oficiales con pago seguro con tarjeta, mini-grupo WhatsApp desde el 20/12.',
     navCartLabel: 'Carrito',
     navAccountLabel: 'Mi Cuenta',
     heroH1: 'Single Pass Nochevieja Milán 2027: elige tu club por edad y paga en el sitio',
-    trustOnlinePayment: 'Precios finales por persona, pago seguro con tarjeta en el sitio',
+    trustOnlinePayment: 'Precios de lista del local, pago seguro con tarjeta en el sitio',
     trustEqualPrice: 'Mismo precio exacto para hombres y mujeres en todos los paquetes',
     trustWhatsAppDate: 'Mini-grupo oficial de WhatsApp activo desde el 20 de diciembre de 2026',
     basePriceLabel: 'Precio del local (EUR)',
     drawerSubtotalLabel: 'Precio del local (EUR)',
     feeLabel: 'Booking fee 20% · asesoría concierge y pago electrónico',
+    feeCalculatedAtCheckoutNote: 'Booking & concierge fee calculada en el checkout',
     addToCartCta: 'Añadir al Carrito',
     buyNowCta: 'Comprar Ahora',
     drawerTitle: 'Tu Carrito',
@@ -459,16 +463,17 @@ export const SINGLE_PASS_COPY_35: Readonly<Record<LocaleCode, SinglePassCopyPack
   fr: makeLocalePack({
     seoTitle: 'Single Pass Nouvel An Milan 2027 · Billetterie Officielle',
     seoDescription:
-      'Single Pass Saint-Sylvestre Milan 2027 pour personnes seules : 8 clubs par âge, tarifs finaux avec paiement sécurisé par carte, mini-groupe WhatsApp dès le 20/12.',
+      'Single Pass Saint-Sylvestre Milan 2027 pour personnes seules : 8 clubs par âge, tarifs officiels du lieu avec paiement sécurisé par carte, mini-groupe WhatsApp dès le 20/12.',
     navCartLabel: 'Panier',
     navAccountLabel: 'Mon Compte',
     heroH1: 'Single Pass Nouvel An Milan 2027 : choisissez votre club par âge et réservez ici',
-    trustOnlinePayment: 'Tarifs finaux par personne, paiement sécurisé par carte sur le site',
+    trustOnlinePayment: 'Tarifs officiels du lieu, paiement sécurisé par carte sur le site',
     trustEqualPrice: 'Tarif strictement identique femmes et hommes sur toutes les formules',
     trustWhatsAppDate: 'Mini-groupe WhatsApp officiel activé dès le 20 décembre 2026',
     basePriceLabel: 'Tarif du lieu (EUR)',
     drawerSubtotalLabel: 'Tarif du lieu (EUR)',
     feeLabel: 'Booking fee 20% · conseil conciergerie et paiement électronique',
+    feeCalculatedAtCheckoutNote: 'Booking & concierge fee calculée au paiement',
     addToCartCta: 'Ajouter au Panier',
     buyNowCta: 'Acheter Maintenant',
     drawerTitle: 'Votre Panier',
@@ -487,16 +492,17 @@ export const SINGLE_PASS_COPY_35: Readonly<Record<LocaleCode, SinglePassCopyPack
   de: makeLocalePack({
     seoTitle: 'Single Pass Silvester Mailand 2027 · Offizieller Online-Shop',
     seoDescription:
-      'Silvester Mailand 2027 Single Pass für Alleinreisende: 8 bestätigte Clubs nach Alter, Endpreise mit sicherer Kartenzahlung direkt auf der Website, WhatsApp-Gruppe ab 20.12.',
+      'Silvester Mailand 2027 Single Pass für Alleinreisende: 8 bestätigte Clubs nach Alter, offizielle Lokalpreise mit sicherer Kartenzahlung direkt auf der Website, WhatsApp-Gruppe ab 20.12.',
     navCartLabel: 'Warenkorb',
     navAccountLabel: 'Konto',
     heroH1: 'Single Pass Silvester Mailand 2027: Club nach Alter wählen & direkt buchen',
-    trustOnlinePayment: 'Endpreise pro Person, sichere Kartenzahlung direkt auf der Website',
+    trustOnlinePayment: 'Offizielle Lokalpreise, sichere Kartenzahlung direkt auf der Website',
     trustEqualPrice: 'Einheitliche Preise für Frauen und Männer bei allen Paketen',
     trustWhatsAppDate: 'Offizielle WhatsApp-Minigruppen starten ab dem 20. Dezember 2026',
     basePriceLabel: 'Lokalpreis (EUR)',
     drawerSubtotalLabel: 'Lokalpreis (EUR)',
     feeLabel: 'Booking fee 20% · Concierge-Beratung & elektronische Zahlung',
+    feeCalculatedAtCheckoutNote: 'Booking & Concierge Fee wird im Checkout berechnet',
     addToCartCta: 'In den Warenkorb',
     buyNowCta: 'Jetzt Kaufen',
     drawerTitle: 'Warenkorb',
@@ -687,9 +693,12 @@ export function formatFeeLabel35(locale: string, feeRate: number, isMixed = fals
     (FEE_DETAIL_BY_LOCALE_35 as Record<string, string>)[locale] ||
     FEE_DETAIL_BY_LOCALE_35[DEFAULT_LOCALE];
   if (isMixed) {
-    return `Booking fee (15% / 20%) · ${detail}`;
+    return `Booking fee 20% · ${detail}`;
   }
   const pct = Math.round(feeRate * 100);
+  if (pct <= 0) {
+    return `Booking fee 0% · ${detail}`;
+  }
   return `Booking fee ${pct}% · ${detail}`;
 }
 

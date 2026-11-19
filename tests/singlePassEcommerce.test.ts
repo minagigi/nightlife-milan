@@ -17,6 +17,7 @@ import {
   STOREFRONT_VENUES,
   SKU_BY_ID,
   TERRAZZA_DUOMO_FEE_RATE,
+  VENUE_BY_ID,
   computeSinglePassPrice,
   getConfirmedSkusForInventoryEvent,
   getSkuFeeRate,
@@ -63,9 +64,12 @@ test('Catalog excludes 55-milano & TOM, includes all 8 confirmed Capodanno + hol
   assert.equal(SKU_BY_ID.get('55-gala-dinner'), undefined);
   assert.equal(resolveCatalogSku('55-club-entry'), null);
 
-  assert.equal(CONFIRMED_CAPODANNO_SLUGS.size, 9);
+  assert.ok(CONFIRMED_CAPODANNO_SLUGS.size >= 30, `Expected >= 30 confirmed Capodanno slugs, got ${CONFIRMED_CAPODANNO_SLUGS.size}`);
   assert.ok(CONFIRMED_CAPODANNO_SLUGS.has('capodanno-bobino-milano'));
   assert.ok(CONFIRMED_CAPODANNO_SLUGS.has('capodanno-terrazza-duomo-21'));
+  assert.ok(CONFIRMED_CAPODANNO_SLUGS.has('capodanno-stk-milan'));
+  assert.ok(CONFIRMED_CAPODANNO_SLUGS.has('capodanno-hotel-barchetta-excelsior-como'));
+  assert.ok(CONFIRMED_CAPODANNO_SLUGS.has('capodanno-albergo-terminus-como'));
   for (const slug of CONFIRMED_CAPODANNO_SLUGS) {
     assert.ok(getVenueIdByEventSlug(slug), `Confirmed slug missing venue mapping: ${slug}`);
   }
@@ -81,11 +85,16 @@ test('Catalog excludes 55-milano & TOM, includes all 8 confirmed Capodanno + hol
 
   for (const sku of SINGLE_PASS_SKUS) {
     assert.equal(sku.genderPolicy, 'equal');
-    const expectedRate =
-      sku.venueId === 'terrazza-duomo-21' ? TERRAZZA_DUOMO_FEE_RATE : SINGLE_PASS_FEE_RATE;
-    assert.equal(getSkuFeeRate(sku), expectedRate);
-    const p1 = computeSinglePassPrice(sku.basePriceCents, 1, expectedRate);
-    assert.equal(p1.unitFeeCents, Math.round(sku.basePriceCents * expectedRate));
+    const venue = VENUE_BY_ID[sku.venueId];
+    assert.ok(venue, `Missing venue spec for SKU ${sku.id}`);
+    // Single Pass channel always applies 20% fee
+    assert.equal(getSkuFeeRate(sku, 'single-pass'), SINGLE_PASS_FEE_RATE);
+    // Venue direct channel: 0% for partner venues (unless Single Pass combo/share), 20% for non-partner venues
+    const isSharedCombo = sku.category === 'all-night-combo' || sku.category === 'vip-table-share';
+    const expectedVenueRate = isSharedCombo ? SINGLE_PASS_FEE_RATE : venue.partner ? 0 : TERRAZZA_DUOMO_FEE_RATE;
+    assert.equal(getSkuFeeRate(sku, 'venue'), expectedVenueRate, `Wrong venue fee rate for ${sku.id}`);
+    const p1 = computeSinglePassPrice(sku.basePriceCents, 1, expectedVenueRate);
+    assert.equal(p1.unitFeeCents, Math.round(sku.basePriceCents * expectedVenueRate));
     assert.equal(p1.unitTotalCents, p1.unitBaseCents + p1.unitFeeCents);
   }
 
@@ -207,6 +216,7 @@ test('Zero public Stripe wording exists across all public pages, UI components, 
     'lib/capodanno/gate35.ts',
     'lib/capodanno/bobino35.ts',
     'lib/capodanno/terrazzaDuomo21_35.ts',
+    'lib/capodanno/t031Venues35.ts',
     'lib/capodanno/ceresio7Closed35.ts',
     'lib/christmas/voya35.ts',
     'lib/orthodox-nye/justme35.ts',

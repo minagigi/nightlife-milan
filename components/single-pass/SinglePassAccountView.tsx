@@ -603,9 +603,11 @@ export default function SinglePassAccountView({
                       <div className="text-[#C2B9AA]">
                         {copy.basePriceLabel}: {formatEurFromCents(order.subtotalBaseCents, locale)}
                       </div>
-                      <div className="text-[#EAE3D5]">
-                        {orderFeeLabel}: {formatEurFromCents(order.feeCents, locale)}
-                      </div>
+                      {order.feeCents > 0 && (
+                        <div className="text-[#EAE3D5]">
+                          {orderFeeLabel}: {formatEurFromCents(order.feeCents, locale)}
+                        </div>
+                      )}
                       <div className="font-bold text-[#F6F1E7] sm:text-right">
                         {copy.totalLabel}: {formatEurFromCents(order.totalCents, locale)}
                         {order.presentmentCurrency && order.presentmentCurrency !== 'EUR' && (

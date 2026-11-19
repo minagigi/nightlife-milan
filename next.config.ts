@@ -160,6 +160,7 @@ const nextConfig: NextConfig = {
     // Inline the compact critical stylesheet to remove the mobile render-blocking
     // round trip. Revalidate this choice if the global stylesheet grows again.
     inlineCss: false,
+    ...(process.env.NEXT_BUILD_CPUS ? { cpus: Number(process.env.NEXT_BUILD_CPUS) } : {}),
   },
   webpack: (config, {dev}) => {
     // HMR is disabled in AI Studio via DISABLE_HMR env var.

@@ -14,6 +14,31 @@ export type SinglePassVenueId =
   | 'justme-thanksgiving'
   | 'justme-partenopea'
   | 'terrazza-duomo-21'
+  | 'stk-milan'
+  | 'radio-rooftop'
+  | 'barchetta-como'
+  | 'terminus-como'
+  | 'atmosfera-tram'
+  | 'alcatraz'
+  | 'black-hole'
+  | 'blue-note'
+  | 'magazzini-generali'
+  | 'mib-milano'
+  | 'pelledoca'
+  | 'the-club'
+  | 'the-dome'
+  | 'tempio-futuro-perduto'
+  | 'teatro-scala'
+  | 'teatri-milano'
+  | 'terme-sirmione'
+  | 'le-rotonde'
+  | 'mascara-mantova'
+  | 'bobadilla'
+  | 'coco-beach'
+  | 'livigno-kosmo-stalet'
+  | 'orsa-maggiore'
+  | 'villa-fenaroli'
+  | 'sheraton-san-siro'
   | 'club-event';
 
 export type SinglePassPackageCategory =
@@ -37,6 +62,7 @@ export type PriceBreakdown = {
 export type SinglePassVenueSpec = {
   id: SinglePassVenueId;
   eventSlug: string;
+  partner: boolean;
   name: string;
   taglineIt: string;
   taglineEn: string;
@@ -86,6 +112,7 @@ export type SinglePassSku = {
 export type SinglePassCartItemInput = {
   skuId: string;
   quantity: number;
+  channel?: 'single-pass' | 'venue';
   dietaryChoice?: string;
   addedFromPath?: string;
   addedFromTitle?: string;
@@ -96,6 +123,7 @@ export type SinglePassOrderItem = {
   venueId: SinglePassVenueId;
   venueName: string;
   eventSlug: string;
+  channel?: 'single-pass' | 'venue';
   category: SinglePassPackageCategory;
   title: string;
   arrivalTime: string;

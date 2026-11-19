@@ -4,7 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { CreditCard, ShieldCheck, ShoppingBag, Users } from 'lucide-react';
 import { localePrefix } from '@/lib/i18n/locales';
-import { computeSinglePassPrice, formatEurFromCents } from '@/lib/single-pass/catalog';
+import { VENUE_BY_ID, formatEurFromCents } from '@/lib/single-pass/catalog';
 import { getSinglePassCopy } from '@/lib/single-pass/i18n35';
 import type { SinglePassSku } from '@/lib/single-pass/types';
 import { useSinglePassCart } from './SinglePassCartContext';
@@ -51,8 +51,8 @@ export default function ConfirmedEventTicketsBox({
 
       <div className="mt-5 grid gap-4 md:grid-cols-2">
         {skus.map((sku) => {
-          const p = computeSinglePassPrice(sku.basePriceCents, 1);
           const guests = sku.guestsPerUnit || 1;
+          const isPartner = Boolean(VENUE_BY_ID[sku.venueId]?.partner);
           return (
             <div
               key={sku.id}
@@ -78,22 +78,25 @@ export default function ConfirmedEventTicketsBox({
 
               <div className="mt-4 space-y-3 border-t border-[#F6F1E7]/12 pt-3">
                 <div className="flex flex-wrap items-baseline justify-between gap-2 font-mono text-xs">
-                  <span className="text-[#8E8577]">{copy.totalLabel}</span>
+                  <span className="text-[#8E8577]">{copy.basePriceLabel}</span>
                   <div className="text-right">
                     <span className="text-base font-bold text-[#F6F1E7]">
-                      {formatEurFromCents(p.unitTotalCents, locale)}
+                      {formatEurFromCents(sku.basePriceCents, locale)}
                     </span>
                     {currency !== 'EUR' && (
                       <span className="ml-2 text-xs text-[#C9A84C]">
-                        (~{formatConvertedEurCents(p.unitTotalCents)})
+                        (~{formatConvertedEurCents(sku.basePriceCents)})
                       </span>
                     )}
                   </div>
                 </div>
+                {!isPartner && (
+                  <p className="text-[11px] text-[#C2B9AA]">{copy.feeCalculatedAtCheckoutNote}</p>
+                )}
                 <div className="flex gap-2">
                   <button
                     type="button"
-                    onClick={() => addItem(sku.id, 1, sku.dietaryPreset, true)}
+                    onClick={() => addItem(sku.id, 1, sku.dietaryPreset, true, undefined, undefined, 'venue')}
                     className="inline-flex min-h-[42px] flex-1 items-center justify-center gap-1.5 border border-[#F6F1E7]/35 bg-[#050505] px-3 py-2 text-xs font-bold uppercase tracking-wider text-[#F6F1E7] transition hover:border-[#F6F1E7]"
                   >
                     <ShoppingBag className="h-3.5 w-3.5" aria-hidden="true" />
@@ -102,7 +105,7 @@ export default function ConfirmedEventTicketsBox({
                   <button
                     type="button"
                     onClick={() => {
-                      addItem(sku.id, 1, sku.dietaryPreset, false);
+                      addItem(sku.id, 1, sku.dietaryPreset, false, undefined, undefined, 'venue');
                       router.push(`${lp}/checkout`);
                     }}
                     className="inline-flex min-h-[42px] flex-1 items-center justify-center gap-1.5 bg-[#F6F1E7] px-3 py-2 text-xs font-extrabold uppercase tracking-wider text-[#050505] transition hover:bg-[#EAE3D5]"

@@ -26,6 +26,7 @@ export type SinglePassCartItem = {
   dietaryChoice?: string;
   addedFromPath?: string;
   addedFromTitle?: string;
+  channel?: 'single-pass' | 'venue';
 };
 
 const STORAGE_KEY = 'nlm_single_pass_cart_v1';
@@ -67,6 +68,7 @@ type SinglePassCartContextValue = {
     openDrawer?: boolean,
     addedFromPath?: string,
     addedFromTitle?: string,
+    channel?: 'single-pass' | 'venue',
   ) => void;
   updateQuantity: (skuId: string, quantity: number) => void;
   updateDietary: (skuId: string, dietaryChoice: string) => void;
@@ -142,6 +144,9 @@ export function SinglePassCartProvider({
                 ...(entry.addedFromTitle
                   ? { addedFromTitle: String(entry.addedFromTitle).slice(0, 140) }
                   : {}),
+                ...(entry.channel === 'single-pass' || entry.channel === 'venue'
+                  ? { channel: entry.channel }
+                  : {}),
               };
             });
           setItems(valid);
@@ -198,6 +203,7 @@ export function SinglePassCartProvider({
     openDrawer = true,
     addedFromPath?: string,
     addedFromTitle?: string,
+    channel?: 'single-pass' | 'venue',
   ) => {
     const sku = resolveCatalogSku(skuId);
     if (!sku) return;
@@ -209,6 +215,9 @@ export function SinglePassCartProvider({
     const originTitle =
       addedFromTitle ||
       (typeof document !== 'undefined' ? document.title.slice(0, 140) : undefined);
+    const resolvedChannel: 'single-pass' | 'venue' =
+      channel ||
+      (originPath && originPath.includes('/single-pass') ? 'single-pass' : 'venue');
 
     setItems((prev) => {
       const idx = prev.findIndex((i) => i.skuId === sku.id);
@@ -221,6 +230,7 @@ export function SinglePassCartProvider({
           dietaryChoice: dietaryChoice || cur.dietaryChoice || sku.dietaryPreset,
           addedFromPath: cur.addedFromPath || originPath,
           addedFromTitle: cur.addedFromTitle || originTitle,
+          channel: channel || cur.channel || resolvedChannel,
         };
         return next;
       }
@@ -234,6 +244,7 @@ export function SinglePassCartProvider({
             : {}),
           ...(originPath ? { addedFromPath: originPath } : {}),
           ...(originTitle ? { addedFromTitle: originTitle } : {}),
+          channel: resolvedChannel,
         },
       ];
     });
@@ -283,7 +294,7 @@ export function SinglePassCartProvider({
       const sku = resolveCatalogSku(item.skuId);
       if (!sku) continue;
       if (sku.venueId === 'terrazza-duomo-21') hasTerrazzaDuomo21 = true;
-      const skuFeeRate = getSkuFeeRate(sku);
+      const skuFeeRate = getSkuFeeRate(sku, item.channel || 'venue');
       distinctFeeRates.add(skuFeeRate);
       const pricing = computeSinglePassPrice(sku.basePriceCents, item.quantity, skuFeeRate);
       itemCount += item.quantity;

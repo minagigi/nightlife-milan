@@ -11,6 +11,7 @@ import { getGateNyeContent } from '@/lib/capodanno/gate35';
 import { getTomNyeContent } from '@/lib/capodanno/tom35';
 import { getTerrazzaDuomo21NyeContent } from '@/lib/capodanno/terrazzaDuomo21_35';
 import { getCeresio7ClosedNyeContent } from '@/lib/capodanno/ceresio7Closed35';
+import { getT031OverrideContent } from '@/lib/capodanno/t031Venues35';
 import { getJustMeOrthodoxRelatedBanner } from '@/lib/orthodox-nye/justme35';
 import type { CapodannoCategoryPageDef, CapodannoEventItem } from '@/lib/capodannoEvents';
 import { SITE_CONTACT } from '@/config/contact';
@@ -531,6 +532,8 @@ function getOverrideEventContent(slug: string, locale: string): CapodannoLocaliz
   if (slug === 'capodanno-tom-the-ordinary-market-milano') return getTomNyeContent(locale);
   if (slug === 'capodanno-terrazza-duomo-21') return getTerrazzaDuomo21NyeContent(locale);
   if (slug === 'capodanno-ceresio-7-milano') return getCeresio7ClosedNyeContent(locale);
+  const t031 = getT031OverrideContent(slug, locale);
+  if (t031) return t031;
   return null;
 }
 

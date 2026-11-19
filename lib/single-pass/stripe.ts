@@ -254,8 +254,6 @@ export function buildCheckoutSessionParams(order: SinglePassOrder, siteOrigin: s
     params.set(`${p}[quantity]`, String(item.quantity));
   });
 
-  const feeIdx = order.items.length;
-  const fp = `line_items[${feeIdx}]`;
   const distinctRates = new Set(
     order.items.map((item) =>
       typeof item.feeRate === 'number' ? item.feeRate : SINGLE_PASS_FEE_RATE,
@@ -268,11 +266,16 @@ export function buildCheckoutSessionParams(order: SinglePassOrder, siteOrigin: s
       : typeof order.feeRate === 'number'
         ? order.feeRate
         : SINGLE_PASS_FEE_RATE;
-  const feeLineName = formatFeeLabel35(order.locale, effectiveFeeRate, isMixed);
-  params.set(`${fp}[price_data][currency]`, 'eur');
-  params.set(`${fp}[price_data][unit_amount]`, String(order.feeCents));
-  params.set(`${fp}[price_data][product_data][name]`, feeLineName);
-  params.set(`${fp}[quantity]`, '1');
+
+  if (order.feeCents > 0) {
+    const feeIdx = order.items.length;
+    const fp = `line_items[${feeIdx}]`;
+    const feeLineName = formatFeeLabel35(order.locale, effectiveFeeRate, isMixed);
+    params.set(`${fp}[price_data][currency]`, 'eur');
+    params.set(`${fp}[price_data][unit_amount]`, String(order.feeCents));
+    params.set(`${fp}[price_data][product_data][name]`, feeLineName);
+    params.set(`${fp}[quantity]`, '1');
+  }
 
   params.set('metadata[order_id]', order.id);
   params.set('metadata[customer_whatsapp]', order.customer.whatsapp.slice(0, 80));

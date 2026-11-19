@@ -90,7 +90,14 @@ export async function POST(request: Request) {
   const nowMs = Date.now();
   const merged = new Map<
     string,
-    { sku: SinglePassSku; qty: number; dietary?: string; addedFromPath?: string; addedFromTitle?: string }
+    {
+      sku: SinglePassSku;
+      qty: number;
+      dietary?: string;
+      addedFromPath?: string;
+      addedFromTitle?: string;
+      channel: 'single-pass' | 'venue';
+    }
   >();
 
   for (const rawItem of rawItems.slice(0, 20)) {
@@ -111,6 +118,14 @@ export async function POST(request: Request) {
     const addedFromTitle = rawItem.addedFromTitle
       ? String(rawItem.addedFromTitle).trim().slice(0, 140)
       : undefined;
+    const itemChannel: 'single-pass' | 'venue' =
+      rawItem.channel === 'single-pass'
+        ? 'single-pass'
+        : rawItem.channel === 'venue'
+          ? 'venue'
+          : addedFromPath && addedFromPath.includes('/single-pass')
+            ? 'single-pass'
+            : prev?.channel || 'venue';
 
     merged.set(resolvedSku.id, {
       sku: resolvedSku,
@@ -118,6 +133,7 @@ export async function POST(request: Request) {
       dietary: dietary || prev?.dietary,
       addedFromPath: addedFromPath || prev?.addedFromPath,
       addedFromTitle: addedFromTitle || prev?.addedFromTitle,
+      channel: itemChannel,
     });
   }
 
@@ -224,7 +240,7 @@ export async function POST(request: Request) {
   const distinctFeeRates = new Set<number>();
 
   for (const pair of resolvedPairs) {
-    const skuFeeRate = getSkuFeeRate(pair.sku);
+    const skuFeeRate = getSkuFeeRate(pair.sku, pair.channel);
     distinctFeeRates.add(skuFeeRate);
     const breakdown = computeSinglePassPrice(pair.sku.basePriceCents, pair.qty, skuFeeRate);
     const venue = VENUE_BY_ID[pair.sku.venueId];
@@ -247,6 +263,7 @@ export async function POST(request: Request) {
       totalGuests,
       ...(pair.addedFromPath ? { addedFromPath: pair.addedFromPath } : {}),
       ...(pair.addedFromTitle ? { addedFromTitle: pair.addedFromTitle } : {}),
+      channel: pair.channel,
       feeRate: skuFeeRate,
       unitBaseCents: breakdown.unitBaseCents,
       unitFeeCents: breakdown.unitFeeCents,

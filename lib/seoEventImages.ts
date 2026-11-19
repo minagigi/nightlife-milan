@@ -513,6 +513,10 @@ const VENUE_MASTER_KEYS: Record<string, [string, string, string, string]> = {
   'gattopardo': ['gattopardo-interior-01', 'gattopardo-interior-02', 'gattopardo-interior-03', 'gattopardo-interior-04'],
   'apollo': ['apollo-milano-interior-01', 'apollo-milano-interior-02', 'apollo-milano-interior-03', 'apollo-milano-interior-04'],
   'terrazza-duomo-21': ['terrazza-duomo-21-real-01', 'terrazza-duomo-21-real-02', 'terrazza-mare-5f-real-03', 'terrazza-mare-5f-real-04'],
+  'stk-milan': ['stk-milan-real-01', 'stk-milan-real-02', 'stk-milan-real-03', 'stk-milan-real-04'],
+  'barchetta-como': ['barchetta-como-real-01', 'barchetta-como-real-02', 'barchetta-como-real-03', 'barchetta-como-real-04'],
+  'terminus-como': ['terminus-como-real-01', 'terminus-como-real-02', 'terminus-como-real-03', 'terminus-como-real-04'],
+  'palace-como': ['palace-como-real-01', 'palace-como-real-02', 'palace-como-real-03', 'palace-como-real-04'],
   'ceresio-7': ['ceresio-7-interior-01', 'ceresio-7-interior-02', 'ceresio-7-interior-03', 'ceresio-7-interior-04'],
   'mib': ['mib-milano-interior-01', 'mib-milano-interior-02', 'mib-milano-interior-03', 'mib-milano-interior-04'],
   'church-81': ['church-81-interior-01', 'church-81-interior-02', 'church-81-interior-03', 'church-81-interior-04'],
@@ -546,6 +550,10 @@ export function selectMasterAssetKeys(slug: string, venueName = '', categorySlug
   if (s.includes('gattopardo')) return VENUE_MASTER_KEYS['gattopardo'];
   if (s.includes('apollo')) return VENUE_MASTER_KEYS['apollo'];
   if (s.includes('terrazza-duomo') || s.includes('terrazza-21') || s.includes('terrazza-mare')) return VENUE_MASTER_KEYS['terrazza-duomo-21'];
+  if (s.includes('stk-milan') || s.includes('stk milan')) return VENUE_MASTER_KEYS['stk-milan'];
+  if (s.includes('barchetta')) return VENUE_MASTER_KEYS['barchetta-como'];
+  if (s.includes('terminus')) return VENUE_MASTER_KEYS['terminus-como'];
+  if (s.includes('palace-hotel-como') || s.includes('palace hotel como')) return VENUE_MASTER_KEYS['palace-como'];
   if (s.includes('ceresio')) return VENUE_MASTER_KEYS['ceresio-7'];
   if (s.includes('mib')) return VENUE_MASTER_KEYS['mib'];
   if (s.includes('church')) return VENUE_MASTER_KEYS['church-81'];

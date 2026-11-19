@@ -69,13 +69,23 @@ test('Terrazza Duomo 21 (1F), Terrazza MA.RE (5F) & Single Pass SKUs all compute
     );
   }
 
-  // Single Pass SKUs are also 20% under T-029c
+  // Single Pass SKUs are 20% on single-pass channel, while partner venues direct are 0% (T-031)
   assert.equal(SINGLE_PASS_FEE_RATE, 0.2);
   const spSku = SKU_BY_ID.get('justme-club-entry')!;
-  assert.equal(getSkuFeeRate(spSku), 0.2);
-  const spPrice = computeSinglePassPrice(spSku.basePriceCents, 1, getSkuFeeRate(spSku));
+  assert.equal(getSkuFeeRate(spSku, 'single-pass'), 0.2);
+  assert.equal(getSkuFeeRate(spSku, 'venue'), 0);
+  const spPrice = computeSinglePassPrice(spSku.basePriceCents, 1, getSkuFeeRate(spSku, 'single-pass'));
   assert.equal(spPrice.unitFeeCents, Math.round(spSku.basePriceCents * 0.2));
   assert.equal(spPrice.unitTotalCents, spPrice.unitBaseCents + spPrice.unitFeeCents);
+
+  // T-031 non-partner venues always apply 20% at checkout
+  const barchettaSku = SKU_BY_ID.get('barchetta-como-gala-adult')!;
+  assert.ok(barchettaSku);
+  assert.equal(getSkuFeeRate(barchettaSku, 'venue'), 0.2);
+  const barchettaP = computeSinglePassPrice(barchettaSku.basePriceCents, 1, getSkuFeeRate(barchettaSku, 'venue'));
+  assert.equal(barchettaP.unitBaseCents, 17500);
+  assert.equal(barchettaP.unitFeeCents, 3500);
+  assert.equal(barchettaP.unitTotalCents, 21000);
 });
 
 test('Terrace table mandatory pairing validation enforces same-floor pairing and max capacity (4 / 8)', () => {
@@ -157,6 +167,8 @@ test('All 35 locales cover Terrazza Duomo 21 / MA.RE & Ceresio 7 closed with zer
     assert.equal(td.menus?.length, 3, `Expected 3 official menus in ${loc}`);
     assert.ok((td.conditions?.length ?? 0) >= 7, `Missing PDF conditions in ${loc}`);
     assert.deepEqual(td.offerPricesEur, [...TERRAZZA_DUOMO_21_NYE_OFFER_PRICES_EUR]);
+    assert.deepEqual(TERRAZZA_DUOMO_21_NYE_OFFER_PRICES_EUR, [300, 200, 90, 70, 600, 1200, 380, 90, 70, 600]);
+    assert.equal(/360€|€360|456€|€456|720€|€720|1\.440€|€1,440|108€|€108|84€|€84|240€|€240/.test(tdJson), false, `Inflated T-029b price leaked in Terrazza ${loc}`);
     assert.equal(tdJson.includes('!'), false, `Exclamation in Terrazza ${loc}`);
     assert.equal(tdJson.includes('\u2014'), false, `Em-dash in Terrazza ${loc}`);
     assert.equal(forbiddenRe.test(tdJson), false, `Forbidden token in Terrazza ${loc}`);
@@ -567,12 +579,12 @@ test('End-to-end /api/single-pass/checkout POST enforces pairing/allergies and c
     assert.equal(savedOrder.feeRate, 0.2);
     assert.equal(savedOrder.customer.dietaryNotes, 'No shellfish for 1 guest');
 
-    // 5. T-029c Single Pass test-mode checkout: Bischeri Dinner €140 × 1.20 = €168 (€140 base + €28 fee)
+    // 5. T-029c / T-031 Single Pass channel checkout: Bischeri Dinner €140 × 1.20 = €168 (€140 base + €28 fee)
     const spRes = await checkoutPost(
       mkPost({
         locale: 'it',
         currency: 'EUR',
-        items: [{ skuId: 'bischeri-dinner-terra', quantity: 1 }],
+        items: [{ skuId: 'bischeri-dinner-terra', quantity: 1, channel: 'single-pass' }],
         fullName: 'Luca Verdi',
         email: 'luca.sp20@example.com',
         whatsapp: '+39 348 1234567',
@@ -596,7 +608,97 @@ test('End-to-end /api/single-pass/checkout POST enforces pairing/allergies and c
     assert.equal(spOk.feeCents, 2800);
     assert.equal(spOk.totalEurCents, 16800);
 
-    assert.equal(capturedPaymentIntentBodies.length, 3);
+    // 6. T-031 Partner venue direct checkout (channel: 'venue'): Bischeri Dinner €140 + 0% fee = €140
+    const partnerRes = await checkoutPost(
+      mkPost({
+        locale: 'it',
+        currency: 'EUR',
+        items: [{ skuId: 'bischeri-dinner-terra', quantity: 1, channel: 'venue' }],
+        fullName: 'Paolo Bianchi',
+        email: 'paolo.partner0@example.com',
+        whatsapp: '+39 348 9876543',
+        age: 54,
+        country: 'Italia',
+        acceptedTerms: true,
+      }),
+    );
+    assert.equal(partnerRes.status, 200);
+    const partnerOk = (await partnerRes.json()) as {
+      ok: boolean;
+      orderId: string;
+      subtotalBaseCents: number;
+      feeRate: number;
+      feeCents: number;
+      totalEurCents: number;
+    };
+    assert.equal(partnerOk.ok, true);
+    assert.equal(partnerOk.subtotalBaseCents, 14000);
+    assert.equal(partnerOk.feeRate, 0);
+    assert.equal(partnerOk.feeCents, 0);
+    assert.equal(partnerOk.totalEurCents, 14000);
+
+    const partnerSavedOrder = await getOrderById(partnerOk.orderId);
+    assert.ok(partnerSavedOrder);
+    const partnerMail = buildSinglePassOrderEmail(partnerSavedOrder);
+    assert.equal(partnerMail.html.includes('Booking fee'), false, 'Partner 0% email must not include Booking fee row');
+
+    // 7. T-031 New non-partner location checkout (channel: 'venue'): Barchetta Como 175€ + 20% (35€) = 210€
+    const barchettaRes = await checkoutPost(
+      mkPost({
+        locale: 'it',
+        currency: 'EUR',
+        items: [{ skuId: 'barchetta-como-gala-adult', quantity: 1, channel: 'venue' }],
+        fullName: 'Chiara Neri',
+        email: 'chiara.como@example.com',
+        whatsapp: '+39 349 1122334',
+        age: 38,
+        country: 'Italia',
+        acceptedTerms: true,
+      }),
+    );
+    assert.equal(barchettaRes.status, 200);
+    const barchettaOk = (await barchettaRes.json()) as {
+      ok: boolean;
+      orderId: string;
+      subtotalBaseCents: number;
+      feeRate: number;
+      feeCents: number;
+      totalEurCents: number;
+    };
+    assert.equal(barchettaOk.ok, true);
+    assert.equal(barchettaOk.subtotalBaseCents, 17500);
+    assert.equal(barchettaOk.feeRate, 0.2);
+    assert.equal(barchettaOk.feeCents, 3500);
+    assert.equal(barchettaOk.totalEurCents, 21000);
+
+    // 8. T-031 New non-partner location checkout: Terminus Como 240€ + 20% (48€) = 288€
+    const terminusRes = await checkoutPost(
+      mkPost({
+        locale: 'en',
+        currency: 'EUR',
+        items: [{ skuId: 'terminus-como-bar-delle-terme', quantity: 1, channel: 'venue' }],
+        fullName: 'James Miller',
+        email: 'james.como@example.com',
+        whatsapp: '+44 7700 900123',
+        age: 41,
+        country: 'United Kingdom',
+        acceptedTerms: true,
+      }),
+    );
+    assert.equal(terminusRes.status, 200);
+    const terminusOk = (await terminusRes.json()) as {
+      ok: boolean;
+      subtotalBaseCents: number;
+      feeRate: number;
+      feeCents: number;
+      totalEurCents: number;
+    };
+    assert.equal(terminusOk.subtotalBaseCents, 24000);
+    assert.equal(terminusOk.feeRate, 0.2);
+    assert.equal(terminusOk.feeCents, 4800);
+    assert.equal(terminusOk.totalEurCents, 28800);
+
+    assert.equal(capturedPaymentIntentBodies.length, 6);
     assert.equal(capturedPaymentIntentBodies[0].get('amount'), '115200');
     assert.equal(capturedPaymentIntentBodies[0].get('metadata[fee_rate]'), '0.2');
     assert.equal(capturedPaymentIntentBodies[1].get('amount'), '216000');
@@ -604,6 +706,13 @@ test('End-to-end /api/single-pass/checkout POST enforces pairing/allergies and c
     assert.equal(capturedPaymentIntentBodies[2].get('amount'), '16800');
     assert.equal(capturedPaymentIntentBodies[2].get('metadata[fee_rate]'), '0.2');
     assert.equal(capturedPaymentIntentBodies[2].get('metadata[venue_net_eur_cents]'), '14000');
+    assert.equal(capturedPaymentIntentBodies[3].get('amount'), '14000');
+    assert.equal(capturedPaymentIntentBodies[3].get('metadata[fee_rate]'), '0');
+    assert.equal(capturedPaymentIntentBodies[3].get('metadata[fee_eur_cents]'), '0');
+    assert.equal(capturedPaymentIntentBodies[4].get('amount'), '21000');
+    assert.equal(capturedPaymentIntentBodies[4].get('metadata[fee_rate]'), '0.2');
+    assert.equal(capturedPaymentIntentBodies[5].get('amount'), '28800');
+    assert.equal(capturedPaymentIntentBodies[5].get('metadata[fee_rate]'), '0.2');
   } finally {
     globalThis.fetch = origFetch;
     clearMemoryStoreForTests();

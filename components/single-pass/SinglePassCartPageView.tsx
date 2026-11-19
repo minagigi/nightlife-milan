@@ -82,7 +82,7 @@ export default function SinglePassCartPageView({ locale }: { locale: string }) {
               if (!sku) return null;
               const venue = VENUE_BY_ID[sku.venueId];
               const venueName = sku.venueNameOverride || venue?.name || 'Nightlife Milan';
-              const skuFeeRate = getSkuFeeRate(sku);
+              const skuFeeRate = getSkuFeeRate(sku, item.channel || 'venue');
               const feePct = Math.round(skuFeeRate * 100);
               const pricing = computeSinglePassPrice(sku.basePriceCents, item.quantity, skuFeeRate);
               const itemGuests = Math.max(0, sku.guestsPerUnit ?? 1) * item.quantity;
@@ -157,9 +157,11 @@ export default function SinglePassCartPageView({ locale }: { locale: string }) {
                     </div>
 
                     <div className="text-right font-mono text-xs">
-                      <p className="text-[#8E8577]">
-                        {formatEurFromCents(pricing.lineBaseCents, locale)} + {formatEurFromCents(pricing.lineFeeCents, locale)} ({feePct}%)
-                      </p>
+                      {feePct > 0 && (
+                        <p className="text-[#8E8577]">
+                          {formatEurFromCents(pricing.lineBaseCents, locale)} + {formatEurFromCents(pricing.lineFeeCents, locale)} ({feePct}%)
+                        </p>
+                      )}
                       <p className="text-base font-bold text-[#F6F1E7]">
                         {formatEurFromCents(pricing.lineTotalCents, locale)}
                       </p>
@@ -207,10 +209,12 @@ export default function SinglePassCartPageView({ locale }: { locale: string }) {
                   <span>{copy.basePriceLabel}</span>
                   <span className="font-mono">{formatEurFromCents(subtotalBaseCents, locale)}</span>
                 </div>
-                <div className="flex justify-between text-[#EAE3D5]">
-                  <span>{feeLabel}</span>
-                  <span className="font-mono">+{formatEurFromCents(totalFeeCents, locale)}</span>
-                </div>
+                {totalFeeCents > 0 && (
+                  <div className="flex justify-between text-[#EAE3D5]">
+                    <span>{feeLabel}</span>
+                    <span className="font-mono">+{formatEurFromCents(totalFeeCents, locale)}</span>
+                  </div>
+                )}
                 {!cartValidation.ok && (
                   <div className="border border-rose-500/50 bg-rose-950/40 p-3 text-xs text-rose-200">
                     {cartValidation.errorCode === 'TABLE_REQUIRES_FORMULA'

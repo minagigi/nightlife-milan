@@ -19,7 +19,6 @@ import { capodannoEventPath } from '@/lib/capodanno/routes';
 import {
   SINGLE_PASS_SKUS,
   STOREFRONT_VENUES,
-  computeSinglePassPrice,
   formatEurFromCents,
 } from '@/lib/single-pass/catalog';
 import type { SupportedCurrency } from '@/lib/single-pass/currency';
@@ -76,7 +75,7 @@ export default function SinglePassStorefront({
 
   const handleAdd = (skuId: string, dietaryDefault?: string) => {
     const choice = menuChoices[skuId] || dietaryDefault;
-    addItem(skuId, 1, choice, true);
+    addItem(skuId, 1, choice, true, undefined, undefined, 'single-pass');
     setJustAddedId(skuId);
     window.setTimeout(() => {
       setJustAddedId((cur) => (cur === skuId ? null : cur));
@@ -85,7 +84,7 @@ export default function SinglePassStorefront({
 
   const handleBuyNow = (skuId: string, dietaryDefault?: string) => {
     const choice = menuChoices[skuId] || dietaryDefault;
-    addItem(skuId, 1, choice, false);
+    addItem(skuId, 1, choice, false, undefined, undefined, 'single-pass');
     router.push(`${lp}/checkout`);
   };
 
@@ -299,7 +298,7 @@ export default function SinglePassStorefront({
                       : 'border-[#050505]/25 bg-[#EFE9DC] text-[#050505] hover:border-[#050505]'
                   }`}
                 >
-                  {copy.venueShortLabels[v.id]}
+                  {copy.venueShortLabels[v.id] || v.name}
                 </button>
               ))}
             </div>
@@ -396,7 +395,6 @@ export default function SinglePassStorefront({
                   {/* SKU Grid for Venue */}
                   <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     {skus.map((sku) => {
-                      const price = computeSinglePassPrice(sku.basePriceCents, 1);
                       const added = justAddedId === sku.id;
                       const skuTitle = isIt ? sku.titleIt : sku.titleEn;
                       const skuDesc = isIt ? sku.descriptionIt : sku.descriptionEn;
@@ -452,16 +450,19 @@ export default function SinglePassStorefront({
                           <div className="mt-5 border-t border-[#050505]/15 pt-4">
                             <div className="font-mono text-xs">
                               <div className="flex items-baseline justify-between pt-1 text-base font-extrabold text-[#050505]">
-                                <span>{copy.totalLabel}</span>
+                                <span>{copy.basePriceLabel}</span>
                                 <span>
-                                  {formatEurFromCents(price.unitTotalCents, locale)}
+                                  {formatEurFromCents(sku.basePriceCents, locale)}
                                   {mounted && currency !== 'EUR' && (
                                     <span className="ml-1.5 text-xs font-semibold text-[#5C4415]">
-                                      (~{formatConvertedEurCents(price.unitTotalCents)})
+                                      (~{formatConvertedEurCents(sku.basePriceCents)})
                                     </span>
                                   )}
                                 </span>
                               </div>
+                              <p className="mt-1 font-sans text-[11px] text-[#5C4415]">
+                                {copy.feeCalculatedAtCheckoutNote}
+                              </p>
                             </div>
 
                             <div className="mt-4 grid grid-cols-2 gap-2">

@@ -222,10 +222,12 @@ export default function SinglePassThankYouView({
               <span>{copy.basePriceLabel}</span>
               <span className="font-mono">{formatEurFromCents(order.subtotalBaseCents, locale)}</span>
             </div>
-            <div className="flex justify-between text-[#C2B9AA]">
-              <span>{orderFeeLabel}</span>
-              <span className="font-mono">+{formatEurFromCents(order.feeCents, locale)}</span>
-            </div>
+            {order.feeCents > 0 && (
+              <div className="flex justify-between text-[#C2B9AA]">
+                <span>{orderFeeLabel}</span>
+                <span className="font-mono">+{formatEurFromCents(order.feeCents, locale)}</span>
+              </div>
+            )}
             <div className="flex justify-between border-t border-[#F6F1E7]/12 pt-2 font-bold text-[#F6F1E7]">
               <span>{copy.totalLabel} (EUR)</span>
               <span className="font-mono">{formatEurFromCents(order.totalCents, locale)}</span>

@@ -102,8 +102,10 @@ export default function SinglePassCheckoutView({
   const activeMixed = paymentSession ? paymentSession.hasMixedFeeRates : hasMixedFeeRates;
   const feeLabel = formatFeeLabel35(locale, activeFeeRate, activeMixed);
   const headerFeeTag = activeMixed
-    ? '15% / 20% FEE'
-    : `BOOKING FEE ${Math.round(activeFeeRate * 100)}%`;
+    ? 'BOOKING FEE 20%'
+    : Math.round(activeFeeRate * 100) > 0
+      ? `BOOKING FEE ${Math.round(activeFeeRate * 100)}%`
+      : 'OFFICIAL PARTNER DIRECT';
 
   useEffect(() => {
     fetch('/api/single-pass/me', { cache: 'no-store' })
@@ -416,18 +418,20 @@ export default function SinglePassCheckoutView({
                     {formatEurFromCents(paymentSession.subtotalBaseCents, locale)}
                   </span>
                 </div>
-                <div className="flex justify-between text-[#EAE3D5]">
-                  <span>
-                    {formatFeeLabel35(
-                      locale,
-                      paymentSession.feeRate,
-                      paymentSession.hasMixedFeeRates,
-                    )}
-                  </span>
-                  <span className="font-mono">
-                    +{formatEurFromCents(paymentSession.feeCents, locale)}
-                  </span>
-                </div>
+                {paymentSession.feeCents > 0 && (
+                  <div className="flex justify-between text-[#EAE3D5]">
+                    <span>
+                      {formatFeeLabel35(
+                        locale,
+                        paymentSession.feeRate,
+                        paymentSession.hasMixedFeeRates,
+                      )}
+                    </span>
+                    <span className="font-mono">
+                      +{formatEurFromCents(paymentSession.feeCents, locale)}
+                    </span>
+                  </div>
+                )}
                 <div className="flex justify-between border-t border-[#F6F1E7]/12 pt-2 font-mono text-base font-bold text-[#F6F1E7]">
                   <span>{copy.totalLabel} (EUR)</span>
                   <span>{formatEurFromCents(paymentSession.totalEurCents, locale)}</span>
@@ -476,7 +480,7 @@ export default function SinglePassCheckoutView({
                 if (!sku) return null;
                 const venue = VENUE_BY_ID[sku.venueId];
                 const venueName = sku.venueNameOverride || venue?.name || 'Nightlife Milan';
-                const skuFeeRate = getSkuFeeRate(sku);
+                const skuFeeRate = getSkuFeeRate(sku, item.channel || 'venue');
                 const p = computeSinglePassPrice(sku.basePriceCents, item.quantity, skuFeeRate);
                 const itemPax = Math.max(0, sku.guestsPerUnit ?? 1) * item.quantity;
 
@@ -767,7 +771,15 @@ export default function SinglePassCheckoutView({
                     onChange={(e) => setAcceptedTerms(e.target.checked)}
                     className="mt-1 h-4 w-4 shrink-0 accent-[#F6F1E7]"
                   />
-                  <span>{hasTerrazzaDuomo21 ? terrazzaUi.termsNotice20 : copy.formTermsLabel}</span>
+                  <span>
+                    {hasTerrazzaDuomo21
+                      ? terrazzaUi.termsNotice20
+                      : totalFeeCents > 0
+                        ? copy.formTermsLabel
+                        : isIt
+                          ? 'Accetto Termini e Condizioni, Privacy Policy e Politica di Rimborso di nightlifemilan.com e confermo i requisiti d’età del locale.'
+                          : 'I accept the Terms & Conditions, Privacy Policy, and Refund Policy of nightlifemilan.com and confirm venue age requirements.'}
+                  </span>
                 </label>
                 <div className="flex flex-wrap gap-4 pl-7 text-[11px] font-semibold text-[#C9A84C]">
                   <Link href={`${lp}/terms`} locale={locale} className="underline">
@@ -826,10 +838,12 @@ export default function SinglePassCheckoutView({
                   <span>{copy.basePriceLabel}</span>
                   <span className="font-mono">{formatEurFromCents(subtotalBaseCents, locale)}</span>
                 </div>
-                <div className="flex justify-between text-[#EAE3D5]">
-                  <span>{feeLabel}</span>
-                  <span className="font-mono">+{formatEurFromCents(totalFeeCents, locale)}</span>
-                </div>
+                {totalFeeCents > 0 && (
+                  <div className="flex justify-between text-[#EAE3D5]">
+                    <span>{feeLabel}</span>
+                    <span className="font-mono">+{formatEurFromCents(totalFeeCents, locale)}</span>
+                  </div>
+                )}
                 <div className="flex justify-between border-t border-[#F6F1E7]/15 pt-2.5 text-base font-bold text-[#F6F1E7]">
                   <span>{copy.totalLabel} (EUR)</span>
                   <span className="font-mono">{formatEurFromCents(grandTotalCents, locale)}</span>

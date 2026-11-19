@@ -7,9 +7,7 @@ import Link from '@/components/LocalizedLink';
 import { localePrefix } from '@/lib/i18n/locales';
 import {
   VENUE_BY_ID,
-  computeSinglePassPrice,
   formatEurFromCents,
-  getSkuFeeRate,
   getSkusForVenue,
 } from '@/lib/single-pass/catalog';
 import { getSinglePassCopy } from '@/lib/single-pass/i18n35';
@@ -50,7 +48,15 @@ export default function SinglePassVenueModule({
               : `Book Official Confirmed Packages Online · ${venue.name}`}
           </h2>
           <p className="mt-1.5 text-sm text-[#24201B]">
-            {copy.trustOnlinePayment} · {copy.trustEqualPrice}
+            {copy.trustOnlinePayment}
+            {!venue.partner ? (
+              <>
+                {' · '}
+                <span className="font-semibold text-[#5C4415]">{copy.feeCalculatedAtCheckoutNote}</span>
+              </>
+            ) : (
+              ` · ${copy.trustEqualPrice}`
+            )}
           </p>
         </div>
         <Link
@@ -74,8 +80,6 @@ export default function SinglePassVenueModule({
 
       <div className="mt-5 grid gap-4 md:grid-cols-2">
         {skus.map((sku) => {
-          const skuFeeRate = getSkuFeeRate(sku);
-          const p = computeSinglePassPrice(sku.basePriceCents, 1, skuFeeRate);
           const guests = Math.max(0, sku.guestsPerUnit ?? 1);
           return (
             <div
@@ -103,18 +107,18 @@ export default function SinglePassVenueModule({
               <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-[#050505]/12 pt-3">
                 <div className="font-mono text-xs">
                   <strong className="text-base text-[#050505]">
-                    {formatEurFromCents(p.unitTotalCents, locale)}
+                    {formatEurFromCents(sku.basePriceCents, locale)}
                   </strong>
                   {currency !== 'EUR' && (
                     <span className="ml-1.5 text-[11px] font-bold text-[#5C4415]">
-                      (~{formatConvertedEurCents(p.unitTotalCents)})
+                      (~{formatConvertedEurCents(sku.basePriceCents)})
                     </span>
                   )}
                 </div>
                 <div className="flex gap-2">
                   <button
                     type="button"
-                    onClick={() => addItem(sku.id, 1, sku.dietaryPreset, true)}
+                    onClick={() => addItem(sku.id, 1, sku.dietaryPreset, true, undefined, undefined, 'venue')}
                     className="inline-flex min-h-[40px] items-center gap-1.5 border border-[#050505] bg-white px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-[#050505] hover:bg-[#F6F1E7]"
                   >
                     <ShoppingBag className="h-3.5 w-3.5" aria-hidden="true" />
@@ -123,7 +127,7 @@ export default function SinglePassVenueModule({
                   <button
                     type="button"
                     onClick={() => {
-                      addItem(sku.id, 1, sku.dietaryPreset, false);
+                      addItem(sku.id, 1, sku.dietaryPreset, false, undefined, undefined, 'venue');
                       router.push(`${lp}/checkout`);
                     }}
                     className="inline-flex min-h-[40px] items-center bg-[#050505] px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-[#F6F1E7] hover:bg-[#24201B]"

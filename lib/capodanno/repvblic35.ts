@@ -55,10 +55,12 @@ export interface CapodannoLocalizedEventContent {
   conditions?: string[];
   offerPricesEur?: number[];
   closedForNye?: boolean;
+  soldOutForNye?: boolean;
   closureBannerTitle?: string;
   closureBannerBody?: string;
   alternativesHeading?: string;
   alternativesSubheading?: string;
+  alternativeSlugs?: string[];
   customFaqs?: Array<{ q: string; a: string }>;
   shots?: [string, string, string, string];
 }

@@ -16,7 +16,6 @@ import { seoTitle } from '@/lib/seoMetadata';
 import {
   SINGLE_PASS_SKUS,
   STOREFRONT_VENUES,
-  computeSinglePassPrice,
 } from '@/lib/single-pass/catalog';
 import { getSinglePassCopy } from '@/lib/single-pass/i18n35';
 
@@ -83,7 +82,7 @@ export default async function SinglePassPage({
         },
         {
           q: 'Posso pagare direttamente sul sito nella mia valuta?',
-          a: 'Sì. I prezzi finali in Euro vengono convertiti automaticamente in tempo reale nella tua valuta locale al checkout. Il pagamento avviene direttamente all’interno delle nostre pagine protette con carta, Apple Pay o Google Pay.',
+          a: 'Sì. I prezzi di listino in Euro vengono convertiti automaticamente in tempo reale nella tua valuta locale al checkout (dove viene calcolata la booking & concierge fee). Il pagamento avviene direttamente all’interno delle nostre pagine protette con carta, Apple Pay o Google Pay.',
         },
         {
           q: 'Cosa include l’acquisto del Single Pass Nightlife Milan?',
@@ -105,7 +104,7 @@ export default async function SinglePassPage({
         },
         {
           q: 'Can I pay directly on nightlifemilan.com in my local currency?',
-          a: 'Yes. Final Euro prices convert live at checkout into your preferred currency using official reference rates. Card, Apple Pay, and Google Pay payments are completed right inside our checkout without external redirects.',
+          a: 'Yes. Official Euro venue list prices convert live at checkout into your preferred currency using official reference rates (with booking & concierge fee calculated at checkout). Card, Apple Pay, and Google Pay payments are completed right inside our checkout without external redirects.',
         },
         {
           q: 'What is included with every Nightlife Milan Single Pass?',
@@ -134,7 +133,6 @@ export default async function SinglePassPage({
         '@type': 'ItemList',
         name: copy.heroH1,
         itemListElement: SINGLE_PASS_SKUS.map((sku, idx) => {
-          const p = computeSinglePassPrice(sku.basePriceCents, 1);
           return {
             '@type': 'ListItem',
             position: idx + 1,
@@ -144,7 +142,7 @@ export default async function SinglePassPage({
               description: isIt ? sku.descriptionIt : sku.descriptionEn,
               offers: {
                 '@type': 'Offer',
-                price: (p.unitTotalCents / 100).toFixed(2),
+                price: (sku.basePriceCents / 100).toFixed(2),
                 priceCurrency: 'EUR',
                 availability: 'https://schema.org/InStock',
               },
