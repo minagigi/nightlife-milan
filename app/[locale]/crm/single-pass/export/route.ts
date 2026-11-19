@@ -90,7 +90,7 @@ export async function GET(request: Request) {
         venues,
         pkgs,
         (o.subtotalBaseCents / 100).toFixed(2),
-        `${Math.round((o.feeRate ?? 0.15) * 100)}%`,
+        `${Math.round((o.feeRate ?? 0.20) * 100)}%`,
         (o.feeCents / 100).toFixed(2),
         (o.totalCents / 100).toFixed(2),
         o.customer.dietaryNotes || '',

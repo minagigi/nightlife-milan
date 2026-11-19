@@ -75,7 +75,6 @@ export default function SinglePassVenueModule({
       <div className="mt-5 grid gap-4 md:grid-cols-2">
         {skus.map((sku) => {
           const skuFeeRate = getSkuFeeRate(sku);
-          const feePct = Math.round(skuFeeRate * 100);
           const p = computeSinglePassPrice(sku.basePriceCents, 1, skuFeeRate);
           const guests = Math.max(0, sku.guestsPerUnit ?? 1);
           return (
@@ -103,10 +102,7 @@ export default function SinglePassVenueModule({
 
               <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-[#050505]/12 pt-3">
                 <div className="font-mono text-xs">
-                  <span className="text-[#3D3830]">
-                    {formatEurFromCents(p.unitBaseCents, locale)} + {formatEurFromCents(p.unitFeeCents, locale)} ({feePct}%) ={' '}
-                  </span>
-                  <strong className="text-sm text-[#050505]">
+                  <strong className="text-base text-[#050505]">
                     {formatEurFromCents(p.unitTotalCents, locale)}
                   </strong>
                   {currency !== 'EUR' && (

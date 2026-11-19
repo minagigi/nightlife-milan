@@ -106,7 +106,7 @@ export type SinglePassCopyPack = {
 const IT_PACK: SinglePassCopyPack = {
   seoTitle: 'Single Pass Capodanno Milano 2027 · Tavoli Condivisi Online',
   seoDescription:
-    'Single Pass Capodanno Milano 2027 per chi festeggia da solo: 8 locali confermati per età, acquisto diretto sul sito (+15% fee), mini-gruppo WhatsApp dal 20/12.',
+    'Single Pass Capodanno Milano 2027 per chi festeggia da solo: 8 locali confermati per età, acquisto diretto sul sito con pagamento sicuro con carta, mini-gruppo WhatsApp dal 20/12.',
   navShopLabel: 'SINGLE PASS',
   navCartLabel: 'Carrello',
   navAccountLabel: 'Area Riservata',
@@ -115,7 +115,7 @@ const IT_PACK: SinglePassCopyPack = {
   heroSubtitle:
     'Vuoi festeggiare il 31 dicembre nei migliori club di Milano ma non hai una compagnia numerosa o vuoi unirti a un tavolo della tua stessa fascia d’età? Scegli tra Gate, Pineta, REPVBLIC, Just Me Torre Branca, Bobino Legends, Voya Rooftop, JustMe Garda e Bischeri Over 50, aggiungi il pacchetto al carrello e completa il pagamento direttamente su Nightlife Milan.',
   trustOnlinePayment:
-    'Checkout nativo direttamente sul sito (+15% Booking, Concierge Service & Entry Fee trasparente)',
+    'Prezzi finali a persona, pagamento sicuro con carta direttamente sul sito',
   trustEqualPrice: 'Prezzo identico uomo e donna: nessuna tariffa ridotta o incentivo per genere',
   trustWhatsAppDate: 'Mini-gruppo WhatsApp ufficiale attivo dal 20 dicembre 2026 in poi',
   trustConciergeHost: 'Ingresso coordinato insieme al nostro referente in Lista o Tavolo NIGHTLIFE MILAN',
@@ -131,8 +131,8 @@ const IT_PACK: SinglePassCopyPack = {
     'club-entry': 'Ingresso Club Ufficiale',
     'holiday-special': 'Menu Speciale Festivo',
   },
-  basePriceLabel: 'Tariffa ufficiale (EUR)',
-  feeLabel: '+15% Booking, Concierge Service & Entry Fee',
+  basePriceLabel: 'Prezzo del locale (EUR)',
+  feeLabel: 'Booking fee 20% · consulenza concierge e pagamento elettronico',
   totalLabel: 'Totale Ordine',
   arrivalLabel: 'Orario ingresso consigliato',
   guestsLabel: 'Ospiti inclusi',
@@ -148,8 +148,8 @@ const IT_PACK: SinglePassCopyPack = {
       body: 'Ogni locale rispetta un target preciso: PERREO XL al Gate (18–26), Pineta Under 30 tassativo (18–29), REPVBLIC internazionale (22–40), Just Me Luxury (30–49), Voya Rooftop (25–50), JustMe Garda (21+) e Bischeri Navigli (Over 50).',
     },
     {
-      title: '2. Paga sul sito nella tua valuta con +15% trasparente',
-      body: 'I prezzi base in Euro vengono convertiti in tempo reale nella tua valuta locale al checkout. La maggiorazione fissa del +15% copre booking, assistenza concierge e lista nominale.',
+      title: '2. Paga sul sito in sicurezza nella tua valuta',
+      body: 'I prezzi finali in Euro possono essere pagati direttamente con carta, Apple Pay o Google Pay nella tua valuta locale al tasso di cambio ufficiale del checkout.',
     },
     {
       title: '3. Crea il tuo account e scarica il Pass',
@@ -164,7 +164,7 @@ const IT_PACK: SinglePassCopyPack = {
   drawerEmptyTitle: 'Il carrello è vuoto',
   drawerEmptyBody: 'Aggiungi uno dei pacchetti con tariffa ufficiale confermata da qualsiasi scheda evento o dallo shop Single Pass.',
   drawerExploreCta: 'Esplora i pacchetti confermati',
-  drawerSubtotalLabel: 'Subtotale pacchetti (EUR)',
+  drawerSubtotalLabel: 'Prezzo del locale (EUR)',
   drawerCheckoutCta: 'Vai al Checkout',
   drawerCartCta: 'Rivedi Carrello',
   drawerAccountCta: 'Area Riservata',
@@ -195,7 +195,7 @@ const IT_PACK: SinglePassCopyPack = {
   formLanguages: 'Lingue parlate',
   formDietary: 'Preferenze menù (Terra/Mare) o allergie alimentari',
   formTermsLabel:
-    'Accetto Termini e Condizioni, Privacy Policy e Politica di Rimborso di nightlifemilan.com, confermo il +15% di Booking, Concierge & Entry Fee e i requisiti d’età del locale.',
+    'Accetto Termini e Condizioni, Privacy Policy e Politica di Rimborso di nightlifemilan.com, confermo la Booking fee 20% (consulenza concierge e pagamento elettronico) e i requisiti d’età del locale.',
   termsPolicyLabel: 'Termini e Condizioni',
   privacyPolicyLabel: 'Privacy Policy',
   refundPolicyLabel: 'Politica di Rimborso',
@@ -254,14 +254,14 @@ const IT_PACK: SinglePassCopyPack = {
   },
   embeddedBannerTitle: 'Acquista online i biglietti ufficiali confermati',
   embeddedBannerBody:
-    'Tariffe ufficiali in Euro convertibili nella tua valuta al checkout (+15% Booking, Concierge Service & Entry Fee). Pagamento sicuro sul sito senza reindirizzamenti esterni.',
+    'Prezzi finali a persona, pagamento sicuro con carta direttamente sul sito nella tua valuta senza reindirizzamenti esterni.',
   embeddedBannerCta: 'Vedi Shop Single Pass',
 };
 
 const EN_PACK: SinglePassCopyPack = {
   seoTitle: 'Milan New Year’s Eve 2027 Single Pass · Direct Online Storefront',
   seoDescription:
-    'Official Milan NYE 2027 Single Pass e-commerce: 8 confirmed venues by age bracket, direct on-site multi-currency checkout (+15% fee), WhatsApp groups from Dec 20.',
+    'Official Milan NYE 2027 Single Pass e-commerce: 8 confirmed venues by age bracket, final per-person prices with secure on-site card payment, WhatsApp groups from Dec 20.',
   navShopLabel: 'SINGLE PASS',
   navCartLabel: 'Cart',
   navAccountLabel: 'Account',
@@ -270,7 +270,7 @@ const EN_PACK: SinglePassCopyPack = {
   heroSubtitle:
     'Celebrating New Year’s Eve solo or in a duo without booking an entire private booth? Select from Gate, Pineta Under 30, REPVBLIC, Just Me Torre Branca, Bobino Legends, Voya Rooftop, JustMe Garda Lake, and Bischeri Over 50, add your package to the cart, and check out seamlessly on nightlifemilan.com in your preferred currency.',
   trustOnlinePayment:
-    '100% native on-site checkout with real-time currency conversion (+15% Booking & Concierge Fee)',
+    'Final per-person prices, secure card payment directly on site',
   trustEqualPrice: 'Identical male and female pricing: zero gender discounts or price differences',
   trustWhatsAppDate: 'Official WhatsApp mini-groups open progressively from December 20, 2026',
   trustConciergeHost: 'Priority coordinated entry under Lista / Tavolo NIGHTLIFE MILAN',
@@ -286,8 +286,8 @@ const EN_PACK: SinglePassCopyPack = {
     'club-entry': 'Official Club Entry',
     'holiday-special': 'Holiday Special Menu',
   },
-  basePriceLabel: 'Official base rate (EUR)',
-  feeLabel: '+15% Booking, Concierge Service & Entry Fee',
+  basePriceLabel: 'Venue price (EUR)',
+  feeLabel: 'Booking fee 20% · concierge & electronic payment',
   totalLabel: 'Order Total',
   arrivalLabel: 'Recommended arrival',
   guestsLabel: 'Guests covered',
@@ -303,8 +303,8 @@ const EN_PACK: SinglePassCopyPack = {
       body: 'PERREO XL @ Gate covers 18–26, Pineta enforces strict Under 30 (18–29), REPVBLIC hosts 22–40 international guests, Just Me leads 30–49 luxury, Voya Rooftop brings skyline dining, JustMe Garda offers lakefront glamour, and Bischeri welcomes Over 50.',
     },
     {
-      title: '2. Pay natively in your currency with transparent +15% fee',
-      body: 'Canonical Euro prices are converted live at checkout to your selected currency at official reference exchange rates, with a clear +15% Booking, Concierge & Entry Fee.',
+      title: '2. Pay safely on site in your preferred currency',
+      body: 'Final Euro totals can be paid directly by card, Apple Pay, or Google Pay in your selected currency at official reference exchange rates shown at checkout.',
     },
     {
       title: '3. Register your account and access instant digital passes',
@@ -319,7 +319,7 @@ const EN_PACK: SinglePassCopyPack = {
   drawerEmptyTitle: 'Your cart is empty',
   drawerEmptyBody: 'Add any confirmed-price Single Pass, Gala Dinner, or Club Ticket from eligible event pages or our storefront.',
   drawerExploreCta: 'Browse Confirmed Packages',
-  drawerSubtotalLabel: 'Packages base subtotal (EUR)',
+  drawerSubtotalLabel: 'Venue price (EUR)',
   drawerCheckoutCta: 'Go to Checkout',
   drawerCartCta: 'View Full Cart',
   drawerAccountCta: 'Reserved Area',
@@ -350,7 +350,7 @@ const EN_PACK: SinglePassCopyPack = {
   formLanguages: 'Spoken Languages',
   formDietary: 'Menu selection (Land/Sea) or dietary notes',
   formTermsLabel:
-    'I accept the Terms & Conditions, Privacy Policy, and Refund Policy of nightlifemilan.com, acknowledge the +15% Booking, Concierge & Entry Fee, and confirm venue age requirements.',
+    'I accept the Terms & Conditions, Privacy Policy, and Refund Policy of nightlifemilan.com, acknowledge the Booking fee 20% (concierge & electronic payment), and confirm venue age requirements.',
   termsPolicyLabel: 'Terms & Conditions',
   privacyPolicyLabel: 'Privacy Policy',
   refundPolicyLabel: 'Refund Policy',
@@ -409,7 +409,7 @@ const EN_PACK: SinglePassCopyPack = {
   },
   embeddedBannerTitle: 'Buy confirmed-price tickets directly online',
   embeddedBannerBody:
-    'Official Euro prices converted live at checkout into your currency (+15% Booking, Concierge Service & Entry Fee). Complete payment securely on nightlifemilan.com.',
+    'Final per-person prices, secure card payment directly on nightlifemilan.com in your preferred currency.',
   embeddedBannerCta: 'Explore Single Pass Shop',
 };
 
@@ -431,13 +431,16 @@ export const SINGLE_PASS_COPY_35: Readonly<Record<LocaleCode, SinglePassCopyPack
   es: makeLocalePack({
     seoTitle: 'Single Pass Nochevieja Milán 2027 · Tienda Oficial Online',
     seoDescription:
-      'Single Pass Nochevieja Milán 2027 para quienes van solos: 8 clubes confirmados por edad, pago directo en el sitio en tu moneda (+15% fee), mini-grupo WhatsApp desde el 20/12.',
+      'Single Pass Nochevieja Milán 2027 para quienes van solos: 8 clubes confirmados por edad, precios finales con pago seguro con tarjeta, mini-grupo WhatsApp desde el 20/12.',
     navCartLabel: 'Carrito',
     navAccountLabel: 'Mi Cuenta',
     heroH1: 'Single Pass Nochevieja Milán 2027: elige tu club por edad y paga en el sitio',
-    trustOnlinePayment: 'Pago directo 100% en el sitio con conversión de moneda (+15% fee transparente)',
+    trustOnlinePayment: 'Precios finales por persona, pago seguro con tarjeta en el sitio',
     trustEqualPrice: 'Mismo precio exacto para hombres y mujeres en todos los paquetes',
     trustWhatsAppDate: 'Mini-grupo oficial de WhatsApp activo desde el 20 de diciembre de 2026',
+    basePriceLabel: 'Precio del local (EUR)',
+    drawerSubtotalLabel: 'Precio del local (EUR)',
+    feeLabel: 'Booking fee 20% · asesoría concierge y pago electrónico',
     addToCartCta: 'Añadir al Carrito',
     buyNowCta: 'Comprar Ahora',
     drawerTitle: 'Tu Carrito',
@@ -456,13 +459,16 @@ export const SINGLE_PASS_COPY_35: Readonly<Record<LocaleCode, SinglePassCopyPack
   fr: makeLocalePack({
     seoTitle: 'Single Pass Nouvel An Milan 2027 · Billetterie Officielle',
     seoDescription:
-      'Single Pass Saint-Sylvestre Milan 2027 pour personnes seules : 8 clubs par âge, paiement intégré sur le site (+15% frais), mini-groupe WhatsApp dès le 20/12.',
+      'Single Pass Saint-Sylvestre Milan 2027 pour personnes seules : 8 clubs par âge, tarifs finaux avec paiement sécurisé par carte, mini-groupe WhatsApp dès le 20/12.',
     navCartLabel: 'Panier',
     navAccountLabel: 'Mon Compte',
     heroH1: 'Single Pass Nouvel An Milan 2027 : choisissez votre club par âge et réservez ici',
-    trustOnlinePayment: 'Paiement direct sécurisé sur le site avec conversion de devise (+15% frais)',
+    trustOnlinePayment: 'Tarifs finaux par personne, paiement sécurisé par carte sur le site',
     trustEqualPrice: 'Tarif strictement identique femmes et hommes sur toutes les formules',
     trustWhatsAppDate: 'Mini-groupe WhatsApp officiel activé dès le 20 décembre 2026',
+    basePriceLabel: 'Tarif du lieu (EUR)',
+    drawerSubtotalLabel: 'Tarif du lieu (EUR)',
+    feeLabel: 'Booking fee 20% · conseil conciergerie et paiement électronique',
     addToCartCta: 'Ajouter au Panier',
     buyNowCta: 'Acheter Maintenant',
     drawerTitle: 'Votre Panier',
@@ -481,13 +487,16 @@ export const SINGLE_PASS_COPY_35: Readonly<Record<LocaleCode, SinglePassCopyPack
   de: makeLocalePack({
     seoTitle: 'Single Pass Silvester Mailand 2027 · Offizieller Online-Shop',
     seoDescription:
-      'Silvester Mailand 2027 Single Pass für Alleinreisende: 8 bestätigte Clubs nach Alter, direkte Zahlung auf der Website in Ihrer Währung (+15% Gebühr), WhatsApp-Gruppe ab 20.12.',
+      'Silvester Mailand 2027 Single Pass für Alleinreisende: 8 bestätigte Clubs nach Alter, Endpreise mit sicherer Kartenzahlung direkt auf der Website, WhatsApp-Gruppe ab 20.12.',
     navCartLabel: 'Warenkorb',
     navAccountLabel: 'Konto',
     heroH1: 'Single Pass Silvester Mailand 2027: Club nach Alter wählen & direkt buchen',
-    trustOnlinePayment: 'Direkte Zahlung auf der Website inkl. Währungsumrechnung (+15% Servicegebühr)',
+    trustOnlinePayment: 'Endpreise pro Person, sichere Kartenzahlung direkt auf der Website',
     trustEqualPrice: 'Einheitliche Preise für Frauen und Männer bei allen Paketen',
     trustWhatsAppDate: 'Offizielle WhatsApp-Minigruppen starten ab dem 20. Dezember 2026',
+    basePriceLabel: 'Lokalpreis (EUR)',
+    drawerSubtotalLabel: 'Lokalpreis (EUR)',
+    feeLabel: 'Booking fee 20% · Concierge-Beratung & elektronische Zahlung',
     addToCartCta: 'In den Warenkorb',
     buyNowCta: 'Jetzt Kaufen',
     drawerTitle: 'Warenkorb',
@@ -635,53 +644,53 @@ export function getSinglePassCopy(locale: string): SinglePassCopyPack {
   );
 }
 
-const FEE_LABEL_BY_LOCALE_35: Record<LocaleCode, string> = {
-  en: 'Booking, Concierge & Payment Fee',
-  it: 'Commissione Booking, Concierge e Pagamento',
-  es: 'Comisión de reserva, concierge y pago',
-  fr: 'Frais de réservation, conciergerie et paiement',
-  de: 'Buchungs-, Concierge- und Zahlungsgebühr',
-  pt: 'Taxa de reserva, concierge e pagamento',
-  nl: 'Boekings-, conciërge- en betalingskosten',
-  ru: 'Сбор за бронирование, консьерж и оплату',
-  tr: 'Rezervasyon, concierge ve ödeme ücreti',
-  zh: '预订、礼宾及支付服务费',
-  ar: 'رسوم الحجز والكونسيرج والدفع',
-  bg: 'Такса за резервация, консиерж и плащане',
-  hr: 'Naknada za rezervaciju, concierge i plaćanje',
-  cs: 'Poplatek za rezervaci, concierge a platbu',
-  da: 'Booking-, concierge- og betalingsgebyr',
-  et: 'Broneerimis-, concierge- ja maksetasu',
-  fi: 'Varaus-, concierge- ja maksumaksu',
-  el: 'Τέλος κράτησης, concierge και πληρωμής',
-  hu: 'Foglalási, concierge és fizetési díj',
-  ga: 'Táille áirithinte, concierge agus íocaíochta',
-  lv: 'Rezervācijas, konsjerža un maksājuma maksa',
-  lt: 'Rezervacijos, konsjeržo ir mokėjimo mokestis',
-  mt: 'Ħlas ta’ prenotazzjoni, concierge u pagament',
-  pl: 'Opłata za rezerwację, concierge i płatność',
-  ro: 'Taxă de rezervare, concierge și plată',
-  sk: 'Poplatok za rezerváciu, concierge a platbu',
-  sl: 'Provizija za rezervacijo, concierge in plačilo',
-  sv: 'Boknings-, concierge- och betalningsavgift',
-  no: 'Bestillings-, concierge- og betalingsgebyr',
-  is: 'Bókunar-, móttöku- og greiðslugjald',
-  uk: 'Збір за бронювання, консьєрж та оплату',
-  sq: 'Tarifa e rezervimit, concierge dhe pagesës',
-  sr: 'Naknada za rezervaciju, concierge i plaćanje',
-  bs: 'Naknada za rezervaciju, concierge i plaćanje',
-  mk: 'Надомест за резервација, консиерж и плаќање',
+const FEE_DETAIL_BY_LOCALE_35: Record<LocaleCode, string> = {
+  en: 'concierge & electronic payment',
+  it: 'consulenza concierge e pagamento elettronico',
+  es: 'asesoría concierge y pago electrónico',
+  fr: 'conseil conciergerie et paiement électronique',
+  de: 'Concierge-Beratung & elektronische Zahlung',
+  pt: 'consultoria concierge e pagamento eletrónico',
+  nl: 'conciërge-advies en elektronische betaling',
+  ru: 'консьерж-поддержка и электронная оплата',
+  tr: 'concierge danışmanlığı ve elektronik ödeme',
+  zh: '礼宾咨询与电子支付服务',
+  ar: 'استشارة الكونسيرج والدفع الإلكتروني',
+  bg: 'консиерж съдействие и електронно плащане',
+  hr: 'concierge savjetovanje i elektroničko plaćanje',
+  cs: 'concierge poradenství a elektronická platba',
+  da: 'concierge-rådgivning og elektronisk betaling',
+  et: 'concierge-nõustamine ja elektrooniline makse',
+  fi: 'concierge-neuvonta ja sähköinen maksu',
+  el: 'συμβουλευτική concierge και ηλεκτρονική πληρωμή',
+  hu: 'concierge tanácsadás és elektronikus fizetés',
+  ga: 'comhairle concierge agus íocaíocht leictreonach',
+  lv: 'konsjerža konsultācija un elektroniskais maksājums',
+  lt: 'konsjeržo konsultacija ir elektroninis mokėjimas',
+  mt: 'konsulenza concierge u pagament elettroniku',
+  pl: 'doradztwo concierge i płatność elektroniczna',
+  ro: 'consultanță concierge și plată electronică',
+  sk: 'concierge poradenstvo a elektronická platba',
+  sl: 'concierge svetovanje in elektronsko plačilo',
+  sv: 'concierge-rådgivning och elektronisk betalning',
+  no: 'concierge-rådgivning og elektronisk betaling',
+  is: 'concierge-ráðgjöf og rafræn greiðsla',
+  uk: 'консьєрж-підтримка та електронна оплата',
+  sq: 'këshillim concierge dhe pagesë elektronike',
+  sr: 'concierge savetovanje i elektronsko plaćanje',
+  bs: 'concierge savjetovanje i elektronsko plaćanje',
+  mk: 'консиерж советување и електронско плаќање',
 };
 
 export function formatFeeLabel35(locale: string, feeRate: number, isMixed = false): string {
-  const base =
-    (FEE_LABEL_BY_LOCALE_35 as Record<string, string>)[locale] ||
-    FEE_LABEL_BY_LOCALE_35[DEFAULT_LOCALE];
+  const detail =
+    (FEE_DETAIL_BY_LOCALE_35 as Record<string, string>)[locale] ||
+    FEE_DETAIL_BY_LOCALE_35[DEFAULT_LOCALE];
   if (isMixed) {
-    return `${base} (15% / 20%)`;
+    return `Booking fee (15% / 20%) · ${detail}`;
   }
   const pct = Math.round(feeRate * 100);
-  return `+${pct}% ${base}`;
+  return `Booking fee ${pct}% · ${detail}`;
 }
 
 export type TerrazzaCheckoutUiPack = {
@@ -712,7 +721,7 @@ const TERRAZZA_UI_EN: TerrazzaCheckoutUiPack = {
   allergiesRequiredError:
     'Please state any allergies or intolerances (or click No allergies) before proceeding.',
   termsNotice20:
-    'I accept the Terms & Conditions, Privacy Policy, and Refund Policy of nightlifemilan.com, acknowledge the +20% Booking, Concierge & Payment Fee on Terrazza Duomo 21 / MA.RE packages, and accept official venue rules.',
+    'I accept the Terms & Conditions, Privacy Policy, and Refund Policy of nightlifemilan.com, acknowledge the Booking fee 20% (concierge & electronic payment), and accept official venue rules.',
   confirmationRefundNotice:
     'Booking confirmed by Nightlife Milan after verifying availability with the venue; if the package is no longer available, full refund.',
   entryCheckpointNotice:
@@ -733,7 +742,7 @@ const TERRAZZA_UI_IT: TerrazzaCheckoutUiPack = {
   allergiesRequiredError:
     'Indica eventuali allergie o intolleranze alimentari (oppure clicca Nessuna allergia) per proseguire.',
   termsNotice20:
-    'Accetto Termini e Condizioni, Privacy Policy e Politica di Rimborso di nightlifemilan.com, confermo la commissione del +20% di booking, concierge e pagamento per Terrazza Duomo 21 / MA.RE e le condizioni ufficiali del locale.',
+    'Accetto Termini e Condizioni, Privacy Policy e Politica di Rimborso di nightlifemilan.com, confermo la Booking fee 20% (consulenza concierge e pagamento elettronico) e le condizioni ufficiali del locale.',
   confirmationRefundNotice:
     'Prenotazione confermata da Nightlife Milan dopo la verifica della disponibilità col locale; se il pacchetto non è più disponibile, rimborso completo.',
   entryCheckpointNotice:

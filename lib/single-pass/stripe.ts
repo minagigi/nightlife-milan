@@ -3,6 +3,7 @@ import { localePrefix } from '@/lib/i18n/locales';
 import { sendAttendeeEmail } from '@/lib/emailTransport';
 import { SINGLE_PASS_FEE_RATE } from './catalog';
 import { buildSinglePassOrderEmail, buildStaffActivationEmail } from './email';
+import { formatFeeLabel35 } from './i18n35';
 import {
   getOrderById,
   readStripeVaultConfig,
@@ -255,11 +256,22 @@ export function buildCheckoutSessionParams(order: SinglePassOrder, siteOrigin: s
 
   const feeIdx = order.items.length;
   const fp = `line_items[${feeIdx}]`;
-  const effectiveFeeRate = typeof order.feeRate === 'number' ? order.feeRate : SINGLE_PASS_FEE_RATE;
-  const feePctLabel = Math.round(effectiveFeeRate * 100);
+  const distinctRates = new Set(
+    order.items.map((item) =>
+      typeof item.feeRate === 'number' ? item.feeRate : SINGLE_PASS_FEE_RATE,
+    ),
+  );
+  const isMixed = distinctRates.size > 1;
+  const effectiveFeeRate =
+    distinctRates.size === 1
+      ? Array.from(distinctRates)[0]
+      : typeof order.feeRate === 'number'
+        ? order.feeRate
+        : SINGLE_PASS_FEE_RATE;
+  const feeLineName = formatFeeLabel35(order.locale, effectiveFeeRate, isMixed);
   params.set(`${fp}[price_data][currency]`, 'eur');
   params.set(`${fp}[price_data][unit_amount]`, String(order.feeCents));
-  params.set(`${fp}[price_data][product_data][name]`, `Booking, Concierge Service & Payment Fee (+${feePctLabel}%)`);
+  params.set(`${fp}[price_data][product_data][name]`, feeLineName);
   params.set(`${fp}[quantity]`, '1');
 
   params.set('metadata[order_id]', order.id);

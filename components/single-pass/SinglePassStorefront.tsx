@@ -450,15 +450,7 @@ export default function SinglePassStorefront({
                           </div>
 
                           <div className="mt-5 border-t border-[#050505]/15 pt-4">
-                            <div className="space-y-1 font-mono text-xs">
-                              <div className="flex justify-between text-[#3D3830]">
-                                <span>{copy.basePriceLabel}</span>
-                                <span>{formatEurFromCents(price.unitBaseCents, locale)}</span>
-                              </div>
-                              <div className="flex justify-between text-[#3D3830]">
-                                <span>+15% Fee</span>
-                                <span>+{formatEurFromCents(price.unitFeeCents, locale)}</span>
-                              </div>
+                            <div className="font-mono text-xs">
                               <div className="flex items-baseline justify-between pt-1 text-base font-extrabold text-[#050505]">
                                 <span>{copy.totalLabel}</span>
                                 <span>

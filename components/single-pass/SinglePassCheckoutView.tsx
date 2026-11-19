@@ -35,6 +35,10 @@ type PaymentIntentSession = {
   clientSecret: string;
   presentmentCurrency: string;
   presentmentTotalMinor: number;
+  subtotalBaseCents: number;
+  feeCents: number;
+  feeRate: number;
+  hasMixedFeeRates: boolean;
   totalEurCents: number;
   fxRate: number;
   fullName: string;
@@ -75,10 +79,6 @@ export default function SinglePassCheckoutView({
 
   const copy = getSinglePassCopy(locale);
   const terrazzaUi = getTerrazzaCheckoutUi35(locale);
-  const feeLabel = formatFeeLabel35(locale, effectiveFeeRate, hasMixedFeeRates);
-  const headerFeeTag = hasMixedFeeRates
-    ? '15% / 20% FEE'
-    : `+${Math.round(effectiveFeeRate * 100)}% FEE`;
   const lp = localePrefix(locale);
   const isIt = locale === 'it';
 
@@ -98,6 +98,12 @@ export default function SinglePassCheckoutView({
   const [submitting, setSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [paymentSession, setPaymentSession] = useState<PaymentIntentSession | null>(null);
+  const activeFeeRate = paymentSession ? paymentSession.feeRate : effectiveFeeRate;
+  const activeMixed = paymentSession ? paymentSession.hasMixedFeeRates : hasMixedFeeRates;
+  const feeLabel = formatFeeLabel35(locale, activeFeeRate, activeMixed);
+  const headerFeeTag = activeMixed
+    ? '15% / 20% FEE'
+    : `BOOKING FEE ${Math.round(activeFeeRate * 100)}%`;
 
   useEffect(() => {
     fetch('/api/single-pass/me', { cache: 'no-store' })
@@ -130,6 +136,7 @@ export default function SinglePassCheckoutView({
           | (PaymentIntentSession & {
               ok?: boolean;
               error?: string;
+              items?: Array<{ feeRate?: number }>;
               customer?: { fullName?: string; email?: string; whatsapp?: string };
             })
           | null;
@@ -139,12 +146,35 @@ export default function SinglePassCheckoutView({
           );
           return;
         }
+        const itemRates = new Set(
+          (data.items || [])
+            .map((it) => it.feeRate)
+            .filter((r): r is number => typeof r === 'number'),
+        );
+        const resumedFeeRate =
+          typeof data.feeRate === 'number'
+            ? data.feeRate
+            : itemRates.size === 1
+              ? Array.from(itemRates)[0]
+              : 0.2;
+        const resumedFeeCents =
+          typeof data.feeCents === 'number'
+            ? data.feeCents
+            : Math.round(data.totalEurCents - data.totalEurCents / (1 + resumedFeeRate));
+        const resumedSubtotalBaseCents =
+          typeof data.subtotalBaseCents === 'number'
+            ? data.subtotalBaseCents
+            : Math.max(0, data.totalEurCents - resumedFeeCents);
         setPaymentSession({
           orderId: data.orderId,
           publishableKey: data.publishableKey,
           clientSecret: data.clientSecret,
           presentmentCurrency: data.presentmentCurrency || 'EUR',
           presentmentTotalMinor: data.presentmentTotalMinor,
+          subtotalBaseCents: resumedSubtotalBaseCents,
+          feeCents: resumedFeeCents,
+          feeRate: resumedFeeRate,
+          hasMixedFeeRates: itemRates.size > 1,
           totalEurCents: data.totalEurCents,
           fxRate: data.fxRate || 1,
           fullName: data.customer?.fullName || fullName,
@@ -253,6 +283,9 @@ export default function SinglePassCheckoutView({
         orderId?: string;
         clientSecret?: string;
         publishableKey?: string;
+        subtotalBaseCents?: number;
+        feeCents?: number;
+        feeRate?: number;
         totalEurCents?: number;
         presentmentCurrency?: string;
         presentmentTotalMinor?: number;
@@ -273,6 +306,10 @@ export default function SinglePassCheckoutView({
         clientSecret: data.clientSecret,
         presentmentCurrency: data.presentmentCurrency || currency,
         presentmentTotalMinor: data.presentmentTotalMinor ?? grandTotalCents,
+        subtotalBaseCents: data.subtotalBaseCents ?? subtotalBaseCents,
+        feeCents: data.feeCents ?? totalFeeCents,
+        feeRate: data.feeRate ?? effectiveFeeRate,
+        hasMixedFeeRates,
         totalEurCents: data.totalEurCents ?? grandTotalCents,
         fxRate: data.fxRate ?? currentFxRate,
         fullName,
@@ -372,25 +409,45 @@ export default function SinglePassCheckoutView({
                 <p>{paymentSession.email}</p>
                 <p className="font-mono">{paymentSession.phone}</p>
               </div>
-              <div className="border-t border-[#F6F1E7]/12 pt-3 text-sm space-y-1.5">
-                <div className="flex justify-between font-mono text-[#EAE3D5]">
-                  <span>{copy.eurOriginalLabel}</span>
-                  <span>{formatEurFromCents(paymentSession.totalEurCents, locale)}</span>
-                </div>
-                <div className="flex justify-between font-mono text-base font-bold text-[#C9A84C]">
-                  <span>{paymentSession.presentmentCurrency}</span>
-                  <span>
-                    {formatMinorCurrency(
-                      paymentSession.presentmentTotalMinor,
-                      paymentSession.presentmentCurrency,
-                      locale,
-                    )}
+              <div className="border-t border-[#F6F1E7]/12 pt-3 text-sm space-y-2">
+                <div className="flex justify-between text-[#C2B9AA]">
+                  <span>{copy.basePriceLabel}</span>
+                  <span className="font-mono">
+                    {formatEurFromCents(paymentSession.subtotalBaseCents, locale)}
                   </span>
                 </div>
+                <div className="flex justify-between text-[#EAE3D5]">
+                  <span>
+                    {formatFeeLabel35(
+                      locale,
+                      paymentSession.feeRate,
+                      paymentSession.hasMixedFeeRates,
+                    )}
+                  </span>
+                  <span className="font-mono">
+                    +{formatEurFromCents(paymentSession.feeCents, locale)}
+                  </span>
+                </div>
+                <div className="flex justify-between border-t border-[#F6F1E7]/12 pt-2 font-mono text-base font-bold text-[#F6F1E7]">
+                  <span>{copy.totalLabel} (EUR)</span>
+                  <span>{formatEurFromCents(paymentSession.totalEurCents, locale)}</span>
+                </div>
                 {paymentSession.presentmentCurrency !== 'EUR' && (
-                  <p className="text-right font-mono text-[11px] text-[#8E8577]">
-                    FX: 1 EUR = {paymentSession.fxRate.toFixed(4)} {paymentSession.presentmentCurrency}
-                  </p>
+                  <>
+                    <div className="flex justify-between font-mono text-base font-bold text-[#C9A84C]">
+                      <span>{paymentSession.presentmentCurrency}</span>
+                      <span>
+                        {formatMinorCurrency(
+                          paymentSession.presentmentTotalMinor,
+                          paymentSession.presentmentCurrency,
+                          locale,
+                        )}
+                      </span>
+                    </div>
+                    <p className="text-right font-mono text-[11px] text-[#8E8577]">
+                      FX: 1 EUR = {paymentSession.fxRate.toFixed(4)} {paymentSession.presentmentCurrency}
+                    </p>
+                  </>
                 )}
               </div>
             </div>

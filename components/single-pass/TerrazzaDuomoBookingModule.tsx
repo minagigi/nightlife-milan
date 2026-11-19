@@ -12,7 +12,7 @@ import {
 } from '@/lib/single-pass/catalog';
 
 const getSkuById = (id: string) => SKU_BY_ID.get(id);
-import { formatFeeLabel35, getSinglePassCopy, getTerrazzaCheckoutUi35 } from '@/lib/single-pass/i18n35';
+import { getSinglePassCopy, getTerrazzaCheckoutUi35 } from '@/lib/single-pass/i18n35';
 import { useSinglePassCart } from './SinglePassCartContext';
 
 type FloorTab = 'f1' | 'f5';
@@ -48,8 +48,6 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
   const [bundleFormulaId, setBundleFormulaId] = useState<string>('terrazza21-f1-brindisi');
   const [bundleGuests, setBundleGuests] = useState<number>(4);
 
-  const feeLabel = formatFeeLabel35(locale, TERRAZZA_DUOMO_FEE_RATE, false);
-
   const getQty = (key: string) => quantities[key] ?? 2;
   const setQty = (key: string, next: number) =>
     setQuantities((prev) => ({ ...prev, [key]: Math.max(1, Math.min(20, next)) }));
@@ -81,10 +79,9 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
       TERRAZZA_DUOMO_FEE_RATE,
     );
     return {
-      baseCents: t.lineBaseCents + f.lineBaseCents,
-      feeCents: t.lineFeeCents + f.lineFeeCents,
       totalCents: t.lineTotalCents + f.lineTotalCents,
       tableTotalCents: t.lineTotalCents,
+      formulaUnitTotalCents: f.unitTotalCents,
       formulaTotalCents: f.lineTotalCents,
     };
   }, [tableSku, pairedFormulaSku, safeBundleGuests]);
@@ -142,9 +139,7 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
             : 'Book Terrazza Duomo 21 (1st Floor) & Terrazza MA.RE (5th Floor)'}
         </h2>
         <p className="mt-1.5 text-sm text-[#24201B]">
-          {isIt
-            ? 'Tariffe ufficiali dei due piani con commissione booking, concierge e pagamento del +20% trasparente al checkout. Pagamento sicuro sul sito nella tua valuta.'
-            : 'Official rates for both floors with transparent +20% booking, concierge & payment fee at checkout. Encrypted on-site payment in your currency.'}
+          {copy.trustOnlinePayment}
         </p>
 
         {/* Floor Switcher Tabs */}
@@ -291,7 +286,6 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
                     </div>
                     <div className="text-right font-mono text-xs">
                       <span className="block text-[#3D3830]">
-                        {formatEurFromCents(p.unitBaseCents, locale)} + 20% ={' '}
                         <strong>{formatEurFromCents(p.unitTotalCents, locale)}</strong> / pax
                       </span>
                       <strong className="text-sm text-[#050505]">
@@ -377,7 +371,6 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
                     </div>
                     <div className="text-right font-mono text-xs">
                       <span className="block text-[#3D3830]">
-                        {formatEurFromCents(p.unitBaseCents, locale)} + 20% ={' '}
                         <strong>{formatEurFromCents(p.unitTotalCents, locale)}</strong> / pax
                       </span>
                       <strong className="text-sm text-[#050505]">
@@ -467,7 +460,9 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
                     <strong className="block">
                       {isIt ? 'Tavolo in Terrazza (max 4 pax)' : 'Terrace Table (max 4 guests)'}
                     </strong>
-                    <span className="font-mono text-[11px] text-[#C9A84C]">600€ + 20% = 720€</span>
+                    <span className="font-mono text-[11px] text-[#C9A84C]">
+                      {isIt ? '720€' : '€720'}
+                    </span>
                   </button>
                   <button
                     type="button"
@@ -484,7 +479,9 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
                     <strong className="block">
                       {isIt ? 'Terrazzino Privato (max 8 pax)' : 'Private Terrace (max 8 guests)'}
                     </strong>
-                    <span className="font-mono text-[11px] text-[#C9A84C]">1.200€ + 20% = 1.440€</span>
+                    <span className="font-mono text-[11px] text-[#C9A84C]">
+                      {isIt ? '1.440€' : '€1,440'}
+                    </span>
                   </button>
                 </div>
               </div>
@@ -543,12 +540,22 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
             <div className="flex flex-col justify-between border border-[#F6F1E7]/15 bg-[#050505] p-4">
               <div className="space-y-1.5 font-mono text-xs">
                 <div className="flex justify-between text-[#C2B9AA]">
-                  <span>{isIt ? 'Base pacchetto' : 'Package base'}</span>
-                  <span>{formatEurFromCents(bundlePricing.baseCents, locale)}</span>
+                  <span>
+                    {floor === 'f1' && f1TableType === 'private8'
+                      ? isIt
+                        ? 'Terrazzino Privato'
+                        : 'Private Terrace'
+                      : isIt
+                        ? 'Tavolo in Terrazza'
+                        : 'Terrace Table'}
+                  </span>
+                  <span>{formatEurFromCents(bundlePricing.tableTotalCents, locale)}</span>
                 </div>
                 <div className="flex justify-between text-[#C2B9AA]">
-                  <span>{feeLabel}</span>
-                  <span>+{formatEurFromCents(bundlePricing.feeCents, locale)}</span>
+                  <span>
+                    {safeBundleGuests} × {formatEurFromCents(bundlePricing.formulaUnitTotalCents, locale)}
+                  </span>
+                  <span>{formatEurFromCents(bundlePricing.formulaTotalCents, locale)}</span>
                 </div>
                 <div className="flex justify-between border-t border-[#F6F1E7]/15 pt-2 text-base font-bold text-[#F6F1E7]">
                   <span>{copy.totalLabel}</span>

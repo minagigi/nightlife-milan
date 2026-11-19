@@ -84,8 +84,8 @@ export default function CapodannoDetailView({ locale, event }: Props) {
             ? 'Concierge WhatsApp · Terrazza Duomo 21 & MA.RE'
             : 'WhatsApp Concierge · Terrazza Duomo 21 & MA.RE',
           bookingSubtitle: isIt
-            ? 'Prenota direttamente online qui sopra (+20% fee inclusa) oppure contatta il Concierge Nightlife Milan per gruppi numerosi e richieste speciali su WhatsApp +39 351 912 7047.'
-            : 'Book directly online above (+20% fee included) or message Nightlife Milan Concierge for large groups and special requests on WhatsApp +39 351 912 7047.',
+            ? 'Prenota direttamente online qui sopra con pagamento sicuro con carta oppure contatta il Concierge Nightlife Milan per gruppi numerosi e richieste speciali su WhatsApp +39 351 912 7047.'
+            : 'Book directly online above with secure card payment or message Nightlife Milan Concierge for large groups and special requests on WhatsApp +39 351 912 7047.',
         }
       : baseUi;
   const scarcity = partyCopy

@@ -174,8 +174,8 @@ function buildSectionsEn(kind: LegalDocKind, brandNotice: string): LegalSection[
         body: `${c.domain} markets and sells confirmed nightlife tickets, gala dinners, shared Single Pass placements, and VIP table allocations solely for venues and events with verified contractual pricing. Events displayed with prior-edition estimates or "price upon request" labels are editorial guides only and cannot be placed in the cart.`,
       },
       {
-        heading: '3. EUR Pricing, +15% Booking/Concierge/Entry Fee and Currency Conversion',
-        body: `Canonical contract prices are denominated in Euro (EUR). Each online Single Pass or event reservation transparently itemizes a 15% Booking, Concierge Service & Entry Fee covering priority list management, guest coordination, identity matching, and 24/7 WhatsApp concierge desk (${c.phone}). At checkout, the EUR total may be converted in real time to your preferred billing currency using official reference exchange rates displayed prior to authorization.`,
+        heading: '3. EUR Pricing, 20% Booking Fee and Currency Conversion',
+        body: `Canonical venue prices are denominated in Euro (EUR). At cart and checkout, each online booking itemizes the venue price, the 20% Booking fee (concierge consultation and electronic payment) covering priority list management, guest coordination, identity matching, electronic payment processing, and 24/7 WhatsApp concierge desk (${c.phone}), and the final total. At checkout, the EUR total may be converted in real time to your preferred billing currency using official reference exchange rates displayed prior to authorization.`,
       },
       {
         heading: '4. Embedded On-Site Payment & Account Registration',
@@ -272,8 +272,8 @@ function buildSectionsIt(kind: LegalDocKind, brandNotice: string): LegalSection[
         body: `Su ${c.domain} il carrello e l’acquisto diretto sono abilitati esclusivamente per locali, date speciali ed eventi dotati di tariffario ufficiale confermato (incluse le 8 strutture confermate di Capodanno 2027, Natale al Voya Rooftop, Capodanno Ortodosso al Just Me e le date di calendario con biglietti ufficiali disponibili). Le schede con prezzi indicativi di edizioni passate o "su richiesta" hanno valore puramente informativo.`,
       },
       {
-        heading: '3. Prezzi in Euro, Commissione +15% e Conversione Valuta al Checkout',
-        body: `I listini base sono espressi in Euro (EUR). Su ogni formula acquistabile viene applicata in modo trasparente la maggiorazione del +15% per Booking, Concierge Service e Entry Fee (coordinamento lista nominale Nightlife Milan, abbinamento età/tavolo, assistenza 24/7 su ${c.phone}). Al checkout il totale in EUR può essere convertito in tempo reale nella valuta scelta dal cliente secondo il tasso di cambio mostrato prima della conferma.`,
+        heading: '3. Prezzi in Euro, Booking Fee 20% e Conversione Valuta al Checkout',
+        body: `I prezzi base dei locali sono espressi in Euro (EUR). Nel carrello, al checkout e nell’email di conferma ogni prenotazione online mostra in modo trasparente il prezzo del locale, la Booking fee 20% (consulenza concierge e pagamento elettronico: coordinamento lista nominale Nightlife Milan, abbinamento età/tavolo, pagamento elettronico, assistenza 24/7 su ${c.phone}) e il totale finale. Al checkout il totale in EUR può essere convertito in tempo reale nella valuta scelta dal cliente secondo il tasso di cambio mostrato prima della conferma.`,
       },
       {
         heading: '4. Pagamento Integrato sul Sito e Registrazione Cliente',

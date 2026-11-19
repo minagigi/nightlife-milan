@@ -536,7 +536,11 @@ export default function SinglePassAccountView({
                 );
                 const orderFeeLabel = formatFeeLabel35(
                   locale,
-                  typeof order.feeRate === 'number' ? order.feeRate : SINGLE_PASS_FEE_RATE,
+                  typeof order.feeRate === 'number'
+                    ? order.feeRate
+                    : feeRates.size === 1
+                      ? Array.from(feeRates)[0]
+                      : SINGLE_PASS_FEE_RATE,
                   feeRates.size > 1,
                 );
                 return (

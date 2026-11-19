@@ -4,6 +4,7 @@ import path from 'node:path';
 import test from 'node:test';
 import { ALL_35_LOCALES } from '../lib/i18n/localizedSlugs35';
 import {
+  CAPODANNO_CATEGORY_PAGES,
   getCapodannoEventBySlug,
   getCapodannoEventsForMode,
 } from '../lib/capodannoEvents';
@@ -36,7 +37,7 @@ import type { SinglePassOrder } from '../lib/single-pass/types';
 
 const REPO_ROOT = path.resolve(__dirname, '..');
 
-test('Terrazza Duomo 21 (1F) & Terrazza MA.RE (5F) SKUs compute exact +20% fee while Single Pass stays +15%', () => {
+test('Terrazza Duomo 21 (1F), Terrazza MA.RE (5F) & Single Pass SKUs all compute exact +20% fee (T-029b + T-029c)', () => {
   const expectedPrices: Record<string, [number, number, number]> = {
     'terrazza21-f1-dinner-place-rubia': [30000, 6000, 36000],
     'terrazza21-f1-dinner-place-ricciola': [30000, 6000, 36000],
@@ -59,13 +60,22 @@ test('Terrazza Duomo 21 (1F) & Terrazza MA.RE (5F) SKUs compute exact +20% fee w
     assert.equal(p.unitBaseCents, base);
     assert.equal(p.unitFeeCents, fee);
     assert.equal(p.unitTotalCents, total);
+    assert.equal(
+      /20%|15%|\bfee\b|commission|listino locale|venue rate/i.test(
+        `${sku.descriptionIt} ${sku.descriptionEn}`,
+      ),
+      false,
+      `Fee breakdown leaked in SKU description: ${skuId}`,
+    );
   }
 
-  // Single Pass SKU remains strictly 15%
+  // Single Pass SKUs are also 20% under T-029c
+  assert.equal(SINGLE_PASS_FEE_RATE, 0.2);
   const spSku = SKU_BY_ID.get('justme-club-entry')!;
-  assert.equal(getSkuFeeRate(spSku), SINGLE_PASS_FEE_RATE);
+  assert.equal(getSkuFeeRate(spSku), 0.2);
   const spPrice = computeSinglePassPrice(spSku.basePriceCents, 1, getSkuFeeRate(spSku));
-  assert.equal(spPrice.unitFeeCents, Math.round(spSku.basePriceCents * 0.15));
+  assert.equal(spPrice.unitFeeCents, Math.round(spSku.basePriceCents * 0.2));
+  assert.equal(spPrice.unitTotalCents, spPrice.unitBaseCents + spPrice.unitFeeCents);
 });
 
 test('Terrace table mandatory pairing validation enforces same-floor pairing and max capacity (4 / 8)', () => {
@@ -134,8 +144,10 @@ test('Terrace table mandatory pairing validation enforces same-floor pairing and
   assert.equal(valid5F.ok, true);
 });
 
-test('All 35 locales cover Terrazza Duomo 21 / MA.RE & Ceresio 7 closed with zero Stripe/!/em-dash/venue contacts', () => {
+test('All 35 locales cover Terrazza Duomo 21 / MA.RE & Ceresio 7 closed with zero Stripe/!/em-dash/venue contacts/public fee breakdown', () => {
   const forbiddenRe = /\bstripe\b|terrazzaduomo21\.it|marecapitaneo\.com|ceresio7\.com/i;
+  const forbiddenPublicFeeRe =
+    /20%|15%|\bfee\b|booking fee|commission|commissione|percentuale|comisión|gestión|frais|gebühr|taxa de|комисси|hizmet ücreti|服务费|رسوم|opłat|comision|προμήθεια|комісі|listino locale|venue rate/i;
 
   for (const loc of ALL_35_LOCALES) {
     const td = getTerrazzaDuomo21NyeContent(loc);
@@ -148,6 +160,11 @@ test('All 35 locales cover Terrazza Duomo 21 / MA.RE & Ceresio 7 closed with zer
     assert.equal(tdJson.includes('!'), false, `Exclamation in Terrazza ${loc}`);
     assert.equal(tdJson.includes('\u2014'), false, `Em-dash in Terrazza ${loc}`);
     assert.equal(forbiddenRe.test(tdJson), false, `Forbidden token in Terrazza ${loc}`);
+    assert.equal(
+      forbiddenPublicFeeRe.test(tdJson),
+      false,
+      `Public fee/percentage breakdown leaked in Terrazza ${loc}`,
+    );
 
     const c7 = getCeresio7ClosedNyeContent(loc);
     const c7Json = JSON.stringify(c7);
@@ -159,9 +176,47 @@ test('All 35 locales cover Terrazza Duomo 21 / MA.RE & Ceresio 7 closed with zer
     assert.equal(/100–350|350–1\.200|40–50€/.test(c7Json), false, `Invented prices in Ceresio 7 ${loc}`);
 
     const fee20 = formatFeeLabel35(loc, 0.2, false);
-    assert.ok(fee20.includes('20%'), `Missing 20% fee label in ${loc}`);
+    assert.ok(fee20.includes('Booking fee 20%'), `Missing Booking fee 20% label in ${loc}: ${fee20}`);
     const ui35 = getTerrazzaCheckoutUi35(loc);
     assert.ok(ui35.confirmationRefundNotice.length > 20);
+  }
+
+  assert.equal(
+    formatFeeLabel35('it', 0.2, false),
+    'Booking fee 20% · consulenza concierge e pagamento elettronico',
+  );
+  assert.equal(
+    formatFeeLabel35('en', 0.2, false),
+    'Booking fee 20% · concierge & electronic payment',
+  );
+
+  // Category pages (Rooftop, Couples) & raw capodannoEvents entry have zero fee breakdown
+  for (const catSlug of ['capodanno-rooftop-milano', 'capodanno-coppie-romantico-milano']) {
+    const def = CAPODANNO_CATEGORY_PAGES.find((c) => c.slug === catSlug);
+    assert.ok(def, `Missing category ${catSlug}`);
+    assert.equal(
+      forbiddenPublicFeeRe.test(`${def.subtitleIt} ${def.subtitleEn} ${def.quickAnswerIt} ${def.quickAnswerEn}`),
+      false,
+      `Fee leaked in category ${catSlug}`,
+    );
+  }
+  const tdRaw = getCapodannoEventBySlug('capodanno-terrazza-duomo-21')!;
+  assert.equal(forbiddenPublicFeeRe.test(JSON.stringify(tdRaw)), false, 'Fee leaked in raw Terrazza event');
+
+  // Public booking UI files must not show +15% / +20% / fee breakdown
+  for (const rel of [
+    'components/single-pass/TerrazzaDuomoBookingModule.tsx',
+    'components/single-pass/SinglePassStorefront.tsx',
+    'components/single-pass/SinglePassVenueModule.tsx',
+    'components/single-pass/ConfirmedEventTicketsBox.tsx',
+    'app/[locale]/single-pass/page.tsx',
+  ]) {
+    const src = fs.readFileSync(path.join(REPO_ROOT, rel), 'utf8');
+    assert.equal(
+      /\+\s*20%|\+\s*15%|20%\s*fee|15%\s*fee|booking fee|commissione|commission/i.test(src),
+      false,
+      `Public fee/percentage breakdown found in ${rel}`,
+    );
   }
 
   // Real photos exist on disk and are mapped in seoEventImages.ts
@@ -333,7 +388,10 @@ test('Post-payment emails generate localized customer confirmation/refund notice
   assert.equal(custMail.to, 'giulia@example.com');
   assert.ok(custMail.html.includes('verifica della disponibilità col locale'));
   assert.ok(custMail.html.includes('rimborso completo'));
-  assert.ok(custMail.html.includes('20%'));
+  assert.ok(custMail.html.includes('Prezzo del locale (EUR)'));
+  assert.ok(custMail.html.includes('Booking fee 20% · consulenza concierge e pagamento elettronico'));
+  assert.ok(custMail.text.includes('Prezzo del locale (EUR)'));
+  assert.ok(custMail.text.includes('Booking fee 20% · consulenza concierge e pagamento elettronico'));
   assert.ok(custMail.html.includes('Via Silvio Pellico 2'));
   assert.ok(custMail.html.includes('Intolleranza al lattosio'));
   assert.equal(/\bstripe\b/i.test(custMail.html), false);
@@ -508,11 +566,44 @@ test('End-to-end /api/single-pass/checkout POST enforces pairing/allergies and c
     assert.ok(savedOrder);
     assert.equal(savedOrder.feeRate, 0.2);
     assert.equal(savedOrder.customer.dietaryNotes, 'No shellfish for 1 guest');
-    assert.equal(capturedPaymentIntentBodies.length, 2);
+
+    // 5. T-029c Single Pass test-mode checkout: Bischeri Dinner €140 × 1.20 = €168 (€140 base + €28 fee)
+    const spRes = await checkoutPost(
+      mkPost({
+        locale: 'it',
+        currency: 'EUR',
+        items: [{ skuId: 'bischeri-dinner-terra', quantity: 1 }],
+        fullName: 'Luca Verdi',
+        email: 'luca.sp20@example.com',
+        whatsapp: '+39 348 1234567',
+        age: 52,
+        country: 'Italia',
+        acceptedTerms: true,
+      }),
+    );
+    assert.equal(spRes.status, 200);
+    const spOk = (await spRes.json()) as {
+      ok: boolean;
+      orderId: string;
+      subtotalBaseCents: number;
+      feeRate: number;
+      feeCents: number;
+      totalEurCents: number;
+    };
+    assert.equal(spOk.ok, true);
+    assert.equal(spOk.subtotalBaseCents, 14000);
+    assert.equal(spOk.feeRate, 0.2);
+    assert.equal(spOk.feeCents, 2800);
+    assert.equal(spOk.totalEurCents, 16800);
+
+    assert.equal(capturedPaymentIntentBodies.length, 3);
     assert.equal(capturedPaymentIntentBodies[0].get('amount'), '115200');
     assert.equal(capturedPaymentIntentBodies[0].get('metadata[fee_rate]'), '0.2');
     assert.equal(capturedPaymentIntentBodies[1].get('amount'), '216000');
     assert.equal(capturedPaymentIntentBodies[1].get('metadata[venue_net_eur_cents]'), '180000');
+    assert.equal(capturedPaymentIntentBodies[2].get('amount'), '16800');
+    assert.equal(capturedPaymentIntentBodies[2].get('metadata[fee_rate]'), '0.2');
+    assert.equal(capturedPaymentIntentBodies[2].get('metadata[venue_net_eur_cents]'), '14000');
   } finally {
     globalThis.fetch = origFetch;
     clearMemoryStoreForTests();

@@ -79,15 +79,15 @@ export default async function SinglePassPage({
     ? [
         {
           q: 'Come funziona il Single Pass Capodanno Milano 2027 per chi viene da solo?',
-          a: 'Scegli uno o più pacchetti tra i locali ufficiali confermati per fascia d’età, li aggiungi al carrello e completi il pagamento direttamente su questo sito (+15% Booking, Concierge Service & Entry Fee). Ricevi subito l’accesso alla tua Area Riservata e dal 20 dicembre 2026 entri nel mini-gruppo WhatsApp dedicato.',
+          a: 'Scegli uno o più pacchetti tra i locali ufficiali confermati per fascia d’età, li aggiungi al carrello e completi il pagamento sicuro con carta direttamente su questo sito. Ricevi subito l’accesso alla tua Area Riservata e dal 20 dicembre 2026 entri nel mini-gruppo WhatsApp dedicato.',
         },
         {
           q: 'Posso pagare direttamente sul sito nella mia valuta?',
-          a: 'Sì. I prezzi di listino sono espressi in Euro (EUR) e convertiti automaticamente in tempo reale nella tua valuta locale al checkout. Il pagamento avviene direttamente all’interno delle nostre pagine protette con carta, Apple Pay o Google Pay.',
+          a: 'Sì. I prezzi finali in Euro vengono convertiti automaticamente in tempo reale nella tua valuta locale al checkout. Il pagamento avviene direttamente all’interno delle nostre pagine protette con carta, Apple Pay o Google Pay.',
         },
         {
-          q: 'Perché viene applicato il +15% di Booking, Concierge Service & Entry Fee?',
-          a: 'Il supplemento fisso del +15% copre gestione prenotazione, abbinamento manuale per fascia d’età e lingua, apertura e moderazione del mini-gruppo WhatsApp dal 20 dicembre e ingresso prioritario coordinato in Lista o Tavolo NIGHTLIFE MILAN.',
+          q: 'Cosa include l’acquisto del Single Pass Nightlife Milan?',
+          a: 'Ogni pacchetto include l’accesso ufficiale al locale scelto, l’abbinamento per fascia d’età e lingua, il mini-gruppo WhatsApp attivo dal 20 dicembre e il coordinamento all’ingresso in Lista o Tavolo NIGHTLIFE MILAN.',
         },
         {
           q: 'Esiste uno sconto o incentivo donna sui pacchetti Single Pass?',
@@ -101,15 +101,15 @@ export default async function SinglePassPage({
     : [
         {
           q: 'How does the Milan NYE 2027 Single Pass work for solo guests?',
-          a: 'Choose your club by age bracket among our confirmed-price venues, add any package to the cart, and check out directly inside nightlifemilan.com (+15% Booking, Concierge Service & Entry Fee). You gain immediate Reserved Area access and join the venue WhatsApp mini-group from December 20, 2026.',
+          a: 'Choose your club by age bracket among our confirmed-price venues, add any package to the cart, and check out with secure card payment directly inside nightlifemilan.com. You gain immediate Reserved Area access and join the venue WhatsApp mini-group from December 20, 2026.',
         },
         {
           q: 'Can I pay directly on nightlifemilan.com in my local currency?',
-          a: 'Yes. Original Euro prices convert live at checkout into your preferred currency using official reference rates. Card, Apple Pay, and Google Pay payments are completed right inside our checkout without external redirects.',
+          a: 'Yes. Final Euro prices convert live at checkout into your preferred currency using official reference rates. Card, Apple Pay, and Google Pay payments are completed right inside our checkout without external redirects.',
         },
         {
-          q: 'Why is there a +15% Booking, Concierge Service & Entry Fee?',
-          a: 'The fixed +15% service fee covers confirmed reservation management, age and language table matching, December 20 WhatsApp mini-group moderation, and dedicated arrival coordination under Lista / Tavolo NIGHTLIFE MILAN.',
+          q: 'What is included with every Nightlife Milan Single Pass?',
+          a: 'Every package includes official entry to your selected venue, age and language table matching, December 20 WhatsApp mini-group access, and dedicated arrival coordination under Lista / Tavolo NIGHTLIFE MILAN.',
         },
         {
           q: 'Is there any discounted rate or incentive for women?',
@@ -244,8 +244,8 @@ export default async function SinglePassPage({
             </h3>
             <p className="mt-2">
               {isIt
-                ? `Festeggiare San Silvestro o una serata speciale a Milano quando si è da soli oppure in due amici significa poter accedere solo a listini reali e trasparenti. Su nightlifemilan.com ogni acquisto mostra l’importo base ufficiale in Euro più il +15% per Booking, Concierge Service & Entry Fee, convertito al momento del checkout nella tua valuta senza alcun costo nascosto. Assistenza 24/7: ${SITE_CONTACT.whatsapp.number} · concierge@nightlifemilan.com.`
-                : `Celebrating New Year’s Eve or flagship Milan nightlife dates on nightlifemilan.com guarantees verified official rate cards only. Every eligible ticket displays the canonical Euro tariff plus our transparent +15% Booking, Concierge Service & Entry Fee converted live at checkout, with dedicated WhatsApp concierge support on ${SITE_CONTACT.whatsapp.number} and concierge@nightlifemilan.com.`}
+                ? `Festeggiare San Silvestro o una serata speciale a Milano quando si è da soli oppure in due amici significa poter accedere solo a formule ufficiali confermate. Su nightlifemilan.com trovi i prezzi finali a persona in Euro, convertibili al checkout nella tua valuta con pagamento sicuro con carta. Assistenza 24/7: ${SITE_CONTACT.whatsapp.number} · concierge@nightlifemilan.com.`
+                : `Celebrating New Year’s Eve or flagship Milan nightlife dates on nightlifemilan.com guarantees verified official packages only. Every eligible ticket displays the final per-person Euro price converted live at checkout with secure card payment, backed by 24/7 WhatsApp concierge support on ${SITE_CONTACT.whatsapp.number} and concierge@nightlifemilan.com.`}
             </p>
           </div>
         </div>

@@ -134,7 +134,24 @@ test('Zero public Stripe wording exists across all public pages, UI components, 
     const pack = SINGLE_PASS_COPY_35[loc];
     assert.ok(pack, `Missing i18n pack for ${loc}`);
     assert.ok(pack.heroH1.length > 10, `Empty heroH1 for ${loc}`);
-    assert.ok(pack.feeLabel.includes('15%'), `Missing +15% fee mention in ${loc}`);
+    assert.ok(pack.feeLabel.includes('20%'), `Missing 20% fee mention in ${loc}`);
+    assert.equal(pack.feeLabel.includes('15%'), false, `Legacy 15% fee found in ${loc}`);
+    const publicPackFields = JSON.stringify({
+      seoTitle: pack.seoTitle,
+      seoDescription: pack.seoDescription,
+      heroEyebrow: pack.heroEyebrow,
+      heroH1: pack.heroH1,
+      heroSubtitle: pack.heroSubtitle,
+      trustOnlinePayment: pack.trustOnlinePayment,
+      howItWorksSteps: pack.howItWorksSteps,
+      embeddedBannerTitle: pack.embeddedBannerTitle,
+      embeddedBannerBody: pack.embeddedBannerBody,
+    });
+    assert.equal(
+      /15%|20%|\bfee\b|commission|frais|gebühr/i.test(publicPackFields),
+      false,
+      `Fee/percentage leaked into public Single Pass pack for ${loc}`,
+    );
     const serialized = JSON.stringify(pack);
     assert.equal(serialized.includes('!'), false, `Exclamation mark found in ${loc}`);
     assert.equal(serialized.includes('\u2014'), false, `Em-dash found in ${loc}`);
@@ -344,7 +361,7 @@ test('Order persistence, multi-currency PaymentIntent params (no receipt_email),
       ],
       totalHeadcount: 2,
       subtotalBaseCents: p.lineBaseCents,
-      feeRate: 0.15,
+      feeRate: SINGLE_PASS_FEE_RATE,
       feeCents: p.lineFeeCents,
       totalCents: p.lineTotalCents,
       currency: 'eur',
@@ -376,13 +393,14 @@ test('Order persistence, multi-currency PaymentIntent params (no receipt_email),
     await saveOrder(sampleOrder);
     const loadedOrder = await getOrderById(sampleOrder.id);
     assert.ok(loadedOrder);
-    assert.equal(loadedOrder.totalCents, 32200);
+    // 2 × €140 = €280 base + 20% (€56) = €336 (33600 cents); USD @ 1.1 = 36960 minor
+    assert.equal(loadedOrder.totalCents, 33600);
     assert.equal(loadedOrder.presentmentCurrency, 'USD');
-    assert.equal(loadedOrder.presentmentTotalMinor, 35420);
+    assert.equal(loadedOrder.presentmentTotalMinor, 36960);
 
     const piParams = buildPaymentIntentParams(loadedOrder);
     assert.equal(piParams.get('currency'), 'usd');
-    assert.equal(piParams.get('amount'), '35420');
+    assert.equal(piParams.get('amount'), '36960');
     assert.equal(piParams.get('payment_method_types[0]'), 'card');
     assert.equal(piParams.get('receipt_email'), null);
     assert.equal(piParams.get('metadata[order_id]'), sampleOrder.id);
@@ -463,7 +481,8 @@ test('JustMe Partenopea (2026-11-27) confirmed 6 EUR SKUs and strict 21+ age che
   assert.ok(dinner);
   assert.equal(dinner.basePriceCents, 7000);
   const breakdown = computeSinglePassPrice(dinner.basePriceCents, 1);
-  assert.equal(breakdown.unitTotalCents, 8050);
+  // €70 × 1.20 = €84 (8400 cents)
+  assert.equal(breakdown.unitTotalCents, 8400);
 
   const under18 = validateAgeForSkus(cspSkus, 17);
   assert.equal(under18.ok, false);

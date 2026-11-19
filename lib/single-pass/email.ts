@@ -291,6 +291,10 @@ export function buildSinglePassOrderEmail(
       <tbody>${linesHtml}</tbody>
       <tfoot>
         <tr>
+          <td style="padding:10px 8px;border-top:1px solid #333;color:#C2B9AA;">${escapeHtml(copy.basePriceLabel)}</td>
+          <td style="padding:10px 8px;border-top:1px solid #333;text-align:right;color:#EAE3D5;">${escapeHtml(formatEurFromCents(order.subtotalBaseCents, order.locale))}</td>
+        </tr>
+        <tr>
           <td style="padding:10px 8px;color:#C2B9AA;">${escapeHtml(feeLabel)}</td>
           <td style="padding:10px 8px;text-align:right;color:#EAE3D5;">${escapeHtml(formatEurFromCents(order.feeCents, order.locale))}</td>
         </tr>
@@ -345,6 +349,7 @@ export function buildSinglePassOrderEmail(
       const paxLabel = paxCount > 0 ? `${paxCount} pax` : terrazzaUi.tableAddonBadge;
       return `- ${i.venueName}: ${i.title} x${i.quantity} (${paxLabel})${i.dietaryChoice ? ` [${i.dietaryChoice}]` : ''} = ${formatEurFromCents(i.lineBaseCents, order.locale)}`;
     }),
+    `${copy.basePriceLabel}: ${formatEurFromCents(order.subtotalBaseCents, order.locale)}`,
     `${feeLabel}: ${formatEurFromCents(order.feeCents, order.locale)}`,
     `${copy.totalLabel} (EUR): ${eurStr}`,
     ...(paidCur !== 'EUR' ? [`Charged in ${paidCur}: ${paidStr} (1 EUR = ${order.fxRate})`] : []),

@@ -45,7 +45,7 @@ export default function ConfirmedEventTicketsBox({
         </div>
         <div className="inline-flex items-center gap-1.5 font-mono text-xs text-[#EAE3D5]">
           <ShieldCheck className="h-4 w-4 text-[#25D366]" aria-hidden="true" />
-          <span>{copy.feeLabel}</span>
+          <span>{copy.trustOnlinePayment}</span>
         </div>
       </div>
 
@@ -78,9 +78,7 @@ export default function ConfirmedEventTicketsBox({
 
               <div className="mt-4 space-y-3 border-t border-[#F6F1E7]/12 pt-3">
                 <div className="flex flex-wrap items-baseline justify-between gap-2 font-mono text-xs">
-                  <span className="text-[#8E8577]">
-                    {formatEurFromCents(p.unitBaseCents, locale)} + {formatEurFromCents(p.unitFeeCents, locale)} (15%)
-                  </span>
+                  <span className="text-[#8E8577]">{copy.totalLabel}</span>
                   <div className="text-right">
                     <span className="text-base font-bold text-[#F6F1E7]">
                       {formatEurFromCents(p.unitTotalCents, locale)}
