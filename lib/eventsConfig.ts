@@ -137,7 +137,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '25+', 'Elegant and Fashion-forward', 'Deep House and Lounge'),
     image: '/images/events/october-2026/249189-e2b7683e02e3.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/wednesday-night-226/249170/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/wednesday-night-225/249169/channel/nightlifemilan-1',
     priority: 100
   },
   {
