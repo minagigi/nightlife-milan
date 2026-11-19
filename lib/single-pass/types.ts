@@ -13,6 +13,7 @@ export type SinglePassVenueId =
   | 'justme-orthodox'
   | 'justme-thanksgiving'
   | 'justme-partenopea'
+  | 'terrazza-duomo-21'
   | 'club-event';
 
 export type SinglePassPackageCategory =
@@ -65,10 +66,17 @@ export type SinglePassSku = {
   descriptionEn: string;
   arrivalTime: string;
   basePriceCents: number;
+  feeRate?: number;
   guestsPerUnit: number;
   genderPolicy: 'equal';
   requiresDietary?: boolean;
-  dietaryPreset?: 'terra' | 'mare';
+  dietaryPreset?: string;
+  floorGroup?: 'f1' | 'f5';
+  tableAddon?: {
+    floorGroup: 'f1' | 'f5';
+    maxGuestsPerTable: number;
+  };
+  maxQuantityPerOrder?: number;
   eventSlugOverride?: string;
   eventDateLabel?: string;
   venueNameOverride?: string;
@@ -99,6 +107,7 @@ export type SinglePassOrderItem = {
   unitBaseCents: number;
   unitFeeCents: number;
   unitTotalCents: number;
+  feeRate?: number;
   quantity: number;
   lineBaseCents: number;
   lineFeeCents: number;
@@ -159,7 +168,7 @@ export type SinglePassOrder = {
   items: SinglePassOrderItem[];
   totalHeadcount: number;
   subtotalBaseCents: number;
-  feeRate: 0.15;
+  feeRate: number;
   feeCents: number;
   totalCents: number;
   currency: 'eur';
@@ -177,6 +186,8 @@ export type SinglePassOrder = {
   attribution?: OrderAttribution;
   confirmationEmailSentAt: string | null;
   emailDeliveryError: string | null;
+  staffEmailSentAt?: string | null;
+  staffEmailError?: string | null;
 };
 
 export type SinglePassMember = {
@@ -251,6 +262,9 @@ export type SinglePassApiErrorCode =
   | 'UNDER_18'
   | 'UNDER_21_JUSTME'
   | 'PINETA_STRICT_UNDER_30'
+  | 'TABLE_REQUIRES_FORMULA'
+  | 'TABLE_MAX_GUESTS_EXCEEDED'
+  | 'DIETARY_NOTES_REQUIRED'
   | 'TERMS_REQUIRED'
   | 'INVALID_PASSWORD'
   | 'INVALID_CREDENTIALS'

@@ -512,7 +512,7 @@ const VENUE_MASTER_KEYS: Record<string, [string, string, string, string]> = {
   'gate': ['gate-s02-architecture', 'gate-s04-tickets-aperitivo', 'gate-s05-vip-table-bottle', 'gate-s07-getting-there-exterior'],
   'gattopardo': ['gattopardo-interior-01', 'gattopardo-interior-02', 'gattopardo-interior-03', 'gattopardo-interior-04'],
   'apollo': ['apollo-milano-interior-01', 'apollo-milano-interior-02', 'apollo-milano-interior-03', 'apollo-milano-interior-04'],
-  'terrazza-duomo-21': ['terrazza-21-interior-01', 'terrazza-21-interior-02', 'terrazza-21-interior-03', 'terrazza-21-interior-04'],
+  'terrazza-duomo-21': ['terrazza-duomo-21-real-01', 'terrazza-duomo-21-real-02', 'terrazza-mare-5f-real-03', 'terrazza-mare-5f-real-04'],
   'ceresio-7': ['ceresio-7-interior-01', 'ceresio-7-interior-02', 'ceresio-7-interior-03', 'ceresio-7-interior-04'],
   'mib': ['mib-milano-interior-01', 'mib-milano-interior-02', 'mib-milano-interior-03', 'mib-milano-interior-04'],
   'church-81': ['church-81-interior-01', 'church-81-interior-02', 'church-81-interior-03', 'church-81-interior-04'],
@@ -545,7 +545,7 @@ export function selectMasterAssetKeys(slug: string, venueName = '', categorySlug
   if (s.includes('tom-the-ordinary-market') || s.includes('tom-milano') || s.includes('ordinary-market')) return VENUE_MASTER_KEYS['tom-the-ordinary-market'];
   if (s.includes('gattopardo')) return VENUE_MASTER_KEYS['gattopardo'];
   if (s.includes('apollo')) return VENUE_MASTER_KEYS['apollo'];
-  if (s.includes('terrazza-duomo') || s.includes('terrazza-21')) return VENUE_MASTER_KEYS['terrazza-duomo-21'];
+  if (s.includes('terrazza-duomo') || s.includes('terrazza-21') || s.includes('terrazza-mare')) return VENUE_MASTER_KEYS['terrazza-duomo-21'];
   if (s.includes('ceresio')) return VENUE_MASTER_KEYS['ceresio-7'];
   if (s.includes('mib')) return VENUE_MASTER_KEYS['mib'];
   if (s.includes('church')) return VENUE_MASTER_KEYS['church-81'];

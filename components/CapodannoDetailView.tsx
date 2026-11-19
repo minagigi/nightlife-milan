@@ -29,6 +29,7 @@ import { localePrefix } from '@/lib/i18n/locales';
 import { getScarcityAndChatCopy } from '@/lib/i18n/scarcityAndChatCopy';
 import {
   CAPODANNO_EVENTS,
+  getCapodannoEventBySlug,
   getCapodannoEventForClub,
   type CapodannoEventItem,
 } from '@/lib/capodannoEvents';
@@ -41,6 +42,7 @@ import {
   getCapodannoOfficialPosterSrc,
 } from '@/lib/seoEventImages';
 import SinglePassVenueModule from '@/components/single-pass/SinglePassVenueModule';
+import TerrazzaDuomoBookingModule from '@/components/single-pass/TerrazzaDuomoBookingModule';
 import { getVenueIdByEventSlug } from '@/lib/single-pass/catalog';
 
 type Props = {
@@ -60,6 +62,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
   // no dinner, no show, no bottle service, no "almost sold out" claim.
   const isGate = isGateNyeSlug(event.slug);
   const isRepvblic = isRepvblicNyeSlug(event.slug);
+  const isTerrazzaDuomo21 = event.slug === 'capodanno-terrazza-duomo-21';
   const isPartyOnly = isRepvblic || isGate;
   const partyCopy = isGate
     ? getGateNyePageCopy(locale)
@@ -74,7 +77,17 @@ export default function CapodannoDetailView({ locale, event }: Props) {
         bookingSubtitle: partyCopy.bookingSubtitle,
         musicLabel: partyCopy.musicLabel,
       }
-    : baseUi;
+    : isTerrazzaDuomo21
+      ? {
+          ...baseUi,
+          bookingHeading: isIt
+            ? 'Concierge WhatsApp · Terrazza Duomo 21 & MA.RE'
+            : 'WhatsApp Concierge · Terrazza Duomo 21 & MA.RE',
+          bookingSubtitle: isIt
+            ? 'Prenota direttamente online qui sopra (+20% fee inclusa) oppure contatta il Concierge Nightlife Milan per gruppi numerosi e richieste speciali su WhatsApp +39 351 912 7047.'
+            : 'Book directly online above (+20% fee included) or message Nightlife Milan Concierge for large groups and special requests on WhatsApp +39 351 912 7047.',
+        }
+      : baseUi;
   const scarcity = partyCopy
     ? { ...baseScarcity, urgencyAlertTitle: partyCopy.alertTitle, urgencyAlertBody: partyCopy.alertBody }
     : baseScarcity;
@@ -82,6 +95,13 @@ export default function CapodannoDetailView({ locale, event }: Props) {
   const paymentTerms = getPaymentTerms35(locale);
 
   const localized = getCapodannoLocalizedEventContent(event, locale);
+  const isClosedForNye = Boolean(event.closedForNye || localized.closedForNye);
+  const multiOfferPrices = isPartyOnly ? partyOfferPrices : localized.offerPricesEur;
+  const rooftopAlternatives = isClosedForNye
+    ? ['capodanno-terrazza-duomo-21', 'capodanno-voya-rooftop-milano']
+        .map((s) => getCapodannoEventBySlug(s))
+        .filter((e): e is CapodannoEventItem => Boolean(e))
+    : [];
   const title = localized.title;
   const subtitle = localized.subtitle;
   const description = localized.description;
@@ -120,14 +140,14 @@ export default function CapodannoDetailView({ locale, event }: Props) {
     music,
     dressCode: dress,
     posterSrc: officialPosterSrc,
-    shotLabels: partyCopy?.shots,
+    shotLabels: partyCopy?.shots || localized.shots,
   });
 
   const related = CAPODANNO_EVENTS.filter(
-    (item) => item.category === event.category && item.slug !== event.slug
+    (item) => !item.closedForNye && item.category === event.category && item.slug !== event.slug
   ).slice(0, 6);
 
-  const faqs = isIt
+  const defaultFaqs = isIt
     ? [
         {
           q: `Quanto costa il Capodanno 2027 presso ${event.venueName} (${event.city})?`,
@@ -182,6 +202,77 @@ export default function CapodannoDetailView({ locale, event }: Props) {
           },
         ];
 
+  const faqs =
+    localized.customFaqs && localized.customFaqs.length > 0 ? localized.customFaqs : defaultFaqs;
+
+  const eventSchemaNode: Record<string, unknown> = {
+    '@type': 'Event',
+    name: title,
+    description,
+    startDate: event.startISO,
+    endDate: event.endISO,
+    eventStatus: isClosedForNye
+      ? 'https://schema.org/EventCancelled'
+      : 'https://schema.org/EventScheduled',
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    organizer: {
+      '@type': 'Organization',
+      name: 'Nightlife Milan',
+      url: SITE_URL,
+    },
+    image: seoPack.schemaImages,
+    location: {
+      '@type': 'Place',
+      name: event.venueName,
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: event.address,
+        addressLocality: event.city,
+        addressRegion: 'Lombardia',
+        addressCountry: 'IT',
+      },
+    },
+  };
+
+  if (!isClosedForNye) {
+    eventSchemaNode.performer =
+      event.slug === 'capodanno-bischeri-milano'
+        ? {
+            '@type': 'Person',
+            name: 'DJ Gigi Zeus',
+          }
+        : isGate
+          ? {
+              '@type': 'PerformingGroup',
+              name: 'PERREO XL DJs',
+            }
+          : {
+              '@type': 'PerformingGroup',
+              name: `${event.venueName} Resident DJs`,
+            };
+
+    eventSchemaNode.offers =
+      multiOfferPrices && multiOfferPrices.length > 0
+        ? tiers.slice(0, multiOfferPrices.length).map((tier, idx) => ({
+            '@type': 'Offer',
+            name: tier.label,
+            description: tier.details,
+            url: `${SITE_URL}${canonicalPath}`,
+            price: String(multiOfferPrices[idx]),
+            priceCurrency: 'EUR',
+            availability: 'https://schema.org/InStock',
+            validFrom: '2026-10-01T00:00:00+02:00',
+          }))
+        : {
+            '@type': 'Offer',
+            url: `${SITE_URL}${canonicalPath}`,
+            price: String(event.priceFromEur),
+            priceCurrency: 'EUR',
+            availability: 'https://schema.org/InStock',
+            validFrom: '2026-10-01T00:00:00+02:00',
+          };
+  }
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -193,66 +284,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
           { '@type': 'ListItem', position: 3, name: title, item: `${SITE_URL}${canonicalPath}` },
         ],
       },
-      {
-        '@type': 'Event',
-        name: title,
-        description,
-        startDate: event.startISO,
-        endDate: event.endISO,
-        eventStatus: 'https://schema.org/EventScheduled',
-        eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-        organizer: {
-          '@type': 'Organization',
-          name: 'Nightlife Milan',
-          url: SITE_URL,
-        },
-        performer:
-          event.slug === 'capodanno-bischeri-milano'
-            ? {
-                '@type': 'Person',
-                name: 'DJ Gigi Zeus',
-              }
-            : isGate
-              ? {
-                  '@type': 'PerformingGroup',
-                  name: 'PERREO XL DJs',
-                }
-              : {
-                  '@type': 'PerformingGroup',
-                  name: `${event.venueName} Resident DJs`,
-                },
-        image: seoPack.schemaImages,
-        location: {
-          '@type': 'Place',
-          name: event.venueName,
-          address: {
-            '@type': 'PostalAddress',
-            streetAddress: event.address,
-            addressLocality: event.city,
-            addressRegion: 'Lombardia',
-            addressCountry: 'IT',
-          },
-        },
-        offers: isPartyOnly
-          ? tiers.slice(0, partyOfferPrices.length).map((tier, idx) => ({
-              '@type': 'Offer',
-              name: tier.label,
-              description: tier.details,
-              url: `${SITE_URL}${canonicalPath}`,
-              price: String(partyOfferPrices[idx]),
-              priceCurrency: 'EUR',
-              availability: 'https://schema.org/InStock',
-              validFrom: '2026-10-01T00:00:00+02:00',
-            }))
-          : {
-              '@type': 'Offer',
-              url: `${SITE_URL}${canonicalPath}`,
-              price: String(event.priceFromEur),
-              priceCurrency: 'EUR',
-              availability: 'https://schema.org/InStock',
-              validFrom: '2026-10-01T00:00:00+02:00',
-            },
-      },
+      eventSchemaNode,
       {
         '@type': 'FAQPage',
         mainEntity: faqs.map((f) => ({
@@ -303,15 +335,21 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               <span className="border border-[#F6F1E7]/35 bg-[#050505]/90 px-3 py-1 text-xs font-semibold text-[#F6F1E7]">
                 {event.city} ({event.province})
               </span>
-              {!isPartyOnly && (
+              {!isPartyOnly && !isClosedForNye && (
                 <span className="border border-[#F6F1E7]/50 bg-[#050505]/90 px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-[#F6F1E7]" data-almost-sold-out-badge>
                   {scarcity.almostSoldOutBadge}
+                </span>
+              )}
+              {isClosedForNye && (
+                <span className="border border-rose-400/60 bg-rose-950/90 px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-rose-100" data-closed-for-nye-badge>
+                  {isIt ? 'CHIUSO 31 DIC – 3 GEN' : 'CLOSED DEC 31 – JAN 3'}
                 </span>
               )}
             </div>
             <h1
               data-event-title={title}
               data-event-party-only={isPartyOnly ? 'true' : undefined}
+              data-event-closed-nye={isClosedForNye ? 'true' : undefined}
               className="mt-3 font-serif text-3xl font-bold text-[#F6F1E7] sm:text-5xl"
             >
               {title}
@@ -320,14 +358,29 @@ export default function CapodannoDetailView({ locale, event }: Props) {
           </div>
 
           <div className="p-6 sm:p-10">
-            <div role="alert" data-urgency-alert className="mb-8 border border-[#050505]/15 bg-[#F6F1E7] p-5 text-[#050505]">
-              <p className="text-xs font-extrabold uppercase tracking-wider text-[#050505] sm:text-sm">
-                {scarcity.urgencyAlertTitle}
-              </p>
-              <p className="mt-1.5 text-sm leading-relaxed text-[#24201B]">
-                {scarcity.urgencyAlertBody}
-              </p>
-            </div>
+            {isClosedForNye ? (
+              <div
+                role="status"
+                data-closure-notice
+                className="mb-8 border-2 border-rose-400/60 bg-rose-950/40 p-6 text-[#F6F1E7]"
+              >
+                <p className="font-mono text-xs font-extrabold uppercase tracking-wider text-rose-200 sm:text-sm">
+                  {localized.closureBannerTitle}
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-[#F6F1E7] sm:text-base">
+                  {localized.closureBannerBody}
+                </p>
+              </div>
+            ) : (
+              <div role="alert" data-urgency-alert className="mb-8 border border-[#050505]/15 bg-[#F6F1E7] p-5 text-[#050505]">
+                <p className="text-xs font-extrabold uppercase tracking-wider text-[#050505] sm:text-sm">
+                  {scarcity.urgencyAlertTitle}
+                </p>
+                <p className="mt-1.5 text-sm leading-relaxed text-[#24201B]">
+                  {scarcity.urgencyAlertBody}
+                </p>
+              </div>
+            )}
             {/* Clickable Table of Contents (TOC) (#F6F1E7 Avorio Caldo) */}
             <nav
               aria-label={ui.tocTitle}
@@ -342,28 +395,45 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                     {ui.tocProgram}
                   </a>
                 </li>
-                <li>
-                  <a href="#prezzi-formule" className="text-[#050505] hover:underline">
-                    {ui.tocPrices}
-                  </a>
-                </li>
-                {(localized.menus?.length ?? 0) > 0 && (
+                {isClosedForNye ? (
                   <li>
-                    <a href="#menu-ufficiale" className="text-[#050505] hover:underline">
-                      {localized.menusHeading || 'Menu'}
+                    <a href="#alternative-rooftop" className="text-[#050505] hover:underline">
+                      {localized.alternativesHeading || (isIt ? 'Alternative Rooftop' : 'Rooftop Alternatives')}
                     </a>
                   </li>
+                ) : (
+                  <>
+                    <li>
+                      <a href="#prezzi-formule" className="text-[#050505] hover:underline">
+                        {ui.tocPrices}
+                      </a>
+                    </li>
+                    {(localized.menus?.length ?? 0) > 0 && (
+                      <li>
+                        <a href="#menu-ufficiale" className="text-[#050505] hover:underline">
+                          {localized.menusHeading || 'Menu'}
+                        </a>
+                      </li>
+                    )}
+                    {(localized.conditions?.length ?? 0) > 0 && (
+                      <li>
+                        <a href="#condizioni-ufficiali" className="text-[#050505] hover:underline">
+                          {localized.conditionsHeading || (isIt ? 'Condizioni Ufficiali' : 'Official Conditions')}
+                        </a>
+                      </li>
+                    )}
+                    <li>
+                      <a href="#termini-pagamento" className="text-[#050505] hover:underline">
+                        {paymentTerms.tocLabel}
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#prenota-concierge" className="text-[#050505] hover:underline">
+                        {ui.tocBooking}
+                      </a>
+                    </li>
+                  </>
                 )}
-                <li>
-                  <a href="#termini-pagamento" className="text-[#050505] hover:underline">
-                    {paymentTerms.tocLabel}
-                  </a>
-                </li>
-                <li>
-                  <a href="#prenota-concierge" className="text-[#050505] hover:underline">
-                    {ui.tocBooking}
-                  </a>
-                </li>
                 <li>
                   <a href="#mappa-locale" className="text-[#050505] hover:underline">
                     {ui.mapHeadingEvent}
@@ -572,6 +642,78 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               </div>
             </section>
 
+            {isClosedForNye ? (
+              <section
+                id="alternative-rooftop"
+                data-rooftop-alternatives
+                className="mt-10 border border-[#050505]/15 bg-[#F6F1E7] p-6 text-[#050505] sm:p-8"
+              >
+                <p className="font-mono text-xs font-bold uppercase tracking-widest text-[#5C4415]">
+                  {isIt ? 'ROOFTOP CONFERMATI · 31 DICEMBRE 2026' : 'CONFIRMED MILAN ROOFTOPS · DEC 31, 2026'}
+                </p>
+                <h2 className="mt-1 font-serif text-2xl font-bold text-[#050505] sm:text-3xl">
+                  {localized.alternativesHeading}
+                </h2>
+                <p className="mt-2 text-sm text-[#24201B]">
+                  {localized.alternativesSubheading}
+                </p>
+                <div className="mt-5 grid gap-5 md:grid-cols-2">
+                  {rooftopAlternatives.map((alt) => {
+                    const altTitle = getCapodannoLocalizedEventTitle(alt, locale);
+                    const altSub = getCapodannoLocalizedEventSubtitle(alt, locale);
+                    const altHref = capodannoEventPath(alt.slug, locale);
+                    return (
+                      <article
+                        key={alt.slug}
+                        className="flex flex-col justify-between border border-[#050505]/20 bg-[#EFE9DC] p-5"
+                      >
+                        <div>
+                          <div className="overflow-hidden border border-[#050505]/15 bg-[#050505]">
+                            <img
+                              src={alt.image}
+                              alt={altTitle}
+                              loading="lazy"
+                              decoding="async"
+                              className="h-44 w-full object-contain"
+                            />
+                          </div>
+                          <h3 className="mt-3 font-serif text-xl font-bold text-[#050505]">
+                            {altTitle}
+                          </h3>
+                          <p className="mt-1 text-xs text-[#3D3830]">{altSub}</p>
+                          <p className="mt-2 text-xs font-semibold text-[#050505]">
+                            {isIt ? alt.priceSummaryIt : alt.priceSummaryEn}
+                          </p>
+                        </div>
+                        <Link
+                          href={altHref}
+                          className="mt-4 inline-flex min-h-[44px] items-center justify-center bg-[#050505] px-5 py-2.5 text-xs font-extrabold uppercase tracking-wider text-[#F6F1E7] transition hover:bg-[#24201B]"
+                        >
+                          {isIt ? 'Vedi Formule & Prenota Online →' : 'View Packages & Book Online →'}
+                        </Link>
+                      </article>
+                    );
+                  })}
+                </div>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link
+                    href={capodannoPath(locale)}
+                    className="inline-flex min-h-[44px] items-center border border-[#050505] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[#050505] hover:bg-[#050505] hover:text-[#F6F1E7]"
+                  >
+                    {ui.backToAllBtn}
+                  </Link>
+                  <a
+                    href={getConciergeBookingUrl(locale, `Milan NYE 2027 Rooftop Alternatives (Ceresio 7 Closed)`, `${SITE_URL}${canonicalPath}`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-[44px] items-center bg-[#25D366] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[#050505]"
+                  >
+                    WhatsApp {SITE_CONTACT.whatsapp.number}
+                  </a>
+                </div>
+              </section>
+            ) : (
+              <>
             {/* Price Tiers Table (#F6F1E7 Capitolo Avorio Caldo) */}
             <div id="prezzi-formule" className="mt-10 border border-[#050505]/15 bg-[#F6F1E7] text-[#050505] p-6 sm:p-8">
               <div className="flex flex-wrap items-center gap-3">
@@ -606,15 +748,17 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               </div>
             </div>
 
-            {/* Single Pass E-Commerce Module for Eligible Venues */}
-            {(() => {
+            {/* Direct E-Commerce Booking Module */}
+            {isTerrazzaDuomo21 ? (
+              <TerrazzaDuomoBookingModule locale={locale} />
+            ) : (() => {
               const singlePassVenueId = getVenueIdByEventSlug(event.slug);
               return singlePassVenueId ? (
                 <SinglePassVenueModule locale={locale} venueId={singlePassVenueId} />
               ) : null;
             })()}
 
-            {/* Official Menus (Pineta Gala / Buffet & Voya 20th Floor) */}
+            {/* Official Menus (Pineta Gala / Buffet, Voya 20th Floor, Terrazza Duomo 21 & MA.RE) */}
             {localized.menus && localized.menus.length > 0 && (
               <section
                 id="menu-ufficiale"
@@ -671,6 +815,32 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                     </article>
                   ))}
                 </div>
+              </section>
+            )}
+
+            {/* Official Venue Conditions (PDF rules: Via Silvio Pellico 2, 9 checkpoints, Dec 28 allergies, table pairing) */}
+            {localized.conditions && localized.conditions.length > 0 && (
+              <section
+                id="condizioni-ufficiali"
+                data-official-conditions
+                className="mt-10 border border-[#C9A84C]/35 bg-[#0B0A09] p-6 sm:p-8"
+              >
+                <p className="font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-[#C9A84C]">
+                  {isIt ? 'REGOLAMENTO UFFICIALE CAPODANNO 2027' : 'OFFICIAL NYE 2027 VENUE CONDITIONS'}
+                </p>
+                <h2 className="mt-1 font-serif text-2xl font-bold text-[#F6F1E7]">
+                  {localized.conditionsHeading || (isIt ? 'Condizioni Ufficiali' : 'Official Conditions')}
+                </h2>
+                <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+                  {localized.conditions.map((cond) => (
+                    <li
+                      key={cond}
+                      className="border border-[#F6F1E7]/15 bg-[#050505] p-4 text-xs leading-relaxed text-[#EAE3D5] sm:text-sm"
+                    >
+                      {cond}
+                    </li>
+                  ))}
+                </ul>
               </section>
             )}
 
@@ -766,6 +936,8 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 </Link>
               </div>
             </div>
+              </>
+            )}
 
             {/* Embedded Google Map for Venue */}
             <div id="mappa-locale" className="mt-12">

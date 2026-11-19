@@ -45,12 +45,20 @@ export async function POST(
       );
     }
 
+    const nextSubtotalMinor =
+      pi.currencyUsed === 'EUR' ? order.subtotalBaseCents : order.presentmentSubtotalMinor;
+    const nextFeeMinor = pi.currencyUsed === 'EUR' ? order.feeCents : order.presentmentFeeMinor;
+    const nextFxRate = pi.currencyUsed === 'EUR' ? 1 : order.fxRate || 1;
+
     await saveOrder({
       ...order,
       status: 'awaiting_payment',
       stripePaymentIntentId: pi.paymentIntentId,
       presentmentCurrency: pi.currencyUsed,
+      presentmentSubtotalMinor: nextSubtotalMinor,
+      presentmentFeeMinor: nextFeeMinor,
       presentmentTotalMinor: pi.amountMinorUsed,
+      fxRate: nextFxRate,
       updatedAt: new Date().toISOString(),
     });
 
@@ -61,8 +69,10 @@ export async function POST(
       publishableKey: PUBLIC_PAYMENT_PUBLISHABLE_KEY,
       totalEurCents: order.totalCents,
       presentmentCurrency: pi.currencyUsed,
+      presentmentSubtotalMinor: nextSubtotalMinor,
+      presentmentFeeMinor: nextFeeMinor,
       presentmentTotalMinor: pi.amountMinorUsed,
-      fxRate: order.fxRate || 1,
+      fxRate: nextFxRate,
       items: order.items,
       customer: {
         fullName: order.customer.fullName,

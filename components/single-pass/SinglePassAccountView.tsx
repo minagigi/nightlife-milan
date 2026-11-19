@@ -13,9 +13,9 @@ import {
 } from 'lucide-react';
 import Link from '@/components/LocalizedLink';
 import { localePrefix } from '@/lib/i18n/locales';
-import { SPOKEN_LANGUAGE_OPTIONS, VENUE_BY_ID, formatEurFromCents } from '@/lib/single-pass/catalog';
+import { SINGLE_PASS_FEE_RATE, SPOKEN_LANGUAGE_OPTIONS, VENUE_BY_ID, formatEurFromCents } from '@/lib/single-pass/catalog';
 import { formatMinorCurrency } from '@/lib/single-pass/currency';
-import { getSinglePassCopy } from '@/lib/single-pass/i18n35';
+import { formatFeeLabel35, getSinglePassCopy, getTerrazzaCheckoutUi35 } from '@/lib/single-pass/i18n35';
 import type { SinglePassOrder } from '@/lib/single-pass/types';
 import { useSinglePassCart } from './SinglePassCartContext';
 
@@ -45,6 +45,7 @@ export default function SinglePassAccountView({
 }) {
   const { clearCart } = useSinglePassCart();
   const copy = getSinglePassCopy(locale);
+  const terrazzaUi = getTerrazzaCheckoutUi35(locale);
   const lp = localePrefix(locale);
   const isIt = locale === 'it';
 
@@ -518,6 +519,26 @@ export default function SinglePassAccountView({
             ) : (
               orders.map((order) => {
                 const isPaid = order.status === 'paid';
+                const isTerrazzaOrder = order.items.some((i) => i.venueId === 'terrazza-duomo-21');
+                const hasSinglePassVenue = order.items.some((i) =>
+                  ['gate', 'pineta', 'repvblic', 'justme', 'bischeri', 'voya', 'justme-garda'].includes(
+                    i.venueId,
+                  ),
+                );
+                const feeRates = new Set(
+                  order.items.map((i) =>
+                    typeof i.feeRate === 'number'
+                      ? i.feeRate
+                      : i.venueId === 'terrazza-duomo-21'
+                        ? 0.2
+                        : SINGLE_PASS_FEE_RATE,
+                  ),
+                );
+                const orderFeeLabel = formatFeeLabel35(
+                  locale,
+                  typeof order.feeRate === 'number' ? order.feeRate : SINGLE_PASS_FEE_RATE,
+                  feeRates.size > 1,
+                );
                 return (
                   <article
                     key={order.id}
@@ -579,7 +600,7 @@ export default function SinglePassAccountView({
                         {copy.basePriceLabel}: {formatEurFromCents(order.subtotalBaseCents, locale)}
                       </div>
                       <div className="text-[#EAE3D5]">
-                        +15% Fee: {formatEurFromCents(order.feeCents, locale)}
+                        {orderFeeLabel}: {formatEurFromCents(order.feeCents, locale)}
                       </div>
                       <div className="font-bold text-[#F6F1E7] sm:text-right">
                         {copy.totalLabel}: {formatEurFromCents(order.totalCents, locale)}
@@ -614,11 +635,16 @@ export default function SinglePassAccountView({
                           {copy.openMiniGroupCta}
                         </a>
                       )}
-                      {!order.whatsappGroupInviteUrl && (
+                      {!order.whatsappGroupInviteUrl && hasSinglePassVenue && (
                         <span className="inline-flex items-center gap-1.5 text-xs text-[#C2B9AA]">
                           <ShieldCheck className="h-4 w-4 text-[#EAE3D5]" aria-hidden="true" />
                           WhatsApp Group: dal 20 dicembre 2026 su {order.customer.whatsapp}
                         </span>
+                      )}
+                      {isTerrazzaOrder && (
+                        <p className="w-full border border-[#C9A84C]/35 bg-[#17130D] p-3 text-xs text-[#EAE3D5]">
+                          {terrazzaUi.confirmationRefundNotice}
+                        </p>
                       )}
                     </div>
                   </article>

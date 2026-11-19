@@ -1,7 +1,15 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
-import { computeSinglePassPrice, resolveCatalogSku } from '@/lib/single-pass/catalog';
+import {
+  SINGLE_PASS_FEE_RATE,
+  computeSinglePassPrice,
+  getSkuFeeRate,
+  getSkuMaxQuantity,
+  resolveCatalogSku,
+  validateTerrazzaDuomoCart,
+  type TerrazzaCartValidationResult,
+} from '@/lib/single-pass/catalog';
 import {
   SUPPORTED_CURRENCIES,
   convertEurBreakdown,
@@ -69,6 +77,10 @@ type SinglePassCartContextValue = {
   subtotalBaseCents: number;
   totalFeeCents: number;
   grandTotalCents: number;
+  effectiveFeeRate: number;
+  hasMixedFeeRates: boolean;
+  hasTerrazzaDuomo21: boolean;
+  cartValidation: TerrazzaCartValidationResult;
   currency: SupportedCurrency;
   setCurrency: (next: SupportedCurrency) => void;
   fxRates: Record<SupportedCurrency, number>;
@@ -115,19 +127,23 @@ export function SinglePassCartProvider({
                 typeof (entry as SinglePassCartItem).skuId === 'string' &&
                 Boolean(resolveCatalogSku((entry as SinglePassCartItem).skuId)),
             )
-            .map((entry) => ({
-              skuId: entry.skuId,
-              quantity: Math.max(1, Math.min(10, Math.floor(Number(entry.quantity) || 1))),
-              ...(entry.dietaryChoice
-                ? { dietaryChoice: String(entry.dietaryChoice).slice(0, 60) }
-                : {}),
-              ...(entry.addedFromPath
-                ? { addedFromPath: String(entry.addedFromPath).slice(0, 200) }
-                : {}),
-              ...(entry.addedFromTitle
-                ? { addedFromTitle: String(entry.addedFromTitle).slice(0, 140) }
-                : {}),
-            }));
+            .map((entry) => {
+              const resolved = resolveCatalogSku(entry.skuId);
+              const maxQty = resolved ? getSkuMaxQuantity(resolved) : 10;
+              return {
+                skuId: entry.skuId,
+                quantity: Math.max(1, Math.min(maxQty, Math.floor(Number(entry.quantity) || 1))),
+                ...(entry.dietaryChoice
+                  ? { dietaryChoice: String(entry.dietaryChoice).slice(0, 60) }
+                  : {}),
+                ...(entry.addedFromPath
+                  ? { addedFromPath: String(entry.addedFromPath).slice(0, 200) }
+                  : {}),
+                ...(entry.addedFromTitle
+                  ? { addedFromTitle: String(entry.addedFromTitle).slice(0, 140) }
+                  : {}),
+              };
+            });
           setItems(valid);
         }
       }
@@ -185,7 +201,8 @@ export function SinglePassCartProvider({
   ) => {
     const sku = resolveCatalogSku(skuId);
     if (!sku) return;
-    const safeQty = Math.max(1, Math.min(10, Math.floor(quantity)));
+    const maxQty = getSkuMaxQuantity(sku);
+    const safeQty = Math.max(1, Math.min(maxQty, Math.floor(quantity)));
     const originPath =
       addedFromPath ||
       (typeof window !== 'undefined' ? window.location.pathname.slice(0, 200) : undefined);
@@ -200,7 +217,7 @@ export function SinglePassCartProvider({
         const cur = next[idx];
         next[idx] = {
           skuId: sku.id,
-          quantity: Math.min(10, cur.quantity + safeQty),
+          quantity: Math.min(maxQty, cur.quantity + safeQty),
           dietaryChoice: dietaryChoice || cur.dietaryChoice || sku.dietaryPreset,
           addedFromPath: cur.addedFromPath || originPath,
           addedFromTitle: cur.addedFromTitle || originTitle,
@@ -229,9 +246,11 @@ export function SinglePassCartProvider({
       removeItem(skuId);
       return;
     }
+    const sku = resolveCatalogSku(skuId);
+    const maxQty = sku ? getSkuMaxQuantity(sku) : 10;
     setItems((prev) =>
       prev.map((item) =>
-        item.skuId === skuId ? { ...item, quantity: Math.max(1, Math.min(10, safeQty)) } : item,
+        item.skuId === skuId ? { ...item, quantity: Math.max(1, Math.min(maxQty, safeQty)) } : item,
       ),
     );
   };
@@ -256,17 +275,33 @@ export function SinglePassCartProvider({
     let subtotalBaseCents = 0;
     let totalFeeCents = 0;
     let grandTotalCents = 0;
+    const distinctFeeRates = new Set<number>();
+    let hasTerrazzaDuomo21 = false;
+    const resolvedPairs: Array<{ sku: NonNullable<ReturnType<typeof resolveCatalogSku>>; quantity: number }> = [];
 
     for (const item of items) {
       const sku = resolveCatalogSku(item.skuId);
       if (!sku) continue;
-      const pricing = computeSinglePassPrice(sku.basePriceCents, item.quantity);
+      if (sku.venueId === 'terrazza-duomo-21') hasTerrazzaDuomo21 = true;
+      const skuFeeRate = getSkuFeeRate(sku);
+      distinctFeeRates.add(skuFeeRate);
+      const pricing = computeSinglePassPrice(sku.basePriceCents, item.quantity, skuFeeRate);
       itemCount += item.quantity;
-      totalGuests += Math.max(1, sku.guestsPerUnit || 1) * item.quantity;
+      totalGuests += Math.max(0, sku.guestsPerUnit ?? 1) * item.quantity;
       subtotalBaseCents += pricing.lineBaseCents;
       totalFeeCents += pricing.lineFeeCents;
       grandTotalCents += pricing.lineTotalCents;
+      resolvedPairs.push({ sku, quantity: item.quantity });
     }
+
+    const hasMixedFeeRates = distinctFeeRates.size > 1;
+    const effectiveFeeRate =
+      distinctFeeRates.size === 1
+        ? Array.from(distinctFeeRates)[0]
+        : subtotalBaseCents > 0
+          ? Math.round((totalFeeCents / subtotalBaseCents) * 10000) / 10000
+          : SINGLE_PASS_FEE_RATE;
+    const cartValidation = validateTerrazzaDuomoCart(resolvedPairs);
 
     const rate = fxRates[currency] || 1;
     const converted = convertEurBreakdown(subtotalBaseCents, totalFeeCents, currency, rate);
@@ -276,6 +311,10 @@ export function SinglePassCartProvider({
       subtotalBaseCents,
       totalFeeCents,
       grandTotalCents,
+      effectiveFeeRate,
+      hasMixedFeeRates,
+      hasTerrazzaDuomo21,
+      cartValidation,
       convertedSubtotalMinor: converted.subtotalMinor,
       convertedFeeMinor: converted.feeMinor,
       convertedTotalMinor: converted.totalMinor,

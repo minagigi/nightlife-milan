@@ -8,10 +8,11 @@ import {
   VENUE_BY_ID,
   computeSinglePassPrice,
   formatEurFromCents,
+  getSkuFeeRate,
   resolveCatalogSku,
 } from '@/lib/single-pass/catalog';
 import { formatMinorCurrency, type SupportedCurrency } from '@/lib/single-pass/currency';
-import { getSinglePassCopy } from '@/lib/single-pass/i18n35';
+import { formatFeeLabel35, getSinglePassCopy, getTerrazzaCheckoutUi35 } from '@/lib/single-pass/i18n35';
 import { useSinglePassCart } from './SinglePassCartContext';
 
 export default function SinglePassCartPageView({ locale }: { locale: string }) {
@@ -23,6 +24,9 @@ export default function SinglePassCartPageView({ locale }: { locale: string }) {
     subtotalBaseCents,
     totalFeeCents,
     grandTotalCents,
+    effectiveFeeRate,
+    hasMixedFeeRates,
+    cartValidation,
     totalGuests,
     currency,
     setCurrency,
@@ -33,6 +37,8 @@ export default function SinglePassCartPageView({ locale }: { locale: string }) {
   } = useSinglePassCart();
 
   const copy = getSinglePassCopy(locale);
+  const terrazzaUi = getTerrazzaCheckoutUi35(locale);
+  const feeLabel = formatFeeLabel35(locale, effectiveFeeRate, hasMixedFeeRates);
   const lp = localePrefix(locale);
   const isIt = locale === 'it';
 
@@ -76,8 +82,10 @@ export default function SinglePassCartPageView({ locale }: { locale: string }) {
               if (!sku) return null;
               const venue = VENUE_BY_ID[sku.venueId];
               const venueName = sku.venueNameOverride || venue?.name || 'Nightlife Milan';
-              const pricing = computeSinglePassPrice(sku.basePriceCents, item.quantity);
-              const itemGuests = (sku.guestsPerUnit || 1) * item.quantity;
+              const skuFeeRate = getSkuFeeRate(sku);
+              const feePct = Math.round(skuFeeRate * 100);
+              const pricing = computeSinglePassPrice(sku.basePriceCents, item.quantity, skuFeeRate);
+              const itemGuests = Math.max(0, sku.guestsPerUnit ?? 1) * item.quantity;
 
               return (
                 <article
@@ -87,7 +95,8 @@ export default function SinglePassCartPageView({ locale }: { locale: string }) {
                   <div className="flex flex-wrap items-start justify-between gap-4">
                     <div>
                       <p className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#C9A84C]">
-                        {venueName} · {sku.arrivalTime} · {itemGuests} pax
+                        {venueName} · {sku.arrivalTime} ·{' '}
+                        {itemGuests > 0 ? `${itemGuests} pax` : terrazzaUi.tableAddonBadge}
                       </p>
                       <h2 className="mt-1 font-serif text-xl font-bold text-[#F6F1E7]">
                         {isIt ? sku.titleIt : sku.titleEn}
@@ -149,7 +158,7 @@ export default function SinglePassCartPageView({ locale }: { locale: string }) {
 
                     <div className="text-right font-mono text-xs">
                       <p className="text-[#8E8577]">
-                        {formatEurFromCents(pricing.lineBaseCents, locale)} + {formatEurFromCents(pricing.lineFeeCents, locale)} (15%)
+                        {formatEurFromCents(pricing.lineBaseCents, locale)} + {formatEurFromCents(pricing.lineFeeCents, locale)} ({feePct}%)
                       </p>
                       <p className="text-base font-bold text-[#F6F1E7]">
                         {formatEurFromCents(pricing.lineTotalCents, locale)}
@@ -199,9 +208,16 @@ export default function SinglePassCartPageView({ locale }: { locale: string }) {
                   <span className="font-mono">{formatEurFromCents(subtotalBaseCents, locale)}</span>
                 </div>
                 <div className="flex justify-between text-[#EAE3D5]">
-                  <span>{copy.feeLabel}</span>
+                  <span>{feeLabel}</span>
                   <span className="font-mono">+{formatEurFromCents(totalFeeCents, locale)}</span>
                 </div>
+                {!cartValidation.ok && (
+                  <div className="border border-rose-500/50 bg-rose-950/40 p-3 text-xs text-rose-200">
+                    {cartValidation.errorCode === 'TABLE_REQUIRES_FORMULA'
+                      ? terrazzaUi.tableRequiresFormulaError
+                      : terrazzaUi.tableMaxGuestsExceededError}
+                  </div>
+                )}
                 <div className="flex justify-between border-t border-[#F6F1E7]/15 pt-2 text-lg font-extrabold text-[#F6F1E7]">
                   <span>{copy.totalLabel} (EUR)</span>
                   <span className="font-mono">{formatEurFromCents(grandTotalCents, locale)}</span>

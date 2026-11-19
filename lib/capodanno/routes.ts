@@ -966,6 +966,15 @@ const SLUG_TO_CAPODANNO_TARGET: ReadonlyMap<string, { type: 'category' | 'event'
       map.set(capodannoEventSlug(baseSlug, locale), { type: 'event', id: baseSlug });
     }
   }
+  for (const aliasSlug of [
+    'capodanno-terrazza-mare',
+    'capodanno-terrazza-mare-milano',
+    'new-years-eve-terrazza-mare-2027',
+    'new-years-eve-terrazza-duomo-21-milan-2027',
+    'capodanno-terrazza-duomo-21-milano-2027',
+  ]) {
+    map.set(aliasSlug, { type: 'event', id: 'capodanno-terrazza-duomo-21' });
+  }
   return map;
 })();
 

@@ -79,11 +79,19 @@ export default async function CrmSinglePassPage({
   const feeEurCents = paidOrders.reduce((s, o) => s + o.feeCents, 0);
   const baseEurCents = paidOrders.reduce((s, o) => s + o.subtotalBaseCents, 0);
   const totalConfirmedPeople = paidOrders.reduce(
-    (s, o) => s + (o.totalHeadcount || o.items.reduce((acc, it) => acc + (it.totalGuests || it.quantity), 0)),
+    (s, o) =>
+      s +
+      (typeof o.totalHeadcount === 'number' && o.totalHeadcount > 0
+        ? o.totalHeadcount
+        : o.items.reduce((acc, it) => acc + (typeof it.totalGuests === 'number' ? it.totalGuests : it.quantity), 0)),
     0,
   );
   const totalAllPeople = filtered.reduce(
-    (s, o) => s + (o.totalHeadcount || o.items.reduce((acc, it) => acc + (it.totalGuests || it.quantity), 0)),
+    (s, o) =>
+      s +
+      (typeof o.totalHeadcount === 'number' && o.totalHeadcount > 0
+        ? o.totalHeadcount
+        : o.items.reduce((acc, it) => acc + (typeof it.totalGuests === 'number' ? it.totalGuests : it.quantity), 0)),
     0,
   );
 
@@ -107,7 +115,7 @@ export default async function CrmSinglePassPage({
         seenOrderKeys.add(k);
       }
       existing.unitsSold += item.quantity;
-      existing.headcount += item.totalGuests || item.quantity;
+      existing.headcount += typeof item.totalGuests === 'number' ? item.totalGuests : item.quantity;
       existing.revenueCents += item.lineTotalCents;
       productMap.set(k, existing);
     }
@@ -209,7 +217,7 @@ export default async function CrmSinglePassPage({
             <p className="mt-1 font-mono text-xl font-bold">{formatEurFromCents(baseEurCents, 'it')}</p>
           </div>
           <div className="border border-white/10 bg-white/[0.03] p-4">
-            <p className="text-[11px] uppercase text-white/50">Fee +15% (EUR)</p>
+            <p className="text-[11px] uppercase text-white/50">Booking Fee (EUR)</p>
             <p className="mt-1 font-mono text-xl font-bold text-emerald-200">
               +{formatEurFromCents(feeEurCents, 'it')}
             </p>
@@ -438,8 +446,12 @@ export default async function CrmSinglePassPage({
               ) : (
                 filtered.map((o) => {
                   const headcount =
-                    o.totalHeadcount ||
-                    o.items.reduce((acc, i) => acc + (i.totalGuests || i.quantity), 0);
+                    typeof o.totalHeadcount === 'number' && o.totalHeadcount > 0
+                      ? o.totalHeadcount
+                      : o.items.reduce(
+                          (acc, i) => acc + (typeof i.totalGuests === 'number' ? i.totalGuests : i.quantity),
+                          0,
+                        );
                   const cur = (o.presentmentCurrency || 'EUR').toUpperCase();
                   const presMinor = o.presentmentTotalMinor ?? o.totalCents;
 
@@ -482,9 +494,19 @@ export default async function CrmSinglePassPage({
                           {o.items.map((item) => (
                             <li key={item.skuId}>
                               <strong>{item.venueName}</strong>: {item.title} × {item.quantity}
+                              {item.dietaryChoice ? (
+                                <span className="block text-[10px] text-amber-200">
+                                  Scelta: {item.dietaryChoice}
+                                </span>
+                              ) : null}
                             </li>
                           ))}
                         </ul>
+                        {o.customer.dietaryNotes && (
+                          <p className="mt-1.5 border-t border-white/10 pt-1 text-[11px] text-amber-200">
+                            Allergie: {o.customer.dietaryNotes}
+                          </p>
+                        )}
                       </td>
                       <td className="p-3 align-top max-w-[260px] font-mono text-[11px] text-white/75 space-y-1">
                         <p>

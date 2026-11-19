@@ -39,8 +39,10 @@ export async function GET(request: Request) {
     'Venues',
     'Packages',
     'Base EUR',
-    'Fee +15% EUR',
+    'Booking Fee Rate',
+    'Booking Fee EUR',
     'Total EUR',
+    'Dietary / Allergies',
     'Presentment Currency',
     'Presentment Total',
     'FX Rate',
@@ -60,10 +62,18 @@ export async function GET(request: Request) {
     ...filtered.map((o) => {
       const venues = Array.from(new Set(o.items.map((i) => i.venueName))).join('; ');
       const pkgs = o.items
-        .map((i) => `${i.quantity}x ${i.venueName} - ${i.title}`)
+        .map(
+          (i) =>
+            `${i.quantity}x ${i.venueName} - ${i.title}${i.dietaryChoice ? ` [${i.dietaryChoice}]` : ''}`,
+        )
         .join(' | ');
       const headcount =
-        o.totalHeadcount || o.items.reduce((s, i) => s + (i.totalGuests || i.quantity), 0);
+        typeof o.totalHeadcount === 'number' && o.totalHeadcount > 0
+          ? o.totalHeadcount
+          : o.items.reduce(
+              (s, i) => s + (typeof i.totalGuests === 'number' ? i.totalGuests : i.quantity),
+              0,
+            );
       const cur = (o.presentmentCurrency || 'EUR').toUpperCase();
       const presStr = formatMinorCurrency(o.presentmentTotalMinor ?? o.totalCents, cur, 'en');
 
@@ -80,8 +90,10 @@ export async function GET(request: Request) {
         venues,
         pkgs,
         (o.subtotalBaseCents / 100).toFixed(2),
+        `${Math.round((o.feeRate ?? 0.15) * 100)}%`,
         (o.feeCents / 100).toFixed(2),
         (o.totalCents / 100).toFixed(2),
+        o.customer.dietaryNotes || '',
         cur,
         presStr,
         o.fxRate ?? 1,

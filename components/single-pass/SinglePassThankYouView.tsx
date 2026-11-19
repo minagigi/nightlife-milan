@@ -4,9 +4,9 @@ import React, { useEffect, useState } from 'react';
 import { CheckCircle2, Mail, MessageCircle, Phone, QrCode, ShieldCheck, Users } from 'lucide-react';
 import Link from '@/components/LocalizedLink';
 import { localePrefix } from '@/lib/i18n/locales';
-import { formatEurFromCents } from '@/lib/single-pass/catalog';
+import { SINGLE_PASS_FEE_RATE, formatEurFromCents } from '@/lib/single-pass/catalog';
 import { formatMinorCurrency } from '@/lib/single-pass/currency';
-import { getSinglePassCopy } from '@/lib/single-pass/i18n35';
+import { formatFeeLabel35, getSinglePassCopy, getTerrazzaCheckoutUi35 } from '@/lib/single-pass/i18n35';
 import type { SinglePassOrder } from '@/lib/single-pass/types';
 import { useSinglePassCart } from './SinglePassCartContext';
 
@@ -20,6 +20,7 @@ type ThankYouOrderView = {
   items: SinglePassOrder['items'];
   totalHeadcount: number;
   subtotalBaseCents: number;
+  feeRate?: number;
   feeCents: number;
   totalCents: number;
   presentmentCurrency: string;
@@ -128,10 +129,26 @@ export default function SinglePassThankYouView({
   }
 
   const paidCur = (order.presentmentCurrency || 'EUR').toUpperCase();
+  const terrazzaUi = getTerrazzaCheckoutUi35(locale);
+  const hasTerrazzaDuomo21 = order.items.some((i) => i.venueId === 'terrazza-duomo-21');
   const hasCapodannoPass = order.items.some((i) =>
     ['gate', 'pineta', 'repvblic', 'justme', 'bischeri', 'voya', 'justme-garda'].includes(
       i.venueId,
     ),
+  );
+  const feeRates = new Set(
+    order.items.map((i) =>
+      typeof i.feeRate === 'number'
+        ? i.feeRate
+        : i.venueId === 'terrazza-duomo-21'
+          ? 0.2
+          : SINGLE_PASS_FEE_RATE,
+    ),
+  );
+  const orderFeeLabel = formatFeeLabel35(
+    locale,
+    typeof order.feeRate === 'number' ? order.feeRate : SINGLE_PASS_FEE_RATE,
+    feeRates.size > 1,
   );
 
   return (
@@ -202,7 +219,7 @@ export default function SinglePassThankYouView({
               <span className="font-mono">{formatEurFromCents(order.subtotalBaseCents, locale)}</span>
             </div>
             <div className="flex justify-between text-[#C2B9AA]">
-              <span>{copy.feeLabel}</span>
+              <span>{orderFeeLabel}</span>
               <span className="font-mono">+{formatEurFromCents(order.feeCents, locale)}</span>
             </div>
             <div className="flex justify-between border-t border-[#F6F1E7]/12 pt-2 font-bold text-[#F6F1E7]">
@@ -229,24 +246,34 @@ export default function SinglePassThankYouView({
           {isIt ? 'Dettaglio Pacchetti Acquistati' : 'Purchased Items'}
         </h2>
         <div className="divide-y divide-[#F6F1E7]/10">
-          {order.items.map((item) => (
-            <div key={item.skuId} className="flex flex-wrap items-center justify-between gap-3 py-3 text-sm">
-              <div>
-                <p className="font-bold text-[#F6F1E7]">
-                  {item.venueName} · {item.title} × {item.quantity}
-                </p>
-                <p className="font-mono text-xs text-[#C2B9AA]">
-                  {item.arrivalTime} · {item.totalGuests || item.quantity} pax
-                  {item.dietaryChoice ? ` · ${item.dietaryChoice}` : ''}
-                </p>
+          {order.items.map((item) => {
+            const paxCount = typeof item.totalGuests === 'number' ? item.totalGuests : item.quantity;
+            return (
+              <div key={item.skuId} className="flex flex-wrap items-center justify-between gap-3 py-3 text-sm">
+                <div>
+                  <p className="font-bold text-[#F6F1E7]">
+                    {item.venueName} · {item.title} × {item.quantity}
+                  </p>
+                  <p className="font-mono text-xs text-[#C2B9AA]">
+                    {item.arrivalTime} · {paxCount > 0 ? `${paxCount} pax` : terrazzaUi.tableAddonBadge}
+                    {item.dietaryChoice ? ` · ${item.dietaryChoice}` : ''}
+                  </p>
+                </div>
+                <span className="font-mono font-bold text-[#F6F1E7]">
+                  {formatEurFromCents(item.lineTotalCents, locale)}
+                </span>
               </div>
-              <span className="font-mono font-bold text-[#F6F1E7]">
-                {formatEurFromCents(item.lineTotalCents, locale)}
-              </span>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
+
+      {hasTerrazzaDuomo21 && (
+        <div className="border border-[#C9A84C]/40 bg-[#17130D] p-5 text-sm text-[#EAE3D5] space-y-2">
+          <p className="font-bold text-[#F6F1E7]">{terrazzaUi.confirmationRefundNotice}</p>
+          <p className="text-xs leading-relaxed text-[#C2B9AA]">{terrazzaUi.entryCheckpointNotice}</p>
+        </div>
+      )}
 
       {/* Dec 20 Mini-Group Notice */}
       {hasCapodannoPass && (

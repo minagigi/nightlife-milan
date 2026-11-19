@@ -25,10 +25,18 @@ function sanitizeOrderForClient(order: SinglePassOrder) {
       age: order.customer.age,
       country: order.customer.country,
       spokenLanguages: order.customer.spokenLanguages,
+      ...(order.customer.dietaryNotes ? { dietaryNotes: order.customer.dietaryNotes } : {}),
     },
     items: order.items,
-    totalHeadcount: order.totalHeadcount || order.items.reduce((s, i) => s + (i.totalGuests || i.quantity), 0),
+    totalHeadcount:
+      typeof order.totalHeadcount === 'number' && order.totalHeadcount > 0
+        ? order.totalHeadcount
+        : order.items.reduce(
+            (s, i) => s + (typeof i.totalGuests === 'number' ? i.totalGuests : i.quantity),
+            0,
+          ),
     subtotalBaseCents: order.subtotalBaseCents,
+    feeRate: order.feeRate,
     feeCents: order.feeCents,
     totalCents: order.totalCents,
     presentmentCurrency: order.presentmentCurrency || 'EUR',

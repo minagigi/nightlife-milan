@@ -16,8 +16,10 @@ import {
   SINGLE_PASS_SKUS,
   STOREFRONT_VENUES,
   SKU_BY_ID,
+  TERRAZZA_DUOMO_FEE_RATE,
   computeSinglePassPrice,
   getConfirmedSkusForInventoryEvent,
+  getSkuFeeRate,
   getVenueIdByEventSlug,
   resolveCatalogSku,
   validateAgeForSkus,
@@ -61,8 +63,9 @@ test('Catalog excludes 55-milano & TOM, includes all 8 confirmed Capodanno + hol
   assert.equal(SKU_BY_ID.get('55-gala-dinner'), undefined);
   assert.equal(resolveCatalogSku('55-club-entry'), null);
 
-  assert.equal(CONFIRMED_CAPODANNO_SLUGS.size, 8);
+  assert.equal(CONFIRMED_CAPODANNO_SLUGS.size, 9);
   assert.ok(CONFIRMED_CAPODANNO_SLUGS.has('capodanno-bobino-milano'));
+  assert.ok(CONFIRMED_CAPODANNO_SLUGS.has('capodanno-terrazza-duomo-21'));
   for (const slug of CONFIRMED_CAPODANNO_SLUGS) {
     assert.ok(getVenueIdByEventSlug(slug), `Confirmed slug missing venue mapping: ${slug}`);
   }
@@ -78,8 +81,11 @@ test('Catalog excludes 55-milano & TOM, includes all 8 confirmed Capodanno + hol
 
   for (const sku of SINGLE_PASS_SKUS) {
     assert.equal(sku.genderPolicy, 'equal');
-    const p1 = computeSinglePassPrice(sku.basePriceCents, 1);
-    assert.equal(p1.unitFeeCents, Math.round(sku.basePriceCents * SINGLE_PASS_FEE_RATE));
+    const expectedRate =
+      sku.venueId === 'terrazza-duomo-21' ? TERRAZZA_DUOMO_FEE_RATE : SINGLE_PASS_FEE_RATE;
+    assert.equal(getSkuFeeRate(sku), expectedRate);
+    const p1 = computeSinglePassPrice(sku.basePriceCents, 1, expectedRate);
+    assert.equal(p1.unitFeeCents, Math.round(sku.basePriceCents * expectedRate));
     assert.equal(p1.unitTotalCents, p1.unitBaseCents + p1.unitFeeCents);
   }
 
@@ -167,6 +173,7 @@ test('Zero public Stripe wording exists across all public pages, UI components, 
     'components/LegalDocumentPage.tsx',
     'components/single-pass/SinglePassStorefront.tsx',
     'components/single-pass/SinglePassVenueModule.tsx',
+    'components/single-pass/TerrazzaDuomoBookingModule.tsx',
     'components/single-pass/ConfirmedEventTicketsBox.tsx',
     'components/single-pass/SinglePassCartDrawer.tsx',
     'components/single-pass/SinglePassCartPageView.tsx',
@@ -182,6 +189,8 @@ test('Zero public Stripe wording exists across all public pages, UI components, 
     'lib/capodanno/paymentTerms35.ts',
     'lib/capodanno/gate35.ts',
     'lib/capodanno/bobino35.ts',
+    'lib/capodanno/terrazzaDuomo21_35.ts',
+    'lib/capodanno/ceresio7Closed35.ts',
     'lib/christmas/voya35.ts',
     'lib/orthodox-nye/justme35.ts',
     'lib/thanksgiving/justme35.ts',

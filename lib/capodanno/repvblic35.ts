@@ -51,6 +51,16 @@ export interface CapodannoLocalizedEventContent {
   menusHeading?: string;
   menus?: CapodannoMenuCard[];
   relatedHolidayBanner?: CapodannoRelatedHolidayBanner;
+  conditionsHeading?: string;
+  conditions?: string[];
+  offerPricesEur?: number[];
+  closedForNye?: boolean;
+  closureBannerTitle?: string;
+  closureBannerBody?: string;
+  alternativesHeading?: string;
+  alternativesSubheading?: string;
+  customFaqs?: Array<{ q: string; a: string }>;
+  shots?: [string, string, string, string];
 }
 
 const ADDR = 'Piazza della Repubblica, 12, 20124 Milano';

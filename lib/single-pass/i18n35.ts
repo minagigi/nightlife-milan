@@ -249,6 +249,7 @@ const IT_PACK: SinglePassCopyPack = {
     'justme-orthodox': 'Capodanno Ortodosso Just Me (13/01)',
     'justme-thanksgiving': 'JustMe · Thanksgiving & Vida Loca (26 Nov)',
     'justme-partenopea': 'JustMe · Cena Spettacolo Partenopea (27 Nov)',
+    'terrazza-duomo-21': 'Terrazza Duomo 21 & MA.RE (Piazza Duomo)',
     'club-event': 'Serata Club Milano',
   },
   embeddedBannerTitle: 'Acquista online i biglietti ufficiali confermati',
@@ -403,6 +404,7 @@ const EN_PACK: SinglePassCopyPack = {
     'justme-orthodox': 'Just Me Orthodox NYE (Jan 13)',
     'justme-thanksgiving': 'JustMe · Thanksgiving & Vida Loca (Nov 26)',
     'justme-partenopea': 'JustMe · Cena Spettacolo Partenopea (Nov 27)',
+    'terrazza-duomo-21': 'Terrazza Duomo 21 & MA.RE (Piazza Duomo)',
     'club-event': 'Milan Official Club Event',
   },
   embeddedBannerTitle: 'Buy confirmed-price tickets directly online',
@@ -631,4 +633,317 @@ export function getSinglePassCopy(locale: string): SinglePassCopyPack {
     (SINGLE_PASS_COPY_35 as Record<string, SinglePassCopyPack>)[locale] ||
     SINGLE_PASS_COPY_35[DEFAULT_LOCALE]
   );
+}
+
+const FEE_LABEL_BY_LOCALE_35: Record<LocaleCode, string> = {
+  en: 'Booking, Concierge & Payment Fee',
+  it: 'Commissione Booking, Concierge e Pagamento',
+  es: 'Comisión de reserva, concierge y pago',
+  fr: 'Frais de réservation, conciergerie et paiement',
+  de: 'Buchungs-, Concierge- und Zahlungsgebühr',
+  pt: 'Taxa de reserva, concierge e pagamento',
+  nl: 'Boekings-, conciërge- en betalingskosten',
+  ru: 'Сбор за бронирование, консьерж и оплату',
+  tr: 'Rezervasyon, concierge ve ödeme ücreti',
+  zh: '预订、礼宾及支付服务费',
+  ar: 'رسوم الحجز والكونسيرج والدفع',
+  bg: 'Такса за резервация, консиерж и плащане',
+  hr: 'Naknada za rezervaciju, concierge i plaćanje',
+  cs: 'Poplatek za rezervaci, concierge a platbu',
+  da: 'Booking-, concierge- og betalingsgebyr',
+  et: 'Broneerimis-, concierge- ja maksetasu',
+  fi: 'Varaus-, concierge- ja maksumaksu',
+  el: 'Τέλος κράτησης, concierge και πληρωμής',
+  hu: 'Foglalási, concierge és fizetési díj',
+  ga: 'Táille áirithinte, concierge agus íocaíochta',
+  lv: 'Rezervācijas, konsjerža un maksājuma maksa',
+  lt: 'Rezervacijos, konsjeržo ir mokėjimo mokestis',
+  mt: 'Ħlas ta’ prenotazzjoni, concierge u pagament',
+  pl: 'Opłata za rezerwację, concierge i płatność',
+  ro: 'Taxă de rezervare, concierge și plată',
+  sk: 'Poplatok za rezerváciu, concierge a platbu',
+  sl: 'Provizija za rezervacijo, concierge in plačilo',
+  sv: 'Boknings-, concierge- och betalningsavgift',
+  no: 'Bestillings-, concierge- og betalingsgebyr',
+  is: 'Bókunar-, móttöku- og greiðslugjald',
+  uk: 'Збір за бронювання, консьєрж та оплату',
+  sq: 'Tarifa e rezervimit, concierge dhe pagesës',
+  sr: 'Naknada za rezervaciju, concierge i plaćanje',
+  bs: 'Naknada za rezervaciju, concierge i plaćanje',
+  mk: 'Надомест за резервација, консиерж и плаќање',
+};
+
+export function formatFeeLabel35(locale: string, feeRate: number, isMixed = false): string {
+  const base =
+    (FEE_LABEL_BY_LOCALE_35 as Record<string, string>)[locale] ||
+    FEE_LABEL_BY_LOCALE_35[DEFAULT_LOCALE];
+  if (isMixed) {
+    return `${base} (15% / 20%)`;
+  }
+  const pct = Math.round(feeRate * 100);
+  return `+${pct}% ${base}`;
+}
+
+export type TerrazzaCheckoutUiPack = {
+  tableAddonBadge: string;
+  tableRequiresFormulaError: string;
+  tableMaxGuestsExceededError: string;
+  allergiesLabel: string;
+  allergiesHint: string;
+  allergiesPlaceholder: string;
+  noAllergiesQuickFill: string;
+  allergiesRequiredError: string;
+  termsNotice20: string;
+  confirmationRefundNotice: string;
+  entryCheckpointNotice: string;
+};
+
+const TERRAZZA_UI_EN: TerrazzaCheckoutUiPack = {
+  tableAddonBadge: 'Terrace table add-on (bottles included)',
+  tableRequiresFormulaError:
+    'Every terrace table or private terrace must be paired with at least 1 per-person formula on the same floor (1st Floor or 5th Floor MA.RE).',
+  tableMaxGuestsExceededError:
+    'Selected per-person formulas exceed the maximum guest capacity of your terrace table (4 guests per terrace table, 8 guests per private terrace). Add another table or adjust guest count.',
+  allergiesLabel: 'Allergies and intolerances (required, deadline Dec 28, 2026)',
+  allergiesHint:
+    'Required for Terrazza Duomo 21 and Terrazza MA.RE bookings. Must be notified no later than December 28, 2026.',
+  allergiesPlaceholder: 'Specify allergies/intolerances or click No allergies',
+  noAllergiesQuickFill: 'No allergies or intolerances',
+  allergiesRequiredError:
+    'Please state any allergies or intolerances (or click No allergies) before proceeding.',
+  termsNotice20:
+    'I accept the Terms & Conditions, Privacy Policy, and Refund Policy of nightlifemilan.com, acknowledge the +20% Booking, Concierge & Payment Fee on Terrazza Duomo 21 / MA.RE packages, and accept official venue rules.',
+  confirmationRefundNotice:
+    'Booking confirmed by Nightlife Milan after verifying availability with the venue; if the package is no longer available, full refund.',
+  entryCheckpointNotice:
+    'Access via Via Silvio Pellico 2 (Piazza del Duomo 21). Piazza Duomo has 9 security checkpoints manned by authorities on December 31: arrive at least 45 minutes early. Allergies must be reported by December 28.',
+};
+
+const TERRAZZA_UI_IT: TerrazzaCheckoutUiPack = {
+  tableAddonBadge: 'Supplemento tavolo terrazza (bottiglie incluse)',
+  tableRequiresFormulaError:
+    'Ogni tavolo in terrazza o terrazzino privato deve essere abbinato ad almeno 1 formula a persona dello stesso piano (1° Piano oppure 5° Piano MA.RE).',
+  tableMaxGuestsExceededError:
+    'Le formule a persona selezionate superano la capienza massima del tavolo in terrazza (max 4 ospiti per tavolo, max 8 ospiti per terrazzino privato). Aggiungi un altro tavolo o regola il numero di ospiti.',
+  allergiesLabel: 'Allergie e intolleranze alimentari (obbligatorio, entro il 28 dicembre)',
+  allergiesHint:
+    'Dato obbligatorio per le prenotazioni Terrazza Duomo 21 e Terrazza MA.RE, da comunicare entro e non oltre il 28 dicembre 2026.',
+  allergiesPlaceholder: 'Indica eventuali allergie/intolleranze oppure clicca Nessuna allergia',
+  noAllergiesQuickFill: 'Nessuna allergia o intolleranza',
+  allergiesRequiredError:
+    'Indica eventuali allergie o intolleranze alimentari (oppure clicca Nessuna allergia) per proseguire.',
+  termsNotice20:
+    'Accetto Termini e Condizioni, Privacy Policy e Politica di Rimborso di nightlifemilan.com, confermo la commissione del +20% di booking, concierge e pagamento per Terrazza Duomo 21 / MA.RE e le condizioni ufficiali del locale.',
+  confirmationRefundNotice:
+    'Prenotazione confermata da Nightlife Milan dopo la verifica della disponibilità col locale; se il pacchetto non è più disponibile, rimborso completo.',
+  entryCheckpointNotice:
+    'Ingresso da Via Silvio Pellico 2 (Piazza del Duomo 21). In Piazza Duomo saranno presenti 9 varchi presidiati dalle forze dell’ordine: presentarsi con almeno 45 minuti di anticipo. Allergie da comunicare entro il 28 dicembre.',
+};
+
+const TERRAZZA_UI_OVERRIDES: Partial<Record<LocaleCode, Partial<TerrazzaCheckoutUiPack>>> = {
+  es: {
+    tableAddonBadge: 'Suplemento mesa terraza (botellas incluidas)',
+    tableRequiresFormulaError:
+      'Cada mesa en terraza o terraza privada debe combinarse con al menos 1 fórmula por persona de la misma planta (1ª Planta o 5ª Planta MA.RE).',
+    tableMaxGuestsExceededError:
+      'Las fórmulas por persona superan la capacidad máxima de la mesa (máx. 4 personas por mesa, máx. 8 por terraza privada).',
+    allergiesLabel: 'Alergias e intolerancias (obligatorio antes del 28 de diciembre)',
+    noAllergiesQuickFill: 'Sin alergias ni intolerancias',
+    allergiesRequiredError: 'Indica alergias o intolerancias (o pulsa Sin alergias) antes de continuar.',
+    confirmationRefundNotice:
+      'Reserva confirmada por Nightlife Milan tras verificar la disponibilidad con el local; si el paquete ya no está disponible, reembolso completo.',
+    entryCheckpointNotice:
+      'Acceso por Via Silvio Pellico 2 (Piazza del Duomo 21). Hay 9 controles de acceso en Piazza Duomo: llegar al menos 45 minutos antes. Comunicar alergias antes del 28 de diciembre.',
+  },
+  fr: {
+    tableAddonBadge: 'Supplément table terrasse (bouteilles incluses)',
+    tableRequiresFormulaError:
+      'Chaque table en terrasse ou terrasse privée doit être associée à au moins 1 formule par personne du même étage (1er étage ou 5e étage MA.RE).',
+    tableMaxGuestsExceededError:
+      'Les formules par personne dépassent la capacité maximale de la table (max 4 personnes par table, max 8 pour la terrasse privée).',
+    allergiesLabel: 'Allergies et intolérances (obligatoire avant le 28 décembre)',
+    noAllergiesQuickFill: 'Aucune allergie ni intolérance',
+    allergiesRequiredError: 'Veuillez indiquer vos allergies ou cliquer sur Aucune allergie pour continuer.',
+    confirmationRefundNotice:
+      'Réservation confirmée par Nightlife Milan après vérification de la disponibilité auprès du lieu ; si la formule n’est plus disponible, remboursement intégral.',
+    entryCheckpointNotice:
+      'Entrée par Via Silvio Pellico 2 (Piazza del Duomo 21). 9 points de contrôle sécurisés sur la Piazza Duomo : arrivez au moins 45 minutes en avance. Allergies à communiquer avant le 28 décembre.',
+  },
+  de: {
+    tableAddonBadge: 'Terrassentisch-Zuschlag (Flaschen inklusive)',
+    tableRequiresFormulaError:
+      'Jeder Terrassentisch oder die private Terrasse muss mit mindestens 1 Personen-Paket derselben Etage (1. OG oder 5. OG MA.RE) kombiniert werden.',
+    tableMaxGuestsExceededError:
+      'Die gewählten Personen-Pakete überschreiten die maximale Tischkapazität (max. 4 Gäste pro Terrassentisch, max. 8 für die private Terrasse).',
+    allergiesLabel: 'Allergien und Unverträglichkeiten (Pflichtfeld, Frist 28. Dezember)',
+    noAllergiesQuickFill: 'Keine Allergien oder Unverträglichkeiten',
+    allergiesRequiredError: 'Bitte geben Sie Allergien an oder klicken Sie auf Keine Allergien.',
+    confirmationRefundNotice:
+      'Buchung von Nightlife Milan nach Verfügbarkeitsprüfung mit dem Lokal bestätigt; ist das Paket nicht mehr verfügbar, erfolgt eine vollständige Rückerstattung.',
+    entryCheckpointNotice:
+      'Zugang über Via Silvio Pellico 2 (Piazza del Duomo 21). Auf der Piazza Duomo gibt es 9 Sicherheitskontrollen: bitte mindestens 45 Minuten früher erscheinen. Allergien bis 28. Dezember melden.',
+  },
+  pt: {
+    tableAddonBadge: 'Suplemento mesa terraço (garrafas incluídas)',
+    noAllergiesQuickFill: 'Sem alergias ou intolerâncias',
+    confirmationRefundNotice:
+      'Reserva confirmada pela Nightlife Milan após verificação de disponibilidade com o espaço; se o pacote já não estiver disponível, reembolso total.',
+  },
+  nl: {
+    tableAddonBadge: 'Terrastafel toeslag (flessen inbegrepen)',
+    noAllergiesQuickFill: 'Geen allergieën of intoleranties',
+    confirmationRefundNotice:
+      'Reservering bevestigd door Nightlife Milan na controle van de beschikbaarheid bij de locatie; indien het pakket niet meer beschikbaar is, volledige terugbetaling.',
+  },
+  ru: {
+    tableAddonBadge: 'Доплата за стол на террасе (бутылки включены)',
+    noAllergiesQuickFill: 'Нет аллергии и непереносимости',
+    confirmationRefundNotice:
+      'Бронирование подтверждается Nightlife Milan после проверки наличия мест с площадкой; если пакет больше недоступен, полный возврат средств.',
+  },
+  tr: {
+    tableAddonBadge: 'Teras masası ek paketi (şişeler dahil)',
+    noAllergiesQuickFill: 'Alerji veya intolerans yok',
+    confirmationRefundNotice:
+      'Rezervasyon mekanla müsaitlik doğrulandıktan sonra Nightlife Milan tarafından onaylanır; paket artık mevcut değilse tam iade yapılır.',
+  },
+  zh: {
+    tableAddonBadge: '露台桌位附加项（含酒水）',
+    noAllergiesQuickFill: '无食物过敏或不耐受',
+    confirmationRefundNotice:
+      'Nightlife Milan 在与场地确认余位后确认预订；如套餐已售罄，将提供全额退款。',
+  },
+  ar: {
+    tableAddonBadge: 'إضافة طاولة التراس (تشمل الزجاجات)',
+    noAllergiesQuickFill: 'لا توجد حساسية أو عدم تحمل غذائي',
+    confirmationRefundNotice:
+      'يتم تأكيد الحجز من قبل Nightlife Milan بعد التحقق من التوفر مع المكان؛ وفي حال عدم توفر الباقة يتم استرداد المبلغ بالكامل.',
+  },
+  pl: {
+    noAllergiesQuickFill: 'Brak alergii i nietolerancji',
+    confirmationRefundNotice:
+      'Rezerwacja potwierdzana przez Nightlife Milan po sprawdzeniu dostępności w lokalu; jeśli pakiet nie jest już dostępny, pełny zwrot kosztów.',
+  },
+  ro: {
+    noAllergiesQuickFill: 'Fără alergii sau intoleranțe',
+    confirmationRefundNotice:
+      'Rezervare confirmată de Nightlife Milan după verificarea disponibilității cu localul; dacă pachetul nu mai este disponibil, rambursare integrală.',
+  },
+  el: {
+    noAllergiesQuickFill: 'Καμία αλλεργία ή δυσανεξία',
+    confirmationRefundNotice:
+      'Η κράτηση επιβεβαιώνεται από το Nightlife Milan μετά από έλεγχο διαθεσιμότητας με τον χώρο. Εάν το πακέτο δεν είναι πλέον διαθέσιμο, γίνεται πλήρης επιστροφή χρημάτων.',
+  },
+  uk: {
+    noAllergiesQuickFill: 'Немає алергії або непереносимості',
+    confirmationRefundNotice:
+      'Бронювання підтверджується Nightlife Milan після перевірки наявності місць із закладом; якщо пакет більше недоступний, повне повернення коштів.',
+  },
+  sv: {
+    noAllergiesQuickFill: 'Inga allergier eller intoleranser',
+    confirmationRefundNotice:
+      'Bokningen bekräftas av Nightlife Milan efter tillgänglighetskontroll med lokalen; om paketet inte längre är tillgängligt ges full återbetalning.',
+  },
+  no: {
+    noAllergiesQuickFill: 'Ingen allergier eller intoleranser',
+    confirmationRefundNotice:
+      'Bestillingen bekreftes av Nightlife Milan etter kontroll av tilgjengelighet hos stedet; hvis pakken ikke lenger er tilgjengelig, gis full refusjon.',
+  },
+  da: {
+    noAllergiesQuickFill: 'Ingen allergier eller intolerancer',
+    confirmationRefundNotice:
+      'Bookingen bekræftes af Nightlife Milan efter tjek af tilgængelighed hos stedet; hvis pakken ikke længere er tilgængelig, fuld refusion.',
+  },
+  fi: {
+    noAllergiesQuickFill: 'Ei allergioita tai yliherkkyyksiä',
+    confirmationRefundNotice:
+      'Nightlife Milan vahvistaa varauksen tarkistettuaan saatavuuden paikan kanssa; jos paketti ei ole enää saatavilla, täysi hyvitys.',
+  },
+  cs: {
+    noAllergiesQuickFill: 'Žádné alergie ani intolerance',
+    confirmationRefundNotice:
+      'Rezervaci potvrzuje Nightlife Milan po ověření dostupnosti s podnikem; pokud balíček již není dostupný, plná refundace.',
+  },
+  sk: {
+    noAllergiesQuickFill: 'Žiadne alergie ani intolerancie',
+    confirmationRefundNotice:
+      'Rezerváciu potvrdzuje Nightlife Milan po overení dostupnosti s podnikom; ak balíček už nie je dostupný, plná refundácia.',
+  },
+  hu: {
+    noAllergiesQuickFill: 'Nincs ételallergia vagy intolerancia',
+    confirmationRefundNotice:
+      'A foglalást a Nightlife Milan a helyszínnel való egyeztetés után erősíti meg; ha a csomag már nem elérhető, teljes visszatérítés jár.',
+  },
+  bg: {
+    noAllergiesQuickFill: 'Без алергии или непоносимости',
+    confirmationRefundNotice:
+      'Резервацията се потвърждава от Nightlife Milan след проверка на наличността със заведението; ако пакетът вече не е наличен, пълно възстановяване на сумата.',
+  },
+  hr: {
+    noAllergiesQuickFill: 'Bez alergija ili intolerancija',
+    confirmationRefundNotice:
+      'Rezervaciju potvrđuje Nightlife Milan nakon provjere raspoloživosti s lokalom; ako paket više nije dostupan, puni povrat novca.',
+  },
+  sl: {
+    noAllergiesQuickFill: 'Brez alergij ali intoleranc',
+    confirmationRefundNotice:
+      'Rezervacijo potrdi Nightlife Milan po preverjanju razpoložljivosti pri lokalu; če paket ni več na voljo, sledi celotno vračilo.',
+  },
+  sr: {
+    noAllergiesQuickFill: 'Nema alergija ni intolerancija',
+    confirmationRefundNotice:
+      'Rezervaciju potvrđuje Nightlife Milan nakon provere raspoloživosti sa lokalom; ako paket više nije dostupan, pun povraćaj novca.',
+  },
+  bs: {
+    noAllergiesQuickFill: 'Nema alergija ni intolerancija',
+    confirmationRefundNotice:
+      'Rezervaciju potvrđuje Nightlife Milan nakon provjere raspoloživosti sa lokalom; ako paket više nije dostupan, puni povrat novca.',
+  },
+  mk: {
+    noAllergiesQuickFill: 'Нема алергии или нетолеранции',
+    confirmationRefundNotice:
+      'Резервацијата ја потврдува Nightlife Milan по проверка на достапноста со локалот; ако пакетот веќе не е достапен, целосно враќање на средствата.',
+  },
+  sq: {
+    noAllergiesQuickFill: 'Asnjë alergji ose intolerancë',
+    confirmationRefundNotice:
+      'Rezervimi konfirmohet nga Nightlife Milan pas verifikimit të disponueshmërisë me lokalin; nëse paketa nuk është më e disponueshme, rimbursim i plotë.',
+  },
+  et: {
+    noAllergiesQuickFill: 'Allergiaid ja talumatusi ei ole',
+    confirmationRefundNotice:
+      'Nightlife Milan kinnitab broneeringu pärast saadavuse kontrollimist kohaga; kui pakett ei ole enam saadaval, tagastatakse kogu summa.',
+  },
+  lv: {
+    noAllergiesQuickFill: 'Nav alerģiju vai nepanesību',
+    confirmationRefundNotice:
+      'Nightlife Milan apstiprina rezervāciju pēc pieejamības pārbaudes ar norises vietu; ja komplekts vairs nav pieejams, pilna atmaksa.',
+  },
+  lt: {
+    noAllergiesQuickFill: 'Alergijų ar netoleravimo nėra',
+    confirmationRefundNotice:
+      'Nightlife Milan patvirtina rezervaciją patikrinus užimtumą su vieta; jei paketo nebėra, grąžinama visa suma.',
+  },
+  ga: {
+    noAllergiesQuickFill: 'Gan ailléirgí ná éadulaingt',
+    confirmationRefundNotice:
+      'Deimhníonn Nightlife Milan an áirithint tar éis infhaighteacht a sheiceáil leis an ionad; mura bhfuil an pacáiste ar fáil a thuilleadh, aisíocaíocht iomlán.',
+  },
+  mt: {
+    noAllergiesQuickFill: 'Ebda allerġija jew intolleranza',
+    confirmationRefundNotice:
+      'Il-prenotazzjoni tiġi kkonfermata minn Nightlife Milan wara verifika tad-disponibbiltà mal-post; jekk il-pakkett ma jkunx aktar disponibbli, rifużjoni sħiħa.',
+  },
+  is: {
+    noAllergiesQuickFill: 'Engin ofnæmi eða óþol',
+    confirmationRefundNotice:
+      'Nightlife Milan staðfestir bókun eftir athugun á framboði hjá staðnum; ef pakkinn er ekki lengur í boði er full endurgreiðsla veitt.',
+  },
+};
+
+export function getTerrazzaCheckoutUi35(locale: string): TerrazzaCheckoutUiPack {
+  if (locale === 'it') return TERRAZZA_UI_IT;
+  if (locale === 'en') return TERRAZZA_UI_EN;
+  const ov = (TERRAZZA_UI_OVERRIDES as Record<string, Partial<TerrazzaCheckoutUiPack>>)[locale];
+  return ov ? { ...TERRAZZA_UI_EN, ...ov } : TERRAZZA_UI_EN;
 }

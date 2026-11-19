@@ -18,11 +18,12 @@ import {
   VENUE_BY_ID,
   computeSinglePassPrice,
   formatEurFromCents,
+  getSkuFeeRate,
   resolveCatalogSku,
   validateAgeForSkus,
 } from '@/lib/single-pass/catalog';
 import { formatMinorCurrency, type SupportedCurrency } from '@/lib/single-pass/currency';
-import { getSinglePassCopy } from '@/lib/single-pass/i18n35';
+import { formatFeeLabel35, getSinglePassCopy, getTerrazzaCheckoutUi35 } from '@/lib/single-pass/i18n35';
 import type { SinglePassSku } from '@/lib/single-pass/types';
 import { readClientAttribution } from './AttributionTracker';
 import EmbeddedPaymentForm from './EmbeddedPaymentForm';
@@ -59,6 +60,10 @@ export default function SinglePassCheckoutView({
     subtotalBaseCents,
     totalFeeCents,
     grandTotalCents,
+    effectiveFeeRate,
+    hasMixedFeeRates,
+    hasTerrazzaDuomo21,
+    cartValidation,
     totalGuests,
     currency,
     setCurrency,
@@ -69,6 +74,11 @@ export default function SinglePassCheckoutView({
   } = useSinglePassCart();
 
   const copy = getSinglePassCopy(locale);
+  const terrazzaUi = getTerrazzaCheckoutUi35(locale);
+  const feeLabel = formatFeeLabel35(locale, effectiveFeeRate, hasMixedFeeRates);
+  const headerFeeTag = hasMixedFeeRates
+    ? '15% / 20% FEE'
+    : `+${Math.round(effectiveFeeRate * 100)}% FEE`;
   const lp = localePrefix(locale);
   const isIt = locale === 'it';
 
@@ -178,6 +188,20 @@ export default function SinglePassCheckoutView({
       return;
     }
 
+    if (!cartValidation.ok) {
+      setErrorMessage(
+        cartValidation.errorCode === 'TABLE_REQUIRES_FORMULA'
+          ? terrazzaUi.tableRequiresFormulaError
+          : terrazzaUi.tableMaxGuestsExceededError,
+      );
+      return;
+    }
+
+    if (hasTerrazzaDuomo21 && !dietaryNotes.trim()) {
+      setErrorMessage(terrazzaUi.allergiesRequiredError);
+      return;
+    }
+
     if (liveAgeCheck && !liveAgeCheck.ok) {
       setErrorMessage(
         liveAgeCheck.errorCode === 'PINETA_STRICT_UNDER_30'
@@ -274,7 +298,7 @@ export default function SinglePassCheckoutView({
     <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="mb-8 border-b border-[#F6F1E7]/15 pb-6">
         <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#EAE3D5]">
-          NIGHTLIFE MILAN · OFFICIAL CHECKOUT (+15% FEE)
+          NIGHTLIFE MILAN · OFFICIAL CHECKOUT ({headerFeeTag})
         </p>
         <h1 className="mt-2 font-serif text-3xl font-bold text-[#F6F1E7] sm:text-4xl">
           {copy.checkoutTitle}
@@ -395,7 +419,9 @@ export default function SinglePassCheckoutView({
                 if (!sku) return null;
                 const venue = VENUE_BY_ID[sku.venueId];
                 const venueName = sku.venueNameOverride || venue?.name || 'Nightlife Milan';
-                const p = computeSinglePassPrice(sku.basePriceCents, item.quantity);
+                const skuFeeRate = getSkuFeeRate(sku);
+                const p = computeSinglePassPrice(sku.basePriceCents, item.quantity, skuFeeRate);
+                const itemPax = Math.max(0, sku.guestsPerUnit ?? 1) * item.quantity;
 
                 return (
                   <div
@@ -404,11 +430,15 @@ export default function SinglePassCheckoutView({
                   >
                     <div className="min-w-0 flex-1">
                       <p className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#C9A84C]">
-                        {venueName} · {sku.arrivalTime} · {(sku.guestsPerUnit || 1) * item.quantity} pax
+                        {venueName} · {sku.arrivalTime} ·{' '}
+                        {itemPax > 0 ? `${itemPax} pax` : terrazzaUi.tableAddonBadge}
                       </p>
                       <h2 className="font-serif text-base font-bold text-[#F6F1E7]">
                         {isIt ? sku.titleIt : sku.titleEn}
                       </h2>
+                      {item.dietaryChoice && !sku.requiresDietary && (
+                        <p className="mt-1 text-xs text-[#C2B9AA]">{item.dietaryChoice}</p>
+                      )}
                       {sku.requiresDietary && (
                         <select
                           aria-label={copy.formDietary}
@@ -636,17 +666,40 @@ export default function SinglePassCheckoutView({
               </div>
 
               <div>
-                <label htmlFor="sp-notes" className="block text-xs font-bold text-[#EAE3D5]">
-                  {copy.formDietary}
-                </label>
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <label htmlFor="sp-notes" className="block text-xs font-bold text-[#EAE3D5]">
+                    {hasTerrazzaDuomo21 ? `${terrazzaUi.allergiesLabel} *` : copy.formDietary}
+                  </label>
+                  {hasTerrazzaDuomo21 && (
+                    <button
+                      type="button"
+                      onClick={() => setDietaryNotes(terrazzaUi.noAllergiesQuickFill)}
+                      className="border border-[#C9A84C]/50 bg-[#17130D] px-2.5 py-1 text-[11px] font-bold text-[#F6F1E7] transition hover:border-[#C9A84C]"
+                    >
+                      {terrazzaUi.noAllergiesQuickFill}
+                    </button>
+                  )}
+                </div>
                 <textarea
                   id="sp-notes"
                   rows={2}
+                  required={hasTerrazzaDuomo21}
                   value={dietaryNotes}
                   onChange={(e) => setDietaryNotes(e.target.value)}
+                  placeholder={hasTerrazzaDuomo21 ? terrazzaUi.allergiesPlaceholder : undefined}
                   className="mt-1.5 w-full border border-[#F6F1E7]/25 bg-[#050505] p-3 text-sm text-[#F6F1E7]"
                 />
+                {hasTerrazzaDuomo21 && (
+                  <p className="mt-1 text-[11px] text-[#C9A84C]">{terrazzaUi.allergiesHint}</p>
+                )}
               </div>
+
+              {hasTerrazzaDuomo21 && (
+                <div className="border border-[#C9A84C]/35 bg-[#17130D] p-3.5 text-xs leading-relaxed text-[#EAE3D5]">
+                  <p className="font-semibold text-[#F6F1E7]">{terrazzaUi.confirmationRefundNotice}</p>
+                  <p className="mt-1 text-[#C2B9AA]">{terrazzaUi.entryCheckpointNotice}</p>
+                </div>
+              )}
 
               <div className="space-y-2 border-t border-[#F6F1E7]/12 pt-4">
                 <label className="flex items-start gap-3 text-xs leading-relaxed text-[#C2B9AA] cursor-pointer">
@@ -657,7 +710,7 @@ export default function SinglePassCheckoutView({
                     onChange={(e) => setAcceptedTerms(e.target.checked)}
                     className="mt-1 h-4 w-4 shrink-0 accent-[#F6F1E7]"
                   />
-                  <span>{copy.formTermsLabel}</span>
+                  <span>{hasTerrazzaDuomo21 ? terrazzaUi.termsNotice20 : copy.formTermsLabel}</span>
                 </label>
                 <div className="flex flex-wrap gap-4 pl-7 text-[11px] font-semibold text-[#C9A84C]">
                   <Link href={`${lp}/terms`} locale={locale} className="underline">
@@ -673,6 +726,17 @@ export default function SinglePassCheckoutView({
               </div>
             </div>
 
+            {!cartValidation.ok && (
+              <div className="flex items-start gap-2.5 border border-rose-500/50 bg-rose-950/40 p-4 text-sm text-rose-200">
+                <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
+                <span>
+                  {cartValidation.errorCode === 'TABLE_REQUIRES_FORMULA'
+                    ? terrazzaUi.tableRequiresFormulaError
+                    : terrazzaUi.tableMaxGuestsExceededError}
+                </span>
+              </div>
+            )}
+
             {errorMessage && (
               <div className="border border-rose-500/50 bg-rose-950/40 p-4 text-sm text-rose-200">
                 {errorMessage}
@@ -681,7 +745,7 @@ export default function SinglePassCheckoutView({
 
             <button
               type="submit"
-              disabled={submitting || Boolean(liveAgeCheck && !liveAgeCheck.ok)}
+              disabled={submitting || !cartValidation.ok || Boolean(liveAgeCheck && !liveAgeCheck.ok)}
               className="flex min-h-[52px] w-full items-center justify-center gap-2 bg-[#F6F1E7] px-5 py-3.5 text-xs font-extrabold uppercase tracking-widest text-[#050505] transition hover:bg-[#EAE3D5] disabled:cursor-not-allowed disabled:opacity-50"
             >
               <Lock className="h-4 w-4" aria-hidden="true" />
@@ -706,7 +770,7 @@ export default function SinglePassCheckoutView({
                   <span className="font-mono">{formatEurFromCents(subtotalBaseCents, locale)}</span>
                 </div>
                 <div className="flex justify-between text-[#EAE3D5]">
-                  <span>{copy.feeLabel}</span>
+                  <span>{feeLabel}</span>
                   <span className="font-mono">+{formatEurFromCents(totalFeeCents, locale)}</span>
                 </div>
                 <div className="flex justify-between border-t border-[#F6F1E7]/15 pt-2.5 text-base font-bold text-[#F6F1E7]">

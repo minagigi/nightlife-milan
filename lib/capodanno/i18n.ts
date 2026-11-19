@@ -9,6 +9,8 @@ import { getBischeriNyeContent } from '@/lib/capodanno/bischeri35';
 import { getBobinoNyeContent } from '@/lib/capodanno/bobino35';
 import { getGateNyeContent } from '@/lib/capodanno/gate35';
 import { getTomNyeContent } from '@/lib/capodanno/tom35';
+import { getTerrazzaDuomo21NyeContent } from '@/lib/capodanno/terrazzaDuomo21_35';
+import { getCeresio7ClosedNyeContent } from '@/lib/capodanno/ceresio7Closed35';
 import { getJustMeOrthodoxRelatedBanner } from '@/lib/orthodox-nye/justme35';
 import type { CapodannoCategoryPageDef, CapodannoEventItem } from '@/lib/capodannoEvents';
 import { SITE_CONTACT } from '@/config/contact';
@@ -527,6 +529,8 @@ function getOverrideEventContent(slug: string, locale: string): CapodannoLocaliz
   if (slug === 'capodanno-bobino-milano') return getBobinoNyeContent(locale);
   if (slug === 'capodanno-gate-milano') return getGateNyeContent(locale);
   if (slug === 'capodanno-tom-the-ordinary-market-milano') return getTomNyeContent(locale);
+  if (slug === 'capodanno-terrazza-duomo-21') return getTerrazzaDuomo21NyeContent(locale);
+  if (slug === 'capodanno-ceresio-7-milano') return getCeresio7ClosedNyeContent(locale);
   return null;
 }
 

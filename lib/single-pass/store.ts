@@ -188,7 +188,10 @@ export function toOrderSummary(order: SinglePassOrder): SinglePassOrderSummary {
   const totalHeadcount =
     typeof order.totalHeadcount === 'number' && order.totalHeadcount > 0
       ? order.totalHeadcount
-      : order.items.reduce((sum, item) => sum + (item.totalGuests || item.quantity || 1), 0);
+      : order.items.reduce(
+          (sum, item) => sum + (typeof item.totalGuests === 'number' ? item.totalGuests : item.quantity || 1),
+          0,
+        );
 
   return {
     id: order.id,

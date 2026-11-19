@@ -22,6 +22,7 @@ import type {
 } from './types';
 
 export const SINGLE_PASS_FEE_RATE = 0.15 as const;
+export const TERRAZZA_DUOMO_FEE_RATE = 0.20 as const;
 
 export const WHATSAPP_MINI_GROUP_START_DATE_ISO = '2026-12-20';
 
@@ -47,6 +48,7 @@ export const CONFIRMED_CAPODANNO_SLUGS = new Set<string>([
   'capodanno-bobino-milano',
   'capodanno-voya-rooftop-milano',
   'capodanno-justme-garda-lake',
+  'capodanno-terrazza-duomo-21',
 ]);
 
 export function isConfirmedCapodannoSlug(slug: string): boolean {
@@ -293,6 +295,26 @@ export const SINGLE_PASS_VENUES: readonly SinglePassVenueSpec[] = [
     dressCodeIt: 'Elegante (uomo: pantalone lungo obbligatorio)',
     dressCodeEn: 'Smart Elegant (men: long trousers mandatory)',
     posterSrc: PARTENOPEA_JUSTME_POSTER_SRC,
+  },
+  {
+    id: 'terrazza-duomo-21',
+    eventSlug: 'capodanno-terrazza-duomo-21',
+    name: 'Terrazza Duomo 21 (1° Piano) & Terrazza MA.RE (5° Piano)',
+    taglineIt: 'Vista Duomo & Galleria · 1° Piano Chef Valerio Braschi & 5° Piano MA.RE Chef Capitaneo (2★ Michelin)',
+    taglineEn: 'Duomo & Galleria View · 1st Floor Chef Valerio Braschi & 5th Floor MA.RE Chefs Capitaneo (2★ Michelin)',
+    district: 'Piazza del Duomo / Centro Storico',
+    address: 'Piazza del Duomo 21 (Ingresso Via Silvio Pellico 2), 20121 Milano',
+    hours: '20:30 – 05:00',
+    ageBandLabelIt: '18+ anni · Luxury Rooftop Piazza Duomo',
+    ageBandLabelEn: 'Ages 18+ · Piazza Duomo Luxury Rooftop',
+    recommendedMinAge: 21,
+    recommendedMaxAge: 65,
+    strictMaxAge: null,
+    musicIt: 'DJ Set fino al mattino su entrambi i piani (1° Piano Terrazza Duomo 21 & 5° Piano Terrazza MA.RE)',
+    musicEn: 'DJ Set until morning on both floors (1st Floor Terrazza Duomo 21 & 5th Floor Terrazza MA.RE)',
+    dressCodeIt: 'Black Tie / Abito da sera elegante di San Silvestro',
+    dressCodeEn: 'Black Tie / Formal New Year’s Eve Evening Attire',
+    posterSrc: getCapodannoOfficialPosterSrc('capodanno-terrazza-duomo-21'),
   },
   {
     id: 'club-event',
@@ -1217,6 +1239,247 @@ export const SINGLE_PASS_SKUS: readonly SinglePassSku[] = [
     eventDateLabel: '2026-11-27',
     confirmed: true,
   },
+  // TERRAZZA DUOMO 21 (1° PIANO) & TERRAZZA MA.RE (5° PIANO) — CAPODANNO 2027 (+20% BOOKING, CONCIERGE & PAYMENT FEE)
+  {
+    id: 'terrazza21-f1-dinner-place-rubia',
+    venueId: 'terrazza-duomo-21',
+    category: 'gala-dinner',
+    featured: true,
+    titleIt: '1° Piano · Cena Placé Chef Valerio Braschi (Secondo: Rubia Gallega Dry Aged)',
+    titleEn: '1st Floor · Chef Valerio Braschi Seated Dinner (Main: Dry-Aged Rubia Gallega)',
+    descriptionIt:
+      'Vista Galleria / Piazza Duomo 1° piano dalle 20:30 nelle sale interne. Menu completo Chef Valerio Braschi con secondo Rubia gallega dry aged, vini (1 bott. ogni 2), acqua, caffè Lavazza, flûte di mezzanotte e DJ set fino al mattino. Tavoli condivisi min. 10 ospiti. Listino locale 300€ + 20% fee (60€) = 360€.',
+    descriptionEn:
+      '1st Floor Galleria & Piazza Duomo view from 20:30 in indoor dining rooms. Full Chef Valerio Braschi menu with Dry-Aged Rubia Gallega main course, wine (1 bottle per 2), water, Lavazza coffee, midnight champagne flûte & DJ set until morning. Shared tables min. 10 guests. Venue rate €300 + 20% fee (€60) = €360.',
+    arrivalTime: '20:30',
+    basePriceCents: 30000,
+    feeRate: TERRAZZA_DUOMO_FEE_RATE,
+    guestsPerUnit: 1,
+    genderPolicy: 'equal',
+    dietaryPreset: 'Rubia gallega dry aged',
+    floorGroup: 'f1',
+    maxQuantityPerOrder: 20,
+    eventDateLabel: '2026-12-31',
+    venueNameOverride: 'Terrazza Duomo 21 · 1° Piano',
+    confirmed: true,
+  },
+  {
+    id: 'terrazza21-f1-dinner-place-ricciola',
+    venueId: 'terrazza-duomo-21',
+    category: 'gala-dinner',
+    featured: true,
+    titleIt: '1° Piano · Cena Placé Chef Valerio Braschi (Secondo: Ricciola)',
+    titleEn: '1st Floor · Chef Valerio Braschi Seated Dinner (Main: Amberjack / Ricciola)',
+    descriptionIt:
+      'Vista Galleria / Piazza Duomo 1° piano dalle 20:30 nelle sale interne. Menu completo Chef Valerio Braschi con secondo Ricciola, zucca tartufata e tarassaco al miele, vini (1 bott. ogni 2), acqua, caffè Lavazza, flûte di mezzanotte e DJ set fino al mattino. Tavoli condivisi min. 10 ospiti. Listino locale 300€ + 20% fee (60€) = 360€.',
+    descriptionEn:
+      '1st Floor Galleria & Piazza Duomo view from 20:30 in indoor dining rooms. Full Chef Valerio Braschi menu with Amberjack, truffled pumpkin & honey dandelion main course, wine (1 bottle per 2), water, Lavazza coffee, midnight champagne flûte & DJ set until morning. Shared tables min. 10 guests. Venue rate €300 + 20% fee (€60) = €360.',
+    arrivalTime: '20:30',
+    basePriceCents: 30000,
+    feeRate: TERRAZZA_DUOMO_FEE_RATE,
+    guestsPerUnit: 1,
+    genderPolicy: 'equal',
+    dietaryPreset: 'Ricciola',
+    floorGroup: 'f1',
+    maxQuantityPerOrder: 20,
+    eventDateLabel: '2026-12-31',
+    venueNameOverride: 'Terrazza Duomo 21 · 1° Piano',
+    confirmed: true,
+  },
+  {
+    id: 'terrazza21-f1-dinner-buffet',
+    venueId: 'terrazza-duomo-21',
+    category: 'royal-buffet',
+    featured: true,
+    titleIt: '1° Piano · Cena a Buffet (dalle 21:00 · Posto Lounge)',
+    titleEn: '1st Floor · Gala Buffet Dinner (from 21:00 · Lounge Seating)',
+    descriptionIt:
+      'Vista Piazza Duomo 1° piano dalle 21:00 nelle sale interne con posto a sedere assegnato in area lounge. Finger food gourmet, marinati, primi, secondi, contorni, dessert, vini (1 bott. ogni 2), acqua, caffè Lavazza, flûte di mezzanotte e DJ set fino al mattino. Listino locale 200€ + 20% fee (40€) = 240€.',
+    descriptionEn:
+      '1st Floor Piazza Duomo view from 21:00 in indoor rooms with assigned lounge seating. Gourmet finger foods, marinated fish, first & main courses, sides, desserts, wine (1 bottle per 2), water, Lavazza coffee, midnight champagne flûte & DJ set until morning. Venue rate €200 + 20% fee (€40) = €240.',
+    arrivalTime: '21:00',
+    basePriceCents: 20000,
+    feeRate: TERRAZZA_DUOMO_FEE_RATE,
+    guestsPerUnit: 1,
+    genderPolicy: 'equal',
+    floorGroup: 'f1',
+    maxQuantityPerOrder: 20,
+    eventDateLabel: '2026-12-31',
+    venueNameOverride: 'Terrazza Duomo 21 · 1° Piano',
+    confirmed: true,
+  },
+  {
+    id: 'terrazza21-f1-brindisi',
+    venueId: 'terrazza-duomo-21',
+    category: 'club-entry',
+    titleIt: '1° Piano · Formula Brindisi (dalle 23:00 · 1 Flûte + 1 Drink)',
+    titleEn: '1st Floor · Midnight Toast Formula (from 23:00 · 1 Champagne Flûte + 1 Drink)',
+    descriptionIt:
+      'Ingresso 1° piano Terrazza Duomo 21 dalle 23:00 con 1 flûte di champagne per il brindisi di mezzanotte, 1 consumazione a scelta e DJ set fino al mattino. Listino locale 90€ + 20% fee (18€) = 108€.',
+    descriptionEn:
+      '1st Floor Terrazza Duomo 21 entry from 23:00 including 1 champagne flûte for the midnight toast, 1 drink of your choice & DJ set until morning. Venue rate €90 + 20% fee (€18) = €108.',
+    arrivalTime: '23:00',
+    basePriceCents: 9000,
+    feeRate: TERRAZZA_DUOMO_FEE_RATE,
+    guestsPerUnit: 1,
+    genderPolicy: 'equal',
+    floorGroup: 'f1',
+    maxQuantityPerOrder: 20,
+    eventDateLabel: '2026-12-31',
+    venueNameOverride: 'Terrazza Duomo 21 · 1° Piano',
+    confirmed: true,
+  },
+  {
+    id: 'terrazza21-f1-anno-nuovo',
+    venueId: 'terrazza-duomo-21',
+    category: 'club-entry',
+    titleIt: '1° Piano · Formula Anno Nuovo (dalle 00:30 · 1 Drink)',
+    titleEn: '1st Floor · New Year Formula (from 00:30 · 1 Drink)',
+    descriptionIt:
+      'Ingresso 1° piano Terrazza Duomo 21 dalle 00:30 con 1 consumazione a scelta e DJ set fino al mattino. Listino locale 70€ + 20% fee (14€) = 84€.',
+    descriptionEn:
+      '1st Floor Terrazza Duomo 21 entry from 00:30 including 1 drink of your choice & DJ set until morning. Venue rate €70 + 20% fee (€14) = €84.',
+    arrivalTime: '00:30',
+    basePriceCents: 7000,
+    feeRate: TERRAZZA_DUOMO_FEE_RATE,
+    guestsPerUnit: 1,
+    genderPolicy: 'equal',
+    floorGroup: 'f1',
+    maxQuantityPerOrder: 20,
+    eventDateLabel: '2026-12-31',
+    venueNameOverride: 'Terrazza Duomo 21 · 1° Piano',
+    confirmed: true,
+  },
+  {
+    id: 'terrazza21-f1-terrace-table',
+    venueId: 'terrazza-duomo-21',
+    category: 'vip-table-full',
+    titleIt: '1° Piano · Tavolo in Terrazza (max 4 pax · 2 Bottiglie + Formula Obbligatoria)',
+    titleEn: '1st Floor · Terrace Table (max 4 guests · 2 Bottles + Required Per-Person Formula)',
+    descriptionIt:
+      'Tavolo riservato in terrazza 1° piano (max 4 ospiti) con 2 bottiglie di champagne o superalcolico incluse. Obbligatorio abbinare una formula per persona del 1° piano per ogni ospite. Listino locale 600€ + 20% fee (120€) = 720€ + formule.',
+    descriptionEn:
+      'Reserved 1st Floor terrace table (max 4 guests) with 2 bottles of champagne or spirits included. Must be paired with a 1st Floor per-person formula for each guest. Venue rate €600 + 20% fee (€120) = €720 + per-person formulas.',
+    arrivalTime: '20:30',
+    basePriceCents: 60000,
+    feeRate: TERRAZZA_DUOMO_FEE_RATE,
+    guestsPerUnit: 0,
+    genderPolicy: 'equal',
+    floorGroup: 'f1',
+    tableAddon: { floorGroup: 'f1', maxGuestsPerTable: 4 },
+    maxQuantityPerOrder: 4,
+    eventDateLabel: '2026-12-31',
+    venueNameOverride: 'Terrazza Duomo 21 · 1° Piano',
+    confirmed: true,
+  },
+  {
+    id: 'terrazza21-f1-private-terrace',
+    venueId: 'terrazza-duomo-21',
+    category: 'vip-table-full',
+    titleIt: '1° Piano · Terrazzino Privato (max 8 pax · 2 Bottiglie + Formula Obbligatoria)',
+    titleEn: '1st Floor · Private Terrace Balcony (max 8 guests · 2 Bottles + Required Per-Person Formula)',
+    descriptionIt:
+      'Terrazzino privato esclusivo al 1° piano (max 8 ospiti) con 2 bottiglie di champagne o superalcolico incluse. Obbligatorio abbinare una formula per persona del 1° piano per ogni ospite. Listino locale 1.200€ + 20% fee (240€) = 1.440€ + formule.',
+    descriptionEn:
+      'Exclusive 1st Floor private terrace balcony (max 8 guests) with 2 bottles of champagne or spirits included. Must be paired with a 1st Floor per-person formula for each guest. Venue rate €1,200 + 20% fee (€240) = €1,440 + per-person formulas.',
+    arrivalTime: '20:30',
+    basePriceCents: 120000,
+    feeRate: TERRAZZA_DUOMO_FEE_RATE,
+    guestsPerUnit: 0,
+    genderPolicy: 'equal',
+    floorGroup: 'f1',
+    tableAddon: { floorGroup: 'f1', maxGuestsPerTable: 8 },
+    maxQuantityPerOrder: 2,
+    eventDateLabel: '2026-12-31',
+    venueNameOverride: 'Terrazza Duomo 21 · 1° Piano',
+    confirmed: true,
+  },
+  {
+    id: 'terrazza21-f5-mare-dinner-place',
+    venueId: 'terrazza-duomo-21',
+    category: 'gala-dinner',
+    featured: true,
+    titleIt: '5° Piano MA.RE · Cena Placé Chef Mario e Remo Capitaneo (2★ Michelin)',
+    titleEn: '5th Floor MA.RE · Seated Gala Dinner by 2★ Michelin Chefs Mario & Remo Capitaneo',
+    descriptionIt:
+      'Vista Piazza Duomo 5° piano dalle 20:30 nella sala interna di MA.RE. Menu degustazione completo degli chef bistellati Mario e Remo Capitaneo, cocktail di benvenuto, Champagne a mezzanotte, vini Frescobaldi (Gorgona Bianco 2025 / Mormoreto 2023, 1 bott. ogni 2) e DJ set fino al mattino. Listino locale 380€ + 20% fee (76€) = 456€.',
+    descriptionEn:
+      '5th Floor Piazza Duomo view from 20:30 in the MA.RE indoor dining room. Full tasting menu by 2-Michelin-star Chefs Mario & Remo Capitaneo, welcome cocktail, midnight Champagne, Frescobaldi wines (Gorgona Bianco 2025 / Mormoreto 2023, 1 bottle per 2) & DJ set until morning. Venue rate €380 + 20% fee (€76) = €456.',
+    arrivalTime: '20:30',
+    basePriceCents: 38000,
+    feeRate: TERRAZZA_DUOMO_FEE_RATE,
+    guestsPerUnit: 1,
+    genderPolicy: 'equal',
+    floorGroup: 'f5',
+    maxQuantityPerOrder: 20,
+    eventDateLabel: '2026-12-31',
+    venueNameOverride: 'Terrazza MA.RE · 5° Piano',
+    confirmed: true,
+  },
+  {
+    id: 'terrazza21-f5-mare-brindisi',
+    venueId: 'terrazza-duomo-21',
+    category: 'club-entry',
+    titleIt: '5° Piano MA.RE · Formula Brindisi (dalle 23:00 · 1 Flûte + 1 Drink)',
+    titleEn: '5th Floor MA.RE · Midnight Toast Formula (from 23:00 · 1 Champagne Flûte + 1 Drink)',
+    descriptionIt:
+      'Ingresso 5° piano Terrazza MA.RE dalle 23:00 con 1 flûte di champagne, 1 consumazione a scelta e DJ set fino al mattino vista Piazza Duomo. Listino locale 90€ + 20% fee (18€) = 108€.',
+    descriptionEn:
+      '5th Floor Terrazza MA.RE entry from 23:00 including 1 champagne flûte, 1 drink of your choice & DJ set until morning overlooking Piazza Duomo. Venue rate €90 + 20% fee (€18) = €108.',
+    arrivalTime: '23:00',
+    basePriceCents: 9000,
+    feeRate: TERRAZZA_DUOMO_FEE_RATE,
+    guestsPerUnit: 1,
+    genderPolicy: 'equal',
+    floorGroup: 'f5',
+    maxQuantityPerOrder: 20,
+    eventDateLabel: '2026-12-31',
+    venueNameOverride: 'Terrazza MA.RE · 5° Piano',
+    confirmed: true,
+  },
+  {
+    id: 'terrazza21-f5-mare-anno-nuovo',
+    venueId: 'terrazza-duomo-21',
+    category: 'club-entry',
+    titleIt: '5° Piano MA.RE · Formula Anno Nuovo (dalle 00:30 · 1 Drink)',
+    titleEn: '5th Floor MA.RE · New Year Formula (from 00:30 · 1 Drink)',
+    descriptionIt:
+      'Ingresso 5° piano Terrazza MA.RE dalle 00:30 con 1 consumazione a scelta e DJ set fino al mattino vista Piazza Duomo. Listino locale 70€ + 20% fee (14€) = 84€.',
+    descriptionEn:
+      '5th Floor Terrazza MA.RE entry from 00:30 including 1 drink of your choice & DJ set until morning overlooking Piazza Duomo. Venue rate €70 + 20% fee (€14) = €84.',
+    arrivalTime: '00:30',
+    basePriceCents: 7000,
+    feeRate: TERRAZZA_DUOMO_FEE_RATE,
+    guestsPerUnit: 1,
+    genderPolicy: 'equal',
+    floorGroup: 'f5',
+    maxQuantityPerOrder: 20,
+    eventDateLabel: '2026-12-31',
+    venueNameOverride: 'Terrazza MA.RE · 5° Piano',
+    confirmed: true,
+  },
+  {
+    id: 'terrazza21-f5-mare-terrace-table',
+    venueId: 'terrazza-duomo-21',
+    category: 'vip-table-full',
+    titleIt: '5° Piano MA.RE · Tavolo in Terrazza (max 4 pax · 2 Bottiglie + Formula Obbligatoria)',
+    titleEn: '5th Floor MA.RE · Terrace Table (max 4 guests · 2 Bottles + Required Per-Person Formula)',
+    descriptionIt:
+      'Tavolo riservato sulla terrazza del 5° piano MA.RE (max 4 ospiti) con 2 bottiglie di champagne o superalcolico incluse. Obbligatorio abbinare una formula per persona del 5° piano MA.RE per ogni ospite. Listino locale 600€ + 20% fee (120€) = 720€ + formule.',
+    descriptionEn:
+      'Reserved 5th Floor MA.RE terrace table (max 4 guests) with 2 bottles of champagne or spirits included. Must be paired with a 5th Floor MA.RE per-person formula for each guest. Venue rate €600 + 20% fee (€120) = €720 + per-person formulas.',
+    arrivalTime: '20:30',
+    basePriceCents: 60000,
+    feeRate: TERRAZZA_DUOMO_FEE_RATE,
+    guestsPerUnit: 0,
+    genderPolicy: 'equal',
+    floorGroup: 'f5',
+    tableAddon: { floorGroup: 'f5', maxGuestsPerTable: 4 },
+    maxQuantityPerOrder: 4,
+    eventDateLabel: '2026-12-31',
+    venueNameOverride: 'Terrazza MA.RE · 5° Piano',
+    confirmed: true,
+  },
 ];
 
 export const SKU_BY_ID = new Map<string, SinglePassSku>(SINGLE_PASS_SKUS.map((s) => [s.id, s]));
@@ -1238,6 +1501,7 @@ const EVENT_SLUG_TO_VENUE_ID: Record<string, SinglePassVenueId> = {
   'capodanno-bobino-milano': 'bobino',
   'capodanno-voya-rooftop-milano': 'voya',
   'capodanno-justme-garda-lake': 'justme-garda',
+  'capodanno-terrazza-duomo-21': 'terrazza-duomo-21',
   'christmas-voya-rooftop-milan-2026': 'voya-christmas',
   'orthodox-new-year-justme-milan-2027': 'justme-orthodox',
   ...THANKSGIVING_SLUG_MAP,
@@ -1372,10 +1636,27 @@ export function resolveCatalogSku(skuId: string, nowMs = Date.now()): SinglePass
   return buildDynamicInventorySku(event, offer, offerIndex);
 }
 
-export function computeSinglePassPrice(basePriceCents: number, quantity = 1): PriceBreakdown {
+export function getSkuFeeRate(sku: Pick<SinglePassSku, 'feeRate'>): number {
+  return typeof sku.feeRate === 'number' && Number.isFinite(sku.feeRate) && sku.feeRate >= 0
+    ? sku.feeRate
+    : SINGLE_PASS_FEE_RATE;
+}
+
+export function getSkuMaxQuantity(sku: Pick<SinglePassSku, 'maxQuantityPerOrder'>): number {
+  return typeof sku.maxQuantityPerOrder === 'number' && sku.maxQuantityPerOrder >= 1
+    ? sku.maxQuantityPerOrder
+    : 10;
+}
+
+export function computeSinglePassPrice(
+  basePriceCents: number,
+  quantity = 1,
+  feeRate: number = SINGLE_PASS_FEE_RATE,
+): PriceBreakdown {
   const safeBase = Math.max(0, Math.round(basePriceCents));
   const safeQty = Math.max(1, Math.min(20, Math.floor(quantity)));
-  const unitFeeCents = Math.round(safeBase * SINGLE_PASS_FEE_RATE);
+  const safeRate = Number.isFinite(feeRate) && feeRate >= 0 ? feeRate : SINGLE_PASS_FEE_RATE;
+  const unitFeeCents = Math.round(safeBase * safeRate);
   const unitTotalCents = safeBase + unitFeeCents;
   return {
     unitBaseCents: safeBase,
@@ -1385,6 +1666,61 @@ export function computeSinglePassPrice(basePriceCents: number, quantity = 1): Pr
     lineFeeCents: unitFeeCents * safeQty,
     lineTotalCents: unitTotalCents * safeQty,
   };
+}
+
+export type TerrazzaCartValidationResult =
+  | { ok: true }
+  | {
+      ok: false;
+      errorCode: 'TABLE_REQUIRES_FORMULA' | 'TABLE_MAX_GUESTS_EXCEEDED';
+      floorGroup: 'f1' | 'f5';
+      perPersonCount: number;
+      maxCapacity: number;
+    };
+
+export function validateTerrazzaDuomoCart(
+  entries: ReadonlyArray<{ sku: SinglePassSku; quantity: number }>,
+): TerrazzaCartValidationResult {
+  for (const floorGroup of ['f1', 'f5'] as const) {
+    let tableCount = 0;
+    let maxCapacity = 0;
+    let perPersonCount = 0;
+
+    for (const { sku, quantity } of entries) {
+      if (sku.venueId !== 'terrazza-duomo-21') continue;
+      const qty = Math.max(0, Math.floor(quantity));
+      if (qty <= 0) continue;
+
+      if (sku.tableAddon && sku.tableAddon.floorGroup === floorGroup) {
+        tableCount += qty;
+        maxCapacity += sku.tableAddon.maxGuestsPerTable * qty;
+      } else if (!sku.tableAddon && sku.floorGroup === floorGroup) {
+        perPersonCount += Math.max(1, sku.guestsPerUnit) * qty;
+      }
+    }
+
+    if (tableCount > 0) {
+      if (perPersonCount < 1) {
+        return {
+          ok: false,
+          errorCode: 'TABLE_REQUIRES_FORMULA',
+          floorGroup,
+          perPersonCount,
+          maxCapacity,
+        };
+      }
+      if (perPersonCount > maxCapacity) {
+        return {
+          ok: false,
+          errorCode: 'TABLE_MAX_GUESTS_EXCEEDED',
+          floorGroup,
+          perPersonCount,
+          maxCapacity,
+        };
+      }
+    }
+  }
+  return { ok: true };
 }
 
 export function formatEurFromCents(cents: number, locale = 'it'): string {

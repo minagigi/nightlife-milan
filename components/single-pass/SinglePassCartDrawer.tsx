@@ -9,10 +9,11 @@ import {
   VENUE_BY_ID,
   computeSinglePassPrice,
   formatEurFromCents,
+  getSkuFeeRate,
   resolveCatalogSku,
 } from '@/lib/single-pass/catalog';
 import { formatMinorCurrency, type SupportedCurrency } from '@/lib/single-pass/currency';
-import { getSinglePassCopy } from '@/lib/single-pass/i18n35';
+import { formatFeeLabel35, getSinglePassCopy, getTerrazzaCheckoutUi35 } from '@/lib/single-pass/i18n35';
 import { useSinglePassCart } from './SinglePassCartContext';
 
 export default function SinglePassCartDrawer({ lang }: { lang: string }) {
@@ -25,6 +26,9 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
     subtotalBaseCents,
     totalFeeCents,
     grandTotalCents,
+    effectiveFeeRate,
+    hasMixedFeeRates,
+    cartValidation,
     currency,
     setCurrency,
     convertedTotalMinor,
@@ -32,6 +36,8 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
   } = useSinglePassCart();
 
   const copy = getSinglePassCopy(lang);
+  const terrazzaUi = getTerrazzaCheckoutUi35(lang);
+  const feeLabel = formatFeeLabel35(lang, effectiveFeeRate, hasMixedFeeRates);
   const lp = localePrefix(lang);
   const isIt = lang === 'it';
 
@@ -107,8 +113,10 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
                     const venue = VENUE_BY_ID[sku.venueId];
                     const venueName = sku.venueNameOverride || venue?.name || 'Nightlife Milan';
                     const posterSrc = venue?.posterSrc || '/images/events/capodanno-2027-posters/capodanno-justme-milano-torre-branca.webp';
-                    const pricing = computeSinglePassPrice(sku.basePriceCents, item.quantity);
+                    const skuFeeRate = getSkuFeeRate(sku);
+                    const pricing = computeSinglePassPrice(sku.basePriceCents, item.quantity, skuFeeRate);
                     const pkgTitle = isIt ? sku.titleIt : sku.titleEn;
+                    const feePct = Math.round(skuFeeRate * 100);
 
                     return (
                       <div
@@ -167,7 +175,7 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
 
                           <div className="text-right font-mono">
                             <p className="text-[11px] text-[#847C6F]">
-                              {formatEurFromCents(pricing.lineBaseCents, lang)} + 15%
+                              {formatEurFromCents(pricing.lineBaseCents, lang)} + {feePct}%
                             </p>
                             <p className="text-sm font-bold text-[#F6F1E7]">
                               {formatEurFromCents(pricing.lineTotalCents, lang)}
@@ -206,9 +214,16 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
                     <span className="font-mono">{formatEurFromCents(subtotalBaseCents, lang)}</span>
                   </div>
                   <div className="flex justify-between text-[#EAE3D5]">
-                    <span>{copy.feeLabel}</span>
+                    <span>{feeLabel}</span>
                     <span className="font-mono">+{formatEurFromCents(totalFeeCents, lang)}</span>
                   </div>
+                  {!cartValidation.ok && (
+                    <div className="border border-rose-500/50 bg-rose-950/40 p-2.5 text-xs text-rose-200">
+                      {cartValidation.errorCode === 'TABLE_REQUIRES_FORMULA'
+                        ? terrazzaUi.tableRequiresFormulaError
+                        : terrazzaUi.tableMaxGuestsExceededError}
+                    </div>
+                  )}
                   <div className="flex justify-between border-t border-[#F6F1E7]/15 pt-2 text-base font-bold text-[#F6F1E7]">
                     <span>{copy.totalLabel}</span>
                     <span className="font-mono">{formatEurFromCents(grandTotalCents, lang)}</span>

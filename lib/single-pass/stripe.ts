@@ -2,7 +2,7 @@ import crypto from 'node:crypto';
 import { localePrefix } from '@/lib/i18n/locales';
 import { sendAttendeeEmail } from '@/lib/emailTransport';
 import { SINGLE_PASS_FEE_RATE } from './catalog';
-import { buildSinglePassOrderEmail } from './email';
+import { buildSinglePassOrderEmail, buildStaffActivationEmail } from './email';
 import {
   getOrderById,
   readStripeVaultConfig,
@@ -109,9 +109,12 @@ export function buildPaymentIntentParams(
   params.set('metadata[eur_total_cents]', String(order.totalCents));
   params.set('metadata[presentment_currency]', currency.toUpperCase());
   params.set('metadata[fx_rate]', String(order.fxRate || 1));
-  params.set('metadata[headcount]', String(order.totalHeadcount || 1));
+  const effectiveFeeRate = typeof order.feeRate === 'number' ? order.feeRate : SINGLE_PASS_FEE_RATE;
+  params.set('metadata[headcount]', String(order.totalHeadcount ?? 1));
   params.set('metadata[locale]', order.locale);
-  params.set('metadata[fee_rate]', String(SINGLE_PASS_FEE_RATE));
+  params.set('metadata[fee_rate]', String(effectiveFeeRate));
+  params.set('metadata[venue_net_eur_cents]', String(order.subtotalBaseCents));
+  params.set('metadata[fee_eur_cents]', String(order.feeCents));
   if (order.attribution?.firstLandingPath) {
     params.set('metadata[first_landing]', order.attribution.firstLandingPath.slice(0, 120));
   }
@@ -159,12 +162,20 @@ export async function createEmbeddedPaymentIntentForOrder(
   if (!creds) return null;
 
   // Reuse an existing open PaymentIntent if present and currency/amount match
+  const targetCurrency = (order.presentmentCurrency || 'EUR').toUpperCase();
+  const targetAmount = order.presentmentTotalMinor || order.totalCents;
+
   if (order.stripePaymentIntentId) {
     const existing = await fetchEmbeddedPaymentIntent(order.stripePaymentIntentId);
+    const existingCur = (existing?.currency || '').toUpperCase();
+    const matchesAmountAndCurrency =
+      (!existingCur || existingCur === targetCurrency) &&
+      (typeof existing?.amount !== 'number' || existing.amount === Math.max(50, Math.round(targetAmount)));
     if (
       existing?.client_secret &&
       existing.status &&
-      ['requires_payment_method', 'requires_confirmation', 'requires_action'].includes(existing.status)
+      ['requires_payment_method', 'requires_confirmation', 'requires_action'].includes(existing.status) &&
+      matchesAmountAndCurrency
     ) {
       return {
         paymentIntentId: existing.id || order.stripePaymentIntentId,
@@ -174,9 +185,6 @@ export async function createEmbeddedPaymentIntentForOrder(
       };
     }
   }
-
-  const targetCurrency = (order.presentmentCurrency || 'EUR').toUpperCase();
-  const targetAmount = order.presentmentTotalMinor || order.totalCents;
 
   const attemptCreate = async (currency: string, amountMinor: number) => {
     const body = buildPaymentIntentParams(order, currency, amountMinor);
@@ -247,15 +255,17 @@ export function buildCheckoutSessionParams(order: SinglePassOrder, siteOrigin: s
 
   const feeIdx = order.items.length;
   const fp = `line_items[${feeIdx}]`;
+  const effectiveFeeRate = typeof order.feeRate === 'number' ? order.feeRate : SINGLE_PASS_FEE_RATE;
+  const feePctLabel = Math.round(effectiveFeeRate * 100);
   params.set(`${fp}[price_data][currency]`, 'eur');
   params.set(`${fp}[price_data][unit_amount]`, String(order.feeCents));
-  params.set(`${fp}[price_data][product_data][name]`, 'Booking, Concierge Service & Entry Fee (+15%)');
+  params.set(`${fp}[price_data][product_data][name]`, `Booking, Concierge Service & Payment Fee (+${feePctLabel}%)`);
   params.set(`${fp}[quantity]`, '1');
 
   params.set('metadata[order_id]', order.id);
   params.set('metadata[customer_whatsapp]', order.customer.whatsapp.slice(0, 80));
   params.set('metadata[locale]', order.locale);
-  params.set('metadata[fee_rate]', String(SINGLE_PASS_FEE_RATE));
+  params.set('metadata[fee_rate]', String(effectiveFeeRate));
   params.set('payment_intent_data[metadata][order_id]', order.id);
   return params;
 }
@@ -270,12 +280,16 @@ export async function markOrderPaidIdempotently(
   const existing = await getOrderById(orderId);
   if (!existing) return null;
 
-  if (existing.status === 'paid' && existing.confirmationEmailSentAt) {
+  const needsStaffEmail =
+    existing.items.some((item) => item.venueId === 'terrazza-duomo-21') && !existing.staffEmailSentAt;
+
+  if (existing.status === 'paid' && existing.confirmationEmailSentAt && !needsStaffEmail) {
     return existing;
   }
 
   const nowIso = new Date().toISOString();
   const shouldSendEmail = !existing.confirmationEmailSentAt;
+  const shouldSendStaffEmail = needsStaffEmail;
 
   const updated: SinglePassOrder = {
     ...existing,
@@ -285,9 +299,10 @@ export async function markOrderPaidIdempotently(
     stripeSessionId: opts.stripeSessionId || existing.stripeSessionId,
     stripePaymentIntentId: opts.stripePaymentIntentId || existing.stripePaymentIntentId,
     confirmationEmailSentAt: existing.confirmationEmailSentAt || nowIso,
+    ...(shouldSendStaffEmail ? { staffEmailSentAt: nowIso } : {}),
   };
 
-  // Persist confirmationEmailSentAt BEFORE calling email transport to prevent concurrent webhook/verify double-sends
+  // Persist email timestamps BEFORE calling email transport to prevent concurrent webhook/verify double-sends
   await saveOrder(updated);
 
   if (shouldSendEmail) {
@@ -300,6 +315,20 @@ export async function markOrderPaidIdempotently(
       }
     } catch (error) {
       updated.emailDeliveryError = error instanceof Error ? error.message : String(error);
+      await saveOrder(updated);
+    }
+  }
+
+  if (shouldSendStaffEmail) {
+    try {
+      const staffMsg = buildStaffActivationEmail(updated);
+      const staffResult = await sendAttendeeEmail(staffMsg);
+      if (staffResult.outcome === 'failed') {
+        updated.staffEmailError = staffResult.error || 'Staff email delivery failed';
+        await saveOrder(updated);
+      }
+    } catch (error) {
+      updated.staffEmailError = error instanceof Error ? error.message : String(error);
       await saveOrder(updated);
     }
   }

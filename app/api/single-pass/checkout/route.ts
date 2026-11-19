@@ -19,8 +19,11 @@ import {
   SINGLE_PASS_FEE_RATE,
   VENUE_BY_ID,
   computeSinglePassPrice,
+  getSkuFeeRate,
+  getSkuMaxQuantity,
   resolveCatalogSku,
   validateAgeForSkus,
+  validateTerrazzaDuomoCart,
 } from '@/lib/single-pass/catalog';
 import {
   convertEurBreakdown,
@@ -96,7 +99,8 @@ export async function POST(request: Request) {
     if (!resolvedSku) {
       return jsonError(`Confirmed package not available: ${skuId}`, 'INVALID_SKU', 400);
     }
-    const qty = Math.max(1, Math.min(10, Math.floor(Number(rawItem.quantity) || 1)));
+    const maxQty = getSkuMaxQuantity(resolvedSku);
+    const qty = Math.max(1, Math.min(maxQty, Math.floor(Number(rawItem.quantity) || 1)));
     const prev = merged.get(resolvedSku.id);
     const dietary = rawItem.dietaryChoice
       ? String(rawItem.dietaryChoice).trim().slice(0, 60)
@@ -110,7 +114,7 @@ export async function POST(request: Request) {
 
     merged.set(resolvedSku.id, {
       sku: resolvedSku,
-      qty: Math.min(10, (prev?.qty || 0) + qty),
+      qty: Math.min(maxQty, (prev?.qty || 0) + qty),
       dietary: dietary || prev?.dietary,
       addedFromPath: addedFromPath || prev?.addedFromPath,
       addedFromTitle: addedFromTitle || prev?.addedFromTitle,
@@ -118,6 +122,24 @@ export async function POST(request: Request) {
   }
 
   const resolvedPairs = Array.from(merged.values());
+  const hasTerrazzaDuomo21 = resolvedPairs.some((p) => p.sku.venueId === 'terrazza-duomo-21');
+  const terrazzaValidation = validateTerrazzaDuomoCart(
+    resolvedPairs.map((p) => ({ sku: p.sku, quantity: p.qty })),
+  );
+  if (!terrazzaValidation.ok) {
+    return jsonError(
+      terrazzaValidation.errorCode === 'TABLE_REQUIRES_FORMULA'
+        ? 'Every terrace table or private terrace must be paired with at least 1 per-person formula on the same floor.'
+        : `Selected per-person formulas (${terrazzaValidation.perPersonCount}) exceed the maximum guest capacity (${terrazzaValidation.maxCapacity}) of your terrace table.`,
+      terrazzaValidation.errorCode,
+      400,
+      {
+        floorGroup: terrazzaValidation.floorGroup,
+        perPersonCount: terrazzaValidation.perPersonCount,
+        maxCapacity: terrazzaValidation.maxCapacity,
+      },
+    );
+  }
   const fullName = String(body.fullName || '').trim().slice(0, 120);
   const email = normalizeEmail(String(body.email || ''));
   const whatsapp = sanitizeWhatsapp(String(body.whatsapp || ''));
@@ -161,6 +183,14 @@ export async function POST(request: Request) {
     );
   }
 
+  if (hasTerrazzaDuomo21 && !dietaryNotes) {
+    return jsonError(
+      'Allergies and intolerances note is required for Terrazza Duomo 21 / MA.RE bookings (or specify No allergies).',
+      'DIETARY_NOTES_REQUIRED',
+      400,
+    );
+  }
+
   if (!body.acceptedTerms) {
     return jsonError('Terms & Conditions acceptance is required', 'TERMS_REQUIRED', 400);
   }
@@ -191,11 +221,14 @@ export async function POST(request: Request) {
   let subtotalBaseCents = 0;
   let feeCents = 0;
   let totalHeadcount = 0;
+  const distinctFeeRates = new Set<number>();
 
   for (const pair of resolvedPairs) {
-    const breakdown = computeSinglePassPrice(pair.sku.basePriceCents, pair.qty);
+    const skuFeeRate = getSkuFeeRate(pair.sku);
+    distinctFeeRates.add(skuFeeRate);
+    const breakdown = computeSinglePassPrice(pair.sku.basePriceCents, pair.qty, skuFeeRate);
     const venue = VENUE_BY_ID[pair.sku.venueId];
-    const guestsPerUnit = Math.max(1, pair.sku.guestsPerUnit || 1);
+    const guestsPerUnit = Math.max(0, pair.sku.guestsPerUnit ?? 1);
     const totalGuests = guestsPerUnit * pair.qty;
     subtotalBaseCents += breakdown.lineBaseCents;
     feeCents += breakdown.lineFeeCents;
@@ -214,6 +247,7 @@ export async function POST(request: Request) {
       totalGuests,
       ...(pair.addedFromPath ? { addedFromPath: pair.addedFromPath } : {}),
       ...(pair.addedFromTitle ? { addedFromTitle: pair.addedFromTitle } : {}),
+      feeRate: skuFeeRate,
       unitBaseCents: breakdown.unitBaseCents,
       unitFeeCents: breakdown.unitFeeCents,
       unitTotalCents: breakdown.unitTotalCents,
@@ -223,6 +257,21 @@ export async function POST(request: Request) {
       lineTotalCents: breakdown.lineTotalCents,
     });
   }
+
+  if (totalHeadcount < 1) {
+    return jsonError(
+      'At least 1 guest formula is required in the order.',
+      'TABLE_REQUIRES_FORMULA',
+      400,
+    );
+  }
+
+  const orderFeeRate =
+    distinctFeeRates.size === 1
+      ? Array.from(distinctFeeRates)[0]
+      : subtotalBaseCents > 0
+        ? Math.round((feeCents / subtotalBaseCents) * 10000) / 10000
+        : SINGLE_PASS_FEE_RATE;
 
   const totalCents = subtotalBaseCents + feeCents;
   const fxData = await fetchEurExchangeRates();
@@ -322,7 +371,7 @@ export async function POST(request: Request) {
     items: orderItems,
     totalHeadcount,
     subtotalBaseCents,
-    feeRate: SINGLE_PASS_FEE_RATE,
+    feeRate: orderFeeRate,
     feeCents,
     totalCents,
     currency: 'eur',
@@ -389,6 +438,7 @@ export async function POST(request: Request) {
     publishableKey: PUBLIC_PAYMENT_PUBLISHABLE_KEY,
     totalEurCents: order.totalCents,
     subtotalBaseCents: order.subtotalBaseCents,
+    feeRate: order.feeRate,
     feeCents: order.feeCents,
     presentmentCurrency: finalCurrency,
     presentmentSubtotalMinor: order.presentmentSubtotalMinor,
