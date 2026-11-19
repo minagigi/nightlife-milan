@@ -30,6 +30,8 @@ const STK_MENU_IT: CapodannoMenuCard[] = [
       },
     ],
     beverages: 'Toppings (10–15€), Butters (8€), Sauces (3€). Nel secondo turno dalle 21:00 il minimo di spesa di 200€ a persona è utilizzabile interamente per food e beverage. Tutti i prezzi del menù sono comprensivi di IVA.',
+    imageSrc: '/images/events/t031-menus/menu-stk-milan-nye-2027.webp',
+    imageAlt: 'STK Milan · Menù Speciale À la Carte Capodanno 2027 · ME Milan Il Duca',
   },
 ];
 
@@ -58,6 +60,8 @@ const STK_MENU_EN: CapodannoMenuCard[] = [
       },
     ],
     beverages: 'Toppings (€10–€15), Butters (€8), Sauces (€3). During the 2nd seating from 21:00, the €200 per person minimum spend applies toward food and beverage. Menu prices include VAT.',
+    imageSrc: '/images/events/t031-menus/menu-stk-milan-nye-2027.webp',
+    imageAlt: 'STK Milan · Official NYE 2027 À la Carte Menu · ME Milan Il Duca',
   },
 ];
 
@@ -86,6 +90,8 @@ const RADIO_MENU_IT: CapodannoMenuCard[] = [
       },
     ],
     beverages: 'Formula Food & Beverage: minimo di spesa 200€ a persona (130€ menù degustazione + 70€ di credito beverage). Disponibile anche Formula Solo Beverage con intero minimo di spesa di 200€ a persona dedicato alle bevande.',
+    imageSrc: '/images/events/t031-menus/menu-radio-rooftop-nye-2027.webp',
+    imageAlt: 'Radio Rooftop Milan · Menù Degustazione Ufficiale Capodanno 2027',
   },
 ];
 
@@ -114,6 +120,8 @@ const RADIO_MENU_EN: CapodannoMenuCard[] = [
       },
     ],
     beverages: 'Food & Beverage Formula: €200 minimum spend per person (€130 tasting menu + €70 beverage credit). Beverage-Only Formula also available using the full €200 minimum spend for drinks.',
+    imageSrc: '/images/events/t031-menus/menu-radio-rooftop-nye-2027.webp',
+    imageAlt: 'Radio Rooftop Milan · Official NYE 2027 Tasting Menu',
   },
 ];
 
@@ -142,6 +150,8 @@ const BARCHETTA_MENU_IT: CapodannoMenuCard[] = [
       },
     ],
     beverages: 'Abbinamento vini e bevande incluse: Franciacorta Brut DOCG Ferghettina, Sassella Riserva DOCG Plozza, Torcolato Maculan. Bambini 0–4 anni a consumo, 5–12 anni sconto 50% (87,50€), oltre 12 anni tariffa intera.',
+    imageSrc: '/images/events/t031-menus/menu-barchetta-como-nye-2027.webp',
+    imageAlt: 'Hotel Barchetta Excelsior Como · Menù Ufficiale Cenone Capodanno 2027',
   },
 ];
 
@@ -170,6 +180,8 @@ const BARCHETTA_MENU_EN: CapodannoMenuCard[] = [
       },
     ],
     beverages: 'Wine pairing and beverages included: Franciacorta Brut DOCG Ferghettina, Sassella Riserva DOCG Plozza, Torcolato Maculan. Children 0–4 à la carte, ages 5–12 50% discount (€87.50), 13+ full adult rate.',
+    imageSrc: '/images/events/t031-menus/menu-barchetta-como-nye-2027.webp',
+    imageAlt: 'Hotel Barchetta Excelsior Como · Official NYE 2027 Gala Dinner Menu',
   },
 ];
 
@@ -198,6 +210,8 @@ const TERMINUS_MENU_IT: CapodannoMenuCard[] = [
       },
     ],
     beverages: 'Abbinamento vini incluso: Ca’ del Bosco s.a., Lis Neris Pinot Grigio 2025, Terlano Sauvignon Blanc Winkl 2025, Donnafugata Passito di Pantelleria Ben Ryé 2023. Musica dal vivo e vista fuochi sul Lago di Como dalla terrazza.',
+    imageSrc: '/images/events/t031-menus/menu-terminus-como-nye-2027.webp',
+    imageAlt: 'Albergo Terminus Como · Menù Ufficiale Bar delle Terme San Silvestro 2027',
   },
 ];
 
@@ -226,6 +240,60 @@ const TERMINUS_MENU_EN: CapodannoMenuCard[] = [
       },
     ],
     beverages: 'Wine pairing included: Ca’ del Bosco s.a., Lis Neris Pinot Grigio 2025, Terlano Sauvignon Blanc Winkl 2025, Donnafugata Passito di Pantelleria Ben Ryé 2023. Live music and midnight lake fireworks from the terrace.',
+    imageSrc: '/images/events/t031-menus/menu-terminus-como-nye-2027.webp',
+    imageAlt: 'Albergo Terminus Como · Official NYE 2027 Bar delle Terme Menu',
+  },
+];
+
+const LIRICO_BUFFET_MENU_IT: CapodannoMenuCard[] = [
+  {
+    id: 'teatro-lirico-buffet-nye-2027',
+    title: 'Teatro Lirico Giorgio Gaber · Menù Speciale Buffet Pre-Show Capodanno',
+    price: '55€',
+    subtitle: '31 dicembre 2026 · Via Larga 14, Milano · Include 2 consumazioni a persona prima dello spettacolo «A Christmas Carol»',
+    courses: [
+      {
+        course: 'Salati & Finger Food Freddi',
+        dish: 'Triangoli di panettone gastronomico con salumi DOP · Panettone gastronomico ai cereali con erborinati delle Langhe · Miniatura di vitello tonnato · Mini bun con gorgonzola e noci',
+      },
+      {
+        course: 'Piatti Caldi dello Chef',
+        dish: 'Ciotolina di polenta con baccalà mantecato · Focaccina al vapore alla montanara · Pizzoccheri in crespella · Medaglione di riso al salto con ristretto di ossobuco · Cotechino e lenticchie',
+      },
+      {
+        course: 'Dolci della Tradizione',
+        dish: 'Panettone e pandoro con crema al cioccolato e mascarpone',
+      },
+    ],
+    beverages: 'Prezzo ufficiale 55€ a persona con 2 consumazioni incluse (acquistabile in aggiunta al biglietto di A Christmas Carol).',
+    imageSrc: '/images/events/t031-menus/menu-teatro-lirico-buffet-nye-2027.webp',
+    imageAlt: 'Teatro Lirico Giorgio Gaber · Menù Speciale Pre-Show Capodanno 55€',
+  },
+];
+
+const LIRICO_BUFFET_MENU_EN: CapodannoMenuCard[] = [
+  {
+    id: 'teatro-lirico-buffet-nye-2027',
+    title: 'Teatro Lirico Giorgio Gaber · NYE Special Pre-Show Buffet Menu',
+    price: '€55',
+    subtitle: 'December 31, 2026 · Via Larga 14, Milan · Includes 2 drinks per person before «A Christmas Carol»',
+    courses: [
+      {
+        course: 'Savory Bites & Cold Signatures',
+        dish: 'Savory panettone triangles with PDO cured meats · Multigrain savory panettone with Langhe blue cheeses · Mini vitello tonnato · Mini bun with gorgonzola and walnuts',
+      },
+      {
+        course: 'Warm Culinary Specialties',
+        dish: 'Polenta cup with creamed cod (baccalà mantecato) · Steamed montanara mini focaccia · Pizzoccheri crêpe · Crisp saffron rice medallion with ossobuco reduction · Traditional cotechino and lentils',
+      },
+      {
+        course: 'Festive Desserts',
+        dish: 'Artisanal panettone and pandoro with dark chocolate and mascarpone creams',
+      },
+    ],
+    beverages: 'Official €55 per person package including 2 drinks (available alongside tickets for A Christmas Carol).',
+    imageSrc: '/images/events/t031-menus/menu-teatro-lirico-buffet-nye-2027.webp',
+    imageAlt: 'Teatro Lirico Giorgio Gaber · Official NYE 2027 Pre-Show Buffet Menu €55',
   },
 ];
 
@@ -300,9 +368,25 @@ const CLOSED_VENUE_META: Record<
     name: 'Battello sui Navigli (Navigami)',
     city: 'Milano',
     address: 'Alzaia Naviglio Grande 4 / Darsena, 20144 Milano',
-    reasonIt: 'La navigazione turistica sui Navigli (Navigami) non organizza feste o cenoni di Capodanno a bordo la notte del 31 dicembre 2026.',
-    reasonEn: 'Navigli boat tour operator Navigami does not host New Year’s Eve gala dinners or countdown cruises on December 31, 2026.',
-    alternatives: ['capodanno-bischeri-milano', 'capodanno-bobino-milano', 'capodanno-tram-storico-milano-atmosfera'],
+    reasonIt: 'La navigazione turistica sui Navigli (Navigami) non organizza feste o cenoni di Capodanno a bordo la notte del 31 dicembre 2026: l’esperienza è pertanto dichiarata Sold Out.',
+    reasonEn: 'Navigli boat tour operator Navigami does not host New Year’s Eve gala dinners or countdown cruises on December 31, 2026, so this option is marked Sold Out.',
+    alternatives: ['capodanno-tram-storico-milano-atmosfera', 'capodanno-bischeri-milano', 'capodanno-bobino-milano'],
+  },
+  'capodanno-backdoor43-milano': {
+    name: 'BackDoor43 Milano',
+    city: 'Milano',
+    address: 'Ripa di Porta Ticinese 43, 20143 Milano',
+    reasonIt: 'Il Farmily Group ha confermato ufficialmente che BackDoor43 rimane chiuso dal 30 dicembre 2026 al 1° gennaio 2027 inclusi. L’evento è dichiarato Sold Out e non prenotabile per San Silvestro.',
+    reasonEn: 'Farmily Group officially confirmed that BackDoor43 is closed from December 30, 2026 through January 1, 2027 inclusive. Consequently, this venue is marked Sold Out for New Year’s Eve.',
+    alternatives: ['capodanno-terrazza-duomo-21', 'capodanno-radio-rooftop-milano', 'capodanno-voya-rooftop-milano'],
+  },
+  'capodanno-palace-grand-hotel-varese': {
+    name: 'Palace Grand Hotel Varese',
+    city: 'Varese',
+    address: 'Via Luciano Manara 11, 21100 Varese',
+    reasonIt: 'Il Palace Grand Hotel Varese è chiuso per importanti lavori di ristrutturazione e riaprirà a maggio 2027. La serata di Capodanno 2027 risulta pertanto Sold Out senza disponibilità.',
+    reasonEn: 'Palace Grand Hotel Varese is closed for major restoration works with reopening scheduled for May 2027. New Year’s Eve 2027 is therefore marked Sold Out with no availability.',
+    alternatives: ['capodanno-hotel-barchetta-excelsior-como', 'capodanno-albergo-terminus-como', 'capodanno-terrazza-duomo-21'],
   },
 };
 
@@ -315,38 +399,38 @@ const CLOSED_LABELS_BY_LOCALE: Partial<
   Record<LocaleCode, { closedTag: string; bannerPrefix: string; altHeading: string; altSub: string }>
 > = {
   it: {
-    closedTag: 'Chiuso a Capodanno 2027',
-    bannerPrefix: 'CHIUSURA UFFICIALE CAPODANNO 2027 · 31 DICEMBRE 2026',
+    closedTag: 'Sold Out Capodanno 2027',
+    bannerPrefix: 'SOLD OUT CAPODANNO 2027 · STRUTTURA CHIUSA IL 31 DICEMBRE 2026',
     altHeading: 'Alternative Aperte e Confermate per Capodanno 2027',
     altSub: 'Scopri qui sotto le migliori location aperte e prenotabili per la notte del 31 dicembre 2026:',
   },
   en: {
-    closedTag: 'Closed for NYE 2027',
-    bannerPrefix: 'OFFICIAL NYE 2027 CLOSURE · DECEMBER 31, 2026',
+    closedTag: 'Sold Out NYE 2027',
+    bannerPrefix: 'SOLD OUT NYE 2027 · VENUE CLOSED ON DECEMBER 31, 2026',
     altHeading: 'Confirmed Open Alternatives for NYE 2027',
     altSub: 'Explore verified Milan & Lombardy venues officially open and bookable for December 31, 2026:',
   },
   es: {
-    closedTag: 'Cerrado en Nochevieja 2027',
-    bannerPrefix: 'CIERRE OFICIAL NOCHEVIEJA 2027 · 31 DE DICIEMBRE DE 2026',
+    closedTag: 'Sold Out Nochevieja 2027',
+    bannerPrefix: 'SOLD OUT NOCHEVIEJA 2027 · LOCAL CERRADO EL 31 DE DICIEMBRE DE 2026',
     altHeading: 'Alternativas Abiertas y Confirmadas para Nochevieja 2027',
     altSub: 'Descubre abajo los mejores locales abiertos y reservables para el 31 de diciembre de 2026:',
   },
   fr: {
-    closedTag: 'Fermé au Nouvel An 2027',
-    bannerPrefix: 'FERMETURE OFFICIELLE NOUVEL AN 2027 · 31 DÉCEMBRE 2026',
+    closedTag: 'Sold Out Nouvel An 2027',
+    bannerPrefix: 'SOLD OUT NOUVEL AN 2027 · ÉTABLISSEMENT FERMÉ LE 31 DÉCEMBRE 2026',
     altHeading: 'Alternatives Ouvertes et Confirmées pour le Nouvel An 2027',
     altSub: 'Découvrez ci-dessous les lieux officiellement ouverts et réservables pour le 31 décembre 2026 :',
   },
   de: {
-    closedTag: 'Silvester 2027 Geschlossen',
-    bannerPrefix: 'OFFIZIELL GESCHLOSSEN ZU SILVESTER 2027 · 31. DEZEMBER 2026',
+    closedTag: 'Sold Out Silvester 2027',
+    bannerPrefix: 'SOLD OUT SILVESTER 2027 · LOCATION AM 31. DEZEMBER 2026 GESCHLOSSEN',
     altHeading: 'Bestätigte Geöffnete Alternativen für Silvester 2027',
     altSub: 'Entdecken Sie unten offiziell geöffnete und buchbare Locations für den 31. Dezember 2026:',
   },
   pt: {
-    closedTag: 'Fechado no Réveillon 2027',
-    bannerPrefix: 'ENCERRAMENTO OFICIAL RÉVEILLON 2027 · 31 DE DEZEMBRO DE 2026',
+    closedTag: 'Sold Out Réveillon 2027',
+    bannerPrefix: 'SOLD OUT RÉVEILLON 2027 · LOCAL FECHADO EM 31 DE DEZEMBRO DE 2026',
     altHeading: 'Alternativas Abertas e Confirmadas para o Réveillon 2027',
     altSub: 'Explore abaixo os locais oficialmente abertos e disponíveis para 31 de dezembro de 2026:',
   },
@@ -765,6 +849,412 @@ export function getT031OverrideContent(
     };
   }
 
+  if (slug === 'capodanno-tram-storico-milano-atmosfera') {
+    const schedule: CapodannoScheduleStep[] = isIt
+      ? [
+          { time: '19:00', label: 'Partenza 1° Turno Tram ATMosfera da Piazza Castello 2 (cenone itinerante fino alle 21:30, tariffa 130€)' },
+          { time: '22:45', label: 'Partenza 2° Turno di Mezzanotte da Piazza Castello 2 (cenone completo, tariffa 150€)' },
+          { time: '00:00', label: 'Brindisi di mezzanotte a bordo con cotechino, lenticchie e flûte di bollicine attraverso Milano' },
+          { time: '01:00', label: 'Rientro conclusivo al capolinea di Piazza Castello 2 nel centro storico' },
+        ]
+      : [
+          { time: '19:00', label: '1st Seating departure from Piazza Castello 2 aboard historic ATMosfera tram (€130, ends 21:30)' },
+          { time: '22:45', label: '2nd Midnight Seating departure from Piazza Castello 2 (€150 per guest)' },
+          { time: '00:00', label: 'Midnight sparkling toast with traditional cotechino & lentils cruising past Milan landmarks' },
+          { time: '01:00', label: 'Final drop-off back at Piazza Castello 2 in the historic center' },
+        ];
+
+    return {
+      title: isIt
+        ? 'Capodanno Tram Storico ATMosfera Milano 2027 · Cenone Itinerante'
+        : 'ATMosfera Historic Tram Restaurant Milan NYE 2027 · Rolling Gala Dinner',
+      subtitle: isIt
+        ? 'Piazza Castello 2, 20121 Milano · 1° Turno 19:00 (130€) · 2° Turno Mezzanotte 22:45 (150€) · Max 8 persone'
+        : 'Piazza Castello 2, 20121 Milan · 1st Seating 19:00 (€130) · 2nd Midnight Seating 22:45 (€150) · Max 8 guests',
+      description: isIt
+        ? 'Festeggia il Capodanno 2027 a bordo dei tram storici ATMosfera 1 e 2 di ATM Milano attraverso il cuore illuminato della città, con partenza da Piazza Castello 2. Il listino ufficiale prevede due turni il 31 dicembre 2026: 1° Turno 19:00–21:30 a 130€ a persona oppure 2° Turno di Mezzanotte dalle 22:45 a 150€ a persona (prenotazioni fino a max 8 persone; scelta tra menù Carne, Pesce o Vegetariano comprensivo di entrée di benvenuto con calice di bollicine, antipasto, primo, secondo, dessert, 1 bottiglia di vino ogni 2 persone, acqua e caffè). La gestione della prenotazione sul portale ufficiale viene curata dal nostro Concierge dopo verifica disponibilità.'
+        : 'Celebrate New Year’s Eve 2027 aboard ATM Milano’s historic ATMosfera 1 and 2 dining trams departing from Piazza Castello 2. Official Dec 31, 2026 seatings: 1st Seating 19:00–21:30 (€130 per person) or 2nd Midnight Seating from 22:45 (€150 per person), up to 8 guests per booking. Choose Carne (Meat), Pesce (Fish), or Vegetarian 4-course menu including welcome entrée + sparkling flûte, wine (1 bottle per 2 guests), water & coffee. Official reservation managed by our Concierge.',
+      musicAndFormat: isIt
+        ? 'Cenone Gourmet Itinerante su Tram Storico anni ’20 ATMosfera 1 e 2 · Menù Carne, Pesce o Vegetariano'
+        : 'Rolling Gourmet Gala Dinner aboard 1920s Historic Trams ATMosfera 1 & 2 · Meat, Fish or Vegetarian Menu',
+      dressCode: isIt ? 'Smart Chic / Elegante di San Silvestro' : 'Smart Chic / Evening Elegant',
+      priceSummary: isIt
+        ? '1° Turno (19:00–21:30) 130€ · 2° Turno Mezzanotte (22:45) 150€ · Max 8 ospiti per prenotazione'
+        : '1st Seating (19:00–21:30) €130 · 2nd Midnight Seating (22:45) €150 · Max 8 guests per booking',
+      tiers: isIt
+        ? [
+            {
+              label: '1° Turno Cenone San Silvestro ATMosfera (19:00 – 21:30)',
+              price: '130€',
+              details: 'Menù completo a scelta (Carne, Pesce o Vegetariano) con entrée + flûte, antipasto, primo, secondo, dessert, 1 bottiglia vino ogni 2, acqua e caffè (max 8 pax).',
+            },
+            {
+              label: '2° Turno Cenone di Mezzanotte ATMosfera (ore 22:45)',
+              price: '150€',
+              details: 'Cenone completo a bordo con brindisi di mezzanotte, cotechino e lenticchie tra Piazza Castello, Duomo e Brera (max 8 pax).',
+            },
+          ]
+        : [
+            {
+              label: '1st Seating NYE Rolling Dinner (19:00 – 21:30)',
+              price: '€130',
+              details: 'Complete Meat, Fish, or Vegetarian 4-course menu with welcome entrée + sparkling flûte, 1 wine bottle per 2, water & coffee (max 8 guests).',
+            },
+            {
+              label: '2nd Midnight Seating NYE Rolling Dinner (22:45)',
+              price: '€150',
+              details: 'Full rolling dinner with midnight toast, traditional cotechino & lentils through central Milan (max 8 guests).',
+            },
+          ],
+      highlights: isIt
+        ? [
+            'Partenza esclusiva da Piazza Castello 2 a bordo dei tram storici restaurati ATMosfera 1 e 2',
+            'Due turni confermati: 19:00–21:30 (130€) e turno di mezzanotte dalle 22:45 (150€)',
+            'Menù stagionali a scelta: Carne, Pesce o Vegetariano + 1 bottiglia di vino ogni 2 ospiti',
+            'Massimo 8 persone per prenotazione · Gestione prenotazione curata dal Concierge Nightlife Milan',
+          ]
+        : [
+            'Exclusive departure from Piazza Castello 2 aboard restored vintage trams ATMosfera 1 & 2',
+            'Two official seatings: 19:00–21:30 (€130) and 22:45 midnight seating (€150)',
+            'Choice of Meat, Fish, or Vegetarian seasonal menus + 1 bottle of wine per 2 guests',
+            'Maximum 8 guests per booking · Reservation secured by Nightlife Milan Concierge',
+          ],
+      sourceBasis: isIt
+        ? 'Tariffe e condizioni ufficiali ATM Milano per Tram Ristorante ATMosfera (1° turno 130€, 2° turno 150€, max 8 ospiti). La prenotazione viene gestita dal nostro Concierge sul portale ufficiale previa verifica disponibilità.'
+        : 'Official ATM Milano rate card for ATMosfera Dining Tram (1st seating €130, 2nd seating €150, max 8 guests). Booking managed on the official portal by Nightlife Milan Concierge upon availability check.',
+      scheduleHeading: isIt ? 'Turni & Percorso 31 Dicembre 2026 · ATMosfera' : 'Seatings & Route Dec 31, 2026 · ATMosfera',
+      schedule,
+      menusHeading: isIt ? 'Proposte Menù a Bordo (Carne, Pesce, Vegetariano)' : 'On-Board Menus (Meat, Fish, Vegetarian)',
+      menus: isIt
+        ? [
+            {
+              id: 'atmosfera-menu-overview',
+              title: 'ATMosfera Tram · Percorso Gastronomico di San Silvestro',
+              price: '130€ / 150€',
+              subtitle: 'Scelta obbligatoria al momento della prenotazione tra Menù di Carne, di Pesce o Vegetariano',
+              courses: [
+                { course: 'Benvenuto', dish: 'Entrée dello chef con calice di bollicine di benvenuto al posto riservato' },
+                { course: 'Antipasto, Primo & Secondo', dish: 'Tre proposte dedicate (Carne, Pesce oppure Vegetariano) preparate espressamente per i tram ATMosfera' },
+                { course: 'Dessert & Mezzanotte (2° Turno)', dish: 'Dessert di pasticceria, flûte di brindisi di mezzanotte e cotechino con lenticchie nel turno delle 22:45' },
+              ],
+              beverages: '1 bottiglia di vino ogni 2 persone, acqua naturale/frizzante e caffè inclusi nella tariffa.',
+            },
+          ]
+        : [
+            {
+              id: 'atmosfera-menu-overview',
+              title: 'ATMosfera Tram · NYE Rolling Gourmet Experience',
+              price: '€130 / €150',
+              subtitle: 'Advance choice required among Meat, Fish, or Vegetarian 4-course menu',
+              courses: [
+                { course: 'Welcome', dish: 'Chef’s welcome entrée paired with a complimentary sparkling flûte' },
+                { course: 'Starter, First & Main Course', dish: 'Dedicated Meat, Fish, or Vegetarian recipes freshly plated aboard ATMosfera 1 & 2' },
+                { course: 'Dessert & Midnight Ritual (2nd Seating)', dish: 'Artisanal dessert plus midnight sparkling toast with cotechino & lentils on the 22:45 run' },
+              ],
+              beverages: 'Includes 1 bottle of wine every 2 guests, still/sparkling water, and coffee.',
+            },
+          ],
+      offerPricesEur: [130, 150],
+    };
+  }
+
+  if (slug === 'capodanno-teatro-manzoni-milano') {
+    const schedule: CapodannoScheduleStep[] = isIt
+      ? [
+          { time: '17:00', label: 'Prima replica di Capodanno «...e fuori nevica» con Vincenzo Salemme (biglietti 40€–67€)' },
+          { time: '20:00', label: 'Cena opzionale pre-spettacolo al Bistrot Fioraio Bianchi nel foyer (100€, solo cena)' },
+          { time: '21:30', label: 'Replica serale speciale di San Silvestro (70€–130€) seguita dal brindisi di mezzanotte in sala con gli attori' },
+        ]
+      : [
+          { time: '17:00', label: 'First NYE matinee performance of Vincenzo Salemme «...e fuori nevica» (€40–€67)' },
+          { time: '20:00', label: 'Optional NYE Bistrot dinner at Fioraio Bianchi inside the foyer (€100, dinner only)' },
+          { time: '21:30', label: 'Special evening performance (€70–€130) followed by a midnight toast on stage with the cast' },
+        ];
+
+    return {
+      title: isIt
+        ? 'Capodanno Teatro Manzoni Milano 2027 · Vincenzo Salemme & Bistrot'
+        : 'Teatro Manzoni Milan NYE 2027 · Vincenzo Salemme & Foyer Bistrot',
+      subtitle: isIt
+        ? 'Via Alessandro Manzoni 42, 20121 Milano · Ore 17:00 (40€–67€) & Ore 21:30 + Brindisi Cast (70€–130€) · Cena Bistrot 20:00 (100€)'
+        : 'Via Alessandro Manzoni 42, 20121 Milan · 17:00 (€40–€67) & 21:30 + Cast Toast (€70–€130) · Bistrot Dinner 20:00 (€100)',
+      description: isIt
+        ? 'Festeggia il Capodanno 2027 al Teatro Manzoni di Milano (Via Alessandro Manzoni 42) con la celebre commedia «...e fuori nevica» di e con Vincenzo Salemme. Il 31 dicembre 2026 sono previste due repliche: pomeridiana delle 17:00 (Poltrona 40€, Poltronissima 56€, Prestige 67€) e replica speciale di San Silvestro delle 21:30 con brindisi di mezzanotte insieme alla compagnia (Poltrona 70€, Poltronissima 110€, Prestige 130€). Alle ore 20:00 è inoltre disponibile la cena opzionale al Bistrot Fioraio Bianchi nel foyer a 100€ a persona (nota importante: i 100€ riguardano esclusivamente la cena e vanno acquistati separatamente dai biglietti dello spettacolo).'
+        : 'Celebrate New Year’s Eve 2027 at historic Teatro Manzoni Milan (Via Alessandro Manzoni 42) with Vincenzo Salemme in his iconic comedy «...e fuori nevica». Two performances take place on December 31, 2026: 17:00 matinee (Poltrona €40, Poltronissima €56, Prestige €67) and the 21:30 New Year’s Eve performance with a midnight toast alongside the cast (Poltrona €70, Poltronissima €110, Prestige €130). Optional 20:00 NYE dinner at Fioraio Bianchi Bistrot inside the theatre foyer is available at €100 per person (dinner only, separate from show tickets).',
+      musicAndFormat: isIt
+        ? 'Commedia «...e fuori nevica» con Vincenzo Salemme · Brindisi di Mezzanotte in Sala con gli Attori'
+        : 'Live Comedy «...e fuori nevica» starring Vincenzo Salemme · Midnight Toast with the Cast',
+      dressCode: isIt ? 'Elegante da Teatro / Abito Scuro o Cocktail' : 'Theatre Evening Attire / Smart Elegant',
+      priceSummary: isIt
+        ? 'Spettacolo 17:00: 40€/56€/67€ · Spettacolo 21:30 + Brindisi: 70€/110€/130€ · Cena Bistrot ore 20:00 (solo cena): 100€'
+        : '17:00 Show: €40/€56/€67 · 21:30 Show + Toast: €70/€110/€130 · 20:00 Bistrot Dinner (dinner only): €100',
+      tiers: isIt
+        ? [
+            {
+              label: 'Spettacolo ore 21:30 · Poltronissima Prestige (con brindisi cast)',
+              price: '130€',
+              details: 'Posto centrale di prestigio per la recita di Capodanno ore 21:30 incluso brindisi di mezzanotte con Vincenzo Salemme e la compagnia.',
+            },
+            {
+              label: 'Spettacolo ore 21:30 · Poltronissima / Poltrona (con brindisi)',
+              price: '110€ / 70€',
+              details: 'Poltronissima 110€ oppure Poltrona 70€ per la recita serale di San Silvestro delle 21:30 con brindisi finale.',
+            },
+            {
+              label: 'Cena di Capodanno Bistrot Fioraio Bianchi (ore 20:00 · solo cena)',
+              price: '100€',
+              details: 'Cena servita nel foyer alle 20:00 (bevande incluse su conferma bistrot; NON comprende il biglietto dello spettacolo teatrale).',
+            },
+            {
+              label: 'Pomeridiana San Silvestro ore 17:00 (Prestige / Poltronissima / Poltrona)',
+              price: '67€ / 56€ / 40€',
+              details: 'Recita pomeridiana del 31 dicembre alle 17:00 ideale prima di un cenone o di un party di mezzanotte.',
+            },
+          ]
+        : [
+            {
+              label: '21:30 Show · Poltronissima Prestige (with cast midnight toast)',
+              price: '€130',
+              details: 'Prime front-center seating for the 21:30 NYE show including the midnight toast on stage with Vincenzo Salemme and cast.',
+            },
+            {
+              label: '21:30 Show · Poltronissima / Poltrona (with cast toast)',
+              price: '€110 / €70',
+              details: 'Poltronissima €110 or Poltrona €70 for the 21:30 New Year’s Eve performance with midnight toast.',
+            },
+            {
+              label: '20:00 NYE Dinner at Bistrot Fioraio Bianchi (dinner only)',
+              price: '€100',
+              details: 'Optional 20:00 foyer bistrot dinner inside Teatro Manzoni (does NOT include theatre show tickets).',
+            },
+            {
+              label: '17:00 Matinee Show (Prestige / Poltronissima / Poltrona)',
+              price: '€67 / €56 / €40',
+              details: 'December 31 afternoon performance at 17:00 before your midnight gala.',
+            },
+          ],
+      highlights: isIt
+        ? [
+            'Vincenzo Salemme in scena il 31 dicembre 2026 con la commedia «...e fuori nevica»',
+            'Recita serale ore 21:30 con brindisi di mezzanotte insieme alla compagnia (70€–130€)',
+            'Cena opzionale ore 20:00 nel foyer al Bistrot Fioraio Bianchi a 100€ (separata dal biglietto teatro)',
+            'Replica pomeridiana ore 17:00 disponibile a 40€ / 56€ / 67€',
+          ]
+        : [
+            'Vincenzo Salemme live on December 31, 2026 performing «...e fuori nevica»',
+            '21:30 NYE evening show including midnight toast with the cast (€70–€130)',
+            'Optional 20:00 Fioraio Bianchi foyer Bistrot dinner at €100 (sold separately from show tickets)',
+            '17:00 afternoon show also available at €40 / €56 / €67',
+          ],
+      sourceBasis: isIt
+        ? 'Listino ufficiale Teatro Manzoni Milano e risposta ufficiale banqueting Fioraio Bianchi per Capodanno 2027 (cena 100€ separata dai biglietti teatrali).'
+        : 'Official Teatro Manzoni Milan box-office list and Fioraio Bianchi foyer bistrot reply for NYE 2027 (€100 dinner separate from theatre tickets).',
+      scheduleHeading: isIt ? 'Programma 31 Dicembre 2026 · Teatro Manzoni' : 'Schedule Dec 31, 2026 · Teatro Manzoni',
+      schedule,
+      offerPricesEur: [130, 110, 100, 67],
+    };
+  }
+
+  if (slug === 'capodanno-teatro-lirico-giorgio-gaber-milano') {
+    const schedule: CapodannoScheduleStep[] = isIt
+      ? [
+          { time: '19:15', label: 'Apertura Foyer Teatro Lirico per il Buffet Speciale Pre-Show di Capodanno (55€, 2 consumazioni)' },
+          { time: '21:00', label: 'Inizio spettacolo «A Christmas Carol – Il Canto di Natale» con Roberto Ciufoli (46€–90€)' },
+          { time: '00:00', label: 'Brindisi festivo di mezzanotte nel cuore di Milano a due passi da Piazza Duomo' },
+        ]
+      : [
+          { time: '19:15', label: 'Teatro Lirico foyer doors open for the NYE Special Pre-Show Buffet (€55 incl. 2 drinks)' },
+          { time: '21:00', label: 'Curtain up for «A Christmas Carol – Il Canto di Natale» starring Roberto Ciufoli (€46–€90)' },
+          { time: '00:00', label: 'Festive midnight welcome steps from Piazza Duomo in central Milan' },
+        ];
+
+    return {
+      title: isIt
+        ? 'Capodanno Teatro Lirico Giorgio Gaber Milano 2027 · A Christmas Carol'
+        : 'Teatro Lirico Giorgio Gaber Milan NYE 2027 · A Christmas Carol',
+      subtitle: isIt
+        ? 'Via Larga 14, 20122 Milano · Spettacolo con Roberto Ciufoli 46€–90€ · Buffet Pre-Show Ufficiale 55€ (2 drink inclusi)'
+        : 'Via Larga 14, 20122 Milan · Musical with Roberto Ciufoli €46–€90 · Optional Pre-Show Buffet €55 (2 drinks)',
+      description: isIt
+        ? 'Trascorri il Capodanno 2027 al Teatro Lirico Giorgio Gaber (Via Larga 14, a pochi minuti da Piazza Duomo) con il grande musical «A Christmas Carol – Il Canto di Natale» interpretato da Roberto Ciufoli e Compagnia dell’Alba. Biglietti ufficiali per il 31 dicembre 2026 da 46€ (Posti ascolto) a 65€ (Galleria), 79€ (Poltrona) e 90€ (Poltronissima). Disponibile inoltre il Menù Speciale Buffet Pre-Show a 55€ a persona con 2 consumazioni incluse (panettone gastronomico DOP e Langhe, vitello tonnato, mini bun gorgonzola e noci, polenta e baccalà mantecato, pizzoccheri in crespella, riso al salto con ossobuco, cotechino e lenticchie, panettone e pandoro con mascarpone).'
+        : 'Celebrate New Year’s Eve 2027 at Teatro Lirico Giorgio Gaber (Via Larga 14, minutes from Duomo) with «A Christmas Carol – Il Canto di Natale» starring Roberto Ciufoli and Compagnia dell’Alba. Official Dec 31, 2026 tickets range from €46 (Listening seats) to €65 (Gallery), €79 (Stalls), and €90 (Front Stalls). Add the official Pre-Show Special Buffet at €55 per person including 2 drinks and traditional Milanese dishes.',
+      musicAndFormat: isIt
+        ? 'Musical «A Christmas Carol – Il Canto di Natale» con Roberto Ciufoli + Buffet Pre-Show nel Foyer'
+        : 'Musical «A Christmas Carol» starring Roberto Ciufoli + Foyer Pre-Show NYE Buffet',
+      dressCode: isIt ? 'Elegante da Teatro / Smart Chic' : 'Theatre Evening Attire / Smart Chic',
+      priceSummary: isIt
+        ? 'Spettacolo 46€ / 65€ / 79€ / 90€ · Menù Buffet Pre-Show (con 2 consumazioni) 55€'
+        : 'Show Tickets €46 / €65 / €79 / €90 · Pre-Show Buffet (with 2 drinks) €55',
+      tiers: isIt
+        ? [
+            {
+              label: 'Poltronissima · A Christmas Carol (31 dicembre)',
+              price: '90€',
+              details: 'Settore top in prima platea centrale per la replica speciale di San Silvestro con Roberto Ciufoli.',
+            },
+            {
+              label: 'Poltrona · A Christmas Carol (31 dicembre)',
+              price: '79€',
+              details: 'Posto in platea per la recita serale di Capodanno 2027.',
+            },
+            {
+              label: 'Galleria · A Christmas Carol (31 dicembre)',
+              price: '65€',
+              details: 'Settore Galleria panoramica sopra la platea del Teatro Lirico Giorgio Gaber.',
+            },
+            {
+              label: 'Buffet Speciale Pre-Show (opzionale con 2 drink)',
+              price: '55€',
+              details: 'Menù di 10 portate servito nel foyer con 2 consumazioni incluse (vedi menù ufficiale sotto); posti ascolto disponibili da 46€.',
+            },
+          ]
+        : [
+            {
+              label: 'Poltronissima (Front Stalls) · A Christmas Carol (Dec 31)',
+              price: '€90',
+              details: 'Prime front stalls seat for the December 31 performance starring Roberto Ciufoli.',
+            },
+            {
+              label: 'Poltrona (Stalls) · A Christmas Carol (Dec 31)',
+              price: '€79',
+              details: 'Standard stalls seating for New Year’s Eve 2027.',
+            },
+            {
+              label: 'Galleria (Gallery) · A Christmas Carol (Dec 31)',
+              price: '€65',
+              details: 'Elevated gallery seat with clear stage view (listening seats also available from €46).',
+            },
+            {
+              label: 'Official Pre-Show NYE Buffet (with 2 drinks)',
+              price: '€55',
+              details: '10-item gourmet Milanese foyer buffet including 2 drinks per guest (full menu shown below).',
+            },
+          ],
+      highlights: isIt
+        ? [
+            'Roberto Ciufoli protagonista in «A Christmas Carol – Il Canto di Natale» il 31 dicembre',
+            'Biglietti teatro ufficiali da 46€ (ascolto), 65€ (Galleria), 79€ (Poltrona) e 90€ (Poltronissima)',
+            'Menù Speciale Buffet Pre-Show con 10 specialità e 2 consumazioni incluse a 55€',
+            'Posizione centrale in Via Larga 14 a 300 metri da Piazza Duomo',
+          ]
+        : [
+            'Roberto Ciufoli starring in «A Christmas Carol – Il Canto di Natale» on December 31',
+            'Official seats from €46 (listening), €65 (Gallery), €79 (Stalls), and €90 (Front Stalls)',
+            'Optional 10-course Pre-Show NYE Buffet including 2 drinks at €55',
+            'Central address on Via Larga 14 steps from Piazza Duomo',
+          ],
+      sourceBasis: isIt
+        ? 'Listino ufficiale spettacoli Teatro Lirico Giorgio Gaber e Menù Speciale Buffet di Capodanno ufficiale (PDF 55€ con 2 consumazioni).'
+        : 'Official Teatro Lirico Giorgio Gaber box-office prices and official NYE Special Buffet PDF menu (€55 including 2 drinks).',
+      scheduleHeading: isIt ? 'Programma 31 Dicembre 2026 · Teatro Lirico' : 'Schedule Dec 31, 2026 · Teatro Lirico',
+      schedule,
+      menusHeading: isIt ? 'Menù Ufficiale Buffet Pre-Show 55€ · Teatro Lirico' : 'Official €55 Pre-Show Buffet Menu · Teatro Lirico',
+      menus: isIt ? LIRICO_BUFFET_MENU_IT : LIRICO_BUFFET_MENU_EN,
+      offerPricesEur: [90, 79, 65, 55],
+    };
+  }
+
+  if (slug === 'capodanno-teatro-nazionale-milano') {
+    return {
+      title: isIt
+        ? 'Capodanno Teatro Nazionale Milano 2027 · Sister Act Il Musical (Ore 21:00)'
+        : 'Teatro Nazionale Milan NYE 2027 · Sister Act The Musical (21:00)',
+      subtitle: isIt
+        ? 'Via Giordano Rota 1 (Piazza Piemonte), 20145 Milano · Replica speciale ore 21:00 con brindisi di mezzanotte · 100€–150€'
+        : 'Via Giordano Rota 1 (Piazza Piemonte), 20145 Milan · Special 21:00 performance with midnight toast · €100–€150',
+      description: isIt
+        ? 'Vivi un Capodanno scintillante al Teatro Nazionale di Piazza Piemonte con la replica speciale di San Silvestro di «Sister Act – Il Musical». Il 31 dicembre 2026 alle ore 21:00 va in scena lo show completo seguito dal grande brindisi di mezzanotte in sala. Settori ufficiali: I Galleria 100€, Poltrona 120€, Poltronissima 135€ e VIP 150€.'
+        : 'Ring in 2027 at Milan’s Teatro Nazionale in Piazza Piemonte with the special New Year’s Eve performance of «Sister Act – The Musical». Curtain rises on December 31, 2026 at 21:00, culminating in a festive midnight toast inside the theatre. Official seating tiers: Gallery €100, Stalls €120, Front Stalls €135, VIP €150.',
+      musicAndFormat: isIt
+        ? 'Replica Speciale di San Silvestro «Sister Act – Il Musical» + Brindisi di Mezzanotte'
+        : 'Special New Year’s Eve Show «Sister Act – The Musical» + Midnight Toast',
+      dressCode: isIt ? 'Elegante da Teatro / Festive Chic' : 'Theatre Festive Chic / Evening Attire',
+      priceSummary: isIt
+        ? 'I Galleria 100€ · Poltrona 120€ · Poltronissima 135€ · VIP 150€ (brindisi incluso)'
+        : 'I Gallery €100 · Stalls €120 · Front Stalls €135 · VIP €150 (toast included)',
+      tiers: isIt
+        ? [
+            { label: 'Settore VIP · Sister Act Capodanno (ore 21:00 + brindisi)', price: '150€', details: 'Migliori posti VIP in prima platea con brindisi di mezzanotte incluso.' },
+            { label: 'Poltronissima · Sister Act Capodanno (ore 21:00 + brindisi)', price: '135€', details: 'Platea centrale avanzata + brindisi di mezzanotte in sala.' },
+            { label: 'Poltrona · Sister Act Capodanno (ore 21:00 + brindisi)', price: '120€', details: 'Posto in platea per la replica delle 21:00 con brindisi finale.' },
+            { label: 'I Galleria · Sister Act Capodanno (ore 21:00 + brindisi)', price: '100€', details: 'Prima Galleria panoramica con brindisi di mezzanotte incluso.' },
+          ]
+        : [
+            { label: 'VIP Sector · Sister Act NYE (21:00 + toast)', price: '€150', details: 'Best VIP front stalls with midnight toast included.' },
+            { label: 'Poltronissima · Sister Act NYE (21:00 + toast)', price: '€135', details: 'Prime central stalls with midnight celebration toast.' },
+            { label: 'Poltrona · Sister Act NYE (21:00 + toast)', price: '€120', details: 'Standard stalls seat for the 21:00 show and midnight toast.' },
+            { label: 'I Galleria · Sister Act NYE (21:00 + toast)', price: '€100', details: 'First gallery seat with midnight toast included.' },
+          ],
+      highlights: isIt
+        ? [
+            'Replica speciale di Capodanno 2027 di «Sister Act – Il Musical» ore 21:00',
+            'Brindisi di mezzanotte in teatro incluso in tutte le categorie di biglietto',
+            'Quattro fasce di listino ufficiale: 100€ Galleria, 120€ Poltrona, 135€ Poltronissima, 150€ VIP',
+            'Metropolitana M1 Wagner a 100 metri in Piazza Piemonte',
+          ]
+        : [
+            'Special NYE 2027 performance of «Sister Act – The Musical» at 21:00',
+            'Midnight toast inside the theatre included in every ticket tier',
+            'Official pricing: €100 Gallery, €120 Stalls, €135 Front Stalls, €150 VIP',
+            'Steps from Metro M1 Wagner at Piazza Piemonte',
+          ],
+      sourceBasis: isIt
+        ? 'Listino ufficiale biglietteria Teatro Nazionale Milano per la replica speciale di San Silvestro di Sister Act (31 dicembre 2026 ore 21:00 con brindisi).'
+        : 'Official Teatro Nazionale Milan box-office list for the special Dec 31, 2026 21:00 performance of Sister Act with midnight toast.',
+      offerPricesEur: [150, 135, 120, 100],
+    };
+  }
+
+  if (slug === 'capodanno-armani-prive-milano') {
+    return {
+      title: isIt
+        ? 'Capodanno Armani/Privé Milano 2027 · Quadrilatero della Moda'
+        : 'Armani/Privé Milan NYE 2027 · Fashion District Club',
+      subtitle: isIt
+        ? 'Via Gastone Pisoni 3, 20121 Milano · Programma e listino ufficiali 31 dicembre 2026 in via di definizione'
+        : 'Via Gastone Pisoni 3, 20121 Milan · Official December 31, 2026 program & pricing to be announced',
+      description: isIt
+        ? 'Capodanno 2027 ad Armani/Privé Milano (Via Gastone Pisoni 3, Quadrilatero della Moda): la direzione del club ha confermato ufficialmente che il programma e il listino per la notte di giovedì 31 dicembre 2026 non sono ancora stati rilasciati. Non pubblichiamo prezzi stimati: scrivi al Concierge Nightlife Milan su WhatsApp +39 351 912 7047 per entrare nella lista d’attesa prioritaria e ricevere le tariffe non appena rese pubbliche.'
+        : 'New Year’s Eve 2027 at Armani/Privé Milan (Via Gastone Pisoni 3, Quadrilatero della Moda): club management confirmed that the official December 31, 2026 program and rate card have not been finalized yet. Join the Nightlife Milan Concierge waitlist on WhatsApp +39 351 912 7047 to receive official table and admission pricing the moment it is released.',
+      musicAndFormat: isIt
+        ? 'Luxury Fashion Club · Programma House & Deep Fashion 2027 in attesa di annuncio ufficiale'
+        : 'Luxury Fashion Club · 2027 Program Pending Official Release',
+      dressCode: isIt ? 'Alta Moda / Elegante Rigoroso (selezione all’ingresso)' : 'Strict Haute Couture / Evening Elegant',
+      priceSummary: isIt
+        ? 'Programma e prezzi 2027 non ancora usciti · Lista d’attesa prioritaria su WhatsApp +39 351 912 7047'
+        : '2027 program & pricing not yet announced · Priority waitlist via WhatsApp +39 351 912 7047',
+      tiers: isIt
+        ? [
+            {
+              label: 'Lista d’attesa Tavoli Privé & Ingresso (in uscita)',
+              price: 'Su richiesta',
+              details: 'La direzione non ha ancora pubblicato il programma NYE 2027. Contatta WhatsApp +39 351 912 7047 per ricevere in anteprima il listino ufficiale.',
+            },
+          ]
+        : [
+            {
+              label: 'Priority Waitlist · Privé Tables & Admission',
+              price: 'TBA',
+              details: 'Management has not finalized the NYE 2027 schedule yet. Message WhatsApp +39 351 912 7047 for instant notification once published.',
+            },
+          ],
+      highlights: isIt
+        ? [
+            'Club esclusivo del Gruppo Armani in Via Gastone Pisoni 3, Quadrilatero della Moda',
+            'Aggiornamento ufficiale diretto dal club: programma Capodanno 2027 non ancora definito',
+            'Nessun prezzo inventato: servizio gratuito di lista prioritaria su WhatsApp +39 351 912 7047',
+          ]
+        : [
+            'Signature fashion club at Via Gastone Pisoni 3 in Milan’s Fashion District',
+            'Verified club update: NYE 2027 program not yet finalized',
+            'Zero placeholder prices: free priority waitlist alert on WhatsApp +39 351 912 7047',
+          ],
+      sourceBasis: isIt
+        ? 'Verifica diretta tramite risposta ufficiale Armani/Privé Milano: programmazione e prezzi di San Silvestro 2026/2027 non ancora usciti. Aggiornamenti su WhatsApp +39 351 912 7047.'
+        : 'Direct verification from Armani/Privé Milan: Dec 31, 2026 pricing and program not yet released. Updates via WhatsApp +39 351 912 7047.',
+    };
+  }
+
   const closedMeta = CLOSED_VENUE_META[slug];
   if (closedMeta) {
     const labels = CLOSED_LABELS_BY_LOCALE[loc] || CLOSED_LABELS_BY_LOCALE.en!;
@@ -781,14 +1271,14 @@ export function getT031OverrideContent(
         `${closedMeta.name} (${closedMeta.address})`,
         reason,
         isIt
-          ? 'Nessun biglietto o cenone in vendita per la notte del 31 dicembre 2026 in questa sede'
-          : 'No tickets or gala dinner on sale for December 31, 2026 at this venue',
+          ? 'Evento dichiarato Sold Out: nessun biglietto o cenone in vendita per la notte del 31 dicembre 2026'
+          : 'Marked Sold Out: no tickets or gala dinner on sale for December 31, 2026 at this venue',
         isIt
           ? 'Assistenza Concierge Nightlife Milan per alternative aperte: WhatsApp +39 351 912 7047'
           : 'Nightlife Milan Concierge for open alternatives: WhatsApp +39 351 912 7047',
       ],
       sourceBasis: `${reason} Concierge WhatsApp +39 351 912 7047.`,
-      closedForNye: true,
+      soldOutForNye: true,
       closureBannerTitle: `${labels.bannerPrefix} · ${closedMeta.name.toUpperCase()}`,
       closureBannerBody: reason,
       alternativesHeading: labels.altHeading,
@@ -798,7 +1288,7 @@ export function getT031OverrideContent(
         ? [
             {
               q: `${closedMeta.name} è aperto a Capodanno 2027 (31 dicembre 2026)?`,
-              a: `No. ${closedMeta.reasonIt}`,
+              a: `No, l’evento è indicato come Sold Out. ${closedMeta.reasonIt}`,
             },
             {
               q: `Quali sono le migliori alternative aperte e prenotabili a Capodanno 2027?`,
@@ -808,7 +1298,7 @@ export function getT031OverrideContent(
         : [
             {
               q: `Is ${closedMeta.name} open for New Year’s Eve 2027 (December 31, 2026)?`,
-              a: `No. ${closedMeta.reasonEn}`,
+              a: `No, it is marked Sold Out. ${closedMeta.reasonEn}`,
             },
             {
               q: `What are the best confirmed open alternatives for NYE 2027?`,

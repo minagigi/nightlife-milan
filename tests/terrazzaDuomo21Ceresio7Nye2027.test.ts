@@ -180,7 +180,8 @@ test('All 35 locales cover Terrazza Duomo 21 / MA.RE & Ceresio 7 closed with zer
 
     const c7 = getCeresio7ClosedNyeContent(loc);
     const c7Json = JSON.stringify(c7);
-    assert.equal(c7.closedForNye, true);
+    assert.equal(c7.soldOutForNye, true);
+    assert.equal(Boolean(c7.closedForNye), false);
     assert.equal(c7.tiers.length, 0, `Closed Ceresio 7 must have 0 price tiers in ${loc}`);
     assert.ok(c7.closureBannerTitle && c7.closureBannerTitle.length > 10);
     assert.equal(c7Json.includes('!'), false, `Exclamation in Ceresio 7 ${loc}`);
@@ -264,7 +265,8 @@ test('All 35 locales cover Terrazza Duomo 21 / MA.RE & Ceresio 7 closed with zer
 test('Ceresio 7 is excluded from purchasable lists/categories while its detail page resolves cleanly', () => {
   const c7 = getCapodannoEventBySlug('capodanno-ceresio-7-milano');
   assert.ok(c7);
-  assert.equal(c7.closedForNye, true);
+  assert.equal(c7.soldOutForNye, true);
+  assert.equal(Boolean(c7.closedForNye), false);
   assert.equal(c7.priceFromEur, 0);
 
   for (const mode of [

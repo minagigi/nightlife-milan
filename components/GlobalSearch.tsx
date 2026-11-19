@@ -1407,6 +1407,8 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
           address: ev.address,
           image: ev.image,
           priceFromEur: ev.priceFromEur,
+          isPiazza: ev.category === 'piazza',
+          isSoldOut: Boolean(ev.soldOutForNye || ev.closedForNye),
           title: isIt ? ev.titleIt : ev.titleEn,
           summary: isIt ? ev.priceSummaryIt : ev.priceSummaryEn,
           searchTerms: `${ev.venueName} ${ev.city} ${ev.province} ${ev.address} ${ev.musicTag} ${ev.venueType} ${ev.formulas.join(' ')} capodanno 2027 new years eve nye 31 dicembre`,
@@ -1418,6 +1420,8 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
           address: ev.address,
           image: ev.image,
           priceFromEur: ev.priceFromEur,
+          isPiazza: ev.slug.includes('piazza') || ev.slug.includes('arco-della-pace'),
+          isSoldOut: false,
           title: isIt ? ev.titleIt : ev.titleEn,
           summary: isIt ? ev.summaryIt : ev.summaryEn,
           searchTerms: ev.searchTerms,
@@ -2336,9 +2340,15 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                                       {ui.card.nye2027}
                                     </span>
                                     <span className="font-mono text-[10px] px-2 py-0.5 bg-[#EAE3D5]/15 text-[#EAE3D5] shrink-0">
-                                      {ev.priceFromEur > 0
-                                        ? `${ui.card.fromPrice} €${ev.priceFromEur}`
-                                        : ui.card.freeEntry}
+                                      {ev.isSoldOut
+                                        ? 'SOLD OUT'
+                                        : ev.priceFromEur > 0
+                                          ? `${ui.card.fromPrice} €${ev.priceFromEur}`
+                                          : ev.isPiazza
+                                            ? ui.card.freeEntry
+                                            : isIt
+                                              ? 'Su richiesta'
+                                              : 'On request'}
                                     </span>
                                   </div>
                                   <p className="font-serif text-base text-[#F6F1E7] group-hover:text-[#EAE3D5] transition-colors truncate mt-0.5">

@@ -316,18 +316,18 @@ export function HomeHalloweenAndCapodannoSections({
               <p className="font-mono text-xs uppercase tracking-[0.14em] text-[#EAE3D5] flex items-center gap-2 mb-3">
                 <Sparkles aria-hidden="true" className="h-4 w-4 shrink-0 text-[#F6F1E7]" />
                 {isIt
-                  ? 'SEZIONE SPECIALE CAPODANNO 2027 · 115 EVENTI UFFICIALI (31 DICEMBRE 2026)'
-                  : 'NEW YEAR’S EVE 2027 DEDICATED SECTION · 115 OFFICIAL EVENTS (DEC 31, 2026)'}
+                  ? 'SEZIONE SPECIALE CAPODANNO 2027 · 124 EVENTI UFFICIALI (31 DICEMBRE 2026)'
+                  : 'NEW YEAR’S EVE 2027 DEDICATED SECTION · 124 OFFICIAL EVENTS (DEC 31, 2026)'}
               </p>
               <h2 className="font-serif text-3xl sm:text-5xl font-normal text-[#F6F1E7] tracking-[-0.025em] leading-[0.96]">
                 {isIt
-                  ? 'Tutti i 75 Locali e Discoteche di Milano, Just Me Lago di Garda, 15 Capodanni Speciali, 12 Province Lombarde & Piazze Gratis'
-                  : 'All 75 Milan Clubs & Venues, Just Me Lake Garda, 15 Special NYE Experiences, All 12 Lombardy Provinces & Free Squares'}
+                  ? 'Tutti i 77 Locali e Discoteche di Milano, Just Me Lago di Garda, 17 Capodanni Speciali, 12 Province Lombarde & Piazze Gratis'
+                  : 'All 77 Milan Clubs & Venues, Just Me Lake Garda, 17 Special NYE Experiences, All 12 Lombardy Provinces & Free Squares'}
               </h2>
               <p className="mt-4 font-sans text-sm sm:text-base text-[#C2B9AA] leading-relaxed">
                 {isIt
-                  ? 'In prima fila i club e rooftop simbolo (Just Me Milano, Just Me Lago di Garda "Just Me in Rouge", Pineta, Aria, 55 Milano, Voya Rooftop con menu completo a 300€ a persona, Repvblic, Bischeri Milano e PERREO XL @ Gate), seguiti da tutti i 115 eventi di San Silvestro.'
-                  : 'Starting with our priority venues (Just Me Milan, Just Me Lake Garda "Just Me in Rouge", Pineta, Aria, 55 Milano, Voya Rooftop with full all-inclusive menu at €300/person, Repvblic, Bischeri Milano, and PERREO XL @ Gate), followed by all 115 New Year’s Eve events.'}
+                  ? 'In prima fila i club e rooftop simbolo (Just Me Milano, Just Me Lago di Garda "Just Me in Rouge", Pineta, Aria, 55 Milano, Voya Rooftop con menu completo a 300€ a persona, Repvblic, Bischeri Milano e PERREO XL @ Gate), seguiti da tutti i 124 eventi di San Silvestro.'
+                  : 'Starting with our priority venues (Just Me Milan, Just Me Lake Garda "Just Me in Rouge", Pineta, Aria, 55 Milano, Voya Rooftop with full all-inclusive menu at €300/person, Repvblic, Bischeri Milano, and PERREO XL @ Gate), followed by all 124 New Year’s Eve events.'}
               </p>
             </div>
             <div className="flex flex-wrap gap-3 shrink-0">
@@ -336,7 +336,7 @@ export function HomeHalloweenAndCapodannoSections({
                 prefetch={false}
                 className="inline-flex min-h-[48px] items-center justify-center bg-[#F6F1E7] px-6 py-3.5 font-mono text-xs font-bold uppercase tracking-[0.12em] text-[#050505] hover:bg-[#EAE3D5] transition-colors"
               >
-                {isIt ? 'Tutti i 115 Eventi di Capodanno ↗' : 'All 115 NYE 2027 Events ↗'}
+                {isIt ? 'Tutti i 124 Eventi di Capodanno ↗' : 'All 124 NYE 2027 Events ↗'}
               </Link>
               <Link
                 href={capodannoCategoryPath('capodanno-rooftop-milano', locale)}
@@ -412,10 +412,10 @@ export function HomeHalloweenAndCapodannoSections({
           {/* 4 Hub Principali Capodanno + 12 Categorie */}
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
             <Link href={capodannoPath(locale)} prefetch={false} className="bg-[#F6F1E7] p-4 text-center font-mono text-xs font-bold uppercase tracking-wider text-[#050505] hover:bg-[#EAE3D5] transition-colors">
-              {isIt ? '01 · Tutti i 115 Eventi Ufficiali ↗' : '01 · All 115 Official Events ↗'}
+              {isIt ? '01 · Tutti i 124 Eventi Ufficiali ↗' : '01 · All 124 Official Events ↗'}
             </Link>
             <Link href={capodannoCategoryPath('capodanno-speciale', locale)} prefetch={false} className="border border-[#F6F1E7]/35 bg-[#0B0A09] p-4 text-center font-mono text-xs uppercase tracking-wider text-[#F6F1E7] hover:border-[#F6F1E7] transition-colors">
-              {isIt ? '02 · 15 Speciali, Tram & Terme ↗' : '02 · 15 Special, Tram & Spa ↗'}
+              {isIt ? '02 · 17 Speciali, Tram & Terme ↗' : '02 · 17 Special, Tram & Spa ↗'}
             </Link>
             <Link href={capodannoCategoryPath('capodanno-lombardia', locale)} prefetch={false} className="border border-[#F6F1E7]/35 bg-[#0B0A09] p-4 text-center font-mono text-xs uppercase tracking-wider text-[#F6F1E7] hover:border-[#F6F1E7] transition-colors">
               {isIt ? '03 · Tutte le 12 Province ↗' : '03 · All 12 Provinces ↗'}

@@ -26,8 +26,8 @@ import {
 
 const REPO_ROOT = path.resolve(__dirname, '..');
 
-test('T-031: Every Capodanno venue has explicit partner boolean; partners = 0% direct, non-partners = 20% at checkout', () => {
-  assert.ok(CAPODANNO_EVENTS.length >= 119, `Expected >= 119 events, got ${CAPODANNO_EVENTS.length}`);
+test('T-031 & T-032: Every Capodanno venue has explicit partner boolean; partners = 0% direct, non-partners = 20% at checkout', () => {
+  assert.equal(CAPODANNO_EVENTS.length, 124, `Expected 124 events, got ${CAPODANNO_EVENTS.length}`);
   const expectedPartners = [
     'capodanno-pineta-milano',
     'capodanno-justme-milano-torre-branca',
@@ -137,8 +137,8 @@ test('T-031: 4 new venues (STK, Barchetta, Terminus, Palace Sold Out) + Radio Ro
     'capodanno-albergo-terminus-como',
   ]);
 
-  // All 9 closed venues excluded from open hub & have 0 tiers
-  const expectedClosed = [
+  // All 12 closed/sold-out venues mark soldOutForNye (never closedForNye), excluded from open hub & 0 SKUs
+  const expectedSoldOutFromClosed = [
     'capodanno-ceresio-7-milano',
     'capodanno-fabrique-milano',
     'capodanno-base-milano-tortona',
@@ -148,33 +148,128 @@ test('T-031: 4 new venues (STK, Barchetta, Terminus, Palace Sold Out) + Radio Ro
     'capodanno-spirit-de-milan',
     'capodanno-molto-club-milano',
     'capodanno-battello-navigli-darsena-milano',
+    'capodanno-backdoor43-milano',
+    'capodanno-palace-grand-hotel-varese',
   ];
-  for (const slug of expectedClosed) {
-    assert.ok(CLOSED_CAPODANNO_SLUGS.has(slug), `Expected closed slug ${slug}`);
+  const allExpectedSoldOut = ['capodanno-palace-hotel-como', ...expectedSoldOutFromClosed];
+  assert.equal(SOLDOUT_CAPODANNO_SLUGS.size, 12);
+  for (const slug of expectedSoldOutFromClosed) {
+    assert.ok(CLOSED_CAPODANNO_SLUGS.has(slug), `Expected closed->SoldOut slug ${slug}`);
+  }
+  for (const slug of allExpectedSoldOut) {
+    assert.ok(SOLDOUT_CAPODANNO_SLUGS.has(slug), `Expected sold-out slug ${slug}`);
     const ev = getCapodannoEventBySlug(slug)!;
-    assert.equal(ev.closedForNye, true);
-    assert.equal(ev.priceFromEur, 0);
-    assert.equal(openHub.some((e) => e.slug === slug), false, `Closed ${slug} leaked into capodanno-2027 hub`);
+    assert.ok(ev, `Missing event ${slug}`);
+    assert.equal(ev.soldOutForNye, true, `Expected soldOutForNye=true on ${slug}`);
+    assert.equal(Boolean(ev.closedForNye), false, `Expected closedForNye falsy on ${slug}`);
+    assert.equal(ev.priceFromEur, 0, `Expected priceFromEur=0 on ${slug}`);
+    assert.equal(openHub.some((e) => e.slug === slug), false, `SoldOut ${slug} leaked into capodanno-2027 hub`);
+    assert.equal(getVenueIdByEventSlug(slug), null, `SoldOut ${slug} must have no checkout venueId`);
   }
 
-  // Verify 35-locale hygiene on all T-031 overrides (zero !, zero em-dash, zero Stripe, zero +20%/fee inclusa)
+  // Verify 35-locale hygiene on all T-031 & T-032 overrides (zero !, zero em-dash, zero Stripe, zero +20%/fee inclusa)
   const overrideSlugs = [
     'capodanno-stk-milan',
     'capodanno-radio-rooftop-milano',
     'capodanno-hotel-barchetta-excelsior-como',
     'capodanno-albergo-terminus-como',
     'capodanno-palace-hotel-como',
-    ...expectedClosed.filter((s) => s !== 'capodanno-ceresio-7-milano'),
+    'capodanno-tram-storico-milano-atmosfera',
+    'capodanno-armani-prive-milano',
+    'capodanno-teatro-manzoni-milano',
+    'capodanno-teatro-lirico-giorgio-gaber-milano',
+    'capodanno-teatro-nazionale-milano',
+    ...expectedSoldOutFromClosed.filter((s) => s !== 'capodanno-ceresio-7-milano'),
   ];
   const forbiddenRe = /\bstripe\b|\+20%|fee inclusa|commissione|commission/i;
   for (const loc of ALL_35_LOCALES) {
     for (const slug of overrideSlugs) {
       const content = getT031OverrideContent(slug, loc);
-      assert.ok(content, `Missing T-031 override for ${slug} in ${loc}`);
+      assert.ok(content, `Missing T-031/T-032 override for ${slug} in ${loc}`);
       const json = JSON.stringify(content);
       assert.equal(json.includes('!'), false, `Exclamation in ${slug} (${loc})`);
       assert.equal(json.includes('\u2014'), false, `Em-dash in ${slug} (${loc})`);
       assert.equal(forbiddenRe.test(json), false, `Forbidden token in ${slug} (${loc})`);
     }
+  }
+});
+
+test('T-032: 5 new pages, 3 new theatre checkouts, 5 menu plates, 32 masters & TBA safeguards are complete', () => {
+  // Unique SKU IDs across Single Pass catalog
+  const skuIds = SINGLE_PASS_SKUS.map((s) => s.id);
+  assert.equal(new Set(skuIds).size, skuIds.length, 'Duplicate SKU ID detected in SINGLE_PASS_SKUS');
+
+  // 5 new event pages + clean posters + 4 real gallery masters each
+  const newSlugs = [
+    'capodanno-backdoor43-milano',
+    'capodanno-palace-grand-hotel-varese',
+    'capodanno-teatro-manzoni-milano',
+    'capodanno-teatro-lirico-giorgio-gaber-milano',
+    'capodanno-teatro-nazionale-milano',
+  ];
+  for (const slug of newSlugs) {
+    const ev = getCapodannoEventBySlug(slug);
+    assert.ok(ev, `Missing new Capodanno event ${slug}`);
+    const posterPath = path.join(REPO_ROOT, 'public', getCapodannoOfficialPosterSrc(slug).replace(/^\/+/, ''));
+    assert.ok(fs.existsSync(posterPath), `Missing poster ${posterPath}`);
+    assert.ok(fs.statSync(posterPath).size <= 300 * 1024, `Poster too large (>300KB): ${posterPath}`);
+    const masterKeys = selectMasterAssetKeys(slug, ev.venueName, ev.category);
+    for (const key of masterKeys) {
+      const mp = path.join(REPO_ROOT, 'public/images/seo-events/master', `${key}.webp`);
+      assert.ok(fs.existsSync(mp), `Missing master image ${key}.webp for ${slug}`);
+    }
+  }
+
+  // Updated galleries for Radio Rooftop, ATMosfera & Armani/Privé
+  for (const slug of [
+    'capodanno-radio-rooftop-milano',
+    'capodanno-tram-storico-milano-atmosfera',
+    'capodanno-armani-prive-milano',
+  ]) {
+    const ev = getCapodannoEventBySlug(slug)!;
+    for (const key of selectMasterAssetKeys(slug, ev.venueName, ev.category)) {
+      const mp = path.join(REPO_ROOT, 'public/images/seo-events/master', `${key}.webp`);
+      assert.ok(fs.existsSync(mp), `Missing refreshed master ${key}.webp for ${slug}`);
+    }
+  }
+
+  // All 5 bonified PDF menu plates exist on disk
+  for (const mFile of [
+    'menu-stk-milan-nye-2027.webp',
+    'menu-radio-rooftop-nye-2027.webp',
+    'menu-barchetta-como-nye-2027.webp',
+    'menu-terminus-como-nye-2027.webp',
+    'menu-teatro-lirico-buffet-nye-2027.webp',
+  ]) {
+    assert.ok(fs.existsSync(path.join(REPO_ROOT, 'public/images/events/t031-menus', mFile)), `Missing menu plate ${mFile}`);
+  }
+
+  // 3 dedicated theatre checkouts: non-partner (0.20 fee) with exact confirmed base prices
+  for (const [slug, venueId, minCents] of [
+    ['capodanno-teatro-manzoni-milano', 'teatro-manzoni', 4000],
+    ['capodanno-teatro-lirico-giorgio-gaber-milano', 'teatro-lirico', 4600],
+    ['capodanno-teatro-nazionale-milano', 'teatro-nazionale', 10000],
+  ] as const) {
+    assert.equal(getVenueIdByEventSlug(slug), venueId);
+    assert.equal(isPartnerVenueId(venueId), false);
+    const skus = getSkusForVenue(venueId);
+    assert.ok(skus.length >= 4, `Expected >= 4 SKUs for ${venueId}`);
+    assert.ok(skus.some((s) => s.basePriceCents === minCents), `Missing min SKU ${minCents} on ${venueId}`);
+    for (const sku of skus) {
+      assert.equal(getSkuFeeRate(sku), 0.2);
+    }
+  }
+
+  // TBA / On-request safeguards: never expose fake starting prices
+  for (const tbaSlug of [
+    'capodanno-carroponte-sesto-san-giovanni',
+    'capodanno-zoo-club-milano',
+    'capodanno-crociera-lago-di-como-garda-maggiore',
+    'capodanno-armani-prive-milano',
+  ]) {
+    const ev = getCapodannoEventBySlug(tbaSlug)!;
+    assert.ok(ev, `Missing TBA event ${tbaSlug}`);
+    assert.equal(ev.priceFromEur, 0, `Expected TBA priceFromEur=0 on ${tbaSlug}`);
+    assert.equal(Boolean(ev.soldOutForNye), false);
   }
 });

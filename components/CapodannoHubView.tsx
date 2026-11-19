@@ -62,7 +62,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
           a: 'Il Gran Cenone Servito (dalle 20:00/20:30, 95€–450€) include tavolo riservato per tutta la cena, menu multipiatto con vini, brindisi di mezzanotte e ingresso al party. Il Royal Buffet / Apericena (dalle 20:30, 50€–120€) è più dinamico e conviviale, ideale per single e gruppi. L’Ingresso Dopocena (dalle 23:00/23:30, 20€–100€) consente di entrare per il countdown e la festa. Il Tavolo VIP Privé (da 200€ a 5.000€) garantisce ingresso salta-fila e credito in bottiglie di Champagne o superalcolici.',
         },
         {
-          q: 'Come prenotare prevendite Early Bird, cenoni o tavoli VIP senza commissioni extra?',
+          q: 'Come prenotare prevendite Early Bird, cenoni o tavoli VIP?',
           a: `Contatta il Concierge ufficiale Nightlife Milan su WhatsApp (${SITE_CONTACT.whatsapp.number}) attivo 24/24, 7 giorni su 7. ${paymentTerms.steps.join(' ')}`,
         },
       ]
@@ -137,14 +137,18 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
                 addressCountry: 'IT',
               },
             },
-            offers: {
-              '@type': 'Offer',
-              url: `${SITE_URL}${capodannoEventPath(ev.slug, locale)}`,
-              price: String(ev.priceFromEur),
-              priceCurrency: 'EUR',
-              availability: 'https://schema.org/InStock',
-              validFrom: '2026-10-01T00:00:00+02:00',
-            },
+            ...(ev.priceFromEur > 0 || ev.category === 'piazza'
+              ? {
+                  offers: {
+                    '@type': 'Offer',
+                    url: `${SITE_URL}${capodannoEventPath(ev.slug, locale)}`,
+                    price: String(ev.priceFromEur),
+                    priceCurrency: 'EUR',
+                    availability: 'https://schema.org/InStock',
+                    validFrom: '2026-10-01T00:00:00+02:00',
+                  },
+                }
+              : {}),
           },
         })),
       },

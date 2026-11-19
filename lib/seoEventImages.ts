@@ -466,7 +466,7 @@ export function inferTargetAndOutfit(params: {
   if (s.includes('famiglie') || s.includes('bambini')) {
     return { target: 'families_kids', outfit: 'black_tie_gatsby' };
   }
-  if (s.includes('tram-storico') || s.includes('atmosfera') || s.includes('castello') || s.includes('villa-') || s.includes('principe-di-savoia') || s.includes('gallia') || s.includes('scala') || s.includes('justme') || s.includes('gatsby')) {
+  if (s.includes('tram-storico') || s.includes('atmosfera') || s.includes('castello') || s.includes('villa-') || s.includes('principe-di-savoia') || s.includes('gallia') || s.includes('scala') || s.includes('justme') || s.includes('gatsby') || s.includes('palace-grand-hotel-varese') || s.includes('backdoor') || s.includes('teatro-manzoni') || s.includes('teatro-lirico') || s.includes('teatro-nazionale')) {
     return { target: 'couples_vip', outfit: 'black_tie_gatsby' };
   }
   if (s.includes('rooftop') || s.includes('terrazza') || s.includes('ceresio') || s.includes('voya') || s.includes('dome') || s.includes('armani')) {
@@ -495,7 +495,14 @@ export function inferTargetAndOutfit(params: {
 
 const VENUE_MASTER_KEYS: Record<string, [string, string, string, string]> = {
   'justme': ['just-me-milano-torre-branca-01', 'just-me-milano-cena-01', 'just-me-milano-prive-01', 'just-me-milano-party-01'],
-  'armani': ['armani-prive-milano-interior-01', 'armani-prive-milano-interior-02', 'armani-prive-milano-interior-03', 'armani-prive-milano-interior-04'],
+  'armani': ['armani-prive-real-01', 'armani-prive-real-02', 'armani-prive-real-03', 'armani-prive-real-04'],
+  'radio-rooftop': ['radio-rooftop-real-01', 'radio-rooftop-real-02', 'radio-rooftop-real-03', 'radio-rooftop-real-04'],
+  'atmosfera': ['atmosfera-real-01', 'atmosfera-real-02', 'atmosfera-real-03', 'atmosfera-real-04'],
+  'teatro-manzoni': ['teatro-manzoni-real-01', 'teatro-manzoni-real-02', 'teatro-manzoni-real-03', 'teatro-manzoni-real-04'],
+  'teatro-lirico': ['teatro-lirico-real-01', 'teatro-lirico-real-02', 'teatro-lirico-real-03', 'teatro-lirico-real-04'],
+  'teatro-nazionale': ['teatro-nazionale-real-01', 'teatro-nazionale-real-02', 'teatro-nazionale-real-03', 'teatro-nazionale-real-04'],
+  'palace-varese': ['palace-varese-real-01', 'palace-varese-real-02', 'palace-varese-real-03', 'palace-varese-real-04'],
+  'backdoor43': ['backdoor43-real-01', 'backdoor43-real-02', 'backdoor43-real-03', 'backdoor43-real-04'],
   'pineta': ['pineta-milano-ingresso-01', 'pineta-milano-cena-01', 'pineta-milano-lounge-01', 'pineta-milano-party-01'],
   'aria': ['aria-club-milano-interior-01', 'aria-club-milano-buffet-01', 'aria-club-milano-bar-01', 'aria-club-milano-garden-01'],
   'voya': ['voya-rooftop-milan-skyline-01', 'voya-rooftop-milan-cena-01', 'voya-rooftop-milan-lounge-01', 'voya-rooftop-milan-interior-07'],
@@ -534,6 +541,13 @@ export function selectMasterAssetKeys(slug: string, venueName = '', categorySlug
   const s = `${slug} ${venueName} ${categorySlug}`.toLowerCase();
   if (s.includes('justme') || s.includes('just-me') || s.includes('torre-branca')) return VENUE_MASTER_KEYS['justme'];
   if (s.includes('armani')) return VENUE_MASTER_KEYS['armani'];
+  if (s.includes('radio-rooftop') || s.includes('radio rooftop')) return VENUE_MASTER_KEYS['radio-rooftop'];
+  if (s.includes('atmosfera') || s.includes('tram-storico') || s.includes('tram storico')) return VENUE_MASTER_KEYS['atmosfera'];
+  if (s.includes('palace-grand-hotel-varese') || s.includes('palace grand hotel varese')) return VENUE_MASTER_KEYS['palace-varese'];
+  if ((s.includes('backdoor43') || s.includes('backdoor 43')) && !s.includes('speakeasy-cocktail-bar')) return VENUE_MASTER_KEYS['backdoor43'];
+  if ((s.includes('teatro-manzoni') || s.includes('teatro manzoni')) && !s.includes('carcano')) return VENUE_MASTER_KEYS['teatro-manzoni'];
+  if ((s.includes('teatro-lirico') || s.includes('teatro lirico')) && !s.includes('carcano')) return VENUE_MASTER_KEYS['teatro-lirico'];
+  if ((s.includes('teatro-nazionale') || s.includes('teatro nazionale')) && !s.includes('carcano')) return VENUE_MASTER_KEYS['teatro-nazionale'];
   if (s.includes('pineta')) return VENUE_MASTER_KEYS['pineta'];
   if (s.includes('aria-club') || s.includes('v-aria')) return VENUE_MASTER_KEYS['aria'];
   if (s.includes('voya')) return VENUE_MASTER_KEYS['voya'];
@@ -769,7 +783,7 @@ const UX_COPY_BY_LOCALE: Record<string, {
     nfHeading: 'Trova la Tua Serata Perfetta a Milano in 3 Click',
     nfSub: 'Filtra per data, genere musicale o formula d’ingresso oppure chiedi consiglio immediato su WhatsApp.',
     nfSteps: ['1. Quando vuoi uscire?', '2. Che musica e atmosfera cerchi?', '3. Quale formula preferisci?'],
-    nfChips1: ['Stasera a Milano', 'Questo Weekend', 'Speciale Halloween 2026', 'Capodanno 2027 (115 Eventi)'],
+    nfChips1: ['Stasera a Milano', 'Questo Weekend', 'Speciale Halloween 2026', 'Capodanno 2027 (124 Eventi)'],
     nfChips2: ['House, Rooftop & Luxury', 'Hip-Hop, Reggaeton & Urban', 'Techno & Electronic Club', 'Cena Cantata & Over 30'],
     nfChips3: ['Lista & Biglietti Salta-Fila', 'Aperitivo Royal con Tavolo', 'Tavolo VIP Privé & Bottiglie'],
     nfWaCta: 'Fatti Consigliare in 60 Secondi su WhatsApp (+39 351 912 7047) →',
@@ -819,7 +833,7 @@ const UX_COPY_BY_LOCALE: Record<string, {
     nfHeading: 'Find Your Ideal Night Out in Milan in 3 Clicks',
     nfSub: 'Filter by night, music vibe, or entry formula - or message our 24/7 WhatsApp Concierge for an instant match.',
     nfSteps: ['1. When are you going out?', '2. What music & vibe do you want?', '3. Preferred entry formula?'],
-    nfChips1: ['Tonight in Milan', 'This Weekend', 'Halloween 2026 Special', 'New Year’s Eve 2027 (115 Events)'],
+    nfChips1: ['Tonight in Milan', 'This Weekend', 'Halloween 2026 Special', 'New Year’s Eve 2027 (124 Events)'],
     nfChips2: ['House, Rooftop & Luxury', 'Hip-Hop, Reggaeton & Urban', 'Techno & Electronic Club', 'Dinner Show & 30+ Crowd'],
     nfChips3: ['Guest List & Tickets', 'Royal Aperitivo Table', 'VIP Privé Table & Bottles'],
     nfWaCta: 'Get a Tailored Club Match in 60s on WhatsApp (+39 351 912 7047) →',

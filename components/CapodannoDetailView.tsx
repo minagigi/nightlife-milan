@@ -219,9 +219,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
     description,
     startDate: event.startISO,
     endDate: event.endISO,
-    eventStatus: isClosedForNye
-      ? 'https://schema.org/EventCancelled'
-      : 'https://schema.org/EventScheduled',
+    eventStatus: 'https://schema.org/EventScheduled',
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
     organizer: {
       '@type': 'Organization',
@@ -242,7 +240,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
     },
   };
 
-  if (!isClosedForNye) {
+  if (true) {
     eventSchemaNode.performer =
       event.slug === 'capodanno-bischeri-milano'
         ? {
@@ -259,30 +257,37 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               name: `${event.venueName} Resident DJs`,
             };
 
-    const offerAvailability = isSoldOutForNye
+    const offerAvailability = isUnavailableForNye
       ? 'https://schema.org/SoldOut'
       : 'https://schema.org/InStock';
 
-    eventSchemaNode.offers =
-      multiOfferPrices && multiOfferPrices.length > 0
-        ? tiers.slice(0, multiOfferPrices.length).map((tier, idx) => ({
-            '@type': 'Offer',
-            name: tier.label,
-            description: tier.details,
-            url: `${SITE_URL}${canonicalPath}`,
-            price: String(multiOfferPrices[idx]),
-            priceCurrency: 'EUR',
-            availability: offerAvailability,
-            validFrom: '2026-10-01T00:00:00+02:00',
-          }))
-        : {
-            '@type': 'Offer',
-            url: `${SITE_URL}${canonicalPath}`,
-            price: String(event.priceFromEur),
-            priceCurrency: 'EUR',
-            availability: offerAvailability,
-            validFrom: '2026-10-01T00:00:00+02:00',
-          };
+    if (multiOfferPrices && multiOfferPrices.length > 0) {
+      eventSchemaNode.offers = tiers.slice(0, multiOfferPrices.length).map((tier, idx) => ({
+        '@type': 'Offer',
+        name: tier.label,
+        description: tier.details,
+        url: `${SITE_URL}${canonicalPath}`,
+        price: String(multiOfferPrices[idx]),
+        priceCurrency: 'EUR',
+        availability: offerAvailability,
+        validFrom: '2026-10-01T00:00:00+02:00',
+      }));
+    } else if (event.priceFromEur > 0 || event.category === 'piazza') {
+      eventSchemaNode.offers = {
+        '@type': 'Offer',
+        url: `${SITE_URL}${canonicalPath}`,
+        price: String(event.priceFromEur),
+        priceCurrency: 'EUR',
+        availability: offerAvailability,
+        validFrom: '2026-10-01T00:00:00+02:00',
+      };
+    } else if (isUnavailableForNye) {
+      eventSchemaNode.offers = {
+        '@type': 'Offer',
+        url: `${SITE_URL}${canonicalPath}`,
+        availability: 'https://schema.org/SoldOut',
+      };
+    }
   }
 
   const jsonLd = {
@@ -352,14 +357,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                   {scarcity.almostSoldOutBadge}
                 </span>
               )}
-              {isClosedForNye && (
-                <span className="border border-rose-400/60 bg-rose-950/90 px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-rose-100" data-closed-for-nye-badge>
-                  {event.slug === 'capodanno-ceresio-7-milano'
-                    ? (isIt ? 'CHIUSO 31 DIC – 3 GEN' : 'CLOSED DEC 31 – JAN 3')
-                    : (isIt ? 'CHIUSO CAPODANNO 2027' : 'CLOSED FOR NYE 2027')}
-                </span>
-              )}
-              {isSoldOutForNye && !isClosedForNye && (
+              {isUnavailableForNye && (
                 <span className="border border-amber-400/60 bg-amber-950/90 px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-amber-100" data-sold-out-for-nye-badge>
                   {isIt ? 'SOLD OUT CAPODANNO 2027' : 'SOLD OUT NYE 2027'}
                 </span>
@@ -368,8 +366,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
             <h1
               data-event-title={title}
               data-event-party-only={isPartyOnly ? 'true' : undefined}
-              data-event-closed-nye={isClosedForNye ? 'true' : undefined}
-              data-event-sold-out-nye={isSoldOutForNye ? 'true' : undefined}
+              data-event-sold-out-nye={isUnavailableForNye ? 'true' : undefined}
               className="mt-3 font-serif text-3xl font-bold text-[#F6F1E7] sm:text-5xl"
             >
               {title}
@@ -382,17 +379,9 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               <div
                 role="status"
                 data-closure-notice
-                className={`mb-8 border-2 p-6 text-[#F6F1E7] ${
-                  isSoldOutForNye && !isClosedForNye
-                    ? 'border-amber-400/60 bg-amber-950/40'
-                    : 'border-rose-400/60 bg-rose-950/40'
-                }`}
+                className="mb-8 border-2 border-amber-400/60 bg-amber-950/40 p-6 text-[#F6F1E7]"
               >
-                <p
-                  className={`font-mono text-xs font-extrabold uppercase tracking-wider sm:text-sm ${
-                    isSoldOutForNye && !isClosedForNye ? 'text-amber-200' : 'text-rose-200'
-                  }`}
-                >
+                <p className="font-mono text-xs font-extrabold uppercase tracking-wider text-amber-200 sm:text-sm">
                   {localized.closureBannerTitle}
                 </p>
                 <p className="mt-2 text-sm leading-relaxed text-[#F6F1E7] sm:text-base">
@@ -833,18 +822,20 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                           {menu.beverages}
                         </p>
                       </div>
-                      <div className="mt-4 flex justify-center border border-[#F6F1E7]/15 bg-[#050505] p-2">
-                        <img
-                          src={menu.imageSrc}
-                          alt={menu.imageAlt}
-                          title={menu.title}
-                          width={1376}
-                          height={768}
-                          loading="lazy"
-                          decoding="async"
-                          className="max-h-[380px] w-auto max-w-full object-contain"
-                        />
-                      </div>
+                      {menu.imageSrc && (
+                        <div className="mt-4 flex justify-center border border-[#F6F1E7]/15 bg-[#050505] p-2">
+                          <img
+                            src={menu.imageSrc}
+                            alt={menu.imageAlt}
+                            title={menu.title}
+                            width={1376}
+                            height={768}
+                            loading="lazy"
+                            decoding="async"
+                            className="max-h-[380px] w-auto max-w-full object-contain"
+                          />
+                        </div>
+                      )}
                     </article>
                   ))}
                 </div>

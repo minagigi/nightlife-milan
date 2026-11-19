@@ -52,8 +52,8 @@ export default function CapodannoInteractiveFilter({
       if (formula !== 'all' && !ev.formulas.includes(formula)) return false;
       if (musicTag !== 'all' && ev.musicTag !== musicTag) return false;
       if (zoneTag !== 'all' && ev.zoneTag !== zoneTag) return false;
-      if (budget === 'free' && ev.priceFromEur > 0) return false;
-      if (budget === 'low' && ev.priceFromEur > 35) return false;
+      if (budget === 'free' && (ev.category !== 'piazza' || ev.priceFromEur > 0)) return false;
+      if (budget === 'low' && (ev.category !== 'piazza' && ev.priceFromEur <= 0 || ev.priceFromEur > 35)) return false;
       if (budget === 'mid' && (ev.priceFromEur < 35 || ev.priceFromEur > 70)) return false;
       if (budget === 'lux' && ev.priceFromEur < 70) return false;
       if (q) {
@@ -430,13 +430,15 @@ export default function CapodannoInteractiveFilter({
                           {event.city} ({event.province})
                         </span>
                         <span className="bg-[#F6F1E7] px-2.5 py-1 text-[11px] font-bold text-[#050505]">
-                          {event.priceFromEur === 0
-                            ? isIt
-                              ? 'INGRESSO GRATUITO'
-                              : 'FREE ENTRY'
-                            : isIt
-                              ? `Da ${event.priceFromEur}€`
-                              : `From €${event.priceFromEur}`}
+                          {event.soldOutForNye || event.closedForNye
+                            ? 'SOLD OUT'
+                            : event.priceFromEur === 0
+                              ? event.category === 'piazza'
+                                ? (isIt ? 'INGRESSO GRATUITO' : 'FREE ENTRY')
+                                : (isIt ? 'SU RICHIESTA' : 'ON REQUEST')
+                              : isIt
+                                ? `Da ${event.priceFromEur}€`
+                                : `From €${event.priceFromEur}`}
                         </span>
                         {!isRepvblicNyeSlug(event.slug) && !isGateNyeSlug(event.slug) && (
                           <span className="border border-[#F6F1E7]/50 bg-[#050505] px-2.5 py-1 text-[11px] font-extrabold uppercase tracking-wider text-[#F6F1E7]" data-selling-fast-badge>
