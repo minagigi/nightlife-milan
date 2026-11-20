@@ -48,7 +48,7 @@ const GUIDE_UI_35: Record<LocaleCode, GuideUiLabels35> = {
     bookDesc: 'Zero commissioni di agenzia. Risposta in meno di 10 minuti con planimetria e listino bottiglie ufficiale.',
     whatsappCta: 'WhatsApp +39 351 912 7047',
     faqHeading: 'Domande Frequenti',
-    recommendedVenues: 'Club Consigliati in Priorità',
+    recommendedVenues: 'Club Partner Consigliati',
     allGuidesCta: 'Esplora Tutte le Guide Milano',
     tocHeading: 'Indice della Guida',
   },
