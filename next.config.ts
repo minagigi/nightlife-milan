@@ -60,6 +60,14 @@ const nextConfig: NextConfig = {
       ['apollo-venerdi-navigli-05-06-2026', 'apollo-venerdi-navigli-03-07-2026'],
     ];
 
+    const duplicateGuideRedirects = [
+      ['monza-brianza-to-milan-clubs-parking-vip-guide-vip-guide', 'monza-brianza-to-milan-clubs-parking-vip-guide'],
+      ['bergamo-to-milan-clubs-highway-a4-vip-guide-vip-guide', 'bergamo-to-milan-clubs-highway-a4-vip-guide'],
+      ['como-lecco-lugano-ticino-to-milan-clubs-vip-guide-vip-guide', 'como-lecco-lugano-ticino-to-milan-clubs-vip-guide'],
+      ['brescia-franciacorta-cremona-to-milan-clubs-vip-guide-vip-guide', 'brescia-franciacorta-cremona-to-milan-clubs-vip-guide'],
+      ['varese-pavia-lodi-novara-to-milan-clubs-vip-guide-vip-guide', 'varese-pavia-lodi-novara-to-milan-clubs-vip-guide'],
+    ];
+
     return [
       {
         source: '/:path*',
@@ -67,6 +75,10 @@ const nextConfig: NextConfig = {
         destination: 'https://nightlifemilan.com/:path*',
         permanent: true,
       },
+      ...duplicateGuideRedirects.flatMap(([from, to]) => [
+        { source: `/guides/${from}`, destination: `/guides/${to}`, permanent: true },
+        { source: `/en/guides/${from}`, destination: `/guides/${to}`, permanent: true },
+      ]),
       {
         source: '/events/world-cup-final-big-screen-milan-just-me-july-19-2026',
         destination: '/it/eventi/finale-coppa-del-mondo-maxischermo-milano-just-me-19-luglio-2026',

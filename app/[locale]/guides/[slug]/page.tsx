@@ -370,9 +370,11 @@ export default async function GuidePage({ params }: Props) {
                 {ui.verifiedBody}
               </p>
               <p className="font-sans text-white/65 text-xs leading-relaxed">
-                {isIt
-                  ? `${title}: prezzi ufficiali 2026/2027, regole di selezione per i 6 club di riferimento (Just Me, Pineta, Aria, 55 Milano, Voya Rooftop, Repvblic) e prenotazione diretta via ${ui.whatsappCta}.`
-                  : `${title}: Just Me, Pineta, Aria, 55 Milano, Voya Rooftop, Repvblic - ${ui.bookHeading} (${ui.whatsappCta}, concierge@nightlifemilan.com).`}
+                {guide.id === 'g-117'
+                  ? `${title}: ${excerpt}`
+                  : isIt
+                    ? `${title}: prezzi ufficiali 2026/2027, regole di selezione per i 6 club di riferimento (Just Me, Pineta, Aria, 55 Milano, Voya Rooftop, Repvblic) e prenotazione diretta via ${ui.whatsappCta}.`
+                    : `${title}: Just Me, Pineta, Aria, 55 Milano, Voya Rooftop, Repvblic - ${ui.bookHeading} (${ui.whatsappCta}, concierge@nightlifemilan.com).`}
               </p>
             </div>
 

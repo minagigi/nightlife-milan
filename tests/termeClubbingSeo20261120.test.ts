@@ -1,0 +1,245 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import test from 'node:test';
+import {
+  CLOSED_CAPODANNO_SLUGS,
+  getCapodannoEventBySlug,
+  isPartnerCapodannoSlug,
+} from '../lib/capodannoEvents';
+import { getCapodannoLocalizedEventContent } from '../lib/capodanno/i18n';
+import { mockGuides, mockVenues, getGuideBySlug } from '../lib/data';
+import { GUIDE_HERO_IMAGES_114, GUIDE_INLINE_IMAGES_114 } from '../lib/guideImagesMap114';
+import { GUIDE_100_SLUGS_MAP } from '../lib/i18n/guideSlugs100Map';
+import { ALL_35_LOCALES, resolveExistingGuideId } from '../lib/i18n/localizedSlugs35';
+import { REGGAETON_35_PACKS, REGGAETON_PARTNER_VENUES } from '../lib/i18n/reggaetonSeo35';
+import { buildClubHighCtrDescription, buildClubHighCtrTitle } from '../lib/clubSeoMeta35';
+import { VENUE_AUTHORITY_33 } from '../lib/venueAuthority33';
+
+const REPO_ROOT = path.resolve(__dirname, '..');
+
+function stripTags(html: string): string {
+  return html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+const QC_TERME_SLUGS = [
+  'capodanno-qc-terme-milano-porta-romana',
+  'capodanno-qc-terme-san-pellegrino',
+  'capodanno-qc-terme-bormio-bagni-nuovi-vecchi',
+] as const;
+
+const SIRMIONE_SLUG = 'capodanno-terme-di-sirmione-aquaria-lago-di-garda';
+const FABRIQUE_SLUG = 'capodanno-fabrique-milano';
+
+test('3 QC Terme events use truthful TBA waitlist (0 EUR, zero invented tiers, Sirmione 198 EUR cross-sell on all 35 locales)', () => {
+  for (const slug of QC_TERME_SLUGS) {
+    const ev = getCapodannoEventBySlug(slug);
+    assert.ok(ev, `Missing QC Terme event ${slug}`);
+    assert.equal(ev.priceFromEur, 0, `${slug} must have priceFromEur === 0`);
+    for (const loc of ALL_35_LOCALES) {
+      const content = getCapodannoLocalizedEventContent(ev, loc);
+      const joined = [
+        content.title,
+        content.subtitle,
+        content.description,
+        content.priceSummary,
+        content.musicAndFormat,
+        content.dressCode,
+        content.sourceBasis,
+        ...content.tiers.flat(),
+        ...content.highlights,
+      ].join(' ');
+      assert.ok(joined.includes('198'), `${slug} (${loc}) missing Sirmione 198 cross-sell`);
+      assert.ok((content.alternativeSlugs || []).includes(SIRMIONE_SLUG), `${slug} (${loc}) missing Sirmione in alternativeSlugs`);
+      assert.ok(!/\b600\b|\b1\.200\b|tavol[oi]\s+vip\s+500/i.test(joined), `${slug} (${loc}) leaked invented club table price`);
+      assert.ok(!/237,60|\+20%|Stripe/i.test(joined), `${slug} (${loc}) leaked forbidden pricing/Stripe token`);
+    }
+  }
+});
+
+test('Terme di Sirmione confirms 198 EUR, non-partner status, JustMe Garda Lake link, and zero +20%/237,60/Stripe across 35 locales', () => {
+  const sirmione = getCapodannoEventBySlug(SIRMIONE_SLUG);
+  assert.ok(sirmione, 'Missing Sirmione Capodanno event');
+  assert.equal(sirmione.priceFromEur, 198);
+  assert.equal(isPartnerCapodannoSlug(SIRMIONE_SLUG), false);
+
+  const gardaClub = getCapodannoEventBySlug('capodanno-justme-garda-lake');
+  assert.ok(gardaClub, 'Missing JustMe Garda Lake event');
+  assert.equal(isPartnerCapodannoSlug('capodanno-justme-garda-lake'), true);
+
+  for (const loc of ALL_35_LOCALES) {
+    const content = getCapodannoLocalizedEventContent(sirmione, loc);
+    const joined = [
+      content.title,
+      content.subtitle,
+      content.description,
+      content.priceSummary,
+      content.sourceBasis,
+      ...content.tiers.flat(),
+      ...content.highlights,
+    ].join(' ');
+    assert.ok(joined.includes('198'), `Sirmione (${loc}) missing 198`);
+    assert.ok(
+      (content.alternativeSlugs || []).includes('capodanno-justme-garda-lake'),
+      `Sirmione (${loc}) missing capodanno-justme-garda-lake alternative cross-link`,
+    );
+    assert.ok(!/237,60|\+20%|Stripe/i.test(joined), `Sirmione (${loc}) exposed forbidden markup/Stripe`);
+  }
+});
+
+test('g-117 & g-118 Pillar Guides in mockGuides (total 118): >= 2,000 words, 6 H2 sections, >= 18 H3, 0 inner H2, 6 FAQs, clean limits & images <= 300 KB across all 35 locales', () => {
+  assert.equal(mockGuides.length, 118, `Expected 118 total guides, got ${mockGuides.length}`);
+
+  for (const id of ['g-117', 'g-118'] as const) {
+    const guide = mockGuides.find((g) => g.id === id);
+    assert.ok(guide, `Missing guide ${id}`);
+    assert.equal(guide.sections.length, 6, `${id} must have 6 sections`);
+    assert.equal(guide.faqs?.length, 6, `${id} must have 6 FAQs`);
+
+    const hero = GUIDE_HERO_IMAGES_114[id];
+    const inlines = GUIDE_INLINE_IMAGES_114[id];
+    assert.ok(hero, `Missing hero image mapping for ${id}`);
+    assert.ok(inlines && inlines.length === 4, `Expected 4 inline images for ${id}`);
+
+    for (const webPath of [hero, ...inlines]) {
+      const diskPath = path.join(REPO_ROOT, 'public', webPath.replace(/^\//, ''));
+      assert.ok(fs.existsSync(diskPath), `Image not found on disk: ${diskPath}`);
+      const size = fs.statSync(diskPath).size;
+      assert.ok(size <= 307_200, `Image exceeds 300 KB (${size} B): ${webPath}`);
+    }
+
+    for (const loc of ALL_35_LOCALES) {
+      const guideSlug: string | undefined = guide.slugs[loc];
+      assert.ok(guideSlug && !guideSlug.includes('-vip-guide-vip-guide'), `${id} (${loc}) invalid slug ${guideSlug}`);
+      assert.ok(getGuideBySlug(guideSlug, loc)?.id === id, `${id} (${loc}) getGuideBySlug lookup failed for ${guideSlug}`);
+
+      const title = guide.title[loc] || '';
+      const excerpt = guide.excerpt[loc] || '';
+      assert.ok(title.length >= 20 && title.length <= 68, `${id} (${loc}) title length out of bounds: ${title.length} (${title})`);
+      assert.ok(excerpt.length >= 80 && excerpt.length <= 165, `${id} (${loc}) excerpt length out of bounds: ${excerpt.length}`);
+
+      let h3Count = 0;
+      let innerH2Count = 0;
+      let tableCount = 0;
+      const bodyParts: string[] = [];
+
+      for (const sec of guide.sections) {
+        const heading = sec.heading[loc] || '';
+        const html = sec.content[loc] || '';
+        assert.ok(heading.length > 5, `${id} (${loc}) empty section heading`);
+        h3Count += (html.match(/<h3>/gi) || []).length;
+        innerH2Count += (html.match(/<h2>/gi) || []).length;
+        tableCount += (html.match(/<table\b/gi) || []).length;
+        bodyParts.push(heading, html);
+      }
+
+      for (const faq of guide.faqs || []) {
+        const q = faq.question[loc] || '';
+        const a = faq.answer[loc] || '';
+        assert.ok(q.length > 5 && a.length > 10, `${id} (${loc}) empty FAQ`);
+        bodyParts.push(q, a);
+      }
+
+      assert.equal(innerH2Count, 0, `${id} (${loc}) must not contain inner <h2> tags`);
+      assert.ok(h3Count >= 18, `${id} (${loc}) expected >= 18 <h3>, got ${h3Count}`);
+      assert.ok(tableCount >= 2, `${id} (${loc}) expected >= 2 <table> elements, got ${tableCount}`);
+
+      const plainWords = stripTags(bodyParts.join(' ')).split(/\s+/).filter(Boolean).length;
+      assert.ok(plainWords >= 2000, `${id} (${loc}) word count ${plainWords} < 2,000`);
+
+      const allRaw = [title, excerpt, ...bodyParts].join(' ');
+      assert.ok(!/\u2014/.test(allRaw), `${id} (${loc}) contains forbidden em-dash`);
+      assert.ok(!/!/.test(allRaw), `${id} (${loc}) contains exclamation mark`);
+      assert.ok(!/Roberto Cavalli|Privé Cavalli|237,60|\+20%|Stripe/i.test(allRaw), `${id} (${loc}) contains forbidden string`);
+      if (loc === 'ro') {
+        assert.ok(!/[şţŞŢ]/.test(allRaw), `${id} (ro) contains cedilla s/t`);
+      }
+    }
+  }
+});
+
+test('Reggaeton 35L, Just Me (ex Just Cavalli, zero Roberto Cavalli), Gattopardo, and closed Fabrique alternatives work across 35 locales', () => {
+  assert.ok(REGGAETON_PARTNER_VENUES.length >= 6);
+  for (const loc of ALL_35_LOCALES) {
+    const pack = REGGAETON_35_PACKS[loc];
+    assert.ok(
+      pack && pack.seoTitle && pack.seoDescription && pack.nyeFaqQ && pack.nyeFaqA && pack.boxTitle,
+      `Missing reggaeton pack for ${loc}`,
+    );
+  }
+
+  const justMe = mockVenues.find((v) => v.id === 'v-justme');
+  assert.ok(justMe, 'Missing v-justme venue');
+  const gattopardo = mockVenues.find((v) => v.id === 'v-gattopardo');
+  assert.ok(gattopardo, 'Missing v-gattopardo venue');
+
+  for (const loc of ALL_35_LOCALES) {
+    const jmName = justMe.localizedContent.name[loc] || justMe.localizedContent.name.en;
+    const jmRaw = justMe.localizedContent.description[loc] || justMe.localizedContent.description.en;
+    const gpName = gattopardo.localizedContent.name[loc] || gattopardo.localizedContent.name.en;
+    const gpRaw = gattopardo.localizedContent.description[loc] || gattopardo.localizedContent.description.en;
+    const jmTitle = buildClubHighCtrTitle(justMe, loc, jmName);
+    const jmDesc = buildClubHighCtrDescription(justMe, loc, jmName, jmRaw);
+    const gpTitle = buildClubHighCtrTitle(gattopardo, loc, gpName);
+    const gpDesc = buildClubHighCtrDescription(gattopardo, loc, gpName, gpRaw);
+    assert.ok(jmTitle.length > 10 && jmDesc.length > 30, `Missing JustMe SEO meta for ${loc}`);
+    assert.ok(gpTitle.length > 10 && gpDesc.length > 30, `Missing Gattopardo SEO meta for ${loc}`);
+    assert.ok(!/Roberto Cavalli|Privé Cavalli/i.test(`${jmTitle} ${jmDesc}`), `JustMe (${loc}) leaked Roberto Cavalli`);
+  }
+
+  const itJustMeText = [
+    buildClubHighCtrDescription(justMe, 'it', justMe.localizedContent.name.it || justMe.localizedContent.name.en, justMe.localizedContent.description.it || justMe.localizedContent.description.en),
+    VENUE_AUTHORITY_33['v-justme'].alternateNames.join(' '),
+    justMe.localizedContent.description.it,
+    justMe.localizedContent.dressCode.it,
+    justMe.localizedContent.insiderTip?.it || '',
+  ].join(' ');
+  assert.ok(/ex Just Cavalli/i.test(itJustMeText), 'Just Me IT profile should mention ex Just Cavalli');
+  assert.ok(!/Roberto Cavalli|Privé Cavalli/i.test(itJustMeText), 'Just Me IT profile leaked Roberto Cavalli');
+
+  const fabrique = getCapodannoEventBySlug(FABRIQUE_SLUG);
+  assert.ok(fabrique, 'Missing Fabrique event');
+  assert.ok(CLOSED_CAPODANNO_SLUGS.has(FABRIQUE_SLUG), 'Fabrique must be marked in CLOSED_CAPODANNO_SLUGS');
+  assert.equal(fabrique.priceFromEur, 0);
+  const fabIt = getCapodannoLocalizedEventContent(fabrique, 'it');
+  assert.ok(
+    /Gate|Magazzini|Just/i.test(`${fabIt.subtitle} ${fabIt.description} ${fabIt.priceSummary}`) ||
+      (fabIt.alternativeSlugs || []).length >= 2,
+    'Fabrique IT copy should offer open alternatives',
+  );
+});
+
+test('Zero duplicate -vip-guide-vip-guide slugs and legacy guide alias resolution works', () => {
+  for (const [id, map35] of Object.entries(GUIDE_100_SLUGS_MAP)) {
+    for (const [loc, slug] of Object.entries(map35)) {
+      assert.ok(!slug.includes('-vip-guide-vip-guide'), `${id} (${loc}) still has duplicate suffix: ${slug}`);
+    }
+  }
+  for (const guide of mockGuides) {
+    for (const [loc, slug] of Object.entries(guide.slugs)) {
+      if (!slug) continue;
+      assert.ok(!slug.includes('-vip-guide-vip-guide'), `${guide.id} (${loc}) still has duplicate suffix: ${slug}`);
+    }
+  }
+
+  assert.equal(
+    resolveExistingGuideId('monza-brianza-to-milan-clubs-parking-vip-guide-vip-guide'),
+    'g-110',
+  );
+  assert.equal(
+    resolveExistingGuideId('bergamo-to-milan-clubs-highway-a4-vip-guide-vip-guide'),
+    'g-111',
+  );
+  assert.equal(
+    resolveExistingGuideId('como-lecco-lugano-ticino-to-milan-clubs-vip-guide-vip-guide'),
+    'g-112',
+  );
+  assert.equal(
+    resolveExistingGuideId('brescia-franciacorta-cremona-to-milan-clubs-vip-guide-vip-guide'),
+    'g-113',
+  );
+  assert.equal(
+    resolveExistingGuideId('varese-pavia-lodi-novara-to-milan-clubs-vip-guide-vip-guide'),
+    'g-114',
+  );
+});

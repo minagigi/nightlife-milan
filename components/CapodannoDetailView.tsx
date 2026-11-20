@@ -37,12 +37,13 @@ import {
 } from '@/lib/capodannoEvents';
 import { mockVenues } from '@/lib/data';
 import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
-import { getLocalizedVenueSlug35 } from '@/lib/i18n/localizedSlugs35';
+import { getExistingGuideSlug35, getLocalizedVenueSlug35 } from '@/lib/i18n/localizedSlugs35';
 import { getLocalizedText } from '@/lib/seo';
 import {
   buildSeoEventImagePack,
   getCapodannoOfficialPosterSrc,
 } from '@/lib/seoEventImages';
+import { getClubNyeBannerCopy35 } from '@/lib/clubSeoMeta35';
 import SinglePassVenueModule from '@/components/single-pass/SinglePassVenueModule';
 import TerrazzaDuomoBookingModule from '@/components/single-pass/TerrazzaDuomoBookingModule';
 import { getVenueIdByEventSlug } from '@/lib/single-pass/catalog';
@@ -101,12 +102,19 @@ export default function CapodannoDetailView({ locale, event }: Props) {
   const alternativeSlugList =
     localized.alternativeSlugs && localized.alternativeSlugs.length > 0
       ? localized.alternativeSlugs
-      : ['capodanno-terrazza-duomo-21', 'capodanno-voya-rooftop-milano'];
-  const rooftopAlternatives = isUnavailableForNye
-    ? alternativeSlugList
-        .map((s) => getCapodannoEventBySlug(s))
-        .filter((e): e is CapodannoEventItem => Boolean(e))
-    : [];
+      : ['capodanno-justme-milano-torre-branca', 'capodanno-pineta-milano', 'capodanno-voya-rooftop-milano', 'capodanno-repvblic-milano'];
+  const alternativeEventsResolved = alternativeSlugList
+    .map((s) => getCapodannoEventBySlug(s))
+    .filter((e): e is CapodannoEventItem => e !== undefined && !e.closedForNye && !e.soldOutForNye);
+  const rooftopAlternatives = isUnavailableForNye ? alternativeEventsResolved : [];
+  const confirmedAlternatives =
+    !isUnavailableForNye && localized.alternativeSlugs && localized.alternativeSlugs.length > 0
+      ? alternativeEventsResolved
+      : [];
+  const isTermeDetail =
+    event.slug.startsWith('capodanno-qc-terme-') ||
+    event.slug === 'capodanno-terme-di-sirmione-aquaria-lago-di-garda';
+  const partnerGuideHref = `${prefix}/${getLocalizedDir35('guides', locale as LocaleCode)}/${getExistingGuideSlug35(isTermeDetail ? 'g-117' : 'g-118', locale as LocaleCode)}`;
   const title = localized.title;
   const subtitle = localized.subtitle;
   const description = localized.description;
@@ -317,7 +325,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               <span className="border border-[#F6F1E7]/35 bg-[#050505]/90 px-3 py-1 text-xs font-semibold text-[#F6F1E7]">
                 {event.city} ({event.province})
               </span>
-              {!isPartyOnly && !isUnavailableForNye && (
+              {!isPartyOnly && !isUnavailableForNye && event.priceFromEur > 0 && (
                 <span className="border border-[#F6F1E7]/50 bg-[#050505]/90 px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-[#F6F1E7]" data-almost-sold-out-badge>
                   {scarcity.almostSoldOutBadge}
                 </span>
@@ -353,7 +361,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                   {localized.closureBannerBody}
                 </p>
               </div>
-            ) : (
+            ) : event.priceFromEur > 0 ? (
               <div role="alert" data-urgency-alert className="mb-8 border border-[#050505]/15 bg-[#F6F1E7] p-5 text-[#050505]">
                 <p className="text-xs font-extrabold uppercase tracking-wider text-[#050505] sm:text-sm">
                   {scarcity.urgencyAlertTitle}
@@ -362,7 +370,16 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                   {scarcity.urgencyAlertBody}
                 </p>
               </div>
-            )}
+            ) : event.category !== 'piazza' ? (
+              <div role="status" data-tba-waitlist-notice className="mb-8 border border-[#050505]/15 bg-[#F6F1E7] p-5 text-[#050505]">
+                <p className="text-xs font-extrabold uppercase tracking-wider text-[#050505] sm:text-sm">
+                  {localized.musicAndFormat}
+                </p>
+                <p className="mt-1.5 text-sm leading-relaxed text-[#24201B]">
+                  {localized.priceSummary}
+                </p>
+              </div>
+            ) : null}
             {/* Clickable Table of Contents (TOC) (#F6F1E7 Avorio Caldo) */}
             <nav
               aria-label={ui.tocTitle}
@@ -676,9 +693,17 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Link
                     href={capodannoPath(locale)}
+                    locale={locale}
                     className="inline-flex min-h-[44px] items-center border border-[#050505] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[#050505] hover:bg-[#050505] hover:text-[#F6F1E7]"
                   >
                     {ui.backToAllBtn}
+                  </Link>
+                  <Link
+                    href={partnerGuideHref}
+                    locale={locale}
+                    className="inline-flex min-h-[44px] items-center border border-[#050505] bg-[#EFE9DC] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[#050505] hover:bg-[#050505] hover:text-[#F6F1E7]"
+                  >
+                    {getClubNyeBannerCopy35(locale).ctaGuide} →
                   </Link>
                   <a
                     href={getConciergeBookingUrl(locale, `NYE 2027 Alternatives (${event.venueName})`, `${SITE_URL}${canonicalPath}`)}
@@ -698,14 +723,16 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 <h2 className="font-serif text-2xl font-bold text-[#050505]">
                   {ui.pricesHeadingPrefix} · {event.venueName}
                 </h2>
-                {!isPartyOnly && (
+                {!isPartyOnly && event.priceFromEur > 0 && (
                   <span className="border border-[#050505] bg-[#050505] px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-[#F6F1E7]" data-selling-fast-badge>
                     {scarcity.sellingFastBadge}
                   </span>
                 )}
               </div>
               <p className="mt-1 text-xs text-[#3D3830]">{sourceBasis}</p>
-              {!event.partner && (
+              {!event.partner &&
+                event.priceFromEur > 0 &&
+                (isTerrazzaDuomo21 || Boolean(getVenueIdByEventSlug(event.slug))) && (
                 <p className="mt-1 text-xs font-semibold text-[#5C4415]" data-checkout-fee-note>
                   {singlePassCopy.feeCalculatedAtCheckoutNote}
                 </p>
@@ -740,6 +767,84 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 <SinglePassVenueModule locale={locale} venueId={singlePassVenueId} />
               ) : null;
             })()}
+
+            {/* Confirmed Alternatives Cross-Sell (QC Terme Waitlist -> Sirmione 198 EUR & Active NYE Venues) */}
+            {confirmedAlternatives.length > 0 && (
+              <section
+                id="alternative-confermate"
+                data-confirmed-alternatives
+                className="mt-10 border border-[#050505]/15 bg-[#F6F1E7] p-6 text-[#050505] sm:p-8"
+              >
+                <p className="font-mono text-xs font-bold uppercase tracking-widest text-[#5C4415]">
+                  {ui.confirmedVenuesBanner}
+                </p>
+                {localized.alternativesHeading && (
+                  <h2 className="mt-1 font-serif text-2xl font-bold text-[#050505] sm:text-3xl">
+                    {localized.alternativesHeading}
+                  </h2>
+                )}
+                {localized.alternativesSubheading && (
+                  <p className="mt-2 text-sm text-[#24201B]">
+                    {localized.alternativesSubheading}
+                  </p>
+                )}
+                <div className="mt-5 grid gap-5 md:grid-cols-2">
+                  {confirmedAlternatives.map((alt) => {
+                    const altTitle = getCapodannoLocalizedEventTitle(alt, locale);
+                    const altSub = getCapodannoLocalizedEventSubtitle(alt, locale);
+                    const altHref = capodannoEventPath(alt.slug, locale);
+                    return (
+                      <article
+                        key={alt.slug}
+                        className="flex flex-col justify-between border border-[#050505]/20 bg-[#EFE9DC] p-5"
+                      >
+                        <div>
+                          <div className="overflow-hidden border border-[#050505]/15 bg-[#050505]">
+                            <img
+                              src={alt.image}
+                              alt={altTitle}
+                              loading="lazy"
+                              decoding="async"
+                              className="h-44 w-full object-contain"
+                            />
+                          </div>
+                          <h3 className="mt-3 font-serif text-xl font-bold text-[#050505]">
+                            {altTitle}
+                          </h3>
+                          <p className="mt-1 text-xs text-[#3D3830]">{altSub}</p>
+                          <p className="mt-2 text-xs font-semibold text-[#050505]">
+                            {getCapodannoLocalizedEventContent(alt, locale).priceSummary}
+                          </p>
+                        </div>
+                        <Link
+                          href={altHref}
+                          locale={locale}
+                          className="mt-4 inline-flex min-h-[44px] items-center justify-center bg-[#050505] px-5 py-2.5 text-xs font-extrabold uppercase tracking-wider text-[#F6F1E7] transition hover:bg-[#24201B]"
+                        >
+                          {ui.viewPackagesCta}
+                        </Link>
+                      </article>
+                    );
+                  })}
+                </div>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link
+                    href={partnerGuideHref}
+                    locale={locale}
+                    className="inline-flex min-h-[44px] items-center bg-[#050505] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[#F6F1E7] hover:bg-[#24201B]"
+                  >
+                    {(localized.relatedHolidayBanner?.ctaLabel || ui.viewPackagesCta).replace(/\s*→+$/, '')} →
+                  </Link>
+                  <Link
+                    href={capodannoPath(locale)}
+                    locale={locale}
+                    className="inline-flex min-h-[44px] items-center border border-[#050505] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[#050505] hover:bg-[#050505] hover:text-[#F6F1E7]"
+                  >
+                    {ui.backToAllBtn}
+                  </Link>
+                </div>
+              </section>
+            )}
 
             {/* Official Menus (Pineta Gala / Buffet, Voya 20th Floor, Terrazza Duomo 21 & MA.RE) */}
             {localized.menus && localized.menus.length > 0 && (

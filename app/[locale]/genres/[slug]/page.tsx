@@ -1,8 +1,10 @@
 import { notFound } from 'next/navigation';
 import { getLocaleDef, hreflangAlternates, localePrefix, indexedLocaleCodes } from '@/lib/i18n/locales';
-import { resolveGenreSlug, getLocalizedGenreSlug35 } from '@/lib/i18n/localizedSlugs35';
+import { resolveGenreSlug, getLocalizedGenreSlug35, getExistingGuideSlug35, getLocalizedVenueSlug35 } from '@/lib/i18n/localizedSlugs35';
 import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
 import { getGenreLocalized35 } from '@/lib/i18n/zonesAndGenres35';
+import { REGGAETON_35_PACKS, REGGAETON_PARTNER_VENUES } from '@/lib/i18n/reggaetonSeo35';
+import { capodannoEventPath } from '@/lib/capodanno/routes';
 import GuideToc from '@/components/GuideToc';
 import { Metadata } from 'next';
 import Link from '@/components/LocalizedLink';
@@ -170,25 +172,25 @@ export const genreData: Record<
     id: MusicGenre.REGGAETON,
     name: 'Reggaeton & Latin',
     heroTitle: {
-      en: 'Reggaeton: Caliente Nights & Latin Urban Clubbing',
-      it: 'Reggaeton & Latin Urban: Le Notti Più Calienti di Milano',
+      en: 'Reggaeton & Urban Latin Clubs in Milan',
+      it: 'Discoteche Reggaeton & Urban Latin a Milano',
     },
     editorial: {
-      en: 'When Milan wants pure, uninhibited dancefloor heat, Reggaeton and Latin Urban take over. Led by Pineta Milano’s legendary Noche de Perreo on Fridays and Saturdays, alongside Tocqueville 13, Aria Club, and Alcatraz’s Latin arena, these nights feature dembow beats, confetti showers, choreography dancers, and sold-out VIP tables.',
-      it: 'Quando Milano vuole ballare senza freni fino all’alba, il Reggaeton e il Latin Urban dominano la scena. Guidate dalla leggendaria Noche de Perreo del Pineta Milano (venerdì e sabato), insieme a Tocqueville 13, Aria Club e alla pista latina dell’Alcatraz, queste serate uniscono ritmi dembow, animazione, coriandoli e tavoli VIP sempre sold-out.',
+      en: 'When Milan wants pure dancefloor heat, Reggaeton and Latin Urban take over. Anchored by PERREO XL @ Gate Milano on New Year’s Eve 2027 (€20–€50 tickets, €500–€600 tables) and weekly parties at Pineta, Aria Club, Tocqueville 13, Hollywood, REPVBLIC, The Club, and Just Me.',
+      it: 'Quando Milano cerca il ritmo del perreo fino all’alba, il Reggaeton domina tra PERREO XL @ Gate Milano (Capodanno 20–50€, tavoli 500–600€) e i club partner Pineta, Aria Club, Tocqueville 13, Hollywood, REPVBLIC, The Club e Just Me.',
     },
     soundOf: {
-      en: 'Dembow rhythms, Bad Bunny & Karol G anthems, vibrant choreography, and electric dancefloors.',
-      it: 'Ritmi dembow, hit di Bad Bunny, Feid e Karol G, animazione coreografica e piste incandescenti.',
+      en: 'Dembow beats, Bad Bunny & Karol G anthems, PERREO XL specials, and full-energy dancefloors.',
+      it: 'Ritmi dembow, hit di Bad Bunny, Feid e Karol G, speciali PERREO XL e piste fino all’alba.',
     },
-    topClubs: ['Pineta Milano', 'Tocqueville 13', 'Aria Club Milano', 'Alcatraz Milano', 'Hollywood Rythmoteque'],
+    topClubs: ['PERREO XL @ Gate Milano', 'Aria Club Milano', 'Pineta Milano', 'Tocqueville 13', 'Hollywood Rythmoteque', 'REPVBLIC Milano', 'The Club Milano', 'Just Me Milano'],
     metaTitle: {
-      en: 'Top Reggaeton & Latin Clubs in Milan | 2026/2027 Guide',
-      it: 'I Migliori Club Reggaeton e Latini a Milano | Guida 2026/2027',
+      en: 'Reggaeton Clubs Milan 2026/2027: Best Parties & VIP Tables',
+      it: 'Discoteche Reggaeton Milano 2026/2027: Locali, Date & Tavoli',
     },
     metaDescription: {
-      en: "Dance the night away at Milan's best reggaeton and Latin urban clubs: Pineta Noche de Perreo, Tocqueville 13, Aria Club & Alcatraz.",
-      it: 'Balla tutta la notte nei migliori club reggaeton e latin urban di Milano: Pineta Noche de Perreo, Tocqueville 13, Aria Club e Alcatraz.',
+      en: 'Top reggaeton & perreo clubs in Milan: PERREO XL @ Gate, Pineta Noche de Perreo, Aria, Tocqueville 13 & Hollywood. WhatsApp +39 351 912 7047.',
+      it: 'Migliori locali reggaeton a Milano: PERREO XL @ Gate, Pineta, Aria, Tocqueville 13, Hollywood e Repvblic. WhatsApp +39 351 912 7047.',
     },
   },
   commercial: {
@@ -529,6 +531,60 @@ export default async function GenrePage({ params }: Props) {
                 </div>
               ))}
             </div>
+
+            {canonicalGenreSlug === 'reggaeton' && (() => {
+              const rp = REGGAETON_35_PACKS[loc] || REGGAETON_35_PACKS.en;
+              const clubsDir = getLocalizedDir35('clubs', loc);
+              const guidesDir = getLocalizedDir35('guides', loc);
+              const g118Slug = getExistingGuideSlug35('g-118', loc);
+              return (
+                <section className="mb-10 rounded-2xl border border-champagne/25 bg-white/[0.03] p-6">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-champagne mb-1.5">
+                    {rp.boxEyebrow}
+                  </p>
+                  <h2 className="font-serif text-2xl text-white mb-2">{rp.boxTitle}</h2>
+                  <p className="text-sm text-white/70 mb-5">{rp.boxLead}</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
+                    {REGGAETON_PARTNER_VENUES.map((v) => (
+                      <div key={v.name} className="rounded-xl border border-white/10 bg-black/40 p-4 flex flex-col justify-between gap-2">
+                        <div>
+                          <h3 className="font-serif text-base font-semibold text-white">{v.name}</h3>
+                          <p className="text-xs text-white/55">{v.district}</p>
+                          <p className="text-xs text-champagne font-mono mt-1">{v.nightTag}</p>
+                        </div>
+                        <div className="flex flex-wrap gap-2 pt-1">
+                          {v.clubSlug && (
+                            <Link
+                              href={`${lp}/${clubsDir}/${getLocalizedVenueSlug35(v.clubSlug, loc)}`}
+                              locale={loc}
+                              className="text-xs font-mono uppercase tracking-wider px-2.5 py-1 rounded border border-white/20 text-white/85 hover:border-champagne hover:text-champagne transition-colors"
+                            >
+                              {rp.clubCta} →
+                            </Link>
+                          )}
+                          {v.eventSlug && (
+                            <Link
+                              href={capodannoEventPath(v.eventSlug, loc)}
+                              locale={loc}
+                              className="text-xs font-mono uppercase tracking-wider px-2.5 py-1 rounded border border-champagne/40 text-champagne hover:bg-champagne hover:text-black transition-colors"
+                            >
+                              {rp.nyeCta} →
+                            </Link>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <Link
+                    href={`${lp}/${guidesDir}/${g118Slug}`}
+                    locale={loc}
+                    className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-champagne hover:underline"
+                  >
+                    {rp.guideCta} →
+                  </Link>
+                </section>
+              );
+            })()}
           </div>
 
           {/* The Sound Of Box */}

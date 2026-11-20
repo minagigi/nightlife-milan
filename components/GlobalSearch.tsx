@@ -122,8 +122,8 @@ const SEARCH_UI_COPY_BASE: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'ru'
       events: 'Calendario Serate & Eventi Speciali',
       eventsAllLink: 'Calendario Completo',
       hubs: 'Hub Strategici & Esperienze VIP 2026/2027',
-      guides: 'Guide Insider & Listini Ufficiali (114)',
-      guidesAllLink: 'Tutte le 114 Guide',
+      guides: 'Guide Insider & Listini Ufficiali (118)',
+      guidesAllLink: 'Tutte le 118 Guide',
       genres: '10 Generi Musicali',
       zones: '14 Quartieri della Notte',
     },
@@ -177,8 +177,8 @@ const SEARCH_UI_COPY_BASE: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'ru'
       events: 'Upcoming Nights & Special Events Calendar',
       eventsAllLink: 'Full Calendar',
       hubs: 'Strategic VIP Hubs & Experiences 2026/2027',
-      guides: 'Insider Guides & Official Price Lists (114)',
-      guidesAllLink: 'All 114 Guides',
+      guides: 'Insider Guides & Official Price Lists (118)',
+      guidesAllLink: 'All 118 Guides',
       genres: '10 Music Genres',
       zones: '14 Nightlife Districts',
     },
@@ -232,8 +232,8 @@ const SEARCH_UI_COPY_BASE: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'ru'
       events: 'Calendario de Fiestas y Eventos Especiales',
       eventsAllLink: 'Calendario Completo',
       hubs: 'Hubs Estratégicos y Experiencias VIP 2026/2027',
-      guides: 'Guías Oficiales y Tarifas de Mesas VIP (114)',
-      guidesAllLink: 'Las 114 Guías',
+      guides: 'Guías Oficiales y Tarifas de Mesas VIP (118)',
+      guidesAllLink: 'Las 118 Guías',
       genres: '10 Géneros Musicales',
       zones: '14 Zonas Nocturnas',
     },
@@ -287,8 +287,8 @@ const SEARCH_UI_COPY_BASE: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'ru'
       events: 'Calendrier des Soirées & Événements Spéciaux',
       eventsAllLink: 'Calendrier Complet',
       hubs: 'Hubs Stratégiques & Expériences VIP 2026/2027',
-      guides: 'Guides Officiels & Tarifs Bouteilles VIP (114)',
-      guidesAllLink: 'Les 114 Guides',
+      guides: 'Guides Officiels & Tarifs Bouteilles VIP (118)',
+      guidesAllLink: 'Les 118 Guides',
       genres: '10 Genres Musicaux',
       zones: '14 Quartiers Nocturnes',
     },
@@ -342,8 +342,8 @@ const SEARCH_UI_COPY_BASE: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'ru'
       events: 'Party-Kalender & Sonderveranstaltungen',
       eventsAllLink: 'Kompletter Kalender',
       hubs: 'Strategische VIP-Hubs & Erlebnisse 2026/2027',
-      guides: 'Insider-Guides & Offizielle Preislisten (114)',
-      guidesAllLink: 'Alle 114 Guides',
+      guides: 'Insider-Guides & Offizielle Preislisten (118)',
+      guidesAllLink: 'Alle 118 Guides',
       genres: '10 Musikgenres',
       zones: '14 Ausgehviertel',
     },
@@ -397,8 +397,8 @@ const SEARCH_UI_COPY_BASE: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'ru'
       events: 'Calendário de Festas & Eventos Especiais',
       eventsAllLink: 'Calendário Completo',
       hubs: 'Hubs Estratégicos & Experiências VIP 2026/2027',
-      guides: 'Guias Oficiais & Tabelas de Preços VIP (114)',
-      guidesAllLink: 'Todos os 114 Guias',
+      guides: 'Guias Oficiais & Tabelas de Preços VIP (118)',
+      guidesAllLink: 'Todos os 118 Guias',
       genres: '10 Géneros Musicais',
       zones: '14 Bairros Noturnos',
     },
@@ -452,8 +452,8 @@ const SEARCH_UI_COPY_BASE: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'ru'
       events: 'Календарь вечеринок и специальных событий',
       eventsAllLink: 'Полный календарь',
       hubs: 'Стратегические VIP-разделы 2026/2027',
-      guides: 'Официальные гиды и прайс-листы (114)',
-      guidesAllLink: 'Все 114 гидов',
+      guides: 'Официальные гиды и прайс-листы (118)',
+      guidesAllLink: 'Все 118 гидов',
       genres: '10 музыкальных жанров',
       zones: '14 ночных районов',
     },
@@ -507,8 +507,8 @@ const SEARCH_UI_COPY_BASE: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'ru'
       events: '近期派对与特别活动日历',
       eventsAllLink: '完整活动日历',
       hubs: '2026/2027 VIP核心体验专区',
-      guides: '官方夜生活指南与酒水价格表 (114)',
-      guidesAllLink: '全部114篇指南',
+      guides: '官方夜生活指南与酒水价格表 (118)',
+      guidesAllLink: '全部118篇指南',
       genres: '10大音乐风格',
       zones: '14大夜生活街区',
     },
@@ -562,8 +562,8 @@ const SEARCH_UI_COPY_BASE: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'ru'
       events: 'تقويم السهرات والفعاليات الخاصة',
       eventsAllLink: 'التقويم الكامل',
       hubs: 'المراكز الاستراتيجية وتجارب VIP 2026/2027',
-      guides: 'الأدلة الرسمية وقوائم أسعار VIP (114)',
-      guidesAllLink: 'جميع الأدلة (114)',
+      guides: 'الأدلة الرسمية وقوائم أسعار VIP (118)',
+      guidesAllLink: 'جميع الأدلة (118)',
       genres: '10 أنماط موسيقية',
       zones: '14 منطقة سهر في ميلانو',
     },
@@ -1636,7 +1636,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
       .filter((h) => h.score > 0)
       .sort((a, b) => b.score - a.score);
 
-    // 5. Insider & Pillar Guides (All 114 Guides across 35 Languages)
+    // 5. Insider & Pillar Guides (All 118 Guides across 35 Languages)
     const scoredGuides = mockGuides
       .map((g) => {
         const title = g.title[localeCode] || g.title[typedLocale] || g.title.en;
@@ -1740,7 +1740,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
     },
     { id: 'events', label: ui.tabs.events, count: query.trim() ? searchResults.events.length : undefined },
     { id: 'hubs', label: ui.tabs.hubs, count: query.trim() ? searchResults.hubs.length : 9 },
-    { id: 'guides', label: ui.tabs.guides, count: query.trim() ? searchResults.guides.length : 114 },
+    { id: 'guides', label: ui.tabs.guides, count: query.trim() ? searchResults.guides.length : 118 },
     {
       id: 'zones',
       label: ui.tabs.zones,
@@ -2476,7 +2476,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                     </section>
                   )}
 
-                  {/* Filtered Insider & Pillar Guides (114 Guides) */}
+                  {/* Filtered Insider & Pillar Guides (118 Guides) */}
                   {showGuides && searchResults.guides.length > 0 && (
                     <section aria-label={ui.sections.guides}>
                       <div className="flex items-center justify-between border-b border-[#F6F1E7]/14 pb-2 mb-4">

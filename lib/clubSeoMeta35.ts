@@ -385,8 +385,8 @@ const CONFIRMED_MIN_VIP_EUR: Readonly<Record<string, number>> = {
 
 export const FLAGSHIP_TITLES_EN_IT: Readonly<Record<string, { en: string; it: string }>> = {
   'v-justme': {
-    en: 'Just Me Milan: Open 7/7, VIP Tables from €320 & Prices',
-    it: 'Just Me Milano: Aperto 7/7, Tavoli VIP da 320€ e Prezzi',
+    en: 'Just Me Milan (ex Just Cavalli): Dress Code, Tables & 7/7',
+    it: 'Just Me Milano (ex Just Cavalli): Dress Code, Prezzi & 7/7',
   },
   'v-voya': {
     en: 'Voya Rooftop Milan: 20th Floor Bar, Aperitivo & VIP Tables',
@@ -425,8 +425,8 @@ export const FLAGSHIP_TITLES_EN_IT: Readonly<Record<string, { en: string; it: st
     it: 'MIB Milano: Dinner Show Piazza Affari, Prezzi e Tavoli VIP',
   },
   'v-gattopardo': {
-    en: 'Il Gattopardo Milan: Former Church Club & VIP Table Prices',
-    it: 'Il Gattopardo Milano: Club in Ex Chiesa e Prezzi Tavoli VIP',
+    en: 'Il Gattopardo Milan: Entry Prices, Dress Code & VIP Tables',
+    it: 'Il Gattopardo Milano: Prezzi Entrata, Dress Code & Tavoli',
   },
   'v-terrazza21': {
     en: 'Terrazza Duomo 21 Milan: Duomo Rooftop Aperitivo & Tables',
@@ -550,7 +550,10 @@ export function buildClubHighCtrDescription(
 
   if (loc === 'it') {
     if (venue.id === 'v-justme') {
-      return 'Just Me Milano (Torre Branca, Sempione): aperto 7/7 19:30-05:00. Aperitivo 20-35€, Tavoli VIP da 320€. Prenota su WhatsApp +39 351 912 7047.';
+      return 'Just Me Milano (ex Just Cavalli, Torre Branca): aperto 7/7. Dress code camicia/blazer, aperitivo 20-35€, tavoli da 320€. WhatsApp +39 351 912 7047.';
+    }
+    if (venue.id === 'v-gattopardo') {
+      return 'Il Gattopardo Milano (ex chiesa Via Piero della Francesca 47): prezzi entrata da 20€, dress code camicia, tavoli VIP 300-1.200€. WhatsApp +39 351 912 7047.';
     }
     if (venue.id === 'v-aria') {
       return 'Aria Club Milano (Piazzale dello Sport 14, a 150m da San Siro): dopo-partita, aperitivo e Tavoli VIP da 250€. WhatsApp +39 351 912 7047.';
@@ -566,7 +569,10 @@ export function buildClubHighCtrDescription(
 
   if (loc === 'en') {
     if (venue.id === 'v-justme') {
-      return 'Just Me Milan (Torre Branca, Sempione): open 7/7 19:30-05:00. Aperitivo €20-35, VIP tables from €320. Book via WhatsApp +39 351 912 7047.';
+      return 'Just Me Milan (ex Just Cavalli, Torre Branca): open 7/7. Smart dress code, aperitivo €20-35, VIP tables from €320. Book via WhatsApp +39 351 912 7047.';
+    }
+    if (venue.id === 'v-gattopardo') {
+      return 'Il Gattopardo Milan (deconsecrated church, Sempione): entry from €20, strict dress code, VIP tables €300-€1,200. Book via WhatsApp +39 351 912 7047.';
     }
     if (venue.id === 'v-aria') {
       return 'Aria Club Milan (150m from San Siro Stadium): football afterparties, aperitivo & VIP tables from €250. Book via WhatsApp +39 351 912 7047.';
@@ -597,4 +603,54 @@ export function buildClubHighCtrDescription(
     return fullNative;
   }
   return withWhatsApp(fallbackRawDescription, loc, 158);
+}
+
+export type ClubNyeBannerCopy35 = {
+  partnerBadge: string;
+  eventBadge: string;
+  ctaEvent: string;
+  ctaGuide: string;
+  ctaWa: string;
+};
+
+const BANNER_35_PAIRS: Record<LocaleCode, ClubNyeBannerCopy35> = {
+  it: { partnerBadge: 'CAPODANNO 2027 · LOCALE PARTNER UFFICIALE', eventBadge: 'CAPODANNO 2027 · SCHEDA EVENTO', ctaEvent: 'Scheda Capodanno 2027', ctaGuide: 'Guida Club Partner', ctaWa: 'Prenota WhatsApp' },
+  en: { partnerBadge: 'NYE 2027 · OFFICIAL PARTNER VENUE', eventBadge: 'NYE 2027 · EVENT SHEET', ctaEvent: 'NYE 2027 Page', ctaGuide: 'Partner Clubs Guide', ctaWa: 'Book WhatsApp' },
+  es: { partnerBadge: 'NOCHEVIEJA 2027 · LOCAL PARTNER OFICIAL', eventBadge: 'NOCHEVIEJA 2027 · FICHA', ctaEvent: 'Ver Nochevieja 2027', ctaGuide: 'Guía Clubes Partner', ctaWa: 'Reservar WhatsApp' },
+  fr: { partnerBadge: 'NOUVEL AN 2027 · LIEU PARTENAIRE OFFICIEL', eventBadge: 'NOUVEL AN 2027 · FICHE', ctaEvent: 'Page Nouvel An 2027', ctaGuide: 'Guide Partenaires', ctaWa: 'Réserver WhatsApp' },
+  de: { partnerBadge: 'SILVESTER 2027 · OFFIZIELLER PARTNERCLUB', eventBadge: 'SILVESTER 2027 · EVENT', ctaEvent: 'Silvester 2027', ctaGuide: 'Partner-Clubs Guide', ctaWa: 'WhatsApp Buchung' },
+  pt: { partnerBadge: 'RÉVEILLON 2027 · PARCEIRO OFICIAL', eventBadge: 'RÉVEILLON 2027 · EVENTO', ctaEvent: 'Página Réveillon 2027', ctaGuide: 'Guia Parceiros', ctaWa: 'Reservar WhatsApp' },
+  nl: { partnerBadge: 'OUD & NIEUW 2027 · OFFICIËLE PARTNER', eventBadge: 'OUD & NIEUW 2027 · INFO', ctaEvent: 'Oud & Nieuw 2027', ctaGuide: 'Partnerclubs Gids', ctaWa: 'Boek WhatsApp' },
+  ru: { partnerBadge: 'НОВЫЙ ГОД 2027 · ОФИЦИАЛЬНЫЙ ПАРТНЁР', eventBadge: 'НОВЫЙ ГОД 2027 · СОБЫТИЕ', ctaEvent: 'Новый год 2027', ctaGuide: 'Гид по клубам', ctaWa: 'Бронь WhatsApp' },
+  tr: { partnerBadge: 'YILBAŞI 2027 · RESMİ PARTNER MEKAN', eventBadge: 'YILBAŞI 2027 · ETKİNLİK', ctaEvent: 'Yılbaşı 2027', ctaGuide: 'Partner Kulüp Rehberi', ctaWa: 'WhatsApp Rezervasyon' },
+  zh: { partnerBadge: '2027跨年 · 官方合作夜店', eventBadge: '2027跨年 · 活动详情', ctaEvent: '查看2027跨年', ctaGuide: '合作夜店指南', ctaWa: 'WhatsApp预订' },
+  ar: { partnerBadge: 'رأس السنة 2027 · شريك رسمي', eventBadge: 'رأس السنة 2027 · الفعالية', ctaEvent: 'صفحة رأس السنة', ctaGuide: 'دليل النوادي الشريكة', ctaWa: 'حجز واتساب' },
+  bg: { partnerBadge: 'НОВА ГОДИНА 2027 · ОФИЦИАЛЕН ПАРТНЬОР', eventBadge: 'НОВА ГОДИНА 2027', ctaEvent: 'Нова година 2027', ctaGuide: 'Гид партньори', ctaWa: 'WhatsApp' },
+  hr: { partnerBadge: 'DOČEK 2027 · SLUŽBENI PARTNER', eventBadge: 'DOČEK 2027', ctaEvent: 'Doček 2027', ctaGuide: 'Vodič Partnera', ctaWa: 'WhatsApp' },
+  cs: { partnerBadge: 'SILVESTR 2027 · OFICIÁLNÍ PARTNER', eventBadge: 'SILVESTR 2027', ctaEvent: 'Silvestr 2027', ctaGuide: 'Průvodce Kluby', ctaWa: 'WhatsApp' },
+  da: { partnerBadge: 'NYTÅR 2027 · OFFICIEL PARTNER', eventBadge: 'NYTÅR 2027', ctaEvent: 'Nytår 2027', ctaGuide: 'Partnerklub Guide', ctaWa: 'WhatsApp' },
+  et: { partnerBadge: 'AASTAVAHETUS 2027 · AMETLIK PARTNER', eventBadge: 'AASTAVAHETUS 2027', ctaEvent: 'Aastavahetus 2027', ctaGuide: 'Klubide Juhend', ctaWa: 'WhatsApp' },
+  fi: { partnerBadge: 'UUSIVUOSI 2027 · VIRALLINEN KUMPPANI', eventBadge: 'UUSIVUOSI 2027', ctaEvent: 'Uusivuosi 2027', ctaGuide: 'Klubiopas', ctaWa: 'WhatsApp' },
+  el: { partnerBadge: 'ΠΡΩΤΟΧΡΟΝΙΑ 2027 · ΕΠΙΣΗΜΟΣ ΣΥΝΕΡΓΑΤΗΣ', eventBadge: 'ΠΡΩΤΟΧΡΟΝΙΑ 2027', ctaEvent: 'Πρωτοχρονιά 2027', ctaGuide: 'Οδηγός Κλαμπ', ctaWa: 'WhatsApp' },
+  hu: { partnerBadge: 'SZILVESZTER 2027 · HIVATALOS PARTNER', eventBadge: 'SZILVESZTER 2027', ctaEvent: 'Szilveszter 2027', ctaGuide: 'Klub Kalauz', ctaWa: 'WhatsApp' },
+  ga: { partnerBadge: 'OÍCHE CHINN BHLIANA 2027 · COMHPHÁIRTÍ', eventBadge: 'OÍCHE CHINN BHLIANA 2027', ctaEvent: 'Oíche Chinn Bhliana', ctaGuide: 'Treoir Clubanna', ctaWa: 'WhatsApp' },
+  lv: { partnerBadge: 'JAUNAIS GADS 2027 · OFICIĀLS PARTNERIS', eventBadge: 'JAUNAIS GADS 2027', ctaEvent: 'Jaunais gads 2027', ctaGuide: 'Klubu Ceļvedis', ctaWa: 'WhatsApp' },
+  lt: { partnerBadge: 'NAUJIEJI METAI 2027 · OFICIALUS PARTNERIS', eventBadge: 'NAUJIEJI METAI 2027', ctaEvent: 'Naujieji 2027', ctaGuide: 'Klubų Gidas', ctaWa: 'WhatsApp' },
+  mt: { partnerBadge: 'EWWEL TAS-SENA 2027 · SIEĦEB UFFIĊJALI', eventBadge: 'EWWEL TAS-SENA 2027', ctaEvent: 'Ewwel tas-Sena 2027', ctaGuide: 'Gwida Klabbs', ctaWa: 'WhatsApp' },
+  pl: { partnerBadge: 'SYLWESTER 2027 · OFICJALNY PARTNER', eventBadge: 'SYLWESTER 2027', ctaEvent: 'Sylwester 2027', ctaGuide: 'Przewodnik Klubów', ctaWa: 'WhatsApp' },
+  ro: { partnerBadge: 'REVELION 2027 · PARTENER OFICIAL', eventBadge: 'REVELION 2027', ctaEvent: 'Revelion 2027', ctaGuide: 'Ghid Parteneri', ctaWa: 'WhatsApp' },
+  sk: { partnerBadge: 'SILVESTER 2027 · OFICIÁLNY PARTNER', eventBadge: 'SILVESTER 2027', ctaEvent: 'Silvester 2027', ctaGuide: 'Sprievodca Klubmi', ctaWa: 'WhatsApp' },
+  sl: { partnerBadge: 'SILVESTROVO 2027 · URADNI PARTNER', eventBadge: 'SILVESTROVO 2027', ctaEvent: 'Silvestrovo 2027', ctaGuide: 'Vodnik Klubov', ctaWa: 'WhatsApp' },
+  sv: { partnerBadge: 'NYÅR 2027 · OFFICIELL PARTNER', eventBadge: 'NYÅR 2027', ctaEvent: 'Nyår 2027', ctaGuide: 'Klubbguide', ctaWa: 'WhatsApp' },
+  no: { partnerBadge: 'NYTTÅR 2027 · OFFISIELL PARTNER', eventBadge: 'NYTTÅR 2027', ctaEvent: 'Nyttår 2027', ctaGuide: 'Klubbguide', ctaWa: 'WhatsApp' },
+  is: { partnerBadge: 'ÁRAMÓT 2027 · OPINBER SAMSTARFSAÐILI', eventBadge: 'ÁRAMÓT 2027', ctaEvent: 'Áramót 2027', ctaGuide: 'Klúbbahandbók', ctaWa: 'WhatsApp' },
+  uk: { partnerBadge: 'НОВИЙ РІК 2027 · ОФІЦІЙНИЙ ПАРТНЕР', eventBadge: 'НОВИЙ РІК 2027', ctaEvent: 'Новий рік 2027', ctaGuide: 'Гід Клубами', ctaWa: 'WhatsApp' },
+  sq: { partnerBadge: 'VITI I RI 2027 · PARTNER ZYRTAR', eventBadge: 'VITI I RI 2027', ctaEvent: 'Viti i Ri 2027', ctaGuide: 'Udhëzues Klube', ctaWa: 'WhatsApp' },
+  sr: { partnerBadge: 'NOVA GODINA 2027 · ZVANIČNI PARTNER', eventBadge: 'NOVA GODINA 2027', ctaEvent: 'Nova godina 2027', ctaGuide: 'Vodič Klubova', ctaWa: 'WhatsApp' },
+  bs: { partnerBadge: 'NOVA GODINA 2027 · ZVANIČNI PARTNER', eventBadge: 'NOVA GODINA 2027', ctaEvent: 'Nova godina 2027', ctaGuide: 'Vodič Klubova', ctaWa: 'WhatsApp' },
+  mk: { partnerBadge: 'НОВА ГОДИНА 2027 · ОФИЦИЈАЛЕН ПАРТНЕР', eventBadge: 'НОВА ГОДИНА 2027', ctaEvent: 'Нова година 2027', ctaGuide: 'Водич Клубови', ctaWa: 'WhatsApp' },
+};
+
+export function getClubNyeBannerCopy35(locale: string): ClubNyeBannerCopy35 {
+  return BANNER_35_PAIRS[(locale as LocaleCode)] || BANNER_35_PAIRS.en;
 }

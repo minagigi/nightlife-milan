@@ -14,12 +14,12 @@
       "services": "Services"
     },
     "justme": {
-      "subtitle": "A perfect mix of elegance and fun",
-      "description": "In the heart of Parco Sempione, JUSTME is the reference point for a complete experience: from aperitivo to dinner, from disco nights to exclusive VIP areas.",
-      "insiderTip": "Just Me is the heart of Fashion Week. If you want the best table, ask for Privé Branca: you will literally be under the pillars of the tower.",
+      "subtitle": "A perfect mix of elegance and luxury (ex Just Cavalli)",
+      "description": "In the heart of Parco Sempione beneath Torre Branca, Just Me Milan (ex Just Cavalli) is open 7 nights a week: Royal'Aperitivo, dinner, clubbing, and exclusive VIP privé areas.",
+      "insiderTip": "At Just Me Milan (ex Just Cavalli) door policy is strictly smart chic: collared shirt recommended for men, no athletic wear. Ask for Privé Branca under the crystal dome.",
       "location": "Viale Luigi Camoens 2, Milano (Parco Sempione)",
-      "target": "25-45 years",
-      "dressCode": "Elegant / Smart Casual",
+      "target": "23-45 years",
+      "dressCode": "Strictly Elegant / Smart Chic (no sportswear)",
       "music": "House, Hip-Hop, Hits, Commercial",
       "events": [
         {
@@ -87,19 +87,19 @@
       ],
       "pricing": {
         "dancefloor": {
-          "title": "Dancefloor Table",
-          "price": "from 250€",
-          "desc": "Up to 5-6 people. Bottle included."
+          "title": "Dancefloor VIP Table",
+          "price": "€320 - €600",
+          "desc": "6-8 guests (€320-€400 Mon-Thu/Sun · €500-€600 Fri-Sat). 100% bottle credit."
         },
         "priveGold": {
-          "title": "Privé Gold",
-          "price": "from 600€",
-          "desc": "Raised area, dancefloor view."
+          "title": "Privé Branca Elevated VIP",
+          "price": "€800 - €1,200",
+          "desc": "Elevated VIP tier with dedicated security and crystal dome view."
         },
         "priveDiamond": {
-          "title": "Privé Diamond (VIP)",
-          "price": "1.5k - 3k€+",
-          "desc": "Maximum exclusivity under the Branca Tower. Dedicated service."
+          "title": "Super Privé DJ Console",
+          "price": "€1,500 - €5,000+",
+          "desc": "Top stage-level exclusivity beneath Torre Branca with dedicated host."
         }
       },
       "rules": {

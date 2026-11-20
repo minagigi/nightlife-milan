@@ -314,7 +314,14 @@ const CLOSED_VENUE_META: Record<
     address: 'Via Gaudenzio Fantoli 9, 20138 Milano',
     reasonIt: 'Fabrique Milano ha confermato ufficialmente che la venue non organizza la serata di Capodanno il 31 dicembre 2026.',
     reasonEn: 'Fabrique Milan has officially confirmed that the venue is not hosting a New Year’s Eve event on December 31, 2026.',
-    alternatives: ['capodanno-alcatraz-milano', 'capodanno-magazzini-generali-milano', 'capodanno-gate-milano'],
+    alternatives: [
+      'capodanno-gate-milano',
+      'capodanno-justme-milano-torre-branca',
+      'capodanno-pineta-milano',
+      'capodanno-magazzini-generali-milano',
+      'capodanno-repvblic-milano',
+      'capodanno-voya-rooftop-milano',
+    ],
   },
   'capodanno-base-milano-tortona': {
     name: 'BASE Milano',

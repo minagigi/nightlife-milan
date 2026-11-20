@@ -836,10 +836,19 @@ for (const [gid, locMap] of Object.entries(GUIDE_100_SLUGS_MAP)) {
   }
 }
 
+const LEGACY_GUIDE_ALIAS_TO_ID: Readonly<Record<string, string>> = {
+  'san-siro-football-afterparties-guide': 'g-san-siro-football-afterparties',
+  'monza-brianza-to-milan-clubs-parking-vip-guide-vip-guide': 'g-110',
+  'bergamo-to-milan-clubs-highway-a4-vip-guide-vip-guide': 'g-111',
+  'como-lecco-lugano-ticino-to-milan-clubs-vip-guide-vip-guide': 'g-112',
+  'brescia-franciacorta-cremona-to-milan-clubs-vip-guide-vip-guide': 'g-113',
+  'varese-pavia-lodi-novara-to-milan-clubs-vip-guide-vip-guide': 'g-114',
+};
+
 export function resolveExistingGuideId(slugOrId: string): string | undefined {
   const clean = sanitizeAsciiSlug(slugOrId);
-  if (clean === 'san-siro-football-afterparties-guide') {
-    return 'g-san-siro-football-afterparties';
+  if (LEGACY_GUIDE_ALIAS_TO_ID[clean]) {
+    return LEGACY_GUIDE_ALIAS_TO_ID[clean];
   }
   return existingGuideSlugToId.get(clean) || existingGuideSlugToId.get(slugOrId);
 }

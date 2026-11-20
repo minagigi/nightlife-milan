@@ -2,12 +2,15 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix, getLocaleDef, indexedLocaleCodes, canonicalPageUrl } from '@/lib/i18n/locales';
-import { getLocalizedVenueSlug35, getLocalizedZoneSlug35 } from '@/lib/i18n/localizedSlugs35';
+import { getExistingGuideSlug35, getLocalizedVenueSlug35, getLocalizedZoneSlug35 } from '@/lib/i18n/localizedSlugs35';
 import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
 import { getLocalizedGuideSlug35 } from '@/lib/guides100Catalog';
 import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
-import { buildClubHighCtrDescription, buildClubHighCtrTitle } from '@/lib/clubSeoMeta35';
+import { buildClubHighCtrDescription, buildClubHighCtrTitle, getClubNyeBannerCopy35 } from '@/lib/clubSeoMeta35';
+import { getCapodannoEventForClub } from '@/lib/capodannoEvents';
+import { capodannoEventPath } from '@/lib/capodanno/routes';
+import { getCapodannoLocalizedEventContent, getCapodannoLocalizedEventTitle } from '@/lib/capodanno/i18n';
 import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
 import { MapPin, Clock, Shirt, MessageCircle, Star, Calendar, ArrowLeft, Music, Wine, Utensils, ShieldCheck, Check, CreditCard, Sparkles, Train, Users, HelpCircle } from 'lucide-react';
@@ -62,8 +65,8 @@ export async function generateStaticParams() {
 
 const venueTitles: Record<string, { en: string; it: string }> = {
   'v-justme': {
-    en: 'Just Me Milan | Open 7/7 VIP Tables, Prices & Dress Code 2026/2027 | Italo Rota Club',
-    it: 'Just Me Milano | Aperto 7/7 Tavoli VIP, Prezzi & Dress Code 2026/2027 | Club Italo Rota',
+    en: 'Just Me Milan (ex Just Cavalli) | Open 7/7 VIP Tables, Dress Code & Prices 2026/2027',
+    it: 'Just Me Milano (ex Just Cavalli) | Aperto 7/7 Tavoli VIP, Dress Code & Prezzi 2026/2027',
   },
   'v-voya': {
     en: 'Voya Rooftop Milan | 20th Floor Skyline Bar, Tables & Aperitivo 2026/2027 | Isola & Portello',
@@ -157,8 +160,8 @@ const venueTitles: Record<string, { en: string; it: string }> = {
 
 const venueKeywords: Record<string, { en: string[]; it: string[] }> = {
   'v-justme': {
-    en: ['just me milan', 'just me club sempione', 'just me open 7 nights a week', 'just me vip table prices', 'Italo Rota club milan', 'just me dress code', 'torre branca nightclub milan', 'champions league afterparty milan'],
-    it: ['just me milano', 'just me club sempione', 'just me aperto 7 su 7', 'prezzi tavoli just me', 'discoteca Italo Rota milano', 'just me dress code', 'club torre branca milano', 'dopo partita champions league milano'],
+    en: ['just me milan', 'ex just cavalli milan', 'just cavalli milano dress code', 'just me open 7 nights a week', 'just me vip table prices', 'Italo Rota club milan', 'just me dress code', 'torre branca nightclub milan'],
+    it: ['just me milano', 'ex just cavalli milano', 'just cavalli milano dress code', 'just me aperto 7 su 7', 'prezzi tavoli just me', 'discoteca Italo Rota milano', 'just me dress code', 'club torre branca milano'],
   },
   'v-voya': {
     en: ['voya rooftop milan', 'milan rooftop bar 2026', 'voya rooftop 20th floor', 'skyline bar milan', 'voya rooftop aperitivo', 'milan rooftop vip table reservation'],
@@ -265,12 +268,12 @@ export interface ClubEditorialData {
 const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData }> = {
   'v-justme': {
     en: {
-      tagline: 'Priority #1 Flagship | Open 7 Nights a Week (Monday to Sunday) Beneath the Illuminated Torre Branca in Parco Sempione',
+      tagline: 'Priority #1 Flagship (ex Just Cavalli) | Open 7 Nights a Week Beneath Torre Branca in Parco Sempione',
       highlights: [
+        'Formerly known as Just Cavalli Milan: same iconic Italo Rota crystal pavilion beneath the 108m Torre Branca',
         'Open 7 nights out of 7 (Monday to Sunday, 19:30 to 05:00 AM)',
-        'Designed by Italo Rota at the base of the 108m Torre Branca in Parco Sempione',
         'Royal’Aperitivo with private panoramic elevator ticket to the top of Torre Branca',
-        '#1 destination for UEFA Champions League Tue/Wed afterparties, Fashion Week & international stars',
+        'Strict smart chic dress code: collared shirts & leather shoes/loafers (zero sportswear or ripped jeans)',
       ],
       musicStyle: 'Commercial Luxury House, Afro-House, Vocal House & International Hip-Hop/R&B Guest Sets',
       crowdProfile: '23-45 | Models, Serie A footballers, Fashion Week designers, international jet-set & corporate VIP hospitality',
@@ -290,8 +293,12 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
       ],
       faqs: [
         {
+          q: 'What is the dress code at Just Me Milan (ex Just Cavalli)?',
+          a: 'Just Me Milan (ex Just Cavalli, Viale Luigi Camoens 2) enforces one of Milan’s strictest sartorial door policies: men must wear a collared shirt or fitted polo with dark blazer and leather shoes or smart clean sneakers; tracksuits, sportswear, shorts, hoodies, and athletic trainers are strictly refused.',
+        },
+        {
           q: 'Is Just Me Milano really open every night from Monday to Sunday?',
-          a: 'Yes. Just Me Milano (Viale Luigi Camoens 2, Parco Sempione) operates 7 nights a week, 365 days a year, with Royal’Aperitivo from 19:30 and clubbing until 05:00 AM inside its heated winter glass dome or open-air summer garden.',
+          a: 'Yes. Just Me Milano (ex Just Cavalli, Viale Luigi Camoens 2) operates 7 nights a week, 365 days a year, with Royal’Aperitivo from 19:30 and clubbing until 05:00 AM inside its heated winter glass dome or open-air summer garden.',
         },
         {
           q: 'How much is a VIP table at Just Me Milano in 2026/2027?',
@@ -304,12 +311,12 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
       ],
     },
     it: {
-      tagline: 'Scelta Top N.1 a Milano | Aperto 7 Notti su 7 (Lunedì-Domenica) Sotto la Torre Branca Illuminata nel Parco Sempione',
+      tagline: 'Scelta Top N.1 a Milano (ex Just Cavalli) | Aperto 7 Notti su 7 Sotto la Torre Branca nel Parco Sempione',
       highlights: [
-        'Aperto 7 sere su 7 dal Lunedi alla Domenica (19:30 - 05:00 del mattino)',
-        'Architettura firmata Italo Rota ai piedi della Torre Branca (108 metri) in Parco Sempione',
+        'Storica sede dell’ex Just Cavalli Milano: iconico padiglione in cristallo firmato Italo Rota ai piedi della Torre Branca (108 m)',
+        'Aperto 7 sere su 7 dal Lunedì alla Domenica (19:30 – 05:00 del mattino)',
         'Royal’Aperitivo con biglietto ascensore panoramico per salire in cima alla Torre Branca',
-        'Meta #1 per Dopo-Partita UEFA Champions League (Mar/Mer), Derby, Milano Fashion Week e superstar mondiali',
+        'Dress code sartoriale rigoroso: camicia con colletto, blazer e scarpe eleganti per uomo (vietate tute, sneakers sportive e zaini)',
       ],
       musicStyle: 'Commercial Luxury House, Afro-House, Vocal House e Special Guest Internazionali Hip-Hop/R&B',
       crowdProfile: '23-45 anni | Modelle, calciatori di Serie A, stilisti della Fashion Week, jet-set internazionale e clientela VIP',
@@ -329,8 +336,12 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
       ],
       faqs: [
         {
+          q: 'Qual è il dress code del Just Me Milano (ex Just Cavalli)?',
+          a: 'Il Just Me Milano (ex Just Cavalli, Viale Luigi Camoens 2) applica una selezione sartoriale rigorosa alla porta: per gli uomini sono richieste camicia o polo curata, pantalone lungo scuro (no strappi) e scarpe eleganti o sneakers pulite in pelle; tute, abbigliamento sportivo, cappellini, felpe con cappuccio e zaini vengono respinti.',
+        },
+        {
           q: 'Il Just Me Milano e davvero aperto tutte le sere dal lunedi alla domenica?',
-          a: 'Si. Il Just Me Milano (Viale Luigi Camoens 2, Parco Sempione) e l unico top club di Milano aperto 7 notti su 7, dalle 19:30 per il Royal’Aperitivo fino alle 05:00 del mattino, sia nel giardino estivo sia nella cupola invernale riscaldata.',
+          a: 'Sì. Il Just Me Milano (ex Just Cavalli, Viale Luigi Camoens 2) è l’unico top club di Milano aperto 7 notti su 7, dalle 19:30 per il Royal’Aperitivo fino alle 05:00 del mattino.',
         },
         {
           q: 'Quanto costa un Tavolo VIP al Just Me Milano nel 2026/2027?',
@@ -1011,6 +1022,76 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
       ],
     },
   },
+  'v-gattopardo': {
+    en: {
+      tagline: 'Deconsecrated Church Club in Sempione | Royal Aperitivo, Dinner Show & Chandelier VIP Tables',
+      highlights: [
+        'Housed inside a historic early-1900s deconsecrated church at Via Piero della Francesca 47 crowned by a monumental crystal chandelier',
+        'Two-level VIP table architecture: main nave dancefloor beneath the arches and elevated apse mezzanine privé',
+        'Weekly aperitivo & club formats every Friday and Saturday plus university / corporate private events',
+        'Confirmed New Year’s Eve 2027 VIP tables from €600 per person minimum spend (100% bottle spending credit inside the venue)',
+      ],
+      musicStyle: 'Theatrical Dinner Show, Vocal House, Commercial Dance & 90s/2000s Sing-Along Anthems',
+      crowdProfile: '23-45 | Smart Milanese locals, university graduates, international guests & upscale group celebrations',
+      bestNights: 'Friday & Saturday Theatrical Aperitivo (20:00), Dinner Show & Clubbing + New Year’s Eve Dec 31 Gala (22:30-05:00)',
+      nearestMetro: 'M5 Purple Line Gerusalemme or Domodossola FN (3 min walk to Via Piero della Francesca 47)',
+      pricingTable: [
+        { zone: 'Royal Aperitivo Buffet (from 20:00)', price: '€20 - €25 / person', details: 'Reserved table for aperitivo beneath the frescoed church arches with 1 drink included' },
+        { zone: 'Evening Club Admission (Guestlist / Door)', price: 'From €20 / €28 - €33', details: 'Weekend club entry with 1 drink included via nominal concierge accreditation' },
+        { zone: 'Main Nave Dancefloor VIP Table', price: '€300 - €500 (5-8 guests)', details: '100% minimum spending credit in bottles directly under the central crystal chandelier' },
+        { zone: 'Elevated Apse Mezzanine Privé', price: '€600 - €1,200 (8-12 guests)', details: 'Panoramic mezzanine VIP tables overlooking the entire deconsecrated nave' },
+        { zone: 'New Year’s Eve 2027 (Dec 31 · 22:30-05:00)', price: '€600 / person min. spend', details: '100% prepayment covering priority entry and full venue bottle spending credit' },
+      ],
+      insiderTips: [
+        'Door policy is strictly sartorial at Il Gattopardo: collared shirt recommended for men, no sportswear, hoodies, or ripped denim.',
+        'For graduation parties or groups of 8-20 friends, combine the 20:00 Royal Aperitivo table with an Elevated Mezzanine Privé upgrade before 23:30.',
+      ],
+      faqs: [
+        {
+          q: 'How much are entry prices and VIP tables at Il Gattopardo Milan?',
+          a: 'Weekly Royal Aperitivo starts at €20-€25 and club admission starts from €20; weekend Main Nave VIP tables run €300-€500 while Mezzanine Privé tables range €600-€1,200 (all 100% bottle credit). On New Year’s Eve (Dec 31), VIP tables are €600 per person minimum spend.',
+        },
+        {
+          q: 'What is the dress code for Il Gattopardo Milan?',
+          a: 'Smart Evening / Collared Chic: men are expected to wear a collared shirt or smart jacket with leather shoes or clean dress sneakers; athletic wear and shorts are refused at the door.',
+        },
+      ],
+    },
+    it: {
+      tagline: 'Discoteca in Ex Chiesa Sconsacrata (Sempione) | Royal Aperitivo, Dinner Show & Tavoli sotto il Lampadario',
+      highlights: [
+        'Ospitato in una suggestiva chiesa sconsacrata di inizio Novecento in Via Piero della Francesca 47 con lampadario monumentale di cristallo',
+        'Due livelli per i tavoli VIP: navata centrale in pista e balconata rialzata nell’abside',
+        'Programmazione settimanale ogni Venerdì e Sabato tra aperitivo, dinner show e club fino alle 04:30',
+        'Capodanno 2027 confermato: tavoli VIP ufficiali da 600€ a persona di minimum spending',
+      ],
+      musicStyle: 'Dinner Show Scenografico, Vocal House, Commercial Dance e Hit Cantate 90/2000',
+      crowdProfile: '23-45 anni | Pubblico milanese curato, feste di laurea, compleanni eleganti e clientela internazionale',
+      bestNights: 'Venerdì e Sabato (Aperitivo dalle 20:00, Cena Spettacolo e Club) + Capodanno 31 Dicembre (22:30-05:00)',
+      nearestMetro: 'M5 Lilla Gerusalemme o Domodossola FN (3 minuti a piedi da Via Piero della Francesca 47)',
+      pricingTable: [
+        { zone: 'Royal Aperitivo & Tavolo d’Appoggio (dalle 20:00)', price: '20€ - 25€ / persona', details: 'Tavolo riservato sotto le volte affrescate con buffet curato e 1 drink incluso' },
+        { zone: 'Ingresso Serata / Dopocena (Lista o Porta)', price: 'Da 20€ / 28€ - 33€', details: 'Accesso discoteca nel weekend con accredito nominale via Concierge' },
+        { zone: 'Tavolo VIP Navata Centrale (Pista)', price: '300€ - 500€ (5-8 ospiti)', details: '100% credito spendibile al tavolo direttamente sotto il grande lampadario di cristallo' },
+        { zone: 'Tavolo Balconata Privé Abside', price: '600€ - 1.200€ (8-12 ospiti)', details: 'Area panoramica rialzata con vista privilegiata su tutta la navata centrale' },
+        { zone: 'Capodanno 2027 (31 Dicembre · 22:30-05:00)', price: '600€ a persona min. spending', details: 'Prepagamento 100% comprensivo di booking, ingresso prioritario e credito al tavolo' },
+      ],
+      insiderTips: [
+        'Il dress code al Gattopardo è elegante con selezione curata: camicia con colletto per gli uomini, scarpe curate e niente abbigliamento sportivo.',
+        'Per feste di laurea o gruppi da 8 a 20 ospiti, prenota il tavolo dalle 20:30 per l’aperitivo in navata mantenendo l’opzione bottiglia per il dopocena.',
+      ],
+      faqs: [
+        {
+          q: 'Quanto costano ingresso e tavoli VIP al Gattopardo Milano?',
+          a: 'Nel weekend il Royal Aperitivo parte da 20-25€ e l’ingresso club da 20€; i tavoli in navata partono da 300-500€ mentre la Balconata Privé va da 600€ a 1.200€ spendibili in bottiglie. Per Capodanno 2027 il listino ufficiale partner è 600€ a persona di minimum spending.',
+        },
+        {
+          q: 'Qual è il dress code richiesto al Gattopardo Milano?',
+          a: 'Elegante / Smart Chic rigoroso: per uomo è consigliata camicia con colletto (niente felpe sportive, tute o jeans troppo strappati). La prenotazione nominale su WhatsApp +39 351 912 7047 accelera l’ingresso.',
+        },
+      ],
+    },
+  },
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -1246,7 +1327,13 @@ export default async function ClubPage({ params }: Props) {
     'corso-como';
   const canonicalZone = mockZones.find((z) => z.slug === canonicalZoneSlug) || mockZones[0];
   const localizedZoneSlug = getLocalizedZoneSlug35(canonicalZoneSlug, locCode);
-  const reciprocalGuideIds = ['g-dress-code', 'g-vip-bottle-prices', 'g-new-years-eve-2027', 'g-115', 'g-116'];
+  const reciprocalGuideIds = ['g-dress-code', 'g-vip-bottle-prices', 'g-new-years-eve-2027', 'g-115', 'g-116', 'g-118'];
+  const openCapEvent = (() => {
+    const matched = getCapodannoEventForClub(venue.slugs.en, name);
+    return matched && !matched.closedForNye && !matched.soldOutForNye ? matched : undefined;
+  })();
+  const nyeBannerCopy = getClubNyeBannerCopy35(locCode);
+  const guide118Href = `${lp}/${guidesDir}/${getExistingGuideSlug35('g-118', locCode)}`;
   const reciprocalGuides = reciprocalGuideIds
     .map((gid) => mockGuides.find((g) => g.id === gid))
     .filter((g): g is NonNullable<typeof g> => Boolean(g));
@@ -1458,7 +1545,54 @@ export default async function ClubPage({ params }: Props) {
             </div>
           </section>
 
-          {/* Editorial Deep-Dive Dossier (for v-justme, v-aria, v-tocqueville, v-alcatraz, v-fabrique, v-amnesia) */}
+          {/* Editorial Deep-Dive Dossier (for v-justme, v-aria, v-gattopardo, v-tocqueville, v-alcatraz, v-fabrique, v-amnesia) */}
+          {openCapEvent && (() => {
+            const capTitle = getCapodannoLocalizedEventTitle(openCapEvent, locCode);
+            const capSummary = getCapodannoLocalizedEventContent(openCapEvent, locCode).priceSummary;
+            const capHref = capodannoEventPath(openCapEvent.slug, locCode);
+            const badgeText =
+              openCapEvent.partner || venue.isManaged
+                ? nyeBannerCopy.partnerBadge
+                : nyeBannerCopy.eventBadge;
+            return (
+              <section className="p-6 rounded-2xl border border-champagne/35 bg-champagne/[0.06]">
+                <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-champagne mb-2">
+                  {badgeText}
+                </p>
+                <h2 className="text-xl md:text-2xl font-serif font-bold text-white mb-2">
+                  {capTitle}
+                </h2>
+                <p className="text-sm text-white/75 leading-relaxed mb-5">
+                  {capSummary}
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <Link
+                    href={capHref}
+                    locale={locCode}
+                    className="inline-flex items-center px-5 py-2.5 bg-champagne text-zinc-950 font-mono text-xs font-bold uppercase tracking-wider rounded-sm hover:bg-white transition-colors"
+                  >
+                    {nyeBannerCopy.ctaEvent} →
+                  </Link>
+                  <Link
+                    href={guide118Href}
+                    locale={locCode}
+                    className="inline-flex items-center px-4 py-2.5 border border-white/25 text-white/85 font-mono text-xs uppercase tracking-wider rounded-sm hover:border-champagne hover:text-champagne transition-colors"
+                  >
+                    {nyeBannerCopy.ctaGuide} →
+                  </Link>
+                  <a
+                    href={waLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-4 py-2.5 bg-[#25D366] text-zinc-950 font-mono text-xs font-bold uppercase tracking-wider rounded-sm hover:bg-[#2EE472] transition-colors"
+                  >
+                    {nyeBannerCopy.ctaWa}
+                  </a>
+                </div>
+              </section>
+            );
+          })()}
+
           {editorial && (
             <section className="space-y-8 p-7 rounded-2xl border border-champagne/25 bg-white/[0.02]">
               <div>
