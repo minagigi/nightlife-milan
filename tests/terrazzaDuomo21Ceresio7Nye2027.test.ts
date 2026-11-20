@@ -486,7 +486,7 @@ test('End-to-end /api/single-pass/checkout POST enforces pairing/allergies and c
     const orphanJson = (await orphanRes.json()) as { code?: string };
     assert.equal(orphanJson.code, 'TABLE_REQUIRES_FORMULA');
 
-    // 2. Missing allergies blocked (400 DIETARY_NOTES_REQUIRED)
+    // 2. Empty allergies allowed (optional field -> 200 ok)
     const noAllergyRes = await checkoutPost(
       mkPost({
         locale: 'it',
@@ -504,9 +504,11 @@ test('End-to-end /api/single-pass/checkout POST enforces pairing/allergies and c
         acceptedTerms: true,
       }),
     );
-    assert.equal(noAllergyRes.status, 400);
-    const noAllergyJson = (await noAllergyRes.json()) as { code?: string };
-    assert.equal(noAllergyJson.code, 'DIETARY_NOTES_REQUIRED');
+    assert.equal(noAllergyRes.status, 200);
+    const noAllergyJson = (await noAllergyRes.json()) as { ok?: boolean; orderId?: string };
+    assert.equal(noAllergyJson.ok, true);
+    assert.ok(noAllergyJson.orderId);
+    assert.equal((await getOrderById(noAllergyJson.orderId))?.customer.dietaryNotes, undefined);
 
     // 3. Valid: 1 table (€600) + 4 Brindisi (€90×4) = €960 base + €192 (20%) = €1,152, 4 pax
     const okBrindisiRes = await checkoutPost(
@@ -700,21 +702,23 @@ test('End-to-end /api/single-pass/checkout POST enforces pairing/allergies and c
     assert.equal(terminusOk.feeCents, 4800);
     assert.equal(terminusOk.totalEurCents, 28800);
 
-    assert.equal(capturedPaymentIntentBodies.length, 6);
+    assert.equal(capturedPaymentIntentBodies.length, 7);
     assert.equal(capturedPaymentIntentBodies[0].get('amount'), '115200');
     assert.equal(capturedPaymentIntentBodies[0].get('metadata[fee_rate]'), '0.2');
-    assert.equal(capturedPaymentIntentBodies[1].get('amount'), '216000');
-    assert.equal(capturedPaymentIntentBodies[1].get('metadata[venue_net_eur_cents]'), '180000');
-    assert.equal(capturedPaymentIntentBodies[2].get('amount'), '16800');
-    assert.equal(capturedPaymentIntentBodies[2].get('metadata[fee_rate]'), '0.2');
-    assert.equal(capturedPaymentIntentBodies[2].get('metadata[venue_net_eur_cents]'), '14000');
-    assert.equal(capturedPaymentIntentBodies[3].get('amount'), '14000');
-    assert.equal(capturedPaymentIntentBodies[3].get('metadata[fee_rate]'), '0');
-    assert.equal(capturedPaymentIntentBodies[3].get('metadata[fee_eur_cents]'), '0');
-    assert.equal(capturedPaymentIntentBodies[4].get('amount'), '21000');
-    assert.equal(capturedPaymentIntentBodies[4].get('metadata[fee_rate]'), '0.2');
-    assert.equal(capturedPaymentIntentBodies[5].get('amount'), '28800');
+    assert.equal(capturedPaymentIntentBodies[1].get('amount'), '115200');
+    assert.equal(capturedPaymentIntentBodies[1].get('metadata[fee_rate]'), '0.2');
+    assert.equal(capturedPaymentIntentBodies[2].get('amount'), '216000');
+    assert.equal(capturedPaymentIntentBodies[2].get('metadata[venue_net_eur_cents]'), '180000');
+    assert.equal(capturedPaymentIntentBodies[3].get('amount'), '16800');
+    assert.equal(capturedPaymentIntentBodies[3].get('metadata[fee_rate]'), '0.2');
+    assert.equal(capturedPaymentIntentBodies[3].get('metadata[venue_net_eur_cents]'), '14000');
+    assert.equal(capturedPaymentIntentBodies[4].get('amount'), '14000');
+    assert.equal(capturedPaymentIntentBodies[4].get('metadata[fee_rate]'), '0');
+    assert.equal(capturedPaymentIntentBodies[4].get('metadata[fee_eur_cents]'), '0');
+    assert.equal(capturedPaymentIntentBodies[5].get('amount'), '21000');
     assert.equal(capturedPaymentIntentBodies[5].get('metadata[fee_rate]'), '0.2');
+    assert.equal(capturedPaymentIntentBodies[6].get('amount'), '28800');
+    assert.equal(capturedPaymentIntentBodies[6].get('metadata[fee_rate]'), '0.2');
   } finally {
     globalThis.fetch = origFetch;
     clearMemoryStoreForTests();

@@ -24,16 +24,28 @@ export async function POST(request: Request) {
   const password = String(body.password || '');
 
   if (!email || !password) {
-    return jsonError('Email and password are required', 'INVALID_CREDENTIALS', 400);
+    const fieldErrors: Partial<Record<'email' | 'password', string>> = {};
+    if (!email) fieldErrors.email = 'INVALID_EMAIL';
+    if (!password) fieldErrors.password = 'INVALID_PASSWORD';
+    return jsonError('Email and password are required', 'INVALID_CREDENTIALS', 400, {
+      field: !email ? 'email' : 'password',
+      fieldErrors,
+    });
   }
 
   const member = await getMemberByEmail(email);
   if (!member?.passwordHash || !member.passwordSalt) {
-    return jsonError('Invalid email or password', 'INVALID_CREDENTIALS', 401);
+    return jsonError('Invalid email or password', 'INVALID_CREDENTIALS', 401, {
+      field: 'password',
+      fieldErrors: { password: 'INVALID_CREDENTIALS' },
+    });
   }
 
   if (!verifyPassword(password, member.passwordSalt, member.passwordHash)) {
-    return jsonError('Invalid email or password', 'INVALID_CREDENTIALS', 401);
+    return jsonError('Invalid email or password', 'INVALID_CREDENTIALS', 401, {
+      field: 'password',
+      fieldErrors: { password: 'INVALID_CREDENTIALS' },
+    });
   }
 
   const token = createSessionToken(member.email, member.id);

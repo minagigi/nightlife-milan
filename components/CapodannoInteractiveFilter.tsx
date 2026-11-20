@@ -317,12 +317,13 @@ export default function CapodannoInteractiveFilter({
               return (
                 <article
                   key={event.slug}
-                  className="flex flex-col justify-between overflow-hidden border border-[#F6F1E7]/14 bg-[#0B0A09] transition hover:border-[#F6F1E7]/45"
+                  className="flex flex-col justify-between overflow-hidden border border-[#0A0A0C]/16 bg-[#FFFFFF] text-[#0A0A0C] transition hover:border-[#0A0A0C]"
                 >
                   <div>
                     <Link
                       href={detailHref}
-                      className="relative block aspect-[16/9] w-full overflow-hidden border-b border-[#F6F1E7]/14 bg-[#050505]"
+                      data-no-lightbox="true"
+                      className="relative block aspect-[16/9] w-full overflow-hidden border-b border-[#0A0A0C]/14 bg-[#0A0A0C]"
                       aria-label={title}
                     >
                       <Image
@@ -336,64 +337,64 @@ export default function CapodannoInteractiveFilter({
                     </Link>
 
                     <div className="p-5">
-                      <div className="mb-3 flex flex-wrap gap-2">
-                        <span className="border border-[#F6F1E7]/30 bg-[#050505] px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-[#F6F1E7]">
+                      <div className="mb-3 flex flex-wrap items-center gap-2">
+                        <span className="border border-[#0A0A0C]/25 bg-[#EDEBE6] px-2.5 py-1 text-xs font-semibold text-[#0A0A0C]">
                           {event.city} ({event.province})
                         </span>
-                        <span className="bg-[#F6F1E7] px-2.5 py-1 text-[11px] font-bold text-[#050505]">
+                        <span className="font-display text-2xl font-extrabold tabular-nums text-[#D9381E]">
                           {formatCapodannoPriceBadge35(event, locale)}
                         </span>
                         {!isRepvblicNyeSlug(event.slug) && !isGateNyeSlug(event.slug) && (
-                          <span className="border border-[#F6F1E7]/50 bg-[#050505] px-2.5 py-1 text-[11px] font-extrabold uppercase tracking-wider text-[#F6F1E7]" data-selling-fast-badge>
+                          <span className="bg-[#0A0A0C] px-2.5 py-1 text-xs font-bold text-[#FFFFFF]" data-selling-fast-badge>
                             {scarcity.sellingFastBadge}
                           </span>
                         )}
                       </div>
-                      <p className="font-mono text-xs uppercase tracking-wider text-[#EAE3D5]">{event.venueName}</p>
-                      <h3 className="mt-1 mb-3 font-serif text-xl font-bold leading-snug text-[#F6F1E7]">
+                      <p className="text-xs font-bold text-[#4F4D48]">{event.venueName}</p>
+                      <h3 className="mt-1 mb-3 font-display text-2xl font-extrabold leading-tight text-[#0A0A0C]">
                         <Link href={detailHref} className="hover:underline">
                           {title}
                         </Link>
                       </h3>
-                      <p className="text-xs text-[#C2B9AA]">
-                        <strong className="text-[#F6F1E7]">{w.addressLabel}</strong> {event.address} ·{' '}
-                        <strong className="text-[#F6F1E7]">{w.hoursLabel}</strong> {formatCapodannoHours35(event.hours, locale)}
+                      <p className="text-xs text-[#4F4D48]">
+                        <strong className="text-[#0A0A0C]">{w.addressLabel}</strong> {event.address} ·{' '}
+                        <strong className="text-[#0A0A0C]">{w.hoursLabel}</strong> {formatCapodannoHours35(event.hours, locale)}
                       </p>
-                      <p className="mt-2.5 text-sm leading-relaxed text-[#C2B9AA]">{description}</p>
+                      <p className="mt-2.5 text-sm leading-relaxed text-[#4F4D48]">{description}</p>
 
-                      <div className="mt-4 border border-[#F6F1E7]/12 bg-[#050505] p-3.5">
-                        <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-[#EAE3D5]">
+                      <div className="mt-4 border border-[#0A0A0C]/14 bg-[#EDEBE6] p-3.5">
+                        <p className="mb-2 text-xs font-bold text-[#0A0A0C]">
                           {w.priceTiersHeading}
                         </p>
                         <ul className="space-y-2 text-xs">
-                          {tiers.map((tier) => (
-                            <li key={tier.label} className="border-b border-[#F6F1E7]/8 pb-1.5 last:border-0 last:pb-0">
-                              <div className="flex items-baseline justify-between gap-2">
-                                <span className="font-semibold text-[#F6F1E7]">{tier.label}</span>
-                                <span className="shrink-0 font-bold text-[#EAE3D5]">{tier.price}</span>
+                          {tiers.slice(0, 3).map((tier) => (
+                            <li key={tier.label} className="border-b border-[#0A0A0C]/12 pb-1.5 last:border-0 last:pb-0">
+                              <div className="flex items-baseline justify-between gap-2 tabular-nums">
+                                <span className="font-semibold text-[#0A0A0C]">{tier.label}</span>
+                                <span className="shrink-0 font-bold text-[#0A0A0C]">{tier.price}</span>
                               </div>
-                              <p className="mt-0.5 text-[11px] text-[#C2B9AA]">{tier.details}</p>
+                              <p className="mt-0.5 text-xs text-[#4F4D48]">{tier.details}</p>
                             </li>
                           ))}
                         </ul>
                       </div>
 
-                      <div className="mt-3 flex flex-wrap gap-2 text-[11px] text-[#C2B9AA]">
-                        <span className="border border-[#F6F1E7]/12 bg-[#050505] px-2.5 py-1">
-                          <strong className="text-[#F6F1E7]">{ui.musicLabel}:</strong> {music}
+                      <div className="mt-3 flex flex-wrap gap-2 text-xs text-[#4F4D48]">
+                        <span className="border border-[#0A0A0C]/14 bg-[#EDEBE6] px-2.5 py-1">
+                          <strong className="text-[#0A0A0C]">{ui.musicLabel}:</strong> {music}
                         </span>
-                        <span className="border border-[#F6F1E7]/12 bg-[#050505] px-2.5 py-1">
-                          <strong className="text-[#F6F1E7]">{w.dressCodeLabel}:</strong> {dress}
+                        <span className="border border-[#0A0A0C]/14 bg-[#EDEBE6] px-2.5 py-1">
+                          <strong className="text-[#0A0A0C]">{w.dressCodeLabel}:</strong> {dress}
                         </span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="border-t border-[#F6F1E7]/12 bg-[#050505] px-5 py-3.5">
+                  <div className="border-t border-[#0A0A0C]/14 bg-[#FFFFFF] px-5 py-3.5">
                     <Link
                       href={detailHref}
                       data-capodanno-open-event={event.slug}
-                      className="inline-flex min-h-11 w-full items-center justify-center bg-[#F6F1E7] px-4 py-2.5 text-center text-xs font-bold uppercase tracking-wider text-[#050505] transition hover:bg-[#EAE3D5] sm:text-sm"
+                      className="inline-flex min-h-[46px] w-full items-center justify-center bg-[#0A0A0C] px-4 py-2.5 text-center text-xs font-bold uppercase text-[#FFFFFF] transition hover:bg-[#D9381E] sm:text-sm"
                     >
                       {scarcity.openEventCardCta}
                     </Link>

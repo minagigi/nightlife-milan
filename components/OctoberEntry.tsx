@@ -187,7 +187,7 @@ export function HomeHalloweenAndCapodannoSections({
         ? 'NEW YEAR’S EVE AT REPVBLIC MILANO 2027: Piazza della Repubblica 12'
         : 'NEW YEAR’S EVE AT REPVBLIC MILANO 2027 · Piazza della Repubblica 12',
       priceLabel: isIt
-        ? 'Tariffe ufficiali confermate: Early Bird 45€ (flûte + 1 drink) · Tavolo Dancefloor 600€ (6 pax) · Privé 1.200€ (10 pax)'
+        ? 'Tariffe ufficiali confermate: Early Bird 45€ (flûte + 1 drink) · Tavolo Dancefloor 600€ (6 ospiti) · Privé 1.200€ (10 ospiti)'
         : 'Confirmed official rates: Early Bird €45 (flûte + 1 drink) · Dancefloor Table €600 (6 guests) · Privé €1,200 (10 guests)',
       posterSrc: '/images/events/capodanno-2027-posters/capodanno-repvblic-milano.webp',
       href: capodannoEventPath('capodanno-repvblic-milano', locale),
@@ -196,69 +196,69 @@ export function HomeHalloweenAndCapodannoSections({
   ];
 
   return (
-    <div className="w-full bg-[#050505]" data-october-entry>
-      {/* ── SEZIONE DEDICATA 1: SERATE DELLA SETTIMANA NEI 6 CLUB SIMBOLO (#F6F1E7 Avorio Caldo) ─── */}
+    <div className="w-full bg-[#0A0A0C]" data-october-entry>
+      {/* ── SEZIONE DEDICATA 1: SERATE DELLA SETTIMANA NEI 6 CLUB SIMBOLO (#EDEBE6 Carta S17) ─── */}
       <section
         id="serate-settimana"
         data-home-weekly-priority-section
-        className="w-full border-b border-[#050505]/15 bg-[#F6F1E7] text-[#050505]"
+        className="w-full border-b border-[#0A0A0C]/16 bg-[#EDEBE6] text-[#0A0A0C]"
       >
-        <div className="mx-auto max-w-[1440px] border-x border-[#050505]/15 px-5 py-14 sm:px-14 sm:py-20">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-10 border-b border-[#050505]/15">
+        <div className="mx-auto max-w-[1440px] border-x border-[#0A0A0C]/16 px-5 py-14 sm:px-14 sm:py-20">
+          <div className="flex flex-col justify-between gap-6 border-b border-[#0A0A0C]/16 pb-10 lg:flex-row lg:items-end">
             <div className="max-w-3xl">
-              <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#3D3830] flex items-center gap-2 mb-3">
-                <Sparkles aria-hidden="true" className="h-4 w-4 shrink-0 text-[#050505]" />
+              <h2 className="font-display text-3xl font-extrabold uppercase leading-[0.95] text-[#0A0A0C] sm:text-[42px]">
+                {isIt
+                  ? 'Serate dei 6 Club Simbolo'
+                  : 'Milan’s 6 Flagship Club Nights'}
+              </h2>
+              <p className="mt-3 flex items-center gap-2 text-[13px] font-bold text-[#B5240D]">
+                <Sparkles aria-hidden="true" className="h-4 w-4 shrink-0 text-[#B5240D]" />
                 {isIt
                   ? 'PROGRAMMAZIONE SETTIMANALE UFFICIALE · DAL LUNEDÌ ALLA DOMENICA · MILANO'
                   : 'OFFICIAL WEEKLY SCHEDULE · MONDAY TO SUNDAY · MILAN'}
               </p>
-              <h2 className="font-serif text-3xl sm:text-5xl font-normal text-[#050505] tracking-[-0.025em] leading-[0.96]">
-                {isIt
-                  ? 'Le Serate della Settimana a Milano: I 6 Club Simbolo in Ordine di Scelta'
-                  : 'Weekly Nights in Milan: The 6 Flagship Clubs in Priority Order'}
-              </h2>
-              <p className="mt-4 font-sans text-sm sm:text-base text-[#24201B] leading-relaxed">
+              <p className="mt-4 max-w-[48ch] font-sans text-base leading-relaxed text-[#4F4D48]">
                 {isIt
                   ? 'In primo piano le serate settimanali dei 6 club simbolo della notte milanese (1. Just Me aperto 7/7, 2. Pineta Club, 3. Aria Club San Siro, 4. 55 Milano, 5. Voya Rooftop 20° Piano, 6. Repvblic) con Royal Aperitivo, Dinner Show, Liste e Tavoli VIP.'
                   : 'Featuring the weekly club nights across Milan’s 6 flagship venues (1. Just Me open 7/7, 2. Pineta Club, 3. Aria Club San Siro, 4. 55 Milano, 5. Voya Rooftop 20th Floor, 6. Repvblic) with Royal Aperitivo, Dinner Shows, Guest Lists, and VIP Tables.'}
               </p>
             </div>
-            <div className="flex flex-wrap gap-3 shrink-0">
+            <div className="flex shrink-0 flex-wrap gap-3">
               <Link
                 href={`${prefix}/events/this-week`}
                 prefetch={false}
-                className="inline-flex min-h-[48px] items-center justify-center bg-[#050505] px-6 py-3.5 font-mono text-xs font-bold uppercase tracking-[0.12em] text-[#F6F1E7] hover:bg-[#1C1A17] transition-colors"
+                className="nlm-pressable inline-flex min-h-[48px] items-center justify-center bg-[#D9381E] px-6 py-3.5 text-[13px] font-bold uppercase text-[#FFFFFF] transition-colors hover:bg-[#B82B14]"
               >
                 {isIt ? 'Serate di Questa Settimana ↗' : 'This Week’s Nights ↗'}
               </Link>
               <Link
                 href={`${prefix}/events/tonight`}
                 prefetch={false}
-                className="inline-flex min-h-[48px] items-center justify-center border border-[#050505]/30 bg-[#EFE9DC] px-5 py-3.5 font-mono text-xs font-semibold uppercase tracking-[0.12em] text-[#050505] hover:bg-[#050505] hover:text-[#F6F1E7] transition-colors"
+                className="nlm-pressable inline-flex min-h-[48px] items-center justify-center border border-[#0A0A0C]/30 bg-[#FFFFFF] px-5 py-3.5 text-[13px] font-bold uppercase text-[#0A0A0C] transition-colors hover:bg-[#0A0A0C] hover:text-[#FFFFFF]"
               >
                 {isIt ? 'Club Aperti Stasera ↗' : 'Clubs Open Tonight ↗'}
               </Link>
               <Link
                 href={`${prefix}/events/october-2026`}
                 prefetch={false}
-                className="inline-flex min-h-[48px] items-center justify-center border border-[#050505]/30 bg-[#EFE9DC] px-5 py-3.5 font-mono text-xs font-semibold uppercase tracking-[0.12em] text-[#050505] hover:bg-[#050505] hover:text-[#F6F1E7] transition-colors"
+                className="nlm-pressable inline-flex min-h-[48px] items-center justify-center border border-[#0A0A0C]/30 bg-[#FFFFFF] px-5 py-3.5 text-[13px] font-bold uppercase text-[#0A0A0C] transition-colors hover:bg-[#0A0A0C] hover:text-[#FFFFFF]"
               >
-                <CalendarDays aria-hidden="true" className="mr-2 h-4 w-4 text-[#050505]" />
+                <CalendarDays aria-hidden="true" className="mr-2 h-4 w-4 text-[#0A0A0C]" />
                 {octoberHeading} ↗
               </Link>
             </div>
           </div>
 
           {/* Griglia 6 Club Simbolo con Serate della Settimana */}
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
             {weeklyPriorityCards.map((card) => (
               <div
                 key={card.venue}
-                className="flex flex-col justify-between overflow-hidden border border-[#050505]/18 bg-[#EFE9DC] hover:border-[#050505] transition-colors"
+                className="flex flex-col justify-between overflow-hidden border border-[#0A0A0C]/16 bg-[#FFFFFF] transition-colors hover:border-[#0A0A0C]"
                 data-priority-weekly-card={card.venue}
               >
                 <div>
-                  <Link href={card.href} prefetch={false} className="block border-b border-[#050505]/15 bg-[#050505]">
+                  <Link href={card.href} prefetch={false} className="block border-b border-[#0A0A0C]/14 bg-[#0A0A0C]">
                     <img
                       src={card.posterSrc}
                       alt={card.title}
@@ -269,31 +269,32 @@ export function HomeHalloweenAndCapodannoSections({
                   <div className="p-6 pb-2">
                     <div className="mb-2.5">
                       <span
-                        className="inline-flex border border-[#050505] bg-[#050505] px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#F6F1E7]"
+                        className="inline-flex bg-[#0A0A0C] px-3 py-1 text-[13px] font-bold text-[#FFFFFF]"
                         data-selling-fast-badge
                         data-almost-sold-out-badge
                       >
                         {scarcity.almostSoldOutBadge}
                       </span>
                     </div>
-                    <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-[#3D3830]">{card.rank}</p>
-                    <p className="mt-1 font-mono text-xs uppercase tracking-[0.12em] text-[#3D3830]">{card.venue}</p>
-                    <h3 className="mt-2 font-serif text-2xl text-[#050505] leading-snug">
-                      <Link href={card.href} prefetch={false} className="hover:underline transition-colors">
+                    <h3 className="font-display text-lg font-bold leading-snug text-[#0A0A0C] sm:text-xl">
+                      <Link href={card.href} prefetch={false} className="transition-colors hover:underline">
                         {card.title}
                       </Link>
                     </h3>
-                    <p className="mt-3 text-sm text-[#24201B] leading-relaxed">{card.desc}</p>
+                    <p className="mt-1.5 text-[13px] font-bold text-[#0A0A0C]">
+                      {card.venue} · <span className="text-[#4F4D48]">{card.rank}</span>
+                    </p>
+                    <p className="mt-2.5 max-w-[48ch] text-base leading-relaxed text-[#4F4D48]">{card.desc}</p>
                   </div>
                 </div>
-                <div className="p-6 pt-4 mt-3 border-t border-[#050505]/15 flex flex-col gap-3">
-                  <span className="inline-block font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-[#050505]">
+                <div className="mt-3 flex flex-col gap-3 border-t border-[#0A0A0C]/12 p-6 pt-4">
+                  <span className="inline-block text-[13px] font-bold text-[#0A0A0C]">
                     {card.badge}
                   </span>
                   <Link
                     href={card.href}
                     prefetch={false}
-                    className="inline-flex min-h-[44px] w-full items-center justify-center gap-1.5 bg-[#050505] px-4 py-2.5 font-mono text-xs font-bold uppercase tracking-[0.12em] text-[#F6F1E7] hover:bg-[#1C1A17] transition-colors"
+                    className="inline-flex min-h-[46px] w-full items-center justify-center gap-1.5 bg-[#0A0A0C] px-4 py-2.5 text-[13px] font-bold uppercase text-[#FFFFFF] transition-colors hover:bg-[#D9381E]"
                   >
                     {scarcity.openEventCardCta}
                   </Link>
@@ -308,49 +309,49 @@ export function HomeHalloweenAndCapodannoSections({
       <section
         id="capodanno-2027"
         data-home-capodanno-section
-        className="w-full border-b border-[#F6F1E7]/14 bg-[#050505]"
+        className="w-full border-b border-white/14 bg-[#0A0A0C]"
       >
-        <div className="mx-auto max-w-[1440px] border-x border-[#F6F1E7]/14 px-5 py-14 sm:px-14 sm:py-20">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-8 border-b border-[#F6F1E7]/14">
+        <div className="mx-auto max-w-[1440px] border-x border-white/14 px-5 py-14 sm:px-14 sm:py-20">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-8 border-b border-white/14">
             <div className="max-w-3xl">
-              <p className="font-mono text-xs uppercase tracking-[0.14em] text-[#EAE3D5] flex items-center gap-2 mb-3">
-                <Sparkles aria-hidden="true" className="h-4 w-4 shrink-0 text-[#F6F1E7]" />
+              <h2 className="font-display text-3xl sm:text-5xl font-extrabold uppercase text-[#FFFFFF] leading-[0.95]">
                 {isIt
-                  ? 'SEZIONE SPECIALE CAPODANNO 2027 · 125 EVENTI UFFICIALI (31 DICEMBRE 2026)'
-                  : 'NEW YEAR’S EVE 2027 DEDICATED SECTION · 125 OFFICIAL EVENTS (DEC 31, 2026)'}
-              </p>
-              <h2 className="font-serif text-3xl sm:text-5xl font-normal text-[#F6F1E7] tracking-[-0.025em] leading-[0.96]">
-                {isIt
-                  ? 'Tutti i 77 Locali e Discoteche di Milano, Just Me Lago di Garda, 18 Capodanni Speciali, 12 Province Lombarde & Piazze Gratis'
-                  : 'All 77 Milan Clubs & Venues, Just Me Lake Garda, 18 Special NYE Experiences, All 12 Lombardy Provinces & Free Squares'}
+                  ? 'Capodanno 2027 a Milano: 125 Eventi e Cenoni'
+                  : 'Milan NYE 2027: 125 Events, Galas & Tables'}
               </h2>
-              <p className="mt-4 font-sans text-sm sm:text-base text-[#C2B9AA] leading-relaxed">
+              <p className="mt-3 text-[13px] font-bold text-[#F35A3F] flex items-center gap-2">
+                <Sparkles aria-hidden="true" className="h-4 w-4 shrink-0 text-[#F35A3F]" />
                 {isIt
-                  ? 'In prima fila i club e rooftop simbolo (Just Me Milano, Just Me Lago di Garda "Just Me in Rouge", Pineta, Aria, 55 Milano, Voya Rooftop con menu completo a 300€ a persona, Repvblic, Bischeri Milano e PERREO XL @ Gate), seguiti da tutti i 125 eventi di San Silvestro.'
-                  : 'Starting with our priority venues (Just Me Milan, Just Me Lake Garda "Just Me in Rouge", Pineta, Aria, 55 Milano, Voya Rooftop with full all-inclusive menu at €300/person, Repvblic, Bischeri Milano, and PERREO XL @ Gate), followed by all 125 New Year’s Eve events.'}
+                  ? '77 Locali a Milano · Just Me Lago di Garda · 18 Capodanni Speciali · 12 Province Lombarde · Piazze Gratis'
+                  : '77 Milan Clubs · Just Me Lake Garda · 18 Special NYE Galas · 12 Lombardy Provinces · Free Squares'}
+              </p>
+              <p className="mt-4 max-w-[48ch] font-sans text-base text-[#EDEBE6] leading-relaxed">
+                {isIt
+                  ? 'In prima fila i club e rooftop simbolo (Just Me Milano, Just Me Lago di Garda "Just Me in Rouge", Pineta, Aria, 55 Milano, Voya Rooftop con menu completo a 300€ a persona, Repvblic, Bischeri Milano e PERREO XL @ Gate), seguiti da tutti i 125 eventi ufficiali del 31 dicembre 2026.'
+                  : 'Starting with our priority venues (Just Me Milan, Just Me Lake Garda "Just Me in Rouge", Pineta, Aria, 55 Milano, Voya Rooftop with full all-inclusive menu at €300/person, Repvblic, Bischeri Milano, and PERREO XL @ Gate), followed by all 125 official December 31, 2026 events.'}
               </p>
             </div>
             <div className="flex flex-wrap gap-3 shrink-0">
               <Link
                 href={capodannoPath(locale)}
                 prefetch={false}
-                className="inline-flex min-h-[48px] items-center justify-center bg-[#F6F1E7] px-6 py-3.5 font-mono text-xs font-bold uppercase tracking-[0.12em] text-[#050505] hover:bg-[#EAE3D5] transition-colors"
+                className="nlm-pressable inline-flex min-h-[48px] items-center justify-center bg-[#FFFFFF] px-6 py-3.5 text-[13px] font-bold text-[#0A0A0C] hover:bg-[#EDEBE6] transition-colors"
               >
                 {isIt ? 'Tutti i 125 Eventi di Capodanno ↗' : 'All 125 NYE 2027 Events ↗'}
               </Link>
               <Link
                 href={capodannoCategoryPath('capodanno-rooftop-milano', locale)}
                 prefetch={false}
-                className="inline-flex min-h-[48px] items-center justify-center border border-[#F6F1E7]/45 bg-[#0B0A09] px-5 py-3.5 font-mono text-xs font-semibold uppercase tracking-[0.12em] text-[#F6F1E7] hover:bg-[#F6F1E7] hover:text-[#050505] transition-colors"
+                className="nlm-pressable inline-flex min-h-[48px] items-center justify-center border border-white/40 bg-[#18181C] px-5 py-3.5 text-[13px] font-bold text-[#FFFFFF] hover:bg-[#FFFFFF] hover:text-[#0A0A0C] transition-colors"
               >
                 {isIt ? 'Voya Rooftop #1 Milano (300€) ↗' : 'Voya Rooftop #1 Milan (€300) ↗'}
               </Link>
             </div>
           </div>
 
-          {/* Avviso Prezzi Passati e Possibili Cambiamenti (#F6F1E7 Avorio Caldo) */}
-          <div className="mt-6 border border-[#F6F1E7] bg-[#F6F1E7] px-5 py-4 text-xs sm:text-sm text-[#050505]">
-            <span className="font-mono font-bold uppercase tracking-wider text-[#050505]">
+          {/* Avviso Prezzi Passati e Possibili Cambiamenti (#EDEBE6 Carta Calda) */}
+          <div className="mt-6 border border-[#0A0A0C]/16 bg-[#EDEBE6] px-5 py-4 text-base text-[#0A0A0C]">
+            <span className="font-bold text-[#B5240D]">
               {isIt ? 'NOTA TARIFFE E PROGRAMMA CAPODANNO: ' : 'NYE RATES & PROGRAMME NOTICE: '}
             </span>
             <span>
@@ -370,12 +371,12 @@ export function HomeHalloweenAndCapodannoSections({
                 data-priority-capodanno-card={card.venue}
                 className={`group flex flex-col justify-between overflow-hidden border transition-colors ${
                   card.highlight
-                    ? 'border-[#F6F1E7] bg-[#0B0A09] hover:border-[#25D366]'
-                    : 'border-[#F6F1E7]/25 bg-[#0B0A09] hover:border-[#F6F1E7]'
+                    ? 'border-white bg-[#18181C] hover:border-[#25D366]'
+                    : 'border-white/25 bg-[#18181C] hover:border-white'
                 }`}
               >
                 <div>
-                  <div className="border-b border-[#F6F1E7]/12 bg-[#050505]">
+                  <div className="border-b border-white/12 bg-[#0A0A0C]">
                     <img
                       src={card.posterSrc}
                       alt={card.title}
@@ -386,22 +387,23 @@ export function HomeHalloweenAndCapodannoSections({
                   <div className="p-6 pb-2">
                     <div className="mb-2.5">
                       <span
-                        className="inline-flex border border-[#F6F1E7]/45 bg-[#050505] px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#F6F1E7]"
+                        className="inline-flex border border-white/40 bg-[#0A0A0C] px-3 py-1 text-[13px] font-bold text-[#FFFFFF]"
                         data-selling-fast-badge
                       >
                         {scarcity.sellingFastBadge}
                       </span>
                     </div>
-                    <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-[#EAE3D5]">{card.rank}</p>
-                    <p className="mt-1 font-mono text-xs uppercase tracking-[0.12em] text-[#847C6F]">{card.venue}</p>
-                    <h3 className="mt-2 font-serif text-2xl text-[#F6F1E7] group-hover:underline transition-colors leading-snug">
+                    <h3 className="font-display text-lg font-bold text-[#FFFFFF] group-hover:underline transition-colors leading-snug sm:text-xl">
                       {card.title}
                     </h3>
-                    <p className="mt-3 font-mono text-xs font-bold text-[#F6F1E7]">{card.priceLabel}</p>
-                    <p className="mt-1.5 text-[11px] italic text-[#C2B9AA]">{pastNotice}</p>
+                    <p className="mt-1.5 text-[13px] font-semibold text-[#C9C7C2]">
+                      <span className="font-bold text-[#EDEBE6]">{card.venue}</span> · {card.rank}
+                    </p>
+                    <p className="mt-3 text-base font-bold tabular-nums text-[#F35A3F]">{card.priceLabel}</p>
+                    <p className="mt-1.5 text-[13px] italic text-[#C9C7C2]">{pastNotice}</p>
                   </div>
                 </div>
-                <div className="p-6 pt-4 mt-3 border-t border-[#F6F1E7]/12 flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.12em] text-[#EAE3D5]">
+                <div className="p-6 pt-4 mt-3 border-t border-white/14 flex items-center justify-between text-[13px] font-bold text-[#EDEBE6]">
                   <span>{scarcity.openEventCardCta}</span>
                   <ArrowRight aria-hidden="true" className="h-4 w-4" />
                 </div>
@@ -411,33 +413,33 @@ export function HomeHalloweenAndCapodannoSections({
 
           {/* 4 Hub Principali Capodanno + 12 Categorie */}
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
-            <Link href={capodannoPath(locale)} prefetch={false} className="bg-[#F6F1E7] p-4 text-center font-mono text-xs font-bold uppercase tracking-wider text-[#050505] hover:bg-[#EAE3D5] transition-colors">
-              {isIt ? '01 · Tutti i 125 Eventi Ufficiali ↗' : '01 · All 125 Official Events ↗'}
+            <Link href={capodannoPath(locale)} prefetch={false} className="nlm-pressable bg-[#EDEBE6] p-4 text-center text-[13px] font-bold text-[#0A0A0C] hover:bg-[#FFFFFF] transition-colors">
+              {isIt ? 'Tutti i 125 Eventi Ufficiali ↗' : 'All 125 Official Events ↗'}
             </Link>
-            <Link href={capodannoCategoryPath('capodanno-speciale', locale)} prefetch={false} className="border border-[#F6F1E7]/35 bg-[#0B0A09] p-4 text-center font-mono text-xs uppercase tracking-wider text-[#F6F1E7] hover:border-[#F6F1E7] transition-colors">
-              {isIt ? '02 · 18 Speciali, Tram & Terme ↗' : '02 · 18 Special, Tram & Spa ↗'}
+            <Link href={capodannoCategoryPath('capodanno-speciale', locale)} prefetch={false} className="nlm-pressable border border-white/25 bg-[#18181C] p-4 text-center text-[13px] font-bold text-[#FFFFFF] hover:border-[#FFFFFF] transition-colors">
+              {isIt ? '18 Speciali, Tram & Terme ↗' : '18 Special, Tram & Spa ↗'}
             </Link>
-            <Link href={capodannoCategoryPath('capodanno-lombardia', locale)} prefetch={false} className="border border-[#F6F1E7]/35 bg-[#0B0A09] p-4 text-center font-mono text-xs uppercase tracking-wider text-[#F6F1E7] hover:border-[#F6F1E7] transition-colors">
-              {isIt ? '03 · Tutte le 12 Province ↗' : '03 · All 12 Provinces ↗'}
+            <Link href={capodannoCategoryPath('capodanno-lombardia', locale)} prefetch={false} className="nlm-pressable border border-white/25 bg-[#18181C] p-4 text-center text-[13px] font-bold text-[#FFFFFF] hover:border-[#FFFFFF] transition-colors">
+              {isIt ? 'Tutte le 12 Province ↗' : 'All 12 Provinces ↗'}
             </Link>
-            <Link href={capodannoCategoryPath('capodanno-in-piazza', locale)} prefetch={false} className="border border-[#F6F1E7]/35 bg-[#0B0A09] p-4 text-center font-mono text-xs uppercase tracking-wider text-[#F6F1E7] hover:border-[#F6F1E7] transition-colors">
-              {isIt ? '04 · Capodanno in Piazza Gratis ↗' : '04 · Free Public Squares ↗'}
+            <Link href={capodannoCategoryPath('capodanno-in-piazza', locale)} prefetch={false} className="nlm-pressable border border-white/25 bg-[#18181C] p-4 text-center text-[13px] font-bold text-[#FFFFFF] hover:border-[#FFFFFF] transition-colors">
+              {isIt ? 'Capodanno in Piazza Gratis ↗' : 'Free Public Squares ↗'}
             </Link>
           </div>
 
-          <div className="mt-5 pt-5 border-t border-[#F6F1E7]/15 flex flex-wrap gap-2">
-            <Link href={capodannoCategoryPath('capodanno-rooftop-milano', locale)} prefetch={false} className="px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider border border-[#F6F1E7] bg-[#0B0A09] text-[#F6F1E7] hover:bg-[#F6F1E7] hover:text-[#050505] transition-colors">{isIt ? 'Rooftop & Terrazze (Voya N°1 · 300€)' : 'Rooftops (Voya #1 · €300)'}</Link>
-            <Link href={capodannoCategoryPath('capodanno-discoteche-milano', locale)} prefetch={false} className="px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider border border-[#F6F1E7]/30 bg-[#050505] text-[#EAE3D5] hover:bg-[#F6F1E7] hover:text-[#050505] transition-colors">{isIt ? 'Discoteche & Club' : 'Nightclubs'}</Link>
-            <Link href={capodannoCategoryPath('capodanno-locali-cenone-milano', locale)} prefetch={false} className="px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider border border-[#F6F1E7]/30 bg-[#050505] text-[#EAE3D5] hover:bg-[#F6F1E7] hover:text-[#050505] transition-colors">{isIt ? 'Locali & Cenone Show' : 'Dinner Shows'}</Link>
-            <Link href={capodannoCategoryPath('capodanno-coppie-romantico-milano', locale)} prefetch={false} className="px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider border border-[#F6F1E7]/30 bg-[#050505] text-[#EAE3D5] hover:bg-[#F6F1E7] hover:text-[#050505] transition-colors">{isIt ? 'Per Coppie (Romantico)' : 'For Couples'}</Link>
-            <Link href={capodannoCategoryPath('capodanno-single-milano', locale)} prefetch={false} className="px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider border border-[#F6F1E7]/30 bg-[#050505] text-[#EAE3D5] hover:bg-[#F6F1E7] hover:text-[#050505] transition-colors">{isIt ? 'Per Single & Amici' : 'For Singles'}</Link>
-            <Link href={capodannoCategoryPath('capodanno-famiglie-bambini-milano', locale)} prefetch={false} className="px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider border border-[#F6F1E7]/30 bg-[#050505] text-[#EAE3D5] hover:bg-[#F6F1E7] hover:text-[#050505] transition-colors">{isIt ? 'Per Famiglie & Bimbi' : 'For Families'}</Link>
-            <Link href={capodannoCategoryPath('capodanno-over-30-40-milano', locale)} prefetch={false} className="px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider border border-[#F6F1E7]/30 bg-[#050505] text-[#EAE3D5] hover:bg-[#F6F1E7] hover:text-[#050505] transition-colors">{isIt ? 'Over 30 / Over 40' : 'Adults 30+/40+'}</Link>
-            <Link href={capodannoCategoryPath('capodanno-hotel-5-stelle-ville-castelli', locale)} prefetch={false} className="px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider border border-[#F6F1E7]/30 bg-[#050505] text-[#EAE3D5] hover:bg-[#F6F1E7] hover:text-[#050505] transition-colors">{isIt ? 'Hotel 5★ & Ville' : '5★ Hotels & Villas'}</Link>
-            <Link href={capodannoCategoryPath('capodanno-terme-spa-baita-montagna', locale)} prefetch={false} className="px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider border border-[#F6F1E7]/30 bg-[#050505] text-[#EAE3D5] hover:bg-[#F6F1E7] hover:text-[#050505] transition-colors">{isIt ? 'Terme & Baita Neve' : 'Spas & Chalets'}</Link>
-            <Link href={capodannoCategoryPath('capodanno-techno-elettronica-milano', locale)} prefetch={false} className="px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider border border-[#F6F1E7]/30 bg-[#050505] text-[#EAE3D5] hover:bg-[#F6F1E7] hover:text-[#050505] transition-colors">{isIt ? 'Techno & House' : 'Techno & House'}</Link>
-            <Link href={capodannoCategoryPath('capodanno-latino-reggaeton-hiphop-milano', locale)} prefetch={false} className="px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider border border-[#F6F1E7]/30 bg-[#050505] text-[#EAE3D5] hover:bg-[#F6F1E7] hover:text-[#050505] transition-colors">{isIt ? 'Reggaeton & Latino' : 'Reggaeton & Latin'}</Link>
-            <Link href={capodannoCategoryPath('capodanno-economico-low-cost-milano', locale)} prefetch={false} className="px-3 py-1.5 text-[11px] font-mono uppercase tracking-wider border border-[#F6F1E7]/30 bg-[#050505] text-[#EAE3D5] hover:bg-[#F6F1E7] hover:text-[#050505] transition-colors">{isIt ? 'Economico ≤35€' : 'Budget ≤€35'}</Link>
+          <div className="mt-5 pt-5 border-t border-white/15 flex flex-wrap gap-2">
+            <Link href={capodannoCategoryPath('capodanno-rooftop-milano', locale)} prefetch={false} className="px-3.5 py-2 text-[13px] font-bold border border-[#FFFFFF] bg-[#18181C] text-[#FFFFFF] hover:bg-[#FFFFFF] hover:text-[#0A0A0C] transition-colors">{isIt ? 'Rooftop & Terrazze (Voya N°1 · 300€)' : 'Rooftops (Voya #1 · €300)'}</Link>
+            <Link href={capodannoCategoryPath('capodanno-discoteche-milano', locale)} prefetch={false} className="px-3.5 py-2 text-[13px] font-semibold border border-white/25 bg-[#0A0A0C] text-[#EDEBE6] hover:bg-[#FFFFFF] hover:text-[#0A0A0C] transition-colors">{isIt ? 'Discoteche & Club' : 'Nightclubs'}</Link>
+            <Link href={capodannoCategoryPath('capodanno-locali-cenone-milano', locale)} prefetch={false} className="px-3.5 py-2 text-[13px] font-semibold border border-white/25 bg-[#0A0A0C] text-[#EDEBE6] hover:bg-[#FFFFFF] hover:text-[#0A0A0C] transition-colors">{isIt ? 'Locali & Cenone Show' : 'Dinner Shows'}</Link>
+            <Link href={capodannoCategoryPath('capodanno-coppie-romantico-milano', locale)} prefetch={false} className="px-3.5 py-2 text-[13px] font-semibold border border-white/25 bg-[#0A0A0C] text-[#EDEBE6] hover:bg-[#FFFFFF] hover:text-[#0A0A0C] transition-colors">{isIt ? 'Per Coppie (Romantico)' : 'For Couples'}</Link>
+            <Link href={capodannoCategoryPath('capodanno-single-milano', locale)} prefetch={false} className="px-3.5 py-2 text-[13px] font-semibold border border-white/25 bg-[#0A0A0C] text-[#EDEBE6] hover:bg-[#FFFFFF] hover:text-[#0A0A0C] transition-colors">{isIt ? 'Per Single & Amici' : 'For Singles'}</Link>
+            <Link href={capodannoCategoryPath('capodanno-famiglie-bambini-milano', locale)} prefetch={false} className="px-3.5 py-2 text-[13px] font-semibold border border-white/25 bg-[#0A0A0C] text-[#EDEBE6] hover:bg-[#FFFFFF] hover:text-[#0A0A0C] transition-colors">{isIt ? 'Per Famiglie & Bimbi' : 'For Families'}</Link>
+            <Link href={capodannoCategoryPath('capodanno-over-30-40-milano', locale)} prefetch={false} className="px-3.5 py-2 text-[13px] font-semibold border border-white/25 bg-[#0A0A0C] text-[#EDEBE6] hover:bg-[#FFFFFF] hover:text-[#0A0A0C] transition-colors">{isIt ? 'Over 30 / Over 40' : 'Adults 30+/40+'}</Link>
+            <Link href={capodannoCategoryPath('capodanno-hotel-5-stelle-ville-castelli', locale)} prefetch={false} className="px-3.5 py-2 text-[13px] font-semibold border border-white/25 bg-[#0A0A0C] text-[#EDEBE6] hover:bg-[#FFFFFF] hover:text-[#0A0A0C] transition-colors">{isIt ? 'Hotel 5 Stelle & Ville' : '5-Star Hotels & Villas'}</Link>
+            <Link href={capodannoCategoryPath('capodanno-terme-spa-baita-montagna', locale)} prefetch={false} className="px-3.5 py-2 text-[13px] font-semibold border border-white/25 bg-[#0A0A0C] text-[#EDEBE6] hover:bg-[#FFFFFF] hover:text-[#0A0A0C] transition-colors">{isIt ? 'Terme & Baita Neve' : 'Spas & Chalets'}</Link>
+            <Link href={capodannoCategoryPath('capodanno-techno-elettronica-milano', locale)} prefetch={false} className="px-3.5 py-2 text-[13px] font-semibold border border-white/25 bg-[#0A0A0C] text-[#EDEBE6] hover:bg-[#FFFFFF] hover:text-[#0A0A0C] transition-colors">{isIt ? 'Techno & House' : 'Techno & House'}</Link>
+            <Link href={capodannoCategoryPath('capodanno-latino-reggaeton-hiphop-milano', locale)} prefetch={false} className="px-3.5 py-2 text-[13px] font-semibold border border-white/25 bg-[#0A0A0C] text-[#EDEBE6] hover:bg-[#FFFFFF] hover:text-[#0A0A0C] transition-colors">{isIt ? 'Reggaeton & Latino' : 'Reggaeton & Latin'}</Link>
+            <Link href={capodannoCategoryPath('capodanno-economico-low-cost-milano', locale)} prefetch={false} className="px-3.5 py-2 text-[13px] font-semibold border border-white/25 bg-[#0A0A0C] text-[#EDEBE6] hover:bg-[#FFFFFF] hover:text-[#0A0A0C] transition-colors">{isIt ? 'Economico ≤35€' : 'Budget ≤€35'}</Link>
           </div>
         </div>
       </section>

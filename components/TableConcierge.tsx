@@ -8,6 +8,7 @@ import { localePrefix } from '@/lib/i18n/locales';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { getDateSensitiveEvents, millisecondsUntilNextDateSensitiveChange } from '@/lib/dateSensitiveView';
 import { tableConciergeContext, tableConciergeDays, tableConciergeEventsForDay, type TableConciergeEvent } from '@/lib/tableConcierge';
+import { Check } from 'lucide-react';
 import { getTableConciergeControlCopy } from '@/lib/tableConciergeCopy';
 import styles from './TableConcierge.module.css';
 
@@ -126,16 +127,16 @@ export default function TableConcierge({ locale, events, initialNow, copy, surfa
           />
         </div>
         <div className={styles.heroCopy}>
-          <p className={styles.eyebrow}>{copy.eyebrow}</p>
           {surface === 'home'
-            ? <h1 id={`tc-title-${surface}`} className={styles.title}>{copy.title}</h1>
-            : <h2 id={`tc-title-${surface}`} className={styles.title}>{copy.title}</h2>}
-          <p className={styles.lead}>{copy.lead}</p>
+            ? <h1 id={`tc-title-${surface}`} className={styles.title} data-reveal="rise">{copy.title}</h1>
+            : <h2 id={`tc-title-${surface}`} className={styles.title} data-reveal="rise">{copy.title}</h2>}
+          <p className={styles.lead} data-reveal="rise" data-stagger="1">{copy.lead}</p>
+          <p className={styles.subNote} data-reveal="rise" data-stagger="2">{copy.eyebrow}</p>
           {homeIntro && <>
             <p className={styles.legacyIntro}>{homeIntro.sub}</p>
             <p className={styles.pills}>{homeIntro.pills}</p>
           </>}
-          <a className={styles.primaryLink} href={`#tc-request-${surface}`}>{copy.heroAnchorAction || copy.requestAction}<span aria-hidden="true">↓</span></a>
+          <a className={`${styles.primaryLink} nlm-pressable`} href={`#tc-request-${surface}`}>{copy.heroAnchorAction || copy.requestAction}<span aria-hidden="true">↓</span></a>
           {homeIntro && <div className={styles.heroLinks}>
             <Link href={`${lp}/events/tonight`} prefetch={false}>{homeIntro.ctaSub} ↓</Link>
             <Link href={`${lp}/clubs`} prefetch={false}>{homeIntro.allVenues} ↗</Link>
@@ -143,8 +144,7 @@ export default function TableConcierge({ locale, events, initialNow, copy, surfa
           <p className={styles.heroNote}>{copy.disclaimer}</p>
         </div>
         </>}
-        <div ref={requestRef} className={styles.request} id={`tc-request-${surface}`}>
-          <p className={styles.requestOverline}>Nightlife Milan / Concierge</p>
+        <div ref={requestRef} className={styles.request} id={`tc-request-${surface}`} data-ui="concierge-form">
           <p className={styles.requestTitle} id={`tc-request-title-${surface}`}>{copy.requestTitle}</p>
           {days.length > 0 ? (
             <>
@@ -206,7 +206,10 @@ export default function TableConcierge({ locale, events, initialNow, copy, surfa
               {copy.trustBadges && (
                 <div className={styles.trustRow}>
                   {copy.trustBadges.map((badge) => (
-                    <span key={badge} className={styles.trustBadge}>✓ {badge}</span>
+                    <span key={badge} className={styles.trustBadge}>
+                      <Check className="mr-1 inline-block h-3.5 w-3.5 shrink-0 text-[#0A0A0C]" aria-hidden="true" />
+                      {badge}
+                    </span>
                   ))}
                 </div>
               )}
@@ -231,7 +234,7 @@ export default function TableConcierge({ locale, events, initialNow, copy, surfa
       </div>
       {showEventList && <div className={styles.events} id={`tc-events-${surface}`}>
         <div className={styles.eventsHead}>
-          <div><p className={styles.eyebrow}>{copy.eyebrow}</p><h2>{copy.eventsTitle}</h2></div>
+          <div><h2>{copy.eventsTitle}</h2><p className={styles.subNote}>{copy.eyebrow}</p></div>
           <p>{copy.eventsLead}</p>
         </div>
         {day && <div className={styles.dayTabs} role="group" aria-label={controlCopy.date}>

@@ -3,11 +3,20 @@ import type { LocaleCode } from '@/lib/i18n/locales';
 import { Metadata } from 'next';
 import MfwEntry from '@/components/MfwEntry';
 import OctoberEntry from '@/components/OctoberEntry';
+import HomePosterCarousel, { type HomePosterSlide } from '@/components/HomePosterCarousel';
 import IntentCards from '@/components/IntentCards';
 import NightLine from '@/components/NightLine';
 import TableConcierge from '@/components/TableConcierge';
 import DateSensitiveCalendar from '@/components/DateSensitiveCalendar';
 import { getEventCalendarCopy } from '@/lib/eventCalendarCopy';
+import {
+  getCapodannoEventsForMode,
+} from '@/lib/capodannoEvents';
+import {
+  formatCapodannoPriceBadge35,
+  getCapodannoLocalizedEventContent,
+} from '@/lib/capodanno/i18n';
+import { capodannoEventPath, capodannoNavigation, capodannoPath } from '@/lib/capodanno/routes';
 import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
 import { notFound } from 'next/navigation';
@@ -117,7 +126,7 @@ const HOME_SAFE_COPY: Record<HomeIndexedLocale, {
     noTonight: 'Scopri i prossimi eventi in calendario o scrivi su WhatsApp per i tavoli e le serate consigliate stasera.', discoverBest: 'Confronta i 20 club di Milano →', allTonight: 'Tutti gli eventi di stasera →',
     availabilityCta: 'Richiedi disponibilità tavoli VIP e liste su WhatsApp.', weekLabel: 'Calendario Settimanale', weekTitle: 'Prossime Serate della Settimana a Milano',
     noWeek: 'Scrivi al Concierge WhatsApp (+39 351 912 7047) per prenotare Royal Aperitivo, liste e Tavoli Privé nel weekend.', allWeek: 'Calendario completo eventi →',
-    discoverLabel: 'Esplora per Stile e Quartiere', categoriesTitle: 'Scegli la Tua Esperienza Notturna a Milano',
+    discoverLabel: 'Esplora per Stile e Quartiere', categoriesTitle: 'Club e Quartieri di Milano',
     categoryLabels: ['Club Techno & Underground', 'Tavoli VIP & Privé', 'Royal Aperitivo Milano', 'Quartiere Navigli', 'Corso Como & Garibaldi', 'Guide Ufficiali 2026/2027', 'Servizio VIP Concierge', 'Tutti i 20 Club Milano'],
     nightSteps: [
       { label: 'Atto I · 19:30 - 22:30', title: 'Royal Aperitivo & Rooftop al Tramonto', body: 'Inizia la serata tra Parco Sempione, Brera, Corso Como o CityLife con signature cocktail, buffet gourmet o tavolo aperitivo con DJ set.' },
@@ -346,6 +355,24 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   // weekly programme can reappear from an indefinitely cached home document.
   const initialNow = new Date();
   const dateSensitiveEvents = selectPriorityVenueEvents(await getDateSensitiveCarouselInventory(locale), initialNow);
+  const posterSlides: HomePosterSlide[] = getCapodannoEventsForMode('capodanno-2027')
+    .slice(0, 18)
+    .map((ev) => {
+      const locEv = getCapodannoLocalizedEventContent(ev, locale);
+      return {
+        slug: ev.slug,
+        venueName: ev.venueName,
+        title: locEv.title,
+        subtitle: locEv.subtitle,
+        image: ev.image,
+        priceFromEur: ev.priceFromEur,
+        priceBadge: formatCapodannoPriceBadge35(ev, locale),
+        href: capodannoEventPath(ev.slug, locale),
+        musicAndFormat: locEv.musicAndFormat,
+        city: ev.city,
+      };
+    });
+  const capodannoNav = capodannoNavigation(locale);
 
   const waLink = getConciergeBookingUrl(locale, undefined, lp || '/');
   const formerHeroCopy = getHeroCopy(locale);
@@ -358,7 +385,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           swipe: 'SCORRI I 6 CLUB →',
           formulaVal: 'Aperitivo · Lista · Privé',
           sanSiroEye: 'STADIO SAN SIRO · SERIE A & CHAMPIONS LEAGUE 2026/2027',
-          sanSiroTitle: 'Guida Ufficiale Dopo-Partita Calcio Milano (Inter & Milan)',
+          sanSiroTitle: 'Dopo-Partita Calcio San Siro (Inter & Milan)',
           sanSiroBody: 'Aria Club a 150m dallo stadio, Just Me Torre Branca aperto 7/7, Voya Rooftop via M5, 55 Milano, Pineta e Repvblic: calcola il piano post-match e prenota Tavolo VIP su WhatsApp +39 351 912 7047.',
           sanSiroCta: 'SCOPRI I DOPO-PARTITA ↗',
           act1: 'ATTO I · H 19:30 ROYAL APERITIVO & ROOFTOP',
@@ -467,34 +494,42 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           }}
         />
         {/* ── Fascia Sartoriale dei Quartieri Notturni ─────────────────── */}
-        <div className="w-full bg-[#050505] border-b border-[#F6F1E7]/14">
-          <div className="max-w-[1440px] mx-auto border-x border-[#F6F1E7]/14 px-5 sm:px-14 py-4 flex flex-wrap items-center justify-between gap-4 font-mono text-[11px] tracking-[0.12em] uppercase text-[#C2B9AA]">
-            <span>01 · PARCO SEMPIONE</span>
-            <span>02 · PORTA GARIBALDI</span>
-            <span className="hidden sm:inline">03 · PORTA NUOVA SKYLINE</span>
-            <span className="hidden md:inline">04 · SAN SIRO GARDEN</span>
-            <span className="hidden lg:inline">05 · REPUBBLICA</span>
-            <span className="hidden xl:inline">06 · CORSO COMO &amp; NAVIGLI</span>
+        <div className="w-full border-b border-white/14 bg-[#0A0A0C]">
+          <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-4 border-x border-white/14 px-5 py-5 text-[13px] font-semibold text-[#EDEBE6] sm:px-14">
+            <span>Parco Sempione</span>
+            <span>Porta Garibaldi</span>
+            <span className="hidden sm:inline">Porta Nuova Skyline</span>
+            <span className="hidden md:inline">San Siro Garden</span>
+            <span className="hidden lg:inline">Repubblica</span>
+            <span className="hidden xl:inline">Corso Como &amp; Navigli</span>
           </div>
         </div>
 
-        {/* ── 2. I Sei Santuari della Notte (Desktop 1440px Flagship Spreads + 2x2 Widescreen / Mobile 390px Swipe) ── */}
-        <section className="w-full bg-[#050505] border-b border-[#F6F1E7]/14">
-          <div className="max-w-[1440px] mx-auto border-x border-[#F6F1E7]/14">
+        {/* ── 1B. Carosello Capodanno 2027 & Live Countdown (S17) ───────── */}
+        <HomePosterCarousel
+          locale={locale}
+          slides={posterSlides}
+          hubHref={capodannoPath(locale)}
+          hubLabel={`${capodannoNav.menuLabel} 2027`}
+        />
+
+        {/* ── 2. I Sei Santuari della Notte (S17 Carta Calda + Bianco) ── */}
+        <section className="w-full border-b border-[#0A0A0C]/16 bg-[#EDEBE6] text-[#0A0A0C]">
+          <div className="mx-auto max-w-[1440px] border-x border-[#0A0A0C]/16">
             {/* Header Editoriale della Collezione */}
-            <div className="px-5 sm:px-14 pt-16 sm:pt-20 pb-10 sm:pb-12 border-b border-[#F6F1E7]/14 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
-              <div>
-                <p className="font-mono text-[#EAE3D5] text-xs tracking-[0.14em] uppercase mb-3">
-                  N° 02 · {homeCopy.curatedLabel}
-                </p>
-                <h2 className="font-serif text-4xl sm:text-5xl lg:text-[62px] font-normal text-[#F6F1E7] tracking-[-0.032em] leading-[0.90]">
+            <div className="flex flex-col justify-between gap-6 border-b border-[#0A0A0C]/16 px-5 pb-10 pt-16 sm:flex-row sm:items-end sm:px-14 sm:pb-12 sm:pt-20">
+              <div data-reveal="rise">
+                <h2 className="font-display text-4xl font-extrabold uppercase leading-[0.94] text-[#0A0A0C] sm:text-4xl lg:text-[68px]">
                   {homeCopy.topVenuesTitle}
                 </h2>
+                <p className="mt-3 max-w-[60ch] font-sans text-sm font-semibold text-[#4F4D48]">
+                  {homeCopy.curatedLabel}
+                </p>
               </div>
               <Link
                 href={`${lp}/clubs`}
                 prefetch={false}
-                className="inline-flex items-center justify-center min-h-[48px] px-7 py-3.5 border border-[#F6F1E7]/40 text-[#F6F1E7] hover:bg-[#F6F1E7] hover:text-[#050505] font-mono text-xs tracking-[0.12em] uppercase transition-colors shrink-0"
+                className="nlm-pressable inline-flex min-h-[48px] shrink-0 items-center justify-center border border-[#0A0A0C] bg-[#FFFFFF] px-7 py-3.5 text-[13px] font-bold uppercase text-[#0A0A0C] transition-colors hover:bg-[#0A0A0C] hover:text-[#FFFFFF]"
               >
                 {homeCopy.allVenues} ↗
               </Link>
@@ -505,66 +540,72 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
               {featuredVenues.slice(0, 2).map((v, idx) => (
                 <article
                   key={v.id}
-                  className="grid grid-cols-12 border-b border-[#F6F1E7]/14 group"
+                  className="group grid grid-cols-12 border-b border-[#0A0A0C]/16"
                 >
                   {/* Colonna Fotografica 16:10 (a sinistra per 01, a destra per 02) */}
-                  <div className={`col-span-7 p-14 bg-[#0B0A09] flex flex-col justify-between ${idx === 1 ? 'order-2 border-l border-[#F6F1E7]/14' : 'border-r border-[#F6F1E7]/14'}`}>
-                    <Link href={`${lp}/clubs/${v.slug}`} prefetch={false} className="block relative aspect-[16/10] w-full overflow-hidden border border-[#F6F1E7]/14">
+                  <div
+                    data-reveal="clip"
+                    className={`col-span-7 flex flex-col justify-between bg-[#18181C] p-12 text-[#FFFFFF] ${idx === 1 ? 'order-2 border-l border-[#0A0A0C]/16' : 'border-r border-[#0A0A0C]/16'}`}
+                  >
+                    <Link href={`${lp}/clubs/${v.slug}`} prefetch={false} className="relative block aspect-[16/10] w-full overflow-hidden border border-white/14">
                       <Image
                         src={v.image}
                         alt={v.name}
                         fill
                         sizes="58vw"
                         quality={92}
-                        className="object-cover group-hover:scale-[1.04] transition-transform duration-700"
+                        className="nlm-hover-zoom object-cover"
                       />
-                      <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, #0505058c, transparent)' }} />
                     </Link>
-                    <div className="flex justify-between items-center mt-4 font-mono text-[11px] tracking-[0.12em] uppercase text-[#847C6F]">
-                      <span>FIG. 0{idx + 1} · {v.zone}</span>
-                      <span>{homeCopy.venueLabel} · MILANO</span>
+                    <div className="mt-4 flex items-center justify-between text-[13px] font-semibold text-[#C9C7C2]">
+                      <span>{v.zone}</span>
+                      <span>{homeCopy.venueLabel} · Milano</span>
                     </div>
                   </div>
 
-                  {/* Colonna Editoriale Sartoriale */}
-                  <div className={`col-span-5 p-14 flex flex-col justify-between bg-[#050505] ${idx === 1 ? 'order-1' : ''}`}>
+                  {/* Colonna Editoriale Bianca S17 */}
+                  <div
+                    data-reveal="rise"
+                    data-stagger="1"
+                    className={`col-span-5 flex flex-col justify-between bg-[#FFFFFF] p-12 text-[#0A0A0C] ${idx === 1 ? 'order-1' : ''}`}
+                  >
                     <div>
-                      <div className="flex justify-between items-baseline">
-                        <span className="font-serif italic text-[74px] leading-[0.85] text-[#F6F1E7] font-normal">
-                          0{idx + 1}
-                        </span>
-                        <span className="font-mono text-xs tracking-[0.12em] uppercase text-[#EAE3D5]">
-                          {v.zone}
+                      <div className="flex items-baseline justify-between">
+                        <span className="font-display text-[74px] font-extrabold italic leading-[0.85] text-[#D9381E] tabular-nums">
+                          {idx + 1}
                         </span>
                       </div>
 
-                      <h3 className="font-serif text-[52px] font-normal text-[#F6F1E7] leading-[0.95] tracking-[-0.03em] mt-5 mb-4">
-                        <Link href={`${lp}/clubs/${v.slug}`} prefetch={false} className="hover:underline transition-colors">
+                      <h3 className="mt-5 mb-2 font-display text-[48px] font-extrabold uppercase leading-[0.94] text-[#0A0A0C]">
+                        <Link href={`${lp}/clubs/${v.slug}`} prefetch={false} className="transition-colors hover:underline">
                           {v.name}
                         </Link>
                       </h3>
+                      <p className="mb-4 text-[13px] font-bold text-[#4F4D48]">
+                        {v.zone}
+                      </p>
 
-                      <p className="font-sans text-base text-[#C2B9AA] leading-[1.7]">
+                      <p className="max-w-[48ch] font-sans text-base leading-[1.65] text-[#4F4D48]">
                         {v.description}
                       </p>
 
                       {/* Griglia Specifiche 2x2 con linee da 1px */}
-                      <div className="grid grid-cols-2 border-y border-[#F6F1E7]/14 my-7">
-                        <div className="py-4 pr-5 border-r border-b border-[#F6F1E7]/14">
-                          <div className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#847C6F]">{homeCopy.venueTags[0]}</div>
-                          <div className="text-[15px] text-[#F6F1E7] font-medium mt-1.5">{v.street}</div>
+                      <div className="my-7 grid grid-cols-2 border-y border-[#0A0A0C]/16">
+                        <div className="border-b border-r border-[#0A0A0C]/16 py-4 pr-5">
+                          <div className="text-[13px] font-bold text-[#4F4D48]">{homeCopy.venueTags[0]}</div>
+                          <div className="mt-1.5 text-[15px] font-semibold text-[#0A0A0C]">{v.street}</div>
                         </div>
-                        <div className="py-4 pl-5 border-b border-[#F6F1E7]/14">
-                          <div className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#847C6F]">{homeCopy.venueTags[1]}</div>
-                          <div className="text-[15px] text-[#F6F1E7] font-medium mt-1.5">{v.genres}</div>
+                        <div className="border-b border-[#0A0A0C]/16 py-4 pl-5">
+                          <div className="text-[13px] font-bold text-[#4F4D48]">{homeCopy.venueTags[1]}</div>
+                          <div className="mt-1.5 text-[15px] font-semibold text-[#0A0A0C]">{v.genres}</div>
                         </div>
-                        <div className="py-4 pr-5 border-r border-[#F6F1E7]/14">
-                          <div className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#847C6F]">FORMULA</div>
-                          <div className="text-[15px] text-[#F6F1E7] font-medium mt-1.5">{uiLabels.formulaVal}</div>
+                        <div className="border-r border-[#0A0A0C]/16 py-4 pr-5">
+                          <div className="text-[13px] font-bold text-[#4F4D48]">Formula</div>
+                          <div className="mt-1.5 text-[15px] font-semibold text-[#0A0A0C]">{uiLabels.formulaVal}</div>
                         </div>
                         <div className="py-4 pl-5">
-                          <div className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#847C6F]">{homeCopy.venueTags[2]}</div>
-                          <div className="text-[15px] text-[#EAE3D5] font-semibold mt-1.5">WhatsApp Concierge</div>
+                          <div className="text-[13px] font-bold text-[#4F4D48]">{homeCopy.venueTags[2]}</div>
+                          <div className="mt-1.5 text-[15px] font-bold text-[#0A0A0C]">WhatsApp Concierge</div>
                         </div>
                       </div>
                     </div>
@@ -573,7 +614,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                       <Link
                         href={`${lp}/clubs/${v.slug}`}
                         prefetch={false}
-                        className="min-h-[48px] px-5 py-3.5 border border-[#F6F1E7]/40 text-[#F6F1E7] hover:bg-[#F6F1E7] hover:text-[#050505] font-mono text-xs tracking-[0.12em] uppercase flex items-center justify-center transition-colors"
+                        className="nlm-pressable flex min-h-[48px] items-center justify-center border border-[#0A0A0C] bg-[#FFFFFF] px-5 py-3.5 text-[13px] font-bold text-[#0A0A0C] transition-colors hover:bg-[#0A0A0C] hover:text-[#FFFFFF]"
                       >
                         {homeCopy.venueLabel}
                       </Link>
@@ -581,7 +622,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                         href={waLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="min-h-[48px] px-5 py-3.5 bg-[#25D366] text-[#050505] hover:bg-[#2EE472] font-mono text-xs font-bold tracking-[0.12em] uppercase flex items-center justify-center gap-2 transition-colors"
+                        className="nlm-pressable flex min-h-[48px] items-center justify-center gap-2 bg-[#D9381E] px-5 py-3.5 text-[13px] font-bold text-[#FFFFFF] transition-colors hover:bg-[#B82B14]"
                       >
                         {uiLabels.vipBtn}
                       </a>
@@ -591,60 +632,62 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
               ))}
 
               {/* GRIGLIA PANORAMICA 2x2 (720px per club) per i restanti locali */}
-              <div className="grid grid-cols-2">
+              <div className="grid grid-cols-2 bg-[#EDEBE6]">
                 {featuredVenues.slice(2).map((v, idx) => (
                   <article
                     key={v.id}
-                    className={`p-14 border-b border-[#F6F1E7]/14 grid grid-cols-[240px_1fr] gap-9 items-stretch hover:bg-[#0B0A09] transition-colors group ${idx % 2 === 0 ? 'border-r border-[#F6F1E7]/14' : ''}`}
+                    data-reveal="rise"
+                    data-stagger={String((idx % 2) + 1)}
+                    className={`group grid grid-cols-[240px_1fr] items-stretch gap-8 border-b border-[#0A0A0C]/16 bg-[#FFFFFF] p-12 transition-colors hover:bg-[#F7F5F0] ${idx % 2 === 0 ? 'border-r border-[#0A0A0C]/16' : ''}`}
                   >
-                    <Link href={`${lp}/clubs/${v.slug}`} prefetch={false} className="block relative aspect-[3/4] w-full overflow-hidden border border-[#F6F1E7]/14">
+                    <Link href={`${lp}/clubs/${v.slug}`} prefetch={false} className="relative block aspect-[3/4] w-full overflow-hidden border border-[#0A0A0C]/16 bg-[#0A0A0C]">
                       <Image
                         src={v.image}
                         alt={v.name}
                         fill
                         sizes="(max-width: 1024px) 100vw, 48vw"
                         quality={92}
-                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                        className="nlm-hover-zoom object-cover"
                       />
                     </Link>
                     <div className="flex flex-col justify-between">
                       <div>
-                        <div className="flex justify-between items-baseline">
-                          <span className="font-serif italic text-[46px] leading-none text-[#F6F1E7]">
-                            0{idx + 3}
-                          </span>
-                          <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#847C6F]">
-                            {v.zone}
+                        <div className="flex items-baseline justify-between">
+                          <span className="font-display text-[46px] font-extrabold italic leading-none text-[#D9381E] tabular-nums">
+                            {idx + 3}
                           </span>
                         </div>
-                        <h3 className="font-serif text-[34px] font-normal text-[#F6F1E7] leading-tight mt-2.5 mb-2">
-                          <Link href={`${lp}/clubs/${v.slug}`} prefetch={false} className="hover:underline transition-colors">
+                        <h3 className="mt-2.5 mb-1 font-display text-[36px] font-extrabold uppercase leading-tight text-[#0A0A0C]">
+                          <Link href={`${lp}/clubs/${v.slug}`} prefetch={false} className="transition-colors hover:underline">
                             {v.name}
                           </Link>
                         </h3>
-                        <p className="font-sans text-sm text-[#C2B9AA] leading-relaxed mb-4">
+                        <p className="mb-3 text-[13px] font-bold text-[#4F4D48]">
+                          {v.zone}
+                        </p>
+                        <p className="mb-4 max-w-[48ch] font-sans text-base leading-relaxed text-[#4F4D48]">
                           {v.description}
                         </p>
-                        <div className="border-t border-[#F6F1E7]/14 text-[13px]">
-                          <div className="flex justify-between gap-4 py-2 border-b border-[#F6F1E7]/14">
-                            <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#847C6F]">{homeCopy.venueTags[0]}</span>
-                            <span className="text-[#F6F1E7] font-medium text-right">{v.street}</span>
+                        <div className="border-t border-[#0A0A0C]/14 text-[13px]">
+                          <div className="flex justify-between gap-4 border-b border-[#0A0A0C]/14 py-2">
+                            <span className="text-[13px] font-bold text-[#4F4D48]">{homeCopy.venueTags[0]}</span>
+                            <span className="text-right font-semibold text-[#0A0A0C]">{v.street}</span>
                           </div>
-                          <div className="flex justify-between gap-4 py-2 border-b border-[#F6F1E7]/14">
-                            <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#847C6F]">{homeCopy.venueTags[1]}</span>
-                            <span className="text-[#F6F1E7] font-medium text-right">{v.genres}</span>
+                          <div className="flex justify-between gap-4 border-b border-[#0A0A0C]/14 py-2">
+                            <span className="text-[13px] font-bold text-[#4F4D48]">{homeCopy.venueTags[1]}</span>
+                            <span className="text-right font-semibold text-[#0A0A0C]">{v.genres}</span>
                           </div>
-                          <div className="flex justify-between gap-4 py-2 border-b border-[#F6F1E7]/14">
-                            <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#847C6F]">{homeCopy.venueTags[2]}</span>
-                            <span className="text-[#EAE3D5] font-medium text-right">{uiLabels.formulaVal}</span>
+                          <div className="flex justify-between gap-4 border-b border-[#0A0A0C]/14 py-2">
+                            <span className="text-[13px] font-bold text-[#4F4D48]">{homeCopy.venueTags[2]}</span>
+                            <span className="text-right font-semibold text-[#0A0A0C]">{uiLabels.formulaVal}</span>
                           </div>
                         </div>
                       </div>
-                      <div className="grid grid-cols-2 gap-3 mt-5">
+                      <div className="mt-5 grid grid-cols-2 gap-3">
                         <Link
                           href={`${lp}/clubs/${v.slug}`}
                           prefetch={false}
-                          className="min-h-[46px] px-4 py-3 border border-[#F6F1E7]/40 text-[#F6F1E7] hover:bg-[#F6F1E7] hover:text-[#050505] font-mono text-[11px] tracking-[0.12em] uppercase flex items-center justify-center transition-colors"
+                          className="nlm-pressable flex min-h-[46px] items-center justify-center border border-[#0A0A0C] bg-[#FFFFFF] px-4 py-3 text-[13px] font-bold text-[#0A0A0C] transition-colors hover:bg-[#0A0A0C] hover:text-[#FFFFFF]"
                         >
                           {uiLabels.details}
                         </Link>
@@ -652,7 +695,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                           href={waLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="min-h-[46px] px-4 py-3 bg-[#25D366] text-[#050505] hover:bg-[#2EE472] font-mono text-[11px] font-bold tracking-[0.12em] uppercase flex items-center justify-center transition-colors"
+                          className="nlm-pressable flex min-h-[46px] items-center justify-center bg-[#D9381E] px-4 py-3 text-[13px] font-bold text-[#FFFFFF] transition-colors hover:bg-[#B82B14]"
                         >
                           {uiLabels.vipBtn}
                         </a>
@@ -663,122 +706,110 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
               </div>
             </div>
 
-            {/* VISTA MOBILE 390PX: SWIPE ORIZZONTALE TATTILE SNAP-X */}
-            <div className="lg:hidden py-8">
-              <div className="px-5 mb-3 flex justify-between items-baseline">
-                <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#EAE3D5]">{uiLabels.swipe}</span>
-                <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#847C6F]">01 / 0{featuredVenues.length}</span>
-              </div>
-              <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory px-5 pb-4 scrollbar-hide">
-                {featuredVenues.map((v, i) => (
-                  <article
-                    key={v.id}
-                    className="flex-[0_0_290px] snap-start border border-[#F6F1E7]/15 bg-[#0B0A09] flex flex-col justify-between"
-                  >
-                    <div>
-                      <Link href={`${lp}/clubs/${v.slug}`} prefetch={false} className="block relative aspect-[4/5] w-full overflow-hidden border-b border-[#F6F1E7]/14">
-                        <Image
-                          src={v.image}
-                          alt={v.name}
-                          fill
-                          sizes="(max-width: 1024px) 90vw, 48vw"
-                          quality={92}
-                          className="object-cover"
-                        />
-                        <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, #050505d9, transparent)' }} />
-                        <span className="absolute top-3 left-3 px-2.5 py-1 bg-[#050505]/90 border border-[#F6F1E7]/35 font-mono text-[10px] tracking-[0.12em] uppercase text-[#F6F1E7]">
-                          0{i + 1} · {homeCopy.venueLabel}
-                        </span>
-                        <div className="absolute bottom-3 left-4 right-4">
-                          <p className="font-mono text-[10px] tracking-[0.12em] uppercase text-[#EAE3D5]">{v.zone}</p>
-                          <h3 className="font-serif text-2xl text-[#F6F1E7] mt-0.5">{v.name}</h3>
-                        </div>
-                      </Link>
-                      <div className="p-4">
-                        <p className="font-sans text-xs text-[#C2B9AA] leading-relaxed mb-3">{v.description}</p>
-                      </div>
+            {/* VISTA MOBILE 390PX: GRIGLIA CARD VISIBILI COMPATTA */}
+            <div className="grid grid-cols-1 gap-4 px-4 py-8 lg:hidden sm:grid-cols-2">
+              {featuredVenues.map((v, i) => (
+                <article
+                  key={v.id}
+                  data-reveal="rise"
+                  className="flex flex-col justify-between border border-[#0A0A0C]/16 bg-[#FFFFFF]"
+                >
+                  <div>
+                    <Link href={`${lp}/clubs/${v.slug}`} prefetch={false} className="relative block aspect-[16/10] w-full overflow-hidden border-b border-[#0A0A0C]/14 bg-[#0A0A0C]">
+                      <Image
+                        src={v.image}
+                        alt={v.name}
+                        fill
+                        sizes="(max-width: 1024px) 92vw, 48vw"
+                        quality={92}
+                        className="object-cover"
+                      />
+                      <span className="absolute left-3 top-3 bg-[#0A0A0C] px-2.5 py-1 text-[13px] font-bold text-[#FFFFFF]">
+                        {v.zone}
+                      </span>
+                    </Link>
+                    <div className="p-4">
+                      <h3 className="font-display text-xl font-extrabold uppercase leading-snug text-[#0A0A0C] sm:text-2xl">{v.name}</h3>
+                      <p className="mt-2 max-w-[48ch] font-sans text-base leading-relaxed text-[#4F4D48]">{v.description}</p>
                     </div>
-                    <div className="grid grid-cols-2 border-t border-[#F6F1E7]/14">
-                      <Link
-                        href={`${lp}/clubs/${v.slug}`}
-                        prefetch={false}
-                        className="min-h-[44px] font-mono text-[11px] tracking-[0.12em] uppercase text-[#F6F1E7] flex items-center justify-center border-r border-[#F6F1E7]/14"
-                      >
-                        {uiLabels.details}
-                      </Link>
-                      <a
-                        href={waLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="min-h-[44px] bg-[#25D366] text-[#050505] font-mono text-[11px] font-bold tracking-[0.12em] uppercase flex items-center justify-center"
-                      >
-                        {uiLabels.vipBtn}
-                      </a>
-                    </div>
-                  </article>
-                ))}
-              </div>
+                  </div>
+                  <div className="grid grid-cols-2 border-t border-[#0A0A0C]/14">
+                    <Link
+                      href={`${lp}/clubs/${v.slug}`}
+                      prefetch={false}
+                      className="nlm-pressable flex min-h-[46px] items-center justify-center border-r border-[#0A0A0C]/14 bg-[#FFFFFF] text-[13px] font-bold text-[#0A0A0C]"
+                    >
+                      {uiLabels.details}
+                    </Link>
+                    <a
+                      href={waLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="nlm-pressable flex min-h-[46px] items-center justify-center bg-[#D9381E] text-[13px] font-bold text-[#FFFFFF]"
+                    >
+                      {uiLabels.vipBtn}
+                    </a>
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
         </section>
 
         <OctoberEntry locale={locale} />
-        <section className="w-full bg-[#050505] border-b border-[#F6F1E7]/14">
-          <div className="max-w-[1440px] mx-auto border-x border-[#F6F1E7]/14 px-5 sm:px-14 py-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 bg-[#0B0A09]">
+        <section className="w-full border-b border-white/14 bg-[#0A0A0C]">
+          <div
+            data-reveal="rise"
+            className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-6 border-x border-white/14 bg-[#18181C] px-5 py-12 md:flex-row md:items-center sm:px-14"
+          >
             <div>
-              <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-[#EAE3D5] mb-2">
-                {uiLabels.sanSiroEye}
-              </p>
-              <h2 className="font-serif text-2xl sm:text-3xl text-[#F6F1E7]">
+              <h2 className="font-display text-2xl font-extrabold uppercase text-[#FFFFFF] sm:text-3xl lg:text-4xl">
                 {uiLabels.sanSiroTitle}
               </h2>
-              <p className="font-sans text-sm text-[#C2B9AA] mt-1 max-w-3xl">
+              <p className="mt-1 max-w-[60ch] font-sans text-sm text-[#EDEBE6]">
                 {uiLabels.sanSiroBody}
               </p>
             </div>
             <Link
               href={`${lp}/football-afterparties`}
               prefetch={false}
-              className="shrink-0 min-h-[48px] px-6 py-3.5 border border-[#F6F1E7] bg-[#F6F1E7] text-[#050505] hover:bg-[#EAE3D5] font-mono text-xs font-semibold tracking-[0.12em] uppercase inline-flex items-center gap-2 transition-colors"
+              className="nlm-pressable inline-flex min-h-[48px] shrink-0 items-center gap-2 bg-[#D9381E] px-6 py-3.5 text-[13px] font-bold text-[#FFFFFF] transition-colors hover:bg-[#B82B14]"
             >
               {uiLabels.sanSiroCta}
             </Link>
           </div>
         </section>
 
-        {/* ── 3. I Tre Atti della Notte Milanese (Capitolo Editoriale Avorio Caldo + Trittico Noir) ─── */}
-        <section className="w-full bg-[#050505] border-b border-[#F6F1E7]/14">
-          <div className="max-w-[1440px] mx-auto border-x border-[#F6F1E7]/14 grid grid-cols-1 lg:grid-cols-12">
-            {/* Colonna Sinistra (5/12): Capitolo Avorio Sartoriale #F6F1E7 */}
-            <div className="lg:col-span-5 p-6 sm:p-14 bg-[#F6F1E7] text-[#050505] border-b lg:border-b-0 lg:border-r border-[#050505]/15 flex flex-col justify-between">
+        {/* ── 3. I Tre Atti della Notte Milanese (Capitolo Carta Calda + Trittico Noir) ─── */}
+        <section className="w-full border-b border-white/14 bg-[#0A0A0C]">
+          <div className="mx-auto grid max-w-[1440px] grid-cols-1 border-x border-white/14 lg:grid-cols-12">
+            {/* Colonna Sinistra (5/12): Capitolo Carta S17 #EDEBE6 */}
+            <div data-reveal="rise" className="flex flex-col justify-between border-b border-[#0A0A0C]/16 bg-[#EDEBE6] px-6 py-10 text-[#0A0A0C] sm:p-14 lg:col-span-5 lg:border-b-0 lg:border-r">
               <div>
-                <p className="font-mono text-[#3D3830] text-xs font-semibold tracking-[0.14em] uppercase mb-3">
-                  N° 03 · {homeCopy.nightLabel}
-                </p>
-                <h2 className="font-serif text-4xl sm:text-5xl font-normal italic text-[#050505] tracking-[-0.03em] leading-[0.92] mb-10">
+                <h2 className="mb-3 font-display text-3xl font-extrabold uppercase italic leading-[0.95] text-[#0A0A0C] sm:text-[40px]">
                   {homeCopy.nightTitle}
                 </h2>
-                <div className="divide-y divide-[#050505]/15 border-t border-b border-[#050505]/15">
+                <p className="mb-8 text-[13px] font-semibold text-[#4F4D48]">{homeCopy.nightLabel}</p>
+                <div className="divide-y divide-[#0A0A0C]/15 border-y border-[#0A0A0C]/15">
                   {homeCopy.nightSteps.map((step: { label: string; title: string; body: string }, i: number) => (
-                    <div key={i} className="py-6 flex justify-between items-start gap-6">
+                    <div key={i} className="flex items-start justify-between gap-6 py-6">
                       <div>
-                        <p className="font-mono text-[11px] font-semibold tracking-[0.12em] uppercase text-[#3D3830] mb-2">{step.label}</p>
-                        <h3 className="font-serif text-2xl sm:text-[28px] text-[#050505] font-normal leading-tight mb-2">{step.title}</h3>
-                        <p className="font-sans text-sm text-[#24201B] leading-relaxed">{step.body}</p>
+                        <h3 className="mb-2 font-display text-2xl font-extrabold uppercase leading-tight text-[#0A0A0C] sm:text-[30px]">{step.title}</h3>
+                        <p className="max-w-[52ch] font-sans text-sm leading-relaxed text-[#4F4D48]">{step.body}</p>
                       </div>
-                      <span className="font-serif italic text-4xl text-[#050505] shrink-0">
+                      <span className="shrink-0 font-display text-4xl font-extrabold italic text-[#D9381E]">
                         {i === 0 ? 'I' : i === 1 ? 'II' : 'III'}
                       </span>
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="mt-8 bg-[#050505] p-3">
+              <div className="mt-8 bg-[#0A0A0C] p-3">
                 <a
                   href={waLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full min-h-[48px] px-6 py-3.5 bg-[#25D366] text-[#050505] hover:bg-[#2EE472] font-mono text-xs font-bold tracking-[0.12em] uppercase flex items-center justify-between transition-colors"
+                  className="nlm-pressable flex min-h-[48px] w-full items-center justify-between bg-[#D9381E] px-6 py-3.5 text-[13px] font-bold text-[#FFFFFF] transition-colors hover:bg-[#B82B14]"
                 >
                   <span>{homeCopy.requestAction}</span>
                   <span aria-hidden="true">↗</span>
@@ -787,66 +818,63 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
             </div>
 
             {/* Colonna Destra (7/12): Trittico Fotografico Editoriale */}
-            <div data-lightbox-group="home-editorial-triptych" className="lg:col-span-7 p-6 sm:p-14 bg-[#0B0A09] flex flex-col justify-between">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="sm:col-span-2">
-                  <div className="relative aspect-[16/9] w-full overflow-hidden border border-[#F6F1E7]/14">
+            <div data-lightbox-group="home-editorial-triptych" className="flex flex-col justify-between bg-[#18181C] p-6 sm:p-14 lg:col-span-7">
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <div className="sm:col-span-2" data-reveal="clip">
+                  <div className="relative aspect-[16/9] w-full overflow-hidden border border-white/14">
                     <Image
                       src="/images/vip-table-milan-nightclub-just-me.webp"
                       alt={homeGridAlts[0]}
                       fill
                       quality={92}
-                      className="object-cover hover:scale-105 transition-transform duration-700"
+                      className="nlm-hover-zoom object-cover"
                       sizes="(max-width: 1024px) 100vw, 65vw"
                     />
-                    <div className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(to top, #05050599, transparent)' }} />
                   </div>
-                  <div className="flex justify-between mt-2.5 font-mono text-[11px] tracking-[0.12em] uppercase text-[#847C6F]">
+                  <div className="mt-2.5 flex justify-between text-[13px] font-semibold text-[#C9C7C2]">
                     <span>{uiLabels.act1}</span>
-                    <span>PARCO SEMPIONE &amp; PORTA NUOVA</span>
+                    <span>Parco Sempione &amp; Porta Nuova</span>
                   </div>
                 </div>
 
-                <div>
-                  <div className="relative aspect-[4/3] w-full overflow-hidden border border-[#F6F1E7]/14">
+                <div data-reveal="clip" data-stagger="1">
+                  <div className="relative aspect-[4/3] w-full overflow-hidden border border-white/14">
                     <Image
                       src="/images/milan-club-crowd-dancefloor-night.webp"
                       alt={homeGridAlts[3]}
                       fill
                       quality={92}
-                      className="object-cover hover:scale-105 transition-transform duration-700"
+                      className="nlm-hover-zoom object-cover"
                       sizes="(max-width: 1024px) 50vw, 45vw"
                     />
-                    <div className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(to top, #05050599, transparent)' }} />
                   </div>
-                  <div className="mt-2 font-mono text-[11px] tracking-[0.12em] uppercase text-[#847C6F]">
+                  <div className="mt-2 text-[13px] font-semibold text-[#C9C7C2]">
                     {uiLabels.act2}
                   </div>
                 </div>
 
-                <div>
-                  <div className="relative aspect-[4/3] w-full overflow-hidden border border-[#F6F1E7]/14">
+                <div data-reveal="clip" data-stagger="2">
+                  <div className="relative aspect-[4/3] w-full overflow-hidden border border-white/14">
                     <Image
                       src="/images/bottle-service-milan-vip-nightclub.webp"
                       alt={homeGridAlts[4]}
                       fill
                       quality={92}
-                      className="object-cover hover:scale-105 transition-transform duration-700"
+                      className="nlm-hover-zoom object-cover"
                       sizes="(max-width: 1024px) 50vw, 45vw"
                     />
-                    <div className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(to top, #05050599, transparent)' }} />
                   </div>
-                  <div className="mt-2 font-mono text-[11px] tracking-[0.12em] uppercase text-[#847C6F]">
+                  <div className="mt-2 text-[13px] font-semibold text-[#C9C7C2]">
                     {uiLabels.act3}
                   </div>
                 </div>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-[#F6F1E7]/14 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                <p className="font-serif italic text-lg text-[#C2B9AA]">
+              <div className="mt-8 flex flex-col justify-between gap-4 border-t border-white/14 pt-6 sm:flex-row sm:items-center">
+                <p className="max-w-[58ch] font-sans text-base italic text-[#EDEBE6]">
                   {homeCopy.description} · {SITE_CONTACT.whatsapp.number}
                 </p>
-                <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-[#EAE3D5] shrink-0">
+                <span className="shrink-0 text-[13px] font-bold text-[#EDEBE6]">
                   {homeCopy.quickLabel}
                 </span>
               </div>
@@ -855,52 +883,54 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         </section>
 
         {/* ── 4. Le Tre Formule d'Accesso (Intent Cards) ───────────────── */}
-        <div className="w-full bg-[#F6F1E7] border-b border-[#050505]/15">
-          <div className="max-w-[1440px] mx-auto border-x border-[#050505]/15">
+        <div className="w-full border-b border-[#0A0A0C]/16 bg-[#EDEBE6]">
+          <div className="mx-auto max-w-[1440px] border-x border-[#0A0A0C]/16">
             <IntentCards locale={locale} />
           </div>
         </div>
 
         {/* ── 5. Calendario Eventi Verificati della Settimana ──────────── */}
-        <section className="w-full bg-[#050505] border-b border-[#F6F1E7]/14 px-4 py-16 sm:px-14" data-home-week-events>
+        <section className="w-full border-b border-white/14 bg-[#0A0A0C] px-4 py-16 sm:px-14" data-home-week-events>
           <div className="mx-auto max-w-[1328px]">
-            <p className="mb-3 font-mono text-xs tracking-[0.14em] uppercase text-[#EAE3D5]">{homeCopy.weekLabel}</p>
-            <h2 className="mb-5 font-serif text-4xl text-[#F6F1E7] md:text-5xl">{homeCopy.weekTitle}</h2>
-            <Link href={`${lp}/events`} prefetch={false} className="mb-8 inline-flex min-h-11 items-center text-base font-semibold text-[#F6F1E7] underline underline-offset-4">{homeCopy.seeAll}</Link>
+            <h2 data-reveal="rise" className="mb-3 font-display text-3xl font-extrabold uppercase text-[#FFFFFF] sm:text-5xl md:text-6xl">{homeCopy.weekTitle}</h2>
+            <p className="mb-5 text-sm font-semibold text-[#C9C7C2]">{homeCopy.weekLabel}</p>
+            <Link href={`${lp}/events`} prefetch={false} className="mb-8 inline-flex min-h-11 items-center text-base font-bold text-[#FFFFFF] underline underline-offset-4">{homeCopy.seeAll}</Link>
             <DateSensitiveCalendar events={dateSensitiveEvents} initialNow={initialNow.toISOString()} mode="calendar-week" localeTag={getLocaleDef(locale)!.hreflang} localePrefix={lp} copy={{ ...getEventCalendarCopy(locale), empty: homeCopy.noWeek }} schemaName={homeCopy.weekTitle} emptyHref={`${lp}/events`} emptyLinkLabel={homeCopy.seeAll} groupByDay variant="gallery" bookingLocale={locale} />
           </div>
         </section>
 
         <MfwEntry locale={locale} />
 
-        {/* ── 6. Esplora per Categoria e Quartiere (#F6F1E7 Capitolo Avorio Caldo) ── */}
-        <section className="w-full bg-[#F6F1E7] text-[#050505] border-b border-[#050505]/15">
-          <div className="max-w-[1440px] mx-auto border-x border-[#050505]/15 px-5 sm:px-14 py-20">
-            <p className="font-mono text-[#3D3830] text-xs font-semibold tracking-[0.14em] uppercase mb-3">
-              N° 05 · {homeCopy.discoverLabel}
-            </p>
-            <h2 className="font-serif text-4xl md:text-5xl font-normal text-[#050505] tracking-[-0.03em] mb-10">
+        {/* ── 6. Esplora per Categoria e Quartiere (Carta Calda S17 #EDEBE6 + #FFFFFF) ── */}
+        <section className="w-full border-b border-[#0A0A0C]/16 bg-[#EDEBE6] text-[#0A0A0C]">
+          <div className="mx-auto max-w-[1440px] border-x border-[#0A0A0C]/16 px-5 py-20 sm:px-14">
+            <h2 data-reveal="rise" className="mb-3 font-display text-3xl font-extrabold uppercase text-[#0A0A0C] sm:text-5xl md:text-6xl">
               {homeCopy.categoriesTitle}
             </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-4 border-t border-l border-[#050505]/15 bg-[#EFE9DC]">
+            <p className="mb-10 text-sm font-semibold text-[#4F4D48]">
+              {homeCopy.discoverLabel}
+            </p>
+            <div className="grid grid-cols-2 border-l border-t border-[#0A0A0C]/16 bg-[#FFFFFF] sm:grid-cols-4">
               {[
-                { label: homeCopy.categoryLabels[0], href: `${lp}/genres/techno`, num: '01' },
-                { label: homeCopy.categoryLabels[1], href: `${lp}/vip-tables`, num: '02' },
-                { label: homeCopy.categoryLabels[2], href: `${lp}/aperitivo`, num: '03' },
-                { label: homeCopy.categoryLabels[3], href: `${lp}/zones/navigli`, num: '04' },
-                { label: homeCopy.categoryLabels[4], href: `${lp}/zones/corso-como`, num: '05' },
-                { label: homeCopy.categoryLabels[5], href: `${lp}/guides`, num: '06' },
-                { label: homeCopy.categoryLabels[6], href: `${lp}/concierge`, num: '07' },
-                { label: homeCopy.categoryLabels[7], href: `${lp}/clubs`, num: '08' },
-              ].map((tag) => (
+                { label: homeCopy.categoryLabels[0], href: `${lp}/genres/techno` },
+                { label: homeCopy.categoryLabels[1], href: `${lp}/vip-tables` },
+                { label: homeCopy.categoryLabels[2], href: `${lp}/aperitivo` },
+                { label: homeCopy.categoryLabels[3], href: `${lp}/zones/navigli` },
+                { label: homeCopy.categoryLabels[4], href: `${lp}/zones/corso-como` },
+                { label: homeCopy.categoryLabels[5], href: `${lp}/guides` },
+                { label: homeCopy.categoryLabels[6], href: `${lp}/concierge` },
+                { label: homeCopy.categoryLabels[7], href: `${lp}/clubs` },
+              ].map((tag, idx) => (
                 <Link
                   key={tag.label}
                   href={tag.href}
                   prefetch={false}
-                  className="p-6 border-r border-b border-[#050505]/15 hover:bg-[#050505] group transition-colors min-h-[88px] flex flex-col justify-between"
+                  data-reveal="rise"
+                  data-stagger={String((idx % 4) + 1)}
+                  className="nlm-pressable group flex min-h-[96px] flex-col justify-between border-b border-r border-[#0A0A0C]/16 p-6 transition-colors hover:bg-[#0A0A0C]"
                 >
-                  <span className="font-serif italic text-2xl text-[#050505] group-hover:text-[#F6F1E7] transition-colors">{tag.num}</span>
-                  <span className="font-mono text-xs font-semibold tracking-[0.12em] uppercase text-[#050505] group-hover:text-[#F6F1E7] transition-colors mt-3">
+                  <span className="font-display text-3xl font-extrabold italic tabular-nums text-[#D9381E] transition-colors group-hover:text-[#FFFFFF]">{idx + 1}</span>
+                  <span className="mt-3 text-sm font-bold text-[#0A0A0C] transition-colors group-hover:text-[#FFFFFF]">
                     {tag.label} ↗
                   </span>
                 </Link>

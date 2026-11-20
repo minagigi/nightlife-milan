@@ -158,18 +158,18 @@ export default function WhatsAppFloating({ locale: explicitLocale }: { locale?: 
       {showBubble && (
         <span
           data-floating-whatsapp-bubble
+          className="hidden xl:inline-block"
           style={{
             position: 'relative',
-            background: '#14120d',
-            color: '#F6F1E7',
-            border: '1px solid rgba(214, 190, 150, 0.75)',
-            borderRadius: '14px',
-            padding: '7px 11px',
-            fontSize: '11.5px',
-            fontWeight: 600,
+            background: '#0A0A0C',
+            color: '#FFFFFF',
+            border: '1px solid rgba(255, 255, 255, 0.28)',
+            borderRadius: '0px',
+            padding: '8px 12px',
+            fontSize: '13px',
+            fontWeight: 700,
             lineHeight: 1.25,
             maxWidth: '220px',
-            boxShadow: '0 6px 20px rgba(0,0,0,0.7)',
             textAlign: 'left',
           }}
         >
@@ -183,9 +183,9 @@ export default function WhatsAppFloating({ locale: explicitLocale }: { locale?: 
               marginTop: '-4px',
               width: '8px',
               height: '8px',
-              background: '#14120d',
-              borderTop: '1px solid rgba(214, 190, 150, 0.75)',
-              borderRight: '1px solid rgba(214, 190, 150, 0.75)',
+              background: '#0A0A0C',
+              borderTop: '1px solid rgba(255, 255, 255, 0.28)',
+              borderRight: '1px solid rgba(255, 255, 255, 0.28)',
               transform: 'rotate(45deg)',
             }}
           />
@@ -194,16 +194,16 @@ export default function WhatsAppFloating({ locale: explicitLocale }: { locale?: 
       <span
         data-floating-whatsapp-icon
         style={{
-          width: '46px',
-          height: '46px',
+          width: '48px',
+          height: '48px',
           borderRadius: '9999px',
           background: '#25D366',
-          color: '#0b0a09',
+          color: '#0A0A0C',
+          border: '2px solid #FFFFFF',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           flexShrink: 0,
-          boxShadow: '0 6px 20px rgba(0,0,0,0.7), 0 0 0 2px rgba(214, 190, 150, 0.55)',
         }}
       >
         <MessageCircle className="h-6 w-6 shrink-0" aria-hidden="true" />

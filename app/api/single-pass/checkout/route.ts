@@ -46,7 +46,9 @@ import {
   createEmbeddedPaymentIntentForOrder,
 } from '@/lib/single-pass/stripe';
 import type {
+  CheckoutFieldKey,
   OrderAttribution,
+  SinglePassApiErrorCode,
   SinglePassCartItemInput,
   SinglePassOrder,
   SinglePassOrderItem,
@@ -147,7 +149,6 @@ export async function POST(request: Request) {
   }
 
   const resolvedPairs = Array.from(merged.values());
-  const hasTerrazzaDuomo21 = resolvedPairs.some((p) => p.sku.venueId === 'terrazza-duomo-21');
   const terrazzaValidation = validateTerrazzaDuomoCart(
     resolvedPairs.map((p) => ({ sku: p.sku, quantity: p.qty })),
   );
@@ -159,6 +160,8 @@ export async function POST(request: Request) {
       terrazzaValidation.errorCode,
       400,
       {
+        field: 'cart',
+        fieldErrors: { cart: terrazzaValidation.errorCode },
         floorGroup: terrazzaValidation.floorGroup,
         perPersonCount: terrazzaValidation.perPersonCount,
         maxCapacity: terrazzaValidation.maxCapacity,
@@ -174,54 +177,77 @@ export async function POST(request: Request) {
     request.headers.get('cf-ipcountry') ||
     undefined;
   const ipCity = request.headers.get('x-vercel-ip-city') || undefined;
-  const country = String(body.country || ipCountry || '').trim().slice(0, 80) || undefined;
+  const hasExplicitCountry = Object.prototype.hasOwnProperty.call(body, 'country');
+  const rawCountry = String(body.country ?? '').trim().slice(0, 80);
+  const country = (hasExplicitCountry ? rawCountry : String(ipCountry || '').trim().slice(0, 80)) || undefined;
   const password = String(body.password || '').trim();
   const dietaryNotes = String(body.dietaryNotes || '').trim().slice(0, 400);
   const spokenLanguages = Array.isArray(body.spokenLanguages)
     ? body.spokenLanguages.map((v) => String(v).trim().slice(0, 40)).filter(Boolean).slice(0, 10)
     : ['Italiano', 'English'];
 
-  if (!fullName || fullName.length < 2) {
-    return jsonError('Full name is required', 'INVALID_CUSTOMER_DATA', 400);
-  }
-  if (!isValidEmail(email)) {
-    return jsonError('Valid email address is required', 'INVALID_CUSTOMER_DATA', 400);
-  }
-  if (!isValidWhatsapp(whatsapp)) {
-    return jsonError('Valid telephone / WhatsApp number is required', 'INVALID_CUSTOMER_DATA', 400);
-  }
+  const fieldErrors: Partial<Record<CheckoutFieldKey, SinglePassApiErrorCode>> = {};
+  const fieldMessages: Partial<Record<CheckoutFieldKey, string>> = {};
 
+  if (!fullName || fullName.length < 2) {
+    fieldErrors.fullName = 'INVALID_FULL_NAME';
+    fieldMessages.fullName = 'Full name is required (at least 2 characters)';
+  }
   const ageCheck = validateAgeForSkus(
     resolvedPairs.map((p) => p.sku),
     age,
   );
   if (!ageCheck.ok) {
-    return jsonError(
+    fieldErrors.age = ageCheck.errorCode;
+    fieldMessages.age =
       ageCheck.errorCode === 'PINETA_STRICT_UNDER_30'
         ? 'Pineta Milano strictly admits Under 30 guests only (18-29).'
         : ageCheck.errorCode === 'UNDER_21_JUSTME'
           ? 'JustMe Milano strictly admits guests aged 21 and over for this special event.'
-          : 'All bookings require attendees to be at least 18 years old.',
-      ageCheck.errorCode,
-      400,
-      { suggestedVenueIds: ageCheck.suggestedVenueIds },
-    );
+          : 'All bookings require attendees to be at least 18 years old.';
   }
-
-  if (hasTerrazzaDuomo21 && !dietaryNotes) {
-    return jsonError(
-      'Allergies and intolerances note is required for Terrazza Duomo 21 / MA.RE bookings (or specify No allergies).',
-      'DIETARY_NOTES_REQUIRED',
-      400,
-    );
+  if (hasExplicitCountry && rawCountry.length < 2) {
+    fieldErrors.country = 'INVALID_COUNTRY';
+    fieldMessages.country = 'Country of residence is required';
   }
-
-  if (!body.acceptedTerms) {
-    return jsonError('Terms & Conditions acceptance is required', 'TERMS_REQUIRED', 400);
+  if (!isValidWhatsapp(whatsapp)) {
+    fieldErrors.whatsapp = 'INVALID_WHATSAPP';
+    fieldMessages.whatsapp = 'Valid telephone / WhatsApp number is required';
   }
-
+  if (!isValidEmail(email)) {
+    fieldErrors.email = 'INVALID_EMAIL';
+    fieldMessages.email = 'Valid email address is required';
+  }
   if (password && password.length < 8) {
-    return jsonError('Password must be at least 8 characters long', 'INVALID_PASSWORD', 400);
+    fieldErrors.password = 'INVALID_PASSWORD';
+    fieldMessages.password = 'Password must be at least 8 characters long';
+  }
+  if (!body.acceptedTerms) {
+    fieldErrors.acceptedTerms = 'TERMS_REQUIRED';
+    fieldMessages.acceptedTerms = 'Terms & Conditions acceptance is required';
+  }
+
+  const orderedFieldKeys: CheckoutFieldKey[] = [
+    'fullName',
+    'age',
+    'country',
+    'whatsapp',
+    'email',
+    'password',
+    'acceptedTerms',
+  ];
+  const firstField = orderedFieldKeys.find((k) => Boolean(fieldErrors[k]));
+  if (firstField && fieldErrors[firstField]) {
+    return jsonError(
+      fieldMessages[firstField] || 'Please check the highlighted form fields.',
+      fieldErrors[firstField]!,
+      400,
+      {
+        field: firstField,
+        fieldErrors,
+        ...(!ageCheck.ok && ageCheck.suggestedVenueIds ? { suggestedVenueIds: ageCheck.suggestedVenueIds } : {}),
+      },
+    );
   }
 
   const existingSession = readSessionFromRequest(request);
@@ -237,6 +263,10 @@ export async function POST(request: Request) {
           'An account with this email already exists. Use your existing password or leave password blank.',
           'INVALID_CREDENTIALS',
           401,
+          {
+            field: 'password',
+            fieldErrors: { password: 'INVALID_CREDENTIALS' },
+          },
         );
       }
     }
@@ -473,8 +503,8 @@ export async function POST(request: Request) {
     fxRate: order.fxRate,
     fxTimestamp: order.fxTimestamp,
     totalHeadcount: order.totalHeadcount,
-    ageAdvisory: ageCheck.advisoryCode,
-    suggestedVenueIds: ageCheck.suggestedVenueIds,
+    ageAdvisory: ageCheck.ok ? ageCheck.advisoryCode : undefined,
+    suggestedVenueIds: ageCheck.ok ? undefined : ageCheck.suggestedVenueIds,
   });
 
   const token = createSessionToken(member.email, member.id);

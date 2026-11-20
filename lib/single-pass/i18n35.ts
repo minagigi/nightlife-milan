@@ -195,9 +195,9 @@ const IT_PACK: SinglePassCopyPack = {
   formFullName: 'Nome e Cognome (come su documento)',
   formAge: 'Età al 31/12/2026',
   formCountry: 'Paese di residenza',
-  formWhatsapp: 'Numero di Telefono / WhatsApp (obbligatorio, es. +39 3...)',
+  formWhatsapp: 'Numero di Telefono / WhatsApp (es. +39 3...)',
   formWhatsappHint: 'Indispensabile per ricevere il pass, assistenza concierge 24/7 e accedere ai mini-gruppi dal 20/12.',
-  formEmail: 'Indirizzo Email (obbligatorio per voucher)',
+  formEmail: 'Indirizzo Email per voucher e codice PIN',
   formCreateAccountToggle: 'Crea ora un account per l’Area Riservata (consigliato)',
   formPassword: 'Password Area Riservata (minimo 8 caratteri)',
   formPasswordHint: 'Con la password potrai gestire i tuoi ordini e biglietti in qualsiasi momento dall’Area Riservata.',
@@ -351,9 +351,9 @@ const EN_PACK: SinglePassCopyPack = {
   formFullName: 'Full Name (as shown on ID)',
   formAge: 'Age on Dec 31, 2026',
   formCountry: 'Country of Residence',
-  formWhatsapp: 'Mobile / WhatsApp Number (required, e.g. +39 3...)',
-  formWhatsappHint: 'Required for digital voucher delivery, 24/7 concierge support, and Dec 20 mini-groups.',
-  formEmail: 'Email Address (required)',
+  formWhatsapp: 'Mobile / WhatsApp Number (with prefix, e.g. +39 3...)',
+  formWhatsappHint: 'Used for digital voucher delivery, 24/7 concierge support, and Dec 20 mini-groups.',
+  formEmail: 'Email Address (for digital voucher & PIN)',
   formCreateAccountToggle: 'Register my Reserved Area account now (recommended)',
   formPassword: 'Account Password (minimum 8 characters)',
   formPasswordHint: 'Used to manage all bookings and download passes inside your Reserved Area.',
@@ -508,19 +508,18 @@ const TERRAZZA_UI_EN: TerrazzaCheckoutUiPack = {
     'Every terrace table or private terrace must be paired with at least 1 per-person formula on the same floor (1st Floor or 5th Floor MA.RE).',
   tableMaxGuestsExceededError:
     'Selected per-person formulas exceed the maximum guest capacity of your terrace table (4 guests per terrace table, 8 guests per private terrace). Add another table or adjust guest count.',
-  allergiesLabel: 'Allergies and intolerances (required, deadline Dec 28, 2026)',
+  allergiesLabel: 'Allergies and dietary notes (optional)',
   allergiesHint:
-    'Required for Terrazza Duomo 21 and Terrazza MA.RE bookings. Must be notified no later than December 28, 2026.',
-  allergiesPlaceholder: 'Specify allergies/intolerances or click No allergies',
+    'Optional for Terrazza Duomo 21 and Terrazza MA.RE bookings. Leave blank if none, or share by December 28, 2026.',
+  allergiesPlaceholder: 'Specify allergies/intolerances if any (optional)',
   noAllergiesQuickFill: 'No allergies or intolerances',
-  allergiesRequiredError:
-    'Please state any allergies or intolerances (or click No allergies) before proceeding.',
+  allergiesRequiredError: '',
   termsNotice20:
     'I accept the Terms & Conditions, Privacy Policy, and Refund Policy of nightlifemilan.com, acknowledge the Booking fee 20% (concierge & electronic payment), and accept official venue rules.',
   confirmationRefundNotice:
     'Booking confirmed by Nightlife Milan after verifying availability with the venue; if the package is no longer available, full refund.',
   entryCheckpointNotice:
-    'Access via Via Silvio Pellico 2 (Piazza del Duomo 21). Piazza Duomo has 9 security checkpoints manned by authorities on December 31: arrive at least 45 minutes early. Allergies must be reported by December 28.',
+    'Access via Via Silvio Pellico 2 (Piazza del Duomo 21). Piazza Duomo has 9 security checkpoints manned by authorities on December 31: arrive at least 45 minutes early. Optional dietary notes can be updated until December 28.',
 };
 
 const TERRAZZA_UI_IT: TerrazzaCheckoutUiPack = {
@@ -529,19 +528,18 @@ const TERRAZZA_UI_IT: TerrazzaCheckoutUiPack = {
     'Ogni tavolo in terrazza o terrazzino privato deve essere abbinato ad almeno 1 formula a persona dello stesso piano (1° Piano oppure 5° Piano MA.RE).',
   tableMaxGuestsExceededError:
     'Le formule a persona selezionate superano la capienza massima del tavolo in terrazza (max 4 ospiti per tavolo, max 8 ospiti per terrazzino privato). Aggiungi un altro tavolo o regola il numero di ospiti.',
-  allergiesLabel: 'Allergie e intolleranze alimentari (obbligatorio, entro il 28 dicembre)',
+  allergiesLabel: 'Allergie e intolleranze alimentari',
   allergiesHint:
-    'Dato obbligatorio per le prenotazioni Terrazza Duomo 21 e Terrazza MA.RE, da comunicare entro e non oltre il 28 dicembre 2026.',
-  allergiesPlaceholder: 'Indica eventuali allergie/intolleranze oppure clicca Nessuna allergia',
+    'Campo facoltativo per Terrazza Duomo 21 e Terrazza MA.RE. Lascia vuoto se non ne hai, oppure segnala entro il 28 dicembre 2026.',
+  allergiesPlaceholder: 'Indica eventuali allergie/intolleranze solo se presenti (facoltativo)',
   noAllergiesQuickFill: 'Nessuna allergia o intolleranza',
-  allergiesRequiredError:
-    'Indica eventuali allergie o intolleranze alimentari (oppure clicca Nessuna allergia) per proseguire.',
+  allergiesRequiredError: '',
   termsNotice20:
     'Accetto Termini e Condizioni, Privacy Policy e Politica di Rimborso di nightlifemilan.com, confermo la Booking fee 20% (consulenza concierge e pagamento elettronico) e le condizioni ufficiali del locale.',
   confirmationRefundNotice:
     'Prenotazione confermata da Nightlife Milan dopo la verifica della disponibilità col locale; se il pacchetto non è più disponibile, rimborso completo.',
   entryCheckpointNotice:
-    'Ingresso da Via Silvio Pellico 2 (Piazza del Duomo 21). In Piazza Duomo saranno presenti 9 varchi presidiati dalle forze dell’ordine: presentarsi con almeno 45 minuti di anticipo. Allergie da comunicare entro il 28 dicembre.',
+    'Ingresso da Via Silvio Pellico 2 (Piazza del Duomo 21). In Piazza Duomo saranno presenti 9 varchi presidiati dalle forze dell’ordine: presentarsi con almeno 45 minuti di anticipo. Eventuali preferenze o allergie facoltative si possono comunicare entro il 28 dicembre.',
 };
 
 const TERRAZZA_UI_OVERRIDES: Partial<Record<LocaleCode, Partial<TerrazzaCheckoutUiPack>>> = {
@@ -551,13 +549,13 @@ const TERRAZZA_UI_OVERRIDES: Partial<Record<LocaleCode, Partial<TerrazzaCheckout
       'Cada mesa en terraza o terraza privada debe combinarse con al menos 1 fórmula por persona de la misma planta (1ª Planta o 5ª Planta MA.RE).',
     tableMaxGuestsExceededError:
       'Las fórmulas por persona superan la capacidad máxima de la mesa (máx. 4 personas por mesa, máx. 8 por terraza privada).',
-    allergiesLabel: 'Alergias e intolerancias (obligatorio antes del 28 de diciembre)',
+    allergiesLabel: 'Alergias e intolerancias alimentarias',
     noAllergiesQuickFill: 'Sin alergias ni intolerancias',
-    allergiesRequiredError: 'Indica alergias o intolerancias (o pulsa Sin alergias) antes de continuar.',
+    allergiesRequiredError: '',
     confirmationRefundNotice:
       'Reserva confirmada por Nightlife Milan tras verificar la disponibilidad con el local; si el paquete ya no está disponible, reembolso completo.',
     entryCheckpointNotice:
-      'Acceso por Via Silvio Pellico 2 (Piazza del Duomo 21). Hay 9 controles de acceso en Piazza Duomo: llegar al menos 45 minutos antes. Comunicar alergias antes del 28 de diciembre.',
+      'Acceso por Via Silvio Pellico 2 (Piazza del Duomo 21). Hay 9 controles de acceso en Piazza Duomo: llegar al menos 45 minutos antes. Preferencias alimentarias opcionales hasta el 28 de diciembre.',
   },
   fr: {
     tableAddonBadge: 'Supplément table terrasse (bouteilles incluses)',
@@ -565,13 +563,13 @@ const TERRAZZA_UI_OVERRIDES: Partial<Record<LocaleCode, Partial<TerrazzaCheckout
       'Chaque table en terrasse ou terrasse privée doit être associée à au moins 1 formule par personne du même étage (1er étage ou 5e étage MA.RE).',
     tableMaxGuestsExceededError:
       'Les formules par personne dépassent la capacité maximale de la table (max 4 personnes par table, max 8 pour la terrasse privée).',
-    allergiesLabel: 'Allergies et intolérances (obligatoire avant le 28 décembre)',
+    allergiesLabel: 'Allergies et intolérances alimentaires',
     noAllergiesQuickFill: 'Aucune allergie ni intolérance',
-    allergiesRequiredError: 'Veuillez indiquer vos allergies ou cliquer sur Aucune allergie pour continuer.',
+    allergiesRequiredError: '',
     confirmationRefundNotice:
       'Réservation confirmée par Nightlife Milan après vérification de la disponibilité auprès du lieu ; si la formule n’est plus disponible, remboursement intégral.',
     entryCheckpointNotice:
-      'Entrée par Via Silvio Pellico 2 (Piazza del Duomo 21). 9 points de contrôle sécurisés sur la Piazza Duomo : arrivez au moins 45 minutes en avance. Allergies à communiquer avant le 28 décembre.',
+      'Entrée par Via Silvio Pellico 2 (Piazza del Duomo 21). 9 points de contrôle sécurisés sur la Piazza Duomo : arrivez au moins 45 minutes en avance. Notes alimentaires facultatives jusqu’au 28 décembre.',
   },
   de: {
     tableAddonBadge: 'Terrassentisch-Zuschlag (Flaschen inklusive)',
@@ -579,13 +577,13 @@ const TERRAZZA_UI_OVERRIDES: Partial<Record<LocaleCode, Partial<TerrazzaCheckout
       'Jeder Terrassentisch oder die private Terrasse muss mit mindestens 1 Personen-Paket derselben Etage (1. OG oder 5. OG MA.RE) kombiniert werden.',
     tableMaxGuestsExceededError:
       'Die gewählten Personen-Pakete überschreiten die maximale Tischkapazität (max. 4 Gäste pro Terrassentisch, max. 8 für die private Terrasse).',
-    allergiesLabel: 'Allergien und Unverträglichkeiten (Pflichtfeld, Frist 28. Dezember)',
+    allergiesLabel: 'Allergien und Unverträglichkeiten',
     noAllergiesQuickFill: 'Keine Allergien oder Unverträglichkeiten',
-    allergiesRequiredError: 'Bitte geben Sie Allergien an oder klicken Sie auf Keine Allergien.',
+    allergiesRequiredError: '',
     confirmationRefundNotice:
       'Buchung von Nightlife Milan nach Verfügbarkeitsprüfung mit dem Lokal bestätigt; ist das Paket nicht mehr verfügbar, erfolgt eine vollständige Rückerstattung.',
     entryCheckpointNotice:
-      'Zugang über Via Silvio Pellico 2 (Piazza del Duomo 21). Auf der Piazza Duomo gibt es 9 Sicherheitskontrollen: bitte mindestens 45 Minuten früher erscheinen. Allergien bis 28. Dezember melden.',
+      'Zugang über Via Silvio Pellico 2 (Piazza del Duomo 21). Auf der Piazza Duomo gibt es 9 Sicherheitskontrollen: bitte mindestens 45 Minuten früher erscheinen. Optionale Ernährungshinweise bis 28. Dezember.',
   },
   pt: {
     tableAddonBadge: 'Suplemento mesa terraço (garrafas incluídas)',
@@ -751,3 +749,5 @@ export function getTerrazzaCheckoutUi35(locale: string): TerrazzaCheckoutUiPack 
   const ov = (TERRAZZA_UI_OVERRIDES as Record<string, Partial<TerrazzaCheckoutUiPack>>)[locale];
   return ov ? { ...TERRAZZA_UI_EN, ...ov } : TERRAZZA_UI_EN;
 }
+
+export { CHECKOUT_UX_COPY_35, getCheckoutUxCopy, type CheckoutUxCopy } from './checkoutUx35';

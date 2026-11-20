@@ -15,22 +15,29 @@ export interface ChromeStrings {
   events: string;
   bottlePrices: string;
   bookWhatsApp: string;
+  concierge: string;
+  megaClubsTitle: string;
+  megaAllClubs: string;
+  megaNye: string;
+  sanSiro: string;
 }
 
 const EN: ChromeStrings = {
   clubs: 'CLUBS', calendar: 'CALENDAR', zones: 'ZONES', guides: 'GUIDES',
   vipTables: 'VIP TABLES', events: 'EVENTS', bottlePrices: 'BOTTLE PRICES',
-  bookWhatsApp: 'Book via WhatsApp',
+  bookWhatsApp: 'Concierge', concierge: 'Concierge',
+  megaClubsTitle: 'Flagship Milan Clubs & Rooftops', megaAllClubs: 'Compare all 20 Milan clubs',
+  megaNye: 'New Year’s Eve 2027', sanSiro: 'San Siro Afterparties',
 };
 
 const CHROME: Partial<Record<LocaleCode, Partial<ChromeStrings>>> = {
   en: EN,
-  it: { clubs: 'LOCALI', calendar: 'CALENDARIO', zones: 'ZONE', guides: 'GUIDE', vipTables: 'TAVOLI VIP', events: 'EVENTI', bottlePrices: 'PREZZI BOTTIGLIE', bookWhatsApp: 'Prenota su WhatsApp' },
-  es: { clubs: 'CLUBES', calendar: 'CALENDARIO', zones: 'ZONAS', guides: 'GUÍAS', vipTables: 'MESAS VIP', events: 'EVENTOS', bottlePrices: 'PRECIOS DE BOTELLAS', bookWhatsApp: 'Reserva por WhatsApp' },
-  fr: { clubs: 'CLUBS', calendar: 'CALENDRIER', zones: 'QUARTIERS', guides: 'GUIDES', vipTables: 'TABLES VIP', events: 'ÉVÉNEMENTS', bottlePrices: 'PRIX DES BOUTEILLES', bookWhatsApp: 'Réserver via WhatsApp' },
-  de: { clubs: 'CLUBS', calendar: 'KALENDER', zones: 'VIERTEL', guides: 'GUIDES', vipTables: 'VIP-TISCHE', events: 'EVENTS', bottlePrices: 'FLASCHENPREISE', bookWhatsApp: 'Über WhatsApp buchen' },
-  pt: { clubs: 'CLUBES', calendar: 'CALENDÁRIO', zones: 'ZONAS', guides: 'GUIAS', vipTables: 'MESAS VIP', events: 'EVENTOS', bottlePrices: 'PREÇOS DE GARRAFAS', bookWhatsApp: 'Reservar via WhatsApp' },
-  nl: { clubs: 'CLUBS', calendar: 'KALENDER', zones: 'WIJKEN', guides: 'GIDSEN', vipTables: 'VIP-TAFELS', events: 'EVENEMENTEN', bottlePrices: 'FLESSENPRIJZEN', bookWhatsApp: 'Boek via WhatsApp' },
+  it: { clubs: 'LOCALI', calendar: 'CALENDARIO', zones: 'ZONE', guides: 'GUIDE', vipTables: 'TAVOLI VIP', events: 'EVENTI', bottlePrices: 'PREZZI BOTTIGLIE', bookWhatsApp: 'Concierge', concierge: 'Concierge', megaClubsTitle: 'Club e Rooftop Selezionati a Milano', megaAllClubs: 'Tutti i 20 locali di Milano', megaNye: 'Capodanno 2027', sanSiro: 'Dopo Partita San Siro' },
+  es: { clubs: 'CLUBES', calendar: 'CALENDARIO', zones: 'ZONAS', guides: 'GUÍAS', vipTables: 'MESAS VIP', events: 'EVENTOS', bottlePrices: 'PRECIOS DE BOTELLAS', bookWhatsApp: 'Concierge', concierge: 'Concierge', megaClubsTitle: 'Clubes y Terrazas Destacados en Milán', megaAllClubs: 'Ver los 20 clubes de Milán', megaNye: 'Nochevieja 2027', sanSiro: 'Post-Partido San Siro' },
+  fr: { clubs: 'CLUBS', calendar: 'CALENDRIER', zones: 'QUARTIERS', guides: 'GUIDES', vipTables: 'TABLES VIP', events: 'ÉVÉNEMENTS', bottlePrices: 'PRIX DES BOUTEILLES', bookWhatsApp: 'Concierge', concierge: 'Concierge', megaClubsTitle: 'Clubs et Rooftops Sélectionnés à Milan', megaAllClubs: 'Les 20 clubs de Milan', megaNye: 'Réveillon 2027', sanSiro: 'Aftermatchs San Siro' },
+  de: { clubs: 'CLUBS', calendar: 'KALENDER', zones: 'VIERTEL', guides: 'GUIDES', vipTables: 'VIP-TISCHE', events: 'EVENTS', bottlePrices: 'FLASCHENPREISE', bookWhatsApp: 'Concierge', concierge: 'Concierge', megaClubsTitle: 'Ausgewählte Clubs & Rooftops in Mailand', megaAllClubs: 'Alle 20 Clubs in Mailand', megaNye: 'Silvester 2027', sanSiro: 'San Siro Afterpartys' },
+  pt: { clubs: 'CLUBES', calendar: 'CALENDÁRIO', zones: 'ZONAS', guides: 'GUIAS', vipTables: 'MESAS VIP', events: 'EVENTOS', bottlePrices: 'PREÇOS DE GARRAFAS', bookWhatsApp: 'Concierge', concierge: 'Concierge', megaClubsTitle: 'Clubes e Rooftops em Destaque', megaAllClubs: 'Ver todos os 20 clubes', megaNye: 'Réveillon 2027' },
+  nl: { clubs: 'CLUBS', calendar: 'KALENDER', zones: 'WIJKEN', guides: 'GIDSEN', vipTables: 'VIP-TAFELS', events: 'EVENEMENTEN', bottlePrices: 'FLESSENPRIJZEN', bookWhatsApp: 'Concierge', concierge: 'Concierge', megaClubsTitle: 'Uitgelichte Clubs & Rooftops in Milaan', megaAllClubs: 'Alle 20 clubs in Milaan', megaNye: 'Oud & Nieuw 2027' },
   ru: { clubs: 'КЛУБЫ', calendar: 'КАЛЕНДАРЬ', zones: 'РАЙОНЫ', guides: 'ГИДЫ', vipTables: 'VIP-СТОЛЫ', events: 'СОБЫТИЯ', bottlePrices: 'ЦЕНЫ НА БУТЫЛКИ', bookWhatsApp: 'Забронировать в WhatsApp' },
   tr: { clubs: 'KULÜPLER', calendar: 'TAKVİM', zones: 'BÖLGELER', guides: 'REHBERLER', vipTables: 'VIP MASALAR', events: 'ETKİNLİKLER', bottlePrices: 'ŞİŞE FİYATLARI', bookWhatsApp: "WhatsApp'tan rezervasyon" },
   zh: { clubs: '夜店', calendar: '日历', zones: '区域', guides: '指南', vipTables: 'VIP卡座', events: '活动', bottlePrices: '酒水价格', bookWhatsApp: '通过WhatsApp预订' },

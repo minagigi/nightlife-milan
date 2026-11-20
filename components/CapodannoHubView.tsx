@@ -145,7 +145,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
   };
 
   return (
-    <main className="min-h-screen bg-[#050505] pb-24 pt-24 text-[#F6F1E7]">
+    <main className="min-h-[100dvh] bg-[#0A0A0C] pb-24 pt-24 text-[#FFFFFF]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -153,50 +153,50 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
 
       {/* Hero Section */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="relative overflow-hidden border border-[#F6F1E7]/20 bg-[#0B0A09] p-8 sm:p-12 lg:p-14">
-          <nav className="mb-6 text-xs uppercase tracking-widest text-[#C2B9AA]" aria-label="Breadcrumb">
-            <Link href={prefix || '/'} className="hover:text-[#F6F1E7]">Home</Link>
+        <div className="relative overflow-hidden border border-white/18 bg-[#18181C] p-8 sm:p-12 lg:p-14">
+          <nav className="mb-6 text-[13px] font-semibold text-[#C9C7C2]" aria-label="Breadcrumb">
+            <Link href={prefix || '/'} className="hover:text-[#FFFFFF]">Home</Link>
             <span className="mx-2">/</span>
-            <Link href={`${prefix}/events`} className="hover:text-[#F6F1E7]">{ui.eventsBreadcrumb}</Link>
+            <Link href={`${prefix}/events`} className="hover:text-[#FFFFFF]">{ui.eventsBreadcrumb}</Link>
             <span className="mx-2">/</span>
-            <Link href={capodannoPath(locale)} className="hover:text-[#F6F1E7]">{nav.menuLabel} 2027</Link>
+            <Link href={capodannoPath(locale)} className="hover:text-[#FFFFFF]">{nav.menuLabel} 2027</Link>
             {pageDef.slug !== 'capodanno-2027' && (
               <>
                 <span className="mx-2">/</span>
-                <span className="text-[#F6F1E7]">{shortLabel}</span>
+                <span className="text-[#FFFFFF]">{shortLabel}</span>
               </>
             )}
           </nav>
 
           <div className="flex flex-wrap items-center gap-2.5">
-            <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#EAE3D5]">
+            <p className="text-[13px] font-bold uppercase text-[#EDEBE6]">
               {getCapodannoCategoryBadge35(pageDef.slug, locale, pageDef.badgeIt, pageDef.badgeEn)} · {events.length} {ui.verifiedEventsLabel}
             </p>
-            <span className="border border-[#F6F1E7]/50 bg-[#050505] px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#F6F1E7]" data-selling-fast-badge>
+            <span className="bg-[#D9381E] px-3 py-1 text-[13px] font-bold uppercase text-[#FFFFFF]" data-selling-fast-badge>
               {scarcity.almostSoldOutBadge}
             </span>
           </div>
-          <h1 data-event-title={title} className="mt-3 font-serif text-3xl font-bold leading-tight text-[#F6F1E7] sm:text-5xl">
+          <h1 data-event-title={title} className="mt-3 font-display text-4xl font-extrabold uppercase leading-none text-[#FFFFFF] sm:text-6xl">
             {title}
           </h1>
-          <p className="mt-4 max-w-4xl text-base leading-relaxed text-[#C2B9AA] sm:text-lg">
+          <p className="mt-4 max-w-4xl text-base leading-relaxed text-[#C9C7C2] sm:text-lg">
             {subtitle}
           </p>
 
-          <div role="alert" data-urgency-alert className="mt-6 border border-[#050505]/15 bg-[#F6F1E7] p-5 text-[#050505]">
-            <p className="text-xs font-extrabold uppercase tracking-wider text-[#050505] sm:text-sm">
+          <div role="alert" data-urgency-alert className="mt-6 border border-[#0A0A0C]/16 bg-[#EDEBE6] p-5 text-[#0A0A0C]">
+            <p className="text-[13px] font-extrabold uppercase text-[#B5240D] sm:text-sm">
               {scarcity.urgencyAlertTitle}
             </p>
-            <p className="mt-1.5 text-sm leading-relaxed text-[#24201B]">
+            <p className="mt-1.5 max-w-[48ch] text-base leading-relaxed text-[#4F4D48]">
               {scarcity.urgencyAlertBody}
             </p>
           </div>
 
-          <div className="mt-6 border border-[#F6F1E7]/20 bg-[#050505] p-5">
-            <p className="text-xs font-bold uppercase tracking-wider text-[#EAE3D5]">
+          <div className="mt-6 border border-white/18 bg-[#0A0A0C] p-5">
+            <p className="text-[13px] font-bold text-[#EDEBE6]">
               {ui.quickGuideLabel} · {shortLabel}
             </p>
-            <p className="mt-2 text-sm leading-relaxed text-[#C2B9AA]">{quickAnswer}</p>
+            <p className="mt-2 max-w-[48ch] text-sm leading-relaxed text-[#C9C7C2]">{quickAnswer}</p>
           </div>
 
           {/* Clickable Contacts: Catalogo Schede Evento, WhatsApp, Tel, Email */}
@@ -205,74 +205,74 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
               href={getConciergeBookingUrl(locale, title, `${SITE_URL}${canonicalPath}`)}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#25D366] px-5 py-3 text-sm font-bold text-[#050505] transition hover:bg-[#2EE472]"
+              className="inline-flex items-center gap-2 bg-[#25D366] px-5 py-3 text-sm font-bold text-[#0A0A0C] transition hover:bg-[#2EE472]"
             >
               WhatsApp {SITE_CONTACT.whatsapp.number}
             </a>
             <a
               href="#catalogo-eventi"
-              className="inline-flex items-center gap-2 bg-[#F6F1E7] px-5 py-3 text-sm font-bold text-[#050505] transition hover:bg-[#EAE3D5]"
+              className="inline-flex items-center gap-2 bg-[#EDEBE6] px-5 py-3 text-sm font-bold text-[#0A0A0C] transition hover:bg-[#EAE3D5]"
             >
               {scarcity.openEventCardCta}
             </a>
             <a
               href="tel:+393519127047"
-              className="inline-flex items-center gap-2 border border-[#F6F1E7]/40 bg-[#050505] px-4 py-3 text-sm font-semibold text-[#F6F1E7] transition hover:bg-[#F6F1E7] hover:text-[#050505]"
+              className="inline-flex items-center gap-2 border border-white/40 bg-[#0A0A0C] px-4 py-3 text-sm font-semibold text-[#FFFFFF] transition hover:bg-[#EDEBE6] hover:text-[#0A0A0C]"
             >
               {ui.callNowBtn}
             </a>
             <a
               href="mailto:concierge@nightlifemilan.com"
-              className="inline-flex items-center gap-2 border border-[#F6F1E7]/20 bg-[#050505] px-4 py-3 text-sm font-semibold text-[#C2B9AA] transition hover:border-[#F6F1E7] hover:text-[#F6F1E7]"
+              className="inline-flex items-center gap-2 border border-white/20 bg-[#0A0A0C] px-4 py-3 text-sm font-semibold text-[#C9C7C2] transition hover:border-white hover:text-[#FFFFFF]"
             >
               {ui.emailBtn}: concierge@nightlifemilan.com
             </a>
-            <span className="w-full text-xs text-[#C2B9AA] sm:w-auto">
+            <span className="w-full text-[13px] text-[#C9C7C2] sm:w-auto">
               {ui.freeAdviceNote}
             </span>
           </div>
 
-          {/* Clickable Table of Contents (TOC) with #id anchors (#F6F1E7 Avorio Caldo) */}
+          {/* Clickable Table of Contents (TOC) with #id anchors (#EDEBE6 Carta Calda) */}
           <nav
             aria-label={ui.tocTitle}
-            className="mt-7 border border-[#050505]/15 bg-[#F6F1E7] text-[#050505] p-5"
+            className="mt-7 border border-[#0A0A0C]/16 bg-[#EDEBE6] p-5 text-[#0A0A0C]"
           >
-            <p className="text-xs font-bold uppercase tracking-widest text-[#3D3830]">
+            <p className="text-[13px] font-bold text-[#4F4D48]">
               {ui.tocTitle}
             </p>
-            <ul className="mt-3 grid gap-2 text-xs font-medium sm:grid-cols-2 lg:grid-cols-3 sm:text-sm">
+            <ul className="mt-3 grid gap-2 text-[13px] font-medium sm:grid-cols-2 lg:grid-cols-3 sm:text-sm">
               <li>
-                <a href="#categorie-capodanno" className="text-[#050505] hover:underline">
+                <a href="#categorie-capodanno" className="text-[#0A0A0C] hover:underline">
                   {ui.tocCategories}
                 </a>
               </li>
               <li>
-                <a href="#filtro-eventi" className="text-[#050505] hover:underline">
+                <a href="#filtro-eventi" className="text-[#0A0A0C] hover:underline">
                   {ui.tocFilter}
                 </a>
               </li>
               <li>
-                <a href="#catalogo-eventi" className="text-[#050505] hover:underline">
+                <a href="#catalogo-eventi" className="text-[#0A0A0C] hover:underline">
                   {ui.tocCatalog}
                 </a>
               </li>
               <li>
-                <a href="#tabella-prezzi" className="text-[#050505] hover:underline">
+                <a href="#tabella-prezzi" className="text-[#0A0A0C] hover:underline">
                   {ui.tocTable}
                 </a>
               </li>
               <li>
-                <a href="#termini-pagamento" className="text-[#050505] hover:underline">
+                <a href="#termini-pagamento" className="text-[#0A0A0C] hover:underline">
                   {paymentTerms.tocLabel}
                 </a>
               </li>
               <li>
-                <a href="#mappa-milano" className="text-[#050505] hover:underline">
+                <a href="#mappa-milano" className="text-[#0A0A0C] hover:underline">
                   {ui.tocMap}
                 </a>
               </li>
               <li>
-                <a href="#faq-capodanno" className="text-[#050505] hover:underline">
+                <a href="#faq-capodanno" className="text-[#0A0A0C] hover:underline">
                   {ui.tocFaq}
                 </a>
               </li>
@@ -288,22 +288,22 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
         )}
         {mode === 'capodanno-2027' && (
           <div className="mx-auto mt-8 max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col gap-4 border border-[#F6F1E7]/25 bg-[#0B0A09] p-6 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col gap-4 border border-white/18 bg-[#18181C] p-6 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[#EAE3D5]">
+                <h2 className="font-display text-2xl font-extrabold uppercase text-[#FFFFFF]">
+                  {spCopy.embeddedBannerTitle}
+                </h2>
+                <p className="mt-1 text-[13px] font-bold text-[#F35A3F]">
                   {spCopy.heroEyebrow}
                 </p>
-                <p className="mt-1 font-serif text-xl font-bold text-[#F6F1E7]">
-                  {spCopy.embeddedBannerTitle}
-                </p>
-                <p className="mt-1 max-w-3xl text-xs leading-relaxed text-[#C2B9AA] sm:text-sm">
+                <p className="mt-1 max-w-[48ch] text-sm leading-relaxed text-[#C9C7C2]">
                   {spCopy.embeddedBannerBody}
                 </p>
               </div>
               <Link
                 href={`${prefix}/single-pass`}
                 locale={locale}
-                className="inline-flex min-h-[44px] shrink-0 items-center justify-center bg-[#F6F1E7] px-5 py-3 text-xs font-extrabold uppercase tracking-wider text-[#050505] transition hover:bg-[#EAE3D5]"
+                className="nlm-pressable inline-flex min-h-[44px] shrink-0 items-center justify-center bg-[#D9381E] px-5 py-3 text-[13px] font-bold text-[#FFFFFF] transition hover:bg-[#B82B14]"
               >
                 {spCopy.embeddedBannerCta}
               </Link>
@@ -324,15 +324,15 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
 
       {/* Complete Price Comparison Table (#F6F1E7 Capitolo Avorio Caldo) */}
       <section id="tabella-prezzi" className="mx-auto mt-20 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="overflow-hidden border border-[#050505]/15 bg-[#F6F1E7] text-[#050505]">
-          <div className="border-b border-[#050505]/15 p-6 sm:p-8">
-            <h2 className="font-serif text-2xl font-bold text-[#050505] sm:text-3xl">
+        <div className="overflow-hidden border border-[#0A0A0C]/15 bg-[#EDEBE6] text-[#0A0A0C]">
+          <div className="border-b border-[#0A0A0C]/15 p-6 sm:p-8">
+            <h2 className="font-display text-2xl font-bold text-[#0A0A0C] sm:text-3xl">
               {ui.tableHeadingPrefix} · {shortLabel} ({events.length})
             </h2>
           </div>
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs sm:text-sm">
-              <thead className="border-b border-[#050505]/15 bg-[#EFE9DC] text-[11px] font-bold uppercase tracking-wider text-[#050505]">
+            <table className="w-full text-left text-[13px] sm:text-sm">
+              <thead className="border-b border-[#0A0A0C]/15 bg-[#FFFFFF] text-[13px] font-bold uppercase tracking-[0.04em] text-[#0A0A0C]">
                 <tr>
                   <th className="px-4 py-3.5">{ui.colVenue}</th>
                   <th className="px-4 py-3.5">{ui.colCity}</th>
@@ -340,10 +340,10 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
                   <th className="px-4 py-3.5">{ui.colPrices}</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#050505]/10">
+              <tbody className="divide-y divide-[#0A0A0C]/10">
                 {events.map((ev) => (
-                  <tr key={ev.slug} className="hover:bg-[#EFE9DC]">
-                    <td className="px-4 py-3 font-semibold text-[#050505]">
+                  <tr key={ev.slug} className="hover:bg-[#FFFFFF]">
+                    <td className="px-4 py-3 font-semibold text-[#0A0A0C]">
                       <Link
                         href={capodannoEventPath(ev.slug, locale)}
                         className="hover:underline"
@@ -351,11 +351,11 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
                         {ev.venueName}
                       </Link>
                     </td>
-                    <td className="px-4 py-3 text-[#24201B]">
+                    <td className="px-4 py-3 text-[#4F4D48]">
                       {ev.city} ({ev.province})
                     </td>
-                    <td className="px-4 py-3 text-[#24201B]">{formatCapodannoHours35(ev.hours, locale)}</td>
-                    <td className="px-4 py-3 font-bold text-[#050505]">
+                    <td className="px-4 py-3 text-[#4F4D48]">{formatCapodannoHours35(ev.hours, locale)}</td>
+                    <td className="px-4 py-3 font-bold text-[#0A0A0C]">
                       {getCapodannoLocalizedEventContent(ev, locale).priceSummary}
                     </td>
                   </tr>
@@ -368,37 +368,34 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
 
       {/* Official 6-Step Prepayment & Booking Protocol */}
       <section id="termini-pagamento" data-payment-terms-35 className="mx-auto mt-16 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="border border-[#F6F1E7]/25 bg-[#0B0A09] p-6 sm:p-8">
-          <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#C9A84C]">
-            {paymentTerms.eyebrow}
-          </p>
-          <div className="mt-2 flex flex-wrap items-center justify-between gap-3">
-            <h2 className="font-serif text-2xl font-bold text-[#F6F1E7] sm:text-3xl">
+        <div className="border border-white/18 bg-[#18181C] p-6 sm:p-8">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h2 className="font-display text-2xl font-extrabold uppercase text-[#FFFFFF] sm:text-3xl">
               {paymentTerms.heading}
             </h2>
-            <span className="border border-[#F6F1E7]/35 bg-[#050505] px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#EAE3D5]">
+            <span className="border border-white/30 bg-[#0A0A0C] px-3 py-1 text-[13px] font-bold text-[#EDEBE6]">
               {paymentTerms.methodsBadge}
             </span>
           </div>
-          <p className="mt-2 text-sm leading-relaxed text-[#C2B9AA]">
+          <p className="mt-2 max-w-[48ch] text-sm leading-relaxed text-[#C9C7C2]">
             {paymentTerms.subtitle}
           </p>
           <ol className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {paymentTerms.steps.map((step, idx) => (
               <li
                 key={step}
-                className="border border-[#F6F1E7]/15 bg-[#050505] p-4"
+                className="border border-white/14 bg-[#0A0A0C] p-4"
               >
-                <span className="inline-flex h-6 w-6 items-center justify-center bg-[#F6F1E7] font-mono text-xs font-bold text-[#050505]">
+                <span className="inline-flex h-6 w-6 items-center justify-center bg-[#FFFFFF] text-[13px] font-bold tabular-nums text-[#0A0A0C]">
                   {idx + 1}
                 </span>
-                <p className="mt-2.5 text-xs leading-relaxed text-[#F6F1E7] sm:text-sm">
+                <p className="mt-2.5 text-sm leading-relaxed text-[#FFFFFF]">
                   {step}
                 </p>
               </li>
             ))}
           </ol>
-          <p className="mt-4 border-l-2 border-[#C9A84C] pl-3 text-xs leading-relaxed text-[#C2B9AA]">
+          <p className="mt-4 bg-[#0A0A0C] px-4 py-3 text-[13px] leading-relaxed text-[#EDEBE6]">
             {paymentTerms.note}
           </p>
         </div>
@@ -406,11 +403,11 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
 
       {/* Interactive Google Maps Section */}
       <section id="mappa-milano" className="mx-auto mt-16 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="overflow-hidden border border-[#F6F1E7]/14 bg-[#0B0A09] p-6 sm:p-8">
-          <h2 className="font-serif text-2xl font-bold text-[#F6F1E7] sm:text-3xl">
+        <div className="overflow-hidden border border-white/14 bg-[#18181C] p-6 sm:p-8">
+          <h2 className="font-display text-2xl font-bold text-[#FFFFFF] sm:text-3xl">
             {ui.mapHeadingHub}
           </h2>
-          <p className="mt-2 text-sm text-[#C2B9AA]">
+          <p className="mt-2 text-sm text-[#C9C7C2]">
             {ui.mapSubtitleHub}
           </p>
           <div className="mt-5">
@@ -430,15 +427,15 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
 
       {/* FAQ Section (#F6F1E7 Capitolo Avorio Caldo) */}
       <section id="faq-capodanno" className="mx-auto mt-16 max-w-5xl px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#F6F1E7] text-[#050505] border border-[#050505]/15 p-6 sm:p-10">
-          <h2 className="font-serif text-2xl font-bold text-[#050505] sm:text-3xl">
+        <div className="bg-[#EDEBE6] text-[#0A0A0C] border border-[#0A0A0C]/15 p-6 sm:p-10">
+          <h2 className="font-display text-2xl font-bold text-[#0A0A0C] sm:text-3xl">
             {ui.faqHeadingPrefix} · {shortLabel}
           </h2>
           <div className="mt-6 space-y-4">
             {faqs.map((f) => (
-              <div key={f.q} className="border border-[#050505]/15 bg-[#EFE9DC] p-6">
-                <h3 className="font-serif text-lg font-bold text-[#050505]">{f.q}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#24201B]">{f.a}</p>
+              <div key={f.q} className="border border-[#0A0A0C]/15 bg-[#FFFFFF] p-6">
+                <h3 className="font-display text-lg font-bold text-[#0A0A0C]">{f.q}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-[#4F4D48]">{f.a}</p>
               </div>
             ))}
           </div>

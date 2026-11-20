@@ -6,7 +6,12 @@ import Link from '@/components/LocalizedLink';
 import { localePrefix } from '@/lib/i18n/locales';
 import { SINGLE_PASS_FEE_RATE, formatEurFromCents } from '@/lib/single-pass/catalog';
 import { formatMinorCurrency } from '@/lib/single-pass/currency';
-import { formatFeeLabel35, getSinglePassCopy, getTerrazzaCheckoutUi35 } from '@/lib/single-pass/i18n35';
+import {
+  formatFeeLabel35,
+  getCheckoutUxCopy,
+  getSinglePassCopy,
+  getTerrazzaCheckoutUi35,
+} from '@/lib/single-pass/i18n35';
 import type { SinglePassOrder } from '@/lib/single-pass/types';
 import { useSinglePassCart } from './SinglePassCartContext';
 
@@ -45,6 +50,7 @@ export default function SinglePassThankYouView({
 }) {
   const { clearCart } = useSinglePassCart();
   const copy = getSinglePassCopy(locale);
+  const uxCopy = getCheckoutUxCopy(locale);
   const lp = localePrefix(locale);
   const isIt = locale === 'it';
 
@@ -79,7 +85,7 @@ export default function SinglePassThankYouView({
         }
       })
       .catch(() => {
-        setErrorMsg('Unable to verify order right now.');
+        setErrorMsg(uxCopy.errNetwork);
       })
       .finally(() => {
         setLoading(false);
@@ -89,7 +95,7 @@ export default function SinglePassThankYouView({
 
   if (loading) {
     return (
-      <section className="mx-auto max-w-4xl px-4 py-20 text-center text-sm text-[#C2B9AA]">
+      <section className="mx-auto max-w-4xl px-4 py-20 text-center text-base text-[#4F4D48]">
         Verifying order...
       </section>
     );
@@ -97,19 +103,17 @@ export default function SinglePassThankYouView({
 
   if (!order) {
     return (
-      <section className="mx-auto max-w-3xl px-4 py-16 text-center space-y-5">
-        <div className="border border-[#F6F1E7]/20 bg-[#0B0A09] p-8">
-          <h1 className="font-serif text-3xl font-bold text-[#F6F1E7]">
+      <section className="mx-auto max-w-3xl space-y-5 px-4 py-16 text-center">
+        <div className="border border-[#0A0A0C]/16 bg-[#FFFFFF] p-8">
+          <h1 className="font-display text-3xl font-bold uppercase text-[#0A0A0C]">
             {orderId ? `${copy.orderIdLabel}: ${orderId}` : copy.navAccountLabel}
           </h1>
-          <p className="mt-3 text-sm text-[#C2B9AA]">
-            {errorMsg || copy.accountSubtitle}
-          </p>
+          <p className="mt-3 text-base text-[#4F4D48]">{errorMsg || copy.accountSubtitle}</p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Link
               href={`${lp}/account`}
               locale={locale}
-              className="inline-flex min-h-[44px] items-center justify-center bg-[#F6F1E7] px-5 py-2.5 text-xs font-extrabold uppercase tracking-wider text-[#050505]"
+              className="inline-flex min-h-[46px] items-center justify-center bg-[#0A0A0C] px-5 py-2.5 text-sm font-bold text-[#FFFFFF]"
             >
               {copy.navAccountLabel}
             </Link>
@@ -117,7 +121,7 @@ export default function SinglePassThankYouView({
               <Link
                 href={`${lp}/checkout?order=${encodeURIComponent(orderId)}`}
                 locale={locale}
-                className="inline-flex min-h-[44px] items-center justify-center border border-[#F6F1E7]/30 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[#F6F1E7]"
+                className="inline-flex min-h-[46px] items-center justify-center bg-[#D9381E] px-5 py-2.5 text-sm font-bold text-[#FFFFFF]"
               >
                 {copy.completePaymentCta}
               </Link>
@@ -156,88 +160,87 @@ export default function SinglePassThankYouView({
   );
 
   return (
-    <section className="mx-auto max-w-4xl px-4 py-14 sm:px-6 lg:px-8 space-y-8">
-      <header className="border border-[#25D366]/45 bg-[#0B0A09] p-6 sm:p-10">
-        <p className="inline-flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[#25D366]">
+    <section className="mx-auto max-w-4xl space-y-8 px-4 py-12 sm:px-6 lg:px-8">
+      <header className="border-2 border-[#0A0A0C] bg-[#FFFFFF] p-6 sm:p-10">
+        <p className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-[#15803D]">
           <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
           {copy.thankYouEyebrow}
         </p>
-        <h1 className="mt-3 font-serif text-3xl font-bold text-[#F6F1E7] sm:text-5xl">
+        <h1 className="mt-3 font-display text-4xl font-extrabold uppercase text-[#0A0A0C] sm:text-5xl">
           {copy.thankYouHeading}
         </h1>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#C2B9AA]">
+        <p className="mt-3 max-w-2xl text-base leading-relaxed text-[#4F4D48]">
           {copy.thankYouSubtitle}
         </p>
 
-        <div className="mt-6 grid gap-3 sm:grid-cols-3 font-mono text-xs">
-          <div className="border border-[#F6F1E7]/20 bg-[#050505] p-3.5">
-            <p className="text-[#8E8577]">{copy.orderIdLabel}</p>
-            <p className="mt-1 text-base font-bold text-[#F6F1E7]">{order.id}</p>
+        <div className="mt-6 grid gap-3 text-sm tabular-nums sm:grid-cols-3">
+          <div className="border border-[#0A0A0C]/16 bg-[#EDEBE6] p-4">
+            <p className="text-xs font-bold text-[#4F4D48]">{copy.orderIdLabel}</p>
+            <p className="mt-1 font-display text-2xl font-extrabold text-[#0A0A0C]">{order.id}</p>
           </div>
-          <div className="border border-[#F6F1E7]/20 bg-[#050505] p-3.5">
-            <p className="text-[#8E8577]">ACCESS PIN</p>
-            <p className="mt-1 inline-flex items-center gap-1.5 text-base font-bold text-[#C9A84C]">
-              <QrCode className="h-4 w-4" aria-hidden="true" />
+          <div className="border border-[#0A0A0C]/16 bg-[#EDEBE6] p-4">
+            <p className="text-xs font-bold text-[#4F4D48]">ACCESS PIN</p>
+            <p className="mt-1 inline-flex items-center gap-1.5 font-display text-2xl font-extrabold text-[#D9381E]">
+              <QrCode className="h-5 w-5" aria-hidden="true" />
               {order.accessPin}
             </p>
           </div>
-          <div className="border border-[#F6F1E7]/20 bg-[#050505] p-3.5">
-            <p className="text-[#8E8577]">{copy.guestsLabel}</p>
-            <p className="mt-1 inline-flex items-center gap-1.5 text-base font-bold text-[#F6F1E7]">
-              <Users className="h-4 w-4" aria-hidden="true" />
+          <div className="border border-[#0A0A0C]/16 bg-[#EDEBE6] p-4">
+            <p className="text-xs font-bold text-[#4F4D48]">{copy.guestsLabel}</p>
+            <p className="mt-1 inline-flex items-center gap-1.5 font-display text-2xl font-extrabold text-[#0A0A0C]">
+              <Users className="h-5 w-5" aria-hidden="true" />
               {order.totalHeadcount}
             </p>
           </div>
         </div>
       </header>
 
-      {/* Customer Contact Details + Purchased Packages */}
       <div className="grid gap-6 md:grid-cols-2">
-        <div className="border border-[#F6F1E7]/16 bg-[#0B0A09] p-6 space-y-3">
-          <h2 className="font-serif text-xl font-bold text-[#F6F1E7]">
+        <div className="space-y-3 border border-[#0A0A0C]/16 bg-[#FFFFFF] p-6">
+          <h2 className="font-display text-2xl font-bold uppercase text-[#0A0A0C]">
             {copy.customerContactsHeading}
           </h2>
-          <div className="space-y-2 text-sm text-[#EAE3D5]">
-            <p className="font-bold text-[#F6F1E7]">
+          <div className="space-y-2 text-sm text-[#0A0A0C]">
+            <p className="font-bold">
               {order.customer.fullName} · {order.customer.age} {isIt ? 'anni' : 'yrs'}
               {order.customer.country ? ` (${order.customer.country})` : ''}
             </p>
-            <p className="flex items-center gap-2 text-xs text-[#C2B9AA]">
-              <Mail className="h-4 w-4 text-[#C9A84C]" aria-hidden="true" />
+            <p className="flex items-center gap-2 text-[#4F4D48]">
+              <Mail className="h-4 w-4 text-[#0A0A0C]" aria-hidden="true" />
               {order.customer.email}
             </p>
-            <p className="flex items-center gap-2 font-mono text-xs text-[#C2B9AA]">
-              <Phone className="h-4 w-4 text-[#25D366]" aria-hidden="true" />
+            <p className="flex items-center gap-2 tabular-nums text-[#4F4D48]">
+              <Phone className="h-4 w-4 text-[#15803D]" aria-hidden="true" />
               {order.customer.whatsapp}
             </p>
           </div>
         </div>
 
-        <div className="border border-[#F6F1E7]/16 bg-[#0B0A09] p-6 space-y-3">
-          <h2 className="font-serif text-xl font-bold text-[#F6F1E7]">
+        <div className="space-y-3 border border-[#0A0A0C]/16 bg-[#FFFFFF] p-6">
+          <h2 className="font-display text-2xl font-bold uppercase text-[#0A0A0C]">
             {isIt ? 'Importi Contabilizzati' : 'Payment Breakdown'}
           </h2>
-          <div className="space-y-1.5 text-sm">
-            <div className="flex justify-between text-[#C2B9AA]">
+          <div className="space-y-1.5 text-sm tabular-nums">
+            <div className="flex justify-between text-[#4F4D48]">
               <span>{copy.basePriceLabel}</span>
-              <span className="font-mono">{formatEurFromCents(order.subtotalBaseCents, locale)}</span>
+              <span>{formatEurFromCents(order.subtotalBaseCents, locale)}</span>
             </div>
             {order.feeCents > 0 && (
-              <div className="flex justify-between text-[#C2B9AA]">
+              <div className="flex justify-between text-[#4F4D48]">
                 <span>{orderFeeLabel}</span>
-                <span className="font-mono">+{formatEurFromCents(order.feeCents, locale)}</span>
+                <span>+{formatEurFromCents(order.feeCents, locale)}</span>
               </div>
             )}
-            <div className="flex justify-between border-t border-[#F6F1E7]/12 pt-2 font-bold text-[#F6F1E7]">
+            <div className="flex justify-between border-t border-[#0A0A0C]/14 pt-2 font-extrabold text-[#0A0A0C]">
               <span>{copy.totalLabel} (EUR)</span>
-              <span className="font-mono">{formatEurFromCents(order.totalCents, locale)}</span>
+              <span>{formatEurFromCents(order.totalCents, locale)}</span>
             </div>
             {paidCur !== 'EUR' && (
-              <div className="flex justify-between bg-[#141210] p-2.5 text-sm font-bold text-[#C9A84C]">
+              <div className="flex justify-between bg-[#EDEBE6] p-2.5 text-sm font-bold text-[#0A0A0C]">
                 <span>
                   {copy.chargedInCurrencyLabel} ({paidCur})
                 </span>
-                <span className="font-mono">
+                <span className="text-[#D9381E]">
                   {formatMinorCurrency(order.presentmentTotalMinor, paidCur, locale)}
                 </span>
               </div>
@@ -246,26 +249,33 @@ export default function SinglePassThankYouView({
         </div>
       </div>
 
-      {/* Items List */}
-      <div className="border border-[#F6F1E7]/16 bg-[#0B0A09] p-6">
-        <h2 className="font-serif text-xl font-bold text-[#F6F1E7] mb-4">
+      <div className="border border-[#0A0A0C]/16 bg-[#FFFFFF] p-6">
+        <h2 className="mb-4 font-display text-2xl font-bold uppercase text-[#0A0A0C]">
           {isIt ? 'Dettaglio Pacchetti Acquistati' : 'Purchased Items'}
         </h2>
-        <div className="divide-y divide-[#F6F1E7]/10">
+        <div className="divide-y divide-[#0A0A0C]/12">
           {order.items.map((item) => {
-            const paxCount = typeof item.totalGuests === 'number' ? item.totalGuests : item.quantity;
+            const guestCount = typeof item.totalGuests === 'number' ? item.totalGuests : item.quantity;
             return (
-              <div key={item.skuId} className="flex flex-wrap items-center justify-between gap-3 py-3 text-sm">
+              <div
+                key={item.skuId}
+                className="flex flex-wrap items-center justify-between gap-3 py-3 text-sm tabular-nums"
+              >
                 <div>
-                  <p className="font-bold text-[#F6F1E7]">
+                  <p className="font-bold text-[#0A0A0C]">
                     {item.venueName} · {item.title} × {item.quantity}
                   </p>
-                  <p className="font-mono text-xs text-[#C2B9AA]">
-                    {item.arrivalTime} · {paxCount > 0 ? `${paxCount} pax` : terrazzaUi.tableAddonBadge}
+                  <p className="text-xs text-[#4F4D48]">
+                    {item.arrivalTime} ·{' '}
+                    {guestCount > 0
+                      ? `${guestCount} ${
+                          guestCount === 1 ? uxCopy.guestUnitSingular : uxCopy.guestsUnit
+                        }`
+                      : terrazzaUi.tableAddonBadge}
                     {item.dietaryChoice ? ` · ${item.dietaryChoice}` : ''}
                   </p>
                 </div>
-                <span className="font-mono font-bold text-[#F6F1E7]">
+                <span className="font-display text-2xl font-extrabold text-[#0A0A0C]">
                   {formatEurFromCents(item.lineTotalCents, locale)}
                 </span>
               </div>
@@ -275,19 +285,18 @@ export default function SinglePassThankYouView({
       </div>
 
       {hasTerrazzaDuomo21 && (
-        <div className="border border-[#C9A84C]/40 bg-[#17130D] p-5 text-sm text-[#EAE3D5] space-y-2">
-          <p className="font-bold text-[#F6F1E7]">{terrazzaUi.confirmationRefundNotice}</p>
-          <p className="text-xs leading-relaxed text-[#C2B9AA]">{terrazzaUi.entryCheckpointNotice}</p>
+        <div className="space-y-2 border border-[#0A0A0C]/20 bg-[#FFFFFF] p-5 text-sm text-[#0A0A0C]">
+          <p className="font-bold">{terrazzaUi.confirmationRefundNotice}</p>
+          <p className="text-xs leading-relaxed text-[#4F4D48]">{terrazzaUi.entryCheckpointNotice}</p>
         </div>
       )}
 
-      {/* Dec 20 Mini-Group Notice */}
       {hasCapodannoPass && (
-        <div className="border border-[#25D366]/35 bg-[#111512] p-5 text-sm text-[#EAE3D5]">
-          <p className="font-mono text-xs font-bold uppercase tracking-wider text-[#25D366]">
+        <div className="border border-[#0A0A0C]/20 bg-[#FFFFFF] p-5 text-sm text-[#0A0A0C]">
+          <p className="text-xs font-extrabold uppercase tracking-wider text-[#15803D]">
             {copy.miniGroupHeading}
           </p>
-          <p className="mt-2">
+          <p className="mt-2 text-[#4F4D48]">
             {order.whatsappGroupInviteUrl ? copy.miniGroupActiveBody : copy.miniGroupScheduledBody}
           </p>
           {order.whatsappGroupInviteUrl && (
@@ -295,7 +304,7 @@ export default function SinglePassThankYouView({
               href={order.whatsappGroupInviteUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 inline-flex min-h-[42px] items-center gap-2 bg-[#25D366] px-4 py-2 text-xs font-extrabold uppercase tracking-wider text-[#050505]"
+              className="mt-3 inline-flex min-h-[44px] items-center gap-2 bg-[#25D366] px-5 py-2.5 text-xs font-extrabold uppercase tracking-wider text-[#0A0A0C]"
             >
               <MessageCircle className="h-4 w-4" aria-hidden="true" />
               {copy.openMiniGroupCta}
@@ -304,15 +313,15 @@ export default function SinglePassThankYouView({
         </div>
       )}
 
-      <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#F6F1E7]/15 pt-6">
-        <p className="inline-flex items-center gap-2 text-xs text-[#8E8577]">
-          <ShieldCheck className="h-4 w-4 text-[#C9A84C]" aria-hidden="true" />
+      <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#0A0A0C]/16 pt-6">
+        <p className="inline-flex items-center gap-2 text-xs text-[#4F4D48]">
+          <ShieldCheck className="h-4 w-4 text-[#0A0A0C]" aria-hidden="true" />
           Nightlife Milan · nightlifemilan.com · Official Digital Pass
         </p>
         <Link
           href={`${lp}/account`}
           locale={locale}
-          className="inline-flex min-h-[46px] items-center justify-center bg-[#F6F1E7] px-6 py-3 text-xs font-extrabold uppercase tracking-widest text-[#050505]"
+          className="inline-flex min-h-[48px] items-center justify-center bg-[#D9381E] px-6 py-3 text-sm font-extrabold uppercase tracking-wider text-[#FFFFFF] hover:bg-[#B82B14]"
         >
           {copy.navAccountLabel} →
         </Link>

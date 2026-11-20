@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import {
+  AlertCircle,
   CheckCircle2,
   Clock,
   CreditCard,
@@ -13,9 +14,19 @@ import {
 } from 'lucide-react';
 import Link from '@/components/LocalizedLink';
 import { localePrefix } from '@/lib/i18n/locales';
-import { SINGLE_PASS_FEE_RATE, SPOKEN_LANGUAGE_OPTIONS, VENUE_BY_ID, formatEurFromCents } from '@/lib/single-pass/catalog';
+import {
+  SINGLE_PASS_FEE_RATE,
+  SPOKEN_LANGUAGE_OPTIONS,
+  VENUE_BY_ID,
+  formatEurFromCents,
+} from '@/lib/single-pass/catalog';
 import { formatMinorCurrency } from '@/lib/single-pass/currency';
-import { formatFeeLabel35, getSinglePassCopy, getTerrazzaCheckoutUi35 } from '@/lib/single-pass/i18n35';
+import {
+  formatFeeLabel35,
+  getCheckoutUxCopy,
+  getSinglePassCopy,
+  getTerrazzaCheckoutUi35,
+} from '@/lib/single-pass/i18n35';
 import type { SinglePassOrder } from '@/lib/single-pass/types';
 import { useSinglePassCart } from './SinglePassCartContext';
 
@@ -29,6 +40,16 @@ type MemberView = {
   dietaryNotes: string;
   hasPassword: boolean;
 };
+
+function isEmailValid(raw: string): boolean {
+  const email = raw.trim();
+  return email.length >= 5 && email.length <= 200 && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+}
+
+function isWhatsappValid(raw: string): boolean {
+  const digits = raw.replace(/\D/g, '');
+  return digits.length >= 7 && digits.length <= 18;
+}
 
 export default function SinglePassAccountView({
   locale,
@@ -45,6 +66,7 @@ export default function SinglePassAccountView({
 }) {
   const { clearCart } = useSinglePassCart();
   const copy = getSinglePassCopy(locale);
+  const uxCopy = getCheckoutUxCopy(locale);
   const terrazzaUi = getTerrazzaCheckoutUi35(locale);
   const lp = localePrefix(locale);
   const isIt = locale === 'it';
@@ -55,14 +77,15 @@ export default function SinglePassAccountView({
   const [paymentReady, setPaymentReady] = useState(false);
   const [statusBanner, setStatusBanner] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   const [authTab, setAuthTab] = useState<'login' | 'register' | 'lookup'>(initialTab || 'login');
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
 
   const [regName, setRegName] = useState('');
-  const [regAge, setRegAge] = useState('30');
-  const [regWhatsapp, setRegWhatsapp] = useState('+39 ');
+  const [regAge, setRegAge] = useState('');
+  const [regWhatsapp, setRegWhatsapp] = useState('');
   const [regEmail, setRegEmail] = useState('');
   const [regPassword, setRegPassword] = useState('');
 
@@ -73,6 +96,15 @@ export default function SinglePassAccountView({
   const [editLanguages, setEditLanguages] = useState<string[]>([]);
   const [savingProfile, setSavingProfile] = useState(false);
   const [payingOrderId, setPayingOrderId] = useState<string | null>(null);
+
+  const clearErr = (k: string) => {
+    setFieldErrors((prev) => {
+      if (!prev[k]) return prev;
+      const next = { ...prev };
+      delete next[k];
+      return next;
+    });
+  };
 
   const loadAccount = async () => {
     try {
@@ -133,59 +165,89 @@ export default function SinglePassAccountView({
     return () => {
       active = false;
     };
-  }, [initialCheckoutState, initialOrderId, initialSessionId]);
+  }, [initialCheckoutState, initialOrderId, initialSessionId, isIt, clearCart]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg(null);
+    const errs: Record<string, string> = {};
+    if (!isEmailValid(loginEmail)) errs.loginEmail = uxCopy.errEmail;
+    if (!loginPassword) errs.loginPassword = uxCopy.errPasswordShort;
+    setFieldErrors(errs);
+    if (Object.keys(errs).length > 0) return;
+
     const res = await fetch('/api/single-pass/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: loginEmail, password: loginPassword }),
+      body: JSON.stringify({ email: loginEmail.trim(), password: loginPassword }),
     });
-    const data = (await res.json()) as { ok?: boolean; error?: string };
-    if (!res.ok || !data.ok) {
-      setErrorMsg(data.error || 'Invalid credentials');
+    const data = (await res.json().catch(() => null)) as {
+      ok?: boolean;
+      error?: string;
+    } | null;
+    if (!res.ok || !data?.ok) {
+      setErrorMsg(data?.error || uxCopy.errInvalidCredentials);
       return;
     }
+    setFieldErrors({});
     await loadAccount();
   };
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg(null);
+    const errs: Record<string, string> = {};
+    const parsedAge = Number(regAge);
+    if (regName.trim().length < 2) errs.regName = uxCopy.errFullName;
+    if (!regAge.trim() || !Number.isFinite(parsedAge) || parsedAge < 18 || parsedAge > 99) {
+      errs.regAge = parsedAge > 0 && parsedAge < 18 ? uxCopy.errUnder18 : uxCopy.errAgeInvalid;
+    }
+    if (!isWhatsappValid(regWhatsapp)) errs.regWhatsapp = uxCopy.errWhatsapp;
+    if (!isEmailValid(regEmail)) errs.regEmail = uxCopy.errEmail;
+    if (regPassword.trim().length < 8) errs.regPassword = uxCopy.errPasswordShort;
+    setFieldErrors(errs);
+    if (Object.keys(errs).length > 0) return;
+
     const res = await fetch('/api/single-pass/auth/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        fullName: regName,
-        age: Number(regAge),
-        whatsapp: regWhatsapp,
-        email: regEmail,
-        password: regPassword,
+        fullName: regName.trim(),
+        age: parsedAge,
+        whatsapp: regWhatsapp.trim(),
+        email: regEmail.trim(),
+        password: regPassword.trim(),
       }),
     });
-    const data = (await res.json()) as { ok?: boolean; error?: string };
-    if (!res.ok || !data.ok) {
-      setErrorMsg(data.error || 'Registration failed');
+    const data = (await res.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
+    if (!res.ok || !data?.ok) {
+      setErrorMsg(data?.error || 'Registration failed');
       return;
     }
+    setFieldErrors({});
     await loadAccount();
   };
 
   const handleLookup = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMsg(null);
+    const errs: Record<string, string> = {};
+    if (!isEmailValid(lookupEmail)) errs.lookupEmail = uxCopy.errEmail;
+    if (!lookupOrderId.trim()) errs.lookupOrderId = copy.orderCodeLabel;
+    setFieldErrors(errs);
+    if (Object.keys(errs).length > 0) return;
+
     const res = await fetch('/api/single-pass/auth/order-lookup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: lookupEmail, orderId: lookupOrderId }),
+      body: JSON.stringify({ email: lookupEmail.trim(), orderId: lookupOrderId.trim() }),
     });
-    const data = (await res.json()) as { ok?: boolean; error?: string };
-    if (!res.ok || !data.ok) {
-      setErrorMsg(data.error || 'Order not found');
+    const data = (await res.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
+    if (!res.ok || !data?.ok) {
+      setErrorMsg(data?.error || 'Order not found');
       return;
     }
+    setFieldErrors({});
     await loadAccount();
   };
 
@@ -202,20 +264,25 @@ export default function SinglePassAccountView({
 
   const handleSaveProfile = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSavingProfile(true);
     setErrorMsg(null);
+    if (!isWhatsappValid(editWhatsapp)) {
+      setFieldErrors({ editWhatsapp: uxCopy.errWhatsapp });
+      return;
+    }
+    setFieldErrors({});
+    setSavingProfile(true);
     try {
       const res = await fetch('/api/single-pass/me', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          whatsapp: editWhatsapp,
+          whatsapp: editWhatsapp.trim(),
           spokenLanguages: editLanguages,
         }),
       });
-      const data = (await res.json()) as { ok?: boolean; error?: string };
-      if (!res.ok || !data.ok) {
-        setErrorMsg(data.error || 'Update failed');
+      const data = (await res.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
+      if (!res.ok || !data?.ok) {
+        setErrorMsg(data?.error || 'Update failed');
       } else {
         setStatusBanner(isIt ? 'Dati WhatsApp e lingue aggiornati.' : 'WhatsApp & languages updated.');
         await loadAccount();
@@ -231,21 +298,21 @@ export default function SinglePassAccountView({
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8">
-      <div className="mb-8 flex flex-col gap-4 border-b border-[#F6F1E7]/15 pb-6 sm:flex-row sm:items-end sm:justify-between">
+      <div className="mb-8 flex flex-col gap-4 border-b border-[#0A0A0C]/16 pb-6 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#EAE3D5]">
+          <p className="text-xs font-bold tracking-wide text-[#4F4D48]">
             NIGHTLIFE MILAN · SINGLE PASS MEMBER PORTAL
           </p>
-          <h1 className="mt-2 font-serif text-3xl font-bold text-[#F6F1E7] sm:text-4xl">
+          <h1 className="mt-2 font-display text-4xl font-extrabold uppercase text-[#0A0A0C] sm:text-5xl">
             {copy.accountTitle}
           </h1>
-          <p className="mt-2 max-w-2xl text-sm text-[#C2B9AA]">{copy.accountSubtitle}</p>
+          <p className="mt-2 max-w-2xl text-base text-[#4F4D48]">{copy.accountSubtitle}</p>
         </div>
         {member && (
           <button
             type="button"
             onClick={handleLogout}
-            className="inline-flex min-h-[42px] items-center gap-2 border border-[#F6F1E7]/25 px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#C2B9AA] hover:border-[#F6F1E7] hover:text-[#F6F1E7]"
+            className="inline-flex min-h-[44px] items-center gap-2 border border-[#0A0A0C] bg-[#FFFFFF] px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#0A0A0C] hover:bg-[#0A0A0C] hover:text-[#FFFFFF]"
           >
             <LogOut className="h-4 w-4" aria-hidden="true" />
             {copy.logoutCta}
@@ -254,73 +321,145 @@ export default function SinglePassAccountView({
       </div>
 
       {statusBanner && (
-        <div className="mb-6 flex items-start gap-3 border border-emerald-400/50 bg-emerald-950/40 p-4 text-sm text-emerald-100">
-          <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-300" aria-hidden="true" />
+        <div className="mb-6 flex items-start gap-3 border border-[#15803D] bg-[#FFFFFF] p-4 text-sm font-medium text-[#0A0A0C]">
+          <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#15803D]" aria-hidden="true" />
           <p>{statusBanner}</p>
         </div>
       )}
 
-      {errorMsg && (
-        <div role="alert" className="mb-6 border border-rose-400/50 bg-rose-950/40 p-4 text-sm text-rose-100">
-          {errorMsg}
+      {(errorMsg || Object.keys(fieldErrors).length > 0) && (
+        <div
+          role="alert"
+          className="mb-6 flex items-start gap-3 border-2 border-[#B91C1C] bg-[#FEF2F2] p-4 text-sm font-semibold text-[#B91C1C]"
+        >
+          <AlertCircle className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
+          <div>
+            {errorMsg && <p>{errorMsg}</p>}
+            {Object.values(fieldErrors).map((m, i) => (
+              <p key={i}>{m}</p>
+            ))}
+          </div>
         </div>
       )}
 
       {loading ? (
-        <div className="border border-[#F6F1E7]/15 bg-[#0B0A09] p-12 text-center font-mono text-xs uppercase tracking-widest text-[#C2B9AA]">
+        <div className="border border-[#0A0A0C]/16 bg-[#FFFFFF] p-12 text-center text-sm font-semibold text-[#4F4D48]">
           Loading Reserved Area...
         </div>
       ) : !member ? (
-        <div className="mx-auto max-w-xl border border-[#050505]/20 bg-[#F6F1E7] p-6 text-[#050505] sm:p-8">
-          <div className="grid grid-cols-3 border-b border-[#050505]/15 pb-3 text-center text-xs font-bold uppercase">
+        <div className="mx-auto max-w-xl border border-[#0A0A0C]/18 bg-[#FFFFFF] p-6 text-[#0A0A0C] sm:p-8">
+          <p className="mb-4 text-xs font-medium text-[#4F4D48]">{uxCopy.requiredLegend}</p>
+          <div className="grid grid-cols-3 border-b border-[#0A0A0C]/15 pb-3 text-center text-xs font-bold uppercase">
             <button
               type="button"
-              onClick={() => setAuthTab('login')}
-              className={`py-2.5 transition ${authTab === 'login' ? 'bg-[#050505] text-[#F6F1E7]' : 'text-[#3D3830] hover:bg-white/60'}`}
+              onClick={() => {
+                setAuthTab('login');
+                setFieldErrors({});
+                setErrorMsg(null);
+              }}
+              className={`min-h-[44px] py-2.5 transition ${
+                authTab === 'login' ? 'bg-[#0A0A0C] text-[#FFFFFF]' : 'text-[#4F4D48] hover:bg-[#EDEBE6]'
+              }`}
             >
               {copy.tabLogin}
             </button>
             <button
               type="button"
-              onClick={() => setAuthTab('register')}
-              className={`py-2.5 transition ${authTab === 'register' ? 'bg-[#050505] text-[#F6F1E7]' : 'text-[#3D3830] hover:bg-white/60'}`}
+              onClick={() => {
+                setAuthTab('register');
+                setFieldErrors({});
+                setErrorMsg(null);
+              }}
+              className={`min-h-[44px] py-2.5 transition ${
+                authTab === 'register'
+                  ? 'bg-[#0A0A0C] text-[#FFFFFF]'
+                  : 'text-[#4F4D48] hover:bg-[#EDEBE6]'
+              }`}
             >
               {copy.tabRegister}
             </button>
             <button
               type="button"
-              onClick={() => setAuthTab('lookup')}
-              className={`py-2.5 transition ${authTab === 'lookup' ? 'bg-[#050505] text-[#F6F1E7]' : 'text-[#3D3830] hover:bg-white/60'}`}
+              onClick={() => {
+                setAuthTab('lookup');
+                setFieldErrors({});
+                setErrorMsg(null);
+              }}
+              className={`min-h-[44px] py-2.5 transition ${
+                authTab === 'lookup'
+                  ? 'bg-[#0A0A0C] text-[#FFFFFF]'
+                  : 'text-[#4F4D48] hover:bg-[#EDEBE6]'
+              }`}
             >
               {copy.tabOrderLookup}
             </button>
           </div>
 
           {authTab === 'login' && (
-            <form onSubmit={handleLogin} className="mt-6 space-y-4">
-              <label className="block text-xs font-bold">
-                Email
+            <form noValidate onSubmit={handleLogin} className="mt-6 space-y-4">
+              <div>
+                <div className="flex items-center justify-between gap-2">
+                  <label htmlFor="acc-login-email" className="text-sm font-bold">
+                    Email *
+                  </label>
+                  <span className="bg-[#0A0A0C] px-2 py-0.5 text-[11px] font-bold text-[#FFFFFF]">
+                    {uxCopy.requiredBadge} *
+                  </span>
+                </div>
                 <input
+                  id="acc-login-email"
                   type="email"
-                  required
                   value={loginEmail}
-                  onChange={(e) => setLoginEmail(e.target.value)}
-                  className="mt-1 h-11 w-full border border-[#050505]/30 bg-white px-3 text-sm"
+                  onChange={(e) => {
+                    setLoginEmail(e.target.value);
+                    clearErr('loginEmail');
+                  }}
+                  aria-invalid={Boolean(fieldErrors.loginEmail)}
+                  className={`mt-1.5 h-12 w-full px-3 text-base ${
+                    fieldErrors.loginEmail
+                      ? 'border-2 border-[#B91C1C] bg-[#FEF2F2]'
+                      : 'border border-[#0A0A0C]/30 bg-[#FFFFFF]'
+                  }`}
                 />
-              </label>
-              <label className="block text-xs font-bold">
-                Password
+                {fieldErrors.loginEmail && (
+                  <p className="mt-1 text-sm font-semibold text-[#B91C1C]">
+                    {fieldErrors.loginEmail}
+                  </p>
+                )}
+              </div>
+              <div>
+                <div className="flex items-center justify-between gap-2">
+                  <label htmlFor="acc-login-pwd" className="text-sm font-bold">
+                    Password *
+                  </label>
+                  <span className="bg-[#0A0A0C] px-2 py-0.5 text-[11px] font-bold text-[#FFFFFF]">
+                    {uxCopy.requiredBadge} *
+                  </span>
+                </div>
                 <input
+                  id="acc-login-pwd"
                   type="password"
-                  required
                   value={loginPassword}
-                  onChange={(e) => setLoginPassword(e.target.value)}
-                  className="mt-1 h-11 w-full border border-[#050505]/30 bg-white px-3 text-sm"
+                  onChange={(e) => {
+                    setLoginPassword(e.target.value);
+                    clearErr('loginPassword');
+                  }}
+                  aria-invalid={Boolean(fieldErrors.loginPassword)}
+                  className={`mt-1.5 h-12 w-full px-3 text-base ${
+                    fieldErrors.loginPassword
+                      ? 'border-2 border-[#B91C1C] bg-[#FEF2F2]'
+                      : 'border border-[#0A0A0C]/30 bg-[#FFFFFF]'
+                  }`}
                 />
-              </label>
+                {fieldErrors.loginPassword && (
+                  <p className="mt-1 text-sm font-semibold text-[#B91C1C]">
+                    {fieldErrors.loginPassword}
+                  </p>
+                )}
+              </div>
               <button
                 type="submit"
-                className="min-h-[46px] w-full bg-[#050505] px-5 py-3 text-xs font-extrabold uppercase tracking-widest text-[#F6F1E7]"
+                className="min-h-[50px] w-full bg-[#D9381E] px-5 py-3 text-sm font-extrabold uppercase tracking-wider text-[#FFFFFF] hover:bg-[#B82B14]"
               >
                 {copy.loginCta}
               </button>
@@ -328,65 +467,137 @@ export default function SinglePassAccountView({
           )}
 
           {authTab === 'register' && (
-            <form onSubmit={handleRegister} className="mt-6 space-y-4">
+            <form noValidate onSubmit={handleRegister} className="mt-6 space-y-4">
               <div className="grid gap-3 sm:grid-cols-2">
-                <label className="text-xs font-bold">
-                  {copy.formFullName}
+                <div>
+                  <label htmlFor="acc-reg-name" className="block text-sm font-bold">
+                    {copy.formFullName} *
+                  </label>
                   <input
+                    id="acc-reg-name"
                     type="text"
-                    required
                     value={regName}
-                    onChange={(e) => setRegName(e.target.value)}
-                    className="mt-1 h-11 w-full border border-[#050505]/30 bg-white px-3 text-sm"
+                    onChange={(e) => {
+                      setRegName(e.target.value);
+                      clearErr('regName');
+                    }}
+                    aria-invalid={Boolean(fieldErrors.regName)}
+                    className={`mt-1.5 h-12 w-full px-3 text-base ${
+                      fieldErrors.regName
+                        ? 'border-2 border-[#B91C1C] bg-[#FEF2F2]'
+                        : 'border border-[#0A0A0C]/30 bg-[#FFFFFF]'
+                    }`}
                   />
-                </label>
-                <label className="text-xs font-bold">
-                  {copy.formAge}
+                  {fieldErrors.regName && (
+                    <p className="mt-1 text-xs font-semibold text-[#B91C1C]">{fieldErrors.regName}</p>
+                  )}
+                </div>
+                <div>
+                  <label htmlFor="acc-reg-age" className="block text-sm font-bold">
+                    {copy.formAge} *
+                  </label>
                   <input
+                    id="acc-reg-age"
                     type="number"
                     min={18}
                     max={99}
-                    required
                     value={regAge}
-                    onChange={(e) => setRegAge(e.target.value)}
-                    className="mt-1 h-11 w-full border border-[#050505]/30 bg-white px-3 text-sm"
+                    onChange={(e) => {
+                      setRegAge(e.target.value);
+                      clearErr('regAge');
+                    }}
+                    aria-invalid={Boolean(fieldErrors.regAge)}
+                    placeholder="28"
+                    className={`mt-1.5 h-12 w-full px-3 text-base ${
+                      fieldErrors.regAge
+                        ? 'border-2 border-[#B91C1C] bg-[#FEF2F2]'
+                        : 'border border-[#0A0A0C]/30 bg-[#FFFFFF]'
+                    }`}
                   />
-                </label>
+                  {fieldErrors.regAge && (
+                    <p className="mt-1 text-xs font-semibold text-[#B91C1C]">{fieldErrors.regAge}</p>
+                  )}
+                </div>
               </div>
-              <label className="block text-xs font-bold">
-                {copy.formWhatsapp}
+              <div>
+                <label htmlFor="acc-reg-wa" className="block text-sm font-bold">
+                  {copy.formWhatsapp} *
+                </label>
                 <input
+                  id="acc-reg-wa"
                   type="tel"
-                  required
                   value={regWhatsapp}
-                  onChange={(e) => setRegWhatsapp(e.target.value)}
-                  className="mt-1 h-11 w-full border border-[#050505]/30 bg-white px-3 text-sm"
+                  onChange={(e) => {
+                    setRegWhatsapp(e.target.value);
+                    clearErr('regWhatsapp');
+                  }}
+                  aria-invalid={Boolean(fieldErrors.regWhatsapp)}
+                  placeholder={uxCopy.whatsappPlaceholder}
+                  className={`mt-1.5 h-12 w-full px-3 text-base ${
+                    fieldErrors.regWhatsapp
+                      ? 'border-2 border-[#B91C1C] bg-[#FEF2F2]'
+                      : 'border border-[#0A0A0C]/30 bg-[#FFFFFF]'
+                  }`}
                 />
-              </label>
-              <label className="block text-xs font-bold">
-                Email
+                {fieldErrors.regWhatsapp && (
+                  <p className="mt-1 text-xs font-semibold text-[#B91C1C]">
+                    {fieldErrors.regWhatsapp}
+                  </p>
+                )}
+              </div>
+              <div>
+                <label htmlFor="acc-reg-email" className="block text-sm font-bold">
+                  Email *
+                </label>
                 <input
+                  id="acc-reg-email"
                   type="email"
-                  required
                   value={regEmail}
-                  onChange={(e) => setRegEmail(e.target.value)}
-                  className="mt-1 h-11 w-full border border-[#050505]/30 bg-white px-3 text-sm"
+                  onChange={(e) => {
+                    setRegEmail(e.target.value);
+                    clearErr('regEmail');
+                  }}
+                  aria-invalid={Boolean(fieldErrors.regEmail)}
+                  placeholder={uxCopy.emailPlaceholder}
+                  className={`mt-1.5 h-12 w-full px-3 text-base ${
+                    fieldErrors.regEmail
+                      ? 'border-2 border-[#B91C1C] bg-[#FEF2F2]'
+                      : 'border border-[#0A0A0C]/30 bg-[#FFFFFF]'
+                  }`}
                 />
-              </label>
-              <label className="block text-xs font-bold">
-                Password (min. 8)
+                {fieldErrors.regEmail && (
+                  <p className="mt-1 text-xs font-semibold text-[#B91C1C]">{fieldErrors.regEmail}</p>
+                )}
+              </div>
+              <div>
+                <label htmlFor="acc-reg-pwd" className="block text-sm font-bold">
+                  Password (min. 8) *
+                </label>
                 <input
+                  id="acc-reg-pwd"
                   type="password"
-                  minLength={8}
-                  required
                   value={regPassword}
-                  onChange={(e) => setRegPassword(e.target.value)}
-                  className="mt-1 h-11 w-full border border-[#050505]/30 bg-white px-3 text-sm"
+                  onChange={(e) => {
+                    setRegPassword(e.target.value);
+                    clearErr('regPassword');
+                  }}
+                  aria-invalid={Boolean(fieldErrors.regPassword)}
+                  placeholder={uxCopy.passwordPlaceholder}
+                  className={`mt-1.5 h-12 w-full px-3 text-base ${
+                    fieldErrors.regPassword
+                      ? 'border-2 border-[#B91C1C] bg-[#FEF2F2]'
+                      : 'border border-[#0A0A0C]/30 bg-[#FFFFFF]'
+                  }`}
                 />
-              </label>
+                {fieldErrors.regPassword && (
+                  <p className="mt-1 text-xs font-semibold text-[#B91C1C]">
+                    {fieldErrors.regPassword}
+                  </p>
+                )}
+              </div>
               <button
                 type="submit"
-                className="min-h-[46px] w-full bg-[#050505] px-5 py-3 text-xs font-extrabold uppercase tracking-widest text-[#F6F1E7]"
+                className="min-h-[50px] w-full bg-[#D9381E] px-5 py-3 text-sm font-extrabold uppercase tracking-wider text-[#FFFFFF] hover:bg-[#B82B14]"
               >
                 {copy.registerCta}
               </button>
@@ -394,31 +605,61 @@ export default function SinglePassAccountView({
           )}
 
           {authTab === 'lookup' && (
-            <form onSubmit={handleLookup} className="mt-6 space-y-4">
-              <label className="block text-xs font-bold">
-                Email
+            <form noValidate onSubmit={handleLookup} className="mt-6 space-y-4">
+              <div>
+                <label htmlFor="acc-lookup-email" className="block text-sm font-bold">
+                  Email *
+                </label>
                 <input
+                  id="acc-lookup-email"
                   type="email"
-                  required
                   value={lookupEmail}
-                  onChange={(e) => setLookupEmail(e.target.value)}
-                  className="mt-1 h-11 w-full border border-[#050505]/30 bg-white px-3 text-sm"
+                  onChange={(e) => {
+                    setLookupEmail(e.target.value);
+                    clearErr('lookupEmail');
+                  }}
+                  aria-invalid={Boolean(fieldErrors.lookupEmail)}
+                  className={`mt-1.5 h-12 w-full px-3 text-base ${
+                    fieldErrors.lookupEmail
+                      ? 'border-2 border-[#B91C1C] bg-[#FEF2F2]'
+                      : 'border border-[#0A0A0C]/30 bg-[#FFFFFF]'
+                  }`}
                 />
-              </label>
-              <label className="block text-xs font-bold">
-                {copy.orderCodeLabel}
+                {fieldErrors.lookupEmail && (
+                  <p className="mt-1 text-xs font-semibold text-[#B91C1C]">
+                    {fieldErrors.lookupEmail}
+                  </p>
+                )}
+              </div>
+              <div>
+                <label htmlFor="acc-lookup-id" className="block text-sm font-bold">
+                  {copy.orderCodeLabel} *
+                </label>
                 <input
+                  id="acc-lookup-id"
                   type="text"
-                  required
                   value={lookupOrderId}
-                  onChange={(e) => setLookupOrderId(e.target.value)}
+                  onChange={(e) => {
+                    setLookupOrderId(e.target.value);
+                    clearErr('lookupOrderId');
+                  }}
+                  aria-invalid={Boolean(fieldErrors.lookupOrderId)}
                   placeholder="NLM-SP-2026..."
-                  className="mt-1 h-11 w-full border border-[#050505]/30 bg-white px-3 font-mono text-sm uppercase"
+                  className={`mt-1.5 h-12 w-full px-3 text-base uppercase ${
+                    fieldErrors.lookupOrderId
+                      ? 'border-2 border-[#B91C1C] bg-[#FEF2F2]'
+                      : 'border border-[#0A0A0C]/30 bg-[#FFFFFF]'
+                  }`}
                 />
-              </label>
+                {fieldErrors.lookupOrderId && (
+                  <p className="mt-1 text-xs font-semibold text-[#B91C1C]">
+                    {fieldErrors.lookupOrderId}
+                  </p>
+                )}
+              </div>
               <button
                 type="submit"
-                className="min-h-[46px] w-full bg-[#050505] px-5 py-3 text-xs font-extrabold uppercase tracking-widest text-[#F6F1E7]"
+                className="min-h-[50px] w-full bg-[#D9381E] px-5 py-3 text-sm font-extrabold uppercase tracking-wider text-[#FFFFFF] hover:bg-[#B82B14]"
               >
                 {copy.lookupCta}
               </button>
@@ -427,50 +668,68 @@ export default function SinglePassAccountView({
         </div>
       ) : (
         <div className="space-y-8">
-          {/* WhatsApp Mini-Group Dec 20 Status & Contact Editor (#F6F1E7) */}
-          <section className="border border-[#050505]/20 bg-[#F6F1E7] p-6 text-[#050505] sm:p-8">
+          <section className="border border-[#0A0A0C]/16 bg-[#FFFFFF] p-6 text-[#0A0A0C] sm:p-8">
             <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">
               <div>
-                <p className="font-mono text-xs font-bold uppercase tracking-widest text-[#3D3830]">
+                <p className="text-xs font-bold text-[#4F4D48]">
                   {member.fullName} · {member.age} anni · {member.email}
                 </p>
-                <h2 className="mt-2 font-serif text-2xl font-bold text-[#050505]">
+                <h2 className="mt-2 font-display text-3xl font-bold uppercase text-[#0A0A0C]">
                   {copy.miniGroupHeading}
                 </h2>
-                <p className="mt-2 text-sm leading-relaxed text-[#24201B]">
+                <p className="mt-2 text-base leading-relaxed text-[#4F4D48]">
                   {orders.some((o) => o.whatsappGroupInviteUrl)
                     ? copy.miniGroupActiveBody
                     : copy.miniGroupScheduledBody}
                 </p>
-                <div className="mt-4 inline-flex items-center gap-2 border border-[#050505]/25 bg-[#EFE9DC] px-3 py-2 font-mono text-xs font-bold text-[#050505]">
+                <div className="mt-4 inline-flex items-center gap-2 border border-[#0A0A0C]/20 bg-[#EDEBE6] px-3 py-2 text-xs font-bold text-[#0A0A0C]">
                   <Clock className="h-4 w-4" aria-hidden="true" />
                   20/12/2026 · Lista / Tavolo NIGHTLIFE MILAN
                 </div>
               </div>
 
-              <form onSubmit={handleSaveProfile} className="space-y-3 border border-[#050505]/15 bg-[#EFE9DC] p-4">
-                <label className="block text-xs font-bold text-[#24201B]">
-                  {copy.formWhatsapp}
-                  <input
-                    type="tel"
-                    required
-                    value={editWhatsapp}
-                    onChange={(e) => setEditWhatsapp(e.target.value)}
-                    className="mt-1 h-10 w-full border border-[#050505]/30 bg-white px-3 text-sm"
-                  />
-                </label>
+              <form
+                noValidate
+                onSubmit={handleSaveProfile}
+                className="space-y-3 border border-[#0A0A0C]/15 bg-[#EDEBE6] p-4"
+              >
                 <div>
-                  <p className="text-[11px] font-bold text-[#24201B]">{copy.formLanguages}</p>
+                  <label htmlFor="acc-edit-wa" className="block text-xs font-bold text-[#0A0A0C]">
+                    {copy.formWhatsapp} *
+                  </label>
+                  <input
+                    id="acc-edit-wa"
+                    type="tel"
+                    value={editWhatsapp}
+                    onChange={(e) => {
+                      setEditWhatsapp(e.target.value);
+                      clearErr('editWhatsapp');
+                    }}
+                    aria-invalid={Boolean(fieldErrors.editWhatsapp)}
+                    className={`mt-1 h-11 w-full px-3 text-sm ${
+                      fieldErrors.editWhatsapp
+                        ? 'border-2 border-[#B91C1C] bg-[#FEF2F2]'
+                        : 'border border-[#0A0A0C]/30 bg-[#FFFFFF]'
+                    }`}
+                  />
+                  {fieldErrors.editWhatsapp && (
+                    <p className="mt-1 text-xs font-semibold text-[#B91C1C]">
+                      {fieldErrors.editWhatsapp}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-[#0A0A0C]">{copy.formLanguages}</p>
                   <div className="mt-1.5 flex flex-wrap gap-1.5">
                     {SPOKEN_LANGUAGE_OPTIONS.slice(0, 6).map((l) => (
                       <button
                         key={l}
                         type="button"
                         onClick={() => toggleEditLang(l)}
-                        className={`border px-2 py-1 text-[11px] font-semibold ${
+                        className={`border px-2.5 py-1 text-xs font-semibold ${
                           editLanguages.includes(l)
-                            ? 'border-[#050505] bg-[#050505] text-[#F6F1E7]'
-                            : 'border-[#050505]/25 bg-white text-[#24201B]'
+                            ? 'border-[#0A0A0C] bg-[#0A0A0C] text-[#FFFFFF]'
+                            : 'border-[#0A0A0C]/25 bg-[#FFFFFF] text-[#0A0A0C]'
                         }`}
                       >
                         {l}
@@ -481,7 +740,7 @@ export default function SinglePassAccountView({
                 <button
                   type="submit"
                   disabled={savingProfile}
-                  className="min-h-[40px] w-full bg-[#050505] px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#F6F1E7]"
+                  className="min-h-[44px] w-full bg-[#0A0A0C] px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#FFFFFF] hover:bg-[#D9381E]"
                 >
                   {savingProfile ? '...' : copy.updateProfileCta}
                 </button>
@@ -489,16 +748,15 @@ export default function SinglePassAccountView({
             </div>
           </section>
 
-          {/* Purchased Single Pass Cards */}
           <section className="space-y-5">
-            <div className="flex items-center justify-between">
-              <h2 className="font-serif text-2xl font-bold text-[#F6F1E7]">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h2 className="font-display text-3xl font-bold uppercase text-[#0A0A0C]">
                 {isIt ? `I tuoi Single Pass (${orders.length})` : `Your Single Passes (${orders.length})`}
               </h2>
               <Link
                 href={`${lp}/single-pass`}
                 locale={locale}
-                className="inline-flex min-h-[40px] items-center gap-2 border border-[#F6F1E7]/30 px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#F6F1E7] hover:border-[#F6F1E7]"
+                className="inline-flex min-h-[44px] items-center gap-2 border border-[#0A0A0C] bg-[#FFFFFF] px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#0A0A0C] hover:bg-[#0A0A0C] hover:text-[#FFFFFF]"
               >
                 <ShoppingBag className="h-4 w-4" aria-hidden="true" />
                 + {copy.filterAllVenues}
@@ -506,12 +764,12 @@ export default function SinglePassAccountView({
             </div>
 
             {orders.length === 0 ? (
-              <div className="border border-[#F6F1E7]/15 bg-[#0B0A09] p-8 text-center">
-                <p className="text-sm text-[#C2B9AA]">{copy.drawerEmptyBody}</p>
+              <div className="border border-[#0A0A0C]/16 bg-[#FFFFFF] p-8 text-center">
+                <p className="text-base text-[#4F4D48]">{copy.drawerEmptyBody}</p>
                 <Link
                   href={`${lp}/single-pass`}
                   locale={locale}
-                  className="mt-4 inline-flex min-h-[44px] items-center bg-[#F6F1E7] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[#050505]"
+                  className="mt-4 inline-flex min-h-[46px] items-center bg-[#D9381E] px-6 py-2.5 text-sm font-bold text-[#FFFFFF]"
                 >
                   {copy.drawerExploreCta}
                 </Link>
@@ -546,25 +804,23 @@ export default function SinglePassAccountView({
                 return (
                   <article
                     key={order.id}
-                    className="border border-[#F6F1E7]/20 bg-[#0B0A09] p-6"
+                    className="border border-[#0A0A0C]/16 bg-[#FFFFFF] p-6"
                   >
-                    <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#F6F1E7]/14 pb-4">
+                    <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#0A0A0C]/14 pb-4">
                       <div>
                         <span
-                          className={`inline-block px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-wider ${
-                            isPaid
-                              ? 'bg-emerald-400 text-[#050505]'
-                              : 'bg-[#F6F1E7] text-[#050505]'
+                          className={`inline-block px-3 py-1 text-xs font-bold uppercase ${
+                            isPaid ? 'bg-[#15803D] text-[#FFFFFF]' : 'bg-[#0A0A0C] text-[#FFFFFF]'
                           }`}
                         >
                           {isPaid ? copy.passStatusPaid : copy.passStatusPending}
                         </span>
-                        <p className="mt-2 font-mono text-sm font-bold text-[#F6F1E7]">
+                        <p className="mt-2 text-sm font-bold tabular-nums text-[#0A0A0C]">
                           {order.id} · PIN {order.accessPin}
                         </p>
                       </div>
-                      <div className="flex items-center gap-2 font-mono text-xs text-[#C2B9AA]">
-                        <QrCode className="h-5 w-5 text-[#EAE3D5]" aria-hidden="true" />
+                      <div className="flex items-center gap-2 text-xs font-bold text-[#4F4D48]">
+                        <QrCode className="h-5 w-5 text-[#0A0A0C]" aria-hidden="true" />
                         <span>Lista NIGHTLIFE MILAN</span>
                       </div>
                     </div>
@@ -575,23 +831,23 @@ export default function SinglePassAccountView({
                         return (
                           <div
                             key={`${order.id}-${item.skuId}`}
-                            className="flex flex-col justify-between gap-2 border border-[#F6F1E7]/12 bg-[#050505] p-4 sm:flex-row sm:items-center"
+                            className="flex flex-col justify-between gap-2 border border-[#0A0A0C]/12 bg-[#EDEBE6] p-4 sm:flex-row sm:items-center"
                           >
                             <div>
-                              <p className="font-serif text-lg font-bold text-[#F6F1E7]">
+                              <p className="font-display text-xl font-bold text-[#0A0A0C]">
                                 {item.venueName} · {item.title} x {item.quantity}
                               </p>
-                              <p className="mt-1 text-xs text-[#C2B9AA]">
+                              <p className="mt-1 text-xs text-[#4F4D48]">
                                 {venueSpec?.address} · {copy.arrivalLabel}: {item.arrivalTime}
                                 {item.dietaryChoice ? ` · ${item.dietaryChoice}` : ''}
                               </p>
                               {venueSpec && (
-                                <p className="mt-0.5 text-xs text-[#847C6F]">
+                                <p className="mt-0.5 text-xs text-[#4F4D48]">
                                   Dress code: {isIt ? venueSpec.dressCodeIt : venueSpec.dressCodeEn}
                                 </p>
                               )}
                             </div>
-                            <p className="font-mono text-sm font-bold text-[#F6F1E7]">
+                            <p className="text-base font-extrabold tabular-nums text-[#0A0A0C]">
                               {formatEurFromCents(item.lineBaseCents, locale)}
                             </p>
                           </div>
@@ -599,20 +855,26 @@ export default function SinglePassAccountView({
                       })}
                     </div>
 
-                    <div className="mt-4 grid gap-2 border-t border-[#F6F1E7]/12 pt-4 font-mono text-xs sm:grid-cols-3">
-                      <div className="text-[#C2B9AA]">
+                    <div className="mt-4 grid gap-2 border-t border-[#0A0A0C]/12 pt-4 text-xs tabular-nums sm:grid-cols-3">
+                      <div className="text-[#4F4D48]">
                         {copy.basePriceLabel}: {formatEurFromCents(order.subtotalBaseCents, locale)}
                       </div>
                       {order.feeCents > 0 && (
-                        <div className="text-[#EAE3D5]">
+                        <div className="text-[#4F4D48]">
                           {orderFeeLabel}: {formatEurFromCents(order.feeCents, locale)}
                         </div>
                       )}
-                      <div className="font-bold text-[#F6F1E7] sm:text-right">
+                      <div className="font-bold text-[#0A0A0C] sm:text-right">
                         {copy.totalLabel}: {formatEurFromCents(order.totalCents, locale)}
                         {order.presentmentCurrency && order.presentmentCurrency !== 'EUR' && (
-                          <span className="ml-2 text-[#C9A84C]">
-                            ({formatMinorCurrency(order.presentmentTotalMinor, order.presentmentCurrency, locale)})
+                          <span className="ml-2 text-[#D9381E]">
+                            (
+                            {formatMinorCurrency(
+                              order.presentmentTotalMinor,
+                              order.presentmentCurrency,
+                              locale,
+                            )}
+                            )
                           </span>
                         )}
                       </div>
@@ -624,7 +886,7 @@ export default function SinglePassAccountView({
                           type="button"
                           onClick={() => handlePayExistingOrder(order.id)}
                           disabled={payingOrderId === order.id}
-                          className="inline-flex min-h-[44px] items-center gap-2 bg-[#F6F1E7] px-5 py-2.5 text-xs font-extrabold uppercase tracking-wider text-[#050505] hover:bg-[#EAE3D5]"
+                          className="inline-flex min-h-[46px] items-center gap-2 bg-[#D9381E] px-5 py-2.5 text-xs font-extrabold uppercase tracking-wider text-[#FFFFFF] hover:bg-[#B82B14]"
                         >
                           <CreditCard className="h-4 w-4" aria-hidden="true" />
                           {payingOrderId === order.id ? '...' : copy.completePaymentCta}
@@ -635,20 +897,20 @@ export default function SinglePassAccountView({
                           href={order.whatsappGroupInviteUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex min-h-[44px] items-center gap-2 bg-[#25D366] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[#050505]"
+                          className="inline-flex min-h-[46px] items-center gap-2 bg-[#25D366] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[#0A0A0C]"
                         >
                           <MessageCircle className="h-4 w-4" aria-hidden="true" />
                           {copy.openMiniGroupCta}
                         </a>
                       )}
                       {!order.whatsappGroupInviteUrl && hasSinglePassVenue && (
-                        <span className="inline-flex items-center gap-1.5 text-xs text-[#C2B9AA]">
-                          <ShieldCheck className="h-4 w-4 text-[#EAE3D5]" aria-hidden="true" />
+                        <span className="inline-flex items-center gap-1.5 text-xs text-[#4F4D48]">
+                          <ShieldCheck className="h-4 w-4 text-[#0A0A0C]" aria-hidden="true" />
                           WhatsApp Group: dal 20 dicembre 2026 su {order.customer.whatsapp}
                         </span>
                       )}
                       {isTerrazzaOrder && (
-                        <p className="w-full border border-[#C9A84C]/35 bg-[#17130D] p-3 text-xs text-[#EAE3D5]">
+                        <p className="w-full border border-[#0A0A0C]/16 bg-[#EDEBE6] p-3 text-xs text-[#0A0A0C]">
                           {terrazzaUi.confirmationRefundNotice}
                         </p>
                       )}

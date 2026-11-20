@@ -31,7 +31,7 @@ export type HeroCopy = {
 
 export const HERO_COPY = {
   en: {
-    h1: 'Milan Nightlife: Best Clubs, VIP Tables, Rooftops & Events',
+    h1: 'Milan Nightlife: Top Clubs, VIP Tables & Rooftops',
     sub: 'The guide Milan insiders keep to themselves.',
     pills: 'VIP Tables 100% Bottle Credit · Nominal Guest Lists · 7/7 Concierge',
     cta: 'Book VIP Table or Guest List on WhatsApp',
@@ -48,7 +48,7 @@ export const HERO_COPY = {
     ticker: { daytime: 'Milan is getting ready', aperitivo: 'Aperitivo hour', preClub: 'Dinner and pre-club', club: 'Milan is in club mode' },
   },
   it: {
-    h1: 'Vita Notturna a Milano: Migliori Club, Tavoli VIP, Rooftop e Serate',
+    h1: 'Vita Notturna Milano: Club, Tavoli VIP e Rooftop',
     sub: 'La guida che i milanesi tengono per sé.',
     pills: 'Tavoli VIP 100% credito bottiglie · Accredito in Lista Nominale · Assistenza Concierge 7/7',
     cta: 'Prenota Tavolo VIP o Lista su WhatsApp',

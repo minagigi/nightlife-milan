@@ -32,7 +32,7 @@ export default async function SinglePassCheckoutPage({
   const cancelled = typeof sp.cancelled === 'string' && sp.cancelled === '1';
 
   return (
-    <main className="min-h-screen bg-[#050505] text-[#F6F1E7]">
+    <main className="min-h-screen bg-[#EDEBE6] text-[#0A0A0C]">
       <SinglePassCheckoutView
         locale={loc}
         resumeOrderId={orderParam}

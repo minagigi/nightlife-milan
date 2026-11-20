@@ -2,9 +2,9 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, Lock, ShieldCheck } from 'lucide-react';
+import { AlertCircle, ArrowLeft, Lock, ShieldCheck } from 'lucide-react';
 import { localePrefix } from '@/lib/i18n/locales';
-import { getSinglePassCopy } from '@/lib/single-pass/i18n35';
+import { getCheckoutUxCopy, getSinglePassCopy } from '@/lib/single-pass/i18n35';
 
 type GatewayError = { message?: string; type?: string; code?: string };
 type GatewayPaymentIntent = { id?: string; status?: string };
@@ -45,7 +45,9 @@ function loadPaymentGatewayScript(): Promise<void> {
         return;
       }
       existing.addEventListener('load', () => resolve(), { once: true });
-      existing.addEventListener('error', () => reject(new Error('Gateway SDK load failed')), { once: true });
+      existing.addEventListener('error', () => reject(new Error('Gateway SDK load failed')), {
+        once: true,
+      });
       return;
     }
     const script = document.createElement('script');
@@ -93,10 +95,12 @@ export default function EmbeddedPaymentForm({
 }) {
   const router = useRouter();
   const copy = getSinglePassCopy(locale);
+  const uxCopy = getCheckoutUxCopy(locale);
   const lp = localePrefix(locale);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const gatewayRef = useRef<GatewayClientInstance | null>(null);
   const elementsRef = useRef<GatewayElementsInstance | null>(null);
+  const confirmLockRef = useRef(false);
 
   const [elementReady, setElementReady] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -117,30 +121,35 @@ export default function EmbeddedPaymentForm({
         const els = gw.elements({
           clientSecret,
           appearance: {
-            theme: 'night',
+            theme: 'flat',
             variables: {
-              colorPrimary: '#F6F1E7',
-              colorBackground: '#050505',
-              colorText: '#F6F1E7',
-              colorTextSecondary: '#C2B9AA',
-              colorDanger: '#FB7185',
+              colorPrimary: '#0A0A0C',
+              colorBackground: '#FFFFFF',
+              colorText: '#0A0A0C',
+              colorTextSecondary: '#4F4D48',
+              colorDanger: '#B91C1C',
               borderRadius: '0px',
               spacingUnit: '4px',
             },
             rules: {
               '.Input': {
-                border: '1px solid rgba(246, 241, 231, 0.25)',
-                backgroundColor: '#050505',
-                color: '#F6F1E7',
+                border: '1px solid rgba(10, 10, 12, 0.28)',
+                backgroundColor: '#FFFFFF',
+                color: '#0A0A0C',
                 boxShadow: 'none',
               },
               '.Input:focus': {
-                border: '1px solid #C9A84C',
+                border: '2px solid #0A0A0C',
                 boxShadow: 'none',
               },
+              '.Input--invalid': {
+                border: '2px solid #B91C1C',
+                backgroundColor: '#FEF2F2',
+              },
               '.Label': {
-                color: '#EAE3D5',
-                fontSize: '12px',
+                color: '#0A0A0C',
+                fontSize: '13px',
+                fontWeight: '600',
               },
             },
           },
@@ -189,7 +198,8 @@ export default function EmbeddedPaymentForm({
 
   const handleConfirm = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!gatewayRef.current || !elementsRef.current || !elementReady) return;
+    if (!gatewayRef.current || !elementsRef.current || !elementReady || confirmLockRef.current) return;
+    confirmLockRef.current = true;
     setErrorMessage(null);
     setSubmitting(true);
 
@@ -211,9 +221,11 @@ export default function EmbeddedPaymentForm({
       });
 
       if (error) {
-        const cleanMsg = (error.message || 'Payment verification failed').replace(/stripe/gi, 'payment gateway');
+        const cleanMsg = (error.message || uxCopy.errPaymentSession).replace(
+          /stripe/gi,
+          'payment gateway',
+        );
         setErrorMessage(cleanMsg);
-        setSubmitting(false);
         return;
       }
 
@@ -229,9 +241,8 @@ export default function EmbeddedPaymentForm({
         if (!verifyRes.ok) {
           const verifyJson = (await verifyRes.json().catch(() => null)) as { error?: string } | null;
           setErrorMessage(
-            (verifyJson?.error || 'Payment verification is pending').replace(/stripe/gi, 'payment'),
+            (verifyJson?.error || uxCopy.errPaymentSession).replace(/stripe/gi, 'payment'),
           );
-          setSubmitting(false);
           return;
         }
         clearCart();
@@ -240,32 +251,36 @@ export default function EmbeddedPaymentForm({
         );
       }
     } catch (err) {
-      const cleanMsg = (err instanceof Error ? err.message : 'Payment error').replace(/stripe/gi, 'payment');
+      const cleanMsg = (err instanceof Error ? err.message : uxCopy.errNetwork).replace(
+        /stripe/gi,
+        'payment',
+      );
       setErrorMessage(cleanMsg);
+    } finally {
+      confirmLockRef.current = false;
       setSubmitting(false);
     }
   };
 
   return (
     <form
+      noValidate
       onSubmit={handleConfirm}
       data-embedded-checkout-form
-      className="space-y-6 border border-[#F6F1E7]/20 bg-[#0B0A09] p-6 sm:p-8"
+      className="space-y-6 border border-[#0A0A0C]/16 bg-[#FFFFFF] p-6 sm:p-8"
     >
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#F6F1E7]/12 pb-4">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#0A0A0C]/14 pb-4">
         <div>
-          <p className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[#C9A84C]">
-            {copy.stepPaymentLabel}
-          </p>
-          <p className="mt-1 font-mono text-xs text-[#C2B9AA]">
-            {copy.orderIdLabel}: <strong className="text-[#F6F1E7]">{orderId}</strong>
+          <p className="text-xs font-bold text-[#4F4D48]">{copy.stepPaymentLabel}</p>
+          <p className="mt-1 text-sm text-[#4F4D48] tabular-nums">
+            {copy.orderIdLabel}: <strong className="text-[#0A0A0C]">{orderId}</strong>
           </p>
         </div>
         {onBack && (
           <button
             type="button"
             onClick={onBack}
-            className="inline-flex min-h-[36px] items-center gap-1.5 border border-[#F6F1E7]/25 px-3 py-1.5 text-xs font-semibold text-[#EAE3D5] hover:border-[#F6F1E7]"
+            className="inline-flex min-h-[40px] items-center gap-1.5 border border-[#0A0A0C] bg-[#FFFFFF] px-3.5 py-1.5 text-xs font-bold text-[#0A0A0C] hover:bg-[#0A0A0C] hover:text-[#FFFFFF]"
           >
             <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
             {copy.backToDetailsCta}
@@ -273,41 +288,45 @@ export default function EmbeddedPaymentForm({
         )}
       </div>
 
-      <div className="border border-[#F6F1E7]/15 bg-[#050505] p-4">
+      <div className="border border-[#0A0A0C]/14 bg-[#EDEBE6] p-4 tabular-nums">
         <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#C2B9AA]">
-            {copy.billingTotalLabel}
+          <span className="text-sm font-bold text-[#0A0A0C]">{copy.billingTotalLabel}</span>
+          <span className="font-display text-3xl font-extrabold text-[#D9381E]">
+            {billingTotalDisplay}
           </span>
-          <span className="font-mono text-xl font-extrabold text-[#F6F1E7]">{billingTotalDisplay}</span>
         </div>
         {showEurReference && (
-          <p className="mt-1 text-right font-mono text-xs text-[#8E8577]">
+          <p className="mt-1 text-right text-xs font-medium text-[#4F4D48]">
             {copy.eurOriginalLabel}: {eurTotalDisplay}
           </p>
         )}
       </div>
 
       {!elementReady && !errorMessage && (
-        <div className="border border-[#F6F1E7]/15 bg-[#050505] p-6 text-center font-mono text-xs text-[#C2B9AA]">
-          Loading encrypted payment terminal...
+        <div className="border border-[#0A0A0C]/16 bg-[#EDEBE6] p-6 text-center text-sm font-medium text-[#4F4D48]">
+          {copy.paymentProcessingLabel}
         </div>
       )}
 
       <div
         ref={containerRef}
-        className={`min-h-[160px] transition-opacity ${elementReady ? 'opacity-100' : 'opacity-30'}`}
+        className={`min-h-[160px] transition-opacity ${elementReady ? 'opacity-100' : 'opacity-40'}`}
       />
 
       {errorMessage && (
-        <div className="border border-rose-500/40 bg-rose-950/35 p-3.5 text-xs text-rose-200">
-          {errorMessage}
+        <div
+          role="alert"
+          className="flex items-start gap-2.5 border-2 border-[#B91C1C] bg-[#FEF2F2] p-4 text-sm font-semibold text-[#B91C1C]"
+        >
+          <AlertCircle className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
+          <span>{errorMessage}</span>
         </div>
       )}
 
       <button
         type="submit"
         disabled={!elementReady || submitting}
-        className="flex min-h-[52px] w-full items-center justify-center gap-2 bg-[#F6F1E7] px-5 py-3.5 text-xs font-extrabold uppercase tracking-widest text-[#050505] transition hover:bg-[#EAE3D5] disabled:cursor-not-allowed disabled:opacity-60"
+        className="flex min-h-[54px] w-full items-center justify-center gap-2 bg-[#D9381E] px-6 py-4 text-sm font-extrabold uppercase tracking-wider text-[#FFFFFF] transition hover:bg-[#B82B14] disabled:cursor-not-allowed disabled:opacity-60"
       >
         <Lock className="h-4 w-4" aria-hidden="true" />
         <span>
@@ -315,9 +334,9 @@ export default function EmbeddedPaymentForm({
         </span>
       </button>
 
-      <div className="flex items-center justify-center gap-2 text-center font-mono text-[11px] text-[#8E8577]">
-        <ShieldCheck className="h-3.5 w-3.5 text-[#C9A84C]" aria-hidden="true" />
-        <span>PCI-DSS Level 1 Encrypted On-Site Payment · Nightlife Milan</span>
+      <div className="flex items-center justify-center gap-2 text-center text-xs text-[#4F4D48]">
+        <ShieldCheck className="h-4 w-4 shrink-0 text-[#0A0A0C]" aria-hidden="true" />
+        <span>{uxCopy.cardStepSecureNote}</span>
       </div>
     </form>
   );

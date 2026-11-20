@@ -33,7 +33,7 @@ export default async function SinglePassThankYouPage({
   const sessionId = typeof sp.session_id === 'string' ? sp.session_id : undefined;
 
   return (
-    <main className="min-h-screen bg-[#050505] text-[#F6F1E7]">
+    <main className="min-h-screen bg-[#EDEBE6] text-[#0A0A0C]">
       <SinglePassThankYouView
         locale={loc}
         orderId={orderId}

@@ -284,6 +284,16 @@ export type StripeCredentialStatus = {
   webhookConfigured: boolean;
 };
 
+export type CheckoutFieldKey =
+  | 'fullName'
+  | 'email'
+  | 'whatsapp'
+  | 'age'
+  | 'country'
+  | 'password'
+  | 'acceptedTerms'
+  | 'cart';
+
 export type SinglePassApiErrorCode =
   | 'ORIGIN_FORBIDDEN'
   | 'INVALID_JSON'
@@ -292,6 +302,10 @@ export type SinglePassApiErrorCode =
   | 'VENUE_BOOKING_EXTERNAL_ONLY'
   | 'VENUE_DIRECT_CHECKOUT_DISABLED'
   | 'INVALID_CUSTOMER_DATA'
+  | 'INVALID_FULL_NAME'
+  | 'INVALID_EMAIL'
+  | 'INVALID_WHATSAPP'
+  | 'INVALID_COUNTRY'
   | 'UNDER_18'
   | 'UNDER_21_JUSTME'
   | 'PINETA_STRICT_UNDER_30'

@@ -44,19 +44,41 @@ export async function POST(request: Request) {
     ? body.spokenLanguages.map((v) => String(v).trim().slice(0, 40)).filter(Boolean).slice(0, 10)
     : ['Italiano', 'English'];
 
-  if (!fullName || fullName.length < 2 || !isValidEmail(email) || !isValidWhatsapp(whatsapp)) {
-    return jsonError('Valid full name, email and WhatsApp number are required', 'INVALID_CUSTOMER_DATA', 400);
-  }
-  if (!Number.isFinite(age) || age < 18 || age > 99) {
-    return jsonError('Minimum age 18 is required', 'UNDER_18', 400);
-  }
-  if (password.length < 8) {
-    return jsonError('Password must be at least 8 characters long', 'INVALID_PASSWORD', 400);
+  const fieldErrors: Partial<Record<'fullName' | 'age' | 'whatsapp' | 'email' | 'password', string>> = {};
+  if (!fullName || fullName.length < 2) fieldErrors.fullName = 'INVALID_FULL_NAME';
+  if (!Number.isFinite(age) || age < 18 || age > 99) fieldErrors.age = 'UNDER_18';
+  if (!isValidWhatsapp(whatsapp)) fieldErrors.whatsapp = 'INVALID_WHATSAPP';
+  if (!isValidEmail(email)) fieldErrors.email = 'INVALID_EMAIL';
+  if (password.length < 8) fieldErrors.password = 'INVALID_PASSWORD';
+
+  if (Object.keys(fieldErrors).length > 0) {
+    const firstField = Object.keys(fieldErrors)[0] as keyof typeof fieldErrors;
+    if (fieldErrors.fullName || fieldErrors.email || fieldErrors.whatsapp) {
+      return jsonError(
+        'Valid full name, email and WhatsApp number are required',
+        'INVALID_CUSTOMER_DATA',
+        400,
+        { field: firstField, fieldErrors },
+      );
+    }
+    if (fieldErrors.age) {
+      return jsonError('Minimum age 18 is required', 'UNDER_18', 400, {
+        field: 'age',
+        fieldErrors,
+      });
+    }
+    return jsonError('Password must be at least 8 characters long', 'INVALID_PASSWORD', 400, {
+      field: 'password',
+      fieldErrors,
+    });
   }
 
   const existing = await getMemberByEmail(email);
   if (existing?.passwordHash) {
-    return jsonError('An account with this email already exists. Sign in instead.', 'INVALID_CREDENTIALS', 409);
+    return jsonError('An account with this email already exists. Sign in instead.', 'INVALID_CREDENTIALS', 409, {
+      field: 'email',
+      fieldErrors: { email: 'INVALID_CREDENTIALS' },
+    });
   }
 
   const { salt, hash } = hashPassword(password);

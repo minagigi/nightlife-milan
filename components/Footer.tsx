@@ -70,15 +70,15 @@ export default function Footer({ lang, editorialFields = {}, copyrightYear }: Fo
   return (
     <div className="mt-auto w-full">
       <NewsletterHub lang={lang} />
-      <footer className="nlm-footer w-full bg-[#050505] border-t border-[#F6F1E7]/14">
-        <div className="max-w-[1440px] mx-auto border-x border-[#F6F1E7]/14">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[#F6F1E7]/14">
+      <footer className="nlm-footer w-full bg-[#0A0A0C] border-t border-white/14">
+        <div className="max-w-[1440px] mx-auto border-x border-white/14">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-white/14">
             {/* Col 1: Brand Info */}
             <div className="flex flex-col space-y-4 p-8 sm:p-12">
               <Link href={lp + '/'} prefetch={false} className="inline-block group" aria-label={t.homeAria}>
                 <Logo className="h-9 w-auto" />
               </Link>
-              <p className="nlm-footer-description font-sans text-sm text-[#C2B9AA] leading-relaxed max-w-xs">
+              <p className="nlm-footer-description font-sans text-sm text-[#C9C7C2] leading-relaxed max-w-xs">
                 {t.desc}
               </p>
               <div className="pt-4">
@@ -88,7 +88,7 @@ export default function Footer({ lang, editorialFields = {}, copyrightYear }: Fo
 
             {/* Col 2: Navigation */}
             <div className="flex flex-col space-y-4 p-8 sm:p-12">
-              <h3 className="font-mono text-[#EAE3D5] tracking-[0.14em] uppercase text-xs">{t.nav}</h3>
+              <h3 className="font-sans text-[#EDEBE6] font-bold text-[15px]">{t.nav}</h3>
               <ul className="flex flex-col space-y-3">
                 {navigation.map((item) => (
                   <li key={item.id}>
@@ -127,39 +127,39 @@ export default function Footer({ lang, editorialFields = {}, copyrightYear }: Fo
 
             {/* Col 3: Zone Hotspots */}
             <div className="flex flex-col space-y-4 p-8 sm:p-12">
-              <h3 className="font-mono text-[#EAE3D5] tracking-[0.14em] uppercase text-xs">{t.zones}</h3>
+              <h3 className="font-sans text-[#EDEBE6] font-bold text-[15px]">{t.zones}</h3>
               <ul className="flex flex-col space-y-3">
                 {zones.map((item) => (
                   <li key={item.id}>
-                    <Link href={item.href} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
+                    <Link href={item.href} prefetch={false} className="text-[#C9C7C2] hover:text-[#FFFFFF] transition-colors text-sm">
                       {item.label}
                     </Link>
                   </li>
                 ))}
                 <li>
-                  <Link href={`${lp}/zones/san-siro`} locale={lang} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
+                  <Link href={`${lp}/zones/san-siro`} locale={lang} prefetch={false} className="text-[#C9C7C2] hover:text-[#FFFFFF] transition-colors text-sm">
                     San Siro & Ippodromo
                   </Link>
                 </li>
                 <li>
-                  <Link href={`${lp}/zones/parco-sempione`} locale={lang} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
+                  <Link href={`${lp}/zones/parco-sempione`} locale={lang} prefetch={false} className="text-[#C9C7C2] hover:text-[#FFFFFF] transition-colors text-sm">
                     Parco Sempione (Just Me / 55)
                   </Link>
                 </li>
                 <li>
-                  <Link href={`${lp}/zones/citylife-portello`} locale={lang} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
+                  <Link href={`${lp}/zones/citylife-portello`} locale={lang} prefetch={false} className="text-[#C9C7C2] hover:text-[#FFFFFF] transition-colors text-sm">
                     CityLife & Portello (Voya)
                   </Link>
                 </li>
               </ul>
-              <details className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-3" data-footer-city-map>
-                <summary className="cursor-pointer font-mono text-xs uppercase tracking-[0.14em] text-[#F6F1E7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F1E7]">
+              <details className="border border-white/14 bg-[#18181C] p-3" data-footer-city-map>
+                <summary className="cursor-pointer font-sans text-[13px] font-bold text-[#FFFFFF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9381E]">
                   {t.zones} · Milano
                 </summary>
                 <div className="mt-3 space-y-3">
                   <a href={cityDirections.toString()} target="_blank" rel="noopener noreferrer"
                     aria-label={`${mapCopy.directions}: Milano`}
-                    className="inline-flex min-h-11 items-center font-mono text-xs uppercase tracking-[0.14em] text-[#EAE3D5] hover:text-[#F6F1E7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F1E7]">
+                    className="inline-flex min-h-11 items-center font-sans text-[13px] font-bold text-[#EDEBE6] hover:text-[#FFFFFF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9381E]">
                     Milano
                   </a>
                   <EventVenueMap purpose="city" id={`footer-city-map-${lang}`} mapUrl={cityMap.toString()}
@@ -170,25 +170,25 @@ export default function Footer({ lang, editorialFields = {}, copyrightYear }: Fo
 
             {/* Col 4: Legal & Social */}
             <div className="flex flex-col space-y-4 p-8 sm:p-12">
-              <h3 className="font-mono text-[#EAE3D5] tracking-[0.14em] uppercase text-xs">{t.legal}</h3>
+              <h3 className="font-sans text-[#EDEBE6] font-bold text-[15px]">{t.legal}</h3>
               <ul className="flex flex-col space-y-3 mb-4">
                 <li>
-                  <Link href={links.terms} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
+                  <Link href={links.terms} prefetch={false} className="text-[#C9C7C2] hover:text-[#FFFFFF] transition-colors text-sm">
                     {utilityText(lang, 'Terms & Conditions', 'Termini e Condizioni')}
                   </Link>
                 </li>
                 <li>
-                  <Link href={links.privacy} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
+                  <Link href={links.privacy} prefetch={false} className="text-[#C9C7C2] hover:text-[#FFFFFF] transition-colors text-sm">
                     {t.privacy}
                   </Link>
                 </li>
                 <li>
-                  <Link href={links.cookies} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
+                  <Link href={links.cookies} prefetch={false} className="text-[#C9C7C2] hover:text-[#FFFFFF] transition-colors text-sm">
                     {utilityText(lang, 'Cookie Policy', 'Cookie Policy')}
                   </Link>
                 </li>
                 <li>
-                  <Link href={links.refund} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
+                  <Link href={links.refund} prefetch={false} className="text-[#C9C7C2] hover:text-[#FFFFFF] transition-colors text-sm">
                     {utilityText(lang, 'Refund Policy', 'Politica di Rimborso')}
                   </Link>
                 </li>
@@ -197,25 +197,25 @@ export default function Footer({ lang, editorialFields = {}, copyrightYear }: Fo
           </div>
 
           {/* Editorial wordmark - rendered via ::after (see .deco-wordmark) so contrast scanners skip it */}
-          <div className="overflow-hidden border-t border-[#F6F1E7]/14 py-10">
+          <div className="overflow-hidden border-t border-white/14 py-10">
             <div className="deco-wordmark" data-text="NIGHTLIFE MILAN" aria-hidden="true" />
-            <p className="text-center font-mono text-[10px] tracking-[0.3em] text-[#847C6F] tabular-nums -mt-2" aria-hidden="true">
-              MILANO · 45.4642° N, 9.1900° E
+            <p className="text-center font-sans text-[13px] font-medium text-[#C9C7C2] tabular-nums -mt-2" aria-hidden="true">
+              Milano · 45.4642° N, 9.1900° E
             </p>
           </div>
 
-          <div className="px-6 sm:px-12 py-6 border-t border-[#F6F1E7]/14 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="font-mono text-[#847C6F] text-[11px] tracking-[0.12em]">
+          <div className="px-6 sm:px-12 py-6 border-t border-white/14 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="font-sans text-[#C9C7C2] text-[13px] tabular-nums">
               © {copyrightYear ?? new Date().getFullYear()} Nightlife Milan. {t.rights}
             </p>
-            <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 font-mono text-[11px] text-[#847C6F]">
+            <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 font-sans text-[13px] text-[#C9C7C2]">
               {ENABLED_LOCALES.map((l) => (
                 <Link
                   key={l.code}
                   href={localePrefix(l.code) || '/'}
                   prefetch={false}
                   lang={l.hreflang}
-                  className="inline-flex min-h-6 min-w-6 items-center justify-center px-1 hover:text-[#F6F1E7] transition-colors uppercase focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F6F1E7]"
+                  className="inline-flex min-h-7 min-w-7 items-center justify-center px-1.5 hover:text-[#FFFFFF] transition-colors uppercase focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9381E]"
                   aria-label={l.nativeName}
                 >
                   {l.code}
