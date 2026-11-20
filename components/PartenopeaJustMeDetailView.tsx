@@ -19,7 +19,6 @@ import {
 import EventVenueMap from '@/components/EventVenueMap';
 import Link from '@/components/LocalizedLink';
 import SeoAuthorityHub from '@/components/SeoAuthorityHub';
-import SinglePassVenueModule from '@/components/single-pass/SinglePassVenueModule';
 import { getPaymentTerms35 } from '@/lib/capodanno/paymentTerms35';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
@@ -47,7 +46,7 @@ const JSON_LD_OFFERS = [
   {
     name: 'Cena Spettacolo Partenopea · Full €70 Menu + Party (19:30 Doors / 21:30 Dinner Show)',
     price: '70',
-    source: 'native' as const,
+    source: 'whatsapp' as const,
   },
   {
     name: 'Aperitif + 1 Drink (19:30–21:30)',
@@ -190,7 +189,7 @@ export default function PartenopeaJustMeDetailView({
       price: o.price,
       priceCurrency: 'EUR',
       availability: 'https://schema.org/InStock',
-      url: o.source === 'native' ? `${canonicalUrl}#official-tickets-ecommerce` : PARTENOPEA_JUSTME_AFFILIATE_URL,
+      url: o.source === 'whatsapp' ? whatsappRestaurantUrl : PARTENOPEA_JUSTME_AFFILIATE_URL,
       validFrom: '2026-11-18T00:00:00+01:00',
     })),
   };
@@ -286,18 +285,10 @@ export default function PartenopeaJustMeDetailView({
 
             <div className="flex flex-wrap gap-3 pt-1">
               <a
-                href="#official-tickets-ecommerce"
-                className="inline-flex min-h-[44px] items-center gap-2 rounded-sm bg-[#EAE3D5] px-5 py-3 text-sm font-bold uppercase tracking-wider text-[#050505] transition-colors hover:bg-white"
-              >
-                {c.ctaBuyNowLabel}
-                <ArrowRight className="h-4 w-4" />
-              </a>
-
-              <a
                 href={PARTENOPEA_JUSTME_AFFILIATE_URL}
                 target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-[44px] items-center gap-2 rounded-sm border border-champagne/45 bg-champagne/10 px-5 py-3 text-sm font-semibold text-champagne transition-colors hover:bg-champagne hover:text-[#050505]"
+                rel="sponsored noopener noreferrer"
+                className="inline-flex min-h-[44px] items-center gap-2 rounded-sm bg-[#EAE3D5] px-5 py-3 text-sm font-bold uppercase tracking-wider text-[#050505] transition-colors hover:bg-white"
               >
                 {c.ctaXceedLabel}
                 <ExternalLink className="h-4 w-4" />
@@ -374,8 +365,41 @@ export default function PartenopeaJustMeDetailView({
         </nav>
       </header>
 
-      {/* Native Embedded Checkout Module (provides #official-tickets-ecommerce) */}
-      <SinglePassVenueModule locale={locale} venueId="justme-partenopea" />
+      {/* Official Xceed #249217 & 24/7 WhatsApp Dinner / VIP Booking Strip */}
+      <section
+        id="official-xceed-booking"
+        className="mx-auto max-w-[1440px] scroll-mt-24 border-x border-b border-white/10 bg-[#0B0A09] px-5 py-6 sm:px-14"
+      >
+        <div className="flex flex-col gap-4 rounded-xl border border-champagne/30 bg-white/[0.03] p-5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="space-y-1">
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-champagne">
+              {c.tiersHeading}
+            </p>
+            <p className="font-sans text-sm text-[#EAE3D5]">{c.priceBadge}</p>
+            <p className="font-sans text-xs text-[#C2B9AA]">{c.tiersSubheading}</p>
+          </div>
+          <div className="flex shrink-0 flex-wrap gap-3">
+            <a
+              href={PARTENOPEA_JUSTME_AFFILIATE_URL}
+              target="_blank"
+              rel="sponsored noopener noreferrer"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-sm bg-[#EAE3D5] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[#050505] transition-colors hover:bg-white"
+            >
+              {c.ctaXceedLabel}
+              <ExternalLink className="h-4 w-4" />
+            </a>
+            <a
+              href={whatsappRestaurantUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-sm border border-[#25D366]/45 bg-[#25D366]/15 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[#25D366] transition-colors hover:bg-[#25D366] hover:text-white"
+            >
+              <MessageCircle className="h-4 w-4" />
+              {c.ctaWhatsappLabel}
+            </a>
+          </div>
+        </div>
+      </section>
 
       <div className="mx-auto max-w-[1440px] space-y-16 border-x border-white/10 px-5 py-14 sm:px-14">
         {/* Section 1: Overview & Timeline */}
@@ -547,23 +571,25 @@ export default function PartenopeaJustMeDetailView({
                   </ul>
                 </div>
 
-                {tier.ctaKind === 'native' ? (
+                {tier.ctaKind === 'whatsapp' ? (
                   <a
-                    href="#official-tickets-ecommerce"
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-sm bg-[#EAE3D5] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#050505] transition-colors hover:bg-white"
-                  >
-                    {tier.ctaLabel}
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </a>
-                ) : (
-                  <a
-                    href={whatsappVipFrontUrl}
+                    href={tier.id === 'dinner-show-70' ? whatsappRestaurantUrl : whatsappVipFrontUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex w-full items-center justify-center gap-2 rounded-sm border border-[#25D366]/45 bg-[#25D366]/15 px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#25D366] transition-colors hover:bg-[#25D366] hover:text-white"
                   >
                     <MessageCircle className="h-3.5 w-3.5" />
                     {tier.ctaLabel}
+                  </a>
+                ) : (
+                  <a
+                    href={PARTENOPEA_JUSTME_AFFILIATE_URL}
+                    target="_blank"
+                    rel="sponsored noopener noreferrer"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-sm bg-[#EAE3D5] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#050505] transition-colors hover:bg-white"
+                  >
+                    {tier.ctaLabel}
+                    <ExternalLink className="h-3.5 w-3.5" />
                   </a>
                 )}
               </div>

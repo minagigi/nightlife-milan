@@ -132,7 +132,9 @@ export default async function SinglePassPage({
       {
         '@type': 'ItemList',
         name: copy.heroH1,
-        itemListElement: SINGLE_PASS_SKUS.map((sku, idx) => {
+        itemListElement: SINGLE_PASS_SKUS.filter((sku) =>
+          STOREFRONT_VENUES.some((venue) => venue.id === sku.venueId),
+        ).map((sku, idx) => {
           return {
             '@type': 'ListItem',
             position: idx + 1,

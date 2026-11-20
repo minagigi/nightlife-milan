@@ -12,7 +12,9 @@ import {
 } from '../lib/legal/magisterMidaLegal35';
 import {
   CONFIRMED_CAPODANNO_SLUGS,
+  DISABLED_DIRECT_CHECKOUT_VENUE_IDS,
   SINGLE_PASS_FEE_RATE,
+  SINGLE_PASS_ONLY_VENUE_IDS,
   SINGLE_PASS_SKUS,
   STOREFRONT_VENUES,
   SKU_BY_ID,
@@ -22,6 +24,7 @@ import {
   getConfirmedSkusForInventoryEvent,
   getSkuFeeRate,
   getVenueIdByEventSlug,
+  isCheckoutItemAllowed,
   resolveCatalogSku,
   validateAgeForSkus,
 } from '../lib/single-pass/catalog';
@@ -73,8 +76,20 @@ test('Catalog excludes 55-milano & TOM, includes all 8 confirmed Capodanno + hol
   for (const slug of CONFIRMED_CAPODANNO_SLUGS) {
     assert.ok(getVenueIdByEventSlug(slug), `Confirmed slug missing venue mapping: ${slug}`);
   }
-  assert.equal(getVenueIdByEventSlug('christmas-voya-rooftop-milan-2026'), 'voya-christmas');
-  assert.equal(getVenueIdByEventSlug('orthodox-new-year-justme-milan-2027'), 'justme-orthodox');
+  assert.equal(getVenueIdByEventSlug('christmas-voya-rooftop-milan-2026'), null);
+  assert.equal(getVenueIdByEventSlug('orthodox-new-year-justme-milan-2027'), null);
+  for (const partnerNyeSlug of [
+    'capodanno-justme-milano-torre-branca',
+    'capodanno-justme-garda-lake',
+    'capodanno-pineta-milano',
+    'capodanno-aria-club-milano',
+    'capodanno-voya-rooftop-milano',
+    'capodanno-55-milano',
+  ]) {
+    assert.equal(getVenueIdByEventSlug(partnerNyeSlug), null);
+  }
+  assert.ok(SINGLE_PASS_ONLY_VENUE_IDS.has('justme'));
+  assert.ok(DISABLED_DIRECT_CHECKOUT_VENUE_IDS.has('voya-christmas'));
 
   assert.equal(STOREFRONT_VENUES.length, 8);
   for (const v of STOREFRONT_VENUES) {
@@ -484,15 +499,15 @@ test('Middleware routes /checkout, /thank-you, /cookie-policy, /refund-policy cl
   assert.equal(crmProtected.status, 401);
 });
 
-test('JustMe Partenopea (2026-11-27) confirmed 6 EUR SKUs and strict 21+ age check', () => {
+test('JustMe Partenopea (2026-11-27) keeps 6 legacy EUR SKU specs + strict 21+ age check while event-page checkout is blocked', () => {
   const cspSkus = SINGLE_PASS_SKUS.filter((s) => s.venueId === 'justme-partenopea');
   assert.equal(cspSkus.length, 6);
   const dinner = cspSkus.find((s) => s.id === 'justme-partenopea-dinner');
   assert.ok(dinner);
   assert.equal(dinner.basePriceCents, 7000);
-  const breakdown = computeSinglePassPrice(dinner.basePriceCents, 1);
-  // €70 × 1.20 = €84 (8400 cents)
-  assert.equal(breakdown.unitTotalCents, 8400);
+  assert.equal(DISABLED_DIRECT_CHECKOUT_VENUE_IDS.has('justme-partenopea'), true);
+  assert.equal(isCheckoutItemAllowed(dinner, 'venue').ok, false);
+  assert.equal(isCheckoutItemAllowed(dinner, 'single-pass').ok, false);
 
   const under18 = validateAgeForSkus(cspSkus, 17);
   assert.equal(under18.ok, false);

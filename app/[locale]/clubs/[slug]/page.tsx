@@ -1187,7 +1187,7 @@ export default async function ClubPage({ params }: Props) {
       : null);
 
   const isWhatsAppOnlyVenue = [
-    'v-voya', 'v-11clubroom', 'v-church81', 'v-mibmilano', 
+    'v-voya', 'v-55milano', 'v-55', 'v-11clubroom', 'v-church81', 'v-mibmilano',
     'v-gattopardo', 'v-terrazza21', 'v-theclub', 'v-tocqueville', 'v-alcatraz', 'v-fabrique', 'v-amnesia'
   ].includes(venue.id);
 

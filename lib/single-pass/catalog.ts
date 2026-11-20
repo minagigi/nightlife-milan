@@ -2,16 +2,12 @@ import { getCapodannoOfficialPosterSrc } from '@/lib/seoEventImages';
 import { OCTOBER_EVENTS_INVENTORY } from '@/lib/octoberEvents';
 import type { OctoberEventOffer, OctoberEventRecord } from '@/lib/october-events/types';
 import {
-  THANKSGIVING_JUSTME_LEGACY_RAW_SLUG,
   THANKSGIVING_JUSTME_POSTER_SRC,
   THANKSGIVING_JUSTME_SLUGS_35,
-  THANKSGIVING_JUSTME_XCEED_RAW_SLUG,
 } from '@/lib/thanksgiving/justme35';
 import {
-  PARTENOPEA_JUSTME_LEGACY_RAW_SLUG,
   PARTENOPEA_JUSTME_POSTER_SRC,
   PARTENOPEA_JUSTME_SLUGS_35,
-  PARTENOPEA_JUSTME_XCEED_RAW_SLUG,
 } from '@/lib/partenopea/justme35';
 import type {
   PriceBreakdown,
@@ -42,13 +38,9 @@ export const SPOKEN_LANGUAGE_OPTIONS: readonly string[] = [
 
 export const CONFIRMED_CAPODANNO_SLUGS = new Set<string>([
   'capodanno-gate-milano',
-  'capodanno-pineta-milano',
   'capodanno-repvblic-milano',
-  'capodanno-justme-milano-torre-branca',
   'capodanno-bischeri-milano',
   'capodanno-bobino-milano',
-  'capodanno-voya-rooftop-milano',
-  'capodanno-justme-garda-lake',
   'capodanno-terrazza-duomo-21',
   'capodanno-stk-milan',
   'capodanno-radio-rooftop-milano',
@@ -215,7 +207,7 @@ export const SINGLE_PASS_VENUES: readonly SinglePassVenueSpec[] = [
   {
     id: 'voya',
     eventSlug: 'capodanno-voya-rooftop-milano',
-    partner: false,
+    partner: true,
     name: 'Voya Rooftop Milan (20° Piano)',
     taglineIt: 'Rooftop Skyline 300€ All-Inclusive · Cenone 6 Portate a 85m & Vista Fuochi 360°',
     taglineEn: 'Rooftop Skyline €300 All-Inclusive · 6-Course Gala Dinner at 85m & 360° Fireworks View',
@@ -257,7 +249,7 @@ export const SINGLE_PASS_VENUES: readonly SinglePassVenueSpec[] = [
   {
     id: 'voya-christmas',
     eventSlug: 'christmas-voya-rooftop-milan-2026',
-    partner: false,
+    partner: true,
     name: 'Natale 2026 @ Voya Rooftop Milano',
     taglineIt: '25 Dicembre 2026 · Menu Ufficiale di Natale 5 Portate al 20° Piano (100€)',
     taglineEn: 'December 25, 2026 · Official 5-Course Christmas Menu on the 20th Floor (€100)',
@@ -3324,23 +3316,74 @@ export const SINGLE_PASS_SKUS: readonly SinglePassSku[] = [
 
 export const SKU_BY_ID = new Map<string, SinglePassSku>(SINGLE_PASS_SKUS.map((s) => [s.id, s]));
 
-const THANKSGIVING_SLUG_MAP = Object.fromEntries(
-  Object.values(THANKSGIVING_JUSTME_SLUGS_35).map((slug) => [slug, 'justme-thanksgiving' as const]),
-);
+export const SINGLE_PASS_ONLY_VENUE_IDS = new Set<SinglePassVenueId>([
+  'justme',
+  'justme-garda',
+  'pineta',
+  'voya',
+]);
 
-const PARTENOPEA_SLUG_MAP = Object.fromEntries(
-  Object.values(PARTENOPEA_JUSTME_SLUGS_35).map((slug) => [slug, 'justme-partenopea' as const]),
-);
+export const DISABLED_DIRECT_CHECKOUT_VENUE_IDS = new Set<SinglePassVenueId>([
+  'voya-christmas',
+  'justme-orthodox',
+  'justme-thanksgiving',
+  'justme-partenopea',
+]);
+
+export const DIRECT_CHECKOUT_EXCLUDED_INVENTORY_VENUE_IDS = new Set<string>([
+  'v-justme',
+  'v-justme-garda',
+  'v-pineta',
+  'v-aria',
+  'v-voya',
+  'v-55',
+  'v-55milano',
+]);
+
+const DIRECT_CHECKOUT_EXCLUDED_VENUE_NAME_RE = /\b(just\s*me|pineta|aria\s+club|voya|55\s*milano)\b/i;
+
+export function isDirectCheckoutExcludedInventoryVenue(
+  event: Pick<OctoberEventRecord, 'venue'> | undefined,
+): boolean {
+  if (!event?.venue) return false;
+  if (DIRECT_CHECKOUT_EXCLUDED_INVENTORY_VENUE_IDS.has(event.venue.id)) return true;
+  return DIRECT_CHECKOUT_EXCLUDED_VENUE_NAME_RE.test(event.venue.name || '');
+}
+
+export function isSinglePassStorefrontPath(pathname?: string): boolean {
+  if (!pathname) return false;
+  const clean = pathname.split(/[?#]/)[0].trim();
+  return /^(?:\/[a-z]{2})?\/single-pass(?:\/|$)/i.test(clean);
+}
+
+export function isCheckoutItemAllowed(
+  sku: Pick<SinglePassSku, 'venueId'>,
+  channel: 'single-pass' | 'venue',
+): { ok: true } | { ok: false; code: 'VENUE_BOOKING_EXTERNAL_ONLY' | 'VENUE_DIRECT_CHECKOUT_DISABLED'; message: string } {
+  if (DISABLED_DIRECT_CHECKOUT_VENUE_IDS.has(sku.venueId)) {
+    return {
+      ok: false,
+      code: 'VENUE_BOOKING_EXTERNAL_ONLY',
+      message:
+        'This event is booked exclusively via official Xceed or WhatsApp Concierge (+39 351 912 7047).',
+    };
+  }
+  if (SINGLE_PASS_ONLY_VENUE_IDS.has(sku.venueId) && channel !== 'single-pass') {
+    return {
+      ok: false,
+      code: 'VENUE_DIRECT_CHECKOUT_DISABLED',
+      message:
+        'Event-page checkout is disabled for this partner venue. Use official Xceed, WhatsApp Concierge (+39 351 912 7047), or the /single-pass page.',
+    };
+  }
+  return { ok: true };
+}
 
 const EVENT_SLUG_TO_VENUE_ID: Record<string, SinglePassVenueId> = {
   'capodanno-gate-milano': 'gate',
-  'capodanno-pineta-milano': 'pineta',
   'capodanno-repvblic-milano': 'repvblic',
-  'capodanno-justme-milano-torre-branca': 'justme',
   'capodanno-bischeri-milano': 'bischeri',
   'capodanno-bobino-milano': 'bobino',
-  'capodanno-voya-rooftop-milano': 'voya',
-  'capodanno-justme-garda-lake': 'justme-garda',
   'capodanno-terrazza-duomo-21': 'terrazza-duomo-21',
   'capodanno-stk-milan': 'stk-milan',
   'capodanno-radio-rooftop-milano': 'radio-rooftop',
@@ -3371,14 +3414,6 @@ const EVENT_SLUG_TO_VENUE_ID: Record<string, SinglePassVenueId> = {
   'capodanno-in-villa-borromeo-fenaroli-reale': 'villa-fenaroli',
   'capodanno-franciacorta-number-one-villa-fenaroli': 'villa-fenaroli',
   'capodanno-hotel-all-inclusive-milano-sheraton-melia-ripamonti': 'sheraton-san-siro',
-  'christmas-voya-rooftop-milan-2026': 'voya-christmas',
-  'orthodox-new-year-justme-milan-2027': 'justme-orthodox',
-  ...THANKSGIVING_SLUG_MAP,
-  [THANKSGIVING_JUSTME_XCEED_RAW_SLUG]: 'justme-thanksgiving',
-  [THANKSGIVING_JUSTME_LEGACY_RAW_SLUG]: 'justme-thanksgiving',
-  ...PARTENOPEA_SLUG_MAP,
-  [PARTENOPEA_JUSTME_XCEED_RAW_SLUG]: 'justme-partenopea',
-  [PARTENOPEA_JUSTME_LEGACY_RAW_SLUG]: 'justme-partenopea',
 };
 
 export function getVenueIdByEventSlug(eventSlug: string): SinglePassVenueId | null {
@@ -3453,6 +3488,7 @@ export function isConfirmedUpcomingInventoryEvent(
   nowMs = Date.now(),
 ): event is OctoberEventRecord {
   if (!event) return false;
+  if (isDirectCheckoutExcludedInventoryVenue(event)) return false;
   if (event.excluded || event.sourceConflict) return false;
   if (event.affiliateStatus !== 'verified' && event.venue?.id !== 'v-gate') return false;
   const endMs = Date.parse(event.endISO || event.startISO || '');

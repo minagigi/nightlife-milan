@@ -21,6 +21,8 @@ import {
   computeSinglePassPrice,
   getSkuFeeRate,
   getSkuMaxQuantity,
+  isCheckoutItemAllowed,
+  isSinglePassStorefrontPath,
   resolveCatalogSku,
   validateAgeForSkus,
   validateTerrazzaDuomoCart,
@@ -108,7 +110,6 @@ export async function POST(request: Request) {
     }
     const maxQty = getSkuMaxQuantity(resolvedSku);
     const qty = Math.max(1, Math.min(maxQty, Math.floor(Number(rawItem.quantity) || 1)));
-    const prev = merged.get(resolvedSku.id);
     const dietary = rawItem.dietaryChoice
       ? String(rawItem.dietaryChoice).trim().slice(0, 60)
       : resolvedSku.dietaryPreset;
@@ -123,11 +124,19 @@ export async function POST(request: Request) {
         ? 'single-pass'
         : rawItem.channel === 'venue'
           ? 'venue'
-          : addedFromPath && addedFromPath.includes('/single-pass')
+          : isSinglePassStorefrontPath(addedFromPath)
             ? 'single-pass'
-            : prev?.channel || 'venue';
+            : 'venue';
 
-    merged.set(resolvedSku.id, {
+    const allowedCheck = isCheckoutItemAllowed(resolvedSku, itemChannel);
+    if (!allowedCheck.ok) {
+      return jsonError(allowedCheck.message, allowedCheck.code, 400);
+    }
+
+    const mergeKey = `${resolvedSku.id}::${itemChannel}`;
+    const prev = merged.get(mergeKey);
+
+    merged.set(mergeKey, {
       sku: resolvedSku,
       qty: Math.min(maxQty, (prev?.qty || 0) + qty),
       dietary: dietary || prev?.dietary,

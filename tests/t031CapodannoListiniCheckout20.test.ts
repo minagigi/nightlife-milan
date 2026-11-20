@@ -35,6 +35,9 @@ test('T-031, T-032 & WA Audit: Every Capodanno venue has explicit partner boolea
     'capodanno-pineta-milano',
     'capodanno-justme-milano-torre-branca',
     'capodanno-justme-garda-lake',
+    'capodanno-aria-club-milano',
+    'capodanno-voya-rooftop-milano',
+    'capodanno-55-milano',
     'capodanno-repvblic-milano',
     'capodanno-il-gattopardo-milano',
     'capodanno-bischeri-milano',
@@ -59,7 +62,6 @@ test('T-031, T-032 & WA Audit: Every Capodanno venue has explicit partner boolea
   // Non-partner verified venues must have partner=false and 20% checkout fee
   const nonPartnerVenues = [
     'terrazza-duomo-21',
-    'voya',
     'bobino',
     'stk-milan',
     'radio-rooftop',
@@ -82,7 +84,7 @@ test('T-031, T-032 & WA Audit: Every Capodanno venue has explicit partner boolea
   }
 
   // Partner venues direct booking must have 0% fee (while Single Pass channel stays 20%)
-  for (const vid of ['gate', 'pineta', 'repvblic', 'justme', 'bischeri', 'justme-garda'] as const) {
+  for (const vid of ['gate', 'pineta', 'repvblic', 'justme', 'bischeri', 'voya', 'justme-garda'] as const) {
     assert.equal(isPartnerVenueId(vid), true, `Expected partner=true for ${vid}`);
     const directSkus = SINGLE_PASS_SKUS.filter(
       (s) => s.venueId === vid && s.category !== 'all-night-combo' && s.category !== 'vip-table-share',

@@ -330,7 +330,6 @@ export const weeklyEvents: WeeklyEvent[] = [
     dressCode: { en: 'Smart Casual. No sportswear.', it: 'Smart Casual. No abbigliamento sportivo.' },
     faqs: defaultFaqs('Aria Club Milano', 'Piazzale dello Sport 14, Milan', '21+', 'Smart Casual', 'Hits, EDM and Dance'),
     image: '/images/events/weekly-posters/aria-thursday.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/thursday-night-362/229397/channel/nightlifemilan-1',
     priority: 90
   },
   {
@@ -351,7 +350,6 @@ export const weeklyEvents: WeeklyEvent[] = [
     dressCode: { en: 'Smart Casual. No sportswear.', it: 'Smart Casual. No abbigliamento sportivo.' },
     faqs: defaultFaqs('Aria Club Milano', 'Piazzale dello Sport 14, Milan', '21+', 'Smart Casual', 'Hits, EDM and Dance'),
     image: '/images/events/october-2026/242611-d6dfa52deb0b.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/friday-night-697/229412/channel/nightlifemilan-1',
     priority: 90
   },
   {
@@ -372,7 +370,6 @@ export const weeklyEvents: WeeklyEvent[] = [
     dressCode: { en: 'Smart Casual. No sportswear.', it: 'Smart Casual. No abbigliamento sportivo.' },
     faqs: defaultFaqs('Aria Club Milano', 'Piazzale dello Sport 14, Milan', '21+', 'Smart Casual', 'Hits, EDM and Dance'),
     image: '/images/events/october-2026/242617-59f08f112437.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/saturday-night-761/242617/channel/nightlifemilan-1',
     priority: 90
   },
 

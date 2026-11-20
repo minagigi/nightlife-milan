@@ -1,5 +1,10 @@
 import { checkOriginOrReject, jsonError, jsonOk } from '@/lib/single-pass/apiHelpers';
 import { readSessionFromRequest } from '@/lib/single-pass/auth';
+import {
+  isCheckoutItemAllowed,
+  isSinglePassStorefrontPath,
+  resolveCatalogSku,
+} from '@/lib/single-pass/catalog';
 import { getOrderById, normalizeEmail, saveOrder } from '@/lib/single-pass/store';
 import {
   PUBLIC_PAYMENT_PUBLISHABLE_KEY,
@@ -33,6 +38,25 @@ export async function POST(
 
   if (order.status === 'paid') {
     return jsonOk({ orderId: order.id, status: order.status, clientSecret: null });
+  }
+
+  for (const item of order.items) {
+    const effectiveChannel: 'single-pass' | 'venue' =
+      item.channel === 'single-pass' ||
+      (!item.channel && isSinglePassStorefrontPath(item.addedFromPath))
+        ? 'single-pass'
+        : 'venue';
+    const allowedCheck = isCheckoutItemAllowed({ venueId: item.venueId }, effectiveChannel);
+    if (!allowedCheck.ok) {
+      return jsonError(allowedCheck.message, allowedCheck.code, 400);
+    }
+    if (item.skuId.startsWith('xceed:') && !resolveCatalogSku(item.skuId)) {
+      return jsonError(
+        'This event is booked exclusively via official Xceed or WhatsApp Concierge (+39 351 912 7047).',
+        'VENUE_BOOKING_EXTERNAL_ONLY',
+        400,
+      );
+    }
   }
 
   try {

@@ -269,7 +269,7 @@ function buildSectionsIt(kind: LegalDocKind, brandNotice: string): LegalSection[
       },
       {
         heading: '2. Ambito E-Commerce e Listini Esclusivamente Confermati',
-        body: `Su ${c.domain} il carrello e l’acquisto diretto sono abilitati esclusivamente per locali, date speciali ed eventi dotati di tariffario ufficiale confermato (incluse le 8 strutture confermate di Capodanno 2027, Natale al Voya Rooftop, Capodanno Ortodosso al Just Me e le date di calendario con biglietti ufficiali disponibili). Le schede con prezzi indicativi di edizioni passate o "su richiesta" hanno valore puramente informativo.`,
+        body: `Su ${c.domain} il carrello e l’acquisto diretto sono abilitati esclusivamente per pacchetti Single Pass ed eventi dotati di tariffario ufficiale confermato e checkout abilitato. Le schede con prenotazione diretta tramite partner ufficiali o Concierge WhatsApp e quelle con prezzi indicativi "su richiesta" non applicano alcun sovrapprezzo online.`,
       },
       {
         heading: '3. Prezzi in Euro, Booking Fee 20% e Conversione Valuta al Checkout',

@@ -19,7 +19,6 @@ import {
 import EventVenueMap from '@/components/EventVenueMap';
 import Link from '@/components/LocalizedLink';
 import SeoAuthorityHub from '@/components/SeoAuthorityHub';
-import SinglePassVenueModule from '@/components/single-pass/SinglePassVenueModule';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { getPaymentTerms35 } from '@/lib/capodanno/paymentTerms35';
 import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
@@ -241,18 +240,10 @@ export default function ThanksgivingJustMeDetailView({ locale: rawLocale }: { lo
 
             <div className="flex flex-wrap gap-3 pt-1">
               <a
-                href="#official-tickets-ecommerce"
-                className="inline-flex min-h-[44px] items-center gap-2 rounded-sm bg-[#EAE3D5] px-5 py-3 text-sm font-bold uppercase tracking-wider text-[#050505] transition-colors hover:bg-white"
-              >
-                {c.ctaBuyNowLabel}
-                <ArrowRight className="h-4 w-4" />
-              </a>
-
-              <a
                 href={THANKSGIVING_JUSTME_AFFILIATE_URL}
                 target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-[44px] items-center gap-2 rounded-sm border border-champagne/45 bg-champagne/10 px-5 py-3 text-sm font-semibold text-champagne transition-colors hover:bg-champagne hover:text-[#050505]"
+                rel="sponsored noopener noreferrer"
+                className="inline-flex min-h-[44px] items-center gap-2 rounded-sm bg-[#EAE3D5] px-5 py-3 text-sm font-bold uppercase tracking-wider text-[#050505] transition-colors hover:bg-white"
               >
                 {c.ctaXceedLabel}
                 <ExternalLink className="h-4 w-4" />
@@ -329,8 +320,41 @@ export default function ThanksgivingJustMeDetailView({ locale: rawLocale }: { lo
         </nav>
       </header>
 
-      {/* Native Embedded Checkout Module (provides #official-tickets-ecommerce) */}
-      <SinglePassVenueModule locale={locale} venueId="justme-thanksgiving" />
+      {/* Official Xceed #249216 & 24/7 WhatsApp Concierge Booking Strip */}
+      <section
+        id="official-xceed-booking"
+        className="mx-auto max-w-[1440px] scroll-mt-24 border-x border-b border-white/10 bg-[#0B0A09] px-5 py-6 sm:px-14"
+      >
+        <div className="flex flex-col gap-4 rounded-xl border border-champagne/30 bg-white/[0.03] p-5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="space-y-1">
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-champagne">
+              {c.tiersHeading}
+            </p>
+            <p className="font-sans text-sm text-[#EAE3D5]">{c.priceBadge}</p>
+            <p className="font-sans text-xs text-[#C2B9AA]">{c.tiersSubheading}</p>
+          </div>
+          <div className="flex shrink-0 flex-wrap gap-3">
+            <a
+              href={THANKSGIVING_JUSTME_AFFILIATE_URL}
+              target="_blank"
+              rel="sponsored noopener noreferrer"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-sm bg-[#EAE3D5] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[#050505] transition-colors hover:bg-white"
+            >
+              {c.ctaXceedLabel}
+              <ExternalLink className="h-4 w-4" />
+            </a>
+            <a
+              href={whatsappGeneralUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-[44px] items-center gap-2 rounded-sm border border-[#25D366]/45 bg-[#25D366]/15 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[#25D366] transition-colors hover:bg-[#25D366] hover:text-white"
+            >
+              <MessageCircle className="h-4 w-4" />
+              {c.ctaWhatsappLabel}
+            </a>
+          </div>
+        </div>
+      </section>
 
       <div className="mx-auto max-w-[1440px] space-y-16 border-x border-white/10 px-5 py-14 sm:px-14">
         {/* Section 1: Overview & Timeline */}
@@ -502,15 +526,7 @@ export default function ThanksgivingJustMeDetailView({ locale: rawLocale }: { lo
                   </ul>
                 </div>
 
-                {tier.ctaKind === 'native' ? (
-                  <a
-                    href="#official-tickets-ecommerce"
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-sm bg-[#EAE3D5] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#050505] transition-colors hover:bg-white"
-                  >
-                    {tier.ctaLabel}
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </a>
-                ) : (
+                {tier.ctaKind === 'whatsapp' ? (
                   <a
                     href={whatsappVipFrontUrl}
                     target="_blank"
@@ -519,6 +535,16 @@ export default function ThanksgivingJustMeDetailView({ locale: rawLocale }: { lo
                   >
                     <MessageCircle className="h-3.5 w-3.5" />
                     {tier.ctaLabel}
+                  </a>
+                ) : (
+                  <a
+                    href={THANKSGIVING_JUSTME_AFFILIATE_URL}
+                    target="_blank"
+                    rel="sponsored noopener noreferrer"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-sm bg-[#EAE3D5] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#050505] transition-colors hover:bg-white"
+                  >
+                    {tier.ctaLabel}
+                    <ExternalLink className="h-3.5 w-3.5" />
                   </a>
                 )}
               </div>

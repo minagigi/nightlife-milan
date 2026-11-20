@@ -216,12 +216,14 @@ export default function CapodannoDetailView({ locale, event }: Props) {
       ? 'https://schema.org/SoldOut'
       : 'https://schema.org/InStock';
 
+    const schemaOfferUrl = event.xceedUrl || `${SITE_URL}${canonicalPath}`;
+
     if (multiOfferPrices && multiOfferPrices.length > 0) {
       eventSchemaNode.offers = tiers.slice(0, multiOfferPrices.length).map((tier, idx) => ({
         '@type': 'Offer',
         name: tier.label,
         description: tier.details,
-        url: `${SITE_URL}${canonicalPath}`,
+        url: schemaOfferUrl,
         price: String(multiOfferPrices[idx]),
         priceCurrency: 'EUR',
         availability: offerAvailability,
@@ -230,7 +232,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
     } else if (event.priceFromEur > 0 || event.category === 'piazza') {
       eventSchemaNode.offers = {
         '@type': 'Offer',
-        url: `${SITE_URL}${canonicalPath}`,
+        url: schemaOfferUrl,
         price: String(event.priceFromEur),
         priceCurrency: 'EUR',
         availability: offerAvailability,
@@ -239,13 +241,13 @@ export default function CapodannoDetailView({ locale, event }: Props) {
     } else if (isUnavailableForNye) {
       eventSchemaNode.offers = {
         '@type': 'Offer',
-        url: `${SITE_URL}${canonicalPath}`,
+        url: schemaOfferUrl,
         availability: 'https://schema.org/SoldOut',
       };
     } else {
       eventSchemaNode.offers = {
         '@type': 'Offer',
-        url: `${SITE_URL}${canonicalPath}`,
+        url: schemaOfferUrl,
         priceCurrency: 'EUR',
         availability: 'https://schema.org/PreOrder',
         validFrom: '2026-10-01T00:00:00+02:00',

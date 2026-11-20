@@ -6,6 +6,8 @@ import {
   computeSinglePassPrice,
   getSkuFeeRate,
   getSkuMaxQuantity,
+  isCheckoutItemAllowed,
+  isSinglePassStorefrontPath,
   resolveCatalogSku,
   validateTerrazzaDuomoCart,
   type TerrazzaCartValidationResult,
@@ -126,28 +128,39 @@ export function SinglePassCartProvider({
               (entry): entry is SinglePassCartItem =>
                 Boolean(entry) &&
                 typeof entry === 'object' &&
-                typeof (entry as SinglePassCartItem).skuId === 'string' &&
-                Boolean(resolveCatalogSku((entry as SinglePassCartItem).skuId)),
+                typeof (entry as SinglePassCartItem).skuId === 'string',
             )
-            .map((entry) => {
+            .flatMap((entry) => {
               const resolved = resolveCatalogSku(entry.skuId);
-              const maxQty = resolved ? getSkuMaxQuantity(resolved) : 10;
-              return {
-                skuId: entry.skuId,
-                quantity: Math.max(1, Math.min(maxQty, Math.floor(Number(entry.quantity) || 1))),
-                ...(entry.dietaryChoice
-                  ? { dietaryChoice: String(entry.dietaryChoice).slice(0, 60) }
-                  : {}),
-                ...(entry.addedFromPath
-                  ? { addedFromPath: String(entry.addedFromPath).slice(0, 200) }
-                  : {}),
-                ...(entry.addedFromTitle
-                  ? { addedFromTitle: String(entry.addedFromTitle).slice(0, 140) }
-                  : {}),
-                ...(entry.channel === 'single-pass' || entry.channel === 'venue'
-                  ? { channel: entry.channel }
-                  : {}),
-              };
+              if (!resolved) return [];
+              const entryChannel: 'single-pass' | 'venue' =
+                entry.channel === 'single-pass'
+                  ? 'single-pass'
+                  : entry.channel === 'venue'
+                    ? 'venue'
+                    : isSinglePassStorefrontPath(entry.addedFromPath)
+                      ? 'single-pass'
+                      : 'venue';
+              if (!isCheckoutItemAllowed(resolved, entryChannel).ok) {
+                return [];
+              }
+              const maxQty = getSkuMaxQuantity(resolved);
+              return [
+                {
+                  skuId: entry.skuId,
+                  quantity: Math.max(1, Math.min(maxQty, Math.floor(Number(entry.quantity) || 1))),
+                  ...(entry.dietaryChoice
+                    ? { dietaryChoice: String(entry.dietaryChoice).slice(0, 60) }
+                    : {}),
+                  ...(entry.addedFromPath
+                    ? { addedFromPath: String(entry.addedFromPath).slice(0, 200) }
+                    : {}),
+                  ...(entry.addedFromTitle
+                    ? { addedFromTitle: String(entry.addedFromTitle).slice(0, 140) }
+                    : {}),
+                  channel: entryChannel,
+                },
+              ];
             });
           setItems(valid);
         }
@@ -217,10 +230,13 @@ export function SinglePassCartProvider({
       (typeof document !== 'undefined' ? document.title.slice(0, 140) : undefined);
     const resolvedChannel: 'single-pass' | 'venue' =
       channel ||
-      (originPath && originPath.includes('/single-pass') ? 'single-pass' : 'venue');
+      (isSinglePassStorefrontPath(originPath) ? 'single-pass' : 'venue');
+    if (!isCheckoutItemAllowed(sku, resolvedChannel).ok) return;
 
     setItems((prev) => {
-      const idx = prev.findIndex((i) => i.skuId === sku.id);
+      const idx = prev.findIndex(
+        (i) => i.skuId === sku.id && (i.channel || 'venue') === resolvedChannel,
+      );
       if (idx >= 0) {
         const next = [...prev];
         const cur = next[idx];
@@ -293,8 +309,10 @@ export function SinglePassCartProvider({
     for (const item of items) {
       const sku = resolveCatalogSku(item.skuId);
       if (!sku) continue;
+      const itemChannel = item.channel || 'venue';
+      if (!isCheckoutItemAllowed(sku, itemChannel).ok) continue;
       if (sku.venueId === 'terrazza-duomo-21') hasTerrazzaDuomo21 = true;
-      const skuFeeRate = getSkuFeeRate(sku, item.channel || 'venue');
+      const skuFeeRate = getSkuFeeRate(sku, itemChannel);
       distinctFeeRates.add(skuFeeRate);
       const pricing = computeSinglePassPrice(sku.basePriceCents, item.quantity, skuFeeRate);
       itemCount += item.quantity;
