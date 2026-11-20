@@ -4,6 +4,7 @@ import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { isEnabledLocale, type LocaleCode } from '@/lib/i18n/localeRegistry';
 import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
 import { getLocalizedEventSlug35 } from '@/lib/i18n/localizedSlugs35';
+import { COMPACT_LOCALE_OVERRIDES_22, getUxCopyForLocale35 } from '@/lib/seoEventImages35';
 
 export type TargetArchetype =
   | 'couples_vip'
@@ -286,7 +287,7 @@ const COMPACT_LOCALE_OVERRIDES: Record<string, {
     techno: 'Volledig Zwarte Techno Clubwear & Leer', thermal: 'Witte Luxe Badjas in de Thermen & Badkleding',
     ski: 'Alpiene Après-Ski Chic & Kasjmier', halloween: 'Halloween Dark Couture & Venetiaans Masker',
     smart: 'Milanees Smart-Chic Maatpak & Aperitivo-Jurk',
-    shots: ['Hooforzaal & Echte Sfeer', 'Galadiner, Show & Ontvangst', 'VIP Privé-Tafels & Champagne', 'Publiek op de Dansvloer & Dresscode'],
+    shots: ['Hoofdzaal & Echte Sfeer', 'Galadiner, Show & Ontvangst', 'VIP Privé-Tafels & Champagne', 'Publiek op de Dansvloer & Dresscode'],
   },
   pl: {
     badge: 'Oficjalny Plakat Wydarzenia', eyebrow: 'GALERIA ZDJĘĆ SEO GOOGLE FLOW · GOŚCIE I DRESS CODE',
@@ -376,7 +377,7 @@ const COMPACT_LOCALE_OVERRIDES: Record<string, {
 
 export function getSeoLocalePack(locale: string): SeoLocalePack {
   if (PACKS[locale]) return PACKS[locale];
-  const ov = COMPACT_LOCALE_OVERRIDES[locale];
+  const ov = COMPACT_LOCALE_OVERRIDES[locale] || COMPACT_LOCALE_OVERRIDES_22[locale];
   if (ov) {
     return {
       officialPosterBadge: ov.badge,
@@ -579,7 +580,9 @@ export function selectMasterAssetKeys(slug: string, venueName = '', categorySlug
   if (s.includes('tunnel')) return ['tunnel-1', 'tunnel-2', 'volt-club-milano-interior-02', 'tempio-del-futuro-perduto-1'];
   if (s.includes('magnolia')) return ['circolo-magnolia', 'circolo-magnolia-2', 'base-milano-1', 'base-milano-2'];
   if (s.includes('santeria')) return ['santeria-toscana-31', 'v-santeria-toscana-2', 'santeria-paladini-8', 'v-santeria-paladini-2'];
-  if (s.includes('base-milano')) return ['base-milano-1', 'base-milano-2', 'fabbrica-del-vapore-1', 'fabbrica-del-vapore-2'];
+  if (s.includes('fabbrica')) return ['fabbrica-del-vapore-1', 'fabbrica-del-vapore-2', 'base-milano-1', 'base-milano-2'];
+if (s.includes('pelledoca')) return ['pelledoca-milano', 'gattopardo-interior-01', 'capodanno-cena-cantata-show-flow-01', 'fiftyfive-milano-cena-01'];
+if (s.includes('base-milano')) return ['base-milano-1', 'base-milano-2', 'fabbrica-del-vapore-1', 'fabbrica-del-vapore-2'];
   if (s.includes('arci-bellezza')) return ['arci-bellezza-milano', 'arci-bellezza-2', 'santeria-toscana-31', 'mosso-milano-1'];
   if (s.includes('masada') || s.includes('amelia')) return ['masada-1', 'masada-2', 'amelia-1', 'amelia-2'];
   if (s.includes('tocqueville')) return ['tocqueville-13', '11-clubroom-interior-01', '11-clubroom-interior-03', 'play-club-milano-interior-02'];
@@ -783,7 +786,7 @@ const UX_COPY_BY_LOCALE: Record<string, {
     nfHeading: 'Trova la Tua Serata Perfetta a Milano in 3 Click',
     nfSub: 'Filtra per data, genere musicale o formula d’ingresso oppure chiedi consiglio immediato su WhatsApp.',
     nfSteps: ['1. Quando vuoi uscire?', '2. Che musica e atmosfera cerchi?', '3. Quale formula preferisci?'],
-    nfChips1: ['Stasera a Milano', 'Questo Weekend', 'Speciale Halloween 2026', 'Capodanno 2027 (124 Eventi)'],
+    nfChips1: ['Stasera a Milano', 'Questo Weekend', 'Speciale Halloween 2026', 'Capodanno 2027 (125 Eventi)'],
     nfChips2: ['House, Rooftop & Luxury', 'Hip-Hop, Reggaeton & Urban', 'Techno & Electronic Club', 'Cena Cantata & Over 30'],
     nfChips3: ['Lista & Biglietti Salta-Fila', 'Aperitivo Royal con Tavolo', 'Tavolo VIP Privé & Bottiglie'],
     nfWaCta: 'Fatti Consigliare in 60 Secondi su WhatsApp (+39 351 912 7047) →',
@@ -833,7 +836,7 @@ const UX_COPY_BY_LOCALE: Record<string, {
     nfHeading: 'Find Your Ideal Night Out in Milan in 3 Clicks',
     nfSub: 'Filter by night, music vibe, or entry formula - or message our 24/7 WhatsApp Concierge for an instant match.',
     nfSteps: ['1. When are you going out?', '2. What music & vibe do you want?', '3. Preferred entry formula?'],
-    nfChips1: ['Tonight in Milan', 'This Weekend', 'Halloween 2026 Special', 'New Year’s Eve 2027 (124 Events)'],
+    nfChips1: ['Tonight in Milan', 'This Weekend', 'Halloween 2026 Special', 'New Year’s Eve 2027 (125 Events)'],
     nfChips2: ['House, Rooftop & Luxury', 'Hip-Hop, Reggaeton & Urban', 'Techno & Electronic Club', 'Dinner Show & 30+ Crowd'],
     nfChips3: ['Guest List & Tickets', 'Royal Aperitivo Table', 'VIP Privé Table & Bottles'],
     nfWaCta: 'Get a Tailored Club Match in 60s on WhatsApp (+39 351 912 7047) →',
@@ -851,7 +854,7 @@ function buildSeoEventUxPack(params: {
 }): SeoEventUxPack {
   const loc = params.locale;
   const locCode: LocaleCode = isEnabledLocale(loc) ? loc : 'en';
-  const base = UX_COPY_BY_LOCALE[loc] || UX_COPY_BY_LOCALE.en;
+  const base = UX_COPY_BY_LOCALE[loc] || getUxCopyForLocale35(loc, UX_COPY_BY_LOCALE.en) || UX_COPY_BY_LOCALE.en;
   const prefix = locCode === 'en' ? '' : `/${locCode}`;
   const capHubHref = `${prefix}/events/${(CAPODANNO_NAVIGATION[locCode as keyof typeof CAPODANNO_NAVIGATION] || CAPODANNO_NAVIGATION.en).slug}`;
   const halHubHref = locCode === 'it' ? '/it/events/eventi-halloween-milano-2026' : `${prefix}/events/halloween-events-in-milan-2026`;
@@ -903,7 +906,7 @@ function buildSeoEventUxPack(params: {
       heading: base.tldrHeadingTpl.replace('{h1}', params.h1),
       items: [
         { label: base.tldrLabels[0], value: params.targetLabel },
-        { label: base.tldrLabels[1], value: params.music || 'Clubbing, DJ Set & Show' },
+        { label: base.tldrLabels[1], value: params.music || base.nfChips2[0] },
         { label: base.tldrLabels[2], value: params.outfitLabel },
         { label: base.tldrLabels[3], value: base.tldrPricesVal },
         { label: base.tldrLabels[4], value: base.tldrConciergeVal },

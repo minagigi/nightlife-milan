@@ -10,7 +10,8 @@ import {
   formatEurFromCents,
   getSkusForVenue,
 } from '@/lib/single-pass/catalog';
-import { getSinglePassCopy } from '@/lib/single-pass/i18n35';
+import { getSinglePassCopy, localizeSinglePassSku, localizeVenueAgeBand } from '@/lib/single-pass/i18n35';
+import { getCapodannoUiCopy } from '@/lib/capodanno/i18n';
 import type { SinglePassVenueId } from '@/lib/single-pass/types';
 import { useSinglePassCart } from './SinglePassCartContext';
 
@@ -26,8 +27,8 @@ export default function SinglePassVenueModule({
   const venue = VENUE_BY_ID[venueId];
   const skus = getSkusForVenue(venueId);
   const copy = getSinglePassCopy(locale);
+  const ui = getCapodannoUiCopy(locale);
   const lp = localePrefix(locale);
-  const isIt = locale === 'it';
 
   if (!venue || skus.length === 0) return null;
 
@@ -40,12 +41,10 @@ export default function SinglePassVenueModule({
       <div className="flex flex-col gap-3 border-b border-[#050505]/15 pb-5 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-[#3D3830]">
-            NIGHTLIFE MILAN E-COMMERCE · {isIt ? venue.ageBandLabelIt : venue.ageBandLabelEn}
+            NIGHTLIFE MILAN E-COMMERCE · {localizeVenueAgeBand(venue, locale)}
           </p>
           <h2 className="mt-1 font-serif text-2xl font-bold text-[#050505]">
-            {isIt
-              ? `Acquista online i pacchetti confermati · ${venue.name}`
-              : `Book Official Confirmed Packages Online · ${venue.name}`}
+            {`${ui.bookPackagesOnlinePrefix} ${venue.name}`}
           </h2>
           <p className="mt-1.5 text-sm text-[#24201B]">
             {copy.trustOnlinePayment}
@@ -97,10 +96,10 @@ export default function SinglePassVenueModule({
                   </span>
                 </div>
                 <h3 className="mt-1.5 font-serif text-lg font-bold text-[#050505]">
-                  {isIt ? sku.titleIt : sku.titleEn}
+                  {localizeSinglePassSku(sku, locale, copy, venue.name).title}
                 </h3>
                 <p className="mt-1 text-xs leading-relaxed text-[#24201B]">
-                  {isIt ? sku.descriptionIt : sku.descriptionEn}
+                  {localizeSinglePassSku(sku, locale, copy, venue.name).description}
                 </p>
               </div>
 

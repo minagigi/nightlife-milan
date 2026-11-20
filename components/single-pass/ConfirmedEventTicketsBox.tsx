@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation';
 import { CreditCard, ShieldCheck, ShoppingBag, Users } from 'lucide-react';
 import { localePrefix } from '@/lib/i18n/locales';
 import { VENUE_BY_ID, formatEurFromCents } from '@/lib/single-pass/catalog';
-import { getSinglePassCopy } from '@/lib/single-pass/i18n35';
+import { getSinglePassCopy, localizeSinglePassSku } from '@/lib/single-pass/i18n35';
+import { getCapodannoUiCopy } from '@/lib/capodanno/i18n';
 import type { SinglePassSku } from '@/lib/single-pass/types';
 import { useSinglePassCart } from './SinglePassCartContext';
 
@@ -21,8 +22,8 @@ export default function ConfirmedEventTicketsBox({
   const router = useRouter();
   const { addItem, currency, formatConvertedEurCents } = useSinglePassCart();
   const copy = getSinglePassCopy(locale);
+  const ui = getCapodannoUiCopy(locale);
   const lp = localePrefix(locale);
-  const isIt = locale === 'it';
 
   if (!skus || skus.length === 0) return null;
 
@@ -35,12 +36,10 @@ export default function ConfirmedEventTicketsBox({
       <div className="flex flex-col gap-2 border-b border-[#F6F1E7]/15 pb-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="font-mono text-[11px] font-bold uppercase tracking-[0.18em] text-[#C9A84C]">
-            {isIt ? 'ACQUISTO DIRETTO UFFICIALE · LISTINO CONFERMATO' : 'OFFICIAL DIRECT TICKETING · CONFIRMED RATE CARD'}
+            {ui.officialDirectTicketingEyebrow}
           </p>
           <h3 className="mt-1 font-serif text-2xl font-bold text-[#F6F1E7]">
-            {isIt
-              ? `Acquista online i pacchetti confermati · ${venueName}`
-              : `Book Official Packages Online · ${venueName}`}
+            {`${ui.bookPackagesOnlinePrefix} ${venueName}`}
           </h3>
         </div>
         <div className="inline-flex items-center gap-1.5 font-mono text-xs text-[#EAE3D5]">
@@ -53,6 +52,7 @@ export default function ConfirmedEventTicketsBox({
         {skus.map((sku) => {
           const guests = sku.guestsPerUnit || 1;
           const isPartner = Boolean(VENUE_BY_ID[sku.venueId]?.partner);
+          const locSku = localizeSinglePassSku(sku, locale, copy, venueName);
           return (
             <div
               key={sku.id}
@@ -65,14 +65,14 @@ export default function ConfirmedEventTicketsBox({
                   </span>
                   <span className="inline-flex items-center gap-1">
                     <Users className="h-3.5 w-3.5" aria-hidden="true" />
-                    {guests} {guests === 1 ? (isIt ? 'ospite' : 'guest') : isIt ? 'ospiti' : 'guests'} · {sku.arrivalTime}
+                    {guests} {guests === 1 ? ui.guestSingular : ui.guestPlural} · {sku.arrivalTime}
                   </span>
                 </div>
                 <h4 className="mt-1.5 font-serif text-lg font-bold text-[#F6F1E7]">
-                  {isIt ? sku.titleIt : sku.titleEn}
+                  {locSku.title}
                 </h4>
                 <p className="mt-1 text-xs leading-relaxed text-[#C2B9AA]">
-                  {isIt ? sku.descriptionIt : sku.descriptionEn}
+                  {locSku.description}
                 </p>
               </div>
 

@@ -290,7 +290,7 @@ def main() -> int:
     menu_prog_pair = make_diptych(slide_menu, slide_prog)
     manifest.append(save_couture_card(menu_prog_pair, menus_dir / "bobino-nye-2027-menu-legends-120.webp", wa_glyph))
 
-    # 3. After Dinner 30€/35€/40€/50€ + Contact Card bonified in-place (replaces 371 408 5303 without cv2.inpaint)
+    # 3. After Dinner 30€/35€/40€/50€ + Contact Card bonified in-place (replaces 371 408 5303 without magic-eraser inpainting)
     slide_after = Image.open(BOBINO_SRC / "ig-legends-slide-6.jpg").convert("RGB")
     slide_contact_raw = Image.open(BOBINO_SRC / "ig-legends-slide-7.jpg").convert("RGB")
     slide_contact_clean, plate_meta = apply_custom_contact_plate(

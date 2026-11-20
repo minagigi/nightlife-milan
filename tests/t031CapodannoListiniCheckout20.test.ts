@@ -12,9 +12,12 @@ import {
   getCapodannoEventsForMode,
   isPartnerCapodannoSlug,
 } from '../lib/capodannoEvents';
-import { getCapodannoLocalizedEventContent } from '../lib/capodanno/i18n';
+import { getCapodannoLocalizedEventContent, getCapodannoUiCopy } from '../lib/capodanno/i18n';
+import { getCapodannoFilterOptions35 } from '../lib/capodanno/capodannoUi35';
 import { getT031OverrideContent } from '../lib/capodanno/t031Venues35';
-import { selectMasterAssetKeys, getCapodannoOfficialPosterSrc } from '../lib/seoEventImages';
+import { getWhatsappVenueNyeContent } from '../lib/capodanno/whatsappVenues35';
+import { SINGLE_PASS_COPY_35, localizeSinglePassSku } from '../lib/single-pass/i18n35';
+import { selectMasterAssetKeys, getCapodannoOfficialPosterSrc, getSeoLocalePack, buildSeoEventImagePack } from '../lib/seoEventImages';
 import {
   SINGLE_PASS_SKUS,
   VENUE_BY_ID,
@@ -26,8 +29,8 @@ import {
 
 const REPO_ROOT = path.resolve(__dirname, '..');
 
-test('T-031 & T-032: Every Capodanno venue has explicit partner boolean; partners = 0% direct, non-partners = 20% at checkout', () => {
-  assert.equal(CAPODANNO_EVENTS.length, 124, `Expected 124 events, got ${CAPODANNO_EVENTS.length}`);
+test('T-031, T-032 & WA Audit: Every Capodanno venue has explicit partner boolean; partners = 0% direct, non-partners = 20% at checkout', () => {
+  assert.equal(CAPODANNO_EVENTS.length, 125, `Expected 125 events, got ${CAPODANNO_EVENTS.length}`);
   const expectedPartners = [
     'capodanno-pineta-milano',
     'capodanno-justme-milano-torre-branca',
@@ -271,5 +274,83 @@ test('T-032: 5 new pages, 3 new theatre checkouts, 5 menu plates, 32 masters & T
     assert.ok(ev, `Missing TBA event ${tbaSlug}`);
     assert.equal(ev.priceFromEur, 0, `Expected TBA priceFromEur=0 on ${tbaSlug}`);
     assert.equal(Boolean(ev.soldOutForNye), false);
+  }
+});
+
+test('WhatsApp Audit: Magazzini tables, Fabbrica del Vapore TBA, Armani TBA, The Club & JustMe clean across 35 locales', () => {
+  // 1. Magazzini Generali tables & 20% fee (non-partner)
+  const magPista = SINGLE_PASS_SKUS.find((s) => s.id === 'magazzini-table-pista');
+  const magBalc = SINGLE_PASS_SKUS.find((s) => s.id === 'magazzini-table-balconata');
+  const magPalco = SINGLE_PASS_SKUS.find((s) => s.id === 'magazzini-table-prive-palco');
+  assert.ok(magPista && magBalc && magPalco, 'Missing Magazzini table SKUs');
+  assert.equal(magPista.basePriceCents, 30000);
+  assert.equal(magBalc.basePriceCents, 60000);
+  assert.equal(magPalco.basePriceCents, 90000);
+  assert.equal(VENUE_BY_ID['magazzini-generali']?.partner, false);
+  assert.equal(getSkuFeeRate(magPista, 'venue'), 0.2);
+
+  // 2. Fabbrica del Vapore (TBA, 0 formulas, 4 SEO master files present)
+  const fabbrica = getCapodannoEventBySlug('capodanno-fabbrica-del-vapore-milano');
+  assert.ok(fabbrica, 'Missing capodanno-fabbrica-del-vapore-milano');
+  assert.equal(fabbrica.priceFromEur, 0);
+  assert.deepEqual(fabbrica.formulas, []);
+  for (const key of selectMasterAssetKeys('capodanno-fabbrica-del-vapore-milano')) {
+    const p = path.join(REPO_ROOT, `public/images/seo-events/master/${key}.webp`);
+    assert.ok(fs.existsSync(p), `Missing Fabbrica master image ${p}`);
+  }
+
+  // 3. Armani/Privé TBA & Fabbrica TBA have zero invented offerPricesEur across 35 locales
+  for (const loc of ALL_35_LOCALES) {
+    const armaniC = getWhatsappVenueNyeContent('capodanno-armani-prive-milano', loc)!;
+    const fabbricaC = getWhatsappVenueNyeContent('capodanno-fabbrica-del-vapore-milano', loc)!;
+    assert.ok(armaniC && fabbricaC);
+    assert.equal(armaniC.offerPricesEur, undefined, `Armani must stay TBA in ${loc}`);
+    assert.equal(fabbricaC.offerPricesEur, undefined, `Fabbrica must stay TBA in ${loc}`);
+    assert.doesNotMatch(JSON.stringify(armaniC), /70€|280€|800€/);
+    assert.doesNotMatch(JSON.stringify(armaniC), /\bFREE ENTRY\b|\bINGRESSO GRATUITO\b/i);
+
+    // 4. The Club aligned with verified rate card (50/70/90/150/900-2000€)
+    const theClubC = getWhatsappVenueNyeContent('capodanno-the-club-milano', loc)!;
+    assert.match(JSON.stringify(theClubC), /50€/);
+    assert.match(JSON.stringify(theClubC), /150€/);
+    assert.match(JSON.stringify(theClubC), /2\.000€/);
+
+    // 5. JustMe never contains Pelledoca Cantine Volpi wines, and always keeps Orthodox banner
+    const justMe = getCapodannoEventBySlug('capodanno-justme-milano-torre-branca')!;
+    const jmContent = getCapodannoLocalizedEventContent(justMe, loc);
+    assert.doesNotMatch(JSON.stringify(jmContent), /Cantine Volpi|Gavi DOCG|Nebbiolo DOC/i);
+    assert.ok(jmContent.relatedHolidayBanner?.href, `Missing Orthodox banner on JustMe in ${loc}`);
+
+    // 6. Zero UI / Filter / SEO / SinglePass English leaks or forbidden tokens
+    const ui = getCapodannoUiCopy(loc);
+    const filterOpts = getCapodannoFilterOptions35(loc);
+    const spPack = SINGLE_PASS_COPY_35[loc];
+    const seoPack = getSeoLocalePack(loc);
+    const imgPack = buildSeoEventImagePack({
+      locale: loc,
+      eventSlug: 'capodanno-justme-milano-torre-branca',
+      venueName: 'JustMe Milano',
+      h1: jmContent.title,
+      h2List: ['H2'],
+      h3List: ['H3'],
+      posterSrc: '/images/events/capodanno-2027-posters/capodanno-justme-milano-torre-branca.webp',
+    });
+    const uxPack = imgPack.ux;
+    if (loc !== 'en') {
+      assert.doesNotMatch(JSON.stringify(ui), /Tarife \/ Prices|Official & Benchmark|FREE ENTRY|\bUpon request\b|Rooftop, Club & Gala Events/);
+      assert.doesNotMatch(JSON.stringify(filterOpts.w), /All Budgets|All Venue Types|All Packages|No events match all selected/);
+      assert.doesNotMatch(seoPack.galleryEyebrow, /GOOGLE FLOW SEO PHOTO GALLERY · TARGET & OUTFIT/);
+      assert.doesNotMatch(uxPack.vipCalc.heading, /Calculate Your Per-Person VIP Table Cost/);
+      assert.doesNotMatch(spPack.embeddedBannerTitle, /Buy confirmed-price tickets directly online/);
+    }
+    const allTexts = JSON.stringify({ ui, spPack, jmContent, theClubC, armaniC, fabbricaC });
+    assert.equal(allTexts.includes('!'), false, `Exclamation in ${loc}`);
+    assert.equal(allTexts.includes('\u2014'), false, `Em-dash in ${loc}`);
+    assert.equal(/\bstripe\b/i.test(allTexts), false, `Stripe mention in ${loc}`);
+
+    // 7. Distinct localized titles across Magazzini & JustMe SKUs
+    const magSkus = getSkusForVenue('magazzini-generali');
+    const magTitles = magSkus.map((s) => localizeSinglePassSku(s, loc, spPack, 'Magazzini Generali').title);
+    assert.equal(new Set(magTitles).size, magSkus.length, `Colliding Magazzini SKU titles in ${loc}: ${magTitles.join(' | ')}`);
   }
 });

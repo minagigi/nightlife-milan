@@ -6,6 +6,7 @@ import type { LocaleCode } from '@/lib/i18n/locales';
 import { capodannoEventPath, capodannoNavigation, capodannoPath } from '@/lib/capodanno/routes';
 import { getPaymentTerms35 } from '@/lib/capodanno/paymentTerms35';
 import {
+  getCapodannoDetailFaqs35,
   getCapodannoLocalizedEventContent,
   getCapodannoLocalizedEventSubtitle,
   getCapodannoLocalizedEventTitle,
@@ -54,7 +55,6 @@ type Props = {
 const SITE_URL = 'https://nightlifemilan.com';
 
 export default function CapodannoDetailView({ locale, event }: Props) {
-  const isIt = locale === 'it';
   const prefix = localePrefix(locale);
   const nav = capodannoNavigation(locale);
   const baseUi = getCapodannoUiCopy(locale);
@@ -81,12 +81,8 @@ export default function CapodannoDetailView({ locale, event }: Props) {
     : isTerrazzaDuomo21
       ? {
           ...baseUi,
-          bookingHeading: isIt
-            ? 'Concierge WhatsApp · Terrazza Duomo 21 & MA.RE'
-            : 'WhatsApp Concierge · Terrazza Duomo 21 & MA.RE',
-          bookingSubtitle: isIt
-            ? 'Prenota direttamente online qui sopra con pagamento sicuro con carta oppure contatta il Concierge Nightlife Milan per gruppi numerosi e richieste speciali su WhatsApp +39 351 912 7047.'
-            : 'Book directly online above with secure card payment or message Nightlife Milan Concierge for large groups and special requests on WhatsApp +39 351 912 7047.',
+          bookingHeading: baseUi.terrazzaBookingHeading,
+          bookingSubtitle: baseUi.terrazzaBookingSubtitle,
         }
       : baseUi;
   const scarcity = partyCopy
@@ -118,7 +114,6 @@ export default function CapodannoDetailView({ locale, event }: Props) {
   const tiers = localized.tiers;
   const highlights = localized.highlights;
   const sourceBasis = localized.sourceBasis;
-  const hasDinnerFormula = event.formulas.includes('cenone') || event.formulas.includes('buffet');
   const canonicalPath = capodannoEventPath(event.slug, locale);
   const officialPosterSrc = getCapodannoOfficialPosterSrc(event.slug);
   const isGardaSisterVenue = event.slug === 'capodanno-justme-garda-lake';
@@ -155,60 +150,18 @@ export default function CapodannoDetailView({ locale, event }: Props) {
     (item) => !item.closedForNye && !item.soldOutForNye && item.category === event.category && item.slug !== event.slug
   ).slice(0, 6);
 
-  const defaultFaqs = isIt
-    ? [
-        {
-          q: `Quanto costa il Capodanno 2027 presso ${event.venueName} (${event.city})?`,
-          a: `Le formule previste per la notte di San Silvestro (31 dicembre 2026 – 1 gennaio 2027) presso ${event.venueName} sono: ${localized.priceSummary}. ${sourceBasis}`,
-        },
-        {
-          q: `Quali sono gli orari e l’indirizzo di ${event.venueName} per la notte di Capodanno?`,
-          a: `L’evento si svolge presso ${event.venueName} in ${event.address}, ${event.city} (${event.province}), con orario ${event.hours}. Il dress code richiesto è: ${dress}.`,
-        },
-        hasDinnerFormula
-          ? {
-              q: `Come posso prenotare prevendite, cenone o tavolo VIP per ${event.venueName}?`,
-              a: `Contatta il Concierge ufficiale Nightlife Milan su WhatsApp (${SITE_CONTACT.whatsapp.number}), attivo 24/24, 7 giorni su 7. ${paymentTerms.steps.join(' ')}`,
-            }
-          : {
-              q: `Come posso prenotare l’ingresso Early Bird o il tavolo VIP per ${event.venueName}?`,
-              a: `Contatta il Concierge ufficiale Nightlife Milan su WhatsApp (${SITE_CONTACT.whatsapp.number}), attivo 24/24, 7 giorni su 7. ${paymentTerms.steps.join(' ')}`,
-            },
-      ]
-    : locale === 'en'
-      ? [
-          {
-            q: `How much does New Year’s Eve 2027 cost at ${event.venueName} (${event.city})?`,
-            a: `Official packages for December 31, 2026 – January 1, 2027 at ${event.venueName} are: ${localized.priceSummary}. ${sourceBasis}`,
-          },
-          {
-            q: `What are the hours, address, and dress code for ${event.venueName} on New Year’s Eve?`,
-            a: `The celebration takes place at ${event.venueName}, ${event.address}, ${event.city} (${event.province}), operating ${event.hours}. Recommended dress code: ${dress}.`,
-          },
-          hasDinnerFormula
-            ? {
-                q: `How can I book tickets, gala dinner, or a VIP table for ${event.venueName}?`,
-                a: `Contact our official Nightlife Milan WhatsApp Concierge (${SITE_CONTACT.whatsapp.number}), available 24/7. ${paymentTerms.steps.join(' ')}`,
-              }
-            : {
-                q: `How can I book Early Bird admission or a VIP table for ${event.venueName}?`,
-                a: `Contact our official Nightlife Milan WhatsApp Concierge (${SITE_CONTACT.whatsapp.number}), available 24/7. ${paymentTerms.steps.join(' ')}`,
-              },
-        ]
-      : [
-          {
-            q: `${nav.menuLabel} 2027 @ ${event.venueName} (${event.city}) · EUR (€)?`,
-            a: `${event.venueName} (${event.address}, ${event.city}): ${localized.priceSummary}. ${sourceBasis}`,
-          },
-          {
-            q: `${event.venueName} (${event.address}, ${event.city}) · 31/12/2026 (${event.hours})?`,
-            a: `${event.venueName}, ${event.address}, ${event.city} (${event.province}), ${event.hours}. Dress code: ${dress}.`,
-          },
-          {
-            q: `WhatsApp Concierge ${SITE_CONTACT.whatsapp.number} · ${event.venueName}?`,
-            a: `${paymentTerms.steps.join(' ')}`,
-          },
-        ];
+  const defaultFaqs = getCapodannoDetailFaqs35({
+    locale,
+    venueName: event.venueName,
+    address: event.address,
+    city: event.city,
+    province: event.province,
+    hours: event.hours,
+    dressCode: dress,
+    priceSummary: localized.priceSummary,
+    sourceBasis,
+    paymentSteps: paymentTerms.steps,
+  });
 
   const faqs =
     localized.customFaqs && localized.customFaqs.length > 0 ? localized.customFaqs : defaultFaqs;
@@ -287,6 +240,14 @@ export default function CapodannoDetailView({ locale, event }: Props) {
         url: `${SITE_URL}${canonicalPath}`,
         availability: 'https://schema.org/SoldOut',
       };
+    } else {
+      eventSchemaNode.offers = {
+        '@type': 'Offer',
+        url: `${SITE_URL}${canonicalPath}`,
+        priceCurrency: 'EUR',
+        availability: 'https://schema.org/PreOrder',
+        validFrom: '2026-10-01T00:00:00+02:00',
+      };
     }
   }
 
@@ -359,7 +320,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               )}
               {isUnavailableForNye && (
                 <span className="border border-amber-400/60 bg-amber-950/90 px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-amber-100" data-sold-out-for-nye-badge>
-                  {isIt ? 'SOLD OUT CAPODANNO 2027' : 'SOLD OUT NYE 2027'}
+                  {ui.soldOutNye2027Badge}
                 </span>
               )}
             </div>
@@ -415,7 +376,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 {isUnavailableForNye ? (
                   <li>
                     <a href="#alternative-rooftop" className="text-[#050505] hover:underline">
-                      {localized.alternativesHeading || (isIt ? 'Alternative Confermate' : 'Confirmed Alternatives')}
+                      {localized.alternativesHeading || ui.confirmedAlternativesHeading}
                     </a>
                   </li>
                 ) : (
@@ -428,14 +389,14 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                     {(localized.menus?.length ?? 0) > 0 && (
                       <li>
                         <a href="#menu-ufficiale" className="text-[#050505] hover:underline">
-                          {localized.menusHeading || 'Menu'}
+                          {localized.menusHeading || ui.tocMenuLabel}
                         </a>
                       </li>
                     )}
                     {(localized.conditions?.length ?? 0) > 0 && (
                       <li>
                         <a href="#condizioni-ufficiali" className="text-[#050505] hover:underline">
-                          {localized.conditionsHeading || (isIt ? 'Condizioni Ufficiali' : 'Official Conditions')}
+                          {localized.conditionsHeading || ui.officialConditionsHeading}
                         </a>
                       </li>
                     )}
@@ -485,7 +446,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               <p className="text-base leading-relaxed text-[#C2B9AA]">{description}</p>
               <p className="text-sm leading-relaxed text-[#C2B9AA]">
                 <strong className="text-[#F6F1E7]">{ui.musicLabel}:</strong> {music} ·{' '}
-                <strong className="text-[#F6F1E7]">Dress Code:</strong> {dress}
+                <strong className="text-[#F6F1E7]">{ui.dressCodeLabel}:</strong> {dress}
               </p>
               {matchedPublicVenue && matchedPublicVenueHref && (
                 <div
@@ -495,17 +456,13 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                   <div>
                     <p className="text-[11px] font-bold uppercase tracking-widest text-[#C9A84C]">
                       {isGardaSisterVenue
-                        ? (isIt ? 'Sede Gemella a Milano' : 'Sister Flagship Venue in Milan')
-                        : (isIt ? 'Scheda Ufficiale Locale Tutto l\'Anno' : 'Official Year-Round Venue Guide')}
+                        ? ui.sisterVenueMilanLabel
+                        : ui.officialVenueGuideLabel}
                     </p>
                     <p className="mt-1 text-sm text-[#EAE3D5]">
                       {isGardaSisterVenue
-                        ? (isIt
-                            ? 'Scopri anche la sede milanese Just Me Milano (Torre Branca, Parco Sempione): prezzi tavoli VIP, serate 7/7 e lista.'
-                            : 'Explore our sister Milan flagship Just Me Milano (Torre Branca, Parco Sempione): VIP table prices, 7/7 nights and guest list.')
-                        : (isIt
-                            ? `Consulta prezzi tavoli VIP, dress code, orari metro e calendario settimanale completo di ${matchedPublicVenueName}.`
-                            : `Check year-round VIP table prices, dress code, metro directions and weekly calendar for ${matchedPublicVenueName}.`)}
+                        ? ui.sisterVenueMilanDesc
+                        : ui.officialVenueGuideDescTpl.replace('{venue}', matchedPublicVenueName)}
                     </p>
                   </div>
                   <Link
@@ -666,7 +623,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 className="mt-10 border border-[#050505]/15 bg-[#F6F1E7] p-6 text-[#050505] sm:p-8"
               >
                 <p className="font-mono text-xs font-bold uppercase tracking-widest text-[#5C4415]">
-                  {isIt ? 'LOCATION CONFERMATE · 31 DICEMBRE 2026' : 'CONFIRMED NYE 2027 VENUES · DEC 31, 2026'}
+                  {ui.confirmedVenuesBanner}
                 </p>
                 <h2 className="mt-1 font-serif text-2xl font-bold text-[#050505] sm:text-3xl">
                   {localized.alternativesHeading}
@@ -699,14 +656,14 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                           </h3>
                           <p className="mt-1 text-xs text-[#3D3830]">{altSub}</p>
                           <p className="mt-2 text-xs font-semibold text-[#050505]">
-                            {isIt ? alt.priceSummaryIt : alt.priceSummaryEn}
+                            {getCapodannoLocalizedEventContent(alt, locale).priceSummary}
                           </p>
                         </div>
                         <Link
                           href={altHref}
                           className="mt-4 inline-flex min-h-[44px] items-center justify-center bg-[#050505] px-5 py-2.5 text-xs font-extrabold uppercase tracking-wider text-[#F6F1E7] transition hover:bg-[#24201B]"
                         >
-                          {isIt ? 'Vedi Formule & Prenota Online →' : 'View Packages & Book Online →'}
+                          {ui.viewPackagesCta}
                         </Link>
                       </article>
                     );
@@ -850,10 +807,10 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 className="mt-10 border border-[#C9A84C]/35 bg-[#0B0A09] p-6 sm:p-8"
               >
                 <p className="font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-[#C9A84C]">
-                  {isIt ? 'REGOLAMENTO UFFICIALE CAPODANNO 2027' : 'OFFICIAL NYE 2027 VENUE CONDITIONS'}
+                  {ui.officialConditionsEyebrow}
                 </p>
                 <h2 className="mt-1 font-serif text-2xl font-bold text-[#F6F1E7]">
-                  {localized.conditionsHeading || (isIt ? 'Condizioni Ufficiali' : 'Official Conditions')}
+                  {localized.conditionsHeading || ui.officialConditionsHeading}
                 </h2>
                 <ul className="mt-4 grid gap-3 sm:grid-cols-2">
                   {localized.conditions.map((cond) => (

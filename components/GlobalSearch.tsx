@@ -33,6 +33,7 @@ import {
   capodannoNavigation,
   capodannoPath,
 } from '@/lib/capodanno/routes';
+import { getWords35 } from '@/lib/capodanno/capodannoUi35';
 import type { CapodannoEventItem } from '@/lib/capodannoEvents';
 import type { OctoberEventRecord } from '@/lib/october-events/types';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
@@ -2346,9 +2347,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                                           ? `${ui.card.fromPrice} €${ev.priceFromEur}`
                                           : ev.isPiazza
                                             ? ui.card.freeEntry
-                                            : isIt
-                                              ? 'Su richiesta'
-                                              : 'On request'}
+                                            : getWords35(currentLocale).uponRequestLabel}
                                     </span>
                                   </div>
                                   <p className="font-serif text-base text-[#F6F1E7] group-hover:text-[#EAE3D5] transition-colors truncate mt-0.5">

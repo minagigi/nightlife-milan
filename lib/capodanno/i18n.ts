@@ -12,6 +12,18 @@ import { getTomNyeContent } from '@/lib/capodanno/tom35';
 import { getTerrazzaDuomo21NyeContent } from '@/lib/capodanno/terrazzaDuomo21_35';
 import { getCeresio7ClosedNyeContent } from '@/lib/capodanno/ceresio7Closed35';
 import { getT031OverrideContent } from '@/lib/capodanno/t031Venues35';
+import { getWhatsappVenueNyeContent } from '@/lib/capodanno/whatsappVenues35';
+import {
+  buildFallbackLocalizedEventContent35,
+  formatCapodannoPriceBadge35,
+  getCapodannoCategoryBadge35,
+  getCapodannoCategoryQuickAnswer35,
+  getCapodannoCategoryShortLabel35,
+  getCapodannoDetailFaqs35,
+  getCapodannoFilterOptions35,
+  getCapodannoHubFaqs35,
+  getWords35,
+} from '@/lib/capodanno/capodannoUi35';
 import { getJustMeOrthodoxRelatedBanner } from '@/lib/orthodox-nye/justme35';
 import type { CapodannoCategoryPageDef, CapodannoEventItem } from '@/lib/capodannoEvents';
 import { SITE_CONTACT } from '@/config/contact';
@@ -104,13 +116,49 @@ export type CapodannoUiCopy = {
   relatedHeading: string;
   metaCtaLabel: string;
   dateBadge: string;
+  tocMenuLabel: string;
+  freeEntryLabel: string;
+  uponRequestLabel: string;
+  fromPricePrefix: string;
+  dressCodeLabel: string;
+  closedDec31Jan3Badge: string;
+  closedNye2027Badge: string;
+  soldOutNye2027Badge: string;
+  confirmedAlternativesHeading: string;
+  officialConditionsHeading: string;
+  officialConditionsEyebrow: string;
+  sisterVenueMilanLabel: string;
+  sisterVenueMilanDesc: string;
+  officialVenueGuideLabel: string;
+  officialVenueGuideDescTpl: string;
+  confirmedVenuesBanner: string;
+  viewPackagesCta: string;
+  addressLabel: string;
+  hoursLabel: string;
+  priceTiersHeading: string;
+  terrazzaBookingHeading: string;
+  terrazzaBookingSubtitle: string;
+  guestSingular: string;
+  guestPlural: string;
+  officialDirectTicketingEyebrow: string;
+  bookPackagesOnlinePrefix: string;
   categoryTitles: Record<string, string>;
   categorySubtitles: Record<string, string>;
 };
 
+export {
+  formatCapodannoPriceBadge35,
+  getCapodannoCategoryBadge35,
+  getCapodannoCategoryQuickAnswer35,
+  getCapodannoCategoryShortLabel35,
+  getCapodannoDetailFaqs35,
+  getCapodannoFilterOptions35,
+  getCapodannoHubFaqs35,
+};
+
 const CATEGORY_LABELS_BY_LOCALE: Record<string, Record<string, string>> = {
   es: {
-    'capodanno-2027': 'Eventos de Nochevieja en Milán y Lombardía 2027: Los 124 Eventos, Discotecas, Rooftops y Cenas',
+    'capodanno-2027': 'Eventos de Nochevieja en Milán y Lombardía 2027: Los 125 Eventos, Discotecas, Rooftops y Cenas',
     'capodanno-rooftop-milano': 'Nochevieja en Terrazas Rooftop en Milán 2027: Vistas al Duomo y Rascacielos',
     'capodanno-discoteche-milano': 'Nochevieja en Discotecas y Clubs de Milán 2027: Entradas y Mesas VIP',
     'capodanno-locali-cenone-milano': 'Nochevieja con Cena de Gala y Dinner Show en Milán 2027',
@@ -128,7 +176,7 @@ const CATEGORY_LABELS_BY_LOCALE: Record<string, Record<string, string>> = {
     'capodanno-in-piazza': 'Nochevieja en las Plazas de Milán y Lombardía 2027: Conciertos Gratis',
   },
   fr: {
-    'capodanno-2027': 'Événements du Nouvel An à Milan et en Lombardie 2027 : Les 124 Soirées, Clubs et Rooftops',
+    'capodanno-2027': 'Événements du Nouvel An à Milan et en Lombardie 2027 : Les 125 Soirées, Clubs et Rooftops',
     'capodanno-rooftop-milano': 'Nouvel An sur les Rooftops et Terrasses Panoramiques de Milan 2027',
     'capodanno-discoteche-milano': 'Nouvel An en Discothèque et Club à Milan 2027 : Soirées et Tables VIP',
     'capodanno-locali-cenone-milano': 'Réveillon du Nouvel An avec Dîner de Gala et Dinner Show à Milan 2027',
@@ -146,7 +194,7 @@ const CATEGORY_LABELS_BY_LOCALE: Record<string, Record<string, string>> = {
     'capodanno-in-piazza': 'Nouvel An sur les Places de Milan et Lombardie 2027 : Concerts Gratuits',
   },
   de: {
-    'capodanno-2027': 'Silvester-Veranstaltungen in Mailand & Lombardei 2027: Alle 124 Partys, Clubs & Galadinner',
+    'capodanno-2027': 'Silvester-Veranstaltungen in Mailand & Lombardei 2027: Alle 125 Partys, Clubs & Galadinner',
     'capodanno-rooftop-milano': 'Silvester auf Rooftop-Terrassen in Mailand 2027: Dom-Blick & Skyline',
     'capodanno-discoteche-milano': 'Silvester in Clubs und Diskotheken in Mailand 2027: Tickets & VIP-Tische',
     'capodanno-locali-cenone-milano': 'Silvester Galadinner und Dinner-Show in Mailand 2027',
@@ -164,7 +212,7 @@ const CATEGORY_LABELS_BY_LOCALE: Record<string, Record<string, string>> = {
     'capodanno-in-piazza': 'Silvester auf den Plätzen in Mailand 2027: Kostenlose Open-Air-Konzerte',
   },
   pt: {
-    'capodanno-2027': 'Eventos de Réveillon em Milão e Lombardia 2027: Todos os 124 Eventos, Clubs e Rooftops',
+    'capodanno-2027': 'Eventos de Réveillon em Milão e Lombardia 2027: Todos os 125 Eventos, Clubs e Rooftops',
     'capodanno-rooftop-milano': 'Réveillon nos Rooftops e Terraços Panorâmicos de Milão 2027',
     'capodanno-discoteche-milano': 'Réveillon nas Discotecas e Clubs de Milão 2027: Ingressos e Mesas VIP',
     'capodanno-locali-cenone-milano': 'Réveillon com Ceia de Gala e Dinner Show em Milão 2027',
@@ -185,6 +233,35 @@ const CATEGORY_LABELS_BY_LOCALE: Record<string, Record<string, string>> = {
 
 export function getCapodannoUiCopy(locale: string): CapodannoUiCopy {
   const nav = capodannoNavigation(locale);
+  const w = getWords35(locale);
+  const extraFields = {
+    tocMenuLabel: w.tocMenuLabel,
+    freeEntryLabel: w.freeEntryLabel,
+    uponRequestLabel: w.uponRequestLabel,
+    fromPricePrefix: w.fromPricePrefix,
+    dressCodeLabel: w.dressCodeLabel,
+    closedDec31Jan3Badge: w.closedDec31Jan3Badge,
+    closedNye2027Badge: w.closedNye2027Badge,
+    soldOutNye2027Badge: w.soldOutNye2027Badge,
+    confirmedAlternativesHeading: w.confirmedAlternativesHeading,
+    officialConditionsHeading: w.officialConditionsHeading,
+    officialConditionsEyebrow: w.officialConditionsEyebrow,
+    sisterVenueMilanLabel: w.sisterVenueMilanLabel,
+    sisterVenueMilanDesc: w.sisterVenueMilanDesc,
+    officialVenueGuideLabel: w.officialVenueGuideLabel,
+    officialVenueGuideDescTpl: w.officialVenueGuideDescTpl,
+    confirmedVenuesBanner: w.confirmedVenuesBanner,
+    viewPackagesCta: w.viewPackagesCta,
+    addressLabel: w.addressLabel,
+    hoursLabel: w.hoursLabel,
+    priceTiersHeading: w.priceTiersHeading,
+    terrazzaBookingHeading: w.terrazzaBookingHeading,
+    terrazzaBookingSubtitle: w.terrazzaBookingSubtitle,
+    guestSingular: w.guestSingular,
+    guestPlural: w.guestPlural,
+    officialDirectTicketingEyebrow: w.officialDirectTicketingEyebrow,
+    bookPackagesOnlinePrefix: w.bookPackagesOnlinePrefix,
+  };
   if (locale === 'it') {
     return {
       eventsBreadcrumb: 'Eventi',
@@ -223,11 +300,12 @@ export function getCapodannoUiCopy(locale: string): CapodannoUiCopy {
       pricesHeadingPrefix: 'Prezzi, Formule e Tavoli VIP',
       bookingHeading: 'Prenota Ora con il Concierge Ufficiale (Zero Commissioni)',
       bookingSubtitle: 'Ricevi subito su WhatsApp, telefono o email il link di prevendita, il menu del Gran Cenone di San Silvestro o la mappa dei tavoli Privé.',
-      backToAllBtn: '← Torna a Tutti i 124 Eventi di Capodanno',
+      backToAllBtn: '← Torna a Tutti i 125 Eventi di Capodanno',
       mapHeadingEvent: 'Mappa, Indirizzo e Come Arrivare',
       relatedHeading: 'Altri Eventi di Capodanno nella Stessa Categoria',
       metaCtaLabel: 'Info e prenotazioni',
       dateBadge: '31 Dicembre 2026 – 1 Gennaio 2027',
+      ...extraFields,
       categoryTitles: {},
       categorySubtitles: {},
     };
@@ -271,11 +349,12 @@ export function getCapodannoUiCopy(locale: string): CapodannoUiCopy {
       pricesHeadingPrefix: 'Prices, Packages & VIP Tables',
       bookingHeading: 'Book Now via Official Concierge (Zero Agency Fees)',
       bookingSubtitle: 'Receive the official ticket link, full New Year’s Eve gala dinner menu, or VIP table floor plan via WhatsApp, phone, or email.',
-      backToAllBtn: '← Back to All 124 NYE Events',
+      backToAllBtn: '← Back to All 125 NYE Events',
       mapHeadingEvent: 'Venue Map, Address & Directions',
       relatedHeading: 'More New Year’s Eve Events in This Category',
       metaCtaLabel: 'Info & bookings',
       dateBadge: 'December 31, 2026 – January 1, 2027',
+      ...extraFields,
       categoryTitles: {},
       categorySubtitles: {},
     };
@@ -315,7 +394,7 @@ export function getCapodannoUiCopy(locale: string): CapodannoUiCopy {
       pricesHeadingPrefix: 'Precios, Paquetes y Mesas VIP',
       bookingHeading: 'Reserva Ahora con el Concierge Oficial (Sin Comisiones)',
       bookingSubtitle: 'Recibe al instante por WhatsApp, teléfono o email el enlace oficial de entradas, el menú de gala o el mapa de mesas VIP.',
-      backToAllBtn: '← Volver a los 124 Eventos de Nochevieja',
+      backToAllBtn: '← Volver a los 125 Eventos de Nochevieja',
       mapHeadingEvent: 'Mapa del Local, Dirección y Cómo Llegar',
       relatedHeading: 'Más Eventos de Nochevieja en Esta Categoría',
       metaCtaLabel: 'Info y reservas',
@@ -354,7 +433,7 @@ export function getCapodannoUiCopy(locale: string): CapodannoUiCopy {
       pricesHeadingPrefix: 'Tarifs, Formules et Tables VIP',
       bookingHeading: 'Réservez via le Concierge Officiel WhatsApp (Zéro Commission)',
       bookingSubtitle: 'Recevez en temps réel par WhatsApp, téléphone ou e-mail les préventes officielles, le menu du réveillon ou le plan des tables VIP.',
-      backToAllBtn: '← Retour aux 124 Événements du Nouvel An',
+      backToAllBtn: '← Retour aux 125 Événements du Nouvel An',
       mapHeadingEvent: 'Carte, Adresse et Accès',
       relatedHeading: 'Autres Soirées du Nouvel An dans Cette Catégorie',
       metaCtaLabel: 'Infos et réservations',
@@ -393,7 +472,7 @@ export function getCapodannoUiCopy(locale: string): CapodannoUiCopy {
       pricesHeadingPrefix: 'Preise, Pakete & VIP-Tische',
       bookingHeading: 'Jetzt über den offiziellen WhatsApp Concierge buchen (Ohne Gebühren)',
       bookingSubtitle: 'Erhalten Sie per WhatsApp, Telefon oder E-Mail den offiziellen Ticketlink, das Galadinner-Menü oder den VIP-Tischplan.',
-      backToAllBtn: '← Zurück zu allen 124 Silvester-Events',
+      backToAllBtn: '← Zurück zu allen 125 Silvester-Events',
       mapHeadingEvent: 'Karte, Adresse & Anfahrt',
       relatedHeading: 'Weitere Silvester-Events in dieser Kategorie',
       metaCtaLabel: 'Infos & Reservierung',
@@ -432,7 +511,7 @@ export function getCapodannoUiCopy(locale: string): CapodannoUiCopy {
       pricesHeadingPrefix: 'Preços, Pacotes e Mesas VIP',
       bookingHeading: 'Reserve Agora pelo Concierge Oficial WhatsApp (Zero Taxas)',
       bookingSubtitle: 'Receba por WhatsApp, telefone ou e-mail o link oficial de ingressos, o menu da ceia de gala ou o mapa de mesas VIP.',
-      backToAllBtn: '← Voltar para Todos os 124 Eventos de Réveillon',
+      backToAllBtn: '← Voltar para Todos os 125 Eventos de Réveillon',
       mapHeadingEvent: 'Mapa do Local, Endereço e Como Chegar',
       relatedHeading: 'Mais Eventos de Réveillon Nesta Categoria',
       metaCtaLabel: 'Info e reservas',
@@ -442,47 +521,48 @@ export function getCapodannoUiCopy(locale: string): CapodannoUiCopy {
 
   const custom = perLocale[locale] || {};
   return {
-    eventsBreadcrumb: custom.eventsBreadcrumb || nav.menuLabel,
-    verifiedEventsLabel: custom.verifiedEventsLabel || `2027 · ${nav.menuLabel.toUpperCase()}`,
-    tocTitle: custom.tocTitle || `${nav.h1} - Index`,
-    tocCategories: custom.tocCategories || `1. ${nav.h1} (16)`,
-    tocFilter: custom.tocFilter || `2. ${nav.menuLabel} Filter`,
-    tocCatalog: custom.tocCatalog || `3. ${nav.menuLabel} Venues & Prices`,
-    tocTable: custom.tocTable || `4. ${nav.menuLabel} Price Table`,
-    tocMap: custom.tocMap || `5. Milano & Lombardia Map`,
-    tocFaq: custom.tocFaq || `6. FAQ - ${nav.menuLabel} 2027`,
-    tocProgram: custom.tocProgram || `1. ${nav.menuLabel} 2027 - Program & Format`,
-    tocPrices: custom.tocPrices || `2. ${nav.menuLabel} 2027 - Prices & VIP Tables`,
-    tocBooking: custom.tocBooking || `3. WhatsApp Concierge (${SITE_CONTACT.whatsapp.number})`,
-    tocRelated: custom.tocRelated || `6. ${nav.h1}`,
-    quickGuideLabel: custom.quickGuideLabel || `${nav.menuLabel} 2027 Guide`,
-    whatsappConciergeBtn: `WhatsApp ${SITE_CONTACT.whatsapp.number}`,
-    callNowBtn: `Tel ${SITE_CONTACT.whatsapp.number}`,
-    emailBtn: 'Email concierge@nightlifemilan.com',
-    freeAdviceNote: custom.freeAdviceNote || `${nav.h1} - WhatsApp Concierge ${SITE_CONTACT.whatsapp.number}`,
-    categoryBoxEyebrow: custom.categoryBoxEyebrow || `${nav.h1.toUpperCase()} (16)`,
-    categoryBoxHeading: custom.categoryBoxHeading || `${nav.h1}: Rooftop, Club, Gala Dinner, VIP`,
-    filterEyebrow: custom.filterEyebrow || `${nav.menuLabel.toUpperCase()} 2027`,
+    eventsBreadcrumb: custom.eventsBreadcrumb || w.eventsBreadcrumb,
+    verifiedEventsLabel: custom.verifiedEventsLabel || w.verifiedEventsLabel,
+    tocTitle: custom.tocTitle || w.tocTitle,
+    tocCategories: custom.tocCategories || w.tocCategoriesTpl,
+    tocFilter: custom.tocFilter || w.tocFilter,
+    tocCatalog: custom.tocCatalog || w.tocCatalog,
+    tocTable: custom.tocTable || w.tocTable,
+    tocMap: custom.tocMap || w.tocMap,
+    tocFaq: custom.tocFaq || w.tocFaq,
+    tocProgram: custom.tocProgram || `${nav.menuLabel} · ${w.tocProgram}`,
+    tocPrices: custom.tocPrices || `${nav.menuLabel} · ${w.tocPrices}`,
+    tocBooking: custom.tocBooking || w.tocBooking,
+    tocRelated: custom.tocRelated || w.tocRelated,
+    quickGuideLabel: custom.quickGuideLabel || `${nav.menuLabel} · ${w.quickGuideLabel}`,
+    whatsappConciergeBtn: custom.whatsappConciergeBtn || w.whatsappLabel,
+    callNowBtn: custom.callNowBtn || w.callLabel,
+    emailBtn: custom.emailBtn || w.emailLabel,
+    freeAdviceNote: custom.freeAdviceNote || `${nav.h1} · ${w.freeAdviceTpl}`,
+    categoryBoxEyebrow: custom.categoryBoxEyebrow || w.categoryBoxEyebrow,
+    categoryBoxHeading: custom.categoryBoxHeading || w.categoryBoxHeading,
+    filterEyebrow: custom.filterEyebrow || w.filterEyebrow,
     filterHeadingPrefix: custom.filterHeadingPrefix || nav.h1,
-    resetFiltersBtn: custom.resetFiltersBtn || 'Reset ✕',
-    tableHeadingPrefix: custom.tableHeadingPrefix || `${nav.h1} - Tarife / Prices`,
-    colVenue: custom.colVenue || 'Venue',
-    colCity: custom.colCity || 'City',
-    colHours: custom.colHours || '31/12',
-    colPrices: custom.colPrices || 'EUR (€)',
-    mapHeadingHub: custom.mapHeadingHub || `${nav.h1} - Milano Map`,
-    mapSubtitleHub: custom.mapSubtitleHub || `Duomo, Brera, Corso Como, Parco Sempione, Navigli, Porta Nuova (${nav.h1}).`,
-    faqHeadingPrefix: custom.faqHeadingPrefix || `FAQ - ${nav.h1}`,
-    programHeading: custom.programHeading || `${nav.menuLabel} 2027 - Program & Format`,
-    musicLabel: custom.musicLabel || 'Music & Format',
-    pricesHeadingPrefix: custom.pricesHeadingPrefix || `${nav.menuLabel} 2027 - Prices & VIP`,
-    bookingHeading: custom.bookingHeading || `WhatsApp Concierge ${SITE_CONTACT.whatsapp.number}`,
-    bookingSubtitle: custom.bookingSubtitle || `${nav.h1}: WhatsApp ${SITE_CONTACT.whatsapp.number} / concierge@nightlifemilan.com`,
-    backToAllBtn: custom.backToAllBtn || `← ${nav.h1}`,
-    mapHeadingEvent: custom.mapHeadingEvent || 'Google Maps - Milano',
-    relatedHeading: custom.relatedHeading || nav.h1,
-    metaCtaLabel: custom.metaCtaLabel || 'WhatsApp',
-    dateBadge: custom.dateBadge || '31/12/2026 – 01/01/2027',
+    resetFiltersBtn: custom.resetFiltersBtn || w.resetFiltersBtn,
+    tableHeadingPrefix: custom.tableHeadingPrefix || `${nav.h1} · ${w.tableHeadingSuffix}`,
+    colVenue: custom.colVenue || w.colVenue,
+    colCity: custom.colCity || w.colCity,
+    colHours: custom.colHours || w.colHours,
+    colPrices: custom.colPrices || w.colPrices,
+    mapHeadingHub: custom.mapHeadingHub || `${nav.h1} · ${w.mapHeadingHubSuffix}`,
+    mapSubtitleHub: custom.mapSubtitleHub || w.mapSubtitleHub,
+    faqHeadingPrefix: custom.faqHeadingPrefix || `${w.faqPrefix} · ${nav.h1}`,
+    programHeading: custom.programHeading || `${nav.menuLabel} · ${w.programHeadingSuffix}`,
+    musicLabel: custom.musicLabel || w.musicLabel,
+    pricesHeadingPrefix: custom.pricesHeadingPrefix || `${nav.menuLabel} · ${w.pricesHeadingSuffix}`,
+    bookingHeading: custom.bookingHeading || w.bookingHeading,
+    bookingSubtitle: custom.bookingSubtitle || w.bookingSubtitle,
+    backToAllBtn: custom.backToAllBtn || w.backToAllBtn,
+    mapHeadingEvent: custom.mapHeadingEvent || w.mapHeadingEvent,
+    relatedHeading: custom.relatedHeading || w.relatedHeading,
+    metaCtaLabel: custom.metaCtaLabel || w.metaCtaLabel,
+    dateBadge: custom.dateBadge || w.dateBadge,
+    ...extraFields,
     categoryTitles: CATEGORY_LABELS_BY_LOCALE[locale] || {},
     categorySubtitles: {},
   };
@@ -498,16 +578,12 @@ export function getCapodannoLocalizedCategoryTitle(
   const ui = getCapodannoUiCopy(locale);
   if (ui.categoryTitles[pageDef.slug]) return ui.categoryTitles[pageDef.slug];
   const nav = capodannoNavigation(locale);
+  const w = getWords35(locale);
   if (pageDef.slug === 'capodanno-2027') {
-    return `${nav.h1}: ${eventsCount} Rooftop, Club & Gala Events`;
+    return w.allEventsTitleTpl.replace('{h1}', nav.h1).replace('{count}', String(eventsCount));
   }
-  const catSlug = nav.categories[pageDef.slug] || pageDef.slug;
-  const humanized = catSlug
-    .replace(/-2027$/, '')
-    .split('-')
-    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(' ');
-  return `${nav.h1} - ${humanized} (${eventsCount})`;
+  const catLabel = w.cats[pageDef.slug]?.label || pageDef.shortLabelEn;
+  return `${nav.menuLabel} 2027 · ${catLabel} (${eventsCount})`;
 }
 
 export function getCapodannoLocalizedCategorySubtitle(
@@ -519,7 +595,12 @@ export function getCapodannoLocalizedCategorySubtitle(
   if (locale === 'en') return pageDef.subtitleEn;
   const nav = capodannoNavigation(locale);
   const ui = getCapodannoUiCopy(locale);
-  return `${nav.h1} (${ui.dateBadge}): ${eventsCount} Voya Rooftop, JustMe Milano, Armani Privé, Pineta, Aria Club, QC Terme & Piazza Duomo. ${pageDef.subtitleEn}`;
+  const w = getWords35(locale);
+  const catLabel = w.cats[pageDef.slug]?.label || nav.menuLabel;
+  return w.hubSubtitleSuffixTpl
+    .replace('{h1}', `${nav.h1} · ${catLabel}`)
+    .replace('{date}', ui.dateBadge)
+    .replace('{count}', String(eventsCount));
 }
 
 function getOverrideEventContent(slug: string, locale: string): CapodannoLocalizedEventContent | null {
@@ -532,6 +613,8 @@ function getOverrideEventContent(slug: string, locale: string): CapodannoLocaliz
   if (slug === 'capodanno-tom-the-ordinary-market-milano') return getTomNyeContent(locale);
   if (slug === 'capodanno-terrazza-duomo-21') return getTerrazzaDuomo21NyeContent(locale);
   if (slug === 'capodanno-ceresio-7-milano') return getCeresio7ClosedNyeContent(locale);
+  const wa = getWhatsappVenueNyeContent(slug, locale);
+  if (wa) return wa;
   const t031 = getT031OverrideContent(slug, locale);
   if (t031) return t031;
   return null;
@@ -549,7 +632,9 @@ export function getCapodannoLocalizedEventTitle(
   if (event.slug === 'capodanno-justme-milano-torre-branca') {
     return `${nav.menuLabel} 2027 ${event.venueName}: The Great Gatsby`;
   }
-  return `${nav.menuLabel} 2027 ${event.venueName} (${event.city}): Gala, Club & VIP`;
+  const w = getWords35(locale);
+  const catWord = w.cats[`capodanno-${event.category}-milano`]?.badge || w.verifiedEventsLabel;
+  return `${nav.menuLabel} 2027 ${event.venueName} (${event.city}) · ${catWord}`;
 }
 
 export function getCapodannoLocalizedEventSubtitle(
@@ -561,7 +646,9 @@ export function getCapodannoLocalizedEventSubtitle(
   if (locale === 'it') return event.subtitleIt;
   if (locale === 'en') return event.subtitleEn;
   const nav = capodannoNavigation(locale);
-  return `${nav.h1} @ ${event.venueName} (${event.address}, ${event.city}). ${event.priceSummaryEn}. ${event.subtitleEn}`;
+  const w = getWords35(locale);
+  const priceBadge = formatCapodannoPriceBadge35(event, locale);
+  return `${nav.h1} @ ${event.venueName} (${event.address}, ${event.city}) · ${w.hoursLabel} ${event.hours} · ${priceBadge}.`;
 }
 
 export function getCapodannoLocalizedEventContent(
@@ -569,18 +656,20 @@ export function getCapodannoLocalizedEventContent(
   locale: string,
 ): CapodannoLocalizedEventContent {
   const override = getOverrideEventContent(event.slug, locale);
-  if (override) return override;
-  const isIt = locale === 'it';
+  if (override) {
+    if (event.slug === 'capodanno-justme-milano-torre-branca' && !override.relatedHolidayBanner) {
+      return { ...override, relatedHolidayBanner: getJustMeOrthodoxRelatedBanner(locale) };
+    }
+    return override;
+  }
+  const base = buildFallbackLocalizedEventContent35(
+    event,
+    locale,
+    getCapodannoLocalizedEventTitle(event, locale),
+    getCapodannoLocalizedEventSubtitle(event, locale),
+  );
   return {
-    title: getCapodannoLocalizedEventTitle(event, locale),
-    subtitle: getCapodannoLocalizedEventSubtitle(event, locale),
-    description: isIt ? event.descriptionIt : event.descriptionEn,
-    musicAndFormat: isIt ? event.musicAndFormatIt : event.musicAndFormatEn,
-    dressCode: isIt ? event.dressCodeIt : event.dressCodeEn,
-    priceSummary: isIt ? event.priceSummaryIt : event.priceSummaryEn,
-    tiers: isIt ? event.tiersIt : event.tiersEn,
-    highlights: isIt ? event.highlightsIt : event.highlightsEn,
-    sourceBasis: isIt ? event.sourceBasisIt : event.sourceBasisEn,
+    ...base,
     relatedHolidayBanner:
       event.slug === 'capodanno-justme-milano-torre-branca'
         ? getJustMeOrthodoxRelatedBanner(locale)

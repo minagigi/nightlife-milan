@@ -6,6 +6,10 @@ import type { LocaleCode } from '@/lib/i18n/locales';
 import { capodannoEventPath, capodannoNavigation, capodannoPath } from '@/lib/capodanno/routes';
 import { getPaymentTerms35 } from '@/lib/capodanno/paymentTerms35';
 import {
+  getCapodannoCategoryBadge35,
+  getCapodannoCategoryQuickAnswer35,
+  getCapodannoCategoryShortLabel35,
+  getCapodannoHubFaqs35,
   getCapodannoLocalizedCategorySubtitle,
   getCapodannoLocalizedCategoryTitle,
   getCapodannoLocalizedEventContent,
@@ -48,53 +52,17 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
 
   const title = getCapodannoLocalizedCategoryTitle(pageDef, locale, events.length);
   const subtitle = getCapodannoLocalizedCategorySubtitle(pageDef, locale, events.length);
-  const quickAnswer = isIt ? pageDef.quickAnswerIt : pageDef.quickAnswerEn;
-  const shortLabel = isIt ? pageDef.shortLabelIt : locale === 'en' ? pageDef.shortLabelEn : nav.h1;
+  const quickAnswer = getCapodannoCategoryQuickAnswer35(pageDef, locale, events.length);
+  const shortLabel = getCapodannoCategoryShortLabel35(pageDef.slug, locale, pageDef.shortLabelIt, pageDef.shortLabelEn);
 
-  const faqs = isIt
-    ? [
-        {
-          q: `Quanti eventi sono inclusi in ${pageDef.shortLabelIt} per Capodanno 2027?`,
-          a: `Questa pagina raccoglie ${events.length} eventi verificati di Capodanno 2027 (31 dicembre 2026 – 1 gennaio 2027) con prezzi ufficiali o storico certificato dell’edizione precedente. Puoi filtrare in tempo reale per Tipologia (Rooftop, Discoteche, Locali con Cenone, Hotel 5★, Speakeasy, Terme/Baita), Target (Coppie, Single, Famiglie, Over 30/40), Musica, Zona e Budget.`,
-        },
-        {
-          q: 'Quali sono le differenze tra Ingresso Dopocena, Royal Buffet, Cenone Servito e Tavolo VIP?',
-          a: 'Il Gran Cenone Servito (dalle 20:00/20:30, 95€–450€) include tavolo riservato per tutta la cena, menu multipiatto con vini, brindisi di mezzanotte e ingresso al party. Il Royal Buffet / Apericena (dalle 20:30, 50€–120€) è più dinamico e conviviale, ideale per single e gruppi. L’Ingresso Dopocena (dalle 23:00/23:30, 20€–100€) consente di entrare per il countdown e la festa. Il Tavolo VIP Privé (da 200€ a 5.000€) garantisce ingresso salta-fila e credito in bottiglie di Champagne o superalcolici.',
-        },
-        {
-          q: 'Come prenotare prevendite Early Bird, cenoni o tavoli VIP?',
-          a: `Contatta il Concierge ufficiale Nightlife Milan su WhatsApp (${SITE_CONTACT.whatsapp.number}) attivo 24/24, 7 giorni su 7. ${paymentTerms.steps.join(' ')}`,
-        },
-      ]
-    : locale === 'en'
-      ? [
-          {
-            q: `How many New Year’s Eve 2027 events are included in ${pageDef.shortLabelEn}?`,
-            a: `This category guide features ${events.length} verified New Year’s Eve 2027 (December 31, 2026 – January 1, 2027) events with official or prior-edition benchmark pricing. Use the interactive filter bar to narrow down by Venue Type, Target Crowd (Couples, Singles, Families, 30+ Adults), Music Genre, District, and Budget.`,
-          },
-          {
-            q: 'What is the difference between Served Gala Dinner, Royal Buffet, After-Dinner Entry, and VIP Tables?',
-            a: 'Served Gala Dinners (from 20:00, €95–€450) include a reserved dining table, multi-course menu with wines, midnight toast, and club party access. Royal Buffets (from 20:30, €50–€120) offer a standing/lounge social dinner + party. After-Dinner Tickets (from 23:00, €20–€100) grant entry for the midnight countdown and clubbing. VIP Privé Tables (€200–€5,000) include skip-the-line admission and 100% bottle credit.',
-          },
-          {
-            q: 'How do I book early-bird tickets, gala dinners, or VIP tables?',
-            a: `Contact our official Nightlife Milan WhatsApp Concierge (${SITE_CONTACT.whatsapp.number}), available 24/7. ${paymentTerms.steps.join(' ')}`,
-          },
-        ]
-      : [
-          {
-            q: `${nav.h1} · ${events.length} Events (31/12/2026 – 01/01/2027)?`,
-            a: `${subtitle} ${quickAnswer}`,
-          },
-          {
-            q: `${nav.menuLabel} 2027: Gala Dinner (95€–450€), Royal Buffet (50€–120€), Club Entry (20€–100€) & VIP Tables?`,
-            a: `Voya Rooftop (#1 Rooftop, 300€), JustMe Milano Torre Branca, Armani Privé, Pineta Milano, Aria Club, 55 Milano, Terrazza Duomo 21, QC Terme & Piazza Duomo. WhatsApp Concierge: ${SITE_CONTACT.whatsapp.number}.`,
-          },
-          {
-            q: `WhatsApp Concierge (${SITE_CONTACT.whatsapp.number}) & Email (concierge@nightlifemilan.com)?`,
-            a: `${paymentTerms.steps.join(' ')}`,
-          },
-        ];
+  const faqs = getCapodannoHubFaqs35({
+    pageDef,
+    locale,
+    eventsCount: events.length,
+    subtitle,
+    quickAnswer,
+    paymentSteps: paymentTerms.steps,
+  });
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -137,18 +105,30 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
                 addressCountry: 'IT',
               },
             },
-            ...(ev.priceFromEur > 0 || ev.category === 'piazza'
+            offers: ev.priceFromEur > 0 || ev.category === 'piazza'
               ? {
-                  offers: {
+                  '@type': 'Offer',
+                  url: `${SITE_URL}${capodannoEventPath(ev.slug, locale)}`,
+                  price: String(ev.priceFromEur),
+                  priceCurrency: 'EUR',
+                  availability: ev.soldOutForNye || ev.closedForNye
+                    ? 'https://schema.org/SoldOut'
+                    : 'https://schema.org/InStock',
+                  validFrom: '2026-10-01T00:00:00+02:00',
+                }
+              : ev.soldOutForNye || ev.closedForNye
+                ? {
                     '@type': 'Offer',
                     url: `${SITE_URL}${capodannoEventPath(ev.slug, locale)}`,
-                    price: String(ev.priceFromEur),
+                    availability: 'https://schema.org/SoldOut',
+                  }
+                : {
+                    '@type': 'Offer',
+                    url: `${SITE_URL}${capodannoEventPath(ev.slug, locale)}`,
                     priceCurrency: 'EUR',
-                    availability: 'https://schema.org/InStock',
+                    availability: 'https://schema.org/PreOrder',
                     validFrom: '2026-10-01T00:00:00+02:00',
                   },
-                }
-              : {}),
           },
         })),
       },
@@ -189,7 +169,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
 
           <div className="flex flex-wrap items-center gap-2.5">
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-[#EAE3D5]">
-              {(isIt ? pageDef.badgeIt : pageDef.badgeEn)} · {events.length} {ui.verifiedEventsLabel}
+              {getCapodannoCategoryBadge35(pageDef.slug, locale, pageDef.badgeIt, pageDef.badgeEn)} · {events.length} {ui.verifiedEventsLabel}
             </p>
             <span className="border border-[#F6F1E7]/50 bg-[#050505] px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#F6F1E7]" data-selling-fast-badge>
               {scarcity.almostSoldOutBadge}
