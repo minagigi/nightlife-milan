@@ -281,7 +281,7 @@ export default async function RooftopsPage({
             id={r.slug}
             className="scroll-mt-24 grid grid-cols-1 lg:grid-cols-12 rounded-2xl overflow-hidden border border-white/15 bg-white/[0.02] hover:border-champagne/50 transition-all"
           >
-            <div className="relative h-72 lg:h-auto lg:col-span-5">
+            <div data-no-lightbox="true" className="relative h-72 lg:h-auto lg:col-span-5">
               <Image
                 src={r.image}
                 alt={r.name}

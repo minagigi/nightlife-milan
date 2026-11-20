@@ -92,7 +92,7 @@ export default function SinglePassStorefront({
   const waHref = getConciergeBookingUrl(locale, copy.seoTitle, shopUrl);
 
   return (
-    <div id="single-pass-storefront" className="w-full">
+    <div id="single-pass-storefront" data-single-pass-storefront="true" data-no-lightbox="true" className="w-full">
       {/* Dark Hero Header (when standalone page) */}
       {!embedded && (
         <section className="border-b border-[#F6F1E7]/14 bg-[#050505] px-4 py-12 text-[#F6F1E7] sm:px-6 lg:px-8">

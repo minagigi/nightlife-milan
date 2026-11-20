@@ -551,3 +551,19 @@ html[lang='zh-Hans'] .tc-page { font-family: var(--font-noto-sc), var(--ff-body)
 html[lang='zh-Hans'] .tc-page :is(h1, h2, h3, .tc-heading) { font-family: var(--font-noto-sc), sans-serif; }
 html[dir='rtl'] .tc-page { font-family: var(--font-noto-naskh), var(--ff-body); }
 html[dir='rtl'] .tc-page :is(h1, h2, h3, .tc-heading) { font-family: var(--font-noto-naskh), sans-serif; }
+
+/* Full-screen lightbox affordance for eligible logical (non-card) images */
+#main-content img[data-lightbox-ready='true'],
+main img[data-lightbox-ready='true'] {
+  cursor: zoom-in;
+  transition: filter 200ms ease;
+}
+#main-content img[data-lightbox-ready='true']:hover,
+main img[data-lightbox-ready='true']:hover {
+  filter: brightness(1.06);
+}
+#main-content img[data-lightbox-ready='true']:focus-visible,
+main img[data-lightbox-ready='true']:focus-visible {
+  outline: 2px solid #C9A84C;
+  outline-offset: 2px;
+}

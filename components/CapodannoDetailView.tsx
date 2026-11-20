@@ -598,7 +598,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                         decoding="async"
                         className="h-full w-full object-cover"
                       />
-                      <span className="absolute left-3 top-3 border border-[#F6F1E7]/30 bg-[#050505]/90 px-2.5 py-1 text-[11px] font-semibold text-[#F6F1E7]">
+                      <span className="pointer-events-none absolute left-3 top-3 border border-[#F6F1E7]/30 bg-[#050505]/90 px-2.5 py-1 text-[11px] font-semibold text-[#F6F1E7]">
                         {img.shotLabel}
                       </span>
                     </div>
@@ -646,7 +646,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                         className="flex flex-col justify-between border border-[#050505]/20 bg-[#EFE9DC] p-5"
                       >
                         <div>
-                          <div className="overflow-hidden border border-[#050505]/15 bg-[#050505]">
+                          <div data-no-lightbox="true" className="overflow-hidden border border-[#050505]/15 bg-[#050505]">
                             <img
                               src={alt.image}
                               alt={altTitle}
@@ -746,6 +746,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               <section
                 id="menu-ufficiale"
                 data-official-menus
+                data-lightbox-group="capodanno-menus"
                 className="mt-10 border border-[#F6F1E7]/20 bg-[#050505] p-6 sm:p-8"
               >
                 <h2 className="font-serif text-2xl font-bold text-[#F6F1E7]">

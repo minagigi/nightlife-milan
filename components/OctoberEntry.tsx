@@ -116,19 +116,6 @@ export function HomeHalloweenAndCapodannoSections({
       highlight: false,
     },
     {
-      rank: isIt ? '02 · GRAN GALÀ LAGO DI GARDA · DESENZANO / LONATO' : '02 · LAKE GARDA GALA · DESENZANO / LONATO',
-      venue: 'Just Me Garda Lake',
-      title: isIt
-        ? 'Capodanno Just Me Lago di Garda 2027: "Just Me in Rouge" Dinner & Dance'
-        : 'Just Me Garda Lake NYE 2027: "Just Me in Rouge" Dinner & Dance',
-      priceLabel: isIt
-        ? 'Prezzi Xceed verificati: 20€ (Club + Drink) · 70€ (Buffet) · 130€ (Gran Cenone) · Tavoli da 440€'
-        : 'Verified Xceed prices: €20 (Club + Drink) · €70 (Buffet) · €130 (Gala Dinner) · Tables from €440',
-      posterSrc: '/images/events/capodanno-2027-posters/capodanno-justme-garda-lake.webp',
-      href: capodannoEventPath('capodanno-justme-garda-lake', locale),
-      highlight: true,
-    },
-    {
       rank: isIt ? '02 · CLUB ICONICO · PORTA GARIBALDI' : '02 · FLAGSHIP CLUB · PORTA GARIBALDI',
       venue: 'Pineta Club Milano',
       title: isIt
@@ -142,33 +129,7 @@ export function HomeHalloweenAndCapodannoSections({
       highlight: false,
     },
     {
-      rank: '03 · ARENA & GARDEN · SAN SIRO',
-      venue: 'Aria Club Milano',
-      title: isIt
-        ? 'Capodanno Aria Club Milano 2027: Urban, Reggaeton & Commercial Show a San Siro'
-        : 'Aria Club Milan NYE 2027: Urban, Reggaeton & Commercial Arena Show',
-      priceLabel: isIt
-        ? 'Prezzi indicativi: 45€–55€ (Dopocena) · 65€ (Buffet) · 130€ (Cenone)'
-        : 'Benchmark prices: €45–€55 (Entry) · €65 (Buffet) · €130 (Dinner)',
-      posterSrc: '/images/events/capodanno-2027-posters/capodanno-aria-club-milano.webp',
-      href: capodannoEventPath('capodanno-aria-club-milano', locale),
-      highlight: false,
-    },
-    {
-      rank: '04 · LOFT PARTY · VIA PIERO DELLA FRANCESCA',
-      venue: '55 Milano',
-      title: isIt
-        ? 'Capodanno 55 Milano 2027: New York Loft Party in Via Piero della Francesca'
-        : '55 Milano NYE 2027: New York Loft Dinner & Party',
-      priceLabel: isIt
-        ? 'Prezzi indicativi: 50€ (Dopocena) · 70€–75€ (Buffet) · 130€–140€ (Cenone)'
-        : 'Benchmark prices: €50 (Party) · €70–€75 (Buffet) · €130–€140 (Dinner)',
-      posterSrc: '/images/events/capodanno-2027-posters/capodanno-55-milano.webp',
-      href: capodannoEventPath('capodanno-55-milano', locale),
-      highlight: false,
-    },
-    {
-      rank: isIt ? '05 · SKYLINE 20° PIANO · CAPODANNO ROOFTOP N° 1 DI MILANO' : '05 · 20TH FLOOR SKYLINE · MILAN’S #1 ROOFTOP NYE',
+      rank: isIt ? '03 · SKYLINE 20° PIANO · CAPODANNO ROOFTOP N° 1 DI MILANO' : '03 · 20TH FLOOR SKYLINE · MILAN’S #1 ROOFTOP NYE',
       venue: 'Voya Rooftop Milano',
       title: isIt
         ? 'Capodanno Voya Rooftop Milano 2027: Il Capodanno Rooftop Numero 1 di Milano (Menu Completo 300€)'
@@ -181,7 +142,46 @@ export function HomeHalloweenAndCapodannoSections({
       highlight: true,
     },
     {
-      rank: '06 · CAPODANNO 2027 · REPUBBLICA',
+      rank: isIt ? '04 · GRAN GALÀ LAGO DI GARDA · DESENZANO / LONATO' : '04 · LAKE GARDA GALA · DESENZANO / LONATO',
+      venue: 'Just Me Garda Lake',
+      title: isIt
+        ? 'Capodanno Just Me Lago di Garda 2027: "Just Me in Rouge" Dinner & Dance'
+        : 'Just Me Garda Lake NYE 2027: "Just Me in Rouge" Dinner & Dance',
+      priceLabel: isIt
+        ? 'Prezzi Xceed verificati: 20€ (Club + Drink) · 70€ (Buffet) · 130€ (Gran Cenone) · Tavoli da 440€'
+        : 'Verified Xceed prices: €20 (Club + Drink) · €70 (Buffet) · €130 (Gala Dinner) · Tables from €440',
+      posterSrc: '/images/events/capodanno-2027-posters/capodanno-justme-garda-lake.webp',
+      href: capodannoEventPath('capodanno-justme-garda-lake', locale),
+      highlight: true,
+    },
+    {
+      rank: '05 · ARENA & GARDEN · SAN SIRO',
+      venue: 'Aria Club Milano',
+      title: isIt
+        ? 'Capodanno Aria Club Milano 2027: Urban, Reggaeton & Commercial Show a San Siro'
+        : 'Aria Club Milan NYE 2027: Urban, Reggaeton & Commercial Arena Show',
+      priceLabel: isIt
+        ? 'Prezzi indicativi: 45€–55€ (Dopocena) · 65€ (Buffet) · 130€ (Cenone)'
+        : 'Benchmark prices: €45–€55 (Entry) · €65 (Buffet) · €130 (Dinner)',
+      posterSrc: '/images/events/capodanno-2027-posters/capodanno-aria-club-milano.webp',
+      href: capodannoEventPath('capodanno-aria-club-milano', locale),
+      highlight: false,
+    },
+    {
+      rank: '06 · LOFT PARTY · VIA PIERO DELLA FRANCESCA',
+      venue: '55 Milano',
+      title: isIt
+        ? 'Capodanno 55 Milano 2027: New York Loft Party in Via Piero della Francesca'
+        : '55 Milano NYE 2027: New York Loft Dinner & Party',
+      priceLabel: isIt
+        ? 'Prezzi indicativi: 50€ (Dopocena) · 70€–75€ (Buffet) · 130€–140€ (Cenone)'
+        : 'Benchmark prices: €50 (Party) · €70–€75 (Buffet) · €130–€140 (Dinner)',
+      posterSrc: '/images/events/capodanno-2027-posters/capodanno-55-milano.webp',
+      href: capodannoEventPath('capodanno-55-milano', locale),
+      highlight: false,
+    },
+    {
+      rank: '07 · CAPODANNO 2027 · REPUBBLICA',
       venue: 'REPVBLIC Milano',
       title: isIt
         ? 'NEW YEAR’S EVE AT REPVBLIC MILANO 2027: Piazza della Repubblica 12'

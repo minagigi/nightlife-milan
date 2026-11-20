@@ -109,7 +109,7 @@ export default function VerticalHubsAndEventsSection({
               className="border border-[#050505]/16 bg-[#EFE9DC] overflow-hidden flex flex-col justify-between hover:border-[#050505] transition"
             >
               <div>
-                <div className="relative h-52 w-full bg-[#050505] overflow-hidden border-b border-[#050505]/14">
+                <div data-no-lightbox="true" className="relative h-52 w-full bg-[#050505] overflow-hidden border-b border-[#050505]/14">
                   <Image
                     src={card.imageSrc}
                     alt={card.title}
@@ -233,7 +233,7 @@ export default function VerticalHubsAndEventsSection({
               className="min-w-[290px] sm:min-w-[330px] max-w-[345px] snap-start flex flex-col justify-between border border-[#F6F1E7]/14 bg-[#050505] overflow-hidden hover:border-[#F6F1E7]/45 transition"
             >
               <div>
-                <div className="relative h-52 w-full bg-[#050505] flex items-center justify-center border-b border-[#F6F1E7]/12">
+                <div data-no-lightbox="true" className="relative h-52 w-full bg-[#050505] flex items-center justify-center border-b border-[#F6F1E7]/12">
                   <Image
                     src={ev.imageSrc}
                     alt={ev.title}

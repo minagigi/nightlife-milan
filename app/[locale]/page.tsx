@@ -787,7 +787,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
             </div>
 
             {/* Colonna Destra (7/12): Trittico Fotografico Editoriale */}
-            <div className="lg:col-span-7 p-6 sm:p-14 bg-[#0B0A09] flex flex-col justify-between">
+            <div data-lightbox-group="home-editorial-triptych" className="lg:col-span-7 p-6 sm:p-14 bg-[#0B0A09] flex flex-col justify-between">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="sm:col-span-2">
                   <div className="relative aspect-[16/9] w-full overflow-hidden border border-[#F6F1E7]/14">

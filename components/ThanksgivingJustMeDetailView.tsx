@@ -732,7 +732,7 @@ export default function ThanksgivingJustMeDetailView({ locale: rawLocale }: { lo
         </section>
 
         {/* Internal Cross-Links: JustMe Dossier, Dec 31 NYE & Jan 13 Orthodox NYE */}
-        <section className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+        <section data-no-lightbox="true" className="grid grid-cols-1 gap-4 lg:grid-cols-3">
           <div className="flex flex-col justify-between overflow-hidden rounded-xl border border-white/15 bg-white/[0.03] p-5 space-y-4">
             <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg border border-white/10">
               <Image

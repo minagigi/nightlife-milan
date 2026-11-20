@@ -113,7 +113,7 @@ export default function TableConcierge({ locale, events, initialNow, copy, surfa
     <section className={styles.shell} data-table-concierge={surface} data-variant={compact ? 'compact' : 'full'} aria-labelledby={compact ? `tc-request-title-${surface}` : `tc-title-${surface}`}>
       <div className={styles.hero}>
         {!compact && <>
-        <div className={styles.heroImage}>
+        <div className={styles.heroImage} data-hero-backdrop="true" data-no-lightbox="true">
           <Image
             src="/images/table-concierge/justme-night.webp"
             alt={copy.title}
@@ -253,7 +253,7 @@ export default function TableConcierge({ locale, events, initialNow, copy, surfa
               <h3>{event.title}</h3>
               <p className={styles.venue}>{event.venueName}</p>
             </div>
-            <div className={styles.eventArt}>
+            <div className={styles.eventArt} data-no-lightbox="true">
               <Image src={event.image} alt={event.venueAltText || event.title} fill quality={92} sizes="(max-width: 680px) 100vw, 480px" className={styles.eventPhoto} />
             </div>
             <div className={styles.eventActions}>

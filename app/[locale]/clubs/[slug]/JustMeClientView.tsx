@@ -18,7 +18,7 @@ export default function JustMeClientView({ dict, locale }: { dict: Dictionary, l
     <main className="bg-[#050505] min-h-screen text-[#F6F1E7] font-sans selection:bg-[#F6F1E7] selection:text-[#050505] pb-20">
       {/* Hero Section */}
       <section className="relative w-full h-[70vh] min-h-[600px] flex items-end pb-16">
-        <div className="absolute inset-0 z-0">
+        <div data-hero-backdrop="true" data-no-lightbox="true" className="absolute inset-0 z-0">
           <Image
             src="/images/just-me-milano.webp"
             alt="Just Me Milano"

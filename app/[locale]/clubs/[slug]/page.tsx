@@ -1310,7 +1310,7 @@ export default async function ClubPage({ params }: Props) {
       
       {/* Hero Section */}
       <section className="relative w-full h-[70vh] min-h-[600px] flex items-end pb-16">
-        <div className="absolute inset-0 z-0">
+        <div data-hero-backdrop="true" data-no-lightbox="true" className="absolute inset-0 z-0">
           <Image
             src={image}
             alt={name}
@@ -1688,7 +1688,7 @@ export default async function ClubPage({ params }: Props) {
             <h2 className="text-2xl font-serif font-bold text-white mb-6">
               {locale === 'it' ? `${name}: Foto & Atmosfera` : `${name}: Photos & Atmosphere`}
             </h2>
-            <div className="grid grid-cols-2 gap-3 mb-8">
+            <div data-venue-gallery="true" className="grid grid-cols-2 gap-3 mb-8">
               {gallery.map((src, i) => (
                 <div key={i} className="relative h-40 rounded-xl overflow-hidden border border-white/10">
                   <Image

@@ -438,7 +438,7 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
                         decoding="async"
                         className="h-full w-full object-cover"
                       />
-                      <span className="absolute left-3 top-3 border border-[#F6F1E7]/30 bg-[#050505]/90 px-2.5 py-1 text-[11px] font-semibold text-[#F6F1E7]">
+                      <span className="pointer-events-none absolute left-3 top-3 border border-[#F6F1E7]/30 bg-[#050505]/90 px-2.5 py-1 text-[11px] font-semibold text-[#F6F1E7]">
                         {img.shotLabel}
                       </span>
                     </div>

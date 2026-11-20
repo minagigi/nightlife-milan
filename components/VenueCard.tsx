@@ -94,6 +94,8 @@ export default function VenueCard({
 
   return (
     <div
+      data-venue-card={id}
+      data-no-lightbox="true"
       className={`group relative overflow-hidden rounded-lg cursor-pointer img-maison
         aspect-[3/4]
         transition-all duration-500

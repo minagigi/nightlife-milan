@@ -13,7 +13,7 @@ export default function Hero({ locale }: { locale: string }) {
   // Next.js <Image priority> emits <link rel="preload" fetchpriority="high"> automatically
   return (
     <section className="relative w-full h-[100svh] min-h-[560px] max-h-[900px] overflow-hidden bg-black flex items-end">
-        <div className="absolute inset-0 z-[1]">
+        <div data-hero-backdrop="true" data-no-lightbox="true" className="absolute inset-0 z-[1]">
           <Image
             src={firstImage}
             alt={firstVenue.localizedContent.name[typedLocale] || firstVenue.localizedContent.name.en}

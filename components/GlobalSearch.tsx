@@ -992,20 +992,9 @@ const CAPODANNO_CATEGORIES_QUICK = [
   },
 ] as const;
 
+import { CAPODANNO_PARTNER_PRIORITY_RANK } from '@/lib/capodanno/partnerPrioritySlugs';
+
 const CAPODANNO_FLAGSHIP_EVENTS_FALLBACK = [
-  {
-    slug: 'capodanno-voya-rooftop-milano',
-    venueName: 'Voya Rooftop Milano (20° Piano)',
-    city: 'Milano',
-    address: 'Viale Achille Papa 30 · Portello / CityLife',
-    image: '/images/events/capodanno-2027-posters/capodanno-voya-rooftop-milano.webp',
-    priceFromEur: 300,
-    titleIt: 'Capodanno 2027 Voya Rooftop Milano · 20° Piano Skyline All-Inclusive',
-    titleEn: 'NYE 2027 Voya Rooftop Milan · 20th Floor Skyline All-Inclusive Gala',
-    summaryIt: 'Tariffa unica confermata 300€ a persona · Menù 6 portate + Cotechino e Lenticchie · Vino 1 ogni 4 · Vista fuochi 360°',
-    summaryEn: 'Confirmed single rate €300 per person · 6-course menu + Cotechino & Lentils · Wine 1 per 4 · 360° fireworks view',
-    searchTerms: 'capodanno voya rooftop 20 piano ventesimo piano skyline fuochi 300 euro cotechino lenticchie',
-  },
   {
     slug: 'capodanno-justme-milano-torre-branca',
     venueName: 'Just Me Milano · Torre Branca',
@@ -1033,6 +1022,45 @@ const CAPODANNO_FLAGSHIP_EVENTS_FALLBACK = [
     searchTerms: 'capodanno pineta club moulin rouge via messina 38 royal buffet 40 gala 160 xceed reggaeton',
   },
   {
+    slug: 'capodanno-voya-rooftop-milano',
+    venueName: 'Voya Rooftop Milano (20° Piano)',
+    city: 'Milano',
+    address: 'Viale Achille Papa 30 · Portello / CityLife',
+    image: '/images/events/capodanno-2027-posters/capodanno-voya-rooftop-milano.webp',
+    priceFromEur: 300,
+    titleIt: 'Capodanno 2027 Voya Rooftop Milano · 20° Piano Skyline All-Inclusive',
+    titleEn: 'NYE 2027 Voya Rooftop Milan · 20th Floor Skyline All-Inclusive Gala',
+    summaryIt: 'Tariffa unica confermata 300€ a persona · Menù 6 portate + Cotechino e Lenticchie · Vino 1 ogni 4 · Vista fuochi 360°',
+    summaryEn: 'Confirmed single rate €300 per person · 6-course menu + Cotechino & Lentils · Wine 1 per 4 · 360° fireworks view',
+    searchTerms: 'capodanno voya rooftop 20 piano ventesimo piano skyline fuochi 300 euro cotechino lenticchie',
+  },
+  {
+    slug: 'capodanno-justme-garda-lake',
+    venueName: 'Just Me Garda Lake',
+    city: 'Lonato del Garda / Desenzano',
+    address: 'Via Lavagnone 13 · Lago di Garda (BS)',
+    image: '/images/events/capodanno-2027-posters/capodanno-justme-garda-lake.webp',
+    priceFromEur: 20,
+    titleIt: 'Capodanno 2027 JustMe Garda Lake · Just Me in Rouge Dinner & Dance',
+    titleEn: 'NYE 2027 JustMe Garda Lake · Just Me in Rouge Dinner & Dance',
+    summaryIt: 'Ticket da 20€ · Royal Buffet 70€ · Gran Cenone 130€ · Tavoli VIP da 440€',
+    summaryEn: 'Ticket from €20 · Royal Buffet €70 · Gala Dinner €130 · VIP Tables from €440',
+    searchTerms: 'capodanno just me garda lake lago di garda desenzano lonato rouge xceed',
+  },
+  {
+    slug: 'capodanno-repvblic-milano',
+    venueName: 'REPVBLIC Milano',
+    city: 'Milano',
+    address: 'Piazza della Repubblica, 12, 20124 Milano · Porta Nuova',
+    image: '/images/events/capodanno-2027-posters/capodanno-repvblic-milano.webp',
+    priceFromEur: 45,
+    titleIt: 'NEW YEAR’S EVE AT REPVBLIC MILANO 2027 · Piazza della Repubblica 12',
+    titleEn: 'NEW YEAR’S EVE AT REPVBLIC MILANO 2027 · Piazza della Repubblica 12',
+    summaryIt: 'Dalle 23:00 al mattino · Early Bird 45€ (flûte + 1 drink) · Tavolo Dancefloor 600€ (6 pax) · Privé 1.200€ (10 pax)',
+    summaryEn: '23:00 till morning · Early Bird €45 (flûte + 1 drink) · Dancefloor Table €600 (6 guests) · Privé €1,200 (10 guests)',
+    searchTerms: 'capodanno repvblic republic piazza della repubblica 12 early bird 45 dancefloor 600 prive 1200 hip hop house international hits',
+  },
+  {
     slug: 'capodanno-aria-club-milano',
     venueName: 'Aria Club Milano · San Siro',
     city: 'Milano',
@@ -1057,19 +1085,6 @@ const CAPODANNO_FLAGSHIP_EVENTS_FALLBACK = [
     summaryIt: 'Dopocena 50€ · Imperial Buffet 90€ · Gran Cenone Servito 160€ · Tavoli VIP',
     summaryEn: 'After-dinner €50 · Imperial Buffet €90 · Seated Gala €160 · VIP Tables',
     searchTerms: 'capodanno 55 milano cinquantacinque via piero della francesca 55 cenone buffet',
-  },
-  {
-    slug: 'capodanno-repvblic-milano',
-    venueName: 'REPVBLIC Milano',
-    city: 'Milano',
-    address: 'Piazza della Repubblica, 12, 20124 Milano · Porta Nuova',
-    image: '/images/events/capodanno-2027-posters/capodanno-repvblic-milano.webp',
-    priceFromEur: 45,
-    titleIt: 'NEW YEAR’S EVE AT REPVBLIC MILANO 2027 · Piazza della Repubblica 12',
-    titleEn: 'NEW YEAR’S EVE AT REPVBLIC MILANO 2027 · Piazza della Repubblica 12',
-    summaryIt: 'Dalle 23:00 al mattino · Early Bird 45€ (flûte + 1 drink) · Tavolo Dancefloor 600€ (6 pax) · Privé 1.200€ (10 pax)',
-    summaryEn: '23:00 till morning · Early Bird €45 (flûte + 1 drink) · Dancefloor Table €600 (6 guests) · Privé €1,200 (10 guests)',
-    searchTerms: 'capodanno repvblic republic piazza della repubblica 12 early bird 45 dancefloor 600 prive 1200 hip hop house international hits',
   },
 ] as const;
 
@@ -1428,14 +1443,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
           searchTerms: ev.searchTerms,
         }));
 
-    const priorityCapodannoSlugRank: Record<string, number> = {
-      'capodanno-voya-rooftop-milano': 1,
-      'capodanno-justme-milano-torre-branca': 2,
-      'capodanno-pineta-milano': 3,
-      'capodanno-aria-club-milano': 4,
-      'capodanno-55-milano': 5,
-      'capodanno-repvblic-milano': 6,
-    };
+    const priorityCapodannoSlugRank = CAPODANNO_PARTNER_PRIORITY_RANK;
 
     const scoredCapodannoEvents = rawCapodannoList
       .map((ev) => {

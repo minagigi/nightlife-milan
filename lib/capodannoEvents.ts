@@ -1,3 +1,7 @@
+import { CAPODANNO_PARTNER_PRIORITY_SLUGS } from './capodanno/partnerPrioritySlugs';
+
+export { CAPODANNO_PARTNER_PRIORITY_SLUGS };
+
 export type CapodannoCategory =
   | 'milano-club'
   | 'capodanno-speciale'
@@ -994,7 +998,8 @@ export function isPartnerCapodannoSlug(slug: string): boolean {
   return PARTNER_CAPODANNO_SLUGS.has(slug);
 }
 
-const PRIORITY_SLUGS = [
+const NON_PARTNER_PRIORITY_SLUGS: readonly string[] = [
+  'capodanno-terrazza-duomo-21',
   'capodanno-stk-milan',
   'capodanno-radio-rooftop-milano',
   'capodanno-hotel-barchetta-excelsior-como',
@@ -1003,28 +1008,15 @@ const PRIORITY_SLUGS = [
   'capodanno-teatro-lirico-giorgio-gaber-milano',
   'capodanno-teatro-nazionale-milano',
   'capodanno-tram-storico-milano-atmosfera',
-  'capodanno-justme-milano-torre-branca',
-  'capodanno-justme-garda-lake',
-  'capodanno-voya-rooftop-milano',
-  'capodanno-terrazza-duomo-21',
-  'capodanno-pineta-milano',
-  'capodanno-aria-club-milano',
-  'capodanno-55-milano',
-  'capodanno-repvblic-milano',
-  'capodanno-bischeri-milano',
-  'capodanno-bobino-milano',
-  'capodanno-gate-milano',
-  'capodanno-tom-the-ordinary-market-milano',
   'capodanno-armani-prive-milano',
-  'capodanno-tocqueville-13-milano',
-  'capodanno-hollywood-milano',
-  'capodanno-the-club-milano',
-  'capodanno-11clubroom-milano',
   'capodanno-volt-club-milano',
-  'capodanno-il-gattopardo-milano',
   'capodanno-alcatraz-milano',
-  'capodanno-magazzini-generali-milano',
   'capodanno-fabbrica-del-vapore-milano',
+];
+
+const PRIORITY_SLUGS: readonly string[] = [
+  ...CAPODANNO_PARTNER_PRIORITY_SLUGS,
+  ...NON_PARTNER_PRIORITY_SLUGS,
 ];
 
 export function getCapodannoPriorityRank(slug: string, mode?: string): number {

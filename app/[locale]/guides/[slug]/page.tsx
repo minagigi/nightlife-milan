@@ -307,7 +307,7 @@ export default async function GuidePage({ params }: Props) {
       <main className="flex-1 bg-[#050505] w-full">
         {/* Hero Article */}
         <section className="relative w-full h-[60vh] min-h-[500px] flex items-end pb-16">
-          <div className="absolute inset-0 z-0">
+          <div data-hero-backdrop="true" data-no-lightbox="true" className="absolute inset-0 z-0">
             <Image
               src={GUIDE_HERO_IMAGES[guide.id] || guide.image || '/images/guides-hero.webp'}
               alt={title}

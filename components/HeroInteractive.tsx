@@ -57,7 +57,7 @@ export default function HeroInteractive({ venues, locale, firstVenueId }: Props)
 
       {/* Slideshow overlay — only renders for venues after the first (first is SSR'd) */}
       {currentIndex > 0 && (
-        <div key={current.id} className="animate-hero-slide-in absolute inset-0 z-[2]">
+        <div key={current.id} data-hero-backdrop="true" data-no-lightbox="true" className="animate-hero-slide-in absolute inset-0 z-[2]">
           <Image
             src={current.gallery?.[0] || current.image || '/images/milan-nightclub-luxury-vip-champagne.webp'}
             alt={current.localizedContent.name[typedLocale] || current.localizedContent.name.en}

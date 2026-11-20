@@ -288,7 +288,7 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
                     <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-champagne to-transparent" />
                   )}
 
-                  <div className="relative h-48 overflow-hidden">
+                  <div data-no-lightbox="true" className="relative h-48 overflow-hidden">
                     <Image
                       src={bar.image}
                       alt={bar.name}

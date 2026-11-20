@@ -10,6 +10,7 @@ import AttributionTracker from './single-pass/AttributionTracker';
 // closed-by-default overlays, never needed for the initial paint.
 const FavoritesDrawer = dynamic(() => import('./FavoritesDrawer'));
 const SinglePassCartDrawer = dynamic(() => import('./single-pass/SinglePassCartDrawer'));
+const SiteImageLightbox = dynamic(() => import('./SiteImageLightbox'));
 
 export function Providers({ children, lang }: { children: React.ReactNode; lang: string }) {
   return (
@@ -21,6 +22,7 @@ export function Providers({ children, lang }: { children: React.ReactNode; lang:
         {children}
         <FavoritesDrawer lang={lang} />
         <SinglePassCartDrawer lang={lang} />
+        <SiteImageLightbox locale={lang} />
       </SinglePassCartProvider>
     </FavoritesProvider>
   );

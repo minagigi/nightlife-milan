@@ -203,7 +203,7 @@ export default function VenueEventsAutoCarousel({
             >
               <div>
                 {/* Uncropped Flyer / Image Frame */}
-                <div className="relative h-56 w-full bg-[#050505] flex items-center justify-center overflow-hidden border-b border-[#F6F1E7]/12">
+                <div data-no-lightbox="true" className="relative h-56 w-full bg-[#050505] flex items-center justify-center overflow-hidden border-b border-[#F6F1E7]/12">
                   <Image
                     src={ev.imageSrc}
                     alt={`${ev.title} - ${venueName}`}
