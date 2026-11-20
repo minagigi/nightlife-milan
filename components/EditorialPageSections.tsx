@@ -272,7 +272,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
     return (
     <>
       <aside className="w-full border-t border-[#0A0A0C]/16 bg-[#EDEBE6] text-[#0A0A0C]" aria-label={isIt ? 'Assistenza Concierge Guida' : 'Guide Concierge Desk'}>
-        <div className="mx-auto max-w-[1280px] border-x border-[#0A0A0C]/16 px-6 py-12 sm:px-12">
+        <div className="mx-auto max-w-[1440px] border-x border-[#0A0A0C]/16 px-5 py-12 sm:px-10 lg:px-14">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border border-[#0A0A0C] bg-[#0A0A0C] p-7 text-[#FFFFFF]">
             <div className="max-w-2xl">
               <h2 className="font-display text-2xl font-bold uppercase text-[#FFFFFF] mb-2">

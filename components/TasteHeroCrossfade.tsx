@@ -2,84 +2,96 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import type { EditorialPlate } from '@/lib/guideEditorialMedia';
 
 interface TasteHeroCrossfadeProps {
-  images: string[];
+  slides?: EditorialPlate[];
+  images?: string[];
   altPrimary: string;
-  altSecondary: string;
+  altSecondary?: string;
   title: string;
 }
 
 /**
- * Editorial "Two prints in darkness" visual showcase for Taste directions.
- * Places the og:image hero photo first in the DOM (priority) for SEO social parity
- * while running a calm 1600ms ambient crossfade across verified gallery photos.
+ * Editorial Cinema Stage for Taste v2 guide pages.
+ * Places slides[0] first in DOM (priority, lightbox-ready, matches og:image)
+ * with calm 1600ms ambient crossfade, subtle Ken Burns drift, and clean venue captions.
  */
 export default function TasteHeroCrossfade({
+  slides: propSlides,
   images,
   altPrimary,
-  altSecondary,
   title,
 }: TasteHeroCrossfadeProps) {
-  const uniqueImages = Array.from(new Set(images.filter(Boolean)));
-  const leadImg = uniqueImages[0] || '/images/seo-events/master/capodanno-justme-milano-torre-branca.webp';
-  const slides = uniqueImages.slice(0, 4);
-  const secondaryImg = uniqueImages[1] || leadImg;
+  const normalizedSlides: EditorialPlate[] =
+    propSlides && propSlides.length > 0
+      ? propSlides.slice(0, 4)
+      : Array.from(new Set((images || []).filter(Boolean)))
+          .slice(0, 4)
+          .map((src) => ({ src, caption: title, district: '' }));
+
+  const leadSlide = normalizedSlides[0] || {
+    src: '/images/guides-editorial/just-me-pavilion.webp',
+    caption: title,
+    district: '',
+  };
 
   const [activeIdx, setActiveIdx] = useState(0);
 
   useEffect(() => {
-    if (slides.length <= 1) return;
+    if (normalizedSlides.length <= 1) return;
     if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       return;
     }
 
     const timer = window.setInterval(() => {
       if (document.hidden) return;
-      setActiveIdx((prev) => (prev + 1) % slides.length);
+      setActiveIdx((prev) => (prev + 1) % normalizedSlides.length);
     }, 5200);
 
     return () => window.clearInterval(timer);
-  }, [slides.length]);
+  }, [normalizedSlides.length]);
 
-  const paddedIndex = `${activeIdx + 1} / ${slides.length}`;
+  const currentSlide = normalizedSlides[activeIdx] || leadSlide;
+  const paddedIndex = `${activeIdx + 1} / ${normalizedSlides.length}`;
 
   return (
-    <div className="relative pb-6 sm:pb-10 lg:pb-12">
-      {/* Main large editorial print (frame 0 is always first body <img> -> matches og:image) */}
+    <div className="relative w-full">
       <figure
-        className="relative ml-auto w-[90%] sm:w-[86%] aspect-[16/10] overflow-clip bg-[#0B0A09]"
+        className="relative w-full aspect-[16/10] lg:aspect-auto lg:min-h-[480px] xl:min-h-[520px] overflow-clip bg-[#141418]"
         data-taste-clip
       >
         <Image
-          src={leadImg}
+          src={leadSlide.src}
           alt={altPrimary}
           title={title}
           fill
           unoptimized
           priority
           quality={92}
-          sizes="(max-width: 1024px) 100vw, 55vw"
-          className="object-cover"
+          sizes="(max-width: 1024px) 100vw, 50vw"
+          className={`object-cover transition-opacity duration-700 ${
+            activeIdx === 0 ? 'taste-ken-burns-active opacity-100' : 'opacity-100'
+          }`}
         />
 
-        {slides.slice(1).map((src, idx) => {
+        {normalizedSlides.slice(1).map((sl, idx) => {
           const slideIdx = idx + 1;
           const visible = activeIdx === slideIdx;
           return (
             <Image
-              key={src}
-              src={src}
-              alt={`${altPrimary} - ${slideIdx + 1}`}
+              key={`${sl.src}-${slideIdx}`}
+              src={sl.src}
+              alt={`${altPrimary} - ${sl.caption}`}
               fill
               unoptimized
               quality={92}
-              sizes="(max-width: 1024px) 100vw, 55vw"
+              sizes="(max-width: 1024px) 100vw, 50vw"
               aria-hidden="true"
               data-hero-backdrop="true"
               data-no-lightbox="true"
               className={`object-cover taste-crossfade-slide pointer-events-none ${
-                visible ? 'opacity-100' : 'opacity-0'
+                visible ? 'opacity-100 taste-ken-burns-active' : 'opacity-0'
               }`}
             />
           );
@@ -87,43 +99,49 @@ export default function TasteHeroCrossfade({
 
         <div className="taste-hero-scrim absolute inset-0" aria-hidden="true" />
 
-        {slides.length > 1 && (
-          <div className="absolute bottom-3 right-3 z-10 flex items-center gap-2 bg-[#050505]/85 px-3 py-1.5 text-[13px] font-medium text-[#F6F1E7] tabular-nums">
-            <span>{paddedIndex}</span>
-            <div className="flex items-center gap-1" role="tablist" aria-label={title}>
-              {slides.map((src, idx) => (
-                <button
-                  key={src}
-                  type="button"
-                  role="tab"
-                  aria-selected={activeIdx === idx}
-                  aria-label={`${idx + 1} / ${slides.length}`}
-                  onClick={() => setActiveIdx(idx)}
-                  className={`h-2 transition-[width,background-color] duration-300 ${
-                    activeIdx === idx ? 'w-5 bg-[#25D366]' : 'w-2 bg-[#F6F1E7]/45 hover:bg-[#F6F1E7]'
-                  }`}
-                />
-              ))}
+        <div className="absolute inset-x-0 bottom-0 z-10 flex flex-wrap items-end justify-between gap-3 p-4 sm:p-5">
+          <div className="flex items-center gap-3 bg-[#0A0A0C]/90 px-3.5 py-2 max-w-[75%]" data-no-lightbox="true">
+            <span className="w-1 h-4 bg-[#D9381E] shrink-0" aria-hidden="true" />
+            <div className="min-w-0">
+              <div className="text-[14px] font-semibold text-[#FFFFFF] truncate leading-snug">
+                {currentSlide.caption}
+              </div>
+              {currentSlide.district && (
+                <div className="text-[14px] text-[#C9C7C2] truncate leading-snug">
+                  {currentSlide.district}
+                </div>
+              )}
             </div>
           </div>
-        )}
-      </figure>
 
-      {/* Overlapping secondary 1:1 square print (uneven-photographs gallery placement) */}
-      <figure
-        className="relative -mt-12 sm:-mt-20 w-[34%] sm:w-[30%] aspect-square overflow-clip bg-[#0B0A09] brightness-[0.86] hover:brightness-100 transition-[filter] duration-500"
-        data-taste-reveal
-      >
-        <Image
-          src={secondaryImg}
-          alt={altSecondary}
-          title={altSecondary}
-          fill
-          unoptimized
-          quality={92}
-          sizes="(max-width: 640px) 40vw, 28vw"
-          className="object-cover"
-        />
+          {normalizedSlides.length > 1 && (
+            <div
+              className="flex items-center gap-2 bg-[#0A0A0C]/90 px-3 py-2 text-[14px] font-semibold text-[#FFFFFF] tabular-nums"
+              data-no-lightbox="true"
+            >
+              <span>{paddedIndex}</span>
+              <div className="flex items-center gap-1" role="tablist" aria-label={title}>
+                {normalizedSlides.map((sl, idx) => (
+                  <button
+                    key={`${sl.src}-tab-${idx}`}
+                    type="button"
+                    role="tab"
+                    aria-selected={activeIdx === idx}
+                    aria-label={`${idx + 1} / ${normalizedSlides.length}`}
+                    onClick={() => setActiveIdx(idx)}
+                    className="h-7 px-0.5 flex items-center cursor-pointer bg-transparent"
+                  >
+                    <span
+                      className={`block h-1.5 transition-[width,background-color] duration-300 ${
+                        activeIdx === idx ? 'w-5 bg-[#D9381E]' : 'w-2 bg-[#FFFFFF]/45 hover:bg-[#FFFFFF]'
+                      }`}
+                    />
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
       </figure>
     </div>
   );

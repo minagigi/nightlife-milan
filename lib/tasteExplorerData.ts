@@ -5,6 +5,7 @@ import { getLocalizedVenueSlug35 } from './i18n/localizedSlugs35';
 import { CLUBBING_PILLAR_35 } from './i18n/pillarClubbing35';
 import { TERME_PILLAR_35 } from './i18n/pillarTerme35';
 import { capodannoEventPath } from './capodanno/routes';
+import { EXPLORER_VENUE_PHOTOS } from './guideEditorialMedia';
 
 export type ExplorerMode = 'clubbing' | 'terme';
 
@@ -26,6 +27,8 @@ export interface TasteExplorerItem {
   detailNote: string;
   rate: string;
   status: string;
+  image: string;
+  imageCaption: string;
   filters: ExplorerFilterId[];
   primaryHref: string;
   primaryLabel: string;
@@ -868,19 +871,27 @@ export function buildTasteExplorerData(
       },
     ];
 
-    const items: TasteExplorerItem[] = specs.map((sp) => ({
-      id: sp.id,
-      name: sp.name,
-      district: sp.district,
-      subtitle: sp.incl,
-      detailNote: `${sp.status} · ${sp.rate}`,
-      rate: sp.rate,
-      status: sp.status,
-      filters: sp.filters,
-      primaryHref: capodannoEventPath(sp.slug, locale),
-      primaryLabel: sp.actionLabel || ui.viewVenue,
-      waHref: getConciergeBookingUrl(locale, `${sp.name} (${sp.rate})`, pageUrl),
-    }));
+    const items: TasteExplorerItem[] = specs.map((sp) => {
+      const media = EXPLORER_VENUE_PHOTOS[sp.id] || {
+        src: '/images/guides-editorial/terme-thermal-night.webp',
+        caption: sp.name,
+      };
+      return {
+        id: sp.id,
+        name: sp.name,
+        district: sp.district,
+        subtitle: sp.incl,
+        detailNote: `${sp.status} · ${sp.rate}`,
+        rate: sp.rate,
+        status: sp.status,
+        image: media.src,
+        imageCaption: media.caption,
+        filters: sp.filters,
+        primaryHref: capodannoEventPath(sp.slug, locale),
+        primaryLabel: sp.actionLabel || ui.viewVenue,
+        waHref: getConciergeBookingUrl(locale, `${sp.name} (${sp.rate})`, pageUrl),
+      };
+    });
 
     return {
       mode: 'terme',
@@ -1134,6 +1145,10 @@ export function buildTasteExplorerData(
   const items: TasteExplorerItem[] = clubSpecs.map((sp) => {
     const nyeHref = capodannoEventPath(sp.nyeSlug, locale);
     const weeklyHref = sp.clubSlug ? clubPath(sp.clubSlug, locale) : undefined;
+    const media = EXPLORER_VENUE_PHOTOS[sp.id] || {
+      src: '/images/guides-editorial/just-me-pavilion.webp',
+      caption: sp.name,
+    };
     return {
       id: sp.id,
       name: sp.name,
@@ -1142,6 +1157,8 @@ export function buildTasteExplorerData(
       detailNote: `${tl.thDressCode}: ${sp.dress}`,
       rate: sp.rate,
       status: sp.status,
+      image: media.src,
+      imageCaption: media.caption,
       filters: sp.filters,
       primaryHref: nyeHref,
       primaryLabel: clean(ui.viewNye),

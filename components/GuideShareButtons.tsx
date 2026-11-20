@@ -27,13 +27,13 @@ export default function GuideShareButtons({
   const isLight = variant === 'light';
   const wrapClass = isLight
     ? 'flex items-center gap-3'
-    : 'flex items-center gap-4 mt-8 pt-8 border-t border-white/10';
+    : 'flex items-center gap-4 mt-8 pt-8';
   const labelClass = isLight
-    ? 'text-sm text-[#050505] font-semibold'
-    : 'text-sm text-[#C2B9AA] font-semibold';
+    ? 'text-sm text-[#0A0A0C] font-semibold'
+    : 'text-sm text-[#C9C7C2] font-semibold';
   const btnClass = isLight
-    ? 'min-h-[44px] min-w-[44px] inline-flex items-center justify-center bg-[#EAE3D5] text-[#050505] hover:bg-[#050505] hover:text-[#F6F1E7] transition-colors'
-    : 'min-h-[44px] min-w-[44px] inline-flex items-center justify-center bg-[#141311] text-[#EAE3D5] hover:text-[#F6F1E7] hover:bg-[#1F1C18] transition-colors';
+    ? 'min-h-[44px] min-w-[44px] inline-flex items-center justify-center bg-[#E2DED6] text-[#0A0A0C] hover:bg-[#0A0A0C] hover:text-[#FFFFFF] transition-colors'
+    : 'min-h-[44px] min-w-[44px] inline-flex items-center justify-center bg-[#18181C] text-[#EDEBE6] hover:bg-[#FFFFFF] hover:text-[#0A0A0C] transition-colors';
 
   return (
     <div className={wrapClass}>
@@ -54,7 +54,7 @@ export default function GuideShareButtons({
       >
         <LinkIcon className="w-4 h-4" />
         {copied && (
-          <span className="absolute -top-9 left-1/2 -translate-x-1/2 text-[13px] font-semibold bg-[#25D366] text-[#050505] px-2.5 py-1 whitespace-nowrap">
+          <span className="absolute -top-9 left-1/2 -translate-x-1/2 text-[14px] font-semibold bg-[#25D366] text-[#0A0A0C] px-2.5 py-1 whitespace-nowrap">
             Copied
           </span>
         )}
