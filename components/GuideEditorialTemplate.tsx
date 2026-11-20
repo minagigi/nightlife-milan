@@ -123,9 +123,15 @@ export default function GuideEditorialTemplate({
   const secondaryJumpHref = isPillarExplorer ? '#explorer' : '#partner-clubs';
   const secondaryJumpLabel = isPillarExplorer ? explorerData!.allLabel : t.relatedVenues;
 
-  const metricCountValue = explorerData ? String(explorerData.items.length) : String(guide.sections.length);
-  const metricCountLabel = explorerData ? explorerData.colVenue : ui.officialBadge;
-  const metricRateValue = explorerData && leadRateShort ? leadRateShort : '100% Bot.';
+  const metricCountValue = explorerData
+    ? String(explorerData.items.length)
+    : String(relatedVenues.length || guide.sections.length);
+  const metricCountLabel = explorerData
+    ? explorerData.colVenue
+    : relatedVenues.length
+      ? t.relatedVenues
+      : ui.officialBadge;
+  const metricRateValue = explorerData && leadRateShort ? leadRateShort : 'VIP · 100%';
   const metricRateLabel = explorerData ? leadVenue : ui.directDesk;
 
   return (
@@ -149,12 +155,12 @@ export default function GuideEditorialTemplate({
             <span className="tabular-nums">{formattedDate}</span>
           </nav>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            <div className="lg:col-span-6" data-taste-reveal>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+            <div className="lg:col-span-5" data-taste-reveal>
               <h1 className="font-display font-extrabold text-[#FFFFFF] m-0 mb-4">
                 {displayHeadline}
               </h1>
-              <p className="text-lg sm:text-xl font-semibold text-[#EDEBE6] leading-snug mb-3 max-w-2xl">
+              <p className="text-[19px] font-semibold text-[#EDEBE6] leading-snug mb-3 max-w-xl">
                 {title}
               </p>
               <p className="text-base text-[#C9C7C2] leading-relaxed mb-7 max-w-xl">
@@ -176,7 +182,7 @@ export default function GuideEditorialTemplate({
               </div>
             </div>
 
-            <div className="lg:col-span-6">
+            <div className="lg:col-span-7">
               <TasteHeroCrossfade
                 slides={bundle.heroSlides}
                 altPrimary={title}

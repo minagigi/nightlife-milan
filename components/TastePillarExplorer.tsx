@@ -136,14 +136,14 @@ export default function TastePillarExplorer({ data, locale }: TastePillarExplore
             })}
           </div>
 
-          {/* Compact Spotlight Drawer with curated 16:9 photo preview */}
+          {/* Compact Spotlight Drawer with curated preview — clears bottom-right floating WA CTA */}
           {activeItem && (
             <aside
               aria-label={activeItem.name}
-              className="lg:col-span-5 lg:sticky lg:top-20 bg-[#141418] p-5 sm:p-6"
+              className="lg:col-span-5 lg:sticky lg:top-[76px] bg-[#141418] p-4 sm:p-5"
               data-no-lightbox="true"
             >
-              <figure className="relative aspect-[16/9] w-full overflow-clip bg-[#0A0A0C] mb-4">
+              <figure className="relative aspect-[21/9] w-full overflow-clip bg-[#0A0A0C] mb-3">
                 <Image
                   key={activeItem.image}
                   src={activeItem.image}
@@ -159,21 +159,21 @@ export default function TastePillarExplorer({ data, locale }: TastePillarExplore
                 </figcaption>
               </figure>
 
-              <h3 className="font-display text-xl font-bold text-[#FFFFFF] leading-tight mb-1">
+              <h3 className="font-display text-xl font-bold text-[#FFFFFF] leading-tight mb-0.5">
                 {activeItem.name}
               </h3>
-              <p className="text-[14px] text-[#C9C7C2] mb-4 leading-snug">
+              <p className="text-[14px] text-[#C9C7C2] mb-2.5 leading-snug">
                 {data.spotlightHeading} · {activeItem.district}
               </p>
 
-              <dl className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3 text-[14px]">
-                <div className="bg-[#0A0A0C] p-3">
+              <dl className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-2.5 text-[14px]">
+                <div className="bg-[#0A0A0C] p-2.5">
                   <dt className="text-[14px] text-[#C9C7C2] mb-0.5">{data.colRate}</dt>
                   <dd className="text-[15px] font-bold text-[#FFFFFF] tabular-nums m-0">
                     {activeItem.rate}
                   </dd>
                 </div>
-                <div className="bg-[#0A0A0C] p-3">
+                <div className="bg-[#0A0A0C] p-2.5">
                   <dt className="text-[14px] text-[#C9C7C2] mb-0.5">{data.colStatus}</dt>
                   <dd className="text-[15px] font-semibold text-[#25D366] m-0">
                     {activeItem.status}
@@ -181,7 +181,7 @@ export default function TastePillarExplorer({ data, locale }: TastePillarExplore
                 </div>
               </dl>
 
-              <div className="bg-[#0A0A0C] p-3 mb-4 space-y-1">
+              <div className="bg-[#0A0A0C] p-2.5 mb-3 space-y-1">
                 <p className="text-[14px] text-[#FFFFFF] leading-snug m-0">
                   {activeItem.subtitle}
                 </p>

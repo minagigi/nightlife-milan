@@ -58,7 +58,7 @@ export default function TasteHeroCrossfade({
   return (
     <div className="relative w-full">
       <figure
-        className="relative w-full aspect-[16/10] lg:aspect-auto lg:min-h-[480px] xl:min-h-[520px] overflow-clip bg-[#141418]"
+        className="relative w-full aspect-[16/10] lg:aspect-auto lg:min-h-[540px] xl:min-h-[560px] overflow-clip bg-[#141418]"
         data-taste-clip
       >
         <Image
