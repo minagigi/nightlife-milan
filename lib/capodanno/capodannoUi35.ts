@@ -879,7 +879,7 @@ const WORDS_35: Partial<Record<LocaleCode, LocaleWords35>> & { en: LocaleWords35
     freeEntryLabel: 'ENTRADA GRATUITA',
     uponRequestLabel: 'Sob consulta',
     fromPricePrefix: 'Desde',
-    dressCodeLabel: 'Dress Code',
+    dressCodeLabel: 'Código de Vestuário',
     closedDec31Jan3Badge: 'FECHADO 31 DEZ – 3 JAN',
     closedNye2027Badge: 'FECHADO RÉVEILLON 2027',
     soldOutNye2027Badge: 'ESGOTADO RÉVEILLON 2027',
@@ -1355,6 +1355,28 @@ export function getCapodannoFilterOptions35(locale: string) {
   };
 }
 
+export function formatCapodannoHours35(hours: string, locale: string): string {
+  if (locale === 'it') return hours;
+  const trimmed = hours.trim();
+  if (/^\d{2}:\d{2}\s*[–-]\s*\d{2}:\d{2}$/.test(trimmed)) {
+    return hours;
+  }
+  const w = getWords35(locale);
+  if (
+    trimmed.includes('Sold Out') ||
+    trimmed.startsWith('Chiuso') ||
+    trimmed.startsWith('Sede chiusa') ||
+    trimmed.startsWith('Esaurito') ||
+    trimmed.startsWith('Nessuna')
+  ) {
+    return w.soldOutNye2027Badge;
+  }
+  if (trimmed.startsWith('Orari') || trimmed.includes('su richiesta')) {
+    return w.uponRequestLabel;
+  }
+  return hours;
+}
+
 export function formatCapodannoPriceBadge35(event: CapodannoEventItem, locale: string): string {
   const w = getWords35(locale);
   if (event.soldOutForNye || event.closedForNye) {
@@ -1399,6 +1421,7 @@ export function buildFallbackLocalizedEventContent35(
     };
   }
   const w = getWords35(locale);
+  const hoursText = formatCapodannoHours35(event.hours, locale);
   const priceLabel = formatCapodannoPriceBadge35(event, locale);
   const musicText = w.music[event.musicTag] || event.musicAndFormatEn;
   const venueTypeText = w.venueTypes[event.venueType] || '';
@@ -1406,7 +1429,7 @@ export function buildFallbackLocalizedEventContent35(
   return {
     title,
     subtitle,
-    description: `${title} · ${event.venueName} (${event.address}, ${event.city}). ${venueTypeText} · ${w.hoursLabel} ${event.hours} · ${musicText}. ${priceLabel}.`,
+    description: `${title} · ${event.venueName} (${event.address}, ${event.city}). ${venueTypeText} · ${w.hoursLabel} ${hoursText} · ${musicText}. ${priceLabel}.`,
     musicAndFormat: musicText,
     dressCode: event.category === 'piazza' ? w.freeEntryLabel : `${w.dressCodeLabel}: Elegant / Smart Chic`,
     priceSummary: priceLabel,
@@ -1414,12 +1437,12 @@ export function buildFallbackLocalizedEventContent35(
       ? event.formulas.slice(0, 3).map((f) => ({
           label: w.formulas[f] || priceLabel,
           price: priceLabel,
-          details: `${w.hoursLabel} ${event.hours} · WhatsApp ${SITE_CONTACT.whatsapp.number}`,
+          details: `${w.hoursLabel} ${hoursText} · WhatsApp ${SITE_CONTACT.whatsapp.number}`,
         }))
       : [],
     highlights: [
       `${event.venueName} · ${event.address}, ${event.city}`,
-      `${w.hoursLabel} ${event.hours} · ${w.dateBadge}`,
+      `${w.hoursLabel} ${hoursText} · ${w.dateBadge}`,
       `${musicText} · ${zoneText}`,
       `${priceLabel} · WhatsApp ${SITE_CONTACT.whatsapp.number}`,
     ],

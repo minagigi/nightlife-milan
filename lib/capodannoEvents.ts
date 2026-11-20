@@ -1101,7 +1101,13 @@ const UNSORTED_CAPODANNO_EVENTS: CapodannoEventItem[] = SEEDS.map((rawSeed: any[
     titleIt,
     titleEn,
     subtitleIt: `${venueName} · ${city} (${province}) · Orari 31/12: ${hours}`,
-    subtitleEn: `${venueName} · ${city} (${province}) · Dec 31 Hours: ${hours}`,
+    subtitleEn: `${venueName} · ${city} (${province}) · Dec 31 Hours: ${
+      /^\d/.test(hours)
+        ? hours
+        : hours.includes('Sold Out')
+          ? 'Sold Out'
+          : 'Upon request'
+    }`,
     descriptionIt,
     descriptionEn,
     musicAndFormatIt,

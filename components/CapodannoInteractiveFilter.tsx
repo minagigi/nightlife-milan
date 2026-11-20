@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
 import { capodannoCategoryPath, capodannoEventPath } from '@/lib/capodanno/routes';
 import {
+  formatCapodannoHours35,
   formatCapodannoPriceBadge35,
   getCapodannoCategoryBadge35,
   getCapodannoCategoryShortLabel35,
@@ -356,7 +357,7 @@ export default function CapodannoInteractiveFilter({
                       </h3>
                       <p className="text-xs text-[#C2B9AA]">
                         <strong className="text-[#F6F1E7]">{w.addressLabel}</strong> {event.address} ·{' '}
-                        <strong className="text-[#F6F1E7]">{w.hoursLabel}</strong> {event.hours}
+                        <strong className="text-[#F6F1E7]">{w.hoursLabel}</strong> {formatCapodannoHours35(event.hours, locale)}
                       </p>
                       <p className="mt-2.5 text-sm leading-relaxed text-[#C2B9AA]">{description}</p>
 

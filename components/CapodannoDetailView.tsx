@@ -6,6 +6,7 @@ import type { LocaleCode } from '@/lib/i18n/locales';
 import { capodannoEventPath, capodannoNavigation, capodannoPath } from '@/lib/capodanno/routes';
 import { getPaymentTerms35 } from '@/lib/capodanno/paymentTerms35';
 import {
+  formatCapodannoHours35,
   getCapodannoDetailFaqs35,
   getCapodannoLocalizedEventContent,
   getCapodannoLocalizedEventSubtitle,
@@ -150,13 +151,14 @@ export default function CapodannoDetailView({ locale, event }: Props) {
     (item) => !item.closedForNye && !item.soldOutForNye && item.category === event.category && item.slug !== event.slug
   ).slice(0, 6);
 
+  const displayHours = formatCapodannoHours35(event.hours, locale);
   const defaultFaqs = getCapodannoDetailFaqs35({
     locale,
     venueName: event.venueName,
     address: event.address,
     city: event.city,
     province: event.province,
-    hours: event.hours,
+    hours: displayHours,
     dressCode: dress,
     priceSummary: localized.priceSummary,
     sourceBasis,
@@ -926,7 +928,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 {ui.mapHeadingEvent} · {event.venueName}
               </h2>
               <p className="mt-1 text-sm text-[#C2B9AA]">
-                {event.venueName} · {event.address}, {event.city} ({event.province}) · {event.hours}
+                {event.venueName} · {event.address}, {event.city} ({event.province}) · {displayHours}
               </p>
               <div className="mt-4">
                 <EventVenueMap

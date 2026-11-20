@@ -6,6 +6,7 @@ import type { LocaleCode } from '@/lib/i18n/locales';
 import { capodannoEventPath, capodannoNavigation, capodannoPath } from '@/lib/capodanno/routes';
 import { getPaymentTerms35 } from '@/lib/capodanno/paymentTerms35';
 import {
+  formatCapodannoHours35,
   getCapodannoCategoryBadge35,
   getCapodannoCategoryQuickAnswer35,
   getCapodannoCategoryShortLabel35,
@@ -353,7 +354,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
                     <td className="px-4 py-3 text-[#24201B]">
                       {ev.city} ({ev.province})
                     </td>
-                    <td className="px-4 py-3 text-[#24201B]">{ev.hours}</td>
+                    <td className="px-4 py-3 text-[#24201B]">{formatCapodannoHours35(ev.hours, locale)}</td>
                     <td className="px-4 py-3 font-bold text-[#050505]">
                       {getCapodannoLocalizedEventContent(ev, locale).priceSummary}
                     </td>

@@ -15,6 +15,7 @@ import { getT031OverrideContent } from '@/lib/capodanno/t031Venues35';
 import { getWhatsappVenueNyeContent } from '@/lib/capodanno/whatsappVenues35';
 import {
   buildFallbackLocalizedEventContent35,
+  formatCapodannoHours35,
   formatCapodannoPriceBadge35,
   getCapodannoCategoryBadge35,
   getCapodannoCategoryQuickAnswer35,
@@ -24,6 +25,8 @@ import {
   getCapodannoHubFaqs35,
   getWords35,
 } from '@/lib/capodanno/capodannoUi35';
+
+export { formatCapodannoHours35 };
 import { getJustMeOrthodoxRelatedBanner } from '@/lib/orthodox-nye/justme35';
 import type { CapodannoCategoryPageDef, CapodannoEventItem } from '@/lib/capodannoEvents';
 import { SITE_CONTACT } from '@/config/contact';
@@ -648,7 +651,8 @@ export function getCapodannoLocalizedEventSubtitle(
   const nav = capodannoNavigation(locale);
   const w = getWords35(locale);
   const priceBadge = formatCapodannoPriceBadge35(event, locale);
-  return `${nav.h1} @ ${event.venueName} (${event.address}, ${event.city}) · ${w.hoursLabel} ${event.hours} · ${priceBadge}.`;
+  const hoursText = formatCapodannoHours35(event.hours, locale);
+  return `${nav.h1} @ ${event.venueName} (${event.address}, ${event.city}) · ${w.hoursLabel} ${hoursText} · ${priceBadge}.`;
 }
 
 export function getCapodannoLocalizedEventContent(
