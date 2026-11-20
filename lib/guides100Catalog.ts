@@ -8274,7 +8274,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
       "alcatraz-milan"
     ],
     "slugs35": {
-      "en": "monza-brianza-to-milan-clubs-parking-vip-guide-vip-guide",
+      "en": "monza-brianza-to-milan-clubs-parking-vip-guide",
       "it": "guida-da-monza-brianza-a-milano-discoteche-parcheggi-vip",
       "es": "guia-da-monza-brianza-a-parcheggi-milan-mesas-vip",
       "fr": "guide-da-monza-brianza-a-parcheggi-milan-tables-vip",
@@ -8344,7 +8344,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
       "tocqueville-13-milan"
     ],
     "slugs35": {
-      "en": "bergamo-to-milan-clubs-highway-a4-vip-guide-vip-guide",
+      "en": "bergamo-to-milan-clubs-highway-a4-vip-guide",
       "it": "guida-da-bergamo-a-milano-discoteche-autostrada-a4-vip",
       "es": "guia-da-bergamo-a-autostrada-a4-milan-mesas-vip",
       "fr": "guide-da-bergamo-a-autostrada-a4-milan-tables-vip",
@@ -8414,7 +8414,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
       "ceresio-7-milan"
     ],
     "slugs35": {
-      "en": "como-lecco-lugano-ticino-to-milan-clubs-vip-guide-vip-guide",
+      "en": "como-lecco-lugano-ticino-to-milan-clubs-vip-guide",
       "it": "guida-da-como-lecco-lugano-ticino-a-milano-discoteche-vip",
       "es": "guia-da-como-lecco-lugano-ticino-a-milan-mesas-vip",
       "fr": "guide-da-como-lecco-lugano-ticino-a-milan-tables-vip",
@@ -8484,7 +8484,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
       "voya-rooftop-milan"
     ],
     "slugs35": {
-      "en": "brescia-franciacorta-cremona-to-milan-clubs-vip-guide-vip-guide",
+      "en": "brescia-franciacorta-cremona-to-milan-clubs-vip-guide",
       "it": "guida-da-brescia-franciacorta-a-milano-discoteche-vip",
       "es": "guia-da-brescia-franciacorta-a-milan-mesas-vip",
       "fr": "guide-da-brescia-franciacorta-a-milan-tables-vip",
@@ -8554,7 +8554,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
       "apollo-club-milan"
     ],
     "slugs35": {
-      "en": "varese-pavia-lodi-novara-to-milan-clubs-vip-guide-vip-guide",
+      "en": "varese-pavia-lodi-novara-to-milan-clubs-vip-guide",
       "it": "guida-da-varese-pavia-lodi-novara-a-milano-discoteche-vip",
       "es": "guia-da-varese-pavia-lodi-novara-a-milan-mesas-vip",
       "fr": "guide-da-varese-pavia-lodi-novara-a-milan-tables-vip",

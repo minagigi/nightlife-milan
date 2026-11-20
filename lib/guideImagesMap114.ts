@@ -135,6 +135,8 @@ export const GUIDE_HERO_IMAGES_114: Record<string, string> = {
   'g-114': '/images/pillars/zone-inline-10-a.webp',
   'g-115': '/images/pillars/concierge-hero.webp',
   'g-116': '/images/pillars/zone-hero-13.webp',
+  'g-117': '/images/seo-events/master/capodanno-terme-milano-flow-01.webp',
+  'g-118': '/images/seo-events/master/capodanno-justme-milano-torre-branca.webp',
 };
 
 export const GUIDE_INLINE_IMAGES_114: Record<string, string[]> = {
@@ -269,6 +271,18 @@ export const GUIDE_INLINE_IMAGES_114: Record<string, string[]> = {
   'g-114': ['/images/pillars/zone-inline-10-b.webp', '/images/pillars/zone-inline-10-c.webp', '/images/pillars/zone-inline-12-d.webp', '/images/pillars/zone-inline-14-d.webp'],
   'g-115': ['/images/pillars/concierge-01.webp', '/images/pillars/concierge-02.webp', '/images/pillars/concierge-03.webp', '/images/pillars/concierge-05.webp'],
   'g-116': ['/images/pillars/zone-inline-13-a.webp', '/images/pillars/zone-inline-13-b.webp', '/images/pillars/zone-inline-13-d.webp', '/images/pillars/concert-afterparties-01.webp'],
+  'g-117': [
+    '/images/events/capodanno-2027-posters/capodanno-terme-di-sirmione-aquaria-lago-di-garda.webp',
+    '/images/events/capodanno-2027-posters/capodanno-qc-terme-milano-porta-romana.webp',
+    '/images/events/capodanno-2027-posters/capodanno-qc-terme-bormio-bagni-nuovi-vecchi.webp',
+    '/images/events/capodanno-2027-posters/capodanno-qc-terme-san-pellegrino.webp',
+  ],
+  'g-118': [
+    '/images/venues/pineta-milano/pineta-milano-party-01.webp',
+    '/images/venues/aria-club-milano/aria-club-milano-interior-01.webp',
+    '/images/venues/gattopardo/gattopardo-interior-01.webp',
+    '/images/events/capodanno-2027-posters/capodanno-repvblic-milano.webp',
+  ],
 };
 
 export function getGuideHeroImage114(guideId: string, fallback?: string): string {

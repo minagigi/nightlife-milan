@@ -2,6 +2,7 @@ import { Event, Venue, Performer, MusicGenre, MilanZone, VenueCategory, Guide, Z
 import { MOCK_EVENT_I18N } from '@/lib/mockEventI18n';
 import { GUIDE_I18N } from '@/lib/guideI18n.generated';
 import { EXTRA_100_GUIDES, populateGuideSlugs35 } from '@/lib/guides100Catalog';
+import { GSC_PILLAR_GUIDES_20261120 } from '@/lib/guidesGscPillar20261120';
 import { VENUE_SLUGS_35, resolveVenueSlug, ALL_35_LOCALES, sanitizeAsciiSlug, SLUG_TOKENS_35, registerMockEventSlugs35 } from '@/lib/i18n/localizedSlugs35';
 import { GUIDE_HERO_IMAGES_114 } from '@/lib/guideImagesMap114';
 import { applyFlagshipGuides35 } from '@/lib/i18n/flagshipGuides35';
@@ -2783,6 +2784,7 @@ export const mockGuides: Guide[] = [
 ];
 
 mockGuides.push(...EXTRA_100_GUIDES);
+mockGuides.push(...GSC_PILLAR_GUIDES_20261120);
 populateGuideSlugs35(mockGuides);
 for (const g of mockGuides) {
   if (GUIDE_HERO_IMAGES_114[g.id]) {

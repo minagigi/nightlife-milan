@@ -14,12 +14,12 @@
       "services": "Servizi"
     },
     "justme": {
-      "subtitle": "Un mix perfetto di eleganza e divertimento",
-      "description": "Nel cuore di Parco Sempione, JUSTME è il punto di riferimento per un'esperienza completa: dall'aperitivo alla cena, dalla serata disco al privé esclusivo.",
-      "insiderTip": "Il Just Me è il cuore della Fashion Week. Se vuoi il tavolo migliore, chiedi del Privé Branca: sarai letteralmente sotto i pilastri della torre.",
+      "subtitle": "Un mix perfetto di eleganza e divertimento (ex Just Cavalli)",
+      "description": "Nel cuore di Parco Sempione sotto la Torre Branca, Just Me Milano (ex Just Cavalli) è il punto di riferimento aperto 7/7: dall'aperitivo alla cena, fino ai privé esclusivi.",
+      "insiderTip": "Al Just Me Milano (ex Just Cavalli) la selezione è elegante rigorosa: camicia o polo curata per uomo. Chiedi il Privé Branca per essere sotto la cupola di cristallo.",
       "location": "Viale Luigi Camoens 2, Milano (Parco Sempione)",
-      "target": "25-45 anni",
-      "dressCode": "Elegante / Smart Casual",
+      "target": "23-45 anni",
+      "dressCode": "Elegante / Smart Sartoriale (no abbigliamento sportivo)",
       "music": "House, Hip-Hop, Hits, Commercial",
       "events": [
         {
@@ -87,19 +87,19 @@
       ],
       "pricing": {
         "dancefloor": {
-          "title": "Tavolo Pista",
-          "price": "da 250€",
-          "desc": "Fino a 5-6 persone. Bottiglia inclusa."
+          "title": "Tavolo VIP Pista",
+          "price": "€320 - €600",
+          "desc": "6-8 ospiti (320-400€ Lun-Gio/Dom · 500-600€ Ven-Sab). 100% credito bottiglie."
         },
         "priveGold": {
-          "title": "Privé Gold",
-          "price": "da 600€",
-          "desc": "Zona rialzata, vista pista."
+          "title": "Privé Branca Rialzato",
+          "price": "€800 - €1.200",
+          "desc": "Zona rialzata con sicurezza dedicata e vista cupola."
         },
         "priveDiamond": {
-          "title": "Privé Diamond (VIP)",
-          "price": "1.5k - 3k€+",
-          "desc": "La massima esclusività sotto la Torre Branca. Servizio dedicato."
+          "title": "Super Privé Console DJ",
+          "price": "€1.500 - €5.000+",
+          "desc": "Massima esclusività a bordo console sotto la Torre Branca."
         }
       },
       "rules": {

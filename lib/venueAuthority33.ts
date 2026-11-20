@@ -51,7 +51,7 @@ export const VENUE_AUTHORITY_33: Readonly<Record<string, VenueAuthoritySpec>> = 
   'v-justme': {
     id: 'v-justme',
     schemaType: 'NightClub',
-    alternateNames: ['JustMe Milano', 'Just Me Milan', 'Just Me Torre Branca', 'Just Me Sempione', 'JustMe Club Milan'],
+    alternateNames: ['JustMe Milano', 'Just Me Milan', 'Just Me Torre Branca', 'Just Me Sempione', 'JustMe Club Milan', 'Just Cavalli Milano', 'ex Just Cavalli Milano'],
     neighborhoodEn: 'Parco Sempione / Torre Branca',
     neighborhoodIt: 'Parco Sempione / Torre Branca',
     openingHoursSpec: [

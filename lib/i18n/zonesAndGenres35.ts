@@ -1,5 +1,6 @@
 import type { LocaleCode } from './localeRegistry';
 import { ALL_35_LOCALES } from './localizedSlugs35';
+import { REGGAETON_35_PACKS } from './reggaetonSeo35';
 
 export interface LocalizedChapter35 {
   id: string;
@@ -1242,8 +1243,8 @@ const GENRES_BASE: Record<string, GenreBaseMeta> = {
   },
   reggaeton: {
     nameEn: 'Reggaeton & Urban Latin', nameIt: 'Reggaeton & Urban Latin',
-    subtitleEn: 'High-Energy Latin Fiesta & Perreo', subtitleIt: 'Fiesta Latina & Noche de Perreo',
-    topClubs: ['Pineta Milano', 'Tocqueville 13', 'Aria Club Milano', 'Loolapaloosa', 'Alcatraz Milano'],
+    subtitleEn: 'High-Energy Latin Fiesta, Dembow & PERREO XL', subtitleIt: 'Fiesta Latina, Dembow & PERREO XL @ Gate',
+    topClubs: ['PERREO XL @ Gate Milano', 'Aria Club Milano', 'Pineta Milano', 'Tocqueville 13', 'Hollywood Rythmoteque', 'REPVBLIC Milano', 'The Club Milano', 'Just Me Milano'],
   },
   commercial: {
     nameEn: 'Commercial & Party Hits', nameIt: 'Commerciale & Hit Cantate',
@@ -1454,17 +1455,25 @@ export function getGenreLocalized35(genreSlug: string, locale: LocaleCode): Genr
 
   const lead = pack.genreSecSound(name, clubsText)[0];
 
+  const regPack = normSlug === 'reggaeton' ? (REGGAETON_35_PACKS[locale] || REGGAETON_35_PACKS.en) : null;
+  const seoTitle = regPack ? regPack.seoTitle : pack.genreTitleFmt(name);
+  const seoDescription = regPack ? regPack.seoDescription : pack.genreDescFmt(name);
+  const baseFaqs = pack.faqPairs('genre', name, subtitle, clubsText);
+  const faqs = regPack
+    ? [{ question: regPack.nyeFaqQ, answer: regPack.nyeFaqA }, ...baseFaqs]
+    : baseFaqs;
+
   return {
     slug: normSlug,
     name,
     h1,
     subtitle,
     lead,
-    seoTitle: pack.genreTitleFmt(name),
-    seoDescription: pack.genreDescFmt(name),
+    seoTitle,
+    seoDescription,
     topClubs: base.topClubs,
     sections,
-    faqs: pack.faqPairs('genre', name, subtitle, clubsText),
+    faqs,
     ui: {
       home: pack.home,
       genresHub: pack.genresHub,

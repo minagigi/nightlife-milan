@@ -13,6 +13,7 @@ import { getTerrazzaDuomo21NyeContent } from '@/lib/capodanno/terrazzaDuomo21_35
 import { getCeresio7ClosedNyeContent } from '@/lib/capodanno/ceresio7Closed35';
 import { getT031OverrideContent } from '@/lib/capodanno/t031Venues35';
 import { getWhatsappVenueNyeContent } from '@/lib/capodanno/whatsappVenues35';
+import { getQcTermeAndSirmioneOverride35 } from '@/lib/capodanno/qcTermeTba35';
 import {
   buildFallbackLocalizedEventContent35,
   formatCapodannoHours35,
@@ -616,6 +617,8 @@ function getOverrideEventContent(slug: string, locale: string): CapodannoLocaliz
   if (slug === 'capodanno-tom-the-ordinary-market-milano') return getTomNyeContent(locale);
   if (slug === 'capodanno-terrazza-duomo-21') return getTerrazzaDuomo21NyeContent(locale);
   if (slug === 'capodanno-ceresio-7-milano') return getCeresio7ClosedNyeContent(locale);
+  const qc = getQcTermeAndSirmioneOverride35(slug, locale);
+  if (qc) return qc;
   const wa = getWhatsappVenueNyeContent(slug, locale);
   if (wa) return wa;
   const t031 = getT031OverrideContent(slug, locale);
