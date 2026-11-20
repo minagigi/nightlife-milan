@@ -287,9 +287,11 @@ export default function CapodannoDetailView({ locale, event }: Props) {
   };
 
   const mapQuery = encodeURIComponent(`${event.venueName}, ${event.address}, ${event.city}`);
+  const [capDisplayH1, ...capTitleExtra] = title.split(/\s*·\s*/);
+  const capTitleQualifier = capTitleExtra.join(' · ');
 
   return (
-    <main className="min-h-[100dvh] bg-[#0A0A0C] pb-24 pt-20 text-[#FFFFFF]">
+    <main className="taste-pillar-root taste-capodanno-root min-h-[100dvh] bg-[#0A0A0C] pb-24 pt-20 text-[#FFFFFF]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -318,7 +320,19 @@ export default function CapodannoDetailView({ locale, event }: Props) {
             />
           </div>
           <div className="border-b border-white/14 bg-[#18181C] px-6 py-6 sm:px-10 sm:py-8">
-            <div className="flex flex-wrap gap-2">
+            <h1
+              data-event-title={title}
+              data-event-party-only={isPartyOnly ? 'true' : undefined}
+              data-event-sold-out-nye={isUnavailableForNye ? 'true' : undefined}
+              className="font-display font-extrabold uppercase leading-none text-[#FFFFFF]"
+            >
+              {capDisplayH1 || title}
+            </h1>
+            {capTitleQualifier && (
+              <p className="mt-2 font-sans text-base font-semibold text-[#EDEBE6]">{capTitleQualifier}</p>
+            )}
+            <p className="mt-2 font-sans text-base italic text-[#EDEBE6] sm:text-lg">{subtitle}</p>
+            <div className="mt-4 flex flex-wrap gap-2">
               <span className="bg-[#FFFFFF] px-3 py-1 text-[13px] font-bold text-[#0A0A0C]">
                 {ui.dateBadge}
               </span>
@@ -336,15 +350,6 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 </span>
               )}
             </div>
-            <h1
-              data-event-title={title}
-              data-event-party-only={isPartyOnly ? 'true' : undefined}
-              data-event-sold-out-nye={isUnavailableForNye ? 'true' : undefined}
-              className="mt-3 font-display text-4xl font-extrabold uppercase leading-none text-[#FFFFFF] sm:text-6xl"
-            >
-              {title}
-            </h1>
-            <p className="mt-2 font-sans text-base italic text-[#EDEBE6] sm:text-lg">{subtitle}</p>
           </div>
 
           <div className="p-6 sm:p-10">
@@ -509,7 +514,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               ))}
             </div>
 
-            <div id="programma-serata" className="mt-8 space-y-4">
+            <div id="programma-serata" data-reveal="rise" className="mt-8 space-y-4">
               <h2 className="font-display text-2xl font-bold text-[#FFFFFF]">
                 {ui.programHeading}
               </h2>
@@ -606,6 +611,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
             {/* Official Remediated Event Poster (Uncropped object-contain) */}
             <figure
               data-capodanno-poster-detail
+              data-reveal="clip"
               className="mt-8 overflow-hidden border border-white/25 bg-[#0A0A0C] p-4 sm:p-6"
             >
               <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
@@ -690,6 +696,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               <section
                 id="alternative-rooftop"
                 data-rooftop-alternatives
+                data-reveal="rise"
                 className="mt-10 border border-[#0A0A0C]/16 bg-[#EDEBE6] p-6 text-[#0A0A0C] sm:p-8"
               >
                 <h2 className="font-display text-3xl font-extrabold uppercase text-[#0A0A0C] sm:text-4xl">
@@ -767,7 +774,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
             ) : (
               <>
             {/* Price Tiers S17 Table (#EDEBE6 Carta Calda + Testa Nera #0A0A0C) */}
-            <div id="prezzi-formule" className="mt-10 border border-[#0A0A0C]/16 bg-[#EDEBE6] p-6 text-[#0A0A0C] sm:p-8">
+            <div id="prezzi-formule" data-reveal="rise" className="mt-10 border border-[#0A0A0C]/16 bg-[#EDEBE6] p-6 text-[#0A0A0C] sm:p-8">
               <div className="flex flex-wrap items-center gap-3">
                 <h2 className="font-display text-3xl font-extrabold uppercase text-[#0A0A0C]">
                   {ui.pricesHeadingPrefix} · {event.venueName}
@@ -834,6 +841,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               <section
                 id="alternative-confermate"
                 data-confirmed-alternatives
+                data-reveal="rise"
                 className="mt-10 border border-[#0A0A0C]/16 bg-[#EDEBE6] p-6 text-[#0A0A0C] sm:p-8"
               >
                 {localized.alternativesHeading && (
@@ -1036,6 +1044,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
             {/* CTA Box with WhatsApp, Tel, Email */}
             <div
               id="prenota-concierge"
+              data-reveal="rise"
               className="mt-10 border border-white/25 bg-[#0A0A0C] p-6 sm:p-8"
             >
               <h2 className="font-display text-2xl font-bold text-[#FFFFFF]">
@@ -1089,7 +1098,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
             )}
 
             {/* Embedded Google Map for Venue */}
-            <div id="mappa-locale" className="mt-12">
+            <div id="mappa-locale" data-reveal="rise" className="mt-12">
               <h2 className="font-display text-2xl font-bold text-[#FFFFFF]">
                 {ui.mapHeadingEvent} · {event.venueName}
               </h2>
@@ -1110,7 +1119,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
             </div>
 
             {/* FAQs (#F6F1E7 Capitolo Avorio Caldo) */}
-            <div id="faq-evento" className="mt-12 border border-[#0A0A0C]/15 bg-[#EDEBE6] text-[#0A0A0C] p-6 sm:p-8 space-y-4">
+            <div id="faq-evento" data-reveal="rise" className="mt-12 border border-[#0A0A0C]/15 bg-[#EDEBE6] text-[#0A0A0C] p-6 sm:p-8 space-y-4">
               <h2 className="font-display text-2xl font-bold text-[#0A0A0C]">
                 {ui.faqHeadingPrefix}
               </h2>
@@ -1126,7 +1135,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
 
         {/* Related Events */}
         {related.length > 0 && (
-          <section id="eventi-correlati" className="mt-14">
+          <section id="eventi-correlati" data-reveal="rise" className="mt-14">
             <h2 className="font-display text-2xl font-bold text-[#FFFFFF]">
               {ui.relatedHeading}
             </h2>

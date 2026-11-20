@@ -28,6 +28,7 @@ function createLazyLocalizedString(getter: (locale: LocaleCode) => string): Loca
 function sanitizeText(raw: string): string {
   return raw
     .replace(/\u2014/g, '-')
+    .replace(/\u2605/g, '*')
     .replace(/!/g, '.');
 }
 
@@ -53,7 +54,7 @@ function reggaetonUrl(locale: LocaleCode): string {
 }
 
 function linkTag(href: string, label: string): string {
-  return `<a href="${escapeHtml(href)}" class="underline decoration-amber-400/70 underline-offset-4 hover:text-amber-300">${escapeHtml(sanitizeText(label))}</a>`;
+  return `<a href="${escapeHtml(href)}" class="underline decoration-current/55 underline-offset-4 hover:opacity-75 transition-opacity">${escapeHtml(sanitizeText(label))}</a>`;
 }
 
 // ─── PILLAR g-117: TERME CAPODANNO 2027 ───────────────────────────────────────
@@ -172,24 +173,24 @@ function renderTermeGuide(locale: LocaleCode): TermeRendered {
     ],
   ];
 
-  const comparisonTable = `<div class="overflow-x-auto my-6"><table class="min-w-full border border-white/15 text-sm">
-<thead><tr class="bg-white/10 text-left"><th class="p-3">${escapeHtml(l.thSpa)}</th><th class="p-3">${escapeHtml(l.thProvince)}</th><th class="p-3">${escapeHtml(l.thStatus)}</th><th class="p-3">${escapeHtml(l.thOfficialRate)}</th><th class="p-3">${escapeHtml(l.thIncluded)}</th><th class="p-3">${escapeHtml(l.thLink)}</th></tr></thead>
+  const comparisonTable = `<div class="taste-table-scroll"><table class="taste-data-table">
+<thead><tr><th>${escapeHtml(l.thSpa)}</th><th>${escapeHtml(l.thProvince)}</th><th>${escapeHtml(l.thStatus)}</th><th>${escapeHtml(l.thOfficialRate)}</th><th>${escapeHtml(l.thIncluded)}</th><th>${escapeHtml(l.thLink)}</th></tr></thead>
 <tbody>
 ${comparisonRows
   .map(
     ([spa, prov, status, rate, incl, action]) =>
-      `<tr class="border-t border-white/10"><td class="p-3 font-semibold">${escapeHtml(sanitizeText(spa))}</td><td class="p-3">${escapeHtml(sanitizeText(prov))}</td><td class="p-3">${escapeHtml(sanitizeText(status))}</td><td class="p-3 font-semibold">${escapeHtml(sanitizeText(rate))}</td><td class="p-3">${escapeHtml(sanitizeText(incl))}</td><td class="p-3">${action}</td></tr>`,
+      `<tr><td class="font-semibold">${escapeHtml(sanitizeText(spa))}</td><td>${escapeHtml(sanitizeText(prov))}</td><td>${escapeHtml(sanitizeText(status))}</td><td class="font-semibold whitespace-nowrap">${escapeHtml(sanitizeText(rate))}</td><td>${escapeHtml(sanitizeText(incl))}</td><td class="whitespace-nowrap">${action}</td></tr>`,
   )
   .join('\n')}
 </tbody></table></div>`;
 
-  const scheduleTable = `<div class="overflow-x-auto my-6"><table class="min-w-full border border-white/15 text-sm">
-<thead><tr class="bg-white/10 text-left"><th class="p-3">${escapeHtml(l.thTime)}</th><th class="p-3">${escapeHtml(l.thActivity)}</th><th class="p-3">${escapeHtml(l.thNotes)}</th></tr></thead>
+  const scheduleTable = `<div class="taste-table-scroll"><table class="taste-data-table">
+<thead><tr><th>${escapeHtml(l.thTime)}</th><th>${escapeHtml(l.thActivity)}</th><th>${escapeHtml(l.thNotes)}</th></tr></thead>
 <tbody>
 ${p.sirmione.scheduleRows
   .map(
     ([time, act, note]) =>
-      `<tr class="border-t border-white/10"><td class="p-3 font-semibold">${escapeHtml(sanitizeText(time))}</td><td class="p-3">${escapeHtml(sanitizeText(act))}</td><td class="p-3">${escapeHtml(sanitizeText(note))}</td></tr>`,
+      `<tr><td class="font-semibold whitespace-nowrap">${escapeHtml(sanitizeText(time))}</td><td>${escapeHtml(sanitizeText(act))}</td><td>${escapeHtml(sanitizeText(note))}</td></tr>`,
   )
   .join('\n')}
 </tbody></table></div>`;
@@ -216,7 +217,7 @@ ${scheduleTable}
 <ul class="list-disc pl-6 space-y-2 my-4">
 ${p.sirmione.packingList.map((item) => `<li>${escapeHtml(sanitizeText(item))}</li>`).join('\n')}
 </ul>
-<p>${linkTag(sirmioneUrl, p.sirmione.ctaLabel)} · ${linkTag(justMeGardaUrl, p.garda.ctaLabel)} · <a href="https://wa.me/393519127047" class="underline decoration-amber-400/70 underline-offset-4">WhatsApp +39 351 912 7047</a>.</p>`;
+<p>${linkTag(sirmioneUrl, p.sirmione.ctaLabel)} · ${linkTag(justMeGardaUrl, p.garda.ctaLabel)} · <a href="https://wa.me/393519127047" class="underline decoration-current/55 underline-offset-4">WhatsApp +39 351 912 7047</a>.</p>`;
 
   const s3 = `<h3>${escapeHtml(sanitizeText(p.h3[6]))}</h3>
 <p>${escapeHtml(sanitizeText(p.qcTerme.waitlistPolicy))}</p>
@@ -269,7 +270,7 @@ ${p.logistics.bookingSteps.map((step) => `<li>${escapeHtml(sanitizeText(step))}<
 <p>${escapeHtml(sanitizeText(p.logistics.transitComoValtellina))}</p>
 <h3>${escapeHtml(sanitizeText(p.h3[17]))}</h3>
 <p>${escapeHtml(sanitizeText(p.logistics.hubLinkNote))}</p>
-<p>${linkTag(nyeHubUrl, p.logistics.categoryCta)} · ${linkTag(termeCatUrl, p.sirmione.ctaLabel)} · ${linkTag(clubGuideUrl, p.milanAlts.clubGuideCta)} · <a href="https://wa.me/393519127047" class="underline decoration-amber-400/70 underline-offset-4">${escapeHtml(sanitizeText(p.logistics.whatsappCta))}</a> | <a href="mailto:concierge@nightlifemilan.com" class="underline decoration-amber-400/70 underline-offset-4">concierge@nightlifemilan.com</a>.</p>`;
+<p>${linkTag(nyeHubUrl, p.logistics.categoryCta)} · ${linkTag(termeCatUrl, p.sirmione.ctaLabel)} · ${linkTag(clubGuideUrl, p.milanAlts.clubGuideCta)} · <a href="https://wa.me/393519127047" class="underline decoration-current/55 underline-offset-4">${escapeHtml(sanitizeText(p.logistics.whatsappCta))}</a> | <a href="mailto:concierge@nightlifemilan.com" class="underline decoration-current/55 underline-offset-4">concierge@nightlifemilan.com</a>.</p>`;
 
   const rendered: TermeRendered = {
     title: sanitizeText(p.title),
@@ -500,24 +501,24 @@ function renderClubbingGuide(locale: LocaleCode): ClubbingRendered {
     ],
   ];
 
-  const partnerMatrixTable = `<div class="overflow-x-auto my-6"><table class="min-w-full border border-white/15 text-sm">
-<thead><tr class="bg-white/10 text-left"><th class="p-3">${escapeHtml(tl.thVenue)}</th><th class="p-3">${escapeHtml(tl.thDistrict)}</th><th class="p-3">${escapeHtml(tl.thMusic)}</th><th class="p-3">${escapeHtml(tl.thDressCode)}</th><th class="p-3">${escapeHtml(tl.thRates2027)}</th><th class="p-3">${escapeHtml(tl.thStatus)}</th></tr></thead>
+  const partnerMatrixTable = `<div class="taste-table-scroll"><table class="taste-data-table">
+<thead><tr><th>${escapeHtml(tl.thVenue)}</th><th>${escapeHtml(tl.thDistrict)}</th><th>${escapeHtml(tl.thMusic)}</th><th>${escapeHtml(tl.thDressCode)}</th><th>${escapeHtml(tl.thRates2027)}</th><th>${escapeHtml(tl.thStatus)}</th></tr></thead>
 <tbody>
 ${partnerRows
   .map(
     ([venueHtml, district, music, dress, rates, status]) =>
-      `<tr class="border-t border-white/10"><td class="p-3 font-semibold">${venueHtml}</td><td class="p-3">${escapeHtml(sanitizeText(district))}</td><td class="p-3">${escapeHtml(sanitizeText(music))}</td><td class="p-3">${escapeHtml(sanitizeText(dress))}</td><td class="p-3">${escapeHtml(sanitizeText(rates))}</td><td class="p-3 font-semibold">${escapeHtml(sanitizeText(status))}</td></tr>`,
+      `<tr><td class="font-semibold">${venueHtml}</td><td>${escapeHtml(sanitizeText(district))}</td><td>${escapeHtml(sanitizeText(music))}</td><td>${escapeHtml(sanitizeText(dress))}</td><td class="whitespace-nowrap">${escapeHtml(sanitizeText(rates))}</td><td class="font-semibold whitespace-nowrap">${escapeHtml(sanitizeText(status))}</td></tr>`,
   )
   .join('\n')}
 </tbody></table></div>`;
 
-  const tierTable = `<div class="overflow-x-auto my-6"><table class="min-w-full border border-white/15 text-sm">
-<thead><tr class="bg-white/10 text-left"><th class="p-3">${escapeHtml(tl.thFormula)}</th><th class="p-3">${escapeHtml(tl.thWeeklyRef)}</th><th class="p-3">${escapeHtml(tl.thNye2027)}</th><th class="p-3">${escapeHtml(tl.thRates2027)}</th></tr></thead>
+  const tierTable = `<div class="taste-table-scroll"><table class="taste-data-table">
+<thead><tr><th>${escapeHtml(tl.thFormula)}</th><th>${escapeHtml(tl.thWeeklyRef)}</th><th>${escapeHtml(tl.thNye2027)}</th><th>${escapeHtml(tl.thRates2027)}</th></tr></thead>
 <tbody>
 ${p.gattopardoCitylife.tierRows
   .map(
     ([club, style, weekly, nye]) =>
-      `<tr class="border-t border-white/10"><td class="p-3 font-semibold">${escapeHtml(sanitizeText(club))}</td><td class="p-3">${escapeHtml(sanitizeText(style))}</td><td class="p-3">${escapeHtml(sanitizeText(weekly))}</td><td class="p-3">${escapeHtml(sanitizeText(nye))}</td></tr>`,
+      `<tr><td class="font-semibold">${escapeHtml(sanitizeText(club))}</td><td>${escapeHtml(sanitizeText(style))}</td><td>${escapeHtml(sanitizeText(weekly))}</td><td>${escapeHtml(sanitizeText(nye))}</td></tr>`,
   )
   .join('\n')}
 </tbody></table></div>`;
@@ -528,13 +529,13 @@ ${p.gattopardoCitylife.tierRows
     principeNyeUrl,
   ];
 
-  const closedTable = `<div class="overflow-x-auto my-6"><table class="min-w-full border border-white/15 text-sm">
-<thead><tr class="bg-white/10 text-left"><th class="p-3">${escapeHtml(tl.thClosedVenue)}</th><th class="p-3">${escapeHtml(tl.thClosedStatus)}</th><th class="p-3">${escapeHtml(tl.thOpenAlt)}</th></tr></thead>
+  const closedTable = `<div class="taste-table-scroll"><table class="taste-data-table">
+<thead><tr><th>${escapeHtml(tl.thClosedVenue)}</th><th>${escapeHtml(tl.thClosedStatus)}</th><th>${escapeHtml(tl.thOpenAlt)}</th></tr></thead>
 <tbody>
 ${p.doorPolicyAndClosed.closedRows
   .map(
     ([venue, status, alts], idx) =>
-      `<tr class="border-t border-white/10"><td class="p-3 font-semibold">${linkTag(closedLinks[idx] || nyeHubUrl, venue)}</td><td class="p-3">${escapeHtml(sanitizeText(status))}</td><td class="p-3">${escapeHtml(sanitizeText(alts))}</td></tr>`,
+      `<tr><td class="font-semibold">${linkTag(closedLinks[idx] || nyeHubUrl, venue)}</td><td>${escapeHtml(sanitizeText(status))}</td><td>${escapeHtml(sanitizeText(alts))}</td></tr>`,
   )
   .join('\n')}
 </tbody></table></div>`;
@@ -606,7 +607,7 @@ ${p.conciergeAndTransit.steps.map((step) => `<li>${escapeHtml(sanitizeText(step)
 <p>${escapeHtml(sanitizeText(p.conciergeAndTransit.metroParkingDetail))}</p>
 <h3>${escapeHtml(sanitizeText(p.h3[17]))}</h3>
 <p>${escapeHtml(sanitizeText(p.conciergeAndTransit.termeCrossLink))}</p>
-<p>${linkTag(nyeHubUrl, p.conciergeAndTransit.nyeHubCta)} · ${linkTag(termeGuideUrl, p.conciergeAndTransit.termeGuideCta)} · <a href="https://wa.me/393519127047" class="underline decoration-amber-400/70 underline-offset-4">${escapeHtml(sanitizeText(p.conciergeAndTransit.whatsappCta))}</a> | <a href="mailto:concierge@nightlifemilan.com" class="underline decoration-amber-400/70 underline-offset-4">concierge@nightlifemilan.com</a>.</p>`;
+<p>${linkTag(nyeHubUrl, p.conciergeAndTransit.nyeHubCta)} · ${linkTag(termeGuideUrl, p.conciergeAndTransit.termeGuideCta)} · <a href="https://wa.me/393519127047" class="underline decoration-current/55 underline-offset-4">${escapeHtml(sanitizeText(p.conciergeAndTransit.whatsappCta))}</a> | <a href="mailto:concierge@nightlifemilan.com" class="underline decoration-current/55 underline-offset-4">concierge@nightlifemilan.com</a>.</p>`;
 
   const rendered: ClubbingRendered = {
     title: sanitizeText(p.title),
@@ -686,6 +687,90 @@ function buildClubbingGuide(): Guide {
     dateModified: '2026-11-20',
     image: '/images/seo-events/master/capodanno-justme-milano-torre-branca.webp',
   };
+}
+
+export const PILLAR_HEADLINE_35: Record<'g-117' | 'g-118', Record<LocaleCode, string>> = {
+  'g-117': {
+    en: 'Thermal Spa & NYE in Milan 2027',
+    it: 'Terme Capodanno Milano 2027',
+    es: 'Termas y Nochevieja Milán 2027',
+    fr: 'Thermes et Nouvel An Milan 2027',
+    de: 'Thermen & Silvester Mailand 2027',
+    pt: 'Termas e Réveillon Milão 2027',
+    nl: 'Thermen & Oudjaar Milaan 2027',
+    ru: 'Термы и Новый год Милан 2027',
+    tr: 'Termal ve Yılbaşı Milano 2027',
+    zh: '米兰温泉与2027跨年指南',
+    ar: 'المنتجعات ورأس السنة ميلانو 2027',
+    bg: 'Терми и Нова година Милано 2027',
+    hr: 'Terme i Nova godina Milano 2027',
+    cs: 'Lázně a Silvestr v Miláně 2027',
+    da: 'Kurbade og Nytår i Milano 2027',
+    et: 'Termid ja Aastavahetus Milano 2027',
+    fi: 'Kylpylät ja Uusivuosi Milano 2027',
+    el: 'Θέρμες & Πρωτοχρονιά Μιλάνο 2027',
+    hu: 'Termálfürdő és Szilveszter 2027',
+    ga: 'Spánna agus Oíche Chinn Bliana 2027',
+    lv: 'Termas un Jaungads Milānā 2027',
+    lt: 'Termos ir Naujieji Milane 2027',
+    mt: 'Terme u Ewwel tas-Sena Milan 2027',
+    pl: 'Termy i Sylwester Mediolan 2027',
+    ro: 'Terme și Revelion Milano 2027',
+    sk: 'Kúpele a Silvester v Miláne 2027',
+    sl: 'Terme in Silvestrovo Milano 2027',
+    sv: 'Kurbad och Nyår i Milano 2027',
+    no: 'Termalbad og Nyttår Milano 2027',
+    is: 'Böð og áramót í Mílanó 2027',
+    uk: 'Терми і Новий рік Мілан 2027',
+    sq: 'Terme dhe Viti i Ri Milano 2027',
+    sr: 'Terme i Nova godina Milano 2027',
+    bs: 'Terme i Nova godina Milano 2027',
+    mk: 'Терми и Нова година Милано 2027',
+  },
+  'g-118': {
+    en: 'Milan Partner Clubs & VIP 2027',
+    it: 'Discoteche Partner Milano 2027',
+    es: 'Clubs Asociados y VIP Milán 2027',
+    fr: 'Clubs Partenaires Milan 2027',
+    de: 'Partnerclubs & VIP Mailand 2027',
+    pt: 'Clubes Parceiros Milão VIP 2027',
+    nl: 'Partnerclubs & VIP Milaan 2027',
+    ru: 'Клубы-партнеры и VIP Милан 2027',
+    tr: 'Milano Partner Kulüpler VIP 2027',
+    zh: '米兰18家合作夜店VIP指南2027',
+    ar: 'أندية ميلانو الشريكة VIP 2027',
+    bg: 'Партньорски клубове Милано 2027',
+    hr: 'Partnerski klubovi Milano 2027',
+    cs: 'Partnerské kluby Milán VIP 2027',
+    da: 'Partnerklubber & VIP Milano 2027',
+    et: 'Milano partnerklubid ja VIP 2027',
+    fi: 'Kumppaniklubit ja VIP Milano 2027',
+    el: 'Συνεργαζόμενα Κλαμπ Μιλάνο 2027',
+    hu: 'Milánói partnerklubok VIP 2027',
+    ga: 'Clubanna Milano agus VIP 2027',
+    lv: 'Milānas partnerklubi un VIP 2027',
+    lt: 'Milano partnerių klubai VIP 2027',
+    mt: 'Klabbs Sħab u VIP Milan 2027',
+    pl: 'Kluby partnerskie Mediolan 2027',
+    ro: 'Cluburi Partenere Milano 2027',
+    sk: 'Partnerské kluby Miláno VIP 2027',
+    sl: 'Partnerski klubi Milano 2027',
+    sv: 'Partnerklubbar & VIP Milano 2027',
+    no: 'Partnerklubber & VIP Milano 2027',
+    is: 'Samstarfsklúbbar Mílanó 2027',
+    uk: 'Партнерські клуби Мілан 2027',
+    sq: 'Klubet Partnere dhe VIP 2027',
+    sr: 'Partnerski klubovi Milano 2027',
+    bs: 'Partnerski klubovi Milano 2027',
+    mk: 'Партнерски клубови Милано 2027',
+  },
+};
+
+export function getPillarDisplayHeadline(
+  guideId: 'g-117' | 'g-118',
+  locale: LocaleCode,
+): string {
+  return PILLAR_HEADLINE_35[guideId]?.[locale] || PILLAR_HEADLINE_35[guideId]?.en || '';
 }
 
 export const GSC_PILLAR_GUIDES_20261120: Guide[] = [

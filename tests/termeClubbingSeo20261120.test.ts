@@ -15,6 +15,8 @@ import { ALL_35_LOCALES, resolveExistingGuideId } from '../lib/i18n/localizedSlu
 import { REGGAETON_35_PACKS, REGGAETON_PARTNER_VENUES } from '../lib/i18n/reggaetonSeo35';
 import { buildClubHighCtrDescription, buildClubHighCtrTitle } from '../lib/clubSeoMeta35';
 import { VENUE_AUTHORITY_33 } from '../lib/venueAuthority33';
+import { PILLAR_HEADLINE_35, getPillarDisplayHeadline } from '../lib/guidesGscPillar20261120';
+import { buildTasteExplorerData } from '../lib/tasteExplorerData';
 
 const REPO_ROOT = path.resolve(__dirname, '..');
 
@@ -242,4 +244,37 @@ test('Zero duplicate -vip-guide-vip-guide slugs and legacy guide alias resolutio
     resolveExistingGuideId('varese-pavia-lodi-novara-to-milan-clubs-vip-guide-vip-guide'),
     'g-114',
   );
+});
+
+test('PILLAR_HEADLINE_35 & buildTasteExplorerData preserve SEO headlines, honest TBA, 18 partners, and zero forbidden copy across 35 locales', () => {
+  for (const gid of ['g-117', 'g-118'] as const) {
+    for (const loc of ALL_35_LOCALES) {
+      const h1 = getPillarDisplayHeadline(gid, loc);
+      assert.ok(PILLAR_HEADLINE_35[gid][loc], `Missing headline ${gid} for ${loc}`);
+      assert.ok(h1.length >= 10 && h1.length <= 42, `${gid} (${loc}) H1 length ${h1.length} out of bounds: ${h1}`);
+      assert.ok(!/[!\u2014]/.test(h1), `${gid} (${loc}) H1 contains forbidden punctuation: ${h1}`);
+      if (loc === 'ro') {
+        assert.ok(!/[şţŞŢ]/.test(h1), `${gid} (ro) H1 contains Romanian cedilla: ${h1}`);
+      }
+    }
+  }
+
+  for (const loc of ALL_35_LOCALES) {
+    const clubExp = buildTasteExplorerData('clubbing', loc, `https://nightlifemilan.com/${loc}/guides/test`);
+    assert.equal(clubExp.items.length, 18, `Expected 18 partner clubs for ${loc}`);
+    assert.ok(clubExp.filterOptions.length >= 4);
+    for (const item of clubExp.items) {
+      assert.ok(item.waHref.startsWith('https://wa.me/393519127047'), `Invalid WhatsApp link on ${item.id} (${loc})`);
+      assert.ok(!/237,60|\+20%|Stripe|Roberto Cavalli|Priorità #/i.test(`${item.name} ${item.rate} ${item.status} ${item.detailNote}`), `Forbidden text in club explorer ${item.id} (${loc})`);
+    }
+    const tom = clubExp.items.find((i) => i.id === 'tom');
+    assert.ok(tom && !/\b500\b|\b300\b/i.test(tom.rate), `TOM (${loc}) leaked fake rate`);
+
+    const termeExp = buildTasteExplorerData('terme', loc, `https://nightlifemilan.com/${loc}/guides/test-terme`);
+    assert.equal(termeExp.items.length, 9, `Expected 9 Terme/Lake entries for ${loc}`);
+    const sirmione = termeExp.items.find((i) => i.id === 'sirmione');
+    assert.ok(sirmione && sirmione.rate === '198 EUR', `Sirmione (${loc}) missing 198 EUR`);
+    const qc = termeExp.items.find((i) => i.id === 'qc-milano');
+    assert.ok(qc && !/\b198\b|\b300\b|\b500\b/i.test(qc.rate), `QC Terme (${loc}) leaked non-TBA price: ${qc?.rate}`);
+  }
 });

@@ -23,6 +23,7 @@ import { getAllCalendarEvents, isUpcomingRome } from '@/lib/calendarEvents';
 import { getEventDiscoveryItems } from '@/lib/eventDiscovery';
 import { VipQuoteCalculator, EntryFormulaMatrix, SanSiroMatchAfterpartyFinder } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
+import TasteMotionLayer from '@/components/TasteMotionLayer';
 import VenueEventsAutoCarousel from '@/components/VenueEventsAutoCarousel';
 import EventVenueMap from '@/components/EventVenueMap';
 import { getEventVenueCopy } from '@/lib/i18n/eventVenueCopy';
@@ -1385,7 +1386,8 @@ export default async function ClubPage({ params }: Props) {
     : null;
 
   return (
-    <main className="bg-[#050505] min-h-screen text-white font-sans selection:bg-champagne selection:text-white pb-20">
+    <main className="taste-pillar-root bg-[#050505] min-h-screen text-[#F6F1E7] font-sans pb-20">
+      <TasteMotionLayer />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       {faqLd && (
@@ -1396,121 +1398,126 @@ export default async function ClubPage({ params }: Props) {
       )}
       
       {/* Hero Section */}
-      <section className="relative w-full h-[70vh] min-h-[600px] flex items-end pb-16">
+      <section className="relative w-full min-h-[540px] lg:h-[68vh] lg:min-h-[560px] flex items-end pt-10 pb-14">
         <div data-hero-backdrop="true" data-no-lightbox="true" className="absolute inset-0 z-0">
           <Image
             src={image}
             alt={name}
             fill
+            unoptimized
             quality={92}
             sizes="100vw"
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/50 to-transparent" />
+          <div className="taste-hero-scrim absolute inset-0" />
         </div>
         
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link href={localePrefix(locale) || '/'} className="inline-flex items-center text-white/50 hover:text-champagne transition-colors mb-8 text-sm uppercase tracking-wider font-semibold">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            {t.back}
-          </Link>
+          <nav aria-label="Breadcrumb" className="mb-6">
+            <Link href={localePrefix(locale) || '/'} className="inline-flex items-center text-[#EAE3D5] hover:text-[#25D366] transition-colors text-sm font-semibold min-h-[44px]">
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              {t.back}
+            </Link>
+          </nav>
           
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8" data-taste-reveal>
             <div className="max-w-3xl">
-              <div className="flex items-center gap-3 mb-4">
+              <h1 className="font-display font-extrabold text-[#F6F1E7] mb-4 m-0">
+                {cityQualifiedH1}
+              </h1>
+              <p className="text-lg md:text-2xl text-[#EAE3D5] font-light mb-4">
+                {(editorial?.tagline || c?.subtitle || description.substring(0, 110) + '...').replace(/[\u2014–]/g, ' - ')}
+              </p>
+              <div className="flex flex-wrap items-center gap-2.5">
                 {venue.isManaged && (
-                  <span className="px-3 py-1 bg-champagne/20 border border-champagne/50 text-champagne text-xs uppercase tracking-widest rounded-sm flex items-center">
-                    <ShieldCheck className="w-3.5 h-3.5 mr-1" />
-                    OFFICIAL PARTNER
+                  <span className="px-3 py-1 bg-[#141311] text-[#25D366] text-sm font-semibold inline-flex items-center">
+                    <ShieldCheck className="w-4 h-4 mr-1.5" />
+                    Official Partner
                   </span>
                 )}
-                <span className="px-3 py-1 border border-white/20 text-white/70 text-xs uppercase tracking-widest rounded-full">
+                <span className="px-3 py-1 bg-[#141311] text-[#EAE3D5] text-sm font-medium">
                   {venue.category.replace(/_/g, ' ')}
                 </span>
               </div>
-              <h1 className="font-serif text-5xl md:text-7xl font-bold text-white tracking-tight mb-4 drop-shadow-lg">
-                {cityQualifiedH1}
-              </h1>
-              <p className="text-xl md:text-2xl text-white/70 font-light tracking-wide">
-                {(editorial?.tagline || c?.subtitle || description.substring(0, 110) + '...').replace(/[\u2014–]/g, ' - ')}
-              </p>
             </div>
             
-            <div className="shrink-0">
-              <a href={waLink} target="_blank" rel="noopener noreferrer" className="inline-flex flex-col items-center justify-center px-8 py-4 bg-champagne text-zinc-950 font-bold uppercase tracking-wider text-sm hover:bg-white transition-colors rounded-sm">
-                <div className="flex items-center">
-                  <MessageCircle className="w-5 h-5 mr-2" />
-                  {t.vipAccess}
-                </div>
-                {isWhatsAppOnlyVenue && (
-                  <span className="text-[10px] mt-1 opacity-80 normal-case font-medium">
-                    {tr(locale, 'Available via WhatsApp only', 'Disponibile solo via WhatsApp')}
-                  </span>
-                )}
+            <div className="shrink-0 flex flex-col items-start md:items-end gap-1.5">
+              <a href={waLink} target="_blank" rel="noopener noreferrer" className="taste-btn-primary">
+                <MessageCircle className="w-5 h-5" />
+                <span>{t.vipAccess}</span>
               </a>
+              {isWhatsAppOnlyVenue && (
+                <span className="text-sm text-[#C2B9AA]">
+                  {tr(locale, 'Available via WhatsApp only', 'Disponibile solo via WhatsApp')}
+                </span>
+              )}
             </div>
           </div>
         </div>
       </section>
 
-      {/* QuickInfoBar (4 Info Blocks) */}
-      <section id="dress-code-hours" className="border-y border-white/10 bg-[#050505]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 divide-x divide-white/10">
-            <div className="flex flex-col px-4 first:pl-0">
-              <MapPin className="w-6 h-6 text-champagne mb-2" />
-              <span className="text-xs text-white/40 uppercase tracking-wider mb-1">{t.labels.address}</span>
-              <span className="text-sm font-medium text-white/80">{venue.address.streetAddress}</span>
+      {/* QuickInfoBar (Architectural Horizontal Spec Strip — zero icon-cards) */}
+      <section id="dress-code-hours" className="bg-[#0B0A09]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7">
+          <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 m-0" data-taste-stagger>
+            <div className="flex flex-col min-w-0">
+              <dt className="text-sm font-semibold text-[#C2B9AA] mb-1.5">
+                {t.labels.address}
+              </dt>
+              <dd className="text-[15px] font-medium text-[#F6F1E7] m-0">{venue.address.streetAddress}</dd>
               {venue.coordinates?.latitude && (
                 <a
                   href={`https://www.google.com/maps/search/?api=1&query=${venue.coordinates.latitude},${venue.coordinates.longitude}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-1 text-xs text-champagne/70 hover:text-champagne underline underline-offset-2 transition-colors"
+                  className="mt-1.5 text-sm text-[#25D366] hover:underline w-fit"
                 >
                   {tr(locale, 'Open in Google Maps ↗', 'Apri in Google Maps ↗')}
                 </a>
               )}
             </div>
-            <div className="flex flex-col px-4">
-              <Clock className="w-6 h-6 text-champagne mb-2" />
-              <span className="text-xs text-white/40 uppercase tracking-wider mb-1">{t.labels.targetAge}</span>
-              <span className="text-sm font-medium text-white/80">{c?.target || venue.ageRange || "18+"}</span>
+            <div className="flex flex-col min-w-0">
+              <dt className="text-sm font-semibold text-[#C2B9AA] mb-1.5">
+                {t.labels.targetAge}
+              </dt>
+              <dd className="text-[15px] font-medium text-[#F6F1E7] m-0">{c?.target || venue.ageRange || "18+"}</dd>
             </div>
-            <div className="flex flex-col px-4">
-              <Shirt className="w-6 h-6 text-champagne mb-2" />
-              <span className="text-xs text-white/40 uppercase tracking-wider mb-1">{t.labels.dressCode}</span>
-              <span className="text-sm font-medium text-white/80">{dressCode}</span>
+            <div className="flex flex-col min-w-0">
+              <dt className="text-sm font-semibold text-[#C2B9AA] mb-1.5">
+                {t.labels.dressCode}
+              </dt>
+              <dd className="text-[15px] font-medium text-[#F6F1E7] m-0">{dressCode}</dd>
             </div>
-            <div className="flex flex-col px-4">
-              <Music className="w-6 h-6 text-champagne mb-2" />
-              <span className="text-xs text-white/40 uppercase tracking-wider mb-1">{t.labels.music}</span>
-              <span className="text-sm font-medium text-white/80">{editorial?.musicStyle || c?.music || "House, Commercial & Urban"}</span>
+            <div className="flex flex-col min-w-0">
+              <dt className="text-sm font-semibold text-[#C2B9AA] mb-1.5">
+                {t.labels.music}
+              </dt>
+              <dd className="text-[15px] font-medium text-[#F6F1E7] m-0">{editorial?.musicStyle || c?.music || "House, Commercial & Urban"}</dd>
             </div>
-          </div>
+          </dl>
         </div>
       </section>
 
-      {/* Quick-Jump SEO Anchor Navigation (Sitelinks Trigger) */}
+      {/* Quick-Jump SEO Anchor Navigation */}
       <nav
         aria-label={tr(locale, 'Venue Sections', 'Sezioni Locale')}
-        className="border-b border-white/10 bg-[#0A0A0C]"
+        className="bg-[#F6F1E7] text-[#050505]"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center gap-2 sm:gap-3 text-xs font-mono uppercase tracking-wider">
-          <a href="#prices-tables" className="px-3 py-1.5 rounded-full border border-champagne/35 text-champagne hover:bg-champagne hover:text-black transition-colors">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap items-center gap-2.5 text-sm font-semibold">
+          <a href="#prices-tables" className="px-4 py-2 bg-[#050505] text-[#F6F1E7] hover:bg-[#1F1C18] transition-colors">
             {tr(locale, 'VIP Tables & Prices', 'Tavoli VIP & Prezzi')}
           </a>
-          <a href="#dress-code-hours" className="px-3 py-1.5 rounded-full border border-white/15 text-white/80 hover:border-champagne hover:text-champagne transition-colors">
+          <a href="#dress-code-hours" className="px-4 py-2 bg-[#EAE3D5] text-[#050505] hover:bg-[#050505] hover:text-[#F6F1E7] transition-colors">
             {tr(locale, 'Dress Code & Info', 'Dress Code & Info')}
           </a>
-          <a href="#upcoming-events" className="px-3 py-1.5 rounded-full border border-white/15 text-white/80 hover:border-champagne hover:text-champagne transition-colors">
+          <a href="#upcoming-events" className="px-4 py-2 bg-[#EAE3D5] text-[#050505] hover:bg-[#050505] hover:text-[#F6F1E7] transition-colors">
             {tr(locale, 'Events Calendar', 'Calendario Eventi')}
           </a>
-          <a href="#map-directions" className="px-3 py-1.5 rounded-full border border-white/15 text-white/80 hover:border-champagne hover:text-champagne transition-colors">
+          <a href="#map-directions" className="px-4 py-2 bg-[#EAE3D5] text-[#050505] hover:bg-[#050505] hover:text-[#F6F1E7] transition-colors">
             {tr(locale, 'Map & Metro', 'Mappa & Metro')}
           </a>
-          <a href="#faq" className="px-3 py-1.5 rounded-full border border-white/15 text-white/80 hover:border-champagne hover:text-champagne transition-colors">
+          <a href="#faq" className="px-4 py-2 bg-[#EAE3D5] text-[#050505] hover:bg-[#050505] hover:text-[#F6F1E7] transition-colors">
             {tr(locale, 'FAQ', 'Domande Frequenti')}
           </a>
         </div>
@@ -1519,33 +1526,33 @@ export default async function ClubPage({ params }: Props) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 grid grid-cols-1 lg:grid-cols-3 gap-16">
         
         {/* Main Content Column */}
-        <div className="lg:col-span-2 space-y-16">
+        <div className="lg:col-span-2 min-w-0 space-y-16">
           
           {/* Descrizione & Tags */}
-          <section>
+          <section data-taste-reveal>
             {/* AI Trafiletto */}
-            <div className="mb-6 p-5 rounded-xl border border-champagne/20 bg-champagne/[0.04]">
-              <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">Quick Answer</p>
-              <p className="font-sans text-white/70 text-sm leading-relaxed">
+            <div className="mb-6 p-5 bg-[#0B0A09]">
+              <p className="font-sans text-[#F6F1E7] text-sm font-semibold mb-2">Quick Answer</p>
+              <p className="font-sans text-[#EAE3D5] text-base leading-relaxed">
                 {locale === 'it'
                   ? `${name} si trova in ${venue.address.streetAddress}, Milano. ${editorial?.tagline ? editorial.tagline + '. ' : ''}${description.substring(0, 180)}... Prenotazione Tavoli VIP e Liste su WhatsApp +39 351 912 7047 o concierge@nightlifemilan.com.`
                   : `${name} is located at ${venue.address.streetAddress}, Milan. ${editorial?.tagline ? editorial.tagline + '. ' : ''}${description.substring(0, 180)}... Book VIP Tables & Guestlists via WhatsApp +39 351 912 7047 or concierge@nightlifemilan.com.`}
               </p>
             </div>
 
-            <p className="text-lg text-white/70 leading-relaxed font-light mb-6">
+            <p className="text-lg text-[#EAE3D5] leading-relaxed font-light mb-6">
               {description}
             </p>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-2.5">
               {servicesTags.map((tag: string, idx: number) => (
-                <span key={idx} className="px-3 py-1 bg-transparent border border-champagne/30 text-champagne text-xs uppercase tracking-widest rounded-full">
+                <span key={idx} className="px-3.5 py-1.5 bg-[#141311] text-[#EAE3D5] text-sm font-medium">
                   {tag}
                 </span>
               ))}
             </div>
           </section>
 
-          {/* Editorial Deep-Dive Dossier (for v-justme, v-aria, v-gattopardo, v-tocqueville, v-alcatraz, v-fabrique, v-amnesia) */}
+          {/* Editorial Deep-Dive Dossier — NYE 2027 Warm Ivory Architectural Feature */}
           {openCapEvent && (() => {
             const capTitle = getCapodannoLocalizedEventTitle(openCapEvent, locCode);
             const capSummary = getCapodannoLocalizedEventContent(openCapEvent, locCode).priceSummary;
@@ -1555,28 +1562,28 @@ export default async function ClubPage({ params }: Props) {
                 ? nyeBannerCopy.partnerBadge
                 : nyeBannerCopy.eventBadge;
             return (
-              <section className="p-6 rounded-2xl border border-champagne/35 bg-champagne/[0.06]">
-                <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-champagne mb-2">
-                  {badgeText}
-                </p>
-                <h2 className="text-xl md:text-2xl font-serif font-bold text-white mb-2">
+              <section className="p-6 sm:p-8 bg-[#F6F1E7] text-[#050505]" data-taste-reveal>
+                <h2 className="text-xl md:text-2xl font-display font-bold text-[#050505] mb-2">
                   {capTitle}
                 </h2>
-                <p className="text-sm text-white/75 leading-relaxed mb-5">
+                <p className="text-sm font-semibold text-[#3B362E] mb-3">
+                  {badgeText}
+                </p>
+                <p className="text-[15px] text-[#1F1C18] leading-relaxed mb-6">
                   {capSummary}
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <Link
                     href={capHref}
                     locale={locCode}
-                    className="inline-flex items-center px-5 py-2.5 bg-champagne text-zinc-950 font-mono text-xs font-bold uppercase tracking-wider rounded-sm hover:bg-white transition-colors"
+                    className="taste-btn-dark text-sm"
                   >
                     {nyeBannerCopy.ctaEvent} →
                   </Link>
                   <Link
                     href={guide118Href}
                     locale={locCode}
-                    className="inline-flex items-center px-4 py-2.5 border border-white/25 text-white/85 font-mono text-xs uppercase tracking-wider rounded-sm hover:border-champagne hover:text-champagne transition-colors"
+                    className="taste-btn-outline-dark text-sm"
                   >
                     {nyeBannerCopy.ctaGuide} →
                   </Link>
@@ -1584,7 +1591,7 @@ export default async function ClubPage({ params }: Props) {
                     href={waLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center px-4 py-2.5 bg-[#25D366] text-zinc-950 font-mono text-xs font-bold uppercase tracking-wider rounded-sm hover:bg-[#2EE472] transition-colors"
+                    className="taste-btn-dark text-sm"
                   >
                     {nyeBannerCopy.ctaWa}
                   </a>
@@ -1594,53 +1601,46 @@ export default async function ClubPage({ params }: Props) {
           })()}
 
           {editorial && (
-            <section className="space-y-8 p-7 rounded-2xl border border-champagne/25 bg-white/[0.02]">
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <Sparkles className="w-4 h-4 text-champagne" />
-                  <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-champagne">
-                    {tr(locale, '2026/2027 Verified Club Dossier', 'Dossier Ufficiale Club 2026/2027')}
-                  </span>
-                </div>
-                <h2 className="text-2xl md:text-3xl font-serif font-bold text-white">
+            <section className="space-y-8 p-6 sm:p-8 bg-[#0B0A09]">
+              <div data-taste-reveal>
+                <h2 className="text-2xl md:text-3xl font-display font-bold text-[#F6F1E7]">
                   {locale === 'it'
                     ? `Perché Scegliere ${name}: Punti di Forza, Musica e Logistica`
                     : `Why Choose ${name}: Highlights, Music & Logistics`}
                 </h2>
+                <p className="text-sm font-semibold text-[#C2B9AA] mt-2">
+                  {tr(locale, '2026/2027 Verified Club Dossier', 'Dossier Ufficiale Club 2026/2027')}
+                </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 list-disc pl-5 m-0" data-taste-stagger>
                 {editorial.highlights.map((item, i) => (
-                  <div key={i} className="flex items-start gap-3 p-4 rounded-xl bg-white/[0.03] border border-white/10">
-                    <Check className="w-5 h-5 text-champagne shrink-0 mt-0.5" />
-                    <span className="text-sm text-white/85 leading-relaxed">{item}</span>
-                  </div>
+                  <li key={i} className="text-[15px] text-[#F6F1E7] leading-relaxed">
+                    {item}
+                  </li>
                 ))}
-              </div>
+              </ul>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-                <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-                  <div className="flex items-center gap-2 text-champagne text-xs font-mono uppercase tracking-wider mb-1">
-                    <Users className="w-4 h-4" />
-                    <span>{tr(locale, 'Crowd Profile & Target', 'Target & Pubblico')}</span>
-                  </div>
-                  <p className="text-sm text-white/75">{editorial.crowdProfile}</p>
+              <dl className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 m-0" data-taste-stagger>
+                <div className="min-w-0">
+                  <dt className="text-[#C2B9AA] text-sm font-semibold mb-1.5">
+                    {tr(locale, 'Crowd Profile & Target', 'Target & Pubblico')}
+                  </dt>
+                  <dd className="text-[15px] text-[#EAE3D5] leading-relaxed m-0">{editorial.crowdProfile}</dd>
                 </div>
-                <div className="p-4 rounded-xl bg-black/40 border border-white/10">
-                  <div className="flex items-center gap-2 text-champagne text-xs font-mono uppercase tracking-wider mb-1">
-                    <Calendar className="w-4 h-4" />
-                    <span>{tr(locale, 'Best Nights to Go', 'Serate Migliori')}</span>
-                  </div>
-                  <p className="text-sm text-white/75">{editorial.bestNights}</p>
+                <div className="min-w-0">
+                  <dt className="text-[#C2B9AA] text-sm font-semibold mb-1.5">
+                    {tr(locale, 'Best Nights to Go', 'Serate Migliori')}
+                  </dt>
+                  <dd className="text-[15px] text-[#EAE3D5] leading-relaxed m-0">{editorial.bestNights}</dd>
                 </div>
-                <div className="p-4 rounded-xl bg-black/40 border border-white/10 md:col-span-2">
-                  <div className="flex items-center gap-2 text-champagne text-xs font-mono uppercase tracking-wider mb-1">
-                    <Train className="w-4 h-4" />
-                    <span>{tr(locale, 'Nearest Metro & Fast Arrival', 'Metro Più Vicina & Come Arrivare')}</span>
-                  </div>
-                  <p className="text-sm text-white/75">{editorial.nearestMetro}</p>
+                <div className="min-w-0">
+                  <dt className="text-[#C2B9AA] text-sm font-semibold mb-1.5">
+                    {tr(locale, 'Nearest Metro & Fast Arrival', 'Metro Più Vicina & Come Arrivare')}
+                  </dt>
+                  <dd className="text-[15px] text-[#EAE3D5] leading-relaxed m-0">{editorial.nearestMetro}</dd>
                 </div>
-              </div>
+              </dl>
 
               {/* Editorial Pricing Table */}
               <div id="prices-tables" className="scroll-mt-24">
@@ -1704,12 +1704,12 @@ export default async function ClubPage({ params }: Props) {
 
           {/* Upcoming Events at this venue */}
           {futureVenueEvents.length > 0 && (
-            <section>
-              <h2 className="text-2xl font-serif font-bold text-white mb-6 flex items-center gap-3">
+            <section className="min-w-0">
+              <h2 className="text-2xl font-serif font-bold text-white mb-6 flex items-center gap-3" data-taste-reveal>
                 <Calendar className="w-6 h-6 text-champagne" />
                 {tr(locale, 'Upcoming Events at', 'Prossimi Eventi da')} {name}
               </h2>
-              <div className="space-y-3">
+              <div className="space-y-3" data-taste-stagger>
                 {futureVenueEvents.map((ev) => {
                   const evTitle = getLocalizedText(ev.localizedContent.title, locale).replace(/[\u2014–]/g, ' - ');
                   const evSlug = getLocalizedText(ev.localizedContent.slug, locale);
@@ -1723,13 +1723,13 @@ export default async function ClubPage({ params }: Props) {
                     <Link
                       key={ev.id}
                       href={`${lp}/events/${evSlug}`}
-                      className="flex items-center justify-between gap-4 py-3 px-4 rounded-lg bg-white/[0.03] border border-white/10 hover:border-champagne/40 transition-colors group"
+                      className="flex items-center justify-between gap-3 py-3 px-4 bg-[#0B0A09] hover:bg-[#141311] transition-colors group min-w-0 overflow-hidden"
                     >
-                      <div className="flex items-center gap-4 min-w-0">
-                        <span className="text-champagne/70 text-xs font-mono shrink-0">{dateStr}</span>
-                        <span className="text-white/90 text-sm font-medium truncate group-hover:text-champagne transition-colors">{evTitle}</span>
+                      <div className="flex items-center gap-3 min-w-0 flex-1 overflow-hidden">
+                        <span className="text-[#EAE3D5] text-[13px] tabular-nums shrink-0">{dateStr}</span>
+                        <span className="text-[#F6F1E7] text-sm font-medium truncate group-hover:text-[#25D366] transition-colors min-w-0 block">{evTitle}</span>
                       </div>
-                      <span className="text-white/40 text-xs font-mono shrink-0">{timeStr}</span>
+                      <span className="text-[#C2B9AA] text-[13px] tabular-nums shrink-0">{timeStr}</span>
                     </Link>
                   );
                 })}
@@ -1739,12 +1739,12 @@ export default async function ClubPage({ params }: Props) {
 
           {/* Past Events at this venue */}
           {pastVenueEvents.length > 0 && (
-            <section>
-              <h2 className="text-2xl font-serif font-bold text-white/60 mb-6 flex items-center gap-3">
+            <section className="min-w-0">
+              <h2 className="text-2xl font-serif font-bold text-white/60 mb-6 flex items-center gap-3" data-taste-reveal>
                 <Clock className="w-6 h-6 text-white/40" />
                 {tr(locale, 'Past Events at', 'Eventi Passati da')} {name}
               </h2>
-              <div className="space-y-2">
+              <div className="space-y-2" data-taste-stagger>
                 {pastVenueEvents.slice(0, 12).map((ev) => {
                   const evTitle = getLocalizedText(ev.localizedContent.title, locale).replace(/[\u2014–]/g, ' - ');
                   const evSlug = getLocalizedText(ev.localizedContent.slug, locale);
@@ -1755,10 +1755,10 @@ export default async function ClubPage({ params }: Props) {
                     <Link
                       key={ev.id}
                       href={`${lp}/events/${evSlug}`}
-                      className="flex items-center justify-between gap-4 py-2 px-4 rounded-lg bg-transparent border border-white/5 hover:border-white/20 transition-colors group"
+                      className="flex items-center justify-between gap-3 py-2.5 px-4 bg-[#0B0A09] hover:bg-[#141311] transition-colors group min-w-0 overflow-hidden"
                     >
-                      <span className="text-white/50 text-sm truncate group-hover:text-white/80 transition-colors">{evTitle}</span>
-                      <span className="text-white/30 text-xs font-mono shrink-0">{dateStr}</span>
+                      <span className="text-[#C2B9AA] text-sm truncate group-hover:text-[#F6F1E7] transition-colors min-w-0 flex-1 block">{evTitle}</span>
+                      <span className="text-[#C2B9AA] text-[13px] tabular-nums shrink-0">{dateStr}</span>
                     </Link>
                   );
                 })}
@@ -1766,33 +1766,26 @@ export default async function ClubPage({ params }: Props) {
             </section>
           )}
 
-          {/* TheTimeline (3 Acts) */}
+          {/* TheTimeline (3 Acts — Unboxed Couture Noir Time-Ledger) */}
           {c?.acts && (
-            <section>
-              <h2 className="text-3xl font-serif font-bold text-white mb-8 flex items-center gap-3">
-                <Clock className="w-8 h-8 text-champagne" />
+            <section className="min-w-0">
+              <h2 className="text-3xl font-display font-bold text-[#F6F1E7] mb-8" data-taste-reveal>
                 {t.timelineTitle}
               </h2>
-              <div className="space-y-6 relative before:absolute before:inset-0 before:ml-6 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-champagne before:via-zinc-800 before:to-transparent">
+              <div className="divide-y divide-[#F6F1E7]/12" data-taste-stagger>
                 
                 {c.acts.map((act: any, idx: number) => {
-                  const icons = [Wine, Utensils, Music];
-                  const Icon = icons[idx % icons.length];
-                  const isFirst = idx === 0;
                   return (
-                    <div key={idx} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                      <div className={`flex items-center justify-center w-12 h-12 rounded-full border-4 border-[#050505] ${isFirst ? 'bg-champagne text-black' : 'bg-white/[0.08] text-champagne'} shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10`}>
-                        <Icon className="w-5 h-5" />
+                    <div key={idx} className="grid grid-cols-1 md:grid-cols-12 gap-4 items-baseline py-5">
+                      <div className="md:col-span-3">
+                        <span className="text-sm font-semibold text-[#25D366] tabular-nums">{act.time}</span>
                       </div>
-                      <div className="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] p-6 rounded-lg bg-white/[0.03] border border-white/10 hover:border-champagne/50 transition-colors">
-                        <div className="flex items-center justify-between mb-2">
-                          <h3 className="font-bold text-champagne text-xl">{act.title}</h3>
-                          <span className="text-xs font-mono text-white/40">{act.time}</span>
-                        </div>
-                        <p className="text-white/70 mb-4">{act.description}</p>
+                      <div className="md:col-span-9 min-w-0">
+                        <h3 className="font-display font-bold text-[#F6F1E7] text-xl mb-1.5">{act.title}</h3>
+                        <p className="text-[#EAE3D5] mb-3 text-[15px] leading-relaxed">{act.description}</p>
                         <div className="flex gap-2 flex-wrap">
                           {act.price.split(' | ').map((p: string, i: number) => (
-                            <span key={i} className="inline-block px-3 py-1 bg-white/[0.08] rounded text-sm text-white/80">{p}</span>
+                            <span key={i} className="inline-block px-3 py-1 bg-[#141311] text-sm text-[#F6F1E7]">{p}</span>
                           ))}
                         </div>
                       </div>
@@ -1803,12 +1796,12 @@ export default async function ClubPage({ params }: Props) {
               </div>
               
               <div className="mt-8 text-center">
-                <a href={waLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center px-6 py-3 border border-champagne text-champagne hover:bg-champagne hover:text-black transition-colors rounded-sm uppercase tracking-wider text-sm font-bold">
+                <a href={waLink} target="_blank" rel="noopener noreferrer" className="taste-btn-primary text-sm">
                   {t.bookWa}
                 </a>
                 {isWhatsAppOnlyVenue && (
                   <div className="text-center mt-2">
-                    <span className="text-[10px] opacity-80 normal-case font-medium text-white/50">
+                    <span className="text-sm text-[#C2B9AA]">
                       {tr(locale, 'Available via WhatsApp only', 'Disponibile solo via WhatsApp')}
                     </span>
                   </div>
@@ -1818,13 +1811,13 @@ export default async function ClubPage({ params }: Props) {
           )}
 
           {/* Venue Gallery & More Info */}
-          <section>
-            <h2 className="text-2xl font-serif font-bold text-white mb-6">
+          <section className="min-w-0">
+            <h2 className="text-2xl font-serif font-bold text-white mb-6" data-taste-reveal>
               {locale === 'it' ? `${name}: Foto & Atmosfera` : `${name}: Photos & Atmosphere`}
             </h2>
-            <div data-venue-gallery="true" className="grid grid-cols-2 gap-3 mb-8">
+            <div data-venue-gallery="true" className="grid grid-cols-2 gap-3 mb-8" data-taste-stagger>
               {gallery.map((src, i) => (
-                <div key={i} className="relative h-40 rounded-xl overflow-hidden border border-white/10">
+                <div key={i} className="relative h-40 overflow-hidden bg-[#0B0A09]">
                   <Image
                     src={src}
                     alt={[
@@ -1837,6 +1830,7 @@ export default async function ClubPage({ params }: Props) {
                       `${name} Milan - terrace and outdoor space`,
                     ][i] ?? `${name} Milan - venue photo ${i + 1}`}
                     fill
+                    unoptimized
                     quality={92}
                     className="object-cover hover:scale-105 transition-transform duration-700"
                     sizes="(max-width: 768px) 50vw, 40vw"
@@ -1844,44 +1838,44 @@ export default async function ClubPage({ params }: Props) {
                 </div>
               ))}
             </div>
-            <div className="p-5 rounded-xl border border-white/10 bg-white/[0.03]">
-              <h3 className="font-serif text-lg text-white mb-3">
+            <div className="p-5 bg-[#0B0A09]" data-taste-reveal>
+              <h3 className="font-serif text-lg text-[#F6F1E7] mb-4">
                 {tr(locale, 'Practical Information', 'Informazioni Pratiche')}
               </h3>
-              <div className="grid grid-cols-2 gap-4 text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 text-[15px]">
                 <div>
-                  <p className="text-white/40 uppercase tracking-widest text-[10px] mb-1">
+                  <p className="text-[#C2B9AA] text-sm font-semibold mb-1">
                     {tr(locale, 'Address', 'Indirizzo')}
                   </p>
-                  <p className="text-white/70">{venue.address.streetAddress}, Milan</p>
+                  <p className="text-[#EAE3D5]">{venue.address.streetAddress}, Milan</p>
                   {venue.coordinates?.latitude && (
                     <a
                       href={`https://www.google.com/maps/search/?api=1&query=${venue.coordinates.latitude},${venue.coordinates.longitude}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs text-champagne/70 hover:text-champagne underline underline-offset-2 transition-colors mt-1 inline-block"
+                      className="text-sm text-[#25D366] hover:underline mt-1 inline-block"
                     >
                       {tr(locale, 'Open in Google Maps ↗', 'Apri in Google Maps ↗')}
                     </a>
                   )}
                 </div>
                 <div>
-                  <p className="text-white/40 uppercase tracking-widest text-[10px] mb-1">
+                  <p className="text-[#C2B9AA] text-sm font-semibold mb-1">
                     {tr(locale, 'Dress Code', 'Dress Code')}
                   </p>
-                  <p className="text-white/70">{dressCode}</p>
+                  <p className="text-[#EAE3D5]">{dressCode}</p>
                 </div>
                 <div>
-                  <p className="text-white/40 uppercase tracking-widest text-[10px] mb-1">
+                  <p className="text-[#C2B9AA] text-sm font-semibold mb-1">
                     {tr(locale, 'Booking Desk', 'Prenotazioni Ufficiali')}
                   </p>
-                  <p className="text-white/70">WhatsApp +39 351 912 7047 · concierge@nightlifemilan.com</p>
+                  <p className="text-[#EAE3D5]">WhatsApp +39 351 912 7047 · concierge@nightlifemilan.com</p>
                 </div>
                 <div>
-                  <p className="text-white/40 uppercase tracking-widest text-[10px] mb-1">
+                  <p className="text-[#C2B9AA] text-sm font-semibold mb-1">
                     {tr(locale, 'Concierge Service', 'Servizio Concierge')}
                   </p>
-                  <p className="text-white/70">{tr(locale, 'Free Official Assistance', 'Assistenza Ufficiale Gratuita')}</p>
+                  <p className="text-[#EAE3D5]">{tr(locale, 'Free Official Assistance', 'Assistenza Ufficiale Gratuita')}</p>
                 </div>
               </div>
             </div>
@@ -1933,54 +1927,52 @@ export default async function ClubPage({ params }: Props) {
         </div>
 
         {/* Sidebar Column */}
-        <div className="space-y-8">
+        <div className="min-w-0 space-y-8">
           <div className="sticky top-32 space-y-8">
             
             {/* Pricing Table */}
             {c?.pricing ? (
-              <div className="bg-white/[0.03] border border-white/10 rounded-lg overflow-hidden shadow-2xl">
-                <div className="bg-white/[0.05] p-6 border-b border-white/10">
-                  <h3 className="text-xl font-serif font-bold text-white flex items-center gap-2">
-                    <CreditCard className="w-5 h-5 text-champagne" />
+              <div className="bg-[#0B0A09] overflow-hidden" data-taste-reveal>
+                <div className="bg-[#141311] p-6">
+                  <h3 className="text-xl font-display font-bold text-[#F6F1E7] flex items-center gap-2">
+                    <CreditCard className="w-5 h-5 text-[#25D366]" />
                     {t.pricingTitle}
                   </h3>
                 </div>
-                <div className="p-6 space-y-6">
+                <div className="p-6 space-y-5">
                   <div>
                     <div className="flex justify-between items-end mb-1">
-                      <span className="text-white/70 font-medium">{c.pricing.dancefloor.title}</span>
-                      <span className="text-xl font-bold text-white">{c.pricing.dancefloor.price}</span>
+                      <span className="text-[#EAE3D5] font-medium">{c.pricing.dancefloor.title}</span>
+                      <span className="text-xl font-bold text-[#F6F1E7] tabular-nums">{c.pricing.dancefloor.price}</span>
                     </div>
-                    <p className="text-xs text-white/40">{c.pricing.dancefloor.desc}</p>
+                    <p className="text-sm text-[#C2B9AA]">{c.pricing.dancefloor.desc}</p>
                   </div>
-                  <div className="w-full h-px bg-white/10"></div>
-                  <div>
+                  <div className="bg-[#141311] p-4">
                     <div className="flex justify-between items-end mb-1">
-                      <span className="text-champagne font-medium flex items-center gap-2">
+                      <span className="text-[#25D366] font-semibold">
                         {c.pricing.priveGold.title}
                       </span>
-                      <span className="text-xl font-bold text-white">{c.pricing.priveGold.price}</span>
+                      <span className="text-xl font-bold text-[#F6F1E7] tabular-nums">{c.pricing.priveGold.price}</span>
                     </div>
-                    <p className="text-xs text-white/40">{c.pricing.priveGold.desc}</p>
+                    <p className="text-sm text-[#C2B9AA]">{c.pricing.priveGold.desc}</p>
                   </div>
-                  <div className="w-full h-px bg-white/10"></div>
                   <div>
                     <div className="flex justify-between items-end mb-1">
-                      <span className="text-white font-bold flex items-center gap-2">
-                        <Star className="w-4 h-4 text-champagne fill-champagne" />
+                      <span className="text-[#F6F1E7] font-bold flex items-center gap-2">
+                        <Star className="w-4 h-4 text-[#25D366]" />
                         {c.pricing.priveDiamond.title}
                       </span>
-                      <span className="text-xl font-bold text-champagne">{c.pricing.priveDiamond.price}</span>
+                      <span className="text-xl font-bold text-[#25D366] tabular-nums">{c.pricing.priveDiamond.price}</span>
                     </div>
-                    <p className="text-xs text-white/40">{c.pricing.priveDiamond.desc}</p>
+                    <p className="text-sm text-[#C2B9AA]">{c.pricing.priveDiamond.desc}</p>
                   </div>
                   
-                  <a href={waLink} target="_blank" rel="noopener noreferrer" className="mt-6 w-full flex items-center justify-center px-4 py-4 bg-champagne text-zinc-950 font-bold uppercase tracking-wider text-sm hover:bg-white transition-colors rounded-sm">
+                  <a href={waLink} target="_blank" rel="noopener noreferrer" className="taste-btn-primary mt-4 w-full">
                     {t.bookWa}
                   </a>
                   {isWhatsAppOnlyVenue && (
                     <div className="text-center mt-2">
-                      <span className="text-[10px] opacity-80 normal-case font-medium text-white/50">
+                      <span className="text-sm text-[#C2B9AA]">
                         {tr(locale, 'Available via WhatsApp only', 'Disponibile solo via WhatsApp')}
                       </span>
                     </div>
@@ -1988,10 +1980,10 @@ export default async function ClubPage({ params }: Props) {
                 </div>
               </div>
             ) : editorial?.pricingTable ? (
-              <div className="bg-white/[0.03] border border-white/10 rounded-lg overflow-hidden shadow-2xl">
-                <div className="bg-white/[0.05] p-6 border-b border-white/10">
-                  <h3 className="text-xl font-serif font-bold text-white flex items-center gap-2">
-                    <CreditCard className="w-5 h-5 text-champagne" />
+              <div className="bg-[#0B0A09] overflow-hidden" data-taste-reveal>
+                <div className="bg-[#141311] p-6">
+                  <h3 className="text-xl font-display font-bold text-[#F6F1E7] flex items-center gap-2">
+                    <CreditCard className="w-5 h-5 text-[#25D366]" />
                     {t.pricingTitle}
                   </h3>
                 </div>
@@ -1999,13 +1991,13 @@ export default async function ClubPage({ params }: Props) {
                   {editorial.pricingTable.map((tier, idx) => (
                     <div key={idx} className="pb-4 border-b border-white/10 last:border-0 last:pb-0">
                       <div className="flex justify-between items-start gap-2 mb-1">
-                        <span className="text-white font-medium text-sm">{tier.zone}</span>
-                        <span className="text-base font-bold text-champagne shrink-0">{tier.price}</span>
+                        <span className="text-[#F6F1E7] font-medium text-[15px]">{tier.zone}</span>
+                        <span className="text-base font-bold text-[#25D366] shrink-0 tabular-nums">{tier.price}</span>
                       </div>
-                      <p className="text-xs text-white/50">{tier.details}</p>
+                      <p className="text-sm text-[#C2B9AA]">{tier.details}</p>
                     </div>
                   ))}
-                  <a href={waLink} target="_blank" rel="noopener noreferrer" className="mt-4 w-full flex items-center justify-center px-4 py-4 bg-champagne text-zinc-950 font-bold uppercase tracking-wider text-sm hover:bg-white transition-colors rounded-sm">
+                  <a href={waLink} target="_blank" rel="noopener noreferrer" className="taste-btn-primary mt-4 w-full">
                     {t.bookWa}
                   </a>
                 </div>
@@ -2067,7 +2059,7 @@ export default async function ClubPage({ params }: Props) {
                 ? 'Esplora i locali più vicini calcolati in linea d’aria per combinare aperitivo panoramico, cena cantata e tavolo VIP.'
                 : 'Explore the closest verified Milan venues sorted by real distance to pair sunset aperitivo, dinner shows, and VIP clubbing.'}
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" data-taste-stagger>
               {nearbyVenues.map(({ venue: near, distanceLabel }) => {
                 const nearName = getLocalizedText(near.localizedContent.name, locale);
                 const nearSlug = getLocalizedVenueSlug35(near.id, (locale as LocaleCode) || 'en');
@@ -2078,23 +2070,23 @@ export default async function ClubPage({ params }: Props) {
                     key={near.id}
                     href={nearHref}
                     prefetch={false}
-                    className="group p-5 rounded-xl border border-white/10 bg-white/[0.025] hover:border-champagne/50 transition-colors flex flex-col justify-between"
+                    className="group p-5 bg-[#0B0A09] hover:bg-[#141311] transition-colors flex flex-col justify-between"
                   >
                     <div>
+                      <h3 className="font-serif text-xl font-bold text-[#F6F1E7] group-hover:text-[#25D366] transition-colors mb-1.5">
+                        {nearName} ↗
+                      </h3>
                       <div className="flex items-center justify-between gap-2 mb-2">
-                        <span className="text-[11px] font-mono uppercase tracking-wider text-champagne">
+                        <span className="text-sm font-semibold text-[#25D366]">
                           {distanceLabel}
                         </span>
-                        <span className="text-[11px] text-white/45 truncate">
+                        <span className="text-sm text-[#C2B9AA] truncate">
                           {locale === 'it' ? nearSpec?.neighborhoodIt : nearSpec?.neighborhoodEn}
                         </span>
                       </div>
-                      <h3 className="font-serif text-xl font-bold text-white group-hover:text-champagne transition-colors mb-1.5">
-                        {nearName} ↗
-                      </h3>
-                      <p className="text-xs text-white/65 mb-2">{near.address.streetAddress}</p>
+                      <p className="text-sm text-[#EAE3D5] mb-2">{near.address.streetAddress}</p>
                       {nearSpec && (
-                        <p className="text-xs text-white/50 line-clamp-2">
+                        <p className="text-sm text-[#C2B9AA] line-clamp-2">
                           {locale === 'it' ? nearSpec.soundIt : nearSpec.soundEn}
                         </p>
                       )}
@@ -2107,32 +2099,32 @@ export default async function ClubPage({ params }: Props) {
         )}
 
         {/* Reciprocal District & Essential Insider Guides Silo */}
-        <section className="pt-8 border-t border-white/10">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-            <h2 className="text-2xl font-serif font-bold text-white">
+        <section className="pt-8">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4" data-taste-reveal>
+            <h2 className="text-2xl font-display font-bold text-[#F6F1E7]">
               {locale === 'it'
                 ? `Quartiere & Guide Ufficiali per ${name}`
                 : `District & Official Insider Guides for ${name}`}
             </h2>
-            <span className="text-[11px] font-mono uppercase tracking-wider text-champagne">
+            <span className="text-sm font-semibold text-[#C2B9AA]">
               {locale === 'it'
                 ? 'Listini Verificati Novembre 2026 · WhatsApp +39 351 912 7047'
                 : 'Verified November 2026 · Official Concierge Desk (+39 351 912 7047)'}
             </span>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" data-taste-stagger>
             {canonicalZone && (
               <Link
                 href={`${lp}/${zonesDir}/${localizedZoneSlug}`}
                 locale={locCode}
                 prefetch={false}
-                className="p-4 rounded-xl border border-champagne/35 bg-champagne/[0.06] hover:border-champagne transition-colors"
+                className="p-5 bg-[#141311] hover:bg-[#1F1C18] transition-colors"
               >
-                <span className="block text-[10px] font-mono uppercase tracking-wider text-champagne mb-1">
-                  {locale === 'it' ? 'Quartiere del Locale' : 'Venue District Guide'}
-                </span>
-                <span className="block font-serif text-base font-semibold text-white">
+                <span className="block font-serif text-base font-semibold text-[#F6F1E7] mb-1">
                   {canonicalZone.name} · Milano ↗
+                </span>
+                <span className="block text-sm text-[#25D366]">
+                  {locale === 'it' ? 'Quartiere del Locale' : 'Venue District Guide'}
                 </span>
               </Link>
             )}
@@ -2142,13 +2134,13 @@ export default async function ClubPage({ params }: Props) {
                 href={`${lp}/${guidesDir}/${getLocalizedGuideSlug35(g, locCode)}`}
                 locale={locCode}
                 prefetch={false}
-                className="p-4 rounded-xl border border-white/10 bg-white/[0.025] hover:border-champagne/50 transition-colors"
+                className="p-5 bg-[#0B0A09] hover:bg-[#141311] transition-colors"
               >
-                <span className="block text-[10px] font-mono uppercase tracking-wider text-white/45 mb-1">
-                  {locale === 'it' ? 'Guida Ufficiale' : 'Official Guide'}
-                </span>
-                <span className="block font-serif text-base font-semibold text-white">
+                <span className="block font-serif text-base font-semibold text-[#F6F1E7] mb-1">
                   {getLocalizedText(g.title, locCode).replace(/[—–]/g, ' - ')} ↗
+                </span>
+                <span className="block text-sm text-[#C2B9AA]">
+                  {locale === 'it' ? 'Guida Ufficiale' : 'Official Guide'}
                 </span>
               </Link>
             ))}

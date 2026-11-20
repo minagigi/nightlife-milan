@@ -32,16 +32,16 @@ export default function GuideToc({ sections, title }: { sections: Section[], tit
 
   return (
     <nav className="sticky top-24">
-      <h3 className="text-sm font-semibold text-white/40 uppercase tracking-wider mb-4">{title}</h3>
-      <ul className="space-y-3 border-l border-white/10">
+      <h3 className="text-base font-semibold text-[#F6F1E7] mb-4">{title}</h3>
+      <ul className="space-y-3 border-l border-white/15">
         {sections.map((section) => (
           <li key={section.id}>
             <a
               href={`#${section.id}`}
               className={`block pl-4 text-sm transition-colors ${
                 activeId === section.id
-                  ? 'text-champagne border-l-2 border-champagne -ml-[1px]'
-                  : 'text-white/40 hover:text-white/70'
+                  ? 'text-[#F6F1E7] font-semibold border-l-2 border-[#25D366] -ml-[1px]'
+                  : 'text-[#C2B9AA] hover:text-[#F6F1E7]'
               }`}
             >
               {section.title.replace(/^#+\s*/, '')}

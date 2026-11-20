@@ -177,27 +177,23 @@ export function VipQuoteCalculator({ locale = 'it', initialVenueSlug }: { locale
   return (
     <section
       aria-label={isIt ? 'Calcolatore Preventivo Tavolo VIP e Feste Private' : 'VIP Table & Private Party Quote Calculator'}
-      className="my-14 rounded-2xl border border-champagne/30 bg-[#0B0A09] p-6 sm:p-10 shadow-[0_20px_60px_rgba(0,0,0,0.65)]"
+      className="my-14 border border-white/15 bg-[#0B0A09] p-6 sm:p-10"
     >
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8 pb-6 border-b border-white/10">
         <div>
-          <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-champagne/15 border border-champagne/40 text-champagne text-[11px] font-bold tracking-[0.22em] uppercase mb-3">
-            <Sparkles className="w-3.5 h-3.5" />
-            {isIt ? 'STRUMENTO INTERATTIVO CONCIERGE 2026/2027' : 'INTERACTIVE 2026/2027 CONCIERGE TOOL'}
-          </span>
           <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white tracking-tight">
             {isIt
               ? 'Configuratore Tavolo VIP, Laurea, 18 Anni & Eventi Privati'
               : 'VIP Table, Graduation, Birthday & Private Party Configurator'}
           </h2>
-          <p className="text-white/60 text-sm sm:text-base mt-2 max-w-2xl">
+          <p className="text-[#C2B9AA] text-sm sm:text-base mt-2 max-w-2xl">
             {isIt
               ? 'Calcola in 5 secondi il minimum spend reale (100% convertito in bottiglie) e la quota a persona nei migliori club di Milano, poi invia il brief su WhatsApp per ricevere le mappe tavoli in 10 minuti.'
               : 'Calculate in 5 seconds the real minimum spend (100% converted into bottles) and per-person share across Milan’s top clubs, then send your brief via WhatsApp to receive floorplans within 10 minutes.'}
           </p>
         </div>
-        <div className="flex items-center gap-3 text-xs text-champagne/90 bg-champagne/10 border border-champagne/25 px-4 py-2.5 rounded-xl shrink-0">
-          <ShieldCheck className="w-4 h-4 text-champagne shrink-0" />
+        <div className="flex items-center gap-3 text-sm text-[#EAE3D5] bg-[#141311] px-4 py-2.5 shrink-0">
+          <ShieldCheck className="w-4 h-4 text-[#25D366] shrink-0" />
           <span>
             {isIt ? 'Zero commissioni d’agenzia · Prezzi ufficiali del locale' : 'Zero agency fees · Official venue prices'}
           </span>
@@ -313,7 +309,7 @@ export function VipQuoteCalculator({ locale = 'it', initialVenueSlug }: { locale
               onChange={(e: { target: { value: string } }) => setGuests(Number(e.target.value))}
               className="w-full accent-[#F6F1E7] cursor-pointer h-2 bg-white/15 rounded-lg"
             />
-            <div className="flex justify-between text-[11px] text-white/40 mt-1">
+            <div className="flex justify-between text-[13px] text-[#C2B9AA] mt-1">
               <span>4 {isIt ? 'ospiti (min)' : 'guests (min)'}</span>
               <span>10 {isIt ? 'ospiti (gruppo standard)' : 'guests (standard)'}</span>
               <span>25 {isIt ? 'ospiti (evento privato)' : 'guests (large party)'}</span>
@@ -324,18 +320,20 @@ export function VipQuoteCalculator({ locale = 'it', initialVenueSlug }: { locale
         {/* Right Summary Box */}
         <div className="lg:col-span-5 rounded-2xl border border-champagne/40 bg-black/60 p-6 sm:p-8 flex flex-col justify-between">
           <div>
-            <div className="text-[10px] font-bold tracking-[0.28em] uppercase text-champagne/70 mb-2">
-              {isIt ? 'STIMA UFFICIALE CONCIERGE' : 'OFFICIAL CONCIERGE ESTIMATE'}
-            </div>
-            <div className="flex items-baseline gap-3 mb-1">
-              <span className="font-serif text-5xl sm:text-6xl font-bold text-champagne">
+            <p className="text-sm text-[#C2B9AA] leading-relaxed mb-4">
+              {isIt
+                ? 'Stima ufficiale concierge 100% convertita in bottiglie dal listino del locale:'
+                : 'Official concierge estimate 100% convertible into bottles from the venue menu:'}
+            </p>
+            <div className="flex items-baseline gap-3 mb-2">
+              <span className="font-serif text-4xl sm:text-5xl font-bold text-champagne">
                 €{totalEstimate}
               </span>
-              <span className="text-white/50 text-xs uppercase tracking-wider">
-                {isIt ? 'Minimum Spend Totale' : 'Total Minimum Spend'}
+              <span className="text-[#EAE3D5] text-[13px] font-medium">
+                {isIt ? 'Minimum spend totale' : 'Total minimum spend'}
               </span>
             </div>
-            <div className="inline-block px-3 py-1 rounded-md bg-champagne/15 text-champagne text-xs font-semibold mb-6">
+            <div className="inline-block px-3 py-1 rounded-md bg-champagne/15 text-champagne text-[13px] font-semibold mb-6">
               {isIt
                 ? `Circa €${perPerson} a persona (diviso in ${guests} ospiti)`
                 : `Approx. €${perPerson} per person (split across ${guests} guests)`}
@@ -343,27 +341,27 @@ export function VipQuoteCalculator({ locale = 'it', initialVenueSlug }: { locale
 
             <div className="space-y-3.5 text-xs sm:text-sm text-white/80 border-t border-white/10 pt-5 mb-6">
               <div className="flex items-start gap-2.5">
-                <Crown className="w-4 h-4 text-champagne shrink-0 mt-0.5" />
+                <Crown className="w-4 h-4 text-[#25D366] shrink-0 mt-0.5" />
                 <div>
-                  <span className="text-white/50 block text-[11px] uppercase tracking-wider">
-                    {isIt ? 'Locali Consigliati (Priorità Top)' : 'Recommended Venues (Top Priority)'}
+                  <span className="text-[#C2B9AA] block text-sm">
+                    {isIt ? 'Locali Selezionati' : 'Selected Venues'}
                   </span>
                   <strong className="text-white">{isIt ? tierObj.venuesIt : tierObj.venuesEn}</strong>
                 </div>
               </div>
               <div className="flex items-start gap-2.5">
-                <GlassWater className="w-4 h-4 text-champagne shrink-0 mt-0.5" />
+                <GlassWater className="w-4 h-4 text-[#25D366] shrink-0 mt-0.5" />
                 <div>
-                  <span className="text-white/50 block text-[11px] uppercase tracking-wider">
+                  <span className="text-[#C2B9AA] block text-sm">
                     {isIt ? 'Cosa Include il Credito (100% Bottiglie)' : 'Included Bottle Credit (100%)'}
                   </span>
                   <span>{isIt ? posObj.bottlesIt : posObj.bottlesEn}</span>
                 </div>
               </div>
               <div className="flex items-start gap-2.5">
-                <CheckCircle2 className="w-4 h-4 text-champagne shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4 h-4 text-[#25D366] shrink-0 mt-0.5" />
                 <div>
-                  <span className="text-white/50 block text-[11px] uppercase tracking-wider">
+                  <span className="text-[#C2B9AA] block text-sm">
                     {isIt ? 'Vantaggio Esclusivo Occasione' : 'Occasion VIP Perk'}
                   </span>
                   <span>{isIt ? occasionObj.bonusIt : occasionObj.bonusEn}</span>
@@ -376,7 +374,7 @@ export function VipQuoteCalculator({ locale = 'it', initialVenueSlug }: { locale
             href={waHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 rounded-xl bg-[#25D366] text-[#050505] font-sans font-bold text-xs sm:text-sm tracking-[0.15em] uppercase hover:bg-white transition-colors shadow-[0_0_30px_rgba(201,168,106,0.35)]"
+            className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 bg-[#25D366] text-[#050505] font-sans font-bold text-sm hover:bg-[#2EE472] transition-colors"
           >
             <MessageCircle className="w-4 h-4" />
             {isIt ? 'Ricevi Mappa Tavoli & Listino su WhatsApp' : 'Get Floorplan & Bottle Menu on WhatsApp'}
@@ -1317,7 +1315,7 @@ export function SanSiroMatchAfterpartyFinder({ locale = 'it' }: { locale?: strin
           ? 'Configuratore Interattivo Dopo-Partita San Siro Inter e Milan'
           : 'Interactive San Siro Inter & AC Milan Match Afterparty Finder'
       }
-      className="my-14 rounded-2xl border border-champagne/35 bg-[#0B0A09] p-6 sm:p-10 shadow-[0_25px_70px_rgba(0,0,0,0.75)]"
+      className="my-14 border border-[#F6F1E7]/16 bg-[#0B0A09] p-6 sm:p-10"
     >
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8 pb-6 border-b border-white/10">
         <div>
@@ -1364,10 +1362,10 @@ export function SanSiroMatchAfterpartyFinder({ locale = 'it' }: { locale?: strin
                     key={k}
                     type="button"
                     onClick={() => setCompetition(k)}
-                    className={`text-left p-3.5 rounded-xl border transition-all ${
+                    className={`text-left p-3.5 border transition-colors ${
                       active
-                        ? 'bg-[#25D366] text-[#050505] border-champagne font-bold shadow-[0_0_20px_rgba(201,168,106,0.3)]'
-                        : 'bg-white/[0.03] text-white/85 border-white/10 hover:border-champagne/40'
+                        ? 'bg-[#25D366] text-[#050505] border-[#25D366] font-bold'
+                        : 'bg-[#141311] text-[#EAE3D5] border-[#F6F1E7]/14 hover:border-[#F6F1E7]/40'
                     }`}
                   >
                     <div className="text-xs sm:text-sm leading-snug">
@@ -1512,14 +1510,14 @@ export function SanSiroMatchAfterpartyFinder({ locale = 'it' }: { locale?: strin
               href={waHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 rounded-xl bg-[#25D366] text-[#050505] font-sans font-bold text-xs sm:text-sm tracking-[0.14em] uppercase hover:bg-white transition-colors shadow-[0_0_30px_rgba(201,168,106,0.35)]"
+              className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 bg-[#25D366] text-[#050505] font-sans font-bold text-[13px] sm:text-sm hover:bg-[#2EE472] transition-colors"
             >
               <MessageCircle className="w-4 h-4" />
               {isIt
                 ? 'Blocca Tavolo Post-Partita su WhatsApp'
                 : 'Lock In Post-Match VIP Table on WhatsApp'}
             </a>
-            <p className="text-[11px] text-center text-white/45 mt-2.5">
+            <p className="text-[13px] text-center text-[#C2B9AA] mt-2.5">
               {isIt
                 ? 'Desk Diretto San Siro: +39 351 912 7047 · Teniamo il tavolo anche in caso di tempi supplementari'
                 : 'Direct San Siro Desk: +39 351 912 7047 · We hold your VIP table even during extra time'}
@@ -1528,65 +1526,53 @@ export function SanSiroMatchAfterpartyFinder({ locale = 'it' }: { locale?: strin
         </div>
       </div>
 
-      {/* Live Ranked Venues Grid with Exact Travel Times from Stadio Meazza */}
+      {/* Live Ranked Venues Architectural List with Exact Travel Times from Stadio Meazza */}
       <div>
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="font-serif text-xl sm:text-2xl font-bold text-white">
+        <div className="flex flex-wrap items-baseline justify-between gap-2 mb-4">
+          <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#F6F1E7] m-0">
             {isIt
               ? 'I 6 Club Consigliati in Tempo Reale (con Distanza Esatta dallo Stadio Meazza)'
               : 'Real-Time Recommended Clubs (with Exact Travel Time from San Siro Stadium)'}
           </h3>
-          <span className="text-xs text-champagne/80 hidden sm:inline">
-            {isIt ? 'Ordinati per la tua formula + Priorità Ufficiale' : 'Sorted by your formula + Official Priority'}
+          <span className="text-[13px] text-[#EAE3D5]">
+            {isIt ? 'Ordinati per la tua formula + Selezione Ufficiale' : 'Sorted by your formula + Official Selection'}
           </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="divide-y divide-[#F6F1E7]/12">
           {orderedVenues.map((v, idx) => (
             <div
               key={v.slug}
-              className={`rounded-xl p-5 border transition-all flex flex-col justify-between ${
-                idx === 0
-                  ? 'border-champagne bg-champagne/[0.07] shadow-[0_0_25px_rgba(201,168,106,0.18)]'
-                  : 'border-white/10 bg-black/40 hover:border-champagne/40'
-              }`}
+              className="py-5 grid grid-cols-1 lg:grid-cols-12 gap-4 items-center"
             >
-              <div>
-                <div className="flex items-center justify-between gap-2 mb-2.5">
-                  <span className="px-2.5 py-0.5 rounded-full bg-champagne/20 border border-champagne/40 text-champagne text-[10px] font-bold uppercase tracking-wider">
-                    {isIt ? v.priorityBadgeIt : v.priorityBadgeEn}
-                  </span>
-                  {idx === 0 && (
-                    <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] font-bold uppercase">
-                      {isIt ? 'Top Match' : 'Best Match'}
-                    </span>
-                  )}
-                </div>
-
-                <h4 className="font-serif text-xl font-bold text-white mb-1">{v.name}</h4>
-
-                <div className="text-xs text-champagne font-semibold flex items-center gap-1.5 mb-1">
-                  <MapPin className="w-3.5 h-3.5 shrink-0" />
-                  <span>{isIt ? v.distanceIt : v.distanceEn}</span>
-                </div>
-                <p className="text-[11px] text-white/55 mb-3">{isIt ? v.transitIt : v.transitEn}</p>
-
-                <p className="text-xs text-white/75 leading-relaxed mb-3">
-                  {isIt ? v.whyMatchIt : v.whyMatchEn}
+              <div className="lg:col-span-4 min-w-0">
+                <p className="text-[13px] font-semibold text-[#C2B9AA] mb-1">
+                  {isIt ? v.priorityBadgeIt : v.priorityBadgeEn}
+                  {idx === 0 ? ` · ${isIt ? 'Top Match' : 'Best Match'}` : ''}
                 </p>
-
-                <div className="p-2.5 rounded-lg bg-white/[0.03] border border-white/10 text-[11px] text-white/85 mb-4">
-                  <strong className="text-champagne block uppercase tracking-wider text-[10px]">
-                    {isIt ? 'Listino Post-Partita:' : 'Post-Match Pricing:'}
-                  </strong>
-                  {isIt ? v.pricesIt : v.pricesEn}
-                </div>
+                <h4 className="font-serif text-xl font-bold text-[#F6F1E7] mb-1">{v.name}</h4>
+                <p className="text-[13px] text-[#25D366] font-semibold">
+                  {isIt ? v.distanceIt : v.distanceEn}
+                </p>
+                <p className="text-[13px] text-[#C2B9AA] mt-0.5">{isIt ? v.transitIt : v.transitEn}</p>
               </div>
 
-              <div className="flex items-center gap-2 pt-3 border-t border-white/10">
+              <div className="lg:col-span-5 min-w-0 space-y-2">
+                <p className="text-[14px] text-[#EAE3D5] leading-relaxed">
+                  {isIt ? v.whyMatchIt : v.whyMatchEn}
+                </p>
+                <p className="text-[13px] text-[#C2B9AA]">
+                  <strong className="text-[#F6F1E7]">
+                    {isIt ? 'Listino Post-Partita:' : 'Post-Match Pricing:'}
+                  </strong>{' '}
+                  {isIt ? v.pricesIt : v.pricesEn}
+                </p>
+              </div>
+
+              <div className="lg:col-span-3 flex flex-wrap lg:justify-end items-center gap-3">
                 <Link
                   href={`${lp}/clubs/${v.slug}`}
-                  className="text-xs font-semibold text-white/85 hover:text-champagne transition-colors"
+                  className="text-[13px] font-semibold text-[#F6F1E7] hover:text-[#25D366] transition-colors"
                 >
                   {isIt ? 'Scheda Club →' : 'Club Guide →'}
                 </Link>
@@ -1598,7 +1584,7 @@ export function SanSiroMatchAfterpartyFinder({ locale = 'it' }: { locale?: strin
                   )}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="ml-auto px-3 py-1.5 rounded-lg bg-[#25D366] text-[#050505] text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
+                  className="px-4 py-2 bg-[#25D366] text-[#050505] text-[13px] font-bold hover:bg-[#2EE472] transition-colors"
                 >
                   WhatsApp VIP
                 </a>

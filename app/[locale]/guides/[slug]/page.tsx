@@ -18,6 +18,11 @@ import EditorialPageSections from '@/components/EditorialPageSections';
 import { getGuideUiLabels35 } from '@/lib/i18n/flagshipGuides35';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
+import TasteMotionLayer from '@/components/TasteMotionLayer';
+import TasteHeroCrossfade from '@/components/TasteHeroCrossfade';
+import TastePillarExplorer from '@/components/TastePillarExplorer';
+import { getPillarDisplayHeadline } from '@/lib/guidesGscPillar20261120';
+import { buildTasteExplorerData } from '@/lib/tasteExplorerData';
 
 // ISR Configuration (1 hour)
 export const revalidate = 3600;
@@ -286,6 +291,488 @@ export default async function GuidePage({ params }: Props) {
   }
 
   const waUrl = getConciergeBookingUrl(loc, title, guideUrl);
+  const isTastePillar = guide.id === 'g-117' || guide.id === 'g-118';
+
+  if (isTastePillar) {
+    const heroImg = GUIDE_HERO_IMAGES[guide.id] || guide.image || '/images/guides-hero.webp';
+    const inlineGallery = GUIDE_INLINE_IMAGES[guide.id] || [];
+    const crossfadeImgs = Array.from(new Set([heroImg, ...inlineGallery]));
+    const tasteHeadline = getPillarDisplayHeadline(guide.id as 'g-117' | 'g-118', loc);
+    const explorerData = buildTasteExplorerData(
+      guide.id === 'g-117' ? 'terme' : 'clubbing',
+      loc,
+      guideUrl,
+    );
+    const leadRate = explorerData.items[0]?.rate || '';
+    const leadRateShort = leadRate.includes('·') ? leadRate.split('·')[0].trim() : leadRate;
+    const leadVenue = explorerData.items[0]?.name || '';
+    const deskAltLabel = explorerData.items[0]?.primaryLabel || t.toc;
+
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        />
+        {faqSchema && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+          />
+        )}
+
+        <main className="taste-pillar-root flex-1 bg-[#050505] text-[#F6F1E7] w-full">
+          <TasteMotionLayer />
+
+          {/* 1. Editorial Hero — Two Prints in Darkness (#050505) */}
+          <section className="bg-[#050505] text-[#F6F1E7] pt-8 sm:pt-12 pb-16 sm:pb-24">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <nav aria-label="Breadcrumb" className="mb-8 flex flex-wrap items-center gap-3 text-[14px] text-[#C2B9AA]">
+                <Link
+                  href={`${langPrefix}/guides`}
+                  className="inline-flex items-center gap-2 text-[#EAE3D5] hover:text-[#25D366] transition-colors font-semibold min-h-[44px]"
+                >
+                  <ArrowLeft className="w-4 h-4 shrink-0" />
+                  <span>{t.back}</span>
+                </Link>
+                <span aria-hidden="true">/</span>
+                <span>{ui.officialBadge}</span>
+                <span aria-hidden="true">·</span>
+                <span className="tabular-nums">{formattedDate}</span>
+              </nav>
+
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end">
+                <div className="lg:col-span-7" data-taste-reveal>
+                  <h1 className="font-display font-extrabold text-[#F6F1E7] m-0 mb-5">
+                    {tasteHeadline}
+                  </h1>
+                  <p className="text-lg sm:text-xl font-semibold text-[#EAE3D5] leading-snug mb-3 max-w-2xl">
+                    {title}
+                  </p>
+                  <p className="text-base text-[#C2B9AA] leading-relaxed mb-8 max-w-xl">
+                    {excerpt}
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    <a
+                      href={waUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="taste-btn-primary"
+                    >
+                      <MessageCircle className="w-4 h-4 shrink-0" />
+                      <span>{ui.whatsappCta}</span>
+                    </a>
+                    <a href="#explorer" className="taste-btn-outline-light">
+                      <span>{explorerData.allLabel}</span>
+                    </a>
+                  </div>
+                </div>
+
+                <div className="lg:col-span-5">
+                  <TasteHeroCrossfade
+                    images={crossfadeImgs}
+                    altPrimary={title}
+                    altSecondary={tocSections[0]?.title || title}
+                    title={title}
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* 2. Warm Ivory Editorial Brief, Verified Metrics & Architectural TOC (#F6F1E7) */}
+          <section className="bg-[#F6F1E7] text-[#050505] py-12 sm:py-16">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pb-8 mb-8" data-taste-stagger>
+                <div>
+                  <p className="text-lg sm:text-xl font-bold text-[#050505] tabular-nums m-0">{explorerData.items.length}</p>
+                  <p className="text-[14px] text-[#3B362E] mt-1 m-0">{explorerData.colVenue}</p>
+                </div>
+                <div>
+                  <p className="text-lg sm:text-xl font-bold text-[#050505] tabular-nums m-0">{leadRateShort}</p>
+                  <p className="text-[14px] text-[#3B362E] mt-1 m-0">{leadVenue}</p>
+                </div>
+                <div>
+                  <p className="text-lg sm:text-xl font-bold text-[#050505] tabular-nums m-0">{formattedDate}</p>
+                  <p className="text-[14px] text-[#3B362E] mt-1 m-0">{guide.author}</p>
+                </div>
+                <div>
+                  <p className="text-lg sm:text-xl font-bold text-[#050505] tabular-nums m-0">{ui.directDesk}</p>
+                  <p className="text-[14px] text-[#3B362E] mt-1 m-0">WhatsApp +39 351 912 7047</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <div className="lg:col-span-4 flex flex-col gap-4" data-taste-reveal>
+                  <h2 className="font-display font-bold text-[#050505] m-0">{t.toc}</h2>
+                  <p className="text-[15px] text-[#3B362E] leading-relaxed m-0">
+                    {ui.bookDesc}
+                  </p>
+                  <GuideShareButtons url={guideUrl} title={title} variant="light" />
+                </div>
+
+                <nav aria-label={t.toc} className="lg:col-span-8">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3" data-taste-stagger>
+                    <a
+                      href="#explorer"
+                      className="flex items-center justify-between gap-4 bg-[#EAE3D5] hover:bg-[#050505] hover:text-[#F6F1E7] text-[#050505] px-5 py-4 text-[15px] font-semibold transition-colors"
+                    >
+                      <span>{explorerData.heading}</span>
+                      <span aria-hidden="true">→</span>
+                    </a>
+                    {tocSections.map((sec) => (
+                      <a
+                        key={sec.id}
+                        href={`#${sec.id}`}
+                        className="flex items-center justify-between gap-4 bg-[#EAE3D5] hover:bg-[#050505] hover:text-[#F6F1E7] text-[#050505] px-5 py-4 text-[15px] font-medium transition-colors"
+                      >
+                        <span>{sec.title}</span>
+                        <span aria-hidden="true">→</span>
+                      </a>
+                    ))}
+                    {guide.faqs && guide.faqs.length > 0 && (
+                      <a
+                        href="#faq-guide"
+                        className="flex items-center justify-between gap-4 bg-[#EAE3D5] hover:bg-[#050505] hover:text-[#F6F1E7] text-[#050505] px-5 py-4 text-[15px] font-semibold transition-colors"
+                      >
+                        <span>{t.faq}</span>
+                        <span aria-hidden="true">→</span>
+                      </a>
+                    )}
+                  </div>
+                </nav>
+              </div>
+            </div>
+          </section>
+
+          {/* 3. Uneven Photo Gallery Strip (#050505 — Lightbox Enabled) */}
+          {inlineGallery.length >= 2 && (
+            <section id="gallery" aria-label={title} className="bg-[#050505] py-8 sm:py-12">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="taste-uneven-strip" data-taste-stagger>
+                  {inlineGallery.slice(0, 4).map((src, idx) => (
+                    <figure key={src} className="taste-uneven-panel">
+                      <Image
+                        src={src}
+                        alt={tocSections[idx]?.title || `${title} - ${idx + 1}`}
+                        title={tocSections[idx]?.title || `${title} - ${idx + 1}`}
+                        fill
+                        unoptimized
+                        quality={92}
+                        sizes="(max-width: 1024px) 50vw, 40vw"
+                        className="object-cover brightness-[0.88] hover:brightness-100 transition-[filter] duration-500"
+                      />
+                    </figure>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* 4. Interactive Partner & Thermal Directory ("One Live Thing" #050505) */}
+          <TastePillarExplorer data={explorerData} locale={loc} />
+
+          {/* 5. Six Alternating Chapters (#F6F1E7 / #050505) with Varied Editorial Grids */}
+          {guide.sections.map((section, index) => {
+            const secHeading = getLocalizedText(section.heading, loc).replace(/^#+\s*/, '').replace(/\u2014/g, ' - ');
+            const secContent = getLocalizedText(section.content, loc).replace(/\u2014/g, ' - ');
+            const isLight = index % 2 === 0;
+            const secPhoto = inlineGallery[index % Math.max(1, inlineGallery.length)] || heroImg;
+
+            return (
+              <section
+                key={section.id}
+                id={section.id}
+                className={`scroll-mt-24 py-16 sm:py-24 ${
+                  isLight ? 'bg-[#F6F1E7] text-[#050505]' : 'bg-[#050505] text-[#F6F1E7]'
+                }`}
+              >
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  {index === 0 ? (
+                    <div className="space-y-8" data-taste-reveal>
+                      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+                        <div className="lg:col-span-8">
+                          <h2 className="font-display font-bold text-[#050505] m-0">{secHeading}</h2>
+                        </div>
+                        <div className="lg:col-span-4 lg:text-right">
+                          <a
+                            href="#explorer"
+                            className="taste-btn-dark"
+                          >
+                            <span>{explorerData.allLabel}</span>
+                          </a>
+                        </div>
+                      </div>
+                      <div
+                        className="taste-prose-light [&_strong]:font-bold [&_strong]:text-[#050505]"
+                        dangerouslySetInnerHTML={{ __html: secContent }}
+                      />
+                    </div>
+                  ) : index === 1 ? (
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+                      <div className="lg:col-span-7" data-taste-reveal>
+                        <h2 className="font-display font-bold text-[#F6F1E7] mb-6">{secHeading}</h2>
+                        <div
+                          className="taste-prose-dark [&_strong]:font-bold [&_strong]:text-[#F6F1E7]"
+                          dangerouslySetInnerHTML={{ __html: secContent }}
+                        />
+                      </div>
+                      <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-6" data-taste-reveal>
+                        <figure className="relative aspect-[3/4] w-full overflow-clip bg-[#0B0A09]">
+                          <Image
+                            src={secPhoto}
+                            alt={`${secHeading} - ${title}`}
+                            title={secHeading}
+                            fill
+                            unoptimized
+                            quality={92}
+                            sizes="(max-width: 1024px) 100vw, 40vw"
+                            className="object-cover taste-drift-img"
+                          />
+                        </figure>
+                        <div className="bg-[#141311] p-6" data-no-lightbox="true">
+                          <h3 className="font-display text-xl font-bold text-[#F6F1E7] mb-2">
+                            {ui.bookHeading}
+                          </h3>
+                          <p className="text-[15px] text-[#C2B9AA] leading-relaxed mb-5">
+                            {ui.bookDesc}
+                          </p>
+                          <a
+                            href={waUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="taste-btn-primary w-full"
+                          >
+                            <MessageCircle className="w-4 h-4 shrink-0" />
+                            <span>{ui.whatsappCta}</span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  ) : index === 3 ? (
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+                      <div className="lg:col-span-4 lg:sticky lg:top-24 space-y-6" data-taste-reveal>
+                        <h2 className="font-display font-bold text-[#F6F1E7] m-0">{secHeading}</h2>
+                        <div className="bg-[#141311] p-6" data-no-lightbox="true">
+                          <h3 className="font-display text-lg font-bold text-[#F6F1E7] mb-2">
+                            {ui.directDesk}
+                          </h3>
+                          <p className="text-[15px] text-[#C2B9AA] leading-relaxed mb-5">
+                            {deskAltLabel} · WhatsApp +39 351 912 7047
+                          </p>
+                          <a
+                            href={waUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="taste-btn-primary w-full"
+                          >
+                            <MessageCircle className="w-4 h-4 shrink-0" />
+                            <span>{ui.whatsappCta}</span>
+                          </a>
+                        </div>
+                      </div>
+                      <div className="lg:col-span-8" data-taste-reveal>
+                        <div
+                          className="taste-prose-dark [&_strong]:font-bold [&_strong]:text-[#F6F1E7]"
+                          dangerouslySetInnerHTML={{ __html: secContent }}
+                        />
+                      </div>
+                    </div>
+                  ) : index === 5 ? (
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+                      <div className="lg:col-span-7" data-taste-reveal>
+                        <h2 className="font-display font-bold text-[#F6F1E7] mb-6">{secHeading}</h2>
+                        <div
+                          className="taste-prose-dark [&_strong]:font-bold [&_strong]:text-[#F6F1E7]"
+                          dangerouslySetInnerHTML={{ __html: secContent }}
+                        />
+                      </div>
+                      <aside className="lg:col-span-5 lg:sticky lg:top-24 bg-[#141311] p-6 sm:p-8" data-no-lightbox="true">
+                        <h3 className="font-display text-xl font-bold text-[#F6F1E7] mb-5" data-taste-reveal>
+                          {t.relatedVenues}
+                        </h3>
+                        <div className="flex flex-col gap-[2px] bg-[#050505]" data-taste-stagger>
+                          {relatedVenues.map((venue, idx) => {
+                            const venueName = getLocalizedText(venue.localizedContent.name, loc);
+                            const venueSlug = getLocalizedText(venue.slugs, loc);
+                            const venueHref = `${langPrefix}/clubs/${venueSlug}`;
+                            return (
+                              <Link
+                                key={venue.id}
+                                href={venueHref}
+                                className="flex items-center justify-between gap-4 bg-[#0B0A09] hover:bg-[#1F1C18] px-4 py-3.5 transition-colors"
+                              >
+                                <div className="min-w-0">
+                                  <div className="text-[15px] font-semibold text-[#F6F1E7] truncate">
+                                    {idx + 1}. {venueName}
+                                  </div>
+                                  <div className="text-[14px] text-[#C2B9AA] flex items-center gap-1.5 mt-0.5">
+                                    <MapPin className="w-3.5 h-3.5 text-[#25D366] shrink-0" />
+                                    <span>{venue.zone.replace(/_/g, ' ')}</span>
+                                  </div>
+                                </div>
+                                <span className="text-[14px] text-[#25D366] font-semibold shrink-0" aria-hidden="true">→</span>
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      </aside>
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start" data-taste-reveal>
+                      <div className="lg:col-span-4 lg:sticky lg:top-24">
+                        <h2 className="font-display font-bold text-[#050505] mb-4">{secHeading}</h2>
+                        <figure className="relative aspect-[4/3] w-full overflow-clip bg-[#EAE3D5] mt-6">
+                          <Image
+                            src={secPhoto}
+                            alt={`${secHeading} - ${title}`}
+                            title={secHeading}
+                            fill
+                            unoptimized
+                            quality={92}
+                            sizes="(max-width: 1024px) 100vw, 33vw"
+                            className="object-cover"
+                          />
+                        </figure>
+                      </div>
+                      <div className="lg:col-span-8">
+                        <div
+                          className="taste-prose-light [&_strong]:font-bold [&_strong]:text-[#050505]"
+                          dangerouslySetInnerHTML={{ __html: secContent }}
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </section>
+            );
+          })}
+
+          {/* 6. Split FAQ Accordion (#F6F1E7 Warm Ivory) */}
+          {guide.faqs && guide.faqs.length > 0 && (
+            <section id="faq-guide" className="scroll-mt-24 bg-[#F6F1E7] text-[#050505] py-16 sm:py-24">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+                  <div className="lg:col-span-7">
+                    <h2 className="taste-section-display font-bold text-[#050505] mb-8" data-taste-reveal>
+                      {t.faq}
+                    </h2>
+                    <div className="space-y-3" data-taste-stagger>
+                      {guide.faqs.map((faq, i) => (
+                        <details
+                          key={i}
+                          open={i === 0}
+                          className="taste-faq-item bg-[#EAE3D5] px-5 sm:px-6"
+                        >
+                          <summary className="text-base sm:text-lg font-bold text-[#050505]">
+                            <span>{getLocalizedText(faq.question, loc).replace(/\u2014/g, ' - ').replace(/\u2605/g, '*')}</span>
+                            <span className="taste-faq-plus text-[#050505]" aria-hidden="true" />
+                          </summary>
+                          <p className="text-[15px] sm:text-base text-[#1F1C18] leading-relaxed pt-2 pb-3 m-0">
+                            {getLocalizedText(faq.answer, loc).replace(/\u2014/g, ' - ').replace(/\u2605/g, '*')}
+                          </p>
+                        </details>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-6" data-taste-reveal>
+                    <div className="relative pb-8">
+                      <figure className="relative ml-auto w-[88%] aspect-[3/4] overflow-clip bg-[#0B0A09]">
+                        <Image
+                          src={inlineGallery[2] || inlineGallery[0] || heroImg}
+                          alt={`${t.faq} - ${title}`}
+                          title={title}
+                          fill
+                          unoptimized
+                          quality={92}
+                          sizes="(max-width: 1024px) 100vw, 40vw"
+                          className="object-cover"
+                        />
+                      </figure>
+                      <figure className="relative -mt-16 w-[38%] aspect-square overflow-clip bg-[#0B0A09]">
+                        <Image
+                          src={inlineGallery[3] || inlineGallery[1] || heroImg}
+                          alt={title}
+                          title={title}
+                          fill
+                          unoptimized
+                          quality={92}
+                          sizes="(max-width: 640px) 40vw, 22vw"
+                          className="object-cover"
+                        />
+                      </figure>
+                    </div>
+                    <div className="bg-[#EAE3D5] p-6">
+                      <h3 className="font-display text-xl font-bold text-[#050505] mb-2">
+                        {ui.bookHeading}
+                      </h3>
+                      <p className="text-[15px] text-[#3B362E] leading-relaxed mb-5">
+                        {ui.bookDesc}
+                      </p>
+                      <a
+                        href={waUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="taste-btn-dark w-full"
+                      >
+                        <MessageCircle className="w-4 h-4 shrink-0" />
+                        <span>{ui.whatsappCta}</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* 7. VIP Quote Calculator & Flat Editorial Cross-Links (#050505) */}
+          <section className="bg-[#050505] text-[#F6F1E7] py-14 sm:py-20">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <VipQuoteCalculator locale={loc} />
+
+              <div className="pt-14 mt-14">
+                <h2 className="taste-section-display font-bold text-[#F6F1E7] mb-8">
+                  {t.otherGuides}
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" data-no-lightbox="true" data-taste-stagger>
+                  {otherGuides.map((g) => {
+                    const gSlug = getLocalizedGuideSlug35(g, loc);
+                    const gTitle = getLocalizedText(g.title, loc).replace(/\u2014/g, ' - ');
+                    return (
+                      <Link
+                        key={g.id}
+                        href={`${langPrefix}/guides/${gSlug}`}
+                        className="group flex flex-col justify-between p-6 bg-[#0B0A09] hover:bg-[#141311] transition-colors"
+                      >
+                        <div>
+                          <h3 className="font-display text-lg font-bold text-[#F6F1E7] group-hover:text-[#25D366] transition-colors leading-snug mb-3">
+                            {gTitle}
+                          </h3>
+                          <p className="text-[14px] text-[#C2B9AA] line-clamp-3 leading-relaxed">
+                            {getLocalizedText(g.excerpt, loc).replace(/\u2014/g, ' - ')}
+                          </p>
+                        </div>
+                        <div className="mt-5 text-[14px] font-semibold text-[#25D366]">
+                          {ui.officialBadge}
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <EditorialPageSections locale={loc} path={`${langPrefix}/guides/${slug}`} />
+        </main>
+      </>
+    );
+  }
 
   return (
     <>
