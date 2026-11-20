@@ -799,7 +799,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                         className="flex flex-col justify-between border border-[#050505]/20 bg-[#EFE9DC] p-5"
                       >
                         <div>
-                          <div className="overflow-hidden border border-[#050505]/15 bg-[#050505]">
+                          <div data-no-lightbox="true" className="overflow-hidden border border-[#050505]/15 bg-[#050505]">
                             <img
                               src={alt.image}
                               alt={altTitle}
