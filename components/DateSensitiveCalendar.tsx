@@ -63,9 +63,9 @@ function DateSensitiveCard({
       <Link
         href={`${localePrefix}/events/${event.slug}`}
         prefetch={false}
-        className="group flex h-full flex-col border border-white/14 bg-[#18181C] p-5 transition-colors hover:border-white/55 hover:bg-[#12100D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9381E] motion-reduce:transition-none"
+        className="group flex h-full flex-col border border-[#F6F1E7]/14 bg-[#0B0A09] p-5 transition-colors hover:border-[#EAE3D5] hover:bg-[#141311] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] motion-reduce:transition-none"
       >
-        <span className="relative block aspect-[13/7] w-full shrink-0 overflow-hidden border border-white/14 bg-[#0A0A0C]" aria-hidden="true">
+        <span className="relative block aspect-[13/7] w-full shrink-0 overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]" aria-hidden="true">
           <Image
             src={event.image}
             alt={event.title}
@@ -79,22 +79,22 @@ function DateSensitiveCard({
           />
         </span>
         <span className="flex min-w-0 flex-1 flex-col pt-4">
-          <span className="block font-display text-lg font-bold leading-snug text-[#FFFFFF] transition-colors group-hover:text-[#FFFFFF] sm:text-2xl">{event.title}</span>
-          <time dateTime={event.dateISO} className="mt-2 flex items-start gap-2 font-sans tabular-nums text-[13px] font-semibold uppercase tracking-[0.04em] text-[#C9C7C2]">
+          <span className="block font-display text-lg font-bold leading-snug text-[#F6F1E7] transition-colors group-hover:text-[#F6F1E7] sm:text-2xl">{event.title}</span>
+          <time dateTime={event.dateISO} className="mt-2 flex items-start gap-2 font-sans tabular-nums text-[13px] font-semibold uppercase tracking-[0.04em] text-[#C2B9AA]">
             <Clock3 className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
             <span>{event.labels.dayHeading} · {time}</span>
           </time>
-          <span className="mt-2 flex items-start gap-1.5 font-sans text-base leading-relaxed text-[#C9C7C2]">
-            <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#FFFFFF]" aria-hidden="true" />
+          <span className="mt-2 flex items-start gap-1.5 font-sans text-base leading-relaxed text-[#C2B9AA]">
+            <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#F6F1E7]" aria-hidden="true" />
             <span>{event.venueName}</span>
           </span>
-          {price ? <span className="mt-1.5 block font-sans tabular-nums text-[13px] uppercase tracking-[0.04em] tabular-nums text-[#C9C7C2]" data-date-sensitive-price>{price}</span> : null}
-          <span className="mt-auto flex flex-col items-start gap-2 border-t border-white/14 pt-4">
-            <span className="flex items-start gap-1.5 font-sans tabular-nums text-[13px] font-medium uppercase leading-snug tracking-[0.04em] text-[#FFFFFF]" data-date-sensitive-status>
+          {price ? <span className="mt-1.5 block font-sans tabular-nums text-[13px] uppercase tracking-[0.04em] tabular-nums text-[#C2B9AA]" data-date-sensitive-price>{price}</span> : null}
+          <span className="mt-auto flex flex-col items-start gap-2 border-t border-[#F6F1E7]/14 pt-4">
+            <span className="flex items-start gap-1.5 font-sans tabular-nums text-[13px] font-medium uppercase leading-snug tracking-[0.04em] text-[#F6F1E7]" data-date-sensitive-status>
               <CheckCircle2 className="mt-px h-3.5 w-3.5 shrink-0" aria-hidden="true" />
               <span>{verified}</span>
             </span>
-            <span className="font-sans tabular-nums text-[13px] font-semibold uppercase tracking-[0.2em] text-[#FFFFFF] group-hover:text-[#FFFFFF]" data-date-sensitive-cta>{viewEvent} <span aria-hidden="true">↗</span></span>
+            <span className="font-sans tabular-nums text-[13px] font-semibold uppercase tracking-[0.2em] text-[#F6F1E7] group-hover:text-[#F6F1E7]" data-date-sensitive-cta>{viewEvent} <span aria-hidden="true">↗</span></span>
           </span>
         </span>
       </Link>
@@ -124,14 +124,14 @@ function DateSensitiveGalleryCard({
 
   return (
     <li className="h-full min-w-0" data-date-sensitive-event-id={event.id}>
-      <article className="group flex h-full flex-col overflow-hidden border border-white/14 bg-[#18181C] transition-colors hover:border-white/55">
+      <article className="group flex h-full flex-col overflow-hidden border border-[#F6F1E7]/14 bg-[#0B0A09] transition-colors hover:border-[#EAE3D5]">
         <Link
           href={detailHref}
           prefetch={noPrefetch}
-          className="block flex-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#D9381E]"
+          className="block flex-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#25D366]"
           data-date-sensitive-detail-cta
         >
-          <span className={`relative block ${fullPoster && event.image.includes('/halloween/') ? 'aspect-[4/5]' : 'aspect-video'} border-b border-white/14 bg-[#0A0A0C]`} aria-hidden={fullPoster ? undefined : true}>
+          <span className={`relative block ${fullPoster && event.image.includes('/halloween/') ? 'aspect-[4/5]' : 'aspect-video'} border-b border-[#F6F1E7]/14 bg-[#050505]`} aria-hidden={fullPoster ? undefined : true}>
             <Image
               src={event.image}
               alt={event.title}
@@ -147,26 +147,26 @@ function DateSensitiveGalleryCard({
           </span>
           <span className="block p-6 pb-4">
             <span
-              className="mb-2.5 inline-flex border border-white/35 bg-[#0A0A0C]/90 px-3 py-1 font-sans tabular-nums text-[13px] font-bold uppercase tracking-[0.04em] text-[#FFFFFF]"
+              className="mb-2.5 inline-flex border border-white/35 bg-[#050505]/92 px-3 py-1 font-sans tabular-nums text-[13px] font-bold uppercase tracking-[0.04em] text-[#F6F1E7]"
               data-selling-fast-badge
               data-almost-sold-out-badge
             >
               {scarcity.almostSoldOutBadge}
             </span>
-            <h3 className="font-display text-lg font-bold leading-snug text-[#FFFFFF] transition-colors group-hover:text-[#FFFFFF] sm:text-2xl">{event.title}</h3>
-            <time dateTime={event.dateISO} className="mt-2 block font-sans tabular-nums text-[13px] font-semibold uppercase tracking-[0.04em] text-[#C9C7C2]">{dateLabel}</time>
-            <span className="mt-2 flex items-start gap-1.5 font-sans text-base leading-relaxed text-[#C9C7C2]">
-              <MapPin className="mt-1 h-3.5 w-3.5 shrink-0 text-[#FFFFFF]" aria-hidden="true" />
+            <h3 className="font-display text-lg font-bold leading-snug text-[#F6F1E7] transition-colors group-hover:text-[#F6F1E7] sm:text-2xl">{event.title}</h3>
+            <time dateTime={event.dateISO} className="mt-2 block font-sans tabular-nums text-[13px] font-semibold uppercase tracking-[0.04em] text-[#C2B9AA]">{dateLabel}</time>
+            <span className="mt-2 flex items-start gap-1.5 font-sans text-base leading-relaxed text-[#C2B9AA]">
+              <MapPin className="mt-1 h-3.5 w-3.5 shrink-0 text-[#F6F1E7]" aria-hidden="true" />
               <span>{event.venueName}</span>
             </span>
-            {event.labels.price ? <span className="mt-2 block font-sans tabular-nums text-[13px] uppercase tracking-[0.04em] text-[#C9C7C2]" data-date-sensitive-price>{event.labels.price}</span> : null}
+            {event.labels.price ? <span className="mt-2 block font-sans tabular-nums text-[13px] uppercase tracking-[0.04em] text-[#C2B9AA]" data-date-sensitive-price>{event.labels.price}</span> : null}
           </span>
         </Link>
-        <div className="grid grid-cols-1 gap-2.5 border-t border-white/14 px-6 py-4">
+        <div className="grid grid-cols-1 gap-2.5 border-t border-[#F6F1E7]/14 px-6 py-4">
           <Link
             href={detailHref}
             prefetch={noPrefetch}
-            className="inline-flex min-h-[44px] items-center justify-center bg-[#25D366] px-4 py-2.5 text-center font-sans tabular-nums text-sm font-bold text-[#0A0A0C] transition-colors hover:bg-[#EDEBE6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9381E]"
+            className="inline-flex min-h-[44px] items-center justify-center bg-[#25D366] px-4 py-2.5 text-center font-sans tabular-nums text-sm font-bold text-[#050505] transition-colors hover:bg-[#EAE3D5] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]"
             data-date-sensitive-cta
           >
             {scarcity.openEventCardCta}
@@ -292,23 +292,23 @@ export default function DateSensitiveCalendar({
   }), [localePrefix, schemaName, visible]);
 
   const emptyResults = gallery ? (
-    <div className="flex min-h-56 flex-col justify-center border border-white/14 bg-[#18181C] px-6 py-10 text-center">
-      <Calendar className="mx-auto mb-4 h-10 w-10 text-[#FFFFFF]/40" aria-hidden="true" />
-      <p className="font-display text-2xl text-[#C9C7C2]">{copy.empty}</p>
-      {emptyHref && emptyLinkLabel ? <Link href={emptyHref} prefetch={noPrefetch} className="mt-6 inline-flex self-center border border-white/45 px-7 py-3.5 font-sans tabular-nums text-[13px] uppercase tracking-[0.2em] text-[#FFFFFF] transition-colors hover:bg-[#EDEBE6] hover:text-[#0A0A0C]">{emptyLinkLabel}</Link> : null}
+    <div className="flex min-h-56 flex-col justify-center border border-[#F6F1E7]/14 bg-[#0B0A09] px-6 py-10 text-center">
+      <Calendar className="mx-auto mb-4 h-10 w-10 text-[#F6F1E7]/40" aria-hidden="true" />
+      <p className="font-display text-2xl text-[#C2B9AA]">{copy.empty}</p>
+      {emptyHref && emptyLinkLabel ? <Link href={emptyHref} prefetch={noPrefetch} className="mt-6 inline-flex self-center border border-[#EAE3D5]/45 px-7 py-3.5 font-sans tabular-nums text-[13px] uppercase tracking-[0.2em] text-[#050505] transition-colors hover:bg-[#EAE3D5] hover:text-[#050505]">{emptyLinkLabel}</Link> : null}
     </div>
   ) : (
-    <div className="flex min-h-56 flex-col justify-center border border-white/14 bg-[#18181C] px-6 py-10 text-center">
-      <Calendar className="mx-auto mb-4 h-10 w-10 text-[#FFFFFF]/40" aria-hidden="true" />
-      <p className="font-display text-2xl text-[#C9C7C2]">{copy.empty}</p>
-      {emptyHref && emptyLinkLabel ? <Link href={emptyHref} prefetch={false} className="mt-6 inline-flex self-center border border-white/45 px-7 py-3.5 font-sans tabular-nums text-[13px] uppercase tracking-[0.2em] text-[#FFFFFF] transition-colors hover:bg-[#EDEBE6] hover:text-[#0A0A0C]">{emptyLinkLabel}</Link> : null}
+    <div className="flex min-h-56 flex-col justify-center border border-[#F6F1E7]/14 bg-[#0B0A09] px-6 py-10 text-center">
+      <Calendar className="mx-auto mb-4 h-10 w-10 text-[#F6F1E7]/40" aria-hidden="true" />
+      <p className="font-display text-2xl text-[#C2B9AA]">{copy.empty}</p>
+      {emptyHref && emptyLinkLabel ? <Link href={emptyHref} prefetch={false} className="mt-6 inline-flex self-center border border-[#EAE3D5]/45 px-7 py-3.5 font-sans tabular-nums text-[13px] uppercase tracking-[0.2em] text-[#050505] transition-colors hover:bg-[#EAE3D5] hover:text-[#050505]">{emptyLinkLabel}</Link> : null}
     </div>
   );
 
   const results = visible.length === 0 ? emptyResults : groupByDay ? (
     <div className="space-y-20">
       {groups.map(group => <section key={group.key} data-date-sensitive-day={group.key}>
-        <h2 className="mb-6 border-b border-white/14 pb-3 font-display text-2xl italic text-[#FFFFFF] sm:text-3xl">
+        <h2 className="mb-6 border-b border-[#F6F1E7]/14 pb-3 font-display text-2xl italic text-[#F6F1E7] sm:text-3xl">
           {group.isDay ? <time dateTime={group.key}>{group.label}</time> : <span>{group.label}</span>}
         </h2>
         <ol aria-label={group.label} className="grid grid-cols-1 gap-6 p-0 sm:grid-cols-2 lg:grid-cols-3" data-date-sensitive-track>
@@ -332,27 +332,27 @@ export default function DateSensitiveCalendar({
     <div data-date-sensitive-calendar data-date-sensitive-mode={mode} data-rome-day={romeDayKeyAt(now)}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: schema }} />
       {!gallery ? <div className="mb-4">
-        <p className="min-h-5 font-sans text-[13px] font-semibold uppercase tracking-[0.04em] text-[#C9C7C2]" aria-live="polite" data-date-sensitive-count={visible.length}>
+        <p className="min-h-5 font-sans text-[13px] font-semibold uppercase tracking-[0.04em] text-[#C2B9AA]" aria-live="polite" data-date-sensitive-count={visible.length}>
           {visible.length > 0 ? `${visible.length} · ${copy.verified}` : copy.empty}
         </p>
       </div> : null}
-      {dateControls && <div className="mb-10 border border-white/15 bg-[#18181C] p-5 sm:p-8">
+      {dateControls && <div className="mb-10 border border-[#F6F1E7]/14 bg-[#0B0A09] p-5 sm:p-8">
         <div className="grid gap-5 sm:grid-cols-2">
-          <label className="flex flex-col gap-2 font-sans text-[13px] font-bold uppercase tracking-[0.04em] text-[#FFFFFF]">{dateControls.month}
-            <select className="min-h-12 w-full border border-white/20 bg-[#0A0A0C] p-3 font-sans text-base text-[#FFFFFF] focus-visible:outline-[#FFFFFF]" value={month} onChange={event => { setRequestedMonth(event.currentTarget.value); setRequestedDay(''); }}>
+          <label className="flex flex-col gap-2 font-sans text-[13px] font-bold uppercase tracking-[0.04em] text-[#F6F1E7]">{dateControls.month}
+            <select className="min-h-12 w-full border border-[#EAE3D5]/24 bg-[#050505] p-3 font-sans text-base text-[#F6F1E7] focus-visible:outline-[#FFFFFF]" value={month} onChange={event => { setRequestedMonth(event.currentTarget.value); setRequestedDay(''); }}>
               <option value="">{dateControls.allMonths}</option>
               {months.map(key => <option key={key} value={key}>{monthFormatter.format(new Date(`${key}-01T12:00:00Z`))}</option>)}
             </select>
           </label>
-          <label className="flex flex-col gap-2 font-sans text-[13px] font-bold uppercase tracking-[0.04em] text-[#FFFFFF]">{dateControls.date}
-            <select className="min-h-12 w-full border border-white/20 bg-[#0A0A0C] p-3 font-sans text-base text-[#FFFFFF] focus-visible:outline-[#FFFFFF]" value={day} onChange={event => setRequestedDay(event.currentTarget.value)}>
+          <label className="flex flex-col gap-2 font-sans text-[13px] font-bold uppercase tracking-[0.04em] text-[#F6F1E7]">{dateControls.date}
+            <select className="min-h-12 w-full border border-[#EAE3D5]/24 bg-[#050505] p-3 font-sans text-base text-[#F6F1E7] focus-visible:outline-[#FFFFFF]" value={day} onChange={event => setRequestedDay(event.currentTarget.value)}>
               <option value="">{dateControls.allDates}</option>
               {days.map(key => <option key={key} value={key}>{dateFormatter.format(new Date(`${key}T12:00:00Z`))}</option>)}
             </select>
           </label>
         </div>
         <div className="mt-5 flex flex-wrap gap-2" role="group" aria-label={dateControls.date}>
-          {days.slice(0, 7).map(key => <button key={key} type="button" aria-label={dateFormatter.format(new Date(`${key}T12:00:00Z`))} aria-pressed={day === key} onClick={() => setRequestedDay(day === key ? '' : key)} className="nlm-pressable min-h-11 border border-white/35 px-4 py-2 font-sans text-[13px] font-bold uppercase tracking-[0.04em] text-[#FFFFFF] aria-pressed:bg-[#FFFFFF] aria-pressed:text-[#0A0A0C] focus-visible:outline-[#FFFFFF]">{shortDateFormatter.format(new Date(`${key}T12:00:00Z`))}</button>)}
+          {days.slice(0, 7).map(key => <button key={key} type="button" aria-label={dateFormatter.format(new Date(`${key}T12:00:00Z`))} aria-pressed={day === key} onClick={() => setRequestedDay(day === key ? '' : key)} className="nlm-pressable min-h-11 border border-white/35 px-4 py-2 font-sans text-[13px] font-bold uppercase tracking-[0.04em] text-[#050505] aria-pressed:bg-[#F6F1E7] aria-pressed:text-[#050505] focus-visible:outline-[#FFFFFF]">{shortDateFormatter.format(new Date(`${key}T12:00:00Z`))}</button>)}
         </div>
       </div>}
       <div aria-live="polite" data-date-sensitive-results>{results}</div>

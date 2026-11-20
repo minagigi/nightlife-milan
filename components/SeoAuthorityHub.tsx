@@ -22,18 +22,18 @@ export default function SeoAuthorityHub({ lang, pageKey, pagePath }: SeoAuthorit
     <section
       aria-label={copy.h2Main}
       data-seo-authority-hub={lang}
-      className="w-full border-t border-white/14 bg-[#0A0A0C] text-[#FFFFFF]"
+      className="w-full border-t border-[#F6F1E7]/14 bg-[#050505] text-[#F6F1E7]"
     >
-      <div className="mx-auto max-w-[1440px] border-x border-white/14 px-5 py-16 sm:px-14 space-y-14">
+      <div className="mx-auto max-w-[1440px] border-x border-[#F6F1E7]/14 px-5 py-16 sm:px-14 space-y-14">
         {/* Header & Intro */}
         <div className="max-w-4xl space-y-3">
-          <h2 className="font-display text-3xl font-extrabold uppercase tracking-[-0.02em] text-[#FFFFFF] sm:text-5xl">
+          <h2 className="font-display text-3xl font-bold uppercase tracking-[-0.02em] text-[#F6F1E7] sm:text-5xl">
             {copy.h2Main}
           </h2>
-          <p className="font-sans text-[13px] font-bold uppercase tracking-[0.04em] text-[#F35A3F]">
+          <p className="font-sans text-[13px] font-bold uppercase tracking-[0.04em] text-[#EAE3D5]">
             {copy.eyebrow}
           </p>
-          <p className="max-w-[48ch] font-sans text-base leading-relaxed text-[#C9C7C2]">
+          <p className="max-w-[48ch] font-sans text-base leading-relaxed text-[#C2B9AA]">
             {copy.introParagraph}
           </p>
         </div>
@@ -42,23 +42,23 @@ export default function SeoAuthorityHub({ lang, pageKey, pagePath }: SeoAuthorit
         <nav
           aria-label={copy.tocTitle}
           data-seo-toc="true"
-          className="border border-[#0A0A0C]/16 bg-[#EDEBE6] p-6 text-[#0A0A0C] sm:p-10"
+          className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-6 text-[#F6F1E7] sm:p-10"
         >
-          <h2 className="font-display text-2xl font-normal text-[#0A0A0C] sm:text-3xl">
+          <h2 className="font-display text-2xl font-normal text-[#F6F1E7] sm:text-3xl">
             {copy.tocTitle}
           </h2>
-          <p className="mt-1.5 font-sans text-[13px] text-[#4F4D48] sm:text-sm">
+          <p className="mt-1.5 font-sans text-[13px] text-[#C2B9AA] sm:text-sm">
             {copy.tocSubtitle}
           </p>
-          <ol className="mt-6 grid grid-cols-1 gap-4 border-t border-[#0A0A0C]/16 pt-6 sm:grid-cols-2 lg:grid-cols-3">
+          <ol className="mt-6 grid grid-cols-1 gap-4 border-t border-[#F6F1E7]/14 pt-6 sm:grid-cols-2 lg:grid-cols-3">
             {copy.sections.map((sec) => (
               <li key={sec.anchorId} className="flex items-start gap-3">
-                <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center border border-[#0A0A0C]/30 bg-[#0A0A0C] font-sans tabular-nums text-[13px] font-bold text-[#FFFFFF]">
+                <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center border border-[#EAE3D5]/32 bg-[#050505] font-sans tabular-nums text-[13px] font-bold text-[#F6F1E7]">
                   0{sec.index}
                 </span>
                 <a
                   href={`#${sec.anchorId}`}
-                  className="font-sans text-sm font-semibold text-[#0A0A0C] underline-offset-4 transition-colors hover:underline"
+                  className="font-sans text-sm font-semibold text-[#F6F1E7] underline-offset-4 transition-colors hover:underline"
                 >
                   {sec.h3Title}
                 </a>
@@ -68,23 +68,23 @@ export default function SeoAuthorityHub({ lang, pageKey, pagePath }: SeoAuthorit
         </nav>
 
         {/* 2. Five H3 Sections alternating Couture Noir (#050505) and Warm Editorial Ivory (#F6F1E7) */}
-        <div className="divide-y divide-white/14 border border-white/14" data-seo-h3-sections="true">
+        <div className="divide-y divide-[#F6F1E7]/14 border border-[#F6F1E7]/14" data-seo-h3-sections="true">
           {copy.sections.map((sec, idx) => {
             const isIvory = idx % 2 === 1;
             return (
             <article
               key={sec.anchorId}
               className={`grid grid-cols-1 gap-8 p-6 sm:p-10 lg:grid-cols-12 ${
-                isIvory ? 'bg-[#EDEBE6] text-[#0A0A0C]' : 'bg-[#0A0A0C] text-[#FFFFFF]'
+                isIvory ? 'bg-[#0B0A09] text-[#F6F1E7]' : 'bg-[#050505] text-[#F6F1E7]'
               }`}
             >
               <div className={sec.imageSrc ? 'space-y-4 lg:col-span-7' : 'space-y-4 lg:col-span-12'}>
                 <div className="flex items-baseline gap-3">
-                  <span className={`font-display italic text-3xl ${isIvory ? 'text-[#0A0A0C]' : 'text-[#FFFFFF]'}`}>0{sec.index}</span>
+                  <span className={`font-display italic text-3xl ${isIvory ? 'text-[#F6F1E7]' : 'text-[#F6F1E7]'}`}>0{sec.index}</span>
                   <h3
                     id={sec.anchorId}
                     className={`scroll-mt-28 font-display text-2xl font-normal tracking-[-0.02em] sm:text-3xl ${
-                      isIvory ? 'text-[#0A0A0C]' : 'text-[#FFFFFF]'
+                      isIvory ? 'text-[#F6F1E7]' : 'text-[#F6F1E7]'
                     }`}
                   >
                     {sec.h3Title}
@@ -94,7 +94,7 @@ export default function SeoAuthorityHub({ lang, pageKey, pagePath }: SeoAuthorit
                   <p
                     key={pIdx}
                     className={`max-w-[48ch] font-sans text-base leading-relaxed ${
-                      isIvory ? 'text-[#4F4D48]' : 'text-[#C9C7C2]'
+                      isIvory ? 'text-[#C2B9AA]' : 'text-[#C2B9AA]'
                     }`}
                   >
                     {paragraph}
@@ -103,7 +103,7 @@ export default function SeoAuthorityHub({ lang, pageKey, pagePath }: SeoAuthorit
                 {/* Contextual internal keyword anchor links */}
                 <div className="pt-2">
                   <ul className={`flex flex-col gap-2.5 border-t pt-4 sm:flex-row sm:flex-wrap sm:gap-5 ${
-                    isIvory ? 'border-[#0A0A0C]/16' : 'border-white/14'
+                    isIvory ? 'border-[#F6F1E7]/14' : 'border-[#F6F1E7]/14'
                   }`}>
                     {sec.contextualLinks.map((cLink) => (
                       <li key={`${sec.anchorId}-${cLink.href}-${cLink.anchor}`} className="text-[13px] sm:text-sm">
@@ -111,12 +111,12 @@ export default function SeoAuthorityHub({ lang, pageKey, pagePath }: SeoAuthorit
                           prefetch={false}
                           href={cLink.href}
                           className={`font-sans tabular-nums text-[13px] font-semibold uppercase tracking-[0.04em] underline underline-offset-4 transition-colors ${
-                            isIvory ? 'text-[#0A0A0C]' : 'text-[#FFFFFF] hover:text-[#FFFFFF]'
+                            isIvory ? 'text-[#F6F1E7]' : 'text-[#F6F1E7] hover:text-[#F6F1E7]'
                           }`}
                         >
                           {cLink.anchor} ↗
                         </Link>
-                        <span className={`ml-1.5 font-sans ${isIvory ? 'text-[#5C5446]' : 'text-[#A8A093]'}`}>· {cLink.summary}</span>
+                        <span className={`ml-1.5 font-sans ${isIvory ? 'text-[#C2B9AA]' : 'text-[#A8A093]'}`}>· {cLink.summary}</span>
                       </li>
                     ))}
                   </ul>
@@ -125,7 +125,7 @@ export default function SeoAuthorityHub({ lang, pageKey, pagePath }: SeoAuthorit
 
               {sec.imageSrc ? (
                 <figure className={`flex flex-col justify-between overflow-hidden border lg:col-span-5 ${
-                  isIvory ? 'border-[#0A0A0C]/16 bg-[#FFFFFF]' : 'border-white/14 bg-[#18181C]'
+                  isIvory ? 'border-[#F6F1E7]/14 bg-[#141311]' : 'border-[#F6F1E7]/14 bg-[#0B0A09]'
                 }`}>
                   <img
                     src={sec.imageSrc}
@@ -136,11 +136,11 @@ export default function SeoAuthorityHub({ lang, pageKey, pagePath }: SeoAuthorit
                     loading="lazy"
                     decoding="async"
                     className={`aspect-[16/9] h-auto w-full object-cover border-b ${
-                      isIvory ? 'border-[#0A0A0C]/16' : 'border-white/14'
+                      isIvory ? 'border-[#F6F1E7]/14' : 'border-[#F6F1E7]/14'
                     }`}
                   />
                   <figcaption className={`p-4 font-sans tabular-nums text-[13px] uppercase tracking-[0.04em] leading-relaxed ${
-                    isIvory ? 'text-[#4F4D48]' : 'text-[#A8A093]'
+                    isIvory ? 'text-[#C2B9AA]' : 'text-[#A8A093]'
                   }`}>
                     {sec.h3Title}
                   </figcaption>
@@ -154,37 +154,37 @@ export default function SeoAuthorityHub({ lang, pageKey, pagePath }: SeoAuthorit
         {/* 3. Tree / Silo Related Articles & Hubs Structure (Warm Editorial Ivory #F6F1E7) */}
         <div
           data-seo-silo-tree="true"
-          className="border border-[#0A0A0C]/16 bg-[#EDEBE6] p-6 text-[#0A0A0C] sm:p-10"
+          className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-6 text-[#F6F1E7] sm:p-10"
         >
-          <h2 className="font-display text-2xl font-normal text-[#0A0A0C] sm:text-3xl">
+          <h2 className="font-display text-2xl font-normal text-[#F6F1E7] sm:text-3xl">
             {copy.h2SiloTree}
           </h2>
-          <p className="mt-2 font-sans text-sm text-[#4F4D48]">{copy.siloIntro}</p>
-          <div className="mt-6 grid grid-cols-1 divide-y lg:divide-y-0 lg:divide-x divide-[#0A0A0C]/16 border border-[#0A0A0C]/16 lg:grid-cols-3">
+          <p className="mt-2 font-sans text-sm text-[#C2B9AA]">{copy.siloIntro}</p>
+          <div className="mt-6 grid grid-cols-1 divide-y lg:divide-y-0 lg:divide-x divide-[#F6F1E7]/14 border border-[#F6F1E7]/14 lg:grid-cols-3">
             {copy.siloBranches.map((branch) => (
               <div
                 key={branch.branchTitle}
-                className="bg-[#FFFFFF] p-6"
+                className="bg-[#141311] p-6"
               >
-                <p className="font-sans tabular-nums text-[13px] font-bold uppercase tracking-[0.04em] text-[#5C5446]">
+                <p className="font-sans tabular-nums text-[13px] font-bold uppercase tracking-[0.04em] text-[#C2B9AA]">
                   {branch.branchTitle}
                 </p>
-                <div className="mt-3 border-b border-[#0A0A0C]/16 pb-3">
+                <div className="mt-3 border-b border-[#F6F1E7]/14 pb-3">
                   <Link
                     prefetch={false}
                     href={branch.parentLink.href}
-                    className="font-display text-xl text-[#0A0A0C] underline-offset-4 hover:underline"
+                    className="font-display text-xl text-[#F6F1E7] underline-offset-4 hover:underline"
                   >
                     {branch.parentLink.label}
                   </Link>
                 </div>
-                <ul className="mt-4 space-y-2.5 border-l border-[#0A0A0C]/30 pl-4">
+                <ul className="mt-4 space-y-2.5 border-l border-[#EAE3D5]/32 pl-4">
                   {branch.children.map((child) => (
                     <li key={`${branch.branchTitle}-${child.href}-${child.label}`}>
                       <Link
                         prefetch={false}
                         href={child.href}
-                        className="font-sans text-[13px] text-[#4F4D48] underline-offset-4 hover:text-[#0A0A0C] hover:underline sm:text-sm"
+                        className="font-sans text-[13px] text-[#C2B9AA] underline-offset-4 hover:text-[#F6F1E7] hover:underline sm:text-sm"
                       >
                         {child.label}
                       </Link>
@@ -197,28 +197,28 @@ export default function SeoAuthorityHub({ lang, pageKey, pagePath }: SeoAuthorit
         </div>
 
         {/* 4. Territorial Competency Zones, Reference Cities/Provinces & Official Services */}
-        <div className="grid grid-cols-1 divide-y lg:divide-y-0 lg:divide-x divide-white/14 border border-white/14 lg:grid-cols-3">
+        <div className="grid grid-cols-1 divide-y lg:divide-y-0 lg:divide-x divide-[#F6F1E7]/14 border border-[#F6F1E7]/14 lg:grid-cols-3">
           {/* Competency Zones in Milan */}
           <div
             data-footer-competency-zones="true"
-            className="bg-[#18181C] p-6 sm:p-8"
+            className="bg-[#0B0A09] p-6 sm:p-8"
           >
-            <h2 className="font-display text-xl font-normal text-[#FFFFFF]">
+            <h2 className="font-display text-xl font-normal text-[#F6F1E7]">
               {copy.zonesHeading}
             </h2>
-            <ul className="mt-4 space-y-2.5 font-sans text-[13px] leading-relaxed text-[#C9C7C2]">
+            <ul className="mt-4 space-y-2.5 font-sans text-[13px] leading-relaxed text-[#C2B9AA]">
               {copy.zonesList.map((z) => (
                 <li key={z.name}>
                   {z.href ? (
                     <Link
                       prefetch={false}
                       href={z.href}
-                      className="font-semibold text-[#FFFFFF] underline-offset-4 hover:underline"
+                      className="font-semibold text-[#F6F1E7] underline-offset-4 hover:underline"
                     >
                       {z.name}
                     </Link>
                   ) : (
-                    <strong className="font-semibold text-[#FFFFFF]">{z.name}</strong>
+                    <strong className="font-semibold text-[#F6F1E7]">{z.name}</strong>
                   )}{' '}
                   <span className="text-[#A8A093]">· {z.detail}</span>
                 </li>
@@ -229,15 +229,15 @@ export default function SeoAuthorityHub({ lang, pageKey, pagePath }: SeoAuthorit
           {/* Reference Cities, Hinterland Municipalities & Lombardy Provinces */}
           <div
             data-footer-reference-cities="true"
-            className="bg-[#0A0A0C] p-6 sm:p-8"
+            className="bg-[#050505] p-6 sm:p-8"
           >
-            <h2 className="font-display text-xl font-normal text-[#FFFFFF]">
+            <h2 className="font-display text-xl font-normal text-[#F6F1E7]">
               {copy.citiesHeading}
             </h2>
-            <ul className="mt-4 space-y-2.5 font-sans text-[13px] leading-relaxed text-[#C9C7C2]">
+            <ul className="mt-4 space-y-2.5 font-sans text-[13px] leading-relaxed text-[#C2B9AA]">
               {copy.citiesList.map((c) => (
                 <li key={c.name}>
-                  <strong className="font-semibold text-[#FFFFFF]">{c.name}</strong>{' '}
+                  <strong className="font-semibold text-[#F6F1E7]">{c.name}</strong>{' '}
                   <span className="text-[#A8A093]">· {c.detail}</span>
                 </li>
               ))}
@@ -245,21 +245,21 @@ export default function SeoAuthorityHub({ lang, pageKey, pagePath }: SeoAuthorit
           </div>
 
           {/* Official Services & GMB Aligned Contacts */}
-          <div className="divide-y divide-white/14 bg-[#18181C]">
+          <div className="divide-y divide-[#F6F1E7]/14 bg-[#0B0A09]">
             <div
               data-footer-services="true"
               className="p-6 sm:p-8"
             >
-              <h2 className="font-display text-xl font-normal text-[#FFFFFF]">
+              <h2 className="font-display text-xl font-normal text-[#F6F1E7]">
                 {copy.servicesHeading}
               </h2>
-              <ul className="mt-4 space-y-2.5 font-sans text-[13px] leading-relaxed text-[#C9C7C2]">
+              <ul className="mt-4 space-y-2.5 font-sans text-[13px] leading-relaxed text-[#C2B9AA]">
                 {copy.servicesList.map((s) => (
                   <li key={s.name}>
                     <Link
                       prefetch={false}
                       href={s.href}
-                      className="font-semibold text-[#FFFFFF] underline-offset-4 hover:underline"
+                      className="font-semibold text-[#F6F1E7] underline-offset-4 hover:underline"
                     >
                       {s.name}
                     </Link>{' '}
@@ -274,32 +274,32 @@ export default function SeoAuthorityHub({ lang, pageKey, pagePath }: SeoAuthorit
               data-gmb-nap="true"
               className="p-6 sm:p-8"
             >
-              <h2 className="font-display text-xl font-normal text-[#FFFFFF]">
+              <h2 className="font-display text-xl font-normal text-[#F6F1E7]">
                 {copy.h2Gmb}
               </h2>
-              <dl className="mt-4 space-y-2 font-sans text-[13px] text-[#C9C7C2]">
+              <dl className="mt-4 space-y-2 font-sans text-[13px] text-[#C2B9AA]">
                 <div>
-                  <dt className="font-sans tabular-nums uppercase tracking-[0.04em] text-[#FFFFFF]">{copy.gmb.businessName}</dt>
+                  <dt className="font-sans tabular-nums uppercase tracking-[0.04em] text-[#F6F1E7]">{copy.gmb.businessName}</dt>
                   <dd>{copy.gmb.categoryLabel}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#FFFFFF]">{copy.gmb.addressLabel}</dt>
+                  <dt className="font-semibold text-[#F6F1E7]">{copy.gmb.addressLabel}</dt>
                   <dd>{copy.gmb.addressValue}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#FFFFFF]">{copy.gmb.coordinatesLabel}</dt>
+                  <dt className="font-semibold text-[#F6F1E7]">{copy.gmb.coordinatesLabel}</dt>
                   <dd className="font-sans tabular-nums text-[13px]">{copy.gmb.coordinatesValue}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#FFFFFF]">{copy.gmb.phoneLabel}</dt>
-                  <dd className="font-sans tabular-nums font-semibold text-[#FFFFFF]"><a href="tel:+393519127047" className="hover:underline">{copy.gmb.phoneValue}</a></dd>
+                  <dt className="font-semibold text-[#F6F1E7]">{copy.gmb.phoneLabel}</dt>
+                  <dd className="font-sans tabular-nums font-semibold text-[#F6F1E7]"><a href="tel:+393519127047" className="hover:underline">{copy.gmb.phoneValue}</a></dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#FFFFFF]">{copy.gmb.emailLabel}</dt>
+                  <dt className="font-semibold text-[#F6F1E7]">{copy.gmb.emailLabel}</dt>
                   <dd><a href="mailto:concierge@nightlifemilan.com" className="hover:underline">{copy.gmb.emailValue}</a></dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#FFFFFF]">{copy.gmb.hoursLabel}</dt>
+                  <dt className="font-semibold text-[#F6F1E7]">{copy.gmb.hoursLabel}</dt>
                   <dd>{copy.gmb.hoursValue}</dd>
                 </div>
               </dl>
@@ -312,7 +312,7 @@ export default function SeoAuthorityHub({ lang, pageKey, pagePath }: SeoAuthorit
                   )}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-[44px] items-center justify-center bg-[#25D366] px-4 py-2.5 font-sans tabular-nums text-[13px] font-bold uppercase tracking-[0.04em] text-[#0A0A0C] transition-colors hover:bg-[#2EE472]"
+                  className="inline-flex min-h-[44px] items-center justify-center bg-[#25D366] px-4 py-2.5 font-sans tabular-nums text-[13px] font-bold uppercase tracking-[0.04em] text-[#050505] transition-colors hover:bg-[#2EE472]"
                 >
                   {copy.gmb.whatsappCtaLabel}
                 </a>
@@ -320,7 +320,7 @@ export default function SeoAuthorityHub({ lang, pageKey, pagePath }: SeoAuthorit
                   href={mapsDirectionsUrl.toString()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-[44px] items-center justify-center border border-white/35 px-4 py-2.5 font-sans tabular-nums text-[13px] uppercase tracking-[0.04em] text-[#FFFFFF] transition-colors hover:border-white"
+                  className="inline-flex min-h-[44px] items-center justify-center border border-white/35 px-4 py-2.5 font-sans tabular-nums text-[13px] uppercase tracking-[0.04em] text-[#F6F1E7] transition-colors hover:border-[#EAE3D5]"
                 >
                   {copy.gmb.mapsCtaLabel}
                 </a>

@@ -44,7 +44,7 @@ export default function Hero({ title, subtitle, ctaText, ctaLink, imageUrl }: He
           href={ctaLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-black bg-champagne hover:bg-champagne/90 rounded-full transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(201,168,106,0.3)] focus:outline-none focus:ring-4 focus:ring-champagne/50"
+          className="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-[#050505] bg-[#25D366] hover:bg-[#2EE472] rounded-full transition-all shadow-[0_0_20px_rgba(201,168,106,0.3)] focus:outline-none focus:ring-4 focus:ring-champagne/50"
           aria-label={`${ctaText} per ${title}`}
         >
           {/* Icona SVG inline per ridurre le richieste HTTP */}

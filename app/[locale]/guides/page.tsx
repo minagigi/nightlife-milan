@@ -481,7 +481,7 @@ export default async function GuidesPage({
               fill
               quality={92}
               sizes="100vw"
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
+              className="object-cover"
               referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-transparent opacity-95" />
@@ -508,7 +508,7 @@ export default async function GuidesPage({
               </p>
               <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-champagne">
                 <span>{hubUi.featuredCta}</span>
-                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </div>
             </div>
           </Link>
@@ -577,7 +577,7 @@ export default async function GuidesPage({
                     fill
                     quality={92}
                     sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="object-cover"
                     referrerPolicy="no-referrer"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
@@ -626,7 +626,7 @@ export default async function GuidesPage({
 
                   <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs font-mono uppercase tracking-wider text-champagne">
                     <span>{hubUi.readGuideLabel}</span>
-                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </div>
                 </div>
               </Link>
@@ -667,7 +667,7 @@ export default async function GuidesPage({
                         {hubUi.readGuideLabel}
                       </span>
                     </div>
-                    <ArrowUpRight className="w-4 h-4 text-champagne shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="w-4 h-4 text-champagne shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </Link>
                 );
               })}

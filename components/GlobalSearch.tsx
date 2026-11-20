@@ -1202,7 +1202,7 @@ const HighlightText = ({ text, query }: { text: string; query: string }) => {
     <span>
       {parts.map((part, i) =>
         lowerTokens.includes(escapeRegex(part.toLowerCase())) ? (
-          <span key={i} className="text-[#FFFFFF] font-semibold underline decoration-[#EAE3D5]/45 underline-offset-2">
+          <span key={i} className="text-[#F6F1E7] font-semibold underline decoration-[#EAE3D5]/45 underline-offset-2">
             {part}
           </span>
         ) : (
@@ -1712,19 +1712,19 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
   const renderHubIcon = (iconName: string) => {
     switch (iconName) {
       case 'trophy':
-        return <Trophy className="w-4 h-4 text-[#FFFFFF]" />;
+        return <Trophy className="w-4 h-4 text-[#F6F1E7]" />;
       case 'wine':
-        return <Wine className="w-4 h-4 text-[#FFFFFF]" />;
+        return <Wine className="w-4 h-4 text-[#F6F1E7]" />;
       case 'party':
-        return <PartyPopper className="w-4 h-4 text-[#FFFFFF]" />;
+        return <PartyPopper className="w-4 h-4 text-[#F6F1E7]" />;
       case 'music':
-        return <Music2 className="w-4 h-4 text-[#FFFFFF]" />;
+        return <Music2 className="w-4 h-4 text-[#F6F1E7]" />;
       case 'qr':
-        return <QrCode className="w-4 h-4 text-[#FFFFFF]" />;
+        return <QrCode className="w-4 h-4 text-[#F6F1E7]" />;
       case 'crown':
-        return <Crown className="w-4 h-4 text-[#FFFFFF]" />;
+        return <Crown className="w-4 h-4 text-[#F6F1E7]" />;
       default:
-        return <Sparkles className="w-4 h-4 text-[#FFFFFF]" />;
+        return <Sparkles className="w-4 h-4 text-[#F6F1E7]" />;
     }
   };
 
@@ -1755,17 +1755,17 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
         onClick={handleOpen}
         onMouseEnter={ensureExtendedCatalogs}
         onFocus={ensureExtendedCatalogs}
-        className="nlm-search-trigger flex items-center justify-center md:justify-between gap-2.5 min-h-11 min-w-11 md:px-3.5 py-2 border border-white/25 bg-[#0A0A0C] text-[#FFFFFF] hover:border-white hover:text-[#FFFFFF] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9381E]"
+        className="nlm-search-trigger flex items-center justify-center md:justify-between gap-2.5 min-h-11 min-w-11 md:px-3.5 py-2 border border-[#EAE3D5]/28 bg-[#050505] text-[#F6F1E7] hover:border-[#EAE3D5] hover:text-[#F6F1E7] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]"
         aria-label={ui.triggerAria}
         aria-keyshortcuts="Control+K Meta+K"
         aria-expanded={isOpen}
         aria-haspopup="dialog"
       >
-        <Search className="w-4 h-4 text-[#FFFFFF] shrink-0" />
-        <span className="hidden md:inline font-sans text-[13px] font-semibold uppercase tabular-nums tracking-[0.04em] text-[#FFFFFF]">
+        <Search className="w-4 h-4 text-[#F6F1E7] shrink-0" />
+        <span className="hidden md:inline font-sans text-[13px] font-semibold uppercase tabular-nums tracking-[0.04em] text-[#F6F1E7]">
           {ui.triggerLabel}
         </span>
-        <kbd className="hidden xl:inline-flex items-center px-1.5 py-0.5 border border-white/20 bg-[#18181C] font-sans text-[13px] tabular-nums text-[#C9C7C2]">
+        <kbd className="hidden xl:inline-flex items-center px-1.5 py-0.5 border border-[#EAE3D5]/24 bg-[#0B0A09] font-sans text-[13px] tabular-nums text-[#C2B9AA]">
           ⌘K
         </kbd>
       </button>
@@ -1778,18 +1778,18 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
             role="dialog"
             aria-modal="true"
             aria-label={ui.triggerAria}
-            className="fixed inset-0 z-[120] h-[100dvh] w-screen bg-[#0A0A0C] flex flex-col text-[#FFFFFF] overflow-hidden"
+            className="fixed inset-0 z-[120] h-[100dvh] w-screen bg-[#050505] flex flex-col text-[#F6F1E7] overflow-hidden"
             onMouseDown={(e) => {
               if (e.target === e.currentTarget) handleClose();
             }}
           >
             {/* Sticky Editorial Command Header */}
-            <div className="w-full border-b border-white/14 bg-[#18181C]">
+            <div className="w-full border-b border-[#F6F1E7]/14 bg-[#0B0A09]">
               <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-8 pt-4 pb-3">
                 {/* Input Bar */}
                 <div className="flex items-center gap-3 shrink-0 whitespace-nowrap">
-                  <div className="flex-1 relative flex items-center border border-white/45 bg-[#0A0A0C] px-3.5 sm:px-4 min-h-[54px] focus-within:border-white">
-                    <Search className="w-5 h-5 text-[#FFFFFF] shrink-0 mr-3" />
+                  <div className="flex-1 relative flex items-center border border-[#EAE3D5]/45 bg-[#050505] px-3.5 sm:px-4 min-h-[54px] focus-within:border-white">
+                    <Search className="w-5 h-5 text-[#F6F1E7] shrink-0 mr-3" />
                     <input
                       ref={inputRef}
                       type="text"
@@ -1807,7 +1807,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                       placeholder={ui.placeholder}
                       aria-label={ui.placeholder}
                       style={{ outline: "none", boxShadow: "none" }}
-                      className="w-full bg-transparent border-none text-base sm:text-xl font-display text-[#FFFFFF] placeholder:text-[#C9C7C2]/70 focus:outline-none focus-visible:outline-none focus:ring-0 py-2.5"
+                      className="w-full bg-transparent border-none text-base sm:text-xl font-display text-[#F6F1E7] placeholder:text-[#C2B9AA]/70 focus:outline-none focus-visible:outline-none focus:ring-0 py-2.5"
                     />
                     {query.length > 0 && (
                       <button
@@ -1817,7 +1817,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                           inputRef.current?.focus();
                         }}
                         aria-label={ui.clearAria}
-                        className="flex items-center justify-center w-9 h-9 text-[#C9C7C2] hover:text-[#FFFFFF] transition-colors shrink-0"
+                        className="flex items-center justify-center w-9 h-9 text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors shrink-0"
                       >
                         <X className="w-4 h-4" />
                       </button>
@@ -1828,7 +1828,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                     type="button"
                     onClick={handleClose}
                     aria-label={ui.closeAria}
-                    className="flex items-center justify-center gap-2 min-h-[54px] min-w-[54px] sm:px-4 border border-white/20 bg-[#0A0A0C] font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#FFFFFF] hover:border-white hover:text-[#FFFFFF] transition-colors shrink-0"
+                    className="flex items-center justify-center gap-2 min-h-[54px] min-w-[54px] sm:px-4 border border-[#EAE3D5]/24 bg-[#050505] font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#F6F1E7] hover:border-[#EAE3D5] hover:text-[#F6F1E7] transition-colors shrink-0"
                   >
                     <X className="w-5 h-5" />
                     <span className="hidden sm:inline">{ui.closeLabel}</span>
@@ -1848,15 +1848,15 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                         onClick={() => setActiveTab(tab.id)}
                         className={`flex items-center gap-1.5 px-3 py-2 min-h-[38px] shrink-0 font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] border transition-colors ${
                           isActive
-                            ? 'border-white bg-[#EDEBE6] text-[#0A0A0C] font-bold'
-                            : 'border-white/14 bg-[#0A0A0C] text-[#C9C7C2] hover:border-white/50 hover:text-[#FFFFFF]'
+                            ? 'border-white bg-[#EAE3D5] text-[#050505] font-bold'
+                            : 'border-[#F6F1E7]/14 bg-[#050505] text-[#C2B9AA] hover:border-[#EAE3D5] hover:text-[#F6F1E7]'
                         }`}
                       >
                         <span>{tab.label}</span>
                         {typeof tab.count === 'number' && (
                           <span
                             className={`text-[13px] px-1.5 py-0.2 ${
-                              isActive ? 'bg-[#0A0A0C]/20 text-[#0A0A0C]' : 'bg-[#EDEBE6]/8 text-[#FFFFFF]'
+                              isActive ? 'bg-[#050505]/20 text-[#050505]' : 'bg-[#F6F1E7]/10 text-[#F6F1E7]'
                             }`}
                           >
                             {tab.count}
@@ -1869,7 +1869,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
 
                 {/* 1-Click Quick Search Chips */}
                 <div className="mt-2.5 flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-1 border-t border-white/8">
-                  <span className="font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#FFFFFF] shrink-0 flex items-center gap-1 mr-1">
+                  <span className="font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#F6F1E7] shrink-0 flex items-center gap-1 mr-1">
                     <SlidersHorizontal className="w-3 h-3" />
                     {ui.quickLabel}
                   </span>
@@ -1891,8 +1891,8 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                         }}
                         className={`px-2.5 py-1 text-[13px] font-sans tabular-nums shrink-0 border transition-colors ${
                           isChipActive
-                            ? 'border-white bg-[#EAE3D5]/20 text-[#FFFFFF]'
-                            : 'border-white/12 bg-[#0A0A0C]/70 text-[#C9C7C2] hover:border-white/45 hover:text-[#FFFFFF]'
+                            ? 'border-white bg-[#EAE3D5]/20 text-[#F6F1E7]'
+                            : 'border-white/12 bg-[#050505]/80 text-[#C2B9AA] hover:border-[#EAE3D5]/45 hover:text-[#F6F1E7]'
                         }`}
                       >
                         {chip.label[typedLocale]}
@@ -1909,8 +1909,8 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                 <div className="space-y-10">
                   {/* 1. Official Selection: The 6 Priority Partner Clubs with Real Photography & 4 Telemetry Signals */}
                   <section aria-label={ui.sections.priorityClubs}>
-                    <div className="flex items-center justify-between border-b border-white/14 pb-2.5 mb-4">
-                      <h2 className="font-sans tabular-nums text-[13px] font-semibold tabular-nums tracking-[0.06em] text-[#FFFFFF] uppercase flex items-center gap-2">
+                    <div className="flex items-center justify-between border-b border-[#F6F1E7]/14 pb-2.5 mb-4">
+                      <h2 className="font-sans tabular-nums text-[13px] font-semibold tabular-nums tracking-[0.06em] text-[#F6F1E7] uppercase flex items-center gap-2">
                         <Crown className="w-4 h-4" />
                         {ui.sections.priorityClubs}
                       </h2>
@@ -1918,14 +1918,14 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                         <button
                           type="button"
                           onClick={() => setActiveTab('clubs')}
-                          className="font-sans tabular-nums text-[13px] text-[#C9C7C2] hover:text-[#FFFFFF] uppercase tabular-nums tracking-[0.06em]"
+                          className="font-sans tabular-nums text-[13px] text-[#C2B9AA] hover:text-[#F6F1E7] uppercase tabular-nums tracking-[0.06em]"
                         >
                           {ui.sections.allClubsLink} (19)
                         </button>
                         <Link
                           href={`${langPrefix}/clubs`}
                           onClick={handleClose}
-                          className="font-sans tabular-nums text-[13px] text-[#FFFFFF] hover:underline uppercase tabular-nums tracking-[0.06em] flex items-center gap-1 shrink-0 whitespace-nowrap"
+                          className="font-sans tabular-nums text-[13px] text-[#F6F1E7] hover:underline uppercase tabular-nums tracking-[0.06em] flex items-center gap-1 shrink-0 whitespace-nowrap"
                         >
                           /clubs
                           <ArrowUpRight className="w-3.5 h-3.5" />
@@ -1946,22 +1946,22 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                         return (
                           <div
                             key={club.id}
-                            className="group flex flex-col justify-between border border-white/14 bg-[#18181C] hover:border-white/70 transition-colors p-3.5"
+                            className="group flex flex-col justify-between border border-[#F6F1E7]/14 bg-[#0B0A09] hover:border-[#EAE3D5] transition-colors p-3.5"
                           >
                             <div>
                               <div className="flex items-start gap-3">
                                 <Link
                                   href={clubHref}
                                   onClick={handleClose}
-                                  className="relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 overflow-hidden border border-white/14 bg-[#0A0A0C]"
+                                  className="relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]"
                                 >
                                   <img
                                     src={club.image}
                                     alt={club.name}
                                     loading="lazy"
-                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                    className="w-full h-full object-cover"
                                   />
-                                  <span className="absolute top-0 left-0 bg-[#EDEBE6] text-[#0A0A0C] font-sans tabular-nums text-[13px] font-bold px-1.5 py-0.5">
+                                  <span className="absolute top-0 left-0 bg-[#EAE3D5] text-[#050505] font-sans tabular-nums text-[13px] font-bold px-1.5 py-0.5">
                                     0{club.rank}
                                   </span>
                                 </Link>
@@ -1971,24 +1971,24 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                                     <Link
                                       href={clubHref}
                                       onClick={handleClose}
-                                      className="font-display text-lg text-[#FFFFFF] group-hover:text-[#FFFFFF] transition-colors truncate"
+                                      className="font-display text-lg text-[#F6F1E7] group-hover:text-[#F6F1E7] transition-colors truncate"
                                     >
                                       {club.name}
                                     </Link>
                                   </div>
-                                  <p className="font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#FFFFFF] mt-0.5">
+                                  <p className="font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#F6F1E7] mt-0.5">
                                     {ui.card.officialSelection}
                                   </p>
-                                  <p className="text-[13px] text-[#C9C7C2] mt-1 line-clamp-1">{club.zone[typedLocale]}</p>
+                                  <p className="text-[13px] text-[#C2B9AA] mt-1 line-clamp-1">{club.zone[typedLocale]}</p>
                                 </div>
                               </div>
 
                               {/* 4 Decision Telemetry Pills */}
-                              <div className="mt-3 grid grid-cols-2 gap-1.5 text-[13px] text-[#C9C7C2]">
+                              <div className="mt-3 grid grid-cols-2 gap-1.5 text-[13px] text-[#C2B9AA]">
                                 {club.telemetry[typedLocale].map((item, idx) => (
                                   <span
                                     key={idx}
-                                    className="truncate px-2 py-1 bg-[#0A0A0C] border border-white/10 font-sans tabular-nums text-[13px]"
+                                    className="truncate px-2 py-1 bg-[#050505] border border-white/10 font-sans tabular-nums text-[13px]"
                                   >
                                     {item}
                                   </span>
@@ -2000,7 +2000,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                               <Link
                                 href={clubHref}
                                 onClick={handleClose}
-                                className="flex-1 inline-flex items-center justify-center gap-1 py-2 px-2.5 border border-white/20 bg-[#0A0A0C] hover:border-white text-[#FFFFFF] hover:text-[#FFFFFF] font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] transition-colors"
+                                className="flex-1 inline-flex items-center justify-center gap-1 py-2 px-2.5 border border-[#EAE3D5]/24 bg-[#050505] hover:border-[#EAE3D5] text-[#F6F1E7] hover:text-[#F6F1E7] font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] transition-colors"
                               >
                                 {ui.card.openSheet}
                                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -2009,7 +2009,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                                 href={getConciergeBookingUrl(currentLocale, club.name, pathname)}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center gap-1.5 py-2 px-3 bg-[#25D366] text-[#0A0A0C] hover:bg-[#20bd5a] font-sans tabular-nums text-[13px] font-bold uppercase tabular-nums tracking-[0.06em] transition-colors"
+                                className="inline-flex items-center justify-center gap-1.5 py-2 px-3 bg-[#25D366] text-[#050505] hover:bg-[#2EE472] font-sans tabular-nums text-[13px] font-bold uppercase tabular-nums tracking-[0.06em] transition-colors"
                               >
                                 <MessageCircle className="w-3.5 h-3.5" />
                                 {ui.card.whatsappVip}
@@ -2023,8 +2023,8 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
 
                   {/* 2. Capodanno 2027 Quick Hub & Flagship Events */}
                   <section aria-label={ui.sections.capodanno}>
-                    <div className="flex items-center justify-between border-b border-white/14 pb-2.5 mb-4">
-                      <h2 className="font-sans tabular-nums text-[13px] font-semibold tabular-nums tracking-[0.06em] text-[#FFFFFF] uppercase flex items-center gap-2">
+                    <div className="flex items-center justify-between border-b border-[#F6F1E7]/14 pb-2.5 mb-4">
+                      <h2 className="font-sans tabular-nums text-[13px] font-semibold tabular-nums tracking-[0.06em] text-[#F6F1E7] uppercase flex items-center gap-2">
                         <PartyPopper className="w-4 h-4" />
                         {ui.sections.capodanno}
                       </h2>
@@ -2032,14 +2032,14 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                         <button
                           type="button"
                           onClick={() => setActiveTab('capodanno')}
-                          className="font-sans tabular-nums text-[13px] text-[#C9C7C2] hover:text-[#FFFFFF] uppercase tabular-nums tracking-[0.06em]"
+                          className="font-sans tabular-nums text-[13px] text-[#C2B9AA] hover:text-[#F6F1E7] uppercase tabular-nums tracking-[0.06em]"
                         >
                           {ui.sections.capodannoAllLink}
                         </button>
                         <Link
                           href={capodannoPath(currentLocale)}
                           onClick={handleClose}
-                          className="font-sans tabular-nums text-[13px] text-[#FFFFFF] hover:underline uppercase tabular-nums tracking-[0.06em] flex items-center gap-1 shrink-0 whitespace-nowrap"
+                          className="font-sans tabular-nums text-[13px] text-[#F6F1E7] hover:underline uppercase tabular-nums tracking-[0.06em] flex items-center gap-1 shrink-0 whitespace-nowrap"
                         >
                           2027
                           <ArrowUpRight className="w-3.5 h-3.5" />
@@ -2053,17 +2053,17 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                           key={cat.id}
                           href={capodannoCategoryPath(cat.id, currentLocale)}
                           onClick={handleClose}
-                          className="group flex flex-col justify-between p-3 border border-white/14 bg-[#18181C] hover:border-white transition-colors"
+                          className="group flex flex-col justify-between p-3 border border-[#F6F1E7]/14 bg-[#0B0A09] hover:border-[#EAE3D5] transition-colors"
                         >
                           <div>
-                            <span className="font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#FFFFFF]">
+                            <span className="font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#F6F1E7]">
                               {cat.badge[typedLocale]}
                             </span>
-                            <p className="font-display text-base text-[#FFFFFF] group-hover:text-[#FFFFFF] mt-1 leading-snug">
+                            <p className="font-display text-base text-[#F6F1E7] group-hover:text-[#F6F1E7] mt-1 leading-snug">
                               {cat.label[typedLocale]}
                             </p>
                           </div>
-                          <span className="mt-2 inline-flex items-center gap-1 font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#C9C7C2] group-hover:text-[#FFFFFF]">
+                          <span className="mt-2 inline-flex items-center gap-1 font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#C2B9AA] group-hover:text-[#F6F1E7]">
                             {ui.card.openSheet}
                             <ArrowUpRight className="w-3 h-3" />
                           </span>
@@ -2074,8 +2074,8 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
 
                   {/* 3. Strategic VIP Hubs (9 Hubs) */}
                   <section aria-label={ui.sections.hubs}>
-                    <h2 className="font-sans tabular-nums text-[13px] font-semibold tabular-nums tracking-[0.06em] text-[#C9C7C2] uppercase flex items-center gap-2 border-b border-white/14 pb-2.5 mb-4">
-                      <Sparkles className="w-4 h-4 text-[#FFFFFF]" />
+                    <h2 className="font-sans tabular-nums text-[13px] font-semibold tabular-nums tracking-[0.06em] text-[#C2B9AA] uppercase flex items-center gap-2 border-b border-[#F6F1E7]/14 pb-2.5 mb-4">
+                      <Sparkles className="w-4 h-4 text-[#F6F1E7]" />
                       {ui.sections.hubs}
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -2084,19 +2084,19 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                           key={hub.id}
                           href={`${langPrefix}${hub.href}`}
                           onClick={handleClose}
-                          className="group flex items-start gap-3 p-3.5 border border-white/14 bg-[#18181C] hover:border-white transition-colors"
+                          className="group flex items-start gap-3 p-3.5 border border-[#F6F1E7]/14 bg-[#0B0A09] hover:border-[#EAE3D5] transition-colors"
                         >
-                          <div className="p-2 bg-[#0A0A0C] border border-white/35 shrink-0">
+                          <div className="p-2 bg-[#050505] border border-white/35 shrink-0">
                             {renderHubIcon(hub.icon)}
                           </div>
                           <div className="flex-1 min-w-0">
-                            <span className="font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#FFFFFF]">
+                            <span className="font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#F6F1E7]">
                               {hub.badge[typedLocale]}
                             </span>
-                            <p className="font-display text-base text-[#FFFFFF] group-hover:text-[#FFFFFF] transition-colors mt-0.5">
+                            <p className="font-display text-base text-[#F6F1E7] group-hover:text-[#F6F1E7] transition-colors mt-0.5">
                               {hub.title[typedLocale]}
                             </p>
-                            <p className="text-[13px] text-[#C9C7C2] mt-1 leading-relaxed line-clamp-2">
+                            <p className="text-[13px] text-[#C2B9AA] mt-1 leading-relaxed line-clamp-2">
                               {hub.subtitle[typedLocale]}
                             </p>
                           </div>
@@ -2108,15 +2108,15 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                   {/* 4. 10 Music Genres & 14 Milan Nightlife Zones */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <section aria-label={ui.sections.genres}>
-                      <div className="flex items-center justify-between border-b border-white/14 pb-2.5 mb-3">
-                        <h3 className="font-sans tabular-nums text-[13px] font-semibold tabular-nums tracking-[0.06em] text-[#C9C7C2] uppercase flex items-center gap-2">
-                          <Music2 className="w-4 h-4 text-[#FFFFFF]" />
+                      <div className="flex items-center justify-between border-b border-[#F6F1E7]/14 pb-2.5 mb-3">
+                        <h3 className="font-sans tabular-nums text-[13px] font-semibold tabular-nums tracking-[0.06em] text-[#C2B9AA] uppercase flex items-center gap-2">
+                          <Music2 className="w-4 h-4 text-[#F6F1E7]" />
                           {ui.sections.genres}
                         </h3>
                         <Link
                           href={`${langPrefix}/genres`}
                           onClick={handleClose}
-                          className="font-sans tabular-nums text-[13px] text-[#FFFFFF] hover:underline"
+                          className="font-sans tabular-nums text-[13px] text-[#F6F1E7] hover:underline"
                         >
                           /genres
                         </Link>
@@ -2127,7 +2127,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                             key={g.slug}
                             href={`${langPrefix}/genres/${g.slug}`}
                             onClick={handleClose}
-                            className="px-3 py-1.5 text-[13px] font-sans tabular-nums border border-white/14 bg-[#18181C] text-[#FFFFFF] hover:text-[#FFFFFF] hover:border-white transition-colors"
+                            className="px-3 py-1.5 text-[13px] font-sans tabular-nums border border-[#F6F1E7]/14 bg-[#0B0A09] text-[#F6F1E7] hover:text-[#F6F1E7] hover:border-[#EAE3D5] transition-colors"
                           >
                             {g.label[typedLocale]}
                           </Link>
@@ -2136,15 +2136,15 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                     </section>
 
                     <section aria-label={ui.sections.zones}>
-                      <div className="flex items-center justify-between border-b border-white/14 pb-2.5 mb-3">
-                        <h3 className="font-sans tabular-nums text-[13px] font-semibold tabular-nums tracking-[0.06em] text-[#C9C7C2] uppercase flex items-center gap-2">
-                          <MapPin className="w-4 h-4 text-[#FFFFFF]" />
+                      <div className="flex items-center justify-between border-b border-[#F6F1E7]/14 pb-2.5 mb-3">
+                        <h3 className="font-sans tabular-nums text-[13px] font-semibold tabular-nums tracking-[0.06em] text-[#C2B9AA] uppercase flex items-center gap-2">
+                          <MapPin className="w-4 h-4 text-[#F6F1E7]" />
                           {ui.sections.zones}
                         </h3>
                         <Link
                           href={`${langPrefix}/zones`}
                           onClick={handleClose}
-                          className="font-sans tabular-nums text-[13px] text-[#FFFFFF] hover:underline"
+                          className="font-sans tabular-nums text-[13px] text-[#F6F1E7] hover:underline"
                         >
                           /zones
                         </Link>
@@ -2155,7 +2155,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                             key={z.slug}
                             href={`${langPrefix}/zones/${z.slug}`}
                             onClick={handleClose}
-                            className="px-3 py-1.5 text-[13px] font-sans tabular-nums border border-white/14 bg-[#18181C] text-[#FFFFFF] hover:text-[#FFFFFF] hover:border-white transition-colors"
+                            className="px-3 py-1.5 text-[13px] font-sans tabular-nums border border-[#F6F1E7]/14 bg-[#0B0A09] text-[#F6F1E7] hover:text-[#F6F1E7] hover:border-[#EAE3D5] transition-colors"
                           >
                             {z.name}
                           </Link>
@@ -2165,12 +2165,12 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                   </div>
                 </div>
               ) : !hasVisibleResults ? (
-                <div className="flex flex-col items-center justify-center py-16 text-center max-w-xl mx-auto space-y-4 border border-white/14 bg-[#18181C] p-8">
-                  <Search className="w-8 h-8 text-[#FFFFFF]" />
-                  <p className="text-xl font-display text-[#FFFFFF]">
-                    {ui.empty.title} <em className="italic font-display text-[#FFFFFF]">&ldquo;{query}&rdquo;</em>
+                <div className="flex flex-col items-center justify-center py-16 text-center max-w-xl mx-auto space-y-4 border border-[#F6F1E7]/14 bg-[#0B0A09] p-8">
+                  <Search className="w-8 h-8 text-[#F6F1E7]" />
+                  <p className="text-xl font-display text-[#F6F1E7]">
+                    {ui.empty.title} <em className="italic font-display text-[#F6F1E7]">&ldquo;{query}&rdquo;</em>
                   </p>
-                  <p className="text-[13px] text-[#C9C7C2] leading-relaxed">{ui.empty.subtitle}</p>
+                  <p className="text-[13px] text-[#C2B9AA] leading-relaxed">{ui.empty.subtitle}</p>
                   <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
                     <button
                       type="button"
@@ -2179,7 +2179,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                         setActiveTab('all');
                         inputRef.current?.focus();
                       }}
-                      className="px-4 py-2.5 border border-white/25 bg-[#0A0A0C] text-[#FFFFFF] hover:border-white font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em]"
+                      className="px-4 py-2.5 border border-[#EAE3D5]/28 bg-[#050505] text-[#F6F1E7] hover:border-[#EAE3D5] font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em]"
                     >
                       {ui.empty.resetBtn}
                     </button>
@@ -2187,7 +2187,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                       href={getConciergeBookingUrl(currentLocale, query || 'Milan Nightlife', pathname)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#25D366] text-[#0A0A0C] hover:bg-[#20bd5a] font-sans tabular-nums font-bold uppercase tabular-nums tracking-[0.06em] text-[13px] hover:bg-[#EDEBE6] transition-colors"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#25D366] text-[#050505] hover:bg-[#2EE472] font-sans tabular-nums font-bold uppercase tabular-nums tracking-[0.06em] text-[13px] hover:bg-[#EAE3D5] transition-colors"
                     >
                       <MessageCircle className="w-4 h-4" />
                       {ui.empty.askConcierge}
@@ -2199,15 +2199,15 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                   {/* Filtered Clubs & Rooftops */}
                   {showClubs && searchResults.venues.length > 0 && (
                     <section aria-label={ui.sections.clubs}>
-                      <div className="flex items-center justify-between border-b border-white/14 pb-2 mb-4">
-                        <h3 className="font-sans tabular-nums text-[13px] font-semibold tabular-nums tracking-[0.06em] text-[#FFFFFF] uppercase flex items-center gap-2">
+                      <div className="flex items-center justify-between border-b border-[#F6F1E7]/14 pb-2 mb-4">
+                        <h3 className="font-sans tabular-nums text-[13px] font-semibold tabular-nums tracking-[0.06em] text-[#F6F1E7] uppercase flex items-center gap-2">
                           <MapPin className="w-4 h-4" />
                           {ui.sections.clubs} ({searchResults.venues.length})
                         </h3>
                         <Link
                           href={`${langPrefix}/clubs`}
                           onClick={handleClose}
-                          className="font-sans tabular-nums text-[13px] text-[#C9C7C2] hover:text-[#FFFFFF] uppercase tabular-nums tracking-[0.06em] flex items-center gap-1 shrink-0 whitespace-nowrap"
+                          className="font-sans tabular-nums text-[13px] text-[#C2B9AA] hover:text-[#F6F1E7] uppercase tabular-nums tracking-[0.06em] flex items-center gap-1 shrink-0 whitespace-nowrap"
                         >
                           {ui.sections.allClubsLink}
                           <ArrowUpRight className="w-3.5 h-3.5" />
@@ -2225,18 +2225,18 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                           return (
                             <div
                               key={venue.id}
-                              className="group flex items-start justify-between gap-3.5 p-3.5 border border-white/14 bg-[#18181C] hover:border-white transition-colors"
+                              className="group flex items-start justify-between gap-3.5 p-3.5 border border-[#F6F1E7]/14 bg-[#0B0A09] hover:border-[#EAE3D5] transition-colors"
                             >
                               <Link
                                 href={clubHref}
                                 onClick={handleClose}
-                                className="w-16 h-16 sm:w-20 sm:h-20 shrink-0 overflow-hidden border border-white/14 bg-[#0A0A0C]"
+                                className="w-16 h-16 sm:w-20 sm:h-20 shrink-0 overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]"
                               >
                                 <img
                                   src={pQuick?.image || venue.image || '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp'}
                                   alt={name}
                                   loading="lazy"
-                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                  className="w-full h-full object-cover"
                                 />
                               </Link>
 
@@ -2245,19 +2245,19 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                                   <Link
                                     href={clubHref}
                                     onClick={handleClose}
-                                    className="font-display text-lg text-[#FFFFFF] group-hover:text-[#FFFFFF] transition-colors truncate"
+                                    className="font-display text-lg text-[#F6F1E7] group-hover:text-[#F6F1E7] transition-colors truncate"
                                   >
                                     <HighlightText text={name} query={query} />
                                   </Link>
-                                  <span className="font-sans tabular-nums text-[13px] px-2 py-0.5 border border-white/40 text-[#FFFFFF] shrink-0">
+                                  <span className="font-sans tabular-nums text-[13px] px-2 py-0.5 border border-[#EAE3D5]/40 text-[#F6F1E7] shrink-0">
                                     {(venue.priceRange || '€€€').replace(/\$/g, '€')}
                                   </span>
                                 </div>
 
-                                <p className="text-[13px] text-[#C9C7C2] mt-0.5 truncate">
+                                <p className="text-[13px] text-[#C2B9AA] mt-0.5 truncate">
                                   <HighlightText text={zoneLabel} query={query} />
                                 </p>
-                                <p className="font-sans tabular-nums text-[13px] text-[#C9C7C2]/80 mt-1 truncate">
+                                <p className="font-sans tabular-nums text-[13px] text-[#C2B9AA]/80 mt-1 truncate">
                                   {venue.category} · {dressCode}
                                 </p>
 
@@ -2265,7 +2265,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                                   <Link
                                     href={clubHref}
                                     onClick={handleClose}
-                                    className="px-2.5 py-1 border border-white/20 bg-[#0A0A0C] hover:border-white font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#FFFFFF]"
+                                    className="px-2.5 py-1 border border-[#EAE3D5]/24 bg-[#050505] hover:border-[#EAE3D5] font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#F6F1E7]"
                                   >
                                     {ui.card.openSheet}
                                   </Link>
@@ -2273,7 +2273,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                                     href={getConciergeBookingUrl(currentLocale, name, pathname)}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-1 px-2.5 py-1 bg-[#25D366] text-[#0A0A0C] hover:bg-[#20bd5a] font-sans tabular-nums text-[13px] font-bold uppercase tabular-nums tracking-[0.06em]"
+                                    className="inline-flex items-center gap-1 px-2.5 py-1 bg-[#25D366] text-[#050505] hover:bg-[#2EE472] font-sans tabular-nums text-[13px] font-bold uppercase tabular-nums tracking-[0.06em]"
                                   >
                                     <MessageCircle className="w-3 h-3" />
                                     VIP
@@ -2291,15 +2291,15 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                   {showCapodanno &&
                     (searchResults.capodannoCategories.length > 0 || searchResults.capodannoEvents.length > 0) && (
                       <section aria-label={ui.sections.capodanno}>
-                        <div className="flex items-center justify-between border-b border-white/14 pb-2 mb-4">
-                          <h3 className="font-sans tabular-nums text-[13px] font-semibold tabular-nums tracking-[0.06em] text-[#FFFFFF] uppercase flex items-center gap-2">
+                        <div className="flex items-center justify-between border-b border-[#F6F1E7]/14 pb-2 mb-4">
+                          <h3 className="font-sans tabular-nums text-[13px] font-semibold tabular-nums tracking-[0.06em] text-[#F6F1E7] uppercase flex items-center gap-2">
                             <PartyPopper className="w-4 h-4" />
                             {ui.sections.capodanno}
                           </h3>
                           <Link
                             href={capodannoPath(currentLocale)}
                             onClick={handleClose}
-                            className="font-sans tabular-nums text-[13px] text-[#FFFFFF] hover:underline uppercase tabular-nums tracking-[0.06em] flex items-center gap-1 shrink-0 whitespace-nowrap"
+                            className="font-sans tabular-nums text-[13px] text-[#F6F1E7] hover:underline uppercase tabular-nums tracking-[0.06em] flex items-center gap-1 shrink-0 whitespace-nowrap"
                           >
                             {ui.sections.capodannoAllLink}
                             <ArrowUpRight className="w-3.5 h-3.5" />
@@ -2313,12 +2313,12 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                                 key={cat.id}
                                 href={cat.href}
                                 onClick={handleClose}
-                                className="group p-3 border border-white/35 bg-[#18181C] hover:border-white transition-colors"
+                                className="group p-3 border border-white/35 bg-[#0B0A09] hover:border-[#EAE3D5] transition-colors"
                               >
-                                <span className="font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#FFFFFF]">
+                                <span className="font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#F6F1E7]">
                                   {cat.displayBadge}
                                 </span>
-                                <p className="font-display text-sm text-[#FFFFFF] group-hover:text-[#FFFFFF] mt-1">
+                                <p className="font-display text-sm text-[#F6F1E7] group-hover:text-[#F6F1E7] mt-1">
                                   <HighlightText text={cat.displayLabel} query={query} />
                                 </p>
                               </Link>
@@ -2333,22 +2333,22 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                                 key={ev.slug}
                                 href={ev.href}
                                 onClick={handleClose}
-                                className="group flex items-start gap-3.5 p-3.5 border border-white/14 bg-[#18181C] hover:border-white transition-colors"
+                                className="group flex items-start gap-3.5 p-3.5 border border-[#F6F1E7]/14 bg-[#0B0A09] hover:border-[#EAE3D5] transition-colors"
                               >
-                                <div className="w-16 h-16 sm:w-20 sm:h-20 shrink-0 overflow-hidden border border-white/14 bg-[#0A0A0C]">
+                                <div className="w-16 h-16 sm:w-20 sm:h-20 shrink-0 overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]">
                                   <img
                                     src={ev.image}
                                     alt={ev.venueName}
                                     loading="lazy"
-                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                    className="w-full h-full object-cover"
                                   />
                                 </div>
                                 <div className="flex-1 min-w-0">
                                   <div className="flex items-center justify-between gap-2">
-                                    <span className="font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#FFFFFF]">
+                                    <span className="font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#F6F1E7]">
                                       {ui.card.nye2027}
                                     </span>
-                                    <span className="font-sans tabular-nums text-[13px] px-2 py-0.5 bg-[#EAE3D5]/15 text-[#FFFFFF] shrink-0">
+                                    <span className="font-sans tabular-nums text-[13px] px-2 py-0.5 bg-[#EAE3D5]/15 text-[#F6F1E7] shrink-0">
                                       {ev.isSoldOut
                                         ? 'SOLD OUT'
                                         : ev.priceFromEur > 0
@@ -2358,10 +2358,10 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                                             : getWords35(currentLocale).uponRequestLabel}
                                     </span>
                                   </div>
-                                  <p className="font-display text-base text-[#FFFFFF] group-hover:text-[#FFFFFF] transition-colors truncate mt-0.5">
+                                  <p className="font-display text-base text-[#F6F1E7] group-hover:text-[#F6F1E7] transition-colors truncate mt-0.5">
                                     <HighlightText text={ev.venueName} query={query} />
                                   </p>
-                                  <p className="text-[13px] text-[#C9C7C2] line-clamp-2 mt-0.5">
+                                  <p className="text-[13px] text-[#C2B9AA] line-clamp-2 mt-0.5">
                                     <HighlightText text={ev.summary} query={query} />
                                   </p>
                                 </div>
@@ -2375,15 +2375,15 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                   {/* Filtered Upcoming Dated Events */}
                   {showEvents && searchResults.events.length > 0 && (
                     <section aria-label={ui.sections.events}>
-                      <div className="flex items-center justify-between border-b border-white/14 pb-2 mb-4">
-                        <h3 className="font-sans tabular-nums text-[13px] font-semibold tabular-nums tracking-[0.06em] text-[#FFFFFF] uppercase flex items-center gap-2">
+                      <div className="flex items-center justify-between border-b border-[#F6F1E7]/14 pb-2 mb-4">
+                        <h3 className="font-sans tabular-nums text-[13px] font-semibold tabular-nums tracking-[0.06em] text-[#F6F1E7] uppercase flex items-center gap-2">
                           <Calendar className="w-4 h-4" />
                           {ui.sections.events} ({searchResults.events.length})
                         </h3>
                         <Link
                           href={`${langPrefix}/events`}
                           onClick={handleClose}
-                          className="font-sans tabular-nums text-[13px] text-[#C9C7C2] hover:text-[#FFFFFF] uppercase tabular-nums tracking-[0.06em] flex items-center gap-1 shrink-0 whitespace-nowrap"
+                          className="font-sans tabular-nums text-[13px] text-[#C2B9AA] hover:text-[#F6F1E7] uppercase tabular-nums tracking-[0.06em] flex items-center gap-1 shrink-0 whitespace-nowrap"
                         >
                           {ui.sections.eventsAllLink}
                           <ArrowUpRight className="w-3.5 h-3.5" />
@@ -2407,30 +2407,30 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                               key={event.id}
                               href={event.href}
                               onClick={handleClose}
-                              className="group flex items-start gap-3.5 p-3.5 border border-white/14 bg-[#18181C] hover:border-white transition-colors"
+                              className="group flex items-start gap-3.5 p-3.5 border border-[#F6F1E7]/14 bg-[#0B0A09] hover:border-[#EAE3D5] transition-colors"
                             >
-                              <div className="w-16 h-16 sm:w-20 sm:h-20 shrink-0 overflow-hidden border border-white/14 bg-[#0A0A0C]">
+                              <div className="w-16 h-16 sm:w-20 sm:h-20 shrink-0 overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]">
                                 <img
                                   src={event.image}
                                   alt={event.title}
                                   loading="lazy"
-                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                  className="w-full h-full object-cover"
                                 />
                               </div>
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-center justify-between gap-2">
-                                  <span className="font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#FFFFFF] flex items-center gap-1">
+                                  <span className="font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#F6F1E7] flex items-center gap-1">
                                     <Clock className="w-3 h-3" />
                                     {formattedDate}
                                   </span>
-                                  <span className="font-sans tabular-nums text-[13px] text-[#C9C7C2] truncate">
+                                  <span className="font-sans tabular-nums text-[13px] text-[#C2B9AA] truncate">
                                     {event.priceLabel}
                                   </span>
                                 </div>
-                                <p className="font-display text-base text-[#FFFFFF] group-hover:text-[#FFFFFF] transition-colors truncate mt-0.5">
+                                <p className="font-display text-base text-[#F6F1E7] group-hover:text-[#F6F1E7] transition-colors truncate mt-0.5">
                                   <HighlightText text={event.title} query={query} />
                                 </p>
-                                <p className="font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#C9C7C2] mt-1 truncate">
+                                <p className="font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#C2B9AA] mt-1 truncate">
                                   {event.venueName} · <HighlightText text={event.genres} query={query} />
                                 </p>
                               </div>
@@ -2444,7 +2444,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                   {/* Filtered Strategic VIP Hubs */}
                   {showHubs && searchResults.hubs.length > 0 && (
                     <section aria-label={ui.sections.hubs}>
-                      <h3 className="font-sans tabular-nums text-[13px] font-semibold tabular-nums tracking-[0.06em] text-[#FFFFFF] uppercase flex items-center gap-2 border-b border-white/14 pb-2 mb-4">
+                      <h3 className="font-sans tabular-nums text-[13px] font-semibold tabular-nums tracking-[0.06em] text-[#F6F1E7] uppercase flex items-center gap-2 border-b border-[#F6F1E7]/14 pb-2 mb-4">
                         <Sparkles className="w-4 h-4" />
                         {ui.sections.hubs} ({searchResults.hubs.length})
                       </h3>
@@ -2454,19 +2454,19 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                             key={hub.id}
                             href={`${langPrefix}${hub.href}`}
                             onClick={handleClose}
-                            className="group flex items-start gap-3 p-3.5 border border-white/14 bg-[#18181C] hover:border-white transition-colors"
+                            className="group flex items-start gap-3 p-3.5 border border-[#F6F1E7]/14 bg-[#0B0A09] hover:border-[#EAE3D5] transition-colors"
                           >
-                            <div className="p-2 bg-[#0A0A0C] border border-white/35 shrink-0">
+                            <div className="p-2 bg-[#050505] border border-white/35 shrink-0">
                               {renderHubIcon(hub.icon)}
                             </div>
                             <div className="flex-1 min-w-0">
-                              <span className="font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#FFFFFF]">
+                              <span className="font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#F6F1E7]">
                                 {hub.displayBadge}
                               </span>
-                              <p className="font-display text-base text-[#FFFFFF] group-hover:text-[#FFFFFF] transition-colors">
+                              <p className="font-display text-base text-[#F6F1E7] group-hover:text-[#F6F1E7] transition-colors">
                                 <HighlightText text={hub.displayTitle} query={query} />
                               </p>
-                              <p className="text-[13px] text-[#C9C7C2] mt-0.5">
+                              <p className="text-[13px] text-[#C2B9AA] mt-0.5">
                                 <HighlightText text={hub.displaySubtitle} query={query} />
                               </p>
                             </div>
@@ -2479,15 +2479,15 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                   {/* Filtered Insider & Pillar Guides (118 Guides) */}
                   {showGuides && searchResults.guides.length > 0 && (
                     <section aria-label={ui.sections.guides}>
-                      <div className="flex items-center justify-between border-b border-white/14 pb-2 mb-4">
-                        <h3 className="font-sans tabular-nums text-[13px] font-semibold tabular-nums tracking-[0.06em] text-[#FFFFFF] uppercase flex items-center gap-2">
+                      <div className="flex items-center justify-between border-b border-[#F6F1E7]/14 pb-2 mb-4">
+                        <h3 className="font-sans tabular-nums text-[13px] font-semibold tabular-nums tracking-[0.06em] text-[#F6F1E7] uppercase flex items-center gap-2">
                           <BookOpen className="w-4 h-4" />
                           {ui.sections.guides} ({searchResults.guides.length})
                         </h3>
                         <Link
                           href={`${langPrefix}/guides`}
                           onClick={handleClose}
-                          className="font-sans tabular-nums text-[13px] text-[#C9C7C2] hover:text-[#FFFFFF] uppercase tabular-nums tracking-[0.06em] flex items-center gap-1 shrink-0 whitespace-nowrap"
+                          className="font-sans tabular-nums text-[13px] text-[#C2B9AA] hover:text-[#F6F1E7] uppercase tabular-nums tracking-[0.06em] flex items-center gap-1 shrink-0 whitespace-nowrap"
                         >
                           {ui.sections.guidesAllLink}
                           <ArrowUpRight className="w-3.5 h-3.5" />
@@ -2500,26 +2500,26 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                             key={guide.id}
                             href={`${langPrefix}/guides/${slug}`}
                             onClick={handleClose}
-                            className="group flex items-start gap-3.5 p-3.5 border border-white/14 bg-[#18181C] hover:border-white transition-colors"
+                            className="group flex items-start gap-3.5 p-3.5 border border-[#F6F1E7]/14 bg-[#0B0A09] hover:border-[#EAE3D5] transition-colors"
                           >
                             {guide.image && (
-                              <div className="w-14 h-14 sm:w-16 sm:h-16 shrink-0 overflow-hidden border border-white/14 bg-[#0A0A0C]">
+                              <div className="w-14 h-14 sm:w-16 sm:h-16 shrink-0 overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]">
                                 <img
                                   src={guide.image}
                                   alt={title}
                                   loading="lazy"
-                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                  className="w-full h-full object-cover"
                                 />
                               </div>
                             )}
                             <div className="flex-1 min-w-0">
-                              <span className="font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#FFFFFF]">
+                              <span className="font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#F6F1E7]">
                                 {ui.card.insiderGuide}
                               </span>
-                              <p className="font-display text-base text-[#FFFFFF] group-hover:text-[#FFFFFF] transition-colors line-clamp-1 mt-0.5">
+                              <p className="font-display text-base text-[#F6F1E7] group-hover:text-[#F6F1E7] transition-colors line-clamp-1 mt-0.5">
                                 <HighlightText text={title} query={query} />
                               </p>
-                              <p className="text-[13px] text-[#C9C7C2] line-clamp-2 mt-0.5">
+                              <p className="text-[13px] text-[#C2B9AA] line-clamp-2 mt-0.5">
                                 <HighlightText text={excerpt} query={query} />
                               </p>
                             </div>
@@ -2532,7 +2532,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                   {/* Filtered Zones & Genres */}
                   {showZones && (searchResults.zones.length > 0 || searchResults.genres.length > 0) && (
                     <section aria-label={ui.tabs.zones}>
-                      <h3 className="font-sans tabular-nums text-[13px] font-semibold tabular-nums tracking-[0.06em] text-[#FFFFFF] uppercase flex items-center gap-2 border-b border-white/14 pb-2 mb-4">
+                      <h3 className="font-sans tabular-nums text-[13px] font-semibold tabular-nums tracking-[0.06em] text-[#F6F1E7] uppercase flex items-center gap-2 border-b border-[#F6F1E7]/14 pb-2 mb-4">
                         <MapPin className="w-4 h-4" />
                         {ui.tabs.zones} ({searchResults.zones.length + searchResults.genres.length})
                       </h3>
@@ -2542,19 +2542,19 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                             key={zone.id}
                             href={`${langPrefix}/zones/${zone.slug}`}
                             onClick={handleClose}
-                            className="group flex items-center gap-3 p-3 border border-white/14 bg-[#18181C] hover:border-white transition-colors"
+                            className="group flex items-center gap-3 p-3 border border-[#F6F1E7]/14 bg-[#0B0A09] hover:border-[#EAE3D5] transition-colors"
                           >
-                            <div className="w-12 h-12 shrink-0 overflow-hidden border border-white/14 bg-[#0A0A0C]">
+                            <div className="w-12 h-12 shrink-0 overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]">
                               <img src={zone.image} alt={zone.name} loading="lazy" className="w-full h-full object-cover" />
                             </div>
                             <div className="flex-1 min-w-0">
-                              <span className="font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#FFFFFF]">
+                              <span className="font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#F6F1E7]">
                                 {ui.card.nightlifeDistrict}
                               </span>
-                              <p className="font-display text-base text-[#FFFFFF] group-hover:text-[#FFFFFF] truncate">
+                              <p className="font-display text-base text-[#F6F1E7] group-hover:text-[#F6F1E7] truncate">
                                 <HighlightText text={zone.name} query={query} />
                               </p>
-                              <p className="text-[13px] text-[#C9C7C2] truncate">{zone.vibe}</p>
+                              <p className="text-[13px] text-[#C2B9AA] truncate">{zone.vibe}</p>
                             </div>
                           </Link>
                         ))}
@@ -2564,16 +2564,16 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                             key={g.slug}
                             href={`${langPrefix}/genres/${g.slug}`}
                             onClick={handleClose}
-                            className="group flex items-center gap-3 p-3 border border-white/14 bg-[#18181C] hover:border-white transition-colors"
+                            className="group flex items-center gap-3 p-3 border border-[#F6F1E7]/14 bg-[#0B0A09] hover:border-[#EAE3D5] transition-colors"
                           >
-                            <div className="w-12 h-12 shrink-0 flex items-center justify-center border border-white/35 bg-[#0A0A0C]">
-                              <Music2 className="w-5 h-5 text-[#FFFFFF]" />
+                            <div className="w-12 h-12 shrink-0 flex items-center justify-center border border-white/35 bg-[#050505]">
+                              <Music2 className="w-5 h-5 text-[#F6F1E7]" />
                             </div>
                             <div className="flex-1 min-w-0">
-                              <span className="font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#FFFFFF]">
+                              <span className="font-sans tabular-nums text-[13px] uppercase tabular-nums tracking-[0.06em] text-[#F6F1E7]">
                                 {ui.card.musicGenre}
                               </span>
-                              <p className="font-display text-base text-[#FFFFFF] group-hover:text-[#FFFFFF] truncate">
+                              <p className="font-display text-base text-[#F6F1E7] group-hover:text-[#F6F1E7] truncate">
                                 <HighlightText text={g.displayLabel} query={query} />
                               </p>
                             </div>
@@ -2587,27 +2587,27 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
             </div>
 
             {/* Bottom Couture Concierge & Keyboard Telemetry Bar */}
-            <div className="w-full border-t border-white/14 bg-[#18181C] px-4 sm:px-8 py-3">
-              <div className="max-w-[1280px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-[13px] text-[#C9C7C2]">
+            <div className="w-full border-t border-[#F6F1E7]/14 bg-[#0B0A09] px-4 sm:px-8 py-3">
+              <div className="max-w-[1280px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-[13px] text-[#C2B9AA]">
                 <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 font-sans tabular-nums text-[13px]">
                   <span>{ui.footer.deskLabel}</span>
-                  <span className="text-[#FFFFFF] font-semibold">
+                  <span className="text-[#F6F1E7] font-semibold">
                     <bdi dir="ltr">+39 351 912 7047</bdi>
                   </span>
                   <span>·</span>
-                  <a href="mailto:concierge@nightlifemilan.com" className="text-[#FFFFFF] hover:text-[#FFFFFF] underline">
+                  <a href="mailto:concierge@nightlifemilan.com" className="text-[#F6F1E7] hover:text-[#F6F1E7] underline">
                     concierge@nightlifemilan.com
                   </a>
                 </div>
 
                 <div className="flex items-center gap-3 shrink-0 whitespace-nowrap">
-                  <div className="hidden lg:flex items-center gap-3 font-sans tabular-nums text-[13px] text-[#C9C7C2]">
+                  <div className="hidden lg:flex items-center gap-3 font-sans tabular-nums text-[13px] text-[#C2B9AA]">
                     <span>
-                      <kbd className="px-1.5 py-0.5 border border-white/20 bg-[#0A0A0C] text-[#FFFFFF] mr-1">↵</kbd>
+                      <kbd className="px-1.5 py-0.5 border border-[#EAE3D5]/24 bg-[#050505] text-[#F6F1E7] mr-1">↵</kbd>
                       {ui.footer.kbdOpen}
                     </span>
                     <span>
-                      <kbd className="px-1.5 py-0.5 border border-white/20 bg-[#0A0A0C] text-[#FFFFFF] mr-1">ESC</kbd>
+                      <kbd className="px-1.5 py-0.5 border border-[#EAE3D5]/24 bg-[#050505] text-[#F6F1E7] mr-1">ESC</kbd>
                       {ui.footer.kbdClose}
                     </span>
                   </div>
@@ -2615,7 +2615,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
                     href={getConciergeBookingUrl(currentLocale, undefined, pathname)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#25D366] text-[#0A0A0C] hover:bg-[#20bd5a] font-sans tabular-nums font-bold uppercase tabular-nums tracking-[0.06em] text-[13px] hover:bg-[#EDEBE6] transition-colors"
+                    className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#25D366] text-[#050505] hover:bg-[#2EE472] font-sans tabular-nums font-bold uppercase tabular-nums tracking-[0.06em] text-[13px] hover:bg-[#EAE3D5] transition-colors"
                   >
                     <MessageCircle className="w-3.5 h-3.5" />
                     WhatsApp +39 351 912 7047

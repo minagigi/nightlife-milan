@@ -210,7 +210,7 @@ export default function VenueEventsAutoCarousel({
                     fill
                     sizes="(max-width: 768px) 90vw, 350px"
                     quality={80}
-                    className="object-contain p-1.5 group-hover:scale-105 transition-transform duration-300"
+                    className="object-contain p-1.5"
                   />
                   <span className="absolute top-3 left-3 bg-[#050505]/92 border border-[#F6F1E7]/25 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-[#EAE3D5]">
                     {ev.badge}

@@ -289,25 +289,25 @@ export default function CapodannoDetailView({ locale, event }: Props) {
   const mapQuery = encodeURIComponent(`${event.venueName}, ${event.address}, ${event.city}`);
 
   return (
-    <main className="min-h-[100dvh] bg-[#0A0A0C] pb-24 pt-20 text-[#FFFFFF]">
+    <main className="min-h-[100dvh] bg-[#050505] pb-24 pt-20 text-[#F6F1E7]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
       <article className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <nav className="mb-6 flex flex-wrap items-center gap-2 text-[13px] font-semibold text-[#C9C7C2]">
-          <Link href={prefix || '/'} className="hover:text-[#FFFFFF]">Home</Link>
+        <nav className="mb-6 flex flex-wrap items-center gap-2 text-[13px] font-semibold text-[#C2B9AA]">
+          <Link href={prefix || '/'} className="hover:text-[#F6F1E7]">Home</Link>
           <span>/</span>
-          <Link href={capodannoPath(locale)} className="hover:text-[#FFFFFF]">
+          <Link href={capodannoPath(locale)} className="hover:text-[#F6F1E7]">
             {nav.menuLabel} 2027
           </Link>
           <span>/</span>
-          <span className="text-[#FFFFFF]">{event.venueName}</span>
+          <span className="text-[#F6F1E7]">{event.venueName}</span>
         </nav>
 
-        <div className="overflow-hidden border border-white/18 bg-[#18181C]">
-          <div className="border-b border-white/14 bg-[#0A0A0C]">
+        <div className="overflow-hidden border border-[#F6F1E7]/18 bg-[#0B0A09]">
+          <div className="border-b border-[#F6F1E7]/14 bg-[#050505]">
             <img
               src={seoPack.poster.src}
               title={seoPack.poster.title}
@@ -317,16 +317,16 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               className="mx-auto block max-h-[620px] w-full object-contain"
             />
           </div>
-          <div className="border-b border-white/14 bg-[#18181C] px-6 py-6 sm:px-10 sm:py-8">
+          <div className="border-b border-[#F6F1E7]/14 bg-[#0B0A09] px-6 py-6 sm:px-10 sm:py-8">
             <div className="flex flex-wrap gap-2">
-              <span className="bg-[#FFFFFF] px-3 py-1 text-[13px] font-bold text-[#0A0A0C]">
+              <span className="bg-[#F6F1E7] px-3 py-1 text-[13px] font-bold text-[#050505]">
                 {ui.dateBadge}
               </span>
-              <span className="border border-white/30 bg-[#0A0A0C] px-3 py-1 text-[13px] font-semibold text-[#FFFFFF]">
+              <span className="border border-white/30 bg-[#050505] px-3 py-1 text-[13px] font-semibold text-[#F6F1E7]">
                 {event.city} ({event.province})
               </span>
               {!isPartyOnly && !isUnavailableForNye && event.priceFromEur > 0 && (
-                <span className="bg-[#D9381E] px-3 py-1 text-[13px] font-extrabold uppercase text-[#FFFFFF]" data-almost-sold-out-badge>
+                <span className="bg-[#25D366] px-3 py-1 text-[13px] font-bold uppercase text-[#050505]" data-almost-sold-out-badge>
                   {scarcity.almostSoldOutBadge}
                 </span>
               )}
@@ -340,11 +340,11 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               data-event-title={title}
               data-event-party-only={isPartyOnly ? 'true' : undefined}
               data-event-sold-out-nye={isUnavailableForNye ? 'true' : undefined}
-              className="mt-3 font-display text-4xl font-extrabold uppercase leading-none text-[#FFFFFF] sm:text-6xl"
+              className="mt-3 font-display text-4xl font-bold uppercase leading-none text-[#F6F1E7] sm:text-6xl"
             >
               {title}
             </h1>
-            <p className="mt-2 font-sans text-base italic text-[#EDEBE6] sm:text-lg">{subtitle}</p>
+            <p className="mt-2 font-sans text-base italic text-[#EAE3D5] sm:text-lg">{subtitle}</p>
           </div>
 
           <div className="p-6 sm:p-10">
@@ -352,99 +352,99 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               <div
                 role="status"
                 data-closure-notice
-                className="mb-8 border-2 border-amber-400/60 bg-amber-950/40 p-6 text-[#FFFFFF]"
+                className="mb-8 border-2 border-amber-400/60 bg-amber-950/40 p-6 text-[#F6F1E7]"
               >
                 <p className="text-sm font-extrabold text-amber-200">
                   {localized.closureBannerTitle}
                 </p>
-                <p className="mt-2 text-sm leading-relaxed text-[#FFFFFF] sm:text-base">
+                <p className="mt-2 text-sm leading-relaxed text-[#F6F1E7] sm:text-base">
                   {localized.closureBannerBody}
                 </p>
               </div>
             ) : event.priceFromEur > 0 ? (
-              <div role="alert" data-urgency-alert className="mb-8 border border-[#0A0A0C]/16 bg-[#EDEBE6] p-5 text-[#0A0A0C]">
-                <p className="text-sm font-extrabold text-[#0A0A0C]">
+              <div role="alert" data-urgency-alert className="mb-8 border border-[#F6F1E7]/14 bg-[#0B0A09] p-5 text-[#F6F1E7]">
+                <p className="text-sm font-bold text-[#F6F1E7]">
                   {scarcity.urgencyAlertTitle}
                 </p>
-                <p className="mt-1.5 max-w-[48ch] text-sm leading-relaxed text-[#4F4D48]">
+                <p className="mt-1.5 max-w-[48ch] text-sm leading-relaxed text-[#C2B9AA]">
                   {scarcity.urgencyAlertBody}
                 </p>
               </div>
             ) : event.category !== 'piazza' ? (
-              <div role="status" data-tba-waitlist-notice className="mb-8 border border-[#0A0A0C]/16 bg-[#EDEBE6] p-5 text-[#0A0A0C]">
-                <p className="text-sm font-extrabold text-[#0A0A0C]">
+              <div role="status" data-tba-waitlist-notice className="mb-8 border border-[#F6F1E7]/14 bg-[#0B0A09] p-5 text-[#F6F1E7]">
+                <p className="text-sm font-bold text-[#F6F1E7]">
                   {localized.musicAndFormat}
                 </p>
-                <p className="mt-1.5 max-w-[48ch] text-sm leading-relaxed text-[#4F4D48]">
+                <p className="mt-1.5 max-w-[48ch] text-sm leading-relaxed text-[#C2B9AA]">
                   {localized.priceSummary}
                 </p>
               </div>
             ) : null}
-            {/* Clickable Table of Contents (TOC) (#EDEBE6 Carta Calda) */}
+            {/* Clickable Table of Contents (TOC) (Couture Noir) */}
             <nav
               aria-label={ui.tocTitle}
-              className="mb-8 border border-[#0A0A0C]/16 bg-[#EDEBE6] p-5 text-[#0A0A0C]"
+              className="mb-8 border border-[#F6F1E7]/14 bg-[#0B0A09] p-5 text-[#F6F1E7]"
             >
-              <p className="text-[13px] font-bold text-[#4F4D48]">
+              <p className="text-[13px] font-bold text-[#C2B9AA]">
                 {ui.tocTitle}
               </p>
               <ul className="mt-3 grid gap-2 text-[13px] font-medium sm:grid-cols-2 lg:grid-cols-3 sm:text-sm">
                 <li>
-                  <a href="#programma-serata" className="text-[#0A0A0C] hover:underline">
+                  <a href="#programma-serata" className="text-[#F6F1E7] hover:underline">
                     {ui.tocProgram}
                   </a>
                 </li>
                 {isUnavailableForNye ? (
                   <li>
-                    <a href="#alternative-rooftop" className="text-[#0A0A0C] hover:underline">
+                    <a href="#alternative-rooftop" className="text-[#F6F1E7] hover:underline">
                       {localized.alternativesHeading || ui.confirmedAlternativesHeading}
                     </a>
                   </li>
                 ) : (
                   <>
                     <li>
-                      <a href="#prezzi-formule" className="text-[#0A0A0C] hover:underline">
+                      <a href="#prezzi-formule" className="text-[#F6F1E7] hover:underline">
                         {ui.tocPrices}
                       </a>
                     </li>
                     {(localized.menus?.length ?? 0) > 0 && (
                       <li>
-                        <a href="#menu-ufficiale" className="text-[#0A0A0C] hover:underline">
+                        <a href="#menu-ufficiale" className="text-[#F6F1E7] hover:underline">
                           {localized.menusHeading || ui.tocMenuLabel}
                         </a>
                       </li>
                     )}
                     {(localized.conditions?.length ?? 0) > 0 && (
                       <li>
-                        <a href="#condizioni-ufficiali" className="text-[#0A0A0C] hover:underline">
+                        <a href="#condizioni-ufficiali" className="text-[#F6F1E7] hover:underline">
                           {localized.conditionsHeading || ui.officialConditionsHeading}
                         </a>
                       </li>
                     )}
                     <li>
-                      <a href="#termini-pagamento" className="text-[#0A0A0C] hover:underline">
+                      <a href="#termini-pagamento" className="text-[#F6F1E7] hover:underline">
                         {paymentTerms.tocLabel}
                       </a>
                     </li>
                     <li>
-                      <a href="#prenota-concierge" className="text-[#0A0A0C] hover:underline">
+                      <a href="#prenota-concierge" className="text-[#F6F1E7] hover:underline">
                         {ui.tocBooking}
                       </a>
                     </li>
                   </>
                 )}
                 <li>
-                  <a href="#mappa-locale" className="text-[#0A0A0C] hover:underline">
+                  <a href="#mappa-locale" className="text-[#F6F1E7] hover:underline">
                     {ui.mapHeadingEvent}
                   </a>
                 </li>
                 <li>
-                  <a href="#faq-evento" className="text-[#0A0A0C] hover:underline">
+                  <a href="#faq-evento" className="text-[#F6F1E7] hover:underline">
                     {ui.faqHeadingPrefix}
                   </a>
                 </li>
                 <li>
-                  <a href="#eventi-correlati" className="text-[#0A0A0C] hover:underline">
+                  <a href="#eventi-correlati" className="text-[#F6F1E7] hover:underline">
                     {ui.tocRelated}
                   </a>
                 </li>
@@ -454,82 +454,82 @@ export default function CapodannoDetailView({ locale, event }: Props) {
             {/* S17 6-Box Summary Grid */}
             <section
               data-s17-summary-grid
-              className="mb-8 border border-[#0A0A0C]/16 bg-[#EDEBE6] p-5 text-[#0A0A0C]"
+              className="mb-8 border border-[#F6F1E7]/14 bg-[#0B0A09] p-5 text-[#F6F1E7]"
             >
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                <div className="border border-[#0A0A0C]/14 bg-[#FFFFFF] p-4">
-                  <p className="text-[13px] font-extrabold uppercase text-[#B5240D]">
+                <div className="border border-[#F6F1E7]/14 bg-[#141311] p-4">
+                  <p className="text-[13px] font-bold uppercase text-[#EAE3D5]">
                     {ui.colPrices}
                   </p>
-                  <p className="mt-1 font-display text-xl font-bold text-[#0A0A0C]">
+                  <p className="mt-1 font-display text-xl font-bold text-[#F6F1E7]">
                     {localized.priceSummary || `€${event.priceFromEur}`}
                   </p>
                 </div>
-                <div className="border border-[#0A0A0C]/14 bg-[#FFFFFF] p-4">
-                  <p className="text-[13px] font-extrabold uppercase text-[#4F4D48]">TARGET</p>
-                  <p className="mt-1 text-sm font-bold text-[#0A0A0C]">{seoPack.targetLabel}</p>
+                <div className="border border-[#F6F1E7]/14 bg-[#141311] p-4">
+                  <p className="text-[13px] font-bold uppercase text-[#C2B9AA]">TARGET</p>
+                  <p className="mt-1 text-sm font-bold text-[#F6F1E7]">{seoPack.targetLabel}</p>
                 </div>
-                <div className="border border-[#0A0A0C]/14 bg-[#FFFFFF] p-4">
-                  <p className="text-[13px] font-extrabold uppercase text-[#4F4D48]">
+                <div className="border border-[#F6F1E7]/14 bg-[#141311] p-4">
+                  <p className="text-[13px] font-bold uppercase text-[#C2B9AA]">
                     {ui.tocProgram}
                   </p>
-                  <p className="mt-1 text-sm font-semibold text-[#0A0A0C]">
+                  <p className="mt-1 text-sm font-semibold text-[#F6F1E7]">
                     {highlights[0] || event.venueName}
                   </p>
                 </div>
-                <div className="border border-[#0A0A0C]/14 bg-[#FFFFFF] p-4">
-                  <p className="text-[13px] font-extrabold uppercase text-[#4F4D48]">
+                <div className="border border-[#F6F1E7]/14 bg-[#141311] p-4">
+                  <p className="text-[13px] font-bold uppercase text-[#C2B9AA]">
                     {ui.musicLabel}
                   </p>
-                  <p className="mt-1 text-sm font-semibold text-[#0A0A0C]">{music}</p>
+                  <p className="mt-1 text-sm font-semibold text-[#F6F1E7]">{music}</p>
                 </div>
-                <div className="border border-[#0A0A0C]/14 bg-[#FFFFFF] p-4">
-                  <p className="text-[13px] font-extrabold uppercase text-[#4F4D48]">
+                <div className="border border-[#F6F1E7]/14 bg-[#141311] p-4">
+                  <p className="text-[13px] font-bold uppercase text-[#C2B9AA]">
                     {ui.hoursLabel}
                   </p>
-                  <p className="mt-1 text-sm font-semibold tabular-nums text-[#0A0A0C]">
+                  <p className="mt-1 text-sm font-semibold tabular-nums text-[#F6F1E7]">
                     {displayHours}
                   </p>
                 </div>
-                <div className="border border-[#0A0A0C]/14 bg-[#FFFFFF] p-4">
-                  <p className="text-[13px] font-extrabold uppercase text-[#4F4D48]">
+                <div className="border border-[#F6F1E7]/14 bg-[#141311] p-4">
+                  <p className="text-[13px] font-bold uppercase text-[#C2B9AA]">
                     {ui.dressCodeLabel}
                   </p>
-                  <p className="mt-1 text-sm font-semibold text-[#0A0A0C]">{dress}</p>
+                  <p className="mt-1 text-sm font-semibold text-[#F6F1E7]">{dress}</p>
                 </div>
               </div>
             </section>
 
             {/* Key Highlights */}
-            <div className="grid gap-4 border border-white/14 bg-[#0A0A0C] p-5 sm:grid-cols-2">
+            <div className="grid gap-4 border border-[#F6F1E7]/14 bg-[#050505] p-5 sm:grid-cols-2">
               {highlights.map((item) => (
-                <div key={item} className="text-sm text-[#EDEBE6]">
+                <div key={item} className="text-sm text-[#EAE3D5]">
                   • {item}
                 </div>
               ))}
             </div>
 
             <div id="programma-serata" className="mt-8 space-y-4">
-              <h2 className="font-display text-2xl font-bold text-[#FFFFFF]">
+              <h2 className="font-display text-2xl font-bold text-[#F6F1E7]">
                 {ui.programHeading}
               </h2>
-              <p className="text-base leading-relaxed text-[#C9C7C2]">{description}</p>
-              <p className="text-sm leading-relaxed text-[#C9C7C2]">
-                <strong className="text-[#FFFFFF]">{ui.musicLabel}:</strong> {music} ·{' '}
-                <strong className="text-[#FFFFFF]">{ui.dressCodeLabel}:</strong> {dress}
+              <p className="text-base leading-relaxed text-[#C2B9AA]">{description}</p>
+              <p className="text-sm leading-relaxed text-[#C2B9AA]">
+                <strong className="text-[#F6F1E7]">{ui.musicLabel}:</strong> {music} ·{' '}
+                <strong className="text-[#F6F1E7]">{ui.dressCodeLabel}:</strong> {dress}
               </p>
               {matchedPublicVenue && matchedPublicVenueHref && (
                 <div
                   data-venue-authority-backlink
-                  className="mt-4 flex flex-col gap-3 border border-white/25 bg-[#18181C] p-4 sm:flex-row sm:items-center sm:justify-between"
+                  className="mt-4 flex flex-col gap-3 border border-[#EAE3D5]/28 bg-[#0B0A09] p-4 sm:flex-row sm:items-center sm:justify-between"
                 >
                   <div>
-                    <p className="text-[13px] font-bold uppercase tracking-[0.04em] text-[#F35A3F]">
+                    <p className="text-[13px] font-bold uppercase tracking-[0.04em] text-[#EAE3D5]">
                       {isGardaSisterVenue
                         ? ui.sisterVenueMilanLabel
                         : ui.officialVenueGuideLabel}
                     </p>
-                    <p className="mt-1 text-base text-[#FFFFFF]">
+                    <p className="mt-1 text-base text-[#F6F1E7]">
                       {isGardaSisterVenue
                         ? ui.sisterVenueMilanDesc
                         : ui.officialVenueGuideDescTpl.replace('{venue}', matchedPublicVenueName)}
@@ -537,7 +537,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                   </div>
                   <Link
                     href={matchedPublicVenueHref}
-                    className="nlm-pressable inline-flex shrink-0 items-center justify-center bg-[#D9381E] px-4 py-2.5 text-[13px] font-bold uppercase tracking-[0.04em] text-[#FFFFFF] transition hover:bg-[#B82B14]"
+                    className="nlm-pressable inline-flex shrink-0 items-center justify-center bg-[#25D366] px-4 py-2.5 text-[13px] font-bold uppercase tracking-[0.04em] text-[#050505] transition hover:bg-[#2EE472]"
                   >
                     {matchedPublicVenueName} →
                   </Link>
@@ -547,22 +547,22 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               {localized.relatedHolidayBanner && (
                 <div
                   data-related-holiday-banner
-                  className="mt-4 flex flex-col gap-3 border border-white/40 bg-[#0A0A0C] p-4 sm:flex-row sm:items-center sm:justify-between"
+                  className="mt-4 flex flex-col gap-3 border border-[#EAE3D5]/40 bg-[#050505] p-4 sm:flex-row sm:items-center sm:justify-between"
                 >
                   <div>
-                    <p className="text-[13px] font-bold uppercase tracking-[0.04em] text-[#FFFFFF]">
+                    <p className="text-[13px] font-bold uppercase tracking-[0.04em] text-[#F6F1E7]">
                       {localized.relatedHolidayBanner.badge}
                     </p>
-                    <p className="mt-1 font-display text-lg font-bold text-[#FFFFFF]">
+                    <p className="mt-1 font-display text-lg font-bold text-[#F6F1E7]">
                       {localized.relatedHolidayBanner.title}
                     </p>
-                    <p className="mt-1 text-sm text-[#C9C7C2]">
+                    <p className="mt-1 text-sm text-[#C2B9AA]">
                       {localized.relatedHolidayBanner.description}
                     </p>
                   </div>
                   <Link
                     href={localized.relatedHolidayBanner.href}
-                    className="inline-flex min-h-[44px] shrink-0 items-center justify-center bg-[#EDEBE6] px-4 py-2.5 text-[13px] font-bold uppercase tracking-[0.04em] text-[#0A0A0C] transition hover:bg-[#EAE3D5]"
+                    className="inline-flex min-h-[44px] shrink-0 items-center justify-center bg-[#EAE3D5] px-4 py-2.5 text-[13px] font-bold uppercase tracking-[0.04em] text-[#050505] transition hover:bg-[#EAE3D5]"
                   >
                     {localized.relatedHolidayBanner.ctaLabel.replace(/\s*→+$/, '')} →
                   </Link>
@@ -570,23 +570,23 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               )}
 
               {localized.schedule && localized.schedule.length > 0 && (
-                <div className="mt-6 border border-white/15 bg-[#0A0A0C] p-5">
-                  <h3 className="font-display text-lg font-bold text-[#FFFFFF]">
+                <div className="mt-6 border border-[#F6F1E7]/14 bg-[#050505] p-5">
+                  <h3 className="font-display text-lg font-bold text-[#F6F1E7]">
                     {localized.scheduleHeading || ui.programHeading}
                   </h3>
                   <ol className="mt-3 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
                     {localized.schedule.map((step) => (
                       <li
                         key={`${step.time}-${step.label}`}
-                        className="border border-white/12 bg-[#18181C] p-3"
+                        className="border border-white/12 bg-[#0B0A09] p-3"
                       >
-                        <span className="text-[13px] font-bold tabular-nums text-[#F35A3F]">{step.time}</span>
-                        <p className="mt-1 text-base leading-relaxed text-[#FFFFFF]">{step.label}</p>
+                        <span className="text-[13px] font-bold tabular-nums text-[#EAE3D5]">{step.time}</span>
+                        <p className="mt-1 text-base leading-relaxed text-[#F6F1E7]">{step.label}</p>
                       </li>
                     ))}
                   </ol>
                   {localized.programImageSrc && (
-                    <div className="mt-4 flex justify-center border border-white/15 bg-[#18181C] p-2">
+                    <div className="mt-4 flex justify-center border border-[#F6F1E7]/14 bg-[#0B0A09] p-2">
                       <img
                         src={localized.programImageSrc}
                         alt={`${title} · ${localized.scheduleHeading || ui.programHeading}`}
@@ -606,22 +606,22 @@ export default function CapodannoDetailView({ locale, event }: Props) {
             {/* Official Remediated Event Poster (Uncropped object-contain) */}
             <figure
               data-capodanno-poster-detail
-              className="mt-8 overflow-hidden border border-white/25 bg-[#0A0A0C] p-4 sm:p-6"
+              className="mt-8 overflow-hidden border border-[#EAE3D5]/28 bg-[#050505] p-4 sm:p-6"
             >
               <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-                <span className="border border-white/35 bg-[#18181C] px-3 py-1 text-[13px] font-bold uppercase tracking-[0.04em] text-[#FFFFFF]">
+                <span className="border border-white/35 bg-[#0B0A09] px-3 py-1 text-[13px] font-bold uppercase tracking-[0.04em] text-[#F6F1E7]">
                   {seoPack.poster.badgeLabel}
                 </span>
                 <div className="flex flex-wrap gap-2 text-[13px]">
-                  <span className="border border-white/15 bg-[#18181C] px-3 py-1 text-[#FFFFFF]">
-                    <strong className="text-[#FFFFFF]">{seoPack.targetPrefix}:</strong> {seoPack.targetLabel}
+                  <span className="border border-[#F6F1E7]/14 bg-[#0B0A09] px-3 py-1 text-[#F6F1E7]">
+                    <strong className="text-[#F6F1E7]">{seoPack.targetPrefix}:</strong> {seoPack.targetLabel}
                   </span>
-                  <span className="border border-white/15 bg-[#18181C] px-3 py-1 text-[#FFFFFF]">
-                    <strong className="text-[#FFFFFF]">{seoPack.outfitPrefix}:</strong> {seoPack.outfitLabel}
+                  <span className="border border-[#F6F1E7]/14 bg-[#0B0A09] px-3 py-1 text-[#F6F1E7]">
+                    <strong className="text-[#F6F1E7]">{seoPack.outfitPrefix}:</strong> {seoPack.outfitLabel}
                   </span>
                 </div>
               </div>
-              <div className="flex justify-center bg-[#0A0A0C] p-2">
+              <div className="flex justify-center bg-[#050505] p-2">
                 <img
                   src={seoPack.poster.src}
                   title={seoPack.poster.title}
@@ -631,21 +631,21 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                   className="max-h-[540px] w-auto max-w-full object-contain"
                 />
               </div>
-              <figcaption className="mt-3 text-[13px] leading-relaxed text-[#C9C7C2] sm:text-sm">
-                <strong className="text-[#FFFFFF]">{seoPack.poster.title}</strong> · {seoPack.poster.description}
+              <figcaption className="mt-3 text-[13px] leading-relaxed text-[#C2B9AA] sm:text-sm">
+                <strong className="text-[#F6F1E7]">{seoPack.poster.title}</strong> · {seoPack.poster.description}
               </figcaption>
             </figure>
 
             {/* Ad-Hoc Google Flow SEO Gallery (4 Images combining Event + Target Crowd + Event Outfit + H1/H2/H3) */}
             <section id="galleria-seo-flow" data-seo-flow-gallery className="mt-10 space-y-5">
               <div>
-                <h2 className="font-display text-3xl font-extrabold uppercase text-[#FFFFFF]">
+                <h2 className="font-display text-3xl font-bold uppercase text-[#F6F1E7]">
                   {seoPack.sectionHeading}
                 </h2>
-                <p className="mt-1.5 text-[13px] font-bold uppercase tracking-[0.04em] text-[#F35A3F]">
+                <p className="mt-1.5 text-[13px] font-bold uppercase tracking-[0.04em] text-[#EAE3D5]">
                   {seoPack.eyebrow}
                 </p>
-                <p className="mt-2 max-w-[48ch] text-base leading-relaxed text-[#C9C7C2]">
+                <p className="mt-2 max-w-[48ch] text-base leading-relaxed text-[#C2B9AA]">
                   {seoPack.sectionSubtitle}
                 </p>
               </div>
@@ -653,9 +653,9 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 {seoPack.gallery.map((img) => (
                   <figure
                     key={img.src}
-                    className="overflow-hidden border border-white/15 bg-[#0A0A0C] transition hover:border-white/45"
+                    className="overflow-hidden border border-[#F6F1E7]/14 bg-[#050505] transition hover:border-[#EAE3D5]/45"
                   >
-                    <div className="relative h-56 w-full bg-[#0A0A0C]">
+                    <div className="relative h-56 w-full bg-[#050505]">
                       <img
                         src={img.src}
                         title={img.title}
@@ -664,21 +664,21 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                         decoding="async"
                         className="h-full w-full object-cover"
                       />
-                      <span className="pointer-events-none absolute left-3 top-3 border border-white/30 bg-[#0A0A0C]/90 px-2.5 py-1 text-[13px] font-semibold text-[#FFFFFF]">
+                      <span className="pointer-events-none absolute left-3 top-3 border border-white/30 bg-[#050505]/92 px-2.5 py-1 text-[13px] font-semibold text-[#F6F1E7]">
                         {img.shotLabel}
                       </span>
                     </div>
                     <figcaption className="space-y-2 p-4">
                       <div className="flex flex-wrap gap-1.5 text-[13px]">
-                        <span className="border border-white/25 bg-[#18181C] px-2 py-0.5 font-medium text-[#FFFFFF]">
+                        <span className="border border-[#EAE3D5]/28 bg-[#0B0A09] px-2 py-0.5 font-medium text-[#F6F1E7]">
                           {img.targetBadge}
                         </span>
-                        <span className="border border-white/15 bg-[#18181C] px-2 py-0.5 text-[#C9C7C2]">
+                        <span className="border border-[#F6F1E7]/14 bg-[#0B0A09] px-2 py-0.5 text-[#C2B9AA]">
                           {img.outfitBadge}
                         </span>
                       </div>
-                      <p className="text-sm leading-relaxed text-[#C9C7C2]">
-                        <strong className="text-[#FFFFFF]">{img.title}</strong> · {img.description}
+                      <p className="text-sm leading-relaxed text-[#C2B9AA]">
+                        <strong className="text-[#F6F1E7]">{img.title}</strong> · {img.description}
                       </p>
                     </figcaption>
                   </figure>
@@ -690,15 +690,15 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               <section
                 id="alternative-rooftop"
                 data-rooftop-alternatives
-                className="mt-10 border border-[#0A0A0C]/16 bg-[#EDEBE6] p-6 text-[#0A0A0C] sm:p-8"
+                className="mt-10 border border-[#F6F1E7]/14 bg-[#0B0A09] p-6 text-[#F6F1E7] sm:p-8"
               >
-                <h2 className="font-display text-3xl font-extrabold uppercase text-[#0A0A0C] sm:text-4xl">
+                <h2 className="font-display text-3xl font-bold uppercase text-[#F6F1E7] sm:text-4xl">
                   {localized.alternativesHeading}
                 </h2>
-                <p className="mt-1.5 font-sans text-[13px] font-bold uppercase tracking-[0.04em] text-[#B5240D]">
+                <p className="mt-1.5 font-sans text-[13px] font-bold uppercase tracking-[0.04em] text-[#EAE3D5]">
                   {ui.confirmedVenuesBanner}
                 </p>
-                <p className="mt-2 max-w-[48ch] text-base text-[#4F4D48]">
+                <p className="mt-2 max-w-[48ch] text-base text-[#C2B9AA]">
                   {localized.alternativesSubheading}
                 </p>
                 <div className="mt-5 grid gap-5 md:grid-cols-2">
@@ -709,10 +709,10 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                     return (
                       <article
                         key={alt.slug}
-                        className="flex flex-col justify-between border border-[#0A0A0C]/20 bg-[#FFFFFF] p-5"
+                        className="flex flex-col justify-between border border-[#EAE3D5]/28 bg-[#141311] p-5"
                       >
                         <div>
-                          <div data-no-lightbox="true" className="overflow-hidden border border-[#0A0A0C]/15 bg-[#0A0A0C]">
+                          <div data-no-lightbox="true" className="overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]">
                             <img
                               src={alt.image}
                               alt={altTitle}
@@ -721,17 +721,17 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                               className="h-44 w-full object-contain"
                             />
                           </div>
-                          <h3 className="mt-3 font-display text-xl font-bold text-[#0A0A0C]">
+                          <h3 className="mt-3 font-display text-xl font-bold text-[#F6F1E7]">
                             {altTitle}
                           </h3>
-                          <p className="mt-1 text-[13px] text-[#4F4D48]">{altSub}</p>
-                          <p className="mt-2 text-[13px] font-semibold text-[#0A0A0C]">
+                          <p className="mt-1 text-[13px] text-[#C2B9AA]">{altSub}</p>
+                          <p className="mt-2 text-[13px] font-semibold text-[#F6F1E7]">
                             {getCapodannoLocalizedEventContent(alt, locale).priceSummary}
                           </p>
                         </div>
                         <Link
                           href={altHref}
-                          className="mt-4 inline-flex min-h-[44px] items-center justify-center bg-[#0A0A0C] px-5 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.04em] text-[#FFFFFF] transition hover:bg-[#24201B]"
+                          className="mt-4 inline-flex min-h-[44px] items-center justify-center bg-[#050505] px-5 py-2.5 text-[13px] font-bold uppercase tracking-[0.04em] text-[#F6F1E7] transition hover:bg-[#1E1C19]"
                         >
                           {ui.viewPackagesCta}
                         </Link>
@@ -743,14 +743,14 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                   <Link
                     href={capodannoPath(locale)}
                     locale={locale}
-                    className="inline-flex min-h-[44px] items-center border border-[#0A0A0C] px-5 py-2.5 text-[13px] font-bold uppercase tracking-[0.04em] text-[#0A0A0C] hover:bg-[#0A0A0C] hover:text-[#FFFFFF]"
+                    className="inline-flex min-h-[44px] items-center border border-[#EAE3D5]/32 px-5 py-2.5 text-[13px] font-bold uppercase tracking-[0.04em] text-[#F6F1E7] hover:bg-[#050505] hover:text-[#F6F1E7]"
                   >
                     {ui.backToAllBtn}
                   </Link>
                   <Link
                     href={partnerGuideHref}
                     locale={locale}
-                    className="inline-flex min-h-[44px] items-center border border-[#0A0A0C] bg-[#FFFFFF] px-5 py-2.5 text-[13px] font-bold uppercase tracking-[0.04em] text-[#0A0A0C] hover:bg-[#0A0A0C] hover:text-[#FFFFFF]"
+                    className="inline-flex min-h-[44px] items-center border border-[#EAE3D5]/32 bg-[#F6F1E7] px-5 py-2.5 text-[13px] font-bold uppercase tracking-[0.04em] text-[#050505] hover:bg-[#050505] hover:text-[#050505]"
                   >
                     {getClubNyeBannerCopy35(locale).ctaGuide} →
                   </Link>
@@ -758,7 +758,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                     href={getConciergeBookingUrl(locale, `NYE 2027 Alternatives (${event.venueName})`, `${SITE_URL}${canonicalPath}`)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex min-h-[44px] items-center bg-[#25D366] px-5 py-2.5 text-[13px] font-bold uppercase tracking-[0.04em] text-[#0A0A0C]"
+                    className="inline-flex min-h-[44px] items-center bg-[#25D366] px-5 py-2.5 text-[13px] font-bold uppercase tracking-[0.04em] text-[#050505]"
                   >
                     WhatsApp {SITE_CONTACT.whatsapp.number}
                   </a>
@@ -766,30 +766,30 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               </section>
             ) : (
               <>
-            {/* Price Tiers S17 Table (#EDEBE6 Carta Calda + Testa Nera #0A0A0C) */}
-            <div id="prezzi-formule" className="mt-10 border border-[#0A0A0C]/16 bg-[#EDEBE6] p-6 text-[#0A0A0C] sm:p-8">
+            {/* Price Tiers S17 Table (Couture Noir) */}
+            <div id="prezzi-formule" className="mt-10 border border-[#F6F1E7]/14 bg-[#0B0A09] p-6 text-[#F6F1E7] sm:p-8">
               <div className="flex flex-wrap items-center gap-3">
-                <h2 className="font-display text-3xl font-extrabold uppercase text-[#0A0A0C]">
+                <h2 className="font-display text-3xl font-bold uppercase text-[#F6F1E7]">
                   {ui.pricesHeadingPrefix} · {event.venueName}
                 </h2>
                 {!isPartyOnly && event.priceFromEur > 0 && (
-                  <span className="bg-[#D9381E] px-3 py-1 text-[13px] font-extrabold uppercase text-[#FFFFFF]" data-selling-fast-badge>
+                  <span className="bg-[#25D366] px-3 py-1 text-[13px] font-bold uppercase text-[#050505]" data-selling-fast-badge>
                     {scarcity.sellingFastBadge}
                   </span>
                 )}
               </div>
-              <p className="mt-1 text-[13px] font-medium text-[#4F4D48]">{sourceBasis}</p>
+              <p className="mt-1 text-[13px] font-medium text-[#C2B9AA]">{sourceBasis}</p>
               {!event.partner &&
                 event.priceFromEur > 0 &&
                 (isTerrazzaDuomo21 || Boolean(getVenueIdByEventSlug(event.slug))) && (
-                <p className="mt-1 text-[13px] font-bold text-[#0A0A0C]" data-checkout-fee-note>
+                <p className="mt-1 text-[13px] font-bold text-[#F6F1E7]" data-checkout-fee-note>
                   {singlePassCopy.feeCalculatedAtCheckoutNote}
                 </p>
               )}
 
-              <div className="mt-5 overflow-x-auto border border-[#0A0A0C]/18 bg-[#FFFFFF]">
+              <div className="mt-5 overflow-x-auto border border-[#EAE3D5]/28 bg-[#141311]">
                 <table className="w-full border-collapse text-left text-sm tabular-nums">
-                  <thead className="bg-[#0A0A0C] text-[13px] font-bold text-[#FFFFFF]">
+                  <thead className="bg-[#050505] text-[13px] font-bold text-[#F6F1E7]">
                     <tr>
                       <th className="px-4 py-3.5">{ui.tocPrices}</th>
                       <th className="px-4 py-3.5 text-right">{ui.colPrices}</th>
@@ -799,16 +799,16 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                     {tiers.map((tier) => (
                       <tr
                         key={tier.label}
-                        className="border-b border-[#0A0A0C]/12 odd:bg-[#FFFFFF] even:bg-[#F7F5F0] last:border-b-0"
+                        className="border-b border-[#EAE3D5]/32/12 odd:bg-[#141311] even:bg-[#1E1C19] last:border-b-0"
                       >
                         <td className="px-4 py-4 align-top">
-                          <h3 className="font-display text-xl font-bold text-[#0A0A0C]">
+                          <h3 className="font-display text-xl font-bold text-[#F6F1E7]">
                             {tier.label}
                           </h3>
-                          <p className="mt-1 text-sm text-[#4F4D48]">{tier.details}</p>
+                          <p className="mt-1 text-sm text-[#C2B9AA]">{tier.details}</p>
                         </td>
                         <td className="whitespace-nowrap px-4 py-4 text-right align-top">
-                          <span className="font-display text-2xl font-extrabold text-[#D9381E]">
+                          <span className="font-display text-2xl font-bold text-[#EAE3D5]">
                             {tier.price}
                           </span>
                         </td>
@@ -834,18 +834,18 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               <section
                 id="alternative-confermate"
                 data-confirmed-alternatives
-                className="mt-10 border border-[#0A0A0C]/16 bg-[#EDEBE6] p-6 text-[#0A0A0C] sm:p-8"
+                className="mt-10 border border-[#F6F1E7]/14 bg-[#0B0A09] p-6 text-[#F6F1E7] sm:p-8"
               >
                 {localized.alternativesHeading && (
-                  <h2 className="font-display text-2xl font-extrabold uppercase text-[#0A0A0C] sm:text-3xl">
+                  <h2 className="font-display text-2xl font-bold uppercase text-[#F6F1E7] sm:text-3xl">
                     {localized.alternativesHeading}
                   </h2>
                 )}
-                <p className="mt-1 text-[13px] font-bold text-[#B5240D]">
+                <p className="mt-1 text-[13px] font-bold text-[#EAE3D5]">
                   {ui.confirmedVenuesBanner}
                 </p>
                 {localized.alternativesSubheading && (
-                  <p className="mt-2 text-sm text-[#4F4D48]">
+                  <p className="mt-2 text-sm text-[#C2B9AA]">
                     {localized.alternativesSubheading}
                   </p>
                 )}
@@ -857,10 +857,10 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                     return (
                       <article
                         key={alt.slug}
-                        className="flex flex-col justify-between border border-[#0A0A0C]/20 bg-[#FFFFFF] p-5"
+                        className="flex flex-col justify-between border border-[#EAE3D5]/28 bg-[#141311] p-5"
                       >
                         <div>
-                          <div data-no-lightbox="true" className="overflow-hidden border border-[#0A0A0C]/15 bg-[#0A0A0C]">
+                          <div data-no-lightbox="true" className="overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]">
                             <img
                               src={alt.image}
                               alt={altTitle}
@@ -869,18 +869,18 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                               className="h-44 w-full object-contain"
                             />
                           </div>
-                          <h3 className="mt-3 font-display text-xl font-bold text-[#0A0A0C]">
+                          <h3 className="mt-3 font-display text-xl font-bold text-[#F6F1E7]">
                             {altTitle}
                           </h3>
-                          <p className="mt-1 text-[13px] text-[#4F4D48]">{altSub}</p>
-                          <p className="mt-2 text-[13px] font-semibold text-[#0A0A0C]">
+                          <p className="mt-1 text-[13px] text-[#C2B9AA]">{altSub}</p>
+                          <p className="mt-2 text-[13px] font-semibold text-[#F6F1E7]">
                             {getCapodannoLocalizedEventContent(alt, locale).priceSummary}
                           </p>
                         </div>
                         <Link
                           href={altHref}
                           locale={locale}
-                          className="mt-4 inline-flex min-h-[44px] items-center justify-center bg-[#0A0A0C] px-5 py-2.5 text-[13px] font-extrabold uppercase tracking-[0.04em] text-[#FFFFFF] transition hover:bg-[#24201B]"
+                          className="mt-4 inline-flex min-h-[44px] items-center justify-center bg-[#050505] px-5 py-2.5 text-[13px] font-bold uppercase tracking-[0.04em] text-[#F6F1E7] transition hover:bg-[#1E1C19]"
                         >
                           {ui.viewPackagesCta}
                         </Link>
@@ -892,14 +892,14 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                   <Link
                     href={partnerGuideHref}
                     locale={locale}
-                    className="inline-flex min-h-[44px] items-center bg-[#0A0A0C] px-5 py-2.5 text-[13px] font-bold uppercase tracking-[0.04em] text-[#FFFFFF] hover:bg-[#24201B]"
+                    className="inline-flex min-h-[44px] items-center bg-[#050505] px-5 py-2.5 text-[13px] font-bold uppercase tracking-[0.04em] text-[#F6F1E7] hover:bg-[#1E1C19]"
                   >
                     {(localized.relatedHolidayBanner?.ctaLabel || ui.viewPackagesCta).replace(/\s*→+$/, '')} →
                   </Link>
                   <Link
                     href={capodannoPath(locale)}
                     locale={locale}
-                    className="inline-flex min-h-[44px] items-center border border-[#0A0A0C] px-5 py-2.5 text-[13px] font-bold uppercase tracking-[0.04em] text-[#0A0A0C] hover:bg-[#0A0A0C] hover:text-[#FFFFFF]"
+                    className="inline-flex min-h-[44px] items-center border border-[#EAE3D5]/32 px-5 py-2.5 text-[13px] font-bold uppercase tracking-[0.04em] text-[#F6F1E7] hover:bg-[#050505] hover:text-[#F6F1E7]"
                   >
                     {ui.backToAllBtn}
                   </Link>
@@ -913,45 +913,45 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 id="menu-ufficiale"
                 data-official-menus
                 data-lightbox-group="capodanno-menus"
-                className="mt-10 border border-white/20 bg-[#0A0A0C] p-6 sm:p-8"
+                className="mt-10 border border-[#EAE3D5]/24 bg-[#050505] p-6 sm:p-8"
               >
-                <h2 className="font-display text-2xl font-bold text-[#FFFFFF]">
+                <h2 className="font-display text-2xl font-bold text-[#F6F1E7]">
                   {localized.menusHeading || 'Menu'}
                 </h2>
                 <div className="mt-5 grid gap-6 lg:grid-cols-2">
                   {localized.menus.map((menu) => (
                     <article
                       key={menu.id}
-                      className="flex flex-col justify-between border border-white/16 bg-[#18181C] p-5"
+                      className="flex flex-col justify-between border border-white/16 bg-[#0B0A09] p-5"
                     >
                       <div>
                         <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-white/12 pb-3">
                           <div>
-                            <h3 className="font-display text-xl font-bold text-[#FFFFFF]">{menu.title}</h3>
-                            <p className="mt-1 text-[13px] text-[#C9C7C2]">{menu.subtitle}</p>
+                            <h3 className="font-display text-xl font-bold text-[#F6F1E7]">{menu.title}</h3>
+                            <p className="mt-1 text-[13px] text-[#C2B9AA]">{menu.subtitle}</p>
                           </div>
-                          <span className="shrink-0 bg-[#EDEBE6] px-3 py-1 text-[13px] font-bold uppercase tracking-[0.04em] text-[#0A0A0C]">
+                          <span className="shrink-0 bg-[#EAE3D5] px-3 py-1 text-[13px] font-bold uppercase tracking-[0.04em] text-[#050505]">
                             {menu.price}
                           </span>
                         </div>
                         <dl className="mt-4 space-y-2.5 text-sm">
                           {menu.courses.map((c) => (
                             <div key={`${menu.id}-${c.course}`} className="border-b border-white/10 pb-2 last:border-0">
-                              <dt className="text-[13px] font-bold text-[#F35A3F]">
+                              <dt className="text-[13px] font-bold text-[#EAE3D5]">
                                 {c.course}
                               </dt>
-                              <dd className="mt-0.5 text-sm leading-relaxed text-[#EDEBE6]">
+                              <dd className="mt-0.5 text-sm leading-relaxed text-[#EAE3D5]">
                                 {c.dish}
                               </dd>
                             </div>
                           ))}
                         </dl>
-                        <p className="mt-3 border border-white/15 bg-[#0A0A0C] p-3 text-[13px] font-medium text-[#C9C7C2]">
+                        <p className="mt-3 border border-[#F6F1E7]/14 bg-[#050505] p-3 text-[13px] font-medium text-[#C2B9AA]">
                           {menu.beverages}
                         </p>
                       </div>
                       {menu.imageSrc && (
-                        <div className="mt-4 flex justify-center border border-white/15 bg-[#0A0A0C] p-2">
+                        <div className="mt-4 flex justify-center border border-[#F6F1E7]/14 bg-[#050505] p-2">
                           <img
                             src={menu.imageSrc}
                             alt={menu.imageAlt}
@@ -975,19 +975,19 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               <section
                 id="condizioni-ufficiali"
                 data-official-conditions
-                className="mt-10 border border-white/18 bg-[#18181C] p-6 sm:p-8"
+                className="mt-10 border border-[#F6F1E7]/18 bg-[#0B0A09] p-6 sm:p-8"
               >
-                <h2 className="font-display text-2xl font-extrabold uppercase text-[#FFFFFF]">
+                <h2 className="font-display text-2xl font-bold uppercase text-[#F6F1E7]">
                   {localized.conditionsHeading || ui.officialConditionsHeading}
                 </h2>
-                <p className="mt-1 text-[13px] font-bold text-[#EDEBE6]">
+                <p className="mt-1 text-[13px] font-bold text-[#EAE3D5]">
                   {ui.officialConditionsEyebrow}
                 </p>
                 <ul className="mt-4 grid gap-3 sm:grid-cols-2">
                   {localized.conditions.map((cond) => (
                     <li
                       key={cond}
-                      className="border border-white/15 bg-[#0A0A0C] p-4 text-[13px] leading-relaxed text-[#FFFFFF] sm:text-sm"
+                      className="border border-[#F6F1E7]/14 bg-[#050505] p-4 text-[13px] leading-relaxed text-[#F6F1E7] sm:text-sm"
                     >
                       {cond}
                     </li>
@@ -1000,35 +1000,35 @@ export default function CapodannoDetailView({ locale, event }: Props) {
             <section
               id="termini-pagamento"
               data-payment-terms-35
-              className="mt-10 border border-white/18 bg-[#0A0A0C] p-6 sm:p-8"
+              className="mt-10 border border-[#F6F1E7]/18 bg-[#050505] p-6 sm:p-8"
             >
               <div className="flex flex-wrap items-center justify-between gap-3">
-                <h2 className="font-display text-2xl font-extrabold uppercase text-[#FFFFFF] sm:text-3xl">
+                <h2 className="font-display text-2xl font-bold uppercase text-[#F6F1E7] sm:text-3xl">
                   {paymentTerms.heading}
                 </h2>
-                <span className="border border-white/30 bg-[#18181C] px-3 py-1 text-[13px] font-bold text-[#EDEBE6]">
+                <span className="border border-white/30 bg-[#0B0A09] px-3 py-1 text-[13px] font-bold text-[#EAE3D5]">
                   {paymentTerms.methodsBadge}
                 </span>
               </div>
-              <p className="mt-2 max-w-[48ch] text-sm leading-relaxed text-[#C9C7C2]">
+              <p className="mt-2 max-w-[48ch] text-sm leading-relaxed text-[#C2B9AA]">
                 {paymentTerms.subtitle}
               </p>
               <ol className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {paymentTerms.steps.map((step, idx) => (
                   <li
                     key={step}
-                    className="border border-white/14 bg-[#18181C] p-4"
+                    className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-4"
                   >
-                    <span className="inline-flex h-6 w-6 items-center justify-center bg-[#FFFFFF] text-[13px] font-bold tabular-nums text-[#0A0A0C]">
+                    <span className="inline-flex h-6 w-6 items-center justify-center bg-[#F6F1E7] text-[13px] font-bold tabular-nums text-[#050505]">
                       {idx + 1}
                     </span>
-                    <p className="mt-2.5 text-sm leading-relaxed text-[#FFFFFF]">
+                    <p className="mt-2.5 text-sm leading-relaxed text-[#F6F1E7]">
                       {step}
                     </p>
                   </li>
                 ))}
               </ol>
-              <p className="mt-4 bg-[#18181C] px-4 py-3 text-[13px] leading-relaxed text-[#EDEBE6]">
+              <p className="mt-4 bg-[#0B0A09] px-4 py-3 text-[13px] leading-relaxed text-[#EAE3D5]">
                 {paymentTerms.note}
               </p>
             </section>
@@ -1036,12 +1036,12 @@ export default function CapodannoDetailView({ locale, event }: Props) {
             {/* CTA Box with WhatsApp, Tel, Email */}
             <div
               id="prenota-concierge"
-              className="mt-10 border border-white/25 bg-[#0A0A0C] p-6 sm:p-8"
+              className="mt-10 border border-[#EAE3D5]/28 bg-[#050505] p-6 sm:p-8"
             >
-              <h2 className="font-display text-2xl font-bold text-[#FFFFFF]">
+              <h2 className="font-display text-2xl font-bold text-[#F6F1E7]">
                 {ui.bookingHeading}
               </h2>
-              <p className="mt-2 text-sm text-[#C9C7C2]">
+              <p className="mt-2 text-sm text-[#C2B9AA]">
                 {ui.bookingSubtitle}
               </p>
               <div className="mt-5 flex flex-wrap gap-3">
@@ -1050,7 +1050,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                   target="_blank"
                   rel="noopener noreferrer"
                   data-event-cta-kind="table"
-                  className="inline-flex min-h-[44px] items-center bg-[#25D366] px-6 py-3 text-sm font-bold text-[#0A0A0C] transition hover:bg-[#2EE472]"
+                  className="inline-flex min-h-[44px] items-center bg-[#25D366] px-6 py-3 text-sm font-bold text-[#050505] transition hover:bg-[#2EE472]"
                 >
                   WhatsApp {SITE_CONTACT.whatsapp.number}
                 </a>
@@ -1060,26 +1060,26 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                     target="_blank"
                     rel="sponsored noopener noreferrer"
                     data-event-cta-kind="admission"
-                    className="inline-flex min-h-[44px] items-center bg-[#EDEBE6] px-6 py-3 text-sm font-bold text-[#0A0A0C] transition hover:bg-[#EAE3D5]"
+                    className="inline-flex min-h-[44px] items-center bg-[#EAE3D5] px-6 py-3 text-sm font-bold text-[#050505] transition hover:bg-[#EAE3D5]"
                   >
                     {scarcity.xceedPriorityCta}
                   </a>
                 ) : null}
                 <a
                   href="tel:+393519127047"
-                  className="inline-flex min-h-[44px] items-center border border-white/40 bg-[#18181C] px-5 py-3 text-sm font-semibold text-[#FFFFFF] transition hover:bg-[#EDEBE6] hover:text-[#0A0A0C]"
+                  className="inline-flex min-h-[44px] items-center border border-[#EAE3D5]/40 bg-[#0B0A09] px-5 py-3 text-sm font-semibold text-[#050505] transition hover:bg-[#EAE3D5] hover:text-[#050505]"
                 >
                   {ui.callNowBtn}
                 </a>
                 <a
                   href="mailto:concierge@nightlifemilan.com"
-                  className="inline-flex min-h-[44px] items-center border border-white/20 bg-[#18181C] px-5 py-3 text-sm font-semibold text-[#C9C7C2] transition hover:border-white hover:text-[#FFFFFF]"
+                  className="inline-flex min-h-[44px] items-center border border-[#EAE3D5]/24 bg-[#0B0A09] px-5 py-3 text-sm font-semibold text-[#C2B9AA] transition hover:border-[#EAE3D5] hover:text-[#F6F1E7]"
                 >
                   concierge@nightlifemilan.com
                 </a>
                 <Link
                   href={capodannoPath(locale)}
-                  className="inline-flex min-h-[44px] items-center border border-white/20 px-5 py-3 text-sm font-semibold text-[#FFFFFF] hover:bg-[#EDEBE6] hover:text-[#0A0A0C]"
+                  className="inline-flex min-h-[44px] items-center border border-[#EAE3D5]/24 px-5 py-3 text-sm font-semibold text-[#050505] hover:bg-[#EAE3D5] hover:text-[#050505]"
                 >
                   {ui.backToAllBtn}
                 </Link>
@@ -1090,10 +1090,10 @@ export default function CapodannoDetailView({ locale, event }: Props) {
 
             {/* Embedded Google Map for Venue */}
             <div id="mappa-locale" className="mt-12">
-              <h2 className="font-display text-2xl font-bold text-[#FFFFFF]">
+              <h2 className="font-display text-2xl font-bold text-[#F6F1E7]">
                 {ui.mapHeadingEvent} · {event.venueName}
               </h2>
-              <p className="mt-1 text-sm text-[#C9C7C2]">
+              <p className="mt-1 text-sm text-[#C2B9AA]">
                 {event.venueName} · {event.address}, {event.city} ({event.province}) · {displayHours}
               </p>
               <div className="mt-4">
@@ -1110,14 +1110,14 @@ export default function CapodannoDetailView({ locale, event }: Props) {
             </div>
 
             {/* FAQs (#F6F1E7 Capitolo Avorio Caldo) */}
-            <div id="faq-evento" className="mt-12 border border-[#0A0A0C]/15 bg-[#EDEBE6] text-[#0A0A0C] p-6 sm:p-8 space-y-4">
-              <h2 className="font-display text-2xl font-bold text-[#0A0A0C]">
+            <div id="faq-evento" className="mt-12 border border-[#F6F1E7]/14 bg-[#0B0A09] text-[#F6F1E7] p-6 sm:p-8 space-y-4">
+              <h2 className="font-display text-2xl font-bold text-[#F6F1E7]">
                 {ui.faqHeadingPrefix}
               </h2>
               {faqs.map((faq) => (
-                <div key={faq.q} className="border border-[#0A0A0C]/15 bg-[#FFFFFF] p-5">
-                  <h3 className="font-semibold text-[#0A0A0C]">{faq.q}</h3>
-                  <p className="mt-1.5 text-sm text-[#4F4D48]">{faq.a}</p>
+                <div key={faq.q} className="border border-[#F6F1E7]/14 bg-[#141311] p-5">
+                  <h3 className="font-semibold text-[#F6F1E7]">{faq.q}</h3>
+                  <p className="mt-1.5 text-sm text-[#C2B9AA]">{faq.a}</p>
                 </div>
               ))}
             </div>
@@ -1127,7 +1127,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
         {/* Related Events */}
         {related.length > 0 && (
           <section id="eventi-correlati" className="mt-14">
-            <h2 className="font-display text-2xl font-bold text-[#FFFFFF]">
+            <h2 className="font-display text-2xl font-bold text-[#F6F1E7]">
               {ui.relatedHeading}
             </h2>
             <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -1135,15 +1135,15 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 <Link
                   key={item.slug}
                   href={capodannoEventPath(item.slug, locale)}
-                  className="border border-white/14 bg-[#18181C] p-5 transition hover:border-white/45"
+                  className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-5 transition hover:border-[#EAE3D5]/45"
                 >
-                  <p className="text-[13px] font-semibold text-[#FFFFFF]">
+                  <p className="text-[13px] font-semibold text-[#F6F1E7]">
                     {item.city} ({item.province})
                   </p>
-                  <h3 className="mt-1 font-display text-lg font-bold text-[#FFFFFF]">
+                  <h3 className="mt-1 font-display text-lg font-bold text-[#F6F1E7]">
                     {getCapodannoLocalizedEventTitle(item, locale)}
                   </h3>
-                  <p className="mt-2 text-[13px] text-[#C9C7C2]">
+                  <p className="mt-2 text-[13px] text-[#C2B9AA]">
                     {getCapodannoLocalizedEventContent(item, locale).priceSummary}
                   </p>
                 </Link>

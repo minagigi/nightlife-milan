@@ -10,7 +10,10 @@ import { getDateSensitiveEvents, millisecondsUntilNextDateSensitiveChange } from
 import { tableConciergeContext, tableConciergeDays, tableConciergeEventsForDay, type TableConciergeEvent } from '@/lib/tableConcierge';
 import { Check } from 'lucide-react';
 import { getTableConciergeControlCopy } from '@/lib/tableConciergeCopy';
+import { getV01SiteCopy } from '@/lib/i18n/v01SiteCopy35';
 import styles from './TableConcierge.module.css';
+
+type ConciergeFormulaKey = 'vip' | 'list' | 'aperitivo' | 'dinner';
 
 export type TableConciergeCopy = {
   eyebrow: string;
@@ -59,11 +62,20 @@ export default function TableConcierge({ locale, events, initialNow, copy, surfa
   const [now, setNow] = useState(() => new Date(initialNow));
   const [requestedDay, setRequestedDay] = useState('');
   const [requestedEvent, setRequestedEvent] = useState('');
+  const [formula, setFormula] = useState<ConciergeFormulaKey>('vip');
   const [groupSize, setGroupSize] = useState(4);
   const [preference, setPreference] = useState('');
   const requestRef = useRef<HTMLDivElement>(null);
   const selectRef = useRef<HTMLSelectElement>(null);
   const controlCopy = getTableConciergeControlCopy(locale);
+  const v01 = getV01SiteCopy(locale);
+  const formulaOptions: ReadonlyArray<{ key: ConciergeFormulaKey; label: string }> = [
+    { key: 'vip', label: v01.formulaVip },
+    { key: 'list', label: v01.formulaList },
+    { key: 'aperitivo', label: v01.formulaAperitivo },
+    { key: 'dinner', label: v01.formulaDinner },
+  ];
+  const selectedFormulaLabel = formulaOptions.find((item) => item.key === formula)?.label || v01.formulaVip;
   const lp = localePrefix(locale);
   const upcoming = useMemo(() => getDateSensitiveEvents(events, surface === 'home' ? 'calendar-week' : 'upcoming', now), [events, now, surface]);
   const days = useMemo(() => tableConciergeDays(upcoming, now), [upcoming, now]);
@@ -107,45 +119,86 @@ export default function TableConcierge({ locale, events, initialNow, copy, surfa
   };
 
   const pathname = usePathname() || '/';
-  const context = selected ? `${tableConciergeContext(selected, groupSize, locale)}${preference.trim() ? ` · ${controlCopy.preference}: ${preference.trim()}` : ''}` : undefined;
+  const contextParts = [
+    selectedFormulaLabel,
+    selected ? tableConciergeContext(selected, groupSize, locale) : `${controlCopy.group}: ${groupSize}`,
+    preference.trim() ? `${controlCopy.preference}: ${preference.trim()}` : '',
+  ].filter(Boolean);
+  const context = contextParts.join(' · ');
   const waUrl = getConciergeBookingUrl(locale, context, pathname);
 
   return (
     <section className={styles.shell} data-table-concierge={surface} data-variant={compact ? 'compact' : 'full'} aria-labelledby={compact ? `tc-request-title-${surface}` : `tc-title-${surface}`}>
       <div className={styles.hero}>
-        {!compact && <>
+        {!compact && <div className={styles.heroLeft} data-cialdini="presuasion">
         <div className={styles.heroImage} data-hero-backdrop="true" data-no-lightbox="true">
           <Image
             src="/images/table-concierge/justme-night.webp"
             alt={copy.title}
             fill
             quality={92}
-            sizes="100vw"
+            sizes="(max-width: 1023px) 100vw, 58vw"
             priority={surface === 'home'}
             fetchPriority={surface === 'home' ? 'high' : undefined}
             className={styles.heroPhoto}
           />
         </div>
+        <div className={styles.heroStatusBar}>
+          <span className={styles.onlineBadge}>
+            <span className={styles.onlineDot} aria-hidden="true" />
+            {v01.onlineNow}
+          </span>
+          <span className={styles.statusStats}>{v01.statusStats}</span>
+        </div>
         <div className={styles.heroCopy}>
+          <p className={styles.subNote}>{copy.eyebrow}</p>
           {surface === 'home'
-            ? <h1 id={`tc-title-${surface}`} className={styles.title} data-reveal="rise">{copy.title}</h1>
-            : <h2 id={`tc-title-${surface}`} className={styles.title} data-reveal="rise">{copy.title}</h2>}
-          <p className={styles.lead} data-reveal="rise" data-stagger="1">{copy.lead}</p>
-          <p className={styles.subNote} data-reveal="rise" data-stagger="2">{copy.eyebrow}</p>
+            ? <h1 id={`tc-title-${surface}`} className={styles.title}>{copy.title}</h1>
+            : <h2 id={`tc-title-${surface}`} className={styles.title}>{copy.title}</h2>}
+          <p className={styles.lead}>{copy.lead}</p>
           {homeIntro && <>
             <p className={styles.legacyIntro}>{homeIntro.sub}</p>
             <p className={styles.pills}>{homeIntro.pills}</p>
           </>}
-          <a className={`${styles.primaryLink} nlm-pressable`} href={`#tc-request-${surface}`}>{copy.heroAnchorAction || copy.requestAction}<span aria-hidden="true">↓</span></a>
+          <div className={styles.heroAnchorRow}>
+            <a className={styles.primaryLink} href="#capodanno">
+              {v01.exploreNyeCta}<span aria-hidden="true">↓</span>
+            </a>
+            <a className={styles.heroAnchorBtn} href="#locali-partner">
+              {v01.partnerClubsCta}<span aria-hidden="true">↓</span>
+            </a>
+          </div>
           {homeIntro && <div className={styles.heroLinks}>
-            <Link href={`${lp}/events/tonight`} prefetch={false}>{homeIntro.ctaSub} ↓</Link>
+            <a href="#stasera">{homeIntro.ctaSub} ↓</a>
             <Link href={`${lp}/clubs`} prefetch={false}>{homeIntro.allVenues} ↗</Link>
           </div>}
-          <p className={styles.heroNote}>{copy.disclaimer}</p>
+          <p className={styles.heroNote}>{v01.statusLive} · {copy.disclaimer}</p>
         </div>
-        </>}
-        <div ref={requestRef} className={styles.request} id={`tc-request-${surface}`} data-ui="concierge-form">
-          <p className={styles.requestTitle} id={`tc-request-title-${surface}`}>{copy.requestTitle}</p>
+        </div>}
+        <div ref={requestRef} className={styles.request} id={`tc-request-${surface}`} data-ui="concierge-form" data-cialdini="commitment">
+          <div className={styles.requestHead}>
+            <p className={styles.requestTitle} id={`tc-request-title-${surface}`}>{copy.requestTitle}</p>
+            <span className={styles.onlineBadge}>
+              <span className={styles.onlineDot} aria-hidden="true" />
+              {v01.onlineNow}
+            </span>
+          </div>
+          <fieldset className={styles.fieldset}>
+            <legend>{v01.formulaLabel}</legend>
+            <div className={styles.formulaGrid} role="group" aria-label={v01.formulaLabel}>
+              {formulaOptions.map((item) => (
+                <button
+                  key={item.key}
+                  type="button"
+                  className={styles.formulaChip}
+                  aria-pressed={formula === item.key}
+                  onClick={() => setFormula(item.key)}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          </fieldset>
           {days.length > 0 ? (
             <>
               <fieldset className={styles.fieldset}>
@@ -198,16 +251,23 @@ export default function TableConcierge({ locale, events, initialNow, copy, surfa
               <label className={styles.fieldLabel} htmlFor={`tc-preference-${surface}`}>{controlCopy.preference}</label>
               <input id={`tc-preference-${surface}`} className={styles.input} type="text" maxLength={120} autoComplete="off"
                 value={preference} onChange={(event) => setPreference(event.currentTarget.value)} />
+              <div className={styles.previewBox} aria-live="polite">
+                <p className={styles.previewLabel}>{v01.previewPrefix}</p>
+                <p className={styles.previewText}>
+                  {selectedFormulaLabel} · {selected ? `${selected.venueName} (${selected.labels.longDate})` : copy.eventLabel} · {groupSize}
+                </p>
+              </div>
               <div className={styles.requestCtaDock}>
                 <a className={styles.requestLink} href={waUrl} target="_blank" rel="noopener noreferrer">
                   {copy.requestAction}<span aria-hidden="true">↗</span>
                 </a>
               </div>
+              <p className={styles.noUpfrontNote}>{v01.noUpfrontNote}</p>
               {copy.trustBadges && (
                 <div className={styles.trustRow}>
                   {copy.trustBadges.map((badge) => (
                     <span key={badge} className={styles.trustBadge}>
-                      <Check className="mr-1 inline-block h-3.5 w-3.5 shrink-0 text-[#0A0A0C]" aria-hidden="true" />
+                      <Check className="mr-1 inline-block h-3.5 w-3.5 shrink-0 text-[#25D366]" aria-hidden="true" />
                       {badge}
                     </span>
                   ))}

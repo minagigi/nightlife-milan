@@ -25,18 +25,23 @@ import { headerMenuFromFields, resolveMenuItems, type HeaderMenu } from '@/lib/e
 import type { PublishedLanguagePaths } from '@/lib/languageRouteResolver';
 import { halloweenNavigation, halloweenPath } from '@/lib/halloween/routes';
 import { capodannoNavigation, capodannoPath } from '@/lib/capodanno/routes';
+import { getV01SiteCopy } from '@/lib/i18n/v01SiteCopy35';
 
 const anyLocalePrefixRe = new RegExp(`^\\/(${LOCALES.map((l) => l.code).join('|')})(\\/|$)`);
 
 const MEGA_FEATURED_CLUBS = [
   { name: 'Just Me Milano', zone: 'Parco Sempione', slug: 'just-me-milano' },
-  { name: 'Pineta Milano', zone: 'Moscova / Solferino', slug: 'pineta-club-milano' },
-  { name: 'Voya Rooftop', zone: 'Portello Skyline', slug: 'voya-rooftop-milan' },
+  { name: 'Pineta Milano', zone: 'Porta Garibaldi · Via Messina', slug: 'pineta-club-milano' },
+  { name: 'Voya Rooftop', zone: 'Portello Skyline · 20° Piano', slug: 'voya-rooftop-milan' },
+  { name: 'REPVBLIC Milano', zone: 'Piazza della Repubblica 12', slug: 'repvblic-milano' },
+  { name: 'The Club Milano', zone: 'Brera · Moscova', slug: 'the-club-milano' },
   { name: 'Aria Club Milano', zone: 'San Siro Garden', slug: 'aria-club-milano' },
-  { name: '55 Milano', zone: 'Sempione / Piero della Francesca', slug: '55-milano' },
-  { name: 'REPVBLIC Milano', zone: 'Piazza della Repubblica', slug: 'repvblic-milano' },
-  { name: 'Terrazza Duomo 21', zone: 'Piazza del Duomo', slug: 'terrazza-21' },
-  { name: 'Gattopardo Milano', zone: 'Cenisio / Sempione', slug: 'gattopardo-milano' },
+  { name: '55 Milano', zone: 'Sempione · Arco della Pace', slug: '55-milano' },
+  { name: 'Tocqueville 13', zone: 'Corso Como · Garibaldi', slug: 'tocqueville-13' },
+  { name: 'Terrazza Duomo 21', zone: 'Piazza del Duomo 21', slug: 'terrazza-21' },
+  { name: 'Gattopardo Milano', zone: 'Cenisio · Ex Chiesa', slug: 'gattopardo-milano' },
+  { name: 'Hollywood Milano', zone: 'Corso Como 15', slug: 'hollywood-milano' },
+  { name: '11 Clubroom', zone: 'Via Tocqueville 11', slug: '11-clubroom-milano' },
 ] as const;
 
 const MOBILE_MENU_COPY = {
@@ -329,10 +334,11 @@ export default function Header({
     `${localePrefix}/events/this-week`,
     currentLocale as LocaleCode,
   );
+  const v01 = getV01SiteCopy(currentLocale);
   const weeklyMobileItem = {
     id: 'events' as const,
-    label: currentLocale === 'it' ? 'SERATE SETTIMANA' : 'THIS WEEK',
-    name: currentLocale === 'it' ? 'SERATE SETTIMANA' : 'THIS WEEK',
+    label: v01.settimana.titleBefore + v01.settimana.titleAccent,
+    name: v01.settimana.titleBefore + v01.settimana.titleAccent,
     href: weeklyHref,
     match: weeklyHref,
     gold: false,
@@ -356,20 +362,38 @@ export default function Header({
     <header
       ref={headerRef}
       data-no-lightbox="true"
-      className={`nlm-header sticky top-0 z-50 w-full border-b border-white/14 bg-[#0A0A0C] ${
+      className={`nlm-header sticky top-0 z-50 w-full border-b border-[#F6F1E7]/14 bg-[#050505] ${
         scrolled ? 'is-scrolled' : ''
       }`}
     >
-      <div className="mx-auto max-w-[1440px] border-x border-white/14">
+      <div className="hidden xl:block w-full border-b border-[#F6F1E7]/14 bg-[#0B0A09]">
+        <div className="mx-auto flex max-w-[1440px] items-center justify-between border-x border-[#F6F1E7]/14 px-8 py-2 text-[13px] text-[#C2B9AA]">
+          <div className="flex items-center gap-2">
+            <span className="live-dot inline-block h-2 w-2 rounded-full bg-[#25D366]" aria-hidden="true" />
+            <strong className="font-semibold text-[#F6F1E7]">{v01.statusLive}</strong>
+            <span aria-hidden="true">·</span>
+            <span>{v01.statusStats}</span>
+          </div>
+          <a
+            href={waMenuLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-mono text-[13px] tabular-nums text-[#EAE3D5] hover:text-[#25D366]"
+          >
+            WhatsApp <bdi dir="ltr">{SITE_CONTACT.whatsapp.number}</bdi>
+          </a>
+        </div>
+      </div>
+      <div className="mx-auto max-w-[1440px] border-x border-[#F6F1E7]/14">
         <div className="px-2 sm:px-8">
           <div className="nlm-header-inner flex min-h-[68px] items-center justify-between gap-1 sm:gap-2">
-            {/* Mobile Menu Toggle (1 of 4 controls at 390px) */}
+            {/* Mobile Menu Toggle */}
             <div className="relative z-20 flex shrink-0 items-center xl:hidden">
               <button
                 ref={mobileMenuTriggerRef}
                 type="button"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="nlm-menu-toggle flex h-11 w-11 items-center justify-center text-[#FFFFFF] transition-colors hover:text-[#EDEBE6] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FFFFFF]"
+                className="nlm-menu-toggle flex h-11 w-11 items-center justify-center text-[#F6F1E7] transition-colors hover:text-[#EAE3D5] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]"
                 aria-label={menuCopy.menu}
                 aria-expanded={isMobileMenuOpen}
                 aria-controls="mobile-menu"
@@ -399,14 +423,14 @@ export default function Header({
               <Link
                 href={localePrefix || '/'}
                 prefetch={false}
-                className="relative z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFFFFF]"
+                className="relative z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]"
                 aria-label="Nightlife Milan"
               >
                 <Logo className="h-6 w-auto max-w-[116px] sm:h-8 sm:max-w-none" />
               </Link>
             </div>
 
-            {/* Desktop Primary Navigation S17 (5 focused items + Mega-Dropdown) */}
+            {/* Desktop Primary Navigation (1-row Couture Noir) */}
             <nav
               className="nlm-header-nav hidden shrink-0 items-center gap-4 xl:flex"
               aria-label={menuCopy.menu}
@@ -416,7 +440,7 @@ export default function Header({
                   type="button"
                   aria-expanded={openDropdown === 'clubs'}
                   onClick={() => setOpenDropdown((p) => (p === 'clubs' ? null : 'clubs'))}
-                  className="nlm-header-link inline-flex min-h-[44px] items-center gap-1 whitespace-nowrap font-sans text-sm font-semibold text-[#FFFFFF] hover:text-[#EDEBE6]"
+                  className="nlm-header-link inline-flex min-h-[44px] items-center gap-1 whitespace-nowrap font-sans text-sm font-semibold text-[#F6F1E7] hover:text-[#EAE3D5]"
                 >
                   <span>{t.clubs}</span>
                   <ChevronDown className="h-4 w-4" aria-hidden="true" />
@@ -424,7 +448,7 @@ export default function Header({
                 {mounted && favorites.length > 0 && (
                   <button
                     onClick={() => setDrawerOpen(true)}
-                    className="ml-1.5 flex h-5 min-w-[20px] items-center justify-center bg-[#FFFFFF] px-1 text-[11px] font-bold text-[#0A0A0C]"
+                    className="ml-1.5 flex h-5 min-w-[20px] items-center justify-center bg-[#F6F1E7] px-1 text-[11px] font-bold text-[#050505]"
                     aria-label={favoritesTitle}
                   >
                     {favorites.length}
@@ -436,9 +460,9 @@ export default function Header({
                 href={capodannoHref}
                 prefetch={false}
                 aria-current={pathname?.startsWith(capodannoHref) ? 'page' : undefined}
-                className="nlm-header-link inline-flex min-h-[44px] items-center gap-1.5 whitespace-nowrap font-sans text-sm font-bold text-[#FFFFFF]"
+                className="nlm-header-link inline-flex min-h-[44px] items-center gap-1.5 whitespace-nowrap font-sans text-sm font-bold text-[#F6F1E7]"
               >
-                <span className="inline-block h-2 w-2 shrink-0 bg-[#D9381E]" aria-hidden="true" />
+                <span className="inline-block h-2 w-2 shrink-0 rounded-full bg-[#25D366]" aria-hidden="true" />
                 <span>{capodannoLabel}</span>
               </Link>
 
@@ -484,7 +508,7 @@ export default function Header({
                 prefetch={false}
                 aria-label={spCopy.navAccountLabel}
                 title={spCopy.navAccountLabel}
-                className="hidden min-h-[44px] min-w-[44px] items-center justify-center border border-white/20 bg-[#18181C] text-[#FFFFFF] transition-colors hover:border-[#FFFFFF] sm:flex"
+                className="hidden min-h-[44px] min-w-[44px] items-center justify-center border border-[#F6F1E7]/20 bg-[#0B0A09] text-[#F6F1E7] transition-colors hover:border-[#EAE3D5] sm:flex"
               >
                 <User className="h-4 w-4" aria-hidden="true" />
               </Link>
@@ -494,11 +518,11 @@ export default function Header({
                 onClick={() => setCartOpen(true)}
                 aria-label={spCopy.navCartLabel}
                 title={spCopy.navCartLabel}
-                className="relative flex h-11 w-11 items-center justify-center border border-white/25 bg-[#18181C] text-[#FFFFFF] transition-colors hover:border-[#FFFFFF]"
+                className="relative flex h-11 w-11 items-center justify-center border border-[#F6F1E7]/20 bg-[#0B0A09] text-[#F6F1E7] transition-colors hover:border-[#EAE3D5]"
               >
                 <ShoppingBag className="h-4 w-4" aria-hidden="true" />
                 {mounted && itemCount > 0 && (
-                  <span className="absolute -right-1.5 -top-1.5 flex h-5 min-w-[20px] items-center justify-center bg-[#D9381E] px-1 text-[11px] font-bold tabular-nums text-[#FFFFFF]">
+                  <span className="absolute -right-1.5 -top-1.5 flex h-5 min-w-[20px] items-center justify-center bg-[#25D366] px-1 text-[11px] font-bold tabular-nums text-[#050505]">
                     {itemCount}
                   </span>
                 )}
@@ -512,13 +536,13 @@ export default function Header({
                 href={waMenuLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="nlm-header-action hidden min-h-[44px] shrink-0 items-center gap-2 whitespace-nowrap bg-[#D9381E] px-3.5 py-2 text-[13px] font-bold text-[#FFFFFF] transition-colors hover:bg-[#B82B14] xl:flex"
+                className="nlm-header-action hidden min-h-[44px] shrink-0 items-center gap-2 whitespace-nowrap bg-[#25D366] px-3.5 py-2 text-[13px] font-bold text-[#050505] transition-colors hover:bg-[#2EE472] xl:flex"
                 aria-label={bookingLabel}
               >
-                <MessageCircle className="h-4 w-4 shrink-0 text-[#FFFFFF]" aria-hidden="true" />
+                <MessageCircle className="h-4 w-4 shrink-0 text-[#050505]" aria-hidden="true" />
                 <div className="flex flex-col leading-none">
                   <span className="text-[13px] font-bold">{bookingLabel}</span>
-                  <span className="text-[13px] font-semibold tabular-nums text-[#FFFFFF]">
+                  <span className="font-mono text-[12px] font-semibold tabular-nums text-[#050505]">
                     <bdi dir="ltr">{SITE_CONTACT.whatsapp.number}</bdi>
                   </span>
                 </div>
@@ -527,15 +551,15 @@ export default function Header({
           </div>
         </div>
 
-        {/* White Editorial Mega-Dropdown for Clubs (S17) */}
+        {/* Couture Noir Mega-Dropdown for Clubs */}
         {openDropdown === 'clubs' && (
           <div
             data-no-lightbox="true"
-            className="nlm-mega-panel hidden border-t border-[#0A0A0C] border-b-2 border-b-[#0A0A0C] bg-[#FFFFFF] text-[#0A0A0C] xl:block"
+            className="nlm-mega-panel hidden border-t border-[#F6F1E7]/14 border-b border-b-[#EAE3D5]/32 bg-[#0B0A09] text-[#F6F1E7] xl:block"
           >
             <div className="mx-auto max-w-[1440px] px-8 py-6">
-              <div className="mb-4 flex items-center justify-between border-b border-[#0A0A0C]/14 pb-3">
-                <p className="font-display text-2xl font-extrabold uppercase text-[#0A0A0C]">
+              <div className="mb-4 flex items-center justify-between border-b border-[#F6F1E7]/14 pb-3">
+                <p className="font-display text-2xl font-bold text-[#F6F1E7]">
                   {t.megaClubsTitle}
                 </p>
                 <div className="flex items-center gap-4">
@@ -543,7 +567,7 @@ export default function Header({
                     href={capodannoHref}
                     prefetch={false}
                     onClick={() => setOpenDropdown(null)}
-                    className="inline-flex items-center gap-1.5 bg-[#D9381E] px-3.5 py-2 text-[13px] font-bold text-[#FFFFFF] hover:bg-[#B82B14]"
+                    className="inline-flex items-center gap-1.5 bg-[#25D366] px-3.5 py-2 text-[13px] font-bold text-[#050505] hover:bg-[#2EE472]"
                   >
                     <span>{t.megaNye}</span>
                     <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -552,7 +576,7 @@ export default function Header({
                     href={clubsHref}
                     prefetch={false}
                     onClick={() => setOpenDropdown(null)}
-                    className="inline-flex items-center gap-1 text-sm font-bold text-[#0A0A0C] underline underline-offset-4 hover:text-[#D9381E]"
+                    className="inline-flex items-center gap-1 text-sm font-bold text-[#EAE3D5] underline underline-offset-4 hover:text-[#F6F1E7]"
                   >
                     <span>{t.megaAllClubs}</span>
                   </Link>
@@ -566,12 +590,12 @@ export default function Header({
                     locale={currentLocale}
                     prefetch={false}
                     onClick={() => setOpenDropdown(null)}
-                    className="group flex flex-col justify-between border border-[#0A0A0C]/16 bg-[#EDEBE6] p-3.5 transition-colors hover:border-[#0A0A0C] hover:bg-[#FFFFFF]"
+                    className="group flex flex-col justify-between border border-[#F6F1E7]/14 bg-[#141311] p-3.5 transition-colors hover:border-[#EAE3D5] hover:bg-[#1E1C19]"
                   >
-                    <span className="font-display text-xl font-bold uppercase text-[#0A0A0C] group-hover:text-[#D9381E]">
+                    <span className="font-display text-xl font-bold text-[#F6F1E7] group-hover:text-[#EAE3D5]">
                       {club.name}
                     </span>
-                    <span className="mt-1 text-xs font-medium text-[#4F4D48]">{club.zone}</span>
+                    <span className="mt-1 text-xs font-medium text-[#C2B9AA]">{club.zone}</span>
                   </Link>
                 ))}
               </div>
@@ -579,11 +603,11 @@ export default function Header({
           </div>
         )}
 
-        {/* White Dropdown for Guides & San Siro */}
+        {/* Couture Noir Dropdown for Guides & San Siro */}
         {openDropdown === 'guides' && (
           <div
             data-no-lightbox="true"
-            className="nlm-mega-panel hidden border-t border-[#0A0A0C] border-b-2 border-b-[#0A0A0C] bg-[#FFFFFF] text-[#0A0A0C] xl:block"
+            className="nlm-mega-panel hidden border-t border-[#F6F1E7]/14 border-b border-b-[#EAE3D5]/32 bg-[#0B0A09] text-[#F6F1E7] xl:block"
           >
             <div className="mx-auto grid max-w-[1440px] grid-cols-4 gap-4 px-8 py-5">
               {[
@@ -597,10 +621,10 @@ export default function Header({
                   href={item.href}
                   prefetch={false}
                   onClick={() => setOpenDropdown(null)}
-                  className="flex items-center justify-between border border-[#0A0A0C]/16 bg-[#EDEBE6] p-4 font-display text-xl font-bold uppercase text-[#0A0A0C] hover:border-[#0A0A0C] hover:bg-[#FFFFFF]"
+                  className="flex items-center justify-between border border-[#F6F1E7]/14 bg-[#141311] p-4 font-display text-xl font-bold text-[#F6F1E7] hover:border-[#EAE3D5] hover:bg-[#1E1C19]"
                 >
                   <span>{item.label}</span>
-                  <ArrowRight className="h-4 w-4 text-[#D9381E]" aria-hidden="true" />
+                  <ArrowRight className="h-4 w-4 text-[#25D366]" aria-hidden="true" />
                 </Link>
               ))}
             </div>
@@ -625,10 +649,10 @@ export default function Header({
               role="dialog"
               aria-modal="true"
               aria-label={menuCopy.menu}
-              className="nlm-mobile-menu mx-auto max-h-[calc(100vh-5.25rem)] max-w-xl overflow-y-auto overscroll-contain border border-white/20 bg-[#0A0A0C]"
+              className="nlm-mobile-menu mx-auto max-h-[calc(100vh-5.25rem)] max-w-xl overflow-y-auto overscroll-contain border border-[#EAE3D5]/32 bg-[#050505]"
             >
-              <div className="flex items-center justify-between border-b border-white/14 px-5 py-3">
-                <span className="font-sans text-sm font-bold text-[#EDEBE6]">
+              <div className="flex items-center justify-between border-b border-[#F6F1E7]/14 px-5 py-3">
+                <span className="font-sans text-sm font-bold text-[#EAE3D5]">
                   {menuCopy.menu}
                 </span>
                 <button
@@ -637,14 +661,14 @@ export default function Header({
                     setIsMobileMenuOpen(false);
                     window.requestAnimationFrame(() => mobileMenuTriggerRef.current?.focus());
                   }}
-                  className="flex h-11 w-11 items-center justify-center text-[#FFFFFF] hover:bg-white/10"
+                  className="flex h-11 w-11 items-center justify-center text-[#F6F1E7] hover:bg-[#141311]"
                   aria-label={menuCopy.close}
                 >
                   <X className="h-5 w-5" aria-hidden="true" />
                 </button>
               </div>
               <nav className="flex flex-col px-5 pb-6 pt-3" aria-label={menuCopy.menu}>
-                <div className="mb-3 flex items-center justify-between gap-2 border-b border-white/14 pb-3">
+                <div className="mb-3 flex items-center justify-between gap-2 border-b border-[#F6F1E7]/14 pb-3">
                   <LanguageSwitcher currentLocale={currentLocale} />
                   <div className="flex items-center gap-2">
                     <Link
@@ -652,7 +676,7 @@ export default function Header({
                       locale={currentLocale}
                       prefetch={false}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="flex min-h-[44px] items-center justify-center gap-1.5 border border-white/25 bg-[#18181C] px-3 py-2 text-[13px] font-bold text-[#FFFFFF]"
+                      className="flex min-h-[44px] items-center justify-center gap-1.5 border border-[#F6F1E7]/24 bg-[#0B0A09] px-3 py-2 text-[13px] font-bold text-[#F6F1E7]"
                     >
                       <User className="h-4 w-4" aria-hidden="true" />
                       <span>{spCopy.navAccountLabel}</span>
@@ -662,7 +686,7 @@ export default function Header({
                       locale={currentLocale}
                       prefetch={false}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="flex min-h-[44px] items-center justify-center gap-1.5 border border-white/25 bg-[#18181C] px-3 py-2 text-[13px] font-bold text-[#FFFFFF]"
+                      className="flex min-h-[44px] items-center justify-center gap-1.5 border border-[#F6F1E7]/24 bg-[#0B0A09] px-3 py-2 text-[13px] font-bold text-[#F6F1E7]"
                     >
                       <ShoppingBag className="h-4 w-4" aria-hidden="true" />
                       <span>
@@ -679,7 +703,7 @@ export default function Header({
                   return (
                     <div
                       key={link.name}
-                      className="flex items-center justify-between border-b border-white/10 last:border-0"
+                      className="flex items-center justify-between border-b border-[#F6F1E7]/12 last:border-0"
                     >
                       <Link
                         href={link.href}
@@ -688,10 +712,10 @@ export default function Header({
                         aria-current={isActive ? 'page' : undefined}
                         className={`block min-h-[46px] flex-1 py-3 font-sans text-base font-bold transition-colors ${
                           isGold
-                            ? 'text-[#FFFFFF]'
+                            ? 'text-[#F6F1E7]'
                             : isActive
-                              ? 'text-[#FFFFFF]'
-                              : 'text-[#C9C7C2] hover:text-[#FFFFFF]'
+                              ? 'text-[#F6F1E7]'
+                              : 'text-[#C2B9AA] hover:text-[#F6F1E7]'
                         }`}
                       >
                         {link.name}
@@ -702,7 +726,7 @@ export default function Header({
                             setIsMobileMenuOpen(false);
                             setDrawerOpen(true);
                           }}
-                          className="flex h-8 w-8 items-center justify-center bg-[#FFFFFF] text-[13px] font-bold text-[#0A0A0C]"
+                          className="flex h-8 w-8 items-center justify-center bg-[#F6F1E7] text-[13px] font-bold text-[#050505]"
                           aria-label={favoritesTitle}
                         >
                           {favorites.length}
@@ -717,12 +741,12 @@ export default function Header({
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="mt-4 flex min-h-[48px] items-center justify-center gap-2 bg-[#D9381E] py-3.5 text-sm font-bold text-[#FFFFFF]"
+                  className="mt-4 flex min-h-[48px] items-center justify-center gap-2 bg-[#25D366] py-3.5 text-sm font-bold text-[#050505] hover:bg-[#2EE472]"
                 >
                   <MessageCircle className="h-4 w-4" />
                   <span>{bookingLabel}</span>
                 </a>
-                <p className="mt-2.5 text-center text-[13px] text-[#C9C7C2]">
+                <p className="mt-2.5 text-center text-[13px] text-[#C2B9AA]">
                   <bdi dir="ltr">{SITE_CONTACT.whatsapp.number}</bdi> · {infoCopy.disclaimer}
                 </p>
               </nav>

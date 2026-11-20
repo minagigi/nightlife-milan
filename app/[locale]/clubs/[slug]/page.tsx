@@ -1425,7 +1425,7 @@ export default async function ClubPage({ params }: Props) {
                     OFFICIAL PARTNER
                   </span>
                 )}
-                <span className="px-3 py-1 border border-white/20 text-white/70 text-xs uppercase tracking-widest rounded-full">
+                <span className="px-3 py-1 border border-[#EAE3D5]/24 text-white/70 text-xs uppercase tracking-widest rounded-full">
                   {venue.category.replace(/_/g, ' ')}
                 </span>
               </div>
@@ -1495,22 +1495,22 @@ export default async function ClubPage({ params }: Props) {
       {/* Quick-Jump SEO Anchor Navigation (Sitelinks Trigger) */}
       <nav
         aria-label={tr(locale, 'Venue Sections', 'Sezioni Locale')}
-        className="border-b border-white/10 bg-[#0A0A0C]"
+        className="border-b border-white/10 bg-[#050505]"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center gap-2 sm:gap-3 text-xs font-mono uppercase tracking-wider">
           <a href="#prices-tables" className="px-3 py-1.5 rounded-full border border-champagne/35 text-champagne hover:bg-champagne hover:text-black transition-colors">
             {tr(locale, 'VIP Tables & Prices', 'Tavoli VIP & Prezzi')}
           </a>
-          <a href="#dress-code-hours" className="px-3 py-1.5 rounded-full border border-white/15 text-white/80 hover:border-champagne hover:text-champagne transition-colors">
+          <a href="#dress-code-hours" className="px-3 py-1.5 rounded-full border border-[#F6F1E7]/14 text-white/80 hover:border-champagne hover:text-champagne transition-colors">
             {tr(locale, 'Dress Code & Info', 'Dress Code & Info')}
           </a>
-          <a href="#upcoming-events" className="px-3 py-1.5 rounded-full border border-white/15 text-white/80 hover:border-champagne hover:text-champagne transition-colors">
+          <a href="#upcoming-events" className="px-3 py-1.5 rounded-full border border-[#F6F1E7]/14 text-white/80 hover:border-champagne hover:text-champagne transition-colors">
             {tr(locale, 'Events Calendar', 'Calendario Eventi')}
           </a>
-          <a href="#map-directions" className="px-3 py-1.5 rounded-full border border-white/15 text-white/80 hover:border-champagne hover:text-champagne transition-colors">
+          <a href="#map-directions" className="px-3 py-1.5 rounded-full border border-[#F6F1E7]/14 text-white/80 hover:border-champagne hover:text-champagne transition-colors">
             {tr(locale, 'Map & Metro', 'Mappa & Metro')}
           </a>
-          <a href="#faq" className="px-3 py-1.5 rounded-full border border-white/15 text-white/80 hover:border-champagne hover:text-champagne transition-colors">
+          <a href="#faq" className="px-3 py-1.5 rounded-full border border-[#F6F1E7]/14 text-white/80 hover:border-champagne hover:text-champagne transition-colors">
             {tr(locale, 'FAQ', 'Domande Frequenti')}
           </a>
         </div>
@@ -1576,7 +1576,7 @@ export default async function ClubPage({ params }: Props) {
                   <Link
                     href={guide118Href}
                     locale={locCode}
-                    className="inline-flex items-center px-4 py-2.5 border border-white/25 text-white/85 font-mono text-xs uppercase tracking-wider rounded-sm hover:border-champagne hover:text-champagne transition-colors"
+                    className="inline-flex items-center px-4 py-2.5 border border-[#EAE3D5]/28 text-white/85 font-mono text-xs uppercase tracking-wider rounded-sm hover:border-champagne hover:text-champagne transition-colors"
                   >
                     {nyeBannerCopy.ctaGuide} →
                   </Link>
@@ -1755,7 +1755,7 @@ export default async function ClubPage({ params }: Props) {
                     <Link
                       key={ev.id}
                       href={`${lp}/events/${evSlug}`}
-                      className="flex items-center justify-between gap-4 py-2 px-4 rounded-lg bg-transparent border border-white/5 hover:border-white/20 transition-colors group"
+                      className="flex items-center justify-between gap-4 py-2 px-4 rounded-lg bg-transparent border border-white/5 hover:border-[#EAE3D5]/24 transition-colors group"
                     >
                       <span className="text-white/50 text-sm truncate group-hover:text-white/80 transition-colors">{evTitle}</span>
                       <span className="text-white/30 text-xs font-mono shrink-0">{dateStr}</span>
@@ -1838,7 +1838,7 @@ export default async function ClubPage({ params }: Props) {
                     ][i] ?? `${name} Milan - venue photo ${i + 1}`}
                     fill
                     quality={92}
-                    className="object-cover hover:scale-105 transition-transform duration-700"
+                    className="object-cover"
                     sizes="(max-width: 768px) 50vw, 40vw"
                   />
                 </div>

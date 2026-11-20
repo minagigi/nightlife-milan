@@ -17,7 +17,7 @@ import { readEditorialFields } from '@/lib/editorialContent';
 import SiteShell from '@/components/SiteShell';
 
 export const viewport: Viewport = {
-  themeColor: '#0A0A0C',
+  themeColor: '#050505',
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',

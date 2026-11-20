@@ -1,14 +1,11 @@
 import MainContent from '@/components/MainContent';
 import {
-  Big_Shoulders,
-  Figtree,
   Montserrat,
   Cormorant_Garamond,
   Bodoni_Moda,
   Plus_Jakarta_Sans,
   JetBrains_Mono,
 } from 'next/font/google';
-import dynamic from 'next/dynamic';
 import { ENABLED_LOCALES, getLocaleDef, localePrefix, DEFAULT_LOCALE, type LocaleCode } from '@/lib/i18n/locales';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -17,7 +14,6 @@ import { getFavoritesCopy } from '@/components/favoritesCopy';
 import { Providers } from '@/components/Providers';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
 import AnalyticsTracker from '@/components/AnalyticsTracker';
-import IdleMount from '@/components/IdleMount';
 import { jsonLdString } from '@/lib/seo';
 import { SITE_CONTACT } from '@/config/contact';
 import { getFooterCopy } from '@/lib/footerLocaleCopy';
@@ -37,24 +33,10 @@ import { venuesData } from '@/lib/venuesData';
 import { getLocalizedText } from '@/lib/seo';
 
 import WhatsAppFloating from '@/components/WhatsAppFloating';
-import TasteMotionEngine from '@/components/TasteMotionEngine';
-const CustomCursor = dynamic(() => import('@/components/CustomCursor'));
 
 // `subsets` chooses preloads, not the glyphs included in the generated CSS.
 // Preload only the common Latin files. Extended Latin/Cyrillic unicode ranges
 // remain available and load when the actual native text requires their glyphs.
-const bigShoulders = Big_Shoulders({
-  subsets: ['latin', 'latin-ext'],
-  weight: ['700', '800', '900'],
-  variable: '--font-big-shoulders',
-  display: 'swap',
-});
-const figtree = Figtree({
-  subsets: ['latin', 'latin-ext'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-figtree',
-  display: 'swap',
-});
 const montserrat = Montserrat({
   subsets: ['latin'],
   variable: '--font-montserrat',
@@ -68,13 +50,13 @@ const cormorant = Cormorant_Garamond({
   preload: false,
 });
 const bodoni = Bodoni_Moda({
-  subsets: ['latin'],
+  subsets: ['latin', 'latin-ext'],
   style: ['normal', 'italic'],
   variable: '--font-bodoni',
   display: 'swap',
 });
 const jakarta = Plus_Jakarta_Sans({
-  subsets: ['latin'],
+  subsets: ['latin', 'latin-ext'],
   variable: '--font-jakarta',
   display: 'swap',
 });
@@ -150,7 +132,7 @@ export default async function SiteShell({ locale, editorialFields, copyrightYear
     <html
       lang={localeDef.hreflang}
       dir={localeDef.dir}
-      className={`${bigShoulders.variable} ${figtree.variable} ${montserrat.variable} ${cormorant.variable} ${bodoni.variable} ${jakarta.variable} ${jetbrains.variable} ${scriptFont?.variableClass ?? ''}`.trim()}
+      className={`${montserrat.variable} ${cormorant.variable} ${bodoni.variable} ${jakarta.variable} ${jetbrains.variable} ${scriptFont?.variableClass ?? ''}`.trim()}
     >
       <head>
         {scriptFont ? <link rel="stylesheet" href={scriptFont.cssHref} /> : null}
@@ -160,9 +142,8 @@ export default async function SiteShell({ locale, editorialFields, copyrightYear
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(orgSchema) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(websiteSchema) }} />
       </head>
-      <body className="font-sans antialiased bg-[#0A0A0C] text-[#FFFFFF] min-h-screen flex flex-col pb-[calc(env(safe-area-inset-bottom)+6.5rem)]" suppressHydrationWarning>
+      <body className="font-sans antialiased bg-[#050505] text-[#F6F1E7] min-h-screen flex flex-col pb-[calc(env(safe-area-inset-bottom)+6.5rem)]" suppressHydrationWarning>
         <Providers lang={locale}>
-          <TasteMotionEngine />
           <a className="skip-link" href="#main-content">{getSkipToMainContent(locale)}</a>
           <Header publicPath={publicPath} currentLocale={locale} editorialFields={editorialFields} favoritesTitle={getFavoritesCopy(locale).title} />
           <MainContent>{children}</MainContent>
@@ -173,9 +154,6 @@ export default async function SiteShell({ locale, editorialFields, copyrightYear
           <BackToTop label={getBackToTopLabel(locale)} />
           <Footer lang={locale} editorialFields={editorialFields} copyrightYear={copyrightYear} />
           <WhatsAppFloating locale={locale} />
-          <IdleMount>
-            <CustomCursor />
-          </IdleMount>
         </Providers>
         <GoogleAnalytics />
         <AnalyticsTracker />

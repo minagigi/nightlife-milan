@@ -708,6 +708,54 @@ export default function SinglePassCheckoutView({
             </div>
           </aside>
         </div>
+      ) : resumeOrderId && !paymentSession ? (
+        generalError ? (
+          <div
+            role="alert"
+            aria-live="assertive"
+            className="border-2 border-[#D9381E] bg-[#FFFFFF] p-10 text-center"
+          >
+            <AlertCircle className="mx-auto h-10 w-10 text-[#D9381E]" aria-hidden="true" />
+            <h2 className="mt-4 font-display text-3xl font-bold uppercase text-[#0A0A0C]">
+              {isIt ? `Ordine ${resumeOrderId}` : `Order ${resumeOrderId}`}
+            </h2>
+            <p className="mx-auto mt-3 max-w-lg text-base font-medium text-[#0A0A0C]">
+              {generalError}
+            </p>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+              <Link
+                href={`${lp}/account`}
+                locale={locale}
+                className="inline-flex min-h-[48px] items-center justify-center bg-[#0A0A0C] px-6 py-3 text-sm font-bold text-[#FFFFFF] transition hover:bg-[#18181C]"
+              >
+                {copy.navAccountLabel || (isIt ? 'Area Riservata' : 'Reserved Area')}
+              </Link>
+              <Link
+                href={`${lp}/single-pass`}
+                locale={locale}
+                className="inline-flex min-h-[48px] items-center justify-center border border-[#0A0A0C]/30 bg-[#FFFFFF] px-6 py-3 text-sm font-bold text-[#0A0A0C] transition hover:border-[#0A0A0C]"
+              >
+                {copy.drawerExploreCta}
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <div
+            role="status"
+            aria-live="polite"
+            className="border border-[#0A0A0C]/18 bg-[#FFFFFF] p-10 text-center"
+          >
+            <ShieldCheck className="mx-auto h-10 w-10 text-[#0A0A0C]" aria-hidden="true" />
+            <h2 className="mt-4 font-display text-3xl font-bold uppercase text-[#0A0A0C]">
+              {isIt ? `Verifica ordine ${resumeOrderId}` : `Verifying order ${resumeOrderId}`}
+            </h2>
+            <p className="mx-auto mt-2 max-w-md text-base text-[#4F4D48]">
+              {isIt
+                ? 'Caricamento della sessione sicura di pagamento in corso...'
+                : 'Loading secure on-site payment session...'}
+            </p>
+          </div>
+        )
       ) : items.length === 0 ? (
         <div className="border border-[#0A0A0C]/18 bg-[#FFFFFF] p-10 text-center">
           <ShoppingBag className="mx-auto h-10 w-10 text-[#0A0A0C]" />

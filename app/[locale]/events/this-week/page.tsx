@@ -381,7 +381,7 @@ export default async function EventsThisWeekPage({ params }: Props) {
                                 fill
                                 sizes="(max-width: 640px) 100vw, 480px"
                                 quality={92}
-                                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                className="object-cover"
                               />
                               <div className="absolute inset-0 bg-gradient-to-t sm:bg-gradient-to-r from-[#050505] via-[#050505]/40 to-transparent" />
                               {event.isSpecial && (

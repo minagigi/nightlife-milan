@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
 import { ALL_35_LOCALES } from '../lib/i18n/localizedSlugs35';
+import { V01_SITE_COPY_35, getV01SiteCopy } from '../lib/i18n/v01SiteCopy35';
 import { CHECKOUT_UX_COPY_35, getCheckoutUxCopy } from '../lib/single-pass/checkoutUx35';
 import { clearMemoryStoreForTests, getOrderById } from '../lib/single-pass/store';
 import { POST as checkoutPost } from '../app/api/single-pass/checkout/route';
@@ -163,7 +164,7 @@ test('CHECKOUT_UX_COPY_35 covers all 35 locales with zero forbidden strings or A
   }
 });
 
-test('Static invariants: Checkout UX clarity & Axel S17 Design Parity tokens', () => {
+test('Static invariants: Checkout UX clarity, Bug A resume guard, and V01 Couture Noir Parity', () => {
   const checkoutView = fs.readFileSync(
     path.join(REPO_ROOT, 'components/single-pass/SinglePassCheckoutView.tsx'),
     'utf8',
@@ -171,15 +172,58 @@ test('Static invariants: Checkout UX clarity & Axel S17 Design Parity tokens', (
   assert.ok(checkoutView.includes('noValidate'));
   assert.ok(checkoutView.includes('role="alert"'));
   assert.ok(checkoutView.includes('aria-invalid'));
+  assert.ok(checkoutView.includes('resumeOrderId && !paymentSession'));
   assert.equal(checkoutView.includes("useState('+39 ')"), false);
   assert.equal(checkoutView.includes('useState("+39 ")'), false);
 
   const siteShell = fs.readFileSync(path.join(REPO_ROOT, 'components/SiteShell.tsx'), 'utf8');
-  assert.ok(siteShell.includes('Big_Shoulders'));
-  assert.ok(siteShell.includes('Figtree'));
-  assert.ok(siteShell.includes('--font-big-shoulders'));
+  assert.ok(siteShell.includes('Bodoni_Moda'));
+  assert.ok(siteShell.includes('Plus_Jakarta_Sans'));
+  assert.ok(siteShell.includes('JetBrains_Mono'));
+  assert.equal(siteShell.includes('Big_Shoulders'), false);
+  assert.equal(siteShell.includes('Figtree'), false);
+  assert.equal(siteShell.includes('CustomCursor'), false);
+  assert.equal(siteShell.includes('TasteMotionEngine'), false);
 
   const globalsCss = fs.readFileSync(path.join(REPO_ROOT, 'app/globals.css'), 'utf8');
-  assert.match(globalsCss, /--color-white:\s*#FFFFFF;/);
-  assert.ok(globalsCss.includes('var(--font-big-shoulders)'));
+  assert.ok(globalsCss.includes('#050505'));
+  assert.ok(globalsCss.includes('#F6F1E7'));
+  assert.ok(globalsCss.includes('var(--font-bodoni)'));
+  assert.equal(globalsCss.includes('Big Shoulders'), false);
+  assert.equal(globalsCss.includes('Figtree'), false);
+  assert.equal(globalsCss.includes('cursor: none'), false);
+
+  const homePage = fs.readFileSync(path.join(REPO_ROOT, 'app/[locale]/page.tsx'), 'utf8');
+  const carousels = fs.readFileSync(path.join(REPO_ROOT, 'components/V01HomeCarousels.tsx'), 'utf8');
+  const concierge = fs.readFileSync(path.join(REPO_ROOT, 'components/TableConcierge.tsx'), 'utf8');
+  const editorial = fs.readFileSync(path.join(REPO_ROOT, 'components/EditorialPageSections.tsx'), 'utf8');
+  const v01CopySrc = fs.readFileSync(path.join(REPO_ROOT, 'lib/i18n/v01SiteCopy35.ts'), 'utf8');
+  assert.ok(carousels.includes('id="capodanno"') || carousels.includes('id={id}'));
+  assert.ok(carousels.includes('id="stasera"'));
+  assert.ok(carousels.includes('id="settimana"'));
+  assert.ok(carousels.includes('id="locali-partner"'));
+
+  const cialdiniBundle = `${homePage}\n${carousels}\n${concierge}\n${editorial}\n${v01CopySrc}`;
+  for (const principle of [
+    'presuasion',
+    'commitment',
+    'authority',
+    'social-proof',
+    'scarcity',
+    'unity',
+    'liking',
+    'reciprocity',
+  ]) {
+    assert.ok(cialdiniBundle.includes(principle), `Missing Cialdini principle marker: ${principle}`);
+  }
+
+  assert.equal(Object.keys(V01_SITE_COPY_35).length, 35);
+  for (const locale of ALL_35_LOCALES) {
+    const v01 = getV01SiteCopy(locale);
+    assert.ok(v01.statusLive.trim().length > 0, `Empty statusLive for ${locale}`);
+    assert.equal(/[!\u00a1\uff01\u2014]/.test(v01.statusStats), false, `Forbidden punctuation in ${locale}.statusStats`);
+    if (locale !== 'en') {
+      assert.notEqual(v01.statusStats, V01_SITE_COPY_35.en.statusStats, `English fallback leaked in ${locale}.statusStats`);
+    }
+  }
 });

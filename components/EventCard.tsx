@@ -63,15 +63,15 @@ export default function EventCard({ event, venue, lang, priority = false, isToni
 
   return (
     <article
-      className="group relative flex h-full flex-col justify-between overflow-hidden rounded-lg border border-white/12 bg-[#0B0A09] transition-all duration-300 hover:border-champagne/45"
+      className="group relative flex h-full flex-col justify-between overflow-hidden border border-[#F6F1E7]/14 bg-[#0B0A09] transition-colors duration-200 hover:border-[#EAE3D5] hover:bg-[#141311]"
       data-event-card={event.id}
     >
       {venue.isFeatured && (
-        <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-champagne to-transparent" />
+        <div className="h-[2px] w-full bg-[#25D366]" />
       )}
 
       <div>
-        <div className="relative border-b border-white/10 bg-[#050505]">
+        <div className="relative border-b border-[#F6F1E7]/14 bg-[#050505]">
           <Link href={href} className="relative block aspect-[16/9] w-full overflow-hidden bg-[#050505]" aria-label={title}>
             <Image
               src={imgSrc}
@@ -82,7 +82,7 @@ export default function EventCard({ event, venue, lang, priority = false, isToni
               quality={92}
               placeholder="blur"
               blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiMxQzE4MTAiLz48L3N2Zz4="
-              className="object-contain transition-opacity duration-300 group-hover:opacity-95"
+              className="object-contain transition-opacity duration-200 group-hover:opacity-95"
               referrerPolicy="no-referrer"
             />
           </Link>
@@ -92,10 +92,10 @@ export default function EventCard({ event, venue, lang, priority = false, isToni
             />
           </div>
           {showInlineContactBar && (
-            <div className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-0.5 border-t border-champagne/45 bg-[#08080B] px-3 py-1.5 text-[10px] font-bold tracking-wider">
-              <span className="text-champagne">WWW.NIGHTLIFEMILAN.COM</span>
-              <span className="text-white/40">·</span>
-              <span className="inline-flex items-center gap-1 text-white">
+            <div className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-0.5 border-t border-[#EAE3D5]/32 bg-[#050505] px-3 py-1.5 text-[11px] font-bold">
+              <span className="text-[#EAE3D5]">WWW.NIGHTLIFEMILAN.COM</span>
+              <span className="text-[#A8A093]">·</span>
+              <span className="inline-flex items-center gap-1 text-[#F6F1E7]">
                 <span className="inline-block h-2 w-2 rounded-full bg-[#25D366]" aria-hidden="true" />
                 +39 351 912 7047
               </span>
@@ -106,58 +106,58 @@ export default function EventCard({ event, venue, lang, priority = false, isToni
         <div className="p-5 pb-3">
           <div className="mb-2.5 flex flex-wrap items-center gap-2">
             {isTonight && (
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-campari/40 bg-campari/15 px-2.5 py-1 font-sans text-[10px] font-semibold uppercase tracking-[0.18em] text-campari-hi">
-                <span className="live-dot inline-block h-1.5 w-1.5 rounded-full bg-campari" aria-hidden="true" />
+              <span className="inline-flex items-center gap-1.5 border border-[#25D366]/60 bg-[#050505] px-2.5 py-1 font-sans text-[12px] font-bold text-[#25D366]">
+                <span className="live-dot inline-block h-1.5 w-1.5 rounded-full bg-[#25D366]" aria-hidden="true" />
                 {tr(lang, 'Tonight', 'Stasera')}
               </span>
             )}
             {genre && (
-              <span className="rounded-full border border-white/15 bg-[#050505] px-2.5 py-1 font-sans text-[10px] font-semibold uppercase tracking-[0.16em] text-white/80">
+              <span className="border border-[#F6F1E7]/16 bg-[#050505] px-2.5 py-1 font-sans text-[12px] font-semibold text-[#C2B9AA]">
                 {genre}
               </span>
             )}
             {formattedPrice && (
               <span
-                className={`rounded-full px-2.5 py-1 font-sans text-[10px] font-bold uppercase tracking-[0.14em] tabular-nums ${
+                className={`px-2.5 py-1 font-mono text-[12px] font-bold tabular-nums ${
                   isFree
-                    ? 'border border-emerald-500/30 bg-emerald-500/20 text-emerald-400'
-                    : 'bg-champagne text-black'
+                    ? 'border border-[#25D366]/50 bg-[#050505] text-[#25D366]'
+                    : 'bg-[#EAE3D5] text-[#050505]'
                 }`}
               >
                 {formattedPrice}
               </span>
             )}
             {event.isTrending && (
-              <span className="font-sans text-[10px] font-bold uppercase tracking-[0.16em] text-champagne">
+              <span className="font-sans text-[12px] font-bold text-[#EAE3D5]">
                 {tr(lang, 'Trending', 'Di Tendenza')}
               </span>
             )}
           </div>
 
           <div className="mb-1.5 flex items-center gap-2">
-            <span className="font-sans text-[11px] font-semibold uppercase tracking-[0.18em] tabular-nums text-champagne">
+            <span className="font-mono text-[13px] font-semibold tabular-nums text-[#EAE3D5]">
               {timeStr}
             </span>
-            <span className="text-[10px] text-white/30">·</span>
-            <span className="font-sans text-[11px] tracking-wider tabular-nums text-white/60">{dateStr}</span>
+            <span className="text-[12px] text-[#A8A093]">·</span>
+            <span className="font-mono text-[13px] tabular-nums text-[#C2B9AA]">{dateStr}</span>
           </div>
 
-          <h3 className="mb-1 font-serif text-xl font-semibold leading-snug text-white transition-colors duration-300 group-hover:text-champagne">
+          <h3 className="mb-1 font-serif text-xl font-bold leading-snug text-[#F6F1E7] transition-colors group-hover:text-[#EAE3D5]">
             <Link href={href} className="hover:underline">
               {title}
             </Link>
           </h3>
 
-          <p className="font-sans text-[11px] uppercase tracking-[0.14em] text-white/60">
+          <p className="font-sans text-[13px] text-[#C2B9AA]">
             {venueName}
           </p>
         </div>
       </div>
 
-      <div className="border-t border-white/10 p-5 pt-3.5">
+      <div className="border-t border-[#F6F1E7]/14 p-5 pt-3.5">
         <Link
           href={href}
-          className="block w-full rounded-lg bg-champagne py-2.5 text-center font-sans text-xs font-semibold uppercase tracking-[0.15em] text-black transition-all duration-300 hover:bg-white"
+          className="block w-full bg-[#25D366] py-3 text-center font-sans text-[13px] font-bold text-[#050505] transition-colors hover:bg-[#2EE472]"
         >
           {tr(lang, 'Book Now', 'Prenota Ora')}
         </Link>

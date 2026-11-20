@@ -12,6 +12,7 @@ import { getEventVenueCopy } from '@/lib/i18n/eventVenueCopy';
 import { mockGuides } from '@/lib/data';
 import { getLocalizedGuideSlug35 } from '@/lib/guides100Catalog';
 import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
+import { getV01SiteCopy } from '@/lib/i18n/v01SiteCopy35';
 
 interface FooterProps {
   lang: LocaleCode;
@@ -21,6 +22,7 @@ interface FooterProps {
 
 export default function Footer({ lang, editorialFields = {}, copyrightYear }: FooterProps) {
   const defaults = getFooterCopy(lang);
+  const v01 = getV01SiteCopy(lang);
   const t = Object.fromEntries(Object.entries(defaults).map(([key, value]) => [
     key,
     editorialValue(editorialFields, `footer.${key}`, value),
@@ -70,15 +72,15 @@ export default function Footer({ lang, editorialFields = {}, copyrightYear }: Fo
   return (
     <div className="mt-auto w-full">
       <NewsletterHub lang={lang} />
-      <footer className="nlm-footer w-full bg-[#0A0A0C] border-t border-white/14">
-        <div className="max-w-[1440px] mx-auto border-x border-white/14">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-white/14">
+      <footer className="nlm-footer w-full bg-[#050505] border-t border-[#F6F1E7]/14">
+        <div className="max-w-[1440px] mx-auto border-x border-[#F6F1E7]/14">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[#F6F1E7]/14">
             {/* Col 1: Brand Info */}
             <div className="flex flex-col space-y-4 p-8 sm:p-12">
               <Link href={lp + '/'} prefetch={false} className="inline-block group" aria-label={t.homeAria}>
                 <Logo className="h-9 w-auto" />
               </Link>
-              <p className="nlm-footer-description font-sans text-sm text-[#C9C7C2] leading-relaxed max-w-xs">
+              <p className="nlm-footer-description font-sans text-sm text-[#C2B9AA] leading-relaxed max-w-xs">
                 {t.desc}
               </p>
               <div className="pt-4">
@@ -88,7 +90,7 @@ export default function Footer({ lang, editorialFields = {}, copyrightYear }: Fo
 
             {/* Col 2: Navigation */}
             <div className="flex flex-col space-y-4 p-8 sm:p-12">
-              <h3 className="font-sans text-[#EDEBE6] font-bold text-[15px]">{t.nav}</h3>
+              <h3 className="font-sans text-[#EAE3D5] font-bold text-[15px]">{t.nav}</h3>
               <ul className="flex flex-col space-y-3">
                 {navigation.map((item) => (
                   <li key={item.id}>
@@ -99,27 +101,27 @@ export default function Footer({ lang, editorialFields = {}, copyrightYear }: Fo
                 ))}
                 <li>
                   <Link href={`${lp}/football-afterparties`} locale={lang} prefetch={false} className="text-[#F6F1E7] hover:underline transition-colors text-sm font-medium">
-                    {lang === 'it' ? 'Dopo-Partita Calcio San Siro (Inter & Milan)' : 'San Siro Football Afterparties (Inter & AC Milan)'}
+                    {v01.footerSanSiro}
                   </Link>
                 </li>
                 <li>
                   <Link href={`${lp}/concert-afterparties`} locale={lang} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
-                    {lang === 'it' ? 'Afterparty Concerti San Siro, Ippodromo & Forum' : 'Concert Afterparties (San Siro, Ippodromo & Forum)'}
+                    {v01.footerConcerts}
                   </Link>
                 </li>
                 <li>
                   <Link href={`${lp}/new-years-eve`} locale={lang} prefetch={false} className="text-[#F6F1E7] hover:underline transition-colors text-sm font-medium">
-                    {lang === 'it' ? 'Capodanno Milano 2027 · Cenoni & Club' : 'New Year Eve Milan 2027 · Gala Dinners & Clubs'}
+                    {v01.footerNye}
                   </Link>
                 </li>
                 <li>
                   <Link href={g115Href} locale={lang} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
-                    {lang === 'it' ? 'Rho Fiera, Forum Assago, Linate & Malpensa VIP' : 'Rho Fiera, Forum Assago, Linate & Malpensa Nightlife'}
+                    {v01.footerAirports}
                   </Link>
                 </li>
                 <li>
                   <Link href={g116Href} locale={lang} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
-                    {lang === 'it' ? 'Weekend VIP da Monza, Como, Bergamo, Brescia & Lugano' : 'Monza, Como, Bergamo, Brescia & Ticino VIP Guide'}
+                    {v01.footerRegions}
                   </Link>
                 </li>
               </ul>
@@ -127,39 +129,39 @@ export default function Footer({ lang, editorialFields = {}, copyrightYear }: Fo
 
             {/* Col 3: Zone Hotspots */}
             <div className="flex flex-col space-y-4 p-8 sm:p-12">
-              <h3 className="font-sans text-[#EDEBE6] font-bold text-[15px]">{t.zones}</h3>
+              <h3 className="font-sans text-[#EAE3D5] font-bold text-[15px]">{t.zones}</h3>
               <ul className="flex flex-col space-y-3">
                 {zones.map((item) => (
                   <li key={item.id}>
-                    <Link href={item.href} prefetch={false} className="text-[#C9C7C2] hover:text-[#FFFFFF] transition-colors text-sm">
+                    <Link href={item.href} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
                       {item.label}
                     </Link>
                   </li>
                 ))}
                 <li>
-                  <Link href={`${lp}/zones/san-siro`} locale={lang} prefetch={false} className="text-[#C9C7C2] hover:text-[#FFFFFF] transition-colors text-sm">
-                    San Siro & Ippodromo
+                  <Link href={`${lp}/zones/san-siro`} locale={lang} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
+                    San Siro &amp; Ippodromo
                   </Link>
                 </li>
                 <li>
-                  <Link href={`${lp}/zones/parco-sempione`} locale={lang} prefetch={false} className="text-[#C9C7C2] hover:text-[#FFFFFF] transition-colors text-sm">
+                  <Link href={`${lp}/zones/parco-sempione`} locale={lang} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
                     Parco Sempione (Just Me / 55)
                   </Link>
                 </li>
                 <li>
-                  <Link href={`${lp}/zones/citylife-portello`} locale={lang} prefetch={false} className="text-[#C9C7C2] hover:text-[#FFFFFF] transition-colors text-sm">
-                    CityLife & Portello (Voya)
+                  <Link href={`${lp}/zones/citylife-portello`} locale={lang} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
+                    CityLife &amp; Portello (Voya)
                   </Link>
                 </li>
               </ul>
-              <details className="border border-white/14 bg-[#18181C] p-3" data-footer-city-map>
-                <summary className="cursor-pointer font-sans text-[13px] font-bold text-[#FFFFFF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9381E]">
+              <details className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-3" data-footer-city-map>
+                <summary className="cursor-pointer font-sans text-[13px] font-bold text-[#F6F1E7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]">
                   {t.zones} · Milano
                 </summary>
                 <div className="mt-3 space-y-3">
                   <a href={cityDirections.toString()} target="_blank" rel="noopener noreferrer"
                     aria-label={`${mapCopy.directions}: Milano`}
-                    className="inline-flex min-h-11 items-center font-sans text-[13px] font-bold text-[#EDEBE6] hover:text-[#FFFFFF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9381E]">
+                    className="inline-flex min-h-11 items-center font-sans text-[13px] font-bold text-[#EAE3D5] hover:text-[#F6F1E7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]">
                     Milano
                   </a>
                   <EventVenueMap purpose="city" id={`footer-city-map-${lang}`} mapUrl={cityMap.toString()}
@@ -170,25 +172,25 @@ export default function Footer({ lang, editorialFields = {}, copyrightYear }: Fo
 
             {/* Col 4: Legal & Social */}
             <div className="flex flex-col space-y-4 p-8 sm:p-12">
-              <h3 className="font-sans text-[#EDEBE6] font-bold text-[15px]">{t.legal}</h3>
+              <h3 className="font-sans text-[#EAE3D5] font-bold text-[15px]">{t.legal}</h3>
               <ul className="flex flex-col space-y-3 mb-4">
                 <li>
-                  <Link href={links.terms} prefetch={false} className="text-[#C9C7C2] hover:text-[#FFFFFF] transition-colors text-sm">
+                  <Link href={links.terms} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
                     {utilityText(lang, 'Terms & Conditions', 'Termini e Condizioni')}
                   </Link>
                 </li>
                 <li>
-                  <Link href={links.privacy} prefetch={false} className="text-[#C9C7C2] hover:text-[#FFFFFF] transition-colors text-sm">
+                  <Link href={links.privacy} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
                     {t.privacy}
                   </Link>
                 </li>
                 <li>
-                  <Link href={links.cookies} prefetch={false} className="text-[#C9C7C2] hover:text-[#FFFFFF] transition-colors text-sm">
+                  <Link href={links.cookies} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
                     {utilityText(lang, 'Cookie Policy', 'Cookie Policy')}
                   </Link>
                 </li>
                 <li>
-                  <Link href={links.refund} prefetch={false} className="text-[#C9C7C2] hover:text-[#FFFFFF] transition-colors text-sm">
+                  <Link href={links.refund} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
                     {utilityText(lang, 'Refund Policy', 'Politica di Rimborso')}
                   </Link>
                 </li>
@@ -196,26 +198,25 @@ export default function Footer({ lang, editorialFields = {}, copyrightYear }: Fo
             </div>
           </div>
 
-          {/* Editorial wordmark - rendered via ::after (see .deco-wordmark) so contrast scanners skip it */}
-          <div className="overflow-hidden border-t border-white/14 py-10">
+          <div className="overflow-hidden border-t border-[#F6F1E7]/14 py-10">
             <div className="deco-wordmark" data-text="NIGHTLIFE MILAN" aria-hidden="true" />
-            <p className="text-center font-sans text-[13px] font-medium text-[#C9C7C2] tabular-nums -mt-2" aria-hidden="true">
+            <p className="text-center font-sans text-[13px] font-medium text-[#C2B9AA] tabular-nums -mt-2" aria-hidden="true">
               Milano · 45.4642° N, 9.1900° E
             </p>
           </div>
 
-          <div className="px-6 sm:px-12 py-6 border-t border-white/14 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="font-sans text-[#C9C7C2] text-[13px] tabular-nums">
+          <div className="px-6 sm:px-12 py-6 border-t border-[#F6F1E7]/14 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="font-sans text-[#C2B9AA] text-[13px] tabular-nums">
               © {copyrightYear ?? new Date().getFullYear()} Nightlife Milan. {t.rights}
             </p>
-            <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 font-sans text-[13px] text-[#C9C7C2]">
+            <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 font-sans text-[13px] text-[#C2B9AA]">
               {ENABLED_LOCALES.map((l) => (
                 <Link
                   key={l.code}
                   href={localePrefix(l.code) || '/'}
                   prefetch={false}
                   lang={l.hreflang}
-                  className="inline-flex min-h-7 min-w-7 items-center justify-center px-1.5 hover:text-[#FFFFFF] transition-colors uppercase focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9381E]"
+                  className="inline-flex min-h-7 min-w-7 items-center justify-center px-1.5 hover:text-[#F6F1E7] transition-colors uppercase focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]"
                   aria-label={l.nativeName}
                 >
                   {l.code}

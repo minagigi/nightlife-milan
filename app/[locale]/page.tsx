@@ -3,20 +3,23 @@ import type { LocaleCode } from '@/lib/i18n/locales';
 import { Metadata } from 'next';
 import MfwEntry from '@/components/MfwEntry';
 import OctoberEntry from '@/components/OctoberEntry';
-import HomePosterCarousel, { type HomePosterSlide } from '@/components/HomePosterCarousel';
 import IntentCards from '@/components/IntentCards';
 import NightLine from '@/components/NightLine';
 import TableConcierge from '@/components/TableConcierge';
-import DateSensitiveCalendar from '@/components/DateSensitiveCalendar';
-import { getEventCalendarCopy } from '@/lib/eventCalendarCopy';
+import V01HomeCarousels, {
+  type V01CapodannoSlide,
+  type V01PartnerClubSlide,
+} from '@/components/V01HomeCarousels';
 import {
-  getCapodannoEventsForMode,
+  CAPODANNO_PARTNER_PRIORITY_SLUGS,
+  getCapodannoEventBySlug,
 } from '@/lib/capodannoEvents';
 import {
   formatCapodannoPriceBadge35,
   getCapodannoLocalizedEventContent,
 } from '@/lib/capodanno/i18n';
-import { capodannoEventPath, capodannoNavigation, capodannoPath } from '@/lib/capodanno/routes';
+import { capodannoEventPath, capodannoPath } from '@/lib/capodanno/routes';
+import { getV01SiteCopy } from '@/lib/i18n/v01SiteCopy35';
 import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
 import { notFound } from 'next/navigation';
@@ -33,7 +36,7 @@ import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { getTableConciergeLead, getTableConciergeSharedCopy } from '@/lib/tableConciergePageCopy';
 import { venuesData } from '@/lib/venuesData';
 import { venueLocationLabel } from '@/lib/venueLocation';
-import { PRIORITY_VENUE_IDS, selectPriorityVenueEvents } from '@/lib/priorityVenueEvents';
+import { selectPriorityVenueEvents } from '@/lib/priorityVenueEvents';
 import { getLocalizedText } from '@/lib/seo';
 
 // Cache senza scadenza. Gli aggiornamenti avvengono solo al deploy o tramite
@@ -300,8 +303,30 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-// ─── Featured venues shown in the homepage strip ───────────────────────────
-const FEATURED_VENUES = PRIORITY_VENUE_IDS;
+// ─── Exact 18 Milano partner clubs in Axel order (#01-#16 + Terrazza 21 + Gattopardo) ─
+const PARTNER_18_ORDER: readonly (
+  | { kind: 'venue'; id: string }
+  | { kind: 'capodanno'; slug: string }
+)[] = [
+  { kind: 'venue', id: 'v-justme' },
+  { kind: 'venue', id: 'v-pineta' },
+  { kind: 'venue', id: 'v-voya' },
+  { kind: 'venue', id: 'v-repvblic' },
+  { kind: 'capodanno', slug: 'capodanno-bischeri-milano' },
+  { kind: 'capodanno', slug: 'capodanno-gate-milano' },
+  { kind: 'capodanno', slug: 'capodanno-pelledoca-milano' },
+  { kind: 'venue', id: 'v-magazzini' },
+  { kind: 'venue', id: 'v-bobino' },
+  { kind: 'venue', id: 'v-theclub' },
+  { kind: 'venue', id: 'v-aria' },
+  { kind: 'venue', id: 'v-55milano' },
+  { kind: 'venue', id: 'v-tocqueville' },
+  { kind: 'venue', id: 'v-hollywood' },
+  { kind: 'venue', id: 'v-11clubroom' },
+  { kind: 'capodanno', slug: 'capodanno-tom-the-ordinary-market-milano' },
+  { kind: 'venue', id: 'v-terrazza21' },
+  { kind: 'venue', id: 'v-gattopardo' },
+];
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -311,52 +336,61 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     await readEditorialFields('home', locale),
   );
   const homeGridAlts = currentHomeGridAlts(locale);
-  // Locale REALE ovunque (prima era coerciato a en/it → su /es, /fr, ecc. eventi,
-  // card e link interni finivano in inglese). Il prefisso URL e i contenuti
-  // localizzati usano il locale selezionato.
+  const v01 = getV01SiteCopy(locale);
   const lp = localePrefix(locale);
-  const featuredVenues = FEATURED_VENUES.map((id) => {
-    const venue = venuesData.find((candidate) => candidate.id === id);
-    if (!venue || !venue.image) throw new Error(`Missing featured venue ${id}`);
-    const rawDesc = getLocalizedText(venue.localizedContent.description, locale) || homeCopy.venueDescription;
-    const shortDesc = rawDesc.length > 210 ? rawDesc.slice(0, 207).replace(/\s+\S*$/, '') + '…' : rawDesc;
-    const priorityZoneOverrides: Record<string, { it: string; en: string }> = {
-      'v-justme': { it: 'PARCO SEMPIONE · TORRE BRANCA', en: 'PARCO SEMPIONE · TORRE BRANCA' },
-      'v-pineta': { it: 'PORTA GARIBALDI · VIA MESSINA', en: 'PORTA GARIBALDI · VIA MESSINA' },
-      'v-aria': { it: 'SAN SIRO · PARCO IPPODROMO', en: 'SAN SIRO · HIPPODROME PARK' },
-      'v-55milano': { it: 'SEMPIONE · ARCO DELLA PACE', en: 'SEMPIONE · ARCO DELLA PACE' },
-      'v-voya': { it: 'PORTELLO / CITYLIFE · 20° PIANO', en: 'PORTELLO / CITYLIFE · 20TH FLOOR' },
-      'v-repvblic': { it: 'PIAZZA DELLA REPUBBLICA · PORTA NUOVA', en: 'PIAZZA DELLA REPUBBLICA · PORTA NUOVA' },
-    };
-    const displayZone = priorityZoneOverrides[id]?.[locale === 'it' ? 'it' : 'en'] || venueLocationLabel(venue);
-    const street = venue.address?.streetAddress ? `${venue.address.streetAddress} · ${displayZone}` : displayZone;
-    const venueGenres = (venue as { musicGenre?: string[]; genres?: string[]; category?: string }).musicGenre || (venue as { genres?: string[] }).genres || [];
-    const genres = venueGenres.slice(0, 2).join(' · ') || 'House · Commercial · Hip-Hop';
-    const dress = venue.localizedContent?.dressCode ? getLocalizedText(venue.localizedContent.dressCode, locale) : 'Smart & Fashion Chic';
+
+  const partnerClubs: V01PartnerClubSlide[] = PARTNER_18_ORDER.map((entry, idx) => {
+    const rank = String(idx + 1).padStart(2, '0');
+    if (entry.kind === 'venue') {
+      const venue = venuesData.find((candidate) => candidate.id === entry.id);
+      if (!venue || !venue.image) throw new Error(`Missing partner venue ${entry.id}`);
+      const name = getLocalizedText(venue.localizedContent.name, locale);
+      const slug = getLocalizedText(venue.slugs, locale);
+      const zone = venue.address?.streetAddress
+        ? `${venue.address.streetAddress} · ${venueLocationLabel(venue)}`
+        : venueLocationLabel(venue);
+      const genres = venue.tags?.slice(0, 3).join(' · ') || 'House · Commercial · Hip-Hop';
+      const dress = venue.localizedContent?.dressCode
+        ? getLocalizedText(venue.localizedContent.dressCode, locale)
+        : 'Smart & Fashion Chic';
+      return {
+        rank,
+        id: venue.id,
+        name,
+        zone,
+        genres,
+        dress,
+        image: venue.image,
+        href: `${lp}/clubs/${slug}`,
+        waHref: getConciergeBookingUrl(locale, `${name} · VIP Table`, lp || '/'),
+      };
+    }
+
+    const ev = getCapodannoEventBySlug(entry.slug);
+    if (!ev) throw new Error(`Missing partner event ${entry.slug}`);
+    const locEv = getCapodannoLocalizedEventContent(ev, locale);
     return {
-      id,
-      slug: getLocalizedText(venue.slugs, locale),
-      image: venue.image,
-      name: getLocalizedText(venue.localizedContent.name, locale),
-      zone: displayZone,
-      street,
-      description: shortDesc,
-      genres,
-      dress,
+      rank,
+      id: ev.slug,
+      name: ev.venueName,
+      zone: ev.address,
+      genres: locEv.musicAndFormat,
+      dress: locEv.dressCode,
+      image: ev.image,
+      href: capodannoEventPath(ev.slug, locale),
+      waHref: getConciergeBookingUrl(locale, `${ev.venueName} · VIP Table`, lp || '/'),
     };
   });
-
-  // Niente LocalBusiness qui: Nightlife Milan è già rappresentata dal
-  // Organization site-wide nel layout · due entità dello stesso soggetto con
-  // @type diversi sulla stessa pagina confondono Google, non aiutano.
 
   // Send the whole verified dated future catalog once. The client recomputes
   // Rome-day windows at hydration, on visibility return and at midnight; no
   // weekly programme can reappear from an indefinitely cached home document.
   const initialNow = new Date();
   const dateSensitiveEvents = selectPriorityVenueEvents(await getDateSensitiveCarouselInventory(locale), initialNow);
-  const posterSlides: HomePosterSlide[] = getCapodannoEventsForMode('capodanno-2027')
-    .slice(0, 18)
+  const capodannoSlugs19 = [...CAPODANNO_PARTNER_PRIORITY_SLUGS, 'capodanno-terrazza-duomo-21'];
+  const capodannoSlides: V01CapodannoSlide[] = capodannoSlugs19
+    .map((slug) => getCapodannoEventBySlug(slug))
+    .filter((ev): ev is NonNullable<typeof ev> => Boolean(ev))
     .map((ev) => {
       const locEv = getCapodannoLocalizedEventContent(ev, locale);
       return {
@@ -365,14 +399,13 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         title: locEv.title,
         subtitle: locEv.subtitle,
         image: ev.image,
-        priceFromEur: ev.priceFromEur,
         priceBadge: formatCapodannoPriceBadge35(ev, locale),
         href: capodannoEventPath(ev.slug, locale),
         musicAndFormat: locEv.musicAndFormat,
         city: ev.city,
+        waHref: getConciergeBookingUrl(locale, `${ev.venueName} · Capodanno 2027`, lp || '/'),
       };
     });
-  const capodannoNav = capodannoNavigation(locale);
 
   const waLink = getConciergeBookingUrl(locale, undefined, lp || '/');
   const formerHeroCopy = getHeroCopy(locale);
@@ -380,10 +413,6 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     switch (locale) {
       case 'it':
         return {
-          details: 'SCHEDA',
-          vipBtn: 'TAVOLO VIP ↗',
-          swipe: 'SCORRI I 6 CLUB →',
-          formulaVal: 'Aperitivo · Lista · Privé',
           sanSiroEye: 'STADIO SAN SIRO · SERIE A & CHAMPIONS LEAGUE 2026/2027',
           sanSiroTitle: 'Dopo-Partita Calcio San Siro (Inter & Milan)',
           sanSiroBody: 'Aria Club a 150m dallo stadio, Just Me Torre Branca aperto 7/7, Voya Rooftop via M5, 55 Milano, Pineta e Repvblic: calcola il piano post-match e prenota Tavolo VIP su WhatsApp +39 351 912 7047.',
@@ -394,10 +423,6 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         };
       case 'es':
         return {
-          details: 'FICHA',
-          vipBtn: 'MESA VIP ↗',
-          swipe: 'DESLIZA LOS 6 CLUBES →',
-          formulaVal: 'Aperitivo · Lista · Privé',
           sanSiroEye: 'ESTADIO SAN SIRO · SERIE A & CHAMPIONS LEAGUE 2026/2027',
           sanSiroTitle: 'Guía Oficial Post-Partido San Siro Milán (Inter y AC Milan)',
           sanSiroBody: 'Aria Club a 150m del estadio, Just Me Torre Branca abierto 7/7, Voya Rooftop vía M5, 55 Milano, Pineta y Repvblic: organiza tu noche post-partido y reserva Mesa VIP por WhatsApp +39 351 912 7047.',
@@ -408,10 +433,6 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         };
       case 'fr':
         return {
-          details: 'FICHE',
-          vipBtn: 'TABLE VIP ↗',
-          swipe: 'FAITES DÉFILER LES 6 CLUBS →',
-          formulaVal: 'Aperitivo · Liste · Privé',
           sanSiroEye: 'STADE SAN SIRO · SERIE A & CHAMPIONS LEAGUE 2026/2027',
           sanSiroTitle: 'Guide Officiel Après-Match San Siro Milan (Inter & AC Milan)',
           sanSiroBody: 'Aria Club à 150m du stade, Just Me Torre Branca ouvert 7j/7, Voya Rooftop via M5, 55 Milano, Pineta et Repvblic : préparez votre soirée d’après-match et réservez sur WhatsApp +39 351 912 7047.',
@@ -422,10 +443,6 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         };
       case 'de':
         return {
-          details: 'PROFIL',
-          vipBtn: 'VIP-TISCH ↗',
-          swipe: '6 CLUBS DURCHWISCHEN →',
-          formulaVal: 'Aperitivo · Liste · Privé',
           sanSiroEye: 'SAN-SIRO-STADION · SERIE A & CHAMPIONS LEAGUE 2026/2027',
           sanSiroTitle: 'Offizieller San-Siro-Afterparty-Guide Mailand (Inter & AC Milan)',
           sanSiroBody: 'Aria Club 150m vom Stadion, Just Me Torre Branca 7/7 geöffnet, Voya Rooftop via M5, 55 Milano, Pineta & Repvblic: planen Sie Ihre Afterparty und buchen Sie VIP-Tische per WhatsApp +39 351 912 7047.',
@@ -436,10 +453,6 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         };
       case 'pt':
         return {
-          details: 'PERFIL',
-          vipBtn: 'MESA VIP ↗',
-          swipe: 'DESLIZE OS 6 CLUBES →',
-          formulaVal: 'Aperitivo · Lista · Privé',
           sanSiroEye: 'ESTÁDIO SAN SIRO · SERIE A & CHAMPIONS LEAGUE 2026/2027',
           sanSiroTitle: 'Guia Oficial Pós-Jogo San Siro Milão (Inter e AC Milan)',
           sanSiroBody: 'Aria Club a 150m do estádio, Just Me Torre Branca aberto 7/7, Voya Rooftop via M5, 55 Milano, Pineta e Repvblic: planeje a noite pós-jogo e reserve Mesa VIP no WhatsApp +39 351 912 7047.',
@@ -450,10 +463,6 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         };
       default:
         return {
-          details: 'PROFILE',
-          vipBtn: 'VIP TABLE ↗',
-          swipe: 'SWIPE THE 6 CLUBS →',
-          formulaVal: 'Aperitivo · Guest List · VIP',
           sanSiroEye: 'SAN SIRO STADIUM · SERIE A & CHAMPIONS LEAGUE 2026/2027',
           sanSiroTitle: 'Official San Siro Football Afterparty Guide (Inter & AC Milan)',
           sanSiroBody: 'Aria Club 150m from the stadium, Just Me Torre Branca open 7/7, Voya Rooftop via M5, 55 Milano, Pineta & Repvblic: plan your post-match night and book VIP tables via WhatsApp +39 351 912 7047.',
@@ -467,10 +476,10 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 
   return (
     <>
-      <main className="flex-1 flex flex-col w-full">
+      <main className="flex-1 flex flex-col w-full bg-[#050505] text-[#F6F1E7]">
         <NightLine />
 
-        {/* ── 1. Hero ───────────────────────────────────────────────────── */}
+        {/* ── 1. Split Concierge Hero (V01 Couture Noir · Pre-Suasion + Commitment) ── */}
         <TableConcierge
           locale={locale}
           events={dateSensitiveEvents}
@@ -493,323 +502,115 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
             allEvents: homeCopy.seeAll,
           }}
         />
-        {/* ── Fascia Sartoriale dei Quartieri Notturni ─────────────────── */}
-        <div className="w-full border-b border-white/14 bg-[#0A0A0C]">
-          <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-4 border-x border-white/14 px-5 py-5 text-[13px] font-semibold text-[#EDEBE6] sm:px-14">
-            <span>Parco Sempione</span>
-            <span>Porta Garibaldi</span>
-            <span className="hidden sm:inline">Porta Nuova Skyline</span>
-            <span className="hidden md:inline">San Siro Garden</span>
-            <span className="hidden lg:inline">Repubblica</span>
-            <span className="hidden xl:inline">Corso Como &amp; Navigli</span>
-          </div>
-        </div>
 
-        {/* ── 1B. Carosello Capodanno 2027 & Live Countdown (S17) ───────── */}
-        <HomePosterCarousel
-          locale={locale}
-          slides={posterSlides}
-          hubHref={capodannoPath(locale)}
-          hubLabel={`${capodannoNav.menuLabel} 2027`}
-        />
-
-        {/* ── 2. I Sei Santuari della Notte (S17 Carta Calda + Bianco) ── */}
-        <section className="w-full border-b border-[#0A0A0C]/16 bg-[#EDEBE6] text-[#0A0A0C]">
-          <div className="mx-auto max-w-[1440px] border-x border-[#0A0A0C]/16">
-            {/* Header Editoriale della Collezione */}
-            <div className="flex flex-col justify-between gap-6 border-b border-[#0A0A0C]/16 px-5 pb-10 pt-16 sm:flex-row sm:items-end sm:px-14 sm:pb-12 sm:pt-20">
-              <div data-reveal="rise">
-                <h2 className="font-display text-4xl font-extrabold uppercase leading-[0.94] text-[#0A0A0C] sm:text-4xl lg:text-[68px]">
-                  {homeCopy.topVenuesTitle}
-                </h2>
-                <p className="mt-3 max-w-[60ch] font-sans text-sm font-semibold text-[#4F4D48]">
-                  {homeCopy.curatedLabel}
+        {/* ── 2. Fascia Garanzie Cialdini a 4 Colonne (Authority · Social Proof · Scarcity · Unity) ── */}
+        <section
+          className="w-full border-b border-[#F6F1E7]/14 bg-[#0B0A09]"
+          aria-label={v01.statusLive}
+        >
+          <div className="mx-auto grid max-w-[1440px] grid-cols-1 divide-y divide-[#F6F1E7]/12 border-x border-[#F6F1E7]/14 sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4">
+            {v01.cialdiniCells.map((cell) => (
+              <div
+                key={cell.principle}
+                data-cialdini={cell.principle}
+                className="flex flex-col justify-between gap-2 p-6 sm:p-7"
+              >
+                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#EAE3D5]">
+                  {cell.kicker}
+                </p>
+                <p className="font-serif text-2xl font-normal text-[#F6F1E7]">
+                  {cell.value}
+                </p>
+                <p className="font-sans text-[13px] leading-relaxed text-[#C2B9AA]">
+                  {cell.body}
                 </p>
               </div>
-              <Link
-                href={`${lp}/clubs`}
-                prefetch={false}
-                className="nlm-pressable inline-flex min-h-[48px] shrink-0 items-center justify-center border border-[#0A0A0C] bg-[#FFFFFF] px-7 py-3.5 text-[13px] font-bold uppercase text-[#0A0A0C] transition-colors hover:bg-[#0A0A0C] hover:text-[#FFFFFF]"
-              >
-                {homeCopy.allVenues} ↗
-              </Link>
-            </div>
-
-            {/* VISTA DESKTOP WIDESCREEN 1440PX: 2 FLAGSHIP SPREADS A 12 COLONNE + GRIGLIA PANORAMICA 2x2 */}
-            <div className="hidden lg:block">
-              {featuredVenues.slice(0, 2).map((v, idx) => (
-                <article
-                  key={v.id}
-                  className="group grid grid-cols-12 border-b border-[#0A0A0C]/16"
-                >
-                  {/* Colonna Fotografica 16:10 (a sinistra per 01, a destra per 02) */}
-                  <div
-                    data-reveal="clip"
-                    className={`col-span-7 flex flex-col justify-between bg-[#18181C] p-12 text-[#FFFFFF] ${idx === 1 ? 'order-2 border-l border-[#0A0A0C]/16' : 'border-r border-[#0A0A0C]/16'}`}
-                  >
-                    <Link href={`${lp}/clubs/${v.slug}`} prefetch={false} className="relative block aspect-[16/10] w-full overflow-hidden border border-white/14">
-                      <Image
-                        src={v.image}
-                        alt={v.name}
-                        fill
-                        sizes="58vw"
-                        quality={92}
-                        className="nlm-hover-zoom object-cover"
-                      />
-                    </Link>
-                    <div className="mt-4 flex items-center justify-between text-[13px] font-semibold text-[#C9C7C2]">
-                      <span>{v.zone}</span>
-                      <span>{homeCopy.venueLabel} · Milano</span>
-                    </div>
-                  </div>
-
-                  {/* Colonna Editoriale Bianca S17 */}
-                  <div
-                    data-reveal="rise"
-                    data-stagger="1"
-                    className={`col-span-5 flex flex-col justify-between bg-[#FFFFFF] p-12 text-[#0A0A0C] ${idx === 1 ? 'order-1' : ''}`}
-                  >
-                    <div>
-                      <div className="flex items-baseline justify-between">
-                        <span className="font-display text-[74px] font-extrabold italic leading-[0.85] text-[#D9381E] tabular-nums">
-                          {idx + 1}
-                        </span>
-                      </div>
-
-                      <h3 className="mt-5 mb-2 font-display text-[48px] font-extrabold uppercase leading-[0.94] text-[#0A0A0C]">
-                        <Link href={`${lp}/clubs/${v.slug}`} prefetch={false} className="transition-colors hover:underline">
-                          {v.name}
-                        </Link>
-                      </h3>
-                      <p className="mb-4 text-[13px] font-bold text-[#4F4D48]">
-                        {v.zone}
-                      </p>
-
-                      <p className="max-w-[48ch] font-sans text-base leading-[1.65] text-[#4F4D48]">
-                        {v.description}
-                      </p>
-
-                      {/* Griglia Specifiche 2x2 con linee da 1px */}
-                      <div className="my-7 grid grid-cols-2 border-y border-[#0A0A0C]/16">
-                        <div className="border-b border-r border-[#0A0A0C]/16 py-4 pr-5">
-                          <div className="text-[13px] font-bold text-[#4F4D48]">{homeCopy.venueTags[0]}</div>
-                          <div className="mt-1.5 text-[15px] font-semibold text-[#0A0A0C]">{v.street}</div>
-                        </div>
-                        <div className="border-b border-[#0A0A0C]/16 py-4 pl-5">
-                          <div className="text-[13px] font-bold text-[#4F4D48]">{homeCopy.venueTags[1]}</div>
-                          <div className="mt-1.5 text-[15px] font-semibold text-[#0A0A0C]">{v.genres}</div>
-                        </div>
-                        <div className="border-r border-[#0A0A0C]/16 py-4 pr-5">
-                          <div className="text-[13px] font-bold text-[#4F4D48]">Formula</div>
-                          <div className="mt-1.5 text-[15px] font-semibold text-[#0A0A0C]">{uiLabels.formulaVal}</div>
-                        </div>
-                        <div className="py-4 pl-5">
-                          <div className="text-[13px] font-bold text-[#4F4D48]">{homeCopy.venueTags[2]}</div>
-                          <div className="mt-1.5 text-[15px] font-bold text-[#0A0A0C]">WhatsApp Concierge</div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <Link
-                        href={`${lp}/clubs/${v.slug}`}
-                        prefetch={false}
-                        className="nlm-pressable flex min-h-[48px] items-center justify-center border border-[#0A0A0C] bg-[#FFFFFF] px-5 py-3.5 text-[13px] font-bold text-[#0A0A0C] transition-colors hover:bg-[#0A0A0C] hover:text-[#FFFFFF]"
-                      >
-                        {homeCopy.venueLabel}
-                      </Link>
-                      <a
-                        href={waLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="nlm-pressable flex min-h-[48px] items-center justify-center gap-2 bg-[#D9381E] px-5 py-3.5 text-[13px] font-bold text-[#FFFFFF] transition-colors hover:bg-[#B82B14]"
-                      >
-                        {uiLabels.vipBtn}
-                      </a>
-                    </div>
-                  </div>
-                </article>
-              ))}
-
-              {/* GRIGLIA PANORAMICA 2x2 (720px per club) per i restanti locali */}
-              <div className="grid grid-cols-2 bg-[#EDEBE6]">
-                {featuredVenues.slice(2).map((v, idx) => (
-                  <article
-                    key={v.id}
-                    data-reveal="rise"
-                    data-stagger={String((idx % 2) + 1)}
-                    className={`group grid grid-cols-[240px_1fr] items-stretch gap-8 border-b border-[#0A0A0C]/16 bg-[#FFFFFF] p-12 transition-colors hover:bg-[#F7F5F0] ${idx % 2 === 0 ? 'border-r border-[#0A0A0C]/16' : ''}`}
-                  >
-                    <Link href={`${lp}/clubs/${v.slug}`} prefetch={false} className="relative block aspect-[3/4] w-full overflow-hidden border border-[#0A0A0C]/16 bg-[#0A0A0C]">
-                      <Image
-                        src={v.image}
-                        alt={v.name}
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 48vw"
-                        quality={92}
-                        className="nlm-hover-zoom object-cover"
-                      />
-                    </Link>
-                    <div className="flex flex-col justify-between">
-                      <div>
-                        <div className="flex items-baseline justify-between">
-                          <span className="font-display text-[46px] font-extrabold italic leading-none text-[#D9381E] tabular-nums">
-                            {idx + 3}
-                          </span>
-                        </div>
-                        <h3 className="mt-2.5 mb-1 font-display text-[36px] font-extrabold uppercase leading-tight text-[#0A0A0C]">
-                          <Link href={`${lp}/clubs/${v.slug}`} prefetch={false} className="transition-colors hover:underline">
-                            {v.name}
-                          </Link>
-                        </h3>
-                        <p className="mb-3 text-[13px] font-bold text-[#4F4D48]">
-                          {v.zone}
-                        </p>
-                        <p className="mb-4 max-w-[48ch] font-sans text-base leading-relaxed text-[#4F4D48]">
-                          {v.description}
-                        </p>
-                        <div className="border-t border-[#0A0A0C]/14 text-[13px]">
-                          <div className="flex justify-between gap-4 border-b border-[#0A0A0C]/14 py-2">
-                            <span className="text-[13px] font-bold text-[#4F4D48]">{homeCopy.venueTags[0]}</span>
-                            <span className="text-right font-semibold text-[#0A0A0C]">{v.street}</span>
-                          </div>
-                          <div className="flex justify-between gap-4 border-b border-[#0A0A0C]/14 py-2">
-                            <span className="text-[13px] font-bold text-[#4F4D48]">{homeCopy.venueTags[1]}</span>
-                            <span className="text-right font-semibold text-[#0A0A0C]">{v.genres}</span>
-                          </div>
-                          <div className="flex justify-between gap-4 border-b border-[#0A0A0C]/14 py-2">
-                            <span className="text-[13px] font-bold text-[#4F4D48]">{homeCopy.venueTags[2]}</span>
-                            <span className="text-right font-semibold text-[#0A0A0C]">{uiLabels.formulaVal}</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="mt-5 grid grid-cols-2 gap-3">
-                        <Link
-                          href={`${lp}/clubs/${v.slug}`}
-                          prefetch={false}
-                          className="nlm-pressable flex min-h-[46px] items-center justify-center border border-[#0A0A0C] bg-[#FFFFFF] px-4 py-3 text-[13px] font-bold text-[#0A0A0C] transition-colors hover:bg-[#0A0A0C] hover:text-[#FFFFFF]"
-                        >
-                          {uiLabels.details}
-                        </Link>
-                        <a
-                          href={waLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="nlm-pressable flex min-h-[46px] items-center justify-center bg-[#D9381E] px-4 py-3 text-[13px] font-bold text-[#FFFFFF] transition-colors hover:bg-[#B82B14]"
-                        >
-                          {uiLabels.vipBtn}
-                        </a>
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-
-            {/* VISTA MOBILE 390PX: GRIGLIA CARD VISIBILI COMPATTA */}
-            <div className="grid grid-cols-1 gap-4 px-4 py-8 lg:hidden sm:grid-cols-2">
-              {featuredVenues.map((v, i) => (
-                <article
-                  key={v.id}
-                  data-reveal="rise"
-                  className="flex flex-col justify-between border border-[#0A0A0C]/16 bg-[#FFFFFF]"
-                >
-                  <div>
-                    <Link href={`${lp}/clubs/${v.slug}`} prefetch={false} className="relative block aspect-[16/10] w-full overflow-hidden border-b border-[#0A0A0C]/14 bg-[#0A0A0C]">
-                      <Image
-                        src={v.image}
-                        alt={v.name}
-                        fill
-                        sizes="(max-width: 1024px) 92vw, 48vw"
-                        quality={92}
-                        className="object-cover"
-                      />
-                      <span className="absolute left-3 top-3 bg-[#0A0A0C] px-2.5 py-1 text-[13px] font-bold text-[#FFFFFF]">
-                        {v.zone}
-                      </span>
-                    </Link>
-                    <div className="p-4">
-                      <h3 className="font-display text-xl font-extrabold uppercase leading-snug text-[#0A0A0C] sm:text-2xl">{v.name}</h3>
-                      <p className="mt-2 max-w-[48ch] font-sans text-base leading-relaxed text-[#4F4D48]">{v.description}</p>
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2 border-t border-[#0A0A0C]/14">
-                    <Link
-                      href={`${lp}/clubs/${v.slug}`}
-                      prefetch={false}
-                      className="nlm-pressable flex min-h-[46px] items-center justify-center border-r border-[#0A0A0C]/14 bg-[#FFFFFF] text-[13px] font-bold text-[#0A0A0C]"
-                    >
-                      {uiLabels.details}
-                    </Link>
-                    <a
-                      href={waLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="nlm-pressable flex min-h-[46px] items-center justify-center bg-[#D9381E] text-[13px] font-bold text-[#FFFFFF]"
-                    >
-                      {uiLabels.vipBtn}
-                    </a>
-                  </div>
-                </article>
-              ))}
-            </div>
+            ))}
           </div>
         </section>
 
+        {/* ── 3. Quattro Caroselli Orizzontali Separati (#capodanno 19 · #stasera · #settimana · #locali-partner 18) ── */}
+        <V01HomeCarousels
+          locale={locale}
+          localePrefix={lp}
+          initialNow={initialNow.toISOString()}
+          capodannoEvents={capodannoSlides}
+          dateSensitiveEvents={dateSensitiveEvents}
+          partnerClubs={partnerClubs}
+          capodannoHubHref={capodannoPath(locale)}
+          tonightHref={`${lp}/events/tonight`}
+          weekHref={`${lp}/events/this-week`}
+          clubsHref={`${lp}/clubs`}
+        />
+
         <OctoberEntry locale={locale} />
-        <section className="w-full border-b border-white/14 bg-[#0A0A0C]">
-          <div
-            data-reveal="rise"
-            className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-6 border-x border-white/14 bg-[#18181C] px-5 py-12 md:flex-row md:items-center sm:px-14"
-          >
+
+        {/* ── 4. San Siro Banner (Couture Noir + WhatsApp Direct) ─────────────────── */}
+        <section className="w-full border-b border-[#F6F1E7]/14 bg-[#050505]">
+          <div className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-6 border-x border-[#F6F1E7]/14 bg-[#0B0A09] px-5 py-12 md:flex-row md:items-center sm:px-14">
             <div>
-              <h2 className="font-display text-2xl font-extrabold uppercase text-[#FFFFFF] sm:text-3xl lg:text-4xl">
+              <p className="mb-2 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-[#EAE3D5]">
+                {uiLabels.sanSiroEye}
+              </p>
+              <h2 className="font-serif text-2xl font-normal text-[#F6F1E7] sm:text-4xl">
                 {uiLabels.sanSiroTitle}
               </h2>
-              <p className="mt-1 max-w-[60ch] font-sans text-sm text-[#EDEBE6]">
+              <p className="mt-2 max-w-[64ch] font-sans text-sm leading-relaxed text-[#DED8CC]">
                 {uiLabels.sanSiroBody}
               </p>
             </div>
             <Link
               href={`${lp}/football-afterparties`}
               prefetch={false}
-              className="nlm-pressable inline-flex min-h-[48px] shrink-0 items-center gap-2 bg-[#D9381E] px-6 py-3.5 text-[13px] font-bold text-[#FFFFFF] transition-colors hover:bg-[#B82B14]"
+              className="inline-flex min-h-[48px] shrink-0 items-center gap-2 bg-[#25D366] px-6 py-3.5 text-[13px] font-bold uppercase tracking-[0.04em] text-[#050505] transition-colors hover:bg-[#2EE472]"
             >
               {uiLabels.sanSiroCta}
             </Link>
           </div>
         </section>
 
-        {/* ── 3. I Tre Atti della Notte Milanese (Capitolo Carta Calda + Trittico Noir) ─── */}
-        <section className="w-full border-b border-white/14 bg-[#0A0A0C]">
-          <div className="mx-auto grid max-w-[1440px] grid-cols-1 border-x border-white/14 lg:grid-cols-12">
-            {/* Colonna Sinistra (5/12): Capitolo Carta S17 #EDEBE6 */}
-            <div data-reveal="rise" className="flex flex-col justify-between border-b border-[#0A0A0C]/16 bg-[#EDEBE6] px-6 py-10 text-[#0A0A0C] sm:p-14 lg:col-span-5 lg:border-b-0 lg:border-r">
+        {/* ── 5. I Tre Atti della Notte Milanese (Cialdini: Liking · Couture Noir) ─── */}
+        <section
+          data-cialdini="liking"
+          className="w-full border-b border-[#F6F1E7]/14 bg-[#050505]"
+        >
+          <div className="mx-auto grid max-w-[1440px] grid-cols-1 border-x border-[#F6F1E7]/14 lg:grid-cols-12">
+            {/* Colonna Sinistra (5/12): #0B0A09 */}
+            <div className="flex flex-col justify-between border-b border-[#F6F1E7]/14 bg-[#0B0A09] px-6 py-12 text-[#F6F1E7] sm:p-14 lg:col-span-5 lg:border-b-0 lg:border-r">
               <div>
-                <h2 className="mb-3 font-display text-3xl font-extrabold uppercase italic leading-[0.95] text-[#0A0A0C] sm:text-[40px]">
+                <p className="mb-2 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-[#EAE3D5]">
+                  {homeCopy.nightLabel}
+                </p>
+                <h2 className="mb-8 font-serif text-3xl font-normal italic leading-[1.04] text-[#F6F1E7] sm:text-4xl">
                   {homeCopy.nightTitle}
                 </h2>
-                <p className="mb-8 text-[13px] font-semibold text-[#4F4D48]">{homeCopy.nightLabel}</p>
-                <div className="divide-y divide-[#0A0A0C]/15 border-y border-[#0A0A0C]/15">
+                <div className="divide-y divide-[#F6F1E7]/14 border-y border-[#F6F1E7]/14">
                   {homeCopy.nightSteps.map((step: { label: string; title: string; body: string }, i: number) => (
                     <div key={i} className="flex items-start justify-between gap-6 py-6">
                       <div>
-                        <h3 className="mb-2 font-display text-2xl font-extrabold uppercase leading-tight text-[#0A0A0C] sm:text-[30px]">{step.title}</h3>
-                        <p className="max-w-[52ch] font-sans text-sm leading-relaxed text-[#4F4D48]">{step.body}</p>
+                        <p className="mb-1 font-mono text-[11px] uppercase tracking-[0.12em] text-[#EAE3D5]">
+                          {step.label}
+                        </p>
+                        <h3 className="mb-2 font-serif text-2xl font-normal leading-tight text-[#F6F1E7] sm:text-3xl">
+                          {step.title}
+                        </h3>
+                        <p className="max-w-[52ch] font-sans text-sm leading-relaxed text-[#C2B9AA]">
+                          {step.body}
+                        </p>
                       </div>
-                      <span className="shrink-0 font-display text-4xl font-extrabold italic text-[#D9381E]">
+                      <span className="shrink-0 font-serif text-4xl font-normal italic text-[#EAE3D5]">
                         {i === 0 ? 'I' : i === 1 ? 'II' : 'III'}
                       </span>
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="mt-8 bg-[#0A0A0C] p-3">
+              <div className="mt-8">
                 <a
                   href={waLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="nlm-pressable flex min-h-[48px] w-full items-center justify-between bg-[#D9381E] px-6 py-3.5 text-[13px] font-bold text-[#FFFFFF] transition-colors hover:bg-[#B82B14]"
+                  className="flex min-h-[48px] w-full items-center justify-between bg-[#25D366] px-6 py-3.5 text-[13px] font-bold uppercase tracking-[0.04em] text-[#050505] transition-colors hover:bg-[#2EE472]"
                 >
                   <span>{homeCopy.requestAction}</span>
                   <span aria-hidden="true">↗</span>
@@ -818,63 +619,63 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
             </div>
 
             {/* Colonna Destra (7/12): Trittico Fotografico Editoriale */}
-            <div data-lightbox-group="home-editorial-triptych" className="flex flex-col justify-between bg-[#18181C] p-6 sm:p-14 lg:col-span-7">
+            <div data-lightbox-group="home-editorial-triptych" className="flex flex-col justify-between bg-[#141311] p-6 sm:p-14 lg:col-span-7">
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                <div className="sm:col-span-2" data-reveal="clip">
-                  <div className="relative aspect-[16/9] w-full overflow-hidden border border-white/14">
+                <div className="sm:col-span-2">
+                  <div className="relative aspect-[16/9] w-full overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]">
                     <Image
                       src="/images/vip-table-milan-nightclub-just-me.webp"
                       alt={homeGridAlts[0]}
                       fill
                       quality={92}
-                      className="nlm-hover-zoom object-cover"
+                      className="object-cover"
                       sizes="(max-width: 1024px) 100vw, 65vw"
                     />
                   </div>
-                  <div className="mt-2.5 flex justify-between text-[13px] font-semibold text-[#C9C7C2]">
+                  <div className="mt-2.5 flex justify-between font-mono text-[12px] text-[#DED8CC]">
                     <span>{uiLabels.act1}</span>
                     <span>Parco Sempione &amp; Porta Nuova</span>
                   </div>
                 </div>
 
-                <div data-reveal="clip" data-stagger="1">
-                  <div className="relative aspect-[4/3] w-full overflow-hidden border border-white/14">
+                <div>
+                  <div className="relative aspect-[4/3] w-full overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]">
                     <Image
                       src="/images/milan-club-crowd-dancefloor-night.webp"
                       alt={homeGridAlts[3]}
                       fill
                       quality={92}
-                      className="nlm-hover-zoom object-cover"
+                      className="object-cover"
                       sizes="(max-width: 1024px) 50vw, 45vw"
                     />
                   </div>
-                  <div className="mt-2 text-[13px] font-semibold text-[#C9C7C2]">
+                  <div className="mt-2 font-mono text-[12px] text-[#DED8CC]">
                     {uiLabels.act2}
                   </div>
                 </div>
 
-                <div data-reveal="clip" data-stagger="2">
-                  <div className="relative aspect-[4/3] w-full overflow-hidden border border-white/14">
+                <div>
+                  <div className="relative aspect-[4/3] w-full overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]">
                     <Image
                       src="/images/bottle-service-milan-vip-nightclub.webp"
                       alt={homeGridAlts[4]}
                       fill
                       quality={92}
-                      className="nlm-hover-zoom object-cover"
+                      className="object-cover"
                       sizes="(max-width: 1024px) 50vw, 45vw"
                     />
                   </div>
-                  <div className="mt-2 text-[13px] font-semibold text-[#C9C7C2]">
+                  <div className="mt-2 font-mono text-[12px] text-[#DED8CC]">
                     {uiLabels.act3}
                   </div>
                 </div>
               </div>
 
-              <div className="mt-8 flex flex-col justify-between gap-4 border-t border-white/14 pt-6 sm:flex-row sm:items-center">
-                <p className="max-w-[58ch] font-sans text-base italic text-[#EDEBE6]">
+              <div className="mt-8 flex flex-col justify-between gap-4 border-t border-[#F6F1E7]/14 pt-6 sm:flex-row sm:items-center">
+                <p className="max-w-[58ch] font-sans text-sm italic leading-relaxed text-[#DED8CC]">
                   {homeCopy.description} · {SITE_CONTACT.whatsapp.number}
                 </p>
-                <span className="shrink-0 text-[13px] font-bold text-[#EDEBE6]">
+                <span className="shrink-0 font-mono text-[12px] font-bold uppercase tracking-[0.08em] text-[#25D366]">
                   {homeCopy.quickLabel}
                 </span>
               </div>
@@ -882,35 +683,25 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           </div>
         </section>
 
-        {/* ── 4. Le Tre Formule d'Accesso (Intent Cards) ───────────────── */}
-        <div className="w-full border-b border-[#0A0A0C]/16 bg-[#EDEBE6]">
-          <div className="mx-auto max-w-[1440px] border-x border-[#0A0A0C]/16">
+        {/* ── 6. Le Tre Formule d'Accesso (Intent Cards) ───────────────────────── */}
+        <div className="w-full border-b border-[#F6F1E7]/14 bg-[#050505]">
+          <div className="mx-auto max-w-[1440px] border-x border-[#F6F1E7]/14">
             <IntentCards locale={locale} />
           </div>
         </div>
 
-        {/* ── 5. Calendario Eventi Verificati della Settimana ──────────── */}
-        <section className="w-full border-b border-white/14 bg-[#0A0A0C] px-4 py-16 sm:px-14" data-home-week-events>
-          <div className="mx-auto max-w-[1328px]">
-            <h2 data-reveal="rise" className="mb-3 font-display text-3xl font-extrabold uppercase text-[#FFFFFF] sm:text-5xl md:text-6xl">{homeCopy.weekTitle}</h2>
-            <p className="mb-5 text-sm font-semibold text-[#C9C7C2]">{homeCopy.weekLabel}</p>
-            <Link href={`${lp}/events`} prefetch={false} className="mb-8 inline-flex min-h-11 items-center text-base font-bold text-[#FFFFFF] underline underline-offset-4">{homeCopy.seeAll}</Link>
-            <DateSensitiveCalendar events={dateSensitiveEvents} initialNow={initialNow.toISOString()} mode="calendar-week" localeTag={getLocaleDef(locale)!.hreflang} localePrefix={lp} copy={{ ...getEventCalendarCopy(locale), empty: homeCopy.noWeek }} schemaName={homeCopy.weekTitle} emptyHref={`${lp}/events`} emptyLinkLabel={homeCopy.seeAll} groupByDay variant="gallery" bookingLocale={locale} />
-          </div>
-        </section>
-
         <MfwEntry locale={locale} />
 
-        {/* ── 6. Esplora per Categoria e Quartiere (Carta Calda S17 #EDEBE6 + #FFFFFF) ── */}
-        <section className="w-full border-b border-[#0A0A0C]/16 bg-[#EDEBE6] text-[#0A0A0C]">
-          <div className="mx-auto max-w-[1440px] border-x border-[#0A0A0C]/16 px-5 py-20 sm:px-14">
-            <h2 data-reveal="rise" className="mb-3 font-display text-3xl font-extrabold uppercase text-[#0A0A0C] sm:text-5xl md:text-6xl">
-              {homeCopy.categoriesTitle}
-            </h2>
-            <p className="mb-10 text-sm font-semibold text-[#4F4D48]">
+        {/* ── 7. Esplora per Categoria e Quartiere (Couture Noir Grid) ────────────── */}
+        <section className="w-full border-b border-[#F6F1E7]/14 bg-[#0B0A09] text-[#F6F1E7]">
+          <div className="mx-auto max-w-[1440px] border-x border-[#F6F1E7]/14 px-5 py-16 sm:px-14 sm:py-20">
+            <p className="mb-2 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-[#EAE3D5]">
               {homeCopy.discoverLabel}
             </p>
-            <div className="grid grid-cols-2 border-l border-t border-[#0A0A0C]/16 bg-[#FFFFFF] sm:grid-cols-4">
+            <h2 className="mb-10 font-serif text-3xl font-normal text-[#F6F1E7] sm:text-5xl">
+              {homeCopy.categoriesTitle}
+            </h2>
+            <div className="grid grid-cols-2 border-l border-t border-[#F6F1E7]/14 bg-[#141311] sm:grid-cols-4">
               {[
                 { label: homeCopy.categoryLabels[0], href: `${lp}/genres/techno` },
                 { label: homeCopy.categoryLabels[1], href: `${lp}/vip-tables` },
@@ -925,12 +716,12 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                   key={tag.label}
                   href={tag.href}
                   prefetch={false}
-                  data-reveal="rise"
-                  data-stagger={String((idx % 4) + 1)}
-                  className="nlm-pressable group flex min-h-[96px] flex-col justify-between border-b border-r border-[#0A0A0C]/16 p-6 transition-colors hover:bg-[#0A0A0C]"
+                  className="flex min-h-[104px] flex-col justify-between border-b border-r border-[#F6F1E7]/14 p-6 transition-colors hover:bg-[#1E1C19]"
                 >
-                  <span className="font-display text-3xl font-extrabold italic tabular-nums text-[#D9381E] transition-colors group-hover:text-[#FFFFFF]">{idx + 1}</span>
-                  <span className="mt-3 text-sm font-bold text-[#0A0A0C] transition-colors group-hover:text-[#FFFFFF]">
+                  <span className="font-serif text-3xl font-normal italic tabular-nums text-[#EAE3D5]">
+                    {String(idx + 1).padStart(2, '0')}
+                  </span>
+                  <span className="mt-3 text-sm font-bold text-[#F6F1E7]">
                     {tag.label} ↗
                   </span>
                 </Link>

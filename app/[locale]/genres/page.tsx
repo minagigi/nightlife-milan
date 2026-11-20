@@ -196,7 +196,7 @@ export default async function GenresIndexPage({
                   fill
                   quality={92}
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
 
@@ -206,7 +206,7 @@ export default async function GenresIndexPage({
                       <Music className="w-3.5 h-3.5" />
                       {gLoc.name}
                     </span>
-                    <ArrowUpRight className="w-5 h-5 text-champagne transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="w-5 h-5 text-champagne group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </div>
 
                   <h3 className="font-serif text-2xl md:text-3xl font-bold text-white mb-2 group-hover:text-champagne transition-colors">

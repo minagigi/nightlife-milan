@@ -423,7 +423,7 @@ export default function VibeFinder({ lang }: { lang: string }) {
                     onClick={() => handleSelect('mood', mood.id)}
                     className="group flex flex-col items-start text-left p-5 rounded-xl border border-white/10 bg-white/5 hover:bg-champagne/10 hover:border-champagne/50 transition-all duration-300 hover:shadow-[0_0_20px_rgba(242,227,198,0.15)]"
                   >
-                    <Icon className="w-6 h-6 text-champagne mb-3 group-hover:scale-110 transition-transform duration-300" />
+                    <Icon className="w-6 h-6 text-champagne mb-3" />
                     <span className="text-white font-serif text-base font-medium tracking-wide group-hover:text-champagne">
                       {mood.label}
                     </span>
@@ -460,7 +460,7 @@ export default function VibeFinder({ lang }: { lang: string }) {
                     onClick={() => handleSelect('budget', budget.id)}
                     className="group flex flex-col items-center text-center justify-center p-6 rounded-xl border border-white/10 bg-white/5 hover:bg-champagne/10 hover:border-champagne/50 transition-all duration-300 hover:shadow-[0_0_20px_rgba(242,227,198,0.15)]"
                   >
-                    <Icon className="w-8 h-8 text-champagne mb-3 group-hover:scale-110 transition-transform duration-300" />
+                    <Icon className="w-8 h-8 text-champagne mb-3" />
                     <span className="text-white font-medium tracking-wide text-sm sm:text-base">
                       {budget.label}
                     </span>
@@ -497,7 +497,7 @@ export default function VibeFinder({ lang }: { lang: string }) {
                     onClick={() => handleSelect('zone', zone.id)}
                     className="group flex flex-col items-center justify-center p-4 rounded-xl border border-white/10 bg-white/5 hover:bg-champagne/10 hover:border-champagne/50 transition-all duration-300 text-center"
                   >
-                    <Icon className="w-6 h-6 text-champagne mb-2 group-hover:scale-110 transition-transform duration-300" />
+                    <Icon className="w-6 h-6 text-champagne mb-2" />
                     <span className="text-white font-medium tracking-wide text-xs sm:text-sm">
                       {zone.label}
                     </span>

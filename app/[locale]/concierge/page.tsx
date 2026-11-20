@@ -461,7 +461,7 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
               ].map((img) => (
                 <div key={img.label} className="relative group">
                   <div className="relative h-36 overflow-hidden border border-[#F6F1E7]/14">
-                    <Image src={img.src} alt={img.alt} fill quality={92} className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="(max-width: 768px) 50vw, 25vw" />
+                    <Image src={img.src} alt={img.alt} fill quality={92} className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
                   </div>
                   <p className="font-mono text-[#C2B9AA] text-[11px] text-center mt-2 tracking-widest uppercase">{img.label}</p>
                 </div>

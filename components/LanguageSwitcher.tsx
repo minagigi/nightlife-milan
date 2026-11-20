@@ -63,9 +63,9 @@ export default function LanguageSwitcher({ currentLocale }: { currentLocale: str
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label={`Language: ${current.nativeName}`}
-        className="flex items-center gap-2 border border-white/25 bg-[#18181C] px-2.5 h-9 text-[#FFFFFF] transition-colors hover:border-white/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D9381E]"
+        className="flex items-center gap-2 border border-[#EAE3D5]/30 bg-[#0B0A09] px-2.5 h-9 text-[#F6F1E7] transition-colors hover:border-[#F6F1E7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]"
       >
-        <span className={`fi fi-${current.country} fis block w-5 h-5 border border-white/20`} aria-hidden="true" />
+        <span className={`fi fi-${current.country} fis block w-5 h-5 border border-[#F6F1E7]/20`} aria-hidden="true" />
         <span className="font-sans text-[13px] font-semibold uppercase tracking-[0.04em]">{current.code}</span>
         <svg width="8" height="5" viewBox="0 0 8 5" aria-hidden="true" className={`transition-transform ${open ? 'rotate-180' : ''}`}>
           <path d="M0 0l4 5 4-5z" fill="currentColor" />
@@ -75,7 +75,7 @@ export default function LanguageSwitcher({ currentLocale }: { currentLocale: str
         <ul
           role="listbox"
           aria-label="Language"
-          className="absolute end-0 top-full mt-2 max-h-[70vh] w-56 overflow-y-auto border border-white/20 bg-[#18181C] py-2 z-50"
+          className="absolute end-0 top-full mt-2 max-h-[70vh] w-56 overflow-y-auto border border-[#EAE3D5]/30 bg-[#0B0A09] py-2 z-50"
         >
           {ENABLED_LOCALES.map((l) => (
             <li key={l.code} role="option" aria-selected={currentLocale === l.code}>
@@ -84,7 +84,7 @@ export default function LanguageSwitcher({ currentLocale }: { currentLocale: str
                 lang={l.hreflang}
                 onClick={() => rememberChoice(l.code)}
                 className={`flex items-center gap-3 px-4 py-2 text-sm transition-colors ${
-                  currentLocale === l.code ? 'bg-white/10 font-semibold text-[#FFFFFF]' : 'text-[#CCCCCC] hover:text-[#FFFFFF] hover:bg-white/5'
+                  currentLocale === l.code ? 'bg-[#1E1C19] font-semibold text-[#F6F1E7]' : 'text-[#C2B9AA] hover:text-[#F6F1E7] hover:bg-[#141311]'
                 }`}
               >
                 <span className={`fi fi-${l.country} fis block w-5 h-5 rounded-full ring-1 ring-white/15 shrink-0`} aria-hidden="true" />

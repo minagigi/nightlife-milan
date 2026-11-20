@@ -53,7 +53,7 @@ export default function EventImageGallery({ gallery, locale }: { gallery: EventV
                 unoptimized
                 priority={index === 0}
                 sizes={index === 0 ? '(max-width: 899px) 100vw, 66vw' : '(max-width: 519px) 100vw, 33vw'}
-                className="object-contain transition-transform duration-500 group-hover:scale-[1.03] motion-reduce:transition-none"
+                className="object-contain motion-reduce:transition-none"
               />
             </button>
             <figcaption className="mt-3">

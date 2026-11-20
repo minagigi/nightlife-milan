@@ -519,7 +519,7 @@ function EventCard({ item, locale, renderedAtMs }: { item: { event: Event; venue
           fill
           sizes="(max-width: 768px) 100vw, 33vw"
           quality={92}
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          className="object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#050505] via-transparent to-transparent" />
 

@@ -105,14 +105,14 @@ export default function CapodannoInteractiveFilter({
 
   return (
     <div className="mt-10 space-y-10" data-capodanno-interactive-filter>
-      {/* 16 Dedicated SEO Category Pages Grid (#F6F1E7 Avorio Caldo) */}
-      <div id="categorie-capodanno" className="border border-[#050505]/15 bg-[#F6F1E7] text-[#050505] p-5 sm:p-7">
+      {/* 16 Dedicated SEO Category Pages Grid (V01 Couture Noir) */}
+      <div id="categorie-capodanno" className="border border-[#F6F1E7]/16 bg-[#0B0A09] text-[#F6F1E7] p-5 sm:p-7">
         <div className="mb-4 flex flex-col justify-between gap-2 sm:flex-row sm:items-center">
           <div>
-            <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#3D3830]">
+            <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#EAE3D5]">
               {ui.categoryBoxEyebrow}
             </p>
-            <h2 className="mt-1 font-serif text-xl font-bold text-[#050505] sm:text-2xl">
+            <h2 className="mt-1 font-serif text-xl font-bold text-[#F6F1E7] sm:text-2xl">
               {ui.categoryBoxHeading}
             </h2>
           </div>
@@ -125,13 +125,13 @@ export default function CapodannoInteractiveFilter({
                 key={cat.slug}
                 href={capodannoCategoryPath(cat.slug, locale)}
                 prefetch={false}
-                className={`flex flex-col justify-between border p-3 transition ${
+                className={`flex flex-col justify-between border p-3 transition-colors ${
                   isCurrent
-                    ? 'border-[#050505] bg-[#050505] text-[#F6F1E7]'
-                    : 'border-[#050505]/18 bg-[#EFE9DC] text-[#050505] hover:border-[#050505]'
+                    ? 'border-[#25D366] bg-[#1E1C19] text-[#F6F1E7]'
+                    : 'border-[#F6F1E7]/16 bg-[#141311] text-[#F6F1E7] hover:border-[#EAE3D5]'
                 }`}
               >
-                <span className={`text-[10px] font-bold uppercase tracking-wider ${isCurrent ? 'text-[#EAE3D5]' : 'text-[#3D3830]'}`}>
+                <span className={`text-[10px] font-bold uppercase tracking-wider ${isCurrent ? 'text-[#25D366]' : 'text-[#C2B9AA]'}`}>
                   {getCapodannoCategoryBadge35(cat.slug, locale, cat.badgeIt, cat.badgeEn)}
                 </span>
                 <span className="mt-1 text-xs font-bold leading-snug sm:text-sm">
@@ -179,7 +179,7 @@ export default function CapodannoInteractiveFilter({
                 className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition ${
                   audience === opt.value
                     ? 'bg-champagne text-black'
-                    : 'border border-white/15 bg-black/40 text-white/85 hover:border-champagne/60'
+                    : 'border border-[#F6F1E7]/14 bg-black/40 text-white/85 hover:border-champagne/60'
                 }`}
               >
                 {opt.label}
@@ -198,7 +198,7 @@ export default function CapodannoInteractiveFilter({
               id="cap-filter-type"
               value={venueType}
               onChange={(e) => setVenueType(e.target.value as any)}
-              className="min-h-[44px] w-full rounded-xl border border-white/15 bg-black/70 px-3.5 py-2.5 text-xs sm:text-sm text-white focus:border-champagne focus:outline-none"
+              className="min-h-[44px] w-full rounded-xl border border-[#F6F1E7]/14 bg-black/70 px-3.5 py-2.5 text-xs sm:text-sm text-white focus:border-champagne focus:outline-none"
             >
               {venueTypeOptions.map((o) => (
                 <option key={o.value} value={o.value}>{o.label}</option>
@@ -214,7 +214,7 @@ export default function CapodannoInteractiveFilter({
               id="cap-filter-formula"
               value={formula}
               onChange={(e) => setFormula(e.target.value as any)}
-              className="min-h-[44px] w-full rounded-xl border border-white/15 bg-black/70 px-3.5 py-2.5 text-xs sm:text-sm text-white focus:border-champagne focus:outline-none"
+              className="min-h-[44px] w-full rounded-xl border border-[#F6F1E7]/14 bg-black/70 px-3.5 py-2.5 text-xs sm:text-sm text-white focus:border-champagne focus:outline-none"
             >
               {formulaOptions.map((o) => (
                 <option key={o.value} value={o.value}>{o.label}</option>
@@ -230,7 +230,7 @@ export default function CapodannoInteractiveFilter({
               id="cap-filter-music"
               value={musicTag}
               onChange={(e) => setMusicTag(e.target.value as any)}
-              className="min-h-[44px] w-full rounded-xl border border-white/15 bg-black/70 px-3.5 py-2.5 text-xs sm:text-sm text-white focus:border-champagne focus:outline-none"
+              className="min-h-[44px] w-full rounded-xl border border-[#F6F1E7]/14 bg-black/70 px-3.5 py-2.5 text-xs sm:text-sm text-white focus:border-champagne focus:outline-none"
             >
               {musicOptions.map((o) => (
                 <option key={o.value} value={o.value}>{o.label}</option>
@@ -246,7 +246,7 @@ export default function CapodannoInteractiveFilter({
               id="cap-filter-zone"
               value={zoneTag}
               onChange={(e) => setZoneTag(e.target.value as any)}
-              className="min-h-[44px] w-full rounded-xl border border-white/15 bg-black/70 px-3.5 py-2.5 text-xs sm:text-sm text-white focus:border-champagne focus:outline-none"
+              className="min-h-[44px] w-full rounded-xl border border-[#F6F1E7]/14 bg-black/70 px-3.5 py-2.5 text-xs sm:text-sm text-white focus:border-champagne focus:outline-none"
             >
               {zoneOptions.map((o) => (
                 <option key={o.value} value={o.value}>{o.label}</option>
@@ -262,7 +262,7 @@ export default function CapodannoInteractiveFilter({
               id="cap-filter-budget"
               value={budget}
               onChange={(e) => setBudget(e.target.value as any)}
-              className="min-h-[44px] w-full rounded-xl border border-white/15 bg-black/70 px-3.5 py-2.5 text-xs sm:text-sm text-white focus:border-champagne focus:outline-none"
+              className="min-h-[44px] w-full rounded-xl border border-[#F6F1E7]/14 bg-black/70 px-3.5 py-2.5 text-xs sm:text-sm text-white focus:border-champagne focus:outline-none"
             >
               {budgetOptions.map((o) => (
                 <option key={o.value} value={o.value}>{o.label}</option>
@@ -280,7 +280,7 @@ export default function CapodannoInteractiveFilter({
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={w.searchPlaceholder}
-              className="min-h-[44px] w-full rounded-xl border border-white/15 bg-black/70 px-3.5 py-2.5 text-xs sm:text-sm text-white placeholder-white/40 focus:border-champagne focus:outline-none"
+              className="min-h-[44px] w-full rounded-xl border border-[#F6F1E7]/14 bg-black/70 px-3.5 py-2.5 text-xs sm:text-sm text-white placeholder-white/40 focus:border-champagne focus:outline-none"
             />
           </div>
         </div>
@@ -317,13 +317,13 @@ export default function CapodannoInteractiveFilter({
               return (
                 <article
                   key={event.slug}
-                  className="flex flex-col justify-between overflow-hidden border border-[#0A0A0C]/16 bg-[#FFFFFF] text-[#0A0A0C] transition hover:border-[#0A0A0C]"
+                  className="flex flex-col justify-between overflow-hidden border border-[#F6F1E7]/14 bg-[#141311] text-[#F6F1E7] transition hover:border-[#EAE3D5]/32"
                 >
                   <div>
                     <Link
                       href={detailHref}
                       data-no-lightbox="true"
-                      className="relative block aspect-[16/9] w-full overflow-hidden border-b border-[#0A0A0C]/14 bg-[#0A0A0C]"
+                      className="relative block aspect-[16/9] w-full overflow-hidden border-b border-[#F6F1E7]/14 bg-[#050505]"
                       aria-label={title}
                     >
                       <Image
@@ -338,63 +338,63 @@ export default function CapodannoInteractiveFilter({
 
                     <div className="p-5">
                       <div className="mb-3 flex flex-wrap items-center gap-2">
-                        <span className="border border-[#0A0A0C]/25 bg-[#EDEBE6] px-2.5 py-1 text-xs font-semibold text-[#0A0A0C]">
+                        <span className="border border-[#EAE3D5]/32 bg-[#EAE3D5] px-2.5 py-1 text-xs font-semibold text-[#050505]">
                           {event.city} ({event.province})
                         </span>
-                        <span className="font-display text-2xl font-extrabold tabular-nums text-[#D9381E]">
+                        <span className="font-display text-2xl font-bold tabular-nums text-[#EAE3D5]">
                           {formatCapodannoPriceBadge35(event, locale)}
                         </span>
                         {!isRepvblicNyeSlug(event.slug) && !isGateNyeSlug(event.slug) && (
-                          <span className="bg-[#0A0A0C] px-2.5 py-1 text-xs font-bold text-[#FFFFFF]" data-selling-fast-badge>
+                          <span className="bg-[#050505] px-2.5 py-1 text-xs font-bold text-[#F6F1E7]" data-selling-fast-badge>
                             {scarcity.sellingFastBadge}
                           </span>
                         )}
                       </div>
-                      <p className="text-xs font-bold text-[#4F4D48]">{event.venueName}</p>
-                      <h3 className="mt-1 mb-3 font-display text-2xl font-extrabold leading-tight text-[#0A0A0C]">
+                      <p className="text-xs font-bold text-[#C2B9AA]">{event.venueName}</p>
+                      <h3 className="mt-1 mb-3 font-display text-2xl font-bold leading-tight text-[#F6F1E7]">
                         <Link href={detailHref} className="hover:underline">
                           {title}
                         </Link>
                       </h3>
-                      <p className="text-xs text-[#4F4D48]">
-                        <strong className="text-[#0A0A0C]">{w.addressLabel}</strong> {event.address} ·{' '}
-                        <strong className="text-[#0A0A0C]">{w.hoursLabel}</strong> {formatCapodannoHours35(event.hours, locale)}
+                      <p className="text-xs text-[#C2B9AA]">
+                        <strong className="text-[#F6F1E7]">{w.addressLabel}</strong> {event.address} ·{' '}
+                        <strong className="text-[#F6F1E7]">{w.hoursLabel}</strong> {formatCapodannoHours35(event.hours, locale)}
                       </p>
-                      <p className="mt-2.5 text-sm leading-relaxed text-[#4F4D48]">{description}</p>
+                      <p className="mt-2.5 text-sm leading-relaxed text-[#C2B9AA]">{description}</p>
 
-                      <div className="mt-4 border border-[#0A0A0C]/14 bg-[#EDEBE6] p-3.5">
-                        <p className="mb-2 text-xs font-bold text-[#0A0A0C]">
+                      <div className="mt-4 border border-[#F6F1E7]/14 bg-[#0B0A09] p-3.5">
+                        <p className="mb-2 text-xs font-bold text-[#F6F1E7]">
                           {w.priceTiersHeading}
                         </p>
                         <ul className="space-y-2 text-xs">
                           {tiers.slice(0, 3).map((tier) => (
-                            <li key={tier.label} className="border-b border-[#0A0A0C]/12 pb-1.5 last:border-0 last:pb-0">
+                            <li key={tier.label} className="border-b border-[#EAE3D5]/32/12 pb-1.5 last:border-0 last:pb-0">
                               <div className="flex items-baseline justify-between gap-2 tabular-nums">
-                                <span className="font-semibold text-[#0A0A0C]">{tier.label}</span>
-                                <span className="shrink-0 font-bold text-[#0A0A0C]">{tier.price}</span>
+                                <span className="font-semibold text-[#F6F1E7]">{tier.label}</span>
+                                <span className="shrink-0 font-bold text-[#F6F1E7]">{tier.price}</span>
                               </div>
-                              <p className="mt-0.5 text-xs text-[#4F4D48]">{tier.details}</p>
+                              <p className="mt-0.5 text-xs text-[#C2B9AA]">{tier.details}</p>
                             </li>
                           ))}
                         </ul>
                       </div>
 
-                      <div className="mt-3 flex flex-wrap gap-2 text-xs text-[#4F4D48]">
-                        <span className="border border-[#0A0A0C]/14 bg-[#EDEBE6] px-2.5 py-1">
-                          <strong className="text-[#0A0A0C]">{ui.musicLabel}:</strong> {music}
+                      <div className="mt-3 flex flex-wrap gap-2 text-xs text-[#C2B9AA]">
+                        <span className="border border-[#F6F1E7]/14 bg-[#0B0A09] px-2.5 py-1">
+                          <strong className="text-[#F6F1E7]">{ui.musicLabel}:</strong> {music}
                         </span>
-                        <span className="border border-[#0A0A0C]/14 bg-[#EDEBE6] px-2.5 py-1">
-                          <strong className="text-[#0A0A0C]">{w.dressCodeLabel}:</strong> {dress}
+                        <span className="border border-[#F6F1E7]/14 bg-[#0B0A09] px-2.5 py-1">
+                          <strong className="text-[#F6F1E7]">{w.dressCodeLabel}:</strong> {dress}
                         </span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="border-t border-[#0A0A0C]/14 bg-[#FFFFFF] px-5 py-3.5">
+                  <div className="border-t border-[#F6F1E7]/14 bg-[#141311] px-5 py-3.5">
                     <Link
                       href={detailHref}
                       data-capodanno-open-event={event.slug}
-                      className="inline-flex min-h-[46px] w-full items-center justify-center bg-[#0A0A0C] px-4 py-2.5 text-center text-xs font-bold uppercase text-[#FFFFFF] transition hover:bg-[#D9381E] sm:text-sm"
+                      className="inline-flex min-h-[46px] w-full items-center justify-center bg-[#050505] px-4 py-2.5 text-center text-xs font-bold uppercase text-[#050505] transition hover:bg-[#25D366] sm:text-sm"
                     >
                       {scarcity.openEventCardCta}
                     </Link>

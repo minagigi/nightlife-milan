@@ -161,9 +161,9 @@ export default function WhatsAppFloating({ locale: explicitLocale }: { locale?: 
           className="hidden xl:inline-block"
           style={{
             position: 'relative',
-            background: '#0A0A0C',
-            color: '#FFFFFF',
-            border: '1px solid rgba(255, 255, 255, 0.28)',
+            background: '#050505',
+            color: '#F6F1E7',
+            border: '1px solid rgba(234, 227, 213, 0.34)',
             borderRadius: '0px',
             padding: '8px 12px',
             fontSize: '13px',
@@ -183,9 +183,9 @@ export default function WhatsAppFloating({ locale: explicitLocale }: { locale?: 
               marginTop: '-4px',
               width: '8px',
               height: '8px',
-              background: '#0A0A0C',
-              borderTop: '1px solid rgba(255, 255, 255, 0.28)',
-              borderRight: '1px solid rgba(255, 255, 255, 0.28)',
+              background: '#050505',
+              borderTop: '1px solid rgba(234, 227, 213, 0.34)',
+              borderRight: '1px solid rgba(234, 227, 213, 0.34)',
               transform: 'rotate(45deg)',
             }}
           />
@@ -198,8 +198,8 @@ export default function WhatsAppFloating({ locale: explicitLocale }: { locale?: 
           height: '48px',
           borderRadius: '9999px',
           background: '#25D366',
-          color: '#0A0A0C',
-          border: '2px solid #FFFFFF',
+          color: '#050505',
+          border: '2px solid #F6F1E7',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
