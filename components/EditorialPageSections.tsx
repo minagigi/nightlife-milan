@@ -674,7 +674,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
                 <p className="text-[13px] text-[#C2B9AA]">{isIt ? 'Via Giovenale 7, Via Cappellini 25 e Via Fusetti 1 · Corti vintage, vinili e distillati rari (14–18 €).' : 'Via Giovenale 7, Via Cappellini 25 & Via Fusetti 1 · Vintage courtyards, vinyls & rare spirits (€14–€18).'}</p>
               </div>
             </div>
-            <Link href={`${lp}/guides/${speakeasySlug}`} prefetch={false} className="inline-flex border border-white/50 px-6 py-3 font-sans tabular-nums text-[13px] uppercase tracking-[0.04em] text-[#050505] hover:bg-[#EAE3D5] hover:text-[#050505]">
+            <Link href={`${lp}/guides/${speakeasySlug}`} prefetch={false} className="inline-flex border border-[#EAE3D5]/45 bg-[#141311] px-6 py-3 font-sans tabular-nums text-[13px] uppercase tracking-[0.04em] text-[#F6F1E7] transition-colors hover:bg-[#EAE3D5] hover:text-[#050505]">
               {isIt ? 'Leggi l’Atlante Completo dei 12 Speakeasy di Milano ↗' : 'Read the Full 12 Milan Speakeasies Atlas ↗'}
             </Link>
           </section>

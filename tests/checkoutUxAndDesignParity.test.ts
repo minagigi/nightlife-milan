@@ -227,3 +227,73 @@ test('Static invariants: Checkout UX clarity, Bug A resume guard, and V01 Coutur
     }
   }
 });
+
+function walkTsxFiles(dir: string, acc: string[] = []): string[] {
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      walkTsxFiles(full, acc);
+    } else if (entry.name.endsWith('.tsx')) {
+      acc.push(full);
+    }
+  }
+  return acc;
+}
+
+test('Static invariants: Zero tel: call buttons/links across all app & components', () => {
+  const tsxFiles = [
+    ...walkTsxFiles(path.join(REPO_ROOT, 'app')),
+    ...walkTsxFiles(path.join(REPO_ROOT, 'components')),
+  ];
+  const violations: string[] = [];
+  for (const file of tsxFiles) {
+    const rel = path.relative(REPO_ROOT, file);
+    const lines = fs.readFileSync(file, 'utf8').split(/\r?\n/);
+    lines.forEach((line, idx) => {
+      if (/href\s*=\s*(?:"tel:|'tel:|\{\s*['"`]tel:)/i.test(line)) {
+        violations.push(`${rel}:${idx + 1}: ${line.trim()}`);
+      }
+    });
+  }
+  assert.deepEqual(violations, [], `Found forbidden tel: call links:\n${violations.join('\n')}`);
+});
+
+test('Static invariants: Zero invisible or broken-contrast button/link classes', () => {
+  const tsxFiles = [
+    ...walkTsxFiles(path.join(REPO_ROOT, 'app')),
+    ...walkTsxFiles(path.join(REPO_ROOT, 'components')),
+  ];
+  const darkBgRe = /(?:^|\s)bg-(?:\[#(?:0[0-9a-fA-F]{5}|1[0-9a-fA-F]{5})\]|black)(?=$|\s)/;
+  const darkTxtRe = /(?:^|\s)text-(?:\[#(?:0[0-9a-fA-F]{5}|1[0-9a-fA-F]{5})\]|black)(?=$|\s)/;
+  const anyBgRe = /(?:^|\s)bg-/;
+  const lightBorderRe = /(?:^|\s)border-(?:\[#EAE3D5\]|white|champagne)(?:\/\d+)?(?=$|\s)/;
+  const hoverDarkBgRe = /(?:^|\s)hover:bg-(?:\[#(?:0[0-9a-fA-F]{5}|1[0-9a-fA-F]{5})\]|black)(?=$|\s)/;
+  const hoverDarkTxtRe = /(?:^|\s)hover:text-(?:\[#(?:0[0-9a-fA-F]{5}|1[0-9a-fA-F]{5})\]|black)(?=$|\s)/;
+  const waGreenSolidRe = /(?:^|\s)(?:hover:)?bg-\[#25D366\](?=$|\s)/;
+  const lightTxtRe = /(?:^|\s)(?:hover:)?text-(?:white|\[#[fF]{6}\])(?=$|\s)/;
+
+  const violations: string[] = [];
+  for (const file of tsxFiles) {
+    const rel = path.relative(REPO_ROOT, file);
+    const src = fs.readFileSync(file, 'utf8');
+    const re = /className="([^"]+)"/g;
+    let m: RegExpExecArray | null;
+    while ((m = re.exec(src)) !== null) {
+      const cls = m[1];
+      const lineNo = src.slice(0, m.index).split('\n').length;
+      if (darkBgRe.test(cls) && darkTxtRe.test(cls)) {
+        violations.push(`${rel}:${lineNo}: dark-on-dark (${cls})`);
+      }
+      if (hoverDarkBgRe.test(cls) && hoverDarkTxtRe.test(cls)) {
+        violations.push(`${rel}:${lineNo}: hover dark-on-dark (${cls})`);
+      }
+      if (waGreenSolidRe.test(cls) && lightTxtRe.test(cls)) {
+        violations.push(`${rel}:${lineNo}: white text on #25D366 (${cls})`);
+      }
+      if (darkTxtRe.test(cls) && !anyBgRe.test(cls) && lightBorderRe.test(cls)) {
+        violations.push(`${rel}:${lineNo}: dark text on light-bordered dark button without bg (${cls})`);
+      }
+    }
+  }
+  assert.deepEqual(violations, [], `Found contrast defects:\n${violations.join('\n')}`);
+});

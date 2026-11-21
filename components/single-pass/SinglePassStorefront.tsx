@@ -169,12 +169,6 @@ export default function SinglePassStorefront({
                 WhatsApp {SITE_CONTACT.whatsapp.number}
               </a>
               <a
-                href="tel:+393519127047"
-                className="inline-flex min-h-[46px] items-center border border-[#F6F1E7]/20 px-4 py-3 text-xs font-semibold text-[#C2B9AA] hover:border-[#F6F1E7] hover:text-[#F6F1E7]"
-              >
-                +39 351 912 7047
-              </a>
-              <a
                 href="mailto:concierge@nightlifemilan.com"
                 className="inline-flex min-h-[46px] items-center border border-[#F6F1E7]/20 px-4 py-3 text-xs font-semibold text-[#C2B9AA] hover:border-[#F6F1E7] hover:text-[#F6F1E7]"
               >

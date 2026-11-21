@@ -755,7 +755,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                   <Link
                     href={partnerGuideHref}
                     locale={locale}
-                    className="inline-flex min-h-[44px] items-center border border-[#EAE3D5]/32 bg-[#F6F1E7] px-5 py-2.5 text-[13px] font-bold uppercase tracking-[0.04em] text-[#050505] hover:bg-[#050505] hover:text-[#050505]"
+                    className="inline-flex min-h-[44px] items-center border border-[#EAE3D5]/32 bg-[#F6F1E7] px-5 py-2.5 text-[13px] font-bold uppercase tracking-[0.04em] text-[#050505] hover:bg-[#050505] hover:text-[#F6F1E7]"
                   >
                     {getClubNyeBannerCopy35(locale).ctaGuide} →
                   </Link>
@@ -1065,26 +1065,20 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                     target="_blank"
                     rel="sponsored noopener noreferrer"
                     data-event-cta-kind="admission"
-                    className="inline-flex min-h-[44px] items-center bg-[#EAE3D5] px-6 py-3 text-sm font-bold text-[#050505] transition hover:bg-[#EAE3D5]"
+                    className="inline-flex min-h-[44px] items-center bg-[#EAE3D5] px-6 py-3 text-sm font-bold text-[#050505] transition hover:bg-[#F6F1E7]"
                   >
                     {scarcity.xceedPriorityCta}
                   </a>
                 ) : null}
                 <a
-                  href="tel:+393519127047"
-                  className="inline-flex min-h-[44px] items-center border border-[#EAE3D5]/40 bg-[#0B0A09] px-5 py-3 text-sm font-semibold text-[#050505] transition hover:bg-[#EAE3D5] hover:text-[#050505]"
-                >
-                  {ui.callNowBtn}
-                </a>
-                <a
                   href="mailto:concierge@nightlifemilan.com"
-                  className="inline-flex min-h-[44px] items-center border border-[#EAE3D5]/24 bg-[#0B0A09] px-5 py-3 text-sm font-semibold text-[#C2B9AA] transition hover:border-[#EAE3D5] hover:text-[#F6F1E7]"
+                  className="inline-flex min-h-[44px] items-center border border-[#EAE3D5]/32 bg-[#0B0A09] px-5 py-3 text-sm font-semibold text-[#F6F1E7] transition hover:border-[#EAE3D5] hover:text-[#F6F1E7]"
                 >
                   concierge@nightlifemilan.com
                 </a>
                 <Link
                   href={capodannoPath(locale)}
-                  className="inline-flex min-h-[44px] items-center border border-[#EAE3D5]/24 px-5 py-3 text-sm font-semibold text-[#050505] hover:bg-[#EAE3D5] hover:text-[#050505]"
+                  className="inline-flex min-h-[44px] items-center border border-[#EAE3D5]/32 bg-[#0B0A09] px-5 py-3 text-sm font-semibold text-[#F6F1E7] transition hover:bg-[#EAE3D5] hover:text-[#050505]"
                 >
                   {ui.backToAllBtn}
                 </Link>

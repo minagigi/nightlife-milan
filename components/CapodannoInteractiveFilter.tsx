@@ -394,7 +394,7 @@ export default function CapodannoInteractiveFilter({
                     <Link
                       href={detailHref}
                       data-capodanno-open-event={event.slug}
-                      className="inline-flex min-h-[46px] w-full items-center justify-center bg-[#050505] px-4 py-2.5 text-center text-xs font-bold uppercase text-[#050505] transition hover:bg-[#25D366] sm:text-sm"
+                      className="inline-flex min-h-[46px] w-full items-center justify-center bg-[#EAE3D5] px-4 py-2.5 text-center text-xs font-bold uppercase text-[#050505] transition hover:bg-[#25D366] hover:text-[#050505] sm:text-sm"
                     >
                       {scarcity.openEventCardCta}
                     </Link>

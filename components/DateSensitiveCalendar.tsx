@@ -295,13 +295,13 @@ export default function DateSensitiveCalendar({
     <div className="flex min-h-56 flex-col justify-center border border-[#F6F1E7]/14 bg-[#0B0A09] px-6 py-10 text-center">
       <Calendar className="mx-auto mb-4 h-10 w-10 text-[#F6F1E7]/40" aria-hidden="true" />
       <p className="font-display text-2xl text-[#C2B9AA]">{copy.empty}</p>
-      {emptyHref && emptyLinkLabel ? <Link href={emptyHref} prefetch={noPrefetch} className="mt-6 inline-flex self-center border border-[#EAE3D5]/45 px-7 py-3.5 font-sans tabular-nums text-[13px] uppercase tracking-[0.2em] text-[#050505] transition-colors hover:bg-[#EAE3D5] hover:text-[#050505]">{emptyLinkLabel}</Link> : null}
+      {emptyHref && emptyLinkLabel ? <Link href={emptyHref} prefetch={noPrefetch} className="mt-6 inline-flex self-center border border-[#EAE3D5]/45 bg-[#141311] px-7 py-3.5 font-sans tabular-nums text-[13px] uppercase tracking-[0.2em] text-[#F6F1E7] transition-colors hover:bg-[#EAE3D5] hover:text-[#050505]">{emptyLinkLabel}</Link> : null}
     </div>
   ) : (
     <div className="flex min-h-56 flex-col justify-center border border-[#F6F1E7]/14 bg-[#0B0A09] px-6 py-10 text-center">
       <Calendar className="mx-auto mb-4 h-10 w-10 text-[#F6F1E7]/40" aria-hidden="true" />
       <p className="font-display text-2xl text-[#C2B9AA]">{copy.empty}</p>
-      {emptyHref && emptyLinkLabel ? <Link href={emptyHref} prefetch={false} className="mt-6 inline-flex self-center border border-[#EAE3D5]/45 px-7 py-3.5 font-sans tabular-nums text-[13px] uppercase tracking-[0.2em] text-[#050505] transition-colors hover:bg-[#EAE3D5] hover:text-[#050505]">{emptyLinkLabel}</Link> : null}
+      {emptyHref && emptyLinkLabel ? <Link href={emptyHref} prefetch={false} className="mt-6 inline-flex self-center border border-[#EAE3D5]/45 bg-[#141311] px-7 py-3.5 font-sans tabular-nums text-[13px] uppercase tracking-[0.2em] text-[#F6F1E7] transition-colors hover:bg-[#EAE3D5] hover:text-[#050505]">{emptyLinkLabel}</Link> : null}
     </div>
   );
 
@@ -352,7 +352,7 @@ export default function DateSensitiveCalendar({
           </label>
         </div>
         <div className="mt-5 flex flex-wrap gap-2" role="group" aria-label={dateControls.date}>
-          {days.slice(0, 7).map(key => <button key={key} type="button" aria-label={dateFormatter.format(new Date(`${key}T12:00:00Z`))} aria-pressed={day === key} onClick={() => setRequestedDay(day === key ? '' : key)} className="nlm-pressable min-h-11 border border-white/35 px-4 py-2 font-sans text-[13px] font-bold uppercase tracking-[0.04em] text-[#050505] aria-pressed:bg-[#F6F1E7] aria-pressed:text-[#050505] focus-visible:outline-[#FFFFFF]">{shortDateFormatter.format(new Date(`${key}T12:00:00Z`))}</button>)}
+          {days.slice(0, 7).map(key => <button key={key} type="button" aria-label={dateFormatter.format(new Date(`${key}T12:00:00Z`))} aria-pressed={day === key} onClick={() => setRequestedDay(day === key ? '' : key)} className="nlm-pressable min-h-11 border border-[#EAE3D5]/35 bg-[#141311] px-4 py-2 font-sans text-[13px] font-bold uppercase tracking-[0.04em] text-[#F6F1E7] transition-colors hover:border-[#EAE3D5] aria-pressed:bg-[#F6F1E7] aria-pressed:text-[#050505] focus-visible:outline-[#FFFFFF]">{shortDateFormatter.format(new Date(`${key}T12:00:00Z`))}</button>)}
         </div>
       </div>}
       <div aria-live="polite" data-date-sensitive-results>{results}</div>

@@ -26,6 +26,7 @@ Do not redesign from memory when an approved live example exists. Use the curren
 - Never invent prices, artists, schedules, minimum age, dress code, availability, ticket terms, or venue services.
 - Preserve the exact Xceed affiliate URL from the current source. A non-affiliate replacement loses commission and is a release blocker.
 - Use the booking number exactly as `+39 351 912 7047`. Tell buyers to send their purchase confirmation on WhatsApp so booking and payment can be checked.
+- **Zero `tel:` / «Chiama» call buttons and mandatory button contrast (21 Nov 2026)**: never render clickable `href="tel:..."` links or "Chiama" call buttons anywhere in `app/` or `components/` (public channels are strictly WhatsApp `wa.me/393519127047`, `mailto:concierge@nightlifemilan.com`, and Xceed/checkout where applicable); enforce dark `#050505` text on `#25D366` buttons and non-zero WCAG contrast on every base/hover button state.
 - For every Eventbrite listing with a verified Nightlife Milan Xceed affiliate URL, localize both order-confirmation fields to the listing language. State that Eventbrite registration is not an admission ticket, include only the exact Xceed URL with channel `nightlifemilan-1`, and repeat the WhatsApp purchase-confirmation instruction.
 - Write native search-oriented copy in each language. Never append an English SEO keyword block to a non-English event.
 - Publish only complete language variants. Keep incomplete locales navigable but `noindex`; include only complete locales in hreflang and sitemap.

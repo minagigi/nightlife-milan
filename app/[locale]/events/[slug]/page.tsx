@@ -807,7 +807,7 @@ export default async function EventPage({ params }: Props) {
                   href={weeklyWaHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full bg-[#25D366] text-white px-6 py-3 rounded-xl font-bold hover:bg-[#20bd5a] transition-colors"
+                  className="flex items-center justify-center gap-2 w-full bg-[#25D366] text-[#050505] px-6 py-3 rounded-xl font-bold hover:bg-[#20bd5a] transition-colors"
                 >
                   {tr(locale, 'Book on WhatsApp', 'Prenota su WhatsApp')}
                 </a>

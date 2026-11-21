@@ -546,12 +546,6 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
                   WhatsApp {SITE_CONTACT.whatsapp.number}
                 </a>
                 <a
-                  href="tel:+393519127047"
-                  className="inline-flex min-h-[44px] items-center border border-[#F6F1E7]/40 bg-[#0B0A09] px-5 py-3 text-sm font-semibold text-[#F6F1E7] transition hover:bg-[#F6F1E7] hover:text-[#050505]"
-                >
-                  {SITE_CONTACT.whatsapp.number}
-                </a>
-                <a
                   href="mailto:concierge@nightlifemilan.com"
                   className="inline-flex min-h-[44px] items-center border border-[#F6F1E7]/20 bg-[#0B0A09] px-5 py-3 text-sm font-semibold text-[#C2B9AA] transition hover:border-[#F6F1E7] hover:text-[#F6F1E7]"
                 >

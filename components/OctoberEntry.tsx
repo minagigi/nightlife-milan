@@ -234,16 +234,16 @@ export function HomeHalloweenAndCapodannoSections({
               <Link
                 href={`${prefix}/events/tonight`}
                 prefetch={false}
-                className="nlm-pressable inline-flex min-h-[48px] items-center justify-center border border-[#EAE3D5]/32 bg-[#F6F1E7] px-5 py-3.5 text-[13px] font-bold uppercase text-[#050505] transition-colors hover:bg-[#050505] hover:text-[#050505]"
+                className="nlm-pressable inline-flex min-h-[48px] items-center justify-center border border-[#EAE3D5]/32 bg-[#F6F1E7] px-5 py-3.5 text-[13px] font-bold uppercase text-[#050505] transition-colors hover:bg-[#050505] hover:text-[#F6F1E7]"
               >
                 {isIt ? 'Club Aperti Stasera ↗' : 'Clubs Open Tonight ↗'}
               </Link>
               <Link
                 href={`${prefix}/events/october-2026`}
                 prefetch={false}
-                className="nlm-pressable inline-flex min-h-[48px] items-center justify-center border border-[#EAE3D5]/32 bg-[#F6F1E7] px-5 py-3.5 text-[13px] font-bold uppercase text-[#050505] transition-colors hover:bg-[#050505] hover:text-[#050505]"
+                className="nlm-pressable inline-flex min-h-[48px] items-center justify-center border border-[#EAE3D5]/32 bg-[#F6F1E7] px-5 py-3.5 text-[13px] font-bold uppercase text-[#050505] transition-colors hover:bg-[#050505] hover:text-[#F6F1E7]"
               >
-                <CalendarDays aria-hidden="true" className="mr-2 h-4 w-4 text-[#F6F1E7]" />
+                <CalendarDays aria-hidden="true" className="mr-2 h-4 w-4 text-current" />
                 {octoberHeading} ↗
               </Link>
             </div>
@@ -294,7 +294,7 @@ export function HomeHalloweenAndCapodannoSections({
                   <Link
                     href={card.href}
                     prefetch={false}
-                    className="inline-flex min-h-[46px] w-full items-center justify-center gap-1.5 bg-[#050505] px-4 py-2.5 text-[13px] font-bold uppercase text-[#050505] transition-colors hover:bg-[#25D366]"
+                    className="inline-flex min-h-[46px] w-full items-center justify-center gap-1.5 bg-[#EAE3D5] px-4 py-2.5 text-[13px] font-bold uppercase text-[#050505] transition-colors hover:bg-[#25D366] hover:text-[#050505]"
                   >
                     {scarcity.openEventCardCta}
                   </Link>

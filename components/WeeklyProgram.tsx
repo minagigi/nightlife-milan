@@ -96,7 +96,7 @@ export default function WeeklyProgram({ venueId, venueName, locale }: WeeklyProg
                   href={waLink} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="inline-flex items-center justify-center px-4 py-2 bg-[#25D366]/10 text-[#25D366] border border-[#25D366]/30 rounded-sm hover:bg-[#25D366] hover:text-white transition-colors text-xs font-bold uppercase tracking-wider w-full sm:w-auto"
+                  className="inline-flex items-center justify-center px-4 py-2 bg-[#25D366]/10 text-[#25D366] border border-[#25D366]/30 rounded-sm hover:bg-[#25D366] hover:text-[#050505] transition-colors text-xs font-bold uppercase tracking-wider w-full sm:w-auto"
                 >
                   <MessageCircle className="w-4 h-4 mr-2" />
                   {bookText}

@@ -199,7 +199,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
             <p className="mt-2 max-w-[48ch] text-sm leading-relaxed text-[#C2B9AA]">{quickAnswer}</p>
           </div>
 
-          {/* Clickable Contacts: Catalogo Schede Evento, WhatsApp, Tel, Email */}
+          {/* Clickable Contacts: Catalogo Schede Evento, WhatsApp, Email */}
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <a
               href={getConciergeBookingUrl(locale, title, `${SITE_URL}${canonicalPath}`)}
@@ -211,19 +211,13 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
             </a>
             <a
               href="#catalogo-eventi"
-              className="inline-flex items-center gap-2 bg-[#EAE3D5] px-5 py-3 text-sm font-bold text-[#050505] transition hover:bg-[#EAE3D5]"
+              className="inline-flex items-center gap-2 bg-[#EAE3D5] px-5 py-3 text-sm font-bold text-[#050505] transition hover:bg-[#F6F1E7]"
             >
               {scarcity.openEventCardCta}
             </a>
             <a
-              href="tel:+393519127047"
-              className="inline-flex items-center gap-2 border border-[#EAE3D5]/40 bg-[#050505] px-4 py-3 text-sm font-semibold text-[#050505] transition hover:bg-[#EAE3D5] hover:text-[#050505]"
-            >
-              {ui.callNowBtn}
-            </a>
-            <a
               href="mailto:concierge@nightlifemilan.com"
-              className="inline-flex items-center gap-2 border border-[#EAE3D5]/24 bg-[#050505] px-4 py-3 text-sm font-semibold text-[#C2B9AA] transition hover:border-[#EAE3D5] hover:text-[#F6F1E7]"
+              className="inline-flex items-center gap-2 border border-[#EAE3D5]/32 bg-[#0B0A09] px-4 py-3 text-sm font-semibold text-[#F6F1E7] transition hover:border-[#EAE3D5] hover:bg-[#EAE3D5] hover:text-[#050505]"
             >
               {ui.emailBtn}: concierge@nightlifemilan.com
             </a>

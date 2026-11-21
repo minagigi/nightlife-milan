@@ -291,8 +291,21 @@ export default function SeoAuthorityHub({ lang, pageKey, pagePath }: SeoAuthorit
                   <dd className="font-sans tabular-nums text-[13px]">{copy.gmb.coordinatesValue}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#F6F1E7]">{copy.gmb.phoneLabel}</dt>
-                  <dd className="font-sans tabular-nums font-semibold text-[#F6F1E7]"><a href="tel:+393519127047" className="hover:underline">{copy.gmb.phoneValue}</a></dd>
+                  <dt className="font-semibold text-[#F6F1E7]">WhatsApp</dt>
+                  <dd className="font-sans tabular-nums font-semibold text-[#F6F1E7]">
+                    <a
+                      href={getConciergeBookingUrl(
+                        lang,
+                        copy.h2Main,
+                        pagePath || `${localePrefix(lang)}${pageKey && pageKey !== '/' ? pageKey : ''}` || '/'
+                      )}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:underline"
+                    >
+                      {copy.gmb.phoneValue}
+                    </a>
+                  </dd>
                 </div>
                 <div>
                   <dt className="font-semibold text-[#F6F1E7]">{copy.gmb.emailLabel}</dt>

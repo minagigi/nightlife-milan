@@ -18,12 +18,6 @@ export default function FooterWhatsAppContact({ lang }: { lang: string }) {
         WhatsApp: <bdi dir="ltr" className="ml-1.5 tabular-nums">{SITE_CONTACT.whatsapp.number}</bdi>
       </a>
       <a
-        href="tel:+393519127047"
-        className="text-[13px] font-medium text-[#C9C7C2] hover:text-[#FFFFFF] transition-colors tabular-nums"
-      >
-        Tel: <bdi dir="ltr">+39 351 912 7047</bdi>
-      </a>
-      <a
         href="mailto:concierge@nightlifemilan.com"
         className="text-[13px] font-medium text-[#C9C7C2] hover:text-[#FFFFFF] transition-colors"
       >

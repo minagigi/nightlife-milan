@@ -149,7 +149,7 @@ export default function JustMeClientView({ dict, locale }: { dict: Dictionary, l
                       href={getConciergeBookingUrl(locale, `${event.title} (${event.day}) · Just Me Milano`, pathname)} 
                       target="_blank" 
                       rel="noopener noreferrer" 
-                      className="inline-flex items-center justify-center px-4 py-2 bg-[#25D366]/10 text-[#25D366] border border-[#25D366]/30 rounded-sm hover:bg-[#25D366] hover:text-white transition-colors text-xs font-bold uppercase tracking-wider w-full md:w-auto"
+                      className="inline-flex items-center justify-center px-4 py-2 bg-[#25D366]/10 text-[#25D366] border border-[#25D366]/30 rounded-sm hover:bg-[#25D366] hover:text-[#050505] transition-colors text-xs font-bold uppercase tracking-wider w-full md:w-auto"
                     >
                       <MessageCircle className="w-4 h-4 mr-2" />
                       {dict.labels.bookWa}
@@ -182,7 +182,7 @@ export default function JustMeClientView({ dict, locale }: { dict: Dictionary, l
                   href={waLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center px-4 py-4 bg-[#25D366] text-white font-bold uppercase tracking-wider text-sm hover:bg-[#20bd5a] transition-colors rounded-sm shadow-lg shadow-[#25D366]/20"
+                  className="w-full flex items-center justify-center px-4 py-4 bg-[#25D366] text-[#050505] font-bold uppercase tracking-wider text-sm hover:bg-[#20bd5a] transition-colors rounded-sm shadow-lg shadow-[#25D366]/20"
                 >
                   <MessageCircle className="w-5 h-5 mr-2" />
                   {dict.labels.bookWa}
