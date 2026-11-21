@@ -74,7 +74,7 @@ export const CLUBBING_PILLAR_WEST_2B: Record<'no' | 'is' | 'fi' | 'et' | 'ga', C
       tierRows: [
         ['Il Gattopardo Milano', 'Kirke · House & Commercial', 'Aperitivo 20–25 EUR · Entré 20+ EUR · Bord 300–1.200 EUR', '600 EUR / pers. min. spend (100% forskudd; Kupler a.F.)'],
         ['Voya Rooftop Milano', 'Skyline House & Vocal', 'Bord 300 EUR Gulv / 500+ EUR Privé', '300 EUR Alt Inkludert 6 retter + DJ (20:00–05:00)'],
-        ['55 Milano', 'Revival 80/90 & Vocal House', 'Bord 200 EUR Gulv / 350+ EUR Privé', 'Ref. 50 EUR klubb / 70–75 EUR buffé / 130–140 EUR galla (TBA)'],
+        ['55 Milano', 'Revival 80/90 & Vocal House', 'Bord 200 EUR Gulv / 350+ EUR Privé', '30/40/50 EUR (00:10) klubb / 100 EUR buffé / 160 EUR galla'],
         ['REPVBLIC Milano', 'Internasjonale Hits & Hip-Hop', 'Bord 300–500 EUR / 600+ EUR Privé', 'Early Bird 45 EUR · Gulv 600 EUR (6 pax) · Privé 1.200 EUR (10 pax)'],
       ],
       ctas: {
@@ -136,7 +136,7 @@ export const CLUBBING_PILLAR_WEST_2B: Record<'no' | 'is' | 'fi' | 'et' | 'ga', C
         'Ankom til avtalt tid med gyldig fysisk pass',
         'Bruk VIP-køen med deres Nightlife Milan-reservasjon',
       ],
-      nyeHubCta: 'Se Alle 125 Nyttårsevents 2027',
+      nyeHubCta: 'Se Alle 126 Nyttårsevents 2027',
       termeGuideCta: 'Les Termiske Spa Guide Lombardia 2027',
       whatsappCta: 'Kontakt Partner Concierge (+39 351 912 7047)',
     },
@@ -168,7 +168,7 @@ export const CLUBBING_PILLAR_WEST_2B: Record<'no' | 'is' | 'fi' | 'et' | 'ga', C
       magazziniRates: 'NYE Bekreftet: Buffé 80 EUR · We Love 2000 30 EUR · Bord 300/600/900 EUR',
       theClubRates: 'NYE Bekreftet: Damer 50 EUR / Herrer 70 EUR · Buffé 90 EUR · Privé 150 EUR · VIP 900–2.000 EUR',
       ariaRates: 'Uke 250–500+ EUR · Ref. NYE: Klubb 45–55 EUR, Buffé 65 EUR, Gala 130 EUR, VIP 300–1.000 EUR',
-      fiftyFiveRates: 'Uke 200–350+ EUR · Ref. NYE: Klubb 50 EUR, Buffé 70–75 EUR, Gala 130–140 EUR, VIP 350–1.200 EUR',
+      fiftyFiveRates: 'Uke 200–350+ EUR · NYE La Dolce Vita: Klubb 30/40/50 EUR (00:10), Buffé 100 EUR, Gala 160 EUR, VIP 350 EUR · Keep 200 EUR',
       hollywoodRates: 'Ref. NYE: Klubb 40+ EUR, Buffé 60+ EUR, Gala 130+ EUR, Bord 300–1.200 EUR',
       elevenRates: 'Ref. NYE: Klubb 40+ EUR, Buffé 65+ EUR, Privé 350–1.000 EUR',
       tocquevilleRates: 'Ref. NYE: Klubb 35–45 EUR, Buffé 60 EUR, Middag 110–120 EUR, VIP 600–2.000 EUR',
@@ -263,7 +263,7 @@ export const CLUBBING_PILLAR_WEST_2B: Record<'no' | 'is' | 'fi' | 'et' | 'ga', C
       tierRows: [
         ['Il Gattopardo Milano', 'Kirkja · House & Commercial', 'Aperitivo 20–25 EUR · Innganga 20+ EUR · Borð 300–1.200 EUR', '600 EUR / mann min. spend (100% fyrirfram; Hvelfingar a.B.)'],
         ['Voya Rooftop Milano', 'Skyline House & Vocal', 'Borð 300 EUR Gólf / 500+ EUR Privé', '300 EUR Allt Innifalið 6 réttir + DJ (20:00–05:00)'],
-        ['55 Milano', 'Revival 80/90 & Vocal House', 'Borð 200 EUR Gólf / 350+ EUR Privé', 'Viðm. 50 EUR klúbbur / 70–75 EUR hlaðborð / 130–140 EUR gala'],
+        ['55 Milano', 'Revival 80/90 & Vocal House', 'Borð 200 EUR Gólf / 350+ EUR Privé', '30/40/50 EUR (00:10) klúbbur / 100 EUR hlaðborð / 160 EUR gala'],
         ['REPVBLIC Milano', 'Alþjóðlegir Smellir & Hip-Hop', 'Borð 300–500 EUR / 600+ EUR Privé', 'Early Bird 45 EUR · Gólf 600 EUR (6 pax) · Privé 1.200 EUR'],
       ],
       ctas: {
@@ -325,7 +325,7 @@ export const CLUBBING_PILLAR_WEST_2B: Record<'no' | 'is' | 'fi' | 'et' | 'ga', C
         'Mættu á umsömdum tíma með upprunalegt vegabréf',
         'Farðu í gegnum VIP röðina undir Nightlife Milan bókuninni þinni',
       ],
-      nyeHubCta: 'Sjá Alla 125 Áramótaviðburði 2027',
+      nyeHubCta: 'Sjá Alla 126 Áramótaviðburði 2027',
       termeGuideCta: 'Lesa Heilsulindir Lombardíu 2027',
       whatsappCta: 'Hafa Samband við Concierge (+39 351 912 7047)',
     },
@@ -357,7 +357,7 @@ export const CLUBBING_PILLAR_WEST_2B: Record<'no' | 'is' | 'fi' | 'et' | 'ga', C
       magazziniRates: 'NYE Staðfest: Hlaðborð 80 EUR · We Love 2000 30 EUR · Borð 300/600/900 EUR',
       theClubRates: 'NYE Staðfest: Konur 50 EUR / Karlar 70 EUR · Hlaðborð 90 EUR · Privé 150 EUR · VIP 900–2.000 EUR',
       ariaRates: 'Vika 250–500+ EUR · Viðm. NYE: Klúbbur 45–55 EUR, Hlaðborð 65 EUR, Gala 130 EUR, VIP 300–1.000 EUR',
-      fiftyFiveRates: 'Vika 200–350+ EUR · Viðm. NYE: Klúbbur 50 EUR, Hlaðborð 70–75 EUR, Gala 130–140 EUR, VIP 350–1.200 EUR',
+      fiftyFiveRates: 'Vika 200–350+ EUR · NYE La Dolce Vita: Klúbbur 30/40/50 EUR (00:10), Hlaðborð 100 EUR, Gala 160 EUR, VIP 350 EUR · Keep 200 EUR',
       hollywoodRates: 'Viðm. NYE: Klúbbur 40+ EUR, Hlaðborð 60+ EUR, Gala 130+ EUR, Borð 300–1.200 EUR',
       elevenRates: 'Viðm. NYE: Klúbbur 40+ EUR, Hlaðborð 65+ EUR, Privé 350–1.000 EUR',
       tocquevilleRates: 'Viðm. NYE: Klúbbur 35–45 EUR, Hlaðborð 60 EUR, Kvöldverður 110–120 EUR, VIP 600–2.000 EUR',
@@ -416,7 +416,7 @@ export const CLUBBING_PILLAR_WEST_2B: Record<'no' | 'is' | 'fi' | 'et' | 'ga', C
     ],
     overview: {
       tableLead: 'Alla on täydellinen hakemisto kaikista 18 aktiivisesta partneriklubista Milanossa ja Gardajärvellä kaupunginosan, tarkan katuosoitteen, musiikkityylin, pukukoodin ja virallisten hintojen kera.',
-      venueSpecsSummary: 'Erotamme selkeästi toisistaan jo vahvistetut vuoden 2027 uudenvuoden hinnastot (JustMe Milano, Pineta, Voya, REPVBLIC, Bischeri, Gate, Pelledoca, Bobino, Magazzini Generali, The Club, Il Gattopardo ja JustMe Garda Lake), vahvistusta odottavat edellisen kauden viitehinnat (Aria, 55 Milano, Hollywood, 11 Clubroom, Tocqueville 13) sekä pyynnöstä selvitettävät TBA-kohteet (TOM.).',
+      venueSpecsSummary: 'Erotamme selkeästi toisistaan jo vahvistetut vuoden 2027 uudenvuoden hinnastot (JustMe Milano, Pineta, Voya, REPVBLIC, Bischeri, Gate, Pelledoca, Bobino, Magazzini Generali, The Club, Il Gattopardo, 55 Milano ja JustMe Garda Lake), vahvistusta odottavat edellisen kauden viitehinnat (Aria, Hollywood, 11 Clubroom, Tocqueville 13) sekä pyynnöstä selvitettävät TBA-kohteet (TOM.).',
       highlights: [
         'Kattaa kaikki 18 virallista partneripaikkaa Parco Sempionesta ja Corso Comosta San Siroon, Navigliin ja Lonato del Gardaan',
         'Viikonloppujen VIP-pöydät toimivat 100 % minimikulutusperiaatteella joka käytetään kokonaisuudessaan klubin juomavalikoimaan',
@@ -448,11 +448,11 @@ export const CLUBBING_PILLAR_WEST_2B: Record<'no' | 'is' | 'fi' | 'et' | 'ga', C
     gattopardoCitylife: {
       gattopardoDetail: 'Uusgoottilaisen entisen kirkon sisällä osoitteessa Via Piero della Francesca 47 (Sempione) Il Gattopardo Milano yhdistää freskojen ja valtavan kattokruunun house- ja hittimusiikkiin. Viikoittainen aperitivo maksaa 20–25 EUR, klubisisäänpääsy alkaa 20 EUR:sta, pääsalin pöydät ovat 300–500 EUR ja parven Privé 600–1.200 EUR kauluspaitapakolla. Uudenvuodenaattona 2027 (22:30–05:00) sisään pääsee vain pöytävarauksella hintaan 600 EUR per henkilö minimikulutuksella (100 % ennakkomaksu kattaa sisäänpääsyn ja koko juomabudjetin; kupolipöydät kysyttäessä).',
       voyaDetail: 'CityLifessa 20. kerroksessa kohoava Voya Rooftop Milano (Viale Achille Papa 30) on kaupungin kärkikohde panoraamanäköaloilla. Viikoittain pöydät alkavat 300 EUR:sta (500+ EUR Privé), ja joulukuun 31. päivänä käytössä on yksi selkeä 300 EUR all-inclusive-hinta kuuden ruokalajin illallisella, viinillä ja DJ-setillä klo 20:00–05:00.',
-      fiftyFiveRepvblicDetail: 'Muutaman askelen päässä 55 Milano tarjoaa 1 000 m2 loftin 80/90-luvun musiikille ja Vocal Houselle (viikoittain 200–350+ EUR; aattoviitteet 50 EUR lippu, 70–75 EUR buffetti, 130–140 EUR gaala). Piazza della Repubblica 12:ssa REPVBLIC Milano vahvistaa vuoden 2027 hinnat: Early Bird 45 EUR (kuohuviini + 1 drinkki), Tanssilattiapöytä 600 EUR (6 hlö) ja Privé 1.200 EUR (10 hlö).',
+      fiftyFiveRepvblicDetail: 'Muutaman askelen päässä 55 Milano tarjoaa 1 000 m2 loftin 80/90-luvun musiikille ja Vocal Houselle (viikoittain 200–350+ EUR; vahvistetut La Dolce Vita 2027 hinnat: 30/40/50 EUR (00:10), buffetti 100 EUR, gaala 160 EUR, pöydät 350 EUR). Piazza della Repubblica 12:ssa REPVBLIC Milano vahvistaa vuoden 2027 hinnat: Early Bird 45 EUR (kuohuviini + 1 drinkki), Tanssilattiapöytä 600 EUR (6 hlö) ja Privé 1.200 EUR (10 hlö).',
       tierRows: [
         ['Il Gattopardo Milano', 'Entinen Kirkko · House', 'Aperitivo 20–25 EUR · Lippu 20+ EUR · Pöydät 300–1.200 EUR', '600 EUR / hlö min. spend (100% ennakko; Kupolit kysyttäessä)'],
         ['Voya Rooftop Milano', 'Skyline House & Vocal', 'Pöydät 300 EUR Lattia / 500+ EUR Privé', '300 EUR All-Inclusive 6 ruokalajia + DJ (20:00–05:00)'],
-        ['55 Milano', 'Revival 80/90 & Vocal House', 'Pöydät 200 EUR Lattia / 350+ EUR Privé', 'Viite 50 EUR klubi / 70–75 EUR buffetti / 130–140 EUR gaala'],
+        ['55 Milano', 'Revival 80/90 & Vocal House', 'Pöydät 200 EUR Lattia / 350+ EUR Privé', '30/40/50 EUR (00:10) klubi / 100 EUR buffetti / 160 EUR gaala'],
         ['REPVBLIC Milano', 'Kansainväliset Hitit & Hip-Hop', 'Pöydät 300–500 EUR / 600+ EUR Privé', 'Early Bird 45 EUR · Lattia 600 EUR (6 hlö) · Privé 1.200 EUR'],
       ],
       ctas: {
@@ -514,7 +514,7 @@ export const CLUBBING_PILLAR_WEST_2B: Record<'no' | 'is' | 'fi' | 'et' | 'ga', C
         'Saavu sovitussa aikaikkunassa alkuperäinen passi mukana (illalliset 19:30–21:00; pöydät 23:15–00:30)',
         'Käytä VIP-kaistaa mainiten nimivarauksesi Nightlife Milanin kautta',
       ],
-      nyeHubCta: 'Selaa Kaikkia 125 Uudenvuoden Tapahtumaa 2027',
+      nyeHubCta: 'Selaa Kaikkia 126 Uudenvuoden Tapahtumaa 2027',
       termeGuideCta: 'Lue Lombardian Kylpyläopas 2027',
       whatsappCta: 'Viesti Partner Conciergelle (+39 351 912 7047)',
     },
@@ -546,7 +546,7 @@ export const CLUBBING_PILLAR_WEST_2B: Record<'no' | 'is' | 'fi' | 'et' | 'ga', C
       magazziniRates: 'NYE Vahvistettu: Buffetti 80 EUR · We Love 2000 30 EUR · Pöydät 300/600/900 EUR',
       theClubRates: 'NYE Vahvistettu: Naiset 50 EUR / Miehet 70 EUR · Buffetti 90 EUR · Privé 150 EUR · VIP 900–2.000 EUR',
       ariaRates: 'Viikko 250–500+ EUR · Viite NYE: Klubi 45–55 EUR, Buffetti 65 EUR, Gala 130 EUR, VIP 300–1.000 EUR',
-      fiftyFiveRates: 'Viikko 200–350+ EUR · Viite NYE: Klubi 50 EUR, Buffetti 70–75 EUR, Gala 130–140 EUR, VIP 350–1.200 EUR',
+      fiftyFiveRates: 'Viikko 200–350+ EUR · NYE La Dolce Vita: Klubi 30/40/50 EUR (00:10), Buffetti 100 EUR, Gala 160 EUR, VIP 350 EUR · Keep 200 EUR',
       hollywoodRates: 'Viite NYE: Klubi 40+ EUR, Buffetti 60+ EUR, Gala 130+ EUR, Pöydät 300–1.200 EUR',
       elevenRates: 'Viite NYE: Klubi 40+ EUR, Buffetti 65+ EUR, Privé 350–1.000 EUR',
       tocquevilleRates: 'Viite NYE: Klubi 35–45 EUR, Buffetti 60 EUR, Illallinen 110–120 EUR, VIP 600–2.000 EUR',
@@ -641,7 +641,7 @@ export const CLUBBING_PILLAR_WEST_2B: Record<'no' | 'is' | 'fi' | 'et' | 'ga', C
       tierRows: [
         ['Il Gattopardo Milano', 'Endine Kirik · House', 'Aperitivo 20–25 EUR · Pilet 20+ EUR · Lauad 300–1.200 EUR', '600 EUR / in min. spend (100% ettemaks; Kuplid küsimisel)'],
         ['Voya Rooftop Milano', 'Skyline House & Vocal', 'Lauad 300 EUR Põrand / 500+ EUR Privé', '300 EUR Kõik Hinnas 6 käiku + DJ (20:00–05:00)'],
-        ['55 Milano', 'Revival 80/90 & Vocal House', 'Lauad 200 EUR Põrand / 350+ EUR Privé', 'Ref. 50 EUR klubi / 70–75 EUR buffé / 130–140 EUR gala'],
+        ['55 Milano', 'Revival 80/90 & Vocal House', 'Lauad 200 EUR Põrand / 350+ EUR Privé', '30/40/50 EUR (00:10) klubi / 100 EUR buffé / 160 EUR gala'],
         ['REPVBLIC Milano', 'Rahvusvahelised Hitid & Hip-Hop', 'Lauad 300–500 EUR / 600+ EUR Privé', 'Early Bird 45 EUR · Põrand 600 EUR (6 in) · Privé 1.200 EUR'],
       ],
       ctas: {
@@ -703,7 +703,7 @@ export const CLUBBING_PILLAR_WEST_2B: Record<'no' | 'is' | 'fi' | 'et' | 'ga', C
         'Saabuge õigel ajal originaaldokumendiga',
         'Kasutage VIP-rida nimetades oma Nightlife Milan broneeringu',
       ],
-      nyeHubCta: 'Kõik 125 Aastavahetuse Sündmust 2027',
+      nyeHubCta: 'Kõik 126 Aastavahetuse Sündmust 2027',
       termeGuideCta: 'Loe Lombardia Termaalspaad 2027',
       whatsappCta: 'Kirjuta Partner Conciergele (+39 351 912 7047)',
     },
@@ -735,7 +735,7 @@ export const CLUBBING_PILLAR_WEST_2B: Record<'no' | 'is' | 'fi' | 'et' | 'ga', C
       magazziniRates: 'NYE Kinnitatud: Buffé 80 EUR · We Love 2000 30 EUR · Lauad 300/600/900 EUR',
       theClubRates: 'NYE Kinnitatud: Naised 50 EUR / Mehed 70 EUR · Buffé 90 EUR · Privé 150 EUR · VIP 900–2.000 EUR',
       ariaRates: 'Nädal 250–500+ EUR · Ref. NYE: Klubi 45–55 EUR, Buffé 65 EUR, Gala 130 EUR, VIP 300–1.000 EUR',
-      fiftyFiveRates: 'Nädal 200–350+ EUR · Ref. NYE: Klubi 50 EUR, Buffé 70–75 EUR, Gala 130–140 EUR, VIP 350–1.200 EUR',
+      fiftyFiveRates: 'Nädal 200–350+ EUR · NYE La Dolce Vita: Klubi 30/40/50 EUR (00:10), Buffé 100 EUR, Gala 160 EUR, VIP 350 EUR · Keep 200 EUR',
       hollywoodRates: 'Ref. NYE: Klubi 40+ EUR, Buffé 60+ EUR, Gala 130+ EUR, Lauad 300–1.200 EUR',
       elevenRates: 'Ref. NYE: Klubi 40+ EUR, Buffé 65+ EUR, Privé 350–1.000 EUR',
       tocquevilleRates: 'Ref. NYE: Klubi 35–45 EUR, Buffé 60 EUR, Õhtusöök 110–120 EUR, VIP 600–2.000 EUR',
@@ -830,7 +830,7 @@ export const CLUBBING_PILLAR_WEST_2B: Record<'no' | 'is' | 'fi' | 'et' | 'ga', C
       tierRows: [
         ['Il Gattopardo Milano', 'Eaglais · House & Tráchtála', 'Aperitivo 20–25 EUR · Iontráil 20+ EUR · Boird 300–1.200 EUR', '600 EUR / duine min. spend (100% réamhíoc; Cruinneacháin a.I.)'],
         ['Voya Rooftop Milano', 'Skyline House & Vocal', 'Boird 300 EUR Urlár / 500+ EUR Privé', '300 EUR Uile-Chuimsitheach 6 chúrsa + DJ (20:00–05:00)'],
-        ['55 Milano', 'Revival 80/90 & Vocal House', 'Boird 200 EUR Urlár / 350+ EUR Privé', 'Tag. 50 EUR club / 70–75 EUR buifé / 130–140 EUR gala (TBA)'],
+        ['55 Milano', 'Revival 80/90 & Vocal House', 'Boird 200 EUR Urlár / 350+ EUR Privé', '30/40/50 EUR (00:10) club / 100 EUR buifé / 160 EUR gala'],
         ['REPVBLIC Milano', 'Amhráin Idirnáisiúnta & Hip-Hop', 'Boird 300–500 EUR / 600+ EUR Privé', 'Early Bird 45 EUR · Urlár 600 EUR (6 pax) · Privé 1.200 EUR'],
       ],
       ctas: {
@@ -892,7 +892,7 @@ export const CLUBBING_PILLAR_WEST_2B: Record<'no' | 'is' | 'fi' | 'et' | 'ga', C
         'Tar ag an am comhaontaithe le do phas fisiciúil bunaidh',
         'Bain úsáid as an lána VIP faoi d’ainm ar Nightlife Milan',
       ],
-      nyeHubCta: 'Féach Gach 125 Imeacht Oíche Chinn Bhliana 2027',
+      nyeHubCta: 'Féach Gach 126 Imeacht Oíche Chinn Bhliana 2027',
       termeGuideCta: 'Léigh Treoir Spánna na Lombairde 2027',
       whatsappCta: 'Scríobh chuig Concierge (+39 351 912 7047)',
     },
@@ -924,7 +924,7 @@ export const CLUBBING_PILLAR_WEST_2B: Record<'no' | 'is' | 'fi' | 'et' | 'ga', C
       magazziniRates: 'NYE Deimhnithe: Buifé 80 EUR · We Love 2000 30 EUR · Boird 300/600/900 EUR',
       theClubRates: 'NYE Deimhnithe: Mná 50 EUR / Fir 70 EUR · Buifé 90 EUR · Privé 150 EUR · VIP 900–2.000 EUR',
       ariaRates: 'Seacht. 250–500+ EUR · Tag. NYE: Club 45–55 EUR, Buifé 65 EUR, Gala 130 EUR, VIP 300–1.000 EUR',
-      fiftyFiveRates: 'Seacht. 200–350+ EUR · Tag. NYE: Club 50 EUR, Buifé 70–75 EUR, Gala 130–140 EUR, VIP 350–1.200 EUR',
+      fiftyFiveRates: 'Seacht. 200–350+ EUR · NYE La Dolce Vita: Club 30/40/50 EUR (00:10), Buifé 100 EUR, Gala 160 EUR, VIP 350 EUR · Keep 200 EUR',
       hollywoodRates: 'Tag. NYE: Club 40+ EUR, Buifé 60+ EUR, Gala 130+ EUR, Boird 300–1.200 EUR',
       elevenRates: 'Tag. NYE: Club 40+ EUR, Buifé 65+ EUR, Privé 350–1.000 EUR',
       tocquevilleRates: 'Tag. NYE: Club 35–45 EUR, Buifé 60 EUR, Dinnéar 110–120 EUR, VIP 600–2.000 EUR',

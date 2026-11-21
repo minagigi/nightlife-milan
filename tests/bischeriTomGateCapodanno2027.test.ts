@@ -17,6 +17,8 @@ import {
 import { getCapodannoLocalizedEventContent } from '../lib/capodanno/i18n';
 import { CAPODANNO_EVENT_BASE_SLUGS, capodannoEventPath } from '../lib/capodanno/routes';
 import { getTomNyeContent } from '../lib/capodanno/tom35';
+import { getChurch81NyeContent, getFiftyFiveNyeContent } from '../lib/capodanno/church81And55_35';
+import { getVenueIdByEventSlug } from '../lib/single-pass/catalog';
 import {
   ALL_35_LOCALES,
   resolveLegacyOrExpiredEventRedirect,
@@ -25,12 +27,13 @@ import {
 const REPO_ROOT = path.resolve(__dirname, '..');
 const FORBIDDEN_THIRD_PARTY_RE = /331[\s\-]?478[\s\-]?8258|umberto-falcone|perreoxl\.com|origgigallery|gatemilano\.it/i;
 
-test('Capodanno 2027 catalog expanded cleanly to 125 events (T-032 + WA Audit)', () => {
-  assert.equal(CAPODANNO_EVENT_BASE_SLUGS.length, 125);
-  assert.equal(CAPODANNO_EVENTS.length, 125);
+test('Capodanno 2027 catalog expanded cleanly to 126 events (T-032 + WA Audit + Church 81)', () => {
+  assert.equal(CAPODANNO_EVENT_BASE_SLUGS.length, 126);
+  assert.equal(CAPODANNO_EVENTS.length, 126);
   assert.ok(CAPODANNO_EVENT_BASE_SLUGS.includes('capodanno-bischeri-milano'));
   assert.ok(CAPODANNO_EVENT_BASE_SLUGS.includes('capodanno-tom-the-ordinary-market-milano'));
   assert.ok(CAPODANNO_EVENT_BASE_SLUGS.includes('capodanno-gate-milano'));
+  assert.ok(CAPODANNO_EVENT_BASE_SLUGS.includes('capodanno-church-81-milano'));
 
   for (const rel of [
     'components/OctoberEntry.tsx',
@@ -192,4 +195,49 @@ test('October inventory entry 247797 carries remediated NYE Perreo XL poster wit
   assert.ok(bytes.length <= 300 * 1024);
   const sha = crypto.createHash('sha256').update(bytes).digest('hex');
   assert.equal(entry.image.sha256, sha);
+});
+
+test('capodanno-church-81-milano & capodanno-55-milano (La Dolce Vita 2027) pass 35-locale hygiene, assets & WA-only bounds', () => {
+  const ch = getCapodannoEventBySlug('capodanno-church-81-milano');
+  assert.ok(ch, 'Missing capodanno-church-81-milano');
+  assert.equal(ch.priceFromEur, 90);
+  assert.equal(ch.hours, '20:30 – 04:00');
+  assert.equal(ch.partner, false);
+  assert.match(ch.address, /Via della Chiesa Rossa 81/i);
+  assert.equal(getCapodannoEventForClub('church-81')?.slug, 'capodanno-church-81-milano');
+  assert.equal(getVenueIdByEventSlug('capodanno-church-81-milano'), null);
+
+  const ff = getCapodannoEventBySlug('capodanno-55-milano');
+  assert.ok(ff, 'Missing capodanno-55-milano');
+  assert.equal(ff.priceFromEur, 30);
+  assert.equal(ff.hours, '20:30 – 05:00');
+  assert.equal(ff.partner, true);
+  assert.equal(getVenueIdByEventSlug('capodanno-55-milano'), null);
+
+  for (const rel of [
+    'public/images/events/capodanno-2027-posters/capodanno-church-81-milano.webp',
+    'public/images/events/capodanno-2027-menus/church-81-nye-2027-menu-pesce-90.webp',
+    'public/images/events/capodanno-2027-menus/church-81-nye-2027-menu-carne-90.webp',
+    'public/images/events/capodanno-2027-posters/capodanno-55-milano.webp',
+    'public/images/events/capodanno-2027-menus/55-milano-nye-2027-menu-gala-160.webp',
+    'public/images/events/capodanno-2027-menus/55-milano-nye-2027-menu-buffet-100.webp',
+  ]) {
+    const p = path.join(REPO_ROOT, rel);
+    assert.ok(fs.existsSync(p), `Missing asset ${rel}`);
+    assert.ok(fs.statSync(p).size <= 300 * 1024, `Oversized asset ${rel}`);
+  }
+
+  for (const locale of ALL_35_LOCALES) {
+    const cCh = getChurch81NyeContent(locale);
+    const cFf = getFiftyFiveNyeContent(locale);
+    assert.equal(getCapodannoLocalizedEventContent(ch, locale).title, cCh.title);
+    assert.equal(getCapodannoLocalizedEventContent(ff, locale).title, cFf.title);
+    assert.equal(cCh.tiers.length, 2);
+    assert.equal(cCh.menus?.length, 2);
+    assert.equal(cFf.tiers.length, 5);
+    assert.equal(cFf.menus?.length, 2);
+    const blob = JSON.stringify({ cCh, cFf });
+    assert.doesNotMatch(blob, /!/, `Unexpected exclamation mark in church81And55 (${locale})`);
+    assert.doesNotMatch(blob, /\u2014|335\s*529\s*0025|capodannodimilano|\bstripe\b|70[–-]75|130[–-]140/i, `Forbidden token in church81And55 (${locale})`);
+  }
 });

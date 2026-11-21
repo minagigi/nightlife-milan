@@ -38,7 +38,7 @@ export const CLUBBING_PILLAR_WEST_1: Record<'en' | 'it' | 'es' | 'fr' | 'de' | '
     ],
     overview: {
       tableLead: 'Below is the verified master directory of all 18 official partner clubs active for the 2026/2027 Milan nightlife season and New Year’s Eve calendar, indicating weekly positioning, exact street address, dress standard and confirmed versus pending 2027 NYE rates.',
-      venueSpecsSummary: 'Distinguishing between confirmed 2027 NYE rates (such as JustMe Milano, Pineta, Voya, REPVBLIC, Bischeri, Gate, Pelledoca, Bobino, Magazzini Generali, The Club, Il Gattopardo and JustMe Garda Lake), prior-edition reference benchmarks pending confirmation (Aria, 55 Milano, Hollywood, 11 Clubroom, Tocqueville 13), and TBA upon-request venues (TOM.) ensures guests always know exactly what is locked before committing.',
+      venueSpecsSummary: 'Distinguishing between confirmed 2027 NYE rates (such as JustMe Milano, Pineta, Voya, REPVBLIC, Bischeri, Gate, Pelledoca, Bobino, Magazzini Generali, The Club, Il Gattopardo, 55 Milano and JustMe Garda Lake), prior-edition reference benchmarks pending confirmation (Aria, Hollywood, 11 Clubroom, Tocqueville 13), and TBA upon-request venues (TOM.) ensures guests always know exactly what is locked before committing.',
       highlights: [
         'All 18 partner clubs operate across Parco Sempione, Corso Como, Brera, Repubblica, Navigli, CityLife, San Siro, Via Forlanini and Lonato del Garda',
         'Weekly VIP bottle tables follow the 100% minimum-spend rule redeemable directly on the official bottle list at the club',
@@ -70,11 +70,11 @@ export const CLUBBING_PILLAR_WEST_1: Record<'en' | 'it' | 'es' | 'fr' | 'de' | '
     gattopardoCitylife: {
       gattopardoDetail: 'Housed inside a former neo-Gothic deconsecrated church at Via Piero della Francesca 47 (Sempione), Il Gattopardo Milano pairs stained-glass arches, mezzanine balconies and the central suspended chandelier with house and commercial DJs. On regular weekly nights, aperitivo runs 20–25 EUR, club admission starts from 20 EUR, main-floor tables range 300–500 EUR and upper-balcony Privé tables run 600–1,200 EUR with collared evening attire mandatory. For New Year’s Eve 2027 (22:30–05:00), entry operates strictly by VIP table at 600 EUR per person minimum spend (100% prepayment covering booking, ticket, priority admission and full bottle credit off the menu), with Dome and Center Altar positions available on request.',
       voyaDetail: 'Rising to the 20th floor at Viale Achille Papa 30 (Portello / CityLife, Metro M5), Voya Rooftop Milano leads Milan’s panoramic sky-club category. Weekly tables start around 300 EUR (500+ EUR Privé), and for December 31 (20:00–05:00) the venue maintains a single official all-inclusive rate of 300 EUR per person covering a 6-course gala menu, after-midnight bites, wine pairing (1 bottle per 4 guests), toast and skyline DJ set.',
-      fiftyFiveRepvblicDetail: 'Steps from Il Gattopardo at Via Piero della Francesca 55, 55 Milano spans a 1,000-square-meter historic tram-depot loft and winter terrace popular for graduations, 80s/90s revival and Vocal House (weekly tables 200–350+ EUR; NYE prior benchmarks 50 EUR club, 70–75 EUR buffet, 130–140 EUR dinner, 350–1,200 EUR VIP). Meanwhile in Piazza della Repubblica 12, REPVBLIC Milano hosts an international Fashion Week crowd with NYE 2027 confirmed rates (23:00–05:00): Early Bird 45 EUR (flûte + 1 drink), Dancefloor Table 600 EUR (6 guests) and Privé Table 1,200 EUR (10 guests).',
+      fiftyFiveRepvblicDetail: 'Steps from Il Gattopardo at Via Piero della Francesca 55, 55 Milano spans a 1,000-square-meter historic tram-depot loft and winter terrace popular for graduations, 80s/90s revival and Vocal House (weekly tables 200–350+ EUR; confirmed NYE 2027 La Dolce Vita rates: 30/40/50 EUR (00:10), 100 EUR laid-table buffet, 160 EUR seated gala, 350 EUR tables, 200 EUR keep-table). Meanwhile in Piazza della Repubblica 12, REPVBLIC Milano hosts an international Fashion Week crowd with NYE 2027 confirmed rates (23:00–05:00): Early Bird 45 EUR (flûte + 1 drink), Dancefloor Table 600 EUR (6 guests) and Privé Table 1,200 EUR (10 guests).',
       tierRows: [
         ['Il Gattopardo Milano', 'Church House & Commercial', 'Aperitivo 20–25 EUR · Entry from 20 EUR · Tables 300–1,200 EUR', '600 EUR / person min. spend (100% prepay; Domes on request)'],
         ['Voya Rooftop Milano', 'Skyline House & Vocal', 'Tables 300 EUR Pista / 500+ EUR Privé', '300 EUR all-inclusive 6-course NYE dinner + DJ (20:00–05:00)'],
-        ['55 Milano', 'Revival 80/90 & Vocal House', 'Tables 200 EUR Pista / 350+ EUR Privé', 'Ref. 50 EUR entry / 70–75 EUR buffet / 130–140 EUR gala (TBA)'],
+        ['55 Milano', 'Revival 80/90 & Vocal House', 'Tables 200 EUR Pista / 350+ EUR Privé', '30/40/50 EUR (00:10) entry / 100 EUR buffet / 160 EUR gala'],
         ['REPVBLIC Milano', 'International Hits & Hip-Hop', 'Tables 300–500 EUR Pista / 600+ EUR Privé', 'Early Bird 45 EUR · Dancefloor 600 EUR (6 pax) · Privé 1,200 EUR (10 pax)'],
       ],
       ctas: {
@@ -136,7 +136,7 @@ export const CLUBBING_PILLAR_WEST_1: Record<'en' | 'it' | 'es' | 'fr' | 'de' | '
         'Arrive inside your reserved slot (19:30–21:00 for dinner shows; 23:15–00:30 for club tables) with original IDs',
         'Use the dedicated VIP host lane at the venue barrier and quote your registered Nightlife Milan reservation',
       ],
-      nyeHubCta: 'Open Full Milan NYE 2027 Hub (125 Events)',
+      nyeHubCta: 'Open Full Milan NYE 2027 Hub (126 Events)',
       termeGuideCta: 'Read Lombardy Thermal Spas NYE 2027 Guide',
       whatsappCta: 'Message Partner Concierge (+39 351 912 7047)',
     },
@@ -168,7 +168,7 @@ export const CLUBBING_PILLAR_WEST_1: Record<'en' | 'it' | 'es' | 'fr' | 'de' | '
       magazziniRates: 'NYE Confirmed: Buffet 80 EUR · We Love 2000 30 EUR · Tables 300/600/900 EUR',
       theClubRates: 'NYE Confirmed: Entry 50 EUR F / 70 EUR M · Buffet 90 EUR · Privé 150 EUR · VIP 900–2,000 EUR',
       ariaRates: 'Weekly 250–500+ EUR · NYE Ref: Club 45–55 EUR, Buffet 65 EUR, Gala 130 EUR, VIP 300–1,000 EUR',
-      fiftyFiveRates: 'Weekly 200–350+ EUR · NYE Ref: Club 50 EUR, Buffet 70–75 EUR, Gala 130–140 EUR, VIP 350–1,200 EUR',
+      fiftyFiveRates: 'Weekly 200–350+ EUR · NYE Ref: Club 30/40/50 EUR (00:10), Buffet 100 EUR, Gala 160 EUR, VIP 350 EUR · Keep 200 EUR',
       hollywoodRates: 'NYE Ref: Club 40+ EUR, Buffet 60+ EUR, Gala 130+ EUR, Tables 300–1,200 EUR',
       elevenRates: 'NYE Ref: Club 40+ EUR, Buffet 65+ EUR, Privé Tables 350–1,000 EUR',
       tocquevilleRates: 'NYE Ref: Club 35–45 EUR, Buffet 60 EUR, Dinner 110–120 EUR, VIP 600–2,000 EUR',
@@ -227,7 +227,7 @@ export const CLUBBING_PILLAR_WEST_1: Record<'en' | 'it' | 'es' | 'fr' | 'de' | '
     ],
     overview: {
       tableLead: 'Qui sotto trovi la panoramica completa di tutti i 18 locali partner tra Milano e Garda attivi nella stagione 2026/2027, con quartiere, indirizzo preciso, genere musicale, dress code richiesto alla porta e fasce di prezzo settimanali o di Capodanno.',
-      venueSpecsSummary: 'Distinguiamo in modo trasparente le tariffe già ufficialmente confermate per il Capodanno 2027 (JustMe Milano, Pineta, Voya, REPVBLIC, Bischeri, Gate, Pelledoca, Bobino, Magazzini Generali, The Club, Il Gattopardo e JustMe Garda Lake), i riferimenti di passata edizione in attesa di ratifica (Aria, 55 Milano, Hollywood, 11 Clubroom, Tocqueville 13) e gli indirizzi TBA su richiesta (TOM.), senza mai inventare cifre o pacchetti inesistenti.',
+      venueSpecsSummary: 'Distinguiamo in modo trasparente le tariffe già ufficialmente confermate per il Capodanno 2027 (JustMe Milano, Pineta, Voya, REPVBLIC, Bischeri, Gate, Pelledoca, Bobino, Magazzini Generali, The Club, Il Gattopardo, 55 Milano e JustMe Garda Lake), i riferimenti di passata edizione in attesa di ratifica (Aria, Hollywood, 11 Clubroom, Tocqueville 13) e gli indirizzi TBA su richiesta (TOM.), senza mai inventare cifre o pacchetti inesistenti.',
       highlights: [
         'Copertura totale delle 18 venue partner distribuite tra Parco Sempione, Corso Como, Brera, Repubblica, Navigli, CityLife, San Siro, Via Forlanini e Lonato del Garda',
         'Formula Minimum Spending al 100% sui tavoli VIP settimanali: l’intero importo si converte in bottiglie dal listino ufficiale del locale',
@@ -259,11 +259,11 @@ export const CLUBBING_PILLAR_WEST_1: Record<'en' | 'it' | 'es' | 'fr' | 'de' | '
     gattopardoCitylife: {
       gattopardoDetail: 'All’interno dell’iconica ex chiesa sconsacrata neogotica in Via Piero della Francesca 47 (Sempione), Il Gattopardo Milano incornicia con volte affrescate e il celebre lampadario centrale un’esperienza musicale House e Commerciale. Nelle serate settimanali l’aperitivo costa 20–25 EUR, l’ingresso serata parte da 20 EUR, i tavoli in pista vanno da 300 a 500 EUR e i Privé in balconata da 600 a 1.200 EUR con camicia obbligatoria. Per la notte di Capodanno 2027 (22:30–05:00) l’accesso avviene esclusivamente con tavolo a 600 EUR a persona di minimum spending (prepagamento 100% che include prenotazione, biglietto, ingresso prioritario e l’intero budget spendibile sul menu bottiglie), mentre Tavoli nelle Cupole e Tavolo Centrale restano su richiesta.',
       voyaDetail: 'Al 20° piano di Viale Achille Papa 30 (Portello / CityLife, Metro M5), Voya Rooftop Milano domina lo skyline cittadino. Durante la settimana i tavoli partono da 300 EUR in pista e 500+ EUR in Privé, mentre il 31 dicembre (20:00–05:00) adotta un’unica formula ufficiale tutto compreso a 300 EUR a persona con menu di 6 portate, dolce e cotechino dopo la mezzanotte, vino (1 bottiglia ogni 4 ospiti), brindisi e DJ set panoramico.',
-      fiftyFiveRepvblicDetail: 'A pochi metri da Il Gattopardo in Via Piero della Francesca 55, 55 Milano mette a disposizione un loft di 1.000 mq e terrazza per feste di laurea, Revival anni 80/90 e Vocal House (tavoli settimanali 200–350+ EUR; riferimenti Capodanno 50 EUR dopocena, 70–75 EUR buffet, 130–140 EUR cenone, 350–1.200 EUR VIP). In Piazza della Repubblica 12, REPVBLIC Milano accoglie il pubblico internazionale Fashion & Business con tariffe 2027 confermate (23:00–05:00): Early Bird 45 EUR (flûte + 1 drink), Tavolo Dancefloor 600 EUR (6 pax) e Tavolo Privé 1.200 EUR (10 pax).',
+      fiftyFiveRepvblicDetail: 'A pochi metri da Il Gattopardo in Via Piero della Francesca 55, 55 Milano mette a disposizione un loft di 1.000 mq e terrazza per feste di laurea, Revival anni 80/90 e Vocal House (tavoli settimanali 200–350+ EUR; listino ufficiale La Dolce Vita 2027 confermato: 30/40/50 EUR (00:10), Buffet seduta apparecchiata 100 EUR, Gala Servita 160 EUR, Tavoli 350 EUR, Mantenimento 200 EUR). In Piazza della Repubblica 12, REPVBLIC Milano accoglie il pubblico internazionale Fashion & Business con tariffe 2027 confermate (23:00–05:00): Early Bird 45 EUR (flûte + 1 drink), Tavolo Dancefloor 600 EUR (6 pax) e Tavolo Privé 1.200 EUR (10 pax).',
       tierRows: [
         ['Il Gattopardo Milano', 'House & Commerciale (Ex Chiesa)', 'Aperitivo 20–25 EUR · Entrata da 20 EUR · Tavoli 300–1.200 EUR', '600 EUR / persona minimum spend (100% prepagato; Cupole su richiesta)'],
         ['Voya Rooftop Milano', 'Skyline House & Vocal', 'Tavoli 300 EUR Pista / 500+ EUR Privé', '300 EUR All-Inclusive 6 portate + vino + DJ (20:00–05:00)'],
-        ['55 Milano', 'Revival 80/90 & Vocal House', 'Tavoli 200 EUR Pista / 350+ EUR Privé', 'Rif. 50 EUR party / 70–75 EUR buffet / 130–140 EUR cenone (in attesa)'],
+        ['55 Milano', 'Revival 80/90 & Vocal House', 'Tavoli 200 EUR Pista / 350+ EUR Privé', '30/40/50 EUR (00:10) party / 100 EUR buffet / 160 EUR cenone (in attesa)'],
         ['REPVBLIC Milano', 'Hit Internazionali & Hip-Hop', 'Tavoli 300–500 EUR Pista / 600+ EUR Privé', 'Early Bird 45 EUR · Dancefloor 600 EUR (6 pax) · Privé 1.200 EUR (10 pax)'],
       ],
       ctas: {
@@ -325,7 +325,7 @@ export const CLUBBING_PILLAR_WEST_1: Record<'en' | 'it' | 'es' | 'fr' | 'de' | '
         'Rispetta la fascia oraria concordata (19:30–21:00 per cenoni; 23:15–00:30 per i tavoli dopocena) con documenti fisici',
         'Presentati alla corsia prioritaria VIP segnalando la prenotazione nominativa Nightlife Milan',
       ],
-      nyeHubCta: 'Vedi Tutti i 125 Eventi Capodanno Milano 2027',
+      nyeHubCta: 'Vedi Tutti i 126 Eventi Capodanno Milano 2027',
       termeGuideCta: 'Leggi Guida Terme Capodanno Lombardia 2027',
       whatsappCta: 'Scrivi al Concierge Partner (+39 351 912 7047)',
     },
@@ -357,7 +357,7 @@ export const CLUBBING_PILLAR_WEST_1: Record<'en' | 'it' | 'es' | 'fr' | 'de' | '
       magazziniRates: 'NYE Confermato: Buffet 80 EUR · We Love 2000 30 EUR · Tavoli 300/600/900 EUR',
       theClubRates: 'NYE Confermato: Donna 50 EUR / Uomo 70 EUR · Buffet 90 EUR · Privé 150 EUR · VIP 900–2.000 EUR',
       ariaRates: 'Sett. 250–500+ EUR · Rif. NYE: Club 45–55 EUR, Buffet 65 EUR, Gala 130 EUR, VIP 300–1.000 EUR',
-      fiftyFiveRates: 'Sett. 200–350+ EUR · Rif. NYE: Club 50 EUR, Buffet 70–75 EUR, Gala 130–140 EUR, VIP 350–1.200 EUR',
+      fiftyFiveRates: 'Sett. 200–350+ EUR · NYE La Dolce Vita: Club 30/40/50 EUR (00:10), Buffet 100 EUR, Gala 160 EUR, VIP 350 EUR · Keep 200 EUR',
       hollywoodRates: 'Rif. NYE: Club 40+ EUR, Buffet 60+ EUR, Gala 130+ EUR, Tavoli 300–1.200 EUR',
       elevenRates: 'Rif. NYE: Club 40+ EUR, Buffet 65+ EUR, Tavoli Privé 350–1.000 EUR',
       tocquevilleRates: 'Rif. NYE: Club 35–45 EUR, Buffet 60 EUR, Cena 110–120 EUR, VIP 600–2.000 EUR',
@@ -452,7 +452,7 @@ export const CLUBBING_PILLAR_WEST_1: Record<'en' | 'it' | 'es' | 'fr' | 'de' | '
       tierRows: [
         ['Il Gattopardo Milano', 'House y Comercial (Iglesia)', 'Aperitivo 20–25 EUR · Entrada desde 20 EUR · Mesas 300–1.200 EUR', '600 EUR / persona min. spend (100% prepago; Cúpulas bajo petición)'],
         ['Voya Rooftop Milano', 'Skyline House y Vocal', 'Mesas 300 EUR Pista / 500+ EUR Privé', '300 EUR Todo Incluido 6 platos + DJ (20:00–05:00)'],
-        ['55 Milano', 'Revival 80/90 y Vocal House', 'Mesas 200 EUR Pista / 350+ EUR Privé', 'Ref. 50 EUR club / 70–75 EUR buffet / 130–140 EUR cena (TBA)'],
+        ['55 Milano', 'Revival 80/90 y Vocal House', 'Mesas 200 EUR Pista / 350+ EUR Privé', '30/40/50 EUR (00:10) club / 100 EUR buffet / 160 EUR cena'],
         ['REPVBLIC Milano', 'Hits Internacionales y Hip-Hop', 'Mesas 300–500 EUR / 600+ EUR Privé', 'Early Bird 45 EUR · Pista 600 EUR (6 pax) · Privé 1.200 EUR (10 pax)'],
       ],
       ctas: {
@@ -514,7 +514,7 @@ export const CLUBBING_PILLAR_WEST_1: Record<'en' | 'it' | 'es' | 'fr' | 'de' | '
         'Acude en el horario reservado con tu documento de identidad físico original',
         'Accede por la fila VIP indicando tu reserva nominal con Nightlife Milan',
       ],
-      nyeHubCta: 'Ver Todos los 125 Eventos Nochevieja 2027',
+      nyeHubCta: 'Ver Todos los 126 Eventos Nochevieja 2027',
       termeGuideCta: 'Leer Guía Termas Lombardía 2027',
       whatsappCta: 'Contactar Concierge Partner (+39 351 912 7047)',
     },
@@ -546,7 +546,7 @@ export const CLUBBING_PILLAR_WEST_1: Record<'en' | 'it' | 'es' | 'fr' | 'de' | '
       magazziniRates: 'NYE Confirmado: Buffet 80 EUR · We Love 2000 30 EUR · Mesas 300/600/900 EUR',
       theClubRates: 'NYE Confirmado: Mujer 50 EUR / Hombre 70 EUR · Buffet 90 EUR · Privé 150 EUR · VIP 900–2.000 EUR',
       ariaRates: 'Sem. 250–500+ EUR · Ref. NYE: Club 45–55 EUR, Buffet 65 EUR, Gala 130 EUR, VIP 300–1.000 EUR',
-      fiftyFiveRates: 'Sem. 200–350+ EUR · Ref. NYE: Club 50 EUR, Buffet 70–75 EUR, Gala 130–140 EUR, VIP 350–1.200 EUR',
+      fiftyFiveRates: 'Sem. 200–350+ EUR · NYE La Dolce Vita: Club 30/40/50 EUR (00:10), Buffet 100 EUR, Gala 160 EUR, VIP 350 EUR · Keep 200 EUR',
       hollywoodRates: 'Ref. NYE: Club 40+ EUR, Buffet 60+ EUR, Gala 130+ EUR, Mesas 300–1.200 EUR',
       elevenRates: 'Ref. NYE: Club 40+ EUR, Buffet 65+ EUR, Privé 350–1.000 EUR',
       tocquevilleRates: 'Ref. NYE: Club 35–45 EUR, Buffet 60 EUR, Cena 110–120 EUR, VIP 600–2.000 EUR',
@@ -641,7 +641,7 @@ export const CLUBBING_PILLAR_WEST_1: Record<'en' | 'it' | 'es' | 'fr' | 'de' | '
       tierRows: [
         ['Il Gattopardo Milano', 'House & Commercial (Église)', 'Apéritif 20–25 EUR · Entrée dès 20 EUR · Tables 300–1.200 EUR', '600 EUR / pers. min. spend (100% prépayé ; Coupoles sur demande)'],
         ['Voya Rooftop Milano', 'Skyline House & Vocal', 'Tables 300 EUR Piste / 500+ EUR Privé', '300 EUR Tout Compris 6 plats + DJ (20h00–05h00)'],
-        ['55 Milano', 'Revival 80/90 & Vocal House', 'Tables 200 EUR Piste / 350+ EUR Privé', 'Réf. 50 EUR club / 70–75 EUR buffet / 130–140 EUR dîner (TBA)'],
+        ['55 Milano', 'Revival 80/90 & Vocal House', 'Tables 200 EUR Piste / 350+ EUR Privé', '30/40/50 EUR (00:10) club / 100 EUR buffet / 160 EUR dîner'],
         ['REPVBLIC Milano', 'Hits Internationaux & Hip-Hop', 'Tables 300–500 EUR / 600+ EUR Privé', 'Early Bird 45 EUR · Piste 600 EUR (6 pax) · Privé 1.200 EUR (10 pax)'],
       ],
       ctas: {
@@ -703,7 +703,7 @@ export const CLUBBING_PILLAR_WEST_1: Record<'en' | 'it' | 'es' | 'fr' | 'de' | '
         'Présentez-vous à l’horaire prévu muni de votre pièce d’identité originale',
         'Passez par la file VIP nominative Nightlife Milan',
       ],
-      nyeHubCta: 'Voir les 125 Événements Nouvel An 2027',
+      nyeHubCta: 'Voir les 126 Événements Nouvel An 2027',
       termeGuideCta: 'Lire le Guide Thermes Lombardie 2027',
       whatsappCta: 'Écrire au Concierge WhatsApp (+39 351 912 7047)',
     },
@@ -735,7 +735,7 @@ export const CLUBBING_PILLAR_WEST_1: Record<'en' | 'it' | 'es' | 'fr' | 'de' | '
       magazziniRates: 'NYE Confirmé : Buffet 80 EUR · We Love 2000 30 EUR · Tables 300/600/900 EUR',
       theClubRates: 'NYE Confirmé : Femme 50 EUR / Homme 70 EUR · Buffet 90 EUR · Privé 150 EUR · VIP 900–2.000 EUR',
       ariaRates: 'Hebdo 250–500+ EUR · Réf. NYE : Club 45–55 EUR, Buffet 65 EUR, Gala 130 EUR, VIP 300–1.000 EUR',
-      fiftyFiveRates: 'Hebdo 200–350+ EUR · Réf. NYE : Club 50 EUR, Buffet 70–75 EUR, Gala 130–140 EUR, VIP 350–1.200 EUR',
+      fiftyFiveRates: 'Hebdo 200–350+ EUR · NYE La Dolce Vita: Club 30/40/50 EUR (00:10), Buffet 100 EUR, Gala 160 EUR, VIP 350 EUR · Keep 200 EUR',
       hollywoodRates: 'Réf. NYE : Club 40+ EUR, Buffet 60+ EUR, Gala 130+ EUR, Tables 300–1.200 EUR',
       elevenRates: 'Réf. NYE : Club 40+ EUR, Buffet 65+ EUR, Privé 350–1.000 EUR',
       tocquevilleRates: 'Réf. NYE : Club 35–45 EUR, Buffet 60 EUR, Dîner 110–120 EUR, VIP 600–2.000 EUR',
@@ -830,7 +830,7 @@ export const CLUBBING_PILLAR_WEST_1: Record<'en' | 'it' | 'es' | 'fr' | 'de' | '
       tierRows: [
         ['Il Gattopardo Milano', 'Church House & Commercial', 'Aperitivo 20–25 EUR · Eintritt ab 20 EUR · Tische 300–1.200 EUR', '600 EUR / Pers. Mindestverzehr (100% Vorauszahlung; Kuppeln a.A.)'],
         ['Voya Rooftop Milano', 'Skyline House & Vocal', 'Tische 300 EUR Piste / 500+ EUR Privé', '300 EUR All-Inclusive 6-Gänge-Dinner + DJ (20:00–05:00)'],
-        ['55 Milano', 'Revival 80/90 & Vocal House', 'Tische 200 EUR Piste / 350+ EUR Privé', 'Ref. 50 EUR Club / 70–75 EUR Buffet / 130–140 EUR Gala (TBA)'],
+        ['55 Milano', 'Revival 80/90 & Vocal House', 'Tische 200 EUR Piste / 350+ EUR Privé', '30/40/50 EUR (00:10) Club / 100 EUR Buffet / 160 EUR Gala'],
         ['REPVBLIC Milano', 'Internationale Hits & Hip-Hop', 'Tische 300–500 EUR / 600+ EUR Privé', 'Early Bird 45 EUR · Piste 600 EUR (6 Pax) · Privé 1.200 EUR (10 Pax)'],
       ],
       ctas: {
@@ -892,7 +892,7 @@ export const CLUBBING_PILLAR_WEST_1: Record<'en' | 'it' | 'es' | 'fr' | 'de' | '
         'Im vereinbarten Zeitfenster mit originalem Ausweis erscheinen',
         'Am VIP-Eingang die namentliche Nightlife Milan Reservierung vorzeigen',
       ],
-      nyeHubCta: 'Alle 125 Silvester-Events Mailand 2027',
+      nyeHubCta: 'Alle 126 Silvester-Events Mailand 2027',
       termeGuideCta: 'Thermen-Guide Lombardei 2027 lesen',
       whatsappCta: 'Partner-Concierge kontaktieren (+39 351 912 7047)',
     },
@@ -924,7 +924,7 @@ export const CLUBBING_PILLAR_WEST_1: Record<'en' | 'it' | 'es' | 'fr' | 'de' | '
       magazziniRates: 'NYE Bestätigt: Buffet 80 EUR · We Love 2000 30 EUR · Tische 300/600/900 EUR',
       theClubRates: 'NYE Bestätigt: Damen 50 EUR / Herren 70 EUR · Buffet 90 EUR · Privé 150 EUR · VIP 900–2.000 EUR',
       ariaRates: 'Woche 250–500+ EUR · Ref. NYE: Club 45–55 EUR, Buffet 65 EUR, Gala 130 EUR, VIP 300–1.000 EUR',
-      fiftyFiveRates: 'Woche 200–350+ EUR · Ref. NYE: Club 50 EUR, Buffet 70–75 EUR, Gala 130–140 EUR, VIP 350–1.200 EUR',
+      fiftyFiveRates: 'Woche 200–350+ EUR · NYE La Dolce Vita: Club 30/40/50 EUR (00:10), Buffet 100 EUR, Gala 160 EUR, VIP 350 EUR · Keep 200 EUR',
       hollywoodRates: 'Ref. NYE: Club 40+ EUR, Buffet 60+ EUR, Gala 130+ EUR, Tische 300–1.200 EUR',
       elevenRates: 'Ref. NYE: Club 40+ EUR, Buffet 65+ EUR, Privé 350–1.000 EUR',
       tocquevilleRates: 'Ref. NYE: Club 35–45 EUR, Buffet 60 EUR, Dinner 110–120 EUR, VIP 600–2.000 EUR',
@@ -1019,7 +1019,7 @@ export const CLUBBING_PILLAR_WEST_1: Record<'en' | 'it' | 'es' | 'fr' | 'de' | '
       tierRows: [
         ['Il Gattopardo Milano', 'House & Comercial (Igreja)', 'Aperitivo 20–25 EUR · Entrada desde 20 EUR · Mesas 300–1.200 EUR', '600 EUR / pessoa min. spend (100% pré-pago; Cúpulas sob consulta)'],
         ['Voya Rooftop Milano', 'Skyline House & Vocal', 'Mesas 300 EUR Pista / 500+ EUR Privé', '300 EUR Tudo Incluso 6 pratos + DJ (20:00–05:00)'],
-        ['55 Milano', 'Revival 80/90 & Vocal House', 'Mesas 200 EUR Pista / 350+ EUR Privé', 'Ref. 50 EUR pista / 70–75 EUR buffet / 130–140 EUR jantar (TBA)'],
+        ['55 Milano', 'Revival 80/90 & Vocal House', 'Mesas 200 EUR Pista / 350+ EUR Privé', '30/40/50 EUR (00:10) pista / 100 EUR buffet / 160 EUR jantar'],
         ['REPVBLIC Milano', 'Hits Internacionais & Hip-Hop', 'Mesas 300–500 EUR / 600+ EUR Privé', 'Early Bird 45 EUR · Pista 600 EUR (6 pax) · Privé 1.200 EUR (10 pax)'],
       ],
       ctas: {
@@ -1081,7 +1081,7 @@ export const CLUBBING_PILLAR_WEST_1: Record<'en' | 'it' | 'es' | 'fr' | 'de' | '
         'Chegue no horário combinado levando passaporte ou ID físico original',
         'Apresente sua reserva Nightlife Milan na fila prioritária VIP',
       ],
-      nyeHubCta: 'Ver Todos os 125 Eventos Réveillon 2027',
+      nyeHubCta: 'Ver Todos os 126 Eventos Réveillon 2027',
       termeGuideCta: 'Ler Guia Termas Lombardia 2027',
       whatsappCta: 'Falar com Concierge WhatsApp (+39 351 912 7047)',
     },
@@ -1113,7 +1113,7 @@ export const CLUBBING_PILLAR_WEST_1: Record<'en' | 'it' | 'es' | 'fr' | 'de' | '
       magazziniRates: 'NYE Confirmado: Buffet 80 EUR · We Love 2000 30 EUR · Mesas 300/600/900 EUR',
       theClubRates: 'NYE Confirmado: Mulher 50 EUR / Homem 70 EUR · Buffet 90 EUR · Privé 150 EUR · VIP 900–2.000 EUR',
       ariaRates: 'Sem. 250–500+ EUR · Ref. NYE: Club 45–55 EUR, Buffet 65 EUR, Gala 130 EUR, VIP 300–1.000 EUR',
-      fiftyFiveRates: 'Sem. 200–350+ EUR · Ref. NYE: Club 50 EUR, Buffet 70–75 EUR, Gala 130–140 EUR, VIP 350–1.200 EUR',
+      fiftyFiveRates: 'Sem. 200–350+ EUR · NYE La Dolce Vita: Club 30/40/50 EUR (00:10), Buffet 100 EUR, Gala 160 EUR, VIP 350 EUR · Keep 200 EUR',
       hollywoodRates: 'Ref. NYE: Club 40+ EUR, Buffet 60+ EUR, Gala 130+ EUR, Mesas 300–1.200 EUR',
       elevenRates: 'Ref. NYE: Club 40+ EUR, Buffet 65+ EUR, Privé 350–1.000 EUR',
       tocquevilleRates: 'Ref. NYE: Club 35–45 EUR, Buffet 60 EUR, Jantar 110–120 EUR, VIP 600–2.000 EUR',
@@ -1208,7 +1208,7 @@ export const CLUBBING_PILLAR_WEST_1: Record<'en' | 'it' | 'es' | 'fr' | 'de' | '
       tierRows: [
         ['Il Gattopardo Milano', 'Church House & Commercial', 'Aperitivo 20–25 EUR · Entree 20+ EUR · Tafels 300–1.200 EUR', '600 EUR / p.p. min. spend (100% prepay; Koepels op aanvraag)'],
         ['Voya Rooftop Milano', 'Skyline House & Vocal', 'Tafels 300 EUR Piste / 500+ EUR Privé', '300 EUR All-Inclusive 6-gangen + DJ (20:00–05:00)'],
-        ['55 Milano', 'Revival 80/90 & Vocal House', 'Tafels 200 EUR Piste / 350+ EUR Privé', 'Ref. 50 EUR club / 70–75 EUR buffet / 130–140 EUR diner (TBA)'],
+        ['55 Milano', 'Revival 80/90 & Vocal House', 'Tafels 200 EUR Piste / 350+ EUR Privé', '30/40/50 EUR (00:10) club / 100 EUR buffet / 160 EUR diner'],
         ['REPVBLIC Milano', 'Internationale Hits & Hip-Hop', 'Tafels 300–500 EUR / 600+ EUR Privé', 'Early Bird 45 EUR · Piste 600 EUR (6 pax) · Privé 1.200 EUR (10 pax)'],
       ],
       ctas: {
@@ -1270,7 +1270,7 @@ export const CLUBBING_PILLAR_WEST_1: Record<'en' | 'it' | 'es' | 'fr' | 'de' | '
         'Arriveer binnen het afgesproken tijdvak met origineel legitimatiebewijs',
         'Gebruik de VIP-rij onder vermelding van Nightlife Milan Concierge',
       ],
-      nyeHubCta: 'Alle 125 Oud & Nieuw Events 2027',
+      nyeHubCta: 'Alle 126 Oud & Nieuw Events 2027',
       termeGuideCta: 'Lees Thermen Gids Lombardije 2027',
       whatsappCta: 'Bericht Partner Concierge (+39 351 912 7047)',
     },
@@ -1302,7 +1302,7 @@ export const CLUBBING_PILLAR_WEST_1: Record<'en' | 'it' | 'es' | 'fr' | 'de' | '
       magazziniRates: 'NYE Bevestigd: Buffet 80 EUR · We Love 2000 30 EUR · Tafels 300/600/900 EUR',
       theClubRates: 'NYE Bevestigd: Dames 50 EUR / Heren 70 EUR · Buffet 90 EUR · Privé 150 EUR · VIP 900–2.000 EUR',
       ariaRates: 'Week 250–500+ EUR · Ref. NYE: Club 45–55 EUR, Buffet 65 EUR, Gala 130 EUR, VIP 300–1.000 EUR',
-      fiftyFiveRates: 'Week 200–350+ EUR · Ref. NYE: Club 50 EUR, Buffet 70–75 EUR, Gala 130–140 EUR, VIP 350–1.200 EUR',
+      fiftyFiveRates: 'Week 200–350+ EUR · NYE La Dolce Vita: Club 30/40/50 EUR (00:10), Buffet 100 EUR, Gala 160 EUR, VIP 350 EUR · Keep 200 EUR',
       hollywoodRates: 'Ref. NYE: Club 40+ EUR, Buffet 60+ EUR, Gala 130+ EUR, Tafels 300–1.200 EUR',
       elevenRates: 'Ref. NYE: Club 40+ EUR, Buffet 65+ EUR, Privé 350–1.000 EUR',
       tocquevilleRates: 'Ref. NYE: Club 35–45 EUR, Buffet 60 EUR, Diner 110–120 EUR, VIP 600–2.000 EUR',

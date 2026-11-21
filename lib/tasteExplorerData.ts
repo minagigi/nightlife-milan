@@ -1076,7 +1076,7 @@ export function buildTasteExplorerData(
       music: 'Revival 80/90, Vocal House & Aperitivo',
       dress: clean(tl.dressSmartChic),
       rate: clean(tl.fiftyFiveRates),
-      status: clean(tl.statusBenchmark),
+      status: clean(tl.statusConfirmed),
       nyeSlug: 'capodanno-55-milano',
       clubSlug: '55-milano',
       filters: ['all', 'house', 'dinner-show'],

@@ -168,14 +168,14 @@ export function HomeHalloweenAndCapodannoSections({
       highlight: false,
     },
     {
-      rank: '06 · LOFT PARTY · VIA PIERO DELLA FRANCESCA',
+      rank: '06 · LA DOLCE VITA · VIA PIERO DELLA FRANCESCA',
       venue: '55 Milano',
       title: isIt
-        ? 'Capodanno 55 Milano 2027: New York Loft Party in Via Piero della Francesca'
-        : '55 Milano NYE 2027: New York Loft Dinner & Party',
+        ? 'Capodanno 55 Milano 2027: La Dolce Vita (Gala 160€, Buffet 100€, Club 30–50€)'
+        : '55 Milano NYE 2027: La Dolce Vita (€160 Gala, €100 Buffet, €30–€50 Club)',
       priceLabel: isIt
-        ? 'Prezzi indicativi: 50€ (Dopocena) · 70€–75€ (Buffet) · 130€–140€ (Cenone)'
-        : 'Benchmark prices: €50 (Party) · €70–€75 (Buffet) · €130–€140 (Dinner)',
+        ? 'Confermato 2027: Gala 160€ · Buffet con seduta 100€ · Dopocena 00:10 30/40/50€ · Tavoli 350€'
+        : 'Confirmed 2027: €160 Gala · €100 Laid-Table Buffet · €30/€40/€50 00:10 Club · €350 Tables',
       posterSrc: '/images/events/capodanno-2027-posters/capodanno-55-milano.webp',
       href: capodannoEventPath('capodanno-55-milano', locale),
       highlight: false,
@@ -316,19 +316,19 @@ export function HomeHalloweenAndCapodannoSections({
             <div className="max-w-3xl">
               <h2 className="font-display text-3xl sm:text-5xl font-bold uppercase text-[#F6F1E7] leading-[0.95]">
                 {isIt
-                  ? 'Capodanno 2027 a Milano: 125 Eventi e Cenoni'
-                  : 'Milan NYE 2027: 125 Events, Galas & Tables'}
+                  ? 'Capodanno 2027 a Milano: 126 Eventi e Cenoni'
+                  : 'Milan NYE 2027: 126 Events, Galas & Tables'}
               </h2>
               <p className="mt-3 text-[13px] font-bold text-[#EAE3D5] flex items-center gap-2">
                 <Sparkles aria-hidden="true" className="h-4 w-4 shrink-0 text-[#EAE3D5]" />
                 {isIt
-                  ? '77 Locali a Milano · Just Me Lago di Garda · 18 Capodanni Speciali · 12 Province Lombarde · Piazze Gratis'
-                  : '77 Milan Clubs · Just Me Lake Garda · 18 Special NYE Galas · 12 Lombardy Provinces · Free Squares'}
+                  ? '78 Locali a Milano · Just Me Lago di Garda · 18 Capodanni Speciali · 12 Province Lombarde · Piazze Gratis'
+                  : '78 Milan Clubs · Just Me Lake Garda · 18 Special NYE Galas · 12 Lombardy Provinces · Free Squares'}
               </p>
               <p className="mt-4 max-w-[48ch] font-sans text-base text-[#EAE3D5] leading-relaxed">
                 {isIt
-                  ? 'In prima fila i club e rooftop simbolo (Just Me Milano, Just Me Lago di Garda "Just Me in Rouge", Pineta, Aria, 55 Milano, Voya Rooftop con menu completo a 300€ a persona, Repvblic, Bischeri Milano e PERREO XL @ Gate), seguiti da tutti i 125 eventi ufficiali del 31 dicembre 2026.'
-                  : 'Starting with our priority venues (Just Me Milan, Just Me Lake Garda "Just Me in Rouge", Pineta, Aria, 55 Milano, Voya Rooftop with full all-inclusive menu at €300/person, Repvblic, Bischeri Milano, and PERREO XL @ Gate), followed by all 125 official December 31, 2026 events.'}
+                  ? 'In prima fila i club e rooftop simbolo (Just Me Milano, Just Me Lago di Garda "Just Me in Rouge", Pineta, Aria, 55 Milano, Voya Rooftop con menu completo a 300€ a persona, Repvblic, Bischeri Milano e PERREO XL @ Gate), seguiti da tutti i 126 eventi ufficiali del 31 dicembre 2026.'
+                  : 'Starting with our priority venues (Just Me Milan, Just Me Lake Garda "Just Me in Rouge", Pineta, Aria, 55 Milano, Voya Rooftop with full all-inclusive menu at €300/person, Repvblic, Bischeri Milano, and PERREO XL @ Gate), followed by all 126 official December 31, 2026 events.'}
               </p>
             </div>
             <div className="flex flex-wrap gap-3 shrink-0">
@@ -337,7 +337,7 @@ export function HomeHalloweenAndCapodannoSections({
                 prefetch={false}
                 className="nlm-pressable inline-flex min-h-[48px] items-center justify-center bg-[#F6F1E7] px-6 py-3.5 text-[13px] font-bold text-[#050505] hover:bg-[#EAE3D5] transition-colors"
               >
-                {isIt ? 'Tutti i 125 Eventi di Capodanno ↗' : 'All 125 NYE 2027 Events ↗'}
+                {isIt ? 'Tutti i 126 Eventi di Capodanno ↗' : 'All 126 NYE 2027 Events ↗'}
               </Link>
               <Link
                 href={capodannoCategoryPath('capodanno-rooftop-milano', locale)}
@@ -414,7 +414,7 @@ export function HomeHalloweenAndCapodannoSections({
           {/* 4 Hub Principali Capodanno + 12 Categorie */}
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
             <Link href={capodannoPath(locale)} prefetch={false} className="nlm-pressable bg-[#0B0A09] p-4 text-center text-[13px] font-bold text-[#F6F1E7] hover:bg-[#141311] transition-colors">
-              {isIt ? 'Tutti i 125 Eventi Ufficiali ↗' : 'All 125 Official Events ↗'}
+              {isIt ? 'Tutti i 126 Eventi Ufficiali ↗' : 'All 126 Official Events ↗'}
             </Link>
             <Link href={capodannoCategoryPath('capodanno-speciale', locale)} prefetch={false} className="nlm-pressable border border-[#EAE3D5]/28 bg-[#0B0A09] p-4 text-center text-[13px] font-bold text-[#F6F1E7] hover:border-[#FFFFFF] transition-colors">
               {isIt ? '18 Speciali, Tram & Terme ↗' : '18 Special, Tram & Spa ↗'}
