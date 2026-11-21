@@ -185,7 +185,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '21+', 'Strictly Elegant', 'House and Electronic'),
     image: '/images/events/october-2026/249204-fcb5bf6cc4be.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/friday-night-726/249215/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/friday-night-727/249217/channel/nightlifemilan-1',
     priority: 100
   },
   {
@@ -283,7 +283,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Pineta Club', 'Via Messina 38, Milan', '25+', 'Elegant and Chic', 'Live Music and Commercial'),
     image: '/images/events/october-2026/243822-fa1698470cb9.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/friday-night-722/243824/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/friday-night-723/243825/channel/nightlifemilan-1',
     priority: 95
   },
   {
