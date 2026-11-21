@@ -228,8 +228,12 @@ test('dispatchCandidates deduplica la stessa coppia evento+email nello stesso ru
   // consistente, quindi il dedupe intra-run deve avvenire in memoria.
   const savedBlob = process.env.BLOB_READ_WRITE_TOKEN;
   const savedResend = process.env.RESEND_API_KEY;
+  const savedSmtpUser = process.env.SMTP_USER;
+  const savedSmtpPass = process.env.SMTP_PASS;
   delete process.env.BLOB_READ_WRITE_TOKEN;
   delete process.env.RESEND_API_KEY;
+  delete process.env.SMTP_USER;
+  delete process.env.SMTP_PASS;
   try {
     const event = baseEvent({ eventStartUtc: '2030-01-01T22:00:00Z' });
     const first = baseCandidate({ attendeeId: 'a1', event });
@@ -245,6 +249,8 @@ test('dispatchCandidates deduplica la stessa coppia evento+email nello stesso ru
   } finally {
     if (savedBlob === undefined) delete process.env.BLOB_READ_WRITE_TOKEN; else process.env.BLOB_READ_WRITE_TOKEN = savedBlob;
     if (savedResend === undefined) delete process.env.RESEND_API_KEY; else process.env.RESEND_API_KEY = savedResend;
+    if (savedSmtpUser === undefined) delete process.env.SMTP_USER; else process.env.SMTP_USER = savedSmtpUser;
+    if (savedSmtpPass === undefined) delete process.env.SMTP_PASS; else process.env.SMTP_PASS = savedSmtpPass;
   }
 });
 

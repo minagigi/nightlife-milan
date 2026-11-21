@@ -19,6 +19,7 @@ import {
   SPOKEN_LANGUAGE_OPTIONS,
   VENUE_BY_ID,
   formatEurFromCents,
+  isSinglePassMiniGroupOrder,
 } from '@/lib/single-pass/catalog';
 import { formatMinorCurrency } from '@/lib/single-pass/currency';
 import {
@@ -28,7 +29,7 @@ import {
   getTerrazzaCheckoutUi35,
 } from '@/lib/single-pass/i18n35';
 import type { SinglePassOrder } from '@/lib/single-pass/types';
-import { useSinglePassCart } from './SinglePassCartContext';
+import { cartRowKey, useSinglePassCart } from './SinglePassCartContext';
 
 type MemberView = {
   id: string;
@@ -778,11 +779,7 @@ export default function SinglePassAccountView({
               orders.map((order) => {
                 const isPaid = order.status === 'paid';
                 const isTerrazzaOrder = order.items.some((i) => i.venueId === 'terrazza-duomo-21');
-                const hasSinglePassVenue = order.items.some((i) =>
-                  ['gate', 'pineta', 'repvblic', 'justme', 'bischeri', 'voya', 'justme-garda'].includes(
-                    i.venueId,
-                  ),
-                );
+                const hasSinglePassVenue = isSinglePassMiniGroupOrder(order.items);
                 const feeRates = new Set(
                   order.items.map((i) =>
                     typeof i.feeRate === 'number'
@@ -830,13 +827,20 @@ export default function SinglePassAccountView({
                         const venueSpec = VENUE_BY_ID[item.venueId];
                         return (
                           <div
-                            key={`${order.id}-${item.skuId}`}
+                            key={`${order.id}-${cartRowKey(item)}`}
                             className="flex flex-col justify-between gap-2 border border-[#0A0A0C]/12 bg-[#EDEBE6] p-4 sm:flex-row sm:items-center"
                           >
                             <div>
-                              <p className="font-display text-xl font-bold text-[#0A0A0C]">
-                                {item.venueName} · {item.title} x {item.quantity}
-                              </p>
+                              <div className="flex flex-wrap items-center gap-2">
+                                <p className="font-display text-xl font-bold text-[#0A0A0C]">
+                                  {item.venueName} · {item.title} x {item.quantity}
+                                </p>
+                                {item.channel === 'single-pass' && (
+                                  <span className="border border-[#0A0A0C]/25 bg-[#FFFFFF] px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-[#0A0A0C]">
+                                    Single Pass
+                                  </span>
+                                )}
+                              </div>
                               <p className="mt-1 text-xs text-[#4F4D48]">
                                 {venueSpec?.address} · {copy.arrivalLabel}: {item.arrivalTime}
                                 {item.dietaryChoice ? ` · ${item.dietaryChoice}` : ''}

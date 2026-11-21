@@ -3316,6 +3316,25 @@ export const SINGLE_PASS_SKUS: readonly SinglePassSku[] = [
 
 export const SKU_BY_ID = new Map<string, SinglePassSku>(SINGLE_PASS_SKUS.map((s) => [s.id, s]));
 
+export const STOREFRONT_VENUE_ID_SET = new Set<SinglePassVenueId>(
+  STOREFRONT_VENUES.map((v) => v.id),
+);
+
+export const DINNER_DIETARY_OPTIONS = [
+  { value: 'Terra', labelIt: 'Menù di Terra / Carne', labelEn: 'Terra / Meat Menu' },
+  { value: 'Mare', labelIt: 'Menù di Mare / Pesce', labelEn: 'Mare / Seafood Menu' },
+  { value: 'Vegetariano', labelIt: 'Vegetariano / Vegano', labelEn: 'Vegetarian / Vegan' },
+  { value: 'Senza Glutine', labelIt: 'Senza Glutine', labelEn: 'Gluten-Free' },
+] as const;
+
+export function isSinglePassMiniGroupOrder(
+  items: ReadonlyArray<{ venueId: SinglePassVenueId; channel?: 'single-pass' | 'venue' }>,
+): boolean {
+  return items.some(
+    (item) => item.channel === 'single-pass' || (!item.channel && STOREFRONT_VENUE_ID_SET.has(item.venueId)),
+  );
+}
+
 export const SINGLE_PASS_ONLY_VENUE_IDS = new Set<SinglePassVenueId>([
   'justme',
   'justme-garda',
@@ -3475,6 +3494,7 @@ function buildDynamicInventorySku(
         : `Official admission ticket @ ${event.venue.name}${datePart ? ` (${datePart})` : ''}. Direct online booking with secure card payment.`,
     arrivalTime: timing,
     basePriceCents: Math.round(priceEur * 100),
+    ...(event.id === '247797' ? { feeRate: 0 } : {}),
     guestsPerUnit: guests,
     genderPolicy: 'equal',
     eventDateLabel: datePart,
@@ -3549,11 +3569,7 @@ export function getSkuFeeRate(
   sku: Partial<Pick<SinglePassSku, 'venueId' | 'category' | 'feeRate'>>,
   channel: 'single-pass' | 'venue' = 'venue',
 ): number {
-  if (
-    channel === 'single-pass' ||
-    sku.category === 'all-night-combo' ||
-    sku.category === 'vip-table-share'
-  ) {
+  if (channel === 'single-pass') {
     return SINGLE_PASS_FEE_RATE;
   }
   if (sku.venueId && isPartnerVenueId(sku.venueId)) {

@@ -96,6 +96,10 @@ export default async function SinglePassPage({
           q: 'Chi ha più di 30 anni può acquistare il Single Pass al Pineta Milano?',
           a: 'No. Pineta Milano applica una selezione rigorosamente Under 30 (18–29 anni). Il carrello e il checkout bloccano gli acquisti 30+ su Pineta proponendo Just Me (30–49), REPVBLIC (22–40), Voya Rooftop o Bischeri Over 50.',
         },
+        {
+          q: 'Il servizio partecipa da solo è disponibile anche alle serate settimanali normali?',
+          a: 'No. Il servizio Single Pass per partecipare da soli è attivo esclusivamente per gli eventi occasionali e le ricorrenze speciali in calendario come Capodanno 2027, non per le serate settimanali ordinarie.',
+        },
       ]
     : [
         {
@@ -118,6 +122,10 @@ export default async function SinglePassPage({
           q: 'Can guests aged 30+ book Pineta Milano Moulin Rouge NYE?',
           a: 'No. Pineta enforces a strict Under 30 (18–29) door policy. Ages 30+ are automatically guided during checkout toward Just Me Torre Branca (30–49), REPVBLIC (22–40), Voya Rooftop, or Bischeri Over 50.',
         },
+        {
+          q: 'Is the solo-attendee service active on regular weekly club nights?',
+          a: 'No. The Single Pass solo-attendee service runs exclusively on occasional and flagship special dates such as New Year’s Eve 2027, not during regular weekly nights.',
+        },
       ];
 
   const schemaGraph = {
@@ -132,8 +140,10 @@ export default async function SinglePassPage({
       {
         '@type': 'ItemList',
         name: copy.heroH1,
-        itemListElement: SINGLE_PASS_SKUS.filter((sku) =>
-          STOREFRONT_VENUES.some((venue) => venue.id === sku.venueId),
+        itemListElement: SINGLE_PASS_SKUS.filter(
+          (sku) =>
+            sku.category !== 'vip-table-full' &&
+            STOREFRONT_VENUES.some((venue) => venue.id === sku.venueId),
         ).map((sku, idx) => {
           const venue = STOREFRONT_VENUES.find((v) => v.id === sku.venueId);
           return {
@@ -286,8 +296,8 @@ export default async function SinglePassPage({
             </h3>
             <p className="mt-2">
               {isIt
-                ? `Festeggiare San Silvestro o una serata speciale a Milano quando si è da soli oppure in due amici significa poter accedere solo a formule ufficiali confermate. Su nightlifemilan.com trovi i prezzi finali a persona in Euro, convertibili al checkout nella tua valuta con pagamento sicuro con carta. Assistenza 24/7: ${SITE_CONTACT.whatsapp.number} · concierge@nightlifemilan.com.`
-                : `Celebrating New Year’s Eve or flagship Milan nightlife dates on nightlifemilan.com guarantees verified official packages only. Every eligible ticket displays the final per-person Euro price converted live at checkout with secure card payment, backed by 24/7 WhatsApp concierge support on ${SITE_CONTACT.whatsapp.number} and concierge@nightlifemilan.com.`}
+                ? `Festeggiare San Silvestro o una ricorrenza speciale a Milano quando si è da soli oppure in due amici significa poter accedere solo a formule ufficiali confermate (servizio riservato agli eventi occasionali, non alle serate settimanali ordinarie). Su nightlifemilan.com trovi i prezzi finali a persona in Euro, convertibili al checkout nella tua valuta con pagamento sicuro con carta. Assistenza 24/7: ${SITE_CONTACT.whatsapp.number} · concierge@nightlifemilan.com.`
+                : `Celebrating New Year’s Eve or flagship occasional dates in Milan on nightlifemilan.com guarantees verified official solo packages only (regular weekly club nights are excluded). Every eligible ticket displays the final per-person Euro price converted live at checkout with secure card payment, backed by 24/7 WhatsApp concierge support on ${SITE_CONTACT.whatsapp.number} and concierge@nightlifemilan.com.`}
             </p>
           </div>
         </div>

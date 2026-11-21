@@ -4,7 +4,11 @@ import React, { useEffect, useState } from 'react';
 import { CheckCircle2, Mail, MessageCircle, Phone, QrCode, ShieldCheck, Users } from 'lucide-react';
 import Link from '@/components/LocalizedLink';
 import { localePrefix } from '@/lib/i18n/locales';
-import { SINGLE_PASS_FEE_RATE, formatEurFromCents } from '@/lib/single-pass/catalog';
+import {
+  SINGLE_PASS_FEE_RATE,
+  formatEurFromCents,
+  isSinglePassMiniGroupOrder,
+} from '@/lib/single-pass/catalog';
 import { formatMinorCurrency } from '@/lib/single-pass/currency';
 import {
   formatFeeLabel35,
@@ -13,7 +17,7 @@ import {
   getTerrazzaCheckoutUi35,
 } from '@/lib/single-pass/i18n35';
 import type { SinglePassOrder } from '@/lib/single-pass/types';
-import { useSinglePassCart } from './SinglePassCartContext';
+import { cartRowKey, useSinglePassCart } from './SinglePassCartContext';
 
 type ThankYouOrderView = {
   id: string;
@@ -135,11 +139,7 @@ export default function SinglePassThankYouView({
   const paidCur = (order.presentmentCurrency || 'EUR').toUpperCase();
   const terrazzaUi = getTerrazzaCheckoutUi35(locale);
   const hasTerrazzaDuomo21 = order.items.some((i) => i.venueId === 'terrazza-duomo-21');
-  const hasCapodannoPass = order.items.some((i) =>
-    ['gate', 'pineta', 'repvblic', 'justme', 'bischeri', 'voya', 'justme-garda'].includes(
-      i.venueId,
-    ),
-  );
+  const hasCapodannoPass = isSinglePassMiniGroupOrder(order.items);
   const feeRates = new Set(
     order.items.map((i) =>
       typeof i.feeRate === 'number'
@@ -258,13 +258,20 @@ export default function SinglePassThankYouView({
             const guestCount = typeof item.totalGuests === 'number' ? item.totalGuests : item.quantity;
             return (
               <div
-                key={item.skuId}
+                key={cartRowKey(item)}
                 className="flex flex-wrap items-center justify-between gap-3 py-3 text-sm tabular-nums"
               >
                 <div>
-                  <p className="font-bold text-[#0A0A0C]">
-                    {item.venueName} · {item.title} × {item.quantity}
-                  </p>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <p className="font-bold text-[#0A0A0C]">
+                      {item.venueName} · {item.title} × {item.quantity}
+                    </p>
+                    {item.channel === 'single-pass' && (
+                      <span className="border border-[#0A0A0C]/25 bg-[#EDEBE6] px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-[#0A0A0C]">
+                        Single Pass
+                      </span>
+                    )}
+                  </div>
                   <p className="text-xs text-[#4F4D48]">
                     {item.arrivalTime} ·{' '}
                     {guestCount > 0

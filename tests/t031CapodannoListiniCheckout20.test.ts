@@ -83,12 +83,10 @@ test('T-031, T-032 & WA Audit: Every Capodanno venue has explicit partner boolea
     }
   }
 
-  // Partner venues direct booking must have 0% fee (while Single Pass channel stays 20%)
+  // Partner venues direct booking must have 0% fee across ALL formulas (while Single Pass channel stays 20%)
   for (const vid of ['gate', 'pineta', 'repvblic', 'justme', 'bischeri', 'voya', 'justme-garda'] as const) {
     assert.equal(isPartnerVenueId(vid), true, `Expected partner=true for ${vid}`);
-    const directSkus = SINGLE_PASS_SKUS.filter(
-      (s) => s.venueId === vid && s.category !== 'all-night-combo' && s.category !== 'vip-table-share',
-    );
+    const directSkus = SINGLE_PASS_SKUS.filter((s) => s.venueId === vid);
     assert.ok(directSkus.length >= 1, `Expected direct SKUs for partner ${vid}`);
     for (const sku of directSkus) {
       assert.equal(getSkuFeeRate(sku, 'venue'), 0, `Expected 0% direct fee on partner ${sku.id}`);

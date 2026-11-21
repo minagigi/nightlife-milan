@@ -104,9 +104,8 @@ test('Catalog excludes 55-milano & TOM, includes all 8 confirmed Capodanno + hol
     assert.ok(venue, `Missing venue spec for SKU ${sku.id}`);
     // Single Pass channel always applies 20% fee
     assert.equal(getSkuFeeRate(sku, 'single-pass'), SINGLE_PASS_FEE_RATE);
-    // Venue direct channel: 0% for partner venues (unless Single Pass combo/share), 20% for non-partner venues
-    const isSharedCombo = sku.category === 'all-night-combo' || sku.category === 'vip-table-share';
-    const expectedVenueRate = isSharedCombo ? SINGLE_PASS_FEE_RATE : venue.partner ? 0 : TERRAZZA_DUOMO_FEE_RATE;
+    // Venue direct channel: 0% for ALL partner formulas, 20% for non-partner venues
+    const expectedVenueRate = venue.partner ? 0 : TERRAZZA_DUOMO_FEE_RATE;
     assert.equal(getSkuFeeRate(sku, 'venue'), expectedVenueRate, `Wrong venue fee rate for ${sku.id}`);
     const p1 = computeSinglePassPrice(sku.basePriceCents, 1, expectedVenueRate);
     assert.equal(p1.unitFeeCents, Math.round(sku.basePriceCents * expectedVenueRate));
@@ -116,7 +115,7 @@ test('Catalog excludes 55-milano & TOM, includes all 8 confirmed Capodanno + hol
   // Dynamic upcoming paid offer (Gate Milano 240987 verified upcoming vs past October event)
   const gateSkus = getConfirmedSkusForInventoryEvent('240987', Date.parse('2026-11-16T22:00:00Z'));
   assert.ok(gateSkus.length >= 2, 'Expected Gate Milano upcoming confirmed paid offers');
-  const firstSku = resolveCatalogSku('xceed:240987:0', Date.parse('2026-11-16T22:00:00Z'));
+  const firstSku = resolveCatalogSku(gateSkus[0].id, Date.parse('2026-11-16T22:00:00Z'));
   assert.ok(firstSku);
   assert.ok(firstSku.basePriceCents > 0);
   // Past event excluded automatically
@@ -323,7 +322,16 @@ test('Auth password hashing, HMAC session cookie & AES-256-GCM vault round-trip 
 
 test('Order persistence, multi-currency PaymentIntent params (no receipt_email), attribution, delete & email hygiene', async () => {
   const prevToken = process.env.BLOB_READ_WRITE_TOKEN;
+  const prevSmtpUser = process.env.SMTP_USER;
+  const prevSmtpPass = process.env.SMTP_PASS;
+  const prevResend = process.env.RESEND_API_KEY;
+  const prevOverride = process.env.EMAIL_TEST_OVERRIDE;
+  const origFetch = globalThis.fetch;
   delete process.env.BLOB_READ_WRITE_TOKEN;
+  delete process.env.SMTP_USER;
+  delete process.env.SMTP_PASS;
+  delete process.env.RESEND_API_KEY;
+  delete process.env.EMAIL_TEST_OVERRIDE;
   clearMemoryStoreForTests();
 
   try {
@@ -443,12 +451,36 @@ test('Order persistence, multi-currency PaymentIntent params (no receipt_email),
     const sig = crypto.createHmac('sha256', whSecret).update(`${ts}.${rawWebhook}`).digest('hex');
     assert.equal(verifyStripeWebhookSignature(rawWebhook, `t=${ts},v1=${sig}`, whSecret, ts + 20), true);
 
+    const finalizedDryRun = await markOrderPaidIdempotently(sampleOrder.id, {
+      stripePaymentIntentId: 'pi_test_1',
+    });
+    assert.ok(finalizedDryRun);
+    assert.equal(finalizedDryRun.status, 'paid');
+    assert.equal(finalizedDryRun.confirmationEmailSentAt, null);
+    assert.equal(finalizedDryRun.staffEmailSentAt, null);
+    assert.match(finalizedDryRun.emailDeliveryError || '', /dry_run/i);
+    assert.match(finalizedDryRun.staffEmailError || '', /dry_run/i);
+
+    process.env.RESEND_API_KEY = 're_test_mock_ecommerce';
+    let emailSendCalls = 0;
+    globalThis.fetch = (async () => {
+      emailSendCalls += 1;
+      return new Response(JSON.stringify({ id: `email_mock_${emailSendCalls}` }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }) as typeof fetch;
+
     const finalized1 = await markOrderPaidIdempotently(sampleOrder.id, {
       stripePaymentIntentId: 'pi_test_1',
     });
     assert.ok(finalized1);
     assert.equal(finalized1.status, 'paid');
     assert.ok(finalized1.confirmationEmailSentAt);
+    assert.ok(finalized1.staffEmailSentAt);
+    assert.equal(finalized1.emailDeliveryError, null);
+    assert.equal(finalized1.staffEmailError, null);
+    assert.equal(emailSendCalls, 2);
 
     const member = await getMemberByEmail('elena@example.com');
     assert.ok(member);
@@ -459,8 +491,18 @@ test('Order persistence, multi-currency PaymentIntent params (no receipt_email),
     assert.equal(await getOrderById(sampleOrder.id), null);
     assert.equal((await listAllOrderSummaries()).length, 0);
   } finally {
+    globalThis.fetch = origFetch;
     clearMemoryStoreForTests();
     if (prevToken !== undefined) process.env.BLOB_READ_WRITE_TOKEN = prevToken;
+    else delete process.env.BLOB_READ_WRITE_TOKEN;
+    if (prevSmtpUser !== undefined) process.env.SMTP_USER = prevSmtpUser;
+    else delete process.env.SMTP_USER;
+    if (prevSmtpPass !== undefined) process.env.SMTP_PASS = prevSmtpPass;
+    else delete process.env.SMTP_PASS;
+    if (prevResend !== undefined) process.env.RESEND_API_KEY = prevResend;
+    else delete process.env.RESEND_API_KEY;
+    if (prevOverride !== undefined) process.env.EMAIL_TEST_OVERRIDE = prevOverride;
+    else delete process.env.EMAIL_TEST_OVERRIDE;
   }
 });
 

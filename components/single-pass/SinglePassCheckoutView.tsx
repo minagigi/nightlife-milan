@@ -15,9 +15,12 @@ import {
   Trash2,
 } from 'lucide-react';
 import Link from '@/components/LocalizedLink';
+import { capodannoEventPath } from '@/lib/capodanno/routes';
 import { localePrefix } from '@/lib/i18n/locales';
 import {
+  DINNER_DIETARY_OPTIONS,
   SPOKEN_LANGUAGE_OPTIONS,
+  STOREFRONT_VENUE_ID_SET,
   VENUE_BY_ID,
   computeSinglePassPrice,
   formatEurFromCents,
@@ -40,7 +43,7 @@ import type {
 } from '@/lib/single-pass/types';
 import { readClientAttribution } from './AttributionTracker';
 import EmbeddedPaymentForm from './EmbeddedPaymentForm';
-import { useSinglePassCart } from './SinglePassCartContext';
+import { cartRowKey, useSinglePassCart } from './SinglePassCartContext';
 
 type PaymentIntentSession = {
   orderId: string;
@@ -827,35 +830,47 @@ export default function SinglePassCheckoutView({
 
                 return (
                   <div
-                    key={item.skuId}
+                    key={cartRowKey(item)}
                     className="flex flex-col gap-3 border border-[#0A0A0C]/16 bg-[#FFFFFF] p-4 sm:flex-row sm:items-center sm:justify-between"
                   >
                     <div className="min-w-0 flex-1">
-                      <p className="text-[13px] font-bold text-[#4F4D48] tabular-nums">
-                        {venueName} · {sku.arrivalTime} ·{' '}
-                        {itemGuestCount > 0
-                          ? `${itemGuestCount} ${
-                              itemGuestCount === 1 ? uxCopy.guestUnitSingular : uxCopy.guestsUnit
-                            }`
-                          : terrazzaUi.tableAddonBadge}
-                      </p>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <p className="text-[13px] font-bold text-[#4F4D48] tabular-nums">
+                          {venueName} · {sku.arrivalTime} ·{' '}
+                          {itemGuestCount > 0
+                            ? `${itemGuestCount} ${
+                                itemGuestCount === 1 ? uxCopy.guestUnitSingular : uxCopy.guestsUnit
+                              }`
+                            : terrazzaUi.tableAddonBadge}
+                        </p>
+                        {item.channel === 'single-pass' && (
+                          <span className="border border-[#0A0A0C]/25 bg-[#EDEBE6] px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-[#0A0A0C]">
+                            Single Pass
+                          </span>
+                        )}
+                      </div>
                       <h2 className="font-display text-xl font-bold text-[#0A0A0C]">
                         {isIt ? sku.titleIt : sku.titleEn}
                       </h2>
-                      {item.dietaryChoice && !sku.requiresDietary && (
+                      {item.dietaryChoice && (!sku.requiresDietary || Boolean(sku.dietaryPreset)) && (
                         <p className="mt-1 text-[13px] text-[#4F4D48]">{item.dietaryChoice}</p>
                       )}
-                      {sku.requiresDietary && (
+                      {sku.requiresDietary && !sku.dietaryPreset && (
                         <select
                           aria-label={copy.formDietary}
-                          value={item.dietaryChoice || 'Terra / Meat Menu'}
-                          onChange={(e) => updateDietary(item.skuId, e.target.value)}
+                          value={
+                            DINNER_DIETARY_OPTIONS.some((o) => o.value === item.dietaryChoice)
+                              ? item.dietaryChoice
+                              : DINNER_DIETARY_OPTIONS[0].value
+                          }
+                          onChange={(e) => updateDietary(item.skuId, e.target.value, item.channel)}
                           className="mt-2 h-10 border border-[#0A0A0C]/25 bg-[#FFFFFF] px-3 text-sm text-[#0A0A0C]"
                         >
-                          <option value="Terra / Meat Menu">Menù di Terra / Meat</option>
-                          <option value="Mare / Seafood Menu">Menù di Mare / Seafood</option>
-                          <option value="Vegetarian / Vegan">Vegetariano / Vegano</option>
-                          <option value="Gluten-Free / Allergies">Senza Glutine</option>
+                          {DINNER_DIETARY_OPTIONS.map((opt) => (
+                            <option key={opt.value} value={opt.value}>
+                              {isIt ? opt.labelIt : opt.labelEn}
+                            </option>
+                          ))}
                         </select>
                       )}
                     </div>
@@ -864,7 +879,7 @@ export default function SinglePassCheckoutView({
                       <div className="inline-flex items-center border border-[#0A0A0C]/25 bg-[#EDEBE6]">
                         <button
                           type="button"
-                          onClick={() => updateQuantity(item.skuId, item.quantity - 1)}
+                          onClick={() => updateQuantity(item.skuId, item.quantity - 1, item.channel)}
                           className="flex h-11 w-11 items-center justify-center text-[#0A0A0C] hover:bg-[#0A0A0C]/10"
                           aria-label="Decrease"
                         >
@@ -875,7 +890,7 @@ export default function SinglePassCheckoutView({
                         </span>
                         <button
                           type="button"
-                          onClick={() => updateQuantity(item.skuId, item.quantity + 1)}
+                          onClick={() => updateQuantity(item.skuId, item.quantity + 1, item.channel)}
                           className="flex h-11 w-11 items-center justify-center text-[#0A0A0C] hover:bg-[#0A0A0C]/10"
                           aria-label="Increase"
                         >
@@ -887,7 +902,7 @@ export default function SinglePassCheckoutView({
                       </span>
                       <button
                         type="button"
-                        onClick={() => removeItem(item.skuId)}
+                        onClick={() => removeItem(item.skuId, item.channel)}
                         aria-label={copy.removeItemLabel}
                         className="flex h-11 w-11 items-center justify-center border border-[#0A0A0C]/15 text-[#4F4D48] hover:border-[#B91C1C] hover:text-[#B91C1C]"
                       >
@@ -1031,10 +1046,15 @@ export default function SinglePassCheckoutView({
                       {displayedSuggestedVenues.map((vid) => {
                         const v = VENUE_BY_ID[vid];
                         if (!v) return null;
+                        const hasSinglePassInCart = items.some((i) => i.channel === 'single-pass');
+                        const suggestedHref =
+                          hasSinglePassInCart && STOREFRONT_VENUE_ID_SET.has(vid)
+                            ? `${lp}/single-pass#single-pass-${vid}`
+                            : capodannoEventPath(v.eventSlug, locale);
                         return (
                           <Link
                             key={vid}
-                            href={`${lp}/eventi/${v.eventSlug}`}
+                            href={suggestedHref}
                             locale={locale}
                             className="inline-flex min-h-[40px] items-center gap-1.5 border border-[#0A0A0C] bg-[#FFFFFF] px-3 py-1.5 text-[13px] font-bold text-[#0A0A0C] hover:bg-[#0A0A0C] hover:text-[#FFFFFF]"
                           >

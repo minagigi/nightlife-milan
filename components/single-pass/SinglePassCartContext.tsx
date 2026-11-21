@@ -31,6 +31,13 @@ export type SinglePassCartItem = {
   channel?: 'single-pass' | 'venue';
 };
 
+export function cartRowKey(item: {
+  skuId: string;
+  channel?: 'single-pass' | 'venue';
+}): string {
+  return `${item.skuId}::${item.channel || 'venue'}`;
+}
+
 const STORAGE_KEY = 'nlm_single_pass_cart_v1';
 const CURRENCY_STORAGE_KEY = 'nlm_preferred_currency_v1';
 
@@ -72,9 +79,9 @@ type SinglePassCartContextValue = {
     addedFromTitle?: string,
     channel?: 'single-pass' | 'venue',
   ) => void;
-  updateQuantity: (skuId: string, quantity: number) => void;
-  updateDietary: (skuId: string, dietaryChoice: string) => void;
-  removeItem: (skuId: string) => void;
+  updateQuantity: (skuId: string, quantity: number, channel?: 'single-pass' | 'venue') => void;
+  updateDietary: (skuId: string, dietaryChoice: string, channel?: 'single-pass' | 'venue') => void;
+  removeItem: (skuId: string, channel?: 'single-pass' | 'venue') => void;
   clearCart: () => void;
   itemCount: number;
   totalGuests: number;
@@ -267,29 +274,47 @@ export function SinglePassCartProvider({
     if (openDrawer) setCartOpen(true);
   };
 
-  const updateQuantity = (skuId: string, quantity: number) => {
+  const updateQuantity = (
+    skuId: string,
+    quantity: number,
+    channel?: 'single-pass' | 'venue',
+  ) => {
     const safeQty = Math.floor(quantity);
     if (safeQty <= 0) {
-      removeItem(skuId);
+      removeItem(skuId, channel);
       return;
     }
     const sku = resolveCatalogSku(skuId);
     const maxQty = sku ? getSkuMaxQuantity(sku) : 10;
     setItems((prev) =>
       prev.map((item) =>
-        item.skuId === skuId ? { ...item, quantity: Math.max(1, Math.min(maxQty, safeQty)) } : item,
+        item.skuId === skuId && (!channel || (item.channel || 'venue') === channel)
+          ? { ...item, quantity: Math.max(1, Math.min(maxQty, safeQty)) }
+          : item,
       ),
     );
   };
 
-  const updateDietary = (skuId: string, dietaryChoice: string) => {
+  const updateDietary = (
+    skuId: string,
+    dietaryChoice: string,
+    channel?: 'single-pass' | 'venue',
+  ) => {
     setItems((prev) =>
-      prev.map((item) => (item.skuId === skuId ? { ...item, dietaryChoice } : item)),
+      prev.map((item) =>
+        item.skuId === skuId && (!channel || (item.channel || 'venue') === channel)
+          ? { ...item, dietaryChoice }
+          : item,
+      ),
     );
   };
 
-  const removeItem = (skuId: string) => {
-    setItems((prev) => prev.filter((i) => i.skuId !== skuId));
+  const removeItem = (skuId: string, channel?: 'single-pass' | 'venue') => {
+    setItems((prev) =>
+      prev.filter(
+        (i) => !(i.skuId === skuId && (!channel || (i.channel || 'venue') === channel)),
+      ),
+    );
   };
 
   const clearCart = () => {

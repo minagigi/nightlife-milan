@@ -5,6 +5,7 @@ import { AlertTriangle, ArrowRight, Minus, Plus, ShieldCheck, ShoppingBag, Trash
 import Link from '@/components/LocalizedLink';
 import { localePrefix } from '@/lib/i18n/locales';
 import {
+  DINNER_DIETARY_OPTIONS,
   VENUE_BY_ID,
   computeSinglePassPrice,
   formatEurFromCents,
@@ -18,7 +19,7 @@ import {
   getSinglePassCopy,
   getTerrazzaCheckoutUi35,
 } from '@/lib/single-pass/i18n35';
-import { useSinglePassCart } from './SinglePassCartContext';
+import { cartRowKey, useSinglePassCart } from './SinglePassCartContext';
 
 export default function SinglePassCartPageView({ locale }: { locale: string }) {
   const {
@@ -99,19 +100,26 @@ export default function SinglePassCartPageView({ locale }: { locale: string }) {
 
               return (
                 <article
-                  key={item.skuId}
+                  key={cartRowKey(item)}
                   className="border border-[#0A0A0C]/16 bg-[#FFFFFF] p-5"
                 >
                   <div className="flex flex-wrap items-start justify-between gap-4">
                     <div>
-                      <p className="text-xs font-bold text-[#4F4D48] tabular-nums">
-                        {venueName} · {sku.arrivalTime} ·{' '}
-                        {itemGuests > 0
-                          ? `${itemGuests} ${
-                              itemGuests === 1 ? uxCopy.guestUnitSingular : uxCopy.guestsUnit
-                            }`
-                          : terrazzaUi.tableAddonBadge}
-                      </p>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <p className="text-xs font-bold text-[#4F4D48] tabular-nums">
+                          {venueName} · {sku.arrivalTime} ·{' '}
+                          {itemGuests > 0
+                            ? `${itemGuests} ${
+                                itemGuests === 1 ? uxCopy.guestUnitSingular : uxCopy.guestsUnit
+                              }`
+                            : terrazzaUi.tableAddonBadge}
+                        </p>
+                        {item.channel === 'single-pass' && (
+                          <span className="border border-[#0A0A0C]/25 bg-[#EDEBE6] px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-[#0A0A0C]">
+                            Single Pass
+                          </span>
+                        )}
+                      </div>
                       <h2 className="mt-1 font-display text-2xl font-bold text-[#0A0A0C]">
                         {isIt ? sku.titleIt : sku.titleEn}
                       </h2>
@@ -121,7 +129,7 @@ export default function SinglePassCartPageView({ locale }: { locale: string }) {
                     </div>
                     <button
                       type="button"
-                      onClick={() => removeItem(item.skuId)}
+                      onClick={() => removeItem(item.skuId, item.channel)}
                       aria-label={copy.removeItemLabel}
                       className="flex h-11 w-11 items-center justify-center border border-[#0A0A0C]/20 text-[#4F4D48] hover:border-[#B91C1C] hover:text-[#B91C1C]"
                     >
@@ -129,7 +137,11 @@ export default function SinglePassCartPageView({ locale }: { locale: string }) {
                     </button>
                   </div>
 
-                  {sku.requiresDietary && (
+                  {item.dietaryChoice && (!sku.requiresDietary || Boolean(sku.dietaryPreset)) && (
+                    <p className="mt-3 text-xs font-semibold text-[#4F4D48]">{item.dietaryChoice}</p>
+                  )}
+
+                  {sku.requiresDietary && !sku.dietaryPreset && (
                     <div className="mt-4">
                       <label className="block text-xs font-bold text-[#0A0A0C]">
                         {copy.formDietary}{' '}
@@ -138,14 +150,19 @@ export default function SinglePassCartPageView({ locale }: { locale: string }) {
                         </span>
                       </label>
                       <select
-                        value={item.dietaryChoice || 'Terra / Meat Menu'}
-                        onChange={(e) => updateDietary(item.skuId, e.target.value)}
+                        value={
+                          DINNER_DIETARY_OPTIONS.some((o) => o.value === item.dietaryChoice)
+                            ? item.dietaryChoice
+                            : DINNER_DIETARY_OPTIONS[0].value
+                        }
+                        onChange={(e) => updateDietary(item.skuId, e.target.value, item.channel)}
                         className="mt-1.5 h-10 border border-[#0A0A0C]/25 bg-[#FFFFFF] px-3 text-sm text-[#0A0A0C]"
                       >
-                        <option value="Terra / Meat Menu">Menù di Terra / Meat</option>
-                        <option value="Mare / Seafood Menu">Menù di Mare / Seafood</option>
-                        <option value="Vegetarian / Vegan">Vegetariano / Vegano</option>
-                        <option value="Gluten-Free / Allergies">Senza Glutine / Allergie</option>
+                        {DINNER_DIETARY_OPTIONS.map((opt) => (
+                          <option key={opt.value} value={opt.value}>
+                            {isIt ? opt.labelIt : opt.labelEn}
+                          </option>
+                        ))}
                       </select>
                     </div>
                   )}
@@ -154,7 +171,7 @@ export default function SinglePassCartPageView({ locale }: { locale: string }) {
                     <div className="inline-flex items-center border border-[#0A0A0C]/25 bg-[#EDEBE6]">
                       <button
                         type="button"
-                        onClick={() => updateQuantity(item.skuId, item.quantity - 1)}
+                        onClick={() => updateQuantity(item.skuId, item.quantity - 1, item.channel)}
                         className="flex h-11 w-11 items-center justify-center text-[#0A0A0C] hover:bg-[#0A0A0C]/10"
                         aria-label="Decrease"
                       >
@@ -165,7 +182,7 @@ export default function SinglePassCartPageView({ locale }: { locale: string }) {
                       </span>
                       <button
                         type="button"
-                        onClick={() => updateQuantity(item.skuId, item.quantity + 1)}
+                        onClick={() => updateQuantity(item.skuId, item.quantity + 1, item.channel)}
                         className="flex h-11 w-11 items-center justify-center text-[#0A0A0C] hover:bg-[#0A0A0C]/10"
                         aria-label="Increase"
                       >

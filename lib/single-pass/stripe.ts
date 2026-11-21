@@ -295,8 +295,7 @@ export async function markOrderPaidIdempotently(
   const existing = await getOrderById(orderId);
   if (!existing) return null;
 
-  const needsStaffEmail =
-    existing.items.some((item) => item.venueId === 'terrazza-duomo-21') && !existing.staffEmailSentAt;
+  const needsStaffEmail = !existing.staffEmailSentAt;
 
   if (existing.status === 'paid' && existing.confirmationEmailSentAt && !needsStaffEmail) {
     return existing;
@@ -324,11 +323,21 @@ export async function markOrderPaidIdempotently(
     try {
       const msg = buildSinglePassOrderEmail(updated);
       const emailResult = await sendAttendeeEmail(msg);
-      if (emailResult.outcome === 'failed') {
-        updated.emailDeliveryError = emailResult.error || 'Email delivery failed';
+      if (emailResult.outcome === 'sent') {
+        if (updated.emailDeliveryError) {
+          updated.emailDeliveryError = null;
+          await saveOrder(updated);
+        }
+      } else {
+        updated.confirmationEmailSentAt = null;
+        updated.emailDeliveryError =
+          emailResult.outcome === 'dry_run'
+            ? 'Email transport in dry_run mode (no SMTP/Resend credentials configured)'
+            : emailResult.error || 'Email delivery failed';
         await saveOrder(updated);
       }
     } catch (error) {
+      updated.confirmationEmailSentAt = null;
       updated.emailDeliveryError = error instanceof Error ? error.message : String(error);
       await saveOrder(updated);
     }
@@ -338,11 +347,21 @@ export async function markOrderPaidIdempotently(
     try {
       const staffMsg = buildStaffActivationEmail(updated);
       const staffResult = await sendAttendeeEmail(staffMsg);
-      if (staffResult.outcome === 'failed') {
-        updated.staffEmailError = staffResult.error || 'Staff email delivery failed';
+      if (staffResult.outcome === 'sent') {
+        if (updated.staffEmailError) {
+          updated.staffEmailError = null;
+          await saveOrder(updated);
+        }
+      } else {
+        updated.staffEmailSentAt = null;
+        updated.staffEmailError =
+          staffResult.outcome === 'dry_run'
+            ? 'Email transport in dry_run mode (no SMTP/Resend credentials configured)'
+            : staffResult.error || 'Staff email delivery failed';
         await saveOrder(updated);
       }
     } catch (error) {
+      updated.staffEmailSentAt = null;
       updated.staffEmailError = error instanceof Error ? error.message : String(error);
       await saveOrder(updated);
     }

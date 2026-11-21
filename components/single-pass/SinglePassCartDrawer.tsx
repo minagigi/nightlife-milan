@@ -19,7 +19,7 @@ import {
   getSinglePassCopy,
   getTerrazzaCheckoutUi35,
 } from '@/lib/single-pass/i18n35';
-import { useSinglePassCart } from './SinglePassCartContext';
+import { cartRowKey, useSinglePassCart } from './SinglePassCartContext';
 
 export default function SinglePassCartDrawer({ lang }: { lang: string }) {
   const {
@@ -137,7 +137,7 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
 
                     return (
                       <div
-                        key={item.skuId}
+                        key={cartRowKey(item)}
                         className="border border-[#0A0A0C]/16 bg-[#FFFFFF] p-4"
                       >
                         <div className="flex items-start gap-3">
@@ -148,9 +148,16 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
                             className="h-16 w-16 shrink-0 border border-[#0A0A0C]/15 bg-[#0A0A0C] object-contain"
                           />
                           <div className="min-w-0 flex-1">
-                            <p className="text-xs font-bold text-[#4F4D48]">
-                              {venueName} · {sku.arrivalTime}
-                            </p>
+                            <div className="flex flex-wrap items-center gap-2">
+                              <p className="text-xs font-bold text-[#4F4D48]">
+                                {venueName} · {sku.arrivalTime}
+                              </p>
+                              {item.channel === 'single-pass' && (
+                                <span className="border border-[#0A0A0C]/25 bg-[#EDEBE6] px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-[#0A0A0C]">
+                                  Single Pass
+                                </span>
+                              )}
+                            </div>
                             <p className="mt-0.5 font-display text-lg font-bold leading-snug text-[#0A0A0C]">
                               {pkgTitle}
                             </p>
@@ -160,7 +167,7 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
                           </div>
                           <button
                             type="button"
-                            onClick={() => removeItem(item.skuId)}
+                            onClick={() => removeItem(item.skuId, item.channel)}
                             aria-label={copy.removeItemLabel}
                             className="flex h-10 w-10 items-center justify-center border border-[#0A0A0C]/15 text-[#4F4D48] transition hover:border-[#B91C1C] hover:text-[#B91C1C]"
                           >
@@ -172,7 +179,7 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
                           <div className="inline-flex items-center border border-[#0A0A0C]/25 bg-[#EDEBE6]">
                             <button
                               type="button"
-                              onClick={() => updateQuantity(item.skuId, item.quantity - 1)}
+                              onClick={() => updateQuantity(item.skuId, item.quantity - 1, item.channel)}
                               aria-label="Decrease quantity"
                               className="flex h-9 w-9 items-center justify-center text-[#0A0A0C] hover:bg-[#0A0A0C]/10"
                             >
@@ -183,7 +190,7 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
                             </span>
                             <button
                               type="button"
-                              onClick={() => updateQuantity(item.skuId, item.quantity + 1)}
+                              onClick={() => updateQuantity(item.skuId, item.quantity + 1, item.channel)}
                               aria-label="Increase quantity"
                               className="flex h-9 w-9 items-center justify-center text-[#0A0A0C] hover:bg-[#0A0A0C]/10"
                             >

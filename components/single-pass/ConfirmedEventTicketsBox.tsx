@@ -4,7 +4,7 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { CreditCard, ShieldCheck, ShoppingBag, Users } from 'lucide-react';
 import { localePrefix } from '@/lib/i18n/locales';
-import { VENUE_BY_ID, formatEurFromCents } from '@/lib/single-pass/catalog';
+import { formatEurFromCents, getSkuFeeRate } from '@/lib/single-pass/catalog';
 import { getSinglePassCopy, localizeSinglePassSku } from '@/lib/single-pass/i18n35';
 import { getCapodannoUiCopy } from '@/lib/capodanno/i18n';
 import type { SinglePassSku } from '@/lib/single-pass/types';
@@ -51,7 +51,7 @@ export default function ConfirmedEventTicketsBox({
       <div className="mt-5 grid gap-4 md:grid-cols-2">
         {skus.map((sku) => {
           const guests = sku.guestsPerUnit || 1;
-          const isPartner = Boolean(VENUE_BY_ID[sku.venueId]?.partner);
+          const isPartner = getSkuFeeRate(sku, 'venue') === 0;
           const locSku = localizeSinglePassSku(sku, locale, copy, venueName);
           return (
             <div

@@ -1,7 +1,12 @@
 import type { EmailMessage } from '@/lib/attendeeEmailTypes';
 import { localePrefix, type LocaleCode } from '@/lib/i18n/locales';
 import { SITE_CONTACT } from '@/config/contact';
-import { SINGLE_PASS_FEE_RATE, formatEurFromCents } from './catalog';
+import {
+  SINGLE_PASS_FEE_RATE,
+  STOREFRONT_VENUE_ID_SET,
+  formatEurFromCents,
+  isSinglePassMiniGroupOrder,
+} from './catalog';
 import { formatMinorCurrency } from './currency';
 import { formatFeeLabel35, getSinglePassCopy, getTerrazzaCheckoutUi35 } from './i18n35';
 import type { SinglePassOrder } from './types';
@@ -221,11 +226,7 @@ export function buildSinglePassOrderEmail(
   );
   const eurStr = formatEurFromCents(order.totalCents, order.locale);
   const hasTerrazzaDuomo21 = order.items.some((i) => i.venueId === 'terrazza-duomo-21');
-  const hasCapodannoPass = order.items.some((i) =>
-    ['gate', 'pineta', 'repvblic', 'justme', 'bischeri', 'voya', 'justme-garda'].includes(
-      i.venueId,
-    ),
-  );
+  const hasCapodannoPass = isSinglePassMiniGroupOrder(order.items);
   const feeInfo = getOrderFeeInfo(order);
   const feeLabel = formatFeeLabel35(order.locale, feeInfo.rate, feeInfo.isMixed);
   const headcount = resolveOrderHeadcount(order);
@@ -378,6 +379,7 @@ export function buildStaffActivationEmail(
   order: SinglePassOrder,
   baseUrl = (process.env.APP_URL || 'https://nightlifemilan.com').replace(/\/+$/, ''),
 ): EmailMessage {
+  const cleanBase = baseUrl.replace(/\/+$/, '');
   const headcount = resolveOrderHeadcount(order);
   const feeInfo = getOrderFeeInfo(order);
   const feePct = Math.round(feeInfo.rate * 100);
@@ -390,19 +392,23 @@ export function buildStaffActivationEmail(
     paidCur,
     'it',
   );
-  const crmUrl = `${baseUrl}/it/crm/single-pass`;
+  const crmUrl = `${cleanBase}/it/crm/single-pass`;
 
-  const mainChoices = order.items
-    .filter((i) => i.dietaryChoice)
-    .map((i) => `${i.quantity}x ${i.dietaryChoice} (${i.title})`);
+  const isPureTerrazza =
+    order.items.length > 0 && order.items.every((i) => i.venueId === 'terrazza-duomo-21');
 
-  const subject = `[ATTIVAZIONE CAPODANNO] Terrazza Duomo 21 / MA.RE · #${order.id} · ${order.customer.fullName} (${headcount} pax · Netto ${netVenueStr})`;
+  if (isPureTerrazza) {
+    const mainChoices = order.items
+      .filter((i) => i.dietaryChoice)
+      .map((i) => `${i.quantity}x ${i.dietaryChoice} (${i.title})`);
 
-  const rowsHtml = order.items
-    .map((item) => {
-      const paxCount = typeof item.totalGuests === 'number' ? item.totalGuests : item.quantity;
-      const itemFeePct = Math.round((item.feeRate ?? feeInfo.rate) * 100);
-      return `<tr>
+    const subject = `[ATTIVAZIONE CAPODANNO] Terrazza Duomo 21 / MA.RE · #${order.id} · ${order.customer.fullName} (${headcount} pax · Netto ${netVenueStr})`;
+
+    const rowsHtml = order.items
+      .map((item) => {
+        const paxCount = typeof item.totalGuests === 'number' ? item.totalGuests : item.quantity;
+        const itemFeePct = Math.round((item.feeRate ?? feeInfo.rate) * 100);
+        return `<tr>
         <td style="padding:8px;border-bottom:1px solid #2A2620;color:#F6F1E7;">
           <strong>${escapeHtml(item.title)}</strong><br/>
           <span style="font-size:12px;color:#C2B9AA;">SKU: ${escapeHtml(item.skuId)} · Orario: ${escapeHtml(item.arrivalTime)}${item.dietaryChoice ? ` · Secondo: ${escapeHtml(item.dietaryChoice)}` : ''}</span>
@@ -413,10 +419,10 @@ export function buildStaffActivationEmail(
         <td style="padding:8px;border-bottom:1px solid #2A2620;text-align:right;color:#C2B9AA;">+${itemFeePct}% (${escapeHtml(formatEurFromCents(item.lineFeeCents, 'it'))})</td>
         <td style="padding:8px;border-bottom:1px solid #2A2620;text-align:right;color:#F6F1E7;">${escapeHtml(formatEurFromCents(item.lineTotalCents, 'it'))}</td>
       </tr>`;
-    })
-    .join('');
+      })
+      .join('');
 
-  const html = `<!doctype html>
+    const html = `<!doctype html>
 <html>
 <body style="margin:0;padding:24px;background:#050505;color:#F6F1E7;font-family:Arial,Helvetica,sans-serif;">
   <div style="max-width:680px;margin:0 auto;border:1px solid #3A3224;background:#0B0A09;padding:28px;">
@@ -470,18 +476,153 @@ export function buildStaffActivationEmail(
 </body>
 </html>`;
 
+    const text = [
+      `ATTIVAZIONE PRENOTAZIONE TERRAZZA DUOMO 21 / MA.RE`,
+      `Ordine: ${order.id} | PIN: ${order.accessPin} | Payment ID: ${order.stripePaymentIntentId || 'n/d'}`,
+      `Cliente: ${order.customer.fullName} | Email: ${order.customer.email} | WhatsApp: ${order.customer.whatsapp}`,
+      `Ospiti totali: ${headcount} pax | Lingua: ${order.locale.toUpperCase()}`,
+      `Scelta secondo (1° piano): ${mainChoices.length > 0 ? mainChoices.join(' | ') : 'n/a'}`,
+      `Allergie / Intolleranze (entro 28/12): ${order.customer.dietaryNotes || 'Non indicate'}`,
+      '',
+      'DETTAGLIO PACCHETTI:',
+      ...order.items.map((i) => {
+        const paxCount = typeof i.totalGuests === 'number' ? i.totalGuests : i.quantity;
+        return `- ${i.title} x${i.quantity} (${paxCount > 0 ? `${paxCount} pax` : 'Tavolo add-on'})${i.dietaryChoice ? ` [${i.dietaryChoice}]` : ''} | Netto locale: ${formatEurFromCents(i.lineBaseCents, 'it')} | Fee: ${formatEurFromCents(i.lineFeeCents, 'it')} | Totale: ${formatEurFromCents(i.lineTotalCents, 'it')}`;
+      }),
+      '',
+      `NETTO DA BONIFICARE AL LOCALE: ${netVenueStr}`,
+      `COMMISSIONE NIGHTLIFE MILAN (${feeInfo.isMixed ? 'mista' : `${feePct}%`}): ${feeEurStr}`,
+      `TOTALE INCASSATO CLIENTE (EUR): ${totalEurStr}${paidCur !== 'EUR' ? ` (${paidCurStr} ${paidCur})` : ''}`,
+      `CRM: ${crmUrl}`,
+    ].join('\n');
+
+    return {
+      to: STAFF_ACTIVATION_EMAIL,
+      subject,
+      html,
+      text,
+      idempotencyKey: `nlm-sp-staff-${order.id}`,
+    };
+  }
+
+  const hasSinglePassItems = order.items.some(
+    (i) => i.channel === 'single-pass' || (!i.channel && STOREFRONT_VENUE_ID_SET.has(i.venueId)),
+  );
+  const hasVenueChannelItems = order.items.some((i) => i.channel === 'venue');
+  const orderTags: string[] = [];
+  if (hasSinglePassItems) orderTags.push('SINGLE PASS DA SOLI');
+  if (order.items.some((i) => i.channel !== 'single-pass' && (i.lineFeeCents > 0 || (i.feeRate ?? 0) > 0))) {
+    orderTags.push('CONCIERGE +20%');
+  }
+  if (order.items.some((i) => i.channel !== 'single-pass' && i.lineFeeCents === 0 && (i.feeRate ?? 0) === 0)) {
+    orderTags.push('PARTNER 0%');
+  }
+  if (orderTags.length === 0) {
+    orderTags.push(order.feeCents > 0 ? 'CONCIERGE +20%' : 'PARTNER 0%');
+  }
+  const tagLabel = orderTags.join(' + ');
+  const venueNames = Array.from(new Set(order.items.map((i) => i.venueName))).join(' / ') || 'Nightlife Milan';
+  const dietaryChoices = order.items
+    .filter((i) => i.dietaryChoice)
+    .map((i) => `${i.venueName}: ${i.quantity}x ${i.dietaryChoice} (${i.title})`);
+
+  const subject = `[${tagLabel}] ${venueNames} · #${order.id} · ${order.customer.fullName} (${headcount} pax · Netto ${netVenueStr})`;
+
+  const rowsHtml = order.items
+    .map((item) => {
+      const paxCount = typeof item.totalGuests === 'number' ? item.totalGuests : item.quantity;
+      const itemFeePct = Math.round((item.feeRate ?? (item.lineBaseCents > 0 ? item.lineFeeCents / item.lineBaseCents : feeInfo.rate)) * 100);
+      const itemChannelLabel =
+        item.channel === 'single-pass'
+          ? 'Single Pass da soli'
+          : itemFeePct === 0
+            ? 'Partner diretto 0%'
+            : hasVenueChannelItems || item.channel === 'venue'
+              ? `Concierge +${itemFeePct}%`
+              : `Canale standard +${itemFeePct}%`;
+      return `<tr>
+        <td style="padding:8px;border-bottom:1px solid #2A2620;color:#F6F1E7;">
+          <strong>${escapeHtml(item.venueName)} · ${escapeHtml(item.title)}</strong><br/>
+          <span style="font-size:12px;color:#C2B9AA;">${escapeHtml(itemChannelLabel)} · SKU: ${escapeHtml(item.skuId)} · Orario: ${escapeHtml(item.arrivalTime)}${item.dietaryChoice ? ` · Menù: ${escapeHtml(item.dietaryChoice)}` : ''}</span>
+        </td>
+        <td style="padding:8px;border-bottom:1px solid #2A2620;text-align:center;color:#F6F1E7;">${item.quantity}</td>
+        <td style="padding:8px;border-bottom:1px solid #2A2620;text-align:center;color:#F6F1E7;">${paxCount > 0 ? `${paxCount} pax` : 'Tavolo add-on'}</td>
+        <td style="padding:8px;border-bottom:1px solid #2A2620;text-align:right;color:#D4AF37;">${escapeHtml(formatEurFromCents(item.lineBaseCents, 'it'))}</td>
+        <td style="padding:8px;border-bottom:1px solid #2A2620;text-align:right;color:#C2B9AA;">+${itemFeePct}% (${escapeHtml(formatEurFromCents(item.lineFeeCents, 'it'))})</td>
+        <td style="padding:8px;border-bottom:1px solid #2A2620;text-align:right;color:#F6F1E7;">${escapeHtml(formatEurFromCents(item.lineTotalCents, 'it'))}</td>
+      </tr>`;
+    })
+    .join('');
+
+  const html = `<!doctype html>
+<html>
+<body style="margin:0;padding:24px;background:#050505;color:#F6F1E7;font-family:Arial,Helvetica,sans-serif;">
+  <div style="max-width:680px;margin:0 auto;border:1px solid #3A3224;background:#0B0A09;padding:28px;">
+    <p style="margin:0 0 8px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#D4AF37;">
+      NIGHTLIFE MILAN OPS · [${escapeHtml(tagLabel)}] ATTIVAZIONE ORDINE
+    </p>
+    <h1 style="margin:0 0 14px;font-size:22px;color:#F6F1E7;">
+      Nuovo ordine pagato #${escapeHtml(order.id)} · ${escapeHtml(venueNames)} (${headcount} pax)
+    </h1>
+    <p style="margin:0 0 18px;font-size:14px;line-height:1.5;color:#C2B9AA;">
+      Ordine online confermato e saldato. Registrare gli ospiti in lista / tavolo NIGHTLIFE MILAN presso ${escapeHtml(venueNames)}${hasSinglePassItems ? ' e gestire l’inserimento nel mini-gruppo WhatsApp Single Pass dal 20 dicembre 2026' : ''}.
+    </p>
+
+    <div style="background:#17130D;border:1px solid #D4AF37;padding:16px;margin-bottom:18px;font-size:14px;line-height:1.7;">
+      <div style="font-size:16px;color:#D4AF37;"><strong>NETTO DA BONIFICARE AL LOCALE: ${escapeHtml(netVenueStr)}</strong></div>
+      <div><strong>Commissione Nightlife Milan (${feeInfo.isMixed ? 'mista' : `${feePct}%`}):</strong> ${escapeHtml(feeEurStr)}</div>
+      <div><strong>Totale incassato dal cliente (EUR):</strong> ${escapeHtml(totalEurStr)}${paidCur !== 'EUR' ? ` (${escapeHtml(paidCurStr)} ${escapeHtml(paidCur)})` : ''}</div>
+    </div>
+
+    <div style="background:#141210;border:1px solid #2B2720;padding:14px 16px;margin-bottom:18px;font-size:13px;line-height:1.65;">
+      <div><strong>Canale / Tipo ordine:</strong> [${escapeHtml(tagLabel)}]</div>
+      <div><strong>Cliente:</strong> ${escapeHtml(order.customer.fullName)} (Età: ${order.customer.age}${order.customer.country ? `, ${escapeHtml(order.customer.country)}` : ''})</div>
+      <div><strong>Email:</strong> ${escapeHtml(order.customer.email)}</div>
+      <div><strong>WhatsApp / Tel:</strong> ${escapeHtml(order.customer.whatsapp)}</div>
+      <div><strong>Lingua ordine / parlate:</strong> ${escapeHtml(order.locale.toUpperCase())} · ${escapeHtml(order.customer.spokenLanguages.join(', '))}</div>
+      <div><strong>Ospiti totali (pax):</strong> ${headcount}</div>
+      ${dietaryChoices.length > 0 ? `<div><strong>Preferenze menù:</strong> ${escapeHtml(dietaryChoices.join(' | '))}</div>` : ''}
+      <div><strong>Allergie / Note:</strong> ${escapeHtml(order.customer.dietaryNotes || 'Non indicate')}</div>
+      <div><strong>PIN ordine / ID pagamento:</strong> ${escapeHtml(order.accessPin)} · ${escapeHtml(order.stripePaymentIntentId || 'n/d')}</div>
+    </div>
+
+    <table style="width:100%;border-collapse:collapse;margin-bottom:18px;font-size:13px;">
+      <thead>
+        <tr>
+          <th style="text-align:left;padding:8px;border-bottom:1px solid #444;color:#8E8577;">Locale / Formula / Canale</th>
+          <th style="text-align:center;padding:8px;border-bottom:1px solid #444;color:#8E8577;">Qta</th>
+          <th style="text-align:center;padding:8px;border-bottom:1px solid #444;color:#8E8577;">Pax</th>
+          <th style="text-align:right;padding:8px;border-bottom:1px solid #444;color:#8E8577;">Netto Locale</th>
+          <th style="text-align:right;padding:8px;border-bottom:1px solid #444;color:#8E8577;">Fee</th>
+          <th style="text-align:right;padding:8px;border-bottom:1px solid #444;color:#8E8577;">Totale</th>
+        </tr>
+      </thead>
+      <tbody>${rowsHtml}</tbody>
+    </table>
+
+    <p style="margin:0;">
+      <a href="${escapeHtml(crmUrl)}" style="display:inline-block;background:#D4AF37;color:#050505;padding:10px 18px;font-weight:bold;text-decoration:none;font-size:12px;letter-spacing:1px;text-transform:uppercase;">
+        Apri CRM Ordini Nightlife Milan
+      </a>
+    </p>
+  </div>
+</body>
+</html>`;
+
   const text = [
-    `ATTIVAZIONE PRENOTAZIONE TERRAZZA DUOMO 21 / MA.RE`,
+    `[${tagLabel}] ATTIVAZIONE ORDINE ${venueNames}`,
     `Ordine: ${order.id} | PIN: ${order.accessPin} | Payment ID: ${order.stripePaymentIntentId || 'n/d'}`,
-    `Cliente: ${order.customer.fullName} | Email: ${order.customer.email} | WhatsApp: ${order.customer.whatsapp}`,
+    `Cliente: ${order.customer.fullName} (Età ${order.customer.age}) | Email: ${order.customer.email} | WhatsApp: ${order.customer.whatsapp}`,
     `Ospiti totali: ${headcount} pax | Lingua: ${order.locale.toUpperCase()}`,
-    `Scelta secondo (1° piano): ${mainChoices.length > 0 ? mainChoices.join(' | ') : 'n/a'}`,
-    `Allergie / Intolleranze (entro 28/12): ${order.customer.dietaryNotes || 'Non indicate'}`,
+    ...(dietaryChoices.length > 0 ? [`Menù: ${dietaryChoices.join(' | ')}`] : []),
+    `Allergie / Note: ${order.customer.dietaryNotes || 'Non indicate'}`,
     '',
     'DETTAGLIO PACCHETTI:',
     ...order.items.map((i) => {
       const paxCount = typeof i.totalGuests === 'number' ? i.totalGuests : i.quantity;
-      return `- ${i.title} x${i.quantity} (${paxCount > 0 ? `${paxCount} pax` : 'Tavolo add-on'})${i.dietaryChoice ? ` [${i.dietaryChoice}]` : ''} | Netto locale: ${formatEurFromCents(i.lineBaseCents, 'it')} | Fee: ${formatEurFromCents(i.lineFeeCents, 'it')} | Totale: ${formatEurFromCents(i.lineTotalCents, 'it')}`;
+      const itemFeePct = Math.round((i.feeRate ?? (i.lineBaseCents > 0 ? i.lineFeeCents / i.lineBaseCents : feeInfo.rate)) * 100);
+      const itemChan = i.channel === 'single-pass' ? 'Single Pass' : itemFeePct === 0 ? 'Partner 0%' : `Concierge +${itemFeePct}%`;
+      return `- [${itemChan}] ${i.venueName} · ${i.title} x${i.quantity} (${paxCount > 0 ? `${paxCount} pax` : 'Tavolo add-on'})${i.dietaryChoice ? ` [${i.dietaryChoice}]` : ''} | Netto locale: ${formatEurFromCents(i.lineBaseCents, 'it')} | Fee: ${formatEurFromCents(i.lineFeeCents, 'it')} | Totale: ${formatEurFromCents(i.lineTotalCents, 'it')}`;
     }),
     '',
     `NETTO DA BONIFICARE AL LOCALE: ${netVenueStr}`,

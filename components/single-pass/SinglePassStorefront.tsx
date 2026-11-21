@@ -17,6 +17,7 @@ import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { localePrefix } from '@/lib/i18n/locales';
 import { capodannoEventPath } from '@/lib/capodanno/routes';
 import {
+  DINNER_DIETARY_OPTIONS,
   SINGLE_PASS_SKUS,
   STOREFRONT_VENUES,
   formatEurFromCents,
@@ -29,7 +30,6 @@ import { useSinglePassCart } from './SinglePassCartContext';
 const ALL_CATEGORIES: readonly SinglePassPackageCategory[] = [
   'all-night-combo',
   'vip-table-share',
-  'vip-table-full',
   'gala-dinner',
   'royal-buffet',
   'club-entry',
@@ -67,7 +67,10 @@ export default function SinglePassStorefront({
     return STOREFRONT_VENUES.filter((v) => {
       if (selectedVenue !== 'all' && v.id !== selectedVenue) return false;
       const skus = SINGLE_PASS_SKUS.filter(
-        (s) => s.venueId === v.id && (selectedCategory === 'all' || s.category === selectedCategory),
+        (s) =>
+          s.venueId === v.id &&
+          s.category !== 'vip-table-full' &&
+          (selectedCategory === 'all' || s.category === selectedCategory),
       );
       return skus.length > 0;
     });
@@ -333,6 +336,7 @@ export default function SinglePassStorefront({
               const skus = SINGLE_PASS_SKUS.filter(
                 (s) =>
                   s.venueId === venue.id &&
+                  s.category !== 'vip-table-full' &&
                   (selectedCategory === 'all' || s.category === selectedCategory),
               );
               return (
@@ -432,9 +436,11 @@ export default function SinglePassStorefront({
                                     className="mt-1 h-9 w-full border border-[#050505]/30 bg-white px-2.5 text-xs text-[#050505]"
                                   >
                                     <option value="">{isIt ? 'Standard Gala Menu' : 'Standard Gala Menu'}</option>
-                                    <option value="Terra">{isIt ? 'Preferenza Terra' : 'Meat / Land'}</option>
-                                    <option value="Mare">{isIt ? 'Preferenza Mare' : 'Seafood'}</option>
-                                    <option value="Vegetariano">{isIt ? 'Vegetariano / Allergie' : 'Vegetarian / Allergies'}</option>
+                                    {DINNER_DIETARY_OPTIONS.map((opt) => (
+                                      <option key={opt.value} value={opt.value}>
+                                        {isIt ? opt.labelIt : opt.labelEn}
+                                      </option>
+                                    ))}
                                   </select>
                                 </label>
                               </div>
