@@ -135,7 +135,6 @@ export default async function SiteShell({ locale, editorialFields, copyrightYear
       className={`${montserrat.variable} ${cormorant.variable} ${bodoni.variable} ${jakarta.variable} ${jetbrains.variable} ${scriptFont?.variableClass ?? ''}`.trim()}
     >
       <head>
-        <meta name="p:domain_verify" content="3c0493e59877d6539a83fba224ccd6c0" />
         {scriptFont ? <link rel="stylesheet" href={scriptFont.cssHref} /> : null}
         {/* GA loads on first interaction (see GoogleAnalytics.tsx) — dns-prefetch only, no premature preconnect */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
