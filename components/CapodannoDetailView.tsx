@@ -287,9 +287,11 @@ export default function CapodannoDetailView({ locale, event }: Props) {
   };
 
   const mapQuery = encodeURIComponent(`${event.venueName}, ${event.address}, ${event.city}`);
+  const [capDisplayH1, ...capTitleExtra] = title.split(/\s*·\s*/);
+  const capTitleQualifier = capTitleExtra.join(' · ');
 
   return (
-    <main className="min-h-[100dvh] bg-[#050505] pb-24 pt-20 text-[#F6F1E7]">
+    <main className="taste-pillar-root taste-capodanno-root min-h-[100dvh] bg-[#050505] pb-24 pt-20 text-[#F6F1E7]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -318,7 +320,19 @@ export default function CapodannoDetailView({ locale, event }: Props) {
             />
           </div>
           <div className="border-b border-[#F6F1E7]/14 bg-[#0B0A09] px-6 py-6 sm:px-10 sm:py-8">
-            <div className="flex flex-wrap gap-2">
+            <h1
+              data-event-title={title}
+              data-event-party-only={isPartyOnly ? 'true' : undefined}
+              data-event-sold-out-nye={isUnavailableForNye ? 'true' : undefined}
+              className="font-display font-bold uppercase leading-none text-[#F6F1E7]"
+            >
+              {capDisplayH1 || title}
+            </h1>
+            {capTitleQualifier && (
+              <p className="mt-2 font-sans text-base font-semibold text-[#EAE3D5]">{capTitleQualifier}</p>
+            )}
+            <p className="mt-2 font-sans text-base italic text-[#C2B9AA] sm:text-lg">{subtitle}</p>
+            <div className="mt-4 flex flex-wrap gap-2">
               <span className="bg-[#F6F1E7] px-3 py-1 text-[13px] font-bold text-[#050505]">
                 {ui.dateBadge}
               </span>
@@ -336,15 +350,6 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 </span>
               )}
             </div>
-            <h1
-              data-event-title={title}
-              data-event-party-only={isPartyOnly ? 'true' : undefined}
-              data-event-sold-out-nye={isUnavailableForNye ? 'true' : undefined}
-              className="mt-3 font-display text-4xl font-bold uppercase leading-none text-[#F6F1E7] sm:text-6xl"
-            >
-              {title}
-            </h1>
-            <p className="mt-2 font-sans text-base italic text-[#EAE3D5] sm:text-lg">{subtitle}</p>
           </div>
 
           <div className="p-6 sm:p-10">

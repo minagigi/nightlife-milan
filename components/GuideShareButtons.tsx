@@ -3,7 +3,15 @@
 import { Share2, Link as LinkIcon } from 'lucide-react';
 import { useState } from 'react';
 
-export default function GuideShareButtons({ url, title }: { url: string, title: string }) {
+export default function GuideShareButtons({
+  url,
+  title,
+  variant = 'dark',
+}: {
+  url: string;
+  title: string;
+  variant?: 'dark' | 'light';
+}) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -16,25 +24,38 @@ export default function GuideShareButtons({ url, title }: { url: string, title: 
     window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(title + ' ' + url)}`, '_blank');
   };
 
+  const isLight = variant === 'light';
+  const wrapClass = isLight
+    ? 'flex items-center gap-3'
+    : 'flex items-center gap-4 mt-8 pt-8';
+  const labelClass = isLight
+    ? 'text-sm text-[#050505] font-semibold'
+    : 'text-sm text-[#C9C7C2] font-semibold';
+  const btnClass = isLight
+    ? 'min-h-[44px] min-w-[44px] inline-flex items-center justify-center bg-[#EAE3D5] text-[#050505] hover:bg-[#050505] hover:text-[#FFFFFF] transition-colors'
+    : 'min-h-[44px] min-w-[44px] inline-flex items-center justify-center bg-[#141311] text-[#F6F1E7] hover:bg-[#FFFFFF] hover:text-[#050505] transition-colors';
+
   return (
-    <div className="flex items-center gap-4 mt-8 pt-8 border-t border-white/10">
-      <span className="text-sm text-white/40 uppercase tracking-wider font-semibold">Share</span>
+    <div className={wrapClass}>
+      <span className={labelClass}>Share</span>
       <button
+        type="button"
         onClick={handleWhatsApp}
-        className="p-2 rounded-full bg-white/[0.03] border border-white/10 text-white/70 hover:text-champagne hover:border-champagne transition-colors"
+        className={btnClass}
         aria-label="Share on WhatsApp"
       >
         <Share2 className="w-4 h-4" />
       </button>
       <button
+        type="button"
         onClick={handleCopy}
-        className="p-2 rounded-full bg-white/[0.03] border border-white/10 text-white/70 hover:text-champagne hover:border-champagne transition-colors relative"
+        className={`${btnClass} relative`}
         aria-label="Copy Link"
       >
         <LinkIcon className="w-4 h-4" />
         {copied && (
-          <span className="absolute -top-8 left-1/2 -translate-x-1/2 text-xs bg-champagne text-charcoal px-2 py-1 rounded">
-            Copied!
+          <span className="absolute -top-9 left-1/2 -translate-x-1/2 text-[14px] font-semibold bg-[#25D366] text-[#050505] px-2.5 py-1 whitespace-nowrap">
+            Copied
           </span>
         )}
       </button>

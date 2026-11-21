@@ -20,6 +20,8 @@ import { VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
+import TasteMotionLayer from '@/components/TasteMotionLayer';
+import TasteHeroCrossfade from '@/components/TasteHeroCrossfade';
 
 // ISR Configuration
 export const revalidate = 3600;
@@ -428,6 +430,398 @@ export default async function GenrePage({ params }: Props) {
     })),
   };
 
+  const isTasteReggaeton = canonicalGenreSlug === 'reggaeton';
+
+  if (isTasteReggaeton) {
+    const rp = REGGAETON_35_PACKS[loc] || REGGAETON_35_PACKS.en;
+    const clubsDir = getLocalizedDir35('clubs', loc);
+    const guidesDir = getLocalizedDir35('guides', loc);
+    const g118Slug = getExistingGuideSlug35('g-118', loc);
+    const waUrl = getConciergeBookingUrl(loc, gLoc.h1, currentGenreUrl);
+    const shortDisplayTitle = `${gLoc.name.split('&')[0].trim()} Milano 2027`;
+    const crossfadeImgs = Array.from(new Set([genreHeroImg, ...genreInlineImgs]));
+
+    return (
+      <main className="taste-pillar-root flex-1 bg-[#050505] text-[#F6F1E7] w-full">
+        <TasteMotionLayer />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify([breadcrumbSchema, faqSchema]) }}
+        />
+
+        {/* 1. Hero (#050505) */}
+        <section className="bg-[#050505] text-[#F6F1E7] pt-8 sm:pt-12 pb-16 sm:pb-24">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav className="text-[14px] text-[#C2B9AA] mb-8" aria-label="Breadcrumb">
+              <ol className="list-none p-0 flex flex-wrap items-center gap-2">
+                <li>
+                  <Link href={lp || '/'} className="hover:text-[#F6F1E7] transition-colors">
+                    {gLoc.ui.home}
+                  </Link>
+                </li>
+                <li aria-hidden="true">/</li>
+                <li>
+                  <Link href={`${lp}/genres`} className="hover:text-[#F6F1E7] transition-colors">
+                    {gLoc.ui.genresHub}
+                  </Link>
+                </li>
+                <li aria-hidden="true">/</li>
+                <li className="text-[#F6F1E7] font-semibold" aria-current="page">
+                  {gLoc.name}
+                </li>
+              </ol>
+            </nav>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-end">
+              <div className="lg:col-span-7" data-taste-reveal>
+                <h1 className="font-display font-extrabold text-[#F6F1E7] m-0 mb-5">
+                  {shortDisplayTitle}
+                </h1>
+                <p className="text-lg sm:text-xl font-semibold text-[#EAE3D5] leading-snug mb-3 max-w-2xl">
+                  {gLoc.h1}
+                </p>
+                <p className="text-base text-[#C2B9AA] leading-relaxed mb-6 max-w-xl">
+                  {gLoc.lead} ({items.length} {gLoc.ui.upcomingEvents}).
+                </p>
+
+                <div className="flex flex-wrap gap-2 mb-7">
+                  {gLoc.topClubs.slice(0, 6).map((club) => (
+                    <span
+                      key={club}
+                      className="px-3.5 py-2 bg-[#141311] text-[#EAE3D5] text-[14px] font-medium"
+                    >
+                      {club}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="flex flex-wrap gap-3">
+                  <a
+                    href={waUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="taste-btn-primary"
+                  >
+                    <MessageCircle className="w-4 h-4 shrink-0" />
+                    <span>{gLoc.ui.bookVipCta}</span>
+                  </a>
+                  <a href="#reggaeton-partners" className="taste-btn-outline-light">
+                    <span>{rp.boxTitle}</span>
+                  </a>
+                </div>
+              </div>
+
+              <div className="lg:col-span-5">
+                <TasteHeroCrossfade
+                  images={crossfadeImgs}
+                  altPrimary={gLoc.h1}
+                  altSecondary={gLoc.subtitle}
+                  title={gLoc.h1}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 2. Warm Ivory Quick Brief & TOC (#F6F1E7) */}
+        <section className="bg-[#F6F1E7] text-[#050505] py-12 sm:py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pb-8 mb-8" data-taste-stagger>
+              <div>
+                <p className="text-lg sm:text-xl font-bold text-[#050505] tabular-nums m-0">{REGGAETON_PARTNER_VENUES.length}</p>
+                <p className="text-[14px] text-[#3B362E] mt-1 m-0">{rp.boxTitle}</p>
+              </div>
+              <div>
+                <p className="text-lg sm:text-xl font-bold text-[#050505] tabular-nums m-0">{items.length}</p>
+                <p className="text-[14px] text-[#3B362E] mt-1 m-0">{gLoc.ui.upcomingEvents}</p>
+              </div>
+              <div>
+                <p className="text-lg sm:text-xl font-bold text-[#050505] tabular-nums m-0">{gLoc.ui.verifiedBadge}</p>
+                <p className="text-[14px] text-[#3B362E] mt-1 m-0">{gLoc.ui.quickAnswerTitle}</p>
+              </div>
+              <div>
+                <p className="text-lg sm:text-xl font-bold text-[#050505] tabular-nums m-0">24/7</p>
+                <p className="text-[14px] text-[#3B362E] mt-1 m-0">WhatsApp +39 351 912 7047</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              <div className="lg:col-span-4 space-y-3" data-taste-reveal>
+                <h2 className="font-display font-bold text-[#050505] m-0">{gLoc.ui.tocTitle}</h2>
+                <p className="text-[15px] text-[#3B362E] leading-relaxed m-0">
+                  {gLoc.ui.verifiedBody}
+                </p>
+              </div>
+              <nav aria-label={gLoc.ui.tocTitle} className="lg:col-span-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3" data-taste-stagger>
+                  <a
+                    href="#reggaeton-partners"
+                    className="flex items-center justify-between gap-4 bg-[#EAE3D5] hover:bg-[#050505] hover:text-[#F6F1E7] text-[#050505] px-5 py-4 text-[15px] font-semibold transition-colors"
+                  >
+                    <span>{rp.boxTitle}</span>
+                    <span aria-hidden="true">→</span>
+                  </a>
+                  {gLoc.sections.map((sec) => (
+                    <a
+                      key={sec.id}
+                      href={`#${sec.id}`}
+                      className="flex items-center justify-between gap-4 bg-[#EAE3D5] hover:bg-[#050505] hover:text-[#F6F1E7] text-[#050505] px-5 py-4 text-[15px] font-medium transition-colors"
+                    >
+                      <span>{sec.heading}</span>
+                      <span aria-hidden="true">→</span>
+                    </a>
+                  ))}
+                </div>
+              </nav>
+            </div>
+          </div>
+        </section>
+
+        {/* 3. Uneven Gallery Strip (#050505) */}
+        {genreInlineImgs.length >= 2 && (
+          <section aria-label={gLoc.h1} className="bg-[#050505] py-8 sm:py-12">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="taste-uneven-strip" data-taste-stagger>
+                {genreInlineImgs.slice(0, 4).map((src, idx) => (
+                  <figure key={src} className="taste-uneven-panel">
+                    <Image
+                      src={src}
+                      alt={`${gLoc.name} Milan club atmosphere ${idx + 1}`}
+                      title={`${gLoc.name} Milan club ${idx + 1}`}
+                      fill
+                      unoptimized
+                      quality={92}
+                      sizes="(max-width: 1024px) 50vw, 40vw"
+                      className="object-cover brightness-[0.88] hover:brightness-100 transition-[filter] duration-500"
+                    />
+                  </figure>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* 4. Partner Reggaeton Venues Ledger (#050505) */}
+        <section id="reggaeton-partners" className="scroll-mt-24 bg-[#050505] text-[#F6F1E7] py-16 sm:py-20" data-no-lightbox="true">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mb-10" data-taste-reveal>
+              <div className="lg:col-span-7">
+                <h2 className="taste-section-display font-bold text-[#F6F1E7] m-0">{rp.boxTitle}</h2>
+              </div>
+              <div className="lg:col-span-5">
+                <p className="text-[15px] sm:text-base text-[#C2B9AA] leading-relaxed m-0">{rp.boxLead}</p>
+              </div>
+            </div>
+
+            <div className="bg-[#050505] flex flex-col gap-[2px] mb-8" data-taste-stagger>
+              {REGGAETON_PARTNER_VENUES.map((v) => (
+                <div
+                  key={v.name}
+                  className="bg-[#0B0A09] hover:bg-[#141311] p-5 sm:p-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-center transition-colors"
+                >
+                  <div className="md:col-span-4">
+                    <h3 className="font-display text-lg font-bold text-[#F6F1E7] m-0">{v.name}</h3>
+                    <p className="text-[14px] text-[#C2B9AA] mt-1 m-0">{v.district}</p>
+                  </div>
+                  <div className="md:col-span-4 text-[15px] font-medium text-[#EAE3D5]">
+                    {v.nightTag}
+                  </div>
+                  <div className="md:col-span-4 flex flex-wrap md:justify-end gap-2">
+                    {v.clubSlug && (
+                      <Link
+                        href={`${lp}/${clubsDir}/${getLocalizedVenueSlug35(v.clubSlug, loc)}`}
+                        locale={loc}
+                        className="taste-btn-outline-light text-[14px] px-4 py-2"
+                      >
+                        {rp.clubCta}
+                      </Link>
+                    )}
+                    {v.eventSlug && (
+                      <Link
+                        href={capodannoEventPath(v.eventSlug, loc)}
+                        locale={loc}
+                        className="taste-btn-primary text-[14px] px-4 py-2"
+                      >
+                        {rp.nyeCta}
+                      </Link>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <Link
+              href={`${lp}/${guidesDir}/${g118Slug}`}
+              locale={loc}
+              className="taste-btn-outline-light"
+            >
+              <span>{rp.guideCta}</span>
+            </Link>
+          </div>
+        </section>
+
+        {/* 5. Alternating Localized Reggaeton Chapters (#F6F1E7 / #050505) */}
+        {gLoc.sections.map((sec, idx) => {
+          const isLight = idx % 2 === 0;
+          const chapterImg = genreInlineImgs[idx % Math.max(1, genreInlineImgs.length)] || genreHeroImg;
+          return (
+            <section
+              key={sec.id}
+              id={sec.id}
+              className={`scroll-mt-24 py-14 sm:py-20 ${
+                isLight ? 'bg-[#F6F1E7] text-[#050505]' : 'bg-[#050505] text-[#F6F1E7]'
+              }`}
+            >
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start" data-taste-reveal>
+                  <div className="lg:col-span-4 lg:sticky lg:top-24">
+                    <h2 className={`font-display font-bold m-0 mb-4 ${isLight ? 'text-[#050505]' : 'text-[#F6F1E7]'}`}>
+                      {sec.heading}
+                    </h2>
+                    {idx === 0 ? (
+                      <div className="bg-[#EAE3D5] p-6 mt-5">
+                        <h3 className="font-display text-lg font-bold text-[#050505] flex items-center gap-2 mb-2">
+                          <Music className="w-4 h-4 shrink-0" />
+                          <span>{gLoc.name}</span>
+                        </h3>
+                        <p className="text-[15px] text-[#3B362E] leading-relaxed mb-5 m-0">
+                          {gLoc.subtitle}
+                        </p>
+                        <a
+                          href={waUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="taste-btn-dark w-full"
+                        >
+                          <MessageCircle className="w-4 h-4 shrink-0" />
+                          <span>{gLoc.ui.bookVipCta}</span>
+                        </a>
+                      </div>
+                    ) : (
+                      <figure className={`relative aspect-[4/3] w-full overflow-clip mt-4 ${isLight ? 'bg-[#EAE3D5]' : 'bg-[#0B0A09]'}`}>
+                        <Image
+                          src={chapterImg}
+                          alt={sec.heading}
+                          title={sec.heading}
+                          fill
+                          unoptimized
+                          quality={92}
+                          sizes="(max-width: 1024px) 100vw, 33vw"
+                          className="object-cover"
+                        />
+                      </figure>
+                    )}
+                  </div>
+
+                  <div className={`lg:col-span-8 space-y-4 ${isLight ? 'taste-prose-light' : 'taste-prose-dark'}`}>
+                    {sec.paragraphs.map((p, pIdx) => (
+                      <p key={pIdx} className="m-0">{p}</p>
+                    ))}
+                    {sec.bullets && (
+                      <ul className="list-disc pl-5 space-y-2">
+                        {sec.bullets.map((b, bIdx) => (
+                          <li key={bIdx}>{b}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </section>
+          );
+        })}
+
+        {/* 6. Upcoming Events Grid (#050505) */}
+        <div id="upcoming-reggaeton" className="bg-[#050505] pt-8">
+          {items.length > 0 ? (
+            <DiscoveryGrid
+              items={slimDiscoveryItemsForClient(items, loc, 24)}
+              lang={loc}
+              title={`${gLoc.ui.upcomingEvents} (${gLoc.name})`}
+              subtitle={gLoc.lead}
+            />
+          ) : (
+            <section className="max-w-3xl mx-auto px-4 py-16 text-center">
+              <div className="inline-flex items-center justify-center w-14 h-14 bg-[#141311] mb-5">
+                <Calendar className="w-6 h-6 text-[#25D366]" />
+              </div>
+              <h2 className="taste-section-display text-[#F6F1E7] mb-3">{gLoc.ui.bookVipCta}</h2>
+              <p className="text-[#C2B9AA] mb-7 text-base">{gLoc.ui.directDeskLabel}</p>
+              <Link href={`${lp}/events`} className="taste-btn-primary">
+                {gLoc.ui.upcomingEvents}
+              </Link>
+            </section>
+          )}
+        </div>
+
+        {/* 7. Interactive VIP Quote Calculator (#050505) */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+          <VipQuoteCalculator locale={loc} />
+        </section>
+
+        {/* 8. Split FAQ Accordion (#F6F1E7) */}
+        {gLoc.faqs.length > 0 && (
+          <section className="bg-[#F6F1E7] text-[#050505] py-16 sm:py-20">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+                <div className="lg:col-span-7">
+                  <h2 className="taste-section-display font-bold text-[#050505] mb-8" data-taste-reveal>
+                    {gLoc.ui.faqTitle} ({gLoc.name})
+                  </h2>
+                  <div className="space-y-3" data-taste-stagger>
+                    {gLoc.faqs.map((f, i) => (
+                      <details
+                        key={i}
+                        open={i === 0}
+                        className="taste-faq-item bg-[#EAE3D5] px-5 sm:px-6"
+                      >
+                        <summary className="text-base sm:text-lg font-bold text-[#050505]">
+                          <span>{f.question}</span>
+                          <span className="taste-faq-plus text-[#050505]" aria-hidden="true" />
+                        </summary>
+                        <p className="text-[15px] sm:text-base text-[#1F1C18] leading-relaxed pt-2 pb-3 m-0">
+                          {f.answer}
+                        </p>
+                      </details>
+                    ))}
+                  </div>
+                </div>
+                <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-6" data-taste-reveal>
+                  <figure className="relative aspect-[3/4] w-full overflow-clip bg-[#0B0A09]">
+                    <Image
+                      src={genreInlineImgs[2] || genreInlineImgs[0] || genreHeroImg}
+                      alt={`${gLoc.name} Milan VIP`}
+                      title={gLoc.h1}
+                      fill
+                      unoptimized
+                      quality={92}
+                      sizes="(max-width: 1024px) 100vw, 40vw"
+                      className="object-cover"
+                    />
+                  </figure>
+                  <Link href={`${lp}/genres`} className="taste-btn-dark w-full">
+                    <ArrowLeft className="w-4 h-4 shrink-0" />
+                    <span>{gLoc.ui.otherGenres}</span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {items.length > 0 && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: jsonLdString(generateEventListSchema(items, loc, gLoc.h1)),
+            }}
+          />
+        )}
+        <EditorialPageSections locale={loc} path={`${lp}/genres/${slug}`} />
+      </main>
+    );
+  }
+
   return (
     <main className="flex-grow pt-24 pb-20 bg-[#050505]">
       <script
@@ -537,7 +931,7 @@ export default async function GenrePage({ params }: Props) {
               const clubsDir = getLocalizedDir35('clubs', loc);
               const guidesDir = getLocalizedDir35('guides', loc);
               const g118Slug = getExistingGuideSlug35('g-118', loc);
-              return (
+              return (
                 <section className="mb-10 rounded-2xl border border-champagne/25 bg-white/[0.03] p-6">
                   <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-champagne mb-1.5">
                     {rp.boxEyebrow}

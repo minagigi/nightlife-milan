@@ -273,12 +273,12 @@ export default function VenueEventsAutoCarousel({
         aria-label={ui.targetTitle}
         className="border border-[#050505]/15 bg-[#F6F1E7] text-[#050505] p-6 sm:p-8"
       >
-        <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#3D372E]">
-          {ui.targetEyebrow}
-        </span>
-        <h2 className="mt-2 font-serif text-2xl sm:text-3xl font-normal text-[#050505]">
+        <h2 className="font-serif text-2xl sm:text-3xl font-normal text-[#050505] m-0">
           {venueName} · {ui.targetTitle}
         </h2>
+        <p className="mt-1.5 font-sans text-sm font-semibold text-[#3D372E]">
+          {ui.targetEyebrow}
+        </p>
         <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {[
             { label: ui.labelAge, value: targetProfile.ageRange },
@@ -320,36 +320,31 @@ export default function VenueEventsAutoCarousel({
       {/* 3. VENUE DECLARED AVAILABLE FOR ALL PARTY TYPES & CELEBRATIONS (60% Couture Noir) */}
       <section
         aria-label={ui.celebrationsTitle}
-        className="border border-[#F6F1E7]/16 bg-[#0B0A09] p-6 sm:p-8"
+        className="bg-[#0B0A09] p-6 sm:p-8"
       >
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#EAE3D5]">
-            {ui.celebrationsEyebrow}
-          </span>
-          <span className="border border-[#F6F1E7]/25 bg-[#050505] px-3 py-1 font-mono text-xs font-semibold text-[#F6F1E7]">
-            ✓ {ui.availableBadge}
+        <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+          <h2 className="font-serif text-2xl sm:text-3xl font-normal text-[#F6F1E7]">
+            {venueName} · {ui.celebrationsTitle}
+          </h2>
+          <span className="bg-[#141311] px-3 py-1.5 text-sm font-semibold text-[#25D366]">
+            {ui.availableBadge}
           </span>
         </div>
-        <h2 className="mt-2 font-serif text-2xl sm:text-3xl font-normal text-[#F6F1E7]">
-          {venueName} · {ui.celebrationsTitle}
-        </h2>
+        <p className="text-sm text-[#EAE3D5] mb-1">{ui.celebrationsEyebrow}</p>
         <p className="mt-2 text-sm text-[#C2B9AA] max-w-3xl">{ui.celebrationsSubtitle}</p>
 
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {celebrations.map((cel) => (
             <div
               key={cel.id}
-              className="border border-[#F6F1E7]/14 bg-[#050505] p-5 flex flex-col justify-between hover:border-[#F6F1E7]/45 transition"
+              className="bg-[#050505] p-5 flex flex-col justify-between hover:bg-[#141311] transition"
             >
               <div>
-                <span className="inline-block bg-[#F6F1E7] px-2.5 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-[#050505]">
-                  {cel.formula}
-                </span>
-                <h3 className="mt-3 font-serif text-xl font-normal text-[#F6F1E7]">{cel.title}</h3>
-                <p className="mt-1 font-mono text-xs font-semibold text-[#EAE3D5]">
-                  {cel.priceIndication}
+                <h3 className="font-serif text-xl font-normal text-[#F6F1E7]">{cel.title}</h3>
+                <p className="mt-1 text-sm font-semibold text-[#C2B9AA]">
+                  {cel.formula} · {cel.priceIndication}
                 </p>
-                <p className="mt-2.5 text-xs sm:text-sm text-[#C2B9AA] leading-relaxed">
+                <p className="mt-2.5 text-sm text-[#C2B9AA] leading-relaxed">
                   {cel.details}
                 </p>
               </div>
@@ -357,7 +352,7 @@ export default function VenueEventsAutoCarousel({
                 href={getConciergeBookingUrl(activeLocale, `${cel.title} · ${venueName}`, pathname)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 w-full inline-flex items-center justify-center bg-[#25D366] hover:bg-[#20bd5a] px-3.5 py-2.5 font-mono text-xs font-bold uppercase tracking-wider text-[#050505] transition"
+                className="taste-btn-primary mt-4 w-full text-sm"
               >
                 {ui.askQuoteCta}
               </a>
@@ -369,30 +364,30 @@ export default function VenueEventsAutoCarousel({
       {/* 4. ALL 10 TURNKEY SERVICES OFFERED AT THIS VENUE (30% Warm Editorial Ivory) */}
       <section
         aria-label={ui.servicesTitle}
-        className="border border-[#050505]/15 bg-[#F6F1E7] text-[#050505] p-6 sm:p-8"
+        className="bg-[#F6F1E7] text-[#050505] p-6 sm:p-8"
       >
-        <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#3D372E]">
-          {ui.servicesEyebrow}
-        </span>
-        <h2 className="mt-2 font-serif text-2xl sm:text-3xl font-normal text-[#050505]">
+        <h2 className="font-serif text-2xl sm:text-3xl font-normal text-[#050505]">
           {venueName} · {ui.servicesTitle}
         </h2>
+        <p className="mt-1 text-sm font-semibold text-[#3D372E]">
+          {ui.servicesEyebrow}
+        </p>
         <p className="mt-2 text-sm text-[#3D372E] max-w-3xl">{ui.servicesSubtitle}</p>
 
         <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           {services.map((srv, idx) => (
             <div
               key={srv.id}
-              className="border border-[#050505]/14 bg-[#EFE9DC] p-4 flex flex-col justify-between"
+              className="bg-[#EFE9DC] p-4 flex flex-col justify-between"
             >
               <div>
-                <div className="flex items-center justify-between font-mono text-xs text-[#3D372E] font-bold">
-                  <span>{String(idx + 1).padStart(2, '0')}</span>
-                  <span className="text-[#050505]">✓</span>
+                <div className="flex items-center justify-between text-sm text-[#3D372E] font-bold">
+                  <span>{idx + 1}.</span>
+                  <span className="text-[#050505]">-</span>
                 </div>
                 <h3 className="mt-2 font-serif text-base font-semibold text-[#050505]">{srv.title}</h3>
-                <p className="mt-1 font-mono text-[11px] font-semibold uppercase tracking-wider text-[#3D372E]">{srv.spec}</p>
-                <p className="mt-2 text-xs text-[#1F1C18] leading-relaxed">{srv.description}</p>
+                <p className="mt-1 text-sm font-semibold text-[#3D372E]">{srv.spec}</p>
+                <p className="mt-2 text-sm text-[#1F1C18] leading-relaxed">{srv.description}</p>
               </div>
             </div>
           ))}

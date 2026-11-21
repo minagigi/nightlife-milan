@@ -15,6 +15,15 @@ import { ALL_35_LOCALES, resolveExistingGuideId } from '../lib/i18n/localizedSlu
 import { REGGAETON_35_PACKS, REGGAETON_PARTNER_VENUES } from '../lib/i18n/reggaetonSeo35';
 import { buildClubHighCtrDescription, buildClubHighCtrTitle } from '../lib/clubSeoMeta35';
 import { VENUE_AUTHORITY_33 } from '../lib/venueAuthority33';
+import { PILLAR_HEADLINE_35, getPillarDisplayHeadline } from '../lib/guidesGscPillar20261120';
+import { buildTasteExplorerData } from '../lib/tasteExplorerData';
+import {
+  EXPLORER_VENUE_PHOTOS,
+  getEditorialDisplayHeadline,
+  getGuideCardCover,
+  getGuideEditorialBundle,
+} from '../lib/guideEditorialMedia';
+import { getLocalizedText } from '../lib/seo';
 
 const REPO_ROOT = path.resolve(__dirname, '..');
 
@@ -242,4 +251,91 @@ test('Zero duplicate -vip-guide-vip-guide slugs and legacy guide alias resolutio
     resolveExistingGuideId('varese-pavia-lodi-novara-to-milan-clubs-vip-guide-vip-guide'),
     'g-114',
   );
+});
+
+test('PILLAR_HEADLINE_35 & buildTasteExplorerData preserve SEO headlines, honest TBA, 18 partners, and zero forbidden copy across 35 locales', () => {
+  for (const gid of ['g-117', 'g-118'] as const) {
+    for (const loc of ALL_35_LOCALES) {
+      const h1 = getPillarDisplayHeadline(gid, loc);
+      assert.ok(PILLAR_HEADLINE_35[gid][loc], `Missing headline ${gid} for ${loc}`);
+      assert.ok(h1.length >= 10 && h1.length <= 42, `${gid} (${loc}) H1 length ${h1.length} out of bounds: ${h1}`);
+      assert.ok(!/[!\u2014]/.test(h1), `${gid} (${loc}) H1 contains forbidden punctuation: ${h1}`);
+      if (loc === 'ro') {
+        assert.ok(!/[şţŞŢ]/.test(h1), `${gid} (ro) H1 contains Romanian cedilla: ${h1}`);
+      }
+    }
+  }
+
+  for (const loc of ALL_35_LOCALES) {
+    const clubExp = buildTasteExplorerData('clubbing', loc, `https://nightlifemilan.com/${loc}/guides/test`);
+    assert.equal(clubExp.items.length, 18, `Expected 18 partner clubs for ${loc}`);
+    assert.ok(clubExp.filterOptions.length >= 4);
+    for (const item of clubExp.items) {
+      assert.ok(item.waHref.startsWith('https://wa.me/393519127047'), `Invalid WhatsApp link on ${item.id} (${loc})`);
+      assert.ok(!/237,60|\+20%|Stripe|Roberto Cavalli|Priorità #/i.test(`${item.name} ${item.rate} ${item.status} ${item.detailNote}`), `Forbidden text in club explorer ${item.id} (${loc})`);
+    }
+    const tom = clubExp.items.find((i) => i.id === 'tom');
+    assert.ok(tom && !/\b500\b|\b300\b/i.test(tom.rate), `TOM (${loc}) leaked fake rate`);
+
+    const termeExp = buildTasteExplorerData('terme', loc, `https://nightlifemilan.com/${loc}/guides/test-terme`);
+    assert.equal(termeExp.items.length, 9, `Expected 9 Terme/Lake entries for ${loc}`);
+    const sirmione = termeExp.items.find((i) => i.id === 'sirmione');
+    assert.ok(sirmione && sirmione.rate === '198 EUR', `Sirmione (${loc}) missing 198 EUR`);
+    const qc = termeExp.items.find((i) => i.id === 'qc-milano');
+    assert.ok(qc && !/\b198\b|\b300\b|\b500\b/i.test(qc.rate), `QC Terme (${loc}) leaked non-TBA price: ${qc?.rate}`);
+  }
+});
+
+test('V2 Curated Editorial Media & Reusable 118-Guide Template invariants', () => {
+  const editorialDir = path.join(REPO_ROOT, 'public/images/guides-editorial');
+  assert.ok(fs.existsSync(editorialDir), 'Missing public/images/guides-editorial directory');
+  const curatedFiles = fs.readdirSync(editorialDir).filter((f) => f.endsWith('.webp'));
+  assert.ok(curatedFiles.length >= 28, `Expected >= 28 curated .webp assets, got ${curatedFiles.length}`);
+  for (const file of curatedFiles) {
+    const abs = path.join(editorialDir, file);
+    assert.ok(fs.statSync(abs).size <= 307_200, `Curated image ${file} exceeds 300 KB`);
+  }
+
+  for (const gid of ['g-117', 'g-118', 'g-rooftops-milan', 'g-8', 'g-15'] as const) {
+    const hero = GUIDE_HERO_IMAGES_114[gid];
+    const inlines = GUIDE_INLINE_IMAGES_114[gid] || [];
+    assert.ok(hero.startsWith('/images/guides-editorial/'), `${gid} hero should use curated editorial pack: ${hero}`);
+    assert.equal(hero.includes('capodanno-2027-posters'), false);
+    for (const img of inlines) {
+      assert.ok(img.startsWith('/images/guides-editorial/'), `${gid} inline should use curated editorial pack: ${img}`);
+      assert.equal(img.includes('capodanno-2027-posters'), false);
+    }
+  }
+
+  // All 27 Explorer items (9 Terme + 18 Partner Clubs) have valid curated photos on disk
+  assert.equal(Object.keys(EXPLORER_VENUE_PHOTOS).length, 27);
+  for (const mode of ['terme', 'clubbing'] as const) {
+    const exp = buildTasteExplorerData(mode, 'it', 'https://nightlifemilan.com/it/guides/test');
+    for (const item of exp.items) {
+      assert.ok(item.image.startsWith('/images/guides-editorial/'), `Missing curated image on ${item.id}`);
+      const abs = path.join(REPO_ROOT, 'public', item.image.replace(/^\//, ''));
+      assert.ok(fs.existsSync(abs), `Explorer image missing on disk: ${abs}`);
+    }
+  }
+
+  // Reusable editorial bundle & concise <=2-line display headline across all 118 guides
+  for (const guide of mockGuides) {
+    for (const loc of ['it', 'en', 'fr'] as const) {
+      const fullTitle = getLocalizedText(guide.title, loc);
+      const disp = getEditorialDisplayHeadline(guide.id, loc, fullTitle);
+      assert.ok(disp.length >= 4 && disp.length <= 42, `${guide.id} (${loc}) display headline bad length: ${disp}`);
+      assert.ok(!/[!\u2014]/.test(disp), `${guide.id} (${loc}) display headline forbidden char: ${disp}`);
+      const heroImg = GUIDE_HERO_IMAGES_114[guide.id] || guide.image || '/images/guides-editorial/just-me-pavilion.webp';
+      const bundle = getGuideEditorialBundle(guide, loc, fullTitle, heroImg);
+      assert.equal(bundle.heroSlides[0].src, heroImg, `${guide.id} heroSlides[0] must equal og:image`);
+      assert.equal(bundle.stripPlates.length, 4);
+      assert.equal(bundle.chapterPlates.length, 4);
+      for (const pl of [...bundle.stripPlates, ...bundle.chapterPlates]) {
+        assert.ok(pl.src.startsWith('/images/guides-editorial/'));
+        assert.ok(fs.existsSync(path.join(REPO_ROOT, 'public', pl.src.replace(/^\//, ''))));
+      }
+    }
+    const cover = getGuideCardCover(guide.id);
+    assert.ok(fs.existsSync(path.join(REPO_ROOT, 'public', cover.replace(/^\//, ''))));
+  }
 });
