@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import LegalDocumentPage from '@/components/LegalDocumentPage';
+import { MarketingConsentManager } from '@/components/PinterestTag';
 import { getMagisterMidaLegalDocument } from '@/lib/legal/magisterMidaLegal35';
 import { canonicalPageUrl, getLocaleDef, hreflangAlternates } from '@/lib/i18n/locales';
 
@@ -31,5 +32,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function CookiePolicyPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  return <LegalDocumentPage locale={locale} kind="cookies" />;
+  return (
+    <>
+      <LegalDocumentPage locale={locale} kind="cookies" />
+      <MarketingConsentManager locale={locale} />
+    </>
+  );
 }

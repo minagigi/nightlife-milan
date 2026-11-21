@@ -1,4 +1,5 @@
 import type { LocaleCode } from '@/lib/i18n/localeRegistry';
+import { PINTEREST_ENABLED, PINTEREST_LEGAL_SECTION } from '@/lib/pinterest';
 
 export const MAGISTER_MIDA_COMPANY = {
   brandName: 'Nightlife Milan',
@@ -357,6 +358,26 @@ function buildSectionsIt(kind: LegalDocKind, brandNotice: string): LegalSection[
   ];
 }
 
+/**
+ * Con Pinterest Tag attivo (NEXT_PUBLIC_PINTEREST_TAG_ID) aggiunge la riga dedicata a
+ * Cookie Policy e Privacy, prima dell'ultima sezione (preferenze / diritti). Senza Tag: invariato.
+ */
+function withPinterestSection(kind: LegalDocKind, isIt: boolean, sections: LegalSection[]): LegalSection[] {
+  if (!PINTEREST_ENABLED || (kind !== 'cookies' && kind !== 'privacy')) return sections;
+  const copy = isIt ? PINTEREST_LEGAL_SECTION.it : PINTEREST_LEGAL_SECTION.en;
+  const insertAt = Math.max(sections.length - 1, 0);
+  const renumber = (s: LegalSection, n: number): LegalSection => ({ ...s, heading: s.heading.replace(/^\d+\./, `${n}.`) });
+  const extra: LegalSection = {
+    heading: `${insertAt + 1}. ${kind === 'cookies' ? copy.cookiesHeading : copy.privacyHeading}`,
+    body: copy.body,
+  };
+  return [
+    ...sections.slice(0, insertAt),
+    extra,
+    ...sections.slice(insertAt).map((s, i) => renumber(s, insertAt + 2 + i)),
+  ];
+}
+
 export function getMagisterMidaLegalDocument(locale: string, kind: LegalDocKind): LegalDocumentPack {
   const loc = (TERMS_BRAND_NOTICE_35[locale as LocaleCode] ? locale : 'en') as LocaleCode;
   const isIt = loc === 'it';
@@ -402,8 +423,10 @@ export function getMagisterMidaLegalDocument(locale: string, kind: LegalDocKind)
     contactLabel: isIt ? 'Contatti Ufficiali' : 'Official Contacts',
     crossLinksLabel: isIt ? 'Tutte le Pagine Legali Ufficiali' : 'All Official Legal Pages',
     navLabels,
-    sections: isIt
-      ? buildSectionsIt(kind, brandOwnershipNotice)
-      : buildSectionsEn(kind, brandOwnershipNotice),
+    sections: withPinterestSection(
+      kind,
+      isIt,
+      isIt ? buildSectionsIt(kind, brandOwnershipNotice) : buildSectionsEn(kind, brandOwnershipNotice),
+    ),
   };
 }

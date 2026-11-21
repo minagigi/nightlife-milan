@@ -15,6 +15,8 @@ import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { readEditorialFields } from '@/lib/editorialContent';
 
 import SiteShell from '@/components/SiteShell';
+import PinterestTag from '@/components/PinterestTag';
+import { PINTEREST_DOMAIN_VERIFY } from '@/lib/pinterest';
 
 export const viewport: Viewport = {
   themeColor: '#050505',
@@ -292,6 +294,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       'og:locale:alternate': ENABLED_LOCALES.filter((item) => item.code !== localeDef.code)
         .slice(0, 8)
         .map((item) => item.ogLocale),
+      // Verifica dominio Pinterest: stampata solo se la variabile d'ambiente e' valorizzata.
+      ...(PINTEREST_DOMAIN_VERIFY ? { 'p:domain_verify': PINTEREST_DOMAIN_VERIFY } : {}),
     },
   };
 }
@@ -306,5 +310,10 @@ export default async function RootLayout({
   const { locale } = await params;
   if (!isEnabledLocale(locale)) notFound();
   const sharedEditorialFields = await readEditorialFields('shared', locale);
-  return <SiteShell locale={locale} editorialFields={sharedEditorialFields}>{children}</SiteShell>;
+  return (
+    <SiteShell locale={locale} editorialFields={sharedEditorialFields}>
+      {children}
+      <PinterestTag locale={locale} />
+    </SiteShell>
+  );
 }
