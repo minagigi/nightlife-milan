@@ -95,6 +95,17 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
             eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
             url: `${SITE_URL}${capodannoEventPath(ev.slug, locale)}`,
             image: [`${SITE_URL}${ev.image}`],
+            organizer: {
+              '@type': 'Organization',
+              name: 'Nightlife Milan',
+              url: SITE_URL,
+            },
+            performer:
+              ev.slug === 'capodanno-bischeri-milano'
+                ? { '@type': 'Person', name: 'DJ Gigi Zeus' }
+                : ev.slug === 'capodanno-gate-milano'
+                  ? { '@type': 'PerformingGroup', name: 'PERREO XL DJs' }
+                  : { '@type': 'PerformingGroup', name: `${ev.venueName} Resident DJs` },
             location: {
               '@type': 'Place',
               name: ev.venueName,
@@ -121,7 +132,9 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
                 ? {
                     '@type': 'Offer',
                     url: `${SITE_URL}${capodannoEventPath(ev.slug, locale)}`,
+                    priceCurrency: 'EUR',
                     availability: 'https://schema.org/SoldOut',
+                    validFrom: '2026-10-01T00:00:00+02:00',
                   }
                 : {
                     '@type': 'Offer',

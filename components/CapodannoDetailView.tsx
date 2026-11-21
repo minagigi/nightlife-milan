@@ -250,7 +250,9 @@ export default function CapodannoDetailView({ locale, event }: Props) {
       eventSchemaNode.offers = {
         '@type': 'Offer',
         url: schemaOfferUrl,
+        priceCurrency: 'EUR',
         availability: 'https://schema.org/SoldOut',
+        validFrom: '2026-10-01T00:00:00+02:00',
       };
     } else {
       eventSchemaNode.offers = {

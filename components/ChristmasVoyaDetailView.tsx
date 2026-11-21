@@ -77,6 +77,10 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
           name: 'Nightlife Milan',
           url: SITE_URL,
         },
+        performer: {
+          '@type': 'PerformingGroup',
+          name: `${VOYA_VENUE_NAME} Resident DJs`,
+        },
         image: seoPack.schemaImages,
         location: {
           '@type': 'Place',

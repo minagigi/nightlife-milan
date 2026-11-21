@@ -135,6 +135,7 @@ export default async function SinglePassPage({
         itemListElement: SINGLE_PASS_SKUS.filter((sku) =>
           STOREFRONT_VENUES.some((venue) => venue.id === sku.venueId),
         ).map((sku, idx) => {
+          const venue = STOREFRONT_VENUES.find((v) => v.id === sku.venueId);
           return {
             '@type': 'ListItem',
             position: idx + 1,
@@ -142,11 +143,52 @@ export default async function SinglePassPage({
               '@type': 'Product',
               name: isIt ? sku.titleIt : sku.titleEn,
               description: isIt ? sku.descriptionIt : sku.descriptionEn,
+              sku: sku.id,
+              url: canonical,
+              image: `${SITE_URL}${venue?.posterSrc || HERO_POSTER_PATH}`,
+              brand: {
+                '@type': 'Brand',
+                name: 'Nightlife Milan',
+              },
               offers: {
                 '@type': 'Offer',
+                url: canonical,
                 price: (sku.basePriceCents / 100).toFixed(2),
                 priceCurrency: 'EUR',
                 availability: 'https://schema.org/InStock',
+                hasMerchantReturnPolicy: {
+                  '@type': 'MerchantReturnPolicy',
+                  applicableCountry: 'IT',
+                  returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
+                  merchantReturnLink: canonicalPageUrl(SITE_URL, loc, '/refund-policy'),
+                },
+                shippingDetails: {
+                  '@type': 'OfferShippingDetails',
+                  shippingRate: {
+                    '@type': 'MonetaryAmount',
+                    value: '0',
+                    currency: 'EUR',
+                  },
+                  shippingDestination: {
+                    '@type': 'DefinedRegion',
+                    addressCountry: 'IT',
+                  },
+                  deliveryTime: {
+                    '@type': 'ShippingDeliveryTime',
+                    handlingTime: {
+                      '@type': 'QuantitativeValue',
+                      minValue: 0,
+                      maxValue: 0,
+                      unitCode: 'DAY',
+                    },
+                    transitTime: {
+                      '@type': 'QuantitativeValue',
+                      minValue: 0,
+                      maxValue: 0,
+                      unitCode: 'DAY',
+                    },
+                  },
+                },
               },
             },
           };

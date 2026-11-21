@@ -661,9 +661,14 @@ export default async function EventPage({ params }: Props) {
             price,
             priceCurrency: 'EUR',
             availability: 'https://schema.org/InStock',
+            validFrom: '2026-09-01T00:00:00+02:00',
           },
         };
       })(),
+      performer: {
+        '@type': 'PerformingGroup',
+        name: `${weeklyEvent.clubName} Resident DJs`,
+      },
       organizer: {
         '@type': 'Organization',
         name: 'Nightlife Milan',
