@@ -186,17 +186,28 @@ export default function V01HomeCarousels({
     };
   }, [dateSensitiveEvents]);
 
-  const tonightEvents = useMemo(() => {
-    const liveTonight = getDateSensitiveEvents(dateSensitiveEvents, 'tonight', now);
-    if (liveTonight.length > 0) return liveTonight;
-    return getDateSensitiveEvents(dateSensitiveEvents, 'upcoming', now).slice(0, 8);
+  const seasonalEvents = useMemo(() => {
+    const m = now.getMonth() + 1;
+    const isWinter = m < 5 || m > 9;
+    if (!isWinter) return dateSensitiveEvents;
+    return dateSensitiveEvents.filter((ev) => {
+      const hay = `${ev.id} ${ev.slug} ${ev.venueName}`.toLowerCase();
+      if (!hay.includes('aria')) return true;
+      return hay.includes('capodanno') || hay.includes('12-31');
+    });
   }, [dateSensitiveEvents, now]);
 
+  const tonightEvents = useMemo(() => {
+    const liveTonight = getDateSensitiveEvents(seasonalEvents, 'tonight', now);
+    if (liveTonight.length > 0) return liveTonight;
+    return getDateSensitiveEvents(seasonalEvents, 'upcoming', now).slice(0, 8);
+  }, [seasonalEvents, now]);
+
   const weekEvents = useMemo(() => {
-    const liveWeek = getDateSensitiveEvents(dateSensitiveEvents, 'calendar-week', now);
+    const liveWeek = getDateSensitiveEvents(seasonalEvents, 'calendar-week', now);
     if (liveWeek.length > 0) return liveWeek;
-    return getDateSensitiveEvents(dateSensitiveEvents, 'upcoming', now).slice(0, 12);
-  }, [dateSensitiveEvents, now]);
+    return getDateSensitiveEvents(seasonalEvents, 'upcoming', now).slice(0, 12);
+  }, [seasonalEvents, now]);
 
   const cardShellClass =
     'shrink-0 w-[292px] sm:w-[332px] lg:w-[356px] snap-start flex flex-col justify-between bg-[#141311] border border-[#F6F1E7]/14 hover:border-[#EAE3D5]/55 transition-colors';
@@ -391,10 +402,12 @@ export default function V01HomeCarousels({
                 <span className="absolute left-3 top-3 border border-[#EAE3D5]/40 bg-[#050505]/92 px-2.5 py-1 font-mono text-[11px] font-bold text-[#EAE3D5]">
                   #{club.rank} · {v01.partnerBadgePrefix}
                 </span>
-                <span className="absolute inset-x-0 bottom-0 flex items-center justify-between border-t border-[#D4AF37] bg-[#0B0A09]/95 px-3 py-1.5 text-[10px] font-bold tracking-wider text-[#F6F1E7]">
-                  <span>WWW.NIGHTLIFEMILAN.COM</span>
-                  <span className="text-[#25D366]">+39 351 912 7047</span>
-                </span>
+                {!toCardPoster4x5(club.image).includes('/cards-4x5/') && (
+                  <span className="absolute inset-x-0 bottom-0 flex items-center justify-between border-t border-[#D4AF37] bg-[#0B0A09]/95 px-3 py-1.5 text-[10px] font-bold tracking-wider text-[#F6F1E7]">
+                    <span>WWW.NIGHTLIFEMILAN.COM</span>
+                    <span className="text-[#25D366]">+39 351 912 7047</span>
+                  </span>
+                )}
               </Link>
               <div className="p-5">
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-[#EAE3D5]">

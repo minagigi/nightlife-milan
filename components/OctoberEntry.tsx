@@ -49,20 +49,7 @@ export function HomeHalloweenAndCapodannoSections({
       href: `${prefix}/events/pineta-friday-aperitivo-cantato`,
     },
     {
-      rank: isIt ? '03 · STAGIONE ESTIVA (MAG–SET) · SAN SIRO' : '03 · SUMMER SEASON (MAY–SEP) · SAN SIRO',
-      venue: 'Aria Club Milano',
-      title: isIt
-        ? 'Aria Club Milano: Stagione Estiva Open-Air (Chiuso in inverno salvo eventi rari)'
-        : 'Aria Club Milan: Summer Open-Air Season (Closed in Winter Except Rare Events)',
-      desc: isIt
-        ? 'A 150 metri dallo Stadio San Siro (Piazzale dello Sport 14): programmazione regolare da Maggio a Settembre. In inverno il locale è chiuso salvo eventi rari speciali (es. Capodanno); per le serate invernali attive questa settimana: Just Me, Pineta, 55 Milano, Voya Rooftop e REPVBLIC.'
-        : 'Just 150 meters from San Siro Stadium (Piazzale dello Sport 14): regular open-air season May–September. Closed in winter except rare special events (e.g. NYE); for active winter nights this week, choose Just Me, Pineta, 55 Milano, Voya Rooftop, or REPVBLIC.',
-      badge: isIt ? 'Stagione Estiva Mag–Set · Chiuso in inverno salvo eventi rari' : 'Summer May–Sep · Closed in Winter Except Rare Events',
-      posterSrc: '/images/events/october-2026/242617-59f08f112437.webp',
-      href: `${prefix}/events/aria-saturday-saturday-night`,
-    },
-    {
-      rank: isIt ? '04 · LOFT & TERRAZZA · SEMPIONE' : '04 · LOFT & TERRACE · SEMPIONE',
+      rank: isIt ? '03 · LOFT & SALONE INVERNALE · SEMPIONE' : '03 · WINTER LOFT & HALL · SEMPIONE',
       venue: '55 Milano',
       title: isIt
         ? 'Serate della Settimana 55 Milano: Apericena XL, Cena Cantata & Sabato The Wall'
@@ -75,20 +62,20 @@ export function HomeHalloweenAndCapodannoSections({
       href: `${prefix}/events/55milano-saturday-aperitivo-cena-cantata`,
     },
     {
-      rank: isIt ? '05 · ROOFTOP PANORAMICO · 20° PIANO' : '05 · PANORAMIC ROOFTOP · 20TH FLOOR',
+      rank: isIt ? '04 · ROOFTOP PANORAMICO COPERTO · 20° PIANO' : '04 · ENCLOSED PANORAMIC ROOFTOP · 20TH FLOOR',
       venue: 'Voya Rooftop Milano',
       title: isIt
         ? 'Serate della Settimana Voya Rooftop: Sunset Aperitivo, Cena Skyline & DJ Set'
         : 'Voya Rooftop Weekly Nights: Sunset Aperitivo, Skyline Dinner & DJ Set',
       desc: isIt
-        ? 'Da Martedì a Domenica al 20° piano con vista a 360° sullo skyline di Milano: Sunset Aperitivo dalle 18:30, cena panoramica à la carte, mixology d’autore e Sky Clubbing fino a tardi.'
-        : 'Tuesday through Sunday on the 20th floor with 360° Milan skyline views: Sunset Aperitivo from 18:30, panoramic à la carte dinner, signature mixology & Sky Clubbing until late.',
+        ? 'Da Martedì a Domenica al 20° piano riscaldato con vista a 360° sullo skyline di Milano: Sunset Aperitivo dalle 18:30, cena panoramica à la carte, mixology d’autore e Sky Clubbing fino a tardi.'
+        : 'Tuesday through Sunday on the heated 20th floor with 360° Milan skyline views: Sunset Aperitivo from 18:30, panoramic à la carte dinner, signature mixology & Sky Clubbing until late.',
       badge: isIt ? 'Sunset Aperitivo da 20€ · Cena Vista Skyline & Tavoli VIP Rooftop' : 'Sunset Aperitivo from €20 · Skyline Dinner & Rooftop VIP Tables',
       posterSrc: '/images/events/weekly-posters/voya-saturday.webp',
       href: `${prefix}/events/voya-saturday-rooftop-experience`,
     },
     {
-      rank: '06 · INDOOR CLUB · REPUBBLICA',
+      rank: '05 · INDOOR CLUB · REPUBBLICA',
       venue: 'REPVBLIC Milano',
       title: isIt
         ? 'Serate REPVBLIC Milano: Mar Tech House, Gio Hip-Hop/Reggaeton, Ven–Sab Tech House & Dom Trap'
