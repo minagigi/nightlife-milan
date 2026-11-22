@@ -274,9 +274,8 @@ test('T-032 & Email Reconcile: active venues, Jazz Cafe Orient Express 170€/40
   assert.ok(jazzSkus.some((s) => s.basePriceCents === 17000));
   for (const sku of jazzSkus) assert.equal(getSkuFeeRate(sku), 0.2);
 
-  // TBA / On-request safeguards: never expose fake starting prices
+  // TBA / On-request safeguards: never expose fake starting prices (Carroponte now confirmed €55 via WA)
   for (const tbaSlug of [
-    'capodanno-carroponte-sesto-san-giovanni',
     'capodanno-zoo-club-milano',
     'capodanno-crociera-lago-di-como-garda-maggiore',
     'capodanno-armani-prive-milano',

@@ -41,6 +41,8 @@ export type SinglePassVenueId =
   | 'orsa-maggiore'
   | 'villa-fenaroli'
   | 'sheraton-san-siro'
+  | 'mood-live-garden'
+  | 'carro-social-club'
   | 'club-event';
 
 export type SinglePassPackageCategory =

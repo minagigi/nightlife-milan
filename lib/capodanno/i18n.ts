@@ -13,6 +13,7 @@ import { getTerrazzaDuomo21NyeContent } from '@/lib/capodanno/terrazzaDuomo21_35
 import { getCeresio7ClosedNyeContent } from '@/lib/capodanno/ceresio7Closed35';
 import { getT031OverrideContent } from '@/lib/capodanno/t031Venues35';
 import { getWhatsappVenueNyeContent } from '@/lib/capodanno/whatsappVenues35';
+import { getWaVerifiedNov22Content } from '@/lib/capodanno/waVerifiedNov22_35';
 import { getQcTermeAndSirmioneOverride35 } from '@/lib/capodanno/qcTermeTba35';
 import { getChurch81NyeContent, getFiftyFiveNyeContent } from '@/lib/capodanno/church81And55_35';
 import {
@@ -624,6 +625,8 @@ function getOverrideEventContent(slug: string, locale: string): CapodannoLocaliz
   if (qc) return qc;
   const wa = getWhatsappVenueNyeContent(slug, locale);
   if (wa) return wa;
+  const waNov22 = getWaVerifiedNov22Content(slug, locale);
+  if (waNov22) return waNov22;
   const t031 = getT031OverrideContent(slug, locale);
   if (t031) return t031;
   return null;

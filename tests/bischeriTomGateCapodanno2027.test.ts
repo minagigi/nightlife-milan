@@ -147,7 +147,9 @@ test('capodanno-tom-the-ordinary-market-milano resolves cleanly with The Midnigh
   const ev = getCapodannoEventBySlug('capodanno-tom-the-ordinary-market-milano');
   assert.ok(ev, 'Missing capodanno-tom-the-ordinary-market-milano');
   assert.equal(ev.venueName, 'TOM. The Ordinary Market');
-  assert.equal(ev.priceFromEur, 40);
+  assert.equal(ev.priceFromEur, 30);
+  assert.equal(ev.partner, true);
+  assert.equal(getVenueIdByEventSlug('capodanno-tom-the-ordinary-market-milano'), null);
   assert.equal(ev.hours, '20:30 – 05:00');
   assert.equal(ev.xceedUrl, undefined);
   assert.match(ev.address, /Via Molino delle Armi 16/i);
