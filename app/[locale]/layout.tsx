@@ -15,7 +15,6 @@ import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { readEditorialFields } from '@/lib/editorialContent';
 
 import SiteShell from '@/components/SiteShell';
-import PinterestTag from '@/components/PinterestTag';
 import { PINTEREST_DOMAIN_VERIFY } from '@/lib/pinterest';
 
 export const viewport: Viewport = {
@@ -310,10 +309,5 @@ export default async function RootLayout({
   const { locale } = await params;
   if (!isEnabledLocale(locale)) notFound();
   const sharedEditorialFields = await readEditorialFields('shared', locale);
-  return (
-    <SiteShell locale={locale} editorialFields={sharedEditorialFields}>
-      {children}
-      <PinterestTag locale={locale} />
-    </SiteShell>
-  );
+  return <SiteShell locale={locale} editorialFields={sharedEditorialFields}>{children}</SiteShell>;
 }
