@@ -18,7 +18,7 @@ export const HALLOWEEN_FAMILY_UI: Readonly<Record<LocaleCode, readonly string[]>
 
 export function halloweenHubCollections(selection: readonly HalloweenHubEvent[] = HALLOWEEN_SELECTION_EVENTS) {
   const allowed = ['id','title','venueName','dates','startISO','endISO','category','canonicalEventId','affiliateUrl'];
-  if (selection.length!==30 || new Set(selection.map(event=>event.id)).size!==30) throw new Error('HALLOWEEN_SELECTION_INPUTS_HOLD: expected attested 8+22');
+  if (selection.length!==29 || new Set(selection.map(event=>event.id)).size!==29) throw new Error('HALLOWEEN_SELECTION_INPUTS_HOLD: expected attested 8+21');
   for (const event of selection) {
     halloweenEventAnchor(event.id);
     if (Object.keys(event).some(key=>!allowed.includes(key)) || !event.title.trim() || !event.venueName.trim()
@@ -39,7 +39,7 @@ export function halloweenHubCollections(selection: readonly HalloweenHubEvent[] 
     return event;
   });
   const others=selection.filter(event=>!featured.some(item=>item.id===event.id)).sort((a,b)=>a.dates[0].localeCompare(b.dates[0]) || (a.startISO||'').localeCompare(b.startISO||'') || a.id.localeCompare(b.id));
-  if (others.filter(event=>event.category==='family-culture').length!==10) throw new Error('HALLOWEEN_CATEGORY_INPUTS_HOLD');
+  if (others.filter(event=>event.category==='family-culture').length!==9) throw new Error('HALLOWEEN_CATEGORY_INPUTS_HOLD');
   return {featured,others,all:[...featured,...others]};
 }
 
