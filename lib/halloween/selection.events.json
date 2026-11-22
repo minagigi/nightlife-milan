@@ -273,20 +273,6 @@
     "affiliateUrl": null
   },
   {
-    "id": "teatro-gaber",
-    "title": "Non Aprite Quel Teatro",
-    "venueName": "Teatro Giorgio Gaber",
-    "dates": [
-      "2026-10-30",
-      "2026-10-31"
-    ],
-    "startISO": "2026-10-30T20:30:00+01:00",
-    "endISO": null,
-    "category": "family-culture",
-    "canonicalEventId": "halloween-teatro-giorgio-gaber-2026",
-    "affiliateUrl": null
-  },
-  {
     "id": "parco-trotter",
     "title": "Rosmunda e Al-Boino",
     "venueName": "Parco Trotter",

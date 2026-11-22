@@ -211,12 +211,6 @@ export const HALLOWEEN_MEMBERSHIP: readonly HalloweenMembership[] = [
     "evidenceRef": "lib/october-events/inventory.json#halloween-cineteca-milano-arlecchino-2026"
   },
   {
-    "eventId": "halloween-teatro-giorgio-gaber-2026",
-    "sourceUrl": "https://www.teatroliricogiorgiogaber.it/",
-    "startISO": "2026-10-30T20:30:00+01:00",
-    "evidenceRef": "lib/october-events/inventory.json#halloween-teatro-giorgio-gaber-2026"
-  },
-  {
     "eventId": "halloween-parco-trotter-2026",
     "sourceUrl": "https://www.yesmilano.it/eventi/tutti-gli-eventi/halloween-milano-2026",
     "startISO": "2026-10-31T18:30:00+01:00",

@@ -245,55 +245,63 @@ const TERMINUS_MENU_EN: CapodannoMenuCard[] = [
   },
 ];
 
-const LIRICO_BUFFET_MENU_IT: CapodannoMenuCard[] = [
+const JAZZ_CAFE_MENU_IT: CapodannoMenuCard[] = [
   {
-    id: 'teatro-lirico-buffet-nye-2027',
-    title: 'Teatro Lirico Giorgio Gaber · Menù Speciale Buffet Pre-Show Capodanno',
-    price: '55€',
-    subtitle: '31 dicembre 2026 · Via Larga 14, Milano · Include 2 consumazioni a persona prima dello spettacolo «A Christmas Carol»',
+    id: 'jazz-cafe-orient-express-nye-2027',
+    title: 'Jazz Cafe Milano · Menù Gala Orient Express 2027',
+    price: '170€',
+    subtitle: '31 dicembre 2026 dalle 20:30 · Corso Sempione 8, Milano · Acqua e caffè compresi, vini esclusi · Pagamento anticipato',
     courses: [
       {
-        course: 'Salati & Finger Food Freddi',
-        dish: 'Triangoli di panettone gastronomico con salumi DOP · Panettone gastronomico ai cereali con erborinati delle Langhe · Miniatura di vitello tonnato · Mini bun con gorgonzola e noci',
+        course: 'Benvenuto & Brindisi di Mezzanotte',
+        dish: 'Calice di benvenuto Ca’ del Bosco · A mezzanotte calice di Champagne R de Ruinart',
       },
       {
-        course: 'Piatti Caldi dello Chef',
-        dish: 'Ciotolina di polenta con baccalà mantecato · Focaccina al vapore alla montanara · Pizzoccheri in crespella · Medaglione di riso al salto con ristretto di ossobuco · Cotechino e lenticchie',
+        course: 'Antipasti Gourmet (Condivisione)',
+        dish: 'Amuse bouche · Plateau Royal Jazz con ostriche, gamberi rossi e scampi · Tartare di scampo con foie gras e passito · Capasanta con topinambur, tartufo e nocciola · Uramaki lobster roll · Terrina di foie gras con pan brioche, uva e Sauternes · Wagyu sando al tartufo nero · Jamón de Bellota con pan de cristal, tomate e manchego',
       },
       {
-        course: 'Dolci della Tradizione',
-        dish: 'Panettone e pandoro con crema al cioccolato e mascarpone',
+        course: 'Secondo Piatto & Dolce',
+        dish: 'Filetto di manzo USA con millefoglie di patate, tartufo nero e salsa al porto (alternativa dedicata su segnalazione alimentare) · Délice al marron glacé e Panettone con crema al mascarpone',
+      },
+      {
+        course: 'Dopo Mezzanotte (Club con DJ Anyma Blue & Michel Corradi)',
+        dish: 'Ingresso club dalle 00:00 a 40€ con 1ª consumazione inclusa (successive 20€) · Tavoli Privé dalle 23:30: 1–4 pax 1 bottiglia, 5–8 pax 2 bottiglie da bottle list',
       },
     ],
-    beverages: 'Prezzo ufficiale 55€ a persona con 2 consumazioni incluse (acquistabile in aggiunta al biglietto di A Christmas Carol).',
-    imageSrc: '/images/events/t031-menus/menu-teatro-lirico-buffet-nye-2027.webp',
-    imageAlt: 'Teatro Lirico Giorgio Gaber · Menù Speciale Pre-Show Capodanno 55€',
+    beverages: 'Acqua e caffè compresi nel menù da 170€. Lista vini e champagne da 45€ a 1.300€ (Champagne da 160€, Franciacorta da 75€, Super Tuscan, Distillati da 160€).',
+    imageSrc: '/images/events/t031-menus/menu-jazz-cafe-milano-nye-2027.webp',
+    imageAlt: 'Jazz Cafe Milano · Menù Ufficiale Orient Express 170€ e Dopo Mezzanotte 40€ Capodanno 2027',
   },
 ];
 
-const LIRICO_BUFFET_MENU_EN: CapodannoMenuCard[] = [
+const JAZZ_CAFE_MENU_EN: CapodannoMenuCard[] = [
   {
-    id: 'teatro-lirico-buffet-nye-2027',
-    title: 'Teatro Lirico Giorgio Gaber · NYE Special Pre-Show Buffet Menu',
-    price: '€55',
-    subtitle: 'December 31, 2026 · Via Larga 14, Milan · Includes 2 drinks per person before «A Christmas Carol»',
+    id: 'jazz-cafe-orient-express-nye-2027',
+    title: 'Jazz Cafe Milano · Orient Express NYE 2027 Gala Menu',
+    price: '€170',
+    subtitle: 'December 31, 2026 from 20:30 · Corso Sempione 8, Milan · Water & coffee included, wines excluded · Advance prepayment required',
     courses: [
       {
-        course: 'Savory Bites & Cold Signatures',
-        dish: 'Savory panettone triangles with PDO cured meats · Multigrain savory panettone with Langhe blue cheeses · Mini vitello tonnato · Mini bun with gorgonzola and walnuts',
+        course: 'Welcome & Midnight Toast',
+        dish: 'Welcome glass of Ca’ del Bosco · Midnight Champagne toast with R de Ruinart',
       },
       {
-        course: 'Warm Culinary Specialties',
-        dish: 'Polenta cup with creamed cod (baccalà mantecato) · Steamed montanara mini focaccia · Pizzoccheri crêpe · Crisp saffron rice medallion with ossobuco reduction · Traditional cotechino and lentils',
+        course: 'Gourmet Starters',
+        dish: 'Amuse bouche · Plateau Royal Jazz with oysters, red prawns & langoustines · Langoustine tartare with foie gras & passito · Scallop with Jerusalem artichoke, truffle & hazelnut butter · Uramaki lobster roll · Foie gras terrine with brioche, grapes & Sauternes · Wagyu sando with black truffle · Jamón de Bellota on pan de cristal',
       },
       {
-        course: 'Festive Desserts',
-        dish: 'Artisanal panettone and pandoro with dark chocolate and mascarpone creams',
+        course: 'Main Course & Desserts',
+        dish: 'US Beef Fillet with potato mille-feuille, black truffle & port wine sauce (custom non-meat main upon dietary notice) · Marron glacé délice & Panettone with mascarpone cream',
+      },
+      {
+        course: 'After-Midnight Club (DJs Anyma Blue & Michel Corradi)',
+        dish: 'Club entry from 00:00 at €40 incl. 1st drink (extra drinks €20) · Bottle Service Tables from 23:30: 1–4 pax 1 bottle, 5–8 pax 2 bottles from official bottle list',
       },
     ],
-    beverages: 'Official €55 per person package including 2 drinks (available alongside tickets for A Christmas Carol).',
-    imageSrc: '/images/events/t031-menus/menu-teatro-lirico-buffet-nye-2027.webp',
-    imageAlt: 'Teatro Lirico Giorgio Gaber · Official NYE 2027 Pre-Show Buffet Menu €55',
+    beverages: 'Water and coffee included in the €170 Gala Dinner. Official wine & bottle list from €45 to €1,300 (Champagne from €160, Spirits from €160).',
+    imageSrc: '/images/events/t031-menus/menu-jazz-cafe-milano-nye-2027.webp',
+    imageAlt: 'Jazz Cafe Milano · Official Orient Express €170 Dinner & €40 After-Midnight Brochure NYE 2027',
   },
 ];
 
@@ -394,6 +402,22 @@ const CLOSED_VENUE_META: Record<
     reasonIt: 'Il Palace Grand Hotel Varese è chiuso per importanti lavori di ristrutturazione e riaprirà a maggio 2027. La serata di Capodanno 2027 risulta pertanto Sold Out senza disponibilità.',
     reasonEn: 'Palace Grand Hotel Varese is closed for major restoration works with reopening scheduled for May 2027. New Year’s Eve 2027 is therefore marked Sold Out with no availability.',
     alternatives: ['capodanno-hotel-barchetta-excelsior-como', 'capodanno-albergo-terminus-como', 'capodanno-terrazza-duomo-21'],
+  },
+  'capodanno-legend-club-milano': {
+    name: 'Legend Club Milano',
+    city: 'Milano',
+    address: 'Viale Enrico Fermi 98, 20161 Milano',
+    reasonIt: 'La direzione del Legend Club Milano ha confermato ufficialmente via email che non è previsto alcun evento la notte del 31 dicembre 2026: l’appuntamento è dichiarato Sold Out.',
+    reasonEn: 'Legend Club Milano management officially confirmed by email that no New Year’s Eve event is scheduled for December 31, 2026, so this venue is marked Sold Out.',
+    alternatives: ['capodanno-alcatraz-milano', 'capodanno-magazzini-generali-milano', 'capodanno-gate-milano'],
+  },
+  'capodanno-nidaba-theatre-navigli': {
+    name: 'Nidaba Theatre Navigli',
+    city: 'Milano',
+    address: 'Via Emilio Gola 12, 20143 Milano',
+    reasonIt: 'Il Nidaba Theatre sui Navigli ha confermato ufficialmente via email di restare sempre chiuso a Capodanno: nessuna serata in programma il 31 dicembre 2026 (Sold Out).',
+    reasonEn: 'Nidaba Theatre in Navigli officially confirmed by email that the venue is always closed on New Year’s Eve: no December 31, 2026 event scheduled (Sold Out).',
+    alternatives: ['capodanno-blue-note-milano-concerto-gospel-jazz', 'capodanno-bobino-milano', 'capodanno-bischeri-milano'],
   },
 };
 
@@ -1062,153 +1086,92 @@ export function getT031OverrideContent(
     };
   }
 
-  if (slug === 'capodanno-teatro-lirico-giorgio-gaber-milano') {
+  if (slug === 'capodanno-jazz-cafe-milano') {
     const schedule: CapodannoScheduleStep[] = isIt
       ? [
-          { time: '19:15', label: 'Apertura Foyer Teatro Lirico per il Buffet Speciale Pre-Show di Capodanno (55€, 2 consumazioni)' },
-          { time: '21:00', label: 'Inizio spettacolo «A Christmas Carol – Il Canto di Natale» con Roberto Ciufoli (46€–90€)' },
-          { time: '00:00', label: 'Brindisi festivo di mezzanotte nel cuore di Milano a due passi da Piazza Duomo' },
+          { time: '20:30', label: 'Arrivo e Aperitivo di benvenuto con calice di Ca’ del Bosco · Inizio Cena Gala Orient Express (170€)' },
+          { time: '23:30', label: 'Apertura Tavoli Dopocena Privé con servizio bottiglia (1 bottiglia 1–4 pax, 2 bottiglie 5–8 pax)' },
+          { time: '00:00', label: 'Brindisi di mezzanotte con Champagne R de Ruinart e apertura Club con i DJ Anyma Blue e Michel Corradi (40€ 1 drink · fino alle 05:00)' },
         ]
       : [
-          { time: '19:15', label: 'Teatro Lirico foyer doors open for the NYE Special Pre-Show Buffet (€55 incl. 2 drinks)' },
-          { time: '21:00', label: 'Curtain up for «A Christmas Carol – Il Canto di Natale» starring Roberto Ciufoli (€46–€90)' },
-          { time: '00:00', label: 'Festive midnight welcome steps from Piazza Duomo in central Milan' },
+          { time: '20:30', label: 'Doors open & Ca’ del Bosco welcome toast · Orient Express Gala Dinner Show begins (€170)' },
+          { time: '23:30', label: 'After-Midnight Privé Bottle Service Tables open (1 bottle for 1–4 guests, 2 bottles for 5–8 guests)' },
+          { time: '00:00', label: 'Midnight Champagne R de Ruinart toast and Club night with DJs Anyma Blue & Michel Corradi (€40 incl. 1st drink · until 05:00)' },
         ];
 
     return {
       title: isIt
-        ? 'Capodanno Teatro Lirico Giorgio Gaber Milano 2027 · A Christmas Carol'
-        : 'Teatro Lirico Giorgio Gaber Milan NYE 2027 · A Christmas Carol',
+        ? 'Capodanno Jazz Cafe Milano 2027 · Una Notte a Bordo dell’Orient Express'
+        : 'Jazz Cafe Milano NYE 2027 · A Night Aboard the Orient Express',
       subtitle: isIt
-        ? 'Via Larga 14, 20122 Milano · Spettacolo con Roberto Ciufoli 46€–90€ · Buffet Pre-Show Ufficiale 55€ (2 drink inclusi)'
-        : 'Via Larga 14, 20122 Milan · Musical with Roberto Ciufoli €46–€90 · Optional Pre-Show Buffet €55 (2 drinks)',
+        ? 'Corso Sempione 8, 20154 Milano · Cena Gala Orient Express 170€ (Brindisi R de Ruinart) · Ingresso Club 40€ · DJ Anyma Blue & Michel Corradi'
+        : 'Corso Sempione 8, 20154 Milan · Orient Express Gala Dinner €170 (R de Ruinart Toast) · After-Midnight Entry €40 · DJs Anyma Blue & Michel Corradi',
       description: isIt
-        ? 'Trascorri il Capodanno 2027 al Teatro Lirico Giorgio Gaber (Via Larga 14, a pochi minuti da Piazza Duomo) con il grande musical «A Christmas Carol – Il Canto di Natale» interpretato da Roberto Ciufoli e Compagnia dell’Alba. Biglietti ufficiali per il 31 dicembre 2026 da 46€ (Posti ascolto) a 65€ (Galleria), 79€ (Poltrona) e 90€ (Poltronissima). Disponibile inoltre il Menù Speciale Buffet Pre-Show a 55€ a persona con 2 consumazioni incluse (panettone gastronomico DOP e Langhe, vitello tonnato, mini bun gorgonzola e noci, polenta e baccalà mantecato, pizzoccheri in crespella, riso al salto con ossobuco, cotechino e lenticchie, panettone e pandoro con mascarpone).'
-        : 'Celebrate New Year’s Eve 2027 at Teatro Lirico Giorgio Gaber (Via Larga 14, minutes from Duomo) with «A Christmas Carol – Il Canto di Natale» starring Roberto Ciufoli and Compagnia dell’Alba. Official Dec 31, 2026 tickets range from €46 (Listening seats) to €65 (Gallery), €79 (Stalls), and €90 (Front Stalls). Add the official Pre-Show Special Buffet at €55 per person including 2 drinks and traditional Milanese dishes.',
+        ? 'Festeggia il Capodanno 2027 al Jazz Cafe Milano (Corso Sempione 8, zona Sempione / Arco della Pace) con la notte a tema «Una notte a bordo dell’Orient Express». Dalle 20:30 va in scena la Cena Gourmet con Dinner Show a 170€ a persona (acqua, caffè e calice di brindisi R de Ruinart a mezzanotte compresi; vini esclusi, pagamento anticipato a conferma). Dalle 23:30 Tavoli con bottiglia (1 bottiglia per 1–4 persone, 2 bottiglie per 5–8 persone) e dalle 00:00 Ingresso Dopo Mezzanotte con prima consumazione a 40€ (consumazioni successive 20€) sui set dei DJ Anyma Blue e Michel Corradi fino alle 05:00.'
+        : 'Celebrate New Year’s Eve 2027 at historic Jazz Cafe Milano (Corso Sempione 8) with «A Night Aboard the Orient Express». From 20:30 enjoy the €170 Orient Express Gourmet Dinner Show including welcome Ca’ del Bosco, water, coffee, and an R de Ruinart Champagne midnight toast (wines excluded; advance prepayment required). From 23:30 book Bottle Service Tables (1 bottle 1–4 guests, 2 bottles 5–8 guests) or enter from 00:00 at €40 including your first drink (€20 extra drinks) with DJs Anyma Blue & Michel Corradi until 05:00.',
       musicAndFormat: isIt
-        ? 'Musical «A Christmas Carol – Il Canto di Natale» con Roberto Ciufoli + Buffet Pre-Show nel Foyer'
-        : 'Musical «A Christmas Carol» starring Roberto Ciufoli + Foyer Pre-Show NYE Buffet',
-      dressCode: isIt ? 'Elegante da Teatro / Smart Chic' : 'Theatre Evening Attire / Smart Chic',
+        ? 'Dinner Show Orient Express (20:30) + Clubbing fino alle 05:00 con DJ Anyma Blue e Michel Corradi'
+        : 'Orient Express Dinner Show (20:30) + After-Midnight Club with DJs Anyma Blue & Michel Corradi',
+      dressCode: isIt ? 'Elegante / Smart Chic Orient Express' : 'Smart Chic / Orient Express Glam',
       priceSummary: isIt
-        ? 'Spettacolo 46€ / 65€ / 79€ / 90€ · Menù Buffet Pre-Show (con 2 consumazioni) 55€'
-        : 'Show Tickets €46 / €65 / €79 / €90 · Pre-Show Buffet (with 2 drinks) €55',
+        ? 'Cena Gala Orient Express 170€ (Brindisi R de Ruinart incluso) · Ingresso Dopo Mezzanotte 40€ (1 drink) · Tavoli 1–4 pax 1 bott. / 5–8 pax 2 bott.'
+        : 'Orient Express Gala Dinner €170 (R de Ruinart Toast incl.) · After-Midnight Entry €40 (1 drink) · Tables 1–4 pax 1 btl / 5–8 pax 2 btls',
       tiers: isIt
         ? [
             {
-              label: 'Poltronissima · A Christmas Carol (31 dicembre)',
-              price: '90€',
-              details: 'Settore top in prima platea centrale per la replica speciale di San Silvestro con Roberto Ciufoli.',
+              label: 'Cena Gala & Dinner Show Orient Express (dalle 20:30)',
+              price: '170€',
+              details: 'Calice di benvenuto Ca’ del Bosco, 8 antipasti gourmet da condivisione (ostriche, astice, wagyu, foie gras), Filetto di manzo USA o alternativa senza carne su segnalazione, dessert e brindisi R de Ruinart; acqua e caffè inclusi, vini esclusi.',
             },
             {
-              label: 'Poltrona · A Christmas Carol (31 dicembre)',
-              price: '79€',
-              details: 'Posto in platea per la recita serale di Capodanno 2027.',
+              label: 'Ingresso Dopo Mezzanotte (dalle 00:00 · Club)',
+              price: '40€',
+              details: 'Include ingresso per chi non cena, prima consumazione e DJ set con Anyma Blue e Michel Corradi fino alle 05:00 (consumazioni successive 20€).',
             },
             {
-              label: 'Galleria · A Christmas Carol (31 dicembre)',
-              price: '65€',
-              details: 'Settore Galleria panoramica sopra la platea del Teatro Lirico Giorgio Gaber.',
-            },
-            {
-              label: 'Buffet Speciale Pre-Show (opzionale con 2 drink)',
-              price: '55€',
-              details: 'Menù di 10 portate servito nel foyer con 2 consumazioni incluse (vedi menù ufficiale sotto); posti ascolto disponibili da 46€.',
+              label: 'Tavolo Dopocena Privé (dalle 23:30 · 1–4 pax / 5–8 pax)',
+              price: 'Su richiesta (1–2 bottiglie)',
+              details: 'Prenotazione tavolo da bottle list ufficiale (1 bottiglia per 1–4 ospiti, 2 bottiglie per 5–8 ospiti; champagne da 160€, vodka/distillati da 160€–200€). Conferma tramite WhatsApp Concierge +39 351 912 7047.',
             },
           ]
         : [
             {
-              label: 'Poltronissima (Front Stalls) · A Christmas Carol (Dec 31)',
-              price: '€90',
-              details: 'Prime front stalls seat for the December 31 performance starring Roberto Ciufoli.',
+              label: 'Orient Express Gala Dinner Show (from 20:30)',
+              price: '€170',
+              details: 'Welcome Ca’ del Bosco glass, 8 gourmet sharing starters (oysters, lobster roll, wagyu, foie gras), US beef fillet or custom alternative, desserts, R de Ruinart toast; water & coffee included, wines excluded.',
             },
             {
-              label: 'Poltrona (Stalls) · A Christmas Carol (Dec 31)',
-              price: '€79',
-              details: 'Standard stalls seating for New Year’s Eve 2027.',
+              label: 'After-Midnight Club Admission (from 00:00)',
+              price: '€40',
+              details: 'Includes club entry for non-diners, first drink, and DJ sets by Anyma Blue & Michel Corradi until 05:00 (additional drinks €20).',
             },
             {
-              label: 'Galleria (Gallery) · A Christmas Carol (Dec 31)',
-              price: '€65',
-              details: 'Elevated gallery seat with clear stage view (listening seats also available from €46).',
-            },
-            {
-              label: 'Official Pre-Show NYE Buffet (with 2 drinks)',
-              price: '€55',
-              details: '10-item gourmet Milanese foyer buffet including 2 drinks per guest (full menu shown below).',
+              label: 'After-Midnight Bottle Service Table (from 23:30 · 1–4 / 5–8 pax)',
+              price: 'Upon request (1–2 bottles)',
+              details: 'Table reservation from official bottle list (1 bottle for 1–4 guests, 2 bottles for 5–8 guests; Champagne from €160, spirits €160–€200). Confirm via WhatsApp Concierge +39 351 912 7047.',
             },
           ],
       highlights: isIt
         ? [
-            'Roberto Ciufoli protagonista in «A Christmas Carol – Il Canto di Natale» il 31 dicembre',
-            'Biglietti teatro ufficiali da 46€ (ascolto), 65€ (Galleria), 79€ (Poltrona) e 90€ (Poltronissima)',
-            'Menù Speciale Buffet Pre-Show con 10 specialità e 2 consumazioni incluse a 55€',
-            'Posizione centrale in Via Larga 14 a 300 metri da Piazza Duomo',
+            'Una Notte a Bordo dell’Orient Express nella cornice storica di Corso Sempione 8 (dal 1995)',
+            'Cena Gourmet Orient Express 170€ con 8 antipasti d’autore, filetto USA e brindisi R de Ruinart',
+            'Ingresso Dopo Mezzanotte a 40€ (1 drink) · consumazioni extra 20€',
+            'DJ set con Anyma Blue & Michel Corradi · Tavoli dalle 23:30 da 1 bottiglia (1–4 pax) o 2 bottiglie (5–8 pax)',
           ]
         : [
-            'Roberto Ciufoli starring in «A Christmas Carol – Il Canto di Natale» on December 31',
-            'Official seats from €46 (listening), €65 (Gallery), €79 (Stalls), and €90 (Front Stalls)',
-            'Optional 10-course Pre-Show NYE Buffet including 2 drinks at €55',
-            'Central address on Via Larga 14 steps from Piazza Duomo',
+            'Orient Express Gala Night at Milan institution Jazz Cafe (Corso Sempione 8, est. 1995)',
+            '€170 Gala Dinner Show with 8 signature starters, US beef fillet & R de Ruinart midnight toast',
+            'After-Midnight Club Entry at €40 including first drink (additional drinks €20)',
+            'DJs Anyma Blue & Michel Corradi · Bottle Service Tables from 23:30 (1 bottle 1–4 pax / 2 bottles 5–8 pax)',
           ],
       sourceBasis: isIt
-        ? 'Listino ufficiale spettacoli Teatro Lirico Giorgio Gaber e Menù Speciale Buffet di Capodanno ufficiale (PDF 55€ con 2 consumazioni).'
-        : 'Official Teatro Lirico Giorgio Gaber box-office prices and official NYE Special Buffet PDF menu (€55 including 2 drinks).',
-      scheduleHeading: isIt ? 'Programma 31 Dicembre 2026 · Teatro Lirico' : 'Schedule Dec 31, 2026 · Teatro Lirico',
+        ? 'Brochure e listino ufficiali Jazz Cafe Milano Capodanno 2027 (Orient Express 170€, Dopo Mezzanotte 40€, Tavoli 1–2 bottiglie). Esigenze alimentari da segnalare in fase di prenotazione.'
+        : 'Official Jazz Cafe Milano NYE 2027 brochure and rate card (Orient Express Dinner €170, After-Midnight €40, Bottle Tables 1–2 bottles). Please flag dietary requirements at booking.',
+      scheduleHeading: isIt ? 'Programma 31 Dicembre 2026 · Jazz Cafe Milano' : 'Schedule Dec 31, 2026 · Jazz Cafe Milano',
       schedule,
-      menusHeading: isIt ? 'Menù Ufficiale Buffet Pre-Show 55€ · Teatro Lirico' : 'Official €55 Pre-Show Buffet Menu · Teatro Lirico',
-      menus: isIt ? LIRICO_BUFFET_MENU_IT : LIRICO_BUFFET_MENU_EN,
-      offerPricesEur: [90, 79, 65, 55],
-    };
-  }
-
-  if (slug === 'capodanno-teatro-nazionale-milano') {
-    return {
-      title: isIt
-        ? 'Capodanno Teatro Nazionale Milano 2027 · Sister Act Il Musical (Ore 21:00)'
-        : 'Teatro Nazionale Milan NYE 2027 · Sister Act The Musical (21:00)',
-      subtitle: isIt
-        ? 'Via Giordano Rota 1 (Piazza Piemonte), 20145 Milano · Replica speciale ore 21:00 con brindisi di mezzanotte · 100€–150€'
-        : 'Via Giordano Rota 1 (Piazza Piemonte), 20145 Milan · Special 21:00 performance with midnight toast · €100–€150',
-      description: isIt
-        ? 'Vivi un Capodanno scintillante al Teatro Nazionale di Piazza Piemonte con la replica speciale di San Silvestro di «Sister Act – Il Musical». Il 31 dicembre 2026 alle ore 21:00 va in scena lo show completo seguito dal grande brindisi di mezzanotte in sala. Settori ufficiali: I Galleria 100€, Poltrona 120€, Poltronissima 135€ e VIP 150€.'
-        : 'Ring in 2027 at Milan’s Teatro Nazionale in Piazza Piemonte with the special New Year’s Eve performance of «Sister Act – The Musical». Curtain rises on December 31, 2026 at 21:00, culminating in a festive midnight toast inside the theatre. Official seating tiers: Gallery €100, Stalls €120, Front Stalls €135, VIP €150.',
-      musicAndFormat: isIt
-        ? 'Replica Speciale di San Silvestro «Sister Act – Il Musical» + Brindisi di Mezzanotte'
-        : 'Special New Year’s Eve Show «Sister Act – The Musical» + Midnight Toast',
-      dressCode: isIt ? 'Elegante da Teatro / Festive Chic' : 'Theatre Festive Chic / Evening Attire',
-      priceSummary: isIt
-        ? 'I Galleria 100€ · Poltrona 120€ · Poltronissima 135€ · VIP 150€ (brindisi incluso)'
-        : 'I Gallery €100 · Stalls €120 · Front Stalls €135 · VIP €150 (toast included)',
-      tiers: isIt
-        ? [
-            { label: 'Settore VIP · Sister Act Capodanno (ore 21:00 + brindisi)', price: '150€', details: 'Migliori posti VIP in prima platea con brindisi di mezzanotte incluso.' },
-            { label: 'Poltronissima · Sister Act Capodanno (ore 21:00 + brindisi)', price: '135€', details: 'Platea centrale avanzata + brindisi di mezzanotte in sala.' },
-            { label: 'Poltrona · Sister Act Capodanno (ore 21:00 + brindisi)', price: '120€', details: 'Posto in platea per la replica delle 21:00 con brindisi finale.' },
-            { label: 'I Galleria · Sister Act Capodanno (ore 21:00 + brindisi)', price: '100€', details: 'Prima Galleria panoramica con brindisi di mezzanotte incluso.' },
-          ]
-        : [
-            { label: 'VIP Sector · Sister Act NYE (21:00 + toast)', price: '€150', details: 'Best VIP front stalls with midnight toast included.' },
-            { label: 'Poltronissima · Sister Act NYE (21:00 + toast)', price: '€135', details: 'Prime central stalls with midnight celebration toast.' },
-            { label: 'Poltrona · Sister Act NYE (21:00 + toast)', price: '€120', details: 'Standard stalls seat for the 21:00 show and midnight toast.' },
-            { label: 'I Galleria · Sister Act NYE (21:00 + toast)', price: '€100', details: 'First gallery seat with midnight toast included.' },
-          ],
-      highlights: isIt
-        ? [
-            'Replica speciale di Capodanno 2027 di «Sister Act – Il Musical» ore 21:00',
-            'Brindisi di mezzanotte in teatro incluso in tutte le categorie di biglietto',
-            'Quattro fasce di listino ufficiale: 100€ Galleria, 120€ Poltrona, 135€ Poltronissima, 150€ VIP',
-            'Metropolitana M1 Wagner a 100 metri in Piazza Piemonte',
-          ]
-        : [
-            'Special NYE 2027 performance of «Sister Act – The Musical» at 21:00',
-            'Midnight toast inside the theatre included in every ticket tier',
-            'Official pricing: €100 Gallery, €120 Stalls, €135 Front Stalls, €150 VIP',
-            'Steps from Metro M1 Wagner at Piazza Piemonte',
-          ],
-      sourceBasis: isIt
-        ? 'Listino ufficiale biglietteria Teatro Nazionale Milano per la replica speciale di San Silvestro di Sister Act (31 dicembre 2026 ore 21:00 con brindisi).'
-        : 'Official Teatro Nazionale Milan box-office list for the special Dec 31, 2026 21:00 performance of Sister Act with midnight toast.',
-      offerPricesEur: [150, 135, 120, 100],
+      menusHeading: isIt ? 'Menù Gala Orient Express 170€ & Dopo Mezzanotte 40€' : 'Orient Express €170 Menu & €40 After-Midnight Brochure',
+      menus: isIt ? JAZZ_CAFE_MENU_IT : JAZZ_CAFE_MENU_EN,
+      offerPricesEur: [170, 40],
     };
   }
 

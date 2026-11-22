@@ -27,9 +27,9 @@ import {
 const REPO_ROOT = path.resolve(__dirname, '..');
 const FORBIDDEN_THIRD_PARTY_RE = /331[\s\-]?478[\s\-]?8258|umberto-falcone|perreoxl\.com|origgigallery|gatemilano\.it/i;
 
-test('Capodanno 2027 catalog expanded cleanly to 126 events (T-032 + WA Audit + Church 81)', () => {
-  assert.equal(CAPODANNO_EVENT_BASE_SLUGS.length, 126);
-  assert.equal(CAPODANNO_EVENTS.length, 126);
+test('Capodanno 2027 catalog reconciled cleanly to 124 events (T-032 + WA Audit + Church 81 - Stage Entertainment takedown)', () => {
+  assert.equal(CAPODANNO_EVENT_BASE_SLUGS.length, 124);
+  assert.equal(CAPODANNO_EVENTS.length, 124);
   assert.ok(CAPODANNO_EVENT_BASE_SLUGS.includes('capodanno-bischeri-milano'));
   assert.ok(CAPODANNO_EVENT_BASE_SLUGS.includes('capodanno-tom-the-ordinary-market-milano'));
   assert.ok(CAPODANNO_EVENT_BASE_SLUGS.includes('capodanno-gate-milano'));

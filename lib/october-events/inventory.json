@@ -13010,58 +13010,6 @@
       }
     },
     {
-      "id": "halloween-teatro-giorgio-gaber-2026",
-      "sourceUrl": "https://www.teatroliricogiorgiogaber.it/",
-      "sourceScope": "dated-calendar",
-      "schemaType": "Event",
-      "affiliateUrl": null,
-      "affiliateStatus": "unknown",
-      "officialName": "Non Aprite Quel Teatro",
-      "shortName": "Non Aprite Quel Teatro",
-      "startISO": "2026-10-30T20:30:00+01:00",
-      "endISO": "2026-10-31T23:00:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-teatro-gaber",
-        "name": "Teatro Giorgio Gaber",
-        "address": "Via Larga, 14, 20122 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Via Larga, 14",
-          "addressLocality": "Milano",
-          "postalCode": "20122",
-          "addressCountry": "IT"
-        },
-        "latitude": 45.4614,
-        "longitude": 9.1932
-      },
-      "image": {
-        "src": "/images/events/october-2026/halloween-teatro-giorgio-gaber-2026.webp",
-        "width": 1376,
-        "height": 768,
-        "bytes": 180546,
-        "sha256": "11424a6bd1730b1d0160632381f1f5af422a5657b39dd3010a238cdb98df89c8"
-      },
-      "age": null,
-      "dressCode": null,
-      "genres": [
-        "Live Music"
-      ],
-      "performers": [
-        {
-          "name": "J-Ax"
-        },
-        {
-          "name": "Pedar"
-        },
-        {
-          "name": "Matteo Lenardon"
-        }
-      ],
-      "offers": [],
-      "provenance": "https://www.yesmilano.it/eventi/tutti-gli-eventi/halloween-milano-2026 · Non Aprite Quel Teatro at Teatro Lirico Giorgio Gaber (30–31 October 2026)",
-      "halloween": true
-    },
-    {
       "id": "arci-astore",
       "sourceUrl": "https://arcibellezza.it/evento/astore/",
       "officialName": "ASTORE",
