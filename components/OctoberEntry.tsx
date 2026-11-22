@@ -48,15 +48,15 @@ export function HomeHalloweenAndCapodannoSections({
       href: `${prefix}/events/pineta-friday-aperitivo-cantato`,
     },
     {
-      rank: '03 · ARENA & GARDEN · SAN SIRO',
+      rank: isIt ? '03 · STAGIONE ESTIVA (MAG–SET) · SAN SIRO' : '03 · SUMMER SEASON (MAY–SEP) · SAN SIRO',
       venue: 'Aria Club Milano',
       title: isIt
-        ? 'Serate della Settimana Aria Club Milano: Giovedì, Venerdì, Sabato & Matchday'
-        : 'Aria Club Milan Weekly Nights: Thursday, Friday, Saturday & Matchdays',
+        ? 'Aria Club Milano: Stagione Estiva Open-Air (Chiuso in inverno salvo eventi rari)'
+        : 'Aria Club Milan: Summer Open-Air Season (Closed in Winter Except Rare Events)',
       desc: isIt
-        ? 'A 150 metri dallo Stadio San Siro (Piazzale dello Sport 14): Giovedì, Venerdì e Sabato con Royal Aperitivo dalle 19:30, Hip-Hop, Reggaeton, Urban & Commercial Arena e 3 aree Privé.'
-        : 'Just 150 meters from San Siro Stadium (Piazzale dello Sport 14): Thursday, Friday & Saturday with Royal Aperitivo from 19:30, Hip-Hop, Reggaeton, Urban & Commercial Arena and 3 VIP Privé zones.',
-      badge: isIt ? 'Royal Aperitivo da 15€ · Tavoli Pista, Privé Aria & Console da 200€' : 'Royal Aperitivo from €15 · Dancefloor, Privé & DJ Tables from €200',
+        ? 'A 150 metri dallo Stadio San Siro (Piazzale dello Sport 14): programmazione regolare da Maggio a Settembre. In inverno il locale è chiuso salvo eventi rari speciali (es. Capodanno); per le serate invernali attive questa settimana: Just Me, Pineta, 55 Milano, Voya Rooftop e REPVBLIC.'
+        : 'Just 150 meters from San Siro Stadium (Piazzale dello Sport 14): regular open-air season May–September. Closed in winter except rare special events (e.g. NYE); for active winter nights this week, choose Just Me, Pineta, 55 Milano, Voya Rooftop, or REPVBLIC.',
+      badge: isIt ? 'Stagione Estiva Mag–Set · Chiuso in inverno salvo eventi rari' : 'Summer May–Sep · Closed in Winter Except Rare Events',
       posterSrc: '/images/events/october-2026/242617-59f08f112437.webp',
       href: `${prefix}/events/aria-saturday-saturday-night`,
     },
@@ -87,17 +87,17 @@ export function HomeHalloweenAndCapodannoSections({
       href: `${prefix}/events/voya-saturday-rooftop-experience`,
     },
     {
-      rank: '06 · INTERNATIONAL CLUB · REPUBBLICA',
+      rank: '06 · INDOOR CLUB · REPUBBLICA',
       venue: 'REPVBLIC Milano',
       title: isIt
-        ? 'Serate della Settimana REPVBLIC Milano: Dirty Monday, Home, Sbraake & Weekend'
-        : 'REPVBLIC Milan Weekly Nights: Dirty Monday, Home, Sbraake & Weekend',
+        ? 'Serate REPVBLIC Milano: Mar Tech House, Gio Hip-Hop/Reggaeton, Ven–Sab Tech House & Dom Trap'
+        : 'REPVBLIC Milan Weekly Nights: Tue Tech House, Thu Hip-Hop/Reggaeton, Fri–Sat Tech House & Sun Trap',
       desc: isIt
-        ? 'Lunedì Dirty Monday, Mercoledì Home, Giovedì Sbraake, Venerdì & Sabato hit internazionali, hip hop e house dalle 23:00 nel cuore di Piazza della Repubblica 12.'
-        : 'Monday Dirty Monday, Wednesday Home, Thursday Sbraake, Friday & Saturday international hits, hip hop and house from 23:00 at Piazza della Repubblica 12.',
-      badge: isIt ? 'Accredito Lista da 15€ · Tavoli Dancefloor & Privé VIP da 250€' : 'Guest List from €15 · Dancefloor & Privé VIP Tables from €250',
-      posterSrc: '/images/events/weekly-posters/repvblic-saturday.webp',
-      href: `${prefix}/events/repvblic-saturday-saturday-night`,
+        ? 'Martedì HOME x CLUB APÉRO (Tech House, lista gratis entro 01:00), Giovedì BURAKA x MOVIDA (Hip-Hop & Reggaeton, RSVP gratis entro 01:00), Venerdì & Sabato Tech House, Domenica DEMON TIME (Hip-Hop & Trap, donna gratis entro 01:30). Prenotazione solo via WhatsApp.'
+        : 'Tuesday HOME x CLUB APÉRO (Tech House, free guestlist before 01:00), Thursday BURAKA x MOVIDA (Hip-Hop & Reggaeton, free RSVP before 01:00), Friday & Saturday Tech House, Sunday DEMON TIME (Hip-Hop & Trap, women free before 01:30). WhatsApp booking only.',
+      badge: isIt ? 'Tavoli Pista da 300€ (5 pax) · Privè da 600€ (10–12 pax) · Solo WhatsApp' : 'Dancefloor Tables from €300 (5 pax) · Privé from €600 (10–12 pax) · WhatsApp Only',
+      posterSrc: '/images/events/weekly-posters/repvblic-tuesday.webp',
+      href: `${prefix}/events/repvblic-tuesday-home-club-apero`,
     },
   ];
 

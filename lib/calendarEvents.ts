@@ -139,8 +139,10 @@ function expandWeeklyEvents(): { event: Event; venue: Venue }[] {
     const dayKey = romeDayKeyOffset(offset);
     const dow = dayOfWeekForKey(dayKey);
 
+    const dayMonth = Number(dayKey.slice(5, 7));
     for (const we of weeklyEvents as WeeklyEvent[]) {
       if (we.dayOfWeek !== dow) continue;
+      if (we.seasonalSummerOnly && (dayMonth < 5 || dayMonth > 9)) continue;
       if (we.id === 'justme-thursday' && dayKey >= '2026-11-26') continue;
       if (we.id === 'justme-friday' && dayKey === '2026-11-27') continue;
       const venue = mockVenues.find((v) => v.id === `v-${we.clubSlug}`);

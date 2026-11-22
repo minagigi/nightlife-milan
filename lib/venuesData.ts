@@ -225,21 +225,21 @@ export const venuesData: Venue[] = [
     localizedContent: {
       name: { en: "REPVBLIC Milano", it: "REPVBLIC Milano" },
       description: {
-        en: "International club at Piazza della Repubblica, 12 featuring Dirty Monday, weekend House, Hip-Hop & International Hits, and confirmed New Year's Eve 2027 from 23:00 till morning.",
-        it: "Club internazionale in Piazza della Repubblica 12 con pubblico da tutto il mondo: Dirty Monday, weekend House, Hip-Hop e Hit Internazionali, più Capodanno 2027 confermato dalle 23:00 al mattino."
+        en: "Indoor international club at Piazza della Repubblica 12: Tuesday Tech House (HOME x CLUB APÉRO), Thursday Hip-Hop & Reggaeton (BURAKA x MOVIDA), Friday & Saturday Tech House, Sunday Hip-Hop & Trap (DEMON TIME). Tables from €300 (5 pax Dancefloor) and €600 (10–12 pax Privé) — booked exclusively via WhatsApp.",
+        it: "Club indoor internazionale in Piazza della Repubblica 12: Martedì Tech House (HOME x CLUB APÉRO), Giovedì Hip-Hop & Reggaeton (BURAKA x MOVIDA), Venerdì e Sabato Tech House, Domenica Hip-Hop & Trap (DEMON TIME). Tavoli da 300 € (5 pers. Pista) e 600 € (10–12 pers. Privè) — prenotazione solo via WhatsApp."
       },
       dressCode: { en: "Elevated & Stylish", it: "Look curato & Fashion" },
       altTextImg: { en: "REPVBLIC Milano Piazza della Repubblica 12", it: "REPVBLIC Milano Piazza della Repubblica 12" },
-      insiderTip: { en: "Open from 23:00 till morning. Confirmed NYE 2027: Early Bird €45 (flûte + 1 drink), Dancefloor €600 (6 guests), Privé €1,200 (10 guests).", it: "Aperto dalle 23:00 al mattino. Capodanno 2027 confermato: Early Bird 45€ (flûte + 1 drink), Tavolo Dancefloor 600€ (6 pax), Privé 1.200€ (10 pax)." }
+      insiderTip: { en: "Regular weekly nights (Tue/Thu/Fri/Sat/Sun): Dancefloor tables from €300 (5 guests), Privé from €600 (10–12 guests). Booking exclusively via WhatsApp +39 351 912 7047 (no online ticket links). Confirmed NYE 2027: Early Bird €45, Dancefloor €600, Privé €1,200.", it: "Serate regolari (Mar/Gio/Ven/Sab/Dom): Tavolo Pista da 300 € (5 pers.), Privè da 600 € (10–12 pers.). Prenotazione esclusivamente via WhatsApp +39 351 912 7047 (nessun link acquisto biglietto). Capodanno 2027 confermato: Early Bird 45 €, Dancefloor 600 €, Privè 1.200 €." }
     },
     image: "/images/repvblic-milano.webp",
     isManaged: true,
     isPriority: true,
     isFeatured: true,
     priorityScore: 75,
-    ageRange: "25-40",
+    ageRange: "21-40",
     priceRange: "$$",
-    tags: ["Industrial", "Dirty Monday", "House"],
+    tags: ["Tech House", "Hip-Hop", "Indoor Club"],
     gallery: [
       "/images/venues/repvblic-milano/repvblic-milano-interior-01.webp",
       "/images/venues/repvblic-milano/repvblic-milano-interior-02.webp",
@@ -754,12 +754,12 @@ export const venuesData: Venue[] = [
     localizedContent: {
       name: { en: "Aria Club Milano", it: "Aria Club Milano" },
       description: {
-        en: "New concept club near San Siro. Aperitivo buffet from 19:30, then full club until dawn. Three separate areas: Dance Floor Tables, Privé Aria and Privé DJ. Thursday to Saturday.",
-        it: "Nuovo concept club vicino a San Siro. Aperitivo a buffet dalle 19:30, poi club fino all'alba. Tre aree distinte: Dance Floor Table, Privé Aria e Privé DJ. Dal giovedì al sabato."
+        en: "Summer open-air club near San Siro (regular season May–September; closed during winter except rare special events such as NYE). In summer: aperitivo buffet from 19:30, then open-air club with Dance Floor, Privé Aria and Privé DJ tables.",
+        it: "Club estivo open-air vicino a San Siro (stagione regolare maggio–settembre; chiuso in inverno salvo eventi rari speciali come Capodanno). In estate: aperitivo a buffet dalle 19:30, poi club all'aperto con tavoli Pista, Privé Aria e Privé DJ."
       },
       dressCode: { en: "Smart Elegant: No sportswear, no sneakers", it: "Smart Elegant: No abbigliamento sportivo, no sneakers" },
       altTextImg: { en: "Aria Club Milano interior dancefloor San Siro nightclub", it: "Aria Club Milano interno pista da ballo San Siro discoteca" },
-      insiderTip: { en: "Arrive at aperitivo (19:30) to secure a Dance Floor Table: they book out fast on Fridays. The Privé DJ area is the quieter, more exclusive option.", it: "Arriva all'aperitivo (19:30) per assicurarti un Dance Floor Table: si esauriscono subito il venerdì. Il Privé DJ è l'opzione più tranquilla ed esclusiva." }
+      insiderTip: { en: "Open-air summer venue (May–Sep); closed in winter except rare special announcements. In winter, ask on WhatsApp for Just Me Milano (heated dome), Pineta, 55 Milano, Voya Rooftop, or REPVBLIC.", it: "Location estiva all'aperto (maggio–settembre); chiuso in inverno salvo rari eventi speciali. In inverno scrivici su WhatsApp per Just Me Milano (cupola riscaldata), Pineta, 55 Milano, Voya Rooftop o REPVBLIC." }
     },
     image: "/images/venues/aria-club-milano/aria-club-milano-interior-01.webp",
     gallery: [

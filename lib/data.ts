@@ -930,36 +930,36 @@ export const mockEvents: Event[] = [
   {
     id: "e-repvblic-dirty-monday-0601",
     venueId: "v-repvblic",
-    genre: [MusicGenre.COMMERCIAL, MusicGenre.LIVE_MUSIC],
-    dateISO: "2026-11-23T23:00:00+02:00",
-    endDateISO: "2026-11-24T04:00:00+02:00",
-    pricing: { entry: 15, currency: "EUR", tableMinSpend: null },
+    genre: [MusicGenre.HOUSE, MusicGenre.TECHNO],
+    dateISO: "2026-11-24T22:30:00+01:00",
+    endDateISO: "2026-11-25T05:00:00+01:00",
+    pricing: { entry: 0, currency: "EUR", tableMinSpend: 300 },
     localizedContent: {
-      title: { en: "Dirty Monday — The Rock'n'Roll Party", it: "Dirty Monday — Il Party Rock'n'Roll" },
+      title: { en: "REPVBLIC Milano — HOME x CLUB APÉRO (Tuesday Tech House)", it: "REPVBLIC Milano — HOME x CLUB APÉRO (Martedì Tech House)" },
       shortDescription: {
-        en: "The most insane rock'n'roll party in Milan at Repvblic. Every Monday — dress to express, anything goes.",
-        it: "Il party rock'n'roll più sfrenato di Milano al Repvblic. Ogni lunedì — vestiti per esprimerti, tutto è permesso."
+        en: "Tuesday Tech House at REPVBLIC Milano (Piazza della Repubblica 12). Guestlist free before 01:00; Dancefloor tables from €300 (5 guests) and Privé from €600 (10–12 guests). Bookings exclusively via WhatsApp +39 351 912 7047.",
+        it: "Il martedì Tech House al REPVBLIC Milano (Piazza della Repubblica 12). Lista omaggio fino all'01:00; tavoli Pista da 300€ (5 persone) e Privé da 600€ (10–12 persone). Prenotazioni solo via WhatsApp +39 351 912 7047."
       },
-      slug: { en: "dirty-monday-repvblic-06-07-2026", it: "dirty-monday-repvblic-06-07-2026" }
+      slug: { en: "repvblic-tuesday-home-club-apero", it: "repvblic-tuesday-home-club-apero" }
     },
-    image: "/images/venues/repvblic-milano/repvblic-milano-interior-01.webp",
+    image: "/images/events/weekly-posters/repvblic-tuesday.webp",
   },
   {
     id: "e-repvblic-saturday-0606",
     venueId: "v-repvblic",
-    genre: [MusicGenre.HOUSE, MusicGenre.COMMERCIAL],
-    dateISO: "2026-11-21T22:00:00+02:00",
-    endDateISO: "2026-11-22T04:00:00+02:00",
-    pricing: { entry: 15, currency: "EUR", tableMinSpend: null },
+    genre: [MusicGenre.HOUSE, MusicGenre.TECHNO],
+    dateISO: "2026-11-28T23:30:00+01:00",
+    endDateISO: "2026-11-29T05:00:00+01:00",
+    pricing: { entry: 20, currency: "EUR", tableMinSpend: 300 },
     localizedContent: {
-      title: { en: "Repvblic — Saturday Night", it: "Repvblic — Sabato Notte" },
+      title: { en: "REPVBLIC Milano — Saturday Night Tech House", it: "REPVBLIC Milano — Sabato Notte Tech House" },
       shortDescription: {
-        en: "National and international DJs at Repvblic for the Saturday night. Industrial-chic space, immersive lighting, high energy from 10 PM.",
-        it: "DJ nazionali e internazionali al Repvblic per la notte del sabato. Spazio industrial-chic, illuminazione immersiva, alta energia dalle 22."
+        en: "Saturday Tech House at REPVBLIC Milano (Piazza della Repubblica 12), 23:30–05:00. Admission from €20 with 1 drink; Dancefloor tables from €300 (5 guests) and Privé from €600 (10–12 guests). Bookings exclusively via WhatsApp +39 351 912 7047.",
+        it: "Il sabato Tech House al REPVBLIC Milano (Piazza della Repubblica 12), 23:30–05:00. Ingresso da 20€ con 1 drink; tavoli Pista da 300€ (5 persone) e Privé da 600€ (10–12 persone). Prenotazioni solo via WhatsApp +39 351 912 7047."
       },
-      slug: { en: "repvblic-saturday-04-07-2026", it: "repvblic-sabato-04-07-2026" }
+      slug: { en: "repvblic-saturday-saturday-night", it: "repvblic-saturday-saturday-night" }
     },
-    image: "/images/venues/repvblic-milano/repvblic-milano-interior-02.webp",
+    image: "/images/events/weekly-posters/repvblic-saturday.webp",
   },
 
   // ─── 11 CLUBROOM ───────────────────────────────────────────────────────────
@@ -2153,8 +2153,8 @@ export const mockGuides: Guide[] = [
           it: "1. Lunedì, Martedì e Mercoledì: I Migliori Locali Aperti in Settimana a Milano"
         },
         content: {
-          en: "<ul><li><strong>Monday Night:</strong> <strong>Repvblic Milano (#6 Priority)</strong> hosts the legendary <em>Dirty Monday</em> (hip-hop, urban & house with models and industry insiders), while <strong>Just Me Milano (#1 Priority)</strong> is open from 19:30 to 05:00 beneath Torre Branca.</li><li><strong>Tuesday Night:</strong> <strong>55 Milano (#4 Priority)</strong> for XXL Apericena, <strong>Voya Rooftop (#5 Priority)</strong> for 20th-floor skyline drinks, <strong>Just Me</strong> in Sempione, and <strong>The Club</strong> (Corso Garibaldi) for international/hip-hop night.</li><li><strong>Wednesday Night:</strong> International & University peak at <strong>Just Me Milano</strong>, <strong>11Clubroom</strong> (Corso Como), <strong>Voya Rooftop</strong>, and <strong>55 Milano</strong>.</li></ul>",
-          it: "<ul><li><strong>Lunedì Sera:</strong> <strong>Repvblic Milano (#6 Priorità)</strong> accende la città con il celebre <em>Dirty Monday</em> (hip-hop, house e pubblico moda), mentre <strong>Just Me Milano (#1 Priorità)</strong> è aperto dalle 19:30 alle 05:00 sotto la Torre Branca.</li><li><strong>Martedì Sera:</strong> <strong>55 Milano (#4 Priorità)</strong> per l'Apericena XL in Via Piero della Francesca, <strong>Voya Rooftop (#5 Priorità)</strong> al 20° piano, <strong>Just Me</strong> in Sempione e <strong>The Club</strong> in Corso Garibaldi.</li><li><strong>Mercoledì Sera:</strong> La notte internazionale e universitaria da <strong>Just Me Milano</strong>, <strong>11Clubroom</strong> in Corso Como, <strong>Voya Rooftop</strong> e <strong>55 Milano</strong>.</li></ul>"
+          en: "<ul><li><strong>Monday Night:</strong> <strong>Just Me Milano (#1 Priority)</strong> is open 7 nights a week from 19:30 to 05:00 beneath Torre Branca (heated winter glass dome).</li><li><strong>Tuesday Night:</strong> <strong>REPVBLIC Milano (#6 Priority)</strong> launches the week with <em>HOME x CLUB APÉRO</em> (Tech House, free guestlist before 01:00, tables from €300/5 pax via WhatsApp only), alongside <strong>55 Milano (#4 Priority)</strong>, <strong>Voya Rooftop (#5 Priority)</strong>, and <strong>Just Me</strong>.</li><li><strong>Wednesday Night:</strong> International & University peak at <strong>Just Me Milano</strong>, <strong>11Clubroom</strong> (Corso Como), <strong>Voya Rooftop</strong>, and <strong>55 Milano</strong> (plus special dates at REPVBLIC when confirmed).</li></ul>",
+          it: "<ul><li><strong>Lunedì Sera:</strong> <strong>Just Me Milano (#1 Priorità)</strong> è aperto 7 notti su 7 dalle 19:30 alle 05:00 sotto la Torre Branca (cupola invernale riscaldata).</li><li><strong>Martedì Sera:</strong> <strong>REPVBLIC Milano (#6 Priorità)</strong> apre la settimana con <em>HOME x CLUB APÉRO</em> (Tech House, lista omaggio fino all'01:00, tavoli Pista da 300€/5 pax e Privé da 600€/10–12 pax solo via WhatsApp), insieme a <strong>55 Milano (#4 Priorità)</strong>, <strong>Voya Rooftop (#5 Priorità)</strong> e <strong>Just Me</strong>.</li><li><strong>Mercoledì Sera:</strong> La notte internazionale e universitaria da <strong>Just Me Milano</strong>, <strong>11Clubroom</strong> in Corso Como, <strong>Voya Rooftop</strong> e <strong>55 Milano</strong> (oltre a serate speciali al REPVBLIC quando in calendario).</li></ul>"
         }
       },
       {
@@ -2164,8 +2164,8 @@ export const mockGuides: Guide[] = [
           it: "2. Dal Giovedì alla Domenica: Il Programma del Weekend nei 6 Club Prioritari"
         },
         content: {
-          en: "<ul><li><strong>Thursday Night:</strong> <strong>Aria Club Milano (#3 Priority)</strong> opens its San Siro weekend with buffet and 3 VIP zones; <strong>Just Me (#1)</strong> hosts Fashion Thursday; <strong>55 Milano (#4)</strong> hosts graduation and birthday celebrations.</li><li><strong>Friday Night:</strong> The iconic <em>Singing Aperitivo</em> at <strong>Pineta Club (#2 Priority)</strong> in Corso Como, luxury clubbing at <strong>Just Me (#1)</strong>, <strong>Aria Club (#3)</strong>, Friday Dinner Show at <strong>55 Milano (#4)</strong>, sky lounge DJ set at <strong>Voya Rooftop (#5)</strong>, and techno at <strong>Volt / Magazzini Generali</strong>.</li><li><strong>Saturday Night:</strong> Full capacity across all 6 Priority Venues (<strong>Just Me, Pineta, Aria, 55 Milano 'The Wall', Voya Rooftop, Repvblic</strong>) plus <strong>Armani/Privé</strong> and <strong>Gattopardo</strong>.</li><li><strong>Sunday Night:</strong> Sunset Aperitivo at <strong>Voya Rooftop (#5)</strong>, Sunday Latin Party at <strong>55 Milano (#4)</strong>, and Fashion Sunday at <strong>Just Me (#1)</strong>.</li></ul>",
-          it: "<ul><li><strong>Giovedì Sera:</strong> <strong>Aria Club Milano (#3 Priorità)</strong> inaugura il weekend a San Siro con buffet e 3 aree privé; <strong>Just Me (#1)</strong> lancia il giovedì fashion; <strong>55 Milano (#4)</strong> accoglie lauree e compleanni.</li><li><strong>Venerdì Sera:</strong> Il leggendario <em>Aperitivo Cantato</em> del <strong>Pineta Club (#2 Priorità)</strong> in Via Messina 38, il gran venerdì di <strong>Just Me (#1)</strong>, <strong>Aria Club (#3)</strong>, il Friday Dinner Show di <strong>55 Milano (#4)</strong> e lo skyline di <strong>Voya Rooftop (#5)</strong>.</li><li><strong>Sabato Sera:</strong> Gran Gala in tutti i 6 Club Prioritari (<strong>Just Me, Pineta, Aria, 55 Milano 'The Wall', Voya Rooftop, Repvblic</strong>) oltre ad <strong>Armani/Privé</strong> e <strong>Gattopardo</strong>.</li><li><strong>Domenica Sera:</strong> Sunset Aperitivo da <strong>Voya Rooftop (#5)</strong>, Domenica Latino-Americana da <strong>55 Milano (#4)</strong> e Sunday Night da <strong>Just Me (#1)</strong>.</li></ul>"
+          en: "<ul><li><strong>Thursday Night:</strong> <strong>REPVBLIC Milano (#6)</strong> hosts <em>BURAKA x MOVIDA</em> (Hip-Hop & Reggaeton, free RSVP before 01:00, tables from €300 via WhatsApp); <strong>Just Me (#1)</strong> hosts Fashion Thursday; <strong>55 Milano (#4)</strong> hosts graduation and birthday celebrations. (<strong>Aria Club Milano #3</strong> operates open-air in Summer May–September and is closed in winter except for rare special events.)</li><li><strong>Friday Night:</strong> The iconic <em>Singing Aperitivo</em> at <strong>Pineta Club (#2 Priority)</strong>, luxury clubbing at <strong>Just Me (#1)</strong>, Friday Tech House at <strong>REPVBLIC (#6)</strong>, Friday Dinner Show at <strong>55 Milano (#4)</strong>, and sky lounge DJ set at <strong>Voya Rooftop (#5)</strong>.</li><li><strong>Saturday Night:</strong> Full winter indoor capacity across <strong>Just Me, Pineta, 55 Milano 'The Wall', Voya Rooftop, and REPVBLIC (Tech House)</strong> (plus <strong>Aria Club</strong> in summer May–Sep).</li><li><strong>Sunday Night:</strong> <em>DEMON TIME</em> (Hip-Hop & Trap, women free before 01:30) at <strong>REPVBLIC Milano (#6)</strong>, Sunset Aperitivo at <strong>Voya Rooftop (#5)</strong>, Sunday Latin Party at <strong>55 Milano (#4)</strong>, and Fashion Sunday at <strong>Just Me (#1)</strong>.</li></ul>",
+          it: "<ul><li><strong>Giovedì Sera:</strong> <strong>REPVBLIC Milano (#6)</strong> accende la notte con <em>BURAKA x MOVIDA</em> (Hip-Hop & Reggaeton, lista omaggio fino all'01:00, tavoli Pista da 300€ solo via WhatsApp); <strong>Just Me (#1)</strong> lancia il giovedì fashion; <strong>55 Milano (#4)</strong> accoglie lauree e compleanni. (<strong>Aria Club Milano #3</strong> è attivo nella stagione estiva maggio–settembre ed è chiuso in inverno salvo eventi rari speciali.)</li><li><strong>Venerdì Sera:</strong> Il leggendario <em>Aperitivo Cantato</em> del <strong>Pineta Club (#2 Priorità)</strong>, il gran venerdì di <strong>Just Me (#1)</strong>, il venerdì Tech House di <strong>REPVBLIC (#6)</strong>, il Friday Dinner Show di <strong>55 Milano (#4)</strong> e lo skyline di <strong>Voya Rooftop (#5)</strong>.</li><li><strong>Sabato Sera:</strong> Gran Gala invernale indoor in <strong>Just Me, Pineta, 55 Milano 'The Wall', Voya Rooftop e REPVBLIC (Tech House)</strong> (con <strong>Aria Club</strong> attivo nei mesi estivi maggio–settembre).</li><li><strong>Domenica Sera:</strong> <em>DEMON TIME</em> (Hip-Hop & Trap, donna omaggio fino all'01:30) al <strong>REPVBLIC Milano (#6)</strong>, Sunset Aperitivo da <strong>Voya Rooftop (#5)</strong>, Domenica Latino-Americana da <strong>55 Milano (#4)</strong> e Sunday Night da <strong>Just Me (#1)</strong>.</li></ul>"
         }
       }
     ],
@@ -2637,8 +2637,8 @@ export const mockGuides: Guide[] = [
           it: "Dove uscire la sera dopo un concerto infrasettimanale (lunedì, martedì o mercoledì) a Milano?"
         },
         answer: {
-          en: "Just Me Milano (#1 Priority, Parco Sempione) is open 7 nights a week from Monday to Sunday until 05:00 AM. On Mondays, Repvblic Milano also hosts Dirty Monday; from Tuesday to Sunday, Voya Rooftop and 55 Milano are open.",
-          it: "Il Just Me Milano (#1 Priorità, Parco Sempione) è aperto 7 notti su 7 dal lunedì alla domenica fino alle 05:00. Il lunedì è attivo anche il Dirty Monday da Repvblic, mentre dal martedì alla domenica sono aperti Voya Rooftop e 55 Milano."
+          en: "Just Me Milano (#1 Priority, Parco Sempione) is open 7 nights a week from Monday to Sunday until 05:00 AM. On Tuesdays, REPVBLIC Milano hosts HOME x CLUB APÉRO (Tech House, WhatsApp reservations only); from Tuesday to Sunday, Voya Rooftop and 55 Milano are open.",
+          it: "Il Just Me Milano (#1 Priorità, Parco Sempione) è aperto 7 notti su 7 dal lunedì alla domenica fino alle 05:00. Il martedì è attivo HOME x CLUB APÉRO al REPVBLIC Milano (Tech House, prenotazioni solo via WhatsApp), mentre dal martedì alla domenica sono aperti Voya Rooftop e 55 Milano."
         }
       },
       {

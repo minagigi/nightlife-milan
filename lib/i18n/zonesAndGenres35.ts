@@ -1238,8 +1238,8 @@ const GENRES_BASE: Record<string, GenreBaseMeta> = {
   },
   'hip-hop': {
     nameEn: 'Hip-Hop, Trap & R&B', nameIt: 'Hip-Hop, Trap & Afrobeats',
-    subtitleEn: 'Dirty Monday Icons & Urban Privés', subtitleIt: 'Serate Dirty Monday & Privé Urban',
-    topClubs: ['Repvblic Milano (Dirty Monday)', 'Tocqueville 13', 'The Club Milano', 'Hollywood Rythmoteque'],
+    subtitleEn: 'Hip-Hop, Trap & Urban Privés (BURAKA & DEMON TIME)', subtitleIt: 'Serate Hip-Hop, Trap & Privé Urban (BURAKA & DEMON TIME)',
+    topClubs: ['REPVBLIC Milano (Thu & Sun)', 'Tocqueville 13', 'The Club Milano', 'Hollywood Rythmoteque'],
   },
   reggaeton: {
     nameEn: 'Reggaeton & Urban Latin', nameIt: 'Reggaeton & Urban Latin',

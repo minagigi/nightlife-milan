@@ -29,6 +29,7 @@ export interface WeeklyEvent {
   image: string;
   xceedLink?: string;
   priority: number;
+  seasonalSummerOnly?: boolean;
 }
 
 const defaultFaqs = (clubName: string, address: string, age: string, dressCode: string, genres: string) => [
@@ -311,7 +312,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     priority: 95
   },
 
-  // --- ARIA CLUB MILANO (Thu-Sat) ---
+  // --- ARIA CLUB MILANO (Summer Season May-Sep; closed in winter except rare special events) ---
   {
     id: 'aria-thursday',
     clubSlug: 'aria',
@@ -319,18 +320,19 @@ export const weeklyEvents: WeeklyEvent[] = [
     day: 'thursday',
     dayOfWeek: 4,
     eventSlug: 'thursday-night',
-    name: 'Thursday Night',
+    name: 'Thursday Night (Summer Season May–Sep)',
     genres: ['Hits', 'EDM', 'Dance'],
-    target: '21+, International, Fun crowd',
+    target: '21+, International, Summer Open-Air Crowd',
     description: {
-      en: 'Aria Club Milano opens the weekend early with the Thursday Night: a buffet aperitivo from 7:30 PM, premium cocktails, and a full party from 10:30 PM. New concept club in the heart of San Siro: expect the hits you know, the energy you crave.',
-      it: 'Aria Club Milano apre il weekend in anticipo con il Thursday Night: aperitivo a buffet dalle 19:30, cocktail premium e party dalle 22:30. Nuovo concept club nel cuore di San Siro: i tuoi brani preferiti, l\'energia che cerchi.'
+      en: 'Summer Season (May–September): Aria Club Milano is closed during winter except for rare special events (such as NYE). In the warm season, Thursday Night opens with a 19:30 buffet aperitivo and open-air party at San Siro. For active winter nights this week, ask on WhatsApp for Just Me Milano (heated glass dome), Pineta, 55 Milano, Voya Rooftop, or REPVBLIC.',
+      it: 'Stagione Estiva (Maggio–Settembre): in inverno Aria Club Milano è chiuso salvo eventi rari speciali (es. Capodanno). Nella stagione estiva il giovedì propone aperitivo a buffet dalle 19:30 e party open-air a San Siro. Per le serate invernali attive questa settimana scrivici su WhatsApp per Just Me Milano (cupola riscaldata), Pineta, 55 Milano, Voya Rooftop o REPVBLIC.'
     },
-    pricing: { aperitif: 'From €15', club: 'From €15', tables: 'From €200 to €1,500' },
+    pricing: { aperitif: 'From €15 (Summer)', club: 'From €15 (Summer · Winter closed)', tables: 'From €200 to €1,500 (Summer)' },
     dressCode: { en: 'Smart Casual. No sportswear.', it: 'Smart Casual. No abbigliamento sportivo.' },
     faqs: defaultFaqs('Aria Club Milano', 'Piazzale dello Sport 14, Milan', '21+', 'Smart Casual', 'Hits, EDM and Dance'),
     image: '/images/events/weekly-posters/aria-thursday.webp',
-    priority: 90
+    priority: 90,
+    seasonalSummerOnly: true
   },
   {
     id: 'aria-friday',
@@ -339,18 +341,19 @@ export const weeklyEvents: WeeklyEvent[] = [
     day: 'friday',
     dayOfWeek: 5,
     eventSlug: 'friday-night',
-    name: 'Friday Night',
+    name: 'Friday Night (Summer Season May–Sep)',
     genres: ['Hits', 'EDM', 'Dance'],
-    target: '21+, International, Party crowd',
+    target: '21+, International, Summer Open-Air Crowd',
     description: {
-      en: 'The Friday Night at Aria Club Milano is one of the most vibrant parties in San Siro. Buffet aperitivo from 7:30 PM, optional served dinner, then a full dancefloor until late. Dance Floor Tables, Privé Aria and Privé DJ tables available.',
-      it: 'Il Friday Night all\'Aria Club Milano è una delle serate più vivaci di San Siro. Aperitivo a buffet dalle 19:30, cena servita su prenotazione, poi dancefloor aperto fino a tardi. Disponibili Dance Floor Table, Privé Aria e Privé DJ.'
+      en: 'Summer Season (May–September): Aria Club Milano is closed during winter except for rare special events. During summer months, Friday Night runs open-air at San Siro from 19:30 aperitivo to late-night Dance Floor and Privé tables. For winter Fridays in Milan, book Just Me Milano, Pineta, 55 Milano, Voya Rooftop, or REPVBLIC via WhatsApp.',
+      it: 'Stagione Estiva (Maggio–Settembre): in inverno Aria Club Milano è chiuso salvo eventi rari speciali. Nei mesi estivi il venerdì anima il parco di San Siro dalle 19:30 con aperitivo e tavoli Pista/Privé. Per i venerdì invernali a Milano prenota via WhatsApp Just Me Milano, Pineta, 55 Milano, Voya Rooftop o REPVBLIC.'
     },
-    pricing: { aperitif: 'From €15', club: 'From €15', tables: 'From €200 to €1,500' },
+    pricing: { aperitif: 'From €15 (Summer)', club: 'From €15 (Summer · Winter closed)', tables: 'From €200 to €1,500 (Summer)' },
     dressCode: { en: 'Smart Casual. No sportswear.', it: 'Smart Casual. No abbigliamento sportivo.' },
     faqs: defaultFaqs('Aria Club Milano', 'Piazzale dello Sport 14, Milan', '21+', 'Smart Casual', 'Hits, EDM and Dance'),
     image: '/images/events/october-2026/242611-d6dfa52deb0b.webp',
-    priority: 90
+    priority: 90,
+    seasonalSummerOnly: true
   },
   {
     id: 'aria-saturday',
@@ -359,18 +362,19 @@ export const weeklyEvents: WeeklyEvent[] = [
     day: 'saturday',
     dayOfWeek: 6,
     eventSlug: 'saturday-night',
-    name: 'Saturday Night',
+    name: 'Saturday Night (Summer Season May–Sep)',
     genres: ['Hits', 'EDM', 'Dance'],
-    target: '21+, Mixed, Party crowd',
+    target: '21+, Mixed, Summer Open-Air Crowd',
     description: {
-      en: 'Saturday Night at Aria Club Milano is the weekend highlight for the San Siro neighbourhood. A full evening starting with a buffet aperitivo at 7:30 PM and ending well past midnight. Dance Floor Tables and Privé areas available for groups.',
-      it: 'Il Saturday Night all\'Aria Club Milano è il punto di riferimento del weekend per il quartiere San Siro. Una serata completa che parte dall\'aperitivo a buffet alle 19:30 e si conclude a notte fonda. Dance Floor Table e aree Privé disponibili per i gruppi.'
+      en: 'Summer Season (May–September): Aria Club Milano is closed in winter except for rare special events. In summer, Saturday Night runs open-air at San Siro from 19:30 aperitivo until late. For active winter Saturdays in Milan, write on WhatsApp for Just Me Milano, Pineta, 55 Milano, Voya Rooftop, or REPVBLIC.',
+      it: 'Stagione Estiva (Maggio–Settembre): in inverno Aria Club Milano è chiuso salvo eventi rari speciali. In estate il sabato si svolge all\'aperto a San Siro dalle 19:30 fino a tardi. Per i sabati invernali attivi a Milano scrivici su WhatsApp per Just Me Milano, Pineta, 55 Milano, Voya Rooftop o REPVBLIC.'
     },
-    pricing: { aperitif: 'From €15', club: 'From €20', tables: 'From €200 to €600' },
+    pricing: { aperitif: 'From €15 (Summer)', club: 'From €20 (Summer · Winter closed)', tables: 'From €200 to €600 (Summer)' },
     dressCode: { en: 'Smart Casual. No sportswear.', it: 'Smart Casual. No abbigliamento sportivo.' },
     faqs: defaultFaqs('Aria Club Milano', 'Piazzale dello Sport 14, Milan', '21+', 'Smart Casual', 'Hits, EDM and Dance'),
     image: '/images/events/october-2026/242617-59f08f112437.webp',
-    priority: 90
+    priority: 90,
+    seasonalSummerOnly: true
   },
 
   // --- VOYA ROOFTOP (Tue-Sun) ---
@@ -761,48 +765,25 @@ export const weeklyEvents: WeeklyEvent[] = [
     priority: 50
   },
 
-  // --- REPVBLIC ---
+  // --- REPVBLIC MILANO (Tue Tech House, Thu Hip-Hop/Reggaeton, Fri-Sat Tech House, Sun Hip-Hop/Trap · WhatsApp booking ONLY, no ticket links) ---
   {
-    id: 'repvblic-monday',
+    id: 'repvblic-tuesday',
     clubSlug: 'repvblic',
     clubName: 'Repvblic',
-    day: 'monday',
-    dayOfWeek: 1,
-    eventSlug: 'dirty-monday',
-    name: 'Dirty Monday',
-    genres: ['Hip-Hop', 'House', 'Urban'],
-    target: '21+, Fashion Crowd, Models & Industry',
+    day: 'tuesday',
+    dayOfWeek: 2,
+    eventSlug: 'home-club-apero',
+    name: 'HOME x CLUB APÉRO · Tech House',
+    genres: ['Tech House', 'House'],
+    target: '18+, International & Tech House Crowd',
     description: {
-      en: 'Milan\'s legendary Monday night industry party at Repvblic in Piazza della Repubblica 12. Expect top Hip-Hop and House selectors, fashion insiders, and high-energy VIP tables.',
-      it: 'Il leggendario lunedì notte milanese al Repvblic in Piazza della Repubblica 12. DJ set Hip-Hop e House d\'avanguardia, pubblico fashion internazionale e tavoli VIP.'
+      en: 'Every Tuesday night at REPVBLIC Milano (Piazza della Repubblica 12): HOME x CLUB APÉRO from 22:30 till 05:00 with Tech House selectors. Guestlist free entry before 01:00 and VIP tables (Dancefloor from €300 for 5 guests, Privé from €600 for 10–12 guests) reserved exclusively via WhatsApp +39 351 912 7047.',
+      it: 'Ogni martedì sera al REPVBLIC Milano (Piazza della Repubblica 12): HOME x CLUB APÉRO dalle 22:30 alle 05:00 con selezione Tech House. Ingresso in lista gratis entro le 01:00 e tavoli (Pista da 300 € per 5 persone, Privè da 600 € per 10–12 persone) prenotabili esclusivamente su WhatsApp al +39 351 912 7047.'
     },
-    pricing: { club: 'From €15', tables: 'From €250' },
-    dressCode: { en: 'Fashion Chic.', it: 'Fashion Chic.' },
-    faqs: defaultFaqs('Repvblic', 'Piazza della Repubblica 12, Milan', '21+', 'Fashion Chic', 'Hip-Hop and House'),
-    image: '/images/events/weekly-posters/repvblic-monday.webp',
-    priority: 75
-  },
-  {
-    id: 'repvblic-wednesday',
-    clubSlug: 'repvblic',
-    clubName: 'Repvblic',
-    day: 'wednesday',
-    dayOfWeek: 3,
-    eventSlug: 'home',
-    name: 'Home',
-    genres: ['Commercial', 'Reggaeton'],
-    target: '18+, University Students, Energetic',
-    description: {
-      en: 'Make yourself at "Home" every Wednesday at Repvblic. The ultimate midweek student party featuring a mix of Commercial and Reggaeton hits in a vibrant, welcoming atmosphere.',
-      it: 'Sentiti a "Home" ogni mercoledì al Repvblic. La festa studentesca di metà settimana per eccellenza con un mix di successi Commerciali e Reggaeton in un\'atmosfera vibrante e accogliente.'
-    },
-    pricing: { club: 'From €15', tables: 'From €200' },
-    dressCode: {
-      en: 'Casual Chic.',
-      it: 'Casual Chic.'
-    },
-    faqs: defaultFaqs('Repvblic', 'Piazza della Repubblica 12, Milan', '18+', 'Casual Chic', 'Commercial and Reggaeton'),
-    image: '/images/events/weekly-posters/repvblic-wednesday.webp',
+    pricing: { club: 'Guestlist Free before 01:00 (WhatsApp only)', tables: 'Dancefloor from €300 (5 pax) · Privé from €600 (10–12 pax)' },
+    dressCode: { en: 'Stylish Casual Chic (18+).', it: 'Casual Chic curato (18+).' },
+    faqs: defaultFaqs('Repvblic', 'Piazza della Repubblica 12, Milan', '18+', 'Stylish Casual Chic', 'Tech House'),
+    image: '/images/events/weekly-posters/repvblic-tuesday.webp',
     priority: 75
   },
   {
@@ -811,20 +792,17 @@ export const weeklyEvents: WeeklyEvent[] = [
     clubName: 'Repvblic',
     day: 'thursday',
     dayOfWeek: 4,
-    eventSlug: 'sbraake',
-    name: 'Sbraake',
-    genres: ['Hip-Hop', 'Trap'],
-    target: '18+, University Students, Energetic',
+    eventSlug: 'buraka-movida',
+    name: 'BURAKA x MOVIDA · Hip-Hop & Reggaeton',
+    genres: ['Hip-Hop', 'Reggaeton'],
+    target: '18+, International, University & Urban Crowd',
     description: {
-      en: 'Get ready for "Sbraake" on Thursdays at Repvblic. A high-energy night dedicated to the freshest Hip-Hop and Trap sounds. Gather your crew and hit the dancefloor.',
-      it: 'Preparati per "Sbraake" il giovedì al Repvblic. Una serata ad alta energia dedicata ai suoni Hip-Hop e Trap più freschi. Raduna la tua crew e scendi in pista.'
+      en: 'Thursday night at REPVBLIC Milano (Piazza della Repubblica 12) is dedicated to Hip-Hop and Reggaeton with BURAKA x MOVIDA from 23:30 to 05:00. RSVP free entry before 01:00 and VIP tables (Dancefloor from €300 for 5 guests, Privé from €600 for 10–12 guests) booked strictly via WhatsApp +39 351 912 7047.',
+      it: 'Il giovedì notte al REPVBLIC Milano (Piazza della Repubblica 12) è dedicato a Hip-Hop e Reggaeton con BURAKA x MOVIDA dalle 23:30 alle 05:00. RSVP gratis entro le 01:00 e tavoli (Pista da 300 € per 5 persone, Privè da 600 € per 10–12 persone) prenotabili esclusivamente via WhatsApp al +39 351 912 7047.'
     },
-    pricing: { club: 'From €15', tables: 'From €200' },
-    dressCode: {
-      en: 'Urban Casual.',
-      it: 'Urban Casual.'
-    },
-    faqs: defaultFaqs('Repvblic', 'Piazza della Repubblica 12, Milan', '18+', 'Urban Casual', 'Hip-Hop and Trap'),
+    pricing: { club: 'RSVP Free before 01:00 (WhatsApp only)', tables: 'Dancefloor from €300 (5 pax) · Privé from €600 (10–12 pax)' },
+    dressCode: { en: 'Urban Chic (18+).', it: 'Urban Chic (18+).' },
+    faqs: defaultFaqs('Repvblic', 'Piazza della Repubblica 12, Milan', '18+', 'Urban Chic', 'Hip-Hop and Reggaeton'),
     image: '/images/events/weekly-posters/repvblic-thursday.webp',
     priority: 75
   },
@@ -834,20 +812,17 @@ export const weeklyEvents: WeeklyEvent[] = [
     clubName: 'Repvblic',
     day: 'friday',
     dayOfWeek: 5,
-    eventSlug: 'dirty-monday-edition',
-    name: 'Dirty Monday Edition',
-    genres: ['Indie', 'Rock', 'Electronic'],
-    target: '21+, Alternative, Energetic',
+    eventSlug: 'tech-house-friday',
+    name: 'Friday Night Tech House',
+    genres: ['Tech House', 'Electronic'],
+    target: '21+, International & Clubbing Crowd',
     description: {
-      en: 'The legendary Dirty Monday crew takes over Repvblic for a special Friday edition. Expect an eclectic mix of Indie, Rock, and Electronic music, a wild crowd, and an unforgettable party vibe.',
-      it: 'La leggendaria crew di Dirty Monday conquista il Repvblic per un\'edizione speciale del venerdì. Aspettati un mix eclettico di musica Indie, Rock ed Elettronica, un pubblico scatenato e un\'atmosfera di festa indimenticabile.'
+      en: 'Friday night at REPVBLIC Milano (Piazza della Repubblica 12): pure Tech House clubbing from 23:30 to 05:00 inside Milan’s central indoor club. Entry (from €20 with 1 drink) and tables (Dancefloor from €300 for 5 guests, Privé from €600 for 10–12 guests) are arranged exclusively via WhatsApp +39 351 912 7047.',
+      it: 'Il venerdì notte al REPVBLIC Milano (Piazza della Repubblica 12): clubbing Tech House dalle 23:30 alle 05:00 nella sala indoor del centro. Ingressi (da 20 € con 1 drink) e tavoli (Pista da 300 € per 5 persone, Privè da 600 € per 10–12 persone) si prenotano esclusivamente su WhatsApp al +39 351 912 7047.'
     },
-    pricing: { club: 'From €20', tables: 'From €250' },
-    dressCode: {
-      en: 'Alternative Chic. Express yourself.',
-      it: 'Alternative Chic. Esprimi te stesso.'
-    },
-    faqs: defaultFaqs('Repvblic', 'Piazza della Repubblica 12, Milan', '21+', 'Alternative Chic', 'Indie, Rock, and Electronic'),
+    pricing: { club: 'From €20 with 1 drink (WhatsApp only)', tables: 'Dancefloor from €300 (5 pax) · Privé from €600 (10–12 pax)' },
+    dressCode: { en: 'Smart Elegant.', it: 'Elegante curato.' },
+    faqs: defaultFaqs('Repvblic', 'Piazza della Repubblica 12, Milan', '21+', 'Smart Elegant', 'Tech House'),
     image: '/images/events/weekly-posters/repvblic-friday.webp',
     priority: 75
   },
@@ -858,17 +833,37 @@ export const weeklyEvents: WeeklyEvent[] = [
     day: 'saturday',
     dayOfWeek: 6,
     eventSlug: 'saturday-night',
-    name: 'Saturday Flagship Club Night',
-    genres: ['House', 'Commercial', 'Hip-Hop'],
-    target: '21+, VIPs, International Crowd',
+    name: 'Saturday Night Tech House',
+    genres: ['Tech House', 'House'],
+    target: '21+, VIPs & International Crowd',
     description: {
-      en: 'Saturday night at REPVBLIC Milano delivers an international crowd and high-energy clubbing experience from 23:00 till morning in Piazza della Repubblica 12 with international hits, house, and hip hop.',
-      it: 'Il sabato notte al REPVBLIC Milano unisce pubblico internazionale e clubbing fino al mattino in Piazza della Repubblica 12, dalle 23:00 con hit internazionali, house e hip hop.'
+      en: 'Saturday night at REPVBLIC Milano delivers Tech House and an international crowd from 23:30 to 05:00 at Piazza della Repubblica 12. Entry (from €20 with 1 drink) and VIP tables (Dancefloor from €300 for 5 guests, Privé from €600 for 10–12 guests) are booked exclusively via WhatsApp +39 351 912 7047.',
+      it: 'Il sabato notte al REPVBLIC Milano unisce Tech House e pubblico internazionale dalle 23:30 alle 05:00 in Piazza della Repubblica 12. Ingressi (da 20 € con 1 drink) e tavoli VIP (Pista da 300 € per 5 persone, Privè da 600 € per 10–12 persone) si prenotano esclusivamente su WhatsApp al +39 351 912 7047.'
     },
-    pricing: { club: 'From €25', tables: 'From €300' },
+    pricing: { club: 'From €20 with 1 drink (WhatsApp only)', tables: 'Dancefloor from €300 (5 pax) · Privé from €600 (10–12 pax)' },
     dressCode: { en: 'Strictly Elegant.', it: 'Strettamente Elegante.' },
-    faqs: defaultFaqs('Repvblic', 'Piazza della Repubblica 12, Milan', '21+', 'Strictly Elegant', 'International Hits, House and Hip-Hop'),
+    faqs: defaultFaqs('Repvblic', 'Piazza della Repubblica 12, Milan', '21+', 'Strictly Elegant', 'Tech House'),
     image: '/images/events/weekly-posters/repvblic-saturday.webp',
+    priority: 75
+  },
+  {
+    id: 'repvblic-sunday',
+    clubSlug: 'repvblic',
+    clubName: 'Repvblic',
+    day: 'sunday',
+    dayOfWeek: 0,
+    eventSlug: 'demon-time',
+    name: 'DEMON TIME · Hip-Hop & Trap',
+    genres: ['Hip-Hop', 'Trap'],
+    target: '18+, Urban & Late-Night Crowd',
+    description: {
+      en: 'Sunday night at REPVBLIC Milano (Piazza della Repubblica 12): DEMON TIME from 23:59 till late with Hip-Hop and Trap selectors. Women Free before 01:30 and VIP tables (Dancefloor from €300 for 5 guests, Privé from €600 for 10–12 guests) reserved exclusively via WhatsApp +39 351 912 7047.',
+      it: 'La domenica notte al REPVBLIC Milano (Piazza della Repubblica 12): DEMON TIME dalle 23:59 fino a tardi con selezioni Hip-Hop e Trap. Donna gratis entro le 01:30 e tavoli (Pista da 300 € per 5 persone, Privè da 600 € per 10–12 persone) prenotabili esclusivamente via WhatsApp al +39 351 912 7047.'
+    },
+    pricing: { club: 'Women Free before 01:30 · WhatsApp only', tables: 'Dancefloor from €300 (5 pax) · Privé from €600 (10–12 pax)' },
+    dressCode: { en: 'Urban Chic (18+).', it: 'Urban Chic (18+).' },
+    faqs: defaultFaqs('Repvblic', 'Piazza della Repubblica 12, Milan', '18+', 'Urban Chic', 'Hip-Hop and Trap'),
+    image: '/images/events/weekly-posters/repvblic-sunday.webp',
     priority: 75
   }
 ];

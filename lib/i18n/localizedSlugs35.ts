@@ -943,11 +943,11 @@ const WEEKLY_EVENT_DEFS: Array<{ canonicalSlug: string; clubKey: string; day: st
   { canonicalSlug: 'playclub-friday-flexx', clubKey: 'play-club', day: 'friday', partyName: 'flexx', shortAliases: ['flexx', 'playclub-friday'] },
   { canonicalSlug: 'playclub-saturday-golden-society', clubKey: 'play-club', day: 'saturday', partyName: 'golden-society', shortAliases: ['golden-society', 'playclub-saturday'] },
   { canonicalSlug: 'playclub-sunday-demontime', clubKey: 'play-club', day: 'sunday', partyName: 'demontime', shortAliases: ['demontime', 'playclub-sunday'] },
-  { canonicalSlug: 'repvblic-monday-dirty-monday', clubKey: 'repvblic', day: 'monday', partyName: 'dirty-monday', shortAliases: ['dirty-monday', 'repvblic-monday'] },
-  { canonicalSlug: 'repvblic-wednesday-home', clubKey: 'repvblic', day: 'wednesday', partyName: 'home', shortAliases: ['home', 'repvblic-wednesday'] },
-  { canonicalSlug: 'repvblic-thursday-sbraake', clubKey: 'repvblic', day: 'thursday', partyName: 'sbraake', shortAliases: ['sbraake', 'repvblic-thursday'] },
-  { canonicalSlug: 'repvblic-friday-dirty-monday-edition', clubKey: 'repvblic', day: 'friday', partyName: 'dirty-monday-edition', shortAliases: ['dirty-monday-edition', 'repvblic-friday'] },
+  { canonicalSlug: 'repvblic-tuesday-home-club-apero', clubKey: 'repvblic', day: 'tuesday', partyName: 'home-club-apero', shortAliases: ['home', 'home-club-apero', 'repvblic-tuesday', 'repvblic-monday', 'repvblic-monday-dirty-monday', 'dirty-monday', 'repvblic-wednesday', 'repvblic-wednesday-home'] },
+  { canonicalSlug: 'repvblic-thursday-buraka-movida', clubKey: 'repvblic', day: 'thursday', partyName: 'buraka-movida', shortAliases: ['buraka-movida', 'sbraake', 'repvblic-thursday', 'repvblic-thursday-sbraake'] },
+  { canonicalSlug: 'repvblic-friday-tech-house-friday', clubKey: 'repvblic', day: 'friday', partyName: 'tech-house-friday', shortAliases: ['tech-house-friday', 'dirty-monday-edition', 'repvblic-friday', 'repvblic-friday-dirty-monday-edition'] },
   { canonicalSlug: 'repvblic-saturday-saturday-night', clubKey: 'repvblic', day: 'saturday', partyName: 'saturday-night', shortAliases: ['repvblic-saturday'] },
+  { canonicalSlug: 'repvblic-sunday-demon-time', clubKey: 'repvblic', day: 'sunday', partyName: 'demon-time', shortAliases: ['demon-time', 'repvblic-sunday'] },
 ];
 
 export const WEEKLY_EVENT_SLUGS_35: Record<string, Record<LocaleCode, string>> = {};
