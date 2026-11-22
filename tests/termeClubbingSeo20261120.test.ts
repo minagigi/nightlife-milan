@@ -96,10 +96,10 @@ test('Terme di Sirmione confirms 198 EUR, non-partner status, JustMe Garda Lake 
   }
 });
 
-test('g-117 & g-118 Pillar Guides in mockGuides (total 118): >= 2,000 words, 6 H2 sections, >= 18 H3, 0 inner H2, 6 FAQs, clean limits & images <= 300 KB across all 35 locales', () => {
-  assert.equal(mockGuides.length, 118, `Expected 118 total guides, got ${mockGuides.length}`);
+test('GSC Pillar & Upgraded Guides in mockGuides (total 120): >= 2,000 words, 6 H2 sections, >= 18 H3, 0 inner H2, 6 FAQs, clean limits & images <= 300 KB across all 35 locales', () => {
+  assert.equal(mockGuides.length, 120, `Expected 120 total guides, got ${mockGuides.length}`);
 
-  for (const id of ['g-117', 'g-118'] as const) {
+  for (const id of ['g-117', 'g-118', 'g-119', 'g-120', 'g-weekly-calendar', 'g-37', 'g-38'] as const) {
     const guide = mockGuides.find((g) => g.id === id);
     assert.ok(guide, `Missing guide ${id}`);
     assert.equal(guide.sections.length, 6, `${id} must have 6 sections`);
@@ -159,7 +159,10 @@ test('g-117 & g-118 Pillar Guides in mockGuides (total 118): >= 2,000 words, 6 H
       const allRaw = [title, excerpt, ...bodyParts].join(' ');
       assert.ok(!/\u2014/.test(allRaw), `${id} (${loc}) contains forbidden em-dash`);
       assert.ok(!/!/.test(allRaw), `${id} (${loc}) contains exclamation mark`);
-      assert.ok(!/Roberto Cavalli|Privé Cavalli|237,60|\+20%|Stripe/i.test(allRaw), `${id} (${loc}) contains forbidden string`);
+      assert.ok(
+        !/Roberto Cavalli|Privé Cavalli|237,60|\+20%|Stripe|Giorgio Gaber|Teatro Lirico|Teatro Nazionale|Stage Entertainment/i.test(allRaw),
+        `${id} (${loc}) contains forbidden or takedown string`,
+      );
       if (loc === 'ro') {
         assert.ok(!/[şţŞŢ]/.test(allRaw), `${id} (ro) contains cedilla s/t`);
       }
@@ -296,7 +299,7 @@ test('V2 Curated Editorial Media & Reusable 118-Guide Template invariants', () =
     assert.ok(fs.statSync(abs).size <= 307_200, `Curated image ${file} exceeds 300 KB`);
   }
 
-  for (const gid of ['g-117', 'g-118', 'g-rooftops-milan', 'g-8', 'g-15'] as const) {
+  for (const gid of ['g-117', 'g-118', 'g-119', 'g-120', 'g-weekly-calendar', 'g-37', 'g-38', 'g-rooftops-milan', 'g-8', 'g-15'] as const) {
     const hero = GUIDE_HERO_IMAGES_114[gid];
     const inlines = GUIDE_INLINE_IMAGES_114[gid] || [];
     assert.ok(hero.startsWith('/images/guides-editorial/'), `${gid} hero should use curated editorial pack: ${hero}`);

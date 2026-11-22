@@ -245,9 +245,11 @@ export default async function GuidePage({ params }: Props) {
   const bundle = getGuideEditorialBundle(guide, loc, title, heroImg);
   const displayHeadline = getEditorialDisplayHeadline(guide.id, loc, title);
   const explorerData =
-    guide.id === 'g-117' || guide.id === 'g-118'
-      ? buildTasteExplorerData(guide.id === 'g-117' ? 'terme' : 'clubbing', loc, guideUrl)
-      : null;
+    guide.id === 'g-117' || guide.id === 'g-120'
+      ? buildTasteExplorerData('terme', loc, guideUrl)
+      : guide.id === 'g-118' || guide.id === 'g-119'
+        ? buildTasteExplorerData('clubbing', loc, guideUrl)
+        : null;
 
   return (
     <>
