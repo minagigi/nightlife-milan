@@ -75,11 +75,11 @@ const BATCH_CACHE = new Map<string, RenderedGuide>();
 
 export function getGsc20261122DisplayHeadline(guideId: string, locale: LocaleCode): string | null {
   const lx = GSC_BATCH_20261122_LEX[locale] || GSC_BATCH_20261122_LEX.en;
-  if (guideId === 'g-119') return sanitizeText(lx.reg_short);
-  if (guideId === 'g-120') return sanitizeText(lx.bor_short);
-  if (guideId === 'g-weekly-calendar') return sanitizeText(lx.cal_short);
-  if (guideId === 'g-37') return sanitizeText(lx.loo_short);
-  if (guideId === 'g-38') return sanitizeText(lx.bob_short);
+  if (guideId === 'g-119') return sanitizeText(`Reggaeton ${lx.city}`);
+  if (guideId === 'g-120') return sanitizeText(`Bormio 2027`);
+  if (guideId === 'g-weekly-calendar') return sanitizeText(locale === 'it' ? 'Serate 7/7' : `${lx.city} 7/7`);
+  if (guideId === 'g-37') return 'Loolapaloosa 2027';
+  if (guideId === 'g-38') return sanitizeText(`Bobino ${lx.city}`);
   return null;
 }
 
