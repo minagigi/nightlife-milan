@@ -47,7 +47,7 @@ THIRD_PARTY_CONTACT_RE = re.compile(
     r"\+?\s*39[\s.\-]*\d|02[\s.\-]*\d{4,}|03\d[\s.\-]*\d{4,}|"
     r"\b3[2-9]\d[\s.\-]*\d{3}[\s.\-]*\d{3,4}\b|"
     r"infoline|reservations|prenotazion|ticketone|vivaticket|ticketsms|dice\.fm|xceed|eventbrite|mailticket|"
-    r"togrp|mtishows|teatromanzoni|teatrolirico|teatronazionale|fioraiobianchi|palacevarese|hotelbarchetta|albergoterminus|villaeste|"
+    r"togrp|mtishows|teatromanzoni|fioraiobianchi|palacevarese|hotelbarchetta|albergoterminus|villaeste|"
     r"info\.brunches|rsvp|book now)",
     re.I,
 )
@@ -405,17 +405,6 @@ def main() -> None:
         "manzoni_stage": ("manzoni_stage_hall.jpg", "https://www.teatromanzoni.it/storage/2022/07/a165510361-5082c479-283c-476e-96c3-1be9aaa741d6.jpg"),
         "manzoni_dining": ("manzoni_bistrot_table.jpg", "https://www.teatromanzoni.it/storage/2023/10/1600x1000bis.jpg"),
         "fioraio_bistrot": ("fioraio_bistrot.jpg", "https://www.fioraiobianchicaffe.it/wp-content/uploads/2026/07/DSCF3984-768x1152.jpg"),
-        # Teatro Lirico Giorgio Gaber + MENU PDF (canonical 2024 stage & hall photography, zero COVID masks/promo text)
-        "lirico_stage_gala": ("lirico_stage_gala.jpg", "https://teatroliricogiorgiogaber.it/wp-content/uploads/2024/08/Mediobanca-Premiere-cena-su-palco.jpg"),
-        "lirico_hall": ("lirico_hall.jpeg", "https://teatroliricogiorgiogaber.it/wp-content/uploads/2021/10/TL_Sito_Large_1600x580_3.jpeg"),
-        "lirico_sala1": ("lirico_sala1.jpg", "https://teatroliricogiorgiogaber.it/wp-content/uploads/2024/08/cena-placee-sala-polivalente-1.jpg"),
-        "lirico_sala2": ("lirico_sala2.jpg", "https://teatroliricogiorgiogaber.it/wp-content/uploads/2024/08/cena-placee-sala-polivalente-2.jpg"),
-        "lirico_pdf": ("MENU-CAPODANNO-TEATRO.pdf", "https://esf2ihwfkqm.exactdn.com/wp-content/uploads/2026/10/MENU-CAPODANNO-TEATRO.pdf"),
-        # Teatro Nazionale (Sister Act Il Musical - verified stage photography, zero promo URLs)
-        "naz_01": ("sister_act_ant0306.jpg", "https://teatronazionale.it/wp-content/uploads/2026/06/SISTER-ACT_ANT_0306-copia.jpg"),
-        "naz_02": ("sister_act_ant0928.jpg", "https://teatronazionale.it/wp-content/uploads/2026/06/SISTER-ACT_ANT_0928-copia.jpg"),
-        "naz_03": ("sister_act_scene2.jpg", "https://teatronazionale.it/wp-content/uploads/2026/06/SISTER-ACT_GEN_0838-copia.jpg"),
-        "naz_04": ("sister_act_scene3.jpg", "https://teatronazionale.it/wp-content/uploads/2026/06/SISTER-ACT_GEN_0959-copia.jpg"),
         # Palace Grand Hotel Varese
         "pv_01": ("palace_varese_01.jpg", "https://www.palacevarese.com/static/7efd96200440fa810c484ed528480f9a/0304f/168463fb-2def-4d09-8df1-ef503b2b3c10.jpg"),
         "pv_02": ("palace_varese_02.jpg", "https://www.palacevarese.com/static/50bf756bae952f001bfadb7e718cfc19/2703c/0ca81f06-dd58-419e-a1af-6763dd6800b8.jpg"),
@@ -460,15 +449,7 @@ def main() -> None:
     save_master_webp(dl["manzoni_dining"], master_dir / "teatro-manzoni-real-03.webp", anchor_y=0.45)
     save_master_webp(dl["fioraio_bistrot"], master_dir / "teatro-manzoni-real-04.webp", anchor_y=0.40)
 
-    save_master_webp(dl["lirico_stage_gala"], master_dir / "teatro-lirico-real-01.webp")
-    save_master_webp(dl["lirico_hall"], master_dir / "teatro-lirico-real-02.webp")
-    save_master_webp(dl["lirico_sala1"], master_dir / "teatro-lirico-real-03.webp")
-    save_master_webp(dl["lirico_sala2"], master_dir / "teatro-lirico-real-04.webp")
 
-    save_master_webp(dl["naz_01"], master_dir / "teatro-nazionale-real-01.webp")
-    save_master_webp(dl["naz_02"], master_dir / "teatro-nazionale-real-02.webp")
-    save_master_webp(dl["naz_03"], master_dir / "teatro-nazionale-real-03.webp")
-    save_master_webp(dl["naz_04"], master_dir / "teatro-nazionale-real-04.webp")
 
     save_master_webp(dl["pv_01"], master_dir / "palace-varese-real-01.webp")
     save_master_webp(dl["pv_02"], master_dir / "palace-varese-real-02.webp")
@@ -481,7 +462,7 @@ def main() -> None:
         assert src_p.exists(), f"Missing clean BackDoor43 source: {src_p}"
         save_master_webp(src_p, master_dir / f"backdoor43-real-0{idx}.webp")
 
-    # 3. Render 5 PDF Menus to 1376x768 bonified WebPs
+    # 3. Render 4 PDF Menus to 1376x768 bonified WebPs
     menu_jobs = [
         (EMAIL_MAT_DIR / "stk-radio-rooftop" / "Menu STK Milan NYE 2027.pdf",
          menu_dir / "menu-stk-milan-nye-2027.webp",
@@ -495,9 +476,6 @@ def main() -> None:
         (EMAIL_MAT_DIR / "albergo-terminus-como" / "BardelleTerme_MenuSSilvestro_ITA.pdf",
          menu_dir / "menu-terminus-como-nye-2027.webp",
          "ALBERGO TERMINUS COMO · BAR DELLE TERME NYE 240 EUR"),
-        (dl["lirico_pdf"],
-         menu_dir / "menu-teatro-lirico-buffet-nye-2027.webp",
-         "TEATRO LIRICO GIORGIO GABER · MENU PRE-SHOW CAPODANNO 55 EUR"),
     ]
     menu_outputs: list[tuple[str, Path]] = []
     for pdf_p, out_p, hdr in menu_jobs:
@@ -534,24 +512,6 @@ def main() -> None:
             "SPETTACOLO 40€–130€ · CENA BISTROT FIORAIO BIANCHI ORE 20:00 (100€)",
             False,
         ),
-        (
-            "capodanno-teatro-lirico-giorgio-gaber-milano",
-            dl["lirico_stage_gala"],
-            "VIA LARGA 14 · DUOMO MILANO · CAPODANNO A TEATRO",
-            "TEATRO LIRICO GABER · NYE 2027",
-            "A CHRISTMAS CAROL CON ROBERTO CIUFOLI · 46€–90€",
-            "BUFFET PRE-SHOW OPZIONALE CON 2 DRINK 55€ · SERATA 31 DICEMBRE",
-            False,
-        ),
-        (
-            "capodanno-teatro-nazionale-milano",
-            dl["naz_04"],
-            "PIAZZA PIEMONTE · VIA GIORDANO ROTA 1 · MILANO",
-            "TEATRO NAZIONALE · NYE 2027",
-            "SISTER ACT IL MUSICAL · REPLICA SPECIALE ORE 21:00 CON BRINDISI",
-            "31 DICEMBRE 2026  ·  GALLERIA 100€ · POLTRONA 120€ · VIP 150€",
-            False,
-        ),
         # 4 Refreshed Posters
         (
             "capodanno-radio-rooftop-milano",
@@ -581,11 +541,11 @@ def main() -> None:
             False,
         ),
         (
-            "capodanno-teatro-milano-lirico-manzoni-nazionale-carcano",
+            "capodanno-teatro-manzoni-carcano-milano",
             dl["manzoni_stage"],
-            "MILANO CENTRO · CARCANO, LIRICO GABER, MANZONI, NAZIONALE",
+            "MILANO CENTRO · TEATRO CARCANO & TEATRO MANZONI",
             "TEATRI DI MILANO · NYE 2027",
-            "GIOELE DIX 84€ · A CHRISTMAS CAROL 46–90€ · SALEMME · SISTER ACT",
+            "GIOELE DIX 84€ · VINCENZO SALEMME «...E FUORI NEVICA»",
             "31 DICEMBRE 2026  ·  SPETTACOLI DI CAPODANNO E CENE BISTROT",
             False,
         ),
