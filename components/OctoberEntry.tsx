@@ -32,7 +32,7 @@ export function HomeHalloweenAndCapodannoSections({
         ? 'Dal Lunedì alla Domenica sotto la Torre Branca: Monday Night, Martedì Universitario, Mercoledì Absolutely, Giovedì Special Night, Friday Night, Saturday Night & Sunday Uptown. Royal Aperitivo dalle 19:30 e Club fino alle 05:00.'
         : 'Monday through Sunday beneath Torre Branca in Parco Sempione: Monday Night, University Tuesday, Absolutely Wednesday, Thursday Special Night, Friday Night, Saturday Night & Uptown Sunday. Royal Aperitivo from 19:30 & Club until 05:00.',
       badge: isIt ? 'Royal Aperitivo da 15-20€ · Tavoli VIP da 320€ a 5.000€' : 'Royal Aperitivo from €15-20 · VIP Tables €320 to €5,000',
-      posterSrc: '/images/events/october-2026/249213-e2755e4bf02c.webp',
+      posterSrc: '/images/events/cards-4x5/flagship-weekly/justme-weekly.webp',
       href: `${prefix}/events/justme-saturday-saturday-night`,
     },
     {
@@ -45,11 +45,24 @@ export function HomeHalloweenAndCapodannoSections({
         ? 'Giovedì Tr3ndy Society, Venerdì Aperitivo Cantato & Live Music e Sabato Luxury Dinner Show & Club tra i lampadari di cristallo di Via Messina 38.'
         : 'Thursday Tr3ndy Society, Friday Singing Aperitivo & Live Music, and Saturday Luxury Dinner Show & Club under crystal chandeliers at Via Messina 38.',
       badge: isIt ? 'Aperitivo Cantato da 20€ · Tavoli VIP & Dinner da 300€' : 'Singing Aperitivo from €20 · VIP Tables & Dinner from €300',
-      posterSrc: '/images/events/october-2026/243822-fa1698470cb9.webp',
+      posterSrc: '/images/events/cards-4x5/flagship-weekly/pineta-weekly.webp',
       href: `${prefix}/events/pineta-friday-aperitivo-cantato`,
     },
     {
-      rank: isIt ? '03 · LOFT & SALONE INVERNALE · SEMPIONE' : '03 · WINTER LOFT & HALL · SEMPIONE',
+      rank: isIt ? '03 · STAGIONE ESTIVA (MAG–SET) · SAN SIRO' : '03 · SUMMER SEASON (MAY–SEP) · SAN SIRO',
+      venue: 'Aria Club Milano',
+      title: isIt
+        ? 'Aria Club Milano: Stagione Estiva Open-Air (Chiuso in inverno salvo eventi rari)'
+        : 'Aria Club Milan: Summer Open-Air Season (Closed in Winter Except Rare Events)',
+      desc: isIt
+        ? 'A 150 metri dallo Stadio San Siro (Piazzale dello Sport 14): programmazione regolare da Maggio a Settembre. In inverno il locale è chiuso salvo eventi rari speciali (es. Capodanno); per le serate invernali attive scegli Just Me, Pineta, 55 Milano, Voya Rooftop e REPVBLIC.'
+        : 'Just 150 meters from San Siro Stadium (Piazzale dello Sport 14): regular open-air season May–September. Closed in winter except rare special events (e.g. NYE); for active winter nights choose Just Me, Pineta, 55 Milano, Voya Rooftop, or REPVBLIC.',
+      badge: isIt ? 'Stagione Estiva Mag–Set · Chiuso in inverno salvo eventi rari' : 'Summer May–Sep · Closed in Winter Except Rare Events',
+      posterSrc: '/images/events/cards-4x5/flagship-weekly/aria-summer-season.webp',
+      href: `${prefix}/events/aria-saturday-saturday-night`,
+    },
+    {
+      rank: isIt ? '04 · LOFT & SALONE INVERNALE · SEMPIONE' : '04 · WINTER LOFT & HALL · SEMPIONE',
       venue: '55 Milano',
       title: isIt
         ? 'Serate della Settimana 55 Milano: Apericena XL, Cena Cantata & Sabato The Wall'
@@ -58,11 +71,11 @@ export function HomeHalloweenAndCapodannoSections({
         ? 'Da Martedì a Domenica nello storico loft di Via Piero della Francesca 55: Royal Apericena XL per lauree e compleanni, Venerdì Dinner Show, Sabato The Wall e Domenica Latin Night.'
         : 'Tuesday through Sunday inside the historic loft at Via Piero della Francesca 55: Royal XXL Apericena for graduations and birthdays, Friday Dinner Show, Saturday The Wall & Sunday Latin Night.',
       badge: isIt ? 'Royal Apericena da 20€ · Cena Cantata & Tavoli VIP da 200€' : 'Royal Apericena from €20 · Dinner Show & VIP Tables from €200',
-      posterSrc: '/images/events/weekly-posters/55milano-saturday.webp',
+      posterSrc: '/images/events/cards-4x5/flagship-weekly/55milano-weekly.webp',
       href: `${prefix}/events/55milano-saturday-aperitivo-cena-cantata`,
     },
     {
-      rank: isIt ? '04 · ROOFTOP PANORAMICO COPERTO · 20° PIANO' : '04 · ENCLOSED PANORAMIC ROOFTOP · 20TH FLOOR',
+      rank: isIt ? '05 · ROOFTOP PANORAMICO COPERTO · 20° PIANO' : '05 · ENCLOSED PANORAMIC ROOFTOP · 20TH FLOOR',
       venue: 'Voya Rooftop Milano',
       title: isIt
         ? 'Serate della Settimana Voya Rooftop: Sunset Aperitivo, Cena Skyline & DJ Set'
@@ -71,11 +84,11 @@ export function HomeHalloweenAndCapodannoSections({
         ? 'Da Martedì a Domenica al 20° piano riscaldato con vista a 360° sullo skyline di Milano: Sunset Aperitivo dalle 18:30, cena panoramica à la carte, mixology d’autore e Sky Clubbing fino a tardi.'
         : 'Tuesday through Sunday on the heated 20th floor with 360° Milan skyline views: Sunset Aperitivo from 18:30, panoramic à la carte dinner, signature mixology & Sky Clubbing until late.',
       badge: isIt ? 'Sunset Aperitivo da 20€ · Cena Vista Skyline & Tavoli VIP Rooftop' : 'Sunset Aperitivo from €20 · Skyline Dinner & Rooftop VIP Tables',
-      posterSrc: '/images/events/weekly-posters/voya-saturday.webp',
+      posterSrc: '/images/events/cards-4x5/flagship-weekly/voya-weekly.webp',
       href: `${prefix}/events/voya-saturday-rooftop-experience`,
     },
     {
-      rank: '05 · INDOOR CLUB · REPUBBLICA',
+      rank: '06 · INDOOR CLUB · REPUBBLICA',
       venue: 'REPVBLIC Milano',
       title: isIt
         ? 'Serate REPVBLIC Milano: Mar Tech House, Gio Hip-Hop/Reggaeton, Ven–Sab Tech House & Dom Trap'
@@ -84,7 +97,7 @@ export function HomeHalloweenAndCapodannoSections({
         ? 'Martedì HOME x CLUB APÉRO (Tech House, lista gratis entro 01:00), Giovedì BURAKA x MOVIDA (Hip-Hop & Reggaeton, RSVP gratis entro 01:00), Venerdì & Sabato Tech House, Domenica DEMON TIME (Hip-Hop & Trap, donna gratis entro 01:30). Prenotazione solo via WhatsApp.'
         : 'Tuesday HOME x CLUB APÉRO (Tech House, free guestlist before 01:00), Thursday BURAKA x MOVIDA (Hip-Hop & Reggaeton, free RSVP before 01:00), Friday & Saturday Tech House, Sunday DEMON TIME (Hip-Hop & Trap, women free before 01:30). WhatsApp booking only.',
       badge: isIt ? 'Tavoli Pista da 300€ (5 pax) · Privè da 600€ (10–12 pax) · Solo WhatsApp' : 'Dancefloor Tables from €300 (5 pax) · Privé from €600 (10–12 pax) · WhatsApp Only',
-      posterSrc: '/images/events/weekly-posters/repvblic-tuesday.webp',
+      posterSrc: '/images/events/cards-4x5/flagship-weekly/repvblic-weekly.webp',
       href: `${prefix}/events/repvblic-tuesday-home-club-apero`,
     },
   ];

@@ -1,4 +1,4 @@
-// Auto-generated V3 4:5 (1080x1350) Couture Noir card poster map (events + partner venues).
+// Auto-generated V4 4:5 (1080x1350) Couture Noir card poster map (zero cross-venue fallbacks).
 const CARD_POSTER_4X5_MAP: Readonly<Record<string, string>> = {
   "/images/11-clubroom-milan.webp": "/images/events/cards-4x5/partner-clubs/11-clubroom.webp",
   "/images/55-milano.webp": "/images/events/cards-4x5/partner-clubs/55-milano.webp",

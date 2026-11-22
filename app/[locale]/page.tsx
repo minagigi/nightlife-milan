@@ -376,7 +376,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
       zone: ev.address,
       genres: locEv.musicAndFormat,
       dress: locEv.dressCode,
-      image: ev.image,
+      image: `/images/events/cards-4x5/partner-clubs/${ev.slug.replace(/^capodanno-/, '')}.webp`,
       href: capodannoEventPath(ev.slug, locale),
       waHref: getConciergeBookingUrl(locale, `${ev.venueName} · VIP Table`, lp || '/'),
     };
