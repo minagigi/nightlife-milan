@@ -3,6 +3,7 @@
 import React, { useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
+import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import Link from '@/components/LocalizedLink';
 import {
@@ -109,18 +110,24 @@ export default function VerticalHubsAndEventsSection({
               className="border border-[#050505]/16 bg-[#EFE9DC] overflow-hidden flex flex-col justify-between hover:border-[#050505] transition"
             >
               <div>
-                <div data-no-lightbox="true" className="relative h-52 w-full bg-[#050505] overflow-hidden border-b border-[#050505]/14">
+                <div data-no-lightbox="true" className="relative aspect-[4/5] w-full bg-[#050505] overflow-hidden border-b border-[#050505]/14">
                   <Image
-                    src={card.imageSrc}
+                    src={toCardPoster4x5(card.imageSrc)}
                     alt={card.title}
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
-                    quality={80}
+                    quality={85}
                     className="object-cover"
                   />
                   <span className="absolute top-3 left-3 bg-[#050505]/92 border border-[#F6F1E7]/25 px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-[#F6F1E7]">
                     {card.badge}
                   </span>
+                  {!toCardPoster4x5(card.imageSrc).includes('/cards-4x5/') && (
+                    <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-center justify-between gap-2 border-t border-[#EAE3D5]/25 bg-[#050505]/92 px-3 py-1.5 font-mono text-[10px] tracking-wider text-[#F6F1E7]">
+                      <span className="font-bold">WWW.NIGHTLIFEMILAN.COM</span>
+                      <span className="font-bold text-[#25D366]">+39 351 912 7047</span>
+                    </div>
+                  )}
                 </div>
 
                 <div className="p-6">
@@ -233,14 +240,14 @@ export default function VerticalHubsAndEventsSection({
               className="min-w-[290px] sm:min-w-[330px] max-w-[345px] snap-start flex flex-col justify-between border border-[#F6F1E7]/14 bg-[#050505] overflow-hidden hover:border-[#F6F1E7]/45 transition"
             >
               <div>
-                <div data-no-lightbox="true" className="relative h-52 w-full bg-[#050505] flex items-center justify-center border-b border-[#F6F1E7]/12">
+                <div data-no-lightbox="true" className="relative aspect-[4/5] w-full bg-[#050505] overflow-hidden border-b border-[#F6F1E7]/12">
                   <Image
-                    src={ev.imageSrc}
+                    src={toCardPoster4x5(ev.imageSrc)}
                     alt={ev.title}
                     fill
                     sizes="340px"
-                    quality={80}
-                    className="object-contain p-1.5"
+                    quality={85}
+                    className="object-cover"
                   />
                   <span className="absolute top-2.5 left-2.5 bg-[#050505]/92 border border-[#F6F1E7]/25 px-2.5 py-0.5 font-mono text-[10px] font-bold uppercase text-[#EAE3D5]">
                     {ev.badge}

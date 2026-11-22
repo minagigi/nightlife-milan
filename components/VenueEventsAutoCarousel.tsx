@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { isEnabledLocale } from '@/lib/i18n/locales';
+import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
 import type {
   VenueUi35,
   CarouselEventCard,
@@ -202,15 +203,15 @@ export default function VenueEventsAutoCarousel({
               } flex flex-col justify-between border border-[#F6F1E7]/14 bg-[#050505] overflow-hidden hover:border-[#F6F1E7]/45 transition group`}
             >
               <div>
-                {/* Uncropped Flyer / Image Frame */}
-                <div data-no-lightbox="true" className="relative h-56 w-full bg-[#050505] flex items-center justify-center overflow-hidden border-b border-[#F6F1E7]/12">
+                {/* Uncropped 4:5 Flyer / Image Frame */}
+                <div data-no-lightbox="true" className="relative aspect-[4/5] w-full bg-[#050505] flex items-center justify-center overflow-hidden border-b border-[#F6F1E7]/12">
                   <Image
-                    src={ev.imageSrc}
+                    src={toCardPoster4x5(ev.imageSrc)}
                     alt={`${ev.title} - ${venueName}`}
                     fill
                     sizes="(max-width: 768px) 90vw, 350px"
-                    quality={80}
-                    className="object-contain p-1.5"
+                    quality={88}
+                    className="object-cover"
                   />
                   <span className="absolute top-3 left-3 bg-[#050505]/92 border border-[#F6F1E7]/25 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-[#EAE3D5]">
                     {ev.badge}

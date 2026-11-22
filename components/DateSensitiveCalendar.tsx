@@ -16,6 +16,7 @@ import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import type { CalendarControlsCopy } from '@/lib/calendarControlsCopy';
 import { getChrome } from '@/lib/i18n/chrome';
 import { getScarcityAndChatCopy } from '@/lib/i18n/scarcityAndChatCopy';
+import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
 
 export type DateSensitiveCalendarCopy = {
   verified: string;
@@ -65,9 +66,9 @@ function DateSensitiveCard({
         prefetch={false}
         className="group flex h-full flex-col border border-[#F6F1E7]/14 bg-[#0B0A09] p-5 transition-colors hover:border-[#EAE3D5] hover:bg-[#141311] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] motion-reduce:transition-none"
       >
-        <span className="relative block aspect-[13/7] w-full shrink-0 overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]" aria-hidden="true">
+        <span className="relative block aspect-[4/5] w-full shrink-0 overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]" aria-hidden="true">
           <Image
-            src={event.image}
+            src={toCardPoster4x5(event.image)}
             alt={event.title}
             fill
             sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 40vw"
@@ -75,7 +76,7 @@ function DateSensitiveCard({
             priority={prioritizeImage}
             fetchPriority={prioritizeImage ? 'high' : undefined}
             loading={prioritizeImage ? undefined : 'lazy'}
-            className="object-contain transition-opacity duration-300 group-hover:opacity-90 motion-reduce:transition-none"
+            className="object-cover transition-opacity duration-300 group-hover:opacity-90 motion-reduce:transition-none"
           />
         </span>
         <span className="flex min-w-0 flex-1 flex-col pt-4">
@@ -131,9 +132,9 @@ function DateSensitiveGalleryCard({
           className="block flex-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#25D366]"
           data-date-sensitive-detail-cta
         >
-          <span className={`relative block ${fullPoster && event.image.includes('/halloween/') ? 'aspect-[4/5]' : 'aspect-video'} border-b border-[#F6F1E7]/14 bg-[#050505]`} aria-hidden={fullPoster ? undefined : true}>
+          <span className="relative block aspect-[4/5] border-b border-[#F6F1E7]/14 bg-[#050505]" aria-hidden={fullPoster ? undefined : true}>
             <Image
-              src={event.image}
+              src={toCardPoster4x5(event.image)}
               alt={event.title}
               title={fullPoster ? event.title : undefined}
               fill
@@ -142,7 +143,7 @@ function DateSensitiveGalleryCard({
               priority={prioritizeImage}
               fetchPriority={prioritizeImage ? 'high' : undefined}
               loading={prioritizeImage ? undefined : 'lazy'}
-              className="object-contain"
+              className="object-cover"
             />
           </span>
           <span className="block p-6 pb-4">

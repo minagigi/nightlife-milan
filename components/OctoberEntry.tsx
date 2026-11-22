@@ -4,6 +4,7 @@ import { readOctoberHubCopy } from '@/lib/octoberEditorial';
 import { isEnabledLocale, localePrefix } from '@/lib/i18n/locales';
 import { capodannoCategoryPath, capodannoEventPath, capodannoPath } from '@/lib/capodanno/routes';
 import { getScarcityAndChatCopy } from '@/lib/i18n/scarcityAndChatCopy';
+import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
 
 export function HomeHalloweenAndCapodannoSections({
   locale,
@@ -260,10 +261,10 @@ export function HomeHalloweenAndCapodannoSections({
                 <div>
                   <Link href={card.href} prefetch={false} className="block border-b border-[#F6F1E7]/14 bg-[#050505]">
                     <img
-                      src={card.posterSrc}
+                      src={toCardPoster4x5(card.posterSrc)}
                       alt={card.title}
                       loading="lazy"
-                      className="block aspect-[16/9] w-full object-contain"
+                      className="block aspect-[4/5] w-full object-cover"
                     />
                   </Link>
                   <div className="p-6 pb-2">
@@ -378,10 +379,10 @@ export function HomeHalloweenAndCapodannoSections({
                 <div>
                   <div className="border-b border-white/12 bg-[#050505]">
                     <img
-                      src={card.posterSrc}
+                      src={toCardPoster4x5(card.posterSrc)}
                       alt={card.title}
                       loading="lazy"
-                      className="block h-auto w-full object-contain"
+                      className="block aspect-[4/5] w-full object-cover"
                     />
                   </div>
                   <div className="p-6 pb-2">

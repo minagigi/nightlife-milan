@@ -9,6 +9,7 @@ import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { getDateSensitiveEvents, millisecondsUntilNextDateSensitiveChange } from '@/lib/dateSensitiveView';
 import type { TableConciergeEvent } from '@/lib/tableConcierge';
 import { getV01SiteCopy, type V01CarouselCopy } from '@/lib/i18n/v01SiteCopy35';
+import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
 
 export type V01CapodannoSlide = {
   slug: string;
@@ -212,10 +213,10 @@ export default function V01HomeCarousels({
           <Link
             href={`${lp}/events/${ev.slug}`}
             prefetch={false}
-            className="relative block aspect-[16/10] w-full overflow-hidden border-b border-[#F6F1E7]/14 bg-[#050505]"
+            className="relative block aspect-[4/5] w-full overflow-hidden border-b border-[#F6F1E7]/14 bg-[#050505]"
           >
             <Image
-              src={ev.image}
+              src={toCardPoster4x5(ev.image)}
               alt={ev.venueAltText || `${ev.title} · ${ev.venueName}`}
               fill
               quality={92}
@@ -280,10 +281,10 @@ export default function V01HomeCarousels({
               <Link
                 href={ev.href}
                 prefetch={false}
-                className="relative block aspect-[16/10] w-full overflow-hidden border-b border-[#F6F1E7]/14 bg-[#0B0A09]"
+                className="relative block aspect-[4/5] w-full overflow-hidden border-b border-[#F6F1E7]/14 bg-[#0B0A09]"
               >
                 <Image
-                  src={ev.image}
+                  src={toCardPoster4x5(ev.image)}
                   alt={`${ev.venueName} · ${ev.title}`}
                   fill
                   quality={92}
@@ -377,10 +378,10 @@ export default function V01HomeCarousels({
               <Link
                 href={club.href}
                 prefetch={false}
-                className="relative block aspect-[16/10] w-full overflow-hidden border-b border-[#F6F1E7]/14 bg-[#050505]"
+                className="relative block aspect-[4/5] w-full overflow-hidden border-b border-[#F6F1E7]/14 bg-[#050505]"
               >
                 <Image
-                  src={club.image}
+                  src={toCardPoster4x5(club.image)}
                   alt={`${club.name} · ${club.zone}`}
                   fill
                   quality={92}
@@ -389,6 +390,10 @@ export default function V01HomeCarousels({
                 />
                 <span className="absolute left-3 top-3 border border-[#EAE3D5]/40 bg-[#050505]/92 px-2.5 py-1 font-mono text-[11px] font-bold text-[#EAE3D5]">
                   #{club.rank} · {v01.partnerBadgePrefix}
+                </span>
+                <span className="absolute inset-x-0 bottom-0 flex items-center justify-between border-t border-[#D4AF37] bg-[#0B0A09]/95 px-3 py-1.5 text-[10px] font-bold tracking-wider text-[#F6F1E7]">
+                  <span>WWW.NIGHTLIFEMILAN.COM</span>
+                  <span className="text-[#25D366]">+39 351 912 7047</span>
                 </span>
               </Link>
               <div className="p-5">

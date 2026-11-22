@@ -97,7 +97,7 @@ export default function VenueCard({
       data-venue-card={id}
       data-no-lightbox="true"
       className={`group relative overflow-hidden cursor-pointer border bg-[#0B0A09]
-        aspect-[3/4]
+        aspect-[4/5]
         transition-colors duration-200
         ${isFeatured
           ? 'border-[#EAE3D5]/40 hover:border-[#EAE3D5]'
@@ -201,6 +201,10 @@ export default function VenueCard({
             {labels.explore}
             <ArrowUpRight className="w-3.5 h-3.5" />
           </span>
+        </div>
+        <div className="mt-2 pt-1.5 border-t border-[#EAE3D5]/18 flex items-center justify-between gap-2 font-mono text-[10px] tracking-wider text-[#F6F1E7]/90">
+          <span className="font-semibold">WWW.NIGHTLIFEMILAN.COM</span>
+          <span className="font-bold text-[#25D366]">+39 351 912 7047</span>
         </div>
       </div>
     </div>

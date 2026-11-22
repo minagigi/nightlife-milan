@@ -4,6 +4,7 @@ import { Event, Venue } from '@/lib/types';
 import { getLocalizedText } from '@/lib/seo';
 import { localePrefix } from '@/lib/i18n/locales';
 import { tr } from '@/lib/i18n/t';
+import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
 import FavoriteButton from './FavoriteButton';
 
 interface EventCardProps {
@@ -58,8 +59,9 @@ export default function EventCard({ event, venue, lang, priority = false, isToni
 
   const genre = event.genre[0]?.replace(/_/g, ' ') ?? '';
   const href = `${lp}/events/${slug}`;
-  const imgSrc = event.image || venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp';
-  const showInlineContactBar = !hasBakedContactStrip(imgSrc);
+  const rawImgSrc = event.image || venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp';
+  const imgSrc = toCardPoster4x5(rawImgSrc);
+  const showInlineContactBar = !hasBakedContactStrip(rawImgSrc) && !imgSrc.includes('/cards-4x5/');
 
   return (
     <article
@@ -72,7 +74,7 @@ export default function EventCard({ event, venue, lang, priority = false, isToni
 
       <div>
         <div className="relative border-b border-[#F6F1E7]/14 bg-[#050505]">
-          <Link href={href} className="relative block aspect-[16/9] w-full overflow-hidden bg-[#050505]" aria-label={title}>
+          <Link href={href} className="relative block aspect-[4/5] w-full overflow-hidden bg-[#050505]" aria-label={title}>
             <Image
               src={imgSrc}
               alt={altText}
@@ -82,7 +84,7 @@ export default function EventCard({ event, venue, lang, priority = false, isToni
               quality={92}
               placeholder="blur"
               blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiMxQzE4MTAiLz48L3N2Zz4="
-              className="object-contain transition-opacity duration-200 group-hover:opacity-95"
+              className="object-cover transition-opacity duration-200 group-hover:opacity-95"
               referrerPolicy="no-referrer"
             />
           </Link>

@@ -16,6 +16,7 @@ import {
 import { isRepvblicNyeSlug } from '@/lib/capodanno/repvblic35';
 import { isGateNyeSlug } from '@/lib/capodanno/gate35';
 import { getScarcityAndChatCopy } from '@/lib/i18n/scarcityAndChatCopy';
+import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
 import type {
   CapodannoEventItem,
   CapodannoVenueType,
@@ -323,16 +324,16 @@ export default function CapodannoInteractiveFilter({
                     <Link
                       href={detailHref}
                       data-no-lightbox="true"
-                      className="relative block aspect-[16/9] w-full overflow-hidden border-b border-[#F6F1E7]/14 bg-[#050505]"
+                      className="relative block aspect-[4/5] w-full overflow-hidden border-b border-[#F6F1E7]/14 bg-[#050505]"
                       aria-label={title}
                     >
                       <Image
                         quality={92}
-                        src={event.image}
+                        src={toCardPoster4x5(event.image)}
                         alt={title}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
-                        className="object-contain"
+                        className="object-cover"
                       />
                     </Link>
 
