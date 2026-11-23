@@ -59,11 +59,23 @@ test('WhatsApp-verified NYE 2027 venues (TOM, Mood Live, Coco Beach, Carroponte,
   assert.equal(getVenueIdByEventSlug(coco.slug), 'coco-beach');
   assert.equal(getSkusForVenue('coco-beach').length, 4);
 
-  // Circus Beatclub Closed + 4 TBAs have priceFromEur === 0 (zero fake 40/70/140 placeholders)
+  // The Beach Milano now has confirmed official 2027 rate card (from 25€ + 9 SKUs)
+  const beach = getCapodannoEventBySlug('capodanno-the-beach-milano');
+  assert.ok(beach);
+  assert.equal(beach.partner, false);
+  assert.equal(beach.priceFromEur, 25);
+  assert.equal(getVenueIdByEventSlug(beach.slug), 'the-beach');
+  assert.equal(getSkusForVenue('the-beach').length, 9);
+
+  // Circus Beatclub Closed (Sold Out) + 3 remaining TBAs have priceFromEur === 0
+  const circus = getCapodannoEventBySlug('capodanno-brescia-art-club-desenzano-circus-beatclub');
+  assert.ok(circus);
+  assert.equal(circus.soldOutForNye, true);
+  assert.equal(circus.priceFromEur, 0);
+
   for (const slug of [
     'capodanno-brescia-art-club-desenzano-circus-beatclub',
     'capodanno-volt-club-milano',
-    'capodanno-the-beach-milano',
     'capodanno-oneway-club-milano',
     'capodanno-bergamo-bolgia-osio-sopra',
   ]) {

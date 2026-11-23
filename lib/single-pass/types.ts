@@ -43,6 +43,10 @@ export type SinglePassVenueId =
   | 'sheraton-san-siro'
   | 'mood-live-garden'
   | 'carro-social-club'
+  | 'terrazza-gallia'
+  | 'the-beach'
+  | 'zelig-cabaret'
+  | 'dazi-milano'
   | 'club-event';
 
 export type SinglePassPackageCategory =

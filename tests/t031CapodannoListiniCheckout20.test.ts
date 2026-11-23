@@ -73,6 +73,10 @@ test('T-031, T-032 & WA Audit: Every Capodanno venue has explicit partner boolea
     'mib-milano',
     'the-club',
     'the-dome',
+    'terrazza-gallia',
+    'the-beach',
+    'zelig-cabaret',
+    'dazi-milano',
   ] as const;
   for (const vid of nonPartnerVenues) {
     assert.equal(isPartnerVenueId(vid), false, `Expected partner=false for ${vid}`);
@@ -80,6 +84,18 @@ test('T-031, T-032 & WA Audit: Every Capodanno venue has explicit partner boolea
     assert.ok(skus.length >= 1, `Expected SKUs for ${vid}`);
     for (const sku of skus) {
       assert.equal(getSkuFeeRate(sku, 'venue'), 0.2, `Expected 20% checkout fee on ${sku.id}`);
+    }
+    // Verify unique localized SKU titles across all 35 locales for the 3 newly added non-partner venues
+    if (vid === 'terrazza-gallia' || vid === 'the-beach' || vid === 'zelig-cabaret' || vid === 'dazi-milano') {
+      for (const loc of ALL_35_LOCALES) {
+        const pack = SINGLE_PASS_COPY_35[loc];
+        const skuTitles: string[] = skus.map((s) => localizeSinglePassSku(s, loc, pack, VENUE_BY_ID[vid].name).title);
+        assert.equal(
+          new Set(skuTitles).size,
+          skuTitles.length,
+          `Duplicate localized SKU title for ${vid} in ${loc}: ${JSON.stringify(skuTitles)}`,
+        );
+      }
     }
   }
 
@@ -100,6 +116,9 @@ test('T-031: 4 new venues (STK, Barchetta, Terminus, Palace Sold Out) + Radio Ro
     'capodanno-stk-milan',
     'capodanno-hotel-barchetta-excelsior-como',
     'capodanno-albergo-terminus-como',
+    'capodanno-terrazza-gallia-excelsior-milano',
+    'capodanno-the-beach-milano',
+    'capodanno-zelig-cabaret-milano',
   ];
   const allNewSlugs = [...newOpenSlugs, 'capodanno-palace-hotel-como'];
 
@@ -140,7 +159,7 @@ test('T-031: 4 new venues (STK, Barchetta, Terminus, Palace Sold Out) + Radio Ro
     'capodanno-albergo-terminus-como',
   ]);
 
-  // All 14 closed/sold-out venues mark soldOutForNye (never closedForNye), excluded from open hub & 0 SKUs
+  // All 15 closed/sold-out venues mark soldOutForNye (never closedForNye), excluded from open hub & 0 SKUs
   const expectedSoldOutFromClosed = [
     'capodanno-ceresio-7-milano',
     'capodanno-fabrique-milano',
@@ -155,9 +174,10 @@ test('T-031: 4 new venues (STK, Barchetta, Terminus, Palace Sold Out) + Radio Ro
     'capodanno-palace-grand-hotel-varese',
     'capodanno-legend-club-milano',
     'capodanno-nidaba-theatre-navigli',
+    'capodanno-brescia-art-club-desenzano-circus-beatclub',
   ];
   const allExpectedSoldOut = ['capodanno-palace-hotel-como', ...expectedSoldOutFromClosed];
-  assert.equal(SOLDOUT_CAPODANNO_SLUGS.size, 14);
+  assert.equal(SOLDOUT_CAPODANNO_SLUGS.size, 15);
   for (const slug of expectedSoldOutFromClosed) {
     assert.ok(CLOSED_CAPODANNO_SLUGS.has(slug), `Expected closed->SoldOut slug ${slug}`);
   }
@@ -172,7 +192,7 @@ test('T-031: 4 new venues (STK, Barchetta, Terminus, Palace Sold Out) + Radio Ro
     assert.equal(getVenueIdByEventSlug(slug), null, `SoldOut ${slug} must have no checkout venueId`);
   }
 
-  // Verify 35-locale hygiene on all T-031, T-032 & Email Reconcile overrides (zero !, zero em-dash, zero Stripe, zero +20%/fee inclusa)
+  // Verify 35-locale hygiene on all T-031, T-032 & Giro Totale overrides (zero !, zero em-dash, zero Stripe, zero +20%/fee inclusa)
   const overrideSlugs = [
     'capodanno-stk-milan',
     'capodanno-radio-rooftop-milano',
@@ -183,6 +203,9 @@ test('T-031: 4 new venues (STK, Barchetta, Terminus, Palace Sold Out) + Radio Ro
     'capodanno-tram-storico-milano-atmosfera',
     'capodanno-armani-prive-milano',
     'capodanno-teatro-manzoni-milano',
+    'capodanno-terrazza-gallia-excelsior-milano',
+    'capodanno-the-beach-milano',
+    'capodanno-zelig-cabaret-milano',
     ...expectedSoldOutFromClosed.filter((s) => s !== 'capodanno-ceresio-7-milano'),
   ];
   const forbiddenRe = /\bstripe\b|\+20%|fee inclusa|commissione|commission/i;

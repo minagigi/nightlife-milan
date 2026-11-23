@@ -528,6 +528,9 @@ const VENUE_MASTER_KEYS: Record<string, [string, string, string, string]> = {
   'dazi': ['dazi-milano-interior-01', 'dazi-milano-interior-02', 'dazi-milano-interior-03', 'dazi-milano-interior-04'],
   'church-81': ['church-81-interior-01', 'church-81-interior-02', 'church-81-interior-03', 'church-81-interior-04'],
   'mood-live': ['mood-live-garden-01', 'mood-live-garden-02', 'mood-live-garden-03', 'mood-live-garden-04'],
+  'terrazza-gallia': ['terrazza-gallia-01', 'terrazza-gallia-02', 'terrazza-gallia-03', 'terrazza-gallia-04'],
+  'the-beach-milano': ['the-beach-milano-01', 'the-beach-milano-02', 'the-beach-milano-03', 'the-beach-milano-04'],
+  'zelig-cabaret': ['zelig-cabaret-01', 'zelig-cabaret-02', 'zelig-cabaret-03', 'zelig-cabaret-04'],
   'bobino': ['bobino-milano', 'bobino-milano-cena-01', 'bobino-milano-live-01', 'bobino-milano-party-01'],
   'terme': ['capodanno-terme-milano-flow-01', 'ceresio-7-interior-03', 'voya-rooftop-milan-drink-01', 'capodanno-rooftop-skyline-flow-01'],
   'baita': ['capodanno-baita-neve-flow-01', 'capodanno-villa-castello-flow-01', 'capodanno-cena-cantata-show-flow-01', 'fiftyfive-milano-cena-01'],
@@ -572,6 +575,9 @@ export function selectMasterAssetKeys(slug: string, venueName = '', categorySlug
   if (s.includes('dazi')) return VENUE_MASTER_KEYS['dazi'];
   if (s.includes('church')) return VENUE_MASTER_KEYS['church-81'];
   if (s.includes('mood-live') || s.includes('mood live') || s.includes('garden-club') || s.includes('garden club')) return VENUE_MASTER_KEYS['mood-live'];
+  if (s.includes('terrazza-gallia') || s.includes('gallia')) return VENUE_MASTER_KEYS['terrazza-gallia'];
+  if (s.includes('the-beach') || s.includes('the beach')) return VENUE_MASTER_KEYS['the-beach-milano'];
+  if (s.includes('zelig')) return VENUE_MASTER_KEYS['zelig-cabaret'];
   if (s.includes('fabrique')) return ['fabrique-milano', 'v-fabrique-2', 'magazzini-generali-interior-02', 'capodanno-cena-cantata-show-flow-01'];
   if (s.includes('alcatraz')) return ['alcatraz-milano', 'v-alcatraz-2', 'magazzini-generali-interior-03', 'capodanno-cena-cantata-show-flow-01'];
   if (s.includes('amnesia')) return ['amnesia-milano', 'v-amnesia-2', 'volt-club-milano-interior-02', 'volt-club-milano-interior-03'];

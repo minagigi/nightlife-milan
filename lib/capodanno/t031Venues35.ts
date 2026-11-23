@@ -1,9 +1,156 @@
 import type { LocaleCode } from '@/lib/i18n/localeRegistry';
+import { capodannoNavigation } from './routes';
+import { getCapodannoDetailFaqs35, getWords35 } from './capodannoUi35';
 import type {
+  CapodannoEventTier,
   CapodannoLocalizedEventContent,
   CapodannoMenuCard,
   CapodannoScheduleStep,
 } from './repvblic35';
+
+const GALLIA_MENUS_IT: CapodannoMenuCard[] = [
+  {
+    id: 'terrazza-gallia-restaurant-nye-2027',
+    title: 'Terrazza Gallia Restaurant (7° Piano) · Gran Cenone di San Silvestro',
+    price: '195€ (2 portate + dolce) · 225€ (3 portate + dolce)',
+    subtitle: 'Dalle 19:30 · Piazza Duca d’Aosta 9, Milano · Chef Andrea Calia Di Dio & Pastry Chef Francesco Gramuglia · Musica live & DJ set dopo mezzanotte',
+    courses: [
+      {
+        course: 'Il Benvenuto & Gli Antipasti (a scelta)',
+        dish: 'Calice di Champagne Pommery con selezione di creazioni per l’aperitivo · Scarola napoletana, scampo crudo, seppia e caviale Asetra «Cru Caviar» · Ratatouille d’inverno, jus di verdure al tartufo nero · Terrina di Wagyu delle Dolomiti, salsa fegato e chips di patate',
+      },
+      {
+        course: 'Paste, Risotti, Carne & Pesce (2 o 3 portate a scelta)',
+        dish: 'Carnaroli Riserva San Massimo alla pescatora, salsa prezzemolo e alghe · Spaghetto all’astice blu di Bretagna, la sua bisque ed emulsione di mare · Tortellini di cappone e il suo consommé · Tagliolino 30 tuorli al tartufo bianco 3g (+20€) · Piccione, foie gras e frutti rossi · Baccalà «pil pil», gambero rosso, bisque e caviale Imperial «Cru Caviar» · Cotoletta alla milanese (anche Valdostana con fontina e tartufo bianco 3g +40€) · Pescato del giorno in crosta di sale (per 2 persone)',
+      },
+      {
+        course: 'Dolcezze & Piccolo Buffet di Mezzanotte',
+        dish: 'Creazione dolce a cura del Pastry Chef · Piccolo buffet di dolci e frutta con lenticchie e cotechino, pandoro, panettone, torroncini, uva e mandarini',
+      },
+    ],
+    beverages: 'Calice di Champagne Pommery di benvenuto incluso; ulteriori vini e bevande esclusi. Menu Bambini fino a 12 anni disponibile a 90€. Accesso incluso al DJ set dopo mezzanotte in Terrazza Gallia.',
+    imageSrc: '/images/events/t031-menus/menu-terrazza-gallia-restaurant-nye-2027.webp',
+    imageAlt: 'Terrazza Gallia Restaurant · Menù Ufficiale Capodanno 2027 · Excelsior Hotel Gallia Milano',
+  },
+  {
+    id: 'terrazza-gallia-bar-nye-2027',
+    title: 'Terrazza Gallia Bar (7° Piano) · Aperitivo Aspettando la Mezzanotte + Champagne Pommery',
+    price: '165€ (include 1 bottiglia Champagne Pommery ogni 2 ospiti)',
+    subtitle: 'Dalle 21:30 · Rooftop Panoramico 7° Piano · Musica dal vivo e DJ set fino a tarda notte',
+    courses: [
+      {
+        course: 'Degustazione di Benvenuto & Raw Bar',
+        dish: 'Caviale Imperial (10g) con blinis e panna acida · Ostriche di Goro con scalogno all’aceto di lampone · Terrina di foie gras con pan brioche tostato · Croque monsieur al tartufo nero · Gambero rosso di Mazara in tempura con maionese al lime',
+      },
+      {
+        course: 'Piatto Caldo dello Chef',
+        dish: 'Risotto Carnaroli allo zafferano con ragù d’ossobuco e gremolada della tradizione milanese',
+      },
+      {
+        course: 'Mezzanotte in Terrazza',
+        dish: 'Buffet di dolci delle feste, panettone artigianale con salse calde, lenticchie e cotechino di buon auspicio',
+      },
+    ],
+    beverages: 'Include 1 bottiglia di Champagne Pommery ogni 2 persone, acqua e caffè. Menu Bambini fino a 12 anni disponibile a 80€.',
+    imageSrc: '/images/events/t031-menus/menu-terrazza-gallia-bar-nye-2027.webp',
+    imageAlt: 'Terrazza Gallia Bar · Aperitivo Aspettando la Mezzanotte 165€ con Champagne Pommery · Capodanno 2027',
+  },
+  {
+    id: 'gallia-lounge-bar-nye-2027',
+    title: 'Gallia Lounge & Bar · Cena di San Silvestro + DJ Set in Terrazza',
+    price: '135€',
+    subtitle: 'Cena 19:00–22:30 con musica dal vivo + ingresso al DJ set dopo mezzanotte al 7° piano in Terrazza Gallia',
+    courses: [
+      {
+        course: '7 Antipasti Gourmet in Condivisione',
+        dish: 'Ostrica e caviale · Tartare di tonno rosso agli agrumi · Salmone marinato con aneto e panna acida · Insalata tiepida di mare · Vitello tonnato della tradizione · Culatello di Zibello DOP con gnocco caldo · Burrata pugliese con pomodorini confit',
+      },
+      {
+        course: 'Portata Principale (1 a scelta)',
+        dish: 'Tagliolino 30 tuorli all’aragosta · Catalana di crostacei e verdure croccanti · Raviolo cacio e pepe con tartare di scampi · Guancetta di manzo brasata al vino rosso e tartufo nero',
+      },
+      {
+        course: 'Dessert & Rito di Mezzanotte',
+        dish: 'Dolce di San Silvestro della pasticceria Gallia · Lenticchie e cotechino + salita al 7° piano per il DJ set dopo mezzanotte',
+      },
+    ],
+    beverages: 'Bevande escluse. Menu Bambini fino a 12 anni disponibile a 60€. Include l’accesso dopo mezzanotte al party con DJ set in Terrazza Gallia (7° piano).',
+    imageSrc: '/images/events/t031-menus/menu-gallia-lounge-nye-2027.webp',
+    imageAlt: 'Gallia Lounge & Bar · Cena di San Silvestro 135€ + DJ Set Terrazza Gallia · Capodanno 2027',
+  },
+];
+
+const GALLIA_MENUS_EN: CapodannoMenuCard[] = [
+  {
+    id: 'terrazza-gallia-restaurant-nye-2027',
+    title: 'Terrazza Gallia Restaurant (7th Floor) · New Year’s Eve Gourmet Dinner',
+    price: '€195 (2 courses + dessert) · €225 (3 courses + dessert)',
+    subtitle: 'From 19:30 · Piazza Duca d’Aosta 9, Milan · Chef Andrea Calia Di Dio & Pastry Chef Francesco Gramuglia · Live music & post-midnight DJ set',
+    courses: [
+      {
+        course: 'Welcome Pommery Champagne & Starters',
+        dish: 'Welcome glass of Pommery Champagne with aperitivo creations · Neapolitan-style escarole, raw langoustine, cuttlefish & Asetra «Cru Caviar» · Winter ratatouille with vegetable jus & black truffle · Dolomites Wagyu terrine, liver sauce & potato crisps',
+      },
+      {
+        course: 'Pasta, Risotto, Meat & Fish (choose 2 or 3 courses)',
+        dish: 'Carnaroli Riserva San Massimo pescatora-style risotto · Spaghetti with Brittany blue lobster & bisque · Capon tortellini in consommé · 30-yolk tagliolini with white truffle 3g (+€20) · Pigeon, foie gras & red berries · «Pil Pil» salt cod, red prawn & Imperial «Cru Caviar» · Milanese veal cutlet (also Valdostana with Fontina & white truffle 3g +€40) · Salt-crust catch of the day (for 2)',
+      },
+      {
+        course: 'Sweet Creations & Midnight Buffet',
+        dish: 'Pastry Chef signature dessert · Dessert & fruit buffet with traditional lentils and cotechino, Pandoro, Panettone, mini torroncini, grapes & mandarins',
+      },
+    ],
+    beverages: 'Welcome glass of Pommery Champagne included; additional wines and beverages excluded. Dedicated U12 Menu at €90. Includes post-midnight DJ set on Terrazza Gallia.',
+    imageSrc: '/images/events/t031-menus/menu-terrazza-gallia-restaurant-nye-2027.webp',
+    imageAlt: 'Terrazza Gallia Restaurant · Official NYE 2027 Gala Menu · Excelsior Hotel Gallia Milan',
+  },
+  {
+    id: 'terrazza-gallia-bar-nye-2027',
+    title: 'Terrazza Gallia Bar (7th Floor) · Countdown Aperitif + Pommery Champagne',
+    price: '€165 (includes 1 bottle of Pommery Champagne per 2 guests)',
+    subtitle: 'From 21:30 · 7th-Floor Panoramic Rooftop · Live music & DJ set until late',
+    courses: [
+      {
+        course: 'Luxury Raw Bar & Gourmet Bites',
+        dish: 'Imperial caviar (10g) with blinis & sour cream · Goro oysters with raspberry shallot mignonette · Foie gras terrine with toasted brioche · Black truffle croque monsieur · Tempura red prawn with lime mayo',
+      },
+      {
+        course: 'Warm Signature Course',
+        dish: 'Traditional Milanese saffron Carnaroli risotto with braised ossobuco ragù',
+      },
+      {
+        course: 'Midnight on the Rooftop',
+        dish: 'Festive sweets buffet, artisanal panettone with warm creams, traditional midnight lentils & cotechino',
+      },
+    ],
+    beverages: 'Includes 1 bottle of Pommery Champagne for every 2 guests, water and coffee. Dedicated U12 Menu at €80.',
+    imageSrc: '/images/events/t031-menus/menu-terrazza-gallia-bar-nye-2027.webp',
+    imageAlt: 'Terrazza Gallia Bar · Official €165 Countdown Aperitif with Pommery Champagne · NYE 2027',
+  },
+  {
+    id: 'gallia-lounge-bar-nye-2027',
+    title: 'Gallia Lounge & Bar · New Year’s Eve Dinner + Rooftop DJ Set',
+    price: '€135',
+    subtitle: '19:00–22:30 Dinner with live music + post-midnight DJ set access on 7th-floor Terrazza Gallia',
+    courses: [
+      {
+        course: '7 Gourmet Sharing Starters',
+        dish: 'Oyster & caviar · Citrus bluefin tuna tartare · Dill-cured salmon · Warm seafood salad · Classic vitello tonnato · Culatello di Zibello DOP · Pugliese burrata with confit tomatoes',
+      },
+      {
+        course: 'Main Course (choose 1)',
+        dish: '30-yolk lobster tagliolini · Shellfish catalana with crisp vegetables · Cacio e pepe ravioli with langoustine tartare · Red-wine braised beef cheek with black truffle',
+      },
+      {
+        course: 'Dessert & Rooftop Party',
+        dish: 'Signature New Year’s Eve pastry · Midnight lentils & cotechino + access to the 7th-floor Terrazza Gallia DJ set after midnight',
+      },
+    ],
+    beverages: 'Beverages excluded. Dedicated U12 Menu at €60. Includes post-midnight admission to the 7th-floor Terrazza Gallia DJ set.',
+    imageSrc: '/images/events/t031-menus/menu-gallia-lounge-nye-2027.webp',
+    imageAlt: 'Gallia Lounge & Bar · Official €135 NYE 2027 Dinner + Rooftop DJ Set Menu',
+  },
+];
 
 const STK_MENU_IT: CapodannoMenuCard[] = [
   {
@@ -418,6 +565,18 @@ const CLOSED_VENUE_META: Record<
     reasonIt: 'Il Nidaba Theatre sui Navigli ha confermato ufficialmente via email di restare sempre chiuso a Capodanno: nessuna serata in programma il 31 dicembre 2026 (Sold Out).',
     reasonEn: 'Nidaba Theatre in Navigli officially confirmed by email that the venue is always closed on New Year’s Eve: no December 31, 2026 event scheduled (Sold Out).',
     alternatives: ['capodanno-blue-note-milano-concerto-gospel-jazz', 'capodanno-bobino-milano', 'capodanno-bischeri-milano'],
+  },
+  'capodanno-brescia-art-club-desenzano-circus-beatclub': {
+    name: 'Circus Beatclub Brescia & Art Club Desenzano',
+    city: 'Brescia / Desenzano del Garda',
+    address: 'Via Dalmazia 127, Brescia · Desenzano del Garda (BS)',
+    reasonIt: 'Il Circus Beatclub Brescia ha confermato direttamente la chiusura per la notte del 31 dicembre 2026 e la scheda è dichiarata Sold Out senza disponibilità su Nightlife Milan.',
+    reasonEn: 'Circus Beatclub Brescia directly confirmed it is closed on December 31, 2026 and this event listing is marked Sold Out with no availability on Nightlife Milan.',
+    alternatives: [
+      'capodanno-justme-garda-lake',
+      'capodanno-lago-di-garda-sesto-senso-coco-beach',
+      'capodanno-in-villa-borromeo-fenaroli-reale',
+    ],
   },
 };
 
@@ -1225,56 +1384,553 @@ export function getT031OverrideContent(
     };
   }
 
+  if (slug === 'capodanno-terrazza-gallia-excelsior-milano') {
+    const nav = capodannoNavigation(locale);
+    const w = getWords35(locale);
+    const isEn = locale === 'en';
+    const addr = 'Piazza Duca d’Aosta 9, 20124 Milano';
+    const schedule: CapodannoScheduleStep[] = isIt
+      ? [
+          { time: '19:00', label: 'Apertura Cena di San Silvestro al Gallia Lounge & Bar (135€ · Menu U12 60€) con musica dal vivo' },
+          { time: '19:30', label: 'Gran Cenone al Terrazza Gallia Restaurant al 7° piano: 2 portate + dolce (195€) o 3 portate + dolce (225€ · Menu U12 90€)' },
+          { time: '21:30', label: 'Aperitivo Aspettando la Mezzanotte al Terrazza Gallia Bar (165€ con 1 bottiglia Champagne Pommery ogni 2 ospiti · Menu U12 80€)' },
+          { time: '00:00 – 02:30', label: 'Brindisi sul rooftop panoramico, buffet di dolci, lenticchie e cotechino e DJ set al 7° piano per tutti gli ospiti' },
+        ]
+      : isEn
+        ? [
+            { time: '19:00', label: 'New Year’s Eve Dinner opens at Gallia Lounge & Bar (€135 · U12 Menu €60) with live music' },
+            { time: '19:30', label: '7th-Floor Terrazza Gallia Restaurant Gala Dinner: 2 courses + dessert (€195) or 3 courses + dessert (€225 · U12 Menu €90)' },
+            { time: '21:30', label: 'Countdown Aperitif at 7th-Floor Terrazza Gallia Bar (€165 incl. 1 bottle of Pommery Champagne per 2 guests · U12 Menu €80)' },
+            { time: '00:00 – 02:30', label: 'Panoramic midnight toast, festive pastry buffet, lentils & cotechino and 7th-floor DJ set for all dining guests' },
+          ]
+        : [
+            { time: '19:00', label: `Gallia Lounge & Bar · ${w.formulas.cenone} (€135 · U12 €60)` },
+            { time: '19:30', label: `Terrazza Gallia Restaurant 7F · ${w.formulas.cenone} (€195 / €225 · U12 €90)` },
+            { time: '21:30', label: `Terrazza Gallia Bar 7F · Champagne Pommery 1/2 (€165 · U12 €80)` },
+            { time: '00:00 – 02:30', label: `Terrazza Gallia 7F · DJ Set (${w.dateBadge})` },
+          ];
+
+    const tiers: CapodannoEventTier[] = isIt
+      ? [
+          {
+            label: 'Terrazza Gallia Restaurant (7° Piano · dalle 19:30) · 3 Portate + Dolce',
+            price: '225€ (U12: 90€)',
+            details: 'Calice Champagne Pommery di benvenuto + 3 portate a scelta + dolce + buffet dolci, lenticchie e cotechino + musica dal vivo e DJ set (bevande escluse).',
+          },
+          {
+            label: 'Terrazza Gallia Restaurant (7° Piano · dalle 19:30) · 2 Portate + Dolce',
+            price: '195€',
+            details: 'Calice Champagne Pommery di benvenuto + 2 portate a scelta + dolce + buffet dolci, lenticchie e cotechino + musica dal vivo e DJ set (bevande escluse).',
+          },
+          {
+            label: 'Terrazza Gallia Bar (7° Piano · dalle 21:30) · Aperitivo + Champagne Pommery',
+            price: '165€ (U12: 80€)',
+            details: 'Include 1 bottiglia di Champagne Pommery ogni 2 persone, caviale Imperial 10g, ostriche di Goro, foie gras, croque monsieur al tartufo, risotto allo zafferano e ossobuco, dolci e DJ set.',
+          },
+          {
+            label: 'Gallia Lounge & Bar (19:00–22:30) · Cena + DJ Set in Terrazza dopo 00:00',
+            price: '135€ (U12: 60€)',
+            details: '7 antipasti gourmet in condivisione + 1 portata principale a scelta + dessert + lenticchie e cotechino (bevande escluse) + accesso al DJ set al 7° piano dopo mezzanotte.',
+          },
+        ]
+      : isEn
+        ? [
+            {
+              label: 'Terrazza Gallia Restaurant (7th Floor · from 19:30) · 3 Courses + Dessert',
+              price: '€225 (U12: €90)',
+              details: 'Welcome Pommery Champagne glass + 3 courses of your choice + dessert + sweets buffet, midnight lentils & cotechino + live music & DJ set (beverages excluded).',
+            },
+            {
+              label: 'Terrazza Gallia Restaurant (7th Floor · from 19:30) · 2 Courses + Dessert',
+              price: '€195',
+              details: 'Welcome Pommery Champagne glass + 2 courses of your choice + dessert + sweets buffet, midnight lentils & cotechino + live music & DJ set (beverages excluded).',
+            },
+            {
+              label: 'Terrazza Gallia Bar (7th Floor · from 21:30) · Aperitif + Pommery Champagne',
+              price: '€165 (U12: €80)',
+              details: 'Includes 1 bottle of Pommery Champagne per 2 guests, 10g Imperial caviar, Goro oysters, foie gras, truffle croque monsieur, saffron & ossobuco risotto, sweets & DJ set.',
+            },
+            {
+              label: 'Gallia Lounge & Bar (19:00–22:30) · Dinner + Post-Midnight Rooftop DJ Set',
+              price: '€135 (U12: €60)',
+              details: '7 gourmet sharing starters + 1 main course of your choice + dessert + lentils & cotechino (beverages excluded) + post-midnight DJ set access on 7th-floor Terrazza Gallia.',
+            },
+          ]
+        : [
+            {
+              label: `Terrazza Gallia Restaurant 7F (19:30) · 3 ${w.formulas.cenone}`,
+              price: '€225 (U12 €90)',
+              details: `${addr} · Pommery Champagne welcome + 3 courses + DJ Set · WhatsApp +39 351 912 7047`,
+            },
+            {
+              label: `Terrazza Gallia Restaurant 7F (19:30) · 2 ${w.formulas.cenone}`,
+              price: '€195',
+              details: `${addr} · Pommery Champagne welcome + 2 courses + DJ Set · WhatsApp +39 351 912 7047`,
+            },
+            {
+              label: `Terrazza Gallia Bar 7F (21:30) · ${w.formulas.buffet} + Champagne Pommery`,
+              price: '€165 (U12 €80)',
+              details: `1 Pommery Champagne / 2 ${w.guestPlural} + Caviar, Oysters, Risotto & DJ Set`,
+            },
+            {
+              label: `Gallia Lounge & Bar (19:00) · ${w.formulas.cenone} + Rooftop DJ Set`,
+              price: '€135 (U12 €60)',
+              details: `19:00–22:30 + 00:00 Terrazza Gallia 7F DJ Set · WhatsApp +39 351 912 7047`,
+            },
+          ];
+
+    return {
+      title: isIt
+        ? 'Capodanno Terrazza Gallia Milano 2027 · Excelsior Hotel Gallia 5★L (7° Piano)'
+        : isEn
+          ? 'Terrazza Gallia Milan NYE 2027 · 5★L Excelsior Hotel Gallia Rooftop & Dining'
+          : `${nav.menuLabel} 2027 Terrazza Gallia Milano · Excelsior Hotel Gallia 5★L`,
+      subtitle: isIt
+        ? `${addr} · Lounge 135€ · Terrazza Bar Pommery 165€ · Terrazza Restaurant 195€ / 225€ · Live Music & DJ Set`
+        : isEn
+          ? `${addr} · Lounge €135 · Rooftop Bar Pommery €165 · Rooftop Restaurant €195 / €225 · Live Music & DJ Set`
+          : `${addr} · ${w.dateBadge} · €135 / €165 / €195 / €225`,
+      description: isIt
+        ? 'Festeggia il Capodanno 2027 all’Excelsior Hotel Gallia, a Luxury Collection Hotel 5★L in Piazza Duca d’Aosta 9 a Milano, firmato dall’Executive Chef Andrea Calia Di Dio e dal Pastry Chef Francesco Gramuglia. Quattro formule ufficiali per giovedì 31 dicembre 2026, tutte con musica dal vivo e accesso al DJ set dopo mezzanotte al 7° piano panoramico di Terrazza Gallia: Cena al Gallia Lounge & Bar (19:00–22:30, 135€; Menu U12 60€), Aperitivo Aspettando la Mezzanotte al Terrazza Gallia Bar dalle 21:30 con 1 bottiglia di Champagne Pommery ogni 2 persone, caviale Imperial, ostriche e risotto allo zafferano (165€; Menu U12 80€), e Gran Cenone al Terrazza Gallia Restaurant dalle 19:30 a 2 portate + dolce (195€) o 3 portate + dolce (225€; Menu U12 90€).'
+        : isEn
+          ? 'Celebrate New Year’s Eve 2027 inside Milan’s iconic 5-star luxury landmark Excelsior Hotel Gallia (Piazza Duca d’Aosta 9), curated by Executive Chef Andrea Calia Di Dio and Pastry Chef Francesco Gramuglia. Four official December 31, 2026 experiences include live music and post-midnight DJ set access on the 7th-floor Terrazza Gallia rooftop: Gallia Lounge & Bar Dinner (19:00–22:30, €135; U12 €60), Terrazza Gallia Bar Countdown Aperitif from 21:30 including 1 bottle of Pommery Champagne per 2 guests, Imperial caviar, oysters & saffron risotto (€165; U12 €80), and Terrazza Gallia Restaurant Gala Dinner from 19:30 with 2 courses + dessert (€195) or 3 courses + dessert (€225; U12 €90).'
+          : `${nav.h1} · Terrazza Gallia Excelsior Milano (${addr}). ${w.venueTypes.rooftop} · ${w.hoursLabel} 19:00 – 02:30 · Gallia Lounge €135, Terrazza Gallia Bar Champagne Pommery €165, Terrazza Gallia Restaurant €195 / €225. ${w.freeAdviceTpl}.`,
+      musicAndFormat: isIt
+        ? 'Alta Gastronomia 5★L, Musica dal Vivo & DJ Set Panoramico dopo Mezzanotte al 7° Piano'
+        : isEn
+          ? '5★L Fine Dining, Live Music & Post-Midnight 7th-Floor Rooftop DJ Set'
+          : `${w.venueTypes.rooftop} · Live Music & DJ Set (19:00 – 02:30)`,
+      dressCode: isIt
+        ? 'Elegante / Gala Hotel 5 Stelle Lusso'
+        : isEn
+          ? '5-Star Luxury Gala / Evening Elegant'
+          : `${w.dressCodeLabel}: 5★ Luxury Gala / Elegant`,
+      priceSummary: isIt
+        ? 'Gallia Lounge 135€ · Terrazza Bar + Pommery (1 ogni 2) 165€ · Terrazza Restaurant 195€ / 225€ · Menu U12 60€/80€/90€'
+        : isEn
+          ? 'Gallia Lounge €135 · Rooftop Bar + Pommery (1/2) €165 · Rooftop Restaurant €195 / €225 · U12 €60/€80/€90'
+          : `${w.fromPricePrefix} €135 · €165 · €195 · €225`,
+      tiers,
+      highlights: isIt
+        ? [
+            `Location 5★ Lusso: Terrazza Gallia & Excelsior Hotel Gallia (${addr})`,
+            'Terrazza Gallia Bar (21:30, 165€): include 1 bottiglia di Champagne Pommery ogni 2 ospiti, caviale e ostriche',
+            'Terrazza Gallia Restaurant (19:30): Gran Cenone gourmet 195€ (2 portate) o 225€ (3 portate) + calice Pommery',
+            'Gallia Lounge & Bar (19:00, 135€) con salita inclusa al DJ set dopo mezzanotte in Terrazza Gallia',
+          ]
+        : isEn
+          ? [
+              `5★ Luxury Landmark: Terrazza Gallia at Excelsior Hotel Gallia (${addr})`,
+              'Terrazza Gallia Bar (21:30, €165): includes 1 bottle of Pommery Champagne per 2 guests, caviar & oysters',
+              'Terrazza Gallia Restaurant (19:30): Gourmet Gala €195 (2 courses) or €225 (3 courses) + welcome Pommery',
+              'Gallia Lounge & Bar (19:00, €135) including post-midnight 7th-floor Terrazza Gallia DJ set',
+            ]
+          : [
+              `Terrazza Gallia · ${addr}`,
+              `${w.dateBadge} · 19:00 – 02:30`,
+              'Gallia Lounge €135 · Terrazza Bar €165 (Pommery 1/2) · Restaurant €195 / €225',
+              w.freeAdviceTpl,
+            ],
+      sourceBasis: isIt
+        ? 'Brochure e menù ufficiali Festive Season 2026/2027 Terrazza Gallia – Excelsior Hotel Gallia Milano (Lounge 135€, Bar 165€ con Champagne Pommery 1 ogni 2, Restaurant 195€/225€, tariffe U12 60€/80€/90€). Prenotazione gestita e confermata da Nightlife Milan previa verifica disponibilità.'
+        : isEn
+          ? 'Official Festive Season 2026/2027 brochure and menus from Terrazza Gallia – Excelsior Hotel Gallia Milan (Lounge €135, Bar €165 incl. 1 Pommery bottle per 2, Restaurant €195/€225, U12 €60/€80/€90). Booking managed and confirmed by Nightlife Milan subject to availability verification.'
+          : `${w.verifiedEventsLabel} · Terrazza Gallia Milano (€135–€225) · ${w.freeAdviceTpl}`,
+      scheduleHeading: isIt
+        ? 'Orari & Ambienti 31 Dicembre 2026 · Terrazza Gallia'
+        : isEn
+          ? 'December 31, 2026 Schedule · Terrazza Gallia'
+          : `${w.tocProgram} · Terrazza Gallia`,
+      schedule,
+      menusHeading: isIt
+        ? 'I 3 Menù Ufficiali di San Silvestro 2027 · Terrazza Gallia & Lounge'
+        : isEn
+          ? 'Official NYE 2027 Menus · Terrazza Gallia Restaurant, Bar & Lounge'
+          : `${w.tocMenuLabel} · Terrazza Gallia`,
+      menus: isIt ? GALLIA_MENUS_IT : GALLIA_MENUS_EN,
+      conditionsHeading: isIt ? 'Condizioni Ufficiali · Terrazza Gallia' : isEn ? 'Official Conditions · Terrazza Gallia' : w.officialConditionsHeading,
+      conditions: isIt
+        ? [
+            'Al Terrazza Gallia Bar (165€) è inclusa 1 bottiglia di Champagne Pommery ogni 2 persone; nelle formule Restaurant (195€/225€) e Lounge (135€) i vini in abbinamento sono esclusi.',
+            'Tutti gli ospiti del Gallia Lounge & Bar hanno accesso incluso al DJ set dopo mezzanotte al 7° piano in Terrazza Gallia.',
+            'Tariffe ufficiali dedicate ai minori fino a 12 anni: Lounge 60€, Terrazza Bar 80€, Terrazza Restaurant 90€.',
+            'Prenotazione gestita da Nightlife Milan previa verifica disponibilità con la struttura; rimborso integrale in caso di esaurimento posti.',
+          ]
+        : [
+            'Terrazza Gallia Bar (€165) includes 1 bottle of Pommery Champagne per 2 guests; wines are excluded in the Restaurant (€195/€225) and Lounge (€135) menus.',
+            'All Gallia Lounge & Bar dinner guests receive complimentary access to the post-midnight DJ set on 7th-floor Terrazza Gallia.',
+            'Dedicated official rates for guests up to 12 years old: Lounge €60, Terrazza Bar €80, Terrazza Restaurant €90.',
+            'Booking handled by Nightlife Milan upon live availability check with the property; full refund if sold out.',
+          ],
+      offerPricesEur: [135, 165, 195, 225, 60, 80, 90],
+      shots: isIt
+        ? ['Terrazza Gallia 7° Piano · Rooftop Panoramico Milano', 'Sala Ristorante Gourmet · Excelsior Hotel Gallia 5★L', 'Terrazza Gallia Bar · Champagne & Mixology d’Autore', 'Alta Cucina di San Silvestro · Chef Andrea Calia Di Dio']
+        : ['Terrazza Gallia 7th Floor · Milan Panoramic Rooftop', 'Gourmet Dining Room · 5★L Excelsior Hotel Gallia', 'Terrazza Gallia Bar · Champagne & Signature Mixology', 'New Year’s Eve Fine Dining · Chef Andrea Calia Di Dio'],
+    };
+  }
+
+  if (slug === 'capodanno-the-beach-milano') {
+    const nav = capodannoNavigation(locale);
+    const w = getWords35(locale);
+    const isEn = locale === 'en';
+    const addr = 'Via Arcangelo Corelli 62, 20134 Milano';
+    const schedule: CapodannoScheduleStep[] = isIt
+      ? [
+          { time: '20:30', label: 'Apertura Cena di Gala Servita (150€ con Champagne a mezzanotte) e Royal Buffet (60€ con flûte + 1 drink)' },
+          { time: '23:30', label: 'Apertura Ingresso Serata con brindisi di mezzanotte + 1 drink (Donna 40€ / Uomo 50€)' },
+          { time: '00:15', label: 'Apertura Ingresso Dopocena con 1 drink incluso (Donna 25€ / Uomo 30€)' },
+          { time: '00:30 – 05:00', label: 'Servizio Tavoli Dopocena per 5 ospiti (Basic 400€, Privé 450€, VIP 500€) e clubbing fino alle 05:00' },
+        ]
+      : isEn
+        ? [
+            { time: '20:30', label: 'Served Gala Dinner (€150 incl. midnight Champagne) and Royal Buffet (€60 incl. toast flûte + 1 drink)' },
+            { time: '23:30', label: 'Pre-Midnight Club Entry with midnight toast flûte + 1 drink (Lady €40 / Man €50)' },
+            { time: '00:15', label: 'After-Midnight Club Entry with 1 drink included (Lady €25 / Man €30)' },
+            { time: '00:30 – 05:00', label: 'VIP Bottle Service Tables for up to 5 guests (Basic €400, Privé €450, VIP €500) & party until 05:00' },
+          ]
+        : [
+            { time: '20:30', label: `${w.formulas.cenone} (€150) & ${w.formulas.buffet} (€60)` },
+            { time: '23:30', label: `${w.formulas.dopocena} + Toast (€40 / €50)` },
+            { time: '00:15', label: `${w.formulas.dopocena} + 1 Drink (€25 / €30)` },
+            { time: '00:30 – 05:00', label: `${w.formulas['tavolo-vip']} 5 ${w.guestPlural} (€400 / €450 / €500)` },
+          ];
+
+    const tiers: CapodannoEventTier[] = isIt
+      ? [
+          {
+            label: 'Cena di Gala Servita + Champagne & Party (dalle 20:30)',
+            price: '150€',
+            details: 'Gran Cenone servito al tavolo dalle 20:30 con brindisi Champagne di mezzanotte e serata club inclusa fino alle 05:00.',
+          },
+          {
+            label: 'Royal Buffet + Flûte + 1 Drink & Party (dalle 20:30)',
+            price: '60€',
+            details: 'Buffet di San Silvestro dalle 20:30 con flûte per il brindisi di mezzanotte, 1 drink e ingresso completo al party.',
+          },
+          {
+            label: 'Ingresso Serata dalle 23:30 (Flûte + 1 Drink)',
+            price: '40€ Donna / 50€ Uomo',
+            details: 'Ingresso prevendita prima di mezzanotte comprensivo di flûte per il countdown e 1 consumazione.',
+          },
+          {
+            label: 'Ingresso Dopocena dalle 00:15 (1 Drink)',
+            price: '25€ Donna / 30€ Uomo',
+            details: 'Ingresso prevendita dopo la mezzanotte comprensivo di 1 consumazione.',
+          },
+          {
+            label: 'Tavoli Dopocena (dalle 00:30 · fino a 5 ospiti inclusi)',
+            price: '400€ / 450€ / 500€',
+            details: 'Basic 400€ (200+200), Privé 450€ (200+250), VIP 500€ (200+300) comprensivi di 5 pass d’ingresso e credito bottiglie.',
+          },
+        ]
+      : isEn
+        ? [
+            {
+              label: 'Served Gala Dinner + Midnight Champagne & Party (from 20:30)',
+              price: '€150',
+              details: 'Full seated Gala Dinner from 20:30 with midnight Champagne toast and complete club night until 05:00.',
+            },
+            {
+              label: 'Royal Buffet + Midnight Flûte + 1 Drink & Party (from 20:30)',
+              price: '€60',
+              details: 'New Year’s Eve Royal Buffet from 20:30 with midnight toast flûte, 1 drink and party admission.',
+            },
+            {
+              label: 'Pre-Midnight Club Entry from 23:30 (Flûte + 1 Drink)',
+              price: '€40 Lady / €50 Man',
+              details: 'Pre-midnight admission from 23:30 including midnight sparkling toast and 1 drink.',
+            },
+            {
+              label: 'After-Midnight Club Entry from 00:15 (1 Drink)',
+              price: '€25 Lady / €30 Man',
+              details: 'After-midnight admission from 00:15 including 1 drink.',
+            },
+            {
+              label: 'After-Dinner VIP Tables (from 00:30 · up to 5 guests included)',
+              price: '€400 / €450 / €500',
+              details: 'Basic €400, Privé €450, VIP €500 covering 5 admissions and bottle service credit.',
+            },
+          ]
+        : [
+            { label: `${w.formulas.cenone} (20:30)`, price: '€150', details: `${addr} · Champagne + Party` },
+            { label: `${w.formulas.buffet} (20:30)`, price: '€60', details: `Flûte + 1 Drink + Party` },
+            { label: `${w.formulas.dopocena} (23:30)`, price: '€40 / €50', details: `Flûte + 1 Drink` },
+            { label: `${w.formulas.dopocena} (00:15)`, price: '€25 / €30', details: `1 Drink · 18+` },
+            { label: `${w.formulas['tavolo-vip']} (00:30 · 5 ${w.guestPlural})`, price: '€400 / €450 / €500', details: `Basic €400 · Privé €450 · VIP €500` },
+          ];
+
+    return {
+      title: isIt
+        ? 'Capodanno The Beach Milano 2027 · Dinner Show, Buffet 60€ & Club da 25€'
+        : isEn
+          ? 'The Beach Milano NYE 2027 · Dinner Show, €60 Buffet & Club from €25'
+          : `${nav.menuLabel} 2027 The Beach Milano · Dinner Show & Club`,
+      subtitle: isIt
+        ? `${addr} · 20:30 – 05:00 · Dopocena 25€/30€ · 23:30 40€/50€ · Buffet 60€ · Gala 150€ · Tavoli 400–500€`
+        : isEn
+          ? `${addr} · 20:30 – 05:00 · 00:15 €25/€30 · 23:30 €40/€50 · Buffet €60 · Gala €150 · Tables €400–€500`
+          : `${addr} · ${w.dateBadge} · 20:30 – 05:00 · ${w.fromPricePrefix} €25`,
+      description: isIt
+        ? 'Capodanno 2027 confermato al The Beach Club Milano (Via Arcangelo Corelli 62, zona Forlanini, ingresso 18+): una serata completa dalle 20:30 alle 05:00 tra Dinner Show, musica commerciale, house e urban hits. Listino ufficiale 31 dicembre 2026: Cena di Gala servita 150€ con Champagne a mezzanotte, Royal Buffet 60€ con flûte + 1 drink, Ingresso dalle 23:30 con flûte + 1 drink (Donna 40€ / Uomo 50€), Ingresso dalle 00:15 con 1 drink (Donna 25€ / Uomo 30€) e Tavoli Dopocena per 5 persone (Basic 400€, Privé 450€, VIP 500€). Acquista direttamente online su nightlifemilan.com o scrivi su WhatsApp +39 351 912 7047.'
+        : isEn
+          ? 'Confirmed New Year’s Eve 2027 at The Beach Club Milano (Via Arcangelo Corelli 62, ages 18+): celebrate from 20:30 until 05:00 with Dinner Show entertainment and Commercial, House & Urban clubbing. Official Dec 31, 2026 rate card: €150 Seated Gala Dinner with midnight Champagne, €60 Royal Buffet with toast flûte + 1 drink, 23:30 Pre-Midnight Entry (Lady €40 / Man €50), 00:15 Club Entry (Lady €25 / Man €30), and 5-guest VIP Tables (Basic €400, Privé €450, VIP €500). Book online on nightlifemilan.com or via WhatsApp +39 351 912 7047.'
+          : `${nav.h1} · The Beach Milano (${addr}). ${w.venueTypes.discoteca} · ${w.hoursLabel} 20:30 – 05:00 · €25/€30 (00:15), €40/€50 (23:30), Buffet €60, Gala €150, VIP Tables €400–€500. ${w.freeAdviceTpl}.`,
+      musicAndFormat: isIt
+        ? 'Dinner Show, Royal Buffet & Clubbing Commerciale, House e Urban fino alle 05:00 (18+)'
+        : isEn
+          ? 'Dinner Show, Royal Buffet & Commercial, House and Urban Clubbing until 05:00 (18+)'
+          : `${w.venueTypes.discoteca} · 20:30 – 05:00 (18+)`,
+      dressCode: isIt
+        ? 'Elegante / Smart Chic di San Silvestro (selezione 18+)'
+        : isEn
+          ? 'Smart Chic / New Year’s Eve Elegant (18+ door policy)'
+          : `${w.dressCodeLabel}: Smart Chic / Elegant (18+)`,
+      priceSummary: isIt
+        ? '00:15 Donna 25€ / Uomo 30€ · 23:30 Donna 40€ / Uomo 50€ · Royal Buffet 60€ · Gala 150€ · Tavoli 5 pax 400€/450€/500€'
+        : isEn
+          ? '00:15 Lady €25 / Man €30 · 23:30 Lady €40 / Man €50 · Royal Buffet €60 · Gala €150 · 5-Guest Tables €400/€450/€500'
+          : `${w.fromPricePrefix} €25 · Buffet €60 · Gala €150 · VIP €400–€500`,
+      tiers,
+      highlights: isIt
+        ? [
+            `Location: The Beach Club Milano (${addr}, 18+)`,
+            'Ingressi prevendita ufficiali: dalle 00:15 Donna 25€ / Uomo 30€ · dalle 23:30 Donna 40€ / Uomo 50€',
+            'Formule cena dalle 20:30: Royal Buffet 60€ (flûte + drink) e Cena di Gala Servita 150€ (Champagne)',
+            'Tavoli Dopocena dalle 00:30 (5 ingressi inclusi): Basic 400€ · Privé 450€ · VIP 500€',
+          ]
+        : isEn
+          ? [
+              `Venue: The Beach Club Milano (${addr}, ages 18+)`,
+              'Official club tickets: from 00:15 Lady €25 / Man €30 · from 23:30 Lady €40 / Man €50',
+              '20:30 dining packages: €60 Royal Buffet (flûte + drink) & €150 Seated Gala Dinner (Champagne)',
+              '00:30 VIP Tables (5 entries included): Basic €400 · Privé €450 · VIP €500',
+            ]
+          : [
+              `The Beach Club Milano · ${addr}`,
+              `${w.dateBadge} · 20:30 – 05:00`,
+              '€25/€30 (00:15) · €40/€50 (23:30) · Buffet €60 · Gala €150 · VIP €400–€500',
+              w.freeAdviceTpl,
+            ],
+      sourceBasis: isIt
+        ? 'Listino ufficiale confermato New Year’s Eve 2027 The Beach Club Milano (Via Corelli 62): Dopocena 00:15 25€/30€, Serata 23:30 40€/50€, Royal Buffet 60€, Cena di Gala 150€, Tavoli 5 pax 400€/450€/500€. Acquisto diretto su nightlifemilan.com o WhatsApp +39 351 912 7047.'
+        : isEn
+          ? 'Confirmed official New Year’s Eve 2027 rate card for The Beach Club Milano (Via Corelli 62): 00:15 €25/€30, 23:30 €40/€50, Royal Buffet €60, Gala Dinner €150, 5-guest Tables €400/€450/€500. Direct booking on nightlifemilan.com or WhatsApp +39 351 912 7047.'
+          : `${w.verifiedEventsLabel} · The Beach Milano (€25–€500) · ${w.freeAdviceTpl}`,
+      scheduleHeading: isIt
+        ? 'Programma Orario 31 Dicembre 2026 · The Beach Milano'
+        : isEn
+          ? 'December 31, 2026 Schedule · The Beach Milano'
+          : `${w.tocProgram} · The Beach Milano`,
+      schedule,
+      offerPricesEur: [25, 30, 40, 50, 60, 150, 400, 450, 500],
+      shots: isIt
+        ? ['Main Room & Luci · The Beach Club Milano', 'Dinner Show & Tavoli Gala · Via Corelli 62', 'Privé & Bottle Service di Capodanno', 'Dancefloor & Energia della Serata · The Beach Milano']
+        : ['Main Room & Lighting · The Beach Club Milano', 'Dinner Show & Gala Tables · Via Corelli 62', 'NYE Privé Booths & Bottle Service', 'Dancefloor & Party Crowd · The Beach Milano'],
+    };
+  }
+
+  if (slug === 'capodanno-zelig-cabaret-milano') {
+    const nav = capodannoNavigation(locale);
+    const w = getWords35(locale);
+    const isEn = locale === 'en';
+    const addr = 'Viale Monza 140, 20127 Milano';
+    const schedule: CapodannoScheduleStep[] = isIt
+      ? [
+          { time: '21:30', label: 'Apertura porte e accoglienza spettatori presso lo storico teatro Area Zelig in Viale Monza 140' },
+          { time: '22:15', label: 'Inizio spettacolo speciale «Capodanno ad Area Zelig» in due tempi con i comici sul palco' },
+          { time: '00:00', label: 'Countdown e brindisi di mezzanotte in sala insieme al cast con panettone e bollicine inclusi' },
+          { time: '00:30 – 02:00', label: 'Secondo tempo comico e festeggiamenti per l’arrivo del 2027 (nota: non è previsto cenone seduto)' },
+        ]
+      : isEn
+        ? [
+            { time: '21:30', label: 'Doors open and guest seating at historic Area Zelig comedy theatre on Viale Monza 140' },
+            { time: '22:15', label: 'Curtain up on the special two-act New Year’s Eve comedy variety show «Capodanno ad Area Zelig»' },
+            { time: '00:00', label: 'Midnight countdown and sparkling wine + panettone toast together with the comedians' },
+            { time: '00:30 – 02:00', label: 'Encore comedy act welcoming 2027 (note: theatre show format, no seated dinner)' },
+          ]
+        : [
+            { time: '21:30', label: `Area Zelig (${addr})` },
+            { time: '22:15', label: `Capodanno ad Area Zelig · Tribuna €107 / Platea €135` },
+            { time: '00:00', label: `Countdown & Panettone + Spumante Toast` },
+            { time: '00:30 – 02:00', label: `Act II · Area Zelig Milano` },
+          ];
+
+    const tiers: CapodannoEventTier[] = isIt
+      ? [
+          {
+            label: 'Biglietto Settore Platea + Brindisi di Mezzanotte (ore 22:15)',
+            price: '135€',
+            details: 'Posto numerato ai tavolini di Platea fronte palco per lo spettacolo in due tempi + brindisi di mezzanotte con panettone e bollicine insieme ai comici.',
+          },
+          {
+            label: 'Biglietto Settore Tribuna + Brindisi di Mezzanotte (ore 22:15)',
+            price: '107€',
+            details: 'Posto numerato in Tribuna rialzata con ottima visibilità per lo spettacolo in due tempi + brindisi di mezzanotte con panettone e bollicine.',
+          },
+        ]
+      : isEn
+        ? [
+            {
+              label: 'Platea Stalls Seat + Midnight Cast Toast (22:15)',
+              price: '€135',
+              details: 'Reserved front Platea seating for the two-act NYE comedy show + midnight sparkling wine and panettone toast with the cast.',
+            },
+            {
+              label: 'Tribuna Tier Seat + Midnight Cast Toast (22:15)',
+              price: '€107',
+              details: 'Reserved elevated Tribuna seat for the two-act NYE comedy show + midnight sparkling wine and panettone toast.',
+            },
+          ]
+        : [
+            { label: 'Area Zelig · Platea (22:15)', price: '€135', details: `${addr} · Show + Midnight Toast` },
+            { label: 'Area Zelig · Tribuna (22:15)', price: '€107', details: `${addr} · Show + Midnight Toast` },
+          ];
+
+    return {
+      title: isIt
+        ? 'Capodanno Area Zelig Cabaret Milano 2027 · Spettacolo ore 22:15 & Brindisi'
+        : isEn
+          ? 'Area Zelig Cabaret Milan NYE 2027 · 22:15 Comedy Show & Midnight Toast'
+          : `${nav.menuLabel} 2027 Area Zelig Cabaret Milano · Viale Monza 140`,
+      subtitle: isIt
+        ? `${addr} · Giovedì 31 Dicembre ore 22:15 · Settore Tribuna 107€ · Settore Platea 135€ · Brindisi con i Comici`
+        : isEn
+          ? `${addr} · Thursday Dec 31 at 22:15 · Tribuna €107 · Platea €135 · Midnight Toast with the Cast`
+          : `${addr} · ${w.dateBadge} · 22:15 · €107 / €135`,
+      description: isIt
+        ? 'Trascorri il Capodanno 2027 all’insegna della grande comicità italiana sul palco leggendario di Area Zelig in Viale Monza 140 a Milano (M1 Turro). Giovedì 31 dicembre 2026 alle ore 22:15 va in scena lo speciale «Capodanno ad Area Zelig»: uno spettacolo dal vivo in due tempi con brindisi di mezzanotte insieme ai comici, panettone tradizionale e bollicine inclusi. Settori ufficiali disponibili: Tribuna 107€ a persona e Platea 135€ a persona (spettacolo in lingua italiana; non è previsto cenone). Prenota i posti online su nightlifemilan.com o tramite Concierge WhatsApp +39 351 912 7047.'
+        : isEn
+          ? 'Ring in 2027 at Milan’s legendary temple of Italian stand-up comedy, Area Zelig on Viale Monza 140 (M1 Turro). On Thursday, December 31, 2026 at 22:15, «Capodanno ad Area Zelig» presents a special two-act live comedy gala (performed in Italian) with a midnight sparkling wine and panettone toast alongside the cast. Official seating tiers: Tribuna €107 per person and Platea €135 per person (show + toast format; no seated dinner). Book online on nightlifemilan.com or via WhatsApp +39 351 912 7047.'
+          : `${nav.h1} · Area Zelig Cabaret Milano (${addr}). ${w.hoursLabel} 22:15 – 02:00 · Tribuna €107 · Platea €135. ${w.freeAdviceTpl}.`,
+      musicAndFormat: isIt
+        ? 'Gran Varietà di Cabaret dal Vivo in Due Tempi (ore 22:15) + Brindisi di Mezzanotte con Panettone e Bollicine'
+        : isEn
+          ? 'Two-Act Live Italian Stand-Up & Cabaret Show (22:15) + Midnight Panettone & Sparkling Toast'
+          : `Cabaret Show (22:15) + Midnight Toast · Area Zelig`,
+      dressCode: isIt
+        ? 'Smart Chic / Elegante da Teatro'
+        : isEn
+          ? 'Smart Chic / Theatre Evening Attire'
+          : `${w.dressCodeLabel}: Smart Chic`,
+      priceSummary: isIt
+        ? 'Settore Tribuna + Brindisi: 107€ · Settore Platea + Brindisi: 135€ (spettacolo ore 22:15, senza cena)'
+        : isEn
+          ? 'Tribuna Seat + Toast: €107 · Platea Stalls + Toast: €135 (22:15 comedy show, no dinner)'
+          : `Tribuna €107 · Platea €135 (22:15)`,
+      tiers,
+      highlights: isIt
+        ? [
+            `Storico tempio del cabaret milanese in ${addr} (M1 Turro)`,
+            'Spettacolo speciale di San Silvestro ore 22:15 in due tempi con brindisi di mezzanotte col cast',
+            'Tariffe ufficiali posti numerati: Settore Tribuna 107€ · Settore Platea 135€ (panettone e bollicine inclusi)',
+            'Ideale dopo una cena libera in zona Porta Venezia / Isola / Centrale · Acquisto su nightlifemilan.com',
+          ]
+        : isEn
+          ? [
+              `Iconic Milanese comedy landmark at ${addr} (M1 Turro metro)`,
+              'Special two-act New Year’s Eve comedy gala starting at 22:15 with midnight cast toast',
+              'Official reserved seating: Tribuna €107 · Platea €135 (includes midnight sparkling toast & panettone)',
+              'Performed in Italian · Ideal after an early dinner in central Milan · Book on nightlifemilan.com',
+            ]
+          : [
+              `Area Zelig Cabaret · ${addr}`,
+              `${w.dateBadge} · 22:15 – 02:00`,
+              'Tribuna €107 · Platea €135',
+              w.freeAdviceTpl,
+            ],
+      sourceBasis: isIt
+        ? 'Programmazione e biglietteria ufficiali Area Zelig Milano (Viale Monza 140) per giovedì 31 dicembre 2026 ore 22:15: Tribuna 107€ e Platea 135€ con brindisi di mezzanotte. Prenotazione gestita da Nightlife Milan previa verifica posti.'
+        : isEn
+          ? 'Official Area Zelig Milan schedule and box-office rate card for Thursday, Dec 31, 2026 at 22:15: Tribuna €107 and Platea €135 including midnight toast. Booking handled by Nightlife Milan subject to seat verification.'
+          : `${w.verifiedEventsLabel} · Area Zelig Milano (€107 / €135) · ${w.freeAdviceTpl}`,
+      scheduleHeading: isIt
+        ? 'Orari Spettacolo 31 Dicembre 2026 · Area Zelig'
+        : isEn
+          ? 'December 31, 2026 Show Schedule · Area Zelig'
+          : `${w.tocProgram} · Area Zelig`,
+      schedule,
+      offerPricesEur: [107, 135],
+      shots: isIt
+        ? ['Palco Storico Area Zelig · Viale Monza 140 Milano', 'Platea & Tavolini Fronte Palco · Spettacolo di San Silvestro', 'Tribuna Numerata & Atmosfera Cabaret Live', 'Brindisi di Mezzanotte con i Comici · Capodanno 2027']
+        : ['Historic Area Zelig Stage · Viale Monza 140 Milan', 'Platea Front Tables · New Year’s Eve Comedy Gala', 'Elevated Tribuna Seating & Live Theatre Atmosphere', 'Midnight Sparkling Toast with the Cast · NYE 2027'],
+    };
+  }
+
   const closedMeta = CLOSED_VENUE_META[slug];
   if (closedMeta) {
-    const labels = CLOSED_LABELS_BY_LOCALE[loc] || CLOSED_LABELS_BY_LOCALE.en!;
-    const reason = isIt ? closedMeta.reasonIt : closedMeta.reasonEn;
+    const w = getWords35(loc);
+    const customLabels = CLOSED_LABELS_BY_LOCALE[loc];
+    const closedTag = customLabels ? customLabels.closedTag : w.soldOutNye2027Badge;
+    const bannerPrefix = customLabels ? customLabels.bannerPrefix : w.soldOutNye2027Badge;
+    const altHeading = customLabels ? customLabels.altHeading : w.confirmedAlternativesHeading;
+    const altSub = customLabels ? customLabels.altSub : w.freeAdviceTpl;
+    const reason = isIt ? closedMeta.reasonIt : locale === 'en' ? closedMeta.reasonEn : `${closedMeta.name} (${closedMeta.address}): ${closedTag}.`;
+    const faqs =
+      isIt || locale === 'en'
+        ? isIt
+          ? [
+              {
+                q: `${closedMeta.name} è aperto a Capodanno 2027 (31 dicembre 2026)?`,
+                a: `No, l’evento è indicato come Sold Out. ${closedMeta.reasonIt}`,
+              },
+              {
+                q: `Quali sono le migliori alternative aperte e prenotabili a Capodanno 2027?`,
+                a: `Consulta le alternative ufficiali confermate nella pagina qui sotto oppure scrivi al Concierge Nightlife Milan su WhatsApp +39 351 912 7047.`,
+              },
+            ]
+          : [
+              {
+                q: `Is ${closedMeta.name} open for New Year’s Eve 2027 (December 31, 2026)?`,
+                a: `No, it is marked Sold Out. ${closedMeta.reasonEn}`,
+              },
+              {
+                q: `What are the best confirmed open alternatives for NYE 2027?`,
+                a: `Explore the verified open alternatives linked below or contact Nightlife Milan Concierge on WhatsApp +39 351 912 7047.`,
+              },
+            ]
+        : getCapodannoDetailFaqs35({
+            locale,
+            venueName: closedMeta.name,
+            address: closedMeta.address,
+            city: closedMeta.city,
+            province: 'MI',
+            hours: closedTag,
+            dressCode: closedTag,
+            priceSummary: closedTag,
+            sourceBasis: altSub,
+            paymentSteps: [w.freeAdviceTpl],
+          });
+
     return {
-      title: `${closedMeta.name} · ${labels.closedTag}`,
-      subtitle: `${closedMeta.address} · ${labels.closedTag}`,
-      description: `${reason} ${labels.altSub}`,
-      musicAndFormat: labels.closedTag,
-      dressCode: labels.closedTag,
-      priceSummary: labels.closedTag,
+      title: `${closedMeta.name} · ${closedTag}`,
+      subtitle: `${closedMeta.address} · ${closedTag}`,
+      description: `${reason} ${altSub}`,
+      musicAndFormat: closedTag,
+      dressCode: closedTag,
+      priceSummary: closedTag,
       tiers: [],
       highlights: [
         `${closedMeta.name} (${closedMeta.address})`,
         reason,
         isIt
           ? 'Evento dichiarato Sold Out: nessun biglietto o cenone in vendita per la notte del 31 dicembre 2026'
-          : 'Marked Sold Out: no tickets or gala dinner on sale for December 31, 2026 at this venue',
+          : locale === 'en'
+            ? 'Marked Sold Out: no tickets or gala dinner on sale for December 31, 2026 at this venue'
+            : `${closedTag} · ${w.dateBadge}`,
         isIt
           ? 'Assistenza Concierge Nightlife Milan per alternative aperte: WhatsApp +39 351 912 7047'
-          : 'Nightlife Milan Concierge for open alternatives: WhatsApp +39 351 912 7047',
+          : locale === 'en'
+            ? 'Nightlife Milan Concierge for open alternatives: WhatsApp +39 351 912 7047'
+            : w.freeAdviceTpl,
       ],
       sourceBasis: `${reason} Concierge WhatsApp +39 351 912 7047.`,
       soldOutForNye: true,
-      closureBannerTitle: `${labels.bannerPrefix} · ${closedMeta.name.toUpperCase()}`,
+      closureBannerTitle: `${bannerPrefix} · ${closedMeta.name.toUpperCase()}`,
       closureBannerBody: reason,
-      alternativesHeading: labels.altHeading,
-      alternativesSubheading: labels.altSub,
+      alternativesHeading: altHeading,
+      alternativesSubheading: altSub,
       alternativeSlugs: closedMeta.alternatives,
-      customFaqs: isIt
-        ? [
-            {
-              q: `${closedMeta.name} è aperto a Capodanno 2027 (31 dicembre 2026)?`,
-              a: `No, l’evento è indicato come Sold Out. ${closedMeta.reasonIt}`,
-            },
-            {
-              q: `Quali sono le migliori alternative aperte e prenotabili a Capodanno 2027?`,
-              a: `Consulta le alternative ufficiali confermate nella pagina qui sotto oppure scrivi al Concierge Nightlife Milan su WhatsApp +39 351 912 7047.`,
-            },
-          ]
-        : [
-            {
-              q: `Is ${closedMeta.name} open for New Year’s Eve 2027 (December 31, 2026)?`,
-              a: `No, it is marked Sold Out. ${closedMeta.reasonEn}`,
-            },
-            {
-              q: `What are the best confirmed open alternatives for NYE 2027?`,
-              a: `Explore the verified open alternatives linked below or contact Nightlife Milan Concierge on WhatsApp +39 351 912 7047.`,
-            },
-          ],
+      customFaqs: faqs,
     };
   }
 

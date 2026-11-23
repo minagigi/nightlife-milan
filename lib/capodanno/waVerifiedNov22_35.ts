@@ -536,12 +536,6 @@ const TBA_VENUES: Record<string, TbaVenueSpec> = {
     noteIt: 'Conferma diretta dalla direzione: la programmazione e il listino Capodanno 2027 del Volt Club non sono ancora stati annunciati. Nessuna tariffa stimata esposta prima del rilascio ufficiale.',
     noteEn: 'Direct confirmation from management: Volt Club Milan has not yet announced its NYE 2027 lineup or pricing. Zero estimated prices are shown before the official release.',
   },
-  'capodanno-the-beach-milano': {
-    venueName: 'The Beach Milano',
-    address: 'Via Arcangelo Corelli 62, 20134 Milano',
-    noteIt: 'Conferma diretta dalla direzione: prezzi e opzioni Capodanno 2027 di The Beach Milano usciranno a breve. Nessun listino provvisorio esposto in anticipo.',
-    noteEn: 'Direct confirmation from management: The Beach Milano NYE 2027 prices and packages will be announced shortly. Zero placeholder rates are listed in advance.',
-  },
   'capodanno-oneway-club-milano': {
     venueName: 'Oneway Club Milano',
     address: 'Via Felice Cavallotti 204, 20099 Sesto San Giovanni (MI)',
@@ -598,6 +592,5 @@ export function getWaVerifiedNov22Content(
   if (slug === 'capodanno-lago-di-garda-sesto-senso-coco-beach') return buildCocoBeach(locale, d);
   if (slug === 'capodanno-carroponte-sesto-san-giovanni') return buildCarroponte(locale, d);
   if (slug === 'capodanno-mantova-mascara-all-music-vanita') return buildMascara(locale, d);
-  if (slug === 'capodanno-brescia-art-club-desenzano-circus-beatclub') return buildCircusClosed(locale, d);
   return buildTbaVenue(slug, locale, d);
 }

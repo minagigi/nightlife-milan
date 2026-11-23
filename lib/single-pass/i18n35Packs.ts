@@ -82,6 +82,10 @@ function makePackFromSeed(loc: string, cfg: LocaleSpSeed): SinglePassCopyPack {
     'magazzini-generali': 'Magazzini Generali',
     pelledoca: 'Pelledoca Milano',
     'the-club': 'The Club Milano',
+    'terrazza-gallia': 'Terrazza Gallia 5★L',
+    'the-beach': 'The Beach Milano',
+    'zelig-cabaret': 'Area Zelig Cabaret',
+    'dazi-milano': 'Dazi Milano',
     'club-event': `${w.eventsBreadcrumb} · Nightlife Milan`,
   };
   const h1 = cfg.heroH1 || `Single Pass ${cfg.nye}: ${w.lblVenueType.replace(/^1\.\s*/, '')} & ${w.verifiedEventsLabel}`;

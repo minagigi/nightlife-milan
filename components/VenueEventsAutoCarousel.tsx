@@ -210,7 +210,7 @@ export default function VenueEventsAutoCarousel({
                     alt={`${ev.title} - ${venueName}`}
                     fill
                     sizes="(max-width: 768px) 90vw, 350px"
-                    quality={88}
+                    quality={85}
                     className="object-cover"
                   />
                   <span className="absolute top-3 left-3 bg-[#050505]/92 border border-[#F6F1E7]/25 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-[#EAE3D5]">
