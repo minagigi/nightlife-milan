@@ -2,6 +2,7 @@ import type { Guide } from './types';
 import type { LocaleCode } from './i18n/locales';
 import { getPillarDisplayHeadline } from './guidesGscPillar20261120';
 import { getGsc20261122DisplayHeadline } from './guidesGscBatch20261122';
+import { getGsc20261123DisplayHeadline } from './guidesGscBatch20261123';
 import { GUIDE_100_SEEDS } from './guides100Catalog';
 import { getLocalizedGuideSeedNames } from './i18n/guideSeeds35Names';
 
@@ -284,6 +285,11 @@ export function getEditorialDisplayHeadline(
   locale: LocaleCode,
   localizedFullTitle: string,
 ): string {
+  const gsc20261123 = getGsc20261123DisplayHeadline(guideId, locale);
+  if (gsc20261123) {
+    return clampConciseHeadline(gsc20261123);
+  }
+
   const gsc20261122 = getGsc20261122DisplayHeadline(guideId, locale);
   if (gsc20261122) {
     return clampConciseHeadline(gsc20261122);
@@ -556,12 +562,12 @@ const CHAPTER_PLATES_ELECTRONIC: EditorialPlate[] = [
 const ROOFTOP_IDS = new Set([
   'g-rooftops-milan', 'g-8', 'g-18', 'g-32', 'g-33', 'g-39', 'g-50', 'g-51', 'g-73', 'g-76', 'g-81', 'g-87', 'g-93',
 ]);
-const TERME_IDS = new Set(['g-117', 'g-120', 'g-90']);
+const TERME_IDS = new Set(['g-117', 'g-120', 'g-122', 'g-90']);
 const DINNER_IDS = new Set([
-  'g-secret-bars', 'g-2', 'g-private-parties', 'g-9', 'g-19', 'g-30', 'g-31', 'g-36', 'g-37', 'g-38', 'g-53', 'g-60', 'g-78', 'g-85', 'g-88',
+  'g-secret-bars', 'g-2', 'g-private-parties', 'g-9', 'g-19', 'g-30', 'g-31', 'g-36', 'g-37', 'g-38', 'g-53', 'g-60', 'g-78', 'g-85', 'g-88', 'g-121', 'g-123',
 ]);
 const ELECTRONIC_IDS = new Set([
-  'g-techno-2026', 'g-5', 'g-23', 'g-24', 'g-25', 'g-26', 'g-34', 'g-35', 'g-70', 'g-77', 'g-79', 'g-80', 'g-89',
+  'g-techno-2026', 'g-5', 'g-23', 'g-24', 'g-25', 'g-26', 'g-34', 'g-35', 'g-70', 'g-77', 'g-79', 'g-80', 'g-89', 'g-124',
 ]);
 
 function pickThemeSets(guideId: string): {

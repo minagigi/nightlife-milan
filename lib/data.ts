@@ -7,6 +7,7 @@ import { VENUE_SLUGS_35, resolveVenueSlug, ALL_35_LOCALES, sanitizeAsciiSlug, SL
 import { GUIDE_HERO_IMAGES_114 } from '@/lib/guideImagesMap114';
 import { applyFlagshipGuides35 } from '@/lib/i18n/flagshipGuides35';
 import { applyGscGuidesBatch20261122 } from '@/lib/guidesGscBatch20261122';
+import { applyGscGuidesBatch20261123 } from '@/lib/guidesGscBatch20261123';
 
 // Mock Data for Zones
 export const mockZones: Zone[] = [
@@ -2839,6 +2840,7 @@ for (const guide of mockGuides) {
 
 applyFlagshipGuides35(mockGuides);
 applyGscGuidesBatch20261122(mockGuides);
+applyGscGuidesBatch20261123(mockGuides);
 populateGuideSlugs35(mockGuides);
 for (const g of mockGuides) {
   if (GUIDE_HERO_IMAGES_114[g.id]) {

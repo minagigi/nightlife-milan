@@ -25,7 +25,7 @@ import {
   getLocalizedZoneSlug35,
 } from '@/lib/i18n/localizedSlugs35';
 
-const SITE_RELEASE_TIMESTAMP = '2026-11-22T22:30:00.000Z';
+const SITE_RELEASE_TIMESTAMP = '2026-11-23T00:25:00.000Z';
 const LEGAL_STATIC_TIMESTAMP = '2026-11-01T00:00:00.000Z';
 
 export function clampLastModified(

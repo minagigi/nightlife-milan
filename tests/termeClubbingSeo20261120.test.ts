@@ -96,10 +96,23 @@ test('Terme di Sirmione confirms 198 EUR, non-partner status, JustMe Garda Lake 
   }
 });
 
-test('GSC Pillar & Upgraded Guides in mockGuides (total 120): >= 2,000 words, 6 H2 sections, >= 18 H3, 0 inner H2, 6 FAQs, clean limits & images <= 300 KB across all 35 locales', () => {
-  assert.equal(mockGuides.length, 120, `Expected 120 total guides, got ${mockGuides.length}`);
+test('GSC Pillar & Upgraded Guides in mockGuides (total 124): >= 2,000 words, 6 H2 sections, >= 18 H3, 0 inner H2, 6 FAQs, clean limits & images <= 300 KB across all 35 locales', () => {
+  assert.equal(mockGuides.length, 124, `Expected 124 total guides, got ${mockGuides.length}`);
 
-  for (const id of ['g-117', 'g-118', 'g-119', 'g-120', 'g-weekly-calendar', 'g-37', 'g-38'] as const) {
+  for (const id of [
+    'g-117',
+    'g-118',
+    'g-119',
+    'g-120',
+    'g-121',
+    'g-122',
+    'g-123',
+    'g-124',
+    'g-weekly-calendar',
+    'g-30',
+    'g-37',
+    'g-38',
+  ] as const) {
     const guide = mockGuides.find((g) => g.id === id);
     assert.ok(guide, `Missing guide ${id}`);
     assert.equal(guide.sections.length, 6, `${id} must have 6 sections`);
@@ -299,7 +312,23 @@ test('V2 Curated Editorial Media & Reusable 118-Guide Template invariants', () =
     assert.ok(fs.statSync(abs).size <= 307_200, `Curated image ${file} exceeds 300 KB`);
   }
 
-  for (const gid of ['g-117', 'g-118', 'g-119', 'g-120', 'g-weekly-calendar', 'g-37', 'g-38', 'g-rooftops-milan', 'g-8', 'g-15'] as const) {
+  for (const gid of [
+    'g-117',
+    'g-118',
+    'g-119',
+    'g-120',
+    'g-121',
+    'g-122',
+    'g-123',
+    'g-124',
+    'g-weekly-calendar',
+    'g-30',
+    'g-37',
+    'g-38',
+    'g-rooftops-milan',
+    'g-8',
+    'g-15',
+  ] as const) {
     const hero = GUIDE_HERO_IMAGES_114[gid];
     const inlines = GUIDE_INLINE_IMAGES_114[gid] || [];
     assert.ok(hero.startsWith('/images/guides-editorial/'), `${gid} hero should use curated editorial pack: ${hero}`);

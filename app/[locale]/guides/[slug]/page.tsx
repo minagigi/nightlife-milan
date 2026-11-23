@@ -245,9 +245,14 @@ export default async function GuidePage({ params }: Props) {
   const bundle = getGuideEditorialBundle(guide, loc, title, heroImg);
   const displayHeadline = getEditorialDisplayHeadline(guide.id, loc, title);
   const explorerData =
-    guide.id === 'g-117' || guide.id === 'g-120'
+    guide.id === 'g-117' || guide.id === 'g-120' || guide.id === 'g-122'
       ? buildTasteExplorerData('terme', loc, guideUrl)
-      : guide.id === 'g-118' || guide.id === 'g-119'
+      : guide.id === 'g-118' ||
+          guide.id === 'g-119' ||
+          guide.id === 'g-30' ||
+          guide.id === 'g-121' ||
+          guide.id === 'g-123' ||
+          guide.id === 'g-124'
         ? buildTasteExplorerData('clubbing', loc, guideUrl)
         : null;
 

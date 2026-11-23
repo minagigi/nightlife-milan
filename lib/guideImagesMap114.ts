@@ -139,6 +139,10 @@ export const GUIDE_HERO_IMAGES_114: Record<string, string> = {
   'g-118': '/images/guides-editorial/just-me-pavilion.webp',
   'g-119': '/images/guides-editorial/gate-neon.webp',
   'g-120': '/images/guides-editorial/terme-alpine-snow.webp',
+  'g-121': '/images/guides-editorial/bischeri-gala.webp',
+  'g-122': '/images/guides-editorial/palace-como-fireworks.webp',
+  'g-123': '/images/guides-editorial/terme-villa-gala.webp',
+  'g-124': '/images/guides-editorial/aria-dancefloor.webp',
 };
 
 export const GUIDE_INLINE_IMAGES_114: Record<string, string[]> = {
@@ -211,7 +215,12 @@ export const GUIDE_INLINE_IMAGES_114: Record<string, string[]> = {
   'g-27': ['/images/venues/hollywood/hollywood-interior-02.webp', '/images/venues/hollywood/hollywood-interior-03.webp', '/images/venues/hollywood/hollywood-interior-04.webp', '/images/venues/hollywood/hollywood-interior-05.webp'],
   'g-28': ['/images/venues/the-club-milano/the-club-milano-interior-02.webp', '/images/venues/the-club-milano/the-club-milano-interior-03.webp', '/images/venues/the-club-milano/the-club-milano-interior-04.webp', '/images/venues/the-club-milano/the-club-milano-interior-05.webp'],
   'g-29': ['/images/venues/11-clubroom/11-clubroom-interior-02.webp', '/images/venues/11-clubroom/11-clubroom-interior-03.webp', '/images/venues/11-clubroom/11-clubroom-interior-04.webp', '/images/venues/11-clubroom/11-clubroom-interior-06.webp'],
-  'g-30': ['/images/venues/gattopardo/gattopardo-interior-02.webp', '/images/venues/gattopardo/gattopardo-interior-03.webp', '/images/venues/gattopardo/gattopardo-interior-04.webp', '/images/venues/gattopardo/gattopardo-interior-05.webp'],
+  'g-30': [
+    '/images/guides-editorial/fiftyfive-loft.webp',
+    '/images/guides-editorial/just-me-vip-table.webp',
+    '/images/guides-editorial/pineta-vip.webp',
+    '/images/guides-editorial/bischeri-gala.webp',
+  ],
   'g-31': ['/images/venues/mib-milano/mib-milano-interior-02.webp', '/images/venues/mib-milano/mib-milano-interior-03.webp', '/images/venues/mib-milano/mib-milano-interior-04.webp', '/images/venues/mib-milano/mib-milano-interior-05.webp'],
   'g-32': ['/images/venues/terrazza-21/terrazza-21-interior-01.webp', '/images/venues/terrazza-21/terrazza-21-interior-02.webp', '/images/venues/terrazza-21/terrazza-21-interior-03.webp', '/images/venues/terrazza-21/terrazza-21-interior-04.webp'],
   'g-33': ['/images/venues/ceresio-7/ceresio-7-interior-02.webp', '/images/venues/ceresio-7/ceresio-7-interior-03.webp', '/images/venues/ceresio-7/ceresio-7-interior-04.webp', '/images/venues/ceresio-7/ceresio-7-interior-05.webp'],
@@ -331,6 +340,30 @@ export const GUIDE_INLINE_IMAGES_114: Record<string, string[]> = {
     '/images/guides-editorial/terme-villa-gala.webp',
     '/images/guides-editorial/terminus-como-lake.webp',
     '/images/guides-editorial/voya-rooftop-20f.webp',
+  ],
+  'g-121': [
+    '/images/guides-editorial/palace-como-fireworks.webp',
+    '/images/guides-editorial/just-me-pavilion.webp',
+    '/images/guides-editorial/voya-rooftop-20f.webp',
+    '/images/guides-editorial/fiftyfive-loft.webp',
+  ],
+  'g-122': [
+    '/images/guides-editorial/barchetta-como-dining.webp',
+    '/images/guides-editorial/terminus-como-lake.webp',
+    '/images/guides-editorial/terme-thermal-night.webp',
+    '/images/guides-editorial/voya-rooftop-20f.webp',
+  ],
+  'g-123': [
+    '/images/guides-editorial/voya-rooftop-20f.webp',
+    '/images/guides-editorial/gattopardo-nave.webp',
+    '/images/guides-editorial/just-me-pavilion.webp',
+    '/images/guides-editorial/barchetta-como-dining.webp',
+  ],
+  'g-124': [
+    '/images/guides-editorial/pineta-dancefloor.webp',
+    '/images/guides-editorial/gate-neon.webp',
+    '/images/guides-editorial/just-me-dancefloor.webp',
+    '/images/guides-editorial/palace-como-fireworks.webp',
   ],
 };
 
