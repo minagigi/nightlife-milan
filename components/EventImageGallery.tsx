@@ -34,13 +34,15 @@ export default function EventImageGallery({ gallery, locale }: { gallery: EventV
             <button
               type="button"
               className={`group relative block w-full overflow-hidden rounded-lg border border-white/10 bg-white/[0.03] focus:outline-none focus-visible:ring-2 focus-visible:ring-champagne ${
-                image.aspect === 'portrait'
-                  ? 'aspect-[9/16] max-w-[520px] mx-auto'
-                  : image.aspect === 'landscape'
-                    ? 'aspect-[2/1]'
-                    : image.aspect === 'five-four'
-                      ? 'aspect-[5/4]'
-                    : 'aspect-square'
+                !(image.src.includes('/generated/') || image.src.includes('/october-2026/') || image.src.includes('/halloween'))
+                  ? 'aspect-[4/5] max-w-[540px] mx-auto'
+                  : image.aspect === 'portrait'
+                    ? 'aspect-[9/16] max-w-[520px] mx-auto'
+                    : image.aspect === 'landscape'
+                      ? 'aspect-[2/1]'
+                      : image.aspect === 'five-four'
+                        ? 'aspect-[5/4]'
+                        : 'aspect-square'
               }`}
               onClick={() => setActiveIndex(index)}
               aria-label={image.title}

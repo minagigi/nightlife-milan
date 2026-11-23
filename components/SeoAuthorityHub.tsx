@@ -131,11 +131,11 @@ export default function SeoAuthorityHub({ lang, pageKey, pagePath }: SeoAuthorit
                     src={sec.imageSrc}
                     alt={sec.imageAlt}
                     title={sec.h3Title}
-                    width={1600}
-                    height={899}
+                    width={1080}
+                    height={1350}
                     loading="lazy"
                     decoding="async"
-                    className={`aspect-[16/9] h-auto w-full object-cover border-b ${
+                    className={`aspect-[4/5] h-auto w-full object-cover border-b ${
                       isIvory ? 'border-[#F6F1E7]/14' : 'border-[#F6F1E7]/14'
                     }`}
                   />

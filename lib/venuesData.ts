@@ -374,6 +374,46 @@ export const venuesData: Venue[] = [
     ]
   },
   {
+    id: "v-dazi",
+    slugs: { en: "dazi-milano", it: "dazi-milano" },
+    address: {
+      streetAddress: "Piazza Sempione, 1",
+      addressLocality: "Milano",
+      postalCode: "20145",
+      addressCountry: "IT"
+    },
+    coordinates: { latitude: 45.4759, longitude: 9.1724 },
+    category: VenueCategory.CLUB,
+    zone: MilanZone.ARCO_DELLA_PACE,
+    sameAs: ["https://instagram.com/dazimilano", "https://dazimilano.com"],
+    localizedContent: {
+      name: { en: "Dazi Milano", it: "Dazi Milano" },
+      description: {
+        en: "Set inside the historic neoclassical tollhouse right next to Arco della Pace on Piazza Sempione 1. Gourmet restaurant, signature mixology cocktail bar, and late-night Dinner Show & DJ sets under monumental stone arches.",
+        it: "Ospitato nello storico casello daziario neoclassico accanto all'Arco della Pace in Piazza Sempione 1. Ristorante gourmet, mixology cocktail bar d'autore e serate Dinner Show & DJ set sotto le volte monumentali."
+      },
+      dressCode: { en: "Smart Elegant: Curated evening attire", it: "Smart Elegant: Abbigliamento serale curato" },
+      altTextImg: { en: "Dazi Milano neoclassical tollhouse Piazza Sempione 1 Arco della Pace dinner show and cocktail bar", it: "Dazi Milano casello daziario neoclassico Piazza Sempione 1 Arco della Pace cena spettacolo e cocktail bar" },
+      insiderTip: { en: "Book a terrace or glass-hall table facing Arco della Pace at sunset, then stay as the dining room transforms into a DJ lounge until 03:00.", it: "Prenota un tavolo vista Arco della Pace al tramonto e resta per il passaggio dalla cena gourmet al DJ set fino alle 03:00." }
+    },
+    image: "/images/dazi-milano.webp",
+    isManaged: true,
+    isPriority: true,
+    isFeatured: false,
+    priorityScore: 55,
+    ageRange: "24-45",
+    priceRange: "$$$",
+    tags: ["Dinner Show", "Mixology", "Arco della Pace"],
+    gallery: [
+      "/images/venues/dazi-milano/dazi-milano-interior-01.webp",
+      "/images/venues/dazi-milano/dazi-milano-interior-02.webp",
+      "/images/venues/dazi-milano/dazi-milano-interior-03.webp",
+      "/images/venues/dazi-milano/dazi-milano-interior-04.webp",
+      "/images/venues/dazi-milano/dazi-milano-interior-05.webp",
+      "/images/venues/dazi-milano/dazi-milano-interior-06.webp",
+    ]
+  },
+  {
     id: "v-gattopardo",
     slugs: { en: "gattopardo-milano", it: "gattopardo-milano" },
     address: {

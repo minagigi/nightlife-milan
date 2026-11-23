@@ -577,13 +577,13 @@ export default async function GenrePage({ params }: Props) {
           </div>
         </section>
 
-        {/* 3. Uneven Gallery Strip (#050505) */}
+        {/* 3. Gallery Strip (#050505) */}
         {genreInlineImgs.length >= 2 && (
           <section aria-label={gLoc.h1} className="bg-[#050505] py-8 sm:py-12">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="taste-uneven-strip" data-taste-stagger>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" data-taste-stagger>
                 {genreInlineImgs.slice(0, 4).map((src, idx) => (
-                  <figure key={src} className="taste-uneven-panel">
+                  <figure key={src} className="relative aspect-[4/5] w-full overflow-clip bg-[#141311] m-0">
                     <Image
                       src={src}
                       alt={`${gLoc.name} Milan club atmosphere ${idx + 1}`}
@@ -591,7 +591,7 @@ export default async function GenrePage({ params }: Props) {
                       fill
                       unoptimized
                       quality={92}
-                      sizes="(max-width: 1024px) 50vw, 40vw"
+                      sizes="(max-width: 1024px) 50vw, 25vw"
                       className="object-cover brightness-[0.88] hover:brightness-100 transition-[filter] duration-500"
                     />
                   </figure>
@@ -698,7 +698,7 @@ export default async function GenrePage({ params }: Props) {
                         </a>
                       </div>
                     ) : (
-                      <figure className={`relative aspect-[4/3] w-full overflow-clip mt-4 ${isLight ? 'bg-[#EAE3D5]' : 'bg-[#0B0A09]'}`}>
+                      <figure className={`relative aspect-[4/5] w-full overflow-clip mt-4 ${isLight ? 'bg-[#EAE3D5]' : 'bg-[#0B0A09]'}`}>
                         <Image
                           src={chapterImg}
                           alt={sec.heading}
@@ -787,7 +787,7 @@ export default async function GenrePage({ params }: Props) {
                   </div>
                 </div>
                 <div className="lg:col-span-5 lg:sticky lg:top-24 space-y-6" data-taste-reveal>
-                  <figure className="relative aspect-[3/4] w-full overflow-clip bg-[#0B0A09]">
+                  <figure className="relative aspect-[4/5] w-full overflow-clip bg-[#0B0A09]">
                     <Image
                       src={genreInlineImgs[2] || genreInlineImgs[0] || genreHeroImg}
                       alt={`${gLoc.name} Milan VIP`}
@@ -856,7 +856,7 @@ export default async function GenrePage({ params }: Props) {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <div className="flex flex-col lg:flex-row gap-12 items-start">
           <div className="flex-1">
-            <div className="relative h-64 md:h-80 w-full rounded-2xl overflow-hidden border border-champagne/25 mb-8">
+            <div className="relative mx-auto aspect-[4/5] w-full max-w-[540px] rounded-2xl overflow-hidden border border-champagne/25 mb-8">
               <Image
                 src={genreHeroImg}
                 alt={gLoc.h1}
@@ -864,7 +864,7 @@ export default async function GenrePage({ params }: Props) {
                 fill
                 priority
                 quality={92}
-                sizes="(max-width: 1024px) 100vw, 65vw"
+                sizes="(max-width: 768px) 100vw, 540px"
                 className="object-cover"
               />
             </div>
@@ -1011,7 +1011,7 @@ export default async function GenrePage({ params }: Props) {
               ].map((img, i) => (
                 <div
                   key={i}
-                  className="relative h-20 rounded-lg overflow-hidden border border-white/10"
+                  className="relative aspect-[4/5] w-full rounded-lg overflow-hidden border border-white/10"
                 >
                   <Image
                     src={img.src}

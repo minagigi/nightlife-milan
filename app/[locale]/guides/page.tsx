@@ -546,20 +546,21 @@ export default async function GuidesPage({
           <Link
             href={`${localePrefix}/${guidesDir}/${getLocalizedGuideSlug35(featuredGuide, loc)}`}
             locale={loc}
-            className="group relative block w-full h-[500px] md:h-[580px] rounded-2xl overflow-hidden border border-white/15 hover:border-champagne/60 transition-all duration-500"
+            className="group grid grid-cols-1 lg:grid-cols-12 rounded-2xl overflow-hidden border border-white/15 bg-[#0B0A09] hover:border-champagne/60 transition-all duration-500"
           >
-            <Image
-              src={featuredGuide.image || '/images/pillars/guide-hero-01.webp'}
-              alt={cleanStr(getLocalizedText(featuredGuide.title, loc))}
-              fill
-              quality={92}
-              sizes="100vw"
-              className="object-cover"
-              referrerPolicy="no-referrer"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-transparent opacity-95" />
+            <div className="relative aspect-[4/5] w-full lg:col-span-5 overflow-hidden bg-[#050505]">
+              <Image
+                src={featuredGuide.image || '/images/pillars/guide-hero-01.webp'}
+                alt={cleanStr(getLocalizedText(featuredGuide.title, loc))}
+                fill
+                quality={92}
+                sizes="(max-width: 1024px) 100vw, 42vw"
+                className="object-cover"
+                referrerPolicy="no-referrer"
+              />
+            </div>
 
-            <div className="absolute inset-0 p-8 md:p-14 flex flex-col justify-end">
+            <div className="p-8 md:p-12 lg:col-span-7 flex flex-col justify-center">
               <div className="flex flex-wrap items-center gap-3 mb-4">
                 <span className="bg-champagne text-black px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase">
                   {hubUi.featuredBadge}
@@ -573,10 +574,10 @@ export default async function GuidesPage({
                 </div>
               </div>
 
-              <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 group-hover:text-champagne transition-colors max-w-4xl">
+              <h2 className="font-serif text-3xl md:text-5xl font-bold text-white mb-4 group-hover:text-champagne transition-colors">
                 {cleanStr(getLocalizedText(featuredGuide.title, loc))}
               </h2>
-              <p className="text-base md:text-lg text-white/75 max-w-3xl line-clamp-3 mb-6">
+              <p className="text-base md:text-lg text-white/75 line-clamp-4 mb-6">
                 {cleanStr(getLocalizedText(featuredGuide.excerpt, loc))}
               </p>
               <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-champagne">
@@ -643,7 +644,7 @@ export default async function GuidesPage({
                 locale={loc}
                 className="group flex flex-col bg-white/[0.025] rounded-2xl overflow-hidden border border-white/10 hover:border-champagne/45 transition-all duration-500"
               >
-                <div className="relative h-56 w-full overflow-hidden">
+                <div className="relative aspect-[4/5] w-full overflow-hidden">
                   <Image
                     src={guide.image || '/images/milan-nightclub-luxury-vip-champagne.webp'}
                     alt={guideTitle}

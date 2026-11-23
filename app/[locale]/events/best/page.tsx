@@ -341,7 +341,7 @@ export default async function EventsBestPage({ params }: Props) {
           const upcoming = upcomingByVenue[v.id] ?? [];
           return (
             <div key={v.id} className="border border-white/8 rounded-xl overflow-hidden">
-              <div className="relative h-56 sm:h-72">
+              <div className="relative mx-auto aspect-[4/5] w-full max-w-[540px]">
                 <Image
                   src={v.image}
                   alt={v.name[lang]}

@@ -618,35 +618,35 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
               </div>
             </div>
 
-            {/* Colonna Destra (7/12): Trittico Fotografico Editoriale */}
+            {/* Colonna Destra (7/12): Trittico Fotografico Editoriale 4:5 */}
             <div data-lightbox-group="home-editorial-triptych" className="flex flex-col justify-between bg-[#141311] p-6 sm:p-14 lg:col-span-7">
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                <div className="sm:col-span-2">
-                  <div className="relative aspect-[16/9] w-full overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]">
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
+                <div>
+                  <div className="relative aspect-[4/5] w-full overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]">
                     <Image
                       src="/images/vip-table-milan-nightclub-just-me.webp"
                       alt={homeGridAlts[0]}
                       fill
                       quality={92}
                       className="object-cover"
-                      sizes="(max-width: 1024px) 100vw, 65vw"
+                      sizes="(max-width: 640px) 100vw, 25vw"
                     />
                   </div>
-                  <div className="mt-2.5 flex justify-between font-mono text-[12px] text-[#DED8CC]">
-                    <span>{uiLabels.act1}</span>
-                    <span>Parco Sempione &amp; Porta Nuova</span>
+                  <div className="mt-2 font-mono text-[12px] text-[#DED8CC]">
+                    <div>{uiLabels.act1}</div>
+                    <div className="text-[#C2B9AA]">Parco Sempione &amp; Porta Nuova</div>
                   </div>
                 </div>
 
                 <div>
-                  <div className="relative aspect-[4/3] w-full overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]">
+                  <div className="relative aspect-[4/5] w-full overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]">
                     <Image
                       src="/images/milan-club-crowd-dancefloor-night.webp"
                       alt={homeGridAlts[3]}
                       fill
                       quality={92}
                       className="object-cover"
-                      sizes="(max-width: 1024px) 50vw, 45vw"
+                      sizes="(max-width: 640px) 100vw, 25vw"
                     />
                   </div>
                   <div className="mt-2 font-mono text-[12px] text-[#DED8CC]">
@@ -655,14 +655,14 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                 </div>
 
                 <div>
-                  <div className="relative aspect-[4/3] w-full overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]">
+                  <div className="relative aspect-[4/5] w-full overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]">
                     <Image
                       src="/images/bottle-service-milan-vip-nightclub.webp"
                       alt={homeGridAlts[4]}
                       fill
                       quality={92}
                       className="object-cover"
-                      sizes="(max-width: 1024px) 50vw, 45vw"
+                      sizes="(max-width: 640px) 100vw, 25vw"
                     />
                   </div>
                   <div className="mt-2 font-mono text-[12px] text-[#DED8CC]">

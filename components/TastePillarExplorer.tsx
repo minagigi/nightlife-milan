@@ -143,7 +143,7 @@ export default function TastePillarExplorer({ data, locale }: TastePillarExplore
               className="lg:col-span-5 lg:sticky lg:top-[76px] bg-[#141311] p-4 sm:p-5"
               data-no-lightbox="true"
             >
-              <figure className="relative aspect-[21/9] w-full overflow-clip bg-[#050505] mb-3">
+              <figure className="relative mx-auto aspect-[4/5] w-full max-w-[420px] overflow-clip bg-[#050505] mb-3">
                 <Image
                   key={activeItem.image}
                   src={activeItem.image}

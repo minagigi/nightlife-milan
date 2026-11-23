@@ -230,7 +230,7 @@ export default async function EventsTonightPage({ params }: Props) {
             {dateLabel} · {tr(locale, 'Autumn/Winter 2026 & NYE 2027', 'Autunno/Inverno 2026 & Capodanno 2027')}
           </span>
         </div>
-        <div className="relative w-full h-56 sm:h-72 rounded-2xl overflow-hidden mb-6 border border-champagne/25">
+        <div className="relative mx-auto aspect-[4/5] w-full max-w-[560px] rounded-2xl overflow-hidden mb-6 border border-champagne/25">
           <Image quality={92}
             src="/images/pillars/events-tonight-hero.webp"
             alt={tr(locale, 'Tonight in Milan', 'Stasera a Milano')}
@@ -468,7 +468,7 @@ function TimeSlot({
               href={`${lp}/events/${slug}`}
               className="group flex flex-col sm:flex-row bg-white/[0.03] rounded-lg overflow-hidden border border-white/5 hover:border-champagne/30 transition-all duration-300"
             >
-              <div className="sm:w-1/3 h-40 sm:h-auto relative shrink-0">
+              <div className="sm:w-1/3 aspect-[4/5] w-full relative shrink-0">
                 <Image
                   src={event.image || venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp'}
                   alt={title}

@@ -622,6 +622,8 @@ const CARD_POSTER_4X5_MAP: Readonly<Record<string, string>> = {
   "/images/hollywood-milano.webp": "/images/events/cards-4x5/partner-clubs/hollywood-club-milano.webp",
   "/images/magazzini-generali-milano.webp": "/images/events/cards-4x5/partner-clubs/magazzini-generali-milano.webp",
   "/images/mib-milano.webp": "/images/events/cards-4x5/partner-clubs/mib-milano.webp",
+  "/images/dazi-milano.webp": "/images/events/cards-4x5/partner-clubs/dazi-milano.webp",
+  "/images/venues/dazi-milano/dazi-milano-interior-01.webp": "/images/events/cards-4x5/partner-clubs/dazi-milano.webp",
   "/images/pillars/venue-alcatraz.webp": "/images/events/cards-4x5/partner-clubs/alcatraz-milano.webp",
   "/images/pillars/venue-amnesia.webp": "/images/events/cards-4x5/partner-clubs/amnesia-milano.webp",
   "/images/pillars/venue-fabrique.webp": "/images/events/cards-4x5/partner-clubs/fabrique-milano.webp",

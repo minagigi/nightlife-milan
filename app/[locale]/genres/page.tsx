@@ -181,14 +181,14 @@ export default async function GenresIndexPage({
       {/* 10 Genres Grid */}
       <section id="all-genres-grid" className="scroll-mt-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
         <h2 className="font-serif text-3xl text-white mb-8">{hubUi.allItemsHeading}</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
           {entries.map(([slug]) => {
             const gLoc = getGenreLocalized35(slug, loc);
             return (
               <Link
                 key={slug}
                 href={`${lp}/genres/${getLocalizedGenreSlug35(slug, loc)}`}
-                className="group relative h-[360px] rounded-2xl overflow-hidden border border-white/10 hover:border-champagne/50 transition-all duration-500 block"
+                className="group relative aspect-[4/5] w-full rounded-2xl overflow-hidden border border-white/10 hover:border-champagne/50 transition-all duration-500 block"
               >
                 <Image
                   src={GENRE_IMAGES[slug] || '/images/milan-nightclub-luxury-vip-champagne.webp'}

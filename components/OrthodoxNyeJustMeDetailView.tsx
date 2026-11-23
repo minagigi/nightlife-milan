@@ -220,7 +220,7 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
 
         {/* Hero Section */}
         <section className="overflow-hidden border border-[#24242C] bg-[#0B0C10]">
-          <div className="relative aspect-video w-full bg-[#070709]">
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-[560px] bg-[#070709]">
             <Image
               src={ORTHODOX_NYE_JUSTME_POSTER_SRC}
               alt={imagePack.poster.alt}
@@ -228,8 +228,8 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
               fill
               priority
               quality={92}
-              sizes="(max-width: 1200px) 100vw, 1152px"
-              className="object-cover"
+              sizes="(max-width: 1200px) 100vw, 560px"
+              className="object-contain"
             />
           </div>
 
@@ -387,7 +387,7 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
             {/* Silver 60 EUR */}
             <article className="flex flex-col border border-[#2B2D36] bg-[#101116]">
-              <div className="relative aspect-video w-full border-b border-[#24242C]">
+              <div className="relative aspect-[4/5] w-full border-b border-[#24242C]">
                 <Image
                   src={ORTHODOX_NYE_JUSTME_SILVER_MENU_SRC}
                   alt={c.silverMenuAlt}
@@ -395,7 +395,7 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
                   fill
                   quality={85}
                   sizes="(max-width: 1024px) 100vw, 540px"
-                  className="object-cover"
+                  className="object-contain"
                 />
               </div>
               <div className="flex flex-1 flex-col justify-between p-6">
@@ -434,7 +434,7 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
 
             {/* Gold 80 EUR */}
             <article className="flex flex-col border border-[#C9A84C]/60 bg-[#12100B]">
-              <div className="relative aspect-video w-full border-b border-[#C9A84C]/30">
+              <div className="relative aspect-[4/5] w-full border-b border-[#C9A84C]/30">
                 <Image
                   src={ORTHODOX_NYE_JUSTME_GOLD_MENU_SRC}
                   alt={c.goldMenuAlt}
@@ -442,7 +442,7 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
                   fill
                   quality={85}
                   sizes="(max-width: 1024px) 100vw, 540px"
-                  className="object-cover"
+                  className="object-contain"
                 />
               </div>
               <div className="flex flex-1 flex-col justify-between p-6">
@@ -597,7 +597,7 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             {imagePack.gallery.map((shot) => (
               <figure key={shot.assetKey} className="overflow-hidden border border-[#24242C] bg-[#101116]">
-                <div className="relative aspect-video w-full">
+                <div className="relative aspect-[4/5] w-full">
                   <Image
                     src={shot.src}
                     alt={shot.alt}

@@ -215,7 +215,7 @@ export default async function ZonesPage({
         <h2 className="font-serif text-3xl text-white mb-8">
           {hubUi.allItemsHeading}
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {mockZones.map((zone) => {
             const zLoc = getZoneLocalized35(zone.slug, loc);
             const imgSrc = zone.image || zoneImages[zone.id] || zoneImages[zone.slug] || '/images/pillars/zone-01.webp';
@@ -223,7 +223,7 @@ export default async function ZonesPage({
               <Link
                 key={zone.id}
                 href={`${lp}/zones/${getLocalizedZoneSlug35(zone.slug, loc)}`}
-                className="group relative h-[400px] rounded-lg overflow-hidden border border-white/10 hover:border-champagne/50 transition-colors duration-500 block"
+                className="group relative aspect-[4/5] w-full rounded-lg overflow-hidden border border-white/10 hover:border-champagne/50 transition-colors duration-500 block"
               >
                 <Image
                   src={imgSrc}

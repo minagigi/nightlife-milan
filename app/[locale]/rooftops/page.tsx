@@ -227,7 +227,7 @@ export default async function RooftopsPage({
       />
 
       <div data-rooftops-top-hero="true" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
-        <div className="relative h-64 sm:h-80 w-full rounded-2xl overflow-hidden border border-champagne/30">
+        <div className="relative mx-auto aspect-[4/5] w-full max-w-[560px] rounded-2xl overflow-hidden border border-champagne/30">
           <Image quality={92}
             src="/images/pillars/rooftops-01.webp"
             alt="Milan Panoramic Rooftop Bars & Skyline Lounges"
@@ -281,7 +281,7 @@ export default async function RooftopsPage({
             id={r.slug}
             className="scroll-mt-24 grid grid-cols-1 lg:grid-cols-12 rounded-2xl overflow-hidden border border-white/15 bg-white/[0.02] hover:border-champagne/50 transition-all"
           >
-            <div data-no-lightbox="true" className="relative h-72 lg:h-auto lg:col-span-5">
+            <div data-no-lightbox="true" className="relative aspect-[4/5] w-full lg:col-span-5">
               <Image
                 src={r.image}
                 alt={r.name}

@@ -346,14 +346,16 @@ export default function SinglePassStorefront({
                   className="border border-[#050505]/20 bg-[#EFE9DC] p-5 sm:p-8"
                 >
                   <div className="grid gap-6 border-b border-[#050505]/15 pb-6 lg:grid-cols-[240px_1fr]">
-                    <div className="overflow-hidden border border-[#050505]/20 bg-[#050505]">
+                    <div className="aspect-[4/5] overflow-hidden border border-[#050505]/20 bg-[#050505]">
                       <img
                         src={venue.posterSrc}
                         alt={`${venue.name} · ${isIt ? venue.ageBandLabelIt : venue.ageBandLabelEn}`}
                         title={`${venue.name} Single Pass Capodanno 2027`}
+                        width={1080}
+                        height={1350}
                         loading="eager"
                         decoding="async"
-                        className="h-52 w-full object-contain bg-[#050505]"
+                        className="h-full w-full object-contain bg-[#050505]"
                       />
                     </div>
                     <div className="flex flex-col justify-between">

@@ -371,7 +371,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "flower-power-ibiza-justme-12-06-2026", it: "flower-power-ibiza-justme-12-06-2026" }
     },
-    image: "/images/events/xceed-justme-friday-night.jpg",
+    image: "/images/events/xceed-justme-friday-night.webp",
     isTrending: true
   },
   {
@@ -389,7 +389,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "fashion-week-night-justme-20-06-2026", it: "fashion-week-justme-20-06-2026" }
     },
-    image: "/images/events/xceed-justme-saturday-night.jpg",
+    image: "/images/events/xceed-justme-saturday-night.webp",
     isSpecial: true,
     isTrending: true
   },
@@ -408,7 +408,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "uncle-waffles-tyga-justme-25-06-2026", it: "uncle-waffles-tyga-justme-25-06-2026" }
     },
-    image: "/images/events/xceed-justme-uncle-waffles.jpg",
+    image: "/images/events/xceed-justme-uncle-waffles.webp",
     isSpecial: true,
     isTrending: true
   },
@@ -485,7 +485,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "milan8mile-pineta-26-06-2026", it: "milan8mile-pineta-26-06-2026" }
     },
-    image: "/images/events/xceed-pineta-milan8mile.jpg",
+    image: "/images/events/xceed-pineta-milan8mile.webp",
     xceedUrl: "https://xceed.me/en/milano/event/milan8mile-3/231334/channel/nightlifemilan-1",
   },
 

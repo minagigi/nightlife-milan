@@ -312,14 +312,18 @@ export default function CapodannoDetailView({ locale, event }: Props) {
 
         <div className="overflow-hidden border border-[#F6F1E7]/18 bg-[#0B0A09]">
           <div className="border-b border-[#F6F1E7]/14 bg-[#050505]">
-            <img
-              src={seoPack.poster.src}
-              title={seoPack.poster.title}
-              alt={seoPack.poster.alt}
-              loading="eager"
-              decoding="async"
-              className="mx-auto block max-h-[620px] w-full object-contain"
-            />
+            <div className="mx-auto aspect-[4/5] w-full max-w-[540px] bg-[#050505]">
+              <img
+                src={seoPack.poster.src}
+                title={seoPack.poster.title}
+                alt={seoPack.poster.alt}
+                width={1080}
+                height={1350}
+                loading="eager"
+                decoding="async"
+                className="h-full w-full object-contain"
+              />
+            </div>
           </div>
           <div className="border-b border-[#F6F1E7]/14 bg-[#0B0A09] px-6 py-6 sm:px-10 sm:py-8">
             <h1
@@ -598,11 +602,11 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                         src={localized.programImageSrc}
                         alt={`${title} · ${localized.scheduleHeading || ui.programHeading}`}
                         title={localized.scheduleHeading || title}
-                        width={1376}
-                        height={768}
+                        width={1080}
+                        height={1350}
                         loading="lazy"
                         decoding="async"
-                        className="max-h-[420px] w-auto max-w-full object-contain"
+                        className="aspect-[4/5] max-h-[560px] w-auto max-w-full object-contain"
                       />
                     </div>
                   )}
@@ -633,9 +637,11 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                   src={seoPack.poster.src}
                   title={seoPack.poster.title}
                   alt={seoPack.poster.alt}
+                  width={1080}
+                  height={1350}
                   loading="lazy"
                   decoding="async"
-                  className="max-h-[540px] w-auto max-w-full object-contain"
+                  className="aspect-[4/5] max-h-[640px] w-auto max-w-full object-contain"
                 />
               </div>
               <figcaption className="mt-3 text-[13px] leading-relaxed text-[#C2B9AA] sm:text-sm">
@@ -662,11 +668,13 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                     key={img.src}
                     className="overflow-hidden border border-[#F6F1E7]/14 bg-[#050505] transition hover:border-[#EAE3D5]/45"
                   >
-                    <div className="relative h-56 w-full bg-[#050505]">
+                    <div className="relative aspect-[4/5] w-full bg-[#050505]">
                       <img
                         src={img.src}
                         title={img.title}
                         alt={img.alt}
+                        width={1080}
+                        height={1350}
                         loading="lazy"
                         decoding="async"
                         className="h-full w-full object-cover"
@@ -719,13 +727,15 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                         className="flex flex-col justify-between border border-[#EAE3D5]/28 bg-[#141311] p-5"
                       >
                         <div>
-                          <div data-no-lightbox="true" className="overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]">
+                          <div data-no-lightbox="true" className="aspect-[4/5] overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]">
                             <img
                               src={alt.image}
                               alt={altTitle}
+                              width={1080}
+                              height={1350}
                               loading="lazy"
                               decoding="async"
-                              className="h-44 w-full object-contain"
+                              className="h-full w-full object-contain"
                             />
                           </div>
                           <h3 className="mt-3 font-display text-xl font-bold text-[#F6F1E7]">
@@ -867,13 +877,15 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                         className="flex flex-col justify-between border border-[#EAE3D5]/28 bg-[#141311] p-5"
                       >
                         <div>
-                          <div data-no-lightbox="true" className="overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]">
+                          <div data-no-lightbox="true" className="aspect-[4/5] overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]">
                             <img
                               src={alt.image}
                               alt={altTitle}
+                              width={1080}
+                              height={1350}
                               loading="lazy"
                               decoding="async"
-                              className="h-44 w-full object-contain"
+                              className="h-full w-full object-contain"
                             />
                           </div>
                           <h3 className="mt-3 font-display text-xl font-bold text-[#F6F1E7]">
@@ -963,11 +975,11 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                             src={menu.imageSrc}
                             alt={menu.imageAlt}
                             title={menu.title}
-                            width={1376}
-                            height={768}
+                            width={1080}
+                            height={1350}
                             loading="lazy"
                             decoding="async"
-                            className="max-h-[380px] w-auto max-w-full object-contain"
+                            className="aspect-[4/5] max-h-[560px] w-auto max-w-full object-contain"
                           />
                         </div>
                       )}

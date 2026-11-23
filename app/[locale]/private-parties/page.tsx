@@ -224,7 +224,7 @@ export default async function PrivatePartiesPage({
       />
 
       <div data-privateparties-top-hero="true" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
-        <div className="relative h-64 sm:h-80 w-full rounded-2xl overflow-hidden border border-champagne/30">
+        <div className="relative mx-auto aspect-[4/5] w-full max-w-[560px] rounded-2xl overflow-hidden border border-champagne/30">
           <Image quality={92}
             src="/images/pillars/private-parties-hero.webp"
             alt="Milan Graduation Parties, 18th Birthdays & Private Events"

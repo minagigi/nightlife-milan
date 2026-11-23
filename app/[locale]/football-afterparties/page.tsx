@@ -801,7 +801,7 @@ export default async function FootballAfterpartiesPage({
               className="rounded-3xl border border-white/15 bg-gradient-to-b from-white/[0.04] to-black/60 overflow-hidden hover:border-champagne/50 transition-all"
             >
               <div className="grid grid-cols-1 lg:grid-cols-12">
-                <div className="relative h-72 lg:h-auto lg:col-span-4">
+                <div className="relative aspect-[4/5] w-full lg:col-span-4">
                   <Image quality={92}
                     src={club.image}
                     alt={isIt ? club.name : club.nameEn}

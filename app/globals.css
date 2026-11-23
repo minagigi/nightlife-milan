@@ -584,7 +584,7 @@ main img[data-lightbox-ready='true']:focus-visible {
   }
 }
 
-/* Uneven photo gallery strip (5 / 2 / 3 / 2 ratios on desktop, clean 1/2 col cards on phone/tablet) */
+/* 4:5 photo gallery strip (4 equal 4:5 panels on desktop, 1/2 col cards on phone/tablet) */
 .taste-uneven-strip {
   display: grid;
   grid-template-columns: 1fr;
@@ -596,7 +596,8 @@ main img[data-lightbox-ready='true']:focus-visible {
   position: relative;
   overflow: clip;
   background: #141311;
-  min-height: 210px;
+  aspect-ratio: 4 / 5;
+  width: 100%;
 }
 @media (min-width: 640px) and (max-width: 1023px) {
   .taste-uneven-strip {
@@ -606,20 +607,9 @@ main img[data-lightbox-ready='true']:focus-visible {
 }
 @media (min-width: 1024px) {
   .taste-uneven-strip {
-    display: flex;
-    gap: 0;
-    height: min(58svh, 500px);
-    min-height: 380px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
   }
-  .taste-uneven-panel {
-    flex-basis: 0;
-    min-width: 0;
-    height: 100%;
-  }
-  .taste-uneven-panel:nth-child(1) { flex-grow: 5; }
-  .taste-uneven-panel:nth-child(2) { flex-grow: 2; }
-  .taste-uneven-panel:nth-child(3) { flex-grow: 3; }
-  .taste-uneven-panel:nth-child(4) { flex-grow: 2; }
 }
 
 /* Slow crossfade slides */

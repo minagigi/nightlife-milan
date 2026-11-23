@@ -312,12 +312,12 @@ export default function PartenopeaJustMeDetailView({
                 src={seoImages.poster.src}
                 alt={seoImages.poster.alt}
                 title={seoImages.poster.title}
-                width={1376}
-                height={768}
+                width={1080}
+                height={1350}
                 priority
                 quality={92}
                 sizes="(max-width: 1024px) 100vw, 42vw"
-                className="h-auto w-full rounded-lg object-contain"
+                className="aspect-[4/5] h-auto w-full rounded-lg object-contain"
               />
             </div>
           </div>
@@ -468,11 +468,11 @@ export default function PartenopeaJustMeDetailView({
                 src={PARTENOPEA_JUSTME_MENU_CARD_SRC}
                 alt={c.menuCardTitle}
                 title={c.menuCardTitle}
-                width={1376}
-                height={768}
+                width={1080}
+                height={1350}
                 quality={85}
                 sizes="(max-width: 1024px) 100vw, 48vw"
-                className="h-auto w-full rounded-lg object-contain"
+                className="aspect-[4/5] h-auto w-full rounded-lg object-contain"
               />
               <figcaption className="mt-3 space-y-1 px-1">
                 <div className="font-serif text-lg text-[#F6F1E7]">{c.menuCardTitle}</div>
@@ -485,11 +485,11 @@ export default function PartenopeaJustMeDetailView({
                 src={PARTENOPEA_JUSTME_TABLES_CARD_SRC}
                 alt={c.tablesCardTitle}
                 title={c.tablesCardTitle}
-                width={1376}
-                height={768}
+                width={1080}
+                height={1350}
                 quality={85}
                 sizes="(max-width: 1024px) 100vw, 48vw"
-                className="h-auto w-full rounded-lg object-contain"
+                className="aspect-[4/5] h-auto w-full rounded-lg object-contain"
               />
               <figcaption className="mt-3 space-y-1 px-1">
                 <div className="font-serif text-lg text-[#F6F1E7]">{c.tablesCardTitle}</div>
@@ -623,7 +623,7 @@ export default function PartenopeaJustMeDetailView({
                 key={item.src}
                 className="overflow-hidden rounded-xl border border-white/15 bg-black/60"
               >
-                <div className="relative aspect-video w-full overflow-hidden">
+                <div className="relative aspect-[4/5] w-full overflow-hidden">
                   <Image
                     src={item.src}
                     alt={item.alt}
@@ -779,7 +779,7 @@ export default function PartenopeaJustMeDetailView({
         {/* Internal Cross-Links: JustMe Dossier, Thanksgiving Nov 26, Dec 31 NYE & Jan 13 Orthodox NYE */}
         <section data-no-lightbox="true" className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
           <div className="flex flex-col justify-between overflow-hidden rounded-xl border border-white/15 bg-white/[0.03] p-5 space-y-4">
-            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg border border-white/10">
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg border border-white/10">
               <Image
                 src="/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp"
                 alt={c.venueBannerTitle}

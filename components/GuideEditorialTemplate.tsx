@@ -262,9 +262,9 @@ export default function GuideEditorialTemplate({
       {bundle.stripPlates.length >= 2 && (
         <section id="gallery" aria-label={title} className="bg-[#050505] py-8 sm:py-12">
           <div className="max-w-[1440px] mx-auto px-5 sm:px-10 lg:px-14">
-            <div className="taste-uneven-strip" data-taste-stagger>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" data-taste-stagger>
               {bundle.stripPlates.map((plate, idx) => (
-                <figure key={`${plate.src}-${idx}`} className="taste-uneven-panel group">
+                <figure key={`${plate.src}-${idx}`} className="relative aspect-[4/5] w-full overflow-clip bg-[#141311] m-0 group">
                   <Image
                     src={plate.src}
                     alt={`${plate.caption} - ${title}`}
@@ -272,7 +272,7 @@ export default function GuideEditorialTemplate({
                     fill
                     unoptimized
                     quality={92}
-                    sizes="(max-width: 1024px) 50vw, 40vw"
+                    sizes="(max-width: 1024px) 50vw, 25vw"
                     className="object-cover brightness-[0.88] group-hover:brightness-100 transition-[filter] duration-500"
                   />
                   <figcaption className="absolute bottom-3 left-3 z-10 bg-[#050505]/88 px-3 py-1.5 text-[14px] text-[#FFFFFF] pointer-events-none">
@@ -327,7 +327,7 @@ export default function GuideEditorialTemplate({
                     href={venueHref}
                     className="group bg-[#141311] hover:bg-[#1E1C19] transition-colors flex flex-col overflow-clip"
                   >
-                    <div className="relative aspect-[16/9] w-full overflow-clip bg-[#050505]">
+                    <div className="relative aspect-[4/5] w-full overflow-clip bg-[#050505]">
                       <Image
                         src={coverSrc}
                         alt={venueName}
@@ -444,7 +444,7 @@ export default function GuideEditorialTemplate({
                     <h2 className="font-display font-bold text-[#050505] mb-5">{secHeading}</h2>
                     {secPlate && (
                       <figure className="m-0">
-                        <div className="relative aspect-[16/10] w-full overflow-clip bg-[#EAE3D5]">
+                        <div className="relative aspect-[4/5] w-full overflow-clip bg-[#EAE3D5]">
                           <Image
                             src={secPlate.src}
                             alt={`${secPlate.caption} - ${secHeading}`}
@@ -480,7 +480,7 @@ export default function GuideEditorialTemplate({
                   </div>
                   <div className="lg:col-span-5 lg:sticky lg:top-20 space-y-5" data-taste-reveal>
                     {secPlate && (
-                      <figure className="relative aspect-[16/10] w-full overflow-clip bg-[#141311]">
+                      <figure className="relative aspect-[4/5] w-full overflow-clip bg-[#141311]">
                         <Image
                           src={secPlate.src}
                           alt={`${secPlate.caption} - ${secHeading}`}
@@ -552,7 +552,7 @@ export default function GuideEditorialTemplate({
               </div>
 
               <div className="lg:col-span-5 lg:sticky lg:top-20 space-y-5" data-taste-reveal>
-                <figure className="relative aspect-[16/10] w-full overflow-clip bg-[#050505]">
+                <figure className="relative aspect-[4/5] w-full overflow-clip bg-[#050505]">
                   <Image
                     src={(bundle.chapterPlates[2] || bundle.stripPlates[0]).src}
                     alt={`${t.faq} - ${title}`}
@@ -608,7 +608,7 @@ export default function GuideEditorialTemplate({
                     className="group flex flex-col justify-between bg-[#141311] hover:bg-[#1E1C19] transition-colors overflow-clip"
                   >
                     <div>
-                      <div className="relative aspect-[16/10] w-full overflow-clip bg-[#050505]">
+                      <div className="relative aspect-[4/5] w-full overflow-clip bg-[#050505]">
                         <Image
                           src={gCover}
                           alt={gTitle}

@@ -660,7 +660,7 @@
 
 .eventArt {
   position: relative;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 4 / 5;
   border: 1px solid rgba(246, 241, 231, 0.14);
   overflow: hidden;
   background: #141311;

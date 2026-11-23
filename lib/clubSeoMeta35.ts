@@ -378,6 +378,7 @@ const CONFIRMED_MIN_VIP_EUR: Readonly<Record<string, number>> = {
   'v-11clubroom': 300,
   'v-church81': 200,
   'v-mibmilano': 250,
+  'v-dazi': 250,
   'v-gattopardo': 300,
   'v-terrazza21': 250,
   'v-theclub': 250,
@@ -423,6 +424,10 @@ export const FLAGSHIP_TITLES_EN_IT: Readonly<Record<string, { en: string; it: st
   'v-mibmilano': {
     en: 'MIB Milan: Dinner Show Piazza Affari, Prices & VIP Tables',
     it: 'MIB Milano: Dinner Show Piazza Affari, Prezzi e Tavoli VIP',
+  },
+  'v-dazi': {
+    en: 'Dazi Milan: Arco della Pace Dinner Show, Mixology & Tables',
+    it: 'Dazi Milano: Dinner Show Arco della Pace, Mixology e Tavoli',
   },
   'v-gattopardo': {
     en: 'Il Gattopardo Milan: Entry Prices, Dress Code & VIP Tables',

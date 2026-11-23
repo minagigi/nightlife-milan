@@ -249,17 +249,19 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <main className="min-h-screen bg-[#050505] text-[#F6F1E7]">
         {/* 1st Body Image == og:image */}
-        <div className="relative h-64 sm:h-80 w-full overflow-hidden border-b border-[#F6F1E7]/14">
-          <Image
-            quality={92}
-            src="/images/pillars/concierge-hero.webp"
+        <div className="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-[560px] overflow-hidden border border-[#F6F1E7]/14">
+            <Image
+              quality={92}
+              src="/images/pillars/concierge-hero.webp"
             alt={tr(locale, 'Milan nightlife concierge VIP table service', 'Concierge nightlife Milano tavolo VIP')}
             fill
             priority
             className="object-cover opacity-65"
-            sizes="100vw"
+            sizes="(max-width: 768px) 100vw, 560px"
           />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/35 to-transparent" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/35 to-transparent" />
+          </div>
         </div>
 
         {/* Hero */}
@@ -460,7 +462,7 @@ export default async function ConciergePage({ params }: { params: Promise<{ loca
                 { src: '/images/pillars/concierge-05.webp', alt: 'Magazzini Generali Milano Electronic Arena', label: 'Magazzini' },
               ].map((img) => (
                 <div key={img.label} className="relative group">
-                  <div className="relative h-36 overflow-hidden border border-[#F6F1E7]/14">
+                  <div className="relative aspect-[4/5] w-full overflow-hidden border border-[#F6F1E7]/14">
                     <Image src={img.src} alt={img.alt} fill quality={92} className="object-cover" sizes="(max-width: 768px) 50vw, 25vw" />
                   </div>
                   <p className="font-mono text-[#C2B9AA] text-[11px] text-center mt-2 tracking-widest uppercase">{img.label}</p>

@@ -722,7 +722,7 @@ export default async function FashionWeekPage({
               className="rounded-3xl border border-white/15 bg-[#14100a] overflow-hidden flex flex-col justify-between hover:border-champagne/50 transition-all"
             >
               <div>
-                <div className="relative h-56 w-full">
+                <div className="relative aspect-[4/5] w-full">
                   <Image
                     src={v.image}
                     alt={v.name}

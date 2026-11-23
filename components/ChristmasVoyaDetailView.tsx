@@ -145,7 +145,7 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
         {/* Hero Couture Noir */}
         <div className="overflow-hidden border border-[#F6F1E7]/20 bg-[#0B0A09]">
           <div className="grid lg:grid-cols-5">
-            <div className="relative aspect-[16/9] w-full min-w-0 bg-[#050505] lg:col-span-2 lg:aspect-auto lg:min-h-[380px]">
+            <div className="relative aspect-[4/5] w-full min-w-0 bg-[#050505] lg:col-span-2">
               <Image
                 quality={92}
                 src={c.posterSrc}
@@ -346,11 +346,11 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
                   src={c.posterSrc}
                   title={seoPack.poster.title}
                   alt={seoPack.poster.alt}
-                  width={1376}
-                  height={768}
+                  width={1080}
+                  height={1350}
                   loading="lazy"
                   decoding="async"
-                  className="max-h-[540px] w-auto max-w-full object-contain"
+                  className="aspect-[4/5] max-h-[640px] w-auto max-w-full object-contain"
                 />
               </div>
               <figcaption className="mt-3 text-xs leading-relaxed text-[#C2B9AA] sm:text-sm">
@@ -404,11 +404,11 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
                     src={c.menuImageSrc}
                     alt={`${c.title} · ${c.menuHeading}`}
                     title={c.menuHeading}
-                    width={1376}
-                    height={768}
+                    width={1080}
+                    height={1350}
                     loading="lazy"
                     decoding="async"
-                    className="max-h-[460px] w-auto max-w-full object-contain"
+                    className="aspect-[4/5] max-h-[580px] w-auto max-w-full object-contain"
                   />
                 </figure>
               </div>
@@ -433,11 +433,13 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
                     key={img.src}
                     className="overflow-hidden border border-[#F6F1E7]/15 bg-[#050505] transition hover:border-[#F6F1E7]/45"
                   >
-                    <div className="relative h-56 w-full bg-[#050505]">
+                    <div className="relative aspect-[4/5] w-full bg-[#050505]">
                       <img
                         src={img.src}
                         title={img.title}
                         alt={img.alt}
+                        width={1080}
+                        height={1350}
                         loading="lazy"
                         decoding="async"
                         className="h-full w-full object-cover"

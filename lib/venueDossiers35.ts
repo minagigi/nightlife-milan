@@ -977,6 +977,7 @@ const VENUE_WORD_TO_CLUB_SLUG: Record<string, string> = {
   'v-11clubroom': '11-clubroom',
   'v-church81': 'church-81',
   'v-mibmilano': 'mib-milano',
+  'v-dazi': 'dazi-milano',
   'v-gattopardo': 'gattopardo-milano',
   'v-terrazza21': 'terrazza-21',
   'v-magazzini': 'magazzini-generali-milano',

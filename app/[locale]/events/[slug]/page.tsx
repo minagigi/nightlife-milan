@@ -685,14 +685,14 @@ export default async function EventPage({ params }: Props) {
 
         <section className="border-b border-white/10 bg-[#050505]">
           <div className="mx-auto max-w-5xl px-4 pt-6 sm:px-6 lg:px-8">
-            <div className="relative aspect-[16/9] w-full overflow-hidden border border-white/15 bg-[#050505]">
+            <div className="relative mx-auto aspect-[4/5] w-full max-w-[560px] overflow-hidden border border-white/15 bg-[#050505]">
               <Image
                 src={weeklyEvent.image}
                 alt={title}
                 fill
                 quality={95}
                 priority
-                sizes="(max-width: 1280px) 100vw, 1024px"
+                sizes="(max-width: 768px) 100vw, 560px"
                 className="object-contain p-1 sm:p-2"
                 referrerPolicy="no-referrer"
               />
@@ -979,6 +979,11 @@ export default async function EventPage({ params }: Props) {
   ].filter(Boolean).join(', ');
   const currentEventPath = `${localePrefix(locale)}/${getLocalizedDir35('events', locale)}/${slug}`;
   const currentEventWaHref = getConciergeBookingUrl(locale, `${title} · ${venueName}`, currentEventPath);
+  const isPastEvent =
+    Date.parse(event.endDateISO || event.dateISO) < Date.parse('2026-11-23T00:00:00Z') ||
+    eventHeroImage.includes('/october-2026/') ||
+    eventHeroImage.includes('/halloween') ||
+    eventHeroImage.includes('/generated/');
 
   return (
     <>
@@ -1001,32 +1006,34 @@ export default async function EventPage({ params }: Props) {
         {/* Hero Section */}
         <section className="w-full border-b border-[#F6F1E7]/14 bg-[#050505]">
           <div className="mx-auto max-w-7xl px-6 pt-6 md:px-12">
-            <div className="relative aspect-[16/9] w-full overflow-hidden border border-[#F6F1E7]/18 bg-[#050505]">
-              <Image
-                src={eventHeroImage}
-                alt={eventVisualGallery?.hero?.alt || eventVisualGallery?.images[0]?.alt || title}
-                fill
-                quality={95}
-                priority={true}
-                sizes="(max-width: 1280px) 100vw, 1200px"
-                className="object-contain p-1 sm:p-2"
-                referrerPolicy="no-referrer"
-              />
-            </div>
-            {!(
-              eventHeroImage.includes('/images/events/october-2026/') ||
-              eventHeroImage.includes('/images/events/capodanno-2027-posters/') ||
-              eventHeroImage.includes('/images/events/weekly-posters/') ||
-              eventHeroImage.includes('/images/events/halloween-2026/')
-            ) && (
-              <div className="flex flex-wrap items-center justify-between gap-2 border-x border-b border-[#F6F1E7]/18 bg-[#050505] px-4 py-2 font-mono text-[11px] font-bold tracking-[0.12em] text-[#F6F1E7]">
-                <span>WWW.NIGHTLIFEMILAN.COM</span>
-                <span className="inline-flex items-center gap-1.5 text-[#EAE3D5]">
-                  <span className="inline-block h-2 w-2 rounded-full bg-[#25D366]" aria-hidden="true" />
-                  +39 351 912 7047
-                </span>
+            <div className={!isPastEvent ? 'mx-auto max-w-[560px]' : 'w-full'}>
+              <div className={`relative w-full overflow-hidden border border-[#F6F1E7]/18 bg-[#050505] ${!isPastEvent ? 'aspect-[4/5]' : 'aspect-[16/9]'}`}>
+                <Image
+                  src={eventHeroImage}
+                  alt={eventVisualGallery?.hero?.alt || eventVisualGallery?.images[0]?.alt || title}
+                  fill
+                  quality={95}
+                  priority={true}
+                  sizes={!isPastEvent ? '(max-width: 768px) 100vw, 560px' : '(max-width: 1280px) 100vw, 1200px'}
+                  className="object-contain p-1 sm:p-2"
+                  referrerPolicy="no-referrer"
+                />
               </div>
-            )}
+              {!(
+                eventHeroImage.includes('/images/events/october-2026/') ||
+                eventHeroImage.includes('/images/events/capodanno-2027-posters/') ||
+                eventHeroImage.includes('/images/events/weekly-posters/') ||
+                eventHeroImage.includes('/images/events/halloween-2026/')
+              ) && (
+                <div className="flex flex-wrap items-center justify-between gap-2 border-x border-b border-[#F6F1E7]/18 bg-[#050505] px-4 py-2 font-mono text-[11px] font-bold tracking-[0.12em] text-[#F6F1E7]">
+                  <span>WWW.NIGHTLIFEMILAN.COM</span>
+                  <span className="inline-flex items-center gap-1.5 text-[#EAE3D5]">
+                    <span className="inline-block h-2 w-2 rounded-full bg-[#25D366]" aria-hidden="true" />
+                    +39 351 912 7047
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
 
           <div className="w-full px-6 py-8 md:px-12 max-w-7xl mx-auto">
@@ -1148,7 +1155,7 @@ export default async function EventPage({ params }: Props) {
               <section className="mt-8" data-event-section="lead-poster">
                 <h2 className="text-2xl font-serif font-bold text-champagne mb-4">{leadPoster.title}</h2>
                 <figure className="not-prose">
-                  <div className={`relative w-full overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] ${leadPoster.aspect === 'five-four' ? 'aspect-[5/4]' : leadPoster.aspect === 'landscape' ? 'aspect-[2/1]' : leadPoster.aspect === 'portrait' ? 'aspect-[9/16]' : 'aspect-square'}`}>
+                  <div className={`relative w-full overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] ${!isPastEvent && !leadPoster.src.includes('/generated/') ? 'mx-auto aspect-[4/5] max-w-[560px]' : leadPoster.aspect === 'five-four' ? 'aspect-[5/4]' : leadPoster.aspect === 'landscape' ? 'aspect-[2/1]' : leadPoster.aspect === 'portrait' ? 'aspect-[9/16]' : 'aspect-square'}`}>
                     <Image
                       src={leadPoster.src}
                       alt={leadPoster.alt}
@@ -1189,7 +1196,7 @@ export default async function EventPage({ params }: Props) {
                 </p>
                 <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-4 not-prose">
                   {buildVenueGalleryImages(venue, title, locale).map((img, i) => (
-                    <div key={i} className="relative h-32 rounded-xl overflow-hidden border border-white/8">
+                    <div key={i} className="relative aspect-[4/5] w-full rounded-xl overflow-hidden border border-white/8">
                       <Image src={img.src} alt={img.alt} title={img.alt} fill quality={92} className="object-cover" sizes="(max-width: 768px) 50vw, 33vw" />
                     </div>
                   ))}

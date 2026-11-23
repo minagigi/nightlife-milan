@@ -512,7 +512,7 @@ function EventCard({ item, locale, renderedAtMs }: { item: { event: Event; venue
 
   return (
     <div className="group relative flex flex-col md:flex-row bg-white/[0.03] rounded-lg overflow-hidden border border-white/5 hover:border-champagne/30 transition-colors duration-500">
-      <div className="w-full md:w-1/3 h-48 md:h-auto relative">
+      <div className="w-full md:w-1/3 aspect-[4/5] relative shrink-0">
         <Image
           src={event.image || venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp'}
           alt={title}

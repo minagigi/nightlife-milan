@@ -882,7 +882,7 @@ export default async function NewYearsEvePage({
               className="rounded-3xl border border-white/15 bg-gradient-to-b from-white/[0.04] to-black/60 overflow-hidden hover:border-champagne/50 transition-all"
             >
               <div className="grid grid-cols-1 lg:grid-cols-12">
-                <div data-no-lightbox="true" className="relative h-72 lg:h-auto lg:col-span-4">
+                <div data-no-lightbox="true" className="relative aspect-[4/5] w-full lg:col-span-4">
                   <Image
                     src={club.image}
                     alt={isIt ? club.nameIt : club.nameEn}

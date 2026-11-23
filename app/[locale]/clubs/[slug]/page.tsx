@@ -105,6 +105,10 @@ const venueTitles: Record<string, { en: string; it: string }> = {
     en: 'MIB Milan | Dinner Show, VIP Tables & Booking 2026/2027 | Piazza Affari',
     it: 'MIB Milano | Dinner Show, Tavoli VIP & Prenotazioni 2026/2027 | Piazza Affari',
   },
+  'v-dazi': {
+    en: 'Dazi Milan | Arco della Pace Dinner Show, Mixology & VIP Tables 2026/2027 | Sempione',
+    it: 'Dazi Milano | Dinner Show Arco della Pace, Mixology & Tavoli VIP 2026/2027 | Sempione',
+  },
   'v-gattopardo': {
     en: 'Gattopardo Milan | Deconsecrated Church Club, Table Prices & Nights 2026/2027',
     it: 'Gattopardo Milano | Club in Ex Chiesa, Prezzi Tavoli & Serate 2026/2027',
@@ -199,6 +203,10 @@ const venueKeywords: Record<string, { en: string[]; it: string[] }> = {
   'v-mibmilano': {
     en: ['mib milan', 'mib milano dinner show', 'mib milan vip table', 'piazza affari nightclub milan', 'mib milan prices 2026', 'dinner show duomo milan'],
     it: ['mib milano', 'mib dinner show', 'tavolo vip mib milano', 'discoteca piazza affari milano', 'prezzi mib 2026', 'cena spettacolo centro milano'],
+  },
+  'v-dazi': {
+    en: ['dazi milan', 'dazi milano arco della pace', 'dazi milan dinner show', 'piazza sempione 1 cocktail bar', 'dazi milano vip tables', 'caselli daziari milan club'],
+    it: ['dazi milano', 'dazi arco della pace', 'cena spettacolo dazi milano', 'cocktail bar piazza sempione 1', 'tavoli vip dazi milano', 'caselli daziari milano locale'],
   },
   'v-gattopardo': {
     en: ['gattopardo milan', 'gattopardo club church milan', 'gattopardo table prices', 'gattopardo piero della francesca', 'ex church nightclub milan', 'gattopardo dress code'],
@@ -745,6 +753,84 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
       ],
     },
   },
+  'v-dazi': {
+    en: {
+      tagline: 'Historic Neoclassical Tollhouse Facing Arco della Pace | Gourmet Dining, Mixology Bar & Late-Night Dinner Show',
+      highlights: [
+        'Housed inside Luigi Cagnola 1838 neoclassical tollhouse directly on Piazza Sempione 1 beside Arco della Pace',
+        'Open Tuesday to Friday 12:00 – 03:00 and Saturday to Sunday 11:00 – 03:00 (Weekend Brunch, Sunset Mixology, Dinner & Club)',
+        'Seamless progression from contemporary Italian gourmet dining and botanical mixology into live Dinner Show & DJ sets',
+        'Panoramic outdoor Sempione terrace and soaring double-height glass portico looking directly onto Arco della Pace',
+      ],
+      musicStyle: 'Live Singing Dinner Show, Vocal House, Commercial Hits & Mixology Lounge DJ Sets until 03:00',
+      crowdProfile: '24-45 | Design & fashion crowd, Sempione regulars, international diners, corporate celebrations & VIP groups',
+      bestNights: 'Friday & Saturday Dinner Show + DJ Set, Sunset Mixology Tue-Sun & Saturday-Sunday Sempione Brunch',
+      nearestMetro: 'M5 Purple Line Domodossola / Tre Torri or Tram 1 & 10 right at Arco della Pace (Piazza Sempione 1)',
+      pricingTable: [
+        { zone: 'Sunset Mixology Aperitivo (18:00-21:00)', price: '€15 - €22 / person', details: 'Signature craft cocktail with gourmet bites facing Arco della Pace' },
+        { zone: 'Gourmet Restaurant & Dinner Show', price: '€55 - €85 / person', details: 'Full à la carte or tasting dinner inside the neoclassical stone hall with live show' },
+        { zone: 'After-Dinner Lounge & Dancefloor VIP Table', price: '€250 - €450 (4-6 guests)', details: '100% bottle service credit with reserved sofa and priority skip-the-line entry' },
+        { zone: 'New Year Eve Red Carpet & Dinner Show (Dec 31)', price: '€160 Dinner / €40-€50 Party', details: 'Gala Menu + Live Show by EKI + DJ Set until 05:00 (Tables €250-€320)' },
+      ],
+      insiderTips: [
+        'Request a table near the monumental glass colonnade at sunset to watch Arco della Pace light up over Parco Sempione.',
+        'On Friday and Saturday nights, booking dinner guarantees you keep your spot inside without queuing when the DJ set starts at 23:00.',
+        'Dress code is Smart Elegant: tailored blazers, silk shirts, and curated eveningwear blend right in with the Sempione crowd.',
+      ],
+      faqs: [
+        {
+          q: 'Where is Dazi Milano located and what are its opening hours?',
+          a: 'Dazi Milano is located at Piazza Sempione 1 inside the historic neoclassical tollhouse beside Arco della Pace. It is open Tuesday to Friday from 12:00 to 03:00 and Saturday to Sunday from 11:00 to 03:00.',
+        },
+        {
+          q: 'How much does dinner or a VIP table cost at Dazi Milano?',
+          a: 'Signature sunset cocktails range from €15 to €22, gourmet dinner and Dinner Show evenings average €55-€85 per person, and after-dinner bottle service tables start from €250-€320 for 4-6 guests.',
+        },
+        {
+          q: 'What is the dress code at Dazi Milano Arco della Pace?',
+          a: 'Smart Elegant attire is recommended for dinner and night events: collared shirts or blazers for men and chic evening looks for women (avoid athletic sportswear).',
+        },
+      ],
+    },
+    it: {
+      tagline: 'Storico Casello Daziario Neoclassico all’Arco della Pace | Ristorante Gourmet, Mixology Bar, Dinner Show & DJ Set',
+      highlights: [
+        'Ospitato nel monumentale casello daziario neoclassico del 1838 firmato Luigi Cagnola in Piazza Sempione 1',
+        'Aperto Martedì – Venerdì 12:00 – 03:00 e Sabato – Domenica 11:00 – 03:00 (Brunch, Aperitivo, Ristorante e Dopocena)',
+        'Evoluzione naturale dalla cucina gourmet contemporanea e mixology d’autore al Dinner Show dal vivo con DJ Set fino alle 03:00',
+        'Dehors affacciato direttamente sull’Arco della Pace e salone vetrato a doppia altezza su Parco Sempione',
+      ],
+      musicStyle: 'Live Dinner Show Cantato, Vocal House, Hit Commerciali e DJ Set Mixology Lounge fino alle 03:00',
+      crowdProfile: '24-45 anni | Pubblico elegante di Corso Sempione, professionisti, moda, cene aziendali, lauree e tavoli VIP',
+      bestNights: 'Venerdì e Sabato Dinner Show + DJ Set, Aperitivo Mixology Mar-Dom e Brunch del Weekend dalle 11:00',
+      nearestMetro: 'M5 Lilla Domodossola / Tre Torri oppure Tram 1 e 10 fermata Arco della Pace (Piazza Sempione 1)',
+      pricingTable: [
+        { zone: 'Aperitivo Mixology Vista Arco (18:00-21:00)', price: '€15 - €22 / persona', details: 'Signature cocktail d’autore con proposte gourmet in Piazza Sempione 1' },
+        { zone: 'Ristorante Gourmet & Dinner Show', price: '€55 - €85 / persona', details: 'Cena servita alla carta o menù degustazione nel salone neoclassico con spettacolo live' },
+        { zone: 'Tavolo VIP Dopocena & Pista', price: '€250 - €450 (4-6 persone)', details: '100% spendibile in bottiglie premium con ingresso prioritario salta-fila' },
+        { zone: 'Capodanno 2027 Red Carpet & Dinner Show', price: '160€ Cenone / 40-50€ Serata', details: 'Menù Terra + Live Show EKI + DJ Set fino alle 05:00 (Tavoli 250€-320€)' },
+      ],
+      insiderTips: [
+        'Chiedi un tavolo vicino alla vetrata monumentale al tramonto per goderti l’illuminazione serale dell’Arco della Pace.',
+        'Il venerdì e il sabato prenotare la cena spettacolo permette di vivere anche il DJ set successivo senza rifare coda all’ingresso.',
+        'Il dress code richiesto la sera è Smart Elegant: camicia o giacca curata per lui, look da sera ricercato per lei.',
+      ],
+      faqs: [
+        {
+          q: 'Dove si trova Dazi Milano e quali sono gli orari di apertura?',
+          a: 'Dazi Milano si trova in Piazza Sempione 1, nello storico casello daziario accanto all’Arco della Pace. È aperto da martedì a venerdì dalle 12:00 alle 03:00 e sabato e domenica dalle 11:00 alle 03:00.',
+        },
+        {
+          q: 'Quanto costa cenare o prenotare un tavolo dopocena da Dazi Milano?',
+          a: 'I cocktail mixology all’aperitivo partono da 15-22€, la cena gourmet con Dinner Show varia tra 55€ e 85€ a persona, mentre i tavoli riservati dopocena partono da 250€-320€ in bottiglie.',
+        },
+        {
+          q: 'Qual è il dress code serale di Dazi Milano all’Arco della Pace?',
+          a: 'Per la cena spettacolo e il dopocena è richiesto un abbigliamento Smart Elegant curato; evitare tute e abbigliamento sportivo.',
+        },
+      ],
+    },
+  },
   'v-pineta': {
     en: {
       tagline: 'Priority #2 Flagship | Milan Iconic Crystal-Chandelier Singing Aperitivo & Reggaeton/Commercial VIP Club',
@@ -1269,7 +1355,7 @@ export default async function ClubPage({ params }: Props) {
       : null);
 
   const isWhatsAppOnlyVenue = [
-    'v-voya', 'v-55milano', 'v-55', 'v-11clubroom', 'v-church81', 'v-mibmilano',
+    'v-voya', 'v-55milano', 'v-55', 'v-11clubroom', 'v-church81', 'v-mibmilano', 'v-dazi',
     'v-gattopardo', 'v-terrazza21', 'v-theclub', 'v-tocqueville', 'v-alcatraz', 'v-fabrique', 'v-amnesia'
   ].includes(venue.id);
 
@@ -1817,7 +1903,7 @@ export default async function ClubPage({ params }: Props) {
             </h2>
             <div data-venue-gallery="true" className="grid grid-cols-2 gap-3 mb-8" data-taste-stagger>
               {gallery.map((src, i) => (
-                <div key={i} className="relative h-40 overflow-hidden bg-[#0B0A09]">
+                <div key={i} className="relative aspect-[4/5] w-full overflow-hidden bg-[#0B0A09]">
                   <Image
                     src={src}
                     alt={[

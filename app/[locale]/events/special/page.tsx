@@ -477,7 +477,7 @@ export default async function SpecialEventsPage({ params }: Props) {
             { src: '/images/pillars/events-special-04.webp', alt: 'Voya Rooftop Milan exclusive party special evening' },
             { src: '/images/pillars/events-special-05.webp', alt: 'Milan luxury nightclub VIP champagne special night' },
           ].map((img, i) => (
-            <div key={i} className="relative h-32 rounded-xl overflow-hidden border border-white/8">
+            <div key={i} className="relative aspect-[4/5] w-full rounded-xl overflow-hidden border border-white/8">
               <Image src={img.src} alt={img.alt} fill quality={92} className="object-cover" sizes="(max-width: 768px) 50vw, 40vw" />
             </div>
           ))}

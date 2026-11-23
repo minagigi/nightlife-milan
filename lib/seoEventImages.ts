@@ -525,6 +525,7 @@ const VENUE_MASTER_KEYS: Record<string, [string, string, string, string]> = {
   'palace-como': ['palace-como-real-01', 'palace-como-real-02', 'palace-como-real-03', 'palace-como-real-04'],
   'ceresio-7': ['ceresio-7-interior-01', 'ceresio-7-interior-02', 'ceresio-7-interior-03', 'ceresio-7-interior-04'],
   'mib': ['mib-milano-interior-01', 'mib-milano-interior-02', 'mib-milano-interior-03', 'mib-milano-interior-04'],
+  'dazi': ['dazi-milano-interior-01', 'dazi-milano-interior-02', 'dazi-milano-interior-03', 'dazi-milano-interior-04'],
   'church-81': ['church-81-interior-01', 'church-81-interior-02', 'church-81-interior-03', 'church-81-interior-04'],
   'mood-live': ['mood-live-garden-01', 'mood-live-garden-02', 'mood-live-garden-03', 'mood-live-garden-04'],
   'bobino': ['bobino-milano', 'bobino-milano-cena-01', 'bobino-milano-live-01', 'bobino-milano-party-01'],
@@ -568,6 +569,7 @@ export function selectMasterAssetKeys(slug: string, venueName = '', categorySlug
   if (s.includes('palace-hotel-como') || s.includes('palace hotel como')) return VENUE_MASTER_KEYS['palace-como'];
   if (s.includes('ceresio')) return VENUE_MASTER_KEYS['ceresio-7'];
   if (s.includes('mib')) return VENUE_MASTER_KEYS['mib'];
+  if (s.includes('dazi')) return VENUE_MASTER_KEYS['dazi'];
   if (s.includes('church')) return VENUE_MASTER_KEYS['church-81'];
   if (s.includes('mood-live') || s.includes('mood live') || s.includes('garden-club') || s.includes('garden club')) return VENUE_MASTER_KEYS['mood-live'];
   if (s.includes('fabrique')) return ['fabrique-milano', 'v-fabrique-2', 'magazzini-generali-interior-02', 'capodanno-cena-cantata-show-flow-01'];

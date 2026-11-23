@@ -26,7 +26,7 @@ export default function EventCoverHero({ src, alt, imageTitle, title, titleNode,
       <div className="border-b border-[#F6F1E7]/14 bg-[#050505]">
         <div className="mx-auto max-w-6xl bg-[#050505]">
           <Image quality={92} src={src} alt={alt} title={imageTitle} width={width} height={height} priority fetchPriority="high" sizes="100vw"
-            className="mx-auto block max-h-[620px] h-auto w-full object-contain" />
+            className="mx-auto block max-h-[680px] h-auto w-full object-contain" />
         </div>
       </div>
       <div className="border-b border-[#F6F1E7]/14 bg-[#0B0A09] px-5 py-8 sm:px-8 sm:py-10">
