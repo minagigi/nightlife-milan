@@ -20,6 +20,11 @@ import { getQcTermeAndSirmioneOverride35 } from '@/lib/capodanno/qcTermeTba35';
 import { getChurch81NyeContent, getFiftyFiveNyeContent } from '@/lib/capodanno/church81And55_35';
 import { getCarlsbergOlNyeContent } from '@/lib/capodanno/carlsbergOl35';
 import {
+  getBeachGardenNyeContent,
+  getFrezzaMilanoNyeContent,
+  getIlMarcheseNyeContent,
+} from '@/lib/capodanno/marcheseFrezzaBeach35';
+import {
   buildFallbackLocalizedEventContent35,
   formatCapodannoHours35,
   formatCapodannoPriceBadge35,
@@ -167,7 +172,7 @@ export {
 
 const CATEGORY_LABELS_BY_LOCALE: Record<string, Record<string, string>> = {
   es: {
-    'capodanno-2027': 'Eventos de Nochevieja en Milán y Lombardía 2027: Los 126 Eventos, Discotecas, Rooftops y Cenas',
+    'capodanno-2027': 'Eventos de Nochevieja en Milán y Lombardía 2027: Los 129 Eventos, Discotecas, Rooftops y Cenas',
     'capodanno-rooftop-milano': 'Nochevieja en Terrazas Rooftop en Milán 2027: Vistas al Duomo y Rascacielos',
     'capodanno-discoteche-milano': 'Nochevieja en Discotecas y Clubs de Milán 2027: Entradas y Mesas VIP',
     'capodanno-locali-cenone-milano': 'Nochevieja con Cena de Gala y Dinner Show en Milán 2027',
@@ -185,7 +190,7 @@ const CATEGORY_LABELS_BY_LOCALE: Record<string, Record<string, string>> = {
     'capodanno-in-piazza': 'Nochevieja en las Plazas de Milán y Lombardía 2027: Conciertos Gratis',
   },
   fr: {
-    'capodanno-2027': 'Événements du Nouvel An à Milan et en Lombardie 2027 : Les 126 Soirées, Clubs et Rooftops',
+    'capodanno-2027': 'Événements du Nouvel An à Milan et en Lombardie 2027 : Les 129 Soirées, Clubs et Rooftops',
     'capodanno-rooftop-milano': 'Nouvel An sur les Rooftops et Terrasses Panoramiques de Milan 2027',
     'capodanno-discoteche-milano': 'Nouvel An en Discothèque et Club à Milan 2027 : Soirées et Tables VIP',
     'capodanno-locali-cenone-milano': 'Réveillon du Nouvel An avec Dîner de Gala et Dinner Show à Milan 2027',
@@ -203,7 +208,7 @@ const CATEGORY_LABELS_BY_LOCALE: Record<string, Record<string, string>> = {
     'capodanno-in-piazza': 'Nouvel An sur les Places de Milan et Lombardie 2027 : Concerts Gratuits',
   },
   de: {
-    'capodanno-2027': 'Silvester-Veranstaltungen in Mailand & Lombardei 2027: Alle 126 Partys, Clubs & Galadinner',
+    'capodanno-2027': 'Silvester-Veranstaltungen in Mailand & Lombardei 2027: Alle 129 Partys, Clubs & Galadinner',
     'capodanno-rooftop-milano': 'Silvester auf Rooftop-Terrassen in Mailand 2027: Dom-Blick & Skyline',
     'capodanno-discoteche-milano': 'Silvester in Clubs und Diskotheken in Mailand 2027: Tickets & VIP-Tische',
     'capodanno-locali-cenone-milano': 'Silvester Galadinner und Dinner-Show in Mailand 2027',
@@ -221,7 +226,7 @@ const CATEGORY_LABELS_BY_LOCALE: Record<string, Record<string, string>> = {
     'capodanno-in-piazza': 'Silvester auf den Plätzen in Mailand 2027: Kostenlose Open-Air-Konzerte',
   },
   pt: {
-    'capodanno-2027': 'Eventos de Réveillon em Milão e Lombardia 2027: Todos os 126 Eventos, Clubs e Rooftops',
+    'capodanno-2027': 'Eventos de Réveillon em Milão e Lombardia 2027: Todos os 129 Eventos, Clubs e Rooftops',
     'capodanno-rooftop-milano': 'Réveillon nos Rooftops e Terraços Panorâmicos de Milão 2027',
     'capodanno-discoteche-milano': 'Réveillon nas Discotecas e Clubs de Milão 2027: Ingressos e Mesas VIP',
     'capodanno-locali-cenone-milano': 'Réveillon com Ceia de Gala e Dinner Show em Milão 2027',
@@ -309,7 +314,7 @@ export function getCapodannoUiCopy(locale: string): CapodannoUiCopy {
       pricesHeadingPrefix: 'Prezzi, Formule e Tavoli VIP',
       bookingHeading: 'Prenota Ora con il Concierge Ufficiale (Zero Commissioni)',
       bookingSubtitle: 'Ricevi subito su WhatsApp, telefono o email il link di prevendita, il menu del Gran Cenone di San Silvestro o la mappa dei tavoli Privé.',
-      backToAllBtn: '← Torna a Tutti i 126 Eventi di Capodanno',
+      backToAllBtn: '← Torna a Tutti i 129 Eventi di Capodanno',
       mapHeadingEvent: 'Mappa, Indirizzo e Come Arrivare',
       relatedHeading: 'Altri Eventi di Capodanno nella Stessa Categoria',
       metaCtaLabel: 'Info e prenotazioni',
@@ -358,7 +363,7 @@ export function getCapodannoUiCopy(locale: string): CapodannoUiCopy {
       pricesHeadingPrefix: 'Prices, Packages & VIP Tables',
       bookingHeading: 'Book Now via Official Concierge (Zero Agency Fees)',
       bookingSubtitle: 'Receive the official ticket link, full New Year’s Eve gala dinner menu, or VIP table floor plan via WhatsApp, phone, or email.',
-      backToAllBtn: '← Back to All 126 NYE Events',
+      backToAllBtn: '← Back to All 129 NYE Events',
       mapHeadingEvent: 'Venue Map, Address & Directions',
       relatedHeading: 'More New Year’s Eve Events in This Category',
       metaCtaLabel: 'Info & bookings',
@@ -403,7 +408,7 @@ export function getCapodannoUiCopy(locale: string): CapodannoUiCopy {
       pricesHeadingPrefix: 'Precios, Paquetes y Mesas VIP',
       bookingHeading: 'Reserva Ahora con el Concierge Oficial (Sin Comisiones)',
       bookingSubtitle: 'Recibe al instante por WhatsApp, teléfono o email el enlace oficial de entradas, el menú de gala o el mapa de mesas VIP.',
-      backToAllBtn: '← Volver a los 126 Eventos de Nochevieja',
+      backToAllBtn: '← Volver a los 129 Eventos de Nochevieja',
       mapHeadingEvent: 'Mapa del Local, Dirección y Cómo Llegar',
       relatedHeading: 'Más Eventos de Nochevieja en Esta Categoría',
       metaCtaLabel: 'Info y reservas',
@@ -442,7 +447,7 @@ export function getCapodannoUiCopy(locale: string): CapodannoUiCopy {
       pricesHeadingPrefix: 'Tarifs, Formules et Tables VIP',
       bookingHeading: 'Réservez via le Concierge Officiel WhatsApp (Zéro Commission)',
       bookingSubtitle: 'Recevez en temps réel par WhatsApp, téléphone ou e-mail les préventes officielles, le menu du réveillon ou le plan des tables VIP.',
-      backToAllBtn: '← Retour aux 126 Événements du Nouvel An',
+      backToAllBtn: '← Retour aux 129 Événements du Nouvel An',
       mapHeadingEvent: 'Carte, Adresse et Accès',
       relatedHeading: 'Autres Soirées du Nouvel An dans Cette Catégorie',
       metaCtaLabel: 'Infos et réservations',
@@ -481,7 +486,7 @@ export function getCapodannoUiCopy(locale: string): CapodannoUiCopy {
       pricesHeadingPrefix: 'Preise, Pakete & VIP-Tische',
       bookingHeading: 'Jetzt über den offiziellen WhatsApp Concierge buchen (Ohne Gebühren)',
       bookingSubtitle: 'Erhalten Sie per WhatsApp, Telefon oder E-Mail den offiziellen Ticketlink, das Galadinner-Menü oder den VIP-Tischplan.',
-      backToAllBtn: '← Zurück zu allen 126 Silvester-Events',
+      backToAllBtn: '← Zurück zu allen 129 Silvester-Events',
       mapHeadingEvent: 'Karte, Adresse & Anfahrt',
       relatedHeading: 'Weitere Silvester-Events in dieser Kategorie',
       metaCtaLabel: 'Infos & Reservierung',
@@ -520,7 +525,7 @@ export function getCapodannoUiCopy(locale: string): CapodannoUiCopy {
       pricesHeadingPrefix: 'Preços, Pacotes e Mesas VIP',
       bookingHeading: 'Reserve Agora pelo Concierge Oficial WhatsApp (Zero Taxas)',
       bookingSubtitle: 'Receba por WhatsApp, telefone ou e-mail o link oficial de ingressos, o menu da ceia de gala ou o mapa de mesas VIP.',
-      backToAllBtn: '← Voltar para Todos os 126 Eventos de Réveillon',
+      backToAllBtn: '← Voltar para Todos os 129 Eventos de Réveillon',
       mapHeadingEvent: 'Mapa do Local, Endereço e Como Chegar',
       relatedHeading: 'Mais Eventos de Réveillon Nesta Categoria',
       metaCtaLabel: 'Info e reservas',
@@ -613,6 +618,11 @@ export function getCapodannoLocalizedCategorySubtitle(
 }
 
 function getOverrideEventContent(slug: string, locale: string): CapodannoLocalizedEventContent | null {
+  if (slug === 'capodanno-il-marchese-milano') return getIlMarcheseNyeContent(locale);
+  if (slug === 'capodanno-frezza-milano-cascina-romana') return getFrezzaMilanoNyeContent(locale);
+  if (slug === 'capodanno-beach-garden-milano') return getBeachGardenNyeContent(locale, 'beach-garden');
+  if (slug === 'capodanno-le-jardin-milano-idroscalo') return getBeachGardenNyeContent(locale, 'le-jardin');
+  if (slug === 'capodanno-mood-live-milano') return getBeachGardenNyeContent(locale, 'mood-live');
   if (slug === 'capodanno-carlsberg-ol-milano') return getCarlsbergOlNyeContent(locale);
   if (slug === 'capodanno-church-81-milano') return getChurch81NyeContent(locale);
   if (slug === 'capodanno-55-milano') return getFiftyFiveNyeContent(locale);

@@ -30,7 +30,7 @@ import {
 const REPO_ROOT = path.resolve(__dirname, '..');
 
 test('T-031, T-032 & WA Audit: Every Capodanno venue has explicit partner boolean; partners = 0% direct, non-partners = 20% at checkout', () => {
-  assert.equal(CAPODANNO_EVENTS.length, 126, `Expected 126 events, got ${CAPODANNO_EVENTS.length}`);
+  assert.equal(CAPODANNO_EVENTS.length, 129, `Expected 129 events, got ${CAPODANNO_EVENTS.length}`);
   const expectedPartners = [
     'capodanno-pineta-milano',
     'capodanno-justme-milano-torre-branca',

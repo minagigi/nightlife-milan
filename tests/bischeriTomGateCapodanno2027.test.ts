@@ -19,6 +19,11 @@ import { CAPODANNO_EVENT_BASE_SLUGS, capodannoEventPath } from '../lib/capodanno
 import { getTomNyeContent } from '../lib/capodanno/tom35';
 import { getChurch81NyeContent, getFiftyFiveNyeContent } from '../lib/capodanno/church81And55_35';
 import { getCarlsbergOlNyeContent } from '../lib/capodanno/carlsbergOl35';
+import {
+  getBeachGardenNyeContent,
+  getFrezzaMilanoNyeContent,
+  getIlMarcheseNyeContent,
+} from '../lib/capodanno/marcheseFrezzaBeach35';
 import { getVenueIdByEventSlug } from '../lib/single-pass/catalog';
 import {
   ALL_35_LOCALES,
@@ -29,9 +34,12 @@ const REPO_ROOT = path.resolve(__dirname, '..');
 const FORBIDDEN_THIRD_PARTY_RE = /331[\s\-]?478[\s\-]?8258|umberto-falcone|perreoxl\.com|origgigallery|gatemilano\.it/i;
 
 test('Capodanno 2027 catalog reconciled cleanly to 126 events (T-032 + WA Audit + Church 81 + Carlsberg Ol + Malpaga Sold Out)', () => {
-  assert.equal(CAPODANNO_EVENT_BASE_SLUGS.length, 126);
-  assert.equal(CAPODANNO_EVENTS.length, 126);
+  assert.equal(CAPODANNO_EVENT_BASE_SLUGS.length, 129);
+  assert.equal(CAPODANNO_EVENTS.length, 129);
   assert.ok(CAPODANNO_EVENT_BASE_SLUGS.includes('capodanno-carlsberg-ol-milano'));
+  assert.ok(CAPODANNO_EVENT_BASE_SLUGS.includes('capodanno-il-marchese-milano'));
+  assert.ok(CAPODANNO_EVENT_BASE_SLUGS.includes('capodanno-frezza-milano-cascina-romana'));
+  assert.ok(CAPODANNO_EVENT_BASE_SLUGS.includes('capodanno-beach-garden-milano'));
   assert.ok(CAPODANNO_EVENT_BASE_SLUGS.includes('capodanno-castello-di-malpaga'));
   assert.ok(CAPODANNO_EVENT_BASE_SLUGS.includes('capodanno-bischeri-milano'));
   assert.ok(CAPODANNO_EVENT_BASE_SLUGS.includes('capodanno-tom-the-ordinary-market-milano'));
@@ -282,5 +290,32 @@ test('capodanno-carlsberg-ol-milano passes 35-locale hygiene, €75 all-in menu 
     const blob = JSON.stringify(cCb);
     assert.doesNotMatch(blob, /!/, `Unexpected exclamation mark in carlsbergOl35 (${locale})`);
     assert.doesNotMatch(blob, /\u2014|335\s*529\s*0025|capodannodimilano|\bstripe\b|commissione|commission/i, `Forbidden token in carlsbergOl35 (${locale})`);
+  }
+});
+
+test('Il Marchese, Frezza Milano & Beach Garden (ex Le Jardin) verified menus, 4:5 assets & 35 locales', () => {
+  const leakRe = /02[\s.-]*84106[\s.-]*534|capodannodimilano|335[\s.-]*529[\s.-]*0025/i;
+  for (const [slug, minPrice, expMenus] of [
+    ['capodanno-il-marchese-milano', 60, 1],
+    ['capodanno-frezza-milano-cascina-romana', 130, 1],
+    ['capodanno-beach-garden-milano', 30, 1],
+    ['capodanno-le-jardin-milano-idroscalo', 30, 1],
+    ['capodanno-mood-live-milano', 30, 1],
+  ] as const) {
+    const ev = getCapodannoEventBySlug(slug);
+    assert.ok(ev, `Missing ${slug}`);
+    assert.equal(ev.priceFromEur, minPrice);
+    assert.equal(ev.partner, false);
+    const posterP = path.join(REPO_ROOT, 'public', ev.image.replace(/^\//, ''));
+    assert.ok(fs.existsSync(posterP), `Missing poster ${posterP}`);
+    assert.ok(fs.statSync(posterP).size <= 300 * 1024);
+
+    for (const loc of ALL_35_LOCALES) {
+      const c = getCapodannoLocalizedEventContent(ev, loc);
+      assert.equal(c.menus?.length, expMenus, `Menus count mismatch for ${slug} in ${loc}`);
+      const blob = JSON.stringify(c);
+      assert.doesNotMatch(blob, leakRe, `Third-party leak in ${slug} (${loc})`);
+      assert.doesNotMatch(blob, /!/, `Exclamation mark in ${slug} (${loc})`);
+    }
   }
 });
