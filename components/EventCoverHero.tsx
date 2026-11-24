@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import type { ReactNode } from 'react';
 import { CalendarDays } from 'lucide-react';
+import { getPublicImageDimensions } from '@/lib/imageDimensions';
 
 type EventCoverHeroProps = {
   src: string;
@@ -19,15 +20,72 @@ type EventCoverHeroProps = {
   eventId: string;
 };
 
-/** Shared full-width approved-cover treatment for the four localized special events. */
-export default function EventCoverHero({ src, alt, imageTitle, title, titleNode, venue, date, dateTimeISO, genres, statusBadge, caption, width, height, eventId }: EventCoverHeroProps) {
+/**
+ * Shared Event Hero component:
+ * - Active 4:5 (1080x1350) posters render in a crisp 4:5 stage (max-w-[540px], >=1080w q=95, zero crop).
+ * - Historical archive posters (e.g. 1376x768 16:9) adapt to their exact intrinsic ratio without cropping or upscaling.
+ */
+export default function EventCoverHero({
+  src,
+  alt,
+  imageTitle,
+  title,
+  titleNode,
+  venue,
+  date,
+  dateTimeISO,
+  genres,
+  statusBadge,
+  caption,
+  width,
+  height,
+  eventId,
+}: EventCoverHeroProps) {
+  const dims = getPublicImageDimensions(src, { width: width || 1080, height: height || 1350 });
+  const isPortrait4x5 = dims.height > dims.width;
+
   return (
     <figure className="border-y border-[#F6F1E7]/14 bg-[#050505]" data-event-cover-hero={eventId}>
       <div className="border-b border-[#F6F1E7]/14 bg-[#050505]">
-        <div className="mx-auto aspect-[4/5] w-full max-w-[540px] bg-[#050505]">
-          <Image quality={92} src={src} alt={alt} title={imageTitle} width={1080} height={1350} priority fetchPriority="high" sizes="(max-width: 768px) 100vw, 540px"
-            className="h-full w-full object-cover" />
-        </div>
+        {isPortrait4x5 ? (
+          <div className="mx-auto aspect-[4/5] w-full max-w-[540px] bg-[#050505]">
+            <Image
+              quality={95}
+              src={src}
+              alt={alt}
+              title={imageTitle}
+              width={dims.width}
+              height={dims.height}
+              priority
+              fetchPriority="high"
+              sizes="(max-width: 1080px) 100vw, 1080px"
+              data-no-lightbox="true"
+              className="h-full w-full object-cover"
+            />
+          </div>
+        ) : (
+          <div
+            className="mx-auto w-full bg-[#050505]"
+            style={{
+              aspectRatio: `${dims.width} / ${dims.height}`,
+              maxWidth: `${Math.min(960, dims.width)}px`,
+            }}
+          >
+            <Image
+              quality={95}
+              src={src}
+              alt={alt}
+              title={imageTitle}
+              width={dims.width}
+              height={dims.height}
+              priority
+              fetchPriority="high"
+              sizes="(max-width: 1024px) 100vw, 1080px"
+              data-no-lightbox="true"
+              className="h-full w-full object-cover"
+            />
+          </div>
+        )}
       </div>
       <div className="border-b border-[#F6F1E7]/14 bg-[#0B0A09] px-5 py-8 sm:px-8 sm:py-10">
         <div className="mx-auto w-full max-w-7xl">

@@ -95,6 +95,7 @@ import { getEventLocalePack } from '@/lib/eventLocalePacks';
 import { buildEventSeoDescription, buildEventSeoTitle, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { CONTACT } from '@/config/contact';
+import { getPublicImageDimensions } from '@/lib/imageDimensions';
 import { compareEventDiscoveryItems, getEventDiscoveryItems } from '@/lib/eventDiscovery';
 import {
   buildEventQuickAnswer,
@@ -205,7 +206,13 @@ function buildCapodannoCategoryMetadata(catId: string, locale: string): Metadata
       type: 'website',
       siteName: 'Nightlife Milan',
       locale: getLocaleDef(locale)?.ogLocale || 'en_US',
-      images: [{ url: `${baseUrl}${heroImage}`, width: 1200, height: 630, alt: title }],
+      images: [
+        {
+          url: `${baseUrl}${heroImage}`,
+          ...getPublicImageDimensions(heroImage, { width: 1080, height: 1350 }),
+          alt: title,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
@@ -432,7 +439,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title,
         description,
         url: canonical,
-        images: [{ url: weeklyEvent.image, width: 1080, height: 1350, alt: title }],
+        images: [
+          {
+            url: weeklyEvent.image.startsWith('http') ? weeklyEvent.image : `${baseUrl}${weeklyEvent.image}`,
+            ...getPublicImageDimensions(weeklyEvent.image, { width: 1080, height: 1350 }),
+            alt: title,
+          },
+        ],
         type: 'website',
         siteName: 'Nightlife Milan',
         locale: locale === 'it' ? 'it_IT' : 'en_US',
@@ -441,7 +454,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         card: 'summary_large_image',
         title,
         description,
-        images: [weeklyEvent.image],
+        images: [weeklyEvent.image.startsWith('http') ? weeklyEvent.image : `${baseUrl}${weeklyEvent.image}`],
         site: '@nightlifemilan',
       },
     };
@@ -515,6 +528,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         ? { width: 900, height: 1600 }
         : { width: 1600, height: 1600 };
 
+  const ogDims = getPublicImageDimensions(
+    image,
+    visualGallery ? socialImageDimensions : { width: 1080, height: 1350 },
+  );
+
   return {
     title,
     description,
@@ -531,8 +549,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: canonical,
       images: [{
         url: absoluteImage,
-        width: visualGallery ? socialImageDimensions.width : 1200,
-        height: visualGallery ? socialImageDimensions.height : 630,
+        width: ogDims.width,
+        height: ogDims.height,
         alt: socialImage?.alt || title,
       }],
       type: 'website',
@@ -688,14 +706,16 @@ export default async function EventPage({ params }: Props) {
 
         <section className="border-b border-white/10 bg-[#050505]">
           <div className="mx-auto max-w-5xl px-4 pt-6 sm:px-6 lg:px-8">
-            <div className="relative mx-auto aspect-[4/5] w-full max-w-[560px] overflow-hidden border border-white/15 bg-[#050505]">
+            <div className="relative mx-auto aspect-[4/5] w-full max-w-[540px] overflow-hidden border border-white/15 bg-[#050505]">
               <Image
                 src={weeklyEvent.image}
                 alt={title}
                 fill
                 quality={95}
                 priority
-                sizes="(max-width: 768px) 100vw, 560px"
+                fetchPriority="high"
+                sizes="(max-width: 1080px) 100vw, 1080px"
+                data-no-lightbox="true"
                 className="object-cover"
                 referrerPolicy="no-referrer"
               />
@@ -985,11 +1005,8 @@ export default async function EventPage({ params }: Props) {
   ].filter(Boolean).join(', ');
   const currentEventPath = `${localePrefix(locale)}/${getLocalizedDir35('events', locale)}/${slug}`;
   const currentEventWaHref = getConciergeBookingUrl(locale, `${title} · ${venueName}`, currentEventPath);
-  const isPastEvent =
-    Date.parse(event.endDateISO || event.dateISO) < Date.parse('2026-11-23T00:00:00Z') ||
-    eventHeroImage.includes('/october-2026/') ||
-    eventHeroImage.includes('/halloween') ||
-    eventHeroImage.includes('/generated/');
+  const heroDims = getPublicImageDimensions(eventHeroImage, { width: 1080, height: 1350 });
+  const isHeroPortrait4x5 = heroDims.height > heroDims.width;
 
   return (
     <>
@@ -1012,16 +1029,25 @@ export default async function EventPage({ params }: Props) {
         {/* Hero Section */}
         <section className="w-full border-b border-[#F6F1E7]/14 bg-[#050505]">
           <div className="mx-auto max-w-7xl px-6 pt-6 md:px-12">
-            <div className={!isPastEvent ? 'mx-auto max-w-[560px]' : 'w-full'}>
-              <div className={`relative w-full overflow-hidden border border-[#F6F1E7]/18 bg-[#050505] ${!isPastEvent ? 'aspect-[4/5]' : 'aspect-[16/9]'}`}>
+            <div
+              className={isHeroPortrait4x5 ? 'mx-auto max-w-[540px]' : 'mx-auto w-full'}
+              style={isHeroPortrait4x5 ? undefined : { maxWidth: `${Math.min(960, heroDims.width)}px` }}
+            >
+              <div
+                className={`relative w-full overflow-hidden border border-[#F6F1E7]/18 bg-[#050505] ${isHeroPortrait4x5 ? 'aspect-[4/5]' : ''}`}
+                style={isHeroPortrait4x5 ? undefined : { aspectRatio: `${heroDims.width} / ${heroDims.height}` }}
+              >
                 <Image
                   src={eventHeroImage}
                   alt={eventVisualGallery?.hero?.alt || eventVisualGallery?.images[0]?.alt || title}
-                  fill
+                  width={heroDims.width}
+                  height={heroDims.height}
                   quality={95}
                   priority={true}
-                  sizes={!isPastEvent ? '(max-width: 768px) 100vw, 560px' : '(max-width: 1280px) 100vw, 1200px'}
-                  className="object-cover"
+                  fetchPriority="high"
+                  sizes={isHeroPortrait4x5 ? '(max-width: 1080px) 100vw, 1080px' : '(max-width: 1024px) 100vw, 1080px'}
+                  data-no-lightbox="true"
+                  className="h-full w-full object-cover"
                   referrerPolicy="no-referrer"
                 />
               </div>
@@ -1152,26 +1178,32 @@ export default async function EventPage({ params }: Props) {
               </section>
             )}
 
-            {leadPoster && (
-              <section className="mt-8" data-event-section="lead-poster">
-                <h2 className="text-2xl font-serif font-bold text-champagne mb-4">{leadPoster.title}</h2>
-                <figure className="not-prose">
-                  <div className={`relative w-full overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] ${!isPastEvent && !leadPoster.src.includes('/generated/') ? 'mx-auto aspect-[4/5] max-w-[560px]' : leadPoster.aspect === 'five-four' ? 'aspect-[5/4]' : leadPoster.aspect === 'landscape' ? 'aspect-[2/1]' : leadPoster.aspect === 'portrait' ? 'aspect-[9/16]' : 'aspect-square'}`}>
-                    <Image
-                      src={leadPoster.src}
-                      alt={leadPoster.alt}
-                      title={leadPoster.title}
-                      fill
-                      unoptimized
-                      priority
-                      sizes="(max-width: 1023px) 100vw, 66vw"
-                      className="object-contain"
-                    />
-                  </div>
-                  {leadPoster.description ? <figcaption className="mt-3 text-sm leading-relaxed text-white/55">{leadPoster.description}</figcaption> : null}
-                </figure>
-              </section>
-            )}
+            {leadPoster && (() => {
+              const leadDims = getPublicImageDimensions(leadPoster.src, { width: 1080, height: 1350 });
+              const isLeadPortrait = leadDims.height > leadDims.width;
+              return (
+                <section className="mt-8" data-event-section="lead-poster">
+                  <h2 className="text-2xl font-serif font-bold text-champagne mb-4">{leadPoster.title}</h2>
+                  <figure className="not-prose">
+                    <div
+                      className={`relative w-full overflow-hidden border border-white/10 bg-white/[0.03] ${leadPoster.aspect === 'five-four' ? 'aspect-[5/4]' : isLeadPortrait ? 'mx-auto aspect-[4/5] max-w-[540px]' : ''}`}
+                      style={leadPoster.aspect === 'five-four' || isLeadPortrait ? undefined : { aspectRatio: `${leadDims.width} / ${leadDims.height}` }}
+                    >
+                      <Image
+                        src={leadPoster.src}
+                        alt={leadPoster.alt}
+                        title={leadPoster.title}
+                        fill
+                        quality={95}
+                        sizes="(max-width: 1080px) 100vw, 1080px"
+                        className="object-contain"
+                      />
+                    </div>
+                    {leadPoster.description ? <figcaption className="mt-3 text-sm leading-relaxed text-white/55">{leadPoster.description}</figcaption> : null}
+                  </figure>
+                </section>
+              );
+            })()}
 
             {performer && (
               <div className="mt-8 p-6 bg-white/[0.03] rounded-lg border border-white/10">

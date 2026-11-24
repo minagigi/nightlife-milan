@@ -148,16 +148,18 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
         {/* Hero Couture Noir */}
         <div className="overflow-hidden border border-[#F6F1E7]/20 bg-[#0B0A09]">
           <div className="grid lg:grid-cols-5">
-            <div className="relative aspect-[4/5] w-full min-w-0 bg-[#050505] lg:col-span-2">
+            <div className="relative mx-auto aspect-[4/5] w-full max-w-[540px] min-w-0 bg-[#050505] lg:col-span-2">
               <Image
-                quality={92}
+                quality={95}
                 src={c.posterSrc}
                 alt={c.title}
                 title={c.title}
                 fill
                 priority
-                sizes="(max-width: 1024px) 100vw, 40vw"
-                className="object-contain"
+                fetchPriority="high"
+                sizes="(max-width: 1080px) 100vw, 1080px"
+                data-no-lightbox="true"
+                className="object-cover"
               />
             </div>
 
@@ -344,16 +346,16 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
                   </span>
                 </div>
               </div>
-              <div className="flex justify-center bg-[#050505]">
-                <img
+              <div className="mx-auto aspect-[4/5] w-full max-w-[540px] bg-[#050505]">
+                <Image
+                  quality={95}
                   src={c.posterSrc}
                   title={seoPack.poster.title}
                   alt={seoPack.poster.alt}
                   width={1080}
                   height={1350}
-                  loading="lazy"
-                  decoding="async"
-                  className="aspect-[4/5] w-full max-w-[500px] object-cover"
+                  sizes="(max-width: 1080px) 100vw, 1080px"
+                  className="h-full w-full object-cover"
                 />
               </div>
               <figcaption className="mt-3 text-xs leading-relaxed text-[#C2B9AA] sm:text-sm">

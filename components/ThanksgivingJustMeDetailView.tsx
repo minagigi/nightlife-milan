@@ -262,7 +262,7 @@ export default function ThanksgivingJustMeDetailView({ locale: rawLocale }: { lo
           </div>
 
           <div className="lg:col-span-5">
-            <div className="overflow-hidden rounded-xl border border-champagne/30 bg-[#050505] p-2">
+            <div className="mx-auto aspect-[4/5] w-full max-w-[540px] overflow-hidden border border-champagne/30 bg-[#050505]">
               <Image
                 src={seoImages.poster.src}
                 alt={seoImages.poster.alt}
@@ -270,9 +270,11 @@ export default function ThanksgivingJustMeDetailView({ locale: rawLocale }: { lo
                 width={1080}
                 height={1350}
                 priority
-                quality={92}
-                sizes="(max-width: 1024px) 100vw, 42vw"
-                className="aspect-[4/5] h-auto w-full rounded-lg object-contain"
+                fetchPriority="high"
+                quality={95}
+                sizes="(max-width: 1080px) 100vw, 1080px"
+                data-no-lightbox="true"
+                className="h-full w-full object-cover"
               />
             </div>
           </div>

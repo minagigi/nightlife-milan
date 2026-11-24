@@ -132,17 +132,31 @@ test('Pillar C: Capodanno Just Me Lago di Garda (250310) + Ritmo x Gate 0 (25184
   assert.ok(oct250310, '250310 Just Me in Rouge NYE must exist in OCTOBER_EVENTS');
   assert.ok(oct251849, '251849 Ritmo x Gate 0 must exist in OCTOBER_EVENTS');
 
-  const sampleImagePaths = new Set<string>();
-  for (const ev of OCTOBER_EVENTS) sampleImagePaths.add(ev.image.src);
-  for (const ev of CAPODANNO_EVENTS) sampleImagePaths.add(getCapodannoOfficialPosterSrc(ev.slug));
-  for (const ev of weeklyEvents) sampleImagePaths.add(ev.image);
+  const activeImagePaths = new Set<string>();
+  const archiveImagePaths = new Set<string>();
+  const todayIso = new Date().toISOString().slice(0, 10);
+  for (const ev of OCTOBER_EVENTS) {
+    const cutoff = (ev.endISO || ev.startISO || '').slice(0, 10);
+    if (cutoff >= todayIso) activeImagePaths.add(ev.image.src);
+    else archiveImagePaths.add(ev.image.src);
+  }
+  for (const ev of CAPODANNO_EVENTS) activeImagePaths.add(getCapodannoOfficialPosterSrc(ev.slug));
+  for (const ev of weeklyEvents) activeImagePaths.add(ev.image);
 
-  for (const imgSrc of sampleImagePaths) {
+  for (const imgSrc of activeImagePaths) {
     assert.ok(imgSrc.startsWith('/images/'), `Unexpected external event image: ${imgSrc}`);
     const absPath = path.join(process.cwd(), 'public', imgSrc.replace(/^\//, ''));
     await access(absPath);
     const meta = await sharp(absPath).metadata();
-    assert.equal(meta.width, 1376, `${imgSrc} width must be 1376`);
-    assert.equal(meta.height, 768, `${imgSrc} height must be 768`);
+    assert.equal(meta.width, 1080, `${imgSrc} active hero width must be 1080`);
+    assert.equal(meta.height, 1350, `${imgSrc} active hero height must be 1350`);
+  }
+  for (const imgSrc of archiveImagePaths) {
+    if (activeImagePaths.has(imgSrc)) continue;
+    assert.ok(imgSrc.startsWith('/images/'), `Unexpected external event image: ${imgSrc}`);
+    const absPath = path.join(process.cwd(), 'public', imgSrc.replace(/^\//, ''));
+    await access(absPath);
+    const meta = await sharp(absPath).metadata();
+    assert.ok((meta.width || 0) >= 1080, `${imgSrc} archive hero width must be >= 1080`);
   }
 });

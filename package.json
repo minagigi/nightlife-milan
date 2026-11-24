@@ -12,7 +12,7 @@
     "test": "tsx --test tests/*.test.ts",
     "events:manifest": "tsx scripts/generate-event-locale-manifest.ts",
     "events:publish:dry": "node scripts/publish-event-locales-batch.mjs --dry-run",
-    "images:verify": "node scripts/verify-images.mjs",
+    "images:verify": "node scripts/generate-image-dimensions-manifest.mjs && node scripts/verify-images.mjs",
     "verify": "npm run images:verify && npm run typecheck && npm run test && npm run build",
     "indexnow:dry": "node scripts/submit-indexnow.mjs",
     "indexnow:submit": "node scripts/submit-indexnow.mjs --submit"

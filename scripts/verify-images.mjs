@@ -46,6 +46,10 @@ for (const sub of ['app', 'components']) {
 }
 
 const invPath = path.join(root, 'lib', 'october-events', 'inventory.json');
+const manifestPath = path.join(root, 'lib', 'imageDimensionsManifest.json');
+const dimsManifest = fs.existsSync(manifestPath) ? JSON.parse(fs.readFileSync(manifestPath, 'utf8')) : {};
+const todayIso = new Date().toISOString().slice(0, 10);
+
 const inv = JSON.parse(fs.readFileSync(invPath, 'utf8'));
 const events = Array.isArray(inv) ? inv : inv.events || [];
 for (const ev of events) {
@@ -61,6 +65,13 @@ for (const ev of events) {
     const stat = fs.existsSync(disk) ? fs.statSync(disk) : null;
     if (!stat || stat.size < 512 || stat.size > 300_000) {
       errors.push(`inventory.json (${evLabel}): poster mancante/fuori budget (${stat ? stat.size : 0}B) -> ${ev.image.src}`);
+    }
+    const cutoff = ev.endISO || ev.startISO || '';
+    if (cutoff >= todayIso) {
+      const dims = dimsManifest[ev.image.src];
+      if (!dims || dims[0] !== 1080 || dims[1] !== 1350) {
+        errors.push(`inventory.json (${evLabel}): evento attivo/futuro non 1080x1350 (${dims ? dims.join('x') : 'missing'}) -> ${ev.image.src}`);
+      }
     }
   }
 }

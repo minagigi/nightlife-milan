@@ -100,8 +100,8 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
         contentUrl: `${baseUrl}${ORTHODOX_NYE_JUSTME_SILVER_MENU_SRC}`,
         name: c.silverMenuAlt,
         caption: c.silverMenuAlt,
-        width: 1376,
-        height: 768,
+        width: 1080,
+        height: 1350,
       },
       {
         '@type': 'ImageObject',
@@ -109,8 +109,8 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
         contentUrl: `${baseUrl}${ORTHODOX_NYE_JUSTME_GOLD_MENU_SRC}`,
         name: c.goldMenuAlt,
         caption: c.goldMenuAlt,
-        width: 1376,
-        height: 768,
+        width: 1080,
+        height: 1350,
       },
     ],
     location: {
@@ -220,16 +220,18 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
 
         {/* Hero Section */}
         <section className="overflow-hidden border border-[#24242C] bg-[#0B0C10]">
-          <div className="relative mx-auto aspect-[4/5] w-full max-w-[560px] bg-[#070709]">
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-[540px] bg-[#070709]">
             <Image
               src={ORTHODOX_NYE_JUSTME_POSTER_SRC}
               alt={imagePack.poster.alt}
               title={imagePack.poster.title}
               fill
               priority
-              quality={92}
-              sizes="(max-width: 1200px) 100vw, 560px"
-              className="object-contain"
+              fetchPriority="high"
+              quality={95}
+              sizes="(max-width: 1080px) 100vw, 1080px"
+              data-no-lightbox="true"
+              className="object-cover"
             />
           </div>
 
@@ -393,8 +395,8 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
                   alt={c.silverMenuAlt}
                   title={c.silverMenuAlt}
                   fill
-                  quality={85}
-                  sizes="(max-width: 1024px) 100vw, 540px"
+                  quality={92}
+                  sizes="(max-width: 1080px) 100vw, 1080px"
                   className="object-contain"
                 />
               </div>
@@ -440,8 +442,8 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
                   alt={c.goldMenuAlt}
                   title={c.goldMenuAlt}
                   fill
-                  quality={85}
-                  sizes="(max-width: 1024px) 100vw, 540px"
+                  quality={92}
+                  sizes="(max-width: 1080px) 100vw, 1080px"
                   className="object-contain"
                 />
               </div>
@@ -603,8 +605,8 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
                     alt={shot.alt}
                     title={shot.title}
                     fill
-                    quality={85}
-                    sizes="(max-width: 768px) 100vw, 540px"
+                    quality={92}
+                    sizes="(max-width: 1080px) 100vw, 1080px"
                     className="object-cover"
                   />
                 </div>

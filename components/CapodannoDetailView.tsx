@@ -313,14 +313,17 @@ export default function CapodannoDetailView({ locale, event }: Props) {
         <div className="overflow-hidden border border-[#F6F1E7]/18 bg-[#0B0A09]">
           <div className="border-b border-[#F6F1E7]/14 bg-[#050505]">
             <div className="mx-auto aspect-[4/5] w-full max-w-[540px] bg-[#050505]">
-              <img
+              <Image
+                quality={95}
                 src={seoPack.poster.src}
                 title={seoPack.poster.title}
                 alt={seoPack.poster.alt}
                 width={1080}
                 height={1350}
-                loading="eager"
-                decoding="async"
+                priority
+                fetchPriority="high"
+                sizes="(max-width: 1080px) 100vw, 1080px"
+                data-no-lightbox="true"
                 className="h-full w-full object-cover"
               />
             </div>
@@ -633,14 +636,14 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 </div>
               </div>
               <div className="mx-auto aspect-[4/5] w-full max-w-[540px] bg-[#050505]">
-                <img
+                <Image
+                  quality={95}
                   src={seoPack.poster.src}
                   title={seoPack.poster.title}
                   alt={seoPack.poster.alt}
                   width={1080}
                   height={1350}
-                  loading="lazy"
-                  decoding="async"
+                  sizes="(max-width: 1080px) 100vw, 1080px"
                   className="h-full w-full object-cover"
                 />
               </div>
