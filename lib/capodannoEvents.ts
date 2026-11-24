@@ -1045,7 +1045,6 @@ export const PARTNER_CAPODANNO_SLUGS = new Set<string>([
   'capodanno-justme-milano-torre-branca',
   'capodanno-justme-garda-lake',
   'capodanno-aria-club-milano',
-  'capodanno-voya-rooftop-milano',
   'capodanno-55-milano',
   'capodanno-repvblic-milano',
   'capodanno-il-gattopardo-milano',
@@ -1221,7 +1220,7 @@ const UNSORTED_CAPODANNO_EVENTS: CapodannoEventItem[] = SEEDS.map((rawSeed: any[
         : slug === 'capodanno-pineta-milano'
           ? 'Listino ufficiale Moulin Rouge Pineta Milano 2027 & Xceed (nightlifemilan-1): Royal Buffet 40€ (20:30), Solo Discoteca 40€ (23:00), Cena di Gala 160€ (21:00) e Tavoli VIP 300€–1.500€. Prepagamento 100% dopo conferma disponibilità via Concierge WhatsApp +39 351 912 7047.'
           : slug === 'capodanno-voya-rooftop-milano'
-            ? 'Listino ufficiale confermato Voya Rooftop Milan (20° Piano, Viale Achille Papa 30): tariffa unica 300€ a persona (Menu 6 portate + Cotechino e Lenticchie dopo la mezzanotte, 1 bottiglia di vino ogni 4 persone, brindisi di mezzanotte e acqua). Prepagamento 100% dopo conferma disponibilità via Concierge WhatsApp +39 351 912 7047.'
+            ? 'Listino ufficiale confermato Voya Rooftop Milan (20° Piano, Viale Achille Papa 30): tariffa unica 300€ a persona (Menu 6 portate + Cotechino e Lenticchie dopo la mezzanotte, 1 bottiglia di vino ogni 4 persone, brindisi di mezzanotte e acqua). Prenotazione online diretta (+20% Booking & Transaction Fees al checkout) o Concierge WhatsApp +39 351 912 7047.'
             : slug === 'capodanno-repvblic-milano'
               ? 'Listino ufficiale confermato 2026/2027 REPVBLIC Milano (Piazza della Repubblica, 12): Early Bird 45€ (flûte brindisi di mezzanotte + 1 drink inclusi), Tavolo Zona Dancefloor 600€ (6 persone) e Tavolo Zona Privé 1.200€ (10 persone). Ingresso dalle 23:00 fino al mattino. Prenotazioni via Concierge WhatsApp +39 351 912 7047.'
               : slug === 'capodanno-bischeri-milano'
@@ -1281,7 +1280,7 @@ const UNSORTED_CAPODANNO_EVENTS: CapodannoEventItem[] = SEEDS.map((rawSeed: any[
         : slug === 'capodanno-pineta-milano'
           ? 'Official Moulin Rouge Pineta Milano 2027 & Xceed rate card (nightlifemilan-1): Royal Buffet €40 (20:30), Club Entry €40 (23:00), Gala Dinner €160 (21:00), and VIP Tables €300–€1,500. 100% prepayment after availability check via WhatsApp Concierge +39 351 912 7047.'
           : slug === 'capodanno-voya-rooftop-milano'
-            ? 'Confirmed official Voya Rooftop Milan (20th Floor, Viale Achille Papa 30) rate card: single €300 per person rate (6-course gala menu + After-Midnight Cotechino & Lentils, 1 bottle of wine every 4 people, midnight toast & water). 100% prepayment after availability check via WhatsApp Concierge +39 351 912 7047.'
+            ? 'Confirmed official Voya Rooftop Milan (20th Floor, Viale Achille Papa 30) rate card: single €300 per person rate (6-course gala menu + After-Midnight Cotechino & Lentils, 1 bottle of wine every 4 people, midnight toast & water). Direct online booking (+20% Booking & Transaction Fees at checkout) or WhatsApp Concierge +39 351 912 7047.'
             : slug === 'capodanno-repvblic-milano'
               ? 'Confirmed official 2026/2027 REPVBLIC Milano rate card (Piazza della Repubblica, 12): Early Bird €45 (midnight toast flûte + 1 drink included), Dancefloor Table €600 (6 guests), and Privé VIP Table €1,200 (10 guests). Doors open 23:00 till morning. Official bookings via WhatsApp Concierge +39 351 912 7047.'
               : slug === 'capodanno-bischeri-milano'

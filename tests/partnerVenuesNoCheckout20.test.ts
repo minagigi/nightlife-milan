@@ -34,12 +34,11 @@ import {
 
 const REPO_ROOT = path.resolve(__dirname, '..');
 
-const SIX_PARTNER_CAPODANNO_SLUGS = [
+const FIVE_PARTNER_CAPODANNO_SLUGS = [
   'capodanno-justme-milano-torre-branca',
   'capodanno-justme-garda-lake',
   'capodanno-pineta-milano',
   'capodanno-aria-club-milano',
-  'capodanno-voya-rooftop-milano',
   'capodanno-55-milano',
 ] as const;
 
@@ -48,13 +47,12 @@ const EXCLUDED_INVENTORY_VENUE_IDS = new Set([
   'v-justme-garda',
   'v-pineta',
   'v-aria',
-  'v-voya',
   'v-55',
   'v-55milano',
 ]);
 
-test('6 partner venues Capodanno & holiday event pages have zero direct internal checkout and zero +20% fee', () => {
-  for (const slug of SIX_PARTNER_CAPODANNO_SLUGS) {
+test('5 partner venues Capodanno & holiday event pages have zero direct internal checkout, while Voya applies +20% Booking & Transaction Fees', () => {
+  for (const slug of FIVE_PARTNER_CAPODANNO_SLUGS) {
     const ev = CAPODANNO_EVENTS.find((e) => e.slug === slug);
     assert.ok(ev, `Missing Capodanno event: ${slug}`);
     assert.equal(ev.partner, true, `Expected partner=true on ${slug}`);
@@ -62,8 +60,22 @@ test('6 partner venues Capodanno & holiday event pages have zero direct internal
     assert.equal(getVenueIdByEventSlug(slug), null, `Expected null direct checkout venue on ${slug}`);
   }
 
+  // User rule (24 Nov 2026): Voya Rooftop is NOT treated economically as a partner venue on nightlifemilan.com (+20% fee)
+  const voyaEv = CAPODANNO_EVENTS.find((e) => e.slug === 'capodanno-voya-rooftop-milano');
+  assert.ok(voyaEv, 'Missing capodanno-voya-rooftop-milano');
+  assert.equal(voyaEv.partner, false, 'Expected partner=false on capodanno-voya-rooftop-milano');
+  assert.equal(isPartnerCapodannoSlug('capodanno-voya-rooftop-milano'), false);
+  assert.equal(getVenueIdByEventSlug('capodanno-voya-rooftop-milano'), 'voya');
+  assert.equal(getVenueIdByEventSlug('christmas-voya-rooftop-milan-2026'), 'voya-christmas');
+  const voyaSku = SINGLE_PASS_SKUS.find((s) => s.venueId === 'voya');
+  const voyaXmasSku = SINGLE_PASS_SKUS.find((s) => s.venueId === 'voya-christmas');
+  assert.ok(voyaSku && voyaXmasSku);
+  assert.equal(isCheckoutItemAllowed(voyaSku, 'venue').ok, true);
+  assert.equal(isCheckoutItemAllowed(voyaXmasSku, 'venue').ok, true);
+  assert.equal(getSkuFeeRate(voyaSku, 'venue'), SINGLE_PASS_FEE_RATE);
+  assert.equal(getSkuFeeRate(voyaXmasSku, 'venue'), SINGLE_PASS_FEE_RATE);
+
   for (const specialSlug of [
-    'christmas-voya-rooftop-milan-2026',
     'orthodox-new-year-justme-milan-2027',
     ...Object.values(THANKSGIVING_JUSTME_SLUGS_35),
     ...Object.values(PARTENOPEA_JUSTME_SLUGS_35),
@@ -76,7 +88,7 @@ test('6 partner venues Capodanno & holiday event pages have zero direct internal
   }
 });
 
-test('All inventory.json events (regular, dated, Capodanno dupes) for the 6 partner venues block internal checkout SKUs', () => {
+test('All inventory.json events (regular, dated, Capodanno dupes) for the 5 partner venues block internal checkout SKUs', () => {
   const nowMs = Date.parse('2026-11-20T00:00:00Z');
   const partnerInventoryEvents = OCTOBER_EVENTS.filter((ev) =>
     EXCLUDED_INVENTORY_VENUE_IDS.has(ev.venue.id),
@@ -127,18 +139,20 @@ test('Aria weekly events have no expired/404 Xceed links and fall back cleanly t
   }
 });
 
-test('Detail views strip SinglePassVenueModule/#official-tickets-ecommerce and keep valid Partenopea/Thanksgiving routing', () => {
+test('Detail views strip SinglePassVenueModule/#official-tickets-ecommerce on JustMe partner views while Voya Christmas mounts +20% checkout', () => {
   for (const rel of [
     'components/ThanksgivingJustMeDetailView.tsx',
     'components/PartenopeaJustMeDetailView.tsx',
     'components/OrthodoxNyeJustMeDetailView.tsx',
-    'components/ChristmasVoyaDetailView.tsx',
   ]) {
     const src = fs.readFileSync(path.join(REPO_ROOT, rel), 'utf8');
     assert.equal(src.includes('SinglePassVenueModule'), false, `${rel} must not use SinglePassVenueModule`);
     assert.equal(src.includes('official-tickets-ecommerce'), false, `${rel} must not link #official-tickets-ecommerce`);
     assert.equal(/\bstripe\b/i.test(src), false, `${rel} must never mention Stripe`);
   }
+  const xmasVoyaSrc = fs.readFileSync(path.join(REPO_ROOT, 'components/ChristmasVoyaDetailView.tsx'), 'utf8');
+  assert.equal(xmasVoyaSrc.includes('SinglePassVenueModule'), true, 'ChristmasVoyaDetailView.tsx must mount SinglePassVenueModule (+20% fee)');
+  assert.equal(/\bstripe\b/i.test(xmasVoyaSrc), false, 'ChristmasVoyaDetailView.tsx must never mention Stripe');
 
   for (const guardRel of [
     'app/api/single-pass/checkout/route.ts',

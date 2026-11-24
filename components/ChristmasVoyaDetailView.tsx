@@ -2,6 +2,8 @@ import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
 import SeoAuthorityHub from '@/components/SeoAuthorityHub';
 import EventVenueMap from '@/components/EventVenueMap';
+import SinglePassVenueModule from '@/components/single-pass/SinglePassVenueModule';
+import { getSinglePassCopy } from '@/lib/single-pass/i18n35';
 import { SITE_CONTACT } from '@/config/contact';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { localePrefix, type LocaleCode } from '@/lib/i18n/locales';
@@ -32,6 +34,7 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
   const paymentTerms = getPaymentTerms35(locale);
   const scarcity = getScarcityAndChatCopy(locale);
   const venueMapCopy = getEventVenueCopy(loc);
+  const singlePassCopy = getSinglePassCopy(locale);
 
   const canonicalPath = christmasVoyaPath(locale);
   const fullCanonicalUrl = `${SITE_URL}${canonicalPath}`;
@@ -341,7 +344,7 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
                   </span>
                 </div>
               </div>
-              <div className="flex justify-center bg-[#050505] p-2">
+              <div className="flex justify-center bg-[#050505]">
                 <img
                   src={c.posterSrc}
                   title={seoPack.poster.title}
@@ -350,7 +353,7 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
                   height={1350}
                   loading="lazy"
                   decoding="async"
-                  className="aspect-[4/5] max-h-[640px] w-auto max-w-full object-contain"
+                  className="aspect-[4/5] w-full max-w-[500px] object-cover"
                 />
               </div>
               <figcaption className="mt-3 text-xs leading-relaxed text-[#C2B9AA] sm:text-sm">
@@ -398,7 +401,7 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
 
                 <figure
                   data-menu-preview="/images/events/christmas-2026-menus/voya-natale-2026-menu-it.webp"
-                  className="flex flex-col items-center justify-center border border-[#F6F1E7]/15 bg-[#0B0A09] p-3"
+                  className="flex flex-col items-center justify-center border border-[#F6F1E7]/15 bg-[#0B0A09]"
                 >
                   <img
                     src={c.menuImageSrc}
@@ -408,7 +411,7 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
                     height={1350}
                     loading="lazy"
                     decoding="async"
-                    className="aspect-[4/5] max-h-[580px] w-auto max-w-full object-contain"
+                    className="aspect-[4/5] w-full max-w-[460px] object-cover"
                   />
                 </figure>
               </div>
@@ -488,8 +491,13 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
                 <p className="mt-2.5 text-sm leading-relaxed text-[#24201B]">
                   {c.priceCardDetails}
                 </p>
+                <p className="mt-2 text-xs font-bold text-[#5C4415]" data-checkout-fee-note>
+                  {singlePassCopy.feeCalculatedAtCheckoutNote}
+                </p>
               </div>
             </div>
+
+            <SinglePassVenueModule locale={locale} venueId="voya-christmas" />
 
             {/* Official 6-Step Prepayment & Booking Protocol */}
             <section

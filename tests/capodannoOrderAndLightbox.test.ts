@@ -53,8 +53,9 @@ test('Capodanno 2027 ordering places all 18 Axel/Garda/Gattopardo partner venues
   assert.equal(getCapodannoPriorityRank('capodanno-justme-garda-lake', 'lombardia'), -1);
   assert.equal(getCapodannoEventsForMode('lombardia')[0].slug, 'capodanno-justme-garda-lake');
 
-  // Fee-exemption set stays strictly untouched (11 slugs)
-  assert.equal(PARTNER_CAPODANNO_SLUGS.size, 11);
+  // Fee-exemption set has 10 partner slugs (Voya removed 24 Nov 2026: applies +20% Booking & Transaction Fees)
+  assert.equal(PARTNER_CAPODANNO_SLUGS.size, 10);
+  assert.equal(PARTNER_CAPODANNO_SLUGS.has('capodanno-voya-rooftop-milano'), false);
 });
 
 test('GlobalSearch and OctoberEntry follow Capodanno partner-first priority without duplicate numbering', () => {

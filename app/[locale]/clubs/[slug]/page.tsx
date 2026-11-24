@@ -1640,13 +1640,13 @@ export default async function ClubPage({ params }: Props) {
 
           {/* Editorial Deep-Dive Dossier — NYE 2027 Warm Ivory Architectural Feature */}
           {openCapEvent && (() => {
+            const capContent = getCapodannoLocalizedEventContent(openCapEvent, locCode);
             const capTitle = getCapodannoLocalizedEventTitle(openCapEvent, locCode);
-            const capSummary = getCapodannoLocalizedEventContent(openCapEvent, locCode).priceSummary;
+            const capSummary = capContent.priceSummary;
             const capHref = capodannoEventPath(openCapEvent.slug, locCode);
-            const badgeText =
-              openCapEvent.partner || venue.isManaged
-                ? nyeBannerCopy.partnerBadge
-                : nyeBannerCopy.eventBadge;
+            const badgeText = openCapEvent.partner
+              ? nyeBannerCopy.partnerBadge
+              : nyeBannerCopy.eventBadge;
             return (
               <section className="p-6 sm:p-8 bg-[#F6F1E7] text-[#050505]" data-taste-reveal>
                 <h2 className="text-xl md:text-2xl font-display font-bold text-[#050505] mb-2">
@@ -1658,6 +1658,56 @@ export default async function ClubPage({ params }: Props) {
                 <p className="text-[15px] text-[#1F1C18] leading-relaxed mb-6">
                   {capSummary}
                 </p>
+                {capContent.menus && capContent.menus.length > 0 && (
+                  <div
+                    data-official-menus
+                    data-lightbox-group="club-capodanno-menus"
+                    className="mb-6 border border-[#050505]/20 bg-[#0B0A09] p-5 text-[#F6F1E7]"
+                  >
+                    <h3 className="font-display text-xl font-bold text-[#F6F1E7]">
+                      {capContent.menusHeading || capContent.menus[0].title}
+                    </h3>
+                    <div className="mt-4 space-y-6">
+                      {capContent.menus.map((menu) => (
+                        <div key={menu.id} className="grid gap-6 lg:grid-cols-2 lg:items-start">
+                          <div>
+                            <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-white/15 pb-2.5">
+                              <span className="font-semibold text-sm text-[#EAE3D5]">{menu.title}</span>
+                              <span className="bg-[#EAE3D5] px-2.5 py-0.5 text-xs font-bold uppercase text-[#050505]">
+                                {menu.price}
+                              </span>
+                            </div>
+                            <dl className="mt-3 space-y-2 text-sm">
+                              {menu.courses.map((c) => (
+                                <div key={`${menu.id}-${c.course}`} className="border-b border-white/10 pb-1.5 last:border-0">
+                                  <dt className="text-xs font-bold uppercase tracking-wider text-[#EAE3D5]">{c.course}</dt>
+                                  <dd className="mt-0.5 text-sm leading-relaxed text-[#F6F1E7]">{c.dish}</dd>
+                                </div>
+                              ))}
+                            </dl>
+                            <p className="mt-3 border border-white/15 bg-[#050505] p-3 text-xs font-medium text-[#C2B9AA]">
+                              {menu.beverages}
+                            </p>
+                          </div>
+                          {menu.imageSrc && (
+                            <div className="flex justify-center">
+                              <img
+                                src={menu.imageSrc}
+                                alt={menu.imageAlt}
+                                title={menu.title}
+                                width={1080}
+                                height={1350}
+                                loading="lazy"
+                                decoding="async"
+                                className="aspect-[4/5] w-full max-w-[400px] object-cover"
+                              />
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
                 <div className="flex flex-wrap gap-3">
                   <Link
                     href={capHref}

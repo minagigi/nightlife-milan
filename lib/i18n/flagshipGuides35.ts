@@ -1,6 +1,7 @@
 import type { LocaleCode } from './localeRegistry';
 import { ALL_35_LOCALES } from './localizedSlugs35';
 import type { Guide } from '../types';
+import { renderVoyaNyeMenuEditorialHtml } from '../capodanno/voya35';
 
 export interface GuideUiLabels35 {
   home: string;
@@ -1861,7 +1862,9 @@ export function applyFlagshipGuides35(guides: Guide[]): void {
       (guide.sections || []).forEach((sec, idx) => {
         const name = `${idx + 1}. ${secTitles[idx] || secTitles[idx % secTitles.length]}`;
         (sec.heading as Record<string, string>)[loc] = name;
-        (sec.content as Record<string, string>)[loc] = buildLocalizedSectionHtml(topic, name, idx, loc);
+        const extraVoyaMenu =
+          guide.id === 'g-new-years-eve-2027' && idx === 1 ? renderVoyaNyeMenuEditorialHtml(loc) : '';
+        (sec.content as Record<string, string>)[loc] = buildLocalizedSectionHtml(topic, name, idx, loc) + extraVoyaMenu;
       });
 
       (guide.faqs || []).forEach((faq, idx) => {

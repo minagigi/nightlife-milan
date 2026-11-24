@@ -213,7 +213,7 @@ export const SINGLE_PASS_VENUES: readonly SinglePassVenueSpec[] = [
   {
     id: 'voya',
     eventSlug: 'capodanno-voya-rooftop-milano',
-    partner: true,
+    partner: false,
     name: 'Voya Rooftop Milan (20° Piano)',
     taglineIt: 'Rooftop Skyline 300€ All-Inclusive · Cenone 6 Portate a 85m & Vista Fuochi 360°',
     taglineEn: 'Rooftop Skyline €300 All-Inclusive · 6-Course Gala Dinner at 85m & 360° Fireworks View',
@@ -255,7 +255,7 @@ export const SINGLE_PASS_VENUES: readonly SinglePassVenueSpec[] = [
   {
     id: 'voya-christmas',
     eventSlug: 'christmas-voya-rooftop-milan-2026',
-    partner: true,
+    partner: false,
     name: 'Natale 2026 @ Voya Rooftop Milano',
     taglineIt: '25 Dicembre 2026 · Menu Ufficiale di Natale 5 Portate al 20° Piano (100€)',
     taglineEn: 'December 25, 2026 · Official 5-Course Christmas Menu on the 20th Floor (€100)',
@@ -3799,11 +3799,9 @@ export const SINGLE_PASS_ONLY_VENUE_IDS = new Set<SinglePassVenueId>([
   'justme',
   'justme-garda',
   'pineta',
-  'voya',
 ]);
 
 export const DISABLED_DIRECT_CHECKOUT_VENUE_IDS = new Set<SinglePassVenueId>([
-  'voya-christmas',
   'justme-orthodox',
   'justme-thanksgiving',
   'justme-partenopea',
@@ -3814,12 +3812,11 @@ export const DIRECT_CHECKOUT_EXCLUDED_INVENTORY_VENUE_IDS = new Set<string>([
   'v-justme-garda',
   'v-pineta',
   'v-aria',
-  'v-voya',
   'v-55',
   'v-55milano',
 ]);
 
-const DIRECT_CHECKOUT_EXCLUDED_VENUE_NAME_RE = /\b(just\s*me|pineta|aria\s+club|voya|55\s*milano)\b/i;
+const DIRECT_CHECKOUT_EXCLUDED_VENUE_NAME_RE = /\b(just\s*me|pineta|aria\s+club|55\s*milano)\b/i;
 
 export function isDirectCheckoutExcludedInventoryVenue(
   event: Pick<OctoberEventRecord, 'venue'> | undefined,
@@ -3863,6 +3860,8 @@ const EVENT_SLUG_TO_VENUE_ID: Record<string, SinglePassVenueId> = {
   'capodanno-repvblic-milano': 'repvblic',
   'capodanno-bischeri-milano': 'bischeri',
   'capodanno-bobino-milano': 'bobino',
+  'capodanno-voya-rooftop-milano': 'voya',
+  'christmas-voya-rooftop-milan-2026': 'voya-christmas',
   'capodanno-terrazza-duomo-21': 'terrazza-duomo-21',
   'capodanno-stk-milan': 'stk-milan',
   'capodanno-radio-rooftop-milano': 'radio-rooftop',

@@ -33,6 +33,7 @@ import {
 } from '@/components/NightlifeExpansionModules';
 import VerticalHubsAndEventsSection from '@/components/VerticalHubsAndEventsSection';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
+import { getVoyaNyeContent } from '@/lib/capodanno/voya35';
 import { getPaymentTerms35 } from '@/lib/capodanno/paymentTerms35';
 import { capodannoEventPath } from '@/lib/capodanno/routes';
 import { christmasVoyaPath } from '@/lib/christmas/voya35';
@@ -255,22 +256,22 @@ const NYE_CLUBS = [
     rank: 5,
     anchorId: 'nye-voya-rooftop',
     slug: 'voya-rooftop-milan',
-    priorityBadgeIt: '#5 Priorità · 20° Piano Vista Fuochi d Artificio a 360°',
-    priorityBadgeEn: '#5 Priority · 20th Floor 360° Fireworks Skyline View',
-    nameIt: '5. Voya Rooftop Milan (Viale Achille Papa 30, 20° Piano: Capodanno a 85 Metri Vista Fuochi · €300 All-Inclusive)',
-    nameEn: '5. Voya Rooftop Milan (Viale Achille Papa 30, 20th Floor: NYE at 85m Overlooking Fireworks · €300 All-Inclusive)',
+    priorityBadgeIt: 'Top Rooftop · 20° Piano Vista Fuochi a 360°',
+    priorityBadgeEn: 'Top Rooftop · 20th Floor 360° Fireworks Skyline View',
+    nameIt: '5. Voya Rooftop Milan (Viale Achille Papa 30, 20° Piano: Capodanno a 85 Metri Vista Fuochi · €300)',
+    nameEn: '5. Voya Rooftop Milan (Viale Achille Papa 30, 20th Floor: NYE at 85m Overlooking Fireworks · €300)',
     address: 'Viale Achille Papa, 30 (20° Piano, Portello / CityLife / Isola) - 20149 Milano',
     formulasIt:
-      'Tariffa Unica Confermata All-Inclusive — 300€ a persona (Menù 6 portate + Cotechino e Lenticchie dopo mezzanotte, 1 bottiglia di vino ogni 4 persone, brindisi e acqua)',
+      'Tariffa Unica Confermata: 300€ a persona (+20% Booking & Transaction Fees al checkout online · Menù 6 portate + Cotechino e Lenticchie dopo mezzanotte, 1 bottiglia di vino ogni 4 persone, brindisi e acqua)',
     formulasEn:
-      'Single Confirmed All-Inclusive Rate — €300 per person (6-course tasting + Post-Midnight Cotechino & Lentils, 1 bottle of wine every 4 guests, midnight toast & water)',
-    fireworksVibeIt: 'L unico 20° piano con vetrate a tutta altezza da cui vedere simultaneamente i fuochi di tutta Milano',
-    fireworksVibeEn: 'The only 20th-floor floor-to-ceiling glass sky lounge with a 360-degree view of Milans midnight fireworks',
+      'Single Confirmed Rate: €300 per person (+20% Booking & Transaction Fees at online checkout · 6-course tasting + After-Midnight Cotechino & Lentils, 1 bottle of wine every 4 guests, midnight toast & water)',
+    fireworksVibeIt: 'L’unico 20° piano con vetrate a tutta altezza da cui vedere simultaneamente i fuochi di tutta Milano',
+    fireworksVibeEn: 'The only 20th-floor floor-to-ceiling glass sky lounge with a 360-degree view of Milan’s midnight fireworks',
     image: '/images/events/capodanno-2027-posters/capodanno-voya-rooftop-milano.webp',
     descriptionIt:
-      'Vivere il conto alla rovescia del 31 Dicembre al 20° piano di Voya Rooftop Milan (#5 Priorità, Viale Achille Papa 30) a 85 metri d’altezza è un’esperienza visiva impareggiabile: dalle immense vetrate a 360 gradi ammiri i fuochi d’artificio di tutta Milano mentre festeggi con Restaurant & DJ Set. Tariffa ufficiale confermata: 300€ a persona tutto incluso (menù completo 6 portate, cotechino e lenticchie dopo la mezzanotte, 1 bottiglia di vino ogni 4 ospiti, acqua e brindisi di mezzanotte). Disponibile anche il Pranzo di Natale Voya (25 Dicembre 2026, 100€ a persona).',
+      'Vivere il conto alla rovescia del 31 Dicembre al 20° piano di Voya Rooftop Milan (Viale Achille Papa 30, a 85 metri d’altezza) offre una visuale a 360 gradi sui fuochi d’artificio di tutta Milano con Restaurant & DJ Set fino alle 05:00. Tariffa ufficiale confermata: 300€ a persona (+20% Booking & Transaction Fees al checkout online) comprensiva di menù completo 6 portate, cotechino con lenticchie dopo la mezzanotte, 1 bottiglia di vino ogni 4 ospiti, acqua e brindisi di mezzanotte. Disponibile anche il Pranzo di Natale Voya (25 Dicembre 2026, 100€ a persona).',
     descriptionEn:
-      'Counting down to midnight on the 20th floor at Voya Rooftop Milan (#5 Priority, Viale Achille Papa 30, 85 meters high) offers an unmatched 360-degree view of Milan’s fireworks paired with Restaurant & DJ Set. Official confirmed rate: €300 per person all-inclusive (6-course tasting dinner, post-midnight cotechino & lentils, 1 bottle of wine every 4 guests, water & midnight toast). Also discover Voya Christmas (December 25, 2026, €100 per person).',
+      'Counting down to midnight on the 20th floor at Voya Rooftop Milan (Viale Achille Papa 30, 85 meters high) offers an unmatched 360-degree view of Milan’s fireworks paired with Restaurant & DJ Set until 05:00. Official confirmed rate: €300 per person (+20% Booking & Transaction Fees at online checkout) including the 6-course tasting dinner, after-midnight cotechino & lentils, 1 bottle of wine every 4 guests, water & midnight toast. Also discover Voya Christmas (December 25, 2026, €100 per person).',
   },
   {
     rank: 6,
@@ -925,6 +926,58 @@ export default async function NewYearsEvePage({
                     <p className="text-sm sm:text-base text-white/75 leading-relaxed mb-6">
                       {isIt ? club.descriptionIt : club.descriptionEn}
                     </p>
+                    {club.slug === 'voya-rooftop-milan' && (() => {
+                      const voyaLocalized = getVoyaNyeContent(locale);
+                      const voyaMenu = voyaLocalized.menus?.[0];
+                      if (!voyaMenu) return null;
+                      return (
+                        <div
+                          data-official-menus
+                          data-lightbox-group="nye-hub-voya-menu"
+                          className="mb-6 rounded-2xl border border-champagne/30 bg-black/70 p-5"
+                        >
+                          <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-white/15 pb-3">
+                            <h4 className="font-serif text-lg font-bold text-white">
+                              {voyaLocalized.menusHeading || voyaMenu.title}
+                            </h4>
+                            <span className="bg-champagne px-3 py-1 font-mono text-xs font-bold uppercase text-black">
+                              {voyaMenu.price}
+                            </span>
+                          </div>
+                          <div className="mt-4 grid gap-5 md:grid-cols-2 md:items-start">
+                            <div>
+                              <dl className="space-y-2 text-xs sm:text-sm">
+                                {voyaMenu.courses.map((c) => (
+                                  <div key={`nye-voya-${c.course}`} className="border-b border-white/10 pb-1.5 last:border-0">
+                                    <dt className="font-mono text-[11px] font-bold uppercase tracking-wider text-champagne">
+                                      {c.course}
+                                    </dt>
+                                    <dd className="mt-0.5 text-white/90 leading-relaxed">{c.dish}</dd>
+                                  </div>
+                                ))}
+                              </dl>
+                              <p className="mt-3 rounded-lg border border-white/15 bg-black/60 p-3 text-xs text-white/80">
+                                {voyaMenu.beverages}
+                              </p>
+                            </div>
+                            {voyaMenu.imageSrc && (
+                              <div className="flex justify-center">
+                                <img
+                                  src={voyaMenu.imageSrc}
+                                  alt={voyaMenu.imageAlt}
+                                  title={voyaMenu.title}
+                                  width={1080}
+                                  height={1350}
+                                  loading="lazy"
+                                  decoding="async"
+                                  className="aspect-[4/5] w-full max-w-[360px] object-cover"
+                                />
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })()}
                   </div>
 
                   <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-white/10">

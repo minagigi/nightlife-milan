@@ -74,22 +74,26 @@ test('Catalog excludes 55-milano & TOM, includes all 8 confirmed Capodanno + hol
   assert.ok(CONFIRMED_CAPODANNO_SLUGS.has('capodanno-hotel-barchetta-excelsior-como'));
   assert.ok(CONFIRMED_CAPODANNO_SLUGS.has('capodanno-albergo-terminus-como'));
   for (const slug of CONFIRMED_CAPODANNO_SLUGS) {
-    assert.ok(getVenueIdByEventSlug(slug), `Confirmed slug missing venue mapping: ${slug}`);
+    if (slug === 'capodanno-tom-the-ordinary-market-milano') {
+      assert.equal(getVenueIdByEventSlug(slug), null);
+    } else {
+      assert.ok(getVenueIdByEventSlug(slug), `Confirmed slug missing venue mapping: ${slug}`);
+    }
   }
-  assert.equal(getVenueIdByEventSlug('christmas-voya-rooftop-milan-2026'), null);
+  assert.equal(getVenueIdByEventSlug('christmas-voya-rooftop-milan-2026'), 'voya-christmas');
+  assert.equal(getVenueIdByEventSlug('capodanno-voya-rooftop-milano'), 'voya');
   assert.equal(getVenueIdByEventSlug('orthodox-new-year-justme-milan-2027'), null);
   for (const partnerNyeSlug of [
     'capodanno-justme-milano-torre-branca',
     'capodanno-justme-garda-lake',
     'capodanno-pineta-milano',
     'capodanno-aria-club-milano',
-    'capodanno-voya-rooftop-milano',
     'capodanno-55-milano',
   ]) {
     assert.equal(getVenueIdByEventSlug(partnerNyeSlug), null);
   }
   assert.ok(SINGLE_PASS_ONLY_VENUE_IDS.has('justme'));
-  assert.ok(DISABLED_DIRECT_CHECKOUT_VENUE_IDS.has('voya-christmas'));
+  assert.equal(DISABLED_DIRECT_CHECKOUT_VENUE_IDS.has('voya-christmas'), false);
 
   assert.equal(STOREFRONT_VENUES.length, 8);
   for (const v of STOREFRONT_VENUES) {

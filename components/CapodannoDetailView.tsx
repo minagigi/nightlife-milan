@@ -970,7 +970,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                         </p>
                       </div>
                       {menu.imageSrc && (
-                        <div className="mt-4 flex justify-center border border-[#F6F1E7]/14 bg-[#050505] p-2">
+                        <div className="mt-4 flex justify-center border border-[#F6F1E7]/14 bg-[#050505]">
                           <img
                             src={menu.imageSrc}
                             alt={menu.imageAlt}
@@ -979,7 +979,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                             height={1350}
                             loading="lazy"
                             decoding="async"
-                            className="aspect-[4/5] max-h-[560px] w-auto max-w-full object-contain"
+                            className="aspect-[4/5] w-full max-w-[460px] object-cover"
                           />
                         </div>
                       )}

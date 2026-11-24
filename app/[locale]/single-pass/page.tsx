@@ -18,6 +18,7 @@ import {
   STOREFRONT_VENUES,
 } from '@/lib/single-pass/catalog';
 import { getSinglePassCopy } from '@/lib/single-pass/i18n35';
+import { getVoyaNyeContent } from '@/lib/capodanno/voya35';
 
 export const revalidate = 600;
 
@@ -270,6 +271,61 @@ export default async function SinglePassPage({
               privacyLoadNotice: venueMapCopy.privacyLoadNotice,
             }}
           />
+
+          {(() => {
+            const voyaContent = getVoyaNyeContent(loc);
+            const voyaMenu = voyaContent.menus?.[0];
+            if (!voyaMenu) return null;
+            return (
+              <div
+                id="menu-voya-single-pass"
+                data-official-menus
+                data-lightbox-group="single-pass-voya-menu"
+                className="border border-[#050505]/20 bg-[#0B0A09] p-6 text-[#F6F1E7]"
+              >
+                <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-white/15 pb-3">
+                  <div>
+                    <h3 className="font-serif text-2xl font-bold text-[#F6F1E7]">
+                      {voyaContent.menusHeading || voyaMenu.title}
+                    </h3>
+                    <p className="mt-1 text-xs text-[#C2B9AA]">{voyaMenu.subtitle}</p>
+                  </div>
+                  <span className="bg-[#EAE3D5] px-3 py-1 font-mono text-xs font-bold uppercase text-[#050505]">
+                    {voyaMenu.price}
+                  </span>
+                </div>
+                <div className="mt-5 grid gap-6 lg:grid-cols-2 lg:items-start">
+                  <div>
+                    <dl className="space-y-2.5 text-sm">
+                      {voyaMenu.courses.map((c) => (
+                        <div key={`sp-voya-${c.course}`} className="border-b border-white/10 pb-2 last:border-0">
+                          <dt className="text-xs font-bold uppercase tracking-wider text-[#EAE3D5]">{c.course}</dt>
+                          <dd className="mt-0.5 text-sm leading-relaxed text-[#F6F1E7]">{c.dish}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                    <p className="mt-3 border border-white/15 bg-[#050505] p-3 text-xs font-medium text-[#C2B9AA]">
+                      {voyaMenu.beverages}
+                    </p>
+                  </div>
+                  {voyaMenu.imageSrc && (
+                    <div className="flex justify-center">
+                      <img
+                        src={voyaMenu.imageSrc}
+                        alt={voyaMenu.imageAlt}
+                        title={voyaMenu.title}
+                        width={1080}
+                        height={1350}
+                        loading="lazy"
+                        decoding="async"
+                        className="aspect-[4/5] w-full max-w-[400px] object-cover"
+                      />
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })()}
         </div>
       </section>
 

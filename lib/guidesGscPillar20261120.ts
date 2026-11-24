@@ -9,6 +9,7 @@ import { GUIDE_100_SLUGS_MAP } from './i18n/guideSlugs100Map';
 import { TERME_PILLAR_35, type TermeLocalePack } from './i18n/pillarTerme35';
 import { CLUBBING_PILLAR_35, type ClubbingLocalePack } from './i18n/pillarClubbing35';
 import { capodannoCategoryPath, capodannoEventPath, capodannoPath } from './capodanno/routes';
+import { renderVoyaNyeMenuEditorialHtml } from './capodanno/voya35';
 import { MusicGenre, type FAQ, type Guide, type GuideSection, type LocalizedString } from './types';
 
 function createLazyLocalizedString(getter: (locale: LocaleCode) => string): LocalizedString {
@@ -569,6 +570,7 @@ ${p.sempioneBreraComo.bullets.map((b) => `<li>${escapeHtml(sanitizeText(b))}</li
 <p>${linkTag(gattopardoClubUrl, p.gattopardoCitylife.ctas.gattopardoClub)} · ${linkTag(gattopardoNyeUrl, p.gattopardoCitylife.ctas.gattopardoNye)}.</p>
 <h3>${escapeHtml(sanitizeText(p.h3[7]))}</h3>
 <p>${escapeHtml(sanitizeText(p.gattopardoCitylife.voyaDetail))}</p>
+${renderVoyaNyeMenuEditorialHtml(locale)}
 <p>${escapeHtml(sanitizeText(p.gattopardoCitylife.fiftyFiveRepvblicDetail))}</p>
 <h3>${escapeHtml(sanitizeText(p.h3[8]))}</h3>
 ${tierTable}

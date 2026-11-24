@@ -450,6 +450,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   let event = getEventBySlug(slug, locale);
   if (!event) event = getLocalizedEventSeed(slug, locale) || undefined;
   if (!event) return notFound();
+  if (event.id === 'e-nye-2027-voya') {
+    permanentRedirect(capodannoEventPath('capodanno-voya-rooftop-milano', locale));
+  }
 
   const venue = getVenueById(event.venueId);
   if (!venue) return notFound();
@@ -827,6 +830,9 @@ export default async function EventPage({ params }: Props) {
   let event = getEventBySlug(slug, locale);
   if (!event) event = getLocalizedEventSeed(slug, locale) || undefined;
   if (!event) return notFound();
+  if (event.id === 'e-nye-2027-voya') {
+    permanentRedirect(capodannoEventPath('capodanno-voya-rooftop-milano', locale));
+  }
 
   const venue = getVenueById(event.venueId);
   if (!venue) return notFound();

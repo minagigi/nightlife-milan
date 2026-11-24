@@ -1,4 +1,5 @@
 import { getWords35 } from '@/lib/capodanno/capodannoUi35';
+import { getVoyaNyeContent } from '@/lib/capodanno/voya35';
 import type { SinglePassCopyPack } from './i18n35';
 import type { SinglePassPackageCategory, SinglePassSku, SinglePassVenueId, SinglePassVenueSpec } from './types';
 
@@ -884,6 +885,13 @@ export function localizeSinglePassSku(
   }
   if (locale === 'en') {
     return { title: sku.titleEn, description: sku.descriptionEn };
+  }
+  if (sku.id === 'voya-nye-gala-dinner') {
+    const vc = getVoyaNyeContent(locale);
+    return {
+      title: vc.tiers[0]?.label || sku.titleEn,
+      description: vc.tiers[0]?.details || sku.descriptionEn,
+    };
   }
   const w = getWords35(locale);
   const catLabel = pack.categoryLabels[sku.category] || sku.category;
