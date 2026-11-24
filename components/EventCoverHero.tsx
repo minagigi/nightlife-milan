@@ -24,9 +24,9 @@ export default function EventCoverHero({ src, alt, imageTitle, title, titleNode,
   return (
     <figure className="border-y border-[#F6F1E7]/14 bg-[#050505]" data-event-cover-hero={eventId}>
       <div className="border-b border-[#F6F1E7]/14 bg-[#050505]">
-        <div className="mx-auto max-w-6xl bg-[#050505]">
-          <Image quality={92} src={src} alt={alt} title={imageTitle} width={width} height={height} priority fetchPriority="high" sizes="100vw"
-            className="mx-auto block max-h-[680px] h-auto w-full object-contain" />
+        <div className="mx-auto aspect-[4/5] w-full max-w-[540px] bg-[#050505]">
+          <Image quality={92} src={src} alt={alt} title={imageTitle} width={1080} height={1350} priority fetchPriority="high" sizes="(max-width: 768px) 100vw, 540px"
+            className="h-full w-full object-cover" />
         </div>
       </div>
       <div className="border-b border-[#F6F1E7]/14 bg-[#0B0A09] px-5 py-8 sm:px-8 sm:py-10">

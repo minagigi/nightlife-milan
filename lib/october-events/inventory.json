@@ -21222,10 +21222,10 @@
       },
       "image": {
         "src": "/images/events/thanksgiving-2026/thanksgiving-justme-milano-2026.webp",
-        "width": 1376,
-        "height": 768,
-        "bytes": 160322,
-        "sha256": "3f5b5154f126fc51d0450ac1cc3d4fcc6db0abe9beec7eaf29a0469e7bccc480"
+        "width": 1080,
+        "height": 1350,
+        "bytes": 210710,
+        "sha256": "ab45233d1559c88274c0d239884d479a89c3fed4bb4cff2936f6ded7d6bbd106"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -21418,10 +21418,10 @@
       },
       "image": {
         "src": "/images/events/partenopea-2026/cena-spettacolo-partenopea-justme-milano-2026.webp",
-        "width": 1376,
-        "height": 768,
-        "bytes": 122524,
-        "sha256": "12c42e03ae6d70a60ac1dbc2ce943468e6ce9f0e683545a5e6e5a5e4be2bcb02"
+        "width": 1080,
+        "height": 1350,
+        "bytes": 110774,
+        "sha256": "502dabd7b04e40bd7d45e85df284a053e46e61b032a85535d7ae1b1e7fb09918"
       },
       "age": "21+",
       "dressCode": "Elegant",

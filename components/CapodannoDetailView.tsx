@@ -321,7 +321,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 height={1350}
                 loading="eager"
                 decoding="async"
-                className="h-full w-full object-contain"
+                className="h-full w-full object-cover"
               />
             </div>
           </div>
@@ -632,7 +632,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                   </span>
                 </div>
               </div>
-              <div className="flex justify-center bg-[#050505] p-2">
+              <div className="mx-auto aspect-[4/5] w-full max-w-[540px] bg-[#050505]">
                 <img
                   src={seoPack.poster.src}
                   title={seoPack.poster.title}
@@ -641,7 +641,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                   height={1350}
                   loading="lazy"
                   decoding="async"
-                  className="aspect-[4/5] max-h-[640px] w-auto max-w-full object-contain"
+                  className="h-full w-full object-cover"
                 />
               </div>
               <figcaption className="mt-3 text-[13px] leading-relaxed text-[#C2B9AA] sm:text-sm">

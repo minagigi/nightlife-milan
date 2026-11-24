@@ -240,7 +240,7 @@ function buildCapodannoEventMetadata(baseSlug: string, locale: string): Metadata
       type: 'website',
       siteName: 'Nightlife Milan',
       locale: getLocaleDef(locale)?.ogLocale || 'en_US',
-      images: [{ url: `${baseUrl}${event.image}`, width: 1200, height: 630, alt: title }],
+      images: [{ url: `${baseUrl}${event.image}`, width: 1080, height: 1350, alt: title }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -276,7 +276,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         type: 'website',
         siteName: 'Nightlife Milan',
         locale: getLocaleDef(locale)?.ogLocale || 'en_US',
-        images: [{ url: `${baseUrl}${xmas.posterSrc}`, width: 1376, height: 768, alt: xmas.title }],
+        images: [{ url: `${baseUrl}${xmas.posterSrc}`, width: 1080, height: 1350, alt: xmas.title }],
       },
       twitter: {
         card: 'summary_large_image',
@@ -307,7 +307,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         type: 'website',
         siteName: 'Nightlife Milan',
         locale: getLocaleDef(locale)?.ogLocale || 'en_US',
-        images: [{ url: `${baseUrl}${ORTHODOX_NYE_JUSTME_POSTER_SRC}`, width: 1376, height: 768, alt: ortho.h1 }],
+        images: [{ url: `${baseUrl}${ORTHODOX_NYE_JUSTME_POSTER_SRC}`, width: 1080, height: 1350, alt: ortho.h1 }],
       },
       twitter: {
         card: 'summary_large_image',
@@ -338,7 +338,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         type: 'website',
         siteName: 'Nightlife Milan',
         locale: getLocaleDef(locale)?.ogLocale || 'en_US',
-        images: [{ url: `${baseUrl}${THANKSGIVING_JUSTME_POSTER_SRC}`, width: 1376, height: 768, alt: tg.h1 }],
+        images: [{ url: `${baseUrl}${THANKSGIVING_JUSTME_POSTER_SRC}`, width: 1080, height: 1350, alt: tg.h1 }],
       },
       twitter: {
         card: 'summary_large_image',
@@ -369,7 +369,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         type: 'website',
         siteName: 'Nightlife Milan',
         locale: getLocaleDef(locale)?.ogLocale || 'en_US',
-        images: [{ url: `${baseUrl}${PARTENOPEA_JUSTME_POSTER_SRC}`, width: 1376, height: 768, alt: pt.h1 }],
+        images: [{ url: `${baseUrl}${PARTENOPEA_JUSTME_POSTER_SRC}`, width: 1080, height: 1350, alt: pt.h1 }],
       },
       twitter: {
         card: 'summary_large_image',
@@ -432,7 +432,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title,
         description,
         url: canonical,
-        images: [{ url: weeklyEvent.image, width: 1200, height: 630, alt: title }],
+        images: [{ url: weeklyEvent.image, width: 1080, height: 1350, alt: title }],
         type: 'website',
         siteName: 'Nightlife Milan',
         locale: locale === 'it' ? 'it_IT' : 'en_US',
@@ -693,7 +693,7 @@ export default async function EventPage({ params }: Props) {
                 quality={95}
                 priority
                 sizes="(max-width: 768px) 100vw, 560px"
-                className="object-contain p-1 sm:p-2"
+                className="object-cover"
                 referrerPolicy="no-referrer"
               />
             </div>
@@ -1015,16 +1015,11 @@ export default async function EventPage({ params }: Props) {
                   quality={95}
                   priority={true}
                   sizes={!isPastEvent ? '(max-width: 768px) 100vw, 560px' : '(max-width: 1280px) 100vw, 1200px'}
-                  className="object-contain p-1 sm:p-2"
+                  className="object-cover"
                   referrerPolicy="no-referrer"
                 />
               </div>
-              {!(
-                eventHeroImage.includes('/images/events/october-2026/') ||
-                eventHeroImage.includes('/images/events/capodanno-2027-posters/') ||
-                eventHeroImage.includes('/images/events/weekly-posters/') ||
-                eventHeroImage.includes('/images/events/halloween-2026/')
-              ) && (
+              {!eventHeroImage.startsWith('/images/events/') && (
                 <div className="flex flex-wrap items-center justify-between gap-2 border-x border-b border-[#F6F1E7]/18 bg-[#050505] px-4 py-2 font-mono text-[11px] font-bold tracking-[0.12em] text-[#F6F1E7]">
                   <span>WWW.NIGHTLIFEMILAN.COM</span>
                   <span className="inline-flex items-center gap-1.5 text-[#EAE3D5]">
