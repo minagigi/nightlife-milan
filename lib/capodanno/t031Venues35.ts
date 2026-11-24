@@ -581,7 +581,7 @@ const CLOSED_VENUE_META: Record<
   },
   'capodanno-castello-di-malpaga': {
     name: 'Castello di Malpaga',
-    city: 'Cavernago (BG)',
+    city: 'Cavernago',
     province: 'BG',
     address: 'Piazza Castello, 24050 Cavernago (BG)',
     reasonIt: 'Il Castello di Malpaga (Piazza Castello, Cavernago, Bergamo) non ha disponibilità per la notte del 31 dicembre 2026: la scheda di Capodanno 2027 è ufficialmente dichiarata Sold Out su Nightlife Milan.',
