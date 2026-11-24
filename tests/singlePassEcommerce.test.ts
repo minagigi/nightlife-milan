@@ -510,7 +510,7 @@ test('Order persistence, multi-currency PaymentIntent params (no receipt_email),
   }
 });
 
-test('Middleware routes /checkout, /thank-you, /cookie-policy, /refund-policy cleanly and protects /crm', () => {
+test('Middleware routes /checkout, /thank-you, /cookie-policy, /refund-policy cleanly and protects /crm', async () => {
   const mkReq = (pathname: string) =>
     new NextRequest(`https://nightlifemilan.com${pathname}`, {
       headers: { 'user-agent': 'Googlebot/2.1 (+http://www.google.com/bot.html)' },
@@ -529,20 +529,26 @@ test('Middleware routes /checkout, /thank-you, /cookie-policy, /refund-policy cl
     '/it/cookie-policy',
     '/it/refund-policy',
   ]) {
-    const res = middleware(mkReq(p));
+    const res = await middleware(mkReq(p));
     assert.equal(res.status, 200, `Expected 200 on ${p}, got ${res.status}`);
   }
 
-  const redirCheckout = middleware(mkReq('/it/cassa'));
+  const redirCheckout = await middleware(mkReq('/it/cassa'));
   assert.equal(redirCheckout.status, 308);
   assert.equal(new URL(redirCheckout.headers.get('location')!).pathname, '/it/checkout');
 
-  const redirRefund = middleware(mkReq('/it/rimborsi'));
+  const redirRefund = await middleware(mkReq('/it/rimborsi'));
   assert.equal(redirRefund.status, 308);
   assert.equal(new URL(redirRefund.headers.get('location')!).pathname, '/it/refund-policy');
 
-  const crmProtected = middleware(mkReq('/it/crm/single-pass'));
-  assert.equal(crmProtected.status, 401);
+  const crmProtected = await middleware(mkReq('/it/crm/single-pass'));
+  assert.equal(crmProtected.status, 303);
+  const crmLoginUrl = new URL(crmProtected.headers.get('location')!);
+  assert.equal(crmLoginUrl.pathname, '/it/crm/login');
+  assert.equal(crmLoginUrl.searchParams.get('next'), '/it/crm/single-pass');
+
+  const crmLoginOpen = await middleware(mkReq('/it/crm/login'));
+  assert.equal(crmLoginOpen.status, 200);
 });
 
 test('JustMe Partenopea (2026-11-27) keeps 6 legacy EUR SKU specs + strict 21+ age check while event-page checkout is blocked', () => {

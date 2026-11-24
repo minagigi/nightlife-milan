@@ -1,5 +1,8 @@
+import { cookies } from 'next/headers';
+import { verifyActiveNodeCrmSession } from '@/lib/crmAuthVault';
 import { crmContactsCsv } from '@/lib/crmExport';
 import { filterCrmContacts, type CrmContactFilters } from '@/lib/crmModel';
+import { CRM_SESSION_COOKIE } from '@/lib/crmSession';
 import { readCrmDatabase } from '@/lib/crmStore';
 
 export const runtime = 'nodejs';
@@ -10,6 +13,14 @@ function value(url: URL, name: string, fallback = 'all'): string {
 }
 
 export async function GET(request: Request) {
+  const cookieStore = await cookies();
+  const session = await verifyActiveNodeCrmSession(cookieStore.get(CRM_SESSION_COOKIE)?.value);
+  if (!session) {
+    return new Response('CRM authentication required', {
+      status: 401,
+      headers: { 'Cache-Control': 'private, no-store' },
+    });
+  }
   const url = new URL(request.url);
   const segment = value(url, 'segment') as CrmContactFilters['segment'];
   const database = await readCrmDatabase();

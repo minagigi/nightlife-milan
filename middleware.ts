@@ -19,6 +19,13 @@ import {
 } from '@/lib/capodanno/routes';
 import { halloweenPath } from '@/lib/halloween/routes';
 import { UNIVERSITY_PARTY_CANONICAL_SLUG } from '@/lib/universityPartyPt';
+import {
+  CRM_SESSION_COOKIE,
+  crmLoginPath,
+  resolveCrmSessionSecret,
+  safeCrmRedirect,
+  verifyCrmSessionToken,
+} from '@/lib/crmSession';
 
 // Lingue attive dal registry unico (lib/i18n/locales.ts): attivare una lingua li
 // la rende automaticamente instradabile qui, senza toccare il middleware.
@@ -174,27 +181,48 @@ function analyticsAuth(request: NextRequest): NextResponse | null {
   return null;
 }
 
-// Il CRM contiene PII e usa credenziali dedicate quando presenti. Per evitare
-// di bloccare il primo deploy, ripiega sulle credenziali analytics già attive.
-function crmAuth(request: NextRequest): NextResponse | null {
-  const user = process.env.CRM_USER || process.env.ANALYTICS_USER;
-  const pass = process.env.CRM_PASSWORD || process.env.ANALYTICS_PASSWORD;
-  const unauthorized = () =>
-    new NextResponse(user && pass ? 'Authentication required' : 'CRM not configured (set CRM_USER / CRM_PASSWORD)', {
-      status: 401,
-      headers: {
-        'Cache-Control': 'private, no-store',
-        'WWW-Authenticate': 'Basic realm="Nightlife Milan CRM"',
-      },
-    });
+const crmPublicAuthRe = new RegExp(`^${localePrefixPattern}\\/crm\\/(?:login|recover)(\\/|$)`);
+const crmLoginExactRe = new RegExp(`^${localePrefixPattern}\\/crm\\/login\\/?$`);
 
-  if (!user || !pass) return unauthorized();
-  const expected = `Basic ${btoa(`${user}:${pass}`)}`;
-  if (request.headers.get('authorization') !== expected) return unauthorized();
+function applyCrmPrivateHeaders(response: NextResponse): NextResponse {
+  response.headers.set('X-Robots-Tag', 'noindex, nofollow, noarchive');
+  response.headers.set('Cache-Control', 'private, no-store');
+  return response;
+}
+
+async function guardCrmRoute(
+  request: NextRequest,
+  effectiveLocale: string,
+): Promise<NextResponse | null> {
+  const { pathname, search } = request.nextUrl;
+  const cleanPath = pathname !== '/' && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+  const hasValidSession = await verifyCrmSessionToken(
+    request.cookies.get(CRM_SESSION_COOKIE)?.value,
+    resolveCrmSessionSecret(),
+  );
+
+  if (crmPublicAuthRe.test(cleanPath)) {
+    if (
+      crmLoginExactRe.test(cleanPath)
+      && hasValidSession
+      && request.nextUrl.searchParams.get('loggedOut') !== '1'
+    ) {
+      const target = safeCrmRedirect(request.nextUrl.searchParams.get('next'), effectiveLocale);
+      return applyCrmPrivateHeaders(NextResponse.redirect(new URL(target, request.url), 303));
+    }
+    return null;
+  }
+
+  if (!hasValidSession) {
+    const loginUrl = new URL(crmLoginPath(effectiveLocale), request.url);
+    loginUrl.searchParams.set('next', `${cleanPath}${search}`);
+    return applyCrmPrivateHeaders(NextResponse.redirect(loginUrl, 303));
+  }
+
   return null;
 }
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const cleanTopPathname = pathname !== '/' && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
   const isBot = BOT_OR_AUDITOR_UA_RE.test(request.headers.get('user-agent') || '');
@@ -270,11 +298,6 @@ export function middleware(request: NextRequest) {
     if (denied) return denied;
   }
 
-  if (crmRe.test(pathname)) {
-    const denied = crmAuth(request);
-    if (denied) return denied;
-  }
-
   // Check if the pathname starts with a locale
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
@@ -296,6 +319,14 @@ export function middleware(request: NextRequest) {
     const rawRestPath = pathname.slice(firstSegment.length + 1) || '/';
     const cleanPathname = cleanTopPathname;
     const isInternalAdmin = analyticsRe.test(cleanPathname) || crmRe.test(cleanPathname);
+
+    if (crmRe.test(cleanPathname)) {
+      const crmRedirect = await guardCrmRoute(request, firstSegment);
+      if (crmRedirect) return crmRedirect;
+      const res = applyCrmPrivateHeaders(NextResponse.next());
+      maybePersistLocaleCookie(request, res, firstSegment, isBot);
+      return res;
+    }
 
     if (!isInternalAdmin && rawRestPath !== '/') {
       const canonicalSeoPath = resolveSeoHubPathToCanonical(rawRestPath, firstSegment);
@@ -393,6 +424,14 @@ export function middleware(request: NextRequest) {
         return NextResponse.rewrite(rewriteUrl);
       }
     }
+  }
+
+  if (crmRe.test(cleanTopPathname)) {
+    const crmRedirect = await guardCrmRoute(request, 'en');
+    if (crmRedirect) return crmRedirect;
+    const rewriteUrl = new URL(`/en${pathname}`, request.url);
+    rewriteUrl.search = request.nextUrl.search;
+    return applyCrmPrivateHeaders(NextResponse.rewrite(rewriteUrl));
   }
 
   // Rewrite to /en/pathname if no locale is present (so English is served on root)

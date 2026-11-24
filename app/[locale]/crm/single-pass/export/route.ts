@@ -1,3 +1,6 @@
+import { cookies } from 'next/headers';
+import { verifyActiveNodeCrmSession } from '@/lib/crmAuthVault';
+import { CRM_SESSION_COOKIE } from '@/lib/crmSession';
 import { formatMinorCurrency } from '@/lib/single-pass/currency';
 import { listAllOrders } from '@/lib/single-pass/store';
 
@@ -11,6 +14,14 @@ function csvCell(val: string | number | null | undefined): string {
 }
 
 export async function GET(request: Request) {
+  const cookieStore = await cookies();
+  const session = await verifyActiveNodeCrmSession(cookieStore.get(CRM_SESSION_COOKIE)?.value);
+  if (!session) {
+    return new Response('CRM authentication required', {
+      status: 401,
+      headers: { 'Cache-Control': 'private, no-store' },
+    });
+  }
   const url = new URL(request.url);
   const venueFilter = (url.searchParams.get('venue') || 'all').trim();
   const statusFilter = (url.searchParams.get('status') || 'all').trim();

@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from '@/components/LocalizedLink';
-import { Download, Eye, Mail, Search, ShieldCheck, UserRoundCheck } from 'lucide-react';
+import { Download, Eye, KeyRound, LogOut, Mail, Search, ShieldCheck, UserRoundCheck } from 'lucide-react';
+import { getCrmAuthCopy } from '@/lib/crmAuthCopy';
+import { requireCrmServerSession } from '@/lib/crmAuthVault';
 import { crmFilterOptions, filterCrmContacts, type CrmPermissionStatus } from '@/lib/crmModel';
 import { crmStorageConfigured, readCrmDatabase } from '@/lib/crmStore';
 
@@ -51,7 +53,10 @@ export default async function CrmPage({
   params: Promise<{ locale: string }>;
   searchParams: SearchParams;
 }) {
-  const [{ locale }, queryParams, database] = await Promise.all([params, searchParams, readCrmDatabase()]);
+  const [{ locale }, queryParams] = await Promise.all([params, searchParams]);
+  await requireCrmServerSession(locale);
+  const database = await readCrmDatabase();
+  const authCopy = getCrmAuthCopy(locale);
   const query = param(queryParams, 'q');
   const emailMarketing = param(queryParams, 'marketing', 'all') as CrmPermissionStatus | 'all';
   const venue = param(queryParams, 'venue', 'all');
@@ -93,12 +98,31 @@ export default async function CrmPage({
               Contatti deduplicati, storico clienti e preferenze di comunicazione. I contatti senza consenso restano utilizzabili solo per comunicazioni relative alla prenotazione.
             </p>
           </div>
-          <Link
-            href={`${crmPath}/single-pass`}
-            className="inline-flex h-10 shrink-0 items-center border border-emerald-400/50 bg-emerald-950/30 px-4 text-xs font-bold uppercase tracking-wider text-emerald-200 hover:bg-emerald-900/40"
-          >
-            E-Commerce &amp; Single Pass (+20%) Analytics →
-          </Link>
+          <div className="flex flex-wrap items-center gap-2">
+            <Link
+              href={`${crmPath}/single-pass`}
+              className="inline-flex h-10 shrink-0 items-center border border-emerald-400/50 bg-emerald-950/30 px-4 text-xs font-bold uppercase tracking-wider text-emerald-200 hover:bg-emerald-900/40"
+            >
+              E-Commerce &amp; Single Pass (+20%) Analytics →
+            </Link>
+            <a
+              href={`${crmPath}/credentials`}
+              className="inline-flex h-10 shrink-0 items-center gap-1.5 border border-white/25 bg-white/10 px-4 text-xs font-bold uppercase tracking-wider text-white hover:bg-white/20"
+            >
+              <KeyRound className="h-3.5 w-3.5" aria-hidden="true" />
+              {authCopy.headerCredentialsBtn}
+            </a>
+            <form action="/api/crm/logout" method="post">
+              <input type="hidden" name="locale" value={locale} />
+              <button
+                type="submit"
+                className="inline-flex h-10 shrink-0 items-center gap-1.5 border border-white/25 bg-transparent px-4 text-xs font-bold uppercase tracking-wider text-white hover:bg-white/15"
+              >
+                <LogOut className="h-3.5 w-3.5" aria-hidden="true" />
+                {authCopy.headerLogoutBtn}
+              </button>
+            </form>
+          </div>
         </header>
 
         {!crmStorageConfigured() && (

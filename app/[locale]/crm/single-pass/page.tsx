@@ -4,10 +4,13 @@ import {
   CheckCircle2,
   Download,
   KeyRound,
+  LogOut,
   RefreshCw,
   Trash2,
   Users,
 } from 'lucide-react';
+import { getCrmAuthCopy } from '@/lib/crmAuthCopy';
+import { requireCrmServerSession } from '@/lib/crmAuthVault';
 import { localePrefix } from '@/lib/i18n/locales';
 import { SINGLE_PASS_VENUES, formatEurFromCents } from '@/lib/single-pass/catalog';
 import { formatMinorCurrency } from '@/lib/single-pass/currency';
@@ -51,12 +54,13 @@ export default async function CrmSinglePassPage({
   params: Promise<{ locale: string }>;
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
-  const [{ locale }, sp, allOrders, gatewayStatus] = await Promise.all([
-    params,
-    searchParams,
+  const [{ locale }, sp] = await Promise.all([params, searchParams]);
+  await requireCrmServerSession(locale);
+  const [allOrders, gatewayStatus] = await Promise.all([
     listAllOrders(500),
     getStripeCredentialStatus(),
   ]);
+  const authCopy = getCrmAuthCopy(locale);
 
   const lp = localePrefix(locale);
   const venueFilter = typeof sp.venue === 'string' ? sp.venue : 'all';
@@ -163,7 +167,7 @@ export default async function CrmSinglePassPage({
   const topReferrers = Array.from(referrerUtmMap.values()).sort((a, b) => b.orders - a.orders);
 
   return (
-    <main className="min-h-screen bg-[#0c0d0f] px-4 py-10 text-white sm:px-6 lg:px-8">
+    <main className="crm-shell min-h-screen bg-[#0c0d0f] px-4 py-10 text-white sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl space-y-8">
         {/* Header & Quick Nav */}
         <header className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6">
@@ -183,9 +187,12 @@ export default async function CrmSinglePassPage({
               CRM Generale
             </Link>
             <a
-              href={`/api/single-pass/me`}
-              className="hidden"
-            />
+              href={`${lp}/crm/credentials`}
+              className="inline-flex h-10 items-center gap-1.5 border border-white/25 bg-white/10 px-4 text-xs font-bold uppercase tracking-wider text-white hover:bg-white/20"
+            >
+              <KeyRound className="h-4 w-4" aria-hidden="true" />
+              {authCopy.headerCredentialsBtn}
+            </a>
             <a
               href={`${lp}/crm/single-pass/export?venue=${encodeURIComponent(venueFilter)}&status=${encodeURIComponent(statusFilter)}`}
               className="inline-flex h-10 items-center gap-2 bg-white px-4 text-xs font-extrabold uppercase tracking-wider text-black hover:bg-emerald-300"
@@ -193,6 +200,16 @@ export default async function CrmSinglePassPage({
               <Download className="h-4 w-4" aria-hidden="true" />
               Esporta CSV Completo
             </a>
+            <form action="/api/crm/logout" method="post">
+              <input type="hidden" name="locale" value={locale} />
+              <button
+                type="submit"
+                className="inline-flex h-10 items-center gap-1.5 border border-white/25 bg-transparent px-4 text-xs font-bold uppercase tracking-wider text-white hover:bg-white/15"
+              >
+                <LogOut className="h-4 w-4" aria-hidden="true" />
+                {authCopy.headerLogoutBtn}
+              </button>
+            </form>
           </div>
         </header>
 

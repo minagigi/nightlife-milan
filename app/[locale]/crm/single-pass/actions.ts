@@ -1,11 +1,13 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
+import { requireCrmActionSession } from '@/lib/crmAuthVault';
 import { deleteOrderById, getOrderById, saveOrder } from '@/lib/single-pass/store';
 import { syncPaymentWebhookEvents, validateAndSaveStripeKey } from '@/lib/single-pass/stripe';
 import type { WhatsappMiniGroupStatus } from '@/lib/single-pass/types';
 
 export async function saveStripeVaultAction(formData: FormData): Promise<void> {
+  await requireCrmActionSession();
   const secretKey = String(formData.get('secretKey') || '').trim();
   const siteOrigin = String(formData.get('siteOrigin') || 'https://nightlifemilan.com').trim();
   const locale = String(formData.get('locale') || 'it').trim();
@@ -17,6 +19,7 @@ export async function saveStripeVaultAction(formData: FormData): Promise<void> {
 }
 
 export async function syncWebhookAction(formData: FormData): Promise<void> {
+  await requireCrmActionSession();
   const siteOrigin = String(formData.get('siteOrigin') || 'https://nightlifemilan.com').trim();
   const locale = String(formData.get('locale') || 'it').trim();
 
@@ -26,6 +29,7 @@ export async function syncWebhookAction(formData: FormData): Promise<void> {
 }
 
 export async function deleteOrderAction(formData: FormData): Promise<void> {
+  await requireCrmActionSession();
   const orderId = String(formData.get('orderId') || '').trim();
   const locale = String(formData.get('locale') || 'it').trim();
   if (!orderId) return;
@@ -36,6 +40,7 @@ export async function deleteOrderAction(formData: FormData): Promise<void> {
 }
 
 export async function updateOrderWhatsappGroupAction(formData: FormData): Promise<void> {
+  await requireCrmActionSession();
   const orderId = String(formData.get('orderId') || '').trim();
   const locale = String(formData.get('locale') || 'it').trim();
   const statusRaw = String(formData.get('whatsappGroupStatus') || 'scheduled_dec_20').trim();

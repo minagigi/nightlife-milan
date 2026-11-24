@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from '@/components/LocalizedLink';
 import { ArrowLeft, Mail, MessageCircle, Save } from 'lucide-react';
 import { notFound } from 'next/navigation';
+import { requireCrmServerSession } from '@/lib/crmAuthVault';
 import { readCrmDatabase } from '@/lib/crmStore';
 import { updateCrmEmailPermission } from '../../actions';
 
@@ -26,6 +27,7 @@ function formatDateTime(value: string | null): string {
 
 export default async function CrmContactPage({ params }: { params: Promise<{ locale: string; id: string }> }) {
   const { locale, id } = await params;
+  await requireCrmServerSession(locale);
   const database = await readCrmDatabase();
   const contact = database.contacts[id];
   if (!contact) notFound();

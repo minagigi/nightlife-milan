@@ -1,10 +1,14 @@
 body:has(.crm-shell) {
-  background: #101113;
+  background: #0A0A0C;
   padding-bottom: 0 !important;
 }
 
 body:has(.crm-shell) > header,
+body:has(.crm-shell) > footer,
+body:has(.crm-shell) > section,
+body:has(.crm-shell) > a.skip-link,
 body:has(.crm-shell) > main.crm-shell + div,
+body:has(.crm-shell) > #main-content ~ *,
 body:has(.crm-shell) > a.fixed,
 body:has(.crm-shell) > button.fixed,
 body:has(.crm-shell) > nav.fixed,

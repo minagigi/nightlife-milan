@@ -160,3 +160,20 @@ export async function sendAttendeeEmail(message: EmailMessage): Promise<EmailTra
   }
   return sendViaResend(message, effectiveTo, from, replyTo);
 }
+
+export async function sendDirectAdminEmail(message: EmailMessage): Promise<EmailTransportResult> {
+  const effectiveTo = message.to.trim();
+  const provider = emailTransportProvider();
+
+  if (provider === 'dry_run') {
+    return { outcome: 'dry_run', effectiveTo };
+  }
+
+  const from = (process.env.EMAIL_FROM || '').trim() || DEFAULT_FROM;
+  const replyTo = (process.env.EMAIL_REPLY_TO || '').trim() || DEFAULT_REPLY_TO;
+
+  if (provider === 'smtp') {
+    return sendViaSmtp(message, effectiveTo, from, replyTo);
+  }
+  return sendViaResend(message, effectiveTo, from, replyTo);
+}
