@@ -318,7 +318,6 @@ export default function PartenopeaJustMeDetailView({
                 fetchPriority="high"
                 quality={95}
                 sizes="(max-width: 1080px) 100vw, 1080px"
-                data-no-lightbox="true"
                 className="h-full w-full object-cover"
               />
             </div>

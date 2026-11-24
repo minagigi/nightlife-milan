@@ -323,7 +323,6 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 priority
                 fetchPriority="high"
                 sizes="(max-width: 1080px) 100vw, 1080px"
-                data-no-lightbox="true"
                 className="h-full w-full object-cover"
               />
             </div>

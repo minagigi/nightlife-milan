@@ -230,7 +230,6 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
               fetchPriority="high"
               quality={95}
               sizes="(max-width: 1080px) 100vw, 1080px"
-              data-no-lightbox="true"
               className="object-cover"
             />
           </div>
