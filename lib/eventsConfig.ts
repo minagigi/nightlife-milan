@@ -90,7 +90,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '21+', 'Strictly Elegant. Long trousers for men are mandatory.', 'House and Urban'),
     image: '/images/events/october-2026/249146-bbdee1490af9.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/monday-night-281/249159/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/monday-night-282/249160/channel/nightlifemilan-1',
     priority: 100
   },
   {
@@ -234,7 +234,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '21+', 'Urban Chic', 'Hip-Hop and R&B'),
     image: '/images/events/october-2026/249199-9373e4ee381b.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/sunday-night-198/249201/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/sunday-night-211/249203/channel/nightlifemilan-1',
     priority: 100
   },
 
