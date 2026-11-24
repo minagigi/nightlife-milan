@@ -8,6 +8,7 @@ import { GUIDE_HERO_IMAGES_114 } from '@/lib/guideImagesMap114';
 import { applyFlagshipGuides35 } from '@/lib/i18n/flagshipGuides35';
 import { applyGscGuidesBatch20261122 } from '@/lib/guidesGscBatch20261122';
 import { applyGscGuidesBatch20261123 } from '@/lib/guidesGscBatch20261123';
+import { applyGscGuidesBatch20261124 } from '@/lib/guidesGscBatch20261124';
 import { renderVoyaNyeMenuEditorialHtml } from '@/lib/capodanno/voya35';
 
 // Mock Data for Zones
@@ -2842,6 +2843,7 @@ for (const guide of mockGuides) {
 applyFlagshipGuides35(mockGuides);
 applyGscGuidesBatch20261122(mockGuides);
 applyGscGuidesBatch20261123(mockGuides);
+applyGscGuidesBatch20261124(mockGuides);
 populateGuideSlugs35(mockGuides);
 for (const g of mockGuides) {
   if (GUIDE_HERO_IMAGES_114[g.id]) {
