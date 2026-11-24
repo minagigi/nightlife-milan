@@ -1585,7 +1585,7 @@ export const SINGLE_PASS_SKUS: readonly SinglePassSku[] = [
     basePriceCents: 30000,
     guestsPerUnit: 1,
     genderPolicy: 'equal',
-    requiresDietary: true,
+    requiresDietary: false,
     confirmed: true,
   },
 
@@ -1721,7 +1721,7 @@ export const SINGLE_PASS_SKUS: readonly SinglePassSku[] = [
     basePriceCents: 10000,
     guestsPerUnit: 1,
     genderPolicy: 'equal',
-    requiresDietary: true,
+    requiresDietary: false,
     eventDateLabel: '2026-12-25',
     confirmed: true,
   },
