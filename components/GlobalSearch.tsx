@@ -118,7 +118,7 @@ const SEARCH_UI_COPY_BASE: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'ru'
       allClubsLink: 'Tutti i 19 Club',
       clubs: 'Club, Discoteche & Rooftop Ufficiali',
       capodanno: 'Capodanno 2027 a Milano · Cenoni, Rooftop & Discoteche',
-      capodannoAllLink: 'Tutti i 125 Eventi Capodanno',
+      capodannoAllLink: 'Tutti i 126 Eventi Capodanno',
       events: 'Calendario Serate & Eventi Speciali',
       eventsAllLink: 'Calendario Completo',
       hubs: 'Hub Strategici & Esperienze VIP 2026/2027',
@@ -173,7 +173,7 @@ const SEARCH_UI_COPY_BASE: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'ru'
       allClubsLink: 'All 19 Clubs',
       clubs: 'Official Clubs, Nightclubs & Rooftops',
       capodanno: "New Year's Eve 2027 in Milan · Gala Dinners, Rooftops & Clubs",
-      capodannoAllLink: 'All 125 NYE Events',
+      capodannoAllLink: 'All 126 NYE Events',
       events: 'Upcoming Nights & Special Events Calendar',
       eventsAllLink: 'Full Calendar',
       hubs: 'Strategic VIP Hubs & Experiences 2026/2027',
@@ -228,7 +228,7 @@ const SEARCH_UI_COPY_BASE: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'ru'
       allClubsLink: 'Los 19 Clubs',
       clubs: 'Clubs, Discotecas y Rooftops Oficiales',
       capodanno: 'Nochevieja 2027 en Milán · Cenas de Gala, Rooftops y Discotecas',
-      capodannoAllLink: 'Los 125 Eventos de Nochevieja',
+      capodannoAllLink: 'Los 126 Eventos de Nochevieja',
       events: 'Calendario de Fiestas y Eventos Especiales',
       eventsAllLink: 'Calendario Completo',
       hubs: 'Hubs Estratégicos y Experiencias VIP 2026/2027',
@@ -283,7 +283,7 @@ const SEARCH_UI_COPY_BASE: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'ru'
       allClubsLink: 'Les 19 Clubs',
       clubs: 'Clubs, Discothèques & Rooftops Officiels',
       capodanno: 'Nouvel An 2027 à Milan · Dîners Gala, Rooftops & Clubs',
-      capodannoAllLink: 'Les 125 Soirées du Nouvel An',
+      capodannoAllLink: 'Les 126 Soirées du Nouvel An',
       events: 'Calendrier des Soirées & Événements Spéciaux',
       eventsAllLink: 'Calendrier Complet',
       hubs: 'Hubs Stratégiques & Expériences VIP 2026/2027',
@@ -338,7 +338,7 @@ const SEARCH_UI_COPY_BASE: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'ru'
       allClubsLink: 'Alle 19 Clubs',
       clubs: 'Offizielle Clubs, Diskotheken & Rooftops',
       capodanno: 'Silvester 2027 in Mailand · Gala-Dinner, Rooftops & Clubs',
-      capodannoAllLink: 'Alle 125 Silvester-Events',
+      capodannoAllLink: 'Alle 126 Silvester-Events',
       events: 'Party-Kalender & Sonderveranstaltungen',
       eventsAllLink: 'Kompletter Kalender',
       hubs: 'Strategische VIP-Hubs & Erlebnisse 2026/2027',
@@ -393,7 +393,7 @@ const SEARCH_UI_COPY_BASE: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'ru'
       allClubsLink: 'Todos os 19 Clubs',
       clubs: 'Clubs, Discotecas & Rooftops Oficiais',
       capodanno: 'Réveillon 2027 em Milão · Jantares de Gala, Rooftops & Discotecas',
-      capodannoAllLink: 'Todos os 125 Eventos de Réveillon',
+      capodannoAllLink: 'Todos os 126 Eventos de Réveillon',
       events: 'Calendário de Festas & Eventos Especiais',
       eventsAllLink: 'Calendário Completo',
       hubs: 'Hubs Estratégicos & Experiências VIP 2026/2027',
@@ -448,7 +448,7 @@ const SEARCH_UI_COPY_BASE: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'ru'
       allClubsLink: 'Все 19 клубов',
       clubs: 'Официальные клубы и панорамные руфтопы',
       capodanno: 'Новый год 2027 в Милане · Гала-ужины, руфтопы и клубы',
-      capodannoAllLink: 'Все 125 событий Нового года',
+      capodannoAllLink: 'Все 126 событий Нового года',
       events: 'Календарь вечеринок и специальных событий',
       eventsAllLink: 'Полный календарь',
       hubs: 'Стратегические VIP-разделы 2026/2027',
@@ -503,7 +503,7 @@ const SEARCH_UI_COPY_BASE: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'ru'
       allClubsLink: '全部19家俱乐部',
       clubs: '官方合作俱乐部与屋顶酒吧',
       capodanno: '2027米兰跨年盛典 · 晚宴、屋顶烟花与夜店派对',
-      capodannoAllLink: '全部125场跨年活动',
+      capodannoAllLink: '全部126场跨年活动',
       events: '近期派对与特别活动日历',
       eventsAllLink: '完整活动日历',
       hubs: '2026/2027 VIP核心体验专区',
@@ -558,7 +558,7 @@ const SEARCH_UI_COPY_BASE: Record<'it' | 'en' | 'es' | 'fr' | 'de' | 'pt' | 'ru'
       allClubsLink: 'جميع النوادي الـ 19',
       clubs: 'النوادي الليلية والتراسات الرسمية',
       capodanno: 'رأس السنة 2027 في ميلانو · عشاء فاخر وتراسات ونوادي',
-      capodannoAllLink: 'جميع فعاليات رأس السنة (125)',
+      capodannoAllLink: 'جميع فعاليات رأس السنة (126)',
       events: 'تقويم السهرات والفعاليات الخاصة',
       eventsAllLink: 'التقويم الكامل',
       hubs: 'المراكز الاستراتيجية وتجارب VIP 2026/2027',
@@ -786,14 +786,14 @@ const STRATEGIC_HUBS = [
     id: 'hub-nye',
     href: '/new-years-eve',
     icon: 'party',
-    badge: { en: '31 DEC · 125 EVENTS', it: '31 DIC · 125 EVENTI' },
+    badge: { en: '31 DEC · 126 EVENTS', it: '31 DIC · 126 EVENTI' },
     title: {
       en: "New Year's Eve 2027 in Milan (Cenone, Rooftops & VIP Tables)",
       it: 'Capodanno 2027 a Milano (Cenoni, Rooftop & Tavoli VIP)',
     },
     subtitle: {
-      en: 'All 125 NYE 2027 events across 16 categories: Voya 20th Floor, Just Me, Pineta, Aria, 55 Milano & Repvblic',
-      it: 'Tutti i 125 eventi di Capodanno 2027 in 16 categorie: Voya 20° Piano, Just Me, Pineta, Aria, 55 Milano & Repvblic',
+      en: 'All 126 NYE 2027 events across 16 categories: Voya 20th Floor, Just Me, Pineta, Aria, 55 Milano & Repvblic',
+      it: 'Tutti i 126 eventi di Capodanno 2027 in 16 categorie: Voya 20° Piano, Just Me, Pineta, Aria, 55 Milano & Repvblic',
     },
     searchTerms:
       'capodanno 2027 milano new years eve nye 31 dicembre cenone veglione discoteca tavoli vip fuochi artificio just me voya pineta aria 55 milano repvblic',
@@ -944,9 +944,9 @@ const ALL_TEN_GENRES = [
 const CAPODANNO_CATEGORIES_QUICK = [
   {
     id: 'capodanno-2027',
-    label: { it: 'Tutti i 125 Eventi Capodanno 2027', en: 'All 125 NYE 2027 Events' },
-    badge: { it: 'Catalogo Master (125)', en: 'Master Catalog (125)' },
-    terms: 'capodanno 2027 milano lombardia tutti 125 eventi new years eve',
+    label: { it: 'Tutti i 126 Eventi Capodanno 2027', en: 'All 126 NYE 2027 Events' },
+    badge: { it: 'Catalogo Master (126)', en: 'Master Catalog (126)' },
+    terms: 'capodanno 2027 milano lombardia tutti 126 eventi new years eve',
   },
   {
     id: 'capodanno-rooftop-milano',
@@ -1409,7 +1409,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
       })
       .slice(0, activeTab === 'clubs' ? 19 : 8);
 
-    // 2. Capodanno 2027 Categories & Events (16 Categories + 125 Events)
+    // 2. Capodanno 2027 Categories & Events (16 Categories + 126 Events)
     const scoredCapodannoCategories = CAPODANNO_CATEGORIES_QUICK.map((cat) => {
       const label = cat.label[typedLocale];
       const badge = cat.badge[typedLocale];
@@ -1749,7 +1749,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
       label: ui.tabs.capodanno,
       count: query.trim()
         ? searchResults.capodannoEvents.length + searchResults.capodannoCategories.length
-        : 125,
+        : 126,
     },
     { id: 'events', label: ui.tabs.events, count: query.trim() ? searchResults.events.length : undefined },
     { id: 'hubs', label: ui.tabs.hubs, count: query.trim() ? searchResults.hubs.length : 9 },

@@ -32,6 +32,7 @@ const CARD_POSTER_4X5_MAP: Readonly<Record<string, string>> = {
   "/images/events/capodanno-2027-posters/capodanno-bobino-milano.webp": "/images/events/cards-4x5/capodanno-2027-posters/capodanno-bobino-milano.webp",
   "/images/events/capodanno-2027-posters/capodanno-brescia-art-club-desenzano-circus-beatclub.webp": "/images/events/cards-4x5/capodanno-2027-posters/capodanno-brescia-art-club-desenzano-circus-beatclub.webp",
   "/images/events/capodanno-2027-posters/capodanno-carroponte-sesto-san-giovanni.webp": "/images/events/cards-4x5/capodanno-2027-posters/capodanno-carroponte-sesto-san-giovanni.webp",
+  "/images/events/capodanno-2027-posters/capodanno-castello-di-malpaga.webp": "/images/events/cards-4x5/capodanno-2027-posters/capodanno-castello-di-malpaga.webp",
   "/images/events/capodanno-2027-posters/capodanno-castello-sforzesco-parco-sempione-milano.webp": "/images/events/cards-4x5/capodanno-2027-posters/capodanno-castello-sforzesco-parco-sempione-milano.webp",
   "/images/events/capodanno-2027-posters/capodanno-ceresio-7-milano.webp": "/images/events/cards-4x5/capodanno-2027-posters/capodanno-ceresio-7-milano.webp",
   "/images/events/capodanno-2027-posters/capodanno-carlsberg-ol-milano.webp": "/images/events/cards-4x5/capodanno-2027-posters/capodanno-carlsberg-ol-milano.webp",

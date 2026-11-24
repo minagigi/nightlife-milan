@@ -30,13 +30,12 @@ import {
 const REPO_ROOT = path.resolve(__dirname, '..');
 
 test('T-031, T-032 & WA Audit: Every Capodanno venue has explicit partner boolean; partners = 0% direct, non-partners = 20% at checkout', () => {
-  assert.equal(CAPODANNO_EVENTS.length, 125, `Expected 125 events, got ${CAPODANNO_EVENTS.length}`);
+  assert.equal(CAPODANNO_EVENTS.length, 126, `Expected 126 events, got ${CAPODANNO_EVENTS.length}`);
   const expectedPartners = [
     'capodanno-pineta-milano',
     'capodanno-justme-milano-torre-branca',
     'capodanno-justme-garda-lake',
     'capodanno-aria-club-milano',
-    'capodanno-voya-rooftop-milano',
     'capodanno-55-milano',
     'capodanno-repvblic-milano',
     'capodanno-il-gattopardo-milano',
@@ -77,6 +76,7 @@ test('T-031, T-032 & WA Audit: Every Capodanno venue has explicit partner boolea
     'the-beach',
     'zelig-cabaret',
     'dazi-milano',
+    'voya',
   ] as const;
   for (const vid of nonPartnerVenues) {
     assert.equal(isPartnerVenueId(vid), false, `Expected partner=false for ${vid}`);
@@ -100,7 +100,7 @@ test('T-031, T-032 & WA Audit: Every Capodanno venue has explicit partner boolea
   }
 
   // Partner venues direct booking must have 0% fee across ALL formulas (while Single Pass channel stays 20%)
-  for (const vid of ['gate', 'pineta', 'repvblic', 'justme', 'bischeri', 'voya', 'justme-garda'] as const) {
+  for (const vid of ['gate', 'pineta', 'repvblic', 'justme', 'bischeri', 'justme-garda'] as const) {
     assert.equal(isPartnerVenueId(vid), true, `Expected partner=true for ${vid}`);
     const directSkus = SINGLE_PASS_SKUS.filter((s) => s.venueId === vid);
     assert.ok(directSkus.length >= 1, `Expected direct SKUs for partner ${vid}`);
@@ -175,9 +175,14 @@ test('T-031: 4 new venues (STK, Barchetta, Terminus, Palace Sold Out) + Radio Ro
     'capodanno-legend-club-milano',
     'capodanno-nidaba-theatre-navigli',
     'capodanno-brescia-art-club-desenzano-circus-beatclub',
+    'capodanno-castello-di-malpaga',
   ];
   const allExpectedSoldOut = ['capodanno-palace-hotel-como', ...expectedSoldOutFromClosed];
-  assert.equal(SOLDOUT_CAPODANNO_SLUGS.size, 15);
+  assert.equal(SOLDOUT_CAPODANNO_SLUGS.size, 16);
+  const castlesCombo = getCapodannoEventBySlug('capodanno-in-castello-tolcinasco-malpaga-chignolo-po');
+  assert.ok(castlesCombo);
+  assert.equal(castlesCombo.priceFromEur, 0);
+  assert.match(castlesCombo.priceSummaryIt, /Malpaga Sold Out/i);
   for (const slug of expectedSoldOutFromClosed) {
     assert.ok(CLOSED_CAPODANNO_SLUGS.has(slug), `Expected closed->SoldOut slug ${slug}`);
   }

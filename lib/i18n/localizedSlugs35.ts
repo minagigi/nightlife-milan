@@ -1674,6 +1674,8 @@ const LEGACY_NYE_VENUE_TO_BASE: Readonly<Record<string, string>> = {
   'voya-club-milano': 'capodanno-voya-rooftop-milano',
   'aria-club-milano': 'capodanno-aria-club-milano',
   'rocca-brivio-sforza-milano': 'capodanno-in-castello-tolcinasco-malpaga-chignolo-po',
+  'castello-di-malpaga': 'capodanno-castello-di-malpaga',
+  'castello-malpaga': 'capodanno-castello-di-malpaga',
   'fabrique-milano': 'capodanno-fabrique-milano',
   'magazzini-generali-milano': 'capodanno-magazzini-generali-milano',
   'alcatraz-milano': 'capodanno-alcatraz-milano',

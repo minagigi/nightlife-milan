@@ -457,6 +457,7 @@ const CLOSED_VENUE_META: Record<
   {
     name: string;
     city: string;
+    province?: string;
     address: string;
     reasonIt: string;
     reasonEn: string;
@@ -576,6 +577,19 @@ const CLOSED_VENUE_META: Record<
       'capodanno-justme-garda-lake',
       'capodanno-lago-di-garda-sesto-senso-coco-beach',
       'capodanno-in-villa-borromeo-fenaroli-reale',
+    ],
+  },
+  'capodanno-castello-di-malpaga': {
+    name: 'Castello di Malpaga',
+    city: 'Cavernago (BG)',
+    province: 'BG',
+    address: 'Piazza Castello, 24050 Cavernago (BG)',
+    reasonIt: 'Il Castello di Malpaga (Piazza Castello, Cavernago, Bergamo) non ha disponibilità per la notte del 31 dicembre 2026: la scheda di Capodanno 2027 è ufficialmente dichiarata Sold Out su Nightlife Milan.',
+    reasonEn: 'Castello di Malpaga (Piazza Castello, Cavernago, Bergamo) has no availability for December 31, 2026: New Year’s Eve 2027 is officially marked Sold Out on Nightlife Milan.',
+    alternatives: [
+      'capodanno-in-villa-borromeo-fenaroli-reale',
+      'capodanno-bergamo-setai-club-bobadilla',
+      'capodanno-il-gattopardo-milano',
     ],
   },
 };
@@ -1893,7 +1907,7 @@ export function getT031OverrideContent(
             venueName: closedMeta.name,
             address: closedMeta.address,
             city: closedMeta.city,
-            province: 'MI',
+            province: closedMeta.province ?? 'MI',
             hours: closedTag,
             dressCode: closedTag,
             priceSummary: closedTag,

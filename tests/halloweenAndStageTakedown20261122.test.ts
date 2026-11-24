@@ -28,7 +28,7 @@ test('Halloween hub selection and canonical invariants hold after Stage Entertai
 });
 
 test('Capodanno and October inventories exclude removed Stage Entertainment venues', () => {
-  assert.equal(CAPODANNO_EVENTS.length, 125);
+  assert.equal(CAPODANNO_EVENTS.length, 126);
   for (const ev of CAPODANNO_EVENTS) {
     assert.equal(/teatro-lirico|teatro-nazionale|lirico.*nazionale/i.test(ev.slug), false);
   }
