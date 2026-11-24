@@ -77,6 +77,7 @@ export interface UnifiedAnalyticsData {
     purchases: number;
     revenueEur: number;
     activeUsersNow: number;
+    dailySessions30d: Array<{ label: string; value: number }>;
     recentOrders: OrderFunnelEntry[];
   };
   axelTotals: {
@@ -275,6 +276,7 @@ async function fetchNlmMetrics(token: string, startDate: string, endDate: string
   const rtUrl = `https://analyticsdata.googleapis.com/v1beta/properties/${NLM_GA4_PROPERTY_ID}:runRealtimeReport`;
   const gscUrl = `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(NLM_GSC_SITE_URL)}/searchAnalytics/query`;
 
+  const thirtyDaysStart = romeDay(new Date(Date.now() - 29 * 86400_000));
   const [batchRes, rtRes, gscRes] = await Promise.all([
     fetch(batchUrl, {
       method: 'POST',
@@ -312,6 +314,12 @@ async function fetchNlmMetrics(token: string, startDate: string, endDate: string
                 },
               },
             },
+          },
+          {
+            dateRanges: [{ startDate: thirtyDaysStart, endDate }],
+            dimensions: [{ name: 'date' }],
+            metrics: [{ name: 'sessions' }],
+            limit: 60,
           },
         ],
       }),
@@ -352,7 +360,7 @@ async function fetchNlmMetrics(token: string, startDate: string, endDate: string
     throw new Error(`GA4 Nightlife HTTP ${batchRes.status}`);
   }
   const batchJ = (await batchRes.json()) as { reports?: Ga4Report[] };
-  const [repBase, repEv] = batchJ.reports ?? [];
+  const [repBase, repEv, repDaily] = batchJ.reports ?? [];
   const baseVals = repBase?.rows?.[0]?.metricValues ?? [];
   const sessions = Number(baseVals[0]?.value ?? 0) || 0;
   const users = Number(baseVals[1]?.value ?? 0) || 0;
@@ -366,6 +374,20 @@ async function fetchNlmMetrics(token: string, startDate: string, endDate: string
     if (k) evCounts[k] = (evCounts[k] || 0) + v;
   }
 
+  const byIsoDay = new Map<string, number>();
+  for (const row of repDaily?.rows ?? []) {
+    const rawD = row.dimensionValues?.[0]?.value ?? '';
+    const v = Number(row.metricValues?.[0]?.value ?? 0) || 0;
+    if (/^\d{8}$/.test(rawD)) {
+      byIsoDay.set(`${rawD.slice(0, 4)}-${rawD.slice(4, 6)}-${rawD.slice(6, 8)}`, v);
+    }
+  }
+  const dailySessions30d: Array<{ label: string; value: number }> = [];
+  for (let i = 29; i >= 0; i--) {
+    const d = romeDay(new Date(Date.now() - i * 86400_000));
+    dailySessions30d.push({ label: d, value: byIsoDay.get(d) || 0 });
+  }
+
   return {
     sessions,
     users,
@@ -375,6 +397,7 @@ async function fetchNlmMetrics(token: string, startDate: string, endDate: string
     gscImpressions,
     activeUsersNow,
     evCounts,
+    dailySessions30d,
   };
 }
 
@@ -608,6 +631,7 @@ async function computeUnifiedAnalyticsUncached(period: UnifiedPeriod): Promise<U
     gscImpressions: 0,
     activeUsersNow: 0,
     evCounts: {} as Record<string, number>,
+    dailySessions30d: [] as Array<{ label: string; value: number }>,
   };
 
   let axelRows: UnifiedSiteRow[] = [];
@@ -761,6 +785,7 @@ async function computeUnifiedAnalyticsUncached(period: UnifiedPeriod): Promise<U
       purchases: nlmPurchases,
       revenueEur: nlmRevenueEur,
       activeUsersNow: nlmRow.activeUsersNow,
+      dailySessions30d: nlmGa4.dailySessions30d,
       recentOrders: recentEntries,
     },
     axelTotals,
@@ -771,6 +796,6 @@ async function computeUnifiedAnalyticsUncached(period: UnifiedPeriod): Promise<U
 
 export const getUnifiedAnalyticsData = unstable_cache(
   async (period: UnifiedPeriod) => computeUnifiedAnalyticsUncached(period),
-  ['nlm-unified-analytics-v3'],
+  ['nlm-unified-analytics-v4'],
   { revalidate: 900, tags: ['nlm-unified-analytics'] },
 );

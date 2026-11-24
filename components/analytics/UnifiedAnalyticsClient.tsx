@@ -115,7 +115,7 @@ export function UnifiedSitesTable({ sites }: { sites: UnifiedSiteRow[] }) {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 min-w-0">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap gap-2">
           {(

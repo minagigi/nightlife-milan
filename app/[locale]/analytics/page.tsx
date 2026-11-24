@@ -175,7 +175,7 @@ function Panel({
   children: React.ReactNode;
 }) {
   return (
-    <section className="bg-white/[0.03] border border-white/10 rounded-xl p-6">
+    <section className="min-w-0 bg-white/[0.03] border border-white/10 rounded-xl p-4 sm:p-6">
       <div className="mb-4">
         <h2 className="text-lg font-serif font-bold text-champagne">{title}</h2>
         {subtitle && <p className="text-xs text-white/60 mt-1">{subtitle}</p>}
@@ -220,8 +220,8 @@ export default async function AnalyticsPage({
   const ax = unified.axelTotals;
 
   return (
-    <main className="flex-1 bg-[#050505] min-h-screen py-12 px-4 sm:px-6 text-white">
-      <div className="max-w-7xl mx-auto space-y-8">
+    <main className="flex-1 w-full min-w-0 overflow-x-hidden bg-[#050505] min-h-screen py-10 sm:py-12 px-4 sm:px-6 text-white">
+      <div className="max-w-7xl mx-auto min-w-0 space-y-8">
         <header className="flex flex-col lg:flex-row lg:items-end justify-between gap-5 border-b border-white/10 pb-6">
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-champagne font-semibold mb-1.5">
@@ -338,7 +338,7 @@ export default async function AnalyticsPage({
           </div>
         </section>
 
-        <section className="space-y-4 rounded-2xl border border-champagne/25 bg-champagne/[0.03] p-6">
+        <section className="min-w-0 space-y-4 rounded-2xl border border-champagne/25 bg-champagne/[0.03] p-4 sm:p-6">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <div>
               <h2 className="text-xl font-serif font-bold text-champagne">
@@ -500,10 +500,14 @@ export default async function AnalyticsPage({
           <UnifiedSitesTable sites={unified.sites} />
         </Panel>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-6 min-w-0">
           <Panel title="Visite giornaliere su Nightlife Milan (ultimi 30 giorni)">
             <BarChart
-              data={seriesFor(daily, 'pv', DAYS)}
+              data={
+                f.dailySessions30d.some((d) => d.value > 0)
+                  ? f.dailySessions30d
+                  : seriesFor(daily, 'pv', DAYS)
+              }
               ariaLabel={`Visite giornaliere ultimi ${DAYS} giorni`}
             />
           </Panel>
@@ -605,9 +609,9 @@ export default async function AnalyticsPage({
 
           <form
             action={saveXceedEntry}
-            className="grid grid-cols-2 md:grid-cols-6 gap-3 items-end"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-3 items-end"
           >
-            <label className="col-span-2 text-xs text-white/70">
+            <label className="sm:col-span-2 text-xs text-white/70">
               Nome evento
               <input
                 name="eventName"
@@ -658,7 +662,7 @@ export default async function AnalyticsPage({
             </label>
             <button
               type="submit"
-              className="col-span-2 md:col-span-6 md:w-auto md:justify-self-start bg-champagne text-[#050505] font-bold text-sm rounded-lg px-6 py-2.5 hover:bg-white transition-colors cursor-pointer"
+              className="sm:col-span-2 md:col-span-6 md:w-auto md:justify-self-start bg-champagne text-[#050505] font-bold text-sm rounded-lg px-6 py-2.5 hover:bg-white transition-colors cursor-pointer"
             >
               Salva voce Xceed
             </button>

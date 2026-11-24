@@ -28,7 +28,7 @@ export function BarChart({ data, ariaLabel }: { data: Point[]; ariaLabel: string
   const [hover, setHover] = useState<number | null>(null);
 
   if (data.length === 0 || data.every((d) => d.value === 0)) {
-    return <p className="text-white/40 text-sm py-8 text-center">Nessun dato ancora — i contatori si riempiono con le prossime visite.</p>;
+    return <p className="text-white/55 text-sm py-8 text-center">Nessun dato registrato nel periodo selezionato.</p>;
   }
 
   const W = 640;
@@ -103,7 +103,7 @@ export function LineChart({ data, ariaLabel }: { data: Point[]; ariaLabel: strin
   const [hover, setHover] = useState<number | null>(null);
 
   if (data.length < 2) {
-    return <p className="text-white/40 text-sm py-8 text-center">Servono almeno due snapshot giornalieri per la curva — arrivano col cron notturno.</p>;
+    return <p className="text-white/55 text-sm py-8 text-center">Servono almeno due rilevazioni giornaliere per tracciare la curva.</p>;
   }
 
   const W = 640;
