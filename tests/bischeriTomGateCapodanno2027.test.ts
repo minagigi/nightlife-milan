@@ -18,6 +18,7 @@ import { getCapodannoLocalizedEventContent } from '../lib/capodanno/i18n';
 import { CAPODANNO_EVENT_BASE_SLUGS, capodannoEventPath } from '../lib/capodanno/routes';
 import { getTomNyeContent } from '../lib/capodanno/tom35';
 import { getChurch81NyeContent, getFiftyFiveNyeContent } from '../lib/capodanno/church81And55_35';
+import { getCarlsbergOlNyeContent } from '../lib/capodanno/carlsbergOl35';
 import { getVenueIdByEventSlug } from '../lib/single-pass/catalog';
 import {
   ALL_35_LOCALES,
@@ -27,9 +28,10 @@ import {
 const REPO_ROOT = path.resolve(__dirname, '..');
 const FORBIDDEN_THIRD_PARTY_RE = /331[\s\-]?478[\s\-]?8258|umberto-falcone|perreoxl\.com|origgigallery|gatemilano\.it/i;
 
-test('Capodanno 2027 catalog reconciled cleanly to 124 events (T-032 + WA Audit + Church 81 - Stage Entertainment takedown)', () => {
-  assert.equal(CAPODANNO_EVENT_BASE_SLUGS.length, 124);
-  assert.equal(CAPODANNO_EVENTS.length, 124);
+test('Capodanno 2027 catalog reconciled cleanly to 125 events (T-032 + WA Audit + Church 81 - Stage Entertainment takedown)', () => {
+  assert.equal(CAPODANNO_EVENT_BASE_SLUGS.length, 125);
+  assert.equal(CAPODANNO_EVENTS.length, 125);
+  assert.ok(CAPODANNO_EVENT_BASE_SLUGS.includes('capodanno-carlsberg-ol-milano'));
   assert.ok(CAPODANNO_EVENT_BASE_SLUGS.includes('capodanno-bischeri-milano'));
   assert.ok(CAPODANNO_EVENT_BASE_SLUGS.includes('capodanno-tom-the-ordinary-market-milano'));
   assert.ok(CAPODANNO_EVENT_BASE_SLUGS.includes('capodanno-gate-milano'));
@@ -241,5 +243,43 @@ test('capodanno-church-81-milano & capodanno-55-milano (La Dolce Vita 2027) pass
     const blob = JSON.stringify({ cCh, cFf });
     assert.doesNotMatch(blob, /!/, `Unexpected exclamation mark in church81And55 (${locale})`);
     assert.doesNotMatch(blob, /\u2014|335\s*529\s*0025|capodannodimilano|\bstripe\b|70[–-]75|130[–-]140/i, `Forbidden token in church81And55 (${locale})`);
+  }
+});
+
+
+test('capodanno-carlsberg-ol-milano passes 35-locale hygiene, €75 all-in menu & WA-only bounds', () => {
+  const cb = getCapodannoEventBySlug('capodanno-carlsberg-ol-milano');
+  assert.ok(cb, 'Missing capodanno-carlsberg-ol-milano');
+  assert.equal(cb.priceFromEur, 75);
+  assert.equal(cb.hours, '20:30 – 03:00');
+  assert.equal(cb.partner, false);
+  assert.match(cb.address, /Bastioni di Porta Nuova 9/i);
+  assert.equal(getCapodannoEventForClub('carlsberg-ol')?.slug, 'capodanno-carlsberg-ol-milano');
+  assert.equal(getVenueIdByEventSlug('capodanno-carlsberg-ol-milano'), null);
+
+  for (const rel of [
+    'public/images/events/capodanno-2027-posters/capodanno-carlsberg-ol-milano.webp',
+    'public/images/events/cards-4x5/capodanno-2027-posters/capodanno-carlsberg-ol-milano.webp',
+    'public/images/events/capodanno-2027-menus/carlsberg-ol-nye-2027-menu-cenone-75.webp',
+    'public/images/seo-events/master/carlsberg-ol-01.webp',
+    'public/images/seo-events/master/carlsberg-ol-02.webp',
+    'public/images/seo-events/master/carlsberg-ol-03.webp',
+    'public/images/seo-events/master/carlsberg-ol-04.webp',
+  ]) {
+    const p = path.join(REPO_ROOT, rel);
+    assert.ok(fs.existsSync(p), `Missing asset ${rel}`);
+    assert.ok(fs.statSync(p).size <= 300 * 1024, `Oversized asset ${rel}`);
+  }
+
+  for (const locale of ALL_35_LOCALES) {
+    const cCb = getCarlsbergOlNyeContent(locale);
+    assert.equal(getCapodannoLocalizedEventContent(cb, locale).title, cCb.title);
+    assert.equal(cCb.tiers.length, 1);
+    assert.equal(cCb.menus?.length, 1);
+    assert.equal(cCb.menus?.[0]?.courses.length, 5);
+    assert.deepEqual(cCb.offerPricesEur, [75]);
+    const blob = JSON.stringify(cCb);
+    assert.doesNotMatch(blob, /!/, `Unexpected exclamation mark in carlsbergOl35 (${locale})`);
+    assert.doesNotMatch(blob, /\u2014|335\s*529\s*0025|capodannodimilano|\bstripe\b|commissione|commission/i, `Forbidden token in carlsbergOl35 (${locale})`);
   }
 });

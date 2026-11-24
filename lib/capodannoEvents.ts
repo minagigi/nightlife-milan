@@ -126,15 +126,15 @@ export const CAPODANNO_CATEGORY_PAGES: readonly CapodannoCategoryPageDef[] = [
     slug: 'capodanno-2027',
     path: '/events/capodanno-2027',
     group: 'hub',
-    badgeIt: 'Master Hub (124)',
-    badgeEn: 'Master Hub (124)',
-    shortLabelIt: 'Tutti i 124 Eventi',
-    shortLabelEn: 'All 124 Events',
-    titleIt: 'Capodanno 2027 Milano e Lombardia: Tutti i 124 Eventi, Locali, Discoteche, Rooftop, Cenoni, Teatri, Speciali e Piazze',
+    badgeIt: 'Master Hub (125)',
+    badgeEn: 'Master Hub (125)',
+    shortLabelIt: 'Tutti i 125 Eventi',
+    shortLabelEn: 'All 125 Events',
+    titleIt: 'Capodanno 2027 Milano e Lombardia: Tutti i 125 Eventi, Locali, Discoteche, Rooftop, Cenoni, Teatri, Speciali e Piazze',
     titleEn: 'New Year’s Eve 2027 Milan & Lombardy: All 124 Club, Rooftop, Dinner Show, Theatre, Special & Public Square Events',
     subtitleIt: 'Il catalogo completo con filtri interattivi per tipologia di locale, target (coppie, single, famiglie, over 30/40), genere musicale, quartiere e fascia di prezzo.',
     subtitleEn: 'The complete directory with interactive filters by venue type, target crowd (couples, singles, families, 30+ adults), music genre, district, and budget.',
-    quickAnswerIt: 'Usa i filtri interattivi o scegli una delle 16 pagine categoria dedicate per confrontare i 124 eventi di Capodanno 2027 tra Milano, Lago di Garda e Lombardia: Rooftop panoramici, Discoteche (inclusi JustMe Milano e JustMe Garda Lake), Locali con Cenone Cantato, Teatri (Manzoni, Carcano, Scala), Hotel 5★ e Ville, Speakeasy, Terme e Baita in Motoslitta.',
+    quickAnswerIt: 'Usa i filtri interattivi o scegli una delle 16 pagine categoria dedicate per confrontare i 125 eventi di Capodanno 2027 tra Milano, Lago di Garda e Lombardia: Rooftop panoramici, Discoteche (inclusi JustMe Milano e JustMe Garda Lake), Locali con Cenone Cantato, Teatri (Manzoni, Carcano, Scala), Hotel 5★ e Ville, Speakeasy, Terme e Baita in Motoslitta.',
     quickAnswerEn: 'Use our interactive filters or browse 16 dedicated category pages across 124 New Year’s Eve 2027 events in Milan, Lake Garda, and Lombardy: Panoramic Rooftops, Nightclubs (including JustMe Milan and JustMe Garda Lake), Singing Dinner Shows, Theatres (Manzoni, Carcano, La Scala), 5★ Hotels & Villas, Speakeasies, Thermal Spas & Snowmobile Chalets.',
   },
   {
@@ -371,18 +371,18 @@ export const CAPODANNO_HUB_ROUTES: Record<
   all: {
     path: '/events/capodanno-2027',
     slug: 'capodanno-2027',
-    labelIt: 'Tutti gli Eventi di Capodanno 2027 (124 Eventi)',
-    labelEn: 'All New Year’s Eve 2027 Events (124 Events)',
+    labelIt: 'Tutti gli Eventi di Capodanno 2027 (125 Eventi)',
+    labelEn: 'All New Year’s Eve 2027 Events (125 Events)',
     badgeIt: 'Guida Completa 31 Dicembre',
     badgeEn: 'Complete Dec 31 Guide',
   },
   'milano-club': {
     path: '/events/capodanno-discoteche-milano',
     slug: 'capodanno-discoteche-milano',
-    labelIt: 'Milano: Tutti i Club, Discoteche, Live, Rooftop & Hotel 5★ (78)',
+    labelIt: 'Milano: Tutti i Club, Discoteche, Live, Rooftop & Hotel 5★ (79)',
     labelEn: 'Milan: All Clubs, Nightclubs, Live Venues, Rooftops & 5★ Hotels (78)',
-    badgeIt: '78 Locali a Milano',
-    badgeEn: '78 Milan Venues',
+    badgeIt: '79 Locali a Milano',
+    badgeEn: '79 Milan Venues',
   },
   'capodanno-speciale': {
     path: '/events/capodanno-speciale',
@@ -612,6 +612,7 @@ const SEEDS: any[] = [
   ["capodanno-repvblic-milano", "milano-club", "MI", "Milano", "REPVBLIC Milano", "Piazza della Repubblica, 12, 20124 Milano", "23:00 – 05:00", "/images/events/capodanno-2027-posters/capodanno-repvblic-milano.webp", 45, "Early Bird 45€ (flûte + 1 drink) · Tavolo Dancefloor 600€ (6 pax) · Tavolo Privé 1.200€ (10 pax)", "Early Bird €45 (flûte + 1 drink) · Dancefloor Table €600 (6 guests) · Privé Table €1,200 (10 guests)", "Capodanno REPVBLIC Milano 2027: New Year’s Eve in Piazza della Repubblica 12", "New Year’s Eve at REPVBLIC Milano 2027 · Piazza della Repubblica 12", "Hit Internazionali, Hip Hop & House · Countdown con flûte di mezzanotte (dalle 23:00 fino al mattino)", "International Hits, Hip Hop & House · Midnight countdown toast (23:00 till morning)", "Look curato ed elegante per la notte più attesa dell’anno", "Elevated & stylish New Year’s Eve look", [["Early Bird (dalle 23:00)", "45€ a persona", "Ingresso con flûte per il brindisi di mezzanotte e un drink inclusi"], ["Tavolo Zona Dancefloor", "600€ per 6 persone", "Un tavolo riservato nel cuore della festa"], ["Tavolo Zona Privé", "1.200€ per 10 persone", "Un tavolo riservato nella nostra esclusiva area VIP"]], [["Early Bird (from 23:00)", "€45 per person", "Admission from 23:00 with flûte for the midnight toast and one drink included"], ["Dancefloor Table Zone", "€600 for 6 guests", "A reserved table right in the heart of the party"], ["Privé VIP Table Zone", "€1,200 for 10 guests", "A reserved table in our exclusive VIP Privé area"]], "Una notte speciale, un pubblico internazionale e tutta l’energia di Milano per dare il benvenuto al 2027. A Capodanno, REPVBLIC Milano in Piazza della Repubblica 12 ti aspetta dalle 23:00 fino al mattino per una festa che parte con l’attesa della mezzanotte, il countdown e i calici alzati, con hit internazionali, hip hop e house. One night. All nations. A new beginning. Info ufficiali e prenotazioni tavoli VIP via Concierge WhatsApp +39 351 912 7047.", "A special night, an international crowd, and all the energy of Milan to welcome 2027. On New Year’s Eve, REPVBLIC Milano at Piazza della Repubblica 12 awaits from 23:00 till morning with the midnight countdown, raised flûtes, and a DJ selection spanning international hits, hip hop, and house. One night. All nations. A new beginning. Official bookings via WhatsApp Concierge +39 351 912 7047."],
   ["capodanno-bischeri-milano", "milano-club", "MI", "Milano", "Bischeri Milano", "Viale Gorizia 8 (Navigli / Darsena), 20144 Milano", "20:30 – 05:00", "/images/events/capodanno-2027-posters/capodanno-bischeri-milano.webp", 40, "Cenone Servito 140€ (Menù di Terra o di Mare) · Ingresso Dopocena 40€ (23:30 con 2 drink)", "Served Gala Dinner €140 (Land or Sea Menu) · After-Dinner €40 (23:30 with 2 drinks)", "Capodanno Bischeri Milano 2027: Gran Cenone Servito & Party con DJ Gigi Zeus", "Bischeri Milano NYE 2027: Served Gala Dinner & DJ Gigi Zeus Party in Navigli", "Music Dinner Show con DJ Gigi Zeus · Prosecco Extra-Dry a mezzanotte e DJ Set fino all’alba", "Music Dinner Show with DJ Gigi Zeus · Midnight Extra-Dry Prosecco & Party till late", "Elegante / Smart Chic di San Silvestro", "Elegant / Smart Chic New Year’s Eve Attire", [["Gran Cenone Servito (dalle 20:30 · Terra o Mare)", "140€ a persona", "Menu 4 portate con Prosecco Extra-Dry di mezzanotte, acqua ogni 2, bottiglia di vino ogni 4, coperto e DJ Gigi Zeus"], ["Ingresso Dopocena (dalle 23:30)", "40€ a persona", "Include 2 drink e festa con DJ set nella notte di San Silvestro sui Navigli"]], [["Served Gala Dinner (from 20:30 · Land or Sea Menu)", "€140 per person", "4-course menu with midnight Extra-Dry Prosecco, water per 2, 1 bottle of wine per 4, service and DJ Gigi Zeus"], ["After-Dinner Entry (from 23:30)", "€40 per person", "Includes 2 drinks and DJ set New Year’s Eve party in Navigli"]], "Capodanno 2027 firmato Bischeri Milano in Viale Gorizia 8 sui Navigli: Gran Cenone Servito alle 20:30 a 140€ a scelta tra Menù di Terra e Menù di Mare con vini e Prosecco Extra-Dry inclusi, oppure Ingresso Dopocena dalle 23:30 a 40€ con 2 drink e Music Dinner Show con DJ Gigi Zeus. Prenotazioni ufficiali su WhatsApp +39 351 912 7047.", "New Year’s Eve 2027 at Bischeri Milano on Viale Gorizia 8 in Navigli: Served Gala Dinner from 20:30 at €140 with your choice of Meat (Terra) or Seafood (Mare) 4-course menus including wines and midnight Extra-Dry Prosecco, or After-Dinner entry from 23:30 at €40 with 2 drinks and Music Dinner Show by DJ Gigi Zeus. Book via WhatsApp +39 351 912 7047."],
   ["capodanno-tom-the-ordinary-market-milano", "milano-club", "MI", "Milano", "TOM. The Ordinary Market", "Via Molino delle Armi 16 (Colonne di San Lorenzo / Corso Italia), 20123 Milano", "20:30 – 05:00", "/images/events/capodanno-2027-posters/capodanno-tom-the-ordinary-market-milano.webp", 30, "Ingresso 00:30 Early Bird 30€ (1 drink) · Gala Dinner 20:30 Early Bird 150€ (Carne o Pesce) · Tavoli 600€ / 900€ / 1.500€", "00:30 Club Entry Early Bird €30 (1 drink) · 20:30 Gala Dinner Early Bird €150 (Meat or Fish) · Tables €600 / €900 / €1,500", "Capodanno TOM. Milano 2027 · The Midnight Ball in Via Molino delle Armi", "TOM. The Ordinary Market Milan NYE 2027 · The Midnight Ball", "The Midnight Ball · Gala Dinner (20:30) & Club House, Nu-Disco, Hip-Hop (00:30–05:00)", "The Midnight Ball · Gala Dinner (20:30) & House, Nu-Disco, Hip-Hop Club (00:30–05:00)", "Fashion / Cocktail Attire elegante", "Fashion / Elevated Evening Cocktail Attire", [["Ingresso Club dalle 00:30 (Early Bird)", "30€ a persona", "Accesso sala club dalle 00:30 con 1 consumazione inclusa · prenotazione diretta partner WhatsApp"], ["Gala Dinner Servita dalle 20:30 (Early Bird · Carne o Pesce)", "150€ a persona", "Flûte Bellavista Alma, 3 antipasti, 2 portate main, panettone artigianale, 1 vino ogni 4, acqua e guardaroba inclusi"], ["Tavoli VIP dalle 00:30 (Base / Pedana / Consolle)", "600€ / 900€ / 1.500€", "600€ Base (8 pax) · 900€ Pedana (10 pax) · 1.500€ Consolle (15 pax) con bottle list ufficiale TOM."]], [["Club Entry from 00:30 (Early Bird)", "€30 per person", "Club room entry from 00:30 with 1 drink included · direct partner booking via WhatsApp"], ["Served Gala Dinner from 20:30 (Early Bird · Meat or Fish)", "€150 per person", "Bellavista Alma flute, 3 starters, 2 mains, artisanal panettone, 1 wine bottle per 4, water & coat check included"], ["VIP Tables from 00:30 (Base / Deck / Console)", "€600 / €900 / €1,500", "€600 Base (8 pax) · €900 Deck (10 pax) · €1,500 Console (15 pax) with official TOM. bottle list"]], "Capodanno 2027 confermato al TOM. (The Ordinary Market) in Via Molino delle Armi 16 con «The Midnight Ball»: Gala Dinner dalle 20:30 a 150€ Early Bird (Menu di Carne o Menu di Pesce con Bellavista Alma, vino 1 ogni 4, acqua e guardaroba), Ingresso Club dalle 00:30 a 30€ Early Bird con 1 drink e Tavoli VIP 600€ (8), 900€ (10) e 1.500€ (15). Prenotazioni ufficiali partner senza commissioni su WhatsApp +39 351 912 7047.", "Confirmed NYE 2027 at TOM. (The Ordinary Market) on Via Molino delle Armi 16 with \"The Midnight Ball\": 20:30 Gala Dinner at €150 Early Bird (Meat or Fish menu with Bellavista Alma, wine 1/4, water & coat check), 00:30 Club Entry at €30 Early Bird (1 drink) & VIP Tables €600 (8), €900 (10), €1,500 (15). Direct partner booking with zero fees on WhatsApp +39 351 912 7047."],
+  ["capodanno-carlsberg-ol-milano", "milano-club", "MI", "Milano", "Carlsberg Øl Milano", "Bastioni di Porta Nuova 9 (Porta Nuova / Corso Como), 20121 Milano", "20:30 – 03:00", "/images/events/capodanno-2027-posters/capodanno-carlsberg-ol-milano.webp", 75, "Tariffa unica 75€ · Cenone Servito + Vino (1 ogni 4) + Cena Cantata + DJ Set", "Single Rate €75 · Seated Dinner + Wine (1 bottle / 4) + Sing-Along Show + DJ Set", "Capodanno 2027 Carlsberg Øl Milano · Cena Cantata e DJ Set (75€ Tutto Incluso)", "Carlsberg Øl Milan NYE 2027 · Sing-Along Gala Dinner & DJ Set (€75 All-In)", "Cena Cantata dal Vivo durante il Cenone · Countdown di Mezzanotte & DJ Set fino alle 03:00", "Live Italian Sing-Along Dinner Show (Cena Cantata) · Midnight Countdown & DJ Set until 03:00", "Smart Chic / Elegante Casual di San Silvestro", "Smart Chic / Festive Evening Casual", [["Cenone Servito + Cena Cantata + DJ Set (20:30)", "75€", "Antipasto salumi/formaggi/gnocco fritto, lasagnetta cinghiale e porcini, roast beef su carciofi e patate novelle, tortino cuore caldo, acqua, caffè, 1 vino ogni 4 (Montepulciano/Vermentino), cotechino con lenticchie e prosecco"]], [["Seated NYE Dinner + Sing-Along Show + DJ Set (20:30)", "€75", "Cured meats/cheeses/gnocco fritto, wild boar & porcini lasagnetta, roast beef on artichokes & baby potatoes, warm chocolate cake, water, coffee, 1 wine per 4 (Montepulciano/Vermentino), midnight prosecco & lentils"]], "Capodanno 2027 da Carlsberg Øl Milano nei Bastioni di Porta Nuova 9 (Porta Nuova / Corso Como, 20:30–03:00): Gran Cenone servito a tariffa unica 75€ con Cena Cantata dal vivo, vino Montepulciano o Vermentino incluso (1 bottiglia ogni 4 persone), acqua, caffè, cotechino con lenticchie, brindisi di mezzanotte e DJ set. Prenotazioni ufficiali su WhatsApp +39 351 912 7047.", "NYE 2027 at Carlsberg Øl Milan at Bastioni di Porta Nuova 9 (Porta Nuova / Corso Como, 20:30–03:00): all-in €75 seated dinner with live Cena Cantata sing-along show, Montepulciano or Vermentino wine (1 bottle per 4), water, coffee, midnight prosecco & lentils, and DJ set. Official bookings via WhatsApp +39 351 912 7047."],
   ["capodanno-church-81-milano", "milano-club", "MI", "Milano", "Church 81 Milano", "Via della Chiesa Rossa 81 (Navigli / Chiesa Rossa), 20142 Milano", "20:30 – 04:00", "/images/events/capodanno-2027-posters/capodanno-church-81-milano.webp", 90, "Tariffa unica 90€ · Cena di Gala Eyes Wide Shut (Menù Pesce o Carne) + QR Code & Parola d’ordine", "Fixed Rate €90 · Eyes Wide Shut Gala Dinner (Fish or Meat Menu) + QR Code & Password", "Eyes Wide Shut Masquerade · Dinner Show tra archi in mattoni sconsacrati & DJ Set fino alle 04:00", "Eyes Wide Shut Masquerade · Deconsecrated Church Gala Dinner Show & DJ Set until 04:00", "Capodanno 2027 Church 81 Milano: Eyes Wide Shut (90€ · Pesce o Carne)", "NYE 2027 Eyes Wide Shut · Church 81 Milan (€90 Gala + QR & Password)", "Eyes Wide Shut · Maschera ed Eleganza / Abito da Sera", "Eyes Wide Shut Masquerade / Black Tie or Elegant Evening", [["Cena di Gala Eyes Wide Shut · Menù di Pesce (20:30)", "90€", "Flûte Prosecco Millesimato, Tris di Mare, Paccheri/Risotto, Salmone/Branzino, Panettone & Cotechino con lenticchie (altre bevande escluse, cambio gratis fino 28/12)"], ["Cena di Gala Eyes Wide Shut · Menù di Carne (20:30)", "90€", "Flûte Prosecco Millesimato, Tris di Tartare, Pappardelle/Ravioli, Filetto lardellato/Anatra, Panettone & Cotechino con lenticchie (altre bevande escluse, cambio gratis fino 28/12)"]], [["Eyes Wide Shut Fish Gala Dinner (20:30)", "€90", "Welcome Prosecco flute, Seafood Trio, Paccheri or Lemon Risotto, Salmon or Sea Bass, Panettone & Midnight Lentils (other drinks excluded; free switch until Dec 28)"], ["Eyes Wide Shut Meat Gala Dinner (20:30)", "€90", "Welcome Prosecco flute, Tartare Trio, Beef Ragù Pappardelle or Ravioli, Larded Fillet or Orange Duck, Panettone & Midnight Lentils (other drinks excluded; free switch until Dec 28)"]], "Capodanno 2027 Eyes Wide Shut nella chiesa sconsacrata Church 81 Milano (Via della Chiesa Rossa 81, Navigli / Chiesa Rossa, 20:30–04:00): cena servita a tariffa fissa 90€ con Menù Pesce o Carne (cambio gratis entro il 28/12), ingresso con QR code nominale e parola d’ordine segreta, ampio parcheggio gratuito. Prenotazioni WhatsApp +39 351 912 7047.", "NYE 2027 Eyes Wide Shut inside Church 81’s deconsecrated church arches (Via della Chiesa Rossa 81, Navigli, 20:30–04:00): fixed €90 seated gala with Fish or Meat menu (free swap until Dec 28), personal QR code + secret password admission, large free parking. WhatsApp +39 351 912 7047."],
   ["capodanno-il-gattopardo-milano", "milano-club", "MI", "Milano", "Il Gattopardo Milano", "Via Piero della Francesca 47 (Sempione), 20154 Milano", "22:30 – 05:00", "/images/events/capodanno-2027-posters/capodanno-il-gattopardo-milano.webp", 600, "Tavoli VIP 600€ a persona di minimum spending (22:30–05:00) · Tavoli Cupole e Centrale su richiesta", "VIP Tables €600 per person minimum spend (22:30–05:00) · Dome & Center Tables upon request", "Capodanno Il Gattopardo Milano 2027 · Ex Chiesa Sconsacrata & Tavoli VIP", "Il Gattopardo Milan NYE 2027 · Iconic Deconsecrated Church & VIP Tables", "Party di San Silvestro nell’ex chiesa sconsacrata · DJ Set House & Commerciale (22:30 – 05:00)", "New Year’s Eve inside Milan’s iconic deconsecrated church · House & Commercial DJ Set (22:30 – 05:00)", "Black Tie / Elegante Rigoroso", "Strict Black Tie / Evening Elegant", [["Tavolo VIP Minimum Spending (22:30 – 05:00)", "600€ a persona", "Prepagamento 100%; include booking, ingresso e credito bottiglie in sala (vodka da 300€, champagne da 600€)"], ["Tavoli Speciali nelle Cupole & Tavolo Centrale", "Su richiesta", "Disponibilità limitata su verifica diretta col Concierge WhatsApp +39 351 912 7047"]], [["VIP Table Minimum Spend (22:30 – 05:00)", "€600 per person", "100% prepayment; includes booking, admission and bottle spending credit inside the church venue"], ["Dome VIP Tables & Center Altar Table", "Upon request", "Limited availability confirmed directly via WhatsApp Concierge +39 351 912 7047"]], "Capodanno 2027 a Il Gattopardo Milano (Via Piero della Francesca 47): serata dalle 22:30 alle 05:00 nella celebre ex chiesa sconsacrata. Tavoli VIP ufficiali da 600€ a persona di minimum spending (tavoli cupole e centrale su richiesta). Prenotazioni ufficiali partner tramite Concierge WhatsApp +39 351 912 7047.", "New Year’s Eve 2027 at Il Gattopardo Milan (Via Piero della Francesca 47): 22:30 to 05:00 inside the iconic deconsecrated church. Official VIP tables at €600 per person minimum spend (dome & center tables on request). Official partner bookings via WhatsApp +39 351 912 7047."],
   ["capodanno-apollo-club-milano", "milano-club", "MI", "Milano", "Apollo Club Milano", "Centro / Distretto Eventi, Milano", "20:30 – 05:00", "/images/events/capodanno-2027-posters/capodanno-apollo-club-milano.webp", 40, "Dopocena 40–50€ · Royal Buffet 65€ · Cenone 130€ · Tavoli VIP 350–1.200€", "After-Dinner €40–€50 · Royal Buffet €65 · Gala Dinner €130 · VIP Tables €350–€1,200", "Capodanno Apollo Club Milano 2027: Gran Galà, Musica & Festa di San Silvestro", "Apollo Club Milano New Year’s Eve 2027: Gala Dinner, Live Show & Countdown Party", "Dinner Show, DJ Set Commerciale, House & Party di Mezzanotte", "Dinner Show, Commercial, House & Midnight Countdown Party", "Elegante / Smart Chic di San Silvestro", "New Year’s Eve Smart Chic / Elegant", [["Ingresso Dopocena / Serata (dalle 23:00)", "40€", "Include 1 drink e accesso al countdown di mezzanotte"], ["Royal Buffet / Apericena di Gala (dalle 20:30)", "70€", "Buffet caldo/freddo, drink e flûte per il brindisi"], ["Gran Cenone Servito di San Silvestro (dalle 20:00)", "140€", "Menu completo servito al tavolo con vini inclusi e festa"], ["Tavolo VIP Privé con Bottiglie", "350€ – 1.200€", "100% credito in bottiglie premium e ingresso prioritario salta-fila"]], [["After-Dinner / Party Entry (from 23:00)", "€40", "Includes 1 drink and midnight countdown access"], ["Royal Gala Buffet (from 20:30)", "€70", "Gala buffet, drink and midnight sparkling toast"], ["Served New Year’s Eve Gala Dinner (from 20:00)", "€140", "Full multi-course menu with wines and party access"], ["VIP Privé Table with Bottle Service", "€350 – €1,200", "100% credit in premium bottles with skip-the-line VIP admission"]], "Capodanno Apollo Club Milano 2027: Gran Galà, Musica & Festa di San Silvestro presso Apollo Club Milano (Centro / Distretto Eventi, Milano, Milano). Festeggia il 31 dicembre 2026 con cenone, spettacolo dal vivo, brindisi di mezzanotte e DJ set fino all’alba. Info e prenotazioni ufficiali via Concierge WhatsApp +39 351 912 7047.", "Apollo Club Milano New Year’s Eve 2027: Gala Dinner, Live Show & Countdown Party at Apollo Club Milano (Centro / Distretto Eventi, Milano, Milano). Celebrate December 31, 2026 with gala dining, live entertainment, midnight countdown, and DJ sets until dawn. Official bookings via WhatsApp Concierge +39 351 912 7047."],
@@ -857,6 +858,22 @@ function classifyCapodannoSeed(
     };
   }
 
+  if (slug === 'capodanno-carlsberg-ol-milano') {
+    return {
+      subCategories: [
+        'capodanno-locali-cenone-milano',
+        'capodanno-discoteche-milano',
+        'capodanno-over-30-40-milano',
+        'capodanno-coppie-romantico-milano',
+        'capodanno-single-milano',
+      ],
+      venueType: 'locale-cenone',
+      audiences: ['coppie', 'single', 'over30'],
+      formulas: ['cenone'],
+      musicTag: 'cena-cantata-live',
+      zoneTag: 'corso-como-sempione',
+    };
+  }
   if (slug === 'capodanno-church-81-milano') {
     return {
       subCategories: [
@@ -1077,6 +1094,7 @@ export function isPartnerCapodannoSlug(slug: string): boolean {
 }
 
 const NON_PARTNER_PRIORITY_SLUGS: readonly string[] = [
+  'capodanno-carlsberg-ol-milano',
   'capodanno-church-81-milano',
   'capodanno-terrazza-duomo-21',
   'capodanno-terrazza-gallia-excelsior-milano',
@@ -1152,6 +1170,7 @@ const UNSORTED_CAPODANNO_EVENTS: CapodannoEventItem[] = SEEDS.map((rawSeed: any[
       slug === 'capodanno-bischeri-milano' ||
       slug === 'capodanno-bobino-milano' ||
       slug === 'capodanno-55-milano' ||
+      slug === 'capodanno-carlsberg-ol-milano' ||
       slug === 'capodanno-church-81-milano' ||
       slug === 'capodanno-terrazza-duomo-21' ||
       slug === 'capodanno-tom-the-ordinary-market-milano'
@@ -1160,7 +1179,9 @@ const UNSORTED_CAPODANNO_EVENTS: CapodannoEventItem[] = SEEDS.map((rawSeed: any[
           ? '2026-12-31T23:00:00+01:00'
           : '2026-12-31T20:00:00+01:00',
     endISO:
-      slug === 'capodanno-bobino-milano' || slug === 'capodanno-church-81-milano'
+      slug === 'capodanno-carlsberg-ol-milano'
+        ? '2027-01-01T03:00:00+01:00'
+        : slug === 'capodanno-bobino-milano' || slug === 'capodanno-church-81-milano'
         ? '2027-01-01T04:00:00+01:00'
         : slug === 'capodanno-justme-garda-lake' ||
             slug === 'capodanno-repvblic-milano' ||
@@ -1243,6 +1264,8 @@ const UNSORTED_CAPODANNO_EVENTS: CapodannoEventItem[] = SEEDS.map((rawSeed: any[
                                     ? 'Scheda ufficiale in aggiornamento per Fabbrica del Vapore (Via Giulio Cesare Procaccini 4, 18+): programma e tariffe Capodanno 2027 non ancora annunciati, nessuna stima pubblicata prima del comunicato ufficiale. Avvisi su WhatsApp +39 351 912 7047.'
                                     : slug === 'capodanno-55-milano'
                                       ? 'Listino ufficiale confermato La Dolce Vita Capodanno 2027 · 55 Milano (Via Piero della Francesca 55, 20:30–05:00): Gala Servito 160€, Buffet seduta apparecchiata 100€, Dopocena 00:10 30/40/50€ (1 drink), Tavoli 350€, Mantenimento tavolo 200€. Prenotazioni WhatsApp +39 351 912 7047.'
+                                      : slug === 'capodanno-carlsberg-ol-milano'
+                                        ? 'Menù e listino ufficiali confermati Carlsberg Øl Milano (Bastioni di Porta Nuova 9, 20:30–03:00): Cenone servito + Cena Cantata e DJ Set a 75€ a persona con 1 bottiglia di vino ogni 4 (Montepulciano o Vermentino), acqua, caffè, cotechino con lenticchie e prosecco di mezzanotte. WhatsApp +39 351 912 7047.'
                                       : slug === 'capodanno-church-81-milano'
                                         ? 'Listino ufficiale confermato Eyes Wide Shut Capodanno 2027 · Church 81 Milano (Via della Chiesa Rossa 81, 20:30–04:00): tariffa unica 90€ Menù Pesce o Carne (cambio gratis fino al 28/12), ingresso con QR code e parola d’ordine segreta, ampio parcheggio gratuito. WhatsApp +39 351 912 7047.'
                                           : slug === 'capodanno-terrazza-gallia-excelsior-milano'
@@ -1301,6 +1324,8 @@ const UNSORTED_CAPODANNO_EVENTS: CapodannoEventItem[] = SEEDS.map((rawSeed: any[
                                 ? 'Official 2027 NYE schedule and pricing pending announcement for Fabbrica del Vapore (Via Giulio Cesare Procaccini 4, 18+): no unverified prices published ahead of the official release. Request updates via WhatsApp +39 351 912 7047.'
                                 : slug === 'capodanno-55-milano'
                                   ? 'Confirmed official La Dolce Vita 2027 rate card · 55 Milano (Via Piero della Francesca 55, 20:30–05:00): Seated Gala €160, Laid-Table Buffet €100, 00:10 After-Dinner €30/€40/€50 (1 drink), Tables €350, Table Retention €200. Direct WhatsApp booking +39 351 912 7047.'
+                                  : slug === 'capodanno-carlsberg-ol-milano'
+                                    ? 'Confirmed official Carlsberg Øl Milan NYE 2027 menu & rate card (Bastioni di Porta Nuova 9, 20:30–03:00): €75 per person seated dinner with Cena Cantata & DJ Set, 1 wine bottle per 4 (Montepulciano or Vermentino), water, coffee, midnight prosecco & lentils. WhatsApp +39 351 912 7047.'
                                   : slug === 'capodanno-church-81-milano'
                                     ? 'Confirmed official Eyes Wide Shut 2027 rate card · Church 81 Milan (Via della Chiesa Rossa 81, 20:30–04:00): single €90 Fish or Meat gala rate (free switch until Dec 28), QR code + secret password entry, large free parking. WhatsApp +39 351 912 7047.'
                                       : slug === 'capodanno-terrazza-gallia-excelsior-milano'
@@ -1412,6 +1437,8 @@ const CLUB_SLUG_TO_CAPODANNO_SLUG: Record<string, string> = {
   '55-milano': 'capodanno-55-milano',
   'church-81': 'capodanno-church-81-milano',
   'church-81-milano': 'capodanno-church-81-milano',
+  'carlsberg-ol': 'capodanno-carlsberg-ol-milano',
+  'carlsberg-ol-milano': 'capodanno-carlsberg-ol-milano',
   'play-club-milano': 'capodanno-play-club-milano',
   'play-club': 'capodanno-play-club-milano',
   'repvblic-milano': 'capodanno-repvblic-milano',

@@ -527,6 +527,7 @@ const VENUE_MASTER_KEYS: Record<string, [string, string, string, string]> = {
   'mib': ['mib-milano-interior-01', 'mib-milano-interior-02', 'mib-milano-interior-03', 'mib-milano-interior-04'],
   'dazi': ['dazi-milano-interior-01', 'dazi-milano-interior-02', 'dazi-milano-interior-03', 'dazi-milano-interior-04'],
   'church-81': ['church-81-interior-01', 'church-81-interior-02', 'church-81-interior-03', 'church-81-interior-04'],
+  'carlsberg-ol': ['carlsberg-ol-01', 'carlsberg-ol-02', 'carlsberg-ol-03', 'carlsberg-ol-04'],
   'mood-live': ['mood-live-garden-01', 'mood-live-garden-02', 'mood-live-garden-03', 'mood-live-garden-04'],
   'terrazza-gallia': ['terrazza-gallia-01', 'terrazza-gallia-02', 'terrazza-gallia-03', 'terrazza-gallia-04'],
   'the-beach-milano': ['the-beach-milano-01', 'the-beach-milano-02', 'the-beach-milano-03', 'the-beach-milano-04'],
@@ -574,6 +575,7 @@ export function selectMasterAssetKeys(slug: string, venueName = '', categorySlug
   if (s.includes('mib')) return VENUE_MASTER_KEYS['mib'];
   if (s.includes('dazi')) return VENUE_MASTER_KEYS['dazi'];
   if (s.includes('church')) return VENUE_MASTER_KEYS['church-81'];
+  if (s.includes('carlsberg')) return VENUE_MASTER_KEYS['carlsberg-ol'];
   if (s.includes('mood-live') || s.includes('mood live') || s.includes('garden-club') || s.includes('garden club')) return VENUE_MASTER_KEYS['mood-live'];
   if (s.includes('terrazza-gallia') || s.includes('gallia')) return VENUE_MASTER_KEYS['terrazza-gallia'];
   if (s.includes('the-beach') || s.includes('the beach')) return VENUE_MASTER_KEYS['the-beach-milano'];
@@ -792,7 +794,7 @@ const UX_COPY_BY_LOCALE: Record<string, {
     nfHeading: 'Trova la Tua Serata Perfetta a Milano in 3 Click',
     nfSub: 'Filtra per data, genere musicale o formula d’ingresso oppure chiedi consiglio immediato su WhatsApp.',
     nfSteps: ['1. Quando vuoi uscire?', '2. Che musica e atmosfera cerchi?', '3. Quale formula preferisci?'],
-    nfChips1: ['Stasera a Milano', 'Questo Weekend', 'Speciale Halloween 2026', 'Capodanno 2027 (124 Eventi)'],
+    nfChips1: ['Stasera a Milano', 'Questo Weekend', 'Speciale Halloween 2026', 'Capodanno 2027 (125 Eventi)'],
     nfChips2: ['House, Rooftop & Luxury', 'Hip-Hop, Reggaeton & Urban', 'Techno & Electronic Club', 'Cena Cantata & Over 30'],
     nfChips3: ['Lista & Biglietti Salta-Fila', 'Aperitivo Royal con Tavolo', 'Tavolo VIP Privé & Bottiglie'],
     nfWaCta: 'Fatti Consigliare in 60 Secondi su WhatsApp (+39 351 912 7047) →',
@@ -842,7 +844,7 @@ const UX_COPY_BY_LOCALE: Record<string, {
     nfHeading: 'Find Your Ideal Night Out in Milan in 3 Clicks',
     nfSub: 'Filter by night, music vibe, or entry formula - or message our 24/7 WhatsApp Concierge for an instant match.',
     nfSteps: ['1. When are you going out?', '2. What music & vibe do you want?', '3. Preferred entry formula?'],
-    nfChips1: ['Tonight in Milan', 'This Weekend', 'Halloween 2026 Special', 'New Year’s Eve 2027 (124 Events)'],
+    nfChips1: ['Tonight in Milan', 'This Weekend', 'Halloween 2026 Special', 'New Year’s Eve 2027 (125 Events)'],
     nfChips2: ['House, Rooftop & Luxury', 'Hip-Hop, Reggaeton & Urban', 'Techno & Electronic Club', 'Dinner Show & 30+ Crowd'],
     nfChips3: ['Guest List & Tickets', 'Royal Aperitivo Table', 'VIP Privé Table & Bottles'],
     nfWaCta: 'Get a Tailored Club Match in 60s on WhatsApp (+39 351 912 7047) →',
