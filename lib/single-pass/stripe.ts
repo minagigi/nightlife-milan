@@ -6,6 +6,9 @@ import { buildSinglePassOrderEmail, buildStaffActivationEmail } from './email';
 import { formatFeeLabel35 } from './i18n35';
 import {
   getOrderById,
+  listAllOrderSummaries,
+  listExistingOrderIds,
+  normalizeOrderIdKey,
   readStripeVaultConfig,
   recordOrderPaymentFailure,
   saveOrder,
@@ -673,86 +676,149 @@ export type GatewayReconcileSummary = {
   markedPaid: number;
   markedFailed: number;
   markedCancelled: number;
+  skippedErrors: number;
+  errorKind?: 'auth' | 'storage' | 'gateway';
   error?: string;
 };
 
 export async function reconcileEcommerceWithGateway(limit = 100): Promise<GatewayReconcileSummary> {
-  const creds = await resolveStripeCredentials();
-  if (!creds) {
-    return {
-      ok: false,
-      scanned: 0,
-      markedPaid: 0,
-      markedFailed: 0,
-      markedCancelled: 0,
-      error: 'Gateway non configurato',
-    };
-  }
-
   const safeLimit = Math.max(1, Math.min(100, Math.floor(limit)));
   try {
-    const res = await fetch(`${STRIPE_API_BASE}/payment_intents?limit=${safeLimit}`, {
-      method: 'GET',
-      headers: { Authorization: `Bearer ${creds.secretKey}` },
-    });
-    if (!res.ok) {
+    const creds = await resolveStripeCredentials();
+    if (!creds) {
       return {
         ok: false,
         scanned: 0,
         markedPaid: 0,
         markedFailed: 0,
         markedCancelled: 0,
-        error: `HTTP ${res.status}`,
+        skippedErrors: 0,
+        errorKind: 'auth',
+        error: 'Chiave gateway non configurata',
+      };
+    }
+
+    const res = await fetch(`${STRIPE_API_BASE}/payment_intents?limit=${safeLimit}`, {
+      method: 'GET',
+      headers: { Authorization: `Bearer ${creds.secretKey}` },
+    });
+    if (!res.ok) {
+      const isAuthErr = res.status === 401 || res.status === 403;
+      return {
+        ok: false,
+        scanned: 0,
+        markedPaid: 0,
+        markedFailed: 0,
+        markedCancelled: 0,
+        skippedErrors: 0,
+        errorKind: isAuthErr ? 'auth' : 'gateway',
+        error: `Gateway HTTP ${res.status}`,
       };
     }
 
     const payload = (await res.json()) as { data?: RawPaymentIntentResponse[] };
     const items = Array.isArray(payload.data) ? payload.data : [];
 
+    // Load existing order summaries and exact Blob key set ONCE so deleted test order_ids
+    // and non-actionable PaymentIntents never trigger individual Blob reads.
+    const [summaries, existingIds] = await Promise.all([
+      listAllOrderSummaries(),
+      listExistingOrderIds(),
+    ]);
+    const summaryStatusById = new Map<string, string>();
+    for (const s of summaries) {
+      summaryStatusById.set(normalizeOrderIdKey(s.id), s.status);
+    }
+
     let markedPaid = 0;
     let markedFailed = 0;
     let markedCancelled = 0;
+    let skippedErrors = 0;
 
     for (const pi of items) {
-      const orderId = (pi.metadata?.order_id || '').trim();
-      if (!orderId) continue;
+      const rawOrderId = (pi.metadata?.order_id || '').trim();
+      if (!rawOrderId) continue;
 
-      const existing = await getOrderById(orderId);
-      if (!existing) continue;
+      const isActionable =
+        pi.status === 'succeeded' ||
+        pi.status === 'canceled' ||
+        Boolean(pi.last_payment_error);
+      if (!isActionable) continue;
 
-      if (pi.status === 'succeeded') {
-        if (existing.status !== 'paid') {
-          const updated = await markOrderPaidIdempotently(orderId, {
-            stripePaymentIntentId: pi.id || null,
-          });
-          if (updated?.status === 'paid') markedPaid += 1;
+      const normId = normalizeOrderIdKey(rawOrderId);
+      if (!normId) continue;
+
+      // Skip historical/deleted orders that no longer exist in our Blob store
+      if (!summaryStatusById.has(normId) && !existingIds.has(normId)) {
+        continue;
+      }
+
+      const knownStatus = summaryStatusById.get(normId);
+      if (knownStatus === 'paid') {
+        continue;
+      }
+      if (pi.status === 'canceled' && knownStatus && knownStatus !== 'awaiting_payment') {
+        continue;
+      }
+      if (
+        pi.last_payment_error &&
+        pi.status !== 'succeeded' &&
+        (knownStatus === 'cancelled' || knownStatus === 'expired')
+      ) {
+        continue;
+      }
+
+      try {
+        const existing = await getOrderById(normId);
+        if (!existing) continue;
+
+        if (pi.status === 'succeeded') {
+          if (existing.status !== 'paid') {
+            const updated = await markOrderPaidIdempotently(existing.id, {
+              stripePaymentIntentId: pi.id || null,
+            });
+            if (updated?.status === 'paid') {
+              markedPaid += 1;
+              summaryStatusById.set(normId, 'paid');
+            }
+          } else {
+            summaryStatusById.set(normId, 'paid');
+          }
+        } else if (pi.status === 'canceled') {
+          if (existing.status === 'awaiting_payment') {
+            await saveOrder({
+              ...existing,
+              status: 'cancelled',
+              updatedAt: new Date().toISOString(),
+            });
+            markedCancelled += 1;
+            summaryStatusById.set(normId, 'cancelled');
+          }
+        } else if (pi.last_payment_error) {
+          if (
+            existing.status !== 'paid' &&
+            existing.status !== 'cancelled' &&
+            existing.status !== 'expired'
+          ) {
+            const failureTime =
+              typeof pi.created === 'number'
+                ? new Date(pi.created * 1000).toISOString()
+                : new Date().toISOString();
+            const resFail = await recordOrderPaymentFailure(existing.id, {
+              at: failureTime,
+              code: pi.last_payment_error.code,
+              declineCode: pi.last_payment_error.decline_code,
+              type: pi.last_payment_error.type,
+              message: pi.last_payment_error.message || 'Card payment declined',
+              paymentIntentId: pi.id || null,
+              source: 'gateway_sync',
+            });
+            if (resFail.recordedNewAttempt) markedFailed += 1;
+            if (resFail.order?.status) summaryStatusById.set(normId, resFail.order.status);
+          }
         }
-      } else if (pi.status === 'canceled') {
-        if (existing.status === 'awaiting_payment') {
-          await saveOrder({
-            ...existing,
-            status: 'cancelled',
-            updatedAt: new Date().toISOString(),
-          });
-          markedCancelled += 1;
-        }
-      } else if (pi.last_payment_error) {
-        if (existing.status !== 'paid' && existing.status !== 'cancelled' && existing.status !== 'expired') {
-          const failureTime =
-            typeof pi.created === 'number'
-              ? new Date(pi.created * 1000).toISOString()
-              : new Date().toISOString();
-          const resFail = await recordOrderPaymentFailure(orderId, {
-            at: failureTime,
-            code: pi.last_payment_error.code,
-            declineCode: pi.last_payment_error.decline_code,
-            type: pi.last_payment_error.type,
-            message: pi.last_payment_error.message || 'Card payment declined',
-            paymentIntentId: pi.id || null,
-            source: 'gateway_sync',
-          });
-          if (resFail.recordedNewAttempt) markedFailed += 1;
-        }
+      } catch {
+        skippedErrors += 1;
       }
     }
 
@@ -762,15 +828,20 @@ export async function reconcileEcommerceWithGateway(limit = 100): Promise<Gatewa
       markedPaid,
       markedFailed,
       markedCancelled,
+      skippedErrors,
     };
   } catch (err) {
+    const rawMsg = (err instanceof Error ? err.message : String(err)).slice(0, 140);
+    const isBlobErr = /vercel blob|blob/i.test(rawMsg);
     return {
       ok: false,
       scanned: 0,
       markedPaid: 0,
       markedFailed: 0,
       markedCancelled: 0,
-      error: (err instanceof Error ? err.message : String(err)).slice(0, 140),
+      skippedErrors: 0,
+      errorKind: isBlobErr ? 'storage' : 'gateway',
+      error: rawMsg.replace(/stripe/gi, 'gateway'),
     };
   }
 }

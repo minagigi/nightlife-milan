@@ -1,7 +1,8 @@
 import crypto from 'node:crypto';
-import { get, list, put } from '@vercel/blob';
+import { list, put } from '@vercel/blob';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { readPrivateBlobJson } from './blobPrivateRead';
 import { buildCrmRecoveryEmailMessage } from './crmAuthCopy';
 import {
   CRM_RECOVERY_TTL_SECONDS,
@@ -131,20 +132,11 @@ async function readPrivateJson<T>(pathname: string): Promise<T | null> {
     return raw ? (JSON.parse(raw) as T) : null;
   }
   const token = (process.env.BLOB_READ_WRITE_TOKEN || '').trim();
-  try {
-    const result = await get(pathname, {
-      access: 'private',
-      useCache: false,
-      token,
-    });
-    if (!result || result.statusCode !== 200 || !result.stream) return null;
-    const text = await new Response(result.stream).text();
-    return text ? (JSON.parse(text) as T) : null;
-  } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    if (/not found|404|BlobNotFoundError/i.test(message)) return null;
-    throw error;
-  }
+  return readPrivateBlobJson<T>(pathname, {
+    token,
+    useCache: false,
+    allowCachedFallbackOn5xx: false,
+  });
 }
 
 async function writePrivateJson(

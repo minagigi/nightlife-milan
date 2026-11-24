@@ -48,10 +48,12 @@ export async function reconcileCrmEcommerceAction(formData: FormData): Promise<v
   if (res.ok) {
     params.set(
       'sync',
-      `ok:${res.scanned}:${res.markedPaid}:${res.markedFailed}:${res.markedCancelled}`,
+      `ok:${res.scanned}:${res.markedPaid}:${res.markedFailed}:${res.markedCancelled}:${res.skippedErrors}`,
     );
   } else {
-    params.set('sync', `err:${(res.error || 'errore').slice(0, 60)}`);
+    const kind = res.errorKind || 'gateway';
+    const cleanErr = (res.error || 'errore').replace(/:/g, ' ').slice(0, 90);
+    params.set('sync', `err:${kind}:${cleanErr}`);
   }
   redirect(`${crmPath}?${params.toString()}`);
 }

@@ -1,5 +1,6 @@
 import crypto from 'node:crypto';
-import { del, get, list, put } from '@vercel/blob';
+import { del, list, put } from '@vercel/blob';
+import { mapWithConcurrency, readPrivateBlobJson } from '@/lib/blobPrivateRead';
 import { resolveOrderChannels } from './catalog';
 import type {
   AbandonedCartRecord,
@@ -58,8 +59,12 @@ export function emailStorageKey(email: string): string {
   return `${USERS_PREFIX}${hash}.json`;
 }
 
+export function normalizeOrderIdKey(orderId: string): string {
+  return orderId.trim().toUpperCase().replace(/[^A-Z0-9-]/g, '');
+}
+
 export function orderStorageKey(orderId: string): string {
-  const safeId = orderId.trim().toUpperCase().replace(/[^A-Z0-9-]/g, '');
+  const safeId = normalizeOrderIdKey(orderId);
   return `${ORDERS_PREFIX}${safeId}.json`;
 }
 
@@ -73,27 +78,20 @@ export function generateAccessPin(): string {
   return crypto.randomBytes(3).toString('hex').toUpperCase();
 }
 
-async function readPrivateJson<T>(pathname: string): Promise<T | null> {
+async function readPrivateJson<T>(
+  pathname: string,
+  opts?: { allowCachedFallbackOn5xx?: boolean },
+): Promise<T | null> {
   if (!singlePassBlobConfigured()) {
     const raw = memoryBlobs.get(pathname);
     return raw ? (JSON.parse(raw) as T) : null;
   }
   const token = (process.env.BLOB_READ_WRITE_TOKEN || '').trim();
-  try {
-    const result = await get(pathname, {
-      access: 'private',
-      useCache: false,
-      token,
-    });
-    if (!result || result.statusCode !== 200 || !result.stream) return null;
-    const text = await new Response(result.stream).text();
-    if (!text) return null;
-    return JSON.parse(text) as T;
-  } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    if (/not found|404|BlobNotFoundError/i.test(message)) return null;
-    throw error;
-  }
+  return readPrivateBlobJson<T>(pathname, {
+    token,
+    useCache: false,
+    allowCachedFallbackOn5xx: opts?.allowCachedFallbackOn5xx === true,
+  });
 }
 
 async function writePrivateJson(pathname: string, value: unknown): Promise<void> {
@@ -448,11 +446,48 @@ export async function getOrdersForMember(member: SinglePassMember): Promise<Sing
     .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 }
 
+export async function listExistingOrderIds(): Promise<Set<string>> {
+  const ids = new Set<string>();
+  if (!singlePassBlobConfigured()) {
+    for (const k of memoryBlobs.keys()) {
+      if (k.startsWith(ORDERS_PREFIX) && k.endsWith('.json')) {
+        ids.add(normalizeOrderIdKey(k.slice(ORDERS_PREFIX.length, -5)));
+      }
+    }
+    return ids;
+  }
+
+  const token = (process.env.BLOB_READ_WRITE_TOKEN || '').trim();
+  let cursor: string | undefined;
+  for (let page = 0; page < 10; page += 1) {
+    const listed = await list({
+      prefix: ORDERS_PREFIX,
+      limit: 500,
+      ...(cursor ? { cursor } : {}),
+      token,
+    });
+    for (const b of listed.blobs) {
+      if (b.pathname.endsWith('.json')) {
+        ids.add(normalizeOrderIdKey(b.pathname.slice(ORDERS_PREFIX.length, -5)));
+      }
+    }
+    if (!listed.hasMore || !listed.cursor) break;
+    cursor = listed.cursor;
+  }
+  return ids;
+}
+
 export async function listAllOrderSummaries(): Promise<SinglePassOrderSummary[]> {
-  const indexed = await readPrivateJson<OrdersIndexDoc>(ORDERS_INDEX_PATH);
   const byId = new Map<string, SinglePassOrderSummary>();
-  if (indexed?.orders) {
-    for (const s of indexed.orders) byId.set(s.id, s);
+  try {
+    const indexed = await readPrivateJson<OrdersIndexDoc>(ORDERS_INDEX_PATH, {
+      allowCachedFallbackOn5xx: true,
+    });
+    if (indexed?.orders) {
+      for (const s of indexed.orders) byId.set(s.id, s);
+    }
+  } catch {
+    // Proceed to list() recovery sweep if index read fails
   }
 
   // Fallback sweep so concurrent index overwrites can never orphan an order blob.
@@ -468,17 +503,28 @@ export async function listAllOrderSummaries(): Promise<SinglePassOrderSummary[]>
   } else {
     try {
       const token = (process.env.BLOB_READ_WRITE_TOKEN || '').trim();
-      const listed = await list({ prefix: ORDERS_PREFIX, limit: 500, token });
-      const missingPaths = listed.blobs
-        .map((b) => b.pathname)
-        .filter((p) => p.endsWith('.json'))
-        .filter((p) => {
-          const id = p.slice(ORDERS_PREFIX.length, -5);
-          return !byId.has(id);
+      const missingPaths: string[] = [];
+      let cursor: string | undefined;
+      for (let page = 0; page < 5; page += 1) {
+        const listed = await list({
+          prefix: ORDERS_PREFIX,
+          limit: 500,
+          ...(cursor ? { cursor } : {}),
+          token,
         });
+        for (const b of listed.blobs) {
+          if (!b.pathname.endsWith('.json')) continue;
+          const id = b.pathname.slice(ORDERS_PREFIX.length, -5);
+          if (!byId.has(id)) missingPaths.push(b.pathname);
+        }
+        if (!listed.hasMore || !listed.cursor) break;
+        cursor = listed.cursor;
+      }
       if (missingPaths.length > 0) {
-        const recovered = await Promise.all(
-          missingPaths.slice(0, 50).map((p) => readPrivateJson<SinglePassOrder>(p)),
+        const recovered = await mapWithConcurrency(
+          missingPaths.slice(0, 100),
+          8,
+          (p) => readPrivateJson<SinglePassOrder>(p),
         );
         for (const o of recovered) {
           if (o?.id) byId.set(o.id, toOrderSummary(o));
@@ -494,7 +540,11 @@ export async function listAllOrderSummaries(): Promise<SinglePassOrderSummary[]>
 
 export async function listAllOrders(limit = 500): Promise<SinglePassOrder[]> {
   const summaries = await listAllOrderSummaries();
-  const orders = await Promise.all(summaries.slice(0, limit).map((s) => getOrderById(s.id)));
+  const orders = await mapWithConcurrency(
+    summaries.slice(0, limit),
+    8,
+    (s) => getOrderById(s.id),
+  );
   return orders
     .filter((o): o is SinglePassOrder => Boolean(o))
     .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
@@ -712,12 +762,13 @@ export async function listAllCartDrafts(limit = 250): Promise<AbandonedCartRecor
     try {
       const token = (process.env.BLOB_READ_WRITE_TOKEN || '').trim();
       const listed = await list({ prefix: CARTS_PREFIX, limit: 100, token });
-      const recovered = await Promise.all(
+      const recovered = await mapWithConcurrency(
         listed.blobs
           .map((b) => b.pathname)
           .filter((p) => p.endsWith('.json'))
-          .slice(0, 50)
-          .map((p) => readPrivateJson<AbandonedCartRecord>(p)),
+          .slice(0, 50),
+        8,
+        (p) => readPrivateJson<AbandonedCartRecord>(p),
       );
       for (const c of recovered) {
         if (c && !c.clearedAt && !c.convertedOrderId && c.items.length > 0) {

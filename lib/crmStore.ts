@@ -1,4 +1,5 @@
-import { get, put } from '@vercel/blob';
+import { put } from '@vercel/blob';
+import { readPrivateBlobJson } from './blobPrivateRead';
 import {
   emptyCrmDatabase,
   type CrmDatabase,
@@ -11,22 +12,20 @@ export function crmStorageConfigured(): boolean {
   return Boolean(process.env.BLOB_READ_WRITE_TOKEN);
 }
 
-export async function readCrmDatabase(): Promise<CrmDatabase> {
+export async function readCrmDatabase(opts?: {
+  allowCachedFallbackOn5xx?: boolean;
+}): Promise<CrmDatabase> {
   if (!crmStorageConfigured()) return emptyCrmDatabase();
-  try {
-    const result = await get(CRM_DATABASE_PATH, {
-      access: 'private',
-      token: process.env.BLOB_READ_WRITE_TOKEN,
-    });
-    if (!result || result.statusCode !== 200 || !result.stream) return emptyCrmDatabase();
-    const parsed = JSON.parse(await new Response(result.stream).text()) as CrmDatabase;
-    if (parsed.version !== 1) throw new Error(`Unsupported CRM database version: ${String(parsed.version)}`);
-    return parsed;
-  } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    if (/not found|404/i.test(message)) return emptyCrmDatabase();
-    throw error;
+  const parsed = await readPrivateBlobJson<CrmDatabase>(CRM_DATABASE_PATH, {
+    token: process.env.BLOB_READ_WRITE_TOKEN,
+    useCache: false,
+    allowCachedFallbackOn5xx: opts?.allowCachedFallbackOn5xx === true,
+  });
+  if (!parsed) return emptyCrmDatabase();
+  if (parsed.version !== 1) {
+    throw new Error(`Unsupported CRM database version: ${String(parsed.version)}`);
   }
+  return parsed;
 }
 
 export async function writeCrmDatabase(database: CrmDatabase): Promise<void> {

@@ -170,7 +170,7 @@ export default async function CrmPage({
   await requireCrmServerSession(locale);
 
   const [database, allOrders, allCartDrafts, gatewayStatus] = await Promise.all([
-    readCrmDatabase(),
+    readCrmDatabase({ allowCachedFallbackOn5xx: true }),
     listAllOrders(250),
     listAllCartDrafts(250),
     getStripeCredentialStatus(),
@@ -407,17 +407,30 @@ export default async function CrmPage({
   const ecomExportQs = ecomExportParams.toString();
   const ecomExportHref = `${crmPath}/ecommerce-export${ecomExportQs ? `?${ecomExportQs}` : ''}`;
 
-  let syncNotice: { ok: boolean; text: string } | null = null;
+  let syncNotice: { tone: 'ok' | 'warn' | 'err'; text: string } | null = null;
   if (syncBannerRaw.startsWith('ok:')) {
-    const [, scanned = '0', paid = '0', failed = '0', cancelled = '0'] = syncBannerRaw.split(':');
+    const [, scanned = '0', paid = '0', failed = '0', cancelled = '0', skipped = '0'] =
+      syncBannerRaw.split(':');
+    const skippedCount = Number(skipped) || 0;
     syncNotice = {
-      ok: true,
-      text: `Sincronizzazione gateway completata: ${scanned} transazioni verificate, ${paid} nuovi pagati, ${failed} nuovi falliti, ${cancelled} annullati.`,
+      tone: skippedCount > 0 ? 'warn' : 'ok',
+      text:
+        skippedCount > 0
+          ? `Sincronizzazione completata su ${scanned} transazioni (${paid} nuovi pagati, ${failed} nuovi falliti, ${cancelled} annullati; ${skippedCount} voci saltate per errore temporaneo di lettura archivio).`
+          : `Sincronizzazione gateway completata: ${scanned} transazioni verificate, ${paid} nuovi pagati, ${failed} nuovi falliti, ${cancelled} annullati.`,
     };
   } else if (syncBannerRaw.startsWith('err:')) {
+    const parts = syncBannerRaw.split(':');
+    const kind = parts.length >= 3 ? parts[1] : 'gateway';
+    const detail = (parts.length >= 3 ? parts.slice(2).join(':') : syncBannerRaw.slice(4)).trim();
     syncNotice = {
-      ok: false,
-      text: `Impossibile interrogare il gateway pagamenti: ${syncBannerRaw.slice(4)}. Verifica la chiave in Analisi & Gateway.`,
+      tone: 'err',
+      text:
+        kind === 'auth'
+          ? `Autenticazione gateway pagamenti non riuscita (${detail}). Verifica la chiave in Analisi & Gateway.`
+          : kind === 'storage'
+            ? `Errore temporaneo dell'archivio cloud durante la sincronizzazione (${detail}). Riprova tra pochi secondi.`
+            : `Errore temporaneo di connessione al gateway pagamenti (${detail}). Riprova tra pochi secondi.`,
     };
   }
 
@@ -508,15 +521,22 @@ export default async function CrmPage({
         {syncNotice && (
           <div
             className={`flex items-center gap-2.5 border px-4 py-3 text-sm font-medium ${
-              syncNotice.ok
+              syncNotice.tone === 'ok'
                 ? 'border-emerald-400/50 bg-emerald-950/40 text-emerald-100'
-                : 'border-rose-400/50 bg-rose-950/40 text-rose-100'
+                : syncNotice.tone === 'warn'
+                  ? 'border-amber-300/50 bg-amber-950/40 text-amber-100'
+                  : 'border-rose-400/50 bg-rose-950/40 text-rose-100'
             }`}
           >
-            {syncNotice.ok ? (
+            {syncNotice.tone === 'ok' ? (
               <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-300" aria-hidden="true" />
             ) : (
-              <AlertTriangle className="h-4 w-4 shrink-0 text-rose-300" aria-hidden="true" />
+              <AlertTriangle
+                className={`h-4 w-4 shrink-0 ${
+                  syncNotice.tone === 'warn' ? 'text-amber-300' : 'text-rose-300'
+                }`}
+                aria-hidden="true"
+              />
             )}
             <span>{syncNotice.text}</span>
           </div>
