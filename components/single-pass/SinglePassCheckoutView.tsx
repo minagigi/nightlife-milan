@@ -103,10 +103,12 @@ function isWhatsappValidClient(raw: string): boolean {
 export default function SinglePassCheckoutView({
   locale,
   resumeOrderId,
+  resumeToken,
   cancelled,
 }: {
   locale: string;
   resumeOrderId?: string;
+  resumeToken?: string;
   cancelled?: boolean;
 }) {
   const {
@@ -115,6 +117,7 @@ export default function SinglePassCheckoutView({
     updateDietary,
     removeItem,
     clearCart,
+    cartSessionId,
     subtotalBaseCents,
     totalFeeCents,
     grandTotalCents,
@@ -195,6 +198,8 @@ export default function SinglePassCheckoutView({
     setSubmitting(true);
     fetch(`/api/single-pass/orders/${encodeURIComponent(resumeOrderId)}/pay`, {
       method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(resumeToken ? { resumeToken } : {}),
     })
       .then(async (res) => {
         const data = (await res.json().catch(() => null)) as
@@ -270,6 +275,89 @@ export default function SinglePassCheckoutView({
     if (!ageRaw.trim() || !Number.isFinite(parsedAge)) return null;
     return validateAgeForSkus(cartSkus, parsedAge);
   }, [ageRaw, parsedAge, cartSkus]);
+
+  const firstValidationBlocker = useMemo(() => {
+    for (const k of ORDERED_FIELDS) {
+      if (fieldErrors[k]) return fieldErrors[k] || null;
+    }
+    return generalError || null;
+  }, [fieldErrors, generalError]);
+
+  useEffect(() => {
+    if (!mounted || !cartSessionId || resumeOrderId || paymentSession || items.length === 0) {
+      return;
+    }
+    const hasContactInput =
+      fullName.trim().length >= 2 || email.trim().length >= 3 || whatsapp.trim().length >= 4;
+    if (!hasContactInput && !submittedOnce) {
+      return;
+    }
+
+    const buildPayload = () => {
+      const attr = readClientAttribution();
+      return JSON.stringify({
+        cartSessionId,
+        locale,
+        currency,
+        stage: 'checkout_form',
+        items,
+        customer: {
+          ...(fullName.trim() ? { fullName: fullName.trim() } : {}),
+          ...(email.trim() ? { email: email.trim() } : {}),
+          ...(whatsapp.trim() ? { whatsapp: whatsapp.trim() } : {}),
+          ...(ageRaw.trim() && Number.isFinite(parsedAge) ? { age: parsedAge } : {}),
+          ...(country.trim() ? { country: country.trim() } : {}),
+        },
+        lastValidationError: firstValidationBlocker,
+        attribution: {
+          ...attr,
+          checkoutPath:
+            typeof window !== 'undefined' ? window.location.pathname : `/${locale}/checkout`,
+        },
+      });
+    };
+
+    const timer = window.setTimeout(() => {
+      fetch('/api/single-pass/cart-sync', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        keepalive: true,
+        body: buildPayload(),
+      }).catch(() => {});
+    }, 1000);
+
+    const handlePageHide = () => {
+      if (submittingRef.current) return;
+      try {
+        const blob = new Blob([buildPayload()], { type: 'application/json' });
+        if (typeof navigator !== 'undefined' && typeof navigator.sendBeacon === 'function') {
+          navigator.sendBeacon('/api/single-pass/cart-sync', blob);
+        }
+      } catch {}
+    };
+
+    window.addEventListener('pagehide', handlePageHide);
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener('pagehide', handlePageHide);
+    };
+  }, [
+    mounted,
+    cartSessionId,
+    resumeOrderId,
+    paymentSession,
+    items,
+    fullName,
+    email,
+    whatsapp,
+    ageRaw,
+    parsedAge,
+    country,
+    submittedOnce,
+    firstValidationBlocker,
+    locale,
+    currency,
+  ]);
 
   const toggleLanguage = (langLabel: string) => {
     setSpokenLanguages((prev) =>
@@ -455,6 +543,7 @@ export default function SinglePassCheckoutView({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          cartSessionId,
           locale,
           currency,
           items,

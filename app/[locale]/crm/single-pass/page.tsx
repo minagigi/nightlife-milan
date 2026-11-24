@@ -14,7 +14,7 @@ import { requireCrmServerSession } from '@/lib/crmAuthVault';
 import { localePrefix } from '@/lib/i18n/locales';
 import { SINGLE_PASS_VENUES, formatEurFromCents } from '@/lib/single-pass/catalog';
 import { formatMinorCurrency } from '@/lib/single-pass/currency';
-import { listAllOrders } from '@/lib/single-pass/store';
+import { listAllCartDrafts, listAllOrders } from '@/lib/single-pass/store';
 import { getStripeCredentialStatus } from '@/lib/single-pass/stripe';
 import {
   deleteOrderAction,
@@ -56,8 +56,9 @@ export default async function CrmSinglePassPage({
 }) {
   const [{ locale }, sp] = await Promise.all([params, searchParams]);
   await requireCrmServerSession(locale);
-  const [allOrders, gatewayStatus] = await Promise.all([
+  const [allOrders, allCartDrafts, gatewayStatus] = await Promise.all([
     listAllOrders(500),
+    listAllCartDrafts(250),
     getStripeCredentialStatus(),
   ]);
   const authCopy = getCrmAuthCopy(locale);
@@ -77,7 +78,13 @@ export default async function CrmSinglePassPage({
   });
 
   const paidOrders = filtered.filter((o) => o.status === 'paid');
-  const pendingOrders = filtered.filter((o) => o.status === 'awaiting_payment');
+  const failedOrders = filtered.filter((o) => o.status === 'payment_failed');
+  const pendingOrders = filtered.filter(
+    (o) => o.status === 'awaiting_payment' || o.status === 'expired' || o.status === 'cancelled',
+  );
+  const filteredCartDrafts = allCartDrafts.filter(
+    (c) => venueFilter === 'all' || c.items.some((i) => i.venueId === venueFilter),
+  );
 
   const grossEurCents = paidOrders.reduce((s, o) => s + o.totalCents, 0);
   const feeEurCents = paidOrders.reduce((s, o) => s + o.feeCents, 0);
@@ -226,8 +233,13 @@ export default async function CrmSinglePassPage({
             </p>
           </div>
           <div className="border border-white/10 bg-white/[0.03] p-4">
-            <p className="text-[11px] uppercase text-white/50">In Attesa</p>
-            <p className="mt-1 font-mono text-2xl font-bold text-amber-300">{pendingOrders.length}</p>
+            <p className="text-[11px] uppercase text-white/50">Falliti / Abbandonati</p>
+            <p className="mt-1 font-mono text-xl font-bold text-rose-300">
+              {failedOrders.length} falliti{' '}
+              <span className="text-xs text-amber-300">
+                · {pendingOrders.length + filteredCartDrafts.length} abb.
+              </span>
+            </p>
           </div>
           <div className="border border-white/10 bg-white/[0.03] p-4">
             <p className="text-[11px] uppercase text-white/50">Base Locale (EUR)</p>
@@ -428,7 +440,9 @@ export default async function CrmSinglePassPage({
             >
               <option value="all">Tutti</option>
               <option value="paid">Pagati</option>
-              <option value="awaiting_payment">In attesa</option>
+              <option value="payment_failed">Pagamenti Falliti</option>
+              <option value="awaiting_payment">Checkout Abbandonati (In attesa)</option>
+              <option value="cancelled">Annullati</option>
               <option value="expired">Scaduti</option>
             </select>
           </label>
@@ -482,12 +496,25 @@ export default async function CrmSinglePassPage({
                         <span
                           className={`mt-1 inline-block px-2 py-0.5 text-[10px] font-bold uppercase ${
                             o.status === 'paid'
-                              ? 'bg-emerald-400 text-black'
-                              : 'bg-amber-300 text-black'
+                              ? 'bg-emerald-400 text-[#050505]'
+                              : o.status === 'payment_failed'
+                                ? 'bg-rose-400 text-[#050505]'
+                                : 'bg-amber-300 text-[#050505]'
                           }`}
                         >
                           {o.status}
                         </span>
+                        {o.lastPaymentError && o.status !== 'paid' && (
+                          <p className="mt-1 max-w-[200px] border border-rose-400/40 bg-rose-950/40 p-1.5 text-[10px] text-rose-100">
+                            <strong className="block font-mono text-rose-200">
+                              {o.lastPaymentError.declineCode ||
+                                o.lastPaymentError.code ||
+                                'rifiutato'}{' '}
+                              ({o.paymentAttempts || 1}x)
+                            </strong>
+                            {o.lastPaymentError.message}
+                          </p>
+                        )}
                         <p className="mt-1 font-mono text-[10px] text-white/45">
                           {o.createdAt.slice(0, 16).replace('T', ' ')}
                         </p>

@@ -85,7 +85,7 @@ export default function SinglePassThankYouView({
         }
         setOrder(data.order);
         if (data.order.status === 'paid') {
-          clearCart();
+          clearCart({ converted: true });
         }
       })
       .catch(() => {

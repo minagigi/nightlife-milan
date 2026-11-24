@@ -149,7 +149,7 @@ export default function SinglePassAccountView({
           );
           const vData = (await vRes.json()) as { ok?: boolean; status?: string };
           if (vRes.ok && vData.ok && vData.status === 'paid' && active) {
-            clearCart();
+            clearCart({ converted: true });
             setStatusBanner(
               isIt
                 ? `Pagamento confermato per l’ordine ${initialOrderId}. Il tuo pass digitale è attivo nell’Area Riservata.`
@@ -778,6 +778,9 @@ export default function SinglePassAccountView({
             ) : (
               orders.map((order) => {
                 const isPaid = order.status === 'paid';
+                const isPaymentFailed = order.status === 'payment_failed';
+                const isTerminalUnpaid =
+                  order.status === 'cancelled' || order.status === 'expired';
                 const isTerrazzaOrder = order.items.some((i) => i.venueId === 'terrazza-duomo-21');
                 const hasSinglePassVenue = isSinglePassMiniGroupOrder(order.items);
                 const feeRates = new Set(
@@ -807,10 +810,20 @@ export default function SinglePassAccountView({
                       <div>
                         <span
                           className={`inline-block px-3 py-1 text-xs font-bold uppercase ${
-                            isPaid ? 'bg-[#15803D] text-[#FFFFFF]' : 'bg-[#0A0A0C] text-[#FFFFFF]'
+                            isPaid
+                              ? 'bg-[#15803D] text-[#FFFFFF]'
+                              : isPaymentFailed
+                                ? 'bg-[#B91C1C] text-[#FFFFFF]'
+                                : 'bg-[#0A0A0C] text-[#FFFFFF]'
                           }`}
                         >
-                          {isPaid ? copy.passStatusPaid : copy.passStatusPending}
+                          {isPaid
+                            ? copy.passStatusPaid
+                            : isPaymentFailed
+                              ? isIt
+                                ? 'Pagamento non riuscito'
+                                : 'Payment declined'
+                              : copy.passStatusPending}
                         </span>
                         <p className="mt-2 text-sm font-bold tabular-nums text-[#0A0A0C]">
                           {order.id} · PIN {order.accessPin}
@@ -885,7 +898,7 @@ export default function SinglePassAccountView({
                     </div>
 
                     <div className="mt-4 flex flex-wrap items-center gap-3">
-                      {!isPaid && paymentReady && (
+                      {!isPaid && !isTerminalUnpaid && paymentReady && (
                         <button
                           type="button"
                           onClick={() => handlePayExistingOrder(order.id)}

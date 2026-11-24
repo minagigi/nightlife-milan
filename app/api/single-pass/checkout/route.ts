@@ -37,7 +37,10 @@ import {
   generateAccessPin,
   generateOrderId,
   getMemberByEmail,
+  markCartDraftConverted,
   normalizeEmail,
+  recordOrderPaymentFailure,
+  sanitizeCartSessionId,
   saveMember,
   saveOrder,
 } from '@/lib/single-pass/store';
@@ -59,6 +62,7 @@ export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 type CheckoutBody = {
+  cartSessionId?: string;
   locale?: string;
   currency?: string;
   items?: SinglePassCartItemInput[];
@@ -445,9 +449,16 @@ export async function POST(request: Request) {
     attribution,
     confirmationEmailSentAt: null,
     emailDeliveryError: null,
+    ...(sanitizeCartSessionId(body.cartSessionId)
+      ? { cartSessionId: sanitizeCartSessionId(body.cartSessionId) }
+      : {}),
   };
 
   await saveOrder(order);
+  const cleanCartId = sanitizeCartSessionId(body.cartSessionId);
+  if (cleanCartId) {
+    await markCartDraftConverted(cleanCartId, order.id);
+  }
 
   let clientSecret = '';
   let paymentIntentId = '';
@@ -482,6 +493,12 @@ export async function POST(request: Request) {
     await saveOrder(order);
   } catch (error) {
     const msg = (error instanceof Error ? error.message : String(error)).replace(/stripe/gi, 'payment gateway');
+    await recordOrderPaymentFailure(order.id, {
+      code: 'gateway_init_error',
+      type: 'api_error',
+      message: msg,
+      source: 'checkout_init',
+    });
     return jsonError(`Unable to initialize secure payment: ${msg}`, 'PAYMENT_SESSION_ERROR', 502, {
       orderId: order.id,
     });

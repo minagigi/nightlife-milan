@@ -29,6 +29,7 @@ export default async function SinglePassCheckoutPage({
   const [{ locale }, sp] = await Promise.all([params, searchParams]);
   const loc = (getLocaleDef(locale)?.code || DEFAULT_LOCALE) as LocaleCode;
   const orderParam = typeof sp.order === 'string' ? sp.order : undefined;
+  const resumeToken = typeof sp.rt === 'string' ? sp.rt : undefined;
   const cancelled = typeof sp.cancelled === 'string' && sp.cancelled === '1';
 
   return (
@@ -36,6 +37,7 @@ export default async function SinglePassCheckoutPage({
       <SinglePassCheckoutView
         locale={loc}
         resumeOrderId={orderParam}
+        resumeToken={resumeToken}
         cancelled={cancelled}
       />
     </main>

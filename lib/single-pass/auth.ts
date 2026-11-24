@@ -86,6 +86,59 @@ export function verifySessionToken(
   }
 }
 
+const RESUME_TOKEN_TTL_SEC = 30 * 24 * 60 * 60; // 30 days for WhatsApp payment recovery links
+
+export function createOrderResumeToken(
+  orderId: string,
+  email: string,
+  nowSec = Math.floor(Date.now() / 1000),
+): string {
+  const payload = {
+    oid: orderId.trim().toUpperCase(),
+    eml: normalizeEmail(email),
+    exp: nowSec + RESUME_TOKEN_TTL_SEC,
+  };
+  const encoded = Buffer.from(JSON.stringify(payload), 'utf8').toString('base64url');
+  const sig = signTokenData(`resume:${encoded}`);
+  return `${encoded}.${sig}`;
+}
+
+export function verifyOrderResumeToken(
+  token: string | undefined | null,
+  expectedOrderId: string,
+  expectedEmail: string,
+  nowSec = Math.floor(Date.now() / 1000),
+): boolean {
+  if (!token || typeof token !== 'string') return false;
+  const parts = token.trim().split('.');
+  if (parts.length !== 2) return false;
+  const [encoded, sig] = parts;
+  if (!encoded || !sig) return false;
+
+  const expectedSig = signTokenData(`resume:${encoded}`);
+  const sigBuf = Buffer.from(sig);
+  const expBuf = Buffer.from(expectedSig);
+  if (sigBuf.length !== expBuf.length || !crypto.timingSafeEqual(sigBuf, expBuf)) {
+    return false;
+  }
+
+  try {
+    const parsed = JSON.parse(Buffer.from(encoded, 'base64url').toString('utf8')) as {
+      oid?: string;
+      eml?: string;
+      exp?: number;
+    };
+    if (!parsed.oid || !parsed.eml || typeof parsed.exp !== 'number') return false;
+    if (parsed.exp < nowSec) return false;
+    return (
+      parsed.oid === expectedOrderId.trim().toUpperCase() &&
+      parsed.eml === normalizeEmail(expectedEmail)
+    );
+  } catch {
+    return false;
+  }
+}
+
 export function readSessionFromRequest(request: NextRequest | Request): SinglePassSessionPayload | null {
   if ('cookies' in request && typeof request.cookies?.get === 'function') {
     const raw = request.cookies.get(SINGLE_PASS_SESSION_COOKIE)?.value;

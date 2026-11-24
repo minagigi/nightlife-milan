@@ -1,5 +1,9 @@
 import { jsonError, jsonOk } from '@/lib/single-pass/apiHelpers';
-import { getOrderById, saveOrder } from '@/lib/single-pass/store';
+import {
+  getOrderById,
+  recordOrderPaymentFailure,
+  saveOrder,
+} from '@/lib/single-pass/store';
 import {
   markOrderPaidIdempotently,
   resolveStripeCredentials,
@@ -20,6 +24,12 @@ type GatewayWebhookEvent = {
       client_reference_id?: string | null;
       payment_intent?: string | { id?: string } | null;
       metadata?: Record<string, string>;
+      last_payment_error?: {
+        code?: string;
+        decline_code?: string;
+        type?: string;
+        message?: string;
+      } | null;
     };
   };
 };
@@ -52,10 +62,21 @@ export async function POST(request: Request) {
       stripePaymentIntentId: obj?.id || null,
     });
   } else if (orderId && event.type === 'payment_intent.payment_failed') {
+    const err = obj?.last_payment_error;
+    await recordOrderPaymentFailure(orderId, {
+      code: err?.code,
+      declineCode: err?.decline_code,
+      type: err?.type,
+      message: err?.message || 'Card payment declined',
+      paymentIntentId: obj?.id || null,
+      source: 'webhook',
+    });
+  } else if (orderId && event.type === 'payment_intent.canceled') {
     const existing = await getOrderById(orderId);
     if (existing && existing.status === 'awaiting_payment') {
       await saveOrder({
         ...existing,
+        status: 'cancelled',
         updatedAt: new Date().toISOString(),
       });
     }

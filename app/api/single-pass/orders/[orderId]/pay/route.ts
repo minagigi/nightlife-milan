@@ -1,5 +1,10 @@
 import { checkOriginOrReject, jsonError, jsonOk } from '@/lib/single-pass/apiHelpers';
-import { readSessionFromRequest } from '@/lib/single-pass/auth';
+import {
+  applySessionCookie,
+  createSessionToken,
+  readSessionFromRequest,
+  verifyOrderResumeToken,
+} from '@/lib/single-pass/auth';
 import {
   isCheckoutItemAllowed,
   isSinglePassStorefrontPath,
@@ -21,19 +26,29 @@ export async function POST(
   const originReject = checkOriginOrReject(request);
   if (originReject) return originReject;
 
-  const session = readSessionFromRequest(request);
-  if (!session) {
-    return jsonError('Authentication required', 'UNAUTHORIZED', 401);
-  }
-
   const { orderId } = await context.params;
   const order = await getOrderById(orderId);
   if (!order) {
     return jsonError('Order not found', 'ORDER_NOT_FOUND', 404);
   }
 
-  if (normalizeEmail(order.customer.email) !== normalizeEmail(session.email)) {
-    return jsonError('Not authorized for this order', 'UNAUTHORIZED', 403);
+  let resumeToken = '';
+  try {
+    const body = (await request.json().catch(() => null)) as { resumeToken?: string } | null;
+    if (body && typeof body.resumeToken === 'string') {
+      resumeToken = body.resumeToken.trim();
+    }
+  } catch {
+    // Empty body allowed when authenticated via session cookie
+  }
+
+  const session = readSessionFromRequest(request);
+  const ownsSession =
+    Boolean(session) && normalizeEmail(order.customer.email) === normalizeEmail(session!.email);
+  const validResumeToken = verifyOrderResumeToken(resumeToken, order.id, order.customer.email);
+
+  if (!ownsSession && !validResumeToken) {
+    return jsonError('Authentication required', 'UNAUTHORIZED', session ? 403 : 401);
   }
 
   if (order.status === 'paid') {
@@ -74,9 +89,12 @@ export async function POST(
     const nextFeeMinor = pi.currencyUsed === 'EUR' ? order.feeCents : order.presentmentFeeMinor;
     const nextFxRate = pi.currencyUsed === 'EUR' ? 1 : order.fxRate || 1;
 
+    const preservedStatus =
+      order.status === 'payment_failed' ? 'payment_failed' : 'awaiting_payment';
+
     await saveOrder({
       ...order,
-      status: 'awaiting_payment',
+      status: preservedStatus,
       stripePaymentIntentId: pi.paymentIntentId,
       presentmentCurrency: pi.currencyUsed,
       presentmentSubtotalMinor: nextSubtotalMinor,
@@ -86,9 +104,9 @@ export async function POST(
       updatedAt: new Date().toISOString(),
     });
 
-    return jsonOk({
+    const response = jsonOk({
       orderId: order.id,
-      status: 'awaiting_payment',
+      status: preservedStatus,
       clientSecret: pi.clientSecret,
       publishableKey: PUBLIC_PAYMENT_PUBLISHABLE_KEY,
       subtotalBaseCents: order.subtotalBaseCents,
@@ -107,6 +125,10 @@ export async function POST(
         whatsapp: order.customer.whatsapp,
       },
     });
+    if (validResumeToken && !ownsSession) {
+      applySessionCookie(response, createSessionToken(order.customer.email, order.memberId));
+    }
+    return response;
   } catch (error) {
     const msg = (error instanceof Error ? error.message : String(error)).replace(/stripe/gi, 'payment gateway');
     return jsonError(`Payment initialization error: ${msg}`, 'PAYMENT_SESSION_ERROR', 502);

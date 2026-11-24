@@ -7,6 +7,7 @@ import { formatFeeLabel35 } from './i18n35';
 import {
   getOrderById,
   readStripeVaultConfig,
+  recordOrderPaymentFailure,
   saveOrder,
   writeStripeVaultConfig,
 } from './store';
@@ -139,7 +140,14 @@ type RawPaymentIntentResponse = {
   status?: string;
   amount?: number;
   currency?: string;
+  created?: number;
   metadata?: Record<string, string>;
+  last_payment_error?: {
+    code?: string;
+    decline_code?: string;
+    type?: string;
+    message?: string;
+  } | null;
 };
 
 export async function fetchEmbeddedPaymentIntent(
@@ -397,6 +405,21 @@ export async function verifyPaymentIntentAndFinalizeOrder(
   }
 
   if (pi.status !== 'succeeded') {
+    if (pi.last_payment_error) {
+      const updatedFailure = await recordOrderPaymentFailure(order.id, {
+        code: pi.last_payment_error.code,
+        declineCode: pi.last_payment_error.decline_code,
+        type: pi.last_payment_error.type,
+        message: pi.last_payment_error.message || 'Card payment declined',
+        paymentIntentId: pi.id || targetPiId,
+        source: 'gateway_sync',
+      });
+      return {
+        ok: false,
+        order: updatedFailure.order || order,
+        reason: pi.last_payment_error.decline_code || pi.last_payment_error.code || pi.status || 'PAYMENT_FAILED',
+      };
+    }
     return { ok: false, order, reason: pi.status || 'PAYMENT_NOT_CONFIRMED' };
   }
 
@@ -544,6 +567,7 @@ export async function validateAndSaveStripeKey(
   const events = [
     'payment_intent.succeeded',
     'payment_intent.payment_failed',
+    'payment_intent.canceled',
     'checkout.session.completed',
     'checkout.session.async_payment_succeeded',
     'checkout.session.expired',
@@ -620,6 +644,7 @@ export async function syncPaymentWebhookEvents(
   const events = [
     'payment_intent.succeeded',
     'payment_intent.payment_failed',
+    'payment_intent.canceled',
     'checkout.session.completed',
     'checkout.session.async_payment_succeeded',
     'checkout.session.expired',
@@ -640,5 +665,113 @@ export async function syncPaymentWebhookEvents(
   );
   if (!updRes.ok) return { ok: false, endpointId: match.id };
   return { ok: true, endpointId: match.id };
+}
+
+export type GatewayReconcileSummary = {
+  ok: boolean;
+  scanned: number;
+  markedPaid: number;
+  markedFailed: number;
+  markedCancelled: number;
+  error?: string;
+};
+
+export async function reconcileEcommerceWithGateway(limit = 100): Promise<GatewayReconcileSummary> {
+  const creds = await resolveStripeCredentials();
+  if (!creds) {
+    return {
+      ok: false,
+      scanned: 0,
+      markedPaid: 0,
+      markedFailed: 0,
+      markedCancelled: 0,
+      error: 'Gateway non configurato',
+    };
+  }
+
+  const safeLimit = Math.max(1, Math.min(100, Math.floor(limit)));
+  try {
+    const res = await fetch(`${STRIPE_API_BASE}/payment_intents?limit=${safeLimit}`, {
+      method: 'GET',
+      headers: { Authorization: `Bearer ${creds.secretKey}` },
+    });
+    if (!res.ok) {
+      return {
+        ok: false,
+        scanned: 0,
+        markedPaid: 0,
+        markedFailed: 0,
+        markedCancelled: 0,
+        error: `HTTP ${res.status}`,
+      };
+    }
+
+    const payload = (await res.json()) as { data?: RawPaymentIntentResponse[] };
+    const items = Array.isArray(payload.data) ? payload.data : [];
+
+    let markedPaid = 0;
+    let markedFailed = 0;
+    let markedCancelled = 0;
+
+    for (const pi of items) {
+      const orderId = (pi.metadata?.order_id || '').trim();
+      if (!orderId) continue;
+
+      const existing = await getOrderById(orderId);
+      if (!existing) continue;
+
+      if (pi.status === 'succeeded') {
+        if (existing.status !== 'paid') {
+          const updated = await markOrderPaidIdempotently(orderId, {
+            stripePaymentIntentId: pi.id || null,
+          });
+          if (updated?.status === 'paid') markedPaid += 1;
+        }
+      } else if (pi.status === 'canceled') {
+        if (existing.status === 'awaiting_payment') {
+          await saveOrder({
+            ...existing,
+            status: 'cancelled',
+            updatedAt: new Date().toISOString(),
+          });
+          markedCancelled += 1;
+        }
+      } else if (pi.last_payment_error) {
+        if (existing.status !== 'paid' && existing.status !== 'cancelled' && existing.status !== 'expired') {
+          const failureTime =
+            typeof pi.created === 'number'
+              ? new Date(pi.created * 1000).toISOString()
+              : new Date().toISOString();
+          const resFail = await recordOrderPaymentFailure(orderId, {
+            at: failureTime,
+            code: pi.last_payment_error.code,
+            declineCode: pi.last_payment_error.decline_code,
+            type: pi.last_payment_error.type,
+            message: pi.last_payment_error.message || 'Card payment declined',
+            paymentIntentId: pi.id || null,
+            source: 'gateway_sync',
+          });
+          if (resFail.recordedNewAttempt) markedFailed += 1;
+        }
+      }
+    }
+
+    return {
+      ok: true,
+      scanned: items.length,
+      markedPaid,
+      markedFailed,
+      markedCancelled,
+    };
+  } catch (err) {
+    return {
+      ok: false,
+      scanned: 0,
+      markedPaid: 0,
+      markedFailed: 0,
+      markedCancelled: 0,
+      error: (err instanceof Error ? err.message : String(err)).slice(0, 140),
+    };
+  }
 }
 

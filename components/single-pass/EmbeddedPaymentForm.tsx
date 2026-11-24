@@ -6,7 +6,13 @@ import { AlertCircle, ArrowLeft, Lock, ShieldCheck } from 'lucide-react';
 import { localePrefix } from '@/lib/i18n/locales';
 import { getCheckoutUxCopy, getSinglePassCopy } from '@/lib/single-pass/i18n35';
 
-type GatewayError = { message?: string; type?: string; code?: string };
+type GatewayError = {
+  message?: string;
+  type?: string;
+  code?: string;
+  decline_code?: string;
+  payment_intent?: { id?: string };
+};
 type GatewayPaymentIntent = { id?: string; status?: string };
 type GatewayElementInstance = {
   mount: (domNode: HTMLElement | string) => void;
@@ -91,7 +97,7 @@ export default function EmbeddedPaymentForm({
   eurTotalDisplay: string;
   showEurReference: boolean;
   onBack?: () => void;
-  clearCart: () => void;
+  clearCart: (opts?: { converted?: boolean }) => void;
 }) {
   const router = useRouter();
   const copy = getSinglePassCopy(locale);
@@ -225,6 +231,22 @@ export default function EmbeddedPaymentForm({
           /stripe/gi,
           'payment gateway',
         );
+        if (error.type !== 'validation_error' || Boolean(error.decline_code)) {
+          const derivedPiId =
+            error.payment_intent?.id || clientSecret.split('_secret_')[0] || '';
+          fetch(`/api/single-pass/orders/${encodeURIComponent(orderId)}/payment-failed`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            keepalive: true,
+            body: JSON.stringify({
+              paymentIntentId: derivedPiId,
+              code: error.code,
+              declineCode: error.decline_code,
+              type: error.type,
+              message: cleanMsg,
+            }),
+          }).catch(() => {});
+        }
         setErrorMessage(cleanMsg);
         return;
       }
@@ -245,7 +267,7 @@ export default function EmbeddedPaymentForm({
           );
           return;
         }
-        clearCart();
+        clearCart({ converted: true });
         router.push(
           `${lp}/thank-you?order=${encodeURIComponent(orderId)}&payment_intent=${encodeURIComponent(paymentIntent.id)}`,
         );

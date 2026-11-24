@@ -64,8 +64,13 @@ export async function GET(request: Request) {
     'UTM Source',
     'UTM Campaign',
     'WhatsApp Group Status',
+    'Payment Attempts',
+    'Last Error Code',
+    'Last Decline Code',
+    'Last Error Message',
     'Created At',
     'Paid At',
+    'Failed At',
   ];
 
   const rows = [
@@ -115,8 +120,13 @@ export async function GET(request: Request) {
         o.attribution?.utmSource || '',
         o.attribution?.utmCampaign || '',
         o.whatsappGroupStatus,
+        o.paymentAttempts || 0,
+        o.lastPaymentError?.code || '',
+        o.lastPaymentError?.declineCode || '',
+        o.lastPaymentError?.message || '',
         o.createdAt,
         o.paidAt || '',
+        o.failedAt || '',
       ]
         .map(csvCell)
         .join(',');

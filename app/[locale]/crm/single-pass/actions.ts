@@ -16,6 +16,8 @@ export async function saveStripeVaultAction(formData: FormData): Promise<void> {
   await validateAndSaveStripeKey(secretKey, siteOrigin);
   revalidatePath(`/${locale}/crm/single-pass`);
   revalidatePath('/crm/single-pass');
+  revalidatePath(`/${locale}/crm`);
+  revalidatePath('/crm');
 }
 
 export async function syncWebhookAction(formData: FormData): Promise<void> {
@@ -26,6 +28,8 @@ export async function syncWebhookAction(formData: FormData): Promise<void> {
   await syncPaymentWebhookEvents(siteOrigin);
   revalidatePath(`/${locale}/crm/single-pass`);
   revalidatePath('/crm/single-pass');
+  revalidatePath(`/${locale}/crm`);
+  revalidatePath('/crm');
 }
 
 export async function deleteOrderAction(formData: FormData): Promise<void> {
@@ -37,6 +41,8 @@ export async function deleteOrderAction(formData: FormData): Promise<void> {
   await deleteOrderById(orderId);
   revalidatePath(`/${locale}/crm/single-pass`);
   revalidatePath('/crm/single-pass');
+  revalidatePath(`/${locale}/crm`);
+  revalidatePath('/crm');
 }
 
 export async function updateOrderWhatsappGroupAction(formData: FormData): Promise<void> {
@@ -75,4 +81,6 @@ export async function updateOrderWhatsappGroupAction(formData: FormData): Promis
 
   revalidatePath(`/${locale}/crm/single-pass`);
   revalidatePath('/crm/single-pass');
+  revalidatePath(`/${locale}/crm`);
+  revalidatePath('/crm');
 }

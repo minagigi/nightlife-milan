@@ -4201,3 +4201,23 @@ export function validateAgeForSkus(skus: readonly SinglePassSku[], age: number):
     suggestedVenueIds: [],
   };
 }
+
+export function resolveItemChannel(item: {
+  channel?: 'single-pass' | 'venue';
+  addedFromPath?: string;
+}): 'single-pass' | 'venue' {
+  if (item.channel === 'single-pass') return 'single-pass';
+  if (item.channel === 'venue') return 'venue';
+  return isSinglePassStorefrontPath(item.addedFromPath) ? 'single-pass' : 'venue';
+}
+
+export function resolveOrderChannels(
+  items: ReadonlyArray<{ channel?: 'single-pass' | 'venue'; addedFromPath?: string }>,
+): Array<'single-pass' | 'venue'> {
+  const out = new Set<'single-pass' | 'venue'>();
+  for (const item of items) {
+    out.add(resolveItemChannel(item));
+  }
+  if (out.size === 0) out.add('venue');
+  return Array.from(out);
+}

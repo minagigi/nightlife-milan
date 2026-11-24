@@ -1,6 +1,7 @@
 'use client';
 
-import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import React, { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { readClientAttribution } from './AttributionTracker';
 import {
   SINGLE_PASS_FEE_RATE,
   computeSinglePassPrice,
@@ -40,6 +41,33 @@ export function cartRowKey(item: {
 
 const STORAGE_KEY = 'nlm_single_pass_cart_v1';
 const CURRENCY_STORAGE_KEY = 'nlm_preferred_currency_v1';
+const CART_SESSION_STORAGE_KEY = 'nlm_cart_session_id_v1';
+
+function generateBrowserCartSessionId(): string {
+  const bytes = new Uint8Array(20);
+  if (typeof crypto !== 'undefined' && typeof crypto.getRandomValues === 'function') {
+    crypto.getRandomValues(bytes);
+  } else {
+    for (let i = 0; i < bytes.length; i += 1) {
+      bytes[i] = Math.floor(Math.random() * 256);
+    }
+  }
+  return Array.from(bytes, (b) => b.toString(16).padStart(2, '0')).join('');
+}
+
+function readOrCreateCartSessionId(): string {
+  try {
+    const existing = localStorage.getItem(CART_SESSION_STORAGE_KEY) || '';
+    if (/^[a-f0-9]{32,64}$/i.test(existing.trim())) {
+      return existing.trim().toLowerCase();
+    }
+    const created = generateBrowserCartSessionId();
+    localStorage.setItem(CART_SESSION_STORAGE_KEY, created);
+    return created;
+  } catch {
+    return generateBrowserCartSessionId();
+  }
+}
 
 const DEFAULT_FX_RATES: Record<SupportedCurrency, number> = {
   EUR: 1,
@@ -82,7 +110,8 @@ type SinglePassCartContextValue = {
   updateQuantity: (skuId: string, quantity: number, channel?: 'single-pass' | 'venue') => void;
   updateDietary: (skuId: string, dietaryChoice: string, channel?: 'single-pass' | 'venue') => void;
   removeItem: (skuId: string, channel?: 'single-pass' | 'venue') => void;
-  clearCart: () => void;
+  clearCart: (opts?: { converted?: boolean }) => void;
+  cartSessionId: string;
   itemCount: number;
   totalGuests: number;
   subtotalBaseCents: number;
@@ -122,9 +151,12 @@ export function SinglePassCartProvider({
   );
   const [fxRates, setFxRates] = useState<Record<SupportedCurrency, number>>(DEFAULT_FX_RATES);
   const [fxUpdatedAt, setFxUpdatedAt] = useState<string | null>(null);
+  const [cartSessionId, setCartSessionId] = useState<string>('');
+  const userMutatedRef = useRef(false);
 
   useEffect(() => {
     setMounted(true);
+    setCartSessionId(readOrCreateCartSessionId());
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
@@ -206,6 +238,28 @@ export function SinglePassCartProvider({
     }
   }, [items, mounted]);
 
+  useEffect(() => {
+    if (!mounted || !cartSessionId || !userMutatedRef.current) return;
+    const timer = window.setTimeout(() => {
+      const attr = readClientAttribution();
+      fetch('/api/single-pass/cart-sync', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        keepalive: true,
+        body: JSON.stringify({
+          cartSessionId,
+          locale,
+          currency,
+          stage: 'cart',
+          cleared: items.length === 0,
+          items,
+          attribution: attr,
+        }),
+      }).catch(() => {});
+    }, 1200);
+    return () => window.clearTimeout(timer);
+  }, [items, mounted, cartSessionId, locale, currency]);
+
   const setCurrency = (next: SupportedCurrency) => {
     const clean = normalizeSupportedCurrency(next);
     setCurrencyState(clean);
@@ -239,6 +293,7 @@ export function SinglePassCartProvider({
       channel ||
       (isSinglePassStorefrontPath(originPath) ? 'single-pass' : 'venue');
     if (!isCheckoutItemAllowed(sku, resolvedChannel).ok) return;
+    userMutatedRef.current = true;
 
     setItems((prev) => {
       const idx = prev.findIndex(
@@ -286,6 +341,7 @@ export function SinglePassCartProvider({
     }
     const sku = resolveCatalogSku(skuId);
     const maxQty = sku ? getSkuMaxQuantity(sku) : 10;
+    userMutatedRef.current = true;
     setItems((prev) =>
       prev.map((item) =>
         item.skuId === skuId && (!channel || (item.channel || 'venue') === channel)
@@ -300,6 +356,7 @@ export function SinglePassCartProvider({
     dietaryChoice: string,
     channel?: 'single-pass' | 'venue',
   ) => {
+    userMutatedRef.current = true;
     setItems((prev) =>
       prev.map((item) =>
         item.skuId === skuId && (!channel || (item.channel || 'venue') === channel)
@@ -310,6 +367,7 @@ export function SinglePassCartProvider({
   };
 
   const removeItem = (skuId: string, channel?: 'single-pass' | 'venue') => {
+    userMutatedRef.current = true;
     setItems((prev) =>
       prev.filter(
         (i) => !(i.skuId === skuId && (!channel || (i.channel || 'venue') === channel)),
@@ -317,7 +375,20 @@ export function SinglePassCartProvider({
     );
   };
 
-  const clearCart = () => {
+  const clearCart = (opts?: { converted?: boolean }) => {
+    if (opts?.converted) {
+      userMutatedRef.current = false;
+      const nextSessionId = generateBrowserCartSessionId();
+      setCartSessionId(nextSessionId);
+      try {
+        localStorage.setItem(CART_SESSION_STORAGE_KEY, nextSessionId);
+      } catch {
+        // Ignore storage errors
+      }
+      setItems([]);
+      return;
+    }
+    userMutatedRef.current = true;
     setItems([]);
   };
 
@@ -392,6 +463,7 @@ export function SinglePassCartProvider({
         updateDietary,
         removeItem,
         clearCart,
+        cartSessionId,
         ...totals,
         currency,
         setCurrency,

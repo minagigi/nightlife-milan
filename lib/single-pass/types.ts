@@ -152,9 +152,20 @@ export type SinglePassOrderItem = {
 
 export type SinglePassOrderStatus =
   | 'awaiting_payment'
+  | 'payment_failed'
   | 'paid'
   | 'cancelled'
   | 'expired';
+
+export type PaymentFailureRecord = {
+  at: string;
+  code?: string;
+  declineCode?: string;
+  type?: string;
+  message: string;
+  paymentIntentId?: string | null;
+  source: 'client_confirm' | 'checkout_init' | 'webhook' | 'gateway_sync';
+};
 
 export type WhatsappMiniGroupStatus =
   | 'scheduled_dec_20'
@@ -224,6 +235,11 @@ export type SinglePassOrder = {
   emailDeliveryError: string | null;
   staffEmailSentAt?: string | null;
   staffEmailError?: string | null;
+  failedAt?: string | null;
+  paymentAttempts?: number;
+  lastPaymentError?: PaymentFailureRecord | null;
+  paymentFailures?: PaymentFailureRecord[];
+  cartSessionId?: string | null;
 };
 
 export type SinglePassMember = {
@@ -251,6 +267,7 @@ export type SinglePassOrderSummary = {
   country?: string;
   spokenLanguages: string[];
   venueIds: SinglePassVenueId[];
+  channels?: Array<'single-pass' | 'venue'>;
   itemSummary: string;
   totalHeadcount?: number;
   subtotalBaseCents: number;
@@ -269,6 +286,41 @@ export type SinglePassOrderSummary = {
   whatsappGroupInviteUrl: string | null;
   createdAt: string;
   paidAt: string | null;
+  failedAt?: string | null;
+  paymentAttempts?: number;
+  lastPaymentError?: PaymentFailureRecord | null;
+  cartSessionId?: string | null;
+};
+
+export type CartDraftCustomer = {
+  fullName?: string;
+  email?: string;
+  whatsapp?: string;
+  age?: number;
+  country?: string;
+};
+
+export type AbandonedCartRecord = {
+  cartSessionId: string;
+  stage: 'cart' | 'checkout_form';
+  createdAt: string;
+  updatedAt: string;
+  convertedOrderId: string | null;
+  clearedAt: string | null;
+  locale: LocaleCode;
+  items: SinglePassOrderItem[];
+  venueIds: SinglePassVenueId[];
+  channels: Array<'single-pass' | 'venue'>;
+  itemSummary: string;
+  totalHeadcount: number;
+  subtotalBaseCents: number;
+  feeCents: number;
+  totalCents: number;
+  presentmentCurrency: string;
+  presentmentTotalMinor: number;
+  customer?: CartDraftCustomer;
+  lastValidationError?: string | null;
+  attribution?: Partial<OrderAttribution>;
 };
 
 export type StripeVaultConfig = {
@@ -324,4 +376,6 @@ export type SinglePassApiErrorCode =
   | 'UNAUTHORIZED'
   | 'PAYMENT_SESSION_ERROR'
   | 'PAYMENT_NOT_CONFIRMED'
+  | 'INVALID_CART_SESSION'
+  | 'PAYLOAD_TOO_LARGE'
   | 'INTERNAL_ERROR';
