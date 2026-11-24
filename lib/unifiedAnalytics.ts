@@ -266,6 +266,7 @@ interface Ga4Row {
 }
 interface Ga4Report {
   rows?: Ga4Row[];
+  totals?: Ga4Row[];
 }
 
 async function fetchNlmMetrics(token: string, startDate: string, endDate: string) {
@@ -409,7 +410,10 @@ async function fetchAxelSiteMetrics(
   if (site.hasGscLink) {
     requests.push({
       dateRanges: [{ startDate, endDate }],
+      dimensions: [{ name: 'landingPagePlusQueryString' }],
       metrics: [{ name: 'organicGoogleSearchClicks' }, { name: 'organicGoogleSearchImpressions' }],
+      metricAggregations: ['TOTAL'],
+      limit: 1,
     });
   }
 
@@ -464,7 +468,7 @@ async function fetchAxelSiteMetrics(
   const users = Number(bv[1]?.value ?? 0) || 0;
   const pageViews = Number(bv[2]?.value ?? 0) || 0;
 
-  const gv = repGsc?.rows?.[0]?.metricValues ?? [];
+  const gv = repGsc?.totals?.[0]?.metricValues ?? repGsc?.rows?.[0]?.metricValues ?? [];
   const gscClicks = Number(gv[0]?.value ?? 0) || 0;
   const gscImpressions = Number(gv[1]?.value ?? 0) || 0;
 
@@ -767,6 +771,6 @@ async function computeUnifiedAnalyticsUncached(period: UnifiedPeriod): Promise<U
 
 export const getUnifiedAnalyticsData = unstable_cache(
   async (period: UnifiedPeriod) => computeUnifiedAnalyticsUncached(period),
-  ['nlm-unified-analytics-v2'],
+  ['nlm-unified-analytics-v3'],
   { revalidate: 900, tags: ['nlm-unified-analytics'] },
 );
