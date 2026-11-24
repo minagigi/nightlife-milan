@@ -47,17 +47,17 @@ const CORE_IT: CarlsbergPack = {
   title: 'Capodanno 2027 Carlsberg Øl Milano · Cena Cantata e DJ Set (75 € Tutto Incluso)',
   sub: `Carlsberg Øl Milano · ${CARLSBERG_ADDR} · 20:30 – 03:00 · Tariffa unica 75 €`,
   desc:
-    'Festeggia il 31 dicembre 2026 da Carlsberg Øl Milano nei sotterranei storici con volte in mattoni a vista dei Bastioni di Porta Nuova 9 (zona Porta Nuova / Corso Como, a 350 metri da M2 Moscova e M2/M5 Garibaldi). Il programma ufficiale unisce il Gran Cenone servito al tavolo a 75 € a persona con Cena Cantata dal vivo, vino Montepulciano o Vermentino incluso (1 bottiglia ogni 4 ospiti), acqua, caffè, brindisi di mezzanotte con flûte di prosecco, cotechino con lenticchie e DJ set fino alle 03:00. Prenotazioni ufficiali su WhatsApp +39 351 912 7047.',
+    'Festeggia il 31 dicembre 2026 da Carlsberg Øl Milano nei sotterranei storici con volte in mattoni a vista dei Bastioni di Porta Nuova 9 (zona Porta Nuova / Corso Como, a 350 metri da M2 Moscova e M2/M5 Garibaldi). Il programma ufficiale unisce il Gran Cenone servito al tavolo a 75 € a persona con Cena Cantata dal vivo, Vino Nobile di Montepulciano o Vermentino di Gallura incluso (1 bottiglia ogni 4 ospiti), acqua, caffè, brindisi di mezzanotte con flûte di prosecco, cotechino con lenticchie e DJ set fino alle 03:00. Prenotazioni ufficiali su WhatsApp +39 351 912 7047.',
   music: 'Cena Cantata dal Vivo durante il Cenone · Countdown di Mezzanotte & DJ Set fino alle 03:00',
   dress: 'Smart Chic / Elegante Casual di San Silvestro',
   priceSum: 'Tariffa unica 75 € a persona · Cenone Servito + Vino (1 ogni 4) + Cena Cantata + DJ Set',
   tierLabel: 'Cenone Servito + Cena Cantata + DJ Set (dalle 20:30)',
   tierPrice: '75 € a persona',
   tierDesc:
-    'Menù completo servito al tavolo (antipasto selezione salumi, formaggi con mostarda e gnocco fritto, lasagnetta ragù di cinghiale e funghi porcini, roast beef scottato su letto di carciofi e patate novelle, tortino dal cuore caldo con frutti di bosco), acqua, caffè, 1 bottiglia di vino ogni 4 persone (Montepulciano o Vermentino), cotechino con lenticchie, flûte di prosecco a mezzanotte e DJ set.',
+    'Menù completo servito al tavolo (antipasto: capesante gratinate alla veneziana, crocchette di patate al Patanegra su stecco, cestino di Parmigiano con puntarelle, burrata e acciughe del Cantabrico; primo: risotto Carnaroli con funghi porcini e zafferano con i suoi pistilli; secondo: ribeye di manzo alla pietra lavica con salsa chimichurry e patate novelle; dolce: tiramisù al pandoro con gocce di cioccolato), acque minerali, caffè, 1 bottiglia di Vino Nobile di Montepulciano o Vermentino di Gallura ogni 4 persone, cotechino con lenticchie, flûte di prosecco a mezzanotte e DJ set.',
   highlights: [
     'Tariffa unica chiara di 75 € a persona nei Bastioni di Porta Nuova 9 (Porta Nuova / Corso Como)',
-    'Vino Montepulciano o Vermentino incluso (1 bottiglia ogni 4 ospiti) insieme ad acqua, caffè e flûte di mezzanotte',
+    'Vino Nobile di Montepulciano o Vermentino di Gallura incluso (1 bottiglia ogni 4 ospiti) con acque minerali, caffè e flûte di mezzanotte',
     'Cena Cantata coinvolgente tra le volte storiche in mattoni e impianti spillatura a vista, seguita da DJ set',
     'A pochi passi da Piazza XXV Aprile, Corso Como, M2 Moscova e stazione Porta Garibaldi (M2/M5)',
   ],
@@ -71,13 +71,13 @@ const CORE_IT: CarlsbergPack = {
   ],
   menuTitle: 'Menù Cenone di Capodanno · Cena Cantata & DJ Set (75 €)',
   menuBev:
-    'Inclusi nel prezzo di 75 €: acqua, caffè, 1 bottiglia di vino ogni 4 persone (Montepulciano o Vermentino) e flûte di prosecco per il brindisi di mezzanotte con cotechino e lenticchie.',
+    'Inclusi nel prezzo di 75 €: acque minerali, caffè, 1 bottiglia ogni 4 persone di Vino Nobile di Montepulciano o Vermentino di Gallura e flûte di prosecco per il brindisi di mezzanotte con cotechino e lenticchie.',
   courseLabels: ['Antipasto', 'Primo Piatto', 'Secondo e Contorno', 'Dolce', 'Tradizione di Mezzanotte'],
   dishes: [
-    'Selezione di salumi nostrani e formaggi stagionati accompagnati da mostarda artigianale e gnocco fritto caldo',
-    'Lasagnetta al forno con ragù di cinghiale e funghi porcini',
-    'Roast beef scottato servito su letto di carciofi e patate novelle al forno',
-    'Tortino dal cuore caldo al cioccolato servito con salsa ai frutti di bosco',
+    'Capesante gratinate alla veneziana, crocchette di patate al Patanegra su stecco e cestino di Parmigiano con puntarelle, burrata e acciughe del Cantabrico',
+    'Risotto Carnaroli con funghi porcini e zafferano con i suoi pistilli',
+    'Ribeye di manzo alla pietra lavica con salsa chimichurry e patate novelle',
+    'Tiramisù al pandoro con gocce di cioccolato',
     'Cotechino tradizionale con lenticchie di buon auspicio e flûte di prosecco per il brindisi',
   ],
   faqs: [
@@ -117,7 +117,7 @@ const CORE_EN: CarlsbergPack = {
   tierLabel: 'Seated NYE Dinner + Sing-Along Show + DJ Set (from 20:30)',
   tierPrice: '€75 per person',
   tierDesc:
-    'Full seated menu (artisan cured meats, cheeses with mostarda and warm gnocco fritto; wild boar and porcini mushroom lasagnetta; seared roast beef on artichokes with baby potatoes; warm chocolate lava cake with berry coulis), water, coffee, 1 bottle of wine per 4 guests (Montepulciano or Vermentino), midnight prosecco flute with cotechino & lentils, and DJ set.',
+    'Full seated menu (Venetian-style gratinated scallops, Patanegra potato croquettes on skewers, and Parmigiano basket with puntarelle, burrata & Cantabrian anchovies; Carnaroli risotto with porcini mushrooms and saffron pistils; lava-stone beef ribeye with chimichurry sauce and baby potatoes; pandoro tiramisù with chocolate drops), mineral water, coffee, 1 bottle of Vino Nobile di Montepulciano or Vermentino di Gallura per 4 guests, midnight prosecco flute with cotechino & lentils, and DJ set.',
   highlights: [
     'All-inclusive €75 per person seated dinner & party at Bastioni di Porta Nuova 9 (Corso Como / Porta Nuova)',
     'Includes 1 bottle of Montepulciano or Vermentino wine every 4 guests, water, coffee, and midnight prosecco',
@@ -134,13 +134,13 @@ const CORE_EN: CarlsbergPack = {
   ],
   menuTitle: 'Official NYE 2027 Dinner Menu · Sing-Along & DJ Set (€75)',
   menuBev:
-    'Included in the €75 rate: still/sparkling water, coffee, 1 bottle of Montepulciano red or Vermentino white wine per 4 guests, plus a midnight prosecco flute with cotechino and lentils.',
+    'Included in the €75 rate: mineral water, coffee, 1 bottle of Vino Nobile di Montepulciano red or Vermentino di Gallura white wine per 4 guests, plus a midnight prosecco flute with cotechino and lentils.',
   courseLabels: ['Starter', 'First Course', 'Main Course', 'Dessert', 'Midnight Tradition'],
   dishes: [
-    'Selection of cured meats and aged cheeses served with fruit mostarda and warm gnocco fritto',
-    'Oven-baked lasagnetta with wild boar ragù and porcini mushrooms',
-    'Seared roast beef over sautéed artichokes with roasted baby potatoes',
-    'Warm molten-heart chocolate cake with wild berry sauce',
+    'Venetian-style gratinated scallops, Patanegra potato croquettes on skewers, and Parmigiano basket with puntarelle, burrata & Cantabrian anchovies',
+    'Carnaroli risotto with porcini mushrooms and saffron pistils',
+    'Lava-stone beef ribeye with chimichurry sauce and roasted baby potatoes',
+    'Pandoro tiramisù with dark chocolate drops',
     'Traditional midnight cotechino with lentils and a prosecco toast flute',
   ],
   faqs: [
