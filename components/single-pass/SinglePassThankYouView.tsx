@@ -17,6 +17,7 @@ import {
   getTerrazzaCheckoutUi35,
 } from '@/lib/single-pass/i18n35';
 import type { SinglePassOrder } from '@/lib/single-pass/types';
+import { trackEcommerceEvent } from '@/lib/analytics';
 import { cartRowKey, useSinglePassCart } from './SinglePassCartContext';
 
 type ThankYouOrderView = {
@@ -85,6 +86,19 @@ export default function SinglePassThankYouView({
         }
         setOrder(data.order);
         if (data.order.status === 'paid') {
+          trackEcommerceEvent('purchase', {
+            transaction_id: data.order.id,
+            currency: 'EUR',
+            value: (data.order.totalCents || 0) / 100,
+            item_count: data.order.items.reduce((s, i) => s + (i.quantity || 1), 0),
+            items: data.order.items.map((item) => ({
+              item_id: item.skuId,
+              item_name: `${item.venueName} - ${item.title}`,
+              item_category: item.channel || 'venue',
+              price: Number(((item.unitTotalCents || 0) / 100).toFixed(2)),
+              quantity: item.quantity || 1,
+            })),
+          });
           clearCart({ converted: true });
         }
       })

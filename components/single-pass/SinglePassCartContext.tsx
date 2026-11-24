@@ -1,6 +1,11 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  readCartFunnelSnapshot,
+  trackEcommerceEvent,
+  writeCartFunnelSnapshot,
+} from '@/lib/analytics';
 import { readClientAttribution } from './AttributionTracker';
 import {
   SINGLE_PASS_FEE_RATE,
@@ -295,6 +300,26 @@ export function SinglePassCartProvider({
     if (!isCheckoutItemAllowed(sku, resolvedChannel).ok) return;
     userMutatedRef.current = true;
 
+      const linePricing = computeSinglePassPrice(
+        sku.basePriceCents,
+        safeQty,
+        getSkuFeeRate(sku, resolvedChannel),
+      );
+      trackEcommerceEvent('add_to_cart', {
+        currency: 'EUR',
+        value: linePricing.lineTotalCents / 100,
+        item_count: safeQty,
+        items: [
+          {
+            item_id: sku.id,
+            item_name: sku.titleIt || sku.titleEn,
+            item_category: resolvedChannel,
+            price: Number((linePricing.unitTotalCents / 100).toFixed(2)),
+            quantity: safeQty,
+          },
+        ],
+      });
+
     setItems((prev) => {
       const idx = prev.findIndex(
         (i) => i.skuId === sku.id && (i.channel || 'venue') === resolvedChannel,
@@ -378,6 +403,10 @@ export function SinglePassCartProvider({
   const clearCart = (opts?: { converted?: boolean }) => {
     if (opts?.converted) {
       userMutatedRef.current = false;
+      const prevSnap = readCartFunnelSnapshot();
+      if (prevSnap) {
+        writeCartFunnelSnapshot({ ...prevSnap, active: false, purchased: true });
+      }
       const nextSessionId = generateBrowserCartSessionId();
       setCartSessionId(nextSessionId);
       try {
@@ -389,6 +418,7 @@ export function SinglePassCartProvider({
       return;
     }
     userMutatedRef.current = true;
+    writeCartFunnelSnapshot(null);
     setItems([]);
   };
 
@@ -451,6 +481,71 @@ export function SinglePassCartProvider({
     const minor = convertEurCentsSingle(eurCents, currency, totals.currentFxRate);
     return formatMinorCurrency(minor, currency, locale);
   };
+
+  useEffect(() => {
+    if (!mounted) return;
+    const ABANDON_IDLE_MS = 25 * 60 * 1000;
+    const prev = readCartFunnelSnapshot();
+    const now = Date.now();
+
+    if (items.length === 0) {
+      if (prev && !prev.purchased) {
+        writeCartFunnelSnapshot(null);
+      }
+      return;
+    }
+
+    if (
+      prev &&
+      prev.active &&
+      !prev.purchased &&
+      !prev.abandonedSent &&
+      now - prev.lastTouchMs >= ABANDON_IDLE_MS
+    ) {
+      trackEcommerceEvent('cart_abandoned', {
+        currency: 'EUR',
+        value: prev.valueEur || totals.grandTotalCents / 100,
+        item_count: prev.itemCount || totals.itemCount,
+        abandon_stage: prev.stage,
+        ...(prev.orderId ? { order_id: prev.orderId } : {}),
+      });
+      writeCartFunnelSnapshot({
+        ...prev,
+        valueEur: Number((totals.grandTotalCents / 100).toFixed(2)),
+        itemCount: totals.itemCount,
+        abandonedSent: true,
+        lastTouchMs: now,
+      });
+      return;
+    }
+
+    const nextSnap = {
+      active: true,
+      stage: prev?.stage || ('cart' as const),
+      valueEur: Number((totals.grandTotalCents / 100).toFixed(2)),
+      itemCount: totals.itemCount,
+      orderId: prev?.orderId,
+      lastTouchMs: userMutatedRef.current || !prev ? now : prev.lastTouchMs,
+      purchased: false,
+      abandonedSent: Boolean(prev?.abandonedSent),
+    };
+    writeCartFunnelSnapshot(nextSnap);
+
+    const idleTimer = window.setTimeout(() => {
+      const latest = readCartFunnelSnapshot();
+      if (!latest || !latest.active || latest.purchased || latest.abandonedSent) return;
+      trackEcommerceEvent('cart_abandoned', {
+        currency: 'EUR',
+        value: latest.valueEur,
+        item_count: latest.itemCount,
+        abandon_stage: latest.stage,
+        ...(latest.orderId ? { order_id: latest.orderId } : {}),
+      });
+      writeCartFunnelSnapshot({ ...latest, abandonedSent: true });
+    }, ABANDON_IDLE_MS);
+
+    return () => window.clearTimeout(idleTimer);
+  }, [mounted, items.length, totals.grandTotalCents, totals.itemCount]);
 
   return (
     <SinglePassCartContext.Provider

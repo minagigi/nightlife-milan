@@ -1,8 +1,9 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { AlertTriangle, ArrowRight, Minus, Plus, ShieldCheck, ShoppingBag, Trash2 } from 'lucide-react';
 import Link from '@/components/LocalizedLink';
+import { trackEcommerceEvent, type Ga4EcommerceItem } from '@/lib/analytics';
 import { localePrefix } from '@/lib/i18n/locales';
 import {
   DINNER_DIETARY_OPTIONS,
@@ -48,6 +49,30 @@ export default function SinglePassCartPageView({ locale }: { locale: string }) {
   const feeLabel = formatFeeLabel35(locale, effectiveFeeRate, hasMixedFeeRates);
   const lp = localePrefix(locale);
   const isIt = locale === 'it';
+  const viewedRef = useRef(false);
+
+  useEffect(() => {
+    if (!mounted || items.length === 0 || viewedRef.current) return;
+    viewedRef.current = true;
+    const gaItems: Ga4EcommerceItem[] = [];
+    for (const it of items) {
+      const s = resolveCatalogSku(it.skuId);
+      if (!s) continue;
+      const ch = it.channel || 'venue';
+      const br = computeSinglePassPrice(s.basePriceCents, it.quantity, getSkuFeeRate(s, ch));
+      gaItems.push({
+        item_id: s.id,
+        item_name: s.titleIt || s.titleEn,
+        item_category: VENUE_BY_ID[s.venueId]?.name || s.venueId,
+        price: Number((br.unitTotalCents / 100).toFixed(2)),
+        quantity: it.quantity,
+      });
+    }
+    trackEcommerceEvent('view_cart', {
+      value: Number((grandTotalCents / 100).toFixed(2)),
+      items: gaItems,
+    });
+  }, [mounted, items, grandTotalCents]);
 
   if (!mounted) {
     return (

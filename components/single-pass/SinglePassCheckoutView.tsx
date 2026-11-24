@@ -42,6 +42,11 @@ import type {
   SinglePassVenueId,
 } from '@/lib/single-pass/types';
 import { readClientAttribution } from './AttributionTracker';
+import {
+  readCartFunnelSnapshot,
+  trackEcommerceEvent,
+  writeCartFunnelSnapshot,
+} from '@/lib/analytics';
 import EmbeddedPaymentForm from './EmbeddedPaymentForm';
 import { cartRowKey, useSinglePassCart } from './SinglePassCartContext';
 
@@ -142,6 +147,49 @@ export default function SinglePassCheckoutView({
 
   const errorSummaryRef = useRef<HTMLDivElement | null>(null);
   const submittingRef = useRef(false);
+  const beginCheckoutSigRef = useRef<string>('');
+
+  useEffect(() => {
+    if (!mounted || items.length === 0 || grandTotalCents <= 0) return;
+    const sig = items.map((i) => `${i.skuId}:${i.quantity}:${i.channel || 'venue'}`).join('|');
+    if (beginCheckoutSigRef.current === sig) return;
+    beginCheckoutSigRef.current = sig;
+
+    const gaItems = items.flatMap((i) => {
+      const sku = resolveCatalogSku(i.skuId);
+      if (!sku) return [];
+      const ch = i.channel || 'venue';
+      const pr = computeSinglePassPrice(sku.basePriceCents, i.quantity, getSkuFeeRate(sku, ch));
+      return [
+        {
+          item_id: sku.id,
+          item_name: sku.titleIt || sku.titleEn,
+          item_category: ch,
+          price: Number((pr.unitTotalCents / 100).toFixed(2)),
+          quantity: i.quantity,
+        },
+      ];
+    });
+
+    trackEcommerceEvent('begin_checkout', {
+      currency: 'EUR',
+      value: grandTotalCents / 100,
+      item_count: items.reduce((s, x) => s + x.quantity, 0),
+      items: gaItems,
+    });
+
+    const prevSnap = readCartFunnelSnapshot();
+    writeCartFunnelSnapshot({
+      active: true,
+      stage: 'checkout',
+      valueEur: Number((grandTotalCents / 100).toFixed(2)),
+      itemCount: items.reduce((s, x) => s + x.quantity, 0),
+      orderId: prevSnap?.orderId,
+      lastTouchMs: Date.now(),
+      purchased: false,
+      abandonedSent: false,
+    });
+  }, [mounted, items, grandTotalCents]);
 
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [fullName, setFullName] = useState('');
@@ -611,6 +659,24 @@ export default function SinglePassCheckoutView({
 
       setFieldErrors({});
       setGeneralError(null);
+      const sessionEurCents = data.totalEurCents ?? grandTotalCents;
+      trackEcommerceEvent('add_payment_info', {
+        currency: 'EUR',
+        value: sessionEurCents / 100,
+        order_id: data.orderId,
+        payment_type: 'card',
+        item_count: items.reduce((s, x) => s + x.quantity, 0),
+      });
+      writeCartFunnelSnapshot({
+        active: true,
+        stage: 'payment',
+        valueEur: Number((sessionEurCents / 100).toFixed(2)),
+        itemCount: items.reduce((s, x) => s + x.quantity, 0),
+        orderId: data.orderId,
+        lastTouchMs: Date.now(),
+        purchased: false,
+        abandonedSent: false,
+      });
       setPaymentSession({
         orderId: data.orderId,
         publishableKey: data.publishableKey,

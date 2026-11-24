@@ -731,3 +731,18 @@ export async function listAllCartDrafts(limit = 250): Promise<AbandonedCartRecor
     .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
     .slice(0, limit);
 }
+
+export async function readIndexedOrderSummariesOnly(): Promise<SinglePassOrderSummary[]> {
+  const indexed = await readPrivateJson<OrdersIndexDoc>(ORDERS_INDEX_PATH);
+  if (!indexed?.orders || !Array.isArray(indexed.orders)) return [];
+  return [...indexed.orders].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+}
+
+export async function readIndexedCartDraftsOnly(): Promise<AbandonedCartRecord[]> {
+  const indexed = await readPrivateJson<CartsIndexDoc>(CARTS_INDEX_PATH);
+  if (!indexed?.carts || !Array.isArray(indexed.carts)) return [];
+  return indexed.carts
+    .filter((c) => !c.clearedAt && !c.convertedOrderId && Array.isArray(c.items) && c.items.length > 0)
+    .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+}
+

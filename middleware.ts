@@ -26,6 +26,12 @@ import {
   safeCrmRedirect,
   verifyCrmSessionToken,
 } from '@/lib/crmSession';
+import {
+  ANALYTICS_MASTER_COOKIE,
+  verifyAnalyticsMasterCookie,
+  verifyAnalyticsMasterRawKey,
+  verifyBasicAuthHeader,
+} from '@/lib/analyticsMasterAuth';
 
 // Lingue attive dal registry unico (lib/i18n/locales.ts): attivare una lingua li
 // la rende automaticamente instradabile qui, senza toccare il middleware.
@@ -163,22 +169,58 @@ function resolveLegacySubpathForLocale(subPath: string, targetLocale: LocaleCode
 // Dashboard interna /analytics: Basic Auth con ANALYTICS_USER / ANALYTICS_PASSWORD.
 // Protegge anche le Server Action della pagina (stesso path → il browser riallega
 // l'header Authorization, cosa che NON farebbe verso /api/* fuori da questo prefisso).
-function analyticsAuth(request: NextRequest): NextResponse | null {
-  const user = process.env.ANALYTICS_USER;
-  const pass = process.env.ANALYTICS_PASSWORD;
-  const unauthorized = () =>
-    new NextResponse(user && pass ? 'Authentication required' : 'Analytics not configured (set ANALYTICS_USER / ANALYTICS_PASSWORD)', {
-      status: 401,
-      headers: {
-        'Cache-Control': 'private, no-store',
-        'WWW-Authenticate': 'Basic realm="Nightlife Milan Analytics"',
-      },
-    });
+function applyAnalyticsPrivateHeaders(response: NextResponse): NextResponse {
+  response.headers.set('X-Robots-Tag', 'noindex, nofollow, noarchive');
+  response.headers.set('Referrer-Policy', 'no-referrer');
+  response.headers.set('Cache-Control', 'private, no-store');
+  return response;
+}
 
-  if (!user || !pass) return unauthorized();
-  const expected = `Basic ${btoa(`${user}:${pass}`)}`;
-  if (request.headers.get('authorization') !== expected) return unauthorized();
-  return null;
+async function analyticsAuth(request: NextRequest): Promise<NextResponse | null> {
+  const keyParam = request.nextUrl.searchParams.get('k');
+  if (keyParam) {
+    const cookieDigest = await verifyAnalyticsMasterRawKey(keyParam);
+    if (cookieDigest) {
+      const cleanUrl = request.nextUrl.clone();
+      cleanUrl.searchParams.delete('k');
+      const redirectRes = NextResponse.redirect(cleanUrl, 303);
+      redirectRes.cookies.set(ANALYTICS_MASTER_COOKIE, cookieDigest, {
+        httpOnly: true,
+        secure: request.nextUrl.protocol === 'https:',
+        sameSite: 'lax',
+        path: '/',
+        maxAge: 60 * 60 * 24 * 365,
+      });
+      return applyAnalyticsPrivateHeaders(redirectRes);
+    }
+  }
+
+  const cookieVal = request.cookies.get(ANALYTICS_MASTER_COOKIE)?.value;
+  if (await verifyAnalyticsMasterCookie(cookieVal)) {
+    return null;
+  }
+
+  if (verifyBasicAuthHeader(request.headers.get('authorization'))) {
+    return null;
+  }
+
+  const hasAnyAuthConfigured =
+    Boolean((process.env.ANALYTICS_MASTER_TOKEN || '').trim()) ||
+    Boolean((process.env.ANALYTICS_USER || '').trim() && (process.env.ANALYTICS_PASSWORD || '').trim());
+
+  return applyAnalyticsPrivateHeaders(
+    new NextResponse(
+      hasAnyAuthConfigured
+        ? 'Accesso riservato. Apri il link personale completo oppure autenticati.'
+        : 'Analytics non configurato',
+      {
+        status: 401,
+        headers: {
+          'WWW-Authenticate': 'Basic realm="Nightlife Milan Analytics"',
+        },
+      },
+    ),
+  );
 }
 
 const crmPublicAuthRe = new RegExp(`^${localePrefixPattern}\\/crm\\/(?:login|recover)(\\/|$)`);
@@ -294,8 +336,11 @@ export async function middleware(request: NextRequest) {
   }
 
   if (analyticsRe.test(pathname)) {
-    const denied = analyticsAuth(request);
-    if (denied) return denied;
+    const authRes = await analyticsAuth(request);
+    if (authRes) return authRes;
+    if (!locales.some((l) => pathname.startsWith(`/${l}/`) || pathname === `/${l}`)) {
+      return applyAnalyticsPrivateHeaders(NextResponse.next());
+    }
   }
 
   // Check if the pathname starts with a locale
@@ -361,6 +406,9 @@ export async function middleware(request: NextRequest) {
 
     const res = NextResponse.next();
     maybePersistLocaleCookie(request, res, firstSegment, isBot);
+    if (analyticsRe.test(cleanPathname)) {
+      return applyAnalyticsPrivateHeaders(res);
+    }
     if (nonIndexedLocales.has(firstSegment)) {
       res.headers.set('X-Robots-Tag', 'noindex, follow');
     }

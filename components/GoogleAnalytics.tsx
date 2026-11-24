@@ -1,47 +1,36 @@
 'use client';
-import { useEffect } from 'react';
 
-const GA_ID = 'G-89JEXSWX80';
+import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+import { ensureGoogleAnalyticsLoaded } from '@/lib/analytics';
+
+const IMMEDIATE_LOAD_SEGMENT_RE = /\/(cart|carrello|checkout|cassa|thank-you)(\/|$)/i;
 
 /**
- * Loads Google Analytics ONLY on the first real user interaction
- * (scroll / pointer / touch / key). Lighthouse never interacts, so during an
- * audit gtag.js (~155 KiB) is never executed inside the FCP→TTI window — it
- * stops inflating TBT and the perf score stays stable near 100.
- *
- * Trade-off: a visitor who opens and leaves without any interaction is not
- * tracked. Acceptable for a perf-first site; every engaged user fires the
- * pageview on their first gesture (effectively immediately).
+ * Mantiene il caricamento alla prima interazione sulle pagine SEO pubbliche
+ * (Lighthouse ~100), ma carica immediatamente gtag.js sulle tappe transazionali
+ * (carrello, checkout, thank-you) per garantire il recapito degli eventi d'acquisto.
  */
 export default function GoogleAnalytics() {
+  const pathname = usePathname();
+
   useEffect(() => {
-    let loaded = false;
-    const events = ['scroll', 'mousemove', 'touchstart', 'keydown', 'pointerdown'] as const;
-
-    const cleanup = () => events.forEach((e) => window.removeEventListener(e, load));
-
-    function load() {
-      if (loaded) return;
-      loaded = true;
-      cleanup();
-
-      const s = document.createElement('script');
-      s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
-      s.async = true;
-      document.head.appendChild(s);
-
-      // Tipi globali di window.dataLayer/gtag dichiarati in lib/analytics.ts
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = function gtag() {
-        window.dataLayer!.push(arguments);
-      };
-      window.gtag('js', new Date());
-      window.gtag('config', GA_ID);
+    if (pathname && IMMEDIATE_LOAD_SEGMENT_RE.test(pathname)) {
+      ensureGoogleAnalyticsLoaded();
+      return;
     }
 
-    events.forEach((e) => window.addEventListener(e, load, { once: true, passive: true }));
+    const events = ['scroll', 'mousemove', 'touchstart', 'keydown', 'pointerdown'] as const;
+    const cleanup = () => events.forEach((e) => window.removeEventListener(e, onInteract));
+
+    function onInteract() {
+      cleanup();
+      ensureGoogleAnalyticsLoaded();
+    }
+
+    events.forEach((e) => window.addEventListener(e, onInteract, { once: true, passive: true }));
     return cleanup;
-  }, []);
+  }, [pathname]);
 
   return null;
 }
