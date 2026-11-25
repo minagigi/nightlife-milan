@@ -11,7 +11,11 @@ import { getGuideUiLabels35 } from '@/lib/i18n/flagshipGuides35';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { buildTasteExplorerData } from '@/lib/tasteExplorerData';
-import { getEditorialDisplayHeadline, getGuideEditorialBundle } from '@/lib/guideEditorialMedia';
+import {
+  getEditorialDisplayHeadline,
+  getGuideEditorialBundle,
+  resolveDistinctGuidePageMedia,
+} from '@/lib/guideEditorialMedia';
 import GuideEditorialTemplate from '@/components/GuideEditorialTemplate';
 
 // ISR Configuration (1 hour)
@@ -79,8 +83,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [
         {
           url: guide.image ? `${baseUrl}${GUIDE_HERO_IMAGES[guide.id] || guide.image}` : `${baseUrl}/images/guides-hero.webp`,
-          width: 1200,
-          height: 630,
+          width: 1080,
+          height: 1350,
           alt: title,
         },
       ],
@@ -147,7 +151,8 @@ export default async function GuidePage({ params }: Props) {
   }));
 
   // Priority Top 6 venues ordered by priorityScore (1. Just Me, 2. Pineta, 3. Aria, 4. 55 Milano, 5. Voya Rooftop, 6. Repvblic)
-  const relatedVenues = getVenues().slice(0, 6);
+  const allVenues = getVenues();
+  const relatedVenues = allVenues.slice(0, 6);
 
   // Other guides for cross-linking
   const otherGuides = mockGuides.filter((g) => g.id !== guide.id).slice(0, 4);
@@ -244,7 +249,7 @@ export default async function GuidePage({ params }: Props) {
   const heroImg = GUIDE_HERO_IMAGES[guide.id] || guide.image || '/images/guides-editorial/just-me-pavilion.webp';
   const bundle = getGuideEditorialBundle(guide, loc, title, heroImg);
   const displayHeadline = getEditorialDisplayHeadline(guide.id, loc, title);
-  const explorerData =
+  const rawExplorerData =
     guide.id === 'g-117' || guide.id === 'g-120' || guide.id === 'g-122'
       ? buildTasteExplorerData('terme', loc, guideUrl)
       : guide.id === 'g-118' ||
@@ -255,6 +260,14 @@ export default async function GuidePage({ params }: Props) {
           guide.id === 'g-124'
         ? buildTasteExplorerData('clubbing', loc, guideUrl)
         : null;
+  const resolvedMedia = resolveDistinctGuidePageMedia(
+    guide,
+    allVenues,
+    otherGuides,
+    bundle,
+    rawExplorerData,
+  );
+  const explorerData = resolvedMedia.explorerData;
 
   return (
     <>
@@ -289,6 +302,8 @@ export default async function GuidePage({ params }: Props) {
         otherGuides={otherGuides}
         bundle={bundle}
         explorerData={explorerData}
+        partnerCards={resolvedMedia.partnerCards}
+        relatedGuideCards={resolvedMedia.relatedGuideCards}
         t={t}
         ui={ui}
       />

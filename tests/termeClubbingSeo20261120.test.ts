@@ -8,7 +8,7 @@ import {
   isPartnerCapodannoSlug,
 } from '../lib/capodannoEvents';
 import { getCapodannoLocalizedEventContent } from '../lib/capodanno/i18n';
-import { mockGuides, mockVenues, getGuideBySlug } from '../lib/data';
+import { mockGuides, mockVenues, getVenues, getGuideBySlug } from '../lib/data';
 import { GUIDE_HERO_IMAGES_114, GUIDE_INLINE_IMAGES_114 } from '../lib/guideImagesMap114';
 import { GUIDE_100_SLUGS_MAP } from '../lib/i18n/guideSlugs100Map';
 import { ALL_35_LOCALES, resolveExistingGuideId } from '../lib/i18n/localizedSlugs35';
@@ -22,6 +22,7 @@ import {
   getEditorialDisplayHeadline,
   getGuideCardCover,
   getGuideEditorialBundle,
+  resolveDistinctGuidePageMedia,
 } from '../lib/guideEditorialMedia';
 import { getLocalizedText } from '../lib/seo';
 
@@ -327,6 +328,17 @@ test('V2 Curated Editorial Media & Reusable 118-Guide Template invariants', () =
     assert.ok(fs.statSync(abs).size <= 307_200, `Curated image ${file} exceeds 300 KB`);
   }
 
+  const CURATED_GUIDE_PREFIXES = [
+    '/images/guides-editorial/',
+    '/images/venues/',
+    '/images/seo-events/master/',
+    '/images/events/curated/',
+    '/images/events-gallery/',
+    '/images/pillars/',
+  ];
+  const isCuratedGuideAsset = (src: string) =>
+    CURATED_GUIDE_PREFIXES.some((p) => src.startsWith(p));
+
   for (const gid of [
     'g-117',
     'g-118',
@@ -360,10 +372,11 @@ test('V2 Curated Editorial Media & Reusable 118-Guide Template invariants', () =
   ] as const) {
     const hero = GUIDE_HERO_IMAGES_114[gid];
     const inlines = GUIDE_INLINE_IMAGES_114[gid] || [];
-    assert.ok(hero.startsWith('/images/guides-editorial/'), `${gid} hero should use curated editorial pack: ${hero}`);
+    assert.ok(isCuratedGuideAsset(hero), `${gid} hero should use curated pack: ${hero}`);
     assert.equal(hero.includes('capodanno-2027-posters'), false);
+    assert.equal(new Set([hero, ...inlines]).size, 5, `${gid} hero + 4 inlines must be 5 distinct images`);
     for (const img of inlines) {
-      assert.ok(img.startsWith('/images/guides-editorial/'), `${gid} inline should use curated editorial pack: ${img}`);
+      assert.ok(isCuratedGuideAsset(img), `${gid} inline should use curated pack: ${img}`);
       assert.equal(img.includes('capodanno-2027-posters'), false);
     }
   }
@@ -379,7 +392,11 @@ test('V2 Curated Editorial Media & Reusable 118-Guide Template invariants', () =
     }
   }
 
-  // Reusable editorial bundle & concise <=2-line display headline across all 118 guides
+  const allVenues = getVenues();
+  const TERME_EXP = new Set(['g-117', 'g-120', 'g-122']);
+  const CLUB_EXP = new Set(['g-118', 'g-119', 'g-30', 'g-121', 'g-123', 'g-124']);
+
+  // Reusable editorial bundle, <=2-line display headline & ZERO repeated images across all 125 guides
   for (const guide of mockGuides) {
     for (const loc of ['it', 'en', 'fr'] as const) {
       const fullTitle = getLocalizedText(guide.title, loc);
@@ -388,13 +405,59 @@ test('V2 Curated Editorial Media & Reusable 118-Guide Template invariants', () =
       assert.ok(!/[!\u2014]/.test(disp), `${guide.id} (${loc}) display headline forbidden char: ${disp}`);
       const heroImg = GUIDE_HERO_IMAGES_114[guide.id] || guide.image || '/images/guides-editorial/just-me-pavilion.webp';
       const bundle = getGuideEditorialBundle(guide, loc, fullTitle, heroImg);
+      assert.equal(bundle.heroSlides.length, 1, `${guide.id} heroSlides should contain 1 lead image`);
       assert.equal(bundle.heroSlides[0].src, heroImg, `${guide.id} heroSlides[0] must equal og:image`);
       assert.equal(bundle.stripPlates.length, 4);
       assert.equal(bundle.chapterPlates.length, 4);
-      for (const pl of [...bundle.stripPlates, ...bundle.chapterPlates]) {
-        assert.ok(pl.src.startsWith('/images/guides-editorial/'));
-        assert.ok(fs.existsSync(path.join(REPO_ROOT, 'public', pl.src.replace(/^\//, ''))));
+      const allBundlePlates = [
+        ...bundle.heroSlides,
+        ...bundle.stripPlates,
+        ...bundle.chapterPlates,
+        ...(bundle.faqPlate ? [bundle.faqPlate] : []),
+      ];
+      for (const pl of allBundlePlates) {
+        assert.ok(isCuratedGuideAsset(pl.src), `${guide.id} plate outside curated dirs: ${pl.src}`);
+        const diskP = path.join(REPO_ROOT, 'public', pl.src.replace(/^\//, ''));
+        assert.ok(fs.existsSync(diskP), `${guide.id} missing file: ${diskP}`);
+        assert.ok(fs.statSync(diskP).size <= 307_200, `${guide.id} plate > 300KB: ${pl.src}`);
       }
+
+      const otherGuides = mockGuides.filter((g) => g.id !== guide.id).slice(0, 4);
+      const rawExplorer = TERME_EXP.has(guide.id)
+        ? buildTasteExplorerData('terme', loc, 'https://nightlifemilan.com/it/guides/test')
+        : CLUB_EXP.has(guide.id)
+          ? buildTasteExplorerData('clubbing', loc, 'https://nightlifemilan.com/it/guides/test')
+          : null;
+      const resolved = resolveDistinctGuidePageMedia(guide, allVenues, otherGuides, bundle, rawExplorer);
+
+      const pageSrcs: string[] = [
+        ...bundle.heroSlides.map((p) => p.src),
+        ...bundle.stripPlates.map((p) => p.src),
+      ];
+      guide.sections.forEach((_, idx) => {
+        const isLight = idx % 2 === 0;
+        const isLastDark = !isLight && idx === guide.sections.length - 1 && idx >= 3;
+        if (idx >= 1 && !isLastDark && bundle.chapterPlates[idx - 1]) {
+          pageSrcs.push(bundle.chapterPlates[idx - 1].src);
+        }
+      });
+      if (guide.faqs && guide.faqs.length > 0 && bundle.faqPlate) {
+        pageSrcs.push(bundle.faqPlate.src);
+      }
+      if (resolved.explorerData?.items[0]) {
+        pageSrcs.push(resolved.explorerData.items[0].image);
+      } else {
+        assert.equal(resolved.partnerCards.length, 6, `${guide.id} must resolve 6 partnerCards`);
+        pageSrcs.push(...resolved.partnerCards.map((c) => c.coverSrc));
+      }
+      assert.equal(resolved.relatedGuideCards.length, 4, `${guide.id} must resolve 4 relatedGuideCards`);
+      pageSrcs.push(...resolved.relatedGuideCards.map((c) => c.coverSrc));
+
+      assert.equal(
+        new Set(pageSrcs).size,
+        pageSrcs.length,
+        `${guide.id} (${loc}) has duplicate image src on page: ${JSON.stringify(pageSrcs)}`,
+      );
     }
     const cover = getGuideCardCover(guide.id);
     assert.ok(fs.existsSync(path.join(REPO_ROOT, 'public', cover.replace(/^\//, ''))));

@@ -10,35 +10,10 @@ import EditorialPageSections from '@/components/EditorialPageSections';
 import type { Guide, Venue } from '@/lib/types';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import type { GuideEditorialBundle } from '@/lib/guideEditorialMedia';
-import { getGuideCardCover } from '@/lib/guideEditorialMedia';
+import { resolveDistinctGuidePageMedia } from '@/lib/guideEditorialMedia';
 import { getLocalizedGuideSlug35 } from '@/lib/guides100Catalog';
 import { getLocalizedText } from '@/lib/seo';
 import type { TasteExplorerData } from '@/lib/tasteExplorerData';
-
-const VENUE_CURATED_PHOTO_MAP: Record<string, string> = {
-  'just-me-milano': '/images/guides-editorial/just-me-pavilion.webp',
-  'pineta-club-milano': '/images/guides-editorial/pineta-lounge.webp',
-  'aria-club-milano': '/images/guides-editorial/aria-garden.webp',
-  '55-milano': '/images/guides-editorial/fiftyfive-loft.webp',
-  'voya-rooftop-milan': '/images/guides-editorial/voya-rooftop-20f.webp',
-  'repvblic-milano': '/images/guides-editorial/repvblic-club.webp',
-  'gattopardo-milano': '/images/guides-editorial/gattopardo-nave.webp',
-  'armani-prive-milano': '/images/guides-editorial/armani-prive-lounge.webp',
-  'hollywood-club-milano': '/images/guides-editorial/hollywood-corso-como.webp',
-  'the-club-milano': '/images/guides-editorial/the-club-brera.webp',
-  'apollo-milano': '/images/guides-editorial/apollo-navigli.webp',
-  'terrazza-21': '/images/guides-editorial/terrazza-duomo-skyline.webp',
-  'ceresio-7': '/images/guides-editorial/ceresio-pool-dusk.webp',
-};
-
-const PARTNER_COVER_FALLBACKS = [
-  '/images/guides-editorial/just-me-pavilion.webp',
-  '/images/guides-editorial/pineta-lounge.webp',
-  '/images/guides-editorial/aria-garden.webp',
-  '/images/guides-editorial/fiftyfive-loft.webp',
-  '/images/guides-editorial/voya-rooftop-20f.webp',
-  '/images/guides-editorial/repvblic-club.webp',
-];
 
 function normalizeGuideSectionHtml(rawHtml: string): string {
   const cleaned = rawHtml
@@ -75,6 +50,8 @@ export interface GuideEditorialTemplateProps {
   otherGuides: Guide[];
   bundle: GuideEditorialBundle;
   explorerData: TasteExplorerData | null;
+  partnerCards?: Array<{ venue: Venue; coverSrc: string }>;
+  relatedGuideCards?: Array<{ guide: Guide; coverSrc: string }>;
   t: {
     back: string;
     toc: string;
@@ -112,9 +89,17 @@ export default function GuideEditorialTemplate({
   otherGuides,
   bundle,
   explorerData,
+  partnerCards,
+  relatedGuideCards,
   t,
   ui,
 }: GuideEditorialTemplateProps) {
+  const fallbackMedia =
+    !partnerCards || !relatedGuideCards
+      ? resolveDistinctGuidePageMedia(guide, relatedVenues, otherGuides, bundle, explorerData)
+      : null;
+  const effectivePartnerCards = partnerCards ?? fallbackMedia!.partnerCards;
+  const effectiveRelatedGuideCards = relatedGuideCards ?? fallbackMedia!.relatedGuideCards;
   const isPillarExplorer = Boolean(explorerData);
   const leadRate = explorerData?.items[0]?.rate || '';
   const leadRateShort = leadRate.includes('·') ? leadRate.split('·')[0].trim() : leadRate;
@@ -314,13 +299,10 @@ export default function GuideEditorialTemplate({
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" data-taste-stagger>
-              {relatedVenues.map((venue, idx) => {
+              {effectivePartnerCards.map(({ venue, coverSrc }) => {
                 const venueName = getLocalizedText(venue.localizedContent.name, locale);
                 const venueSlug = getLocalizedText(venue.slugs, locale);
                 const venueHref = `${langPrefix}/clubs/${venueSlug}`;
-                const coverSrc =
-                  VENUE_CURATED_PHOTO_MAP[venue.slugs.en] ||
-                  PARTNER_COVER_FALLBACKS[idx % PARTNER_COVER_FALLBACKS.length];
                 return (
                   <Link
                     key={venue.id}
@@ -367,10 +349,9 @@ export default function GuideEditorialTemplate({
           getLocalizedText(section.content, locale),
         );
         const isLight = index % 2 === 0;
-        const secPlate =
-          bundle.chapterPlates[index % Math.max(1, bundle.chapterPlates.length)] ||
-          bundle.stripPlates[0];
         const isLastDark = !isLight && index === guide.sections.length - 1 && index >= 3;
+        const secPlate =
+          index >= 1 && !isLastDark ? (bundle.chapterPlates[index - 1] ?? null) : null;
 
         return (
           <section
@@ -552,18 +533,20 @@ export default function GuideEditorialTemplate({
               </div>
 
               <div className="lg:col-span-5 lg:sticky lg:top-20 space-y-5" data-taste-reveal>
-                <figure className="relative aspect-[4/5] w-full overflow-clip bg-[#050505]">
-                  <Image
-                    src={(bundle.chapterPlates[2] || bundle.stripPlates[0]).src}
-                    alt={`${t.faq} - ${title}`}
-                    title={title}
-                    fill
-                    unoptimized
-                    quality={92}
-                    sizes="(max-width: 1024px) 100vw, 40vw"
-                    className="object-cover"
-                  />
-                </figure>
+                {bundle.faqPlate && (
+                  <figure className="relative aspect-[4/5] w-full overflow-clip bg-[#050505]">
+                    <Image
+                      src={bundle.faqPlate.src}
+                      alt={`${bundle.faqPlate.caption} - ${title}`}
+                      title={title}
+                      fill
+                      unoptimized
+                      quality={92}
+                      sizes="(max-width: 1024px) 100vw, 40vw"
+                      className="object-cover"
+                    />
+                  </figure>
+                )}
                 <div className="bg-[#EAE3D5] p-6" data-no-lightbox="true">
                   <h3 className="font-display text-xl font-bold text-[#050505] mb-2">
                     {ui.bookHeading}
@@ -597,10 +580,9 @@ export default function GuideEditorialTemplate({
               {t.otherGuides}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" data-taste-stagger>
-              {otherGuides.map((g) => {
+              {effectiveRelatedGuideCards.map(({ guide: g, coverSrc: gCover }) => {
                 const gSlug = getLocalizedGuideSlug35(g, locale);
                 const gTitle = getLocalizedText(g.title, locale).replace(/\u2014/g, ' - ');
-                const gCover = getGuideCardCover(g.id);
                 return (
                   <Link
                     key={g.id}

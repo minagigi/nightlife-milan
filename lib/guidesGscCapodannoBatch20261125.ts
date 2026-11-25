@@ -892,7 +892,7 @@ export function applyGscCapodannoBatch20261125(guidesList: Guide[]): void {
         GUIDE_100_SLUGS_MAP['g-125'] as Record<LocaleCode, string>,
         renderCarlsbergGuide,
         [MusicGenre.LIVE_MUSIC, MusicGenre.COMMERCIAL, MusicGenre.HOUSE],
-        '/images/guides-editorial/tom-milano-dinner.webp',
+        '/images/seo-events/master/carlsberg-ol-01.webp',
         '2026-11-25',
       ),
     );
