@@ -5,6 +5,7 @@ import { getGsc20261122DisplayHeadline } from './guidesGscBatch20261122';
 import { getGsc20261123DisplayHeadline } from './guidesGscBatch20261123';
 import { getGsc20261124DisplayHeadline } from './guidesGscBatch20261124';
 import { getGsc20261125DisplayHeadline } from './guidesGscBatch20261125';
+import { getGscCapodanno20261125DisplayHeadline } from './guidesGscCapodannoBatch20261125';
 import { GUIDE_100_SEEDS } from './guides100Catalog';
 import { getLocalizedGuideSeedNames } from './i18n/guideSeeds35Names';
 
@@ -287,6 +288,11 @@ export function getEditorialDisplayHeadline(
   locale: LocaleCode,
   localizedFullTitle: string,
 ): string {
+  const gscCap20261125 = getGscCapodanno20261125DisplayHeadline(guideId, locale);
+  if (gscCap20261125) {
+    return clampConciseHeadline(gscCap20261125);
+  }
+
   const gsc20261125 = getGsc20261125DisplayHeadline(guideId, locale);
   if (gsc20261125) {
     return clampConciseHeadline(gsc20261125);
@@ -576,17 +582,54 @@ const ROOFTOP_IDS = new Set([
 ]);
 const TERME_IDS = new Set(['g-117', 'g-120', 'g-122', 'g-90']);
 const DINNER_IDS = new Set([
-  'g-secret-bars', 'g-2', 'g-private-parties', 'g-9', 'g-19', 'g-30', 'g-31', 'g-36', 'g-37', 'g-38', 'g-53', 'g-60', 'g-78', 'g-85', 'g-88', 'g-102', 'g-121', 'g-123',
+  'g-secret-bars', 'g-2', 'g-private-parties', 'g-9', 'g-19', 'g-30', 'g-31', 'g-36', 'g-37', 'g-38', 'g-53', 'g-60', 'g-78', 'g-85', 'g-88', 'g-102', 'g-121', 'g-123', 'g-125',
 ]);
 const ELECTRONIC_IDS = new Set([
   'g-techno-2026', 'g-5', 'g-23', 'g-24', 'g-25', 'g-26', 'g-34', 'g-35', 'g-70', 'g-77', 'g-79', 'g-80', 'g-89', 'g-124',
 ]);
+
+const SINGLE_VENUE_EDITORIAL_PLATES: Record<string, EditorialPlate[]> = {
+  'g-15': [
+    { src: '/images/guides-editorial/just-me-pavilion.webp', caption: 'Just Me Milano · Cupola Italo Rota', district: 'Viale Luigi Camoens 2 · Parco Sempione' },
+    { src: '/images/guides-editorial/just-me-dancefloor.webp', caption: 'Just Me Milano · Main Dancefloor', district: 'Torre Branca · Parco Sempione' },
+    { src: '/images/guides-editorial/just-me-vip-table.webp', caption: 'Just Me Milano · Tavoli VIP Privé', district: 'Gala Dinner & Bottle Service' },
+    { src: '/images/guides-editorial/just-me-exterior.webp', caption: 'Just Me Milano · Ingresso Parco Sempione', district: 'Torre Branca' },
+  ],
+  'g-16': [
+    { src: '/images/guides-editorial/pineta-lounge.webp', caption: 'Pineta Milano · Luxury Hall', district: 'Via Messina 38 · Porta Garibaldi' },
+    { src: '/images/guides-editorial/pineta-dancefloor.webp', caption: 'Pineta Milano · Main Room & Urban Room', district: 'Via Messina 38 · M5 Cenisio' },
+    { src: '/images/guides-editorial/pineta-vip.webp', caption: 'Pineta Milano · Champagne & VIP Privé', district: 'Moulin Rouge Edition' },
+    { src: '/images/guides-editorial/pineta-dancefloor.webp', caption: 'Pineta Milano · Dinner Show & Clubbing', district: 'Porta Garibaldi' },
+  ],
+  'g-18': [
+    { src: '/images/guides-editorial/voya-rooftop-20f.webp', caption: 'Voya Rooftop · 20° Piano Skyline (85m)', district: 'Viale Achille Papa 30 · Portello' },
+    { src: '/images/guides-editorial/voya-rooftop-20f.webp', caption: 'Voya Rooftop · Vista 360° Fuochi Capodanno', district: 'CityLife / Portello' },
+    { src: '/images/guides-editorial/voya-rooftop-20f.webp', caption: 'Voya Rooftop · Restaurant 6 Portate & DJ Set', district: '20th Floor Sky Club' },
+    { src: '/images/guides-editorial/voya-rooftop-20f.webp', caption: 'Voya Rooftop · Skyline Glass Privé', district: 'M5 Portello' },
+  ],
+  'g-20': [
+    { src: '/images/guides-editorial/repvblic-club.webp', caption: 'REPVBLIC Milano · Main Dancefloor', district: 'Piazza della Repubblica 12' },
+    { src: '/images/guides-editorial/repvblic-club.webp', caption: 'REPVBLIC Milano · Exclusive VIP Privé', district: 'M3 Repubblica · Porta Nuova' },
+    { src: '/images/guides-editorial/repvblic-club.webp', caption: 'REPVBLIC Milano · International Crowd', district: 'Piazza della Repubblica 12' },
+    { src: '/images/guides-editorial/repvblic-club.webp', caption: 'REPVBLIC Milano · Midnight Toast & Clubbing', district: 'WhatsApp Concierge' },
+  ],
+  'g-125': [
+    { src: '/images/guides-editorial/tom-milano-dinner.webp', caption: 'Gran Cenone Servito · Vino Incluso', district: 'Bastioni di Porta Nuova 9' },
+    { src: '/images/guides-editorial/bischeri-dinner.webp', caption: 'Cena Cantata Live & Tavolo Tutta la Sera', district: 'Porta Nuova / Corso Como' },
+    { src: '/images/guides-editorial/bischeri-gala.webp', caption: 'Brindisi di Mezzanotte & Tradizione', district: 'M2 Moscova · M2/M5 Garibaldi' },
+    { src: '/images/guides-editorial/tom-milano-dinner.webp', caption: 'Festa di San Silvestro & DJ Set', district: 'Bastioni di Porta Nuova 9' },
+  ],
+};
 
 function pickThemeSets(guideId: string): {
   heroPool: EditorialPlate[];
   stripPool: EditorialPlate[];
   chapterPool: EditorialPlate[];
 } {
+  if (SINGLE_VENUE_EDITORIAL_PLATES[guideId]) {
+    const sp = SINGLE_VENUE_EDITORIAL_PLATES[guideId];
+    return { heroPool: sp, stripPool: sp, chapterPool: sp };
+  }
   if (TERME_IDS.has(guideId)) {
     return {
       heroPool: PLATES_TERME,

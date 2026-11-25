@@ -10,6 +10,14 @@ type Lang6 = 'en' | 'it' | 'es' | 'fr' | 'de' | 'pt';
 type Lang35Map = Record<LocaleCode, string>;
 
 const LANG6_NAMES: Record<string, Record<Lang6, { name: string; shortName: string; zone: string }>> = {
+  'g-125': {
+    en: { name: 'Carlsberg Øl Milan New Year\'s Eve 2027 (75 EUR Singing Dinner & DJ Set)', shortName: 'Carlsberg Øl NYE 2027', zone: 'Porta Nuova & Corso Como' },
+    it: { name: 'Carlsberg Øl Milano Capodanno 2027 (Cena Cantata & DJ Set 75 EUR)', shortName: 'Carlsberg Øl Capodanno', zone: 'Porta Nuova & Corso Como' },
+    es: { name: 'Carlsberg Øl Milán Nochevieja 2027 (Cena Cantada y DJ Set 75 EUR)', shortName: 'Carlsberg Øl Nochevieja', zone: 'Porta Nuova & Corso Como' },
+    fr: { name: 'Carlsberg Øl Milan Nouvel An 2027 (Dîner Chanté & DJ Set 75 EUR)', shortName: 'Carlsberg Øl Nouvel An', zone: 'Porta Nuova & Corso Como' },
+    de: { name: 'Carlsberg Øl Mailand Silvester 2027 (Dinner Show & DJ-Set 75 EUR)', shortName: 'Carlsberg Øl Silvester', zone: 'Porta Nuova & Corso Como' },
+    pt: { name: 'Carlsberg Øl Milão Réveillon 2027 (Jantar Cantado e DJ Set 75 EUR)', shortName: 'Carlsberg Øl Réveillon', zone: 'Porta Nuova & Corso Como' },
+  },
   'g-41': {
     en: { name: 'Bocconi University Graduation Party Milan (Aperitivo, Singing Dinner & VIP Tables)', shortName: 'Bocconi Graduation Party', zone: 'Porta Romana, Parco Sempione & Corso Como' },
     it: { name: 'Festa di Laurea Università Bocconi Milano (Aperitivo, Cena Cantata & Tavoli VIP)', shortName: 'Laurea Bocconi', zone: 'Porta Romana, Parco Sempione & Corso Como' },

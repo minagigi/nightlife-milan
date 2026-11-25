@@ -143,6 +143,7 @@ export const GUIDE_HERO_IMAGES_114: Record<string, string> = {
   'g-122': '/images/guides-editorial/palace-como-fireworks.webp',
   'g-123': '/images/guides-editorial/terme-villa-gala.webp',
   'g-124': '/images/guides-editorial/aria-dancefloor.webp',
+  'g-125': '/images/guides-editorial/tom-milano-dinner.webp',
 };
 
 export const GUIDE_INLINE_IMAGES_114: Record<string, string[]> = {
@@ -201,11 +202,26 @@ export const GUIDE_INLINE_IMAGES_114: Record<string, string[]> = {
     '/images/guides-editorial/just-me-vip-table.webp',
     '/images/guides-editorial/just-me-exterior.webp',
   ],
-  'g-16': ['/images/venues/pineta-milano/pineta-milano-aperitivo-01.webp', '/images/venues/pineta-milano/pineta-milano-cena-01.webp', '/images/venues/pineta-milano/pineta-milano-lounge-01.webp', '/images/venues/pineta-milano/pineta-milano-ingresso-01.webp'],
+  'g-16': [
+    '/images/guides-editorial/pineta-lounge.webp',
+    '/images/guides-editorial/pineta-dancefloor.webp',
+    '/images/guides-editorial/pineta-vip.webp',
+    '/images/guides-editorial/pineta-dancefloor.webp',
+  ],
   'g-17': ['/images/venues/aria-club-milano/aria-club-milano-garden-01.webp', '/images/venues/aria-club-milano/aria-club-milano-buffet-01.webp', '/images/venues/aria-club-milano/aria-club-milano-bar-01.webp', '/images/venues/aria-club-milano/aria-club-milano-interior-02.webp'],
-  'g-18': ['/images/seo-events/master/voya-rooftop-milan-lounge-01.webp', '/images/seo-events/master/voya-rooftop-milan-cena-01.webp', '/images/seo-events/master/voya-rooftop-milan-drink-01.webp', '/images/venues/voya-rooftop-milan/voya-rooftop-milan-interior-01.webp'],
+  'g-18': [
+    '/images/guides-editorial/voya-rooftop-20f.webp',
+    '/images/guides-editorial/voya-rooftop-20f.webp',
+    '/images/guides-editorial/voya-rooftop-20f.webp',
+    '/images/guides-editorial/voya-rooftop-20f.webp',
+  ],
   'g-19': ['/images/guides-editorial/gattopardo-nave.webp', '/images/guides-editorial/just-me-pavilion.webp', '/images/guides-editorial/pineta-vip.webp', '/images/guides-editorial/bischeri-dinner.webp'],
-  'g-20': ['/images/venues/repvblic-milano/repvblic-milano-interior-02.webp', '/images/venues/repvblic-milano/repvblic-milano-interior-03.webp', '/images/venues/repvblic-milano/repvblic-milano-interior-04.webp', '/images/venues/repvblic-milano/repvblic-milano-interior-06.webp'],
+  'g-20': [
+    '/images/guides-editorial/repvblic-club.webp',
+    '/images/guides-editorial/repvblic-club.webp',
+    '/images/guides-editorial/repvblic-club.webp',
+    '/images/guides-editorial/repvblic-club.webp',
+  ],
   'g-21': ['/images/pillars/venue-tocqueville.webp', '/images/pillars/zone-inline-03-a.webp', '/images/pillars/zone-inline-03-b.webp', '/images/pillars/zone-inline-03-c.webp'],
   'g-22': [
     '/images/guides-editorial/voya-rooftop-20f.webp',
@@ -389,6 +405,12 @@ export const GUIDE_INLINE_IMAGES_114: Record<string, string[]> = {
     '/images/guides-editorial/gate-neon.webp',
     '/images/guides-editorial/just-me-dancefloor.webp',
     '/images/guides-editorial/palace-como-fireworks.webp',
+  ],
+  'g-125': [
+    '/images/guides-editorial/tom-milano-dinner.webp',
+    '/images/guides-editorial/bischeri-dinner.webp',
+    '/images/guides-editorial/bischeri-gala.webp',
+    '/images/guides-editorial/tom-milano-dinner.webp',
   ],
 };
 
