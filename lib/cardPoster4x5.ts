@@ -136,6 +136,7 @@ const CARD_POSTER_4X5_MAP: Readonly<Record<string, string>> = {
   "/images/events/capodanno-2027-posters/capodanno-voya-rooftop-milano.webp": "/images/events/cards-4x5/capodanno-2027-posters/capodanno-voya-rooftop-milano.webp",
   "/images/events/capodanno-2027-posters/capodanno-zelig-cabaret-milano.webp": "/images/events/cards-4x5/capodanno-2027-posters/capodanno-zelig-cabaret-milano.webp",
   "/images/events/capodanno-2027-posters/capodanno-zoo-club-milano.webp": "/images/events/cards-4x5/capodanno-2027-posters/capodanno-zoo-club-milano.webp",
+  "/images/events/capodanno-2027-posters/capodanno-world-winter-week-aprica.webp": "/images/events/cards-4x5/capodanno-2027-posters/capodanno-world-winter-week-aprica.webp",
   "/images/events/christmas-2026-posters/natale-voya-rooftop-milano-2026.webp": "/images/events/cards-4x5/christmas-2026-posters/natale-voya-rooftop-milano-2026.webp",
   "/images/events/current-xceed/220712-poster.webp": "/images/events/cards-4x5/current-xceed/220712-poster.webp",
   "/images/events/current-xceed/220791-poster.webp": "/images/events/cards-4x5/current-xceed/220791-poster.webp",

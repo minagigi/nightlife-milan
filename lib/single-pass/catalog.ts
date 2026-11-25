@@ -20,6 +20,7 @@ import type {
 export const SINGLE_PASS_FEE_RATE = 0.20 as const;
 export const TERRAZZA_DUOMO_FEE_RATE = 0.20 as const;
 export const NON_PARTNER_FEE_RATE = 0.20 as const;
+export const APRICA_FEE_RATE = 0.15 as const;
 
 export const WHATSAPP_MINI_GROUP_START_DATE_ISO = '2026-12-20';
 
@@ -77,6 +78,7 @@ export const CONFIRMED_CAPODANNO_SLUGS = new Set<string>([
   'capodanno-the-beach-milano',
   'capodanno-zelig-cabaret-milano',
   'capodanno-dazi-milano-arco-della-pace',
+  'capodanno-world-winter-week-aprica',
 ]);
 
 export function isConfirmedCapodannoSlug(slug: string): boolean {
@@ -1071,6 +1073,27 @@ export const SINGLE_PASS_VENUES: readonly SinglePassVenueSpec[] = [
     dressCodeEn: 'New Year’s Eve Red Carpet Elegant',
     posterSrc: getCapodannoOfficialPosterSrc('capodanno-dazi-milano-arco-della-pace'),
   },
+  {
+    id: 'aprica-world-winter-week',
+    eventSlug: 'capodanno-world-winter-week-aprica',
+    partner: false,
+    name: 'World Winter Week Aprica · Residence, Hotel & Charlie Club',
+    taglineIt: '5 Giorni / 4 Notti (30/12 - 03/01) · Giovani 18-26 · Appartamento o Hotel B&B da 399€ · Après-Ski & Charlie Disco Club',
+    taglineEn: '5 Days / 4 Nights (Dec 30 - Jan 3) · Ages 18-26 · Apartment or Hotel B&B from €399 · Slope Après-Ski & Charlie Disco Club',
+    district: 'Aprica · Valtellina (SO)',
+    address: 'Corso Roma, 23031 Aprica (SO)',
+    hours: '30/12 (14:00) - 03/01 (10:00)',
+    ageBandLabelIt: '18-26 anni · Settimana Bianca & Party Capodanno',
+    ageBandLabelEn: 'Ages 18-26 · NYE Snow Week & Club Festival',
+    recommendedMinAge: 18,
+    recommendedMaxAge: 26,
+    strictMaxAge: null,
+    musicIt: 'Après-Ski gratuiti ogni pomeriggio in pista + Party serali gratuiti WWW + Notte 01/01 omaggio al Charlie Disco Club',
+    musicEn: 'Free daily slope après-ski + Free nightly WWW parties + Complimentary Jan 1 night at Charlie Disco Club',
+    dressCodeIt: 'Snow & Après-Ski di giorno · Mountain Clubwear la sera',
+    dressCodeEn: 'Daytime Ski & Snow Gear · Mountain Clubwear at night',
+    posterSrc: getCapodannoOfficialPosterSrc('capodanno-world-winter-week-aprica'),
+  },
 ];
 
 export const VENUE_BY_ID: Record<SinglePassVenueId, SinglePassVenueSpec> = Object.fromEntries(
@@ -1090,6 +1113,126 @@ export const STOREFRONT_VENUES: readonly SinglePassVenueSpec[] = SINGLE_PASS_VEN
 );
 
 export const SINGLE_PASS_SKUS: readonly SinglePassSku[] = [
+  // WORLD WINTER WEEK APRICA (30/12/2026 - 03/01/2027 · 5 GIORNI / 4 NOTTI · FEE 15%)
+  {
+    id: 'aprica-apt-gold',
+    venueId: 'aprica-world-winter-week',
+    category: 'all-night-combo',
+    featured: true,
+    titleIt: 'Pacchetto Appartamento Gold · 4 Notti (30/12 - 03/01)',
+    titleEn: 'Gold Apartment Package · 4 Nights (Dec 30 - Jan 3)',
+    descriptionIt:
+      '4 notti in residence/appartamento (4-8 posti, abbinamento coetanei se < 4), bracciale WWW Gold, après-ski gratuiti ogni giorno, party serali WWW, ingresso gratuito 01/01 al Charlie Disco Club, skipass e noleggio scontati, assistenza staff 24h. Da versare in loco al check-in: assicurazione 12€ + tassa soggiorno 6€ + cauzione 50€ (10€ trattenuti per consumi/igienizzazione, 40€ restituiti).',
+    descriptionEn:
+      '4 nights in residence apartment (4-8 beds, peer matching if < 4), WWW Gold wristband, free daily slope après-ski, free nightly WWW parties, complimentary Jan 1 night at Charlie Disco Club, discounted skipass & ski rental, 24h staff. Payable on site at check-in: €12 insurance + €6 tourist tax + €50 deposit (€10 retained for utilities/sanitization, €40 refunded).',
+    arrivalTime: '30/12 · 14:00',
+    basePriceCents: 39900,
+    feeRate: APRICA_FEE_RATE,
+    guestsPerUnit: 1,
+    genderPolicy: 'equal',
+    maxQuantityPerOrder: 16,
+    eventDateLabel: '2026-12-30 / 2027-01-03',
+    confirmed: true,
+  },
+  {
+    id: 'aprica-apt-platinum',
+    venueId: 'aprica-world-winter-week',
+    category: 'all-night-combo',
+    featured: true,
+    titleIt: 'Pacchetto Appartamento Platinum · 4 Notti + 2 Drink/Giorno & Fast Check-In',
+    titleEn: 'Platinum Apartment Package · 4 Nights + 2 Drinks/Day & Fast Check-In',
+    descriptionIt:
+      'Include tutto il Pacchetto Appartamento Gold (4 notti 30/12 - 03/01, après-ski gratuiti, party serali WWW, notte 01/01 al Charlie Disco Club) + 2 drink al giorno inclusi agli eventi + Fast Check-In salta-fila il 30/12. In loco al check-in: assicurazione 12€ + tassa soggiorno 6€ + cauzione 50€ (10€ consumi/igienizzazione, 40€ restituiti).',
+    descriptionEn:
+      'Includes all Gold Apartment benefits (4 nights Dec 30 - Jan 3, free daily après-ski, nightly WWW parties, Jan 1 Charlie Disco Club) + 2 drinks per day included at events + skip-the-line Fast Check-In on Dec 30. On site at check-in: €12 insurance + €6 tourist tax + €50 deposit (€10 utilities/sanitization, €40 refunded).',
+    arrivalTime: '30/12 · 14:00',
+    basePriceCents: 41900,
+    feeRate: APRICA_FEE_RATE,
+    guestsPerUnit: 1,
+    genderPolicy: 'equal',
+    maxQuantityPerOrder: 16,
+    eventDateLabel: '2026-12-30 / 2027-01-03',
+    confirmed: true,
+  },
+  {
+    id: 'aprica-hotel-gold',
+    venueId: 'aprica-world-winter-week',
+    category: 'all-night-combo',
+    featured: true,
+    titleIt: 'Pacchetto Hotel Gold B&B · 4 Notti con Colazione (30/12 - 03/01)',
+    titleEn: 'Gold Hotel B&B Package · 4 Nights with Breakfast (Dec 30 - Jan 3)',
+    descriptionIt:
+      '4 notti in hotel 3 stelle convenzionato ad Aprica con prima colazione inclusa (camere da 2+ posti su disponibilità, biancheria inclusa), bracciale WWW Gold, après-ski gratuiti in pista, party serali WWW e notte 01/01 al Charlie Disco Club. In loco al check-in: assicurazione 12€ + tassa soggiorno 6€ + cauzione 50€ restituita a fine soggiorno.',
+    descriptionEn:
+      '4 nights in partner 3-star hotel in Aprica with daily breakfast (rooms from 2+ guests subject to availability, linen included), WWW Gold wristband, free daily slope après-ski, nightly WWW parties & Jan 1 night at Charlie Disco Club. On site at check-in: €12 insurance + €6 tourist tax + €50 refundable deposit.',
+    arrivalTime: '30/12 · 14:00',
+    basePriceCents: 39900,
+    feeRate: APRICA_FEE_RATE,
+    guestsPerUnit: 1,
+    genderPolicy: 'equal',
+    maxQuantityPerOrder: 16,
+    eventDateLabel: '2026-12-30 / 2027-01-03',
+    confirmed: true,
+  },
+  {
+    id: 'aprica-hotel-platinum',
+    venueId: 'aprica-world-winter-week',
+    category: 'all-night-combo',
+    featured: true,
+    titleIt: 'Pacchetto Hotel Platinum B&B · 4 Notti + 2 Drink/Giorno & VIP Titanium Charlie',
+    titleEn: 'Platinum Hotel B&B Package · 4 Nights + 2 Drinks/Day & VIP Titanium Charlie',
+    descriptionIt:
+      '4 notti Hotel B&B con colazione + 2 drink al giorno inclusi + Fast Check-In + Bracciale Priority VIP Titanium con corsia dedicata al Charlie Disco Club, oltre ad après-ski e party serali WWW. In loco al check-in: assicurazione 12€ + tassa soggiorno 6€ + cauzione 50€ restituita a fine soggiorno.',
+    descriptionEn:
+      '4 nights Hotel B&B with breakfast + 2 drinks per day included + Fast Check-In + Priority VIP Titanium skip-the-line wristband at Charlie Disco Club, plus free daily après-ski and nightly WWW parties. On site at check-in: €12 insurance + €6 tourist tax + €50 refundable deposit.',
+    arrivalTime: '30/12 · 14:00',
+    basePriceCents: 41900,
+    feeRate: APRICA_FEE_RATE,
+    guestsPerUnit: 1,
+    genderPolicy: 'equal',
+    maxQuantityPerOrder: 16,
+    eventDateLabel: '2026-12-30 / 2027-01-03',
+    confirmed: true,
+  },
+  {
+    id: 'aprica-addon-half-board',
+    venueId: 'aprica-world-winter-week',
+    category: 'holiday-special',
+    titleIt: 'Supplemento Mezza Pensione Hotel · 4 Cene (solo con Pacchetto Hotel)',
+    titleEn: 'Hotel Half-Board Supplement · 4 Dinners (Hotel Packages only)',
+    descriptionIt:
+      'Supplemento facoltativo con 4 cene serali in struttura alberghiera dal 30/12 al 02/01. Acquistabile esclusivamente in abbinamento a Pacchetto Hotel Gold B&B o Pacchetto Hotel Platinum B&B (massimo 1 supplemento per ogni quota Hotel).',
+    descriptionEn:
+      'Optional 4-dinner hotel half-board upgrade from Dec 30 to Jan 2. Available exclusively when paired with Gold Hotel B&B or Platinum Hotel B&B packages (up to 1 supplement per Hotel guest).',
+    arrivalTime: '30/12 - 03/01',
+    basePriceCents: 6000,
+    feeRate: APRICA_FEE_RATE,
+    guestsPerUnit: 0,
+    genderPolicy: 'equal',
+    maxQuantityPerOrder: 16,
+    eventDateLabel: '2026-12-30 / 2027-01-03',
+    confirmed: true,
+  },
+  {
+    id: 'aprica-addon-bus',
+    venueId: 'aprica-world-winter-week',
+    category: 'holiday-special',
+    titleIt: 'Supplemento Viaggio in Pullman A/R (30/12 Andata · 03/01 Ritorno)',
+    titleEn: 'Round-Trip Coach Transfer Supplement (Dec 30 Outbound · Jan 3 Return)',
+    descriptionIt:
+      'Trasferimento organizzato in pullman Gran Turismo andata 30/12/2026 e ritorno 03/01/2027 per chi acquista un pacchetto Aprica. Rimborsabile al 100% fino a 7 giorni prima della partenza qualora non venga raggiunto il numero minimo di adesioni.',
+    descriptionEn:
+      'Organized round-trip GT coach transfer (Dec 30 outbound, Jan 3 return) for Aprica package holders. 100% refundable up to 7 days prior to departure if the minimum group seat threshold is not reached.',
+    arrivalTime: '30/12 A/R 03/01',
+    basePriceCents: 5000,
+    feeRate: APRICA_FEE_RATE,
+    guestsPerUnit: 0,
+    genderPolicy: 'equal',
+    maxQuantityPerOrder: 16,
+    eventDateLabel: '2026-12-30 / 2027-01-03',
+    confirmed: true,
+  },
+
   // GATE MILANO (PERREO XL — 18-26)
   {
     id: 'gate-vip-prive-share',
@@ -3897,6 +4040,7 @@ const EVENT_SLUG_TO_VENUE_ID: Record<string, SinglePassVenueId> = {
   'capodanno-the-beach-milano': 'the-beach',
   'capodanno-zelig-cabaret-milano': 'zelig-cabaret',
   'capodanno-dazi-milano-arco-della-pace': 'dazi-milano',
+  'capodanno-world-winter-week-aprica': 'aprica-world-winter-week',
 };
 
 export function getVenueIdByEventSlug(eventSlug: string): SinglePassVenueId | null {
@@ -4070,6 +4214,21 @@ export function computeSinglePassPrice(
   };
 }
 
+export type ApricaCartErrorCode =
+  | 'APRICA_HALF_BOARD_REQUIRES_HOTEL'
+  | 'APRICA_HALF_BOARD_MAX_EXCEEDED'
+  | 'APRICA_BUS_REQUIRES_PACKAGE'
+  | 'APRICA_BUS_MAX_EXCEEDED';
+
+export type ApricaCartValidationResult =
+  | { ok: true }
+  | {
+      ok: false;
+      errorCode: ApricaCartErrorCode;
+      addonQty: number;
+      allowedMax: number;
+    };
+
 export type TerrazzaCartValidationResult =
   | { ok: true }
   | {
@@ -4079,6 +4238,75 @@ export type TerrazzaCartValidationResult =
       perPersonCount: number;
       maxCapacity: number;
     };
+
+export type CartValidationResult = TerrazzaCartValidationResult | ApricaCartValidationResult;
+
+export function validateApricaCart(
+  entries: ReadonlyArray<{ sku: SinglePassSku; quantity: number }>,
+): ApricaCartValidationResult {
+  let aptQty = 0;
+  let hotelQty = 0;
+  let halfBoardQty = 0;
+  let busQty = 0;
+
+  for (const { sku, quantity } of entries) {
+    if (sku.venueId !== 'aprica-world-winter-week') continue;
+    const qty = Math.max(0, Math.floor(quantity));
+    if (qty <= 0) continue;
+
+    if (sku.id === 'aprica-apt-gold' || sku.id === 'aprica-apt-platinum') {
+      aptQty += qty;
+    } else if (sku.id === 'aprica-hotel-gold' || sku.id === 'aprica-hotel-platinum') {
+      hotelQty += qty;
+    } else if (sku.id === 'aprica-addon-half-board') {
+      halfBoardQty += qty;
+    } else if (sku.id === 'aprica-addon-bus') {
+      busQty += qty;
+    }
+  }
+
+  const totalApricaBaseQty = aptQty + hotelQty;
+
+  if (halfBoardQty > 0) {
+    if (hotelQty < 1) {
+      return {
+        ok: false,
+        errorCode: 'APRICA_HALF_BOARD_REQUIRES_HOTEL',
+        addonQty: halfBoardQty,
+        allowedMax: 0,
+      };
+    }
+    if (halfBoardQty > hotelQty) {
+      return {
+        ok: false,
+        errorCode: 'APRICA_HALF_BOARD_MAX_EXCEEDED',
+        addonQty: halfBoardQty,
+        allowedMax: hotelQty,
+      };
+    }
+  }
+
+  if (busQty > 0) {
+    if (totalApricaBaseQty < 1) {
+      return {
+        ok: false,
+        errorCode: 'APRICA_BUS_REQUIRES_PACKAGE',
+        addonQty: busQty,
+        allowedMax: 0,
+      };
+    }
+    if (busQty > totalApricaBaseQty) {
+      return {
+        ok: false,
+        errorCode: 'APRICA_BUS_MAX_EXCEEDED',
+        addonQty: busQty,
+        allowedMax: totalApricaBaseQty,
+      };
+    }
+  }
+
+  return { ok: true };
+}
 
 export function validateTerrazzaDuomoCart(
   entries: ReadonlyArray<{ sku: SinglePassSku; quantity: number }>,

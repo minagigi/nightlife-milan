@@ -12,6 +12,7 @@ import {
 import { formatMinorCurrency } from '@/lib/single-pass/currency';
 import {
   formatFeeLabel35,
+  formatZeroGuestAddonBadge35,
   getCheckoutUxCopy,
   getSinglePassCopy,
   getTerrazzaCheckoutUi35,
@@ -292,7 +293,7 @@ export default function SinglePassThankYouView({
                       ? `${guestCount} ${
                           guestCount === 1 ? uxCopy.guestUnitSingular : uxCopy.guestsUnit
                         }`
-                      : terrazzaUi.tableAddonBadge}
+                      : formatZeroGuestAddonBadge35(locale, item.venueId)}
                     {item.dietaryChoice ? ` · ${item.dietaryChoice}` : ''}
                   </p>
                 </div>

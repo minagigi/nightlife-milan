@@ -455,6 +455,9 @@ export function inferTargetAndOutfit(params: {
   isHalloween?: boolean;
 }): { target: TargetArchetype; outfit: OutfitArchetype } {
   const s = `${params.slug} ${params.venueName || ''} ${params.categorySlug || ''} ${params.music || ''} ${params.dressCode || ''}`.toLowerCase();
+  if (s.includes('aprica') || s.includes('world-winter-week')) {
+    return { target: 'young_clubbers', outfit: 'apres_ski_chalet' };
+  }
   if (params.isHalloween || s.includes('halloween') || s.includes('muertos') || s.includes('vampir') || s.includes('streghe')) {
     return { target: 'fashion_international', outfit: 'halloween_dark_glam' };
   }
@@ -535,6 +538,7 @@ const VENUE_MASTER_KEYS: Record<string, [string, string, string, string]> = {
   'terrazza-gallia': ['terrazza-gallia-01', 'terrazza-gallia-02', 'terrazza-gallia-03', 'terrazza-gallia-04'],
   'the-beach-milano': ['the-beach-milano-01', 'the-beach-milano-02', 'the-beach-milano-03', 'the-beach-milano-04'],
   'zelig-cabaret': ['zelig-cabaret-01', 'zelig-cabaret-02', 'zelig-cabaret-03', 'zelig-cabaret-04'],
+  'aprica': ['capodanno-aprica-www-flow-01', 'capodanno-aprica-www-flow-02', 'capodanno-aprica-www-flow-03', 'capodanno-aprica-www-flow-04'],
   'bobino': ['bobino-milano', 'bobino-milano-cena-01', 'bobino-milano-live-01', 'bobino-milano-party-01'],
   'terme': ['capodanno-terme-milano-flow-01', 'ceresio-7-interior-03', 'voya-rooftop-milan-drink-01', 'capodanno-rooftop-skyline-flow-01'],
   'baita': ['capodanno-baita-neve-flow-01', 'capodanno-villa-castello-flow-01', 'capodanno-cena-cantata-show-flow-01', 'fiftyfive-milano-cena-01'],
@@ -547,6 +551,7 @@ const VENUE_MASTER_KEYS: Record<string, [string, string, string, string]> = {
 
 export function selectMasterAssetKeys(slug: string, venueName = '', categorySlug = ''): [string, string, string, string] {
   const s = `${slug} ${venueName} ${categorySlug}`.toLowerCase();
+  if (s.includes('aprica') || s.includes('world-winter-week')) return VENUE_MASTER_KEYS['aprica'];
   if (s.includes('justme') || s.includes('just-me') || s.includes('torre-branca')) return VENUE_MASTER_KEYS['justme'];
   if (s.includes('armani')) return VENUE_MASTER_KEYS['armani'];
   if (s.includes('radio-rooftop') || s.includes('radio rooftop')) return VENUE_MASTER_KEYS['radio-rooftop'];

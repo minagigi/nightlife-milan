@@ -1099,6 +1099,19 @@ const CAPODANNO_FLAGSHIP_EVENTS_FALLBACK = [
     summaryEn: 'Fixed €90 · Fish or Meat Gala Dinner (free switch until Dec 28) · QR Code + Password · Free parking',
     searchTerms: 'capodanno church 81 milano eyes wide shut via della chiesa rossa 81 navigli 90 pesce carne qr password parcheggio',
   },
+  {
+    slug: 'capodanno-world-winter-week-aprica',
+    venueName: 'World Winter Week Aprica · Residence, Hotel & Charlie Club',
+    city: 'Aprica (Valtellina)',
+    address: 'Corso Roma, 23031 Aprica (SO)',
+    image: '/images/events/capodanno-2027-posters/capodanno-world-winter-week-aprica.webp',
+    priceFromEur: 399,
+    titleIt: 'World Winter Week · Capodanno ad Aprica 2027 (5 Giorni / 4 Notti da 399€)',
+    titleEn: 'World Winter Week · Aprica NYE 2027 (5 Days / 4 Nights from €399)',
+    summaryIt: '30/12 - 03/01 · Appartamento o Hotel B&B Gold 399€ · Platinum 419€ · Après-Ski Gratuiti & Charlie Disco Club',
+    summaryEn: 'Dec 30 - Jan 3 · Gold Apt or Hotel B&B €399 · Platinum €419 · Free Daily Après-Ski & Charlie Disco Club',
+    searchTerms: 'capodanno aprica valtellina sondrio world winter week settimana bianca neve montagna piste sci snowboard apres ski charlie disco club residence appartamento hotel pullman 399 419',
+  },
 ] as const;
 
 const searchableFeaturedEvents = [
@@ -1440,7 +1453,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
           isSoldOut: Boolean(ev.soldOutForNye || ev.closedForNye),
           title: isIt ? ev.titleIt : ev.titleEn,
           summary: isIt ? ev.priceSummaryIt : ev.priceSummaryEn,
-          searchTerms: `${ev.venueName} ${ev.city} ${ev.province} ${ev.address} ${ev.musicTag} ${ev.venueType} ${ev.formulas.join(' ')} capodanno 2027 new years eve nye 31 dicembre`,
+          searchTerms: `${ev.venueName} ${ev.city} ${ev.province} ${ev.address} ${ev.musicTag} ${ev.venueType} ${ev.formulas.join(' ')} ${ev.slug === 'capodanno-world-winter-week-aprica' ? 'aprica valtellina sondrio world winter week settimana bianca neve montagna piste sci snowboard apres ski charlie disco club residence appartamento hotel pullman' : ''} capodanno 2027 new years eve nye 31 dicembre`,
         }))
       : CAPODANNO_FLAGSHIP_EVENTS_FALLBACK.map((ev) => ({
           slug: ev.slug,

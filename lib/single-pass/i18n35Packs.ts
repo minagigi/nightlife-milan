@@ -1,5 +1,6 @@
 import { getWords35 } from '@/lib/capodanno/capodannoUi35';
 import { getVoyaNyeContent } from '@/lib/capodanno/voya35';
+import { getApricaSkuLocalized35 } from '@/lib/capodanno/apricaWinterWeek35';
 import type { SinglePassCopyPack } from './i18n35';
 import type { SinglePassPackageCategory, SinglePassSku, SinglePassVenueId, SinglePassVenueSpec } from './types';
 
@@ -87,6 +88,7 @@ function makePackFromSeed(loc: string, cfg: LocaleSpSeed): SinglePassCopyPack {
     'the-beach': 'The Beach Milano',
     'zelig-cabaret': 'Area Zelig Cabaret',
     'dazi-milano': 'Dazi Milano',
+    'aprica-world-winter-week': 'World Winter Week Aprica',
     'club-event': `${w.eventsBreadcrumb} · Nightlife Milan`,
   };
   const h1 = cfg.heroH1 || `Single Pass ${cfg.nye}: ${w.lblVenueType.replace(/^1\.\s*/, '')} & ${w.verifiedEventsLabel}`;
@@ -172,7 +174,7 @@ function makePackFromSeed(loc: string, cfg: LocaleSpSeed): SinglePassCopyPack {
     formPasswordHint: cfg.acc,
     formLanguages: cfg.langsLbl,
     formDietary: cfg.dietaryLbl,
-    formTermsLabel: `20% · ${cfg.termsLbl}, ${cfg.privLbl}, ${cfg.refLbl} (nightlifemilan.com)`,
+    formTermsLabel: `Booking fee 20% · ${cfg.termsLbl}, ${cfg.privLbl}, ${cfg.refLbl} (nightlifemilan.com)`,
     termsPolicyLabel: cfg.termsLbl,
     privacyPolicyLabel: cfg.privLbl,
     refundPolicyLabel: cfg.refLbl,
@@ -885,6 +887,10 @@ export function localizeSinglePassSku(
   }
   if (locale === 'en') {
     return { title: sku.titleEn, description: sku.descriptionEn };
+  }
+  if (sku.venueId === 'aprica-world-winter-week') {
+    const ap = getApricaSkuLocalized35(sku.id, locale);
+    if (ap) return ap;
   }
   if (sku.id === 'voya-nye-gala-dinner') {
     const vc = getVoyaNyeContent(locale);

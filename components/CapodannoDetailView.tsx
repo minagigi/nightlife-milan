@@ -46,8 +46,12 @@ import {
 import { getClubNyeBannerCopy35 } from '@/lib/clubSeoMeta35';
 import SinglePassVenueModule from '@/components/single-pass/SinglePassVenueModule';
 import TerrazzaDuomoBookingModule from '@/components/single-pass/TerrazzaDuomoBookingModule';
-import { getVenueIdByEventSlug } from '@/lib/single-pass/catalog';
-import { getSinglePassCopy } from '@/lib/single-pass/i18n35';
+import {
+  getSkusForVenue,
+  getSkuFeeRate,
+  getVenueIdByEventSlug,
+} from '@/lib/single-pass/catalog';
+import { formatCheckoutFeeNote35, getSinglePassCopy } from '@/lib/single-pass/i18n35';
 
 type Props = {
   locale: string;
@@ -342,7 +346,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
             <p className="mt-2 font-sans text-base italic text-[#C2B9AA] sm:text-lg">{subtitle}</p>
             <div className="mt-4 flex flex-wrap gap-2">
               <span className="bg-[#F6F1E7] px-3 py-1 text-[13px] font-bold text-[#050505]">
-                {ui.dateBadge}
+                {event.slug === 'capodanno-world-winter-week-aprica' ? '30/12/2026 - 03/01/2027' : ui.dateBadge}
               </span>
               <span className="border border-white/30 bg-[#050505] px-3 py-1 text-[13px] font-semibold text-[#F6F1E7]">
                 {event.city} ({event.province})
@@ -800,11 +804,16 @@ export default function CapodannoDetailView({ locale, event }: Props) {
               <p className="mt-1 text-[13px] font-medium text-[#C2B9AA]">{sourceBasis}</p>
               {!event.partner &&
                 event.priceFromEur > 0 &&
-                (isTerrazzaDuomo21 || Boolean(getVenueIdByEventSlug(event.slug))) && (
-                <p className="mt-1 text-[13px] font-bold text-[#F6F1E7]" data-checkout-fee-note>
-                  {singlePassCopy.feeCalculatedAtCheckoutNote}
-                </p>
-              )}
+                (isTerrazzaDuomo21 || Boolean(getVenueIdByEventSlug(event.slug))) && (() => {
+                  const spVid = getVenueIdByEventSlug(event.slug);
+                  const spSkus = spVid ? getSkusForVenue(spVid) : [];
+                  const spFeeRate = spSkus.length > 0 ? getSkuFeeRate(spSkus[0], 'venue') : 0.2;
+                  return (
+                    <p className="mt-1 text-[13px] font-bold text-[#F6F1E7]" data-checkout-fee-note>
+                      {formatCheckoutFeeNote35(locale, spFeeRate)}
+                    </p>
+                  );
+                })()}
 
               <div className="mt-5 overflow-x-auto border border-[#EAE3D5]/28 bg-[#141311]">
                 <table className="w-full border-collapse text-left text-sm tabular-nums">

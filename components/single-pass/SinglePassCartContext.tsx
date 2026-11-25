@@ -15,8 +15,9 @@ import {
   isCheckoutItemAllowed,
   isSinglePassStorefrontPath,
   resolveCatalogSku,
+  validateApricaCart,
   validateTerrazzaDuomoCart,
-  type TerrazzaCartValidationResult,
+  type CartValidationResult,
 } from '@/lib/single-pass/catalog';
 import {
   SUPPORTED_CURRENCIES,
@@ -125,7 +126,7 @@ type SinglePassCartContextValue = {
   effectiveFeeRate: number;
   hasMixedFeeRates: boolean;
   hasTerrazzaDuomo21: boolean;
-  cartValidation: TerrazzaCartValidationResult;
+  cartValidation: CartValidationResult;
   currency: SupportedCurrency;
   setCurrency: (next: SupportedCurrency) => void;
   fxRates: Record<SupportedCurrency, number>;
@@ -456,7 +457,10 @@ export function SinglePassCartProvider({
         : subtotalBaseCents > 0
           ? Math.round((totalFeeCents / subtotalBaseCents) * 10000) / 10000
           : SINGLE_PASS_FEE_RATE;
-    const cartValidation = validateTerrazzaDuomoCart(resolvedPairs);
+    const terrazzaValidation = validateTerrazzaDuomoCart(resolvedPairs);
+    const cartValidation: CartValidationResult = terrazzaValidation.ok
+      ? validateApricaCart(resolvedPairs)
+      : terrazzaValidation;
 
     const rate = fxRates[currency] || 1;
     const converted = convertEurBreakdown(subtotalBaseCents, totalFeeCents, currency, rate);

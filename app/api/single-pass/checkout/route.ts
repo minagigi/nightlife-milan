@@ -25,6 +25,7 @@ import {
   isSinglePassStorefrontPath,
   resolveCatalogSku,
   validateAgeForSkus,
+  validateApricaCart,
   validateTerrazzaDuomoCart,
 } from '@/lib/single-pass/catalog';
 import {
@@ -171,6 +172,25 @@ export async function POST(request: Request) {
         maxCapacity: terrazzaValidation.maxCapacity,
       },
     );
+  }
+  const apricaValidation = validateApricaCart(
+    resolvedPairs.map((p) => ({ sku: p.sku, quantity: p.qty })),
+  );
+  if (!apricaValidation.ok) {
+    const apricaMsg =
+      apricaValidation.errorCode === 'APRICA_HALF_BOARD_REQUIRES_HOTEL'
+        ? 'The Hotel Half-Board Supplement requires at least 1 Gold or Platinum Hotel B&B package in your cart.'
+        : apricaValidation.errorCode === 'APRICA_HALF_BOARD_MAX_EXCEEDED'
+          ? `Hotel Half-Board supplements (${apricaValidation.addonQty}) cannot exceed selected Hotel B&B guests (${apricaValidation.allowedMax}).`
+          : apricaValidation.errorCode === 'APRICA_BUS_REQUIRES_PACKAGE'
+            ? 'The Round-Trip Coach Supplement requires at least 1 base Aprica package (Apartment or Hotel B&B) in your cart.'
+            : `Round-Trip Coach seats (${apricaValidation.addonQty}) cannot exceed total base Aprica package guests (${apricaValidation.allowedMax}).`;
+    return jsonError(apricaMsg, apricaValidation.errorCode, 400, {
+      field: 'cart',
+      fieldErrors: { cart: apricaValidation.errorCode },
+      addonQty: apricaValidation.addonQty,
+      allowedMax: apricaValidation.allowedMax,
+    });
   }
   const fullName = String(body.fullName || '').trim().slice(0, 120);
   const email = normalizeEmail(String(body.email || ''));

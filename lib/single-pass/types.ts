@@ -47,6 +47,7 @@ export type SinglePassVenueId =
   | 'the-beach'
   | 'zelig-cabaret'
   | 'dazi-milano'
+  | 'aprica-world-winter-week'
   | 'club-event';
 
 export type SinglePassPackageCategory =
@@ -368,6 +369,10 @@ export type SinglePassApiErrorCode =
   | 'PINETA_STRICT_UNDER_30'
   | 'TABLE_REQUIRES_FORMULA'
   | 'TABLE_MAX_GUESTS_EXCEEDED'
+  | 'APRICA_HALF_BOARD_REQUIRES_HOTEL'
+  | 'APRICA_HALF_BOARD_MAX_EXCEEDED'
+  | 'APRICA_BUS_REQUIRES_PACKAGE'
+  | 'APRICA_BUS_MAX_EXCEEDED'
   | 'DIETARY_NOTES_REQUIRED'
   | 'TERMS_REQUIRED'
   | 'INVALID_PASSWORD'

@@ -15,10 +15,13 @@ import {
 } from '@/lib/single-pass/catalog';
 import { formatMinorCurrency, type SupportedCurrency } from '@/lib/single-pass/currency';
 import {
+  formatCartValidationError35,
   formatFeeLabel35,
+  formatZeroGuestAddonBadge35,
   getCheckoutUxCopy,
   getSinglePassCopy,
   getTerrazzaCheckoutUi35,
+  localizeSinglePassSku,
 } from '@/lib/single-pass/i18n35';
 import { cartRowKey, useSinglePassCart } from './SinglePassCartContext';
 
@@ -137,7 +140,7 @@ export default function SinglePassCartPageView({ locale }: { locale: string }) {
                             ? `${itemGuests} ${
                                 itemGuests === 1 ? uxCopy.guestUnitSingular : uxCopy.guestsUnit
                               }`
-                            : terrazzaUi.tableAddonBadge}
+                            : formatZeroGuestAddonBadge35(locale, sku.venueId)}
                         </p>
                         {item.channel === 'single-pass' && (
                           <span className="border border-[#0A0A0C]/25 bg-[#EDEBE6] px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-[#0A0A0C]">
@@ -146,10 +149,18 @@ export default function SinglePassCartPageView({ locale }: { locale: string }) {
                         )}
                       </div>
                       <h2 className="mt-1 font-display text-2xl font-bold text-[#0A0A0C]">
-                        {isIt ? sku.titleIt : sku.titleEn}
+                        {sku.venueId === 'aprica-world-winter-week'
+                          ? localizeSinglePassSku(sku, locale, copy, venueName).title
+                          : isIt
+                            ? sku.titleIt
+                            : sku.titleEn}
                       </h2>
                       <p className="mt-1 text-sm leading-relaxed text-[#4F4D48]">
-                        {isIt ? sku.descriptionIt : sku.descriptionEn}
+                        {sku.venueId === 'aprica-world-winter-week'
+                          ? localizeSinglePassSku(sku, locale, copy, venueName).description
+                          : isIt
+                            ? sku.descriptionIt
+                            : sku.descriptionEn}
                       </p>
                     </div>
                     <button
@@ -278,11 +289,7 @@ export default function SinglePassCartPageView({ locale }: { locale: string }) {
                     className="flex items-start gap-2 border-2 border-[#B91C1C] bg-[#FEF2F2] p-3.5 text-xs font-semibold text-[#B91C1C]"
                   >
                     <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
-                    <span>
-                      {cartValidation.errorCode === 'TABLE_REQUIRES_FORMULA'
-                        ? terrazzaUi.tableRequiresFormulaError || uxCopy.errTableRequiresFormula
-                        : terrazzaUi.tableMaxGuestsExceededError || uxCopy.errTableMaxGuests}
-                    </span>
+                    <span>{formatCartValidationError35(locale, cartValidation.errorCode)}</span>
                   </div>
                 )}
                 <div className="flex justify-between border-t border-[#0A0A0C]/16 pt-2 text-lg font-extrabold text-[#0A0A0C]">

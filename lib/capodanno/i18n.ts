@@ -24,6 +24,7 @@ import {
   getFrezzaMilanoNyeContent,
   getIlMarcheseNyeContent,
 } from '@/lib/capodanno/marcheseFrezzaBeach35';
+import { getApricaWinterWeekNyeContent } from '@/lib/capodanno/apricaWinterWeek35';
 import {
   buildFallbackLocalizedEventContent35,
   formatCapodannoHours35,
@@ -618,6 +619,7 @@ export function getCapodannoLocalizedCategorySubtitle(
 }
 
 function getOverrideEventContent(slug: string, locale: string): CapodannoLocalizedEventContent | null {
+  if (slug === 'capodanno-world-winter-week-aprica') return getApricaWinterWeekNyeContent(locale);
   if (slug === 'capodanno-il-marchese-milano') return getIlMarcheseNyeContent(locale);
   if (slug === 'capodanno-frezza-milano-cascina-romana') return getFrezzaMilanoNyeContent(locale);
   if (slug === 'capodanno-beach-garden-milano') return getBeachGardenNyeContent(locale, 'beach-garden');

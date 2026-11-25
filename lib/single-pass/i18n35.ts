@@ -141,7 +141,7 @@ const IT_PACK: SinglePassCopyPack = {
   },
   basePriceLabel: 'Prezzo del locale (EUR)',
   feeLabel: 'Booking fee 20% · consulenza concierge e pagamento elettronico',
-  feeCalculatedAtCheckoutNote: 'Booking & concierge fee calcolata al checkout',
+  feeCalculatedAtCheckoutNote: 'Booking & transaction fee 20% calcolata al checkout',
   totalLabel: 'Totale Ordine',
   arrivalLabel: 'Orario ingresso consigliato',
   guestsLabel: 'Ospiti inclusi',
@@ -263,6 +263,7 @@ const IT_PACK: SinglePassCopyPack = {
     'the-beach': 'The Beach Club Milano',
     'zelig-cabaret': 'Area Zelig Cabaret Milano',
     'dazi-milano': 'Dazi Milano (Arco della Pace)',
+    'aprica-world-winter-week': 'World Winter Week Aprica (30/12 - 03/01)',
     'club-event': 'Serata Club Milano',
   },
   embeddedBannerTitle: 'Acquista online i biglietti ufficiali confermati',
@@ -301,7 +302,7 @@ const EN_PACK: SinglePassCopyPack = {
   },
   basePriceLabel: 'Venue price (EUR)',
   feeLabel: 'Booking fee 20% · concierge & electronic payment',
-  feeCalculatedAtCheckoutNote: 'Booking & concierge fee calculated at checkout',
+  feeCalculatedAtCheckoutNote: 'Booking & transaction fee 20% calculated at checkout',
   totalLabel: 'Order Total',
   arrivalLabel: 'Recommended arrival',
   guestsLabel: 'Guests covered',
@@ -423,6 +424,7 @@ const EN_PACK: SinglePassCopyPack = {
     'the-beach': 'The Beach Club Milano',
     'zelig-cabaret': 'Area Zelig Cabaret Milan',
     'dazi-milano': 'Dazi Milano (Arco della Pace)',
+    'aprica-world-winter-week': 'World Winter Week Aprica (Dec 30 - Jan 3)',
     'club-event': 'Milan Official Club Event',
   },
   embeddedBannerTitle: 'Buy confirmed-price tickets directly online',
@@ -482,18 +484,171 @@ const FEE_DETAIL_BY_LOCALE_35: Record<LocaleCode, string> = {
   mk: 'консиерж советување и електронско плаќање',
 };
 
-export function formatFeeLabel35(locale: string, feeRate: number, isMixed = false): string {
+export function formatFeeLabel35(locale: string, feeRate: number, _isMixed = false): string {
   const detail =
     (FEE_DETAIL_BY_LOCALE_35 as Record<string, string>)[locale] ||
     FEE_DETAIL_BY_LOCALE_35[DEFAULT_LOCALE];
-  if (isMixed) {
-    return `Booking fee 20% · ${detail}`;
-  }
-  const pct = Math.round(feeRate * 100);
+  const pct = Math.max(0, Math.round(feeRate * 100));
   if (pct <= 0) {
     return `Booking fee 0% · ${detail}`;
   }
   return `Booking fee ${pct}% · ${detail}`;
+}
+
+export function formatCheckoutFeeNote35(locale: string, feeRate = 0.2): string {
+  const copy = getSinglePassCopy(locale);
+  const pct = Math.max(0, Math.round(feeRate * 100));
+  return copy.feeCalculatedAtCheckoutNote.replace(/20%/g, `${pct}%`);
+}
+
+export function formatTermsLabel35(
+  locale: string,
+  feeRate = 0.2,
+  hasTerrazzaDuomo21 = false,
+): string {
+  const pct = Math.max(0, Math.round(feeRate * 100));
+  const base = hasTerrazzaDuomo21
+    ? getTerrazzaCheckoutUi35(locale).termsNotice20
+    : getSinglePassCopy(locale).formTermsLabel;
+  return base.replace(/20%/g, `${pct}%`);
+}
+
+const APRICA_ADDON_BADGE_35: Record<LocaleCode, string> = {
+  it: 'Supplemento pacchetto Aprica (4 notti)',
+  en: 'Aprica package supplement (4 nights)',
+  es: 'Suplemento paquete Aprica (4 noches)',
+  fr: 'Supplément forfait Aprica (4 nuits)',
+  de: 'Aprica-Paketzuschlag (4 Nächte)',
+  pt: 'Suplemento pacote Aprica (4 noites)',
+  nl: 'Toeslag Aprica-pakket (4 nachten)',
+  ru: 'Доплата к пакету Aprica (4 ночи)',
+  tr: 'Aprica paket eklentisi (4 gece)',
+  zh: 'Aprica 套餐附加项（4晚）',
+  ar: 'إضافة باقة أبريكا (4 ليالٍ)',
+  bg: 'Добавка към пакет Aprica (4 нощувки)',
+  hr: 'Dodatak paketu Aprica (4 noćenja)',
+  cs: 'Příplatek k balíčku Aprica (4 noci)',
+  da: 'Tillæg til Aprica-pakke (4 nætter)',
+  et: 'Aprica paketi lisateenus (4 ööd)',
+  fi: 'Aprica-paketin lisäpalvelu (4 yötä)',
+  el: 'Πρόσθετη παροχή πακέτου Aprica (4 διανυκτερεύσεις)',
+  hu: 'Aprica csomagkiegészítő (4 éj)',
+  ga: 'Forlíonadh pacáiste Aprica (4 oíche)',
+  lv: 'Aprica komplekta papildinājums (4 naktis)',
+  lt: 'Aprica paketo priedas (4 naktys)',
+  mt: 'Suppliment tal-pakkett Aprica (4 iljieli)',
+  pl: 'Dodatek do pakietu Aprica (4 noce)',
+  ro: 'Supliment pachet Aprica (4 nopți)',
+  sk: 'Príplatok k balíku Aprica (4 noci)',
+  sl: 'Dodatek k paketu Aprica (4 nočitve)',
+  sv: 'Tillägg Aprica-paket (4 nätter)',
+  no: 'Tillegg Aprica-pakke (4 netter)',
+  is: 'Viðbót við Aprica-pakka (4 nætur)',
+  uk: 'Доплата до пакета Aprica (4 ночі)',
+  sq: 'Shtesë pakete Aprica (4 net)',
+  sr: 'Dodatak paketu Aprica (4 noćenja)',
+  bs: 'Dodatak paketu Aprica (4 noćenja)',
+  mk: 'Додаток за пакет Aprica (4 ноќевања)',
+};
+
+export function formatZeroGuestAddonBadge35(locale: string, venueId?: string): string {
+  if (venueId === 'aprica-world-winter-week') {
+    return (
+      (APRICA_ADDON_BADGE_35 as Record<string, string>)[locale] ||
+      APRICA_ADDON_BADGE_35[DEFAULT_LOCALE]
+    );
+  }
+  return getTerrazzaCheckoutUi35(locale).tableAddonBadge;
+}
+
+type ApricaValidationCopy = {
+  halfBoardRequiresHotel: string;
+  halfBoardMaxExceeded: string;
+  busRequiresPackage: string;
+  busMaxExceeded: string;
+};
+
+const APRICA_VALIDATION_COPY_IT: ApricaValidationCopy = {
+  halfBoardRequiresHotel:
+    'Il Supplemento Mezza Pensione Hotel (+60€) richiede almeno 1 Pacchetto Hotel Gold B&B o Hotel Platinum B&B nel carrello.',
+  halfBoardMaxExceeded:
+    'Il numero di Supplementi Mezza Pensione Hotel non può superare il numero di quote Hotel B&B selezionate nel carrello.',
+  busRequiresPackage:
+    'Il Supplemento Viaggio in Pullman A/R (+50€) richiede almeno 1 pacchetto base Aprica (Appartamento o Hotel B&B) nel carrello.',
+  busMaxExceeded:
+    'Il numero di posti Pullman A/R non può superare il totale dei partecipanti con pacchetto base Aprica nel carrello.',
+};
+
+const APRICA_VALIDATION_COPY_EN: ApricaValidationCopy = {
+  halfBoardRequiresHotel:
+    'The Hotel Half-Board Supplement (+€60) requires at least 1 Gold Hotel B&B or Platinum Hotel B&B package in your cart.',
+  halfBoardMaxExceeded:
+    'The number of Hotel Half-Board supplements cannot exceed the number of Hotel B&B guests selected in your cart.',
+  busRequiresPackage:
+    'The Round-Trip Coach Supplement (+€50) requires at least 1 base Aprica package (Apartment or Hotel B&B) in your cart.',
+  busMaxExceeded:
+    'The number of Round-Trip Coach seats cannot exceed the total number of base Aprica package guests in your cart.',
+};
+
+const APRICA_VALIDATION_OVERRIDES: Partial<Record<LocaleCode, ApricaValidationCopy>> = {
+  es: {
+    halfBoardRequiresHotel:
+      'El Suplemento de Media Pensión Hotel (+60€) requiere al menos 1 paquete Hotel Gold B&B o Hotel Platinum B&B en el carrito.',
+    halfBoardMaxExceeded:
+      'La cantidad de suplementos de Media Pensión no puede superar el número de plazas de Hotel B&B en el carrito.',
+    busRequiresPackage:
+      'El Suplemento de Autobús A/R (+50€) requiere al menos 1 paquete base de Aprica (Apartamento u Hotel B&B) en el carrito.',
+    busMaxExceeded:
+      'El número de plazas de Autobús A/R no puede superar el total de paquetes base de Aprica en el carrito.',
+  },
+  fr: {
+    halfBoardRequiresHotel:
+      'Le Supplément Demi-Pension Hôtel (+60€) nécessite au moins 1 forfait Hôtel Gold B&B ou Hôtel Platinum B&B dans le panier.',
+    halfBoardMaxExceeded:
+      'Le nombre de suppléments Demi-Pension ne peut pas dépasser le nombre de places Hôtel B&B sélectionnées.',
+    busRequiresPackage:
+      'Le Supplément Bus A/R (+50€) nécessite au moins 1 forfait de base Aprica (Appartement ou Hôtel B&B) dans le panier.',
+    busMaxExceeded:
+      'Le nombre de places Bus A/R ne peut pas dépasser le total des forfaits Aprica sélectionnés dans le panier.',
+  },
+  de: {
+    halfBoardRequiresHotel:
+      'Der Zuschlag Hotel-Halbpension (+60€) erfordert mindestens 1 Paket Hotel Gold B&B oder Hotel Platinum B&B im Warenkorb.',
+    halfBoardMaxExceeded:
+      'Die Anzahl der Halbpensions-Zuschläge darf die Anzahl der gewählten Hotel-B&B-Plätze nicht überschreiten.',
+    busRequiresPackage:
+      'Der Zuschlag Hin- & Rückfahrt im Reisebus (+50€) erfordert mindestens 1 Aprica-Basispaket (Apartment oder Hotel B&B) im Warenkorb.',
+    busMaxExceeded:
+      'Die Anzahl der Busplätze darf die Gesamtzahl der gebuchten Aprica-Basispakete im Warenkorb nicht überschreiten.',
+  },
+};
+
+export function formatCartValidationError35(locale: string, errorCode: string): string {
+  const terrazzaUi = getTerrazzaCheckoutUi35(locale);
+  if (errorCode === 'TABLE_REQUIRES_FORMULA') {
+    return terrazzaUi.tableRequiresFormulaError;
+  }
+  if (errorCode === 'TABLE_MAX_GUESTS_EXCEEDED') {
+    return terrazzaUi.tableMaxGuestsExceededError;
+  }
+  const apricaCopy =
+    locale === 'it'
+      ? APRICA_VALIDATION_COPY_IT
+      : (APRICA_VALIDATION_OVERRIDES as Record<string, ApricaValidationCopy | undefined>)[locale] ||
+        APRICA_VALIDATION_COPY_EN;
+  if (errorCode === 'APRICA_HALF_BOARD_REQUIRES_HOTEL') {
+    return apricaCopy.halfBoardRequiresHotel;
+  }
+  if (errorCode === 'APRICA_HALF_BOARD_MAX_EXCEEDED') {
+    return apricaCopy.halfBoardMaxExceeded;
+  }
+  if (errorCode === 'APRICA_BUS_REQUIRES_PACKAGE') {
+    return apricaCopy.busRequiresPackage;
+  }
+  if (errorCode === 'APRICA_BUS_MAX_EXCEEDED') {
+    return apricaCopy.busMaxExceeded;
+  }
+  return terrazzaUi.tableMaxGuestsExceededError;
 }
 
 export type TerrazzaCheckoutUiPack = {

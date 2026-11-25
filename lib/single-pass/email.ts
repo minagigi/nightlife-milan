@@ -8,7 +8,12 @@ import {
   isSinglePassMiniGroupOrder,
 } from './catalog';
 import { formatMinorCurrency } from './currency';
-import { formatFeeLabel35, getSinglePassCopy, getTerrazzaCheckoutUi35 } from './i18n35';
+import {
+  formatFeeLabel35,
+  formatZeroGuestAddonBadge35,
+  getSinglePassCopy,
+  getTerrazzaCheckoutUi35,
+} from './i18n35';
 import type { SinglePassOrder } from './types';
 
 export const STAFF_ACTIVATION_EMAIL = 'staff@nightlifemilan.com';
@@ -236,7 +241,8 @@ export function buildSinglePassOrderEmail(
   const linesHtml = order.items
     .map((item) => {
       const paxCount = typeof item.totalGuests === 'number' ? item.totalGuests : item.quantity;
-      const paxLabel = paxCount > 0 ? `${paxCount} pax` : terrazzaUi.tableAddonBadge;
+      const paxLabel =
+        paxCount > 0 ? `${paxCount} pax` : formatZeroGuestAddonBadge35(order.locale, item.venueId);
       return `<tr>
           <td style="padding:10px 8px;border-bottom:1px solid #222;color:#F6F1E7;">
             <strong>${escapeHtml(item.venueName)}</strong><br/>
@@ -351,7 +357,8 @@ export function buildSinglePassOrderEmail(
     ...(order.customer.dietaryNotes ? [`${strings.allergiesLabel}: ${order.customer.dietaryNotes}`] : []),
     ...order.items.map((i) => {
       const paxCount = typeof i.totalGuests === 'number' ? i.totalGuests : i.quantity;
-      const paxLabel = paxCount > 0 ? `${paxCount} pax` : terrazzaUi.tableAddonBadge;
+      const paxLabel =
+        paxCount > 0 ? `${paxCount} pax` : formatZeroGuestAddonBadge35(order.locale, i.venueId);
       return `- ${i.venueName}: ${i.title} x${i.quantity} (${paxLabel})${i.dietaryChoice ? ` [${i.dietaryChoice}]` : ''} = ${formatEurFromCents(i.lineBaseCents, order.locale)}`;
     }),
     `${copy.basePriceLabel}: ${formatEurFromCents(order.subtotalBaseCents, order.locale)}`,
@@ -414,7 +421,7 @@ export function buildStaffActivationEmail(
           <span style="font-size:12px;color:#C2B9AA;">SKU: ${escapeHtml(item.skuId)} · Orario: ${escapeHtml(item.arrivalTime)}${item.dietaryChoice ? ` · Secondo: ${escapeHtml(item.dietaryChoice)}` : ''}</span>
         </td>
         <td style="padding:8px;border-bottom:1px solid #2A2620;text-align:center;color:#F6F1E7;">${item.quantity}</td>
-        <td style="padding:8px;border-bottom:1px solid #2A2620;text-align:center;color:#F6F1E7;">${paxCount > 0 ? `${paxCount} pax` : 'Tavolo add-on'}</td>
+        <td style="padding:8px;border-bottom:1px solid #2A2620;text-align:center;color:#F6F1E7;">${paxCount > 0 ? `${paxCount} pax` : item.venueId === 'aprica-world-winter-week' ? 'Supplemento Aprica' : 'Tavolo add-on'}</td>
         <td style="padding:8px;border-bottom:1px solid #2A2620;text-align:right;color:#D4AF37;">${escapeHtml(formatEurFromCents(item.lineBaseCents, 'it'))}</td>
         <td style="padding:8px;border-bottom:1px solid #2A2620;text-align:right;color:#C2B9AA;">+${itemFeePct}% (${escapeHtml(formatEurFromCents(item.lineFeeCents, 'it'))})</td>
         <td style="padding:8px;border-bottom:1px solid #2A2620;text-align:right;color:#F6F1E7;">${escapeHtml(formatEurFromCents(item.lineTotalCents, 'it'))}</td>
@@ -512,13 +519,13 @@ export function buildStaffActivationEmail(
   const orderTags: string[] = [];
   if (hasSinglePassItems) orderTags.push('SINGLE PASS DA SOLI');
   if (order.items.some((i) => i.channel !== 'single-pass' && (i.lineFeeCents > 0 || (i.feeRate ?? 0) > 0))) {
-    orderTags.push('CONCIERGE +20%');
+    orderTags.push(`CONCIERGE +${feePct}%`);
   }
   if (order.items.some((i) => i.channel !== 'single-pass' && i.lineFeeCents === 0 && (i.feeRate ?? 0) === 0)) {
     orderTags.push('PARTNER 0%');
   }
   if (orderTags.length === 0) {
-    orderTags.push(order.feeCents > 0 ? 'CONCIERGE +20%' : 'PARTNER 0%');
+    orderTags.push(order.feeCents > 0 ? `CONCIERGE +${feePct}%` : 'PARTNER 0%');
   }
   const tagLabel = orderTags.join(' + ');
   const venueNames = Array.from(new Set(order.items.map((i) => i.venueName))).join(' / ') || 'Nightlife Milan';
@@ -546,7 +553,7 @@ export function buildStaffActivationEmail(
           <span style="font-size:12px;color:#C2B9AA;">${escapeHtml(itemChannelLabel)} · SKU: ${escapeHtml(item.skuId)} · Orario: ${escapeHtml(item.arrivalTime)}${item.dietaryChoice ? ` · Menù: ${escapeHtml(item.dietaryChoice)}` : ''}</span>
         </td>
         <td style="padding:8px;border-bottom:1px solid #2A2620;text-align:center;color:#F6F1E7;">${item.quantity}</td>
-        <td style="padding:8px;border-bottom:1px solid #2A2620;text-align:center;color:#F6F1E7;">${paxCount > 0 ? `${paxCount} pax` : 'Tavolo add-on'}</td>
+        <td style="padding:8px;border-bottom:1px solid #2A2620;text-align:center;color:#F6F1E7;">${paxCount > 0 ? `${paxCount} pax` : item.venueId === 'aprica-world-winter-week' ? 'Supplemento Aprica' : 'Tavolo add-on'}</td>
         <td style="padding:8px;border-bottom:1px solid #2A2620;text-align:right;color:#D4AF37;">${escapeHtml(formatEurFromCents(item.lineBaseCents, 'it'))}</td>
         <td style="padding:8px;border-bottom:1px solid #2A2620;text-align:right;color:#C2B9AA;">+${itemFeePct}% (${escapeHtml(formatEurFromCents(item.lineFeeCents, 'it'))})</td>
         <td style="padding:8px;border-bottom:1px solid #2A2620;text-align:right;color:#F6F1E7;">${escapeHtml(formatEurFromCents(item.lineTotalCents, 'it'))}</td>
@@ -622,7 +629,7 @@ export function buildStaffActivationEmail(
       const paxCount = typeof i.totalGuests === 'number' ? i.totalGuests : i.quantity;
       const itemFeePct = Math.round((i.feeRate ?? (i.lineBaseCents > 0 ? i.lineFeeCents / i.lineBaseCents : feeInfo.rate)) * 100);
       const itemChan = i.channel === 'single-pass' ? 'Single Pass' : itemFeePct === 0 ? 'Partner 0%' : `Concierge +${itemFeePct}%`;
-      return `- [${itemChan}] ${i.venueName} · ${i.title} x${i.quantity} (${paxCount > 0 ? `${paxCount} pax` : 'Tavolo add-on'})${i.dietaryChoice ? ` [${i.dietaryChoice}]` : ''} | Netto locale: ${formatEurFromCents(i.lineBaseCents, 'it')} | Fee: ${formatEurFromCents(i.lineFeeCents, 'it')} | Totale: ${formatEurFromCents(i.lineTotalCents, 'it')}`;
+      return `- [${itemChan}] ${i.venueName} · ${i.title} x${i.quantity} (${paxCount > 0 ? `${paxCount} pax` : i.venueId === 'aprica-world-winter-week' ? 'Supplemento Aprica' : 'Tavolo add-on'})${i.dietaryChoice ? ` [${i.dietaryChoice}]` : ''} | Netto locale: ${formatEurFromCents(i.lineBaseCents, 'it')} | Fee: ${formatEurFromCents(i.lineFeeCents, 'it')} | Totale: ${formatEurFromCents(i.lineTotalCents, 'it')}`;
     }),
     '',
     `NETTO DA BONIFICARE AL LOCALE: ${netVenueStr}`,

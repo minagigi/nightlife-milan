@@ -8,9 +8,15 @@ import { localePrefix } from '@/lib/i18n/locales';
 import {
   VENUE_BY_ID,
   formatEurFromCents,
+  getSkuFeeRate,
   getSkusForVenue,
 } from '@/lib/single-pass/catalog';
-import { getSinglePassCopy, localizeSinglePassSku, localizeVenueAgeBand } from '@/lib/single-pass/i18n35';
+import {
+  formatCheckoutFeeNote35,
+  getSinglePassCopy,
+  localizeSinglePassSku,
+  localizeVenueAgeBand,
+} from '@/lib/single-pass/i18n35';
 import { getCapodannoUiCopy } from '@/lib/capodanno/i18n';
 import type { SinglePassVenueId } from '@/lib/single-pass/types';
 import { useSinglePassCart } from './SinglePassCartContext';
@@ -31,6 +37,7 @@ export default function SinglePassVenueModule({
   const lp = localePrefix(locale);
 
   if (!venue || skus.length === 0) return null;
+  const venueFeeRate = getSkuFeeRate(skus[0], 'venue');
 
   return (
     <section
@@ -51,7 +58,7 @@ export default function SinglePassVenueModule({
             {!venue.partner ? (
               <>
                 {' · '}
-                <span className="font-semibold text-[#5C4415]">{copy.feeCalculatedAtCheckoutNote}</span>
+                <span className="font-semibold text-[#5C4415]">{formatCheckoutFeeNote35(locale, venueFeeRate)}</span>
               </>
             ) : (
               ` · ${copy.trustEqualPrice}`

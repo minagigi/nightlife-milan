@@ -14,10 +14,10 @@ import {
 } from '@/lib/single-pass/catalog';
 import { formatMinorCurrency, type SupportedCurrency } from '@/lib/single-pass/currency';
 import {
+  formatCartValidationError35,
   formatFeeLabel35,
-  getCheckoutUxCopy,
   getSinglePassCopy,
-  getTerrazzaCheckoutUi35,
+  localizeSinglePassSku,
 } from '@/lib/single-pass/i18n35';
 import { cartRowKey, useSinglePassCart } from './SinglePassCartContext';
 
@@ -41,8 +41,6 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
   } = useSinglePassCart();
 
   const copy = getSinglePassCopy(lang);
-  const uxCopy = getCheckoutUxCopy(lang);
-  const terrazzaUi = getTerrazzaCheckoutUi35(lang);
   const feeLabel = formatFeeLabel35(lang, effectiveFeeRate, hasMixedFeeRates);
   const lp = localePrefix(lang);
   const isIt = lang === 'it';
@@ -132,7 +130,12 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
                       item.quantity,
                       skuFeeRate,
                     );
-                    const pkgTitle = isIt ? sku.titleIt : sku.titleEn;
+                    const pkgTitle =
+                      sku.venueId === 'aprica-world-winter-week'
+                        ? localizeSinglePassSku(sku, lang, copy, venueName).title
+                        : isIt
+                          ? sku.titleIt
+                          : sku.titleEn;
                     const feePct = Math.round(skuFeeRate * 100);
 
                     return (
@@ -256,11 +259,7 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
                       className="flex items-start gap-2 border-2 border-[#B91C1C] bg-[#FEF2F2] p-3 text-xs font-semibold text-[#B91C1C]"
                     >
                       <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
-                      <span>
-                        {cartValidation.errorCode === 'TABLE_REQUIRES_FORMULA'
-                          ? terrazzaUi.tableRequiresFormulaError || uxCopy.errTableRequiresFormula
-                          : terrazzaUi.tableMaxGuestsExceededError || uxCopy.errTableMaxGuests}
-                      </span>
+                      <span>{formatCartValidationError35(lang, cartValidation.errorCode)}</span>
                     </div>
                   )}
                   <div className="flex justify-between border-t border-[#0A0A0C]/16 pt-2 text-base font-extrabold text-[#0A0A0C]">

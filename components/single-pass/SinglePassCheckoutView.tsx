@@ -30,10 +30,14 @@ import {
 } from '@/lib/single-pass/catalog';
 import { formatMinorCurrency, type SupportedCurrency } from '@/lib/single-pass/currency';
 import {
+  formatCartValidationError35,
   formatFeeLabel35,
+  formatTermsLabel35,
+  formatZeroGuestAddonBadge35,
   getCheckoutUxCopy,
   getSinglePassCopy,
   getTerrazzaCheckoutUi35,
+  localizeSinglePassSku,
 } from '@/lib/single-pass/i18n35';
 import type {
   CheckoutFieldKey,
@@ -215,10 +219,10 @@ export default function SinglePassCheckoutView({
   const activeFeeRate = paymentSession ? paymentSession.feeRate : effectiveFeeRate;
   const activeMixed = paymentSession ? paymentSession.hasMixedFeeRates : hasMixedFeeRates;
   const feeLabel = formatFeeLabel35(locale, activeFeeRate, activeMixed);
-  const headerFeeTag = activeMixed
-    ? 'BOOKING FEE 20%'
-    : Math.round(activeFeeRate * 100) > 0
-      ? `BOOKING FEE ${Math.round(activeFeeRate * 100)}%`
+  const activeFeePct = Math.round(activeFeeRate * 100);
+  const headerFeeTag =
+    activeFeePct > 0
+      ? `BOOKING FEE ${activeFeePct}%`
       : 'OFFICIAL PARTNER DIRECT';
 
   useEffect(() => {
@@ -451,9 +455,12 @@ export default function SinglePassCheckoutView({
       case 'TERMS_REQUIRED':
         return uxCopy.errTermsRequired;
       case 'TABLE_REQUIRES_FORMULA':
-        return terrazzaUi.tableRequiresFormulaError || uxCopy.errTableRequiresFormula;
       case 'TABLE_MAX_GUESTS_EXCEEDED':
-        return terrazzaUi.tableMaxGuestsExceededError || uxCopy.errTableMaxGuests;
+      case 'APRICA_HALF_BOARD_REQUIRES_HOTEL':
+      case 'APRICA_HALF_BOARD_MAX_EXCEEDED':
+      case 'APRICA_BUS_REQUIRES_PACKAGE':
+      case 'APRICA_BUS_MAX_EXCEEDED':
+        return formatCartValidationError35(locale, code);
       case 'EMPTY_CART':
         return uxCopy.errEmptyCart;
       case 'PAYMENT_SESSION_ERROR':
@@ -524,10 +531,7 @@ export default function SinglePassCheckoutView({
     let venues: SinglePassVenueId[] = [];
 
     if (!cartValidation.ok) {
-      errors.cart =
-        cartValidation.errorCode === 'TABLE_REQUIRES_FORMULA'
-          ? terrazzaUi.tableRequiresFormulaError
-          : terrazzaUi.tableMaxGuestsExceededError;
+      errors.cart = formatCartValidationError35(locale, cartValidation.errorCode);
     }
     if (fullName.trim().length < 2) {
       errors.fullName = uxCopy.errFullName;
@@ -996,7 +1000,7 @@ export default function SinglePassCheckoutView({
                             ? `${itemGuestCount} ${
                                 itemGuestCount === 1 ? uxCopy.guestUnitSingular : uxCopy.guestsUnit
                               }`
-                            : terrazzaUi.tableAddonBadge}
+                            : formatZeroGuestAddonBadge35(locale, sku.venueId)}
                         </p>
                         {item.channel === 'single-pass' && (
                           <span className="border border-[#0A0A0C]/25 bg-[#EDEBE6] px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-[#0A0A0C]">
@@ -1005,7 +1009,11 @@ export default function SinglePassCheckoutView({
                         )}
                       </div>
                       <h2 className="font-display text-xl font-bold text-[#0A0A0C]">
-                        {isIt ? sku.titleIt : sku.titleEn}
+                        {sku.venueId === 'aprica-world-winter-week'
+                          ? localizeSinglePassSku(sku, locale, copy, venueName).title
+                          : isIt
+                            ? sku.titleIt
+                            : sku.titleEn}
                       </h2>
                       {item.dietaryChoice && (!sku.requiresDietary || Boolean(sku.dietaryPreset)) && (
                         <p className="mt-1 text-[13px] text-[#4F4D48]">{item.dietaryChoice}</p>
@@ -1078,11 +1086,7 @@ export default function SinglePassCheckoutView({
                     <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-[#B91C1C]" />
                     <div className="space-y-2">
                       <p className="font-bold text-[#B91C1C]">{uxCopy.cartFixHeading}</p>
-                      <p>
-                        {cartValidation.errorCode === 'TABLE_REQUIRES_FORMULA'
-                          ? terrazzaUi.tableRequiresFormulaError
-                          : terrazzaUi.tableMaxGuestsExceededError}
-                      </p>
+                      <p>{formatCartValidationError35(locale, cartValidation.errorCode)}</p>
                       <Link
                         href={`${lp}/cart`}
                         locale={locale}
@@ -1538,10 +1542,10 @@ export default function SinglePassCheckoutView({
                       className="mt-1 h-5 w-5 shrink-0 accent-[#0A0A0C]"
                     />
                     <span>
-                      {hasTerrazzaDuomo21
-                        ? terrazzaUi.termsNotice20
-                        : totalFeeCents > 0
-                          ? copy.formTermsLabel
+                      {totalFeeCents > 0
+                        ? formatTermsLabel35(locale, activeFeeRate, hasTerrazzaDuomo21)
+                        : hasTerrazzaDuomo21
+                          ? formatTermsLabel35(locale, 0, true)
                           : isIt
                             ? 'Accetto Termini e Condizioni, Privacy Policy e Politica di Rimborso di nightlifemilan.com e confermo i requisiti d’età del locale.'
                             : 'I accept the Terms & Conditions, Privacy Policy, and Refund Policy of nightlifemilan.com and confirm venue age requirements.'}{' '}
