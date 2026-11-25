@@ -455,7 +455,7 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
             </Link>
             <Link
               href={`${lp}/calendar/tonight`}
-              className="inline-flex items-center gap-2 font-sans text-white/40 text-sm tracking-[0.15em] uppercase
+              className="inline-flex items-center gap-2 font-sans text-white/80 text-sm tracking-[0.15em] uppercase
                 hover:text-champagne transition-colors duration-300"
             >
               {tr(locale, "See Tonight's Events")}
