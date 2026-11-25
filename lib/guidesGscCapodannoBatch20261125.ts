@@ -438,8 +438,16 @@ function renderVoyaGuide(locale: LocaleCode): RenderedGuide {
   const terGuide = guideUrl('g-32', locale);
 
   // Official 6-course NYE 2027 menu + localized 4:5 menu card (voya-nye-2027-menu-<locale>.webp)
+  // Inherit Taste V2 editorial surface & ink so .taste-guide-prose p maintains 12.1:1 WCAG AAA contrast.
   const voyaEditorialCard = sanitizeText(
-    renderVoyaNyeMenuEditorialHtml(locale).replace(/border-white\/15/g, 'border-[#EAE3D5]/20'),
+    renderVoyaNyeMenuEditorialHtml(locale)
+      .replace(/\bbg-\[#0B0A09\]\s*/g, '')
+      .replace(/\bbg-\[#050505\]\s*/g, '')
+      .replace(/\btext-\[#F6F1E7\]\s*/g, '')
+      .replace(/\btext-\[#C2B9AA\]\s*/g, '')
+      .replace(/\btext-\[#EAE3D5\]\s*/g, '')
+      .replace(/bg-\[#EAE3D5\]\s+px-3\s+py-1\s+text-xs\s+font-bold\s+uppercase\s+text-\[#050505\]/g, 'border border-current/30 px-3 py-1 text-xs font-bold uppercase')
+      .replace(/border-white\/15/g, 'border-current/20'),
     locale,
   );
 
