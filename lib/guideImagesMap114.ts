@@ -144,6 +144,7 @@ export const GUIDE_HERO_IMAGES_114: Record<string, string> = {
   'g-123': '/images/guides-editorial/terme-villa-gala.webp',
   'g-124': '/images/guides-editorial/aria-dancefloor.webp',
   'g-125': '/images/seo-events/master/carlsberg-ol-01.webp',
+  'g-126': '/images/guides-editorial/philipps-plein-chandeliers.webp',
 };
 
 export const GUIDE_INLINE_IMAGES_114: Record<string, string[]> = {
@@ -189,7 +190,7 @@ export const GUIDE_INLINE_IMAGES_114: Record<string, string[]> = {
   'g-25': ['/images/seo-events/master/v-fabrique-2.webp', '/images/pillars/concert-afterparties-03.webp', '/images/pillars/concert-afterparties-04.webp', '/images/guides-editorial/apollo-navigli.webp'],
   'g-26': ['/images/pillars/genre-hero-06.webp', '/images/pillars/genre-inline-06-a.webp', '/images/guides-editorial/apollo-navigli.webp', '/images/guides-editorial/aria-dancefloor.webp'],
   'g-27': ['/images/venues/hollywood/hollywood-interior-01.webp', '/images/venues/hollywood/hollywood-interior-02.webp', '/images/venues/hollywood/hollywood-interior-03.webp', '/images/venues/hollywood/hollywood-interior-04.webp'],
-  'g-28': ['/images/venues/the-club-milano/the-club-milano-interior-01.webp', '/images/venues/the-club-milano/the-club-milano-interior-02.webp', '/images/venues/the-club-milano/the-club-milano-interior-03.webp', '/images/venues/the-club-milano/the-club-milano-interior-04.webp'],
+  'g-28': ['/images/guides-editorial/the-club-vip-bottles.webp', '/images/guides-editorial/the-club-dancefloor.webp', '/images/guides-editorial/the-club-prive-console.webp', '/images/guides-editorial/the-club-lights.webp'],
   'g-29': ['/images/venues/11-clubroom/11-clubroom-interior-02.webp', '/images/venues/11-clubroom/11-clubroom-interior-03.webp', '/images/venues/11-clubroom/11-clubroom-interior-04.webp', '/images/venues/11-clubroom/11-clubroom-interior-05.webp'],
   'g-30': ['/images/venues/gattopardo/gattopardo-interior-01.webp', '/images/venues/gattopardo/gattopardo-interior-02.webp', '/images/venues/gattopardo/gattopardo-interior-03.webp', '/images/venues/gattopardo/gattopardo-interior-04.webp'],
   'g-31': ['/images/guides-editorial/bischeri-gala.webp', '/images/guides-editorial/repvblic-club.webp', '/images/guides-editorial/hollywood-corso-como.webp', '/images/guides-editorial/the-club-brera.webp'],
@@ -287,6 +288,7 @@ export const GUIDE_INLINE_IMAGES_114: Record<string, string[]> = {
   'g-123': ['/images/guides-editorial/voya-rooftop-20f.webp', '/images/guides-editorial/gattopardo-nave.webp', '/images/guides-editorial/just-me-pavilion.webp', '/images/guides-editorial/barchetta-como-dining.webp'],
   'g-124': ['/images/guides-editorial/pineta-dancefloor.webp', '/images/guides-editorial/gate-neon.webp', '/images/guides-editorial/just-me-dancefloor.webp', '/images/guides-editorial/palace-como-fireworks.webp'],
   'g-125': ['/images/seo-events/master/carlsberg-ol-02.webp', '/images/seo-events/master/carlsberg-ol-03.webp', '/images/guides-editorial/carlsberg-ol-stage-candles.webp', '/images/seo-events/master/carlsberg-ol-04.webp'],
+  'g-126': ['/images/guides-editorial/philipps-plein-dinnershow.webp', '/images/guides-editorial/philipps-plein-monogram-bar.webp', '/images/guides-editorial/philipps-plein-bottle-parade.webp', '/images/guides-editorial/philipps-plein-mezzanine.webp'],
 };
 
 export function getGuideHeroImage114(guideId: string, fallback?: string): string {

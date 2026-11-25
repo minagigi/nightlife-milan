@@ -65,6 +65,14 @@ export function getEnhancedVenueGallery(venue: Venue): string[] {
       '/images/seo-events/master/amnesia-04.webp',
       '/images/venues/volt-club-milano/volt-club-milano-interior-01.webp',
     ],
+    'v-philipps': [
+      '/images/venues/philipps-milano/philipps-milano-01.webp',
+      '/images/venues/philipps-milano/philipps-milano-02.webp',
+      '/images/venues/philipps-milano/philipps-milano-03.webp',
+      '/images/venues/philipps-milano/philipps-milano-04.webp',
+      '/images/venues/philipps-milano/philipps-milano-05.webp',
+      '/images/venues/philipps-milano/philipps-milano-06.webp',
+    ],
   };
   if (map[venue.id]) return map[venue.id];
   if (venue.gallery && venue.gallery.length >= 5) return venue.gallery;
@@ -1003,6 +1011,7 @@ const VENUE_WORD_TO_CLUB_SLUG: Record<string, string> = {
   'v-terrazza-gallia-milano': 'terrazza-gallia-milano',
   'v-ristorante-torre-milano': 'ristorante-torre-milano',
   'v-innocenti-evasioni-terrazza-triennale': 'innocenti-evasioni-terrazza-triennale',
+  'v-philipps': 'philipps-milano',
 };
 
 function getMilanNightlifeDateISO(): { todayISO: string; endOfWeekISO: string } {
@@ -1096,11 +1105,11 @@ export function resolveVenueEventsForCarousel(
     .map((ev) => mapDatedCard(ev, isIt ? 'DATA UFFICIALE' : 'OFFICIAL DATE'));
 
   const matchedWeekly = weeklyEvents.filter((w) => {
+    if (`v-${w.clubSlug}` === venue.id) return true;
     const wLoc = w.clubName.toLowerCase();
-    return (
-      wLoc.includes(venueNameLower.replace(' milano', '').slice(0, 6)) ||
-      venueNameLower.includes(wLoc.split(' ')[0])
-    );
+    const cleanVenue = venueNameLower.replace(/\s+milano?$/i, '').trim();
+    const cleanWeekly = wLoc.replace(/\s+milano?$/i, '').trim();
+    return cleanVenue.length >= 4 && cleanWeekly.length >= 4 && (wLoc.includes(cleanVenue) || venueNameLower.includes(cleanWeekly));
   });
 
   const fallbackImg = venue.image || '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp';

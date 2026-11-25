@@ -105,6 +105,8 @@ export default async function ClubsPage({
     mibmilano: 'v-mibmilano',
     gattopardo: 'v-gattopardo',
     armani: 'v-armani-prive',
+    philipps: 'v-philipps',
+    terrazza21: 'v-terrazza21',
   };
   const todayDow = new Date().getDay();
   const openVenueIds = new Set(

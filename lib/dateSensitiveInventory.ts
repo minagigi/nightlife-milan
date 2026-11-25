@@ -45,7 +45,7 @@ export type DateSensitiveCarouselPresentation = DateSensitiveEventPresentation &
 };
 
 const ACTIVE_FLOOR_ROME_DAY = '2026-11-02';
-const MAX_SERIALIZED_EVENTS = 80;
+const MAX_SERIALIZED_EVENTS = 120;
 const ROME_DAY_FMT = new Intl.DateTimeFormat('en-CA', {
   timeZone: 'Europe/Rome',
   year: 'numeric',
@@ -160,7 +160,7 @@ export async function getOctoberDateSensitivePresentations(locale: string, venue
 
 function getPriorityVenueSupplementalPresentations(locale: string, venueId?: string): DateSensitiveEventPresentation[] {
   if (!isEnabledLocale(locale)) return [];
-  const supplementalClubs = new Set(['justme', 'pineta', 'aria', '55milano', 'voya', 'repvblic']);
+  const supplementalClubs = new Set(['justme', 'pineta', 'aria', '55milano', 'voya', 'repvblic', 'philipps', 'theclub', 'mibmilano', 'terrazza21']);
   const out: DateSensitiveEventPresentation[] = [];
   const seenSlugs = new Set<string>();
   const octoberVenueDays = new Set(OCTOBER_EVENTS.map((e) => `${normVenueId(e.venue.id)}|${e.startISO.slice(0, 10)}`));

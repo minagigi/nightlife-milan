@@ -386,16 +386,16 @@ const CONFIRMED_MIN_VIP_EUR: Readonly<Record<string, number>> = {
 
 export const FLAGSHIP_TITLES_EN_IT: Readonly<Record<string, { en: string; it: string }>> = {
   'v-justme': {
-    en: 'Just Me Milan (ex Just Cavalli): Dress Code, Tables & 7/7',
-    it: 'Just Me Milano (ex Just Cavalli): Dress Code, Prezzi & 7/7',
+    en: 'Just Me Milan (ex Just Cavalli): Tables, Dress Code & 7/7',
+    it: 'Just Me Milano (ex Just Cavalli): Prezzi, Tavoli VIP e 7/7',
   },
   'v-voya': {
-    en: 'Voya Rooftop Milan: 20th Floor Bar, Aperitivo & VIP Tables',
-    it: 'Voya Rooftop Milano: 20° Piano, Aperitivo e Tavoli VIP',
+    en: 'Voya Rooftop Milan: 20th Floor Skyline, Menu & VIP Tables',
+    it: 'Voya Rooftop Milano: 20° Piano, Menù, Aperitivo e Tavoli',
   },
   'v-pineta': {
-    en: 'Pineta Club Milan: Singing Aperitivo & VIP Tables from €300',
-    it: 'Pineta Club Milano: Aperitivo Cantato e Tavoli VIP da 300€',
+    en: 'Pineta Club Milan: Cena Cantata, Aperitivo & VIP Tables',
+    it: 'Pineta Club Milano: Cena Cantata, Aperitivo e Tavoli VIP',
   },
   'v-aria': {
     en: 'Aria Club Milan: 150m San Siro Afterparty & VIP Tables',
@@ -422,8 +422,8 @@ export const FLAGSHIP_TITLES_EN_IT: Readonly<Record<string, { en: string; it: st
     it: 'Church 81 Milano: Club Navigli, Prezzi Bottiglie e Lista',
   },
   'v-mibmilano': {
-    en: 'MIB Milan: Dinner Show Piazza Affari, Prices & VIP Tables',
-    it: 'MIB Milano: Dinner Show Piazza Affari, Prezzi e Tavoli VIP',
+    en: 'MIB Milan Piazza Affari: Dinner Show, Events & VIP Tables',
+    it: 'MIB Milano Piazza Affari: Cena Cantata, Serate e Tavoli VIP',
   },
   'v-dazi': {
     en: 'Dazi Milan: Arco della Pace Dinner Show, Mixology & Tables',
@@ -434,7 +434,7 @@ export const FLAGSHIP_TITLES_EN_IT: Readonly<Record<string, { en: string; it: st
     it: 'Il Gattopardo Milano: Prezzi Entrata, Dress Code & Tavoli',
   },
   'v-terrazza21': {
-    en: 'Terrazza Duomo 21 Milan: Duomo Rooftop Aperitivo & Tables',
+    en: 'Terrazza Duomo 21 Milan: Piazza Duomo Aperitivo & DJ Sets',
     it: 'Terrazza Duomo 21 Milano: Aperitivo Vista Duomo e Tavoli',
   },
   'v-magazzini': {
@@ -462,8 +462,12 @@ export const FLAGSHIP_TITLES_EN_IT: Readonly<Record<string, { en: string; it: st
     it: 'Ceresio 7 Milano: Rooftop Piscine, Aperitivo e Prenotazioni',
   },
   'v-theclub': {
-    en: 'The Club Milan: Brera International Nights, Guestlist & VIP',
-    it: 'The Club Milano: Serate Brera, Lista e Tavoli VIP 2026/2027',
+    en: 'The Club Milan (Brera): Events, Prices, Guestlist & VIP',
+    it: 'The Club Milano (Brera): Serate, Prezzi, Lista e Tavoli VIP',
+  },
+  'v-philipps': {
+    en: "Philipp's Milan (Philipp Plein Hotel): Dinner Show & Club",
+    it: "Philipp's Milano (Philipp Plein): Dinner Show, Club e VIP",
   },
   'v-tocqueville': {
     en: 'Tocqueville 13 Milan: Corso Como Dinner Show & VIP Tables',
@@ -564,7 +568,22 @@ export function buildClubHighCtrDescription(
       return 'Aria Club Milano (Piazzale dello Sport 14, a 150m da San Siro): dopo-partita, aperitivo e Tavoli VIP da 250€. WhatsApp +39 351 912 7047.';
     }
     if (venue.id === 'v-voya') {
-      return 'Voya Rooftop Milano (20° piano, Viale Achille Papa 30): aperitivo vista skyline e Tavoli VIP da 250€. Prenota su WhatsApp +39 351 912 7047.';
+      return 'Voya Rooftop Milano (20° piano, Viale Achille Papa 30): aperitivo vista skyline, menù cena e Tavoli VIP da 250€. WhatsApp +39 351 912 7047.';
+    }
+    if (venue.id === 'v-pineta') {
+      return 'Pineta Club Milano (Via Messina 38): Aperitivo e Cena Cantata, Tr3ndy Society, Tavoli VIP da 300€ e Moulin Rouge NYE 2027. WA +39 351 912 7047.';
+    }
+    if (venue.id === 'v-terrazza21') {
+      return 'Terrazza Duomo 21 Milano (Piazza del Duomo 21): aperitivo vista guglie, cena Chef Braschi, 5° piano MA.RE e DJ set. Prenota WA +39 351 912 7047.';
+    }
+    if (venue.id === 'v-mibmilano') {
+      return 'MIB Milano (Via Gaetano Negri 10, Piazza Affari): Cena Cantata Love Affair & Billions, Justice, Open Wine e Tavoli VIP. WhatsApp +39 351 912 7047.';
+    }
+    if (venue.id === 'v-theclub') {
+      return 'The Club Milano (Corso Garibaldi 97, Brera): One Two, Atlanta, First Class, Girls Republic, Superbe e Tavoli VIP da 400€. WhatsApp +39 351 912 7047.';
+    }
+    if (venue.id === 'v-philipps') {
+      return "Philipp's Milano (The Plein Hotel, Via Manin 21): The Philipp's Show Chef Roberto Conti 20:00, Club 00:00-04:30 e Tavoli VIP. WA +39 351 912 7047.";
     }
     if (minVip) {
       return withWhatsApp(`${localizedVenueName} (${street}, Milano): Tavoli VIP da ${minVip}€, prezzi bottiglie, dress code e lista.`, 'it', 158);
@@ -583,7 +602,22 @@ export function buildClubHighCtrDescription(
       return 'Aria Club Milan (150m from San Siro Stadium): football afterparties, aperitivo & VIP tables from €250. Book via WhatsApp +39 351 912 7047.';
     }
     if (venue.id === 'v-voya') {
-      return 'Voya Rooftop Milan (20th floor skyline bar, Portello M5): sunset aperitivo & VIP tables from €250. Book via WhatsApp +39 351 912 7047.';
+      return 'Voya Rooftop Milan (20th floor skyline bar, Portello M5): sunset aperitivo, panoramic dining & VIP tables from €250. WA +39 351 912 7047.';
+    }
+    if (venue.id === 'v-pineta') {
+      return 'Pineta Club Milan (Via Messina 38): Singing Aperitivo & Dinner Show, Tr3ndy Society, VIP tables from €300 & NYE 2027. Book WA +39 351 912 7047.';
+    }
+    if (venue.id === 'v-terrazza21') {
+      return 'Terrazza Duomo 21 Milan (Piazza del Duomo 21): Cathedral-view aperitivo, Chef Braschi dining, 5F MA.RE & DJ sets. Book via WA +39 351 912 7047.';
+    }
+    if (venue.id === 'v-mibmilano') {
+      return 'MIB Milan (Via Gaetano Negri 10, Piazza Affari): Love Affair & Billions Dinner Show, Justice, Open Wine & VIP tables. WhatsApp +39 351 912 7047.';
+    }
+    if (venue.id === 'v-theclub') {
+      return 'The Club Milan (Corso Garibaldi 97, Brera): One Two, Atlanta, First Class, Girls Republic, Superbe & VIP tables from €400. WA +39 351 912 7047.';
+    }
+    if (venue.id === 'v-philipps') {
+      return "Philipp's Milan (The Plein Hotel, Via Manin 21): The Philipp's Show by Chef Roberto Conti 20:00, Club 00:00-04:30 & VIP tables. WA +39 351 912 7047.";
     }
     if (minVip) {
       return withWhatsApp(`${localizedVenueName} (${street}, Milan): VIP tables from €${minVip}, bottle prices, dress code & guestlist.`, 'en', 158);

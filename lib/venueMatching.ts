@@ -25,7 +25,8 @@ const VENUE_ALIASES: VenueAliasEntry[] = [
   { venueId: 'v-hollywood', aliases: ['hollywood'] },
   { venueId: 'v-apollo', aliases: ['apollo'] },
   { venueId: 'v-ceresio-7', aliases: ['ceresio 7', 'ceresio7'] },
-  { venueId: 'v-theclub', aliases: ['the club milano', 'theclub'] },
+  { venueId: 'v-theclub', aliases: ['the club milano', 'theclub', 'the club'] },
+  { venueId: 'v-philipps', aliases: ["philipp's", 'philipps', 'philipp plein', 'the plein hotel'] },
   { venueId: 'v-aria', aliases: ['aria club', 'aria milano'] },
 ];
 

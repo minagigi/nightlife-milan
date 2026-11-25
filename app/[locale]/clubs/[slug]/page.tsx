@@ -161,6 +161,10 @@ const venueTitles: Record<string, { en: string; it: string }> = {
     en: 'Amnesia Milan | Tech-House & Techno Temple, Console Privé & Tickets 2026/2027',
     it: 'Amnesia Milano | Tempio Tech-House & Techno, Privé Console & Biglietti 2026/2027',
   },
+  'v-philipps': {
+    en: "Philipp's Milan (Philipp Plein Hotel) | Dinner Show, Luxury Club & VIP Tables 2026/2027",
+    it: "Philipp's Milano (Philipp Plein) | Dinner Show, Luxury Club & Tavoli VIP 2026/2027",
+  },
 };
 
 const venueKeywords: Record<string, { en: string[]; it: string[] }> = {
@@ -259,6 +263,10 @@ const venueKeywords: Record<string, { en: string[]; it: string[] }> = {
   'v-amnesia': {
     en: ['amnesia milan', 'amnesia club via gatto milan', 'amnesia milan tech house techno', 'amnesia backstage console prive', 'top techno dj club milan 2026', 'forlanini electronic club milan'],
     it: ['amnesia milano', 'amnesia via alfonso gatto milano', 'amnesia milano tech house techno', 'prive console backstage amnesia', 'migliore discoteca techno milano 2026', 'club elettronica forlanini milano'],
+  },
+  'v-philipps': {
+    en: ["philipp's milan", 'philipp plein club milan', 'the plein hotel club milan', "the philipp's show dinner show", 'via daniele manin 21 nightclub', "philipp's milano vip tables", 'chef roberto conti dinner show'],
+    it: ["philipp's milano", 'philipp plein locale milano', 'the plein hotel discoteca milano', "the philipp's show cena spettacolo", 'via daniele manin 21 milano', "tavoli vip philipp's milano", 'cena cantata philipp plein milano'],
   },
 };
 
@@ -831,84 +839,6 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
       ],
     },
   },
-  'v-pineta': {
-    en: {
-      tagline: 'Priority #2 Flagship | Milan Iconic Crystal-Chandelier Singing Aperitivo & Reggaeton/Commercial VIP Club',
-      highlights: [
-        'Located at Via Messina 38 (Cenisio / Corso Como district), steps from M5 Purple Line Cenisio stop',
-        'Home of Milan #1 Singing Aperitivo (Aperitivo Cantato) from 19:30 and Noche De Perreo Reggaeton nights',
-        'Opulent crystal chandeliers, velvet VIP booths, and bottle parades until 05:00 AM',
-        'Direct M5 metro connection from San Siro Stadium (10 minutes) for Saturday Serie A afterparties',
-      ],
-      musicStyle: 'Singing Italian/International Hits (Aperitivo), Reggaeton, Commercial Dance, Hip-Hop & Vocal House',
-      crowdProfile: '20-38 | Fashion crowd, bachelorette/birthday celebrations, Corso Como regulars & Serie A Saturday guests',
-      bestNights: 'Friday (Singing Aperitivo & Fashion Club), Saturday (Noche De Perreo & Gran Gala) & Holiday Specials',
-      nearestMetro: 'M5 Purple Line Cenisio (2 min walk to Via Messina 38) + Tram 12 & 14',
-      pricingTable: [
-        { zone: 'Singing Aperitivo Reserved Table (19:30-22:30)', price: '€20 - €35 / person', details: 'Includes royal buffet or gourmet platters, 1 cocktail or wine bottle per 4 guests' },
-        { zone: 'Dancefloor VIP Table (After-Dinner)', price: '€300 - €400 (6-8 guests)', details: '100% bottle credit on the main crystal-chandelier floor with hostess entry' },
-        { zone: 'Elevated VIP Privé Booth', price: '€500 - €800 (8-10 guests)', details: 'Roped-off luxury velvet sofa area with dedicated waiter and premium bottles' },
-        { zone: 'Super Privé Console DJ', price: '€900 - €1,500 (10-12 guests)', details: 'Exclusive booth beside the console for Dom Pérignon & Clase Azul parades' },
-      ],
-      insiderTips: [
-        'Book the 19:30 Singing Aperitivo + After-Dinner VIP Table combo to keep your sofa all night as Pineta transitions from live sing-along dinner vibe to full nightclub.',
-        'Because Cenisio is on the direct M5 Purple Line from San Siro, Pineta is a favorite after Saturday 18:00 and 20:45 Serie A matches.',
-        'Dress code is Glamour & Smart Chic: collared shirt for men, elegant evening outfit for women.',
-      ],
-      faqs: [
-        {
-          q: 'How does the Singing Aperitivo (Aperitivo Cantato) work at Pineta Club Milano?',
-          a: 'Doors open at 19:30 with reserved tables (€20-€35/person), gourmet buffet islands, wine/cocktails, and an interactive vocal DJ show where the whole room sings Italian and international classics before the club night starts at 23:00.',
-        },
-        {
-          q: 'How much is a VIP table at Pineta Club Milano?',
-          a: 'After-dinner Dancefloor VIP tables start at €300-€400 for 6-8 guests, Elevated VIP Privé tables cost €500-€800, and Console tables start from €900, 100% spendable in bottles.',
-        },
-        {
-          q: 'How do I reach Pineta Club by metro?',
-          a: 'Take the M5 Purple Metro Line to the Cenisio stop: Via Messina 38 is just a 2-minute walk from the station exit.',
-        },
-      ],
-    },
-    it: {
-      tagline: 'Scelta Top N.2 a Milano | Il Tempio Milanese dell’Aperitivo Cantato e delle Notti Reggaeton/Commercial sotto i Lampadari di Cristallo',
-      highlights: [
-        'Situato in Via Messina 38 (Cenisio / Corso Como), a 2 minuti a piedi dalla fermata Metro M5 Lilla Cenisio',
-        'Casa del celebre Aperitivo Cantato dalle 19:30 e del format Noche De Perreo Reggaeton & Commerciale',
-        'Sontuosi lampadari di cristallo, divani in velluto e bottle show scenografici fino alle 05:00',
-        'Collegamento diretto in Metro M5 Lilla dallo Stadio di San Siro (10 minuti) per il post-partita del sabato',
-      ],
-      musicStyle: 'Hit Italiane da Cantare (Aperitivo), Reggaeton, Commerciale, Hip-Hop e Vocal House',
-      crowdProfile: '20-38 anni | Pubblico glamour milanese, addii al nubilato, feste di laurea/compleanno e ospiti Serie A',
-      bestNights: 'Venerdi (Aperitivo Cantato & Club Night), Sabato (Noche De Perreo & Gran Gala) e Veglione di Capodanno',
-      nearestMetro: 'M5 Lilla Cenisio (2 minuti a piedi fino a Via Messina 38) + Tram 12 e 14',
-      pricingTable: [
-        { zone: 'Tavolo Riservato Aperitivo Cantato (19:30-22:30)', price: '€20 - €35 / persona', details: 'Include Royal Buffet, 1 drink premium o 1 bottiglia di vino/prosecco ogni 4 ospiti' },
-        { zone: 'Tavolo VIP Pista (Dopocena)', price: '€300 - €400 (6-8 persone)', details: '100% spendibile in bottiglie sotto i lampadari di cristallo con ingresso salta-fila' },
-        { zone: 'Tavolo Privé VIP Rialzato', price: '€500 - €800 (8-10 persone)', details: 'Divano in velluto nell’area Privé riservata con cameriere dedicato' },
-        { zone: 'Super Privé Console DJ', price: '€900 - €1.500 (10-12 persone)', details: 'Posizione dominante a fianco della console per Magnum, Dom Pérignon e Clase Azul' },
-      ],
-      insiderTips: [
-        'Prenota la formula Combo Aperitivo Cantato (19:30) + Tavolo Bottiglia Dopocena per assicurarti lo stesso divanetto per tutta la notte senza mai fare fila.',
-        'Grazie alla fermata M5 Cenisio sulla stessa linea dello stadio, il Pineta e perfetto dopo gli anticipi di Serie A del sabato a San Siro.',
-        'Dress code Glamour & Smart Chic: camicia obbligatoria per gli uomini, outfit curato per le ragazze.',
-      ],
-      faqs: [
-        {
-          q: 'Come funziona l’Aperitivo Cantato del Pineta Club Milano?',
-          a: 'Dalle 19:30 alle 22:30 accedi al tuo tavolo riservato (20-35€ a persona) con buffet gourmet, drink o bottiglie di vino al tavolo e uno show vocale coinvolgente prima che la sala diventi discoteca fino alle 05:00.',
-        },
-        {
-          q: 'Quanto costa un Tavolo VIP dopocena al Pineta Club?',
-          a: 'I tavoli Pista partono da 300-400€ per 6-8 persone, il Privé VIP richiede 500-800€ e il Super Privé Console parte da 900€, sempre 100% convertiti in bottiglie.',
-        },
-        {
-          q: 'Qual e la fermata della metro piu vicina al Pineta Club?',
-          a: 'La fermata Cenisio della linea M5 Lilla dista soli 150 metri (2 minuti a piedi) da Via Messina 38.',
-        },
-      ],
-    },
-  },
   'v-55milano': {
     en: {
       tagline: 'Priority #4 Flagship | 1,000 sqm Industrial-Chic Loft & 600 sqm Terrace for XXL Apericena, Singing Dinner Show & Clubbing',
@@ -971,72 +901,6 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
         {
           q: 'In quali giorni e aperto il 55 Milano?',
           a: 'Il 55 Milano e aperto 6 sere a settimana, dal Martedi alla Domenica dalle 19:30 alle 03:00, in Via Piero della Francesca 55.',
-        },
-      ],
-    },
-  },
-  'v-voya': {
-    en: {
-      tagline: 'Priority #5 Flagship | 20th-Floor Panoramic Sky Lounge 85 Meters Above Milan with 360° CityLife & Porta Nuova Views',
-      highlights: [
-        'Perched on the 20th floor (85m high) at Viale Achille Papa 30 (Portello / CityLife district)',
-        'Floor-to-ceiling 360-degree climate-controlled glass walls operating 12 months a year (autumn/winter/NYE included)',
-        'Sunset Skyline Aperitivo (from 18:30) seamlessly transitioning into an upscale Deep House & Lounge DJ club night',
-        'Only 3 stops on the direct M5 Purple Line from San Siro (Lotto -> Portello) for panoramic post-match drinks',
-      ],
-      musicStyle: 'Sunset Lounge, Deep House, Afro-House, Melodic Grooves & Chic Vocal Club Sets',
-      crowdProfile: '23-48 | International business travelers, romantic dates, rooftop birthday/bachelorette groups & VIPs',
-      bestNights: 'Tuesday to Sunday: Sunset Golden Hour Aperitivo (18:30-21:30) & Fri/Sat 20th-Floor Skyline DJ Party (22:00-02:30)',
-      nearestMetro: 'M5 Purple Line Portello (4 min walk) + M1 Lotto (Viale Achille Papa 30, 20th Floor)',
-      pricingTable: [
-        { zone: 'Skyline Sunset Aperitivo Table (18:30-21:30)', price: '€20 - €35 / person', details: 'Panoramic window seating, gourmet finger food platter & signature cocktail' },
-        { zone: 'After-Dinner Skyline Lounge Table', price: '€250 - €400 (6-8 guests)', details: '100% bottle credit at 85 meters altitude with private elevator access' },
-        { zone: 'First-Row Glass Window VIP Privé', price: '€450 - €800 (8-10 guests)', details: 'Front-row panoramic sofa overlooking the illuminated Milan skyscrapers' },
-      ],
-      insiderTips: [
-        'First-row window tables overlooking the CityLife and Porta Nuova towers sell out 48 hours ahead on Fridays and Saturdays: reserve early via WhatsApp (+39 351 912 7047).',
-        'Because Voya Rooftop is enclosed in floor-to-ceiling heated glass on the 20th floor, you get the full 360-degree skyline view even in November, December, Capodanno, and February.',
-      ],
-      faqs: [
-        {
-          q: 'Is Voya Rooftop open during autumn and winter in Milan?',
-          a: 'Yes! Voya Rooftop on the 20th floor (Viale Achille Papa 30) features an enclosed, climate-controlled 360-degree floor-to-ceiling glass sky lounge open 12 months a year.',
-        },
-        {
-          q: 'How much is a panoramic window table at Voya Rooftop?',
-          a: 'Sunset Aperitivo tables start at €20-€35 per person; after-dinner bottle service tables start from €250-€400 up to €450-€800 for first-row skyline window booths.',
-        },
-      ],
-    },
-    it: {
-      tagline: 'Scelta Top N.5 a Milano | Sky Lounge Panoramico al 20° Piano (85 Metri d’Altezza) con Vista a 360° sullo Skyline di Milano',
-      highlights: [
-        'Sospeso al 20° piano (85 metri d’altezza) in Viale Achille Papa 30 (distretto Portello / CityLife)',
-        'Salone panoramico climatizzato con vetrate a 360 gradi aperto 12 mesi l’anno (anche in autunno/inverno e Capodanno)',
-        'Sunset Aperitivo al tramonto (dalle 18:30) seguito da elegante serata Lounge & Deep House con DJ set fino alle 02:30',
-        'A sole 3 fermate di Metro M5 Lilla da San Siro (Lotto -> Portello) per il Terzo Tempo panoramico post-partita',
-      ],
-      musicStyle: 'Sunset Lounge, Deep House, Afro-House e DJ Set Panoramico Ricercato',
-      crowdProfile: '23-48 anni | Pubblico internazionale, coppie, lauree/compleanni eleganti, addii al nubilato chic e manager',
-      bestNights: 'Dal Martedi alla Domenica: Golden Hour Aperitivo (18:30-21:30) e Ven/Sab 20th Floor Skyline Party (22:00-02:30)',
-      nearestMetro: 'M5 Lilla Portello (4 minuti a piedi) + M1 Rossa Lotto (Viale Achille Papa 30, 20° Piano)',
-      pricingTable: [
-        { zone: 'Tavolo Sunset Aperitivo Vista Skyline (18:30-21:30)', price: '€20 - €35 / persona', details: 'Tavolo riservato al 20° piano con finger food gourmet e signature cocktail' },
-        { zone: 'Tavolo VIP Lounge Dopocena', price: '€250 - €400 (6-8 persone)', details: '100% spendibile in bottiglie a 85 metri d’altezza con ascensore diretto' },
-        { zone: 'Tavolo Privé Prima Fila Vetrata 360°', price: '€450 - €800 (8-10 persone)', details: 'Divanetto fronte vetrata affacciato sui grattacieli illuminati di CityLife e Porta Nuova' },
-      ],
-      insiderTips: [
-        'I tavoli in prima fila lungo la vetrata panoramica esauriscono i posti con 48 ore di anticipo nel weekend: bloccali su WhatsApp (+39 351 912 7047).',
-        'Essendo interamente avvolto da vetrate panoramiche climatizzate al 20° piano, Voya Rooftop è perfetto tutto l’anno, inclusi autunno, inverno e la notte di Capodanno con vista fuochi d’artificio.',
-      ],
-      faqs: [
-        {
-          q: 'Voya Rooftop e aperto anche in autunno e in inverno?',
-          a: 'Sì! Il 20° piano di Voya Rooftop (Viale Achille Papa 30) dispone di un salone interno climatizzato con vetrate a tutta altezza a 360 gradi aperto 12 mesi l’anno.',
-        },
-        {
-          q: 'Quanto costa prenotare un tavolo vista skyline da Voya Rooftop?',
-          a: 'I tavoli per il Sunset Aperitivo partono da 20-35€ a persona; nel dopocena i Tavoli VIP con bottiglia partono da 250-400€ fino a 450-800€ in prima fila vetrata.',
         },
       ],
     },
@@ -1175,6 +1039,422 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
         {
           q: 'Qual è il dress code richiesto al Gattopardo Milano?',
           a: 'Elegante / Smart Chic rigoroso: per uomo è consigliata camicia con colletto (niente felpe sportive, tute o jeans troppo strappati). La prenotazione nominale su WhatsApp +39 351 912 7047 accelera l’ingresso.',
+        },
+      ],
+    },
+  },
+  'v-philipps': {
+    en: {
+      tagline: "Philipp Plein's Luxury Restaurant, Theatrical Dinner Show & Midnight Club Inside The Plein Hotel (Via Daniele Manin 21)",
+      highlights: [
+        "Set inside historic Palazzo Melzi d'Eril (The Plein Hotel, Via Daniele Manin 21) facing Giardini Montanelli between Brera and Porta Venezia",
+        "The Philipp's Show (Wed-Sun from 20:00): Italian haute cuisine by Executive Chef Roberto Conti paired with live singers and choreographed performers at 21:45",
+        'Full 6-night club calendar (00:00-04:30): Tue From Brasil to Milan, Wed Tussy, Thu Saint, Fri ClubForLife, Sat Konekt, Sun Sweetie',
+        'Crystal chandeliers, hexagonal PP gold monograms, mirrored mezzanine privé, and luminous Dom Pérignon bottle parades',
+      ],
+      musicStyle: 'Theatrical Live Vocal Show during Dinner (20:00-00:00) · Luxury Vocal House, Afro-House, Hip-Hop & R&B (00:00-04:30)',
+      crowdProfile: '23-45 | Fashion Week designers, international hotel guests, models, athletes & luxury VIP table clientele',
+      bestNights: "Tue Brasilian Dinner & From Brasil to Milan · Wed Tussy · Thu Saint · Fri ClubForLife · Sat Konekt · Sun Sweetie",
+      nearestMetro: 'M3 Yellow Line Turati (180 m, 2 min walk) or M1 Red Line Palestro (450 m) to Via Daniele Manin 21',
+      pricingTable: [
+        { zone: "The Philipp's Show · Fine Dining & Live Show (20:00)", price: 'Concierge Reservation', details: 'Executive Chef Roberto Conti menu with live theatrical show at 21:45 & direct midnight club transition' },
+        { zone: 'Brasilian Dinner Show (Every Tuesday 20:00)', price: 'Concierge Reservation', details: 'Signature Tuesday Brazilian dining & live show followed by From Brasil to Milan club night' },
+        { zone: 'Chandelier Floor VIP Table (00:00-04:30)', price: 'On Concierge Quote (100% bottle credit)', details: 'Central velvet booth under crystal chandeliers with skip-the-line hostess escort' },
+        { zone: 'Mirrored Mezzanine & DJ Console Super VIP', price: 'On Concierge Quote (Magnum / Dom Pérignon)', details: 'Elevated private mezzanine & console-side tables inside The Plein Hotel' },
+      ],
+      insiderTips: [
+        "Booking the 20:00 Dinner Show table is the smartest insider move at Philipp's Milano: you enjoy Chef Roberto Conti's cuisine and the 21:45 live show while already inside before the midnight velvet-rope selection.",
+        'Door selection is strictly Haute Couture & Tailored Elegance: men must wear a collared shirt, blazer, and dress shoes (zero athletic sportswear or caps).',
+      ],
+      faqs: [
+        {
+          q: "Where is Philipp's Milano (Philipp Plein Club) located and how does the evening work?",
+          a: "Philipp's Milano is located inside The Plein Hotel at Via Daniele Manin 21 (Palazzo Melzi d'Eril, 180 m from M3 Turati). Doors open at 20:00 for restaurant service and The Philipp's Show (live performance at 21:45), transforming from midnight until 04:30 into a luxury nightclub.",
+        },
+        {
+          q: "What are the weekly events at Philipp's Milano in 2026/2027?",
+          a: "Philipp's runs Tuesday (Brasilian Dinner Show + From Brasil to Milan), Wednesday (Tussy), Thursday (Saint), Friday (ClubForLife), Saturday (Konekt), and Sunday (Sweetie Urban Night), plus The Philipp's Show dinner performance Wednesday through Sunday.",
+        },
+        {
+          q: "How do I book a Dinner Show table or VIP bottle table at Philipp's Milano?",
+          a: "Message the Nightlife Milan Concierge on WhatsApp at +39 351 912 7047 with your preferred date, guest count, and formula (20:00 Dinner Show or 00:00 VIP Club Table) to receive live availability and floorplan options.",
+        },
+      ],
+    },
+    it: {
+      tagline: 'Ristorante, Dinner Show Teatrale e Luxury Club di Philipp Plein dentro The Plein Hotel (Via Daniele Manin 21)',
+      highlights: [
+        "Ospitato nello storico Palazzo Melzi d'Eril (The Plein Hotel, Via Daniele Manin 21) di fronte ai Giardini Montanelli tra Brera e Porta Venezia",
+        "The Philipp's Show (Mer-Dom dalle 20:00): alta cucina dell'Executive Chef Roberto Conti con cantanti e corpo di ballo live dalle 21:45",
+        '6 notti di programmazione club (00:00-04:30): Mar From Brasil to Milan, Mer Tussy, Gio Saint, Ven ClubForLife, Sab Konekt, Dom Sweetie',
+        'Lampadari di cristallo, monogrammi esagonali PP in oro, mezzanino specchiato privé e bottle parade Dom Pérignon',
+      ],
+      musicStyle: 'Live Show Vocale durante la Cena (20:00-00:00) · Luxury Vocal House, Afro-House, Hip-Hop e R&B (00:00-04:30)',
+      crowdProfile: '23-45 anni | Stilisti e ospiti Fashion Week, clientela 5 stelle, modelle, calciatori e gruppi VIP internazionali',
+      bestNights: "Mar Brasilian Dinner & From Brasil to Milan · Mer Tussy · Gio Saint · Ven ClubForLife · Sab Konekt · Dom Sweetie",
+      nearestMetro: 'M3 Gialla Turati (180 m, 2 min a piedi) oppure M1 Rossa Palestro (450 m) fino a Via Daniele Manin 21',
+      pricingTable: [
+        { zone: "The Philipp's Show · Cena & Spettacolo Live (ore 20:00)", price: 'Prenotazione Concierge', details: 'Cucina Executive Chef Roberto Conti, live show ore 21:45 e passaggio diretto al club di mezzanotte' },
+        { zone: 'Brasilian Dinner Show (Ogni Martedì ore 20:00)', price: 'Prenotazione Concierge', details: 'Cena spettacolo brasiliana seguita a mezzanotte dal party From Brasil to Milan' },
+        { zone: 'Tavolo VIP Pista Lampadari (00:00-04:30)', price: 'Su quotazione Concierge (100% credito bottiglie)', details: 'Divanetto riservato in velluto sotto i lampadari di cristallo con accoglienza hostess' },
+        { zone: 'Mezzanino Specchiato & Super VIP Console', price: 'Su quotazione Concierge (Magnum / Dom Pérignon)', details: 'Area privata sopraelevata e postazioni a contatto con la console DJ' },
+      ],
+      insiderTips: [
+        "Prenotare il tavolo per The Philipp's Show alle 20:00 permette di godersi la cena firmata dallo Chef Roberto Conti e lo spettacolo delle 21:45 trovandosi già all'interno prima della selezione di mezzanotte.",
+        'Selezione rigorosamente Haute Couture & Sartoriale: camicia, blazer e scarpe eleganti obbligatori per gli uomini.',
+      ],
+      faqs: [
+        {
+          q: "Dove si trova il Philipp's Milano di Philipp Plein e come si svolge la serata?",
+          a: "Il Philipp's Milano si trova dentro The Plein Hotel in Via Daniele Manin 21 (Palazzo Melzi d'Eril, a 180 m da M3 Turati). Apre alle 20:00 per ristorante e cena spettacolo The Philipp's Show (live show alle 21:45) e da mezzanotte alle 04:30 diventa luxury club.",
+        },
+        {
+          q: "Quali sono tutte le serate settimanali del Philipp's Milano?",
+          a: "La programmazione ufficiale prevede Martedì (Brasilian Dinner Show + From Brasil to Milan), Mercoledì (Tussy), Giovedì (Saint), Venerdì (ClubForLife), Sabato (Konekt) e Domenica (Sweetie), oltre a The Philipp's Show dal mercoledì alla domenica.",
+        },
+        {
+          q: "Come si prenota la cena spettacolo o un Tavolo VIP al Philipp's Milano?",
+          a: "Scrivi al Concierge Nightlife Milan su WhatsApp al +39 351 912 7047 indicando data, numero di ospiti e formula scelta (Cena Spettacolo ore 20:00 o Tavolo VIP Club ore 00:00) per ricevere disponibilità in tempo reale.",
+        },
+      ],
+    },
+  },
+  'v-theclub': {
+    en: {
+      tagline: 'Historic Brera & Moscova Nightlife Icon | 5 Weekly Formats (Wed-Sun), International Crowd & VIP Bottle Service Since 2005',
+      highlights: [
+        'Prime central location at Corso Garibaldi 97 (120 m from M2 Moscova) in the heart of Brera / Corso Como',
+        '5 iconic weekly nights (23:30-05:30): Wed ONE TWO, Thu ATLANTA, Fri FIRST CLASS, Sat GIRLS REPUBLIC, Sun SUPERBE',
+        'Special Holiday Opening on Monday 7 December 2026 (Sant’Ambrogio Night, pre-sale €15W / €25M, tables from €400)',
+        'Three distinct VIP table tiers: Main Dancefloor, Privé Lato Consolle & Super VIP Backstage',
+      ],
+      musicStyle: 'Hip-Hop, Trap, Reggaeton, R&B, Vocal House & International Party Anthems',
+      crowdProfile: '18-35 | International fashion models, university students, Erasmus crowd, athletes & VIP bottle groups',
+      bestNights: 'Wed One Two (Hip-Hop) · Thu Atlanta · Fri First Class · Sat Girls Republic · Sun Superbe + Dec 7 Sant’Ambrogio & NYE 2027',
+      nearestMetro: 'M2 Green Line Moscova (120 m, 2 min walk to Corso Garibaldi 97) or M2 Lanza Brera',
+      pricingTable: [
+        { zone: 'Pre-Sale / Accredited Entry (23:30-01:00)', price: '€15 Woman / €20 - €25 Man', details: 'Includes 1 drink; confirm weekly or holiday entry options via WhatsApp Concierge' },
+        { zone: 'Dancefloor VIP Table (Pista)', price: 'From €400 (max 10-12 guests)', details: 'Includes 2 standard spirit bottles with mixers & priority skip-the-line admission' },
+        { zone: 'Privé Lato Consolle Table', price: 'From €440 - €500 (max 10-12 guests)', details: 'Elevated console-side booth with 2 bottles included & dedicated table service' },
+        { zone: 'Super VIP Backstage / Console', price: 'From €600 - €1,200', details: 'Prime stage-level booth right behind the DJ for Magnum & Champagne bottle parades' },
+      ],
+      insiderTips: [
+        'Wednesday ONE TWO and Sunday SUPERBE are Milan’s two longest-running urban/hip-hop benchmarks, while Thursday ATLANTA draws the largest international student and model crowd in Brera.',
+        'For groups of men on Friday (First Class), Saturday (Girls Republic), or Monday Dec 7 (Sant’Ambrogio), booking a €400-€440 table guarantees fast-track entry.',
+      ],
+      faqs: [
+        {
+          q: 'What are the weekly nights at The Club Milano (Corso Garibaldi 97)?',
+          a: 'The Club Milano runs 5 flagship nights from 23:30 to 05:30: Wednesday ONE TWO (Hip-Hop), Thursday ATLANTA (International since 2005), Friday FIRST CLASS (Fashion & House/Hip-Hop), Saturday GIRLS REPUBLIC, and Sunday SUPERBE (Hip-Hop, Trap, Reggaeton), plus special holiday openings like Sant’Ambrogio (Mon Dec 7) and NYE 2027.',
+        },
+        {
+          q: 'How much does a VIP table cost at The Club Milano in 2026/2027?',
+          a: 'Verified table packages start at €400 on the Dancefloor (2 bottles included, up to 10-12 guests), €440 in Privé Lato Consolle (2 bottles), and €600-€1,200 in the Super VIP Console zone.',
+        },
+      ],
+    },
+    it: {
+      tagline: 'Storica Icona di Brera e Moscova | 5 Format Settimanali (Mer-Dom), Pubblico Internazionale e Tavoli VIP dal 2005',
+      highlights: [
+        'Posizione centrale in Corso Garibaldi 97 (a 120 m da M2 Moscova) tra Brera, Largo La Foppa e Corso Como',
+        '5 serate iconiche a settimana (23:30-05:30): Mer ONE TWO, Gio ATLANTA, Ven FIRST CLASS, Sab GIRLS REPUBLIC, Dom SUPERBE',
+        'Apertura speciale Sant’Ambrogio Lunedì 7 Dicembre 2026 (prevendita 15€ Donna / 25€ Uomo, tavoli da 400€ con 2 bottiglie)',
+        'Tre anelli VIP: Tavoli Pista, Privé Lato Consolle e Super VIP Backstage',
+      ],
+      musicStyle: 'Hip-Hop, Trap, Reggaeton, R&B, Vocal House e Hit Internazionali',
+      crowdProfile: '18-35 anni | Modelle internazionali, universitari Bocconi/Cattolica/IULM, calciatori e gruppi Tavoli VIP',
+      bestNights: 'Mer One Two · Gio Atlanta · Ven First Class · Sab Girls Republic · Dom Superbe + 7 Dicembre Sant’Ambrogio e Capodanno 2027',
+      nearestMetro: 'M2 Verde Moscova (120 m, 2 min a piedi fino a Corso Garibaldi 97) oppure M2 Lanza Brera',
+      pricingTable: [
+        { zone: 'Ingresso Ridotto / Prevendita (23:30-01:00)', price: '15€ Donna / 20€ - 25€ Uomo', details: 'Con 1 drink incluso; verifica formula della serata su WhatsApp +39 351 912 7047' },
+        { zone: 'Tavolo Pista (Dancefloor)', price: 'Da 400€ (max 10-12 ospiti)', details: 'Include 2 bottiglie di distillato base, soft drink e ingresso salta-fila prioritario' },
+        { zone: 'Tavolo Privé Lato Consolle', price: 'Da 440€ - 500€ (max 10-12 ospiti)', details: 'Postazione rialzata lato console con 2 bottiglie incluse e cameriere dedicato' },
+        { zone: 'Tavolo Super VIP Consolle', price: 'Da 600€ - 1.200€', details: 'I tavoli più esclusivi dietro al DJ per formati Magnum e Champagne' },
+      ],
+      insiderTips: [
+        'Il mercoledì ONE TWO e la domenica SUPERBE sono i due format Hip-Hop/Urban più longevi di Milano, mentre il giovedì ATLANTA riunisce dal 2005 il pubblico internazionale di Brera.',
+        'Per gruppi di soli ragazzi il venerdì, sabato o nella notte di Sant’Ambrogio (7 dicembre), prenotare un tavolo da 400-440€ garantisce ingresso prioritario.',
+      ],
+      faqs: [
+        {
+          q: 'Quali sono tutte le serate settimanali del The Club Milano in Corso Garibaldi 97?',
+          a: 'Il The Club Milano è aperto 5 notti a settimana dalle 23:30 alle 05:30: Mercoledì ONE TWO (Hip-Hop), Giovedì ATLANTA (Internazionale), Venerdì FIRST CLASS, Sabato GIRLS REPUBLIC e Domenica SUPERBE (Hip-Hop, Trap, Reggaeton), oltre all’apertura speciale di Sant’Ambrogio (7 dicembre) e Capodanno 2027.',
+        },
+        {
+          q: 'Quanto costa un Tavolo VIP al The Club Milano nel 2026/2027?',
+          a: 'I tavoli Pista partono da 400€ (2 bottiglie incluse, fino a 10-12 persone), il Privé Lato Consolle parte da 440€ (2 bottiglie) e il Super VIP Consolle va da 600€ a 1.200€.',
+        },
+      ],
+    },
+  },
+  'v-mibmilano': {
+    en: {
+      tagline: 'Piazza Affari Singing Dinner Show & Nightclub | 300 Meters from Piazza Duomo (Via Gaetano Negri 10)',
+      highlights: [
+        'Located at Via Gaetano Negri 10 directly opposite Palazzo Mezzanotte (Borsa Italiana) in Piazza Affari, 4 min walk from the Duomo',
+        '4 weekly nights: Wed INTERNATIONAL WEEK & Open Wine Bar, Thu JUSTICE x Fastlife, Fri BILLIONS Dinner Show, Sat LOVE AFFAIR Cena Cantata',
+        'Sant’Ambrogio Holiday Weekend: Sun 6 Dec ATLANTA @ MIB (DJ Set Babyciaga, €15 w/ 2 drinks) & Mon 7 Dec ONETWO @ MIB (€15 w/ 2 drinks)',
+        'Seamless Dinner-to-Club architecture inside a glass-vaulted winter garden that transforms into a central dancefloor at 23:30',
+      ],
+      musicStyle: 'Live Singing Dinner Show (Fri-Sat 20:00-23:30), Commercial & Vocal House, plus Thu/Holiday Hip-Hop, Reggaeton & Trap',
+      crowdProfile: '20-42 | Piazza Affari finance & legal professionals, birthday/bachelorette dinner groups & international students',
+      bestNights: 'Wed International Week · Thu Justice · Fri Billions Dinner Show · Sat Love Affair Cena Cantata + Dec 6/7 Specials & NYE 2027 (€160 Gala)',
+      nearestMetro: 'M1 Red Line Cordusio (150 m, 2 min walk) or M1 / M3 Duomo (350 m) to Via Gaetano Negri 10',
+      pricingTable: [
+        { zone: 'Wednesday Open Wine Bar & International Week (from 20:30)', price: '€15 - €20 / person', details: 'Aperitivo with open wine bar followed by international clubbing till 05:00' },
+        { zone: 'Thursday JUSTICE Urban Night (from 23:00)', price: '€1 before 01:00 · €15W / €20M after 01:00', details: 'Pre-sale entry with 1 drink after 01:00; Hip-Hop, Reggaeton, Trap & R&B' },
+        { zone: 'Fri BILLIONS & Sat LOVE AFFAIR Singing Dinner Show (20:00)', price: '€35 - €55 / person', details: 'Royal Dinner Buffet or Seated Singing Dinner with live performers + full club access' },
+        { zone: 'Club VIP Bottle Table (Wed-Sat & Holidays)', price: '€250 - €800 (6-10 guests)', details: '100% bottle spending credit in Dancefloor or Console Privé with skip-the-line entry' },
+      ],
+      insiderTips: [
+        'Want to dine, sing at your table, and dance steps from Piazza Duomo without moving cars at midnight? Book Saturday LOVE AFFAIR or Friday BILLIONS at 20:30.',
+        'Don’t miss the double Sant’Ambrogio takeover on Sunday 6 December (ATLANTA @ MIB) and Monday 7 December (ONETWO @ MIB) with €15 pre-sale including 2 drinks.',
+      ],
+      faqs: [
+        {
+          q: 'Where is MIB Milano and what are its weekly nights?',
+          a: 'MIB Milano is at Via Gaetano Negri 10 (Piazza Affari, 150 m from M1 Cordusio and 350 m from Duomo). Weekly nights: Wednesday INTERNATIONAL WEEK & Open Wine Bar, Thursday JUSTICE (Urban), Friday BILLIONS (Dinner Show & Club), and Saturday LOVE AFFAIR (Cena Cantata & Club).',
+        },
+        {
+          q: 'How does the Cena Cantata (Singing Dinner Show) work at MIB Milano?',
+          a: 'Every Friday (BILLIONS) and Saturday (LOVE AFFAIR) from 20:00 to 23:30, guests enjoy either a Royal Dinner Buffet or a multi-course seated dinner animated by live vocalists and saxophonists before the room converts into a club until 05:00.',
+        },
+      ],
+    },
+    it: {
+      tagline: 'Cena Cantata Spettacolo e Club in Piazza Affari | A 300 Metri dal Duomo di Milano (Via Gaetano Negri 10)',
+      highlights: [
+        'Indirizzo iconico in Via Gaetano Negri 10 di fronte a Palazzo Mezzanotte (Borsa Italiana) in Piazza Affari, a 4 minuti a piedi dal Duomo',
+        '4 serate settimanali: Mer INTERNATIONAL WEEK & Open Wine Bar, Gio JUSTICE x Fastlife, Ven BILLIONS Dinner Show, Sab LOVE AFFAIR Cena Cantata',
+        'Ponte di Sant’Ambrogio: Dom 6 Dicembre ATLANTA @ MIB (DJ Set Babyciaga, 15€ con 2 drink) e Lun 7 Dicembre ONETWO @ MIB (15€ con 2 drink)',
+        'Giardino d’inverno vetrato che dalle 23:30 si trasforma da ristorante spettacolo in discoteca fino alle 05:00',
+      ],
+      musicStyle: 'Cena Cantata Italiana Live (Ven-Sab 20:00-23:30), Commerciale & Vocal House, più Giovedì/Festivi Hip-Hop, Reggaeton e Trap',
+      crowdProfile: '20-42 anni | Professionisti Piazza Affari, compleanni, lauree, addii al nubilato e pubblico internazionale',
+      bestNights: 'Mer International Week · Gio Justice · Ven Billions · Sab Love Affair Cena Cantata + 6/7 Dicembre e Capodanno 2027 (Cenone 160€)',
+      nearestMetro: 'M1 Rossa Cordusio (150 m, 2 min a piedi) oppure M1 / M3 Duomo (350 m) fino a Via Gaetano Negri 10',
+      pricingTable: [
+        { zone: 'Mercoledì Open Wine Bar & International Week (dalle 20:30)', price: '15€ - 20€ / persona', details: 'Aperitivo con formula Open Wine seguito da serata internazionale fino alle 05:00' },
+        { zone: 'Giovedì JUSTICE x Fastlife (dalle 23:00)', price: '1€ entro 01:00 · 15€ D / 20€ U dopo 01:00', details: 'Dopo le 01:00 include 1 drink; selezione Hip-Hop, Reggaeton, Trap e R&B' },
+        { zone: 'Ven BILLIONS & Sab LOVE AFFAIR Cena Cantata (ore 20:00)', price: '35€ - 55€ / persona', details: 'Royal Buffet riservato o Cena Servita Cantata con live show e discoteca inclusa' },
+        { zone: 'Tavolo VIP Dopocena (Pista & Privé Consolle)', price: '250€ - 800€ (6-10 ospiti)', details: '100% credito bottiglie con ingresso prioritario salta-fila in Piazza Affari' },
+      ],
+      insiderTips: [
+        'Per festeggiare compleanni, lauree o addii al nubilato in pieno centro senza spostare le auto a mezzanotte, prenota il sabato LOVE AFFAIR o il venerdì BILLIONS dalle 20:30.',
+        'Per il ponte di Sant’Ambrogio doppio evento speciale: Domenica 6/12 ATLANTA @ MIB e Lunedì 7/12 ONETWO @ MIB con prevendita a 15€ e 2 drink inclusi.',
+      ],
+      faqs: [
+        {
+          q: 'Dove si trova il MIB Milano e quali sono le sue serate settimanali?',
+          a: 'Il MIB Milano si trova in Via Gaetano Negri 10 (Piazza Affari, a 150 m da M1 Cordusio e 350 m dal Duomo). Serate: Mercoledì INTERNATIONAL WEEK & Open Wine Bar, Giovedì JUSTICE, Venerdì BILLIONS Dinner Show e Sabato LOVE AFFAIR Cena Cantata.',
+        },
+        {
+          q: 'Come funziona la Cena Cantata del venerdì e sabato al MIB Milano?',
+          a: 'Ogni venerdì (BILLIONS) e sabato (LOVE AFFAIR) dalle 20:00 alle 23:30 puoi scegliere tra Royal Buffet con appoggio o Cena Servita animata da vocalist e musicisti dal vivo, restando poi a ballare fino alle 05:00.',
+        },
+      ],
+    },
+  },
+  'v-terrazza21': {
+    en: {
+      tagline: 'Piazza del Duomo #1 Cathedral-View Rooftop | 1st Floor Chef Valerio Braschi, 5th Floor Terrazza MA.RE (2 Michelin Stars) & Nightly DJ Sets',
+      highlights: [
+        'Unrivalled front-row terrace at Piazza del Duomo 21 overlooking the marble spires of Milan Cathedral and Galleria Vittorio Emanuele II',
+        'Dual gastronomic identity: 1st Floor Lounge & Restaurant by Chef Valerio Braschi + 5th Floor Terrazza MA.RE by 2-Michelin-Star Chefs Mario & Remo Capitaneo',
+        'Daily Golden-Hour Sunset Aperitivo (from 18:30) transitioning into late-night House & Commercial DJ sets until 02:00-03:30',
+        'Confirmed New Year’s Eve 2027 packages from €70 (post-midnight) to €300 (1F Braschi Gala), €380 (5F MA.RE Michelin Gala) & €600-€1,200 private terrace tables',
+      ],
+      musicStyle: 'Sunset Chill-House & Skyline Lounge (18:30-22:00) · Vocal House & Commercial Elegance DJ Sets (22:30-03:30)',
+      crowdProfile: '25-48 | International luxury travellers, couples, Fashion Week executives & celebratory VIP terrace groups',
+      bestNights: 'Daily Sunset Aperitivo · Thu Duomo Sunset Lounge · Fri Over Duomo · Sat Skyline Night + NYE 2027 Overlooking Duomo Fireworks',
+      nearestMetro: 'M1 Red / M3 Yellow Duomo (direct exit onto Piazza del Duomo 21, 30 meters from the elevator)',
+      pricingTable: [
+        { zone: 'Golden-Hour Sunset Aperitivo (from 18:30)', price: '€22 - €25 / person', details: 'Signature cocktail + gourmet finger food facing the illuminated Duomo facade' },
+        { zone: '1st Floor Dinner (Chef Valerio Braschi)', price: '€85 - €140 / person', details: 'Contemporary Italian menu with Cathedral views and evening DJ transition' },
+        { zone: 'Evening Lounge & Terrace VIP Bottle Table', price: '€250 - €1,000 (4-10 guests)', details: '100% bottle credit on the outdoor Duomo balcony or indoor crystal room' },
+        { zone: 'New Year’s Eve 2027 (1F Braschi & 5F MA.RE)', price: '€70 - €380 / person', details: 'Official NYE tiers: €70 / €90 toast, €200 buffet, €300 1F Gala, €380 5F 2-Michelin-Star Gala' },
+      ],
+      insiderTips: [
+        'Request an outdoor balustrade table at least 48 hours ahead via WhatsApp (+39 351 912 7047) to watch the sunset light hit the Madonnina spire.',
+        'Strict Smart-Elegant dress code applies from 18:30 onwards: collared shirts/blazers for men, chic evening attire for women.',
+      ],
+      faqs: [
+        {
+          q: 'How do I book an outdoor Duomo-view table at Terrazza Duomo 21 Milan?',
+          a: 'Contact the Nightlife Milan Concierge on WhatsApp at +39 351 912 7047 with your date, preferred time slot (18:30 Sunset Aperitivo, 20:30 Dinner, or 22:30 VIP DJ Table), and guest count.',
+        },
+        {
+          q: 'What is the difference between 1st Floor Terrazza Duomo 21 and 5th Floor Terrazza MA.RE?',
+          a: 'At Piazza del Duomo 21, the 1st Floor houses the iconic cocktail lounge, balcony terrace, and restaurant led by Chef Valerio Braschi, while the 5th Floor hosts Terrazza MA.RE curated by Two-Michelin-Star Chefs Mario and Remo Capitaneo.',
+        },
+      ],
+    },
+    it: {
+      tagline: 'Il Rooftop N.1 in Piazza del Duomo 21 | 1° Piano Chef Valerio Braschi, 5° Piano Terrazza MA.RE (2 Stelle Michelin) e DJ Set Vista Guglie',
+      highlights: [
+        'Affaccio frontale impareggiabile in Piazza del Duomo 21 sulle guglie marmoree della Cattedrale e sull’ingresso della Galleria Vittorio Emanuele II',
+        'Doppia anima gastronomica: 1° Piano Lounge & Ristorante Chef Valerio Braschi + 5° Piano Terrazza MA.RE dei fratelli Mario e Remo Capitaneo (2 Stelle Michelin)',
+        'Sunset Aperitivo panoramico tutti i giorni dalle 18:30 seguito da DJ set House e Commerciale fino alle 02:00-03:30',
+        'Capodanno 2027 ufficiale confermato da 70€ (dopocena) fino a 300€ (Cena Placé Braschi), 380€ (5° Piano MA.RE) e terrazzino privato 1.200€',
+      ],
+      musicStyle: 'Sunset Chill-House & Lounge Panoramico (18:30-22:00) · Vocal House e Commercial Elegance (22:30-03:30)',
+      crowdProfile: '25-48 anni | Viaggiatori internazionali, coppie, manager, ospiti Fashion Week e tavoli VIP vista Duomo',
+      bestNights: 'Tutti i giorni Sunset Aperitivo · Gio Sunset Lounge · Ven Over Duomo · Sab Skyline Night + Capodanno 2027 Vista Fuochi Duomo',
+      nearestMetro: 'M1 Rossa / M3 Gialla Duomo (uscita diretta su Piazza del Duomo 21, a 30 metri dall’ingresso)',
+      pricingTable: [
+        { zone: 'Sunset Aperitivo Vista Guglie (dalle 18:30)', price: '22€ - 25€ / persona', details: 'Signature cocktail con finger food gourmet di fronte alla facciata illuminata del Duomo' },
+        { zone: 'Cena Panoramica 1° Piano (Chef Valerio Braschi)', price: '85€ - 140€ / persona', details: 'Percorso contemporaneo vista Cattedrale con permanenza per il DJ set serale' },
+        { zone: 'Tavolo VIP Serale Terrazza o Sala Vetrata', price: '250€ - 1.000€ (4-10 ospiti)', details: '100% spendibile in bottiglie premium tra balconata esterna e lounge interna' },
+        { zone: 'Capodanno 2027 Ufficiale (1° Piano & 5° Piano MA.RE)', price: '70€ - 380€ / persona', details: 'Anno Nuovo 70€, Brindisi 90€, Buffet 200€, Placé Braschi 300€, 5° Piano MA.RE 380€' },
+      ],
+      insiderTips: [
+        'Richiedi il tavolo sulla balconata esterna almeno 48 ore prima su WhatsApp (+39 351 912 7047) per assicurarti la prima fila sulle guglie al tramonto.',
+        'Dress code Smart Elegant rigoroso fin dall’aperitivo: camicia o giacca per l’uomo, vietati shorts e abbigliamento sportivo.',
+      ],
+      faqs: [
+        {
+          q: 'Come si prenota un tavolo vista Duomo a Terrazza Duomo 21 Milano?',
+          a: 'Scrivi su WhatsApp al +39 351 912 7047 indicando data, fascia oraria (Aperitivo 18:30, Cena 20:30 o Tavolo VIP Dopocena 22:30) e numero di ospiti per ricevere conferma prioritaria.',
+        },
+        {
+          q: 'Qual è la differenza tra il 1° Piano Terrazza Duomo 21 e il 5° Piano Terrazza MA.RE?',
+          a: 'In Piazza del Duomo 21 il 1° Piano ospita la storica terrazza cocktail bar con DJ set e la cucina dello Chef Valerio Braschi, mentre il 5° Piano ospita Terrazza MA.RE firmata dagli Chef 2 Stelle Michelin Mario e Remo Capitaneo.',
+        },
+      ],
+    },
+  },
+  'v-pineta': {
+    en: {
+      tagline: 'Priority #2 Flagship | Crystal-Chandelier Singing Dinner Show, Dual-Room Clubbing (House & Urban) & Zero-Fee Partner Booking (Via Messina 38)',
+      highlights: [
+        'Iconic luxury hall at Via Messina 38 (Porta Garibaldi / M5 Cenisio) crowned by monumental crystal chandeliers',
+        'Famous Italian Aperitivo Cantato & Singing Dinner Show every Friday and Saturday from 20:30 before midnight clubbing',
+        'Two musical souls: Main Crystal Room (Vocal House, Commercial & Sing-Along) + Urban Room (Hip-Hop, Reggaeton & Tr3ndy Society)',
+        'Official Moulin Rouge NYE 2027 Partner: €40 Royal Buffet, €40 Club Entry, €160 Seated Gala & €300-€1,500 VIP Tables (zero agency fees)',
+      ],
+      musicStyle: 'Italian Singing Aperitivo & Dinner Show (20:30-23:30) · Vocal House, Commercial, Reggaeton & Hip-Hop (23:30-05:00)',
+      crowdProfile: '20-42 | Stylish Milanese crowd, birthday/graduation celebrations, fashion insiders & VIP bottle tables',
+      bestNights: 'Thu Tr3ndy Society · Fri Aperitivo Cantato & Live · Sat Luxury Dinner Show & Club + Moulin Rouge NYE 2027',
+      nearestMetro: 'M5 Purple Line Cenisio (180 m, 3 min walk) or Tram 12 & 14 right outside Via Messina 38',
+      pricingTable: [
+        { zone: 'Singing Aperitivo / Royal Buffet (from 20:30)', price: '€15 - €25 / person', details: 'Reserved table beneath the crystal chandeliers, gourmet buffet, 1 drink & live vocal show' },
+        { zone: 'Club Entry via Official Xceed / Guestlist', price: 'From €15 - €20 w/ drink', details: 'Direct zero-fee fast-pass on Xceed (nightlifemilan-1) or WhatsApp accreditation' },
+        { zone: 'Main Room & Elevated Privé VIP Tables', price: '€300 - €900 (6-10 guests)', details: '100% bottle spending credit with skip-the-line hostess admission' },
+        { zone: 'Moulin Rouge NYE 2027 (Dec 31 · 20:30-05:00)', price: '€40 Buffet/Club · €160 Gala', details: 'Official partner rates: €40 Royal Buffet, €40 Club, €160 Gala (wine 1/3), VIP Tables €300-€1,500' },
+      ],
+      insiderTips: [
+        'Pineta is Milan’s top venue when your group wants both an electric Italian singing dinner at 20:30 and two full dancefloors (Commercial/House + Reggaeton/Hip-Hop) till 05:00.',
+        'Book directly via our official Xceed partner link or WhatsApp (+39 351 912 7047) with 0% agency markup.',
+      ],
+      faqs: [
+        {
+          q: 'How does the Aperitivo Cantato & Cena Cantata work at Pineta Milano?',
+          a: 'Every Friday and Saturday from 20:30 at Via Messina 38, guests dine at reserved tables under crystal chandeliers while live vocalists lead Italian and international sing-along hits, seamlessly converting into a two-room nightclub at 23:30.',
+        },
+        {
+          q: 'What are the official Moulin Rouge NYE 2027 prices at Pineta Club Milano?',
+          a: 'Verified partner rates for December 31, 2026 are €40 Royal Buffet (20:30), €40 Club Entry (23:00), €160 Seated Gala Dinner (21:00, 1 wine bottle per 3 guests), and VIP tables from €300 to €1,500.',
+        },
+      ],
+    },
+    it: {
+      tagline: 'Scelta Top N.2 Partner | Aperitivo e Cena Cantata sotto i Lampadari di Cristallo, Doppia Sala House/Urban e Zero Commissioni (Via Messina 38)',
+      highlights: [
+        'Salone monumentale in Via Messina 38 (Porta Garibaldi / M5 Cenisio) illuminato da iconici lampadari di cristallo',
+        'Celebre Aperitivo Cantato e Cena Spettacolo ogni Venerdì e Sabato dalle 20:30 prima della discoteca',
+        'Doppia anima musicale: Main Room (Vocal House, Commerciale e Hit Cantate) + Urban Room (Hip-Hop, Reggaeton e Tr3ndy Society)',
+        'Capodanno 2027 Moulin Rouge Partner Ufficiale: Buffet 40€, Solo Club 40€, Cena di Gala 160€ e Tavoli VIP 300-1.500€ a zero commissioni',
+      ],
+      musicStyle: 'Aperitivo e Cena Cantata Italiana (20:30-23:30) · Vocal House, Commerciale, Reggaeton e Hip-Hop (23:30-05:00)',
+      crowdProfile: '20-42 anni | Pubblico milanese elegante, compleanni, feste di laurea, addii al nubilato e tavoli VIP',
+      bestNights: 'Gio Tr3ndy Society · Ven Aperitivo Cantato & Live · Sab Saturday Live & Club + Capodanno 2027 Moulin Rouge',
+      nearestMetro: 'M5 Lilla Cenisio (180 m, 3 min a piedi) oppure Tram 12 e 14 davanti a Via Messina 38',
+      pricingTable: [
+        { zone: 'Aperitivo Cantato & Tavolo Riservato (dalle 20:30)', price: '15€ - 25€ / persona', details: 'Tavolo d’appoggio sotto i lampadari di cristallo, royal buffet, 1 drink e show cantato' },
+        { zone: 'Ingresso Club Ufficiale Xceed / Lista', price: 'Da 15€ - 20€ con drink', details: 'Salta-fila ufficiale a zero commissioni su Xceed (nightlifemilan-1) o WhatsApp' },
+        { zone: 'Tavoli VIP Pista & Privé Rialzato', price: '300€ - 900€ (6-10 ospiti)', details: '100% credito in bottiglie con accoglienza prioritaria hostess' },
+        { zone: 'Capodanno 2027 Moulin Rouge (31/12 · 20:30-05:00)', price: '40€ Buffet/Club · 160€ Gala', details: 'Tariffe partner: Royal Buffet 40€, Club 40€, Gala 160€ (vino 1/3), Tavoli VIP 300-1.500€' },
+      ],
+      insiderTips: [
+        'Il Pineta è la scelta n.1 a Milano quando il gruppo vuole unire l’energia della cena cantata italiana alle 20:30 e due vere piste da ballo (House/Commerciale + Urban/Reggaeton) fino alle 05:00.',
+        'Prenotando tramite il canale ufficiale Nightlife Milan (Xceed o WhatsApp +39 351 912 7047) paghi il listino puro del locale con 0% commissioni.',
+      ],
+      faqs: [
+        {
+          q: 'Come funzionano l’Aperitivo Cantato e la Cena Spettacolo al Pineta Milano?',
+          a: 'Ogni venerdì e sabato dalle 20:30 in Via Messina 38 si cena e si canta ai tavoli riservati sotto i lampadari di cristallo con vocalist dal vivo, per poi proseguire dalle 23:30 alle 05:00 nelle due sale club senza cambiare locale.',
+        },
+        {
+          q: 'Quali sono i prezzi ufficiali di Capodanno 2027 Moulin Rouge al Pineta Milano?',
+          a: 'Il listino partner confermato per il 31 dicembre 2026 prevede Royal Buffet 40€ (ore 20:30), Solo Club 40€ (ore 23:00), Cena di Gala servita 160€ (ore 21:00 con 1 bottiglia di vino ogni 3 ospiti) e Tavoli VIP da 300€ a 1.500€.',
+        },
+      ],
+    },
+  },
+  'v-voya': {
+    en: {
+      tagline: 'Milan’s #1 20th-Floor Panoramic Rooftop (85m High) | Sunset Aperitivo, Skyline Dining & VIP Lounge Overlooking CityLife',
+      highlights: [
+        'Perched 85 meters high on the 20th floor of Torre WJC (Viale Achille Papa 30) with 360-degree glass walls facing CityLife skyscrapers',
+        'Open Tuesday through Sunday for Sunset Aperitivo, À la Carte Skyline Dinner, Sunday Brunch, and panoramic DJ sets',
+        'Confirmed Christmas Day Lunch/Dinner (Dec 25: €100 official menu / €120 online checkout)',
+        'Confirmed #1 Rooftop New Year’s Eve 2027 (Dec 31: €300 6-course seafood gala + wine 1/4 + fireworks + DJ set till 05:00; €360 online checkout)',
+      ],
+      musicStyle: 'Panoramic Sunset Deep House, Soulful Vocal House & Upscale Commercial Lounge',
+      crowdProfile: '25-48 | International executives, couples, CityLife & Portello residents, stylish birthday & corporate groups',
+      bestNights: 'Tue-Sat Rooftop Experience (Sunset Aperitivo, Dinner & DJ Set) · Sun Skyline Brunch + Dec 25 Christmas & Dec 31 NYE Gala',
+      nearestMetro: 'M5 Purple Line Portello (400 m, 5 min walk) or M1 Red Line Lotto / QT8 to Viale Achille Papa 30',
+      pricingTable: [
+        { zone: '20th-Floor Sunset Aperitivo (from 19:00)', price: '€20 - €30 / person', details: 'Reserved panoramic lounge seating, gourmet finger food & signature cocktail at 85m altitude' },
+        { zone: 'Panoramic Skyline Dinner (À la Carte)', price: '€65 - €110 / person', details: 'Window-side dining overlooking the illuminated CityLife towers with live DJ transition' },
+        { zone: 'Sky Lounge VIP Bottle Table', price: 'From €250 - €800 (6-10 guests)', details: '100% bottle spending credit with priority private-elevator hostess access' },
+        { zone: 'NYE 2027 All-Inclusive 6-Course Gala (Dec 31)', price: '€300 (€360 online)', details: '6 seafood courses + lentils, 1 wine bottle per 4, midnight toast, 360° fireworks & DJ till 05:00' },
+      ],
+      insiderTips: [
+        'Window tables facing the Three Towers of CityLife book out 2-3 days in advance on Fridays and Saturdays: message WhatsApp +39 351 912 7047 early to lock the glass-edge row.',
+        'Because Voya is fully glass-enclosed and climate-controlled on the 20th floor, you enjoy uninterrupted 360° skyline and fireworks views even in mid-winter.',
+      ],
+      faqs: [
+        {
+          q: 'Where is Voya Rooftop Milan located and is it open in winter?',
+          a: 'Voya Rooftop is on the 20th floor (85 meters high) at Viale Achille Papa 30 in the Portello / CityLife district (5 min from M5 Portello). Its floor-to-ceiling heated glass lounge operates year-round in every season.',
+        },
+        {
+          q: 'How much is New Year’s Eve 2027 at Voya Rooftop Milan?',
+          a: 'The confirmed official single rate is €300 per person including the 6-course gourmet menu, after-midnight cotechino and lentils, 1 bottle of wine every 4 guests, midnight toast, and DJ set until 05:00 (€360 per person via direct online checkout inclusive of booking and transaction fees).',
+        },
+      ],
+    },
+    it: {
+      tagline: 'Il Rooftop Panoramico N.1 di Milano al 20° Piano (85m) | Aperitivo Vista Skyline, Cena e Tavoli VIP di Fronte a CityLife',
+      highlights: [
+        'Sospeso a 85 metri d’altezza al 20° piano della Torre WJC (Viale Achille Papa 30) con vetrate a tutta altezza a 360° sui grattacieli di CityLife',
+        'Aperto da Martedì a Domenica tra Sunset Aperitivo, Cena Panoramica, Skyline Brunch domenicale e DJ set fino a tarda notte',
+        'Pranzo/Cena di Natale confermato (25 Dicembre: menù ufficiale 100€ / acquisto diretto online 120€)',
+        'Capodanno Rooftop N.1 di Milano 2027 (31 Dicembre: menù 6 portate di mare 300€ con vino 1/4, fuochi a 360° e DJ set fino alle 05:00; 360€ online)',
+      ],
+      musicStyle: 'Sunset Deep House, Soulful Vocal House e Commercial Lounge d’Alta Quota',
+      crowdProfile: '25-48 anni | Coppie, manager internazionali, compleanni panoramici, lauree ed eventi aziendali',
+      bestNights: 'Mar-Sab Rooftop Experience (Aperitivo, Cena & DJ Set) · Dom Skyline Brunch + 25 Dicembre Natale e 31 Dicembre Capodanno',
+      nearestMetro: 'M5 Lilla Portello (400 m, 5 min a piedi) oppure M1 Rossa Lotto / QT8 fino a Viale Achille Papa 30',
+      pricingTable: [
+        { zone: 'Sunset Aperitivo al 20° Piano (dalle 19:00)', price: '20€ - 30€ / persona', details: 'Tavolo panoramico riservato a 85 metri d’altezza con finger food gourmet e 1 cocktail' },
+        { zone: 'Cena Panoramica Vista Grattacieli', price: '65€ - 110€ / persona', details: 'Tavolo fronte vetrata sullo skyline illuminato di CityLife con prosecuzione DJ set' },
+        { zone: 'Tavolo VIP Sky Lounge (Dopocena)', price: 'Da 250€ - 800€ (6-10 ospiti)', details: '100% credito in bottiglie con salita dedicata in ascensore veloce' },
+        { zone: 'Capodanno 2027 Menù Completo 6 Portate (31/12)', price: '300€ (360€ online)', details: '6 portate di mare + cotechino e lenticchie, 1 vino ogni 4, brindisi, fuochi 360° e DJ fino alle 05:00' },
+      ],
+      insiderTips: [
+        'I tavoli attaccati alla vetrata panoramica verso le Tre Torri di CityLife vanno esauriti con 2-3 giorni di anticipo nel weekend: scrivi su WhatsApp al +39 351 912 7047 per bloccare la prima fila.',
+        'Essendo interamente vetrato e climatizzato al 20° piano, il Voya garantisce vista totale a 360° sullo skyline e sui fuochi d’artificio anche in pieno inverno.',
+      ],
+      faqs: [
+        {
+          q: 'Dove si trova il Voya Rooftop Milano ed è aperto anche in inverno?',
+          a: 'Il Voya Rooftop si trova al 20° piano (85 metri d’altezza) in Viale Achille Papa 30, zona Portello / CityLife (a 5 minuti da M5 Portello). Grazie al salone panoramico interamente vetrato e riscaldato è aperto tutto l’anno.',
+        },
+        {
+          q: 'Quanto costa il Capodanno 2027 al Voya Rooftop Milano?',
+          a: 'La tariffa unica ufficiale è di 300€ a persona e comprende menù servito a 6 portate di mare, cotechino e lenticchie dopo mezzanotte, 1 bottiglia di vino ogni 4 ospiti, brindisi e DJ set fino alle 05:00 (360€ a persona con acquisto diretto online comprensivo dei diritti di prenotazione e transazione).',
         },
       ],
     },
@@ -1356,7 +1636,7 @@ export default async function ClubPage({ params }: Props) {
 
   const isWhatsAppOnlyVenue = [
     'v-voya', 'v-55milano', 'v-55', 'v-11clubroom', 'v-church81', 'v-mibmilano', 'v-dazi',
-    'v-gattopardo', 'v-terrazza21', 'v-theclub', 'v-tocqueville', 'v-alcatraz', 'v-fabrique', 'v-amnesia'
+    'v-gattopardo', 'v-terrazza21', 'v-theclub', 'v-tocqueville', 'v-alcatraz', 'v-fabrique', 'v-amnesia', 'v-philipps'
   ].includes(venue.id);
 
   const image = venue.image || venue.gallery?.[0] || '/images/milan-nightclub-luxury-vip-champagne.webp';
@@ -1407,6 +1687,10 @@ export default async function ClubPage({ params }: Props) {
     'v-pineta': 'corso-como',
     'v-repvblic': 'corso-como',
     'v-tocqueville': 'corso-como',
+    'v-philipps': 'brera',
+    'v-theclub': 'brera',
+    'v-mibmilano': 'duomo-centro',
+    'v-terrazza21': 'duomo-centro',
   };
   const canonicalZoneSlug =
     priorityZoneByVenue[venue.id] ||
@@ -1414,7 +1698,20 @@ export default async function ClubPage({ params }: Props) {
     'corso-como';
   const canonicalZone = mockZones.find((z) => z.slug === canonicalZoneSlug) || mockZones[0];
   const localizedZoneSlug = getLocalizedZoneSlug35(canonicalZoneSlug, locCode);
-  const reciprocalGuideIds = ['g-dress-code', 'g-vip-bottle-prices', 'g-new-years-eve-2027', 'g-115', 'g-116', 'g-118'];
+  const venueDedicatedGuides: Record<string, string[]> = {
+    'v-justme': ['g-15', 'g-60'],
+    'v-pineta': ['g-16', 'g-60'],
+    'v-voya': ['g-18', 'g-rooftops-milan'],
+    'v-terrazza21': ['g-32', 'g-rooftops-milan'],
+    'v-mibmilano': ['g-31', 'g-60'],
+    'v-theclub': ['g-28', 'g-119'],
+    'v-philipps': ['g-126', 'g-60'],
+    'v-55milano': ['g-19', 'g-60'],
+    'v-repvblic': ['g-20', 'g-119'],
+  };
+  const reciprocalGuideIds = Array.from(
+    new Set([...(venueDedicatedGuides[venue.id] || []), 'g-dress-code', 'g-vip-bottle-prices', 'g-new-years-eve-2027', 'g-115', 'g-116', 'g-118']),
+  ).slice(0, 6);
   const openCapEvent = (() => {
     const matched = getCapodannoEventForClub(venue.slugs.en, name);
     return matched && !matched.closedForNye && !matched.soldOutForNye ? matched : undefined;

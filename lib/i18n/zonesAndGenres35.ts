@@ -1,6 +1,7 @@
 import type { LocaleCode } from './localeRegistry';
 import { ALL_35_LOCALES } from './localizedSlugs35';
 import { REGGAETON_35_PACKS } from './reggaetonSeo35';
+import { CENA_CANTATA_35_PACKS } from './cenaCantataSeo35';
 
 export interface LocalizedChapter35 {
   id: string;
@@ -1447,21 +1448,31 @@ export function getGenreLocalized35(genreSlug: string, locale: LocaleCode): Genr
     },
   ];
 
-  const h1 = locale === 'it'
-    ? `Discoteche ${name} a Milano`
-    : locale === 'en'
-      ? `${name} Clubs in Milan`
-      : `${name} (${pack.city})`;
+  const regPack = normSlug === 'reggaeton' ? (REGGAETON_35_PACKS[locale] || REGGAETON_35_PACKS.en) : null;
+  const cenaPack = normSlug === 'dinner-show' ? (CENA_CANTATA_35_PACKS[locale] || CENA_CANTATA_35_PACKS.en) : null;
+
+  const h1 = cenaPack
+    ? cenaPack.h1Override
+    : locale === 'it'
+      ? `Discoteche ${name} a Milano`
+      : locale === 'en'
+        ? `${name} Clubs in Milan`
+        : `${name} (${pack.city})`;
 
   const lead = pack.genreSecSound(name, clubsText)[0];
 
-  const regPack = normSlug === 'reggaeton' ? (REGGAETON_35_PACKS[locale] || REGGAETON_35_PACKS.en) : null;
-  const seoTitle = regPack ? regPack.seoTitle : pack.genreTitleFmt(name);
-  const seoDescription = regPack ? regPack.seoDescription : pack.genreDescFmt(name);
+  const seoTitle = regPack ? regPack.seoTitle : cenaPack ? cenaPack.seoTitle : pack.genreTitleFmt(name);
+  const seoDescription = regPack ? regPack.seoDescription : cenaPack ? cenaPack.seoDescription : pack.genreDescFmt(name);
   const baseFaqs = pack.faqPairs('genre', name, subtitle, clubsText);
   const faqs = regPack
     ? [{ question: regPack.nyeFaqQ, answer: regPack.nyeFaqA }, ...baseFaqs]
-    : baseFaqs;
+    : cenaPack
+      ? [
+          { question: cenaPack.nyeFaqQ, answer: cenaPack.nyeFaqA },
+          { question: cenaPack.priceFaqQ, answer: cenaPack.priceFaqA },
+          ...baseFaqs,
+        ]
+      : baseFaqs;
 
   return {
     slug: normSlug,

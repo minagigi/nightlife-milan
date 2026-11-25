@@ -28,9 +28,9 @@ import {
   VENUE_AUTHORITY_33,
 } from '../lib/venueAuthority33';
 
-test('Pillar A: all 33 active public venues have full authority specs, SERP meta, FAQs, and rich Club schema', () => {
-  assert.equal(mockVenues.length, 33);
-  assert.equal(Object.keys(VENUE_AUTHORITY_33).length, 33);
+test('Pillar A: all 35 active public venues have full authority specs, SERP meta, FAQs, and rich Club schema', () => {
+  assert.equal(mockVenues.length, 35);
+  assert.equal(Object.keys(VENUE_AUTHORITY_33).length, 35);
   assert.equal(Object.keys(CLUB_SERP_35).length, 35);
 
   for (const venue of mockVenues) {

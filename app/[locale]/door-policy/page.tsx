@@ -111,6 +111,18 @@ const dressCodeData: Record<string, {
     tip: 'The deconsecrated church setting demands a respectful elegance. The international crowd here sets a naturally high bar.',
     tipIt: 'L\'ambientazione nella chiesa sconsacrata richiede un\'eleganza rispettosa. Il pubblico internazionale impone uno standard naturalmente elevato.',
   },
+  'v-philipps': {
+    label: 'Haute Couture & Strictly Elegant',
+    labelIt: 'Haute Couture & Rigorosamente Elegante',
+    minAge: 21,
+    strictness: 3,
+    allowed: ['Tailored suit or blazer', 'Collared dress shirt', 'Leather loafers or dress shoes', 'Cocktail dress or luxury eveningwear for women'],
+    allowedIt: ['Abito sartoriale o blazer', 'Camicia elegante con colletto', 'Mocassini o scarpe eleganti in pelle', 'Abito da cocktail o eveningwear di lusso per la donna'],
+    banned: ['Athletic sneakers', 'Tracksuits or hoodies', 'Shorts', 'Caps or hats', 'Ripped jeans or sportswear'],
+    bannedIt: ['Sneakers sportive', 'Tute o felpe con cappuccio', 'Shorts', 'Cappellini', 'Jeans strappati o abbigliamento sportivo'],
+    tip: 'Located inside The Plein Hotel (Via Daniele Manin 21), Philipp’s enforces a luxury fashion-district door standard. Booking a 20:00 Dinner Show or VIP table via Concierge ensures priority hostess admission.',
+    tipIt: 'All’interno di The Plein Hotel (Via Daniele Manin 21), il Philipp’s applica uno standard di selezione alta moda. Prenotare il tavolo Dinner Show delle 20:00 o il Tavolo VIP garantisce accoglienza prioritaria con hostess.',
+  },
   'v-theclub': {
     label: 'Smart Casual',
     labelIt: 'Smart Casual',

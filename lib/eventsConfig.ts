@@ -865,5 +865,393 @@ export const weeklyEvents: WeeklyEvent[] = [
     faqs: defaultFaqs('Repvblic', 'Piazza della Repubblica 12, Milan', '18+', 'Urban Chic', 'Hip-Hop and Trap'),
     image: '/images/events/weekly-posters/repvblic-sunday.webp',
     priority: 75
+  },
+
+  // --- PHILIPP'S MILANO · THE PLEIN HOTEL (Tue-Sun · Dinner Show 20:00 + Luxury Club 00:00-04:30 · Concierge WhatsApp only) ---
+  {
+    id: 'philipps-tuesday',
+    clubSlug: 'philipps',
+    clubName: "Philipp's Milano",
+    day: 'tuesday',
+    dayOfWeek: 2,
+    eventSlug: 'from-brasil-to-milan',
+    name: 'Brasilian Dinner Show & From Brasil to Milan',
+    genres: ['Latin', 'Afro House', 'House'],
+    target: '23+, Fashion Crowd, International Jet-Set',
+    description: {
+      en: "Every Tuesday at Philipp's Milano inside The Plein Hotel (Via Daniele Manin 21): start at 20:00 with the vibrant Brasilian Dinner Show curated by Executive Chef Roberto Conti with live performers, followed from midnight till 04:30 by the From Brasil to Milan luxury club party. Dinner tables and VIP bottle service reserved via WhatsApp +39 351 912 7047.",
+      it: "Ogni martedì al Philipp's Milano dentro The Plein Hotel (Via Daniele Manin 21): dalle 20:00 il Brasilian Dinner Show firmato dall'Executive Chef Roberto Conti con performance dal vivo, seguito da mezzanotte alle 04:30 dal party club From Brasil to Milan. Tavoli cena e tavoli VIP club su WhatsApp al +39 351 912 7047."
+    },
+    pricing: { aperitif: 'Dinner Show 20:00 (Concierge Quote)', club: 'Club 00:00–04:30 (VIP Concierge)', tables: 'VIP Bottle Service (100% credit via WhatsApp)' },
+    dressCode: { en: 'Haute Couture & Strictly Elegant (blazer/collared shirt mandatory).', it: 'Haute Couture e Rigorosamente Elegante (camicia e giacca richieste).' },
+    faqs: defaultFaqs("Philipp's Milano", 'Via Daniele Manin 21 (The Plein Hotel), Milan', '23+', 'Haute Couture & Strictly Elegant', 'Brazilian Rhythms, Afro House and Luxury House'),
+    image: '/images/events/weekly-posters/philipps-tuesday-brasil.webp',
+    priority: 72
+  },
+  {
+    id: 'philipps-wednesday',
+    clubSlug: 'philipps',
+    clubName: "Philipp's Milano",
+    day: 'wednesday',
+    dayOfWeek: 3,
+    eventSlug: 'tussy',
+    name: "TUSSY · Wednesday Night & The Philipp's Show",
+    genres: ['House', 'Hip-Hop', 'Commercial'],
+    target: '23+, Models, Fashion Insiders, International VIPs',
+    description: {
+      en: "Wednesday nights at Philipp's Milano (The Plein Hotel, Via Daniele Manin 21) open at 20:00 with The Philipp's Show fine-dining theatrical dinner (live show at 21:45) and ignite at midnight with TUSSY until 04:30 beneath crystal chandeliers. Reserve dining or VIP club tables via WhatsApp +39 351 912 7047.",
+      it: "Il mercoledì al Philipp's Milano (The Plein Hotel, Via Daniele Manin 21) si apre alle 20:00 con la cena spettacolo The Philipp's Show (live show 21:45) e prosegue da mezzanotte alle 04:30 con il format club TUSSY sotto i lampadari di cristallo. Prenotazioni cena e tavoli VIP su WhatsApp al +39 351 912 7047."
+    },
+    pricing: { aperitif: "The Philipp's Show 20:00", club: 'TUSSY Club 00:00–04:30 (Concierge)', tables: 'Chandelier Floor & Mezzanine Privé via WhatsApp' },
+    dressCode: { en: 'Haute Couture & Strictly Elegant.', it: 'Haute Couture e Rigorosamente Elegante.' },
+    faqs: defaultFaqs("Philipp's Milano", 'Via Daniele Manin 21 (The Plein Hotel), Milan', '23+', 'Haute Couture & Strictly Elegant', 'House, Hip-Hop and International Club Hits'),
+    image: '/images/events/weekly-posters/philipps-wednesday-tussy.webp',
+    priority: 72
+  },
+  {
+    id: 'philipps-thursday',
+    clubSlug: 'philipps',
+    clubName: "Philipp's Milano",
+    day: 'thursday',
+    dayOfWeek: 4,
+    eventSlug: 'saint',
+    name: "SAINT · Thursday Night & The Philipp's Show",
+    genres: ['Afro House', 'House', 'Electronic'],
+    target: '23+, Fashion & Luxury Hospitality Crowd',
+    description: {
+      en: "Thursday at Philipp's Milano (Via Daniele Manin 21, The Plein Hotel) pairs Executive Chef Roberto Conti's 20:00 Dinner Show with SAINT from 00:00 to 04:30, delivering Afro-House and Melodic House sets for Milan's fashion crowd. Direct concierge reservations on WhatsApp +39 351 912 7047.",
+      it: "Il giovedì del Philipp's Milano (Via Daniele Manin 21, The Plein Hotel) unisce il Dinner Show delle 20:00 dello Chef Roberto Conti al party SAINT dalle 00:00 alle 04:30, tra sonorità Afro-House e House per il pubblico della moda. Prenotazioni Concierge su WhatsApp al +39 351 912 7047."
+    },
+    pricing: { aperitif: "The Philipp's Show 20:00", club: 'SAINT Club 00:00–04:30 (Concierge)', tables: 'VIP Bottle Service via WhatsApp' },
+    dressCode: { en: 'Haute Couture & Strictly Elegant.', it: 'Haute Couture e Rigorosamente Elegante.' },
+    faqs: defaultFaqs("Philipp's Milano", 'Via Daniele Manin 21 (The Plein Hotel), Milan', '23+', 'Haute Couture & Strictly Elegant', 'Afro House and Luxury Vocal House'),
+    image: '/images/events/weekly-posters/philipps-thursday-saint.webp',
+    priority: 72
+  },
+  {
+    id: 'philipps-friday',
+    clubSlug: 'philipps',
+    clubName: "Philipp's Milano",
+    day: 'friday',
+    dayOfWeek: 5,
+    eventSlug: 'club-for-life',
+    name: "CLUB FOR LIFE · Friday Night at Philipp's",
+    genres: ['House', 'Commercial', 'Afro House'],
+    target: '25+, International Jet-Set, Celebrities & VIPs',
+    description: {
+      en: "Friday nights come alive with CLUB FOR LIFE at Philipp's Milano inside Philipp Plein's flagship hotel (Via Daniele Manin 21). Begin at 20:00 with The Philipp's Show dinner performance and continue from midnight to 04:30 with luminous Dom Pérignon bottle parades. Book via WhatsApp +39 351 912 7047.",
+      it: "Il venerdì notte prende vita con CLUB FOR LIFE al Philipp's Milano dentro The Plein Hotel di Philipp Plein (Via Daniele Manin 21). Dalle 20:00 cena spettacolo The Philipp's Show e dalle 00:00 alle 04:30 clubbing esclusivo e bottle parade. Prenota su WhatsApp al +39 351 912 7047."
+    },
+    pricing: { aperitif: "The Philipp's Show 20:00", club: 'ClubForLife 00:00–04:30 (Concierge)', tables: 'Chandelier Floor, Mezzanine & Console VIP' },
+    dressCode: { en: 'Haute Couture & Strictly Elegant.', it: 'Haute Couture e Rigorosamente Elegante.' },
+    faqs: defaultFaqs("Philipp's Milano", 'Via Daniele Manin 21 (The Plein Hotel), Milan', '25+', 'Haute Couture & Strictly Elegant', 'House, Afro House and Luxury Clubbing'),
+    image: '/images/events/weekly-posters/philipps-friday-clubforlife.webp',
+    priority: 74
+  },
+  {
+    id: 'philipps-saturday',
+    clubSlug: 'philipps',
+    clubName: "Philipp's Milano",
+    day: 'saturday',
+    dayOfWeek: 6,
+    eventSlug: 'konekt',
+    name: "KONEKT · Saturday Night at Philipp's Milano",
+    genres: ['House', 'Afro House', 'Electronic'],
+    target: '25+, High Society, Designers & International VIPs',
+    description: {
+      en: "Saturday flagship night KONEKT at Philipp's Milano (The Plein Hotel, Via Daniele Manin 21): theatrical fine dining from 20:00 with Chef Roberto Conti and live performers, transitioning at 00:00 into Milan's high-jewelry House and Afro-House sanctuary until 04:30. VIP tables via WhatsApp +39 351 912 7047.",
+      it: "Il sabato sera di punta KONEKT al Philipp's Milano (The Plein Hotel, Via Daniele Manin 21): alta cucina teatrale dalle 20:00 con lo Chef Roberto Conti e show dal vivo, seguita a mezzanotte dal club House e Afro-House fino alle 04:30. Tavoli VIP su WhatsApp al +39 351 912 7047."
+    },
+    pricing: { aperitif: "The Philipp's Show 20:00", club: 'KONEKT 00:00–04:30 (Concierge)', tables: 'VIP Bottle Service on Request' },
+    dressCode: { en: 'Haute Couture & Strictly Elegant.', it: 'Haute Couture e Rigorosamente Elegante.' },
+    faqs: defaultFaqs("Philipp's Milano", 'Via Daniele Manin 21 (The Plein Hotel), Milan', '25+', 'Haute Couture & Strictly Elegant', 'House and Afro House'),
+    image: '/images/events/weekly-posters/philipps-saturday-konekt.webp',
+    priority: 74
+  },
+  {
+    id: 'philipps-sunday',
+    clubSlug: 'philipps',
+    clubName: "Philipp's Milano",
+    day: 'sunday',
+    dayOfWeek: 0,
+    eventSlug: 'sweetie',
+    name: "SWEETIE · Sunday Urban Night & Dinner Show",
+    genres: ['Hip-Hop', 'RnB', 'Urban'],
+    target: '23+, Models, Athletes, Artists & Fashion Crowd',
+    description: {
+      en: "Every Sunday at Philipp's Milano (The Plein Hotel, Via Daniele Manin 21): start at 20:00 with The Philipp's Show dinner experience and stay for SWEETIE Urban Night from 00:00 to 04:30 featuring luxury Hip-Hop and R&B sets. Concierge booking via WhatsApp +39 351 912 7047.",
+      it: "Ogni domenica al Philipp's Milano (The Plein Hotel, Via Daniele Manin 21): dalle 20:00 cena spettacolo The Philipp's Show e da mezzanotte alle 04:30 SWEETIE Urban Night con selezioni Hip-Hop e R&B di fascia luxury. Prenotazioni Concierge su WhatsApp al +39 351 912 7047."
+    },
+    pricing: { aperitif: "The Philipp's Show 20:00", club: 'SWEETIE 00:00–04:30 (Concierge)', tables: 'VIP Bottle Service via WhatsApp' },
+    dressCode: { en: 'Luxury Urban Glamour & Smart Tailoring.', it: 'Luxury Urban Glamour e Sartoriale Curato.' },
+    faqs: defaultFaqs("Philipp's Milano", 'Via Daniele Manin 21 (The Plein Hotel), Milan', '23+', 'Luxury Urban Glamour', 'Hip-Hop and R&B'),
+    image: '/images/events/weekly-posters/philipps-sunday-sweetie.webp',
+    priority: 72
+  },
+  {
+    id: 'philipps-dinnershow',
+    clubSlug: 'philipps',
+    clubName: "Philipp's Milano",
+    day: 'saturday',
+    dayOfWeek: 6,
+    eventSlug: 'the-philipps-show',
+    name: "The Philipp's Show · Fine Dining & Live Performance",
+    genres: ['Live Music', 'Commercial', 'House'],
+    target: '25+, Couples, Luxury Diners & VIP Celebrations',
+    description: {
+      en: "Running Wednesday through Sunday inside The Plein Hotel (Via Daniele Manin 21), The Philipp's Show combines Executive Chef Roberto Conti's Italian haute cuisine (seating at 20:00) with a theatrical live vocal and choreography show at 21:45 before the midnight club transformation. Book on WhatsApp +39 351 912 7047.",
+      it: "In scena dal mercoledì alla domenica dentro The Plein Hotel (Via Daniele Manin 21), The Philipp's Show fonde l'alta cucina dell'Executive Chef Roberto Conti (ingresso cena ore 20:00) con lo spettacolo vocale e coreografico dal vivo delle 21:45 prima del club di mezzanotte. Prenota su WhatsApp al +39 351 912 7047."
+    },
+    pricing: { aperitif: 'Seated Dinner Show 20:00 (Concierge)', club: 'Direct Midnight Club Transition', tables: 'Dinner + Club VIP Table Combos' },
+    dressCode: { en: 'Evening Elegance & Haute Couture.', it: 'Eleganza da Sera e Haute Couture.' },
+    faqs: defaultFaqs("Philipp's Milano", 'Via Daniele Manin 21 (The Plein Hotel), Milan', '25+', 'Evening Elegance', 'Live Vocal Show & House'),
+    image: '/images/events/weekly-posters/philipps-dinnershow.webp',
+    priority: 73
+  },
+
+  // --- THE CLUB MILANO (Wed-Sun · Corso Garibaldi 97, Brera/Moscova · 5 Official Weekly Formats) ---
+  {
+    id: 'theclub-wednesday',
+    clubSlug: 'theclub',
+    clubName: 'The Club Milano',
+    day: 'wednesday',
+    dayOfWeek: 3,
+    eventSlug: 'one-two',
+    name: 'ONE TWO · Wednesday Hip-Hop Benchmark',
+    genres: ['Hip-Hop', 'RnB', 'Urban'],
+    target: '18+, International Students, Models & Hip-Hop Lovers',
+    description: {
+      en: "Milan's historic Wednesday Hip-Hop institution at The Club Milano (Corso Garibaldi 97, Brera/Moscova) from 23:30 to 05:00: ONE TWO delivers pure US & Italian Hip-Hop, R&B, and urban clubbing energy. Guest inquiry and VIP tables (Pista from €400 with 2 bottles, Privé Lato Consolle €440, VIP €600) via WhatsApp +39 351 912 7047.",
+      it: "Lo storico appuntamento Hip-Hop del mercoledì al The Club Milano (Corso Garibaldi 97, Brera/Moscova) dalle 23:30 alle 05:00: ONE TWO porta in pista il meglio di Hip-Hop, R&B e urban. Info ingressi e tavoli VIP (Pista da 400 € con 2 bottiglie, Privé Lato Consolle 440 €, VIP 600 €) su WhatsApp al +39 351 912 7047."
+    },
+    pricing: { club: 'From €15–€25 w/ drink (Concierge)', tables: 'Pista €400 (2 bott.) · Privé Consolle €440 · VIP €600' },
+    dressCode: { en: 'Smart Urban Chic (18+). Clean shirt/dark jeans; no tracksuits.', it: 'Smart Urban Chic (18+). Camicia o t-shirt curata; vietate tute.' },
+    faqs: defaultFaqs('The Club Milano', 'Corso Garibaldi 97 (Brera / Moscova), Milan', '18+', 'Smart Urban Chic', 'Hip-Hop and R&B'),
+    image: '/images/events/weekly-posters/theclub-wednesday-onetwo.webp',
+    priority: 68
+  },
+  {
+    id: 'theclub-thursday',
+    clubSlug: 'theclub',
+    clubName: 'The Club Milano',
+    day: 'thursday',
+    dayOfWeek: 4,
+    eventSlug: 'atlanta',
+    name: 'ATLANTA · Thursday International Night (Since 2005)',
+    genres: ['Hip-Hop', 'Reggaeton', 'Commercial'],
+    target: '18+, International University, Fashion & Erasmus Crowd',
+    description: {
+      en: 'Running since 2005 at The Club Milano (Corso Garibaldi 97, M2 Moscova), ATLANTA is Thursday night’s #1 international gathering from 23:30 to 05:00 mixing Hip-Hop, Reggaeton, and global hits. Reserve Dancefloor or Console Privé tables via WhatsApp +39 351 912 7047.',
+      it: 'Attivo dal 2005 al The Club Milano (Corso Garibaldi 97, M2 Moscova), ATLANTA è il punto di riferimento internazionale del giovedì notte dalle 23:30 alle 05:00 tra Hip-Hop, Reggaeton e hit mondiali. Prenota tavoli Pista o Privé Consolle su WhatsApp al +39 351 912 7047.'
+    },
+    pricing: { club: 'From €15–€25 w/ drink (Concierge)', tables: 'Pista €400 (2 bott.) · Privé Consolle €440 · VIP €600' },
+    dressCode: { en: 'Smart Casual Chic (18+).', it: 'Smart Casual Chic (18+).' },
+    faqs: defaultFaqs('The Club Milano', 'Corso Garibaldi 97 (Brera / Moscova), Milan', '18+', 'Smart Casual Chic', 'Hip-Hop, Reggaeton and Commercial Hits'),
+    image: '/images/events/weekly-posters/theclub-thursday-atlanta.webp',
+    priority: 68
+  },
+  {
+    id: 'theclub-friday',
+    clubSlug: 'theclub',
+    clubName: 'The Club Milano',
+    day: 'friday',
+    dayOfWeek: 5,
+    eventSlug: 'first-class',
+    name: 'FIRST CLASS · Friday Fashion & Clubbing',
+    genres: ['House', 'Hip-Hop', 'Commercial'],
+    target: '20+, Fashion Agencies, Brera Crowd & International Guests',
+    description: {
+      en: 'Kick off the weekend in Brera with FIRST CLASS every Friday from 23:30 to 05:30 at The Club Milano (Corso Garibaldi 97), uniting Milanese fashion agencies, international travellers, and high-energy House and Hip-Hop sets. VIP bottle tables booked via WhatsApp +39 351 912 7047.',
+      it: 'Inaugura il weekend a Brera con FIRST CLASS ogni venerdì dalle 23:30 alle 05:30 al The Club Milano (Corso Garibaldi 97), tra agenzie moda, pubblico internazionale e selezioni House e Hip-Hop. Tavoli VIP prenotabili su WhatsApp al +39 351 912 7047.'
+    },
+    pricing: { club: 'From €15–€25 w/ drink (Concierge)', tables: 'Pista €400 (2 bott.) · Privé Consolle €440 · VIP €600+' },
+    dressCode: { en: 'Trendy Glamour & Smart Chic.', it: 'Trendy Glamour e Smart Chic.' },
+    faqs: defaultFaqs('The Club Milano', 'Corso Garibaldi 97 (Brera / Moscova), Milan', '20+', 'Trendy Glamour', 'House, Hip-Hop and Commercial'),
+    image: '/images/events/weekly-posters/theclub-friday-firstclass.webp',
+    priority: 70
+  },
+  {
+    id: 'theclub-saturday',
+    clubSlug: 'theclub',
+    clubName: 'The Club Milano',
+    day: 'saturday',
+    dayOfWeek: 6,
+    eventSlug: 'girls-republic',
+    name: 'GIRLS REPUBLIC · Saturday Flagship Party',
+    genres: ['Commercial', 'House', 'Reggaeton'],
+    target: '20+, VIP Groups, Models & International Nightlife',
+    description: {
+      en: 'Saturday night flagship GIRLS REPUBLIC at The Club Milano (Corso Garibaldi 97, Brera) packs the dancefloor and elevated VIP rings from 23:30 to 05:30 with Vocal House, Commercial anthems, and Reggaeton. Secure your Dancefloor or Privé Lato Consolle table on WhatsApp +39 351 912 7047.',
+      it: 'Il sabato sera di punta GIRLS REPUBLIC al The Club Milano (Corso Garibaldi 97, Brera) accende la pista e i privé rialzati dalle 23:30 alle 05:30 tra Vocal House, hit Commerciali e Reggaeton. Blocca il tuo tavolo Pista o Privé Lato Consolle su WhatsApp al +39 351 912 7047.'
+    },
+    pricing: { club: 'From €15–€25 w/ drink (Concierge)', tables: 'Pista €400 (2 bott.) · Privé Consolle €440 · VIP €600–€1,200' },
+    dressCode: { en: 'Elegant Clubwear. Collared shirt recommended for men.', it: 'Clubwear Elegante. Camicia consigliata per l’uomo.' },
+    faqs: defaultFaqs('The Club Milano', 'Corso Garibaldi 97 (Brera / Moscova), Milan', '20+', 'Elegant Clubwear', 'Vocal House, Commercial and Reggaeton'),
+    image: '/images/events/weekly-posters/theclub-saturday-girlsrepublic.webp',
+    priority: 70
+  },
+  {
+    id: 'theclub-sunday',
+    clubSlug: 'theclub',
+    clubName: 'The Club Milano',
+    day: 'sunday',
+    dayOfWeek: 0,
+    eventSlug: 'superbe',
+    name: 'SUPERBE · Sunday Hip-Hop, Trap & Reggaeton',
+    genres: ['Hip-Hop', 'Trap', 'Reggaeton'],
+    target: '18+, Athletes, Models & Urban Nightlife Insiders',
+    description: {
+      en: 'Close the week in iconic style at SUPERBE every Sunday night (23:30–05:00) at The Club Milano (Corso Garibaldi 97), Milan’s legendary Sunday benchmark for Hip-Hop, Trap, and Reggaeton. VIP table reservations via WhatsApp +39 351 912 7047.',
+      it: 'Chiudi la settimana con SUPERBE ogni domenica notte (23:30–05:00) al The Club Milano (Corso Garibaldi 97), la storica serata domenicale punto di riferimento per Hip-Hop, Trap e Reggaeton. Tavoli VIP su WhatsApp al +39 351 912 7047.'
+    },
+    pricing: { club: 'From €15–€25 w/ drink (Concierge)', tables: 'Pista €400 (2 bott.) · Privé Consolle €440 · VIP €600' },
+    dressCode: { en: 'Fashion Streetwear & Urban Chic.', it: 'Fashion Streetwear e Urban Chic.' },
+    faqs: defaultFaqs('The Club Milano', 'Corso Garibaldi 97 (Brera / Moscova), Milan', '18+', 'Urban Chic', 'Hip-Hop, Trap and Reggaeton'),
+    image: '/images/events/weekly-posters/theclub-sunday-superbe.webp',
+    priority: 68
+  },
+
+  // --- MIB MILANO (Wed-Sat · Via Gaetano Negri 10, Piazza Affari · 4 Official Weekly Formats) ---
+  {
+    id: 'mibmilano-wednesday',
+    clubSlug: 'mibmilano',
+    clubName: 'MIB Milano',
+    day: 'wednesday',
+    dayOfWeek: 3,
+    eventSlug: 'international-week',
+    name: 'INTERNATIONAL WEEK & Open Wine Bar',
+    genres: ['Commercial', 'House', 'Reggaeton'],
+    target: '20+, International Students, Young Professionals & Expats',
+    description: {
+      en: 'Every Wednesday at MIB Milano (Via Gaetano Negri 10, Piazza Affari, 300 m from Piazza Duomo): INTERNATIONAL WEEK starts at 20:30 with the convivial Open Wine Bar aperitivo and flows into an international club party from 23:30 to 05:00. Book tables and guest access via WhatsApp +39 351 912 7047.',
+      it: 'Ogni mercoledì al MIB Milano (Via Gaetano Negri 10, Piazza Affari, a 300 m dal Duomo): INTERNATIONAL WEEK parte alle 20:30 con l’aperitivo Open Wine Bar e prosegue dalle 23:30 alle 05:00 con il party internazionale. Tavoli e accrediti su WhatsApp al +39 351 912 7047.'
+    },
+    pricing: { aperitif: 'Open Wine Bar Aperitivo from 20:30', club: 'Club from 23:30 (Concierge)', tables: 'From €250 to €600' },
+    dressCode: { en: 'Smart Casual Chic.', it: 'Smart Casual Chic.' },
+    faqs: defaultFaqs('MIB Milano', 'Via Gaetano Negri 10 (Piazza Affari), Milan', '20+', 'Smart Casual Chic', 'Commercial, House and Reggaeton'),
+    image: '/images/events/weekly-posters/mib-wednesday-international.webp',
+    priority: 66
+  },
+  {
+    id: 'mibmilano-thursday',
+    clubSlug: 'mibmilano',
+    clubName: 'MIB Milano',
+    day: 'thursday',
+    dayOfWeek: 4,
+    eventSlug: 'justice',
+    name: 'JUSTICE x Fastlife · Thursday Urban Night',
+    genres: ['Hip-Hop', 'Reggaeton', 'Trap'],
+    target: '18+, Urban Fashion & University Crowd',
+    description: {
+      en: 'Thursday night at MIB Milano (Via Gaetano Negri 10, Piazza Affari) hosts JUSTICE in collaboration with Fastlife from 23:00 to 05:00: Hip-Hop, Reggaeton, Trap, and R&B right in Milan’s financial district. Pre-sale before 01:00 from €1, after 01:00 €15 Woman / €20 Man w/ 1 drink; VIP tables from €250 via WhatsApp +39 351 912 7047.',
+      it: 'Il giovedì notte del MIB Milano (Via Gaetano Negri 10, Piazza Affari) accende JUSTICE in collaborazione con Fastlife dalle 23:00 alle 05:00 tra Hip-Hop, Reggaeton, Trap e R&B. Ingresso entro le 01:00 da 1 €, dopo le 01:00 15 € Donna / 20 € Uomo con 1 drink; tavoli VIP da 250 € su WhatsApp al +39 351 912 7047.'
+    },
+    pricing: { club: 'Before 01:00 €1 · After 01:00 €15W / €20M w/ 1 drink', tables: 'From €250 to €600' },
+    dressCode: { en: 'Urban Chic (no tracksuits).', it: 'Urban Chic (vietate tute sportive).' },
+    faqs: defaultFaqs('MIB Milano', 'Via Gaetano Negri 10 (Piazza Affari), Milan', '18+', 'Urban Chic', 'Hip-Hop, Reggaeton, Trap and R&B'),
+    image: '/images/events/weekly-posters/mib-thursday-justice.webp',
+    priority: 66
+  },
+  {
+    id: 'mibmilano-friday',
+    clubSlug: 'mibmilano',
+    clubName: 'MIB Milano',
+    day: 'friday',
+    dayOfWeek: 5,
+    eventSlug: 'billions',
+    name: 'BILLIONS · Friday Singing Dinner Show & Club',
+    genres: ['Live Music', 'Commercial', 'House'],
+    target: '23+, Corporate Piazza Affari, Birthdays & Elegant Groups',
+    description: {
+      en: 'Friday night at MIB Milano (Via Gaetano Negri 10, Piazza Affari) presents BILLIONS: Royal Aperitivo & Singing Dinner Show from 20:00 to 23:30 inside the illuminated winter garden, followed by Commercial and Vocal House clubbing until 05:00. Dinner and VIP bottle tables booked via WhatsApp +39 351 912 7047.',
+      it: 'Il venerdì sera al MIB Milano (Via Gaetano Negri 10, Piazza Affari) va in scena BILLIONS: Aperitivo Royal e Cena Cantata Spettacolo dalle 20:00 alle 23:30 nel giardino d’inverno, seguiti da discoteca Commerciale e Vocal House fino alle 05:00. Prenota cena o tavolo VIP su WhatsApp al +39 351 912 7047.'
+    },
+    pricing: { aperitif: 'Aperitivo & Dinner Show from 20:00', club: 'Club from 23:30 (from €20 w/ drink)', tables: 'From €250 to €800' },
+    dressCode: { en: 'Smart Elegant. Collared shirt required for men.', it: 'Smart Elegant. Camicia richiesta per gli uomini.' },
+    faqs: defaultFaqs('MIB Milano', 'Via Gaetano Negri 10 (Piazza Affari), Milan', '23+', 'Smart Elegant', 'Singing Dinner Show, Commercial and House'),
+    image: '/images/events/weekly-posters/mib-friday-billions.webp',
+    priority: 68
+  },
+  {
+    id: 'mibmilano-saturday',
+    clubSlug: 'mibmilano',
+    clubName: 'MIB Milano',
+    day: 'saturday',
+    dayOfWeek: 6,
+    eventSlug: 'love-affair',
+    name: 'LOVE AFFAIR · Saturday Cena Cantata & Club',
+    genres: ['Live Music', 'Commercial', 'House'],
+    target: '25+, Celebrations, Bachelorettes & VIP Groups',
+    description: {
+      en: 'LOVE AFFAIR is MIB Milano’s signature Saturday night at Piazza Affari (Via Gaetano Negri 10): dine and sing along during the 20:00 Cena Spettacolo with live vocalists and saxophonists, then dance until 05:00 without changing venue. Reserve dinner or after-dinner VIP tables on WhatsApp +39 351 912 7047.',
+      it: 'LOVE AFFAIR è il sabato simbolo del MIB Milano in Piazza Affari (Via Gaetano Negri 10): dalle 20:00 Cena Spettacolo Cantata con vocalist e sax dal vivo, poi pista club fino alle 05:00 senza cambiare locale. Tavoli cena e privé dopocena su WhatsApp al +39 351 912 7047.'
+    },
+    pricing: { aperitif: 'Cena Spettacolo & Royal Buffet from 20:00', club: 'Club from 23:30 (from €20 w/ drink)', tables: 'From €300 to €800' },
+    dressCode: { en: 'Strictly Elegant.', it: 'Strettamente Elegante.' },
+    faqs: defaultFaqs('MIB Milano', 'Via Gaetano Negri 10 (Piazza Affari), Milan', '25+', 'Strictly Elegant', 'Cena Cantata, Live Music and House'),
+    image: '/images/events/weekly-posters/mib-saturday-loveaffair.webp',
+    priority: 68
+  },
+
+  // --- TERRAZZA DUOMO 21 (Thu-Sat · Piazza del Duomo 21 · Panoramic Cathedral-View Aperitivo, Dining & DJ Set) ---
+  {
+    id: 'terrazza21-thursday',
+    clubSlug: 'terrazza21',
+    clubName: 'Terrazza Duomo 21',
+    day: 'thursday',
+    dayOfWeek: 4,
+    eventSlug: 'duomo-sunset-lounge',
+    name: 'Duomo Sunset Lounge · Aperitivo & DJ Set',
+    genres: ['Deep House', 'Lounge', 'House'],
+    target: '25+, International Guests, Couples & Executive Crowd',
+    description: {
+      en: 'Overlooking the illuminated marble facade of Milan Cathedral from Piazza del Duomo 21 (1st Floor), Terrazza Duomo 21 hosts its Thursday Sunset Aperitivo, Chef Valerio Braschi dining, and lounge DJ set until 02:00. Reserve terrace or indoor window tables via WhatsApp +39 351 912 7047.',
+      it: 'Affacciata direttamente sulle guglie illuminate del Duomo da Piazza del Duomo 21 (1° Piano), Terrazza Duomo 21 propone il giovedì tra Sunset Aperitivo, ristorante firmato Chef Valerio Braschi e DJ set lounge fino alle 02:00. Prenota tavoli vista Duomo su WhatsApp al +39 351 912 7047.'
+    },
+    pricing: { aperitif: 'From €22–€25 (Sunset Aperitivo)', club: 'Evening Lounge & Cocktail Bar', tables: 'From €250 to €800' },
+    dressCode: { en: 'Smart Elegant.', it: 'Smart Elegant.' },
+    faqs: defaultFaqs('Terrazza Duomo 21', 'Piazza del Duomo 21, Milan', '23+', 'Smart Elegant', 'Deep House and Skyline Lounge'),
+    image: '/images/events/weekly-posters/terrazza21-thursday-aperitivo.webp',
+    priority: 67
+  },
+  {
+    id: 'terrazza21-friday',
+    clubSlug: 'terrazza21',
+    clubName: 'Terrazza Duomo 21',
+    day: 'friday',
+    dayOfWeek: 5,
+    eventSlug: 'friday-over-duomo',
+    name: 'Friday Over Duomo · Skyline Aperitivo & Club',
+    genres: ['House', 'Commercial'],
+    target: '25+, Fashion & International Visitors, VIP Groups',
+    description: {
+      en: 'Every Friday at Terrazza Duomo 21 (Piazza del Duomo 21): golden-hour cocktails facing the Cathedral spires from 18:30, contemporary Italian dinner, and panoramic House & Commercial DJ sets from 22:30 until 03:00. Terrace and indoor VIP tables via WhatsApp +39 351 912 7047.',
+      it: 'Ogni venerdì a Terrazza Duomo 21 (Piazza del Duomo 21): cocktail al tramonto di fronte alle guglie del Duomo dalle 18:30, cena italiana contemporanea e DJ set House e Commerciale dalle 22:30 alle 03:00. Tavoli VIP in terrazza e sala interna su WhatsApp al +39 351 912 7047.'
+    },
+    pricing: { aperitif: 'From €25 (Duomo View Aperitivo)', club: 'After-Dinner DJ Set from €25', tables: 'From €300 to €1,000' },
+    dressCode: { en: 'Strictly Elegant.', it: 'Strettamente Elegante.' },
+    faqs: defaultFaqs('Terrazza Duomo 21', 'Piazza del Duomo 21, Milan', '23+', 'Strictly Elegant', 'Vocal House and Commercial'),
+    image: '/images/events/weekly-posters/terrazza21-friday-skyline.webp',
+    priority: 69
+  },
+  {
+    id: 'terrazza21-saturday',
+    clubSlug: 'terrazza21',
+    clubName: 'Terrazza Duomo 21',
+    day: 'saturday',
+    dayOfWeek: 6,
+    eventSlug: 'saturday-skyline',
+    name: 'Saturday Skyline · Piazza Duomo Night & DJ Set',
+    genres: ['House', 'Commercial'],
+    target: '25+, Couples, International Jet-Set & Celebrations',
+    description: {
+      en: 'Saturday night directly above Piazza del Duomo: Terrazza Duomo 21 combines sunset aperitivo, fine dining (1st Floor Chef Valerio Braschi & 5th Floor 2-Michelin-Star Terrazza MA.RE), and late-night DJ clubbing until 03:30. Advance table reservation required via WhatsApp +39 351 912 7047.',
+      it: 'Il sabato sera sospeso sopra Piazza del Duomo: Terrazza Duomo 21 unisce aperitivo vista Cattedrale, alta cucina (1° Piano Chef Valerio Braschi e 5° Piano Terrazza MA.RE 2 Stelle Michelin) e DJ set fino alle 03:30. Prenotazione tavolo su WhatsApp al +39 351 912 7047.'
+    },
+    pricing: { aperitif: 'From €25 (Sunset Aperitivo)', club: 'After-Dinner DJ Set from €25', tables: 'From €300 to €1,200' },
+    dressCode: { en: 'Strictly Elegant.', it: 'Strettamente Elegante.' },
+    faqs: defaultFaqs('Terrazza Duomo 21', 'Piazza del Duomo 21, Milan', '25+', 'Strictly Elegant', 'House and Commercial'),
+    image: '/images/events/weekly-posters/terrazza21-saturday-duomo.webp',
+    priority: 69
   }
 ];

@@ -946,6 +946,46 @@ export const venuesData: Venue[] = [
     ageRange: "21-38",
     priceRange: "$$",
     tags: ["Tech House", "Techno", "International DJs"]
+  },
+  {
+    id: "v-philipps",
+    slugs: { en: "philipps-milano", it: "philipps-plein-milano-tavoli-vip" },
+    address: {
+      streetAddress: "Via Daniele Manin, 21",
+      addressLocality: "Milano",
+      postalCode: "20121",
+      addressCountry: "IT"
+    },
+    coordinates: { latitude: 45.4743, longitude: 9.1966 },
+    category: VenueCategory.CLUB,
+    zone: MilanZone.BRERA,
+    sameAs: ["https://www.instagram.com/philippsmilano/", "https://philippsclub.com"],
+    localizedContent: {
+      name: { en: "Philipp's Milano", it: "Philipp's Milano" },
+      description: {
+        en: "Created by designer Philipp Plein inside historic Palazzo Melzi d'Eril (The Plein Hotel, Via Daniele Manin 21), Philipp's Milano unites fine dining by Executive Chef Roberto Conti, the theatrical live Dinner Show (The Philipp's Show from 20:00), and an ultra-glamorous midnight club with crystal chandeliers and VIP bottle service until 04:30.",
+        it: "Creato dallo stilista Philipp Plein nello storico Palazzo Melzi d'Eril (The Plein Hotel, Via Daniele Manin 21), il Philipp's Milano unisce l'alta cucina dell'Executive Chef Roberto Conti, il Dinner Show teatrale dal vivo (The Philipp's Show dalle 20:00) e il luxury club di mezzanotte sotto lampadari di cristallo fino alle 04:30."
+      },
+      dressCode: { en: "Haute Couture & Strictly Elegant: Collared shirt, blazer and dress shoes mandatory for men", it: "Haute Couture e Rigorosamente Elegante: Camicia, blazer e scarpe eleganti obbligatori per l'uomo" },
+      altTextImg: { en: "Philipp's Milano The Plein Hotel restaurant dinner show and luxury VIP nightclub", it: "Philipp's Milano The Plein Hotel ristorante dinner show e luxury club tavoli VIP" },
+      insiderTip: { en: "Reserve the 20:00 Dinner Show table (live performance starts at 21:45) to transition effortlessly into the midnight club inside The Plein Hotel without waiting at the velvet rope.", it: "Prenota il tavolo Dinner Show delle 20:00 (spettacolo live dalle 21:45) per vivere la transizione diretta nel club di mezzanotte dentro The Plein Hotel senza coda all'ingresso." }
+    },
+    image: "/images/venues/philipps-milano/philipps-milano-01.webp",
+    gallery: [
+      "/images/venues/philipps-milano/philipps-milano-01.webp",
+      "/images/venues/philipps-milano/philipps-milano-02.webp",
+      "/images/venues/philipps-milano/philipps-milano-03.webp",
+      "/images/venues/philipps-milano/philipps-milano-04.webp",
+      "/images/venues/philipps-milano/philipps-milano-05.webp",
+      "/images/venues/philipps-milano/philipps-milano-06.webp"
+    ],
+    isManaged: false,
+    isPriority: false,
+    isFeatured: true,
+    priorityScore: 68,
+    ageRange: "23-45",
+    priceRange: "$$$$",
+    tags: ["Dinner Show", "Luxury Fashion", "VIP Tables"]
   }
 ];
 

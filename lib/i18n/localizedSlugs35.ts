@@ -436,6 +436,7 @@ const CANONICAL_VENUE_BASES: Array<{
   { canonicalSlug: 'ristorante-torre-milano', id: 'v-ristorante-torre-milano', brandSlug: 'ristorante-torre', aliases: ['ristorante-torre'] },
   { canonicalSlug: 'innocenti-evasioni-terrazza-triennale', id: 'v-innocenti-evasioni-terrazza-triennale', brandSlug: 'terrazza-triennale', aliases: ['terrazza-triennale'] },
   { canonicalSlug: 'super-club-milano', id: 'v-super-club-milano', brandSlug: 'super-club', aliases: ['super-club', 'superclub', 'superclub-milano', 'superclub-milano-tortona'] },
+  { canonicalSlug: 'philipps-milano', id: 'v-philipps', brandSlug: 'philipps-plein', aliases: ['philipps', 'philipps-club', 'philipps-club-milano', 'philipp-plein-milano', 'the-plein-hotel-milano'] },
 ];
 
 export const VENUE_SLUGS_35: Record<string, Record<LocaleCode, string>> = {};
@@ -498,7 +499,6 @@ const LEGACY_UNLISTED_CLUB_SET: ReadonlySet<string> = new Set([
   'shillings', 'shillings-milano', 'shillings-club', 'shillings-club-milano',
   'duro', 'duro-club', 'duro-milano', 'duro-club-milano',
   'encanto', 'encanto-club', 'encanto-club-latino', 'encanto-club-latino-milano', 'encanto-milano',
-  'philipps', 'philipps-club', 'philipps-milano', 'philipps-club-milano',
   'pelledoca', 'pelledoca-milano', 'pelledoca-music-and-food',
   'live-club', 'live-club-trezzo', 'live-club-trezzo-milano', 'live-music-club-trezzo',
   'noir-club', 'noir-club-lissone', 'noir-lissone', 'noir-club-monza',
@@ -653,7 +653,7 @@ const CANONICAL_GENRES: Array<{ canonicalSlug: string; aliases: string[] }> = [
   { canonicalSlug: 'hip-hop', aliases: ['hip-hop-urban', 'hip-hop-trap-milano', 'afrobeats', 'afrobeats-milano', 'rnb', 'trap'] },
   { canonicalSlug: 'reggaeton', aliases: ['reggaeton-latin', 'reggaeton-milano', 'latin', 'latin-milano', 'musica-latina-milano'] },
   { canonicalSlug: 'commercial', aliases: ['commercial-sing-along', 'commerciale-milano', 'open-format', 'open-format-milano', 'pop', 'disco'] },
-  { canonicalSlug: 'dinner-show', aliases: ['dinner-show-aperitivo-cantato', 'cena-spettacolo-milano'] },
+  { canonicalSlug: 'dinner-show', aliases: ['dinner-show-aperitivo-cantato', 'cena-spettacolo-milano', 'cena-spettacolo', 'cena-cantata', 'cena-cantata-milano'] },
   { canonicalSlug: 'edm', aliases: ['edm-festival', 'edm-milano'] },
   { canonicalSlug: 'live-music', aliases: ['live-music-concerts', 'musica-dal-vivo-milano'] },
   { canonicalSlug: 'indie', aliases: ['indie-nu-disco', 'indie-milano'] },
@@ -949,6 +949,29 @@ const WEEKLY_EVENT_DEFS: Array<{ canonicalSlug: string; clubKey: string; day: st
   { canonicalSlug: 'repvblic-friday-tech-house-friday', clubKey: 'repvblic', day: 'friday', partyName: 'tech-house-friday', shortAliases: ['tech-house-friday', 'dirty-monday-edition', 'repvblic-friday', 'repvblic-friday-dirty-monday-edition'] },
   { canonicalSlug: 'repvblic-saturday-saturday-night', clubKey: 'repvblic', day: 'saturday', partyName: 'saturday-night', shortAliases: ['repvblic-saturday'] },
   { canonicalSlug: 'repvblic-sunday-demon-time', clubKey: 'repvblic', day: 'sunday', partyName: 'demon-time', shortAliases: ['demon-time', 'repvblic-sunday'] },
+  // Philipp's Milano (The Plein Hotel) — 7 active weekly formats
+  { canonicalSlug: 'philipps-tuesday-from-brasil-to-milan', clubKey: 'philipps', day: 'tuesday', partyName: 'from-brasil-to-milan', shortAliases: ['from-brasil-to-milan', 'brasilian-dinner-show', 'philipps-tuesday'] },
+  { canonicalSlug: 'philipps-wednesday-tussy', clubKey: 'philipps', day: 'wednesday', partyName: 'tussy', shortAliases: ['tussy', 'philipps-wednesday'] },
+  { canonicalSlug: 'philipps-thursday-saint', clubKey: 'philipps', day: 'thursday', partyName: 'saint', shortAliases: ['saint', 'philipps-thursday'] },
+  { canonicalSlug: 'philipps-friday-club-for-life', clubKey: 'philipps', day: 'friday', partyName: 'club-for-life', shortAliases: ['club-for-life', 'clubforlife', 'philipps-friday'] },
+  { canonicalSlug: 'philipps-saturday-konekt', clubKey: 'philipps', day: 'saturday', partyName: 'konekt', shortAliases: ['konekt', 'philipps-saturday'] },
+  { canonicalSlug: 'philipps-sunday-sweetie', clubKey: 'philipps', day: 'sunday', partyName: 'sweetie', shortAliases: ['sweetie', 'philipps-sunday'] },
+  { canonicalSlug: 'philipps-saturday-the-philipps-show', clubKey: 'philipps', day: 'saturday', partyName: 'the-philipps-show', shortAliases: ['the-philipps-show', 'philipps-show', 'philipps-dinnershow'] },
+  // The Club Milano — 5 active weekly formats
+  { canonicalSlug: 'theclub-wednesday-one-two', clubKey: 'the-club', day: 'wednesday', partyName: 'one-two', shortAliases: ['one-two', 'onetwo', 'theclub-wednesday'] },
+  { canonicalSlug: 'theclub-thursday-atlanta', clubKey: 'the-club', day: 'thursday', partyName: 'atlanta', shortAliases: ['atlanta', 'theclub-thursday'] },
+  { canonicalSlug: 'theclub-friday-first-class', clubKey: 'the-club', day: 'friday', partyName: 'first-class', shortAliases: ['first-class', 'firstclass', 'theclub-friday'] },
+  { canonicalSlug: 'theclub-saturday-girls-republic', clubKey: 'the-club', day: 'saturday', partyName: 'girls-republic', shortAliases: ['girls-republic', 'girlsrepublic', 'theclub-saturday'] },
+  { canonicalSlug: 'theclub-sunday-superbe', clubKey: 'the-club', day: 'sunday', partyName: 'superbe', shortAliases: ['superbe', 'theclub-sunday'] },
+  // MIB Milano — 4 active weekly formats
+  { canonicalSlug: 'mibmilano-wednesday-international-week', clubKey: 'mib', day: 'wednesday', partyName: 'international-week', shortAliases: ['international-week', 'mibmilano-wednesday', 'mib-wednesday'] },
+  { canonicalSlug: 'mibmilano-thursday-justice', clubKey: 'mib', day: 'thursday', partyName: 'justice', shortAliases: ['justice', 'mibmilano-thursday', 'mib-thursday'] },
+  { canonicalSlug: 'mibmilano-friday-billions', clubKey: 'mib', day: 'friday', partyName: 'billions', shortAliases: ['billions', 'mibmilano-friday', 'mib-friday'] },
+  { canonicalSlug: 'mibmilano-saturday-love-affair', clubKey: 'mib', day: 'saturday', partyName: 'love-affair', shortAliases: ['love-affair', 'mibmilano-saturday', 'mib-saturday'] },
+  // Terrazza Duomo 21 — 3 skyline formats
+  { canonicalSlug: 'terrazza21-thursday-duomo-sunset-lounge', clubKey: 'terrazza-duomo-21', day: 'thursday', partyName: 'duomo-sunset-lounge', shortAliases: ['duomo-sunset-lounge', 'terrazza21-thursday'] },
+  { canonicalSlug: 'terrazza21-friday-friday-over-duomo', clubKey: 'terrazza-duomo-21', day: 'friday', partyName: 'friday-over-duomo', shortAliases: ['friday-over-duomo', 'terrazza21-friday'] },
+  { canonicalSlug: 'terrazza21-saturday-saturday-skyline', clubKey: 'terrazza-duomo-21', day: 'saturday', partyName: 'saturday-skyline', shortAliases: ['saturday-skyline', 'terrazza21-saturday'] },
 ];
 
 export const WEEKLY_EVENT_SLUGS_35: Record<string, Record<LocaleCode, string>> = {};
@@ -1004,7 +1027,7 @@ const CAPODANNO_VENUE_PREFIXES = [
   'the-club-milano', 'hollywood-milano', 'pineta-milano', 'voya-club-milano',
   'aria-club-milano', 'rocca-brivio-sforza-milano', 'fabrique-milano',
   'magazzini-generali-milano', 'alcatraz-milano', 'gattopardo-milano',
-  'the-grace-club-milano', 'twiga-milano',
+  'the-grace-club-milano', 'twiga-milano', 'philipps-milano', 'mib-milano',
 ];
 
 const CAPODANNO_REVERSE_TO_EN: Record<string, { type: 'hub' } | { type: 'cat'; catId: string } | { type: 'venue'; venueSlug: string; catId: string }> = {};

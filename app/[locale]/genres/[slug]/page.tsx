@@ -4,7 +4,8 @@ import { resolveGenreSlug, getLocalizedGenreSlug35, getExistingGuideSlug35, getL
 import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
 import { getGenreLocalized35 } from '@/lib/i18n/zonesAndGenres35';
 import { REGGAETON_35_PACKS, REGGAETON_PARTNER_VENUES } from '@/lib/i18n/reggaetonSeo35';
-import { capodannoEventPath } from '@/lib/capodanno/routes';
+import { CENA_CANTATA_35_PACKS, CENA_CANTATA_VENUES } from '@/lib/i18n/cenaCantataSeo35';
+import { capodannoCategoryPath, capodannoEventPath } from '@/lib/capodanno/routes';
 import GuideToc from '@/components/GuideToc';
 import { Metadata } from 'next';
 import Link from '@/components/LocalizedLink';
@@ -222,27 +223,27 @@ export const genreData: Record<
   },
   'dinner-show': {
     id: MusicGenre.COMMERCIAL,
-    name: 'Dinner Show & Royal Aperitivo',
+    name: 'Cena Cantata & Dinner Show',
     heroTitle: {
-      en: 'Dinner Show & Royal Aperitivo: From Fine Dining to Dancefloor',
-      it: 'Dinner Show & Royal Aperitivo: Dalla Cena Spettacolo alla Pista',
+      en: 'Singing Dinner (Cena Cantata) & Dinner Show: From Fine Dining to Dancefloor',
+      it: 'Cena Cantata & Dinner Show a Milano: Dalla Cena Spettacolo alla Pista',
     },
     editorial: {
-      en: 'Milan’s most coveted formula combines gourmet dining or a monumental Royal Aperitivo with live vocalists, saxophonists, aerial performers, and a seamless midnight transition into a high-energy nightclub — without ever leaving your reserved table. Experience it at 55 Milano (1,600 sqm historic depot), Just Me under Torre Branca, Pineta’s Singing Aperitivo, Voya Rooftop on the 20th floor, Gattopardo, and Church 81.',
-      it: 'La formula più amata a Milano unisce la Cena Spettacolo servita o il Royal Aperitivo monumentale a vocalist dal vivo, sassofonisti, performer acrobatici e trasformazione a mezzanotte in vera discoteca — mantenendo il proprio tavolo riservato tutta la notte. Provala da 55 Milano (ex deposito di 1.600 mq), Just Me sotto Torre Branca, Pineta (Aperitivo Cantato), Voya Rooftop al 20° piano, Il Gattopardo e Church 81.',
+      en: 'Milan’s most coveted nightlife formula combines gourmet seated dining or a monumental Royal Singing Aperitivo with live vocalists, saxophonists, theatrical performers, and a seamless midnight transition into a high-energy nightclub while keeping your reserved table. Experience it at Pineta Milano, Carlsberg Øl (75 EUR all-in NYE Cena Cantata), MIB Milano (LOVE AFFAIR & BILLIONS), Philipp’s Milano at The Plein Hotel (The Philipp’s Show), 55 Milano, Just Me under Torre Branca (VIZIATISSIMA), Voya Rooftop on the 20th floor, Bischeri, and Il Gattopardo.',
+      it: 'La formula più ricercata della notte milanese unisce la Cena Cantata servita o il Royal Aperitivo Cantato a vocalist dal vivo, sassofonisti, performer teatrali e trasformazione a mezzanotte in vera discoteca mantenendo il proprio tavolo riservato. Vivila da Pineta Milano, Carlsberg Øl Porta Nuova (Cenone + Cena Cantata 75€ tutto incluso), MIB Milano (LOVE AFFAIR e BILLIONS), Philipp’s Milano al The Plein Hotel (The Philipp’s Show ore 21:45), 55 Milano, Just Me sotto Torre Branca (VIZIATISSIMA), Voya Rooftop al 20° piano, Bischeri e Il Gattopardo.',
     },
     soundOf: {
-      en: 'Live sax & vocalists during dinner, sing-along anthems at dessert, and full club DJ sets from midnight.',
-      it: 'Sax e vocalist dal vivo durante la cena, cori al momento del dessert e DJ set club da mezzanotte alle 05:00.',
+      en: 'Live sax & vocalists during dinner, Italian & international sing-along anthems at dessert, and full club DJ sets from midnight to 05:00.',
+      it: 'Sax e vocalist dal vivo durante la cena, grandi classici italiani e hit internazionali da cantare al dessert e DJ set club da mezzanotte alle 05:00.',
     },
-    topClubs: ['55 Milano', 'Just Me Milano', 'Pineta Milano', 'Voya Rooftop', 'Il Gattopardo', 'Church 81'],
+    topClubs: ['Pineta Milano', 'Carlsberg Øl Milano', 'MIB Milano', "Philipp's Milano", '55 Milano', 'Just Me Milano', 'Voya Rooftop', 'Il Gattopardo'],
     metaTitle: {
-      en: 'Best Dinner Shows & Singing Aperitivo in Milan | 2026/2027 Guide',
-      it: 'Migliori Cene Spettacolo, Dinner Show e Aperitivo Cantato a Milano | 2026/2027',
+      en: 'Dinner Show & Cena Cantata Milan 2026/2027: Top 10 Venues',
+      it: 'Cena Cantata Milano 2026/2027: Migliori Locali, Prezzi e VIP',
     },
     metaDescription: {
-      en: 'Book the best Dinner Shows and Royal Singing Aperitivos in Milan: 55 Milano, Just Me, Pineta, Voya Rooftop, Gattopardo, and Church 81.',
-      it: 'Prenota le migliori Cene Spettacolo, Dinner Show e Aperitivi Cantati a Milano: 55 Milano, Just Me, Pineta, Voya Rooftop, Gattopardo e Church 81.',
+      en: "Best Singing Dinner (Cena Cantata) & Dinner Show clubs in Milan 2026/2027: Pineta, 55 Milano, Carlsberg Øl (75€), Just Me, MIB & Philipp's. WA +39 351 912 7047.",
+      it: "Migliori locali di Cena Cantata e Dinner Show a Milano 2026/2027: Pineta, 55 Milano, Carlsberg Øl (75€ NYE), Just Me, MIB e Philipp's. WA +39 351 912 7047.",
     },
   },
   edm: {
@@ -430,15 +431,18 @@ export default async function GenrePage({ params }: Props) {
     })),
   };
 
-  const isTasteReggaeton = canonicalGenreSlug === 'reggaeton';
+  const isTasteReggaeton = canonicalGenreSlug === 'reggaeton' || canonicalGenreSlug === 'dinner-show';
 
   if (isTasteReggaeton) {
-    const rp = REGGAETON_35_PACKS[loc] || REGGAETON_35_PACKS.en;
+    const isDinnerShow = canonicalGenreSlug === 'dinner-show';
+    const cp = isDinnerShow ? (CENA_CANTATA_35_PACKS[loc] || CENA_CANTATA_35_PACKS.en) : null;
+    const rp = cp || REGGAETON_35_PACKS[loc] || REGGAETON_35_PACKS.en;
+    const partnerVenues = isDinnerShow ? CENA_CANTATA_VENUES : REGGAETON_PARTNER_VENUES;
     const clubsDir = getLocalizedDir35('clubs', loc);
     const guidesDir = getLocalizedDir35('guides', loc);
-    const g118Slug = getExistingGuideSlug35('g-118', loc);
+    const targetGuideSlug = getExistingGuideSlug35(isDinnerShow ? 'g-60' : 'g-118', loc);
     const waUrl = getConciergeBookingUrl(loc, gLoc.h1, currentGenreUrl);
-    const shortDisplayTitle = `${gLoc.name.split('&')[0].trim()} Milano 2027`;
+    const shortDisplayTitle = cp ? cp.shortDisplayTitle : `${gLoc.name.split('&')[0].trim()} Milano 2027`;
     const crossfadeImgs = Array.from(new Set([genreHeroImg, ...genreInlineImgs]));
 
     return (
@@ -528,7 +532,7 @@ export default async function GenrePage({ params }: Props) {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pb-8 mb-8" data-taste-stagger>
               <div>
-                <p className="text-lg sm:text-xl font-bold text-[#050505] tabular-nums m-0">{REGGAETON_PARTNER_VENUES.length}</p>
+                <p className="text-lg sm:text-xl font-bold text-[#050505] tabular-nums m-0">{partnerVenues.length}</p>
                 <p className="text-[14px] text-[#3B362E] mt-1 m-0">{rp.boxTitle}</p>
               </div>
               <div>
@@ -614,7 +618,7 @@ export default async function GenrePage({ params }: Props) {
             </div>
 
             <div className="bg-[#050505] flex flex-col gap-[2px] mb-8" data-taste-stagger>
-              {REGGAETON_PARTNER_VENUES.map((v) => (
+              {partnerVenues.map((v) => (
                 <div
                   key={v.name}
                   className="bg-[#0B0A09] hover:bg-[#141311] p-5 sm:p-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-center transition-colors"
@@ -650,13 +654,24 @@ export default async function GenrePage({ params }: Props) {
               ))}
             </div>
 
-            <Link
-              href={`${lp}/${guidesDir}/${g118Slug}`}
-              locale={loc}
-              className="taste-btn-outline-light"
-            >
-              <span>{rp.guideCta}</span>
-            </Link>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href={`${lp}/${guidesDir}/${targetGuideSlug}`}
+                locale={loc}
+                className="taste-btn-outline-light"
+              >
+                <span>{rp.guideCta}</span>
+              </Link>
+              {cp && (
+                <Link
+                  href={capodannoCategoryPath('capodanno-locali-cenone-milano', loc)}
+                  locale={loc}
+                  className="taste-btn-primary"
+                >
+                  <span>{cp.nyeCatCta}</span>
+                </Link>
+              )}
+            </div>
           </div>
         </section>
 

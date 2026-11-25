@@ -9,6 +9,7 @@ import { getGsc20261123DisplayHeadline } from './guidesGscBatch20261123';
 import { getGsc20261124DisplayHeadline } from './guidesGscBatch20261124';
 import { getGsc20261125DisplayHeadline } from './guidesGscBatch20261125';
 import { getGscCapodanno20261125DisplayHeadline } from './guidesGscCapodannoBatch20261125';
+import { getTop1Seo20261125DisplayHeadline } from './guidesTop1SeoBatch20261125';
 import { GUIDE_100_SEEDS } from './guides100Catalog';
 import { getLocalizedGuideSeedNames } from './i18n/guideSeeds35Names';
 
@@ -298,6 +299,11 @@ export function getEditorialDisplayHeadline(
   locale: LocaleCode,
   localizedFullTitle: string,
 ): string {
+  const top1Seo20261125 = getTop1Seo20261125DisplayHeadline(guideId, locale);
+  if (top1Seo20261125) {
+    return clampConciseHeadline(top1Seo20261125);
+  }
+
   const gscCap20261125 = getGscCapodanno20261125DisplayHeadline(guideId, locale);
   if (gscCap20261125) {
     return clampConciseHeadline(gscCap20261125);
@@ -381,6 +387,12 @@ const IMAGE_DHASH_64: Record<string, string> = {
   "/images/guides-editorial/just-me-pavilion.webp": "393969a5e561c1d3",
   "/images/guides-editorial/just-me-vip-table.webp": "b698c9e397971797",
   "/images/guides-editorial/palace-como-fireworks.webp": "070f0f0f0f0e0c08",
+  "/images/guides-editorial/philipps-plein-bottle-parade.webp": "180b074dcc1c3525",
+  "/images/guides-editorial/philipps-plein-chandeliers.webp": "ecc4c4c8a0129b3e",
+  "/images/guides-editorial/philipps-plein-dinnershow.webp": "372e0f878d9d3c37",
+  "/images/guides-editorial/philipps-plein-mezzanine.webp": "f33f13167f636242",
+  "/images/guides-editorial/philipps-plein-monogram-bar.webp": "13372b2a3ab2ae69",
+  "/images/guides-editorial/philipps-plein-terrace-statue.webp": "60259c5b1b255515",
   "/images/guides-editorial/pineta-dancefloor.webp": "9a1f9aa989c98486",
   "/images/guides-editorial/pineta-lounge.webp": "84838f9d97135114",
   "/images/guides-editorial/pineta-vip.webp": "672f1f7bf8cc0c0c",
@@ -393,6 +405,10 @@ const IMAGE_DHASH_64: Record<string, string> = {
   "/images/guides-editorial/terminus-como-lake.webp": "06c6c6d692964ece",
   "/images/guides-editorial/terrazza-duomo-skyline.webp": "5d5e929a1292935e",
   "/images/guides-editorial/the-club-brera.webp": "093bb0b0755dc9cb",
+  "/images/guides-editorial/the-club-dancefloor.webp": "70f4e6f7f67a58bc",
+  "/images/guides-editorial/the-club-lights.webp": "9c3c1e2930e7e78f",
+  "/images/guides-editorial/the-club-prive-console.webp": "00e084849a9a6369",
+  "/images/guides-editorial/the-club-vip-bottles.webp": "0480e0e6ce8ecc4e",
   "/images/guides-editorial/tom-milano-dinner.webp": "6c644c8c9a8acebe",
   "/images/guides-editorial/voya-rooftop-20f.webp": "9ce0e0e6c65ade16",
   "/images/pillars/aperitivo-01.webp": "c8ccdcc2061f1f0f",
@@ -807,7 +823,14 @@ const IMAGE_DHASH_64: Record<string, string> = {
   "/images/venues/voya-rooftop-milan/voya-rooftop-milan-interior-04.webp": "7f4041d939d7e6fe",
   "/images/venues/voya-rooftop-milan/voya-rooftop-milan-interior-05.webp": "183c38381b99d9dc",
   "/images/venues/voya-rooftop-milan/voya-rooftop-milan-interior-06.webp": "3c3c75c8cab81213",
-  "/images/venues/voya-rooftop-milan/voya-rooftop-milan-interior-07.webp": "7f4041d939d7e6fe"
+  "/images/venues/voya-rooftop-milan/voya-rooftop-milan-interior-07.webp": "7f4041d939d7e6fe",
+  "/images/venues/philipps-milano/philipps-milano-01.webp": "e4e6c4ec80929b3e",
+  "/images/venues/philipps-milano/philipps-milano-02.webp": "372e0f878d9d3c37",
+  "/images/venues/philipps-milano/philipps-milano-03.webp": "13372b623ab3ace9",
+  "/images/venues/philipps-milano/philipps-milano-04.webp": "180b070dcc9c3525",
+  "/images/venues/philipps-milano/philipps-milano-05.webp": "66233355170f0f07",
+  "/images/venues/philipps-milano/philipps-milano-06.webp": "f33f1b1f7b6b6263",
+  "/images/philipps-milano.webp": "e4e6c4ec80929b3e"
 };
 
 const VENUE_PHOTO_CANDIDATES: Record<string, string[]> = {
@@ -952,6 +975,10 @@ const VENUE_PHOTO_CANDIDATES: Record<string, string[]> = {
   ],
   "the-club-milano": [
     "/images/guides-editorial/the-club-brera.webp",
+    "/images/guides-editorial/the-club-vip-bottles.webp",
+    "/images/guides-editorial/the-club-dancefloor.webp",
+    "/images/guides-editorial/the-club-prive-console.webp",
+    "/images/guides-editorial/the-club-lights.webp",
     "/images/venues/the-club-milano/the-club-milano-interior-01.webp",
     "/images/venues/the-club-milano/the-club-milano-interior-02.webp",
     "/images/venues/the-club-milano/the-club-milano-interior-03.webp",
@@ -959,6 +986,14 @@ const VENUE_PHOTO_CANDIDATES: Record<string, string[]> = {
     "/images/venues/the-club-milano/the-club-milano-interior-05.webp",
     "/images/venues/the-club-milano/the-club-milano-interior-06.webp",
     "/images/venues/the-club-milano/the-club-milano-interior-07.webp"
+  ],
+  "philipps-milano": [
+    "/images/guides-editorial/philipps-plein-chandeliers.webp",
+    "/images/guides-editorial/philipps-plein-dinnershow.webp",
+    "/images/guides-editorial/philipps-plein-monogram-bar.webp",
+    "/images/guides-editorial/philipps-plein-bottle-parade.webp",
+    "/images/guides-editorial/philipps-plein-mezzanine.webp",
+    "/images/guides-editorial/philipps-plein-terrace-statue.webp"
   ],
   "ceresio-7": [
     "/images/guides-editorial/ceresio-pool-dusk.webp",
@@ -1258,6 +1293,16 @@ const CAPTION_BY_SRC: Record<string, { caption: string; district: string }> = {
   '/images/guides-editorial/apollo-navigli.webp': { caption: 'Apollo Club Milano · Groove & Live Club', district: 'Navigli' },
   '/images/guides-editorial/hollywood-corso-como.webp': { caption: 'Hollywood Milano · Corso Como 15', district: 'Porta Garibaldi' },
   '/images/guides-editorial/the-club-brera.webp': { caption: 'The Club Milano · Corso Garibaldi 97', district: 'Brera / Moscova' },
+  '/images/guides-editorial/the-club-vip-bottles.webp': { caption: 'The Club Milano · Tavoli VIP & Bottle Service', district: 'Corso Garibaldi 97' },
+  '/images/guides-editorial/the-club-dancefloor.webp': { caption: 'The Club Milano · Main Dancefloor', district: 'Brera / M2 Moscova' },
+  '/images/guides-editorial/the-club-prive-console.webp': { caption: 'The Club Milano · Privé Lato Consolle', district: 'Corso Garibaldi 97' },
+  '/images/guides-editorial/the-club-lights.webp': { caption: 'The Club Milano · Light Show & Arena', district: 'Brera / Corso Como' },
+  '/images/guides-editorial/philipps-plein-chandeliers.webp': { caption: "Philipp's Milano · The Plein Hotel Crystal Hall", district: 'Via Daniele Manin 21' },
+  '/images/guides-editorial/philipps-plein-dinnershow.webp': { caption: "Philipp's Milano · The Philipp's Show & Fine Dining", district: 'Palazzo Melzi d’Eril' },
+  '/images/guides-editorial/philipps-plein-monogram-bar.webp': { caption: "Philipp's Milano · Couture Monogram Cocktail Bar", district: 'Porta Nuova / Turati' },
+  '/images/guides-editorial/philipps-plein-bottle-parade.webp': { caption: "Philipp's Milano · Privé VIP & Bottle Parade", district: 'Via Daniele Manin 21' },
+  '/images/guides-editorial/philipps-plein-mezzanine.webp': { caption: "Philipp's Milano · Velvet Salon & Mezzanine", district: 'The Plein Hotel' },
+  '/images/guides-editorial/philipps-plein-terrace-statue.webp': { caption: "Philipp's Milano · Corte & Terrazza Monumentale", district: 'Giardini Indro Montanelli' },
   '/images/guides-editorial/armani-prive-lounge.webp': { caption: 'Armani/Privé · Boutique Club Quadrilatero', district: 'Via Gastone Pisoni 1' },
   '/images/guides-editorial/ceresio-pool-dusk.webp': { caption: 'Ceresio 7 · Rooftop & Piscine Panoramica', district: 'Porta Volta / Isola' },
   '/images/guides-editorial/terrazza-duomo-skyline.webp': { caption: 'Terrazza Duomo 21 · Vista Guglie', district: 'Piazza del Duomo' },
@@ -1299,7 +1344,7 @@ const ROOFTOP_IDS = new Set([
 ]);
 const TERME_IDS = new Set(['g-117', 'g-120', 'g-122', 'g-90']);
 const DINNER_IDS = new Set([
-  'g-secret-bars', 'g-2', 'g-private-parties', 'g-9', 'g-19', 'g-30', 'g-31', 'g-36', 'g-37', 'g-38', 'g-53', 'g-60', 'g-78', 'g-85', 'g-88', 'g-102', 'g-121', 'g-123', 'g-125',
+  'g-secret-bars', 'g-2', 'g-private-parties', 'g-9', 'g-19', 'g-30', 'g-31', 'g-36', 'g-37', 'g-38', 'g-53', 'g-60', 'g-78', 'g-85', 'g-88', 'g-102', 'g-121', 'g-123', 'g-125', 'g-126',
 ]);
 const ELECTRONIC_IDS = new Set([
   'g-techno-2026', 'g-5', 'g-23', 'g-24', 'g-25', 'g-26', 'g-34', 'g-35', 'g-70', 'g-77', 'g-79', 'g-80', 'g-89', 'g-124',
@@ -1369,6 +1414,8 @@ const SINGLE_VENUE_SPECS: Record<string, SingleVenueGuideSpec> = {
   'g-28': {
     candidates: [
       ...VENUE_PHOTO_CANDIDATES['the-club-milano'],
+      '/images/guides-editorial/hollywood-corso-como.webp',
+      '/images/guides-editorial/pineta-dancefloor.webp',
       '/images/venues/editorial/03-milano-dress-code-door-policy.webp',
     ],
     allowFaqPlate: false,
@@ -1449,6 +1496,16 @@ const SINGLE_VENUE_SPECS: Record<string, SingleVenueGuideSpec> = {
       '/images/guides-editorial/bischeri-dinner.webp',
       '/images/guides-editorial/gattopardo-nave.webp',
       '/images/guides-editorial/gate-neon.webp',
+      '/images/venues/editorial/03-milano-dress-code-door-policy.webp',
+    ],
+    allowFaqPlate: false,
+  },
+  'g-126': {
+    candidates: [
+      ...VENUE_PHOTO_CANDIDATES['philipps-milano'],
+      '/images/guides-editorial/armani-prive-lounge.webp',
+      '/images/guides-editorial/terrazza-duomo-skyline.webp',
+      '/images/guides-editorial/voya-rooftop-20f.webp',
       '/images/venues/editorial/03-milano-dress-code-door-policy.webp',
     ],
     allowFaqPlate: false,
