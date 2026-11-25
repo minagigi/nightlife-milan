@@ -117,6 +117,11 @@ test('GSC Pillar & Upgraded Guides in mockGuides (total 124): >= 2,000 words, 6 
     'g-102',
     'g-22',
     'g-36',
+    'g-34',
+    'g-60',
+    'g-31',
+    'g-19',
+    'g-32',
   ] as const) {
     const guide = mockGuides.find((g) => g.id === id);
     assert.ok(guide, `Missing guide ${id}`);
@@ -338,6 +343,11 @@ test('V2 Curated Editorial Media & Reusable 118-Guide Template invariants', () =
     'g-102',
     'g-22',
     'g-36',
+    'g-34',
+    'g-60',
+    'g-31',
+    'g-19',
+    'g-32',
   ] as const) {
     const hero = GUIDE_HERO_IMAGES_114[gid];
     const inlines = GUIDE_INLINE_IMAGES_114[gid] || [];

@@ -110,7 +110,7 @@ function makeTable(headers: string[], rows: string[][], rawLastCol = false): str
   return `<div class="taste-table-scroll"><table class="taste-data-table"><thead><tr>${ths}</tr></thead><tbody>\n${trs}\n</tbody></table></div>`;
 }
 
-function buildPartner18MatrixHtml(locale: LocaleCode): string {
+export function buildPartner18MatrixHtml(locale: LocaleCode): string {
   const cp = CLUBBING_PILLAR_35[locale] || CLUBBING_PILLAR_35.en;
   const tl = cp.tableLabels;
   const rows: Array<[string, string, string, string, string, string]> = [
@@ -268,7 +268,7 @@ function buildPartner18MatrixHtml(locale: LocaleCode): string {
   return `<div class="taste-table-scroll"><table class="taste-data-table"><thead><tr><th>${escapeHtml(tl.thVenue)}</th><th>${escapeHtml(tl.thDistrict)}</th><th>${escapeHtml(tl.thMusic)}</th><th>${escapeHtml(tl.thDressCode)}</th><th>${escapeHtml(tl.thRates2027)}</th><th>${escapeHtml(tl.thStatus)}</th></tr></thead><tbody>\n${body}\n</tbody></table></div>`;
 }
 
-function buildClosedVenuesHtml(locale: LocaleCode): string {
+export function buildClosedVenuesHtml(locale: LocaleCode): string {
   const cp = CLUBBING_PILLAR_35[locale] || CLUBBING_PILLAR_35.en;
   const tl = cp.tableLabels;
   const links = [

@@ -4,6 +4,7 @@ import { getPillarDisplayHeadline } from './guidesGscPillar20261120';
 import { getGsc20261122DisplayHeadline } from './guidesGscBatch20261122';
 import { getGsc20261123DisplayHeadline } from './guidesGscBatch20261123';
 import { getGsc20261124DisplayHeadline } from './guidesGscBatch20261124';
+import { getGsc20261125DisplayHeadline } from './guidesGscBatch20261125';
 import { GUIDE_100_SEEDS } from './guides100Catalog';
 import { getLocalizedGuideSeedNames } from './i18n/guideSeeds35Names';
 
@@ -286,6 +287,11 @@ export function getEditorialDisplayHeadline(
   locale: LocaleCode,
   localizedFullTitle: string,
 ): string {
+  const gsc20261125 = getGsc20261125DisplayHeadline(guideId, locale);
+  if (gsc20261125) {
+    return clampConciseHeadline(gsc20261125);
+  }
+
   const gsc20261124 = getGsc20261124DisplayHeadline(guideId, locale);
   if (gsc20261124) {
     return clampConciseHeadline(gsc20261124);
