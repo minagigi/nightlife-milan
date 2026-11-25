@@ -92,7 +92,15 @@ export function getDateSensitiveEvents<T extends DateSensitiveEvent>(
       return active || (day >= today && day <= sunday);
     })
     .slice()
-    .sort((left, right) => Date.parse(left.dateISO) - Date.parse(right.dateISO) || left.id.localeCompare(right.id));
+    .sort((left, right) => {
+      if (left.id === '000-just-singing-in-the-rain-2026' && right.id !== '000-just-singing-in-the-rain-2026') {
+        return -1;
+      }
+      if (right.id === '000-just-singing-in-the-rain-2026' && left.id !== '000-just-singing-in-the-rain-2026') {
+        return 1;
+      }
+      return Date.parse(left.dateISO) - Date.parse(right.dateISO) || left.id.localeCompare(right.id);
+    });
 }
 
 /**

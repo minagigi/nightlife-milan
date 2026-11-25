@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { tr } from '@/lib/i18n/t';
 import { MessageCircle } from 'lucide-react';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
+import { isJustSingingRainActive } from '@/lib/just-singing-rain/justme35';
 
 interface WeeklyProgramProps {
   venueId: string;
@@ -17,7 +18,16 @@ export default function WeeklyProgram({ venueId, venueName, locale }: WeeklyProg
   const programs: Record<string, { day: string; event: string }[]> = {
     'v-justme': [
       { day: tr(locale, 'Tue', 'Martedì'), event: 'University Night' },
-      { day: tr(locale, 'Wed', 'Mercoledì'), event: 'Fortune Teller' },
+      {
+        day: tr(locale, 'Wed', 'Mercoledì'),
+        event: isJustSingingRainActive()
+          ? tr(
+              locale,
+              'Just Singing in the Rain (25 Nov: Free Entry until 00:30 + Free Drink)',
+              'Just Singing in the Rain (25 Nov: Ingresso Gratis entro 00:30 + Drink Offerto)',
+            )
+          : 'Fortune Teller',
+      },
       { day: tr(locale, 'Thu', 'Giovedì'), event: tr(locale, 'Special Format · Vida Loca (26 Nov: Thanksgiving)', 'Format Speciali · Vida Loca (26 Nov: Thanksgiving)') },
       { day: tr(locale, 'Fri', 'Venerdì'), event: tr(locale, 'Friday Night (27 Nov: Cena Spettacolo Partenopea · 70€)', 'Friday Night (27 Nov: Cena Spettacolo Partenopea · 70€)') },
     ],

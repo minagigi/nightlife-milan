@@ -11,6 +11,14 @@ import {
   THANKSGIVING_JUSTME_POSTER_SRC,
   thanksgivingJustMeSlug,
 } from './thanksgiving/justme35';
+import {
+  isJustSingingRainActive,
+  JUST_SINGING_RAIN_ALL_35,
+  JUST_SINGING_RAIN_END_ISO,
+  JUST_SINGING_RAIN_POSTER_SRC,
+  JUST_SINGING_RAIN_SLUGS_35,
+  JUST_SINGING_RAIN_START_ISO,
+} from './just-singing-rain/justme35';
 
 /** REGOLA (richiesta utente): ogni gallery/carosello/calendario mostra UNA sola
  * card per evento — mai due versioni (IT + EN) né due sorgenti (Eventbrite +
@@ -143,6 +151,7 @@ function expandWeeklyEvents(): { event: Event; venue: Venue }[] {
     for (const we of weeklyEvents as WeeklyEvent[]) {
       if (we.dayOfWeek !== dow) continue;
       if (we.seasonalSummerOnly && (dayMonth < 5 || dayMonth > 9)) continue;
+      if (we.id === 'justme-wednesday' && dayKey === '2026-11-25') continue;
       if (we.id === 'justme-thursday' && dayKey >= '2026-11-26') continue;
       if (we.id === 'justme-friday' && dayKey === '2026-11-27') continue;
       const venue = mockVenues.find((v) => v.id === `v-${we.clubSlug}`);
@@ -191,7 +200,7 @@ function expandWeeklyEvents(): { event: Event; venue: Venue }[] {
  */
 export async function getAllCalendarEvents(): Promise<{ event: Event; venue: Venue }[]> {
   const justMeVenue = mockVenues.find((v) => v.id === 'v-justme');
-  const specialJustMeDays = new Set(['2026-11-26', '2026-11-27']);
+  const specialJustMeDays = new Set(['2026-11-25', '2026-11-26', '2026-11-27']);
   const allEvents = mockEvents.filter(
     (event) => !(event.venueId === 'v-justme' && specialJustMeDays.has(romeDayKey(event.dateISO))),
   );
@@ -199,6 +208,34 @@ export async function getAllCalendarEvents(): Promise<{ event: Event; venue: Ven
   const concreteItems = allEvents
     .map((event) => ({ event, venue: mockVenues.find((v) => v.id === event.venueId) }))
     .filter((item): item is { event: Event; venue: Venue } => item.venue !== undefined);
+
+  if (justMeVenue && isJustSingingRainActive()) {
+    const localizedTitles = Object.fromEntries(
+      Object.entries(JUST_SINGING_RAIN_ALL_35).map(([code, pack]) => [code, pack.metaTitle]),
+    ) as Event['localizedContent']['title'];
+    const localizedShortDesc = Object.fromEntries(
+      Object.entries(JUST_SINGING_RAIN_ALL_35).map(([code, pack]) => [code, pack.subtitle]),
+    ) as Event['localizedContent']['shortDescription'];
+    concreteItems.unshift({
+      event: {
+        id: 'just-singing-in-the-rain-2026',
+        venueId: 'v-justme',
+        genre: [MusicGenre.COMMERCIAL, MusicGenre.HIP_HOP],
+        dateISO: JUST_SINGING_RAIN_START_ISO,
+        endDateISO: JUST_SINGING_RAIN_END_ISO,
+        isSpecial: true,
+        isTrending: true,
+        pricing: { entry: 0, currency: 'EUR', tableMinSpend: null },
+        localizedContent: {
+          title: localizedTitles,
+          shortDescription: localizedShortDesc,
+          slug: { ...JUST_SINGING_RAIN_SLUGS_35 },
+        },
+        image: JUST_SINGING_RAIN_POSTER_SRC,
+      },
+      venue: justMeVenue,
+    });
+  }
 
   if (justMeVenue) {
     concreteItems.push(

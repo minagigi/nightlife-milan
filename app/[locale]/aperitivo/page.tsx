@@ -10,9 +10,10 @@ import { getHubSeoMeta35, getAperitivoH1 } from '@/lib/i18n/hubSeoMeta35';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { VipQuoteCalculator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
+import TonightRainSpotlight from '@/components/TonightRainSpotlight';
 import type { LocaleCode } from '@/lib/i18n/locales';
 
-export const revalidate = 3600;
+export const revalidate = 300;
 
 const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
 
@@ -246,6 +247,8 @@ export default async function AperitivoPage({ params }: { params: Promise<{ loca
           </a>
         </div>
       </section>
+
+      <TonightRainSpotlight locale={locale} section="aperitivo-cena" />
 
       {/* Quick tips */}
       <section className="px-6 pb-20 border-t border-white/5 pt-16">

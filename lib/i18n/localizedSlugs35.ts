@@ -12,6 +12,7 @@ import { christmasVoyaSlug, resolveChristmasVoyaSlug } from '@/lib/christmas/voy
 import { orthodoxNyeJustMeSlug, resolveOrthodoxNyeJustMeSlug } from '@/lib/orthodox-nye/justme35';
 import { thanksgivingJustMeSlug, resolveThanksgivingJustMeSlug } from '@/lib/thanksgiving/justme35';
 import { partenopeaJustMeSlug, resolvePartenopeaJustMeSlug } from '@/lib/partenopea/justme35';
+import { justSingingRainSlug, resolveJustSingingRainSlug } from '@/lib/just-singing-rain/justme35';
 import {
   CAPODANNO_CATEGORY_IDS,
   CAPODANNO_EVENT_BASE_SLUGS,
@@ -1146,6 +1147,9 @@ export function resolveEventSlugToCanonical(slug: string, targetLocale?: LocaleC
   if (resolveThanksgivingJustMeSlug(slug)) {
     return thanksgivingJustMeSlug(loc);
   }
+  if (resolveJustSingingRainSlug(slug)) {
+    return justSingingRainSlug(loc);
+  }
   if (resolvePartenopeaJustMeSlug(slug)) {
     return partenopeaJustMeSlug(loc);
   }
@@ -1201,6 +1205,9 @@ export function getLocalizedEventSlug35(rawSlug: string, locale: LocaleCode): st
   }
   if (resolveThanksgivingJustMeSlug(rawSlug)) {
     return thanksgivingJustMeSlug(locale);
+  }
+  if (resolveJustSingingRainSlug(rawSlug)) {
+    return justSingingRainSlug(locale);
   }
   if (resolvePartenopeaJustMeSlug(rawSlug)) {
     return partenopeaJustMeSlug(locale);
@@ -1808,6 +1815,9 @@ export function resolveLegacyOrExpiredEventRedirect(rawSlug: string, targetLocal
     resolveThanksgivingJustMeSlug(rawSlug) ||
     resolveThanksgivingJustMeSlug(slug) ||
     resolveThanksgivingJustMeSlug(stripped) ||
+    resolveJustSingingRainSlug(rawSlug) ||
+    resolveJustSingingRainSlug(slug) ||
+    resolveJustSingingRainSlug(stripped) ||
     resolvePartenopeaJustMeSlug(rawSlug) ||
     resolvePartenopeaJustMeSlug(slug) ||
     resolvePartenopeaJustMeSlug(stripped) ||

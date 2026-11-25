@@ -5,6 +5,14 @@ import { getLocalizedText } from './seo';
 import { formatEventPresentationLabels, type EventPresentationLabels } from './i18n/eventPresentationLabels';
 import { isEnabledLocale } from './i18n/locales';
 import { getVenueById } from './data';
+import {
+  getJustSingingRainContent,
+  isJustSingingRainActive,
+  JUST_SINGING_RAIN_END_ISO,
+  JUST_SINGING_RAIN_POSTER_SRC,
+  JUST_SINGING_RAIN_START_ISO,
+  justSingingRainSlug,
+} from './just-singing-rain/justme35';
 
 export type PriorityRecommendationPresentation = {
   id: string;
@@ -27,17 +35,46 @@ const recommendationCache = new Map<string, PriorityRecommendationPresentation[]
 
 export function getTopPriorityVenueRecommendations(locale: string, limit = 6): PriorityRecommendationPresentation[] {
   if (!isEnabledLocale(locale)) return [];
-  const cached = recommendationCache.get(locale);
+  const rainActive = isJustSingingRainActive();
+  const cacheKey = `${locale}|${rainActive ? 'rain1' : 'rain0'}`;
+  const cached = recommendationCache.get(cacheKey);
   if (cached) return cached.slice(0, limit);
 
   const out: PriorityRecommendationPresentation[] = [];
   const seenVenues = new Set<string>();
+
+  if (rainActive) {
+    const rain = getJustSingingRainContent(locale);
+    const labels = formatEventPresentationLabels({
+      dateISO: JUST_SINGING_RAIN_START_ISO,
+      price: 0,
+      currency: 'EUR',
+      locale,
+    });
+    seenVenues.add('v-justme');
+    out.push({
+      id: '000-just-singing-in-the-rain-2026',
+      venueId: 'v-justme',
+      dateISO: JUST_SINGING_RAIN_START_ISO,
+      endDateISO: JUST_SINGING_RAIN_END_ISO,
+      title: rain.metaTitle,
+      venueName: 'Just Me Milano',
+      slug: justSingingRainSlug(locale),
+      image: JUST_SINGING_RAIN_POSTER_SRC,
+      price: 0,
+      currency: 'EUR',
+      labels,
+      verificationExpiresAt: null,
+      affiliateUrl: null,
+    });
+  }
 
   for (let offset = 0; offset < 7; offset++) {
     const dayKey = romeDayKeyOffset(offset);
     const dow = dayOfWeekForKey(dayKey);
     const candidates = weeklyEvents.filter((we) => PRIORITY_CLUBS.has(we.clubSlug) && we.dayOfWeek === dow);
     for (const we of candidates) {
+      if (we.id === 'justme-wednesday' && dayKey === '2026-11-25') continue;
       if (we.id === 'justme-thursday' && dayKey >= '2026-11-26') continue;
       if (we.id === 'justme-friday' && dayKey === '2026-11-27') continue;
       const resolvedVenueId = `v-${we.clubSlug}`;
@@ -82,6 +119,6 @@ export function getTopPriorityVenueRecommendations(locale: string, limit = 6): P
       Date.parse(left.dateISO) - Date.parse(right.dateISO),
   );
 
-  recommendationCache.set(locale, out);
+  recommendationCache.set(cacheKey, out);
   return out.slice(0, limit);
 }

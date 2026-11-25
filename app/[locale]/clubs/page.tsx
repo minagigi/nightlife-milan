@@ -10,8 +10,9 @@ import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { PrioritySixShowcase, WeeklyNightlifeNavigator, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import VerticalHubsAndEventsSection from '@/components/VerticalHubsAndEventsSection';
+import TonightRainSpotlight from '@/components/TonightRainSpotlight';
 
-export const revalidate = 3600;
+export const revalidate = 300;
 
 const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
 
@@ -197,6 +198,8 @@ export default async function ClubsPage({
           </div>
         </div>
       </section>
+
+      <TonightRainSpotlight locale={localeCode} section="discoteca" />
 
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <VenueMapToggle venues={allVenues} lang={localeCode} mapPins={mapPins} />

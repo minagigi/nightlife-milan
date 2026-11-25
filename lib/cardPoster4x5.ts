@@ -594,6 +594,7 @@ const CARD_POSTER_4X5_MAP: Readonly<Record<string, string>> = {
   "/images/events/orthodox-nye-2027/capodanno-ortodosso-justme-milano-2027.webp": "/images/events/cards-4x5/orthodox-nye-2027/capodanno-ortodosso-justme-milano-2027.webp",
   "/images/events/orthodox-nye-2027/justme-ortodosso-2027-menu-gold-80.webp": "/images/events/cards-4x5/orthodox-nye-2027/justme-ortodosso-2027-menu-gold-80.webp",
   "/images/events/orthodox-nye-2027/justme-ortodosso-2027-menu-silver-60.webp": "/images/events/cards-4x5/orthodox-nye-2027/justme-ortodosso-2027-menu-silver-60.webp",
+  "/images/events/just-singing-rain-2026/just-singing-in-the-rain-justme-milano-2026.webp": "/images/events/just-singing-rain-2026/just-singing-in-the-rain-justme-milano-2026.webp",
   "/images/events/partenopea-2026/cena-spettacolo-partenopea-justme-milano-2026.webp": "/images/events/cards-4x5/partenopea-2026/cena-spettacolo-partenopea-justme-milano-2026.webp",
   "/images/events/partenopea-2026/justme-partenopea-2026-menu-dinner-show-70.webp": "/images/events/cards-4x5/partenopea-2026/justme-partenopea-2026-menu-dinner-show-70.webp",
   "/images/events/partenopea-2026/justme-partenopea-2026-party-vip-tables.webp": "/images/events/cards-4x5/partenopea-2026/justme-partenopea-2026-party-vip-tables.webp",

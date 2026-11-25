@@ -8,10 +8,11 @@ import { Sparkles, CheckCircle2, MessageCircle, Clock, ShieldCheck } from 'lucid
 import { EntryFormulaMatrix, VipQuoteCalculator, PrioritySixShowcase } from '@/components/NightlifeExpansionModules';
 import Image from 'next/image';
 import EditorialPageSections from '@/components/EditorialPageSections';
+import TonightRainSpotlight from '@/components/TonightRainSpotlight';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 
-export const revalidate = 3600;
+export const revalidate = 300;
 
 const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
 
@@ -204,6 +205,8 @@ export default async function GuestListsPage({
           </p>
         </div>
       </section>
+
+      <TonightRainSpotlight locale={locale} section="discoteca" />
 
       {/* Priority 6 Guest List Windows & Prices */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">

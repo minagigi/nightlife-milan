@@ -12,6 +12,7 @@ import { christmasVoyaPath } from '@/lib/christmas/voya35';
 import { orthodoxNyeJustMePath } from '@/lib/orthodox-nye/justme35';
 import { thanksgivingJustMePath } from '@/lib/thanksgiving/justme35';
 import { partenopeaJustMePath } from '@/lib/partenopea/justme35';
+import { isJustSingingRainActive, justSingingRainPath } from '@/lib/just-singing-rain/justme35';
 import { halloweenPath } from '@/lib/halloween/routes';
 import { OCTOBER_EVENTS, OCTOBER_EVENTS_INVENTORY } from '@/lib/octoberEvents';
 import { octoberEventCanonical } from '@/lib/octoberEventSeo';
@@ -25,7 +26,7 @@ import {
   getLocalizedZoneSlug35,
 } from '@/lib/i18n/localizedSlugs35';
 
-const SITE_RELEASE_TIMESTAMP = '2026-11-23T00:25:00.000Z';
+const SITE_RELEASE_TIMESTAMP = '2026-11-25T12:00:00.000Z';
 const LEGAL_STATIC_TIMESTAMP = '2026-11-01T00:00:00.000Z';
 
 export function clampLastModified(
@@ -354,7 +355,7 @@ function buildEventsEntriesInternal(ebEvents: readonly Event[]): MetadataRoute.S
   const archiveCoreLocales: readonly LocaleCode[] = ['it', 'en', 'es', 'fr', 'de', 'pt'];
 
   OCTOBER_EVENTS.forEach((event) => {
-    if (event.id === '251019' || event.id === '249216' || event.id === '249217') return;
+    if (event.id === '251019' || event.id === '249169' || event.id === '249216' || event.id === '249217') return;
     const endMs = Date.parse(event.endISO || event.startISO);
     const isUpcoming = endMs >= nowMs;
     const targetLocales = endMs >= archiveCutoffMs ? locales : archiveCoreLocales;
@@ -406,6 +407,14 @@ function buildEventsEntriesInternal(ebEvents: readonly Event[]): MetadataRoute.S
       changeFrequency: 'daily',
       priority: 0.94,
     });
+    if (isJustSingingRainActive() || archiveCoreLocales.includes(locale)) {
+      entries.push({
+        url: `${baseUrl}${justSingingRainPath(locale)}`,
+        lastModified: getRollingMilanDayLastModified(),
+        changeFrequency: 'hourly',
+        priority: 0.98,
+      });
+    }
     entries.push({
       url: `${baseUrl}${partenopeaJustMePath(locale)}`,
       lastModified: catalogLastMod,

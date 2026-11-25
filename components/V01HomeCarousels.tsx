@@ -273,90 +273,109 @@ export default function V01HomeCarousels({
     );
   };
 
+  const hasTonightRainSpecial = useMemo(
+    () => tonightEvents.some((ev) => ev.id === '000-just-singing-in-the-rain-2026'),
+    [tonightEvents],
+  );
+
+  const staseraBand = (
+    <CarouselBand
+      id="stasera"
+      cialdini="scarcity"
+      surfaceClass={hasTonightRainSpecial ? 'bg-[#050505]' : 'bg-[#0B0A09]'}
+      copy={v01.stasera}
+      countValue={v01.stasera.countBadge}
+      viewAllHref={tonightHref}
+      prevAria={v01.prevAria}
+      nextAria={v01.nextAria}
+    >
+      {tonightEvents.map((ev) => renderDateEventCard(ev, v01.stasera))}
+    </CarouselBand>
+  );
+
+  const capodannoBand = (
+    <CarouselBand
+      id="capodanno"
+      cialdini="scarcity"
+      surfaceClass={hasTonightRainSpecial ? 'bg-[#0B0A09]' : 'bg-[#050505]'}
+      copy={v01.capodanno}
+      countValue={String(capodannoEvents.length).padStart(2, '0')}
+      viewAllHref={capodannoHubHref}
+      prevAria={v01.prevAria}
+      nextAria={v01.nextAria}
+    >
+      {capodannoEvents.map((ev, index) => (
+        <article key={ev.slug} className={cardShellClass}>
+          <div>
+            <Link
+              href={ev.href}
+              prefetch={false}
+              className="relative block aspect-[4/5] w-full overflow-hidden border-b border-[#F6F1E7]/14 bg-[#0B0A09]"
+            >
+              <Image
+                src={toCardPoster4x5(ev.image)}
+                alt={`${ev.venueName} · ${ev.title}`}
+                fill
+                quality={92}
+                sizes="(max-width: 640px) 84vw, (max-width: 1024px) 46vw, 380px"
+                className="object-cover"
+              />
+              <span className="absolute left-3 top-3 border border-[#EAE3D5]/40 bg-[#050505]/92 px-2.5 py-1 font-mono text-[11px] font-bold text-[#EAE3D5]">
+                #{String(index + 1).padStart(2, '0')} · 31 DEC
+              </span>
+              <span className="absolute right-3 top-3 bg-[#EAE3D5] px-2.5 py-1 font-mono text-[11px] font-bold text-[#050505]">
+                {ev.priceBadge}
+              </span>
+            </Link>
+            <div className="p-5">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-[#EAE3D5]">
+                {ev.venueName} · {ev.city}
+              </p>
+              <h3 className="mt-1.5 font-serif text-xl font-normal leading-snug text-[#F6F1E7]">
+                <Link href={ev.href} prefetch={false} className="hover:underline">
+                  {ev.title}
+                </Link>
+              </h3>
+              <p className="mt-2 line-clamp-2 font-sans text-[13px] leading-relaxed text-[#C2B9AA]">
+                {ev.musicAndFormat}
+              </p>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 border-t border-[#F6F1E7]/14">
+            <Link
+              href={ev.href}
+              prefetch={false}
+              className="flex min-h-[46px] items-center justify-center border-r border-[#F6F1E7]/14 bg-[#141311] px-3 py-2.5 text-[12px] font-bold uppercase tracking-[0.06em] text-[#F6F1E7] transition-colors hover:bg-[#1E1C19]"
+            >
+              {v01.capodanno.infoCta}
+            </Link>
+            <a
+              href={ev.waHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex min-h-[46px] items-center justify-center bg-[#25D366] px-3 py-2.5 text-[12px] font-bold uppercase tracking-[0.06em] text-[#050505] transition-colors hover:bg-[#2EE472]"
+            >
+              {v01.capodanno.waCta} ↗
+            </a>
+          </div>
+        </article>
+      ))}
+    </CarouselBand>
+  );
+
   return (
     <>
-      {/* 1. CAROSELLO ORIZZONTALE — CAPODANNO MILANO 2027 (19 EVENTI IN ORDINE UFFICIALE) */}
-      <CarouselBand
-        id="capodanno"
-        cialdini="scarcity"
-        surfaceClass="bg-[#050505]"
-        copy={v01.capodanno}
-        countValue={String(capodannoEvents.length).padStart(2, '0')}
-        viewAllHref={capodannoHubHref}
-        prevAria={v01.prevAria}
-        nextAria={v01.nextAria}
-      >
-        {capodannoEvents.map((ev, index) => (
-          <article key={ev.slug} className={cardShellClass}>
-            <div>
-              <Link
-                href={ev.href}
-                prefetch={false}
-                className="relative block aspect-[4/5] w-full overflow-hidden border-b border-[#F6F1E7]/14 bg-[#0B0A09]"
-              >
-                <Image
-                  src={toCardPoster4x5(ev.image)}
-                  alt={`${ev.venueName} · ${ev.title}`}
-                  fill
-                  quality={92}
-                  sizes="(max-width: 640px) 84vw, (max-width: 1024px) 46vw, 380px"
-                  className="object-cover"
-                />
-                <span className="absolute left-3 top-3 border border-[#EAE3D5]/40 bg-[#050505]/92 px-2.5 py-1 font-mono text-[11px] font-bold text-[#EAE3D5]">
-                  #{String(index + 1).padStart(2, '0')} · 31 DEC
-                </span>
-                <span className="absolute right-3 top-3 bg-[#EAE3D5] px-2.5 py-1 font-mono text-[11px] font-bold text-[#050505]">
-                  {ev.priceBadge}
-                </span>
-              </Link>
-              <div className="p-5">
-                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-[#EAE3D5]">
-                  {ev.venueName} · {ev.city}
-                </p>
-                <h3 className="mt-1.5 font-serif text-xl font-normal leading-snug text-[#F6F1E7]">
-                  <Link href={ev.href} prefetch={false} className="hover:underline">
-                    {ev.title}
-                  </Link>
-                </h3>
-                <p className="mt-2 line-clamp-2 font-sans text-[13px] leading-relaxed text-[#C2B9AA]">
-                  {ev.musicAndFormat}
-                </p>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 border-t border-[#F6F1E7]/14">
-              <Link
-                href={ev.href}
-                prefetch={false}
-                className="flex min-h-[46px] items-center justify-center border-r border-[#F6F1E7]/14 bg-[#141311] px-3 py-2.5 text-[12px] font-bold uppercase tracking-[0.06em] text-[#F6F1E7] transition-colors hover:bg-[#1E1C19]"
-              >
-                {v01.capodanno.infoCta}
-              </Link>
-              <a
-                href={ev.waHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex min-h-[46px] items-center justify-center bg-[#25D366] px-3 py-2.5 text-[12px] font-bold uppercase tracking-[0.06em] text-[#050505] transition-colors hover:bg-[#2EE472]"
-              >
-                {v01.capodanno.waCta} ↗
-              </a>
-            </div>
-          </article>
-        ))}
-      </CarouselBand>
-
-      {/* 2. CAROSELLO ORIZZONTALE — QUESTA SERA A MILANO */}
-      <CarouselBand
-        id="stasera"
-        cialdini="scarcity"
-        surfaceClass="bg-[#0B0A09]"
-        copy={v01.stasera}
-        countValue={v01.stasera.countBadge}
-        viewAllHref={tonightHref}
-        prevAria={v01.prevAria}
-        nextAria={v01.nextAria}
-      >
-        {tonightEvents.map((ev) => renderDateEventCard(ev, v01.stasera))}
-      </CarouselBand>
+      {hasTonightRainSpecial ? (
+        <>
+          {staseraBand}
+          {capodannoBand}
+        </>
+      ) : (
+        <>
+          {capodannoBand}
+          {staseraBand}
+        </>
+      )}
 
       {/* 3. CAROSELLO ORIZZONTALE — QUESTA SETTIMANA & WEEKEND */}
       <CarouselBand

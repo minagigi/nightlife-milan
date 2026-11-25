@@ -250,8 +250,15 @@ export default async function EventIntentLanding({ intent, locale }: { intent: E
   const lp = localePrefix(locale);
   const allItems = getEventDiscoveryItems(await getAllCalendarEvents(), locale);
   const items = allItems
-    .filter(({ event }) => isUpcomingRome(event.dateISO) && config.venueIds.includes(event.venueId))
     .filter(({ event }) => {
+      if (!isUpcomingRome(event.dateISO)) return false;
+      if (event.id === 'just-singing-in-the-rain-2026') {
+        return intent === 'international' || intent === 'university-erasmus' || intent === '18-plus';
+      }
+      return config.venueIds.includes(event.venueId);
+    })
+    .filter(({ event }) => {
+      if (event.id === 'just-singing-in-the-rain-2026') return true;
       if (!config.terms) return true;
       const haystack = `${event.localizedContent.title.en} ${event.localizedContent.shortDescription.en}`.toLowerCase();
       return config.terms.some((term) => haystack.includes(term));

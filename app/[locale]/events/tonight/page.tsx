@@ -14,6 +14,7 @@ import { WeeklyNightlifeNavigator, VipQuoteCalculator } from '@/components/Night
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
+import { getJustSingingRainContent, isJustSingingRainActive } from '@/lib/just-singing-rain/justme35';
 
 export const dynamic = 'force-dynamic';
 
@@ -175,14 +176,25 @@ export default async function EventsTonightPage({ params }: Props) {
   const getMilanHour = (iso: string) =>
     parseInt(new Intl.DateTimeFormat('en-US', { hour: 'numeric', hour12: false, timeZone: 'Europe/Rome' }).format(new Date(iso)), 10);
 
+  const rainActive = isJustSingingRainActive();
+  const rainItem = rainActive
+    ? items.find((i) => i.event.id === 'just-singing-in-the-rain-2026')
+    : undefined;
+  const rainContent = rainActive ? getJustSingingRainContent(locale) : undefined;
+
   const aperitivo = items.filter((i) => {
     const h = getMilanHour(i.event.dateISO);
     return h >= 18 && h <= 21;
   });
-  const primeTime = items.filter((i) => {
+  const dinnerSlot = rainItem ? [rainItem] : [];
+  const primeTimeBase = items.filter((i) => {
     const h = getMilanHour(i.event.dateISO);
     return h === 22 || h === 23 || h === 0;
   });
+  const primeTime =
+    rainItem && !primeTimeBase.some((i) => i.event.id === rainItem.event.id)
+      ? [rainItem, ...primeTimeBase]
+      : primeTimeBase;
   const afterHours = items.filter((i) => {
     const h = getMilanHour(i.event.dateISO);
     return h >= 1 && h <= 6;
@@ -195,8 +207,12 @@ export default async function EventsTonightPage({ params }: Props) {
     timeZone: 'Europe/Rome',
   });
 
-  // Event schema sui soli eventi effettivamente mostrati nei tre slot orari.
-  const shownItems = [...aperitivo, ...primeTime, ...afterHours];
+  // Event schema sui soli eventi effettivamente mostrati (deduplicati per id).
+  const shownMap = new Map<string, (typeof items)[number]>();
+  for (const entry of [...aperitivo, ...dinnerSlot, ...primeTime, ...afterHours]) {
+    if (!shownMap.has(entry.event.id)) shownMap.set(entry.event.id, entry);
+  }
+  const shownItems = [...shownMap.values()];
   const eventListSchema =
     shownItems.length > 0
       ? generateEventListSchema(shownItems, locale, tr(locale, 'Events Tonight in Milan', 'Eventi Stasera a Milano'))
@@ -317,8 +333,32 @@ export default async function EventsTonightPage({ params }: Props) {
           </div>
         ) : (
           <div className="space-y-14">
-            <TimeSlot title="Aperitivo" time="19:30 – 22:30" items={aperitivo} locale={locale} lp={lp} />
-            <TimeSlot title="Prime Time" time="23:30 – 01:00" items={primeTime} locale={locale} lp={lp} />
+            <TimeSlot
+              title="Aperitivo"
+              time="19:30 – 22:30"
+              items={aperitivo}
+              locale={locale}
+              lp={lp}
+              rainSlotNote={rainContent?.offerPhrase}
+            />
+            {dinnerSlot.length > 0 && (
+              <TimeSlot
+                title={rainContent?.formats[1]?.title || tr(locale, 'Dinner', 'Cena')}
+                time="20:30 – 23:00"
+                items={dinnerSlot}
+                locale={locale}
+                lp={lp}
+                rainSlotNote={rainContent?.formats[1]?.title}
+              />
+            )}
+            <TimeSlot
+              title={rainContent?.formats[2]?.title || tr(locale, 'Club Night · Prime Time', 'Serata & Discoteca')}
+              time="22:30 – 05:00"
+              items={primeTime}
+              locale={locale}
+              lp={lp}
+              rainSlotNote={rainContent?.offerPhrase}
+            />
             <TimeSlot title="After Hours" time="01:00 – 05:00" items={afterHours} locale={locale} lp={lp} />
           </div>
         )}
@@ -434,12 +474,14 @@ function TimeSlot({
   items,
   locale,
   lp,
+  rainSlotNote,
 }: {
   title: string;
   time: string;
   items: { event: Event; venue: Venue }[];
   locale: string;
   lp: string;
+  rainSlotNote?: string;
 }) {
   if (items.length === 0) return null;
 
@@ -498,10 +540,15 @@ function TimeSlot({
                   <MapPin className="w-3.5 h-3.5" />
                   <span className="text-sm">{venueName}</span>
                 </div>
-                {event.pricing.entry !== null && event.pricing.entry > 0 && (
-                  <p className="text-white/30 text-xs mt-2">
-                    {tr(locale, 'Entry', 'Ingresso')} €{event.pricing.entry}
-                  </p>
+                {event.id === 'just-singing-in-the-rain-2026' && rainSlotNote ? (
+                  <p className="text-champagne text-xs font-medium mt-2">{rainSlotNote}</p>
+                ) : (
+                  event.pricing.entry !== null &&
+                  event.pricing.entry > 0 && (
+                    <p className="text-white/30 text-xs mt-2">
+                      {tr(locale, 'Entry', 'Ingresso')} €{event.pricing.entry}
+                    </p>
+                  )
                 )}
               </div>
             </Link>

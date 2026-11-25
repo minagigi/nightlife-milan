@@ -19,6 +19,12 @@ import {
 } from './orthodox-nye/justme35';
 import { thanksgivingJustMePath, THANKSGIVING_JUSTME_POSTER_SRC } from './thanksgiving/justme35';
 import { partenopeaJustMePath, PARTENOPEA_JUSTME_POSTER_SRC } from './partenopea/justme35';
+import {
+  getJustSingingRainContent,
+  isJustSingingRainActive,
+  JUST_SINGING_RAIN_POSTER_SRC,
+  justSingingRainPath,
+} from './just-singing-rain/justme35';
 import type { CarouselEventCard } from './venueDossiers35';
 
 export interface VerticalHubUi35 {
@@ -1182,6 +1188,28 @@ export function resolveSuggestedEventsForVertical(
         badge: isIt ? 'CAPODANNO 31 DIC' : 'NYE 31 DEC',
       });
     }
+  }
+
+  if (isJustSingingRainActive()) {
+    const rainPack = getJustSingingRainContent(locale);
+    const rainHref = justSingingRainPath(locale);
+    cards.unshift({
+      id: 'vert-just-singing-in-the-rain-2026',
+      title: rainPack.metaTitle,
+      dateLabel: '2026-11-25',
+      timeLabel: `${rainPack.dateBadge} · ${rainPack.formats[1]?.title || ''}`,
+      priceLabel: rainPack.offerPhrase,
+      categoryLabel: 'Just Me Milano · Viale Luigi Camoens 2',
+      genres: ['Commercial', 'Hip Hop', 'R&B'],
+      imageSrc: JUST_SINGING_RAIN_POSTER_SRC,
+      href: rainHref,
+      whatsappHref: getConciergeBookingUrl(
+        locale,
+        'Just Singing in the Rain · Just Me Milano (25 Novembre)',
+        rainHref,
+      ),
+      badge: `#1 · ${rainPack.offerPhrase}`,
+    });
   }
 
   return cards;

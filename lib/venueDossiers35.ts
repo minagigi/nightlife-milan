@@ -16,6 +16,12 @@ import {
 } from './orthodox-nye/justme35';
 import { thanksgivingJustMePath, THANKSGIVING_JUSTME_POSTER_SRC } from './thanksgiving/justme35';
 import { partenopeaJustMePath, PARTENOPEA_JUSTME_POSTER_SRC } from './partenopea/justme35';
+import {
+  getJustSingingRainContent,
+  isJustSingingRainActive,
+  JUST_SINGING_RAIN_POSTER_SRC,
+  justSingingRainPath,
+} from './just-singing-rain/justme35';
 
 function venueDisplayName(venue: Venue, locale: string): string {
   return (locale === 'it' ? venue.localizedContent?.name?.it : venue.localizedContent?.name?.en) || venue.localizedContent?.name?.en || 'Club Milano';
@@ -1231,10 +1237,38 @@ export function resolveVenueEventsForCarousel(
   }
 
   if (venue.id === 'v-justme' || clubSlug === 'just-me-milano' || clubSlug === 'just-me-milan') {
+    for (const list of [tonight, thisWeek, future]) {
+      for (let idx = list.length - 1; idx >= 0; idx--) {
+        if (list[idx].id.includes('249169') || list[idx].href.includes('249169')) {
+          list.splice(idx, 1);
+        }
+      }
+    }
     const romeNowDay = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Rome' }).format(new Date());
     const romeEndWeekDay = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Rome' }).format(
       new Date(Date.now() + 7 * 86_400_000),
     );
+    const rainActive = isJustSingingRainActive();
+    const rainPack = rainActive ? getJustSingingRainContent(locale) : null;
+    const rainCard = rainPack
+      ? {
+          id: 'just-singing-in-the-rain-2026',
+          title: rainPack.metaTitle,
+          dateLabel: '2026-11-25',
+          timeLabel: `${rainPack.dateBadge} · ${rainPack.formats[1]?.title || ''}`,
+          priceLabel: rainPack.offerPhrase,
+          categoryLabel: 'Nightlife Milan · Just Me Milano · Viale Luigi Camoens 2',
+          genres: ['Commercial', 'Hip Hop', 'R&B'],
+          imageSrc: JUST_SINGING_RAIN_POSTER_SRC,
+          href: justSingingRainPath(locale),
+          whatsappHref: getConciergeBookingUrl(
+            locale,
+            'Just Singing in the Rain @ Just Me Milano (25 Novembre)',
+            sourcePageUrl || justSingingRainPath(locale),
+          ),
+          badge: `#1 · ${rainPack.offerPhrase}`,
+        }
+      : null;
     const thanksgivingDay = '2026-11-26';
     const orthodoxHref = orthodoxNyeJustMePath(locale);
     const orthodoxBanner = getJustMeOrthodoxRelatedBanner(locale);
@@ -1320,6 +1354,11 @@ export function resolveVenueEventsForCarousel(
     }
     future.sort((a, b) => a.dateLabel.localeCompare(b.dateLabel));
     thisWeek.sort((a, b) => a.dateLabel.localeCompare(b.dateLabel));
+    if (rainCard) {
+      tonight.unshift(rainCard);
+      thisWeek.unshift(rainCard);
+      future.unshift(rainCard);
+    }
   }
 
   if (thisWeek.length === 0) {

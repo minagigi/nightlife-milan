@@ -10,6 +10,15 @@ import { readOctoberEventCard } from './octoberEditorial';
 import { getOctoberPosterLabel } from './october-events/copy';
 import { getVenueById } from './data';
 import { venueLocationLabel } from './venueLocation';
+import {
+  getJustSingingRainContent,
+  isJustSingingRainActive,
+  JUST_SINGING_RAIN_END_ISO,
+  JUST_SINGING_RAIN_POSTER_SRC,
+  JUST_SINGING_RAIN_REPLACED_XCEED_ID,
+  JUST_SINGING_RAIN_START_ISO,
+  justSingingRainSlug,
+} from './just-singing-rain/justme35';
 
 export type DateSensitiveEventPresentation = {
   id: string;
@@ -67,9 +76,14 @@ export const normVenueId = (id: string) => (id === 'v-55' ? 'v-55milano' : id);
 
 export async function getOctoberDateSensitivePresentations(locale: string, venueId?: string): Promise<DateSensitiveEventPresentation[]> {
   if (!isEnabledLocale(locale)) return [];
-  return Promise.all(
+  const baseOctober = await Promise.all(
     OCTOBER_EVENTS
-      .filter((event) => (!venueId || normVenueId(event.venue.id) === normVenueId(venueId)) && isCurrentOrUpcomingOccurrence(event.startISO, event.endISO))
+      .filter(
+        (event) =>
+          event.id !== JUST_SINGING_RAIN_REPLACED_XCEED_ID &&
+          (!venueId || normVenueId(event.venue.id) === normVenueId(venueId)) &&
+          isCurrentOrUpcomingOccurrence(event.startISO, event.endISO),
+      )
       .map(async (event) => {
         const card = await readOctoberEventCard(event, locale);
         const lowestVerifiedTicket =
@@ -111,6 +125,37 @@ export async function getOctoberDateSensitivePresentations(locale: string, venue
         };
       }),
   );
+
+  if (
+    isJustSingingRainActive() &&
+    (!venueId || normVenueId(venueId) === 'v-justme') &&
+    isCurrentOrUpcomingOccurrence(JUST_SINGING_RAIN_START_ISO, JUST_SINGING_RAIN_END_ISO)
+  ) {
+    const rain = getJustSingingRainContent(locale);
+    const labels = formatEventPresentationLabels({
+      dateISO: JUST_SINGING_RAIN_START_ISO,
+      price: 0,
+      currency: 'EUR',
+      locale,
+    });
+    baseOctober.unshift({
+      id: '000-just-singing-in-the-rain-2026',
+      venueId: 'v-justme',
+      dateISO: JUST_SINGING_RAIN_START_ISO,
+      endDateISO: JUST_SINGING_RAIN_END_ISO,
+      title: rain.metaTitle,
+      venueName: 'Just Me Milano',
+      slug: justSingingRainSlug(locale),
+      image: JUST_SINGING_RAIN_POSTER_SRC,
+      price: 0,
+      currency: 'EUR',
+      labels,
+      verificationExpiresAt: null,
+      affiliateUrl: null,
+    });
+  }
+
+  return baseOctober;
 }
 
 function getPriorityVenueSupplementalPresentations(locale: string, venueId?: string): DateSensitiveEventPresentation[] {
@@ -124,6 +169,7 @@ function getPriorityVenueSupplementalPresentations(locale: string, venueId?: str
     const dow = dayOfWeekForKey(dayKey);
     const candidates = weeklyEvents.filter((we) => supplementalClubs.has(we.clubSlug) && we.dayOfWeek === dow);
     for (const we of candidates) {
+      if (we.id === 'justme-wednesday' && dayKey === '2026-11-25') continue;
       if (we.id === 'justme-thursday' && dayKey >= '2026-11-26') continue;
       if (we.id === 'justme-friday' && dayKey === '2026-11-27') continue;
       const resolvedVenueId = `v-${we.clubSlug}`;
@@ -166,7 +212,8 @@ function getPriorityVenueSupplementalPresentations(locale: string, venueId?: str
 }
 
 export async function getDateSensitiveInventory(locale: string, venueId?: string): Promise<DateSensitiveEventPresentation[]> {
-  const cacheKey = `${locale}|${venueId ? normVenueId(venueId) : ''}`;
+  const activeFlag = isJustSingingRainActive() ? 'rain1' : 'rain0';
+  const cacheKey = `${locale}|${venueId ? normVenueId(venueId) : ''}|${activeFlag}`;
   const cached = inventoryCache.get(cacheKey);
   if (cached) return cached;
 
@@ -192,16 +239,32 @@ export async function getDateSensitiveCarouselInventory(
   _matches?: (event: Event) => boolean,
   matchesOctober?: (event: typeof OCTOBER_EVENTS[number]) => boolean,
 ): Promise<DateSensitiveCarouselPresentation[]> {
+  const carouselKey = `${locale}|${isJustSingingRainActive() ? 'rain1' : 'rain0'}`;
   if (!matchesOctober) {
-    const cached = carouselCache.get(locale);
+    const cached = carouselCache.get(carouselKey);
     if (cached) return cached;
   }
 
   const compute = async (): Promise<DateSensitiveCarouselPresentation[]> => {
     const october: DateSensitiveCarouselPresentation[] = isEnabledLocale(locale)
       ? (await getOctoberDateSensitivePresentations(locale))
-          .filter((card) => !matchesOctober || matchesOctober(OCTOBER_EVENTS.find((e) => `october-${e.id}` === card.id)!))
+          .filter((card) => {
+            if (card.id === '000-just-singing-in-the-rain-2026') return !matchesOctober;
+            const octEv = OCTOBER_EVENTS.find((e) => `october-${e.id}` === card.id);
+            return Boolean(octEv && (!matchesOctober || matchesOctober(octEv)));
+          })
           .map((card) => {
+            if (card.id === '000-just-singing-in-the-rain-2026') {
+              const venue = getVenueById('v-justme');
+              return {
+                ...card,
+                genre: ['COMMERCIAL', 'HIP_HOP'],
+                venueAltText: card.title,
+                venueZone: venue ? venueLocationLabel(venue) : 'Parco Sempione',
+                venueZoneKey: venue?.zone ?? null,
+                venueFeatured: true,
+              };
+            }
             const event = OCTOBER_EVENTS.find((e) => `october-${e.id}` === card.id)!;
             const venue = getVenueById(normVenueId(event.venue.id));
             const genreKeys: Record<string, string> = {
@@ -245,7 +308,7 @@ export async function getDateSensitiveCarouselInventory(
 
   const promise = compute();
   if (!matchesOctober) {
-    carouselCache.set(locale, promise);
+    carouselCache.set(carouselKey, promise);
   }
   return promise;
 }

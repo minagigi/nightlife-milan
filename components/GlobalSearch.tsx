@@ -44,6 +44,13 @@ import {
 } from '@/lib/orthodox-nye/justme35';
 import { thanksgivingJustMePath, THANKSGIVING_JUSTME_POSTER_SRC } from '@/lib/thanksgiving/justme35';
 import { partenopeaJustMePath, PARTENOPEA_JUSTME_POSTER_SRC } from '@/lib/partenopea/justme35';
+import {
+  getJustSingingRainContent,
+  isJustSingingRainActive,
+  JUST_SINGING_RAIN_POSTER_SRC,
+  JUST_SINGING_RAIN_START_ISO,
+  justSingingRainPath,
+} from '@/lib/just-singing-rain/justme35';
 
 type SearchTabId = 'all' | 'clubs' | 'capodanno' | 'events' | 'hubs' | 'guides' | 'zones';
 
@@ -1513,7 +1520,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
       });
 
     const xceedItems = (octoberCatalog || [])
-      .filter((ev) => ev.id !== '251019' && ev.id !== '249216' && ev.id !== '249217' && romeDayKey(ev.startISO) >= todayKey)
+      .filter((ev) => ev.id !== '251019' && ev.id !== '249169' && ev.id !== '249216' && ev.id !== '249217' && romeDayKey(ev.startISO) >= todayKey)
       .map((ev) => {
         const title = `${ev.shortName || ev.officialName} · ${ev.venue.name}`;
         const performers = ev.performers.map((p) => p.name).join(' ');
@@ -1640,7 +1647,31 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
       score: partenopeaJustMeScore,
     };
 
+    const justSingingRainPack = getJustSingingRainContent(currentLocale);
+    const justSingingRainHref = justSingingRainPath(currentLocale);
+    const justSingingRainTitle = justSingingRainPack.metaTitle;
+    const justSingingRainScore = isBrowsingCategory
+      ? 105
+      : matchTokensScore(
+          `${justSingingRainTitle} Just Me Milano JustMe`,
+          'just singing in the rain pioggia lluvia regen pluie ingresso gratis free entry entrada gratis freier eintritt entree gratuite drink offerto free drink copa gratis gratis-drink verre offert eventbrite mercoledi wednesday 25 novembre november 2026 aperitivo cena serata commercial hip hop r&b rnb parco sempione torre branca',
+          qTokens,
+          fullQuery,
+        );
+    const justSingingRainItem = {
+      id: 'just-singing-in-the-rain-2026',
+      title: justSingingRainTitle,
+      venueName: 'Just Me Milano · Parco Sempione / Torre Branca',
+      dateISO: JUST_SINGING_RAIN_START_ISO,
+      image: JUST_SINGING_RAIN_POSTER_SRC,
+      priceLabel: justSingingRainPack.offerPhrase,
+      genres: 'Commercial, Hip Hop, R&B · 19:30–05:00',
+      href: justSingingRainHref,
+      score: justSingingRainScore,
+    };
+
     const scoredEvents = [
+      ...(isJustSingingRainActive() ? [justSingingRainItem] : []),
       ...(romeDayKey('2026-11-26') >= todayKey ? [thanksgivingJustMeItem] : []),
       ...(romeDayKey('2026-11-27') >= todayKey ? [partenopeaJustMeItem] : []),
       ...(romeDayKey('2027-01-13') >= todayKey ? [orthodoxNyeJustMeItem] : []),

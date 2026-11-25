@@ -5,6 +5,7 @@ import { mockVenues } from './data';
 import { isUpcomingRome } from './calendarEvents';
 import { WORLD_CUP_FINAL_CANONICAL_SLUG } from './worldCupFinalIt';
 import { getEventBatchProfile } from './eventBatchProfiles';
+import { isJustSingingRainActive } from './just-singing-rain/justme35';
 
 export type EventDiscoveryItem = { event: Event; venue: Venue };
 
@@ -59,7 +60,10 @@ export function getEventDiscoveryItems(
   });
 
   const selected = [...baseItems, ...masters]
-    .filter(({ event }) => upcoming(event.dateISO) && !isBadBunny(event))
+    .filter(({ event }) => {
+      if (event.id === 'just-singing-in-the-rain-2026') return isJustSingingRainActive();
+      return upcoming(event.dateISO) && !isBadBunny(event);
+    })
     .map(withLocalSiteImage);
   const unique = new Map<string, EventDiscoveryItem>();
   for (const item of selected) {
@@ -72,8 +76,15 @@ export function getEventDiscoveryItems(
 }
 
 export function compareEventDiscoveryItems(a: EventDiscoveryItem, b: EventDiscoveryItem): number {
-  const priorityA = masterFor(a.event)?.priority ?? 99;
-  const priorityB = masterFor(b.event)?.priority ?? 99;
+  const rainActive = isJustSingingRainActive();
+  const priorityA =
+    rainActive && a.event.id === 'just-singing-in-the-rain-2026'
+      ? 0
+      : masterFor(a.event)?.priority ?? 99;
+  const priorityB =
+    rainActive && b.event.id === 'just-singing-in-the-rain-2026'
+      ? 0
+      : masterFor(b.event)?.priority ?? 99;
   if (priorityA !== priorityB) return priorityA - priorityB;
   return new Date(a.event.dateISO).getTime() - new Date(b.event.dateISO).getTime();
 }

@@ -10,6 +10,7 @@ import type { Event, Venue } from '@/lib/types';
 import { getEventDiscoveryItems } from '@/lib/eventDiscovery';
 import { WeeklyNightlifeNavigator, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
+import { getJustSingingRainContent, isJustSingingRainActive } from '@/lib/just-singing-rain/justme35';
 
 export const dynamic = 'force-dynamic';
 
@@ -196,7 +197,17 @@ export default async function TonightPage({ params }: Props) {
     }),
   });
 
-  const { aperitivo: aperitivoEvents, primeTime: primeTimeEvents, afterHours: afterHoursEvents } = categorize(items);
+  const { aperitivo: aperitivoEvents, primeTime: basePrimeTimeEvents, afterHours: afterHoursEvents } = categorize(items);
+  const rainActive = isJustSingingRainActive();
+  const rainItem = rainActive
+    ? items.find((i) => i.event.id === 'just-singing-in-the-rain-2026')
+    : undefined;
+  const rainContent = rainActive ? getJustSingingRainContent(locale) : undefined;
+  const dinnerEvents = rainItem ? [rainItem] : [];
+  const primeTimeEvents =
+    rainItem && !basePrimeTimeEvents.some((i) => i.event.id === rainItem.event.id)
+      ? [rainItem, ...basePrimeTimeEvents]
+      : basePrimeTimeEvents;
   const { aperitivo: tomorrowAperitivo, primeTime: tomorrowPrimeTime, afterHours: tomorrowAfterHours } = categorize(tomorrowItems);
 
   const hasEvents = items.length > 0;
@@ -316,6 +327,29 @@ export default async function TonightPage({ params }: Props) {
                   <div className="space-y-6">
                     {aperitivoEvents.map((item) => (
                       <EventCard key={item.event.id} item={item} locale={locale} renderedAtMs={renderedAtMs} />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {dinnerEvents.length > 0 && (
+                <div>
+                  <div className="flex items-center space-x-4 mb-8">
+                    <h2 className="font-serif text-3xl text-white">
+                      {rainContent?.formats[1]?.title || tr(locale, 'Dinner', 'Cena')}
+                    </h2>
+                    <span className="text-white/40 font-mono text-sm">20:30 - 23:00</span>
+                    <div className="flex-grow h-px bg-white/10"></div>
+                  </div>
+                  <div className="space-y-6">
+                    {dinnerEvents.map((item) => (
+                      <EventCard
+                        key={`${item.event.id}-dinner`}
+                        item={item}
+                        locale={locale}
+                        renderedAtMs={renderedAtMs}
+                        note={rainContent?.formats[1]?.title}
+                      />
                     ))}
                   </div>
                 </div>
@@ -492,8 +526,21 @@ export default async function TonightPage({ params }: Props) {
   );
 }
 
-function EventCard({ item, locale, renderedAtMs }: { item: { event: Event; venue: Venue }; locale: string; renderedAtMs: number }) {
+function EventCard({
+  item,
+  locale,
+  renderedAtMs,
+  note,
+}: {
+  item: { event: Event; venue: Venue };
+  locale: string;
+  renderedAtMs: number;
+  note?: string;
+}) {
   const { event, venue } = item;
+  const lp = localePrefix(locale);
+  const sLoc = event.localizedContent.slug as Record<string, string | undefined>;
+  const slug = sLoc[locale] || sLoc.en || '';
   const eventDate = new Date(event.dateISO);
   const diffHours = (eventDate.getTime() - renderedAtMs) / (1000 * 60 * 60);
   const isLive = diffHours > 0 && diffHours <= 2;
@@ -544,12 +591,15 @@ function EventCard({ item, locale, renderedAtMs }: { item: { event: Event; venue
           <span className="font-mono text-sm">{timeStr}</span>
         </div>
 
-        <h3 className="font-serif text-2xl text-white mb-2 group-hover:text-champagne transition-colors">{title}</h3>
+        <h3 className="font-serif text-2xl text-white mb-2 group-hover:text-champagne transition-colors">
+          <Link href={`${lp}/events/${slug}`}>{title}</Link>
+        </h3>
 
         <div className="flex items-center space-x-2 text-white/40">
           <MapPin className="w-4 h-4" />
           <span className="text-sm tracking-wide">{venueName}</span>
         </div>
+        {note && <p className="text-xs font-medium text-champagne mt-2">{note}</p>}
       </div>
     </div>
   );

@@ -13,6 +13,11 @@ import { christmasVoyaPath } from '@/lib/christmas/voya35';
 import { orthodoxNyeJustMePath } from '@/lib/orthodox-nye/justme35';
 import { thanksgivingJustMePath, THANKSGIVING_JUSTME_POSTER_SRC } from '@/lib/thanksgiving/justme35';
 import { partenopeaJustMePath } from '@/lib/partenopea/justme35';
+import {
+  getJustSingingRainContent,
+  isJustSingingRainActive,
+  justSingingRainPath,
+} from '@/lib/just-singing-rain/justme35';
 import { getEventDiscoveryItems, slimDiscoveryItemsForClient } from '@/lib/eventDiscovery';
 import { PrioritySixShowcase, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
@@ -93,12 +98,29 @@ type MajorSpecialEventCard = {
   venuesEn: string;
   descIt: string;
   descEn: string;
-  linkKind?: 'orthodox-nye' | 'thanksgiving-justme' | 'partenopea-justme';
+  linkKind?: 'orthodox-nye' | 'thanksgiving-justme' | 'partenopea-justme' | 'just-singing-rain';
+  activeOnly?: boolean;
   linkLabelIt?: string;
   linkLabelEn?: string;
 };
 
 const MAJOR_SPECIAL_EVENTS: MajorSpecialEventCard[] = [
+  {
+    badgeIt: '25 Novembre 2026 · Stasera #1 · Ingresso Gratis + Drink Offerto',
+    badgeEn: 'November 25, 2026 · Tonight #1 · Free Entry + Free Drink',
+    titleIt: 'Just Singing in the Rain · Ingresso Gratis + Drink Offerto al Just Me Milano',
+    titleEn: 'Just Singing in the Rain · Free Entry + Free Drink at Just Me Milano',
+    venuesIt: 'Just Me Milano · Viale Luigi Camoens 2 (Parco Sempione · Torre Branca)',
+    venuesEn: 'Just Me Milano · Viale Luigi Camoens 2 (Parco Sempione · Torre Branca)',
+    descIt:
+      'Mercoledì 25 novembre 2026 (19:30–05:00), promosso e offerto da Nightlife Milan: ingresso gratuito fino alle 00:30 con 1 drink offerto, aperitivo dalle 19:30, cena su richiesta via WhatsApp e serata Commerciale, Hip Hop e R&B (18+). Registrazione gratuita su Eventbrite + conferma WhatsApp +39 351 912 7047.',
+    descEn:
+      'Wednesday Nov 25, 2026 (19:30–05:00), promoted and offered by Nightlife Milan: free entry until 00:30 with 1 complimentary drink, 19:30 aperitivo, dinner on request via WhatsApp, and Commercial, Hip Hop & R&B club night (18+). Free Eventbrite registration + WhatsApp confirmation +39 351 912 7047.',
+    linkKind: 'just-singing-rain',
+    activeOnly: true,
+    linkLabelIt: 'Ingresso Gratis + Drink Offerto →',
+    linkLabelEn: 'Free Entry + Free Drink →',
+  },
   {
     badgeIt: '26 Novembre 2026 · Thanksgiving & Vida Loca',
     badgeEn: 'November 26, 2026 · Thanksgiving & Vida Loca',
@@ -365,23 +387,33 @@ export default async function SpecialEventsPage({ params }: Props) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {MAJOR_SPECIAL_EVENTS.map((ev) => (
+          {MAJOR_SPECIAL_EVENTS.filter((ev) => !ev.activeOnly || isJustSingingRainActive()).map((ev) => {
+            const rainLoc = ev.linkKind === 'just-singing-rain' ? getJustSingingRainContent(locale) : null;
+            const badgeText = rainLoc ? `#1 · ${rainLoc.dateBadge} · ${rainLoc.offerPhrase}` : isIt ? ev.badgeIt : ev.badgeEn;
+            const titleText = rainLoc ? rainLoc.h1 : isIt ? ev.titleIt : ev.titleEn;
+            const descText = rainLoc ? rainLoc.overviewParagraphs[0] : isIt ? ev.descIt : ev.descEn;
+            const ctaText = rainLoc
+              ? `${rainLoc.offerPhrase} →`
+              : ev.linkKind
+                ? tr(locale, ev.linkLabelEn || 'Open Event →', ev.linkLabelIt || 'Scopri Evento →')
+                : tr(locale, 'San Siro & VIP Info →', 'Info San Siro & VIP →');
+            return (
             <div
               key={ev.titleEn}
               className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 flex flex-col justify-between hover:border-champagne/40 transition-colors"
             >
               <div>
                 <span className="inline-block px-3 py-1 rounded-full bg-champagne/15 border border-champagne/30 text-champagne text-[10px] font-bold uppercase tracking-wider mb-3">
-                  {isIt ? ev.badgeIt : ev.badgeEn}
+                  {badgeText}
                 </span>
                 <h3 className="font-serif text-2xl text-white font-bold mb-2">
-                  {isIt ? ev.titleIt : ev.titleEn}
+                  {titleText}
                 </h3>
                 <p className="text-xs text-champagne/85 font-medium mb-3">
                   {isIt ? ev.venuesIt : ev.venuesEn}
                 </p>
                 <p className="text-xs sm:text-sm text-white/65 leading-relaxed mb-5">
-                  {isIt ? ev.descIt : ev.descEn}
+                  {descText}
                 </p>
               </div>
               <div className="flex items-center justify-between pt-4 border-t border-white/10">
@@ -393,16 +425,16 @@ export default async function SpecialEventsPage({ params }: Props) {
                         ? thanksgivingJustMePath(locale)
                         : ev.linkKind === 'partenopea-justme'
                           ? partenopeaJustMePath(locale)
-                          : `${lp}/football-afterparties`
+                          : ev.linkKind === 'just-singing-rain'
+                            ? justSingingRainPath(locale)
+                            : `${lp}/football-afterparties`
                   }
                   className="text-xs font-semibold text-white/75 hover:text-champagne transition-colors"
                 >
-                  {ev.linkKind
-                    ? tr(locale, ev.linkLabelEn || 'Open Event →', ev.linkLabelIt || 'Scopri Evento →')
-                    : tr(locale, 'San Siro & VIP Info →', 'Info San Siro & VIP →')}
+                  {ctaText}
                 </Link>
                 <a
-                  href={getConciergeBookingUrl(locale, isIt ? ev.titleIt : ev.titleEn, `${lp}/events/special`)}
+                  href={getConciergeBookingUrl(locale, titleText, `${lp}/events/special`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-4 py-2 rounded-full bg-champagne text-black text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
@@ -411,7 +443,8 @@ export default async function SpecialEventsPage({ params }: Props) {
                 </a>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 

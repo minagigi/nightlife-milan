@@ -35,6 +35,15 @@ import {
   partenopeaJustMeSlug,
   resolvePartenopeaJustMeSlug,
 } from '@/lib/partenopea/justme35';
+import JustSingingJustMeDetailView from '@/components/JustSingingJustMeDetailView';
+import {
+  getJustSingingRainContent,
+  JUST_SINGING_RAIN_POSTER_SRC,
+  justSingingRainHreflangAlternates,
+  justSingingRainPath,
+  justSingingRainSlug,
+  resolveJustSingingRainSlug,
+} from '@/lib/just-singing-rain/justme35';
 import { getCapodannoCategoryPageDef, getCapodannoEventBySlug, getCapodannoEventsForMode } from '@/lib/capodannoEvents';
 import {
   buildCapodannoMetaDescription,
@@ -355,6 +364,37 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
     };
   }
+  if (resolveJustSingingRainSlug(slug)) {
+    const canonicalSlug = justSingingRainSlug(locale);
+    if (slug !== canonicalSlug) permanentRedirect(justSingingRainPath(locale));
+    const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
+    const canonical = `${baseUrl}${justSingingRainPath(locale)}`;
+    const rain = getJustSingingRainContent(locale);
+    return {
+      title: rain.metaTitle,
+      description: rain.metaDescription,
+      robots: seoRobots(locale, true, true),
+      alternates: {
+        canonical,
+        languages: justSingingRainHreflangAlternates(baseUrl),
+      },
+      openGraph: {
+        title: rain.metaTitle,
+        description: rain.metaDescription,
+        url: canonical,
+        type: 'website',
+        siteName: 'Nightlife Milan',
+        locale: getLocaleDef(locale)?.ogLocale || 'en_US',
+        images: [{ url: `${baseUrl}${JUST_SINGING_RAIN_POSTER_SRC}`, width: 1080, height: 1350, alt: rain.h1 }],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: rain.metaTitle,
+        description: rain.metaDescription,
+        images: [`${baseUrl}${JUST_SINGING_RAIN_POSTER_SRC}`],
+      },
+    };
+  }
   if (resolvePartenopeaJustMeSlug(slug)) {
     const canonicalSlug = partenopeaJustMeSlug(locale);
     if (slug !== canonicalSlug) permanentRedirect(partenopeaJustMePath(locale));
@@ -587,6 +627,11 @@ export default async function EventPage({ params }: Props) {
     const canonicalSlug = thanksgivingJustMeSlug(locale);
     if (slug !== canonicalSlug) permanentRedirect(thanksgivingJustMePath(locale));
     return <ThanksgivingJustMeDetailView locale={locale} />;
+  }
+  if (resolveJustSingingRainSlug(slug)) {
+    const canonicalSlug = justSingingRainSlug(locale);
+    if (slug !== canonicalSlug) permanentRedirect(justSingingRainPath(locale));
+    return <JustSingingJustMeDetailView locale={locale} />;
   }
   if (resolvePartenopeaJustMeSlug(slug)) {
     const canonicalSlug = partenopeaJustMeSlug(locale);
