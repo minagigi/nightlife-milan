@@ -149,6 +149,8 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
       lowPrice: 20,
       highPrice: 80,
       offerCount: 3,
+      availability: 'https://schema.org/InStock',
+      validFrom: '2026-11-15T00:00:00+01:00',
       offers: [
         {
           '@type': 'Offer',
