@@ -262,16 +262,16 @@ const NYE_CLUBS = [
     nameEn: '5. Voya Rooftop Milan (Viale Achille Papa 30, 20th Floor: NYE at 85m Overlooking Fireworks · €300)',
     address: 'Viale Achille Papa, 30 (20° Piano, Portello / CityLife / Isola) - 20149 Milano',
     formulasIt:
-      'Tariffa Unica Confermata: 300€ a persona (+20% Booking & Transaction Fees al checkout online · Menù 6 portate + Cotechino e Lenticchie dopo mezzanotte, 1 bottiglia di vino ogni 4 persone, brindisi e acqua)',
+      'Tariffa Unica Confermata: 300€ a persona (Servizio di Conciergerie & Transaction Fees calcolato al checkout online · Menù 6 portate + Cotechino e Lenticchie dopo mezzanotte, 1 bottiglia di vino ogni 4 persone, brindisi e acqua)',
     formulasEn:
-      'Single Confirmed Rate: €300 per person (+20% Booking & Transaction Fees at online checkout · 6-course tasting + After-Midnight Cotechino & Lentils, 1 bottle of wine every 4 guests, midnight toast & water)',
+      'Single Confirmed Rate: €300 per person (Concierge Service & Transaction Fees calculated at online checkout · 6-course tasting + After-Midnight Cotechino & Lentils, 1 bottle of wine every 4 guests, midnight toast & water)',
     fireworksVibeIt: 'L’unico 20° piano con vetrate a tutta altezza da cui vedere simultaneamente i fuochi di tutta Milano',
     fireworksVibeEn: 'The only 20th-floor floor-to-ceiling glass sky lounge with a 360-degree view of Milan’s midnight fireworks',
     image: '/images/events/capodanno-2027-posters/capodanno-voya-rooftop-milano.webp',
     descriptionIt:
-      'Vivere il conto alla rovescia del 31 Dicembre al 20° piano di Voya Rooftop Milan (Viale Achille Papa 30, a 85 metri d’altezza) offre una visuale a 360 gradi sui fuochi d’artificio di tutta Milano con Restaurant & DJ Set fino alle 05:00. Tariffa ufficiale confermata: 300€ a persona (+20% Booking & Transaction Fees al checkout online) comprensiva di menù completo 6 portate, cotechino con lenticchie dopo la mezzanotte, 1 bottiglia di vino ogni 4 ospiti, acqua e brindisi di mezzanotte. Disponibile anche il Pranzo di Natale Voya (25 Dicembre 2026, 100€ a persona).',
+      'Vivere il conto alla rovescia del 31 Dicembre al 20° piano di Voya Rooftop Milan (Viale Achille Papa 30, a 85 metri d’altezza) offre una visuale a 360 gradi sui fuochi d’artificio di tutta Milano con Restaurant & DJ Set fino alle 05:00. Tariffa ufficiale confermata: 300€ a persona (Servizio di Conciergerie & Transaction Fees calcolato al checkout online) comprensiva di menù completo 6 portate, cotechino con lenticchie dopo la mezzanotte, 1 bottiglia di vino ogni 4 ospiti, acqua e brindisi di mezzanotte. Disponibile anche il Pranzo di Natale Voya (25 Dicembre 2026, 100€ a persona).',
     descriptionEn:
-      'Counting down to midnight on the 20th floor at Voya Rooftop Milan (Viale Achille Papa 30, 85 meters high) offers an unmatched 360-degree view of Milan’s fireworks paired with Restaurant & DJ Set until 05:00. Official confirmed rate: €300 per person (+20% Booking & Transaction Fees at online checkout) including the 6-course tasting dinner, after-midnight cotechino & lentils, 1 bottle of wine every 4 guests, water & midnight toast. Also discover Voya Christmas (December 25, 2026, €100 per person).',
+      'Counting down to midnight on the 20th floor at Voya Rooftop Milan (Viale Achille Papa 30, 85 meters high) offers an unmatched 360-degree view of Milan’s fireworks paired with Restaurant & DJ Set until 05:00. Official confirmed rate: €300 per person (Concierge Service & Transaction Fees calculated at online checkout) including the 6-course tasting dinner, after-midnight cotechino & lentils, 1 bottle of wine every 4 guests, water & midnight toast. Also discover Voya Christmas (December 25, 2026, €100 per person).',
   },
   {
     rank: 6,
@@ -551,7 +551,7 @@ export default async function NewYearsEvePage({
   };
 
   return (
-    <main className="flex-grow pt-24 pb-24 bg-[#0f0c07] text-white">
+    <main className="flex-grow pt-4 pb-24 bg-[#0f0c07] text-white sm:pt-5">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaGraph) }}
@@ -595,7 +595,7 @@ export default async function NewYearsEvePage({
           </p>
 
           {/* 4 Hero Stat Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-9">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-9">
             <div className="rounded-2xl border border-champagne/30 bg-black/55 p-4">
               <div className="text-[11px] font-mono uppercase tracking-widest text-champagne mb-1">
                 {isIt ? '#1 Priorità · Parco Sempione' : '#1 Priority · Parco Sempione'}

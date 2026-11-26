@@ -247,7 +247,7 @@ export default async function TonightPage({ params }: Props) {
       {eventListSchema && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(eventListSchema) }} />
       )}
-      <main className="flex-1 bg-[#050505] w-full pt-20 pb-20">
+      <main className="flex-1 bg-[#050505] w-full pt-4 pb-20 sm:pt-5">
         {/* Header */}
         <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <h1 className="font-serif text-5xl md:text-7xl font-bold text-champagne tracking-tighter mb-6">{t.title}</h1>

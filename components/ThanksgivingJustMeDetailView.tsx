@@ -182,7 +182,7 @@ export default function ThanksgivingJustMeDetailView({ locale: rawLocale }: { lo
       {/* Breadcrumbs */}
       <nav
         aria-label="Breadcrumb"
-        className="mx-auto max-w-[1440px] border-x border-white/10 px-5 pt-28 pb-4 sm:px-14"
+        className="mx-auto max-w-[1440px] border-x border-white/10 px-5 pb-3 pt-3 sm:px-14 sm:pt-4"
       >
         <ol className="flex flex-wrap items-center gap-2 font-mono text-xs text-white/60">
           <li>
@@ -262,7 +262,7 @@ export default function ThanksgivingJustMeDetailView({ locale: rawLocale }: { lo
           </div>
 
           <div className="lg:col-span-5">
-            <div className="mx-auto aspect-[4/5] w-full max-w-[540px] overflow-hidden border border-champagne/30 bg-[#050505]">
+            <div className="aspect-[4/5] w-full overflow-hidden border border-champagne/30 bg-[#050505]">
               <Image
                 src={seoImages.poster.src}
                 alt={seoImages.poster.alt}
@@ -279,33 +279,33 @@ export default function ThanksgivingJustMeDetailView({ locale: rawLocale }: { lo
           </div>
         </div>
 
-        {/* Quick Facts 6-Card Grid */}
-        <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Quick Facts — 1 col below md:, hairline dividers */}
+        <dl className="mt-8 grid grid-cols-1 divide-y divide-white/10 border-t border-white/15 pt-2 md:grid-cols-2 md:gap-x-8 md:divide-y-0 lg:grid-cols-3">
           {c.quickFacts.map((fact) => (
             <div
               key={fact.label}
-              className="rounded-lg border border-white/10 bg-white/[0.03] px-4 py-3"
+              className="py-3 md:border-b md:border-white/10"
             >
-              <div className="font-mono text-[11px] uppercase tracking-wider text-champagne/90">
+              <dt className="font-mono text-[11px] uppercase tracking-wider text-champagne/90">
                 {fact.label}
-              </div>
-              <div className="mt-1 font-sans text-sm font-medium text-[#F6F1E7]">
+              </dt>
+              <dd className="mt-1 font-sans text-sm font-medium text-[#F6F1E7]">
                 {fact.value}
-              </div>
+              </dd>
             </div>
           ))}
-        </div>
+        </dl>
 
         {/* Sticky/Jump TOC */}
         <nav
           aria-label={c.tocTitle}
-          className="mt-8 border border-white/15 bg-white/[0.03] p-4 sm:p-5"
+          className="mt-8 border-t border-white/15 pt-5"
         >
           <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-champagne">
             <ListChecks className="h-4 w-4" />
             <span>{c.tocTitle}</span>
           </div>
-          <ol className="mt-3 flex gap-2 overflow-x-auto pb-1.5 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-2.5 sm:overflow-visible sm:pb-0">
+          <ol className="mt-3 flex gap-2 overflow-x-auto pb-1.5 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-2.5 md:overflow-visible md:pb-0">
             {c.tocItems.map((item) => (
               <li key={item.id} className="shrink-0">
                 <a
@@ -416,37 +416,39 @@ export default function ThanksgivingJustMeDetailView({ locale: rawLocale }: { lo
             </p>
           </div>
 
-          {/* 2 Couture Noir Event Cards */}
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-            <figure className="overflow-hidden rounded-xl border border-champagne/30 bg-black/50 p-3">
-              <Image
-                src={THANKSGIVING_JUSTME_BUFFET_CARD_SRC}
-                alt={c.buffetCardTitle}
-                title={c.buffetCardTitle}
-                width={1080}
-                height={1350}
-                quality={85}
-                sizes="(max-width: 1024px) 100vw, 48vw"
-                className="aspect-[4/5] h-auto w-full rounded-lg object-contain"
-              />
-              <figcaption className="mt-3 space-y-1 px-1">
+          {/* 2 Couture Noir Event Cards — 100% full 4:5 placeholder */}
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+            <figure className="overflow-hidden border border-champagne/30 bg-[#050505]">
+              <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505]">
+                <Image
+                  src={THANKSGIVING_JUSTME_BUFFET_CARD_SRC}
+                  alt={c.buffetCardTitle}
+                  title={c.buffetCardTitle}
+                  fill
+                  quality={92}
+                  sizes="(max-width: 768px) 100vw, 48vw"
+                  className="object-cover"
+                />
+              </div>
+              <figcaption className="space-y-1 border-t border-white/10 p-4">
                 <div className="font-serif text-lg text-[#F6F1E7]">{c.buffetCardTitle}</div>
                 <p className="font-sans text-xs text-[#C2B9AA]">{c.buffetCardCaption}</p>
               </figcaption>
             </figure>
 
-            <figure className="overflow-hidden rounded-xl border border-champagne/30 bg-black/50 p-3">
-              <Image
-                src={THANKSGIVING_JUSTME_TABLES_CARD_SRC}
-                alt={c.tablesCardTitle}
-                title={c.tablesCardTitle}
-                width={1080}
-                height={1350}
-                quality={85}
-                sizes="(max-width: 1024px) 100vw, 48vw"
-                className="aspect-[4/5] h-auto w-full rounded-lg object-contain"
-              />
-              <figcaption className="mt-3 space-y-1 px-1">
+            <figure className="overflow-hidden border border-champagne/30 bg-[#050505]">
+              <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505]">
+                <Image
+                  src={THANKSGIVING_JUSTME_TABLES_CARD_SRC}
+                  alt={c.tablesCardTitle}
+                  title={c.tablesCardTitle}
+                  fill
+                  quality={92}
+                  sizes="(max-width: 768px) 100vw, 48vw"
+                  className="object-cover"
+                />
+              </div>
+              <figcaption className="space-y-1 border-t border-white/10 p-4">
                 <div className="font-serif text-lg text-[#F6F1E7]">{c.tablesCardTitle}</div>
                 <p className="font-sans text-xs text-[#C2B9AA]">{c.tablesCardCaption}</p>
               </figcaption>
@@ -677,11 +679,11 @@ export default function ThanksgivingJustMeDetailView({ locale: rawLocale }: { lo
                   {p}
                 </p>
               ))}
-              <dl className="grid grid-cols-1 gap-3 pt-2 sm:grid-cols-2">
+              <dl className="grid grid-cols-1 divide-y divide-white/10 border-t border-white/10 pt-2 md:grid-cols-2 md:gap-x-6 md:divide-y-0">
                 {c.logisticsFacts.map((lf) => (
                   <div
                     key={lf.label}
-                    className="rounded-lg border border-white/10 bg-white/[0.025] p-3"
+                    className="py-3 md:border-b md:border-white/10"
                   >
                     <dt className="font-mono text-[11px] uppercase text-champagne">{lf.label}</dt>
                     <dd className="mt-1 font-sans text-xs text-[#F6F1E7]">{lf.value}</dd>

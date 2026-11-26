@@ -150,7 +150,7 @@ function makePackFromSeed(loc: string, cfg: LocaleSpSeed): SinglePassCopyPack {
     categoryLabels: cfg.catLabels,
     basePriceLabel: w.colPrices,
     feeLabel: `${feeHead} (20%) · ${cfg.feeDetail}`,
-    feeCalculatedAtCheckoutNote: `${feeHead} (20%) · ${cfg.feeDetail}`,
+    feeCalculatedAtCheckoutNote: `${feeHead} · ${cfg.feeDetail}`,
     totalLabel: cfg.totalChargedLbl,
     arrivalLabel: w.hoursLabel.replace(/:$/, ''),
     guestsLabel: cfg.guests,

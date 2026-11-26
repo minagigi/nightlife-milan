@@ -175,10 +175,31 @@ export default async function OctoberEventPage({
       />
       <main
         data-layout-alt="alternativa-02-capitoli-colore-netto"
-        className="min-h-screen bg-[#050505] pb-20 font-sans text-[#F6F1E7]"
+        className="min-h-screen bg-[#050505] pb-16 pt-3 font-sans text-[#F6F1E7] sm:pt-4"
         data-october-event={event.id}
       >
-        {/* CAPITOLO 01 — NOTTE #050505: Cover 4:5, Breadcrumb & Indice Rapido */}
+        <div className="mx-auto max-w-5xl px-4 pb-2 sm:px-6 lg:px-8">
+          <nav
+            aria-label={copy.labels.recommendations}
+            className="flex flex-wrap items-center gap-1.5 text-xs font-semibold text-[#C2B9AA] sm:text-[13px]"
+          >
+            <Link href={prefix || '/'} prefetch={false} className="hover:text-[#F6F1E7]">
+              Nightlife Milan
+            </Link>
+            <span aria-hidden="true">/</span>
+            <Link
+              href={`${prefix}/events/october-2026`}
+              prefetch={false}
+              className="hover:text-[#F6F1E7]"
+            >
+              {hub.labels.heading}
+            </Link>
+            <span aria-hidden="true">/</span>
+            <span className="text-[#F6F1E7]">{event.officialName}</span>
+          </nav>
+        </div>
+
+        {/* CAPITOLO 01 — NOTTE #050505: Locandina a pieno placeholder & Indice Rapido */}
         <EventCoverHero
           src={event.image.src}
           alt={seoPack.poster.alt}
@@ -195,27 +216,8 @@ export default async function OctoberEventPage({
         />
 
         <div data-event-body className={scriptFont ? scriptFont.variableClass : undefined}>
-          <div className="bg-[#050505] pb-8 pt-6 text-[#F6F1E7]">
+          <div className="bg-[#050505] pb-8 text-[#F6F1E7]">
             <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-              <nav
-                aria-label={copy.labels.recommendations}
-                className="mb-4 flex min-h-[40px] flex-wrap items-center gap-2 text-xs font-semibold text-[#C2B9AA] sm:text-sm"
-              >
-                <Link href={prefix || '/'} prefetch={false} className="hover:text-[#F6F1E7]">
-                  Nightlife Milan
-                </Link>
-                <span aria-hidden="true">/</span>
-                <Link
-                  href={`${prefix}/events/october-2026`}
-                  prefetch={false}
-                  className="hover:text-[#F6F1E7]"
-                >
-                  {hub.labels.heading}
-                </Link>
-                <span aria-hidden="true">/</span>
-                <span className="text-[#F6F1E7]">{event.officialName}</span>
-              </nav>
-
               <div className="flex flex-wrap items-center gap-2.5">
                 <p
                   className="font-mono text-xs font-bold uppercase tracking-wider text-[#EAE3D5] sm:text-sm"
@@ -234,9 +236,9 @@ export default async function OctoberEventPage({
               <nav
                 aria-label={copy.headings.overview}
                 data-october-body-index
-                className="mt-5 border-t border-[#F6F1E7]/15 pt-4"
+                className="mt-4 border-t border-[#F6F1E7]/15 pt-4"
               >
-                <ol className="flex gap-2 overflow-x-auto pb-1.5 text-xs font-bold sm:flex-wrap sm:overflow-visible sm:pb-0">
+                <ol className="flex gap-2 overflow-x-auto pb-1.5 text-xs font-bold md:flex-wrap md:overflow-visible md:pb-0">
                   {tocItems.map((item, idx) => (
                     <li key={item.id} className="shrink-0">
                       <a
@@ -545,33 +547,36 @@ export default async function OctoberEventPage({
             </div>
           </section>
 
-          {/* CAPITOLO 04 — NOTTE #050505: Galleria Atmosfera (Swipe Mobile) & Locandina */}
+          {/* CAPITOLO 04 — NOTTE #050505: Galleria Atmosfera a pieno placeholder (1 colonna mobile) & Locandina */}
           <div className="bg-[#050505] py-10 text-[#F6F1E7]">
-            <div className="mx-auto max-w-5xl space-y-10 px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-5xl space-y-12 px-4 sm:px-6 lg:px-8">
               {justmeImages.length ? (
                 <section
                   aria-label={copy.labels.venue}
                   data-justme-body-images
-                  className="grid items-start gap-6 sm:grid-cols-2"
+                  className="grid grid-cols-1 items-start gap-8 md:grid-cols-2"
                 >
                   {justmeImages.map((image) => (
                     <figure
                       key={image.key}
-                      className={`overflow-hidden border border-[#F6F1E7]/16 bg-[#141311] ${
-                        image.key === 'cocktailPortrait' ? 'max-w-[480px]' : ''
-                      }`}
+                      className="min-w-0"
                     >
-                      <Image
-                        quality={92}
-                        src={image.src}
-                        alt={image.alt}
-                        title={image.alt}
-                        width={image.width}
-                        height={image.height}
-                        sizes="(max-width: 639px) 100vw, 640px"
-                        className="h-auto w-full object-contain"
-                      />
-                      <figcaption className="p-4 text-sm leading-relaxed text-[#C2B9AA]">
+                      <div
+                        className="w-full overflow-hidden border border-[#F6F1E7]/16 bg-[#050505]"
+                        style={{ aspectRatio: `${image.width} / ${image.height}` }}
+                      >
+                        <Image
+                          quality={92}
+                          src={image.src}
+                          alt={image.alt}
+                          title={image.alt}
+                          width={image.width}
+                          height={image.height}
+                          sizes="(max-width: 767px) 100vw, 640px"
+                          className="block h-full w-full object-cover"
+                        />
+                      </div>
+                      <figcaption className="pt-3 text-sm leading-relaxed text-[#C2B9AA]">
                         {image.caption}
                       </figcaption>
                     </figure>
@@ -583,7 +588,7 @@ export default async function OctoberEventPage({
                 aria-labelledby="october-gallery"
                 data-october-gallery
                 data-seo-flow-gallery
-                className="space-y-5"
+                className="space-y-6"
               >
                 <div>
                   <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-[#EAE3D5]">
@@ -598,24 +603,19 @@ export default async function OctoberEventPage({
                   <p className="mt-2 max-w-[54ch] text-sm leading-relaxed text-[#C2B9AA]">
                     {seoPack.sectionSubtitle}
                   </p>
-                  <div className="mt-3 flex flex-wrap gap-2 text-xs">
-                    <span className="border border-[#F6F1E7]/35 bg-[#141311] px-3 py-1 font-semibold text-[#F6F1E7]">
-                      {seoPack.targetPrefix}: {seoPack.targetLabel}
-                    </span>
-                    <span className="border border-[#F6F1E7]/20 bg-[#141311] px-3 py-1 font-semibold text-[#EAE3D5]">
-                      {seoPack.outfitPrefix}: {seoPack.outfitLabel}
-                    </span>
-                  </div>
+                  <p className="mt-2 text-xs text-[#EAE3D5]">
+                    {seoPack.targetPrefix}: {seoPack.targetLabel} · {seoPack.outfitPrefix}: {seoPack.outfitLabel}
+                  </p>
                 </div>
 
-                <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3 sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:pb-0">
+                <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                   {seoPack.gallery.map((img, idx) => (
                     <figure
                       key={img.src}
                       data-seo-flow-item={idx + 1}
-                      className="w-[78vw] max-w-[330px] shrink-0 snap-start overflow-hidden border border-[#F6F1E7]/16 bg-[#141311] sm:w-auto sm:max-w-none"
+                      className="min-w-0"
                     >
-                      <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505]">
+                      <div className="relative aspect-[4/5] w-full overflow-hidden border border-[#F6F1E7]/16 bg-[#050505]">
                         <Image
                           quality={92}
                           src={img.src}
@@ -623,15 +623,15 @@ export default async function OctoberEventPage({
                           title={img.title}
                           width={1080}
                           height={1350}
-                          sizes="(max-width: 639px) 100vw, 540px"
-                          className="h-full w-full object-cover"
+                          sizes="(max-width: 767px) 100vw, 540px"
+                          className="block h-full w-full object-cover"
                         />
                       </div>
-                      <figcaption className="p-4 text-xs leading-relaxed text-[#C2B9AA] sm:text-sm">
+                      <figcaption className="pt-3 text-xs leading-relaxed text-[#C2B9AA] sm:text-sm">
                         <strong className="block font-display text-base font-bold text-[#F6F1E7]">
                           {img.title}
                         </strong>
-                        <span className="mt-1.5 block text-[#C2B9AA]">{img.description}</span>
+                        <span className="mt-1 block text-[#C2B9AA]">{img.description}</span>
                       </figcaption>
                     </figure>
                   ))}
@@ -639,27 +639,32 @@ export default async function OctoberEventPage({
               </section>
 
               <figure
-                className="mx-auto max-w-xl overflow-hidden border border-[#F6F1E7]/25 bg-[#0B0A09]"
+                className="grid grid-cols-1 gap-6 border-t border-[#F6F1E7]/16 pt-8 lg:grid-cols-12 lg:items-center lg:gap-10"
                 data-october-poster-detail
               >
-                <div className="border-b border-[#F6F1E7]/14 bg-[#050505] px-4 py-2 font-mono text-xs font-bold uppercase tracking-wider text-[#F6F1E7]">
-                  {seoPack.poster.badgeLabel} · {event.venue.name}
+                <div
+                  className="w-full overflow-hidden border border-[#F6F1E7]/18 bg-[#050505] lg:col-span-5"
+                  style={{ aspectRatio: `${posterDims.width} / ${posterDims.height}` }}
+                >
+                  <Image
+                    quality={95}
+                    src={event.image.src}
+                    alt={seoPack.poster.alt}
+                    title={seoPack.poster.title}
+                    width={posterDims.width}
+                    height={posterDims.height}
+                    sizes="(max-width: 1080px) 100vw, 1080px"
+                    className="block h-full w-full object-cover"
+                  />
                 </div>
-                <Image
-                  quality={95}
-                  src={event.image.src}
-                  alt={seoPack.poster.alt}
-                  title={seoPack.poster.title}
-                  width={posterDims.width}
-                  height={posterDims.height}
-                  sizes="(max-width: 1080px) 100vw, 1080px"
-                  className="h-auto w-full object-contain"
-                />
-                <figcaption className="p-4 text-xs leading-relaxed text-[#C2B9AA] sm:text-sm">
+                <figcaption className="space-y-2 text-xs leading-relaxed text-[#C2B9AA] sm:text-sm lg:col-span-7">
+                  <span className="inline-block border border-[#F6F1E7]/35 bg-[#050505] px-3 py-1 font-mono text-xs font-bold uppercase tracking-wider text-[#F6F1E7]">
+                    {seoPack.poster.badgeLabel} · {event.venue.name}
+                  </span>
                   <strong className="block text-sm text-[#F6F1E7] sm:text-base">
                     {seoPack.poster.title}
                   </strong>
-                  <span className="mt-1 block">{seoPack.poster.description}</span>
+                  <span className="block">{seoPack.poster.description}</span>
                 </figcaption>
               </figure>
             </div>

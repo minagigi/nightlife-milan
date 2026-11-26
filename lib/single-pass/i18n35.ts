@@ -141,7 +141,7 @@ const IT_PACK: SinglePassCopyPack = {
   },
   basePriceLabel: 'Quota del locale (EUR)',
   feeLabel: 'Servizio di Conciergerie & Transaction Fees (20%) · consulenza concierge e pagamento elettronico',
-  feeCalculatedAtCheckoutNote: 'Servizio di Conciergerie & Transaction Fees (20%) calcolato al checkout',
+  feeCalculatedAtCheckoutNote: 'Servizio di Conciergerie & Transaction Fees calcolato al checkout',
   totalLabel: 'Totale Finito',
   arrivalLabel: 'Orario ingresso consigliato',
   guestsLabel: 'Ospiti inclusi',
@@ -302,7 +302,7 @@ const EN_PACK: SinglePassCopyPack = {
   },
   basePriceLabel: 'Venue price (EUR)',
   feeLabel: 'Concierge Service & Transaction Fees (20%) · concierge & electronic payment',
-  feeCalculatedAtCheckoutNote: 'Concierge Service & Transaction Fees (20%) calculated at checkout',
+  feeCalculatedAtCheckoutNote: 'Concierge Service & Transaction Fees calculated at checkout',
   totalLabel: 'Order Total',
   arrivalLabel: 'Recommended arrival',
   guestsLabel: 'Guests covered',
@@ -536,10 +536,19 @@ export function formatFeeLabel35(locale: string, feeRate: number, _isMixed = fal
   return `${head} (${pct}%) · ${detail}`;
 }
 
-export function formatCheckoutFeeNote35(locale: string, feeRate = 0.2): string {
+export function formatFeeLabelNoPct35(locale: string): string {
+  const head =
+    (CONCIERGE_FEES_HEAD_35 as Record<string, string>)[locale] ||
+    CONCIERGE_FEES_HEAD_35[DEFAULT_LOCALE];
+  const detail =
+    (FEE_DETAIL_BY_LOCALE_35 as Record<string, string>)[locale] ||
+    FEE_DETAIL_BY_LOCALE_35[DEFAULT_LOCALE];
+  return `${head} · ${detail}`;
+}
+
+export function formatCheckoutFeeNote35(locale: string, _feeRate = 0.2): string {
   const copy = getSinglePassCopy(locale);
-  const pct = Math.max(0, Math.round(feeRate * 100));
-  return copy.feeCalculatedAtCheckoutNote.replace(/20%/g, `${pct}%`);
+  return copy.feeCalculatedAtCheckoutNote.replace(/\s*\(\d+%\)/g, '');
 }
 
 export function formatTermsLabel35(

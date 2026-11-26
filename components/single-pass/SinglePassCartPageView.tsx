@@ -16,7 +16,7 @@ import {
 import { formatMinorCurrency, type SupportedCurrency } from '@/lib/single-pass/currency';
 import {
   formatCartValidationError35,
-  formatFeeLabel35,
+  formatFeeLabelNoPct35,
   formatZeroGuestAddonBadge35,
   getCheckoutUxCopy,
   getSinglePassCopy,
@@ -47,7 +47,7 @@ export default function SinglePassCartPageView({ locale }: { locale: string }) {
 
   const copy = getSinglePassCopy(locale);
   const uxCopy = getCheckoutUxCopy(locale);
-  const feeLabel = formatFeeLabel35(locale, effectiveFeeRate, hasMixedFeeRates);
+  const feeLabel = formatFeeLabelNoPct35(locale);
   const lp = localePrefix(locale);
   const isIt = locale === 'it';
   const viewedRef = useRef(false);
@@ -86,7 +86,7 @@ export default function SinglePassCartPageView({ locale }: { locale: string }) {
   return (
     <div data-ui="cart-flow" data-no-lightbox="true" className="w-full">
       {/* CAPITOLO 1 (#050505 NOTTE): INTESTAZIONE & ARTICOLI SCELTI */}
-      <section className="w-full bg-[#050505] pt-24 pb-10 text-[#F6F1E7]">
+      <section className="w-full bg-[#050505] pt-4 pb-10 text-[#F6F1E7] sm:pt-5">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-end justify-between gap-4 border-b border-[#F6F1E7]/16 pb-6">
             <div>
@@ -268,14 +268,8 @@ export default function SinglePassCartPageView({ locale }: { locale: string }) {
                       </div>
 
                       <div className="text-right">
-                        {feePct > 0 && (
-                          <p className="font-mono text-xs text-[#C2B9AA]">
-                            {formatEurFromCents(pricing.lineBaseCents, locale)} +{' '}
-                            {formatEurFromCents(pricing.lineFeeCents, locale)} ({feePct}%)
-                          </p>
-                        )}
                         <p className="font-display text-2xl font-extrabold text-[#F6F1E7]">
-                          {formatEurFromCents(pricing.lineTotalCents, locale)}
+                          {formatEurFromCents(pricing.lineBaseCents, locale)}
                         </p>
                       </div>
                     </div>

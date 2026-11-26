@@ -137,8 +137,8 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
           {copy.trustOnlinePayment} · <span className="font-semibold text-[#5C4415]">{copy.feeCalculatedAtCheckoutNote}</span>
         </p>
 
-        {/* Floor Switcher Tabs */}
-        <div className="mt-5 grid gap-2 sm:grid-cols-2" role="tablist">
+        {/* Floor Switcher Tabs — 1 col below md: */}
+        <div className="mt-5 grid grid-cols-1 gap-2 md:grid-cols-2" role="tablist">
           <button
             type="button"
             role="tab"
@@ -223,8 +223,8 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
                       : 'Indoor dining rooms, shared tables min. 10 guests. 1 bottle of wine per 2 guests, midnight champagne toast, DJ set. Select main course for these guests:'}
                   </p>
 
-                  {/* Mandatory Main Course Choice */}
-                  <div className="mt-3 grid grid-cols-2 gap-2">
+                  {/* Mandatory Main Course Choice — 1 col below md: */}
+                  <div className="mt-3 grid grid-cols-1 gap-2 md:grid-cols-2">
                     <button
                       type="button"
                       onClick={() => setF1PlaceMain('rubia')}
@@ -594,7 +594,7 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
       )}
 
       {/* Trust & Official Refund Guarantee Strip */}
-      <div className="mt-5 grid gap-3 border-t border-[#050505]/15 pt-4 text-xs text-[#24201B] sm:grid-cols-2">
+      <div className="mt-5 grid grid-cols-1 gap-3 border-t border-[#050505]/15 pt-4 text-xs text-[#24201B] md:grid-cols-2">
         <p className="flex items-start gap-2">
           <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#050505]" aria-hidden="true" />
           <span>{terrazzaUi.confirmationRefundNotice}</span>

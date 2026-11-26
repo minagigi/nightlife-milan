@@ -111,7 +111,7 @@ export default function SinglePassStorefront({
             </p>
 
             {/* 4 Trust Pillars */}
-            <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
               <div className="border border-[#F6F1E7]/18 bg-[#0B0A09] p-4">
                 <CreditCard className="h-5 w-5 text-[#EAE3D5]" aria-hidden="true" />
                 <p className="mt-2 text-xs font-semibold leading-relaxed text-[#F6F1E7]">
@@ -187,7 +187,7 @@ export default function SinglePassStorefront({
               <p className="text-xs font-bold uppercase tracking-widest text-[#3D3830]">
                 {copy.filterHeading}
               </p>
-              <ul className="mt-3 grid gap-2 text-xs font-semibold sm:grid-cols-2 lg:grid-cols-5">
+              <ul className="mt-3 grid grid-cols-1 gap-2 text-xs font-semibold md:grid-cols-2 lg:grid-cols-5">
                 <li>
                   <a href="#catalogo-single-pass" className="text-[#050505] underline-offset-4 hover:underline">
                     1. {copy.filterAllVenues}
@@ -346,7 +346,7 @@ export default function SinglePassStorefront({
                   className="border border-[#050505]/20 bg-[#EFE9DC] p-5 sm:p-8"
                 >
                   <div className="grid gap-6 border-b border-[#050505]/15 pb-6 lg:grid-cols-[240px_1fr]">
-                    <div className="aspect-[4/5] overflow-hidden border border-[#050505]/20 bg-[#050505]">
+                    <div className="aspect-[4/5] w-full overflow-hidden border border-[#050505]/20 bg-[#050505]">
                       <img
                         src={venue.posterSrc}
                         alt={`${venue.name} · ${isIt ? venue.ageBandLabelIt : venue.ageBandLabelEn}`}
@@ -355,7 +355,7 @@ export default function SinglePassStorefront({
                         height={1350}
                         loading="eager"
                         decoding="async"
-                        className="h-full w-full object-contain bg-[#050505]"
+                        className="h-full w-full object-cover"
                       />
                     </div>
                     <div className="flex flex-col justify-between">
@@ -467,7 +467,7 @@ export default function SinglePassStorefront({
                               </p>
                             </div>
 
-                            <div className="mt-4 grid grid-cols-2 gap-2">
+                            <div className="mt-4 grid grid-cols-1 gap-2 md:grid-cols-2">
                               <button
                                 type="button"
                                 onClick={() => handleAdd(sku.id, sku.dietaryPreset)}
@@ -514,7 +514,7 @@ export default function SinglePassStorefront({
           <h2 className="mt-2 font-serif text-3xl font-bold text-[#F6F1E7]">
             {copy.howItWorksHeading}
           </h2>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
             {copy.howItWorksSteps.map((step) => (
               <div key={step.title} className="border border-[#F6F1E7]/16 bg-[#0B0A09] p-5">
                 <h3 className="font-serif text-lg font-bold text-[#F6F1E7]">{step.title}</h3>

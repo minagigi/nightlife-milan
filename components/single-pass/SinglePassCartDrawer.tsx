@@ -15,7 +15,7 @@ import {
 import { formatMinorCurrency, type SupportedCurrency } from '@/lib/single-pass/currency';
 import {
   formatCartValidationError35,
-  formatFeeLabel35,
+  formatFeeLabelNoPct35,
   getCheckoutUxCopy,
   getSinglePassCopy,
   localizeSinglePassSku,
@@ -43,7 +43,7 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
 
   const copy = getSinglePassCopy(lang);
   const uxCopy = getCheckoutUxCopy(lang);
-  const feeLabel = formatFeeLabel35(lang, effectiveFeeRate, hasMixedFeeRates);
+  const feeLabel = formatFeeLabelNoPct35(lang);
   const lp = localePrefix(lang);
   const isIt = lang === 'it';
 
@@ -216,13 +216,8 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
                           </div>
 
                           <div className="text-right">
-                            {feePct > 0 && (
-                              <p className="font-mono text-xs text-[#C2B9AA]">
-                                {formatEurFromCents(pricing.lineBaseCents, lang)} + {feePct}%
-                              </p>
-                            )}
                             <p className="font-display text-2xl font-extrabold text-[#F6F1E7]">
-                              {formatEurFromCents(pricing.lineTotalCents, lang)}
+                              {formatEurFromCents(pricing.lineBaseCents, lang)}
                             </p>
                           </div>
                         </div>

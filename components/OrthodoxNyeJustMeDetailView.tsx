@@ -202,9 +202,9 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(eventJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: safeJsonLd(faqJsonLd) }} />
 
-      <div className="mx-auto max-w-6xl px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl px-4 pb-16 pt-3 sm:px-6 sm:pt-4 lg:px-8">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-2 text-xs text-[#C2B9AA]">
+        <nav aria-label="Breadcrumb" className="mb-4 flex flex-wrap items-center gap-2 text-xs text-[#C2B9AA]">
           <Link href={prefix || '/'} className="hover:text-[#F6F1E7]">
             {c.breadcrumbHome}
           </Link>
@@ -221,88 +221,92 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
         </nav>
 
         {/* Hero Section */}
-        <section className="overflow-hidden border border-[#24242C] bg-[#0B0C10]">
-          <div className="relative mx-auto aspect-[4/5] w-full max-w-[540px] bg-[#070709]">
-            <Image
-              src={ORTHODOX_NYE_JUSTME_POSTER_SRC}
-              alt={imagePack.poster.alt}
-              title={imagePack.poster.title}
-              fill
-              priority
-              fetchPriority="high"
-              quality={95}
-              sizes="(max-width: 1080px) 100vw, 1080px"
-              className="object-cover"
-            />
-          </div>
+        <section className="border-b border-[#F6F1E7]/15 pb-8">
+          <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
+            <div className="lg:col-span-5">
+              <div className="relative aspect-[4/5] w-full overflow-hidden border border-[#F6F1E7]/18 bg-[#050505]">
+                <Image
+                  src={ORTHODOX_NYE_JUSTME_POSTER_SRC}
+                  alt={imagePack.poster.alt}
+                  title={imagePack.poster.title}
+                  fill
+                  priority
+                  fetchPriority="high"
+                  quality={95}
+                  sizes="(max-width: 1080px) 100vw, 1080px"
+                  className="object-cover"
+                />
+              </div>
+            </div>
 
-          <div className="space-y-6 p-6 sm:p-10">
-            <div className="flex flex-wrap items-center gap-2.5">
-              <span className="border border-[#C9A84C] bg-[#C9A84C]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-[#C9A84C]">
-                {c.dateBadge}
-              </span>
-              <span className="border border-[#2A2A34] bg-[#12131A] px-3 py-1 font-mono text-[11px] font-semibold tabular-nums tracking-wider text-[#EAE3D5]">
-                {c.priceBadge}
-              </span>
-              <span className="border border-[#8B1E2B] bg-[#8B1E2B]/20 px-3 py-1 text-[11px] font-semibold tracking-wider text-[#F6E3E6]">
-                {c.ageDressBadge}
-              </span>
-              {scarcity?.sellingFastBadge && (
-                <span className="border border-emerald-700/60 bg-emerald-950/60 px-3 py-1 text-[11px] font-semibold text-emerald-300">
-                  {scarcity.sellingFastBadge}
+            <div className="space-y-6 lg:col-span-7">
+              <div className="flex flex-wrap items-center gap-2.5">
+                <span className="border border-[#C9A84C] bg-[#C9A84C]/15 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-[#C9A84C]">
+                  {c.dateBadge}
                 </span>
-              )}
-            </div>
+                <span className="border border-[#2A2A34] bg-[#12131A] px-3 py-1 font-mono text-[11px] font-semibold tabular-nums tracking-wider text-[#EAE3D5]">
+                  {c.priceBadge}
+                </span>
+                <span className="border border-[#8B1E2B] bg-[#8B1E2B]/20 px-3 py-1 text-[11px] font-semibold tracking-wider text-[#F6E3E6]">
+                  {c.ageDressBadge}
+                </span>
+                {scarcity?.sellingFastBadge && (
+                  <span className="border border-emerald-700/60 bg-emerald-950/60 px-3 py-1 text-[11px] font-semibold text-emerald-300">
+                    {scarcity.sellingFastBadge}
+                  </span>
+                )}
+              </div>
 
-            <div className="space-y-3">
-              <p className="font-serif text-sm italic text-[#C9A84C]"><em>{c.themeTag}</em></p>
-              <h1 className="font-serif text-3xl font-bold leading-tight text-[#F6F1E7] sm:text-5xl">{c.h1}</h1>
-              <p className="text-sm font-medium text-[#D6CEC0] sm:text-base">{c.subtitle}</p>
-            </div>
+              <div className="space-y-3">
+                <p className="font-serif text-sm italic text-[#C9A84C]"><em>{c.themeTag}</em></p>
+                <h1 className="font-serif text-3xl font-bold leading-tight text-[#F6F1E7] sm:text-5xl">{c.h1}</h1>
+                <p className="text-sm font-medium text-[#D6CEC0] sm:text-base">{c.subtitle}</p>
+              </div>
 
-            <p className="max-w-4xl text-base leading-relaxed text-[#EAE3D5]">{c.description}</p>
+              <p className="max-w-4xl text-base leading-relaxed text-[#EAE3D5]">{c.description}</p>
 
-            {/* Primary Action Bar */}
-            <div className="flex flex-wrap gap-3 pt-1">
-              <a
-                href={ORTHODOX_NYE_JUSTME_AFFILIATE_URL}
-                target="_blank"
-                rel="noopener noreferrer sponsored"
-                className="inline-flex min-h-[48px] items-center justify-center bg-[#C9A84C] px-6 py-3 text-sm font-bold uppercase tracking-wider text-[#050505] transition hover:bg-[#DFBE63]"
-              >
-                {c.xceedCtaLabel} →
-              </a>
-              <a
-                href={whatsappGeneralHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-[48px] items-center justify-center border border-[#25D366]/70 bg-[#25D366]/15 px-6 py-3 text-sm font-bold text-[#F6F1E7] transition hover:bg-[#25D366] hover:text-[#050505]"
-              >
-                {c.whatsappCtaLabel}
-              </a>
-            </div>
+              {/* Primary Action Bar */}
+              <div className="flex flex-wrap gap-3 pt-1">
+                <a
+                  href={ORTHODOX_NYE_JUSTME_AFFILIATE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className="inline-flex min-h-[48px] items-center justify-center bg-[#C9A84C] px-6 py-3 text-sm font-bold uppercase tracking-wider text-[#050505] transition hover:bg-[#DFBE63]"
+                >
+                  {c.xceedCtaLabel} →
+                </a>
+                <a
+                  href={whatsappGeneralHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-[48px] items-center justify-center border border-[#25D366]/70 bg-[#25D366]/15 px-6 py-3 text-sm font-bold text-[#F6F1E7] transition hover:bg-[#25D366] hover:text-[#050505]"
+                >
+                  {c.whatsappCtaLabel}
+                </a>
+              </div>
 
-            {/* Key Facts Grid */}
-            <div className="grid grid-cols-1 gap-3 border-t border-[#202028] pt-6 sm:grid-cols-2 lg:grid-cols-3">
-              {c.quickFacts.map((fact) => (
-                <div key={fact.label} className="border border-[#202028] bg-[#101116] p-4">
-                  <div className="text-[11px] font-bold tracking-wider text-[#C9A84C]">{fact.label}</div>
-                  <div className="mt-1.5 text-sm font-medium text-[#F6F1E7]">{fact.value}</div>
-                </div>
-              ))}
+              {/* Key Facts — 1 col below md:, hairline dividers */}
+              <dl className="grid grid-cols-1 divide-y divide-[#F6F1E7]/12 border-t border-[#F6F1E7]/15 pt-2 md:grid-cols-2 md:gap-x-8 md:divide-y-0 lg:grid-cols-3">
+                {c.quickFacts.map((fact) => (
+                  <div key={fact.label} className="py-3 md:border-b md:border-[#F6F1E7]/12">
+                    <dt className="text-[11px] font-bold tracking-wider text-[#C9A84C]">{fact.label}</dt>
+                    <dd className="mt-1 text-sm font-medium text-[#F6F1E7]">{fact.value}</dd>
+                  </div>
+                ))}
+              </dl>
             </div>
           </div>
         </section>
 
         {/* Table of Contents */}
-        <section className="mt-6 border border-[#24242C] bg-[#0B0C10] p-4 sm:p-6">
+        <section className="mt-6 border-b border-[#F6F1E7]/15 pb-5">
           <h2 className="font-mono text-xs font-bold uppercase tracking-widest text-[#C9A84C]">{c.tocTitle}</h2>
-          <div className="mt-3 flex gap-2 overflow-x-auto pb-1.5 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-2.5 sm:overflow-visible sm:pb-0">
+          <div className="mt-3 flex gap-2 overflow-x-auto pb-1.5 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-2.5 md:overflow-visible md:pb-0">
             {c.tocItems.map((item) => (
               <a
                 key={item.id}
                 href={`#${item.id}`}
-                className="inline-flex min-h-[38px] shrink-0 items-center border border-[#202028] bg-[#111218] px-3.5 py-2 text-xs font-semibold text-[#EAE3D5] transition hover:border-[#C9A84C] hover:text-[#C9A84C]"
+                className="inline-flex min-h-[38px] shrink-0 items-center border border-[#F6F1E7]/16 bg-[#141311] px-3.5 py-2 text-xs font-semibold text-[#EAE3D5] transition hover:border-[#C9A84C] hover:text-[#C9A84C]"
               >
                 {item.label}
               </a>
@@ -361,11 +365,11 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
           <div className="border-t border-[#202028] pt-6">
             <h3 className="font-serif text-xl font-bold text-[#F6F1E7]">{c.timelineHeading}</h3>
             <p className="mt-1 text-sm text-[#C2B9AA]">{c.timelineSubheading}</p>
-            <div className="mt-5 space-y-3">
+            <div className="mt-5 divide-y divide-[#F6F1E7]/12 border-y border-[#F6F1E7]/12">
               {c.timelineSteps.map((step) => (
                 <div
                   key={step.time}
-                  className="flex flex-col gap-2 border border-[#202028] bg-[#101116] p-4 sm:flex-row sm:items-start sm:gap-5"
+                  className="flex flex-col gap-2 py-4 sm:flex-row sm:items-start sm:gap-5"
                 >
                   <span className="inline-block w-28 shrink-0 border border-[#C9A84C]/50 bg-[#C9A84C]/10 px-2.5 py-1 text-center text-xs font-bold text-[#C9A84C]">
                     {step.time}
@@ -390,15 +394,15 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
             {/* Silver 60 EUR */}
             <article className="flex flex-col border border-[#2B2D36] bg-[#101116]">
-              <div className="relative aspect-[4/5] w-full border-b border-[#24242C]">
+              <div className="relative aspect-[4/5] w-full overflow-hidden border-b border-[#24242C] bg-[#050505]">
                 <Image
                   src={ORTHODOX_NYE_JUSTME_SILVER_MENU_SRC}
                   alt={c.silverMenuAlt}
                   title={c.silverMenuAlt}
                   fill
                   quality={92}
-                  sizes="(max-width: 1080px) 100vw, 1080px"
-                  className="object-contain"
+                  sizes="(max-width: 1024px) 100vw, 48vw"
+                  className="object-cover"
                 />
               </div>
               <div className="flex flex-1 flex-col justify-between p-6">
@@ -437,15 +441,15 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
 
             {/* Gold 80 EUR */}
             <article className="flex flex-col border border-[#C9A84C]/60 bg-[#12100B]">
-              <div className="relative aspect-[4/5] w-full border-b border-[#C9A84C]/30">
+              <div className="relative aspect-[4/5] w-full overflow-hidden border-b border-[#C9A84C]/30 bg-[#050505]">
                 <Image
                   src={ORTHODOX_NYE_JUSTME_GOLD_MENU_SRC}
                   alt={c.goldMenuAlt}
                   title={c.goldMenuAlt}
                   fill
                   quality={92}
-                  sizes="(max-width: 1080px) 100vw, 1080px"
-                  className="object-contain"
+                  sizes="(max-width: 1024px) 100vw, 48vw"
+                  className="object-cover"
                 />
               </div>
               <div className="flex flex-1 flex-col justify-between p-6">
@@ -600,17 +604,17 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
             <p className="mt-1 text-sm text-[#C2B9AA]">{imagePack.sectionSubtitle}</p>
           </div>
 
-          <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:pb-0">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             {imagePack.gallery.map((shot) => (
-              <figure key={shot.assetKey} className="w-[78vw] max-w-[330px] shrink-0 snap-start overflow-hidden border border-[#24242C] bg-[#101116] md:w-auto md:max-w-none">
-                <div className="relative aspect-[4/5] w-full">
+              <figure key={shot.assetKey} className="overflow-hidden border border-[#24242C] bg-[#101116]">
+                <div className="relative aspect-[4/5] w-full bg-[#050505]">
                   <Image
                     src={shot.src}
                     alt={shot.alt}
                     title={shot.title}
                     fill
                     quality={92}
-                    sizes="(max-width: 1080px) 100vw, 1080px"
+                    sizes="(max-width: 768px) 100vw, 48vw"
                     className="object-cover"
                   />
                 </div>
@@ -624,7 +628,7 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
         </section>
 
         {/* 5. Official 6-Step 100% Prepayment Terms */}
-        <section id="payment-terms" className="mt-10 space-y-5 border border-[#24242C] bg-[#0B0C10] p-6 sm:p-10">
+        <section id="payment-terms" className="mt-10 space-y-5 border-t border-[#F6F1E7]/15 pt-8">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#C9A84C]">{paymentTerms.eyebrow}</p>
@@ -637,10 +641,10 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
 
           <p className="text-sm text-[#C2B9AA]">{paymentTerms.subtitle}</p>
 
-          <ol className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
+          <ol className="grid grid-cols-1 divide-y divide-[#F6F1E7]/12 border-y border-[#F6F1E7]/12 md:grid-cols-2 md:gap-x-8 md:divide-y-0 lg:grid-cols-3">
             {paymentTerms.steps.map((step, index) => (
-              <li key={step} className="border border-[#202028] bg-[#101116] p-4 text-sm text-[#EAE3D5]">
-                <span className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-[#C9A84C]">
+              <li key={step} className="py-4 text-sm text-[#EAE3D5] md:border-b md:border-[#F6F1E7]/12">
+                <span className="mb-1 block font-mono text-xs font-bold uppercase tracking-wider text-[#C9A84C]">
                   {index + 1}.
                 </span>
                 {step}
@@ -664,9 +668,9 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
             ))}
           </div>
 
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 divide-y divide-[#F6F1E7]/12 border-y border-[#F6F1E7]/12 md:grid-cols-2 md:gap-x-8 md:divide-y-0 lg:grid-cols-4">
             {c.logisticsFacts.map((item) => (
-              <div key={item.label} className="border border-[#202028] bg-[#101116] p-4">
+              <div key={item.label} className="py-3.5 md:border-b md:border-[#F6F1E7]/12">
                 <div className="text-[11px] font-bold uppercase tracking-wider text-[#C9A84C]">{item.label}</div>
                 <div className="mt-1 text-xs font-medium text-[#F6F1E7]">{item.value}</div>
               </div>

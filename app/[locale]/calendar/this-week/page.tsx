@@ -191,9 +191,9 @@ export default async function ThisWeekPage({ params }: Props) {
       {eventListSchema && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(eventListSchema) }} />
       )}
-      <main className="flex-1 bg-[#050505] w-full pt-20">
+      <main className="flex-1 bg-[#050505] w-full pt-3 sm:pt-4">
         {/* Breadcrumb */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-2">
           <nav className="text-sm text-white/40" aria-label="Breadcrumb">
             <ol className="list-none p-0 inline-flex">
               <li className="flex items-center">

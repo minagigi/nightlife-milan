@@ -219,9 +219,9 @@ export default async function EventsThisWeekPage({ params }: Props) {
       {eventListSchema && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(eventListSchema) }} />
       )}
-      <main className="flex-1 bg-[#050505] w-full pt-20 pb-20">
+      <main className="flex-1 bg-[#050505] w-full pt-3 pb-20 sm:pt-4">
         {/* Breadcrumb */}
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-2">
           <nav className="text-xs text-white/30 flex gap-2">
             <Link href={`${lp}/`} className="hover:text-champagne transition-colors">
               Home

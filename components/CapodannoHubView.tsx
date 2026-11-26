@@ -177,17 +177,17 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
   return (
     <main
       data-layout-alt="alternativa-02-capitoli-colore-netto"
-      className="min-h-[100dvh] bg-[#050505] pb-20 pt-20 text-[#F6F1E7]"
+      className="min-h-[100dvh] bg-[#050505] pb-20 pt-3 text-[#F6F1E7] sm:pt-4"
     >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* CAPITOLO 01 — NOTTE #050505: Testata Compatta, Filtri & Tutte le Locandine 4:5 */}
+      {/* CAPITOLO 01 — NOTTE #050505: Testata Editoriale Senza Cassettoni, Filtri & Locandine 4:5 Piene */}
       <section className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
-        <div className="border border-[#F6F1E7]/18 bg-[#0B0A09] p-5 sm:p-10">
-          <nav className="mb-4 text-xs font-semibold text-[#C2B9AA] sm:text-[13px]" aria-label="Breadcrumb">
+        <div className="border-b border-[#F6F1E7]/14 pb-8">
+          <nav className="mb-3 text-xs font-semibold text-[#C2B9AA] sm:text-[13px]" aria-label="Breadcrumb">
             <Link href={prefix || '/'} className="hover:text-[#F6F1E7]">Home</Link>
             <span className="mx-2">/</span>
             <Link href={`${prefix}/events`} className="hover:text-[#F6F1E7]">{ui.eventsBreadcrumb}</Link>
@@ -216,7 +216,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
 
           <h1
             data-event-title={title}
-            className="mt-3 font-display text-3xl font-bold uppercase leading-[1.03] text-[#F6F1E7] sm:text-6xl"
+            className="mt-3 font-display text-3xl font-bold uppercase leading-[1.05] text-[#F6F1E7] sm:text-6xl"
           >
             {title}
           </h1>
@@ -247,11 +247,11 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
             </a>
           </div>
 
-          <div className="mt-5 grid gap-3 lg:grid-cols-2">
+          <div className="mt-6 divide-y divide-[#F6F1E7]/12 border-t border-[#F6F1E7]/14 pt-2 lg:grid lg:grid-cols-2 lg:gap-8 lg:divide-y-0 lg:pt-5">
             <div
               role="alert"
               data-urgency-alert
-              className="border border-[#F6F1E7]/14 bg-[#141311] p-4 text-[#F6F1E7]"
+              className="py-3 text-[#F6F1E7] lg:py-0"
             >
               <p className="font-mono text-xs font-bold uppercase text-[#EAE3D5]">
                 {scarcity.urgencyAlertTitle}
@@ -260,7 +260,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
                 {scarcity.urgencyAlertBody}
               </p>
             </div>
-            <div className="border border-[#F6F1E7]/14 bg-[#050505] p-4 text-[#F6F1E7]">
+            <div className="py-3 text-[#F6F1E7] lg:border-l lg:border-[#F6F1E7]/14 lg:pl-8 lg:py-0">
               <p className="font-mono text-xs font-bold uppercase text-[#EAE3D5]">
                 {ui.quickGuideLabel} · {shortLabel}
               </p>
@@ -375,11 +375,11 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
         />
       </section>
 
-      {/* CAPITOLO 02 — CARTA CALDA #F6F1E7: Tabella Confronto Prezzi & Protocollo Pagamenti */}
+      {/* CAPITOLO 02 — CARTA CALDA #F6F1E7: Tabella Confronto Prezzi & Protocollo Pagamenti (senza cassettoni) */}
       <div className="border-y border-[#050505] bg-[#F6F1E7] py-12 text-[#050505]">
-        <div className="mx-auto max-w-7xl space-y-10 px-4 sm:px-6 lg:px-8">
-          <section id="tabella-prezzi" className="overflow-hidden border border-[#050505] bg-[#FFFFFF]">
-            <div className="border-b border-[#050505]/15 p-5 sm:p-8">
+        <div className="mx-auto max-w-7xl space-y-12 px-4 sm:px-6 lg:px-8">
+          <section id="tabella-prezzi">
+            <div className="border-b-2 border-[#050505] pb-4">
               <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-[#4A453E]">
                 CONFRONTO UFFICIALE TARIFFE
               </p>
@@ -387,44 +387,42 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
                 {ui.tableHeadingPrefix} · {shortLabel} ({events.length})
               </h2>
             </div>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs text-[#050505] sm:text-sm">
-                <thead className="bg-[#050505] font-mono text-xs font-bold uppercase tracking-[0.04em] text-[#F6F1E7]">
-                  <tr>
-                    <th className="px-4 py-3.5">{ui.colVenue}</th>
-                    <th className="px-4 py-3.5">{ui.colCity}</th>
-                    <th className="px-4 py-3.5">{ui.colHours}</th>
-                    <th className="px-4 py-3.5">{ui.colPrices}</th>
+            <table className="w-full text-left text-xs text-[#050505] sm:text-sm">
+              <thead className="hidden border-b border-[#050505] font-mono text-xs font-bold uppercase tracking-[0.04em] text-[#3D3830] md:table-header-group">
+                <tr>
+                  <th className="py-3.5 pr-4">{ui.colVenue}</th>
+                  <th className="px-4 py-3.5">{ui.colCity}</th>
+                  <th className="px-4 py-3.5">{ui.colHours}</th>
+                  <th className="py-3.5 pl-4 text-right">{ui.colPrices}</th>
+                </tr>
+              </thead>
+              <tbody className="block divide-y divide-[#050505]/15 md:table-row-group">
+                {events.map((ev) => (
+                  <tr key={ev.slug} className="block py-4 md:table-row md:py-0">
+                    <td className="block font-bold text-[#050505] md:table-cell md:py-3.5 md:pr-4">
+                      <Link href={capodannoEventPath(ev.slug, locale)} className="underline underline-offset-2">
+                        {ev.venueName}
+                      </Link>
+                    </td>
+                    <td className="mt-1 block text-[#3D3830] md:mt-0 md:table-cell md:px-4 md:py-3.5">
+                      {ev.city} ({ev.province})
+                    </td>
+                    <td className="mt-0.5 block font-mono text-xs text-[#3D3830] md:mt-0 md:table-cell md:px-4 md:py-3.5">
+                      {formatCapodannoHours35(ev.hours, locale)}
+                    </td>
+                    <td className="mt-1.5 block font-mono font-bold text-[#050505] md:mt-0 md:table-cell md:py-3.5 md:pl-4 md:text-right">
+                      {getCapodannoLocalizedEventContent(ev, locale).priceSummary}
+                    </td>
                   </tr>
-                </thead>
-                <tbody className="divide-y divide-[#050505]/12">
-                  {events.map((ev) => (
-                    <tr key={ev.slug} className="odd:bg-[#FFFFFF] even:bg-[#F6F1E7] hover:bg-[#EAE3D5]">
-                      <td className="px-4 py-3 font-bold text-[#050505]">
-                        <Link href={capodannoEventPath(ev.slug, locale)} className="underline underline-offset-2">
-                          {ev.venueName}
-                        </Link>
-                      </td>
-                      <td className="px-4 py-3 text-[#3D3830]">
-                        {ev.city} ({ev.province})
-                      </td>
-                      <td className="px-4 py-3 font-mono text-xs text-[#3D3830]">
-                        {formatCapodannoHours35(ev.hours, locale)}
-                      </td>
-                      <td className="px-4 py-3 font-mono font-bold text-[#050505]">
-                        {getCapodannoLocalizedEventContent(ev, locale).priceSummary}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
           </section>
 
           <section
             id="termini-pagamento"
             data-payment-terms-35
-            className="border border-[#050505] bg-[#EAE3D5] p-5 text-[#050505] sm:p-8"
+            className="border-t-2 border-[#050505] pt-8 text-[#050505]"
           >
             <div className="flex flex-wrap items-center justify-between gap-3">
               <h2 className="font-display text-2xl font-bold uppercase text-[#050505] sm:text-3xl">
@@ -437,46 +435,44 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
             <p className="mt-2 max-w-[54ch] text-sm leading-relaxed text-[#3D3830]">
               {paymentTerms.subtitle}
             </p>
-            <ol className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <ol className="mt-5 grid grid-cols-1 divide-y divide-[#050505]/15 border-y border-[#050505]/15 md:grid-cols-2 md:gap-x-8 md:divide-y-0 lg:grid-cols-3">
               {paymentTerms.steps.map((step, idx) => (
-                <li key={step} className="border border-[#050505]/20 bg-[#FFFFFF] p-4 text-[#050505]">
+                <li key={step} className="py-4 text-[#050505] md:border-b md:border-[#050505]/15">
                   <span className="inline-flex h-6 w-6 items-center justify-center bg-[#050505] font-mono text-xs font-bold tabular-nums text-[#F6F1E7]">
                     {idx + 1}
                   </span>
-                  <p className="mt-2.5 text-sm leading-relaxed text-[#050505]">{step}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-[#050505]">{step}</p>
                 </li>
               ))}
             </ol>
-            <p className="mt-4 border border-[#050505]/20 bg-[#F6F1E7] px-4 py-3 text-xs font-medium leading-relaxed text-[#24201B] sm:text-[13px]">
+            <p className="mt-4 border-l-2 border-[#050505] pl-4 text-xs font-medium leading-relaxed text-[#24201B] sm:text-[13px]">
               {paymentTerms.note}
             </p>
           </section>
         </div>
       </div>
 
-      {/* CAPITOLO 03 — CHAMPAGNE #EAE3D5: FAQ Hub */}
+      {/* CAPITOLO 03 — CHAMPAGNE #EAE3D5: FAQ Hub (senza cassettoni) */}
       <section id="faq-capodanno" className="border-b border-[#050505] bg-[#EAE3D5] py-12 text-[#050505]">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <div className="border border-[#050505] bg-[#FFFFFF] p-5 sm:p-8">
-            <h2 className="font-display text-2xl font-bold uppercase text-[#050505] sm:text-3xl">
-              {ui.faqHeadingPrefix} · {shortLabel}
-            </h2>
-            <div className="mt-5 divide-y divide-[#050505]/15 border-y border-[#050505]/15">
-              {faqs.map((f, idx) => (
-                <details key={f.q} open={idx < 2} className="group py-4">
-                  <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 marker:hidden">
-                    <h3 className="font-display text-lg font-bold text-[#050505]">{f.q}</h3>
-                    <span
-                      className="font-mono text-xl font-bold text-[#050505] transition-transform group-open:rotate-45"
-                      aria-hidden="true"
-                    >
-                      +
-                    </span>
-                  </summary>
-                  <p className="pt-2 text-sm leading-relaxed text-[#3D3830]">{f.a}</p>
-                </details>
-              ))}
-            </div>
+          <h2 className="font-display text-2xl font-bold uppercase text-[#050505] sm:text-3xl">
+            {ui.faqHeadingPrefix} · {shortLabel}
+          </h2>
+          <div className="mt-5 divide-y divide-[#050505]/15 border-y border-[#050505]/15">
+            {faqs.map((f, idx) => (
+              <details key={f.q} open={idx < 2} className="group py-4">
+                <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 marker:hidden">
+                  <h3 className="font-display text-lg font-bold text-[#050505]">{f.q}</h3>
+                  <span
+                    className="font-mono text-xl font-bold text-[#050505] transition-transform group-open:rotate-45"
+                    aria-hidden="true"
+                  >
+                    +
+                  </span>
+                </summary>
+                <p className="pt-2 text-sm leading-relaxed text-[#3D3830]">{f.a}</p>
+              </details>
+            ))}
           </div>
         </div>
       </section>

@@ -174,9 +174,9 @@ const MAJOR_SPECIAL_EVENTS: MajorSpecialEventCard[] = [
     venuesIt: '1. Just Me Torre Branca · 2. Pineta Club · 3. Aria Club · 4. 55 Milano · 5. Voya Rooftop 20° Piano · 6. Repvblic',
     venuesEn: '1. Just Me Torre Branca · 2. Pineta Club · 3. Aria Club · 4. 55 Milano · 5. Voya Rooftop 20th Floor · 6. Repvblic',
     descIt:
-      'La notte più richiesta dell’anno: Pineta Moulin Rouge (Royal Buffet 40€, Solo Disco 40€, Gala Servito 160€, VIP 300€–1.500€ · Xceed nightlifemilan-1), REPVBLIC (Early Bird 45€, Tavoli 600€–1.200€), Voya Rooftop 20° Piano (300€ menu 6 portate + DJ set, +20% Booking & Transaction Fees al checkout online), Just Me, Aria Club e 55 Milano.',
+      'La notte più richiesta dell’anno: Pineta Moulin Rouge (Royal Buffet 40€, Solo Disco 40€, Gala Servito 160€, VIP 300€–1.500€ · Xceed nightlifemilan-1), REPVBLIC (Early Bird 45€, Tavoli 600€–1.200€), Voya Rooftop 20° Piano (300€ menu 6 portate + DJ set, Servizio di Conciergerie & Transaction Fees calcolato al checkout online), Just Me, Aria Club e 55 Milano.',
     descEn:
-      'Milan’s flagship December 31 celebration: Pineta Moulin Rouge (Royal Buffet €40, Club €40, Seated Gala €160, VIP €300–€1,500 · Xceed nightlifemilan-1), REPVBLIC (Early Bird €45, Tables €600–€1,200), Voya Rooftop 20th Floor (€300 6-course Gala + DJ Set, +20% Booking & Transaction Fees at checkout), Just Me, Aria Club & 55 Milano.',
+      'Milan’s flagship December 31 celebration: Pineta Moulin Rouge (Royal Buffet €40, Club €40, Seated Gala €160, VIP €300–€1,500 · Xceed nightlifemilan-1), REPVBLIC (Early Bird €45, Tables €600–€1,200), Voya Rooftop 20th Floor (€300 6-course Gala + DJ Set, Concierge Service & Transaction Fees calculated at checkout), Just Me, Aria Club & 55 Milano.',
   },
   {
     badgeIt: '25 Dicembre · Natale 2026',
@@ -186,9 +186,9 @@ const MAJOR_SPECIAL_EVENTS: MajorSpecialEventCard[] = [
     venuesIt: 'Voya Rooftop Milano · Viale Achille Papa 30, 20° Piano (85m)',
     venuesEn: 'Voya Rooftop Milano · Viale Achille Papa 30, 20th Floor (85m)',
     descIt:
-      'Menù ufficiale di Natale in 5 portate a 100€ a persona con 1 bottiglia di vino ogni 4 ospiti, acqua e caffè inclusi (Modeghili, Flan di zucca e porcini, Ravioli Plin Voya, Filetto di manzo con crema di patate al tartufo, Sinfonia cioccolato/pistacchio/lamponi). Prenotazione online (+20% Booking & Transaction Fees al checkout) o assistenza WhatsApp 24/7.',
+      'Menù ufficiale di Natale in 5 portate a 100€ a persona con 1 bottiglia di vino ogni 4 ospiti, acqua e caffè inclusi (Modeghili, Flan di zucca e porcini, Ravioli Plin Voya, Filetto di manzo con crema di patate al tartufo, Sinfonia cioccolato/pistacchio/lamponi). Prenotazione online (Servizio di Conciergerie & Transaction Fees calcolato al checkout) o assistenza WhatsApp 24/7.',
     descEn:
-      'Official 5-course Christmas Day tasting menu at €100 per person including 1 bottle of wine per 4 guests, water & coffee (Modeghili, Pumpkin & porcini flan, Voya Plin ravioli, Beef fillet with truffle potato cream, Chocolate/pistachio/raspberry symphony). Direct online booking (+20% Booking & Transaction Fees at checkout) or 24/7 WhatsApp support.',
+      'Official 5-course Christmas Day tasting menu at €100 per person including 1 bottle of wine per 4 guests, water & coffee (Modeghili, Pumpkin & porcini flan, Voya Plin ravioli, Beef fillet with truffle potato cream, Chocolate/pistachio/raspberry symphony). Direct online booking (Concierge Service & Transaction Fees calculated at checkout) or 24/7 WhatsApp support.',
   },
   {
     badgeIt: '31 Ottobre · Peak Autunnale',
@@ -306,12 +306,12 @@ export default async function SpecialEventsPage({ params }: Props) {
       : null;
 
   return (
-    <main className="flex-1 bg-[#050505] w-full pt-20">
+    <main className="flex-1 bg-[#050505] w-full pt-3 sm:pt-4">
       {eventListSchema && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString(eventListSchema) }} />
       )}
       {/* Breadcrumb */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-2">
         <nav className="text-sm text-white/40" aria-label="Breadcrumb">
           <ol className="list-none p-0 inline-flex">
             <li className="flex items-center">

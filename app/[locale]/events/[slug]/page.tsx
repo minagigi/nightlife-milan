@@ -749,10 +749,10 @@ export default async function EventPage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
 
-        {/* CAPITOLO 01 — NOTTE #050505: Locandina 4:5 & Titolo */}
-        <section className="border-b border-[#F6F1E7]/14 bg-[#050505]">
-          <div className="mx-auto max-w-5xl px-4 pt-6 sm:px-6 lg:px-8">
-            <div className="relative mx-auto aspect-[4/5] w-full max-w-[540px] overflow-hidden border border-[#F6F1E7]/18 bg-[#050505]">
+        {/* CAPITOLO 01 — NOTTE #050505: Locandina 4:5 a pieno placeholder & Titolo */}
+        <section className="border-b border-[#F6F1E7]/14 bg-[#050505] pt-3 pb-8 sm:pt-4">
+          <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 px-4 sm:px-6 lg:grid-cols-12 lg:items-start lg:gap-10 lg:px-8">
+            <div className="relative aspect-[4/5] w-full overflow-hidden border border-[#F6F1E7]/18 bg-[#050505] lg:col-span-5">
               <Image
                 src={weeklyEvent.image}
                 alt={title}
@@ -765,29 +765,29 @@ export default async function EventPage({ params }: Props) {
                 referrerPolicy="no-referrer"
               />
             </div>
-          </div>
-          <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
-            <div className="mb-4 flex flex-wrap gap-2">
-              <span className="bg-[#EAE3D5] px-3 py-1 font-mono text-xs font-extrabold uppercase tracking-wider text-[#050505]">
-                {weeklyEvent.clubName}
-              </span>
-              <span className="border border-[#F6F1E7]/25 bg-[#141311] px-3 py-1 text-xs font-semibold text-[#EAE3D5]">
-                {weeklyEvent.genres.join(' · ')}
-              </span>
-              <span className="border border-[#F6F1E7]/25 bg-[#141311] px-3 py-1 font-mono text-xs font-semibold capitalize text-[#C2B9AA]">
-                {weeklyEvent.day}
-              </span>
+            <div className="min-w-0 lg:col-span-7">
+              <div className="mb-3 flex flex-wrap gap-2">
+                <span className="bg-[#EAE3D5] px-3 py-1 font-mono text-xs font-extrabold uppercase tracking-wider text-[#050505]">
+                  {weeklyEvent.clubName}
+                </span>
+                <span className="border border-[#F6F1E7]/25 bg-[#141311] px-3 py-1 text-xs font-semibold text-[#EAE3D5]">
+                  {weeklyEvent.genres.join(' · ')}
+                </span>
+                <span className="border border-[#F6F1E7]/25 bg-[#141311] px-3 py-1 font-mono text-xs font-semibold capitalize text-[#C2B9AA]">
+                  {weeklyEvent.day}
+                </span>
+              </div>
+              <h1 className="font-display text-3xl font-bold uppercase tracking-tight text-[#F6F1E7] sm:text-5xl">
+                {title}
+              </h1>
+              <p className="mt-3 max-w-2xl text-base text-[#C2B9AA] sm:text-lg">{weeklyEvent.target}</p>
             </div>
-            <h1 className="font-display text-3xl font-bold uppercase tracking-tight text-[#F6F1E7] sm:text-5xl">
-              {title}
-            </h1>
-            <p className="mt-3 max-w-2xl text-base text-[#C2B9AA] sm:text-lg">{weeklyEvent.target}</p>
           </div>
         </section>
 
         {/* CAPITOLO 02 — CARTA CALDA #F6F1E7: Prezzi, Tavoli VIP & Prenotazione Immediata */}
         <section className="border-b border-[#050505] bg-[#F6F1E7] py-10 text-[#050505]">
-          <div className="mx-auto grid max-w-5xl gap-8 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
+          <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
             <div className="space-y-4 lg:col-span-7">
               <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-[#4A453E]">
                 01 · TARIFFE & FORMULE D&apos;INGRESSO
@@ -795,33 +795,33 @@ export default async function EventPage({ params }: Props) {
               <h2 className="font-display text-2xl font-bold uppercase text-[#050505] sm:text-3xl">
                 {tr(locale, 'Pricing & VIP Tables', 'Prezzi & Tavoli VIP')}
               </h2>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="divide-y divide-[#050505]/18 border-y border-[#050505]/20">
                 {weeklyEvent.pricing.aperitif && (
-                  <div className="border border-[#050505] bg-[#FFFFFF] p-5 text-[#050505]">
+                  <div className="py-4 text-[#050505]">
                     <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-[#4A453E]">
                       {tr(locale, 'Aperitif', 'Aperitivo')}
                     </h3>
-                    <p className="mt-2 font-display text-2xl font-extrabold text-[#050505]">
+                    <p className="mt-1 font-display text-2xl font-extrabold text-[#050505]">
                       {weeklyEvent.pricing.aperitif}
                     </p>
                   </div>
                 )}
-                <div className="border border-[#050505] bg-[#FFFFFF] p-5 text-[#050505]">
+                <div className="py-4 text-[#050505]">
                   <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-[#4A453E]">
                     {tr(locale, 'Club Entry', 'Ingresso Club')}
                   </h3>
-                  <p className="mt-2 font-display text-2xl font-extrabold text-[#050505]">
+                  <p className="mt-1 font-display text-2xl font-extrabold text-[#050505]">
                     {weeklyEvent.pricing.club}
                   </p>
                 </div>
-                <div className="border border-[#050505] bg-[#EAE3D5] p-5 text-[#050505] sm:col-span-2">
+                <div className="py-4 text-[#050505]">
                   <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-[#4A453E]">
                     {tr(locale, 'VIP Tables', 'Tavoli VIP')}
                   </h3>
-                  <p className="mt-2 font-display text-2xl font-extrabold text-[#050505]">
+                  <p className="mt-1 font-display text-2xl font-extrabold text-[#050505]">
                     {weeklyEvent.pricing.tables}
                   </p>
-                  <p className="mt-1.5 text-xs text-[#3D3830]">
+                  <p className="mt-1 text-xs text-[#3D3830]">
                     {tr(
                       locale,
                       'Prices vary based on location and number of guests.',
@@ -1110,13 +1110,10 @@ export default async function EventPage({ params }: Props) {
       )}
 
       <main data-layout-alt="alternativa-02-capitoli-colore-netto" className="flex-1 flex flex-col w-full bg-[#050505] text-[#F6F1E7]">
-        {/* CAPITOLO 01 — NOTTE #050505: Locandina 4:5 & Intestazione */}
-        <section className="w-full border-b border-[#F6F1E7]/14 bg-[#050505]">
-          <div className="mx-auto max-w-7xl px-4 pt-6 sm:px-6 md:px-12">
-            <div
-              className={isHeroPortrait4x5 ? 'mx-auto max-w-[540px]' : 'mx-auto w-full'}
-              style={isHeroPortrait4x5 ? undefined : { maxWidth: `${Math.min(960, heroDims.width)}px` }}
-            >
+        {/* CAPITOLO 01 — NOTTE #050505: Locandina a pieno placeholder & Intestazione */}
+        <section className="w-full border-b border-[#F6F1E7]/14 bg-[#050505] pt-3 pb-8 sm:pt-4">
+          <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 px-4 sm:px-6 lg:grid-cols-12 lg:items-start lg:gap-10 lg:px-8">
+            <div className={isHeroPortrait4x5 ? 'lg:col-span-5' : 'lg:col-span-6'}>
               <div
                 className={`relative w-full overflow-hidden border border-[#F6F1E7]/18 bg-[#050505] ${isHeroPortrait4x5 ? 'aspect-[4/5]' : ''}`}
                 style={isHeroPortrait4x5 ? undefined : { aspectRatio: `${heroDims.width} / ${heroDims.height}` }}
@@ -1130,7 +1127,7 @@ export default async function EventPage({ params }: Props) {
                   priority={true}
                   fetchPriority="high"
                   sizes={isHeroPortrait4x5 ? '(max-width: 1080px) 100vw, 1080px' : '(max-width: 1024px) 100vw, 1080px'}
-                  className="h-full w-full object-cover"
+                  className="block h-full w-full object-cover"
                   referrerPolicy="no-referrer"
                 />
               </div>
@@ -1144,37 +1141,37 @@ export default async function EventPage({ params }: Props) {
                 </div>
               )}
             </div>
-          </div>
 
-          <div className="mx-auto w-full max-w-7xl px-4 py-7 sm:px-6 md:px-12">
-            <div className="mb-3 flex flex-wrap items-center gap-2.5">
-              <span className="bg-[#EAE3D5] px-3 py-1 font-mono text-xs font-extrabold uppercase tracking-wider text-[#050505]">
-                {venueName}
-              </span>
-              {event.genre.length > 0 && (
-                <span className="border border-[#F6F1E7]/25 bg-[#141311] px-3 py-1 text-xs font-semibold text-[#EAE3D5]">
-                  {event.genre.map(g => formatEventGenre(locale, g)).join(' · ')}
+            <div className={isHeroPortrait4x5 ? 'min-w-0 lg:col-span-7' : 'min-w-0 lg:col-span-6'}>
+              <div className="mb-3 flex flex-wrap items-center gap-2.5">
+                <span className="bg-[#EAE3D5] px-3 py-1 font-mono text-xs font-extrabold uppercase tracking-wider text-[#050505]">
+                  {venueName}
                 </span>
-              )}
+                {event.genre.length > 0 && (
+                  <span className="border border-[#F6F1E7]/25 bg-[#141311] px-3 py-1 text-xs font-semibold text-[#EAE3D5]">
+                    {event.genre.map(g => formatEventGenre(locale, g)).join(' · ')}
+                  </span>
+                )}
+              </div>
+              <h1 className="font-display text-3xl font-bold uppercase tracking-tight text-[#F6F1E7] sm:text-4xl md:text-5xl">
+                {title}
+              </h1>
+              <time dateTime={event.dateISO} className="mt-3 flex items-center gap-2 font-mono text-sm text-[#EAE3D5] sm:text-base">
+                <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                {formattedDate}
+              </time>
             </div>
-            <h1 className="font-display text-3xl font-bold uppercase tracking-tight text-[#F6F1E7] sm:text-4xl md:text-6xl">
-              {title}
-            </h1>
-            <time dateTime={event.dateISO} className="mt-3 flex items-center gap-2 font-mono text-sm text-[#EAE3D5] sm:text-base">
-              <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-              {formattedDate}
-            </time>
           </div>
         </section>
 
         {/* CAPITOLO 02 — CARTA CALDA #F6F1E7: Prezzi Chiari, Informazioni Rapide & Prenotazione Immediata */}
         <section className="w-full border-b border-[#050505] bg-[#F6F1E7] py-10 text-[#050505]">
-          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 sm:px-6 md:px-12 lg:grid-cols-12 lg:items-start">
-            <div className="space-y-5 lg:col-span-7">
+          <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 px-4 sm:px-6 lg:grid-cols-12 lg:items-start lg:px-8">
+            <div className="space-y-6 lg:col-span-7">
               {Date.parse(event.endDateISO || event.dateISO) < Date.now() && (
                 <div
                   data-past-event-conversion-banner
-                  className="not-prose border border-[#050505] bg-[#050505] p-5 text-[#F6F1E7]"
+                  className="not-prose bg-[#050505] p-5 text-[#F6F1E7]"
                 >
                   <p className="text-sm font-semibold text-[#F6F1E7]">
                     {getEventTemporalCopy(locale as LocaleCode, event.dateISO.slice(0, 10)).endedNotice}
@@ -1204,8 +1201,8 @@ export default async function EventPage({ params }: Props) {
                 </div>
               )}
 
-              {/* Sintesi Rapida su Carta Bianca */}
-              <div className="not-prose border border-[#050505] bg-[#FFFFFF] p-5 text-left text-[#050505]">
+              {/* Sintesi Rapida aperta senza cassettone */}
+              <div className="not-prose border-b border-[#050505]/20 pb-5 text-left text-[#050505]">
                 <p className="font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-[#4A453E]">
                   {eventText(locale, 'Quick Answer', 'Sintesi serata & prezzi', 'Resposta rapida')}
                 </p>
@@ -1214,29 +1211,29 @@ export default async function EventPage({ params }: Props) {
                 </p>
               </div>
 
-              {/* Scheda Pratica 3 Box su Champagne #EAE3D5 */}
-              <div className="not-prose grid grid-cols-1 gap-3 sm:grid-cols-3">
-                <div className="border border-[#050505]/20 bg-[#EAE3D5] p-4 text-[#050505]">
+              {/* Scheda Pratica — 1 Colonna Mobile con Filetti Sottili */}
+              <div className="not-prose grid grid-cols-1 divide-y divide-[#050505]/16 md:grid-cols-3 md:gap-6 md:divide-y-0">
+                <div className="py-3 text-[#050505]">
                   <h2 className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#4A453E]">
                     {eventText(locale, 'Dress Code', 'Dress Code', 'Código de vestimenta')}
                   </h2>
-                  <p className="mt-1.5 font-sans text-xs font-semibold text-[#050505] sm:text-sm">
+                  <p className="mt-1 font-sans text-sm font-semibold text-[#050505]">
                     {eventBatchValues?.dressCode || eventText(locale, 'Smart elegant. No sneakers or shorts.', 'Smart elegant. Niente sneakers o shorts.', 'Elegante e sofisticado. Sem tênis ou bermudas.')}
                   </p>
                 </div>
-                <div className="border border-[#050505]/20 bg-[#EAE3D5] p-4 text-[#050505]">
+                <div className="py-3 text-[#050505]">
                   <h2 className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#4A453E]">
                     {eventText(locale, 'Minimum Age', 'Età Minima', 'Idade mínima')}
                   </h2>
-                  <p className="mt-1.5 font-sans text-xs font-semibold text-[#050505] sm:text-sm">
+                  <p className="mt-1 font-sans text-sm font-semibold text-[#050505]">
                     {eventBatchProfile?.minAge ?? 18}+ {eventText(locale, '(ID required)', '(documento richiesto)', '(documento obrigatório)')}
                   </p>
                 </div>
-                <div className="border border-[#050505]/20 bg-[#EAE3D5] p-4 text-[#050505]">
+                <div className="py-3 text-[#050505]">
                   <h2 className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#4A453E]">
                     {eventText(locale, 'Location', 'Indirizzo', 'Localização')}
                   </h2>
-                  <p className="mt-1.5 font-sans text-xs font-semibold text-[#050505] sm:text-sm">
+                  <p className="mt-1 font-sans text-sm font-semibold text-[#050505]">
                     {String(eventBatchValues?.address || `${venue.address.streetAddress}, ${eventText(locale, 'Milan', 'Milano', 'Milão')}`)}
                   </p>
                 </div>
@@ -1361,9 +1358,9 @@ export default async function EventPage({ params }: Props) {
               return (
                 <section className="mt-8" data-event-section="lead-poster">
                   <h2 className="mb-4 font-display text-2xl font-bold text-[#EAE3D5]">{leadPoster.title}</h2>
-                  <figure className="not-prose">
+                  <figure className="not-prose md:max-w-[520px]">
                     <div
-                      className={`relative w-full overflow-hidden border border-[#F6F1E7]/16 bg-[#141311] ${leadPoster.aspect === 'five-four' ? 'aspect-[5/4]' : isLeadPortrait ? 'mx-auto aspect-[4/5] max-w-[540px]' : ''}`}
+                      className={`relative w-full overflow-hidden border border-[#F6F1E7]/16 bg-[#050505] ${leadPoster.aspect === 'five-four' ? 'aspect-[5/4]' : isLeadPortrait ? 'aspect-[4/5]' : ''}`}
                       style={leadPoster.aspect === 'five-four' || isLeadPortrait ? undefined : { aspectRatio: `${leadDims.width} / ${leadDims.height}` }}
                     >
                       <Image
@@ -1373,7 +1370,7 @@ export default async function EventPage({ params }: Props) {
                         fill
                         quality={95}
                         sizes="(max-width: 1080px) 100vw, 1080px"
-                        className="object-contain"
+                        className="object-cover"
                       />
                     </div>
                     {leadPoster.description ? <figcaption className="mt-3 text-sm leading-relaxed text-[#C2B9AA]">{leadPoster.description}</figcaption> : null}
@@ -1403,10 +1400,10 @@ export default async function EventPage({ params }: Props) {
                 <p className="leading-relaxed text-[#DED8CC]">
                   {localizedEventContent?.venueDescription || buildVenueDescription(locale, venueName, venue.address.streetAddress)}
                 </p>
-                <div className="not-prose mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3 sm:grid sm:grid-cols-3 sm:overflow-visible sm:pb-0">
+                <div className="not-prose mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
                   {buildVenueGalleryImages(venue, title, locale).map((img, i) => (
-                    <div key={i} className="relative aspect-[4/5] w-[72vw] max-w-[280px] shrink-0 snap-start overflow-hidden border border-[#F6F1E7]/16 bg-[#141311] sm:w-auto sm:max-w-none">
-                      <Image src={img.src} alt={img.alt} title={img.alt} fill quality={92} className="object-cover" sizes="(max-width: 768px) 75vw, 33vw" />
+                    <div key={i} className="relative aspect-[4/5] w-full overflow-hidden border border-[#F6F1E7]/16 bg-[#050505]">
+                      <Image src={img.src} alt={img.alt} title={img.alt} fill quality={92} className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
                     </div>
                   ))}
                 </div>
