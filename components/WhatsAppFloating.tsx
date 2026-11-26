@@ -262,6 +262,7 @@ export default function WhatsAppFloating({ locale = 'en' }: { locale?: string })
 
   return (
     <div
+      data-floating-whatsapp-chat="true"
       data-wa-floating-root="true"
       data-no-lightbox="true"
       className="fixed bottom-4 end-4 z-40 flex flex-col items-end gap-2.5"
