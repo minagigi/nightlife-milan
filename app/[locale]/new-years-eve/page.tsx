@@ -1211,13 +1211,18 @@ export default async function NewYearsEvePage({
             {paymentTerms.methodsBadge}
           </span>
 
-          <ol className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+          <ol className="list-none pl-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
             {paymentTerms.steps.map((step, index) => (
               <li
                 key={index}
-                className="rounded-2xl border border-white/10 bg-black/55 p-4 text-xs sm:text-sm text-white/85 leading-relaxed"
+                className="flex items-start gap-3 rounded-2xl border border-white/10 bg-black/55 p-4 text-xs sm:text-sm text-white/85 leading-relaxed"
               >
-                {step}
+                <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center bg-[#EAE3D5] font-mono text-xs font-bold tabular-nums text-[#050505]">
+                  {index + 1}
+                </span>
+                <span className="min-w-0 flex-1">
+                  {step.replace(/^\s*(?:\(\d+\)|[\d\u0660-\u0669\u06F0-\u06F9]+[.):、-])\s*/u, '')}
+                </span>
               </li>
             ))}
           </ol>

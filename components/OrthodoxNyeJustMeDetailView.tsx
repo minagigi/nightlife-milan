@@ -641,13 +641,15 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
 
           <p className="text-sm text-[#C2B9AA]">{paymentTerms.subtitle}</p>
 
-          <ol className="grid grid-cols-1 divide-y divide-[#F6F1E7]/12 border-y border-[#F6F1E7]/12 md:grid-cols-2 md:gap-x-8 md:divide-y-0 lg:grid-cols-3">
+          <ol className="list-none pl-0 grid grid-cols-1 divide-y divide-[#F6F1E7]/12 border-y border-[#F6F1E7]/12 md:grid-cols-2 md:gap-x-8 md:divide-y-0 lg:grid-cols-3">
             {paymentTerms.steps.map((step, index) => (
-              <li key={step} className="py-4 text-sm text-[#EAE3D5] md:border-b md:border-[#F6F1E7]/12">
-                <span className="mb-1 block font-mono text-xs font-bold uppercase tracking-wider text-[#C9A84C]">
-                  {index + 1}.
+              <li key={step} className="flex items-start gap-3 py-4 text-sm text-[#EAE3D5] md:border-b md:border-[#F6F1E7]/12">
+                <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center bg-[#C9A84C] font-mono text-xs font-bold tabular-nums text-[#050505]">
+                  {index + 1}
                 </span>
-                {step}
+                <span className="min-w-0 flex-1 leading-relaxed">
+                  {step.replace(/^\s*(?:\(\d+\)|[\d\u0660-\u0669\u06F0-\u06F9]+[.):、-])\s*/u, '')}
+                </span>
               </li>
             ))}
           </ol>

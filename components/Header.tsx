@@ -171,7 +171,9 @@ export default function Header({
     window.dispatchEvent(new CustomEvent('nlm:mobile-menu', { detail: { open: true } }));
     const background = Array.from(document.body.children).filter(
       (node): node is HTMLElement =>
-        node instanceof HTMLElement && !node.contains(mobileMenuRef.current),
+        node instanceof HTMLElement &&
+        !node.contains(mobileMenuRef.current) &&
+        !node.hasAttribute('data-nlm-lang-portal'),
     );
     const previouslyInert = background.map((node) => node.hasAttribute('inert'));
     background.forEach((node) => node.setAttribute('inert', ''));
@@ -179,6 +181,7 @@ export default function Header({
       mobileMenuRef.current?.querySelector<HTMLElement>(menuFocusableSelector)?.focus();
     }, 0);
     const onKeyDown = (event: KeyboardEvent) => {
+      if (document.querySelector('[data-nlm-lang-portal]')) return;
       if (event.key === 'Escape') {
         event.preventDefault();
         setIsMobileMenuOpen(false);
@@ -203,6 +206,7 @@ export default function Header({
     };
     const onFocusIn = (event: FocusEvent) => {
       if (mobileMenuRef.current?.contains(event.target as Node)) return;
+      if (event.target instanceof Element && event.target.closest('[data-nlm-lang-portal]')) return;
       mobileMenuRef.current?.querySelector<HTMLElement>(menuFocusableSelector)?.focus();
     };
     const onResize = () => {
@@ -426,7 +430,7 @@ export default function Header({
                 className="relative z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366]"
                 aria-label="Nightlife Milan"
               >
-                <Logo className="h-6 w-auto max-w-[116px] sm:h-8 sm:max-w-none" />
+                <Logo className="h-5 w-auto max-w-[90px] min-[380px]:h-6 min-[380px]:max-w-[116px] sm:h-8 sm:max-w-none" />
               </Link>
             </div>
 
@@ -499,7 +503,7 @@ export default function Header({
             </nav>
 
             {/* Right Actions */}
-            <div className="nlm-header-actions flex shrink-0 items-center justify-end gap-1.5 sm:gap-2">
+            <div className="nlm-header-actions flex shrink-0 items-center justify-end gap-1 sm:gap-2">
               <GlobalSearch currentLocale={currentLocale} />
 
               <Link
@@ -518,7 +522,7 @@ export default function Header({
                 onClick={() => setCartOpen(true)}
                 aria-label={spCopy.navCartLabel}
                 title={spCopy.navCartLabel}
-                className="relative flex h-11 w-11 items-center justify-center border border-[#F6F1E7]/20 bg-[#0B0A09] text-[#F6F1E7] transition-colors hover:border-[#EAE3D5]"
+                className="relative flex h-10 w-10 items-center justify-center border border-[#F6F1E7]/20 bg-[#0B0A09] text-[#F6F1E7] transition-colors hover:border-[#EAE3D5] sm:h-11 sm:w-11"
               >
                 <ShoppingBag className="h-4 w-4" aria-hidden="true" />
                 {mounted && itemCount > 0 && (
@@ -528,9 +532,7 @@ export default function Header({
                 )}
               </button>
 
-              <div className="hidden sm:block">
-                <LanguageSwitcher currentLocale={currentLocale} />
-              </div>
+              <LanguageSwitcher currentLocale={currentLocale} />
 
               <a
                 href={waMenuLink}

@@ -49,11 +49,24 @@ const GROUP_PRESETS = [
   { label: '15+', value: 15 },
 ] as const;
 
+function normalizeCompareToken(s: string): string {
+  return s.toLowerCase().replace(/[^a-z0-9\u00c0-\u024f\u0400-\u04ff\u0600-\u06ff\u4e00-\u9fff]+/giu, '');
+}
+
 function eventSelectLabel(event: TableConciergeEvent, locale: string): string {
   const localizedTitle = locale === 'ar'
     ? /^(.*)\s+في\s+[^—–]+\s+[—–]\s+[^—–]+$/u.exec(event.title)?.[1]
     : undefined;
-  const title = localizedTitle || event.title;
+  const title = (localizedTitle || event.title).trim();
+  const normTitle = normalizeCompareToken(title);
+  const normVenue = normalizeCompareToken(event.venueName);
+  const normVenueCore = normalizeCompareToken(event.venueName.replace(/\b(?:milano|milan|mailand|milao|milaan)\b/gi, ''));
+  if (
+    (normVenue && normTitle.includes(normVenue)) ||
+    (normVenueCore.length >= 4 && normTitle.includes(normVenueCore))
+  ) {
+    return title;
+  }
   return `${title} · ${event.venueName}`;
 }
 
@@ -222,10 +235,10 @@ export default function TableConcierge({ locale, events, initialNow, copy, surfa
               <label className={styles.fieldLabel} htmlFor={`tc-event-${surface}`}>{copy.eventLabel}</label>
               <select ref={selectRef} id={`tc-event-${surface}`} className={styles.select} dir="auto" value={selected?.id || ''}
                 onChange={(event) => setRequestedEvent(event.currentTarget.value)}>
-                {dayEvents.map((event) => <option key={event.id} value={event.id} dir="auto" title={`${event.title} · ${event.venueName}`}>{eventSelectLabel(event, locale)}</option>)}
+                {dayEvents.map((event) => <option key={event.id} value={event.id} dir="auto" title={eventSelectLabel(event, locale)}>{eventSelectLabel(event, locale)}</option>)}
               </select>
-              <label className={styles.fieldLabel} htmlFor={`tc-group-${surface}`}>{controlCopy.group}</label>
-              <div className={styles.groupRow}>
+              <fieldset className={styles.fieldset}>
+                <legend>{controlCopy.group}</legend>
                 <div className={styles.groupChips} role="group" aria-label={controlCopy.group}>
                   {GROUP_PRESETS.map((preset) => {
                     const active = (preset.value === 4 && groupSize >= 2 && groupSize <= 4)
@@ -245,18 +258,7 @@ export default function TableConcierge({ locale, events, initialNow, copy, surfa
                     );
                   })}
                 </div>
-                <input id={`tc-group-${surface}`} className={styles.groupNumber} type="number" inputMode="numeric" min={1} max={99}
-                  value={groupSize} onChange={(event) => setGroupSize(Math.max(1, Math.min(99, Number(event.currentTarget.value) || 1)))} />
-              </div>
-              <label className={styles.fieldLabel} htmlFor={`tc-preference-${surface}`}>{controlCopy.preference}</label>
-              <input id={`tc-preference-${surface}`} className={styles.input} type="text" maxLength={120} autoComplete="off"
-                value={preference} onChange={(event) => setPreference(event.currentTarget.value)} />
-              <div className={styles.previewBox} aria-live="polite">
-                <p className={styles.previewLabel}>{v01.previewPrefix}</p>
-                <p className={styles.previewText}>
-                  {selectedFormulaLabel} · {selected ? `${selected.venueName} (${selected.labels.longDate})` : copy.eventLabel} · {groupSize}
-                </p>
-              </div>
+              </fieldset>
               <div className={styles.requestCtaDock}>
                 <a className={styles.requestLink} href={waUrl} target="_blank" rel="noopener noreferrer">
                   {copy.requestAction}<span aria-hidden="true">↗</span>
@@ -287,11 +289,6 @@ export default function TableConcierge({ locale, events, initialNow, copy, surfa
         </div>
       </div>
       {!compact && <>
-      <div className={styles.steps} aria-label={copy.eventsLead}>
-        {[controlCopy.date, copy.eventLabel, controlCopy.group].map((label, index) => (
-          <div key={label}><strong>{String(index + 1).padStart(2, '0')}</strong><span>{label}</span></div>
-        ))}
-      </div>
       {showEventList && <div className={styles.events} id={`tc-events-${surface}`}>
         <div className={styles.eventsHead}>
           <div><h2>{copy.eventsTitle}</h2><p className={styles.subNote}>{copy.eyebrow}</p></div>

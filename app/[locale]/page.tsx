@@ -510,49 +510,23 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           }}
         />
 
-        {/* ── 2. Fascia Garanzie Cialdini a 4 Colonne (Alternativa 02 · Capitolo Champagne #EAE3D5) ── */}
-        <section
-          className="w-full border-y border-[#050505] bg-[#EAE3D5] text-[#050505]"
-          aria-label={v01.statusLive}
-        >
-          <div className="mx-auto grid max-w-[1440px] grid-cols-2 divide-x divide-y divide-[#050505]/16 border-x border-[#050505]/18 lg:grid-cols-4 lg:divide-y-0">
-            {v01.cialdiniCells.map((cell) => (
-              <div
-                key={cell.principle}
-                data-cialdini={cell.principle}
-                className="flex flex-col justify-between gap-1.5 p-4 sm:p-7"
-              >
-                <p className="font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-[#4A453E] sm:text-[11px]">
-                  {cell.kicker}
-                </p>
-                <p className="font-serif text-xl font-bold text-[#050505] sm:text-2xl">
-                  {cell.value}
-                </p>
-                <p className="font-sans text-xs leading-relaxed text-[#24201B] sm:text-[13px]">
-                  {cell.body}
-                </p>
-              </div>
-            ))}
-          </div>
-        </section>
+        {/* ── 2. Quattro Caroselli Orizzontali Separati (#capodanno · #stasera · #settimana · #locali-partner) ── */}
+        <div data-cialdini="authority social-proof scarcity unity">
+          <V01HomeCarousels
+            locale={locale}
+            localePrefix={lp}
+            initialNow={initialNow.toISOString()}
+            capodannoEvents={capodannoSlides}
+            dateSensitiveEvents={dateSensitiveEvents}
+            partnerClubs={partnerClubs}
+            capodannoHubHref={capodannoPath(locale)}
+            tonightHref={`${lp}/events/tonight`}
+            weekHref={`${lp}/events/this-week`}
+            clubsHref={`${lp}/clubs`}
+          />
+        </div>
 
-        {/* ── 3. Quattro Caroselli Orizzontali Separati (#capodanno 19 · #stasera · #settimana · #locali-partner 18) ── */}
-        <V01HomeCarousels
-          locale={locale}
-          localePrefix={lp}
-          initialNow={initialNow.toISOString()}
-          capodannoEvents={capodannoSlides}
-          dateSensitiveEvents={dateSensitiveEvents}
-          partnerClubs={partnerClubs}
-          capodannoHubHref={capodannoPath(locale)}
-          tonightHref={`${lp}/events/tonight`}
-          weekHref={`${lp}/events/this-week`}
-          clubsHref={`${lp}/clubs`}
-        />
-
-        <OctoberEntry locale={locale} />
-
-        {/* ── 4. San Siro Banner (Alternativa 02 · Capitolo Carta Calda #F6F1E7 + Plinto #050505) ─── */}
+        {/* ── 3. San Siro Banner (Alternativa 02 · Capitolo Carta Calda #F6F1E7 + Plinto #050505) ─── */}
         <section className="w-full border-y border-[#050505] bg-[#F6F1E7] text-[#050505]">
           <div className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-6 border-x border-[#050505]/18 px-5 py-10 md:flex-row md:items-center sm:px-14 sm:py-12">
             <div>
@@ -578,139 +552,23 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           </div>
         </section>
 
-        {/* ── 5. I Tre Atti della Notte Milanese (Alternativa 02 · Champagne #EAE3D5 + Notte #050505) ── */}
-        <section
-          data-cialdini="liking"
-          className="w-full border-b border-[#F6F1E7]/14 bg-[#050505]"
-        >
-          <div className="mx-auto grid max-w-[1440px] grid-cols-1 border-x border-[#F6F1E7]/14 lg:grid-cols-12">
-            {/* Colonna Sinistra (5/12): Champagne #EAE3D5 */}
-            <div className="flex flex-col justify-between border-b border-[#050505] bg-[#EAE3D5] px-6 py-10 text-[#050505] sm:p-14 lg:col-span-5 lg:border-b-0 lg:border-r">
-              <div>
-                <p className="mb-2 font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-[#4A453E]">
-                  {homeCopy.nightLabel}
-                </p>
-                <h2 className="mb-6 font-serif text-3xl font-bold italic leading-[1.04] text-[#050505] sm:mb-8 sm:text-4xl">
-                  {homeCopy.nightTitle}
-                </h2>
-                <div className="divide-y divide-[#050505]/16 border-y border-[#050505]/16">
-                  {homeCopy.nightSteps.map((step: { label: string; title: string; body: string }, i: number) => (
-                    <div key={i} className="flex items-start justify-between gap-5 py-5">
-                      <div>
-                        <p className="mb-1 font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-[#4A453E]">
-                          {step.label}
-                        </p>
-                        <h3 className="mb-1.5 font-serif text-2xl font-bold leading-tight text-[#050505] sm:text-3xl">
-                          {step.title}
-                        </h3>
-                        <p className="max-w-[52ch] font-sans text-sm leading-relaxed text-[#24201B]">
-                          {step.body}
-                        </p>
-                      </div>
-                      <span className="shrink-0 font-serif text-4xl font-bold italic text-[#050505]">
-                        {i === 0 ? 'I' : i === 1 ? 'II' : 'III'}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="mt-7 bg-[#050505] p-2">
-                <a
-                  href={waLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex min-h-[48px] w-full items-center justify-between bg-[#25D366] px-6 py-3.5 text-[13px] font-extrabold uppercase tracking-[0.04em] text-[#050505] transition-colors hover:bg-[#2EE472]"
-                >
-                  <span>{homeCopy.requestAction}</span>
-                  <span aria-hidden="true">↗</span>
-                </a>
-              </div>
-            </div>
-
-            {/* Colonna Destra (7/12): Trittico Fotografico Editoriale 4:5 (Swipe Mobile / 3-Col Desktop) */}
-            <div data-lightbox-group="home-editorial-triptych" className="flex flex-col justify-between bg-[#141311] p-6 sm:p-14 lg:col-span-7">
-              <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 sm:grid sm:grid-cols-3 sm:gap-5 sm:overflow-visible sm:pb-0">
-                <div className="w-[74vw] max-w-[280px] shrink-0 snap-start sm:w-auto sm:max-w-none">
-                  <div className="relative aspect-[4/5] w-full overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]">
-                    <Image
-                      src="/images/vip-table-milan-nightclub-just-me.webp"
-                      alt={homeGridAlts[0]}
-                      fill
-                      quality={92}
-                      className="object-cover"
-                      sizes="(max-width: 640px) 75vw, 25vw"
-                    />
-                  </div>
-                  <div className="mt-2 font-mono text-[12px] text-[#DED8CC]">
-                    <div>{uiLabels.act1}</div>
-                    <div className="text-[#C2B9AA]">Parco Sempione &amp; Porta Nuova</div>
-                  </div>
-                </div>
-
-                <div className="w-[74vw] max-w-[280px] shrink-0 snap-start sm:w-auto sm:max-w-none">
-                  <div className="relative aspect-[4/5] w-full overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]">
-                    <Image
-                      src="/images/milan-club-crowd-dancefloor-night.webp"
-                      alt={homeGridAlts[3]}
-                      fill
-                      quality={92}
-                      className="object-cover"
-                      sizes="(max-width: 640px) 75vw, 25vw"
-                    />
-                  </div>
-                  <div className="mt-2 font-mono text-[12px] text-[#DED8CC]">
-                    {uiLabels.act2}
-                  </div>
-                </div>
-
-                <div className="w-[74vw] max-w-[280px] shrink-0 snap-start sm:w-auto sm:max-w-none">
-                  <div className="relative aspect-[4/5] w-full overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]">
-                    <Image
-                      src="/images/bottle-service-milan-vip-nightclub.webp"
-                      alt={homeGridAlts[4]}
-                      fill
-                      quality={92}
-                      className="object-cover"
-                      sizes="(max-width: 640px) 75vw, 25vw"
-                    />
-                  </div>
-                  <div className="mt-2 font-mono text-[12px] text-[#DED8CC]">
-                    {uiLabels.act3}
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-8 flex flex-col justify-between gap-4 border-t border-[#F6F1E7]/14 pt-6 sm:flex-row sm:items-center">
-                <p className="max-w-[58ch] font-sans text-sm italic leading-relaxed text-[#DED8CC]">
-                  {homeCopy.description} · {SITE_CONTACT.whatsapp.number}
-                </p>
-                <span className="shrink-0 font-mono text-[12px] font-bold uppercase tracking-[0.08em] text-[#25D366]">
-                  {homeCopy.quickLabel}
-                </span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── 6. Le Tre Formule d'Accesso (Intent Cards) ───────────────────────── */}
-        <div className="w-full border-b border-[#F6F1E7]/14 bg-[#050505]">
+        {/* ── 4. Formule d'Accesso Rapido (Intent Cards · 1 colonna mobile) ───────────────────────── */}
+        <div data-cialdini="liking reciprocity" className="w-full border-b border-[#F6F1E7]/14 bg-[#050505]">
           <div className="mx-auto max-w-[1440px] border-x border-[#F6F1E7]/14">
             <IntentCards locale={locale} />
           </div>
         </div>
 
-        <MfwEntry locale={locale} />
-
-        {/* ── 7. Esplora per Categoria e Quartiere (Alternativa 02 · Capitolo Carta Calda #F6F1E7) ── */}
+        {/* ── 5. Esplora per Categoria e Quartiere (Alternativa 02 · Capitolo Carta Calda #F6F1E7 · 1 colonna mobile) ── */}
         <section className="w-full border-y border-[#050505] bg-[#F6F1E7] text-[#050505]">
-          <div className="mx-auto max-w-[1440px] border-x border-[#050505]/18 px-5 py-14 sm:px-14 sm:py-20">
+          <div className="mx-auto max-w-[1440px] border-x border-[#050505]/18 px-5 py-12 sm:px-14 sm:py-16">
             <p className="mb-2 font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-[#4A453E]">
               {homeCopy.discoverLabel}
             </p>
-            <h2 className="mb-8 font-serif text-3xl font-bold text-[#050505] sm:mb-10 sm:text-5xl">
+            <h2 className="mb-6 font-serif text-3xl font-bold text-[#050505] sm:mb-8 sm:text-5xl">
               {homeCopy.categoriesTitle}
             </h2>
-            <div className="grid grid-cols-2 border-l border-t border-[#050505]/20 bg-[#FFFFFF] sm:grid-cols-4">
+            <div className="grid grid-cols-1 border-l border-t border-[#050505]/20 bg-[#FFFFFF] md:grid-cols-2 lg:grid-cols-4">
               {[
                 { label: homeCopy.categoryLabels[0], href: `${lp}/genres/techno` },
                 { label: homeCopy.categoryLabels[1], href: `${lp}/vip-tables` },
@@ -725,14 +583,17 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                   key={tag.label}
                   href={tag.href}
                   prefetch={false}
-                  className="flex min-h-[100px] flex-col justify-between border-b border-r border-[#050505]/20 p-5 text-[#050505] transition-colors hover:bg-[#EAE3D5] sm:p-6"
+                  className="flex min-h-[64px] items-center justify-between border-b border-r border-[#050505]/20 px-5 py-4 text-[#050505] transition-colors hover:bg-[#EAE3D5] md:min-h-[96px] md:flex-col md:items-start md:p-6"
                 >
-                  <span className="font-serif text-2xl font-bold italic tabular-nums text-[#4A453E] sm:text-3xl">
-                    {String(idx + 1).padStart(2, '0')}
-                  </span>
-                  <span className="mt-3 text-xs font-extrabold text-[#050505] sm:text-sm">
-                    {tag.label} ↗
-                  </span>
+                  <div className="flex items-center gap-3.5 md:flex-col md:items-start md:gap-2">
+                    <span className="font-serif text-xl font-bold italic tabular-nums text-[#4A453E] sm:text-2xl">
+                      {String(idx + 1).padStart(2, '0')}
+                    </span>
+                    <span className="text-sm font-extrabold text-[#050505]">
+                      {tag.label}
+                    </span>
+                  </div>
+                  <span aria-hidden="true" className="font-mono text-sm font-bold text-[#050505]">↗</span>
                 </Link>
               ))}
             </div>

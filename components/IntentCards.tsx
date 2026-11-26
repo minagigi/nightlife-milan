@@ -29,8 +29,8 @@ export default function IntentCards({ locale }: { locale: string }) {
   ];
 
   return (
-    <section className="w-full bg-[#050505] text-[#F6F1E7] border-b border-[#F6F1E7]/14" data-cialdini="reciprocity">
-      <div className="mx-auto max-w-[1440px] border-x border-[#F6F1E7]/14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[#F6F1E7]/14">
+    <section className="w-full bg-[#050505] text-[#F6F1E7] border-b border-[#F6F1E7]/14" data-cialdini="reciprocity liking">
+      <div className="mx-auto max-w-[1440px] border-x border-[#F6F1E7]/14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-[#F6F1E7]/14">
         {cards.map((card, i) => {
           const inner = (
             <div

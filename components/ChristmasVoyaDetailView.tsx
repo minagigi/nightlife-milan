@@ -553,13 +553,15 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
               <p className="mt-2 text-sm leading-relaxed text-[#3D3830]">
                 {paymentTerms.subtitle}
               </p>
-              <ol className="mt-5 grid grid-cols-1 divide-y divide-[#050505]/15 border-y border-[#050505]/15 md:grid-cols-2 md:gap-x-8 lg:grid-cols-3">
+              <ol className="mt-5 list-none pl-0 grid grid-cols-1 divide-y divide-[#050505]/15 border-y border-[#050505]/15 md:grid-cols-2 md:gap-x-8 md:divide-y-0 lg:grid-cols-3">
                 {paymentTerms.steps.map((step, idx) => (
-                  <li key={step} className="py-4 text-[#050505]">
-                    <span className="inline-flex h-6 w-6 items-center justify-center bg-[#050505] font-mono text-xs font-bold text-[#F6F1E7]">
+                  <li key={step} className="flex items-start gap-3 py-4 text-[#050505] md:border-b md:border-[#050505]/15">
+                    <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center bg-[#050505] font-mono text-xs font-bold tabular-nums text-[#F6F1E7]">
                       {idx + 1}
                     </span>
-                    <p className="mt-2 text-xs leading-relaxed text-[#050505] sm:text-sm">{step}</p>
+                    <span className="min-w-0 flex-1 text-xs leading-relaxed text-[#050505] sm:text-sm">
+                      {step.replace(/^\s*(?:\(\d+\)|[\d\u0660-\u0669\u06F0-\u06F9]+[.):、-])\s*/u, '')}
+                    </span>
                   </li>
                 ))}
               </ol>

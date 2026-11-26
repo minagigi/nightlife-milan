@@ -765,13 +765,18 @@ export default function PartenopeaJustMeDetailView({
               {terms.methodsBadge}
             </p>
           </div>
-          <ol className="grid grid-cols-1 gap-3 md:grid-cols-2">
-            {terms.steps.map((step) => (
+          <ol className="list-none pl-0 grid grid-cols-1 gap-3 md:grid-cols-2">
+            {terms.steps.map((step, idx) => (
               <li
                 key={step}
-                className="rounded-lg border border-white/10 bg-black/40 p-4 font-sans text-sm text-[#F6F1E7]/90"
+                className="flex items-start gap-3 rounded-lg border border-white/10 bg-black/40 p-4 font-sans text-sm text-[#F6F1E7]/90"
               >
-                {step}
+                <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center bg-[#EAE3D5] font-mono text-xs font-bold tabular-nums text-[#050505]">
+                  {idx + 1}
+                </span>
+                <span className="min-w-0 flex-1 leading-relaxed">
+                  {step.replace(/^\s*(?:\(\d+\)|[\d\u0660-\u0669\u06F0-\u06F9]+[.):、-])\s*/u, '')}
+                </span>
               </li>
             ))}
           </ol>
