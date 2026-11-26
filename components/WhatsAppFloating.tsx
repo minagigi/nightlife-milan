@@ -70,10 +70,16 @@ function clampContextSubject(raw: string): string {
     .replace(/\s+/g, ' ')
     .replace(/\s*[|·—–-]\s*Nightlife Milan.*$/i, '')
     .trim();
-  if (cleaned.length <= 58) return cleaned;
-  const sliced = cleaned.slice(0, 56);
+  const colonIdx = cleaned.search(/\s*:\s+/);
+  const concise =
+    colonIdx >= 22 && cleaned.length > 56 ? cleaned.slice(0, colonIdx).trim() : cleaned;
+  if (concise.length <= 58) return concise;
+  const sliced = concise.slice(0, 56);
   const lastSpace = sliced.lastIndexOf(' ');
-  return `${(lastSpace > 28 ? sliced.slice(0, lastSpace) : sliced).trim()}…`;
+  const base = (lastSpace > 28 ? sliced.slice(0, lastSpace) : sliced)
+    .replace(/[:;,.·—–-]+\s*$/u, '')
+    .trim();
+  return `${base}…`;
 }
 
 function detectPageContext(pathname: string, locale: string): { kind: WhatsAppPageKind; subject: string } {

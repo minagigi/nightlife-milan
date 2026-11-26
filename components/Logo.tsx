@@ -1,6 +1,8 @@
 export default function Logo({ className }: { className?: string }) {
   return (
     <svg
+      direction="ltr"
+      style={{ direction: 'ltr' }}
       viewBox="0 0 150 40"
       className={className}
       fill="none"

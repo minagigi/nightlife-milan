@@ -152,6 +152,7 @@ export default function LanguageSwitcher({ currentLocale }: { currentLocale: str
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-controls={open ? listboxId : undefined}
+        data-hydrated={mounted ? 'true' : undefined}
         aria-label={`Language: ${current.nativeName}`}
         className="flex h-10 min-w-[44px] items-center justify-center gap-1.5 border border-[#EAE3D5]/32 bg-[#0B0A09] px-2 text-[#F6F1E7] transition-colors hover:border-[#F6F1E7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] sm:h-11 sm:gap-2 sm:px-2.5"
       >
