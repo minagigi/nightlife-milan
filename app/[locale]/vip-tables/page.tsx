@@ -3,7 +3,6 @@ import type { LocaleCode } from '@/lib/i18n/locales';
 import type { Metadata } from 'next';
 import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
-import TableConcierge from '@/components/TableConcierge';
 import {
   ArrowRight,
   CheckCircle2,
@@ -18,8 +17,6 @@ import { notFound } from 'next/navigation';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getHubSeoMeta35 } from '@/lib/i18n/hubSeoMeta35';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
-import { getDateSensitiveCarouselInventory } from '@/lib/dateSensitiveInventory';
-import { selectPriorityVenueEvents } from '@/lib/priorityVenueEvents';
 import { getTableConciergeLead, getTableConciergeSharedCopy } from '@/lib/tableConciergePageCopy';
 import { venuesData } from '@/lib/venuesData';
 import { getLocalizedText } from '@/lib/seo';
@@ -147,7 +144,7 @@ const CORE_COPY: Record<'en' | 'it' | 'es' | 'fr' | 'de' | 'pt', PageCopy> = {
     stepsEyebrow: 'N° 04 · FAST-TRACK PROTOCOL',
     stepsTitle: 'Book Your VIP Table in 3 Steps',
     steps: [
-      { title: 'Select club, date & group size', description: 'Use the instant configurator above or message +39 351 912 7047 with male/female count and preferred zone.' },
+      { title: 'Select club, date & group size', description: 'Choose your club from the table above or message +39 351 912 7047 with your date, male/female count, and preferred zone.' },
       { title: 'Receive floor map & bottle list', description: 'Within 10 minutes we send live table availability, exact minimum spend for that night, and the official bottle menu.' },
       { title: 'Walk straight to the VIP Host desk', description: 'Arrive with smart dress code, give your reservation name at the VIP door, and pay directly at the club.' },
     ],
@@ -196,7 +193,7 @@ const CORE_COPY: Record<'en' | 'it' | 'es' | 'fr' | 'de' | 'pt', PageCopy> = {
     stepsEyebrow: 'N° 04 · PRENOTAZIONE IN 3 PASSI',
     stepsTitle: 'Come Bloccare il Tuo Tavolo in Meno di 10 Minuti',
     steps: [
-      { title: 'Indica locale, data e gruppo', description: 'Compila il configuratore rapido qui sopra o scrivi al +39 351 912 7047 indicando numero di uomini/donne e zona preferita.' },
+      { title: 'Indica locale, data e gruppo', description: 'Scegli il locale dalla tabella qui sopra o scrivi su WhatsApp al +39 351 912 7047 indicando data, numero di ospiti e zona preferita.' },
       { title: 'Ricevi mappa e listino bottiglie', description: 'Entro 10 minuti ricevi disponibilità reale per la data, minimum spend esatto e carta delle bottiglie del club.' },
       { title: 'Entra dalla corsia VIP Host', description: 'Presentati con dress code curato, comunica il nome del tavolo alla porta VIP e salda direttamente alla cassa del locale.' },
     ],
@@ -245,7 +242,7 @@ const CORE_COPY: Record<'en' | 'it' | 'es' | 'fr' | 'de' | 'pt', PageCopy> = {
     stepsEyebrow: 'N° 04 · RESERVA EN 3 PASOS',
     stepsTitle: 'Reserva tu Mesa VIP en Menos de 10 Minutos',
     steps: [
-      { title: 'Elige club, fecha y grupo', description: 'Usa el configurador superior o escribe al +39 351 912 7047 indicando chicos/chicas y zona preferida.' },
+      { title: 'Elige club, fecha y grupo', description: 'Elige el club en la tabla superior o escribe por WhatsApp al +39 351 912 7047 indicando fecha, chicos/chicas y zona preferida.' },
       { title: 'Recibe mapa y carta de botellas', description: 'En menos de 10 minutos te enviamos disponibilidad real, consumo mínimo exacto y carta oficial.' },
       { title: 'Entra directo por VIP Host', description: 'Acude con dress code elegante, indica el nombre de tu reserva en puerta VIP y abona en el club.' },
     ],
@@ -294,7 +291,7 @@ const CORE_COPY: Record<'en' | 'it' | 'es' | 'fr' | 'de' | 'pt', PageCopy> = {
     stepsEyebrow: 'N° 04 · RÉSERVATION EN 3 ÉTAPES',
     stepsTitle: 'Réservez Votre Table VIP en Moins de 10 Minutes',
     steps: [
-      { title: 'Indiquez club, date et groupe', description: 'Utilisez le configurateur ci-dessus ou écrivez au +39 351 912 7047 avec parité H/F et zone souhaitée.' },
+      { title: 'Indiquez club, date et groupe', description: 'Choisissez votre club dans le tableau ci-dessus ou écrivez sur WhatsApp au +39 351 912 7047 avec la date, la parité H/F et la zone souhaitée.' },
       { title: 'Recevez plan et carte des bouteilles', description: 'Sous 10 minutes nous envoyons disponibilités, minimum spend exact et carte officielle.' },
       { title: 'Accédez par l’accueil VIP Host', description: 'Présentez-vous en tenue soignée, annoncez le nom de réservation et réglez directement sur place.' },
     ],
@@ -343,7 +340,7 @@ const CORE_COPY: Record<'en' | 'it' | 'es' | 'fr' | 'de' | 'pt', PageCopy> = {
     stepsEyebrow: 'N° 04 · IN 3 SCHRITTEN ZUM TISCH',
     stepsTitle: 'VIP-Reservierung in Unter 10 Minuten',
     steps: [
-      { title: 'Club, Datum & Gruppe wählen', description: 'Nutzen Sie den Konfigurator oben oder senden Sie Datum und Personenanzahl an +39 351 912 7047.' },
+      { title: 'Club, Datum & Gruppe wählen', description: 'Wählen Sie Ihren Club in der Tabelle oben aus oder senden Sie Datum und Personenanzahl per WhatsApp an +39 351 912 7047.' },
       { title: 'Tischplan & Flaschenkarte erhalten', description: 'Innerhalb von 10 Minuten senden wir Verfügbarkeit, Mindestverzehr und die aktuelle Flaschenliste.' },
       { title: 'Direkt zum VIP-Host-Empfang', description: 'Mit gepflegtem Dresscode erscheinen, Reservierungsnamen nennen und direkt im Club bezahlen.' },
     ],
@@ -392,7 +389,7 @@ const CORE_COPY: Record<'en' | 'it' | 'es' | 'fr' | 'de' | 'pt', PageCopy> = {
     stepsEyebrow: 'N° 04 · RESERVA EM 3 PASSOS',
     stepsTitle: 'Garanta sua Mesa VIP em Menos de 10 Minutos',
     steps: [
-      { title: 'Informe clube, data e grupo', description: 'Use o configurador acima ou envie mensagem para +39 351 912 7047 com número de homens/mulheres.' },
+      { title: 'Informe clube, data e grupo', description: 'Escolha o clube na tabela acima ou envie mensagem no WhatsApp +39 351 912 7047 informando data, homens/mulheres e setor preferido.' },
       { title: 'Receba mapa e carta de garrafas', description: 'Em até 10 minutos enviamos disponibilidade real, consumação mínima exata e cardápio oficial.' },
       { title: 'Entre direto pelo VIP Host', description: 'Chegue com traje elegante, informe o nome da reserva na porta VIP e pague diretamente no clube.' },
     ],
@@ -520,8 +517,6 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
   const canonicalUrl = canonicalPageUrl(baseUrl, locale, '/vip-tables');
   const whatsappUrl = getConciergeBookingUrl(locale, undefined, canonicalUrl);
   const stepIcons = [Send, ClipboardCheck, CheckCircle2];
-  const initialNow = new Date();
-  const datedEvents = selectPriorityVenueEvents(await getDateSensitiveCarouselInventory(locale), initialNow);
 
   const matrixRows = PRIORITY_VIP_MATRIX.map((row) => {
     const venue = venuesData.find((v) => v.id === row.id);
@@ -594,7 +589,7 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
 
             <div className="flex flex-wrap items-center gap-4">
               <a
-                href="#tc-request-vip"
+                href="#vip-clubs-matrix"
                 className="inline-flex min-h-[48px] items-center justify-center gap-3 bg-[#25D366] px-8 py-4 font-mono text-xs font-bold uppercase tracking-[0.18em] text-[#050505] transition-colors hover:bg-[#20bd5a]"
               >
                 <MessageCircle className="h-4 w-4" aria-hidden="true" />
@@ -673,7 +668,7 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
                   </p>
                 </div>
                 <a
-                  href="#tc-request-vip"
+                  href="#vip-clubs-matrix"
                   className="mt-6 inline-flex min-h-[44px] items-center justify-between bg-[#050505] px-5 py-3 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-[#F6F1E7] hover:bg-[#1C1915] transition-colors"
                 >
                   <span>{copy.cta}</span>
@@ -686,7 +681,7 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
       </section>
 
       {/* ── PRIORITY 6 VIP TABLE MINIMUM SPEND MATRIX (#F6F1E7 Avorio Caldo) ── */}
-      <section className="border-b border-[#050505]/15 bg-[#F6F1E7] text-[#050505] px-5 py-16 sm:px-14">
+      <section id="vip-clubs-matrix" className="scroll-mt-24 border-b border-[#050505]/15 bg-[#F6F1E7] text-[#050505] px-5 py-16 sm:px-14">
         <div className="mx-auto max-w-[1328px]">
           <p className="mb-2 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#3D3830]">
             {copy.matrixEyebrow}
@@ -740,16 +735,7 @@ export default async function VipTablesPage({ params }: { params: Promise<{ loca
         </div>
       </section>
 
-      {/* ── INTERACTIVE VIP CONCIERGE CONFIGURATOR ───────────────────────── */}
-      <TableConcierge
-        locale={locale}
-        events={datedEvents}
-        initialNow={initialNow.toISOString()}
-        surface="vip"
-        copy={{ ...getTableConciergeSharedCopy(locale), title: copy.title, lead: copy.lead }}
-      />
-
-      {/* ── WHAT EVERY VIP TABLE INCLUDES (#F6F1E7 Avorio Caldo) ─────────── */}
+{/* ── WHAT EVERY VIP TABLE INCLUDES (#F6F1E7 Avorio Caldo) ─────────── */}
       <section className="px-5 py-16 sm:px-14 border-b border-[#050505]/15 bg-[#F6F1E7] text-[#050505]">
         <div className="mx-auto max-w-[1328px]">
           <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#3D3830]">

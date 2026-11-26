@@ -480,13 +480,10 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
       <main className="flex-1 flex flex-col w-full bg-[#050505] text-[#F6F1E7]">
         <NightLine />
 
-        {/* ── 1. Split Concierge Hero (V01 Couture Noir · Pre-Suasion + Commitment) ── */}
+        {/* ── 1. Full-Width Couture Noir Hero (V01 · Pre-Suasion + Commitment) ── */}
         <TableConcierge
           locale={locale}
-          events={dateSensitiveEvents}
-          initialNow={initialNow.toISOString()}
           surface="home"
-          showEventList={false}
           homeIntro={{
             sub: formerHeroCopy.sub,
             pills: formerHeroCopy.pills,

@@ -79,7 +79,16 @@ test('Home and TableConcierge remove useless dead sections while keeping inline 
   const tcSrc = fs.readFileSync(path.join(REPO_ROOT, 'components/TableConcierge.tsx'), 'utf8');
   assert.equal(tcSrc.includes('styles.steps'), false, 'Dead 01/02/03 steps strip must be removed');
   assert.equal(tcSrc.includes('styles.previewBox'), false, 'Redundant previewBox must be removed');
-  assert.ok(tcSrc.includes('normalizeCompareToken'), 'Venue deduplication must be active');
+  assert.equal(tcSrc.includes('data-ui="concierge-form"'), false, 'Unused WhatsApp configurator form must be removed');
+  assert.equal(tcSrc.includes('tc-request-'), false, 'tc-request panel must be removed everywhere');
+  assert.equal(tcSrc.includes('<fieldset'), false, 'Configurator fieldsets must be removed');
+  assert.equal(tcSrc.includes('<select'), false, 'Configurator selects must be removed');
+
+  const vipSrc = fs.readFileSync(path.join(REPO_ROOT, 'app/[locale]/vip-tables/page.tsx'), 'utf8');
+  assert.equal(vipSrc.includes('<TableConcierge'), false, 'TableConcierge configurator must be removed from /vip-tables');
+  assert.equal(vipSrc.includes('components/TableConcierge'), false, 'TableConcierge import must be removed from /vip-tables');
+  assert.equal(vipSrc.includes('#tc-request-vip'), false, 'Orphan #tc-request-vip anchors must be removed');
+  assert.ok(vipSrc.includes('id="vip-clubs-matrix"'), '/vip-tables must anchor to #vip-clubs-matrix');
 
   const homeSrc = fs.readFileSync(path.join(REPO_ROOT, 'app/[locale]/page.tsx'), 'utf8');
   assert.equal(homeSrc.includes('v01.cialdiniCells.map'), false, 'Internal Xceed jargon 4-cell grid must be removed');
