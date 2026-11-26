@@ -75,6 +75,36 @@ const nextConfig: NextConfig = {
         destination: 'https://nightlifemilan.com/:path*',
         permanent: true,
       },
+      {
+        source: '/images/:file([a-zA-Z0-9_-]+).:ext(webp|jpg|jpeg|png)-tab-:idx(\\d+)',
+        destination: '/images/:file.:ext',
+        permanent: true,
+      },
+      {
+        source: '/images/:file([a-zA-Z0-9_-]+).:ext(webp|jpg|jpeg|png)-:idx(\\d+)',
+        destination: '/images/:file.:ext',
+        permanent: true,
+      },
+      {
+        source: '/images/:dir/:file([a-zA-Z0-9_-]+).:ext(webp|jpg|jpeg|png)-tab-:idx(\\d+)',
+        destination: '/images/:dir/:file.:ext',
+        permanent: true,
+      },
+      {
+        source: '/images/:dir/:file([a-zA-Z0-9_-]+).:ext(webp|jpg|jpeg|png)-:idx(\\d+)',
+        destination: '/images/:dir/:file.:ext',
+        permanent: true,
+      },
+      {
+        source: '/images/:dir/:subdir/:file([a-zA-Z0-9_-]+).:ext(webp|jpg|jpeg|png)-tab-:idx(\\d+)',
+        destination: '/images/:dir/:subdir/:file.:ext',
+        permanent: true,
+      },
+      {
+        source: '/images/:dir/:subdir/:file([a-zA-Z0-9_-]+).:ext(webp|jpg|jpeg|png)-:idx(\\d+)',
+        destination: '/images/:dir/:subdir/:file.:ext',
+        permanent: true,
+      },
       ...duplicateGuideRedirects.flatMap(([from, to]) => [
         { source: `/guides/${from}`, destination: `/guides/${to}`, permanent: true },
         { source: `/en/guides/${from}`, destination: `/guides/${to}`, permanent: true },

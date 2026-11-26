@@ -308,7 +308,7 @@ export default function GuideEditorialTemplate({
             >
               {bundle.stripPlates.map((plate, idx) => (
                 <figure
-                  key={`${plate.src}-${idx}`}
+                  key={`strip-plate-${idx}`}
                   className="relative aspect-[4/5] w-[78vw] max-w-[320px] shrink-0 snap-start overflow-clip bg-[#141311] m-0 group sm:w-auto sm:max-w-none"
                 >
                   <Image

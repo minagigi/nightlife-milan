@@ -90,7 +90,7 @@ const SINGLE_VENUE_GUIDE_RAW_SLUGS: Readonly<Record<string, string>> = {
   'g-27': 'hollywood-milan',
   'g-28': 'the-club-milan',
   'g-29': '11-clubroom-milan',
-  'g-30': 'il-gattopardo-milan',
+  'g-30': 'gattopardo-milano',
   'g-31': 'mib-milan',
   'g-32': 'terrazza-duomo-21-milan',
   'g-33': 'ceresio-7-milan',

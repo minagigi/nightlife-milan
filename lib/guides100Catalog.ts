@@ -1594,7 +1594,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
       "just-me-milan",
       "old-fashion-milan",
       "55-milano",
-      "il-gattopardo-milan",
+      "gattopardo-milano",
       "pineta-milan",
       "aria-club-milan"
     ],
@@ -1876,7 +1876,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     ],
     "relatedVenues": [
       "55-milano",
-      "il-gattopardo-milan",
+      "gattopardo-milano",
       "just-me-milan",
       "old-fashion-milan",
       "voya-rooftop-milan",
@@ -2634,7 +2634,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "id": "g-30",
     "cluster": "venue",
     "slugKey": "il-gattopardo-milan",
-    "venueSlug": "il-gattopardo-milan",
+    "venueSlug": "gattopardo-milano",
     "name": "Il Gattopardo Milano (Chiesa Sconsacrata)",
     "shortName": "Il Gattopardo",
     "zone": "Corso Sempione & Piero della Francesca",
@@ -2656,7 +2656,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
       "/images/pillars/aperitivo-04.webp"
     ],
     "relatedVenues": [
-      "il-gattopardo-milan",
+      "gattopardo-milano",
       "55-milano",
       "just-me-milan",
       "old-fashion-milan",
@@ -3085,7 +3085,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
       "church-81-milan",
       "aria-club-milan",
       "voya-rooftop-milan",
-      "il-gattopardo-milan",
+      "gattopardo-milano",
       "55-milano",
       "just-me-milan"
     ],
@@ -3298,7 +3298,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
       "old-fashion-milan",
       "just-me-milan",
       "55-milano",
-      "il-gattopardo-milan",
+      "gattopardo-milano",
       "aria-club-milan",
       "pineta-milan"
     ],
@@ -3368,7 +3368,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "relatedVenues": [
       "the-grace-club-milan",
       "pineta-milan",
-      "il-gattopardo-milan",
+      "gattopardo-milano",
       "55-milano",
       "tocqueville-13-milan",
       "just-me-milan"
@@ -3438,7 +3438,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "relatedVenues": [
       "just-me-milan",
       "55-milano",
-      "il-gattopardo-milan",
+      "gattopardo-milano",
       "pineta-milan",
       "voya-rooftop-milan",
       "magazzini-generali-milan"
@@ -3508,7 +3508,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "relatedVenues": [
       "just-me-milan",
       "55-milano",
-      "il-gattopardo-milan",
+      "gattopardo-milano",
       "mib-milan",
       "old-fashion-milan",
       "terrazza-duomo-21-milan"
@@ -3580,7 +3580,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
       "terrazza-duomo-21-milan",
       "just-me-milan",
       "55-milano",
-      "il-gattopardo-milan",
+      "gattopardo-milano",
       "pineta-milan"
     ],
     "slugs35": {
@@ -3650,7 +3650,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
       "voya-rooftop-milan",
       "just-me-milan",
       "pineta-milan",
-      "il-gattopardo-milan",
+      "gattopardo-milano",
       "alcatraz-milan"
     ],
     "slugs35": {
@@ -3720,7 +3720,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
       "the-grace-club-milan",
       "voya-rooftop-milan",
       "55-milano",
-      "il-gattopardo-milan",
+      "gattopardo-milano",
       "alcatraz-milan"
     ],
     "slugs35": {
@@ -3861,7 +3861,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
       "magazzini-generali-milan",
       "aria-club-milan",
       "55-milano",
-      "il-gattopardo-milan"
+      "gattopardo-milano"
     ],
     "slugs35": {
       "en": "18th-birthday-party-milan-vip-guide",
@@ -4350,7 +4350,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
       "just-me-milan",
       "voya-rooftop-milan",
       "55-milano",
-      "il-gattopardo-milan",
+      "gattopardo-milano",
       "tocqueville-13-milan"
     ],
     "slugs35": {
@@ -4490,7 +4490,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
       "55-milano",
       "just-me-milan",
       "pineta-milan",
-      "il-gattopardo-milan",
+      "gattopardo-milano",
       "terrazza-duomo-21-milan"
     ],
     "slugs35": {
@@ -4558,7 +4558,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "relatedVenues": [
       "voya-rooftop-milan",
       "55-milano",
-      "il-gattopardo-milan",
+      "gattopardo-milano",
       "mib-milan",
       "ceresio-7-milan",
       "just-me-milan"
@@ -4770,7 +4770,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
       "tocqueville-13-milan",
       "just-me-milan",
       "the-grace-club-milan",
-      "il-gattopardo-milan",
+      "gattopardo-milano",
       "mib-milan"
     ],
     "slugs35": {
@@ -5678,7 +5678,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "relatedVenues": [
       "voya-rooftop-milan",
       "55-milano",
-      "il-gattopardo-milan",
+      "gattopardo-milano",
       "just-me-milan",
       "terrazza-duomo-21-milan",
       "mib-milan"
@@ -5820,7 +5820,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
       "voya-rooftop-milan",
       "just-me-milan",
       "pineta-milan",
-      "il-gattopardo-milan",
+      "gattopardo-milano",
       "mib-milan"
     ],
     "slugs35": {
@@ -6378,7 +6378,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "relatedVenues": [
       "voya-rooftop-milan",
       "55-milano",
-      "il-gattopardo-milan",
+      "gattopardo-milano",
       "pineta-milan",
       "the-grace-club-milan",
       "just-me-milan"
@@ -6516,7 +6516,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
       "/images/pillars/aperitivo-01.webp"
     ],
     "relatedVenues": [
-      "il-gattopardo-milan",
+      "gattopardo-milano",
       "ceresio-7-milan",
       "just-me-milan",
       "voya-rooftop-milan",
@@ -6591,7 +6591,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
       "aria-club-milan",
       "voya-rooftop-milan",
       "55-milano",
-      "il-gattopardo-milan"
+      "gattopardo-milano"
     ],
     "slugs35": {
       "en": "new-years-eve-clubs-milan-december-31-vip-guide",
@@ -6730,7 +6730,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
       "tocqueville-13-milan",
       "just-me-milan",
       "the-grace-club-milan",
-      "il-gattopardo-milan",
+      "gattopardo-milano",
       "mib-milan"
     ],
     "slugs35": {
@@ -6796,7 +6796,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
       "/images/pillars/football-afterparties-01.webp"
     ],
     "relatedVenues": [
-      "il-gattopardo-milan",
+      "gattopardo-milano",
       "just-me-milan",
       "pineta-milan",
       "aria-club-milan",
@@ -6866,7 +6866,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
       "/images/pillars/vip-tables-02.webp"
     ],
     "relatedVenues": [
-      "il-gattopardo-milan",
+      "gattopardo-milano",
       "55-milano",
       "voya-rooftop-milan",
       "mib-milan",
@@ -6938,7 +6938,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "relatedVenues": [
       "voya-rooftop-milan",
       "55-milano",
-      "il-gattopardo-milan",
+      "gattopardo-milano",
       "mib-milan",
       "terrazza-duomo-21-milan",
       "just-me-milan"
@@ -7148,7 +7148,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "relatedVenues": [
       "just-me-milan",
       "pineta-milan",
-      "il-gattopardo-milan",
+      "gattopardo-milano",
       "aria-club-milan",
       "voya-rooftop-milan",
       "alcatraz-milan"
@@ -7709,7 +7709,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
       "just-me-milan",
       "old-fashion-milan",
       "55-milano",
-      "il-gattopardo-milan",
+      "gattopardo-milano",
       "voya-rooftop-milan",
       "pineta-milan"
     ],
@@ -8058,7 +8058,7 @@ export const GUIDE_100_SEEDS: GuideSeed100[] = [
     "relatedVenues": [
       "voya-rooftop-milan",
       "55-milano",
-      "il-gattopardo-milan",
+      "gattopardo-milano",
       "aria-club-milan",
       "just-me-milan",
       "church-81-milan"

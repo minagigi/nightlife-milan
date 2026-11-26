@@ -80,7 +80,7 @@ export default function TasteHeroCrossfade({
           const visible = activeIdx === slideIdx;
           return (
             <Image
-              key={`${sl.src}-${slideIdx}`}
+              key={`hero-slide-${slideIdx}`}
               src={sl.src}
               alt={`${altPrimary} - ${sl.caption}`}
               fill
@@ -123,7 +123,7 @@ export default function TasteHeroCrossfade({
               <div className="flex items-center gap-1" role="tablist" aria-label={title}>
                 {normalizedSlides.map((sl, idx) => (
                   <button
-                    key={`${sl.src}-tab-${idx}`}
+                    key={`hero-tab-${idx}`}
                     type="button"
                     role="tab"
                     aria-selected={activeIdx === idx}

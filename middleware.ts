@@ -143,6 +143,8 @@ function resolveLegacySubpathForLocale(
       'area-riservata': '/account',
       'i-miei-pass': '/account',
       'capodanno-single-pass': '/single-pass',
+      search: '/clubs',
+      cerca: '/clubs',
     };
     const canonicalHub = naturalHubAliases[rawSeg];
     if (canonicalHub) {

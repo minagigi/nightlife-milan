@@ -680,8 +680,8 @@ export default function EditorialPageSections({ locale, path }: Props) {
   // CASE 5: /guides -> Expanded 3-Pillar Guides, Speakeasy Atlas & Insider Interviews Hub
   // ---------------------------------------------------------------------------
   if (cleanPath === '/guides') {
-    const speakeasySlug = isIt ? 'speakeasy-nascosti-navigli' : 'navigli-hidden-speakeasies';
-    const interviewSlug = isIt ? 'intervista-sound-of-milan' : 'the-sound-of-milan-dj-interview';
+    const speakeasySlug = isIt ? 'speakeasy-nascosti-navigli' : 'hidden-speakeasies-navigli';
+    const interviewSlug = isIt ? 'intervista-sound-of-milan' : 'interview-sound-of-milan';
     const dressSlug = isIt ? 'guida-definitiva-dress-code-club-milano' : 'ultimate-dress-code-guide-milan-clubs';
     const vipSlug = isIt ? 'come-prenotare-tavolo-vip' : 'how-to-book-vip-table';
     const technoSlug = isIt ? 'dove-trovare-migliore-techno-2026' : 'where-to-find-best-techno-2026';
@@ -935,10 +935,10 @@ export default function EditorialPageSections({ locale, path }: Props) {
           <Link href={`${lp}/bottle-prices`} prefetch={false} className="border border-[#EAE3D5]/28 bg-[#141311] p-3.5 text-[#F6F1E7] hover:bg-[#1E1C19] hover:border-[#EAE3D5]/55 transition-colors">
             {isIt ? 'Listino Bottiglie ↗' : 'Bottle Prices ↗'}
           </Link>
-          <Link href={`${lp}/guides/${isIt ? 'speakeasy-nascosti-navigli' : 'navigli-hidden-speakeasies'}`} prefetch={false} className="border border-[#EAE3D5]/28 bg-[#141311] p-3.5 text-[#F6F1E7] hover:bg-[#1E1C19] hover:border-[#EAE3D5]/55 transition-colors">
+          <Link href={`${lp}/guides/${isIt ? 'speakeasy-nascosti-navigli' : 'hidden-speakeasies-navigli'}`} prefetch={false} className="border border-[#EAE3D5]/28 bg-[#141311] p-3.5 text-[#F6F1E7] hover:bg-[#1E1C19] hover:border-[#EAE3D5]/55 transition-colors">
             {isIt ? '12 Speakeasy Segreti ↗' : '12 Secret Speakeasies ↗'}
           </Link>
-          <Link href={`${lp}/guides/${isIt ? 'intervista-sound-of-milan' : 'the-sound-of-milan-dj-interview'}`} prefetch={false} className="border border-[#EAE3D5]/28 bg-[#141311] p-3.5 text-[#F6F1E7] hover:bg-[#1E1C19] hover:border-[#EAE3D5]/55 transition-colors">
+          <Link href={`${lp}/guides/${isIt ? 'intervista-sound-of-milan' : 'interview-sound-of-milan'}`} prefetch={false} className="border border-[#EAE3D5]/28 bg-[#141311] p-3.5 text-[#F6F1E7] hover:bg-[#1E1C19] hover:border-[#EAE3D5]/55 transition-colors">
             {isIt ? '7 Interviste Insider ↗' : '7 Insider Interviews ↗'}
           </Link>
           <Link href={`${lp}/events/special`} prefetch={false} className="border border-[#EAE3D5]/28 bg-[#141311] p-3.5 text-[#F6F1E7] hover:bg-[#1E1C19] hover:border-[#EAE3D5]/55 transition-colors">

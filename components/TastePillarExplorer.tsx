@@ -145,7 +145,7 @@ export default function TastePillarExplorer({ data, locale }: TastePillarExplore
             >
               <figure className="relative mx-auto aspect-[4/5] w-full max-w-[420px] overflow-clip bg-[#050505] mb-3">
                 <Image
-                  key={activeItem.image}
+                  key={`spotlight-${activeItem.id}`}
                   src={activeItem.image}
                   alt={activeItem.imageCaption}
                   fill

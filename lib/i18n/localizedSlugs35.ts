@@ -17,6 +17,7 @@ import { justSingingRainSlug, resolveJustSingingRainSlug } from '@/lib/just-sing
 import {
   CAPODANNO_CATEGORY_IDS,
   CAPODANNO_EVENT_BASE_SLUGS,
+  CAPODANNO_NAVIGATION,
   capodannoCategoryPath,
   capodannoCategorySlug,
   capodannoEventPath,
@@ -418,7 +419,7 @@ const CANONICAL_VENUE_BASES: Array<{
   { canonicalSlug: 'hollywood-club-milano', id: 'v-hollywood', brandSlug: 'hollywood-club', aliases: ['hollywood', 'hollywood-milano', 'hollywood-rythmoteque'] },
   { canonicalSlug: 'the-club-milano', id: 'v-theclub', brandSlug: 'the-club', aliases: ['the-club', 'theclub', 'theclub-milano'] },
   { canonicalSlug: '11-clubroom', id: 'v-11clubroom', brandSlug: '11-clubroom', aliases: ['11clubroom', '11-clubroom-milano', 'eleven-clubroom', '11clubroom-milano'] },
-  { canonicalSlug: 'gattopardo-milano', id: 'v-gattopardo', brandSlug: 'gattopardo', aliases: ['gattopardo', 'il-gattopardo', 'il-gattopardo-milano'] },
+  { canonicalSlug: 'gattopardo-milano', id: 'v-gattopardo', brandSlug: 'gattopardo', aliases: ['gattopardo', 'il-gattopardo', 'il-gattopardo-milano', 'il-gattopardo-milan'] },
   { canonicalSlug: 'mib-milano', id: 'v-mibmilano', brandSlug: 'mib', aliases: ['mib', 'mib-piazza-affari'] },
   { canonicalSlug: 'dazi-milano', id: 'v-dazi', brandSlug: 'dazi', aliases: ['dazi', 'dazi-milan', 'dazi-arco-della-pace'] },
   { canonicalSlug: 'terrazza-21', id: 'v-terrazza21', brandSlug: 'terrazza-duomo-21', aliases: ['terrazza-duomo-21', 'terrazza-duomo-21-milano', 'duomo-21', 'duomo-21-milano'] },
@@ -869,6 +870,8 @@ export function isConsolidatedNyeMasterGuideId(guideId: string): boolean {
 
 const LEGACY_GUIDE_ALIAS_TO_ID: Readonly<Record<string, string>> = {
   ...LEGACY_HYBRID_GUIDE_SLUGS_TO_ID,
+  'navigli-hidden-speakeasies': 'g-secret-bars',
+  'the-sound-of-milan-dj-interview': 'g-dj-interview',
   'san-siro-football-afterparties-guide': 'g-san-siro-football-afterparties',
   'monza-brianza-to-milan-clubs-parking-vip-guide-vip-guide': 'g-110',
   'bergamo-to-milan-clubs-highway-a4-vip-guide-vip-guide': 'g-111',
@@ -1893,7 +1896,25 @@ const ACTIVE_VENUE_EVENT_MATCHERS: ReadonlyArray<readonly [RegExp, string]> = [
 ];
 
 const LEGACY_HALLOWEEN_2026_RE = /(?:^|-)(?:halloween|noc-vjestica|noc-vestica|noc-carovnic|cadilar-bayrami|wanshengjie|halowin|helouin|hellouin|helovins|helovinas|hellovin|hlekkjavaka|oiche-shamhna|nokj-na-vesticite)(?:-|$)/i;
-const LEGACY_NYE_2027_RE = /(?:^|-)(?:capodanno|new-years-eve|nye|nochevieja|ano-nuevo|reveillon|nouvel-an|silvester|sylwester|silvestr|revelion|szilveszter|uusivuosi|nytaarsaften|nyarsafton|nyttarsaften|oud-en-nieuw|novyy-god|novyy-rik|nova-godina|kuanian|ras-alsana|yilbasi|protochronia|gamlarskvold|aastavahetus|jaunais-gads|naujieji-metai|viti-i-ri|docek-nove-godine|silvestrovanje|oiche-chinn-bliana|lejlet-l-ewwel-tas-sena)(?:-|$)/i;
+const LEGACY_NYE_TOKENS = Array.from(
+  new Set(
+    [
+      'capodanno', 'new-years-eve', 'nye', 'nochevieja', 'ano-nuevo', 'reveillon', 'nouvel-an',
+      'silvester', 'sylwester', 'silvestr', 'revelion', 'szilveszter', 'uusivuosi', 'nytaarsaften',
+      'nyarsafton', 'nyttarsaften', 'oud-en-nieuw', 'novyy-god', 'novyy-rik', 'nova-godina',
+      'kuanian', 'ras-alsana', 'yilbasi', 'protochronia', 'gamlarskvold', 'aastavahetus',
+      'jaunais-gads', 'naujieji-metai', 'viti-i-ri', 'docek-nove-godine', 'silvestrovanje',
+      'oiche-chinn-bliana', 'lejlet-l-ewwel-tas-sena',
+      ...Object.values(CAPODANNO_NAVIGATION).map((n) => n.nyePrefix),
+      ...Object.values(SLUG_TOKENS_35).map((t) => t.newYearsEve),
+    ]
+      .map((s) => sanitizeAsciiSlug(s))
+      .filter(Boolean)
+      .map((s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')),
+  ),
+);
+const LEGACY_NYE_2027_RE = new RegExp(`(?:^|-)(?:${LEGACY_NYE_TOKENS.join('|')})(?:-|$)`, 'i');
+const LEGACY_NYE_PREFIX_START_RE = new RegExp(`^(?:${LEGACY_NYE_TOKENS.join('|')})-`, 'i');
 const HISTORICAL_PAST_EVENT_DATE_RE = /(?:^|-)(?:202[45]-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\d|3[01])|2026-0[1-9]-(?:0[1-9]|[12]\d|3[01])|(?:0[1-9]|[12]\d|3[01])-0[1-9]-2026|(?:0[1-9]|[12]\d|3[01])-(?:0[1-9]|1[0-2])-202[45]|(?:january|february|march|april|may|june|july|august|september|gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre)-\d{1,2}-202[456]|\d{1,2}-(?:january|february|march|april|may|june|july|august|september|gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre)-202[456])(?:$|-)/i;
 
 export function resolveLegacyOrExpiredEventRedirect(rawSlug: string, targetLocale: LocaleCode): string | null {
@@ -2005,8 +2026,8 @@ export function resolveLegacyOrExpiredEventRedirect(rawSlug: string, targetLocal
     return halloweenPath(targetLocale);
   }
 
-  // 6. Legacy flat Capodanno / NYE 2027 event slugs crawled by GSC
-  if (stripped.includes('2027') && LEGACY_NYE_2027_RE.test(stripped)) {
+  // 6. Legacy flat Capodanno / NYE 2027 event slugs crawled by GSC (all 35 locales)
+  if ((stripped.includes('2027') && LEGACY_NYE_2027_RE.test(stripped)) || LEGACY_NYE_PREFIX_START_RE.test(stripped)) {
     if (/(?:just-?me.*(?:garda|lonato|desenzano)|(?:garda|lonato|desenzano).*just-?me)/i.test(stripped)) {
       return capodannoEventPath('capodanno-justme-garda-lake', targetLocale);
     }
