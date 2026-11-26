@@ -1,7 +1,7 @@
 {
   "schema_version": "2026-11-25.v1",
   "network": "nightlifemilan.com",
-  "generated_at": "2026-11-26T16:48:05.289557+00:00",
+  "generated_at": "2026-11-26T01:00:33.021956+00:00",
   "total_entries": 259,
   "official_flyers": 102,
   "flow_keyart_flyers": 157,
@@ -10,8 +10,8 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 131408,
-      "sha256": "0b1c839158c0129d22c3ffa287bf9d030ac23e90a919b8286297571c3b7d579b"
+      "bytes": 183552,
+      "sha256": "e1a5842910a157af279e3a3e71c3ba2f7f567f94abb1f308d1a93d4ae8d9b1b1"
     },
     "capodanno-2027-posters/capodanno-55-milano.webp": {
       "source_kind": "official_flyer",
@@ -24,15 +24,15 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 164536,
-      "sha256": "93bd87080ba10e5fa7183d854b6b004d715f9a8aafcc91605bf06fdf08246530"
+      "bytes": 254708,
+      "sha256": "8ec8ec8245819ba77666760b7f0b9b3fb02fca27c85a5faf5f4d1ebd2a548acd"
     },
     "capodanno-2027-posters/capodanno-albergo-terminus-como.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 240244,
-      "sha256": "185a88d97a79c69c0348cd41383506e036d269c00159f66ff020640a08711610"
+      "bytes": 253258,
+      "sha256": "f601a31840bf82843b0958affccd24c71f398e9dcdc8f17c62c674e782cd3945"
     },
     "capodanno-2027-posters/capodanno-alcatraz-milano.webp": {
       "source_kind": "official_flyer",
@@ -45,99 +45,99 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 184588,
-      "sha256": "cf4bb1ef065a4264324a19291c8b114df96c2c17c8d4b372652327d9c5080660"
+      "bytes": 259406,
+      "sha256": "f9cb3d6314aa7c4e12e8662622ac1886a686c7e8d9ba38658995fcc91ed3469a"
     },
     "capodanno-2027-posters/capodanno-apollo-club-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 191320,
-      "sha256": "ed1c0fb7ececa76c4edbe48baec4a24dcff03c13b441f7211c45cd8b0e104a7e"
+      "bytes": 254588,
+      "sha256": "3560515e74131abe8bc371b39ff70531e4e749452d92ff1da66d9e4bd83e2b9c"
     },
     "capodanno-2027-posters/capodanno-apophis-club-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 175636,
-      "sha256": "546bb5228eaf86e575abed35e5bfe09a3f364ce03d68488a192f9a75133ce647"
+      "bytes": 253584,
+      "sha256": "438298285ca1e800dca067852422fd69e2bb57bc9952dceb96dc9bad11bb9c62"
     },
     "capodanno-2027-posters/capodanno-arci-bellezza-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 192910,
-      "sha256": "e7985a052400e76d64ac1e937fec1976cc56e3822f516535ecb882a6015cd7a4"
+      "bytes": 261934,
+      "sha256": "ef1983793d7f7805b95c633d14d5046860150ac5a2914beba43b48c63e036d91"
     },
     "capodanno-2027-posters/capodanno-arco-della-pace-piazza-gae-aulenti-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 195794,
-      "sha256": "1005ec8a722264532c8508c91d47f29b1695d4d6c50064bc6ccaf4e08f710974"
+      "bytes": 265024,
+      "sha256": "a4613fa6e18600a52c1efcb6f48a1f08edb8f1ba56e5b472f9ecc23dfd58c424"
     },
     "capodanno-2027-posters/capodanno-aria-club-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 175764,
-      "sha256": "1365217444e1f1243ca0ddcea6132bb9981d678163249d36429b06fd39ea4e72"
+      "bytes": 255942,
+      "sha256": "d0f003bb814d8ebe463ad9ea969863c3eb210f481769daadac9a8f646d1878b7"
     },
     "capodanno-2027-posters/capodanno-armani-prive-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 120524,
-      "sha256": "c16c1254dbf0e263c0c661ed929783ee6d3954d6fddcb08ae74a7bd136fd1917"
+      "bytes": 246950,
+      "sha256": "ce09bcf3e459eb67f3fa4f28d999f80e6297abacd284e6018bd370997223e85a"
     },
     "capodanno-2027-posters/capodanno-backdoor43-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 179192,
-      "sha256": "4e00988dbfc82998ad83f906693639f9fc28af1e152350a1e6a2583c483edb0f"
+      "bytes": 273420,
+      "sha256": "9187374f31620110802d690b1dc486be1b3d6ee7027e31a8b0f13e91371c59c8"
     },
     "capodanno-2027-posters/capodanno-base-milano-tortona.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 209878,
-      "sha256": "9e3933ee7388b2f6c738f94d5d7b6d67c7b1014b0bc898bbdeffe9a9cb224d82"
+      "bytes": 239122,
+      "sha256": "6b361e56fffe688380b2d331a83e9e5504c6de0796744580927dfd631dc1dac7"
     },
     "capodanno-2027-posters/capodanno-battello-navigli-darsena-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 197004,
-      "sha256": "a0be4076131b87b4d0ecebc9407d25e55378e90b97e0958e4fe1fc5fdaafc413"
+      "bytes": 277698,
+      "sha256": "acb4bbbdc610aa331bc3a8da22ae0f02c435bbf372f9f945bb4598d1a475de1c"
     },
     "capodanno-2027-posters/capodanno-beach-garden-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 211244,
-      "sha256": "8fce43ce3482b3c92da6d6a061da40de88b322172b5c8003bdf2b8d058549fcb"
+      "bytes": 261342,
+      "sha256": "bea4470b600c7a2eac763fd1ffc299db932782ec31b67d872d88c842c4e3b7b6"
     },
     "capodanno-2027-posters/capodanno-bergamo-bolgia-osio-sopra.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 189252,
-      "sha256": "2ff560d29413a2a6f2b2635c20c029f48b776a01187aa249ced645e05d096cd0"
+      "bytes": 248562,
+      "sha256": "37392b07ecf010432019d6cd45f7df18746c56d47cec15f395d99dd9feef20dc"
     },
     "capodanno-2027-posters/capodanno-bergamo-setai-club-bobadilla.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 194154,
-      "sha256": "300c3b6de21aeaffeda1b06c92b2cdab4b6a188b926ef849fb07b3eb2876322d"
+      "bytes": 246094,
+      "sha256": "541b3490cb0e62e1a1ae93c0eeb64eb0f11a786ebba2f0b4d28037e0971c48e2"
     },
     "capodanno-2027-posters/capodanno-biko-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 161806,
-      "sha256": "902c6816bd9fb099ef49536f900e66026549e3b2004dfd50f74fac1141b66bd3"
+      "bytes": 255008,
+      "sha256": "748740ffe677cfae0809dc389c86f4060efd253ee583397dd7e6c47ec0d5859e"
     },
     "capodanno-2027-posters/capodanno-bischeri-milano.webp": {
       "source_kind": "official_flyer",
@@ -157,15 +157,15 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 120984,
-      "sha256": "fef21c70e1a3470303cd56d6e96c549ef0248bec2a301dc8d45d7d0ba6f435f4"
+      "bytes": 270586,
+      "sha256": "b78776c2f04ec461b5af3685c8fb6d9ec4fdfa81d4410249e5e3f2e586d872d1"
     },
     "capodanno-2027-posters/capodanno-blue-note-milano-concerto-gospel-jazz.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 168038,
-      "sha256": "fffb69b065ad6eb839ce9ba0fe101b62d1825fc406fa02ba430f304d2d9b06a0"
+      "bytes": 243734,
+      "sha256": "9eea0f543bfbfc7292e32812e66b19ae935cd6d14d5ec2c0de5087f9cb59083c"
     },
     "capodanno-2027-posters/capodanno-bobino-milano.webp": {
       "source_kind": "official_flyer",
@@ -178,43 +178,43 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 116940,
-      "sha256": "000fd82c2f2a41aea19f72e7c4198adca70e6e3273584627a8768551519ae996"
+      "bytes": 245788,
+      "sha256": "ad1244ac59c1dae7c06fc4a8861a58f2b6fd9ca26ddf87f6291d6c54ef7ae646"
     },
     "capodanno-2027-posters/capodanno-carlsberg-ol-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 219712,
-      "sha256": "7aa39a102ff602ae71f0cc7cf83ce10392db3e7d6c5fc4c865a783cdaf4a3a8c"
+      "bytes": 266308,
+      "sha256": "430292ea6291310fb0f8c77df1d09bf6a4b7fedf4a56bbb2e05054b5d51e3c58"
     },
     "capodanno-2027-posters/capodanno-carroponte-sesto-san-giovanni.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 244160,
-      "sha256": "72b43f217025fe83f9e665e0118be601230635abe65af1e9380024d3c5638da8"
+      "bytes": 272986,
+      "sha256": "c3677ec0cd9f44d1088bc29b0f6e801e870515b39f6a79b042c1c4426bd1dcf7"
     },
     "capodanno-2027-posters/capodanno-castello-di-malpaga.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 260436,
-      "sha256": "465722c6eb0a99b8ba5366e1261c7735f99aadb07dd8d085d3fad8a5764c552c"
+      "bytes": 269750,
+      "sha256": "418d6ccf67c44f07fdee8df98b75dc209553acfb2410dfa5839f93fedbc8cdeb"
     },
     "capodanno-2027-posters/capodanno-castello-sforzesco-parco-sempione-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 199460,
-      "sha256": "b3c075de91bf4e13bd9f4bf2252304b0a174e4e14cfcaae5e63e98faa47d60d0"
+      "bytes": 253222,
+      "sha256": "4ba277f949f7be2e9104965998397a556df95d364549d8eecb89e3939169aef5"
     },
     "capodanno-2027-posters/capodanno-ceresio-7-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 141410,
-      "sha256": "7252d21c124fd16396895535a3d60d0789568b778f33ead397599e6f763203b2"
+      "bytes": 182298,
+      "sha256": "97f3ca9426e6dbf1c28f3b6e81d92daa2124e4889d21b7fbe83070192bac5fce"
     },
     "capodanno-2027-posters/capodanno-church-81-milano.webp": {
       "source_kind": "official_flyer",
@@ -227,99 +227,99 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 230996,
-      "sha256": "1f29069fc7bb708a173ecf0de86f4f9de900c6018cb09f981dfd3037e1d3d86a"
+      "bytes": 253008,
+      "sha256": "51c7d294e080ef523b58e56a4aecf6f27f8776b1ee0562ce3c1b797ca95e81c1"
     },
     "capodanno-2027-posters/capodanno-circolo-magnolia-idroscalo.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 187984,
-      "sha256": "da2346e2d706e2e5274453d3f1dcafca202b0702ecaa7f5c757c7ef003b46753"
+      "bytes": 271788,
+      "sha256": "9d83cd7c2b842fbd7da4af4e62bc9e338b89eadabe1d91c753fba5fd82a6188d"
     },
     "capodanno-2027-posters/capodanno-como-made-club-villa-erba-palace-hotel.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 171668,
-      "sha256": "880b885136e9456515efccb1c63df47a205f4109223bcee3325e98a95b22cfe9"
+      "bytes": 272318,
+      "sha256": "41934f3bbb13270f6a8cf9e5d35d97c2759ee0a2877ec63ca402fae64eba2df3"
     },
     "capodanno-2027-posters/capodanno-cost-22-milano-corso-como.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 160216,
-      "sha256": "dbfb6d1595eceaf6045ccaa706846a6be528ef5d0b4eeb207771a7be5bd9d88e"
+      "bytes": 260532,
+      "sha256": "ea22381d72f7416ee6a0bc770cbe79d492d4a18cdf39988265f5ba94821520ce"
     },
     "capodanno-2027-posters/capodanno-cremona-lodi-juliette-magika-castello-chignolo.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 219526,
-      "sha256": "482334d2a4d4e670e7d8c4cfbe78c4e42b457b96dfc58124cb2e16d7c08f5200"
+      "bytes": 251426,
+      "sha256": "94cbec69e913421693990e3d6fe889c4ec4d4a8777ff215c4a41045eff3b6a89"
     },
     "capodanno-2027-posters/capodanno-crociera-lago-di-como-garda-maggiore.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 164188,
-      "sha256": "0d8fa64f76f802d50932665e7f1b331be92bcbefa75db7dcc63f248998ab7ad4"
+      "bytes": 271948,
+      "sha256": "dc27822d07aad514dc59d8a7355029abb5819d42e564da1f7116aed06d7161b0"
     },
     "capodanno-2027-posters/capodanno-darsena-navigli-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 250180,
-      "sha256": "4cfff5797a945a098c2083b02c152e5f0bd48e80753983876d69b31954463195"
+      "bytes": 268632,
+      "sha256": "a262b961caa3ffa538f95892562202fb5b033f60d94639e20c6517f28150193f"
     },
     "capodanno-2027-posters/capodanno-dazi-milano-arco-della-pace.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 198192,
-      "sha256": "f6784a2982f5b52d4fe0c5914302c55556941cb37ca8d097718b8a298078c552"
+      "bytes": 249534,
+      "sha256": "0656deff3d42c276aa8154d23b1c6e3469f2e2ddf8824debfe52a998b0f757b0"
     },
     "capodanno-2027-posters/capodanno-encanto-club-latino-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 213676,
-      "sha256": "5936c86ba8e36d2d12e5939b5c72733c86aa395258d0c4dd2e8f3f6661743b5d"
+      "bytes": 277604,
+      "sha256": "d115b6100dbb9bda4304540458682558be6a8a7e131c69052a72dd8c3fbf6daf"
     },
     "capodanno-2027-posters/capodanno-fabbrica-del-vapore-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 251460,
-      "sha256": "62917b4981acbb54b9c4249a511f8a9e96a8ce7c28b5e7f44ea8470d0538a1bf"
+      "bytes": 257916,
+      "sha256": "c2774b566881343be5c02c29fbffd06a652e1dbe68b88d349013520bc46675dc"
     },
     "capodanno-2027-posters/capodanno-fabrique-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 242902,
-      "sha256": "56857072b0d2b71d86f3f737a86c6c586cd270697acbd4e5eb85aa4e778db50a"
+      "bytes": 248968,
+      "sha256": "34ce813e53f671ebb00176eef459f14bc496d1c3683f7ea64ccf0f054fdde38d"
     },
     "capodanno-2027-posters/capodanno-fiaccolata-maestri-di-sci-livigno-bormio-ponte-di-legno.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 209510,
-      "sha256": "d5156e21f749dfaf27136f71ab189eb082fbad70df99a544495d5f8a41ee7d06"
+      "bytes": 258904,
+      "sha256": "c181d3bf62137bc0e44a1e6f48c26c060c11b6db50cbc5105accf2f3c0d90b69"
     },
     "capodanno-2027-posters/capodanno-franciacorta-number-one-villa-fenaroli.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 223962,
-      "sha256": "60594564a2bfc18e13e3948b53f32c2a9bbb1b40c25159c4eeefd86bffb70b50"
+      "bytes": 256838,
+      "sha256": "e52e7156e904013e6fc2e9f726f89b66478d9da4b253ab1114f652fca2f1b027"
     },
     "capodanno-2027-posters/capodanno-frezza-milano-cascina-romana.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 197434,
-      "sha256": "ff8f26f5284c0665f6225d4c40a3bcdbcb3e4150d4a51756e22e7174cfa6feb6"
+      "bytes": 251606,
+      "sha256": "4a597dbd0e5b86ddcf078738cd1257fc74c280bd2a11b4b06252dc734c52acbf"
     },
     "capodanno-2027-posters/capodanno-gate-milano.webp": {
       "source_kind": "official_flyer",
@@ -332,71 +332,71 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 190014,
-      "sha256": "771d85708bf62995eb2b8352f53fb504931be628588260bc51c70151f417720b"
+      "bytes": 276030,
+      "sha256": "061dd81a415c13cabe135a51f8836492ded3bdf2ecbc11527bc31a379321cc22"
     },
     "capodanno-2027-posters/capodanno-hollywood-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 164470,
-      "sha256": "6cb3ddb1eaa2f3f14743e10d78715f819dadedfae4feb1aa1bf794ca0e686389"
+      "bytes": 267132,
+      "sha256": "8a81dda42998d31e3090e5a0ee40f81c390efa29326c66082b5c628b924ff54d"
     },
     "capodanno-2027-posters/capodanno-hotel-all-inclusive-milano-sheraton-melia-ripamonti.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 160036,
-      "sha256": "b3204f5e5e8add83e9c431f7ad9e97a024648b386d34907340b9b74efd1619b5"
+      "bytes": 253874,
+      "sha256": "a85e9a1e8b8b9a923209a7b27c6a012802c90847d6056ee4c0c0a297b54bac85"
     },
     "capodanno-2027-posters/capodanno-hotel-barchetta-excelsior-como.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 133642,
-      "sha256": "193986871d755ecb5f125efe041005937f45e44821a1aafcb641332025585825"
+      "bytes": 263534,
+      "sha256": "70931053b4324d93d32f1716e811a844e2a9d3f41fa5edd278185ba187b51471"
     },
     "capodanno-2027-posters/capodanno-hotel-principe-di-savoia-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 228860,
-      "sha256": "41f600615420a3c855184c6a0327556287548090eec14023b63a663401d3cf40"
+      "bytes": 270982,
+      "sha256": "a57263b7ac911624a5d66d4197618de700fbac88c133c414bcbdf0207d83363e"
     },
     "capodanno-2027-posters/capodanno-il-gattopardo-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 249996,
-      "sha256": "95327e6ab9aea25b0169a9370099a5769c380a447af96c19b2ae70ee87885b9a"
+      "bytes": 248426,
+      "sha256": "638dcfc10fdc4bf9d7bb5989e0fa9da610230c602262fce20415c807bebc3d44"
     },
     "capodanno-2027-posters/capodanno-il-marchese-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 180950,
-      "sha256": "eeb9f48e7678462de478cdbd7547f8bd020f03c712a069a13b70a672fa1010dc"
+      "bytes": 247376,
+      "sha256": "50598296d418c86fc6e835dade0ee712f4232ab8c158eaf94e5b219f5e06496a"
     },
     "capodanno-2027-posters/capodanno-in-baita-motoslitta-livigno-bormio-madesimo-tonale.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 210834,
-      "sha256": "2d80c8e581d77707c48d0d9338d2351dcae30c4a58c3505a49ede40735ca2b50"
+      "bytes": 264786,
+      "sha256": "79e6cde874a7fbc1169ea6822cdf64a96a39334cab6fece2ce22b320b600d7e7"
     },
     "capodanno-2027-posters/capodanno-in-castello-tolcinasco-malpaga-chignolo-po.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 182266,
-      "sha256": "6eb0d8ef9be25cf27591215e00f126b83a136db3d279db5221bbb1eeec43ef2c"
+      "bytes": 248936,
+      "sha256": "b7f0c44b6c2ec204653f4737d2a01be7fe94676a166d1a6a6f1d02d2c160cc18"
     },
     "capodanno-2027-posters/capodanno-in-villa-borromeo-fenaroli-reale.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 216964,
-      "sha256": "6dcddd8a20ecb1d3e699ea1f06c1951d260bbdec3c6d4492e41e50c3f95417c3"
+      "bytes": 274772,
+      "sha256": "35a50298723d08fa267bbb3a50115df0a5f7d175947177af3c12ab48703f6225"
     },
     "capodanno-2027-posters/capodanno-jazz-cafe-milano.webp": {
       "source_kind": "official_flyer",
@@ -423,64 +423,64 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 226588,
-      "sha256": "ef9032a673557161a20ecc7ce946e6df39a5ad927b57e091de14b8744fe7018f"
+      "bytes": 277976,
+      "sha256": "584bd3a177cb484b936952ab34287d1f2bbf97b60ceb5c6598ef41b683dea666"
     },
     "capodanno-2027-posters/capodanno-lago-di-garda-sesto-senso-coco-beach.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 215740,
-      "sha256": "d8390f791e6aa11d0e0acc963278bcc76271bc8985fe1083393f7332f0c09ecd"
+      "bytes": 269882,
+      "sha256": "2ef1d987391a2904ca2a51fb899241f10bbd7ca1913d8a022fbfd2e026fbb771"
     },
     "capodanno-2027-posters/capodanno-le-jardin-milano-idroscalo.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 194718,
-      "sha256": "8916c622538b2ea300cf6c319c2f138feec4fa5aa5fb56a83f56b1416b9131ed"
+      "bytes": 249864,
+      "sha256": "8d9b715a029690816ff2ad69141615eec1931a1c10cd5a3aa02a003696b57957"
     },
     "capodanno-2027-posters/capodanno-lecco-orsa-maggiore-villa-lario-valsassina.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 173382,
-      "sha256": "1a7d0a4032b5f3ed74949ec2c16a585579f7d894d5d6478a06e80ea6d018ff36"
+      "bytes": 273476,
+      "sha256": "8193f3423f722618d3cdc9280571a80fb286a37d66b92f84b5865d553475bc1e"
     },
     "capodanno-2027-posters/capodanno-legend-club-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 145816,
-      "sha256": "d94a22920807e58f018410948259937a1fc24ddc1d66ce968b4478c8cf96aab6"
+      "bytes": 267452,
+      "sha256": "76b455aea229ca3e640a930921ea4b41fdc0a1323d4ebf8e9ae4fb84584df477"
     },
     "capodanno-2027-posters/capodanno-lime-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 201714,
-      "sha256": "800bd3d1f5055d8b06997fa695d9ee289e5cc7aed60564b6507b45fb8d060999"
+      "bytes": 261186,
+      "sha256": "a3d165eb0f42eff8e7087494fc9000e637abb36c207759813fc044daee950b6b"
     },
     "capodanno-2027-posters/capodanno-live-club-trezzo-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 144518,
-      "sha256": "5627e92ba75f4c906182632991c96bfea64b43e81f96bbc117e7812f0a0f20d9"
+      "bytes": 268476,
+      "sha256": "4c857dfd9a47c2b308f8fdf2be79137e0d576d1ded062b7abfd871a0524cd3b8"
     },
     "capodanno-2027-posters/capodanno-livigno-valtellina-stalet-kosmo-mottolino.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 212232,
-      "sha256": "d5eb9a06e730e6ffcc5c7fdd9ab74b6626f81accd74567ddec7c01e451fb3204"
+      "bytes": 272046,
+      "sha256": "982e9209ed9b26e4b34ce5f9018d48d2b0fb52c7fa6473c2c1ad50b574801152"
     },
     "capodanno-2027-posters/capodanno-loolapaloosa-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 208620,
-      "sha256": "d99f0a4ef842bd06246071b854ed99727cf4c469ccf41313840476204d0a55cd"
+      "bytes": 262162,
+      "sha256": "8af5396fc916db36348ca47794370e843fb0a90a16ad0e169649f0cf16043b4a"
     },
     "capodanno-2027-posters/capodanno-magazzini-generali-milano.webp": {
       "source_kind": "official_flyer",
@@ -500,50 +500,50 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 151074,
-      "sha256": "0aa1a2559bb6f8791f9189c4422a1ebf318eae1b7fb8beacd34257844294f1dc"
+      "bytes": 256212,
+      "sha256": "148ac46e05d0cfca917b5b11a20cb0eb581f0ba5981e192fad57976d16a8069c"
     },
     "capodanno-2027-posters/capodanno-mib-milano-piazza-affari.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 169464,
-      "sha256": "f640cd50dd95d54a5fb5ce057367d2ab6918d81492d5311856ccbd2f49e9ecb2"
+      "bytes": 268324,
+      "sha256": "ebb47bc6407aff015f9e9655f909d14c2efa1dc87cb8d8f683aa05589960481e"
     },
     "capodanno-2027-posters/capodanno-molto-club-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 189986,
-      "sha256": "df04409840c658b204c81ddc2e1f6b1cc136094413f4d0d68f9c39da01edb065"
+      "bytes": 240168,
+      "sha256": "d80c9702d812f2372fc990448754b6b09feaeba2ec04884d4f5b74428baae012"
     },
     "capodanno-2027-posters/capodanno-monza-brianza-noir-club-parco-di-monza.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 160968,
-      "sha256": "c094a9c06b58e7eb58af8b81025e68f6a7297bb97c6da3319002375fe919a81b"
+      "bytes": 272828,
+      "sha256": "9e21a96a83135dd2a1d589ec386690005df9ade79e11279654ab8cb008599364"
     },
     "capodanno-2027-posters/capodanno-mood-live-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 263144,
-      "sha256": "cf3dec354f3fddc01e43848fdc98e2a090932fe89ce18da380a2cf568df0cba2"
+      "bytes": 263258,
+      "sha256": "71c26c97b97b756259b9d92c4d5d9984ca89449cffc06fd0a1b9b35dc8c1d9f1"
     },
     "capodanno-2027-posters/capodanno-movie-club-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 192832,
-      "sha256": "14b255cc946720d867ee19064b366ef4b83d45b8cf1c7508364a48d6b6fbd3b2"
+      "bytes": 267562,
+      "sha256": "588e4229cd64b7c3c70c6a3e26578f440ac2ba4506129bcc3ba1dc1db174b547"
     },
     "capodanno-2027-posters/capodanno-nepentha-milano-duomo.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 145990,
-      "sha256": "24f9418442bf422329444d59f47d10170dbd0adf7216eb16ca1346c4f764896b"
+      "bytes": 274340,
+      "sha256": "7e016bd4c81e01b346a30f8379e887a7f576f16c617e26e88be109eae915af3a"
     },
     "capodanno-2027-posters/capodanno-new-york-lounge-milano.webp": {
       "source_kind": "official_flyer",
@@ -556,22 +556,22 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 163566,
-      "sha256": "6ddf858f2015620f03318e18e16ca3e59512b5e520a2d90a40d3030ec133e928"
+      "bytes": 243812,
+      "sha256": "547009240d29c54767d092903ddc580f52adf0122a937a8a9c1d06d9514d6d62"
     },
     "capodanno-2027-posters/capodanno-old-fashion-triennale.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 166222,
-      "sha256": "097d6ccb6d8c04e62dc8195ebd6986978846336777e27ab20cd16a94214c67d3"
+      "bytes": 260358,
+      "sha256": "547dd589520c09eeda7c3bf1cf6a49607dfa937c09af8676023ee7f053e4e214"
     },
     "capodanno-2027-posters/capodanno-oneway-club-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 168538,
-      "sha256": "9b3e75463b7222a135841c41bd3b32439509d76b10fc34fe3b813313264b5f04"
+      "bytes": 252664,
+      "sha256": "cee2490b227b90986d65d30410802efee6c75f726d496965a89bd83c3366529c"
     },
     "capodanno-2027-posters/capodanno-ortodosso-justme-milano.webp": {
       "source_kind": "official_flyer",
@@ -584,22 +584,22 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 182200,
-      "sha256": "6cb4c6c2ebf4fb3995f4a855d5d2c8545ff0a9fbb57007fda12f84b848684a8b"
+      "bytes": 247902,
+      "sha256": "619f1e09fd41c61e5766856bd96fed5197dcaa6e024e09ef6146346d8a2b043e"
     },
     "capodanno-2027-posters/capodanno-palace-hotel-como.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 177010,
-      "sha256": "61c8a92b916f60954040b2503473baf7e47f4f6e6c3460aee1b6cb02b6726d44"
+      "bytes": 261056,
+      "sha256": "182fac091c4cfb30315bfafd9bb07d360cd65b23968a2d70a8ea7e88e31ec0b3"
     },
     "capodanno-2027-posters/capodanno-pavia-le-rotonde-di-garlasco-oltrepo.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 228116,
-      "sha256": "b8eed2eda7d88c6a74ce869a713388421b99180d3d31e338d27ad9e9dcc26dab"
+      "bytes": 266256,
+      "sha256": "df20ed58b5451b0511eb2b3a352bfc33f6f678f829fc8850893cf7d4bef54774"
     },
     "capodanno-2027-posters/capodanno-pelledoca-milano.webp": {
       "source_kind": "official_flyer",
@@ -612,57 +612,57 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 187032,
-      "sha256": "06ecec08311a35dbac03a4af832f81dca06a95a8e7afae0b177e6c39bb647478"
+      "bytes": 256666,
+      "sha256": "41eb0bfe4c5f716304b7071e244b0afdcd1e0ea253eb0a4145cf9ea3578b26eb"
     },
     "capodanno-2027-posters/capodanno-piazza-cavour-como-fuochi-lago.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 243458,
-      "sha256": "63b4a6347491b2518fde445c5e6282ba35b78c45f66a7257784f47ff0614d7df"
+      "bytes": 266774,
+      "sha256": "2e8abd1da7f1570ed3dc27d9b561cde503f43a6b3d7ae2926d60d63f0f06e84f"
     },
     "capodanno-2027-posters/capodanno-piazza-della-loggia-brescia.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 240132,
-      "sha256": "622a5038bdef334d2f7b2c7da28b7cece1de8b2fbdced184a9d370f0072a3086"
+      "bytes": 263206,
+      "sha256": "045d9be8deb1e459f519dc8e2599e800641a55647334659b22d5246447ad407b"
     },
     "capodanno-2027-posters/capodanno-piazza-duomo-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 235340,
-      "sha256": "480b27e827645627dae2ed4b9065ca8e3455e7df75e16fc73368a826d3196384"
+      "bytes": 264396,
+      "sha256": "54c37d296a7af14b8a38a175bd3d01b37054be45feb35dbde4083e98b113c1ae"
     },
     "capodanno-2027-posters/capodanno-piazza-lecco-sondrio-lodi.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 180402,
-      "sha256": "0d855967e0979df68cb099db4e6b84685c6a4bd95a8316b37b217e180171a52d"
+      "bytes": 270904,
+      "sha256": "8fe4083bb3746af3f4d3d41e289532ba241c2b55f0875815542e43e394bd6382"
     },
     "capodanno-2027-posters/capodanno-piazza-sordello-mantova-fuochi-laghi.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 173730,
-      "sha256": "ca8b5c13669844bd1fe5b3900f3d29f3254706746c2c155622c025b2366205a9"
+      "bytes": 268526,
+      "sha256": "2303a5e95c825a2df9e3e4ceeb15e095f942ee563e29bed774e5556df8f54fb6"
     },
     "capodanno-2027-posters/capodanno-piazza-varese-pavia-cremona.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 247716,
-      "sha256": "3cc4723682d15779e975612b7ee6bf3930bc65bf6d5374224ca868e8ba9492da"
+      "bytes": 265410,
+      "sha256": "58bff7c4130ff013ecf17b7a1a1c0b6d977f33c929e45362eb59b350cd4d42f4"
     },
     "capodanno-2027-posters/capodanno-piazza-vittorio-veneto-citta-alta-bergamo.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 253008,
-      "sha256": "65ba9dda1a4adeb491c86215aa9af83bb72fde656dcd3b4062b966acd7c7dcdf"
+      "bytes": 265212,
+      "sha256": "342689e2bd5a3d93c568bdff3d6d12e1bd377568617b9f59e867ef3516aeb75d"
     },
     "capodanno-2027-posters/capodanno-pineta-milano.webp": {
       "source_kind": "official_flyer",
@@ -675,204 +675,204 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 158466,
-      "sha256": "2f765971eef0218ba91e7dca830e81c3a76ade31bdf4cf9765afdde4ed969b0b"
+      "bytes": 277766,
+      "sha256": "fbdd6e4b0409fa9a189b00f4f9b56cbe0266d5ce28bcc6f69e76ae90ad432697"
     },
     "capodanno-2027-posters/capodanno-play-club-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 216098,
-      "sha256": "bc8ad4dfc49e7766c47ef4d7f16728ca9a7bfca92e5dfdee7806b7863a795f2d"
+      "bytes": 260056,
+      "sha256": "3ec78e605f66caf9a9a0377882f8c366db3495d8af5044818c42d5f4e4d19a9d"
     },
     "capodanno-2027-posters/capodanno-q-club-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 157844,
-      "sha256": "60342badae59b90cdef1371228798cd77aad8a7894fcd83f7e0ec591eaa352ae"
+      "bytes": 272208,
+      "sha256": "5c5cfca04ec27c68f887b63f894f5aa530027a2dffa3093f89d71f10f88578f5"
     },
     "capodanno-2027-posters/capodanno-qc-terme-bormio-bagni-nuovi-vecchi.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 214674,
-      "sha256": "e8ee130493890723a9b5ff4bd6148a634b83df4e870c01dd93e682903943006c"
+      "bytes": 260662,
+      "sha256": "1c339b5cb80479aa72005ab9474eb7e253910d360c6d27a779e5687716119e39"
     },
     "capodanno-2027-posters/capodanno-qc-terme-milano-porta-romana.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 258734,
-      "sha256": "1fb74ce22e69755d6c017362de68ca5569660b134c2f8b694d15ce91910aa124"
+      "bytes": 267984,
+      "sha256": "e59a34eb00261201965127474974050817dd2f5335bc58930e8467e762229a04"
     },
     "capodanno-2027-posters/capodanno-qc-terme-san-pellegrino.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 183576,
-      "sha256": "19f2df62d4bfff98794ec10f3f6ebacb1b968a4e9c27eeaebcf9c8cf961514be"
+      "bytes": 270960,
+      "sha256": "063adbb8432c69e520c3a61535ae56fdd5bfae09477b8aa4db166e5f6edc5f23"
     },
     "capodanno-2027-posters/capodanno-radio-rooftop-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 169018,
-      "sha256": "17233482982862664b5b25c40ce91aa94a6ee230cf73d0709184e4fe1227bcc5"
+      "bytes": 254068,
+      "sha256": "37c2e6ef8b95f0f9762adca9b35512c53a9f944131d4784d466309d710b5d95d"
     },
     "capodanno-2027-posters/capodanno-repvblic-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 195182,
-      "sha256": "88ac0c7ece7b059cabfef4c3622010208941c3d534bb7e92cb003ea78f75af54"
+      "bytes": 247878,
+      "sha256": "98ae57129a2b8ebac72aae91103e93c949cdf31f891e898be28e8080aa701471"
     },
     "capodanno-2027-posters/capodanno-rocket-club-milano-navigli.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 198686,
-      "sha256": "f2948eccf00cf33357b35381a3253a2867cc77bd9e310b6b216a6ee87b24e3c5"
+      "bytes": 272340,
+      "sha256": "9558140753fcca576eae8ac1d6afd619082c06301205fb5b29d03b3c6fa2715c"
     },
     "capodanno-2027-posters/capodanno-sali-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 123206,
-      "sha256": "2bf987d3ac36e838b75d9e95ad22df8a3b4163f73d550c78f9e4c6b2b21066df"
+      "bytes": 266422,
+      "sha256": "fa8a408b7f1ba5d82a468adf39c5d1485c9b3e1ea98f5aea96963b5e76f73a77"
     },
     "capodanno-2027-posters/capodanno-santeria-toscana-31.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 205326,
-      "sha256": "ea4ac36c666d68cc465d9768cfc3ca14ae8ad6a0d8648df86f02dcb8b6cbc5f6"
+      "bytes": 271368,
+      "sha256": "1f8f8d2c3b4123eafc0350c857e5ff185cc564971303f51ea687ede78d36fa22"
     },
     "capodanno-2027-posters/capodanno-sio-cafe-milano-bicocca.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 212194,
-      "sha256": "a495450ae444b78a9bf60be9d1d34b9c46d1adeca785d05cd2cffb55da8f6c49"
+      "bytes": 261008,
+      "sha256": "cec5988c04ba7d66038c85864117181f51621578582bd3068078a69b7ecc271e"
     },
     "capodanno-2027-posters/capodanno-speakeasy-cocktail-bar-milano-1930-backdoor43-camparino.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 112464,
-      "sha256": "28d3218503108f014f569c47a451cacad59eae645dcdaab4bda376413a0775cd"
+      "bytes": 247126,
+      "sha256": "259127826c610dde88514aad58443e25cbcc63b82e18ed4198c6b604df36f734"
     },
     "capodanno-2027-posters/capodanno-spirit-de-milan.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 202166,
-      "sha256": "82178d221f30568d08b440519466b4d6a683591674de70ecbcae5eaffe98ce24"
+      "bytes": 245680,
+      "sha256": "8cb7492117d6e323fd353125eb819e4e19e5524adad577d96e624592712c02ab"
     },
     "capodanno-2027-posters/capodanno-stk-milan.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 124154,
-      "sha256": "21e00388db91bfe7e55454d265c580d3193fffc8608894a7c36e215f88a93926"
+      "bytes": 253402,
+      "sha256": "7163ea8a34eafd828c8f95dc183ff215acf1f555bbeb0264b2e255323bd2749f"
     },
     "capodanno-2027-posters/capodanno-superclub-milano-tortona.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 158460,
-      "sha256": "59bb99546e15562be339c2f41e2b697602496a87fc66ca0a889880cf3e912f56"
+      "bytes": 262408,
+      "sha256": "1952e63fc58f899f9fc2744f577ef0110a803556222c1f41c1e3903060363749"
     },
     "capodanno-2027-posters/capodanno-tambourine-seregno-brianza.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 219758,
-      "sha256": "b5e9f0d29a24a0657a8b938a167efa3c102122653e26ff850fc2ce761b9d3022"
+      "bytes": 235068,
+      "sha256": "39d70bd647f2df603113cd9601aeeeef5e7041ad1d747c7a23c6a7189766e64f"
     },
     "capodanno-2027-posters/capodanno-teatro-alla-scala-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 275034,
-      "sha256": "25b2a63266998c7a37389f002b8b83fb45f2bc16bd9935fe456d4875aae81b3b"
+      "bytes": 244320,
+      "sha256": "91480a580459ee3737df0ebeb65ac95ca430b89277514de06d5b06474baa22a9"
     },
     "capodanno-2027-posters/capodanno-teatro-manzoni-carcano-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 248166,
-      "sha256": "ab004be71abfd23cc9cc0c74d1d1ea37cac717f93d8a4a6b9d04c9d8f748b559"
+      "bytes": 272796,
+      "sha256": "c616a9b5b1ed1e2ef9e4e80f6baf570561e9e2d1993876e7c2fb29d6a2973599"
     },
     "capodanno-2027-posters/capodanno-teatro-manzoni-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 220960,
-      "sha256": "831b63dd44c7df19303dcadea08673fdf3e59b2506943e515cc8a9e7e1a4c87e"
+      "bytes": 268280,
+      "sha256": "639db05ebd75a5e1233178837b5ea342dcad33c86ddc057d0ab439cc2a045768"
     },
     "capodanno-2027-posters/capodanno-tempio-del-futuro-perduto.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 188852,
-      "sha256": "32e15e8c6ca2867e60b57bfc9ea21b9711e47e982301de3154f4c057d851b5b7"
+      "bytes": 258280,
+      "sha256": "d757d2bc0ede352dded06b1bcd503cddb9d2e0a9e457ca95ccb0ac4ba8055f6a"
     },
     "capodanno-2027-posters/capodanno-terme-di-sirmione-aquaria-lago-di-garda.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 117266,
-      "sha256": "0fe470f5f9e93442df0501021827e33ff753591b80f9d8ebc3b18b24f45849a8"
+      "bytes": 246930,
+      "sha256": "008c10b72eedc54de8f2c38146c51591c27c05f03c9c9c29e6db848ea09d5927"
     },
     "capodanno-2027-posters/capodanno-terrazza-duomo-21.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 237538,
-      "sha256": "dceed2fbe8bc73f7e00b43d79d42b00a75b622cf5520955c7c64bdc4951f9d85"
+      "bytes": 261212,
+      "sha256": "cf83e2f6c8f3f597c108405d0925926fd98dfea3e043c3be867f80090670a62b"
     },
     "capodanno-2027-posters/capodanno-terrazza-gallia-excelsior-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 221036,
-      "sha256": "abcd194a5768f4cfe1e0ae12d3870714716f42fb99d9ab9394ce2e2d8f5a95f8"
+      "bytes": 268278,
+      "sha256": "ad0177e3e6135007bd0d26ca19e19a5e5e0e7724c464258e2ef4744a61a8ff57"
     },
     "capodanno-2027-posters/capodanno-the-beach-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 218868,
-      "sha256": "ccf38d2d783115d017988380d62a9c2818f8614ded212d3e7283e57a971bb092"
+      "bytes": 252526,
+      "sha256": "a8251f05d5714788be4820a9d9cc12daa2f9e27a808f145c4e231faa4249b861"
     },
     "capodanno-2027-posters/capodanno-the-club-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 277024,
-      "sha256": "28d92cda40450636c775c47942bfe63e07ba459e95fa2947b21d134200e37032"
+      "bytes": 263018,
+      "sha256": "db5cf2a7c5f413b2592601bd2e27fcc6de2099d42a24acbf3108f2486434d880"
     },
     "capodanno-2027-posters/capodanno-the-dome-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 217780,
-      "sha256": "926b7f8b426071e9381bfdb6164546a8249b65682d448023ebf75e87c3f06e78"
+      "bytes": 274662,
+      "sha256": "f6a6c14a669beb70024e13d3fd5b8d0a1ec8cd5c47fe9add79fb3df58102c228"
     },
     "capodanno-2027-posters/capodanno-the-sanctuary-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 239160,
-      "sha256": "7986fbea834ea5ec03290d0a107658d1041af5cb847b45263b6c06662652092a"
+      "bytes": 255574,
+      "sha256": "3744f1e8e3c063d8d989b9eeefa6bb7bb48ecf72727a8b5bda7f81242d864700"
     },
     "capodanno-2027-posters/capodanno-tocqueville-13-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 135104,
-      "sha256": "ca5b18138695168b9d684ac3a76728cc5646b8d5e73e1c9b678e8afadbd9de8c"
+      "bytes": 239682,
+      "sha256": "46d5ec4ce279fb81e3a9f6ba8038e02bfc2f0a04fc88adcffa28053bf57f8265"
     },
     "capodanno-2027-posters/capodanno-tom-the-ordinary-market-milano.webp": {
       "source_kind": "official_flyer",
@@ -885,29 +885,29 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 211650,
-      "sha256": "3b1caa091362cf8eeb097434473af7b43825c4b4aed7812bbbdd1da59630e85a"
+      "bytes": 257356,
+      "sha256": "f654d57b0845efa560343a049a271b8ae481c45e4b69154064861e0af09e60ae"
     },
     "capodanno-2027-posters/capodanno-tunnel-club-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 229890,
-      "sha256": "904e61782f326032dd51ba128f565d3a3209544ec89246dce6d0bb730ac0ebb3"
+      "bytes": 247252,
+      "sha256": "4708a70e9a2d20127a170709d508f00a5e5591cba7c8bfa7ffec493982d6132a"
     },
     "capodanno-2027-posters/capodanno-varese-shed-club-palace-grand-hotel.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 239362,
-      "sha256": "e055042f4f3d37717dffda5b85d73aca7336909324d84cdb06ddcffad685d1c3"
+      "bytes": 257412,
+      "sha256": "822ed9c25a58c44c1aff236b213815e1023f7bd67dc2672ff2b4a89721e1062e"
     },
     "capodanno-2027-posters/capodanno-volt-club-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 124678,
-      "sha256": "722f275ae192d531223b595f59739c06ca0094941144a50c64dc0e170dc881e2"
+      "bytes": 273892,
+      "sha256": "0bf4cb2a2727ae2b20bc5b5942860ede00a2a188312f6f4a991ba73178daa407"
     },
     "capodanno-2027-posters/capodanno-voya-rooftop-milano.webp": {
       "source_kind": "official_flyer",
@@ -927,29 +927,29 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 141790,
-      "sha256": "5c50b0596dbe1d981e6ba6782e4c6d46c1487c9a9926ad34a03e6dafb42de554"
+      "bytes": 265222,
+      "sha256": "1bc33118b783099079cf55c76dc4ba0395dd4596a07a250813c0d5cd3edf76f4"
     },
     "capodanno-2027-posters/capodanno-zoo-club-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 192474,
-      "sha256": "430e4ae709c9c47856fe4d5184bcb337dd13d16985b8920bb5f8e45c48ebe809"
+      "bytes": 254098,
+      "sha256": "6892de5bf2187f0479edbce7c4d0ed3368bf4a5192a7ff0f6d1538c20a97c324"
     },
     "flagship-weekly/55milano-weekly.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 283238,
-      "sha256": "113e0e73f9a8704d8bb47d9b6319843acca315dfb3935173de0e7e4ea32c572b"
+      "bytes": 257906,
+      "sha256": "8ef0b07dabb17df9baec96e3fb86045872721fd9631318926367e3bc92dd81a9"
     },
     "flagship-weekly/aria-summer-season.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 254870,
-      "sha256": "6174dbecc306c53ef0e676abe9e1dfbabd22e4ad567e5cbe429bfebb791b94ba"
+      "bytes": 274016,
+      "sha256": "dd9419ef80b219a21306a405a5aa17f3671815b14b8cd8476c222904ef539d9e"
     },
     "flagship-weekly/justme-weekly.webp": {
       "source_kind": "official_flyer",
@@ -969,15 +969,15 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 137358,
-      "sha256": "5af47da4ff36982afa5eec5e9d965ff8418acb19b7127bf53fdcd71d9b3bcc86"
+      "bytes": 237536,
+      "sha256": "df5dea418d0b5e38e1f6affb53f28706202a752c22569ef6266f2b024805955e"
     },
     "flagship-weekly/voya-weekly.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 157056,
-      "sha256": "01e0bcd9e13d6b02f5362ff2e16953e27a43636d02934d203b884f8ea7f812dd"
+      "bytes": 272770,
+      "sha256": "fd0b1be76cbbc3fda9424e8c2ba7f2050d4b2afd2e134d06388326e726108d5f"
     },
     "october-2026/236326-c7288fd1c403.webp": {
       "source_kind": "official_flyer",
@@ -1046,15 +1046,15 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 275732,
-      "sha256": "79eca0f3ab1f9a3069cbddb465551103e17788977105a94e91be4a837c5f584a"
+      "bytes": 274016,
+      "sha256": "dd9419ef80b219a21306a405a5aa17f3671815b14b8cd8476c222904ef539d9e"
     },
     "october-2026/242617-59f08f112437.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 255022,
-      "sha256": "a8a9ced9915fe4ba0950421202137cad9342b63adabb52b701478dd82ef994d6"
+      "bytes": 274016,
+      "sha256": "dd9419ef80b219a21306a405a5aa17f3671815b14b8cd8476c222904ef539d9e"
     },
     "october-2026/243815-e33432d48dd4.webp": {
       "source_kind": "official_flyer",
@@ -1196,6 +1196,13 @@
       "bytes": 271568,
       "sha256": "8843979cb3146a9a42a7b80aaa89797c5a29ea2f47e1707a7239352bea1f615a"
     },
+    "october-2026/249169-gentlemen-show-25nov.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 87416,
+      "sha256": "56dfdfb26571265cc4f21e755f2dc3917c458c028b1bee1d8d6d48bfdbdda5d5"
+    },
     "october-2026/249182-aa34ab79100b.webp": {
       "source_kind": "official_flyer",
       "width": 1080,
@@ -1223,6 +1230,13 @@
       "height": 1350,
       "bytes": 175968,
       "sha256": "fa43e40c428fcb874e63151908c60ec2243ee2aaf7c5d76cf9835b1bacb198aa"
+    },
+    "october-2026/249197-carlo-piacente-28nov.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 238840,
+      "sha256": "ff5cf94d77e359d326fb5d5a33d3f0af2592d956ad0bd58683b76181648be2c0"
     },
     "october-2026/249199-9373e4ee381b.webp": {
       "source_kind": "official_flyer",
@@ -1385,12 +1399,19 @@
       "bytes": 135414,
       "sha256": "930bfdc5f2669aceed86029afcf7d9195cbe6a4043132d2eafbecc242b0fe372"
     },
+    "october-2026/incantami-signorvino-25nov.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 142324,
+      "sha256": "3497965d74c0bd6495b2f6e2899143d1902b5e80c0164671f340e149ba1dbbcf"
+    },
     "october-2026/mib-atlanta-20261206.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 166214,
-      "sha256": "c299a34bcd177444df9c0d806851cb15eb0e33db26268160e0f8b2a38ccb8b24"
+      "bytes": 227504,
+      "sha256": "83aeb6aa566bc45ad14662bc043a9642f569692da3f5f4640c8fb75b088e6729"
     },
     "october-2026/mib-justice-20261126.webp": {
       "source_kind": "official_flyer",
@@ -1406,12 +1427,26 @@
       "bytes": 269272,
       "sha256": "cea4d30f07885fd06c80986991af941653df3aab80e6545e3fc50556f3082c03"
     },
+    "october-2026/spaccanapoli-farinami-garden-27nov.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 204438,
+      "sha256": "21811f5bcd7fe54cc9ec1a343009324df802d0af4c01f5b41f71fe60db99aef9"
+    },
     "october-2026/theclub-santambrogio-20261207.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 187112,
-      "sha256": "62ae2e62dae6f5604d1342136ff7fa9afcaae5331ec868cbf9df92cc282ce045"
+      "bytes": 274962,
+      "sha256": "a577c62b49a7d237739f5cecc2f43fa8e9901c63126bb99cdb1c3f4cf1c4cce9"
+    },
+    "october-2026/weco-fabbrica-del-vapore-25nov.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 128596,
+      "sha256": "84207ce08509ff7a05dc347b083511edd88361fc6c024a12fad701ba2f0d7c16"
     },
     "partenopea-2026/cena-spettacolo-partenopea-justme-milano-2026.webp": {
       "source_kind": "official_flyer",
@@ -1419,6 +1454,13 @@
       "height": 1350,
       "bytes": 137124,
       "sha256": "7006f733a060462f15fbb18bbca9bccadd7da27482d5b1982deb2c362d14427e"
+    },
+    "partenopea-2026/justme-friday-27-nov-luciani.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 205948,
+      "sha256": "2f7b18eab8b1e78f2b4cc83e05181c290c42e1a76620e6b70df6d2f584ea5998"
     },
     "partenopea-2026/justme-partenopea-2026-menu-dinner-show-70.webp": {
       "source_kind": "official_flyer",
@@ -1459,64 +1501,78 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 191466,
-      "sha256": "8ce05fc7ba6e23e3331367409cd9f0e7db1b10b4a83a7b77ba0b7ddaeff4c27b"
+      "bytes": 255790,
+      "sha256": "5d0371cc4ad915938519ecced8218c9d2b3083ced6018b0361f3d1339f998fb8"
     },
     "weekly-posters/55milano-saturday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 204066,
-      "sha256": "b903aa0b28d9a206b35fa5e628ff7139508974097adb3948a89b03746311376e"
+      "bytes": 257906,
+      "sha256": "8ef0b07dabb17df9baec96e3fb86045872721fd9631318926367e3bc92dd81a9"
     },
     "weekly-posters/55milano-sunday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 192198,
-      "sha256": "deea2da84ff179df7ce74f5ad27d54549a55325caa30b42402e9be9376f41858"
+      "bytes": 263746,
+      "sha256": "65a01969af6e3e9668d650627891497a4827a2e878afc17e2af6d639ee1fdf2e"
     },
     "weekly-posters/55milano-thursday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 164708,
-      "sha256": "9b4c12dc4aab05462799a4f6b7a78d6defebb9669ba68738806162957a13e3f1"
+      "bytes": 234130,
+      "sha256": "0a6d8143e707dac883eba100e683fa5c091c517a83ada4cb15040ddd5247bc97"
     },
     "weekly-posters/55milano-tuesday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 144876,
-      "sha256": "684ba9b030dd5d9228ff0e230dbf4298d34f30c0bbe7ab354237808bdce79a22"
+      "bytes": 189914,
+      "sha256": "be1103b73d7a05674134f6b214742e57700a1b909bf5391104b2df3d60a622a8"
     },
     "weekly-posters/55milano-wednesday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 242378,
-      "sha256": "ff0e0279c819e15fe63e4172b803498d462faeff12c88dcb73360daa82319188"
+      "bytes": 267236,
+      "sha256": "389b16e65eb50563588b8acd32324d0d366830d917e8cc7d449669a4b46a8d51"
     },
     "weekly-posters/aria-thursday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 252216,
-      "sha256": "a3326b23baec2609b933726544b00430f4f4af25ad52731167b997b6e8853ef8"
+      "bytes": 274016,
+      "sha256": "dd9419ef80b219a21306a405a5aa17f3671815b14b8cd8476c222904ef539d9e"
+    },
+    "weekly-posters/justme-wednesday-club-campanini.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 271572,
+      "sha256": "2497f57b382d8e577ab13cd774b2d74e0a9157853c78b5018487c3c8a2f4b504"
+    },
+    "weekly-posters/justme-wednesday-gentlemen-show.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 87416,
+      "sha256": "56dfdfb26571265cc4f21e755f2dc3917c458c028b1bee1d8d6d48bfdbdda5d5"
     },
     "weekly-posters/mib-friday-billions.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 170170,
-      "sha256": "3781a615e0169742016bd350e5db8f7e770e081260ab8a1180324e59a6693b6a"
+      "bytes": 264246,
+      "sha256": "543394e941632e27f47ae4bc8da2d19f6301f396435dbf4aace301c0e5591be0"
     },
     "weekly-posters/mib-saturday-loveaffair.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 190758,
-      "sha256": "1c74a832e90f93338473a17952232510905cb98d0fc8192330588dc39434a992"
+      "bytes": 213840,
+      "sha256": "726376def8bd2dd32af0530d87defb810bd1a15254c748d5b9890989745b0004"
     },
     "weekly-posters/mib-thursday-justice.webp": {
       "source_kind": "official_flyer",
@@ -1529,22 +1585,22 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 191900,
-      "sha256": "4141f1ff8f81bae1f9f2ee880c782abf314269fec84652400aef703456827c3f"
+      "bytes": 252174,
+      "sha256": "905a70e1aae9677f5e75f604116fbdc180fbacfed6f339416cf2e899a55531ab"
     },
     "weekly-posters/philipps-dinnershow.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 251822,
-      "sha256": "28f6ea064eb4eaf5530af775a925cb87d920caad722e4c96c03278da12d34667"
+      "bytes": 263310,
+      "sha256": "87a886b8bc07edc8f6f553e954788443399364776d4525014dd564fe2b091ffb"
     },
     "weekly-posters/philipps-friday-clubforlife.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 143376,
-      "sha256": "4b9e7b5262fd142befd9bc5cbe017a995fc23def01c3f258defcc9229c4cd1bb"
+      "bytes": 271770,
+      "sha256": "0b79f4f17c702cb17c437b74f99a1664f998a808f0b0b12b6f930ada4a4b7fa0"
     },
     "weekly-posters/philipps-saturday-konekt.webp": {
       "source_kind": "official_flyer",
@@ -1571,43 +1627,43 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 227390,
-      "sha256": "b573983ebf415c4b1446595354db4467228815af43c1d7226918fa8510071222"
+      "bytes": 276498,
+      "sha256": "9e085e195b7e8e8548967dea6d7692d87bbc93503404bc842a24a61b91cb19d9"
     },
     "weekly-posters/philipps-wednesday-tussy.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 156788,
-      "sha256": "5da4a0f6d521b6acb34cd8b8e93559e5df0e0185997df6007eceff0b14b054e4"
+      "bytes": 246764,
+      "sha256": "57dbbbb517e66259f56e2e760fdf08908a74e9e9a3a4dee2d610c06371af7880"
     },
     "weekly-posters/playclub-friday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 164948,
-      "sha256": "37bcffcdcd65314d42d6b4a631f642370c761f55c2672b17d1ce5ace560b7282"
+      "bytes": 246770,
+      "sha256": "788fe5ff70b118f0175ac08a23e1dbb521e82833b14f69eb04be36a1a541beb2"
     },
     "weekly-posters/playclub-saturday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 128308,
-      "sha256": "5679700521c14d3538a849470584e8a9710ac1e4d2dba0968907b9d8cee32b6a"
+      "bytes": 271966,
+      "sha256": "f92a13c3d5dfbd4a5eca7dd61814bb55b776480903c587ce0292cf3e1f901595"
     },
     "weekly-posters/playclub-sunday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 136028,
-      "sha256": "28d733f0f588e13729b48b9d246a88a927726b440a3dd60dc2da378f841e0ffc"
+      "bytes": 255886,
+      "sha256": "2cd0f8a05f0027dd7837679e55863db9b50ce6a6c2c86e9518501ede4231ba9a"
     },
     "weekly-posters/playclub-thursday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 150018,
-      "sha256": "21db2cb9a7e057404b0d3ea0b72e381eca962556ba952f1c13b6a59fc052dda7"
+      "bytes": 215706,
+      "sha256": "1f89c4934ae0323c2810e735c40c9ce9c087aa6c38c57170f1524aba4cdbb59c"
     },
     "weekly-posters/playclub-tuesday.webp": {
       "source_kind": "official_flyer",
@@ -1620,8 +1676,8 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 126622,
-      "sha256": "3d9269b0f0a0119aa0387485a5bfa7f617d2fb3bc6a148c1a46781412be19d98"
+      "bytes": 265342,
+      "sha256": "288b502be85978de91d2a180c5e7d935f66f282e82745a4d9a73ec8da9589249"
     },
     "weekly-posters/repvblic-monday.webp": {
       "source_kind": "official_flyer",
@@ -1634,8 +1690,8 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 157966,
-      "sha256": "ab26261e85b4cef320c214f6ecf97ee9ded3afccecdf94bfc5ffb75d580ad720"
+      "bytes": 237536,
+      "sha256": "df5dea418d0b5e38e1f6affb53f28706202a752c22569ef6266f2b024805955e"
     },
     "weekly-posters/repvblic-sunday.webp": {
       "source_kind": "official_flyer",
@@ -1662,162 +1718,106 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 138418,
-      "sha256": "8ce4198ffababefe7389cd9169987bb55b51bfeb5b75787eda6fb555ada29676"
+      "bytes": 144164,
+      "sha256": "d10acca47134b5ce0f74dd53585e7aeb5cca6af88c70d4336e293b3005fbf55a"
     },
     "weekly-posters/terrazza21-friday-skyline.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 230136,
-      "sha256": "d68d89f6f89ba91fd5cad1e9dc4ec67f45bd664f41de0cefd5416157a71db7fd"
+      "bytes": 222414,
+      "sha256": "39a8d8a8df2b0c8229a824418bd031c21d6bcb417e5231b7a12e103f78d96136"
     },
     "weekly-posters/terrazza21-saturday-duomo.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 202834,
-      "sha256": "5476c60f3dd15ea09da74d55fdebb5686f15ee0fa40f1688d91a76de49ab3a44"
+      "bytes": 256940,
+      "sha256": "889c5b44bff4586986b7e0d9a3ad423378dbbbeb4069e7a1779e27a6f0c14067"
     },
     "weekly-posters/terrazza21-thursday-aperitivo.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 225028,
-      "sha256": "b40b398d6219fb7c6d11b984c7fc051d9ae86995bbaa89991a940d2e5ab877d9"
+      "bytes": 247726,
+      "sha256": "7c2ea801f6f5744d2037a37d083e80cc8ae22d3adc24123f507b20db01740416"
     },
     "weekly-posters/theclub-friday-firstclass.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 172156,
-      "sha256": "63985471234ca3e89e2558bbf03b796624690230638f82bbed5f7e34496e438a"
+      "bytes": 255592,
+      "sha256": "e206878119445b4ca730d5afcb532b61aabba4dd8bf1930232e5aa30b618d7b2"
     },
     "weekly-posters/theclub-saturday-girlsrepublic.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 143350,
-      "sha256": "b9770119ba1568d9b90c96a5e6a4d678165d6315701435c028a2762b5477bfd9"
+      "bytes": 270534,
+      "sha256": "8a612ea159dc027b1c4c089d301342d24179794586bcda2904923d97d411a1bd"
     },
     "weekly-posters/theclub-sunday-superbe.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 169056,
-      "sha256": "2bb4ead764a8a4ab26a576854f9467bfc72eb84c70edc7f72f4a51ff1aa83716"
+      "bytes": 265886,
+      "sha256": "ee06c7cbc048f2537478f2a30026ff9bbf261e98135ac92ce7efccd97294cbe2"
     },
     "weekly-posters/theclub-thursday-atlanta.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 148646,
-      "sha256": "6fa9e58f476a78469ad486efcd201b8c457392bdcf2f433be1e3656e424b3033"
+      "bytes": 250568,
+      "sha256": "29cb6fef86e7b6a015a27b77165db2aa9faebb608f7e29ef78142c0b899f6c76"
     },
     "weekly-posters/theclub-wednesday-onetwo.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 172888,
-      "sha256": "f4ebcbcca8ab6cce1a67bf4652f4962e004db01066c351098885bb994004b2a9"
+      "bytes": 244430,
+      "sha256": "c097c6d11d4b69222bf6831aef1180859ba09d5ae13cb5747e39cbec63305238"
     },
     "weekly-posters/voya-friday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 185002,
-      "sha256": "8d26796d01af03cd9955225bb8e8ae74e372d26525e38d830dc3503a8045fc58"
+      "bytes": 209094,
+      "sha256": "9676f91b2311d22dafe9a59e9580540f70bb7a3cc42c1edff3245dcd7ed2d482"
     },
     "weekly-posters/voya-saturday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 144588,
-      "sha256": "21ef8e3ff02a51ddf444430f052a4d2139c783c471355bf35b28ae6d94595182"
+      "bytes": 272770,
+      "sha256": "fd0b1be76cbbc3fda9424e8c2ba7f2050d4b2afd2e134d06388326e726108d5f"
     },
     "weekly-posters/voya-sunday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 142560,
-      "sha256": "0e03d95072e3f7d0f4bd11e143a85594fb44ee7ce25d5d9d328378315a94a014"
+      "bytes": 203406,
+      "sha256": "2926dca50d12771dfcab49aff5916d4868143ced7be6811c10f8481f1542ddd5"
     },
     "weekly-posters/voya-thursday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 157892,
-      "sha256": "fa07ecc8d7df14544e4867583eae7de23047a80902091eb90c08a4cd965fa289"
+      "bytes": 211486,
+      "sha256": "ed9286bc87346f0213f2be0f8b023c0653c4454716634b203846501c39b6bd1b"
     },
     "weekly-posters/voya-tuesday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 137964,
-      "sha256": "5f83641405ea3d008bf3b154432d335e7510499c431e53bda125da435b49999b"
+      "bytes": 155008,
+      "sha256": "f88285b670330a866012bf50341e4ab073541e1396ac5d4b71710ca91ee9f6e1"
     },
     "weekly-posters/voya-wednesday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 128570,
-      "sha256": "8813d67dfd5f294dca15f0cfaa46004a93ce8d116f907b05cea8925b67a2f384"
-    },
-    "october-2026/249169-gentlemen-show-25nov.webp": {
-      "source_kind": "official_flyer",
-      "width": 1080,
-      "height": 1350,
-      "bytes": 87416,
-      "sha256": "56dfdfb26571265cc4f21e755f2dc3917c458c028b1bee1d8d6d48bfdbdda5d5"
-    },
-    "october-2026/249197-carlo-piacente-28nov.webp": {
-      "source_kind": "official_flyer",
-      "width": 1080,
-      "height": 1350,
-      "bytes": 238840,
-      "sha256": "ff5cf94d77e359d326fb5d5a33d3f0af2592d956ad0bd58683b76181648be2c0"
-    },
-    "october-2026/incantami-signorvino-25nov.webp": {
-      "source_kind": "official_flyer",
-      "width": 1080,
-      "height": 1350,
-      "bytes": 142324,
-      "sha256": "3497965d74c0bd6495b2f6e2899143d1902b5e80c0164671f340e149ba1dbbcf"
-    },
-    "october-2026/spaccanapoli-farinami-garden-27nov.webp": {
-      "source_kind": "official_flyer",
-      "width": 1080,
-      "height": 1350,
-      "bytes": 204438,
-      "sha256": "21811f5bcd7fe54cc9ec1a343009324df802d0af4c01f5b41f71fe60db99aef9"
-    },
-    "october-2026/weco-fabbrica-del-vapore-25nov.webp": {
-      "source_kind": "official_flyer",
-      "width": 1080,
-      "height": 1350,
-      "bytes": 128596,
-      "sha256": "84207ce08509ff7a05dc347b083511edd88361fc6c024a12fad701ba2f0d7c16"
-    },
-    "partenopea-2026/justme-friday-27-nov-luciani.webp": {
-      "source_kind": "official_flyer",
-      "width": 1080,
-      "height": 1350,
-      "bytes": 205948,
-      "sha256": "2f7b18eab8b1e78f2b4cc83e05181c290c42e1a76620e6b70df6d2f584ea5998"
-    },
-    "weekly-posters/justme-wednesday-gentlemen-show.webp": {
-      "source_kind": "official_flyer",
-      "width": 1080,
-      "height": 1350,
-      "bytes": 87416,
-      "sha256": "56dfdfb26571265cc4f21e755f2dc3917c458c028b1bee1d8d6d48bfdbdda5d5"
-    },
-    "weekly-posters/justme-wednesday-club-campanini.webp": {
-      "source_kind": "official_flyer",
-      "width": 1080,
-      "height": 1350,
-      "bytes": 271572,
-      "sha256": "2497f57b382d8e577ab13cd774b2d74e0a9157853c78b5018487c3c8a2f4b504"
+      "bytes": 171900,
+      "sha256": "98f0b29b880a9ec40b168ebff9d73327c586f9170403e50a6ea920f7b70c495b"
     }
   }
 }
