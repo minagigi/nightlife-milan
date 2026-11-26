@@ -1652,7 +1652,7 @@ export default async function ClubPage({ params }: Props) {
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const currentVenueSlug = getLocalizedVenueSlug35(venue.id, (locale as LocaleCode) || 'en');
   const clubsDir = getLocalizedDir35('clubs', locale);
-  if (slug !== currentVenueSlug) {
+  if (slug !== venue.slugs.en && slug !== currentVenueSlug) {
     permanentRedirect(`${localePrefix(locale)}/${clubsDir}/${currentVenueSlug}`);
   }
   const canonicalClubUrl = `${baseUrl}${localePrefix(locale)}/${clubsDir}/${currentVenueSlug}`;

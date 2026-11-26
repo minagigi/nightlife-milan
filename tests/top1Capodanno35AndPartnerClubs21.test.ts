@@ -215,6 +215,15 @@ test('Deliverable B: all 21 Official Partner Venues rank-ready on bare brand nam
       );
       assert.equal(res.status, 200, `${partner.id} (${loc}) ${clubPath} must return 200 OK`);
       assert.equal(res.headers.get('location'), null);
+      if (loc !== 'en') {
+        const rewritten = res.headers.get('x-middleware-rewrite');
+        assert.ok(rewritten, `${partner.id} (${loc}) expected x-middleware-rewrite`);
+        assert.equal(
+          new URL(rewritten).pathname,
+          `/${loc}/clubs/${venue.slugs.en}`,
+          `${partner.id} (${loc}) internal rewrite must pass venue.slugs.en without ClubPage redirect loop`,
+        );
+      }
     }
   }
 
