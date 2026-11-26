@@ -527,7 +527,7 @@ export default async function SpecialEventsPage({ params }: Props) {
             {tr(locale, 'Voya Christmas Menu · €100', 'Pranzo di Natale Voya · €100')}
           </Link>
           <Link
-            href={`${lp}/new-years-eve`}
+            href={`${lp}/events/capodanno-2027`}
             className="px-6 py-3 rounded-full border border-champagne/40 text-champagne text-sm font-medium tracking-wider hover:bg-champagne hover:text-black transition-colors"
           >
             {tr(locale, 'New Years Eve 2027 Guide', 'Guida Capodanno Milano 2027')}

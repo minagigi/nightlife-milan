@@ -1557,16 +1557,23 @@ export function getCapodannoCategoryPageDef(slugOrMode: string): CapodannoCatego
 const CLUB_SLUG_TO_CAPODANNO_SLUG: Record<string, string> = {
   'justme-milano': 'capodanno-justme-milano-torre-branca',
   'just-me-milano': 'capodanno-justme-milano-torre-branca',
+  'justme-garda-lake': 'capodanno-justme-garda-lake',
+  'justme-garda': 'capodanno-justme-garda-lake',
+  'just-me-garda': 'capodanno-justme-garda-lake',
+  'just-me-garda-lake': 'capodanno-justme-garda-lake',
   'armani-prive': 'capodanno-armani-prive-milano',
   'armani-prive-milano': 'capodanno-armani-prive-milano',
   'pineta-milano': 'capodanno-pineta-milano',
+  'pineta-club-milano': 'capodanno-pineta-milano',
   'aria-club-milano': 'capodanno-aria-club-milano',
   'aria-milano': 'capodanno-aria-club-milano',
   'hollywood-milano': 'capodanno-hollywood-milano',
+  'hollywood-club-milano': 'capodanno-hollywood-milano',
   'hollywood-rythmoteque': 'capodanno-hollywood-milano',
   'the-club-milano': 'capodanno-the-club-milano',
   'the-club': 'capodanno-the-club-milano',
   'tocqueville-13': 'capodanno-tocqueville-13-milano',
+  'tocqueville-13-milano': 'capodanno-tocqueville-13-milano',
   'tocqueville-milano': 'capodanno-tocqueville-13-milano',
   'volt-club': 'capodanno-volt-club-milano',
   'volt-club-milano': 'capodanno-volt-club-milano',
@@ -1605,8 +1612,10 @@ const CLUB_SLUG_TO_CAPODANNO_SLUG: Record<string, string> = {
   'repvblic-milano': 'capodanno-repvblic-milano',
   'repvblic': 'capodanno-repvblic-milano',
   'bischeri-milano': 'capodanno-bischeri-milano',
+  'i-bischeri-milano': 'capodanno-bischeri-milano',
   'bischeri': 'capodanno-bischeri-milano',
   'tom-milano': 'capodanno-tom-the-ordinary-market-milano',
+  'tom-the-ordinary-market-milano': 'capodanno-tom-the-ordinary-market-milano',
   'the-ordinary-market': 'capodanno-tom-the-ordinary-market-milano',
   'the-ordinary-market-milano': 'capodanno-tom-the-ordinary-market-milano',
   'il-gattopardo': 'capodanno-il-gattopardo-milano',
@@ -1625,6 +1634,7 @@ const CLUB_SLUG_TO_CAPODANNO_SLUG: Record<string, string> = {
   'old-fashion-milano': 'capodanno-old-fashion-triennale',
   'old-fashion': 'capodanno-old-fashion-triennale',
   'terrazza-duomo-21': 'capodanno-terrazza-duomo-21',
+  'terrazza-21': 'capodanno-terrazza-duomo-21',
   'ceresio-7': 'capodanno-ceresio-7-milano',
   'ceresio-7-milano': 'capodanno-ceresio-7-milano',
   'radio-rooftop-milan': 'capodanno-radio-rooftop-milano',
@@ -1703,7 +1713,7 @@ export function getCapodannoEventForClub(clubSlug: string, clubName?: string): C
     if (tokens.length > 0 && tokens.every((t) => itemSlug.includes(t) || itemVenue.includes(t))) {
       return item;
     }
-    if (clubName && itemVenue.includes(clubName.toLowerCase().replace(/s+milano$/i, '').trim())) {
+    if (clubName && itemVenue.includes(clubName.toLowerCase().replace(/\s+milano$/i, '').trim())) {
       return item;
     }
   }

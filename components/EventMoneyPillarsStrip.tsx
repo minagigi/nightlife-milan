@@ -62,7 +62,7 @@ export default function EventMoneyPillarsStrip({ locale }: Props) {
       desc: `${ui35.bookWhatsApp} · +39 351 912 7047`,
     },
     {
-      href: `${prefix}/new-years-eve`,
+      href: `${prefix}/events/capodanno-2027`,
       eyebrow: `${nyeNav.menuLabel.toUpperCase()} 2027`,
       title: nyeNav.h1,
       desc: `31/12/2026 · ${ui35.bookWhatsApp} +39 351 912 7047`,

@@ -397,8 +397,8 @@ export default function EditorialPageSections({ locale, path }: Props) {
             </p>
             <p className="max-w-[48ch] font-sans text-base leading-relaxed text-[#C2B9AA]">
               {isIt
-                ? `Situato in ${street} (${postal} ${locality}), ${venueName} è uno degli indirizzi chiave della vita notturna milanese. Il sound si articola su ${meta.soundIt}, con spazi suddivisi in ${meta.vipZonesIt}. I Tavoli VIP operano con formula 100% Credito Bottiglie (${meta.minSpend}) e ingresso prioritario salta-fila tramite il desk WhatsApp ${SITE_CONTACT.whatsapp.number}.`
-                : `Located at ${street} (${postal} ${locality}), ${venueName} is a signature destination in Milan nightlife. The musical programming spans ${meta.soundEn}, with floor zones divided into ${meta.vipZonesEn}. VIP Tables operate on a 100% Bottle Credit basis (${meta.minSpend}) with skip-the-line VIP Host admission via WhatsApp ${SITE_CONTACT.whatsapp.number}.`}
+                ? `Situato in ${street} (${postal} ${locality}), ${venueName} è uno degli indirizzi chiave ${locality.toLowerCase().includes('garda') ? 'del Lago di Garda e della Lombardia' : 'della vita notturna milanese'}. Il sound si articola su ${meta.soundIt}, con spazi suddivisi in ${meta.vipZonesIt}. I Tavoli VIP operano con formula 100% Credito Bottiglie (${meta.minSpend}) e ingresso prioritario salta-fila tramite il desk WhatsApp ${SITE_CONTACT.whatsapp.number}.`
+                : `Located at ${street} (${postal} ${locality}), ${venueName} is a signature destination in ${locality.toLowerCase().includes('garda') ? 'Lake Garda and Lombardy nightlife' : 'Milan nightlife'}. The musical programming spans ${meta.soundEn}, with floor zones divided into ${meta.vipZonesEn}. VIP Tables operate on a 100% Bottle Credit basis (${meta.minSpend}) with skip-the-line VIP Host admission via WhatsApp ${SITE_CONTACT.whatsapp.number}.`}
             </p>
           </section>
 
@@ -547,6 +547,12 @@ export default function EditorialPageSections({ locale, path }: Props) {
           { name: 'Loolapaloosa Corso Como', venueId: 'v-loolapaloosa', desc: 'Corso Como 15 · Dal Royal Aperitivo delle 19:00 al party cantato sul bancone fino alle 04:30' },
           { name: 'Bobino Club Navigli', venueId: 'v-bobino', desc: 'Piazzale Stazione Genova 4 · Giardino estivo e sale storiche a Porta Genova tra aperitivo, cena e DJ set' },
           { name: 'Apollo Club Milano', venueId: 'v-apollo', desc: 'Via Giosuè Borsi 9/2 (Navigli) · Ex fabbrica creativa per cocktail, cena e serate House/Electronic' },
+          { name: 'Carlsberg Øl Milano', venueId: 'v-carlsbergol', desc: 'Bastioni di Porta Nuova 9 · Volte storiche in mattoni, birreria, cena cantata e DJ set' },
+          { name: 'TOM. The Ordinary Market', venueId: 'v-tom', desc: 'Via Molino delle Armi 16 · Ristorante design, cocktail bar d’autore e sound club' },
+          { name: 'I Bischeri Milano', venueId: 'v-bischeri', desc: 'Viale Gorizia 8 (Darsena) · Ristorante toscano con cena cantata animata e party sui Navigli' },
+          { name: 'Pelledoca Milano', venueId: 'v-pelledoca', desc: 'Viale Enrico Forlanini 121 · Storico music restaurant con cena cantata e discoteca nel verde' },
+          { name: "Philipp's Milano", venueId: 'v-philipps', desc: 'Via Daniele Manin 21 (The Plein Hotel) · Dinner Show Chef Roberto Conti e luxury club' },
+          { name: 'JustMe Garda Lake', venueId: 'v-justme-garda', desc: 'Via Lavagnone 13, Lonato del Garda (BS) · Sede ufficiale Lago di Garda per Dinner Show e Tavoli VIP' },
         ],
       },
       {
@@ -555,6 +561,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
           { name: 'Volt Club Milano', venueId: 'v-volt', desc: 'Via Molino delle Armi 16 · Boutique club di culto per Melodic Techno, Indie Dance e DJ internazionali' },
           { name: 'Fabrique Milano', venueId: 'v-fabrique', desc: 'Via Gaudenzio Fantoli 9 · Arena post-industriale da 3.100 posti per festival techno e tour mondiali' },
           { name: 'Alcatraz Milano', venueId: 'v-alcatraz', desc: 'Via Valtellina 25 (Isola/Farini) · La più grande arena multi-sala di Milano con 3 piste ogni weekend' },
+          { name: 'Gate Milano', venueId: 'v-gate', desc: 'Via Valtellina 21 (Isola/Farini) · Arena club per format Reggaeton PERREO XL, Techno e live show' },
           { name: 'Amnesia Milano', venueId: 'v-amnesia', desc: 'Via Alfonso Gatto · Tempio milanese Tech-House e Techno con impianto Funktion-One e Privé Console' },
           { name: 'Magazzini Generali', venueId: 'v-magazzini', desc: 'Via Pietrasanta 16 (Porta Romana) · Storico warehouse del 1995 con balconata VIP in ferro battuto' },
           { name: 'Super Club Milano (Tortona)', venueId: 'v-super-club-milano', desc: 'Via Tortona 27 · Spazio design da 380 mq con scultoreo impianto audio Void Acoustics' },
@@ -601,6 +608,12 @@ export default function EditorialPageSections({ locale, path }: Props) {
           { name: 'Loolapaloosa Corso Como', venueId: 'v-loolapaloosa', desc: 'Corso Como 15 · From 19:00 aperitivo to legendary bar-top dancing until 04:30 AM' },
           { name: 'Bobino Club Navigli', venueId: 'v-bobino', desc: 'Piazzale Stazione Genova 4 · Historic Porta Genova railway lounge & summer garden for dining and DJ sets' },
           { name: 'Apollo Club Milan', venueId: 'v-apollo', desc: 'Via Giosuè Borsi 9/2 (Navigli) · Creative converted factory hosting fashion crowds and House/Electronic nights' },
+          { name: 'Carlsberg Øl Milan', venueId: 'v-carlsbergol', desc: 'Bastioni di Porta Nuova 9 · Historic brick vaults, brewery, singing dinner show & DJ sets' },
+          { name: 'TOM. The Ordinary Market', venueId: 'v-tom', desc: 'Via Molino delle Armi 16 · Multi-level design restaurant, mixology bar & sound club' },
+          { name: 'I Bischeri Milan', venueId: 'v-bischeri', desc: 'Viale Gorizia 8 (Darsena) · Tuscan singing dinner show & late-night party on the Navigli harbor' },
+          { name: 'Pelledoca Milan', venueId: 'v-pelledoca', desc: 'Viale Enrico Forlanini 121 · Iconic parkside music restaurant, singing dinner & club' },
+          { name: "Philipp's Milan", venueId: 'v-philipps', desc: 'Via Daniele Manin 21 (The Plein Hotel) · Chef Roberto Conti Dinner Show & luxury nightclub' },
+          { name: 'JustMe Garda Lake', venueId: 'v-justme-garda', desc: 'Via Lavagnone 13, Lonato del Garda (BS) · Official Lake Garda flagship for Dinner Shows & VIP tables' },
         ],
       },
       {
@@ -609,6 +622,7 @@ export default function EditorialPageSections({ locale, path }: Props) {
           { name: 'Volt Club Milan', venueId: 'v-volt', desc: 'Via Molino delle Armi 16 · Cult boutique sanctuary for Melodic Techno, Indie Dance & global headliners' },
           { name: 'Fabrique Milan', venueId: 'v-fabrique', desc: 'Via Gaudenzio Fantoli 9 · 3,100-capacity post-industrial hangar for techno festivals and world tours' },
           { name: 'Alcatraz Milan', venueId: 'v-alcatraz', desc: 'Via Valtellina 25 (Isola/Farini) · Milan’s biggest multi-room arena running 3 dancefloors every weekend' },
+          { name: 'Gate Milan', venueId: 'v-gate', desc: 'Via Valtellina 21 (Isola/Farini) · Warehouse club arena for PERREO XL Reggaeton, Techno & live acts' },
           { name: 'Amnesia Milan', venueId: 'v-amnesia', desc: 'Via Alfonso Gatto · 20-year Tech-House & Techno institution with Funktion-One sound & Console Privé' },
           { name: 'Magazzini Generali', venueId: 'v-magazzini', desc: 'Via Pietrasanta 16 (Porta Romana) · Historic 1995 warehouse club with iron VIP mezzanine' },
           { name: 'Super Club Milan (Tortona)', venueId: 'v-super-club-milano', desc: 'Via Tortona 27 · 380 sqm architectural club engineered around a sculpted Void Acoustics sound system' },
@@ -623,12 +637,12 @@ export default function EditorialPageSections({ locale, path }: Props) {
         <div className="mx-auto max-w-[1280px] border-x border-[#F6F1E7]/14 divide-y divide-[#F6F1E7]/14">
           <section className="px-6 py-14 sm:px-14">
             <p className="mb-2 font-sans tabular-nums text-[13px] font-bold uppercase tracking-[0.04em] text-[#C2B9AA]">
-              {isIt ? 'ATLANTE CATEGORIALE DEI 33 LOCALI VERIFICATI · 2026/2027' : 'CATEGORICAL ATLAS OF ALL 33 VERIFIED MILAN VENUES · 2026/2027'}
+              {isIt ? 'ATLANTE CATEGORIALE DEI 41 LOCALI VERIFICATI · 2026/2027' : 'CATEGORICAL ATLAS OF ALL 41 VERIFIED VENUES · 2026/2027'}
             </p>
             <h2 className="mb-8 font-display text-3xl text-[#F6F1E7] sm:text-4xl">
               {isIt
-                ? 'Tutti i 33 Locali di Milano Suddivisi per Categoria: Fashion Club, Rooftop, Dinner Show e Techno Warehouse'
-                : 'All 33 Milan Venues by Category: Fashion Clubs, Rooftops, Dinner Shows & Techno Warehouses'}
+                ? 'Tutti i 41 Locali Verificati Suddivisi per Categoria: Fashion Club, Rooftop, Dinner Show e Techno Warehouse'
+                : 'All 41 Verified Venues by Category: Fashion Clubs, Rooftops, Dinner Shows & Techno Warehouses'}
             </h2>
             <div className="space-y-10">
               {categories.map((cat) => (

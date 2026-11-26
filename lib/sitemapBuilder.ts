@@ -26,7 +26,7 @@ import {
   getLocalizedZoneSlug35,
 } from '@/lib/i18n/localizedSlugs35';
 
-const SITE_RELEASE_TIMESTAMP = '2026-11-26T00:15:00.000Z';
+const SITE_RELEASE_TIMESTAMP = '2026-11-26T16:30:00.000Z';
 const LEGAL_STATIC_TIMESTAMP = '2026-11-01T00:00:00.000Z';
 
 export function clampLastModified(
@@ -166,7 +166,6 @@ function buildCoreHubEntriesInternal(freshCatalogDate: Date): MetadataRoute.Site
     '/events/special',
     '/guest-lists',
     '/football-afterparties',
-    '/new-years-eve',
   ]);
 
   const staticRoutes = [
@@ -197,7 +196,6 @@ function buildCoreHubEntriesInternal(freshCatalogDate: Date): MetadataRoute.Site
     { path: '/guest-lists', priority: 0.9, changeFrequency: 'daily' as const },
     { path: '/football-afterparties', priority: 0.95, changeFrequency: 'daily' as const },
     { path: '/concert-afterparties', priority: 0.9, changeFrequency: 'weekly' as const },
-    { path: '/new-years-eve', priority: 0.95, changeFrequency: 'daily' as const },
     { path: '/fashion-week', priority: 0.9, changeFrequency: 'weekly' as const },
     { path: '/milan-fashion-week', priority: 0.9, changeFrequency: 'weekly' as const },
     { path: '/milan-fashion-week/calendar', priority: 0.85, changeFrequency: 'weekly' as const },
@@ -335,6 +333,13 @@ function buildEventsEntriesInternal(ebEvents: readonly Event[]): MetadataRoute.S
   ]).map(({ event }) => event);
 
   physicalEvents.forEach((event) => {
+    if (
+      event.id === 'e-nye-2027-justme' ||
+      event.id === 'e-nye-2027-aria' ||
+      event.id === 'e-nye-2027-voya'
+    ) {
+      return;
+    }
     const isUpcoming = Date.parse(event.endDateISO || event.dateISO) >= nowMs;
     const evLastMod = clampLastModified(event.updatedAt, catalogLastMod.getTime());
     locales.forEach((locale) => {

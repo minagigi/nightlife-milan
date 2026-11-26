@@ -704,7 +704,7 @@ export function getHolidaysCatalog(locale: string): VerticalCardItem[] {
             'Voya Rooftop 20th Floor (€300 All-Inclusive): 6-course tasting + post-midnight cotechino & lentils, 1 wine bottle/4 guests, 360° fireworks',
             'Official 6-step 24/7 WhatsApp booking protocol (+39 351 912 7047) with 100% prepayment confirmation',
           ],
-      href: `/${locale}/new-years-eve`,
+      href: `/${locale}/events/capodanno-2027`,
       whatsappText: 'Ciao Nightlife Milan, vorrei il catalogo completo e i prezzi di Capodanno a Milano (Cenone, Buffet e Tavoli)',
       imageSrc: '/images/venues/just-me-milano/just-me-milano-lounge-01.webp',
     },

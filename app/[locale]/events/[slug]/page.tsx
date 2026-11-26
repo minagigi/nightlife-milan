@@ -45,6 +45,7 @@ import {
   resolveJustSingingRainSlug,
 } from '@/lib/just-singing-rain/justme35';
 import { getCapodannoCategoryPageDef, getCapodannoEventBySlug, getCapodannoEventsForMode } from '@/lib/capodannoEvents';
+import { getCapodannoMasterSeo35 } from '@/lib/capodanno/capodannoMasterSeo35';
 import {
   buildCapodannoMetaDescription,
   cleanCapodannoSeoTitle,
@@ -196,10 +197,14 @@ function buildCapodannoCategoryMetadata(catId: string, locale: string): Metadata
   const heroImage = modeEvents[0]?.image || '/images/just-me-milano.webp';
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
   const canonical = `${baseUrl}${capodannoCategoryPath(catId, locale)}`;
-  const rawTitle = getCapodannoLocalizedCategoryTitle(def, locale, eventsCount);
-  const title = cleanCapodannoSeoTitle(rawTitle, 62);
-  const rawSummary = getCapodannoLocalizedCategorySubtitle(def, locale, eventsCount);
-  const description = buildCapodannoMetaDescription(rawSummary, locale);
+  const isMasterHub = catId === 'capodanno-2027';
+  const masterSeo = isMasterHub ? getCapodannoMasterSeo35(locale) : null;
+  const title = masterSeo
+    ? cleanCapodannoSeoTitle(masterSeo.metaTitle, 62)
+    : cleanCapodannoSeoTitle(getCapodannoLocalizedCategoryTitle(def, locale, eventsCount), 62);
+  const description = masterSeo
+    ? masterSeo.metaDescription
+    : buildCapodannoMetaDescription(getCapodannoLocalizedCategorySubtitle(def, locale, eventsCount), locale);
   return {
     title,
     description,
@@ -503,6 +508,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   let event = getEventBySlug(slug, locale);
   if (!event) event = getLocalizedEventSeed(slug, locale) || undefined;
   if (!event) return notFound();
+  if (event.id === 'e-nye-2027-justme') {
+    permanentRedirect(capodannoEventPath('capodanno-justme-milano-torre-branca', locale));
+  }
+  if (event.id === 'e-nye-2027-aria') {
+    permanentRedirect(capodannoEventPath('capodanno-aria-club-milano', locale));
+  }
   if (event.id === 'e-nye-2027-voya') {
     permanentRedirect(capodannoEventPath('capodanno-voya-rooftop-milano', locale));
   }
@@ -934,6 +945,12 @@ export default async function EventPage({ params }: Props) {
   let event = getEventBySlug(slug, locale);
   if (!event) event = getLocalizedEventSeed(slug, locale) || undefined;
   if (!event) return notFound();
+  if (event.id === 'e-nye-2027-justme') {
+    permanentRedirect(capodannoEventPath('capodanno-justme-milano-torre-branca', locale));
+  }
+  if (event.id === 'e-nye-2027-aria') {
+    permanentRedirect(capodannoEventPath('capodanno-aria-club-milano', locale));
+  }
   if (event.id === 'e-nye-2027-voya') {
     permanentRedirect(capodannoEventPath('capodanno-voya-rooftop-milano', locale));
   }

@@ -1054,6 +1054,175 @@ export const VENUE_AUTHORITY_33: Readonly<Record<string, VenueAuthoritySpec>> = 
     signatureFactEn: "Flagship restaurant, theatrical dinner show (Executive Chef Roberto Conti), and luxury nightclub created by designer Philipp Plein inside historic Palazzo Melzi d'Eril (The Plein Hotel, Via Daniele Manin 21).",
     signatureFactIt: "Ristorante d'alta cucina, Dinner Show teatrale (Executive Chef Roberto Conti) e luxury club creati dallo stilista Philipp Plein nello storico Palazzo Melzi d'Eril (The Plein Hotel, Via Daniele Manin 21).",
   },
+  'v-carlsbergol': {
+    id: 'v-carlsbergol',
+    schemaType: 'BarOrPub',
+    alternateNames: ['Carlsberg Øl Milano', 'Carlsberg Ol Milano', 'Carlsberg Milano', 'Carlsberg Porta Nuova', 'Ristorante Birreria Carlsberg Øl'],
+    neighborhoodEn: 'Porta Nuova / Corso Como',
+    neighborhoodIt: 'Porta Nuova / Corso Como',
+    openingHoursSpec: [
+      { dayOfWeek: ['Tuesday', 'Wednesday', 'Thursday', 'Sunday'], opens: '19:00', closes: '01:30' },
+      { dayOfWeek: ['Friday', 'Saturday'], opens: '19:00', closes: '03:00' },
+    ],
+    metroEn: 'M2 / M5 Garibaldi FS or M2 Moscova (4 min walk to Bastioni di Porta Nuova 9)',
+    metroIt: 'M2 / M5 Garibaldi FS oppure M2 Moscova (4 min a piedi da Bastioni di Porta Nuova 9)',
+    parkingEn: 'Piazza XXV Aprile / Eataly Smeraldo underground garage (150 m)',
+    parkingIt: 'Parcheggio interrato Piazza XXV Aprile / Eataly Smeraldo (150 m)',
+    soundEn: 'Italian Singing Dinner Show, Live Bands, Commercial & Party Hits DJ Set',
+    soundIt: 'Cena Cantata Italiana, Live Music Show, Commerciale e Party Hits DJ Set',
+    vipZonesEn: 'Historic Brick-Vault Central Stage Hall, Raised Convivial Tables & Bar Lounge',
+    vipZonesIt: 'Sala Centrale Storica con Volte in Mattoni Fronte Palco, Tavolate Conviviali e Area Lounge',
+    minSpendEn: 'Seated Dinner Show €35-€55 · NYE 2027 Gala Cenone €75 (Kids €35) · Reserved Party Tables from €200',
+    minSpendIt: 'Cena Cantata Servita 35-55€ · Cenone Capodanno 2027 a 75€ (Menu Bimbi 35€) · Tavoli Riservati da 200€',
+    entryFormulaEn: 'À la carte / Fixed-Menu Singing Dinner from 20:00 · Craft Beer & Cocktail After-Dinner Tables',
+    entryFormulaIt: 'Cena Cantata alla carta o menu fisso dalle 20:00 · Tavoli dopocena birreria artigianale e cocktail',
+    preClubEn: 'Sunset walk across Piazza Gae Aulenti and Corso Como pedestrian avenue (2 min walk)',
+    preClubIt: 'Passeggiata e aperitivo tra Piazza Gae Aulenti e Corso Como (a 2 min a piedi)',
+    bestNightsEn: 'Friday & Saturday Singing Dinner Shows, Group Celebrations & New Year’s Eve Family/Friends Gala',
+    bestNightsIt: 'Venerdi e Sabato Cena Cantata, Feste di Laurea/Compleanno e Gran Cenone di Capodanno',
+    signatureFactEn: 'Iconic brick-vaulted restaurant, craft brewery, and live stage venue at Bastioni di Porta Nuova 9 hosting energetic singing dinners right beside Corso Como.',
+    signatureFactIt: 'Storico ristorante, birreria e palco live sotto le volte in mattoni di Bastioni di Porta Nuova 9 celebre per le cene cantate a due passi da Corso Como.',
+  },
+  'v-tom': {
+    id: 'v-tom',
+    schemaType: 'NightClub',
+    alternateNames: ['TOM. The Ordinary Market', 'TOM Milano', 'The Ordinary Market Milano', 'The Ordinary Market', 'TOM Via Molino delle Armi'],
+    neighborhoodEn: 'Centro Storico / Navigli (Via Molino delle Armi)',
+    neighborhoodIt: 'Centro Storico / Navigli (Via Molino delle Armi)',
+    openingHoursSpec: [
+      { dayOfWeek: ['Wednesday', 'Thursday'], opens: '19:30', closes: '02:00' },
+      { dayOfWeek: ['Friday', 'Saturday'], opens: '20:00', closes: '04:30' },
+    ],
+    metroEn: 'M4 Vetra / Santa Sofia or M2 Sant’Ambrogio / Porta Genova (6 min walk to Via Molino delle Armi 16)',
+    metroIt: 'M4 Vetra / Santa Sofia oppure M2 Sant’Ambrogio / Porta Genova (6 min a piedi da Via Molino delle Armi 16)',
+    parkingEn: 'Autosilo Via Santa Sofia / Piazza Vetra garage (300 m)',
+    parkingIt: 'Autorimessa Via Santa Sofia / Piazza Vetra (300 m)',
+    soundEn: 'Vocal House, Tech-House, Commercial Club Hits & Dinner Show',
+    soundIt: 'Vocal House, Tech-House, Commerciale e Dinner Show Contemporaneo',
+    vipZonesEn: 'Main Restaurant Dining Room, Cocktail Mezzanine & Sound Club Console VIP Booths',
+    vipZonesIt: 'Sala Ristorante Design, Mezzanino Cocktail Bar e Tavoli VIP Console Sound Club',
+    minSpendEn: 'Dinner & Club €50-€70 · VIP Club Tables €250-€600 · NYE 2027 Gala Dinner €150 / Entry €40',
+    minSpendIt: 'Cena + Club 50-70€ · Tavoli VIP Sound Club 250-600€ · Capodanno 2027 Cenone 150€ / Ingresso 40€',
+    entryFormulaEn: 'Contemporary Dinner from 20:30 · Cocktail Bar & Sound Club Guestlist / VIP Tables from 23:30',
+    entryFormulaIt: 'Cena contemporanea dalle 20:30 · Cocktail Bar e Sound Club in lista o Tavolo VIP dalle 23:30',
+    preClubEn: 'Signature cocktails at Colonne di San Lorenzo or Piazza Vetra before walking 3 minutes to TOM.',
+    preClubIt: 'Cocktail d’autore alle Colonne di San Lorenzo o Piazza Vetra a 3 minuti a piedi da TOM.',
+    bestNightsEn: 'Thursday Cocktail & DJ Night, Friday & Saturday Dinner-to-Club Flagship Parties',
+    bestNightsIt: 'Giovedi Cocktail & DJ Set, Venerdi e Sabato Dinner-to-Club fino a tarda notte',
+    signatureFactEn: 'Multi-level industrial-chic restaurant, mixology bar, and underground sound club at Via Molino delle Armi 16 bridging Duomo and Navigli.',
+    signatureFactIt: 'Ristorante industrial-chic su piu livelli, cocktail bar e sound club in Via Molino delle Armi 16 tra il Duomo, le Colonne e i Navigli.',
+  },
+  'v-bischeri': {
+    id: 'v-bischeri',
+    schemaType: 'Restaurant',
+    alternateNames: ['I Bischeri Milano', 'Bischeri Milano', 'Ristorante I Bischeri Navigli', 'I Bischeri Darsena', 'Bischeri Viale Gorizia'],
+    neighborhoodEn: 'Darsena / Navigli',
+    neighborhoodIt: 'Darsena / Navigli',
+    openingHoursSpec: [
+      { dayOfWeek: ['Tuesday', 'Wednesday', 'Thursday', 'Sunday'], opens: '19:30', closes: '01:00' },
+      { dayOfWeek: ['Friday', 'Saturday'], opens: '20:00', closes: '03:00' },
+    ],
+    metroEn: 'M2 Porta Genova FS (4 min walk along the Darsena to Viale Gorizia 8)',
+    metroIt: 'M2 Porta Genova FS (4 min a piedi lungo la Darsena fino a Viale Gorizia 8)',
+    parkingEn: 'Piazza XXIV Maggio / Darsena underground parking (200 m)',
+    parkingIt: 'Parcheggio interrato Piazza XXIV Maggio / Darsena (200 m)',
+    soundEn: 'Italian Singing Dinner Show, Live Vocalist & Convivial DJ Party Classics',
+    soundIt: 'Cena Cantata Italiana dal Vivo, Vocalist Show e DJ Set Party Italiano & Internazionale',
+    vipZonesEn: 'Main Darsena Dining Floor, Mezzanine Balcony Tables & Private Group Alcoves',
+    vipZonesIt: 'Sala Principale Darsena, Tavoli Balconata Soppalco e Aree Riservate Gruppi',
+    minSpendEn: 'Tuscan Singing Dinner €45-€65 · NYE 2027 Meat/Seafood Gala €140 · Party Tables from €250',
+    minSpendIt: 'Cena Cantata Toscana 45-65€ · Cenone Capodanno 2027 Terra/Mare 140€ · Tavoli Festa da 250€',
+    entryFormulaEn: 'Seated Tuscan Dinner Show from 20:30 with wine pairing & midnight DJ party',
+    entryFormulaIt: 'Cena Cantata Toscana servita dalle 20:30 con vini selezionati e DJ party a seguire',
+    preClubEn: 'Sunset canalside aperitivo along Darsena and Naviglio Grande directly outside Viale Gorizia 8',
+    preClubIt: 'Aperitivo al tramonto lungo la Darsena e il Naviglio Grande proprio davanti a Viale Gorizia 8',
+    bestNightsEn: 'Friday & Saturday Singing Dinner Shows, Birthdays, Graduations & NYE Gala with DJ Gigi Zeus',
+    bestNightsIt: 'Venerdi e Sabato Cena Cantata, Compleanni, Lauree e Gran Gala di Capodanno con DJ Gigi Zeus',
+    signatureFactEn: 'Flagship Tuscan singing-dinner restaurant and late-night party venue overlooking Milan’s Darsena harbor at Viale Gorizia 8.',
+    signatureFactIt: 'Ristorante toscano con cena cantata e party notturno affacciato direttamente sulla Darsena di Milano in Viale Gorizia 8.',
+  },
+  'v-gate': {
+    id: 'v-gate',
+    schemaType: 'NightClub',
+    alternateNames: ['Gate Milano', 'Gate Club Milano', 'Gate Milan', 'Gate Via Valtellina 21', 'Gate Scalo Farini'],
+    neighborhoodEn: 'Isola / Scalo Farini (Via Valtellina)',
+    neighborhoodIt: 'Isola / Scalo Farini (Via Valtellina)',
+    openingHoursSpec: WEEKEND_CLUB_HOURS,
+    metroEn: 'M3 Maciachini or M5 Monumentale / Lancetti Passante (6 min walk to Via Valtellina 21)',
+    metroIt: 'M3 Maciachini, M5 Monumentale o Passante Lancetti (6 min a piedi da Via Valtellina 21)',
+    parkingEn: 'Via Valtellina street & Scalo Farini parking lots (100 m)',
+    parkingIt: 'Parcheggi lungo Via Valtellina e area Scalo Farini (100 m)',
+    soundEn: 'Reggaeton, Latin Urban (PERREO XL), Techno, Hard-Techno & Live Concerts',
+    soundIt: 'Reggaeton, Latin Urban (PERREO XL), Techno, Hard-Techno e Concerti Live',
+    vipZonesEn: 'Backstage DJ Console Privé, Elevated Stage Ring & Dancefloor Bottle Booths',
+    vipZonesIt: 'Privé Backstage Console DJ, Ring Rialzato Palco e Tavoli Bordo Pista',
+    minSpendEn: 'Dancefloor VIP €250-€350 · Stage Ring Privé €500-€800 · Backstage Console €1,000+',
+    minSpendIt: 'Tavolo Pista 250-350€ · Privé Palco 500-800€ · Backstage Console da 1.000€',
+    entryFormulaEn: 'Xceed Early-Bird Tickets €15-€25 · NYE 2027 PERREO XL Entry from €30 & VIP Tables',
+    entryFormulaIt: 'Prevendite ufficiali Xceed 15-25€ · Capodanno 2027 PERREO XL da 30€ e Tavoli VIP',
+    preClubEn: 'Cocktails and dinner in the Isola district (Via Borsieri / Piazza Tito Minniti, 5 min away)',
+    preClubIt: 'Cocktail e cena nel quartiere Isola (Via Borsieri / Piazza Tito Minniti, a 5 min)',
+    bestNightsEn: 'Friday & Saturday Club Showcases, PERREO XL Reggaeton Nights, Halloween & NYE',
+    bestNightsIt: 'Venerdi e Sabato Club Showcase, notti Reggaeton PERREO XL, Halloween e Capodanno',
+    signatureFactEn: 'Post-industrial warehouse arena at Via Valtellina 21 adjoining Alcatraz, famed for sculptural ceiling light rigs and massive Latin & Techno nights.',
+    signatureFactIt: 'Arena club post-industriale in Via Valtellina 21 nello Scalo Farini, celebre per le installazioni luminose a soffitto e i grandi party Reggaeton e Techno.',
+  },
+  'v-pelledoca': {
+    id: 'v-pelledoca',
+    schemaType: 'NightClub',
+    alternateNames: ['Pelledoca Milano', 'Pelledoca Music and Food', 'Pelledoca Forlanini', 'Pelledoca Idroscalo'],
+    neighborhoodEn: 'Parco Forlanini / Linate',
+    neighborhoodIt: 'Parco Forlanini / Linate',
+    openingHoursSpec: [
+      { dayOfWeek: ['Friday', 'Saturday'], opens: '20:30', closes: '04:30' },
+    ],
+    metroEn: 'M4 Blu Repetti / Linate Aeroporto or Bus 73 (Viale Enrico Forlanini 121)',
+    metroIt: 'M4 Blu Repetti / Linate Aeroporto oppure Bus 73 (Viale Enrico Forlanini 121)',
+    parkingEn: 'Dedicated parking area directly outside Viale Enrico Forlanini 121',
+    parkingIt: 'Ampio parcheggio comodo proprio lungo Viale Enrico Forlanini 121',
+    soundEn: 'Animated Singing Dinner Show, Italian Hits, Vocal House & 90s/2000s Commercial',
+    soundIt: 'Cena Cantata Animata, Hit Italiane, Vocal House e Commerciale Anni 90/2000',
+    vipZonesEn: 'Main Veranda Restaurant, Central Dancefloor Privé & Summer Garden Gazebos',
+    vipZonesIt: 'Sala Ristorante Veranda, Privé Centrale Pista e Gazebo Giardino Estivo',
+    minSpendEn: 'Seated Dinner Show €35-€45 · VIP Club Tables €200-€500 · NYE 2027 Gala Cenone €120',
+    minSpendIt: 'Cena Cantata Servita 35-45€ · Tavoli VIP Discoteca 200-500€ · Cenone Capodanno 2027 a 120€',
+    entryFormulaEn: 'Fixed-Menu Dinner Show from 20:30 · After-Dinner Club Entry & Bottle Tables from 23:30',
+    entryFormulaIt: 'Cena spettacolo a menu fisso dalle 20:30 · Ingresso discoteca e tavoli bottiglia dalle 23:30',
+    preClubEn: 'Full in-house aperitivo and seated singing dinner inside Pelledoca’s park veranda',
+    preClubIt: 'Aperitivo e cena spettacolo interna nella veranda nel verde del Parco Forlanini',
+    bestNightsEn: 'Friday & Saturday Dinner Show + Disco Nights, Private Parties & New Year’s Eve Gala',
+    bestNightsIt: 'Venerdi e Sabato Cena Spettacolo + Discoteca, Feste Private e Gran Cenone di Capodanno',
+    signatureFactEn: 'Historic Milan music-restaurant and club set inside Parco Forlanini greenery at Viale Enrico Forlanini 121, beloved for convivial dinner-to-disco nights.',
+    signatureFactIt: 'Storico music restaurant con discoteca immerso nel verde del Parco Forlanini in Viale Enrico Forlanini 121, punto fermo per cene cantate e serate ballo.',
+  },
+  'v-justme-garda': {
+    id: 'v-justme-garda',
+    schemaType: 'NightClub',
+    alternateNames: ['JustMe Garda Lake', 'Just Me Garda Lake', 'Just Me Lago di Garda', 'JustMe Lonato del Garda', 'JustMe Desenzano'],
+    neighborhoodEn: 'Lonato del Garda / Desenzano (Lake Garda, BS)',
+    neighborhoodIt: 'Lonato del Garda / Desenzano (Lago di Garda, BS)',
+    openingHoursSpec: [
+      { dayOfWeek: ['Saturday'], opens: '20:30', closes: '05:00' },
+    ],
+    metroEn: 'A4 Motorway Desenzano del Garda exit (5 min drive) or Desenzano-Sirmione High-Speed Train Station (8 min taxi)',
+    metroIt: 'Uscita Autostrada A4 Desenzano del Garda (5 min in auto) o Stazione FS Alta Velocita Desenzano-Sirmione (8 min taxi)',
+    parkingEn: 'Private on-site VIP & guest parking lot at Via Lavagnone 13, Lonato del Garda (BS)',
+    parkingIt: 'Ampio parcheggio privato riservato agli ospiti in Via Lavagnone 13, Lonato del Garda (BS)',
+    soundEn: 'Luxury Singing Dinner Show, Vocal House, Commercial Hits & Reggaeton',
+    soundIt: 'Luxury Dinner Show Cantato, Vocal House, Commercial Hits e Reggaeton',
+    vipZonesEn: 'Main Show Dining Room, Raised Ring Privé & Backstage DJ Console Super Privé',
+    vipZonesIt: 'Sala Principale Dinner Show, Privé Ring Rialzato e Super Privé Backstage Console DJ',
+    minSpendEn: 'Dinner & Club Packages €50-€90 · VIP Tables from €300 · NYE 2027 Just Me in Rouge Gala & Club',
+    minSpendIt: 'Cena Spettacolo + Club 50-90€ · Tavoli VIP da 300€ · Capodanno 2027 Just Me in Rouge Cenone e Club',
+    entryFormulaEn: 'Official Xceed Tickets & Dinner Reservations from 20:30 · Club Entry & VIP Bottle Service from 23:30',
+    entryFormulaIt: 'Prevendite ufficiali Xceed e Cena Spettacolo dalle 20:30 · Ingresso Club e Tavoli VIP dalle 23:30',
+    preClubEn: 'Sunset lakeside aperitivo along Desenzano del Garda or Sirmione harbor (10 min away)',
+    preClubIt: 'Aperitivo vista lago sul lungolago di Desenzano del Garda o Sirmione (a 10 minuti)',
+    bestNightsEn: 'Saturday Night Flagship Showcases (Ritmo / Luxury Dinner & Dance) & New Year’s Eve Just Me in Rouge',
+    bestNightsIt: 'Sabato Sera Luxury Dinner & Dance (format Ritmo) e Capodanno 2027 Just Me in Rouge',
+    signatureFactEn: 'Official Lake Garda sister destination of Just Me Milano at Via Lavagnone 13 in Lonato del Garda (BS), combining theatrical dinner shows and luxury clubbing.',
+    signatureFactIt: 'Sede ufficiale sul Lago di Garda del brand Just Me in Via Lavagnone 13 a Lonato del Garda (BS), tra cene spettacolo scenografiche e clubbing di lusso.',
+  },
 };
 
 export function getVenueAuthoritySpec(venueId: string): VenueAuthoritySpec | undefined {
@@ -1065,6 +1234,11 @@ export function buildCityQualifiedVenueH1(
   locale: string,
   localizedVenueName: string,
 ): string {
+  if (venue.id === 'v-justme-garda') {
+    return locale === 'it'
+      ? 'JustMe Garda Lake (Lago di Garda)'
+      : 'JustMe Garda Lake';
+  }
   const loc = (CLUB_SERP_35[locale as LocaleCode] ? locale : 'en') as LocaleCode;
   const city = CLUB_SERP_35[loc].city;
   const lower = localizedVenueName.toLowerCase();
@@ -1092,7 +1266,16 @@ export function buildVenueAuthorityFaqs(
 ): VenueFaqItem[] {
   const spec = VENUE_AUTHORITY_33[venue.id];
   const loc = (CLUB_SERP_35[locale as LocaleCode] ? locale : 'en') as LocaleCode;
-  const city = CLUB_SERP_35[loc].city;
+  const isGarda = venue.id === 'v-justme-garda';
+  const city = isGarda
+    ? loc === 'it'
+      ? 'Lonato del Garda (Lago di Garda)'
+      : 'Lonato del Garda (Lake Garda)'
+    : CLUB_SERP_35[loc].city;
+  const inCityIt = isGarda ? 'sul Lago di Garda' : 'a Milano';
+  const inCityEn = isGarda ? 'on Lake Garda' : 'in Milan';
+  const postalCityIt = isGarda ? `${venue.address.postalCode} Lonato del Garda (BS)` : `${venue.address.postalCode} Milano`;
+  const postalCityEn = isGarda ? `${venue.address.postalCode} Lonato del Garda (Lake Garda, BS)` : `${venue.address.postalCode} Milan`;
   const street = venue.address.streetAddress;
   const postal = venue.address.postalCode;
 
@@ -1104,8 +1287,8 @@ export function buildVenueAuthorityFaqs(
     loc === 'it'
       ? [
           {
-            q: `Dove si trova esattamente ${localizedVenueName} a Milano e come si arriva in metro o auto?`,
-            a: `${localizedVenueName} si trova in ${street}, ${postal} Milano (zona ${spec.neighborhoodIt}). Metro consigliata: ${spec.metroIt}. Parcheggio: ${spec.parkingIt}.`,
+            q: `Dove si trova esattamente ${localizedVenueName} ${inCityIt} e come si arriva?`,
+            a: `${localizedVenueName} si trova in ${street}, ${postalCityIt} (zona ${spec.neighborhoodIt}). Indicazioni: ${spec.metroIt}. Parcheggio: ${spec.parkingIt}.`,
           },
           {
             q: `Quanto costa un Tavolo VIP o l’ingresso da ${localizedVenueName} nel 2026/2027?`,
@@ -1127,15 +1310,15 @@ export function buildVenueAuthorityFaqs(
       : loc === 'en'
         ? [
             {
-              q: `Where is ${localizedVenueName} located in Milan and what is the nearest metro station?`,
-              a: `${localizedVenueName} is located at ${street}, ${postal} Milan (${spec.neighborhoodEn} district). Public transit: ${spec.metroEn}. Parking: ${spec.parkingEn}.`,
+              q: `Where is ${localizedVenueName} located ${inCityEn} and how do I get there?`,
+              a: `${localizedVenueName} is located at ${street}, ${postalCityEn} (${spec.neighborhoodEn}). Transit & access: ${spec.metroEn}. Parking: ${spec.parkingEn}.`,
             },
             {
               q: `How much are VIP tables, bottle service, and entry at ${localizedVenueName} in 2026/2027?`,
               a: `Official ${localizedVenueName} table tiers: ${spec.minSpendEn} (100% credited toward bottles from the menu with skip-the-line hostess escort). Entry & aperitivo formulas: ${spec.entryFormulaEn}. Confirm live availability on WhatsApp at +39 351 912 7047.`,
             },
             {
-              q: `What is the dress code and door policy at ${localizedVenueName} Milan?`,
+              q: `What is the dress code and door policy at ${localizedVenueName}?`,
               a: `The enforced dress code at ${localizedVenueName} is: ${localizedDressCode}. Bring a physical government-issued photo ID and arrive in a well-dressed, balanced group (or reserve a VIP table for priority admission).`,
             },
             {
@@ -1150,7 +1333,7 @@ export function buildVenueAuthorityFaqs(
         : [
             {
               q: `${localizedVenueName} (${city}) - ${street}, ${postal}`,
-              a: `${localizedVenueName}: ${street}, ${postal} ${city} (${spec.neighborhoodEn}). Metro: ${spec.metroEn}. Parking: ${spec.parkingEn}.`,
+              a: `${localizedVenueName}: ${street}, ${isGarda ? '25017 Lonato del Garda (Lake Garda, BS)' : `${postal} ${city}`} (${spec.neighborhoodEn}). Access: ${spec.metroEn}. Parking: ${spec.parkingEn}.`,
             },
             {
               q: `${localizedVenueName} (${city}) - ${CLUB_SERP_35[loc].titlePricesVip}`,

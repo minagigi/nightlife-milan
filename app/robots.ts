@@ -2,6 +2,16 @@ import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
+  const vercelUrl = process.env.VERCEL_URL || '';
+  if (
+    (process.env.VERCEL_ENV && process.env.VERCEL_ENV !== 'production') ||
+    baseUrl.includes('vercel.app') ||
+    (vercelUrl.endsWith('.vercel.app') && process.env.VERCEL_ENV === 'preview')
+  ) {
+    return {
+      rules: [{ userAgent: '*', disallow: '/' }],
+    };
+  }
 
   return {
     rules: [

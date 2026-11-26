@@ -28,9 +28,9 @@ import {
   VENUE_AUTHORITY_33,
 } from '../lib/venueAuthority33';
 
-test('Pillar A: all 35 active public venues have full authority specs, SERP meta, FAQs, and rich Club schema', () => {
-  assert.equal(mockVenues.length, 35);
-  assert.equal(Object.keys(VENUE_AUTHORITY_33).length, 35);
+test('Pillar A: all 41 active public venues have full authority specs, SERP meta, FAQs, and rich Club schema', () => {
+  assert.equal(mockVenues.length, 41);
+  assert.equal(Object.keys(VENUE_AUTHORITY_33).length, 41);
   assert.equal(Object.keys(CLUB_SERP_35).length, 35);
 
   for (const venue of mockVenues) {
@@ -42,8 +42,15 @@ test('Pillar A: all 35 active public venues have full authority specs, SERP meta
     const nameEn = getLocalizedText(venue.localizedContent.name, 'en');
     const h1It = buildCityQualifiedVenueH1(venue, 'it', nameIt);
     const h1En = buildCityQualifiedVenueH1(venue, 'en', nameEn);
-    assert.match(h1It, /Milano|Milan/i);
-    assert.match(h1En, /Milan|Milano/i);
+    if (venue.id === 'v-justme-garda') {
+      assert.match(h1It, /Garda/i);
+      assert.match(h1En, /Garda/i);
+      assert.doesNotMatch(h1It, /Milano|Milan/i);
+      assert.doesNotMatch(h1En, /Milano|Milan/i);
+    } else {
+      assert.match(h1It, /Milano|Milan/i);
+      assert.match(h1En, /Milan|Milano/i);
+    }
 
     for (const locale of ['it', 'en', 'fr', 'es', 'de', 'ar', 'zh'] as const) {
       const locName = getLocalizedText(venue.localizedContent.name, locale);

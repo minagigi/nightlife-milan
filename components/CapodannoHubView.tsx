@@ -4,7 +4,10 @@ import EventVenueMap from '@/components/EventVenueMap';
 import { getEventVenueCopy } from '@/lib/i18n/eventVenueCopy';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import { capodannoEventPath, capodannoNavigation, capodannoPath } from '@/lib/capodanno/routes';
+import { getCapodannoMasterSeo35 } from '@/lib/capodanno/capodannoMasterSeo35';
 import { getPaymentTerms35 } from '@/lib/capodanno/paymentTerms35';
+import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
+import { getLocalizedVenueSlug35 } from '@/lib/i18n/localizedSlugs35';
 import {
   formatCapodannoHours35,
   getCapodannoCategoryBadge35,
@@ -39,19 +42,54 @@ type Props = {
 
 const SITE_URL = 'https://nightlifemilan.com';
 
+const OFFICIAL_21_PARTNER_VENUES: ReadonlyArray<{
+  venueId: string;
+  brandName: string;
+  capodannoSlug: string;
+  district: string;
+}> = [
+  { venueId: 'v-justme', brandName: 'Just Me Milano', capodannoSlug: 'capodanno-justme-milano-torre-branca', district: 'Parco Sempione · Torre Branca' },
+  { venueId: 'v-pineta', brandName: 'Pineta Milano', capodannoSlug: 'capodanno-pineta-milano', district: 'Porta Garibaldi · Via Messina 38' },
+  { venueId: 'v-voya', brandName: 'Voya Rooftop', capodannoSlug: 'capodanno-voya-rooftop-milano', district: 'Portello · 20° Piano Vista Fuochi' },
+  { venueId: 'v-repvblic', brandName: 'REPVBLIC Milano', capodannoSlug: 'capodanno-repvblic-milano', district: 'Piazza della Repubblica 12' },
+  { venueId: 'v-55milano', brandName: '55 Milano', capodannoSlug: 'capodanno-55-milano', district: 'Sempione · Via Piero della Francesca 55' },
+  { venueId: 'v-magazzini', brandName: 'Magazzini Generali', capodannoSlug: 'capodanno-magazzini-generali-milano', district: 'Porta Romana · Via Pietrasanta 16' },
+  { venueId: 'v-bobino', brandName: 'Bobino Milano', capodannoSlug: 'capodanno-bobino-milano', district: 'Navigli · Piazzale Stazione Genova 4' },
+  { venueId: 'v-theclub', brandName: 'The Club Milano', capodannoSlug: 'capodanno-the-club-milano', district: 'Brera · Corso Garibaldi 97' },
+  { venueId: 'v-carlsbergol', brandName: 'Carlsberg Øl Milano', capodannoSlug: 'capodanno-carlsberg-ol-milano', district: 'Porta Nuova · Bastioni di Porta Nuova 9' },
+  { venueId: 'v-tocqueville', brandName: 'Tocqueville 13', capodannoSlug: 'capodanno-tocqueville-13-milano', district: 'Corso Como · Via Tocqueville 13' },
+  { venueId: 'v-tom', brandName: 'TOM. The Ordinary Market', capodannoSlug: 'capodanno-tom-the-ordinary-market-milano', district: 'Centro / Navigli · Via Molino delle Armi 16' },
+  { venueId: 'v-mibmilano', brandName: 'MIB Milano', capodannoSlug: 'capodanno-mib-milano-piazza-affari', district: 'Duomo / Piazza Affari · Via Gaetano Negri 10' },
+  { venueId: 'v-dazi', brandName: 'Dazi Milano', capodannoSlug: 'capodanno-dazi-milano-arco-della-pace', district: 'Arco della Pace · Piazza Sempione 1' },
+  { venueId: 'v-bischeri', brandName: 'I Bischeri Milano', capodannoSlug: 'capodanno-bischeri-milano', district: 'Darsena / Navigli · Viale Gorizia 8' },
+  { venueId: 'v-gate', brandName: 'Gate Milano', capodannoSlug: 'capodanno-gate-milano', district: 'Isola / Farini · Via Valtellina 21' },
+  { venueId: 'v-pelledoca', brandName: 'Pelledoca Milano', capodannoSlug: 'capodanno-pelledoca-milano', district: 'Forlanini / Idroscalo · Viale Forlanini 121' },
+  { venueId: 'v-aria', brandName: 'Aria Club Milano', capodannoSlug: 'capodanno-aria-club-milano', district: 'San Siro · Piazzale dello Sport 14' },
+  { venueId: 'v-hollywood', brandName: 'Hollywood Milano', capodannoSlug: 'capodanno-hollywood-milano', district: 'Corso Como 15' },
+  { venueId: 'v-11clubroom', brandName: '11Clubroom', capodannoSlug: 'capodanno-11clubroom-milano', district: 'Corso Como · Via Tocqueville 11' },
+  { venueId: 'v-gattopardo', brandName: 'Il Gattopardo', capodannoSlug: 'capodanno-il-gattopardo-milano', district: 'Sempione · Via Piero della Francesca 47' },
+  { venueId: 'v-justme-garda', brandName: 'JustMe Garda Lake', capodannoSlug: 'capodanno-justme-garda-lake', district: 'Lago di Garda · Lonato del Garda (BS)' },
+];
+
 export default function CapodannoHubView({ locale, mode, canonicalPath }: Props) {
   const isIt = locale === 'it';
+  const isMasterHub = mode === 'capodanno-2027';
   const prefix = localePrefix(locale);
+  const locCode = (locale as LocaleCode) || 'en';
+  const clubsDir = getLocalizedDir35('clubs', locCode);
   const pageDef = getCapodannoCategoryPageDef(mode);
   const events = getCapodannoEventsForMode(mode);
   const nav = capodannoNavigation(locale);
   const ui = getCapodannoUiCopy(locale);
+  const masterSeo = getCapodannoMasterSeo35(locale);
   const scarcity = getScarcityAndChatCopy(locale);
-  const venueMapCopy = getEventVenueCopy(locale as LocaleCode);
+  const venueMapCopy = getEventVenueCopy(locCode);
   const paymentTerms = getPaymentTerms35(locale);
   const spCopy = getSinglePassCopy(locale);
 
-  const title = getCapodannoLocalizedCategoryTitle(pageDef, locale, events.length);
+  const title = isMasterHub
+    ? masterSeo.h1
+    : getCapodannoLocalizedCategoryTitle(pageDef, locale, events.length);
   const subtitle = getCapodannoLocalizedCategorySubtitle(pageDef, locale, events.length);
   const quickAnswer = getCapodannoCategoryQuickAnswer35(pageDef, locale, events.length);
   const shortLabel = getCapodannoCategoryShortLabel35(
@@ -70,9 +108,32 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
     paymentSteps: paymentTerms.steps,
   });
 
+  const itemListId = `${SITE_URL}${canonicalPath}#itemlist`;
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
+      ...(isMasterHub
+        ? [
+            {
+              '@type': 'CollectionPage',
+              '@id': `${SITE_URL}${canonicalPath}#collection`,
+              url: `${SITE_URL}${canonicalPath}`,
+              name: title,
+              description: masterSeo.metaDescription,
+              inLanguage: locale,
+              mainEntity: { '@id': itemListId },
+              mentions: OFFICIAL_21_PARTNER_VENUES.map((p) => {
+                const clubUrl = `${SITE_URL}${prefix}/${clubsDir}/${getLocalizedVenueSlug35(p.venueId, locCode)}`;
+                return {
+                  '@type': 'NightClub',
+                  '@id': `${clubUrl}#venue`,
+                  name: p.brandName,
+                  url: clubUrl,
+                };
+              }),
+            },
+          ]
+        : []),
       {
         '@type': 'BreadcrumbList',
         itemListElement: [
@@ -94,6 +155,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
       },
       {
         '@type': 'ItemList',
+        '@id': itemListId,
         name: title,
         description: subtitle,
         numberOfItems: events.length,
@@ -181,7 +243,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
     >
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
       />
 
       {/* CAPITOLO 01 — NOTTE #050505: Testata Editoriale Senza Cassettoni, Filtri & Locandine 4:5 Piene */}
@@ -281,6 +343,16 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
                   {ui.tocCatalog}
                 </a>
               </li>
+              {isMasterHub && (
+                <li className="shrink-0">
+                  <a
+                    href="#locali-partner-capodanno"
+                    className="inline-flex min-h-[36px] items-center border border-[#25D366]/60 bg-[#141311] px-3 py-1.5 text-[#F6F1E7]"
+                  >
+                    {masterSeo.tocPartners}
+                  </a>
+                </li>
+              )}
               <li className="shrink-0">
                 <a
                   href="#categorie-capodanno"
@@ -373,6 +445,80 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
           locale={locale}
           prefix={prefix}
         />
+
+        {/* Vetrina Dedicata ai 21 Locali Partner Ufficiali (doppio link: Scheda Capodanno 2027 + Scheda Locale) */}
+        {isMasterHub && (
+          <section
+            id="locali-partner-capodanno"
+            data-official-partner-clubs-21
+            className="mt-14 border-t border-[#F6F1E7]/18 pt-10"
+          >
+            <p className="font-mono text-xs font-bold uppercase tracking-[0.14em] text-[#EAE3D5]">
+              {masterSeo.partnerEyebrow}
+            </p>
+            <h2 className="mt-1.5 font-display text-2xl font-bold uppercase text-[#F6F1E7] sm:text-4xl">
+              {masterSeo.partnerTitle}
+            </h2>
+            <p className="mt-2 max-w-4xl text-sm leading-relaxed text-[#C2B9AA] sm:text-base">
+              {masterSeo.partnerIntro}
+            </p>
+
+            <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {OFFICIAL_21_PARTNER_VENUES.map((partner, idx) => {
+                const nyeHref = capodannoEventPath(partner.capodannoSlug, locale);
+                const clubSlug = getLocalizedVenueSlug35(partner.venueId, locCode);
+                const clubHref = `${prefix}/${clubsDir}/${clubSlug}`;
+                const ev = events.find((item) => item.slug === partner.capodannoSlug);
+                const priceSummary = ev
+                  ? getCapodannoLocalizedEventContent(ev, locale).priceSummary
+                  : '';
+                return (
+                  <article
+                    key={partner.venueId}
+                    className="flex flex-col justify-between border border-[#F6F1E7]/16 bg-[#0B0A09] p-4 transition-colors hover:border-[#EAE3D5]/45"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#25D366]">
+                          #{String(idx + 1).padStart(2, '0')} · PARTNER
+                        </span>
+                        <span className="truncate font-sans text-xs text-[#C2B9AA]">
+                          {partner.district}
+                        </span>
+                      </div>
+                      <h3 className="mt-1.5 font-display text-xl font-bold text-[#F6F1E7]">
+                        <Link href={clubHref} prefetch={false} className="hover:underline">
+                          {partner.brandName}
+                        </Link>
+                      </h3>
+                      {priceSummary && (
+                        <p className="mt-1.5 line-clamp-2 font-mono text-xs text-[#EAE3D5]">
+                          {priceSummary}
+                        </p>
+                      )}
+                    </div>
+                    <div className="mt-4 flex flex-wrap items-center gap-2 pt-2 border-t border-[#F6F1E7]/10">
+                      <Link
+                        href={nyeHref}
+                        prefetch={false}
+                        className="inline-flex min-h-[36px] flex-1 items-center justify-center bg-[#EAE3D5] px-3 py-1.5 text-xs font-extrabold uppercase tracking-wider text-[#050505] hover:bg-[#F6F1E7]"
+                      >
+                        {masterSeo.partnerNyeCta}
+                      </Link>
+                      <Link
+                        href={clubHref}
+                        prefetch={false}
+                        className="inline-flex min-h-[36px] flex-1 items-center justify-center border border-[#F6F1E7]/28 bg-[#141311] px-3 py-1.5 text-xs font-semibold text-[#F6F1E7] hover:border-[#EAE3D5]"
+                      >
+                        {masterSeo.partnerClubCta}
+                      </Link>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </section>
+        )}
       </section>
 
       {/* CAPITOLO 02 — CARTA CALDA #F6F1E7: Tabella Confronto Prezzi & Protocollo Pagamenti (senza cassettoni) */}

@@ -305,7 +305,7 @@ export const generateClubSchema = ({
       '@type': 'PostalAddress',
       streetAddress: venue.address.streetAddress,
       addressLocality: venue.address.addressLocality || 'Milano',
-      addressRegion: 'MI',
+      addressRegion: venue.address.addressRegion || 'MI',
       postalCode: venue.address.postalCode,
       addressCountry: venue.address.addressCountry || 'IT',
     },
@@ -324,9 +324,12 @@ export const generateClubSchema = ({
     schema.hasMap = hasMapUrl;
   }
   if (neighborhoodName) {
+    const localityLabel = venue.address.addressLocality || 'Milano';
     schema.containedInPlace = {
       '@type': 'AdministrativeArea',
-      name: `${neighborhoodName}, Milano`,
+      name: neighborhoodName.toLowerCase().includes(localityLabel.toLowerCase())
+        ? neighborhoodName
+        : `${neighborhoodName}, ${localityLabel}`,
     };
   }
   if (openingHoursSpec.length > 0) {

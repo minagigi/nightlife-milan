@@ -30,18 +30,28 @@ import { getV01SiteCopy } from '@/lib/i18n/v01SiteCopy35';
 const anyLocalePrefixRe = new RegExp(`^\\/(${LOCALES.map((l) => l.code).join('|')})(\\/|$)`);
 
 const MEGA_FEATURED_CLUBS = [
-  { name: 'Just Me Milano', zone: 'Parco Sempione', slug: 'just-me-milano' },
-  { name: 'Pineta Milano', zone: 'Porta Garibaldi · Via Messina', slug: 'pineta-club-milano' },
+  { name: 'Just Me Milano', zone: 'Parco Sempione · Torre Branca', slug: 'just-me-milano' },
+  { name: 'Pineta Milano', zone: 'Porta Garibaldi · Via Messina 38', slug: 'pineta-club-milano' },
   { name: 'Voya Rooftop', zone: 'Portello Skyline · 20° Piano', slug: 'voya-rooftop-milan' },
   { name: 'REPVBLIC Milano', zone: 'Piazza della Repubblica 12', slug: 'repvblic-milano' },
-  { name: 'The Club Milano', zone: 'Brera · Moscova', slug: 'the-club-milano' },
-  { name: 'Aria Club Milano', zone: 'San Siro Garden', slug: 'aria-club-milano' },
-  { name: '55 Milano', zone: 'Sempione · Arco della Pace', slug: '55-milano' },
-  { name: 'Tocqueville 13', zone: 'Corso Como · Garibaldi', slug: 'tocqueville-13' },
+  { name: '55 Milano', zone: 'Sempione · Via Piero della Francesca 55', slug: '55-milano' },
+  { name: 'Magazzini Generali', zone: 'Porta Romana · Via Pietrasanta 16', slug: 'magazzini-generali-milano' },
+  { name: 'Bobino Milano', zone: 'Navigli · Porta Genova', slug: 'bobino-milano' },
+  { name: 'The Club Milano', zone: 'Brera · Corso Garibaldi 97', slug: 'the-club-milano' },
+  { name: 'Carlsberg Øl Milano', zone: 'Porta Nuova · Bastioni 9', slug: 'carlsberg-ol-milano' },
+  { name: 'Tocqueville 13', zone: 'Corso Como · Via Tocqueville 13', slug: 'tocqueville-13-milano' },
+  { name: 'TOM. The Ordinary Market', zone: 'Centro / Navigli · Via Molino 16', slug: 'tom-the-ordinary-market-milano' },
+  { name: 'MIB Milano', zone: 'Duomo · Piazza Affari', slug: 'mib-milano' },
+  { name: 'Dazi Milano', zone: 'Arco della Pace · Piazza Sempione 1', slug: 'dazi-milano' },
+  { name: 'I Bischeri Milano', zone: 'Darsena / Navigli · Viale Gorizia 8', slug: 'bischeri-milano' },
+  { name: 'Gate Milano', zone: 'Isola / Farini · Via Valtellina 21', slug: 'gate-milano' },
+  { name: 'Pelledoca Milano', zone: 'Forlanini · Viale Forlanini 121', slug: 'pelledoca-milano' },
+  { name: 'Aria Club Milano', zone: 'San Siro · Piazzale dello Sport 14', slug: 'aria-club-milano' },
+  { name: 'Hollywood Milano', zone: 'Corso Como 15', slug: 'hollywood-club-milano' },
+  { name: '11Clubroom', zone: 'Corso Como · Via Tocqueville 11', slug: '11-clubroom' },
+  { name: 'Il Gattopardo', zone: 'Sempione · Ex Chiesa', slug: 'gattopardo-milano' },
+  { name: 'JustMe Garda Lake', zone: 'Lago di Garda · Lonato (BS)', slug: 'justme-garda-lake' },
   { name: 'Terrazza Duomo 21', zone: 'Piazza del Duomo 21', slug: 'terrazza-21' },
-  { name: 'Gattopardo Milano', zone: 'Cenisio · Ex Chiesa', slug: 'gattopardo-milano' },
-  { name: 'Hollywood Milano', zone: 'Corso Como 15', slug: 'hollywood-milano' },
-  { name: '11 Clubroom', zone: 'Via Tocqueville 11', slug: '11-clubroom-milano' },
 ] as const;
 
 const MOBILE_MENU_COPY = {
@@ -557,10 +567,10 @@ export default function Header({
         {openDropdown === 'clubs' && (
           <div
             data-no-lightbox="true"
-            className="nlm-mega-panel hidden border-t border-[#F6F1E7]/14 border-b border-b-[#EAE3D5]/32 bg-[#0B0A09] text-[#F6F1E7] xl:block"
+            className="nlm-mega-panel hidden max-h-[calc(100vh-5rem)] overflow-y-auto border-t border-[#F6F1E7]/14 border-b border-b-[#EAE3D5]/32 bg-[#0B0A09] text-[#F6F1E7] xl:block"
           >
-            <div className="mx-auto max-w-[1440px] px-8 py-6">
-              <div className="mb-4 flex items-center justify-between border-b border-[#F6F1E7]/14 pb-3">
+            <div className="mx-auto max-w-[1440px] px-8 py-5">
+              <div className="mb-3 flex items-center justify-between border-b border-[#F6F1E7]/14 pb-3">
                 <p className="font-display text-2xl font-bold text-[#F6F1E7]">
                   {t.megaClubsTitle}
                 </p>
@@ -584,7 +594,7 @@ export default function Header({
                   </Link>
                 </div>
               </div>
-              <div className="grid grid-cols-4 gap-3">
+              <div className="grid grid-cols-4 gap-2.5 2xl:grid-cols-5">
                 {MEGA_FEATURED_CLUBS.map((club) => (
                   <Link
                     key={club.slug}
@@ -592,12 +602,12 @@ export default function Header({
                     locale={currentLocale}
                     prefetch={false}
                     onClick={() => setOpenDropdown(null)}
-                    className="group flex flex-col justify-between border border-[#F6F1E7]/14 bg-[#141311] p-3.5 transition-colors hover:border-[#EAE3D5] hover:bg-[#1E1C19]"
+                    className="group flex flex-col justify-between border border-[#F6F1E7]/14 bg-[#141311] p-2.5 transition-colors hover:border-[#EAE3D5] hover:bg-[#1E1C19]"
                   >
-                    <span className="font-display text-xl font-bold text-[#F6F1E7] group-hover:text-[#EAE3D5]">
+                    <span className="font-display text-lg font-bold text-[#F6F1E7] group-hover:text-[#EAE3D5]">
                       {club.name}
                     </span>
-                    <span className="mt-1 text-xs font-medium text-[#C2B9AA]">{club.zone}</span>
+                    <span className="mt-0.5 text-xs font-medium text-[#C2B9AA]">{club.zone}</span>
                   </Link>
                 ))}
               </div>

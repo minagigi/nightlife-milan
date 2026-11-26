@@ -366,6 +366,51 @@ export const CLUB_SERP_35: Record<LocaleCode, ClubSerpPack> = {
   },
 };
 
+/** Canonical bare/official SERP brand names starting at index 0 across all 35 languages */
+export const OFFICIAL_SERP_NAME_BY_ID: Readonly<Record<string, string>> = {
+  'v-justme': 'Just Me Milano',
+  'v-pineta': 'Pineta Milano',
+  'v-voya': 'Voya Rooftop',
+  'v-repvblic': 'REPVBLIC Milano',
+  'v-55milano': '55 Milano',
+  'v-magazzini': 'Magazzini Generali',
+  'v-bobino': 'Bobino Milano',
+  'v-theclub': 'The Club Milano',
+  'v-carlsbergol': 'Carlsberg Øl Milano',
+  'v-tocqueville': 'Tocqueville 13',
+  'v-tom': 'TOM. The Ordinary Market',
+  'v-mibmilano': 'MIB Milano',
+  'v-dazi': 'Dazi Milano',
+  'v-bischeri': 'I Bischeri Milano',
+  'v-gate': 'Gate Milano',
+  'v-pelledoca': 'Pelledoca Milano',
+  'v-aria': 'Aria Club Milano',
+  'v-hollywood': 'Hollywood Milano',
+  'v-11clubroom': '11Clubroom',
+  'v-gattopardo': 'Il Gattopardo',
+  'v-justme-garda': 'JustMe Garda Lake',
+  'v-terrazza21': 'Terrazza Duomo 21',
+  'v-philipps': "Philipp's Milano",
+  'v-playclub': 'Play Club Milano',
+  'v-church81': 'Church 81 Milano',
+  'v-armani-prive': 'Armani Privé Milano',
+  'v-volt': 'Volt Club Milano',
+  'v-apollo': 'Apollo Club Milano',
+  'v-ceresio-7': 'Ceresio 7 Milano',
+  'v-alcatraz': 'Alcatraz Milano',
+  'v-fabrique': 'Fabrique Milano',
+  'v-amnesia': 'Amnesia Milano',
+  'v-dock22': 'Dock 22 Milano',
+  'v-loolapaloosa': 'Loolapaloosa Milano',
+  'v-super-club-milano': 'Super Club Milano',
+  'v-radio-rooftop-bar-milano': 'Radio Rooftop Bar Milano',
+  'v-the-roof-milano': 'The Roof Milano',
+  'v-terrazza-aperol-milano': 'Terrazza Aperol Milano',
+  'v-terrazza-gallia-milano': 'Terrazza Gallia Milano',
+  'v-ristorante-torre-milano': 'Ristorante Torre Milano',
+  'v-innocenti-evasioni-terrazza-triennale': 'Terrazza Triennale Milano',
+};
+
 /** Confirmed minimum VIP table spend (EUR) strictly for managed/verified venues in clubContent */
 const CONFIRMED_MIN_VIP_EUR: Readonly<Record<string, number>> = {
   'v-justme': 320,
@@ -382,6 +427,16 @@ const CONFIRMED_MIN_VIP_EUR: Readonly<Record<string, number>> = {
   'v-gattopardo': 300,
   'v-terrazza21': 250,
   'v-theclub': 250,
+  'v-magazzini': 300,
+  'v-bobino': 200,
+  'v-tocqueville': 300,
+  'v-hollywood': 300,
+  'v-carlsbergol': 200,
+  'v-tom': 250,
+  'v-bischeri': 250,
+  'v-gate': 250,
+  'v-pelledoca': 200,
+  'v-justme-garda': 300,
 };
 
 export const FLAGSHIP_TITLES_EN_IT: Readonly<Record<string, { en: string; it: string }>> = {
@@ -394,8 +449,8 @@ export const FLAGSHIP_TITLES_EN_IT: Readonly<Record<string, { en: string; it: st
     it: 'Voya Rooftop Milano: 20° Piano, Menù, Aperitivo e Tavoli',
   },
   'v-pineta': {
-    en: 'Pineta Club Milan: Cena Cantata, Aperitivo & VIP Tables',
-    it: 'Pineta Club Milano: Cena Cantata, Aperitivo e Tavoli VIP',
+    en: 'Pineta Milan: Singing Dinner, Aperitivo, Events & VIP Tables',
+    it: 'Pineta Milano: Cena Cantata, Aperitivo, Serate e Tavoli VIP',
   },
   'v-aria': {
     en: 'Aria Club Milan: 150m San Siro Afterparty & VIP Tables',
@@ -410,12 +465,12 @@ export const FLAGSHIP_TITLES_EN_IT: Readonly<Record<string, { en: string; it: st
     it: '55 Milano: Cena Cantata, Apericena XL e Tavoli VIP Sempione',
   },
   'v-repvblic': {
-    en: 'Repvblic Milan: Dirty Monday, House Nights & VIP Tables',
-    it: 'Repvblic Milano: Dirty Monday, House e Tavoli VIP Repubblica',
+    en: 'REPVBLIC Milan: Dirty Monday, House Nights & VIP Tables',
+    it: 'REPVBLIC Milano: Dirty Monday, House e Tavoli VIP Repubblica',
   },
   'v-11clubroom': {
-    en: '11 Clubroom Milan: Corso Como Urban Nights & VIP Tables',
-    it: '11 Clubroom Milano: Serate Urban Corso Como e Tavoli VIP',
+    en: '11Clubroom Milan: Corso Como Urban Nights & VIP Tables',
+    it: '11Clubroom Milano: Serate Urban Corso Como e Tavoli VIP',
   },
   'v-church81': {
     en: 'Church 81 Milan: Navigli Club, Bottle Prices & Guestlist',
@@ -431,7 +486,7 @@ export const FLAGSHIP_TITLES_EN_IT: Readonly<Record<string, { en: string; it: st
   },
   'v-gattopardo': {
     en: 'Il Gattopardo Milan: Entry Prices, Dress Code & VIP Tables',
-    it: 'Il Gattopardo Milano: Prezzi Entrata, Dress Code & Tavoli',
+    it: 'Il Gattopardo Milano: Prezzi Entrata, Dress Code e Tavoli',
   },
   'v-terrazza21': {
     en: 'Terrazza Duomo 21 Milan: Piazza Duomo Aperitivo & DJ Sets',
@@ -525,6 +580,30 @@ export const FLAGSHIP_TITLES_EN_IT: Readonly<Record<string, { en: string; it: st
     en: 'Terrazza Triennale Milan: Parco Sempione Rooftop & Dining',
     it: 'Terrazza Triennale Milano: Ristorante Panoramico Sempione',
   },
+  'v-carlsbergol': {
+    en: 'Carlsberg Øl Milan: Singing Dinner, Brewery & VIP Tables',
+    it: 'Carlsberg Øl Milano: Cena Cantata, Birreria e Tavoli VIP',
+  },
+  'v-tom': {
+    en: 'TOM. The Ordinary Market Milan: Dinner, Cocktails & Club',
+    it: 'TOM. The Ordinary Market Milano: Cena, Cocktail e Sound Club',
+  },
+  'v-bischeri': {
+    en: 'I Bischeri Milan: Tuscan Singing Dinner & Navigli Party',
+    it: 'I Bischeri Milano: Cena Cantata Toscana e Tavoli Navigli',
+  },
+  'v-gate': {
+    en: 'Gate Milan: Techno, Reggaeton, Tickets & VIP Tables Isola',
+    it: 'Gate Milano: Techno, Reggaeton, Prevendite e Tavoli VIP',
+  },
+  'v-pelledoca': {
+    en: 'Pelledoca Milan: Singing Dinner, Music Restaurant & Club',
+    it: 'Pelledoca Milano: Cena Cantata, Music Restaurant e Tavoli',
+  },
+  'v-justme-garda': {
+    en: 'JustMe Garda Lake (Lonato): Dinner Show, Club & VIP Tables',
+    it: 'JustMe Garda Lake (Lago di Garda): Cena Show e Tavoli VIP',
+  },
 };
 
 export function buildClubHighCtrTitle(venue: Venue, locale: string, localizedVenueName: string): string {
@@ -534,11 +613,19 @@ export function buildClubHighCtrTitle(venue: Venue, locale: string, localizedVen
   }
   const pack = CLUB_SERP_35[loc];
   const minVip = CONFIRMED_MIN_VIP_EUR[venue.id];
+  const canonicalBrand = OFFICIAL_SERP_NAME_BY_ID[venue.id] || localizedVenueName;
+  if (venue.id === 'v-justme-garda') {
+    if (minVip) {
+      const gardaCandidate = `JustMe Garda Lake: ${pack.vipFrom(minVip)} · ${pack.titlePricesVip}`;
+      if (gardaCandidate.length <= 62) return seoTitle(gardaCandidate, 62);
+    }
+    return seoTitle(`JustMe Garda Lake: ${pack.titlePricesVip}`, 62);
+  }
   const hasCityInName =
-    localizedVenueName.toLowerCase().includes('milan') ||
-    localizedVenueName.toLowerCase().includes('milano') ||
-    localizedVenueName.toLowerCase().includes(pack.city.toLowerCase());
-  const head = hasCityInName ? localizedVenueName : `${localizedVenueName} ${pack.city}`;
+    canonicalBrand.toLowerCase().includes('milan') ||
+    canonicalBrand.toLowerCase().includes('milano') ||
+    canonicalBrand.toLowerCase().includes(pack.city.toLowerCase());
+  const head = hasCityInName ? canonicalBrand : `${canonicalBrand} ${pack.city}`;
   if (minVip) {
     const candidate = `${head}: ${pack.vipFrom(minVip)} · ${pack.titlePricesVip}`;
     if (candidate.length <= 62) return seoTitle(candidate, 62);
@@ -556,6 +643,17 @@ export function buildClubHighCtrDescription(
   const pack = CLUB_SERP_35[loc];
   const street = venue.address.streetAddress;
   const minVip = CONFIRMED_MIN_VIP_EUR[venue.id];
+  const brand = OFFICIAL_SERP_NAME_BY_ID[venue.id] || localizedVenueName;
+  const isGarda = venue.id === 'v-justme-garda';
+  const cityLabel = isGarda
+    ? loc === 'it'
+      ? 'Lonato del Garda, Lago di Garda'
+      : 'Lonato del Garda, Lake Garda'
+    : loc === 'it'
+      ? 'Milano'
+      : loc === 'en'
+        ? 'Milan'
+        : pack.city;
 
   if (loc === 'it') {
     if (venue.id === 'v-justme') {
@@ -571,7 +669,7 @@ export function buildClubHighCtrDescription(
       return 'Voya Rooftop Milano (20° piano, Viale Achille Papa 30): aperitivo vista skyline, menù cena e Tavoli VIP da 250€. WhatsApp +39 351 912 7047.';
     }
     if (venue.id === 'v-pineta') {
-      return 'Pineta Club Milano (Via Messina 38): Aperitivo e Cena Cantata, Tr3ndy Society, Tavoli VIP da 300€ e Moulin Rouge NYE 2027. WA +39 351 912 7047.';
+      return 'Pineta Milano (Via Messina 38): Aperitivo e Cena Cantata, Tr3ndy Society, Tavoli VIP da 300€ e Moulin Rouge Capodanno 2027. WA +39 351 912 7047.';
     }
     if (venue.id === 'v-terrazza21') {
       return 'Terrazza Duomo 21 Milano (Piazza del Duomo 21): aperitivo vista guglie, cena Chef Braschi, 5° piano MA.RE e DJ set. Prenota WA +39 351 912 7047.';
@@ -585,10 +683,13 @@ export function buildClubHighCtrDescription(
     if (venue.id === 'v-philipps') {
       return "Philipp's Milano (The Plein Hotel, Via Manin 21): The Philipp's Show Chef Roberto Conti 20:00, Club 00:00-04:30 e Tavoli VIP. WA +39 351 912 7047.";
     }
-    if (minVip) {
-      return withWhatsApp(`${localizedVenueName} (${street}, Milano): Tavoli VIP da ${minVip}€, prezzi bottiglie, dress code e lista.`, 'it', 158);
+    if (venue.id === 'v-justme-garda') {
+      return 'JustMe Garda Lake (Via Lavagnone 13, Lonato del Garda): Dinner Show, Tavoli VIP da 300€ e Capodanno 2027 Just Me in Rouge. WA +39 351 912 7047.';
     }
-    return withWhatsApp(`${localizedVenueName} (${street}, Milano): orari, dress code, eventi e assistenza tavoli VIP.`, 'it', 158);
+    if (minVip) {
+      return withWhatsApp(`${brand} (${street}, ${cityLabel}): Tavoli VIP da ${minVip}€, prezzi bottiglie, dress code e lista.`, 'it', 158);
+    }
+    return withWhatsApp(`${brand} (${street}, ${cityLabel}): orari, dress code, eventi e assistenza tavoli VIP.`, 'it', 158);
   }
 
   if (loc === 'en') {
@@ -605,7 +706,7 @@ export function buildClubHighCtrDescription(
       return 'Voya Rooftop Milan (20th floor skyline bar, Portello M5): sunset aperitivo, panoramic dining & VIP tables from €250. WA +39 351 912 7047.';
     }
     if (venue.id === 'v-pineta') {
-      return 'Pineta Club Milan (Via Messina 38): Singing Aperitivo & Dinner Show, Tr3ndy Society, VIP tables from €300 & NYE 2027. Book WA +39 351 912 7047.';
+      return 'Pineta Milan (Via Messina 38): Singing Aperitivo & Dinner Show, Tr3ndy Society, VIP tables from €300 & NYE 2027. Book via WA +39 351 912 7047.';
     }
     if (venue.id === 'v-terrazza21') {
       return 'Terrazza Duomo 21 Milan (Piazza del Duomo 21): Cathedral-view aperitivo, Chef Braschi dining, 5F MA.RE & DJ sets. Book via WA +39 351 912 7047.';
@@ -619,10 +720,13 @@ export function buildClubHighCtrDescription(
     if (venue.id === 'v-philipps') {
       return "Philipp's Milan (The Plein Hotel, Via Manin 21): The Philipp's Show by Chef Roberto Conti 20:00, Club 00:00-04:30 & VIP tables. WA +39 351 912 7047.";
     }
-    if (minVip) {
-      return withWhatsApp(`${localizedVenueName} (${street}, Milan): VIP tables from €${minVip}, bottle prices, dress code & guestlist.`, 'en', 158);
+    if (venue.id === 'v-justme-garda') {
+      return 'JustMe Garda Lake (Via Lavagnone 13, Lonato del Garda): Dinner Show, VIP tables from €300 & Just Me in Rouge NYE 2027. Book WA +39 351 912 7047.';
     }
-    return withWhatsApp(`${localizedVenueName} (${street}, Milan): events, dress code & VIP table concierge.`, 'en', 158);
+    if (minVip) {
+      return withWhatsApp(`${brand} (${street}, ${cityLabel}): VIP tables from €${minVip}, bottle prices, dress code & guestlist.`, 'en', 158);
+    }
+    return withWhatsApp(`${brand} (${street}, ${cityLabel}): events, dress code & VIP table concierge.`, 'en', 158);
   }
 
   // All 33 additional indexed locales: 100% native high-CTR snippet
@@ -637,7 +741,7 @@ export function buildClubHighCtrDescription(
             ? `${pack.vipFrom(minVip)}, ${pack.guestlistAndVip}`
             : pack.guestlistAndVip;
 
-  const fullNative = `${localizedVenueName} (${street}, ${pack.city}): ${specialFeature}. ${pack.whatsappCta}`;
+  const fullNative = `${brand} (${street}, ${cityLabel}): ${specialFeature}. ${pack.whatsappCta}`;
   if (fullNative.length >= 78 && fullNative.length <= 158) {
     return fullNative;
   }

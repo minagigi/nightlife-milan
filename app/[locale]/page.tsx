@@ -40,6 +40,9 @@ import { venuesData } from '@/lib/venuesData';
 import { venueLocationLabel } from '@/lib/venueLocation';
 import { selectPriorityVenueEvents } from '@/lib/priorityVenueEvents';
 import { getLocalizedText } from '@/lib/seo';
+import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
+import { getLocalizedVenueSlug35 } from '@/lib/i18n/localizedSlugs35';
+import { OFFICIAL_SERP_NAME_BY_ID } from '@/lib/clubSeoMeta35';
 
 // Cache senza scadenza. Gli aggiornamenti avvengono solo al deploy o tramite
 // revalidatePath dopo una modifica editoriale esplicita.
@@ -305,29 +308,30 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-// ─── Exact 18 Milano partner clubs in Axel order (#01-#16 + Terrazza 21 + Gattopardo) ─
-const PARTNER_18_ORDER: readonly (
-  | { kind: 'venue'; id: string }
-  | { kind: 'capodanno'; slug: string }
-)[] = [
+// ─── All 21 Official Partner Venues in Axel priority order + Terrazza Duomo 21 ─
+const PARTNER_22_ORDER: readonly { kind: 'venue'; id: string }[] = [
   { kind: 'venue', id: 'v-justme' },
   { kind: 'venue', id: 'v-pineta' },
   { kind: 'venue', id: 'v-voya' },
   { kind: 'venue', id: 'v-repvblic' },
-  { kind: 'capodanno', slug: 'capodanno-bischeri-milano' },
-  { kind: 'capodanno', slug: 'capodanno-gate-milano' },
-  { kind: 'capodanno', slug: 'capodanno-pelledoca-milano' },
+  { kind: 'venue', id: 'v-55milano' },
   { kind: 'venue', id: 'v-magazzini' },
   { kind: 'venue', id: 'v-bobino' },
   { kind: 'venue', id: 'v-theclub' },
-  { kind: 'venue', id: 'v-aria' },
-  { kind: 'venue', id: 'v-55milano' },
+  { kind: 'venue', id: 'v-carlsbergol' },
   { kind: 'venue', id: 'v-tocqueville' },
+  { kind: 'venue', id: 'v-tom' },
+  { kind: 'venue', id: 'v-mibmilano' },
+  { kind: 'venue', id: 'v-dazi' },
+  { kind: 'venue', id: 'v-bischeri' },
+  { kind: 'venue', id: 'v-gate' },
+  { kind: 'venue', id: 'v-pelledoca' },
+  { kind: 'venue', id: 'v-aria' },
   { kind: 'venue', id: 'v-hollywood' },
   { kind: 'venue', id: 'v-11clubroom' },
-  { kind: 'capodanno', slug: 'capodanno-tom-the-ordinary-market-milano' },
-  { kind: 'venue', id: 'v-terrazza21' },
   { kind: 'venue', id: 'v-gattopardo' },
+  { kind: 'venue', id: 'v-justme-garda' },
+  { kind: 'venue', id: 'v-terrazza21' },
 ];
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
@@ -340,47 +344,37 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   const homeGridAlts = currentHomeGridAlts(locale);
   const v01 = getV01SiteCopy(locale);
   const lp = localePrefix(locale);
+  const clubsDir = getLocalizedDir35('clubs', locale as LocaleCode);
 
-  const partnerClubs: V01PartnerClubSlide[] = PARTNER_18_ORDER.map((entry, idx) => {
+  const partnerClubs: V01PartnerClubSlide[] = PARTNER_22_ORDER.map((entry, idx) => {
     const rank = String(idx + 1).padStart(2, '0');
-    if (entry.kind === 'venue') {
-      const venue = venuesData.find((candidate) => candidate.id === entry.id);
-      if (!venue || !venue.image) throw new Error(`Missing partner venue ${entry.id}`);
-      const name = getLocalizedText(venue.localizedContent.name, locale);
-      const slug = getLocalizedText(venue.slugs, locale);
-      const zone = venue.address?.streetAddress
-        ? `${venue.address.streetAddress} · ${venueLocationLabel(venue)}`
+    const venue = venuesData.find((candidate) => candidate.id === entry.id);
+    if (!venue || !venue.image) throw new Error(`Missing partner venue ${entry.id}`);
+    const name =
+      OFFICIAL_SERP_NAME_BY_ID[venue.id] ||
+      getLocalizedText(venue.localizedContent.name, locale);
+    const slug = getLocalizedVenueSlug35(venue.id, (locale as LocaleCode) || 'en');
+    const locLabel =
+      venue.id === 'v-justme-garda'
+        ? 'Lonato del Garda (Lago di Garda, BS)'
         : venueLocationLabel(venue);
-      const genres = venue.tags?.slice(0, 3).join(' · ') || 'House · Commercial · Hip-Hop';
-      const dress = venue.localizedContent?.dressCode
-        ? getLocalizedText(venue.localizedContent.dressCode, locale)
-        : 'Smart & Fashion Chic';
-      return {
-        rank,
-        id: venue.id,
-        name,
-        zone,
-        genres,
-        dress,
-        image: venue.image,
-        href: `${lp}/clubs/${slug}`,
-        waHref: getConciergeBookingUrl(locale, `${name} · VIP Table`, lp || '/'),
-      };
-    }
-
-    const ev = getCapodannoEventBySlug(entry.slug);
-    if (!ev) throw new Error(`Missing partner event ${entry.slug}`);
-    const locEv = getCapodannoLocalizedEventContent(ev, locale);
+    const zone = venue.address?.streetAddress
+      ? `${venue.address.streetAddress} · ${locLabel}`
+      : locLabel;
+    const genres = venue.tags?.slice(0, 3).join(' · ') || 'House · Commercial · Hip-Hop';
+    const dress = venue.localizedContent?.dressCode
+      ? getLocalizedText(venue.localizedContent.dressCode, locale)
+      : 'Smart & Fashion Chic';
     return {
       rank,
-      id: ev.slug,
-      name: ev.venueName,
-      zone: ev.address,
-      genres: locEv.musicAndFormat,
-      dress: locEv.dressCode,
-      image: `/images/events/cards-4x5/partner-clubs/${ev.slug.replace(/^capodanno-/, '')}.webp`,
-      href: capodannoEventPath(ev.slug, locale),
-      waHref: getConciergeBookingUrl(locale, `${ev.venueName} · VIP Table`, lp || '/'),
+      id: venue.id,
+      name,
+      zone,
+      genres,
+      dress,
+      image: venue.image,
+      href: `${lp}/${clubsDir}/${slug}`,
+      waHref: getConciergeBookingUrl(locale, `${name} · VIP Table`, lp || '/'),
     };
   });
 

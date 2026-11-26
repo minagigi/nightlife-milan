@@ -1,5 +1,8 @@
 import { Metadata } from 'next';
 import { getLocaleDef, hreflangAlternates, canonicalPageUrl, isEnabledLocale, localePrefix, DEFAULT_LOCALE, type LocaleCode } from '@/lib/i18n/locales';
+import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
+import { getLocalizedVenueSlug35 } from '@/lib/i18n/localizedSlugs35';
+import { OFFICIAL_SERP_NAME_BY_ID } from '@/lib/clubSeoMeta35';
 import { getClubsHubCopy } from '@/lib/i18n/clubsHubCopy';
 import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
@@ -91,13 +94,27 @@ export default async function ClubsPage({
 
   const CLUB_SLUG_TO_VENUE_ID: Record<string, string> = {
     justme: 'v-justme',
+    'just-me': 'v-justme',
     pineta: 'v-pineta',
+    aria: 'v-aria',
+    'aria-club': 'v-aria',
     voya: 'v-voya',
+    'voya-rooftop': 'v-voya',
     playclub: 'v-playclub',
     '55milano': 'v-55milano',
     repvblic: 'v-repvblic',
     magazzini: 'v-magazzini',
+    bobino: 'v-bobino',
+    tocqueville: 'v-tocqueville',
+    carlsbergol: 'v-carlsbergol',
+    tom: 'v-tom',
+    bischeri: 'v-bischeri',
+    gate: 'v-gate',
+    pelledoca: 'v-pelledoca',
+    'justme-garda': 'v-justme-garda',
     hollywood: 'v-hollywood',
+    '11clubroom': 'v-11clubroom',
+    dazi: 'v-dazi',
     apollo: 'v-apollo',
     ceresio7: 'v-ceresio-7',
     theclub: 'v-theclub',
@@ -108,6 +125,7 @@ export default async function ClubsPage({
     philipps: 'v-philipps',
     terrazza21: 'v-terrazza21',
   };
+  const clubsDir = getLocalizedDir35('clubs', localeCode);
   const todayDow = new Date().getDay();
   const openVenueIds = new Set(
     weeklyEvents
@@ -117,13 +135,20 @@ export default async function ClubsPage({
   );
 
   const sortedVenues = getVenues().map((v) => {
-    const slug = v.slugs[localeCode] || v.slugs[typedLocale] || v.slugs.en;
+    const slug = getLocalizedVenueSlug35(v.id, localeCode);
+    const displayName =
+      OFFICIAL_SERP_NAME_BY_ID[v.id] ||
+      v.localizedContent.name[localeCode] ||
+      v.localizedContent.name[typedLocale] ||
+      v.localizedContent.name.en;
     return {
       id: v.id,
       slug,
-      name: v.localizedContent.name[localeCode] || v.localizedContent.name[typedLocale] || v.localizedContent.name.en,
+      name: displayName,
       image: v.gallery?.[0] || v.image || '/images/milan-nightclub-luxury-vip-champagne.webp',
-      zone: v.zone.replace(/_/g, ' '),
+      zone: v.id === 'v-justme-garda' ? 'Lago di Garda (Lonato BS)' : v.zone.replace(/_/g, ' '),
+      addressLocality: v.address.addressLocality || 'Milano',
+      addressRegion: v.address.addressRegion || 'Lombardy',
       mood: v.tags?.[0] || v.category,
       entryDifficulty: mapDifficulty(v.entryDifficulty),
       insiderTip:
@@ -137,7 +162,7 @@ export default async function ClubsPage({
       isFeatured: v.isFeatured,
       isOpenTonight: openVenueIds.has(v.id),
       priceRange: v.priceRange,
-      customUrl: `${lp}/clubs/${slug}`,
+      customUrl: `${lp}/${clubsDir}/${slug}`,
     };
   });
 
@@ -147,9 +172,13 @@ export default async function ClubsPage({
     .filter((v) => v.coordinates?.latitude && v.coordinates?.longitude)
     .map((v) => ({
       id: v.id,
-      name: v.localizedContent.name[localeCode] || v.localizedContent.name[typedLocale] || v.localizedContent.name.en,
+      name:
+        OFFICIAL_SERP_NAME_BY_ID[v.id] ||
+        v.localizedContent.name[localeCode] ||
+        v.localizedContent.name[typedLocale] ||
+        v.localizedContent.name.en,
       address: v.address.streetAddress,
-      href: `${lp}/clubs/${v.slugs[localeCode] || v.slugs[typedLocale] || v.slugs.en}`,
+      href: `${lp}/${clubsDir}/${getLocalizedVenueSlug35(v.id, localeCode)}`,
       latitude: v.coordinates!.latitude,
       longitude: v.coordinates!.longitude,
     }));
@@ -267,8 +296,8 @@ export default async function ClubsPage({
                 image: venue.image.startsWith('http') ? venue.image : `${baseUrl}${venue.image}`,
                 address: {
                   '@type': 'PostalAddress',
-                  addressLocality: 'Milan',
-                  addressRegion: 'Lombardy',
+                  addressLocality: venue.addressLocality,
+                  addressRegion: venue.addressRegion,
                   addressCountry: 'IT',
                 },
               },

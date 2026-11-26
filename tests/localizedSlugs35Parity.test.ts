@@ -54,7 +54,6 @@ const STATIC_HUB_PATHS = [
   '/milan-fashion-week/calendar',
   '/football-afterparties',
   '/concert-afterparties',
-  '/new-years-eve',
   '/clubs',
   '/events',
   '/events/tonight',
@@ -356,7 +355,11 @@ test('anti-sabotage: bare dirs, unlisted clubs, past GSC events, mockEvents and 
     ['/it/prenotazione', '/it/concierge-vip-milano'],
     ['/it/prenota', '/it/concierge-vip-milano'],
     ['/it/eventi/stasera', '/it/eventi/stasera-milano'],
-    ['/it/capodanno-milano', '/it/capodanno-milano-discoteche'],
+    ['/new-years-eve', capodannoCategoryPath('capodanno-2027', 'en')],
+    ['/it/capodanno-milano', capodannoCategoryPath('capodanno-2027', 'it')],
+    ['/it/capodanno-milano-discoteche', capodannoCategoryPath('capodanno-2027', 'it')],
+    ['/es/nochevieja-milan', capodannoCategoryPath('capodanno-2027', 'es')],
+    ['/de/silvester-mailand', capodannoCategoryPath('capodanno-2027', 'de')],
     ['/sr/klub-milano', '/sr/klub-milano'],
     ['/it/milan-fashion-week/events/some-runway-party', '/it/milano-fashion-week-eventi'],
   ] as const) {
@@ -372,17 +375,23 @@ test('anti-sabotage: bare dirs, unlisted clubs, past GSC events, mockEvents and 
     }
   }
 
-  // Unlisted catalog + historical GSC clubs -> 1-hop 308 to localized /clubs hub (both /clubs/* and localized dir)
+  // Unlocked partner venues are active 200 OK; genuinely unlisted clubs -> 1-hop 308 to localized /clubs hub
   assert.equal(isKnownActiveVenueSlug('just-me-milano'), true);
   assert.equal(isKnownActiveVenueSlug('bobino-milano'), true);
-  assert.equal(isKnownActiveVenueSlug('gate-milano'), false);
-  assert.equal(isLegacyUnlistedClubSlug('gate-club-milano-tavoli-vip'), true);
+  assert.equal(isKnownActiveVenueSlug('gate-milano'), true);
+  assert.equal(isKnownActiveVenueSlug('pelledoca-milano'), true);
+  assert.equal(isKnownActiveVenueSlug('carlsberg-ol-milano'), true);
+  assert.equal(isKnownActiveVenueSlug('tom-the-ordinary-market-milano'), true);
+  assert.equal(isKnownActiveVenueSlug('bischeri-milano'), true);
+  assert.equal(isKnownActiveVenueSlug('justme-garda-lake'), true);
+  assert.equal(isLegacyUnlistedClubSlug('gate-club-milano-tavoli-vip'), false);
   assert.equal(isLegacyUnlistedClubSlug('encanto-club-latino'), true);
 
   for (const [src, dest] of [
-    ['/clubs/gate-milano', '/clubs'],
-    ['/it/clubs/gate-milano', '/it/discoteche-locali-milano'],
-    ['/it/locali/gate-club-milano-tavoli-vip', '/it/discoteche-locali-milano'],
+    ['/it/clubs/gate-milano', '/it/locali/gate-milano-tavoli-vip'],
+    ['/it/locali/gate-club-milano-tavoli-vip', '/it/locali/gate-milano-tavoli-vip'],
+    ['/it/clubs/pelledoca-milano', '/it/locali/pelledoca-milano-tavoli-vip'],
+    ['/clubs/old-fashion-milano', '/clubs'],
     ['/it/clubs/encanto-club-latino', '/it/discoteche-locali-milano'],
     ['/es/discotecas/old-fashion-milan-mesas-vip', '/es/discoteca-milan'],
   ] as const) {

@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import { tr } from '@/lib/i18n/t';
 import { hreflangAlternates, localePrefix, getLocaleDef, indexedLocaleCodes, canonicalPageUrl } from '@/lib/i18n/locales';
 import { getExistingGuideSlug35, getLocalizedVenueSlug35, getLocalizedZoneSlug35 } from '@/lib/i18n/localizedSlugs35';
@@ -7,7 +7,7 @@ import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
 import { getLocalizedGuideSlug35 } from '@/lib/guides100Catalog';
 import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
-import { buildClubHighCtrDescription, buildClubHighCtrTitle, getClubNyeBannerCopy35 } from '@/lib/clubSeoMeta35';
+import { buildClubHighCtrDescription, buildClubHighCtrTitle, getClubNyeBannerCopy35, OFFICIAL_SERP_NAME_BY_ID } from '@/lib/clubSeoMeta35';
 import { getCapodannoEventForClub } from '@/lib/capodannoEvents';
 import { capodannoEventPath } from '@/lib/capodanno/routes';
 import { getCapodannoLocalizedEventContent, getCapodannoLocalizedEventTitle } from '@/lib/capodanno/i18n';
@@ -1515,9 +1515,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         url: ogImage.startsWith('http') ? ogImage : `${baseUrl}${ogImage}`,
         width: 1200,
         height: 630,
-        alt: locale === 'it'
-          ? `${name} Milano | locale notturno, tavoli VIP`
-          : `${name} Milan | nightclub, VIP tables`,
+        alt: venue.id === 'v-justme-garda'
+          ? (locale === 'it'
+              ? `${name} Lonato del Garda (Lago di Garda) | Dinner Show e Tavoli VIP`
+              : `${name} Lonato del Garda (Lake Garda) | Dinner Show & VIP tables`)
+          : (locale === 'it'
+              ? `${name} Milano | locale notturno, tavoli VIP`
+              : `${name} Milan | nightclub, VIP tables`),
       }],
     },
     twitter: {
@@ -1635,8 +1639,9 @@ export default async function ClubPage({ params }: Props) {
       : null);
 
   const isWhatsAppOnlyVenue = [
-    'v-voya', 'v-55milano', 'v-55', 'v-11clubroom', 'v-church81', 'v-mibmilano', 'v-dazi',
-    'v-gattopardo', 'v-terrazza21', 'v-theclub', 'v-tocqueville', 'v-alcatraz', 'v-fabrique', 'v-amnesia', 'v-philipps'
+    'v-voya', 'v-55milano', 'v-repvblic', 'v-11clubroom', 'v-church81', 'v-mibmilano', 'v-dazi',
+    'v-gattopardo', 'v-terrazza21', 'v-theclub', 'v-tocqueville', 'v-alcatraz', 'v-fabrique', 'v-amnesia', 'v-philipps',
+    'v-bobino', 'v-magazzini', 'v-hollywood', 'v-carlsbergol', 'v-tom', 'v-bischeri', 'v-pelledoca',
   ].includes(venue.id);
 
   const image = venue.image || venue.gallery?.[0] || '/images/milan-nightclub-luxury-vip-champagne.webp';
@@ -1645,9 +1650,15 @@ export default async function ClubPage({ params }: Props) {
   const gallery = rawGallery.length >= 4 ? rawGallery : enhancedGallery;
   const venueUi = getVenueUi35(locale);
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-  const currentVenueSlug = getLocalizedVenueSlug35(venue.slugs.en, (locale as LocaleCode) || 'en');
+  const currentVenueSlug = getLocalizedVenueSlug35(venue.id, (locale as LocaleCode) || 'en');
   const clubsDir = getLocalizedDir35('clubs', locale);
+  if (slug !== currentVenueSlug) {
+    permanentRedirect(`${localePrefix(locale)}/${clubsDir}/${currentVenueSlug}`);
+  }
   const canonicalClubUrl = `${baseUrl}${localePrefix(locale)}/${clubsDir}/${currentVenueSlug}`;
+  const isGarda = venue.id === 'v-justme-garda';
+  const localityDisplay = venue.address.addressLocality || (locale === 'it' ? 'Milano' : 'Milan');
+  const canonicalBrandName = OFFICIAL_SERP_NAME_BY_ID[venue.id] || name;
 
   const venueCarouselEvents = resolveVenueEventsForCarousel(venue, locale, canonicalClubUrl);
   const venueTargetProfile = getVenueTargetProfile(venue, locale);
@@ -1669,10 +1680,10 @@ export default async function ClubPage({ params }: Props) {
     .sort((a, b) => new Date(b.dateISO).getTime() - new Date(a.dateISO).getTime());
   const hasMapUrl = venue.coordinates?.latitude
     ? `https://www.google.com/maps/search/?api=1&query=${venue.coordinates.latitude},${venue.coordinates.longitude}`
-    : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${name} ${venue.address.streetAddress} Milano`)}`;
+    : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${name} ${venue.address.streetAddress} ${localityDisplay}`)}`;
   const embedMapUrl = venue.coordinates?.latitude
     ? `https://www.google.com/maps?q=${venue.coordinates.latitude},${venue.coordinates.longitude}&output=embed`
-    : `https://www.google.com/maps?q=${encodeURIComponent(`${name} ${venue.address.streetAddress} Milano`)}&output=embed`;
+    : `https://www.google.com/maps?q=${encodeURIComponent(`${name} ${venue.address.streetAddress} ${localityDisplay}`)}&output=embed`;
   const venueMapCopy = getEventVenueCopy((locale as LocaleCode) || 'en');
   const nearbyVenues = getRelatedNearbyVenues(venue, mockVenues, 6);
   const allVenueFaqs = buildVenueAuthorityFaqs(venue, locale, name, dressCode, editorial?.faqs);
@@ -1684,13 +1695,22 @@ export default async function ClubPage({ params }: Props) {
     'v-voya': 'citylife-portello',
     'v-justme': 'parco-sempione',
     'v-55milano': 'parco-sempione',
+    'v-dazi': 'parco-sempione',
+    'v-gattopardo': 'parco-sempione',
     'v-pineta': 'corso-como',
     'v-repvblic': 'corso-como',
     'v-tocqueville': 'corso-como',
+    'v-carlsbergol': 'corso-como',
+    'v-hollywood': 'corso-como',
+    'v-11clubroom': 'corso-como',
     'v-philipps': 'brera',
     'v-theclub': 'brera',
-    'v-mibmilano': 'duomo-centro',
-    'v-terrazza21': 'duomo-centro',
+    'v-mibmilano': 'duomo-san-babila',
+    'v-terrazza21': 'duomo-san-babila',
+    'v-tom': 'navigli',
+    'v-bischeri': 'navigli',
+    'v-bobino': 'navigli',
+    'v-gate': 'isola',
   };
   const canonicalZoneSlug =
     priorityZoneByVenue[venue.id] ||
@@ -1727,10 +1747,10 @@ export default async function ClubPage({ params }: Props) {
     venue,
     locale,
     canonicalUrl: canonicalClubUrl,
-    name: cityQualifiedH1,
+    name: canonicalBrandName,
     description,
     schemaType: authoritySpec?.schemaType,
-    alternateNames: authoritySpec?.alternateNames,
+    alternateNames: Array.from(new Set([cityQualifiedH1, name, ...(authoritySpec?.alternateNames || [])])),
     neighborhoodName: locale === 'it' ? authoritySpec?.neighborhoodIt : authoritySpec?.neighborhoodEn,
     hasMapUrl,
     openingHoursSpec: authoritySpec?.openingHoursSpec,
@@ -1741,7 +1761,7 @@ export default async function ClubPage({ params }: Props) {
     "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": canonicalPageUrl(baseUrl, locale, '') },
-      { "@type": "ListItem", "position": 2, "name": locale === 'it' ? "Club Milano" : "Milan Clubs", "item": canonicalPageUrl(baseUrl, locale, '/clubs') },
+      { "@type": "ListItem", "position": 2, "name": locale === 'it' ? "Locali Partner & Club" : "Partner Venues & Clubs", "item": canonicalPageUrl(baseUrl, locale, '/clubs') },
       { "@type": "ListItem", "position": 3, "name": cityQualifiedH1, "item": `${baseUrl}${localePrefix(locale)}/${clubsDir}/${currentVenueSlug}` },
     ],
   };
@@ -1919,8 +1939,8 @@ export default async function ClubPage({ params }: Props) {
               <p className="font-sans text-[#F6F1E7] text-sm font-semibold mb-2">Quick Answer</p>
               <p className="font-sans text-[#EAE3D5] text-base leading-relaxed">
                 {locale === 'it'
-                  ? `${name} si trova in ${venue.address.streetAddress}, Milano. ${editorial?.tagline ? editorial.tagline + '. ' : ''}${description.substring(0, 180)}... Prenotazione Tavoli VIP e Liste su WhatsApp +39 351 912 7047 o concierge@nightlifemilan.com.`
-                  : `${name} is located at ${venue.address.streetAddress}, Milan. ${editorial?.tagline ? editorial.tagline + '. ' : ''}${description.substring(0, 180)}... Book VIP Tables & Guestlists via WhatsApp +39 351 912 7047 or concierge@nightlifemilan.com.`}
+                  ? `${name} si trova in ${venue.address.streetAddress}, ${isGarda ? 'Lonato del Garda (Lago di Garda, BS)' : localityDisplay}. ${editorial?.tagline ? editorial.tagline + '. ' : ''}${description.substring(0, 180)}... Prenotazione Tavoli VIP e Liste su WhatsApp +39 351 912 7047 o concierge@nightlifemilan.com.`
+                  : `${name} is located at ${venue.address.streetAddress}, ${isGarda ? 'Lonato del Garda (Lake Garda, BS)' : localityDisplay}. ${editorial?.tagline ? editorial.tagline + '. ' : ''}${description.substring(0, 180)}... Book VIP Tables & Guestlists via WhatsApp +39 351 912 7047 or concierge@nightlifemilan.com.`}
               </p>
             </div>
 
@@ -2255,14 +2275,14 @@ export default async function ClubPage({ params }: Props) {
                   <Image
                     src={src}
                     alt={[
-                      `${name} Milan - interior atmosphere and dance floor`,
-                      `${name} Milan - VIP tables and bottle service`,
-                      `${name} Milan - bar and lounge area`,
-                      `${name} Milan - nightclub crowd and DJ set`,
-                      `${name} Milan - private room and VIP area`,
-                      `${name} Milan - venue entrance and facade`,
-                      `${name} Milan - terrace and outdoor space`,
-                    ][i] ?? `${name} Milan - venue photo ${i + 1}`}
+                      `${name} ${localityDisplay} - interior atmosphere and dance floor`,
+                      `${name} ${localityDisplay} - VIP tables and bottle service`,
+                      `${name} ${localityDisplay} - bar and lounge area`,
+                      `${name} ${localityDisplay} - nightclub crowd and DJ set`,
+                      `${name} ${localityDisplay} - private room and VIP area`,
+                      `${name} ${localityDisplay} - venue entrance and facade`,
+                      `${name} ${localityDisplay} - terrace and outdoor space`,
+                    ][i] ?? `${name} ${localityDisplay} - venue photo ${i + 1}`}
                     fill
                     unoptimized
                     quality={92}
@@ -2281,7 +2301,7 @@ export default async function ClubPage({ params }: Props) {
                   <p className="text-[#C2B9AA] text-sm font-semibold mb-1">
                     {tr(locale, 'Address', 'Indirizzo')}
                   </p>
-                  <p className="text-[#EAE3D5]">{venue.address.streetAddress}, Milan</p>
+                  <p className="text-[#EAE3D5]">{venue.address.streetAddress}, {venue.address.postalCode} {localityDisplay}</p>
                   {venue.coordinates?.latitude && (
                     <a
                       href={`https://www.google.com/maps/search/?api=1&query=${venue.coordinates.latitude},${venue.coordinates.longitude}`}
@@ -2475,7 +2495,7 @@ export default async function ClubPage({ params }: Props) {
           services={venueServices}
         />
         <EntryFormulaMatrix locale={locale} />
-        {(slug.includes('aria') || slug.includes('just-me') || slug.includes('voya') || slug.includes('55-milano') || slug.includes('pineta') || slug.includes('repvblic')) && (
+        {['v-aria', 'v-justme', 'v-voya', 'v-55milano', 'v-pineta', 'v-repvblic'].includes(venue.id) && (
           <SanSiroMatchAfterpartyFinder locale={locale} />
         )}
         <VipQuoteCalculator locale={locale} initialVenueSlug={slug} />
@@ -2484,14 +2504,22 @@ export default async function ClubPage({ params }: Props) {
         {nearbyVenues.length > 0 && (
           <section className="pt-8 border-t border-white/10">
             <h2 className="text-2xl md:text-3xl font-serif font-bold text-white mb-2">
-              {locale === 'it'
-                ? `Altri Club e Rooftop Vicini a ${name} a Milano`
-                : `Nearby Clubs & Rooftops Close to ${name} in Milan`}
+              {isGarda
+                ? (locale === 'it'
+                    ? `Locali Partner Collegati a ${name} tra Lombardia e Milano`
+                    : `Connected Partner Clubs & Flagship Venues in Lombardy & Milan`)
+                : (locale === 'it'
+                    ? `Altri Club e Rooftop Vicini a ${name} a Milano`
+                    : `Nearby Clubs & Rooftops Close to ${name} in Milan`)}
             </h2>
             <p className="text-sm text-white/60 mb-6">
-              {locale === 'it'
-                ? 'Esplora i locali più vicini calcolati in linea d’aria per combinare aperitivo panoramico, cena cantata e tavolo VIP.'
-                : 'Explore the closest verified Milan venues sorted by real distance to pair sunset aperitivo, dinner shows, and VIP clubbing.'}
+              {isGarda
+                ? (locale === 'it'
+                    ? 'Scopri i club partner del gruppo Nightlife Milan prenotabili con lo stesso desk WhatsApp ufficiale.'
+                    : 'Explore sister partner venues across the Nightlife Milan network bookable via the same official WhatsApp desk.')
+                : (locale === 'it'
+                    ? 'Esplora i locali più vicini calcolati in linea d’aria per combinare aperitivo panoramico, cena cantata e tavolo VIP.'
+                    : 'Explore the closest verified Milan venues sorted by real distance to pair sunset aperitivo, dinner shows, and VIP clubbing.')}
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" data-taste-stagger>
               {nearbyVenues.map(({ venue: near, distanceLabel }) => {
@@ -2547,7 +2575,7 @@ export default async function ClubPage({ params }: Props) {
             </span>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" data-taste-stagger>
-            {canonicalZone && (
+            {!isGarda && canonicalZone && (
               <Link
                 href={`${lp}/${zonesDir}/${localizedZoneSlug}`}
                 locale={locCode}

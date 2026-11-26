@@ -2,6 +2,11 @@
 const CARD_POSTER_4X5_MAP: Readonly<Record<string, string>> = {
   "/images/11-clubroom-milan.webp": "/images/events/cards-4x5/partner-clubs/11-clubroom.webp",
   "/images/55-milano.webp": "/images/events/cards-4x5/partner-clubs/55-milano.webp",
+  "/images/seo-events/master/carlsberg-ol-01.webp": "/images/events/cards-4x5/partner-clubs/carlsberg-ol-milano.webp",
+  "/images/seo-events/master/tom-milano-01.webp": "/images/events/cards-4x5/partner-clubs/tom-the-ordinary-market-milano.webp",
+  "/images/seo-events/master/bischeri-milano-01.webp": "/images/events/cards-4x5/partner-clubs/bischeri-milano.webp",
+  "/images/seo-events/master/gate-milano.webp": "/images/events/cards-4x5/partner-clubs/gate-milano.webp",
+  "/images/seo-events/master/pelledoca-milano.webp": "/images/events/cards-4x5/partner-clubs/pelledoca-milano.webp",
   "/images/apollo-club-milano.webp": "/images/events/cards-4x5/partner-clubs/apollo-club-milano.webp",
   "/images/armani-prive-milano.webp": "/images/events/cards-4x5/partner-clubs/armani-prive-milano.webp",
   "/images/ceresio-7-milano.webp": "/images/events/cards-4x5/partner-clubs/ceresio-7-milano.webp",

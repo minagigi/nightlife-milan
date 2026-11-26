@@ -73,6 +73,50 @@ export function getEnhancedVenueGallery(venue: Venue): string[] {
       '/images/venues/philipps-milano/philipps-milano-05.webp',
       '/images/venues/philipps-milano/philipps-milano-06.webp',
     ],
+    'v-carlsbergol': [
+      '/images/seo-events/master/carlsberg-ol-01.webp',
+      '/images/seo-events/master/carlsberg-ol-02.webp',
+      '/images/seo-events/master/carlsberg-ol-03.webp',
+      '/images/seo-events/master/carlsberg-ol-04.webp',
+      '/images/guides-editorial/carlsberg-ol-stage-candles.webp',
+    ],
+    'v-tom': [
+      '/images/events/cards-4x5/partner-clubs/tom-the-ordinary-market-milano.webp',
+      '/images/seo-events/master/tom-milano-01.webp',
+      '/images/seo-events/master/tom-milano-02.webp',
+      '/images/seo-events/master/tom-milano-03.webp',
+      '/images/seo-events/master/tom-milano-04.webp',
+      '/images/guides-editorial/tom-milano-dinner.webp',
+    ],
+    'v-bischeri': [
+      '/images/events/cards-4x5/partner-clubs/bischeri-milano.webp',
+      '/images/seo-events/master/bischeri-milano-01.webp',
+      '/images/seo-events/master/bischeri-milano-02.webp',
+      '/images/seo-events/master/bischeri-milano-03.webp',
+      '/images/seo-events/master/bischeri-milano-04.webp',
+      '/images/guides-editorial/bischeri-dinner.webp',
+      '/images/guides-editorial/bischeri-gala.webp',
+    ],
+    'v-gate': [
+      '/images/events/cards-4x5/partner-clubs/gate-milano.webp',
+      '/images/seo-events/master/gate-milano.webp',
+      '/images/seo-events/master/gate-s02-architecture.webp',
+      '/images/seo-events/master/gate-s03-sound-dancefloor.webp',
+      '/images/seo-events/master/gate-s04-tickets-aperitivo.webp',
+      '/images/seo-events/master/gate-s05-vip-table-bottle.webp',
+      '/images/seo-events/master/gate-s07-getting-there-exterior.webp',
+    ],
+    'v-pelledoca': [
+      '/images/events/cards-4x5/partner-clubs/pelledoca-milano.webp',
+      '/images/seo-events/master/pelledoca-milano.webp',
+      '/images/events/cards-4x5/capodanno-2027-posters/capodanno-pelledoca-milano.webp',
+      '/images/events/capodanno-2027-menus/pelledoca-nye-2027-menu-cenone-120.webp',
+    ],
+    'v-justme-garda': [
+      '/images/events/cards-4x5/partner-clubs/justme-garda-lake.webp',
+      '/images/events/cards-4x5/october-2026/250310-garda-nye-rouge.webp',
+      '/images/events/cards-4x5/october-2026/251849-garda-ritmo.webp',
+    ],
   };
   if (map[venue.id]) return map[venue.id];
   if (venue.gallery && venue.gallery.length >= 5) return venue.gallery;

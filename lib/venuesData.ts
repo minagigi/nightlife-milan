@@ -988,6 +988,240 @@ export const venuesData: Venue[] = [
     ageRange: "23-45",
     priceRange: "$$$$",
     tags: ["Dinner Show", "Luxury Fashion", "VIP Tables"]
+  },
+  {
+    id: "v-carlsbergol",
+    slugs: { en: "carlsberg-ol-milano", it: "carlsberg-ol-milano-tavoli-vip" },
+    address: {
+      streetAddress: "Bastioni di Porta Nuova, 9",
+      addressLocality: "Milano",
+      postalCode: "20121",
+      addressCountry: "IT"
+    },
+    coordinates: { latitude: 45.4807, longitude: 9.1898 },
+    category: VenueCategory.CLUB,
+    zone: MilanZone.CORSO_COMO,
+    sameAs: ["https://www.instagram.com/carlsbergol_milano/"],
+    localizedContent: {
+      name: { en: "Carlsberg Øl Milano", it: "Carlsberg Øl Milano" },
+      description: {
+        en: "Carlsberg Øl Milano sits beneath historic brick vaults at Bastioni di Porta Nuova 9, steps from Corso Como and Piazza Gae Aulenti. A spacious restaurant, craft brewery, and live singing dinner venue hosting convivial group tables, live music shows, and late-night DJ sets.",
+        it: "Il Carlsberg Øl Milano sorge sotto le storiche volte in mattoni di Bastioni di Porta Nuova 9, a pochi passi da Corso Como e Piazza Gae Aulenti. Ristorante scenografico, birreria storica e locale con cena cantata dal vivo, ideale per grandi tavolate, feste private e DJ set fino a tardi."
+      },
+      dressCode: { en: "Smart Casual & Evening Chic", it: "Smart Casual curato per cena e serata" },
+      altTextImg: { en: "Carlsberg Øl Milano Bastioni di Porta Nuova brick vaults dinner show and club", it: "Carlsberg Øl Milano Bastioni di Porta Nuova volte in mattoni cena cantata e tavoli" },
+      insiderTip: { en: "Book the central vaulted hall tables for the best view of the live singing dinner show before the DJ set starts.", it: "Prenota i tavoli nella sala centrale sotto le volte in mattoni per vivere al meglio la cena cantata prima del DJ set." }
+    },
+    image: "/images/events/cards-4x5/partner-clubs/carlsberg-ol-milano.webp",
+    gallery: [
+      "/images/seo-events/master/carlsberg-ol-01.webp",
+      "/images/seo-events/master/carlsberg-ol-02.webp",
+      "/images/seo-events/master/carlsberg-ol-03.webp",
+      "/images/seo-events/master/carlsberg-ol-04.webp",
+      "/images/guides-editorial/carlsberg-ol-stage-candles.webp"
+    ],
+    isManaged: true,
+    isPriority: false,
+    isFeatured: false,
+    priorityScore: 88,
+    ageRange: "20-45",
+    priceRange: "$$",
+    tags: ["Singing Dinner", "Porta Nuova", "Live Show & DJ"]
+  },
+  {
+    id: "v-tom",
+    slugs: { en: "tom-the-ordinary-market-milano", it: "tom-the-ordinary-market-milano-tavoli-vip" },
+    address: {
+      streetAddress: "Via Molino delle Armi, 16",
+      addressLocality: "Milano",
+      postalCode: "20123",
+      addressCountry: "IT"
+    },
+    coordinates: { latitude: 45.4567, longitude: 9.1834 },
+    category: VenueCategory.CLUB,
+    zone: MilanZone.NAVIGLI,
+    sameAs: ["https://www.instagram.com/theordinarymarket/"],
+    localizedContent: {
+      name: { en: "TOM. The Ordinary Market", it: "TOM. The Ordinary Market" },
+      description: {
+        en: "Located at Via Molino delle Armi 16 between Milan's historic center and Navigli, TOM. The Ordinary Market is a multi-level design restaurant, cocktail bar, and sound club blending contemporary dining, signature mixology, and vibrant house & commercial DJ nights.",
+        it: "Situato in Via Molino delle Armi 16 tra il centro storico e i Navigli, TOM. The Ordinary Market è un ristorante di design su più livelli, cocktail bar d'autore e sound club che fonde cucina contemporanea, alta miscelazione e serate DJ set House e Commercial."
+      },
+      dressCode: { en: "Smart Chic: Collared shirt or tailored evening attire recommended", it: "Smart Chic: Camicia o outfit serale curato consigliato" },
+      altTextImg: { en: "TOM. The Ordinary Market Milan Via Molino delle Armi restaurant cocktail bar and sound club", it: "TOM. The Ordinary Market Milano Via Molino delle Armi ristorante cocktail bar e sound club" },
+      insiderTip: { en: "Reserve a dinner table at 21:00 to keep your spot seamlessly as the lights dim and the sound club takes over at midnight.", it: "Prenota il tavolo cena delle 21:00 per mantenere la postazione riservata quando le luci si abbassano e parte il sound club di mezzanotte." }
+    },
+    image: "/images/events/cards-4x5/partner-clubs/tom-the-ordinary-market-milano.webp",
+    gallery: [
+      "/images/seo-events/master/tom-milano-01.webp",
+      "/images/seo-events/master/tom-milano-02.webp",
+      "/images/seo-events/master/tom-milano-03.webp",
+      "/images/seo-events/master/tom-milano-04.webp",
+      "/images/guides-editorial/tom-milano-dinner.webp"
+    ],
+    isManaged: true,
+    isPriority: false,
+    isFeatured: false,
+    priorityScore: 86,
+    ageRange: "22-42",
+    priceRange: "$$$",
+    tags: ["Dinner & Club", "Mixology", "VIP Tables"]
+  },
+  {
+    id: "v-bischeri",
+    slugs: { en: "bischeri-milano", it: "bischeri-milano-tavoli-vip" },
+    address: {
+      streetAddress: "Viale Gorizia, 8",
+      addressLocality: "Milano",
+      postalCode: "20144",
+      addressCountry: "IT"
+    },
+    coordinates: { latitude: 45.4529, longitude: 9.1755 },
+    category: VenueCategory.CLUB,
+    zone: MilanZone.NAVIGLI,
+    sameAs: ["https://www.instagram.com/ibischerimilano/"],
+    localizedContent: {
+      name: { en: "I Bischeri Milano", it: "I Bischeri Milano" },
+      description: {
+        en: "Overlooking the Darsena at Viale Gorizia 8 in Navigli, I Bischeri Milano pairs authentic Tuscan steakhouse & seafood dining with high-energy Italian singing dinners, premium wine cellars, and convivial DJ party nights until late.",
+        it: "Affacciato sulla Darsena in Viale Gorizia 8 sui Navigli, I Bischeri Milano unisce l'autentica cucina toscana di carne e mare alle travolgenti cene cantate italiane, cantina vini pregiati e party con DJ set fino a tarda notte."
+      },
+      dressCode: { en: "Smart Elegant & Dinner Chic", it: "Smart Elegant e abbigliamento curato da cena spettacolo" },
+      altTextImg: { en: "I Bischeri Milano Viale Gorizia 8 Darsena Tuscan singing dinner show and party", it: "I Bischeri Milano Viale Gorizia 8 Darsena cena cantata toscana e tavoli" },
+      insiderTip: { en: "Ideal for birthdays, graduations, and New Year's Eve groups seeking seated Italian dining that turns into a full singing party.", it: "Perfetto per compleanni, lauree e gruppi di Capodanno che cercano una vera cena servita capace di trasformarsi in festa cantata." }
+    },
+    image: "/images/events/cards-4x5/partner-clubs/bischeri-milano.webp",
+    gallery: [
+      "/images/seo-events/master/bischeri-milano-01.webp",
+      "/images/seo-events/master/bischeri-milano-02.webp",
+      "/images/seo-events/master/bischeri-milano-03.webp",
+      "/images/seo-events/master/bischeri-milano-04.webp",
+      "/images/guides-editorial/bischeri-dinner.webp",
+      "/images/guides-editorial/bischeri-gala.webp"
+    ],
+    isManaged: true,
+    isPriority: false,
+    isFeatured: false,
+    priorityScore: 84,
+    ageRange: "22-45",
+    priceRange: "$$$",
+    tags: ["Cena Cantata", "Navigli Darsena", "Dinner Party"]
+  },
+  {
+    id: "v-gate",
+    slugs: { en: "gate-milano", it: "gate-milano-tavoli-vip" },
+    address: {
+      streetAddress: "Via Valtellina, 21",
+      addressLocality: "Milano",
+      postalCode: "20159",
+      addressCountry: "IT"
+    },
+    coordinates: { latitude: 45.4934, longitude: 9.1812 },
+    category: VenueCategory.CLUB,
+    zone: MilanZone.ISOLA,
+    sameAs: ["https://www.instagram.com/gatemilano/"],
+    localizedContent: {
+      name: { en: "Gate Milano", it: "Gate Milano" },
+      description: {
+        en: "Set inside the Scalo Farini industrial district at Via Valtellina 21 (Isola / Porta Nuova), Gate Milano is a high-impact club arena equipped with custom light installations and concert-grade sound, hosting PERREO XL Reggaeton fiestas, Techno showcases, and international live acts.",
+        it: "Immerso nel distretto post-industriale dello Scalo Farini in Via Valtellina 21 (Isola / Porta Nuova), il Gate Milano è un club arena ad alto impatto scenografico con installazioni luminose e impianto da concerto, casa dei format Reggaeton PERREO XL, showcase Techno e live internazionali."
+      },
+      dressCode: { en: "Urban Clubwear & Smart Street Style (valid physical ID required)", it: "Urban Clubwear e Street Style curato (documento fisico obbligatorio)" },
+      altTextImg: { en: "Gate Milano Via Valtellina 21 Isola club dancefloor lighting and VIP tables", it: "Gate Milano Via Valtellina 21 Isola discoteca impianto luci e tavoli VIP" },
+      insiderTip: { en: "Secure Xceed early-bird tickets or reserve a raised Stage Privé table on WhatsApp +39 351 912 7047 to skip the Via Valtellina queue.", it: "Blocca le prevendite Xceed o prenota un Tavolo Privé Palco su WhatsApp +39 351 912 7047 per saltare la coda di Via Valtellina." }
+    },
+    image: "/images/events/cards-4x5/partner-clubs/gate-milano.webp",
+    gallery: [
+      "/images/seo-events/master/gate-milano.webp",
+      "/images/seo-events/master/gate-s02-architecture.webp",
+      "/images/seo-events/master/gate-s03-sound-dancefloor.webp",
+      "/images/seo-events/master/gate-s04-tickets-aperitivo.webp",
+      "/images/seo-events/master/gate-s05-vip-table-bottle.webp",
+      "/images/seo-events/master/gate-s07-getting-there-exterior.webp"
+    ],
+    isManaged: true,
+    isPriority: false,
+    isFeatured: false,
+    priorityScore: 83,
+    ageRange: "18-35",
+    priceRange: "$$",
+    tags: ["Reggaeton & Urban", "Techno Arena", "Isola Farini"]
+  },
+  {
+    id: "v-pelledoca",
+    slugs: { en: "pelledoca-milano", it: "pelledoca-milano-tavoli-vip" },
+    address: {
+      streetAddress: "Viale Enrico Forlanini, 121",
+      addressLocality: "Milano",
+      postalCode: "20134",
+      addressCountry: "IT"
+    },
+    coordinates: { latitude: 45.4622, longitude: 9.2618 },
+    category: VenueCategory.CLUB,
+    zone: MilanZone.LAMBRATE,
+    sameAs: ["https://www.instagram.com/pelledocamilano/", "https://www.pelledoca.com"],
+    localizedContent: {
+      name: { en: "Pelledoca Milano", it: "Pelledoca Milano" },
+      description: {
+        en: "Surrounded by greenery at Viale Enrico Forlanini 121 near Linate and Idroscalo Park, Pelledoca Milano Music & Food is Milan's historic dinner-and-dance institution, famous for celebratory singing dinners, summer garden nights, and commercial house clubbing until 04:30.",
+        it: "Immerso nel verde di Viale Enrico Forlanini 121 tra Parco Forlanini, Linate e Idroscalo, il Pelledoca Milano Music & Food è lo storico music restaurant e club milanese celebre per la cena cantata animata, il giardino estivo e la discoteca House e Commerciale fino alle 04:30."
+      },
+      dressCode: { en: "Smart Elegant: Shirt recommended for men, no athletic wear", it: "Smart Elegant: Camicia consigliata per l'uomo, no abbigliamento sportivo" },
+      altTextImg: { en: "Pelledoca Milano Viale Forlanini 121 music restaurant singing dinner and club", it: "Pelledoca Milano Viale Forlanini 121 music restaurant cena cantata e discoteca" },
+      insiderTip: { en: "Convenient parking right along Viale Forlanini 121 and direct M4 Blu metro access make Pelledoca effortless for large dinner-show groups.", it: "Il comodo parcheggio su Viale Forlanini 121 e la linea M4 Blu rendono il Pelledoca comodissimo per grandi tavolate di cena cantata e compleanni." }
+    },
+    image: "/images/events/cards-4x5/partner-clubs/pelledoca-milano.webp",
+    gallery: [
+      "/images/events/cards-4x5/partner-clubs/pelledoca-milano.webp",
+      "/images/seo-events/master/pelledoca-milano.webp",
+      "/images/events/cards-4x5/capodanno-2027-posters/capodanno-pelledoca-milano.webp",
+      "/images/events/capodanno-2027-menus/pelledoca-nye-2027-menu-cenone-120.webp"
+    ],
+    isManaged: true,
+    isPriority: false,
+    isFeatured: false,
+    priorityScore: 82,
+    ageRange: "23-45",
+    priceRange: "$$",
+    tags: ["Music Restaurant", "Cena Cantata", "Clubbing"]
+  },
+  {
+    id: "v-justme-garda",
+    slugs: { en: "justme-garda-lake", it: "justme-garda-lake-lago-di-garda-tavoli-vip" },
+    address: {
+      streetAddress: "Via Lavagnone, 13",
+      addressLocality: "Lonato del Garda",
+      addressRegion: "BS",
+      postalCode: "25017",
+      addressCountry: "IT"
+    },
+    coordinates: { latitude: 45.4484, longitude: 10.5186 },
+    category: VenueCategory.CLUB,
+    zone: MilanZone.SEMPIONE,
+    sameAs: ["https://www.instagram.com/justmegardalake/"],
+    localizedContent: {
+      name: { en: "JustMe Garda Lake", it: "JustMe Garda Lake" },
+      description: {
+        en: "Located at Via Lavagnone 13 in Lonato del Garda (BS), minutes from Desenzano and Sirmione on Lake Garda, JustMe Garda Lake brings Roberto Cavalli hospitality to northern Italy's premier lake resort with theatrical Singing Dinner Shows, luxury VIP bottle service, and flagship events like Just Me in Rouge New Year's Eve 2027.",
+        it: "Situato in Via Lavagnone 13 a Lonato del Garda (BS), a pochi minuti da Desenzano e Sirmione sul Lago di Garda, il JustMe Garda Lake firma l'ospitalità luxury del gruppo Just Me sul Benaco tra Dinner Show cantati scenografici, Tavoli VIP con bottle service e grandi eventi come il Capodanno 2027 Just Me in Rouge."
+      },
+      dressCode: { en: "Strictly Glamorous & Elegant: Shirt/blazer for men, evening chic", it: "Rigorosamente Elegante e Glamour: Camicia/blazer per l'uomo, abito curato" },
+      altTextImg: { en: "JustMe Garda Lake Lonato del Garda luxury dinner show and VIP nightclub", it: "JustMe Garda Lake Lonato del Garda Lago di Garda dinner show e discoteca VIP" },
+      insiderTip: { en: "Exit the A4 motorway at Desenzano del Garda (5 minutes by car to Via Lavagnone 13) and reserve online via Xceed or WhatsApp +39 351 912 7047.", it: "Esci al casello A4 Desenzano del Garda (a 5 minuti d'auto da Via Lavagnone 13) e prenota tramite link ufficiale Xceed o su WhatsApp +39 351 912 7047." }
+    },
+    image: "/images/events/cards-4x5/partner-clubs/justme-garda-lake.webp",
+    gallery: [
+      "/images/events/cards-4x5/partner-clubs/justme-garda-lake.webp",
+      "/images/events/cards-4x5/october-2026/250310-garda-nye-rouge.webp",
+      "/images/events/cards-4x5/october-2026/251849-garda-ritmo.webp"
+    ],
+    isManaged: true,
+    isPriority: false,
+    isFeatured: false,
+    priorityScore: 78,
+    ageRange: "21-45",
+    priceRange: "$$$",
+    tags: ["Lake Garda Flagship", "Dinner Show", "VIP Tables"]
   }
 ];
 
@@ -996,6 +1230,36 @@ for (const extra of [...rooftopVenueBatch, ...superClubVenueBatch]) {
   if (!existingIds.has(extra.id)) {
     venuesData.push(extra);
     existingIds.add(extra.id);
+  }
+}
+
+const OFFICIAL_PARTNER_IDS = new Set<string>([
+  'v-justme',
+  'v-pineta',
+  'v-voya',
+  'v-repvblic',
+  'v-55milano',
+  'v-magazzini',
+  'v-bobino',
+  'v-theclub',
+  'v-carlsbergol',
+  'v-tocqueville',
+  'v-tom',
+  'v-mibmilano',
+  'v-dazi',
+  'v-bischeri',
+  'v-gate',
+  'v-pelledoca',
+  'v-aria',
+  'v-hollywood',
+  'v-11clubroom',
+  'v-gattopardo',
+  'v-justme-garda',
+]);
+
+for (const v of venuesData) {
+  if (OFFICIAL_PARTNER_IDS.has(v.id)) {
+    v.isManaged = true;
   }
 }
 

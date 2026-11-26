@@ -12,7 +12,35 @@ import { getEventVenueCopy } from '@/lib/i18n/eventVenueCopy';
 import { mockGuides } from '@/lib/data';
 import { getLocalizedGuideSlug35 } from '@/lib/guides100Catalog';
 import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
+import { getLocalizedVenueSlug35 } from '@/lib/i18n/localizedSlugs35';
 import { getV01SiteCopy } from '@/lib/i18n/v01SiteCopy35';
+import { capodannoCategoryPath } from '@/lib/capodanno/routes';
+import { getCapodannoMasterSeo35 } from '@/lib/capodanno/capodannoMasterSeo35';
+
+const FOOTER_PARTNER_CLUBS_22: ReadonlyArray<{ id: string; label: string }> = [
+  { id: 'v-justme', label: 'Just Me Milano' },
+  { id: 'v-pineta', label: 'Pineta Milano' },
+  { id: 'v-voya', label: 'Voya Rooftop' },
+  { id: 'v-repvblic', label: 'REPVBLIC Milano' },
+  { id: 'v-55milano', label: '55 Milano' },
+  { id: 'v-magazzini', label: 'Magazzini Generali' },
+  { id: 'v-bobino', label: 'Bobino Milano' },
+  { id: 'v-theclub', label: 'The Club Milano' },
+  { id: 'v-carlsbergol', label: 'Carlsberg Øl Milano' },
+  { id: 'v-tocqueville', label: 'Tocqueville 13' },
+  { id: 'v-tom', label: 'TOM. The Ordinary Market' },
+  { id: 'v-mibmilano', label: 'MIB Milano' },
+  { id: 'v-dazi', label: 'Dazi Milano' },
+  { id: 'v-bischeri', label: 'I Bischeri Milano' },
+  { id: 'v-gate', label: 'Gate Milano' },
+  { id: 'v-pelledoca', label: 'Pelledoca Milano' },
+  { id: 'v-aria', label: 'Aria Club Milano' },
+  { id: 'v-hollywood', label: 'Hollywood Milano' },
+  { id: 'v-11clubroom', label: '11Clubroom' },
+  { id: 'v-gattopardo', label: 'Il Gattopardo' },
+  { id: 'v-justme-garda', label: 'JustMe Garda Lake' },
+  { id: 'v-terrazza21', label: 'Terrazza Duomo 21' },
+];
 
 interface FooterProps {
   lang: LocaleCode;
@@ -23,6 +51,8 @@ interface FooterProps {
 export default function Footer({ lang, editorialFields = {}, copyrightYear }: FooterProps) {
   const defaults = getFooterCopy(lang);
   const v01 = getV01SiteCopy(lang);
+  const masterNyeSeo = getCapodannoMasterSeo35(lang);
+  const clubsDir = getLocalizedDir35('clubs', lang);
   const t = Object.fromEntries(Object.entries(defaults).map(([key, value]) => [
     key,
     editorialValue(editorialFields, `footer.${key}`, value),
@@ -110,8 +140,8 @@ export default function Footer({ lang, editorialFields = {}, copyrightYear }: Fo
                   </Link>
                 </li>
                 <li>
-                  <Link href={`${lp}/new-years-eve`} locale={lang} prefetch={false} className="text-[#F6F1E7] hover:underline transition-colors text-sm font-medium">
-                    {v01.footerNye}
+                  <Link href={capodannoCategoryPath('capodanno-2027', lang)} locale={lang} prefetch={false} className="text-[#F6F1E7] hover:underline transition-colors text-sm font-medium">
+                    {masterNyeSeo.footerAnchor}
                   </Link>
                 </li>
                 <li>
@@ -196,6 +226,32 @@ export default function Footer({ lang, editorialFields = {}, copyrightYear }: Fo
                 </li>
               </ul>
             </div>
+          </div>
+
+          <div
+            data-footer-partner-clubs="true"
+            className="border-t border-[#F6F1E7]/14 px-6 py-7 sm:px-12"
+          >
+            <p className="mb-3 font-sans text-xs font-bold uppercase tracking-[0.12em] text-[#EAE3D5]">
+              {masterNyeSeo.footerPartnersHeading}
+            </p>
+            <ul className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-[#C2B9AA] sm:text-[13px]">
+              {FOOTER_PARTNER_CLUBS_22.map((club) => {
+                const clubHref = `${lp}/${clubsDir}/${getLocalizedVenueSlug35(club.id, lang)}`;
+                return (
+                  <li key={club.id}>
+                    <Link
+                      href={clubHref}
+                      locale={lang}
+                      prefetch={false}
+                      className="hover:text-[#F6F1E7] hover:underline transition-colors"
+                    >
+                      {club.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
 
           <div className="overflow-hidden border-t border-[#F6F1E7]/14 py-10">

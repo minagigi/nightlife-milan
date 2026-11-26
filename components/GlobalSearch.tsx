@@ -791,7 +791,7 @@ const PRIORITY_CLUBS_QUICK = [
 const STRATEGIC_HUBS = [
   {
     id: 'hub-nye',
-    href: '/new-years-eve',
+    href: '/events/capodanno-2027',
     icon: 'party',
     badge: { en: '31 DEC · 129 EVENTS', it: '31 DIC · 129 EVENTI' },
     title: {

@@ -647,7 +647,7 @@ export default async function GuidesPage({
           </div>
           <div className="flex flex-wrap gap-2">
             {[
-              { href: `${localePrefix}/new-years-eve`, label: tr(loc, 'New Year Eve 2027', 'Capodanno 2027') },
+              { href: `${localePrefix}/events/capodanno-2027`, label: tr(loc, 'New Year Eve 2027', 'Capodanno 2027') },
               { href: `${localePrefix}/football-afterparties`, label: tr(loc, 'San Siro Football', 'Dopo-Partita San Siro') },
               { href: `${localePrefix}/concert-afterparties`, label: tr(loc, 'Concert Afterparties', 'Dopo-Concerto') },
               { href: `${localePrefix}/fashion-week`, label: tr(loc, 'Fashion & Design Week', 'Fashion Week & Fuorisalone') },

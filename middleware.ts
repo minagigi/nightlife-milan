@@ -6,6 +6,7 @@ import { isRemovedCuratedSitePath } from '@/lib/eventVisibility';
 import { ALL_EVENT_DIR_TOKENS, resolveLocalizedDirToCanonical } from '@/lib/i18n/dirTokens35';
 import {
   isKnownActiveVenueSlug,
+  isLegacyNewYearsEveHubSlug,
   isLegacyUnlistedClubSlug,
   localizeInternalHref,
   resolveLegacyOrExpiredEventRedirect,
@@ -115,6 +116,9 @@ function resolveLegacySubpathForLocale(subPath: string, targetLocale: LocaleCode
   const segs = cleanSub.split('/').filter(Boolean);
   if (segs.length === 1) {
     const rawSeg = safeDecodeSegment(segs[0]).toLowerCase();
+    if (isLegacyNewYearsEveHubSlug(rawSeg)) {
+      return capodannoCategoryPath('capodanno-2027', targetLocale);
+    }
     const naturalHubAliases: Record<string, string> = {
       zone: '/zones',
       'aperitivo-milano': '/aperitivo',
@@ -139,8 +143,18 @@ function resolveLegacySubpathForLocale(subPath: string, targetLocale: LocaleCode
     }
   }
   if (segs.length === 2) {
-    const parentCanonical = resolveLocalizedDirToCanonical(segs[0]);
+    const rawFirst = safeDecodeSegment(segs[0]).toLowerCase();
     const rawLeaf = safeDecodeSegment(segs[1]);
+    if (isLegacyNewYearsEveHubSlug(rawFirst)) {
+      const evBase = resolveCapodannoEventBaseSlugByLocalizedSlug(rawLeaf, targetLocale);
+      if (evBase) return capodannoEventPath(evBase, targetLocale);
+      const catId = resolveCapodannoCategoryIdByLocalizedSlug(rawLeaf, targetLocale);
+      if (catId) return capodannoCategoryPath(catId, targetLocale);
+      const legacyEv = resolveLegacyOrExpiredEventRedirect(rawLeaf, targetLocale);
+      if (legacyEv) return legacyEv;
+      return capodannoCategoryPath('capodanno-2027', targetLocale);
+    }
+    const parentCanonical = resolveLocalizedDirToCanonical(segs[0]);
     if (parentCanonical === '/clubs') {
       if (!isKnownActiveVenueSlug(rawLeaf) && isLegacyUnlistedClubSlug(rawLeaf)) {
         const clubsHub = targetLocale === 'en' ? '/clubs' : `/${targetLocale}/clubs`;

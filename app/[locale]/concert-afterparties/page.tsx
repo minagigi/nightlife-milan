@@ -1009,7 +1009,7 @@ export default async function ConcertAfterpartiesPage({
             </Link>
 
             <Link
-              href={`${lp}/new-years-eve`}
+              href={`${lp}/events/capodanno-2027`}
               className="p-4 rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex items-center justify-between transition-all"
             >
               <span>{isIt ? 'Capodanno Milano 2027 (NYE)' : 'New Years Eve Milan 2027'}</span>

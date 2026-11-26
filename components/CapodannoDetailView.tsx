@@ -128,15 +128,15 @@ export default function CapodannoDetailView({ locale, event }: Props) {
   const sourceBasis = localized.sourceBasis;
   const canonicalPath = capodannoEventPath(event.slug, locale);
   const officialPosterSrc = getCapodannoOfficialPosterSrc(event.slug);
-  const isGardaSisterVenue = event.slug === 'capodanno-justme-garda-lake';
-  const matchedPublicVenue = isGardaSisterVenue
-    ? mockVenues.find((v) => v.id === 'v-justme')
-    : mockVenues.find((v) => getCapodannoEventForClub(v.slugs.en, getLocalizedText(v.localizedContent.name, 'en'))?.slug === event.slug);
+  const matchedPublicVenue =
+    event.slug === 'capodanno-justme-garda-lake'
+      ? mockVenues.find((v) => v.id === 'v-justme-garda')
+      : mockVenues.find((v) => getCapodannoEventForClub(v.slugs.en, getLocalizedText(v.localizedContent.name, 'en'))?.slug === event.slug);
   const matchedPublicVenueName = matchedPublicVenue
     ? getLocalizedText(matchedPublicVenue.localizedContent.name, locale)
     : '';
   const matchedPublicVenueHref = matchedPublicVenue
-    ? `${prefix}/${getLocalizedDir35('clubs', locale as LocaleCode)}/${getLocalizedVenueSlug35(matchedPublicVenue.slugs.en, locale as LocaleCode)}`
+    ? `${prefix}/${getLocalizedDir35('clubs', locale as LocaleCode)}/${getLocalizedVenueSlug35(matchedPublicVenue.id, locale as LocaleCode)}`
     : null;
 
   const seoPack = buildSeoEventImagePack({
@@ -1018,12 +1018,10 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 >
                   <div>
                     <p className="font-mono text-xs font-bold uppercase tracking-[0.06em] text-[#EAE3D5]">
-                      {isGardaSisterVenue ? ui.sisterVenueMilanLabel : ui.officialVenueGuideLabel}
+                      {ui.officialVenueGuideLabel}
                     </p>
                     <p className="mt-1 text-sm text-[#F6F1E7] sm:text-base">
-                      {isGardaSisterVenue
-                        ? ui.sisterVenueMilanDesc
-                        : ui.officialVenueGuideDescTpl.replace('{venue}', matchedPublicVenueName)}
+                      {ui.officialVenueGuideDescTpl.replace('{venue}', matchedPublicVenueName)}
                     </p>
                   </div>
                   <Link
