@@ -51,7 +51,6 @@ export default function CapodannoInteractiveFilter({
   const [zoneTag, setZoneTag] = useState<'all' | CapodannoZoneTag>('all');
   const [budget, setBudget] = useState<'all' | 'free' | 'low' | 'mid' | 'lux'>('all');
   const [query, setQuery] = useState('');
-  const [showAll, setShowAll] = useState(false);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -305,140 +304,105 @@ export default function CapodannoInteractiveFilter({
           </button>
         </div>
       ) : (
-        <>
-          <div id="catalogo-eventi" className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {(!hasActiveFilter && !showAll ? filtered.slice(0, 24) : filtered).map((event) => {
-              const localized = getCapodannoLocalizedEventContent(event, locale);
-              const title = localized.title;
-              const description = localized.description;
-              const music = localized.musicAndFormat;
-              const dress = localized.dressCode;
-              const tiers = localized.tiers;
-              const detailHref = capodannoEventPath(event.slug, locale);
-              return (
-                <article
-                  key={event.slug}
-                  className="flex flex-col justify-between overflow-hidden border border-[#F6F1E7]/14 bg-[#141311] text-[#F6F1E7] transition hover:border-[#EAE3D5]/32"
-                >
-                  <div>
-                    <Link
-                      href={detailHref}
-                      data-no-lightbox="true"
-                      className="relative block aspect-[4/5] w-full overflow-hidden border-b border-[#F6F1E7]/14 bg-[#050505]"
-                      aria-label={title}
-                    >
-                      <Image
-                        quality={92}
-                        src={toCardPoster4x5(event.image)}
-                        alt={title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
-                        className="object-cover"
-                      />
-                    </Link>
+        <div id="catalogo-eventi" className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {filtered.map((event, index) => {
+            const localized = getCapodannoLocalizedEventContent(event, locale);
+            const title = localized.title;
+            const description = localized.description;
+            const music = localized.musicAndFormat;
+            const dress = localized.dressCode;
+            const tiers = localized.tiers;
+            const detailHref = capodannoEventPath(event.slug, locale);
+            return (
+              <article
+                key={event.slug}
+                className="flex flex-col justify-between overflow-hidden border border-[#F6F1E7]/14 bg-[#141311] text-[#F6F1E7] transition hover:border-[#EAE3D5]/32"
+              >
+                <div>
+                  <Link
+                    href={detailHref}
+                    data-no-lightbox="true"
+                    className="relative block aspect-[4/5] w-full overflow-hidden border-b border-[#F6F1E7]/14 bg-[#050505]"
+                    aria-label={title}
+                  >
+                    <Image
+                      quality={92}
+                      src={toCardPoster4x5(event.image)}
+                      alt={title}
+                      fill
+                      loading={index < 6 ? 'eager' : 'lazy'}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
+                      className="object-cover"
+                    />
+                  </Link>
 
-                    <div className="p-5">
-                      <div className="mb-3 flex flex-wrap items-center gap-2">
-                        <span className="border border-[#EAE3D5]/32 bg-[#EAE3D5] px-2.5 py-1 text-xs font-semibold text-[#050505]">
-                          {event.city} ({event.province})
+                  <div className="p-5">
+                    <div className="mb-3 flex flex-wrap items-center gap-2">
+                      <span className="border border-[#EAE3D5]/32 bg-[#EAE3D5] px-2.5 py-1 text-xs font-semibold text-[#050505]">
+                        {event.city} ({event.province})
+                      </span>
+                      <span className="font-display text-2xl font-bold tabular-nums text-[#EAE3D5]">
+                        {formatCapodannoPriceBadge35(event, locale)}
+                      </span>
+                      {!isRepvblicNyeSlug(event.slug) && !isGateNyeSlug(event.slug) && (
+                        <span className="bg-[#050505] px-2.5 py-1 text-xs font-bold text-[#F6F1E7]" data-selling-fast-badge>
+                          {scarcity.sellingFastBadge}
                         </span>
-                        <span className="font-display text-2xl font-bold tabular-nums text-[#EAE3D5]">
-                          {formatCapodannoPriceBadge35(event, locale)}
-                        </span>
-                        {!isRepvblicNyeSlug(event.slug) && !isGateNyeSlug(event.slug) && (
-                          <span className="bg-[#050505] px-2.5 py-1 text-xs font-bold text-[#F6F1E7]" data-selling-fast-badge>
-                            {scarcity.sellingFastBadge}
-                          </span>
-                        )}
-                      </div>
-                      <p className="text-xs font-bold text-[#C2B9AA]">{event.venueName}</p>
-                      <h3 className="mt-1 mb-3 font-display text-2xl font-bold leading-tight text-[#F6F1E7]">
-                        <Link href={detailHref} className="hover:underline">
-                          {title}
-                        </Link>
-                      </h3>
-                      <p className="text-xs text-[#C2B9AA]">
-                        <strong className="text-[#F6F1E7]">{w.addressLabel}</strong> {event.address} ·{' '}
-                        <strong className="text-[#F6F1E7]">{w.hoursLabel}</strong> {formatCapodannoHours35(event.hours, locale)}
+                      )}
+                    </div>
+                    <p className="text-xs font-bold text-[#C2B9AA]">{event.venueName}</p>
+                    <h3 className="mt-1 mb-3 font-display text-2xl font-bold leading-tight text-[#F6F1E7]">
+                      <Link href={detailHref} className="hover:underline">
+                        {title}
+                      </Link>
+                    </h3>
+                    <p className="text-xs text-[#C2B9AA]">
+                      <strong className="text-[#F6F1E7]">{w.addressLabel}</strong> {event.address} ·{' '}
+                      <strong className="text-[#F6F1E7]">{w.hoursLabel}</strong> {formatCapodannoHours35(event.hours, locale)}
+                    </p>
+                    <p className="mt-2.5 text-sm leading-relaxed text-[#C2B9AA]">{description}</p>
+
+                    <div className="mt-4 border border-[#F6F1E7]/14 bg-[#0B0A09] p-3.5">
+                      <p className="mb-2 text-xs font-bold text-[#F6F1E7]">
+                        {w.priceTiersHeading}
                       </p>
-                      <p className="mt-2.5 text-sm leading-relaxed text-[#C2B9AA]">{description}</p>
+                      <ul className="space-y-2 text-xs">
+                        {tiers.slice(0, 3).map((tier) => (
+                          <li key={tier.label} className="border-b border-[#EAE3D5]/32/12 pb-1.5 last:border-0 last:pb-0">
+                            <div className="flex items-baseline justify-between gap-2 tabular-nums">
+                              <span className="font-semibold text-[#F6F1E7]">{tier.label}</span>
+                              <span className="shrink-0 font-bold text-[#F6F1E7]">{tier.price}</span>
+                            </div>
+                            <p className="mt-0.5 text-xs text-[#C2B9AA]">{tier.details}</p>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
 
-                      <div className="mt-4 border border-[#F6F1E7]/14 bg-[#0B0A09] p-3.5">
-                        <p className="mb-2 text-xs font-bold text-[#F6F1E7]">
-                          {w.priceTiersHeading}
-                        </p>
-                        <ul className="space-y-2 text-xs">
-                          {tiers.slice(0, 3).map((tier) => (
-                            <li key={tier.label} className="border-b border-[#EAE3D5]/32/12 pb-1.5 last:border-0 last:pb-0">
-                              <div className="flex items-baseline justify-between gap-2 tabular-nums">
-                                <span className="font-semibold text-[#F6F1E7]">{tier.label}</span>
-                                <span className="shrink-0 font-bold text-[#F6F1E7]">{tier.price}</span>
-                              </div>
-                              <p className="mt-0.5 text-xs text-[#C2B9AA]">{tier.details}</p>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      <div className="mt-3 flex flex-wrap gap-2 text-xs text-[#C2B9AA]">
-                        <span className="border border-[#F6F1E7]/14 bg-[#0B0A09] px-2.5 py-1">
-                          <strong className="text-[#F6F1E7]">{ui.musicLabel}:</strong> {music}
-                        </span>
-                        <span className="border border-[#F6F1E7]/14 bg-[#0B0A09] px-2.5 py-1">
-                          <strong className="text-[#F6F1E7]">{w.dressCodeLabel}:</strong> {dress}
-                        </span>
-                      </div>
+                    <div className="mt-3 flex flex-wrap gap-2 text-xs text-[#C2B9AA]">
+                      <span className="border border-[#F6F1E7]/14 bg-[#0B0A09] px-2.5 py-1">
+                        <strong className="text-[#F6F1E7]">{ui.musicLabel}:</strong> {music}
+                      </span>
+                      <span className="border border-[#F6F1E7]/14 bg-[#0B0A09] px-2.5 py-1">
+                        <strong className="text-[#F6F1E7]">{w.dressCodeLabel}:</strong> {dress}
+                      </span>
                     </div>
                   </div>
+                </div>
 
-                  <div className="border-t border-[#F6F1E7]/14 bg-[#141311] px-5 py-3.5">
-                    <Link
-                      href={detailHref}
-                      data-capodanno-open-event={event.slug}
-                      className="inline-flex min-h-[46px] w-full items-center justify-center bg-[#EAE3D5] px-4 py-2.5 text-center text-xs font-bold uppercase text-[#050505] transition hover:bg-[#25D366] hover:text-[#050505] sm:text-sm"
-                    >
-                      {scarcity.openEventCardCta}
-                    </Link>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-
-          {!hasActiveFilter && !showAll && filtered.length > 24 && (
-            <div className="mt-8 border border-[#F6F1E7]/25 bg-[#0B0A09] p-6 text-center">
-              <p className="mb-3 font-sans text-sm text-[#C2B9AA]">
-                {w.showingTop24Tpl.replace('{total}', String(filtered.length))}
-              </p>
-              <button
-                type="button"
-                onClick={() => setShowAll(true)}
-                className="inline-flex min-h-[48px] items-center justify-center bg-[#F6F1E7] px-8 py-3.5 font-mono text-xs font-bold uppercase tracking-[0.12em] text-[#050505] transition hover:bg-[#EAE3D5]"
-              >
-                {w.showAllEventsBtnTpl.replace('{total}', String(filtered.length)).replace('{rest}', String(filtered.length - 24))}
-              </button>
-
-              <details className="mt-5 text-left">
-                <summary className="cursor-pointer font-mono text-[11px] uppercase tracking-[0.18em] text-champagne/80 hover:text-champagne">
-                  {w.fullDirectoryTpl.replace('{rest}', String(filtered.length - 24))}
-                </summary>
-                <ul className="mt-3 grid grid-cols-1 gap-1.5 sm:grid-cols-2 lg:grid-cols-3 text-xs text-white/75">
-                  {filtered.slice(24).map((ev) => (
-                    <li key={ev.slug}>
-                      <Link
-                        href={capodannoEventPath(ev.slug, locale)}
-                        prefetch={false}
-                        className="block rounded px-2 py-1 hover:bg-white/5 hover:text-champagne"
-                      >
-                        {ev.venueName} · {getCapodannoLocalizedEventContent(ev, locale).title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </details>
-            </div>
-          )}
-        </>
+                <div className="border-t border-[#F6F1E7]/14 bg-[#141311] px-5 py-3.5">
+                  <Link
+                    href={detailHref}
+                    data-capodanno-open-event={event.slug}
+                    className="inline-flex min-h-[46px] w-full items-center justify-center bg-[#EAE3D5] px-4 py-2.5 text-center text-xs font-bold uppercase text-[#050505] transition hover:bg-[#25D366] hover:text-[#050505] sm:text-sm"
+                  >
+                    {scarcity.openEventCardCta}
+                  </Link>
+                </div>
+              </article>
+            );
+          })}
+        </div>
       )}
     </div>
   );

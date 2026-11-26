@@ -999,7 +999,7 @@ const CAPODANNO_CATEGORIES_QUICK = [
   },
 ] as const;
 
-import { CAPODANNO_PARTNER_PRIORITY_RANK } from '@/lib/capodanno/partnerPrioritySlugs';
+import { getCapodannoPriorityRank } from '@/lib/capodanno/partnerPrioritySlugs';
 
 const CAPODANNO_FLAGSHIP_EVENTS_FALLBACK = [
   {
@@ -1007,12 +1007,12 @@ const CAPODANNO_FLAGSHIP_EVENTS_FALLBACK = [
     venueName: 'Just Me Milano · Torre Branca',
     city: 'Milano',
     address: 'Viale Luigi Camoens 2 · Parco Sempione',
-    image: '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp',
+    image: '/images/events/capodanno-2027-posters/capodanno-justme-milano-torre-branca.webp',
     priceFromEur: 80,
     titleIt: 'Capodanno 2027 Just Me Milano · Gala Dinner & Party sotto la Torre Branca',
     titleEn: 'NYE 2027 Just Me Milan · Gala Dinner & VIP Party under Torre Branca',
-    summaryIt: 'Dopocena 80–100€ · Royal Buffet 120€ · Gran Cenone Servito 300€ · Tavoli VIP',
-    summaryEn: 'After-dinner €80–100 · Royal Buffet €120 · Gala Dinner €300 · VIP Tables',
+    summaryIt: 'Dopocena 80€ · Gran Cenone Servito 300€ · Tavoli VIP 600–5.000€',
+    summaryEn: 'After-dinner €80 · Gala Dinner €300 · VIP Tables €600–€5,000',
     searchTerms: 'capodanno just me justme torre branca parco sempione cenone tavoli vip',
   },
   {
@@ -1042,19 +1042,6 @@ const CAPODANNO_FLAGSHIP_EVENTS_FALLBACK = [
     searchTerms: 'capodanno voya rooftop 20 piano ventesimo piano skyline fuochi 300 euro cotechino lenticchie',
   },
   {
-    slug: 'capodanno-justme-garda-lake',
-    venueName: 'Just Me Garda Lake',
-    city: 'Lonato del Garda / Desenzano',
-    address: 'Via Lavagnone 13 · Lago di Garda (BS)',
-    image: '/images/events/capodanno-2027-posters/capodanno-justme-garda-lake.webp',
-    priceFromEur: 20,
-    titleIt: 'Capodanno 2027 JustMe Garda Lake · Just Me in Rouge Dinner & Dance',
-    titleEn: 'NYE 2027 JustMe Garda Lake · Just Me in Rouge Dinner & Dance',
-    summaryIt: 'Ticket da 20€ · Royal Buffet 70€ · Gran Cenone 130€ · Tavoli VIP da 440€',
-    summaryEn: 'Ticket from €20 · Royal Buffet €70 · Gala Dinner €130 · VIP Tables from €440',
-    searchTerms: 'capodanno just me garda lake lago di garda desenzano lonato rouge xceed',
-  },
-  {
     slug: 'capodanno-repvblic-milano',
     venueName: 'REPVBLIC Milano',
     city: 'Milano',
@@ -1066,19 +1053,6 @@ const CAPODANNO_FLAGSHIP_EVENTS_FALLBACK = [
     summaryIt: 'Dalle 23:00 al mattino · Early Bird 45€ (flûte + 1 drink) · Tavolo Dancefloor 600€ (6 pax) · Privé 1.200€ (10 pax)',
     summaryEn: '23:00 till morning · Early Bird €45 (flûte + 1 drink) · Dancefloor Table €600 (6 guests) · Privé €1,200 (10 guests)',
     searchTerms: 'capodanno repvblic republic piazza della repubblica 12 early bird 45 dancefloor 600 prive 1200 hip hop house international hits',
-  },
-  {
-    slug: 'capodanno-aria-club-milano',
-    venueName: 'Aria Club Milano · San Siro',
-    city: 'Milano',
-    address: 'Piazzale dello Sport 14 · San Siro',
-    image: '/images/venues/aria-club-milano/aria-club-milano-interior-01.webp',
-    priceFromEur: 50,
-    titleIt: 'Capodanno 2027 Aria Club Milano · Gran Veglione San Siro & Tavoli VIP',
-    titleEn: 'NYE 2027 Aria Club Milan · San Siro Arena Gala & VIP Club Night',
-    summaryIt: 'Dopocena da 50€ · Gran Buffet & Cenone · Tavoli Pista e Console Privé',
-    summaryEn: 'After-dinner from €50 · Royal Buffet & Gala · Mainfloor & Console VIP Tables',
-    searchTerms: 'capodanno aria club san siro piazzale dello sport 14',
   },
   {
     slug: 'capodanno-55-milano',
@@ -1094,30 +1068,134 @@ const CAPODANNO_FLAGSHIP_EVENTS_FALLBACK = [
     searchTerms: 'capodanno 55 milano cinquantacinque dolce vita via piero della francesca 55 cenone buffet 160 100 30 40 50',
   },
   {
-    slug: 'capodanno-church-81-milano',
-    venueName: 'Church 81 Milano · Eyes Wide Shut',
+    slug: 'capodanno-magazzini-generali-milano',
+    venueName: 'Magazzini Generali Milano',
     city: 'Milano',
-    address: 'Via della Chiesa Rossa 81 · Navigli / Chiesa Rossa',
-    image: '/images/events/capodanno-2027-posters/capodanno-church-81-milano.webp',
-    priceFromEur: 90,
-    titleIt: 'Capodanno 2027 Church 81 Milano · Eyes Wide Shut (90€ Pesce o Carne + QR & Password)',
-    titleEn: 'NYE 2027 Church 81 Milan · Eyes Wide Shut (€90 Fish or Meat + QR & Password)',
-    summaryIt: 'Quota unica 90€ · Cena di Gala Pesce o Carne (cambio gratis fino 28/12) · QR code + Password · Parcheggio gratuito',
-    summaryEn: 'Fixed €90 · Fish or Meat Gala Dinner (free switch until Dec 28) · QR Code + Password · Free parking',
-    searchTerms: 'capodanno church 81 milano eyes wide shut via della chiesa rossa 81 navigli 90 pesce carne qr password parcheggio',
+    address: 'Via Pietrasanta 16 · Milano',
+    image: '/images/events/capodanno-2027-posters/capodanno-magazzini-generali-milano.webp',
+    priceFromEur: 30,
+    titleIt: 'Capodanno Magazzini Generali Milano 2027 · Casino Night & We Love 2000',
+    titleEn: 'Magazzini Generali Milan NYE 2027 · Casino Night & We Love 2000',
+    summaryIt: 'Club + 1 Drink 30€ · Dinner Buffet Casino Night 80€ · Tavoli 300€ / 600€ / 900€',
+    summaryEn: 'Club + 1 Drink €30 · Casino Night Buffet €80 · VIP Tables €300 / €600 / €900',
+    searchTerms: 'capodanno magazzini generali we love 2000 casino night via pietrasanta 16',
   },
   {
-    slug: 'capodanno-world-winter-week-aprica',
-    venueName: 'World Winter Week Aprica · Residence, Hotel & Charlie Club',
-    city: 'Aprica (Valtellina)',
-    address: 'Corso Roma, 23031 Aprica (SO)',
-    image: '/images/events/capodanno-2027-posters/capodanno-world-winter-week-aprica.webp',
-    priceFromEur: 399,
-    titleIt: 'World Winter Week · Capodanno ad Aprica 2027 (5 Giorni / 4 Notti da 399€)',
-    titleEn: 'World Winter Week · Aprica NYE 2027 (5 Days / 4 Nights from €399)',
-    summaryIt: '30/12 - 03/01 · Appartamento o Hotel B&B Gold 399€ · Platinum 419€ · Après-Ski Gratuiti & Charlie Disco Club',
-    summaryEn: 'Dec 30 - Jan 3 · Gold Apt or Hotel B&B €399 · Platinum €419 · Free Daily Après-Ski & Charlie Disco Club',
-    searchTerms: 'capodanno aprica valtellina sondrio world winter week settimana bianca neve montagna piste sci snowboard apres ski charlie disco club residence appartamento hotel pullman 399 419',
+    slug: 'capodanno-bobino-milano',
+    venueName: 'Bobino Milano',
+    city: 'Milano',
+    address: 'Piazzale Stazione Genova 4 · Navigli',
+    image: '/images/events/capodanno-2027-posters/capodanno-bobino-milano.webp',
+    priceFromEur: 30,
+    titleIt: 'Capodanno Bobino Milano 2027 · BOBINO LEGENDS (Cena 120€, Party 30€)',
+    titleEn: 'Bobino Milan NYE 2027 · BOBINO LEGENDS (€120 Dinner, €30 Party)',
+    summaryIt: 'Dinner 120€ · After Dinner da 30€ (2 drink) · Tavoli 200€ / 250€',
+    summaryEn: 'Dinner €120 · After Dinner from €30 (2 drinks) · Tables €200 / €250',
+    searchTerms: 'capodanno bobino navigli porta genova legends cena 120 party 30',
+  },
+  {
+    slug: 'capodanno-the-club-milano',
+    venueName: 'The Club Milano',
+    city: 'Milano',
+    address: 'Corso Garibaldi 97 · Brera / Moscova',
+    image: '/images/events/capodanno-2027-posters/capodanno-the-club-milano.webp',
+    priceFromEur: 50,
+    titleIt: 'Capodanno The Club Milano 2027 · Gran Galà in Corso Garibaldi 97',
+    titleEn: 'The Club Milano NYE 2027 · Grand Gala in Corso Garibaldi 97',
+    summaryIt: 'Donna 50€ · Uomo 70€ · Buffet + Serata 90€ · Privé 150€ · Tavoli 900–2.000€',
+    summaryEn: 'Lady €50 · Man €70 · Buffet + Party €90 · Privé €150 · Tables €900–€2,000',
+    searchTerms: 'capodanno the club corso garibaldi 97 brera moscova',
+  },
+  {
+    slug: 'capodanno-carlsberg-ol-milano',
+    venueName: 'Carlsberg Øl Milano · Capodanno per Famiglie',
+    city: 'Milano',
+    address: 'Bastioni di Porta Nuova 9 · Porta Nuova / Corso Como',
+    image: '/images/events/capodanno-2027-posters/capodanno-carlsberg-ol-milano.webp',
+    priceFromEur: 75,
+    titleIt: 'Capodanno per Famiglie Carlsberg Øl Milano 2027 · Cenone, Cena Cantata & DJ Set (75€)',
+    titleEn: 'Family NYE Carlsberg Øl Milan 2027 · Seated Dinner, Sing-Along & DJ Set (€75)',
+    summaryIt: 'Capodanno per Famiglie · Tariffa unica 75€ · Cenone + Vino 1/4 + Cena Cantata + DJ Set',
+    summaryEn: 'Family NYE · Single €75 rate · Seated Dinner + Wine 1/4 + Sing-Along + DJ Set',
+    searchTerms: 'capodanno carlsberg ol famiglie bambini ragazzi bastioni di porta nuova 9 cena cantata 75',
+  },
+  {
+    slug: 'capodanno-tocqueville-13-milano',
+    venueName: 'Tocqueville 13',
+    city: 'Milano',
+    address: 'Via Alessio di Tocqueville 13 · Corso Como',
+    image: '/images/events/capodanno-2027-posters/capodanno-tocqueville-13-milano.webp',
+    priceFromEur: 35,
+    titleIt: 'Capodanno Tocqueville 13 Milano 2027 · Dinner Show & Club su 2 Livelli',
+    titleEn: 'Tocqueville 13 Milan NYE 2027 · Two-Floor Dinner Show & Club',
+    summaryIt: 'Dopocena 35–45€ · Royal Buffet 60€ · Cenone 110–120€ · Tavoli 600–2.000€',
+    summaryEn: 'After-Dinner €35–€45 · Royal Buffet €60 · Dinner €110–€120 · Tables €600–€2,000',
+    searchTerms: 'capodanno tocqueville 13 corso como porta nuova dinner show',
+  },
+  {
+    slug: 'capodanno-tom-the-ordinary-market-milano',
+    venueName: 'TOM. The Ordinary Market',
+    city: 'Milano',
+    address: 'Via Molino delle Armi 16 · Colonne di San Lorenzo',
+    image: '/images/events/capodanno-2027-posters/capodanno-tom-the-ordinary-market-milano.webp',
+    priceFromEur: 30,
+    titleIt: 'Capodanno TOM. Milano 2027 · The Midnight Ball',
+    titleEn: 'TOM. The Ordinary Market Milan NYE 2027 · The Midnight Ball',
+    summaryIt: 'Club 00:30 Early Bird 30€ · Gala Dinner 20:30 150€ · Tavoli 600€ / 900€ / 1.500€',
+    summaryEn: '00:30 Club €30 · 20:30 Gala Dinner €150 · VIP Tables €600 / €900 / €1,500',
+    searchTerms: 'capodanno tom the ordinary market via molino delle armi 16 midnight ball',
+  },
+  {
+    slug: 'capodanno-mib-milano-piazza-affari',
+    venueName: 'MIB Milano · Piazza Affari',
+    city: 'Milano',
+    address: 'Via Gaetano Negri 10 · Piazza Affari / Duomo',
+    image: '/images/events/capodanno-2027-posters/capodanno-mib-milano-piazza-affari.webp',
+    priceFromEur: 40,
+    titleIt: 'Capodanno MIB Milano 2027 · Gran Galà in Piazza Affari',
+    titleEn: 'MIB Milan NYE 2027 · Grand Gala at Piazza Affari',
+    summaryIt: 'Dopo 00:00 40€ · Brindisi 50€ · Buffet 70€ · Cenone 160€ · Tavoli 300–1.200€',
+    summaryEn: 'After 00:00 €40 · Toast €50 · Buffet €70 · Gala Dinner €160 · Tables €300–€1,200',
+    searchTerms: 'capodanno mib milano piazza affari via gaetano negri 10 duomo',
+  },
+  {
+    slug: 'capodanno-dazi-milano-arco-della-pace',
+    venueName: 'Dazi Milano · Arco della Pace',
+    city: 'Milano',
+    address: 'Piazza Sempione 1 · Arco della Pace',
+    image: '/images/events/capodanno-2027-posters/capodanno-dazi-milano-arco-della-pace.webp',
+    priceFromEur: 40,
+    titleIt: 'Capodanno Dazi Milano 2027 · Red Carpet & Dinner Show all’Arco della Pace',
+    titleEn: 'Dazi Milano NYE 2027 · Red Carpet & Dinner Show at Arco della Pace',
+    summaryIt: 'Dopo 00:00 40€ · Brindisi 50€ · Cenone + Show 160€ · Tavoli 250–320€',
+    summaryEn: 'After 00:00 €40 · Toast €50 · Gala Dinner Show €160 · Tables €250–€320',
+    searchTerms: 'capodanno dazi milano arco della pace piazza sempione 1 red carpet eki',
+  },
+  {
+    slug: 'capodanno-ortodosso-justme-milano',
+    venueName: 'JustMe Milano · Capodanno Ortodosso (13 Gennaio)',
+    city: 'Milano',
+    address: 'Viale Luigi Camoens 2 · Parco Sempione',
+    image: '/images/events/capodanno-2027-posters/capodanno-ortodosso-justme-milano.webp',
+    priceFromEur: 20,
+    titleIt: 'Capodanno Ortodosso 2027 al JustMe Milano · Il ritorno di Cappuccetto Rosso (13/01)',
+    titleEn: 'Orthodox New Year 2027 at JustMe Milan · Return of Little Red Riding Hood (Jan 13)',
+    summaryIt: '13 Gennaio 2027 · Club + 1 Drink 20€ · Cena Silver 60€ · Cena Gold 80€ · Xceed',
+    summaryEn: 'Jan 13, 2027 · Club + 1 Drink €20 · Silver Dinner €60 · Gold Dinner €80 · Xceed',
+    searchTerms: 'capodanno ortodosso orthodox new year staryj novyj god 13 gennaio justme nazar radchuk',
+  },
+  {
+    slug: 'capodanno-justme-garda-lake',
+    venueName: 'Just Me Garda Lake',
+    city: 'Lonato del Garda / Desenzano',
+    address: 'Via Lavagnone 13 · Lago di Garda (BS)',
+    image: '/images/events/capodanno-2027-posters/capodanno-justme-garda-lake.webp',
+    priceFromEur: 20,
+    titleIt: 'Capodanno 2027 JustMe Garda Lake · Just Me in Rouge Dinner & Dance',
+    titleEn: 'NYE 2027 JustMe Garda Lake · Just Me in Rouge Dinner & Dance',
+    summaryIt: 'Ticket da 20€ · Royal Buffet 70€ · Gran Cenone 130€ · Tavoli VIP da 440€',
+    summaryEn: 'Ticket from €20 · Royal Buffet €70 · Gala Dinner €130 · VIP Tables from €440',
+    searchTerms: 'capodanno just me garda lake lago di garda desenzano lonato rouge xceed',
   },
 ] as const;
 
@@ -1476,13 +1554,12 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
           searchTerms: ev.searchTerms,
         }));
 
-    const priorityCapodannoSlugRank = CAPODANNO_PARTNER_PRIORITY_RANK;
-
     const scoredCapodannoEvents = rawCapodannoList
-      .map((ev) => {
-        const rank = priorityCapodannoSlugRank[ev.slug] ?? 99;
+      .map((ev, idx) => {
+        const baseRank = getCapodannoPriorityRank(ev.slug);
+        const rank = baseRank === 500 ? 500 + idx : baseRank;
         const score = isBrowsingCategory
-          ? 100 - rank
+          ? 20000 - rank
           : matchTokensScore(`${ev.venueName} ${ev.title}`, `${ev.summary} ${ev.address} ${ev.searchTerms}`, qTokens, fullQuery);
         return {
           ...ev,
@@ -1491,9 +1568,15 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
           score,
         };
       })
-      .filter((ev) => ev.score > 0)
-      .sort((a, b) => (a.rank !== b.rank && Math.abs(b.score - a.score) < 25 ? a.rank - b.rank : b.score - a.score))
-      .slice(0, activeTab === 'capodanno' ? 24 : 6);
+      .filter((ev) => ev.score > 0 && (!isBrowsingCategory || !ev.isSoldOut))
+      .sort((a, b) =>
+        isBrowsingCategory
+          ? a.rank - b.rank
+          : a.rank !== b.rank && Math.abs(b.score - a.score) < 25
+            ? a.rank - b.rank
+            : b.score - a.score,
+      )
+      .slice(0, activeTab === 'capodanno' ? rawCapodannoList.length : 6);
 
     // 3. Upcoming Calendar Events (Featured Masters + Xceed Dated Inventory)
     const todayKey = romeDayKey(new Date());
@@ -1785,6 +1868,11 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
     }
   };
 
+  const openCapodannoCount = useMemo(
+    () => (capodannoCatalog ? capodannoCatalog.filter((ev) => !ev.closedForNye && !ev.soldOutForNye).length : 120),
+    [capodannoCatalog],
+  );
+
   const tabDefinitions: Array<{ id: SearchTabId; label: string; count?: number }> = [
     { id: 'all', label: ui.tabs.all },
     { id: 'clubs', label: ui.tabs.clubs, count: query.trim() ? searchResults.venues.length : 19 },
@@ -1793,7 +1881,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
       label: ui.tabs.capodanno,
       count: query.trim()
         ? searchResults.capodannoEvents.length + searchResults.capodannoCategories.length
-        : 129,
+        : openCapodannoCount,
     },
     { id: 'events', label: ui.tabs.events, count: query.trim() ? searchResults.events.length : undefined },
     { id: 'hubs', label: ui.tabs.hubs, count: query.trim() ? searchResults.hubs.length : 9 },

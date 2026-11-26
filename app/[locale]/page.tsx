@@ -11,7 +11,9 @@ import V01HomeCarousels, {
   type V01PartnerClubSlide,
 } from '@/components/V01HomeCarousels';
 import {
-  CAPODANNO_PARTNER_PRIORITY_SLUGS,
+  CAPODANNO_HEAD_13_SLUGS,
+  CAPODANNO_REMAINING_PARTNER_SLUGS,
+  CAPODANNO_TAIL_2_SLUGS,
   getCapodannoEventBySlug,
 } from '@/lib/capodannoEvents';
 import {
@@ -387,8 +389,13 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
   // weekly programme can reappear from an indefinitely cached home document.
   const initialNow = new Date();
   const dateSensitiveEvents = selectPriorityVenueEvents(await getDateSensitiveCarouselInventory(locale), initialNow);
-  const capodannoSlugs19 = [...CAPODANNO_PARTNER_PRIORITY_SLUGS, 'capodanno-terrazza-duomo-21'];
-  const capodannoSlides: V01CapodannoSlide[] = capodannoSlugs19
+  const capodannoCarouselSlugs = [
+    ...CAPODANNO_HEAD_13_SLUGS,
+    ...CAPODANNO_REMAINING_PARTNER_SLUGS,
+    'capodanno-terrazza-duomo-21',
+    ...CAPODANNO_TAIL_2_SLUGS,
+  ];
+  const capodannoSlides: V01CapodannoSlide[] = capodannoCarouselSlugs
     .map((slug) => getCapodannoEventBySlug(slug))
     .filter((ev): ev is NonNullable<typeof ev> => Boolean(ev))
     .map((ev) => {

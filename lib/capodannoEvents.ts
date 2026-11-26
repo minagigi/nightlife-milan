@@ -1,6 +1,18 @@
-import { CAPODANNO_PARTNER_PRIORITY_SLUGS } from './capodanno/partnerPrioritySlugs';
+import {
+  CAPODANNO_HEAD_13_SLUGS,
+  CAPODANNO_REMAINING_PARTNER_SLUGS,
+  CAPODANNO_TAIL_2_SLUGS,
+  CAPODANNO_NON_PARTNER_PRIORITY_SLUGS,
+  CAPODANNO_PARTNER_PRIORITY_SLUGS,
+  getCapodannoPriorityRank as getBaseCapodannoPriorityRank,
+} from './capodanno/partnerPrioritySlugs';
 
-export { CAPODANNO_PARTNER_PRIORITY_SLUGS };
+export {
+  CAPODANNO_HEAD_13_SLUGS,
+  CAPODANNO_REMAINING_PARTNER_SLUGS,
+  CAPODANNO_TAIL_2_SLUGS,
+  CAPODANNO_PARTNER_PRIORITY_SLUGS,
+};
 
 export type CapodannoCategory =
   | 'milano-club'
@@ -121,21 +133,21 @@ export type CapodannoCategoryPageDef = {
   quickAnswerEn: string;
 };
 
-export const CAPODANNO_CATEGORY_PAGES: readonly CapodannoCategoryPageDef[] = [
+const RAW_CAPODANNO_CATEGORY_PAGES: readonly CapodannoCategoryPageDef[] = [
   {
     slug: 'capodanno-2027',
     path: '/events/capodanno-2027',
     group: 'hub',
-    badgeIt: 'Master Hub (129)',
-    badgeEn: 'Master Hub (129)',
-    shortLabelIt: 'Tutti i 129 Eventi',
-    shortLabelEn: 'All 129 Events',
-    titleIt: 'Capodanno 2027 Milano e Lombardia: Tutti i 129 Eventi, Locali, Discoteche, Rooftop, Cenoni, Teatri, Speciali e Piazze',
-    titleEn: 'New Year’s Eve 2027 Milan & Lombardy: All 129 Club, Rooftop, Dinner Show, Theatre, Special & Public Square Events',
+    badgeIt: 'Master Hub (__OPEN_COUNT__)',
+    badgeEn: 'Master Hub (__OPEN_COUNT__)',
+    shortLabelIt: 'Tutti i __OPEN_COUNT__ Eventi',
+    shortLabelEn: 'All __OPEN_COUNT__ Events',
+    titleIt: 'Capodanno 2027 Milano e Lombardia: Tutti i __OPEN_COUNT__ Eventi, Locali, Discoteche, Rooftop, Cenoni, Teatri, Speciali e Piazze',
+    titleEn: 'New Year’s Eve 2027 Milan & Lombardy: All __OPEN_COUNT__ Club, Rooftop, Dinner Show, Theatre, Special & Public Square Events',
     subtitleIt: 'Il catalogo completo con filtri interattivi per tipologia di locale, target (coppie, single, famiglie, over 30/40), genere musicale, quartiere e fascia di prezzo.',
     subtitleEn: 'The complete directory with interactive filters by venue type, target crowd (couples, singles, families, 30+ adults), music genre, district, and budget.',
-    quickAnswerIt: 'Usa i filtri interattivi o scegli una delle 16 pagine categoria dedicate per confrontare i 129 eventi di Capodanno 2027 tra Milano, Lago di Garda e Lombardia: Rooftop panoramici, Discoteche (inclusi JustMe Milano e JustMe Garda Lake), Locali con Cenone Cantato, Teatri (Manzoni, Carcano, Scala), Hotel 5★ e Ville, Speakeasy, Terme e Baita in Motoslitta.',
-    quickAnswerEn: 'Use our interactive filters or browse 16 dedicated category pages across 129 New Year’s Eve 2027 events in Milan, Lake Garda, and Lombardy: Panoramic Rooftops, Nightclubs (including JustMe Milan and JustMe Garda Lake), Singing Dinner Shows, Theatres (Manzoni, Carcano, La Scala), 5★ Hotels & Villas, Speakeasies, Thermal Spas & Snowmobile Chalets.',
+    quickAnswerIt: 'Usa i filtri interattivi o scegli una delle 16 pagine categoria dedicate per confrontare i __OPEN_COUNT__ eventi aperti di Capodanno 2027 tra Milano, Lago di Garda e Lombardia: Rooftop panoramici, Discoteche (inclusi JustMe Milano, Capodanno Ortodosso e JustMe Garda Lake), Locali con Cenone Cantato e Capodanno per Famiglie (Carlsberg Øl Milano 75€), Teatri (Manzoni, Carcano, Scala), Hotel 5★ e Ville, Speakeasy, Terme e Baita in Motoslitta.',
+    quickAnswerEn: 'Use our interactive filters or browse 16 dedicated category pages across __OPEN_COUNT__ open New Year’s Eve 2027 events in Milan, Lake Garda, and Lombardy: Panoramic Rooftops, Nightclubs (including JustMe Milan, Orthodox New Year, and JustMe Garda Lake), Singing Dinner Shows & Family NYE (Carlsberg Øl Milan €75), Theatres (Manzoni, Carcano, La Scala), 5★ Hotels & Villas, Speakeasies, Thermal Spas & Snowmobile Chalets.',
   },
   {
     slug: 'capodanno-rooftop-milano',
@@ -235,12 +247,12 @@ export const CAPODANNO_CATEGORY_PAGES: readonly CapodannoCategoryPageDef[] = [
     badgeEn: 'Families, Kids & Teens',
     shortLabelIt: 'Per Famiglie & Bambini',
     shortLabelEn: 'For Families & Kids',
-    titleIt: 'Capodanno per Famiglie e Bambini a Milano e Lombardia 2027: Hotel con Animazione, Teatro, Musical, Piazze e Neve',
-    titleEn: 'Family & Kids New Year’s Eve in Milan & Lombardy 2027: Family Hotels, Musicals, Science Museum, Snow & Theme Parks',
-    subtitleIt: 'Tutte le soluzioni sicure, divertenti e organizzate per festeggiare il 31 dicembre con bambini e ragazzi: hotel con sala animazione dedicata e menu bimbi, spettacoli teatrali e musical, Gardaland Magic Winter, Trenino del Bernina e fiaccolate sulla neve.',
-    subtitleEn: 'Safe, fun, and organized December 31st celebrations with children and teens: 4★/5★ hotels with kids’ entertainment rooms, Broadway musicals, Gardaland Magic Winter, Bernina Red Train, and ski torchlight parades.',
-    quickAnswerIt: 'Per le famiglie con bambini a Capodanno 2027 a Milano e in Lombardia le scelte ideali sono: (1) Il Capodanno Family in Hotel 4★/5★ (Sheraton Milan San Siro, Ripamonti Residence, agriturismi e family resort con cenone per i genitori, menu bimbi 40–65€, animatori, maghi, baby dance e camera in ascensore); (2) Gli Spettacoli e Teatri di San Silvestro (Teatro Manzoni con Vincenzo Salemme 40–130€, Carcano 84€, Elfo Puccini); (3) Gardaland Magic Winter & Sea Life sul Lago di Garda; (4) Il Trenino Rosso del Bernina e le Fiaccolate dei Maestri di Sci alle 18:00 a Livigno, Bormio e Ponte di Legno.',
-    quickAnswerEn: 'Top family-friendly NYE 2027 options in Milan and Lombardy include: (1) Family Hotel Galas (Sheraton San Siro, Ripamonti Hotel, and resorts offering adult gala dinners, €40–€65 kids’ menus, dedicated entertainers, magicians, and upstairs hotel rooms); (2) Family-friendly Theatres (Manzoni, Carcano, Elfo Puccini: €40–€130); (3) Gardaland Magic Winter on Lake Garda; (4) The Bernina Red Train and the 18:00 Ski Instructors’ Torchlight Parades in Livigno, Bormio, and Ponte di Legno.',
+    titleIt: 'Capodanno per Famiglie e Bambini a Milano e Lombardia 2027: Carlsberg Øl, Hotel, Teatro, Piazze e Neve',
+    titleEn: 'Family & Kids New Year’s Eve in Milan & Lombardy 2027: Carlsberg Øl, Family Hotels, Theatre, Squares & Snow',
+    subtitleIt: 'In primo piano Carlsberg Øl Milano in Bastioni di Porta Nuova 9 (cenone servito a tariffa chiara 75€ tutto incluso nelle ampie sale calde sotto le volte in mattoni, Cena Cantata per genitori, bambini e ragazzi, seggioloni e variazioni in cucina su WhatsApp), insieme a hotel 4★/5★, teatri di San Silvestro, Gardaland Magic Winter e fiaccolate sulla neve.',
+    subtitleEn: 'Led by Carlsberg Øl Milan at Bastioni di Porta Nuova 9 (€75 all-inclusive seated dinner inside warm brick-vaulted halls, cheerful Cena Cantata for parents, kids, and teens, plus family table layout, high chairs, and kitchen adjustments via WhatsApp), alongside 4★/5★ hotels, theatres, Gardaland Magic Winter, and Alpine torchlight parades.',
+    quickAnswerIt: 'Per le famiglie con bambini e ragazzi a Capodanno 2027 a Milano e in Lombardia le scelte ideali sono: (1) Carlsberg Øl Milano in Bastioni di Porta Nuova 9 a 350m da M2 Moscova e Garibaldi (tariffa unica ufficiale 75€ tutto incluso con posto riservato tutta la sera, 4 portate, 1 bottiglia di vino ogni 4 adulti, acqua, caffè, cotechino e lenticchie, Cena Cantata allegra e DJ set; su WhatsApp +39 351 912 7047 sistemazione tavolata famiglia, seggioloni e variazioni semplici in cucina per i più piccoli); (2) Il Capodanno Family in Hotel 4★/5★ (Terrazza Gallia, Sheraton San Siro, Ripamonti, Villa Fenaroli); (3) Gli Spettacoli e Teatri di San Silvestro (Teatro Manzoni con Vincenzo Salemme 40–130€, Carcano 84€, Area Zelig); (4) Il Trenino Rosso del Bernina e le Fiaccolate dei Maestri di Sci alle 18:00 a Livigno, Bormio e Ponte di Legno.',
+    quickAnswerEn: 'Top family-friendly NYE 2027 options in Milan and Lombardy include: (1) Carlsberg Øl Milan at Bastioni di Porta Nuova 9 steps from M2 Moscova and Garibaldi (official €75 all-inclusive seated dinner with reserved family table all night, 4 courses, 1 bottle of wine every 4 adults, water, coffee, midnight lentils, cheerful live Cena Cantata, and DJ set; message WhatsApp +39 351 912 7047 for family table seating, high chairs, and simple kids’ kitchen variations); (2) Family Hotel Galas (Terrazza Gallia, Sheraton San Siro, Ripamonti, Villa Fenaroli); (3) Family-friendly Theatres (Manzoni, Carcano, Area Zelig); (4) The Bernina Red Train and 18:00 Ski Torchlight Parades in Livigno, Bormio, and Ponte di Legno.',
   },
   {
     slug: 'capodanno-over-30-40-milano',
@@ -364,15 +376,15 @@ export const CAPODANNO_CATEGORY_PAGES: readonly CapodannoCategoryPageDef[] = [
   },
 ];
 
-export const CAPODANNO_HUB_ROUTES: Record<
+const RAW_CAPODANNO_HUB_ROUTES: Record<
   'all' | CapodannoCategory,
   { path: string; slug: string; labelIt: string; labelEn: string; badgeIt: string; badgeEn: string }
 > = {
   all: {
     path: '/events/capodanno-2027',
     slug: 'capodanno-2027',
-    labelIt: 'Tutti gli Eventi di Capodanno 2027 (129 Eventi)',
-    labelEn: 'All New Year’s Eve 2027 Events (129 Events)',
+    labelIt: 'Tutti gli Eventi di Capodanno 2027 (__OPEN_COUNT__ Eventi)',
+    labelEn: 'All New Year’s Eve 2027 Events (__OPEN_COUNT__ Events)',
     badgeIt: 'Guida Completa 31 Dicembre',
     badgeEn: 'Complete Dec 31 Guide',
   },
@@ -612,7 +624,7 @@ const SEEDS: any[] = [
   ["capodanno-repvblic-milano", "milano-club", "MI", "Milano", "REPVBLIC Milano", "Piazza della Repubblica, 12, 20124 Milano", "23:00 – 05:00", "/images/events/capodanno-2027-posters/capodanno-repvblic-milano.webp", 45, "Early Bird 45€ (flûte + 1 drink) · Tavolo Dancefloor 600€ (6 pax) · Tavolo Privé 1.200€ (10 pax)", "Early Bird €45 (flûte + 1 drink) · Dancefloor Table €600 (6 guests) · Privé Table €1,200 (10 guests)", "Capodanno REPVBLIC Milano 2027: New Year’s Eve in Piazza della Repubblica 12", "New Year’s Eve at REPVBLIC Milano 2027 · Piazza della Repubblica 12", "Hit Internazionali, Hip Hop & House · Countdown con flûte di mezzanotte (dalle 23:00 fino al mattino)", "International Hits, Hip Hop & House · Midnight countdown toast (23:00 till morning)", "Look curato ed elegante per la notte più attesa dell’anno", "Elevated & stylish New Year’s Eve look", [["Early Bird (dalle 23:00)", "45€ a persona", "Ingresso con flûte per il brindisi di mezzanotte e un drink inclusi"], ["Tavolo Zona Dancefloor", "600€ per 6 persone", "Un tavolo riservato nel cuore della festa"], ["Tavolo Zona Privé", "1.200€ per 10 persone", "Un tavolo riservato nella nostra esclusiva area VIP"]], [["Early Bird (from 23:00)", "€45 per person", "Admission from 23:00 with flûte for the midnight toast and one drink included"], ["Dancefloor Table Zone", "€600 for 6 guests", "A reserved table right in the heart of the party"], ["Privé VIP Table Zone", "€1,200 for 10 guests", "A reserved table in our exclusive VIP Privé area"]], "Una notte speciale, un pubblico internazionale e tutta l’energia di Milano per dare il benvenuto al 2027. A Capodanno, REPVBLIC Milano in Piazza della Repubblica 12 ti aspetta dalle 23:00 fino al mattino per una festa che parte con l’attesa della mezzanotte, il countdown e i calici alzati, con hit internazionali, hip hop e house. One night. All nations. A new beginning. Info ufficiali e prenotazioni tavoli VIP via Concierge WhatsApp +39 351 912 7047.", "A special night, an international crowd, and all the energy of Milan to welcome 2027. On New Year’s Eve, REPVBLIC Milano at Piazza della Repubblica 12 awaits from 23:00 till morning with the midnight countdown, raised flûtes, and a DJ selection spanning international hits, hip hop, and house. One night. All nations. A new beginning. Official bookings via WhatsApp Concierge +39 351 912 7047."],
   ["capodanno-bischeri-milano", "milano-club", "MI", "Milano", "Bischeri Milano", "Viale Gorizia 8 (Navigli / Darsena), 20144 Milano", "20:30 – 05:00", "/images/events/capodanno-2027-posters/capodanno-bischeri-milano.webp", 40, "Cenone Servito 140€ (Menù di Terra o di Mare) · Ingresso Dopocena 40€ (23:30 con 2 drink)", "Served Gala Dinner €140 (Land or Sea Menu) · After-Dinner €40 (23:30 with 2 drinks)", "Capodanno Bischeri Milano 2027: Gran Cenone Servito & Party con DJ Gigi Zeus", "Bischeri Milano NYE 2027: Served Gala Dinner & DJ Gigi Zeus Party in Navigli", "Music Dinner Show con DJ Gigi Zeus · Prosecco Extra-Dry a mezzanotte e DJ Set fino all’alba", "Music Dinner Show with DJ Gigi Zeus · Midnight Extra-Dry Prosecco & Party till late", "Elegante / Smart Chic di San Silvestro", "Elegant / Smart Chic New Year’s Eve Attire", [["Gran Cenone Servito (dalle 20:30 · Terra o Mare)", "140€ a persona", "Menu 4 portate con Prosecco Extra-Dry di mezzanotte, acqua ogni 2, bottiglia di vino ogni 4, coperto e DJ Gigi Zeus"], ["Ingresso Dopocena (dalle 23:30)", "40€ a persona", "Include 2 drink e festa con DJ set nella notte di San Silvestro sui Navigli"]], [["Served Gala Dinner (from 20:30 · Land or Sea Menu)", "€140 per person", "4-course menu with midnight Extra-Dry Prosecco, water per 2, 1 bottle of wine per 4, service and DJ Gigi Zeus"], ["After-Dinner Entry (from 23:30)", "€40 per person", "Includes 2 drinks and DJ set New Year’s Eve party in Navigli"]], "Capodanno 2027 firmato Bischeri Milano in Viale Gorizia 8 sui Navigli: Gran Cenone Servito alle 20:30 a 140€ a scelta tra Menù di Terra e Menù di Mare con vini e Prosecco Extra-Dry inclusi, oppure Ingresso Dopocena dalle 23:30 a 40€ con 2 drink e Music Dinner Show con DJ Gigi Zeus. Prenotazioni ufficiali su WhatsApp +39 351 912 7047.", "New Year’s Eve 2027 at Bischeri Milano on Viale Gorizia 8 in Navigli: Served Gala Dinner from 20:30 at €140 with your choice of Meat (Terra) or Seafood (Mare) 4-course menus including wines and midnight Extra-Dry Prosecco, or After-Dinner entry from 23:30 at €40 with 2 drinks and Music Dinner Show by DJ Gigi Zeus. Book via WhatsApp +39 351 912 7047."],
   ["capodanno-tom-the-ordinary-market-milano", "milano-club", "MI", "Milano", "TOM. The Ordinary Market", "Via Molino delle Armi 16 (Colonne di San Lorenzo / Corso Italia), 20123 Milano", "20:30 – 05:00", "/images/events/capodanno-2027-posters/capodanno-tom-the-ordinary-market-milano.webp", 30, "Ingresso 00:30 Early Bird 30€ (1 drink) · Gala Dinner 20:30 Early Bird 150€ (Carne o Pesce) · Tavoli 600€ / 900€ / 1.500€", "00:30 Club Entry Early Bird €30 (1 drink) · 20:30 Gala Dinner Early Bird €150 (Meat or Fish) · Tables €600 / €900 / €1,500", "Capodanno TOM. Milano 2027 · The Midnight Ball in Via Molino delle Armi", "TOM. The Ordinary Market Milan NYE 2027 · The Midnight Ball", "The Midnight Ball · Gala Dinner (20:30) & Club House, Nu-Disco, Hip-Hop (00:30–05:00)", "The Midnight Ball · Gala Dinner (20:30) & House, Nu-Disco, Hip-Hop Club (00:30–05:00)", "Fashion / Cocktail Attire elegante", "Fashion / Elevated Evening Cocktail Attire", [["Ingresso Club dalle 00:30 (Early Bird)", "30€ a persona", "Accesso sala club dalle 00:30 con 1 consumazione inclusa · prenotazione diretta partner WhatsApp"], ["Gala Dinner Servita dalle 20:30 (Early Bird · Carne o Pesce)", "150€ a persona", "Flûte Bellavista Alma, 3 antipasti, 2 portate main, panettone artigianale, 1 vino ogni 4, acqua e guardaroba inclusi"], ["Tavoli VIP dalle 00:30 (Base / Pedana / Consolle)", "600€ / 900€ / 1.500€", "600€ Base (8 pax) · 900€ Pedana (10 pax) · 1.500€ Consolle (15 pax) con bottle list ufficiale TOM."]], [["Club Entry from 00:30 (Early Bird)", "€30 per person", "Club room entry from 00:30 with 1 drink included · direct partner booking via WhatsApp"], ["Served Gala Dinner from 20:30 (Early Bird · Meat or Fish)", "€150 per person", "Bellavista Alma flute, 3 starters, 2 mains, artisanal panettone, 1 wine bottle per 4, water & coat check included"], ["VIP Tables from 00:30 (Base / Deck / Console)", "€600 / €900 / €1,500", "€600 Base (8 pax) · €900 Deck (10 pax) · €1,500 Console (15 pax) with official TOM. bottle list"]], "Capodanno 2027 confermato al TOM. (The Ordinary Market) in Via Molino delle Armi 16 con «The Midnight Ball»: Gala Dinner dalle 20:30 a 150€ Early Bird (Menu di Carne o Menu di Pesce con Bellavista Alma, vino 1 ogni 4, acqua e guardaroba), Ingresso Club dalle 00:30 a 30€ Early Bird con 1 drink e Tavoli VIP 600€ (8), 900€ (10) e 1.500€ (15). Prenotazioni ufficiali partner senza commissioni su WhatsApp +39 351 912 7047.", "Confirmed NYE 2027 at TOM. (The Ordinary Market) on Via Molino delle Armi 16 with \"The Midnight Ball\": 20:30 Gala Dinner at €150 Early Bird (Meat or Fish menu with Bellavista Alma, wine 1/4, water & coat check), 00:30 Club Entry at €30 Early Bird (1 drink) & VIP Tables €600 (8), €900 (10), €1,500 (15). Direct partner booking with zero fees on WhatsApp +39 351 912 7047."],
-  ["capodanno-carlsberg-ol-milano", "milano-club", "MI", "Milano", "Carlsberg Øl Milano", "Bastioni di Porta Nuova 9 (Porta Nuova / Corso Como), 20121 Milano", "20:30 – 03:00", "/images/events/capodanno-2027-posters/capodanno-carlsberg-ol-milano.webp", 75, "Tariffa unica 75€ · Cenone Servito + Vino (1 ogni 4) + Cena Cantata + DJ Set", "Single Rate €75 · Seated Dinner + Wine (1 bottle / 4) + Sing-Along Show + DJ Set", "Capodanno 2027 Carlsberg Øl Milano · Cena Cantata e DJ Set (75€ Tutto Incluso)", "Carlsberg Øl Milan NYE 2027 · Sing-Along Gala Dinner & DJ Set (€75 All-In)", "Cena Cantata dal Vivo durante il Cenone · Countdown di Mezzanotte & DJ Set fino alle 03:00", "Live Italian Sing-Along Dinner Show (Cena Cantata) · Midnight Countdown & DJ Set until 03:00", "Smart Chic / Elegante Casual di San Silvestro", "Smart Chic / Festive Evening Casual", [["Cenone Servito + Cena Cantata + DJ Set (20:30)", "75€", "Capesante gratinate, crocchette Patanegra, cestino Parmigiano burrata e acciughe, risotto Carnaroli porcini e zafferano, ribeye alla pietra lavica con chimichurry, tiramisù al pandoro, acqua, caffè, 1 vino ogni 4 (Vino Nobile di Montepulciano / Vermentino di Gallura), cotechino con lenticchie e prosecco"]], [["Seated NYE Dinner + Sing-Along Show + DJ Set (20:30)", "€75", "Gratinated scallops, Patanegra croquettes, Parmigiano basket with burrata & anchovies, porcini & saffron Carnaroli risotto, lava-stone beef ribeye with chimichurry, pandoro tiramisù, water, coffee, 1 wine per 4 (Vino Nobile di Montepulciano / Vermentino di Gallura), midnight prosecco & lentils"]], "Capodanno 2027 da Carlsberg Øl Milano nei Bastioni di Porta Nuova 9 (Porta Nuova / Corso Como, 20:30–03:00): Gran Cenone servito a tariffa unica 75€ con Cena Cantata dal vivo, vino Montepulciano o Vermentino incluso (1 bottiglia ogni 4 persone), acqua, caffè, cotechino con lenticchie, brindisi di mezzanotte e DJ set. Prenotazioni ufficiali su WhatsApp +39 351 912 7047.", "NYE 2027 at Carlsberg Øl Milan at Bastioni di Porta Nuova 9 (Porta Nuova / Corso Como, 20:30–03:00): all-in €75 seated dinner with live Cena Cantata sing-along show, Montepulciano or Vermentino wine (1 bottle per 4), water, coffee, midnight prosecco & lentils, and DJ set. Official bookings via WhatsApp +39 351 912 7047."],
+  ["capodanno-carlsberg-ol-milano", "milano-club", "MI", "Milano", "Carlsberg Øl Milano", "Bastioni di Porta Nuova 9 (Porta Nuova / Corso Como), 20121 Milano", "20:30 – 03:00", "/images/events/capodanno-2027-posters/capodanno-carlsberg-ol-milano.webp", 75, "Capodanno per Famiglie · Tariffa unica 75€ · Cenone Servito + Vino (1 ogni 4 adulti) + Cena Cantata + DJ Set", "Family-Friendly NYE · Single Rate €75 · Seated Dinner + Wine (1 bottle / 4 adults) + Sing-Along Show + DJ Set", "Capodanno per Famiglie da Carlsberg Øl Milano 2027 · Cenone Servito, Cena Cantata e DJ Set (75€ Tutto Incluso)", "Family New Year’s Eve at Carlsberg Øl Milan 2027 · Seated Dinner, Sing-Along Show & DJ Set (€75 All-In)", "Cena Cantata allegra per Famiglie, Genitori e Ragazzi · Brindisi di Mezzanotte & DJ Set fino alle 03:00", "Cheerful Family Sing-Along Dinner (Cena Cantata) for Parents, Kids & Teens · Midnight Toast & DJ Set until 03:00", "Elegante Comodo di San Silvestro per Tutta la Famiglia", "Festive Smart Casual for the Whole Family", [["Capodanno Famiglie · Cenone Servito + Cena Cantata + DJ Set (20:30)", "75€", "Tavolata riservata tutta la sera sotto le volte in mattoni, 4 portate (capesante gratinate, crocchette Patanegra, cestino Parmigiano burrata e acciughe; risotto Carnaroli porcini e zafferano; ribeye alla pietra lavica con patate novelle; tiramisù al pandoro), acqua, caffè, 1 bottiglia di vino ogni 4 adulti, cotechino con lenticchie e prosecco. Seggioloni e variazioni piatti bimbi su WhatsApp +39 351 912 7047"]], [["Family NYE · Seated Dinner + Sing-Along Show + DJ Set (20:30)", "€75", "Reserved family table all evening under historic brick vaults, 4 courses (gratinated scallops, Patanegra croquettes, Parmigiano basket with burrata & anchovies; porcini & saffron Carnaroli risotto; lava-stone beef ribeye with baby potatoes; pandoro tiramisù), water, coffee, 1 wine bottle per 4 adults, midnight prosecco & lentils. High chairs & kids’ course adjustments via WhatsApp +39 351 912 7047"]], "Il Capodanno per Famiglie in centro a Milano da Carlsberg Øl in Bastioni di Porta Nuova 9 (a 350 metri da M2 Moscova e M2/M5 Garibaldi, 20:30–03:00): ampie sale calde sotto le volte storiche in mattoni, Cenone servito a tariffa unica verificata di 75€ a persona con 1 bottiglia di Vino Nobile di Montepulciano o Vermentino di Gallura ogni 4 adulti, acqua, caffè, cotechino con lenticchie, Cena Cantata allegra ideale per genitori, bambini e ragazzi e DJ set. Scrivi su WhatsApp +39 351 912 7047 per disposizione tavolata famiglia, seggioloni e variazioni in cucina per i più piccoli.", "Central Milan’s welcoming Family New Year’s Eve 2027 at Carlsberg Øl, Bastioni di Porta Nuova 9 (350m from M2 Moscova and M2/M5 Garibaldi, 20:30–03:00): spacious warm halls under historic brick vaults, official €75 per person seated dinner including 1 bottle of Montepulciano or Vermentino wine per 4 adults, water, coffee, midnight prosecco & lentils, joyful live Cena Cantata for parents, children, and teens, and a DJ set. Message WhatsApp +39 351 912 7047 for family table layout, high chairs, and simple kitchen adjustments for kids."],
   ["capodanno-church-81-milano", "milano-club", "MI", "Milano", "Church 81 Milano", "Via della Chiesa Rossa 81 (Navigli / Chiesa Rossa), 20142 Milano", "20:30 – 04:00", "/images/events/capodanno-2027-posters/capodanno-church-81-milano.webp", 90, "Tariffa unica 90€ · Cena di Gala Eyes Wide Shut (Menù Pesce o Carne) + QR Code & Parola d’ordine", "Fixed Rate €90 · Eyes Wide Shut Gala Dinner (Fish or Meat Menu) + QR Code & Password", "Eyes Wide Shut Masquerade · Dinner Show tra archi in mattoni sconsacrati & DJ Set fino alle 04:00", "Eyes Wide Shut Masquerade · Deconsecrated Church Gala Dinner Show & DJ Set until 04:00", "Capodanno 2027 Church 81 Milano: Eyes Wide Shut (90€ · Pesce o Carne)", "NYE 2027 Eyes Wide Shut · Church 81 Milan (€90 Gala + QR & Password)", "Eyes Wide Shut · Maschera ed Eleganza / Abito da Sera", "Eyes Wide Shut Masquerade / Black Tie or Elegant Evening", [["Cena di Gala Eyes Wide Shut · Menù di Pesce (20:30)", "90€", "Flûte Prosecco Millesimato, Tris di Mare, Paccheri/Risotto, Salmone/Branzino, Panettone & Cotechino con lenticchie (altre bevande escluse, cambio gratis fino 28/12)"], ["Cena di Gala Eyes Wide Shut · Menù di Carne (20:30)", "90€", "Flûte Prosecco Millesimato, Tris di Tartare, Pappardelle/Ravioli, Filetto lardellato/Anatra, Panettone & Cotechino con lenticchie (altre bevande escluse, cambio gratis fino 28/12)"]], [["Eyes Wide Shut Fish Gala Dinner (20:30)", "€90", "Welcome Prosecco flute, Seafood Trio, Paccheri or Lemon Risotto, Salmon or Sea Bass, Panettone & Midnight Lentils (other drinks excluded; free switch until Dec 28)"], ["Eyes Wide Shut Meat Gala Dinner (20:30)", "€90", "Welcome Prosecco flute, Tartare Trio, Beef Ragù Pappardelle or Ravioli, Larded Fillet or Orange Duck, Panettone & Midnight Lentils (other drinks excluded; free switch until Dec 28)"]], "Capodanno 2027 Eyes Wide Shut nella chiesa sconsacrata Church 81 Milano (Via della Chiesa Rossa 81, Navigli / Chiesa Rossa, 20:30–04:00): cena servita a tariffa fissa 90€ con Menù Pesce o Carne (cambio gratis entro il 28/12), ingresso con QR code nominale e parola d’ordine segreta, ampio parcheggio gratuito. Prenotazioni WhatsApp +39 351 912 7047.", "NYE 2027 Eyes Wide Shut inside Church 81’s deconsecrated church arches (Via della Chiesa Rossa 81, Navigli, 20:30–04:00): fixed €90 seated gala with Fish or Meat menu (free swap until Dec 28), personal QR code + secret password admission, large free parking. WhatsApp +39 351 912 7047."],
   ["capodanno-il-gattopardo-milano", "milano-club", "MI", "Milano", "Il Gattopardo Milano", "Via Piero della Francesca 47 (Sempione), 20154 Milano", "22:30 – 05:00", "/images/events/capodanno-2027-posters/capodanno-il-gattopardo-milano.webp", 600, "Tavoli VIP 600€ a persona di minimum spending (22:30–05:00) · Tavoli Cupole e Centrale su richiesta", "VIP Tables €600 per person minimum spend (22:30–05:00) · Dome & Center Tables upon request", "Capodanno Il Gattopardo Milano 2027 · Ex Chiesa Sconsacrata & Tavoli VIP", "Il Gattopardo Milan NYE 2027 · Iconic Deconsecrated Church & VIP Tables", "Party di San Silvestro nell’ex chiesa sconsacrata · DJ Set House & Commerciale (22:30 – 05:00)", "New Year’s Eve inside Milan’s iconic deconsecrated church · House & Commercial DJ Set (22:30 – 05:00)", "Black Tie / Elegante Rigoroso", "Strict Black Tie / Evening Elegant", [["Tavolo VIP Minimum Spending (22:30 – 05:00)", "600€ a persona", "Prepagamento 100%; include booking, ingresso e credito bottiglie in sala (vodka da 300€, champagne da 600€)"], ["Tavoli Speciali nelle Cupole & Tavolo Centrale", "Su richiesta", "Disponibilità limitata su verifica diretta col Concierge WhatsApp +39 351 912 7047"]], [["VIP Table Minimum Spend (22:30 – 05:00)", "€600 per person", "100% prepayment; includes booking, admission and bottle spending credit inside the church venue"], ["Dome VIP Tables & Center Altar Table", "Upon request", "Limited availability confirmed directly via WhatsApp Concierge +39 351 912 7047"]], "Capodanno 2027 a Il Gattopardo Milano (Via Piero della Francesca 47): serata dalle 22:30 alle 05:00 nella celebre ex chiesa sconsacrata. Tavoli VIP ufficiali da 600€ a persona di minimum spending (tavoli cupole e centrale su richiesta). Prenotazioni ufficiali partner tramite Concierge WhatsApp +39 351 912 7047.", "New Year’s Eve 2027 at Il Gattopardo Milan (Via Piero della Francesca 47): 22:30 to 05:00 inside the iconic deconsecrated church. Official VIP tables at €600 per person minimum spend (dome & center tables on request). Official partner bookings via WhatsApp +39 351 912 7047."],
   ["capodanno-apollo-club-milano", "milano-club", "MI", "Milano", "Apollo Club Milano", "Centro / Distretto Eventi, Milano", "20:30 – 05:00", "/images/events/capodanno-2027-posters/capodanno-apollo-club-milano.webp", 40, "Dopocena 40–50€ · Royal Buffet 65€ · Cenone 130€ · Tavoli VIP 350–1.200€", "After-Dinner €40–€50 · Royal Buffet €65 · Gala Dinner €130 · VIP Tables €350–€1,200", "Capodanno Apollo Club Milano 2027: Gran Galà, Musica & Festa di San Silvestro", "Apollo Club Milano New Year’s Eve 2027: Gala Dinner, Live Show & Countdown Party", "Dinner Show, DJ Set Commerciale, House & Party di Mezzanotte", "Dinner Show, Commercial, House & Midnight Countdown Party", "Elegante / Smart Chic di San Silvestro", "New Year’s Eve Smart Chic / Elegant", [["Ingresso Dopocena / Serata (dalle 23:00)", "40€", "Include 1 drink e accesso al countdown di mezzanotte"], ["Royal Buffet / Apericena di Gala (dalle 20:30)", "70€", "Buffet caldo/freddo, drink e flûte per il brindisi"], ["Gran Cenone Servito di San Silvestro (dalle 20:00)", "140€", "Menu completo servito al tavolo con vini inclusi e festa"], ["Tavolo VIP Privé con Bottiglie", "350€ – 1.200€", "100% credito in bottiglie premium e ingresso prioritario salta-fila"]], [["After-Dinner / Party Entry (from 23:00)", "€40", "Includes 1 drink and midnight countdown access"], ["Royal Gala Buffet (from 20:30)", "€70", "Gala buffet, drink and midnight sparkling toast"], ["Served New Year’s Eve Gala Dinner (from 20:00)", "€140", "Full multi-course menu with wines and party access"], ["VIP Privé Table with Bottle Service", "€350 – €1,200", "100% credit in premium bottles with skip-the-line VIP admission"]], "Capodanno Apollo Club Milano 2027: Gran Galà, Musica & Festa di San Silvestro presso Apollo Club Milano (Centro / Distretto Eventi, Milano, Milano). Festeggia il 31 dicembre 2026 con cenone, spettacolo dal vivo, brindisi di mezzanotte e DJ set fino all’alba. Info e prenotazioni ufficiali via Concierge WhatsApp +39 351 912 7047.", "Apollo Club Milano New Year’s Eve 2027: Gala Dinner, Live Show & Countdown Party at Apollo Club Milano (Centro / Distretto Eventi, Milano, Milano). Celebrate December 31, 2026 with gala dining, live entertainment, midnight countdown, and DJ sets until dawn. Official bookings via WhatsApp Concierge +39 351 912 7047."],
@@ -719,7 +731,8 @@ const SEEDS: any[] = [
   ["capodanno-beach-garden-milano", "milano-club", "MI", "Milano / Segrate", "Beach Garden Milano (ex Le Jardin Idroscalo)", "Via Circonvallazione Idroscalo 51, 20054 Segrate (MI)", "20:30 – 05:00", "/images/events/capodanno-2027-posters/capodanno-beach-garden-milano.webp", 30, "Ingresso Dopocena 23:00 (1 drink) 30€ · Royal Buffet Completo + Serata 20:30: 65€ (1 drink + flûte)", "23:00 After-Dinner (1 drink) €30 · 20:30 Full Royal Buffet + Party: €65 (1 drink + toast flute)", "Capodanno 2027 Beach Garden Milano (ex Le Jardin) · Royal Buffet 65€ & Party 30€ fino alle 05:00", "Beach Garden Milan (formerly Le Jardin) NYE 2027 · €65 Royal Buffet & €30 Party until 05:00", "Royal Buffet (20:30), Countdown di Mezzanotte & Club DJ Set fino alle 05:00", "Royal Buffet (20:30), Midnight Countdown & Club DJ Set until 05:00", "Smart Chic / Elegante da Club", "Smart Chic / Club Elegant", [["Royal Buffet + Serata (20:30 – 05:00)", "65€", "17 antipasti, lasagne autunnali, agnolotti nero di seppia e frutti di mare, manzo alla Wellington, dolce milanese con gelato, 1 drink, flûte di mezzanotte e DJ set"], ["Ingresso Dopocena + Party (23:00 – 05:00)", "30€", "Ingresso dalle 23:00 con 1 drink incluso e DJ set fino alle 05:00"]], [["Royal Buffet + Club Night (20:30 – 05:00)", "€65", "17 starters, autumn lasagna, squid-ink seafood agnolotti, Beef Wellington, Milanese dessert, 1 drink, midnight flute & DJ set"], ["After-Dinner Party + 1 Drink (23:00 – 05:00)", "€30", "Admission from 23:00 including 1 drink and DJ set until 05:00"]], "Capodanno 2027 al Beach Garden Milano (ex Le Jardin, Via Circonvallazione Idroscalo 51): Royal Buffet completo dalle 20:30 a 65€ (17 antipasti, 2 primi, Manzo alla Wellington, 1 drink, flûte e serata) e Ingresso Dopocena dalle 23:00 a 30€ con 1 drink fino alle 05:00. WhatsApp +39 351 912 7047.", "NYE 2027 at Beach Garden Milan (formerly Le Jardin, Via Circonvallazione Idroscalo 51): €65 Royal Buffet from 20:30 and €30 After-Dinner Party from 23:00 with 1 drink until 05:00. WhatsApp +39 351 912 7047."],
   ["capodanno-castello-di-malpaga", "lombardia", "BG", "Cavernago", "Castello di Malpaga", "Piazza Castello, 24050 Cavernago (BG)", "Esaurito / Chiuso 31/12 (Sold Out)", "/images/events/capodanno-2027-posters/capodanno-castello-di-malpaga.webp", 0, "Sold Out Capodanno 2027 · Nessuna disponibilità per la notte del 31 dicembre 2026", "Sold Out NYE 2027 · No availability for December 31, 2026", "Castello di Malpaga · Sold Out Capodanno 2027", "Castello di Malpaga · Sold Out NYE 2027", "Sold Out · Castello di Malpaga non ha disponibilità per il 31 dicembre 2026 · Alternative aperte in villa e a Bergamo", "Sold Out · Castello di Malpaga has no availability for Dec 31, 2026 · Confirmed open villa & Bergamo alternatives", "Sold Out Capodanno 2027", "Sold Out NYE 2027", [], [], "Avviso ufficiale Capodanno 2027 per il Castello di Malpaga (Piazza Castello, 24050 Cavernago, Bergamo): l’evento del 31 dicembre 2026 è ufficialmente dichiarato Sold Out senza posti prenotabili su Nightlife Milan. Alternative aperte confermate in dimora storica e in provincia di Bergamo: Villa Fenaroli Palace Hotel (100€), Bobadilla Club Bergamo (25€–140€) e Il Gattopardo Milano su WhatsApp +39 351 912 7047.", "Official NYE 2027 notice for Castello di Malpaga (Piazza Castello, 24050 Cavernago, Bergamo): December 31, 2026 is officially marked Sold Out with no availability on Nightlife Milan. Confirmed open historic villa and Bergamo alternatives: Villa Fenaroli Palace Hotel (€100), Bobadilla Club Bergamo (€25–€140) and Il Gattopardo Milan via WhatsApp +39 351 912 7047."],
   ["capodanno-world-winter-week-aprica", "lombardia", "SO", "Aprica (Valtellina)", "World Winter Week Aprica · Residence, Hotel & Charlie Club", "Corso Roma, 23031 Aprica (SO)", "30/12 (14:00) - 03/01 (10:00)", "/images/events/capodanno-2027-posters/capodanno-world-winter-week-aprica.webp", 399, "5 Giorni / 4 Notti (30/12 - 03/01) · Appartamento o Hotel B&B Gold 399€ · Platinum 419€ · Mezza Pensione +60€ · Pullman A/R +50€", "5 Days / 4 Nights (Dec 30 - Jan 3) · Gold Apt or Hotel B&B €399 · Platinum €419 · Half Board +€60 · Coach A/R +€50", "World Winter Week · Capodanno ad Aprica 2027: 5 Giorni tra Neve, Après-Ski & Party", "World Winter Week · Aprica NYE 2027: 5-Day Snow Festival, Après-Ski & Club Parties", "5 Giorni / 4 Notti (30/12 - 03/01) · Après-Ski Gratuiti in Pista, Party Serali WWW & Notte 01/01 al Charlie Disco Club", "5 Days / 4 Nights (Dec 30 - Jan 3) · Free Daily Slope Après-Ski, Nightly WWW Parties & Jan 1 Night at Charlie Disco Club", "Snow & Après-Ski di Giorno · Mountain Clubwear la Sera", "Daytime Ski & Snow Gear · Mountain Clubwear at Night", [["Pacchetto Appartamento Gold (4 Notti · 30/12 - 03/01)", "399€", "4 notti in residence/appartamento (4-8 posti), bracciale WWW Gold, après-ski gratuiti ogni giorno, party serali WWW, ingresso gratuito 01/01 al Charlie Disco Club, skipass e noleggio convenzionati, assistenza staff 24h (+15% fee online = 458,85€)"], ["Pacchetto Appartamento Platinum (4 Notti + 2 Drink/Giorno)", "419€", "Tutto il pacchetto Appartamento Gold + 2 drink al giorno inclusi agli eventi + Fast Check-In salta-fila il 30/12 (+15% fee online = 481,85€)"], ["Pacchetto Hotel Gold B&B (4 Notti con Colazione)", "399€", "4 notti in hotel 3 stelle convenzionato con prima colazione inclusa (camere da 2+ posti su disponibilità), bracciale WWW Gold, après-ski, party serali e notte 01/01 al Charlie Disco Club (+15% fee online = 458,85€)"], ["Pacchetto Hotel Platinum B&B (Priority VIP Titanium)", "419€", "4 notti Hotel B&B con colazione + 2 drink al giorno inclusi + Fast Check-In + Bracciale Priority VIP Titanium salta-fila al Charlie Disco Club (+15% fee online = 481,85€)"], ["Supplemento Mezza Pensione Hotel (4 Cene)", "+60€", "4 cene in hotel riservate a chi sceglie Hotel Gold B&B o Hotel Platinum B&B (+15% fee online = +69,00€)"], ["Supplemento Viaggio in Pullman A/R", "+50€", "Trasferimento in pullman andata 30/12 e ritorno 03/01, rimborsabile al 100% fino a 7 giorni prima se non si raggiunge il minimo adesioni (+15% fee online = +57,50€)"]], [["Gold Apartment Package (4 Nights · Dec 30 - Jan 3)", "€399", "4 nights in residence apartment (4-8 beds), WWW Gold wristband, free daily slope après-ski, nightly WWW parties, free Jan 1 entry at Charlie Disco Club, discounted skipass & ski rental, 24h staff (+15% online fee = €458.85)"], ["Platinum Apartment Package (4 Nights + 2 Drinks/Day)", "€419", "All Gold Apartment benefits + 2 drinks per day included at events + Fast Check-In skip-the-line on Dec 30 (+15% online fee = €481.85)"], ["Gold Hotel B&B Package (4 Nights with Breakfast)", "€399", "4 nights in partner 3-star hotel with daily breakfast (rooms from 2+ guests subject to availability), WWW Gold wristband, daily après-ski, nightly parties & Jan 1 Charlie Disco Club (+15% online fee = €458.85)"], ["Platinum Hotel B&B Package (Priority VIP Titanium)", "€419", "4 nights Hotel B&B with breakfast + 2 drinks/day + Fast Check-In + Priority VIP Titanium skip-the-line wristband at Charlie Disco Club (+15% online fee = €481.85)"], ["Hotel Half-Board Supplement (4 Dinners)", "+€60", "4 evening hotel dinners exclusively for Gold or Platinum Hotel B&B guests (+15% online fee = +€69.00)"], ["Round-Trip Coach Transfer Supplement", "+€50", "Dec 30 outbound & Jan 3 return coach transfer, 100% refundable up to 7 days prior if minimum group seats are not met (+15% online fee = +€57.50)"]], "World Winter Week · Capodanno ad Aprica 2027 (Corso Roma, 23031 Aprica, Valtellina SO): 5 giorni e 4 notti dal 30 dicembre 2026 (check-in dalle 14:00) al 3 gennaio 2027 (check-out entro le 10:00) per giovani 18-26 tra 50 km di piste, après-ski gratuiti ogni pomeriggio, party serali gratuiti con lo staff WWW e ingresso omaggio la notte dell'1 gennaio al Charlie Disco Club (non serve saper sciare). Pacchetti Appartamento o Hotel B&B Gold 399€ e Platinum 419€, supplementi Mezza Pensione Hotel +60€ e Pullman A/R +50€. Acquisto diretto su nightlifemilan.com (+15% Booking & Transaction Fee) o assistenza Concierge WhatsApp +39 351 912 7047.", "World Winter Week · Aprica NYE 2027 (Corso Roma, 23031 Aprica, Valtellina SO): 5 days and 4 nights from December 30, 2026 (check-in from 14:00) to January 3, 2027 (check-out by 10:00) across 50 km of Alpine slopes, free daily après-ski, free nightly WWW parties, and complimentary January 1 admission at Charlie Disco Club (no skiing experience required). Gold Apartment or Hotel B&B €399, Platinum €419, optional Hotel Half Board +€60 and Coach A/R +€50. Direct checkout on nightlifemilan.com (+15% Booking & Transaction Fee) or WhatsApp Concierge +39 351 912 7047."],
-  ["capodanno-philipps-milano", "milano-club", "MI", "Milano", "Philipp's Milano · The Plein Hotel", "Via Daniele Manin 21 (Piazza Cavour / Brera), 20121 Milano", "20:00 – 05:00", "/images/events/capodanno-2027-posters/capodanno-philipps-milano.webp", 0, "Gran Cenone The Philipp's Show & Tavoli VIP Club su richiesta · Info Concierge", "The Philipp's Show Gala Dinner & VIP Club Tables upon request · Concierge Desk", "Capodanno Philipp's Milano 2027 · The Plein Hotel (Philipp Plein): Gala Dinner Show & Club", "Philipp's Milan NYE 2027 · The Plein Hotel (Philipp Plein): Gala Dinner Show & Luxury Club", "The Philipp's Show Live Gala Dinner (Chef Roberto Conti) & Luxury House / Afro-House / Hip-Hop Club", "The Philipp's Show Live Gala Dinner (Chef Roberto Conti) & Luxury House / Afro-House / Hip-Hop Club", "Haute Couture & Black Tie Optional (selezione sartoriale rigorosa)", "Haute Couture & Black Tie Optional (strict luxury door policy)", [["Gran Cenone The Philipp's Show (dalle 20:00)", "Su richiesta", "Cena di Gala di San Silvestro firmata Executive Chef Roberto Conti con spettacolo live The Philipp's Show e accesso al club; quotazione ufficiale e disponibilità su WhatsApp +39 351 912 7047"], ["Tavoli VIP Club & Mezzanino Privé (dalle 00:00)", "Su richiesta", "Postazioni riservate Pista Lampadari, Mezzanino Specchiato e Super VIP Console con bottle service Dom Pérignon e Magnum su quotazione Concierge WhatsApp +39 351 912 7047"]], [["The Philipp's Show Gala Dinner (from 20:00)", "Upon request", "New Year's Eve fine-dining Gala by Executive Chef Roberto Conti with live theatrical show and midnight club transition; request official rates on WhatsApp +39 351 912 7047"], ["VIP Club & Mirrored Mezzanine Tables (from 00:00)", "Upon request", "Reserved Chandelier Floor, Mirrored Mezzanine Privé, and Super VIP DJ Console bottle service quoted directly via WhatsApp Concierge +39 351 912 7047"]], "Capodanno 2027 al Philipp's Milano dentro The Plein Hotel (Via Daniele Manin 21, Palazzo Melzi d'Eril, Piazza Cavour / Brera), il ristorante, Dinner Show e luxury club firmato dallo stilista Philipp Plein. Dalle 20:00 Gran Cenone spettacolo The Philipp's Show con cucina dell'Executive Chef Roberto Conti e performance dal vivo, seguito a mezzanotte dal Club Party sotto i lampadari di cristallo fino alle 05:00. Disponibilità tavoli cena e tavoli VIP club su richiesta tramite Concierge WhatsApp +39 351 912 7047.", "New Year's Eve 2027 at Philipp's Milano inside The Plein Hotel (Via Daniele Manin 21, Palazzo Melzi d'Eril, Piazza Cavour / Brera), the flagship restaurant, theatrical Dinner Show, and luxury nightclub created by designer Philipp Plein. Starting at 20:00 with The Philipp's Show Gala Dinner by Executive Chef Roberto Conti and live performers, transitioning at midnight into high-fashion clubbing beneath crystal chandeliers until 05:00. Gala dining and VIP bottle tables managed upon request via WhatsApp Concierge +39 351 912 7047."]
+  ["capodanno-philipps-milano", "milano-club", "MI", "Milano", "Philipp's Milano · The Plein Hotel", "Via Daniele Manin 21 (Piazza Cavour / Brera), 20121 Milano", "20:00 – 05:00", "/images/events/capodanno-2027-posters/capodanno-philipps-milano.webp", 0, "Gran Cenone The Philipp's Show & Tavoli VIP Club su richiesta · Info Concierge", "The Philipp's Show Gala Dinner & VIP Club Tables upon request · Concierge Desk", "Capodanno Philipp's Milano 2027 · The Plein Hotel (Philipp Plein): Gala Dinner Show & Club", "Philipp's Milan NYE 2027 · The Plein Hotel (Philipp Plein): Gala Dinner Show & Luxury Club", "The Philipp's Show Live Gala Dinner (Chef Roberto Conti) & Luxury House / Afro-House / Hip-Hop Club", "The Philipp's Show Live Gala Dinner (Chef Roberto Conti) & Luxury House / Afro-House / Hip-Hop Club", "Haute Couture & Black Tie Optional (selezione sartoriale rigorosa)", "Haute Couture & Black Tie Optional (strict luxury door policy)", [["Gran Cenone The Philipp's Show (dalle 20:00)", "Su richiesta", "Cena di Gala di San Silvestro firmata Executive Chef Roberto Conti con spettacolo live The Philipp's Show e accesso al club; quotazione ufficiale e disponibilità su WhatsApp +39 351 912 7047"], ["Tavoli VIP Club & Mezzanino Privé (dalle 00:00)", "Su richiesta", "Postazioni riservate Pista Lampadari, Mezzanino Specchiato e Super VIP Console con bottle service Dom Pérignon e Magnum su quotazione Concierge WhatsApp +39 351 912 7047"]], [["The Philipp's Show Gala Dinner (from 20:00)", "Upon request", "New Year's Eve fine-dining Gala by Executive Chef Roberto Conti with live theatrical show and midnight club transition; request official rates on WhatsApp +39 351 912 7047"], ["VIP Club & Mirrored Mezzanine Tables (from 00:00)", "Upon request", "Reserved Chandelier Floor, Mirrored Mezzanine Privé, and Super VIP DJ Console bottle service quoted directly via WhatsApp Concierge +39 351 912 7047"]], "Capodanno 2027 al Philipp's Milano dentro The Plein Hotel (Via Daniele Manin 21, Palazzo Melzi d'Eril, Piazza Cavour / Brera), il ristorante, Dinner Show e luxury club firmato dallo stilista Philipp Plein. Dalle 20:00 Gran Cenone spettacolo The Philipp's Show con cucina dell'Executive Chef Roberto Conti e performance dal vivo, seguito a mezzanotte dal Club Party sotto i lampadari di cristallo fino alle 05:00. Disponibilità tavoli cena e tavoli VIP club su richiesta tramite Concierge WhatsApp +39 351 912 7047.", "New Year's Eve 2027 at Philipp's Milano inside The Plein Hotel (Via Daniele Manin 21, Palazzo Melzi d'Eril, Piazza Cavour / Brera), the flagship restaurant, theatrical Dinner Show, and luxury nightclub created by designer Philipp Plein. Starting at 20:00 with The Philipp's Show Gala Dinner by Executive Chef Roberto Conti and live performers, transitioning at midnight into high-fashion clubbing beneath crystal chandeliers until 05:00. Gala dining and VIP bottle tables managed upon request via WhatsApp Concierge +39 351 912 7047."],
+  ["capodanno-ortodosso-justme-milano", "milano-club", "MI", "Milano", "JustMe Milano (Torre Branca)", "Viale Luigi Camoens 2 (Parco Sempione), 20121 Milano", "19:30 – 05:00 (13/01/2027)", "/images/events/capodanno-2027-posters/capodanno-ortodosso-justme-milano.webp", 20, "13 Gennaio 2027 · Club + 1 Drink 20€ · Cena Silver 60€ · Cena Gold Pesce 80€ · Tavoli VIP", "Jan 13, 2027 · Club + 1 Drink €20 · Silver Dinner €60 · Gold Seafood Dinner €80 · VIP Tables", "Capodanno Ortodosso 2027 al JustMe Milano: Il ritorno di Cappuccetto Rosso (13 Gennaio)", "Orthodox New Year 2027 at JustMe Milan: Return of Little Red Riding Hood (Jan 13)", "Guest Star DJ Nazar Radchuk · House, Hip-Hop & Hit Internazionali · Concorso Vacanza 4★ in Montagna", "Guest Star DJ Nazar Radchuk · House, Hip-Hop & Global Hits · 4★ Mountain Holiday Contest", "21+ · Elegante con dettaglio rosso o accessorio luminoso", "21+ · Elegant with red item or luminous accessory", [["Ingresso Serata Club + 1 Drink (13/01 dalle 23:30)", "20€", "Prevendita ufficiale Xceed con 1 drink incluso e DJ set Nazar Radchuk fino alle 05:00"], ["Cena Servita Menu Silver (13/01 dalle 19:30 + Party)", "60€", "Tris di antipasti, Risotto ai Crostacei e Zucchine Nane, Cheesecake al Pistacchio, 1 acqua e 1 vino ogni 4 + party"], ["Cena Servita Menu Gold Pesce (13/01 dalle 19:30 + Party)", "80€", "Percorso mare 4 portate, 1 acqua e 1 vino ogni 4 ospiti + party fino alle 05:00"], ["Tavoli VIP Privé & Super Privé Torre Branca", "Su richiesta", "Ingresso prioritario dedicato e bottiglie su prenotazione WhatsApp +39 351 912 7047"]], [["Club Night Entry + 1 Drink (Jan 13 from 23:30)", "€20", "Official Xceed presale including 1 drink and Guest Star DJ Nazar Radchuk until 05:00"], ["Silver Seated Gala Dinner (Jan 13 from 19:30 + Party)", "€60", "Starter trio, Crustacean Risotto, Pistachio Cheesecake, 1 water & 1 wine per 4 + party"], ["Gold Seafood Gala Dinner (Jan 13 from 19:30 + Party)", "€80", "4-course seafood gala menu, 1 water & 1 wine per 4 guests + full club night"], ["VIP Privé & Console Bottle Tables", "Upon request", "Priority VIP entry and bottle service via WhatsApp +39 351 912 7047"]], "Mercoledì 13 gennaio 2027 JustMe Milano firma il Capodanno Ortodosso 2027 («Il ritorno di Cappuccetto Rosso») sotto la Torre Branca illuminata in Parco Sempione con Guest Star DJ Nazar Radchuk: Cene servite dalle 19:30 (Menu Silver 60€ e Menu Gold Pesce 80€ con 1 acqua e 1 vino ogni 4 + party), Ingresso Club dalle 23:30 a 20€ con 1 drink su Xceed e Tavoli VIP Privé su WhatsApp +39 351 912 7047.", "On Wednesday, January 13, 2027, JustMe Milano hosts Orthodox New Year 2027 (\"Il ritorno di Cappuccetto Rosso\") beneath the illuminated Torre Branca in Parco Sempione with Guest Star DJ Nazar Radchuk: 19:30 seated Gala Dinners (€60 Silver & €80 Gold Seafood including 1 water & 1 wine per 4 + party), 23:30 Club Entry €20 with 1 drink on Xceed, and VIP Privé tables via WhatsApp +39 351 912 7047."]
 ];
 
 function classifyCapodannoSeed(
@@ -939,17 +952,32 @@ function classifyCapodannoSeed(
       zoneTag: 'milano-arena-est-nord',
     };
   }
+  if (slug === 'capodanno-ortodosso-justme-milano') {
+    return {
+      subCategories: [
+        'capodanno-discoteche-milano',
+        'capodanno-locali-cenone-milano',
+        'capodanno-coppie-romantico-milano',
+        'capodanno-single-milano',
+        'capodanno-over-30-40-milano',
+      ],
+      venueType: 'discoteca',
+      audiences: ['coppie', 'single', 'over30', 'giovani', 'vip'],
+      formulas: ['cenone', 'dopocena', 'tavolo-vip'],
+      musicTag: 'commerciale-house',
+      zoneTag: 'corso-como-sempione',
+    };
+  }
   if (slug === 'capodanno-carlsberg-ol-milano') {
     return {
       subCategories: [
+        'capodanno-famiglie-bambini-milano',
         'capodanno-locali-cenone-milano',
-        'capodanno-discoteche-milano',
         'capodanno-over-30-40-milano',
         'capodanno-coppie-romantico-milano',
-        'capodanno-single-milano',
       ],
       venueType: 'locale-cenone',
-      audiences: ['coppie', 'single', 'over30'],
+      audiences: ['famiglie', 'coppie', 'over30'],
       formulas: ['cenone'],
       musicTag: 'cena-cantata-live',
       zoneTag: 'corso-como-sempione',
@@ -1175,41 +1203,16 @@ export function isPartnerCapodannoSlug(slug: string): boolean {
   return PARTNER_CAPODANNO_SLUGS.has(slug);
 }
 
-const NON_PARTNER_PRIORITY_SLUGS: readonly string[] = [
-  'capodanno-world-winter-week-aprica',
-  'capodanno-il-marchese-milano',
-  'capodanno-frezza-milano-cascina-romana',
-  'capodanno-beach-garden-milano',
-  'capodanno-carlsberg-ol-milano',
-  'capodanno-church-81-milano',
-  'capodanno-terrazza-duomo-21',
-  'capodanno-terrazza-gallia-excelsior-milano',
-  'capodanno-the-beach-milano',
-  'capodanno-dazi-milano-arco-della-pace',
-  'capodanno-zelig-cabaret-milano',
-  'capodanno-stk-milan',
-  'capodanno-radio-rooftop-milano',
-  'capodanno-jazz-cafe-milano',
-  'capodanno-hotel-barchetta-excelsior-como',
-  'capodanno-albergo-terminus-como',
-  'capodanno-teatro-manzoni-milano',
-  'capodanno-tram-storico-milano-atmosfera',
-  'capodanno-armani-prive-milano',
-  'capodanno-volt-club-milano',
-  'capodanno-alcatraz-milano',
-  'capodanno-fabbrica-del-vapore-milano',
-];
-
-const PRIORITY_SLUGS: readonly string[] = [
-  ...CAPODANNO_PARTNER_PRIORITY_SLUGS,
-  ...NON_PARTNER_PRIORITY_SLUGS,
-];
+const SEED_ORDER_INDEX: ReadonlyMap<string, number> = new Map(
+  SEEDS.map((rawSeed: any[], idx: number) => [String(rawSeed[0]), idx]),
+);
 
 export function getCapodannoPriorityRank(slug: string, mode?: string): number {
-  if (mode === 'capodanno-rooftop-milano' && slug === 'capodanno-voya-rooftop-milano') return -1;
-  if ((mode === 'lombardia' || mode === 'capodanno-lombardia') && slug === 'capodanno-justme-garda-lake') return -1;
-  const idx = PRIORITY_SLUGS.indexOf(slug);
-  return idx === -1 ? 999 : idx;
+  const base = getBaseCapodannoPriorityRank(slug, mode);
+  if (base === 500) {
+    return 500 + (SEED_ORDER_INDEX.get(slug) ?? 0);
+  }
+  return base;
 }
 
 const UNSORTED_CAPODANNO_EVENTS: CapodannoEventItem[] = SEEDS.map((rawSeed: any[]) => {
@@ -1251,24 +1254,28 @@ const UNSORTED_CAPODANNO_EVENTS: CapodannoEventItem[] = SEEDS.map((rawSeed: any[
     address,
     hours,
     startISO:
-      slug === 'capodanno-world-winter-week-aprica'
-        ? '2026-12-30T14:00:00+01:00'
-        : slug === 'capodanno-justme-garda-lake' ||
-          slug === 'capodanno-pineta-milano' ||
-          slug === 'capodanno-bischeri-milano' ||
-          slug === 'capodanno-bobino-milano' ||
-          slug === 'capodanno-55-milano' ||
-          slug === 'capodanno-carlsberg-ol-milano' ||
-          slug === 'capodanno-church-81-milano' ||
-          slug === 'capodanno-terrazza-duomo-21' ||
-          slug === 'capodanno-tom-the-ordinary-market-milano'
-          ? '2026-12-31T20:30:00+01:00'
-          : slug === 'capodanno-repvblic-milano' || slug === 'capodanno-gate-milano'
-            ? '2026-12-31T23:00:00+01:00'
-            : '2026-12-31T20:00:00+01:00',
+      slug === 'capodanno-ortodosso-justme-milano'
+        ? '2027-01-13T19:30:00+01:00'
+        : slug === 'capodanno-world-winter-week-aprica'
+          ? '2026-12-30T14:00:00+01:00'
+          : slug === 'capodanno-justme-garda-lake' ||
+            slug === 'capodanno-pineta-milano' ||
+            slug === 'capodanno-bischeri-milano' ||
+            slug === 'capodanno-bobino-milano' ||
+            slug === 'capodanno-55-milano' ||
+            slug === 'capodanno-carlsberg-ol-milano' ||
+            slug === 'capodanno-church-81-milano' ||
+            slug === 'capodanno-terrazza-duomo-21' ||
+            slug === 'capodanno-tom-the-ordinary-market-milano'
+            ? '2026-12-31T20:30:00+01:00'
+            : slug === 'capodanno-repvblic-milano' || slug === 'capodanno-gate-milano'
+              ? '2026-12-31T23:00:00+01:00'
+              : '2026-12-31T20:00:00+01:00',
     endISO:
-      slug === 'capodanno-world-winter-week-aprica'
-        ? '2027-01-03T10:00:00+01:00'
+      slug === 'capodanno-ortodosso-justme-milano'
+        ? '2027-01-14T05:00:00+01:00'
+        : slug === 'capodanno-world-winter-week-aprica'
+          ? '2027-01-03T10:00:00+01:00'
         : slug === 'capodanno-carlsberg-ol-milano'
           ? '2027-01-01T03:00:00+01:00'
         : slug === 'capodanno-bobino-milano' || slug === 'capodanno-church-81-milano'
@@ -1355,7 +1362,9 @@ const UNSORTED_CAPODANNO_EVENTS: CapodannoEventItem[] = SEEDS.map((rawSeed: any[
                                     : slug === 'capodanno-55-milano'
                                       ? 'Listino ufficiale confermato La Dolce Vita Capodanno 2027 · 55 Milano (Via Piero della Francesca 55, 20:30–05:00): Gala Servito 160€, Buffet seduta apparecchiata 100€, Dopocena 00:10 30/40/50€ (1 drink), Tavoli 350€, Mantenimento tavolo 200€. Prenotazioni WhatsApp +39 351 912 7047.'
                                       : slug === 'capodanno-carlsberg-ol-milano'
-                                        ? 'Menù e listino ufficiali confermati Carlsberg Øl Milano (Bastioni di Porta Nuova 9, 20:30–03:00): Cenone servito + Cena Cantata e DJ Set a 75€ a persona con 1 bottiglia di vino ogni 4 (Montepulciano o Vermentino), acqua, caffè, cotechino con lenticchie e prosecco di mezzanotte. WhatsApp +39 351 912 7047.'
+                                        ? 'Menù e listino ufficiali confermati Carlsberg Øl Milano · Capodanno per Famiglie (Bastioni di Porta Nuova 9, 20:30–03:00): Cenone servito + Cena Cantata gioiosa per grandi, bambini e ragazzi + DJ Set a tariffa unica 75 € a persona con 1 bottiglia di vino ogni 4 adulti (Montepulciano o Vermentino), acqua, caffè, cotechino con lenticchie e prosecco di mezzanotte. Tavolate famiglia, seggioloni e variazioni cucina bimbi su WhatsApp +39 351 912 7047.'
+                                      : slug === 'capodanno-ortodosso-justme-milano'
+                                        ? 'Listino ufficiale confermato Xceed (canale ufficiale nightlifemilan-1) per il Capodanno Ortodosso 2027 · JustMe Milano Torre Branca (Mercoledì 13 Gennaio 2027, 19:30–05:00): Aperitivo + Party 15 € / 20 € (con 1 drink) e Tavoli VIP da 160 € a 640 €. Prenotazioni su Xceed o Concierge WhatsApp +39 351 912 7047.'
                                       : slug === 'capodanno-church-81-milano'
                                         ? 'Listino ufficiale confermato Eyes Wide Shut Capodanno 2027 · Church 81 Milano (Via della Chiesa Rossa 81, 20:30–04:00): tariffa unica 90€ Menù Pesce o Carne (cambio gratis fino al 28/12), ingresso con QR code e parola d’ordine segreta, ampio parcheggio gratuito. WhatsApp +39 351 912 7047.'
                                           : slug === 'capodanno-terrazza-gallia-excelsior-milano'
@@ -1425,7 +1434,9 @@ const UNSORTED_CAPODANNO_EVENTS: CapodannoEventItem[] = SEEDS.map((rawSeed: any[
                                       : (slug === 'capodanno-beach-garden-milano' || slug === 'capodanno-le-jardin-milano-idroscalo' || slug === 'capodanno-mood-live-milano')
                                         ? 'Confirmed official Beach Garden Milan (ex Le Jardin, Via Circonvallazione Idroscalo 51) NYE 2027 rate card: €65 Royal Buffet from 20:30 and €30 After-Dinner Party with 1 drink from 23:00 until 05:00. WhatsApp +39 351 912 7047.'
                                         : slug === 'capodanno-carlsberg-ol-milano'
-                                    ? 'Confirmed official Carlsberg Øl Milan NYE 2027 menu & rate card (Bastioni di Porta Nuova 9, 20:30–03:00): €75 per person seated dinner with Cena Cantata & DJ Set, 1 wine bottle per 4 (Montepulciano or Vermentino), water, coffee, midnight prosecco & lentils. WhatsApp +39 351 912 7047.'
+                                    ? 'Confirmed official Carlsberg Øl Milan Family NYE 2027 menu & rate card (Bastioni di Porta Nuova 9, 20:30–03:00): single €75 per person rate for seated dinner, family-friendly Cena Cantata & DJ Set, 1 wine bottle per 4 adults (Montepulciano or Vermentino), water, coffee, midnight prosecco & lentils. Family table layouts, high chairs & kids kitchen options via WhatsApp +39 351 912 7047.'
+                                        : slug === 'capodanno-ortodosso-justme-milano'
+                                    ? 'Verified official Xceed rate card (official channel nightlifemilan-1) for Orthodox New Year 2027 at JustMe Milan Torre Branca (Wednesday, Jan 13, 2027, 19:30–05:00): Aperitif + Party €15 / €20 (incl. 1 drink) and VIP Tables €160–€640. Book online or via WhatsApp Concierge +39 351 912 7047.'
                                   : slug === 'capodanno-church-81-milano'
                                     ? 'Confirmed official Eyes Wide Shut 2027 rate card · Church 81 Milan (Via della Chiesa Rossa 81, 20:30–04:00): single €90 Fish or Meat gala rate (free switch until Dec 28), QR code + secret password entry, large free parking. WhatsApp +39 351 912 7047.'
                                       : slug === 'capodanno-terrazza-gallia-excelsior-milano'
@@ -1458,7 +1469,9 @@ const UNSORTED_CAPODANNO_EVENTS: CapodannoEventItem[] = SEEDS.map((rawSeed: any[
           ? 'https://xceed.me/en/brescia/event/new-years-eve-42/250310/channel/nightlifemilan-1'
           : slug === 'capodanno-pineta-milano'
             ? 'https://xceed.me/en/milano/event/capodanno-2027-moulin-rouge-pineta-club-milano/252170/channel/nightlifemilan-1'
-            : undefined,
+            : slug === 'capodanno-ortodosso-justme-milano'
+              ? 'https://xceed.me/en/milano/event/il-ritorno-di-cappuccetto-rosso/251019/channel/nightlifemilan-1'
+              : undefined,
     partner: PARTNER_CAPODANNO_SLUGS.has(slug),
     ...(SOLDOUT_CAPODANNO_SLUGS.has(slug) ? { soldOutForNye: true } : {}),
   };
@@ -1467,6 +1480,44 @@ const UNSORTED_CAPODANNO_EVENTS: CapodannoEventItem[] = SEEDS.map((rawSeed: any[
 export const CAPODANNO_EVENTS: readonly CapodannoEventItem[] = [...UNSORTED_CAPODANNO_EVENTS].sort(
   (a, b) => getCapodannoPriorityRank(a.slug) - getCapodannoPriorityRank(b.slug)
 );
+
+export const OPEN_CAPODANNO_EVENTS_COUNT: number = CAPODANNO_EVENTS.filter(
+  (item) => !item.closedForNye && !item.soldOutForNye,
+).length;
+
+const replaceOpenCapodannoCount = (value: string): string =>
+  value.replace(/__OPEN_COUNT__/g, String(OPEN_CAPODANNO_EVENTS_COUNT));
+
+export const CAPODANNO_CATEGORY_PAGES: readonly CapodannoCategoryPageDef[] = RAW_CAPODANNO_CATEGORY_PAGES.map(
+  (page) => ({
+    ...page,
+    badgeIt: replaceOpenCapodannoCount(page.badgeIt),
+    badgeEn: replaceOpenCapodannoCount(page.badgeEn),
+    shortLabelIt: replaceOpenCapodannoCount(page.shortLabelIt),
+    shortLabelEn: replaceOpenCapodannoCount(page.shortLabelEn),
+    titleIt: replaceOpenCapodannoCount(page.titleIt),
+    titleEn: replaceOpenCapodannoCount(page.titleEn),
+    quickAnswerIt: replaceOpenCapodannoCount(page.quickAnswerIt),
+    quickAnswerEn: replaceOpenCapodannoCount(page.quickAnswerEn),
+  }),
+);
+
+export const CAPODANNO_HUB_ROUTES: Record<
+  'all' | CapodannoCategory,
+  { path: string; slug: string; labelIt: string; labelEn: string; badgeIt: string; badgeEn: string }
+> = Object.fromEntries(
+  Object.entries(RAW_CAPODANNO_HUB_ROUTES).map(([key, val]) => [
+    key,
+    {
+      ...val,
+      labelIt: replaceOpenCapodannoCount(val.labelIt),
+      labelEn: replaceOpenCapodannoCount(val.labelEn),
+    },
+  ]),
+) as Record<
+  'all' | CapodannoCategory,
+  { path: string; slug: string; labelIt: string; labelEn: string; badgeIt: string; badgeEn: string }
+>;
 
 export function getCapodannoEventBySlug(slug: string): CapodannoEventItem | undefined {
   return CAPODANNO_EVENTS.find((item) => item.slug === slug);

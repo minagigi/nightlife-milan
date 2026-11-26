@@ -1,6 +1,71 @@
 import { enabledLocaleCodes, getLocaleDef, localePrefix, type LocaleCode } from '@/lib/i18n/localeRegistry';
 import { ALL_EVENT_DIR_TOKENS, getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
 
+const ORTHODOX_NYE_ROUTE_SLUGS_35: Readonly<Record<LocaleCode, string>> = {
+  en: 'orthodox-new-year-justme-milan-2027',
+  it: 'capodanno-ortodosso-justme-milano-2027',
+  es: 'ano-nuevo-ortodoxo-justme-milan-2027',
+  fr: 'nouvel-an-orthodoxe-justme-milan-2027',
+  de: 'orthodoxes-neujahr-justme-mailand-2027',
+  pt: 'ano-novo-ortodoxo-justme-milao-2027',
+  nl: 'orthodox-nieuwjaar-justme-milaan-2027',
+  ru: 'staryj-novyj-god-justme-milan-2027',
+  tr: 'ortodoks-yilbasi-justme-milano-2027',
+  zh: 'zhengjiao-xinnian-justme-milan-2027',
+  ar: 'ras-al-sana-orthodoxy-justme-milano-2027',
+  bg: 'vasilica-stara-nova-godina-justme-milano-2027',
+  hr: 'pravoslavna-nova-godina-justme-milano-2027',
+  cs: 'pravoslavny-novy-rok-justme-milan-2027',
+  da: 'ortodokst-nytar-justme-milano-2027',
+  et: 'vene-uusaasta-justme-milano-2027',
+  fi: 'ortodoksinen-uusivuosi-justme-milano-2027',
+  el: 'palaio-imerologio-protochronia-justme-milano-2027',
+  hu: 'ortodox-ujev-justme-milano-2027',
+  ga: 'athbhliain-cheartchreidmheach-justme-milano-2027',
+  lv: 'vecais-jaunais-gads-justme-milano-2027',
+  lt: 'senieji-naujieji-metai-justme-milano-2027',
+  mt: 'sena-gdida-ortodossa-justme-milan-2027',
+  pl: 'prawoslawny-nowy-rok-justme-mediolan-2027',
+  ro: 'revelion-pe-rit-vechi-justme-milano-2027',
+  sk: 'pravoslavny-novy-rok-justme-milano-2027',
+  sl: 'pravoslavno-novo-leto-justme-milano-2027',
+  sv: 'ortodoxt-nyar-justme-milano-2027',
+  no: 'ortodoks-nyttar-justme-milano-2027',
+  is: 'nyar-rettrunadra-justme-milano-2027',
+  uk: 'staryj-novyj-rik-justme-milan-2027',
+  sq: 'viti-i-ri-ortodoks-justme-milano-2027',
+  sr: 'srpska-nova-godina-justme-milano-2027',
+  bs: 'stara-nova-godina-justme-milano-2027',
+  mk: 'stara-nova-godina-vasilica-justme-milano-2027',
+};
+
+const ALL_ORTHODOX_NYE_ROUTE_SLUGS = new Set<string>([
+  ...Object.values(ORTHODOX_NYE_ROUTE_SLUGS_35),
+  'il-ritorno-di-cappuccetto-rosso-justme-milano-2027-01-13',
+  'capodanno-ortodosso-2027-il-ritorno-di-cappuccetto-rosso-justme-milano-2027-01-13',
+  'il-ritorno-di-cappuccetto-rosso-justme-milano',
+  'il-ritorno-di-cappuccetto-rosso-251019',
+  'capodanno-ortodosso-milano-2027',
+  'orthodox-new-year-milan-2027',
+  'staryj-novyj-god-milan-2027',
+  'srpska-nova-godina-milano-2027',
+  'revelion-rit-vechi-milano-2027',
+  'vasilica-milano-2027',
+  'justme-milano-capodanno-ortodosso-2027',
+]);
+
+function orthodoxNyeJustMeSlug(locale: string): string {
+  return ORTHODOX_NYE_ROUTE_SLUGS_35[locale as LocaleCode] || ORTHODOX_NYE_ROUTE_SLUGS_35.en;
+}
+
+function orthodoxNyeJustMePath(locale: string): string {
+  return `${localePrefix(locale)}/${getLocalizedDir35('events', locale as LocaleCode)}/${orthodoxNyeJustMeSlug(locale)}`;
+}
+
+function resolveOrthodoxNyeJustMeSlug(slug: string): boolean {
+  return ALL_ORTHODOX_NYE_ROUTE_SLUGS.has((slug || '').trim().toLowerCase());
+}
+
 export type CapodannoLocaleNav = Readonly<{
   h1: string;
   slug: string;
@@ -926,6 +991,9 @@ export function capodannoCategoryHreflangAlternates(siteUrl: string, categoryId:
 }
 
 export function capodannoEventSlug(baseSlug: string, locale: string): string {
+  if (baseSlug === 'capodanno-ortodosso-justme-milano') {
+    return orthodoxNyeJustMeSlug(locale);
+  }
   const nav = capodannoNavigation(locale);
   const rest = baseSlug
     .replace(/^capodanno-/u, '')
@@ -934,6 +1002,9 @@ export function capodannoEventSlug(baseSlug: string, locale: string): string {
 }
 
 export function capodannoEventPath(baseSlug: string, locale: string): string {
+  if (baseSlug === 'capodanno-ortodosso-justme-milano') {
+    return orthodoxNyeJustMePath(locale);
+  }
   return `${localePrefix(locale)}/${getLocalizedDir35('events', locale)}/${capodannoEventSlug(baseSlug, locale)}`;
 }
 
@@ -1018,6 +1089,12 @@ export function capodannoAlternatePath(pathname: string, targetLocale: string): 
 
   const legacyDetailMatch = pathname.match(CAPODANNO_LEGACY_DETAIL_RE);
   if (legacyDetailMatch) {
+    if (
+      legacyDetailMatch[1] === 'capodanno-ortodosso-justme-milano' ||
+      resolveOrthodoxNyeJustMeSlug(legacyDetailMatch[1])
+    ) {
+      return orthodoxNyeJustMePath(targetLocale);
+    }
     const hit = SLUG_TO_CAPODANNO_TARGET.get(legacyDetailMatch[1]);
     if (hit && hit.type === 'event') {
       return capodannoEventPath(hit.id, targetLocale);
@@ -1026,6 +1103,12 @@ export function capodannoAlternatePath(pathname: string, targetLocale: string): 
 
   const singleMatch = pathname.match(CAPODANNO_SINGLE_RE);
   if (!singleMatch) return null;
+  if (
+    singleMatch[1] === 'capodanno-ortodosso-justme-milano' ||
+    resolveOrthodoxNyeJustMeSlug(singleMatch[1])
+  ) {
+    return orthodoxNyeJustMePath(targetLocale);
+  }
   const hit = SLUG_TO_CAPODANNO_TARGET.get(singleMatch[1]);
   if (!hit) return null;
   return hit.type === 'category'

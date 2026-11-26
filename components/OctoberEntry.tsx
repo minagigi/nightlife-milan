@@ -3,6 +3,13 @@ import { CalendarDays, ArrowRight, Sparkles } from 'lucide-react';
 import { readOctoberHubCopy } from '@/lib/octoberEditorial';
 import { isEnabledLocale, localePrefix } from '@/lib/i18n/locales';
 import { capodannoCategoryPath, capodannoEventPath, capodannoPath } from '@/lib/capodanno/routes';
+import {
+  CAPODANNO_HEAD_13_SLUGS,
+  OPEN_CAPODANNO_EVENTS_COUNT,
+  getCapodannoEventBySlug,
+} from '@/lib/capodannoEvents';
+import { getCapodannoLocalizedEventContent } from '@/lib/capodanno/i18n';
+import { isRepvblicNyeSlug } from '@/lib/capodanno/repvblic35';
 import { getScarcityAndChatCopy } from '@/lib/i18n/scarcityAndChatCopy';
 import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
 
@@ -102,99 +109,55 @@ export function HomeHalloweenAndCapodannoSections({
     },
   ];
 
-  const capodannoPriorityCards = [
-    {
-      rank: isIt ? '01 · GRAN GALÀ · TORRE BRANCA' : '01 · GALA NIGHT · TORRE BRANCA',
-      venue: 'Just Me Milano',
-      title: isIt
-        ? 'Capodanno JustMe Milano 2027: Il Grande Gatsby sotto la Torre Branca'
-        : 'JustMe Milan NYE 2027: The Great Gatsby beneath Torre Branca',
-      priceLabel: isIt
-        ? 'Prezzi ufficiali: 80€ (Club) · 300€ (Gran Cenone) · Tavoli 600€–5.000€'
-        : 'Official prices: €80 (Club) · €300 (Gala Dinner) · Tables €600–€5,000',
-      posterSrc: '/images/events/capodanno-2027-posters/capodanno-justme-milano-torre-branca.webp',
-      href: capodannoEventPath('capodanno-justme-milano-torre-branca', locale),
-      highlight: false,
-    },
-    {
-      rank: isIt ? '02 · CLUB ICONICO · PORTA GARIBALDI' : '02 · FLAGSHIP CLUB · PORTA GARIBALDI',
-      venue: 'Pineta Club Milano',
-      title: isIt
-        ? 'Capodanno Pineta Milano 2027: Gran Galà Dinner Show & Luxury Club'
-        : 'Pineta Milan NYE 2027: Gala Dinner Show & Luxury Club',
-      priceLabel: isIt
-        ? 'Prezzi ufficiali: 40€ (Dopocena / Buffet) · 160€ (Gran Cenone Servito)'
-        : 'Official prices: €40 (Party / Buffet) · €160 (Served Gala Dinner)',
-      posterSrc: '/images/events/capodanno-2027-posters/capodanno-pineta-milano.webp',
-      href: capodannoEventPath('capodanno-pineta-milano', locale),
-      highlight: false,
-    },
-    {
-      rank: isIt ? '03 · SKYLINE 20° PIANO · CAPODANNO ROOFTOP N° 1 DI MILANO' : '03 · 20TH FLOOR SKYLINE · MILAN’S #1 ROOFTOP NYE',
-      venue: 'Voya Rooftop Milano',
-      title: isIt
-        ? 'Capodanno Voya Rooftop Milano 2027: Il Capodanno Rooftop Numero 1 di Milano (Menu Completo 300€)'
-        : 'Voya Rooftop Milan NYE 2027: Milan’s #1 Rooftop New Year’s Eve (Full Menu €300/person)',
-      priceLabel: isIt
-        ? 'Menu completo di tutto: 300€ a persona (Gran Cenone Panoramico + Vini + Brindisi + Party)'
-        : 'Full all-inclusive menu: €300 per person (Panoramic Gala Dinner + Wines + Midnight Toast + Party)',
-      posterSrc: '/images/events/capodanno-2027-posters/capodanno-voya-rooftop-milano.webp',
-      href: capodannoEventPath('capodanno-voya-rooftop-milano', locale),
-      highlight: true,
-    },
-    {
-      rank: isIt ? '04 · GRAN GALÀ LAGO DI GARDA · DESENZANO / LONATO' : '04 · LAKE GARDA GALA · DESENZANO / LONATO',
-      venue: 'Just Me Garda Lake',
-      title: isIt
-        ? 'Capodanno Just Me Lago di Garda 2027: "Just Me in Rouge" Dinner & Dance'
-        : 'Just Me Garda Lake NYE 2027: "Just Me in Rouge" Dinner & Dance',
-      priceLabel: isIt
-        ? 'Prezzi Xceed verificati: 20€ (Club + Drink) · 70€ (Buffet) · 130€ (Gran Cenone) · Tavoli da 440€'
-        : 'Verified Xceed prices: €20 (Club + Drink) · €70 (Buffet) · €130 (Gala Dinner) · Tables from €440',
-      posterSrc: '/images/events/capodanno-2027-posters/capodanno-justme-garda-lake.webp',
-      href: capodannoEventPath('capodanno-justme-garda-lake', locale),
-      highlight: true,
-    },
-    {
-      rank: '05 · ARENA & GARDEN · SAN SIRO',
-      venue: 'Aria Club Milano',
-      title: isIt
-        ? 'Capodanno Aria Club Milano 2027: Urban, Reggaeton & Commercial Show a San Siro'
-        : 'Aria Club Milan NYE 2027: Urban, Reggaeton & Commercial Arena Show',
-      priceLabel: isIt
-        ? 'Prezzi indicativi: 45€–55€ (Dopocena) · 65€ (Buffet) · 130€ (Cenone)'
-        : 'Benchmark prices: €45–€55 (Entry) · €65 (Buffet) · €130 (Dinner)',
-      posterSrc: '/images/events/capodanno-2027-posters/capodanno-aria-club-milano.webp',
-      href: capodannoEventPath('capodanno-aria-club-milano', locale),
-      highlight: false,
-    },
-    {
-      rank: '06 · LA DOLCE VITA · VIA PIERO DELLA FRANCESCA',
-      venue: '55 Milano',
-      title: isIt
-        ? 'Capodanno 55 Milano 2027: La Dolce Vita (Gala 160€, Buffet 100€, Club 30–50€)'
-        : '55 Milano NYE 2027: La Dolce Vita (€160 Gala, €100 Buffet, €30–€50 Club)',
-      priceLabel: isIt
-        ? 'Confermato 2027: Gala 160€ · Buffet con seduta 100€ · Dopocena 00:10 30/40/50€ · Tavoli 350€'
-        : 'Confirmed 2027: €160 Gala · €100 Laid-Table Buffet · €30/€40/€50 00:10 Club · €350 Tables',
-      posterSrc: '/images/events/capodanno-2027-posters/capodanno-55-milano.webp',
-      href: capodannoEventPath('capodanno-55-milano', locale),
-      highlight: false,
-    },
-    {
-      rank: '07 · CAPODANNO 2027 · REPUBBLICA',
-      venue: 'REPVBLIC Milano',
-      title: isIt
-        ? 'NEW YEAR’S EVE AT REPVBLIC MILANO 2027: Piazza della Repubblica 12'
-        : 'NEW YEAR’S EVE AT REPVBLIC MILANO 2027 · Piazza della Repubblica 12',
-      priceLabel: isIt
-        ? 'Tariffe ufficiali confermate: Early Bird 45€ (flûte + 1 drink) · Tavolo Dancefloor 600€ (6 ospiti) · Privé 1.200€ (10 ospiti)'
-        : 'Confirmed official rates: Early Bird €45 (flûte + 1 drink) · Dancefloor Table €600 (6 guests) · Privé €1,200 (10 guests)',
-      posterSrc: '/images/events/capodanno-2027-posters/capodanno-repvblic-milano.webp',
-      href: capodannoEventPath('capodanno-repvblic-milano', locale),
-      highlight: false,
-    },
-  ];
+  const headRankBadgesIt: Record<string, string> = {
+    'capodanno-justme-milano-torre-branca': '01 · GRAN GALÀ · TORRE BRANCA',
+    'capodanno-pineta-milano': '02 · CLUB ICONICO · PORTA GARIBALDI',
+    'capodanno-voya-rooftop-milano': '03 · SKYLINE 20° PIANO · CAPODANNO ROOFTOP N° 1',
+    'capodanno-repvblic-milano': '04 · CAPODANNO 2027 · REPUBBLICA',
+    'capodanno-55-milano': '05 · LA DOLCE VITA · SEMPIONE',
+    'capodanno-magazzini-generali-milano': '06 · CASINO NIGHT & WE LOVE 2000',
+    'capodanno-bobino-milano': '07 · BOBINO LEGENDS · NAVIGLI',
+    'capodanno-the-club-milano': '08 · GRAN GALÀ · CORSO GARIBALDI 97',
+    'capodanno-carlsberg-ol-milano': '09 · CAPODANNO PER FAMIGLIE · PORTA NUOVA',
+    'capodanno-tocqueville-13-milano': '10 · DINNER SHOW & 2 PIANI · CORSO COMO',
+    'capodanno-tom-the-ordinary-market-milano': '11 · THE MIDNIGHT BALL · COLONNE',
+    'capodanno-mib-milano-piazza-affari': '12 · GRAN GALÀ · PIAZZA AFFARI',
+    'capodanno-dazi-milano-arco-della-pace': '13 · RED CARPET · ARCO DELLA PACE',
+  };
+  const headRankBadgesEn: Record<string, string> = {
+    'capodanno-justme-milano-torre-branca': '01 · GALA NIGHT · TORRE BRANCA',
+    'capodanno-pineta-milano': '02 · FLAGSHIP CLUB · PORTA GARIBALDI',
+    'capodanno-voya-rooftop-milano': '03 · 20TH FLOOR SKYLINE · MILAN’S #1 ROOFTOP NYE',
+    'capodanno-repvblic-milano': '04 · NYE 2027 · PIAZZA DELLA REPUBBLICA',
+    'capodanno-55-milano': '05 · LA DOLCE VITA · SEMPIONE',
+    'capodanno-magazzini-generali-milano': '06 · CASINO NIGHT & WE LOVE 2000',
+    'capodanno-bobino-milano': '07 · BOBINO LEGENDS · NAVIGLI',
+    'capodanno-the-club-milano': '08 · GRAND GALA · CORSO GARIBALDI 97',
+    'capodanno-carlsberg-ol-milano': '09 · FAMILY NYE · PORTA NUOVA',
+    'capodanno-tocqueville-13-milano': '10 · TWO-FLOOR DINNER SHOW · CORSO COMO',
+    'capodanno-tom-the-ordinary-market-milano': '11 · THE MIDNIGHT BALL · COLONNE',
+    'capodanno-mib-milano-piazza-affari': '12 · GRAND GALA · PIAZZA AFFARI',
+    'capodanno-dazi-milano-arco-della-pace': '13 · RED CARPET · ARCO DELLA PACE',
+  };
+
+  const capodannoPriorityCards = CAPODANNO_HEAD_13_SLUGS.map((slug, idx) => {
+    const ev = getCapodannoEventBySlug(slug);
+    if (!ev) return null;
+    const loc = getCapodannoLocalizedEventContent(ev, locale);
+    const num = String(idx + 1).padStart(2, '0');
+    const isPastPricing = ev.sourceBasisIt.startsWith('Prezzi passati:');
+    return {
+      slug: ev.slug,
+      rank: (isIt ? headRankBadgesIt[slug] : headRankBadgesEn[slug]) || `${num} · ${ev.city.toUpperCase()}`,
+      venue: ev.venueName,
+      title: loc.title,
+      priceLabel: loc.priceSummary,
+      posterSrc: ev.image,
+      href: capodannoEventPath(ev.slug, locale),
+      highlight: slug === 'capodanno-voya-rooftop-milano' || slug === 'capodanno-carlsberg-ol-milano',
+      showPastNotice: isPastPricing,
+    };
+  }).filter((item): item is NonNullable<typeof item> => Boolean(item));
 
   return (
     <div className="w-full bg-[#050505]" data-october-entry>
@@ -317,19 +280,19 @@ export function HomeHalloweenAndCapodannoSections({
             <div className="max-w-3xl">
               <h2 className="font-display text-3xl sm:text-5xl font-bold uppercase text-[#F6F1E7] leading-[0.95]">
                 {isIt
-                  ? 'Capodanno 2027 a Milano: 129 Eventi e Cenoni'
-                  : 'Milan NYE 2027: 129 Events, Galas & Tables'}
+                  ? `Capodanno 2027 a Milano: ${OPEN_CAPODANNO_EVENTS_COUNT} Eventi e Cenoni`
+                  : `Milan NYE 2027: ${OPEN_CAPODANNO_EVENTS_COUNT} Events, Galas & Tables`}
               </h2>
               <p className="mt-3 text-[13px] font-bold text-[#EAE3D5] flex items-center gap-2">
                 <Sparkles aria-hidden="true" className="h-4 w-4 shrink-0 text-[#EAE3D5]" />
                 {isIt
-                  ? '78 Locali a Milano · Just Me Lago di Garda · 16 Capodanni Speciali · 12 Province Lombarde · Piazze Gratis'
-                  : '78 Milan Clubs · Just Me Lake Garda · 16 Special NYE Galas · 12 Lombardy Provinces · Free Squares'}
+                  ? 'Top Club a Milano · Capodanno per Famiglie · 16 Speciali · 12 Province Lombarde · Lago di Garda'
+                  : 'Top Milan Clubs · Family NYE · 16 Special NYE Galas · 12 Lombardy Provinces · Lake Garda'}
               </p>
               <p className="mt-4 max-w-[48ch] font-sans text-base text-[#EAE3D5] leading-relaxed">
                 {isIt
-                  ? 'In prima fila i club e rooftop simbolo (Just Me Milano, Just Me Lago di Garda "Just Me in Rouge", Pineta, Aria, 55 Milano, Voya Rooftop con menu completo a 300€ a persona, Repvblic, Bischeri Milano e PERREO XL @ Gate), seguiti da tutti i 129 eventi ufficiali del 31 dicembre 2026.'
-                  : 'Starting with our priority venues (Just Me Milan, Just Me Lake Garda "Just Me in Rouge", Pineta, Aria, 55 Milano, Voya Rooftop with full all-inclusive menu at €300/person, Repvblic, Bischeri Milano, and PERREO XL @ Gate), followed by all 129 official December 31, 2026 events.'}
+                  ? `In prima fila i 13 appuntamenti simbolo di Milano (Just Me, Pineta, Voya Rooftop 300€, REPVBLIC, 55 Milano, Magazzini Generali, Bobino, The Club, Carlsberg Øl per Famiglie 75€, Tocqueville 13, TOM., MIB e Dazi), seguiti da tutti i ${OPEN_CAPODANNO_EVENTS_COUNT} eventi aperti fino al Capodanno Ortodosso e Just Me Garda Lake.`
+                  : `Led by Milan’s 13 headline venues (Just Me, Pineta, Voya Rooftop €300, REPVBLIC, 55 Milano, Magazzini Generali, Bobino, The Club, Carlsberg Øl Family NYE €75, Tocqueville 13, TOM., MIB, and Dazi), followed by all ${OPEN_CAPODANNO_EVENTS_COUNT} open events through Orthodox NYE and Just Me Garda Lake.`}
               </p>
             </div>
             <div className="flex flex-wrap gap-3 shrink-0">
@@ -338,7 +301,7 @@ export function HomeHalloweenAndCapodannoSections({
                 prefetch={false}
                 className="nlm-pressable inline-flex min-h-[48px] items-center justify-center bg-[#F6F1E7] px-6 py-3.5 text-[13px] font-bold text-[#050505] hover:bg-[#EAE3D5] transition-colors"
               >
-                {isIt ? 'Tutti i 129 Eventi di Capodanno ↗' : 'All 129 NYE 2027 Events ↗'}
+                {isIt ? `Tutti i ${OPEN_CAPODANNO_EVENTS_COUNT} Eventi di Capodanno ↗` : `All ${OPEN_CAPODANNO_EVENTS_COUNT} NYE 2027 Events ↗`}
               </Link>
               <Link
                 href={capodannoCategoryPath('capodanno-rooftop-milano', locale)}
@@ -362,7 +325,7 @@ export function HomeHalloweenAndCapodannoSections({
             </span>
           </div>
 
-          {/* Griglia 6 Location Prioritarie Capodanno 2027 con Locandine */}
+          {/* Griglia 13 Location Prioritarie Capodanno 2027 con Locandine */}
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {capodannoPriorityCards.map((card) => (
               <Link
@@ -386,14 +349,16 @@ export function HomeHalloweenAndCapodannoSections({
                     />
                   </div>
                   <div className="p-6 pb-2">
-                    <div className="mb-2.5">
-                      <span
-                        className="inline-flex border border-[#EAE3D5]/40 bg-[#050505] px-3 py-1 text-[13px] font-bold text-[#F6F1E7]"
-                        data-selling-fast-badge
-                      >
-                        {scarcity.sellingFastBadge}
-                      </span>
-                    </div>
+                    {!isRepvblicNyeSlug(card.slug) && (
+                      <div className="mb-2.5">
+                        <span
+                          className="inline-flex border border-[#EAE3D5]/40 bg-[#050505] px-3 py-1 text-[13px] font-bold text-[#F6F1E7]"
+                          data-selling-fast-badge
+                        >
+                          {scarcity.sellingFastBadge}
+                        </span>
+                      </div>
+                    )}
                     <h3 className="font-display text-lg font-bold text-[#F6F1E7] group-hover:underline transition-colors leading-snug sm:text-xl">
                       {card.title}
                     </h3>
@@ -401,7 +366,9 @@ export function HomeHalloweenAndCapodannoSections({
                       <span className="font-bold text-[#EAE3D5]">{card.venue}</span> · {card.rank}
                     </p>
                     <p className="mt-3 text-base font-bold tabular-nums text-[#EAE3D5]">{card.priceLabel}</p>
-                    <p className="mt-1.5 text-[13px] italic text-[#C2B9AA]">{pastNotice}</p>
+                    {card.showPastNotice && (
+                      <p className="mt-1.5 text-[13px] italic text-[#C2B9AA]">{pastNotice}</p>
+                    )}
                   </div>
                 </div>
                 <div className="p-6 pt-4 mt-3 border-t border-[#F6F1E7]/14 flex items-center justify-between text-[13px] font-bold text-[#EAE3D5]">
@@ -415,7 +382,7 @@ export function HomeHalloweenAndCapodannoSections({
           {/* 4 Hub Principali Capodanno + 12 Categorie */}
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
             <Link href={capodannoPath(locale)} prefetch={false} className="nlm-pressable bg-[#0B0A09] p-4 text-center text-[13px] font-bold text-[#F6F1E7] hover:bg-[#141311] transition-colors">
-              {isIt ? 'Tutti i 129 Eventi Ufficiali ↗' : 'All 129 Official Events ↗'}
+              {isIt ? `Tutti i ${OPEN_CAPODANNO_EVENTS_COUNT} Eventi Ufficiali ↗` : `All ${OPEN_CAPODANNO_EVENTS_COUNT} Official Events ↗`}
             </Link>
             <Link href={capodannoCategoryPath('capodanno-speciale', locale)} prefetch={false} className="nlm-pressable border border-[#EAE3D5]/28 bg-[#0B0A09] p-4 text-center text-[13px] font-bold text-[#F6F1E7] hover:border-[#FFFFFF] transition-colors">
               {isIt ? '16 Speciali, Tram & Terme ↗' : '16 Special, Tram & Spa ↗'}

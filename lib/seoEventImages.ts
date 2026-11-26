@@ -467,8 +467,8 @@ export function inferTargetAndOutfit(params: {
   if (s.includes('baita') || s.includes('motoslitta') || s.includes('livigno') || s.includes('mottolino') || s.includes('fiaccolata') || s.includes('bobbio')) {
     return { target: 'couples_vip', outfit: 'apres_ski_chalet' };
   }
-  if (s.includes('famiglie') || s.includes('bambini')) {
-    return { target: 'families_kids', outfit: 'black_tie_gatsby' };
+  if (s.includes('famiglie') || s.includes('bambini') || s.includes('carlsberg')) {
+    return { target: 'families_kids', outfit: s.includes('carlsberg') ? 'sequins_evening' : 'black_tie_gatsby' };
   }
   if (s.includes('tram-storico') || s.includes('atmosfera') || s.includes('castello') || s.includes('villa-') || s.includes('principe-di-savoia') || s.includes('gallia') || s.includes('scala') || s.includes('justme') || s.includes('gatsby') || s.includes('palace-grand-hotel-varese') || s.includes('backdoor') || s.includes('teatro-manzoni')) {
     return { target: 'couples_vip', outfit: 'black_tie_gatsby' };

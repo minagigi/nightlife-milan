@@ -66,6 +66,7 @@ const CARD_POSTER_4X5_MAP: Readonly<Record<string, string>> = {
   "/images/events/capodanno-2027-posters/capodanno-jazz-cafe-milano.webp": "/images/events/cards-4x5/capodanno-2027-posters/capodanno-jazz-cafe-milano.webp",
   "/images/events/capodanno-2027-posters/capodanno-justme-garda-lake.webp": "/images/events/cards-4x5/capodanno-2027-posters/capodanno-justme-garda-lake.webp",
   "/images/events/capodanno-2027-posters/capodanno-justme-milano-torre-branca.webp": "/images/events/cards-4x5/capodanno-2027-posters/capodanno-justme-milano-torre-branca.webp",
+  "/images/events/capodanno-2027-posters/capodanno-ortodosso-justme-milano.webp": "/images/events/cards-4x5/capodanno-2027-posters/capodanno-ortodosso-justme-milano.webp",
   "/images/events/capodanno-2027-posters/capodanno-la-cripta-club-milano.webp": "/images/events/cards-4x5/capodanno-2027-posters/capodanno-la-cripta-club-milano.webp",
   "/images/events/capodanno-2027-posters/capodanno-lago-di-garda-sesto-senso-coco-beach.webp": "/images/events/cards-4x5/capodanno-2027-posters/capodanno-lago-di-garda-sesto-senso-coco-beach.webp",
   "/images/events/capodanno-2027-posters/capodanno-le-jardin-milano-idroscalo.webp": "/images/events/cards-4x5/capodanno-2027-posters/capodanno-le-jardin-milano-idroscalo.webp",
