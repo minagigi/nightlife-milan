@@ -69,8 +69,45 @@ export type LocaleSpSeed = {
   };
 };
 
+const CONCIERGE_HEAD_BY_LOC: Record<string, string> = {
+  es: 'Servicio de Conciergerie y Transaction Fees',
+  fr: 'Service de Conciergerie & Transaction Fees',
+  de: 'Concierge-Service & Transaction Fees',
+  pt: 'Serviço de Concierge e Transaction Fees',
+  nl: 'Conciërgeservice & Transaction Fees',
+  ru: 'Сервис консьержа и Transaction Fees',
+  tr: 'Concierge Hizmeti ve Transaction Fees',
+  zh: '礼宾服务与电子交易费 (Transaction Fees)',
+  ar: 'خدمة الكونسيرج ورسوم المعاملات (Transaction Fees)',
+  bg: 'Консиерж услуга и Transaction Fees',
+  hr: 'Concierge usluga i Transaction Fees',
+  cs: 'Concierge služba a Transaction Fees',
+  da: 'Concierge-service & Transaction Fees',
+  et: 'Concierge-teenus ja Transaction Fees',
+  fi: 'Concierge-palvelu ja Transaction Fees',
+  el: 'Υπηρεσία Concierge & Transaction Fees',
+  hu: 'Concierge-szolgáltatás és Transaction Fees',
+  ga: 'Seirbhís Concierge & Transaction Fees',
+  lv: 'Konsjerža serviss un Transaction Fees',
+  lt: 'Konsjeržo paslauga ir Transaction Fees',
+  mt: 'Servizz ta’ Concierge u Transaction Fees',
+  pl: 'Usługa Concierge i Transaction Fees',
+  ro: 'Serviciu de Concierge & Transaction Fees',
+  sk: 'Concierge služba a Transaction Fees',
+  sl: 'Storitev Concierge in Transaction Fees',
+  sv: 'Conciergeservice & Transaction Fees',
+  no: 'Conciergeservice & Transaction Fees',
+  is: 'Concierge-þjónusta og Transaction Fees',
+  uk: 'Консьєрж-сервіс та Transaction Fees',
+  sq: 'Shërbimi Concierge & Transaction Fees',
+  sr: 'Concierge usluga i Transaction Fees',
+  bs: 'Concierge usluga i Transaction Fees',
+  mk: 'Консиерж услуга и Transaction Fees',
+};
+
 function makePackFromSeed(loc: string, cfg: LocaleSpSeed): SinglePassCopyPack {
   const w = getWords35(loc);
+  const feeHead = CONCIERGE_HEAD_BY_LOC[loc] || 'Concierge Service & Transaction Fees';
   const shortVenues: Partial<Record<SinglePassVenueId, string>> = {
     gate: 'PERREO XL Gate (18–26)',
     pineta: 'Pineta Under 30 (18–29)',
@@ -112,8 +149,8 @@ function makePackFromSeed(loc: string, cfg: LocaleSpSeed): SinglePassCopyPack {
     filterAllCategories: w.formulas.all,
     categoryLabels: cfg.catLabels,
     basePriceLabel: w.colPrices,
-    feeLabel: `Booking fee 20% · ${cfg.feeDetail}`,
-    feeCalculatedAtCheckoutNote: `Booking fee 20% · ${cfg.feeDetail}`,
+    feeLabel: `${feeHead} (20%) · ${cfg.feeDetail}`,
+    feeCalculatedAtCheckoutNote: `${feeHead} (20%) · ${cfg.feeDetail}`,
     totalLabel: cfg.totalChargedLbl,
     arrivalLabel: w.hoursLabel.replace(/:$/, ''),
     guestsLabel: cfg.guests,
@@ -174,7 +211,7 @@ function makePackFromSeed(loc: string, cfg: LocaleSpSeed): SinglePassCopyPack {
     formPasswordHint: cfg.acc,
     formLanguages: cfg.langsLbl,
     formDietary: cfg.dietaryLbl,
-    formTermsLabel: `Booking fee 20% · ${cfg.termsLbl}, ${cfg.privLbl}, ${cfg.refLbl} (nightlifemilan.com)`,
+    formTermsLabel: `${feeHead} (20%) · ${cfg.termsLbl}, ${cfg.privLbl}, ${cfg.refLbl} (nightlifemilan.com)`,
     termsPolicyLabel: cfg.termsLbl,
     privacyPolicyLabel: cfg.privLbl,
     refundPolicyLabel: cfg.refLbl,

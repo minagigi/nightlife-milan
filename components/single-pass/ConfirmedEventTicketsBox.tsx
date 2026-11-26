@@ -108,7 +108,7 @@ export default function ConfirmedEventTicketsBox({
                       addItem(sku.id, 1, sku.dietaryPreset, false, undefined, undefined, 'venue');
                       router.push(`${lp}/checkout`);
                     }}
-                    className="inline-flex min-h-[42px] flex-1 items-center justify-center gap-1.5 bg-[#F6F1E7] px-3 py-2 text-xs font-extrabold uppercase tracking-wider text-[#050505] transition hover:bg-[#EAE3D5]"
+                    className="inline-flex min-h-[44px] flex-1 items-center justify-center gap-1.5 bg-[#25D366] px-3 py-2 text-xs font-extrabold uppercase tracking-wider text-[#050505] transition hover:bg-[#2EE472]"
                   >
                     <CreditCard className="h-3.5 w-3.5" aria-hidden="true" />
                     {copy.buyNowCta}

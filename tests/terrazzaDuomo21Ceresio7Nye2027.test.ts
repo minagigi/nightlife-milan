@@ -189,18 +189,18 @@ test('All 35 locales cover Terrazza Duomo 21 / MA.RE & Ceresio 7 closed with zer
     assert.equal(/100–350|350–1\.200|40–50€/.test(c7Json), false, `Invented prices in Ceresio 7 ${loc}`);
 
     const fee20 = formatFeeLabel35(loc, 0.2, false);
-    assert.ok(fee20.includes('Booking fee 20%'), `Missing Booking fee 20% label in ${loc}: ${fee20}`);
+    assert.ok(fee20.includes('Transaction Fees') && fee20.includes('20%'), `Missing Concierge & Transaction Fees 20% label in ${loc}: ${fee20}`);
     const ui35 = getTerrazzaCheckoutUi35(loc);
     assert.ok(ui35.confirmationRefundNotice.length > 20);
   }
 
   assert.equal(
     formatFeeLabel35('it', 0.2, false),
-    'Booking fee 20% · consulenza concierge e pagamento elettronico',
+    'Servizio di Conciergerie & Transaction Fees (20%) · consulenza concierge e pagamento elettronico',
   );
   assert.equal(
     formatFeeLabel35('en', 0.2, false),
-    'Booking fee 20% · concierge & electronic payment',
+    'Concierge Service & Transaction Fees (20%) · concierge & electronic payment',
   );
 
   // Category pages (Rooftop, Couples) & raw capodannoEvents entry have zero fee breakdown
@@ -402,10 +402,10 @@ test('Post-payment emails generate localized customer confirmation/refund notice
   assert.equal(custMail.to, 'giulia@example.com');
   assert.ok(custMail.html.includes('verifica della disponibilità col locale'));
   assert.ok(custMail.html.includes('rimborso completo'));
-  assert.ok(custMail.html.includes('Prezzo del locale (EUR)'));
-  assert.ok(custMail.html.includes('Booking fee 20% · consulenza concierge e pagamento elettronico'));
-  assert.ok(custMail.text.includes('Prezzo del locale (EUR)'));
-  assert.ok(custMail.text.includes('Booking fee 20% · consulenza concierge e pagamento elettronico'));
+  assert.ok(custMail.html.includes('Quota del locale (EUR)'));
+  assert.ok(custMail.html.includes('Servizio di Conciergerie &amp; Transaction Fees (20%) · consulenza concierge e pagamento elettronico') || custMail.html.includes('Servizio di Conciergerie & Transaction Fees (20%) · consulenza concierge e pagamento elettronico'));
+  assert.ok(custMail.text.includes('Quota del locale (EUR)'));
+  assert.ok(custMail.text.includes('Servizio di Conciergerie & Transaction Fees (20%) · consulenza concierge e pagamento elettronico'));
   assert.ok(custMail.html.includes('Via Silvio Pellico 2'));
   assert.ok(custMail.html.includes('Intolleranza al lattosio'));
   assert.equal(/\bstripe\b/i.test(custMail.html), false);
@@ -644,7 +644,7 @@ test('End-to-end /api/single-pass/checkout POST enforces pairing/allergies and c
     const partnerSavedOrder = await getOrderById(partnerOk.orderId);
     assert.ok(partnerSavedOrder);
     const partnerMail = buildSinglePassOrderEmail(partnerSavedOrder);
-    assert.equal(partnerMail.html.includes('Booking fee'), false, 'Partner 0% email must not include Booking fee row');
+    assert.equal(partnerMail.html.includes('Transaction Fees'), false, 'Partner 0% email must not include Transaction Fees row');
 
     // 7. T-031 New non-partner location checkout (channel: 'venue'): Barchetta Como 175€ + 20% (35€) = 210€
     const barchettaRes = await checkoutPost(

@@ -324,20 +324,19 @@ export default function JustSingingJustMeDetailView({
         {/* Jump TOC */}
         <nav
           aria-label={c.tocTitle}
-          className="mt-8 rounded-xl border border-white/15 bg-white/[0.03] p-5"
+          className="mt-8 border border-white/15 bg-white/[0.03] p-4 sm:p-5"
         >
           <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-champagne">
             <ListChecks className="h-4 w-4" />
             <span>{c.tocTitle}</span>
           </div>
-          <ol className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
+          <ol className="mt-3 flex gap-2 overflow-x-auto pb-1.5 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-2.5 sm:overflow-visible sm:pb-0">
             {c.tocItems.map((item) => (
-              <li key={item.id}>
+              <li key={item.id} className="shrink-0">
                 <a
                   href={`#${item.id}`}
-                  className="inline-flex items-center gap-2 font-sans text-sm text-white/85 transition-colors hover:text-champagne"
+                  className="inline-flex min-h-[36px] items-center gap-2 border border-white/15 bg-[#141311] px-3 py-1.5 font-sans text-xs font-semibold text-[#F6F1E7] transition-colors hover:border-champagne hover:text-champagne sm:text-sm"
                 >
-                  <span className="h-1.5 w-1.5 rounded-full bg-champagne" />
                   <span>{item.label}</span>
                 </a>
               </li>
@@ -346,64 +345,66 @@ export default function JustSingingJustMeDetailView({
         </nav>
       </header>
 
-      {/* 2-Step Eventbrite + WhatsApp Strip */}
+      {/* 2-Step Eventbrite + WhatsApp Strip — Alternativa 02 Capitolo Carta Calda #F6F1E7 */}
       <section
         id="how-to-enter"
-        className="mx-auto max-w-[1440px] scroll-mt-24 border-x border-b border-white/10 bg-[#0B0A09] px-5 py-10 sm:px-14"
+        className="w-full scroll-mt-24 border-y border-[#050505] bg-[#F6F1E7] text-[#050505]"
       >
-        <div className="space-y-6">
+        <div className="mx-auto max-w-[1440px] space-y-6 border-x border-[#050505]/18 px-5 py-10 sm:px-14">
           <div className="space-y-2">
-            <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-champagne">
-              <Sparkles className="h-4 w-4" />
+            <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-[0.18em] text-[#4A453E]">
+              <Sparkles className="h-4 w-4 text-[#050505]" />
               <span>Nightlife Milan Official Accreditation · 0 €</span>
             </div>
-            <h2 className="font-serif text-2xl font-normal text-[#F6F1E7] sm:text-4xl">
+            <h2 className="font-serif text-2xl font-bold text-[#050505] sm:text-4xl">
               {c.howToHeading}
             </h2>
-            <p className="font-sans text-sm text-[#C2B9AA] sm:text-base">{c.howToSubheading}</p>
+            <p className="font-sans text-sm text-[#3D3830] sm:text-base">{c.howToSubheading}</p>
           </div>
 
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
             {c.howToSteps.map((step) => (
               <div
                 key={step.stepNumber}
-                className="flex flex-col justify-between rounded-xl border border-champagne/30 bg-white/[0.03] p-6 space-y-5"
+                className="flex flex-col justify-between space-y-5 border border-[#050505] bg-[#FFFFFF] p-6 text-[#050505]"
               >
                 <div className="space-y-3">
-                  <span className="inline-flex items-center rounded-full border border-champagne/40 bg-champagne/10 px-3 py-1 font-mono text-xs font-bold text-champagne">
+                  <span className="inline-flex items-center bg-[#050505] px-3 py-1 font-mono text-xs font-bold text-[#F6F1E7]">
                     {step.stepNumber}
                   </span>
-                  <h3 className="font-serif text-xl text-[#F6F1E7] sm:text-2xl">{step.title}</h3>
-                  <p className="font-sans text-sm leading-relaxed text-[#C2B9AA]">{step.detail}</p>
+                  <h3 className="font-serif text-xl font-bold text-[#050505] sm:text-2xl">{step.title}</h3>
+                  <p className="font-sans text-sm leading-relaxed text-[#24201B]">{step.detail}</p>
                 </div>
 
-                {step.ctaKind === 'eventbrite' && eventbriteUrl ? (
-                  <a
-                    href={eventbriteUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-sm bg-[#EAE3D5] px-5 py-3 text-xs font-bold uppercase tracking-wider text-[#050505] transition-colors hover:bg-white sm:w-auto"
-                  >
-                    <Ticket className="h-4 w-4" />
-                    {step.ctaLabel}
-                    <ExternalLink className="h-3.5 w-3.5" />
-                  </a>
-                ) : (
-                  <a
-                    href={whatsappConfirmUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-sm bg-[#25D366] px-5 py-3 text-xs font-bold uppercase tracking-wider text-[#050505] transition-opacity hover:opacity-90 sm:w-auto"
-                  >
-                    <MessageCircle className="h-4 w-4" />
-                    {step.ctaKind === 'eventbrite' ? c.ctaWhatsappLabel : step.ctaLabel}
-                  </a>
-                )}
+                <div className="bg-[#050505] p-1.5 sm:w-fit">
+                  {step.ctaKind === 'eventbrite' && eventbriteUrl ? (
+                    <a
+                      href={eventbriteUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 bg-[#EAE3D5] px-5 py-2.5 text-xs font-extrabold uppercase tracking-wider text-[#050505] transition-colors hover:bg-[#F6F1E7] sm:w-auto"
+                    >
+                      <Ticket className="h-4 w-4" />
+                      {step.ctaLabel}
+                      <ExternalLink className="h-3.5 w-3.5" />
+                    </a>
+                  ) : (
+                    <a
+                      href={whatsappConfirmUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 bg-[#25D366] px-5 py-2.5 text-xs font-extrabold uppercase tracking-wider text-[#050505] transition-colors hover:bg-[#2EE472] sm:w-auto"
+                    >
+                      <MessageCircle className="h-4 w-4" />
+                      {step.ctaKind === 'eventbrite' ? c.ctaWhatsappLabel : step.ctaLabel}
+                    </a>
+                  )}
+                </div>
               </div>
             ))}
           </div>
 
-          <p className="rounded-lg border border-[#25D366]/30 bg-[#25D366]/10 px-4 py-3 font-sans text-xs leading-relaxed text-[#F6F1E7] sm:text-sm">
+          <p className="border border-[#050505]/25 bg-[#EAE3D5] px-4 py-3 font-sans text-xs font-medium leading-relaxed text-[#050505] sm:text-sm">
             {c.whatsappTemplateNote}
           </p>
         </div>
@@ -739,20 +740,20 @@ export default function JustSingingJustMeDetailView({
           </div>
         </section>
 
-        {/* Section 7: 12 FAQs */}
-        <section id="faqs" className="scroll-mt-24 space-y-6">
-          <h2 className="font-serif text-3xl font-normal text-[#F6F1E7] sm:text-4xl">
+        {/* Section 7: 12 FAQs — Alternativa 02 Capitolo Carta Calda #F6F1E7 */}
+        <section id="faqs" className="scroll-mt-24 border-2 border-[#050505] bg-[#F6F1E7] p-6 text-[#050505] sm:p-10">
+          <h2 className="font-serif text-2xl font-bold text-[#050505] sm:text-4xl">
             {c.faqHeading}
           </h2>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {c.faqs.map((faq) => (
-              <div
-                key={faq.q}
-                className="rounded-xl border border-white/10 bg-white/[0.025] p-5 space-y-2"
-              >
-                <h3 className="font-serif text-lg text-[#F6F1E7]">{faq.q}</h3>
-                <p className="font-sans text-sm leading-relaxed text-[#C2B9AA]">{faq.a}</p>
-              </div>
+          <div className="mt-5 divide-y divide-[#050505]/15 border-y border-[#050505]/15 bg-[#FFFFFF] px-5">
+            {c.faqs.map((faq, idx) => (
+              <details key={faq.q} open={idx < 2} className="group py-4">
+                <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 marker:hidden">
+                  <h3 className="font-serif text-base font-bold text-[#050505] sm:text-lg">{faq.q}</h3>
+                  <span className="font-mono text-xl font-bold text-[#050505] transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+                </summary>
+                <p className="pt-2 font-sans text-sm leading-relaxed text-[#24201B]">{faq.a}</p>
+              </details>
             ))}
           </div>
         </section>

@@ -289,76 +289,84 @@ export default function EmbeddedPaymentForm({
       noValidate
       onSubmit={handleConfirm}
       data-embedded-checkout-form
-      className="space-y-6 border border-[#0A0A0C]/16 bg-[#FFFFFF] p-6 sm:p-8"
+      className="overflow-hidden border border-[#050505] bg-[#F6F1E7] text-[#050505]"
     >
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#0A0A0C]/14 pb-4">
-        <div>
-          <p className="text-xs font-bold text-[#4F4D48]">{copy.stepPaymentLabel}</p>
-          <p className="mt-1 text-sm text-[#4F4D48] tabular-nums">
-            {copy.orderIdLabel}: <strong className="text-[#0A0A0C]">{orderId}</strong>
-          </p>
+      <div className="space-y-6 p-6 sm:p-8">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#050505]/18 pb-4">
+          <div>
+            <p className="font-mono text-xs font-bold uppercase tracking-wider text-[#4A453E]">
+              {copy.stepPaymentLabel}
+            </p>
+            <p className="mt-1 text-sm text-[#4A453E] tabular-nums">
+              {copy.orderIdLabel}: <strong className="text-[#050505]">{orderId}</strong>
+            </p>
+          </div>
+          {onBack && (
+            <button
+              type="button"
+              onClick={onBack}
+              className="inline-flex min-h-[42px] items-center gap-1.5 border border-[#050505] bg-[#FFFFFF] px-3.5 py-1.5 text-xs font-bold text-[#050505] hover:bg-[#050505] hover:text-[#F6F1E7]"
+            >
+              <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
+              {copy.backToDetailsCta}
+            </button>
+          )}
         </div>
-        {onBack && (
-          <button
-            type="button"
-            onClick={onBack}
-            className="inline-flex min-h-[40px] items-center gap-1.5 border border-[#0A0A0C] bg-[#FFFFFF] px-3.5 py-1.5 text-xs font-bold text-[#0A0A0C] hover:bg-[#0A0A0C] hover:text-[#FFFFFF]"
-          >
-            <ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" />
-            {copy.backToDetailsCta}
-          </button>
+
+        <div className="border border-[#050505] bg-[#EAE3D5] p-4 tabular-nums">
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
+            <span className="text-sm font-bold uppercase text-[#050505]">{copy.billingTotalLabel}</span>
+            <span className="font-display text-3xl font-extrabold text-[#050505]">
+              {billingTotalDisplay}
+            </span>
+          </div>
+          {showEurReference && (
+            <p className="mt-1 text-right font-mono text-xs font-medium text-[#4A453E]">
+              {copy.eurOriginalLabel}: {eurTotalDisplay}
+            </p>
+          )}
+        </div>
+
+        {!elementReady && !errorMessage && (
+          <div className="border border-[#050505]/25 bg-[#FFFFFF] p-6 text-center text-sm font-medium text-[#4A453E]">
+            {copy.paymentProcessingLabel}
+          </div>
         )}
-      </div>
 
-      <div className="border border-[#0A0A0C]/14 bg-[#EDEBE6] p-4 tabular-nums">
-        <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <span className="text-sm font-bold text-[#0A0A0C]">{copy.billingTotalLabel}</span>
-          <span className="font-display text-3xl font-extrabold text-[#D9381E]">
-            {billingTotalDisplay}
-          </span>
-        </div>
-        {showEurReference && (
-          <p className="mt-1 text-right text-xs font-medium text-[#4F4D48]">
-            {copy.eurOriginalLabel}: {eurTotalDisplay}
-          </p>
-        )}
-      </div>
-
-      {!elementReady && !errorMessage && (
-        <div className="border border-[#0A0A0C]/16 bg-[#EDEBE6] p-6 text-center text-sm font-medium text-[#4F4D48]">
-          {copy.paymentProcessingLabel}
-        </div>
-      )}
-
-      <div
-        ref={containerRef}
-        className={`min-h-[160px] transition-opacity ${elementReady ? 'opacity-100' : 'opacity-40'}`}
-      />
-
-      {errorMessage && (
         <div
-          role="alert"
-          className="flex items-start gap-2.5 border-2 border-[#B91C1C] bg-[#FEF2F2] p-4 text-sm font-semibold text-[#B91C1C]"
+          ref={containerRef}
+          className={`min-h-[160px] border border-[#050505]/25 bg-[#FFFFFF] p-4 transition-opacity ${
+            elementReady ? 'opacity-100' : 'opacity-40'
+          }`}
+        />
+
+        {errorMessage && (
+          <div
+            role="alert"
+            className="flex items-start gap-2.5 border-2 border-[#991B1B] bg-[#FEF2F2] p-4 text-sm font-bold text-[#991B1B]"
+          >
+            <AlertCircle className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
+            <span>{errorMessage}</span>
+          </div>
+        )}
+      </div>
+
+      <div className="space-y-3 border-t border-[#050505] bg-[#050505] p-6 text-[#F6F1E7]">
+        <button
+          type="submit"
+          disabled={!elementReady || submitting}
+          className="flex min-h-[56px] w-full items-center justify-center gap-2 bg-[#25D366] px-6 py-4 text-sm font-extrabold uppercase tracking-wider text-[#050505] transition hover:bg-[#2EE472] disabled:cursor-not-allowed disabled:opacity-60"
         >
-          <AlertCircle className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
-          <span>{errorMessage}</span>
+          <Lock className="h-4 w-4" aria-hidden="true" />
+          <span>
+            {submitting ? copy.paymentProcessingLabel : `${copy.paySafelyCta} (${billingTotalDisplay})`}
+          </span>
+        </button>
+
+        <div className="flex items-center justify-center gap-2 text-center text-xs text-[#C2B9AA]">
+          <ShieldCheck className="h-4 w-4 shrink-0 text-[#25D366]" aria-hidden="true" />
+          <span>{uxCopy.cardStepSecureNote}</span>
         </div>
-      )}
-
-      <button
-        type="submit"
-        disabled={!elementReady || submitting}
-        className="flex min-h-[54px] w-full items-center justify-center gap-2 bg-[#D9381E] px-6 py-4 text-sm font-extrabold uppercase tracking-wider text-[#FFFFFF] transition hover:bg-[#B82B14] disabled:cursor-not-allowed disabled:opacity-60"
-      >
-        <Lock className="h-4 w-4" aria-hidden="true" />
-        <span>
-          {submitting ? copy.paymentProcessingLabel : `${copy.paySafelyCta} (${billingTotalDisplay})`}
-        </span>
-      </button>
-
-      <div className="flex items-center justify-center gap-2 text-center text-xs text-[#4F4D48]">
-        <ShieldCheck className="h-4 w-4 shrink-0 text-[#0A0A0C]" aria-hidden="true" />
-        <span>{uxCopy.cardStepSecureNote}</span>
       </div>
     </form>
   );

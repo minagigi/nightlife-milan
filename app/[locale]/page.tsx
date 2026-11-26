@@ -510,25 +510,25 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           }}
         />
 
-        {/* ── 2. Fascia Garanzie Cialdini a 4 Colonne (Authority · Social Proof · Scarcity · Unity) ── */}
+        {/* ── 2. Fascia Garanzie Cialdini a 4 Colonne (Alternativa 02 · Capitolo Champagne #EAE3D5) ── */}
         <section
-          className="w-full border-b border-[#F6F1E7]/14 bg-[#0B0A09]"
+          className="w-full border-y border-[#050505] bg-[#EAE3D5] text-[#050505]"
           aria-label={v01.statusLive}
         >
-          <div className="mx-auto grid max-w-[1440px] grid-cols-1 divide-y divide-[#F6F1E7]/12 border-x border-[#F6F1E7]/14 sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4">
+          <div className="mx-auto grid max-w-[1440px] grid-cols-2 divide-x divide-y divide-[#050505]/16 border-x border-[#050505]/18 lg:grid-cols-4 lg:divide-y-0">
             {v01.cialdiniCells.map((cell) => (
               <div
                 key={cell.principle}
                 data-cialdini={cell.principle}
-                className="flex flex-col justify-between gap-2 p-6 sm:p-7"
+                className="flex flex-col justify-between gap-1.5 p-4 sm:p-7"
               >
-                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[#EAE3D5]">
+                <p className="font-mono text-[10px] font-bold uppercase tracking-[0.14em] text-[#4A453E] sm:text-[11px]">
                   {cell.kicker}
                 </p>
-                <p className="font-serif text-2xl font-normal text-[#F6F1E7]">
+                <p className="font-serif text-xl font-bold text-[#050505] sm:text-2xl">
                   {cell.value}
                 </p>
-                <p className="font-sans text-[13px] leading-relaxed text-[#C2B9AA]">
+                <p className="font-sans text-xs leading-relaxed text-[#24201B] sm:text-[13px]">
                   {cell.body}
                 </p>
               </div>
@@ -552,72 +552,74 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 
         <OctoberEntry locale={locale} />
 
-        {/* ── 4. San Siro Banner (Couture Noir + WhatsApp Direct) ─────────────────── */}
-        <section className="w-full border-b border-[#F6F1E7]/14 bg-[#050505]">
-          <div className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-6 border-x border-[#F6F1E7]/14 bg-[#0B0A09] px-5 py-12 md:flex-row md:items-center sm:px-14">
+        {/* ── 4. San Siro Banner (Alternativa 02 · Capitolo Carta Calda #F6F1E7 + Plinto #050505) ─── */}
+        <section className="w-full border-y border-[#050505] bg-[#F6F1E7] text-[#050505]">
+          <div className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-6 border-x border-[#050505]/18 px-5 py-10 md:flex-row md:items-center sm:px-14 sm:py-12">
             <div>
-              <p className="mb-2 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-[#EAE3D5]">
+              <p className="mb-2 font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-[#4A453E]">
                 {uiLabels.sanSiroEye}
               </p>
-              <h2 className="font-serif text-2xl font-normal text-[#F6F1E7] sm:text-4xl">
+              <h2 className="font-serif text-2xl font-bold text-[#050505] sm:text-4xl">
                 {uiLabels.sanSiroTitle}
               </h2>
-              <p className="mt-2 max-w-[64ch] font-sans text-sm leading-relaxed text-[#DED8CC]">
+              <p className="mt-2 max-w-[64ch] font-sans text-sm leading-relaxed text-[#24201B]">
                 {uiLabels.sanSiroBody}
               </p>
             </div>
-            <Link
-              href={`${lp}/football-afterparties`}
-              prefetch={false}
-              className="inline-flex min-h-[48px] shrink-0 items-center gap-2 bg-[#25D366] px-6 py-3.5 text-[13px] font-bold uppercase tracking-[0.04em] text-[#050505] transition-colors hover:bg-[#2EE472]"
-            >
-              {uiLabels.sanSiroCta}
-            </Link>
+            <div className="shrink-0 bg-[#050505] p-1.5">
+              <Link
+                href={`${lp}/football-afterparties`}
+                prefetch={false}
+                className="inline-flex min-h-[48px] items-center gap-2 bg-[#25D366] px-6 py-3.5 text-[13px] font-extrabold uppercase tracking-[0.04em] text-[#050505] transition-colors hover:bg-[#2EE472]"
+              >
+                {uiLabels.sanSiroCta}
+              </Link>
+            </div>
           </div>
         </section>
 
-        {/* ── 5. I Tre Atti della Notte Milanese (Cialdini: Liking · Couture Noir) ─── */}
+        {/* ── 5. I Tre Atti della Notte Milanese (Alternativa 02 · Champagne #EAE3D5 + Notte #050505) ── */}
         <section
           data-cialdini="liking"
           className="w-full border-b border-[#F6F1E7]/14 bg-[#050505]"
         >
           <div className="mx-auto grid max-w-[1440px] grid-cols-1 border-x border-[#F6F1E7]/14 lg:grid-cols-12">
-            {/* Colonna Sinistra (5/12): #0B0A09 */}
-            <div className="flex flex-col justify-between border-b border-[#F6F1E7]/14 bg-[#0B0A09] px-6 py-12 text-[#F6F1E7] sm:p-14 lg:col-span-5 lg:border-b-0 lg:border-r">
+            {/* Colonna Sinistra (5/12): Champagne #EAE3D5 */}
+            <div className="flex flex-col justify-between border-b border-[#050505] bg-[#EAE3D5] px-6 py-10 text-[#050505] sm:p-14 lg:col-span-5 lg:border-b-0 lg:border-r">
               <div>
-                <p className="mb-2 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-[#EAE3D5]">
+                <p className="mb-2 font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-[#4A453E]">
                   {homeCopy.nightLabel}
                 </p>
-                <h2 className="mb-8 font-serif text-3xl font-normal italic leading-[1.04] text-[#F6F1E7] sm:text-4xl">
+                <h2 className="mb-6 font-serif text-3xl font-bold italic leading-[1.04] text-[#050505] sm:mb-8 sm:text-4xl">
                   {homeCopy.nightTitle}
                 </h2>
-                <div className="divide-y divide-[#F6F1E7]/14 border-y border-[#F6F1E7]/14">
+                <div className="divide-y divide-[#050505]/16 border-y border-[#050505]/16">
                   {homeCopy.nightSteps.map((step: { label: string; title: string; body: string }, i: number) => (
-                    <div key={i} className="flex items-start justify-between gap-6 py-6">
+                    <div key={i} className="flex items-start justify-between gap-5 py-5">
                       <div>
-                        <p className="mb-1 font-mono text-[11px] uppercase tracking-[0.12em] text-[#EAE3D5]">
+                        <p className="mb-1 font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-[#4A453E]">
                           {step.label}
                         </p>
-                        <h3 className="mb-2 font-serif text-2xl font-normal leading-tight text-[#F6F1E7] sm:text-3xl">
+                        <h3 className="mb-1.5 font-serif text-2xl font-bold leading-tight text-[#050505] sm:text-3xl">
                           {step.title}
                         </h3>
-                        <p className="max-w-[52ch] font-sans text-sm leading-relaxed text-[#C2B9AA]">
+                        <p className="max-w-[52ch] font-sans text-sm leading-relaxed text-[#24201B]">
                           {step.body}
                         </p>
                       </div>
-                      <span className="shrink-0 font-serif text-4xl font-normal italic text-[#EAE3D5]">
+                      <span className="shrink-0 font-serif text-4xl font-bold italic text-[#050505]">
                         {i === 0 ? 'I' : i === 1 ? 'II' : 'III'}
                       </span>
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="mt-8">
+              <div className="mt-7 bg-[#050505] p-2">
                 <a
                   href={waLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex min-h-[48px] w-full items-center justify-between bg-[#25D366] px-6 py-3.5 text-[13px] font-bold uppercase tracking-[0.04em] text-[#050505] transition-colors hover:bg-[#2EE472]"
+                  className="flex min-h-[48px] w-full items-center justify-between bg-[#25D366] px-6 py-3.5 text-[13px] font-extrabold uppercase tracking-[0.04em] text-[#050505] transition-colors hover:bg-[#2EE472]"
                 >
                   <span>{homeCopy.requestAction}</span>
                   <span aria-hidden="true">↗</span>
@@ -625,10 +627,10 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
               </div>
             </div>
 
-            {/* Colonna Destra (7/12): Trittico Fotografico Editoriale 4:5 */}
+            {/* Colonna Destra (7/12): Trittico Fotografico Editoriale 4:5 (Swipe Mobile / 3-Col Desktop) */}
             <div data-lightbox-group="home-editorial-triptych" className="flex flex-col justify-between bg-[#141311] p-6 sm:p-14 lg:col-span-7">
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
-                <div>
+              <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 sm:grid sm:grid-cols-3 sm:gap-5 sm:overflow-visible sm:pb-0">
+                <div className="w-[74vw] max-w-[280px] shrink-0 snap-start sm:w-auto sm:max-w-none">
                   <div className="relative aspect-[4/5] w-full overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]">
                     <Image
                       src="/images/vip-table-milan-nightclub-just-me.webp"
@@ -636,7 +638,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                       fill
                       quality={92}
                       className="object-cover"
-                      sizes="(max-width: 640px) 100vw, 25vw"
+                      sizes="(max-width: 640px) 75vw, 25vw"
                     />
                   </div>
                   <div className="mt-2 font-mono text-[12px] text-[#DED8CC]">
@@ -645,7 +647,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                   </div>
                 </div>
 
-                <div>
+                <div className="w-[74vw] max-w-[280px] shrink-0 snap-start sm:w-auto sm:max-w-none">
                   <div className="relative aspect-[4/5] w-full overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]">
                     <Image
                       src="/images/milan-club-crowd-dancefloor-night.webp"
@@ -653,7 +655,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                       fill
                       quality={92}
                       className="object-cover"
-                      sizes="(max-width: 640px) 100vw, 25vw"
+                      sizes="(max-width: 640px) 75vw, 25vw"
                     />
                   </div>
                   <div className="mt-2 font-mono text-[12px] text-[#DED8CC]">
@@ -661,7 +663,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                   </div>
                 </div>
 
-                <div>
+                <div className="w-[74vw] max-w-[280px] shrink-0 snap-start sm:w-auto sm:max-w-none">
                   <div className="relative aspect-[4/5] w-full overflow-hidden border border-[#F6F1E7]/14 bg-[#050505]">
                     <Image
                       src="/images/bottle-service-milan-vip-nightclub.webp"
@@ -669,7 +671,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                       fill
                       quality={92}
                       className="object-cover"
-                      sizes="(max-width: 640px) 100vw, 25vw"
+                      sizes="(max-width: 640px) 75vw, 25vw"
                     />
                   </div>
                   <div className="mt-2 font-mono text-[12px] text-[#DED8CC]">
@@ -699,16 +701,16 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
 
         <MfwEntry locale={locale} />
 
-        {/* ── 7. Esplora per Categoria e Quartiere (Couture Noir Grid) ────────────── */}
-        <section className="w-full border-b border-[#F6F1E7]/14 bg-[#0B0A09] text-[#F6F1E7]">
-          <div className="mx-auto max-w-[1440px] border-x border-[#F6F1E7]/14 px-5 py-16 sm:px-14 sm:py-20">
-            <p className="mb-2 font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-[#EAE3D5]">
+        {/* ── 7. Esplora per Categoria e Quartiere (Alternativa 02 · Capitolo Carta Calda #F6F1E7) ── */}
+        <section className="w-full border-y border-[#050505] bg-[#F6F1E7] text-[#050505]">
+          <div className="mx-auto max-w-[1440px] border-x border-[#050505]/18 px-5 py-14 sm:px-14 sm:py-20">
+            <p className="mb-2 font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-[#4A453E]">
               {homeCopy.discoverLabel}
             </p>
-            <h2 className="mb-10 font-serif text-3xl font-normal text-[#F6F1E7] sm:text-5xl">
+            <h2 className="mb-8 font-serif text-3xl font-bold text-[#050505] sm:mb-10 sm:text-5xl">
               {homeCopy.categoriesTitle}
             </h2>
-            <div className="grid grid-cols-2 border-l border-t border-[#F6F1E7]/14 bg-[#141311] sm:grid-cols-4">
+            <div className="grid grid-cols-2 border-l border-t border-[#050505]/20 bg-[#FFFFFF] sm:grid-cols-4">
               {[
                 { label: homeCopy.categoryLabels[0], href: `${lp}/genres/techno` },
                 { label: homeCopy.categoryLabels[1], href: `${lp}/vip-tables` },
@@ -723,12 +725,12 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
                   key={tag.label}
                   href={tag.href}
                   prefetch={false}
-                  className="flex min-h-[104px] flex-col justify-between border-b border-r border-[#F6F1E7]/14 p-6 transition-colors hover:bg-[#1E1C19]"
+                  className="flex min-h-[100px] flex-col justify-between border-b border-r border-[#050505]/20 p-5 text-[#050505] transition-colors hover:bg-[#EAE3D5] sm:p-6"
                 >
-                  <span className="font-serif text-3xl font-normal italic tabular-nums text-[#EAE3D5]">
+                  <span className="font-serif text-2xl font-bold italic tabular-nums text-[#4A453E] sm:text-3xl">
                     {String(idx + 1).padStart(2, '0')}
                   </span>
-                  <span className="mt-3 text-sm font-bold text-[#F6F1E7]">
+                  <span className="mt-3 text-xs font-extrabold text-[#050505] sm:text-sm">
                     {tag.label} ↗
                   </span>
                 </Link>

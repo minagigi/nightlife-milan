@@ -241,8 +241,9 @@ export function buildSinglePassOrderEmail(
   const linesHtml = order.items
     .map((item) => {
       const paxCount = typeof item.totalGuests === 'number' ? item.totalGuests : item.quantity;
+      const guestWord = order.locale === 'it' ? (paxCount === 1 ? 'ospite' : 'ospiti') : (paxCount === 1 ? 'guest' : 'guests');
       const paxLabel =
-        paxCount > 0 ? `${paxCount} pax` : formatZeroGuestAddonBadge35(order.locale, item.venueId);
+        paxCount > 0 ? `${paxCount} ${guestWord}` : formatZeroGuestAddonBadge35(order.locale, item.venueId);
       return `<tr>
           <td style="padding:10px 8px;border-bottom:1px solid #222;color:#F6F1E7;">
             <strong>${escapeHtml(item.venueName)}</strong><br/>

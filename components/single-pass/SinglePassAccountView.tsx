@@ -460,7 +460,7 @@ export default function SinglePassAccountView({
               </div>
               <button
                 type="submit"
-                className="min-h-[50px] w-full bg-[#D9381E] px-5 py-3 text-sm font-extrabold uppercase tracking-wider text-[#FFFFFF] hover:bg-[#B82B14]"
+                className="min-h-[50px] w-full bg-[#050505] px-5 py-3 text-sm font-extrabold uppercase tracking-wider text-[#F6F1E7] hover:bg-[#1E1C19]"
               >
                 {copy.loginCta}
               </button>
@@ -598,7 +598,7 @@ export default function SinglePassAccountView({
               </div>
               <button
                 type="submit"
-                className="min-h-[50px] w-full bg-[#D9381E] px-5 py-3 text-sm font-extrabold uppercase tracking-wider text-[#FFFFFF] hover:bg-[#B82B14]"
+                className="min-h-[50px] w-full bg-[#050505] px-5 py-3 text-sm font-extrabold uppercase tracking-wider text-[#F6F1E7] hover:bg-[#1E1C19]"
               >
                 {copy.registerCta}
               </button>
@@ -660,7 +660,7 @@ export default function SinglePassAccountView({
               </div>
               <button
                 type="submit"
-                className="min-h-[50px] w-full bg-[#D9381E] px-5 py-3 text-sm font-extrabold uppercase tracking-wider text-[#FFFFFF] hover:bg-[#B82B14]"
+                className="min-h-[50px] w-full bg-[#050505] px-5 py-3 text-sm font-extrabold uppercase tracking-wider text-[#F6F1E7] hover:bg-[#1E1C19]"
               >
                 {copy.lookupCta}
               </button>
@@ -903,7 +903,7 @@ export default function SinglePassAccountView({
                           type="button"
                           onClick={() => handlePayExistingOrder(order.id)}
                           disabled={payingOrderId === order.id}
-                          className="inline-flex min-h-[46px] items-center gap-2 bg-[#D9381E] px-5 py-2.5 text-xs font-extrabold uppercase tracking-wider text-[#FFFFFF] hover:bg-[#B82B14]"
+                          className="inline-flex min-h-[46px] items-center gap-2 bg-[#25D366] px-5 py-2.5 text-xs font-extrabold uppercase tracking-wider text-[#050505] hover:bg-[#2EE472]"
                         >
                           <CreditCard className="h-4 w-4" aria-hidden="true" />
                           {payingOrderId === order.id ? '...' : copy.completePaymentCta}

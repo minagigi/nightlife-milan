@@ -54,7 +54,12 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
   const title = getCapodannoLocalizedCategoryTitle(pageDef, locale, events.length);
   const subtitle = getCapodannoLocalizedCategorySubtitle(pageDef, locale, events.length);
   const quickAnswer = getCapodannoCategoryQuickAnswer35(pageDef, locale, events.length);
-  const shortLabel = getCapodannoCategoryShortLabel35(pageDef.slug, locale, pageDef.shortLabelIt, pageDef.shortLabelEn);
+  const shortLabel = getCapodannoCategoryShortLabel35(
+    pageDef.slug,
+    locale,
+    pageDef.shortLabelIt,
+    pageDef.shortLabelEn,
+  );
 
   const faqs = getCapodannoHubFaqs35({
     pageDef,
@@ -72,8 +77,18 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}${prefix || '/'}` },
-          { '@type': 'ListItem', position: 2, name: ui.eventsBreadcrumb, item: canonicalPageUrl(SITE_URL, locale, '/events') },
-          { '@type': 'ListItem', position: 3, name: nav.menuLabel, item: `${SITE_URL}${capodannoPath(locale)}` },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: ui.eventsBreadcrumb,
+            item: canonicalPageUrl(SITE_URL, locale, '/events'),
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: nav.menuLabel,
+            item: `${SITE_URL}${capodannoPath(locale)}`,
+          },
           { '@type': 'ListItem', position: 4, name: title, item: `${SITE_URL}${canonicalPath}` },
         ],
       },
@@ -117,32 +132,34 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
                 addressCountry: 'IT',
               },
             },
-            offers: ev.priceFromEur > 0 || ev.category === 'piazza'
-              ? {
-                  '@type': 'Offer',
-                  url: `${SITE_URL}${capodannoEventPath(ev.slug, locale)}`,
-                  price: String(ev.priceFromEur),
-                  priceCurrency: 'EUR',
-                  availability: ev.soldOutForNye || ev.closedForNye
-                    ? 'https://schema.org/SoldOut'
-                    : 'https://schema.org/InStock',
-                  validFrom: '2026-10-01T00:00:00+02:00',
-                }
-              : ev.soldOutForNye || ev.closedForNye
+            offers:
+              ev.priceFromEur > 0 || ev.category === 'piazza'
                 ? {
                     '@type': 'Offer',
                     url: `${SITE_URL}${capodannoEventPath(ev.slug, locale)}`,
+                    price: String(ev.priceFromEur),
                     priceCurrency: 'EUR',
-                    availability: 'https://schema.org/SoldOut',
+                    availability:
+                      ev.soldOutForNye || ev.closedForNye
+                        ? 'https://schema.org/SoldOut'
+                        : 'https://schema.org/InStock',
                     validFrom: '2026-10-01T00:00:00+02:00',
                   }
-                : {
-                    '@type': 'Offer',
-                    url: `${SITE_URL}${capodannoEventPath(ev.slug, locale)}`,
-                    priceCurrency: 'EUR',
-                    availability: 'https://schema.org/PreOrder',
-                    validFrom: '2026-10-01T00:00:00+02:00',
-                  },
+                : ev.soldOutForNye || ev.closedForNye
+                  ? {
+                      '@type': 'Offer',
+                      url: `${SITE_URL}${capodannoEventPath(ev.slug, locale)}`,
+                      priceCurrency: 'EUR',
+                      availability: 'https://schema.org/SoldOut',
+                      validFrom: '2026-10-01T00:00:00+02:00',
+                    }
+                  : {
+                      '@type': 'Offer',
+                      url: `${SITE_URL}${capodannoEventPath(ev.slug, locale)}`,
+                      priceCurrency: 'EUR',
+                      availability: 'https://schema.org/PreOrder',
+                      validFrom: '2026-10-01T00:00:00+02:00',
+                    },
           },
         })),
       },
@@ -158,16 +175,19 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
   };
 
   return (
-    <main className="min-h-[100dvh] bg-[#050505] pb-24 pt-24 text-[#F6F1E7]">
+    <main
+      data-layout-alt="alternativa-02-capitoli-colore-netto"
+      className="min-h-[100dvh] bg-[#050505] pb-20 pt-20 text-[#F6F1E7]"
+    >
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Hero Section */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="relative overflow-hidden border border-[#F6F1E7]/18 bg-[#0B0A09] p-8 sm:p-12 lg:p-14">
-          <nav className="mb-6 text-[13px] font-semibold text-[#C2B9AA]" aria-label="Breadcrumb">
+      {/* CAPITOLO 01 — NOTTE #050505: Testata Compatta, Filtri & Tutte le Locandine 4:5 */}
+      <section className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
+        <div className="border border-[#F6F1E7]/18 bg-[#0B0A09] p-5 sm:p-10">
+          <nav className="mb-4 text-xs font-semibold text-[#C2B9AA] sm:text-[13px]" aria-label="Breadcrumb">
             <Link href={prefix || '/'} className="hover:text-[#F6F1E7]">Home</Link>
             <span className="mx-2">/</span>
             <Link href={`${prefix}/events`} className="hover:text-[#F6F1E7]">{ui.eventsBreadcrumb}</Link>
@@ -182,105 +202,131 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
           </nav>
 
           <div className="flex flex-wrap items-center gap-2.5">
-            <p className="text-[13px] font-bold uppercase text-[#EAE3D5]">
-              {getCapodannoCategoryBadge35(pageDef.slug, locale, pageDef.badgeIt, pageDef.badgeEn)} · {events.length} {ui.verifiedEventsLabel}
+            <p className="font-mono text-xs font-bold uppercase tracking-wider text-[#EAE3D5]">
+              {getCapodannoCategoryBadge35(pageDef.slug, locale, pageDef.badgeIt, pageDef.badgeEn)} ·{' '}
+              {events.length} {ui.verifiedEventsLabel}
             </p>
-            <span className="bg-[#25D366] px-3 py-1 text-[13px] font-bold uppercase text-[#050505]" data-selling-fast-badge>
+            <span
+              className="bg-[#25D366] px-3 py-0.5 font-mono text-xs font-extrabold uppercase text-[#050505]"
+              data-selling-fast-badge
+            >
               {scarcity.almostSoldOutBadge}
             </span>
           </div>
-          <h1 data-event-title={title} className="mt-3 font-display text-4xl font-bold uppercase leading-none text-[#F6F1E7] sm:text-6xl">
+
+          <h1
+            data-event-title={title}
+            className="mt-3 font-display text-3xl font-bold uppercase leading-[1.03] text-[#F6F1E7] sm:text-6xl"
+          >
             {title}
           </h1>
-          <p className="mt-4 max-w-4xl text-base leading-relaxed text-[#C2B9AA] sm:text-lg">
+          <p className="mt-3 max-w-4xl text-sm leading-relaxed text-[#C2B9AA] sm:text-lg">
             {subtitle}
           </p>
 
-          <div role="alert" data-urgency-alert className="mt-6 border border-[#F6F1E7]/14 bg-[#0B0A09] p-5 text-[#F6F1E7]">
-            <p className="text-[13px] font-bold uppercase text-[#EAE3D5] sm:text-sm">
-              {scarcity.urgencyAlertTitle}
-            </p>
-            <p className="mt-1.5 max-w-[48ch] text-base leading-relaxed text-[#C2B9AA]">
-              {scarcity.urgencyAlertBody}
-            </p>
-          </div>
-
-          <div className="mt-6 border border-[#F6F1E7]/18 bg-[#050505] p-5">
-            <p className="text-[13px] font-bold text-[#EAE3D5]">
-              {ui.quickGuideLabel} · {shortLabel}
-            </p>
-            <p className="mt-2 max-w-[48ch] text-sm leading-relaxed text-[#C2B9AA]">{quickAnswer}</p>
-          </div>
-
-          {/* Clickable Contacts: Catalogo Schede Evento, WhatsApp, Email */}
-          <div className="mt-6 flex flex-wrap items-center gap-3">
-            <a
-              href={getConciergeBookingUrl(locale, title, `${SITE_URL}${canonicalPath}`)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#25D366] px-5 py-3 text-sm font-bold text-[#050505] transition hover:bg-[#2EE472]"
-            >
-              WhatsApp {SITE_CONTACT.whatsapp.number}
-            </a>
+          <div className="mt-5 flex flex-wrap items-center gap-3">
             <a
               href="#catalogo-eventi"
-              className="inline-flex items-center gap-2 bg-[#EAE3D5] px-5 py-3 text-sm font-bold text-[#050505] transition hover:bg-[#F6F1E7]"
+              className="inline-flex min-h-[46px] items-center gap-2 bg-[#EAE3D5] px-5 py-2.5 text-xs font-extrabold uppercase tracking-wider text-[#050505] transition hover:bg-[#F6F1E7] sm:text-sm"
             >
               {scarcity.openEventCardCta}
             </a>
             <a
+              href={getConciergeBookingUrl(locale, title, `${SITE_URL}${canonicalPath}`)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-[46px] items-center gap-2 bg-[#25D366] px-5 py-2.5 text-xs font-extrabold uppercase tracking-wider text-[#050505] transition hover:bg-[#2EE472] sm:text-sm"
+            >
+              WhatsApp {SITE_CONTACT.whatsapp.number}
+            </a>
+            <a
               href="mailto:concierge@nightlifemilan.com"
-              className="inline-flex items-center gap-2 border border-[#EAE3D5]/32 bg-[#0B0A09] px-4 py-3 text-sm font-semibold text-[#F6F1E7] transition hover:border-[#EAE3D5] hover:bg-[#EAE3D5] hover:text-[#050505]"
+              className="inline-flex min-h-[46px] items-center gap-2 border border-[#EAE3D5]/32 bg-[#141311] px-4 py-2.5 text-xs font-semibold text-[#F6F1E7] transition hover:border-[#EAE3D5] sm:text-sm"
             >
               {ui.emailBtn}: concierge@nightlifemilan.com
             </a>
-            <span className="w-full text-[13px] text-[#C2B9AA] sm:w-auto">
-              {ui.freeAdviceNote}
-            </span>
           </div>
 
-          {/* Clickable Table of Contents (TOC) with #id anchors */}
-          <nav
-            aria-label={ui.tocTitle}
-            className="mt-7 border border-[#F6F1E7]/14 bg-[#0B0A09] p-5 text-[#F6F1E7]"
-          >
-            <p className="text-[13px] font-bold text-[#C2B9AA]">
-              {ui.tocTitle}
-            </p>
-            <ul className="mt-3 grid gap-2 text-[13px] font-medium sm:grid-cols-2 lg:grid-cols-3 sm:text-sm">
-              <li>
-                <a href="#categorie-capodanno" className="text-[#F6F1E7] hover:underline">
-                  {ui.tocCategories}
-                </a>
-              </li>
-              <li>
-                <a href="#filtro-eventi" className="text-[#F6F1E7] hover:underline">
-                  {ui.tocFilter}
-                </a>
-              </li>
-              <li>
-                <a href="#catalogo-eventi" className="text-[#F6F1E7] hover:underline">
+          <div className="mt-5 grid gap-3 lg:grid-cols-2">
+            <div
+              role="alert"
+              data-urgency-alert
+              className="border border-[#F6F1E7]/14 bg-[#141311] p-4 text-[#F6F1E7]"
+            >
+              <p className="font-mono text-xs font-bold uppercase text-[#EAE3D5]">
+                {scarcity.urgencyAlertTitle}
+              </p>
+              <p className="mt-1 text-xs leading-relaxed text-[#C2B9AA] sm:text-sm">
+                {scarcity.urgencyAlertBody}
+              </p>
+            </div>
+            <div className="border border-[#F6F1E7]/14 bg-[#050505] p-4 text-[#F6F1E7]">
+              <p className="font-mono text-xs font-bold uppercase text-[#EAE3D5]">
+                {ui.quickGuideLabel} · {shortLabel}
+              </p>
+              <p className="mt-1 text-xs leading-relaxed text-[#C2B9AA] sm:text-sm">
+                {quickAnswer}
+              </p>
+            </div>
+          </div>
+
+          {/* Compact Horizontal TOC */}
+          <nav aria-label={ui.tocTitle} className="mt-5 border-t border-[#F6F1E7]/14 pt-4">
+            <ul className="flex gap-2 overflow-x-auto pb-1.5 text-xs font-bold sm:flex-wrap sm:overflow-visible sm:pb-0">
+              <li className="shrink-0">
+                <a
+                  href="#catalogo-eventi"
+                  className="inline-flex min-h-[36px] items-center bg-[#F6F1E7] px-3 py-1.5 text-[#050505]"
+                >
                   {ui.tocCatalog}
                 </a>
               </li>
-              <li>
-                <a href="#tabella-prezzi" className="text-[#F6F1E7] hover:underline">
+              <li className="shrink-0">
+                <a
+                  href="#categorie-capodanno"
+                  className="inline-flex min-h-[36px] items-center border border-[#F6F1E7]/22 bg-[#141311] px-3 py-1.5 text-[#F6F1E7]"
+                >
+                  {ui.tocCategories}
+                </a>
+              </li>
+              <li className="shrink-0">
+                <a
+                  href="#filtro-eventi"
+                  className="inline-flex min-h-[36px] items-center border border-[#F6F1E7]/22 bg-[#141311] px-3 py-1.5 text-[#F6F1E7]"
+                >
+                  {ui.tocFilter}
+                </a>
+              </li>
+              <li className="shrink-0">
+                <a
+                  href="#tabella-prezzi"
+                  className="inline-flex min-h-[36px] items-center border border-[#F6F1E7]/22 bg-[#141311] px-3 py-1.5 text-[#F6F1E7]"
+                >
                   {ui.tocTable}
                 </a>
               </li>
-              <li>
-                <a href="#termini-pagamento" className="text-[#F6F1E7] hover:underline">
+              <li className="shrink-0">
+                <a
+                  href="#termini-pagamento"
+                  className="inline-flex min-h-[36px] items-center border border-[#F6F1E7]/22 bg-[#141311] px-3 py-1.5 text-[#F6F1E7]"
+                >
                   {paymentTerms.tocLabel}
                 </a>
               </li>
-              <li>
-                <a href="#mappa-milano" className="text-[#F6F1E7] hover:underline">
-                  {ui.tocMap}
+              <li className="shrink-0">
+                <a
+                  href="#faq-capodanno"
+                  className="inline-flex min-h-[36px] items-center border border-[#F6F1E7]/22 bg-[#141311] px-3 py-1.5 text-[#F6F1E7]"
+                >
+                  {ui.tocFaq}
                 </a>
               </li>
-              <li>
-                <a href="#faq-capodanno" className="text-[#F6F1E7] hover:underline">
-                  {ui.tocFaq}
+              <li className="shrink-0">
+                <a
+                  href="#mappa-milano"
+                  className="inline-flex min-h-[36px] items-center border border-[#F6F1E7]/22 bg-[#141311] px-3 py-1.5 text-[#F6F1E7]"
+                >
+                  {ui.tocMap}
                 </a>
               </li>
             </ul>
@@ -289,28 +335,28 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
 
         {/* Dedicated Single Pass E-Commerce Embed or Callout */}
         {mode === 'capodanno-single-milano' && (
-          <div className="mx-auto mt-10 max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mt-8">
             <SinglePassStorefront locale={locale} embedded />
           </div>
         )}
         {mode === 'capodanno-2027' && (
-          <div className="mx-auto mt-8 max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col gap-4 border border-[#F6F1E7]/18 bg-[#0B0A09] p-6 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-6">
+            <div className="flex flex-col gap-4 border border-[#EAE3D5]/30 bg-[#141311] p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
               <div>
-                <h2 className="font-display text-2xl font-bold uppercase text-[#F6F1E7]">
-                  {spCopy.embeddedBannerTitle}
-                </h2>
-                <p className="mt-1 text-[13px] font-bold text-[#EAE3D5]">
+                <p className="font-mono text-xs font-bold uppercase tracking-wider text-[#EAE3D5]">
                   {spCopy.heroEyebrow}
                 </p>
-                <p className="mt-1 max-w-[48ch] text-sm leading-relaxed text-[#C2B9AA]">
+                <h2 className="mt-1 font-display text-2xl font-bold uppercase text-[#F6F1E7]">
+                  {spCopy.embeddedBannerTitle}
+                </h2>
+                <p className="mt-1 max-w-[54ch] text-sm leading-relaxed text-[#C2B9AA]">
                   {spCopy.embeddedBannerBody}
                 </p>
               </div>
               <Link
                 href={`${prefix}/single-pass`}
                 locale={locale}
-                className="nlm-pressable inline-flex min-h-[44px] shrink-0 items-center justify-center bg-[#25D366] px-5 py-3 text-[13px] font-bold text-[#050505] transition hover:bg-[#2EE472]"
+                className="nlm-pressable inline-flex min-h-[46px] shrink-0 items-center justify-center bg-[#25D366] px-5 py-3 text-xs font-extrabold uppercase tracking-wider text-[#050505] transition hover:bg-[#2EE472]"
               >
                 {spCopy.embeddedBannerCta}
               </Link>
@@ -329,94 +375,119 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
         />
       </section>
 
-      {/* Complete Price Comparison Table (#F6F1E7 Capitolo Avorio Caldo) */}
-      <section id="tabella-prezzi" className="mx-auto mt-20 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="overflow-hidden border border-[#F6F1E7]/14 bg-[#0B0A09] text-[#F6F1E7]">
-          <div className="border-b border-[#F6F1E7]/14 p-6 sm:p-8">
-            <h2 className="font-display text-2xl font-bold text-[#F6F1E7] sm:text-3xl">
-              {ui.tableHeadingPrefix} · {shortLabel} ({events.length})
-            </h2>
-          </div>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-[13px] sm:text-sm">
-              <thead className="border-b border-[#F6F1E7]/14 bg-[#F6F1E7] text-[13px] font-bold uppercase tracking-[0.04em] text-[#050505]">
-                <tr>
-                  <th className="px-4 py-3.5">{ui.colVenue}</th>
-                  <th className="px-4 py-3.5">{ui.colCity}</th>
-                  <th className="px-4 py-3.5">{ui.colHours}</th>
-                  <th className="px-4 py-3.5">{ui.colPrices}</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#F6F1E7]/12">
-                {events.map((ev) => (
-                  <tr key={ev.slug} className="hover:bg-[#141311]">
-                    <td className="px-4 py-3 font-semibold text-[#F6F1E7]">
-                      <Link
-                        href={capodannoEventPath(ev.slug, locale)}
-                        className="hover:underline"
-                      >
-                        {ev.venueName}
-                      </Link>
-                    </td>
-                    <td className="px-4 py-3 text-[#C2B9AA]">
-                      {ev.city} ({ev.province})
-                    </td>
-                    <td className="px-4 py-3 text-[#C2B9AA]">{formatCapodannoHours35(ev.hours, locale)}</td>
-                    <td className="px-4 py-3 font-bold text-[#F6F1E7]">
-                      {getCapodannoLocalizedEventContent(ev, locale).priceSummary}
-                    </td>
+      {/* CAPITOLO 02 — CARTA CALDA #F6F1E7: Tabella Confronto Prezzi & Protocollo Pagamenti */}
+      <div className="border-y border-[#050505] bg-[#F6F1E7] py-12 text-[#050505]">
+        <div className="mx-auto max-w-7xl space-y-10 px-4 sm:px-6 lg:px-8">
+          <section id="tabella-prezzi" className="overflow-hidden border border-[#050505] bg-[#FFFFFF]">
+            <div className="border-b border-[#050505]/15 p-5 sm:p-8">
+              <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-[#4A453E]">
+                CONFRONTO UFFICIALE TARIFFE
+              </p>
+              <h2 className="mt-1 font-display text-2xl font-bold uppercase text-[#050505] sm:text-3xl">
+                {ui.tableHeadingPrefix} · {shortLabel} ({events.length})
+              </h2>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs text-[#050505] sm:text-sm">
+                <thead className="bg-[#050505] font-mono text-xs font-bold uppercase tracking-[0.04em] text-[#F6F1E7]">
+                  <tr>
+                    <th className="px-4 py-3.5">{ui.colVenue}</th>
+                    <th className="px-4 py-3.5">{ui.colCity}</th>
+                    <th className="px-4 py-3.5">{ui.colHours}</th>
+                    <th className="px-4 py-3.5">{ui.colPrices}</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
+                </thead>
+                <tbody className="divide-y divide-[#050505]/12">
+                  {events.map((ev) => (
+                    <tr key={ev.slug} className="odd:bg-[#FFFFFF] even:bg-[#F6F1E7] hover:bg-[#EAE3D5]">
+                      <td className="px-4 py-3 font-bold text-[#050505]">
+                        <Link href={capodannoEventPath(ev.slug, locale)} className="underline underline-offset-2">
+                          {ev.venueName}
+                        </Link>
+                      </td>
+                      <td className="px-4 py-3 text-[#3D3830]">
+                        {ev.city} ({ev.province})
+                      </td>
+                      <td className="px-4 py-3 font-mono text-xs text-[#3D3830]">
+                        {formatCapodannoHours35(ev.hours, locale)}
+                      </td>
+                      <td className="px-4 py-3 font-mono font-bold text-[#050505]">
+                        {getCapodannoLocalizedEventContent(ev, locale).priceSummary}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
 
-      {/* Official 6-Step Prepayment & Booking Protocol */}
-      <section id="termini-pagamento" data-payment-terms-35 className="mx-auto mt-16 max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="border border-[#F6F1E7]/18 bg-[#0B0A09] p-6 sm:p-8">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <h2 className="font-display text-2xl font-bold uppercase text-[#F6F1E7] sm:text-3xl">
-              {paymentTerms.heading}
+          <section
+            id="termini-pagamento"
+            data-payment-terms-35
+            className="border border-[#050505] bg-[#EAE3D5] p-5 text-[#050505] sm:p-8"
+          >
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h2 className="font-display text-2xl font-bold uppercase text-[#050505] sm:text-3xl">
+                {paymentTerms.heading}
+              </h2>
+              <span className="bg-[#050505] px-3 py-1 font-mono text-xs font-bold text-[#F6F1E7]">
+                {paymentTerms.methodsBadge}
+              </span>
+            </div>
+            <p className="mt-2 max-w-[54ch] text-sm leading-relaxed text-[#3D3830]">
+              {paymentTerms.subtitle}
+            </p>
+            <ol className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {paymentTerms.steps.map((step, idx) => (
+                <li key={step} className="border border-[#050505]/20 bg-[#FFFFFF] p-4 text-[#050505]">
+                  <span className="inline-flex h-6 w-6 items-center justify-center bg-[#050505] font-mono text-xs font-bold tabular-nums text-[#F6F1E7]">
+                    {idx + 1}
+                  </span>
+                  <p className="mt-2.5 text-sm leading-relaxed text-[#050505]">{step}</p>
+                </li>
+              ))}
+            </ol>
+            <p className="mt-4 border border-[#050505]/20 bg-[#F6F1E7] px-4 py-3 text-xs font-medium leading-relaxed text-[#24201B] sm:text-[13px]">
+              {paymentTerms.note}
+            </p>
+          </section>
+        </div>
+      </div>
+
+      {/* CAPITOLO 03 — CHAMPAGNE #EAE3D5: FAQ Hub */}
+      <section id="faq-capodanno" className="border-b border-[#050505] bg-[#EAE3D5] py-12 text-[#050505]">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="border border-[#050505] bg-[#FFFFFF] p-5 sm:p-8">
+            <h2 className="font-display text-2xl font-bold uppercase text-[#050505] sm:text-3xl">
+              {ui.faqHeadingPrefix} · {shortLabel}
             </h2>
-            <span className="border border-white/30 bg-[#050505] px-3 py-1 text-[13px] font-bold text-[#EAE3D5]">
-              {paymentTerms.methodsBadge}
-            </span>
+            <div className="mt-5 divide-y divide-[#050505]/15 border-y border-[#050505]/15">
+              {faqs.map((f, idx) => (
+                <details key={f.q} open={idx < 2} className="group py-4">
+                  <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 marker:hidden">
+                    <h3 className="font-display text-lg font-bold text-[#050505]">{f.q}</h3>
+                    <span
+                      className="font-mono text-xl font-bold text-[#050505] transition-transform group-open:rotate-45"
+                      aria-hidden="true"
+                    >
+                      +
+                    </span>
+                  </summary>
+                  <p className="pt-2 text-sm leading-relaxed text-[#3D3830]">{f.a}</p>
+                </details>
+              ))}
+            </div>
           </div>
-          <p className="mt-2 max-w-[48ch] text-sm leading-relaxed text-[#C2B9AA]">
-            {paymentTerms.subtitle}
-          </p>
-          <ol className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {paymentTerms.steps.map((step, idx) => (
-              <li
-                key={step}
-                className="border border-[#F6F1E7]/14 bg-[#050505] p-4"
-              >
-                <span className="inline-flex h-6 w-6 items-center justify-center bg-[#F6F1E7] text-[13px] font-bold tabular-nums text-[#050505]">
-                  {idx + 1}
-                </span>
-                <p className="mt-2.5 text-sm leading-relaxed text-[#F6F1E7]">
-                  {step}
-                </p>
-              </li>
-            ))}
-          </ol>
-          <p className="mt-4 bg-[#050505] px-4 py-3 text-[13px] leading-relaxed text-[#EAE3D5]">
-            {paymentTerms.note}
-          </p>
         </div>
       </section>
 
-      {/* Interactive Google Maps Section */}
-      <section id="mappa-milano" className="mx-auto mt-16 max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* CAPITOLO 04 — NOTTE #050505: Mappa Città & Authority Hub */}
+      <section id="mappa-milano" className="mx-auto mt-12 max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="overflow-hidden border border-[#F6F1E7]/14 bg-[#0B0A09] p-6 sm:p-8">
           <h2 className="font-display text-2xl font-bold text-[#F6F1E7] sm:text-3xl">
             {ui.mapHeadingHub}
           </h2>
-          <p className="mt-2 text-sm text-[#C2B9AA]">
-            {ui.mapSubtitleHub}
-          </p>
+          <p className="mt-2 text-sm text-[#C2B9AA]">{ui.mapSubtitleHub}</p>
           <div className="mt-5">
             <EventVenueMap
               id={`capodanno-city-map-${mode}`}
@@ -432,22 +503,6 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
         </div>
       </section>
 
-      {/* FAQ Section (#F6F1E7 Capitolo Avorio Caldo) */}
-      <section id="faq-capodanno" className="mx-auto mt-16 max-w-5xl px-4 sm:px-6 lg:px-8">
-        <div className="bg-[#0B0A09] text-[#F6F1E7] border border-[#F6F1E7]/14 p-6 sm:p-10">
-          <h2 className="font-display text-2xl font-bold text-[#F6F1E7] sm:text-3xl">
-            {ui.faqHeadingPrefix} · {shortLabel}
-          </h2>
-          <div className="mt-6 space-y-4">
-            {faqs.map((f) => (
-              <div key={f.q} className="border border-[#F6F1E7]/14 bg-[#141311] p-6">
-                <h3 className="font-display text-lg font-bold text-[#F6F1E7]">{f.q}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#C2B9AA]">{f.a}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
       <SeoAuthorityHub lang={locale as LocaleCode} />
     </main>
   );

@@ -1421,7 +1421,7 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
         },
         {
           q: 'How much is New Year’s Eve 2027 at Voya Rooftop Milan?',
-          a: 'The confirmed official single rate is €300 per person including the 6-course gourmet menu, after-midnight cotechino and lentils, 1 bottle of wine every 4 guests, midnight toast, and DJ set until 05:00 (€360 per person via direct online checkout inclusive of booking and transaction fees).',
+          a: 'The confirmed official single rate is €300 per person including the 6-course gourmet menu, after-midnight cotechino and lentils, 1 bottle of wine every 4 guests, midnight toast, and DJ set until 05:00 (€360 per person via direct online checkout inclusive of Concierge Service & Transaction Fees).',
         },
       ],
     },
@@ -1454,7 +1454,7 @@ const clubContent: Record<string, { en: ClubEditorialData; it: ClubEditorialData
         },
         {
           q: 'Quanto costa il Capodanno 2027 al Voya Rooftop Milano?',
-          a: 'La tariffa unica ufficiale è di 300€ a persona e comprende menù servito a 6 portate di mare, cotechino e lenticchie dopo mezzanotte, 1 bottiglia di vino ogni 4 ospiti, brindisi e DJ set fino alle 05:00 (360€ a persona con acquisto diretto online comprensivo dei diritti di prenotazione e transazione).',
+          a: 'La tariffa unica ufficiale è di 300€ a persona e comprende menù servito a 6 portate di mare, cotechino e lenticchie dopo mezzanotte, 1 bottiglia di vino ogni 4 ospiti, brindisi e DJ set fino alle 05:00 (360€ a persona con acquisto diretto online comprensivo di Servizio di Conciergerie & Transaction Fees).',
         },
       ],
     },

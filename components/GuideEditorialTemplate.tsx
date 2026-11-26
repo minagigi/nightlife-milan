@@ -210,10 +210,13 @@ export default function GuideEditorialTemplate({
             </div>
 
             <nav aria-label={t.toc} className="lg:col-span-8">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3" data-taste-stagger>
+              <div
+                className="flex snap-x gap-2.5 overflow-x-auto pb-2 sm:grid sm:grid-cols-2 sm:gap-3 sm:overflow-visible sm:pb-0"
+                data-taste-stagger
+              >
                 <a
                   href={secondaryJumpHref}
-                  className="flex items-center justify-between gap-4 bg-[#EAE3D5] hover:bg-[#050505] hover:text-[#FFFFFF] text-[#050505] px-5 py-4 text-[15px] font-semibold transition-colors"
+                  className="flex min-h-[46px] shrink-0 snap-start items-center justify-between gap-3 border border-[#050505] bg-[#050505] px-4 py-3 text-[14px] font-bold text-[#F6F1E7] transition-colors hover:bg-[#1E1C19] sm:px-5 sm:py-4 sm:text-[15px]"
                 >
                   <span>{isPillarExplorer ? explorerData!.heading : t.relatedVenues}</span>
                   <span aria-hidden="true">→</span>
@@ -222,7 +225,7 @@ export default function GuideEditorialTemplate({
                   <a
                     key={sec.id}
                     href={`#${sec.id}`}
-                    className="flex items-center justify-between gap-4 bg-[#EAE3D5] hover:bg-[#050505] hover:text-[#FFFFFF] text-[#050505] px-5 py-4 text-[15px] font-medium transition-colors"
+                    className="flex min-h-[46px] shrink-0 snap-start items-center justify-between gap-3 border border-[#050505]/20 bg-[#EAE3D5] px-4 py-3 text-[14px] font-medium text-[#050505] transition-colors hover:bg-[#050505] hover:text-[#FFFFFF] sm:px-5 sm:py-4 sm:text-[15px]"
                   >
                     <span>{sec.title}</span>
                     <span aria-hidden="true">→</span>
@@ -231,7 +234,7 @@ export default function GuideEditorialTemplate({
                 {guide.faqs && guide.faqs.length > 0 && (
                   <a
                     href="#faq-guide"
-                    className="flex items-center justify-between gap-4 bg-[#EAE3D5] hover:bg-[#050505] hover:text-[#FFFFFF] text-[#050505] px-5 py-4 text-[15px] font-semibold transition-colors"
+                    className="flex min-h-[46px] shrink-0 snap-start items-center justify-between gap-3 border border-[#050505]/20 bg-[#EAE3D5] px-4 py-3 text-[14px] font-semibold text-[#050505] transition-colors hover:bg-[#050505] hover:text-[#FFFFFF] sm:px-5 sm:py-4 sm:text-[15px]"
                   >
                     <span>{t.faq}</span>
                     <span aria-hidden="true">→</span>
@@ -243,13 +246,19 @@ export default function GuideEditorialTemplate({
         </div>
       </section>
 
-      {/* 3. Curated Cinema Photo Strip — Zero Flyer Text, Zero Watermarks, Lightbox Enabled */}
+      {/* 3. Curated Cinema Photo Strip — Swipe on Mobile, 4-Column Grid on Desktop, Lightbox Enabled */}
       {bundle.stripPlates.length >= 2 && (
         <section id="gallery" aria-label={title} className="bg-[#050505] py-8 sm:py-12">
           <div className="max-w-[1440px] mx-auto px-5 sm:px-10 lg:px-14">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" data-taste-stagger>
+            <div
+              className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-4 sm:overflow-visible sm:pb-0"
+              data-taste-stagger
+            >
               {bundle.stripPlates.map((plate, idx) => (
-                <figure key={`${plate.src}-${idx}`} className="relative aspect-[4/5] w-full overflow-clip bg-[#141311] m-0 group">
+                <figure
+                  key={`${plate.src}-${idx}`}
+                  className="relative aspect-[4/5] w-[78vw] max-w-[320px] shrink-0 snap-start overflow-clip bg-[#141311] m-0 group sm:w-auto sm:max-w-none"
+                >
                   <Image
                     src={plate.src}
                     alt={`${plate.caption} - ${title}`}

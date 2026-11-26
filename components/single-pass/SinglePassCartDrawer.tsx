@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { AlertTriangle, Minus, Plus, ShoppingBag, Trash2, UserCheck, X } from 'lucide-react';
+import { AlertTriangle, ArrowRight, Minus, Plus, ShoppingBag, Trash2, UserCheck, X } from 'lucide-react';
 import Link from '@/components/LocalizedLink';
 import { localePrefix } from '@/lib/i18n/locales';
 import {
@@ -16,6 +16,7 @@ import { formatMinorCurrency, type SupportedCurrency } from '@/lib/single-pass/c
 import {
   formatCartValidationError35,
   formatFeeLabel35,
+  getCheckoutUxCopy,
   getSinglePassCopy,
   localizeSinglePassSku,
 } from '@/lib/single-pass/i18n35';
@@ -41,6 +42,7 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
   } = useSinglePassCart();
 
   const copy = getSinglePassCopy(lang);
+  const uxCopy = getCheckoutUxCopy(lang);
   const feeLabel = formatFeeLabel35(lang, effectiveFeeRate, hasMixedFeeRates);
   const lp = localePrefix(lang);
   const isIt = lang === 'it';
@@ -62,7 +64,7 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setCartOpen(false)}
-            className="fixed inset-0 z-[10000] bg-black/70"
+            className="fixed inset-0 z-[10000] bg-black/75"
             style={{ zIndex: 10000 }}
           />
 
@@ -70,18 +72,20 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
-            transition={{ type: 'spring', bounce: 0, duration: 0.35 }}
+            transition={{ type: 'spring', bounce: 0, duration: 0.32 }}
             role="dialog"
             aria-modal="true"
             aria-label={copy.drawerTitle}
             data-ui="cart-drawer"
-            className="fixed right-0 top-0 z-[10001] flex h-full w-full flex-col border-l border-[#0A0A0C]/20 bg-[#EDEBE6] text-[#0A0A0C] sm:w-[440px]"
+            data-no-lightbox="true"
+            className="fixed right-0 top-0 z-[10001] flex h-full w-full flex-col border-l border-[#F6F1E7]/20 bg-[#050505] text-[#F6F1E7] sm:w-[440px]"
             style={{ zIndex: 10001 }}
           >
-            <div className="flex items-center justify-between border-b border-[#0A0A0C]/16 bg-[#0A0A0C] px-6 py-4 text-[#FFFFFF]">
+            {/* CAPITOLO 1 (#050505): TESTATA & VALUTA */}
+            <div className="flex items-center justify-between border-b border-[#F6F1E7]/16 bg-[#050505] px-5 py-4 text-[#F6F1E7]">
               <div className="flex items-center gap-2.5">
-                <ShoppingBag className="h-5 w-5 text-[#FFFFFF]" aria-hidden="true" />
-                <h2 className="font-display text-2xl font-bold uppercase text-[#FFFFFF]">
+                <ShoppingBag className="h-5 w-5 text-[#25D366]" aria-hidden="true" />
+                <h2 className="font-display text-2xl font-bold text-[#F6F1E7]">
                   {copy.drawerTitle}
                 </h2>
               </div>
@@ -89,33 +93,36 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
                 type="button"
                 onClick={() => setCartOpen(false)}
                 aria-label="Close"
-                className="flex h-11 w-11 items-center justify-center border border-[#FFFFFF]/25 text-[#FFFFFF] transition hover:border-[#FFFFFF]"
+                className="flex h-11 w-11 items-center justify-center border border-[#F6F1E7]/28 bg-[#141311] text-[#F6F1E7] transition hover:border-[#F6F1E7]"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-6">
+            {/* ELENCO ARTICOLI SCELTI (#050505) */}
+            <div className="flex-1 overflow-y-auto bg-[#050505] p-5">
               {items.length === 0 ? (
-                <div className="flex h-full flex-col items-center justify-center space-y-4 text-center">
-                  <div className="flex h-16 w-16 items-center justify-center border border-[#0A0A0C]/16 bg-[#FFFFFF]">
-                    <ShoppingBag className="h-7 w-7 text-[#0A0A0C]" />
+                <div className="flex h-full flex-col items-center justify-center space-y-4 bg-[#F6F1E7] p-6 text-center text-[#050505]">
+                  <div className="flex h-16 w-16 items-center justify-center border border-[#050505] bg-[#FFFFFF]">
+                    <ShoppingBag className="h-7 w-7 text-[#050505]" />
                   </div>
-                  <p className="font-display text-2xl font-bold uppercase text-[#0A0A0C]">
+                  <p className="font-display text-2xl font-bold text-[#050505]">
                     {copy.drawerEmptyTitle}
                   </p>
-                  <p className="max-w-xs text-sm text-[#4F4D48]">{copy.drawerEmptyBody}</p>
-                  <Link
-                    href={`${lp}/single-pass`}
-                    locale={lang}
-                    onClick={() => setCartOpen(false)}
-                    className="inline-flex min-h-[48px] items-center justify-center bg-[#D9381E] px-6 py-3 text-sm font-bold text-[#FFFFFF] transition hover:bg-[#B82B14]"
-                  >
-                    {copy.drawerExploreCta}
-                  </Link>
+                  <p className="max-w-xs text-sm text-[#57534E]">{copy.drawerEmptyBody}</p>
+                  <div className="w-full bg-[#050505] p-3">
+                    <Link
+                      href={`${lp}/single-pass`}
+                      locale={lang}
+                      onClick={() => setCartOpen(false)}
+                      className="inline-flex min-h-[48px] w-full items-center justify-center bg-[#25D366] px-6 py-3 text-sm font-extrabold text-[#050505] transition hover:bg-[#2EE472]"
+                    >
+                      {copy.drawerExploreCta}
+                    </Link>
+                  </div>
                 </div>
               ) : (
-                <div className="space-y-4">
+                <div className="space-y-3.5">
                   {items.map((item) => {
                     const sku = resolveCatalogSku(item.skuId);
                     if (!sku) return null;
@@ -137,77 +144,84 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
                           ? sku.titleIt
                           : sku.titleEn;
                     const feePct = Math.round(skuFeeRate * 100);
+                    const itemGuests = Math.max(0, sku.guestsPerUnit ?? 1) * item.quantity;
 
                     return (
                       <div
                         key={cartRowKey(item)}
-                        className="border border-[#0A0A0C]/16 bg-[#FFFFFF] p-4"
+                        className="border border-[#F6F1E7]/18 bg-[#141311] p-4 text-[#F6F1E7]"
                       >
                         <div className="flex items-start gap-3">
                           <img
                             src={posterSrc}
                             alt={venueName}
                             data-no-lightbox="true"
-                            className="h-16 w-16 shrink-0 border border-[#0A0A0C]/15 bg-[#0A0A0C] object-contain"
+                            className="aspect-[4/5] w-16 shrink-0 border border-[#F6F1E7]/20 bg-[#050505] object-cover"
                           />
                           <div className="min-w-0 flex-1">
                             <div className="flex flex-wrap items-center gap-2">
-                              <p className="text-xs font-bold text-[#4F4D48]">
+                              <p className="font-mono text-xs font-semibold text-[#C2B9AA] tabular-nums">
                                 {venueName} · {sku.arrivalTime}
                               </p>
                               {item.channel === 'single-pass' && (
-                                <span className="border border-[#0A0A0C]/25 bg-[#EDEBE6] px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-[#0A0A0C]">
+                                <span className="bg-[#EAE3D5] px-2 py-0.5 text-[11px] font-bold text-[#050505]">
                                   Single Pass
                                 </span>
                               )}
                             </div>
-                            <p className="mt-0.5 font-display text-lg font-bold leading-snug text-[#0A0A0C]">
+                            <p className="mt-1 font-display text-lg font-bold leading-snug text-[#F6F1E7]">
                               {pkgTitle}
                             </p>
+                            {itemGuests > 0 && (
+                              <p className="mt-1 font-mono text-xs text-[#25D366] tabular-nums">
+                                {itemGuests}{' '}
+                                {itemGuests === 1 ? uxCopy.guestUnitSingular : uxCopy.guestsUnit}
+                              </p>
+                            )}
                             {item.dietaryChoice && (
-                              <p className="mt-1 text-xs text-[#4F4D48]">{item.dietaryChoice}</p>
+                              <p className="mt-1 text-xs text-[#EAE3D5]">{item.dietaryChoice}</p>
                             )}
                           </div>
                           <button
                             type="button"
                             onClick={() => removeItem(item.skuId, item.channel)}
                             aria-label={copy.removeItemLabel}
-                            className="flex h-10 w-10 items-center justify-center border border-[#0A0A0C]/15 text-[#4F4D48] transition hover:border-[#B91C1C] hover:text-[#B91C1C]"
+                            className="flex h-11 w-11 shrink-0 items-center justify-center border border-[#F6F1E7]/22 bg-[#050505] text-[#C2B9AA] transition hover:border-[#F6F1E7] hover:text-[#F6F1E7]"
                           >
                             <Trash2 className="h-4 w-4" />
                           </button>
                         </div>
 
-                        <div className="mt-3 flex items-center justify-between border-t border-[#0A0A0C]/12 pt-3 tabular-nums">
-                          <div className="inline-flex items-center border border-[#0A0A0C]/25 bg-[#EDEBE6]">
+                        <div className="mt-3 flex items-center justify-between border-t border-[#F6F1E7]/14 pt-3 tabular-nums">
+                          <div className="inline-flex items-center border border-[#F6F1E7]/30 bg-[#050505]">
                             <button
                               type="button"
                               onClick={() => updateQuantity(item.skuId, item.quantity - 1, item.channel)}
                               aria-label="Decrease quantity"
-                              className="flex h-9 w-9 items-center justify-center text-[#0A0A0C] hover:bg-[#0A0A0C]/10"
+                              className="flex h-11 w-11 items-center justify-center text-[#F6F1E7] hover:bg-[#1E1C19]"
                             >
-                              <Minus className="h-3.5 w-3.5" />
+                              <Minus className="h-4 w-4" />
                             </button>
-                            <span className="min-w-[2rem] text-center text-sm font-bold text-[#0A0A0C]">
+                            <span className="min-w-[2.25rem] text-center font-mono text-sm font-bold text-[#F6F1E7]">
                               {item.quantity}
                             </span>
                             <button
                               type="button"
                               onClick={() => updateQuantity(item.skuId, item.quantity + 1, item.channel)}
                               aria-label="Increase quantity"
-                              className="flex h-9 w-9 items-center justify-center text-[#0A0A0C] hover:bg-[#0A0A0C]/10"
+                              className="flex h-11 w-11 items-center justify-center text-[#F6F1E7] hover:bg-[#1E1C19]"
                             >
-                              <Plus className="h-3.5 w-3.5" />
+                              <Plus className="h-4 w-4" />
                             </button>
                           </div>
 
                           <div className="text-right">
                             {feePct > 0 && (
-                              <p className="text-xs text-[#4F4D48]">
+                              <p className="font-mono text-xs text-[#C2B9AA]">
                                 {formatEurFromCents(pricing.lineBaseCents, lang)} + {feePct}%
                               </p>
                             )}
-                            <p className="font-display text-2xl font-extrabold text-[#0A0A0C]">
+                            <p className="font-display text-2xl font-extrabold text-[#F6F1E7]">
                               {formatEurFromCents(pricing.lineTotalCents, lang)}
                             </p>
                           </div>
@@ -219,18 +233,19 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
               )}
             </div>
 
-            <div className="border-t border-[#0A0A0C]/16 bg-[#FFFFFF] p-6">
-              {items.length > 0 && (
-                <div className="mb-4 space-y-2.5 text-sm tabular-nums">
+            {/* CAPITOLO 2 (#EAE3D5 CHAMPAGNE): SCOMPOSIZIONE COSTI E VALUTA */}
+            {items.length > 0 && (
+              <div className="border-t border-[#050505] bg-[#EAE3D5] px-5 py-4 text-[#050505]">
+                <div className="space-y-2 text-sm tabular-nums">
                   <div className="flex items-center justify-between gap-2 pb-1">
-                    <label htmlFor="drawer-currency-select" className="text-xs font-bold text-[#4F4D48]">
+                    <label htmlFor="drawer-currency-select" className="text-xs font-bold text-[#050505]">
                       {copy.currencySelectorLabel}
                     </label>
                     <select
                       id="drawer-currency-select"
                       value={currency}
                       onChange={(e) => setCurrency(e.target.value as SupportedCurrency)}
-                      className="h-9 border border-[#0A0A0C]/30 bg-[#FFFFFF] px-2.5 text-xs font-bold text-[#0A0A0C]"
+                      className="h-10 border border-[#050505] bg-[#FFFFFF] px-2.5 font-mono text-sm font-bold text-[#050505]"
                     >
                       {supportedCurrencies.map((c) => (
                         <option key={c} value={c}>
@@ -239,16 +254,16 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
                       ))}
                     </select>
                   </div>
-                  <div className="flex justify-between text-[#4F4D48]">
+                  <div className="flex justify-between text-[#050505]">
                     <span>{copy.drawerSubtotalLabel}</span>
-                    <span className="font-semibold text-[#0A0A0C]">
+                    <span className="font-mono font-bold text-[#050505]">
                       {formatEurFromCents(subtotalBaseCents, lang)}
                     </span>
                   </div>
                   {totalFeeCents > 0 && (
-                    <div className="flex justify-between text-[#4F4D48]">
-                      <span>{feeLabel}</span>
-                      <span className="font-semibold text-[#0A0A0C]">
+                    <div className="flex justify-between gap-3 text-[#050505]">
+                      <span className="font-semibold">{feeLabel}</span>
+                      <span className="shrink-0 font-mono font-bold text-[#050505]">
                         +{formatEurFromCents(totalFeeCents, lang)}
                       </span>
                     </div>
@@ -262,23 +277,26 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
                       <span>{formatCartValidationError35(lang, cartValidation.errorCode)}</span>
                     </div>
                   )}
-                  <div className="flex justify-between border-t border-[#0A0A0C]/16 pt-2 text-base font-extrabold text-[#0A0A0C]">
+                  <div className="flex items-baseline justify-between border-t-2 border-[#050505] pt-2 text-base font-extrabold text-[#050505]">
                     <span>{copy.totalLabel}</span>
-                    <span className="font-display text-2xl text-[#0A0A0C]">
+                    <span className="font-display text-2xl text-[#050505]">
                       {formatEurFromCents(grandTotalCents, lang)}
                     </span>
                   </div>
                   {currency !== 'EUR' && (
-                    <div className="flex justify-between text-[13px] font-bold text-[#B5240D]">
+                    <div className="flex justify-between border border-[#050505] bg-[#FFFFFF] px-3 py-2 text-xs font-bold text-[#050505]">
                       <span>
                         {copy.chargedInCurrencyLabel} ({currency})
                       </span>
-                      <span>~{formatMinorCurrency(convertedTotalMinor, currency, lang)}</span>
+                      <span className="font-mono">~{formatMinorCurrency(convertedTotalMinor, currency, lang)}</span>
                     </div>
                   )}
                 </div>
-              )}
+              </div>
+            )}
 
+            {/* CAPITOLO 3 (#050505 PLINTO DI AZIONE): CONTRASTO 10.6:1 SU #25D366 */}
+            <div className="border-t border-[#F6F1E7]/16 bg-[#050505] p-5">
               <div className="grid gap-2.5">
                 {items.length > 0 && (
                   <>
@@ -286,15 +304,16 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
                       href={`${lp}/checkout`}
                       locale={lang}
                       onClick={() => setCartOpen(false)}
-                      className="flex min-h-[50px] w-full items-center justify-center bg-[#D9381E] px-5 py-3 text-sm font-extrabold uppercase tracking-wider text-[#FFFFFF] transition hover:bg-[#B82B14]"
+                      className="flex min-h-[52px] w-full items-center justify-center gap-2 bg-[#25D366] px-5 py-3 text-base font-extrabold text-[#050505] transition hover:bg-[#2EE472]"
                     >
-                      {copy.drawerCheckoutCta}
+                      <span>{copy.drawerCheckoutCta}</span>
+                      <ArrowRight className="h-4 w-4 rtl:rotate-180" aria-hidden="true" />
                     </Link>
                     <Link
                       href={`${lp}/cart`}
                       locale={lang}
                       onClick={() => setCartOpen(false)}
-                      className="flex min-h-[44px] w-full items-center justify-center border border-[#0A0A0C] bg-[#FFFFFF] px-4 py-2 text-xs font-bold text-[#0A0A0C] transition hover:bg-[#0A0A0C] hover:text-[#FFFFFF]"
+                      className="flex min-h-[44px] w-full items-center justify-center border border-[#F6F1E7]/30 bg-[#141311] px-4 py-2 text-xs font-bold text-[#F6F1E7] transition hover:border-[#F6F1E7]"
                     >
                       {copy.drawerCartCta}
                     </Link>
@@ -304,7 +323,7 @@ export default function SinglePassCartDrawer({ lang }: { lang: string }) {
                   href={`${lp}/account`}
                   locale={lang}
                   onClick={() => setCartOpen(false)}
-                  className="flex min-h-[44px] w-full items-center justify-center gap-2 border border-[#0A0A0C]/25 bg-[#EDEBE6] px-4 py-2 text-xs font-bold text-[#0A0A0C] transition hover:border-[#0A0A0C]"
+                  className="flex min-h-[44px] w-full items-center justify-center gap-2 border border-[#F6F1E7]/20 bg-[#0B0A09] px-4 py-2 text-xs font-bold text-[#EAE3D5] transition hover:border-[#F6F1E7] hover:text-[#F6F1E7]"
                 >
                   <UserCheck className="h-4 w-4" aria-hidden="true" />
                   {copy.drawerAccountCta}

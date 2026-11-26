@@ -98,7 +98,7 @@ export default function SinglePassVenueModule({
                     {copy.categoryLabels[sku.category]}
                   </span>
                   <span className="font-mono text-xs font-bold text-[#050505]">
-                    {guests > 1 ? `${guests} pax · ` : ''}
+                    {guests > 1 ? `${guests} ${ui.guestPlural} · ` : ''}
                     {sku.arrivalTime}
                   </span>
                 </div>
@@ -121,11 +121,11 @@ export default function SinglePassVenueModule({
                     </span>
                   )}
                 </div>
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                   <button
                     type="button"
                     onClick={() => addItem(sku.id, 1, sku.dietaryPreset, true, undefined, undefined, 'venue')}
-                    className="inline-flex min-h-[40px] items-center gap-1.5 border border-[#050505] bg-white px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-[#050505] hover:bg-[#F6F1E7]"
+                    className="inline-flex min-h-[44px] items-center gap-1.5 border border-[#050505] bg-[#FFFFFF] px-3.5 py-2 text-xs font-bold text-[#050505] transition hover:bg-[#050505] hover:text-[#F6F1E7]"
                   >
                     <ShoppingBag className="h-3.5 w-3.5" aria-hidden="true" />
                     {copy.addToCartCta}
@@ -136,7 +136,7 @@ export default function SinglePassVenueModule({
                       addItem(sku.id, 1, sku.dietaryPreset, false, undefined, undefined, 'venue');
                       router.push(`${lp}/checkout`);
                     }}
-                    className="inline-flex min-h-[40px] items-center bg-[#050505] px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-[#F6F1E7] hover:bg-[#24201B]"
+                    className="inline-flex min-h-[44px] items-center bg-[#25D366] px-4 py-2 text-xs font-extrabold text-[#050505] transition hover:bg-[#2EE472]"
                   >
                     {copy.buyNowCta}
                   </button>

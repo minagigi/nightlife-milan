@@ -299,20 +299,19 @@ export default function ThanksgivingJustMeDetailView({ locale: rawLocale }: { lo
         {/* Sticky/Jump TOC */}
         <nav
           aria-label={c.tocTitle}
-          className="mt-8 rounded-xl border border-white/15 bg-white/[0.03] p-5"
+          className="mt-8 border border-white/15 bg-white/[0.03] p-4 sm:p-5"
         >
           <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-champagne">
             <ListChecks className="h-4 w-4" />
             <span>{c.tocTitle}</span>
           </div>
-          <ol className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
+          <ol className="mt-3 flex gap-2 overflow-x-auto pb-1.5 sm:grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-2.5 sm:overflow-visible sm:pb-0">
             {c.tocItems.map((item) => (
-              <li key={item.id}>
+              <li key={item.id} className="shrink-0">
                 <a
                   href={`#${item.id}`}
-                  className="inline-flex items-center gap-2 font-sans text-sm text-white/85 transition-colors hover:text-champagne"
+                  className="inline-flex min-h-[36px] items-center gap-2 border border-white/15 bg-[#141311] px-3 py-1.5 font-sans text-xs font-semibold text-[#F6F1E7] transition-colors hover:border-champagne hover:text-champagne sm:text-sm"
                 >
-                  <span className="h-1.5 w-1.5 rounded-full bg-champagne" />
                   <span>{item.label}</span>
                 </a>
               </li>
@@ -321,25 +320,25 @@ export default function ThanksgivingJustMeDetailView({ locale: rawLocale }: { lo
         </nav>
       </header>
 
-      {/* Official Xceed #249216 & 24/7 WhatsApp Concierge Booking Strip */}
+      {/* Official Xceed #249216 & 24/7 WhatsApp Concierge Booking Strip — Alternativa 02 Carta Calda #F6F1E7 */}
       <section
         id="official-xceed-booking"
-        className="mx-auto max-w-[1440px] scroll-mt-24 border-x border-b border-white/10 bg-[#0B0A09] px-5 py-6 sm:px-14"
+        className="w-full scroll-mt-24 border-y border-[#050505] bg-[#F6F1E7] text-[#050505]"
       >
-        <div className="flex flex-col gap-4 rounded-xl border border-champagne/30 bg-white/[0.03] p-5 sm:flex-row sm:items-center sm:justify-between">
-          <div className="space-y-1">
-            <p className="font-mono text-xs uppercase tracking-[0.18em] text-champagne">
+        <div className="mx-auto flex max-w-[1440px] flex-col gap-5 border-x border-[#050505]/18 px-5 py-8 sm:flex-row sm:items-center sm:justify-between sm:px-14">
+          <div className="space-y-1.5">
+            <p className="font-mono text-xs font-bold uppercase tracking-[0.16em] text-[#4A453E]">
               {c.tiersHeading}
             </p>
-            <p className="font-sans text-sm text-[#EAE3D5]">{c.priceBadge}</p>
-            <p className="font-sans text-xs text-[#C2B9AA]">{c.tiersSubheading}</p>
+            <p className="font-serif text-xl font-bold text-[#050505] sm:text-2xl">{c.priceBadge}</p>
+            <p className="font-sans text-xs text-[#3D3830] sm:text-sm">{c.tiersSubheading}</p>
           </div>
-          <div className="flex shrink-0 flex-wrap gap-3">
+          <div className="flex shrink-0 flex-wrap gap-3 bg-[#050505] p-2">
             <a
               href={THANKSGIVING_JUSTME_AFFILIATE_URL}
               target="_blank"
               rel="sponsored noopener noreferrer"
-              className="inline-flex min-h-[44px] items-center gap-2 rounded-sm bg-[#EAE3D5] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[#050505] transition-colors hover:bg-white"
+              className="inline-flex min-h-[46px] items-center gap-2 bg-[#EAE3D5] px-5 py-2.5 text-xs font-extrabold uppercase tracking-wider text-[#050505] transition-colors hover:bg-[#F6F1E7]"
             >
               {c.ctaXceedLabel}
               <ExternalLink className="h-4 w-4" />
@@ -348,7 +347,7 @@ export default function ThanksgivingJustMeDetailView({ locale: rawLocale }: { lo
               href={whatsappGeneralUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-[44px] items-center gap-2 rounded-sm border border-[#25D366]/45 bg-[#25D366]/15 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[#25D366] transition-colors hover:bg-[#25D366] hover:text-[#050505]"
+              className="inline-flex min-h-[46px] items-center gap-2 bg-[#25D366] px-5 py-2.5 text-xs font-extrabold uppercase tracking-wider text-[#050505] transition-colors hover:bg-[#2EE472]"
             >
               <MessageCircle className="h-4 w-4" />
               {c.ctaWhatsappLabel}
@@ -794,20 +793,20 @@ export default function ThanksgivingJustMeDetailView({ locale: rawLocale }: { lo
           </div>
         </section>
 
-        {/* Section 6: 12 FAQs */}
-        <section id="faqs" className="scroll-mt-24 space-y-6">
-          <h2 className="font-serif text-3xl font-normal text-[#F6F1E7] sm:text-4xl">
+        {/* Section 6: 12 FAQs — Alternativa 02 Capitolo Carta Calda #F6F1E7 */}
+        <section id="faqs" className="scroll-mt-24 border-2 border-[#050505] bg-[#F6F1E7] p-6 text-[#050505] sm:p-10">
+          <h2 className="font-serif text-2xl font-bold text-[#050505] sm:text-4xl">
             {c.faqHeading}
           </h2>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {c.faqs.map((faq) => (
-              <div
-                key={faq.q}
-                className="rounded-xl border border-white/10 bg-white/[0.025] p-5 space-y-2"
-              >
-                <h3 className="font-serif text-lg text-[#F6F1E7]">{faq.q}</h3>
-                <p className="font-sans text-sm leading-relaxed text-[#C2B9AA]">{faq.a}</p>
-              </div>
+          <div className="mt-5 divide-y divide-[#050505]/15 border-y border-[#050505]/15 bg-[#FFFFFF] px-5">
+            {c.faqs.map((faq, idx) => (
+              <details key={faq.q} open={idx < 2} className="group py-4">
+                <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 marker:hidden">
+                  <h3 className="font-serif text-base font-bold text-[#050505] sm:text-lg">{faq.q}</h3>
+                  <span className="font-mono text-xl font-bold text-[#050505] transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+                </summary>
+                <p className="pt-2 font-sans text-sm leading-relaxed text-[#24201B]">{faq.a}</p>
+              </details>
             ))}
           </div>
         </section>

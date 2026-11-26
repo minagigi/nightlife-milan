@@ -140,7 +140,7 @@ export default function SinglePassThankYouView({
               <Link
                 href={`${lp}/checkout?order=${encodeURIComponent(orderId)}`}
                 locale={locale}
-                className="inline-flex min-h-[46px] items-center justify-center bg-[#D9381E] px-5 py-2.5 text-sm font-bold text-[#FFFFFF]"
+                className="inline-flex min-h-[46px] items-center justify-center bg-[#25D366] px-5 py-2.5 text-sm font-extrabold text-[#050505] hover:bg-[#2EE472]"
               >
                 {copy.completePaymentCta}
               </Link>
@@ -176,33 +176,33 @@ export default function SinglePassThankYouView({
 
   return (
     <section className="mx-auto max-w-4xl space-y-8 px-4 py-12 sm:px-6 lg:px-8">
-      <header className="border-2 border-[#0A0A0C] bg-[#FFFFFF] p-6 sm:p-10">
+      <header className="border-2 border-[#050505] bg-[#FFFFFF] p-6 sm:p-10">
         <p className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-[#15803D]">
           <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
           {copy.thankYouEyebrow}
         </p>
-        <h1 className="mt-3 font-display text-4xl font-extrabold uppercase text-[#0A0A0C] sm:text-5xl">
+        <h1 className="mt-3 font-display text-4xl font-extrabold uppercase text-[#050505] sm:text-5xl">
           {copy.thankYouHeading}
         </h1>
-        <p className="mt-3 max-w-2xl text-base leading-relaxed text-[#4F4D48]">
+        <p className="mt-3 max-w-2xl text-base leading-relaxed text-[#4A453E]">
           {copy.thankYouSubtitle}
         </p>
 
         <div className="mt-6 grid gap-3 text-sm tabular-nums sm:grid-cols-3">
-          <div className="border border-[#0A0A0C]/16 bg-[#EDEBE6] p-4">
-            <p className="text-xs font-bold text-[#4F4D48]">{copy.orderIdLabel}</p>
-            <p className="mt-1 font-display text-2xl font-extrabold text-[#0A0A0C]">{order.id}</p>
+          <div className="border border-[#050505]/20 bg-[#EAE3D5] p-4">
+            <p className="text-xs font-bold text-[#4A453E]">{copy.orderIdLabel}</p>
+            <p className="mt-1 font-display text-2xl font-extrabold text-[#050505]">{order.id}</p>
           </div>
-          <div className="border border-[#0A0A0C]/16 bg-[#EDEBE6] p-4">
-            <p className="text-xs font-bold text-[#4F4D48]">ACCESS PIN</p>
-            <p className="mt-1 inline-flex items-center gap-1.5 font-display text-2xl font-extrabold text-[#D9381E]">
+          <div className="border border-[#050505] bg-[#050505] p-4 text-[#F6F1E7]">
+            <p className="text-xs font-bold text-[#C2B9AA]">ACCESS PIN</p>
+            <p className="mt-1 inline-flex items-center gap-1.5 font-display text-2xl font-extrabold text-[#25D366]">
               <QrCode className="h-5 w-5" aria-hidden="true" />
               {order.accessPin}
             </p>
           </div>
-          <div className="border border-[#0A0A0C]/16 bg-[#EDEBE6] p-4">
-            <p className="text-xs font-bold text-[#4F4D48]">{copy.guestsLabel}</p>
-            <p className="mt-1 inline-flex items-center gap-1.5 font-display text-2xl font-extrabold text-[#0A0A0C]">
+          <div className="border border-[#050505]/20 bg-[#EAE3D5] p-4">
+            <p className="text-xs font-bold text-[#4A453E]">{copy.guestsLabel}</p>
+            <p className="mt-1 inline-flex items-center gap-1.5 font-display text-2xl font-extrabold text-[#050505]">
               <Users className="h-5 w-5" aria-hidden="true" />
               {order.totalHeadcount}
             </p>
@@ -251,11 +251,11 @@ export default function SinglePassThankYouView({
               <span>{formatEurFromCents(order.totalCents, locale)}</span>
             </div>
             {paidCur !== 'EUR' && (
-              <div className="flex justify-between bg-[#EDEBE6] p-2.5 text-sm font-bold text-[#0A0A0C]">
+              <div className="flex justify-between border border-[#050505]/20 bg-[#EAE3D5] p-2.5 text-sm font-bold text-[#050505]">
                 <span>
                   {copy.chargedInCurrencyLabel} ({paidCur})
                 </span>
-                <span className="text-[#D9381E]">
+                <span className="text-[#050505]">
                   {formatMinorCurrency(order.presentmentTotalMinor, paidCur, locale)}
                 </span>
               </div>
@@ -335,15 +335,15 @@ export default function SinglePassThankYouView({
         </div>
       )}
 
-      <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#0A0A0C]/16 pt-6">
-        <p className="inline-flex items-center gap-2 text-xs text-[#4F4D48]">
-          <ShieldCheck className="h-4 w-4 text-[#0A0A0C]" aria-hidden="true" />
+      <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#050505] bg-[#050505] p-6 text-[#F6F1E7]">
+        <p className="inline-flex items-center gap-2 text-xs text-[#C2B9AA]">
+          <ShieldCheck className="h-4 w-4 text-[#25D366]" aria-hidden="true" />
           Nightlife Milan · nightlifemilan.com · Official Digital Pass
         </p>
         <Link
           href={`${lp}/account`}
           locale={locale}
-          className="inline-flex min-h-[48px] items-center justify-center bg-[#D9381E] px-6 py-3 text-sm font-extrabold uppercase tracking-wider text-[#FFFFFF] hover:bg-[#B82B14]"
+          className="inline-flex min-h-[48px] items-center justify-center bg-[#25D366] px-6 py-3 text-sm font-extrabold uppercase tracking-wider text-[#050505] hover:bg-[#2EE472]"
         >
           {copy.navAccountLabel} →
         </Link>

@@ -139,10 +139,10 @@ const IT_PACK: SinglePassCopyPack = {
     'club-entry': 'Ingresso Club Ufficiale',
     'holiday-special': 'Menu Speciale Festivo',
   },
-  basePriceLabel: 'Prezzo del locale (EUR)',
-  feeLabel: 'Booking fee 20% · consulenza concierge e pagamento elettronico',
-  feeCalculatedAtCheckoutNote: 'Booking & transaction fee 20% calcolata al checkout',
-  totalLabel: 'Totale Ordine',
+  basePriceLabel: 'Quota del locale (EUR)',
+  feeLabel: 'Servizio di Conciergerie & Transaction Fees (20%) · consulenza concierge e pagamento elettronico',
+  feeCalculatedAtCheckoutNote: 'Servizio di Conciergerie & Transaction Fees (20%) calcolato al checkout',
+  totalLabel: 'Totale Finito',
   arrivalLabel: 'Orario ingresso consigliato',
   guestsLabel: 'Ospiti inclusi',
   addToCartCta: 'Aggiungi al Carrello',
@@ -173,7 +173,7 @@ const IT_PACK: SinglePassCopyPack = {
   drawerEmptyTitle: 'Il carrello è vuoto',
   drawerEmptyBody: 'Aggiungi uno dei pacchetti con tariffa ufficiale confermata da qualsiasi scheda evento o dallo shop Single Pass.',
   drawerExploreCta: 'Esplora i pacchetti confermati',
-  drawerSubtotalLabel: 'Prezzo del locale (EUR)',
+  drawerSubtotalLabel: 'Quota del locale (EUR)',
   drawerCheckoutCta: 'Vai al Checkout',
   drawerCartCta: 'Rivedi Carrello',
   drawerAccountCta: 'Area Riservata',
@@ -204,7 +204,7 @@ const IT_PACK: SinglePassCopyPack = {
   formLanguages: 'Lingue parlate',
   formDietary: 'Preferenze menù (Terra/Mare) o allergie alimentari',
   formTermsLabel:
-    'Accetto Termini e Condizioni, Privacy Policy e Politica di Rimborso di nightlifemilan.com, confermo la Booking fee 20% (consulenza concierge e pagamento elettronico) e i requisiti d’età del locale.',
+    'Accetto Termini e Condizioni, Privacy Policy e Politica di Rimborso di nightlifemilan.com, confermo il Servizio di Conciergerie & Transaction Fees (20%) (consulenza concierge e pagamento elettronico) e i requisiti d’età del locale.',
   termsPolicyLabel: 'Termini e Condizioni',
   privacyPolicyLabel: 'Privacy Policy',
   refundPolicyLabel: 'Politica di Rimborso',
@@ -301,8 +301,8 @@ const EN_PACK: SinglePassCopyPack = {
     'holiday-special': 'Holiday Special Menu',
   },
   basePriceLabel: 'Venue price (EUR)',
-  feeLabel: 'Booking fee 20% · concierge & electronic payment',
-  feeCalculatedAtCheckoutNote: 'Booking & transaction fee 20% calculated at checkout',
+  feeLabel: 'Concierge Service & Transaction Fees (20%) · concierge & electronic payment',
+  feeCalculatedAtCheckoutNote: 'Concierge Service & Transaction Fees (20%) calculated at checkout',
   totalLabel: 'Order Total',
   arrivalLabel: 'Recommended arrival',
   guestsLabel: 'Guests covered',
@@ -365,7 +365,7 @@ const EN_PACK: SinglePassCopyPack = {
   formLanguages: 'Spoken Languages',
   formDietary: 'Menu selection (Land/Sea) or dietary notes',
   formTermsLabel:
-    'I accept the Terms & Conditions, Privacy Policy, and Refund Policy of nightlifemilan.com, acknowledge the Booking fee 20% (concierge & electronic payment), and confirm venue age requirements.',
+    'I accept the Terms & Conditions, Privacy Policy, and Refund Policy of nightlifemilan.com, acknowledge the Concierge Service & Transaction Fees (20%) (concierge & electronic payment), and confirm venue age requirements.',
   termsPolicyLabel: 'Terms & Conditions',
   privacyPolicyLabel: 'Privacy Policy',
   refundPolicyLabel: 'Refund Policy',
@@ -484,15 +484,56 @@ const FEE_DETAIL_BY_LOCALE_35: Record<LocaleCode, string> = {
   mk: 'консиерж советување и електронско плаќање',
 };
 
+export const CONCIERGE_FEES_HEAD_35: Record<LocaleCode, string> = {
+  en: 'Concierge Service & Transaction Fees',
+  it: 'Servizio di Conciergerie & Transaction Fees',
+  es: 'Servicio de Conciergerie y Transaction Fees',
+  fr: 'Service de Conciergerie & Transaction Fees',
+  de: 'Concierge-Service & Transaction Fees',
+  pt: 'Serviço de Concierge e Transaction Fees',
+  nl: 'Conciërgeservice & Transaction Fees',
+  ru: 'Сервис консьержа и Transaction Fees',
+  tr: 'Concierge Hizmeti ve Transaction Fees',
+  zh: '礼宾服务与电子交易费 (Transaction Fees)',
+  ar: 'خدمة الكونسيرج ورسوم المعاملات (Transaction Fees)',
+  bg: 'Консиерж услуга и Transaction Fees',
+  hr: 'Concierge usluga i Transaction Fees',
+  cs: 'Concierge služba a Transaction Fees',
+  da: 'Concierge-service & Transaction Fees',
+  et: 'Concierge-teenus ja Transaction Fees',
+  fi: 'Concierge-palvelu ja Transaction Fees',
+  el: 'Υπηρεσία Concierge & Transaction Fees',
+  hu: 'Concierge-szolgáltatás és Transaction Fees',
+  ga: 'Seirbhís Concierge & Transaction Fees',
+  lv: 'Konsjerža serviss un Transaction Fees',
+  lt: 'Konsjeržo paslauga ir Transaction Fees',
+  mt: 'Servizz ta’ Concierge u Transaction Fees',
+  pl: 'Usługa Concierge i Transaction Fees',
+  ro: 'Serviciu de Concierge & Transaction Fees',
+  sk: 'Concierge služba a Transaction Fees',
+  sl: 'Storitev Concierge in Transaction Fees',
+  sv: 'Conciergeservice & Transaction Fees',
+  no: 'Conciergeservice & Transaction Fees',
+  is: 'Concierge-þjónusta og Transaction Fees',
+  uk: 'Консьєрж-сервіс та Transaction Fees',
+  sq: 'Shërbimi Concierge & Transaction Fees',
+  sr: 'Concierge usluga i Transaction Fees',
+  bs: 'Concierge usluga i Transaction Fees',
+  mk: 'Консиерж услуга и Transaction Fees',
+};
+
 export function formatFeeLabel35(locale: string, feeRate: number, _isMixed = false): string {
+  const head =
+    (CONCIERGE_FEES_HEAD_35 as Record<string, string>)[locale] ||
+    CONCIERGE_FEES_HEAD_35[DEFAULT_LOCALE];
   const detail =
     (FEE_DETAIL_BY_LOCALE_35 as Record<string, string>)[locale] ||
     FEE_DETAIL_BY_LOCALE_35[DEFAULT_LOCALE];
   const pct = Math.max(0, Math.round(feeRate * 100));
   if (pct <= 0) {
-    return `Booking fee 0% · ${detail}`;
+    return `${head} (0%) · ${detail}`;
   }
-  return `Booking fee ${pct}% · ${detail}`;
+  return `${head} (${pct}%) · ${detail}`;
 }
 
 export function formatCheckoutFeeNote35(locale: string, feeRate = 0.2): string {
@@ -678,7 +719,7 @@ const TERRAZZA_UI_EN: TerrazzaCheckoutUiPack = {
   noAllergiesQuickFill: 'No allergies or intolerances',
   allergiesRequiredError: '',
   termsNotice20:
-    'I accept the Terms & Conditions, Privacy Policy, and Refund Policy of nightlifemilan.com, acknowledge the Booking fee 20% (concierge & electronic payment), and accept official venue rules.',
+    'I accept the Terms & Conditions, Privacy Policy, and Refund Policy of nightlifemilan.com, acknowledge the Concierge Service & Transaction Fees (20%) (concierge & electronic payment), and accept official venue rules.',
   confirmationRefundNotice:
     'Booking confirmed by Nightlife Milan after verifying availability with the venue; if the package is no longer available, full refund.',
   entryCheckpointNotice:
@@ -698,7 +739,7 @@ const TERRAZZA_UI_IT: TerrazzaCheckoutUiPack = {
   noAllergiesQuickFill: 'Nessuna allergia o intolleranza',
   allergiesRequiredError: '',
   termsNotice20:
-    'Accetto Termini e Condizioni, Privacy Policy e Politica di Rimborso di nightlifemilan.com, confermo la Booking fee 20% (consulenza concierge e pagamento elettronico) e le condizioni ufficiali del locale.',
+    'Accetto Termini e Condizioni, Privacy Policy e Politica di Rimborso di nightlifemilan.com, confermo il Servizio di Conciergerie & Transaction Fees (20%) (consulenza concierge e pagamento elettronico) e le condizioni ufficiali del locale.',
   confirmationRefundNotice:
     'Prenotazione confermata da Nightlife Milan dopo la verifica della disponibilità col locale; se il pacchetto non è più disponibile, rimborso completo.',
   entryCheckpointNotice:

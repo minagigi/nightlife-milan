@@ -268,20 +268,21 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
                         <Minus className="h-3.5 w-3.5" />
                       </button>
                       <span className="min-w-[3.5rem] text-center font-mono text-xs font-bold">
-                        {qty} pax
+                        {qty} {qty === 1 ? (isIt ? 'ospite' : 'guest') : isIt ? 'ospiti' : 'guests'}
                       </span>
                       <button
                         type="button"
                         onClick={() => setQty('f1-place', qty + 1)}
                         aria-label="Increase guests"
-                        className="flex h-8 w-8 items-center justify-center hover:bg-[#EFE9DC]"
+                        className="flex h-9 w-9 items-center justify-center hover:bg-[#EFE9DC]"
                       >
                         <Plus className="h-3.5 w-3.5" />
                       </button>
                     </div>
                     <div className="text-right font-mono text-xs">
                       <span className="block text-[#3D3830]">
-                        <strong>{formatEurFromCents(f1PlaceSku.basePriceCents, locale)}</strong> / pax
+                        <strong>{formatEurFromCents(f1PlaceSku.basePriceCents, locale)}</strong> /{' '}
+                        {isIt ? 'ospite' : 'guest'}
                       </span>
                       <strong className="text-sm text-[#050505]">
                         {formatEurFromCents(lineBaseCents, locale)}
@@ -297,7 +298,7 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
                     <button
                       type="button"
                       onClick={() => addItem(f1PlaceSku.id, qty, f1PlaceSku.dietaryPreset, true, undefined, undefined, 'venue')}
-                      className="inline-flex min-h-[40px] flex-1 items-center justify-center gap-1.5 border border-[#050505] bg-white px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-[#050505] hover:bg-[#F6F1E7]"
+                      className="inline-flex min-h-[44px] flex-1 items-center justify-center gap-1.5 border border-[#050505] bg-white px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-[#050505] hover:bg-[#F6F1E7]"
                     >
                       <ShoppingBag className="h-3.5 w-3.5" aria-hidden="true" />
                       {copy.addToCartCta}
@@ -308,7 +309,7 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
                         addItem(f1PlaceSku.id, qty, f1PlaceSku.dietaryPreset, false, undefined, undefined, 'venue');
                         router.push(`${lp}/checkout`);
                       }}
-                      className="inline-flex min-h-[40px] flex-1 items-center justify-center bg-[#050505] px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-[#F6F1E7] hover:bg-[#24201B]"
+                      className="inline-flex min-h-[44px] flex-1 items-center justify-center bg-[#050505] px-3 py-2 text-[11px] font-extrabold uppercase tracking-wider text-[#F6F1E7] hover:bg-[#24201B]"
                     >
                       {copy.buyNowCta}
                     </button>
@@ -353,20 +354,21 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
                         <Minus className="h-3.5 w-3.5" />
                       </button>
                       <span className="min-w-[3.5rem] text-center font-mono text-xs font-bold">
-                        {qty} pax
+                        {qty} {qty === 1 ? (isIt ? 'ospite' : 'guest') : isIt ? 'ospiti' : 'guests'}
                       </span>
                       <button
                         type="button"
                         onClick={() => setQty(sku.id, qty + 1)}
                         aria-label="Increase guests"
-                        className="flex h-8 w-8 items-center justify-center hover:bg-[#EFE9DC]"
+                        className="flex h-9 w-9 items-center justify-center hover:bg-[#EFE9DC]"
                       >
                         <Plus className="h-3.5 w-3.5" />
                       </button>
                     </div>
                     <div className="text-right font-mono text-xs">
                       <span className="block text-[#3D3830]">
-                        <strong>{formatEurFromCents(sku.basePriceCents, locale)}</strong> / pax
+                        <strong>{formatEurFromCents(sku.basePriceCents, locale)}</strong> /{' '}
+                        {isIt ? 'ospite' : 'guest'}
                       </span>
                       <strong className="text-sm text-[#050505]">
                         {formatEurFromCents(lineBaseCents, locale)}
@@ -382,7 +384,7 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
                     <button
                       type="button"
                       onClick={() => addItem(sku.id, qty, sku.dietaryPreset, true, undefined, undefined, 'venue')}
-                      className="inline-flex min-h-[40px] flex-1 items-center justify-center gap-1.5 border border-[#050505] bg-white px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-[#050505] hover:bg-[#F6F1E7]"
+                      className="inline-flex min-h-[44px] flex-1 items-center justify-center gap-1.5 border border-[#050505] bg-white px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-[#050505] hover:bg-[#F6F1E7]"
                     >
                       <ShoppingBag className="h-3.5 w-3.5" aria-hidden="true" />
                       {copy.addToCartCta}
@@ -393,7 +395,7 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
                         addItem(sku.id, qty, sku.dietaryPreset, false, undefined, undefined, 'venue');
                         router.push(`${lp}/checkout`);
                       }}
-                      className="inline-flex min-h-[40px] flex-1 items-center justify-center bg-[#050505] px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-[#F6F1E7] hover:bg-[#24201B]"
+                      className="inline-flex min-h-[44px] flex-1 items-center justify-center bg-[#050505] px-3 py-2 text-[11px] font-extrabold uppercase tracking-wider text-[#F6F1E7] hover:bg-[#24201B]"
                     >
                       {copy.buyNowCta}
                     </button>
@@ -453,7 +455,7 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
                     }`}
                   >
                     <strong className="block">
-                      {isIt ? 'Tavolo in Terrazza (max 4 pax)' : 'Terrace Table (max 4 guests)'}
+                      {isIt ? 'Tavolo in Terrazza (max 4 ospiti)' : 'Terrace Table (max 4 guests)'}
                     </strong>
                     <span className="font-mono text-[11px] text-[#C9A84C]">
                       {isIt ? '600€' : '€600'}
@@ -472,7 +474,7 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
                     }`}
                   >
                     <strong className="block">
-                      {isIt ? 'Terrazzino Privato (max 8 pax)' : 'Private Terrace (max 8 guests)'}
+                      {isIt ? 'Terrazzino Privato (max 8 ospiti)' : 'Private Terrace (max 8 guests)'}
                     </strong>
                     <span className="font-mono text-[11px] text-[#C9A84C]">
                       {isIt ? '1.200€' : '€1,200'}
@@ -500,7 +502,8 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
                   if (!s) return null;
                   return (
                     <option key={id} value={id}>
-                      {(isIt ? s.titleIt : s.titleEn)} ({formatEurFromCents(s.basePriceCents, locale)} / pax)
+                      {(isIt ? s.titleIt : s.titleEn)} ({formatEurFromCents(s.basePriceCents, locale)} /{' '}
+                      {isIt ? 'ospite' : 'guest'})
                     </option>
                   );
                 })}
@@ -509,8 +512,8 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
               <div className="mt-3">
                 <span className="block font-mono text-[10px] font-bold uppercase tracking-wider text-[#C9A84C]">
                   {isIt
-                    ? `Numero ospiti al tavolo (1–${activeTableMaxCap} pax)`
-                    : `Number of guests at table (1–${activeTableMaxCap} pax)`}
+                    ? `Numero ospiti al tavolo (1-${activeTableMaxCap} ospiti)`
+                    : `Number of guests at table (1-${activeTableMaxCap} guests)`}
                 </span>
                 <div className="mt-1.5 flex flex-wrap gap-1.5">
                   {Array.from({ length: activeTableMaxCap }, (_, i) => i + 1).map((n) => (
@@ -569,11 +572,11 @@ export default function TerrazzaDuomoBookingModule({ locale }: { locale: string 
                 <button
                   type="button"
                   onClick={() => handleAddBundle(true)}
-                  className="inline-flex min-h-[42px] w-full items-center justify-center gap-1.5 bg-[#F6F1E7] px-3 py-2 text-[11px] font-extrabold uppercase tracking-wider text-[#050505] hover:bg-[#EAE3D5]"
+                  className="inline-flex min-h-[44px] w-full items-center justify-center gap-1.5 bg-[#25D366] px-3 py-2 text-[11px] font-extrabold uppercase tracking-wider text-[#050505] hover:bg-[#2EE472]"
                 >
                   <Check className="h-3.5 w-3.5" aria-hidden="true" />
                   {isIt
-                    ? `Prenota Tavolo + ${safeBundleGuests} Pax`
+                    ? `Prenota Tavolo + ${safeBundleGuests} Ospiti`
                     : `Book Table + ${safeBundleGuests} Guests`}
                 </button>
                 <button

@@ -743,15 +743,16 @@ export default async function EventPage({ params }: Props) {
     };
 
     return (
-      <main className="min-h-screen bg-[#050505] text-white">
+      <main data-layout-alt="alternativa-02-capitoli-colore-netto" className="min-h-screen bg-[#050505] text-[#F6F1E7]">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
 
-        <section className="border-b border-white/10 bg-[#050505]">
+        {/* CAPITOLO 01 — NOTTE #050505: Locandina 4:5 & Titolo */}
+        <section className="border-b border-[#F6F1E7]/14 bg-[#050505]">
           <div className="mx-auto max-w-5xl px-4 pt-6 sm:px-6 lg:px-8">
-            <div className="relative mx-auto aspect-[4/5] w-full max-w-[540px] overflow-hidden border border-white/15 bg-[#050505]">
+            <div className="relative mx-auto aspect-[4/5] w-full max-w-[540px] overflow-hidden border border-[#F6F1E7]/18 bg-[#050505]">
               <Image
                 src={weeklyEvent.image}
                 alt={title}
@@ -765,128 +766,167 @@ export default async function EventPage({ params }: Props) {
               />
             </div>
           </div>
-          <div className="relative z-10 text-center px-4 py-10 max-w-5xl mx-auto">
-            <div className="flex flex-wrap justify-center gap-3 mb-5">
-              <span className="bg-champagne text-black text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+          <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
+            <div className="mb-4 flex flex-wrap gap-2">
+              <span className="bg-[#EAE3D5] px-3 py-1 font-mono text-xs font-extrabold uppercase tracking-wider text-[#050505]">
                 {weeklyEvent.clubName}
               </span>
-              <span className="text-white/70 text-sm font-medium border border-white/20 px-3 py-1 rounded-full">
-                {weeklyEvent.genres.join(', ')}
+              <span className="border border-[#F6F1E7]/25 bg-[#141311] px-3 py-1 text-xs font-semibold text-[#EAE3D5]">
+                {weeklyEvent.genres.join(' · ')}
+              </span>
+              <span className="border border-[#F6F1E7]/25 bg-[#141311] px-3 py-1 font-mono text-xs font-semibold capitalize text-[#C2B9AA]">
+                {weeklyEvent.day}
               </span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-serif font-bold text-white mb-5 tracking-tight">{title}</h1>
-            <p className="text-lg md:text-xl text-white/70 mb-8 max-w-2xl mx-auto">{weeklyEvent.target}</p>
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              {weeklyEvent.xceedLink && (
-                <a
-                  href={weeklyEvent.xceedLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-champagne text-black px-8 py-4 rounded-full font-bold hover:bg-white transition-colors text-lg"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" /></svg>
-                  {tr(locale, 'Buy on Xceed', 'Acquista su Xceed')}
-                </a>
-              )}
-              <a
-                href={weeklyWaHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`inline-block ${weeklyEvent.xceedLink ? 'border border-white/40 text-white hover:border-champagne hover:text-champagne' : 'bg-champagne text-black hover:bg-white'} px-8 py-4 rounded-full font-bold transition-colors text-lg`}
-              >
-                {tr(locale, 'Book via WhatsApp', 'Prenota via WhatsApp')}
-              </a>
-            </div>
+            <h1 className="font-display text-3xl font-bold uppercase tracking-tight text-[#F6F1E7] sm:text-5xl">
+              {title}
+            </h1>
+            <p className="mt-3 max-w-2xl text-base text-[#C2B9AA] sm:text-lg">{weeklyEvent.target}</p>
           </div>
         </section>
 
-        <div className="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-3 gap-12">
-          <div className="lg:col-span-2">
-            <h2 className="text-3xl font-serif font-bold text-champagne mb-6">
-              {tr(locale, 'The Experience', 'L\'Esperienza')}
-            </h2>
-            <p className="text-lg text-white/70 leading-relaxed mb-8">{description}</p>
-            
-            <div className="bg-white/[0.03] p-8 rounded-lg border border-white/10 mb-12">
-              <h3 className="text-xl font-bold text-white mb-4">{tr(locale, 'Dress Code', 'Dress Code')}</h3>
-              <p className="text-white/50">{dressCode}</p>
+        {/* CAPITOLO 02 — CARTA CALDA #F6F1E7: Prezzi, Tavoli VIP & Prenotazione Immediata */}
+        <section className="border-b border-[#050505] bg-[#F6F1E7] py-10 text-[#050505]">
+          <div className="mx-auto grid max-w-5xl gap-8 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
+            <div className="space-y-4 lg:col-span-7">
+              <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-[#4A453E]">
+                01 · TARIFFE & FORMULE D&apos;INGRESSO
+              </p>
+              <h2 className="font-display text-2xl font-bold uppercase text-[#050505] sm:text-3xl">
+                {tr(locale, 'Pricing & VIP Tables', 'Prezzi & Tavoli VIP')}
+              </h2>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                {weeklyEvent.pricing.aperitif && (
+                  <div className="border border-[#050505] bg-[#FFFFFF] p-5 text-[#050505]">
+                    <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-[#4A453E]">
+                      {tr(locale, 'Aperitif', 'Aperitivo')}
+                    </h3>
+                    <p className="mt-2 font-display text-2xl font-extrabold text-[#050505]">
+                      {weeklyEvent.pricing.aperitif}
+                    </p>
+                  </div>
+                )}
+                <div className="border border-[#050505] bg-[#FFFFFF] p-5 text-[#050505]">
+                  <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-[#4A453E]">
+                    {tr(locale, 'Club Entry', 'Ingresso Club')}
+                  </h3>
+                  <p className="mt-2 font-display text-2xl font-extrabold text-[#050505]">
+                    {weeklyEvent.pricing.club}
+                  </p>
+                </div>
+                <div className="border border-[#050505] bg-[#EAE3D5] p-5 text-[#050505] sm:col-span-2">
+                  <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-[#4A453E]">
+                    {tr(locale, 'VIP Tables', 'Tavoli VIP')}
+                  </h3>
+                  <p className="mt-2 font-display text-2xl font-extrabold text-[#050505]">
+                    {weeklyEvent.pricing.tables}
+                  </p>
+                  <p className="mt-1.5 text-xs text-[#3D3830]">
+                    {tr(
+                      locale,
+                      'Prices vary based on location and number of guests.',
+                      'I prezzi variano in base alla posizione e al numero di ospiti.',
+                    )}
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <h2 className="text-3xl font-serif font-bold text-champagne mb-6 mt-12">
-              {tr(locale, 'Pricing & VIP Tables', 'Prezzi & Tavoli VIP')}
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-              {weeklyEvent.pricing.aperitif && (
-                <div className="bg-white/[0.03] p-6 rounded-xl border border-white/10">
-                  <h4 className="text-lg font-bold text-white mb-2">{tr(locale, 'Aperitif', 'Aperitivo')}</h4>
-                  <p className="text-2xl font-serif text-champagne">{weeklyEvent.pricing.aperitif}</p>
+            <aside className="border border-[#050505] bg-[#050505] p-6 text-[#F6F1E7] lg:col-span-5">
+              <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-[#EAE3D5]">
+                CONCIERGE UFFICIALE
+              </p>
+              <h3 className="mt-1 font-display text-2xl font-bold uppercase text-[#F6F1E7]">
+                {tr(locale, 'Event Details & Booking', 'Dettagli & Prenotazione')}
+              </h3>
+              <div className="mt-4 space-y-3 border-y border-[#F6F1E7]/15 py-4 text-sm">
+                <div className="flex justify-between gap-3">
+                  <span className="text-[#C2B9AA]">{tr(locale, 'Day', 'Giorno')}</span>
+                  <span className="font-bold capitalize text-[#F6F1E7]">{weeklyEvent.day}</span>
                 </div>
-              )}
-              <div className="bg-white/[0.03] p-6 rounded-xl border border-white/10">
-                <h4 className="text-lg font-bold text-white mb-2">{tr(locale, 'Club Entry', 'Ingresso Club')}</h4>
-                <p className="text-2xl font-serif text-champagne">{weeklyEvent.pricing.club}</p>
-              </div>
-              <div className="bg-white/[0.03] p-6 rounded-xl border border-white/10 md:col-span-2">
-                <h4 className="text-lg font-bold text-white mb-2">{tr(locale, 'VIP Tables', 'Tavoli VIP')}</h4>
-                <p className="text-2xl font-serif text-champagne">{weeklyEvent.pricing.tables}</p>
-                <p className="text-sm text-white/50 mt-2">{tr(locale, 'Prices vary based on location and number of guests.', 'I prezzi variano in base alla posizione e al numero di persone.')}</p>
-              </div>
-            </div>
-            
-            <h2 className="text-3xl font-serif font-bold text-champagne mb-6 mt-12">
-              {tr(locale, 'Frequently Asked Questions', 'Domande Frequenti')}
-            </h2>
-            <div className="space-y-4">
-              {weeklyEvent.faqs.map((faq, index) => (
-                <div key={index} className="bg-white/[0.03] rounded-xl border border-white/10 p-6">
-                  <h3 className="text-lg font-semibold text-white mb-2">{isIt ? faq.q.it : faq.q.en}</h3>
-                  <p className="text-white/50">{isIt ? faq.a.it : faq.a.en}</p>
+                <div className="flex justify-between gap-3">
+                  <span className="text-[#C2B9AA]">{tr(locale, 'Target', 'Target')}</span>
+                  <span className="text-right font-semibold text-[#F6F1E7]">{weeklyEvent.target}</span>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          <aside className="bg-white/[0.03] rounded-xl p-8 border border-white/10 h-fit sticky top-24">
-            <h3 className="text-xl font-serif font-bold text-champagne mb-6 pb-4 border-b border-white/10">
-              {tr(locale, 'Event Details', 'Dettagli Evento')}
-            </h3>
-            <div className="space-y-6">
-              <div>
-                <p className="text-sm text-white/50 mb-1">{tr(locale, 'Day', 'Giorno')}</p>
-                <p className="text-white font-medium capitalize">{weeklyEvent.day}</p>
+                <div className="flex justify-between gap-3">
+                  <span className="text-[#C2B9AA]">{tr(locale, 'Music', 'Musica')}</span>
+                  <span className="text-right font-semibold text-[#F6F1E7]">
+                    {weeklyEvent.genres.join(', ')}
+                  </span>
+                </div>
               </div>
-              <div>
-                <p className="text-sm text-white/50 mb-1">{tr(locale, 'Target', 'Target')}</p>
-                <p className="text-white font-medium">{weeklyEvent.target}</p>
-              </div>
-              <div>
-                <p className="text-sm text-white/50 mb-1">{tr(locale, 'Music Genres', 'Generi Musicali')}</p>
-                <p className="text-white font-medium">{weeklyEvent.genres.join(', ')}</p>
-              </div>
-              <div className="pt-6 border-t border-white/10 space-y-3">
+              <div className="mt-5 space-y-3">
+                <a
+                  href={weeklyWaHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex min-h-[48px] w-full items-center justify-center gap-2 bg-[#25D366] px-6 py-3 text-sm font-extrabold uppercase tracking-wider text-[#050505] transition hover:bg-[#2EE472]"
+                >
+                  {tr(locale, 'Book on WhatsApp', 'Prenota su WhatsApp')}
+                </a>
                 {weeklyEvent.xceedLink && (
                   <a
                     href={weeklyEvent.xceedLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 w-full bg-champagne text-black px-6 py-3 rounded-xl font-bold hover:bg-white transition-colors"
+                    className="flex min-h-[48px] w-full items-center justify-center gap-2 bg-[#EAE3D5] px-6 py-3 text-sm font-extrabold uppercase tracking-wider text-[#050505] transition hover:bg-[#F6F1E7]"
                   >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" /></svg>
                     {tr(locale, 'Buy on Xceed', 'Acquista su Xceed')}
                   </a>
                 )}
-                <a
-                  href={weeklyWaHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full bg-[#25D366] text-[#050505] px-6 py-3 rounded-xl font-bold hover:bg-[#20bd5a] transition-colors"
-                >
-                  {tr(locale, 'Book on WhatsApp', 'Prenota su WhatsApp')}
-                </a>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        {/* CAPITOLO 03 — CHAMPAGNE #EAE3D5: Esperienza & Dress Code */}
+        <section className="border-b border-[#050505] bg-[#EAE3D5] py-10 text-[#050505]">
+          <div className="mx-auto max-w-5xl space-y-6 px-4 sm:px-6 lg:px-8">
+            <h2 className="font-display text-2xl font-bold uppercase text-[#050505] sm:text-3xl">
+              {tr(locale, 'The Experience', "L'Esperienza")}
+            </h2>
+            <p className="max-w-3xl text-base leading-relaxed text-[#24201B] sm:text-lg">
+              {description}
+            </p>
+            <div className="border border-[#050505] bg-[#FFFFFF] p-5 text-[#050505]">
+              <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-[#4A453E]">
+                {tr(locale, 'Dress Code', 'Dress Code')}
+              </h3>
+              <p className="mt-1.5 text-sm font-medium text-[#050505] sm:text-base">{dressCode}</p>
+            </div>
+          </div>
+        </section>
+
+        {/* CAPITOLO 04 — CARTA CALDA #F6F1E7: Domande Frequenti */}
+        <section className="bg-[#F6F1E7] py-10 text-[#050505]">
+          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+            <div className="border border-[#050505] bg-[#FFFFFF] p-5 sm:p-8">
+              <h2 className="font-display text-2xl font-bold uppercase text-[#050505] sm:text-3xl">
+                {tr(locale, 'Frequently Asked Questions', 'Domande Frequenti')}
+              </h2>
+              <div className="mt-5 divide-y divide-[#050505]/15 border-y border-[#050505]/15">
+                {weeklyEvent.faqs.map((faq, index) => (
+                  <details key={index} open={index < 2} className="group py-4">
+                    <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 marker:hidden">
+                      <h3 className="text-sm font-bold text-[#050505] sm:text-base">
+                        {isIt ? faq.q.it : faq.q.en}
+                      </h3>
+                      <span
+                        className="font-mono text-xl font-bold text-[#050505] transition-transform group-open:rotate-45"
+                        aria-hidden="true"
+                      >
+                        +
+                      </span>
+                    </summary>
+                    <p className="pt-2 text-sm leading-relaxed text-[#3D3830]">
+                      {isIt ? faq.a.it : faq.a.en}
+                    </p>
+                  </details>
+                ))}
               </div>
             </div>
-          </aside>
-        </div>
+          </div>
+        </section>
       </main>
     );
   }
@@ -1069,10 +1109,10 @@ export default async function EventPage({ params }: Props) {
         />
       )}
 
-      <main className="flex-1 flex flex-col w-full">
-        {/* Hero Section */}
+      <main data-layout-alt="alternativa-02-capitoli-colore-netto" className="flex-1 flex flex-col w-full bg-[#050505] text-[#F6F1E7]">
+        {/* CAPITOLO 01 — NOTTE #050505: Locandina 4:5 & Intestazione */}
         <section className="w-full border-b border-[#F6F1E7]/14 bg-[#050505]">
-          <div className="mx-auto max-w-7xl px-6 pt-6 md:px-12">
+          <div className="mx-auto max-w-7xl px-4 pt-6 sm:px-6 md:px-12">
             <div
               className={isHeroPortrait4x5 ? 'mx-auto max-w-[540px]' : 'mx-auto w-full'}
               style={isHeroPortrait4x5 ? undefined : { maxWidth: `${Math.min(960, heroDims.width)}px` }}
@@ -1106,130 +1146,224 @@ export default async function EventPage({ params }: Props) {
             </div>
           </div>
 
-          <div className="w-full px-6 py-8 md:px-12 max-w-7xl mx-auto">
-            <div className="flex flex-wrap items-center gap-3 mb-4">
-              <span className="border border-[#F6F1E7]/35 bg-[#0B0A09]/90 text-[#F6F1E7] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+          <div className="mx-auto w-full max-w-7xl px-4 py-7 sm:px-6 md:px-12">
+            <div className="mb-3 flex flex-wrap items-center gap-2.5">
+              <span className="bg-[#EAE3D5] px-3 py-1 font-mono text-xs font-extrabold uppercase tracking-wider text-[#050505]">
                 {venueName}
               </span>
-              <span className="text-white/70 text-sm font-medium">
-                {event.genre.map(g => formatEventGenre(locale, g)).join(', ')}
-              </span>
+              {event.genre.length > 0 && (
+                <span className="border border-[#F6F1E7]/25 bg-[#141311] px-3 py-1 text-xs font-semibold text-[#EAE3D5]">
+                  {event.genre.map(g => formatEventGenre(locale, g)).join(' · ')}
+                </span>
+              )}
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-4 tracking-tight">
+            <h1 className="font-display text-3xl font-bold uppercase tracking-tight text-[#F6F1E7] sm:text-4xl md:text-6xl">
               {title}
             </h1>
-            <time dateTime={event.dateISO} className="text-lg sm:text-xl text-white/70 font-light flex items-center gap-2">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+            <time dateTime={event.dateISO} className="mt-3 flex items-center gap-2 font-mono text-sm text-[#EAE3D5] sm:text-base">
+              <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
               {formattedDate}
             </time>
           </div>
         </section>
 
-        {/* Content Section */}
-        <section className="max-w-7xl mx-auto w-full px-6 md:px-12 py-12 grid grid-cols-1 lg:grid-cols-3 gap-12">
-          <div className="lg:col-span-2 max-w-none">
+        {/* CAPITOLO 02 — CARTA CALDA #F6F1E7: Prezzi Chiari, Informazioni Rapide & Prenotazione Immediata */}
+        <section className="w-full border-b border-[#050505] bg-[#F6F1E7] py-10 text-[#050505]">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 sm:px-6 md:px-12 lg:grid-cols-12 lg:items-start">
+            <div className="space-y-5 lg:col-span-7">
+              {Date.parse(event.endDateISO || event.dateISO) < Date.now() && (
+                <div
+                  data-past-event-conversion-banner
+                  className="not-prose border border-[#050505] bg-[#050505] p-5 text-[#F6F1E7]"
+                >
+                  <p className="text-sm font-semibold text-[#F6F1E7]">
+                    {getEventTemporalCopy(locale as LocaleCode, event.dateISO.slice(0, 10)).endedNotice}
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-3">
+                    <a
+                      href={currentEventWaHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex min-h-[44px] items-center justify-center bg-[#25D366] px-4 py-2.5 text-xs font-extrabold uppercase tracking-wider text-[#050505] transition hover:bg-[#2EE472]"
+                    >
+                      {getVenueUi35(locale as LocaleCode).bookWhatsApp} · {CONTACT.whatsapp.number}
+                    </a>
+                    <Link
+                      href={`${localePrefix(locale)}/events/tonight`}
+                      className="inline-flex min-h-[44px] items-center justify-center border border-[#F6F1E7]/40 bg-[#141311] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#F6F1E7] transition hover:border-[#F6F1E7]"
+                    >
+                      {getVenueUi35(locale as LocaleCode).tabTonight}
+                    </Link>
+                    <Link
+                      href={`${localePrefix(locale)}/vip-tables`}
+                      className="inline-flex min-h-[44px] items-center justify-center border border-[#F6F1E7]/25 bg-[#141311] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#C2B9AA] transition hover:text-[#F6F1E7]"
+                    >
+                      {getVenueUi35(locale as LocaleCode).labelPrices}
+                    </Link>
+                  </div>
+                </div>
+              )}
 
-            {Date.parse(event.endDateISO || event.dateISO) < Date.now() && (
-              <div
-                data-past-event-conversion-banner
-                className="not-prose mb-8 border border-[#F6F1E7]/25 bg-[#0B0A09] p-5"
-              >
-                <p className="text-sm font-semibold text-[#F6F1E7]">
-                  {getEventTemporalCopy(locale as LocaleCode, event.dateISO.slice(0, 10)).endedNotice}
+              {/* Sintesi Rapida su Carta Bianca */}
+              <div className="not-prose border border-[#050505] bg-[#FFFFFF] p-5 text-left text-[#050505]">
+                <p className="font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-[#4A453E]">
+                  {eventText(locale, 'Quick Answer', 'Sintesi serata & prezzi', 'Resposta rapida')}
                 </p>
-                <div className="mt-4 flex flex-wrap gap-3">
-                  <a
-                    href={currentEventWaHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center bg-[#25D366] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#050505] transition hover:bg-[#2EE472]"
-                  >
-                    {getVenueUi35(locale as LocaleCode).bookWhatsApp} · {CONTACT.whatsapp.number}
-                  </a>
-                  <Link
-                    href={`${localePrefix(locale)}/events/tonight`}
-                    className="inline-flex items-center justify-center border border-[#F6F1E7]/40 bg-[#050505] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#F6F1E7] transition hover:border-[#F6F1E7]"
-                  >
-                    {getVenueUi35(locale as LocaleCode).tabTonight}
-                  </Link>
-                  <Link
-                    href={`${localePrefix(locale)}/vip-tables`}
-                    className="inline-flex items-center justify-center border border-[#F6F1E7]/25 bg-[#050505] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#C2B9AA] transition hover:text-[#F6F1E7]"
-                  >
-                    {getVenueUi35(locale as LocaleCode).labelPrices}
-                  </Link>
+                <p className="mt-2 font-sans text-sm leading-relaxed text-[#24201B] sm:text-base">
+                  {localizedEventContent?.seoSummary || buildEventQuickAnswer({ locale, title, venueName, formattedDate, pricePhrase })}
+                </p>
+              </div>
+
+              {/* Scheda Pratica 3 Box su Champagne #EAE3D5 */}
+              <div className="not-prose grid grid-cols-1 gap-3 sm:grid-cols-3">
+                <div className="border border-[#050505]/20 bg-[#EAE3D5] p-4 text-[#050505]">
+                  <h2 className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#4A453E]">
+                    {eventText(locale, 'Dress Code', 'Dress Code', 'Código de vestimenta')}
+                  </h2>
+                  <p className="mt-1.5 font-sans text-xs font-semibold text-[#050505] sm:text-sm">
+                    {eventBatchValues?.dressCode || eventText(locale, 'Smart elegant. No sneakers or shorts.', 'Smart elegant. Niente sneakers o shorts.', 'Elegante e sofisticado. Sem tênis ou bermudas.')}
+                  </p>
+                </div>
+                <div className="border border-[#050505]/20 bg-[#EAE3D5] p-4 text-[#050505]">
+                  <h2 className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#4A453E]">
+                    {eventText(locale, 'Minimum Age', 'Età Minima', 'Idade mínima')}
+                  </h2>
+                  <p className="mt-1.5 font-sans text-xs font-semibold text-[#050505] sm:text-sm">
+                    {eventBatchProfile?.minAge ?? 18}+ {eventText(locale, '(ID required)', '(documento richiesto)', '(documento obrigatório)')}
+                  </p>
+                </div>
+                <div className="border border-[#050505]/20 bg-[#EAE3D5] p-4 text-[#050505]">
+                  <h2 className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#4A453E]">
+                    {eventText(locale, 'Location', 'Indirizzo', 'Localização')}
+                  </h2>
+                  <p className="mt-1.5 font-sans text-xs font-semibold text-[#050505] sm:text-sm">
+                    {String(eventBatchValues?.address || `${venue.address.streetAddress}, ${eventText(locale, 'Milan', 'Milano', 'Milão')}`)}
+                  </p>
                 </div>
               </div>
-            )}
 
-            {/* AI Trafiletto */}
-            <div className="not-prose mb-8 p-5 rounded-xl border border-champagne/20 bg-champagne/[0.04] text-left">
-              <p className="font-sans text-champagne/60 text-[9px] tracking-[0.3em] uppercase mb-3">{eventText(locale, 'Quick Answer', 'Risposta rapida', 'Resposta rapida')}</p>
-              <p className="font-sans text-white/70 text-sm leading-relaxed">
-                {localizedEventContent?.seoSummary || buildEventQuickAnswer({ locale, title, venueName, formattedDate, pricePhrase })}
-              </p>
+              {localizedEventContent?.bookingIntro && (
+                <section className="border border-[#050505] bg-[#FFFFFF] p-5 text-[#050505]" data-event-section="booking-intro">
+                  <h2 className="font-display text-xl font-bold text-[#050505] sm:text-2xl">
+                    {eventText(locale, 'Tickets, admission and WhatsApp', 'Prenotazioni, biglietti e WhatsApp', 'Bilhetes, entrada e WhatsApp')}
+                  </h2>
+                  <p className="mt-2 text-sm leading-relaxed text-[#24201B] sm:text-base">
+                    {localizedEventContent.bookingIntro}
+                  </p>
+                  <div className="not-prose mt-4 flex flex-col gap-3 bg-[#050505] p-3 sm:flex-row">
+                    <a
+                      href={localizedEventContent.affiliateUrl}
+                      target="_blank"
+                      rel="noopener noreferrer sponsored"
+                      data-analytics-source="event_intro_xceed"
+                      className="flex min-h-[46px] flex-1 items-center justify-center bg-[#EAE3D5] px-5 py-3 text-center text-xs font-extrabold uppercase tracking-[0.12em] text-[#050505] transition-colors hover:bg-[#F6F1E7]"
+                    >
+                      {eventText(locale, 'Buy on Xceed', 'Acquista su Xceed', 'Comprar na Xceed')}
+                    </a>
+                    <a
+                      href={currentEventWaHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-analytics-source="event_intro_whatsapp"
+                      className="flex min-h-[46px] flex-1 items-center justify-center bg-[#25D366] px-5 py-3 text-center text-xs font-extrabold uppercase tracking-[0.12em] text-[#050505] transition-colors hover:bg-[#2EE472]"
+                    >
+                      {eventText(locale, 'Confirm on WhatsApp', 'Conferma su WhatsApp', 'Confirmar no WhatsApp')} {CONTACT.whatsapp.number}
+                    </a>
+                  </div>
+                </section>
+              )}
             </div>
 
-            {/* Tags */}
-            <div className="not-prose flex flex-wrap gap-2 mb-8">
+            {/* Plinto Notte #050505: Dettagli Ingresso, Xceed & Modulo Prenotazione */}
+            <aside id="booking" className="border border-[#050505] bg-[#050505] p-6 text-[#F6F1E7] lg:col-span-5 lg:sticky lg:top-24">
+              <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-[#EAE3D5]">
+                01 · PRENOTAZIONE DIRETTA
+              </p>
+              <h2 className="mt-1 border-b border-[#F6F1E7]/15 pb-4 font-display text-2xl font-bold uppercase text-[#F6F1E7]">
+                {eventText(locale, 'Entry Details', 'Dettagli Ingresso & Tavoli', 'Detalhes de entrada')}
+              </h2>
+
+              <div className="my-5 space-y-3 text-sm tabular-nums">
+                <div className="flex items-baseline justify-between border border-[#F6F1E7]/14 bg-[#141311] px-4 py-3">
+                  <span className="text-[#C2B9AA]">{eventText(locale, 'Entry', 'Ingresso', 'Entrada')}</span>
+                  <span className="font-display text-2xl font-extrabold text-[#F6F1E7]">
+                    {event.pricing.entry === null
+                      ? eventText(locale, 'On request', 'Su richiesta', 'Sob consulta')
+                      : event.pricing.entry === 0
+                        ? eventText(locale, 'Free', 'Gratis', 'Grátis')
+                        : formattedPrice}
+                  </span>
+                </div>
+                {event.pricing.tableMinSpend && (
+                  <div className="flex items-baseline justify-between border border-[#F6F1E7]/14 bg-[#141311] px-4 py-3">
+                    <span className="text-[#C2B9AA]">{eventText(locale, 'Tables from', 'Tavoli VIP da', 'Mesas a partir de')}</span>
+                    <span className="font-display text-2xl font-extrabold text-[#EAE3D5]">
+                      {new Intl.NumberFormat(getIntlLocale(locale), { style: 'currency', currency: event.pricing.currency, maximumFractionDigits: 0 }).format(event.pricing.tableMinSpend)}
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              {event.xceedUrl && (
+                <a
+                  href={event.xceedUrl}
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className="mb-4 flex min-h-[48px] w-full items-center justify-center gap-2 bg-[#EAE3D5] px-6 py-3.5 font-sans text-xs font-extrabold uppercase tracking-[0.14em] text-[#050505] transition-colors hover:bg-[#F6F1E7]"
+                >
+                  <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" /></svg>
+                  {eventText(locale, 'Buy on Xceed', 'Acquista su Xceed', 'Comprar no Xceed')}
+                </a>
+              )}
+
+              <BookingForm
+                lang={locale}
+                prefilledDate={event.dateISO.split('T')[0]}
+                venueName={venueName}
+                eventName={title}
+              />
+
+              <div className="mt-5 border-t border-[#F6F1E7]/14 pt-4 text-xs">
+                <p className="font-mono uppercase tracking-wider text-[#C2B9AA]">{eventText(locale, 'Location', 'Location', 'Localização')}</p>
+                <p className="mt-1 font-bold text-[#F6F1E7]">{venueName}</p>
+                <p className="text-[#C2B9AA]">{venue.address.streetAddress}, {locale === 'pt' ? 'Milão' : venue.address.addressLocality}</p>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        {/* CAPITOLO 03 — NOTTE #050505: Approfondimento Evento, Galleria Swipe & Contenuti Editoriali */}
+        <section className="mx-auto w-full max-w-5xl px-4 py-12 sm:px-6 md:px-12">
+          <div className="max-w-none">
+            <div className="not-prose mb-6 flex flex-wrap gap-2">
               {[
                 venueName,
                 ...event.genre.map(g => formatEventGenre(locale, g)),
                 eventText(locale, 'Milan Events', 'Serate Milano', 'Eventos em Milão'),
                 eventText(locale, 'VIP Tables', 'Tavoli VIP', 'Mesas VIP'),
-                eventText(locale, 'Book Now', 'Prenotazione', 'Reservar agora'),
               ].map(tag => (
-                <span key={tag} className="px-3 py-1.5 rounded-full border border-white/10 text-white/40 text-xs font-sans tracking-wider">
+                <span key={tag} className="border border-[#F6F1E7]/16 bg-[#141311] px-3 py-1 text-xs font-semibold tracking-wide text-[#C2B9AA]">
                   {tag}
                 </span>
               ))}
             </div>
 
-            <h2 className="text-2xl font-serif font-bold text-champagne mb-4">
-              {eventText(locale, 'About the event', 'Informazioni sull\'evento', 'Sobre o evento')}
+            <h2 className="mb-4 font-display text-2xl font-bold text-[#EAE3D5] sm:text-3xl">
+              {eventText(locale, 'About the event', "Informazioni sull'evento", 'Sobre o evento')}
             </h2>
-            <p className="text-lg text-white/70 leading-relaxed">
+            <p className="text-base leading-relaxed text-[#DED8CC] sm:text-lg">
               {eventIntroduction}
             </p>
-
-            {localizedEventContent?.bookingIntro && (
-              <section className="mt-8 rounded-xl border border-champagne/30 bg-champagne/[0.06] p-6" data-event-section="booking-intro">
-                <h2 className="text-2xl font-serif font-bold text-champagne mb-3">
-                  {eventText(locale, 'Tickets, admission and WhatsApp', 'Prenotazioni, biglietti e WhatsApp', 'Bilhetes, entrada e WhatsApp')}
-                </h2>
-                <p className="text-white/70 leading-relaxed">{localizedEventContent.bookingIntro}</p>
-                <div className="mt-5 flex flex-col gap-3 sm:flex-row not-prose">
-                  <a
-                    href={localizedEventContent.affiliateUrl}
-                    target="_blank"
-                    rel="noopener noreferrer sponsored"
-                    data-analytics-source="event_intro_xceed"
-                    className="flex-1 bg-champagne px-5 py-3 text-center text-sm font-bold uppercase tracking-[0.12em] text-black transition-colors hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
-                  >
-                    {eventText(locale, 'Buy on Xceed', 'Acquista su Xceed', 'Comprar na Xceed')}
-                  </a>
-                  <a
-                    href={currentEventWaHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-analytics-source="event_intro_whatsapp"
-                    className="flex-1 border border-champagne/60 px-5 py-3 text-center text-sm font-bold uppercase tracking-[0.12em] text-champagne transition-colors hover:bg-champagne/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-champagne"
-                  >
-                    {eventText(locale, 'Confirm on WhatsApp', 'Conferma su WhatsApp', 'Confirmar no WhatsApp')} {CONTACT.whatsapp.number}
-                  </a>
-                </div>
-              </section>
-            )}
 
             {leadPoster && (() => {
               const leadDims = getPublicImageDimensions(leadPoster.src, { width: 1080, height: 1350 });
               const isLeadPortrait = leadDims.height > leadDims.width;
               return (
                 <section className="mt-8" data-event-section="lead-poster">
-                  <h2 className="text-2xl font-serif font-bold text-champagne mb-4">{leadPoster.title}</h2>
+                  <h2 className="mb-4 font-display text-2xl font-bold text-[#EAE3D5]">{leadPoster.title}</h2>
                   <figure className="not-prose">
                     <div
-                      className={`relative w-full overflow-hidden border border-white/10 bg-white/[0.03] ${leadPoster.aspect === 'five-four' ? 'aspect-[5/4]' : isLeadPortrait ? 'mx-auto aspect-[4/5] max-w-[540px]' : ''}`}
+                      className={`relative w-full overflow-hidden border border-[#F6F1E7]/16 bg-[#141311] ${leadPoster.aspect === 'five-four' ? 'aspect-[5/4]' : isLeadPortrait ? 'mx-auto aspect-[4/5] max-w-[540px]' : ''}`}
                       style={leadPoster.aspect === 'five-four' || isLeadPortrait ? undefined : { aspectRatio: `${leadDims.width} / ${leadDims.height}` }}
                     >
                       <Image
@@ -1242,16 +1376,16 @@ export default async function EventPage({ params }: Props) {
                         className="object-contain"
                       />
                     </div>
-                    {leadPoster.description ? <figcaption className="mt-3 text-sm leading-relaxed text-white/55">{leadPoster.description}</figcaption> : null}
+                    {leadPoster.description ? <figcaption className="mt-3 text-sm leading-relaxed text-[#C2B9AA]">{leadPoster.description}</figcaption> : null}
                   </figure>
                 </section>
               );
             })()}
 
             {performer && (
-              <div className="mt-8 p-6 bg-white/[0.03] rounded-lg border border-white/10">
-                <h3 className="text-xl font-serif font-bold text-champagne mb-2">{eventText(locale, 'Lineup', 'Lineup', 'Line-up')}: {performer.name}</h3>
-                <p className="text-white/50">
+              <div className="mt-8 border border-[#F6F1E7]/16 bg-[#141311] p-6">
+                <h3 className="font-display text-xl font-bold text-[#EAE3D5]">{eventText(locale, 'Lineup', 'Lineup', 'Line-up')}: {performer.name}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-[#C2B9AA]">
                   {getLocalizedText(performer.localizedContent.bio, locale)}
                 </p>
               </div>
@@ -1259,50 +1393,22 @@ export default async function EventPage({ params }: Props) {
 
             {!localizedEventContent?.programmeBeforeSections && (
               <>
-                {/* H2: Venue Info */}
-                <h2 className="text-2xl font-serif font-bold text-champagne mt-12 mb-4">
-              {!localizedEventContent && venueHeading.prefix ? `${venueHeading.prefix} ` : null}
-              <Link href={venueHref} className="hover:text-white transition-colors underline decoration-champagne/40 underline-offset-4">
-                {venueName}
-              </Link>
-              {!localizedEventContent ? venueHeading.suffix || null : null}
+                <h2 className="mb-4 mt-10 font-display text-2xl font-bold text-[#EAE3D5]">
+                  {!localizedEventContent && venueHeading.prefix ? `${venueHeading.prefix} ` : null}
+                  <Link href={venueHref} className="underline decoration-[#EAE3D5]/40 underline-offset-4 transition-colors hover:text-[#F6F1E7]">
+                    {venueName}
+                  </Link>
+                  {!localizedEventContent ? venueHeading.suffix || null : null}
                 </h2>
-                <p className="text-white/70 leading-relaxed">
+                <p className="leading-relaxed text-[#DED8CC]">
                   {localizedEventContent?.venueDescription || buildVenueDescription(locale, venueName, venue.address.streetAddress)}
                 </p>
-                <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-4 not-prose">
+                <div className="not-prose mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3 sm:grid sm:grid-cols-3 sm:overflow-visible sm:pb-0">
                   {buildVenueGalleryImages(venue, title, locale).map((img, i) => (
-                    <div key={i} className="relative aspect-[4/5] w-full rounded-xl overflow-hidden border border-white/8">
-                      <Image src={img.src} alt={img.alt} title={img.alt} fill quality={92} className="object-cover" sizes="(max-width: 768px) 50vw, 33vw" />
+                    <div key={i} className="relative aspect-[4/5] w-[72vw] max-w-[280px] shrink-0 snap-start overflow-hidden border border-[#F6F1E7]/16 bg-[#141311] sm:w-auto sm:max-w-none">
+                      <Image src={img.src} alt={img.alt} title={img.alt} fill quality={92} className="object-cover" sizes="(max-width: 768px) 75vw, 33vw" />
                     </div>
                   ))}
-                </div>
-
-                {/* H2: Practical Info */}
-                <h2 className="text-2xl font-serif font-bold text-champagne mt-12 mb-4">
-                  {eventText(locale, 'Practical Information', 'Informazioni Pratiche', 'Informações práticas')}
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 not-prose">
-                  <div className="p-4 rounded-xl border border-white/8 bg-white/[0.02]">
-                    <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-2">
-                      {eventText(locale, 'Dress Code', 'Dress Code', 'Código de vestimenta')}
-                    </h3>
-                    <p className="font-sans text-white/50 text-sm">
-                      {eventBatchValues?.dressCode || eventText(locale, 'Smart elegant. No sneakers or shorts.', 'Smart elegant. Niente sneakers o shorts.', 'Elegante e sofisticado. Sem tênis ou bermudas.')}
-                    </p>
-                  </div>
-                  <div className="p-4 rounded-xl border border-white/8 bg-white/[0.02]">
-                    <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-2">
-                      {eventText(locale, 'Minimum Age', 'Età Minima', 'Idade mínima')}
-                    </h3>
-                    <p className="font-sans text-white/50 text-sm">{eventBatchProfile?.minAge ?? 18}+ {eventText(locale, '(ID required)', '(documento richiesto)', '(documento obrigatório)')}</p>
-                  </div>
-                  <div className="p-4 rounded-xl border border-white/8 bg-white/[0.02]">
-                    <h3 className="font-sans text-champagne text-xs font-bold tracking-widest uppercase mb-2">
-                      {eventText(locale, 'Getting There', 'Come Arrivare', 'Como chegar')}
-                    </h3>
-                    <p className="font-sans text-white/50 text-sm">{String(eventBatchValues?.address || `${venue.address.streetAddress}, ${eventText(locale, 'Milan', 'Milano', 'Milão')}`)}</p>
-                  </div>
                 </div>
               </>
             )}
@@ -1319,59 +1425,6 @@ export default async function EventPage({ params }: Props) {
 
             <MoreVenueEvents items={moreVenueEvents} locale={locale} venueName={venueName} />
           </div>
-
-          {/* Sidebar / Ticket Info */}
-          <aside id="booking" className="bg-white/[0.03] rounded-xl p-8 border border-white/10 h-fit sticky top-24">
-            <h3 className="text-xl font-serif font-bold text-champagne mb-6 pb-4 border-b border-white/10">
-              {eventText(locale, 'Entry Details', 'Dettagli Ingresso', 'Detalhes de entrada')}
-            </h3>
-            
-            <div className="space-y-4 mb-8">
-              <div className="flex justify-between items-center">
-                <span className="text-white/50">{eventText(locale, 'Entry', 'Ingresso', 'Entrada')}</span>
-                <span className="text-white font-bold text-xl">
-                  {event.pricing.entry === null
-                    ? eventText(locale, 'On request', 'Su richiesta', 'Sob consulta')
-                    : event.pricing.entry === 0
-                      ? eventText(locale, 'Free', 'Gratis', 'Grátis')
-                      : formattedPrice}
-                </span>
-              </div>
-              {event.pricing.tableMinSpend && (
-                <div className="flex justify-between items-center">
-                  <span className="text-white/50">{eventText(locale, 'Tables from', 'Tavoli da', 'Mesas a partir de')}</span>
-                  <span className="text-white font-medium">
-                    {new Intl.NumberFormat(getIntlLocale(locale), { style: 'currency', currency: event.pricing.currency, maximumFractionDigits: 0 }).format(event.pricing.tableMinSpend)}
-                  </span>
-                </div>
-              )}
-            </div>
-
-            {event.xceedUrl && (
-              <a
-                href={event.xceedUrl}
-                target="_blank"
-                rel="noopener noreferrer sponsored"
-                className="flex items-center justify-center gap-2 w-full bg-champagne text-black px-6 py-4 font-sans font-bold text-sm tracking-[0.15em] uppercase hover:bg-white transition-colors duration-300 mb-4"
-              >
-                <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" /></svg>
-                {eventText(locale, 'Buy on Xceed', 'Acquista su Xceed', 'Comprar no Xceed')}
-              </a>
-            )}
-
-            <BookingForm
-              lang={locale}
-              prefilledDate={event.dateISO.split('T')[0]}
-              venueName={venueName}
-              eventName={title}
-            />
-
-            <div className="mt-6 pt-6 border-t border-white/10">
-              <p className="text-sm text-white/50 mb-1">{eventText(locale, 'Location', 'Location', 'Localização')}</p>
-              <p className="text-white font-medium">{venueName}</p>
-              <p className="text-sm text-white/40">{venue.address.streetAddress}, {locale === 'pt' ? 'Milão' : venue.address.addressLocality}</p>
-            </div>
-          </aside>
         </section>
 
         {/* Discovery gallery: editorial and partner event inventory. */}

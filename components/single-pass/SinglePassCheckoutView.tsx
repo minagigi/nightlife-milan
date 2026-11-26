@@ -6,6 +6,7 @@ import {
   AlertTriangle,
   ArrowRight,
   Check,
+  ChevronDown,
   Info,
   Lock,
   Minus,
@@ -202,6 +203,7 @@ export default function SinglePassCheckoutView({
   const [whatsapp, setWhatsapp] = useState('');
   const [email, setEmail] = useState('');
   const [createAccount, setCreateAccount] = useState(false);
+  const [extraOpen, setExtraOpen] = useState(false);
   const [password, setPassword] = useState('');
   const [spokenLanguages, setSpokenLanguages] = useState<string[]>([
     locale === 'it' ? 'Italiano' : 'English',
@@ -222,7 +224,7 @@ export default function SinglePassCheckoutView({
   const activeFeePct = Math.round(activeFeeRate * 100);
   const headerFeeTag =
     activeFeePct > 0
-      ? `BOOKING FEE ${activeFeePct}%`
+      ? `CONCIERGE & TRANSACTION FEES ${activeFeePct}%`
       : 'OFFICIAL PARTNER DIRECT';
 
   useEffect(() => {
@@ -485,6 +487,19 @@ export default function SinglePassCheckoutView({
       errorSummaryRef.current?.focus();
       return;
     }
+    if (field === 'password') {
+      setExtraOpen(true);
+      setTimeout(() => {
+        const pwEl = typeof document !== 'undefined' ? document.getElementById(FIELD_DOM_IDS.password) : null;
+        if (pwEl) {
+          pwEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          if (typeof (pwEl as HTMLElement).focus === 'function') {
+            (pwEl as HTMLElement).focus();
+          }
+        }
+      }, 30);
+      return;
+    }
     const targetId = FIELD_DOM_IDS[field];
     const el = typeof document !== 'undefined' ? document.getElementById(targetId) : null;
     if (el) {
@@ -581,6 +596,10 @@ export default function SinglePassCheckoutView({
     setFieldErrors(errors);
     setSuggestedVenues(venues);
 
+    if (errors.password) {
+      setExtraOpen(true);
+    }
+
     if (Object.keys(errors).length > 0) {
       focusSummaryBanner();
       return;
@@ -647,6 +666,10 @@ export default function SinglePassCheckoutView({
           }
         } else if (data?.details?.field && data.code) {
           mappedErrors[data.details.field] = mapApiCodeToMessage(data.code);
+        }
+
+        if (mappedErrors.password) {
+          setExtraOpen(true);
         }
 
         if (Object.keys(mappedErrors).length > 0) {
@@ -737,430 +760,599 @@ export default function SinglePassCheckoutView({
     return [];
   }, [suggestedVenues, liveAgeCheck]);
 
+  const isOptionalDrawerOpen = extraOpen || createAccount || Boolean(fieldErrors.password);
+
   if (!mounted && !resumeOrderId) {
     return (
-      <section className="mx-auto max-w-6xl px-4 py-16 text-center text-base font-medium text-[#4F4D48]">
+      <section className="bg-[#050505] px-4 py-16 text-center text-base font-medium text-[#C2B9AA]">
         Loading...
       </section>
     );
   }
 
   return (
-    <section data-ui="checkout-flow" className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
-      <div className="mb-8 border-b border-[#0A0A0C]/18 pb-6">
-        <h1 className="font-display text-4xl font-extrabold uppercase tracking-tight text-[#0A0A0C] sm:text-5xl">
-          {copy.checkoutTitle}
-        </h1>
-        <p className="mt-2 max-w-[48ch] text-base leading-relaxed text-[#4F4D48]">
-          {copy.checkoutSubtitle}
-        </p>
-        <p className="mt-2 text-[13px] font-semibold text-[#4F4D48]">
-          Nightlife Milan · {headerFeeTag}
-        </p>
-
-        {/* 2-Step Progress Strip */}
-        <div className="mt-5 flex flex-wrap gap-2.5 text-sm">
-          <span
-            className={`px-4 py-2 font-bold tabular-nums ${
-              !paymentSession
-                ? 'bg-[#0A0A0C] text-[#FFFFFF]'
-                : 'border border-[#0A0A0C]/20 bg-[#FFFFFF] text-[#4F4D48]'
-            }`}
-          >
-            {copy.stepDetailsLabel}
-          </span>
-          <span
-            className={`px-4 py-2 font-bold tabular-nums ${
-              paymentSession
-                ? 'bg-[#0A0A0C] text-[#FFFFFF]'
-                : 'border border-[#0A0A0C]/20 bg-[#FFFFFF] text-[#4F4D48]'
-            }`}
-          >
-            {copy.stepPaymentLabel}
-          </span>
-        </div>
-
-        {(cancelled || resumeOrderId) && (
-          <div className="mt-4 border border-[#0A0A0C]/30 bg-[#FFFFFF] p-4 text-sm font-medium text-[#0A0A0C]">
-            {cancelled
-              ? isIt
-                ? `Pagamento annullato per l’ordine ${resumeOrderId || ''}. Puoi completarlo subito qui sotto.`
-                : `Payment was cancelled for order ${resumeOrderId || ''}. You can complete it below.`
-              : isIt
-                ? `Riprendi il pagamento sicuro direttamente su Nightlife Milan per l’ordine ${resumeOrderId}.`
-                : `Completing on-site secure payment for order ${resumeOrderId}.`}
-          </div>
-        )}
-      </div>
-
-      {paymentSession ? (
-        <div className="grid gap-8 lg:grid-cols-12">
-          <div className="lg:col-span-7">
-            <EmbeddedPaymentForm
-              publishableKey={paymentSession.publishableKey}
-              clientSecret={paymentSession.clientSecret}
-              orderId={paymentSession.orderId}
-              locale={locale}
-              fullName={paymentSession.fullName}
-              email={paymentSession.email}
-              phone={paymentSession.phone}
-              billingTotalDisplay={formatMinorCurrency(
-                paymentSession.presentmentTotalMinor,
-                paymentSession.presentmentCurrency,
-                locale,
-              )}
-              eurTotalDisplay={formatEurFromCents(paymentSession.totalEurCents, locale)}
-              showEurReference={paymentSession.presentmentCurrency !== 'EUR'}
-              onBack={resumeOrderId ? undefined : () => setPaymentSession(null)}
-              clearCart={clearCart}
-            />
-          </div>
-          <aside className="lg:col-span-5">
-            <div className="space-y-4 border border-[#0A0A0C]/16 bg-[#FFFFFF] p-6">
-              <h2 className="font-display text-2xl font-bold uppercase text-[#0A0A0C]">
-                {copy.orderIdLabel}: {paymentSession.orderId}
-              </h2>
-              <div className="space-y-1 text-sm text-[#4F4D48]">
-                <p>
-                  <strong className="text-[#0A0A0C]">{paymentSession.fullName}</strong>
-                </p>
-                <p>{paymentSession.email}</p>
-                <p className="tabular-nums font-semibold text-[#0A0A0C]">{paymentSession.phone}</p>
-              </div>
-              <div className="space-y-2 border-t border-[#0A0A0C]/14 pt-3 text-sm tabular-nums">
-                <div className="flex justify-between text-[#4F4D48]">
-                  <span>{copy.basePriceLabel}</span>
-                  <span>{formatEurFromCents(paymentSession.subtotalBaseCents, locale)}</span>
-                </div>
-                {paymentSession.feeCents > 0 && (
-                  <div className="flex justify-between text-[#0A0A0C]">
-                    <span>
-                      {formatFeeLabel35(
-                        locale,
-                        paymentSession.feeRate,
-                        paymentSession.hasMixedFeeRates,
-                      )}
-                    </span>
-                    <span>+{formatEurFromCents(paymentSession.feeCents, locale)}</span>
-                  </div>
-                )}
-                <div className="flex justify-between border-t border-[#0A0A0C]/16 pt-2 text-base font-extrabold text-[#0A0A0C]">
-                  <span>{copy.totalLabel} (EUR)</span>
-                  <span>{formatEurFromCents(paymentSession.totalEurCents, locale)}</span>
-                </div>
-                {paymentSession.presentmentCurrency !== 'EUR' && (
-                  <>
-                    <div className="flex justify-between bg-[#EDEBE6] p-3 font-extrabold text-[#0A0A0C]">
-                      <span>{paymentSession.presentmentCurrency}</span>
-                      <span>
-                        {formatMinorCurrency(
-                          paymentSession.presentmentTotalMinor,
-                          paymentSession.presentmentCurrency,
-                          locale,
-                        )}
-                      </span>
-                    </div>
-                    <p className="text-right text-[13px] text-[#4F4D48]">
-                      FX: 1 EUR = {paymentSession.fxRate.toFixed(4)}{' '}
-                      {paymentSession.presentmentCurrency}
-                    </p>
-                  </>
-                )}
-              </div>
-            </div>
-          </aside>
-        </div>
-      ) : resumeOrderId && !paymentSession ? (
-        generalError ? (
-          <div
-            role="alert"
-            aria-live="assertive"
-            className="border-2 border-[#D9381E] bg-[#FFFFFF] p-10 text-center"
-          >
-            <AlertCircle className="mx-auto h-10 w-10 text-[#D9381E]" aria-hidden="true" />
-            <h2 className="mt-4 font-display text-3xl font-bold uppercase text-[#0A0A0C]">
-              {isIt ? `Ordine ${resumeOrderId}` : `Order ${resumeOrderId}`}
-            </h2>
-            <p className="mx-auto mt-3 max-w-lg text-base font-medium text-[#0A0A0C]">
-              {generalError}
+    <section data-ui="checkout-flow" data-cart-variant="variante-1-carta-calda" className="w-full">
+      {/* CAPITOLO 01 — NOTTE #050505: Testata & Articoli Selezionati */}
+      <div className="bg-[#050505] text-[#F6F1E7]">
+        <div className="mx-auto max-w-4xl px-4 pb-8 pt-8 sm:px-6 lg:px-8">
+          <div className="border-b border-[#F6F1E7]/16 pb-6">
+            <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-[#EAE3D5]">
+              NIGHTLIFE MILAN · {headerFeeTag}
             </p>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-              <Link
-                href={`${lp}/account`}
-                locale={locale}
-                className="inline-flex min-h-[48px] items-center justify-center bg-[#0A0A0C] px-6 py-3 text-sm font-bold text-[#FFFFFF] transition hover:bg-[#18181C]"
+            <h1 className="mt-2 font-display text-3xl font-extrabold uppercase tracking-tight text-[#F6F1E7] sm:text-5xl">
+              {copy.checkoutTitle}
+            </h1>
+            <p className="mt-2 max-w-[54ch] text-sm leading-relaxed text-[#C2B9AA] sm:text-base">
+              {copy.checkoutSubtitle}
+            </p>
+
+            {/* 2-Step Progress Strip */}
+            <div className="mt-5 flex flex-wrap gap-2.5 text-xs sm:text-sm">
+              <span
+                className={`inline-flex min-h-[38px] items-center px-4 py-2 font-extrabold uppercase tracking-wider tabular-nums ${
+                  !paymentSession
+                    ? 'bg-[#25D366] text-[#050505]'
+                    : 'border border-[#F6F1E7]/25 bg-[#141311] text-[#C2B9AA]'
+                }`}
               >
-                {copy.navAccountLabel || (isIt ? 'Area Riservata' : 'Reserved Area')}
-              </Link>
+                {copy.stepDetailsLabel}
+              </span>
+              <span
+                className={`inline-flex min-h-[38px] items-center px-4 py-2 font-extrabold uppercase tracking-wider tabular-nums ${
+                  paymentSession
+                    ? 'bg-[#25D366] text-[#050505]'
+                    : 'border border-[#F6F1E7]/25 bg-[#141311] text-[#C2B9AA]'
+                }`}
+              >
+                {copy.stepPaymentLabel}
+              </span>
+            </div>
+
+            {(cancelled || resumeOrderId) && (
+              <div className="mt-4 border border-[#EAE3D5]/35 bg-[#141311] p-4 text-sm font-medium text-[#F6F1E7]">
+                {cancelled
+                  ? isIt
+                    ? `Pagamento annullato per l’ordine ${resumeOrderId || ''}. Puoi completarlo subito qui sotto.`
+                    : `Payment was cancelled for order ${resumeOrderId || ''}. You can complete it below.`
+                  : isIt
+                    ? `Riprendi il pagamento sicuro direttamente su Nightlife Milan per l’ordine ${resumeOrderId}.`
+                    : `Completing on-site secure payment for order ${resumeOrderId}.`}
+              </div>
+            )}
+          </div>
+
+          {!paymentSession && !resumeOrderId && items.length === 0 && (
+            <div className="mt-8 border border-[#F6F1E7]/18 bg-[#141311] p-8 text-center sm:p-12">
+              <ShoppingBag className="mx-auto h-10 w-10 text-[#EAE3D5]" />
+              <h2 className="mt-4 font-display text-3xl font-bold uppercase text-[#F6F1E7]">
+                {copy.drawerEmptyTitle}
+              </h2>
+              <p className="mx-auto mt-2 max-w-md text-base text-[#C2B9AA]">{copy.drawerEmptyBody}</p>
               <Link
                 href={`${lp}/single-pass`}
                 locale={locale}
-                className="inline-flex min-h-[48px] items-center justify-center border border-[#0A0A0C]/30 bg-[#FFFFFF] px-6 py-3 text-sm font-bold text-[#0A0A0C] transition hover:border-[#0A0A0C]"
+                className="mt-6 inline-flex min-h-[48px] items-center justify-center bg-[#25D366] px-6 py-3 text-sm font-extrabold uppercase tracking-wider text-[#050505] transition hover:bg-[#2EE472]"
               >
                 {copy.drawerExploreCta}
               </Link>
             </div>
-          </div>
-        ) : (
-          <div
-            role="status"
-            aria-live="polite"
-            className="border border-[#0A0A0C]/18 bg-[#FFFFFF] p-10 text-center"
-          >
-            <ShieldCheck className="mx-auto h-10 w-10 text-[#0A0A0C]" aria-hidden="true" />
-            <h2 className="mt-4 font-display text-3xl font-bold uppercase text-[#0A0A0C]">
-              {isIt ? `Verifica ordine ${resumeOrderId}` : `Verifying order ${resumeOrderId}`}
-            </h2>
-            <p className="mx-auto mt-2 max-w-md text-base text-[#4F4D48]">
-              {isIt
-                ? 'Caricamento della sessione sicura di pagamento in corso...'
-                : 'Loading secure on-site payment session...'}
-            </p>
-          </div>
-        )
-      ) : items.length === 0 ? (
-        <div className="border border-[#0A0A0C]/18 bg-[#FFFFFF] p-10 text-center">
-          <ShoppingBag className="mx-auto h-10 w-10 text-[#0A0A0C]" />
-          <h2 className="mt-4 font-display text-3xl font-bold uppercase text-[#0A0A0C]">
-            {copy.drawerEmptyTitle}
-          </h2>
-          <p className="mx-auto mt-2 max-w-md text-base text-[#4F4D48]">{copy.drawerEmptyBody}</p>
-          <Link
-            href={`${lp}/single-pass`}
-            locale={locale}
-            className="mt-6 inline-flex min-h-[48px] items-center justify-center bg-[#D9381E] px-6 py-3 text-sm font-bold text-[#FFFFFF] transition hover:bg-[#B82B14]"
-          >
-            {copy.drawerExploreCta}
-          </Link>
-        </div>
-      ) : (
-        <div className="grid gap-8 lg:grid-cols-12">
-          <form noValidate onSubmit={handleInitPayment} className="space-y-6 lg:col-span-7">
-            {/* Clickable Error Summary Banner */}
-            {summaryItems.length > 0 && (
-              <div
-                ref={errorSummaryRef}
-                tabIndex={-1}
-                role="alert"
-                aria-live="assertive"
-                data-checkout-error-summary
-                className="border-2 border-[#B91C1C] bg-[#FEF2F2] p-5 text-[#0A0A0C] focus:outline-none"
-              >
-                <div className="flex items-start gap-3">
-                  <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-[#B91C1C]" aria-hidden="true" />
-                  <div className="flex-1">
-                    <h2 className="text-base font-extrabold text-[#B91C1C]">
-                      {summaryItems.length === 1
-                        ? uxCopy.errorSummarySingleTitle
-                        : uxCopy.errorSummaryTitle}
-                    </h2>
-                    <p className="mt-0.5 text-sm text-[#4F4D48]">{uxCopy.errorSummaryHint}</p>
-                    <ul className="mt-3 space-y-2">
-                      {summaryItems.map((item, idx) => (
-                        <li key={`${item.field}-${idx}`}>
-                          <button
-                            type="button"
-                            data-target-field={item.field}
-                            onClick={() => jumpToField(item.field)}
-                            className="inline-flex min-h-[36px] items-start gap-2 text-left text-sm font-semibold text-[#B91C1C] underline decoration-[#B91C1C]/60 underline-offset-2 hover:text-[#0A0A0C]"
-                          >
-                            <span>
-                              {item.label}: {item.message}
-                            </span>
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
+          )}
+
+          {resumeOrderId && !paymentSession && (
+            <div className="mt-8">
+              {generalError ? (
+                <div
+                  role="alert"
+                  aria-live="assertive"
+                  className="border-2 border-[#991B1B] bg-[#FEF2F2] p-8 text-center text-[#050505] sm:p-10"
+                >
+                  <AlertCircle className="mx-auto h-10 w-10 text-[#991B1B]" aria-hidden="true" />
+                  <h2 className="mt-4 font-display text-3xl font-bold uppercase text-[#050505]">
+                    {isIt ? `Ordine ${resumeOrderId}` : `Order ${resumeOrderId}`}
+                  </h2>
+                  <p className="mx-auto mt-3 max-w-lg text-base font-medium text-[#050505]">
+                    {generalError}
+                  </p>
+                  <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                    <Link
+                      href={`${lp}/account`}
+                      locale={locale}
+                      className="inline-flex min-h-[48px] items-center justify-center bg-[#050505] px-6 py-3 text-sm font-bold text-[#F6F1E7] transition hover:bg-[#1E1C19]"
+                    >
+                      {copy.navAccountLabel || (isIt ? 'Area Riservata' : 'Reserved Area')}
+                    </Link>
+                    <Link
+                      href={`${lp}/single-pass`}
+                      locale={locale}
+                      className="inline-flex min-h-[48px] items-center justify-center border border-[#050505] bg-[#FFFFFF] px-6 py-3 text-sm font-bold text-[#050505]"
+                    >
+                      {copy.drawerExploreCta}
+                    </Link>
                   </div>
                 </div>
-              </div>
-            )}
-
-            {/* Selected Cart Items */}
-            <div id="sp-cart-items" tabIndex={-1} className="space-y-3 focus:outline-none">
-              {items.map((item) => {
-                const sku = resolveCatalogSku(item.skuId);
-                if (!sku) return null;
-                const venue = VENUE_BY_ID[sku.venueId];
-                const venueName = sku.venueNameOverride || venue?.name || 'Nightlife Milan';
-                const skuFeeRate = getSkuFeeRate(sku, item.channel || 'venue');
-                const p = computeSinglePassPrice(sku.basePriceCents, item.quantity, skuFeeRate);
-                const itemGuestCount = Math.max(0, sku.guestsPerUnit ?? 1) * item.quantity;
-
-                return (
-                  <div
-                    key={cartRowKey(item)}
-                    className="flex flex-col gap-3 border border-[#0A0A0C]/16 bg-[#FFFFFF] p-4 sm:flex-row sm:items-center sm:justify-between"
-                  >
-                    <div className="min-w-0 flex-1">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <p className="text-[13px] font-bold text-[#4F4D48] tabular-nums">
-                          {venueName} · {sku.arrivalTime} ·{' '}
-                          {itemGuestCount > 0
-                            ? `${itemGuestCount} ${
-                                itemGuestCount === 1 ? uxCopy.guestUnitSingular : uxCopy.guestsUnit
-                              }`
-                            : formatZeroGuestAddonBadge35(locale, sku.venueId)}
-                        </p>
-                        {item.channel === 'single-pass' && (
-                          <span className="border border-[#0A0A0C]/25 bg-[#EDEBE6] px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-[#0A0A0C]">
-                            Single Pass
-                          </span>
-                        )}
-                      </div>
-                      <h2 className="font-display text-xl font-bold text-[#0A0A0C]">
-                        {sku.venueId === 'aprica-world-winter-week'
-                          ? localizeSinglePassSku(sku, locale, copy, venueName).title
-                          : isIt
-                            ? sku.titleIt
-                            : sku.titleEn}
-                      </h2>
-                      {item.dietaryChoice && (!sku.requiresDietary || Boolean(sku.dietaryPreset)) && (
-                        <p className="mt-1 text-[13px] text-[#4F4D48]">{item.dietaryChoice}</p>
-                      )}
-                      {sku.requiresDietary && !sku.dietaryPreset && (
-                        <select
-                          aria-label={copy.formDietary}
-                          value={
-                            DINNER_DIETARY_OPTIONS.some((o) => o.value === item.dietaryChoice)
-                              ? item.dietaryChoice
-                              : DINNER_DIETARY_OPTIONS[0].value
-                          }
-                          onChange={(e) => updateDietary(item.skuId, e.target.value, item.channel)}
-                          className="mt-2 h-10 border border-[#0A0A0C]/25 bg-[#FFFFFF] px-3 text-sm text-[#0A0A0C]"
-                        >
-                          {DINNER_DIETARY_OPTIONS.map((opt) => (
-                            <option key={opt.value} value={opt.value}>
-                              {isIt ? opt.labelIt : opt.labelEn}
-                            </option>
-                          ))}
-                        </select>
-                      )}
-                    </div>
-
-                    <div className="flex items-center gap-3">
-                      <div className="inline-flex items-center border border-[#0A0A0C]/25 bg-[#EDEBE6]">
-                        <button
-                          type="button"
-                          onClick={() => updateQuantity(item.skuId, item.quantity - 1, item.channel)}
-                          className="flex h-11 w-11 items-center justify-center text-[#0A0A0C] hover:bg-[#0A0A0C]/10"
-                          aria-label="Decrease"
-                        >
-                          <Minus className="h-4 w-4" />
-                        </button>
-                        <span className="min-w-[2.25rem] text-center text-sm font-bold tabular-nums text-[#0A0A0C]">
-                          {item.quantity}
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => updateQuantity(item.skuId, item.quantity + 1, item.channel)}
-                          className="flex h-11 w-11 items-center justify-center text-[#0A0A0C] hover:bg-[#0A0A0C]/10"
-                          aria-label="Increase"
-                        >
-                          <Plus className="h-4 w-4" />
-                        </button>
-                      </div>
-                      <span className="min-w-[84px] text-right font-display text-2xl font-extrabold tabular-nums text-[#0A0A0C]">
-                        {formatEurFromCents(p.lineTotalCents, locale)}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => removeItem(item.skuId, item.channel)}
-                        aria-label={copy.removeItemLabel}
-                        className="flex h-11 w-11 items-center justify-center border border-[#0A0A0C]/15 text-[#4F4D48] hover:border-[#B91C1C] hover:text-[#B91C1C]"
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </button>
-                    </div>
-                  </div>
-                );
-              })}
-
-              {!cartValidation.ok && (
+              ) : (
                 <div
-                  role="region"
-                  aria-label={uxCopy.cartFixHeading}
-                  className="border-2 border-[#B91C1C] bg-[#FEF2F2] p-4 text-sm text-[#0A0A0C]"
+                  role="status"
+                  aria-live="polite"
+                  className="border border-[#F6F1E7]/18 bg-[#141311] p-10 text-center text-[#F6F1E7]"
                 >
-                  <div className="flex items-start gap-2.5">
-                    <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-[#B91C1C]" />
-                    <div className="space-y-2">
-                      <p className="font-bold text-[#B91C1C]">{uxCopy.cartFixHeading}</p>
-                      <p>{formatCartValidationError35(locale, cartValidation.errorCode)}</p>
-                      <Link
-                        href={`${lp}/cart`}
-                        locale={locale}
-                        className="inline-flex min-h-[40px] items-center gap-1.5 border border-[#0A0A0C] bg-[#FFFFFF] px-3.5 py-2 text-[13px] font-bold text-[#0A0A0C] hover:bg-[#0A0A0C] hover:text-[#FFFFFF]"
-                      >
-                        {uxCopy.cartFixCta}
-                      </Link>
-                    </div>
-                  </div>
+                  <ShieldCheck className="mx-auto h-10 w-10 text-[#25D366]" aria-hidden="true" />
+                  <h2 className="mt-4 font-display text-3xl font-bold uppercase text-[#F6F1E7]">
+                    {isIt ? `Verifica ordine ${resumeOrderId}` : `Verifying order ${resumeOrderId}`}
+                  </h2>
+                  <p className="mx-auto mt-2 max-w-md text-base text-[#C2B9AA]">
+                    {isIt
+                      ? 'Caricamento della sessione sicura di pagamento in corso...'
+                      : 'Loading secure on-site payment session...'}
+                  </p>
                 </div>
               )}
             </div>
+          )}
+        </div>
+      </div>
 
-            {/* Guest Registration & Contact Fields */}
-            <div className="space-y-5 border border-[#0A0A0C]/16 bg-[#FFFFFF] p-6 sm:p-8">
-              {/* Required / Optional Legend */}
-              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#0A0A0C]/12 pb-4">
-                <p className="flex items-center gap-2 text-sm font-medium text-[#4F4D48]">
-                  <Info className="h-4 w-4 shrink-0 text-[#0A0A0C]" aria-hidden="true" />
-                  <span>{uxCopy.requiredLegend}</span>
+      {/* STEP 2 — Sessione Pagamento Carta / Apple Pay / Google Pay */}
+      {paymentSession ? (
+        <div className="bg-[#F6F1E7] text-[#050505]">
+          <div className="mx-auto grid max-w-5xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-12 lg:px-8">
+            <div className="lg:col-span-7">
+              <EmbeddedPaymentForm
+                publishableKey={paymentSession.publishableKey}
+                clientSecret={paymentSession.clientSecret}
+                orderId={paymentSession.orderId}
+                locale={locale}
+                fullName={paymentSession.fullName}
+                email={paymentSession.email}
+                phone={paymentSession.phone}
+                billingTotalDisplay={formatMinorCurrency(
+                  paymentSession.presentmentTotalMinor,
+                  paymentSession.presentmentCurrency,
+                  locale,
+                )}
+                eurTotalDisplay={formatEurFromCents(paymentSession.totalEurCents, locale)}
+                showEurReference={paymentSession.presentmentCurrency !== 'EUR'}
+                onBack={resumeOrderId ? undefined : () => setPaymentSession(null)}
+                clearCart={clearCart}
+              />
+            </div>
+            <aside className="lg:col-span-5">
+              <div className="space-y-4 border border-[#050505] bg-[#EAE3D5] p-6 text-[#050505]">
+                <p className="font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-[#4A453E]">
+                  {isIt ? 'CONTO CONFERMATO' : 'CONFIRMED SUMMARY'}
                 </p>
-                <div className="flex items-center gap-2 text-[13px] font-bold">
-                  <span className="bg-[#0A0A0C] px-2 py-0.5 text-[#FFFFFF]">
+                <h2 className="font-display text-2xl font-bold uppercase text-[#050505]">
+                  {copy.orderIdLabel}: {paymentSession.orderId}
+                </h2>
+                <div className="space-y-1 border border-[#050505]/20 bg-[#F6F1E7] p-3.5 text-sm text-[#4A453E]">
+                  <p>
+                    <strong className="text-[#050505]">{paymentSession.fullName}</strong>
+                  </p>
+                  <p>{paymentSession.email}</p>
+                  <p className="font-mono font-semibold tabular-nums text-[#050505]">
+                    {paymentSession.phone}
+                  </p>
+                </div>
+                <div className="space-y-2 border-t border-[#050505]/20 pt-3 text-sm tabular-nums">
+                  <div className="flex justify-between text-[#4A453E]">
+                    <span>{copy.basePriceLabel}</span>
+                    <span className="font-semibold text-[#050505]">
+                      {formatEurFromCents(paymentSession.subtotalBaseCents, locale)}
+                    </span>
+                  </div>
+                  {paymentSession.feeCents > 0 && (
+                    <div className="flex justify-between gap-3 text-[#4A453E]">
+                      <span>
+                        {formatFeeLabel35(
+                          locale,
+                          paymentSession.feeRate,
+                          paymentSession.hasMixedFeeRates,
+                        )}
+                      </span>
+                      <span className="shrink-0 font-semibold text-[#050505]">
+                        +{formatEurFromCents(paymentSession.feeCents, locale)}
+                      </span>
+                    </div>
+                  )}
+                  <div className="flex items-baseline justify-between border-t border-[#050505] pt-3 text-base font-extrabold text-[#050505]">
+                    <span>{copy.totalLabel} (EUR)</span>
+                    <span className="font-display text-3xl font-extrabold text-[#050505]">
+                      {formatEurFromCents(paymentSession.totalEurCents, locale)}
+                    </span>
+                  </div>
+                  {paymentSession.presentmentCurrency !== 'EUR' && (
+                    <>
+                      <div className="flex justify-between border border-[#050505] bg-[#FFFFFF] p-3 font-extrabold text-[#050505]">
+                        <span>{paymentSession.presentmentCurrency}</span>
+                        <span>
+                          {formatMinorCurrency(
+                            paymentSession.presentmentTotalMinor,
+                            paymentSession.presentmentCurrency,
+                            locale,
+                          )}
+                        </span>
+                      </div>
+                      <p className="text-right font-mono text-xs text-[#4A453E]">
+                        FX: 1 EUR = {paymentSession.fxRate.toFixed(4)}{' '}
+                        {paymentSession.presentmentCurrency}
+                      </p>
+                    </>
+                  )}
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      ) : !resumeOrderId && items.length > 0 ? (
+        <form noValidate onSubmit={handleInitPayment} className="w-full">
+          {/* CAPITOLO 01B — NOTTE #050505: Articoli & Valuta */}
+          <div className="bg-[#050505] pb-10 text-[#F6F1E7]">
+            <div className="mx-auto max-w-4xl space-y-4 px-4 sm:px-6 lg:px-8">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <p className="font-mono text-xs font-bold uppercase tracking-[0.12em] text-[#EAE3D5]">
+                  01 · {isIt ? 'I TUOI PACCHETTI' : 'SELECTED PACKAGES'} ({totalGuests}{' '}
+                  {totalGuests === 1 ? uxCopy.guestUnitSingular : uxCopy.guestsUnit})
+                </p>
+                <div className="flex flex-wrap items-center gap-1.5">
+                  {supportedCurrencies.slice(0, 5).map((cur) => {
+                    const isCurActive = currency === cur;
+                    return (
+                      <button
+                        key={cur}
+                        type="button"
+                        onClick={() => setCurrency(cur as SupportedCurrency)}
+                        className={`min-h-[36px] px-2.5 py-1 font-mono text-xs font-bold tabular-nums transition ${
+                          isCurActive
+                            ? 'bg-[#EAE3D5] text-[#050505]'
+                            : 'border border-[#F6F1E7]/22 bg-[#141311] text-[#C2B9AA] hover:border-[#F6F1E7] hover:text-[#F6F1E7]'
+                        }`}
+                      >
+                        {cur}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div
+                id="sp-cart-items"
+                data-no-lightbox="true"
+                tabIndex={-1}
+                className="space-y-3 focus:outline-none"
+              >
+                {items.map((item) => {
+                  const sku = resolveCatalogSku(item.skuId);
+                  if (!sku) return null;
+                  const venue = VENUE_BY_ID[sku.venueId];
+                  const venueName = sku.venueNameOverride || venue?.name || 'Nightlife Milan';
+                  const skuFeeRate = getSkuFeeRate(sku, item.channel || 'venue');
+                  const p = computeSinglePassPrice(sku.basePriceCents, item.quantity, skuFeeRate);
+                  const itemGuestCount = Math.max(0, sku.guestsPerUnit ?? 1) * item.quantity;
+                  const perGuestCents =
+                    itemGuestCount > 1 ? Math.round(p.lineBaseCents / itemGuestCount) : 0;
+
+                  return (
+                    <div
+                      key={cartRowKey(item)}
+                      className="flex flex-col gap-4 border border-[#F6F1E7]/18 bg-[#141311] p-4 sm:flex-row sm:items-center sm:justify-between"
+                    >
+                      <div className="flex items-start gap-3.5 min-w-0 flex-1">
+                        {venue?.posterSrc && (
+                          <img
+                            src={venue.posterSrc}
+                            alt={venueName}
+                            width={72}
+                            height={90}
+                            loading="lazy"
+                            decoding="async"
+                            className="aspect-[4/5] w-16 shrink-0 border border-[#F6F1E7]/16 object-cover sm:w-20"
+                          />
+                        )}
+                        <div className="min-w-0 flex-1">
+                          <div className="flex flex-wrap items-center gap-2">
+                            <p className="font-mono text-xs font-bold uppercase tracking-wide text-[#EAE3D5] tabular-nums">
+                              {venueName} · {sku.arrivalTime}
+                            </p>
+                            {item.channel === 'single-pass' && (
+                              <span className="border border-[#EAE3D5]/35 bg-[#050505] px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider text-[#EAE3D5]">
+                                Single Pass
+                              </span>
+                            )}
+                          </div>
+                          <h2 className="mt-1 font-display text-xl font-bold text-[#F6F1E7]">
+                            {sku.venueId === 'aprica-world-winter-week'
+                              ? localizeSinglePassSku(sku, locale, copy, venueName).title
+                              : isIt
+                                ? sku.titleIt
+                                : sku.titleEn}
+                          </h2>
+                          <p className="mt-1 text-xs font-medium text-[#C2B9AA] tabular-nums">
+                            {itemGuestCount > 0
+                              ? `${itemGuestCount} ${
+                                  itemGuestCount === 1 ? uxCopy.guestUnitSingular : uxCopy.guestsUnit
+                                }`
+                              : formatZeroGuestAddonBadge35(locale, sku.venueId)}
+                            {perGuestCents > 0
+                              ? ` · ${formatEurFromCents(perGuestCents, locale)} / ${uxCopy.guestUnitSingular}`
+                              : ''}
+                          </p>
+                          {item.dietaryChoice && (!sku.requiresDietary || Boolean(sku.dietaryPreset)) && (
+                            <p className="mt-1 text-xs text-[#EAE3D5]">{item.dietaryChoice}</p>
+                          )}
+                          {sku.requiresDietary && !sku.dietaryPreset && (
+                            <select
+                              aria-label={copy.formDietary}
+                              value={
+                                DINNER_DIETARY_OPTIONS.some((o) => o.value === item.dietaryChoice)
+                                  ? item.dietaryChoice
+                                  : DINNER_DIETARY_OPTIONS[0].value
+                              }
+                              onChange={(e) => updateDietary(item.skuId, e.target.value, item.channel)}
+                              className="mt-2 h-11 border border-[#F6F1E7]/30 bg-[#050505] px-3 text-sm text-[#F6F1E7]"
+                            >
+                              {DINNER_DIETARY_OPTIONS.map((opt) => (
+                                <option key={opt.value} value={opt.value}>
+                                  {isIt ? opt.labelIt : opt.labelEn}
+                                </option>
+                              ))}
+                            </select>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between gap-3 border-t border-[#F6F1E7]/12 pt-3 sm:border-t-0 sm:pt-0">
+                        <div className="inline-flex items-center border border-[#F6F1E7]/28 bg-[#050505]">
+                          <button
+                            type="button"
+                            onClick={() => updateQuantity(item.skuId, item.quantity - 1, item.channel)}
+                            className="flex h-11 w-11 items-center justify-center text-[#F6F1E7] hover:bg-[#1E1C19]"
+                            aria-label="Decrease"
+                          >
+                            <Minus className="h-4 w-4" />
+                          </button>
+                          <span className="min-w-[2.25rem] text-center font-mono text-sm font-bold tabular-nums text-[#F6F1E7]">
+                            {item.quantity}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => updateQuantity(item.skuId, item.quantity + 1, item.channel)}
+                            className="flex h-11 w-11 items-center justify-center text-[#F6F1E7] hover:bg-[#1E1C19]"
+                            aria-label="Increase"
+                          >
+                            <Plus className="h-4 w-4" />
+                          </button>
+                        </div>
+                        <div className="text-right">
+                          <span className="block font-display text-2xl font-extrabold tabular-nums text-[#F6F1E7]">
+                            {formatEurFromCents(p.lineBaseCents, locale)}
+                          </span>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => removeItem(item.skuId, item.channel)}
+                          aria-label={copy.removeItemLabel}
+                          className="flex h-11 w-11 items-center justify-center border border-[#F6F1E7]/20 bg-[#050505] text-[#C2B9AA] hover:border-[#F6F1E7] hover:text-[#F6F1E7]"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+
+                {!cartValidation.ok && (
+                  <div
+                    role="region"
+                    aria-label={uxCopy.cartFixHeading}
+                    className="border-2 border-[#991B1B] bg-[#FEF2F2] p-4 text-sm text-[#050505]"
+                  >
+                    <div className="flex items-start gap-2.5">
+                      <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-[#991B1B]" />
+                      <div className="space-y-2">
+                        <p className="font-bold text-[#991B1B]">{uxCopy.cartFixHeading}</p>
+                        <p>{formatCartValidationError35(locale, cartValidation.errorCode)}</p>
+                        <Link
+                          href={`${lp}/cart`}
+                          locale={locale}
+                          className="inline-flex min-h-[40px] items-center gap-1.5 border border-[#050505] bg-[#FFFFFF] px-3.5 py-2 text-[13px] font-bold text-[#050505] hover:bg-[#050505] hover:text-[#F6F1E7]"
+                        >
+                          {uxCopy.cartFixCta}
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* CAPITOLO 02 — CHAMPAGNE #EAE3D5: Conto Trasparente & Valuta */}
+          <div className="border-y border-[#050505] bg-[#EAE3D5] py-8 text-[#050505]">
+            <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+              <div className="flex flex-wrap items-end justify-between gap-3 border-b border-[#050505]/20 pb-4">
+                <div>
+                  <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-[#4A453E]">
+                    02 · {isIt ? 'CONTO TRASPARENTE' : 'TRANSPARENT BREAKDOWN'}
+                  </p>
+                  <h2 className="mt-1 font-display text-2xl font-bold uppercase text-[#050505] sm:text-3xl">
+                    {isIt ? 'Riepilogo Importi' : 'Order Breakdown'}
+                  </h2>
+                </div>
+                <div className="flex items-center gap-2">
+                  <label htmlFor="sp-currency" className="text-xs font-bold uppercase text-[#4A453E]">
+                    {copy.currencySelectorLabel}
+                  </label>
+                  <select
+                    id="sp-currency"
+                    value={currency}
+                    onChange={(e) => setCurrency(e.target.value as SupportedCurrency)}
+                    className="h-11 border border-[#050505] bg-[#FFFFFF] px-3 font-mono text-sm font-bold tabular-nums text-[#050505]"
+                  >
+                    {supportedCurrencies.map((c) => (
+                      <option key={c} value={c}>
+                        {c}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="mt-4 space-y-2.5 text-sm tabular-nums sm:text-base">
+                <div className="flex justify-between text-[#4A453E]">
+                  <span>{copy.guestsLabel}</span>
+                  <span className="font-mono font-bold text-[#050505]">{totalGuests}</span>
+                </div>
+                <div className="flex justify-between text-[#4A453E]">
+                  <span>{copy.basePriceLabel}</span>
+                  <span className="font-mono font-semibold text-[#050505]">
+                    {formatEurFromCents(subtotalBaseCents, locale)}
+                  </span>
+                </div>
+                {totalFeeCents > 0 && (
+                  <div className="flex justify-between gap-4 text-[#050505]">
+                    <span className="font-semibold">{feeLabel}</span>
+                    <span className="shrink-0 font-mono font-bold">
+                      +{formatEurFromCents(totalFeeCents, locale)}
+                    </span>
+                  </div>
+                )}
+                <div className="flex items-baseline justify-between border-t border-[#050505] pt-3.5">
+                  <span className="text-base font-extrabold uppercase tracking-wide text-[#050505]">
+                    {copy.totalLabel} (EUR)
+                  </span>
+                  <span className="font-display text-3xl font-extrabold text-[#050505] sm:text-4xl">
+                    {formatEurFromCents(grandTotalCents, locale)}
+                  </span>
+                </div>
+
+                {currency !== 'EUR' && (
+                  <div className="mt-3 border border-[#050505] bg-[#F6F1E7] p-4">
+                    <div className="flex items-baseline justify-between gap-2">
+                      <span className="text-sm font-extrabold uppercase text-[#050505]">
+                        {copy.chargedInCurrencyLabel} ({currency})
+                      </span>
+                      <span className="font-display text-2xl font-extrabold text-[#050505]">
+                        {formatMinorCurrency(convertedTotalMinor, currency, locale)}
+                      </span>
+                    </div>
+                    <p className="mt-1 text-right font-mono text-xs text-[#4A453E]">
+                      1 EUR = {currentFxRate.toFixed(4)} {currency} · {copy.fxRateNotice}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* CAPITOLO 03 — CARTA CALDA #F6F1E7: Compilazione Dati & Preferenze */}
+          <div className="bg-[#F6F1E7] py-10 text-[#050505]">
+            <div className="mx-auto max-w-4xl space-y-6 px-4 sm:px-6 lg:px-8">
+              <div className="flex flex-wrap items-end justify-between gap-3 border-b border-[#050505]/20 pb-4">
+                <div>
+                  <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-[#4A453E]">
+                    03 · {isIt ? 'COMPILAZIONE SU CARTA CALDA' : 'GUEST REGISTRATION'}
+                  </p>
+                  <h2 className="mt-1 font-display text-2xl font-bold uppercase text-[#050505] sm:text-3xl">
+                    {isIt ? 'Dati Intestatario Pass' : 'Pass Holder Details'}
+                  </h2>
+                </div>
+                <div className="flex flex-wrap items-center gap-2 text-xs font-bold">
+                  <span className="bg-[#050505] px-2.5 py-1 text-[#F6F1E7]">
                     {uxCopy.requiredBadge} *
                   </span>
-                  <span className="bg-[#EDEBE6] px-2 py-0.5 text-[#4F4D48]">
+                  <span className="border border-[#050505]/30 bg-[#EAE3D5] px-2.5 py-1 text-[#050505]">
                     {uxCopy.optionalBadge}
                   </span>
                 </div>
               </div>
 
-              <div className="grid gap-5 sm:grid-cols-2">
-                <div>
-                  <div className="flex items-center justify-between gap-2">
-                    <label htmlFor="sp-full-name" className="text-sm font-bold text-[#0A0A0C]">
-                      {copy.formFullName} *
-                    </label>
-                    <span className="shrink-0 whitespace-nowrap bg-[#0A0A0C] px-2 py-0.5 text-[13px] font-bold text-[#FFFFFF]">
-                      {uxCopy.requiredBadge} *
-                    </span>
-                  </div>
-                  <input
-                    id="sp-full-name"
-                    type="text"
-                    autoComplete="name"
-                    value={fullName}
-                    onChange={(e) => {
-                      setFullName(e.target.value);
-                      clearFieldError('fullName');
-                    }}
-                    aria-invalid={Boolean(fieldErrors.fullName)}
-                    aria-describedby={fieldErrors.fullName ? 'sp-full-name-error' : undefined}
-                    placeholder="Marco Rossi"
-                    className={`mt-2 h-12 w-full px-3.5 text-base text-[#0A0A0C] placeholder:text-[#4F4D48]/60 ${
-                      fieldErrors.fullName
-                        ? 'border-2 border-[#B91C1C] bg-[#FEF2F2]'
-                        : 'border border-[#0A0A0C]/30 bg-[#FFFFFF]'
-                    }`}
-                  />
-                  {fieldErrors.fullName && (
-                    <p id="sp-full-name-error" className="mt-1.5 text-sm font-semibold text-[#B91C1C]">
-                      {fieldErrors.fullName}
-                    </p>
-                  )}
-                </div>
+              <p className="flex items-center gap-2 text-sm font-medium text-[#4A453E]">
+                <Info className="h-4 w-4 shrink-0 text-[#050505]" aria-hidden="true" />
+                <span>{uxCopy.requiredLegend}</span>
+              </p>
 
+              {/* Clickable Error Summary Banner */}
+              {summaryItems.length > 0 && (
+                <div
+                  ref={errorSummaryRef}
+                  tabIndex={-1}
+                  role="alert"
+                  aria-live="assertive"
+                  data-checkout-error-summary
+                  className="border-2 border-[#991B1B] bg-[#FEF2F2] p-5 text-[#050505] focus:outline-none"
+                >
+                  <div className="flex items-start gap-3">
+                    <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-[#991B1B]" aria-hidden="true" />
+                    <div className="flex-1">
+                      <h3 className="text-base font-extrabold text-[#991B1B]">
+                        {summaryItems.length === 1
+                          ? uxCopy.errorSummarySingleTitle
+                          : uxCopy.errorSummaryTitle}
+                      </h3>
+                      <p className="mt-0.5 text-sm text-[#4A453E]">{uxCopy.errorSummaryHint}</p>
+                      <ul className="mt-3 space-y-2">
+                        {summaryItems.map((item, idx) => (
+                          <li key={`${item.field}-${idx}`}>
+                            <button
+                              type="button"
+                              data-target-field={item.field}
+                              onClick={() => jumpToField(item.field)}
+                              className="inline-flex min-h-[38px] items-start gap-2 text-left text-sm font-bold text-[#991B1B] underline decoration-[#991B1B]/60 underline-offset-2 hover:text-[#050505]"
+                            >
+                              <span>
+                                {item.label}: {item.message}
+                              </span>
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Row 1: Full Name */}
+              <div>
+                <div className="flex items-center justify-between gap-2">
+                  <label htmlFor="sp-full-name" className="text-sm font-bold text-[#050505]">
+                    {copy.formFullName} *
+                  </label>
+                  <span className="shrink-0 whitespace-nowrap bg-[#050505] px-2 py-0.5 text-xs font-bold text-[#F6F1E7]">
+                    {uxCopy.requiredBadge} *
+                  </span>
+                </div>
+                <input
+                  id="sp-full-name"
+                  type="text"
+                  autoComplete="name"
+                  value={fullName}
+                  onChange={(e) => {
+                    setFullName(e.target.value);
+                    clearFieldError('fullName');
+                  }}
+                  aria-invalid={Boolean(fieldErrors.fullName)}
+                  aria-describedby={fieldErrors.fullName ? 'sp-full-name-error' : undefined}
+                  placeholder="Marco Rossi"
+                  className={`mt-2 h-12 w-full px-3.5 text-base text-[#050505] placeholder:text-[#4A453E]/65 ${
+                    fieldErrors.fullName
+                      ? 'border-2 border-[#991B1B] bg-[#FEF2F2]'
+                      : 'border border-[#050505] bg-[#FFFFFF]'
+                  }`}
+                />
+                {fieldErrors.fullName && (
+                  <p id="sp-full-name-error" className="mt-1.5 text-sm font-bold text-[#991B1B]">
+                    {fieldErrors.fullName}
+                  </p>
+                )}
+              </div>
+
+              {/* Row 2: Age + Country side by side on mobile too */}
+              <div className="grid grid-cols-[minmax(118px,38%)_1fr] items-end gap-3 sm:gap-5">
                 <div>
-                  <div className="flex items-center justify-between gap-2">
-                    <label htmlFor="sp-age" className="text-sm font-bold text-[#0A0A0C]">
+                  <div className="flex items-center justify-between gap-1">
+                    <label htmlFor="sp-age" className="text-sm font-bold text-[#050505]">
                       {copy.formAge} *
                     </label>
-                    <span className="shrink-0 whitespace-nowrap bg-[#0A0A0C] px-2 py-0.5 text-[13px] font-bold text-[#FFFFFF]">
-                      {uxCopy.requiredBadge} *
-                    </span>
                   </div>
                   <input
                     id="sp-age"
@@ -1176,15 +1368,49 @@ export default function SinglePassCheckoutView({
                     aria-invalid={Boolean(fieldErrors.age || (liveAgeCheck && !liveAgeCheck.ok))}
                     aria-describedby={fieldErrors.age ? 'sp-age-error' : undefined}
                     placeholder="28"
-                    className={`mt-2 h-12 w-full px-3.5 text-base tabular-nums text-[#0A0A0C] placeholder:text-[#4F4D48]/60 ${
+                    className={`mt-2 h-12 w-full px-3.5 font-mono text-base tabular-nums text-[#050505] placeholder:text-[#4A453E]/65 ${
                       fieldErrors.age || (liveAgeCheck && !liveAgeCheck.ok)
-                        ? 'border-2 border-[#B91C1C] bg-[#FEF2F2]'
-                        : 'border border-[#0A0A0C]/30 bg-[#FFFFFF]'
+                        ? 'border-2 border-[#991B1B] bg-[#FEF2F2]'
+                        : 'border border-[#050505] bg-[#FFFFFF]'
                     }`}
                   />
                   {fieldErrors.age && (
-                    <p id="sp-age-error" className="mt-1.5 text-sm font-semibold text-[#B91C1C]">
+                    <p id="sp-age-error" className="mt-1.5 text-sm font-bold text-[#991B1B]">
                       {fieldErrors.age}
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <div className="flex items-center justify-between gap-2">
+                    <label htmlFor="sp-country" className="text-sm font-bold text-[#050505]">
+                      {copy.formCountry} *
+                    </label>
+                    <span className="shrink-0 whitespace-nowrap bg-[#050505] px-2 py-0.5 text-xs font-bold text-[#F6F1E7]">
+                      {uxCopy.requiredBadge} *
+                    </span>
+                  </div>
+                  <input
+                    id="sp-country"
+                    type="text"
+                    autoComplete="country-name"
+                    value={country}
+                    onChange={(e) => {
+                      setCountry(e.target.value);
+                      clearFieldError('country');
+                    }}
+                    aria-invalid={Boolean(fieldErrors.country)}
+                    aria-describedby={fieldErrors.country ? 'sp-country-error' : undefined}
+                    placeholder={uxCopy.countryPlaceholder}
+                    className={`mt-2 h-12 w-full px-3.5 text-base text-[#050505] placeholder:text-[#4A453E]/65 ${
+                      fieldErrors.country
+                        ? 'border-2 border-[#991B1B] bg-[#FEF2F2]'
+                        : 'border border-[#050505] bg-[#FFFFFF]'
+                    }`}
+                  />
+                  {fieldErrors.country && (
+                    <p id="sp-country-error" className="mt-1.5 text-sm font-bold text-[#991B1B]">
+                      {fieldErrors.country}
                     </p>
                   )}
                 </div>
@@ -1192,13 +1418,13 @@ export default function SinglePassCheckoutView({
 
               {(fieldErrors.age || (liveAgeCheck && !liveAgeCheck.ok)) &&
                 displayedSuggestedVenues.length > 0 && (
-                  <div className="border-2 border-[#B91C1C] bg-[#FEF2F2] p-4 text-sm text-[#0A0A0C]">
-                    <p className="font-bold text-[#B91C1C]">
+                  <div className="border-2 border-[#991B1B] bg-[#FEF2F2] p-4 text-sm text-[#050505]">
+                    <p className="font-bold text-[#991B1B]">
                       {liveAgeCheck && !liveAgeCheck.ok
                         ? mapApiCodeToMessage(liveAgeCheck.errorCode)
                         : fieldErrors.age}
                     </p>
-                    <p className="mt-2 font-semibold text-[#0A0A0C]">
+                    <p className="mt-2 font-semibold text-[#050505]">
                       {uxCopy.suggestedVenuesHeading}
                     </p>
                     <div className="mt-2 flex flex-wrap gap-2">
@@ -1215,7 +1441,7 @@ export default function SinglePassCheckoutView({
                             key={vid}
                             href={suggestedHref}
                             locale={locale}
-                            className="inline-flex min-h-[40px] items-center gap-1.5 border border-[#0A0A0C] bg-[#FFFFFF] px-3 py-1.5 text-[13px] font-bold text-[#0A0A0C] hover:bg-[#0A0A0C] hover:text-[#FFFFFF]"
+                            className="inline-flex min-h-[40px] items-center gap-1.5 border border-[#050505] bg-[#FFFFFF] px-3 py-1.5 text-[13px] font-bold text-[#050505] hover:bg-[#050505] hover:text-[#F6F1E7]"
                           >
                             <span>{v.name}</span>
                             <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -1227,24 +1453,26 @@ export default function SinglePassCheckoutView({
                 )}
 
               {liveAgeCheck?.ok && liveAgeCheck.advisoryCode === 'RECOMMEND_BISCHERI_50_PLUS' && (
-                <div className="border border-[#0A0A0C]/25 bg-[#EDEBE6] p-3.5 text-sm font-medium text-[#0A0A0C]">
+                <div className="border border-[#050505] bg-[#EAE3D5] p-3.5 text-sm font-medium text-[#050505]">
                   {copy.bischeriAdvisory}
                 </div>
               )}
 
+              {/* Row 3: WhatsApp + Email */}
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
                   <div className="flex items-center justify-between gap-2">
-                    <label htmlFor="sp-whatsapp" className="text-sm font-bold text-[#0A0A0C]">
+                    <label htmlFor="sp-whatsapp" className="text-sm font-bold text-[#050505]">
                       {copy.formWhatsapp} *
                     </label>
-                    <span className="shrink-0 whitespace-nowrap bg-[#0A0A0C] px-2 py-0.5 text-[13px] font-bold text-[#FFFFFF]">
+                    <span className="shrink-0 whitespace-nowrap bg-[#050505] px-2 py-0.5 text-xs font-bold text-[#F6F1E7]">
                       {uxCopy.requiredBadge} *
                     </span>
                   </div>
                   <input
                     id="sp-whatsapp"
                     type="tel"
+                    dir="ltr"
                     autoComplete="tel"
                     value={whatsapp}
                     onChange={(e) => {
@@ -1256,17 +1484,17 @@ export default function SinglePassCheckoutView({
                       fieldErrors.whatsapp ? 'sp-whatsapp-error sp-whatsapp-hint' : 'sp-whatsapp-hint'
                     }
                     placeholder={uxCopy.whatsappPlaceholder}
-                    className={`mt-2 h-12 w-full px-3.5 text-base tabular-nums text-[#0A0A0C] placeholder:text-[#4F4D48]/60 ${
+                    className={`mt-2 h-12 w-full px-3.5 font-mono text-base tabular-nums text-[#050505] placeholder:text-[#4A453E]/65 ${
                       fieldErrors.whatsapp
-                        ? 'border-2 border-[#B91C1C] bg-[#FEF2F2]'
-                        : 'border border-[#0A0A0C]/30 bg-[#FFFFFF]'
+                        ? 'border-2 border-[#991B1B] bg-[#FEF2F2]'
+                        : 'border border-[#050505] bg-[#FFFFFF]'
                     }`}
                   />
-                  <p id="sp-whatsapp-hint" className="mt-1.5 text-[13px] text-[#4F4D48]">
+                  <p id="sp-whatsapp-hint" className="mt-1.5 text-xs text-[#4A453E]">
                     {copy.formWhatsappHint}
                   </p>
                   {fieldErrors.whatsapp && (
-                    <p id="sp-whatsapp-error" className="mt-1 text-sm font-semibold text-[#B91C1C]">
+                    <p id="sp-whatsapp-error" className="mt-1 text-sm font-bold text-[#991B1B]">
                       {fieldErrors.whatsapp}
                     </p>
                   )}
@@ -1274,16 +1502,17 @@ export default function SinglePassCheckoutView({
 
                 <div>
                   <div className="flex items-center justify-between gap-2">
-                    <label htmlFor="sp-email" className="text-sm font-bold text-[#0A0A0C]">
+                    <label htmlFor="sp-email" className="text-sm font-bold text-[#050505]">
                       {copy.formEmail} *
                     </label>
-                    <span className="shrink-0 whitespace-nowrap bg-[#0A0A0C] px-2 py-0.5 text-[13px] font-bold text-[#FFFFFF]">
+                    <span className="shrink-0 whitespace-nowrap bg-[#050505] px-2 py-0.5 text-xs font-bold text-[#F6F1E7]">
                       {uxCopy.requiredBadge} *
                     </span>
                   </div>
                   <input
                     id="sp-email"
                     type="email"
+                    dir="ltr"
                     autoComplete="email"
                     value={email}
                     onChange={(e) => {
@@ -1293,185 +1522,31 @@ export default function SinglePassCheckoutView({
                     aria-invalid={Boolean(fieldErrors.email)}
                     aria-describedby={fieldErrors.email ? 'sp-email-error' : undefined}
                     placeholder={uxCopy.emailPlaceholder}
-                    className={`mt-2 h-12 w-full px-3.5 text-base text-[#0A0A0C] placeholder:text-[#4F4D48]/60 ${
+                    className={`mt-2 h-12 w-full px-3.5 text-base text-[#050505] placeholder:text-[#4A453E]/65 ${
                       fieldErrors.email
-                        ? 'border-2 border-[#B91C1C] bg-[#FEF2F2]'
-                        : 'border border-[#0A0A0C]/30 bg-[#FFFFFF]'
+                        ? 'border-2 border-[#991B1B] bg-[#FEF2F2]'
+                        : 'border border-[#050505] bg-[#FFFFFF]'
                     }`}
                   />
                   {fieldErrors.email && (
-                    <p id="sp-email-error" className="mt-1.5 text-sm font-semibold text-[#B91C1C]">
+                    <p id="sp-email-error" className="mt-1.5 text-sm font-bold text-[#991B1B]">
                       {fieldErrors.email}
                     </p>
                   )}
                 </div>
               </div>
 
-              <div className="grid gap-5 sm:grid-cols-2">
-                <div>
-                  <div className="flex items-center justify-between gap-2">
-                    <label htmlFor="sp-country" className="text-sm font-bold text-[#0A0A0C]">
-                      {copy.formCountry} *
-                    </label>
-                    <span className="shrink-0 whitespace-nowrap bg-[#0A0A0C] px-2 py-0.5 text-[13px] font-bold text-[#FFFFFF]">
-                      {uxCopy.requiredBadge} *
-                    </span>
-                  </div>
-                  <input
-                    id="sp-country"
-                    type="text"
-                    autoComplete="country-name"
-                    value={country}
-                    onChange={(e) => {
-                      setCountry(e.target.value);
-                      clearFieldError('country');
-                    }}
-                    aria-invalid={Boolean(fieldErrors.country)}
-                    aria-describedby={fieldErrors.country ? 'sp-country-error' : undefined}
-                    placeholder={uxCopy.countryPlaceholder}
-                    className={`mt-2 h-12 w-full px-3.5 text-base text-[#0A0A0C] placeholder:text-[#4F4D48]/60 ${
-                      fieldErrors.country
-                        ? 'border-2 border-[#B91C1C] bg-[#FEF2F2]'
-                        : 'border border-[#0A0A0C]/30 bg-[#FFFFFF]'
-                    }`}
-                  />
-                  {fieldErrors.country && (
-                    <p id="sp-country-error" className="mt-1.5 text-sm font-semibold text-[#B91C1C]">
-                      {fieldErrors.country}
-                    </p>
-                  )}
-                </div>
-
-                <div>
-                  <div className="flex items-center justify-between gap-2">
-                    <label htmlFor="sp-currency" className="text-sm font-bold text-[#0A0A0C]">
-                      {copy.currencySelectorLabel}
-                    </label>
-                    <span className="shrink-0 whitespace-nowrap bg-[#EDEBE6] px-2 py-0.5 text-[13px] font-bold text-[#4F4D48]">
-                      {uxCopy.optionalBadge}
-                    </span>
-                  </div>
-                  <select
-                    id="sp-currency"
-                    value={currency}
-                    onChange={(e) => setCurrency(e.target.value as SupportedCurrency)}
-                    className="mt-2 h-12 w-full border border-[#0A0A0C]/30 bg-[#FFFFFF] px-3.5 text-base font-bold tabular-nums text-[#0A0A0C]"
-                  >
-                    {supportedCurrencies.map((c) => (
-                      <option key={c} value={c}>
-                        {c}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              {!isSignedIn && (
-                <div className="space-y-3 border border-[#0A0A0C]/16 bg-[#EDEBE6] p-4">
-                  <div className="flex items-center justify-between gap-2">
-                    <label className="flex cursor-pointer items-center gap-3 text-sm font-bold text-[#0A0A0C]">
-                      <input
-                        type="checkbox"
-                        checked={createAccount}
-                        onChange={(e) => {
-                          const nextChecked = e.target.checked;
-                          setCreateAccount(nextChecked);
-                          if (!nextChecked) {
-                            clearFieldError('password');
-                          }
-                        }}
-                        className="h-5 w-5 shrink-0 accent-[#0A0A0C]"
-                      />
-                      <span>{copy.formCreateAccountToggle}</span>
-                    </label>
-                    <span className="shrink-0 whitespace-nowrap bg-[#FFFFFF] px-2 py-0.5 text-[13px] font-bold text-[#4F4D48]">
-                      {uxCopy.optionalBadge}
-                    </span>
-                  </div>
-                  <p className="text-[13px] text-[#4F4D48]">{uxCopy.createAccountHint}</p>
-
-                  {createAccount && (
-                    <div className="pt-1">
-                      <div className="flex items-center justify-between gap-2">
-                        <label htmlFor="sp-password" className="text-sm font-bold text-[#0A0A0C]">
-                          {copy.formPassword} *
-                        </label>
-                        <span className="shrink-0 whitespace-nowrap bg-[#0A0A0C] px-2 py-0.5 text-[13px] font-bold text-[#FFFFFF]">
-                          {uxCopy.conditionalBadge}
-                        </span>
-                      </div>
-                      <input
-                        id="sp-password"
-                        type="password"
-                        autoComplete="new-password"
-                        value={password}
-                        onChange={(e) => {
-                          setPassword(e.target.value);
-                          clearFieldError('password');
-                        }}
-                        aria-invalid={Boolean(fieldErrors.password)}
-                        aria-describedby={
-                          fieldErrors.password ? 'sp-password-error sp-password-hint' : 'sp-password-hint'
-                        }
-                        placeholder={uxCopy.passwordPlaceholder}
-                        className={`mt-2 h-12 w-full px-3.5 text-base text-[#0A0A0C] placeholder:text-[#4F4D48]/60 ${
-                          fieldErrors.password
-                            ? 'border-2 border-[#B91C1C] bg-[#FEF2F2]'
-                            : 'border border-[#0A0A0C]/30 bg-[#FFFFFF]'
-                        }`}
-                      />
-                      <p id="sp-password-hint" className="mt-1 text-[13px] text-[#4F4D48]">
-                        {uxCopy.existingAccountHint}
-                      </p>
-                      {fieldErrors.password && (
-                        <p id="sp-password-error" className="mt-1.5 text-sm font-semibold text-[#B91C1C]">
-                          {fieldErrors.password}
-                        </p>
-                      )}
-                    </div>
-                  )}
-                </div>
-              )}
-
-              <div>
-                <div className="flex items-center justify-between gap-2">
-                  <span className="text-sm font-bold text-[#0A0A0C]">{copy.formLanguages}</span>
-                  <span className="shrink-0 whitespace-nowrap bg-[#EDEBE6] px-2 py-0.5 text-[13px] font-bold text-[#4F4D48]">
-                    {uxCopy.optionalBadge}
-                  </span>
-                </div>
-                <div className="mt-2.5 flex flex-wrap gap-2">
-                  {SPOKEN_LANGUAGE_OPTIONS.map((langOption) => {
-                    const active = spokenLanguages.includes(langOption);
-                    return (
-                      <button
-                        key={langOption}
-                        type="button"
-                        onClick={() => toggleLanguage(langOption)}
-                        className={`nlm-pressable min-h-[38px] border px-3 py-1.5 text-[13px] font-bold transition ${
-                          active
-                            ? 'border-[#0A0A0C] bg-[#0A0A0C] text-[#FFFFFF]'
-                            : 'border-[#0A0A0C]/25 bg-[#FFFFFF] text-[#4F4D48] hover:border-[#0A0A0C] hover:text-[#0A0A0C]'
-                        }`}
-                      >
-                        {langOption}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* ALWAYS OPTIONAL Allergies & Dietary Notes */}
-              <div className="border-t border-[#0A0A0C]/12 pt-5">
+              {/* ALWAYS VISIBLE & ALWAYS OPTIONAL: Allergies & Dietary Notes */}
+              <div className="border-t border-[#050505]/18 pt-5">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <label htmlFor="sp-notes" className="text-sm font-bold text-[#0A0A0C]">
+                  <label htmlFor="sp-notes" className="text-sm font-bold text-[#050505]">
                     {hasTerrazzaDuomo21 ? terrazzaUi.allergiesLabel : copy.formDietary}
                   </label>
-                  <span className="shrink-0 whitespace-nowrap bg-[#EDEBE6] px-2 py-0.5 text-[13px] font-bold text-[#4F4D48]">
+                  <span className="shrink-0 whitespace-nowrap border border-[#050505]/30 bg-[#EAE3D5] px-2.5 py-0.5 text-xs font-bold text-[#050505]">
                     {uxCopy.optionalBadge}
                   </span>
                 </div>
-                <p className="mt-1 max-w-[48ch] text-[13px] text-[#4F4D48]">
+                <p className="mt-1 max-w-[54ch] text-xs text-[#4A453E]">
                   {hasTerrazzaDuomo21 ? terrazzaUi.allergiesHint : uxCopy.allergiesOptionalNote}
                 </p>
 
@@ -1490,10 +1565,10 @@ export default function SinglePassCheckoutView({
                         key={chip}
                         type="button"
                         onClick={() => toggleAllergyChip(chip)}
-                        className={`nlm-pressable inline-flex min-h-[36px] items-center gap-1.5 border px-3 py-1 text-[13px] font-semibold transition ${
+                        className={`nlm-pressable inline-flex min-h-[38px] items-center gap-1.5 border px-3 py-1.5 text-xs font-bold transition ${
                           isChipActive
-                            ? 'border-[#0A0A0C] bg-[#0A0A0C] text-[#FFFFFF]'
-                            : 'border-[#0A0A0C]/25 bg-[#FFFFFF] text-[#0A0A0C] hover:border-[#0A0A0C]'
+                            ? 'border-[#050505] bg-[#050505] text-[#F6F1E7]'
+                            : 'border-[#050505]/40 bg-[#FFFFFF] text-[#050505] hover:border-[#050505]'
                         }`}
                       >
                         {isChipActive && <Check className="h-3.5 w-3.5" aria-hidden="true" />}
@@ -1511,24 +1586,151 @@ export default function SinglePassCheckoutView({
                   placeholder={
                     hasTerrazzaDuomo21 ? terrazzaUi.allergiesPlaceholder : uxCopy.allergiesOptionalNote
                   }
-                  className="mt-2.5 w-full border border-[#0A0A0C]/30 bg-[#FFFFFF] p-3 text-base text-[#0A0A0C] placeholder:text-[#4F4D48]/60"
+                  className="mt-2.5 w-full border border-[#050505] bg-[#FFFFFF] p-3 text-base text-[#050505] placeholder:text-[#4A453E]/65"
                 />
               </div>
 
+              {/* Collapsible Optional Drawer: Spoken Languages & Member Password */}
+              <div className="border border-[#050505]/30 bg-[#EAE3D5]">
+                <button
+                  type="button"
+                  aria-expanded={isOptionalDrawerOpen}
+                  onClick={() => setExtraOpen((prev) => !prev)}
+                  className="flex min-h-[48px] w-full items-center justify-between gap-3 px-4 py-3 text-left text-sm font-bold text-[#050505]"
+                >
+                  <span>
+                    {isIt
+                      ? 'Opzioni facoltative: Lingue parlate e salvataggio Area Riservata'
+                      : 'Optional preferences: Spoken languages & Reserved Area account'}
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#4A453E]">
+                    <span>{uxCopy.optionalBadge}</span>
+                    <ChevronDown
+                      className={`h-4 w-4 transition-transform ${isOptionalDrawerOpen ? 'rotate-180' : ''}`}
+                      aria-hidden="true"
+                    />
+                  </span>
+                </button>
+
+                {isOptionalDrawerOpen && (
+                  <div className="space-y-5 border-t border-[#050505]/20 bg-[#F6F1E7] p-4 sm:p-5">
+                    <div>
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-sm font-bold text-[#050505]">{copy.formLanguages}</span>
+                        <span className="border border-[#050505]/30 bg-[#EAE3D5] px-2 py-0.5 text-xs font-bold text-[#050505]">
+                          {uxCopy.optionalBadge}
+                        </span>
+                      </div>
+                      <div className="mt-2.5 flex flex-wrap gap-2">
+                        {SPOKEN_LANGUAGE_OPTIONS.map((langOption) => {
+                          const active = spokenLanguages.includes(langOption);
+                          return (
+                            <button
+                              key={langOption}
+                              type="button"
+                              onClick={() => toggleLanguage(langOption)}
+                              className={`nlm-pressable min-h-[38px] border px-3 py-1.5 text-xs font-bold transition ${
+                                active
+                                  ? 'border-[#050505] bg-[#050505] text-[#F6F1E7]'
+                                  : 'border-[#050505]/40 bg-[#FFFFFF] text-[#050505] hover:border-[#050505]'
+                              }`}
+                            >
+                              {langOption}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {!isSignedIn && (
+                      <div className="space-y-3 border border-[#050505]/25 bg-[#EAE3D5] p-4">
+                        <div className="flex items-center justify-between gap-2">
+                          <label className="flex cursor-pointer items-center gap-3 text-sm font-bold text-[#050505]">
+                            <input
+                              type="checkbox"
+                              checked={createAccount}
+                              onChange={(e) => {
+                                const nextChecked = e.target.checked;
+                                setCreateAccount(nextChecked);
+                                if (!nextChecked) {
+                                  clearFieldError('password');
+                                }
+                              }}
+                              className="h-5 w-5 shrink-0 accent-[#050505]"
+                            />
+                            <span>{copy.formCreateAccountToggle}</span>
+                          </label>
+                          <span className="bg-[#FFFFFF] px-2 py-0.5 text-xs font-bold text-[#050505]">
+                            {uxCopy.optionalBadge}
+                          </span>
+                        </div>
+                        <p className="text-xs text-[#4A453E]">{uxCopy.createAccountHint}</p>
+
+                        {(createAccount || Boolean(fieldErrors.password)) && (
+                          <div className="pt-1">
+                            <div className="flex items-center justify-between gap-2">
+                              <label htmlFor="sp-password" className="text-sm font-bold text-[#050505]">
+                                {copy.formPassword} *
+                              </label>
+                              <span className="shrink-0 whitespace-nowrap bg-[#050505] px-2 py-0.5 text-xs font-bold text-[#F6F1E7]">
+                                {uxCopy.conditionalBadge}
+                              </span>
+                            </div>
+                            <input
+                              id="sp-password"
+                              type="password"
+                              autoComplete="new-password"
+                              value={password}
+                              onChange={(e) => {
+                                setPassword(e.target.value);
+                                clearFieldError('password');
+                              }}
+                              aria-invalid={Boolean(fieldErrors.password)}
+                              aria-describedby={
+                                fieldErrors.password
+                                  ? 'sp-password-error sp-password-hint'
+                                  : 'sp-password-hint'
+                              }
+                              placeholder={uxCopy.passwordPlaceholder}
+                              className={`mt-2 h-12 w-full px-3.5 text-base text-[#050505] placeholder:text-[#4A453E]/65 ${
+                                fieldErrors.password
+                                  ? 'border-2 border-[#991B1B] bg-[#FEF2F2]'
+                                  : 'border border-[#050505] bg-[#FFFFFF]'
+                              }`}
+                            />
+                            <p id="sp-password-hint" className="mt-1 text-xs text-[#4A453E]">
+                              {uxCopy.existingAccountHint}
+                            </p>
+                            {fieldErrors.password && (
+                              <p id="sp-password-error" className="mt-1.5 text-sm font-bold text-[#991B1B]">
+                                {fieldErrors.password}
+                              </p>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+
               {hasTerrazzaDuomo21 && (
-                <div className="border border-[#0A0A0C]/20 bg-[#EDEBE6] p-4 text-sm leading-relaxed text-[#0A0A0C]">
+                <div className="border border-[#050505] bg-[#EAE3D5] p-4 text-sm leading-relaxed text-[#050505]">
                   <p className="font-bold">{terrazzaUi.confirmationRefundNotice}</p>
-                  <p className="mt-1 text-[13px] text-[#4F4D48]">{terrazzaUi.entryCheckpointNotice}</p>
+                  <p className="mt-1 text-xs text-[#4A453E]">{terrazzaUi.entryCheckpointNotice}</p>
                 </div>
               )}
 
+              {/* Terms Acceptance Card on #FFFFFF */}
               <div
-                className={`space-y-2 border-t border-[#0A0A0C]/14 pt-5 ${
-                  fieldErrors.acceptedTerms ? 'bg-[#FEF2F2] p-3.5 border-2 border-[#B91C1C]' : ''
+                className={`space-y-2.5 p-4 ${
+                  fieldErrors.acceptedTerms
+                    ? 'border-2 border-[#991B1B] bg-[#FEF2F2]'
+                    : 'border border-[#050505] bg-[#FFFFFF]'
                 }`}
               >
                 <div className="flex items-start justify-between gap-2">
-                  <label className="flex cursor-pointer items-start gap-3 text-sm leading-relaxed text-[#0A0A0C]">
+                  <label className="flex min-h-[44px] cursor-pointer items-start gap-3 text-sm leading-relaxed text-[#050505]">
                     <input
                       id="sp-terms"
                       type="checkbox"
@@ -1539,7 +1741,7 @@ export default function SinglePassCheckoutView({
                       }}
                       aria-invalid={Boolean(fieldErrors.acceptedTerms)}
                       aria-describedby={fieldErrors.acceptedTerms ? 'sp-terms-error' : undefined}
-                      className="mt-1 h-5 w-5 shrink-0 accent-[#0A0A0C]"
+                      className="mt-1 h-5 w-5 shrink-0 accent-[#050505]"
                     />
                     <span>
                       {totalFeeCents > 0
@@ -1552,16 +1754,16 @@ export default function SinglePassCheckoutView({
                       *
                     </span>
                   </label>
-                  <span className="shrink-0 whitespace-nowrap bg-[#0A0A0C] px-2 py-0.5 text-[13px] font-bold text-[#FFFFFF]">
+                  <span className="shrink-0 whitespace-nowrap bg-[#050505] px-2 py-0.5 text-xs font-bold text-[#F6F1E7]">
                     {uxCopy.requiredBadge} *
                   </span>
                 </div>
                 {fieldErrors.acceptedTerms && (
-                  <p id="sp-terms-error" className="pl-8 text-sm font-semibold text-[#B91C1C]">
+                  <p id="sp-terms-error" className="pl-8 text-sm font-bold text-[#991B1B]">
                     {fieldErrors.acceptedTerms}
                   </p>
                 )}
-                <div className="flex flex-wrap gap-4 pl-8 text-[13px] font-bold text-[#0A0A0C]">
+                <div className="flex flex-wrap gap-4 pl-8 text-xs font-bold text-[#050505]">
                   <Link href={`${lp}/terms`} locale={locale} className="underline">
                     {copy.termsPolicyLabel}
                   </Link>
@@ -1574,85 +1776,55 @@ export default function SinglePassCheckoutView({
                 </div>
               </div>
             </div>
+          </div>
 
-            {submittedOnce && summaryItems.length > 0 && (
-              <p className="text-sm font-semibold text-[#B91C1C]">
-                {summaryItems.length === 1
-                  ? uxCopy.errorSummarySingleTitle
-                  : uxCopy.errorSummaryTitle}
-              </p>
-            )}
-
-            <button
-              type="submit"
-              disabled={submitting}
-              className="nlm-pressable flex min-h-[54px] w-full items-center justify-center gap-2 bg-[#D9381E] px-6 py-4 text-sm font-extrabold uppercase tracking-[0.04em] text-[#FFFFFF] transition hover:bg-[#B82B14] disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              <Lock className="h-4 w-4" aria-hidden="true" />
-              <span>{submitting ? copy.paymentProcessingLabel : copy.formPayNowCta}</span>
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </button>
-          </form>
-
-          {/* Right Summary Card */}
-          <aside className="lg:col-span-5">
-            <div className="sticky top-24 space-y-5 border border-[#0A0A0C]/16 bg-[#FFFFFF] p-6">
-              <h2 className="font-display text-2xl font-bold uppercase text-[#0A0A0C]">
-                {isIt ? 'Riepilogo & Valuta di Pagamento' : 'Order & Currency Summary'}
-              </h2>
-              <div className="space-y-3 text-sm tabular-nums">
-                <div className="flex justify-between text-[#4F4D48]">
-                  <span>{copy.guestsLabel}</span>
-                  <span className="font-bold text-[#0A0A0C]">{totalGuests}</span>
+          {/* CAPITOLO 04 — PLINTO NOTTE #050505: Azione Pagamento #25D366 */}
+          <div className="border-t border-[#F6F1E7]/16 bg-[#050505] py-8 text-[#F6F1E7]">
+            <div className="mx-auto max-w-4xl space-y-4 px-4 sm:px-6 lg:px-8">
+              <div className="flex flex-wrap items-baseline justify-between gap-2">
+                <div>
+                  <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-[#EAE3D5]">
+                    04 · {isIt ? 'CONFERMA & PAGAMENTO IMMEDIATO' : 'INSTANT SECURE PAYMENT'}
+                  </p>
+                  <p className="mt-1 text-xs text-[#C2B9AA]">
+                    {isIt
+                      ? 'Apple Pay · Google Pay · Carta di credito o debito · Pass QR istantaneo'
+                      : 'Apple Pay · Google Pay · Credit or Debit Card · Instant QR Pass'}
+                  </p>
                 </div>
-                <div className="flex justify-between text-[#4F4D48]">
-                  <span>{copy.basePriceLabel}</span>
-                  <span className="font-semibold text-[#0A0A0C]">
-                    {formatEurFromCents(subtotalBaseCents, locale)}
-                  </span>
-                </div>
-                {totalFeeCents > 0 && (
-                  <div className="flex justify-between text-[#4F4D48]">
-                    <span>{feeLabel}</span>
-                    <span className="font-semibold text-[#0A0A0C]">
-                      +{formatEurFromCents(totalFeeCents, locale)}
-                    </span>
-                  </div>
-                )}
-                <div className="flex justify-between border-t border-[#0A0A0C]/16 pt-3 text-lg font-extrabold text-[#0A0A0C]">
-                  <span>{copy.totalLabel} (EUR)</span>
-                  <span className="font-display text-3xl text-[#0A0A0C]">
-                    {formatEurFromCents(grandTotalCents, locale)}
-                  </span>
-                </div>
-                {currency !== 'EUR' && (
-                  <div className="space-y-1 bg-[#EDEBE6] p-3.5">
-                    <div className="flex justify-between text-base font-extrabold text-[#0A0A0C]">
-                      <span>
-                        {copy.chargedInCurrencyLabel} ({currency})
-                      </span>
-                      <span className="font-display text-2xl text-[#D9381E]">
-                        {formatMinorCurrency(convertedTotalMinor, currency, locale)}
-                      </span>
-                    </div>
-                    <p className="text-right text-[13px] text-[#4F4D48]">
-                      1 EUR = {currentFxRate.toFixed(4)} {currency}
-                    </p>
-                  </div>
-                )}
-              </div>
-
-              <div className="space-y-2 border-t border-[#0A0A0C]/12 pt-4 text-[13px] text-[#4F4D48]">
-                <p className="flex items-center gap-2 font-bold text-[#0A0A0C]">
-                  <ShieldCheck className="h-4 w-4 text-[#0A0A0C]" aria-hidden="true" />
-                  nightlifemilan.com · Official Concierge
+                <p className="font-display text-3xl font-extrabold tabular-nums text-[#F6F1E7]">
+                  {currency !== 'EUR'
+                    ? formatMinorCurrency(convertedTotalMinor, currency, locale)
+                    : formatEurFromCents(grandTotalCents, locale)}
                 </p>
-                <p>{copy.fxRateNotice}</p>
               </div>
+
+              {submittedOnce && summaryItems.length > 0 && (
+                <p className="border border-[#FCA5A5]/50 bg-[#7F1D1D] px-4 py-2.5 text-sm font-bold text-[#FEF2F2]">
+                  {summaryItems.length === 1
+                    ? uxCopy.errorSummarySingleTitle
+                    : uxCopy.errorSummaryTitle}
+                </p>
+              )}
+
+              <button
+                type="submit"
+                disabled={submitting}
+                className="nlm-pressable flex min-h-[56px] w-full items-center justify-center gap-2.5 bg-[#25D366] px-6 py-4 text-sm font-extrabold uppercase tracking-[0.05em] text-[#050505] transition hover:bg-[#2EE472] disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                <Lock className="h-4 w-4" aria-hidden="true" />
+                <span>{submitting ? copy.paymentProcessingLabel : copy.formPayNowCta}</span>
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </button>
+
+              <p className="flex items-center justify-center gap-2 text-center text-xs text-[#C2B9AA]">
+                <ShieldCheck className="h-4 w-4 shrink-0 text-[#25D366]" aria-hidden="true" />
+                <span>nightlifemilan.com · Official Concierge & Encrypted Checkout</span>
+              </p>
             </div>
-          </aside>
-        </div>
-      )}
+          </div>
+        </form>
+      ) : null}
     </section>
   );
 }

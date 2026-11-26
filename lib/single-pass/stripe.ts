@@ -104,7 +104,7 @@ export function buildPaymentIntentParams(
   params.set('currency', currency);
   // Card + Apple Pay + Google Pay wallets without external link branding; never set receipt_email.
   params.set('payment_method_types[0]', 'card');
-  params.set('description', `Nightlife Milan Order ${order.id} (${order.totalHeadcount || 1} pax)`);
+  params.set('description', `Nightlife Milan Order ${order.id} (${order.totalHeadcount || 1} guests)`);
 
   params.set('metadata[order_id]', order.id);
   params.set('metadata[customer_name]', order.customer.fullName.slice(0, 80));

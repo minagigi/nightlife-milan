@@ -28,7 +28,7 @@ export default async function SinglePassCartPage({
   const loc = (getLocaleDef(locale)?.code || DEFAULT_LOCALE) as LocaleCode;
 
   return (
-    <main className="min-h-screen bg-[#EDEBE6] text-[#0A0A0C]">
+    <main className="min-h-screen bg-[#050505] text-[#F6F1E7]">
       <SinglePassCartPageView locale={loc} />
     </main>
   );

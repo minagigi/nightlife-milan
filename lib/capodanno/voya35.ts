@@ -91,7 +91,7 @@ const VOYA_BASE_35: Record<LocaleCode, VoyaBasePack> = {
       `Location: Voya Rooftop · 20° Piano, 85m (${VOYA_ADDR})`,
       'Format: Restaurant & DJ Set fino al mattino con vista fuochi a 360° su Milano',
       'Prezzo ufficiale confermato: 300€ a persona (menu completo, vini e brindisi)',
-      'Prenotazione online diretta (+20% Booking & Transaction Fees al checkout) o Concierge WhatsApp 24/7 +39 351 912 7047',
+      'Prenotazione online diretta (+20% Servizio di Conciergerie & Transaction Fees al checkout) o Concierge WhatsApp 24/7 +39 351 912 7047',
     ],
     sourceBasis:
       'Locandina ufficiale Voya Rooftop 20th Floor e Menu Capodanno ufficiale Voya Rooftop 2026/2027: tariffa confermata 300€ a persona, 1 bottiglia di vino ogni 4 persone, brindisi e acqua.',
@@ -127,7 +127,7 @@ const VOYA_BASE_35: Record<LocaleCode, VoyaBasePack> = {
       `Venue: Voya Rooftop · 20th Floor, 85m (${VOYA_ADDR})`,
       'Format: Fine-Dining Restaurant & DJ Set with 360° fireworks views',
       'Confirmed official rate: €300 per person all-inclusive menu',
-      'Direct online checkout (+20% Booking & Transaction Fees at checkout) or 24/7 WhatsApp Concierge +39 351 912 7047',
+      'Direct online checkout (+20% Concierge Service & Transaction Fees at checkout) or 24/7 WhatsApp Concierge +39 351 912 7047',
     ],
     sourceBasis:
       'Official Voya Rooftop 20th Floor NYE 2027 flyer & official Voya menu PDF: single confirmed rate €300 per person with wine (1/4 guests), midnight toast and water.',

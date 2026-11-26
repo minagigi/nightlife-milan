@@ -38,7 +38,7 @@ export default async function SinglePassAccountPage({
       : undefined;
 
   return (
-    <main className="min-h-screen bg-[#EDEBE6] text-[#0A0A0C]">
+    <main className="min-h-screen bg-[#F6F1E7] text-[#050505]">
       <SinglePassAccountView
         locale={loc}
         initialCheckoutState={checkoutState}

@@ -295,14 +295,14 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
         </section>
 
         {/* Table of Contents */}
-        <section className="mt-8 border border-[#24242C] bg-[#0B0C10] p-6">
-          <h2 className="font-serif text-xl font-bold text-[#F6F1E7]">{c.tocTitle}</h2>
-          <div className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
+        <section className="mt-6 border border-[#24242C] bg-[#0B0C10] p-4 sm:p-6">
+          <h2 className="font-mono text-xs font-bold uppercase tracking-widest text-[#C9A84C]">{c.tocTitle}</h2>
+          <div className="mt-3 flex gap-2 overflow-x-auto pb-1.5 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-2.5 sm:overflow-visible sm:pb-0">
             {c.tocItems.map((item) => (
               <a
                 key={item.id}
                 href={`#${item.id}`}
-                className="border border-[#202028] bg-[#111218] px-3.5 py-2.5 text-xs font-semibold text-[#EAE3D5] transition hover:border-[#C9A84C] hover:text-[#C9A84C]"
+                className="inline-flex min-h-[38px] shrink-0 items-center border border-[#202028] bg-[#111218] px-3.5 py-2 text-xs font-semibold text-[#EAE3D5] transition hover:border-[#C9A84C] hover:text-[#C9A84C]"
               >
                 {item.label}
               </a>
@@ -484,45 +484,48 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
           </div>
         </section>
 
-        {/* 3. Tickets & VIP Privé Pricing Grid */}
-        <section id="tickets-vip" className="mt-10 space-y-6 border border-[#24242C] bg-[#0B0C10] p-6 sm:p-10">
+        {/* 3. Tickets & VIP Privé Pricing Grid — Alternativa 02 Capitolo Carta Calda #F6F1E7 */}
+        <section id="tickets-vip" className="mt-10 space-y-6 border-2 border-[#050505] bg-[#F6F1E7] p-6 text-[#050505] sm:p-10">
           <div>
-            <h2 className="font-serif text-2xl font-bold text-[#F6F1E7] sm:text-3xl">{c.ticketsHeading}</h2>
-            <p className="mt-1 text-sm text-[#C2B9AA]">{c.ticketsSubheading}</p>
+            <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-[#4A453E]">
+              TARIFFE UFFICIALI & PRENOTAZIONE
+            </p>
+            <h2 className="mt-1 font-serif text-2xl font-bold text-[#050505] sm:text-3xl">{c.ticketsHeading}</h2>
+            <p className="mt-1 text-sm text-[#3D3830]">{c.ticketsSubheading}</p>
           </div>
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {c.tiers.map((tier) => (
               <div
                 key={tier.id}
-                className="flex flex-col justify-between border border-[#24242C] bg-[#101116] p-6"
+                className="flex flex-col justify-between border border-[#050505] bg-[#FFFFFF] p-6 text-[#050505]"
               >
                 <div>
                   <div className="flex flex-wrap items-center justify-between gap-2">
-                    <span className="border border-[#C9A84C]/40 bg-[#C9A84C]/10 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-[#C9A84C]">
+                    <span className="bg-[#050505] px-2.5 py-0.5 font-mono text-[11px] font-bold uppercase tracking-wider text-[#F6F1E7]">
                       {tier.badge}
                     </span>
-                    <span className="font-serif text-2xl font-bold text-[#F6F1E7]">{tier.price}</span>
+                    <span className="font-serif text-2xl font-extrabold text-[#050505]">{tier.price}</span>
                   </div>
-                  <h3 className="mt-3 font-serif text-xl font-bold text-[#F6F1E7]">{tier.title}</h3>
-                  <p className="mt-1.5 text-xs text-[#C2B9AA]">{tier.summary}</p>
-                  <ul className="mt-4 space-y-2 text-sm text-[#EAE3D5]">
+                  <h3 className="mt-3 font-serif text-xl font-bold text-[#050505]">{tier.title}</h3>
+                  <p className="mt-1.5 text-xs text-[#4A453E]">{tier.summary}</p>
+                  <ul className="mt-4 space-y-2 text-sm text-[#24201B]">
                     {tier.bullets.map((b) => (
                       <li key={b} className="flex items-start gap-2">
-                        <span className="mt-1 text-xs text-[#C9A84C]">◆</span>
+                        <span className="mt-1 text-xs font-bold text-[#050505]">◆</span>
                         <span>{b}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="mt-6 pt-3">
+                <div className="mt-6 bg-[#050505] p-1.5">
                   {tier.action === 'xceed' ? (
                     <a
                       href={ORTHODOX_NYE_JUSTME_AFFILIATE_URL}
                       target="_blank"
                       rel="noopener noreferrer sponsored"
-                      className="inline-flex min-h-[44px] w-full items-center justify-center bg-[#C9A84C] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#050505] transition hover:bg-[#DFBE63]"
+                      className="inline-flex min-h-[44px] w-full items-center justify-center bg-[#EAE3D5] px-4 py-2.5 text-xs font-extrabold uppercase tracking-wider text-[#050505] transition hover:bg-[#F6F1E7]"
                     >
                       {c.xceedCtaLabel}
                     </a>
@@ -531,7 +534,7 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
                       href={whatsappVipHref}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex min-h-[44px] w-full items-center justify-center border border-[#25D366] bg-[#25D366]/15 px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#F6F1E7] transition hover:bg-[#25D366] hover:text-[#050505]"
+                      className="inline-flex min-h-[44px] w-full items-center justify-center bg-[#25D366] px-4 py-2.5 text-xs font-extrabold uppercase tracking-wider text-[#050505] transition hover:bg-[#2EE472]"
                     >
                       {c.whatsappCtaLabel}
                     </a>
@@ -541,7 +544,7 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
             ))}
           </div>
 
-          <p className="border border-[#24242C] bg-[#111218] p-4 text-sm text-[#EAE3D5]">{c.vipConciergeNote}</p>
+          <p className="border border-[#050505]/25 bg-[#EAE3D5] p-4 text-sm font-medium text-[#050505]">{c.vipConciergeNote}</p>
         </section>
 
         {/* 4. Theme, Dress Code & 4-Star Mountain Contest */}
@@ -597,9 +600,9 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
             <p className="mt-1 text-sm text-[#C2B9AA]">{imagePack.sectionSubtitle}</p>
           </div>
 
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+          <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:pb-0">
             {imagePack.gallery.map((shot) => (
-              <figure key={shot.assetKey} className="overflow-hidden border border-[#24242C] bg-[#101116]">
+              <figure key={shot.assetKey} className="w-[78vw] max-w-[330px] shrink-0 snap-start overflow-hidden border border-[#24242C] bg-[#101116] md:w-auto md:max-w-none">
                 <div className="relative aspect-[4/5] w-full">
                   <Image
                     src={shot.src}
@@ -700,19 +703,21 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
           </div>
         </section>
 
-        {/* 7. FAQ Section */}
-        <section id="faq" className="mt-10 space-y-5 border border-[#24242C] bg-[#0B0C10] p-6 sm:p-10">
-          <h2 className="font-serif text-2xl font-bold text-[#F6F1E7] sm:text-3xl">{c.faqHeading}</h2>
-          <div className="space-y-3">
-            {c.faqs.map((faq) => (
+        {/* 7. FAQ Section — Alternativa 02 Capitolo Carta Calda #F6F1E7 */}
+        <section id="faq" className="mt-10 space-y-5 border-2 border-[#050505] bg-[#F6F1E7] p-6 text-[#050505] sm:p-10">
+          <h2 className="font-serif text-2xl font-bold text-[#050505] sm:text-3xl">{c.faqHeading}</h2>
+          <div className="divide-y divide-[#050505]/15 border-y border-[#050505]/15 bg-[#FFFFFF] px-5">
+            {c.faqs.map((faq, idx) => (
               <details
                 key={faq.q}
-                className="group border border-[#202028] bg-[#101116] p-5"
+                open={idx < 2}
+                className="group py-4"
               >
-                <summary className="cursor-pointer list-none font-semibold text-[#F6F1E7] group-open:text-[#C9A84C]">
-                  {faq.q}
+                <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 font-bold text-[#050505] marker:hidden">
+                  <span>{faq.q}</span>
+                  <span className="font-mono text-xl font-bold text-[#050505] transition-transform group-open:rotate-45" aria-hidden="true">+</span>
                 </summary>
-                <p className="mt-3 text-sm leading-relaxed text-[#D6CEC0]">{faq.a}</p>
+                <p className="pt-2 text-sm leading-relaxed text-[#24201B]">{faq.a}</p>
               </details>
             ))}
           </div>
