@@ -1708,6 +1708,7 @@ export default async function ClubPage({ params }: Props) {
     'v-philipps': ['g-126', 'g-60'],
     'v-55milano': ['g-19', 'g-60'],
     'v-repvblic': ['g-20', 'g-119'],
+    'v-radio-rooftop-bar-milano': ['g-129', 'g-rooftops-milan'],
   };
   const reciprocalGuideIds = Array.from(
     new Set([...(venueDedicatedGuides[venue.id] || []), 'g-dress-code', 'g-vip-bottle-prices', 'g-new-years-eve-2027', 'g-115', 'g-116', 'g-118']),

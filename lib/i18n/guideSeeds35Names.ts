@@ -626,6 +626,46 @@ const LANG6_NAMES: Record<string, Record<Lang6, { name: string; shortName: strin
     de: { name: 'Mailand Umland, Rho Fiera (M1), Assago Forum (M2), Sesto & San Donato: U-Bahn & VIP-Clubs', shortName: 'Rho Fiera, Assago & Umland', zone: 'Rho Fiera M1, Forum Assago M2, Sesto San Giovanni, San Donato & Rozzano' },
     pt: { name: 'Região Metropolitana de Milão, Rho Fiera (M1), Assago Forum (M2), Sesto e San Donato VIP', shortName: 'Rho Fiera, Assago e Grande Milão', zone: 'Rho Fiera M1, Forum Assago M2, Sesto San Giovanni, San Donato & Rozzano' },
   },
+  'g-127': {
+    en: { name: "New Year's Eve Dinner 2027 Near Me: Milan & Lombardy Menus (75-380 EUR)", shortName: 'NYE Dinner Near Me', zone: 'Milan, Como, Franciacorta & Lake Garda' },
+    it: { name: 'Cenone Capodanno 2027 Vicino a Me: Menu, Prezzi Reali (75-380 EUR) e Zone', shortName: 'Cenone Capodanno', zone: 'Milano, Como, Franciacorta & Lago di Garda' },
+    es: { name: 'Cena de Nochevieja 2027 Cerca de Mí: Menús y Precios Milán (75-380 EUR)', shortName: 'Cena Nochevieja', zone: 'Milán, Como, Franciacorta & Lago de Garda' },
+    fr: { name: 'Dîner du Réveillon 2027 Autour de Moi : Menus et Tarifs Milan (75-380 EUR)', shortName: 'Dîner Réveillon', zone: 'Milan, Côme, Franciacorta & Lac de Garde' },
+    de: { name: 'Silvester-Galadinner 2027 in der Nähe: Menüs & Preise Mailand (75-380 EUR)', shortName: 'Silvesterdinner', zone: 'Mailand, Como, Franciacorta & Gardasee' },
+    pt: { name: 'Ceia de Réveillon 2027 Perto de Mim: Menus e Preços Milão (75-380 EUR)', shortName: 'Ceia Réveillon', zone: 'Milão, Como, Franciacorta & Lago de Garda' },
+  },
+  'g-128': {
+    en: { name: 'Mountain Chalet NYE 2027: Snowmobile Dinner in Livigno, Bormio & Tonale', shortName: 'Chalet NYE 2027', zone: 'Livigno, Bormio, Madesimo, Ponte di Legno & Tonale' },
+    it: { name: 'Capodanno in Baita 2027: Cena in Motoslitta a Livigno, Bormio e Tonale', shortName: 'Capodanno Baita', zone: 'Livigno, Bormio, Madesimo, Ponte di Legno & Tonale' },
+    es: { name: 'Nochevieja en Cabaña Alpina 2027: Moto de Nieve en Livigno y Bormio', shortName: 'Nochevieja Cabaña', zone: 'Livigno, Bormio, Madesimo, Ponte di Legno & Tonale' },
+    fr: { name: 'Réveillon en Chalet Alpin 2027 : Motoneige à Livigno, Bormio et Tonale', shortName: 'Chalet Alpin 2027', zone: 'Livigno, Bormio, Madesimo, Ponte di Legno & Tonale' },
+    de: { name: 'Silvester auf der Berghütte 2027: Motorschlitten in Livigno & Bormio', shortName: 'Berghütte 2027', zone: 'Livigno, Bormio, Madesimo, Ponte di Legno & Tonale' },
+    pt: { name: 'Réveillon no Chalé Alpino 2027: Moto de Neve em Livigno e Bormio', shortName: 'Chalé Alpino 2027', zone: 'Livigno, Bormio, Madesimo, Ponte di Legno & Tonale' },
+  },
+  'g-129': {
+    en: { name: 'Radio Rooftop Milan 2027: 10th-Floor Aperitivo, Dress Code & NYE 200 EUR', shortName: 'Radio Rooftop', zone: 'Via Marco Polo 18 · ME Milan Il Duca (Repubblica / Porta Nuova)' },
+    it: { name: 'Radio Rooftop Milano 2027: Prezzi Aperitivo, Dress Code e Capodanno 200 EUR', shortName: 'Radio Rooftop', zone: 'Via Marco Polo 18 · ME Milan Il Duca (Repubblica / Porta Nuova)' },
+    es: { name: 'Radio Rooftop Milán 2027: Precios Aperitivo, Dress Code y Nochevieja 200 EUR', shortName: 'Radio Rooftop', zone: 'Via Marco Polo 18 · ME Milan Il Duca (Repubblica / Porta Nuova)' },
+    fr: { name: 'Radio Rooftop Milan 2027 : Tarifs Aperitivo, Dress Code et Réveillon 200 EUR', shortName: 'Radio Rooftop', zone: 'Via Marco Polo 18 · ME Milan Il Duca (Repubblica / Porta Nuova)' },
+    de: { name: 'Radio Rooftop Mailand 2027: Aperitivo-Preise, Dresscode & Silvester 200 EUR', shortName: 'Radio Rooftop', zone: 'Via Marco Polo 18 · ME Milan Il Duca (Repubblica / Porta Nuova)' },
+    pt: { name: 'Radio Rooftop Milão 2027: Preços Aperitivo, Dress Code e Réveillon 200 EUR', shortName: 'Radio Rooftop', zone: 'Via Marco Polo 18 · ME Milan Il Duca (Repubblica / Porta Nuova)' },
+  },
+  'g-130': {
+    en: { name: 'New Year’s Eve in Brescia 2027: Piazza Loggia Free, Villa Fenaroli & Garda', shortName: 'Brescia NYE 2027', zone: 'Piazza della Loggia, Rezzato, Franciacorta & Desenzano del Garda' },
+    it: { name: 'Capodanno a Brescia 2027: Piazza Loggia Gratis, Villa Fenaroli e Garda', shortName: 'Capodanno Brescia', zone: 'Piazza della Loggia, Rezzato, Franciacorta & Desenzano del Garda' },
+    es: { name: 'Nochevieja en Brescia 2027: Piazza Loggia Gratis, Villa Fenaroli y Garda', shortName: 'Nochevieja Brescia', zone: 'Piazza della Loggia, Rezzato, Franciacorta & Desenzano del Garda' },
+    fr: { name: 'Réveillon à Brescia 2027 : Piazza Loggia Gratuit, Villa Fenaroli et Garde', shortName: 'Réveillon Brescia', zone: 'Piazza della Loggia, Rezzato, Franciacorta & Desenzano del Garda' },
+    de: { name: 'Silvester in Brescia 2027: Piazza Loggia Gratis, Villa Fenaroli & Gardasee', shortName: 'Silvester Brescia', zone: 'Piazza della Loggia, Rezzato, Franciacorta & Desenzano del Garda' },
+    pt: { name: 'Réveillon em Brescia 2027: Piazza Loggia Grátis, Villa Fenaroli e Garda', shortName: 'Réveillon Brescia', zone: 'Piazza della Loggia, Rezzato, Franciacorta & Desenzano del Garda' },
+  },
+  'g-131': {
+    en: { name: 'Theatre New Year’s Eve 2027 in Milan: Manzoni, Carcano, La Scala & Zelig', shortName: 'Theatre Milan', zone: 'Quadrilatero, Porta Romana, Piazza della Scala & Viale Monza' },
+    it: { name: 'Capodanno 2027 a Teatro Milano: Manzoni, Carcano, Scala, Zelig e Dopo-Show', shortName: 'Teatro Milano', zone: 'Quadrilatero, Porta Romana, Piazza della Scala & Viale Monza' },
+    es: { name: 'Nochevieja 2027 en el Teatro Milán: Manzoni, Carcano, La Scala y Zelig', shortName: 'Teatro Milán', zone: 'Quadrilatero, Porta Romana, Piazza della Scala & Viale Monza' },
+    fr: { name: 'Réveillon 2027 au Théâtre à Milan : Manzoni, Carcano, La Scala et Zelig', shortName: 'Théâtre Milan', zone: 'Quadrilatero, Porta Romana, Piazza della Scala & Viale Monza' },
+    de: { name: 'Silvester 2027 im Theater Mailand: Manzoni, Carcano, La Scala & Zelig', shortName: 'Theater Mailand', zone: 'Quadrilatero, Porta Romana, Piazza della Scala & Viale Monza' },
+    pt: { name: 'Réveillon 2027 no Teatro em Milão: Manzoni, Carcano, La Scala e Zelig', shortName: 'Teatro Milão', zone: 'Quadrilatero, Porta Romana, Piazza della Scala & Viale Monza' },
+  },
 };
 
 const CLEAN_15_40_IT_PARENS: Record<string, { en: string }> = {

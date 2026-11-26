@@ -145,6 +145,11 @@ export const GUIDE_HERO_IMAGES_114: Record<string, string> = {
   'g-124': '/images/guides-editorial/aria-dancefloor.webp',
   'g-125': '/images/seo-events/master/carlsberg-ol-01.webp',
   'g-126': '/images/guides-editorial/philipps-plein-chandeliers.webp',
+  'g-127': '/images/guides-editorial/bischeri-dinner.webp',
+  'g-128': '/images/guides-editorial/terme-alpine-snow.webp',
+  'g-129': '/images/guides-editorial/radio-skyline-dusk.webp',
+  'g-130': '/images/seo-events/master/capodanno-villa-castello-flow-01.webp',
+  'g-131': '/images/guides-editorial/philipps-plein-dinnershow.webp',
 };
 
 export const GUIDE_INLINE_IMAGES_114: Record<string, string[]> = {
@@ -289,6 +294,11 @@ export const GUIDE_INLINE_IMAGES_114: Record<string, string[]> = {
   'g-124': ['/images/guides-editorial/pineta-dancefloor.webp', '/images/guides-editorial/gate-neon.webp', '/images/guides-editorial/just-me-dancefloor.webp', '/images/guides-editorial/palace-como-fireworks.webp'],
   'g-125': ['/images/seo-events/master/carlsberg-ol-02.webp', '/images/seo-events/master/carlsberg-ol-03.webp', '/images/guides-editorial/carlsberg-ol-stage-candles.webp', '/images/seo-events/master/carlsberg-ol-04.webp'],
   'g-126': ['/images/guides-editorial/philipps-plein-dinnershow.webp', '/images/guides-editorial/philipps-plein-monogram-bar.webp', '/images/guides-editorial/philipps-plein-bottle-parade.webp', '/images/guides-editorial/philipps-plein-mezzanine.webp'],
+  'g-127': ['/images/guides-editorial/bischeri-gala.webp', '/images/guides-editorial/tom-milano-dinner.webp', '/images/guides-editorial/fiftyfive-loft.webp', '/images/guides-editorial/gattopardo-nave.webp'],
+  'g-128': ['/images/guides-editorial/terme-thermal-night.webp', '/images/guides-editorial/terme-villa-gala.webp', '/images/guides-editorial/terminus-como-lake.webp', '/images/guides-editorial/palace-como-fireworks.webp'],
+  'g-129': ['/images/venues/editorial/radio-rooftop-bar-milano.webp', '/images/seo-events/master/radio-rooftop-real-03.webp', '/images/seo-events/master/radio-rooftop-real-04.webp', '/images/seo-events/master/terrazza-gallia-milano.webp'],
+  'g-130': ['/images/guides-editorial/palace-como-fireworks.webp', '/images/guides-editorial/terme-thermal-night.webp', '/images/guides-editorial/just-me-pavilion.webp', '/images/guides-editorial/bischeri-gala.webp'],
+  'g-131': ['/images/guides-editorial/terrazza-duomo-skyline.webp', '/images/guides-editorial/gattopardo-nave.webp', '/images/guides-editorial/armani-prive-lounge.webp', '/images/seo-events/master/blue-note-milano.webp'],
 };
 
 export function getGuideHeroImage114(guideId: string, fallback?: string): string {

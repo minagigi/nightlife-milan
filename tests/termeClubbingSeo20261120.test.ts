@@ -97,8 +97,8 @@ test('Terme di Sirmione confirms 198 EUR, non-partner status, JustMe Garda Lake 
   }
 });
 
-test('GSC Pillar & Upgraded Guides in mockGuides (total 126): >= 2,000 words, 6 H2 sections, >= 18 H3, 0 inner H2, 6 FAQs, clean limits & images <= 300 KB across all 35 locales', () => {
-  assert.equal(mockGuides.length, 126, `Expected 126 total guides, got ${mockGuides.length}`);
+test('GSC Pillar & Upgraded Guides in mockGuides (total 131): >= 2,000 words, 6 H2 sections, >= 18 H3, 0 inner H2, 6 FAQs, clean limits & images <= 300 KB across all 35 locales', () => {
+  assert.equal(mockGuides.length, 131, `Expected 131 total guides, got ${mockGuides.length}`);
 
   for (const id of [
     'g-117',
@@ -130,6 +130,11 @@ test('GSC Pillar & Upgraded Guides in mockGuides (total 126): >= 2,000 words, 6 
     'g-28',
     'g-125',
     'g-126',
+    'g-127',
+    'g-128',
+    'g-129',
+    'g-130',
+    'g-131',
   ] as const) {
     const guide = mockGuides.find((g) => g.id === id);
     assert.ok(guide, `Missing guide ${id}`);
@@ -373,6 +378,11 @@ test('V2 Curated Editorial Media & Reusable 118-Guide Template invariants', () =
     'g-28',
     'g-125',
     'g-126',
+    'g-127',
+    'g-128',
+    'g-129',
+    'g-130',
+    'g-131',
   ] as const) {
     const hero = GUIDE_HERO_IMAGES_114[gid];
     const inlines = GUIDE_INLINE_IMAGES_114[gid] || [];

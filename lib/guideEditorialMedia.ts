@@ -10,6 +10,7 @@ import { getGsc20261124DisplayHeadline } from './guidesGscBatch20261124';
 import { getGsc20261125DisplayHeadline } from './guidesGscBatch20261125';
 import { getGscCapodanno20261125DisplayHeadline } from './guidesGscCapodannoBatch20261125';
 import { getTop1Seo20261125DisplayHeadline } from './guidesTop1SeoBatch20261125';
+import { getGsc20261126DisplayHeadline } from './guidesGscBatch20261126';
 import { GUIDE_100_SEEDS } from './guides100Catalog';
 import { getLocalizedGuideSeedNames } from './i18n/guideSeeds35Names';
 
@@ -299,6 +300,11 @@ export function getEditorialDisplayHeadline(
   locale: LocaleCode,
   localizedFullTitle: string,
 ): string {
+  const gsc20261126 = getGsc20261126DisplayHeadline(guideId, locale);
+  if (gsc20261126) {
+    return clampConciseHeadline(gsc20261126);
+  }
+
   const top1Seo20261125 = getTop1Seo20261125DisplayHeadline(guideId, locale);
   if (top1Seo20261125) {
     return clampConciseHeadline(top1Seo20261125);
@@ -830,10 +836,18 @@ const IMAGE_DHASH_64: Record<string, string> = {
   "/images/venues/philipps-milano/philipps-milano-04.webp": "180b070dcc9c3525",
   "/images/venues/philipps-milano/philipps-milano-05.webp": "66233355170f0f07",
   "/images/venues/philipps-milano/philipps-milano-06.webp": "f33f1b1f7b6b6263",
-  "/images/philipps-milano.webp": "e4e6c4ec80929b3e"
+  "/images/philipps-milano.webp": "e4e6c4ec80929b3e",
+  "/images/seo-events/master/radio-rooftop-real-03.webp": "6f6f76f4c0c1b3e3",
+  "/images/seo-events/master/radio-rooftop-real-04.webp": "51392969793070f5"
 };
 
 const VENUE_PHOTO_CANDIDATES: Record<string, string[]> = {
+  "radio-rooftop-bar-milano": [
+    "/images/guides-editorial/radio-skyline-dusk.webp",
+    "/images/venues/editorial/radio-rooftop-bar-milano.webp",
+    "/images/seo-events/master/radio-rooftop-real-03.webp",
+    "/images/seo-events/master/radio-rooftop-real-04.webp"
+  ],
   "just-me-milano": [
     "/images/guides-editorial/just-me-pavilion.webp",
     "/images/guides-editorial/just-me-dancefloor.webp",
@@ -1307,6 +1321,11 @@ const CAPTION_BY_SRC: Record<string, { caption: string; district: string }> = {
   '/images/guides-editorial/ceresio-pool-dusk.webp': { caption: 'Ceresio 7 · Rooftop & Piscine Panoramica', district: 'Porta Volta / Isola' },
   '/images/guides-editorial/terrazza-duomo-skyline.webp': { caption: 'Terrazza Duomo 21 · Vista Guglie', district: 'Piazza del Duomo' },
   '/images/guides-editorial/radio-skyline-dusk.webp': { caption: 'Radio Rooftop · Skyline Porta Nuova', district: 'Via Marco Polo 18' },
+  '/images/venues/editorial/radio-rooftop-bar-milano.webp': { caption: 'Radio Rooftop Milan · Terrazza 10° Piano ME Il Duca', district: 'Via Marco Polo 18 · M3 Repubblica' },
+  '/images/seo-events/master/radio-rooftop-real-03.webp': { caption: 'Radio Rooftop · Lounge Panoramica & Cocktail Bar', district: 'Porta Nuova / Repubblica' },
+  '/images/seo-events/master/radio-rooftop-real-04.webp': { caption: 'Radio Rooftop · Vista Grattacieli & Tapas Fusion', district: 'ME Milan Il Duca · 10° Piano' },
+  '/images/seo-events/master/capodanno-villa-castello-flow-01.webp': { caption: 'Villa Fenaroli Palace Hotel · Gran Cenone Storico', district: 'Rezzato · Brescia / Franciacorta' },
+  '/images/seo-events/master/blue-note-milano.webp': { caption: 'Palcoscenico & Gala Live a Milano', district: 'Isola / Centro Storico' },
   '/images/guides-editorial/terme-thermal-night.webp': { caption: 'Terme di Sirmione Aquaria · Vasche Termali', district: 'Lago di Garda' },
   '/images/guides-editorial/terme-alpine-snow.webp': { caption: 'QC Terme Bormio · Acque Calde tra le Alpi', district: 'Alta Valtellina' },
   '/images/guides-editorial/terme-villa-gala.webp': { caption: 'QC Terme & Dimore Storiche Lombarde', district: 'Milano / San Pellegrino' },
@@ -1340,11 +1359,11 @@ function describeSrc(src: string, fallbackTitle: string): EditorialPlate {
 }
 
 const ROOFTOP_IDS = new Set([
-  'g-rooftops-milan', 'g-8', 'g-18', 'g-32', 'g-33', 'g-39', 'g-50', 'g-51', 'g-73', 'g-76', 'g-81', 'g-87', 'g-93',
+  'g-rooftops-milan', 'g-8', 'g-18', 'g-32', 'g-33', 'g-39', 'g-50', 'g-51', 'g-73', 'g-76', 'g-81', 'g-87', 'g-93', 'g-129',
 ]);
-const TERME_IDS = new Set(['g-117', 'g-120', 'g-122', 'g-90']);
+const TERME_IDS = new Set(['g-117', 'g-120', 'g-122', 'g-90', 'g-128']);
 const DINNER_IDS = new Set([
-  'g-secret-bars', 'g-2', 'g-private-parties', 'g-9', 'g-19', 'g-30', 'g-31', 'g-36', 'g-37', 'g-38', 'g-53', 'g-60', 'g-78', 'g-85', 'g-88', 'g-102', 'g-121', 'g-123', 'g-125', 'g-126',
+  'g-secret-bars', 'g-2', 'g-private-parties', 'g-9', 'g-19', 'g-30', 'g-31', 'g-36', 'g-37', 'g-38', 'g-53', 'g-60', 'g-78', 'g-85', 'g-88', 'g-102', 'g-121', 'g-123', 'g-125', 'g-126', 'g-127', 'g-130', 'g-131',
 ]);
 const ELECTRONIC_IDS = new Set([
   'g-techno-2026', 'g-5', 'g-23', 'g-24', 'g-25', 'g-26', 'g-34', 'g-35', 'g-70', 'g-77', 'g-79', 'g-80', 'g-89', 'g-124',
@@ -1506,6 +1525,17 @@ const SINGLE_VENUE_SPECS: Record<string, SingleVenueGuideSpec> = {
       '/images/guides-editorial/armani-prive-lounge.webp',
       '/images/guides-editorial/terrazza-duomo-skyline.webp',
       '/images/guides-editorial/voya-rooftop-20f.webp',
+      '/images/venues/editorial/03-milano-dress-code-door-policy.webp',
+    ],
+    allowFaqPlate: false,
+  },
+  'g-129': {
+    candidates: [
+      ...VENUE_PHOTO_CANDIDATES['radio-rooftop-bar-milano'],
+      '/images/seo-events/master/terrazza-gallia-milano.webp',
+      '/images/guides-editorial/voya-rooftop-20f.webp',
+      '/images/guides-editorial/terrazza-duomo-skyline.webp',
+      '/images/guides-editorial/ceresio-pool-dusk.webp',
       '/images/venues/editorial/03-milano-dress-code-door-policy.webp',
     ],
     allowFaqPlate: false,
