@@ -23,7 +23,7 @@ export const PARTENOPEA_JUSTME_POSTER_SRC =
 export const PARTENOPEA_JUSTME_MENU_CARD_SRC =
   '/images/events/partenopea-2026/justme-partenopea-2026-menu-dinner-show-70.webp';
 export const PARTENOPEA_JUSTME_TABLES_CARD_SRC =
-  '/images/events/partenopea-2026/justme-partenopea-2026-party-vip-tables.webp';
+  '/images/events/partenopea-2026/justme-friday-27-nov-luciani.webp';
 
 export const PARTENOPEA_JUSTME_FLOW_ASSET_KEYS = [
   'partenopea-justme-01-torre-branca',
@@ -298,13 +298,13 @@ const CORE_35: Record<LocaleCode, CoreLocalePack> = {
     metaTitle: 'Cena Spettacolo Partenopea JustMe Milan | Nov 27 · €70',
     metaDescription: `Fri Nov 27 2026 at JustMe Milan: Cena Spettacolo Partenopea with Pineta Napoli. €70 Full Menu, €20 Party, VIP tables 320-5000€ · Xceed or ${PHONE}.`,
     h1: 'CSP · Cena Spettacolo Partenopea at JustMe Milano (Pineta Napoli)',
-    subtitle: 'Friday, November 27, 2026 · 19:30 Doors & Aperitif · 21:30 Dinner Show & Live Music · 23:00 Party until 05:00 · John Vaccaro, DJ Franky Dee & DJ Antonio Marigliano',
-    themeTag: 'In Collaboration with Pineta Napoli · Live Dinner Show & Party · Torre Branca',
+    subtitle: 'Friday, November 27, 2026 · 19:30 Doors & Aperitif · 21:30 Dinner Show & Live Music · 23:00 Party until 05:00 · DJ Guest Luciani, Yana Bandysik, John Vaccaro, DJ Franky Dee & DJ Antonio Marigliano',
+    themeTag: 'In Collaboration with Pineta Napoli · Live Dinner Show + DJ Guest Luciani & Yana Bandysik · Torre Branca',
     dateBadge: 'Friday, Nov 27, 2026 · 19:30 / 05:00',
     priceBadge: 'Menu €70 · Aperitif €15 · Club €20 · Tables €320–€5.000',
     ageDressBadge: '21+ · Elegant (Men: long trousers mandatory)',
     leadIntro: 'After conquering Naples, the celebrated CSP · Cena Spettacolo Partenopea arrives at JustMe Milano in Parco Sempione beneath the illuminated Torre Branca on Friday, November 27, 2026, presented in official collaboration with Pineta Napoli.',
-    extraNativeParagraph: 'Doors open at 19:30 for the €15 Aperitif and seated dinner reception, building into the €70 full 4-course Neapolitan Dinner Show from 21:30 led live by Voice John Vaccaro, before transitioning at 23:00 into the full club party with DJ Franky Dee and DJ Antonio Marigliano until 05:00 AM.',
+    extraNativeParagraph: 'Doors open at 19:30 for the €15 Aperitif and seated dinner reception, building into the €70 full 4-course Neapolitan Dinner Show from 21:30 led live by Voice John Vaccaro, before transitioning at 23:00 into the full Friday Night club party headlined by Special Guests DJ Luciani & Yana Bandysik alongside DJ Franky Dee and DJ Antonio Marigliano until 05:00 AM.',
     homeLabel: 'Home',
     eventsLabel: 'Milan Events',
     specialLabel: 'Special Events',
@@ -379,13 +379,13 @@ const CORE_35: Record<LocaleCode, CoreLocalePack> = {
     metaTitle: 'Cena Spettacolo Partenopea JustMe Milano | 27 Nov · 70€',
     metaDescription: `Ven 27 nov 2026 al JustMe Milano: Cena Spettacolo Partenopea con Pineta Napoli, menu 70€, Party dalle 23:00 (20€). Biglietti e tavoli ${PHONE}.`,
     h1: 'CSP · Cena Spettacolo Partenopea al JustMe Milano (Pineta Napoli)',
-    subtitle: 'Venerdì 27 Novembre 2026 · 19:30 Apertura & Aperitivo · 21:30 Dinner Show & Live Music · 23:00 Start Party fino alle 05:00 · Voice John Vaccaro, DJ Franky Dee e DJ Antonio Marigliano',
-    themeTag: 'In Collaborazione con Pineta Napoli · Dinner Show & Party · Torre Branca',
+    subtitle: 'Venerdì 27 Novembre 2026 · 19:30 Apertura & Aperitivo · 21:30 Dinner Show & Live Music · 23:00 Start Party fino alle 05:00 · DJ Guest Luciani, Yana Bandysik, Voice John Vaccaro, DJ Franky Dee e DJ Antonio Marigliano',
+    themeTag: 'In Collaborazione con Pineta Napoli · Dinner Show + DJ Guest Luciani & Yana Bandysik · Torre Branca',
     dateBadge: 'Venerdì 27 Novembre 2026 · 19:30 / 05:00',
     priceBadge: 'Cena Menu 70€ · Aperitivo 15€ · Club 20€ · Tavoli 320€–5.000€',
     ageDressBadge: '21+ · Elegante (uomini: pantalone lungo obbligatorio)',
     leadIntro: 'Dopo aver conquistato Napoli, la celebre CSP · Cena Spettacolo Partenopea sbarca a Milano venerdì 27 novembre 2026 nella prestigiosa cornice vetrata del JustMe Milano sotto la Torre Branca, in collaborazione ufficiale con Pineta Napoli.',
-    extraNativeParagraph: 'La serata apre alle 19:30 per gli ingressi aperitivo (15€) e il ricevimento ai tavoli ristorante, esplode dalle 21:30 con il Dinner Show cantato dal vivo da Voice John Vaccaro accompagnato dal menu partenopeo completo da 70€, e prosegue dalle 23:00 fino alle 05:00 con il Party firmato DJ Franky Dee e DJ Antonio Marigliano.',
+    extraNativeParagraph: 'La serata apre alle 19:30 per gli ingressi aperitivo (15€) e il ricevimento ai tavoli ristorante, esplode dalle 21:30 con il Dinner Show cantato dal vivo da Voice John Vaccaro accompagnato dal menu partenopeo completo da 70€, e prosegue dalle 23:00 fino alle 05:00 con il Friday Night Party guidato dagli special guest DJ Luciani e Yana Bandysik insieme a DJ Franky Dee e DJ Antonio Marigliano.',
     homeLabel: 'Home',
     eventsLabel: 'Eventi Milano',
     specialLabel: 'Eventi Speciali',

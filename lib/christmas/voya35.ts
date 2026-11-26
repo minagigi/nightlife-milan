@@ -222,8 +222,8 @@ function getData35(): Record<LocaleCode, ShortChristmasPack> {
     bookingHeading: 'Prenota il Natale al Voya Rooftop · Concierge 24/24, 7 su 7',
     bookingSubtitle:
       'Verifica la disponibilità in tempo reale su WhatsApp (+39 351 912 7047): risposta 24/7, conferma immediata e prenotazione garantita tramite prepagamento al 100%.',
-    venueBannerEyebrow: 'Scheda Locale Ufficiale · Voya Rooftop Milano',
-    venueBannerDesc: 'Scopri tutte le serate, gli orari e i tavoli VIP del rooftop più alto di Milano (Viale Achille Papa 30).',
+    venueBannerEyebrow: 'Scheda Locale Ufficiale · Voya Rooftop Milano & Gift Card',
+    venueBannerDesc: 'Scopri le serate panoramiche, i tavoli VIP e le Voya Experience Gift Card ufficiali (100 € Aperitivo Experience, 150 € Classic Dinner Experience per due, 250 € Signature Dinner Experience per due, validità 6 mesi) in Viale Achille Papa 30.',
     nyeCrossTitle: 'Festeggi anche Capodanno 2027 al Voya Rooftop?',
     nyeCrossDesc: 'Scopri il Gran Cenone Panoramico di Capodanno al 20° piano (31 Dicembre 2026) con menu ufficiale a 300€ a persona e vista 360° sui fuochi di Milano.',
     nyeCrossCta: 'Vedi Capodanno Voya 2027 (300€) →',
@@ -284,8 +284,8 @@ function getData35(): Record<LocaleCode, ShortChristmasPack> {
     bookingHeading: 'Reserve Your Christmas Table · 24/7 WhatsApp Concierge',
     bookingSubtitle:
       'Message our Concierge on WhatsApp (+39 351 912 7047) 24 hours a day, 7 days a week for real-time seating availability and 100% prepaid reservation confirmation.',
-    venueBannerEyebrow: 'Official Venue Guide · Voya Rooftop Milan',
-    venueBannerDesc: 'Explore panoramic rooftop dining, evening DJ sets, and VIP tables at Viale Achille Papa 30.',
+    venueBannerEyebrow: 'Official Venue Guide · Voya Rooftop Milan & Gift Cards',
+    venueBannerDesc: 'Explore panoramic rooftop dining, evening DJ sets, VIP tables, and official Voya Experience Gift Cards (€100 Aperitif Experience, €150 Classic Dinner Experience for two, €250 Signature Dinner Experience for two, valid 6 months) at Viale Achille Papa 30.',
     nyeCrossTitle: 'Planning New Year’s Eve 2027 at Voya Rooftop too?',
     nyeCrossDesc: 'View our confirmed 20th-floor New Year’s Eve 2027 Menu at €300 per person with after-midnight Cotechino & lentils and 360° fireworks over Milan.',
     nyeCrossCta: 'Explore Voya NYE 2027 (€300) →',

@@ -55,16 +55,25 @@ const defaultFaqs = (clubName: string, address: string, age: string, dressCode: 
   }
 ];
 
+const LEGACY_WEEKLY_ALIASES: Record<string, string> = {
+  'justme-wednesday-absolutely': 'justme-wednesday',
+  'absolutely': 'justme-wednesday',
+  'justme-thursday-viziatissima': 'justme-thursday',
+  'viziatissima': 'justme-thursday',
+};
+
 export const getWeeklyEventBySlug = (slug: string): WeeklyEvent | undefined => {
-  const canon = resolveEventSlugToCanonical(slug);
+  const mapped = LEGACY_WEEKLY_ALIASES[slug] || slug;
+  const canon = resolveEventSlugToCanonical(mapped);
+  const resolved = LEGACY_WEEKLY_ALIASES[canon] || canon;
   return weeklyEvents.find(
     (e) =>
-      `${e.clubSlug}-${e.day}-${e.eventSlug}` === canon ||
-      `${e.clubSlug}-${e.day}-${e.eventSlug}` === slug ||
-      e.id === canon ||
-      e.id === slug ||
-      e.eventSlug === canon ||
-      e.eventSlug === slug
+      `${e.clubSlug}-${e.day}-${e.eventSlug}` === resolved ||
+      `${e.clubSlug}-${e.day}-${e.eventSlug}` === mapped ||
+      e.id === resolved ||
+      e.id === mapped ||
+      e.eventSlug === resolved ||
+      e.eventSlug === mapped
   );
 };
 
@@ -123,21 +132,21 @@ export const weeklyEvents: WeeklyEvent[] = [
     clubName: 'Just Me Milano',
     day: 'wednesday',
     dayOfWeek: 3,
-    eventSlug: 'absolutely',
-    name: 'Absolutely',
-    genres: ['Deep House', 'Lounge'],
-    target: '25+, Professionals, Fashion Industry',
+    eventSlug: 'wednesday-night-gentlemen-show',
+    name: 'Wednesday Night · The Gentlemen Show',
+    genres: ['House', 'Commercial', 'Live Show'],
+    target: '23+, Professionals, Fashion Industry, Ladies Night',
     description: {
-      en: 'Midweek magic at Just Me. "Absolutely" brings a unique vibe with deep house music and mystical entertainment including a fortune teller. The perfect blend of a sophisticated dinner and an elegant party.',
-      it: 'Magia di metà settimana al Just Me. "Absolutely" porta una vibrazione unica con musica deep house e intrattenimento mistico, inclusa una cartomante. Il mix perfetto tra una cena sofisticata e un party elegante.'
+      en: 'Midweek elegance under Torre Branca at Just Me Milano. Doors open at 19:30 for the Royal Buffet Aperitif (€15), followed at 22:20 by The Gentlemen Show live stage performance and from 23:00 until 05:00 by the club party with DJ Francesco Campanini.',
+      it: 'Eleganza di metà settimana sotto la Torre Branca al Just Me Milano. Apertura alle 19:30 con Royal Buffet Aperitif (15 €), alle 22:20 spettacolo dal vivo The Gentlemen Show e dalle 23:00 fino alle 05:00 party con DJ Francesco Campanini.'
     },
     pricing: { aperitif: 'From €15', club: 'From €15', tables: 'From €320 to €5,000' },
     dressCode: {
       en: 'Elegant and Fashion-forward.',
-      it: 'Elegante e alla moda.'
+      it: 'Elegante e curato.'
     },
-    faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '25+', 'Elegant and Fashion-forward', 'Deep House and Lounge'),
-    image: '/images/events/october-2026/249189-e2b7683e02e3.webp',
+    faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '23+', 'Elegant and Fashion-forward', 'House, Commercial and Live Show'),
+    image: '/images/events/weekly-posters/justme-wednesday-gentlemen-show.webp',
     xceedLink: 'https://xceed.me/en/milano/event/wednesday-night-225/249169/channel/nightlifemilan-1',
     priority: 100
   },
@@ -147,20 +156,20 @@ export const weeklyEvents: WeeklyEvent[] = [
     clubName: 'Just Me Milano',
     day: 'thursday',
     dayOfWeek: 4,
-    eventSlug: 'viziatissima',
-    name: 'VIZIATISSIMA',
-    genres: ['Live Music', 'Italian Hits', 'Commercial'],
-    target: '25+, Locals, VIPs',
+    eventSlug: 'thursday-night',
+    name: 'Thursday Night',
+    genres: ['Reggaeton', 'Hip-Hop', 'Commercial'],
+    target: '21+, International, Locals, VIPs',
     description: {
-      en: 'The famous singing dinner "VIZIATISSIMA" featuring live performances by Benny Camaro. Start with a premium dining experience and seamlessly transition into a high-energy party where everyone sings along to timeless hits.',
-      it: 'La famosa cena cantata "VIZIATISSIMA" con esibizioni dal vivo di Benny Camaro. Inizia con un\'esperienza culinaria premium e passa senza interruzioni a una festa ad alta energia dove tutti cantano i successi senza tempo.'
+      en: 'Thursday night at Just Me Milano beneath Torre Branca in Parco Sempione. While the Viziatissima singing dinner format takes a winter pause during December corporate events, Thursday nights feature international urban & commercial clubbing (including special editions such as Thanksgiving and Vida Loca) with Aperitif from 19:30 and Party until 05:00.',
+      it: 'Il giovedì notte del Just Me Milano sotto la Torre Branca in Parco Sempione. Con la pausa invernale del format Viziatissima durante gli eventi aziendali di dicembre, il giovedì prosegue con aperitivo dalle 19:30 e clubbing internazionale urban, hip-hop e reggaeton (incluse le serate speciali Thanksgiving e Vida Loca) fino alle 05:00.'
     },
     pricing: { aperitif: 'From €15', club: 'From €15', tables: 'From €320 to €5,000' },
     dressCode: {
       en: 'Strictly Elegant.',
       it: 'Strettamente Elegante.'
     },
-    faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '25+', 'Strictly Elegant', 'Live Music and Commercial'),
+    faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '21+', 'Strictly Elegant', 'Reggaeton, Hip-Hop and Commercial'),
     image: '/images/events/october-2026/249192-8d811d65d7c5.webp',
     xceedLink: 'https://xceed.me/en/milano/event/vida-loca-13/249216/channel/nightlifemilan-1',
     priority: 100

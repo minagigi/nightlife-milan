@@ -601,6 +601,7 @@ export function selectMasterAssetKeys(slug: string, venueName = '', categorySlug
   if (s.includes('tunnel')) return ['tunnel-1', 'tunnel-2', 'volt-club-milano-interior-02', 'tempio-del-futuro-perduto-1'];
   if (s.includes('magnolia')) return ['circolo-magnolia', 'circolo-magnolia-2', 'base-milano-1', 'base-milano-2'];
   if (s.includes('santeria')) return ['santeria-toscana-31', 'v-santeria-toscana-2', 'santeria-paladini-8', 'v-santeria-paladini-2'];
+  if (s.includes('incantami') || s.includes('signorvino') || s.includes('spaccanapoli') || s.includes('farinami')) return VENUE_MASTER_KEYS['dinner-show-generic'];
   if (s.includes('fabbrica')) return ['fabbrica-del-vapore-1', 'fabbrica-del-vapore-2', 'base-milano-1', 'base-milano-2'];
 if (s.includes('pelledoca')) return ['pelledoca-milano', 'gattopardo-interior-01', 'capodanno-cena-cantata-show-flow-01', 'fiftyfive-milano-cena-01'];
 if (s.includes('base-milano')) return ['base-milano-1', 'base-milano-2', 'fabbrica-del-vapore-1', 'fabbrica-del-vapore-2'];

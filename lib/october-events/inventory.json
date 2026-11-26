@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceCheckedAt": "2026-11-25T19:00:00.000Z",
+  "sourceCheckedAt": "2026-11-24T22:00:00.000Z",
   "events": [
     {
       "id": "fabrique-fred-de-palma",
@@ -21022,11 +21022,11 @@
         "longitude": null
       },
       "image": {
-        "src": "/images/events/october-2026/249161-014a4857fb70.webp",
+        "src": "/images/events/october-2026/249161-university-party-24nov.webp",
         "width": 1080,
         "height": 1350,
-        "bytes": 270212,
-        "sha256": "76aab7e4b825847a051aabfdc5d942377a4e71583ca72f2ca217018100f1dfc9"
+        "bytes": 256856,
+        "sha256": "0ca995170f763ca598e7bed60f4fb2f513b1cdd128794d00a56c64b97c133b93"
       },
       "age": "18+",
       "dressCode": "Elegant",
@@ -21104,6 +21104,72 @@
       "dressCodeDetail": "men-long-trousers"
     },
     {
+      "id": "incantami-signorvino-2026-11-25",
+      "sourceUrl": "https://incantami.netlify.app/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unknown",
+      "officialName": "inCANTAmi · La Cena che si Canta con Benny Camaro",
+      "shortName": "inCANTAmi Dinner",
+      "startISO": "2026-11-25T19:00:00+01:00",
+      "endISO": "2026-11-26T00:00:00+01:00",
+      "startTimeKnown": true,
+      "timeKind": "doors",
+      "doorTime": "19:00",
+      "venue": {
+        "id": "v-signorvino-navigli",
+        "name": "Signorvino Navigli",
+        "address": "Viale Gorizia, 30, 20144 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Viale Gorizia, 30",
+          "addressLocality": "Milano",
+          "postalCode": "20144",
+          "addressCountry": "IT"
+        },
+        "latitude": 45.4525,
+        "longitude": 9.1764
+      },
+      "image": {
+        "src": "/images/events/october-2026/incantami-signorvino-25nov.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 142324,
+        "sha256": "3497965d74c0bd6495b2f6e2899143d1902b5e80c0164671f340e149ba1dbbcf"
+      },
+      "age": "21+",
+      "dressCode": "Smart Casual",
+      "genres": [
+        "Live Music",
+        "Hits"
+      ],
+      "performers": [
+        {
+          "name": "Benny Camaro"
+        }
+      ],
+      "offers": [
+        {
+          "name": "Cena Cantata Menu Completo (6 antipasti condivisi, piatto principale, dolce, acqua e caffè)",
+          "price": 40,
+          "category": "ticket",
+          "availability": "available",
+          "url": null,
+          "admissionFrom": "20:00"
+        },
+        {
+          "name": "Aperitivo in Enoteca alla carta",
+          "price": null,
+          "category": "other",
+          "availability": "available",
+          "url": null,
+          "admissionFrom": "19:00",
+          "admissionUntil": "20:00"
+        }
+      ],
+      "provenance": "Official COMUNICATI & FLYER announcement + https://incantami.netlify.app/ · checked 2026-11-24",
+      "halloween": false
+    },
+    {
       "id": "249169",
       "sourceUrl": "https://xceed.me/en/milano/event/wednesday-night-225/249169",
       "affiliateUrl": "https://xceed.me/en/milano/event/wednesday-night-225/249169/channel/nightlifemilan-1",
@@ -21125,11 +21191,11 @@
         "longitude": null
       },
       "image": {
-        "src": "/images/events/october-2026/249169-02805d900826.webp",
+        "src": "/images/events/october-2026/249169-gentlemen-show-25nov.webp",
         "width": 1080,
         "height": 1350,
-        "bytes": 280748,
-        "sha256": "adf8b4a4ff3324260e4572f8f04fc2ab2a6b61a69566783b9c3cd71519f955d4"
+        "bytes": 87416,
+        "sha256": "56dfdfb26571265cc4f21e755f2dc3917c458c028b1bee1d8d6d48bfdbdda5d5"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -21138,7 +21204,14 @@
         "Hip-hop",
         "Hits"
       ],
-      "performers": [],
+      "performers": [
+        {
+          "name": "The Gentlemen Show"
+        },
+        {
+          "name": "DJ Francesco Campanini"
+        }
+      ],
       "offers": [
         {
           "name": "Dehor Table",
@@ -21197,7 +21270,98 @@
       "halloween": false,
       "startTimeKnown": true,
       "commercialCheckedAt": "2026-11-25T05:00:24.000Z",
-      "dressCodeDetail": "men-long-trousers"
+      "dressCodeDetail": "men-long-trousers",
+      "shortName": "The Gentlemen Show"
+    },
+    {
+      "id": "weco-fabbrica-del-vapore-2026-11-25",
+      "sourceUrl": "https://wecomilano.netlify.app/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unknown",
+      "officialName": "WECO · Social Dinner & Party",
+      "shortName": "WECO Social Dinner",
+      "startISO": "2026-11-25T19:30:00+01:00",
+      "endISO": "2026-11-26T02:00:00+01:00",
+      "startTimeKnown": true,
+      "timeKind": "doors",
+      "doorTime": "19:30",
+      "venue": {
+        "id": "fabbrica-del-vapore",
+        "name": "Bar Vapore 1928 · Fabbrica del Vapore",
+        "address": "Via Giulio Cesare Procaccini, 4, 20154 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Giulio Cesare Procaccini, 4",
+          "addressLocality": "Milano",
+          "postalCode": "20154",
+          "addressCountry": "IT"
+        },
+        "latitude": 45.4852,
+        "longitude": 9.1764
+      },
+      "image": {
+        "src": "/images/events/october-2026/weco-fabbrica-del-vapore-25nov.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 128596,
+        "sha256": "84207ce08509ff7a05dc347b083511edd88361fc6c024a12fad701ba2f0d7c16"
+      },
+      "age": "21+",
+      "dressCode": "Smart Casual",
+      "genres": [
+        "Commercial",
+        "House",
+        "Hits"
+      ],
+      "performers": [
+        {
+          "name": "WECO Social Dinner & DJ Set"
+        }
+      ],
+      "offers": [
+        {
+          "name": "Social Experience (1 drink + tagliere salumi/formaggi con focaccia e taralli + DJ set)",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": null,
+          "admissionFrom": "19:30"
+        },
+        {
+          "name": "Aperitivo Gourmet (1 drink + tagliere o pinsa + flûte + DJ set)",
+          "price": 20,
+          "category": "ticket",
+          "availability": "available",
+          "url": null,
+          "admissionFrom": "19:30"
+        },
+        {
+          "name": "Il Doppio Sorso (2 drink + tagliere o pinsa + DJ set)",
+          "price": 25,
+          "category": "ticket",
+          "availability": "available",
+          "url": null,
+          "admissionFrom": "19:30"
+        },
+        {
+          "name": "L'Apericena Condiviso (1 drink + tagliere + 1 pinsa ogni 2 + flûte + DJ set)",
+          "price": 30,
+          "category": "ticket",
+          "availability": "available",
+          "url": null,
+          "admissionFrom": "19:30"
+        },
+        {
+          "name": "The Full Experience (2 drink + tagliere + 1 pinsa ogni 2 + flûte + DJ set)",
+          "price": 35,
+          "category": "ticket",
+          "availability": "available",
+          "url": null,
+          "admissionFrom": "19:30"
+        }
+      ],
+      "provenance": "Official COMUNICATI & FLYER announcement + https://wecomilano.netlify.app/ · checked 2026-11-24",
+      "halloween": false
     },
     {
       "id": "249216",
@@ -21297,6 +21461,197 @@
       "commercialCheckedAt": "2026-11-25T05:00:24.000Z",
       "dressCodeDetail": "men-long-trousers",
       "shortName": "Thanksgiving · Vida Loca"
+    },
+    {
+      "id": "philipps-20261126-saint",
+      "sourceUrl": "https://philippsmilano.com/events",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "SAINT · Couture Thursday Club",
+      "shortName": "Saint",
+      "startISO": "2026-11-26T20:00:00+01:00",
+      "endISO": "2026-11-27T04:30:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-philipps",
+        "name": "Philipp's Milano",
+        "address": "Via Daniele Manin, 21, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Daniele Manin, 21",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": 45.4754,
+        "longitude": 9.1972
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/philipps-thursday-saint.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 269620,
+        "sha256": "1bc2253474add396199eb5e3787bbfae93a11fe45d3b13a811806e28f4aade11"
+      },
+      "age": null,
+      "dressCode": "Couture Evening Elegance",
+      "genres": [
+        "House",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [],
+      "provenance": "https://philippsmilano.com/events · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
+      "id": "mib-20261126-justice",
+      "sourceUrl": "https://xceed.me/en/milano/club/mib-milano",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "JUSTICE x Fastlife · Urban Thursday",
+      "shortName": "Justice",
+      "startISO": "2026-11-26T23:00:00+01:00",
+      "endISO": "2026-11-27T05:00:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-mibmilano",
+        "name": "MIB Milano",
+        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Gaetano Negri, 10",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20123"
+        },
+        "latitude": 45.4648,
+        "longitude": 9.1832
+      },
+      "image": {
+        "src": "/images/events/october-2026/mib-justice-20261126.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 256546,
+        "sha256": "b67061faea30910c456a5ba6f3be7441cd679fb548db2a86609c6c0b016caeab"
+      },
+      "age": "18+",
+      "dressCode": "Smart Casual",
+      "genres": [
+        "Hip-hop",
+        "Reggaeton",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Early Pre-sale before 01:00",
+          "price": 1,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/club/mib-milano",
+          "admissionUntil": "01:00"
+        },
+        {
+          "name": "Woman Admission + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/club/mib-milano",
+          "audience": "women"
+        },
+        {
+          "name": "Man Admission + 1 Drink",
+          "price": 20,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/club/mib-milano"
+        },
+        {
+          "name": "VIP Table",
+          "price": 250,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/club/mib-milano"
+        }
+      ],
+      "provenance": "https://xceed.me/en/milano/club/mib-milano · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
+      "id": "theclub-20261126-atlanta",
+      "sourceUrl": "https://www.theclubmilano.com/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "ATLANTA · Hip-Hop & Trap Night",
+      "shortName": "Atlanta",
+      "startISO": "2026-11-26T23:30:00+01:00",
+      "endISO": "2026-11-27T05:30:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-theclub",
+        "name": "The Club Milano",
+        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Corso Garibaldi, 97",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": 45.4792,
+        "longitude": 9.1886
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/theclub-thursday-atlanta.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 256718,
+        "sha256": "35765327385397315dc9da00e04096c83148c3b03a2141cbcd16c0f13ebc913c"
+      },
+      "age": "18+",
+      "dressCode": "Smart Casual",
+      "genres": [
+        "Hip-hop",
+        "Reggaeton"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Woman Pre-sale + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/",
+          "audience": "women"
+        },
+        {
+          "name": "Man Pre-sale + 1 Drink",
+          "price": 25,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "Dancefloor Table (2 Bottles)",
+          "price": 400,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "VIP Table (2 Bottles)",
+          "price": 600,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        }
+      ],
+      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
     },
     {
       "id": "243825",
@@ -21432,6 +21787,12 @@
       ],
       "performers": [
         {
+          "name": "DJ Guest Luciani"
+        },
+        {
+          "name": "Yana Bandysik"
+        },
+        {
           "name": "Voice John Vaccaro"
         },
         {
@@ -21439,9 +21800,6 @@
         },
         {
           "name": "DJ Antonio Marigliano"
-        },
-        {
-          "name": "Pineta Napoli"
         }
       ],
       "offers": [
@@ -21503,6 +21861,193 @@
       "startTimeKnown": true,
       "commercialCheckedAt": "2026-11-25T05:00:24.000Z",
       "dressCodeDetail": "men-long-trousers"
+    },
+    {
+      "id": "philipps-20261127-clubforlife",
+      "sourceUrl": "https://philippsmilano.com/events",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "ClubForLife · Couture Friday Night",
+      "shortName": "ClubForLife",
+      "startISO": "2026-11-27T20:00:00+01:00",
+      "endISO": "2026-11-28T04:30:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-philipps",
+        "name": "Philipp's Milano",
+        "address": "Via Daniele Manin, 21, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Daniele Manin, 21",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": 45.4754,
+        "longitude": 9.1972
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/philipps-friday-clubforlife.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 206258,
+        "sha256": "f0fba5ede59ffbab6bb173b222aaeb41808624e5dc69fec1a9f6ddcde1c39fa1"
+      },
+      "age": null,
+      "dressCode": "Couture Evening Elegance",
+      "genres": [
+        "House",
+        "Hip-hop",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [],
+      "provenance": "https://philippsmilano.com/events · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
+      "id": "mib-20261127-billions",
+      "sourceUrl": "https://mibmilano.it/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "BILLIONS · Dinner Show & Club",
+      "shortName": "Billions",
+      "startISO": "2026-11-27T20:30:00+01:00",
+      "endISO": "2026-11-28T05:00:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-mibmilano",
+        "name": "MIB Milano",
+        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Gaetano Negri, 10",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20123"
+        },
+        "latitude": 45.4648,
+        "longitude": 9.1832
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/mib-friday-billions.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 131722,
+        "sha256": "32b93cfec4b17dcc2ce620d962d77d84f2cfe062bb30d0e19b4a557ac30cbc9e"
+      },
+      "age": "20+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Hip-hop",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Aperitif + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "20:30",
+          "admissionUntil": "22:30"
+        },
+        {
+          "name": "Club Admission + 1 Drink",
+          "price": 20,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "23:00"
+        },
+        {
+          "name": "Seated Dinner Show",
+          "price": 50,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "20:30"
+        },
+        {
+          "name": "VIP Table",
+          "price": 250,
+          "category": "table",
+          "availability": "available",
+          "url": "https://mibmilano.it/"
+        }
+      ],
+      "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
+      "id": "spaccanapoli-farinami-garden-2026-11-27",
+      "sourceUrl": "https://cenanapoletana.netlify.app/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unknown",
+      "officialName": "SpaccaNapoli · Cena Cantata Live",
+      "shortName": "SpaccaNapoli Live",
+      "startISO": "2026-11-27T20:30:00+01:00",
+      "endISO": "2026-11-28T02:00:00+01:00",
+      "startTimeKnown": true,
+      "timeKind": "start",
+      "doorTime": "20:30",
+      "venue": {
+        "id": "v-farinami-garden",
+        "name": "Farinami Garden",
+        "address": "Via Nino Bixio, 1, 20099 Sesto San Giovanni, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Nino Bixio, 1",
+          "addressLocality": "Sesto San Giovanni",
+          "postalCode": "20099",
+          "addressCountry": "IT"
+        },
+        "latitude": 45.5338,
+        "longitude": 9.2298
+      },
+      "image": {
+        "src": "/images/events/october-2026/spaccanapoli-farinami-garden-27nov.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 204438,
+        "sha256": "21811f5bcd7fe54cc9ec1a343009324df802d0af4c01f5b41f71fe60db99aef9"
+      },
+      "age": "20+",
+      "dressCode": "Smart Casual",
+      "genres": [
+        "Live Music",
+        "Commercial",
+        "Hits"
+      ],
+      "performers": [
+        {
+          "name": "SpaccaNapoli Live Show"
+        }
+      ],
+      "offers": [
+        {
+          "name": "Formula Tagliere Aperitivo + Live Show",
+          "price": 25,
+          "category": "ticket",
+          "availability": "available",
+          "url": null,
+          "admissionFrom": "20:30"
+        },
+        {
+          "name": "Menu Cena Napoletana (Frittatina e Montanara, Pasta patate e provola, Salsiccia e friarielli, Caffè) + Show",
+          "price": 45,
+          "category": "ticket",
+          "availability": "available",
+          "url": null,
+          "admissionFrom": "20:30"
+        }
+      ],
+      "provenance": "Official COMUNICATI & FLYER announcement + https://cenanapoletana.netlify.app/content.json · checked 2026-11-24",
+      "halloween": false
     },
     {
       "id": "236326",
@@ -21723,6 +22268,87 @@
       "commercialCheckedAt": "2026-11-25T05:00:24.000Z"
     },
     {
+      "id": "theclub-20261127-firstclass",
+      "sourceUrl": "https://www.theclubmilano.com/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "FIRST CLASS · International Friday",
+      "shortName": "First Class",
+      "startISO": "2026-11-27T23:30:00+01:00",
+      "endISO": "2026-11-28T05:30:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-theclub",
+        "name": "The Club Milano",
+        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Corso Garibaldi, 97",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": 45.4792,
+        "longitude": 9.1886
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/theclub-friday-firstclass.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 278248,
+        "sha256": "9ff958a7893bd6410fbc8ebdbed53e47bfa83a4d3cc922f99cec750daf879a91"
+      },
+      "age": "20+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Hip-hop",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Woman Pre-sale + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/",
+          "audience": "women"
+        },
+        {
+          "name": "Man Pre-sale + 1 Drink",
+          "price": 25,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "Dancefloor Table (2 Bottles)",
+          "price": 400,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "Privé Consolle Table (2 Bottles)",
+          "price": 440,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "VIP Table (2 Bottles)",
+          "price": 600,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        }
+      ],
+      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
       "id": "243831",
       "sourceUrl": "https://xceed.me/en/milano/event/saturday-night-777/243831",
       "affiliateUrl": "https://xceed.me/en/milano/event/saturday-night-777/243831/channel/nightlifemilan-1",
@@ -21841,11 +22467,11 @@
         "longitude": null
       },
       "image": {
-        "src": "/images/events/october-2026/249197-a9e4bf6c46ee.webp",
+        "src": "/images/events/october-2026/249197-carlo-piacente-28nov.webp",
         "width": 1080,
         "height": 1350,
-        "bytes": 249518,
-        "sha256": "641c05872b35a84492205f81a7a18c01728f46079a4facd0b37ae924e16e2cd3"
+        "bytes": 238840,
+        "sha256": "ff5cf94d77e359d326fb5d5a33d3f0af2592d956ad0bd58683b76181648be2c0"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -21854,7 +22480,11 @@
         "Hip-hop",
         "Hits"
       ],
-      "performers": [],
+      "performers": [
+        {
+          "name": "DJ Carlo Piacente"
+        }
+      ],
       "offers": [
         {
           "name": "Dehor Table",
@@ -22108,6 +22738,125 @@
       "startTimeKnown": true,
       "commercialCheckedAt": "2026-11-25T05:00:24.000Z",
       "dressCodeDetail": "men-long-trousers"
+    },
+    {
+      "id": "philipps-20261128-konekt",
+      "sourceUrl": "https://philippsmilano.com/events",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "KONEKT · Saturday Afro & Melodic House",
+      "shortName": "Konekt",
+      "startISO": "2026-11-28T20:00:00+01:00",
+      "endISO": "2026-11-29T04:30:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-philipps",
+        "name": "Philipp's Milano",
+        "address": "Via Daniele Manin, 21, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Daniele Manin, 21",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": 45.4754,
+        "longitude": 9.1972
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/philipps-saturday-konekt.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 193840,
+        "sha256": "4a802eb81aec8c2514dcdda30ef22d782913f2124f0f8e31b99c02d0172832b1"
+      },
+      "age": null,
+      "dressCode": "Couture Evening Elegance",
+      "genres": [
+        "House",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [],
+      "provenance": "https://philippsmilano.com/events · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
+      "id": "mib-20261128-loveaffair",
+      "sourceUrl": "https://mibmilano.it/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "LOVE AFFAIR · Cena Cantata & Club",
+      "shortName": "Love Affair",
+      "startISO": "2026-11-28T20:30:00+01:00",
+      "endISO": "2026-11-29T05:00:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-mibmilano",
+        "name": "MIB Milano",
+        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Gaetano Negri, 10",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20123"
+        },
+        "latitude": 45.4648,
+        "longitude": 9.1832
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/mib-saturday-loveaffair.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 185650,
+        "sha256": "3fc28d3165e2ffc5a0bda56ed6cf64f5849c46ab7a17189e646b6930271523ea"
+      },
+      "age": "21+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Aperitif + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "20:30",
+          "admissionUntil": "22:30"
+        },
+        {
+          "name": "Club Admission + 1 Drink",
+          "price": 20,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "23:30"
+        },
+        {
+          "name": "Cena Cantata (Singing Dinner)",
+          "price": 50,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "21:00"
+        },
+        {
+          "name": "VIP Table",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://mibmilano.it/"
+        }
+      ],
+      "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
     },
     {
       "id": "240988",
@@ -22475,6 +23224,86 @@
       "commercialCheckedAt": "2026-11-25T05:00:24.000Z"
     },
     {
+      "id": "theclub-20261128-girlsrepublic",
+      "sourceUrl": "https://www.theclubmilano.com/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "GIRLS REPUBLIC · Saturday Flagship",
+      "shortName": "Girls Republic",
+      "startISO": "2026-11-28T23:30:00+01:00",
+      "endISO": "2026-11-29T05:30:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-theclub",
+        "name": "The Club Milano",
+        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Corso Garibaldi, 97",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": 45.4792,
+        "longitude": 9.1886
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/theclub-saturday-girlsrepublic.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 245558,
+        "sha256": "1eb74623367d79e5d3e8842f177a5ab6d79f6ec432cc16e2ff3aba3c01358257"
+      },
+      "age": "20+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Woman Pre-sale + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/",
+          "audience": "women"
+        },
+        {
+          "name": "Man Pre-sale + 1 Drink",
+          "price": 25,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "Dancefloor Table (2 Bottles)",
+          "price": 400,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "Privé Consolle Table (2 Bottles)",
+          "price": 440,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "VIP Table (2 Bottles)",
+          "price": 600,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        }
+      ],
+      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
       "id": "249203",
       "sourceUrl": "https://xceed.me/en/milano/event/sunday-night-211/249203",
       "affiliateUrl": "https://xceed.me/en/milano/event/sunday-night-211/249203/channel/nightlifemilan-1",
@@ -22569,6 +23398,115 @@
       "startTimeKnown": true,
       "commercialCheckedAt": "2026-11-25T05:00:24.000Z",
       "dressCodeDetail": "men-long-trousers"
+    },
+    {
+      "id": "philipps-20261129-sweetie",
+      "sourceUrl": "https://philippsmilano.com/events",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "SWEETIE · Couture Sunday Club",
+      "shortName": "Sweetie",
+      "startISO": "2026-11-29T20:00:00+01:00",
+      "endISO": "2026-11-30T04:30:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-philipps",
+        "name": "Philipp's Milano",
+        "address": "Via Daniele Manin, 21, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Daniele Manin, 21",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": 45.4754,
+        "longitude": 9.1972
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/philipps-sunday-sweetie.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 270992,
+        "sha256": "4b8a1f171ceb9518d1ca70e003f1de05ce53f62d7a07e97fcefeb7d6868d4af6"
+      },
+      "age": null,
+      "dressCode": "Couture Evening Elegance",
+      "genres": [
+        "Hip-hop",
+        "House"
+      ],
+      "performers": [],
+      "offers": [],
+      "provenance": "https://philippsmilano.com/events · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
+      "id": "theclub-20261129-superbe",
+      "sourceUrl": "https://www.theclubmilano.com/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "SUPERBE · Sunday Hip-Hop & R&B",
+      "shortName": "Superbe",
+      "startISO": "2026-11-29T23:30:00+01:00",
+      "endISO": "2026-11-30T05:30:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-theclub",
+        "name": "The Club Milano",
+        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Corso Garibaldi, 97",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": 45.4792,
+        "longitude": 9.1886
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/theclub-sunday-superbe.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 256598,
+        "sha256": "59e663aeffa8974ee2b91e18210485214c82d5dddd0dfd029dfaf7714ffb5f25"
+      },
+      "age": "18+",
+      "dressCode": "Smart Casual",
+      "genres": [
+        "Hip-hop",
+        "Reggaeton"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Woman Pre-sale + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/",
+          "audience": "women"
+        },
+        {
+          "name": "Man Pre-sale + 1 Drink",
+          "price": 25,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "Dancefloor Table (2 Bottles)",
+          "price": 400,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        }
+      ],
+      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
     },
     {
       "id": "249160",
@@ -22770,6 +23708,50 @@
       "dressCodeDetail": "men-long-trousers"
     },
     {
+      "id": "philipps-20261201-brasil",
+      "sourceUrl": "https://philippsmilano.com/events",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "From Brasil to Milan · Dinner Show & Club",
+      "shortName": "From Brasil to Milan",
+      "startISO": "2026-12-01T20:00:00+01:00",
+      "endISO": "2026-12-02T04:30:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-philipps",
+        "name": "Philipp's Milano",
+        "address": "Via Daniele Manin, 21, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Daniele Manin, 21",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": 45.4754,
+        "longitude": 9.1972
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/philipps-tuesday-brasil.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 231850,
+        "sha256": "9fc7e999f41ce815331443aefc02dc67fc908e72b34538c26c66c81830424d95"
+      },
+      "age": null,
+      "dressCode": "Couture Evening Elegance",
+      "genres": [
+        "Reggaeton",
+        "House",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [],
+      "provenance": "https://philippsmilano.com/events · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
       "id": "249243",
       "sourceUrl": "https://xceed.me/en/milano/event/wednesday-night-229/249243",
       "affiliateUrl": "https://xceed.me/en/milano/event/wednesday-night-229/249243/channel/nightlifemilan-1",
@@ -22866,6 +23848,184 @@
       "dressCodeDetail": "men-long-trousers"
     },
     {
+      "id": "philipps-20261202-tussy",
+      "sourceUrl": "https://philippsmilano.com/events",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "TUSSY · Couture Wednesday Night",
+      "shortName": "Tussy",
+      "startISO": "2026-12-02T20:00:00+01:00",
+      "endISO": "2026-12-03T04:30:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-philipps",
+        "name": "Philipp's Milano",
+        "address": "Via Daniele Manin, 21, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Daniele Manin, 21",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": 45.4754,
+        "longitude": 9.1972
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/philipps-wednesday-tussy.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 143280,
+        "sha256": "73b8a2ca6e0112e3a7f23b204e2add51c262979775cdd299a4fa9736127586ff"
+      },
+      "age": null,
+      "dressCode": "Couture Evening Elegance",
+      "genres": [
+        "House",
+        "Hip-hop"
+      ],
+      "performers": [],
+      "offers": [],
+      "provenance": "https://philippsmilano.com/events · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
+      "id": "mib-20261202-international",
+      "sourceUrl": "https://mibmilano.it/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "INTERNATIONAL WEEK · Open Wine & Club",
+      "shortName": "International Week",
+      "startISO": "2026-12-02T20:30:00+01:00",
+      "endISO": "2026-12-03T04:30:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-mibmilano",
+        "name": "MIB Milano",
+        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Gaetano Negri, 10",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20123"
+        },
+        "latitude": 45.4648,
+        "longitude": 9.1832
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/mib-wednesday-international.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 257946,
+        "sha256": "0f14231e3c6783d210bba174cec60e17a4567f8e2d3f75d82de280090c2c267a"
+      },
+      "age": "18+",
+      "dressCode": "Smart Casual",
+      "genres": [
+        "House",
+        "Reggaeton",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Aperitif + Open Wine Window",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "20:30",
+          "admissionUntil": "22:30"
+        },
+        {
+          "name": "Club Admission + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "23:00"
+        },
+        {
+          "name": "VIP Table",
+          "price": 200,
+          "category": "table",
+          "availability": "available",
+          "url": "https://mibmilano.it/"
+        }
+      ],
+      "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
+      "id": "theclub-20261202-onetwo",
+      "sourceUrl": "https://www.theclubmilano.com/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "ONE TWO · Urban & Hip-Hop Wednesday",
+      "shortName": "One Two",
+      "startISO": "2026-12-02T23:30:00+01:00",
+      "endISO": "2026-12-03T05:30:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-theclub",
+        "name": "The Club Milano",
+        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Corso Garibaldi, 97",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": 45.4792,
+        "longitude": 9.1886
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/theclub-wednesday-onetwo.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 272760,
+        "sha256": "7805f5817cd5eeeb130df07d34355e7a7573eb54bbdd00e323c900f371c44e85"
+      },
+      "age": "18+",
+      "dressCode": "Smart Casual",
+      "genres": [
+        "Hip-hop",
+        "Reggaeton"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Woman Pre-sale + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/",
+          "audience": "women"
+        },
+        {
+          "name": "Man Pre-sale + 1 Drink",
+          "price": 25,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "Dancefloor Table (2 Bottles)",
+          "price": 400,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        }
+      ],
+      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
       "id": "249244",
       "sourceUrl": "https://xceed.me/en/milano/event/thursday-night-349/249244",
       "affiliateUrl": "https://xceed.me/en/milano/event/thursday-night-349/249244/channel/nightlifemilan-1",
@@ -22960,6 +24120,146 @@
       "startTimeKnown": true,
       "commercialCheckedAt": "2026-11-16T10:01:24.000Z",
       "dressCodeDetail": "men-long-trousers"
+    },
+    {
+      "id": "mib-20261203-justice",
+      "sourceUrl": "https://xceed.me/en/milano/club/mib-milano",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "JUSTICE x Fastlife · Urban Thursday",
+      "shortName": "Justice",
+      "startISO": "2026-12-03T23:00:00+01:00",
+      "endISO": "2026-12-04T05:00:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-mibmilano",
+        "name": "MIB Milano",
+        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Gaetano Negri, 10",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20123"
+        },
+        "latitude": 45.4648,
+        "longitude": 9.1832
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/mib-thursday-justice.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 241874,
+        "sha256": "958f4d0cbd28536f5bd163de59e6b5271dbc1ae68cf8c39d6c359ca50e56c9d7"
+      },
+      "age": "18+",
+      "dressCode": "Smart Casual",
+      "genres": [
+        "Hip-hop",
+        "Reggaeton",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Woman Admission + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/club/mib-milano",
+          "audience": "women"
+        },
+        {
+          "name": "Man Admission + 1 Drink",
+          "price": 20,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/club/mib-milano"
+        },
+        {
+          "name": "VIP Table",
+          "price": 250,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/club/mib-milano"
+        }
+      ],
+      "provenance": "https://xceed.me/en/milano/club/mib-milano · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
+      "id": "theclub-20261203-atlanta",
+      "sourceUrl": "https://www.theclubmilano.com/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "ATLANTA · Hip-Hop & Trap Night",
+      "shortName": "Atlanta",
+      "startISO": "2026-12-03T23:30:00+01:00",
+      "endISO": "2026-12-04T05:30:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-theclub",
+        "name": "The Club Milano",
+        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Corso Garibaldi, 97",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": 45.4792,
+        "longitude": 9.1886
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/theclub-thursday-atlanta.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 256718,
+        "sha256": "35765327385397315dc9da00e04096c83148c3b03a2141cbcd16c0f13ebc913c"
+      },
+      "age": "18+",
+      "dressCode": "Smart Casual",
+      "genres": [
+        "Hip-hop",
+        "Reggaeton"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Woman Pre-sale + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/",
+          "audience": "women"
+        },
+        {
+          "name": "Man Pre-sale + 1 Drink",
+          "price": 25,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "Dancefloor Table (2 Bottles)",
+          "price": 400,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "VIP Table (2 Bottles)",
+          "price": 600,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        }
+      ],
+      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
     },
     {
       "id": "249130",
@@ -23129,6 +24429,127 @@
       "dressCodeDetail": "men-long-trousers"
     },
     {
+      "id": "philipps-20261204-clubforlife",
+      "sourceUrl": "https://philippsmilano.com/events",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "ClubForLife · Couture Friday Night",
+      "shortName": "ClubForLife",
+      "startISO": "2026-12-04T20:00:00+01:00",
+      "endISO": "2026-12-05T04:30:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-philipps",
+        "name": "Philipp's Milano",
+        "address": "Via Daniele Manin, 21, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Daniele Manin, 21",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": 45.4754,
+        "longitude": 9.1972
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/philipps-friday-clubforlife.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 206258,
+        "sha256": "f0fba5ede59ffbab6bb173b222aaeb41808624e5dc69fec1a9f6ddcde1c39fa1"
+      },
+      "age": null,
+      "dressCode": "Couture Evening Elegance",
+      "genres": [
+        "House",
+        "Hip-hop",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [],
+      "provenance": "https://philippsmilano.com/events · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
+      "id": "mib-20261204-billions",
+      "sourceUrl": "https://mibmilano.it/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "BILLIONS · Dinner Show & Club",
+      "shortName": "Billions",
+      "startISO": "2026-12-04T20:30:00+01:00",
+      "endISO": "2026-12-05T05:00:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-mibmilano",
+        "name": "MIB Milano",
+        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Gaetano Negri, 10",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20123"
+        },
+        "latitude": 45.4648,
+        "longitude": 9.1832
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/mib-friday-billions.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 131722,
+        "sha256": "32b93cfec4b17dcc2ce620d962d77d84f2cfe062bb30d0e19b4a557ac30cbc9e"
+      },
+      "age": "20+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Hip-hop",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Aperitif + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "20:30",
+          "admissionUntil": "22:30"
+        },
+        {
+          "name": "Club Admission + 1 Drink",
+          "price": 20,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "23:00"
+        },
+        {
+          "name": "Seated Dinner Show",
+          "price": 50,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "20:30"
+        },
+        {
+          "name": "VIP Table",
+          "price": 250,
+          "category": "table",
+          "availability": "available",
+          "url": "https://mibmilano.it/"
+        }
+      ],
+      "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
       "id": "236327",
       "sourceUrl": "https://xceed.me/en/milano/event/biscotto-hector-oaks/236327",
       "affiliateUrl": null,
@@ -23269,6 +24690,87 @@
       "halloween": false,
       "startTimeKnown": true,
       "commercialCheckedAt": "2026-11-16T10:01:24.000Z"
+    },
+    {
+      "id": "theclub-20261204-firstclass",
+      "sourceUrl": "https://www.theclubmilano.com/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "FIRST CLASS · International Friday",
+      "shortName": "First Class",
+      "startISO": "2026-12-04T23:30:00+01:00",
+      "endISO": "2026-12-05T05:30:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-theclub",
+        "name": "The Club Milano",
+        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Corso Garibaldi, 97",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": 45.4792,
+        "longitude": 9.1886
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/theclub-friday-firstclass.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 278248,
+        "sha256": "9ff958a7893bd6410fbc8ebdbed53e47bfa83a4d3cc922f99cec750daf879a91"
+      },
+      "age": "20+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Hip-hop",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Woman Pre-sale + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/",
+          "audience": "women"
+        },
+        {
+          "name": "Man Pre-sale + 1 Drink",
+          "price": 25,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "Dancefloor Table (2 Bottles)",
+          "price": 400,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "Privé Consolle Table (2 Bottles)",
+          "price": 440,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "VIP Table (2 Bottles)",
+          "price": 600,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        }
+      ],
+      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
     },
     {
       "id": "249139",
@@ -23531,6 +25033,125 @@
       "startTimeKnown": true,
       "commercialCheckedAt": "2026-11-16T10:01:24.000Z",
       "dressCodeDetail": "men-long-trousers"
+    },
+    {
+      "id": "philipps-20261205-konekt",
+      "sourceUrl": "https://philippsmilano.com/events",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "KONEKT · Saturday Afro & Melodic House",
+      "shortName": "Konekt",
+      "startISO": "2026-12-05T20:00:00+01:00",
+      "endISO": "2026-12-06T04:30:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-philipps",
+        "name": "Philipp's Milano",
+        "address": "Via Daniele Manin, 21, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Daniele Manin, 21",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": 45.4754,
+        "longitude": 9.1972
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/philipps-saturday-konekt.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 193840,
+        "sha256": "4a802eb81aec8c2514dcdda30ef22d782913f2124f0f8e31b99c02d0172832b1"
+      },
+      "age": null,
+      "dressCode": "Couture Evening Elegance",
+      "genres": [
+        "House",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [],
+      "provenance": "https://philippsmilano.com/events · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
+      "id": "mib-20261205-loveaffair",
+      "sourceUrl": "https://mibmilano.it/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "LOVE AFFAIR · Cena Cantata & Club",
+      "shortName": "Love Affair",
+      "startISO": "2026-12-05T20:30:00+01:00",
+      "endISO": "2026-12-06T05:00:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-mibmilano",
+        "name": "MIB Milano",
+        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Gaetano Negri, 10",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20123"
+        },
+        "latitude": 45.4648,
+        "longitude": 9.1832
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/mib-saturday-loveaffair.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 185650,
+        "sha256": "3fc28d3165e2ffc5a0bda56ed6cf64f5849c46ab7a17189e646b6930271523ea"
+      },
+      "age": "21+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Aperitif + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "20:30",
+          "admissionUntil": "22:30"
+        },
+        {
+          "name": "Club Admission + 1 Drink",
+          "price": 20,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "23:30"
+        },
+        {
+          "name": "Cena Cantata (Singing Dinner)",
+          "price": 50,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "21:00"
+        },
+        {
+          "name": "VIP Table",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://mibmilano.it/"
+        }
+      ],
+      "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
     },
     {
       "id": "240989",
@@ -23801,6 +25422,86 @@
       "commercialCheckedAt": "2026-11-16T10:01:24.000Z"
     },
     {
+      "id": "theclub-20261205-girlsrepublic",
+      "sourceUrl": "https://www.theclubmilano.com/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "GIRLS REPUBLIC · Saturday Flagship",
+      "shortName": "Girls Republic",
+      "startISO": "2026-12-05T23:30:00+01:00",
+      "endISO": "2026-12-06T05:30:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-theclub",
+        "name": "The Club Milano",
+        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Corso Garibaldi, 97",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": 45.4792,
+        "longitude": 9.1886
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/theclub-saturday-girlsrepublic.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 245558,
+        "sha256": "1eb74623367d79e5d3e8842f177a5ab6d79f6ec432cc16e2ff3aba3c01358257"
+      },
+      "age": "20+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Woman Pre-sale + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/",
+          "audience": "women"
+        },
+        {
+          "name": "Man Pre-sale + 1 Drink",
+          "price": 25,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "Dancefloor Table (2 Bottles)",
+          "price": 400,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "Privé Consolle Table (2 Bottles)",
+          "price": 440,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "VIP Table (2 Bottles)",
+          "price": 600,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        }
+      ],
+      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
       "id": "249249",
       "sourceUrl": "https://xceed.me/en/milano/event/sunday-night-213/249249",
       "affiliateUrl": "https://xceed.me/en/milano/event/sunday-night-213/249249/channel/nightlifemilan-1",
@@ -23962,6 +25663,135 @@
       "dressCodeDetail": "men-long-trousers"
     },
     {
+      "id": "mib-20261206-atlanta",
+      "sourceUrl": "https://mibmilano.it/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "ATLANTA @ MIB Milano · Pre-Sant'Ambrogio",
+      "shortName": "Atlanta @ MIB",
+      "startISO": "2026-12-06T23:00:00+01:00",
+      "endISO": "2026-12-07T05:00:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-mibmilano",
+        "name": "MIB Milano",
+        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Gaetano Negri, 10",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20123"
+        },
+        "latitude": 45.4648,
+        "longitude": 9.1832
+      },
+      "image": {
+        "src": "/images/events/october-2026/mib-atlanta-20261206.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 281522,
+        "sha256": "cfb030c3042e3249c69c6b3fff58913ae8d2a510b7cf9cff6912c87b6a4dd3c8"
+      },
+      "age": "18+",
+      "dressCode": "Smart Casual",
+      "genres": [
+        "Hip-hop",
+        "Reggaeton",
+        "Hits"
+      ],
+      "performers": [
+        {
+          "name": "Babyciaga"
+        }
+      ],
+      "offers": [
+        {
+          "name": "Pre-sale Admission + 2 Drinks",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/"
+        },
+        {
+          "name": "VIP Table",
+          "price": 250,
+          "category": "table",
+          "availability": "available",
+          "url": "https://mibmilano.it/"
+        }
+      ],
+      "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
+      "id": "theclub-20261206-superbe",
+      "sourceUrl": "https://www.theclubmilano.com/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "SUPERBE · Sunday Hip-Hop & R&B",
+      "shortName": "Superbe",
+      "startISO": "2026-12-06T23:30:00+01:00",
+      "endISO": "2026-12-07T05:30:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-theclub",
+        "name": "The Club Milano",
+        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Corso Garibaldi, 97",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": 45.4792,
+        "longitude": 9.1886
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/theclub-sunday-superbe.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 256598,
+        "sha256": "59e663aeffa8974ee2b91e18210485214c82d5dddd0dfd029dfaf7714ffb5f25"
+      },
+      "age": "18+",
+      "dressCode": "Smart Casual",
+      "genres": [
+        "Hip-hop",
+        "Reggaeton"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Woman Pre-sale + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/",
+          "audience": "women"
+        },
+        {
+          "name": "Man Pre-sale + 1 Drink",
+          "price": 25,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "Dancefloor Table (2 Bottles)",
+          "price": 400,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        }
+      ],
+      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
       "id": "250223",
       "sourceUrl": "https://xceed.me/en/milano/event/monday-night-286/250223",
       "affiliateUrl": "https://xceed.me/en/milano/event/monday-night-286/250223/channel/nightlifemilan-1",
@@ -24058,6 +25888,49 @@
       "dressCodeDetail": "men-long-trousers"
     },
     {
+      "id": "philipps-20261207-santambrogio",
+      "sourceUrl": "https://philippsmilano.com/events",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "The Philipp's Show · Sant'Ambrogio Gala",
+      "shortName": "Philipp's Show",
+      "startISO": "2026-12-07T20:00:00+01:00",
+      "endISO": "2026-12-08T04:30:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-philipps",
+        "name": "Philipp's Milano",
+        "address": "Via Daniele Manin, 21, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Daniele Manin, 21",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": 45.4754,
+        "longitude": 9.1972
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/philipps-dinnershow.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 127596,
+        "sha256": "bf353c6eb816ad8c3ea9e0275085708cbbd3ecdb91bb455b8b2ecb7d716ad11e"
+      },
+      "age": null,
+      "dressCode": "Couture Evening Elegance",
+      "genres": [
+        "House",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [],
+      "provenance": "https://philippsmilano.com/events · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
       "id": "251155",
       "sourceUrl": "https://xceed.me/en/milano/event/arkore-5/251155",
       "affiliateUrl": null,
@@ -24148,6 +26021,146 @@
       "halloween": false,
       "startTimeKnown": true,
       "commercialCheckedAt": "2026-11-16T10:01:24.000Z"
+    },
+    {
+      "id": "mib-20261207-onetwo",
+      "sourceUrl": "https://mibmilano.it/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "ONETWO @ MIB Milano · Sant'Ambrogio",
+      "shortName": "OneTwo @ MIB",
+      "startISO": "2026-12-07T23:00:00+01:00",
+      "endISO": "2026-12-08T05:00:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-mibmilano",
+        "name": "MIB Milano",
+        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Gaetano Negri, 10",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20123"
+        },
+        "latitude": 45.4648,
+        "longitude": 9.1832
+      },
+      "image": {
+        "src": "/images/events/october-2026/mib-onetwo-20261207.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 258376,
+        "sha256": "e3ca6719132ba4f7d8bdd97b48d14af724de123f81f1ee75ab2c435e33be8294"
+      },
+      "age": "18+",
+      "dressCode": "Smart Casual",
+      "genres": [
+        "Hip-hop",
+        "Reggaeton",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Pre-sale Admission + 2 Drinks",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/"
+        },
+        {
+          "name": "VIP Table",
+          "price": 250,
+          "category": "table",
+          "availability": "available",
+          "url": "https://mibmilano.it/"
+        }
+      ],
+      "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
+      "id": "theclub-20261207-santambrogio",
+      "sourceUrl": "https://www.theclubmilano.com/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "Sant'Ambrogio Special Opening Night",
+      "shortName": "Sant'Ambrogio Night",
+      "startISO": "2026-12-07T23:30:00+01:00",
+      "endISO": "2026-12-08T05:30:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-theclub",
+        "name": "The Club Milano",
+        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Corso Garibaldi, 97",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": 45.4792,
+        "longitude": 9.1886
+      },
+      "image": {
+        "src": "/images/events/october-2026/theclub-santambrogio-20261207.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 281014,
+        "sha256": "ea6bf54794564bc667cf4c7598c01c1a12b25e19fe4a1c39e0e276ad62a14d2a"
+      },
+      "age": "18+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Hip-hop",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Woman Pre-sale + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/",
+          "audience": "women"
+        },
+        {
+          "name": "Man Pre-sale + 1 Drink",
+          "price": 25,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "Dancefloor Table (2 Bottles, max 12)",
+          "price": 400,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "Privé Lato Consolle Table (2 Bottles)",
+          "price": 440,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "VIP Table (2 Bottles)",
+          "price": 600,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        }
+      ],
+      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
     },
     {
       "id": "250224",
@@ -24253,6 +26266,281 @@
       "dressCodeDetail": "men-long-trousers"
     },
     {
+      "id": "mib-20261209-international",
+      "sourceUrl": "https://mibmilano.it/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "INTERNATIONAL WEEK · Open Wine & Club",
+      "shortName": "International Week",
+      "startISO": "2026-12-09T20:30:00+01:00",
+      "endISO": "2026-12-10T04:30:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-mibmilano",
+        "name": "MIB Milano",
+        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Gaetano Negri, 10",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20123"
+        },
+        "latitude": 45.4648,
+        "longitude": 9.1832
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/mib-wednesday-international.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 257946,
+        "sha256": "0f14231e3c6783d210bba174cec60e17a4567f8e2d3f75d82de280090c2c267a"
+      },
+      "age": "18+",
+      "dressCode": "Smart Casual",
+      "genres": [
+        "House",
+        "Reggaeton",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Aperitif + Open Wine Window",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "20:30",
+          "admissionUntil": "22:30"
+        },
+        {
+          "name": "Club Admission + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "23:00"
+        },
+        {
+          "name": "VIP Table",
+          "price": 200,
+          "category": "table",
+          "availability": "available",
+          "url": "https://mibmilano.it/"
+        }
+      ],
+      "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
+      "id": "theclub-20261209-onetwo",
+      "sourceUrl": "https://www.theclubmilano.com/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "ONE TWO · Urban & Hip-Hop Wednesday",
+      "shortName": "One Two",
+      "startISO": "2026-12-09T23:30:00+01:00",
+      "endISO": "2026-12-10T05:30:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-theclub",
+        "name": "The Club Milano",
+        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Corso Garibaldi, 97",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": 45.4792,
+        "longitude": 9.1886
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/theclub-wednesday-onetwo.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 272760,
+        "sha256": "7805f5817cd5eeeb130df07d34355e7a7573eb54bbdd00e323c900f371c44e85"
+      },
+      "age": "18+",
+      "dressCode": "Smart Casual",
+      "genres": [
+        "Hip-hop",
+        "Reggaeton"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Woman Pre-sale + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/",
+          "audience": "women"
+        },
+        {
+          "name": "Man Pre-sale + 1 Drink",
+          "price": 25,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "Dancefloor Table (2 Bottles)",
+          "price": 400,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        }
+      ],
+      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
+      "id": "mib-20261210-justice",
+      "sourceUrl": "https://xceed.me/en/milano/club/mib-milano",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "JUSTICE x Fastlife · Urban Thursday",
+      "shortName": "Justice",
+      "startISO": "2026-12-10T23:00:00+01:00",
+      "endISO": "2026-12-11T05:00:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-mibmilano",
+        "name": "MIB Milano",
+        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Gaetano Negri, 10",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20123"
+        },
+        "latitude": 45.4648,
+        "longitude": 9.1832
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/mib-thursday-justice.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 241874,
+        "sha256": "958f4d0cbd28536f5bd163de59e6b5271dbc1ae68cf8c39d6c359ca50e56c9d7"
+      },
+      "age": "18+",
+      "dressCode": "Smart Casual",
+      "genres": [
+        "Hip-hop",
+        "Reggaeton",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Woman Admission + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/club/mib-milano",
+          "audience": "women"
+        },
+        {
+          "name": "Man Admission + 1 Drink",
+          "price": 20,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/club/mib-milano"
+        },
+        {
+          "name": "VIP Table",
+          "price": 250,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/club/mib-milano"
+        }
+      ],
+      "provenance": "https://xceed.me/en/milano/club/mib-milano · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
+      "id": "theclub-20261210-atlanta",
+      "sourceUrl": "https://www.theclubmilano.com/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "ATLANTA · Hip-Hop & Trap Night",
+      "shortName": "Atlanta",
+      "startISO": "2026-12-10T23:30:00+01:00",
+      "endISO": "2026-12-11T05:30:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-theclub",
+        "name": "The Club Milano",
+        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Corso Garibaldi, 97",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": 45.4792,
+        "longitude": 9.1886
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/theclub-thursday-atlanta.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 256718,
+        "sha256": "35765327385397315dc9da00e04096c83148c3b03a2141cbcd16c0f13ebc913c"
+      },
+      "age": "18+",
+      "dressCode": "Smart Casual",
+      "genres": [
+        "Hip-hop",
+        "Reggaeton"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Woman Pre-sale + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/",
+          "audience": "women"
+        },
+        {
+          "name": "Man Pre-sale + 1 Drink",
+          "price": 25,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "Dancefloor Table (2 Bottles)",
+          "price": 400,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "VIP Table (2 Bottles)",
+          "price": 600,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        }
+      ],
+      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
       "id": "249132",
       "sourceUrl": "https://xceed.me/en/milano/event/friday-night-714/249132",
       "affiliateUrl": "https://xceed.me/en/milano/event/friday-night-714/249132/channel/nightlifemilan-1",
@@ -24341,6 +26629,164 @@
       "dressCodeDetail": "men-long-trousers"
     },
     {
+      "id": "mib-20261211-billions",
+      "sourceUrl": "https://mibmilano.it/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "BILLIONS · Dinner Show & Club",
+      "shortName": "Billions",
+      "startISO": "2026-12-11T20:30:00+01:00",
+      "endISO": "2026-12-12T05:00:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-mibmilano",
+        "name": "MIB Milano",
+        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Gaetano Negri, 10",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20123"
+        },
+        "latitude": 45.4648,
+        "longitude": 9.1832
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/mib-friday-billions.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 131722,
+        "sha256": "32b93cfec4b17dcc2ce620d962d77d84f2cfe062bb30d0e19b4a557ac30cbc9e"
+      },
+      "age": "20+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Hip-hop",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Aperitif + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "20:30",
+          "admissionUntil": "22:30"
+        },
+        {
+          "name": "Club Admission + 1 Drink",
+          "price": 20,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "23:00"
+        },
+        {
+          "name": "Seated Dinner Show",
+          "price": 50,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "20:30"
+        },
+        {
+          "name": "VIP Table",
+          "price": 250,
+          "category": "table",
+          "availability": "available",
+          "url": "https://mibmilano.it/"
+        }
+      ],
+      "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
+      "id": "theclub-20261211-firstclass",
+      "sourceUrl": "https://www.theclubmilano.com/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "FIRST CLASS · International Friday",
+      "shortName": "First Class",
+      "startISO": "2026-12-11T23:30:00+01:00",
+      "endISO": "2026-12-12T05:30:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-theclub",
+        "name": "The Club Milano",
+        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Corso Garibaldi, 97",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": 45.4792,
+        "longitude": 9.1886
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/theclub-friday-firstclass.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 278248,
+        "sha256": "9ff958a7893bd6410fbc8ebdbed53e47bfa83a4d3cc922f99cec750daf879a91"
+      },
+      "age": "20+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Hip-hop",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Woman Pre-sale + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/",
+          "audience": "women"
+        },
+        {
+          "name": "Man Pre-sale + 1 Drink",
+          "price": 25,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "Dancefloor Table (2 Bottles)",
+          "price": 400,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "Privé Consolle Table (2 Bottles)",
+          "price": 440,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "VIP Table (2 Bottles)",
+          "price": 600,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        }
+      ],
+      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
       "id": "249144",
       "sourceUrl": "https://xceed.me/en/milano/event/saturday-night-782/249144",
       "affiliateUrl": "https://xceed.me/en/milano/event/saturday-night-782/249144/channel/nightlifemilan-1",
@@ -24427,6 +26873,82 @@
       "startTimeKnown": true,
       "commercialCheckedAt": "2026-11-16T10:01:24.000Z",
       "dressCodeDetail": "men-long-trousers"
+    },
+    {
+      "id": "mib-20261212-loveaffair",
+      "sourceUrl": "https://mibmilano.it/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "LOVE AFFAIR · Cena Cantata & Club",
+      "shortName": "Love Affair",
+      "startISO": "2026-12-12T20:30:00+01:00",
+      "endISO": "2026-12-13T05:00:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-mibmilano",
+        "name": "MIB Milano",
+        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Gaetano Negri, 10",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20123"
+        },
+        "latitude": 45.4648,
+        "longitude": 9.1832
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/mib-saturday-loveaffair.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 185650,
+        "sha256": "3fc28d3165e2ffc5a0bda56ed6cf64f5849c46ab7a17189e646b6930271523ea"
+      },
+      "age": "21+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Aperitif + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "20:30",
+          "admissionUntil": "22:30"
+        },
+        {
+          "name": "Club Admission + 1 Drink",
+          "price": 20,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "23:30"
+        },
+        {
+          "name": "Cena Cantata (Singing Dinner)",
+          "price": 50,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "21:00"
+        },
+        {
+          "name": "VIP Table",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://mibmilano.it/"
+        }
+      ],
+      "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
     },
     {
       "id": "240990",
@@ -24801,6 +27323,288 @@
       "commercialCheckedAt": "2026-11-16T10:01:24.000Z"
     },
     {
+      "id": "theclub-20261212-girlsrepublic",
+      "sourceUrl": "https://www.theclubmilano.com/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "GIRLS REPUBLIC · Saturday Flagship",
+      "shortName": "Girls Republic",
+      "startISO": "2026-12-12T23:30:00+01:00",
+      "endISO": "2026-12-13T05:30:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-theclub",
+        "name": "The Club Milano",
+        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Corso Garibaldi, 97",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": 45.4792,
+        "longitude": 9.1886
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/theclub-saturday-girlsrepublic.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 245558,
+        "sha256": "1eb74623367d79e5d3e8842f177a5ab6d79f6ec432cc16e2ff3aba3c01358257"
+      },
+      "age": "20+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Woman Pre-sale + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/",
+          "audience": "women"
+        },
+        {
+          "name": "Man Pre-sale + 1 Drink",
+          "price": 25,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "Dancefloor Table (2 Bottles)",
+          "price": 400,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "Privé Consolle Table (2 Bottles)",
+          "price": 440,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "VIP Table (2 Bottles)",
+          "price": 600,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        }
+      ],
+      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
+      "id": "theclub-20261213-superbe",
+      "sourceUrl": "https://www.theclubmilano.com/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "SUPERBE · Sunday Hip-Hop & R&B",
+      "shortName": "Superbe",
+      "startISO": "2026-12-13T23:30:00+01:00",
+      "endISO": "2026-12-14T05:30:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-theclub",
+        "name": "The Club Milano",
+        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Corso Garibaldi, 97",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20121"
+        },
+        "latitude": 45.4792,
+        "longitude": 9.1886
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/theclub-sunday-superbe.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 256598,
+        "sha256": "59e663aeffa8974ee2b91e18210485214c82d5dddd0dfd029dfaf7714ffb5f25"
+      },
+      "age": "18+",
+      "dressCode": "Smart Casual",
+      "genres": [
+        "Hip-hop",
+        "Reggaeton"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Woman Pre-sale + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/",
+          "audience": "women"
+        },
+        {
+          "name": "Man Pre-sale + 1 Drink",
+          "price": 25,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        },
+        {
+          "name": "Dancefloor Table (2 Bottles)",
+          "price": 400,
+          "category": "table",
+          "availability": "available",
+          "url": "https://www.theclubmilano.com/"
+        }
+      ],
+      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
+      "id": "mib-20261216-international",
+      "sourceUrl": "https://mibmilano.it/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "INTERNATIONAL WEEK · Open Wine & Club",
+      "shortName": "International Week",
+      "startISO": "2026-12-16T20:30:00+01:00",
+      "endISO": "2026-12-17T04:30:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-mibmilano",
+        "name": "MIB Milano",
+        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Gaetano Negri, 10",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20123"
+        },
+        "latitude": 45.4648,
+        "longitude": 9.1832
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/mib-wednesday-international.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 257946,
+        "sha256": "0f14231e3c6783d210bba174cec60e17a4567f8e2d3f75d82de280090c2c267a"
+      },
+      "age": "18+",
+      "dressCode": "Smart Casual",
+      "genres": [
+        "House",
+        "Reggaeton",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Aperitif + Open Wine Window",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "20:30",
+          "admissionUntil": "22:30"
+        },
+        {
+          "name": "Club Admission + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "23:00"
+        },
+        {
+          "name": "VIP Table",
+          "price": 200,
+          "category": "table",
+          "availability": "available",
+          "url": "https://mibmilano.it/"
+        }
+      ],
+      "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
+      "id": "mib-20261217-justice",
+      "sourceUrl": "https://xceed.me/en/milano/club/mib-milano",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "JUSTICE x Fastlife · Urban Thursday",
+      "shortName": "Justice",
+      "startISO": "2026-12-17T23:00:00+01:00",
+      "endISO": "2026-12-18T05:00:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-mibmilano",
+        "name": "MIB Milano",
+        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Gaetano Negri, 10",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20123"
+        },
+        "latitude": 45.4648,
+        "longitude": 9.1832
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/mib-thursday-justice.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 241874,
+        "sha256": "958f4d0cbd28536f5bd163de59e6b5271dbc1ae68cf8c39d6c359ca50e56c9d7"
+      },
+      "age": "18+",
+      "dressCode": "Smart Casual",
+      "genres": [
+        "Hip-hop",
+        "Reggaeton",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Woman Admission + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/club/mib-milano",
+          "audience": "women"
+        },
+        {
+          "name": "Man Admission + 1 Drink",
+          "price": 20,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/club/mib-milano"
+        },
+        {
+          "name": "VIP Table",
+          "price": 250,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/club/mib-milano"
+        }
+      ],
+      "provenance": "https://xceed.me/en/milano/club/mib-milano · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
       "id": "249135",
       "sourceUrl": "https://xceed.me/en/milano/event/friday-night-715/249135",
       "affiliateUrl": "https://xceed.me/en/milano/event/friday-night-715/249135/channel/nightlifemilan-1",
@@ -24889,6 +27693,83 @@
       "dressCodeDetail": "men-long-trousers"
     },
     {
+      "id": "mib-20261218-billions",
+      "sourceUrl": "https://mibmilano.it/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "BILLIONS · Dinner Show & Club",
+      "shortName": "Billions",
+      "startISO": "2026-12-18T20:30:00+01:00",
+      "endISO": "2026-12-19T05:00:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-mibmilano",
+        "name": "MIB Milano",
+        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Gaetano Negri, 10",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20123"
+        },
+        "latitude": 45.4648,
+        "longitude": 9.1832
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/mib-friday-billions.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 131722,
+        "sha256": "32b93cfec4b17dcc2ce620d962d77d84f2cfe062bb30d0e19b4a557ac30cbc9e"
+      },
+      "age": "20+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Hip-hop",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Aperitif + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "20:30",
+          "admissionUntil": "22:30"
+        },
+        {
+          "name": "Club Admission + 1 Drink",
+          "price": 20,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "23:00"
+        },
+        {
+          "name": "Seated Dinner Show",
+          "price": 50,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "20:30"
+        },
+        {
+          "name": "VIP Table",
+          "price": 250,
+          "category": "table",
+          "availability": "available",
+          "url": "https://mibmilano.it/"
+        }
+      ],
+      "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
       "id": "249142",
       "sourceUrl": "https://xceed.me/en/milano/event/saturday-night-768/249142",
       "affiliateUrl": "https://xceed.me/en/milano/event/saturday-night-768/249142/channel/nightlifemilan-1",
@@ -24975,6 +27856,82 @@
       "startTimeKnown": true,
       "commercialCheckedAt": "2026-11-16T10:01:24.000Z",
       "dressCodeDetail": "men-long-trousers"
+    },
+    {
+      "id": "mib-20261219-loveaffair",
+      "sourceUrl": "https://mibmilano.it/",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unavailable",
+      "officialName": "LOVE AFFAIR · Cena Cantata & Club",
+      "shortName": "Love Affair",
+      "startISO": "2026-12-19T20:30:00+01:00",
+      "endISO": "2026-12-20T05:00:00+01:00",
+      "startTimeKnown": true,
+      "venue": {
+        "id": "v-mibmilano",
+        "name": "MIB Milano",
+        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Gaetano Negri, 10",
+          "addressLocality": "Milano",
+          "addressCountry": "IT",
+          "postalCode": "20123"
+        },
+        "latitude": 45.4648,
+        "longitude": 9.1832
+      },
+      "image": {
+        "src": "/images/events/weekly-posters/mib-saturday-loveaffair.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 185650,
+        "sha256": "3fc28d3165e2ffc5a0bda56ed6cf64f5849c46ab7a17189e646b6930271523ea"
+      },
+      "age": "21+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Aperitif + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "20:30",
+          "admissionUntil": "22:30"
+        },
+        {
+          "name": "Club Admission + 1 Drink",
+          "price": 20,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "23:30"
+        },
+        {
+          "name": "Cena Cantata (Singing Dinner)",
+          "price": 50,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://mibmilano.it/",
+          "admissionFrom": "21:00"
+        },
+        {
+          "name": "VIP Table",
+          "price": 300,
+          "category": "table",
+          "availability": "available",
+          "url": "https://mibmilano.it/"
+        }
+      ],
+      "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
+      "halloween": false,
+      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
     },
     {
       "id": "250374",
@@ -26563,2726 +29520,6 @@
       "halloween": false,
       "startTimeKnown": true,
       "commercialCheckedAt": "2026-11-16T10:01:24.000Z"
-    },
-    {
-      "id": "mib-20261126-justice",
-      "sourceUrl": "https://xceed.me/en/milano/club/mib-milano",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "JUSTICE x Fastlife · Urban Thursday",
-      "shortName": "Justice",
-      "startISO": "2026-11-26T23:00:00+01:00",
-      "endISO": "2026-11-27T05:00:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-mibmilano",
-        "name": "MIB Milano",
-        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Via Gaetano Negri, 10",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20123"
-        },
-        "latitude": 45.4648,
-        "longitude": 9.1832
-      },
-      "image": {
-        "src": "/images/events/october-2026/mib-justice-20261126.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 256546,
-        "sha256": "b67061faea30910c456a5ba6f3be7441cd679fb548db2a86609c6c0b016caeab"
-      },
-      "age": "18+",
-      "dressCode": "Smart Casual",
-      "genres": [
-        "Hip-hop",
-        "Reggaeton",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Early Pre-sale before 01:00",
-          "price": 1,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://xceed.me/en/milano/club/mib-milano",
-          "admissionUntil": "01:00"
-        },
-        {
-          "name": "Woman Admission + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://xceed.me/en/milano/club/mib-milano",
-          "audience": "women"
-        },
-        {
-          "name": "Man Admission + 1 Drink",
-          "price": 20,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://xceed.me/en/milano/club/mib-milano"
-        },
-        {
-          "name": "VIP Table",
-          "price": 250,
-          "category": "table",
-          "availability": "available",
-          "url": "https://xceed.me/en/milano/club/mib-milano"
-        }
-      ],
-      "provenance": "https://xceed.me/en/milano/club/mib-milano · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "mib-20261206-atlanta",
-      "sourceUrl": "https://mibmilano.it/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "ATLANTA @ MIB Milano · Pre-Sant'Ambrogio",
-      "shortName": "Atlanta @ MIB",
-      "startISO": "2026-12-06T23:00:00+01:00",
-      "endISO": "2026-12-07T05:00:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-mibmilano",
-        "name": "MIB Milano",
-        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Via Gaetano Negri, 10",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20123"
-        },
-        "latitude": 45.4648,
-        "longitude": 9.1832
-      },
-      "image": {
-        "src": "/images/events/october-2026/mib-atlanta-20261206.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 281522,
-        "sha256": "cfb030c3042e3249c69c6b3fff58913ae8d2a510b7cf9cff6912c87b6a4dd3c8"
-      },
-      "age": "18+",
-      "dressCode": "Smart Casual",
-      "genres": [
-        "Hip-hop",
-        "Reggaeton",
-        "Hits"
-      ],
-      "performers": [
-        {
-          "name": "Babyciaga"
-        }
-      ],
-      "offers": [
-        {
-          "name": "Pre-sale Admission + 2 Drinks",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/"
-        },
-        {
-          "name": "VIP Table",
-          "price": 250,
-          "category": "table",
-          "availability": "available",
-          "url": "https://mibmilano.it/"
-        }
-      ],
-      "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "mib-20261207-onetwo",
-      "sourceUrl": "https://mibmilano.it/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "ONETWO @ MIB Milano · Sant'Ambrogio",
-      "shortName": "OneTwo @ MIB",
-      "startISO": "2026-12-07T23:00:00+01:00",
-      "endISO": "2026-12-08T05:00:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-mibmilano",
-        "name": "MIB Milano",
-        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Via Gaetano Negri, 10",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20123"
-        },
-        "latitude": 45.4648,
-        "longitude": 9.1832
-      },
-      "image": {
-        "src": "/images/events/october-2026/mib-onetwo-20261207.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 258376,
-        "sha256": "e3ca6719132ba4f7d8bdd97b48d14af724de123f81f1ee75ab2c435e33be8294"
-      },
-      "age": "18+",
-      "dressCode": "Smart Casual",
-      "genres": [
-        "Hip-hop",
-        "Reggaeton",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Pre-sale Admission + 2 Drinks",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/"
-        },
-        {
-          "name": "VIP Table",
-          "price": 250,
-          "category": "table",
-          "availability": "available",
-          "url": "https://mibmilano.it/"
-        }
-      ],
-      "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "mib-20261127-billions",
-      "sourceUrl": "https://mibmilano.it/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "BILLIONS · Dinner Show & Club",
-      "shortName": "Billions",
-      "startISO": "2026-11-27T20:30:00+01:00",
-      "endISO": "2026-11-28T05:00:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-mibmilano",
-        "name": "MIB Milano",
-        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Via Gaetano Negri, 10",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20123"
-        },
-        "latitude": 45.4648,
-        "longitude": 9.1832
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/mib-friday-billions.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 131722,
-        "sha256": "32b93cfec4b17dcc2ce620d962d77d84f2cfe062bb30d0e19b4a557ac30cbc9e"
-      },
-      "age": "20+",
-      "dressCode": "Elegant",
-      "genres": [
-        "House",
-        "Hip-hop",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Aperitif + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "20:30",
-          "admissionUntil": "22:30"
-        },
-        {
-          "name": "Club Admission + 1 Drink",
-          "price": 20,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "23:00"
-        },
-        {
-          "name": "Seated Dinner Show",
-          "price": 50,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "20:30"
-        },
-        {
-          "name": "VIP Table",
-          "price": 250,
-          "category": "table",
-          "availability": "available",
-          "url": "https://mibmilano.it/"
-        }
-      ],
-      "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "mib-20261204-billions",
-      "sourceUrl": "https://mibmilano.it/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "BILLIONS · Dinner Show & Club",
-      "shortName": "Billions",
-      "startISO": "2026-12-04T20:30:00+01:00",
-      "endISO": "2026-12-05T05:00:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-mibmilano",
-        "name": "MIB Milano",
-        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Via Gaetano Negri, 10",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20123"
-        },
-        "latitude": 45.4648,
-        "longitude": 9.1832
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/mib-friday-billions.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 131722,
-        "sha256": "32b93cfec4b17dcc2ce620d962d77d84f2cfe062bb30d0e19b4a557ac30cbc9e"
-      },
-      "age": "20+",
-      "dressCode": "Elegant",
-      "genres": [
-        "House",
-        "Hip-hop",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Aperitif + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "20:30",
-          "admissionUntil": "22:30"
-        },
-        {
-          "name": "Club Admission + 1 Drink",
-          "price": 20,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "23:00"
-        },
-        {
-          "name": "Seated Dinner Show",
-          "price": 50,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "20:30"
-        },
-        {
-          "name": "VIP Table",
-          "price": 250,
-          "category": "table",
-          "availability": "available",
-          "url": "https://mibmilano.it/"
-        }
-      ],
-      "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "mib-20261211-billions",
-      "sourceUrl": "https://mibmilano.it/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "BILLIONS · Dinner Show & Club",
-      "shortName": "Billions",
-      "startISO": "2026-12-11T20:30:00+01:00",
-      "endISO": "2026-12-12T05:00:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-mibmilano",
-        "name": "MIB Milano",
-        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Via Gaetano Negri, 10",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20123"
-        },
-        "latitude": 45.4648,
-        "longitude": 9.1832
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/mib-friday-billions.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 131722,
-        "sha256": "32b93cfec4b17dcc2ce620d962d77d84f2cfe062bb30d0e19b4a557ac30cbc9e"
-      },
-      "age": "20+",
-      "dressCode": "Elegant",
-      "genres": [
-        "House",
-        "Hip-hop",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Aperitif + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "20:30",
-          "admissionUntil": "22:30"
-        },
-        {
-          "name": "Club Admission + 1 Drink",
-          "price": 20,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "23:00"
-        },
-        {
-          "name": "Seated Dinner Show",
-          "price": 50,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "20:30"
-        },
-        {
-          "name": "VIP Table",
-          "price": 250,
-          "category": "table",
-          "availability": "available",
-          "url": "https://mibmilano.it/"
-        }
-      ],
-      "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "mib-20261218-billions",
-      "sourceUrl": "https://mibmilano.it/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "BILLIONS · Dinner Show & Club",
-      "shortName": "Billions",
-      "startISO": "2026-12-18T20:30:00+01:00",
-      "endISO": "2026-12-19T05:00:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-mibmilano",
-        "name": "MIB Milano",
-        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Via Gaetano Negri, 10",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20123"
-        },
-        "latitude": 45.4648,
-        "longitude": 9.1832
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/mib-friday-billions.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 131722,
-        "sha256": "32b93cfec4b17dcc2ce620d962d77d84f2cfe062bb30d0e19b4a557ac30cbc9e"
-      },
-      "age": "20+",
-      "dressCode": "Elegant",
-      "genres": [
-        "House",
-        "Hip-hop",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Aperitif + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "20:30",
-          "admissionUntil": "22:30"
-        },
-        {
-          "name": "Club Admission + 1 Drink",
-          "price": 20,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "23:00"
-        },
-        {
-          "name": "Seated Dinner Show",
-          "price": 50,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "20:30"
-        },
-        {
-          "name": "VIP Table",
-          "price": 250,
-          "category": "table",
-          "availability": "available",
-          "url": "https://mibmilano.it/"
-        }
-      ],
-      "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "mib-20261128-loveaffair",
-      "sourceUrl": "https://mibmilano.it/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "LOVE AFFAIR · Cena Cantata & Club",
-      "shortName": "Love Affair",
-      "startISO": "2026-11-28T20:30:00+01:00",
-      "endISO": "2026-11-29T05:00:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-mibmilano",
-        "name": "MIB Milano",
-        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Via Gaetano Negri, 10",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20123"
-        },
-        "latitude": 45.4648,
-        "longitude": 9.1832
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/mib-saturday-loveaffair.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 185650,
-        "sha256": "3fc28d3165e2ffc5a0bda56ed6cf64f5849c46ab7a17189e646b6930271523ea"
-      },
-      "age": "21+",
-      "dressCode": "Elegant",
-      "genres": [
-        "House",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Aperitif + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "20:30",
-          "admissionUntil": "22:30"
-        },
-        {
-          "name": "Club Admission + 1 Drink",
-          "price": 20,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "23:30"
-        },
-        {
-          "name": "Cena Cantata (Singing Dinner)",
-          "price": 50,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "21:00"
-        },
-        {
-          "name": "VIP Table",
-          "price": 300,
-          "category": "table",
-          "availability": "available",
-          "url": "https://mibmilano.it/"
-        }
-      ],
-      "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "mib-20261205-loveaffair",
-      "sourceUrl": "https://mibmilano.it/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "LOVE AFFAIR · Cena Cantata & Club",
-      "shortName": "Love Affair",
-      "startISO": "2026-12-05T20:30:00+01:00",
-      "endISO": "2026-12-06T05:00:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-mibmilano",
-        "name": "MIB Milano",
-        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Via Gaetano Negri, 10",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20123"
-        },
-        "latitude": 45.4648,
-        "longitude": 9.1832
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/mib-saturday-loveaffair.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 185650,
-        "sha256": "3fc28d3165e2ffc5a0bda56ed6cf64f5849c46ab7a17189e646b6930271523ea"
-      },
-      "age": "21+",
-      "dressCode": "Elegant",
-      "genres": [
-        "House",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Aperitif + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "20:30",
-          "admissionUntil": "22:30"
-        },
-        {
-          "name": "Club Admission + 1 Drink",
-          "price": 20,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "23:30"
-        },
-        {
-          "name": "Cena Cantata (Singing Dinner)",
-          "price": 50,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "21:00"
-        },
-        {
-          "name": "VIP Table",
-          "price": 300,
-          "category": "table",
-          "availability": "available",
-          "url": "https://mibmilano.it/"
-        }
-      ],
-      "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "mib-20261212-loveaffair",
-      "sourceUrl": "https://mibmilano.it/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "LOVE AFFAIR · Cena Cantata & Club",
-      "shortName": "Love Affair",
-      "startISO": "2026-12-12T20:30:00+01:00",
-      "endISO": "2026-12-13T05:00:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-mibmilano",
-        "name": "MIB Milano",
-        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Via Gaetano Negri, 10",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20123"
-        },
-        "latitude": 45.4648,
-        "longitude": 9.1832
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/mib-saturday-loveaffair.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 185650,
-        "sha256": "3fc28d3165e2ffc5a0bda56ed6cf64f5849c46ab7a17189e646b6930271523ea"
-      },
-      "age": "21+",
-      "dressCode": "Elegant",
-      "genres": [
-        "House",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Aperitif + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "20:30",
-          "admissionUntil": "22:30"
-        },
-        {
-          "name": "Club Admission + 1 Drink",
-          "price": 20,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "23:30"
-        },
-        {
-          "name": "Cena Cantata (Singing Dinner)",
-          "price": 50,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "21:00"
-        },
-        {
-          "name": "VIP Table",
-          "price": 300,
-          "category": "table",
-          "availability": "available",
-          "url": "https://mibmilano.it/"
-        }
-      ],
-      "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "mib-20261219-loveaffair",
-      "sourceUrl": "https://mibmilano.it/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "LOVE AFFAIR · Cena Cantata & Club",
-      "shortName": "Love Affair",
-      "startISO": "2026-12-19T20:30:00+01:00",
-      "endISO": "2026-12-20T05:00:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-mibmilano",
-        "name": "MIB Milano",
-        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Via Gaetano Negri, 10",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20123"
-        },
-        "latitude": 45.4648,
-        "longitude": 9.1832
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/mib-saturday-loveaffair.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 185650,
-        "sha256": "3fc28d3165e2ffc5a0bda56ed6cf64f5849c46ab7a17189e646b6930271523ea"
-      },
-      "age": "21+",
-      "dressCode": "Elegant",
-      "genres": [
-        "House",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Aperitif + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "20:30",
-          "admissionUntil": "22:30"
-        },
-        {
-          "name": "Club Admission + 1 Drink",
-          "price": 20,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "23:30"
-        },
-        {
-          "name": "Cena Cantata (Singing Dinner)",
-          "price": 50,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "21:00"
-        },
-        {
-          "name": "VIP Table",
-          "price": 300,
-          "category": "table",
-          "availability": "available",
-          "url": "https://mibmilano.it/"
-        }
-      ],
-      "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "mib-20261202-international",
-      "sourceUrl": "https://mibmilano.it/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "INTERNATIONAL WEEK · Open Wine & Club",
-      "shortName": "International Week",
-      "startISO": "2026-12-02T20:30:00+01:00",
-      "endISO": "2026-12-03T04:30:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-mibmilano",
-        "name": "MIB Milano",
-        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Via Gaetano Negri, 10",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20123"
-        },
-        "latitude": 45.4648,
-        "longitude": 9.1832
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/mib-wednesday-international.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 257946,
-        "sha256": "0f14231e3c6783d210bba174cec60e17a4567f8e2d3f75d82de280090c2c267a"
-      },
-      "age": "18+",
-      "dressCode": "Smart Casual",
-      "genres": [
-        "House",
-        "Reggaeton",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Aperitif + Open Wine Window",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "20:30",
-          "admissionUntil": "22:30"
-        },
-        {
-          "name": "Club Admission + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "23:00"
-        },
-        {
-          "name": "VIP Table",
-          "price": 200,
-          "category": "table",
-          "availability": "available",
-          "url": "https://mibmilano.it/"
-        }
-      ],
-      "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "mib-20261209-international",
-      "sourceUrl": "https://mibmilano.it/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "INTERNATIONAL WEEK · Open Wine & Club",
-      "shortName": "International Week",
-      "startISO": "2026-12-09T20:30:00+01:00",
-      "endISO": "2026-12-10T04:30:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-mibmilano",
-        "name": "MIB Milano",
-        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Via Gaetano Negri, 10",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20123"
-        },
-        "latitude": 45.4648,
-        "longitude": 9.1832
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/mib-wednesday-international.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 257946,
-        "sha256": "0f14231e3c6783d210bba174cec60e17a4567f8e2d3f75d82de280090c2c267a"
-      },
-      "age": "18+",
-      "dressCode": "Smart Casual",
-      "genres": [
-        "House",
-        "Reggaeton",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Aperitif + Open Wine Window",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "20:30",
-          "admissionUntil": "22:30"
-        },
-        {
-          "name": "Club Admission + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "23:00"
-        },
-        {
-          "name": "VIP Table",
-          "price": 200,
-          "category": "table",
-          "availability": "available",
-          "url": "https://mibmilano.it/"
-        }
-      ],
-      "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "mib-20261216-international",
-      "sourceUrl": "https://mibmilano.it/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "INTERNATIONAL WEEK · Open Wine & Club",
-      "shortName": "International Week",
-      "startISO": "2026-12-16T20:30:00+01:00",
-      "endISO": "2026-12-17T04:30:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-mibmilano",
-        "name": "MIB Milano",
-        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Via Gaetano Negri, 10",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20123"
-        },
-        "latitude": 45.4648,
-        "longitude": 9.1832
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/mib-wednesday-international.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 257946,
-        "sha256": "0f14231e3c6783d210bba174cec60e17a4567f8e2d3f75d82de280090c2c267a"
-      },
-      "age": "18+",
-      "dressCode": "Smart Casual",
-      "genres": [
-        "House",
-        "Reggaeton",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Aperitif + Open Wine Window",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "20:30",
-          "admissionUntil": "22:30"
-        },
-        {
-          "name": "Club Admission + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://mibmilano.it/",
-          "admissionFrom": "23:00"
-        },
-        {
-          "name": "VIP Table",
-          "price": 200,
-          "category": "table",
-          "availability": "available",
-          "url": "https://mibmilano.it/"
-        }
-      ],
-      "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "mib-20261203-justice",
-      "sourceUrl": "https://xceed.me/en/milano/club/mib-milano",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "JUSTICE x Fastlife · Urban Thursday",
-      "shortName": "Justice",
-      "startISO": "2026-12-03T23:00:00+01:00",
-      "endISO": "2026-12-04T05:00:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-mibmilano",
-        "name": "MIB Milano",
-        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Via Gaetano Negri, 10",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20123"
-        },
-        "latitude": 45.4648,
-        "longitude": 9.1832
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/mib-thursday-justice.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 241874,
-        "sha256": "958f4d0cbd28536f5bd163de59e6b5271dbc1ae68cf8c39d6c359ca50e56c9d7"
-      },
-      "age": "18+",
-      "dressCode": "Smart Casual",
-      "genres": [
-        "Hip-hop",
-        "Reggaeton",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Woman Admission + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://xceed.me/en/milano/club/mib-milano",
-          "audience": "women"
-        },
-        {
-          "name": "Man Admission + 1 Drink",
-          "price": 20,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://xceed.me/en/milano/club/mib-milano"
-        },
-        {
-          "name": "VIP Table",
-          "price": 250,
-          "category": "table",
-          "availability": "available",
-          "url": "https://xceed.me/en/milano/club/mib-milano"
-        }
-      ],
-      "provenance": "https://xceed.me/en/milano/club/mib-milano · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "mib-20261210-justice",
-      "sourceUrl": "https://xceed.me/en/milano/club/mib-milano",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "JUSTICE x Fastlife · Urban Thursday",
-      "shortName": "Justice",
-      "startISO": "2026-12-10T23:00:00+01:00",
-      "endISO": "2026-12-11T05:00:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-mibmilano",
-        "name": "MIB Milano",
-        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Via Gaetano Negri, 10",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20123"
-        },
-        "latitude": 45.4648,
-        "longitude": 9.1832
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/mib-thursday-justice.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 241874,
-        "sha256": "958f4d0cbd28536f5bd163de59e6b5271dbc1ae68cf8c39d6c359ca50e56c9d7"
-      },
-      "age": "18+",
-      "dressCode": "Smart Casual",
-      "genres": [
-        "Hip-hop",
-        "Reggaeton",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Woman Admission + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://xceed.me/en/milano/club/mib-milano",
-          "audience": "women"
-        },
-        {
-          "name": "Man Admission + 1 Drink",
-          "price": 20,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://xceed.me/en/milano/club/mib-milano"
-        },
-        {
-          "name": "VIP Table",
-          "price": 250,
-          "category": "table",
-          "availability": "available",
-          "url": "https://xceed.me/en/milano/club/mib-milano"
-        }
-      ],
-      "provenance": "https://xceed.me/en/milano/club/mib-milano · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "mib-20261217-justice",
-      "sourceUrl": "https://xceed.me/en/milano/club/mib-milano",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "JUSTICE x Fastlife · Urban Thursday",
-      "shortName": "Justice",
-      "startISO": "2026-12-17T23:00:00+01:00",
-      "endISO": "2026-12-18T05:00:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-mibmilano",
-        "name": "MIB Milano",
-        "address": "Via Gaetano Negri, 10, 20123 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Via Gaetano Negri, 10",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20123"
-        },
-        "latitude": 45.4648,
-        "longitude": 9.1832
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/mib-thursday-justice.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 241874,
-        "sha256": "958f4d0cbd28536f5bd163de59e6b5271dbc1ae68cf8c39d6c359ca50e56c9d7"
-      },
-      "age": "18+",
-      "dressCode": "Smart Casual",
-      "genres": [
-        "Hip-hop",
-        "Reggaeton",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Woman Admission + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://xceed.me/en/milano/club/mib-milano",
-          "audience": "women"
-        },
-        {
-          "name": "Man Admission + 1 Drink",
-          "price": 20,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://xceed.me/en/milano/club/mib-milano"
-        },
-        {
-          "name": "VIP Table",
-          "price": 250,
-          "category": "table",
-          "availability": "available",
-          "url": "https://xceed.me/en/milano/club/mib-milano"
-        }
-      ],
-      "provenance": "https://xceed.me/en/milano/club/mib-milano · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "theclub-20261207-santambrogio",
-      "sourceUrl": "https://www.theclubmilano.com/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "Sant'Ambrogio Special Opening Night",
-      "shortName": "Sant'Ambrogio Night",
-      "startISO": "2026-12-07T23:30:00+01:00",
-      "endISO": "2026-12-08T05:30:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-theclub",
-        "name": "The Club Milano",
-        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Corso Garibaldi, 97",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20121"
-        },
-        "latitude": 45.4792,
-        "longitude": 9.1886
-      },
-      "image": {
-        "src": "/images/events/october-2026/theclub-santambrogio-20261207.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 281014,
-        "sha256": "ea6bf54794564bc667cf4c7598c01c1a12b25e19fe4a1c39e0e276ad62a14d2a"
-      },
-      "age": "18+",
-      "dressCode": "Elegant",
-      "genres": [
-        "House",
-        "Hip-hop",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Woman Pre-sale + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/",
-          "audience": "women"
-        },
-        {
-          "name": "Man Pre-sale + 1 Drink",
-          "price": 25,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "Dancefloor Table (2 Bottles, max 12)",
-          "price": 400,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "Privé Lato Consolle Table (2 Bottles)",
-          "price": 440,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "VIP Table (2 Bottles)",
-          "price": 600,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        }
-      ],
-      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "theclub-20261126-atlanta",
-      "sourceUrl": "https://www.theclubmilano.com/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "ATLANTA · Hip-Hop & Trap Night",
-      "shortName": "Atlanta",
-      "startISO": "2026-11-26T23:30:00+01:00",
-      "endISO": "2026-11-27T05:30:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-theclub",
-        "name": "The Club Milano",
-        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Corso Garibaldi, 97",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20121"
-        },
-        "latitude": 45.4792,
-        "longitude": 9.1886
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/theclub-thursday-atlanta.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 256718,
-        "sha256": "35765327385397315dc9da00e04096c83148c3b03a2141cbcd16c0f13ebc913c"
-      },
-      "age": "18+",
-      "dressCode": "Smart Casual",
-      "genres": [
-        "Hip-hop",
-        "Reggaeton"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Woman Pre-sale + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/",
-          "audience": "women"
-        },
-        {
-          "name": "Man Pre-sale + 1 Drink",
-          "price": 25,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "Dancefloor Table (2 Bottles)",
-          "price": 400,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "VIP Table (2 Bottles)",
-          "price": 600,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        }
-      ],
-      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "theclub-20261203-atlanta",
-      "sourceUrl": "https://www.theclubmilano.com/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "ATLANTA · Hip-Hop & Trap Night",
-      "shortName": "Atlanta",
-      "startISO": "2026-12-03T23:30:00+01:00",
-      "endISO": "2026-12-04T05:30:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-theclub",
-        "name": "The Club Milano",
-        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Corso Garibaldi, 97",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20121"
-        },
-        "latitude": 45.4792,
-        "longitude": 9.1886
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/theclub-thursday-atlanta.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 256718,
-        "sha256": "35765327385397315dc9da00e04096c83148c3b03a2141cbcd16c0f13ebc913c"
-      },
-      "age": "18+",
-      "dressCode": "Smart Casual",
-      "genres": [
-        "Hip-hop",
-        "Reggaeton"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Woman Pre-sale + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/",
-          "audience": "women"
-        },
-        {
-          "name": "Man Pre-sale + 1 Drink",
-          "price": 25,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "Dancefloor Table (2 Bottles)",
-          "price": 400,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "VIP Table (2 Bottles)",
-          "price": 600,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        }
-      ],
-      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "theclub-20261210-atlanta",
-      "sourceUrl": "https://www.theclubmilano.com/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "ATLANTA · Hip-Hop & Trap Night",
-      "shortName": "Atlanta",
-      "startISO": "2026-12-10T23:30:00+01:00",
-      "endISO": "2026-12-11T05:30:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-theclub",
-        "name": "The Club Milano",
-        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Corso Garibaldi, 97",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20121"
-        },
-        "latitude": 45.4792,
-        "longitude": 9.1886
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/theclub-thursday-atlanta.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 256718,
-        "sha256": "35765327385397315dc9da00e04096c83148c3b03a2141cbcd16c0f13ebc913c"
-      },
-      "age": "18+",
-      "dressCode": "Smart Casual",
-      "genres": [
-        "Hip-hop",
-        "Reggaeton"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Woman Pre-sale + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/",
-          "audience": "women"
-        },
-        {
-          "name": "Man Pre-sale + 1 Drink",
-          "price": 25,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "Dancefloor Table (2 Bottles)",
-          "price": 400,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "VIP Table (2 Bottles)",
-          "price": 600,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        }
-      ],
-      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "theclub-20261127-firstclass",
-      "sourceUrl": "https://www.theclubmilano.com/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "FIRST CLASS · International Friday",
-      "shortName": "First Class",
-      "startISO": "2026-11-27T23:30:00+01:00",
-      "endISO": "2026-11-28T05:30:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-theclub",
-        "name": "The Club Milano",
-        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Corso Garibaldi, 97",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20121"
-        },
-        "latitude": 45.4792,
-        "longitude": 9.1886
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/theclub-friday-firstclass.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 278248,
-        "sha256": "9ff958a7893bd6410fbc8ebdbed53e47bfa83a4d3cc922f99cec750daf879a91"
-      },
-      "age": "20+",
-      "dressCode": "Elegant",
-      "genres": [
-        "House",
-        "Hip-hop",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Woman Pre-sale + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/",
-          "audience": "women"
-        },
-        {
-          "name": "Man Pre-sale + 1 Drink",
-          "price": 25,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "Dancefloor Table (2 Bottles)",
-          "price": 400,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "Privé Consolle Table (2 Bottles)",
-          "price": 440,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "VIP Table (2 Bottles)",
-          "price": 600,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        }
-      ],
-      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "theclub-20261204-firstclass",
-      "sourceUrl": "https://www.theclubmilano.com/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "FIRST CLASS · International Friday",
-      "shortName": "First Class",
-      "startISO": "2026-12-04T23:30:00+01:00",
-      "endISO": "2026-12-05T05:30:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-theclub",
-        "name": "The Club Milano",
-        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Corso Garibaldi, 97",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20121"
-        },
-        "latitude": 45.4792,
-        "longitude": 9.1886
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/theclub-friday-firstclass.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 278248,
-        "sha256": "9ff958a7893bd6410fbc8ebdbed53e47bfa83a4d3cc922f99cec750daf879a91"
-      },
-      "age": "20+",
-      "dressCode": "Elegant",
-      "genres": [
-        "House",
-        "Hip-hop",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Woman Pre-sale + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/",
-          "audience": "women"
-        },
-        {
-          "name": "Man Pre-sale + 1 Drink",
-          "price": 25,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "Dancefloor Table (2 Bottles)",
-          "price": 400,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "Privé Consolle Table (2 Bottles)",
-          "price": 440,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "VIP Table (2 Bottles)",
-          "price": 600,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        }
-      ],
-      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "theclub-20261211-firstclass",
-      "sourceUrl": "https://www.theclubmilano.com/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "FIRST CLASS · International Friday",
-      "shortName": "First Class",
-      "startISO": "2026-12-11T23:30:00+01:00",
-      "endISO": "2026-12-12T05:30:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-theclub",
-        "name": "The Club Milano",
-        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Corso Garibaldi, 97",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20121"
-        },
-        "latitude": 45.4792,
-        "longitude": 9.1886
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/theclub-friday-firstclass.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 278248,
-        "sha256": "9ff958a7893bd6410fbc8ebdbed53e47bfa83a4d3cc922f99cec750daf879a91"
-      },
-      "age": "20+",
-      "dressCode": "Elegant",
-      "genres": [
-        "House",
-        "Hip-hop",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Woman Pre-sale + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/",
-          "audience": "women"
-        },
-        {
-          "name": "Man Pre-sale + 1 Drink",
-          "price": 25,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "Dancefloor Table (2 Bottles)",
-          "price": 400,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "Privé Consolle Table (2 Bottles)",
-          "price": 440,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "VIP Table (2 Bottles)",
-          "price": 600,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        }
-      ],
-      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "theclub-20261128-girlsrepublic",
-      "sourceUrl": "https://www.theclubmilano.com/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "GIRLS REPUBLIC · Saturday Flagship",
-      "shortName": "Girls Republic",
-      "startISO": "2026-11-28T23:30:00+01:00",
-      "endISO": "2026-11-29T05:30:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-theclub",
-        "name": "The Club Milano",
-        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Corso Garibaldi, 97",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20121"
-        },
-        "latitude": 45.4792,
-        "longitude": 9.1886
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/theclub-saturday-girlsrepublic.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 245558,
-        "sha256": "1eb74623367d79e5d3e8842f177a5ab6d79f6ec432cc16e2ff3aba3c01358257"
-      },
-      "age": "20+",
-      "dressCode": "Elegant",
-      "genres": [
-        "House",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Woman Pre-sale + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/",
-          "audience": "women"
-        },
-        {
-          "name": "Man Pre-sale + 1 Drink",
-          "price": 25,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "Dancefloor Table (2 Bottles)",
-          "price": 400,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "Privé Consolle Table (2 Bottles)",
-          "price": 440,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "VIP Table (2 Bottles)",
-          "price": 600,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        }
-      ],
-      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "theclub-20261205-girlsrepublic",
-      "sourceUrl": "https://www.theclubmilano.com/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "GIRLS REPUBLIC · Saturday Flagship",
-      "shortName": "Girls Republic",
-      "startISO": "2026-12-05T23:30:00+01:00",
-      "endISO": "2026-12-06T05:30:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-theclub",
-        "name": "The Club Milano",
-        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Corso Garibaldi, 97",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20121"
-        },
-        "latitude": 45.4792,
-        "longitude": 9.1886
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/theclub-saturday-girlsrepublic.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 245558,
-        "sha256": "1eb74623367d79e5d3e8842f177a5ab6d79f6ec432cc16e2ff3aba3c01358257"
-      },
-      "age": "20+",
-      "dressCode": "Elegant",
-      "genres": [
-        "House",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Woman Pre-sale + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/",
-          "audience": "women"
-        },
-        {
-          "name": "Man Pre-sale + 1 Drink",
-          "price": 25,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "Dancefloor Table (2 Bottles)",
-          "price": 400,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "Privé Consolle Table (2 Bottles)",
-          "price": 440,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "VIP Table (2 Bottles)",
-          "price": 600,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        }
-      ],
-      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "theclub-20261212-girlsrepublic",
-      "sourceUrl": "https://www.theclubmilano.com/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "GIRLS REPUBLIC · Saturday Flagship",
-      "shortName": "Girls Republic",
-      "startISO": "2026-12-12T23:30:00+01:00",
-      "endISO": "2026-12-13T05:30:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-theclub",
-        "name": "The Club Milano",
-        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Corso Garibaldi, 97",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20121"
-        },
-        "latitude": 45.4792,
-        "longitude": 9.1886
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/theclub-saturday-girlsrepublic.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 245558,
-        "sha256": "1eb74623367d79e5d3e8842f177a5ab6d79f6ec432cc16e2ff3aba3c01358257"
-      },
-      "age": "20+",
-      "dressCode": "Elegant",
-      "genres": [
-        "House",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Woman Pre-sale + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/",
-          "audience": "women"
-        },
-        {
-          "name": "Man Pre-sale + 1 Drink",
-          "price": 25,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "Dancefloor Table (2 Bottles)",
-          "price": 400,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "Privé Consolle Table (2 Bottles)",
-          "price": 440,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "VIP Table (2 Bottles)",
-          "price": 600,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        }
-      ],
-      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "theclub-20261129-superbe",
-      "sourceUrl": "https://www.theclubmilano.com/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "SUPERBE · Sunday Hip-Hop & R&B",
-      "shortName": "Superbe",
-      "startISO": "2026-11-29T23:30:00+01:00",
-      "endISO": "2026-11-30T05:30:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-theclub",
-        "name": "The Club Milano",
-        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Corso Garibaldi, 97",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20121"
-        },
-        "latitude": 45.4792,
-        "longitude": 9.1886
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/theclub-sunday-superbe.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 256598,
-        "sha256": "59e663aeffa8974ee2b91e18210485214c82d5dddd0dfd029dfaf7714ffb5f25"
-      },
-      "age": "18+",
-      "dressCode": "Smart Casual",
-      "genres": [
-        "Hip-hop",
-        "Reggaeton"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Woman Pre-sale + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/",
-          "audience": "women"
-        },
-        {
-          "name": "Man Pre-sale + 1 Drink",
-          "price": 25,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "Dancefloor Table (2 Bottles)",
-          "price": 400,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        }
-      ],
-      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "theclub-20261206-superbe",
-      "sourceUrl": "https://www.theclubmilano.com/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "SUPERBE · Sunday Hip-Hop & R&B",
-      "shortName": "Superbe",
-      "startISO": "2026-12-06T23:30:00+01:00",
-      "endISO": "2026-12-07T05:30:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-theclub",
-        "name": "The Club Milano",
-        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Corso Garibaldi, 97",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20121"
-        },
-        "latitude": 45.4792,
-        "longitude": 9.1886
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/theclub-sunday-superbe.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 256598,
-        "sha256": "59e663aeffa8974ee2b91e18210485214c82d5dddd0dfd029dfaf7714ffb5f25"
-      },
-      "age": "18+",
-      "dressCode": "Smart Casual",
-      "genres": [
-        "Hip-hop",
-        "Reggaeton"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Woman Pre-sale + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/",
-          "audience": "women"
-        },
-        {
-          "name": "Man Pre-sale + 1 Drink",
-          "price": 25,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "Dancefloor Table (2 Bottles)",
-          "price": 400,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        }
-      ],
-      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "theclub-20261213-superbe",
-      "sourceUrl": "https://www.theclubmilano.com/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "SUPERBE · Sunday Hip-Hop & R&B",
-      "shortName": "Superbe",
-      "startISO": "2026-12-13T23:30:00+01:00",
-      "endISO": "2026-12-14T05:30:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-theclub",
-        "name": "The Club Milano",
-        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Corso Garibaldi, 97",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20121"
-        },
-        "latitude": 45.4792,
-        "longitude": 9.1886
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/theclub-sunday-superbe.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 256598,
-        "sha256": "59e663aeffa8974ee2b91e18210485214c82d5dddd0dfd029dfaf7714ffb5f25"
-      },
-      "age": "18+",
-      "dressCode": "Smart Casual",
-      "genres": [
-        "Hip-hop",
-        "Reggaeton"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Woman Pre-sale + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/",
-          "audience": "women"
-        },
-        {
-          "name": "Man Pre-sale + 1 Drink",
-          "price": 25,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "Dancefloor Table (2 Bottles)",
-          "price": 400,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        }
-      ],
-      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "theclub-20261202-onetwo",
-      "sourceUrl": "https://www.theclubmilano.com/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "ONE TWO · Urban & Hip-Hop Wednesday",
-      "shortName": "One Two",
-      "startISO": "2026-12-02T23:30:00+01:00",
-      "endISO": "2026-12-03T05:30:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-theclub",
-        "name": "The Club Milano",
-        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Corso Garibaldi, 97",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20121"
-        },
-        "latitude": 45.4792,
-        "longitude": 9.1886
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/theclub-wednesday-onetwo.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 272760,
-        "sha256": "7805f5817cd5eeeb130df07d34355e7a7573eb54bbdd00e323c900f371c44e85"
-      },
-      "age": "18+",
-      "dressCode": "Smart Casual",
-      "genres": [
-        "Hip-hop",
-        "Reggaeton"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Woman Pre-sale + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/",
-          "audience": "women"
-        },
-        {
-          "name": "Man Pre-sale + 1 Drink",
-          "price": 25,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "Dancefloor Table (2 Bottles)",
-          "price": 400,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        }
-      ],
-      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "theclub-20261209-onetwo",
-      "sourceUrl": "https://www.theclubmilano.com/",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "ONE TWO · Urban & Hip-Hop Wednesday",
-      "shortName": "One Two",
-      "startISO": "2026-12-09T23:30:00+01:00",
-      "endISO": "2026-12-10T05:30:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-theclub",
-        "name": "The Club Milano",
-        "address": "Corso Garibaldi, 97, 20121 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Corso Garibaldi, 97",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20121"
-        },
-        "latitude": 45.4792,
-        "longitude": 9.1886
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/theclub-wednesday-onetwo.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 272760,
-        "sha256": "7805f5817cd5eeeb130df07d34355e7a7573eb54bbdd00e323c900f371c44e85"
-      },
-      "age": "18+",
-      "dressCode": "Smart Casual",
-      "genres": [
-        "Hip-hop",
-        "Reggaeton"
-      ],
-      "performers": [],
-      "offers": [
-        {
-          "name": "Woman Pre-sale + 1 Drink",
-          "price": 15,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/",
-          "audience": "women"
-        },
-        {
-          "name": "Man Pre-sale + 1 Drink",
-          "price": 25,
-          "category": "ticket",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        },
-        {
-          "name": "Dancefloor Table (2 Bottles)",
-          "price": 400,
-          "category": "table",
-          "availability": "available",
-          "url": "https://www.theclubmilano.com/"
-        }
-      ],
-      "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "philipps-20261126-saint",
-      "sourceUrl": "https://philippsmilano.com/events",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "SAINT · Couture Thursday Club",
-      "shortName": "Saint",
-      "startISO": "2026-11-26T20:00:00+01:00",
-      "endISO": "2026-11-27T04:30:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-philipps",
-        "name": "Philipp's Milano",
-        "address": "Via Daniele Manin, 21, 20121 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Via Daniele Manin, 21",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20121"
-        },
-        "latitude": 45.4754,
-        "longitude": 9.1972
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/philipps-thursday-saint.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 269620,
-        "sha256": "1bc2253474add396199eb5e3787bbfae93a11fe45d3b13a811806e28f4aade11"
-      },
-      "age": null,
-      "dressCode": "Couture Evening Elegance",
-      "genres": [
-        "House",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [],
-      "provenance": "https://philippsmilano.com/events · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "philipps-20261127-clubforlife",
-      "sourceUrl": "https://philippsmilano.com/events",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "ClubForLife · Couture Friday Night",
-      "shortName": "ClubForLife",
-      "startISO": "2026-11-27T20:00:00+01:00",
-      "endISO": "2026-11-28T04:30:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-philipps",
-        "name": "Philipp's Milano",
-        "address": "Via Daniele Manin, 21, 20121 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Via Daniele Manin, 21",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20121"
-        },
-        "latitude": 45.4754,
-        "longitude": 9.1972
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/philipps-friday-clubforlife.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 206258,
-        "sha256": "f0fba5ede59ffbab6bb173b222aaeb41808624e5dc69fec1a9f6ddcde1c39fa1"
-      },
-      "age": null,
-      "dressCode": "Couture Evening Elegance",
-      "genres": [
-        "House",
-        "Hip-hop",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [],
-      "provenance": "https://philippsmilano.com/events · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "philipps-20261128-konekt",
-      "sourceUrl": "https://philippsmilano.com/events",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "KONEKT · Saturday Afro & Melodic House",
-      "shortName": "Konekt",
-      "startISO": "2026-11-28T20:00:00+01:00",
-      "endISO": "2026-11-29T04:30:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-philipps",
-        "name": "Philipp's Milano",
-        "address": "Via Daniele Manin, 21, 20121 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Via Daniele Manin, 21",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20121"
-        },
-        "latitude": 45.4754,
-        "longitude": 9.1972
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/philipps-saturday-konekt.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 193840,
-        "sha256": "4a802eb81aec8c2514dcdda30ef22d782913f2124f0f8e31b99c02d0172832b1"
-      },
-      "age": null,
-      "dressCode": "Couture Evening Elegance",
-      "genres": [
-        "House",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [],
-      "provenance": "https://philippsmilano.com/events · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "philipps-20261129-sweetie",
-      "sourceUrl": "https://philippsmilano.com/events",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "SWEETIE · Couture Sunday Club",
-      "shortName": "Sweetie",
-      "startISO": "2026-11-29T20:00:00+01:00",
-      "endISO": "2026-11-30T04:30:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-philipps",
-        "name": "Philipp's Milano",
-        "address": "Via Daniele Manin, 21, 20121 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Via Daniele Manin, 21",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20121"
-        },
-        "latitude": 45.4754,
-        "longitude": 9.1972
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/philipps-sunday-sweetie.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 270992,
-        "sha256": "4b8a1f171ceb9518d1ca70e003f1de05ce53f62d7a07e97fcefeb7d6868d4af6"
-      },
-      "age": null,
-      "dressCode": "Couture Evening Elegance",
-      "genres": [
-        "Hip-hop",
-        "House"
-      ],
-      "performers": [],
-      "offers": [],
-      "provenance": "https://philippsmilano.com/events · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "philipps-20261201-brasil",
-      "sourceUrl": "https://philippsmilano.com/events",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "From Brasil to Milan · Dinner Show & Club",
-      "shortName": "From Brasil to Milan",
-      "startISO": "2026-12-01T20:00:00+01:00",
-      "endISO": "2026-12-02T04:30:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-philipps",
-        "name": "Philipp's Milano",
-        "address": "Via Daniele Manin, 21, 20121 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Via Daniele Manin, 21",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20121"
-        },
-        "latitude": 45.4754,
-        "longitude": 9.1972
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/philipps-tuesday-brasil.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 231850,
-        "sha256": "9fc7e999f41ce815331443aefc02dc67fc908e72b34538c26c66c81830424d95"
-      },
-      "age": null,
-      "dressCode": "Couture Evening Elegance",
-      "genres": [
-        "Reggaeton",
-        "House",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [],
-      "provenance": "https://philippsmilano.com/events · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "philipps-20261202-tussy",
-      "sourceUrl": "https://philippsmilano.com/events",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "TUSSY · Couture Wednesday Night",
-      "shortName": "Tussy",
-      "startISO": "2026-12-02T20:00:00+01:00",
-      "endISO": "2026-12-03T04:30:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-philipps",
-        "name": "Philipp's Milano",
-        "address": "Via Daniele Manin, 21, 20121 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Via Daniele Manin, 21",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20121"
-        },
-        "latitude": 45.4754,
-        "longitude": 9.1972
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/philipps-wednesday-tussy.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 143280,
-        "sha256": "73b8a2ca6e0112e3a7f23b204e2add51c262979775cdd299a4fa9736127586ff"
-      },
-      "age": null,
-      "dressCode": "Couture Evening Elegance",
-      "genres": [
-        "House",
-        "Hip-hop"
-      ],
-      "performers": [],
-      "offers": [],
-      "provenance": "https://philippsmilano.com/events · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "philipps-20261204-clubforlife",
-      "sourceUrl": "https://philippsmilano.com/events",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "ClubForLife · Couture Friday Night",
-      "shortName": "ClubForLife",
-      "startISO": "2026-12-04T20:00:00+01:00",
-      "endISO": "2026-12-05T04:30:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-philipps",
-        "name": "Philipp's Milano",
-        "address": "Via Daniele Manin, 21, 20121 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Via Daniele Manin, 21",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20121"
-        },
-        "latitude": 45.4754,
-        "longitude": 9.1972
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/philipps-friday-clubforlife.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 206258,
-        "sha256": "f0fba5ede59ffbab6bb173b222aaeb41808624e5dc69fec1a9f6ddcde1c39fa1"
-      },
-      "age": null,
-      "dressCode": "Couture Evening Elegance",
-      "genres": [
-        "House",
-        "Hip-hop",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [],
-      "provenance": "https://philippsmilano.com/events · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "philipps-20261205-konekt",
-      "sourceUrl": "https://philippsmilano.com/events",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "KONEKT · Saturday Afro & Melodic House",
-      "shortName": "Konekt",
-      "startISO": "2026-12-05T20:00:00+01:00",
-      "endISO": "2026-12-06T04:30:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-philipps",
-        "name": "Philipp's Milano",
-        "address": "Via Daniele Manin, 21, 20121 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Via Daniele Manin, 21",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20121"
-        },
-        "latitude": 45.4754,
-        "longitude": 9.1972
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/philipps-saturday-konekt.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 193840,
-        "sha256": "4a802eb81aec8c2514dcdda30ef22d782913f2124f0f8e31b99c02d0172832b1"
-      },
-      "age": null,
-      "dressCode": "Couture Evening Elegance",
-      "genres": [
-        "House",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [],
-      "provenance": "https://philippsmilano.com/events · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
-    },
-    {
-      "id": "philipps-20261207-santambrogio",
-      "sourceUrl": "https://philippsmilano.com/events",
-      "sourceScope": "dated-calendar",
-      "affiliateUrl": null,
-      "affiliateStatus": "unavailable",
-      "officialName": "The Philipp's Show · Sant'Ambrogio Gala",
-      "shortName": "Philipp's Show",
-      "startISO": "2026-12-07T20:00:00+01:00",
-      "endISO": "2026-12-08T04:30:00+01:00",
-      "startTimeKnown": true,
-      "venue": {
-        "id": "v-philipps",
-        "name": "Philipp's Milano",
-        "address": "Via Daniele Manin, 21, 20121 Milano, IT",
-        "structuredAddress": {
-          "streetAddress": "Via Daniele Manin, 21",
-          "addressLocality": "Milano",
-          "addressCountry": "IT",
-          "postalCode": "20121"
-        },
-        "latitude": 45.4754,
-        "longitude": 9.1972
-      },
-      "image": {
-        "src": "/images/events/weekly-posters/philipps-dinnershow.webp",
-        "width": 1080,
-        "height": 1350,
-        "bytes": 127596,
-        "sha256": "bf353c6eb816ad8c3ea9e0275085708cbbd3ecdb91bb455b8b2ecb7d716ad11e"
-      },
-      "age": null,
-      "dressCode": "Couture Evening Elegance",
-      "genres": [
-        "House",
-        "Hits"
-      ],
-      "performers": [],
-      "offers": [],
-      "provenance": "https://philippsmilano.com/events · verified official calendar · checked 2026-11-25T19:00:00.000Z",
-      "halloween": false,
-      "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
     }
   ]
 }

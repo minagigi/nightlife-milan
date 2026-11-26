@@ -59,8 +59,8 @@ export const venuesData: Venue[] = [
     localizedContent: {
       name: { en: "Voya Rooftop", it: "Voya Rooftop" },
       description: {
-        en: "Twentieth floor of Torre WJC in Portello, facing the CityLife skyscrapers. Floor-to-ceiling glass walls frame the Milan skyline while sunset aperitivo flows into panoramic dinner and late-night DJ sets.",
-        it: "Ventesimo piano della Torre WJC al Portello, di fronte ai grattacieli di CityLife. Le vetrate a tutta altezza incorniciano lo skyline di Milano mentre l'aperitivo al tramonto sfuma nella cena panoramica e nel DJ set notturno."
+        en: "Twentieth floor of Torre WJC in Portello, facing the CityLife skyscrapers. Floor-to-ceiling glass walls frame the Milan skyline while sunset aperitivo flows into panoramic dinner and late-night DJ sets. Official Voya Experience Gift Cards available (€100 Aperitif Experience, €150 Classic Dinner Experience for two, €250 Signature Dinner Experience for two, valid 6 months).",
+        it: "Ventesimo piano della Torre WJC al Portello, di fronte ai grattacieli di CityLife. Le vetrate a tutta altezza incorniciano lo skyline di Milano mentre l'aperitivo al tramonto sfuma nella cena panoramica e nel DJ set notturno. Disponibili le Gift Card ufficiali Voya Experience (100 € Aperitivo Experience, 150 € Classic Dinner Experience per due, 250 € Signature Dinner Experience per due, validità 6 mesi)."
       },
       dressCode: { en: "Smart Elegant: No sportswear, no shorts", it: "Smart Elegant: No abbigliamento sportivo" },
       altTextImg: { en: "Voya Rooftop Milan skyline view from 20th floor at night", it: "Vista skyline di Milano dal Voya Rooftop al 20° piano" },
@@ -794,12 +794,12 @@ export const venuesData: Venue[] = [
     localizedContent: {
       name: { en: "Aria Club Milano", it: "Aria Club Milano" },
       description: {
-        en: "Summer open-air club near San Siro (regular season May–September; closed during winter except rare special events such as NYE). In summer: aperitivo buffet from 19:30, then open-air club with Dance Floor, Privé Aria and Privé DJ tables.",
-        it: "Club estivo open-air vicino a San Siro (stagione regolare maggio–settembre; chiuso in inverno salvo eventi rari speciali come Capodanno). In estate: aperitivo a buffet dalle 19:30, poi club all'aperto con tavoli Pista, Privé Aria e Privé DJ."
+        en: "Summer open-air club near San Siro (regular public season May–September; closed for regular winter clubbing except special events such as NYE, while its heated indoor Sala Privata remains bookable all winter for private corporate events, graduations, and birthdays). In summer: aperitivo buffet from 19:30, then open-air club with Dance Floor, Privé Aria and Privé DJ tables.",
+        it: "Club estivo open-air vicino a San Siro (stagione pubblica regolare maggio–settembre; chiuso per le serate regolari invernali salvo eventi speciali come Capodanno, mentre la Sala Privata interna riscaldata resta prenotabile tutto l'inverno per eventi privati aziendali, lauree e compleanni). In estate: aperitivo a buffet dalle 19:30, poi club all'aperto con tavoli Pista, Privé Aria e Privé DJ."
       },
       dressCode: { en: "Smart Elegant: No sportswear, no sneakers", it: "Smart Elegant: No abbigliamento sportivo, no sneakers" },
       altTextImg: { en: "Aria Club Milano interior dancefloor San Siro nightclub", it: "Aria Club Milano interno pista da ballo San Siro discoteca" },
-      insiderTip: { en: "Open-air summer venue (May–Sep); closed in winter except rare special announcements. In winter, ask on WhatsApp for Just Me Milano (heated dome), Pineta, 55 Milano, Voya Rooftop, or REPVBLIC.", it: "Location estiva all'aperto (maggio–settembre); chiuso in inverno salvo rari eventi speciali. In inverno scrivici su WhatsApp per Just Me Milano (cupola riscaldata), Pineta, 55 Milano, Voya Rooftop o REPVBLIC." }
+      insiderTip: { en: "Open-air summer venue (May–Sep); during winter, inquire on WhatsApp (+39 351 912 7047) to rent the indoor Sala Privata exclusively for private parties, graduations, or corporate events, or book club nights at Just Me Milano, Pineta, 55 Milano, Voya Rooftop, or REPVBLIC.", it: "Location estiva all'aperto (maggio–settembre); durante l'inverno scrivici su WhatsApp (+39 351 912 7047) per affittare in esclusiva la Sala Privata interna per feste private, lauree o eventi aziendali, oppure prenota le serate al Just Me Milano, Pineta, 55 Milano, Voya Rooftop o REPVBLIC." }
     },
     image: "/images/venues/aria-club-milano/aria-club-milano-interior-01.webp",
     gallery: [
