@@ -1,14 +1,18 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { enabledLocaleCodes, LOCALES, type LocaleCode } from '@/lib/i18n/locales';
+import { enabledLocaleCodes, LOCALES, localePrefix, type LocaleCode } from '@/lib/i18n/locales';
 import { getEventBatchProfile, isEventBatchLocaleHttpIndexable } from '@/lib/eventBatchProfiles';
 import { isRemovedCuratedSitePath } from '@/lib/eventVisibility';
-import { ALL_EVENT_DIR_TOKENS, resolveLocalizedDirToCanonical } from '@/lib/i18n/dirTokens35';
+import { ALL_EVENT_DIR_TOKENS, getLocalizedDir35, resolveLocalizedDirToCanonical } from '@/lib/i18n/dirTokens35';
 import {
+  getExistingGuideSlug35,
+  isConsolidatedNyeMasterGuideId,
   isKnownActiveVenueSlug,
+  isLegacyHybridGuideSlug,
   isLegacyNewYearsEveHubSlug,
   isLegacyUnlistedClubSlug,
   localizeInternalHref,
+  resolveExistingGuideId,
   resolveLegacyOrExpiredEventRedirect,
   resolveSeoHubPathToCanonical,
 } from '@/lib/i18n/localizedSlugs35';
@@ -92,7 +96,11 @@ function safeDecodeSegment(seg: string): string {
   }
 }
 
-function resolveLegacySubpathForLocale(subPath: string, targetLocale: LocaleCode): string | null {
+function resolveLegacySubpathForLocale(
+  subPath: string,
+  targetLocale: LocaleCode,
+  hasExplicitLocale = true,
+): string | null {
   if (capodannoDirectRe.test(subPath)) {
     return capodannoCategoryPath('capodanno-2027', targetLocale);
   }
@@ -154,11 +162,22 @@ function resolveLegacySubpathForLocale(subPath: string, targetLocale: LocaleCode
       if (legacyEv) return legacyEv;
       return capodannoCategoryPath('capodanno-2027', targetLocale);
     }
-    const parentCanonical = resolveLocalizedDirToCanonical(segs[0]);
+    const parentCanonical = resolveLocalizedDirToCanonical(rawFirst);
     if (parentCanonical === '/clubs') {
       if (!isKnownActiveVenueSlug(rawLeaf) && isLegacyUnlistedClubSlug(rawLeaf)) {
         const clubsHub = targetLocale === 'en' ? '/clubs' : `/${targetLocale}/clubs`;
         return localizeInternalHref(clubsHub, targetLocale);
+      }
+    } else if (parentCanonical === '/guides') {
+      const guideId = resolveExistingGuideId(rawLeaf);
+      if (guideId && isConsolidatedNyeMasterGuideId(guideId)) {
+        return capodannoCategoryPath('capodanno-2027', targetLocale);
+      }
+      if (guideId) {
+        const expectedSlug = getExistingGuideSlug35(guideId, targetLocale);
+        if (rawLeaf !== expectedSlug && (hasExplicitLocale || isLegacyHybridGuideSlug(rawLeaf))) {
+          return `${localePrefix(targetLocale)}/${getLocalizedDir35('guides', targetLocale)}/${expectedSlug}`;
+        }
       }
     } else if (parentCanonical === '/events') {
       const eventDest = resolveLegacyOrExpiredEventRedirect(rawLeaf, targetLocale);
@@ -335,11 +354,31 @@ export async function middleware(request: NextRequest) {
   const legacySubPath = hasLeadingActiveLocale
     ? (pathname.slice(rawFirstSeg.length + 1) || '/')
     : pathname;
-  const legacyDestination = resolveLegacySubpathForLocale(legacySubPath, legacyTargetLocale);
+  const rootSegsForLegacy = !hasLeadingActiveLocale ? cleanTopPathname.split('/').filter(Boolean) : [];
+  const isUnprefixedGuidePath =
+    !hasLeadingActiveLocale &&
+    rootSegsForLegacy.length === 2 &&
+    resolveLocalizedDirToCanonical(safeDecodeSegment(rootSegsForLegacy[0]).toLowerCase()) === '/guides';
+  const rawCookieLocForLegacy = request.cookies.get('NEXT_LOCALE')?.value;
+  const effectiveHumanLoc = !isBot
+    ? rawCookieLocForLegacy && locales.includes(rawCookieLocForLegacy)
+      ? rawCookieLocForLegacy
+      : rawCookieLocForLegacy
+        ? 'en'
+        : matchBrowserLocale(request.headers.get('accept-language')) || 'en'
+    : 'en';
+  const deferUnprefixedGuideToBrowserLocale = isUnprefixedGuidePath && !isBot && effectiveHumanLoc !== 'en';
+  const legacyDestination = deferUnprefixedGuideToBrowserLocale
+    ? null
+    : resolveLegacySubpathForLocale(legacySubPath, legacyTargetLocale, hasLeadingActiveLocale);
   if (legacyDestination && legacyDestination !== cleanTopPathname) {
     const url = new URL(legacyDestination, request.url);
     url.search = request.nextUrl.search;
-    return NextResponse.redirect(url, 308);
+    const redirectRes = NextResponse.redirect(url, 308);
+    if (hasLeadingActiveLocale) {
+      maybePersistLocaleCookie(request, redirectRes, legacyTargetLocale, isBot);
+    }
+    return redirectRes;
   }
 
   // Typo comune -> path canonico

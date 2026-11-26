@@ -3,7 +3,7 @@ import { MOCK_EVENT_I18N } from '@/lib/mockEventI18n';
 import { GUIDE_I18N } from '@/lib/guideI18n.generated';
 import { EXTRA_100_GUIDES, populateGuideSlugs35 } from '@/lib/guides100Catalog';
 import { GSC_PILLAR_GUIDES_20261120 } from '@/lib/guidesGscPillar20261120';
-import { VENUE_SLUGS_35, resolveVenueSlug, ALL_35_LOCALES, sanitizeAsciiSlug, SLUG_TOKENS_35, registerMockEventSlugs35 } from '@/lib/i18n/localizedSlugs35';
+import { VENUE_SLUGS_35, resolveVenueSlug, resolveExistingGuideId, ALL_35_LOCALES, sanitizeAsciiSlug, SLUG_TOKENS_35, registerMockEventSlugs35 } from '@/lib/i18n/localizedSlugs35';
 import { GUIDE_HERO_IMAGES_114 } from '@/lib/guideImagesMap114';
 import { applyFlagshipGuides35 } from '@/lib/i18n/flagshipGuides35';
 import { applyGscGuidesBatch20261122 } from '@/lib/guidesGscBatch20261122';
@@ -2862,6 +2862,11 @@ for (const g of mockGuides) {
 export const getGuideBySlug = (slug: string, lang: string): Guide | undefined => {
   if (slug === 'san-siro-football-afterparties-guide') {
     slug = 'san-siro-football-match-afterparties-inter-ac-milan';
+  }
+  const resolvedId = resolveExistingGuideId(slug);
+  if (resolvedId) {
+    const byId = mockGuides.find((g) => g.id === resolvedId);
+    if (byId) return byId;
   }
   // Stesso bug fix di getEventBySlug: riconosce entrambi gli slug a prescindere da lang.
   return mockGuides.find(g =>

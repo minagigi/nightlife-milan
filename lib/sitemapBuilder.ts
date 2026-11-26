@@ -24,9 +24,10 @@ import {
   getLocalizedSeoPagePath35,
   getLocalizedVenueSlug35,
   getLocalizedZoneSlug35,
+  isConsolidatedNyeMasterGuideId,
 } from '@/lib/i18n/localizedSlugs35';
 
-const SITE_RELEASE_TIMESTAMP = '2026-11-26T16:30:00.000Z';
+const SITE_RELEASE_TIMESTAMP = '2026-11-26T21:05:00.000Z';
 const LEGAL_STATIC_TIMESTAMP = '2026-11-01T00:00:00.000Z';
 
 export function clampLastModified(
@@ -461,6 +462,7 @@ export function buildGuidesTaxonomySitemapEntries(): MetadataRoute.Sitemap {
   const catalogLastMod = getCatalogLastModified();
 
   mockGuides.forEach((guide) => {
+    if (isConsolidatedNyeMasterGuideId(guide.id)) return;
     locales.forEach((locale) => {
       const langPrefix = localePrefix(locale);
       const slug = getExistingGuideSlug35(guide.id, locale) || getLocalizedText(guide.slugs, locale);

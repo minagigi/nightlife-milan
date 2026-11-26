@@ -1,5 +1,6 @@
 import type { LocaleCode } from './localeRegistry';
 import { GUIDE_100_SLUGS_MAP, CAPODANNO_NAV_35 } from './guideSlugs100Map';
+import { LEGACY_HYBRID_GUIDE_SLUGS_TO_ID } from './legacyHybridGuideSlugs';
 import {
   DIR_AND_SUB_TOKENS_35,
   getLocalizedDir35,
@@ -857,7 +858,17 @@ for (const [gid, locMap] of Object.entries(GUIDE_100_SLUGS_MAP)) {
   }
 }
 
+export const CONSOLIDATED_NYE_MASTER_GUIDE_IDS: ReadonlySet<string> = new Set([
+  'g-new-years-eve-2027',
+  'g-86',
+]);
+
+export function isConsolidatedNyeMasterGuideId(guideId: string): boolean {
+  return CONSOLIDATED_NYE_MASTER_GUIDE_IDS.has(guideId);
+}
+
 const LEGACY_GUIDE_ALIAS_TO_ID: Readonly<Record<string, string>> = {
+  ...LEGACY_HYBRID_GUIDE_SLUGS_TO_ID,
   'san-siro-football-afterparties-guide': 'g-san-siro-football-afterparties',
   'monza-brianza-to-milan-clubs-parking-vip-guide-vip-guide': 'g-110',
   'bergamo-to-milan-clubs-highway-a4-vip-guide-vip-guide': 'g-111',
@@ -865,6 +876,11 @@ const LEGACY_GUIDE_ALIAS_TO_ID: Readonly<Record<string, string>> = {
   'brescia-franciacorta-cremona-to-milan-clubs-vip-guide-vip-guide': 'g-113',
   'varese-pavia-lodi-novara-to-milan-clubs-vip-guide-vip-guide': 'g-114',
 };
+
+export function isLegacyHybridGuideSlug(slug: string): boolean {
+  const clean = sanitizeAsciiSlug(slug);
+  return Boolean(LEGACY_GUIDE_ALIAS_TO_ID[clean] || LEGACY_GUIDE_ALIAS_TO_ID[slug]);
+}
 
 export function resolveExistingGuideId(slugOrId: string): string | undefined {
   const clean = sanitizeAsciiSlug(slugOrId);
@@ -1729,6 +1745,10 @@ export function localizeInternalHref(rawHref: string, fallbackLocale: LocaleCode
       return `${lp}/${getLocalizedDir35('genres', locale)}/${locGenre}${suffix}`;
     }
     if (parentCanonical === '/guides') {
+      const resolvedGuideId = resolveExistingGuideId(rawItemSlug);
+      if (resolvedGuideId && isConsolidatedNyeMasterGuideId(resolvedGuideId)) {
+        return `${capodannoCategoryPath('capodanno-2027', locale)}${suffix}`;
+      }
       const locGuide = getExistingGuideSlug35(rawItemSlug, locale);
       return `${lp}/${getLocalizedDir35('guides', locale)}/${locGuide}${suffix}`;
     }

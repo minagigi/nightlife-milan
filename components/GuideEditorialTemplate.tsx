@@ -12,8 +12,19 @@ import type { LocaleCode } from '@/lib/i18n/locales';
 import type { GuideEditorialBundle } from '@/lib/guideEditorialMedia';
 import { resolveDistinctGuidePageMedia } from '@/lib/guideEditorialMedia';
 import { getLocalizedGuideSlug35 } from '@/lib/guides100Catalog';
+import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
+import { getLocalizedVenueSlug35 } from '@/lib/i18n/localizedSlugs35';
 import { getLocalizedText } from '@/lib/seo';
 import type { TasteExplorerData } from '@/lib/tasteExplorerData';
+
+export interface GuideCanonicalHubBanner {
+  eyebrow: string;
+  description: string;
+  primaryHref: string;
+  primaryAnchor: string;
+  secondaryHref?: string;
+  secondaryAnchor?: string;
+}
 
 function normalizeGuideSectionHtml(rawHtml: string): string {
   const cleaned = rawHtml
@@ -52,6 +63,7 @@ export interface GuideEditorialTemplateProps {
   explorerData: TasteExplorerData | null;
   partnerCards?: Array<{ venue: Venue; coverSrc: string }>;
   relatedGuideCards?: Array<{ guide: Guide; coverSrc: string }>;
+  canonicalHubBanner?: GuideCanonicalHubBanner | null;
   t: {
     back: string;
     toc: string;
@@ -91,6 +103,7 @@ export default function GuideEditorialTemplate({
   explorerData,
   partnerCards,
   relatedGuideCards,
+  canonicalHubBanner,
   t,
   ui,
 }: GuideEditorialTemplateProps) {
@@ -129,6 +142,7 @@ export default function GuideEditorialTemplate({
           <nav aria-label="Breadcrumb" className="mb-7 flex flex-wrap items-center gap-3 text-[14px] text-[#C9C7C2]">
             <Link
               href={`${langPrefix}/guides`}
+              locale={locale}
               className="inline-flex items-center gap-2 text-[#F6F1E7] hover:text-[#25D366] transition-colors font-semibold min-h-[44px]"
             >
               <ArrowLeft className="w-4 h-4 shrink-0" />
@@ -177,6 +191,44 @@ export default function GuideEditorialTemplate({
           </div>
         </div>
       </section>
+
+      {canonicalHubBanner && (
+        <section
+          data-canonical-hub-banner="true"
+          className="bg-[#141311] text-[#FFFFFF] border-t border-b border-[#2A2824] py-6 sm:py-7"
+        >
+          <div className="max-w-[1440px] mx-auto px-5 sm:px-10 lg:px-14 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+            <div className="min-w-0">
+              <p className="text-[12px] uppercase tracking-[0.14em] text-[#25D366] font-bold m-0 mb-1">
+                {canonicalHubBanner.eyebrow}
+              </p>
+              <p className="text-[15px] text-[#E6E2DA] leading-snug m-0 max-w-3xl">
+                {canonicalHubBanner.description}
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-3 shrink-0">
+              <Link
+                href={canonicalHubBanner.primaryHref}
+                locale={locale}
+                className="inline-flex items-center gap-2 min-h-[44px] bg-[#25D366] text-[#050505] hover:bg-[#20bd5a] px-5 py-2.5 text-[14px] font-bold transition-colors"
+              >
+                <span>{canonicalHubBanner.primaryAnchor}</span>
+                <ArrowUpRight className="w-4 h-4 shrink-0" aria-hidden="true" />
+              </Link>
+              {canonicalHubBanner.secondaryHref && canonicalHubBanner.secondaryAnchor && (
+                <Link
+                  href={canonicalHubBanner.secondaryHref}
+                  locale={locale}
+                  className="inline-flex items-center gap-2 min-h-[44px] border border-[#F6F1E7]/40 text-[#F6F1E7] hover:border-[#25D366] hover:text-[#25D366] px-4 py-2.5 text-[14px] font-semibold transition-colors"
+                >
+                  <span>{canonicalHubBanner.secondaryAnchor}</span>
+                  <ArrowUpRight className="w-4 h-4 shrink-0" aria-hidden="true" />
+                </Link>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* 2. Carta Calda Executive Brief & Editorial Index (#F6F1E7 Warm Paper) */}
       <section className="bg-[#F6F1E7] text-[#050505] py-12 sm:py-16">
@@ -310,12 +362,13 @@ export default function GuideEditorialTemplate({
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" data-taste-stagger>
               {effectivePartnerCards.map(({ venue, coverSrc }) => {
                 const venueName = getLocalizedText(venue.localizedContent.name, locale);
-                const venueSlug = getLocalizedText(venue.slugs, locale);
-                const venueHref = `${langPrefix}/clubs/${venueSlug}`;
+                const venueSlug = getLocalizedVenueSlug35(venue.id, locale);
+                const venueHref = `${langPrefix}/${getLocalizedDir35('clubs', locale)}/${venueSlug}`;
                 return (
                   <Link
                     key={venue.id}
                     href={venueHref}
+                    locale={locale}
                     className="group bg-[#141311] hover:bg-[#1E1C19] transition-colors flex flex-col overflow-clip"
                   >
                     <div className="relative aspect-[4/5] w-full overflow-clip bg-[#050505]">
@@ -404,12 +457,13 @@ export default function GuideEditorialTemplate({
                     <div className="flex flex-col gap-[2px] bg-[#050505]" data-taste-stagger>
                       {relatedVenues.map((venue, idx) => {
                         const venueName = getLocalizedText(venue.localizedContent.name, locale);
-                        const venueSlug = getLocalizedText(venue.slugs, locale);
-                        const venueHref = `${langPrefix}/clubs/${venueSlug}`;
+                        const venueSlug = getLocalizedVenueSlug35(venue.id, locale);
+                        const venueHref = `${langPrefix}/${getLocalizedDir35('clubs', locale)}/${venueSlug}`;
                         return (
                           <Link
                             key={venue.id}
                             href={venueHref}
+                            locale={locale}
                             className="flex items-center justify-between gap-4 bg-[#0B0A09] hover:bg-[#141311] px-4 py-3.5 transition-colors"
                           >
                             <div className="min-w-0">

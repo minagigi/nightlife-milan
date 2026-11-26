@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { getLocaleDef, hreflangAlternates, canonicalPageUrl } from '@/lib/i18n/locales';
 import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
+import { isConsolidatedNyeMasterGuideId } from '@/lib/i18n/localizedSlugs35';
 import { getHubSeoMeta35 } from '@/lib/i18n/hubSeoMeta35';
 import { getGuideUiLabels35 } from '@/lib/i18n/flagshipGuides35';
 import { getGuidesHubCopy35 } from '@/lib/i18n/guidesHub35';
@@ -417,10 +418,11 @@ export default async function GuidesPage({
   ];
 
   const orderedSet = new Set(orderedIds);
+  const activeGuides = mockGuides.filter((g) => !isConsolidatedNyeMasterGuideId(g.id));
   const flagshipGuides = orderedIds
-    .map((id) => mockGuides.find((g) => g.id === id))
+    .map((id) => activeGuides.find((g) => g.id === id))
     .filter((g): g is NonNullable<typeof g> => Boolean(g));
-  const clusterGuides = mockGuides.filter((g) => !orderedSet.has(g.id));
+  const clusterGuides = activeGuides.filter((g) => !orderedSet.has(g.id));
   const allGuidesOrdered = [...flagshipGuides, ...clusterGuides];
 
   const featuredGuide = flagshipGuides[0];

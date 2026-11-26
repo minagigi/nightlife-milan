@@ -25,7 +25,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { mockVenues, mockZones, mockGuides } from '@/lib/data';
 import { CONTACT } from '@/config/contact';
 import { localePrefix as urlLocalePrefix, type LocaleCode } from '@/lib/i18n/locales';
-import { localizeInternalHref } from '@/lib/i18n/localizedSlugs35';
+import { isConsolidatedNyeMasterGuideId, localizeInternalHref } from '@/lib/i18n/localizedSlugs35';
 import {
   CAPODANNO_CATEGORY_IDS,
   capodannoCategoryPath,
@@ -1776,8 +1776,9 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
       .filter((h) => h.score > 0)
       .sort((a, b) => b.score - a.score);
 
-    // 5. Insider & Pillar Guides (All 118 Guides across 35 Languages)
-    const scoredGuides = mockGuides
+    // 5. Insider & Pillar Guides (Active Guides across 35 Languages, excluding consolidated redirects)
+    const activeSearchGuides = mockGuides.filter((g) => !isConsolidatedNyeMasterGuideId(g.id));
+    const scoredGuides = activeSearchGuides
       .map((g) => {
         const title = g.title[localeCode] || g.title[typedLocale] || g.title.en;
         const excerpt = g.excerpt[localeCode] || g.excerpt[typedLocale] || g.excerpt.en;
@@ -1885,7 +1886,7 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
     },
     { id: 'events', label: ui.tabs.events, count: query.trim() ? searchResults.events.length : undefined },
     { id: 'hubs', label: ui.tabs.hubs, count: query.trim() ? searchResults.hubs.length : 9 },
-    { id: 'guides', label: ui.tabs.guides, count: query.trim() ? searchResults.guides.length : 118 },
+    { id: 'guides', label: ui.tabs.guides, count: query.trim() ? searchResults.guides.length : 129 },
     {
       id: 'zones',
       label: ui.tabs.zones,
