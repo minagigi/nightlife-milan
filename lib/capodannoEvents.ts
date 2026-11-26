@@ -436,12 +436,12 @@ const SEEDS: any[] = [
     'Black Tie / Tema Il Grande Gatsby / Abito da Sera Elegante (selezione rigorosa)', 'Black Tie / The Great Gatsby Theme / Strict Evening Elegance',
     [
       ['Ingresso Dopocena (dalle 23:30)', '80€', 'Include 1 drink e accesso al club party sotto la Torre Branca illuminata'],
-      ['Gran Cenone di Gala Servito (dalle 20:00)', '300€', 'Red Carpet dalle 19:30, menu gourmet completo, vini bianco/rosso, live dinner show e serata inclusa (600€ a coppia)'],
+      ['Gran Cenone di Gala Servito (dalle 20:00)', '300€', 'Red Carpet dalle 19:30, Rainbow Sashimi Ponzu & Yuzu, Croquetas di Patanegra, Ceviche di Ricciola, Risotto Gamberi Burrata e Caviale, Just Sorbetto, Black Cod al Miso o Filetto di Chianina al Tartufo, Parfait NYE al Cioccolato, vini bianco/rosso, acqua, caffè e serata inclusa (600€ a coppia)'],
       ['Tavolo VIP Bronze / Silver / Gold / Platinum', '600€ – 5.000€', 'Bronze 600€, Silver 800€, Gold 3.000€, Platinum 5.000€; pacchetti Cena×2 + Bronze 1.000€ e Cena×2 + Silver 1.200€']
     ],
     [
       ['After-Dinner Entry (from 23:30)', '€80', 'Includes 1 drink and club party access under the illuminated Torre Branca'],
-      ['Served Gala Dinner (from 20:00)', '€300', 'Red Carpet from 19:30, full gourmet gala menu, white/red wines, live dinner show and club access (€600 per couple)'],
+      ['Served Gala Dinner (from 20:00)', '€300', 'Red Carpet from 19:30, Marinated Rainbow Sashimi Ponzu & Yuzu, Patanegra Croquettes, Yellowtail Ceviche, Shrimp Burrata & Caviar Risotto, Just Sorbet, Miso Black Cod or Truffle Chianina Beef Fillet, NYE Chocolate Parfait, white/red wines, water, coffee & club access (€600 per couple)'],
       ['VIP Tables Bronze / Silver / Gold / Platinum', '€600 – €5,000', 'Bronze €600, Silver €800, Gold €3,000, Platinum €5,000; Dinner×2 + Bronze €1,000 and Dinner×2 + Silver €1,200']
     ],
     'Il Capodanno più iconico di Milano a tema Il Grande Gatsby nella cornice di cristallo progettata da Italo Rota ai piedi della Torre Branca in Parco Sempione. Dalle 19:30 Red Carpet e photocall, dalle 20:00 Gran Cenone di Gala con musica dal vivo e dalle 23:30 Club Party fino alle 05:30 con spettacolo pirotecnico di mezzanotte.',

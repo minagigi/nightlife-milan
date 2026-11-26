@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceCheckedAt": "2026-11-24T22:00:00.000Z",
+  "sourceCheckedAt": "2026-11-26T07:10:57+01:00",
   "events": [
     {
       "id": "fabrique-fred-de-palma",
@@ -21130,11 +21130,11 @@
         "longitude": 9.1764
       },
       "image": {
-        "src": "/images/events/october-2026/incantami-signorvino-25nov.webp",
+        "src": "/images/events/menus/incantami-signorvino-menu-40.webp",
         "width": 1080,
         "height": 1350,
-        "bytes": 142324,
-        "sha256": "3497965d74c0bd6495b2f6e2899143d1902b5e80c0164671f340e149ba1dbbcf"
+        "bytes": 111730,
+        "sha256": "9b281b4067c38f333987e6ed1d344ce7bb2f50679223f8887971cddf2a963f41"
       },
       "age": "21+",
       "dressCode": "Smart Casual",
@@ -21579,6 +21579,66 @@
       "provenance": "https://xceed.me/en/milano/club/mib-milano · verified official calendar · checked 2026-11-25T19:00:00.000Z",
       "halloween": false,
       "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
+      "id": "254095",
+      "sourceUrl": "https://xceed.me/en/milano/event/tr3ndy-society-thursday-night-9/254095",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": "https://xceed.me/en/milano/event/tr3ndy-society-thursday-night-9/254095/channel/nightlifemilan-1",
+      "affiliateStatus": "verified",
+      "officialName": "Tr3ndy Society - Thursday Night",
+      "shortName": "Tr3ndy Society - Thursday Night",
+      "startISO": "2026-11-26T23:30:00+01:00",
+      "endISO": "2026-11-27T05:00:00+01:00",
+      "startTimeKnown": true,
+      "timeKind": "doors",
+      "doorTime": "23:30",
+      "venue": {
+        "id": "v-pineta",
+        "name": "Pineta Club",
+        "address": "Via Messina, 38, 20154 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Via Messina, 38",
+          "addressLocality": "Milano",
+          "postalCode": "20154",
+          "addressCountry": "IT"
+        },
+        "latitude": 45.4856,
+        "longitude": 9.1726
+      },
+      "image": {
+        "src": "/images/events/october-2026/254095-partner-xceed.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 227582,
+        "sha256": "5afd5d09a3b34811491eb0d275ccc2b89dc93d525963e74d94d2b4ff26e503f7"
+      },
+      "age": "21+",
+      "dressCode": "Elegant",
+      "genres": [
+        "Commercial",
+        "House",
+        "Reggaeton"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Entry + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/tr3ndy-society-thursday-night-9/254095/channel/nightlifemilan-1"
+        },
+        {
+          "name": "VIP Bottle Table",
+          "price": 250,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/tr3ndy-society-thursday-night-9/254095/channel/nightlifemilan-1"
+        }
+      ],
+      "provenance": "Automated partner Xceed sync (https://xceed.me/en/milano/event/tr3ndy-society-thursday-night-9/254095/channel/nightlifemilan-1) · COMUNICATI & FLYER",
+      "halloween": false
     },
     {
       "id": "theclub-20261126-atlanta",
@@ -23752,6 +23812,72 @@
       "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
     },
     {
+      "id": "incantami-signorvino-2026-12-02",
+      "sourceUrl": "https://incantami.netlify.app/?date=2026-12-02",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unknown",
+      "officialName": "inCANTAmi · La Cena che si Canta con Benny Camaro",
+      "shortName": "inCANTAmi Dinner",
+      "startISO": "2026-12-02T19:00:00+01:00",
+      "endISO": "2026-12-03T00:00:00+01:00",
+      "startTimeKnown": true,
+      "timeKind": "doors",
+      "doorTime": "19:00",
+      "venue": {
+        "id": "v-signorvino-navigli",
+        "name": "Signorvino Navigli",
+        "address": "Viale Gorizia, 30, 20144 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Viale Gorizia, 30",
+          "addressLocality": "Milano",
+          "postalCode": "20144",
+          "addressCountry": "IT"
+        },
+        "latitude": 45.4525,
+        "longitude": 9.1764
+      },
+      "image": {
+        "src": "/images/events/menus/incantami-signorvino-menu-40.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 111730,
+        "sha256": "9b281b4067c38f333987e6ed1d344ce7bb2f50679223f8887971cddf2a963f41"
+      },
+      "age": "21+",
+      "dressCode": "Smart Casual",
+      "genres": [
+        "Live Music",
+        "Hits"
+      ],
+      "performers": [
+        {
+          "name": "Benny Camaro"
+        }
+      ],
+      "offers": [
+        {
+          "name": "Cena Cantata Menu Completo (6 antipasti condivisi, piatto principale, dolce, acqua e caffè)",
+          "price": 40,
+          "category": "ticket",
+          "availability": "available",
+          "url": null,
+          "admissionFrom": "20:00"
+        },
+        {
+          "name": "Aperitivo in Enoteca alla carta",
+          "price": null,
+          "category": "other",
+          "availability": "available",
+          "url": null,
+          "admissionFrom": "19:00",
+          "admissionUntil": "20:00"
+        }
+      ],
+      "provenance": "Official COMUNICATI & FLYER weekly format ('Ogni Mercoledì menù cena 40€') · checked 2026-11-26",
+      "halloween": false
+    },
+    {
       "id": "249243",
       "sourceUrl": "https://xceed.me/en/milano/event/wednesday-night-229/249243",
       "affiliateUrl": "https://xceed.me/en/milano/event/wednesday-night-229/249243/channel/nightlifemilan-1",
@@ -23773,11 +23899,11 @@
         "longitude": null
       },
       "image": {
-        "src": "/images/events/october-2026/249243-b1cd343f6f44.webp",
+        "src": "/images/events/october-2026/249169-gentlemen-show-25nov.webp",
         "width": 1080,
         "height": 1350,
-        "bytes": 271200,
-        "sha256": "fc07264fa79f606b2a03ed5eb895c76394db2fe53be39af8dcbc81270becbf78"
+        "bytes": 87416,
+        "sha256": "56dfdfb26571265cc4f21e755f2dc3917c458c028b1bee1d8d6d48bfdbdda5d5"
       },
       "age": "21+",
       "dressCode": "Elegant",
@@ -23786,7 +23912,14 @@
         "Hip-hop",
         "Hits"
       ],
-      "performers": [],
+      "performers": [
+        {
+          "name": "The Gentlemen Show"
+        },
+        {
+          "name": "DJ Francesco Campanini"
+        }
+      ],
       "offers": [
         {
           "name": "Dehor Table",
@@ -26266,6 +26399,72 @@
       "dressCodeDetail": "men-long-trousers"
     },
     {
+      "id": "incantami-signorvino-2026-12-09",
+      "sourceUrl": "https://incantami.netlify.app/?date=2026-12-09",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unknown",
+      "officialName": "inCANTAmi · La Cena che si Canta con Benny Camaro",
+      "shortName": "inCANTAmi Dinner",
+      "startISO": "2026-12-09T19:00:00+01:00",
+      "endISO": "2026-12-10T00:00:00+01:00",
+      "startTimeKnown": true,
+      "timeKind": "doors",
+      "doorTime": "19:00",
+      "venue": {
+        "id": "v-signorvino-navigli",
+        "name": "Signorvino Navigli",
+        "address": "Viale Gorizia, 30, 20144 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Viale Gorizia, 30",
+          "addressLocality": "Milano",
+          "postalCode": "20144",
+          "addressCountry": "IT"
+        },
+        "latitude": 45.4525,
+        "longitude": 9.1764
+      },
+      "image": {
+        "src": "/images/events/menus/incantami-signorvino-menu-40.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 111730,
+        "sha256": "9b281b4067c38f333987e6ed1d344ce7bb2f50679223f8887971cddf2a963f41"
+      },
+      "age": "21+",
+      "dressCode": "Smart Casual",
+      "genres": [
+        "Live Music",
+        "Hits"
+      ],
+      "performers": [
+        {
+          "name": "Benny Camaro"
+        }
+      ],
+      "offers": [
+        {
+          "name": "Cena Cantata Menu Completo (6 antipasti condivisi, piatto principale, dolce, acqua e caffè)",
+          "price": 40,
+          "category": "ticket",
+          "availability": "available",
+          "url": null,
+          "admissionFrom": "20:00"
+        },
+        {
+          "name": "Aperitivo in Enoteca alla carta",
+          "price": null,
+          "category": "other",
+          "availability": "available",
+          "url": null,
+          "admissionFrom": "19:00",
+          "admissionUntil": "20:00"
+        }
+      ],
+      "provenance": "Official COMUNICATI & FLYER weekly format ('Ogni Mercoledì menù cena 40€') · checked 2026-11-26",
+      "halloween": false
+    },
+    {
       "id": "mib-20261209-international",
       "sourceUrl": "https://mibmilano.it/",
       "sourceScope": "dated-calendar",
@@ -26333,6 +26532,80 @@
       "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
       "halloween": false,
       "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
+      "id": "250225",
+      "sourceUrl": "https://xceed.me/en/milano/event/wednesday-night-230/250225",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": "https://xceed.me/en/milano/event/wednesday-night-230/250225/channel/nightlifemilan-1",
+      "affiliateStatus": "verified",
+      "officialName": "Wednesday Night",
+      "shortName": "Wednesday Night",
+      "startISO": "2026-12-09T23:30:00+01:00",
+      "endISO": "2026-12-10T05:00:00+01:00",
+      "startTimeKnown": true,
+      "timeKind": "doors",
+      "doorTime": "23:30",
+      "venue": {
+        "id": "v-justme",
+        "name": "Justme Milano",
+        "address": "Viale Luigi Camoens, 2, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Viale Luigi Camoens, 2",
+          "addressLocality": "Milano",
+          "postalCode": "20121",
+          "addressCountry": "IT"
+        },
+        "latitude": 45.4729624,
+        "longitude": 9.1735598
+      },
+      "image": {
+        "src": "/images/events/october-2026/250225-partner-xceed.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 69436,
+        "sha256": "35e94894e098fb0b2e5976484b0ccb8e282aa6e7639183c647b82922bf56c063"
+      },
+      "age": "21+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Commercial",
+        "Hits"
+      ],
+      "performers": [
+        {
+          "name": "The Gentlemen Show"
+        },
+        {
+          "name": "DJ Francesco Campanini"
+        }
+      ],
+      "offers": [
+        {
+          "name": "Aperitif + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/wednesday-night-230/250225/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Club Entry + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/wednesday-night-230/250225/channel/nightlifemilan-1"
+        },
+        {
+          "name": "VIP Privé Table",
+          "price": 320,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/wednesday-night-230/250225/channel/nightlifemilan-1"
+        }
+      ],
+      "provenance": "Automated partner Xceed sync (https://xceed.me/en/milano/event/wednesday-night-230/250225/channel/nightlifemilan-1) · COMUNICATI & FLYER",
+      "halloween": false
     },
     {
       "id": "theclub-20261209-onetwo",
@@ -26466,6 +26739,73 @@
       "provenance": "https://xceed.me/en/milano/club/mib-milano · verified official calendar · checked 2026-11-25T19:00:00.000Z",
       "halloween": false,
       "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
+      "id": "250227",
+      "sourceUrl": "https://xceed.me/en/milano/event/thursday-night-350/250227",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": "https://xceed.me/en/milano/event/thursday-night-350/250227/channel/nightlifemilan-1",
+      "affiliateStatus": "verified",
+      "officialName": "Thursday Night",
+      "shortName": "Thursday Night",
+      "startISO": "2026-12-10T23:30:00+01:00",
+      "endISO": "2026-12-11T05:00:00+01:00",
+      "startTimeKnown": true,
+      "timeKind": "doors",
+      "doorTime": "23:30",
+      "venue": {
+        "id": "v-justme",
+        "name": "Justme Milano",
+        "address": "Viale Luigi Camoens, 2, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Viale Luigi Camoens, 2",
+          "addressLocality": "Milano",
+          "postalCode": "20121",
+          "addressCountry": "IT"
+        },
+        "latitude": 45.4729624,
+        "longitude": 9.1735598
+      },
+      "image": {
+        "src": "/images/events/october-2026/250227-partner-xceed.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 138076,
+        "sha256": "aa2cbae50d3478b27aa32abf4b24a971493dbf98ddbaa91fb3bdb320936cbd6c"
+      },
+      "age": "21+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Commercial",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Aperitif + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/thursday-night-350/250227/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Club Entry + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/thursday-night-350/250227/channel/nightlifemilan-1"
+        },
+        {
+          "name": "VIP Privé Table",
+          "price": 320,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/thursday-night-350/250227/channel/nightlifemilan-1"
+        }
+      ],
+      "provenance": "Automated partner Xceed sync (https://xceed.me/en/milano/event/thursday-night-350/250227/channel/nightlifemilan-1) · COMUNICATI & FLYER",
+      "halloween": false
     },
     {
       "id": "theclub-20261210-atlanta",
@@ -26627,6 +26967,73 @@
       "startTimeKnown": true,
       "commercialCheckedAt": "2026-11-16T10:01:24.000Z",
       "dressCodeDetail": "men-long-trousers"
+    },
+    {
+      "id": "250228",
+      "sourceUrl": "https://xceed.me/en/milano/event/friday-night-729/250228",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": "https://xceed.me/en/milano/event/friday-night-729/250228/channel/nightlifemilan-1",
+      "affiliateStatus": "verified",
+      "officialName": "Friday Night",
+      "shortName": "Friday Night",
+      "startISO": "2026-12-11T19:30:00+01:00",
+      "endISO": "2026-12-12T05:00:00+01:00",
+      "startTimeKnown": true,
+      "timeKind": "doors",
+      "doorTime": "19:30",
+      "venue": {
+        "id": "v-justme",
+        "name": "Justme Milano",
+        "address": "Viale Luigi Camoens, 2, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Viale Luigi Camoens, 2",
+          "addressLocality": "Milano",
+          "postalCode": "20121",
+          "addressCountry": "IT"
+        },
+        "latitude": 45.4729624,
+        "longitude": 9.1735598
+      },
+      "image": {
+        "src": "/images/events/october-2026/250228-partner-xceed.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 95014,
+        "sha256": "110b4d9f5920559a6de60f7e71624d4a6bdaa2f6c7d6080a3f5fed238e636f92"
+      },
+      "age": "21+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Commercial",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Aperitif + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/friday-night-729/250228/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Club Entry + 1 Drink",
+          "price": 20,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/friday-night-729/250228/channel/nightlifemilan-1"
+        },
+        {
+          "name": "VIP Privé Table",
+          "price": 320,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/friday-night-729/250228/channel/nightlifemilan-1"
+        }
+      ],
+      "provenance": "Automated partner Xceed sync (https://xceed.me/en/milano/event/friday-night-729/250228/channel/nightlifemilan-1) · COMUNICATI & FLYER",
+      "halloween": false
     },
     {
       "id": "mib-20261211-billions",
@@ -26873,6 +27280,73 @@
       "startTimeKnown": true,
       "commercialCheckedAt": "2026-11-16T10:01:24.000Z",
       "dressCodeDetail": "men-long-trousers"
+    },
+    {
+      "id": "250229",
+      "sourceUrl": "https://xceed.me/en/milano/event/saturday-night-788/250229",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": "https://xceed.me/en/milano/event/saturday-night-788/250229/channel/nightlifemilan-1",
+      "affiliateStatus": "verified",
+      "officialName": "Saturday Night",
+      "shortName": "Saturday Night",
+      "startISO": "2026-12-12T19:30:00+01:00",
+      "endISO": "2026-12-13T05:00:00+01:00",
+      "startTimeKnown": true,
+      "timeKind": "doors",
+      "doorTime": "19:30",
+      "venue": {
+        "id": "v-justme",
+        "name": "Justme Milano",
+        "address": "Viale Luigi Camoens, 2, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Viale Luigi Camoens, 2",
+          "addressLocality": "Milano",
+          "postalCode": "20121",
+          "addressCountry": "IT"
+        },
+        "latitude": 45.4729624,
+        "longitude": 9.1735598
+      },
+      "image": {
+        "src": "/images/events/october-2026/250229-partner-xceed.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 181062,
+        "sha256": "8e87b2e66b6bef98e4c1d90028ad2b9bdbeb5b0e98c17bb172b7f53720b3ea8d"
+      },
+      "age": "21+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Commercial",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Aperitif + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/saturday-night-788/250229/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Club Entry + 1 Drink",
+          "price": 20,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/saturday-night-788/250229/channel/nightlifemilan-1"
+        },
+        {
+          "name": "VIP Privé Table",
+          "price": 320,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/saturday-night-788/250229/channel/nightlifemilan-1"
+        }
+      ],
+      "provenance": "Automated partner Xceed sync (https://xceed.me/en/milano/event/saturday-night-788/250229/channel/nightlifemilan-1) · COMUNICATI & FLYER",
+      "halloween": false
     },
     {
       "id": "mib-20261212-loveaffair",
@@ -27403,6 +27877,73 @@
       "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
     },
     {
+      "id": "250230",
+      "sourceUrl": "https://xceed.me/en/milano/event/sunday-night-214/250230",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": "https://xceed.me/en/milano/event/sunday-night-214/250230/channel/nightlifemilan-1",
+      "affiliateStatus": "verified",
+      "officialName": "Sunday Night",
+      "shortName": "Sunday Night",
+      "startISO": "2026-12-13T23:30:00+01:00",
+      "endISO": "2026-12-14T05:00:00+01:00",
+      "startTimeKnown": true,
+      "timeKind": "doors",
+      "doorTime": "23:30",
+      "venue": {
+        "id": "v-justme",
+        "name": "Justme Milano",
+        "address": "Viale Luigi Camoens, 2, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Viale Luigi Camoens, 2",
+          "addressLocality": "Milano",
+          "postalCode": "20121",
+          "addressCountry": "IT"
+        },
+        "latitude": 45.4729624,
+        "longitude": 9.1735598
+      },
+      "image": {
+        "src": "/images/events/october-2026/250230-partner-xceed.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 108122,
+        "sha256": "b1cebb74cf44ecf9f988be7f80a0ab875f6809a660ef01bca5c28b9695beabe8"
+      },
+      "age": "21+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Commercial",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Aperitif + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/sunday-night-214/250230/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Club Entry + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/sunday-night-214/250230/channel/nightlifemilan-1"
+        },
+        {
+          "name": "VIP Privé Table",
+          "price": 320,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/sunday-night-214/250230/channel/nightlifemilan-1"
+        }
+      ],
+      "provenance": "Automated partner Xceed sync (https://xceed.me/en/milano/event/sunday-night-214/250230/channel/nightlifemilan-1) · COMUNICATI & FLYER",
+      "halloween": false
+    },
+    {
       "id": "theclub-20261213-superbe",
       "sourceUrl": "https://www.theclubmilano.com/",
       "sourceScope": "dated-calendar",
@@ -27467,6 +28008,280 @@
       "provenance": "https://www.theclubmilano.com/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
       "halloween": false,
       "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
+      "id": "251336",
+      "sourceUrl": "https://xceed.me/en/milano/event/monday-night-287/251336",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": "https://xceed.me/en/milano/event/monday-night-287/251336/channel/nightlifemilan-1",
+      "affiliateStatus": "verified",
+      "officialName": "Monday Night",
+      "shortName": "Monday Night",
+      "startISO": "2026-12-14T19:30:00+01:00",
+      "endISO": "2026-12-15T05:00:00+01:00",
+      "startTimeKnown": true,
+      "timeKind": "doors",
+      "doorTime": "19:30",
+      "venue": {
+        "id": "v-justme",
+        "name": "Justme Milano",
+        "address": "Viale Luigi Camoens, 2, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Viale Luigi Camoens, 2",
+          "addressLocality": "Milano",
+          "postalCode": "20121",
+          "addressCountry": "IT"
+        },
+        "latitude": 45.4729624,
+        "longitude": 9.1735598
+      },
+      "image": {
+        "src": "/images/events/october-2026/251336-partner-xceed.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 277938,
+        "sha256": "830aca470aaab3d33962ae0268f3b2f89c7bad314803b894b13b75c7d7d30f04"
+      },
+      "age": "21+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Commercial",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Aperitif + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/monday-night-287/251336/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Club Entry + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/monday-night-287/251336/channel/nightlifemilan-1"
+        },
+        {
+          "name": "VIP Privé Table",
+          "price": 320,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/monday-night-287/251336/channel/nightlifemilan-1"
+        }
+      ],
+      "provenance": "Automated partner Xceed sync (https://xceed.me/en/milano/event/monday-night-287/251336/channel/nightlifemilan-1) · COMUNICATI & FLYER",
+      "halloween": false
+    },
+    {
+      "id": "251337",
+      "sourceUrl": "https://xceed.me/en/milano/event/university-party-60/251337",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": "https://xceed.me/en/milano/event/university-party-60/251337/channel/nightlifemilan-1",
+      "affiliateStatus": "verified",
+      "officialName": "University Party",
+      "shortName": "University Party",
+      "startISO": "2026-12-15T23:59:00+01:00",
+      "endISO": "2026-12-16T05:00:00+01:00",
+      "startTimeKnown": true,
+      "timeKind": "doors",
+      "doorTime": "23:59",
+      "venue": {
+        "id": "v-justme",
+        "name": "Justme Milano",
+        "address": "Viale Luigi Camoens, 2, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Viale Luigi Camoens, 2",
+          "addressLocality": "Milano",
+          "postalCode": "20121",
+          "addressCountry": "IT"
+        },
+        "latitude": 45.4729624,
+        "longitude": 9.1735598
+      },
+      "image": {
+        "src": "/images/events/october-2026/251337-partner-xceed.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 170970,
+        "sha256": "3837f7ed558a60a3253766109221fa5eef83175222c8134a20cea1f5c8eb2eeb"
+      },
+      "age": "18+",
+      "dressCode": "Smart Casual",
+      "genres": [
+        "House",
+        "Commercial",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Aperitif + 1 Drink",
+          "price": 13,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/university-party-60/251337/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Club Entry + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/university-party-60/251337/channel/nightlifemilan-1"
+        },
+        {
+          "name": "VIP Privé Table",
+          "price": 320,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/university-party-60/251337/channel/nightlifemilan-1"
+        }
+      ],
+      "provenance": "Automated partner Xceed sync (https://xceed.me/en/milano/event/university-party-60/251337/channel/nightlifemilan-1) · COMUNICATI & FLYER",
+      "halloween": false
+    },
+    {
+      "id": "incantami-signorvino-2026-12-16",
+      "sourceUrl": "https://incantami.netlify.app/?date=2026-12-16",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unknown",
+      "officialName": "inCANTAmi · La Cena che si Canta con Benny Camaro",
+      "shortName": "inCANTAmi Dinner",
+      "startISO": "2026-12-16T19:00:00+01:00",
+      "endISO": "2026-12-17T00:00:00+01:00",
+      "startTimeKnown": true,
+      "timeKind": "doors",
+      "doorTime": "19:00",
+      "venue": {
+        "id": "v-signorvino-navigli",
+        "name": "Signorvino Navigli",
+        "address": "Viale Gorizia, 30, 20144 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Viale Gorizia, 30",
+          "addressLocality": "Milano",
+          "postalCode": "20144",
+          "addressCountry": "IT"
+        },
+        "latitude": 45.4525,
+        "longitude": 9.1764
+      },
+      "image": {
+        "src": "/images/events/menus/incantami-signorvino-menu-40.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 111730,
+        "sha256": "9b281b4067c38f333987e6ed1d344ce7bb2f50679223f8887971cddf2a963f41"
+      },
+      "age": "21+",
+      "dressCode": "Smart Casual",
+      "genres": [
+        "Live Music",
+        "Hits"
+      ],
+      "performers": [
+        {
+          "name": "Benny Camaro"
+        }
+      ],
+      "offers": [
+        {
+          "name": "Cena Cantata Menu Completo (6 antipasti condivisi, piatto principale, dolce, acqua e caffè)",
+          "price": 40,
+          "category": "ticket",
+          "availability": "available",
+          "url": null,
+          "admissionFrom": "20:00"
+        },
+        {
+          "name": "Aperitivo in Enoteca alla carta",
+          "price": null,
+          "category": "other",
+          "availability": "available",
+          "url": null,
+          "admissionFrom": "19:00",
+          "admissionUntil": "20:00"
+        }
+      ],
+      "provenance": "Official COMUNICATI & FLYER weekly format ('Ogni Mercoledì menù cena 40€') · checked 2026-11-26",
+      "halloween": false
+    },
+    {
+      "id": "251338",
+      "sourceUrl": "https://xceed.me/en/milano/event/wednesday-night-232/251338",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": "https://xceed.me/en/milano/event/wednesday-night-232/251338/channel/nightlifemilan-1",
+      "affiliateStatus": "verified",
+      "officialName": "Wednesday Night",
+      "shortName": "Wednesday Night",
+      "startISO": "2026-12-16T19:30:00+01:00",
+      "endISO": "2026-12-17T05:00:00+01:00",
+      "startTimeKnown": true,
+      "timeKind": "doors",
+      "doorTime": "19:30",
+      "venue": {
+        "id": "v-justme",
+        "name": "Justme Milano",
+        "address": "Viale Luigi Camoens, 2, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Viale Luigi Camoens, 2",
+          "addressLocality": "Milano",
+          "postalCode": "20121",
+          "addressCountry": "IT"
+        },
+        "latitude": 45.4729624,
+        "longitude": 9.1735598
+      },
+      "image": {
+        "src": "/images/events/october-2026/251338-partner-xceed.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 68984,
+        "sha256": "6cb6030314e375f2b8bdb234ea7231b6b3bb3554686f2d196d97eb6e3a498a1e"
+      },
+      "age": "21+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Commercial",
+        "Hits"
+      ],
+      "performers": [
+        {
+          "name": "The Gentlemen Show"
+        },
+        {
+          "name": "DJ Francesco Campanini"
+        }
+      ],
+      "offers": [
+        {
+          "name": "Aperitif + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/wednesday-night-232/251338/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Club Entry + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/wednesday-night-232/251338/channel/nightlifemilan-1"
+        },
+        {
+          "name": "VIP Privé Table",
+          "price": 320,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/wednesday-night-232/251338/channel/nightlifemilan-1"
+        }
+      ],
+      "provenance": "Automated partner Xceed sync (https://xceed.me/en/milano/event/wednesday-night-232/251338/channel/nightlifemilan-1) · COMUNICATI & FLYER",
+      "halloween": false
     },
     {
       "id": "mib-20261216-international",
@@ -27536,6 +28351,73 @@
       "provenance": "https://mibmilano.it/ · verified official calendar · checked 2026-11-25T19:00:00.000Z",
       "halloween": false,
       "commercialCheckedAt": "2026-11-25T19:00:00.000Z"
+    },
+    {
+      "id": "251339",
+      "sourceUrl": "https://xceed.me/en/milano/event/thursday-night-355/251339",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": "https://xceed.me/en/milano/event/thursday-night-355/251339/channel/nightlifemilan-1",
+      "affiliateStatus": "verified",
+      "officialName": "Thursday Night",
+      "shortName": "Thursday Night",
+      "startISO": "2026-12-17T19:30:00+01:00",
+      "endISO": "2026-12-18T05:00:00+01:00",
+      "startTimeKnown": true,
+      "timeKind": "doors",
+      "doorTime": "19:30",
+      "venue": {
+        "id": "v-justme",
+        "name": "Justme Milano",
+        "address": "Viale Luigi Camoens, 2, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Viale Luigi Camoens, 2",
+          "addressLocality": "Milano",
+          "postalCode": "20121",
+          "addressCountry": "IT"
+        },
+        "latitude": 45.4729624,
+        "longitude": 9.1735598
+      },
+      "image": {
+        "src": "/images/events/october-2026/251339-partner-xceed.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 200886,
+        "sha256": "beb4c96d99ba38e0884cd1f6e3a15535ecdb3ddf72eddb7704750b052a1c190b"
+      },
+      "age": "21+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Commercial",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Aperitif + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/thursday-night-355/251339/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Club Entry + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/thursday-night-355/251339/channel/nightlifemilan-1"
+        },
+        {
+          "name": "VIP Privé Table",
+          "price": 320,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/thursday-night-355/251339/channel/nightlifemilan-1"
+        }
+      ],
+      "provenance": "Automated partner Xceed sync (https://xceed.me/en/milano/event/thursday-night-355/251339/channel/nightlifemilan-1) · COMUNICATI & FLYER",
+      "halloween": false
     },
     {
       "id": "mib-20261217-justice",
@@ -27691,6 +28573,73 @@
       "startTimeKnown": true,
       "commercialCheckedAt": "2026-11-16T10:01:24.000Z",
       "dressCodeDetail": "men-long-trousers"
+    },
+    {
+      "id": "251340",
+      "sourceUrl": "https://xceed.me/en/milano/event/friday-night-731/251340",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": "https://xceed.me/en/milano/event/friday-night-731/251340/channel/nightlifemilan-1",
+      "affiliateStatus": "verified",
+      "officialName": "Friday Night",
+      "shortName": "Friday Night",
+      "startISO": "2026-12-18T19:30:00+01:00",
+      "endISO": "2026-12-19T05:00:00+01:00",
+      "startTimeKnown": true,
+      "timeKind": "doors",
+      "doorTime": "19:30",
+      "venue": {
+        "id": "v-justme",
+        "name": "Justme Milano",
+        "address": "Viale Luigi Camoens, 2, 20121 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Viale Luigi Camoens, 2",
+          "addressLocality": "Milano",
+          "postalCode": "20121",
+          "addressCountry": "IT"
+        },
+        "latitude": 45.4729624,
+        "longitude": 9.1735598
+      },
+      "image": {
+        "src": "/images/events/october-2026/251340-partner-xceed.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 95014,
+        "sha256": "110b4d9f5920559a6de60f7e71624d4a6bdaa2f6c7d6080a3f5fed238e636f92"
+      },
+      "age": "21+",
+      "dressCode": "Elegant",
+      "genres": [
+        "House",
+        "Commercial",
+        "Hits"
+      ],
+      "performers": [],
+      "offers": [
+        {
+          "name": "Aperitif + 1 Drink",
+          "price": 15,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/friday-night-731/251340/channel/nightlifemilan-1"
+        },
+        {
+          "name": "Club Entry + 1 Drink",
+          "price": 20,
+          "category": "ticket",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/friday-night-731/251340/channel/nightlifemilan-1"
+        },
+        {
+          "name": "VIP Privé Table",
+          "price": 320,
+          "category": "table",
+          "availability": "available",
+          "url": "https://xceed.me/en/milano/event/friday-night-731/251340/channel/nightlifemilan-1"
+        }
+      ],
+      "provenance": "Automated partner Xceed sync (https://xceed.me/en/milano/event/friday-night-731/251340/channel/nightlifemilan-1) · COMUNICATI & FLYER",
+      "halloween": false
     },
     {
       "id": "mib-20261218-billions",
@@ -28080,6 +29029,72 @@
       "halloween": false,
       "startTimeKnown": true,
       "commercialCheckedAt": "2026-11-16T10:01:24.000Z"
+    },
+    {
+      "id": "incantami-signorvino-2026-12-23",
+      "sourceUrl": "https://incantami.netlify.app/?date=2026-12-23",
+      "sourceScope": "dated-calendar",
+      "affiliateUrl": null,
+      "affiliateStatus": "unknown",
+      "officialName": "inCANTAmi · La Cena che si Canta con Benny Camaro",
+      "shortName": "inCANTAmi Dinner",
+      "startISO": "2026-12-23T19:00:00+01:00",
+      "endISO": "2026-12-24T00:00:00+01:00",
+      "startTimeKnown": true,
+      "timeKind": "doors",
+      "doorTime": "19:00",
+      "venue": {
+        "id": "v-signorvino-navigli",
+        "name": "Signorvino Navigli",
+        "address": "Viale Gorizia, 30, 20144 Milano, IT",
+        "structuredAddress": {
+          "streetAddress": "Viale Gorizia, 30",
+          "addressLocality": "Milano",
+          "postalCode": "20144",
+          "addressCountry": "IT"
+        },
+        "latitude": 45.4525,
+        "longitude": 9.1764
+      },
+      "image": {
+        "src": "/images/events/menus/incantami-signorvino-menu-40.webp",
+        "width": 1080,
+        "height": 1350,
+        "bytes": 111730,
+        "sha256": "9b281b4067c38f333987e6ed1d344ce7bb2f50679223f8887971cddf2a963f41"
+      },
+      "age": "21+",
+      "dressCode": "Smart Casual",
+      "genres": [
+        "Live Music",
+        "Hits"
+      ],
+      "performers": [
+        {
+          "name": "Benny Camaro"
+        }
+      ],
+      "offers": [
+        {
+          "name": "Cena Cantata Menu Completo (6 antipasti condivisi, piatto principale, dolce, acqua e caffè)",
+          "price": 40,
+          "category": "ticket",
+          "availability": "available",
+          "url": null,
+          "admissionFrom": "20:00"
+        },
+        {
+          "name": "Aperitivo in Enoteca alla carta",
+          "price": null,
+          "category": "other",
+          "availability": "available",
+          "url": null,
+          "admissionFrom": "19:00",
+          "admissionUntil": "20:00"
+        }
+      ],
+      "provenance": "Official COMUNICATI & FLYER weekly format ('Ogni Mercoledì menù cena 40€') · checked 2026-11-26",
+      "halloween": false
     },
     {
       "id": "249067",

@@ -663,6 +663,22 @@ const CARD_POSTER_4X5_MAP: Readonly<Record<string, string>> = {
   "/images/venues/pineta-milano/pineta-milano-ingresso-01.webp": "/images/events/cards-4x5/partner-clubs/pineta-club-milano.webp",
   "/images/volt-club-milano.webp": "/images/events/cards-4x5/partner-clubs/volt-club-milano.webp",
   "/images/voya-rooftop-milan.webp": "/images/events/cards-4x5/partner-clubs/voya-rooftop-milan.webp",
+  "/images/events/weekly-posters/justme-wednesday-club-campanini.webp": "/images/events/cards-4x5/weekly-posters/justme-wednesday-club-campanini.webp",
+  "/images/events/menus/incantami-signorvino-menu-40.webp": "/images/events/cards-4x5/menus/incantami-signorvino-menu-40.webp",
+  "/images/events/menus/justme-gatsby-nye-2027-official-menu.webp": "/images/events/cards-4x5/menus/justme-gatsby-nye-2027-official-menu.webp",
+  "/images/events/christmas-2026-posters/voya-gift-card-classic-150.webp": "/images/events/cards-4x5/christmas-2026-posters/voya-gift-card-classic-150.webp",
+  "/images/events/christmas-2026-posters/voya-gift-card-signature-250.webp": "/images/events/cards-4x5/christmas-2026-posters/voya-gift-card-signature-250.webp",
+  "/images/events/october-2026/254095-partner-xceed.webp": "/images/events/cards-4x5/october-2026/254095-partner-xceed.webp",
+  "/images/events/october-2026/250225-partner-xceed.webp": "/images/events/cards-4x5/october-2026/250225-partner-xceed.webp",
+  "/images/events/october-2026/250227-partner-xceed.webp": "/images/events/cards-4x5/october-2026/250227-partner-xceed.webp",
+  "/images/events/october-2026/250228-partner-xceed.webp": "/images/events/cards-4x5/october-2026/250228-partner-xceed.webp",
+  "/images/events/october-2026/250229-partner-xceed.webp": "/images/events/cards-4x5/october-2026/250229-partner-xceed.webp",
+  "/images/events/october-2026/250230-partner-xceed.webp": "/images/events/cards-4x5/october-2026/250230-partner-xceed.webp",
+  "/images/events/october-2026/251336-partner-xceed.webp": "/images/events/cards-4x5/october-2026/251336-partner-xceed.webp",
+  "/images/events/october-2026/251337-partner-xceed.webp": "/images/events/cards-4x5/october-2026/251337-partner-xceed.webp",
+  "/images/events/october-2026/251338-partner-xceed.webp": "/images/events/cards-4x5/october-2026/251338-partner-xceed.webp",
+  "/images/events/october-2026/251339-partner-xceed.webp": "/images/events/cards-4x5/october-2026/251339-partner-xceed.webp",
+  "/images/events/october-2026/251340-partner-xceed.webp": "/images/events/cards-4x5/october-2026/251340-partner-xceed.webp",
 };
 
 export function toCardPoster4x5(src: string | undefined | null): string {

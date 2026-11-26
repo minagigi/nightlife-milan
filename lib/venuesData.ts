@@ -809,6 +809,8 @@ export const venuesData: Venue[] = [
       "/images/venues/aria-club-milano/aria-club-milano-bar-01.webp",
       "/images/venues/aria-club-milano/aria-club-milano-buffet-02.webp",
       "/images/venues/aria-club-milano/aria-club-milano-garden-01.webp",
+      "/images/venues/aria-club-milano/aria-club-milano-sala-privata-01.webp",
+      "/images/venues/aria-club-milano/aria-club-milano-sign-01.webp",
     ],
     isManaged: true,
     isPriority: true,

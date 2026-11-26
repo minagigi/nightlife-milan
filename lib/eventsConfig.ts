@@ -122,7 +122,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Smart Casual. Camicia elegante per gli uomini. No abbigliamento sportivo.'
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '18+', 'Smart Casual', 'Commercial and Reggaeton'),
-    image: '/images/events/october-2026/249182-aa34ab79100b.webp',
+    image: '/images/events/october-2026/249161-university-party-24nov.webp',
     xceedLink: 'https://xceed.me/en/milano/event/university-party-58/249218/channel/nightlifemilan-1',
     priority: 100
   },
@@ -170,7 +170,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Strettamente Elegante.'
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '21+', 'Strictly Elegant', 'Reggaeton, Hip-Hop and Commercial'),
-    image: '/images/events/october-2026/249192-8d811d65d7c5.webp',
+    image: '/images/events/thanksgiving-2026/thanksgiving-justme-milano-2026.webp',
     xceedLink: 'https://xceed.me/en/milano/event/vida-loca-13/249216/channel/nightlifemilan-1',
     priority: 100
   },
@@ -194,7 +194,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Strettamente Elegante. Vestiti per impressionare.'
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '21+', 'Strictly Elegant', 'House and Electronic'),
-    image: '/images/events/october-2026/249204-fcb5bf6cc4be.webp',
+    image: '/images/events/partenopea-2026/justme-friday-27-nov-luciani.webp',
     xceedLink: 'https://xceed.me/en/milano/event/friday-night-727/249217/channel/nightlifemilan-1',
     priority: 100
   },
@@ -218,7 +218,7 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Strettamente Elegante. Vestiti per impressionare.'
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '21+', 'Strictly Elegant', 'Commercial and House'),
-    image: '/images/events/october-2026/249213-e2755e4bf02c.webp',
+    image: '/images/events/october-2026/249197-carlo-piacente-28nov.webp',
     xceedLink: 'https://xceed.me/en/milano/event/saturday-night-785/249197/channel/nightlifemilan-1',
     priority: 100
   },
@@ -268,8 +268,8 @@ export const weeklyEvents: WeeklyEvent[] = [
       it: 'Smart Elegant. Camicia consigliata per gli uomini.'
     },
     faqs: defaultFaqs('Pineta Club', 'Via Messina 38, Milan', '20+', 'Smart Elegant', 'Hip-Hop, Reggaeton and Commercial'),
-    image: '/images/events/october-2026/249230-f6b0d6c67b51.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/tr3ndy-society-thursday-night-7/252514/channel/nightlifemilan-1',
+    image: '/images/events/october-2026/254095-partner-xceed.webp',
+    xceedLink: 'https://xceed.me/en/milano/event/tr3ndy-society-thursday-night-9/254095/channel/nightlifemilan-1',
     priority: 95
   },
   {
