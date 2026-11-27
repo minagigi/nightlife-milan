@@ -121,6 +121,7 @@ const NYE_VERTICAL_GUIDE_IDS: ReadonlySet<string> = new Set([
   'g-128',
   'g-130',
   'g-131',
+  'g-133',
 ]);
 
 function resolvePrimaryVenueForGuide(guideId: string): Venue | undefined {

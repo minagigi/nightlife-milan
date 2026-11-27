@@ -11,6 +11,7 @@ import { getGsc20261125DisplayHeadline } from './guidesGscBatch20261125';
 import { getGscCapodanno20261125DisplayHeadline } from './guidesGscCapodannoBatch20261125';
 import { getTop1Seo20261125DisplayHeadline } from './guidesTop1SeoBatch20261125';
 import { getGsc20261126DisplayHeadline } from './guidesGscBatch20261126';
+import { getGsc20261127DisplayHeadline } from './guidesGscBatch20261127';
 import { GUIDE_100_SEEDS } from './guides100Catalog';
 import { getLocalizedGuideSeedNames } from './i18n/guideSeeds35Names';
 
@@ -300,6 +301,11 @@ export function getEditorialDisplayHeadline(
   locale: LocaleCode,
   localizedFullTitle: string,
 ): string {
+  const gsc20261127 = getGsc20261127DisplayHeadline(guideId, locale);
+  if (gsc20261127) {
+    return clampConciseHeadline(gsc20261127);
+  }
+
   const gsc20261126 = getGsc20261126DisplayHeadline(guideId, locale);
   if (gsc20261126) {
     return clampConciseHeadline(gsc20261126);
@@ -1326,6 +1332,8 @@ const CAPTION_BY_SRC: Record<string, { caption: string; district: string }> = {
   '/images/seo-events/master/radio-rooftop-real-04.webp': { caption: 'Radio Rooftop · Vista Grattacieli & Tapas Fusion', district: 'ME Milan Il Duca · 10° Piano' },
   '/images/seo-events/master/capodanno-villa-castello-flow-01.webp': { caption: 'Villa Fenaroli Palace Hotel · Gran Cenone Storico', district: 'Rezzato · Brescia / Franciacorta' },
   '/images/seo-events/master/blue-note-milano.webp': { caption: 'Palcoscenico & Gala Live a Milano', district: 'Isola / Centro Storico' },
+  '/images/seo-events/master/super-club-milano.webp': { caption: 'Super Club Milano · Void Acoustics & Light Show', district: 'Via Tortona 27 · Navigli / Tortona' },
+  '/images/seo-events/master/amnesia-milano.webp': { caption: 'Amnesia Milano · Main Room Techno & Tech-House', district: 'Via Alfonso Gatto 14 · M4 Repetti' },
   '/images/guides-editorial/terme-thermal-night.webp': { caption: 'Terme di Sirmione Aquaria · Vasche Termali', district: 'Lago di Garda' },
   '/images/guides-editorial/terme-alpine-snow.webp': { caption: 'QC Terme Bormio · Acque Calde tra le Alpi', district: 'Alta Valtellina' },
   '/images/guides-editorial/terme-villa-gala.webp': { caption: 'QC Terme & Dimore Storiche Lombarde', district: 'Milano / San Pellegrino' },
@@ -1363,10 +1371,10 @@ const ROOFTOP_IDS = new Set([
 ]);
 const TERME_IDS = new Set(['g-117', 'g-120', 'g-122', 'g-90', 'g-128']);
 const DINNER_IDS = new Set([
-  'g-secret-bars', 'g-2', 'g-private-parties', 'g-9', 'g-19', 'g-30', 'g-31', 'g-36', 'g-37', 'g-38', 'g-53', 'g-60', 'g-78', 'g-85', 'g-88', 'g-102', 'g-121', 'g-123', 'g-125', 'g-126', 'g-127', 'g-130', 'g-131',
+  'g-secret-bars', 'g-2', 'g-private-parties', 'g-9', 'g-19', 'g-30', 'g-31', 'g-36', 'g-37', 'g-38', 'g-40', 'g-45', 'g-53', 'g-60', 'g-78', 'g-85', 'g-88', 'g-102', 'g-121', 'g-123', 'g-125', 'g-126', 'g-127', 'g-130', 'g-131', 'g-133',
 ]);
 const ELECTRONIC_IDS = new Set([
-  'g-techno-2026', 'g-5', 'g-23', 'g-24', 'g-25', 'g-26', 'g-34', 'g-35', 'g-70', 'g-77', 'g-79', 'g-80', 'g-89', 'g-124',
+  'g-techno-2026', 'g-5', 'g-23', 'g-24', 'g-25', 'g-26', 'g-34', 'g-35', 'g-70', 'g-77', 'g-79', 'g-80', 'g-89', 'g-124', 'g-134',
 ]);
 
 interface SingleVenueGuideSpec {

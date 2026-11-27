@@ -666,6 +666,30 @@ const LANG6_NAMES: Record<string, Record<Lang6, { name: string; shortName: strin
     de: { name: 'Silvester 2027 im Theater Mailand: Manzoni, Carcano, La Scala & Zelig', shortName: 'Theater Mailand', zone: 'Quadrilatero, Porta Romana, Piazza della Scala & Viale Monza' },
     pt: { name: 'Réveillon 2027 no Teatro em Milão: Manzoni, Carcano, La Scala e Zelig', shortName: 'Teatro Milão', zone: 'Quadrilatero, Porta Romana, Piazza della Scala & Viale Monza' },
   },
+  'g-132': {
+    en: { name: 'Milan Nightclubs 2026/2027: Best Clubs, Guestlists, Metro M1-M5 & VIP Tables', shortName: 'Milan Clubs', zone: 'Parco Sempione, Corso Como, CityLife, Repubblica, Isola & Navigli' },
+    it: { name: 'Discoteca Milano 2026/2027: Migliori Locali, Prezzi Liste, Metro M1-M5 e Tavoli VIP', shortName: 'Discoteche Milano', zone: 'Parco Sempione, Corso Como, CityLife, Repubblica, Isola & Navigli' },
+    es: { name: 'Discotecas en Milán 2026/2027: Mejores Clubes, Precios Listas y Mesas VIP', shortName: 'Discotecas Milán', zone: 'Parco Sempione, Corso Como, CityLife, Repubblica, Isola & Navigli' },
+    fr: { name: 'Discothèques à Milan 2026/2027 : Meilleurs Clubs, Tarifs et Tables VIP', shortName: 'Clubs Milan', zone: 'Parco Sempione, Corso Como, CityLife, Repubblica, Isola & Navigli' },
+    de: { name: 'Clubs & Diskotheken Mailand 2026/2027: Preise, Gästelisten & VIP-Tische', shortName: 'Clubs Mailand', zone: 'Parco Sempione, Corso Como, CityLife, Repubblica, Isola & Navigli' },
+    pt: { name: 'Discotecas e Baladas em Milão 2026/2027: Preços Listas e Mesas VIP', shortName: 'Baladas Milão', zone: 'Parco Sempione, Corso Como, CityLife, Repubblica, Isola & Navigli' },
+  },
+  'g-133': {
+    en: { name: 'New Year’s Eve Milan 2027 Guide: Gala Dinners, Club Parties & VIP Tables', shortName: 'Milan 2027', zone: 'Parco Sempione, Porta Nuova, CityLife, Duomo & Lake Garda' },
+    it: { name: 'Guida Capodanno Milano 2027: Cenoni Verificati, Discoteche e Tavoli VIP', shortName: 'Capodanno 2027', zone: 'Parco Sempione, Porta Nuova, CityLife, Duomo & Lago di Garda' },
+    es: { name: 'Guía Nochevieja Milán 2027: Cenas de Gala, Discotecas y Mesas VIP', shortName: 'Nochevieja 2027', zone: 'Parco Sempione, Porta Nuova, CityLife, Duomo & Lago de Garda' },
+    fr: { name: 'Guide Réveillon Milan 2027 : Dîners de Gala, Clubs et Tables VIP', shortName: 'Réveillon 2027', zone: 'Parco Sempione, Porta Nuova, CityLife, Duomo & Lac de Garde' },
+    de: { name: 'Silvester Mailand 2027 Ratgeber: Galadinner, Clubs & VIP-Tische', shortName: 'Silvester 2027', zone: 'Parco Sempione, Porta Nuova, CityLife, Duomo & Gardasee' },
+    pt: { name: 'Guia Réveillon Milão 2027: Ceias de Gala, Baladas e Mesas VIP', shortName: 'Réveillon 2027', zone: 'Parco Sempione, Porta Nuova, CityLife, Duomo & Lago de Garda' },
+  },
+  'g-134': {
+    en: { name: 'Milan Techno Clubs 2026/2027: Volt, Amnesia, Gate, Tunnel & Super Club', shortName: 'Techno Clubs', zone: 'Vetra M4, Forlanini, Scalo Farini, Centrale & Tortona' },
+    it: { name: 'Club Techno Milano 2026/2027: Volt, Amnesia, Gate, Tunnel e Super Club', shortName: 'Club Techno', zone: 'Vetra M4, Forlanini, Scalo Farini, Centrale & Tortona' },
+    es: { name: 'Clubes Techno en Milán 2026/2027: Volt, Amnesia, Gate, Tunnel y Super Club', shortName: 'Clubes Techno', zone: 'Vetra M4, Forlanini, Scalo Farini, Centrale & Tortona' },
+    fr: { name: 'Clubs Techno à Milan 2026/2027 : Volt, Amnesia, Gate, Tunnel et Super Club', shortName: 'Clubs Techno', zone: 'Vetra M4, Forlanini, Scalo Farini, Centrale & Tortona' },
+    de: { name: 'Techno Clubs Mailand 2026/2027: Volt, Amnesia, Gate, Tunnel & Super Club', shortName: 'Techno Clubs', zone: 'Vetra M4, Forlanini, Scalo Farini, Centrale & Tortona' },
+    pt: { name: 'Clubes Techno em Milão 2026/2027: Volt, Amnesia, Gate, Tunnel e Super Club', shortName: 'Clubes Techno', zone: 'Vetra M4, Forlanini, Scalo Farini, Centrale & Tortona' },
+  },
 };
 
 const CLEAN_15_40_IT_PARENS: Record<string, { en: string }> = {

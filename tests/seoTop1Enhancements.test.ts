@@ -37,8 +37,8 @@ test('generateClubSchema emits ReserveAction potentialAction and never aggregate
   assert.equal('aggregateRating' in schema, false);
 });
 
-test('mockGuides preserves all 131 guides (g-115, g-116, g-117 & g-118 included) across all 35 locales without em-dash', () => {
-  assert.equal(mockGuides.length, 131);
+test('mockGuides preserves all 134 guides (g-115, g-116, g-117 & g-118 included) across all 35 locales without em-dash', () => {
+  assert.equal(mockGuides.length, 134);
   const geoIds = new Set(mockGuides.map((g) => g.id));
   assert.ok(geoIds.has('g-115'));
   assert.ok(geoIds.has('g-116'));

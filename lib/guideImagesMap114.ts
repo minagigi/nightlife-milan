@@ -63,7 +63,7 @@ export const GUIDE_HERO_IMAGES_114: Record<string, string> = {
   'g-42': '/images/pillars/intent-21plus-hero.webp',
   'g-43': '/images/pillars/intent-18plus-hero.webp',
   'g-44': '/images/pillars/private-parties-02.webp',
-  'g-45': '/images/pillars/private-parties-03.webp',
+  'g-45': '/images/guides-editorial/pineta-vip.webp',
   'g-46': '/images/pillars/intent-international-hero.webp',
   'g-47': '/images/pillars/guide-09.webp',
   'g-48': '/images/pillars/vip-tables-hero.webp',
@@ -150,6 +150,9 @@ export const GUIDE_HERO_IMAGES_114: Record<string, string> = {
   'g-129': '/images/guides-editorial/radio-skyline-dusk.webp',
   'g-130': '/images/seo-events/master/capodanno-villa-castello-flow-01.webp',
   'g-131': '/images/guides-editorial/philipps-plein-dinnershow.webp',
+  'g-132': '/images/guides-editorial/just-me-dancefloor.webp',
+  'g-133': '/images/guides-editorial/voya-rooftop-20f.webp',
+  'g-134': '/images/guides-editorial/gate-neon.webp',
 };
 
 export const GUIDE_INLINE_IMAGES_114: Record<string, string[]> = {
@@ -207,12 +210,12 @@ export const GUIDE_INLINE_IMAGES_114: Record<string, string[]> = {
   'g-37': ['/images/guides-editorial/the-club-brera.webp', '/images/guides-editorial/pineta-lounge.webp', '/images/guides-editorial/just-me-dancefloor.webp', '/images/guides-editorial/apollo-navigli.webp'],
   'g-38': ['/images/guides-editorial/bischeri-dinner.webp', '/images/guides-editorial/fiftyfive-loft.webp', '/images/guides-editorial/tom-milano-dinner.webp', '/images/guides-editorial/aria-dancefloor.webp'],
   'g-39': ['/images/pillars/zone-hero-11.webp', '/images/pillars/zone-inline-11-a.webp', '/images/pillars/zone-inline-11-c.webp', '/images/guides-editorial/apollo-navigli.webp'],
-  'g-40': ['/images/venues/play-club-milano/play-club-milano-interior-01.webp', '/images/venues/play-club-milano/play-club-milano-interior-02.webp', '/images/venues/play-club-milano/play-club-milano-interior-03.webp', '/images/guides-editorial/apollo-navigli.webp'],
+  'g-40': ['/images/guides-editorial/bischeri-dinner.webp', '/images/guides-editorial/apollo-navigli.webp', '/images/guides-editorial/pineta-lounge.webp', '/images/guides-editorial/fiftyfive-loft.webp'],
   'g-41': ['/images/pillars/intent-erasmus-02.webp', '/images/pillars/intent-erasmus-03.webp', '/images/pillars/private-parties-02.webp', '/images/guides-editorial/apollo-navigli.webp'],
   'g-42': ['/images/pillars/intent-21plus-02.webp', '/images/pillars/intent-21plus-03.webp', '/images/pillars/intent-21plus-04.webp', '/images/guides-editorial/apollo-navigli.webp'],
   'g-43': ['/images/pillars/intent-18plus-02.webp', '/images/pillars/intent-18plus-03.webp', '/images/pillars/intent-18plus-04.webp', '/images/guides-editorial/apollo-navigli.webp'],
   'g-44': ['/images/pillars/private-parties-03.webp', '/images/pillars/private-parties-04.webp', '/images/venues/55-milano/55-milano-interior-02.webp', '/images/venues/pineta-milano/pineta-milano-interior-01.webp'],
-  'g-45': ['/images/venues/aria-club-milano/aria-club-milano-buffet-02.webp', '/images/venues/just-me-milano/just-me-milano-buffet-01.webp', '/images/venues/pineta-milano/pineta-milano-interior-02.webp', '/images/venues/55-milano/55-milano-interior-03.webp'],
+  'g-45': ['/images/guides-editorial/voya-rooftop-20f.webp', '/images/guides-editorial/fiftyfive-loft.webp', '/images/guides-editorial/aria-garden.webp', '/images/guides-editorial/carlsberg-ol-stage-candles.webp'],
   'g-46': ['/images/pillars/intent-international-02.webp', '/images/pillars/intent-international-03.webp', '/images/pillars/intent-international-04.webp', '/images/guides-editorial/apollo-navigli.webp'],
   'g-47': ['/images/pillars/guide-inline-09-a.webp', '/images/pillars/guide-inline-09-b.webp', '/images/pillars/intent-18plus-01.webp', '/images/venues/the-club-milano/the-club-milano-interior-06.webp'],
   'g-48': ['/images/pillars/vip-tables-02.webp', '/images/pillars/vip-tables-03.webp', '/images/pillars/vip-tables-04.webp', '/images/guides-editorial/apollo-navigli.webp'],
@@ -299,6 +302,9 @@ export const GUIDE_INLINE_IMAGES_114: Record<string, string[]> = {
   'g-129': ['/images/venues/editorial/radio-rooftop-bar-milano.webp', '/images/seo-events/master/radio-rooftop-real-03.webp', '/images/seo-events/master/radio-rooftop-real-04.webp', '/images/seo-events/master/terrazza-gallia-milano.webp'],
   'g-130': ['/images/guides-editorial/palace-como-fireworks.webp', '/images/guides-editorial/terme-thermal-night.webp', '/images/guides-editorial/just-me-pavilion.webp', '/images/guides-editorial/bischeri-gala.webp'],
   'g-131': ['/images/guides-editorial/terrazza-duomo-skyline.webp', '/images/guides-editorial/gattopardo-nave.webp', '/images/guides-editorial/armani-prive-lounge.webp', '/images/seo-events/master/blue-note-milano.webp'],
+  'g-132': ['/images/guides-editorial/pineta-lounge.webp', '/images/guides-editorial/fiftyfive-loft.webp', '/images/guides-editorial/repvblic-club.webp', '/images/guides-editorial/the-club-brera.webp'],
+  'g-133': ['/images/guides-editorial/just-me-pavilion.webp', '/images/guides-editorial/bischeri-gala.webp', '/images/guides-editorial/carlsberg-ol-stage-candles.webp', '/images/guides-editorial/gattopardo-nave.webp'],
+  'g-134': ['/images/guides-editorial/aria-dancefloor.webp', '/images/guides-editorial/apollo-navigli.webp', '/images/seo-events/master/amnesia-milano.webp', '/images/seo-events/master/super-club-milano.webp'],
 };
 
 export function getGuideHeroImage114(guideId: string, fallback?: string): string {
