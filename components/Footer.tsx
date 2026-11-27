@@ -242,10 +242,10 @@ export default function Footer({ lang, editorialFields = {}, copyrightYear }: Fo
             data-footer-partner-clubs="true"
             className="border-t border-[#F6F1E7]/14 px-6 py-7 sm:px-12"
           >
-            <p className="mb-3 font-sans text-xs font-bold uppercase tracking-[0.12em] text-[#EAE3D5]">
+            <p className="mb-3 font-sans text-[13px] font-bold uppercase tracking-[0.12em] text-[#EAE3D5]">
               {masterNyeSeo.footerPartnersHeading}
             </p>
-            <ul className="flex flex-wrap gap-x-4 gap-y-2 text-xs text-[#C2B9AA] sm:text-[13px]">
+            <ul className="flex flex-wrap gap-x-4 gap-y-2 text-[13px] text-[#C2B9AA]">
               {FOOTER_PARTNER_CLUBS_22.map((club) => {
                 const clubHref = `${lp}/${clubsDir}/${getLocalizedVenueSlug35(club.id, lang)}`;
                 return (

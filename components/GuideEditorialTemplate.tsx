@@ -199,7 +199,7 @@ export default function GuideEditorialTemplate({
         >
           <div className="max-w-[1440px] mx-auto px-5 sm:px-10 lg:px-14 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
             <div className="min-w-0">
-              <p className="text-[12px] uppercase tracking-[0.14em] text-[#25D366] font-bold m-0 mb-1">
+              <p className="text-[13px] uppercase tracking-[0.12em] text-[#25D366] font-bold m-0 mb-1">
                 {canonicalHubBanner.eyebrow}
               </p>
               <p className="text-[15px] text-[#E6E2DA] leading-snug m-0 max-w-3xl">
