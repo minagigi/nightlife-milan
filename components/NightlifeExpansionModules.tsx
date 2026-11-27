@@ -919,8 +919,8 @@ export function PrioritySixShowcase({ locale }: { locale: string }) {
       slug: 'just-me-milano',
       zone: 'Parco Sempione (Torre Branca)',
       image: '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp',
-      badgeIt: '#1 Priorità Assoluta · Design Italo Rota',
-      badgeEn: '#1 Top Priority · Italo Rota Design',
+      badgeIt: '01 · Selezione Ufficiale · Design Italo Rota',
+      badgeEn: '01 · Official Selection · Italo Rota Design',
       descIt:
         'Il club più iconico ed esclusivo di Milano ai piedi della Torre Branca nel Parco Sempione. Royal Aperitivo dalle 19:30 con salita in cima alla torre e party internazionale fino alle 05:00 con tavoli VIP da 350–500€.',
       descEn:
@@ -932,8 +932,8 @@ export function PrioritySixShowcase({ locale }: { locale: string }) {
       slug: 'pineta-club-milano',
       zone: 'Corso Como / Porta Garibaldi (Via Messina 38)',
       image: '/images/venues/pineta-milano/pineta-milano-ingresso-01.webp',
-      badgeIt: '#2 Priorità · Il Re dell’Aperitivo Cantato',
-      badgeEn: '#2 Priority · King of the Singing Aperitivo',
+      badgeIt: '02 · Selezione Ufficiale · Il Re dell’Aperitivo Cantato',
+      badgeEn: '02 · Official Selection · King of the Singing Aperitivo',
       descIt:
         'L’istituzione del venerdì e sabato a Milano: grandi tavolate conviviali dalle 19:30 con aperitivo cantato, cori a squarciagola e transizione fluida in discoteca reggaeton e commerciale fino all’alba. Tavoli VIP da 300€.',
       descEn:
@@ -945,8 +945,8 @@ export function PrioritySixShowcase({ locale }: { locale: string }) {
       slug: 'aria-club-milano',
       zone: 'San Siro / Ippodromo (Piazzale dello Sport 14)',
       image: '/images/venues/aria-club-milano/aria-club-milano-interior-01.webp',
-      badgeIt: '#3 Priorità · 3 Aree Privé & Afterparty San Siro',
-      badgeEn: '#3 Priority · 3 VIP Zones & San Siro Afterparties',
+      badgeIt: '03 · Selezione Ufficiale · 3 Aree Privé & Afterparty San Siro',
+      badgeEn: '03 · Official Selection · 3 VIP Zones & San Siro Afterparties',
       descIt:
         'A soli 150 metri dallo Stadio San Siro e dall’Ippodromo: grande giardino e sala interna con Royal Aperitivo dalle 19:30 e tre livelli di tavoli (Dancefloor, Privé Aria e Privé Console DJ) da 250€.',
       descEn:
@@ -958,8 +958,8 @@ export function PrioritySixShowcase({ locale }: { locale: string }) {
       slug: '55-milano',
       zone: 'Arco della Pace / Sempione (Via Piero della Francesca 55)',
       image: '/images/55-milano.webp',
-      badgeIt: '#4 Priorità · Ex Deposito ATM, Apericena XL & Dinner Show',
-      badgeEn: '#4 Priority · Historic Tram Depot, XXL Apericena & Dinner Show',
+      badgeIt: '04 · Selezione Ufficiale · Ex Deposito ATM & Dinner Show',
+      badgeEn: '04 · Official Selection · Historic Tram Depot & Dinner Show',
       descIt:
         'Mille metri quadri ricavati da uno storico deposito ferroviario con grande terrazza: il punto di riferimento a Milano per Apericena riservata, feste di laurea, compleanni, Dinner Show del venerdì e "The Wall" il sabato.',
       descEn:
@@ -971,8 +971,8 @@ export function PrioritySixShowcase({ locale }: { locale: string }) {
       slug: 'voya-rooftop-milan',
       zone: 'Isola / Portello · 20° Piano (Via Achille Papa 30)',
       image: '/images/voya-rooftop-milan.webp',
-      badgeIt: '#5 Priorità · Sky Lounge al 20° Piano Vista Skyline',
-      badgeEn: '#5 Priority · 20th-Floor Sky Lounge & Skyline View',
+      badgeIt: '05 · Selezione Ufficiale · Sky Lounge al 20° Piano Vista Skyline',
+      badgeEn: '05 · Official Selection · 20th-Floor Sky Lounge & Skyline View',
       descIt:
         'Ventesimo piano con vetrate a 360 gradi sullo skyline di Milano: aperitivo al tramonto dalle 18:30 e DJ set elegante fino a tarda notte. Ideale per appuntamenti, compleanni chic, eventi aziendali e tavoli vista grattacieli.',
       descEn:
@@ -995,18 +995,20 @@ export function PrioritySixShowcase({ locale }: { locale: string }) {
 
   return (
     <section
-      aria-label={isIt ? 'La Classifica Ufficiale dei 6 Club Prioritari di Milano' : 'Official Ranking of Milan’s Top 6 Priority Clubs'}
+      aria-label={isIt ? 'I 6 Club Iconici di Milano' : 'Milan’s 6 Iconic Partner Clubs'}
+      data-priority-six-showcase
+      data-no-lightbox="true"
       className="my-14"
     >
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
         <div>
-          <p className="font-sans text-champagne text-[10px] font-bold tracking-[0.28em] uppercase mb-2">
-            {isIt ? 'LA SELEZIONE UFFICIALE NIGHTLIFE MILAN · ORDINE DI PRIORITÀ' : 'NIGHTLIFE MILAN OFFICIAL SELECTION · PRIORITY RANKING'}
+          <p className="font-sans text-champagne text-[11px] font-bold tracking-[0.22em] uppercase mb-2">
+            {isIt ? 'LA SELEZIONE UFFICIALE NIGHTLIFE MILAN' : 'NIGHTLIFE MILAN OFFICIAL SELECTION'}
           </p>
           <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white">
             {isIt
-              ? 'I 6 Locali Prioritari di Milano (Gestione Diretta Tavoli VIP & Liste)'
-              : 'Milan’s Top 6 Priority Venues (Direct VIP Table & Guestlist Desk)'}
+              ? 'I 6 Club Iconici di Milano (Gestione Diretta Tavoli VIP & Liste)'
+              : 'Milan’s 6 Iconic Partner Venues (Direct VIP Table & Guestlist Desk)'}
           </h2>
         </div>
         <Link
@@ -1024,7 +1026,20 @@ export function PrioritySixShowcase({ locale }: { locale: string }) {
             key={club.slug}
             className="group rounded-2xl overflow-hidden border border-white/10 bg-[#0B0A09] hover:border-champagne/50 transition-all flex flex-col"
           >
-            <div className="relative px-6 py-4 bg-gradient-to-r from-champagne/15 via-champagne/5 to-transparent border-b border-white/10 flex items-center justify-between gap-3">
+            <Link
+              href={`${lp}/clubs/${club.slug}`}
+              className="group/img relative block aspect-[4/5] w-full overflow-hidden border-b border-white/10 bg-[#050505]"
+            >
+              <Image
+                src={club.image}
+                alt={club.name}
+                fill
+                quality={92}
+                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                className="object-cover transition-transform duration-300 group-hover/img:scale-[1.02]"
+              />
+            </Link>
+            <div className="relative px-6 py-3.5 border-b border-white/10 flex items-center justify-between gap-3 bg-[#141311]">
               <div className="px-3 py-1 rounded-full bg-[#25D366] text-[#050505] text-[10px] font-extrabold tracking-wider uppercase">
                 {isIt ? club.badgeIt : club.badgeEn}
               </div>
@@ -1045,7 +1060,7 @@ export function PrioritySixShowcase({ locale }: { locale: string }) {
               <div className="flex items-center gap-3 pt-4 border-t border-white/10">
                 <Link
                   href={`${lp}/clubs/${club.slug}`}
-                  className="px-4 py-2 rounded-lg border border-white/15 text-xs font-semibold text-white hover:border-champagne hover:text-champagne transition-colors"
+                  className="min-h-[40px] inline-flex items-center px-4 py-2 rounded-lg border border-white/15 text-xs font-semibold text-white hover:border-champagne hover:text-champagne transition-colors"
                 >
                   {isIt ? 'Guida & Prezzi' : 'Guide & Prices'}
                 </Link>
@@ -1053,7 +1068,7 @@ export function PrioritySixShowcase({ locale }: { locale: string }) {
                   href={getConciergeBookingUrl(locale, club.name, pathname || lp || '/')}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="ml-auto px-4 py-2 rounded-lg bg-[#25D366] text-[#050505] text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
+                  className="ml-auto min-h-[40px] inline-flex items-center px-4 py-2 rounded-lg bg-[#25D366] text-[#050505] text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
                 >
                   WhatsApp VIP
                 </a>

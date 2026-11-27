@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
 import { localePrefix, type LocaleCode } from '@/lib/i18n/locales';
 import { CAPODANNO_NAVIGATION } from '@/lib/capodanno/routes';
@@ -57,18 +58,21 @@ export default function EventMoneyPillarsStrip({ locale }: Props) {
   const cards = [
     {
       href: `${prefix}/vip-tables`,
+      imageSrc: '/images/pillars/vip-tables-01.webp',
       eyebrow: tk.vipTables.replace(/-/g, ' ').toUpperCase(),
       title: ui35.labelPrices,
       desc: `${ui35.bookWhatsApp} · +39 351 912 7047`,
     },
     {
       href: `${prefix}/events/capodanno-2027`,
+      imageSrc: '/images/events/cards-4x5/capodanno-2027-posters/capodanno-justme-milano-torre-branca.webp',
       eyebrow: `${nyeNav.menuLabel.toUpperCase()} 2027`,
       title: nyeNav.h1,
       desc: `31/12/2026 · ${ui35.bookWhatsApp} +39 351 912 7047`,
     },
     {
       href: `${prefix}/football-afterparties`,
+      imageSrc: '/images/pillars/football-afterparties-01.webp',
       eyebrow: 'SAN SIRO · INTER & AC MILAN',
       title: sanSiro.title,
       desc: sanSiro.desc,
@@ -79,23 +83,36 @@ export default function EventMoneyPillarsStrip({ locale }: Props) {
     <section
       aria-label={ui35.servicesTitle}
       data-event-money-pillars
+      data-no-lightbox="true"
       className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 border-t border-[#F6F1E7]/14"
     >
       <h2 className="font-serif text-2xl font-bold text-[#F6F1E7] mb-6">{ui35.servicesTitle}</h2>
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-5 md:grid-cols-3">
         {cards.map((card) => (
           <Link
             key={card.href}
             href={card.href}
-            className="group block border border-[#F6F1E7]/18 bg-[#0B0A09] p-6 transition hover:border-[#F6F1E7]/50"
+            className="group flex flex-col overflow-hidden border border-[#F6F1E7]/18 bg-[#0B0A09] transition hover:border-[#F6F1E7]/50"
           >
-            <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#C2B9AA]">
-              {card.eyebrow}
-            </p>
-            <h3 className="mt-2 font-serif text-lg font-semibold text-[#F6F1E7] group-hover:underline">
-              {card.title}
-            </h3>
-            <p className="mt-2 text-sm leading-relaxed text-[#C2B9AA]">{card.desc}</p>
+            <div className="relative aspect-[4/5] w-full overflow-hidden border-b border-[#F6F1E7]/14 bg-[#050505]">
+              <Image
+                src={card.imageSrc}
+                alt={card.title}
+                fill
+                quality={92}
+                sizes="(max-width: 768px) 100vw, 33vw"
+                className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+              />
+            </div>
+            <div className="p-6">
+              <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#C2B9AA]">
+                {card.eyebrow}
+              </p>
+              <h3 className="mt-2 font-serif text-lg font-semibold text-[#F6F1E7] group-hover:underline">
+                {card.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-[#C2B9AA]">{card.desc}</p>
+            </div>
           </Link>
         ))}
       </div>

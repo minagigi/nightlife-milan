@@ -1,5 +1,6 @@
 import SeoAuthorityHub from './SeoAuthorityHub';
 import React from 'react';
+import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
 import { SITE_CONTACT } from '@/config/contact';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
@@ -819,72 +820,176 @@ export default function EditorialPageSections({ locale, path }: Props) {
                 ? 'Durante i grandi appuntamenti internazionali e le notti tematiche settimanali, la domanda per i Tavoli VIP e le liste nominali a Milano raddoppia. Qui trovi il calendario operativo diviso per evento speciale, università e fascia d’età.'
                 : 'During major international weeks and weekly thematic club nights, demand for Milan VIP Tables and guest lists doubles. Below is the complete operational breakdown by special event, university, and age bracket.'}
             </p>
-            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              <article className="border border-[#F6F1E7]/14 bg-[#141311] p-6">
-                <p className="font-sans tabular-nums text-[13px] font-bold text-[#C2B9AA] uppercase mb-1">30 OTT – 1 NOV 2026</p>
-                <h3 className="font-display text-xl text-[#F6F1E7] mb-2">
-                  <Link href={`${lp}/events/halloween-2026`} prefetch={false} className="underline-offset-4 hover:underline">Halloween 2026 Milano ↗</Link>
-                </h3>
-                <p className="text-[13px] text-[#C2B9AA] leading-relaxed">
-                  {isIt
-                    ? 'Tre notti di produzioni scenografiche tra JustMe, Alcatraz (3 piste Horror Show), Fabrique, Old Fashion, Tocqueville 13 e Magazzini Generali. Nei fashion club è gradito il tema Dark Elegance; nei warehouse maschere e costumi completi.'
-                    : 'Three nights of immersive productions across JustMe, Alcatraz (3-stage Horror Show), Fabrique, Old Fashion, Tocqueville 13, and Magazzini Generali. Dark Elegance in luxury clubs; full costumes at warehouse parties.'}
-                </p>
+            <div
+              data-events-thematic-grid
+              data-no-lightbox="true"
+              className="grid gap-5 md:grid-cols-2 lg:grid-cols-3"
+            >
+              <article className="flex flex-col overflow-hidden border border-[#F6F1E7]/14 bg-[#141311]">
+                <Link
+                  href={`${lp}/events/halloween-2026`}
+                  prefetch={false}
+                  className="group relative block aspect-[4/5] w-full overflow-hidden border-b border-[#F6F1E7]/14 bg-[#050505]"
+                >
+                  <Image
+                    src="/images/pillars/events-special-01.webp"
+                    alt="Halloween 2026 Milano"
+                    fill
+                    quality={92}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
+                </Link>
+                <div className="p-6">
+                  <p className="font-sans tabular-nums text-[13px] font-bold text-[#C2B9AA] uppercase mb-1">30 OTT – 1 NOV 2026</p>
+                  <h3 className="font-display text-xl text-[#F6F1E7] mb-2">
+                    <Link href={`${lp}/events/halloween-2026`} prefetch={false} className="underline-offset-4 hover:underline">Halloween 2026 Milano ↗</Link>
+                  </h3>
+                  <p className="text-[13px] text-[#C2B9AA] leading-relaxed">
+                    {isIt
+                      ? 'Tre notti di produzioni scenografiche tra JustMe, Alcatraz (3 piste Horror Show), Fabrique, Old Fashion, Tocqueville 13 e Magazzini Generali. Nei fashion club è gradito il tema Dark Elegance; nei warehouse maschere e costumi completi.'
+                      : 'Three nights of immersive productions across JustMe, Alcatraz (3-stage Horror Show), Fabrique, Old Fashion, Tocqueville 13, and Magazzini Generali. Dark Elegance in luxury clubs; full costumes at warehouse parties.'}
+                  </p>
+                </div>
               </article>
-              <article className="border border-[#F6F1E7]/14 bg-[#141311] p-6">
-                <p className="font-sans tabular-nums text-[13px] font-bold text-[#C2B9AA] uppercase mb-1">31 DICEMBRE 2026 / 1 GENNAIO 2027</p>
-                <h3 className="font-display text-xl text-[#F6F1E7] mb-2">{isIt ? 'Capodanno a Milano (NYE 2027)' : 'New Year’s Eve Milan (NYE 2027)'}</h3>
-                <p className="text-[13px] text-[#C2B9AA] leading-relaxed">
-                  {isIt
-                    ? 'Cenoni di Gala, Royal Buffet e Tavoli Privé di Capodanno da JustMe (Torre Branca), Armani Privé, Il Gattopardo, Tocqueville 13, Hollywood e The Sanctuary. Prenotazione Early-Bird consigliata entro fine novembre via WhatsApp.'
-                    : 'Gala Dinners, Royal Buffets, and NYE VIP Privé Tables at JustMe (Torre Branca), Armani Privé, Il Gattopardo, Tocqueville 13, Hollywood, and The Sanctuary. Early-Bird booking recommended via WhatsApp.'}
-                </p>
+              <article className="flex flex-col overflow-hidden border border-[#F6F1E7]/14 bg-[#141311]">
+                <Link
+                  href={`${lp}/events/capodanno-2027`}
+                  prefetch={false}
+                  className="group relative block aspect-[4/5] w-full overflow-hidden border-b border-[#F6F1E7]/14 bg-[#050505]"
+                >
+                  <Image
+                    src="/images/events/cards-4x5/capodanno-2027-posters/capodanno-justme-milano-torre-branca.webp"
+                    alt={isIt ? 'Capodanno a Milano 2027' : 'New Year’s Eve Milan 2027'}
+                    fill
+                    quality={92}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
+                </Link>
+                <div className="p-6">
+                  <p className="font-sans tabular-nums text-[13px] font-bold text-[#C2B9AA] uppercase mb-1">31 DICEMBRE 2026 / 1 GENNAIO 2027</p>
+                  <h3 className="font-display text-xl text-[#F6F1E7] mb-2">
+                    <Link href={`${lp}/events/capodanno-2027`} prefetch={false} className="underline-offset-4 hover:underline">
+                      {isIt ? 'Capodanno a Milano (NYE 2027) ↗' : 'New Year’s Eve Milan (NYE 2027) ↗'}
+                    </Link>
+                  </h3>
+                  <p className="text-[13px] text-[#C2B9AA] leading-relaxed">
+                    {isIt
+                      ? 'Cenoni di Gala, Royal Buffet e Tavoli Privé di Capodanno da JustMe (Torre Branca), Armani Privé, Il Gattopardo, Tocqueville 13, Hollywood e The Sanctuary. Prenotazione Early-Bird consigliata entro fine novembre via WhatsApp.'
+                      : 'Gala Dinners, Royal Buffets, and NYE VIP Privé Tables at JustMe (Torre Branca), Armani Privé, Il Gattopardo, Tocqueville 13, Hollywood, and The Sanctuary. Early-Bird booking recommended via WhatsApp.'}
+                  </p>
+                </div>
               </article>
-              <article className="border border-[#F6F1E7]/14 bg-[#141311] p-6">
-                <p className="font-sans tabular-nums text-[13px] font-bold text-[#C2B9AA] uppercase mb-1">SETTEMBRE & FEBBRAIO · APRILE · SETTEMBRE F1</p>
-                <h3 className="font-display text-xl text-[#F6F1E7] mb-2">
-                  <Link href={`${lp}/milan-fashion-week`} prefetch={false} className="underline-offset-4 hover:underline">Fashion Week, Fuorisalone & Monza F1 ↗</Link>
-                </h3>
-                <p className="text-[13px] text-[#C2B9AA] leading-relaxed">
-                  {isIt
-                    ? 'Gli afterparty ufficiali delle sfilate (Armani Privé, JustMe, Volt, 11Clubroom), le feste del Salone del Mobile tra Tortona, Brera e Lambrate (The Sanctuary) e i party piloti/sponsor del GP di Monza.'
-                    : 'Official runway afterparties (Armani Privé, JustMe, Volt, 11Clubroom), Salone del Mobile Design Week parties across Tortona, Brera & Lambrate, and Monza F1 GP weekend celebrations.'}
-                </p>
+              <article className="flex flex-col overflow-hidden border border-[#F6F1E7]/14 bg-[#141311]">
+                <Link
+                  href={`${lp}/milan-fashion-week`}
+                  prefetch={false}
+                  className="group relative block aspect-[4/5] w-full overflow-hidden border-b border-[#F6F1E7]/14 bg-[#050505]"
+                >
+                  <Image
+                    src="/images/pillars/mfw-01.webp"
+                    alt="Milan Fashion Week, Fuorisalone & Monza F1"
+                    fill
+                    quality={92}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
+                </Link>
+                <div className="p-6">
+                  <p className="font-sans tabular-nums text-[13px] font-bold text-[#C2B9AA] uppercase mb-1">SETTEMBRE & FEBBRAIO · APRILE · SETTEMBRE F1</p>
+                  <h3 className="font-display text-xl text-[#F6F1E7] mb-2">
+                    <Link href={`${lp}/milan-fashion-week`} prefetch={false} className="underline-offset-4 hover:underline">Fashion Week, Fuorisalone & Monza F1 ↗</Link>
+                  </h3>
+                  <p className="text-[13px] text-[#C2B9AA] leading-relaxed">
+                    {isIt
+                      ? 'Gli afterparty ufficiali delle sfilate (Armani Privé, JustMe, Volt, 11Clubroom), le feste del Salone del Mobile tra Tortona, Brera e Lambrate (The Sanctuary) e i party piloti/sponsor del GP di Monza.'
+                      : 'Official runway afterparties (Armani Privé, JustMe, Volt, 11Clubroom), Salone del Mobile Design Week parties across Tortona, Brera & Lambrate, and Monza F1 GP weekend celebrations.'}
+                  </p>
+                </div>
               </article>
-              <article className="border border-[#F6F1E7]/14 bg-[#141311] p-6">
-                <p className="font-sans tabular-nums text-[13px] font-bold text-[#C2B9AA] uppercase mb-1">MARTEDÌ · MERCOLEDÌ · GIOVEDÌ · VENERDÌ</p>
-                <h3 className="font-display text-xl text-[#F6F1E7] mb-2">
-                  <Link href={`${lp}/events/university-erasmus`} prefetch={false} className="underline-offset-4 hover:underline">{isIt ? 'Notti Universitarie & Erasmus ↗' : 'University & Erasmus Nights ↗'}</Link>
-                </h3>
-                <p className="text-[13px] text-[#C2B9AA] leading-relaxed">
-                  {isIt
-                    ? 'Il calendario per gli studenti di Bocconi, Cattolica, Politecnico, Statale, IULM, NABA e Marangoni: Martedì/Mercoledì International Night (The Club, Old Fashion, Hollywood), Giovedì Universitario e Venerdì Alcatraz/Magazzini.'
-                    : 'Weekly calendar for Bocconi, Cattolica, Politecnico, Statale, IULM, NABA & Marangoni students: Tue/Wed International Nights (The Club, Old Fashion, Hollywood), Thursday Student Nights & Friday Alcatraz/Magazzini.'}
-                </p>
+              <article className="flex flex-col overflow-hidden border border-[#F6F1E7]/14 bg-[#141311]">
+                <Link
+                  href={`${lp}/events/university-erasmus`}
+                  prefetch={false}
+                  className="group relative block aspect-[4/5] w-full overflow-hidden border-b border-[#F6F1E7]/14 bg-[#050505]"
+                >
+                  <Image
+                    src="/images/pillars/intent-erasmus-01.webp"
+                    alt={isIt ? 'Notti Universitarie ed Erasmus Milano' : 'University & Erasmus Nights Milan'}
+                    fill
+                    quality={92}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
+                </Link>
+                <div className="p-6">
+                  <p className="font-sans tabular-nums text-[13px] font-bold text-[#C2B9AA] uppercase mb-1">MARTEDÌ · MERCOLEDÌ · GIOVEDÌ · VENERDÌ</p>
+                  <h3 className="font-display text-xl text-[#F6F1E7] mb-2">
+                    <Link href={`${lp}/events/university-erasmus`} prefetch={false} className="underline-offset-4 hover:underline">{isIt ? 'Notti Universitarie & Erasmus ↗' : 'University & Erasmus Nights ↗'}</Link>
+                  </h3>
+                  <p className="text-[13px] text-[#C2B9AA] leading-relaxed">
+                    {isIt
+                      ? 'Il calendario per gli studenti di Bocconi, Cattolica, Politecnico, Statale, IULM, NABA e Marangoni: Martedì/Mercoledì International Night (The Club, Old Fashion, Hollywood), Giovedì Universitario e Venerdì Alcatraz/Magazzini.'
+                      : 'Weekly calendar for Bocconi, Cattolica, Politecnico, Statale, IULM, NABA & Marangoni students: Tue/Wed International Nights (The Club, Old Fashion, Hollywood), Thursday Student Nights & Friday Alcatraz/Magazzini.'}
+                  </p>
+                </div>
               </article>
-              <article className="border border-[#F6F1E7]/14 bg-[#141311] p-6">
-                <p className="font-sans tabular-nums text-[13px] font-bold text-[#C2B9AA] uppercase mb-1">SELEZIONE ANAGRAFICA · 18+ VS 21+</p>
-                <h3 className="font-display text-xl text-[#F6F1E7] mb-2">
-                  <Link href={`${lp}/events/18-plus`} prefetch={false} className="underline-offset-4 hover:underline">Serate 18+</Link>
-                  {' · '}
-                  <Link href={`${lp}/events/21-plus`} prefetch={false} className="underline-offset-4 hover:underline">Club 21+ & 23+ ↗</Link>
-                </h3>
-                <p className="text-[13px] text-[#C2B9AA] leading-relaxed">
-                  {isIt
-                    ? 'Confronta i locali accessibili dai 18 anni compiuti (Alcatraz, Fabrique, Magazzini Generali, Lime, serate studentesche) con i club 21+/23+ (Armani Privé, JustMe, 11Clubroom, Volt, Tocqueville 13).'
-                    : 'Compare 18+ accessible venues (Alcatraz, Fabrique, Magazzini Generali, Lime, student nights) with strict 21+/23+ luxury doors (Armani Privé, JustMe, 11Clubroom, Volt, Tocqueville 13).'}
-                </p>
+              <article className="flex flex-col overflow-hidden border border-[#F6F1E7]/14 bg-[#141311]">
+                <Link
+                  href={`${lp}/events/21-plus`}
+                  prefetch={false}
+                  className="group relative block aspect-[4/5] w-full overflow-hidden border-b border-[#F6F1E7]/14 bg-[#050505]"
+                >
+                  <Image
+                    src="/images/pillars/intent-21plus-01.webp"
+                    alt={isIt ? 'Selezione Club 18+ e 21+ Milano' : 'Milan 18+ & 21+ Nightclubs'}
+                    fill
+                    quality={92}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
+                </Link>
+                <div className="p-6">
+                  <p className="font-sans tabular-nums text-[13px] font-bold text-[#C2B9AA] uppercase mb-1">SELEZIONE ANAGRAFICA · 18+ VS 21+</p>
+                  <h3 className="font-display text-xl text-[#F6F1E7] mb-2">
+                    <Link href={`${lp}/events/18-plus`} prefetch={false} className="underline-offset-4 hover:underline">Serate 18+</Link>
+                    {' · '}
+                    <Link href={`${lp}/events/21-plus`} prefetch={false} className="underline-offset-4 hover:underline">Club 21+ & 23+ ↗</Link>
+                  </h3>
+                  <p className="text-[13px] text-[#C2B9AA] leading-relaxed">
+                    {isIt
+                      ? 'Confronta i locali accessibili dai 18 anni compiuti (Alcatraz, Fabrique, Magazzini Generali, Lime, serate studentesche) con i club 21+/23+ (Armani Privé, JustMe, 11Clubroom, Volt, Tocqueville 13).'
+                      : 'Compare 18+ accessible venues (Alcatraz, Fabrique, Magazzini Generali, Lime, student nights) with strict 21+/23+ luxury doors (Armani Privé, JustMe, 11Clubroom, Volt, Tocqueville 13).'}
+                  </p>
+                </div>
               </article>
-              <article className="border border-[#F6F1E7]/14 bg-[#141311] p-6">
-                <p className="font-sans tabular-nums text-[13px] font-bold text-[#C2B9AA] uppercase mb-1">GUEST DJ & JET-SET GLOBALE</p>
-                <h3 className="font-display text-xl text-[#F6F1E7] mb-2">
-                  <Link href={`${lp}/events/international`} prefetch={false} className="underline-offset-4 hover:underline">{isIt ? 'Eventi & DJ Internazionali ↗' : 'International DJs & Global Nights ↗'}</Link>
-                </h3>
-                <p className="text-[13px] text-[#C2B9AA] leading-relaxed">
-                  {isIt
-                    ? 'Showcase con special guest mondiali Afro House, Melodic Techno, Hip-Hop e Reggaeton, con assistenza Concierge multilingue e fatturazione aziendale per tavoli corporate.'
-                    : 'Showcases with global Afro House, Melodic Techno, Hip-Hop, and Reggaeton headliners, complete with multilingual VIP Concierge support and corporate table invoicing.'}
-                </p>
+              <article className="flex flex-col overflow-hidden border border-[#F6F1E7]/14 bg-[#141311]">
+                <Link
+                  href={`${lp}/events/international`}
+                  prefetch={false}
+                  className="group relative block aspect-[4/5] w-full overflow-hidden border-b border-[#F6F1E7]/14 bg-[#050505]"
+                >
+                  <Image
+                    src="/images/pillars/intent-international-01.webp"
+                    alt={isIt ? 'Eventi e DJ Internazionali Milano' : 'International DJs & Global Nights Milan'}
+                    fill
+                    quality={92}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
+                </Link>
+                <div className="p-6">
+                  <p className="font-sans tabular-nums text-[13px] font-bold text-[#C2B9AA] uppercase mb-1">GUEST DJ & JET-SET GLOBALE</p>
+                  <h3 className="font-display text-xl text-[#F6F1E7] mb-2">
+                    <Link href={`${lp}/events/international`} prefetch={false} className="underline-offset-4 hover:underline">{isIt ? 'Eventi & DJ Internazionali ↗' : 'International DJs & Global Nights ↗'}</Link>
+                  </h3>
+                  <p className="text-[13px] text-[#C2B9AA] leading-relaxed">
+                    {isIt
+                      ? 'Showcase con special guest mondiali Afro House, Melodic Techno, Hip-Hop e Reggaeton, con assistenza Concierge multilingue e fatturazione aziendale per tavoli corporate.'
+                      : 'Showcases with global Afro House, Melodic Techno, Hip-Hop, and Reggaeton headliners, complete with multilingual VIP Concierge support and corporate table invoicing.'}
+                  </p>
+                </div>
               </article>
             </div>
           </section>

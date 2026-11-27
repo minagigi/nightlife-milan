@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
 import { buildMoreVenueEventsHeading } from '@/lib/eventPageLocale';
 
@@ -5,6 +6,7 @@ export interface MoreVenueEventItem {
   href: string;
   title: string;
   dateStr: string;
+  imageSrc: string;
 }
 
 interface MoreVenueEventsProps {
@@ -20,21 +22,39 @@ export default function MoreVenueEvents({ items, locale, venueName }: MoreVenueE
   if (items.length === 0) return null;
 
   return (
-    <section className="mt-12 not-prose">
-      <h2 className="text-2xl font-serif font-bold text-champagne mb-4">
+    <section
+      data-more-venue-events
+      data-no-lightbox="true"
+      className="mt-12 not-prose"
+    >
+      <h2 className="text-2xl font-serif font-bold text-champagne mb-5">
         {buildMoreVenueEventsHeading(locale, venueName)}
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {items.map((item) => (
           <Link
             key={item.href}
             href={item.href}
-            className="block p-4 rounded-xl border border-white/8 bg-white/[0.02] hover:border-champagne/40 transition-colors"
+            className="group flex flex-col overflow-hidden rounded-xl border border-white/15 bg-[#0B0A09] hover:border-champagne/50 transition-colors"
           >
-            <p className="font-sans text-champagne text-[11px] font-semibold tracking-[0.15em] uppercase mb-1">
-              {item.dateStr}
-            </p>
-            <h3 className="font-serif text-lg text-white">{item.title}</h3>
+            <div className="relative aspect-[4/5] w-full overflow-hidden border-b border-white/10 bg-[#050505]">
+              <Image
+                src={item.imageSrc}
+                alt={item.title}
+                fill
+                quality={92}
+                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
+                className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+              />
+            </div>
+            <div className="p-4">
+              <p className="font-sans text-champagne text-[11px] font-semibold tracking-[0.15em] uppercase mb-1">
+                {item.dateStr}
+              </p>
+              <h3 className="font-serif text-base sm:text-lg text-white group-hover:text-champagne transition-colors">
+                {item.title}
+              </h3>
+            </div>
           </Link>
         ))}
       </div>

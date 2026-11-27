@@ -733,25 +733,33 @@ export default function ThanksgivingJustMeDetailView({ locale: rawLocale }: { lo
         </section>
 
         {/* Internal Cross-Links: JustMe Dossier, Dec 31 NYE & Jan 13 Orthodox NYE */}
-        <section data-no-lightbox="true" className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+        <section
+          data-no-lightbox="true"
+          data-event-crosslink-cards="thanksgiving-justme"
+          className="grid grid-cols-1 gap-4 lg:grid-cols-3"
+        >
           <div className="flex flex-col justify-between overflow-hidden rounded-xl border border-white/15 bg-white/[0.03] p-5 space-y-4">
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg border border-white/10">
-              <Image
-                src="/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp"
-                alt={c.venueBannerTitle}
-                title={c.venueBannerTitle}
-                fill
-                quality={85}
-                sizes="(max-width: 1024px) 100vw, 30vw"
-                className="object-cover"
-              />
-            </div>
-            <div className="space-y-1.5">
-              <p className="font-mono text-[11px] uppercase text-champagne">
-                {c.venueBannerEyebrow}
-              </p>
-              <h3 className="font-serif text-lg text-[#F6F1E7]">{c.venueBannerTitle}</h3>
-              <p className="font-sans text-xs text-[#C2B9AA]">{c.venueBannerDesc}</p>
+            <div className="space-y-4">
+              <Link
+                href={justMeClubPath}
+                className="group relative block aspect-[4/5] w-full overflow-hidden rounded-lg border border-white/10 bg-[#050505]"
+              >
+                <Image
+                  src="/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp"
+                  alt={c.venueBannerTitle}
+                  fill
+                  quality={92}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                />
+              </Link>
+              <div className="space-y-1.5">
+                <p className="font-mono text-[11px] uppercase text-champagne">
+                  {c.venueBannerEyebrow}
+                </p>
+                <h3 className="font-serif text-lg text-[#F6F1E7]">{c.venueBannerTitle}</h3>
+                <p className="font-sans text-xs text-[#C2B9AA]">{c.venueBannerDesc}</p>
+              </div>
             </div>
             <Link
               href={justMeClubPath}
@@ -761,33 +769,63 @@ export default function ThanksgivingJustMeDetailView({ locale: rawLocale }: { lo
             </Link>
           </div>
 
-          <div className="flex flex-col justify-between rounded-xl border border-white/15 bg-white/[0.03] p-5 space-y-4">
-            <div className="space-y-1.5">
-              <p className="font-mono text-[11px] uppercase text-champagne">
-                {c.dec31BannerEyebrow}
-              </p>
-              <h3 className="font-serif text-lg text-[#F6F1E7]">{c.dec31BannerTitle}</h3>
-              <p className="font-sans text-xs text-[#C2B9AA]">{c.dec31BannerDesc}</p>
+          <div className="flex flex-col justify-between overflow-hidden rounded-xl border border-white/15 bg-white/[0.03] p-5 space-y-4">
+            <div className="space-y-4">
+              <Link
+                href={dec31Path}
+                className="group relative block aspect-[4/5] w-full overflow-hidden rounded-lg border border-white/10 bg-[#050505]"
+              >
+                <Image
+                  src="/images/events/cards-4x5/capodanno-2027-posters/capodanno-justme-milano-torre-branca.webp"
+                  alt={c.dec31BannerTitle}
+                  fill
+                  quality={92}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                />
+              </Link>
+              <div className="space-y-1.5">
+                <p className="font-mono text-[11px] uppercase text-champagne">
+                  {c.dec31BannerEyebrow}
+                </p>
+                <h3 className="font-serif text-lg text-[#F6F1E7]">{c.dec31BannerTitle}</h3>
+                <p className="font-sans text-xs text-[#C2B9AA]">{c.dec31BannerDesc}</p>
+              </div>
             </div>
             <Link
               href={dec31Path}
-              className="inline-flex items-center gap-1.5 font-mono text-xs font-bold uppercase text-champagne hover:underline"
+              className="inline-flex min-h-[44px] items-center gap-1.5 font-mono text-xs font-bold uppercase text-champagne hover:underline"
             >
               {c.dec31BannerCta} <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>
 
-          <div className="flex flex-col justify-between rounded-xl border border-white/15 bg-white/[0.03] p-5 space-y-4">
-            <div className="space-y-1.5">
-              <p className="font-mono text-[11px] uppercase text-champagne">
-                {c.orthodoxBannerEyebrow}
-              </p>
-              <h3 className="font-serif text-lg text-[#F6F1E7]">{c.orthodoxBannerTitle}</h3>
-              <p className="font-sans text-xs text-[#C2B9AA]">{c.orthodoxBannerDesc}</p>
+          <div className="flex flex-col justify-between overflow-hidden rounded-xl border border-white/15 bg-white/[0.03] p-5 space-y-4">
+            <div className="space-y-4">
+              <Link
+                href={orthodoxPath}
+                className="group relative block aspect-[4/5] w-full overflow-hidden rounded-lg border border-white/10 bg-[#050505]"
+              >
+                <Image
+                  src="/images/events/cards-4x5/orthodox-nye-2027/capodanno-ortodosso-justme-milano-2027.webp"
+                  alt={c.orthodoxBannerTitle}
+                  fill
+                  quality={92}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                />
+              </Link>
+              <div className="space-y-1.5">
+                <p className="font-mono text-[11px] uppercase text-champagne">
+                  {c.orthodoxBannerEyebrow}
+                </p>
+                <h3 className="font-serif text-lg text-[#F6F1E7]">{c.orthodoxBannerTitle}</h3>
+                <p className="font-sans text-xs text-[#C2B9AA]">{c.orthodoxBannerDesc}</p>
+              </div>
             </div>
             <Link
               href={orthodoxPath}
-              className="inline-flex items-center gap-1.5 font-mono text-xs font-bold uppercase text-champagne hover:underline"
+              className="inline-flex min-h-[44px] items-center gap-1.5 font-mono text-xs font-bold uppercase text-champagne hover:underline"
             >
               {c.orthodoxBannerCta} <ArrowRight className="h-3.5 w-3.5" />
             </Link>

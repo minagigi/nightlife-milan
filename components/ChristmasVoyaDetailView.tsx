@@ -412,39 +412,75 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
               </div>
 
               <div
-                data-venue-authority-backlink
-                className="flex flex-col gap-3 bg-[#050505] p-5 text-[#F6F1E7] md:flex-row md:items-center md:justify-between"
+                data-no-lightbox="true"
+                data-event-crosslink-cards="christmas-voya"
+                className="grid grid-cols-1 gap-4 sm:grid-cols-2"
               >
-                <div>
-                  <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[#EAE3D5]">
-                    {c.venueBannerEyebrow}
-                  </p>
-                  <p className="mt-1 text-sm text-[#F6F1E7]">{c.venueBannerDesc}</p>
-                </div>
-                <Link
-                  href={voyaClubHref}
-                  className="inline-flex min-h-[44px] shrink-0 items-center justify-center bg-[#25D366] px-4 py-2.5 text-xs font-extrabold uppercase tracking-wider text-[#050505] transition hover:bg-[#2EE472]"
+                <div
+                  data-venue-authority-backlink
+                  className="flex flex-col justify-between gap-4 bg-[#050505] p-5 text-[#F6F1E7]"
                 >
-                  Voya Rooftop Milan →
-                </Link>
-              </div>
+                  <div className="space-y-4">
+                    <Link
+                      href={voyaClubHref}
+                      className="group relative block aspect-[4/5] w-full overflow-hidden border border-white/15 bg-[#050505]"
+                    >
+                      <Image
+                        src="/images/events/cards-4x5/partner-clubs/voya-rooftop-milan.webp"
+                        alt="Voya Rooftop Milan"
+                        fill
+                        quality={92}
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                      />
+                    </Link>
+                    <div>
+                      <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[#EAE3D5]">
+                        {c.venueBannerEyebrow}
+                      </p>
+                      <p className="mt-1 text-sm text-[#F6F1E7]">{c.venueBannerDesc}</p>
+                    </div>
+                  </div>
+                  <Link
+                    href={voyaClubHref}
+                    className="inline-flex min-h-[44px] w-full items-center justify-center bg-[#25D366] px-4 py-2.5 text-xs font-extrabold uppercase tracking-wider text-[#050505] transition hover:bg-[#2EE472]"
+                  >
+                    Voya Rooftop Milan →
+                  </Link>
+                </div>
 
-              <div
-                data-related-holiday-banner
-                className="flex flex-col gap-3 border-y border-[#050505]/25 bg-[#EAE3D5] py-5 text-[#050505] md:flex-row md:items-center md:justify-between"
-              >
-                <div>
-                  <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[#4A453E]">
-                    {c.nyeCrossTitle}
-                  </p>
-                  <p className="mt-1 text-sm text-[#3D3830]">{c.nyeCrossDesc}</p>
-                </div>
-                <Link
-                  href={voyaNyeHref}
-                  className="inline-flex min-h-[44px] shrink-0 items-center justify-center bg-[#050505] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#F6F1E7] transition hover:bg-[#1E1C19]"
+                <div
+                  data-related-holiday-banner
+                  className="flex flex-col justify-between gap-4 border border-[#050505]/25 bg-[#EAE3D5] p-5 text-[#050505]"
                 >
-                  {c.nyeCrossCta.replace(/\s*→+$/, '')} →
-                </Link>
+                  <div className="space-y-4">
+                    <Link
+                      href={voyaNyeHref}
+                      className="group relative block aspect-[4/5] w-full overflow-hidden border border-[#050505]/20 bg-[#050505]"
+                    >
+                      <Image
+                        src="/images/events/cards-4x5/capodanno-2027-posters/capodanno-voya-rooftop-milano.webp"
+                        alt={c.nyeCrossTitle}
+                        fill
+                        quality={92}
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                      />
+                    </Link>
+                    <div>
+                      <p className="font-mono text-[11px] font-bold uppercase tracking-widest text-[#4A453E]">
+                        {c.nyeCrossTitle}
+                      </p>
+                      <p className="mt-1 text-sm text-[#3D3830]">{c.nyeCrossDesc}</p>
+                    </div>
+                  </div>
+                  <Link
+                    href={voyaNyeHref}
+                    className="inline-flex min-h-[44px] w-full items-center justify-center bg-[#050505] px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-[#F6F1E7] transition hover:bg-[#1E1C19]"
+                  >
+                    {c.nyeCrossCta.replace(/\s*→+$/, '')} →
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

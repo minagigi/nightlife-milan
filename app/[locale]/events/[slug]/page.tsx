@@ -1056,6 +1056,9 @@ export default async function EventPage({ params }: Props) {
         href: `${localePrefix(locale)}/events/${eSlug}`,
         title: getLocalizedText(e.localizedContent.title, locale),
         dateStr: eDateStr,
+        imageSrc: toCardPoster4x5(
+          e.image || venue.image || '/images/milan-nightclub-luxury-vip-champagne.webp'
+        ),
       };
     });
 

@@ -26,6 +26,7 @@ import {
 } from '@/lib/capodanno/gate35';
 import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
+import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
 import { SITE_CONTACT } from '@/config/contact';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { localePrefix } from '@/lib/i18n/locales';
@@ -579,7 +580,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                               className="aspect-[4/5] w-full overflow-hidden border border-[#050505]/18 bg-[#050505]"
                             >
                               <img
-                                src={alt.image}
+                                src={toCardPoster4x5(alt.image)}
                                 alt={altTitle}
                                 width={1080}
                                 height={1350}
@@ -837,7 +838,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                                 className="aspect-[4/5] w-full overflow-hidden border border-[#050505]/18 bg-[#050505]"
                               >
                                 <img
-                                  src={alt.image}
+                                  src={toCardPoster4x5(alt.image)}
                                   alt={altTitle}
                                   width={1080}
                                   height={1350}
@@ -999,52 +1000,105 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 </p>
               </div>
 
-              {matchedPublicVenue && matchedPublicVenueHref && (
+              {(matchedPublicVenue && matchedPublicVenueHref) || localized.relatedHolidayBanner ? (
                 <div
-                  data-venue-authority-backlink
-                  className="flex flex-col gap-3 bg-[#050505] p-5 text-[#F6F1E7] md:flex-row md:items-center md:justify-between"
+                  data-no-lightbox="true"
+                  data-event-crosslink-cards="capodanno-detail"
+                  className={`grid grid-cols-1 gap-4 ${
+                    matchedPublicVenue && matchedPublicVenueHref && localized.relatedHolidayBanner
+                      ? 'sm:grid-cols-2'
+                      : ''
+                  }`}
                 >
-                  <div>
-                    <p className="font-mono text-xs font-bold uppercase tracking-[0.06em] text-[#EAE3D5]">
-                      {ui.officialVenueGuideLabel}
-                    </p>
-                    <p className="mt-1 text-sm text-[#F6F1E7] sm:text-base">
-                      {ui.officialVenueGuideDescTpl.replace('{venue}', matchedPublicVenueName)}
-                    </p>
-                  </div>
-                  <Link
-                    href={matchedPublicVenueHref}
-                    className="nlm-pressable inline-flex min-h-[44px] shrink-0 items-center justify-center bg-[#25D366] px-5 py-2.5 text-xs font-extrabold uppercase tracking-[0.05em] text-[#050505] transition hover:bg-[#2EE472]"
-                  >
-                    {matchedPublicVenueName} →
-                  </Link>
-                </div>
-              )}
+                  {matchedPublicVenue && matchedPublicVenueHref && (
+                    <div
+                      data-venue-authority-backlink
+                      className="flex flex-col justify-between gap-4 bg-[#050505] p-5 text-[#F6F1E7]"
+                    >
+                      <div className="space-y-4">
+                        <Link
+                          href={matchedPublicVenueHref}
+                          className="group relative block aspect-[4/5] w-full overflow-hidden border border-white/15 bg-[#050505]"
+                        >
+                          <Image
+                            src={toCardPoster4x5(
+                              matchedPublicVenue.image ||
+                                '/images/milan-nightclub-luxury-vip-champagne.webp',
+                            )}
+                            alt={matchedPublicVenueName}
+                            fill
+                            quality={92}
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                          />
+                        </Link>
+                        <div>
+                          <p className="font-mono text-xs font-bold uppercase tracking-[0.06em] text-[#EAE3D5]">
+                            {ui.officialVenueGuideLabel}
+                          </p>
+                          <p className="mt-1 text-sm text-[#F6F1E7] sm:text-base">
+                            {ui.officialVenueGuideDescTpl.replace('{venue}', matchedPublicVenueName)}
+                          </p>
+                        </div>
+                      </div>
+                      <Link
+                        href={matchedPublicVenueHref}
+                        className="nlm-pressable inline-flex min-h-[44px] w-full items-center justify-center bg-[#25D366] px-5 py-2.5 text-xs font-extrabold uppercase tracking-[0.05em] text-[#050505] transition hover:bg-[#2EE472]"
+                      >
+                        {matchedPublicVenueName} →
+                      </Link>
+                    </div>
+                  )}
 
-              {localized.relatedHolidayBanner && (
-                <div
-                  data-related-holiday-banner
-                  className="flex flex-col gap-3 border-y border-[#050505]/25 bg-[#EAE3D5] py-5 text-[#050505] md:flex-row md:items-center md:justify-between"
-                >
-                  <div>
-                    <p className="font-mono text-xs font-bold uppercase tracking-[0.06em] text-[#4A453E]">
-                      {localized.relatedHolidayBanner.badge}
-                    </p>
-                    <p className="mt-1 font-display text-xl font-bold text-[#050505]">
-                      {localized.relatedHolidayBanner.title}
-                    </p>
-                    <p className="mt-1 text-sm text-[#3D3830]">
-                      {localized.relatedHolidayBanner.description}
-                    </p>
-                  </div>
-                  <Link
-                    href={localized.relatedHolidayBanner.href}
-                    className="inline-flex min-h-[44px] shrink-0 items-center justify-center bg-[#050505] px-5 py-2.5 text-xs font-bold uppercase tracking-[0.05em] text-[#F6F1E7] transition hover:bg-[#1E1C19]"
-                  >
-                    {localized.relatedHolidayBanner.ctaLabel.replace(/\s*→+$/, '')} →
-                  </Link>
+                  {localized.relatedHolidayBanner && (
+                    <div
+                      data-related-holiday-banner
+                      className="flex flex-col justify-between gap-4 border border-[#050505]/25 bg-[#EAE3D5] p-5 text-[#050505]"
+                    >
+                      <div className="space-y-4">
+                        <Link
+                          href={localized.relatedHolidayBanner.href}
+                          className="group relative block aspect-[4/5] w-full overflow-hidden border border-[#050505]/20 bg-[#050505]"
+                        >
+                          <Image
+                            src={
+                              localized.relatedHolidayBanner.href.includes('voya')
+                                ? '/images/events/cards-4x5/christmas-2026-posters/natale-voya-rooftop-milano-2026.webp'
+                                : localized.relatedHolidayBanner.href.includes('garda')
+                                  ? '/images/events/cards-4x5/capodanno-2027-posters/capodanno-justme-garda-lake.webp'
+                                  : event.slug === 'capodanno-justme-milano-torre-branca'
+                                    ? '/images/events/cards-4x5/orthodox-nye-2027/capodanno-ortodosso-justme-milano-2027.webp'
+                                    : toCardPoster4x5(event.image)
+                            }
+                            alt={localized.relatedHolidayBanner.title}
+                            fill
+                            quality={92}
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                          />
+                        </Link>
+                        <div>
+                          <p className="font-mono text-xs font-bold uppercase tracking-[0.06em] text-[#4A453E]">
+                            {localized.relatedHolidayBanner.badge}
+                          </p>
+                          <p className="mt-1 font-display text-xl font-bold text-[#050505]">
+                            {localized.relatedHolidayBanner.title}
+                          </p>
+                          <p className="mt-1 text-sm text-[#3D3830]">
+                            {localized.relatedHolidayBanner.description}
+                          </p>
+                        </div>
+                      </div>
+                      <Link
+                        href={localized.relatedHolidayBanner.href}
+                        className="inline-flex min-h-[44px] w-full items-center justify-center bg-[#050505] px-5 py-2.5 text-xs font-bold uppercase tracking-[0.05em] text-[#F6F1E7] transition hover:bg-[#1E1C19]"
+                      >
+                        {localized.relatedHolidayBanner.ctaLabel.replace(/\s*→+$/, '')} →
+                      </Link>
+                    </div>
+                  )}
                 </div>
-              )}
+              ) : null}
 
               {localized.schedule && localized.schedule.length > 0 && (
                 <div className="border-t border-[#050505]/20 pt-6 text-[#050505]">
@@ -1273,28 +1327,43 @@ export default function CapodannoDetailView({ locale, event }: Props) {
             </div>
 
             {related.length > 0 && (
-              <section id="eventi-correlati">
+              <section id="eventi-correlati" data-no-lightbox="true">
                 <h2 className="font-display text-2xl font-bold text-[#F6F1E7]">
                   {ui.relatedHeading}
                 </h2>
-                <div className="mt-5 grid grid-cols-1 divide-y divide-[#F6F1E7]/14 border-y border-[#F6F1E7]/14 md:grid-cols-2 md:gap-x-8 lg:grid-cols-3">
-                  {related.map((item) => (
-                    <Link
-                      key={item.slug}
-                      href={capodannoEventPath(item.slug, locale)}
-                      className="block py-4 transition hover:text-[#EAE3D5]"
-                    >
-                      <p className="font-mono text-xs font-bold uppercase text-[#EAE3D5]">
-                        {item.city} ({item.province})
-                      </p>
-                      <h3 className="mt-1 font-display text-lg font-bold text-[#F6F1E7]">
-                        {getCapodannoLocalizedEventTitle(item, locale)}
-                      </h3>
-                      <p className="mt-1.5 font-mono text-xs text-[#C2B9AA]">
-                        {getCapodannoLocalizedEventContent(item, locale).priceSummary}
-                      </p>
-                    </Link>
-                  ))}
+                <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                  {related.map((item) => {
+                    const relTitle = getCapodannoLocalizedEventTitle(item, locale);
+                    return (
+                      <Link
+                        key={item.slug}
+                        href={capodannoEventPath(item.slug, locale)}
+                        className="group flex flex-col overflow-hidden border border-[#F6F1E7]/16 bg-[#0B0A09] transition hover:border-[#EAE3D5]"
+                      >
+                        <div className="relative aspect-[4/5] w-full overflow-hidden border-b border-[#F6F1E7]/14 bg-[#050505]">
+                          <Image
+                            src={toCardPoster4x5(item.image)}
+                            alt={relTitle}
+                            fill
+                            quality={92}
+                            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                            className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                          />
+                        </div>
+                        <div className="p-4">
+                          <p className="font-mono text-xs font-bold uppercase text-[#EAE3D5]">
+                            {item.city} ({item.province})
+                          </p>
+                          <h3 className="mt-1 font-display text-lg font-bold text-[#F6F1E7] group-hover:text-[#EAE3D5]">
+                            {relTitle}
+                          </h3>
+                          <p className="mt-1.5 font-mono text-xs text-[#C2B9AA]">
+                            {getCapodannoLocalizedEventContent(item, locale).priceSummary}
+                          </p>
+                        </div>
+                      </Link>
+                    );
+                  })}
                 </div>
               </section>
             )}

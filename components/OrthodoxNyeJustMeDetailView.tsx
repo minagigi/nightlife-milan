@@ -315,39 +315,73 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
         </section>
 
         {/* Cross Banners: JustMe Club + Dec 31 Gatsby NYE */}
-        <div className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-2">
-          <div className="flex flex-col justify-between gap-4 border border-[#24242C] bg-[#0D0E13] p-6 sm:flex-row sm:items-center">
-            <div>
-              <span className="text-[11px] font-bold tracking-wider text-[#C9A84C]">
-                {c.venueBannerEyebrow}
-              </span>
-              <h3 className="mt-1 font-serif text-lg font-bold text-[#F6F1E7]">{c.venueBannerTitle}</h3>
-              <p className="mt-1 text-xs leading-relaxed text-[#C2B9AA]">{c.venueBannerDesc}</p>
+        <section
+          data-no-lightbox="true"
+          data-event-crosslink-cards="orthodox-nye-justme"
+          className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2"
+        >
+          <div className="flex flex-col justify-between gap-4 border border-[#24242C] bg-[#0D0E13] p-5">
+            <div className="space-y-4">
+              <Link
+                href={justMeClubHref}
+                className="group relative block aspect-[4/5] w-full overflow-hidden border border-white/10 bg-[#050505]"
+              >
+                <Image
+                  src="/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp"
+                  alt={c.venueBannerTitle}
+                  fill
+                  quality={92}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                />
+              </Link>
+              <div>
+                <span className="text-[11px] font-bold tracking-wider text-[#C9A84C]">
+                  {c.venueBannerEyebrow}
+                </span>
+                <h3 className="mt-1 font-serif text-lg font-bold text-[#F6F1E7]">{c.venueBannerTitle}</h3>
+                <p className="mt-1 text-xs leading-relaxed text-[#C2B9AA]">{c.venueBannerDesc}</p>
+              </div>
             </div>
             <Link
               href={justMeClubHref}
-              className="inline-flex min-h-[44px] shrink-0 items-center justify-center border border-[#C9A84C] bg-[#C9A84C]/10 px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#F6F1E7] transition hover:bg-[#C9A84C] hover:text-[#050505]"
+              className="inline-flex min-h-[44px] w-full items-center justify-center border border-[#C9A84C] bg-[#C9A84C]/10 px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#F6F1E7] transition hover:bg-[#C9A84C] hover:text-[#050505]"
             >
               {c.venueBannerCta}
             </Link>
           </div>
 
-          <div className="flex flex-col justify-between gap-4 border border-[#8B1E2B]/60 bg-[#120A0D] p-6 sm:flex-row sm:items-center">
-            <div>
-              <span className="text-[11px] font-bold tracking-wider text-[#E69A9A]">
-                {c.dec31BannerEyebrow}
-              </span>
-              <h3 className="mt-1 font-serif text-lg font-bold text-[#F6F1E7]">{c.dec31BannerTitle}</h3>
-              <p className="mt-1 text-xs leading-relaxed text-[#EAE3D5]">{c.dec31BannerDesc}</p>
+          <div className="flex flex-col justify-between gap-4 border border-[#8B1E2B]/60 bg-[#120A0D] p-5">
+            <div className="space-y-4">
+              <Link
+                href={dec31NyeHref}
+                className="group relative block aspect-[4/5] w-full overflow-hidden border border-white/10 bg-[#050505]"
+              >
+                <Image
+                  src="/images/events/cards-4x5/capodanno-2027-posters/capodanno-justme-milano-torre-branca.webp"
+                  alt={c.dec31BannerTitle}
+                  fill
+                  quality={92}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                />
+              </Link>
+              <div>
+                <span className="text-[11px] font-bold tracking-wider text-[#E69A9A]">
+                  {c.dec31BannerEyebrow}
+                </span>
+                <h3 className="mt-1 font-serif text-lg font-bold text-[#F6F1E7]">{c.dec31BannerTitle}</h3>
+                <p className="mt-1 text-xs leading-relaxed text-[#EAE3D5]">{c.dec31BannerDesc}</p>
+              </div>
             </div>
             <Link
               href={dec31NyeHref}
-              className="inline-flex min-h-[44px] shrink-0 items-center justify-center bg-[#F6F1E7] px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#050505] transition hover:bg-[#DFBE63]"
+              className="inline-flex min-h-[44px] w-full items-center justify-center bg-[#F6F1E7] px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#050505] transition hover:bg-[#DFBE63]"
             >
               {c.dec31BannerCta}
             </Link>
           </div>
-        </div>
+        </section>
 
         {/* 1. Overview & Timeline */}
         <section id="overview" className="mt-10 space-y-6 border border-[#24242C] bg-[#0B0C10] p-6 sm:p-10">

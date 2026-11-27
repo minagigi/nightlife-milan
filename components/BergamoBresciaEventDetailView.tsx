@@ -512,26 +512,83 @@ export default function BergamoBresciaEventDetailView({
             ))}
           </div>
 
-          <div className="flex flex-wrap items-center justify-between gap-4 border border-white/15 bg-[#141311] p-5">
-            <div className="flex items-start gap-3">
-              <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-[#EAE3D5]" />
-              <div>
-                <div className="font-serif text-lg text-[#F6F1E7]">{seed.venueName}</div>
-                <div className="font-sans text-sm text-[#C2B9AA]">
-                  {fullAddr} · {highway}
+          <div
+            data-no-lightbox="true"
+            data-event-crosslink-cards="bergamo-brescia"
+            className="grid grid-cols-1 gap-4 sm:grid-cols-2"
+          >
+            <div className="flex flex-col justify-between gap-4 border border-white/15 bg-[#141311] p-5">
+              <div className="space-y-4">
+                <Link
+                  href={detail.clubPath}
+                  className="group relative block aspect-[4/5] w-full overflow-hidden border border-white/10 bg-[#050505]"
+                >
+                  <Image
+                    src={`/images/events/cards-4x5/partner-clubs/${
+                      seed.clubKey === 'setai'
+                        ? 'setai-club-bergamo'
+                        : seed.clubKey === 'capogiro'
+                          ? 'capogiro-curno-bergamo'
+                          : seed.clubKey === 'tiky'
+                            ? 'tiky-klub-seriate-bergamo'
+                            : seed.clubKey === 'zeroclub'
+                              ? 'zero-club-bergamo'
+                              : seed.clubKey === 'qiclubbing'
+                                ? 'qi-clubbing-erbusco-brescia'
+                                : 'number-one-corte-franca-brescia'
+                    }.webp`}
+                    alt={seed.venueName}
+                    fill
+                    quality={92}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
+                </Link>
+                <div className="flex items-start gap-3">
+                  <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-[#EAE3D5]" />
+                  <div>
+                    <h3 className="font-serif text-lg text-[#F6F1E7]">{seed.venueName}</h3>
+                    <p className="font-sans text-sm text-[#C2B9AA]">
+                      {fullAddr} · {highway}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="flex flex-wrap gap-3">
               <Link
                 href={detail.clubPath}
-                className="inline-flex min-h-[42px] items-center gap-2 bg-[#EAE3D5] px-4 py-2 text-xs font-extrabold uppercase tracking-wider text-[#050505] hover:bg-white"
+                className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 bg-[#EAE3D5] px-4 py-2 text-xs font-extrabold uppercase tracking-wider text-[#050505] hover:bg-white"
               >
                 {ui.openClubCta}
               </Link>
+            </div>
+
+            <div className="flex flex-col justify-between gap-4 border border-white/15 bg-[#141311] p-5">
+              <div className="space-y-4">
+                <Link
+                  href={detail.nyePath}
+                  className="group relative block aspect-[4/5] w-full overflow-hidden border border-white/10 bg-[#050505]"
+                >
+                  <Image
+                    src={`/images/events/cards-4x5/capodanno-2027-posters/${seed.nyeSlug}.webp`}
+                    alt={`${seed.venueName} · Capodanno 2027`}
+                    fill
+                    quality={92}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
+                </Link>
+                <div className="space-y-1">
+                  <p className="font-mono text-[11px] uppercase tracking-wider text-[#EAE3D5]">
+                    31/12/2026 · {seed.city} ({seed.province})
+                  </p>
+                  <h3 className="font-serif text-lg text-[#F6F1E7]">
+                    {seed.venueName} · Capodanno 2027
+                  </h3>
+                </div>
+              </div>
               <Link
                 href={detail.nyePath}
-                className="inline-flex min-h-[42px] items-center gap-2 border border-[#EAE3D5]/45 bg-[#050505] px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#F6F1E7] hover:border-[#EAE3D5]"
+                className="inline-flex min-h-[44px] w-full items-center justify-center gap-2 border border-[#EAE3D5]/45 bg-[#050505] px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#F6F1E7] hover:border-[#EAE3D5]"
               >
                 {ui.openNyeCta}
               </Link>
