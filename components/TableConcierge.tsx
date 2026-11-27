@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
+import { capodannoPath } from '@/lib/capodanno/routes';
+import { getCapodannoMasterSeo35 } from '@/lib/capodanno/capodannoMasterSeo35';
 import { localePrefix } from '@/lib/i18n/locales';
 import { getV01SiteCopy } from '@/lib/i18n/v01SiteCopy35';
 import styles from './TableConcierge.module.css';
@@ -30,6 +32,7 @@ type Props = {
 
 export default function TableConcierge({ locale, copy, surface = 'home', homeIntro }: Props) {
   const v01 = getV01SiteCopy(locale);
+  const masterSeo = getCapodannoMasterSeo35(locale);
   const lp = localePrefix(locale);
 
   return (
@@ -81,14 +84,19 @@ export default function TableConcierge({ locale, copy, surface = 'home', homeInt
                 <span aria-hidden="true">↓</span>
               </a>
             </div>
-            {homeIntro && (
-              <div className={styles.heroLinks}>
-                <a href="#stasera">{homeIntro.ctaSub} ↓</a>
-                <Link href={`${lp}/clubs`} prefetch={false}>
-                  {homeIntro.allVenues} ↗
-                </Link>
-              </div>
-            )}
+            <div className={styles.heroLinks}>
+              <Link href={capodannoPath(locale)} locale={locale} prefetch={false}>
+                {masterSeo.footerAnchor} ↗
+              </Link>
+              {homeIntro && (
+                <>
+                  <a href="#stasera">{homeIntro.ctaSub} ↓</a>
+                  <Link href={`${lp}/clubs`} locale={locale} prefetch={false}>
+                    {homeIntro.allVenues} ↗
+                  </Link>
+                </>
+              )}
+            </div>
             <p className={styles.heroNote}>
               {v01.statusLive} · {copy.disclaimer}
             </p>

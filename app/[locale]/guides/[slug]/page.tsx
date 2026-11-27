@@ -135,9 +135,10 @@ function buildDeCannibalizedGuideMetaTitle(
   rawTitle: string,
   locale: LocaleCode,
   primaryVenue?: Venue,
+  isNyeVerticalGuide = false,
 ): string {
   const cleaned = rawTitle.replace(/\u2014/g, ' - ').replace(/!/g, '.').trim();
-  if (!primaryVenue) {
+  if (!primaryVenue && !isNyeVerticalGuide) {
     return seoTitle(`${cleaned} | Nightlife Milan`);
   }
   const guidePrefix = NATIVE_GUIDE_TITLE_PREFIX_35[locale] || 'Guide';
@@ -188,7 +189,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const primaryVenue = resolvePrimaryVenueForGuide(guide.id);
   const rawTitle = getLocalizedText(guide.title, loc).replace(/\u2014/g, ' - ');
-  const title = buildDeCannibalizedGuideMetaTitle(rawTitle, loc, primaryVenue);
+  const title = buildDeCannibalizedGuideMetaTitle(
+    rawTitle,
+    loc,
+    primaryVenue,
+    NYE_VERTICAL_GUIDE_IDS.has(guide.id),
+  );
   const description = withWhatsApp(getLocalizedText(guide.excerpt, loc).replace(/\u2014/g, ' - '), loc);
 
   const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
@@ -326,7 +332,13 @@ export default async function GuidePage({ params }: Props) {
         : NYE_VERTICAL_GUIDE_IDS.has(guide.id)
           ? capodannoCategoryPath('capodanno-2027', loc)
           : undefined,
-      secondaryAnchor: nyeSlug || NYE_VERTICAL_GUIDE_IDS.has(guide.id) ? masterSeo.footerAnchor : undefined,
+      secondaryAnchor: nyeSlug
+        ? `${officialClubName} 2027`
+        : NYE_VERTICAL_GUIDE_IDS.has(guide.id)
+          ? masterSeo.footerAnchor
+          : undefined,
+      tertiaryHref: nyeSlug ? capodannoCategoryPath('capodanno-2027', loc) : undefined,
+      tertiaryAnchor: nyeSlug ? masterSeo.footerAnchor : undefined,
     };
   } else if (NYE_VERTICAL_GUIDE_IDS.has(guide.id)) {
     const masterSeo = getCapodannoMasterSeo35(loc);

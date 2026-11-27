@@ -24,6 +24,8 @@ export interface GuideCanonicalHubBanner {
   primaryAnchor: string;
   secondaryHref?: string;
   secondaryAnchor?: string;
+  tertiaryHref?: string;
+  tertiaryAnchor?: string;
 }
 
 function normalizeGuideSectionHtml(rawHtml: string): string {
@@ -222,6 +224,16 @@ export default function GuideEditorialTemplate({
                   className="inline-flex items-center gap-2 min-h-[44px] border border-[#F6F1E7]/40 text-[#F6F1E7] hover:border-[#25D366] hover:text-[#25D366] px-4 py-2.5 text-[14px] font-semibold transition-colors"
                 >
                   <span>{canonicalHubBanner.secondaryAnchor}</span>
+                  <ArrowUpRight className="w-4 h-4 shrink-0" aria-hidden="true" />
+                </Link>
+              )}
+              {canonicalHubBanner.tertiaryHref && canonicalHubBanner.tertiaryAnchor && (
+                <Link
+                  href={canonicalHubBanner.tertiaryHref}
+                  locale={locale}
+                  className="inline-flex items-center gap-2 min-h-[44px] border border-[#F6F1E7]/40 text-[#F6F1E7] hover:border-[#25D366] hover:text-[#25D366] px-4 py-2.5 text-[14px] font-semibold transition-colors"
+                >
+                  <span>{canonicalHubBanner.tertiaryAnchor}</span>
                   <ArrowUpRight className="w-4 h-4 shrink-0" aria-hidden="true" />
                 </Link>
               )}

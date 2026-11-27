@@ -4,6 +4,7 @@ import EventVenueMap from '@/components/EventVenueMap';
 import { getEventVenueCopy } from '@/lib/i18n/eventVenueCopy';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import { capodannoEventPath, capodannoNavigation, capodannoPath } from '@/lib/capodanno/routes';
+import { getCapodannoMasterSeo35 } from '@/lib/capodanno/capodannoMasterSeo35';
 import { getPaymentTerms35 } from '@/lib/capodanno/paymentTerms35';
 import {
   formatCapodannoHours35,
@@ -63,6 +64,7 @@ const SITE_URL = 'https://nightlifemilan.com';
 export default function CapodannoDetailView({ locale, event }: Props) {
   const prefix = localePrefix(locale);
   const nav = capodannoNavigation(locale);
+  const masterSeo = getCapodannoMasterSeo35(locale);
   const baseUi = getCapodannoUiCopy(locale);
   const baseScarcity = getScarcityAndChatCopy(locale);
   // Party-only events (official REPVBLIC and PERREO XL @ Gate Milano NYE rate cards):
@@ -185,7 +187,9 @@ export default function CapodannoDetailView({ locale, event }: Props) {
     description,
     startDate: event.startISO,
     endDate: event.endISO,
-    eventStatus: 'https://schema.org/EventScheduled',
+    eventStatus: isClosedForNye
+      ? 'https://schema.org/EventCancelled'
+      : 'https://schema.org/EventScheduled',
     eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
     organizer: {
       '@type': 'Organization',
@@ -248,22 +252,6 @@ export default function CapodannoDetailView({ locale, event }: Props) {
       availability: offerAvailability,
       validFrom: '2026-10-01T00:00:00+02:00',
     };
-  } else if (isUnavailableForNye) {
-    eventSchemaNode.offers = {
-      '@type': 'Offer',
-      url: schemaOfferUrl,
-      priceCurrency: 'EUR',
-      availability: 'https://schema.org/SoldOut',
-      validFrom: '2026-10-01T00:00:00+02:00',
-    };
-  } else {
-    eventSchemaNode.offers = {
-      '@type': 'Offer',
-      url: schemaOfferUrl,
-      priceCurrency: 'EUR',
-      availability: 'https://schema.org/PreOrder',
-      validFrom: '2026-10-01T00:00:00+02:00',
-    };
   }
 
   const jsonLd = {
@@ -272,8 +260,8 @@ export default function CapodannoDetailView({ locale, event }: Props) {
       {
         '@type': 'BreadcrumbList',
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}${prefix || '/'}` },
-          { '@type': 'ListItem', position: 2, name: nav.h1, item: `${SITE_URL}${capodannoPath(locale)}` },
+          { '@type': 'ListItem', position: 1, name: masterSeo.homeBreadcrumb, item: `${SITE_URL}${prefix || '/'}` },
+          { '@type': 'ListItem', position: 2, name: masterSeo.footerAnchor, item: `${SITE_URL}${capodannoPath(locale)}` },
           { '@type': 'ListItem', position: 3, name: title, item: `${SITE_URL}${canonicalPath}` },
         ],
       },
@@ -301,7 +289,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
     >
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
       />
 
       <article className="w-full">
@@ -309,10 +297,10 @@ export default function CapodannoDetailView({ locale, event }: Props) {
         <div className="bg-[#050505] pb-10 text-[#F6F1E7]">
           <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
             <nav className="mb-3 flex flex-wrap items-center gap-1.5 text-xs font-semibold text-[#C2B9AA] sm:mb-4 sm:text-[13px]">
-              <Link href={prefix || '/'} className="hover:text-[#F6F1E7]">Home</Link>
+              <Link href={prefix || '/'} className="hover:text-[#F6F1E7]">{masterSeo.homeBreadcrumb}</Link>
               <span>/</span>
               <Link href={capodannoPath(locale)} className="hover:text-[#F6F1E7]">
-                {nav.menuLabel} 2027
+                {masterSeo.footerAnchor}
               </Link>
               <span>/</span>
               <span className="text-[#F6F1E7]">{event.venueName}</span>
@@ -509,7 +497,7 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                         href="#galleria-seo-flow"
                         className="inline-flex min-h-[38px] items-center border border-[#F6F1E7]/22 bg-[#141311] px-3.5 py-1.5 text-[#F6F1E7] hover:border-[#F6F1E7]"
                       >
-                        Foto
+                        {masterSeo.tocPhotos}
                       </a>
                     </li>
                     <li className="shrink-0">

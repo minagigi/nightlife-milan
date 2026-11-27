@@ -1654,22 +1654,28 @@ for (const locale of ALL_35_LOCALES) {
 }
 
 export const LEGACY_NEW_YEARS_EVE_SLUGS_SET: ReadonlySet<string> = (() => {
-  const s = new Set<string>([
+  const baseStems = new Set<string>([
     'new-years-eve',
     'new-years-eve-milan',
     'new-years-eve-milano',
+    'milan-new-years-eve',
     'capodanno-milano-discoteche',
     'capodanno-milano',
+    'milano-capodanno',
     'capodanno',
     'nye',
     'nye-milan',
     'nye-milano',
     'nochevieja-milan',
+    'nochevieja-en-milan',
     'nochevieja-milano',
     'nouvel-an-milan',
+    'reveillon-milan',
     'silvester-mailand',
+    'mailand-silvester',
     'silvester-milano',
     'reveillon-milao',
+    'ano-novo-milao',
     'oud-en-nieuw-milaan',
     'sylwester-mediolan',
     'revelion-milano',
@@ -1685,8 +1691,16 @@ export const LEGACY_NEW_YEARS_EVE_SLUGS_SET: ReadonlySet<string> = (() => {
   for (const locale of ALL_35_LOCALES) {
     const tk = SLUG_TOKENS_35[locale];
     if (tk) {
-      s.add(sanitizeAsciiSlug(`${tk.newYearsEve}-${tk.milan}`));
+      baseStems.add(sanitizeAsciiSlug(`${tk.newYearsEve}-${tk.milan}`));
+      baseStems.add(sanitizeAsciiSlug(`${tk.milan}-${tk.newYearsEve}`));
     }
+  }
+  const s = new Set<string>();
+  for (const stem of baseStems) {
+    if (!stem) continue;
+    s.add(stem);
+    s.add(`${stem}-2026`);
+    s.add(`${stem}-2027`);
   }
   return s;
 })();
@@ -2059,6 +2073,15 @@ export function resolveLegacyOrExpiredEventRedirect(rawSlug: string, targetLocal
     const destSlug = getEventBatchSlug(batchProfile, destLocale);
     const lp = destLocale === 'en' ? '' : `/${destLocale}`;
     return `${lp}/${getLocalizedDir35('events', destLocale)}/${destSlug}`;
+  }
+
+  // 2b. Legacy/vanity NYE 2026 & 2027 hub aliases under /events/* -> deterministic 1-hop 308 to Master Hub
+  if (
+    CAPODANNO_LEGACY_SET.has(rawSlug) ||
+    CAPODANNO_LEGACY_SET.has(slug) ||
+    isLegacyNewYearsEveHubSlug(slug)
+  ) {
+    return capodannoCategoryPath('capodanno-2027', targetLocale);
   }
 
   // 3. Old Capodanno venue-category compound slugs from guideSlugs100Map

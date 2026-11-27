@@ -121,6 +121,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
               name: title,
               description: masterSeo.metaDescription,
               inLanguage: locale,
+              dateModified: '2026-11-27',
               mainEntity: { '@id': itemListId },
               mentions: OFFICIAL_21_PARTNER_VENUES.map((p) => {
                 const clubUrl = `${SITE_URL}${prefix}/${clubsDir}/${getLocalizedVenueSlug35(p.venueId, locCode)}`;
@@ -137,7 +138,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
       {
         '@type': 'BreadcrumbList',
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}${prefix || '/'}` },
+          { '@type': 'ListItem', position: 1, name: masterSeo.homeBreadcrumb, item: `${SITE_URL}${prefix || '/'}` },
           {
             '@type': 'ListItem',
             position: 2,
@@ -147,10 +148,12 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
           {
             '@type': 'ListItem',
             position: 3,
-            name: nav.menuLabel,
+            name: masterSeo.footerAnchor,
             item: `${SITE_URL}${capodannoPath(locale)}`,
           },
-          { '@type': 'ListItem', position: 4, name: title, item: `${SITE_URL}${canonicalPath}` },
+          ...(!isMasterHub
+            ? [{ '@type': 'ListItem', position: 4, name: title, item: `${SITE_URL}${canonicalPath}` }]
+            : []),
         ],
       },
       {
@@ -168,7 +171,9 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
             description: getCapodannoLocalizedEventContent(ev, locale).description,
             startDate: ev.startISO,
             endDate: ev.endISO,
-            eventStatus: 'https://schema.org/EventScheduled',
+            eventStatus: ev.closedForNye
+              ? 'https://schema.org/EventCancelled'
+              : 'https://schema.org/EventScheduled',
             eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
             url: `${SITE_URL}${capodannoEventPath(ev.slug, locale)}`,
             image: [`${SITE_URL}${ev.image}`],
@@ -194,9 +199,9 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
                 addressCountry: 'IT',
               },
             },
-            offers:
-              ev.priceFromEur > 0 || ev.category === 'piazza'
-                ? {
+            ...(ev.priceFromEur > 0 || ev.category === 'piazza'
+              ? {
+                  offers: {
                     '@type': 'Offer',
                     url: `${SITE_URL}${capodannoEventPath(ev.slug, locale)}`,
                     price: String(ev.priceFromEur),
@@ -206,22 +211,9 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
                         ? 'https://schema.org/SoldOut'
                         : 'https://schema.org/InStock',
                     validFrom: '2026-10-01T00:00:00+02:00',
-                  }
-                : ev.soldOutForNye || ev.closedForNye
-                  ? {
-                      '@type': 'Offer',
-                      url: `${SITE_URL}${capodannoEventPath(ev.slug, locale)}`,
-                      priceCurrency: 'EUR',
-                      availability: 'https://schema.org/SoldOut',
-                      validFrom: '2026-10-01T00:00:00+02:00',
-                    }
-                  : {
-                      '@type': 'Offer',
-                      url: `${SITE_URL}${capodannoEventPath(ev.slug, locale)}`,
-                      priceCurrency: 'EUR',
-                      availability: 'https://schema.org/PreOrder',
-                      validFrom: '2026-10-01T00:00:00+02:00',
-                    },
+                  },
+                }
+              : {}),
           },
         })),
       },
@@ -250,11 +242,11 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
       <section className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
         <div className="border-b border-[#F6F1E7]/14 pb-8">
           <nav className="mb-3 text-xs font-semibold text-[#C2B9AA] sm:text-[13px]" aria-label="Breadcrumb">
-            <Link href={prefix || '/'} className="hover:text-[#F6F1E7]">Home</Link>
+            <Link href={prefix || '/'} className="hover:text-[#F6F1E7]">{masterSeo.homeBreadcrumb}</Link>
             <span className="mx-2">/</span>
             <Link href={`${prefix}/events`} className="hover:text-[#F6F1E7]">{ui.eventsBreadcrumb}</Link>
             <span className="mx-2">/</span>
-            <Link href={capodannoPath(locale)} className="hover:text-[#F6F1E7]">{nav.menuLabel} 2027</Link>
+            <Link href={capodannoPath(locale)} className="hover:text-[#F6F1E7]">{masterSeo.footerAnchor}</Link>
             {pageDef.slug !== 'capodanno-2027' && (
               <>
                 <span className="mx-2">/</span>
@@ -344,14 +336,24 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
                 </a>
               </li>
               {isMasterHub && (
-                <li className="shrink-0">
-                  <a
-                    href="#locali-partner-capodanno"
-                    className="inline-flex min-h-[36px] items-center border border-[#25D366]/60 bg-[#141311] px-3 py-1.5 text-[#F6F1E7]"
-                  >
-                    {masterSeo.tocPartners}
-                  </a>
-                </li>
+                <>
+                  <li className="shrink-0">
+                    <a
+                      href="#locali-partner-capodanno"
+                      className="inline-flex min-h-[36px] items-center border border-[#25D366]/60 bg-[#141311] px-3 py-1.5 text-[#F6F1E7]"
+                    >
+                      {masterSeo.tocPartners}
+                    </a>
+                  </li>
+                  <li className="shrink-0">
+                    <a
+                      href="#guida-notte-31-dicembre"
+                      className="inline-flex min-h-[36px] items-center border border-[#EAE3D5]/45 bg-[#141311] px-3 py-1.5 text-[#F6F1E7]"
+                    >
+                      {masterSeo.tocCityGuide}
+                    </a>
+                  </li>
+                </>
               )}
               <li className="shrink-0">
                 <a
@@ -519,6 +521,43 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
             </div>
           </section>
         )}
+
+        {isMasterHub && (
+          <section
+            id="guida-notte-31-dicembre"
+            data-nye-city-guide-35
+            className="mt-14 border-t border-[#F6F1E7]/18 pt-10"
+          >
+            <p className="font-mono text-xs font-bold uppercase tracking-[0.14em] text-[#EAE3D5]">
+              {masterSeo.cityGuideEyebrow}
+            </p>
+            <h2 className="mt-1.5 font-display text-2xl font-bold uppercase text-[#F6F1E7] sm:text-4xl">
+              {masterSeo.cityGuideTitle}
+            </h2>
+            <p className="mt-2 max-w-4xl text-sm leading-relaxed text-[#C2B9AA] sm:text-base">
+              {masterSeo.cityGuideIntro}
+            </p>
+
+            <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+              {masterSeo.cityGuideCards.map((card) => (
+                <article
+                  key={card.badge}
+                  className="border border-[#F6F1E7]/16 bg-[#0B0A09] p-5"
+                >
+                  <p className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#25D366]">
+                    {card.badge}
+                  </p>
+                  <h3 className="mt-1.5 font-display text-xl font-bold text-[#F6F1E7]">
+                    {card.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[#C2B9AA]">
+                    {card.body}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
       </section>
 
       {/* CAPITOLO 02 — CARTA CALDA #F6F1E7: Tabella Confronto Prezzi & Protocollo Pagamenti (senza cassettoni) */}
@@ -527,7 +566,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
           <section id="tabella-prezzi">
             <div className="border-b-2 border-[#050505] pb-4">
               <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-[#4A453E]">
-                CONFRONTO UFFICIALE TARIFFE
+                {masterSeo.tariffComparisonEyebrow}
               </p>
               <h2 className="mt-1 font-display text-2xl font-bold uppercase text-[#050505] sm:text-3xl">
                 {ui.tableHeadingPrefix} · {shortLabel} ({events.length})
