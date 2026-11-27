@@ -50,14 +50,8 @@ const MEGA_FEATURED_CLUBS = [
   { name: 'Hollywood Milano', zone: 'Corso Como 15', slug: 'hollywood-club-milano' },
   { name: '11Clubroom', zone: 'Corso Como · Via Tocqueville 11', slug: '11-clubroom' },
   { name: 'Il Gattopardo', zone: 'Sempione · Ex Chiesa', slug: 'gattopardo-milano' },
-  { name: 'JustMe Garda Lake', zone: 'Lago di Garda · Lonato (BS)', slug: 'justme-garda-lake' },
+  { name: 'JustMe Garda Lake', zone: 'Lago di Garda · Lonato del Garda', slug: 'justme-garda-lake' },
   { name: 'Terrazza Duomo 21', zone: 'Piazza del Duomo 21', slug: 'terrazza-21' },
-  { name: 'Setai Club Bergamo', zone: 'Orio al Serio (BG) · A4 / BGY', slug: 'setai-club-bergamo' },
-  { name: 'Capogiro Bergamo', zone: 'Curno (BG) · Cena Show & 25+', slug: 'capogiro-curno-bergamo' },
-  { name: 'Tiky Klub', zone: 'Seriate (BG) · House & Tech-House', slug: 'tiky-klub-seriate-bergamo' },
-  { name: 'Zero Club Bergamo', zone: 'Bergamo Centro · Doppia Sala', slug: 'zero-club-bergamo' },
-  { name: 'Qi Clubbing', zone: 'Erbusco · Franciacorta (BS)', slug: 'qi-clubbing-erbusco-brescia' },
-  { name: 'Number One', zone: 'Corte Franca · Franciacorta (BS)', slug: 'number-one-corte-franca-brescia' },
 ] as const;
 
 const MOBILE_MENU_COPY = {
@@ -354,11 +348,6 @@ export default function Header({
     `${localePrefix}/events/this-week`,
     currentLocale as LocaleCode,
   );
-  const bgBsHubHref = localizeInternalHref(
-    `${localePrefix}/bergamo-brescia`,
-    currentLocale as LocaleCode,
-  );
-  const bgBsNavLabel = currentLocale === 'it' ? 'Bergamo & Brescia (6 Club)' : 'Bergamo & Brescia';
   const v01 = getV01SiteCopy(currentLocale);
   const weeklyMobileItem = {
     id: 'events' as const,
@@ -368,17 +357,8 @@ export default function Header({
     match: weeklyHref,
     gold: false,
   };
-  const bgBsMobileItem = {
-    id: 'clubs' as const,
-    label: bgBsNavLabel,
-    name: bgBsNavLabel,
-    href: bgBsHubHref,
-    match: bgBsHubHref,
-    gold: true,
-  };
   const mobileExtraLinks = [
     weeklyMobileItem,
-    bgBsMobileItem,
     ...resolveSeasonalHeaderLinks(menu.mobileExtra, currentLocale).filter(
       (item) => item.href !== halloweenHref && item.href !== capodannoHref && item.id !== 'mfw',
     ),
@@ -641,11 +621,10 @@ export default function Header({
             data-no-lightbox="true"
             className="nlm-mega-panel hidden border-t border-[#F6F1E7]/14 border-b border-b-[#EAE3D5]/32 bg-[#0B0A09] text-[#F6F1E7] xl:block"
           >
-            <div className="mx-auto grid max-w-[1440px] grid-cols-5 gap-4 px-8 py-5">
+            <div className="mx-auto grid max-w-[1440px] grid-cols-4 gap-4 px-8 py-5">
               {[
                 { label: t.guides, href: guidesHref },
                 { label: t.sanSiro, href: sanSiroHref },
-                { label: bgBsNavLabel, href: bgBsHubHref },
                 { label: t.vipTables, href: vipHref },
                 { label: t.zones, href: zonesHref },
               ].map((item) => (

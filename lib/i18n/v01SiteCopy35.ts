@@ -143,7 +143,7 @@ const CORE_V01_COPY: Record<string, V01SiteCopy> = {
     footerConcerts: 'Afterparty Concerti San Siro, Ippodromo & Forum',
     footerNye: 'Capodanno Milano 2027 · Cenoni & Club',
     footerAirports: 'Rho Fiera, Forum Assago, Linate & Malpensa VIP',
-    footerRegions: 'Weekend VIP da Monza, Como, Bergamo, Brescia & Lugano',
+    footerRegions: 'Weekend VIP da Monza, Como, Varese & Lugano',
   },
   en: {
     statusLive: 'Milan Nightlife Concierge Active 7/7',
@@ -236,7 +236,7 @@ const CORE_V01_COPY: Record<string, V01SiteCopy> = {
     footerConcerts: 'Concert Afterparties (San Siro, Ippodromo & Forum)',
     footerNye: 'New Year Eve Milan 2027 · Gala Dinners & Clubs',
     footerAirports: 'Rho Fiera, Forum Assago, Linate & Malpensa Nightlife',
-    footerRegions: 'Monza, Como, Bergamo, Brescia & Ticino VIP Guide',
+    footerRegions: 'Monza, Como, Varese & Ticino VIP Guide',
   },
   es: {
     statusLive: 'Concierge Nocturno de Milán 7/7',
@@ -309,7 +309,7 @@ const CORE_V01_COPY: Record<string, V01SiteCopy> = {
     footerConcerts: 'Afterparties Conciertos San Siro, Ippodromo y Forum',
     footerNye: 'Fin de Año Milán 2027 · Cenas y Clubes',
     footerAirports: 'Rho Fiera, Forum Assago, Linate y Malpensa VIP',
-    footerRegions: 'Guía VIP Monza, Como, Bérgamo, Brescia y Tesino',
+    footerRegions: 'Guía VIP Monza, Como, Varese y Tesino',
   },
   fr: {
     statusLive: 'Conciergerie Nuit Milan Active 7j/7',
@@ -382,7 +382,7 @@ const CORE_V01_COPY: Record<string, V01SiteCopy> = {
     footerConcerts: 'Afterparties Concerts San Siro, Ippodromo & Forum',
     footerNye: 'Nouvel An Milan 2027 · Dîners & Clubs',
     footerAirports: 'Rho Fiera, Forum Assago, Linate & Malpensa VIP',
-    footerRegions: 'Guide VIP Monza, Côme, Bergame, Brescia & Tessin',
+    footerRegions: 'Guide VIP Monza, Côme, Varèse & Tessin',
   },
   de: {
     statusLive: 'Mailand Nightlife Concierge 7/7',
@@ -455,7 +455,7 @@ const CORE_V01_COPY: Record<string, V01SiteCopy> = {
     footerConcerts: 'Konzert-Afterpartys San Siro, Ippodromo & Forum',
     footerNye: 'Silvester Mailand 2027 · Gala-Dinner & Clubs',
     footerAirports: 'Rho Fiera, Forum Assago, Linate & Malpensa VIP',
-    footerRegions: 'Wochenend-VIP-Guide Monza, Como, Bergamo & Tessin',
+    footerRegions: 'Wochenend-VIP-Guide Monza, Como, Varese & Tessin',
   },
   pt: {
     statusLive: 'Concierge Noturno Milão Ativo 7/7',
@@ -528,7 +528,7 @@ const CORE_V01_COPY: Record<string, V01SiteCopy> = {
     footerConcerts: 'Afterparties Shows San Siro, Ippodromo e Forum',
     footerNye: 'Réveillon Milão 2027 · Jantares e Clubes',
     footerAirports: 'Rho Fiera, Forum Assago, Linate e Malpensa VIP',
-    footerRegions: 'Guia VIP Monza, Como, Bérgamo, Brescia e Ticino',
+    footerRegions: 'Guia VIP Monza, Como, Varese e Ticino',
   },
 };
 
@@ -608,7 +608,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'Concert Afterparties San Siro, Ippodromo & Forum',
     footerNye: 'Oud en Nieuw Milaan 2027 · Galadiners & Clubs',
     footerAirports: 'Rho Fiera, Forum Assago, Linate & Malpensa VIP',
-    footerRegions: 'Weekend VIP Gids Monza, Como, Bergamo, Brescia & Lugano',
+    footerRegions: 'Weekend VIP Gids Monza, Como, Varese & Lugano',
   },
   ru: {
     statusLive: 'Консьерж Ночного Милана 7/7',
@@ -681,7 +681,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'Афтепати после концертов Сан-Сиро, Ипподромо и Форум',
     footerNye: 'Новый год в Милане 2027 · Ужины и клубы',
     footerAirports: 'Rho Fiera, Forum Assago, Linate и Malpensa VIP',
-    footerRegions: 'VIP-гид для гостей из Монцы, Комо, Бергамо и Лугано',
+    footerRegions: 'VIP-гид для гостей из Монцы, Комо, Варезе и Лугано',
   },
   tr: {
     statusLive: 'Milano Gece Hayatı Concierge 7/7 Aktif',
@@ -754,7 +754,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'Konser Afterparty Rehberi San Siro, Ippodromo & Forum',
     footerNye: 'Milano Yılbaşı 2027 · Gala Yemekleri ve Kulüpler',
     footerAirports: 'Rho Fiera, Forum Assago, Linate & Malpensa VIP',
-    footerRegions: 'Monza, Como, Bergamo, Brescia & Lugano VIP Rehberi',
+    footerRegions: 'Monza, Como, Varese & Lugano VIP Rehberi',
   },
   zh: {
     statusLive: '米兰夜生活官方礼宾 7/7 在线',
@@ -827,7 +827,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: '演唱会赛后派对（圣西罗、跑马场与 Forum）',
     footerNye: '2027 米兰跨年夜 · 晚宴与夜店专场',
     footerAirports: 'Rho 会展、Assago 体育馆与两大机场 VIP 出行',
-    footerRegions: '蒙扎、科莫、贝加莫与卢加诺周末夜生活指南',
+    footerRegions: '蒙扎、科莫、瓦雷泽与卢加诺周末夜生活指南',
   },
   ar: {
     statusLive: 'خدمة كونسيرج ميلانو الليلية 7/7',
@@ -900,7 +900,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'حفلات ما بعد الكونسرت في سان سيرو وإيبودرومو وفوروم',
     footerNye: 'رأس السنة ميلانو 2027 · عشاء ونوادي',
     footerAirports: 'رو فييرا وأساغو ومطارات ليناتي ومالبينسا VIP',
-    footerRegions: 'دليل السهر للزوار من مونزا وكومو وبيرغامو ولوغانو',
+    footerRegions: 'دليل السهر للزوار من مونزا وكومو وفاريزي ولوغانو',
   },
   bg: {
     statusLive: 'Нощен консиерж Милано 7/7',
@@ -973,7 +973,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'Концертни афтърпартита Сан Сиро, Иподромо и Форум',
     footerNye: 'Нова година Милано 2027 · Вечери и клубове',
     footerAirports: 'Rho Fiera, Forum Assago, Linate и Malpensa VIP',
-    footerRegions: 'Уикенд VIP гид Монца, Комо, Бергамо и Лугано',
+    footerRegions: 'Уикенд VIP гид Монца, Комо, Варезе и Лугано',
   },
   hr: {
     statusLive: 'Milano Nightlife Concierge 7/7 Aktivan',
@@ -1046,7 +1046,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'Koncertni afterpartyji San Siro, Ippodromo i Forum',
     footerNye: 'Nova godina Milano 2027 · Večere i klubovi',
     footerAirports: 'Rho Fiera, Forum Assago, Linate i Malpensa VIP',
-    footerRegions: 'Vikend VIP vodič Monza, Como, Bergamo i Lugano',
+    footerRegions: 'Vikend VIP vodič Monza, Como, Varese i Lugano',
   },
   cs: {
     statusLive: 'Milán Nightlife Concierge 7/7 Aktivní',
@@ -1119,7 +1119,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'Koncertní afterparty San Siro, Ippodromo a Forum',
     footerNye: 'Silvestr Milán 2027 · Večeře a kluby',
     footerAirports: 'Rho Fiera, Forum Assago, Linate a Malpensa VIP',
-    footerRegions: 'Víkendový VIP průvodce Monza, Como, Bergamo a Lugano',
+    footerRegions: 'Víkendový VIP průvodce Monza, Como, Varese a Lugano',
   },
   da: {
     statusLive: 'Milano Nightlife Concierge 7/7 Aktiv',
@@ -1192,7 +1192,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'Koncert-afterpartys San Siro, Ippodromo & Forum',
     footerNye: 'Nytår Milano 2027 · Middage & Klubber',
     footerAirports: 'Rho Fiera, Forum Assago, Linate & Malpensa VIP',
-    footerRegions: 'Weekend VIP-guide Monza, Como, Bergamo & Lugano',
+    footerRegions: 'Weekend VIP-guide Monza, Como, Varese & Lugano',
   },
   et: {
     statusLive: 'Milano Ööelu Concierge 7/7 Aktiivne',
@@ -1265,7 +1265,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'Kontsertide järelpeod San Siro, Ippodromo ja Forum',
     footerNye: 'Milano aastavahetus 2027 · Õhtusöögid ja klubid',
     footerAirports: 'Rho Fiera, Forum Assago, Linate ja Malpensa VIP',
-    footerRegions: 'Nädalavahetuse VIP-juht Monza, Como, Bergamo ja Lugano',
+    footerRegions: 'Nädalavahetuse VIP-juht Monza, Como, Varese ja Lugano',
   },
   fi: {
     statusLive: 'Milano Nightlife Concierge 7/7 Aktiivinen',
@@ -1338,7 +1338,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'Konserttijatkot San Siro, Ippodromo & Forum',
     footerNye: 'Uusivuosi Milano 2027 · Illalliset & Klubit',
     footerAirports: 'Rho Fiera, Forum Assago, Linate & Malpensa VIP',
-    footerRegions: 'Viikonlopun VIP-opas Monza, Como, Bergamo & Lugano',
+    footerRegions: 'Viikonlopun VIP-opas Monza, Como, Varese & Lugano',
   },
   el: {
     statusLive: 'Concierge Νυχτερινής Ζωής Μιλάνο 7/7',
@@ -1411,7 +1411,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'Afterparty Συναυλιών San Siro, Ippodromo & Forum',
     footerNye: 'Πρωτοχρονιά Μιλάνο 2027 · Δείπνα & Κλαμπ',
     footerAirports: 'Rho Fiera, Forum Assago, Linate & Malpensa VIP',
-    footerRegions: 'VIP Οδηγός Σαββατοκύριακου Monza, Como, Bergamo & Lugano',
+    footerRegions: 'VIP Οδηγός Σαββατοκύριακου Monza, Como, Varese & Lugano',
   },
   hu: {
     statusLive: 'Milánó Nightlife Concierge 7/7 Aktív',
@@ -1484,7 +1484,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'Koncert afterpartyk San Siro, Ippodromo és Forum',
     footerNye: 'Szilveszter Milánó 2027 · Vacsorák és Klubok',
     footerAirports: 'Rho Fiera, Forum Assago, Linate és Malpensa VIP',
-    footerRegions: 'Hétvégi VIP kalauz Monza, Como, Bergamo és Lugano',
+    footerRegions: 'Hétvégi VIP kalauz Monza, Como, Varese és Lugano',
   },
   ga: {
     statusLive: 'Concierge Oíche Milano Gníomhach 7/7',
@@ -1557,7 +1557,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'Cóisirí Ceolchoirme San Siro, Ippodromo & Forum',
     footerNye: 'Oíche Chinn Bliana Milano 2027 · Dinnéir & Clubanna',
     footerAirports: 'Rho Fiera, Forum Assago, Linate & Malpensa VIP',
-    footerRegions: 'Treoir VIP Deireadh Seachtaine Monza, Como, Bergamo & Lugano',
+    footerRegions: 'Treoir VIP Deireadh Seachtaine Monza, Como, Varese & Lugano',
   },
   lv: {
     statusLive: 'Milānas Naktsdzīves Concierge 7/7 Aktīvs',
@@ -1630,7 +1630,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'Koncertu afterpārtiji San Siro, Ippodromo un Forum',
     footerNye: 'Jaunais gads Milānā 2027 · Vakariņas un klubi',
     footerAirports: 'Rho Fiera, Forum Assago, Linate un Malpensa VIP',
-    footerRegions: 'Nedēļas nogales VIP ceļvedis Monza, Como, Bergamo un Lugano',
+    footerRegions: 'Nedēļas nogales VIP ceļvedis Monza, Como, Varese un Lugano',
   },
   lt: {
     statusLive: 'Milano Naktinis Concierge 7/7 Veikia',
@@ -1703,7 +1703,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'Koncertų afterparty San Siro, Ippodromo ir Forum',
     footerNye: 'Naujieji metai Milane 2027 · Vakarienės ir klubai',
     footerAirports: 'Rho Fiera, Forum Assago, Linate ir Malpensa VIP',
-    footerRegions: 'Savaitgalio VIP gidas Monza, Como, Bergamo ir Lugano',
+    footerRegions: 'Savaitgalio VIP gidas Monza, Como, Varese ir Lugano',
   },
   mt: {
     statusLive: 'Concierge ta’ Billejl Milan Attiv 7/7',
@@ -1776,7 +1776,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'Afterparties tal-Kunċerti San Siro, Ippodromo & Forum',
     footerNye: 'Ewwel tas-Sena Milan 2027 · Ikliet u Klabbs',
     footerAirports: 'Rho Fiera, Forum Assago, Linate & Malpensa VIP',
-    footerRegions: 'Gwida VIP Monza, Como, Bergamo, Brescia u Lugano',
+    footerRegions: 'Gwida VIP Monza, Como, Varese u Lugano',
   },
   pl: {
     statusLive: 'Concierge Nocny Mediolan 7/7 Aktywny',
@@ -1849,7 +1849,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'Afterparty po koncertach San Siro, Ippodromo i Forum',
     footerNye: 'Sylwester Mediolan 2027 · Kolacje i Kluby',
     footerAirports: 'Rho Fiera, Forum Assago, Linate i Malpensa VIP',
-    footerRegions: 'Przewodnik VIP Monza, Como, Bergamo, Brescia i Lugano',
+    footerRegions: 'Przewodnik VIP Monza, Como, Varese i Lugano',
   },
   ro: {
     statusLive: 'Concierge Viață de Noapte Milano 7/7',
@@ -1922,7 +1922,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'Afterparty Concerte San Siro, Ippodromo & Forum',
     footerNye: 'Revelion Milano 2027 · Cine & Cluburi',
     footerAirports: 'Rho Fiera, Forum Assago, Linate & Malpensa VIP',
-    footerRegions: 'Ghid VIP Weekend Monza, Como, Bergamo, Brescia & Lugano',
+    footerRegions: 'Ghid VIP Weekend Monza, Como, Varese & Lugano',
   },
   sk: {
     statusLive: 'Miláno Nightlife Concierge 7/7 Aktívny',
@@ -1995,7 +1995,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'Koncertné afterparty San Siro, Ippodromo a Forum',
     footerNye: 'Silvester Miláno 2027 · Večere a kluby',
     footerAirports: 'Rho Fiera, Forum Assago, Linate a Malpensa VIP',
-    footerRegions: 'Víkendový VIP sprievodca Monza, Como, Bergamo a Lugano',
+    footerRegions: 'Víkendový VIP sprievodca Monza, Como, Varese a Lugano',
   },
   sl: {
     statusLive: 'Milano Nightlife Concierge 7/7 Aktiven',
@@ -2068,7 +2068,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'Koncertni afterpartyji San Siro, Ippodromo in Forum',
     footerNye: 'Silvestrovo Milano 2027 · Večerje in klubi',
     footerAirports: 'Rho Fiera, Forum Assago, Linate in Malpensa VIP',
-    footerRegions: 'Vikend VIP vodnik Monza, Como, Bergamo in Lugano',
+    footerRegions: 'Vikend VIP vodnik Monza, Como, Varese in Lugano',
   },
   sv: {
     statusLive: 'Milano Nightlife Concierge 7/7 Aktiv',
@@ -2141,7 +2141,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'Konsert-afterpartyn San Siro, Ippodromo & Forum',
     footerNye: 'Nyår Milano 2027 · Middagar & Klubbar',
     footerAirports: 'Rho Fiera, Forum Assago, Linate & Malpensa VIP',
-    footerRegions: 'Helg-VIP-guide Monza, Como, Bergamo & Lugano',
+    footerRegions: 'Helg-VIP-guide Monza, Como, Varese & Lugano',
   },
   no: {
     statusLive: 'Milano Nightlife Concierge 7/7 Aktiv',
@@ -2214,7 +2214,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'Konsert-afterpartys San Siro, Ippodromo & Forum',
     footerNye: 'Nyttår Milano 2027 · Middager & Klubber',
     footerAirports: 'Rho Fiera, Forum Assago, Linate & Malpensa VIP',
-    footerRegions: 'Helge-VIP-guide Monza, Como, Bergamo & Lugano',
+    footerRegions: 'Helge-VIP-guide Monza, Como, Varese & Lugano',
   },
   is: {
     statusLive: 'Mílanó Næturlíf Concierge Virkt 7/7',
@@ -2287,7 +2287,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'Tónleika-eftirpartý San Siro, Ippodromo & Forum',
     footerNye: 'Áramót Mílanó 2027 · Kvöldverðir & Klúbbar',
     footerAirports: 'Rho Fiera, Forum Assago, Linate & Malpensa VIP',
-    footerRegions: 'Helgar-VIP leiðarvísir Monza, Como, Bergamo & Lugano',
+    footerRegions: 'Helgar-VIP leiðarvísir Monza, Como, Varese & Lugano',
   },
   uk: {
     statusLive: 'Консьєрж Нічного Мілана 7/7 Активний',
@@ -2360,7 +2360,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'Концертні афтепаті Сан-Сіро, Іпподромо та Форум',
     footerNye: 'Новий рік Мілан 2027 · Вечері та клуби',
     footerAirports: 'Rho Fiera, Forum Assago, Linate та Malpensa VIP',
-    footerRegions: 'VIP-гід вихідного дня Монца, Комо, Бергамо та Лугано',
+    footerRegions: 'VIP-гід вихідного дня Монца, Комо, Варезе та Лугано',
   },
   sq: {
     statusLive: 'Concierge i Jetës së Natës Milano 7/7',
@@ -2433,7 +2433,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'Afterparty Koncertesh San Siro, Ippodromo & Forum',
     footerNye: 'Viti i Ri Milano 2027 · Darka & Klube',
     footerAirports: 'Rho Fiera, Forum Assago, Linate & Malpensa VIP',
-    footerRegions: 'Guida VIP e Fundjavës Monza, Como, Bergamo & Lugano',
+    footerRegions: 'Guida VIP e Fundjavës Monza, Como, Varese & Lugano',
   },
   sr: {
     statusLive: 'Milano Nightlife Concierge 7/7 Aktivan',
@@ -2506,7 +2506,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'Koncertni afterpartiji San Siro, Ippodromo i Forum',
     footerNye: 'Nova godina Milano 2027 · Večere i klubovi',
     footerAirports: 'Rho Fiera, Forum Assago, Linate i Malpensa VIP',
-    footerRegions: 'Vikend VIP vodič Monza, Como, Bergamo i Lugano',
+    footerRegions: 'Vikend VIP vodič Monza, Como, Varese i Lugano',
   },
   bs: {
     statusLive: 'Milano Nightlife Concierge 7/7 Aktivan',
@@ -2579,7 +2579,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'Koncertni afterpartiji San Siro, Ippodromo i Forum',
     footerNye: 'Nova godina Milano 2027 · Večere i klubovi',
     footerAirports: 'Rho Fiera, Forum Assago, Linate i Malpensa VIP',
-    footerRegions: 'Vikend VIP vodič Monza, Como, Bergamo i Lugano',
+    footerRegions: 'Vikend VIP vodič Monza, Como, Varese i Lugano',
   },
   mk: {
     statusLive: 'Милано Ноќен Консиерж 7/7 Активен',
@@ -2652,7 +2652,7 @@ const EXTRA_V01_COPY: Record<ExtraLocaleKey, V01SiteCopy> = {
     footerConcerts: 'Концертни афтерпарти Сан Сиро, Иподромо и Форум',
     footerNye: 'Нова година Милано 2027 · Вечери и клубови',
     footerAirports: 'Rho Fiera, Forum Assago, Linate и Malpensa VIP',
-    footerRegions: 'Викенд VIP водич Монца, Комо, Бергамо и Лугано',
+    footerRegions: 'Викенд VIP водич Монца, Комо, Варезе и Лугано',
   },
 };
 

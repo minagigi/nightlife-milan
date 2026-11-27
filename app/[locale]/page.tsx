@@ -41,22 +41,8 @@ import { venueLocationLabel } from '@/lib/venueLocation';
 import { selectPriorityVenueEvents } from '@/lib/priorityVenueEvents';
 import { getLocalizedText } from '@/lib/seo';
 import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
-import { getLocalizedSeoPagePath35, getLocalizedVenueSlug35 } from '@/lib/i18n/localizedSlugs35';
+import { getLocalizedVenueSlug35 } from '@/lib/i18n/localizedSlugs35';
 import { OFFICIAL_SERP_NAME_BY_ID } from '@/lib/clubSeoMeta35';
-import BergamoBresciaHomeSection, {
-  type BergamoBresciaHomeClubItem,
-} from '@/components/BergamoBresciaHomeSection';
-import {
-  getBergamoBresciaActiveNightCards,
-  type BergamoBresciaCardViewModel,
-} from '@/lib/bergamo-brescia/activeNights35';
-import {
-  bergamoBresciaVenueBatch,
-  BG_BS_CITY_META_BY_ID,
-  type BergamoBresciaVenueId,
-} from '@/lib/bergamo-brescia/clubsSeed';
-import { getBergamoBresciaHomeLabels35 } from '@/lib/bergamo-brescia/hubCopy35';
-import { BERGAMO_BRESCIA_NYE_SLUGS } from '@/lib/capodanno/bergamoBresciaNye35';
 
 // Cache senza scadenza. Gli aggiornamenti avvengono solo al deploy o tramite
 // revalidatePath dopo una modifica editoriale esplicita.
@@ -370,7 +356,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     const slug = getLocalizedVenueSlug35(venue.id, (locale as LocaleCode) || 'en');
     const locLabel =
       venue.id === 'v-justme-garda'
-        ? 'Lonato del Garda (Lago di Garda, BS)'
+        ? 'Lonato del Garda (Lago di Garda)'
         : venueLocationLabel(venue);
     const zone = venue.address?.streetAddress
       ? `${venue.address.streetAddress} · ${locLabel}`
@@ -423,72 +409,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     });
 
   const waLink = getConciergeBookingUrl(locale, undefined, lp || '/');
-  const bgBsHubHref = `${lp}${getLocalizedSeoPagePath35('/bergamo-brescia', (locale as LocaleCode) || 'en')}`;
-  const bgBsWaHref = getConciergeBookingUrl(locale, 'Bergamo & Brescia · Tavoli VIP & Capodanno 2027', lp || '/');
-  const bgBsLabels = getBergamoBresciaHomeLabels35(locale);
-  const bgBsClubKeyMap: Record<BergamoBresciaVenueId, BergamoBresciaCardViewModel['clubKey']> = {
-    'v-setai-bergamo': 'setai',
-    'v-capogiro-bergamo': 'capogiro',
-    'v-tiky-klub-bergamo': 'tiky',
-    'v-zero-club-bergamo': 'zeroclub',
-    'v-qi-clubbing-brescia': 'qiclubbing',
-    'v-number-one-brescia': 'numberone',
-  };
-  const bgBsNyeSlugByVid: Record<BergamoBresciaVenueId, (typeof BERGAMO_BRESCIA_NYE_SLUGS)[number]> = {
-    'v-setai-bergamo': 'capodanno-setai-club-bergamo',
-    'v-capogiro-bergamo': 'capodanno-capogiro-curno-bergamo',
-    'v-tiky-klub-bergamo': 'capodanno-tiky-klub-seriate-bergamo',
-    'v-zero-club-bergamo': 'capodanno-zero-club-bergamo',
-    'v-qi-clubbing-brescia': 'capodanno-qi-clubbing-brescia',
-    'v-number-one-brescia': 'capodanno-number-one-brescia',
-  };
-  const bgBsClubs: BergamoBresciaHomeClubItem[] = bergamoBresciaVenueBatch.map((v) => {
-    const vid = v.id as BergamoBresciaVenueId;
-    const meta = BG_BS_CITY_META_BY_ID[vid];
-    const slug = getLocalizedVenueSlug35(vid, (locale as LocaleCode) || 'en');
-    const name = getLocalizedText(v.localizedContent.name, locale);
-    const clubHref = `${lp}/${clubsDir}/${slug}`;
-    const nyeSlug = bgBsNyeSlugByVid[vid];
-    return {
-      id: vid,
-      clubKey: bgBsClubKeyMap[vid],
-      name,
-      city: v.address.addressLocality,
-      province: meta.province,
-      zoneLabel: meta.shortZoneLabel,
-      genres: v.tags?.join(' · ') || 'House · Tech-House · Commercial',
-      ageRange: v.ageRange || '18+',
-      image: `/images/events/cards-4x5/partner-clubs/${v.slugs.en}.webp`,
-      href: clubHref,
-      nyeHref: capodannoEventPath(nyeSlug, locale),
-      waHref: getConciergeBookingUrl(locale, `${name} (${v.address.addressLocality})`, lp || '/'),
-    };
-  });
-  const bgBsNyeCards: BergamoBresciaCardViewModel[] = bergamoBresciaVenueBatch.map((v) => {
-    const vid = v.id as BergamoBresciaVenueId;
-    const meta = BG_BS_CITY_META_BY_ID[vid];
-    const nyeSlug = bgBsNyeSlugByVid[vid];
-    const ev = getCapodannoEventBySlug(nyeSlug);
-    const locEv = ev ? getCapodannoLocalizedEventContent(ev, locale) : null;
-    const href = capodannoEventPath(nyeSlug, locale);
-    const hoursStr = ev?.hours || '20:30 – 05:00';
-    return {
-      id: nyeSlug,
-      clubKey: bgBsClubKeyMap[vid],
-      province: meta.province,
-      city: v.address.addressLocality,
-      venueName: ev?.venueName || v.localizedContent.name.en,
-      kind: 'nye',
-      title: locEv?.title || ev?.titleEn || nyeSlug,
-      whenLabel: locale === 'it' ? `31 Dic 2026 · ${hoursStr}` : `Dec 31, 2026 · ${hoursStr}`,
-      genresLabel: locEv?.musicAndFormat || (v.tags?.join(' · ') ?? 'NYE 2027 Gala'),
-      posterSrc: `/images/events/capodanno-2027-posters/${nyeSlug}.webp`,
-      href,
-      waHref: getConciergeBookingUrl(locale, `Capodanno 2027 · ${v.localizedContent.name.en}`, lp || '/'),
-      endISO: '2027-01-01T06:00:00+01:00',
-    };
-  });
-  const bgBsActiveNightCards = getBergamoBresciaActiveNightCards(locale, initialNow);
+  void waLink;
   const formerHeroCopy = getHeroCopy(locale);
   const uiLabels = (() => {
     switch (locale) {
@@ -672,17 +593,6 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         </section>
 
         <EditorialPageSections locale={locale as LocaleCode} path={localePrefix(locale) || '/'} />
-
-        {/* ── 6. Sezione Dedicata Bergamo & Brescia in Fondo alla Home (6 Club · 6 Capodanno 2027 · 21 Serate Attive) ── */}
-        <BergamoBresciaHomeSection
-          hubHref={bgBsHubHref}
-          waHubHref={bgBsWaHref}
-          initialNow={initialNow.toISOString()}
-          clubs={bgBsClubs}
-          nyeCards={bgBsNyeCards}
-          activeNightCards={bgBsActiveNightCards}
-          labels={bgBsLabels}
-        />
       </main>
     </>
   );
