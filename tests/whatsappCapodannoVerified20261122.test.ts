@@ -37,11 +37,11 @@ test('WhatsApp-verified NYE 2027 venues (TOM, Mood Live, Coco Beach, Carroponte,
   assert.equal(tom.priceFromEur, 30);
   assert.equal(getVenueIdByEventSlug(tom.slug), null);
 
-  // Mood Live / Garden Club is non-partner -> €65 Royal Buffet SKU
+  // Mood Live / Garden Club is non-partner -> €30 after-dinner entry + €65 Royal Buffet SKU
   const mood = getCapodannoEventBySlug('capodanno-mood-live-milano');
   assert.ok(mood);
   assert.equal(mood.partner, false);
-  assert.equal(mood.priceFromEur, 65);
+  assert.equal(mood.priceFromEur, 30);
   assert.equal(getVenueIdByEventSlug(mood.slug), 'mood-live-garden');
   assert.ok(getSkusForVenue('mood-live-garden').some((s) => s.id === 'mood-live-royal-buffet-65' && s.basePriceCents === 6500));
 

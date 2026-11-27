@@ -631,7 +631,7 @@ export const CAPODANNO_MASTER_SEO_35: Readonly<Record<LocaleCode, CapodannoMaste
   },
   mt: {
     primaryKeyword: "Lejlet l-Ewwel tas-Sena Milan",
-    metaTitle: "Ewwel tas-Sena Milan 2026/2027: Klabbs, Ikla u Imwejjed VIP",
+    metaTitle: "Lejlet l-Ewwel tas-Sena Milan 2027: Klabbs, Ikla u VIP",
     metaDescription: "Lejlet l-Ewwel tas-Sena Milan 2026/2027 (31/12): 108 festa uffiċjali (0€-380€) f’Duomo, Just Me, Pineta, Voya u 55. WhatsApp +39 351 912 7047.",
     h1: "Lejlet l-Ewwel tas-Sena Milan 2026/2027: Klabbs, Ikliet tal-31 ta’ Diċembru, Rooftops u Imwejjed VIP",
     footerAnchor: "Lejlet l-Ewwel tas-Sena Milan 2026/2027",
@@ -928,7 +928,7 @@ export const CAPODANNO_MASTER_SEO_35: Readonly<Record<LocaleCode, CapodannoMaste
   },
   bs: {
     primaryKeyword: "Doček Nove godine u Milanu",
-    metaTitle: "Doček Nove godine Milano 2026/2027: klubovi, večera i VIP",
+    metaTitle: "Doček Nove godine u Milanu 2027: klubovi, večera i VIP",
     metaDescription: "Doček Nove godine u Milanu 2026/2027 (31.12.): 108 zvaničnih zabava (0€-380€) - Duomo, Just Me, Pineta, Voya i 55. WhatsApp +39 351 912 7047.",
     h1: "Doček Nove godine u Milanu 2026/2027: noćni klubovi, gala večere 31. decembra, rooftopovi i VIP stolovi",
     footerAnchor: "Doček Nove godine u Milanu 2026/2027",

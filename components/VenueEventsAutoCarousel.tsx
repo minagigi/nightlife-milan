@@ -192,7 +192,7 @@ export default function VenueEventsAutoCarousel({
           className={
             viewMode === 'carousel'
               ? 'flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-thin'
-              : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5'
+              : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'
           }
         >
           {activeItems.map((ev) => (
@@ -210,7 +210,7 @@ export default function VenueEventsAutoCarousel({
                     alt={`${ev.title} - ${venueName}`}
                     fill
                     sizes="(max-width: 768px) 90vw, 350px"
-                    quality={85}
+                    quality={92}
                     className="object-cover"
                   />
                   <span className="absolute top-3 left-3 bg-[#050505]/92 border border-[#F6F1E7]/25 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-[#EAE3D5]">

@@ -17,6 +17,7 @@ import { mockGuides } from '@/lib/data';
 import { getLocalizedText } from '@/lib/seo';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
+import { getGuideCardPhoto4x5 } from '@/lib/siteCardAssets4x5';
 
 export const revalidate = 3600;
 
@@ -814,26 +815,40 @@ export default async function GuidesPage({
               {section.title}
             </h2>
             <p className="text-sm text-white/60 max-w-3xl mb-6">{section.desc}</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
-              {section.items.map((guide) => {
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {section.items.map((guide, gIdx) => {
                 const guideSlug = getLocalizedGuideSlug35(guide, loc);
                 const guideTitle = cleanStr(getLocalizedText(guide.title, loc));
+                const guideThumb = getGuideCardPhoto4x5(guide.id, gIdx);
                 return (
                   <Link
                     key={guide.id}
                     href={`${localePrefix}/${guidesDir}/${guideSlug}`}
                     locale={loc}
-                    className="group flex items-center justify-between gap-3 p-4 rounded-xl border border-white/10 bg-white/[0.02] hover:border-champagne/50 hover:bg-champagne/[0.04] transition-colors"
+                    className="group flex flex-col justify-between overflow-hidden rounded-xl border border-white/10 bg-white/[0.02] hover:border-champagne/50 hover:bg-champagne/[0.04] transition-colors"
                   >
-                    <div className="min-w-0">
-                      <span className="block font-serif text-base font-semibold text-white group-hover:text-champagne transition-colors leading-snug">
-                        {guideTitle}
-                      </span>
-                      <span className="mt-1 inline-block font-mono text-[10px] uppercase tracking-wider text-white/40">
-                        {hubUi.readGuideLabel}
-                      </span>
+                    <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-white/10">
+                      <Image
+                        src={guideThumb}
+                        alt={guideTitle}
+                        width={1080}
+                        height={1350}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 380px"
+                        quality={92}
+                        className="h-full w-full object-cover"
+                      />
                     </div>
-                    <ArrowUpRight className="w-4 h-4 text-champagne shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <div className="flex items-center justify-between gap-3 p-4">
+                      <div className="min-w-0">
+                        <span className="block font-serif text-base font-semibold text-white group-hover:text-champagne transition-colors leading-snug">
+                          {guideTitle}
+                        </span>
+                        <span className="mt-1 inline-block font-mono text-[10px] uppercase tracking-wider text-white/40">
+                          {hubUi.readGuideLabel}
+                        </span>
+                      </div>
+                      <ArrowUpRight className="w-4 h-4 text-champagne shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </div>
                   </Link>
                 );
               })}

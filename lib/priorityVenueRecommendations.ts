@@ -36,7 +36,8 @@ const recommendationCache = new Map<string, PriorityRecommendationPresentation[]
 export function getTopPriorityVenueRecommendations(locale: string, limit = 6): PriorityRecommendationPresentation[] {
   if (!isEnabledLocale(locale)) return [];
   const rainActive = isJustSingingRainActive();
-  const cacheKey = `${locale}|${rainActive ? 'rain1' : 'rain0'}`;
+  const todayKey = romeDayKeyOffset(0);
+  const cacheKey = `${locale}|${rainActive ? 'rain1' : 'rain0'}|${todayKey}`;
   const cached = recommendationCache.get(cacheKey);
   if (cached) return cached.slice(0, limit);
 
@@ -71,8 +72,12 @@ export function getTopPriorityVenueRecommendations(locale: string, limit = 6): P
 
   for (let offset = 0; offset < 7; offset++) {
     const dayKey = romeDayKeyOffset(offset);
+    const monthNum = Number(dayKey.slice(5, 7));
+    const isWinterSeason = monthNum < 5 || monthNum > 9;
     const dow = dayOfWeekForKey(dayKey);
-    const candidates = weeklyEvents.filter((we) => PRIORITY_CLUBS.has(we.clubSlug) && we.dayOfWeek === dow);
+    const candidates = weeklyEvents.filter(
+      (we) => PRIORITY_CLUBS.has(we.clubSlug) && we.dayOfWeek === dow && !(isWinterSeason && we.seasonalSummerOnly),
+    );
     for (const we of candidates) {
       if (we.id === 'justme-wednesday' && dayKey === '2026-11-25') continue;
       if (we.id === 'justme-thursday' && dayKey >= '2026-11-26') continue;

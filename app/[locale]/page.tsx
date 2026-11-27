@@ -562,30 +562,41 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
             </h2>
             <div className="grid grid-cols-1 border-l border-t border-[#050505]/20 bg-[#FFFFFF] md:grid-cols-2 lg:grid-cols-4">
               {[
-                { label: homeCopy.categoryLabels[0], href: `${lp}/genres/techno` },
-                { label: homeCopy.categoryLabels[1], href: `${lp}/vip-tables` },
-                { label: homeCopy.categoryLabels[2], href: `${lp}/aperitivo` },
-                { label: homeCopy.categoryLabels[3], href: `${lp}/zones/navigli` },
-                { label: homeCopy.categoryLabels[4], href: `${lp}/zones/corso-como` },
-                { label: homeCopy.categoryLabels[5], href: `${lp}/guides` },
-                { label: homeCopy.categoryLabels[6], href: `${lp}/concierge` },
-                { label: homeCopy.categoryLabels[7], href: `${lp}/clubs` },
+                { label: homeCopy.categoryLabels[0], href: `${lp}/genres/techno`, img: '/images/events/cards-4x5/genres/techno.webp' },
+                { label: homeCopy.categoryLabels[1], href: `${lp}/vip-tables`, img: '/images/events/cards-4x5/pillars/guide-03.webp' },
+                { label: homeCopy.categoryLabels[2], href: `${lp}/aperitivo`, img: '/images/events/cards-4x5/partner-clubs/terrazza-duomo-21.webp' },
+                { label: homeCopy.categoryLabels[3], href: `${lp}/zones/navigli`, img: '/images/events/cards-4x5/zones/navigli.webp' },
+                { label: homeCopy.categoryLabels[4], href: `${lp}/zones/corso-como`, img: '/images/events/cards-4x5/zones/corso-como.webp' },
+                { label: homeCopy.categoryLabels[5], href: `${lp}/guides`, img: '/images/events/cards-4x5/pillars/guide-04.webp' },
+                { label: homeCopy.categoryLabels[6], href: `${lp}/concierge`, img: '/images/events/cards-4x5/pillars/guide-05.webp' },
+                { label: homeCopy.categoryLabels[7], href: `${lp}/clubs`, img: '/images/events/cards-4x5/partner-clubs/pineta-milano.webp' },
               ].map((tag, idx) => (
                 <Link
                   key={tag.label}
                   href={tag.href}
                   prefetch={false}
-                  className="flex min-h-[64px] items-center justify-between border-b border-r border-[#050505]/20 px-5 py-4 text-[#050505] transition-colors hover:bg-[#EAE3D5] md:min-h-[96px] md:flex-col md:items-start md:p-6"
+                  className="group flex flex-col justify-between border-b border-r border-[#050505]/20 bg-[#FFFFFF] text-[#050505] transition-colors hover:bg-[#EAE3D5] overflow-hidden"
                 >
-                  <div className="flex items-center gap-3.5 md:flex-col md:items-start md:gap-2">
-                    <span className="font-serif text-xl font-bold italic tabular-nums text-[#4A453E] sm:text-2xl">
+                  <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-[#050505]/16">
+                    <Image
+                      src={tag.img}
+                      alt={tag.label}
+                      width={1080}
+                      height={1350}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 340px"
+                      quality={92}
+                      className="h-full w-full object-cover"
+                    />
+                    <span className="absolute top-3 left-3 bg-[#050505]/90 border border-[#F6F1E7]/25 px-2.5 py-1 font-serif text-sm font-bold italic tabular-nums text-[#F6F1E7]">
                       {String(idx + 1).padStart(2, '0')}
                     </span>
+                  </div>
+                  <div className="flex items-center justify-between gap-3 px-5 py-4">
                     <span className="text-sm font-extrabold text-[#050505]">
                       {tag.label}
                     </span>
+                    <span aria-hidden="true" className="font-mono text-sm font-bold text-[#050505]">↗</span>
                   </div>
-                  <span aria-hidden="true" className="font-mono text-sm font-bold text-[#050505]">↗</span>
                 </Link>
               ))}
             </div>

@@ -25,8 +25,12 @@ import { VipQuoteCalculator, EntryFormulaMatrix, SanSiroMatchAfterpartyFinder } 
 import EditorialPageSections from '@/components/EditorialPageSections';
 import TasteMotionLayer from '@/components/TasteMotionLayer';
 import VenueEventsAutoCarousel from '@/components/VenueEventsAutoCarousel';
+import VenueWeeklyHeroCarousel from '@/components/VenueWeeklyHeroCarousel';
 import EventVenueMap from '@/components/EventVenueMap';
 import { getEventVenueCopy } from '@/lib/i18n/eventVenueCopy';
+import { getVenueWeeklyHeroUi35, resolveVenueWeeklyHeroSchedule } from '@/lib/venueWeeklyHero35';
+import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
+import { getVenueCardPhoto4x5, getZoneCardPhoto4x5, getGuideCardPhoto4x5 } from '@/lib/siteCardAssets4x5';
 import {
   getVenueAuthoritySpec,
   buildCityQualifiedVenueH1,
@@ -43,7 +47,7 @@ import {
 } from '@/lib/venueDossiers35';
 import type { LocaleCode } from '@/lib/i18n/locales';
 
-export const revalidate = 3600;
+export const revalidate = 1800;
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -1841,6 +1845,13 @@ export default async function ClubPage({ params }: Props) {
       )
     : null;
 
+  const weeklyHeroUi = getVenueWeeklyHeroUi35(locCode);
+  const weeklyHeroSchedule = resolveVenueWeeklyHeroSchedule(
+    venue,
+    locCode,
+    `${lp}/${clubsDir}/${currentVenueSlug}`,
+  );
+
   return (
     <main className="taste-pillar-root bg-[#050505] min-h-screen text-[#F6F1E7] font-sans pb-20">
       <TasteMotionLayer />
@@ -1913,6 +1924,13 @@ export default async function ClubPage({ params }: Props) {
         </div>
       </section>
 
+      {/* Dedicated Post-Hero Weekly Nights Carousel (All Scheduled Nights of the Week) */}
+      <VenueWeeklyHeroCarousel
+        venueName={name}
+        ui={weeklyHeroUi}
+        schedule={weeklyHeroSchedule}
+      />
+
       {/* QuickInfoBar (Architectural Horizontal Spec Strip — zero icon-cards) */}
       <section id="dress-code-hours" className="bg-[#0B0A09]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7">
@@ -1961,6 +1979,9 @@ export default async function ClubPage({ params }: Props) {
         className="bg-[#F6F1E7] text-[#050505]"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap items-center gap-2.5 text-sm font-semibold">
+          <a href="#serate-settimana-locale" className="px-4 py-2 bg-[#25D366] text-[#050505] hover:bg-[#2EE472] transition-colors">
+            {weeklyHeroUi.tocLabel}
+          </a>
           <a href="#prices-tables" className="px-4 py-2 bg-[#050505] text-[#F6F1E7] hover:bg-[#1F1C18] transition-colors">
             {tr(locale, 'VIP Tables & Prices', 'Tavoli VIP & Prezzi')}
           </a>
@@ -2215,7 +2236,7 @@ export default async function ClubPage({ params }: Props) {
                 <Calendar className="w-6 h-6 text-champagne" />
                 {tr(locale, 'Upcoming Events at', 'Prossimi Eventi da')} {name}
               </h2>
-              <div className="space-y-3" data-taste-stagger>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5" data-taste-stagger>
                 {futureVenueEvents.map((ev) => {
                   const evTitle = getLocalizedText(ev.localizedContent.title, locale).replace(/[\u2014–]/g, ' - ');
                   const evSlug = getLocalizedText(ev.localizedContent.slug, locale);
@@ -2225,17 +2246,39 @@ export default async function ClubPage({ params }: Props) {
                   const timeStr = new Intl.DateTimeFormat(locale, {
                     hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Rome',
                   }).format(new Date(ev.dateISO));
+                  const fallbackPoster = weeklyHeroSchedule.cards[0]?.imageSrc || '/images/events/cards-4x5/weekly-posters/justme-saturday.webp';
+                  const evPoster = toCardPoster4x5(ev.image && !ev.image.startsWith('/images/venues/') ? ev.image : fallbackPoster);
                   return (
                     <Link
                       key={ev.id}
                       href={`${lp}/events/${evSlug}`}
-                      className="flex items-center justify-between gap-3 py-3 px-4 bg-[#0B0A09] hover:bg-[#141311] transition-colors group min-w-0 overflow-hidden"
+                      className="flex flex-col justify-between border border-[#F6F1E7]/14 bg-[#0B0A09] hover:border-[#EAE3D5]/45 transition-colors group min-w-0 overflow-hidden"
                     >
-                      <div className="flex items-center gap-3 min-w-0 flex-1 overflow-hidden">
-                        <span className="text-[#EAE3D5] text-[13px] tabular-nums shrink-0">{dateStr}</span>
-                        <span className="text-[#F6F1E7] text-sm font-medium truncate group-hover:text-[#25D366] transition-colors min-w-0 block">{evTitle}</span>
+                      <div>
+                        <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-[#F6F1E7]/12">
+                          <Image
+                            src={evPoster}
+                            alt={`${evTitle} - ${name}`}
+                            width={1080}
+                            height={1350}
+                            sizes="(max-width: 768px) 100vw, 420px"
+                            quality={92}
+                            className="h-full w-full object-cover"
+                          />
+                          <span className="absolute top-3 left-3 bg-[#050505]/92 border border-[#F6F1E7]/25 px-2.5 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-[#EAE3D5]">
+                            {dateStr} · {timeStr}
+                          </span>
+                        </div>
+                        <div className="p-4">
+                          <h3 className="font-serif text-lg font-bold text-[#F6F1E7] group-hover:text-[#25D366] transition-colors line-clamp-2">
+                            {evTitle}
+                          </h3>
+                        </div>
                       </div>
-                      <span className="text-[#C2B9AA] text-[13px] tabular-nums shrink-0">{timeStr}</span>
+                      <div className="px-4 pb-4 pt-2 border-t border-[#F6F1E7]/10 flex items-center justify-between font-mono text-xs font-semibold uppercase tracking-wider text-[#EAE3D5]">
+                        <span>{weeklyHeroUi.openEventSheetCta}</span>
+                        <span aria-hidden="true">→</span>
+                      </div>
                     </Link>
                   );
                 })}
@@ -2573,37 +2616,51 @@ export default async function ClubPage({ params }: Props) {
                     ? 'Esplora i locali più vicini calcolati in linea d’aria per combinare aperitivo panoramico, cena cantata e tavolo VIP.'
                     : 'Explore the closest verified Milan venues sorted by real distance to pair sunset aperitivo, dinner shows, and VIP clubbing.')}
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" data-taste-stagger>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" data-taste-stagger>
               {nearbyVenues.map(({ venue: near, distanceLabel }) => {
                 const nearName = getLocalizedText(near.localizedContent.name, locale);
                 const nearSlug = getLocalizedVenueSlug35(near.id, (locale as LocaleCode) || 'en');
                 const nearSpec = getVenueAuthoritySpec(near.id);
                 const nearHref = `${lp}/${clubsDir}/${nearSlug}`;
+                const nearImg = getVenueCardPhoto4x5(near);
                 return (
                   <Link
                     key={near.id}
                     href={nearHref}
                     prefetch={false}
-                    className="group p-5 bg-[#0B0A09] hover:bg-[#141311] transition-colors flex flex-col justify-between"
+                    className="group border border-[#F6F1E7]/14 bg-[#0B0A09] hover:border-[#EAE3D5]/45 transition-colors flex flex-col justify-between overflow-hidden"
                   >
                     <div>
-                      <h3 className="font-serif text-xl font-bold text-[#F6F1E7] group-hover:text-[#25D366] transition-colors mb-1.5">
-                        {nearName} ↗
-                      </h3>
-                      <div className="flex items-center justify-between gap-2 mb-2">
-                        <span className="text-sm font-semibold text-[#25D366]">
+                      <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-[#F6F1E7]/12">
+                        <Image
+                          src={nearImg}
+                          alt={nearName}
+                          width={1080}
+                          height={1350}
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 380px"
+                          quality={92}
+                          className="h-full w-full object-cover"
+                        />
+                        <span className="absolute top-3 left-3 bg-[#050505]/92 border border-[#F6F1E7]/25 px-2.5 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-[#25D366]">
                           {distanceLabel}
                         </span>
-                        <span className="text-sm text-[#C2B9AA] truncate">
-                          {locale === 'it' ? nearSpec?.neighborhoodIt : nearSpec?.neighborhoodEn}
-                        </span>
                       </div>
-                      <p className="text-sm text-[#EAE3D5] mb-2">{near.address.streetAddress}</p>
-                      {nearSpec && (
-                        <p className="text-sm text-[#C2B9AA] line-clamp-2">
-                          {locale === 'it' ? nearSpec.soundIt : nearSpec.soundEn}
-                        </p>
-                      )}
+                      <div className="p-5">
+                        <h3 className="font-serif text-xl font-bold text-[#F6F1E7] group-hover:text-[#25D366] transition-colors mb-1.5">
+                          {nearName} ↗
+                        </h3>
+                        <div className="flex items-center justify-between gap-2 mb-2">
+                          <span className="text-sm text-[#C2B9AA] truncate">
+                            {locale === 'it' ? nearSpec?.neighborhoodIt : nearSpec?.neighborhoodEn}
+                          </span>
+                        </div>
+                        <p className="text-sm text-[#EAE3D5] mb-2">{near.address.streetAddress}</p>
+                        {nearSpec && (
+                          <p className="text-sm text-[#C2B9AA] line-clamp-2">
+                            {locale === 'it' ? nearSpec.soundIt : nearSpec.soundEn}
+                          </p>
+                        )}
+                      </div>
                     </div>
                   </Link>
                 );
@@ -2626,36 +2683,66 @@ export default async function ClubPage({ params }: Props) {
                 : 'Verified November 2026 · Official Concierge Desk (+39 351 912 7047)'}
             </span>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" data-taste-stagger>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" data-taste-stagger>
             {!isGarda && canonicalZone && (
               <Link
                 href={`${lp}/${zonesDir}/${localizedZoneSlug}`}
                 locale={locCode}
                 prefetch={false}
-                className="p-5 bg-[#141311] hover:bg-[#1F1C18] transition-colors"
+                className="group border border-[#F6F1E7]/16 bg-[#141311] hover:border-[#EAE3D5]/45 transition-colors overflow-hidden flex flex-col justify-between"
               >
-                <span className="block font-serif text-base font-semibold text-[#F6F1E7] mb-1">
-                  {canonicalZone.name} · Milano ↗
-                </span>
-                <span className="block text-sm text-[#25D366]">
-                  {locale === 'it' ? 'Quartiere del Locale' : 'Venue District Guide'}
-                </span>
+                <div>
+                  <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-[#F6F1E7]/12">
+                    <Image
+                      src={getZoneCardPhoto4x5(canonicalZone.slug)}
+                      alt={`${canonicalZone.name} · Milano`}
+                      width={1080}
+                      height={1350}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 380px"
+                      quality={92}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <span className="block font-serif text-lg font-semibold text-[#F6F1E7] group-hover:text-[#25D366] transition-colors mb-1">
+                      {canonicalZone.name} · Milano ↗
+                    </span>
+                    <span className="block text-sm text-[#25D366]">
+                      {locale === 'it' ? 'Quartiere del Locale' : 'Venue District Guide'}
+                    </span>
+                  </div>
+                </div>
               </Link>
             )}
-            {reciprocalGuides.map((g) => (
+            {reciprocalGuides.map((g, gIdx) => (
               <Link
                 key={g.id}
                 href={`${lp}/${guidesDir}/${getLocalizedGuideSlug35(g, locCode)}`}
                 locale={locCode}
                 prefetch={false}
-                className="p-5 bg-[#0B0A09] hover:bg-[#141311] transition-colors"
+                className="group border border-[#F6F1E7]/14 bg-[#0B0A09] hover:border-[#EAE3D5]/45 transition-colors overflow-hidden flex flex-col justify-between"
               >
-                <span className="block font-serif text-base font-semibold text-[#F6F1E7] mb-1">
-                  {getLocalizedText(g.title, locCode).replace(/[—–]/g, ' - ')} ↗
-                </span>
-                <span className="block text-sm text-[#C2B9AA]">
-                  {locale === 'it' ? 'Guida Ufficiale' : 'Official Guide'}
-                </span>
+                <div>
+                  <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-[#F6F1E7]/12">
+                    <Image
+                      src={getGuideCardPhoto4x5(g.id, gIdx)}
+                      alt={getLocalizedText(g.title, locCode).replace(/[—–]/g, ' - ')}
+                      width={1080}
+                      height={1350}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 380px"
+                      quality={92}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <span className="block font-serif text-base font-semibold text-[#F6F1E7] group-hover:text-[#25D366] transition-colors mb-1">
+                      {getLocalizedText(g.title, locCode).replace(/[—–]/g, ' - ')} ↗
+                    </span>
+                    <span className="block text-sm text-[#C2B9AA]">
+                      {locale === 'it' ? 'Guida Ufficiale' : 'Official Guide'}
+                    </span>
+                  </div>
+                </div>
               </Link>
             ))}
           </div>

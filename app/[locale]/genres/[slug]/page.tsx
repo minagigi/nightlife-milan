@@ -23,6 +23,7 @@ import type { LocaleCode } from '@/lib/i18n/locales';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import TasteMotionLayer from '@/components/TasteMotionLayer';
 import TasteHeroCrossfade from '@/components/TasteHeroCrossfade';
+import { getVenueCardPhoto4x5 } from '@/lib/siteCardAssets4x5';
 
 // ISR Configuration
 export const revalidate = 3600;
@@ -617,41 +618,55 @@ export default async function GenrePage({ params }: Props) {
               </div>
             </div>
 
-            <div className="bg-[#050505] flex flex-col gap-[2px] mb-8" data-taste-stagger>
-              {partnerVenues.map((v) => (
-                <div
-                  key={v.name}
-                  className="bg-[#0B0A09] hover:bg-[#141311] p-5 sm:p-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-center transition-colors"
-                >
-                  <div className="md:col-span-4">
-                    <h3 className="font-display text-lg font-bold text-[#F6F1E7] m-0">{v.name}</h3>
-                    <p className="text-[14px] text-[#C2B9AA] mt-1 m-0">{v.district}</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8" data-taste-stagger>
+              {partnerVenues.map((v) => {
+                const vPhoto = getVenueCardPhoto4x5({ id: v.clubSlug, slugs: { en: v.clubSlug } });
+                return (
+                  <div
+                    key={v.name}
+                    className="border border-[#F6F1E7]/14 bg-[#0B0A09] hover:border-[#EAE3D5]/45 overflow-hidden flex flex-col justify-between transition-colors"
+                  >
+                    <div>
+                      <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-[#F6F1E7]/14">
+                        <Image
+                          src={vPhoto}
+                          alt={v.name}
+                          width={1080}
+                          height={1350}
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 380px"
+                          quality={92}
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                      <div className="p-5">
+                        <h3 className="font-display text-lg font-bold text-[#F6F1E7] m-0">{v.name}</h3>
+                        <p className="text-[14px] text-[#C2B9AA] mt-1 m-0">{v.district}</p>
+                        <p className="text-[14px] font-medium text-[#EAE3D5] mt-2 m-0">{v.nightTag}</p>
+                      </div>
+                    </div>
+                    <div className="px-5 pb-5 pt-3 border-t border-[#F6F1E7]/10 flex flex-wrap gap-2">
+                      {v.clubSlug && (
+                        <Link
+                          href={`${lp}/${clubsDir}/${getLocalizedVenueSlug35(v.clubSlug, loc)}`}
+                          locale={loc}
+                          className="taste-btn-outline-light text-[13px] px-3.5 py-2 flex-1 text-center"
+                        >
+                          {rp.clubCta}
+                        </Link>
+                      )}
+                      {v.eventSlug && (
+                        <Link
+                          href={capodannoEventPath(v.eventSlug, loc)}
+                          locale={loc}
+                          className="taste-btn-primary text-[13px] px-3.5 py-2 flex-1 text-center"
+                        >
+                          {rp.nyeCta}
+                        </Link>
+                      )}
+                    </div>
                   </div>
-                  <div className="md:col-span-4 text-[15px] font-medium text-[#EAE3D5]">
-                    {v.nightTag}
-                  </div>
-                  <div className="md:col-span-4 flex flex-wrap md:justify-end gap-2">
-                    {v.clubSlug && (
-                      <Link
-                        href={`${lp}/${clubsDir}/${getLocalizedVenueSlug35(v.clubSlug, loc)}`}
-                        locale={loc}
-                        className="taste-btn-outline-light text-[14px] px-4 py-2"
-                      >
-                        {rp.clubCta}
-                      </Link>
-                    )}
-                    {v.eventSlug && (
-                      <Link
-                        href={capodannoEventPath(v.eventSlug, loc)}
-                        locale={loc}
-                        className="taste-btn-primary text-[14px] px-4 py-2"
-                      >
-                        {rp.nyeCta}
-                      </Link>
-                    )}
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             <div className="flex flex-wrap gap-3">
@@ -953,36 +968,52 @@ export default async function GenrePage({ params }: Props) {
                   </p>
                   <h2 className="font-serif text-2xl text-white mb-2">{rp.boxTitle}</h2>
                   <p className="text-sm text-white/70 mb-5">{rp.boxLead}</p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
-                    {REGGAETON_PARTNER_VENUES.map((v) => (
-                      <div key={v.name} className="rounded-xl border border-white/10 bg-black/40 p-4 flex flex-col justify-between gap-2">
-                        <div>
-                          <h3 className="font-serif text-base font-semibold text-white">{v.name}</h3>
-                          <p className="text-xs text-white/55">{v.district}</p>
-                          <p className="text-xs text-champagne font-mono mt-1">{v.nightTag}</p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+                    {REGGAETON_PARTNER_VENUES.map((v) => {
+                      const vPhoto = getVenueCardPhoto4x5({ id: v.clubSlug, slugs: { en: v.clubSlug } });
+                      return (
+                        <div key={v.name} className="rounded-xl border border-white/10 bg-black/40 overflow-hidden flex flex-col justify-between">
+                          <div>
+                            <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-white/10">
+                              <Image
+                                src={vPhoto}
+                                alt={v.name}
+                                width={1080}
+                                height={1350}
+                                sizes="(max-width: 768px) 100vw, 380px"
+                                quality={92}
+                                className="h-full w-full object-cover"
+                              />
+                            </div>
+                            <div className="p-4">
+                              <h3 className="font-serif text-base font-semibold text-white">{v.name}</h3>
+                              <p className="text-xs text-white/55">{v.district}</p>
+                              <p className="text-xs text-champagne font-mono mt-1">{v.nightTag}</p>
+                            </div>
+                          </div>
+                          <div className="px-4 pb-4 flex flex-wrap gap-2 pt-2 border-t border-white/10">
+                            {v.clubSlug && (
+                              <Link
+                                href={`${lp}/${clubsDir}/${getLocalizedVenueSlug35(v.clubSlug, loc)}`}
+                                locale={loc}
+                                className="text-xs font-mono uppercase tracking-wider px-2.5 py-1 rounded border border-white/20 text-white/85 hover:border-champagne hover:text-champagne transition-colors"
+                              >
+                                {rp.clubCta} →
+                              </Link>
+                            )}
+                            {v.eventSlug && (
+                              <Link
+                                href={capodannoEventPath(v.eventSlug, loc)}
+                                locale={loc}
+                                className="text-xs font-mono uppercase tracking-wider px-2.5 py-1 rounded border border-champagne/40 text-champagne hover:bg-champagne hover:text-black transition-colors"
+                              >
+                                {rp.nyeCta} →
+                              </Link>
+                            )}
+                          </div>
                         </div>
-                        <div className="flex flex-wrap gap-2 pt-1">
-                          {v.clubSlug && (
-                            <Link
-                              href={`${lp}/${clubsDir}/${getLocalizedVenueSlug35(v.clubSlug, loc)}`}
-                              locale={loc}
-                              className="text-xs font-mono uppercase tracking-wider px-2.5 py-1 rounded border border-white/20 text-white/85 hover:border-champagne hover:text-champagne transition-colors"
-                            >
-                              {rp.clubCta} →
-                            </Link>
-                          )}
-                          {v.eventSlug && (
-                            <Link
-                              href={capodannoEventPath(v.eventSlug, loc)}
-                              locale={loc}
-                              className="text-xs font-mono uppercase tracking-wider px-2.5 py-1 rounded border border-champagne/40 text-champagne hover:bg-champagne hover:text-black transition-colors"
-                            >
-                              {rp.nyeCta} →
-                            </Link>
-                          )}
-                        </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                   <Link
                     href={`${lp}/${guidesDir}/${g118Slug}`}

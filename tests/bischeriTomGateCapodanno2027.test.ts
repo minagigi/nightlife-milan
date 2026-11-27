@@ -34,8 +34,8 @@ const REPO_ROOT = path.resolve(__dirname, '..');
 const FORBIDDEN_THIRD_PARTY_RE = /331[\s\-]?478[\s\-]?8258|umberto-falcone|perreoxl\.com|origgigallery|gatemilano\.it/i;
 
 test('Capodanno 2027 catalog reconciled cleanly to 126 events (T-032 + WA Audit + Church 81 + Carlsberg Ol + Malpaga Sold Out)', () => {
-  assert.equal(CAPODANNO_EVENT_BASE_SLUGS.length, 129);
-  assert.equal(CAPODANNO_EVENTS.length, 129);
+  assert.equal(CAPODANNO_EVENT_BASE_SLUGS.length, 137);
+  assert.equal(CAPODANNO_EVENTS.length, 138);
   assert.ok(CAPODANNO_EVENT_BASE_SLUGS.includes('capodanno-carlsberg-ol-milano'));
   assert.ok(CAPODANNO_EVENT_BASE_SLUGS.includes('capodanno-il-marchese-milano'));
   assert.ok(CAPODANNO_EVENT_BASE_SLUGS.includes('capodanno-frezza-milano-cascina-romana'));

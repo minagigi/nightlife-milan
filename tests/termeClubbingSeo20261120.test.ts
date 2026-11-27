@@ -312,7 +312,7 @@ test('PILLAR_HEADLINE_35 & buildTasteExplorerData preserve SEO headlines, honest
 
   for (const loc of ALL_35_LOCALES) {
     const clubExp = buildTasteExplorerData('clubbing', loc, `https://nightlifemilan.com/${loc}/guides/test`);
-    assert.equal(clubExp.items.length, 18, `Expected 18 partner clubs for ${loc}`);
+    assert.equal(clubExp.items.length, 19, `Expected 19 partner clubs for ${loc}`);
     assert.ok(clubExp.filterOptions.length >= 4);
     for (const item of clubExp.items) {
       assert.ok(item.waHref.startsWith('https://wa.me/393519127047'), `Invalid WhatsApp link on ${item.id} (${loc})`);
@@ -405,8 +405,8 @@ test('V2 Curated Editorial Media & Reusable 118-Guide Template invariants', () =
     }
   }
 
-  // All 27 Explorer items (9 Terme + 18 Partner Clubs) have valid curated photos on disk
-  assert.equal(Object.keys(EXPLORER_VENUE_PHOTOS).length, 27);
+  // All 28 Explorer items (9 Terme + 19 Partner Clubs) have valid curated photos on disk
+  assert.equal(Object.keys(EXPLORER_VENUE_PHOTOS).length, 28);
   for (const mode of ['terme', 'clubbing'] as const) {
     const exp = buildTasteExplorerData(mode, 'it', 'https://nightlifemilan.com/it/guides/test');
     for (const item of exp.items) {

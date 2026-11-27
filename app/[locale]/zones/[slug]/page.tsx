@@ -18,6 +18,7 @@ import { VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
+import { getVenueCardPhoto4x5 } from '@/lib/siteCardAssets4x5';
 
 export const revalidate = 3600;
 
@@ -483,7 +484,7 @@ export default async function ZonePage({ params }: Props) {
             </div>
 
             {/* District Atmosphere Gallery (4 Unique Images) */}
-            <div className="mb-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="mb-12 grid grid-cols-1 md:grid-cols-2 gap-4">
               {(ZONE_INLINE_MAP[zone.slug] || ZONE_INLINE_MAP[slug] || ZONE_INLINE_MAP['brera']).map((imgSrc, idx) => (
                 <div key={imgSrc} className="relative aspect-[4/5] w-full rounded-xl overflow-hidden border border-white/10">
                   <Image quality={92}
@@ -501,7 +502,7 @@ export default async function ZonePage({ params }: Props) {
               <h2 className="text-2xl font-serif text-white mb-6">
                 {zLoc.ui.clubsInZone} ({zLoc.name})
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {displayedVenues.slice(0, 6).map((v, idx) => {
                   const vName = getLocalizedText(v.localizedContent.name, loc);
                   const vDesc = getLocalizedText(v.localizedContent.description, loc);
@@ -510,17 +511,32 @@ export default async function ZonePage({ params }: Props) {
                     <Link
                       key={v.id}
                       href={`${lp}/clubs/${vSlug}`}
-                      className="group flex items-start gap-4 p-4 rounded-xl border border-white/10 bg-white/[0.02] hover:border-champagne/50 transition-all"
+                      className="group flex flex-col justify-between overflow-hidden rounded-xl border border-white/10 bg-white/[0.02] hover:border-champagne/50 transition-all"
                     >
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg border border-champagne/40 bg-champagne/10 font-serif text-lg font-bold text-champagne">#{idx + 1}</div>
-                      <div className="min-w-0">
-                        <div className="text-[10px] font-mono uppercase tracking-wider text-champagne mb-1">
-                          {v.category.replace(/_/g, ' ')} · {v.priceRange}
+                      <div>
+                        <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-white/10">
+                          <Image
+                            src={getVenueCardPhoto4x5(v)}
+                            alt={vName}
+                            width={1080}
+                            height={1350}
+                            sizes="(max-width: 768px) 100vw, 400px"
+                            quality={92}
+                            className="h-full w-full object-cover"
+                          />
+                          <span className="absolute top-3 left-3 flex h-8 px-2.5 items-center justify-center rounded-lg border border-champagne/45 bg-[#050505]/90 font-serif text-sm font-bold text-champagne">
+                            #{idx + 1}
+                          </span>
                         </div>
-                        <h3 className="font-serif text-lg text-white group-hover:text-champagne transition-colors truncate">
-                          {vName}
-                        </h3>
-                        <p className="text-xs text-white/55 line-clamp-2 mt-1">{vDesc}</p>
+                        <div className="p-4">
+                          <div className="text-[10px] font-mono uppercase tracking-wider text-champagne mb-1">
+                            {v.category.replace(/_/g, ' ')} · {v.priceRange}
+                          </div>
+                          <h3 className="font-serif text-lg text-white group-hover:text-champagne transition-colors truncate">
+                            {vName}
+                          </h3>
+                          <p className="text-xs text-white/60 line-clamp-2 mt-1">{vDesc}</p>
+                        </div>
                       </div>
                     </Link>
                   );

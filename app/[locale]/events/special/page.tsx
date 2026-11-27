@@ -10,14 +10,17 @@ import DiscoveryGrid from '@/components/DiscoveryGrid';
 import { seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { christmasVoyaPath } from '@/lib/christmas/voya35';
-import { orthodoxNyeJustMePath } from '@/lib/orthodox-nye/justme35';
+import { orthodoxNyeJustMePath, ORTHODOX_NYE_JUSTME_POSTER_SRC } from '@/lib/orthodox-nye/justme35';
 import { thanksgivingJustMePath, THANKSGIVING_JUSTME_POSTER_SRC } from '@/lib/thanksgiving/justme35';
-import { partenopeaJustMePath } from '@/lib/partenopea/justme35';
+import { partenopeaJustMePath, PARTENOPEA_JUSTME_POSTER_SRC } from '@/lib/partenopea/justme35';
 import {
   getJustSingingRainContent,
   isJustSingingRainActive,
+  JUST_SINGING_RAIN_POSTER_SRC,
   justSingingRainPath,
 } from '@/lib/just-singing-rain/justme35';
+import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
+import { resolveCardImageByHref } from '@/lib/siteCardAssets4x5';
 import { getEventDiscoveryItems, slimDiscoveryItemsForClient } from '@/lib/eventDiscovery';
 import { PrioritySixShowcase, VipQuoteCalculator } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
@@ -387,7 +390,7 @@ export default async function SpecialEventsPage({ params }: Props) {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {MAJOR_SPECIAL_EVENTS.filter((ev) => !ev.activeOnly || isJustSingingRainActive()).map((ev) => {
+          {MAJOR_SPECIAL_EVENTS.filter((ev) => !ev.activeOnly || isJustSingingRainActive()).map((ev, evIdx) => {
             const rainLoc = ev.linkKind === 'just-singing-rain' ? getJustSingingRainContent(locale) : null;
             const badgeText = rainLoc ? `#1 · ${rainLoc.dateBadge} · ${rainLoc.offerPhrase}` : isIt ? ev.badgeIt : ev.badgeEn;
             const titleText = rainLoc ? rainLoc.h1 : isIt ? ev.titleIt : ev.titleEn;
@@ -397,52 +400,77 @@ export default async function SpecialEventsPage({ params }: Props) {
               : ev.linkKind
                 ? tr(locale, ev.linkLabelEn || 'Open Event →', ev.linkLabelIt || 'Scopri Evento →')
                 : tr(locale, 'San Siro & VIP Info →', 'Info San Siro & VIP →');
+            const cardHref =
+              ev.linkKind === 'orthodox-nye'
+                ? orthodoxNyeJustMePath(locale)
+                : ev.linkKind === 'thanksgiving-justme'
+                  ? thanksgivingJustMePath(locale)
+                  : ev.linkKind === 'partenopea-justme'
+                    ? partenopeaJustMePath(locale)
+                    : ev.linkKind === 'just-singing-rain'
+                      ? justSingingRainPath(locale)
+                      : `${lp}/football-afterparties`;
+            const posterSrc =
+              ev.linkKind === 'orthodox-nye'
+                ? toCardPoster4x5(ORTHODOX_NYE_JUSTME_POSTER_SRC)
+                : ev.linkKind === 'thanksgiving-justme'
+                  ? toCardPoster4x5(THANKSGIVING_JUSTME_POSTER_SRC)
+                  : ev.linkKind === 'partenopea-justme'
+                    ? toCardPoster4x5(PARTENOPEA_JUSTME_POSTER_SRC)
+                    : ev.linkKind === 'just-singing-rain'
+                      ? toCardPoster4x5(JUST_SINGING_RAIN_POSTER_SRC)
+                      : resolveCardImageByHref(cardHref, evIdx);
             return (
-            <div
-              key={ev.titleEn}
-              className="rounded-2xl border border-white/10 bg-white/[0.02] p-6 flex flex-col justify-between hover:border-champagne/40 transition-colors"
-            >
-              <div>
-                <span className="inline-block px-3 py-1 rounded-full bg-champagne/15 border border-champagne/30 text-champagne text-[10px] font-bold uppercase tracking-wider mb-3">
-                  {badgeText}
-                </span>
-                <h3 className="font-serif text-2xl text-white font-bold mb-2">
-                  {titleText}
-                </h3>
-                <p className="text-xs text-champagne/85 font-medium mb-3">
-                  {isIt ? ev.venuesIt : ev.venuesEn}
-                </p>
-                <p className="text-xs sm:text-sm text-white/65 leading-relaxed mb-5">
-                  {descText}
-                </p>
+              <div
+                key={ev.titleEn}
+                className="rounded-2xl border border-white/10 bg-white/[0.02] overflow-hidden flex flex-col justify-between hover:border-champagne/40 transition-colors"
+              >
+                <div>
+                  <Link href={cardHref} className="block">
+                    <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-white/10">
+                      <Image
+                        src={posterSrc}
+                        alt={titleText}
+                        width={1080}
+                        height={1350}
+                        sizes="(max-width: 768px) 100vw, 540px"
+                        quality={92}
+                        className="h-full w-full object-cover"
+                      />
+                      <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-[#050505]/92 border border-champagne/45 text-champagne text-[10px] font-bold uppercase tracking-wider">
+                        {badgeText}
+                      </span>
+                    </div>
+                  </Link>
+                  <div className="p-6 pb-0">
+                    <h3 className="font-serif text-2xl text-white font-bold mb-2">
+                      {titleText}
+                    </h3>
+                    <p className="text-xs text-champagne/85 font-medium mb-3">
+                      {isIt ? ev.venuesIt : ev.venuesEn}
+                    </p>
+                    <p className="text-xs sm:text-sm text-white/65 leading-relaxed mb-5">
+                      {descText}
+                    </p>
+                  </div>
+                </div>
+                <div className="mx-6 mb-6 flex items-center justify-between pt-4 border-t border-white/10">
+                  <Link
+                    href={cardHref}
+                    className="text-xs font-semibold text-white/75 hover:text-champagne transition-colors"
+                  >
+                    {ctaText}
+                  </Link>
+                  <a
+                    href={getConciergeBookingUrl(locale, titleText, `${lp}/events/special`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 rounded-full bg-champagne text-black text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
+                  >
+                    WhatsApp +39 351 912 7047
+                  </a>
+                </div>
               </div>
-              <div className="flex items-center justify-between pt-4 border-t border-white/10">
-                <Link
-                  href={
-                    ev.linkKind === 'orthodox-nye'
-                      ? orthodoxNyeJustMePath(locale)
-                      : ev.linkKind === 'thanksgiving-justme'
-                        ? thanksgivingJustMePath(locale)
-                        : ev.linkKind === 'partenopea-justme'
-                          ? partenopeaJustMePath(locale)
-                          : ev.linkKind === 'just-singing-rain'
-                            ? justSingingRainPath(locale)
-                            : `${lp}/football-afterparties`
-                  }
-                  className="text-xs font-semibold text-white/75 hover:text-champagne transition-colors"
-                >
-                  {ctaText}
-                </Link>
-                <a
-                  href={getConciergeBookingUrl(locale, titleText, `${lp}/events/special`)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 rounded-full bg-champagne text-black text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
-                >
-                  WhatsApp +39 351 912 7047
-                </a>
-              </div>
-            </div>
             );
           })}
         </div>

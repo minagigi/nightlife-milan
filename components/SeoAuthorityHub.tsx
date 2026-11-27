@@ -4,6 +4,7 @@ import { localePrefix } from '@/lib/i18n/locales';
 import Link from '@/components/LocalizedLink';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import { getSeoStandard21Copy } from '@/lib/seoStandard21Copy';
+import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
 
 interface SeoAuthorityHubProps {
   lang: LocaleCode;
@@ -124,11 +125,14 @@ export default function SeoAuthorityHub({ lang, pageKey, pagePath }: SeoAuthorit
               </div>
 
               {sec.imageSrc ? (
-                <figure className={`flex flex-col justify-between overflow-hidden border lg:col-span-5 ${
-                  isIvory ? 'border-[#F6F1E7]/14 bg-[#141311]' : 'border-[#F6F1E7]/14 bg-[#0B0A09]'
-                }`}>
+                <figure
+                  data-no-lightbox="true"
+                  className={`flex flex-col justify-between overflow-hidden border lg:col-span-5 ${
+                    isIvory ? 'border-[#F6F1E7]/14 bg-[#141311]' : 'border-[#F6F1E7]/14 bg-[#0B0A09]'
+                  }`}
+                >
                   <img
-                    src={sec.imageSrc}
+                    src={toCardPoster4x5(sec.imageSrc)}
                     alt={sec.imageAlt}
                     title={sec.h3Title}
                     width={1080}

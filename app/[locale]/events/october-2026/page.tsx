@@ -43,7 +43,7 @@ export default async function October2026EventsPage({params}:Props){
     dateLabel: formatOctoberEventDate(code, item.dateISO),
     venueId: item.venueId || item.venueName,
     venueName: item.venueName,
-    image: { src: item.image, width: 1200, height: 675, alt: item.title },
+    image: { src: item.image, width: 1080, height: 1350, alt: item.title },
     statusBadge: scarcity.almostSoldOutBadge,
     openEventCtaLabel: scarcity.openEventCardCta,
     booking: item.affiliateUrl ? { href: item.affiliateUrl, label: 'Xceed', affiliate: true } : undefined,

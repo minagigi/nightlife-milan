@@ -152,12 +152,13 @@ function buildCoreHubEntriesInternal(freshCatalogDate: Date): MetadataRoute.Site
   const rollingHubDate = getRollingMilanDayLastModified(freshCatalogDate.getTime());
   const legalPaths = new Set(['/privacy', '/terms', '/cookie-policy', '/refund-policy']);
 
-  for (const locale of locales) {
+  const archiveHalloweenLocales: readonly LocaleCode[] = ['it', 'en', 'es', 'fr', 'de', 'pt'];
+  for (const locale of archiveHalloweenLocales) {
     entries.push({
       url: `${baseUrl}${halloweenPath(locale)}`,
       lastModified: evergreenDate,
-      changeFrequency: 'weekly',
-      priority: 0.85,
+      changeFrequency: 'monthly',
+      priority: 0.65,
     });
   }
 
@@ -218,9 +219,13 @@ function buildCoreHubEntriesInternal(freshCatalogDate: Date): MetadataRoute.Site
     { path: '/refund-policy', priority: 0.2, changeFrequency: 'yearly' as const },
   ];
 
+  const archiveHubPaths = new Set(['/events/past', '/events/october-2026']);
   locales.forEach((locale) => {
     const langPrefix = localePrefix(locale);
     staticRoutes.forEach((route) => {
+      if ((legalPaths.has(route.path) || archiveHubPaths.has(route.path)) && !archiveHalloweenLocales.includes(locale)) {
+        return;
+      }
       const locPath = route.path ? getLocalizedSeoPagePath35(route.path, locale) : '';
       entries.push({
         url: `${baseUrl}${langPrefix}${locPath}`,
@@ -344,6 +349,11 @@ function buildEventsEntriesInternal(ebEvents: readonly Event[]): MetadataRoute.S
     ...mockEvents.map((event) => ({ event })),
   ]).map(({ event }) => event);
 
+  const archiveCutoffMs = nowMs - 7 * 86400000;
+  const deepArchiveCutoffMs = nowMs - 21 * 86400000;
+  const archiveCoreLocales: readonly LocaleCode[] = ['it', 'en', 'es', 'fr', 'de', 'pt'];
+  const deepArchiveLocales: readonly LocaleCode[] = [];
+
   physicalEvents.forEach((event) => {
     if (
       event.id === 'e-nye-2027-justme' ||
@@ -352,9 +362,16 @@ function buildEventsEntriesInternal(ebEvents: readonly Event[]): MetadataRoute.S
     ) {
       return;
     }
-    const isUpcoming = Date.parse(event.endDateISO || event.dateISO) >= nowMs;
+    const endMs = Date.parse(event.endDateISO || event.dateISO);
+    const isUpcoming = endMs >= nowMs;
     const evLastMod = clampLastModified(event.updatedAt, catalogLastMod.getTime());
-    locales.forEach((locale) => {
+    const targetLocales: readonly LocaleCode[] =
+      endMs >= archiveCutoffMs
+        ? locales
+        : endMs >= deepArchiveCutoffMs
+          ? archiveCoreLocales
+          : ['it', 'en'];
+    targetLocales.forEach((locale) => {
       const langPrefix = localePrefix(locale);
       const rawSlug = getLocalizedText(event.localizedContent.slug, locale);
       if (!rawSlug) return;
@@ -368,14 +385,16 @@ function buildEventsEntriesInternal(ebEvents: readonly Event[]): MetadataRoute.S
     });
   });
 
-  const archiveCutoffMs = nowMs - 7 * 86400000;
-  const archiveCoreLocales: readonly LocaleCode[] = ['it', 'en', 'es', 'fr', 'de', 'pt'];
-
   OCTOBER_EVENTS.forEach((event) => {
     if (event.id === '251019' || event.id === '249169' || event.id === '249216' || event.id === '249217') return;
     const endMs = Date.parse(event.endISO || event.startISO);
     const isUpcoming = endMs >= nowMs;
-    const targetLocales = endMs >= archiveCutoffMs ? locales : archiveCoreLocales;
+    const targetLocales =
+      endMs >= archiveCutoffMs
+        ? locales
+        : endMs >= deepArchiveCutoffMs
+          ? archiveCoreLocales
+          : deepArchiveLocales;
     targetLocales.forEach((locale) => {
       entries.push({
         url: octoberEventCanonical(event, locale),
@@ -394,13 +413,14 @@ function buildEventsEntriesInternal(ebEvents: readonly Event[]): MetadataRoute.S
     const indexedSiteLocales = profile.indexedLocales
       || (profile.siteLocales || []).filter((siteLocale) => indexedLocaleCodes.includes(siteLocale));
     const evDate = new Date(`${profile.dateISO}T00:00:00+02:00`);
-    const isUpcoming = evDate.getTime() + 86400000 >= nowMs;
+    const endMs = evDate.getTime() + 86400000;
+    const isUpcoming = endMs >= nowMs;
     indexedSiteLocales.forEach((siteLocale) => {
       entries.push({
         url: `${baseUrl}${localePrefix(siteLocale)}/${getLocalizedDir35('events', siteLocale)}/${getEventBatchSlug(profile, siteLocale)}`,
         lastModified: catalogLastMod,
         changeFrequency: isUpcoming ? 'daily' : 'monthly',
-        priority: isUpcoming ? 0.9 : 0.6,
+        priority: isUpcoming ? 0.95 : 0.91,
       });
     });
   });
@@ -545,8 +565,42 @@ export async function buildGuidesTaxonomySitemapEntriesAsync(): Promise<Metadata
   return buildGuidesTaxonomySitemapEntries();
 }
 
+const MONOLITHIC_SITEMAP_MAX_URLS = 19500;
+const PRIMARY_ROLLUP_LOCALE_PREFIXES = new Set([
+  'it', 'es', 'fr', 'de', 'pt', 'nl', 'ru', 'tr', 'zh', 'ar',
+]);
+
+function isPrimaryRollupUrl(url: string): boolean {
+  try {
+    const pathname = new URL(url).pathname;
+    const firstSeg = pathname.split('/').filter(Boolean)[0] || '';
+    if (!firstSeg || firstSeg.length > 3) return true; // default 'en' (no locale prefix)
+    return PRIMARY_ROLLUP_LOCALE_PREFIXES.has(firstSeg);
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Caps the legacy monolithic /sitemap.xml roll-up at 20,000 highest-priority URLs (~3.35 MB)
+ * so /sitemap.xml stays safely below 3.8 MB (and Vercel's 4.5 MB Serverless response ceiling),
+ * while /sitemap-index.xml + the 5 child sitemaps expose 100% of URLs across all 35 languages.
+ */
+export function capMonolithicSitemapEntries(entries: MetadataRoute.Sitemap): MetadataRoute.Sitemap {
+  const deduped = dedupeAndSortSitemap(entries);
+  if (deduped.length <= MONOLITHIC_SITEMAP_MAX_URLS) return deduped;
+  const ranked = [...deduped].sort((a, b) => {
+    const prioDiff = (b.priority ?? 0.5) - (a.priority ?? 0.5);
+    if (Math.abs(prioDiff) > 1e-6) return prioDiff;
+    const tierDiff = Number(isPrimaryRollupUrl(b.url)) - Number(isPrimaryRollupUrl(a.url));
+    if (tierDiff !== 0) return tierDiff;
+    return a.url.localeCompare(b.url);
+  });
+  return ranked.slice(0, MONOLITHIC_SITEMAP_MAX_URLS).sort((a, b) => a.url.localeCompare(b.url));
+}
+
 export function buildAllSitemapEntries(): MetadataRoute.Sitemap {
-  return dedupeAndSortSitemap([
+  return capMonolithicSitemapEntries([
     ...buildCoreHubSitemapEntries(),
     ...buildClubsSitemapEntries(),
     ...buildCapodannoSitemapEntries(),
@@ -564,7 +618,7 @@ export async function buildAllSitemapEntriesAsync(): Promise<MetadataRoute.Sitem
       if (ms > latestMs) latestMs = ms;
     }
   }
-  return dedupeAndSortSitemap([
+  return capMonolithicSitemapEntries([
     ...buildCoreHubEntriesInternal(new Date(latestMs)),
     ...buildClubsEntriesInternal(ebEvents),
     ...buildCapodannoSitemapEntries(),
@@ -603,6 +657,9 @@ export function renderSitemapXml(
     const prio = typeof entry.priority === 'number' ? `<priority>${entry.priority.toFixed(2)}</priority>` : '';
     return `<url><loc>${loc}</loc><lastmod>${escapeXml(lastMod)}</lastmod>${freq}${prio}</url>`;
   });
+  if (compact) {
+    return `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${rows.join('')}</urlset>`;
+  }
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${rows.join('\n')}\n</urlset>\n`;
 }
 

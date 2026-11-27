@@ -1523,5 +1523,2744 @@ export const weeklyEvents: WeeklyEvent[] = [
     faqs: defaultFaqs('Number One Franciacorta', 'Via Provinciale 1/B, Corte Franca (BS)', '18+', 'Smart Club Casual', 'EDM, Commercial, Tech-House and Urban'),
     image: '/images/events/weekly-posters/number-one-brescia-saturday.webp',
     priority: 68
+  },
+
+  // --- COMPLETE 47-VENUE WEEKLY SCHEDULE COVERAGE (2026-11-27) ---,
+  {
+    id: "tocqueville-thursday-corso-como-thursday",
+    clubSlug: "tocqueville",
+    clubName: "Tocqueville 13 Milano",
+    day: "thursday",
+    dayOfWeek: 4,
+    eventSlug: "corso-como-thursday",
+    name: "Corso Como Urban & House Night",
+    genres: ["Hip-Hop", "Commercial", "House"],
+    target: "21+, Corso Como Fashion & International Crowd",
+    description: {
+      en: "Thursday program at Tocqueville 13 Milano (Via Alessio di Tocqueville 13, Corso Como, Milan): Corso Como Urban & House Night. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del giovedì da Tocqueville 13 Milano (Via Alessio di Tocqueville 13, Corso Como, Milan): Corso Como Urban & House Night. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "Dinner Show upon request", "club": "From €20", "tables": "From €300 to €1,500"},
+    dressCode: {
+      en: "Smart Chic & Corso Como Glamour.",
+      it: "Smart Chic & Glamour Corso Como."
+    },
+    faqs: defaultFaqs("Tocqueville 13 Milano", "Via Alessio di Tocqueville 13, Corso Como, Milan", "21+", "Smart Chic & Corso Como Glamour.", "Hip-Hop, Commercial, House"),
+    image: "/images/events/weekly-posters/tocqueville-milano-weekly.webp",
+    priority: 86
+  },
+  {
+    id: "tocqueville-friday-friday-dinner-club",
+    clubSlug: "tocqueville",
+    clubName: "Tocqueville 13 Milano",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-dinner-club",
+    name: "Friday Dinner Show & Corso Como Club",
+    genres: ["Hip-Hop", "Commercial", "House"],
+    target: "21+, Corso Como Fashion & International Crowd",
+    description: {
+      en: "Friday program at Tocqueville 13 Milano (Via Alessio di Tocqueville 13, Corso Como, Milan): Friday Dinner Show & Corso Como Club. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da Tocqueville 13 Milano (Via Alessio di Tocqueville 13, Corso Como, Milan): Friday Dinner Show & Corso Como Club. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "Dinner Show upon request", "club": "From €20", "tables": "From €300 to €1,500"},
+    dressCode: {
+      en: "Smart Chic & Corso Como Glamour.",
+      it: "Smart Chic & Glamour Corso Como."
+    },
+    faqs: defaultFaqs("Tocqueville 13 Milano", "Via Alessio di Tocqueville 13, Corso Como, Milan", "21+", "Smart Chic & Corso Como Glamour.", "Hip-Hop, Commercial, House"),
+    image: "/images/events/weekly-posters/tocqueville-milano-weekly.webp",
+    priority: 86
+  },
+  {
+    id: "tocqueville-saturday-saturday-glamour-club",
+    clubSlug: "tocqueville",
+    clubName: "Tocqueville 13 Milano",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-glamour-club",
+    name: "Saturday Glamour Show & VIP Privé",
+    genres: ["Hip-Hop", "Commercial", "House"],
+    target: "21+, Corso Como Fashion & International Crowd",
+    description: {
+      en: "Saturday program at Tocqueville 13 Milano (Via Alessio di Tocqueville 13, Corso Como, Milan): Saturday Glamour Show & VIP Privé. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da Tocqueville 13 Milano (Via Alessio di Tocqueville 13, Corso Como, Milan): Saturday Glamour Show & VIP Privé. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "Dinner Show upon request", "club": "From €20", "tables": "From €300 to €1,500"},
+    dressCode: {
+      en: "Smart Chic & Corso Como Glamour.",
+      it: "Smart Chic & Glamour Corso Como."
+    },
+    faqs: defaultFaqs("Tocqueville 13 Milano", "Via Alessio di Tocqueville 13, Corso Como, Milan", "21+", "Smart Chic & Corso Como Glamour.", "Hip-Hop, Commercial, House"),
+    image: "/images/events/weekly-posters/tocqueville-milano-weekly.webp",
+    priority: 86
+  },
+  {
+    id: "tocqueville-sunday-sunday-corso-como-party",
+    clubSlug: "tocqueville",
+    clubName: "Tocqueville 13 Milano",
+    day: "sunday",
+    dayOfWeek: 0,
+    eventSlug: "sunday-corso-como-party",
+    name: "Sunday Corso Como International Party",
+    genres: ["Hip-Hop", "Commercial", "House"],
+    target: "21+, Corso Como Fashion & International Crowd",
+    description: {
+      en: "Sunday program at Tocqueville 13 Milano (Via Alessio di Tocqueville 13, Corso Como, Milan): Sunday Corso Como International Party. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del domenica da Tocqueville 13 Milano (Via Alessio di Tocqueville 13, Corso Como, Milan): Sunday Corso Como International Party. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "Dinner Show upon request", "club": "From €20", "tables": "From €300 to €1,500"},
+    dressCode: {
+      en: "Smart Chic & Corso Como Glamour.",
+      it: "Smart Chic & Glamour Corso Como."
+    },
+    faqs: defaultFaqs("Tocqueville 13 Milano", "Via Alessio di Tocqueville 13, Corso Como, Milan", "21+", "Smart Chic & Corso Como Glamour.", "Hip-Hop, Commercial, House"),
+    image: "/images/events/weekly-posters/tocqueville-milano-weekly.webp",
+    priority: 86
+  },
+  {
+    id: "armani-prive-thursday-couture-cocktail-thursday",
+    clubSlug: "armani-prive",
+    clubName: "Armani/Priv\u00e9 Milano",
+    day: "thursday",
+    dayOfWeek: 4,
+    eventSlug: "couture-cocktail-thursday",
+    name: "Couture Cocktail Lounge & Deep Grooves",
+    genres: ["House", "Deep House", "Commercial"],
+    target: "23+, Fashion Quadrilatero, International VIPs",
+    description: {
+      en: "Thursday program at Armani/Privé Milano (Via Gastone Pisoni 1, Fashion Quadrilatero, Milan): Couture Cocktail Lounge & Deep Grooves. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del giovedì da Armani/Privé Milano (Via Gastone Pisoni 1, Fashion Quadrilatero, Milan): Couture Cocktail Lounge & Deep Grooves. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Guestlist / Entry upon selection", "tables": "VIP Privé from €600 to €3,000"},
+    dressCode: {
+      en: "Strictly Haute Couture & Cocktail Chic.",
+      it: "Rigorosamente Elegante & Cocktail Chic."
+    },
+    faqs: defaultFaqs("Armani/Privé Milano", "Via Gastone Pisoni 1, Fashion Quadrilatero, Milan", "23+", "Strictly Haute Couture & Cocktail Chic.", "House, Deep House, Commercial"),
+    image: "/images/events/weekly-posters/armani-prive-resident-weekly.webp",
+    priority: 88
+  },
+  {
+    id: "armani-prive-friday-friday-fashion-prive",
+    clubSlug: "armani-prive",
+    clubName: "Armani/Priv\u00e9 Milano",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-fashion-prive",
+    name: "Friday Fashion District Privé Night",
+    genres: ["House", "Deep House", "Commercial"],
+    target: "23+, Fashion Quadrilatero, International VIPs",
+    description: {
+      en: "Friday program at Armani/Privé Milano (Via Gastone Pisoni 1, Fashion Quadrilatero, Milan): Friday Fashion District Privé Night. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da Armani/Privé Milano (Via Gastone Pisoni 1, Fashion Quadrilatero, Milan): Friday Fashion District Privé Night. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Guestlist / Entry upon selection", "tables": "VIP Privé from €600 to €3,000"},
+    dressCode: {
+      en: "Strictly Haute Couture & Cocktail Chic.",
+      it: "Rigorosamente Elegante & Cocktail Chic."
+    },
+    faqs: defaultFaqs("Armani/Privé Milano", "Via Gastone Pisoni 1, Fashion Quadrilatero, Milan", "23+", "Strictly Haute Couture & Cocktail Chic.", "House, Deep House, Commercial"),
+    image: "/images/events/weekly-posters/armani-prive-resident-weekly.webp",
+    priority: 88
+  },
+  {
+    id: "armani-prive-saturday-saturday-haute-couture-club",
+    clubSlug: "armani-prive",
+    clubName: "Armani/Priv\u00e9 Milano",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-haute-couture-club",
+    name: "Saturday Haute Couture VIP Clubbing",
+    genres: ["House", "Deep House", "Commercial"],
+    target: "23+, Fashion Quadrilatero, International VIPs",
+    description: {
+      en: "Saturday program at Armani/Privé Milano (Via Gastone Pisoni 1, Fashion Quadrilatero, Milan): Saturday Haute Couture VIP Clubbing. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da Armani/Privé Milano (Via Gastone Pisoni 1, Fashion Quadrilatero, Milan): Saturday Haute Couture VIP Clubbing. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Guestlist / Entry upon selection", "tables": "VIP Privé from €600 to €3,000"},
+    dressCode: {
+      en: "Strictly Haute Couture & Cocktail Chic.",
+      it: "Rigorosamente Elegante & Cocktail Chic."
+    },
+    faqs: defaultFaqs("Armani/Privé Milano", "Via Gastone Pisoni 1, Fashion Quadrilatero, Milan", "23+", "Strictly Haute Couture & Cocktail Chic.", "House, Deep House, Commercial"),
+    image: "/images/events/weekly-posters/armani-prive-resident-weekly.webp",
+    priority: 88
+  },
+  {
+    id: "volt-friday-friday-avant-garde-sound",
+    clubSlug: "volt",
+    clubName: "Volt Club Milano",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-avant-garde-sound",
+    name: "Friday Avant-Garde Electronic & House",
+    genres: ["Melodic Techno", "House", "Electronic"],
+    target: "21+, Electronic Music Connoisseurs & Creative Crowd",
+    description: {
+      en: "Friday program at Volt Club Milano (Via Molino delle Armi 16, Milan): Friday Avant-Garde Electronic & House. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da Volt Club Milano (Via Molino delle Armi 16, Milan): Friday Avant-Garde Electronic & House. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "From €20", "tables": "Backstage & Privé from €400"},
+    dressCode: {
+      en: "Minimal Dark & Contemporary Clubwear.",
+      it: "Minimal Dark & Clubwear Contemporaneo."
+    },
+    faqs: defaultFaqs("Volt Club Milano", "Via Molino delle Armi 16, Milan", "21+", "Minimal Dark & Contemporary Clubwear.", "Melodic Techno, House, Electronic"),
+    image: "/images/events/weekly-posters/volt-club-resident-weekly.webp",
+    priority: 84
+  },
+  {
+    id: "volt-saturday-saturday-melodic-techno",
+    clubSlug: "volt",
+    clubName: "Volt Club Milano",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-melodic-techno",
+    name: "Saturday Melodic Techno & Underground Showcase",
+    genres: ["Melodic Techno", "House", "Electronic"],
+    target: "21+, Electronic Music Connoisseurs & Creative Crowd",
+    description: {
+      en: "Saturday program at Volt Club Milano (Via Molino delle Armi 16, Milan): Saturday Melodic Techno & Underground Showcase. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da Volt Club Milano (Via Molino delle Armi 16, Milan): Saturday Melodic Techno & Underground Showcase. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "From €20", "tables": "Backstage & Privé from €400"},
+    dressCode: {
+      en: "Minimal Dark & Contemporary Clubwear.",
+      it: "Minimal Dark & Clubwear Contemporaneo."
+    },
+    faqs: defaultFaqs("Volt Club Milano", "Via Molino delle Armi 16, Milan", "21+", "Minimal Dark & Contemporary Clubwear.", "Melodic Techno, House, Electronic"),
+    image: "/images/events/weekly-posters/volt-club-resident-weekly.webp",
+    priority: 84
+  },
+  {
+    id: "alcatraz-friday-friday-all-you-can-dance",
+    clubSlug: "alcatraz",
+    clubName: "Alcatraz Milano",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-all-you-can-dance",
+    name: "Friday 3-Room Arena Party & Live Show",
+    genres: ["Commercial", "Reggaeton", "90s-2000s", "Rock"],
+    target: "18+, Multi-Room Arena & University Crowd",
+    description: {
+      en: "Friday program at Alcatraz Milano (Via Valtellina 25, Isola / Scalo Farini, Milan): Friday 3-Room Arena Party & Live Show. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da Alcatraz Milano (Via Valtellina 25, Isola / Scalo Farini, Milan): Friday 3-Room Arena Party & Live Show. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "From €15", "tables": "Arena Balcony Privé from €250"},
+    dressCode: {
+      en: "Smart Casual Clubbing (original ID required).",
+      it: "Smart Casual Clubbing (documento originale obbligatorio)."
+    },
+    faqs: defaultFaqs("Alcatraz Milano", "Via Valtellina 25, Isola / Scalo Farini, Milan", "18+", "Smart Casual Clubbing (original ID required).", "Commercial, Reggaeton, 90s-2000s, Rock"),
+    image: "/images/events/weekly-posters/alcatraz-all-you-can-dance.webp",
+    priority: 83
+  },
+  {
+    id: "alcatraz-saturday-saturday-mega-arena",
+    clubSlug: "alcatraz",
+    clubName: "Alcatraz Milano",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-mega-arena",
+    name: "Saturday All You Can Dance · 3 Dancefloors",
+    genres: ["Commercial", "Reggaeton", "90s-2000s", "Rock"],
+    target: "18+, Multi-Room Arena & University Crowd",
+    description: {
+      en: "Saturday program at Alcatraz Milano (Via Valtellina 25, Isola / Scalo Farini, Milan): Saturday All You Can Dance · 3 Dancefloors. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da Alcatraz Milano (Via Valtellina 25, Isola / Scalo Farini, Milan): Saturday All You Can Dance · 3 Dancefloors. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "From €15", "tables": "Arena Balcony Privé from €250"},
+    dressCode: {
+      en: "Smart Casual Clubbing (original ID required).",
+      it: "Smart Casual Clubbing (documento originale obbligatorio)."
+    },
+    faqs: defaultFaqs("Alcatraz Milano", "Via Valtellina 25, Isola / Scalo Farini, Milan", "18+", "Smart Casual Clubbing (original ID required).", "Commercial, Reggaeton, 90s-2000s, Rock"),
+    image: "/images/events/weekly-posters/alcatraz-all-you-can-dance.webp",
+    priority: 83
+  },
+  {
+    id: "fabrique-friday-friday-live-club-arena",
+    clubSlug: "fabrique",
+    clubName: "Fabrique Milano",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-live-club-arena",
+    name: "Friday Live Showcase & Arena Club Night",
+    genres: ["Electronic", "Live Concerts", "Tech-House", "Urban"],
+    target: "18+, Live Concert & International Festival Fans",
+    description: {
+      en: "Friday program at Fabrique Milano (Via Gaudenzio Fantoli 9, Mecenate, Milan): Friday Live Showcase & Arena Club Night. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da Fabrique Milano (Via Gaudenzio Fantoli 9, Mecenate, Milan): Friday Live Showcase & Arena Club Night. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Upon event / WhatsApp Concierge", "tables": "VIP Ring Privé upon request"},
+    dressCode: {
+      en: "Contemporary Urban & Concert Clubwear.",
+      it: "Urban Contemporaneo & Clubwear da Arena."
+    },
+    faqs: defaultFaqs("Fabrique Milano", "Via Gaudenzio Fantoli 9, Mecenate, Milan", "18+", "Contemporary Urban & Concert Clubwear.", "Electronic, Live Concerts, Tech-House, Urban"),
+    image: "/images/events/weekly-posters/fabrique-resident-weekly.webp",
+    priority: 82
+  },
+  {
+    id: "fabrique-saturday-saturday-festival-arena",
+    clubSlug: "fabrique",
+    clubName: "Fabrique Milano",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-festival-arena",
+    name: "Saturday International Electronic & Club Arena",
+    genres: ["Electronic", "Live Concerts", "Tech-House", "Urban"],
+    target: "18+, Live Concert & International Festival Fans",
+    description: {
+      en: "Saturday program at Fabrique Milano (Via Gaudenzio Fantoli 9, Mecenate, Milan): Saturday International Electronic & Club Arena. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da Fabrique Milano (Via Gaudenzio Fantoli 9, Mecenate, Milan): Saturday International Electronic & Club Arena. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Upon event / WhatsApp Concierge", "tables": "VIP Ring Privé upon request"},
+    dressCode: {
+      en: "Contemporary Urban & Concert Clubwear.",
+      it: "Urban Contemporaneo & Clubwear da Arena."
+    },
+    faqs: defaultFaqs("Fabrique Milano", "Via Gaudenzio Fantoli 9, Mecenate, Milan", "18+", "Contemporary Urban & Concert Clubwear.", "Electronic, Live Concerts, Tech-House, Urban"),
+    image: "/images/events/weekly-posters/fabrique-resident-weekly.webp",
+    priority: 82
+  },
+  {
+    id: "amnesia-saturday-saturday-tech-house-temple",
+    clubSlug: "amnesia",
+    clubName: "Amnesia Milano",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-tech-house-temple",
+    name: "Saturday International Tech-House & Techno Showcase",
+    genres: ["Tech-House", "Techno", "House"],
+    target: "20+, International Tech-House & Techno Clubbers",
+    description: {
+      en: "Saturday program at Amnesia Milano (Via Alfonso Gatti, Forlanini, Milan): Saturday International Tech-House & Techno Showcase. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da Amnesia Milano (Via Alfonso Gatti, Forlanini, Milan): Saturday International Tech-House & Techno Showcase. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "From €25", "tables": "Console & Privé from €400"},
+    dressCode: {
+      en: "Contemporary Electronic Clubwear.",
+      it: "Clubwear Elettronico Curato."
+    },
+    faqs: defaultFaqs("Amnesia Milano", "Via Alfonso Gatti, Forlanini, Milan", "20+", "Contemporary Electronic Clubwear.", "Tech-House, Techno, House"),
+    image: "/images/events/weekly-posters/amnesia-resident-weekly.webp",
+    priority: 83
+  },
+  {
+    id: "hollywood-tuesday-tuesday-international-party",
+    clubSlug: "hollywood",
+    clubName: "Hollywood Rythmoteque Milano",
+    day: "tuesday",
+    dayOfWeek: 2,
+    eventSlug: "tuesday-international-party",
+    name: "Tuesday Corso Como International Party",
+    genres: ["Commercial", "Hip-Hop", "Reggaeton", "House"],
+    target: "20+, International Models, Students & Corso Como Crowd",
+    description: {
+      en: "Tuesday program at Hollywood Rythmoteque Milano (Corso Como 15, Porta Garibaldi, Milan): Tuesday Corso Como International Party. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del martedì da Hollywood Rythmoteque Milano (Corso Como 15, Porta Garibaldi, Milan): Tuesday Corso Como International Party. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "From €20", "tables": "VIP Privé from €300"},
+    dressCode: {
+      en: "Corso Como Chic & Glamour.",
+      it: "Chic & Glamour Corso Como."
+    },
+    faqs: defaultFaqs("Hollywood Rythmoteque Milano", "Corso Como 15, Porta Garibaldi, Milan", "20+", "Corso Como Chic & Glamour.", "Commercial, Hip-Hop, Reggaeton, House"),
+    image: "/images/events/weekly-posters/hollywood-milano-weekly.webp",
+    priority: 82
+  },
+  {
+    id: "hollywood-wednesday-wednesday-midweek-club",
+    clubSlug: "hollywood",
+    clubName: "Hollywood Rythmoteque Milano",
+    day: "wednesday",
+    dayOfWeek: 3,
+    eventSlug: "wednesday-midweek-club",
+    name: "Wednesday Corso Como Club Night",
+    genres: ["Commercial", "Hip-Hop", "Reggaeton", "House"],
+    target: "20+, International Models, Students & Corso Como Crowd",
+    description: {
+      en: "Wednesday program at Hollywood Rythmoteque Milano (Corso Como 15, Porta Garibaldi, Milan): Wednesday Corso Como Club Night. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del mercoledì da Hollywood Rythmoteque Milano (Corso Como 15, Porta Garibaldi, Milan): Wednesday Corso Como Club Night. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "From €20", "tables": "VIP Privé from €300"},
+    dressCode: {
+      en: "Corso Como Chic & Glamour.",
+      it: "Chic & Glamour Corso Como."
+    },
+    faqs: defaultFaqs("Hollywood Rythmoteque Milano", "Corso Como 15, Porta Garibaldi, Milan", "20+", "Corso Como Chic & Glamour.", "Commercial, Hip-Hop, Reggaeton, House"),
+    image: "/images/events/weekly-posters/hollywood-milano-weekly.webp",
+    priority: 82
+  },
+  {
+    id: "hollywood-thursday-thursday-glamour-hits",
+    clubSlug: "hollywood",
+    clubName: "Hollywood Rythmoteque Milano",
+    day: "thursday",
+    dayOfWeek: 4,
+    eventSlug: "thursday-glamour-hits",
+    name: "Thursday Glamour & Urban Hits",
+    genres: ["Commercial", "Hip-Hop", "Reggaeton", "House"],
+    target: "20+, International Models, Students & Corso Como Crowd",
+    description: {
+      en: "Thursday program at Hollywood Rythmoteque Milano (Corso Como 15, Porta Garibaldi, Milan): Thursday Glamour & Urban Hits. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del giovedì da Hollywood Rythmoteque Milano (Corso Como 15, Porta Garibaldi, Milan): Thursday Glamour & Urban Hits. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "From €20", "tables": "VIP Privé from €300"},
+    dressCode: {
+      en: "Corso Como Chic & Glamour.",
+      it: "Chic & Glamour Corso Como."
+    },
+    faqs: defaultFaqs("Hollywood Rythmoteque Milano", "Corso Como 15, Porta Garibaldi, Milan", "20+", "Corso Como Chic & Glamour.", "Commercial, Hip-Hop, Reggaeton, House"),
+    image: "/images/events/weekly-posters/hollywood-milano-weekly.webp",
+    priority: 82
+  },
+  {
+    id: "hollywood-friday-friday-rythmoteque-club",
+    clubSlug: "hollywood",
+    clubName: "Hollywood Rythmoteque Milano",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-rythmoteque-club",
+    name: "Friday Historic Corso Como Clubbing",
+    genres: ["Commercial", "Hip-Hop", "Reggaeton", "House"],
+    target: "20+, International Models, Students & Corso Como Crowd",
+    description: {
+      en: "Friday program at Hollywood Rythmoteque Milano (Corso Como 15, Porta Garibaldi, Milan): Friday Historic Corso Como Clubbing. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da Hollywood Rythmoteque Milano (Corso Como 15, Porta Garibaldi, Milan): Friday Historic Corso Como Clubbing. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "From €20", "tables": "VIP Privé from €300"},
+    dressCode: {
+      en: "Corso Como Chic & Glamour.",
+      it: "Chic & Glamour Corso Como."
+    },
+    faqs: defaultFaqs("Hollywood Rythmoteque Milano", "Corso Como 15, Porta Garibaldi, Milan", "20+", "Corso Como Chic & Glamour.", "Commercial, Hip-Hop, Reggaeton, House"),
+    image: "/images/events/weekly-posters/hollywood-milano-weekly.webp",
+    priority: 82
+  },
+  {
+    id: "hollywood-saturday-saturday-iconic-vip-night",
+    clubSlug: "hollywood",
+    clubName: "Hollywood Rythmoteque Milano",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-iconic-vip-night",
+    name: "Saturday Iconic Corso Como VIP Night",
+    genres: ["Commercial", "Hip-Hop", "Reggaeton", "House"],
+    target: "20+, International Models, Students & Corso Como Crowd",
+    description: {
+      en: "Saturday program at Hollywood Rythmoteque Milano (Corso Como 15, Porta Garibaldi, Milan): Saturday Iconic Corso Como VIP Night. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da Hollywood Rythmoteque Milano (Corso Como 15, Porta Garibaldi, Milan): Saturday Iconic Corso Como VIP Night. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "From €20", "tables": "VIP Privé from €300"},
+    dressCode: {
+      en: "Corso Como Chic & Glamour.",
+      it: "Chic & Glamour Corso Como."
+    },
+    faqs: defaultFaqs("Hollywood Rythmoteque Milano", "Corso Como 15, Porta Garibaldi, Milan", "20+", "Corso Como Chic & Glamour.", "Commercial, Hip-Hop, Reggaeton, House"),
+    image: "/images/events/weekly-posters/hollywood-milano-weekly.webp",
+    priority: 82
+  },
+  {
+    id: "hollywood-sunday-sunday-late-party",
+    clubSlug: "hollywood",
+    clubName: "Hollywood Rythmoteque Milano",
+    day: "sunday",
+    dayOfWeek: 0,
+    eventSlug: "sunday-late-party",
+    name: "Sunday Corso Como Closing Party",
+    genres: ["Commercial", "Hip-Hop", "Reggaeton", "House"],
+    target: "20+, International Models, Students & Corso Como Crowd",
+    description: {
+      en: "Sunday program at Hollywood Rythmoteque Milano (Corso Como 15, Porta Garibaldi, Milan): Sunday Corso Como Closing Party. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del domenica da Hollywood Rythmoteque Milano (Corso Como 15, Porta Garibaldi, Milan): Sunday Corso Como Closing Party. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "From €20", "tables": "VIP Privé from €300"},
+    dressCode: {
+      en: "Corso Como Chic & Glamour.",
+      it: "Chic & Glamour Corso Como."
+    },
+    faqs: defaultFaqs("Hollywood Rythmoteque Milano", "Corso Como 15, Porta Garibaldi, Milan", "20+", "Corso Como Chic & Glamour.", "Commercial, Hip-Hop, Reggaeton, House"),
+    image: "/images/events/weekly-posters/hollywood-milano-weekly.webp",
+    priority: 82
+  },
+  {
+    id: "11clubroom-thursday-thursday-velvet-urban",
+    clubSlug: "11clubroom",
+    clubName: "11Clubroom Milano",
+    day: "thursday",
+    dayOfWeek: 4,
+    eventSlug: "thursday-velvet-urban",
+    name: "Thursday Velvet Lounge & Urban Grooves",
+    genres: ["Hip-Hop", "RnB", "House", "Commercial"],
+    target: "21+, Boutique VIP Lounge & Corso Como Insiders",
+    description: {
+      en: "Thursday program at 11Clubroom Milano (Via Alessio di Tocqueville 11, Corso Como, Milan): Thursday Velvet Lounge & Urban Grooves. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del giovedì da 11Clubroom Milano (Via Alessio di Tocqueville 11, Corso Como, Milan): Thursday Velvet Lounge & Urban Grooves. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "From €20", "tables": "Boutique Privé from €300"},
+    dressCode: {
+      en: "Smart Elegant & Boutique Lounge Chic.",
+      it: "Smart Elegant & Boutique Lounge Chic."
+    },
+    faqs: defaultFaqs("11Clubroom Milano", "Via Alessio di Tocqueville 11, Corso Como, Milan", "21+", "Smart Elegant & Boutique Lounge Chic.", "Hip-Hop, RnB, House, Commercial"),
+    image: "/images/events/weekly-posters/11clubroom-milano-weekly.webp",
+    priority: 80
+  },
+  {
+    id: "11clubroom-friday-friday-boutique-clubroom",
+    clubSlug: "11clubroom",
+    clubName: "11Clubroom Milano",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-boutique-clubroom",
+    name: "Friday Boutique Clubroom & VIP Bottles",
+    genres: ["Hip-Hop", "RnB", "House", "Commercial"],
+    target: "21+, Boutique VIP Lounge & Corso Como Insiders",
+    description: {
+      en: "Friday program at 11Clubroom Milano (Via Alessio di Tocqueville 11, Corso Como, Milan): Friday Boutique Clubroom & VIP Bottles. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da 11Clubroom Milano (Via Alessio di Tocqueville 11, Corso Como, Milan): Friday Boutique Clubroom & VIP Bottles. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "From €20", "tables": "Boutique Privé from €300"},
+    dressCode: {
+      en: "Smart Elegant & Boutique Lounge Chic.",
+      it: "Smart Elegant & Boutique Lounge Chic."
+    },
+    faqs: defaultFaqs("11Clubroom Milano", "Via Alessio di Tocqueville 11, Corso Como, Milan", "21+", "Smart Elegant & Boutique Lounge Chic.", "Hip-Hop, RnB, House, Commercial"),
+    image: "/images/events/weekly-posters/11clubroom-milano-weekly.webp",
+    priority: 80
+  },
+  {
+    id: "11clubroom-saturday-saturday-intimate-prive",
+    clubSlug: "11clubroom",
+    clubName: "11Clubroom Milano",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-intimate-prive",
+    name: "Saturday Intimate Corso Como Privé Night",
+    genres: ["Hip-Hop", "RnB", "House", "Commercial"],
+    target: "21+, Boutique VIP Lounge & Corso Como Insiders",
+    description: {
+      en: "Saturday program at 11Clubroom Milano (Via Alessio di Tocqueville 11, Corso Como, Milan): Saturday Intimate Corso Como Privé Night. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da 11Clubroom Milano (Via Alessio di Tocqueville 11, Corso Como, Milan): Saturday Intimate Corso Como Privé Night. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "From €20", "tables": "Boutique Privé from €300"},
+    dressCode: {
+      en: "Smart Elegant & Boutique Lounge Chic.",
+      it: "Smart Elegant & Boutique Lounge Chic."
+    },
+    faqs: defaultFaqs("11Clubroom Milano", "Via Alessio di Tocqueville 11, Corso Como, Milan", "21+", "Smart Elegant & Boutique Lounge Chic.", "Hip-Hop, RnB, House, Commercial"),
+    image: "/images/events/weekly-posters/11clubroom-milano-weekly.webp",
+    priority: 80
+  },
+  {
+    id: "gattopardo-friday-friday-chandelier-gala",
+    clubSlug: "gattopardo",
+    clubName: "Il Gattopardo Milano",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-chandelier-gala",
+    name: "Friday Chandelier Aperitivo & Club Gala",
+    genres: ["House", "Commercial", "Dinner Show"],
+    target: "21+, Sempione Elegant & University Gala Crowd",
+    description: {
+      en: "Friday program at Il Gattopardo Milano (Via Piero della Francesca 47, Sempione, Milan): Friday Chandelier Aperitivo & Club Gala. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da Il Gattopardo Milano (Via Piero della Francesca 47, Sempione, Milan): Friday Chandelier Aperitivo & Club Gala. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "From €20", "tables": "Chandelier Privé from €350"},
+    dressCode: {
+      en: "Strictly Elegant (collared shirt required for men).",
+      it: "Rigorosamente Elegante (camicia obbligatoria per gli uomini)."
+    },
+    faqs: defaultFaqs("Il Gattopardo Milano", "Via Piero della Francesca 47, Sempione, Milan", "21+", "Strictly Elegant (collared shirt required for men).", "House, Commercial, Dinner Show"),
+    image: "/images/events/weekly-posters/gattopardo-milano-weekly.webp",
+    priority: 81
+  },
+  {
+    id: "gattopardo-saturday-saturday-grand-nave-party",
+    clubSlug: "gattopardo",
+    clubName: "Il Gattopardo Milano",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-grand-nave-party",
+    name: "Saturday Grand Nave House & Commercial Party",
+    genres: ["House", "Commercial", "Dinner Show"],
+    target: "21+, Sempione Elegant & University Gala Crowd",
+    description: {
+      en: "Saturday program at Il Gattopardo Milano (Via Piero della Francesca 47, Sempione, Milan): Saturday Grand Nave House & Commercial Party. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da Il Gattopardo Milano (Via Piero della Francesca 47, Sempione, Milan): Saturday Grand Nave House & Commercial Party. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "From €20", "tables": "Chandelier Privé from €350"},
+    dressCode: {
+      en: "Strictly Elegant (collared shirt required for men).",
+      it: "Rigorosamente Elegante (camicia obbligatoria per gli uomini)."
+    },
+    faqs: defaultFaqs("Il Gattopardo Milano", "Via Piero della Francesca 47, Sempione, Milan", "21+", "Strictly Elegant (collared shirt required for men).", "House, Commercial, Dinner Show"),
+    image: "/images/events/weekly-posters/gattopardo-milano-weekly.webp",
+    priority: 81
+  },
+  {
+    id: "dazi-wednesday-wednesday-arco-aperitivo",
+    clubSlug: "dazi",
+    clubName: "Dazi Milano",
+    day: "wednesday",
+    dayOfWeek: 3,
+    eventSlug: "wednesday-arco-aperitivo",
+    name: "Wednesday Arco della Pace Aperitivo & DJ Set",
+    genres: ["Cocktail Lounge", "House", "Commercial"],
+    target: "21+, Arco della Pace Aperitivo, Dinner & Late Lounge Crowd",
+    description: {
+      en: "Wednesday program at Dazi Milano (Piazza Sempione 1, Arco della Pace, Milan): Wednesday Arco della Pace Aperitivo & DJ Set. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del mercoledì da Dazi Milano (Piazza Sempione 1, Arco della Pace, Milan): Wednesday Arco della Pace Aperitivo & DJ Set. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "Lounge selection", "tables": "Reserved Lounge from €250"},
+    dressCode: {
+      en: "Smart Chic Arco della Pace.",
+      it: "Smart Chic Arco della Pace."
+    },
+    faqs: defaultFaqs("Dazi Milano", "Piazza Sempione 1, Arco della Pace, Milan", "21+", "Smart Chic Arco della Pace.", "Cocktail Lounge, House, Commercial"),
+    image: "/images/events/weekly-posters/dazi-milano-weekly.webp",
+    priority: 80
+  },
+  {
+    id: "dazi-thursday-thursday-neoclassical-lounge",
+    clubSlug: "dazi",
+    clubName: "Dazi Milano",
+    day: "thursday",
+    dayOfWeek: 4,
+    eventSlug: "thursday-neoclassical-lounge",
+    name: "Thursday Neoclassical Tollhouse Dinner & Beats",
+    genres: ["Cocktail Lounge", "House", "Commercial"],
+    target: "21+, Arco della Pace Aperitivo, Dinner & Late Lounge Crowd",
+    description: {
+      en: "Thursday program at Dazi Milano (Piazza Sempione 1, Arco della Pace, Milan): Thursday Neoclassical Tollhouse Dinner & Beats. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del giovedì da Dazi Milano (Piazza Sempione 1, Arco della Pace, Milan): Thursday Neoclassical Tollhouse Dinner & Beats. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "Lounge selection", "tables": "Reserved Lounge from €250"},
+    dressCode: {
+      en: "Smart Chic Arco della Pace.",
+      it: "Smart Chic Arco della Pace."
+    },
+    faqs: defaultFaqs("Dazi Milano", "Piazza Sempione 1, Arco della Pace, Milan", "21+", "Smart Chic Arco della Pace.", "Cocktail Lounge, House, Commercial"),
+    image: "/images/events/weekly-posters/dazi-milano-weekly.webp",
+    priority: 80
+  },
+  {
+    id: "dazi-friday-friday-sempione-dinner-dj",
+    clubSlug: "dazi",
+    clubName: "Dazi Milano",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-sempione-dinner-dj",
+    name: "Friday Piazza Sempione Dinner & Late DJ Set",
+    genres: ["Cocktail Lounge", "House", "Commercial"],
+    target: "21+, Arco della Pace Aperitivo, Dinner & Late Lounge Crowd",
+    description: {
+      en: "Friday program at Dazi Milano (Piazza Sempione 1, Arco della Pace, Milan): Friday Piazza Sempione Dinner & Late DJ Set. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da Dazi Milano (Piazza Sempione 1, Arco della Pace, Milan): Friday Piazza Sempione Dinner & Late DJ Set. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "Lounge selection", "tables": "Reserved Lounge from €250"},
+    dressCode: {
+      en: "Smart Chic Arco della Pace.",
+      it: "Smart Chic Arco della Pace."
+    },
+    faqs: defaultFaqs("Dazi Milano", "Piazza Sempione 1, Arco della Pace, Milan", "21+", "Smart Chic Arco della Pace.", "Cocktail Lounge, House, Commercial"),
+    image: "/images/events/weekly-posters/dazi-milano-weekly.webp",
+    priority: 80
+  },
+  {
+    id: "dazi-saturday-saturday-arco-della-pace-night",
+    clubSlug: "dazi",
+    clubName: "Dazi Milano",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-arco-della-pace-night",
+    name: "Saturday Arco della Pace Signature Night",
+    genres: ["Cocktail Lounge", "House", "Commercial"],
+    target: "21+, Arco della Pace Aperitivo, Dinner & Late Lounge Crowd",
+    description: {
+      en: "Saturday program at Dazi Milano (Piazza Sempione 1, Arco della Pace, Milan): Saturday Arco della Pace Signature Night. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da Dazi Milano (Piazza Sempione 1, Arco della Pace, Milan): Saturday Arco della Pace Signature Night. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "Lounge selection", "tables": "Reserved Lounge from €250"},
+    dressCode: {
+      en: "Smart Chic Arco della Pace.",
+      it: "Smart Chic Arco della Pace."
+    },
+    faqs: defaultFaqs("Dazi Milano", "Piazza Sempione 1, Arco della Pace, Milan", "21+", "Smart Chic Arco della Pace.", "Cocktail Lounge, House, Commercial"),
+    image: "/images/events/weekly-posters/dazi-milano-weekly.webp",
+    priority: 80
+  },
+  {
+    id: "dazi-sunday-sunday-sunset-sempione",
+    clubSlug: "dazi",
+    clubName: "Dazi Milano",
+    day: "sunday",
+    dayOfWeek: 0,
+    eventSlug: "sunday-sunset-sempione",
+    name: "Sunday Sunset Aperitivo & Lounge Grooves",
+    genres: ["Cocktail Lounge", "House", "Commercial"],
+    target: "21+, Arco della Pace Aperitivo, Dinner & Late Lounge Crowd",
+    description: {
+      en: "Sunday program at Dazi Milano (Piazza Sempione 1, Arco della Pace, Milan): Sunday Sunset Aperitivo & Lounge Grooves. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del domenica da Dazi Milano (Piazza Sempione 1, Arco della Pace, Milan): Sunday Sunset Aperitivo & Lounge Grooves. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "Lounge selection", "tables": "Reserved Lounge from €250"},
+    dressCode: {
+      en: "Smart Chic Arco della Pace.",
+      it: "Smart Chic Arco della Pace."
+    },
+    faqs: defaultFaqs("Dazi Milano", "Piazza Sempione 1, Arco della Pace, Milan", "21+", "Smart Chic Arco della Pace.", "Cocktail Lounge, House, Commercial"),
+    image: "/images/events/weekly-posters/dazi-milano-weekly.webp",
+    priority: 80
+  },
+  {
+    id: "ceresio-7-tuesday-tuesday-skyline-mixology",
+    clubSlug: "ceresio-7",
+    clubName: "Ceresio 7 Pools & Restaurant",
+    day: "tuesday",
+    dayOfWeek: 2,
+    eventSlug: "tuesday-skyline-mixology",
+    name: "Tuesday Twin-Pool Skyline Aperitivo & Dinner",
+    genres: ["Lounge", "Deep House", "Fine Mixology"],
+    target: "23+, Design, Fashion & Fine Dining Clientele",
+    description: {
+      en: "Tuesday program at Ceresio 7 Pools & Restaurant (Via Ceresio 7, Porta Volta, Milan): Tuesday Twin-Pool Skyline Aperitivo & Dinner. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del martedì da Ceresio 7 Pools & Restaurant (Via Ceresio 7, Porta Volta, Milan): Tuesday Twin-Pool Skyline Aperitivo & Dinner. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Cocktails from €20", "tables": "Rooftop Dining & Lounge upon reservation"},
+    dressCode: {
+      en: "Sartorial Smart Elegant.",
+      it: "Sartoriale Smart Elegant."
+    },
+    faqs: defaultFaqs("Ceresio 7 Pools & Restaurant", "Via Ceresio 7, Porta Volta, Milan", "23+", "Sartorial Smart Elegant.", "Lounge, Deep House, Fine Mixology"),
+    image: "/images/events/weekly-posters/ceresio7-resident-weekly.webp",
+    priority: 82
+  },
+  {
+    id: "ceresio-7-wednesday-wednesday-rooftop-dining",
+    clubSlug: "ceresio-7",
+    clubName: "Ceresio 7 Pools & Restaurant",
+    day: "wednesday",
+    dayOfWeek: 3,
+    eventSlug: "wednesday-rooftop-dining",
+    name: "Wednesday Panoramic Dining & Cocktail Bar",
+    genres: ["Lounge", "Deep House", "Fine Mixology"],
+    target: "23+, Design, Fashion & Fine Dining Clientele",
+    description: {
+      en: "Wednesday program at Ceresio 7 Pools & Restaurant (Via Ceresio 7, Porta Volta, Milan): Wednesday Panoramic Dining & Cocktail Bar. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del mercoledì da Ceresio 7 Pools & Restaurant (Via Ceresio 7, Porta Volta, Milan): Wednesday Panoramic Dining & Cocktail Bar. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Cocktails from €20", "tables": "Rooftop Dining & Lounge upon reservation"},
+    dressCode: {
+      en: "Sartorial Smart Elegant.",
+      it: "Sartoriale Smart Elegant."
+    },
+    faqs: defaultFaqs("Ceresio 7 Pools & Restaurant", "Via Ceresio 7, Porta Volta, Milan", "23+", "Sartorial Smart Elegant.", "Lounge, Deep House, Fine Mixology"),
+    image: "/images/events/weekly-posters/ceresio7-resident-weekly.webp",
+    priority: 82
+  },
+  {
+    id: "ceresio-7-thursday-thursday-fashion-aperitivo",
+    clubSlug: "ceresio-7",
+    clubName: "Ceresio 7 Pools & Restaurant",
+    day: "thursday",
+    dayOfWeek: 4,
+    eventSlug: "thursday-fashion-aperitivo",
+    name: "Thursday Porta Volta Sunset Mixology",
+    genres: ["Lounge", "Deep House", "Fine Mixology"],
+    target: "23+, Design, Fashion & Fine Dining Clientele",
+    description: {
+      en: "Thursday program at Ceresio 7 Pools & Restaurant (Via Ceresio 7, Porta Volta, Milan): Thursday Porta Volta Sunset Mixology. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del giovedì da Ceresio 7 Pools & Restaurant (Via Ceresio 7, Porta Volta, Milan): Thursday Porta Volta Sunset Mixology. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Cocktails from €20", "tables": "Rooftop Dining & Lounge upon reservation"},
+    dressCode: {
+      en: "Sartorial Smart Elegant.",
+      it: "Sartoriale Smart Elegant."
+    },
+    faqs: defaultFaqs("Ceresio 7 Pools & Restaurant", "Via Ceresio 7, Porta Volta, Milan", "23+", "Sartorial Smart Elegant.", "Lounge, Deep House, Fine Mixology"),
+    image: "/images/events/weekly-posters/ceresio7-resident-weekly.webp",
+    priority: 82
+  },
+  {
+    id: "ceresio-7-friday-friday-rooftop-lounge",
+    clubSlug: "ceresio-7",
+    clubName: "Ceresio 7 Pools & Restaurant",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-rooftop-lounge",
+    name: "Friday Rooftop Pools Dinner & Lounge Session",
+    genres: ["Lounge", "Deep House", "Fine Mixology"],
+    target: "23+, Design, Fashion & Fine Dining Clientele",
+    description: {
+      en: "Friday program at Ceresio 7 Pools & Restaurant (Via Ceresio 7, Porta Volta, Milan): Friday Rooftop Pools Dinner & Lounge Session. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da Ceresio 7 Pools & Restaurant (Via Ceresio 7, Porta Volta, Milan): Friday Rooftop Pools Dinner & Lounge Session. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Cocktails from €20", "tables": "Rooftop Dining & Lounge upon reservation"},
+    dressCode: {
+      en: "Sartorial Smart Elegant.",
+      it: "Sartoriale Smart Elegant."
+    },
+    faqs: defaultFaqs("Ceresio 7 Pools & Restaurant", "Via Ceresio 7, Porta Volta, Milan", "23+", "Sartorial Smart Elegant.", "Lounge, Deep House, Fine Mixology"),
+    image: "/images/events/weekly-posters/ceresio7-resident-weekly.webp",
+    priority: 82
+  },
+  {
+    id: "ceresio-7-saturday-saturday-panoramic-soiree",
+    clubSlug: "ceresio-7",
+    clubName: "Ceresio 7 Pools & Restaurant",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-panoramic-soiree",
+    name: "Saturday Panoramic Soirée & Signature Cocktails",
+    genres: ["Lounge", "Deep House", "Fine Mixology"],
+    target: "23+, Design, Fashion & Fine Dining Clientele",
+    description: {
+      en: "Saturday program at Ceresio 7 Pools & Restaurant (Via Ceresio 7, Porta Volta, Milan): Saturday Panoramic Soirée & Signature Cocktails. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da Ceresio 7 Pools & Restaurant (Via Ceresio 7, Porta Volta, Milan): Saturday Panoramic Soirée & Signature Cocktails. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Cocktails from €20", "tables": "Rooftop Dining & Lounge upon reservation"},
+    dressCode: {
+      en: "Sartorial Smart Elegant.",
+      it: "Sartoriale Smart Elegant."
+    },
+    faqs: defaultFaqs("Ceresio 7 Pools & Restaurant", "Via Ceresio 7, Porta Volta, Milan", "23+", "Sartorial Smart Elegant.", "Lounge, Deep House, Fine Mixology"),
+    image: "/images/events/weekly-posters/ceresio7-resident-weekly.webp",
+    priority: 82
+  },
+  {
+    id: "ceresio-7-sunday-sunday-sunset-terrace",
+    clubSlug: "ceresio-7",
+    clubName: "Ceresio 7 Pools & Restaurant",
+    day: "sunday",
+    dayOfWeek: 0,
+    eventSlug: "sunday-sunset-terrace",
+    name: "Sunday Sunset Terrace Aperitivo & Fine Dining",
+    genres: ["Lounge", "Deep House", "Fine Mixology"],
+    target: "23+, Design, Fashion & Fine Dining Clientele",
+    description: {
+      en: "Sunday program at Ceresio 7 Pools & Restaurant (Via Ceresio 7, Porta Volta, Milan): Sunday Sunset Terrace Aperitivo & Fine Dining. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del domenica da Ceresio 7 Pools & Restaurant (Via Ceresio 7, Porta Volta, Milan): Sunday Sunset Terrace Aperitivo & Fine Dining. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Cocktails from €20", "tables": "Rooftop Dining & Lounge upon reservation"},
+    dressCode: {
+      en: "Sartorial Smart Elegant.",
+      it: "Sartoriale Smart Elegant."
+    },
+    faqs: defaultFaqs("Ceresio 7 Pools & Restaurant", "Via Ceresio 7, Porta Volta, Milan", "23+", "Sartorial Smart Elegant.", "Lounge, Deep House, Fine Mixology"),
+    image: "/images/events/weekly-posters/ceresio7-resident-weekly.webp",
+    priority: 82
+  },
+  {
+    id: "apollo-thursday-thursday-navigli-live-grooves",
+    clubSlug: "apollo",
+    clubName: "Apollo Club Milano",
+    day: "thursday",
+    dayOfWeek: 4,
+    eventSlug: "thursday-navigli-live-grooves",
+    name: "Thursday Navigli Cocktail & Live Grooves",
+    genres: ["House", "Disco", " Funky", "Live Music"],
+    target: "21+, Navigli Creative, Design & Music Crowd",
+    description: {
+      en: "Thursday program at Apollo Club Milano (Via Giosuè Borsi 9/2, Navigli, Milan): Thursday Navigli Cocktail & Live Grooves. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del giovedì da Apollo Club Milano (Via Giosuè Borsi 9/2, Navigli, Milan): Thursday Navigli Cocktail & Live Grooves. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "From €15", "tables": "Club Tables from €250"},
+    dressCode: {
+      en: "Creative Smart Casual & Retro Chic.",
+      it: "Smart Casual Creativo & Retro Chic."
+    },
+    faqs: defaultFaqs("Apollo Club Milano", "Via Giosuè Borsi 9/2, Navigli, Milan", "21+", "Creative Smart Casual & Retro Chic.", "House, Disco,  Funky, Live Music"),
+    image: "/images/events/weekly-posters/apollo-club-resident-weekly.webp",
+    priority: 78
+  },
+  {
+    id: "apollo-friday-friday-house-disco-club",
+    clubSlug: "apollo",
+    clubName: "Apollo Club Milano",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-house-disco-club",
+    name: "Friday House, Disco & Cocktail Club",
+    genres: ["House", "Disco", " Funky", "Live Music"],
+    target: "21+, Navigli Creative, Design & Music Crowd",
+    description: {
+      en: "Friday program at Apollo Club Milano (Via Giosuè Borsi 9/2, Navigli, Milan): Friday House, Disco & Cocktail Club. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da Apollo Club Milano (Via Giosuè Borsi 9/2, Navigli, Milan): Friday House, Disco & Cocktail Club. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "From €15", "tables": "Club Tables from €250"},
+    dressCode: {
+      en: "Creative Smart Casual & Retro Chic.",
+      it: "Smart Casual Creativo & Retro Chic."
+    },
+    faqs: defaultFaqs("Apollo Club Milano", "Via Giosuè Borsi 9/2, Navigli, Milan", "21+", "Creative Smart Casual & Retro Chic.", "House, Disco,  Funky, Live Music"),
+    image: "/images/events/weekly-posters/apollo-club-resident-weekly.webp",
+    priority: 78
+  },
+  {
+    id: "apollo-saturday-saturday-apollo-club-night",
+    clubSlug: "apollo",
+    clubName: "Apollo Club Milano",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-apollo-club-night",
+    name: "Saturday Navigli Dancefloor & Vinyl Grooves",
+    genres: ["House", "Disco", " Funky", "Live Music"],
+    target: "21+, Navigli Creative, Design & Music Crowd",
+    description: {
+      en: "Saturday program at Apollo Club Milano (Via Giosuè Borsi 9/2, Navigli, Milan): Saturday Navigli Dancefloor & Vinyl Grooves. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da Apollo Club Milano (Via Giosuè Borsi 9/2, Navigli, Milan): Saturday Navigli Dancefloor & Vinyl Grooves. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "From €15", "tables": "Club Tables from €250"},
+    dressCode: {
+      en: "Creative Smart Casual & Retro Chic.",
+      it: "Smart Casual Creativo & Retro Chic."
+    },
+    faqs: defaultFaqs("Apollo Club Milano", "Via Giosuè Borsi 9/2, Navigli, Milan", "21+", "Creative Smart Casual & Retro Chic.", "House, Disco,  Funky, Live Music"),
+    image: "/images/events/weekly-posters/apollo-club-resident-weekly.webp",
+    priority: 78
+  },
+  {
+    id: "apollo-sunday-sunday-rollover-session",
+    clubSlug: "apollo",
+    clubName: "Apollo Club Milano",
+    day: "sunday",
+    dayOfWeek: 0,
+    eventSlug: "sunday-rollover-session",
+    name: "Sunday Aperitivo & Eclectic Club Session",
+    genres: ["House", "Disco", " Funky", "Live Music"],
+    target: "21+, Navigli Creative, Design & Music Crowd",
+    description: {
+      en: "Sunday program at Apollo Club Milano (Via Giosuè Borsi 9/2, Navigli, Milan): Sunday Aperitivo & Eclectic Club Session. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del domenica da Apollo Club Milano (Via Giosuè Borsi 9/2, Navigli, Milan): Sunday Aperitivo & Eclectic Club Session. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "From €15", "tables": "Club Tables from €250"},
+    dressCode: {
+      en: "Creative Smart Casual & Retro Chic.",
+      it: "Smart Casual Creativo & Retro Chic."
+    },
+    faqs: defaultFaqs("Apollo Club Milano", "Via Giosuè Borsi 9/2, Navigli, Milan", "21+", "Creative Smart Casual & Retro Chic.", "House, Disco,  Funky, Live Music"),
+    image: "/images/events/weekly-posters/apollo-club-resident-weekly.webp",
+    priority: 78
+  },
+  {
+    id: "magazzini-thursday-thursday-porta-romana-showcase",
+    clubSlug: "magazzini",
+    clubName: "Magazzini Generali Milano",
+    day: "thursday",
+    dayOfWeek: 4,
+    eventSlug: "thursday-porta-romana-showcase",
+    name: "Thursday Live & University Club Showcase",
+    genres: ["Electronic", "Techno", "Commercial", "Live Concerts"],
+    target: "18+, Electronic Fans, Live Concertgoers & International Students",
+    description: {
+      en: "Thursday program at Magazzini Generali Milano (Via Pietrasanta 16, Porta Romana, Milan): Thursday Live & University Club Showcase. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del giovedì da Magazzini Generali Milano (Via Pietrasanta 16, Porta Romana, Milan): Thursday Live & University Club Showcase. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "From €15", "tables": "Mezzanine Balcony VIP from €300"},
+    dressCode: {
+      en: "Club Casual & Underground Chic.",
+      it: "Club Casual & Underground Chic."
+    },
+    faqs: defaultFaqs("Magazzini Generali Milano", "Via Pietrasanta 16, Porta Romana, Milan", "18+", "Club Casual & Underground Chic.", "Electronic, Techno, Commercial, Live Concerts"),
+    image: "/images/events/weekly-posters/magazzini-resident-weekly.webp",
+    priority: 83
+  },
+  {
+    id: "magazzini-friday-friday-warehouse-party",
+    clubSlug: "magazzini",
+    clubName: "Magazzini Generali Milano",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-warehouse-party",
+    name: "Friday Historic Warehouse Club Night",
+    genres: ["Electronic", "Techno", "Commercial", "Live Concerts"],
+    target: "18+, Electronic Fans, Live Concertgoers & International Students",
+    description: {
+      en: "Friday program at Magazzini Generali Milano (Via Pietrasanta 16, Porta Romana, Milan): Friday Historic Warehouse Club Night. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da Magazzini Generali Milano (Via Pietrasanta 16, Porta Romana, Milan): Friday Historic Warehouse Club Night. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "From €15", "tables": "Mezzanine Balcony VIP from €300"},
+    dressCode: {
+      en: "Club Casual & Underground Chic.",
+      it: "Club Casual & Underground Chic."
+    },
+    faqs: defaultFaqs("Magazzini Generali Milano", "Via Pietrasanta 16, Porta Romana, Milan", "18+", "Club Casual & Underground Chic.", "Electronic, Techno, Commercial, Live Concerts"),
+    image: "/images/events/weekly-posters/magazzini-resident-weekly.webp",
+    priority: 83
+  },
+  {
+    id: "magazzini-saturday-saturday-mezzanine-electronic",
+    clubSlug: "magazzini",
+    clubName: "Magazzini Generali Milano",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-mezzanine-electronic",
+    name: "Saturday Electronic & Themed Arena Night",
+    genres: ["Electronic", "Techno", "Commercial", "Live Concerts"],
+    target: "18+, Electronic Fans, Live Concertgoers & International Students",
+    description: {
+      en: "Saturday program at Magazzini Generali Milano (Via Pietrasanta 16, Porta Romana, Milan): Saturday Electronic & Themed Arena Night. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da Magazzini Generali Milano (Via Pietrasanta 16, Porta Romana, Milan): Saturday Electronic & Themed Arena Night. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "From €15", "tables": "Mezzanine Balcony VIP from €300"},
+    dressCode: {
+      en: "Club Casual & Underground Chic.",
+      it: "Club Casual & Underground Chic."
+    },
+    faqs: defaultFaqs("Magazzini Generali Milano", "Via Pietrasanta 16, Porta Romana, Milan", "18+", "Club Casual & Underground Chic.", "Electronic, Techno, Commercial, Live Concerts"),
+    image: "/images/events/weekly-posters/magazzini-resident-weekly.webp",
+    priority: 83
+  },
+  {
+    id: "church81-friday-friday-candlelight-dinner-show",
+    clubSlug: "church81",
+    clubName: "Church 81 Milano",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-candlelight-dinner-show",
+    name: "Friday Candlelight Dinner Show & DJ Set",
+    genres: ["Dinner Show", "Commercial", "House"],
+    target: "21+, Dinner Show Groups, Celebrations & VIP Tables",
+    description: {
+      en: "Friday program at Church 81 Milano (Via Marco Ulpio Traiano 81, Portello, Milan): Friday Candlelight Dinner Show & DJ Set. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da Church 81 Milano (Via Marco Ulpio Traiano 81, Portello, Milan): Friday Candlelight Dinner Show & DJ Set. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "Dinner Show from €35", "club": "From €15", "tables": "VIP Tables from €250"},
+    dressCode: {
+      en: "Elegant Dinner & Supper-Club Attire.",
+      it: "Elegante da Dinner Show & Supper-Club."
+    },
+    faqs: defaultFaqs("Church 81 Milano", "Via Marco Ulpio Traiano 81, Portello, Milan", "21+", "Elegant Dinner & Supper-Club Attire.", "Dinner Show, Commercial, House"),
+    image: "/images/events/weekly-posters/church81-resident-weekly.webp",
+    priority: 77
+  },
+  {
+    id: "church81-saturday-saturday-supper-club-party",
+    clubSlug: "church81",
+    clubName: "Church 81 Milano",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-supper-club-party",
+    name: "Saturday Supper-Club Show & Late Party",
+    genres: ["Dinner Show", "Commercial", "House"],
+    target: "21+, Dinner Show Groups, Celebrations & VIP Tables",
+    description: {
+      en: "Saturday program at Church 81 Milano (Via Marco Ulpio Traiano 81, Portello, Milan): Saturday Supper-Club Show & Late Party. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da Church 81 Milano (Via Marco Ulpio Traiano 81, Portello, Milan): Saturday Supper-Club Show & Late Party. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "Dinner Show from €35", "club": "From €15", "tables": "VIP Tables from €250"},
+    dressCode: {
+      en: "Elegant Dinner & Supper-Club Attire.",
+      it: "Elegante da Dinner Show & Supper-Club."
+    },
+    faqs: defaultFaqs("Church 81 Milano", "Via Marco Ulpio Traiano 81, Portello, Milan", "21+", "Elegant Dinner & Supper-Club Attire.", "Dinner Show, Commercial, House"),
+    image: "/images/events/weekly-posters/church81-resident-weekly.webp",
+    priority: 77
+  },
+  {
+    id: "loolapaloosa-tuesday-tuesday-corso-como-aperitivo",
+    clubSlug: "loolapaloosa",
+    clubName: "Loolapaloosa Milano",
+    day: "tuesday",
+    dayOfWeek: 2,
+    eventSlug: "tuesday-corso-como-aperitivo",
+    name: "Tuesday Corso Como Aperitivo & Party Bar",
+    genres: ["Commercial", "Sing-Along", "Party Hits", "Dance"],
+    target: "20+, Corso Como Aperitivo & High-Energy Party Crowd",
+    description: {
+      en: "Tuesday program at Loolapaloosa Milano (Corso Como 15, Porta Garibaldi, Milan): Tuesday Corso Como Aperitivo & Party Bar. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del martedì da Loolapaloosa Milano (Corso Como 15, Porta Garibaldi, Milan): Tuesday Corso Como Aperitivo & Party Bar. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "From €15", "tables": "Party Tables from €250"},
+    dressCode: {
+      en: "Smart Casual Corso Como.",
+      it: "Smart Casual Corso Como."
+    },
+    faqs: defaultFaqs("Loolapaloosa Milano", "Corso Como 15, Porta Garibaldi, Milan", "20+", "Smart Casual Corso Como.", "Commercial, Sing-Along, Party Hits, Dance"),
+    image: "/images/events/weekly-posters/loolapaloosa-resident-weekly.webp",
+    priority: 79
+  },
+  {
+    id: "loolapaloosa-wednesday-wednesday-sing-along-night",
+    clubSlug: "loolapaloosa",
+    clubName: "Loolapaloosa Milano",
+    day: "wednesday",
+    dayOfWeek: 3,
+    eventSlug: "wednesday-sing-along-night",
+    name: "Wednesday Midweek Party & Bar Show",
+    genres: ["Commercial", "Sing-Along", "Party Hits", "Dance"],
+    target: "20+, Corso Como Aperitivo & High-Energy Party Crowd",
+    description: {
+      en: "Wednesday program at Loolapaloosa Milano (Corso Como 15, Porta Garibaldi, Milan): Wednesday Midweek Party & Bar Show. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del mercoledì da Loolapaloosa Milano (Corso Como 15, Porta Garibaldi, Milan): Wednesday Midweek Party & Bar Show. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "From €15", "tables": "Party Tables from €250"},
+    dressCode: {
+      en: "Smart Casual Corso Como.",
+      it: "Smart Casual Corso Como."
+    },
+    faqs: defaultFaqs("Loolapaloosa Milano", "Corso Como 15, Porta Garibaldi, Milan", "20+", "Smart Casual Corso Como.", "Commercial, Sing-Along, Party Hits, Dance"),
+    image: "/images/events/weekly-posters/loolapaloosa-resident-weekly.webp",
+    priority: 79
+  },
+  {
+    id: "loolapaloosa-thursday-thursday-garibaldi-party",
+    clubSlug: "loolapaloosa",
+    clubName: "Loolapaloosa Milano",
+    day: "thursday",
+    dayOfWeek: 4,
+    eventSlug: "thursday-garibaldi-party",
+    name: "Thursday Corso Como Cocktails & Hits",
+    genres: ["Commercial", "Sing-Along", "Party Hits", "Dance"],
+    target: "20+, Corso Como Aperitivo & High-Energy Party Crowd",
+    description: {
+      en: "Thursday program at Loolapaloosa Milano (Corso Como 15, Porta Garibaldi, Milan): Thursday Corso Como Cocktails & Hits. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del giovedì da Loolapaloosa Milano (Corso Como 15, Porta Garibaldi, Milan): Thursday Corso Como Cocktails & Hits. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "From €15", "tables": "Party Tables from €250"},
+    dressCode: {
+      en: "Smart Casual Corso Como.",
+      it: "Smart Casual Corso Como."
+    },
+    faqs: defaultFaqs("Loolapaloosa Milano", "Corso Como 15, Porta Garibaldi, Milan", "20+", "Smart Casual Corso Como.", "Commercial, Sing-Along, Party Hits, Dance"),
+    image: "/images/events/weekly-posters/loolapaloosa-resident-weekly.webp",
+    priority: 79
+  },
+  {
+    id: "loolapaloosa-friday-friday-bar-top-party",
+    clubSlug: "loolapaloosa",
+    clubName: "Loolapaloosa Milano",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-bar-top-party",
+    name: "Friday Legendary Corso Como Party Night",
+    genres: ["Commercial", "Sing-Along", "Party Hits", "Dance"],
+    target: "20+, Corso Como Aperitivo & High-Energy Party Crowd",
+    description: {
+      en: "Friday program at Loolapaloosa Milano (Corso Como 15, Porta Garibaldi, Milan): Friday Legendary Corso Como Party Night. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da Loolapaloosa Milano (Corso Como 15, Porta Garibaldi, Milan): Friday Legendary Corso Como Party Night. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "From €15", "tables": "Party Tables from €250"},
+    dressCode: {
+      en: "Smart Casual Corso Como.",
+      it: "Smart Casual Corso Como."
+    },
+    faqs: defaultFaqs("Loolapaloosa Milano", "Corso Como 15, Porta Garibaldi, Milan", "20+", "Smart Casual Corso Como.", "Commercial, Sing-Along, Party Hits, Dance"),
+    image: "/images/events/weekly-posters/loolapaloosa-resident-weekly.webp",
+    priority: 79
+  },
+  {
+    id: "loolapaloosa-saturday-saturday-loola-celebration",
+    clubSlug: "loolapaloosa",
+    clubName: "Loolapaloosa Milano",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-loola-celebration",
+    name: "Saturday Full-House Aperitivo & Dance Party",
+    genres: ["Commercial", "Sing-Along", "Party Hits", "Dance"],
+    target: "20+, Corso Como Aperitivo & High-Energy Party Crowd",
+    description: {
+      en: "Saturday program at Loolapaloosa Milano (Corso Como 15, Porta Garibaldi, Milan): Saturday Full-House Aperitivo & Dance Party. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da Loolapaloosa Milano (Corso Como 15, Porta Garibaldi, Milan): Saturday Full-House Aperitivo & Dance Party. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "From €15", "tables": "Party Tables from €250"},
+    dressCode: {
+      en: "Smart Casual Corso Como.",
+      it: "Smart Casual Corso Como."
+    },
+    faqs: defaultFaqs("Loolapaloosa Milano", "Corso Como 15, Porta Garibaldi, Milan", "20+", "Smart Casual Corso Como.", "Commercial, Sing-Along, Party Hits, Dance"),
+    image: "/images/events/weekly-posters/loolapaloosa-resident-weekly.webp",
+    priority: 79
+  },
+  {
+    id: "loolapaloosa-sunday-sunday-corso-como-finale",
+    clubSlug: "loolapaloosa",
+    clubName: "Loolapaloosa Milano",
+    day: "sunday",
+    dayOfWeek: 0,
+    eventSlug: "sunday-corso-como-finale",
+    name: "Sunday Aperitivo & Late Night Hits",
+    genres: ["Commercial", "Sing-Along", "Party Hits", "Dance"],
+    target: "20+, Corso Como Aperitivo & High-Energy Party Crowd",
+    description: {
+      en: "Sunday program at Loolapaloosa Milano (Corso Como 15, Porta Garibaldi, Milan): Sunday Aperitivo & Late Night Hits. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del domenica da Loolapaloosa Milano (Corso Como 15, Porta Garibaldi, Milan): Sunday Aperitivo & Late Night Hits. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "From €15", "tables": "Party Tables from €250"},
+    dressCode: {
+      en: "Smart Casual Corso Como.",
+      it: "Smart Casual Corso Como."
+    },
+    faqs: defaultFaqs("Loolapaloosa Milano", "Corso Como 15, Porta Garibaldi, Milan", "20+", "Smart Casual Corso Como.", "Commercial, Sing-Along, Party Hits, Dance"),
+    image: "/images/events/weekly-posters/loolapaloosa-resident-weekly.webp",
+    priority: 79
+  },
+  {
+    id: "bobino-wednesday-wednesday-navigli-lounge",
+    clubSlug: "bobino",
+    clubName: "Bobino Milano",
+    day: "wednesday",
+    dayOfWeek: 3,
+    eventSlug: "wednesday-navigli-lounge",
+    name: "Wednesday Gourmet Aperitivo & DJ Selection",
+    genres: ["Commercial", "Revival 80s-90s", "House", "Dinner Buffet"],
+    target: "23+, Professionals, Navigli Aperitivo & Adult Clubbing Crowd",
+    description: {
+      en: "Wednesday program at Bobino Milano (Piazzale Stazione Genova 4, Navigli, Milan): Wednesday Gourmet Aperitivo & DJ Selection. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del mercoledì da Bobino Milano (Piazzale Stazione Genova 4, Navigli, Milan): Wednesday Gourmet Aperitivo & DJ Selection. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "Evening selection", "tables": "Reserved Tables from €250"},
+    dressCode: {
+      en: "Smart Elegant After-Work & Evening.",
+      it: "Smart Elegant Aperitivo & Dopocena."
+    },
+    faqs: defaultFaqs("Bobino Milano", "Piazzale Stazione Genova 4, Navigli, Milan", "23+", "Smart Elegant After-Work & Evening.", "Commercial, Revival 80s-90s, House, Dinner Buffet"),
+    image: "/images/events/weekly-posters/bobino-navigli-weekly.webp",
+    priority: 81
+  },
+  {
+    id: "bobino-thursday-thursday-afterwork-party",
+    clubSlug: "bobino",
+    clubName: "Bobino Milano",
+    day: "thursday",
+    dayOfWeek: 4,
+    eventSlug: "thursday-afterwork-party",
+    name: "Thursday Navigli After-Work Buffet & Dance",
+    genres: ["Commercial", "Revival 80s-90s", "House", "Dinner Buffet"],
+    target: "23+, Professionals, Navigli Aperitivo & Adult Clubbing Crowd",
+    description: {
+      en: "Thursday program at Bobino Milano (Piazzale Stazione Genova 4, Navigli, Milan): Thursday Navigli After-Work Buffet & Dance. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del giovedì da Bobino Milano (Piazzale Stazione Genova 4, Navigli, Milan): Thursday Navigli After-Work Buffet & Dance. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "Evening selection", "tables": "Reserved Tables from €250"},
+    dressCode: {
+      en: "Smart Elegant After-Work & Evening.",
+      it: "Smart Elegant Aperitivo & Dopocena."
+    },
+    faqs: defaultFaqs("Bobino Milano", "Piazzale Stazione Genova 4, Navigli, Milan", "23+", "Smart Elegant After-Work & Evening.", "Commercial, Revival 80s-90s, House, Dinner Buffet"),
+    image: "/images/events/weekly-posters/bobino-navigli-weekly.webp",
+    priority: 81
+  },
+  {
+    id: "bobino-friday-friday-dinner-dance-hits",
+    clubSlug: "bobino",
+    clubName: "Bobino Milano",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-dinner-dance-hits",
+    name: "Friday Aperitivo, Dinner & Dance Classics",
+    genres: ["Commercial", "Revival 80s-90s", "House", "Dinner Buffet"],
+    target: "23+, Professionals, Navigli Aperitivo & Adult Clubbing Crowd",
+    description: {
+      en: "Friday program at Bobino Milano (Piazzale Stazione Genova 4, Navigli, Milan): Friday Aperitivo, Dinner & Dance Classics. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da Bobino Milano (Piazzale Stazione Genova 4, Navigli, Milan): Friday Aperitivo, Dinner & Dance Classics. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "Evening selection", "tables": "Reserved Tables from €250"},
+    dressCode: {
+      en: "Smart Elegant After-Work & Evening.",
+      it: "Smart Elegant Aperitivo & Dopocena."
+    },
+    faqs: defaultFaqs("Bobino Milano", "Piazzale Stazione Genova 4, Navigli, Milan", "23+", "Smart Elegant After-Work & Evening.", "Commercial, Revival 80s-90s, House, Dinner Buffet"),
+    image: "/images/events/weekly-posters/bobino-navigli-weekly.webp",
+    priority: 81
+  },
+  {
+    id: "bobino-saturday-saturday-bobino-club-night",
+    clubSlug: "bobino",
+    clubName: "Bobino Milano",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-bobino-club-night",
+    name: "Saturday Navigli Garden & Indoor Party",
+    genres: ["Commercial", "Revival 80s-90s", "House", "Dinner Buffet"],
+    target: "23+, Professionals, Navigli Aperitivo & Adult Clubbing Crowd",
+    description: {
+      en: "Saturday program at Bobino Milano (Piazzale Stazione Genova 4, Navigli, Milan): Saturday Navigli Garden & Indoor Party. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da Bobino Milano (Piazzale Stazione Genova 4, Navigli, Milan): Saturday Navigli Garden & Indoor Party. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "Evening selection", "tables": "Reserved Tables from €250"},
+    dressCode: {
+      en: "Smart Elegant After-Work & Evening.",
+      it: "Smart Elegant Aperitivo & Dopocena."
+    },
+    faqs: defaultFaqs("Bobino Milano", "Piazzale Stazione Genova 4, Navigli, Milan", "23+", "Smart Elegant After-Work & Evening.", "Commercial, Revival 80s-90s, House, Dinner Buffet"),
+    image: "/images/events/weekly-posters/bobino-navigli-weekly.webp",
+    priority: 81
+  },
+  {
+    id: "bobino-sunday-sunday-navigli-aperitivo",
+    clubSlug: "bobino",
+    clubName: "Bobino Milano",
+    day: "sunday",
+    dayOfWeek: 0,
+    eventSlug: "sunday-navigli-aperitivo",
+    name: "Sunday Navigli Aperitivo & Vocal DJ Set",
+    genres: ["Commercial", "Revival 80s-90s", "House", "Dinner Buffet"],
+    target: "23+, Professionals, Navigli Aperitivo & Adult Clubbing Crowd",
+    description: {
+      en: "Sunday program at Bobino Milano (Piazzale Stazione Genova 4, Navigli, Milan): Sunday Navigli Aperitivo & Vocal DJ Set. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del domenica da Bobino Milano (Piazzale Stazione Genova 4, Navigli, Milan): Sunday Navigli Aperitivo & Vocal DJ Set. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "From €15", "club": "Evening selection", "tables": "Reserved Tables from €250"},
+    dressCode: {
+      en: "Smart Elegant After-Work & Evening.",
+      it: "Smart Elegant Aperitivo & Dopocena."
+    },
+    faqs: defaultFaqs("Bobino Milano", "Piazzale Stazione Genova 4, Navigli, Milan", "23+", "Smart Elegant After-Work & Evening.", "Commercial, Revival 80s-90s, House, Dinner Buffet"),
+    image: "/images/events/weekly-posters/bobino-navigli-weekly.webp",
+    priority: 81
+  },
+  {
+    id: "dock22-thursday-thursday-canal-mixology",
+    clubSlug: "dock22",
+    clubName: "Dock 22 Milano",
+    day: "thursday",
+    dayOfWeek: 4,
+    eventSlug: "thursday-canal-mixology",
+    name: "Thursday Naviglio Grande Mixology & Beats",
+    genres: ["House", "Deep House", "Mixology", "Commercial"],
+    target: "21+, Naviglio Grande Cocktail & Late Lounge Crowd",
+    description: {
+      en: "Thursday program at Dock 22 Milano (Alzaia Naviglio Grande 22, Navigli, Milan): Thursday Naviglio Grande Mixology & Beats. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del giovedì da Dock 22 Milano (Alzaia Naviglio Grande 22, Navigli, Milan): Thursday Naviglio Grande Mixology & Beats. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "Cocktails from €12", "club": "Upon selection", "tables": "Loft Tables from €200"},
+    dressCode: {
+      en: "Canal Loft Chic & Smart Casual.",
+      it: "Loft Chic & Smart Casual sui Navigli."
+    },
+    faqs: defaultFaqs("Dock 22 Milano", "Alzaia Naviglio Grande 22, Navigli, Milan", "21+", "Canal Loft Chic & Smart Casual.", "House, Deep House, Mixology, Commercial"),
+    image: "/images/events/weekly-posters/dock22-resident-weekly.webp",
+    priority: 76
+  },
+  {
+    id: "dock22-friday-friday-loft-house-session",
+    clubSlug: "dock22",
+    clubName: "Dock 22 Milano",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-loft-house-session",
+    name: "Friday Canal Loft Cocktails & House Session",
+    genres: ["House", "Deep House", "Mixology", "Commercial"],
+    target: "21+, Naviglio Grande Cocktail & Late Lounge Crowd",
+    description: {
+      en: "Friday program at Dock 22 Milano (Alzaia Naviglio Grande 22, Navigli, Milan): Friday Canal Loft Cocktails & House Session. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da Dock 22 Milano (Alzaia Naviglio Grande 22, Navigli, Milan): Friday Canal Loft Cocktails & House Session. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "Cocktails from €12", "club": "Upon selection", "tables": "Loft Tables from €200"},
+    dressCode: {
+      en: "Canal Loft Chic & Smart Casual.",
+      it: "Loft Chic & Smart Casual sui Navigli."
+    },
+    faqs: defaultFaqs("Dock 22 Milano", "Alzaia Naviglio Grande 22, Navigli, Milan", "21+", "Canal Loft Chic & Smart Casual.", "House, Deep House, Mixology, Commercial"),
+    image: "/images/events/weekly-posters/dock22-resident-weekly.webp",
+    priority: 76
+  },
+  {
+    id: "dock22-saturday-saturday-naviglio-late-club",
+    clubSlug: "dock22",
+    clubName: "Dock 22 Milano",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-naviglio-late-club",
+    name: "Saturday Naviglio Grande Lounge & Club",
+    genres: ["House", "Deep House", "Mixology", "Commercial"],
+    target: "21+, Naviglio Grande Cocktail & Late Lounge Crowd",
+    description: {
+      en: "Saturday program at Dock 22 Milano (Alzaia Naviglio Grande 22, Navigli, Milan): Saturday Naviglio Grande Lounge & Club. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da Dock 22 Milano (Alzaia Naviglio Grande 22, Navigli, Milan): Saturday Naviglio Grande Lounge & Club. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "Cocktails from €12", "club": "Upon selection", "tables": "Loft Tables from €200"},
+    dressCode: {
+      en: "Canal Loft Chic & Smart Casual.",
+      it: "Loft Chic & Smart Casual sui Navigli."
+    },
+    faqs: defaultFaqs("Dock 22 Milano", "Alzaia Naviglio Grande 22, Navigli, Milan", "21+", "Canal Loft Chic & Smart Casual.", "House, Deep House, Mixology, Commercial"),
+    image: "/images/events/weekly-posters/dock22-resident-weekly.webp",
+    priority: 76
+  },
+  {
+    id: "dock22-sunday-sunday-canal-sunset-grooves",
+    clubSlug: "dock22",
+    clubName: "Dock 22 Milano",
+    day: "sunday",
+    dayOfWeek: 0,
+    eventSlug: "sunday-canal-sunset-grooves",
+    name: "Sunday Canal Aperitivo & Deep Grooves",
+    genres: ["House", "Deep House", "Mixology", "Commercial"],
+    target: "21+, Naviglio Grande Cocktail & Late Lounge Crowd",
+    description: {
+      en: "Sunday program at Dock 22 Milano (Alzaia Naviglio Grande 22, Navigli, Milan): Sunday Canal Aperitivo & Deep Grooves. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del domenica da Dock 22 Milano (Alzaia Naviglio Grande 22, Navigli, Milan): Sunday Canal Aperitivo & Deep Grooves. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "Cocktails from €12", "club": "Upon selection", "tables": "Loft Tables from €200"},
+    dressCode: {
+      en: "Canal Loft Chic & Smart Casual.",
+      it: "Loft Chic & Smart Casual sui Navigli."
+    },
+    faqs: defaultFaqs("Dock 22 Milano", "Alzaia Naviglio Grande 22, Navigli, Milan", "21+", "Canal Loft Chic & Smart Casual.", "House, Deep House, Mixology, Commercial"),
+    image: "/images/events/weekly-posters/dock22-resident-weekly.webp",
+    priority: 76
+  },
+  {
+    id: "radio-rooftop-bar-milano-monday-monday-skyline-sunset",
+    clubSlug: "radio-rooftop-bar-milano",
+    clubName: "Radio Rooftop Milan",
+    day: "monday",
+    dayOfWeek: 1,
+    eventSlug: "monday-skyline-sunset",
+    name: "Monday 10th-Floor Skyline Aperitivo & Lounge",
+    genres: ["Deep House", "Lounge", "Skyline Aperitivo"],
+    target: "21+, International Hotel Guests, Skyline & Cocktail Lovers",
+    description: {
+      en: "Monday program at Radio Rooftop Milan (Via Marco Polo 18 (10th Floor ME Milan Il Duca), Repubblica, Milan): Monday 10th-Floor Skyline Aperitivo & Lounge. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del lunedì da Radio Rooftop Milan (Via Marco Polo 18 (10th Floor ME Milan Il Duca), Repubblica, Milan): Monday 10th-Floor Skyline Aperitivo & Lounge. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Cocktails from €18", "tables": "Skyline Lounge Tables upon reservation"},
+    dressCode: {
+      en: "Upscale Cosmopolitan Rooftop Chic.",
+      it: "Cosmopolitan Chic da Rooftop."
+    },
+    faqs: defaultFaqs("Radio Rooftop Milan", "Via Marco Polo 18 (10th Floor ME Milan Il Duca), Repubblica, Milan", "21+", "Upscale Cosmopolitan Rooftop Chic.", "Deep House, Lounge, Skyline Aperitivo"),
+    image: "/images/events/weekly-posters/radio-rooftop-resident-weekly.webp",
+    priority: 81
+  },
+  {
+    id: "radio-rooftop-bar-milano-tuesday-tuesday-porta-nuova-mixology",
+    clubSlug: "radio-rooftop-bar-milano",
+    clubName: "Radio Rooftop Milan",
+    day: "tuesday",
+    dayOfWeek: 2,
+    eventSlug: "tuesday-porta-nuova-mixology",
+    name: "Tuesday Skyline Tapas & Deep House",
+    genres: ["Deep House", "Lounge", "Skyline Aperitivo"],
+    target: "21+, International Hotel Guests, Skyline & Cocktail Lovers",
+    description: {
+      en: "Tuesday program at Radio Rooftop Milan (Via Marco Polo 18 (10th Floor ME Milan Il Duca), Repubblica, Milan): Tuesday Skyline Tapas & Deep House. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del martedì da Radio Rooftop Milan (Via Marco Polo 18 (10th Floor ME Milan Il Duca), Repubblica, Milan): Tuesday Skyline Tapas & Deep House. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Cocktails from €18", "tables": "Skyline Lounge Tables upon reservation"},
+    dressCode: {
+      en: "Upscale Cosmopolitan Rooftop Chic.",
+      it: "Cosmopolitan Chic da Rooftop."
+    },
+    faqs: defaultFaqs("Radio Rooftop Milan", "Via Marco Polo 18 (10th Floor ME Milan Il Duca), Repubblica, Milan", "21+", "Upscale Cosmopolitan Rooftop Chic.", "Deep House, Lounge, Skyline Aperitivo"),
+    image: "/images/events/weekly-posters/radio-rooftop-resident-weekly.webp",
+    priority: 81
+  },
+  {
+    id: "radio-rooftop-bar-milano-wednesday-wednesday-panoramic-dj-set",
+    clubSlug: "radio-rooftop-bar-milano",
+    clubName: "Radio Rooftop Milan",
+    day: "wednesday",
+    dayOfWeek: 3,
+    eventSlug: "wednesday-panoramic-dj-set",
+    name: "Wednesday Panoramic Cocktails & DJ Set",
+    genres: ["Deep House", "Lounge", "Skyline Aperitivo"],
+    target: "21+, International Hotel Guests, Skyline & Cocktail Lovers",
+    description: {
+      en: "Wednesday program at Radio Rooftop Milan (Via Marco Polo 18 (10th Floor ME Milan Il Duca), Repubblica, Milan): Wednesday Panoramic Cocktails & DJ Set. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del mercoledì da Radio Rooftop Milan (Via Marco Polo 18 (10th Floor ME Milan Il Duca), Repubblica, Milan): Wednesday Panoramic Cocktails & DJ Set. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Cocktails from €18", "tables": "Skyline Lounge Tables upon reservation"},
+    dressCode: {
+      en: "Upscale Cosmopolitan Rooftop Chic.",
+      it: "Cosmopolitan Chic da Rooftop."
+    },
+    faqs: defaultFaqs("Radio Rooftop Milan", "Via Marco Polo 18 (10th Floor ME Milan Il Duca), Repubblica, Milan", "21+", "Upscale Cosmopolitan Rooftop Chic.", "Deep House, Lounge, Skyline Aperitivo"),
+    image: "/images/events/weekly-posters/radio-rooftop-resident-weekly.webp",
+    priority: 81
+  },
+  {
+    id: "radio-rooftop-bar-milano-thursday-thursday-cosmopolitan-rooftop",
+    clubSlug: "radio-rooftop-bar-milano",
+    clubName: "Radio Rooftop Milan",
+    day: "thursday",
+    dayOfWeek: 4,
+    eventSlug: "thursday-cosmopolitan-rooftop",
+    name: "Thursday Cosmopolitan Skyline Session",
+    genres: ["Deep House", "Lounge", "Skyline Aperitivo"],
+    target: "21+, International Hotel Guests, Skyline & Cocktail Lovers",
+    description: {
+      en: "Thursday program at Radio Rooftop Milan (Via Marco Polo 18 (10th Floor ME Milan Il Duca), Repubblica, Milan): Thursday Cosmopolitan Skyline Session. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del giovedì da Radio Rooftop Milan (Via Marco Polo 18 (10th Floor ME Milan Il Duca), Repubblica, Milan): Thursday Cosmopolitan Skyline Session. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Cocktails from €18", "tables": "Skyline Lounge Tables upon reservation"},
+    dressCode: {
+      en: "Upscale Cosmopolitan Rooftop Chic.",
+      it: "Cosmopolitan Chic da Rooftop."
+    },
+    faqs: defaultFaqs("Radio Rooftop Milan", "Via Marco Polo 18 (10th Floor ME Milan Il Duca), Repubblica, Milan", "21+", "Upscale Cosmopolitan Rooftop Chic.", "Deep House, Lounge, Skyline Aperitivo"),
+    image: "/images/events/weekly-posters/radio-rooftop-resident-weekly.webp",
+    priority: 81
+  },
+  {
+    id: "radio-rooftop-bar-milano-friday-friday-tenth-floor-grooves",
+    clubSlug: "radio-rooftop-bar-milano",
+    clubName: "Radio Rooftop Milan",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-tenth-floor-grooves",
+    name: "Friday 10th-Floor Sunset & Deep House",
+    genres: ["Deep House", "Lounge", "Skyline Aperitivo"],
+    target: "21+, International Hotel Guests, Skyline & Cocktail Lovers",
+    description: {
+      en: "Friday program at Radio Rooftop Milan (Via Marco Polo 18 (10th Floor ME Milan Il Duca), Repubblica, Milan): Friday 10th-Floor Sunset & Deep House. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da Radio Rooftop Milan (Via Marco Polo 18 (10th Floor ME Milan Il Duca), Repubblica, Milan): Friday 10th-Floor Sunset & Deep House. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Cocktails from €18", "tables": "Skyline Lounge Tables upon reservation"},
+    dressCode: {
+      en: "Upscale Cosmopolitan Rooftop Chic.",
+      it: "Cosmopolitan Chic da Rooftop."
+    },
+    faqs: defaultFaqs("Radio Rooftop Milan", "Via Marco Polo 18 (10th Floor ME Milan Il Duca), Repubblica, Milan", "21+", "Upscale Cosmopolitan Rooftop Chic.", "Deep House, Lounge, Skyline Aperitivo"),
+    image: "/images/events/weekly-posters/radio-rooftop-resident-weekly.webp",
+    priority: 81
+  },
+  {
+    id: "radio-rooftop-bar-milano-saturday-saturday-skyline-soiree",
+    clubSlug: "radio-rooftop-bar-milano",
+    clubName: "Radio Rooftop Milan",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-skyline-soiree",
+    name: "Saturday Porta Nuova Skyline Soirée & DJ Set",
+    genres: ["Deep House", "Lounge", "Skyline Aperitivo"],
+    target: "21+, International Hotel Guests, Skyline & Cocktail Lovers",
+    description: {
+      en: "Saturday program at Radio Rooftop Milan (Via Marco Polo 18 (10th Floor ME Milan Il Duca), Repubblica, Milan): Saturday Porta Nuova Skyline Soirée & DJ Set. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da Radio Rooftop Milan (Via Marco Polo 18 (10th Floor ME Milan Il Duca), Repubblica, Milan): Saturday Porta Nuova Skyline Soirée & DJ Set. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Cocktails from €18", "tables": "Skyline Lounge Tables upon reservation"},
+    dressCode: {
+      en: "Upscale Cosmopolitan Rooftop Chic.",
+      it: "Cosmopolitan Chic da Rooftop."
+    },
+    faqs: defaultFaqs("Radio Rooftop Milan", "Via Marco Polo 18 (10th Floor ME Milan Il Duca), Repubblica, Milan", "21+", "Upscale Cosmopolitan Rooftop Chic.", "Deep House, Lounge, Skyline Aperitivo"),
+    image: "/images/events/weekly-posters/radio-rooftop-resident-weekly.webp",
+    priority: 81
+  },
+  {
+    id: "radio-rooftop-bar-milano-sunday-sunday-rooftop-horizon",
+    clubSlug: "radio-rooftop-bar-milano",
+    clubName: "Radio Rooftop Milan",
+    day: "sunday",
+    dayOfWeek: 0,
+    eventSlug: "sunday-rooftop-horizon",
+    name: "Sunday Panoramic Aperitivo & Lounge Beats",
+    genres: ["Deep House", "Lounge", "Skyline Aperitivo"],
+    target: "21+, International Hotel Guests, Skyline & Cocktail Lovers",
+    description: {
+      en: "Sunday program at Radio Rooftop Milan (Via Marco Polo 18 (10th Floor ME Milan Il Duca), Repubblica, Milan): Sunday Panoramic Aperitivo & Lounge Beats. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del domenica da Radio Rooftop Milan (Via Marco Polo 18 (10th Floor ME Milan Il Duca), Repubblica, Milan): Sunday Panoramic Aperitivo & Lounge Beats. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Cocktails from €18", "tables": "Skyline Lounge Tables upon reservation"},
+    dressCode: {
+      en: "Upscale Cosmopolitan Rooftop Chic.",
+      it: "Cosmopolitan Chic da Rooftop."
+    },
+    faqs: defaultFaqs("Radio Rooftop Milan", "Via Marco Polo 18 (10th Floor ME Milan Il Duca), Repubblica, Milan", "21+", "Upscale Cosmopolitan Rooftop Chic.", "Deep House, Lounge, Skyline Aperitivo"),
+    image: "/images/events/weekly-posters/radio-rooftop-resident-weekly.webp",
+    priority: 81
+  },
+  {
+    id: "the-roof-milano-monday-monday-missori-sunset",
+    clubSlug: "the-roof-milano",
+    clubName: "The Roof Milano",
+    day: "monday",
+    dayOfWeek: 1,
+    eventSlug: "monday-missori-sunset",
+    name: "Monday Historic Spires Aperitivo & Dining",
+    genres: ["Lounge", "Sunset Aperitivo", "Fine Dining"],
+    target: "21+, Couples, Business & Historic Center Rooftop Guests",
+    description: {
+      en: "Monday program at The Roof Milano (Piazza Giuseppe Missori 1, Historic Center, Milan): Monday Historic Spires Aperitivo & Dining. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del lunedì da The Roof Milano (Piazza Giuseppe Missori 1, Historic Center, Milan): Monday Historic Spires Aperitivo & Dining. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Cocktails from €18", "tables": "Panoramic Terrace Dining & Lounge upon request"},
+    dressCode: {
+      en: "Refined Italian Smart Elegant.",
+      it: "Raffinato Smart Elegant Italiano."
+    },
+    faqs: defaultFaqs("The Roof Milano", "Piazza Giuseppe Missori 1, Historic Center, Milan", "21+", "Refined Italian Smart Elegant.", "Lounge, Sunset Aperitivo, Fine Dining"),
+    image: "/images/events/weekly-posters/the-roof-resident-weekly.webp",
+    priority: 78
+  },
+  {
+    id: "the-roof-milano-tuesday-tuesday-panoramic-terrace",
+    clubSlug: "the-roof-milano",
+    clubName: "The Roof Milano",
+    day: "tuesday",
+    dayOfWeek: 2,
+    eventSlug: "tuesday-panoramic-terrace",
+    name: "Tuesday Panoramic Cocktail Lounge & Dinner",
+    genres: ["Lounge", "Sunset Aperitivo", "Fine Dining"],
+    target: "21+, Couples, Business & Historic Center Rooftop Guests",
+    description: {
+      en: "Tuesday program at The Roof Milano (Piazza Giuseppe Missori 1, Historic Center, Milan): Tuesday Panoramic Cocktail Lounge & Dinner. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del martedì da The Roof Milano (Piazza Giuseppe Missori 1, Historic Center, Milan): Tuesday Panoramic Cocktail Lounge & Dinner. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Cocktails from €18", "tables": "Panoramic Terrace Dining & Lounge upon request"},
+    dressCode: {
+      en: "Refined Italian Smart Elegant.",
+      it: "Raffinato Smart Elegant Italiano."
+    },
+    faqs: defaultFaqs("The Roof Milano", "Piazza Giuseppe Missori 1, Historic Center, Milan", "21+", "Refined Italian Smart Elegant.", "Lounge, Sunset Aperitivo, Fine Dining"),
+    image: "/images/events/weekly-posters/the-roof-resident-weekly.webp",
+    priority: 78
+  },
+  {
+    id: "the-roof-milano-wednesday-wednesday-duomo-horizon",
+    clubSlug: "the-roof-milano",
+    clubName: "The Roof Milano",
+    day: "wednesday",
+    dayOfWeek: 3,
+    eventSlug: "wednesday-duomo-horizon",
+    name: "Wednesday Sunset Mixology Over Central Milan",
+    genres: ["Lounge", "Sunset Aperitivo", "Fine Dining"],
+    target: "21+, Couples, Business & Historic Center Rooftop Guests",
+    description: {
+      en: "Wednesday program at The Roof Milano (Piazza Giuseppe Missori 1, Historic Center, Milan): Wednesday Sunset Mixology Over Central Milan. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del mercoledì da The Roof Milano (Piazza Giuseppe Missori 1, Historic Center, Milan): Wednesday Sunset Mixology Over Central Milan. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Cocktails from €18", "tables": "Panoramic Terrace Dining & Lounge upon request"},
+    dressCode: {
+      en: "Refined Italian Smart Elegant.",
+      it: "Raffinato Smart Elegant Italiano."
+    },
+    faqs: defaultFaqs("The Roof Milano", "Piazza Giuseppe Missori 1, Historic Center, Milan", "21+", "Refined Italian Smart Elegant.", "Lounge, Sunset Aperitivo, Fine Dining"),
+    image: "/images/events/weekly-posters/the-roof-resident-weekly.webp",
+    priority: 78
+  },
+  {
+    id: "the-roof-milano-thursday-thursday-gourmet-rooftop",
+    clubSlug: "the-roof-milano",
+    clubName: "The Roof Milano",
+    day: "thursday",
+    dayOfWeek: 4,
+    eventSlug: "thursday-gourmet-rooftop",
+    name: "Thursday Gourmet Terrace & Evening Drinks",
+    genres: ["Lounge", "Sunset Aperitivo", "Fine Dining"],
+    target: "21+, Couples, Business & Historic Center Rooftop Guests",
+    description: {
+      en: "Thursday program at The Roof Milano (Piazza Giuseppe Missori 1, Historic Center, Milan): Thursday Gourmet Terrace & Evening Drinks. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del giovedì da The Roof Milano (Piazza Giuseppe Missori 1, Historic Center, Milan): Thursday Gourmet Terrace & Evening Drinks. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Cocktails from €18", "tables": "Panoramic Terrace Dining & Lounge upon request"},
+    dressCode: {
+      en: "Refined Italian Smart Elegant.",
+      it: "Raffinato Smart Elegant Italiano."
+    },
+    faqs: defaultFaqs("The Roof Milano", "Piazza Giuseppe Missori 1, Historic Center, Milan", "21+", "Refined Italian Smart Elegant.", "Lounge, Sunset Aperitivo, Fine Dining"),
+    image: "/images/events/weekly-posters/the-roof-resident-weekly.webp",
+    priority: 78
+  },
+  {
+    id: "the-roof-milano-friday-friday-skyline-aperitivo",
+    clubSlug: "the-roof-milano",
+    clubName: "The Roof Milano",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-skyline-aperitivo",
+    name: "Friday Central Milan Skyline Aperitivo & Dinner",
+    genres: ["Lounge", "Sunset Aperitivo", "Fine Dining"],
+    target: "21+, Couples, Business & Historic Center Rooftop Guests",
+    description: {
+      en: "Friday program at The Roof Milano (Piazza Giuseppe Missori 1, Historic Center, Milan): Friday Central Milan Skyline Aperitivo & Dinner. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da The Roof Milano (Piazza Giuseppe Missori 1, Historic Center, Milan): Friday Central Milan Skyline Aperitivo & Dinner. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Cocktails from €18", "tables": "Panoramic Terrace Dining & Lounge upon request"},
+    dressCode: {
+      en: "Refined Italian Smart Elegant.",
+      it: "Raffinato Smart Elegant Italiano."
+    },
+    faqs: defaultFaqs("The Roof Milano", "Piazza Giuseppe Missori 1, Historic Center, Milan", "21+", "Refined Italian Smart Elegant.", "Lounge, Sunset Aperitivo, Fine Dining"),
+    image: "/images/events/weekly-posters/the-roof-resident-weekly.webp",
+    priority: 78
+  },
+  {
+    id: "the-roof-milano-saturday-saturday-starlight-terrace",
+    clubSlug: "the-roof-milano",
+    clubName: "The Roof Milano",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-starlight-terrace",
+    name: "Saturday Starlight Rooftop Dinner & Mixology",
+    genres: ["Lounge", "Sunset Aperitivo", "Fine Dining"],
+    target: "21+, Couples, Business & Historic Center Rooftop Guests",
+    description: {
+      en: "Saturday program at The Roof Milano (Piazza Giuseppe Missori 1, Historic Center, Milan): Saturday Starlight Rooftop Dinner & Mixology. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da The Roof Milano (Piazza Giuseppe Missori 1, Historic Center, Milan): Saturday Starlight Rooftop Dinner & Mixology. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Cocktails from €18", "tables": "Panoramic Terrace Dining & Lounge upon request"},
+    dressCode: {
+      en: "Refined Italian Smart Elegant.",
+      it: "Raffinato Smart Elegant Italiano."
+    },
+    faqs: defaultFaqs("The Roof Milano", "Piazza Giuseppe Missori 1, Historic Center, Milan", "21+", "Refined Italian Smart Elegant.", "Lounge, Sunset Aperitivo, Fine Dining"),
+    image: "/images/events/weekly-posters/the-roof-resident-weekly.webp",
+    priority: 78
+  },
+  {
+    id: "the-roof-milano-sunday-sunday-panoramic-lounge",
+    clubSlug: "the-roof-milano",
+    clubName: "The Roof Milano",
+    day: "sunday",
+    dayOfWeek: 0,
+    eventSlug: "sunday-panoramic-lounge",
+    name: "Sunday Sunset Aperitivo & Fine Cocktails",
+    genres: ["Lounge", "Sunset Aperitivo", "Fine Dining"],
+    target: "21+, Couples, Business & Historic Center Rooftop Guests",
+    description: {
+      en: "Sunday program at The Roof Milano (Piazza Giuseppe Missori 1, Historic Center, Milan): Sunday Sunset Aperitivo & Fine Cocktails. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del domenica da The Roof Milano (Piazza Giuseppe Missori 1, Historic Center, Milan): Sunday Sunset Aperitivo & Fine Cocktails. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Cocktails from €18", "tables": "Panoramic Terrace Dining & Lounge upon request"},
+    dressCode: {
+      en: "Refined Italian Smart Elegant.",
+      it: "Raffinato Smart Elegant Italiano."
+    },
+    faqs: defaultFaqs("The Roof Milano", "Piazza Giuseppe Missori 1, Historic Center, Milan", "21+", "Refined Italian Smart Elegant.", "Lounge, Sunset Aperitivo, Fine Dining"),
+    image: "/images/events/weekly-posters/the-roof-resident-weekly.webp",
+    priority: 78
+  },
+  {
+    id: "terrazza-aperol-milano-monday-monday-duomo-spires-aperitivo",
+    clubSlug: "terrazza-aperol-milano",
+    clubName: "Terrazza Aperol Milano",
+    day: "monday",
+    dayOfWeek: 1,
+    eventSlug: "monday-duomo-spires-aperitivo",
+    name: "Monday Cathedral Spires Aperitivo",
+    genres: ["Aperitivo", "Lounge", "Italian Eclectic"],
+    target: "18+, International Visitors & Milanese Duomo Aperitivo Lovers",
+    description: {
+      en: "Monday program at Terrazza Aperol Milano (Piazza del Duomo (Galleria Vittorio Emanuele II), Milan): Monday Cathedral Spires Aperitivo. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del lunedì da Terrazza Aperol Milano (Piazza del Duomo (Galleria Vittorio Emanuele II), Milan): Monday Cathedral Spires Aperitivo. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Drinks & Cicchetti from €16", "tables": "Cathedral-View Tables via Concierge"},
+    dressCode: {
+      en: "Milanese Smart Casual.",
+      it: "Smart Casual Milanese."
+    },
+    faqs: defaultFaqs("Terrazza Aperol Milano", "Piazza del Duomo (Galleria Vittorio Emanuele II), Milan", "18+", "Milanese Smart Casual.", "Aperitivo, Lounge, Italian Eclectic"),
+    image: "/images/events/weekly-posters/terrazza-aperol-resident-weekly.webp",
+    priority: 78
+  },
+  {
+    id: "terrazza-aperol-milano-tuesday-tuesday-galleria-sunset",
+    clubSlug: "terrazza-aperol-milano",
+    clubName: "Terrazza Aperol Milano",
+    day: "tuesday",
+    dayOfWeek: 2,
+    eventSlug: "tuesday-galleria-sunset",
+    name: "Tuesday Galleria Balcony Spritz & Cicchetti",
+    genres: ["Aperitivo", "Lounge", "Italian Eclectic"],
+    target: "18+, International Visitors & Milanese Duomo Aperitivo Lovers",
+    description: {
+      en: "Tuesday program at Terrazza Aperol Milano (Piazza del Duomo (Galleria Vittorio Emanuele II), Milan): Tuesday Galleria Balcony Spritz & Cicchetti. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del martedì da Terrazza Aperol Milano (Piazza del Duomo (Galleria Vittorio Emanuele II), Milan): Tuesday Galleria Balcony Spritz & Cicchetti. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Drinks & Cicchetti from €16", "tables": "Cathedral-View Tables via Concierge"},
+    dressCode: {
+      en: "Milanese Smart Casual.",
+      it: "Smart Casual Milanese."
+    },
+    faqs: defaultFaqs("Terrazza Aperol Milano", "Piazza del Duomo (Galleria Vittorio Emanuele II), Milan", "18+", "Milanese Smart Casual.", "Aperitivo, Lounge, Italian Eclectic"),
+    image: "/images/events/weekly-posters/terrazza-aperol-resident-weekly.webp",
+    priority: 78
+  },
+  {
+    id: "terrazza-aperol-milano-wednesday-wednesday-duomo-golden-hour",
+    clubSlug: "terrazza-aperol-milano",
+    clubName: "Terrazza Aperol Milano",
+    day: "wednesday",
+    dayOfWeek: 3,
+    eventSlug: "wednesday-duomo-golden-hour",
+    name: "Wednesday Duomo View Golden Hour",
+    genres: ["Aperitivo", "Lounge", "Italian Eclectic"],
+    target: "18+, International Visitors & Milanese Duomo Aperitivo Lovers",
+    description: {
+      en: "Wednesday program at Terrazza Aperol Milano (Piazza del Duomo (Galleria Vittorio Emanuele II), Milan): Wednesday Duomo View Golden Hour. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del mercoledì da Terrazza Aperol Milano (Piazza del Duomo (Galleria Vittorio Emanuele II), Milan): Wednesday Duomo View Golden Hour. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Drinks & Cicchetti from €16", "tables": "Cathedral-View Tables via Concierge"},
+    dressCode: {
+      en: "Milanese Smart Casual.",
+      it: "Smart Casual Milanese."
+    },
+    faqs: defaultFaqs("Terrazza Aperol Milano", "Piazza del Duomo (Galleria Vittorio Emanuele II), Milan", "18+", "Milanese Smart Casual.", "Aperitivo, Lounge, Italian Eclectic"),
+    image: "/images/events/weekly-posters/terrazza-aperol-resident-weekly.webp",
+    priority: 78
+  },
+  {
+    id: "terrazza-aperol-milano-thursday-thursday-milanese-ritual",
+    clubSlug: "terrazza-aperol-milano",
+    clubName: "Terrazza Aperol Milano",
+    day: "thursday",
+    dayOfWeek: 4,
+    eventSlug: "thursday-milanese-ritual",
+    name: "Thursday Iconic Milanese Aperitivo Over Duomo",
+    genres: ["Aperitivo", "Lounge", "Italian Eclectic"],
+    target: "18+, International Visitors & Milanese Duomo Aperitivo Lovers",
+    description: {
+      en: "Thursday program at Terrazza Aperol Milano (Piazza del Duomo (Galleria Vittorio Emanuele II), Milan): Thursday Iconic Milanese Aperitivo Over Duomo. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del giovedì da Terrazza Aperol Milano (Piazza del Duomo (Galleria Vittorio Emanuele II), Milan): Thursday Iconic Milanese Aperitivo Over Duomo. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Drinks & Cicchetti from €16", "tables": "Cathedral-View Tables via Concierge"},
+    dressCode: {
+      en: "Milanese Smart Casual.",
+      it: "Smart Casual Milanese."
+    },
+    faqs: defaultFaqs("Terrazza Aperol Milano", "Piazza del Duomo (Galleria Vittorio Emanuele II), Milan", "18+", "Milanese Smart Casual.", "Aperitivo, Lounge, Italian Eclectic"),
+    image: "/images/events/weekly-posters/terrazza-aperol-resident-weekly.webp",
+    priority: 78
+  },
+  {
+    id: "terrazza-aperol-milano-friday-friday-cathedral-terrace",
+    clubSlug: "terrazza-aperol-milano",
+    clubName: "Terrazza Aperol Milano",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-cathedral-terrace",
+    name: "Friday Piazza Duomo Sunset Terrace",
+    genres: ["Aperitivo", "Lounge", "Italian Eclectic"],
+    target: "18+, International Visitors & Milanese Duomo Aperitivo Lovers",
+    description: {
+      en: "Friday program at Terrazza Aperol Milano (Piazza del Duomo (Galleria Vittorio Emanuele II), Milan): Friday Piazza Duomo Sunset Terrace. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da Terrazza Aperol Milano (Piazza del Duomo (Galleria Vittorio Emanuele II), Milan): Friday Piazza Duomo Sunset Terrace. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Drinks & Cicchetti from €16", "tables": "Cathedral-View Tables via Concierge"},
+    dressCode: {
+      en: "Milanese Smart Casual.",
+      it: "Smart Casual Milanese."
+    },
+    faqs: defaultFaqs("Terrazza Aperol Milano", "Piazza del Duomo (Galleria Vittorio Emanuele II), Milan", "18+", "Milanese Smart Casual.", "Aperitivo, Lounge, Italian Eclectic"),
+    image: "/images/events/weekly-posters/terrazza-aperol-resident-weekly.webp",
+    priority: 78
+  },
+  {
+    id: "terrazza-aperol-milano-saturday-saturday-duomo-balcony",
+    clubSlug: "terrazza-aperol-milano",
+    clubName: "Terrazza Aperol Milano",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-duomo-balcony",
+    name: "Saturday Signature Aperitivo Facing Duomo",
+    genres: ["Aperitivo", "Lounge", "Italian Eclectic"],
+    target: "18+, International Visitors & Milanese Duomo Aperitivo Lovers",
+    description: {
+      en: "Saturday program at Terrazza Aperol Milano (Piazza del Duomo (Galleria Vittorio Emanuele II), Milan): Saturday Signature Aperitivo Facing Duomo. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da Terrazza Aperol Milano (Piazza del Duomo (Galleria Vittorio Emanuele II), Milan): Saturday Signature Aperitivo Facing Duomo. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Drinks & Cicchetti from €16", "tables": "Cathedral-View Tables via Concierge"},
+    dressCode: {
+      en: "Milanese Smart Casual.",
+      it: "Smart Casual Milanese."
+    },
+    faqs: defaultFaqs("Terrazza Aperol Milano", "Piazza del Duomo (Galleria Vittorio Emanuele II), Milan", "18+", "Milanese Smart Casual.", "Aperitivo, Lounge, Italian Eclectic"),
+    image: "/images/events/weekly-posters/terrazza-aperol-resident-weekly.webp",
+    priority: 78
+  },
+  {
+    id: "terrazza-aperol-milano-sunday-sunday-duomo-aperitivo",
+    clubSlug: "terrazza-aperol-milano",
+    clubName: "Terrazza Aperol Milano",
+    day: "sunday",
+    dayOfWeek: 0,
+    eventSlug: "sunday-duomo-aperitivo",
+    name: "Sunday Panoramic Duomo Terrace Aperitivo",
+    genres: ["Aperitivo", "Lounge", "Italian Eclectic"],
+    target: "18+, International Visitors & Milanese Duomo Aperitivo Lovers",
+    description: {
+      en: "Sunday program at Terrazza Aperol Milano (Piazza del Duomo (Galleria Vittorio Emanuele II), Milan): Sunday Panoramic Duomo Terrace Aperitivo. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del domenica da Terrazza Aperol Milano (Piazza del Duomo (Galleria Vittorio Emanuele II), Milan): Sunday Panoramic Duomo Terrace Aperitivo. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Drinks & Cicchetti from €16", "tables": "Cathedral-View Tables via Concierge"},
+    dressCode: {
+      en: "Milanese Smart Casual.",
+      it: "Smart Casual Milanese."
+    },
+    faqs: defaultFaqs("Terrazza Aperol Milano", "Piazza del Duomo (Galleria Vittorio Emanuele II), Milan", "18+", "Milanese Smart Casual.", "Aperitivo, Lounge, Italian Eclectic"),
+    image: "/images/events/weekly-posters/terrazza-aperol-resident-weekly.webp",
+    priority: 78
+  },
+  {
+    id: "terrazza-gallia-milano-tuesday-tuesday-art-deco-mixology",
+    clubSlug: "terrazza-gallia-milano",
+    clubName: "Terrazza Gallia Milano",
+    day: "tuesday",
+    dayOfWeek: 2,
+    eventSlug: "tuesday-art-deco-mixology",
+    name: "Tuesday 7th-Floor Art-Deco Mixology & Dining",
+    genres: ["Fine Mixology", "Haute Cuisine", "Lounge"],
+    target: "23+, Luxury Travelers, Gourmets & Five-Star Mixology Guests",
+    description: {
+      en: "Tuesday program at Terrazza Gallia Milano (Piazza Duca d'Aosta 9 (7th Floor Excelsior Hotel Gallia), Milan): Tuesday 7th-Floor Art-Deco Mixology & Dining. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del martedì da Terrazza Gallia Milano (Piazza Duca d'Aosta 9 (7th Floor Excelsior Hotel Gallia), Milan): Tuesday 7th-Floor Art-Deco Mixology & Dining. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Signature Cocktails from €22", "tables": "7th-Floor Bar & Haute Dining upon request"},
+    dressCode: {
+      en: "Luxury Palace Smart Elegant.",
+      it: "Luxury Hotel Smart Elegant."
+    },
+    faqs: defaultFaqs("Terrazza Gallia Milano", "Piazza Duca d'Aosta 9 (7th Floor Excelsior Hotel Gallia), Milan", "23+", "Luxury Palace Smart Elegant.", "Fine Mixology, Haute Cuisine, Lounge"),
+    image: "/images/events/weekly-posters/terrazza-gallia-resident-weekly.webp",
+    priority: 79
+  },
+  {
+    id: "terrazza-gallia-milano-wednesday-wednesday-signature-martini",
+    clubSlug: "terrazza-gallia-milano",
+    clubName: "Terrazza Gallia Milano",
+    day: "wednesday",
+    dayOfWeek: 3,
+    eventSlug: "wednesday-signature-martini",
+    name: "Wednesday Haute Aperitivo & Rooftop Restaurant",
+    genres: ["Fine Mixology", "Haute Cuisine", "Lounge"],
+    target: "23+, Luxury Travelers, Gourmets & Five-Star Mixology Guests",
+    description: {
+      en: "Wednesday program at Terrazza Gallia Milano (Piazza Duca d'Aosta 9 (7th Floor Excelsior Hotel Gallia), Milan): Wednesday Haute Aperitivo & Rooftop Restaurant. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del mercoledì da Terrazza Gallia Milano (Piazza Duca d'Aosta 9 (7th Floor Excelsior Hotel Gallia), Milan): Wednesday Haute Aperitivo & Rooftop Restaurant. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Signature Cocktails from €22", "tables": "7th-Floor Bar & Haute Dining upon request"},
+    dressCode: {
+      en: "Luxury Palace Smart Elegant.",
+      it: "Luxury Hotel Smart Elegant."
+    },
+    faqs: defaultFaqs("Terrazza Gallia Milano", "Piazza Duca d'Aosta 9 (7th Floor Excelsior Hotel Gallia), Milan", "23+", "Luxury Palace Smart Elegant.", "Fine Mixology, Haute Cuisine, Lounge"),
+    image: "/images/events/weekly-posters/terrazza-gallia-resident-weekly.webp",
+    priority: 79
+  },
+  {
+    id: "terrazza-gallia-milano-thursday-thursday-excelsior-soiree",
+    clubSlug: "terrazza-gallia-milano",
+    clubName: "Terrazza Gallia Milano",
+    day: "thursday",
+    dayOfWeek: 4,
+    eventSlug: "thursday-excelsior-soiree",
+    name: "Thursday Luxury Rooftop Bar & Gourmet Dinner",
+    genres: ["Fine Mixology", "Haute Cuisine", "Lounge"],
+    target: "23+, Luxury Travelers, Gourmets & Five-Star Mixology Guests",
+    description: {
+      en: "Thursday program at Terrazza Gallia Milano (Piazza Duca d'Aosta 9 (7th Floor Excelsior Hotel Gallia), Milan): Thursday Luxury Rooftop Bar & Gourmet Dinner. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del giovedì da Terrazza Gallia Milano (Piazza Duca d'Aosta 9 (7th Floor Excelsior Hotel Gallia), Milan): Thursday Luxury Rooftop Bar & Gourmet Dinner. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Signature Cocktails from €22", "tables": "7th-Floor Bar & Haute Dining upon request"},
+    dressCode: {
+      en: "Luxury Palace Smart Elegant.",
+      it: "Luxury Hotel Smart Elegant."
+    },
+    faqs: defaultFaqs("Terrazza Gallia Milano", "Piazza Duca d'Aosta 9 (7th Floor Excelsior Hotel Gallia), Milan", "23+", "Luxury Palace Smart Elegant.", "Fine Mixology, Haute Cuisine, Lounge"),
+    image: "/images/events/weekly-posters/terrazza-gallia-resident-weekly.webp",
+    priority: 79
+  },
+  {
+    id: "terrazza-gallia-milano-friday-friday-gallia-skyline",
+    clubSlug: "terrazza-gallia-milano",
+    clubName: "Terrazza Gallia Milano",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-gallia-skyline",
+    name: "Friday Five-Star Mixology & Terrace Dining",
+    genres: ["Fine Mixology", "Haute Cuisine", "Lounge"],
+    target: "23+, Luxury Travelers, Gourmets & Five-Star Mixology Guests",
+    description: {
+      en: "Friday program at Terrazza Gallia Milano (Piazza Duca d'Aosta 9 (7th Floor Excelsior Hotel Gallia), Milan): Friday Five-Star Mixology & Terrace Dining. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da Terrazza Gallia Milano (Piazza Duca d'Aosta 9 (7th Floor Excelsior Hotel Gallia), Milan): Friday Five-Star Mixology & Terrace Dining. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Signature Cocktails from €22", "tables": "7th-Floor Bar & Haute Dining upon request"},
+    dressCode: {
+      en: "Luxury Palace Smart Elegant.",
+      it: "Luxury Hotel Smart Elegant."
+    },
+    faqs: defaultFaqs("Terrazza Gallia Milano", "Piazza Duca d'Aosta 9 (7th Floor Excelsior Hotel Gallia), Milan", "23+", "Luxury Palace Smart Elegant.", "Fine Mixology, Haute Cuisine, Lounge"),
+    image: "/images/events/weekly-posters/terrazza-gallia-resident-weekly.webp",
+    priority: 79
+  },
+  {
+    id: "terrazza-gallia-milano-saturday-saturday-haute-rooftop",
+    clubSlug: "terrazza-gallia-milano",
+    clubName: "Terrazza Gallia Milano",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-haute-rooftop",
+    name: "Saturday Grand Rooftop Gourmet & Cocktail Night",
+    genres: ["Fine Mixology", "Haute Cuisine", "Lounge"],
+    target: "23+, Luxury Travelers, Gourmets & Five-Star Mixology Guests",
+    description: {
+      en: "Saturday program at Terrazza Gallia Milano (Piazza Duca d'Aosta 9 (7th Floor Excelsior Hotel Gallia), Milan): Saturday Grand Rooftop Gourmet & Cocktail Night. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da Terrazza Gallia Milano (Piazza Duca d'Aosta 9 (7th Floor Excelsior Hotel Gallia), Milan): Saturday Grand Rooftop Gourmet & Cocktail Night. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Signature Cocktails from €22", "tables": "7th-Floor Bar & Haute Dining upon request"},
+    dressCode: {
+      en: "Luxury Palace Smart Elegant.",
+      it: "Luxury Hotel Smart Elegant."
+    },
+    faqs: defaultFaqs("Terrazza Gallia Milano", "Piazza Duca d'Aosta 9 (7th Floor Excelsior Hotel Gallia), Milan", "23+", "Luxury Palace Smart Elegant.", "Fine Mixology, Haute Cuisine, Lounge"),
+    image: "/images/events/weekly-posters/terrazza-gallia-resident-weekly.webp",
+    priority: 79
+  },
+  {
+    id: "terrazza-gallia-milano-sunday-sunday-palace-terrace",
+    clubSlug: "terrazza-gallia-milano",
+    clubName: "Terrazza Gallia Milano",
+    day: "sunday",
+    dayOfWeek: 0,
+    eventSlug: "sunday-palace-terrace",
+    name: "Sunday Panoramic Aperitivo & Fine Cuisine",
+    genres: ["Fine Mixology", "Haute Cuisine", "Lounge"],
+    target: "23+, Luxury Travelers, Gourmets & Five-Star Mixology Guests",
+    description: {
+      en: "Sunday program at Terrazza Gallia Milano (Piazza Duca d'Aosta 9 (7th Floor Excelsior Hotel Gallia), Milan): Sunday Panoramic Aperitivo & Fine Cuisine. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del domenica da Terrazza Gallia Milano (Piazza Duca d'Aosta 9 (7th Floor Excelsior Hotel Gallia), Milan): Sunday Panoramic Aperitivo & Fine Cuisine. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Signature Cocktails from €22", "tables": "7th-Floor Bar & Haute Dining upon request"},
+    dressCode: {
+      en: "Luxury Palace Smart Elegant.",
+      it: "Luxury Hotel Smart Elegant."
+    },
+    faqs: defaultFaqs("Terrazza Gallia Milano", "Piazza Duca d'Aosta 9 (7th Floor Excelsior Hotel Gallia), Milan", "23+", "Luxury Palace Smart Elegant.", "Fine Mixology, Haute Cuisine, Lounge"),
+    image: "/images/events/weekly-posters/terrazza-gallia-resident-weekly.webp",
+    priority: 79
+  },
+  {
+    id: "ristorante-torre-milano-wednesday-wednesday-prada-tower-bar",
+    clubSlug: "ristorante-torre-milano",
+    clubName: "Ristorante Torre \u00b7 Fondazione Prada",
+    day: "wednesday",
+    dayOfWeek: 3,
+    eventSlug: "wednesday-prada-tower-bar",
+    name: "Wednesday 6th-Floor Museum Tower Bar & Dinner",
+    genres: ["Contemporary Dining", "Cocktail Bar", "Lounge"],
+    target: "21+, Contemporary Art Collectors, Architects & Fine Diners",
+    description: {
+      en: "Wednesday program at Ristorante Torre · Fondazione Prada (Via Lorenzini 14 (6th Floor Fondazione Prada), Milan): Wednesday 6th-Floor Museum Tower Bar & Dinner. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del mercoledì da Ristorante Torre · Fondazione Prada (Via Lorenzini 14 (6th Floor Fondazione Prada), Milan): Wednesday 6th-Floor Museum Tower Bar & Dinner. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Bar Cocktails from €18", "tables": "6th-Floor Panoramic Table upon reservation"},
+    dressCode: {
+      en: "Architectural Contemporary Elegant.",
+      it: "Elegante Contemporaneo."
+    },
+    faqs: defaultFaqs("Ristorante Torre · Fondazione Prada", "Via Lorenzini 14 (6th Floor Fondazione Prada), Milan", "21+", "Architectural Contemporary Elegant.", "Contemporary Dining, Cocktail Bar, Lounge"),
+    image: "/images/events/weekly-posters/ristorante-torre-resident-weekly.webp",
+    priority: 77
+  },
+  {
+    id: "ristorante-torre-milano-thursday-thursday-architectural-dining",
+    clubSlug: "ristorante-torre-milano",
+    clubName: "Ristorante Torre \u00b7 Fondazione Prada",
+    day: "thursday",
+    dayOfWeek: 4,
+    eventSlug: "thursday-architectural-dining",
+    name: "Thursday Contemporary Art Skyline Dinner & Drinks",
+    genres: ["Contemporary Dining", "Cocktail Bar", "Lounge"],
+    target: "21+, Contemporary Art Collectors, Architects & Fine Diners",
+    description: {
+      en: "Thursday program at Ristorante Torre · Fondazione Prada (Via Lorenzini 14 (6th Floor Fondazione Prada), Milan): Thursday Contemporary Art Skyline Dinner & Drinks. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del giovedì da Ristorante Torre · Fondazione Prada (Via Lorenzini 14 (6th Floor Fondazione Prada), Milan): Thursday Contemporary Art Skyline Dinner & Drinks. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Bar Cocktails from €18", "tables": "6th-Floor Panoramic Table upon reservation"},
+    dressCode: {
+      en: "Architectural Contemporary Elegant.",
+      it: "Elegante Contemporaneo."
+    },
+    faqs: defaultFaqs("Ristorante Torre · Fondazione Prada", "Via Lorenzini 14 (6th Floor Fondazione Prada), Milan", "21+", "Architectural Contemporary Elegant.", "Contemporary Dining, Cocktail Bar, Lounge"),
+    image: "/images/events/weekly-posters/ristorante-torre-resident-weekly.webp",
+    priority: 77
+  },
+  {
+    id: "ristorante-torre-milano-friday-friday-fondazione-skyline",
+    clubSlug: "ristorante-torre-milano",
+    clubName: "Ristorante Torre \u00b7 Fondazione Prada",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-fondazione-skyline",
+    name: "Friday Panoramic Tower Cocktails & Italian Cuisine",
+    genres: ["Contemporary Dining", "Cocktail Bar", "Lounge"],
+    target: "21+, Contemporary Art Collectors, Architects & Fine Diners",
+    description: {
+      en: "Friday program at Ristorante Torre · Fondazione Prada (Via Lorenzini 14 (6th Floor Fondazione Prada), Milan): Friday Panoramic Tower Cocktails & Italian Cuisine. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da Ristorante Torre · Fondazione Prada (Via Lorenzini 14 (6th Floor Fondazione Prada), Milan): Friday Panoramic Tower Cocktails & Italian Cuisine. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Bar Cocktails from €18", "tables": "6th-Floor Panoramic Table upon reservation"},
+    dressCode: {
+      en: "Architectural Contemporary Elegant.",
+      it: "Elegante Contemporaneo."
+    },
+    faqs: defaultFaqs("Ristorante Torre · Fondazione Prada", "Via Lorenzini 14 (6th Floor Fondazione Prada), Milan", "21+", "Architectural Contemporary Elegant.", "Contemporary Dining, Cocktail Bar, Lounge"),
+    image: "/images/events/weekly-posters/ristorante-torre-resident-weekly.webp",
+    priority: 77
+  },
+  {
+    id: "ristorante-torre-milano-saturday-saturday-torre-fine-dining",
+    clubSlug: "ristorante-torre-milano",
+    clubName: "Ristorante Torre \u00b7 Fondazione Prada",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-torre-fine-dining",
+    name: "Saturday 6th-Floor Skyline Dinner & Mixology",
+    genres: ["Contemporary Dining", "Cocktail Bar", "Lounge"],
+    target: "21+, Contemporary Art Collectors, Architects & Fine Diners",
+    description: {
+      en: "Saturday program at Ristorante Torre · Fondazione Prada (Via Lorenzini 14 (6th Floor Fondazione Prada), Milan): Saturday 6th-Floor Skyline Dinner & Mixology. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da Ristorante Torre · Fondazione Prada (Via Lorenzini 14 (6th Floor Fondazione Prada), Milan): Saturday 6th-Floor Skyline Dinner & Mixology. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Bar Cocktails from €18", "tables": "6th-Floor Panoramic Table upon reservation"},
+    dressCode: {
+      en: "Architectural Contemporary Elegant.",
+      it: "Elegante Contemporaneo."
+    },
+    faqs: defaultFaqs("Ristorante Torre · Fondazione Prada", "Via Lorenzini 14 (6th Floor Fondazione Prada), Milan", "21+", "Architectural Contemporary Elegant.", "Contemporary Dining, Cocktail Bar, Lounge"),
+    image: "/images/events/weekly-posters/ristorante-torre-resident-weekly.webp",
+    priority: 77
+  },
+  {
+    id: "ristorante-torre-milano-sunday-sunday-museum-tower-evening",
+    clubSlug: "ristorante-torre-milano",
+    clubName: "Ristorante Torre \u00b7 Fondazione Prada",
+    day: "sunday",
+    dayOfWeek: 0,
+    eventSlug: "sunday-museum-tower-evening",
+    name: "Sunday Panoramic Aperitivo & Evening Dining",
+    genres: ["Contemporary Dining", "Cocktail Bar", "Lounge"],
+    target: "21+, Contemporary Art Collectors, Architects & Fine Diners",
+    description: {
+      en: "Sunday program at Ristorante Torre · Fondazione Prada (Via Lorenzini 14 (6th Floor Fondazione Prada), Milan): Sunday Panoramic Aperitivo & Evening Dining. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del domenica da Ristorante Torre · Fondazione Prada (Via Lorenzini 14 (6th Floor Fondazione Prada), Milan): Sunday Panoramic Aperitivo & Evening Dining. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Bar Cocktails from €18", "tables": "6th-Floor Panoramic Table upon reservation"},
+    dressCode: {
+      en: "Architectural Contemporary Elegant.",
+      it: "Elegante Contemporaneo."
+    },
+    faqs: defaultFaqs("Ristorante Torre · Fondazione Prada", "Via Lorenzini 14 (6th Floor Fondazione Prada), Milan", "21+", "Architectural Contemporary Elegant.", "Contemporary Dining, Cocktail Bar, Lounge"),
+    image: "/images/events/weekly-posters/ristorante-torre-resident-weekly.webp",
+    priority: 77
+  },
+  {
+    id: "innocenti-evasioni-terrazza-triennale-tuesday-tuesday-glasshouse-skyline",
+    clubSlug: "innocenti-evasioni-terrazza-triennale",
+    clubName: "Terrazza Triennale \u00b7 Osteria con Vista",
+    day: "tuesday",
+    dayOfWeek: 2,
+    eventSlug: "tuesday-glasshouse-skyline",
+    name: "Tuesday Glasshouse Aperitivo Over Parco Sempione",
+    genres: ["Panoramic Dining", "Cocktail Lounge", "Sunset Aperitivo"],
+    target: "21+, Design Lovers, Parco Sempione & Skyline Dining Guests",
+    description: {
+      en: "Tuesday program at Terrazza Triennale · Osteria con Vista (Viale Emilio Alemagna 6 (Parco Sempione), Milan): Tuesday Glasshouse Aperitivo Over Parco Sempione. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del martedì da Terrazza Triennale · Osteria con Vista (Viale Emilio Alemagna 6 (Parco Sempione), Milan): Tuesday Glasshouse Aperitivo Over Parco Sempione. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Cocktails from €18", "tables": "Glasshouse Dinner & Terrace upon reservation"},
+    dressCode: {
+      en: "Design Museum Smart Elegant.",
+      it: "Smart Elegant da Museo del Design."
+    },
+    faqs: defaultFaqs("Terrazza Triennale · Osteria con Vista", "Viale Emilio Alemagna 6 (Parco Sempione), Milan", "21+", "Design Museum Smart Elegant.", "Panoramic Dining, Cocktail Lounge, Sunset Aperitivo"),
+    image: "/images/events/weekly-posters/terrazza-triennale-resident-weekly.webp",
+    priority: 78
+  },
+  {
+    id: "innocenti-evasioni-terrazza-triennale-wednesday-wednesday-triennale-vista",
+    clubSlug: "innocenti-evasioni-terrazza-triennale",
+    clubName: "Terrazza Triennale \u00b7 Osteria con Vista",
+    day: "wednesday",
+    dayOfWeek: 3,
+    eventSlug: "wednesday-triennale-vista",
+    name: "Wednesday Design Museum Terrace Dinner & Drinks",
+    genres: ["Panoramic Dining", "Cocktail Lounge", "Sunset Aperitivo"],
+    target: "21+, Design Lovers, Parco Sempione & Skyline Dining Guests",
+    description: {
+      en: "Wednesday program at Terrazza Triennale · Osteria con Vista (Viale Emilio Alemagna 6 (Parco Sempione), Milan): Wednesday Design Museum Terrace Dinner & Drinks. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del mercoledì da Terrazza Triennale · Osteria con Vista (Viale Emilio Alemagna 6 (Parco Sempione), Milan): Wednesday Design Museum Terrace Dinner & Drinks. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Cocktails from €18", "tables": "Glasshouse Dinner & Terrace upon reservation"},
+    dressCode: {
+      en: "Design Museum Smart Elegant.",
+      it: "Smart Elegant da Museo del Design."
+    },
+    faqs: defaultFaqs("Terrazza Triennale · Osteria con Vista", "Viale Emilio Alemagna 6 (Parco Sempione), Milan", "21+", "Design Museum Smart Elegant.", "Panoramic Dining, Cocktail Lounge, Sunset Aperitivo"),
+    image: "/images/events/weekly-posters/terrazza-triennale-resident-weekly.webp",
+    priority: 78
+  },
+  {
+    id: "innocenti-evasioni-terrazza-triennale-thursday-thursday-sempione-canopy",
+    clubSlug: "innocenti-evasioni-terrazza-triennale",
+    clubName: "Terrazza Triennale \u00b7 Osteria con Vista",
+    day: "thursday",
+    dayOfWeek: 4,
+    eventSlug: "thursday-sempione-canopy",
+    name: "Thursday Panoramic Pavilion Cocktails & Cuisine",
+    genres: ["Panoramic Dining", "Cocktail Lounge", "Sunset Aperitivo"],
+    target: "21+, Design Lovers, Parco Sempione & Skyline Dining Guests",
+    description: {
+      en: "Thursday program at Terrazza Triennale · Osteria con Vista (Viale Emilio Alemagna 6 (Parco Sempione), Milan): Thursday Panoramic Pavilion Cocktails & Cuisine. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del giovedì da Terrazza Triennale · Osteria con Vista (Viale Emilio Alemagna 6 (Parco Sempione), Milan): Thursday Panoramic Pavilion Cocktails & Cuisine. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Cocktails from €18", "tables": "Glasshouse Dinner & Terrace upon reservation"},
+    dressCode: {
+      en: "Design Museum Smart Elegant.",
+      it: "Smart Elegant da Museo del Design."
+    },
+    faqs: defaultFaqs("Terrazza Triennale · Osteria con Vista", "Viale Emilio Alemagna 6 (Parco Sempione), Milan", "21+", "Design Museum Smart Elegant.", "Panoramic Dining, Cocktail Lounge, Sunset Aperitivo"),
+    image: "/images/events/weekly-posters/terrazza-triennale-resident-weekly.webp",
+    priority: 78
+  },
+  {
+    id: "innocenti-evasioni-terrazza-triennale-friday-friday-osteria-con-vista",
+    clubSlug: "innocenti-evasioni-terrazza-triennale",
+    clubName: "Terrazza Triennale \u00b7 Osteria con Vista",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-osteria-con-vista",
+    name: "Friday Illuminated Skyline Dinner & Cocktail Lounge",
+    genres: ["Panoramic Dining", "Cocktail Lounge", "Sunset Aperitivo"],
+    target: "21+, Design Lovers, Parco Sempione & Skyline Dining Guests",
+    description: {
+      en: "Friday program at Terrazza Triennale · Osteria con Vista (Viale Emilio Alemagna 6 (Parco Sempione), Milan): Friday Illuminated Skyline Dinner & Cocktail Lounge. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da Terrazza Triennale · Osteria con Vista (Viale Emilio Alemagna 6 (Parco Sempione), Milan): Friday Illuminated Skyline Dinner & Cocktail Lounge. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Cocktails from €18", "tables": "Glasshouse Dinner & Terrace upon reservation"},
+    dressCode: {
+      en: "Design Museum Smart Elegant.",
+      it: "Smart Elegant da Museo del Design."
+    },
+    faqs: defaultFaqs("Terrazza Triennale · Osteria con Vista", "Viale Emilio Alemagna 6 (Parco Sempione), Milan", "21+", "Design Museum Smart Elegant.", "Panoramic Dining, Cocktail Lounge, Sunset Aperitivo"),
+    image: "/images/events/weekly-posters/terrazza-triennale-resident-weekly.webp",
+    priority: 78
+  },
+  {
+    id: "innocenti-evasioni-terrazza-triennale-saturday-saturday-triennale-soiree",
+    clubSlug: "innocenti-evasioni-terrazza-triennale",
+    clubName: "Terrazza Triennale \u00b7 Osteria con Vista",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-triennale-soiree",
+    name: "Saturday Glasshouse Gourmet Dinner & Park View",
+    genres: ["Panoramic Dining", "Cocktail Lounge", "Sunset Aperitivo"],
+    target: "21+, Design Lovers, Parco Sempione & Skyline Dining Guests",
+    description: {
+      en: "Saturday program at Terrazza Triennale · Osteria con Vista (Viale Emilio Alemagna 6 (Parco Sempione), Milan): Saturday Glasshouse Gourmet Dinner & Park View. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da Terrazza Triennale · Osteria con Vista (Viale Emilio Alemagna 6 (Parco Sempione), Milan): Saturday Glasshouse Gourmet Dinner & Park View. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Cocktails from €18", "tables": "Glasshouse Dinner & Terrace upon reservation"},
+    dressCode: {
+      en: "Design Museum Smart Elegant.",
+      it: "Smart Elegant da Museo del Design."
+    },
+    faqs: defaultFaqs("Terrazza Triennale · Osteria con Vista", "Viale Emilio Alemagna 6 (Parco Sempione), Milan", "21+", "Design Museum Smart Elegant.", "Panoramic Dining, Cocktail Lounge, Sunset Aperitivo"),
+    image: "/images/events/weekly-posters/terrazza-triennale-resident-weekly.webp",
+    priority: 78
+  },
+  {
+    id: "innocenti-evasioni-terrazza-triennale-sunday-sunday-parco-sempione-sunset",
+    clubSlug: "innocenti-evasioni-terrazza-triennale",
+    clubName: "Terrazza Triennale \u00b7 Osteria con Vista",
+    day: "sunday",
+    dayOfWeek: 0,
+    eventSlug: "sunday-parco-sempione-sunset",
+    name: "Sunday Sunset Aperitivo & Skyline Dining",
+    genres: ["Panoramic Dining", "Cocktail Lounge", "Sunset Aperitivo"],
+    target: "21+, Design Lovers, Parco Sempione & Skyline Dining Guests",
+    description: {
+      en: "Sunday program at Terrazza Triennale · Osteria con Vista (Viale Emilio Alemagna 6 (Parco Sempione), Milan): Sunday Sunset Aperitivo & Skyline Dining. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del domenica da Terrazza Triennale · Osteria con Vista (Viale Emilio Alemagna 6 (Parco Sempione), Milan): Sunday Sunset Aperitivo & Skyline Dining. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Cocktails from €18", "tables": "Glasshouse Dinner & Terrace upon reservation"},
+    dressCode: {
+      en: "Design Museum Smart Elegant.",
+      it: "Smart Elegant da Museo del Design."
+    },
+    faqs: defaultFaqs("Terrazza Triennale · Osteria con Vista", "Viale Emilio Alemagna 6 (Parco Sempione), Milan", "21+", "Design Museum Smart Elegant.", "Panoramic Dining, Cocktail Lounge, Sunset Aperitivo"),
+    image: "/images/events/weekly-posters/terrazza-triennale-resident-weekly.webp",
+    priority: 78
+  },
+  {
+    id: "super-club-milano-friday-friday-tortona-club-night",
+    clubSlug: "super-club-milano",
+    clubName: "Super Club Milano",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-tortona-club-night",
+    name: "Friday Tortona Design District Club Night",
+    genres: ["House", "Tech-House", "Commercial"],
+    target: "21+, Tortona Creative, Fashion & Boutique Club Crowd",
+    description: {
+      en: "Friday program at Super Club Milano (Via Tortona 27, Tortona Design District, Milan): Friday Tortona Design District Club Night. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da Super Club Milano (Via Tortona 27, Tortona Design District, Milan): Friday Tortona Design District Club Night. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "From €20", "tables": "VIP Privé from €300"},
+    dressCode: {
+      en: "Fashion & Design District Chic.",
+      it: "Chic da Tortona Design District."
+    },
+    faqs: defaultFaqs("Super Club Milano", "Via Tortona 27, Tortona Design District, Milan", "21+", "Fashion & Design District Chic.", "House, Tech-House, Commercial"),
+    image: "/images/events/weekly-posters/superclub-milano-weekly.webp",
+    priority: 77
+  },
+  {
+    id: "super-club-milano-saturday-saturday-superclub-prive",
+    clubSlug: "super-club-milano",
+    clubName: "Super Club Milano",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-superclub-prive",
+    name: "Saturday Super Club House & VIP Showcase",
+    genres: ["House", "Tech-House", "Commercial"],
+    target: "21+, Tortona Creative, Fashion & Boutique Club Crowd",
+    description: {
+      en: "Saturday program at Super Club Milano (Via Tortona 27, Tortona Design District, Milan): Saturday Super Club House & VIP Showcase. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da Super Club Milano (Via Tortona 27, Tortona Design District, Milan): Saturday Super Club House & VIP Showcase. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "From €20", "tables": "VIP Privé from €300"},
+    dressCode: {
+      en: "Fashion & Design District Chic.",
+      it: "Chic da Tortona Design District."
+    },
+    faqs: defaultFaqs("Super Club Milano", "Via Tortona 27, Tortona Design District, Milan", "21+", "Fashion & Design District Chic.", "House, Tech-House, Commercial"),
+    image: "/images/events/weekly-posters/superclub-milano-weekly.webp",
+    priority: 77
+  },
+  {
+    id: "carlsbergol-tuesday-tuesday-porta-nuova-brewery",
+    clubSlug: "carlsbergol",
+    clubName: "Carlsberg \u00d8L Milano",
+    day: "tuesday",
+    dayOfWeek: 2,
+    eventSlug: "tuesday-porta-nuova-brewery",
+    name: "Tuesday Craft Brewery & Convivial Dinner",
+    genres: ["Restaurant & Brewery", "Live Convivial", "Porta Nuova Evening"],
+    target: "Groups, Families, Convivial Dinners & Porta Nuova Crowd",
+    description: {
+      en: "Tuesday program at Carlsberg ØL Milano (Bastioni di Porta Nuova 9, Porta Nuova, Milan): Tuesday Craft Brewery & Convivial Dinner. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del martedì da Carlsberg ØL Milano (Bastioni di Porta Nuova 9, Porta Nuova, Milan): Tuesday Craft Brewery & Convivial Dinner. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Craft Beer & Grill Menu", "tables": "Convivial & Group Tables via WhatsApp"},
+    dressCode: {
+      en: "Smart Casual Porta Nuova.",
+      it: "Smart Casual Porta Nuova."
+    },
+    faqs: defaultFaqs("Carlsberg ØL Milano", "Bastioni di Porta Nuova 9, Porta Nuova, Milan", "18+ (Family-Friendly Restaurant & Brewery)", "Smart Casual Porta Nuova.", "Restaurant & Brewery, Live Convivial, Porta Nuova Evening"),
+    image: "/images/events/weekly-posters/carlsbergol-milano-weekly.webp",
+    priority: 85
+  },
+  {
+    id: "carlsbergol-wednesday-wednesday-grill-stein-evening",
+    clubSlug: "carlsbergol",
+    clubName: "Carlsberg \u00d8L Milano",
+    day: "wednesday",
+    dayOfWeek: 3,
+    eventSlug: "wednesday-grill-stein-evening",
+    name: "Wednesday Porta Nuova Grill & Craft Taps",
+    genres: ["Restaurant & Brewery", "Live Convivial", "Porta Nuova Evening"],
+    target: "Groups, Families, Convivial Dinners & Porta Nuova Crowd",
+    description: {
+      en: "Wednesday program at Carlsberg ØL Milano (Bastioni di Porta Nuova 9, Porta Nuova, Milan): Wednesday Porta Nuova Grill & Craft Taps. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del mercoledì da Carlsberg ØL Milano (Bastioni di Porta Nuova 9, Porta Nuova, Milan): Wednesday Porta Nuova Grill & Craft Taps. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Craft Beer & Grill Menu", "tables": "Convivial & Group Tables via WhatsApp"},
+    dressCode: {
+      en: "Smart Casual Porta Nuova.",
+      it: "Smart Casual Porta Nuova."
+    },
+    faqs: defaultFaqs("Carlsberg ØL Milano", "Bastioni di Porta Nuova 9, Porta Nuova, Milan", "18+ (Family-Friendly Restaurant & Brewery)", "Smart Casual Porta Nuova.", "Restaurant & Brewery, Live Convivial, Porta Nuova Evening"),
+    image: "/images/events/weekly-posters/carlsbergol-milano-weekly.webp",
+    priority: 85
+  },
+  {
+    id: "carlsbergol-thursday-thursday-bastioni-social-dinner",
+    clubSlug: "carlsbergol",
+    clubName: "Carlsberg \u00d8L Milano",
+    day: "thursday",
+    dayOfWeek: 4,
+    eventSlug: "thursday-bastioni-social-dinner",
+    name: "Thursday Bastioni di Porta Nuova Group Dinner",
+    genres: ["Restaurant & Brewery", "Live Convivial", "Porta Nuova Evening"],
+    target: "Groups, Families, Convivial Dinners & Porta Nuova Crowd",
+    description: {
+      en: "Thursday program at Carlsberg ØL Milano (Bastioni di Porta Nuova 9, Porta Nuova, Milan): Thursday Bastioni di Porta Nuova Group Dinner. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del giovedì da Carlsberg ØL Milano (Bastioni di Porta Nuova 9, Porta Nuova, Milan): Thursday Bastioni di Porta Nuova Group Dinner. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Craft Beer & Grill Menu", "tables": "Convivial & Group Tables via WhatsApp"},
+    dressCode: {
+      en: "Smart Casual Porta Nuova.",
+      it: "Smart Casual Porta Nuova."
+    },
+    faqs: defaultFaqs("Carlsberg ØL Milano", "Bastioni di Porta Nuova 9, Porta Nuova, Milan", "18+ (Family-Friendly Restaurant & Brewery)", "Smart Casual Porta Nuova.", "Restaurant & Brewery, Live Convivial, Porta Nuova Evening"),
+    image: "/images/events/weekly-posters/carlsbergol-milano-weekly.webp",
+    priority: 85
+  },
+  {
+    id: "carlsbergol-friday-friday-brewery-music-night",
+    clubSlug: "carlsbergol",
+    clubName: "Carlsberg \u00d8L Milano",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-brewery-music-night",
+    name: "Friday Craft Brewery Dinner & Evening Vibes",
+    genres: ["Restaurant & Brewery", "Live Convivial", "Porta Nuova Evening"],
+    target: "Groups, Families, Convivial Dinners & Porta Nuova Crowd",
+    description: {
+      en: "Friday program at Carlsberg ØL Milano (Bastioni di Porta Nuova 9, Porta Nuova, Milan): Friday Craft Brewery Dinner & Evening Vibes. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da Carlsberg ØL Milano (Bastioni di Porta Nuova 9, Porta Nuova, Milan): Friday Craft Brewery Dinner & Evening Vibes. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Craft Beer & Grill Menu", "tables": "Convivial & Group Tables via WhatsApp"},
+    dressCode: {
+      en: "Smart Casual Porta Nuova.",
+      it: "Smart Casual Porta Nuova."
+    },
+    faqs: defaultFaqs("Carlsberg ØL Milano", "Bastioni di Porta Nuova 9, Porta Nuova, Milan", "18+ (Family-Friendly Restaurant & Brewery)", "Smart Casual Porta Nuova.", "Restaurant & Brewery, Live Convivial, Porta Nuova Evening"),
+    image: "/images/events/weekly-posters/carlsbergol-milano-weekly.webp",
+    priority: 85
+  },
+  {
+    id: "carlsbergol-saturday-saturday-porta-nuova-feast",
+    clubSlug: "carlsbergol",
+    clubName: "Carlsberg \u00d8L Milano",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-porta-nuova-feast",
+    name: "Saturday Porta Nuova Dinner & Celebration Tables",
+    genres: ["Restaurant & Brewery", "Live Convivial", "Porta Nuova Evening"],
+    target: "Groups, Families, Convivial Dinners & Porta Nuova Crowd",
+    description: {
+      en: "Saturday program at Carlsberg ØL Milano (Bastioni di Porta Nuova 9, Porta Nuova, Milan): Saturday Porta Nuova Dinner & Celebration Tables. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da Carlsberg ØL Milano (Bastioni di Porta Nuova 9, Porta Nuova, Milan): Saturday Porta Nuova Dinner & Celebration Tables. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Craft Beer & Grill Menu", "tables": "Convivial & Group Tables via WhatsApp"},
+    dressCode: {
+      en: "Smart Casual Porta Nuova.",
+      it: "Smart Casual Porta Nuova."
+    },
+    faqs: defaultFaqs("Carlsberg ØL Milano", "Bastioni di Porta Nuova 9, Porta Nuova, Milan", "18+ (Family-Friendly Restaurant & Brewery)", "Smart Casual Porta Nuova.", "Restaurant & Brewery, Live Convivial, Porta Nuova Evening"),
+    image: "/images/events/weekly-posters/carlsbergol-milano-weekly.webp",
+    priority: 85
+  },
+  {
+    id: "carlsbergol-sunday-sunday-convivial-dinner",
+    clubSlug: "carlsbergol",
+    clubName: "Carlsberg \u00d8L Milano",
+    day: "sunday",
+    dayOfWeek: 0,
+    eventSlug: "sunday-convivial-dinner",
+    name: "Sunday Family & Friends Brewery Dinner",
+    genres: ["Restaurant & Brewery", "Live Convivial", "Porta Nuova Evening"],
+    target: "Groups, Families, Convivial Dinners & Porta Nuova Crowd",
+    description: {
+      en: "Sunday program at Carlsberg ØL Milano (Bastioni di Porta Nuova 9, Porta Nuova, Milan): Sunday Family & Friends Brewery Dinner. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del domenica da Carlsberg ØL Milano (Bastioni di Porta Nuova 9, Porta Nuova, Milan): Sunday Family & Friends Brewery Dinner. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Craft Beer & Grill Menu", "tables": "Convivial & Group Tables via WhatsApp"},
+    dressCode: {
+      en: "Smart Casual Porta Nuova.",
+      it: "Smart Casual Porta Nuova."
+    },
+    faqs: defaultFaqs("Carlsberg ØL Milano", "Bastioni di Porta Nuova 9, Porta Nuova, Milan", "18+ (Family-Friendly Restaurant & Brewery)", "Smart Casual Porta Nuova.", "Restaurant & Brewery, Live Convivial, Porta Nuova Evening"),
+    image: "/images/events/weekly-posters/carlsbergol-milano-weekly.webp",
+    priority: 85
+  },
+  {
+    id: "tom-thursday-thursday-ordinary-supper-club",
+    clubSlug: "tom",
+    clubName: "TOM \u00b7 The Ordinary Market Milano",
+    day: "thursday",
+    dayOfWeek: 4,
+    eventSlug: "thursday-ordinary-supper-club",
+    name: "Thursday Cosmopolitan Dinner & DJ Lounge",
+    genres: ["Dinner Show", "House", "Commercial"],
+    target: "21+, International Supper-Club, Cocktails & Late Lounge Crowd",
+    description: {
+      en: "Thursday program at TOM · The Ordinary Market Milano (Via Molino delle Armi / Via della Chiusa, Centro, Milan): Thursday Cosmopolitan Dinner & DJ Lounge. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del giovedì da TOM · The Ordinary Market Milano (Via Molino delle Armi / Via della Chiusa, Centro, Milan): Thursday Cosmopolitan Dinner & DJ Lounge. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "Dinner & Cocktails from €35", "club": "From €20", "tables": "Supper-Club & Club Tables from €300"},
+    dressCode: {
+      en: "Urban Supper-Club Chic.",
+      it: "Urban Supper-Club Chic."
+    },
+    faqs: defaultFaqs("TOM · The Ordinary Market Milano", "Via Molino delle Armi / Via della Chiusa, Centro, Milan", "21+", "Urban Supper-Club Chic.", "Dinner Show, House, Commercial"),
+    image: "/images/events/weekly-posters/tom-milano-weekly.webp",
+    priority: 80
+  },
+  {
+    id: "tom-friday-friday-dinner-show-club",
+    clubSlug: "tom",
+    clubName: "TOM \u00b7 The Ordinary Market Milano",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-dinner-show-club",
+    name: "Friday Two-Level Dinner Show & House Club",
+    genres: ["Dinner Show", "House", "Commercial"],
+    target: "21+, International Supper-Club, Cocktails & Late Lounge Crowd",
+    description: {
+      en: "Friday program at TOM · The Ordinary Market Milano (Via Molino delle Armi / Via della Chiusa, Centro, Milan): Friday Two-Level Dinner Show & House Club. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da TOM · The Ordinary Market Milano (Via Molino delle Armi / Via della Chiusa, Centro, Milan): Friday Two-Level Dinner Show & House Club. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "Dinner & Cocktails from €35", "club": "From €20", "tables": "Supper-Club & Club Tables from €300"},
+    dressCode: {
+      en: "Urban Supper-Club Chic.",
+      it: "Urban Supper-Club Chic."
+    },
+    faqs: defaultFaqs("TOM · The Ordinary Market Milano", "Via Molino delle Armi / Via della Chiusa, Centro, Milan", "21+", "Urban Supper-Club Chic.", "Dinner Show, House, Commercial"),
+    image: "/images/events/weekly-posters/tom-milano-weekly.webp",
+    priority: 80
+  },
+  {
+    id: "tom-saturday-saturday-tom-club-night",
+    clubSlug: "tom",
+    clubName: "TOM \u00b7 The Ordinary Market Milano",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-tom-club-night",
+    name: "Saturday Signature Supper-Club & VIP Party",
+    genres: ["Dinner Show", "House", "Commercial"],
+    target: "21+, International Supper-Club, Cocktails & Late Lounge Crowd",
+    description: {
+      en: "Saturday program at TOM · The Ordinary Market Milano (Via Molino delle Armi / Via della Chiusa, Centro, Milan): Saturday Signature Supper-Club & VIP Party. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da TOM · The Ordinary Market Milano (Via Molino delle Armi / Via della Chiusa, Centro, Milan): Saturday Signature Supper-Club & VIP Party. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "Dinner & Cocktails from €35", "club": "From €20", "tables": "Supper-Club & Club Tables from €300"},
+    dressCode: {
+      en: "Urban Supper-Club Chic.",
+      it: "Urban Supper-Club Chic."
+    },
+    faqs: defaultFaqs("TOM · The Ordinary Market Milano", "Via Molino delle Armi / Via della Chiusa, Centro, Milan", "21+", "Urban Supper-Club Chic.", "Dinner Show, House, Commercial"),
+    image: "/images/events/weekly-posters/tom-milano-weekly.webp",
+    priority: 80
+  },
+  {
+    id: "bischeri-wednesday-wednesday-cena-cantata",
+    clubSlug: "bischeri",
+    clubName: "I Bischeri Milano",
+    day: "wednesday",
+    dayOfWeek: 3,
+    eventSlug: "wednesday-cena-cantata",
+    name: "Wednesday Tuscan Cuisine & Singing Dinner",
+    genres: ["Tuscan Dinner Show", "Italian Sing-Along", "Commercial"],
+    target: "21+, Singing Dinner Groups, Birthdays & Convivial Parties",
+    description: {
+      en: "Wednesday program at I Bischeri Milano (Viale Gorizia / Darsena District, Milan): Wednesday Tuscan Cuisine & Singing Dinner. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del mercoledì da I Bischeri Milano (Viale Gorizia / Darsena District, Milan): Wednesday Tuscan Cuisine & Singing Dinner. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Singing Dinner from €40", "tables": "Dinner & After-Dinner Tables via WhatsApp"},
+    dressCode: {
+      en: "Smart Elegant Dinner Show.",
+      it: "Smart Elegant da Cena Cantata."
+    },
+    faqs: defaultFaqs("I Bischeri Milano", "Viale Gorizia / Darsena District, Milan", "21+", "Smart Elegant Dinner Show.", "Tuscan Dinner Show, Italian Sing-Along, Commercial"),
+    image: "/images/events/weekly-posters/bischeri-milano-weekly.webp",
+    priority: 79
+  },
+  {
+    id: "bischeri-thursday-thursday-live-dinner-party",
+    clubSlug: "bischeri",
+    clubName: "I Bischeri Milano",
+    day: "thursday",
+    dayOfWeek: 4,
+    eventSlug: "thursday-live-dinner-party",
+    name: "Thursday Convivial Singing Dinner & DJ Set",
+    genres: ["Tuscan Dinner Show", "Italian Sing-Along", "Commercial"],
+    target: "21+, Singing Dinner Groups, Birthdays & Convivial Parties",
+    description: {
+      en: "Thursday program at I Bischeri Milano (Viale Gorizia / Darsena District, Milan): Thursday Convivial Singing Dinner & DJ Set. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del giovedì da I Bischeri Milano (Viale Gorizia / Darsena District, Milan): Thursday Convivial Singing Dinner & DJ Set. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Singing Dinner from €40", "tables": "Dinner & After-Dinner Tables via WhatsApp"},
+    dressCode: {
+      en: "Smart Elegant Dinner Show.",
+      it: "Smart Elegant da Cena Cantata."
+    },
+    faqs: defaultFaqs("I Bischeri Milano", "Viale Gorizia / Darsena District, Milan", "21+", "Smart Elegant Dinner Show.", "Tuscan Dinner Show, Italian Sing-Along, Commercial"),
+    image: "/images/events/weekly-posters/bischeri-milano-weekly.webp",
+    priority: 79
+  },
+  {
+    id: "bischeri-friday-friday-bischeri-dinner-show",
+    clubSlug: "bischeri",
+    clubName: "I Bischeri Milano",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-bischeri-dinner-show",
+    name: "Friday Full Singing Dinner Show & Dance",
+    genres: ["Tuscan Dinner Show", "Italian Sing-Along", "Commercial"],
+    target: "21+, Singing Dinner Groups, Birthdays & Convivial Parties",
+    description: {
+      en: "Friday program at I Bischeri Milano (Viale Gorizia / Darsena District, Milan): Friday Full Singing Dinner Show & Dance. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da I Bischeri Milano (Viale Gorizia / Darsena District, Milan): Friday Full Singing Dinner Show & Dance. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Singing Dinner from €40", "tables": "Dinner & After-Dinner Tables via WhatsApp"},
+    dressCode: {
+      en: "Smart Elegant Dinner Show.",
+      it: "Smart Elegant da Cena Cantata."
+    },
+    faqs: defaultFaqs("I Bischeri Milano", "Viale Gorizia / Darsena District, Milan", "21+", "Smart Elegant Dinner Show.", "Tuscan Dinner Show, Italian Sing-Along, Commercial"),
+    image: "/images/events/weekly-posters/bischeri-milano-weekly.webp",
+    priority: 79
+  },
+  {
+    id: "bischeri-saturday-saturday-gran-cena-cantata",
+    clubSlug: "bischeri",
+    clubName: "I Bischeri Milano",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-gran-cena-cantata",
+    name: "Saturday Flagship Cena Cantata & Party",
+    genres: ["Tuscan Dinner Show", "Italian Sing-Along", "Commercial"],
+    target: "21+, Singing Dinner Groups, Birthdays & Convivial Parties",
+    description: {
+      en: "Saturday program at I Bischeri Milano (Viale Gorizia / Darsena District, Milan): Saturday Flagship Cena Cantata & Party. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da I Bischeri Milano (Viale Gorizia / Darsena District, Milan): Saturday Flagship Cena Cantata & Party. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "Evening Cocktail Bar & Lounge", "aperitif": "Singing Dinner from €40", "tables": "Dinner & After-Dinner Tables via WhatsApp"},
+    dressCode: {
+      en: "Smart Elegant Dinner Show.",
+      it: "Smart Elegant da Cena Cantata."
+    },
+    faqs: defaultFaqs("I Bischeri Milano", "Viale Gorizia / Darsena District, Milan", "21+", "Smart Elegant Dinner Show.", "Tuscan Dinner Show, Italian Sing-Along, Commercial"),
+    image: "/images/events/weekly-posters/bischeri-milano-weekly.webp",
+    priority: 79
+  },
+  {
+    id: "gate-friday-friday-warehouse-techno",
+    clubSlug: "gate",
+    clubName: "Gate Milano",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-warehouse-techno",
+    name: "Friday Scalo Farini Warehouse Techno & House",
+    genres: ["Techno", "Tech-House", "Electronic"],
+    target: "18+, Underground Techno & International Electronic Scene",
+    description: {
+      en: "Friday program at Gate Milano (Via Valtellina 21, Scalo Farini, Milan): Friday Scalo Farini Warehouse Techno & House. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da Gate Milano (Via Valtellina 21, Scalo Farini, Milan): Friday Scalo Farini Warehouse Techno & House. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "From €20", "tables": "Stage & Backstage Privé from €350"},
+    dressCode: {
+      en: "Dark Clubwear & Warehouse Techno Style.",
+      it: "Dark Clubwear & Stile Techno Warehouse."
+    },
+    faqs: defaultFaqs("Gate Milano", "Via Valtellina 21, Scalo Farini, Milan", "18+", "Dark Clubwear & Warehouse Techno Style.", "Techno, Tech-House, Electronic"),
+    image: "/images/events/weekly-posters/gate-milano-resident-weekly.webp",
+    priority: 81
+  },
+  {
+    id: "gate-saturday-saturday-gate-electronic-arena",
+    clubSlug: "gate",
+    clubName: "Gate Milano",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-gate-electronic-arena",
+    name: "Saturday International Techno & Tech-House Arena",
+    genres: ["Techno", "Tech-House", "Electronic"],
+    target: "18+, Underground Techno & International Electronic Scene",
+    description: {
+      en: "Saturday program at Gate Milano (Via Valtellina 21, Scalo Farini, Milan): Saturday International Techno & Tech-House Arena. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da Gate Milano (Via Valtellina 21, Scalo Farini, Milan): Saturday International Techno & Tech-House Arena. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"club": "From €20", "tables": "Stage & Backstage Privé from €350"},
+    dressCode: {
+      en: "Dark Clubwear & Warehouse Techno Style.",
+      it: "Dark Clubwear & Stile Techno Warehouse."
+    },
+    faqs: defaultFaqs("Gate Milano", "Via Valtellina 21, Scalo Farini, Milan", "18+", "Dark Clubwear & Warehouse Techno Style.", "Techno, Tech-House, Electronic"),
+    image: "/images/events/weekly-posters/gate-milano-resident-weekly.webp",
+    priority: 81
+  },
+  {
+    id: "pelledoca-friday-friday-forlanini-dinner-show",
+    clubSlug: "pelledoca",
+    clubName: "Pelledoca Music & Club Milano",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-forlanini-dinner-show",
+    name: "Friday Singing Dinner Show & Commercial Club",
+    genres: ["Dinner Show", "Commercial", "Revival", "House"],
+    target: "23+, Parco Forlanini Dinner Show, Birthdays & VIP Clubbing",
+    description: {
+      en: "Friday program at Pelledoca Music & Club Milano (Viale Enrico Forlanini 121, Parco Forlanini, Milan): Friday Singing Dinner Show & Commercial Club. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da Pelledoca Music & Club Milano (Viale Enrico Forlanini 121, Parco Forlanini, Milan): Friday Singing Dinner Show & Commercial Club. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "Dinner Show from €35", "club": "From €20", "tables": "VIP Privé from €250"},
+    dressCode: {
+      en: "Smart Chic Dinner & Club.",
+      it: "Smart Chic Cena & Discoteca."
+    },
+    faqs: defaultFaqs("Pelledoca Music & Club Milano", "Viale Enrico Forlanini 121, Parco Forlanini, Milan", "23+", "Smart Chic Dinner & Club.", "Dinner Show, Commercial, Revival, House"),
+    image: "/images/events/weekly-posters/pelledoca-resident-weekly.webp",
+    priority: 79
+  },
+  {
+    id: "pelledoca-saturday-saturday-pelledoca-party",
+    clubSlug: "pelledoca",
+    clubName: "Pelledoca Music & Club Milano",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-pelledoca-party",
+    name: "Saturday Villa Dinner Show & Late Night Dance",
+    genres: ["Dinner Show", "Commercial", "Revival", "House"],
+    target: "23+, Parco Forlanini Dinner Show, Birthdays & VIP Clubbing",
+    description: {
+      en: "Saturday program at Pelledoca Music & Club Milano (Viale Enrico Forlanini 121, Parco Forlanini, Milan): Saturday Villa Dinner Show & Late Night Dance. Official Milan guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da Pelledoca Music & Club Milano (Viale Enrico Forlanini 121, Parco Forlanini, Milan): Saturday Villa Dinner Show & Late Night Dance. Prenotazione tavoli VIP, cena e accrediti ufficiali a Milano tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "Dinner Show from €35", "club": "From €20", "tables": "VIP Privé from €250"},
+    dressCode: {
+      en: "Smart Chic Dinner & Club.",
+      it: "Smart Chic Cena & Discoteca."
+    },
+    faqs: defaultFaqs("Pelledoca Music & Club Milano", "Viale Enrico Forlanini 121, Parco Forlanini, Milan", "23+", "Smart Chic Dinner & Club.", "Dinner Show, Commercial, Revival, House"),
+    image: "/images/events/weekly-posters/pelledoca-resident-weekly.webp",
+    priority: 79
+  },
+  {
+    id: "justme-garda-friday-friday-garda-dinner-club",
+    clubSlug: "justme-garda",
+    clubName: "JustMe Garda Lake",
+    day: "friday",
+    dayOfWeek: 5,
+    eventSlug: "friday-garda-dinner-club",
+    name: "Friday Lake Garda Luxury Dinner Show & Club",
+    genres: ["Dinner Show", "House", "Commercial"],
+    target: "21+, Lake Garda, Desenzano, Sirmione & International VIP Guests",
+    description: {
+      en: "Friday program at JustMe Garda Lake (Via Lavagnone 13, Lonato del Garda (Desenzano / Lake Garda, BS)): Friday Lake Garda Luxury Dinner Show & Club. Official Lake Garda (Lonato / Desenzano, BS) guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del venerdì da JustMe Garda Lake (Via Lavagnone 13, Lonato del Garda (Desenzano / Lake Garda, BS)): Friday Lake Garda Luxury Dinner Show & Club. Prenotazione tavoli VIP, cena e accrediti ufficiali a Lago di Garda (Lonato / Desenzano, BS) tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "Aperitivo & Dinner upon request", "club": "From €20", "tables": "Lake Garda VIP Privé from €350"},
+    dressCode: {
+      en: "Strictly Elegant Lake Garda Glamour.",
+      it: "Rigorosamente Elegante Glamour Lago di Garda."
+    },
+    faqs: defaultFaqs("JustMe Garda Lake", "Via Lavagnone 13, Lonato del Garda (Desenzano / Lake Garda, BS)", "21+", "Strictly Elegant Lake Garda Glamour.", "Dinner Show, House, Commercial"),
+    image: "/images/events/weekly-posters/justme-garda-resident-weekly.webp",
+    priority: 84
+  },
+  {
+    id: "justme-garda-saturday-saturday-garda-vip-gala",
+    clubSlug: "justme-garda",
+    clubName: "JustMe Garda Lake",
+    day: "saturday",
+    dayOfWeek: 6,
+    eventSlug: "saturday-garda-vip-gala",
+    name: "Saturday Lake Garda Flagship Party & VIP Privé",
+    genres: ["Dinner Show", "House", "Commercial"],
+    target: "21+, Lake Garda, Desenzano, Sirmione & International VIP Guests",
+    description: {
+      en: "Saturday program at JustMe Garda Lake (Via Lavagnone 13, Lonato del Garda (Desenzano / Lake Garda, BS)): Saturday Lake Garda Flagship Party & VIP Privé. Official Lake Garda (Lonato / Desenzano, BS) guest list, dinner reservations, and VIP table concierge via WhatsApp +39 351 912 7047.",
+      it: "Appuntamento del sabato da JustMe Garda Lake (Via Lavagnone 13, Lonato del Garda (Desenzano / Lake Garda, BS)): Saturday Lake Garda Flagship Party & VIP Privé. Prenotazione tavoli VIP, cena e accrediti ufficiali a Lago di Garda (Lonato / Desenzano, BS) tramite Concierge WhatsApp +39 351 912 7047."
+    },
+    pricing: {"aperitif": "Aperitivo & Dinner upon request", "club": "From €20", "tables": "Lake Garda VIP Privé from €350"},
+    dressCode: {
+      en: "Strictly Elegant Lake Garda Glamour.",
+      it: "Rigorosamente Elegante Glamour Lago di Garda."
+    },
+    faqs: defaultFaqs("JustMe Garda Lake", "Via Lavagnone 13, Lonato del Garda (Desenzano / Lake Garda, BS)", "21+", "Strictly Elegant Lake Garda Glamour.", "Dinner Show, House, Commercial"),
+    image: "/images/events/weekly-posters/justme-garda-resident-weekly.webp",
+    priority: 84
   }
 ];

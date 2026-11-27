@@ -1483,15 +1483,27 @@ export default async function EventPage({ params }: Props) {
                       className={`relative w-full overflow-hidden border border-[#F6F1E7]/16 bg-[#050505] ${leadPoster.aspect === 'five-four' ? 'aspect-[5/4]' : isLeadPortrait ? 'aspect-[4/5]' : ''}`}
                       style={leadPoster.aspect === 'five-four' || isLeadPortrait ? undefined : { aspectRatio: `${leadDims.width} / ${leadDims.height}` }}
                     >
-                      <Image
-                        src={leadPoster.src}
-                        alt={leadPoster.alt}
-                        title={leadPoster.title}
-                        fill
-                        quality={95}
-                        sizes="(max-width: 1080px) 100vw, 1080px"
-                        className="object-cover"
-                      />
+                      {leadPoster.aspect === 'five-four' ? (
+                        <Image
+                          src={leadPoster.src}
+                          alt={leadPoster.alt}
+                          title={leadPoster.title}
+                          fill
+                          quality={95}
+                          sizes="(max-width: 1080px) 100vw, 1080px"
+                          className="object-contain"
+                        />
+                      ) : (
+                        <Image
+                          src={leadPoster.src}
+                          alt={leadPoster.alt}
+                          title={leadPoster.title}
+                          fill
+                          quality={95}
+                          sizes="(max-width: 1080px) 100vw, 1080px"
+                          className="object-cover"
+                        />
+                      )}
                     </div>
                     {leadPoster.description ? <figcaption className="mt-3 text-sm leading-relaxed text-[#C2B9AA]">{leadPoster.description}</figcaption> : null}
                   </figure>

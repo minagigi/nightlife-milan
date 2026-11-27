@@ -358,7 +358,7 @@ export const mockEvents: Event[] = [
         it: 'keinemusik-milan-25-september-2026',
       },
     },
-    image: '/images/club-techno.webp',
+    image: '/images/events/weekly-posters/dock22-resident-weekly.webp',
     isSpecial: true,
   },
 
@@ -436,7 +436,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "noche-de-perreo-pineta-12-06-2026", it: "noche-de-perreo-pineta-12-06-2026" }
     },
-    image: "/images/venues/pineta-milano/pineta-milano-interior-01.webp",
+    image: "/images/events/weekly-posters/pineta-saturday-club.webp",
     isTrending: true
   },
   {
@@ -454,7 +454,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "mfw-friday-pineta-19-06-2026", it: "mfw-friday-pineta-19-06-2026" }
     },
-    image: "/images/venues/pineta-milano/pineta-milano-interior-02.webp",
+    image: "/images/events/weekly-posters/pineta-friday-club.webp",
     isSpecial: true,
     isTrending: true
   },
@@ -473,7 +473,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "mfw-perreo-night-pineta-20-06-2026", it: "mfw-perreo-night-pineta-20-06-2026" }
     },
-    image: "/images/venues/pineta-milano/pineta-milano-interior-03.webp",
+    image: "/images/events/weekly-posters/pineta-saturday-club.webp",
     isSpecial: true,
     isTrending: true
   },
@@ -512,7 +512,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "basement-magazzini-23-06-2026", it: "basement-magazzini-23-06-2026" }
     },
-    image: "/images/venues/magazzini-generali/magazzini-generali-interior-01.webp",
+    image: "/images/events/weekly-posters/magazzini-resident-weekly.webp",
   },
   {
     id: "e-magazzini-hatebreed-0624",
@@ -529,7 +529,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "hatebreed-magazzini-24-06-2026", it: "hatebreed-magazzini-24-06-2026" }
     },
-    image: "/images/venues/magazzini-generali/magazzini-generali-interior-02.webp",
+    image: "/images/events/weekly-posters/magazzini-resident-weekly.webp",
     isSpecial: true
   },
   {
@@ -547,7 +547,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "la-boum-magazzini-26-06-2026", it: "la-boum-magazzini-26-06-2026" }
     },
-    image: "/images/venues/magazzini-generali/magazzini-generali-interior-03.webp",
+    image: "/images/events/weekly-posters/magazzini-resident-weekly.webp",
     isTrending: true
   },
   {
@@ -565,7 +565,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "emergenza-live-final-magazzini-27-06-2026", it: "emergenza-live-finale-magazzini-27-06-2026" }
     },
-    image: "/images/venues/magazzini-generali/magazzini-generali-interior-04.webp",
+    image: "/images/events/weekly-posters/magazzini-resident-weekly.webp",
   },
 
   // ─── VOLT CLUB ─────────────────────────────────────────────────────────────
@@ -584,7 +584,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "volt-friday-techno-19-06-2026", it: "volt-venerdi-techno-19-06-2026" }
     },
-    image: "/images/venues/volt-club-milano/volt-club-milano-interior-01.webp",
+    image: "/images/events/weekly-posters/volt-club-resident-weekly.webp",
     isTrending: true
   },
   {
@@ -602,7 +602,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "volt-saturday-techno-20-06-2026", it: "volt-sabato-techno-20-06-2026" }
     },
-    image: "/images/venues/volt-club-milano/volt-club-milano-interior-02.webp",
+    image: "/images/events/weekly-posters/volt-club-resident-weekly.webp",
   },
 
   // ─── GATTOPARDO ────────────────────────────────────────────────────────────
@@ -621,7 +621,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "gattopardo-saturday-06-06-2026", it: "gattopardo-sabato-06-06-2026" }
     },
-    image: "/images/venues/gattopardo/gattopardo-interior-01.webp",
+    image: "/images/events/weekly-posters/gattopardo-milano-weekly.webp",
   },
   {
     id: "e-gattopardo-0612",
@@ -638,7 +638,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "gattopardo-friday-12-06-2026", it: "gattopardo-venerdi-12-06-2026" }
     },
-    image: "/images/venues/gattopardo/gattopardo-interior-02.webp",
+    image: "/images/events/weekly-posters/gattopardo-milano-weekly.webp",
   },
 
   // ─── ARMANI PRIVÉ ──────────────────────────────────────────────────────────
@@ -657,7 +657,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "armani-prive-mfw-opening-19-06-2026", it: "armani-prive-apertura-mfw-19-06-2026" }
     },
-    image: "/images/venues/armani-prive-milano/armani-prive-milano-interior-01.webp",
+    image: "/images/events/weekly-posters/armani-prive-resident-weekly.webp",
     isSpecial: true,
     isTrending: true
   },
@@ -676,7 +676,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "armani-prive-mfw-saturday-20-06-2026", it: "armani-prive-sabato-mfw-20-06-2026" }
     },
-    image: "/images/venues/armani-prive-milano/armani-prive-milano-interior-02.webp",
+    image: "/images/events/weekly-posters/armani-prive-resident-weekly.webp",
     isSpecial: true
   },
 
@@ -696,7 +696,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "hollywood-friday-03-07-2026", it: "hollywood-venerdi-03-07-2026" }
     },
-    image: "/images/venues/hollywood/hollywood-interior-01.webp",
+    image: "/images/events/weekly-posters/hollywood-milano-weekly.webp",
   },
   {
     id: "e-hollywood-0606",
@@ -713,7 +713,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "hollywood-saturday-04-07-2026", it: "hollywood-sabato-04-07-2026" }
     },
-    image: "/images/venues/hollywood/hollywood-interior-02.webp",
+    image: "/images/events/weekly-posters/hollywood-milano-weekly.webp",
   },
 
   // ─── MIB MILANO ────────────────────────────────────────────────────────────
@@ -732,7 +732,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "mib-gala-saturday-04-07-2026", it: "mib-gala-sabato-04-07-2026" }
     },
-    image: "/images/venues/mib-milano/mib-milano-interior-01.webp",
+    image: "/images/events/weekly-posters/mib-saturday-loveaffair.webp",
     isSpecial: true
   },
   {
@@ -750,7 +750,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "mib-monday-night-06-07-2026", it: "mib-lunedi-notte-06-07-2026" }
     },
-    image: "/images/venues/mib-milano/mib-milano-interior-02.webp",
+    image: "/images/events/weekly-posters/mib-saturday-loveaffair.webp",
   },
 
   // ─── THE CLUB MILANO ───────────────────────────────────────────────────────
@@ -769,7 +769,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "girls-republic-theclub-18-07-2026", it: "girls-republic-theclub-18-07-2026" }
     },
-    image: "/images/venues/the-club-milano/the-club-milano-interior-01.webp",
+    image: "/images/events/weekly-posters/theclub-saturday-girlsrepublic.webp",
     isTrending: true
   },
   {
@@ -787,7 +787,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "superbe-theclub-19-07-2026", it: "superbe-theclub-19-07-2026" }
     },
-    image: "/images/venues/the-club-milano/the-club-milano-interior-02.webp",
+    image: "/images/events/weekly-posters/theclub-sunday-superbe.webp",
   },
   {
     id: "e-theclub-atlanta-0625",
@@ -804,7 +804,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "atlanta-theclub-25-06-2026", it: "atlanta-theclub-25-06-2026" }
     },
-    image: "/images/venues/the-club-milano/the-club-milano-interior-03.webp",
+    image: "/images/events/weekly-posters/theclub-thursday-atlanta.webp",
   },
   {
     id: "e-theclub-aura-0626",
@@ -821,7 +821,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "aura-theclub-26-06-2026", it: "aura-theclub-26-06-2026" }
     },
-    image: "/images/venues/the-club-milano/the-club-milano-interior-04.webp",
+    image: "/images/events/weekly-posters/theclub-friday-firstclass.webp",
   },
   {
     id: "e-theclub-girls-republic-0627",
@@ -838,7 +838,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "girls-republic-theclub-27-06-2026", it: "girls-republic-theclub-27-06-2026" }
     },
-    image: "/images/venues/the-club-milano/the-club-milano-interior-05.webp",
+    image: "/images/events/weekly-posters/theclub-saturday-girlsrepublic.webp",
   },
 
   // ─── CERESIO 7 ─────────────────────────────────────────────────────────────
@@ -857,7 +857,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "ceresio-pool-saturday-04-07-2026", it: "ceresio-piscine-sabato-04-07-2026" }
     },
-    image: "/images/venues/ceresio-7/ceresio-7-interior-01.webp",
+    image: "/images/events/weekly-posters/ceresio7-resident-weekly.webp",
     isSpecial: true,
     isTrending: true
   },
@@ -876,7 +876,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "ceresio-poolside-aperitivo-11-07-2026", it: "ceresio-aperitivo-bordo-piscina-11-07-2026" }
     },
-    image: "/images/venues/ceresio-7/ceresio-7-interior-02.webp",
+    image: "/images/events/weekly-posters/ceresio7-resident-weekly.webp",
     isTrending: true
   },
 
@@ -896,7 +896,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "elite-playclub-19-07-2026", it: "elite-playclub-19-07-2026" }
     },
-    image: "/images/venues/play-club-milano/play-club-milano-interior-01.webp",
+    image: "/images/events/weekly-posters/playclub-saturday.webp",
   },
 
   // ─── 55 MILANO ─────────────────────────────────────────────────────────────
@@ -915,7 +915,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "dinner-show-friday-55-milano-03-07-2026", it: "dinner-show-venerdi-55-milano-03-07-2026" }
     },
-    image: "/images/venues/55-milano/55-milano-interior-01.webp",
+    image: "/images/events/weekly-posters/55milano-saturday.webp",
   },
   {
     id: "e-55milano-studio55-0606",
@@ -932,7 +932,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "studio-55-saturday-04-07-2026", it: "studio-55-sabato-04-07-2026" }
     },
-    image: "/images/venues/55-milano/55-milano-interior-02.webp",
+    image: "/images/events/weekly-posters/55milano-saturday.webp",
   },
 
   // ─── REPVBLIC ──────────────────────────────────────────────────────────────
@@ -987,7 +987,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "11clubroom-saturday-04-07-2026", it: "11clubroom-sabato-04-07-2026" }
     },
-    image: "/images/venues/11-clubroom/11-clubroom-interior-01.webp",
+    image: "/images/events/weekly-posters/11clubroom-milano-weekly.webp",
   },
   {
     id: "e-11clubroom-saturday-0620",
@@ -1004,7 +1004,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "11clubroom-saturday-18-07-2026", it: "11clubroom-sabato-18-07-2026" }
     },
-    image: "/images/venues/11-clubroom/11-clubroom-interior-02.webp",
+    image: "/images/events/weekly-posters/11clubroom-milano-weekly.webp",
     isTrending: true
   },
 
@@ -1024,7 +1024,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "church81-friday-dinner-show-03-07-2026", it: "church81-dinner-show-venerdi-03-07-2026" }
     },
-    image: "/images/venues/church-81/church-81-interior-01.webp",
+    image: "/images/events/weekly-posters/church81-resident-weekly.webp",
   },
   {
     id: "e-church81-saturday-0606",
@@ -1041,7 +1041,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "church81-saturday-dinner-show-04-07-2026", it: "church81-dinner-show-sabato-04-07-2026" }
     },
-    image: "/images/venues/church-81/church-81-interior-02.webp",
+    image: "/images/events/weekly-posters/church81-resident-weekly.webp",
   },
 
   // ─── TERRAZZA DUOMO 21 ─────────────────────────────────────────────────────
@@ -1060,7 +1060,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "terrazza21-sunset-aperitivo-04-07-2026", it: "terrazza21-aperitivo-tramonto-04-07-2026" }
     },
-    image: "/images/venues/terrazza-21/terrazza-21-interior-01.webp",
+    image: "/images/events/weekly-posters/terrazza21-saturday-duomo.webp",
     isTrending: true
   },
   {
@@ -1078,7 +1078,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "terrazza21-summer-aperitivo-18-07-2026", it: "terrazza21-aperitivo-estivo-18-07-2026" }
     },
-    image: "/images/venues/terrazza-21/terrazza-21-interior-02.webp",
+    image: "/images/events/weekly-posters/terrazza21-saturday-duomo.webp",
     isSpecial: true
   },
 
@@ -1098,7 +1098,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "voya-rooftop-dj-night-05-07-2026", it: "voya-rooftop-dj-night-05-07-2026" }
     },
-    image: "/images/venues/voya-rooftop-milan/voya-rooftop-milan-interior-01.webp",
+    image: "/images/events/weekly-posters/voya-saturday.webp",
     isTrending: true
   },
   {
@@ -1116,7 +1116,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "voya-rooftop-saturday-18-07-2026", it: "voya-rooftop-sabato-18-07-2026" }
     },
-    image: "/images/venues/voya-rooftop-milan/voya-rooftop-milan-interior-02.webp",
+    image: "/images/events/weekly-posters/voya-saturday.webp",
     isSpecial: true
   },
 
@@ -1136,7 +1136,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "apollo-friday-navigli-03-07-2026", it: "apollo-venerdi-navigli-03-07-2026" }
     },
-    image: "/images/venues/apollo-milano/apollo-milano-interior-01.webp",
+    image: "/images/events/weekly-posters/apollo-club-resident-weekly.webp",
   },
 
   // ─── JULY 2026 ─────────────────────────────────────────────────────────────
@@ -1155,7 +1155,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "summer-nights-independence-day-justme-04-07-2026", it: "summer-nights-4-luglio-justme-04-07-2026" }
     },
-    image: "/images/venues/just-me-milano/just-me-milano-interior-04.webp",
+    image: "/images/events/partenopea-2026/justme-friday-27-nov-luciani.webp",
     isSpecial: true,
     isTrending: true
   },
@@ -1174,7 +1174,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "noche-de-perreo-summer-pineta-04-07-2026", it: "noche-de-perreo-estate-pineta-04-07-2026" }
     },
-    image: "/images/venues/pineta-milano/pineta-milano-interior-05.webp",
+    image: "/images/events/weekly-posters/pineta-saturday-club.webp",
     isTrending: true
   },
   {
@@ -1192,7 +1192,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "volt-summer-techno-special-10-07-2026", it: "volt-estate-techno-speciale-10-07-2026" }
     },
-    image: "/images/venues/volt-club-milano/volt-club-milano-interior-03.webp",
+    image: "/images/events/weekly-posters/volt-club-resident-weekly.webp",
     isSpecial: true
   },
   {
@@ -1210,7 +1210,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "voya-summer-sunset-july-11-07-2026", it: "voya-estate-tramonto-luglio-11-07-2026" }
     },
-    image: "/images/venues/voya-rooftop-milan/voya-rooftop-milan-interior-03.webp",
+    image: "/images/events/weekly-posters/voya-saturday.webp",
     isTrending: true
   },
   {
@@ -1228,7 +1228,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "play-club-summer-hiphop-17-07-2026", it: "play-club-estate-hiphop-17-07-2026" }
     },
-    image: "/images/venues/play-club-milano/play-club-milano-interior-02.webp",
+    image: "/images/events/weekly-posters/playclub-saturday.webp",
   },
   {
     id: "e-justme-0718",
@@ -1245,7 +1245,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "just-me-saturday-luxury-18-07-2026", it: "just-me-sabato-lusso-18-07-2026" }
     },
-    image: "/images/venues/just-me-milano/just-me-milano-interior-05.webp",
+    image: "/images/events/partenopea-2026/justme-friday-27-nov-luciani.webp",
     isTrending: true
   },
   {
@@ -1263,7 +1263,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "magazzini-generali-summer-rave-19-07-2026", it: "magazzini-generali-summer-rave-19-07-2026" }
     },
-    image: "/images/venues/magazzini-generali/magazzini-generali-interior-05.webp",
+    image: "/images/events/weekly-posters/magazzini-resident-weekly.webp",
     isSpecial: true
   },
   {
@@ -1281,7 +1281,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "ceresio-7-summer-rooftop-aperitivo-25-07-2026", it: "ceresio-7-aperitivo-estivo-rooftop-25-07-2026" }
     },
-    image: "/images/venues/ceresio-7/ceresio-7-interior-03.webp",
+    image: "/images/events/weekly-posters/ceresio7-resident-weekly.webp",
   },
   {
     id: "e-pineta-summer-closing-0726",
@@ -1298,7 +1298,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "pineta-summer-saturday-special-26-07-2026", it: "pineta-sabato-speciale-estivo-26-07-2026" }
     },
-    image: "/images/venues/pineta-milano/pineta-milano-interior-06.webp",
+    image: "/images/events/weekly-posters/pineta-saturday-club.webp",
     isTrending: true
   },
 
@@ -1318,7 +1318,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "ferragosto-luxury-night-just-me-14-08-2026", it: "notte-ferragosto-just-me-14-08-2026" }
     },
-    image: "/images/venues/just-me-milano/just-me-milano-interior-06.webp",
+    image: "/images/events/partenopea-2026/justme-friday-27-nov-luciani.webp",
     isSpecial: true,
     isTrending: true
   },
@@ -1337,7 +1337,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "volt-ferragosto-techno-marathon-14-08-2026", it: "volt-ferragosto-marathon-techno-14-08-2026" }
     },
-    image: "/images/venues/volt-club-milano/volt-club-milano-interior-04.webp",
+    image: "/images/events/weekly-posters/volt-club-resident-weekly.webp",
     isSpecial: true
   },
   {
@@ -1355,7 +1355,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "pineta-ferragosto-aperitivo-club-15-08-2026", it: "pineta-ferragosto-aperitivo-club-15-08-2026" }
     },
-    image: "/images/venues/pineta-milano/pineta-milano-interior-07.webp",
+    image: "/images/events/weekly-posters/pineta-saturday-club.webp",
     isSpecial: true,
     isTrending: true
   },
@@ -1374,7 +1374,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "play-club-end-of-summer-22-08-2026", it: "play-club-fine-estate-22-08-2026" }
     },
-    image: "/images/venues/play-club-milano/play-club-milano-interior-03.webp",
+    image: "/images/events/weekly-posters/playclub-saturday.webp",
     isTrending: true
   },
   {
@@ -1392,7 +1392,7 @@ export const mockEvents: Event[] = [
       },
       slug: { en: "armani-prive-late-summer-gala-29-08-2026", it: "armani-prive-gala-fine-estate-29-08-2026" }
     },
-    image: "/images/venues/armani-prive-milano/armani-prive-milano-interior-03.webp",
+    image: "/images/events/capodanno-2027-posters/capodanno-armani-prive-milano.webp",
     isSpecial: true,
     isTrending: true
   },
@@ -1419,7 +1419,7 @@ export const mockEvents: Event[] = [
         it: "dopo-partita-derby-inter-milan-san-siro-aria-club"
       }
     },
-    image: "/images/venues/aria-club-milano/aria-club-milano-interior-01.webp",
+    image: "/images/events/flagship-weekly/aria-summer-season.webp",
     isSpecial: true,
     isTrending: true
   },
@@ -1444,7 +1444,7 @@ export const mockEvents: Event[] = [
         it: "dopo-partita-derby-milano-tavoli-vip-just-me"
       }
     },
-    image: "/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp",
+    image: "/images/events/partenopea-2026/justme-friday-27-nov-luciani.webp",
     isSpecial: true,
     isTrending: true
   },
@@ -1469,7 +1469,7 @@ export const mockEvents: Event[] = [
         it: "dopo-partita-champions-league-san-siro-just-me-milano"
       }
     },
-    image: "/images/venues/just-me-milano/just-me-milano-lounge-01.webp",
+    image: "/images/events/partenopea-2026/justme-friday-27-nov-luciani.webp",
     isSpecial: true,
     isTrending: true
   },
@@ -1494,7 +1494,7 @@ export const mockEvents: Event[] = [
         it: "terzo-tempo-san-siro-aperitivo-djset-voya-rooftop"
       }
     },
-    image: "/images/venues/voya-rooftop-milan/voya-rooftop-milan-interior-01.webp",
+    image: "/images/events/weekly-posters/voya-saturday.webp",
     isTrending: true
   },
   {
@@ -1518,7 +1518,7 @@ export const mockEvents: Event[] = [
         it: "dopo-partita-sabato-serie-a-pineta-club-milano"
       }
     },
-    image: "/images/venues/pineta-milano/pineta-milano-lounge-01.webp",
+    image: "/images/events/weekly-posters/pineta-saturday-club.webp",
     isTrending: true
   },
   {
@@ -1542,7 +1542,7 @@ export const mockEvents: Event[] = [
         it: "cena-e-serata-dopo-partita-san-siro-55-milano"
       }
     },
-    image: "/images/venues/55-milano/55-milano-interior-01.webp",
+    image: "/images/events/weekly-posters/55milano-saturday.webp",
     isTrending: true
   },
 
@@ -1568,7 +1568,7 @@ export const mockEvents: Event[] = [
         it: "capodanno-2027-gran-gala-torre-branca-just-me-milano"
       }
     },
-    image: "/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp",
+    image: "/images/events/capodanno-2027-posters/capodanno-justme-milano-torre-branca.webp",
     isSpecial: true,
     isTrending: true
   },
@@ -1593,7 +1593,7 @@ export const mockEvents: Event[] = [
         it: "capodanno-2027-san-siro-winter-dome-aria-club-milano"
       }
     },
-    image: "/images/venues/aria-club-milano/aria-club-milano-interior-01.webp",
+    image: "/images/events/capodanno-2027-posters/capodanno-aria-club-milano.webp",
     isSpecial: true,
     isTrending: true
   },

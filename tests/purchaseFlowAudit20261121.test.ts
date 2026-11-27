@@ -190,12 +190,15 @@ test('Mini-group WhatsApp eligibility includes bobino on single-pass and exclude
   assert.equal(storefrontSrc.includes("s.category !== 'vip-table-full'"), true);
   assert.equal(singlePassPageSrc.includes("sku.category !== 'vip-table-full'"), true);
 
-  // Protected partner venues still reject direct venue-channel checkout
-  for (const protectedVid of ['justme', 'justme-garda', 'pineta', 'voya'] as const) {
+  // Protected partner venues still reject direct venue-channel checkout (Voya Rooftop explicitly enabled with 20% fee)
+  for (const protectedVid of ['justme', 'justme-garda', 'pineta'] as const) {
     const sku = SKU_BY_ID.get(
       SINGLE_PASS_SKUS.find((s) => s.venueId === protectedVid)?.id || '',
     );
     assert.ok(sku);
     assert.equal(isCheckoutItemAllowed(sku, 'venue').ok, false);
   }
+  const voyaSku = SKU_BY_ID.get(SINGLE_PASS_SKUS.find((s) => s.venueId === 'voya')?.id || '');
+  assert.ok(voyaSku);
+  assert.equal(isCheckoutItemAllowed(voyaSku, 'venue').ok, true);
 });

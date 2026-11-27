@@ -14,6 +14,7 @@ import {
 } from '@/lib/i18n/locales';
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
+import { resolveCardImageByHref } from '@/lib/siteCardAssets4x5';
 import {
   Sparkles,
   MapPin,
@@ -971,70 +972,39 @@ export default async function FashionWeekPage({
               : 'Explore our 6 priority venue guides, Dom Pérignon Champagne menus, corporate private parties, and seasonal hubs:'}
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 text-xs sm:text-sm">
-            <Link
-              href={`${lp}/clubs/just-me-milano`}
-              className="p-4 rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex items-center justify-between transition-all"
-            >
-              <span>{isIt ? '1. Just Me Milano (7/7 MFW)' : '1. Just Me Milano (7/7 MFW)'}</span>
-              <ArrowRight className="w-4 h-4 text-champagne shrink-0" />
-            </Link>
-
-            <Link
-              href={`${lp}/clubs/pineta-club-milano`}
-              className="p-4 rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex items-center justify-between transition-all"
-            >
-              <span>{isIt ? '2. Pineta Club Corso Como' : '2. Pineta Club Corso Como'}</span>
-              <ArrowRight className="w-4 h-4 text-champagne shrink-0" />
-            </Link>
-
-            <Link
-              href={`${lp}/rooftops`}
-              className="p-4 rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex items-center justify-between transition-all"
-            >
-              <span>{isIt ? '5. Voya Rooftop 20° Piano' : '5. Voya Rooftop 20th Floor'}</span>
-              <ArrowRight className="w-4 h-4 text-champagne shrink-0" />
-            </Link>
-
-            <Link
-              href={`${lp}/private-parties`}
-              className="p-4 rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex items-center justify-between transition-all"
-            >
-              <span>{isIt ? 'Eventi Aziendali & Buyout' : 'Corporate Events & Buyouts'}</span>
-              <ArrowRight className="w-4 h-4 text-champagne shrink-0" />
-            </Link>
-
-            <Link
-              href={`${lp}/vip-tables`}
-              className="p-4 rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex items-center justify-between transition-all"
-            >
-              <span>{isIt ? 'Prenotazione Tavoli VIP' : 'VIP Tables Booking'}</span>
-              <ArrowRight className="w-4 h-4 text-champagne shrink-0" />
-            </Link>
-
-            <Link
-              href={`${lp}/bottle-prices`}
-              className="p-4 rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex items-center justify-between transition-all"
-            >
-              <span>{isIt ? 'Listino Bottiglie & Magnum' : 'Champagne & Magnum Prices'}</span>
-              <ArrowRight className="w-4 h-4 text-champagne shrink-0" />
-            </Link>
-
-            <Link
-              href={`${lp}/events/capodanno-2027`}
-              className="p-4 rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex items-center justify-between transition-all"
-            >
-              <span>{isIt ? 'Capodanno Milano 2027 (NYE)' : 'New Years Eve Milan 2027'}</span>
-              <ArrowRight className="w-4 h-4 text-champagne shrink-0" />
-            </Link>
-
-            <Link
-              href={`${lp}/concert-afterparties`}
-              className="p-4 rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex items-center justify-between transition-all"
-            >
-              <span>{isIt ? 'Afterparty Concerti Milano' : 'Milan Concert Afterparties'}</span>
-              <ArrowRight className="w-4 h-4 text-champagne shrink-0" />
-            </Link>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs sm:text-sm">
+            {[
+              { href: `${lp}/clubs/just-me-milano`, label: '1. Just Me Milano (7/7 MFW)' },
+              { href: `${lp}/clubs/pineta-club-milano`, label: '2. Pineta Club Corso Como' },
+              { href: `${lp}/rooftops`, label: isIt ? '5. Voya Rooftop 20° Piano' : '5. Voya Rooftop 20th Floor' },
+              { href: `${lp}/private-parties`, label: isIt ? 'Eventi Aziendali & Buyout' : 'Corporate Events & Buyouts' },
+              { href: `${lp}/vip-tables`, label: isIt ? 'Prenotazione Tavoli VIP' : 'VIP Tables Booking' },
+              { href: `${lp}/bottle-prices`, label: isIt ? 'Listino Bottiglie & Magnum' : 'Champagne & Magnum Prices' },
+              { href: `${lp}/events/capodanno-2027`, label: isIt ? 'Capodanno Milano 2027 (NYE)' : 'New Years Eve Milan 2027' },
+              { href: `${lp}/concert-afterparties`, label: isIt ? 'Afterparty Concerti Milano' : 'Milan Concert Afterparties' },
+            ].map((item, idx) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="group overflow-hidden rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex flex-col justify-between transition-all"
+              >
+                <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-white/10">
+                  <Image
+                    src={resolveCardImageByHref(item.href, idx)}
+                    alt={item.label}
+                    width={1080}
+                    height={1350}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 300px"
+                    quality={92}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div className="p-4 flex items-center justify-between gap-2">
+                  <span>{item.label}</span>
+                  <ArrowRight className="w-4 h-4 text-champagne shrink-0" />
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

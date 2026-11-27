@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { CONTACT } from '@/config/contact';
 import { localePrefix } from '@/lib/i18n/locales';
+import { getVenueCardPhoto4x5 } from '@/lib/siteCardAssets4x5';
 
 type OccasionKey = 'club-vip' | 'graduation' | 'birthday-18-30' | 'bachelorette' | 'corporate-fashion';
 type TierKey = 'luxury-flagship' | 'dinner-show-chic' | 'rooftop-skyline' | 'urban-warehouse';
@@ -740,25 +741,40 @@ export function WeeklyNightlifeNavigator({ locale }: { locale: string }) {
         {current.clubs.map((club) => (
           <div
             key={club.name}
-            className="rounded-xl border border-white/10 bg-black/40 p-5 flex flex-col justify-between hover:border-champagne/40 transition-colors"
+            className="rounded-xl border border-white/10 bg-black/40 overflow-hidden flex flex-col justify-between hover:border-champagne/40 transition-colors"
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-3">
-                <span className="px-2.5 py-0.5 rounded-full bg-champagne/15 border border-champagne/30 text-champagne text-[10px] font-bold tracking-wider uppercase">
-                  {club.rank}
-                </span>
-                <span className="text-[11px] text-white/50 flex items-center gap-1">
-                  <MapPin className="w-3 h-3 text-champagne" />
-                  {club.zone}
-                </span>
+              <Link href={`${lp}/clubs/${club.slug}`} className="block">
+                <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-white/10">
+                  <Image
+                    src={getVenueCardPhoto4x5({ slugs: { en: club.slug } })}
+                    alt={club.name}
+                    width={1080}
+                    height={1350}
+                    sizes="(max-width: 768px) 100vw, 360px"
+                    quality={92}
+                    className="h-full w-full object-cover"
+                  />
+                  <span className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-[#050505]/90 border border-champagne/40 text-champagne text-[10px] font-bold tracking-wider uppercase">
+                    {club.rank}
+                  </span>
+                </div>
+              </Link>
+              <div className="p-5 pb-0">
+                <div className="flex items-center justify-end gap-2 mb-2">
+                  <span className="text-[11px] text-white/50 flex items-center gap-1">
+                    <MapPin className="w-3 h-3 text-champagne" />
+                    {club.zone}
+                  </span>
+                </div>
+                <h4 className="font-serif text-xl font-bold text-white mb-1">{club.name}</h4>
+                <p className="text-xs text-champagne/90 font-medium mb-3">{club.music}</p>
+                <p className="text-xs text-white/60 leading-relaxed mb-4">
+                  {isIt ? club.formulaIt : club.formulaEn}
+                </p>
               </div>
-              <h4 className="font-serif text-xl font-bold text-white mb-1">{club.name}</h4>
-              <p className="text-xs text-champagne/90 font-medium mb-3">{club.music}</p>
-              <p className="text-xs text-white/60 leading-relaxed mb-4">
-                {isIt ? club.formulaIt : club.formulaEn}
-              </p>
             </div>
-            <div className="flex items-center gap-3 pt-3 border-t border-white/10">
+            <div className="mx-5 mb-5 flex items-center gap-3 pt-3 border-t border-white/10">
               <Link
                 href={`${lp}/clubs/${club.slug}`}
                 className="text-xs font-semibold text-white hover:text-champagne transition-colors"
@@ -1554,37 +1570,49 @@ export function SanSiroMatchAfterpartyFinder({ locale = 'it' }: { locale?: strin
           </span>
         </div>
 
-        <div className="divide-y divide-[#F6F1E7]/12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {orderedVenues.map((v, idx) => (
             <div
               key={v.slug}
-              className="py-5 grid grid-cols-1 lg:grid-cols-12 gap-4 items-center"
+              className="border border-[#F6F1E7]/14 bg-[#0B0A09] overflow-hidden flex flex-col justify-between"
             >
-              <div className="lg:col-span-4 min-w-0">
-                <p className="text-[13px] font-semibold text-[#C2B9AA] mb-1">
-                  {isIt ? v.priorityBadgeIt : v.priorityBadgeEn}
-                  {idx === 0 ? ` · ${isIt ? 'Top Match' : 'Best Match'}` : ''}
-                </p>
-                <h4 className="font-serif text-xl font-bold text-[#F6F1E7] mb-1">{v.name}</h4>
-                <p className="text-[13px] text-[#25D366] font-semibold">
-                  {isIt ? v.distanceIt : v.distanceEn}
-                </p>
-                <p className="text-[13px] text-[#C2B9AA] mt-0.5">{isIt ? v.transitIt : v.transitEn}</p>
+              <div>
+                <Link href={`${lp}/clubs/${v.slug}`} className="block">
+                  <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-[#F6F1E7]/14">
+                    <Image
+                      src={getVenueCardPhoto4x5({ slugs: { en: v.slug } })}
+                      alt={v.name}
+                      width={1080}
+                      height={1350}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 360px"
+                      quality={92}
+                      className="h-full w-full object-cover"
+                    />
+                    <span className="absolute top-3 left-3 bg-[#050505]/92 border border-[#F6F1E7]/25 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wider text-[#EAE3D5]">
+                      {isIt ? v.priorityBadgeIt : v.priorityBadgeEn}
+                      {idx === 0 ? ` · ${isIt ? 'Top Match' : 'Best Match'}` : ''}
+                    </span>
+                  </div>
+                </Link>
+                <div className="p-5 space-y-2">
+                  <h4 className="font-serif text-xl font-bold text-[#F6F1E7]">{v.name}</h4>
+                  <p className="text-[13px] text-[#25D366] font-semibold">
+                    {isIt ? v.distanceIt : v.distanceEn}
+                  </p>
+                  <p className="text-[13px] text-[#C2B9AA]">{isIt ? v.transitIt : v.transitEn}</p>
+                  <p className="text-[14px] text-[#EAE3D5] leading-relaxed pt-1">
+                    {isIt ? v.whyMatchIt : v.whyMatchEn}
+                  </p>
+                  <p className="text-[13px] text-[#C2B9AA]">
+                    <strong className="text-[#F6F1E7]">
+                      {isIt ? 'Listino Post-Partita:' : 'Post-Match Pricing:'}
+                    </strong>{' '}
+                    {isIt ? v.pricesIt : v.pricesEn}
+                  </p>
+                </div>
               </div>
 
-              <div className="lg:col-span-5 min-w-0 space-y-2">
-                <p className="text-[14px] text-[#EAE3D5] leading-relaxed">
-                  {isIt ? v.whyMatchIt : v.whyMatchEn}
-                </p>
-                <p className="text-[13px] text-[#C2B9AA]">
-                  <strong className="text-[#F6F1E7]">
-                    {isIt ? 'Listino Post-Partita:' : 'Post-Match Pricing:'}
-                  </strong>{' '}
-                  {isIt ? v.pricesIt : v.pricesEn}
-                </p>
-              </div>
-
-              <div className="lg:col-span-3 flex flex-wrap lg:justify-end items-center gap-3">
+              <div className="mx-5 mb-5 pt-3 border-t border-[#F6F1E7]/12 flex flex-wrap items-center justify-between gap-3">
                 <Link
                   href={`${lp}/clubs/${v.slug}`}
                   className="text-[13px] font-semibold text-[#F6F1E7] hover:text-[#25D366] transition-colors"
@@ -2873,45 +2901,58 @@ export function NeighborhoodCommutePlanner({ locale }: { locale: string }) {
           return (
             <div
               key={route.slug}
-              className="rounded-xl border border-white/10 bg-black/50 p-5 flex flex-col justify-between hover:border-champagne/45 transition-all"
+              className="rounded-xl border border-white/10 bg-black/50 overflow-hidden flex flex-col justify-between hover:border-champagne/45 transition-all"
             >
               <div>
-                <div className="flex items-center justify-between gap-2 mb-2.5">
-                  <span className="px-2.5 py-0.5 rounded-full bg-champagne/20 border border-champagne/40 text-champagne text-[10px] font-bold uppercase tracking-wider">
-                    {isIt ? `#${route.priorityRank} Club Prioritario` : `#${route.priorityRank} Priority Club`}
-                  </span>
-                  <span className="px-2.5 py-0.5 rounded-md bg-white/10 text-white text-xs font-mono font-bold">
-                    Taxi {route.taxiEstimate}
-                  </span>
-                </div>
-
-                <h3 className="font-serif text-xl font-bold text-white mb-0.5">{route.name}</h3>
-                <p className="text-[11px] text-champagne/85 mb-4">
-                  {isIt ? route.districtIt : route.districtEn}
-                </p>
-
-                <div className="space-y-3 text-xs border-t border-white/10 pt-3.5 mb-5">
-                  <div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400 block mb-0.5">
-                      {isIt ? 'A Piedi / Metro Diurna (fino alle 00:30)' : 'Walk / Daytime Metro (until 00:30)'}
+                <Link href={`${lp}/clubs/${route.slug}`} className="block">
+                  <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-white/10">
+                    <Image
+                      src={getVenueCardPhoto4x5({ slugs: { en: route.slug } })}
+                      alt={route.name}
+                      width={1080}
+                      height={1350}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 360px"
+                      quality={92}
+                      className="h-full w-full object-cover"
+                    />
+                    <span className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-[#050505]/90 border border-champagne/40 text-champagne text-[10px] font-bold uppercase tracking-wider">
+                      {isIt ? `#${route.priorityRank} Club Prioritario` : `#${route.priorityRank} Priority Club`}
                     </span>
-                    <p className="text-white/85 leading-relaxed">
-                      {isIt ? route.daytimeIt : route.daytimeEn}
-                    </p>
+                    <span className="absolute top-3 right-3 px-2.5 py-0.5 rounded-md bg-[#050505]/90 border border-white/20 text-white text-xs font-mono font-bold">
+                      Taxi {route.taxiEstimate}
+                    </span>
                   </div>
+                </Link>
 
-                  <div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#EAE3D5] block mb-0.5">
-                      {isIt ? 'Rientro Notturno (00:30 - 05:00) & Taxi' : 'Night Return (00:30 - 05:00) & Taxi'}
-                    </span>
-                    <p className="text-white/75 leading-relaxed">
-                      {isIt ? route.nightReturnIt : route.nightReturnEn} ({route.taxiEstimate})
-                    </p>
+                <div className="p-5 pb-0">
+                  <h3 className="font-serif text-xl font-bold text-white mb-0.5">{route.name}</h3>
+                  <p className="text-[11px] text-champagne/85 mb-4">
+                    {isIt ? route.districtIt : route.districtEn}
+                  </p>
+
+                  <div className="space-y-3 text-xs border-t border-white/10 pt-3.5 mb-5">
+                    <div>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400 block mb-0.5">
+                        {isIt ? 'A Piedi / Metro Diurna (fino alle 00:30)' : 'Walk / Daytime Metro (until 00:30)'}
+                      </span>
+                      <p className="text-white/85 leading-relaxed">
+                        {isIt ? route.daytimeIt : route.daytimeEn}
+                      </p>
+                    </div>
+
+                    <div>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#EAE3D5] block mb-0.5">
+                        {isIt ? 'Rientro Notturno (00:30 - 05:00) & Taxi' : 'Night Return (00:30 - 05:00) & Taxi'}
+                      </span>
+                      <p className="text-white/75 leading-relaxed">
+                        {isIt ? route.nightReturnIt : route.nightReturnEn} ({route.taxiEstimate})
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 pt-3 border-t border-white/10">
+              <div className="mx-5 mb-5 flex items-center gap-2 pt-3 border-t border-white/10">
                 <Link
                   href={`${lp}/clubs/${route.slug}`}
                   className="text-xs font-semibold text-white/85 hover:text-champagne transition-colors"

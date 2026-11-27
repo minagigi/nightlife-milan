@@ -189,7 +189,7 @@ test('Cena Spettacolo Partenopea @ JustMe Milano (Nov 27, 2026) 35-locale routin
   assert.equal(ev.sourceUrl, PARTENOPEA_JUSTME_SOURCE_URL);
   assert.equal(ev.affiliateUrl, PARTENOPEA_JUSTME_AFFILIATE_URL);
   assert.equal(ev.offers.length, 7);
-  assert.equal(ev.performers.length, 4);
+  assert.equal(ev.performers.length, 5);
   for (const o of ev.offers) {
     assert.equal(o.url, PARTENOPEA_JUSTME_AFFILIATE_URL);
   }
@@ -236,8 +236,16 @@ test('Cena Spettacolo Partenopea @ JustMe Milano (Nov 27, 2026) 35-locale routin
   const dossier = resolveVenueEventsForCarousel(justMeVenue, 'it');
   const idxTg = dossier.future.findIndex((c) => c.id === 'thanksgiving-justme-2026');
   const idxCsp = dossier.future.findIndex((c) => c.id === 'partenopea-justme-2026');
-  assert.ok(idxCsp >= 0, 'Missing partenopea-justme-2026 in JustMe dossier future events');
-  if (idxTg >= 0) {
+  const milanNightDay = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Europe/Rome',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(new Date(Date.now() - 6 * 3600 * 1000));
+  if (milanNightDay <= '2026-11-27') {
+    assert.ok(idxCsp >= 0, 'Missing partenopea-justme-2026 in JustMe dossier future events');
+  }
+  if (idxTg >= 0 && idxCsp >= 0) {
     assert.ok(idxTg < idxCsp, 'Expected 2026-11-26 Thanksgiving before 2026-11-27 Partenopea chronologically');
   }
 

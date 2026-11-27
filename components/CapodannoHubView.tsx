@@ -20,7 +20,9 @@ import {
   getCapodannoLocalizedEventTitle,
   getCapodannoUiCopy,
 } from '@/lib/capodanno/i18n';
+import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
+import { getVenueCardPhoto4x5 } from '@/lib/siteCardAssets4x5';
 import { SITE_CONTACT } from '@/config/contact';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { localePrefix, canonicalPageUrl } from '@/lib/i18n/locales';
@@ -465,7 +467,7 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
               {masterSeo.partnerIntro}
             </p>
 
-            <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
               {OFFICIAL_21_PARTNER_VENUES.map((partner, idx) => {
                 const nyeHref = capodannoEventPath(partner.capodannoSlug, locale);
                 const clubSlug = getLocalizedVenueSlug35(partner.venueId, locCode);
@@ -474,32 +476,48 @@ export default function CapodannoHubView({ locale, mode, canonicalPath }: Props)
                 const priceSummary = ev
                   ? getCapodannoLocalizedEventContent(ev, locale).priceSummary
                   : '';
+                const partnerPhoto = getVenueCardPhoto4x5({ id: partner.venueId });
                 return (
                   <article
                     key={partner.venueId}
-                    className="flex flex-col justify-between border border-[#F6F1E7]/16 bg-[#0B0A09] p-4 transition-colors hover:border-[#EAE3D5]/45"
+                    className="flex flex-col justify-between border border-[#F6F1E7]/16 bg-[#0B0A09] overflow-hidden transition-colors hover:border-[#EAE3D5]/45"
                   >
                     <div>
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#25D366]">
-                          #{String(idx + 1).padStart(2, '0')} · PARTNER
-                        </span>
-                        <span className="truncate font-sans text-xs text-[#C2B9AA]">
-                          {partner.district}
-                        </span>
+                      <Link href={clubHref} prefetch={false} className="block">
+                        <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-[#F6F1E7]/12">
+                          <Image
+                            src={partnerPhoto}
+                            alt={partner.brandName}
+                            width={1080}
+                            height={1350}
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
+                            quality={92}
+                            className="h-full w-full object-cover"
+                          />
+                          <span className="absolute top-3 left-3 bg-[#050505]/92 border border-[#F6F1E7]/25 px-2.5 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-[#25D366]">
+                            #{String(idx + 1).padStart(2, '0')} · PARTNER
+                          </span>
+                        </div>
+                      </Link>
+                      <div className="p-4 pb-0">
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="truncate font-sans text-xs text-[#C2B9AA]">
+                            {partner.district}
+                          </span>
+                        </div>
+                        <h3 className="mt-1 font-display text-xl font-bold text-[#F6F1E7]">
+                          <Link href={clubHref} prefetch={false} className="hover:underline">
+                            {partner.brandName}
+                          </Link>
+                        </h3>
+                        {priceSummary && (
+                          <p className="mt-1.5 line-clamp-2 font-mono text-xs text-[#EAE3D5]">
+                            {priceSummary}
+                          </p>
+                        )}
                       </div>
-                      <h3 className="mt-1.5 font-display text-xl font-bold text-[#F6F1E7]">
-                        <Link href={clubHref} prefetch={false} className="hover:underline">
-                          {partner.brandName}
-                        </Link>
-                      </h3>
-                      {priceSummary && (
-                        <p className="mt-1.5 line-clamp-2 font-mono text-xs text-[#EAE3D5]">
-                          {priceSummary}
-                        </p>
-                      )}
                     </div>
-                    <div className="mt-4 flex flex-wrap items-center gap-2 pt-2 border-t border-[#F6F1E7]/10">
+                    <div className="m-4 flex flex-wrap items-center gap-2 pt-3 border-t border-[#F6F1E7]/10">
                       <Link
                         href={nyeHref}
                         prefetch={false}

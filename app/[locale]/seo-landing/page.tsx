@@ -1,8 +1,10 @@
 import { Metadata } from 'next';
+import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
 import Hero from '@/components/seo-landing/Hero';
 import { localePrefix } from '@/lib/i18n/locales';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
+import { resolveCardImageByHref } from '@/lib/siteCardAssets4x5';
 import {
   VipQuoteCalculator,
   WeeklyNightlifeNavigator,
@@ -87,19 +89,34 @@ export default async function LandingPage({ params }: Props) {
         <SanSiroMatchAfterpartyFinder locale={locale} />
         <VipQuoteCalculator locale={locale} />
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-white/10">
-          <Link href={`${lp}/vip-tables`} className="p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-champagne/40 text-sm font-bold text-white">
-            {isIt ? 'Tavoli VIP & Privé →' : 'VIP Tables & Privé →'}
-          </Link>
-          <Link href={`${lp}/bottle-prices`} className="p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-champagne/40 text-sm font-bold text-white">
-            {isIt ? 'Listino Bottiglie 2026/27 →' : 'Bottle Price List 2026/27 →'}
-          </Link>
-          <Link href={`${lp}/football-afterparties`} className="p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-champagne/40 text-sm font-bold text-white">
-            {isIt ? 'Dopo-Partita San Siro →' : 'San Siro Afterparties →'}
-          </Link>
-          <Link href={`${lp}/private-parties`} className="p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-champagne/40 text-sm font-bold text-white">
-            {isIt ? 'Lauree, 18° & Compleanni →' : 'Graduations & Birthdays →'}
-          </Link>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-6 border-t border-white/10">
+          {[
+            { href: `${lp}/vip-tables`, label: isIt ? 'Tavoli VIP & Privé →' : 'VIP Tables & Privé →' },
+            { href: `${lp}/bottle-prices`, label: isIt ? 'Listino Bottiglie 2026/27 →' : 'Bottle Price List 2026/27 →' },
+            { href: `${lp}/football-afterparties`, label: isIt ? 'Dopo-Partita San Siro →' : 'San Siro Afterparties →' },
+            { href: `${lp}/private-parties`, label: isIt ? 'Lauree, 18° & Compleanni →' : 'Graduations & Birthdays →' },
+          ].map((item, idx) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="group overflow-hidden rounded-xl bg-white/[0.03] border border-white/10 hover:border-champagne/45 flex flex-col justify-between transition-colors"
+            >
+              <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-white/10">
+                <Image
+                  src={resolveCardImageByHref(item.href, idx)}
+                  alt={item.label}
+                  width={1080}
+                  height={1350}
+                  sizes="(max-width: 768px) 100vw, 300px"
+                  quality={92}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <div className="p-4 text-sm font-bold text-white group-hover:text-champagne transition-colors">
+                {item.label}
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
     </main>

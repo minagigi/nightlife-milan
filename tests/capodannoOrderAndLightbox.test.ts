@@ -5,7 +5,9 @@ import test from 'node:test';
 import { enabledLocaleCodes } from '../lib/i18n/locales';
 import {
   CAPODANNO_EVENTS,
+  CAPODANNO_HEAD_13_SLUGS,
   CAPODANNO_PARTNER_PRIORITY_SLUGS,
+  CAPODANNO_TAIL_2_SLUGS,
   PARTNER_CAPODANNO_SLUGS,
   getCapodannoEventsForMode,
   getCapodannoPriorityRank,
@@ -19,27 +21,38 @@ import {
 
 const REPO_ROOT = path.resolve(__dirname, '..');
 
-test('Capodanno 2027 ordering places all 18 Axel/Garda/Gattopardo partner venues strictly before non-partners', () => {
-  assert.equal(CAPODANNO_PARTNER_PRIORITY_SLUGS.length, 18);
+test('Capodanno 2027 ordering places all 20 head+partner venues before non-partners and pins Ortodosso + Garda Lake to the tail', () => {
+  assert.equal(CAPODANNO_HEAD_13_SLUGS.length, 13);
+  assert.equal(CAPODANNO_PARTNER_PRIORITY_SLUGS.length, 20);
   assert.equal(CAPODANNO_PARTNER_PRIORITY_SLUGS[0], 'capodanno-justme-milano-torre-branca');
   assert.equal(CAPODANNO_PARTNER_PRIORITY_SLUGS[1], 'capodanno-pineta-milano');
   assert.equal(CAPODANNO_PARTNER_PRIORITY_SLUGS[2], 'capodanno-voya-rooftop-milano');
-  assert.equal(CAPODANNO_PARTNER_PRIORITY_SLUGS[3], 'capodanno-justme-garda-lake');
+  assert.equal(CAPODANNO_PARTNER_PRIORITY_SLUGS[3], 'capodanno-repvblic-milano');
+  assert.equal(CAPODANNO_PARTNER_PRIORITY_SLUGS[4], 'capodanno-55-milano');
+  assert.equal(CAPODANNO_PARTNER_PRIORITY_SLUGS[5], 'capodanno-carlsberg-ol-milano');
+  assert.deepEqual([...CAPODANNO_TAIL_2_SLUGS], [
+    'capodanno-ortodosso-justme-milano',
+    'capodanno-justme-garda-lake',
+  ]);
 
   // Verify open hub ordering starts with every open partner before any non-partner
   const hubEvents = getCapodannoEventsForMode('capodanno-2027');
   const partnerSet = new Set<string>(CAPODANNO_PARTNER_PRIORITY_SLUGS);
   const firstNonPartnerIndex = hubEvents.findIndex((ev) => !partnerSet.has(ev.slug));
-  assert.ok(firstNonPartnerIndex >= CAPODANNO_PARTNER_PRIORITY_SLUGS.length, `Expected all 18 partners before first non-partner (got index ${firstNonPartnerIndex})`);
+  assert.ok(firstNonPartnerIndex >= CAPODANNO_PARTNER_PRIORITY_SLUGS.length, `Expected all 20 partners before first non-partner (got index ${firstNonPartnerIndex})`);
 
-  const first18Slugs = hubEvents.slice(0, CAPODANNO_PARTNER_PRIORITY_SLUGS.length).map((e) => e.slug);
-  assert.deepEqual(first18Slugs, [...CAPODANNO_PARTNER_PRIORITY_SLUGS]);
+  const first20Slugs = hubEvents.slice(0, CAPODANNO_PARTNER_PRIORITY_SLUGS.length).map((e) => e.slug);
+  assert.deepEqual(first20Slugs, [...CAPODANNO_PARTNER_PRIORITY_SLUGS]);
 
-  // Verify global CAPODANNO_EVENTS ordering keeps all 18 partners ahead of STK, Terrazza Duomo 21, Radio Rooftop
+  // Verify tail 2 slugs sit at the end of the open hub
+  const lastTwoHubSlugs = hubEvents.slice(-2).map((e) => e.slug);
+  assert.deepEqual(lastTwoHubSlugs, [...CAPODANNO_TAIL_2_SLUGS]);
+
+  // Verify global CAPODANNO_EVENTS ordering keeps all 20 partners ahead of STK, Terrazza Duomo 21, Radio Rooftop
   const stkIndex = CAPODANNO_EVENTS.findIndex((e) => e.slug === 'capodanno-stk-milan');
   const td21Index = CAPODANNO_EVENTS.findIndex((e) => e.slug === 'capodanno-terrazza-duomo-21');
   const radioIndex = CAPODANNO_EVENTS.findIndex((e) => e.slug === 'capodanno-radio-rooftop-milano');
-  assert.ok(stkIndex >= 18 && td21Index >= 18 && radioIndex >= 18, `Expected STK/TD21/Radio after all 18 partners`);
+  assert.ok(stkIndex >= 20 && td21Index >= 20 && radioIndex >= 20, `Expected STK/TD21/Radio after all 20 partners`);
 
   for (const partnerSlug of CAPODANNO_PARTNER_PRIORITY_SLUGS) {
     const idx = CAPODANNO_EVENTS.findIndex((e) => e.slug === partnerSlug);
@@ -52,6 +65,8 @@ test('Capodanno 2027 ordering places all 18 Axel/Garda/Gattopardo partner venues
   assert.equal(getCapodannoEventsForMode('capodanno-rooftop-milano')[0].slug, 'capodanno-voya-rooftop-milano');
   assert.equal(getCapodannoPriorityRank('capodanno-justme-garda-lake', 'lombardia'), -1);
   assert.equal(getCapodannoEventsForMode('lombardia')[0].slug, 'capodanno-justme-garda-lake');
+  assert.equal(getCapodannoPriorityRank('capodanno-ortodosso-justme-milano', 'capodanno-2027'), 9998);
+  assert.equal(getCapodannoPriorityRank('capodanno-justme-garda-lake', 'capodanno-2027'), 9999);
 
   // Fee-exemption set has 10 partner slugs (Voya removed 24 Nov 2026: applies +20% Booking & Transaction Fees)
   assert.equal(PARTNER_CAPODANNO_SLUGS.size, 10);
@@ -60,17 +75,20 @@ test('Capodanno 2027 ordering places all 18 Axel/Garda/Gattopardo partner venues
 
 test('GlobalSearch and OctoberEntry follow Capodanno partner-first priority without duplicate numbering', () => {
   const globalSearchSrc = fs.readFileSync(path.join(REPO_ROOT, 'components', 'GlobalSearch.tsx'), 'utf8');
-  assert.ok(globalSearchSrc.includes('CAPODANNO_PARTNER_PRIORITY_RANK'), 'GlobalSearch must use shared 18-venue partner priority rank');
+  assert.ok(globalSearchSrc.includes('getCapodannoPriorityRank'), 'GlobalSearch must use shared getCapodannoPriorityRank ordering');
 
   const octoberEntrySrc = fs.readFileSync(path.join(REPO_ROOT, 'components', 'OctoberEntry.tsx'), 'utf8');
+  assert.ok(octoberEntrySrc.includes('CAPODANNO_HEAD_13_SLUGS'), 'OctoberEntry must render CAPODANNO_HEAD_13_SLUGS');
   assert.ok(octoberEntrySrc.includes('01 · GRAN GALÀ'), 'OctoberEntry missing 01 rank');
-  assert.ok(octoberEntrySrc.includes('07 · CAPODANNO 2027'), 'OctoberEntry missing 07 rank');
+  assert.ok(octoberEntrySrc.includes('06 · CAPODANNO PER FAMIGLIE'), 'OctoberEntry missing 06 Carlsberg ØL rank');
+  assert.ok(octoberEntrySrc.includes('07 · CASINO NIGHT'), 'OctoberEntry missing 07 Magazzini Generali rank');
+  assert.ok(octoberEntrySrc.includes('13 · RED CARPET'), 'OctoberEntry missing 13 Dazi rank');
   const idxJustMe = octoberEntrySrc.indexOf("'capodanno-justme-milano-torre-branca'");
   const idxPineta = octoberEntrySrc.indexOf("'capodanno-pineta-milano'");
   const idxVoya = octoberEntrySrc.indexOf("'capodanno-voya-rooftop-milano'");
-  const idxGarda = octoberEntrySrc.indexOf("'capodanno-justme-garda-lake'");
-  const idxAria = octoberEntrySrc.indexOf("'capodanno-aria-club-milano'");
-  assert.ok(idxJustMe < idxPineta && idxPineta < idxVoya && idxVoya < idxGarda && idxGarda < idxAria);
+  const idx55 = octoberEntrySrc.indexOf("'capodanno-55-milano'");
+  const idxCarlsberg = octoberEntrySrc.indexOf("'capodanno-carlsberg-ol-milano'");
+  assert.ok(idxJustMe < idxPineta && idxPineta < idxVoya && idxVoya < idx55 && idx55 < idxCarlsberg);
 });
 
 test('Lightbox copy covers all 35 enabled locales natively without forbidden words', () => {

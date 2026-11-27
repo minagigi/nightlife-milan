@@ -29,6 +29,8 @@ import {
   computeActiveNightWindowISO,
   getNightUi35,
 } from './bergamo-brescia/activeNights35';
+import { AXEL_GROUP_DATED_EVENTS, axelGroupEventPath } from './axel-group-events/events35';
+import { getVenueWeeklyHeroUi35 } from './venueWeeklyHero35';
 
 function venueDisplayName(venue: Venue, locale: string): string {
   return (locale === 'it' ? venue.localizedContent?.name?.it : venue.localizedContent?.name?.en) || venue.localizedContent?.name?.en || 'Club Milano';
@@ -1138,8 +1140,13 @@ export function resolveVenueEventsForCarousel(
   const venueNameLower = vName.toLowerCase();
 
   const locCode = (isEnabledLocale(locale) ? locale : 'en') as LocaleCode;
+  const heroUi = getVenueWeeklyHeroUi35(locCode);
   const lp = localePrefix(locCode);
   const toHref = (enPath: string) => localizeInternalHref(`${lp}${enPath}`, locCode);
+  const monthNum = Number(todayISO.slice(5, 7));
+  const isWinterSeason = monthNum < 5 || monthNum > 9;
+  const stripFeePct = (raw: string) =>
+    raw.replace(/\s*\([^)]*%\)/g, '').replace(/\s*\+\s*\d+\s*%[^,.;)]*/g, '').trim();
 
   const matchedDated = OCTOBER_EVENTS.filter((ev) => {
     if (ev.id === '251019' || ev.id === '249216' || ev.id === '249217') return false;
@@ -1159,11 +1166,11 @@ export function resolveVenueEventsForCarousel(
       (acc, o) => (typeof o.price === 'number' && o.price > 0 && o.price < acc ? o.price : acc),
       999
     );
-    const priceLabel = minOffer < 999 ? `€${minOffer}` : venue.priceRange || '€20';
+    const priceLabel = stripFeePct(minOffer < 999 ? `€${minOffer}` : venue.priceRange || '€20');
     const dStr = ev.startISO.slice(0, 10);
     const tStr = ev.startISO.slice(11, 16) || '23:00';
     const endStr = ev.endISO ? ev.endISO.slice(11, 16) : '05:00';
-    const fallbackImg = venue.image || '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp';
+    const fallbackImg = '/images/events/weekly-posters/justme-saturday.webp';
     const cardHref = toHref(`/events/${slug}`);
     return {
       id: ev.id,
@@ -1182,7 +1189,7 @@ export function resolveVenueEventsForCarousel(
 
   const tonight: CarouselEventCard[] = matchedDated
     .filter((ev) => ev.startISO.slice(0, 10) === todayISO)
-    .map((ev) => mapDatedCard(ev, isIt ? 'STASERA LIVE' : 'TONIGHT LIVE'));
+    .map((ev) => mapDatedCard(ev, heroUi.tonightBadge));
 
   const thisWeek: CarouselEventCard[] = matchedDated
     .filter((ev) => {
@@ -1190,14 +1197,40 @@ export function resolveVenueEventsForCarousel(
       return d >= todayISO && d <= endOfWeekISO;
     })
     .slice(0, 12)
-    .map((ev) => mapDatedCard(ev, isIt ? 'QUESTA SETTIMANA' : 'THIS WEEK'));
+    .map((ev) => mapDatedCard(ev, heroUi.specialDateBadge));
 
   const future: CarouselEventCard[] = matchedDated
     .filter((ev) => ev.startISO.slice(0, 10) >= todayISO)
     .slice(0, 16)
-    .map((ev) => mapDatedCard(ev, isIt ? 'DATA UFFICIALE' : 'OFFICIAL DATE'));
+    .map((ev) => mapDatedCard(ev, heroUi.specialDateBadge));
+
+  if (venue.id === 'v-pineta') {
+    for (const ax of AXEL_GROUP_DATED_EVENTS) {
+      if (ax.venueType !== 'pineta' || ax.ymd < todayISO) continue;
+      const axHref = axelGroupEventPath(ax.id, locCode);
+      const axCard: CarouselEventCard = {
+        id: `axel-${ax.id}`,
+        title: isIt
+          ? 'Check&Love · Aperitivo, Cena Cantata & Serata Club'
+          : 'Check&Love · Interactive Dinner Show & Club Night',
+        dateLabel: ax.ymd,
+        timeLabel: ax.hours,
+        priceLabel: `€${ax.entryEur}`,
+        categoryLabel: ax.venueName,
+        genres: ax.genres.slice(0, 3),
+        imageSrc: ax.card4x5Src || ax.posterSrc,
+        href: axHref,
+        whatsappHref: getConciergeBookingUrl(locale, `Check&Love Pineta Milano (${ax.ymd})`, sourcePageUrl || axHref),
+        badge: ax.ymd === todayISO ? heroUi.tonightBadge : heroUi.specialDateBadge,
+      };
+      if (ax.ymd === todayISO) tonight.push(axCard);
+      if (ax.ymd <= endOfWeekISO) thisWeek.push(axCard);
+      future.push(axCard);
+    }
+  }
 
   const matchedWeekly = weeklyEvents.filter((w) => {
+    if (isWinterSeason && w.seasonalSummerOnly) return false;
     if (`v-${w.clubSlug}` === venue.id) return true;
     const wLoc = w.clubName.toLowerCase();
     const cleanVenue = venueNameLower.replace(/\s+milano?$/i, '').trim();
@@ -1205,100 +1238,57 @@ export function resolveVenueEventsForCarousel(
     return cleanVenue.length >= 4 && cleanWeekly.length >= 4 && (wLoc.includes(cleanVenue) || venueNameLower.includes(cleanWeekly));
   });
 
-  const fallbackImg = venue.image || '/images/venues/just-me-milano/just-me-milano-torre-branca-01.webp';
+  const fallbackImg = '/images/events/weekly-posters/justme-saturday.webp';
   const curatedProposals: CarouselEventCard[] = matchedWeekly.map((w) => {
     const weeklyHref = toHref(`/events/${w.clubSlug}-${w.day}-${w.eventSlug}`);
+    const refSun = new Date(Date.UTC(2026, 10, 22 + (w.dayOfWeek || 0), 12, 0, 0));
+    let wDayLabel = w.day;
+    try {
+      wDayLabel = new Intl.DateTimeFormat(locCode, { weekday: 'long', timeZone: 'UTC' }).format(refSun);
+    } catch {
+      wDayLabel = w.day;
+    }
     return {
       id: `weekly-${w.id}`,
       title: w.name,
-      dateLabel: isIt ? `Ogni Settimana (${w.day.toUpperCase()})` : `Weekly (${w.day.toUpperCase()})`,
-      timeLabel: '20:30 – 05:00',
-      priceLabel: w.pricing.club || w.pricing.aperitif || '€20',
+      dateLabel: wDayLabel,
+      timeLabel: '20:30 - 05:00',
+      priceLabel: stripFeePct(w.pricing.club || w.pricing.aperitif || heroUi.uponRequest),
       categoryLabel: vName,
       genres: (w.genres && w.genres.length > 0 ? w.genres : vTags).slice(0, 3),
       imageSrc: w.image || fallbackImg,
       href: weeklyHref,
       whatsappHref: getConciergeBookingUrl(locale, `${w.name} (${vName})`, sourcePageUrl || weeklyHref),
-      badge: isIt ? 'PROPOSTA Nightlife Milan' : 'Nightlife Milan PICK',
+      badge: heroUi.weeklyNightBadge,
       isRecurring: true,
     };
   });
 
-  const isRepvblic = venue.id === 'v-repvblic' || venue.slugs?.en === 'repvblic-milano';
-  const gallery = getEnhancedVenueGallery(venue);
-  const repNyeHref = capodannoEventPath('capodanno-repvblic-milano', locale);
-  const aperitivoHref = toHref('/private-parties');
-  const vipHref = toHref('/vip-tables');
-  const signatureProposals: CarouselEventCard[] = [
-    isRepvblic
-      ? {
-          id: `${venue.id}-prop-nye-2027`,
-          title: isIt
-            ? 'NEW YEAR’S EVE AT REPVBLIC MILANO 2027 (Confermato)'
-            : 'NEW YEAR’S EVE AT REPVBLIC MILANO 2027 (Confirmed)',
-          dateLabel: isIt ? '31 Dicembre 2026 · Piazza della Repubblica 12' : 'Dec 31, 2026 · Piazza della Repubblica 12',
-          timeLabel: '23:00 – 05:00',
-          priceLabel: isIt ? 'Early Bird 45€ (flûte + 1 drink)' : 'Early Bird €45 (flûte + 1 drink)',
-          categoryLabel: isIt ? 'Capodanno 2027 Ufficiale' : 'Official NYE 2027',
-          genres: ['International Hits', 'Hip Hop', 'House'],
-          imageSrc: '/images/events/capodanno-2027-posters/capodanno-repvblic-milano.webp',
-          href: repNyeHref,
-          whatsappHref: getConciergeBookingUrl(
-            locale,
-            'NEW YEAR’S EVE AT REPVBLIC MILANO (31 Dec, Piazza della Repubblica 12)',
-            sourcePageUrl || repNyeHref
-          ),
-          badge: isIt ? 'CAPODANNO CONFERMATO 2027' : 'CONFIRMED NYE 2027',
-          isRecurring: false,
-        }
-      : {
-          id: `${venue.id}-prop-aperitivo`,
-          title: isIt ? `${vName} · Royal Aperitivo & Isola Riservata` : `${vName} · Royal Aperitivo & Reserved Island`,
-          dateLabel: isIt ? 'Questa Settimana · Su Prenotazione' : 'This Week · Direct Booking',
-          timeLabel: '20:00 – 22:30',
-          priceLabel: '€20 – €25',
-          categoryLabel: isIt ? 'Aperitivo & Lauree/Compleanni' : 'Aperitivo & Celebrations',
-          genres: ['Royal Buffet', 'Cocktail Bar', 'DJ Set'],
-          imageSrc: gallery[0] || fallbackImg,
-          href: aperitivoHref,
-          whatsappHref: getConciergeBookingUrl(locale, `${vName} Royal Aperitivo`, sourcePageUrl || aperitivoHref),
-          badge: isIt ? 'PROPOSTA Nightlife Milan #1' : 'Nightlife Milan PROPOSAL #1',
-          isRecurring: true,
-        },
-    {
-      id: `${venue.id}-prop-vip`,
-      title: isIt ? `${vName} · Tavolo Privé, Pista & Bottle Show` : `${vName} · VIP Privé Table & Bottle Show`,
-      dateLabel: isIt ? 'Weekend & Prefestivi' : 'Weekends & Special Nights',
-      timeLabel: '23:30 – 05:00',
-      priceLabel: isIt ? 'Da €250 (100% Bottiglie)' : 'From €250 (100% Bottle Credit)',
-      categoryLabel: isIt ? 'Tavoli VIP & Club' : 'VIP Tables & Club',
+  const openCapEv = getCapodannoEventForClub(clubSlug, venue.localizedContent.name.en);
+  if (openCapEv && !openCapEv.closedForNye && !openCapEv.soldOutForNye && !isBergamoBresciaVenueId(venue.id)) {
+    const capHref = capodannoEventPath(openCapEv.slug, locale);
+    const nyeCard: CarouselEventCard = {
+      id: `${venue.id}-prop-nye-2027`,
+      title: isIt ? openCapEv.titleIt : openCapEv.titleEn,
+      dateLabel: '2026-12-31',
+      timeLabel: openCapEv.hours || '20:30 - 05:00',
+      priceLabel: stripFeePct(
+        typeof openCapEv.priceFromEur === 'number' && openCapEv.priceFromEur > 0
+          ? `€${openCapEv.priceFromEur}`
+          : heroUi.uponRequest,
+      ),
+      categoryLabel: vName,
       genres: vTags.slice(0, 3),
-      imageSrc: gallery[1] || gallery[0] || fallbackImg,
-      href: vipHref,
-      whatsappHref: getConciergeBookingUrl(locale, `${vName} VIP Table`, sourcePageUrl || vipHref),
-      badge: isIt ? 'PROPOSTA Nightlife Milan #2' : 'Nightlife Milan PROPOSAL #2',
-      isRecurring: true,
-    },
-    {
-      id: `${venue.id}-prop-party`,
-      title: isIt
-        ? `${vName} · Pacchetto Festa (Laurea, Compleanno, Celibato/Nubilato)`
-        : `${vName} · Turnkey Party Package (Graduation, Birthday, Stag/Hen)`,
-      dateLabel: isIt ? 'Disponibile Tutto l’Anno' : 'Available Year-Round',
-      timeLabel: '20:30 – 05:00',
-      priceLabel: '€25 (2 Drink + Buffet)',
-      categoryLabel: isIt ? 'Feste Private & Gruppi' : 'Private Parties & Groups',
-      genres: ['2 Drinks Included', 'Cake Service', 'Fast-Track'],
-      imageSrc: gallery[2] || gallery[0] || fallbackImg,
-      href: aperitivoHref,
-      whatsappHref: getConciergeBookingUrl(locale, `${vName} Private Party`, sourcePageUrl || aperitivoHref),
-      badge: isIt ? 'PROPOSTA Nightlife Milan #3' : 'Nightlife Milan PROPOSAL #3',
-      isRecurring: true,
-    },
-  ];
-
-  for (const sig of signatureProposals) {
-    if (curatedProposals.length < 6) curatedProposals.push(sig);
+      imageSrc: openCapEv.image || '/images/events/capodanno-2027-posters/capodanno-justme-milano-torre-branca.webp',
+      href: capHref,
+      whatsappHref: getConciergeBookingUrl(locale, `${vName} Capodanno 2027`, sourcePageUrl || capHref),
+      badge: heroUi.specialDateBadge,
+      isRecurring: false,
+    };
+    future.push(nyeCard);
+    if (curatedProposals.length < 6) {
+      curatedProposals.push(nyeCard);
+    }
   }
 
   if (isBergamoBresciaVenueId(venue.id)) {
@@ -1403,10 +1393,8 @@ export function resolveVenueEventsForCarousel(
         }
       }
     }
-    const romeNowDay = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Rome' }).format(new Date());
-    const romeEndWeekDay = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Rome' }).format(
-      new Date(Date.now() + 7 * 86_400_000),
-    );
+    const romeNowDay = todayISO;
+    const romeEndWeekDay = endOfWeekISO;
     const rainActive = isJustSingingRainActive();
     const rainPack = rainActive ? getJustSingingRainContent(locale) : null;
     const rainCard = rainPack

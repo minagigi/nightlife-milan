@@ -17,6 +17,7 @@ import { isRepvblicNyeSlug } from '@/lib/capodanno/repvblic35';
 import { isGateNyeSlug } from '@/lib/capodanno/gate35';
 import { getScarcityAndChatCopy } from '@/lib/i18n/scarcityAndChatCopy';
 import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
+import { getCapodannoCategoryCardPoster4x5 } from '@/lib/siteCardAssets4x5';
 import type {
   CapodannoEventItem,
   CapodannoVenueType,
@@ -117,29 +118,42 @@ export default function CapodannoInteractiveFilter({
             </h2>
           </div>
         </div>
-        <div className="grid grid-cols-1 divide-y divide-[#F6F1E7]/12 border-y border-[#F6F1E7]/14 md:grid-cols-2 md:gap-3 md:divide-y-0 md:border-0 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
           {categoryPages.map((cat) => {
             const isCurrent = cat.slug === activeSlug;
+            const catLabel = getCapodannoCategoryShortLabel35(cat.slug, locale, cat.shortLabelIt, cat.shortLabelEn);
+            const catBadge = getCapodannoCategoryBadge35(cat.slug, locale, cat.badgeIt, cat.badgeEn);
             return (
               <Link
                 key={cat.slug}
                 href={capodannoCategoryPath(cat.slug, locale)}
                 prefetch={false}
-                className={`flex items-center justify-between gap-3 py-3 transition-colors md:flex-col md:items-start md:border md:p-3.5 ${
+                className={`group flex flex-col justify-between overflow-hidden border transition-colors ${
                   isCurrent
-                    ? 'text-[#F6F1E7] md:border-[#25D366] md:bg-[#141311]'
-                    : 'text-[#F6F1E7] hover:text-[#EAE3D5] md:border-[#F6F1E7]/14 md:bg-[#0B0A09] md:hover:border-[#EAE3D5]'
+                    ? 'border-[#25D366] bg-[#141311] text-[#F6F1E7]'
+                    : 'border-[#F6F1E7]/14 bg-[#0B0A09] text-[#F6F1E7] hover:border-[#EAE3D5]'
                 }`}
               >
-                <div>
-                  <span className={`block text-[10px] font-bold uppercase tracking-wider ${isCurrent ? 'text-[#25D366]' : 'text-[#C2B9AA]'}`}>
-                    {getCapodannoCategoryBadge35(cat.slug, locale, cat.badgeIt, cat.badgeEn)}
-                  </span>
-                  <span className="mt-0.5 block text-xs font-bold leading-snug sm:text-sm">
-                    {getCapodannoCategoryShortLabel35(cat.slug, locale, cat.shortLabelIt, cat.shortLabelEn)}
+                <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-[#F6F1E7]/12">
+                  <Image
+                    src={getCapodannoCategoryCardPoster4x5(cat.slug)}
+                    alt={catLabel}
+                    width={1080}
+                    height={1350}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 320px"
+                    quality={92}
+                    className="h-full w-full object-cover"
+                  />
+                  <span className={`absolute top-2.5 left-2.5 bg-[#050505]/92 border border-[#F6F1E7]/25 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-wider ${isCurrent ? 'text-[#25D366]' : 'text-[#EAE3D5]'}`}>
+                    {catBadge}
                   </span>
                 </div>
-                <span className="font-mono text-sm text-[#EAE3D5]" aria-hidden="true">→</span>
+                <div className="flex items-center justify-between gap-3 p-3.5">
+                  <span className="block text-xs font-bold leading-snug sm:text-sm">
+                    {catLabel}
+                  </span>
+                  <span className="font-mono text-sm text-[#EAE3D5]" aria-hidden="true">→</span>
+                </div>
               </Link>
             );
           })}

@@ -1,4 +1,5 @@
 import { localePrefix, type LocaleCode } from '@/lib/i18n/locales';
+import { getHubOrPillarCardPhoto4x5 } from '@/lib/siteCardAssets4x5';
 
 export type SeoContextualLink = {
   href: string;
@@ -464,7 +465,22 @@ export function getSeoStandard21Copy(lang: LocaleCode, pageKey?: string): SeoSta
   const lp = localePrefix(lang);
   const pack = getHeaderPack(lang);
   const baseParagraphs = lang === 'it' ? ITALIAN_SECTIONS_TEXT : ENGLISH_SECTIONS_TEXT;
-  const pageImages = pageKey ? PAGE_KEY_SEO_IMAGES[pageKey] : undefined;
+  const isSingleGuidePage = Boolean(pageKey && pageKey.startsWith('/guides/') && pageKey !== '/guides');
+  const pageImages: readonly string[] = (() => {
+    if (isSingleGuidePage) return [];
+    const base = pageKey && PAGE_KEY_SEO_IMAGES[pageKey] ? [...PAGE_KEY_SEO_IMAGES[pageKey]] : [];
+    const used = new Set(base);
+    let salt = 0;
+    while (base.length < 5 && salt < 40) {
+      const cand = getHubOrPillarCardPhoto4x5(`${pageKey || 'home'}-seo21-${base.length}`, salt);
+      salt += 1;
+      if (!used.has(cand)) {
+        used.add(cand);
+        base.push(cand);
+      }
+    }
+    return base;
+  })();
 
   const titles: readonly [string, string, string, string, string] = [
     pack.s1Title,

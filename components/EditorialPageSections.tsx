@@ -11,6 +11,12 @@ import { localePrefix, type LocaleCode } from '@/lib/i18n/locales';
 import { getLocalizedText } from '@/lib/seo';
 import { getVenueAuthoritySpec } from '@/lib/venueAuthority33';
 import { getV01SiteCopy } from '@/lib/i18n/v01SiteCopy35';
+import {
+  getVenueCardPhoto4x5,
+  getZoneCardPhoto4x5,
+  getGuideCardPhoto4x5,
+  getHubOrPillarCardPhoto4x5,
+} from '@/lib/siteCardAssets4x5';
 
 type Props = {
   locale: LocaleCode;
@@ -478,22 +484,56 @@ export default function EditorialPageSections({ locale, path }: Props) {
                 ? `Il distretto di ${zoneName} offre una sequenza completa per la serata milanese: 1) Fascia 19:30–21:30 con Royal Aperitivo o cocktail sartoriale nei lounge bar del quartiere; 2) Fascia 21:30–23:30 con cena cantata o degustazione in speakeasy; 3) Fascia 23:30–05:00 con ingresso in lista nominale (entro le 00:30) o Tavolo VIP Privé nei club di ${zoneName} e dei distretti limitrofi.`
                 : `The ${zoneName} district offers a direct three-stage Milanese evening: 1) 19:30–21:30 Royal Aperitivo or craft cocktails at neighborhood lounges; 2) 21:30–23:30 singing dinner show or speakeasy tasting; 3) 23:30–05:00 nominal guest-list entry (before 00:30) or VIP Privé Table service across ${zoneName} and adjacent nightlife hubs.`}
             </p>
-            <div className="grid gap-4 sm:grid-cols-3">
-              <div className="border border-[#F6F1E7]/14 bg-[#141311] p-5">
-                <p className="font-sans tabular-nums text-[13px] font-bold uppercase tracking-[0.04em] text-[#C2B9AA] mb-1">19:30 – 22:00</p>
-                <h3 className="font-display text-xl text-[#F6F1E7] mb-2">{isIt ? `Aperitivo & Lounge a ${zoneName}` : `${zoneName} Aperitivo & Lounges`}</h3>
-                <p className="text-sm text-[#C2B9AA]">{isIt ? 'Prenota un tavolo d’appoggio entro le 20:00 per iniziare la serata con cocktail d’autore e finger food gourmet.' : 'Reserve an aperitivo table before 20:00 for craft cocktails and gourmet platters.'}</p>
-              </div>
-              <div className="border border-[#F6F1E7]/14 bg-[#141311] p-5">
-                <p className="font-sans tabular-nums text-[13px] font-bold uppercase tracking-[0.04em] text-[#C2B9AA] mb-1">22:00 – 23:45</p>
-                <h3 className="font-display text-xl text-[#F6F1E7] mb-2">{isIt ? 'Speakeasy & Pre-Clubbing' : 'Speakeasies & Pre-Clubbing'}</h3>
-                <p className="text-sm text-[#C2B9AA]">{isIt ? 'Ideale per un secondo drink di alta miscelazione prima di raggiungere il desk d’ingresso della discoteca.' : 'Ideal for a high-mixology second drink before heading to the club velvet rope.'}</p>
-              </div>
-              <div className="border border-[#F6F1E7]/14 bg-[#141311] p-5">
-                <p className="font-sans tabular-nums text-[13px] font-bold uppercase tracking-[0.04em] text-[#C2B9AA] mb-1">23:45 – 05:00</p>
-                <h3 className="font-display text-xl text-[#F6F1E7] mb-2">{isIt ? `Clubbing & Tavoli VIP ${zoneName}` : `${zoneName} Clubbing & VIP Tables`}</h3>
-                <p className="text-sm text-[#C2B9AA]">{isIt ? `Accreditati in lista nominale o prenota il tuo Tavolo Privé su WhatsApp al ${SITE_CONTACT.whatsapp.number}.` : `Register on the nominal guest list or book your VIP Privé table on WhatsApp at ${SITE_CONTACT.whatsapp.number}.`}</p>
-              </div>
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+              {[
+                {
+                  slot: '19:30 – 22:00',
+                  title: isIt ? `Aperitivo & Lounge a ${zoneName}` : `${zoneName} Aperitivo & Lounges`,
+                  body: isIt
+                    ? 'Prenota un tavolo d’appoggio entro le 20:00 per iniziare la serata con cocktail d’autore e finger food gourmet.'
+                    : 'Reserve an aperitivo table before 20:00 for craft cocktails and gourmet platters.',
+                  img: getZoneCardPhoto4x5(zoneSlug),
+                },
+                {
+                  slot: '22:00 – 23:45',
+                  title: isIt ? 'Speakeasy & Pre-Clubbing' : 'Speakeasies & Pre-Clubbing',
+                  body: isIt
+                    ? 'Ideale per un secondo drink di alta miscelazione prima di raggiungere il desk d’ingresso della discoteca.'
+                    : 'Ideal for a high-mixology second drink before heading to the club velvet rope.',
+                  img: getHubOrPillarCardPhoto4x5(`${zoneSlug}-speakeasy`, 1),
+                },
+                {
+                  slot: '23:45 – 05:00',
+                  title: isIt ? `Clubbing & Tavoli VIP ${zoneName}` : `${zoneName} Clubbing & VIP Tables`,
+                  body: isIt
+                    ? `Accreditati in lista nominale o prenota il tuo Tavolo Privé su WhatsApp al ${SITE_CONTACT.whatsapp.number}.`
+                    : `Register on the nominal guest list or book your VIP Privé table on WhatsApp at ${SITE_CONTACT.whatsapp.number}.`,
+                  img: getHubOrPillarCardPhoto4x5(`${zoneSlug}-clubbing`, 2),
+                },
+              ].map((st) => (
+                <div key={st.slot} className="border border-[#F6F1E7]/14 bg-[#141311] overflow-hidden flex flex-col justify-between">
+                  <div>
+                    <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-[#F6F1E7]/14">
+                      <Image
+                        src={st.img}
+                        alt={st.title}
+                        width={1080}
+                        height={1350}
+                        sizes="(max-width: 768px) 100vw, 380px"
+                        quality={92}
+                        className="h-full w-full object-cover"
+                      />
+                      <span className="absolute top-3 left-3 bg-[#050505]/90 border border-[#F6F1E7]/25 px-2.5 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-[#EAE3D5]">
+                        {st.slot}
+                      </span>
+                    </div>
+                    <div className="p-5">
+                      <h3 className="font-display text-xl text-[#F6F1E7] mb-2">{st.title}</h3>
+                      <p className="text-sm text-[#C2B9AA]">{st.body}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </section>
         </div>
@@ -649,18 +689,35 @@ export default function EditorialPageSections({ locale, path }: Props) {
               {categories.map((cat) => (
                 <div key={cat.title}>
                   <h3 className="mb-4 font-display text-2xl text-[#F6F1E7] border-b border-[#F6F1E7]/14 pb-2">{cat.title}</h3>
-                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
                     {cat.items.map((item) => {
                       const canonicalVenueSlug = getLocalizedVenueSlug35(item.venueId, locale);
+                      const clubHref = `${lp}/${clubsDir}/${canonicalVenueSlug}`;
+                      const clubPhoto = getVenueCardPhoto4x5({ id: item.venueId });
                       return (
-                        <article key={item.venueId} className="border border-[#F6F1E7]/14 bg-[#141311] p-5 flex flex-col justify-between">
+                        <article key={item.venueId} className="border border-[#F6F1E7]/14 bg-[#141311] overflow-hidden flex flex-col justify-between">
                           <div>
-                            <h4 className="font-display text-lg text-[#F6F1E7] mb-1.5">
-                              <Link href={`${lp}/${clubsDir}/${canonicalVenueSlug}`} prefetch={false} className="underline-offset-4 hover:underline transition-colors">
-                                {item.name} ↗
-                              </Link>
-                            </h4>
-                            <p className="font-sans text-[13px] leading-relaxed text-[#C2B9AA]">{item.desc}</p>
+                            <Link href={clubHref} prefetch={false} className="block">
+                              <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-[#F6F1E7]/14">
+                                <Image
+                                  src={clubPhoto}
+                                  alt={item.name}
+                                  width={1080}
+                                  height={1350}
+                                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 300px"
+                                  quality={92}
+                                  className="h-full w-full object-cover"
+                                />
+                              </div>
+                            </Link>
+                            <div className="p-5">
+                              <h4 className="font-display text-lg text-[#F6F1E7] mb-1.5">
+                                <Link href={clubHref} prefetch={false} className="underline-offset-4 hover:underline transition-colors">
+                                  {item.name} ↗
+                                </Link>
+                              </h4>
+                              <p className="font-sans text-[13px] leading-relaxed text-[#C2B9AA]">{item.desc}</p>
+                            </div>
                           </div>
                         </article>
                       );
@@ -706,27 +763,54 @@ export default function EditorialPageSections({ locale, path }: Props) {
                 ? 'Dalla porta nascosta del 1930 Secret Cocktail Bar ai 4 metri quadrati del Backdoor 43 sui Navigli, fino alla mixology molecolare del Nottingham Forest, Officina Milano, MAG La Pusterla, Iter, Moebius, Botanical Club, Camparino e Bar Basso: scopri dove bere tra le 20:00 e le 23:30 prima di entrare nel tuo Tavolo VIP.'
                 : 'From the unmarked door of 1930 Secret Cocktail Bar and the 4-square-meter Backdoor 43 on the Navigli canals to molecular mixology at Nottingham Forest, Officina Milano, MAG La Pusterla, Iter, Moebius, Botanical Club, Camparino, and Bar Basso: discover where to drink between 20:00 and 23:30 before your VIP club table.'}
             </p>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-6">
-              <div className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-5">
-                <p className="font-sans tabular-nums text-[13px] text-[#F6F1E7] uppercase mb-1">01 · CINQUE GIORNATE</p>
-                <h3 className="font-display text-lg text-[#F6F1E7] mb-1">1930 Secret Bar</h3>
-                <p className="text-[13px] text-[#C2B9AA]">{isIt ? 'World’s 50 Best Bars · Ingresso su invito tramite MAG Cafè · Cocktail concettuali 18–25 €.' : 'World’s 50 Best Bars · Invitation access via MAG Cafè · Conceptual cocktails €18–€25.'}</p>
-              </div>
-              <div className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-5">
-                <p className="font-sans tabular-nums text-[13px] text-[#F6F1E7] uppercase mb-1">02 · NAVIGLI (RIPA TICINESE 43)</p>
-                <h3 className="font-display text-lg text-[#F6F1E7] mb-1">Backdoor 43</h3>
-                <p className="text-[13px] text-[#C2B9AA]">{isIt ? 'Il bar più piccolo del mondo (4 mq) · Bartender mascherato · Slot privato o take-away 12–18 €.' : 'World’s smallest bar (4 sqm) · Masked bartender · Private slot or window cocktail €12–€18.'}</p>
-              </div>
-              <div className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-5">
-                <p className="font-sans tabular-nums text-[13px] text-[#F6F1E7] uppercase mb-1">03 · PORTA VENEZIA (VIALE PIAVE 1)</p>
-                <h3 className="font-display text-lg text-[#F6F1E7] mb-1">Nottingham Forest</h3>
-                <p className="text-[13px] text-[#C2B9AA]">{isIt ? 'Mixology molecolare di Dario Comini · Niente prenotazione, arrivo entro le 19:15 o dopo le 23:00 (15–20 €).' : 'Dario Comini’s molecular mixology · Walk-in only, arrive by 19:15 or after 23:00 (€15–€20).'}</p>
-              </div>
-              <div className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-5">
-                <p className="font-sans tabular-nums text-[13px] text-[#F6F1E7] uppercase mb-1">04 · NAVIGLI & ISOLA</p>
-                <h3 className="font-display text-lg text-[#F6F1E7] mb-1">Officina, Moebius & Iter</h3>
-                <p className="text-[13px] text-[#C2B9AA]">{isIt ? 'Via Giovenale 7, Via Cappellini 25 e Via Fusetti 1 · Corti vintage, vinili e distillati rari (14–18 €).' : 'Via Giovenale 7, Via Cappellini 25 & Via Fusetti 1 · Vintage courtyards, vinyls & rare spirits (€14–€18).'}</p>
-              </div>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 mb-6">
+              {[
+                {
+                  kicker: '01 · CINQUE GIORNATE',
+                  title: '1930 Secret Bar',
+                  desc: isIt ? 'World’s 50 Best Bars · Ingresso su invito tramite MAG Cafè · Cocktail concettuali 18–25 €.' : 'World’s 50 Best Bars · Invitation access via MAG Cafè · Conceptual cocktails €18–€25.',
+                  img: getGuideCardPhoto4x5('speakeasy-1930', 1),
+                },
+                {
+                  kicker: '02 · NAVIGLI (RIPA TICINESE 43)',
+                  title: 'Backdoor 43',
+                  desc: isIt ? 'Il bar più piccolo del mondo (4 mq) · Bartender mascherato · Slot privato o take-away 12–18 €.' : 'World’s smallest bar (4 sqm) · Masked bartender · Private slot or window cocktail €12–€18.',
+                  img: getGuideCardPhoto4x5('speakeasy-backdoor43', 2),
+                },
+                {
+                  kicker: '03 · PORTA VENEZIA (VIALE PIAVE 1)',
+                  title: 'Nottingham Forest',
+                  desc: isIt ? 'Mixology molecolare di Dario Comini · Niente prenotazione, arrivo entro le 19:15 o dopo le 23:00 (15–20 €).' : 'Dario Comini’s molecular mixology · Walk-in only, arrive by 19:15 or after 23:00 (€15–€20).',
+                  img: getGuideCardPhoto4x5('speakeasy-nottingham', 3),
+                },
+                {
+                  kicker: '04 · NAVIGLI & ISOLA',
+                  title: 'Officina, Moebius & Iter',
+                  desc: isIt ? 'Via Giovenale 7, Via Cappellini 25 e Via Fusetti 1 · Corti vintage, vinili e distillati rari (14–18 €).' : 'Via Giovenale 7, Via Cappellini 25 & Via Fusetti 1 · Vintage courtyards, vinyls & rare spirits (€14–€18).',
+                  img: getGuideCardPhoto4x5('speakeasy-officina', 4),
+                },
+              ].map((sp) => (
+                <div key={sp.title} className="border border-[#F6F1E7]/14 bg-[#0B0A09] overflow-hidden flex flex-col justify-between">
+                  <div>
+                    <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-[#F6F1E7]/14">
+                      <Image
+                        src={sp.img}
+                        alt={sp.title}
+                        width={1080}
+                        height={1350}
+                        sizes="(max-width: 768px) 100vw, 300px"
+                        quality={92}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                    <div className="p-5">
+                      <p className="font-sans tabular-nums text-[12px] text-[#EAE3D5] uppercase mb-1">{sp.kicker}</p>
+                      <h3 className="font-display text-lg text-[#F6F1E7] mb-1">{sp.title}</h3>
+                      <p className="text-[13px] text-[#C2B9AA]">{sp.desc}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
             <Link href={`${lp}/guides/${speakeasySlug}`} prefetch={false} className="inline-flex border border-[#EAE3D5]/45 bg-[#141311] px-6 py-3 font-sans tabular-nums text-[13px] uppercase tracking-[0.04em] text-[#F6F1E7] transition-colors hover:bg-[#EAE3D5] hover:text-[#050505]">
               {isIt ? 'Leggi l’Atlante Completo dei 12 Speakeasy di Milano ↗' : 'Read the Full 12 Milan Speakeasies Atlas ↗'}
@@ -743,22 +827,48 @@ export default function EditorialPageSections({ locale, path }: Props) {
                 ? '7 Interviste Esclusive ai Protagonisti della Notte Milanese: DJ, Door Selector, VIP Host e Bartender'
                 : '7 Exclusive Interviews with Milan Nightlife Insiders: DJs, Door Selectors, VIP Hosts & Bartenders'}
             </h2>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-6">
-              <article className="border border-[#F6F1E7]/14 bg-[#141311] p-5">
-                <p className="font-sans tabular-nums text-[13px] font-bold text-[#C2B9AA] mb-1">INTERVIEW #01 & #02 · CONSOLE</p>
-                <h3 className="font-display text-lg text-[#F6F1E7] mb-2">{isIt ? 'I Resident DJ di Corso Como & I Selettori Techno di Volt' : 'Corso Como Resident DJs & Volt Techno Selectors'}</h3>
-                <p className="text-[13px] text-[#C2B9AA]">{isIt ? 'Come si costruisce la curva energetica della pista tra Afro House, vocal edit commerciali e Melodic Techno fino alle 05:00.' : 'How resident selectors build the dancefloor arc from Afro House and vocal edits to 05:00 Melodic Techno.'}</p>
-              </article>
-              <article className="border border-[#F6F1E7]/14 bg-[#141311] p-5">
-                <p className="font-sans tabular-nums text-[13px] font-bold text-[#C2B9AA] mb-1">INTERVIEW #03 & #04 · VELVET ROPE & PRIVÉ</p>
-                <h3 className="font-display text-lg text-[#F6F1E7] mb-2">{isIt ? 'Head Door Selector & Direttrice Tavoli VIP' : 'Head Door Selector & Senior VIP Table Host'}</h3>
-                <p className="text-[13px] text-[#C2B9AA]">{isIt ? 'Cosa guardano davvero i selezionatori nei primi 5 secondi in fila e come funziona l’accoglienza dei tavoli da 1.000 a 5.000 €.' : 'What door selectors evaluate in the first 5 seconds and how €1,000–€5,000 Super Privé tables are hosted.'}</p>
-              </article>
-              <article className="border border-[#F6F1E7]/14 bg-[#141311] p-5">
-                <p className="font-sans tabular-nums text-[13px] font-bold text-[#C2B9AA] mb-1">INTERVIEW #05, #06 & #07 · FORMAT</p>
-                <h3 className="font-display text-lg text-[#F6F1E7] mb-2">{isIt ? 'Speakeasy Mixologist, Dinner Show & Notti Universitarie' : 'Speakeasy Mixologist, Dinner Shows & University Nights'}</h3>
-                <p className="text-[13px] text-[#C2B9AA]">{isIt ? 'Dietro le quinte delle cene cantate milanesi e dei mercoledì universitari Bocconi, Cattolica, Politecnico e NABA.' : 'Behind the scenes of Milan’s singing dinner shows and Bocconi, Cattolica, Politecnico & NABA student nights.'}</p>
-              </article>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3 mb-6">
+              {[
+                {
+                  kicker: 'INTERVIEW #01 & #02 · CONSOLE',
+                  title: isIt ? 'I Resident DJ di Corso Como & I Selettori Techno di Volt' : 'Corso Como Resident DJs & Volt Techno Selectors',
+                  desc: isIt ? 'Come si costruisce la curva energetica della pista tra Afro House, vocal edit commerciali e Melodic Techno fino alle 05:00.' : 'How resident selectors build the dancefloor arc from Afro House and vocal edits to 05:00 Melodic Techno.',
+                  img: getGuideCardPhoto4x5('interview-console', 5),
+                },
+                {
+                  kicker: 'INTERVIEW #03 & #04 · VELVET ROPE & PRIVÉ',
+                  title: isIt ? 'Head Door Selector & Direttrice Tavoli VIP' : 'Head Door Selector & Senior VIP Table Host',
+                  desc: isIt ? 'Cosa guardano davvero i selezionatori nei primi 5 secondi in fila e come funziona l’accoglienza dei tavoli da 1.000 a 5.000 €.' : 'What door selectors evaluate in the first 5 seconds and how €1,000–€5,000 Super Privé tables are hosted.',
+                  img: getGuideCardPhoto4x5('interview-velvet-rope', 6),
+                },
+                {
+                  kicker: 'INTERVIEW #05, #06 & #07 · FORMAT',
+                  title: isIt ? 'Speakeasy Mixologist, Dinner Show & Notti Universitarie' : 'Speakeasy Mixologist, Dinner Shows & University Nights',
+                  desc: isIt ? 'Dietro le quinte delle cene cantate milanesi e dei mercoledì universitari Bocconi, Cattolica, Politecnico e NABA.' : 'Behind the scenes of Milan’s singing dinner shows and Bocconi, Cattolica, Politecnico & NABA student nights.',
+                  img: getGuideCardPhoto4x5('interview-formats', 7),
+                },
+              ].map((iv) => (
+                <article key={iv.kicker} className="border border-[#F6F1E7]/14 bg-[#141311] overflow-hidden flex flex-col justify-between">
+                  <div>
+                    <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-[#F6F1E7]/14">
+                      <Image
+                        src={iv.img}
+                        alt={iv.title}
+                        width={1080}
+                        height={1350}
+                        sizes="(max-width: 768px) 100vw, 380px"
+                        quality={92}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                    <div className="p-5">
+                      <p className="font-sans tabular-nums text-[12px] font-bold text-[#C2B9AA] mb-1">{iv.kicker}</p>
+                      <h3 className="font-display text-lg text-[#F6F1E7] mb-2">{iv.title}</h3>
+                      <p className="text-[13px] text-[#C2B9AA]">{iv.desc}</p>
+                    </div>
+                  </div>
+                </article>
+              ))}
             </div>
             <Link href={`${lp}/guides/${interviewSlug}`} prefetch={false} className="inline-flex border border-[#EAE3D5]/32 bg-[#050505] px-6 py-3 font-sans tabular-nums text-[13px] uppercase tracking-[0.04em] text-[#F6F1E7] hover:bg-[#3D3830]">
               {isIt ? 'Leggi Tutte le 7 Interviste "The Sound & Faces of Milan" ↗' : 'Read All 7 "The Sound & Faces of Milan" Interviews ↗'}
@@ -773,22 +883,51 @@ export default function EditorialPageSections({ locale, path }: Props) {
             <h2 className="mb-6 font-display text-3xl text-[#F6F1E7] sm:text-4xl">
               {isIt ? 'Guide Pratiche per Lauree, Compleanni, Età (18+/21+/Over 30) e Budget' : 'Practical Guides for Graduations, Birthdays, Age Brackets (18+/21+/30+) & Budgets'}
             </h2>
-            <div className="grid gap-4 sm:grid-cols-3">
-              <Link href={`${lp}/guides/${vipSlug}`} prefetch={false} className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-6 hover:border-[#EAE3D5]">
-                <span className="block font-sans tabular-nums text-[13px] text-[#F6F1E7] mb-1">CLUSTER 01 · VIP & PARTY</span>
-                <h3 className="font-display text-xl text-[#F6F1E7] mb-2">{isIt ? 'Guida Tavoli VIP, Feste di Laurea & Compleanni ↗' : 'VIP Tables, Graduations & Birthday Parties Guide ↗'}</h3>
-                <p className="text-[13px] text-[#C2B9AA]">{isIt ? 'Come scegliere tra Royal Aperitivo riservato, Cena Cantata e Tavolo Pista/Privé con pacchetti bottiglie per 6–25 invitati.' : 'How to choose between reserved Royal Aperitivo, Singing Dinner Show, and VIP Tables for 6–25 guests.'}</p>
-              </Link>
-              <Link href={`${lp}/guides/${dressSlug}`} prefetch={false} className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-6 hover:border-[#EAE3D5]">
-                <span className="block font-sans tabular-nums text-[13px] text-[#F6F1E7] mb-1">CLUSTER 02 · DOOR POLICY</span>
-                <h3 className="font-display text-xl text-[#F6F1E7] mb-2">{isIt ? 'Guida Dress Code Uomo/Donna & Fasce d’Età ↗' : 'Men & Women Dress Code & Age Brackets Guide ↗'}</h3>
-                <p className="text-[13px] text-[#C2B9AA]">{isIt ? 'Cosa indossare nei club 18+, 21+, 23+ e Over 30 tra Corso Como, Sempione e Quadrilatero della Moda.' : 'What to wear across 18+, 21+, 23+, and 30+ clubs in Corso Como, Sempione, and the Fashion Quadrilatero.'}</p>
-              </Link>
-              <Link href={`${lp}/guides/${technoSlug}`} prefetch={false} className="border border-[#F6F1E7]/14 bg-[#0B0A09] p-6 hover:border-[#EAE3D5]">
-                <span className="block font-sans tabular-nums text-[13px] text-[#F6F1E7] mb-1">CLUSTER 03 · ELECTRONIC</span>
-                <h3 className="font-display text-xl text-[#F6F1E7] mb-2">{isIt ? 'Guida Techno, Afro House & Warehouse 2026 ↗' : 'Techno, Afro House & Warehouses 2026 Guide ↗'}</h3>
-                <p className="text-[13px] text-[#C2B9AA]">{isIt ? 'Mappa dei migliori sound system di Milano: Volt, Tunnel Club, Fabrique, Magazzini Generali, Gate e The Sanctuary.' : 'Map of Milan’s top sound systems: Volt, Tunnel Club, Fabrique, Magazzini Generali, Gate, and The Sanctuary.'}</p>
-              </Link>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+              {[
+                {
+                  href: `${lp}/guides/${vipSlug}`,
+                  kicker: 'CLUSTER 01 · VIP & PARTY',
+                  title: isIt ? 'Guida Tavoli VIP, Feste di Laurea & Compleanni ↗' : 'VIP Tables, Graduations & Birthday Parties Guide ↗',
+                  desc: isIt ? 'Come scegliere tra Royal Aperitivo riservato, Cena Cantata e Tavolo Pista/Privé con pacchetti bottiglie per 6–25 invitati.' : 'How to choose between reserved Royal Aperitivo, Singing Dinner Show, and VIP Tables for 6–25 guests.',
+                  img: getGuideCardPhoto4x5('g-vip-tables', 8),
+                },
+                {
+                  href: `${lp}/guides/${dressSlug}`,
+                  kicker: 'CLUSTER 02 · DOOR POLICY',
+                  title: isIt ? 'Guida Dress Code Uomo/Donna & Fasce d’Età ↗' : 'Men & Women Dress Code & Age Brackets Guide ↗',
+                  desc: isIt ? 'Cosa indossare nei club 18+, 21+, 23+ e Over 30 tra Corso Como, Sempione e Quadrilatero della Moda.' : 'What to wear across 18+, 21+, 23+, and 30+ clubs in Corso Como, Sempione, and the Fashion Quadrilatero.',
+                  img: getGuideCardPhoto4x5('g-dress-code', 9),
+                },
+                {
+                  href: `${lp}/guides/${technoSlug}`,
+                  kicker: 'CLUSTER 03 · ELECTRONIC',
+                  title: isIt ? 'Guida Techno, Afro House & Warehouse 2026 ↗' : 'Techno, Afro House & Warehouses 2026 Guide ↗',
+                  desc: isIt ? 'Mappa dei migliori sound system di Milano: Volt, Tunnel Club, Fabrique, Magazzini Generali, Gate e The Sanctuary.' : 'Map of Milan’s top sound systems: Volt, Tunnel Club, Fabrique, Magazzini Generali, Gate, and The Sanctuary.',
+                  img: getGuideCardPhoto4x5('g-techno-2026', 10),
+                },
+              ].map((cl) => (
+                <Link key={cl.href} href={cl.href} prefetch={false} className="border border-[#F6F1E7]/14 bg-[#0B0A09] overflow-hidden hover:border-[#EAE3D5] transition-colors flex flex-col justify-between">
+                  <div>
+                    <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-[#F6F1E7]/14">
+                      <Image
+                        src={cl.img}
+                        alt={cl.title}
+                        width={1080}
+                        height={1350}
+                        sizes="(max-width: 768px) 100vw, 380px"
+                        quality={92}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                    <div className="p-6">
+                      <span className="block font-sans tabular-nums text-[12px] text-[#EAE3D5] mb-1">{cl.kicker}</span>
+                      <h3 className="font-display text-xl text-[#F6F1E7] mb-2">{cl.title}</h3>
+                      <p className="text-[13px] text-[#C2B9AA]">{cl.desc}</p>
+                    </div>
+                  </div>
+                </Link>
+              ))}
             </div>
           </section>
         </div>
@@ -1030,25 +1169,61 @@ export default function EditorialPageSections({ locale, path }: Props) {
           </a>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6 font-sans tabular-nums text-[13px] font-bold uppercase tracking-[0.04em]">
-          <Link href={`${lp}/clubs`} prefetch={false} className="border border-[#EAE3D5]/28 bg-[#141311] p-3.5 text-[#F6F1E7] hover:bg-[#1E1C19] hover:border-[#EAE3D5]/55 transition-colors">
-            {v01.partnerClubsCta} ↗
-          </Link>
-          <Link href={`${lp}/vip-tables`} prefetch={false} className="border border-[#EAE3D5]/28 bg-[#141311] p-3.5 text-[#F6F1E7] hover:bg-[#1E1C19] hover:border-[#EAE3D5]/55 transition-colors">
-            {v01.formulaVip} ↗
-          </Link>
-          <Link href={`${lp}/bottle-prices`} prefetch={false} className="border border-[#EAE3D5]/28 bg-[#141311] p-3.5 text-[#F6F1E7] hover:bg-[#1E1C19] hover:border-[#EAE3D5]/55 transition-colors">
-            {isIt ? 'Listino Bottiglie ↗' : 'Bottle Prices ↗'}
-          </Link>
-          <Link href={`${lp}/guides/${isIt ? 'speakeasy-nascosti-navigli' : 'hidden-speakeasies-navigli'}`} prefetch={false} className="border border-[#EAE3D5]/28 bg-[#141311] p-3.5 text-[#F6F1E7] hover:bg-[#1E1C19] hover:border-[#EAE3D5]/55 transition-colors">
-            {isIt ? '12 Speakeasy Segreti ↗' : '12 Secret Speakeasies ↗'}
-          </Link>
-          <Link href={`${lp}/guides/${isIt ? 'intervista-sound-of-milan' : 'interview-sound-of-milan'}`} prefetch={false} className="border border-[#EAE3D5]/28 bg-[#141311] p-3.5 text-[#F6F1E7] hover:bg-[#1E1C19] hover:border-[#EAE3D5]/55 transition-colors">
-            {isIt ? '7 Interviste Insider ↗' : '7 Insider Interviews ↗'}
-          </Link>
-          <Link href={`${lp}/events/special`} prefetch={false} className="border border-[#EAE3D5]/28 bg-[#141311] p-3.5 text-[#F6F1E7] hover:bg-[#1E1C19] hover:border-[#EAE3D5]/55 transition-colors">
-            {isIt ? 'Eventi Speciali ↗' : 'Special Events ↗'}
-          </Link>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 font-sans tabular-nums text-[13px] font-bold uppercase tracking-[0.04em]">
+          {[
+            {
+              href: `${lp}/clubs`,
+              label: `${v01.partnerClubsCta} ↗`,
+              img: '/images/events/cards-4x5/partner-clubs/just-me-milano.webp',
+            },
+            {
+              href: `${lp}/vip-tables`,
+              label: `${v01.formulaVip} ↗`,
+              img: '/images/events/cards-4x5/pillars/guide-03.webp',
+            },
+            {
+              href: `${lp}/bottle-prices`,
+              label: isIt ? 'Listino Bottiglie ↗' : 'Bottle Prices ↗',
+              img: '/images/events/cards-4x5/partner-clubs/armani-prive-milano.webp',
+            },
+            {
+              href: `${lp}/guides/${isIt ? 'speakeasy-nascosti-navigli' : 'hidden-speakeasies-navigli'}`,
+              label: isIt ? '12 Speakeasy Segreti ↗' : '12 Secret Speakeasies ↗',
+              img: '/images/events/cards-4x5/pillars/guide-02.webp',
+            },
+            {
+              href: `${lp}/guides/${isIt ? 'intervista-sound-of-milan' : 'interview-sound-of-milan'}`,
+              label: isIt ? '7 Interviste Insider ↗' : '7 Insider Interviews ↗',
+              img: '/images/events/cards-4x5/pillars/guide-04.webp',
+            },
+            {
+              href: `${lp}/events/special`,
+              label: isIt ? 'Eventi Speciali ↗' : 'Special Events ↗',
+              img: '/images/events/cards-4x5/capodanno-2027-posters/capodanno-pineta-milano.webp',
+            },
+          ].map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              prefetch={false}
+              className="group flex flex-col justify-between overflow-hidden border border-[#EAE3D5]/28 bg-[#141311] text-[#F6F1E7] hover:bg-[#1E1C19] hover:border-[#EAE3D5]/55 transition-colors"
+            >
+              <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-[#F6F1E7]/14">
+                <Image
+                  src={item.img}
+                  alt={item.label}
+                  width={1080}
+                  height={1350}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 220px"
+                  quality={92}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <div className="p-3.5 group-hover:text-[#25D366] transition-colors">
+                {item.label}
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </aside>

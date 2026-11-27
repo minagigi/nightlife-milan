@@ -1,10 +1,10 @@
 {
   "schema_version": "2026-11-25.v1",
   "network": "nightlifemilan.com",
-  "generated_at": "2026-11-27T20:30:00.000Z",
-  "total_entries": 342,
+  "generated_at": "2026-11-28T00:11:47.521848+00:00",
+  "total_entries": 361,
   "official_flyers": 143,
-  "flow_keyart_flyers": 199,
+  "flow_keyart_flyers": 218,
   "entries": {
     "capodanno-2027-posters/capodanno-11clubroom-milano.webp": {
       "source_kind": "flow_keyart_flyer",
@@ -1735,12 +1735,33 @@
       "bytes": 231342,
       "sha256": "e9539b3b485c7de68a087085e5156ac36ce05d6fa0d25b6445e675754da904d0"
     },
+    "weekly-posters/amnesia-resident-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 179924,
+      "sha256": "0f62673e7f146ee172862a36785692bfd5ffd24093b65074492a3514e7544eb7"
+    },
+    "weekly-posters/apollo-club-resident-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 248548,
+      "sha256": "11cc505483398d18092a34f9f5f3ec839dfc027e0c199543687bcb50d660f72d"
+    },
     "weekly-posters/aria-thursday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
       "bytes": 274016,
       "sha256": "dd9419ef80b219a21306a405a5aa17f3671815b14b8cd8476c222904ef539d9e"
+    },
+    "weekly-posters/armani-prive-resident-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 133768,
+      "sha256": "857576dc65a4b4898f8efed0e002055c25e6fdb6f6c867f30224b6f201ead36d"
     },
     "weekly-posters/bergamo-brescia-hub-2026.webp": {
       "source_kind": "flow_keyart_flyer",
@@ -1798,12 +1819,26 @@
       "bytes": 246090,
       "sha256": "0055b351eda64aaedd60f6317ab6c24fb38eacba34148b9a97192dad8278098e"
     },
+    "weekly-posters/ceresio7-resident-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 133816,
+      "sha256": "73ea20a75c24d912fdc4374f8505a0b0421fa75ecce260df3ea0c1941b48b8ab"
+    },
     "weekly-posters/check-love-pineta-2026-12-04.webp": {
       "source_kind": "official_flyer",
       "width": 1080,
       "height": 1350,
       "bytes": 153834,
       "sha256": "3a13ba222c1db37d56ad12ef189d2b01f13c396058cf3cc710dc83014978e963"
+    },
+    "weekly-posters/church81-resident-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 150762,
+      "sha256": "7663147fd6036eacdc52ab9c014dc2e5a30664a841407be7a41edf7eb2ffc471"
     },
     "weekly-posters/dazi-milano-weekly.webp": {
       "source_kind": "flow_keyart_flyer",
@@ -1812,12 +1847,33 @@
       "bytes": 172440,
       "sha256": "8022f46eddd063df88be4449c8ce3d860112dacebb0710165d7decad69b1527c"
     },
+    "weekly-posters/dock22-resident-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 189360,
+      "sha256": "e4712ba83d390d6df81e47efc5e45f9220c4adb137291538ff0e28cf6c666b25"
+    },
     "weekly-posters/fabrique-20261204-holy-priest.webp": {
       "source_kind": "official_flyer",
       "width": 1080,
       "height": 1350,
       "bytes": 128302,
       "sha256": "1fb3011ccd4ab5ee00a0a5906e23bc6f57effd09911e55d3add922632762ce5c"
+    },
+    "weekly-posters/fabrique-resident-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 213420,
+      "sha256": "5cbd57656ec44a9b34f35025cf903df3daabf4ae8a0081ed4eb6f556647f775e"
+    },
+    "weekly-posters/gate-milano-resident-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 172900,
+      "sha256": "6ad2af45380e39f6de641faad9db59832b49f65427e2b253743002872e073514"
     },
     "weekly-posters/gattopardo-milano-weekly.webp": {
       "source_kind": "flow_keyart_flyer",
@@ -1833,6 +1889,13 @@
       "bytes": 261614,
       "sha256": "23a364638a019095955b251d164a6d60d854313e91775a38ae6c01ded6581d79"
     },
+    "weekly-posters/justme-garda-resident-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 206020,
+      "sha256": "46b239b5db8a84feca3ebcca87e74f54a12efba274ca4f4c5b3bb1d8709a2b39"
+    },
     "weekly-posters/justme-wednesday-club-campanini.webp": {
       "source_kind": "official_flyer",
       "width": 1080,
@@ -1846,6 +1909,13 @@
       "height": 1350,
       "bytes": 87416,
       "sha256": "56dfdfb26571265cc4f21e755f2dc3917c458c028b1bee1d8d6d48bfdbdda5d5"
+    },
+    "weekly-posters/loolapaloosa-resident-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 228872,
+      "sha256": "025ced78f9dd29201010facd0c84ae5b210ff5065b5bfb2b705a98ba0acaf658"
     },
     "weekly-posters/magazzini-20261203-entropia.webp": {
       "source_kind": "official_flyer",
@@ -1881,6 +1951,13 @@
       "height": 1350,
       "bytes": 218352,
       "sha256": "787f19ee990b39cf09434760c38e21935a51056d19c81ce7e902d2b56c6d975b"
+    },
+    "weekly-posters/magazzini-resident-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 218148,
+      "sha256": "91012cd975341a1f79b22aee4934f21de63af1b83574b728932e6bf5f7aab188"
     },
     "weekly-posters/mib-friday-billions.webp": {
       "source_kind": "flow_keyart_flyer",
@@ -1930,6 +2007,13 @@
       "height": 1350,
       "bytes": 237068,
       "sha256": "ca0d5ab6757fb79fcd907f438beb791fc4a51df66fbbb279e41d8f5690ddcb2a"
+    },
+    "weekly-posters/pelledoca-resident-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 240588,
+      "sha256": "2f54e467bf93dd82e194e14622beea517a89344f71c98b9bfa1aeebfd6595857"
     },
     "weekly-posters/philipps-dinnershow.webp": {
       "source_kind": "flow_keyart_flyer",
@@ -2057,6 +2141,13 @@
       "bytes": 152824,
       "sha256": "e86339c809904a8c545af5c45f13b1d215bef2dd6612b865a391a0aba88c0354"
     },
+    "weekly-posters/radio-rooftop-resident-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 157554,
+      "sha256": "1b6631feb42c3fe41400b4273865c50c2e09eb1b3a85ce7f60b8676883c17cc6"
+    },
     "weekly-posters/repvblic-friday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
@@ -2106,6 +2197,13 @@
       "bytes": 144164,
       "sha256": "d10acca47134b5ce0f74dd53585e7aeb5cca6af88c70d4336e293b3005fbf55a"
     },
+    "weekly-posters/ristorante-torre-resident-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 121296,
+      "sha256": "e2ecd599ac6ff28941b6de0aac11c32871ba3f263a473c629ac64120a75b7b6a"
+    },
     "weekly-posters/setai-bergamo-friday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
@@ -2141,6 +2239,27 @@
       "bytes": 174958,
       "sha256": "2a1c3890083bf0a60b1286e0ba842d4e0c5fb84d49be47f78f0f7ab1c2a17f31"
     },
+    "weekly-posters/terrazza-aperol-resident-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 146970,
+      "sha256": "319997471a1a5ac9163ede7ca5dd85d75d5c567145254c060dcccfdd34b11eed"
+    },
+    "weekly-posters/terrazza-gallia-resident-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 178740,
+      "sha256": "61285ac1eed2c2cd2cea315d54a10095fc077aff0b605ab97c1bd69ca1b1f54d"
+    },
+    "weekly-posters/terrazza-triennale-resident-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 124718,
+      "sha256": "ebb68929ada6a6dc0533413aaf742c9787376d9c426160a60aa33b761b406ecd"
+    },
     "weekly-posters/terrazza21-friday-skyline.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
@@ -2161,6 +2280,13 @@
       "height": 1350,
       "bytes": 225028,
       "sha256": "b40b398d6219fb7c6d11b984c7fc051d9ae86995bbaa89991a940d2e5ab877d9"
+    },
+    "weekly-posters/the-roof-resident-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 182538,
+      "sha256": "94eaaece5a75aa13adedacf13a5670a291d07adee76f54a68819f26eb2ed2318"
     },
     "weekly-posters/theclub-friday-firstclass.webp": {
       "source_kind": "flow_keyart_flyer",
@@ -2231,6 +2357,13 @@
       "height": 1350,
       "bytes": 245032,
       "sha256": "37634bcff985a075727651e8e8173fe0ad6840465fc3fa6a7809bf57255fa87c"
+    },
+    "weekly-posters/volt-club-resident-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 136336,
+      "sha256": "e4c04059622afde130f0ee5583bac65a8996b10cb117ddf977f2f5b6084ad170"
     },
     "weekly-posters/voya-friday.webp": {
       "source_kind": "flow_keyart_flyer",

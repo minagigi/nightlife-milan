@@ -24,6 +24,8 @@ import { getMfwCopy } from '@/lib/mfw/copy';
 import { generatePageBreadcrumbSchema, jsonLdString } from '@/lib/seo';
 import { withWhatsApp } from '@/lib/seoMetadata';
 import { getScarcityAndChatCopy } from '@/lib/i18n/scarcityAndChatCopy';
+import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
+import { resolveCardImageByHref } from '@/lib/siteCardAssets4x5';
 
 const BASE = 'https://nightlifemilan.com';
 export function halloweenItemList(name: string, publicPath: string, cards: readonly OctoberCalendarCard[]) {
@@ -121,9 +123,9 @@ export default async function HalloweenHub({ locale }: { locale: LocaleCode }) {
     {featuredCards.length && selection ? <section className="mx-auto max-w-7xl px-5 lg:px-8" aria-labelledby="halloween-featured-heading" data-halloween-featured>
       <h2 id="halloween-featured-heading" className="font-serif text-3xl font-bold">{selection.featuredHeading}</h2>
       <p className="mt-4 max-w-4xl text-base leading-7 text-white/80">{selection.featuredIntroduction}</p>
-      <ol className="mt-8 grid items-start gap-6 sm:grid-cols-2 xl:grid-cols-4">{featuredCards.map(card => {
+      <ol className="mt-8 grid grid-cols-1 items-start gap-6 md:grid-cols-2 xl:grid-cols-4">{featuredCards.map(card => {
         const details = <>
-          {card.image ? <Image quality={92} src={card.image.src} alt={card.image.alt} title={card.image.alt} width={card.image.width} height={card.image.height} priority={card.id===featuredCards[0].id} sizes="(max-width: 639px) 100vw, (max-width: 1279px) 50vw, 38vw" className="block h-auto w-full bg-black/30 object-contain"/> : null}
+          {card.image ? <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505]"><Image quality={92} src={toCardPoster4x5(card.image.src)} alt={card.image.alt} title={card.image.alt} width={1080} height={1350} priority={card.id===featuredCards[0].id} sizes="(max-width: 768px) 100vw, (max-width: 1279px) 50vw, 38vw" className="h-full w-full object-cover"/></div> : null}
           <div className="p-5"><div className="flex flex-wrap gap-2"><span className="inline-flex rounded-full bg-champagne px-3 py-1 text-sm font-semibold text-black">{selection.recommendedLabel}</span><span className="inline-flex rounded-full border border-[#F6F1E7]/35 bg-[#050505]/90 px-3 py-1 text-xs font-bold uppercase tracking-wider text-[#EAE3D5]" data-selling-fast-badge>{scarcity.almostSoldOutBadge}</span></div><p className="mt-4 text-base text-champagne">{card.dateLabel}</p><p data-halloween-featured-hours={card.id} className="mt-2 text-base text-white/80">{featuredViews.get(card.id)!.labels.hours}: {featuredViews.get(card.id)!.hours}</p><h3 className="mt-3 font-serif text-2xl font-bold leading-tight">{card.title}</h3><p className="mt-3 text-base text-white/80">{card.venueName}</p><p data-halloween-featured-summary={card.id} className="mt-4 text-base leading-7 text-white/75">{card.summary}</p></div>
         </>;
         return <li key={card.id}><article id={halloweenEventAnchor(card.id)} className="overflow-hidden rounded-2xl border border-champagne/30 bg-white/[0.035]" data-no-lightbox="true" data-halloween-featured-card={card.id}>
@@ -155,7 +157,10 @@ export default async function HalloweenHub({ locale }: { locale: LocaleCode }) {
       </div>
     </div>
     <section className="mx-auto mt-16 max-w-5xl px-5 lg:px-8" aria-labelledby="halloween-faq-heading"><h2 id="halloween-faq-heading" className="font-serif text-3xl font-bold">{copy.faqHeading}</h2><div className="mt-8 space-y-8">{body.faqs.map((faq, index) => <article key={faq.question}><h3 id={faqEntries[index].id} className="text-xl font-semibold text-champagne">{faq.question}</h3><p className="mt-2 text-base leading-8 text-white/80">{faq.answer}</p></article>)}</div></section>
-    <aside data-related-navigation="card" className="mx-auto mt-16 max-w-5xl px-5 lg:px-8" aria-labelledby="halloween-related-heading"><h2 id="halloween-related-heading" className="font-serif text-3xl font-bold">{body.h1}</h2><nav aria-label={body.h1}><ul className="mt-6 grid gap-4 sm:grid-cols-2">{cards.map(card => <li key={card.id}><Link href={card.href} prefetch={false} className="inline-flex min-h-11 items-center text-base underline underline-offset-4">{card.title}</Link></li>)}</ul></nav></aside>
+    <aside data-related-navigation="card" className="mx-auto mt-16 max-w-5xl px-5 lg:px-8" aria-labelledby="halloween-related-heading"><h2 id="halloween-related-heading" className="font-serif text-3xl font-bold">{body.h1}</h2><nav aria-label={body.h1}><ul className="mt-6 grid grid-cols-1 gap-5 md:grid-cols-2">{cards.map((card, cIdx) => {
+      const cardPoster = card.image?.src ? toCardPoster4x5(card.image.src) : resolveCardImageByHref(card.href, cIdx);
+      return <li key={card.id}><Link href={card.href} prefetch={false} className="group flex flex-col justify-between overflow-hidden rounded-xl border border-white/12 bg-[#0B0A09] hover:border-champagne/50 transition-colors"><div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-white/10"><Image quality={92} src={cardPoster} alt={card.title} width={1080} height={1350} sizes="(max-width: 768px) 100vw, 460px" className="h-full w-full object-cover" /></div><div className="p-4 text-base font-semibold text-white group-hover:text-champagne transition-colors">{card.title} →</div></Link></li>;
+    })}</ul></nav></aside>
     <EditorialPageSections locale={locale} path={`${localePrefix(locale)}/events/${HALLOWEEN_LEGACY_SLUG}`} />
   </main>;
 }

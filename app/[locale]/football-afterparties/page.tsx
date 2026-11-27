@@ -11,6 +11,7 @@ import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getHubSeoMeta35 } from '@/lib/i18n/hubSeoMeta35';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
 import { CONTACT } from '@/config/contact';
+import { resolveCardImageByHref } from '@/lib/siteCardAssets4x5';
 import {
   Sparkles,
   MapPin,
@@ -1222,70 +1223,39 @@ export default async function FootballAfterpartiesPage({
               : 'Explore venue profiles, bottle menus, panoramic rooftops, and dedicated San Siro matchday guides:'}
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 text-xs sm:text-sm">
-            <Link
-              href={`${lp}/zones/san-siro`}
-              className="p-4 rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex items-center justify-between transition-all"
-            >
-              <span>{isIt ? 'Guida Quartiere San Siro' : 'San Siro District Guide'}</span>
-              <ArrowRight className="w-4 h-4 text-champagne shrink-0" />
-            </Link>
-
-            <Link
-              href={`${lp}/clubs/aria-club-milano`}
-              className="p-4 rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex items-center justify-between transition-all"
-            >
-              <span>{isIt ? 'Aria Club Milano (a 150m)' : 'Aria Club Milano (150m)'}</span>
-              <ArrowRight className="w-4 h-4 text-champagne shrink-0" />
-            </Link>
-
-            <Link
-              href={`${lp}/clubs/just-me-milano`}
-              className="p-4 rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex items-center justify-between transition-all"
-            >
-              <span>{isIt ? 'Just Me Milano (Aperto 7/7)' : 'Just Me Milano (Open 7/7)'}</span>
-              <ArrowRight className="w-4 h-4 text-champagne shrink-0" />
-            </Link>
-
-            <Link
-              href={`${lp}/vip-tables`}
-              className="p-4 rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex items-center justify-between transition-all"
-            >
-              <span>{isIt ? 'Prenotazione Tavoli VIP' : 'VIP Tables Booking'}</span>
-              <ArrowRight className="w-4 h-4 text-champagne shrink-0" />
-            </Link>
-
-            <Link
-              href={`${lp}/bottle-prices`}
-              className="p-4 rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex items-center justify-between transition-all"
-            >
-              <span>{isIt ? 'Listino Prezzi Bottiglie 2026' : '2026 Club Bottle Prices'}</span>
-              <ArrowRight className="w-4 h-4 text-champagne shrink-0" />
-            </Link>
-
-            <Link
-              href={`${lp}/rooftops`}
-              className="p-4 rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex items-center justify-between transition-all"
-            >
-              <span>{isIt ? 'Rooftop & Voya 20° Piano' : 'Rooftops & Voya 20th Floor'}</span>
-              <ArrowRight className="w-4 h-4 text-champagne shrink-0" />
-            </Link>
-
-            <Link
-              href={`${lp}/private-parties`}
-              className="p-4 rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex items-center justify-between transition-all"
-            >
-              <span>{isIt ? 'Eventi Privati & Hospitality' : 'Private Parties & Hospitality'}</span>
-              <ArrowRight className="w-4 h-4 text-champagne shrink-0" />
-            </Link>
-
-            <Link
-              href={`${lp}/guides/san-siro-football-match-afterparties-inter-ac-milan`}
-              className="p-4 rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex items-center justify-between transition-all"
-            >
-              <span>{isIt ? 'Guida Editoriale Terzo Tempo' : 'Editorial Third-Half Guide'}</span>
-              <ArrowRight className="w-4 h-4 text-champagne shrink-0" />
-            </Link>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs sm:text-sm">
+            {[
+              { href: `${lp}/zones/san-siro`, label: isIt ? 'Guida Quartiere San Siro' : 'San Siro District Guide' },
+              { href: `${lp}/clubs/aria-club-milano`, label: isIt ? 'Aria Club Milano (a 150m)' : 'Aria Club Milano (150m)' },
+              { href: `${lp}/clubs/just-me-milano`, label: isIt ? 'Just Me Milano (Aperto 7/7)' : 'Just Me Milano (Open 7/7)' },
+              { href: `${lp}/vip-tables`, label: isIt ? 'Prenotazione Tavoli VIP' : 'VIP Tables Booking' },
+              { href: `${lp}/bottle-prices`, label: isIt ? 'Listino Prezzi Bottiglie 2026' : '2026 Club Bottle Prices' },
+              { href: `${lp}/rooftops`, label: isIt ? 'Rooftop & Voya 20° Piano' : 'Rooftops & Voya 20th Floor' },
+              { href: `${lp}/private-parties`, label: isIt ? 'Eventi Privati & Hospitality' : 'Private Parties & Hospitality' },
+              { href: `${lp}/guides/san-siro-football-match-afterparties-inter-ac-milan`, label: isIt ? 'Guida Editoriale Terzo Tempo' : 'Editorial Third-Half Guide' },
+            ].map((item, idx) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="group overflow-hidden rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex flex-col justify-between transition-all"
+              >
+                <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-white/10">
+                  <Image
+                    src={resolveCardImageByHref(item.href, idx)}
+                    alt={item.label}
+                    width={1080}
+                    height={1350}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 300px"
+                    quality={92}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div className="p-4 flex items-center justify-between gap-2">
+                  <span>{item.label}</span>
+                  <ArrowRight className="w-4 h-4 text-champagne shrink-0" />
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

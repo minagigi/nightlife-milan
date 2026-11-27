@@ -116,7 +116,7 @@ export default function VerticalHubsAndEventsSection({
                     alt={card.title}
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
-                    quality={85}
+                    quality={92}
                     className="object-cover"
                   />
                   <span className="absolute top-3 left-3 bg-[#050505]/92 border border-[#F6F1E7]/25 px-3 py-1 font-mono text-[11px] font-bold uppercase tracking-wider text-[#F6F1E7]">
@@ -246,7 +246,7 @@ export default function VerticalHubsAndEventsSection({
                     alt={ev.title}
                     fill
                     sizes="340px"
-                    quality={85}
+                    quality={92}
                     className="object-cover"
                   />
                   <span className="absolute top-2.5 left-2.5 bg-[#050505]/92 border border-[#F6F1E7]/25 px-2.5 py-0.5 font-mono text-[10px] font-bold uppercase text-[#EAE3D5]">

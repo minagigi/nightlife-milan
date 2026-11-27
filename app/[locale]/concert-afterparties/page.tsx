@@ -14,6 +14,7 @@ import {
 import { seoRobots, seoTitle, withWhatsApp } from '@/lib/seoMetadata';
 import { getHubSeoMeta35 } from '@/lib/i18n/hubSeoMeta35';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
+import { resolveCardImageByHref } from '@/lib/siteCardAssets4x5';
 import {
   Sparkles,
   MapPin,
@@ -959,70 +960,39 @@ export default async function ConcertAfterpartiesPage({
               : 'Explore our 6 priority venue guides, the San Siro Football Afterparty hub, NYE 2027, and Fashion Week:'}
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 text-xs sm:text-sm">
-            <Link
-              href={`${lp}/clubs/aria-club-milano`}
-              className="p-4 rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex items-center justify-between transition-all"
-            >
-              <span>{isIt ? '3. Aria Club (150m San Siro)' : '3. Aria Club (150m San Siro)'}</span>
-              <ArrowRight className="w-4 h-4 text-champagne shrink-0" />
-            </Link>
-
-            <Link
-              href={`${lp}/clubs/just-me-milano`}
-              className="p-4 rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex items-center justify-between transition-all"
-            >
-              <span>{isIt ? '1. Just Me Milano (Aperto 7/7)' : '1. Just Me Milano (Open 7/7)'}</span>
-              <ArrowRight className="w-4 h-4 text-champagne shrink-0" />
-            </Link>
-
-            <Link
-              href={`${lp}/clubs/pineta-club-milano`}
-              className="p-4 rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex items-center justify-between transition-all"
-            >
-              <span>{isIt ? '2. Pineta Club Corso Como' : '2. Pineta Club Corso Como'}</span>
-              <ArrowRight className="w-4 h-4 text-champagne shrink-0" />
-            </Link>
-
-            <Link
-              href={`${lp}/football-afterparties`}
-              className="p-4 rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex items-center justify-between transition-all"
-            >
-              <span>{isIt ? 'Dopo-Partita Calcio San Siro' : 'San Siro Football Afterparties'}</span>
-              <ArrowRight className="w-4 h-4 text-champagne shrink-0" />
-            </Link>
-
-            <Link
-              href={`${lp}/zones/san-siro`}
-              className="p-4 rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex items-center justify-between transition-all"
-            >
-              <span>{isIt ? 'Guida Quartiere San Siro' : 'San Siro District Guide'}</span>
-              <ArrowRight className="w-4 h-4 text-champagne shrink-0" />
-            </Link>
-
-            <Link
-              href={`${lp}/vip-tables`}
-              className="p-4 rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex items-center justify-between transition-all"
-            >
-              <span>{isIt ? 'Prenotazione Tavoli VIP' : 'VIP Tables Booking'}</span>
-              <ArrowRight className="w-4 h-4 text-champagne shrink-0" />
-            </Link>
-
-            <Link
-              href={`${lp}/events/capodanno-2027`}
-              className="p-4 rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex items-center justify-between transition-all"
-            >
-              <span>{isIt ? 'Capodanno Milano 2027 (NYE)' : 'New Years Eve Milan 2027'}</span>
-              <ArrowRight className="w-4 h-4 text-champagne shrink-0" />
-            </Link>
-
-            <Link
-              href={`${lp}/fashion-week`}
-              className="p-4 rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex items-center justify-between transition-all"
-            >
-              <span>{isIt ? 'Milano Fashion Week & F1' : 'Milan Fashion Week & F1'}</span>
-              <ArrowRight className="w-4 h-4 text-champagne shrink-0" />
-            </Link>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs sm:text-sm">
+            {[
+              { href: `${lp}/clubs/aria-club-milano`, label: '3. Aria Club (150m San Siro)' },
+              { href: `${lp}/clubs/just-me-milano`, label: isIt ? '1. Just Me Milano (Aperto 7/7)' : '1. Just Me Milano (Open 7/7)' },
+              { href: `${lp}/clubs/pineta-club-milano`, label: '2. Pineta Club Corso Como' },
+              { href: `${lp}/football-afterparties`, label: isIt ? 'Dopo-Partita Calcio San Siro' : 'San Siro Football Afterparties' },
+              { href: `${lp}/zones/san-siro`, label: isIt ? 'Guida Quartiere San Siro' : 'San Siro District Guide' },
+              { href: `${lp}/vip-tables`, label: isIt ? 'Prenotazione Tavoli VIP' : 'VIP Tables Booking' },
+              { href: `${lp}/events/capodanno-2027`, label: isIt ? 'Capodanno Milano 2027 (NYE)' : 'New Years Eve Milan 2027' },
+              { href: `${lp}/fashion-week`, label: isIt ? 'Milano Fashion Week & F1' : 'Milan Fashion Week & F1' },
+            ].map((item, idx) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="group overflow-hidden rounded-xl border border-white/10 bg-black/45 hover:border-champagne text-white font-semibold flex flex-col justify-between transition-all"
+              >
+                <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-white/10">
+                  <Image
+                    src={resolveCardImageByHref(item.href, idx)}
+                    alt={item.label}
+                    width={1080}
+                    height={1350}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 300px"
+                    quality={92}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div className="p-4 flex items-center justify-between gap-2">
+                  <span>{item.label}</span>
+                  <ArrowRight className="w-4 h-4 text-champagne shrink-0" />
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>

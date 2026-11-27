@@ -14,6 +14,7 @@ import { WeeklyNightlifeNavigator, VipQuoteCalculator } from '@/components/Night
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
+import { getVenueCardPhoto4x5 } from '@/lib/siteCardAssets4x5';
 
 export const dynamic = 'force-dynamic';
 
@@ -453,45 +454,65 @@ export default async function EventsThisWeekPage({ params }: Props) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {PRIORITY_SIX_WEEK.map((club) => (
-              <div
-                key={club.slug}
-                className="rounded-xl border border-white/10 bg-white/[0.02] p-6 flex flex-col justify-between hover:border-champagne/40 transition-colors"
-              >
-                <div>
-                  <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className="px-2.5 py-0.5 rounded-full bg-champagne text-black text-[10px] font-bold uppercase tracking-wider">
-                      #{club.rank} {tr(locale, 'Priority', 'Priorità')}
-                    </span>
-                    <span className="text-xs text-champagne/80 font-mono">
-                      {isIt ? club.scheduleIt : club.scheduleEn}
-                    </span>
+            {PRIORITY_SIX_WEEK.map((club) => {
+              const isAria = club.slug === 'aria-club-milano';
+              const curMonth = Number(romeDayKeyOffset(0).slice(5, 7));
+              const ariaWinterClosed = isAria && (curMonth < 5 || curMonth > 9);
+              return (
+                <div
+                  key={club.slug}
+                  className="rounded-xl border border-white/10 bg-white/[0.02] overflow-hidden flex flex-col justify-between hover:border-champagne/40 transition-colors"
+                >
+                  <div>
+                    <Link href={`${lp}/clubs/${club.slug}`} className="block">
+                      <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-white/10">
+                        <Image
+                          src={getVenueCardPhoto4x5({ slugs: { en: club.slug } })}
+                          alt={club.name}
+                          width={1080}
+                          height={1350}
+                          sizes="(max-width: 768px) 100vw, 480px"
+                          quality={92}
+                          className="h-full w-full object-cover"
+                        />
+                        <span className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-champagne text-black text-[10px] font-bold uppercase tracking-wider">
+                          #{club.rank} {tr(locale, 'Priority', 'Priorità')}
+                        </span>
+                      </div>
+                    </Link>
+                    <div className="p-6 pb-0">
+                      <span className="block text-xs text-champagne/85 font-mono mb-1.5">
+                        {ariaWinterClosed
+                          ? tr(locale, 'Closed in winter · Open Dec 31 NYE 2027', 'Chiuso in inverno · Aperto 31 Dicembre Capodanno 2027')
+                          : isIt ? club.scheduleIt : club.scheduleEn}
+                      </span>
+                      <h3 className="font-serif text-2xl text-white font-bold mb-1">{club.name}</h3>
+                      <p className="text-xs text-white/50 mb-3">{club.zone}</p>
+                      <p className="text-xs text-champagne font-mono mb-2">
+                        {isIt ? club.hoursIt : club.hoursEn}
+                      </p>
+                      <p className="text-xs text-white/75 mb-4">{isIt ? club.pricesIt : club.pricesEn}</p>
+                    </div>
                   </div>
-                  <h3 className="font-serif text-2xl text-white font-bold mb-1">{club.name}</h3>
-                  <p className="text-xs text-white/50 mb-3">{club.zone}</p>
-                  <p className="text-xs text-champagne font-mono mb-2">
-                    {isIt ? club.hoursIt : club.hoursEn}
-                  </p>
-                  <p className="text-xs text-white/75 mb-4">{isIt ? club.pricesIt : club.pricesEn}</p>
+                  <div className="mx-6 mb-6 flex items-center gap-3 pt-3 border-t border-white/10">
+                    <Link
+                      href={`${lp}/clubs/${club.slug}`}
+                      className="text-xs font-semibold text-white/80 hover:text-champagne transition-colors"
+                    >
+                      {tr(locale, 'Club Guide →', 'Scheda Club →')}
+                    </Link>
+                    <a
+                      href={getConciergeBookingUrl(locale, club.name, `${lp}/events/this-week`)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="ml-auto px-4 py-2 rounded-full bg-champagne text-black text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
+                    >
+                      WhatsApp +39 351 912 7047
+                    </a>
+                  </div>
                 </div>
-                <div className="flex items-center gap-3 pt-3 border-t border-white/10">
-                  <Link
-                    href={`${lp}/clubs/${club.slug}`}
-                    className="text-xs font-semibold text-white/80 hover:text-champagne transition-colors"
-                  >
-                    {tr(locale, 'Club Guide →', 'Scheda Club →')}
-                  </Link>
-                  <a
-                    href={getConciergeBookingUrl(locale, club.name, `${lp}/events/this-week`)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="ml-auto px-4 py-2 rounded-full bg-champagne text-black text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors"
-                  >
-                    WhatsApp +39 351 912 7047
-                  </a>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
 

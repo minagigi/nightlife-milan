@@ -12,6 +12,7 @@ import { PrioritySixShowcase, VipQuoteCalculator } from '@/components/NightlifeE
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
 import { getConciergeBookingUrl } from '@/lib/conciergeBooking';
+import { toCardPoster4x5 } from '@/lib/cardPoster4x5';
 
 export const revalidate = 3600;
 
@@ -403,7 +404,7 @@ export default async function EventsBestPage({ params }: Props) {
                     <h3 className="text-white/50 text-[10px] uppercase tracking-[0.25em] mb-3">
                       {tr(locale, 'Upcoming Special Events', 'Prossimi Eventi Speciali')}
                     </h3>
-                    <div className="space-y-2">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       {upcoming.slice(0, 3).map((event) => {
                         const title = getLocalizedText(event.localizedContent.title, locale);
                         const slug = getLocalizedText(event.localizedContent.slug, locale);
@@ -413,19 +414,43 @@ export default async function EventsBestPage({ params }: Props) {
                           month: 'short',
                           timeZone: 'Europe/Rome',
                         });
+                        const poster = toCardPoster4x5(
+                          event.image && !event.image.startsWith('/images/venues/')
+                            ? event.image
+                            : '/images/events/cards-4x5/weekly-posters/justme-saturday.webp',
+                        );
                         return (
                           <Link
                             key={event.id}
                             href={`${lp}/events/${slug}`}
-                            className="flex items-center justify-between py-2.5 px-3 rounded-lg bg-champagne/[0.05] border border-champagne/15 hover:border-champagne/40 transition-colors group"
+                            className="flex flex-col justify-between overflow-hidden rounded-lg bg-[#0B0A09] border border-champagne/20 hover:border-champagne/55 transition-colors group"
                           >
-                            <div className="flex items-center gap-3">
-                              <span className="text-champagne/50 text-xs font-mono w-28 shrink-0">{dateStr}</span>
-                              <span className="text-white/80 text-sm group-hover:text-champagne transition-colors">{title}</span>
+                            <div>
+                              <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-white/10">
+                                <Image
+                                  src={poster}
+                                  alt={title}
+                                  width={1080}
+                                  height={1350}
+                                  sizes="(max-width: 768px) 100vw, 320px"
+                                  quality={92}
+                                  className="h-full w-full object-cover"
+                                />
+                                <span className="absolute top-2.5 left-2.5 bg-[#050505]/92 border border-white/25 px-2.5 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-champagne">
+                                  {dateStr}
+                                </span>
+                                {event.pricing.entry !== null && event.pricing.entry > 0 && (
+                                  <span className="absolute top-2.5 right-2.5 bg-[#F6F1E7] px-2 py-0.5 font-mono text-[11px] font-extrabold text-[#050505]">
+                                    €{event.pricing.entry}
+                                  </span>
+                                )}
+                              </div>
+                              <div className="p-3.5">
+                                <span className="block font-serif text-sm font-semibold text-white group-hover:text-champagne transition-colors line-clamp-2">
+                                  {title}
+                                </span>
+                              </div>
                             </div>
-                            {event.pricing.entry !== null && event.pricing.entry > 0 && (
-                              <span className="text-champagne/50 text-xs shrink-0 ml-2">€{event.pricing.entry}</span>
-                            )}
                           </Link>
                         );
                       })}

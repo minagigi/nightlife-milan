@@ -108,9 +108,13 @@ test('Catalog excludes 55-milano & TOM, includes all 8 confirmed Capodanno + hol
     assert.ok(venue, `Missing venue spec for SKU ${sku.id}`);
     // Single Pass channel always applies 20% fee
     assert.equal(getSkuFeeRate(sku, 'single-pass'), SINGLE_PASS_FEE_RATE);
-    // Venue direct channel: 0% for ALL partner formulas, 20% for non-partner venues
-    const expectedVenueRate = venue.partner ? 0 : TERRAZZA_DUOMO_FEE_RATE;
-    assert.equal(getSkuFeeRate(sku, 'venue'), expectedVenueRate, `Wrong venue fee rate for ${sku.id}`);
+    // Venue direct channel: custom sku/venue feeRate when specified (e.g. Aprica 15%), 0% for partner formulas, 20% for non-partner venues
+    const expectedVenueRate = getSkuFeeRate(sku, 'venue');
+    if (sku.id.startsWith('aprica-')) {
+      assert.equal(expectedVenueRate, 0.15, `Wrong Aprica venue fee rate for ${sku.id}`);
+    } else {
+      assert.equal(expectedVenueRate, venue.partner ? 0 : TERRAZZA_DUOMO_FEE_RATE, `Wrong venue fee rate for ${sku.id}`);
+    }
     const p1 = computeSinglePassPrice(sku.basePriceCents, 1, expectedVenueRate);
     assert.equal(p1.unitFeeCents, Math.round(sku.basePriceCents * expectedVenueRate));
     assert.equal(p1.unitTotalCents, p1.unitBaseCents + p1.unitFeeCents);

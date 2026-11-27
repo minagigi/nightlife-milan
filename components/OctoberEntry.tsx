@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from '@/components/LocalizedLink';
 import { CalendarDays, ArrowRight, Sparkles } from 'lucide-react';
 import { readOctoberHubCopy } from '@/lib/octoberEditorial';
@@ -380,19 +381,51 @@ export function HomeHalloweenAndCapodannoSections({
           </div>
 
           {/* 4 Hub Principali Capodanno + 12 Categorie */}
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
-            <Link href={capodannoPath(locale)} prefetch={false} className="nlm-pressable bg-[#0B0A09] p-4 text-center text-[13px] font-bold text-[#F6F1E7] hover:bg-[#141311] transition-colors">
-              {isIt ? `Tutti i ${OPEN_CAPODANNO_EVENTS_COUNT} Eventi Ufficiali ↗` : `All ${OPEN_CAPODANNO_EVENTS_COUNT} Official Events ↗`}
-            </Link>
-            <Link href={capodannoCategoryPath('capodanno-speciale', locale)} prefetch={false} className="nlm-pressable border border-[#EAE3D5]/28 bg-[#0B0A09] p-4 text-center text-[13px] font-bold text-[#F6F1E7] hover:border-[#FFFFFF] transition-colors">
-              {isIt ? '16 Speciali, Tram & Terme ↗' : '16 Special, Tram & Spa ↗'}
-            </Link>
-            <Link href={capodannoCategoryPath('capodanno-lombardia', locale)} prefetch={false} className="nlm-pressable border border-[#EAE3D5]/28 bg-[#0B0A09] p-4 text-center text-[13px] font-bold text-[#F6F1E7] hover:border-[#FFFFFF] transition-colors">
-              {isIt ? 'Tutte le 12 Province ↗' : 'All 12 Provinces ↗'}
-            </Link>
-            <Link href={capodannoCategoryPath('capodanno-in-piazza', locale)} prefetch={false} className="nlm-pressable border border-[#EAE3D5]/28 bg-[#0B0A09] p-4 text-center text-[13px] font-bold text-[#F6F1E7] hover:border-[#FFFFFF] transition-colors">
-              {isIt ? 'Capodanno in Piazza Gratis ↗' : 'Free Public Squares ↗'}
-            </Link>
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              {
+                href: capodannoPath(locale),
+                label: isIt ? `Tutti i ${OPEN_CAPODANNO_EVENTS_COUNT} Eventi Ufficiali ↗` : `All ${OPEN_CAPODANNO_EVENTS_COUNT} Official Events ↗`,
+                img: '/images/events/cards-4x5/capodanno-2027-posters/capodanno-justme-milano-torre-branca.webp',
+              },
+              {
+                href: capodannoCategoryPath('capodanno-speciale', locale),
+                label: isIt ? '16 Speciali, Tram & Terme ↗' : '16 Special, Tram & Spa ↗',
+                img: '/images/events/cards-4x5/capodanno-2027-posters/capodanno-tram-storico-milano.webp',
+              },
+              {
+                href: capodannoCategoryPath('capodanno-lombardia', locale),
+                label: isIt ? 'Tutte le 12 Province ↗' : 'All 12 Provinces ↗',
+                img: '/images/events/cards-4x5/capodanno-2027-posters/capodanno-como-made-club-villa-erba-palace-hotel.webp',
+              },
+              {
+                href: capodannoCategoryPath('capodanno-in-piazza', locale),
+                label: isIt ? 'Capodanno in Piazza Gratis ↗' : 'Free Public Squares ↗',
+                img: '/images/events/cards-4x5/capodanno-2027-posters/capodanno-piazza-duomo-milano.webp',
+              },
+            ].map((hub) => (
+              <Link
+                key={hub.href}
+                href={hub.href}
+                prefetch={false}
+                className="nlm-pressable group flex flex-col justify-between border border-[#EAE3D5]/28 bg-[#0B0A09] overflow-hidden hover:border-[#FFFFFF] transition-colors"
+              >
+                <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-[#F6F1E7]/14">
+                  <Image
+                    src={hub.img}
+                    alt={hub.label}
+                    width={1080}
+                    height={1350}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 320px"
+                    quality={92}
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div className="p-4 text-center text-[13px] font-bold text-[#F6F1E7] group-hover:text-[#25D366] transition-colors">
+                  {hub.label}
+                </div>
+              </Link>
+            ))}
           </div>
 
           <div className="mt-5 pt-5 border-t border-[#F6F1E7]/14 flex flex-wrap gap-2">

@@ -13,6 +13,7 @@ import { getEventDiscoveryItems } from '@/lib/eventDiscovery';
 import { VipQuoteCalculator, EntryFormulaMatrix, PrioritySixShowcase, SanSiroMatchAfterpartyFinder } from '@/components/NightlifeExpansionModules';
 import EditorialPageSections from '@/components/EditorialPageSections';
 import type { LocaleCode } from '@/lib/i18n/locales';
+import { getVenueCardPhoto4x5 } from '@/lib/siteCardAssets4x5';
 
 export type EventIntent = 'international' | 'university-erasmus' | '18-plus' | '21-plus';
 type CoreLocale = 'en' | 'it' | 'es' | 'fr' | 'de' | 'pt';
@@ -340,7 +341,7 @@ export default async function EventIntentLanding({ intent, locale }: { intent: E
           <CalendarDays className="w-7 h-7 text-champagne/60" />
         </div>
         {items.length > 0 ? (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {items.map(({ event, venue }, index) => <EventCard key={event.id} event={event} venue={venue} lang={locale} priority={index < 2} />)}
           </div>
         ) : (
@@ -351,19 +352,44 @@ export default async function EventIntentLanding({ intent, locale }: { intent: E
       <section className="border-y border-white/10 bg-white/[0.025]">
         <div className="max-w-6xl mx-auto px-5 sm:px-8 py-16">
           <h2 className="font-serif text-3xl sm:text-4xl font-bold mb-10">{COMMON.venues[lang]}</h2>
-          <div className="divide-y divide-white/10 border-y border-white/10">
-            {venues.map((venue, idx) => (
-              <article key={venue.id} className="grid md:grid-cols-[80px_1fr_auto] gap-6 py-7 items-center">
-                <div className="h-16 w-16 rounded-2xl border border-champagne/30 bg-champagne/10 flex items-center justify-center">
-                  <span className="font-serif text-2xl font-bold text-champagne">#{idx + 1}</span>
-                </div>
-                <div>
-                  <h3 className="font-serif text-2xl font-bold mb-2">{getLocalizedText(venue.localizedContent.name, locale)}</h3>
-                  <p className="text-white/60 leading-relaxed">{VENUE_SERVICES[venue.id]?.[lang] || getLocalizedText(venue.localizedContent.description, locale)}</p>
-                </div>
-                <Link href={`${lp}/clubs/${getLocalizedText(venue.slugs, locale)}`} className="text-champagne text-sm underline underline-offset-4">{COMMON.details[lang]}</Link>
-              </article>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {venues.map((venue, idx) => {
+              const vName = getLocalizedText(venue.localizedContent.name, locale);
+              const vHref = `${lp}/clubs/${getLocalizedText(venue.slugs, locale)}`;
+              return (
+                <article key={venue.id} className="border border-white/12 bg-[#0B0A09] overflow-hidden flex flex-col justify-between">
+                  <div>
+                    <Link href={vHref} className="block">
+                      <div data-no-lightbox="true" className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505] border-b border-white/12">
+                        <Image
+                          src={getVenueCardPhoto4x5(venue)}
+                          alt={vName}
+                          width={1080}
+                          height={1350}
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 360px"
+                          quality={92}
+                          className="h-full w-full object-cover"
+                        />
+                        <span className="absolute top-3 left-3 flex h-9 px-3 items-center justify-center rounded-lg border border-champagne/45 bg-[#050505]/90 font-serif text-base font-bold text-champagne">
+                          #{idx + 1}
+                        </span>
+                      </div>
+                    </Link>
+                    <div className="p-5">
+                      <h3 className="font-serif text-2xl font-bold mb-2 text-white">{vName}</h3>
+                      <p className="text-white/65 text-sm leading-relaxed line-clamp-3">
+                        {VENUE_SERVICES[venue.id]?.[lang] || getLocalizedText(venue.localizedContent.description, locale)}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="px-5 pb-5 pt-3 border-t border-white/10">
+                    <Link href={vHref} className="text-champagne text-sm font-semibold underline underline-offset-4">
+                      {COMMON.details[lang]} →
+                    </Link>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
