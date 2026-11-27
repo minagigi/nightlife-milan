@@ -147,7 +147,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '23+', 'Elegant and Fashion-forward', 'House, Commercial and Live Show'),
     image: '/images/events/weekly-posters/justme-wednesday-gentlemen-show.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/wednesday-night-225/249169/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/wednesday-night-229/249243/channel/nightlifemilan-1',
     priority: 100
   },
   {
@@ -171,7 +171,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Just Me Milano', 'Via Luigi Camoens 2, Parco Sempione, Milan', '21+', 'Strictly Elegant', 'Reggaeton, Hip-Hop and Commercial'),
     image: '/images/events/thanksgiving-2026/thanksgiving-justme-milano-2026.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/vida-loca-13/249216/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/thursday-night-349/249244/channel/nightlifemilan-1',
     priority: 100
   },
   {
@@ -293,7 +293,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Pineta Club', 'Via Messina 38, Milan', '25+', 'Elegant and Chic', 'Live Music and Commercial'),
     image: '/images/events/october-2026/243822-fa1698470cb9.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/friday-night-723/243825/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/friday-night-702/249130/channel/nightlifemilan-1',
     priority: 95
   },
   {
@@ -317,7 +317,7 @@ export const weeklyEvents: WeeklyEvent[] = [
     },
     faqs: defaultFaqs('Pineta Club', 'Via Messina 38, Milan', '25+', 'Strictly Elegant', 'Live Music and Commercial'),
     image: '/images/events/october-2026/243815-e33432d48dd4.webp',
-    xceedLink: 'https://xceed.me/en/milano/event/saturday-night-777/243831/channel/nightlifemilan-1',
+    xceedLink: 'https://xceed.me/en/milano/event/saturday-night-767/249139/channel/nightlifemilan-1',
     priority: 95
   },
 

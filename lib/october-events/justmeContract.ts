@@ -24,11 +24,11 @@ type Page = {
 };
 
 const BODY_IMAGES: Record<string,{src:string;width:number;height:number}> = {
-  exterior: {src:'/images/events/october-2026/justme-body/justme-venue-exterior.webp',width:1000,height:563},
-  interior: {src:'/images/events/october-2026/justme-body/justme-restaurant-interior.webp',width:1600,height:1067},
-  cocktailPortrait: {src:'/images/events/october-2026/justme-body/justme-cocktail-portrait.webp',width:480,height:600},
-  aperitifCocktail: {src:'/images/events/october-2026/justme-body/justme-aperitif-cocktail.webp',width:1080,height:1080},
-  tower: {src:'/images/events/october-2026/justme-body/torre-branca-night.webp',width:1300,height:1300},
+  exterior: {src:'/images/events/october-2026/justme-body/justme-venue-exterior.webp',width:1080,height:1350},
+  interior: {src:'/images/events/october-2026/justme-body/justme-restaurant-interior.webp',width:1080,height:1350},
+  cocktailPortrait: {src:'/images/events/october-2026/justme-body/justme-cocktail-portrait.webp',width:1080,height:1350},
+  aperitifCocktail: {src:'/images/events/october-2026/justme-body/justme-aperitif-cocktail.webp',width:1080,height:1350},
+  tower: {src:'/images/events/october-2026/justme-body/torre-branca-night.webp',width:1080,height:1350},
 };
 
 export function getJustmePage(event:OctoberEventRecord,locale:LocaleCode):Page|null {

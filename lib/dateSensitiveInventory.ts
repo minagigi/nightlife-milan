@@ -19,6 +19,8 @@ import {
   JUST_SINGING_RAIN_START_ISO,
   justSingingRainSlug,
 } from './just-singing-rain/justme35';
+import { christmasVoyaSlug, getChristmasVoyaContent } from './christmas/voya35';
+import { AXEL_GROUP_DATED_EVENTS, getAxelGroupEventLocalized } from './axel-group-events/events35';
 
 export type DateSensitiveEventPresentation = {
   id: string;
@@ -45,7 +47,7 @@ export type DateSensitiveCarouselPresentation = DateSensitiveEventPresentation &
 };
 
 const ACTIVE_FLOOR_ROME_DAY = '2026-11-02';
-const MAX_SERIALIZED_EVENTS = 120;
+const MAX_SERIALIZED_EVENTS = 650;
 const ROME_DAY_FMT = new Intl.DateTimeFormat('en-CA', {
   timeZone: 'Europe/Rome',
   year: 'numeric',
@@ -169,9 +171,6 @@ function getPriorityVenueSupplementalPresentations(locale: string, venueId?: str
     const dow = dayOfWeekForKey(dayKey);
     const candidates = weeklyEvents.filter((we) => supplementalClubs.has(we.clubSlug) && we.dayOfWeek === dow);
     for (const we of candidates) {
-      if (we.id === 'justme-wednesday' && dayKey === '2026-11-25') continue;
-      if (we.id === 'justme-thursday' && dayKey >= '2026-11-26') continue;
-      if (we.id === 'justme-friday' && dayKey === '2026-11-27') continue;
       const resolvedVenueId = `v-${we.clubSlug}`;
       if (venueId && normVenueId(venueId) !== resolvedVenueId) continue;
       if (octoberVenueDays.has(`${resolvedVenueId}|${dayKey}`)) continue;
@@ -211,6 +210,63 @@ function getPriorityVenueSupplementalPresentations(locale: string, venueId?: str
   return out;
 }
 
+function getSpecialModulePresentations(locale: string, venueId?: string, includeOutsideMilan = true): DateSensitiveEventPresentation[] {
+  if (!isEnabledLocale(locale)) return [];
+  const out: DateSensitiveEventPresentation[] = [];
+
+  // 1. Voya Rooftop Christmas Day (25 December 2026 · €100 official menu)
+  const xmasStart = '2026-12-25T12:30:00+01:00';
+  const xmasEnd = '2026-12-26T02:00:00+01:00';
+  if ((!venueId || normVenueId(venueId) === 'v-voya') && isCurrentOrUpcomingOccurrence(xmasStart, xmasEnd)) {
+    const xmas = getChristmasVoyaContent(locale);
+    const labels = formatEventPresentationLabels({ dateISO: xmasStart, price: 100, currency: 'EUR', locale });
+    out.push({
+      id: 'christmas-voya-rooftop-2026-12-25',
+      venueId: 'v-voya',
+      dateISO: xmasStart,
+      endDateISO: xmasEnd,
+      title: xmas.title,
+      venueName: 'Voya Rooftop',
+      slug: christmasVoyaSlug(locale),
+      image: xmas.posterSrc,
+      price: 100,
+      currency: 'EUR',
+      labels,
+      verificationExpiresAt: null,
+      affiliateUrl: null,
+    });
+  }
+
+  // 2. Axel Group Dated Events (Check&Love @ Pineta Milano + Zangola Madonna di Campiglio winter calendar)
+  for (const seed of AXEL_GROUP_DATED_EVENTS) {
+    const isMilan = seed.venueType === 'pineta';
+    if (!isMilan && !includeOutsideMilan) continue;
+    const effectiveVenueId = isMilan ? 'v-pineta' : 'v-zangola-campiglio';
+    if (venueId && normVenueId(venueId) !== effectiveVenueId) continue;
+    if (!isCurrentOrUpcomingOccurrence(seed.startISO, seed.endISO)) continue;
+    const detail = getAxelGroupEventLocalized(seed.id, locale);
+    if (!detail) continue;
+    const labels = formatEventPresentationLabels({ dateISO: seed.startISO, price: seed.entryEur, currency: 'EUR', locale });
+    out.push({
+      id: `axelgroup-${seed.id}`,
+      venueId: effectiveVenueId,
+      dateISO: seed.startISO,
+      endDateISO: seed.endISO,
+      title: detail.h1,
+      venueName: seed.venueName,
+      slug: detail.slug,
+      image: seed.posterSrc,
+      price: seed.entryEur,
+      currency: 'EUR',
+      labels,
+      verificationExpiresAt: null,
+      affiliateUrl: null,
+    });
+  }
+
+  return out;
+}
+
 export async function getDateSensitiveInventory(locale: string, venueId?: string): Promise<DateSensitiveEventPresentation[]> {
   const activeFlag = isJustSingingRainActive() ? 'rain1' : 'rain0';
   const cacheKey = `${locale}|${venueId ? normVenueId(venueId) : ''}|${activeFlag}`;
@@ -219,8 +275,9 @@ export async function getDateSensitiveInventory(locale: string, venueId?: string
 
   const promise = (async () => {
     const october = await getOctoberDateSensitivePresentations(locale, venueId);
+    const specials = getSpecialModulePresentations(locale, venueId, !venueId);
     const supplemental = getPriorityVenueSupplementalPresentations(locale, venueId);
-    return [...october, ...supplemental]
+    return [...october, ...specials, ...supplemental]
       .sort(
         (left, right) =>
           getVenuePriorityRank(left.venueId || left.venueName) - getVenuePriorityRank(right.venueId || right.venueName) ||

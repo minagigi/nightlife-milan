@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import type { NextResponse } from 'next/server';
 
 export const EVENTBRITE_DISCONNECTED_CODE = 'EVENTBRITE_DISCONNECTED' as const;
 export const EVENTBRITE_DISCONNECTED_MESSAGE =
@@ -8,7 +8,7 @@ export const EVENTBRITE_DISCONNECTED_MESSAGE =
  * Shared 410 Gone payload returned by every disconnected Eventbrite endpoint.
  */
 export function eventbriteGoneResponse(route: string): NextResponse {
-  return NextResponse.json(
+  return Response.json(
     {
       ok: false,
       disconnected: true,
@@ -24,5 +24,5 @@ export function eventbriteGoneResponse(route: string): NextResponse {
         'X-Robots-Tag': 'noindex, nofollow, nosnippet',
       },
     },
-  );
+  ) as NextResponse;
 }

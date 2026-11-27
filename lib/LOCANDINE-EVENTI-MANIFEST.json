@@ -1,10 +1,10 @@
 {
   "schema_version": "2026-11-25.v1",
   "network": "nightlifemilan.com",
-  "generated_at": "2026-11-27T19:53:39.103538+00:00",
-  "total_entries": 303,
-  "official_flyers": 118,
-  "flow_keyart_flyers": 185,
+  "generated_at": "2026-11-27T20:30:00.000Z",
+  "total_entries": 342,
+  "official_flyers": 143,
+  "flow_keyart_flyers": 199,
   "entries": {
     "capodanno-2027-posters/capodanno-11clubroom-milano.webp": {
       "source_kind": "flow_keyart_flyer",
@@ -1021,6 +1021,13 @@
       "bytes": 272770,
       "sha256": "fd0b1be76cbbc3fda9424e8c2ba7f2050d4b2afd2e134d06388326e726108d5f"
     },
+    "menus/incantami-signorvino-menu-40.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 111730,
+      "sha256": "9b281b4067c38f333987e6ed1d344ce7bb2f50679223f8887971cddf2a963f41"
+    },
     "october-2026/236326-c7288fd1c403.webp": {
       "source_kind": "official_flyer",
       "width": 1080,
@@ -1034,6 +1041,20 @@
       "height": 1350,
       "bytes": 200062,
       "sha256": "5c8e7a0c5745027d27e24b13524a8ebd5d22355e3768b56b309aa70f97a07e66"
+    },
+    "october-2026/236328-bcco-blawan.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 119042,
+      "sha256": "e12b2e39088f89a3912d93ea966561f5df603d787d72d7c61b9389c2b83d5cce"
+    },
+    "october-2026/236329-ben-klock-ignez.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 79128,
+      "sha256": "7e26aaee6285482ba7177967d48b87b58cb4b98a8ab4db85b74d75fb5a4869d9"
     },
     "october-2026/238459-fc72c7aa06d3.webp": {
       "source_kind": "official_flyer",
@@ -1126,6 +1147,13 @@
       "bytes": 247340,
       "sha256": "af391e810f21d0dc079e3f5688fab33b96c81dd6f5c4d4c415e616cef7b4c080"
     },
+    "october-2026/247792-perreo-xl-alcatraz.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 237734,
+      "sha256": "732f4f9ef5e2cf6f2f5327230d5a02a8f35c1cd7700d7bd91d5357cef555d8d9"
+    },
     "october-2026/247797-d1eb9fbf79a0.webp": {
       "source_kind": "official_flyer",
       "width": 1080,
@@ -1153,6 +1181,13 @@
       "height": 1350,
       "bytes": 197344,
       "sha256": "a92a4ecda69e0e0ae49956094bddfbd08816e7dc565f0a105b622a42dc048305"
+    },
+    "october-2026/248722-plasma-clara-cuve.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 107704,
+      "sha256": "597e549c2db8f2e75e061b928bef31a21f86a294b609c51e3184925329898d06"
     },
     "october-2026/249060-b09c1092099f.webp": {
       "source_kind": "official_flyer",
@@ -1371,6 +1406,41 @@
       "bytes": 205768,
       "sha256": "e6adc1448c2ceb94ef4f43f3d982668248fc89a6bd6329b57fbe05677768f459"
     },
+    "october-2026/250225-partner-xceed.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 270194,
+      "sha256": "ed31cbf3f0cbf35ca7cafd1b940de0af226242c20e4a80e5638b7a1a2db6399f"
+    },
+    "october-2026/250227-partner-xceed.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 138076,
+      "sha256": "aa2cbae50d3478b27aa32abf4b24a971493dbf98ddbaa91fb3bdb320936cbd6c"
+    },
+    "october-2026/250228-partner-xceed.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 95014,
+      "sha256": "110b4d9f5920559a6de60f7e71624d4a6bdaa2f6c7d6080a3f5fed238e636f92"
+    },
+    "october-2026/250229-partner-xceed.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 181062,
+      "sha256": "8e87b2e66b6bef98e4c1d90028ad2b9bdbeb5b0e98c17bb172b7f53720b3ea8d"
+    },
+    "october-2026/250230-partner-xceed.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 108122,
+      "sha256": "b1cebb74cf44ecf9f988be7f80a0ab875f6809a660ef01bca5c28b9695beabe8"
+    },
     "october-2026/250300-e0a534b01c6e.webp": {
       "source_kind": "official_flyer",
       "width": 1080,
@@ -1392,6 +1462,13 @@
       "bytes": 270976,
       "sha256": "74430155c0dcd3bed953d29027cb3682e19f58c6743de564467ff4b99cf615a5"
     },
+    "october-2026/250989-doctor-mucke.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 232846,
+      "sha256": "a053b459dd771cf1e34e8207682d50e59a27adc7d8beaf060e46496580ac3505"
+    },
     "october-2026/251019-5cfdcappuccetto.webp": {
       "source_kind": "official_flyer",
       "width": 1080,
@@ -1405,6 +1482,13 @@
       "height": 1350,
       "bytes": 217634,
       "sha256": "be87a67a92452b3ec39d78b5172bb446afc665d481a00ba5e82bc71c228f6635"
+    },
+    "october-2026/251529-tom-midnight-ball.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 274182,
+      "sha256": "2c8460da1df3931130ac1777fe93f63e8118b044b174bbfea30dea98ffd3b953"
     },
     "october-2026/251833-61eb740fbdac.webp": {
       "source_kind": "official_flyer",
@@ -1440,6 +1524,34 @@
       "height": 1350,
       "bytes": 135414,
       "sha256": "930bfdc5f2669aceed86029afcf7d9195cbe6a4043132d2eafbecc242b0fe372"
+    },
+    "october-2026/253986-nameless-xmas.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 257402,
+      "sha256": "4707b8a18d5b2732fcd407f0780310034f5627514f3e3eb0ea7ffe7b41dc078e"
+    },
+    "october-2026/254003-wonderfest-garda.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 82184,
+      "sha256": "29d453dd7fdaad33217597066e826dc4ba9e4114dd289dbefde5aac7e66d6cbf"
+    },
+    "october-2026/254095-partner-xceed.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 227582,
+      "sha256": "5afd5d09a3b34811491eb0d275ccc2b89dc93d525963e74d94d2b4ff26e503f7"
+    },
+    "october-2026/254285-kickstart-sat.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 248686,
+      "sha256": "47cb7075998a2615faef1082d1c23aeb3a6f1ed22cac06530254e1cd7012e017"
     },
     "october-2026/incantami-signorvino-25nov.webp": {
       "source_kind": "official_flyer",
@@ -1539,47 +1651,89 @@
       "bytes": 210710,
       "sha256": "ab45233d1559c88274c0d239884d479a89c3fed4bb4cff2936f6ded7d6bbd106"
     },
+    "weekly-posters/11clubroom-milano-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 142892,
+      "sha256": "d4a0e3fc2fad0d9c50dc02ca1ddd65e08df09fb12eda3c976d1426494ce3fe96"
+    },
     "weekly-posters/55milano-friday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 255790,
-      "sha256": "5d0371cc4ad915938519ecced8218c9d2b3083ced6018b0361f3d1339f998fb8"
+      "bytes": 191466,
+      "sha256": "8ce05fc7ba6e23e3331367409cd9f0e7db1b10b4a83a7b77ba0b7ddaeff4c27b"
     },
     "weekly-posters/55milano-saturday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 257906,
-      "sha256": "8ef0b07dabb17df9baec96e3fb86045872721fd9631318926367e3bc92dd81a9"
+      "bytes": 204066,
+      "sha256": "b903aa0b28d9a206b35fa5e628ff7139508974097adb3948a89b03746311376e"
     },
     "weekly-posters/55milano-sunday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 263746,
-      "sha256": "65a01969af6e3e9668d650627891497a4827a2e878afc17e2af6d639ee1fdf2e"
+      "bytes": 192198,
+      "sha256": "deea2da84ff179df7ce74f5ad27d54549a55325caa30b42402e9be9376f41858"
     },
     "weekly-posters/55milano-thursday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 234130,
-      "sha256": "0a6d8143e707dac883eba100e683fa5c091c517a83ada4cb15040ddd5247bc97"
+      "bytes": 164708,
+      "sha256": "9b4c12dc4aab05462799a4f6b7a78d6defebb9669ba68738806162957a13e3f1"
     },
     "weekly-posters/55milano-tuesday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 189914,
-      "sha256": "be1103b73d7a05674134f6b214742e57700a1b909bf5391104b2df3d60a622a8"
+      "bytes": 144876,
+      "sha256": "684ba9b030dd5d9228ff0e230dbf4298d34f30c0bbe7ab354237808bdce79a22"
     },
     "weekly-posters/55milano-wednesday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 267236,
-      "sha256": "389b16e65eb50563588b8acd32324d0d366830d917e8cc7d449669a4b46a8d51"
+      "bytes": 242378,
+      "sha256": "ff0e0279c819e15fe63e4172b803498d462faeff12c88dcb73360daa82319188"
+    },
+    "weekly-posters/alcatraz-all-you-can-dance.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 239506,
+      "sha256": "7d2fac649ebff715d85bc48b772374e48b5731dbec20c500910524137e32bf88"
+    },
+    "weekly-posters/amnesia-20261205-cuartero.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 176092,
+      "sha256": "a19e9f3faac2944dcfa6ce29021e9811438572728eed3e5b6c36625f6525c9ae"
+    },
+    "weekly-posters/amnesia-20261212-ale-de-tuglie.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 154136,
+      "sha256": "f7f3cda6dc93eb614c1f80b9ede56b4137ddb245bff3b35ef84d57d1d16f239f"
+    },
+    "weekly-posters/amnesia-20261219-jamback.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 186616,
+      "sha256": "23b446cb74c38ac29de8a1b4b47b4b61e23037b03c0db6c9b2ed0a8730859fc9"
+    },
+    "weekly-posters/amnesia-20261225-ilario-alicante.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 231342,
+      "sha256": "e9539b3b485c7de68a087085e5156ac36ce05d6fa0d25b6445e675754da904d0"
     },
     "weekly-posters/aria-thursday.webp": {
       "source_kind": "flow_keyart_flyer",
@@ -1594,6 +1748,20 @@
       "height": 1350,
       "bytes": 141406,
       "sha256": "dbe19ef7d2741f504bddeeb4b9c246bd23a9774647f966741e74cd43d3ba851e"
+    },
+    "weekly-posters/bischeri-milano-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 164964,
+      "sha256": "905614d5b9f01da8b35e8615d3d433a623fc65bd5e7e1f45dd2cbbf3345b2664"
+    },
+    "weekly-posters/bobino-navigli-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 237692,
+      "sha256": "7caf8be1dd2c04563e93e2921afa30abce05f23ed32eb2d1374588815d65a403"
     },
     "weekly-posters/capogiro-bergamo-friday.webp": {
       "source_kind": "flow_keyart_flyer",
@@ -1623,12 +1791,47 @@
       "bytes": 148734,
       "sha256": "58ebc29544e228d3704278b916c505d45133a1c41e74e8b406f908fe761fcb6e"
     },
+    "weekly-posters/carlsbergol-milano-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 246090,
+      "sha256": "0055b351eda64aaedd60f6317ab6c24fb38eacba34148b9a97192dad8278098e"
+    },
     "weekly-posters/check-love-pineta-2026-12-04.webp": {
       "source_kind": "official_flyer",
       "width": 1080,
       "height": 1350,
       "bytes": 153834,
       "sha256": "3a13ba222c1db37d56ad12ef189d2b01f13c396058cf3cc710dc83014978e963"
+    },
+    "weekly-posters/dazi-milano-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 172440,
+      "sha256": "8022f46eddd063df88be4449c8ce3d860112dacebb0710165d7decad69b1527c"
+    },
+    "weekly-posters/fabrique-20261204-holy-priest.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 128302,
+      "sha256": "1fb3011ccd4ab5ee00a0a5906e23bc6f57effd09911e55d3add922632762ce5c"
+    },
+    "weekly-posters/gattopardo-milano-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 204338,
+      "sha256": "625f1aac7050fdcca3940506ee687d0f79873d2fe1f90ee4674c8f9a005331f7"
+    },
+    "weekly-posters/hollywood-milano-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 261614,
+      "sha256": "23a364638a019095955b251d164a6d60d854313e91775a38ae6c01ded6581d79"
     },
     "weekly-posters/justme-wednesday-club-campanini.webp": {
       "source_kind": "official_flyer",
@@ -1644,19 +1847,54 @@
       "bytes": 87416,
       "sha256": "56dfdfb26571265cc4f21e755f2dc3917c458c028b1bee1d8d6d48bfdbdda5d5"
     },
+    "weekly-posters/magazzini-20261203-entropia.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 121050,
+      "sha256": "240c174d89bca875eb28193a74bee4a3f66be941c5dab526dda7fc918a1c8626"
+    },
+    "weekly-posters/magazzini-20261204-disco-taylor.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 256698,
+      "sha256": "9ae340d80e8ad73f86d2c22d6d0250db9cad589ababf2d5a8e983a0d4ed7f4cd"
+    },
+    "weekly-posters/magazzini-20261205-macy-gray.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 143462,
+      "sha256": "880f6a78f1fc645aaffa8433280256af87e87499d07e349902448c81c3f135de"
+    },
+    "weekly-posters/magazzini-20261211-sama-abdalhadi.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 264356,
+      "sha256": "e00890ce1afc88a2ae301c76e06a1cc18d184556bf49846fbbd1c193676a1f46"
+    },
+    "weekly-posters/magazzini-20261218-gen-z.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 218352,
+      "sha256": "787f19ee990b39cf09434760c38e21935a51056d19c81ce7e902d2b56c6d975b"
+    },
     "weekly-posters/mib-friday-billions.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 264246,
-      "sha256": "543394e941632e27f47ae4bc8da2d19f6301f396435dbf4aace301c0e5591be0"
+      "bytes": 170170,
+      "sha256": "3781a615e0169742016bd350e5db8f7e770e081260ab8a1180324e59a6693b6a"
     },
     "weekly-posters/mib-saturday-loveaffair.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 213840,
-      "sha256": "726376def8bd2dd32af0530d87defb810bd1a15254c748d5b9890989745b0004"
+      "bytes": 190758,
+      "sha256": "1c74a832e90f93338473a17952232510905cb98d0fc8192330588dc39434a992"
     },
     "weekly-posters/mib-thursday-justice.webp": {
       "source_kind": "official_flyer",
@@ -1669,8 +1907,8 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 252174,
-      "sha256": "905a70e1aae9677f5e75f604116fbdc180fbacfed6f339416cf2e899a55531ab"
+      "bytes": 191900,
+      "sha256": "4141f1ff8f81bae1f9f2ee880c782abf314269fec84652400aef703456827c3f"
     },
     "weekly-posters/number-one-brescia-immacolata-7-dicembre.webp": {
       "source_kind": "flow_keyart_flyer",
@@ -1704,8 +1942,8 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 271770,
-      "sha256": "0b79f4f17c702cb17c437b74f99a1664f998a808f0b0b12b6f930ada4a4b7fa0"
+      "bytes": 143376,
+      "sha256": "4b9e7b5262fd142befd9bc5cbe017a995fc23def01c3f258defcc9229c4cd1bb"
     },
     "weekly-posters/philipps-saturday-konekt.webp": {
       "source_kind": "official_flyer",
@@ -1732,43 +1970,57 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 276498,
-      "sha256": "9e085e195b7e8e8548967dea6d7692d87bbc93503404bc842a24a61b91cb19d9"
+      "bytes": 227390,
+      "sha256": "b573983ebf415c4b1446595354db4467228815af43c1d7226918fa8510071222"
     },
     "weekly-posters/philipps-wednesday-tussy.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 246764,
-      "sha256": "57dbbbb517e66259f56e2e760fdf08908a74e9e9a3a4dee2d610c06371af7880"
+      "bytes": 156788,
+      "sha256": "5da4a0f6d521b6acb34cd8b8e93559e5df0e0185997df6007eceff0b14b054e4"
+    },
+    "weekly-posters/pineta-friday-club.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 143566,
+      "sha256": "353a240cfce6f80c8e3e13b80f49d91ccfe94e3f21aeb6940027f19549583726"
+    },
+    "weekly-posters/pineta-saturday-club.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 117530,
+      "sha256": "d576ee0ca0c2023864bec8ba31537dbdf2f4c6f0e4e62079d4669b465936557e"
     },
     "weekly-posters/playclub-friday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 246770,
-      "sha256": "788fe5ff70b118f0175ac08a23e1dbb521e82833b14f69eb04be36a1a541beb2"
+      "bytes": 164948,
+      "sha256": "37bcffcdcd65314d42d6b4a631f642370c761f55c2672b17d1ce5ace560b7282"
     },
     "weekly-posters/playclub-saturday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 271966,
-      "sha256": "f92a13c3d5dfbd4a5eca7dd61814bb55b776480903c587ce0292cf3e1f901595"
+      "bytes": 128308,
+      "sha256": "5679700521c14d3538a849470584e8a9710ac1e4d2dba0968907b9d8cee32b6a"
     },
     "weekly-posters/playclub-sunday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 255886,
-      "sha256": "2cd0f8a05f0027dd7837679e55863db9b50ce6a6c2c86e9518501ede4231ba9a"
+      "bytes": 136028,
+      "sha256": "28d733f0f588e13729b48b9d246a88a927726b440a3dd60dc2da378f841e0ffc"
     },
     "weekly-posters/playclub-thursday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 215706,
-      "sha256": "1f89c4934ae0323c2810e735c40c9ce9c087aa6c38c57170f1524aba4cdbb59c"
+      "bytes": 150018,
+      "sha256": "21db2cb9a7e057404b0d3ea0b72e381eca962556ba952f1c13b6a59fc052dda7"
     },
     "weekly-posters/playclub-tuesday.webp": {
       "source_kind": "official_flyer",
@@ -1809,8 +2061,8 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 265342,
-      "sha256": "288b502be85978de91d2a180c5e7d935f66f282e82745a4d9a73ec8da9589249"
+      "bytes": 126622,
+      "sha256": "3d9269b0f0a0119aa0387485a5bfa7f617d2fb3bc6a148c1a46781412be19d98"
     },
     "weekly-posters/repvblic-monday.webp": {
       "source_kind": "official_flyer",
@@ -1823,8 +2075,8 @@
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 237536,
-      "sha256": "df5dea418d0b5e38e1f6affb53f28706202a752c22569ef6266f2b024805955e"
+      "bytes": 157966,
+      "sha256": "ab26261e85b4cef320c214f6ecf97ee9ded3afccecdf94bfc5ffb75d580ad720"
     },
     "weekly-posters/repvblic-sunday.webp": {
       "source_kind": "official_flyer",
@@ -1882,61 +2134,68 @@
       "bytes": 179680,
       "sha256": "671b17325a127aa2628f0d7d2969d8be6b65780118e8be2f734a9a67716e6f95"
     },
+    "weekly-posters/superclub-milano-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 174958,
+      "sha256": "2a1c3890083bf0a60b1286e0ba842d4e0c5fb84d49be47f78f0f7ab1c2a17f31"
+    },
     "weekly-posters/terrazza21-friday-skyline.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 222414,
-      "sha256": "39a8d8a8df2b0c8229a824418bd031c21d6bcb417e5231b7a12e103f78d96136"
+      "bytes": 230136,
+      "sha256": "d68d89f6f89ba91fd5cad1e9dc4ec67f45bd664f41de0cefd5416157a71db7fd"
     },
     "weekly-posters/terrazza21-saturday-duomo.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 256940,
-      "sha256": "889c5b44bff4586986b7e0d9a3ad423378dbbbeb4069e7a1779e27a6f0c14067"
+      "bytes": 202834,
+      "sha256": "5476c60f3dd15ea09da74d55fdebb5686f15ee0fa40f1688d91a76de49ab3a44"
     },
     "weekly-posters/terrazza21-thursday-aperitivo.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 247726,
-      "sha256": "7c2ea801f6f5744d2037a37d083e80cc8ae22d3adc24123f507b20db01740416"
+      "bytes": 225028,
+      "sha256": "b40b398d6219fb7c6d11b984c7fc051d9ae86995bbaa89991a940d2e5ab877d9"
     },
     "weekly-posters/theclub-friday-firstclass.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 255592,
-      "sha256": "e206878119445b4ca730d5afcb532b61aabba4dd8bf1930232e5aa30b618d7b2"
+      "bytes": 172156,
+      "sha256": "63985471234ca3e89e2558bbf03b796624690230638f82bbed5f7e34496e438a"
     },
     "weekly-posters/theclub-saturday-girlsrepublic.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 270534,
-      "sha256": "8a612ea159dc027b1c4c089d301342d24179794586bcda2904923d97d411a1bd"
+      "bytes": 143350,
+      "sha256": "b9770119ba1568d9b90c96a5e6a4d678165d6315701435c028a2762b5477bfd9"
     },
     "weekly-posters/theclub-sunday-superbe.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 265886,
-      "sha256": "ee06c7cbc048f2537478f2a30026ff9bbf261e98135ac92ce7efccd97294cbe2"
+      "bytes": 169056,
+      "sha256": "2bb4ead764a8a4ab26a576854f9467bfc72eb84c70edc7f72f4a51ff1aa83716"
     },
     "weekly-posters/theclub-thursday-atlanta.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 250568,
-      "sha256": "29cb6fef86e7b6a015a27b77165db2aa9faebb608f7e29ef78142c0b899f6c76"
+      "bytes": 148646,
+      "sha256": "6fa9e58f476a78469ad486efcd201b8c457392bdcf2f433be1e3656e424b3033"
     },
     "weekly-posters/theclub-wednesday-onetwo.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 244430,
-      "sha256": "c097c6d11d4b69222bf6831aef1180859ba09d5ae13cb5747e39cbec63305238"
+      "bytes": 172888,
+      "sha256": "f4ebcbcca8ab6cce1a67bf4652f4962e004db01066c351098885bb994004b2a9"
     },
     "weekly-posters/tiky-klub-bergamo-friday.webp": {
       "source_kind": "flow_keyart_flyer",
@@ -1959,47 +2218,61 @@
       "bytes": 131088,
       "sha256": "b4bae1cdf08cb2611440063e4ebd15e2855f9c9b61c371a2d51a59875d20bd91"
     },
+    "weekly-posters/tocqueville-milano-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 238676,
+      "sha256": "39022fef2c6577f137d25bfb63837e1067eaa7e5bb8ca9af093e551f498b5d6f"
+    },
+    "weekly-posters/tom-milano-weekly.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 245032,
+      "sha256": "37634bcff985a075727651e8e8173fe0ad6840465fc3fa6a7809bf57255fa87c"
+    },
     "weekly-posters/voya-friday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 209094,
-      "sha256": "9676f91b2311d22dafe9a59e9580540f70bb7a3cc42c1edff3245dcd7ed2d482"
+      "bytes": 185002,
+      "sha256": "8d26796d01af03cd9955225bb8e8ae74e372d26525e38d830dc3503a8045fc58"
     },
     "weekly-posters/voya-saturday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 272770,
-      "sha256": "fd0b1be76cbbc3fda9424e8c2ba7f2050d4b2afd2e134d06388326e726108d5f"
+      "bytes": 144588,
+      "sha256": "21ef8e3ff02a51ddf444430f052a4d2139c783c471355bf35b28ae6d94595182"
     },
     "weekly-posters/voya-sunday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 203406,
-      "sha256": "2926dca50d12771dfcab49aff5916d4868143ced7be6811c10f8481f1542ddd5"
+      "bytes": 142560,
+      "sha256": "0e03d95072e3f7d0f4bd11e143a85594fb44ee7ce25d5d9d328378315a94a014"
     },
     "weekly-posters/voya-thursday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 211486,
-      "sha256": "ed9286bc87346f0213f2be0f8b023c0653c4454716634b203846501c39b6bd1b"
+      "bytes": 157892,
+      "sha256": "fa07ecc8d7df14544e4867583eae7de23047a80902091eb90c08a4cd965fa289"
     },
     "weekly-posters/voya-tuesday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 155008,
-      "sha256": "f88285b670330a866012bf50341e4ab073541e1396ac5d4b71710ca91ee9f6e1"
+      "bytes": 137964,
+      "sha256": "5f83641405ea3d008bf3b154432d335e7510499c431e53bda125da435b49999b"
     },
     "weekly-posters/voya-wednesday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
       "height": 1350,
-      "bytes": 171900,
-      "sha256": "98f0b29b880a9ec40b168ebff9d73327c586f9170403e50a6ea920f7b70c495b"
+      "bytes": 128570,
+      "sha256": "8813d67dfd5f294dca15f0cfaa46004a93ce8d116f907b05cea8925b67a2f384"
     },
     "weekly-posters/zangola-ale-maestri-2027-01-03.webp": {
       "source_kind": "official_flyer",
