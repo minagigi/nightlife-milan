@@ -604,24 +604,20 @@ export default function OrthodoxNyeJustMeDetailView({ locale }: { locale: string
             <p className="mt-1 text-sm text-[#C2B9AA]">{imagePack.sectionSubtitle}</p>
           </div>
 
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {imagePack.gallery.map((shot) => (
-              <figure key={shot.assetKey} className="overflow-hidden border border-[#24242C] bg-[#101116]">
-                <div className="relative aspect-[4/5] w-full bg-[#050505]">
-                  <Image
+              <figure key={shot.assetKey} className="overflow-hidden border border-[#24242C] bg-[#050505]">
+                <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505]">
+                  <img
                     src={shot.src}
                     alt={shot.alt}
-                    title={shot.title}
-                    fill
-                    quality={92}
-                    sizes="(max-width: 768px) 100vw, 48vw"
-                    className="object-cover"
+                    width={1080}
+                    height={1350}
+                    loading="lazy"
+                    decoding="async"
+                    className="block h-full w-full object-cover"
                   />
                 </div>
-                <figcaption className="space-y-1.5 p-4">
-                  <div className="text-sm font-bold text-[#F6F1E7]">{shot.shotLabel}</div>
-                  <p className="text-xs leading-relaxed text-[#C2B9AA]">{shot.description}</p>
-                </figcaption>
               </figure>
             ))}
           </div>

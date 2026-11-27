@@ -470,31 +470,16 @@ export default function BergamoBresciaEventDetailView({
                 className="overflow-hidden border border-white/15 bg-[#050505]"
               >
                 <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#050505]">
-                  <Image
+                  <img
                     src={item.src}
                     alt={item.alt}
-                    title={item.title}
                     width={1920}
                     height={1080}
-                    quality={92}
-                    sizes="(max-width: 768px) 100vw, 680px"
-                    className="h-full w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                    className="block h-full w-full object-cover"
                   />
                 </div>
-                <figcaption className="space-y-2 p-4">
-                  <div className="flex flex-wrap gap-1.5 font-mono text-[11px] text-[#EAE3D5]">
-                    <span className="border border-white/15 bg-[#141311] px-2 py-0.5">
-                      {item.targetBadge}
-                    </span>
-                    <span className="border border-white/15 bg-[#141311] px-2 py-0.5">
-                      {item.outfitBadge}
-                    </span>
-                  </div>
-                  <div className="font-serif text-base text-[#F6F1E7]">{item.title}</div>
-                  <p className="font-sans text-xs leading-relaxed text-[#C2B9AA]">
-                    {item.description}
-                  </p>
-                </figcaption>
               </figure>
             ))}
           </div>

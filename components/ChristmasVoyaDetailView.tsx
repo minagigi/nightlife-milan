@@ -465,16 +465,16 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
                   {seoPack.sectionSubtitle}
                 </p>
               </div>
-              <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-                {seoPack.gallery.map((img) => (
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                {seoPack.gallery.map((img, idx) => (
                   <figure
                     key={img.src}
+                    data-seo-flow-item={idx + 1}
                     className="min-w-0"
                   >
                     <div className="relative aspect-[4/5] w-full overflow-hidden border border-[#F6F1E7]/16 bg-[#050505]">
                       <img
                         src={img.src}
-                        title={img.title}
                         alt={img.alt}
                         width={1080}
                         height={1350}
@@ -482,18 +482,7 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
                         decoding="async"
                         className="block h-full w-full object-cover"
                       />
-                      <span className="pointer-events-none absolute left-3 top-3 border border-[#F6F1E7]/30 bg-[#050505]/90 px-2.5 py-1 text-[11px] font-semibold text-[#F6F1E7]">
-                        {img.shotLabel}
-                      </span>
                     </div>
-                    <figcaption className="space-y-1.5 pt-3">
-                      <p className="font-mono text-[11px] text-[#EAE3D5]">
-                        {img.targetBadge} · {img.outfitBadge}
-                      </p>
-                      <p className="text-xs leading-relaxed text-[#C2B9AA]">
-                        <strong className="text-[#F6F1E7]">{img.title}</strong> · {img.description}
-                      </p>
-                    </figcaption>
                   </figure>
                 ))}
               </div>
@@ -507,7 +496,6 @@ export default function ChristmasVoyaDetailView({ locale }: Props) {
                 <Image
                   quality={95}
                   src={c.posterSrc}
-                  title={seoPack.poster.title}
                   alt={seoPack.poster.alt}
                   width={1080}
                   height={1350}

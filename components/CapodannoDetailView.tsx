@@ -1114,16 +1114,16 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-                {seoPack.gallery.map((img) => (
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                {seoPack.gallery.map((img, idx) => (
                   <figure
                     key={img.src}
+                    data-seo-flow-item={idx + 1}
                     className="min-w-0"
                   >
                     <div className="relative aspect-[4/5] w-full overflow-hidden border border-[#F6F1E7]/16 bg-[#050505]">
                       <img
                         src={img.src}
-                        title={img.title}
                         alt={img.alt}
                         width={1080}
                         height={1350}
@@ -1131,24 +1131,13 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                         decoding="async"
                         className="block h-full w-full object-cover"
                       />
-                      <span className="pointer-events-none absolute left-3 top-3 border border-[#F6F1E7]/30 bg-[#050505]/92 px-2.5 py-1 text-xs font-semibold text-[#F6F1E7]">
-                        {img.shotLabel}
-                      </span>
                     </div>
-                    <figcaption className="space-y-1.5 pt-3">
-                      <p className="font-mono text-[11px] text-[#EAE3D5]">
-                        {img.targetBadge} · {img.outfitBadge}
-                      </p>
-                      <p className="text-xs leading-relaxed text-[#C2B9AA] sm:text-sm">
-                        <strong className="text-[#F6F1E7]">{img.title}</strong> · {img.description}
-                      </p>
-                    </figcaption>
                   </figure>
                 ))}
               </div>
             </section>
 
-            {/* Official Remediated Event Poster — 100% Placeholder */}
+            {/* Official Event Poster — 100% Placeholder */}
             <figure
               data-capodanno-poster-detail
               className="grid grid-cols-1 gap-6 border-t border-[#F6F1E7]/16 pt-8 lg:grid-cols-12 lg:items-center lg:gap-10"
@@ -1157,7 +1146,6 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 <Image
                   quality={95}
                   src={seoPack.poster.src}
-                  title={seoPack.poster.title}
                   alt={seoPack.poster.alt}
                   width={1080}
                   height={1350}
@@ -1169,13 +1157,11 @@ export default function CapodannoDetailView({ locale, event }: Props) {
                 <span className="inline-block border border-[#F6F1E7]/35 bg-[#050505] px-3 py-1 font-mono text-xs font-bold uppercase tracking-[0.04em] text-[#F6F1E7]">
                   {seoPack.poster.badgeLabel}
                 </span>
-                <p className="text-xs text-[#EAE3D5] sm:text-sm">
-                  <strong>{seoPack.targetPrefix}:</strong> {seoPack.targetLabel} ·{' '}
-                  <strong>{seoPack.outfitPrefix}:</strong> {seoPack.outfitLabel}
+                <p className="text-sm leading-relaxed text-[#EAE3D5]">
+                  <strong>{seoPack.targetPrefix}:</strong> {seoPack.targetLabel}
                 </p>
                 <p className="text-sm leading-relaxed text-[#C2B9AA]">
-                  <strong className="text-[#F6F1E7]">{seoPack.poster.title}</strong> ·{' '}
-                  {seoPack.poster.description}
+                  <strong className="text-[#EAE3D5]">{seoPack.outfitPrefix}:</strong> {seoPack.outfitLabel}
                 </p>
               </figcaption>
             </figure>

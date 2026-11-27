@@ -6,6 +6,7 @@ import { getOctoberEventCopy, getOctoberHubCopy, getOctoberEventSlug } from '@/l
 import type { OctoberEventRecord, OctoberEventCopy } from '@/lib/october-events/types';
 import { readOctoberEventCopy } from '@/lib/octoberEditorial';
 import { getRaConditionTexts } from '@/lib/october-events/raConditionsAdapter';
+import { buildSeoEventImagePack } from '@/lib/seoEventImages';
 
 const BASE_URL = 'https://nightlifemilan.com';
 
@@ -62,6 +63,19 @@ export function buildOctoberEventGraph(event: OctoberEventRecord, locale: Locale
   const canonical = octoberEventCanonical(event, locale);
   const eventId = `${canonical}#event`;
   const pageId = `${canonical}#webpage`;
+  const eventSlug = getOctoberEventSlug(event);
+  const seoPack = buildSeoEventImagePack({
+    locale,
+    eventSlug,
+    venueName: event.venue.name,
+    music: event.genres.length > 0 ? event.genres.join(', ') : undefined,
+    dressCode: event.dressCode || undefined,
+    h1: copy.title,
+    h2List: [copy.headings.overview, copy.headings.booking, copy.headings.faq],
+    h3List: copy.sections.slice(0, 4).map((s) => s.heading),
+    posterSrc: event.image.src,
+    isHalloween: eventSlug.includes('halloween') || event.id.includes('halloween'),
+  });
   const venueAddress = event.venue.addressStatus==='source_conflict'?undefined:event.venue.structuredAddress;
   const offerRows = event.affiliateStatus === 'verified' && event.affiliateUrl
     ? event.offers.filter((offer) => offer.category === 'ticket' && !offer.audience && offer.availability === 'available' && offer.price !== null && offer.url === event.affiliateUrl)
@@ -108,6 +122,7 @@ export function buildOctoberEventGraph(event: OctoberEventRecord, locale: Locale
         { '@type': 'ListItem', position: 2, name: getOctoberHubCopy(locale).labels.heading, item: `${BASE_URL}${localizeInternalHref(`${localePrefix(locale)}/events/october-2026`, locale)}` },
         { '@type': 'ListItem', position: 3, name: copy.title, item: canonical },
       ] },
+      ...seoPack.schemaImages,
     ],
   };
 }

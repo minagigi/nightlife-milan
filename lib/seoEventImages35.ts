@@ -84,8 +84,8 @@ type CompactBaseSeed = {
 function makeCompactPack(s: CompactBaseSeed): CompactSeoLocaleOverride {
   return {
     badge: s.badge,
-    eyebrow: `GOOGLE FLOW SEO · ${s.targetPrefix.toUpperCase()} & ${s.outfitPrefix.toUpperCase()}`,
-    headingTpl: `{venue} - ${s.targetPrefix} & ${s.outfitPrefix}`,
+    eyebrow: `${s.targetPrefix.toUpperCase()} · ${s.outfitPrefix.toUpperCase()}`,
+    headingTpl: `{venue} — ${s.targetPrefix} & ${s.outfitPrefix}`,
     targetPrefix: s.targetPrefix,
     outfitPrefix: s.outfitPrefix,
     couples: s.couples,

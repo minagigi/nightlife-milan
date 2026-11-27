@@ -557,25 +557,19 @@ export default function JustSingingJustMeDetailView({
             {fullGallery.map((item) => (
               <figure
                 key={item.src}
-                className="overflow-hidden rounded-xl border border-white/15 bg-black/60"
+                className="overflow-hidden border border-white/15 bg-[#050505]"
               >
-                <div className="relative aspect-[4/5] w-full overflow-hidden">
-                  <Image
+                <div className="relative aspect-[4/5] w-full overflow-hidden bg-[#050505]">
+                  <img
                     src={item.src}
                     alt={item.alt}
-                    title={item.title}
-                    fill
-                    quality={85}
-                    sizes="(max-width: 768px) 100vw, 48vw"
-                    className="object-cover"
+                    width={1080}
+                    height={1350}
+                    loading="lazy"
+                    decoding="async"
+                    className="block h-full w-full object-cover"
                   />
                 </div>
-                <figcaption className="space-y-1 p-4">
-                  <div className="font-serif text-base text-[#F6F1E7]">{item.title}</div>
-                  <p className="font-sans text-xs leading-relaxed text-[#C2B9AA]">
-                    {item.description}
-                  </p>
-                </figcaption>
               </figure>
             ))}
           </div>

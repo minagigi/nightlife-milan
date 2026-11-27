@@ -608,7 +608,7 @@ export default async function OctoberEventPage({
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                   {seoPack.gallery.map((img, idx) => (
                     <figure
                       key={img.src}
@@ -616,23 +616,16 @@ export default async function OctoberEventPage({
                       className="min-w-0"
                     >
                       <div className="relative aspect-[4/5] w-full overflow-hidden border border-[#F6F1E7]/16 bg-[#050505]">
-                        <Image
-                          quality={92}
+                        <img
                           src={img.src}
                           alt={img.alt}
-                          title={img.title}
                           width={1080}
                           height={1350}
-                          sizes="(max-width: 767px) 100vw, 540px"
+                          loading="lazy"
+                          decoding="async"
                           className="block h-full w-full object-cover"
                         />
                       </div>
-                      <figcaption className="pt-3 text-xs leading-relaxed text-[#C2B9AA] sm:text-sm">
-                        <strong className="block font-display text-base font-bold text-[#F6F1E7]">
-                          {img.title}
-                        </strong>
-                        <span className="mt-1 block text-[#C2B9AA]">{img.description}</span>
-                      </figcaption>
                     </figure>
                   ))}
                 </div>
@@ -650,21 +643,22 @@ export default async function OctoberEventPage({
                     quality={95}
                     src={event.image.src}
                     alt={seoPack.poster.alt}
-                    title={seoPack.poster.title}
                     width={posterDims.width}
                     height={posterDims.height}
                     sizes="(max-width: 1080px) 100vw, 1080px"
                     className="block h-full w-full object-cover"
                   />
                 </div>
-                <figcaption className="space-y-2 text-xs leading-relaxed text-[#C2B9AA] sm:text-sm lg:col-span-7">
+                <figcaption className="space-y-3 text-sm leading-relaxed text-[#C2B9AA] lg:col-span-7">
                   <span className="inline-block border border-[#F6F1E7]/35 bg-[#050505] px-3 py-1 font-mono text-xs font-bold uppercase tracking-wider text-[#F6F1E7]">
                     {seoPack.poster.badgeLabel} · {event.venue.name}
                   </span>
-                  <strong className="block text-sm text-[#F6F1E7] sm:text-base">
-                    {seoPack.poster.title}
-                  </strong>
-                  <span className="block">{seoPack.poster.description}</span>
+                  <p className="text-[#EAE3D5]">
+                    <strong>{seoPack.targetPrefix}:</strong> {seoPack.targetLabel}
+                  </p>
+                  <p className="text-[#C2B9AA]">
+                    <strong className="text-[#EAE3D5]">{seoPack.outfitPrefix}:</strong> {seoPack.outfitLabel}
+                  </p>
                 </figcaption>
               </figure>
             </div>

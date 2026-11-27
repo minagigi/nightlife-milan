@@ -42,11 +42,11 @@ export interface SeoLocalePack {
 const PACKS: Record<string, SeoLocalePack> = {
   it: {
     officialPosterBadge: 'Locandina Ufficiale Evento',
-    galleryEyebrow: 'GALLERIA FOTOGRAFICA SEO GOOGLE FLOW · PUBBLICO TARGET & OUTFIT',
-    galleryHeadingTpl: 'Immagini dell’Evento, Pubblico Target e Outfit Consigliato - {venue}',
-    gallerySubTpl: '{h1}: scopri l’atmosfera reale di {venue}, il pubblico target ({target}) e il dress code della serata ({outfit}). Prenotazioni ufficiali su WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}.',
-    targetPrefix: 'Target Evento',
-    outfitPrefix: 'Outfit Consigliato',
+    galleryEyebrow: 'ATMOSFERA DEL LOCALE · AMBIENTI REALI & DRESS CODE',
+    galleryHeadingTpl: 'Gli Ambienti Reali e il Dress Code della Serata · {venue}',
+    gallerySubTpl: 'Uno sguardo agli spazi reali di {venue}, dall’ingresso alla pista: serata pensata per {target}, con dress code {outfit}.',
+    targetPrefix: 'Ospiti della Serata',
+    outfitPrefix: 'Dress Code Consigliato',
     targets: {
       couples_vip: 'Coppie Romantiche & Ospiti VIP (25–45 anni)',
       singles_friends: 'Single, Gruppi di Amici & Tavoli Social (23–38 anni)',
@@ -67,21 +67,21 @@ const PACKS: Record<string, SeoLocalePack> = {
       smart_chic_aperitivo: 'Smart Chic Milanese, Blazer Sartoriale & Abito da Aperitivo',
     },
     shots: [
-      'Sala Principale & Atmosfera Reale',
-      'Esperienza Cena, Spettacolo & Accoglienza',
-      'Tavoli VIP Privé, Bottiglie & Brindisi',
-      'Pubblico in Pista, Outfit & Energia della Serata',
+      'Ingresso Monumentale & Atmosfera Esterna',
+      'Sala Ristorante, Cena di Gala & Accoglienza',
+      'Tavoli VIP Privé, Champagne & Brindisi',
+      'Dancefloor, DJ Set & Dress Code della Serata',
     ],
-    posterDescTpl: '{h1} presso {venue}: locandina ufficiale bonificata dell’evento con contatti diretti WWW.NIGHTLIFEMILAN.COM e Concierge WhatsApp {phone}. Pensato per {target} con dress code {outfit}.',
-    shotDescTpl: '{h1} ({heading}) da {venue}: fotografia ambientata nel locale reale con {target} in {outfit} ({shot}). Info e tavoli: WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}.',
+    posterDescTpl: '{h1} presso {venue}: locandina ufficiale dell’evento per {target}, dress code {outfit}. Concierge WhatsApp {phone}.',
+    shotDescTpl: '{shot} — {h1} presso {venue}: {target}, dress code {outfit}.',
   },
   en: {
     officialPosterBadge: 'Official Event Poster',
-    galleryEyebrow: 'GOOGLE FLOW SEO PHOTO GALLERY · TARGET CROWD & OUTFIT',
-    galleryHeadingTpl: 'Event Atmosphere, Target Crowd & Outfit Guide - {venue}',
-    gallerySubTpl: '{h1}: explore the real atmosphere of {venue}, the target crowd ({target}), and the event dress code ({outfit}). Official bookings at WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}.',
-    targetPrefix: 'Target Crowd',
-    outfitPrefix: 'Event Outfit',
+    galleryEyebrow: 'VENUE ATMOSPHERE · REAL INTERIORS & DRESS CODE',
+    galleryHeadingTpl: 'Inside {venue} · Real Spaces & Evening Dress Code',
+    gallerySubTpl: 'A look inside the real spaces of {venue}, from arrival to the dancefloor — curated for {target}, with {outfit}.',
+    targetPrefix: 'Guest Profile',
+    outfitPrefix: 'Recommended Dress Code',
     targets: {
       couples_vip: 'Romantic Couples & VIP Guests (Ages 25–45)',
       singles_friends: 'Singles, Groups of Friends & Social Tables (Ages 23–38)',
@@ -102,21 +102,21 @@ const PACKS: Record<string, SeoLocalePack> = {
       smart_chic_aperitivo: 'Milanese Smart-Chic Blazer & Silk Aperitivo Attire',
     },
     shots: [
-      'Main Hall & Real Venue Atmosphere',
-      'Gala Dinner, Show & Hospitality Experience',
-      'VIP Privé Tables, Bottle Service & Midnight Toast',
-      'Target Crowd on the Dancefloor & Event Outfit',
+      'Iconic Entrance & Exterior Architecture',
+      'Gala Dining Room, Show & Hospitality',
+      'VIP Privé Tables, Bottle Service & Toast',
+      'Main Dancefloor, DJ Booth & Evening Attire',
     ],
-    posterDescTpl: '{h1} at {venue}: official remediated event poster featuring direct concierge contacts WWW.NIGHTLIFEMILAN.COM and WhatsApp {phone}. Curated for {target} wearing {outfit}.',
-    shotDescTpl: '{h1} ({heading}) at {venue}: contextualized venue photography featuring {target} dressed in {outfit} ({shot}). Bookings: WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}.',
+    posterDescTpl: '{h1} at {venue}: official event poster curated for {target}, wearing {outfit}. Concierge WhatsApp {phone}.',
+    shotDescTpl: '{shot} — {h1} at {venue}: {target} dressed in {outfit}.',
   },
   es: {
     officialPosterBadge: 'Cartel Oficial del Evento',
-    galleryEyebrow: 'GALERÍA FOTOGRÁFICA SEO GOOGLE FLOW · PÚBLICO Y OUTFIT',
-    galleryHeadingTpl: 'Fotos del Evento, Público Objetivo y Outfit Recomendado - {venue}',
-    gallerySubTpl: '{h1}: descubre el ambiente real de {venue}, el público del evento ({target}) y el dress code ({outfit}). Reservas oficiales en WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}.',
-    targetPrefix: 'Público Objetivo',
-    outfitPrefix: 'Outfit del Evento',
+    galleryEyebrow: 'AMBIENTE DEL LOCAL · ESPACIOS REALES Y DRESS CODE',
+    galleryHeadingTpl: 'Espacios Reales y Dress Code de la Noche · {venue}',
+    gallerySubTpl: 'Un recorrido por los espacios reales de {venue}, de la entrada a la pista: velada pensada para {target}, con dress code {outfit}.',
+    targetPrefix: 'Perfil de Invitados',
+    outfitPrefix: 'Dress Code Recomendado',
     targets: {
       couples_vip: 'Parejas Románticas e Invitados VIP (25–45 años)',
       singles_friends: 'Solteros, Grupos de Amigos y Mesas Sociales (23–38 años)',
@@ -137,21 +137,21 @@ const PACKS: Record<string, SeoLocalePack> = {
       smart_chic_aperitivo: 'Smart Chic Milanés, Blazer a Medida y Vestido de Aperitivo',
     },
     shots: [
-      'Sala Principal y Ambiente Real del Local',
-      'Cena de Gala, Espectáculo y Bienvenida',
+      'Entrada Principal y Ambiente Exterior',
+      'Salón Restaurante, Cena de Gala y Bienvenida',
       'Mesas VIP Privé, Botellas y Brindis',
-      'Público Objetivo en Pista y Outfit de la Noche',
+      'Pista Principal, DJ Set y Dress Code',
     ],
-    posterDescTpl: '{h1} en {venue}: cartel oficial del evento con contacto directo WWW.NIGHTLIFEMILAN.COM y WhatsApp {phone}. Ideal para {target} con outfit {outfit}.',
-    shotDescTpl: '{h1} ({heading}) en {venue}: imagen del local real mostrando {target} con {outfit} ({shot}). Reservas: WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}.',
+    posterDescTpl: '{h1} en {venue}: cartel oficial del evento para {target} con dress code {outfit}. WhatsApp {phone}.',
+    shotDescTpl: '{shot} — {h1} en {venue}: {target} con {outfit}.',
   },
   fr: {
     officialPosterBadge: 'Affiche Officielle de la Soirée',
-    galleryEyebrow: 'GALERIE PHOTO SEO GOOGLE FLOW · PUBLIC CIBLE & TENUE',
-    galleryHeadingTpl: 'Photos de la Soirée, Public Cible et Tenue Conseillée - {venue}',
-    gallerySubTpl: '{h1} : découvrez l’ambiance réelle de {venue}, la clientèle cible ({target}) et la tenue exigée ({outfit}). Réservations sur WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}.',
-    targetPrefix: 'Public Cible',
-    outfitPrefix: 'Tenue de Soirée',
+    galleryEyebrow: 'ATMOSPHÈRE DU LIEU · ESPACES RÉELS & TENUE',
+    galleryHeadingTpl: 'Les Espaces du Lieu et la Tenue de Soirée · {venue}',
+    gallerySubTpl: 'Aperçu des espaces réels de {venue}, de l’accueil à la piste : une soirée pensée pour {target}, en tenue {outfit}.',
+    targetPrefix: 'Clientèle de la Soirée',
+    outfitPrefix: 'Tenue Conseillée',
     targets: {
       couples_vip: 'Couples Romantiques & Clientèle VIP (25–45 ans)',
       singles_friends: 'Célibataires, Groupes d’Amis & Tables Conviviales (23–38 ans)',
@@ -172,21 +172,21 @@ const PACKS: Record<string, SeoLocalePack> = {
       smart_chic_aperitivo: 'Smart Chic Milanais, Blazer sur Mesure & Tenue Aperitivo',
     },
     shots: [
-      'Salle Principale & Architecture Réelle du Lieu',
-      'Dîner de Gala, Spectacle & Accueil',
-      'Carré VIP Privé, Flacons & Toast de Minuit',
-      'Clientèle Cible en Soirée & Dress Code',
+      'Entrée Monumentale & Architecture du Lieu',
+      'Dîner de Gala, Salle Restaurant & Accueil',
+      'Carré VIP Privé, Champagne & Toast',
+      'Piste de Danse, DJ Set & Dress Code',
     ],
-    posterDescTpl: '{h1} chez {venue} : affiche officielle de l’événement avec contact direct WWW.NIGHTLIFEMILAN.COM et WhatsApp {phone}. Pensé pour {target} en tenue {outfit}.',
-    shotDescTpl: '{h1} ({heading}) chez {venue} : photographie du lieu réel réunissant {target} en {outfit} ({shot}). Infos : WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}.',
+    posterDescTpl: '{h1} chez {venue} : affiche officielle de l’événement pour {target} en tenue {outfit}. WhatsApp {phone}.',
+    shotDescTpl: '{shot} — {h1} chez {venue} : {target} en {outfit}.',
   },
   de: {
     officialPosterBadge: 'Offizielles Event-Plakat',
-    galleryEyebrow: 'GOOGLE FLOW SEO-FOTOGALERIE · ZIELGRUPPE & DRESSCODE',
-    galleryHeadingTpl: 'Event-Impressionen, Zielgruppe und Dresscode - {venue}',
-    gallerySubTpl: '{h1}: Entdecken Sie das echte Ambiente von {venue}, das Zielpublikum ({target}) und das passende Event-Outfit ({outfit}). Buchung über WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}.',
-    targetPrefix: 'Zielgruppe',
-    outfitPrefix: 'Event-Outfit',
+    galleryEyebrow: 'LOCATION-AMBIENTE · ECHTE RÄUME & DRESSCODE',
+    galleryHeadingTpl: 'Einblicke in die Location und Dresscode · {venue}',
+    gallerySubTpl: 'Einblicke in die echten Räume von {venue}, vom Empfang bis zur Tanzfläche – für {target} im Dresscode {outfit}.',
+    targetPrefix: 'Gästeprofil',
+    outfitPrefix: 'Empfohlener Dresscode',
     targets: {
       couples_vip: 'Romantische Paare & VIP-Gäste (25–45 Jahre)',
       singles_friends: 'Singles, Freundesgruppen & Social Tables (23–38 Jahre)',
@@ -207,21 +207,21 @@ const PACKS: Record<string, SeoLocalePack> = {
       smart_chic_aperitivo: 'Mailänder Smart-Chic, maßgeschneiderter Blazer & Seidenkleid',
     },
     shots: [
-      'Hauptsaal & echte Location-Architektur',
-      'Galadinner, Dinner-Show & Empfang',
+      'Eingangsbereich & echte Location-Architektur',
+      'Galadinner, Restaurantkuppel & Empfang',
       'VIP-Privé-Tische, Champagner & Mitternachtstoast',
-      'Zielgruppe auf der Tanzfläche & Dresscode',
+      'Tanzfläche, DJ-Set & Abendgarderobe',
     ],
-    posterDescTpl: '{h1} im {venue}: offizielles Event-Plakat mit direktem Concierge-Kontakt WWW.NIGHTLIFEMILAN.COM und WhatsApp {phone}. Für {target} im Outfit {outfit}.',
-    shotDescTpl: '{h1} ({heading}) im {venue}: echte Location-Aufnahme mit {target} im {outfit} ({shot}). Reservierung: WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}.',
+    posterDescTpl: '{h1} im {venue}: offizielles Event-Plakat für {target} im Dresscode {outfit}. WhatsApp {phone}.',
+    shotDescTpl: '{shot} — {h1} im {venue}: {target} im {outfit}.',
   },
   pt: {
     officialPosterBadge: 'Cartaz Oficial do Evento',
-    galleryEyebrow: 'GALERIA DE FOTOS SEO GOOGLE FLOW · PÚBLICO E TRAJE',
-    galleryHeadingTpl: 'Fotos do Evento, Público-Alvo e Traje Recomendado - {venue}',
-    gallerySubTpl: '{h1}: conheça o ambiente real de {venue}, o público do evento ({target}) e o dress code ({outfit}). Reservas em WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}.',
-    targetPrefix: 'Público-Alvo',
-    outfitPrefix: 'Traje do Evento',
+    galleryEyebrow: 'ATMOSFERA DA CASA · AMBIENTES REAIS E TRAJE',
+    galleryHeadingTpl: 'Ambientes Reais e Traje Recomendado · {venue}',
+    gallerySubTpl: 'Um olhar pelos espaços reais do {venue}, da entrada à pista: noite pensada para {target}, com traje {outfit}.',
+    targetPrefix: 'Perfil de Convidados',
+    outfitPrefix: 'Traje Recomendado',
     targets: {
       couples_vip: 'Casais Românticos e Convidados VIP (25–45 anos)',
       singles_friends: 'Solteiros, Grupos de Amigos e Mesas Sociais (23–38 anos)',
@@ -242,13 +242,13 @@ const PACKS: Record<string, SeoLocalePack> = {
       smart_chic_aperitivo: 'Smart Chic Milanês, Blazer de Alfaiataria e Traje Aperitivo',
     },
     shots: [
-      'Salão Principal e Atmosfera Real da Casa',
+      'Entrada Principal e Atmosfera Real da Casa',
       'Ceia de Gala, Dinner Show e Recepção',
-      'Mesas VIP Privé, Champanhe e Brinde da Meia-Noite',
-      'Público na Pista e Traje da Noite',
+      'Mesas VIP Privé, Champanhe e Brinde',
+      'Pista Principal, DJ Set e Traje da Noite',
     ],
-    posterDescTpl: '{h1} no {venue}: cartaz oficial do evento com contato direto WWW.NIGHTLIFEMILAN.COM e WhatsApp {phone}. Para {target} com traje {outfit}.',
-    shotDescTpl: '{h1} ({heading}) no {venue}: fotografia do local real com {target} vestindo {outfit} ({shot}). Reservas: WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}.',
+    posterDescTpl: '{h1} no {venue}: cartaz oficial do evento para {target} com traje {outfit}. WhatsApp {phone}.',
+    shotDescTpl: '{shot} — {h1} no {venue}: {target} vestindo {outfit}.',
   },
 };
 
@@ -276,8 +276,8 @@ const COMPACT_LOCALE_OVERRIDES: Record<string, {
   shots: [string, string, string, string];
 }> = {
   nl: {
-    badge: 'Officiële Eventposter', eyebrow: 'GOOGLE FLOW SEO FOTOGALERIJ · DOELGROEP & OUTFIT',
-    headingTpl: 'Sfeerbeelden, Doelgroep en Kledingvoorschrift - {venue}',
+    badge: 'Officiële Eventposter', eyebrow: 'LOCATIESFEER · ECHTE RUIMTES & DRESSCODE',
+    headingTpl: 'Sfeerbeelden, Doelgroep en Kledingvoorschrift · {venue}',
     targetPrefix: 'Doelgroep', outfitPrefix: 'Event Outfit',
     couples: 'Romantische Koppels & VIP-Gasten (25–45 jaar)', singles: 'Singles, Vriendengroepen & Social Tables (23–38 jaar)',
     over30: 'Stijlvol 30+ / 40+ Publiek', families: 'Gezinnen met Kinderen bij het Galadiner',
@@ -287,12 +287,12 @@ const COMPACT_LOCALE_OVERRIDES: Record<string, {
     techno: 'Volledig Zwarte Techno Clubwear & Leer', thermal: 'Witte Luxe Badjas in de Thermen & Badkleding',
     ski: 'Alpiene Après-Ski Chic & Kasjmier', halloween: 'Halloween Dark Couture & Venetiaans Masker',
     smart: 'Milanees Smart-Chic Maatpak & Aperitivo-Jurk',
-    shots: ['Hoofdzaal & Echte Sfeer', 'Galadiner, Show & Ontvangst', 'VIP Privé-Tafels & Champagne', 'Publiek op de Dansvloer & Dresscode'],
+    shots: ['Hoofdzaal & Echte Sfeer', 'Galadiner, Show & Ontvangst', 'VIP Privé-Tafels & Champagne', 'Dansvloer & Dresscode'],
   },
   pl: {
-    badge: 'Oficjalny Plakat Wydarzenia', eyebrow: 'GALERIA ZDJĘĆ SEO GOOGLE FLOW · GOŚCIE I DRESS CODE',
-    headingTpl: 'Zdjęcia Wydarzenia, Grupa Docelowa i Strój Wieczorowy - {venue}',
-    targetPrefix: 'Grupa Docelowa', outfitPrefix: 'Strój na Wydarzenie',
+    badge: 'Oficjalny Plakat Wydarzenia', eyebrow: 'ATMOSFERA KLUBU · PRAWDZIWE WNĘTRZA I DRESS CODE',
+    headingTpl: 'Wnętrza Klubu i Strój Wieczorowy · {venue}',
+    targetPrefix: 'Goście Wydarzenia', outfitPrefix: 'Strój na Wydarzenie',
     couples: 'Romantyczne Pary i Goście VIP (25–45 lat)', singles: 'Single, Grupy Znajomych i Stoliki Towarzyskie (23–38 lat)',
     over30: 'Elegancka Publiczność 30+ / 40+', families: 'Rodziny z Dziećmi na Kolacji Galowej',
     young: 'Młodzi Klubowicze i Miłośnicy Muzyki (20–32 lata)', fashion: 'Międzynarodowi Goście Świata Mody i Strefy VIP (24–40 lat)',
@@ -301,12 +301,12 @@ const COMPACT_LOCALE_OVERRIDES: Record<string, {
     techno: 'Nowoczesny Total Black Clubwear i Skóra', thermal: 'Biały Szlafrok Termalny Spa i Elegancki Strój Kąpielowy',
     ski: 'Alpejski Styl Après-Ski Chic i Kaszmir', halloween: 'Mroczna Elegancja Halloween i Wenecka Maska',
     smart: 'Mediolański Smart Chic, Marynarka i Sukienka na Aperitivo',
-    shots: ['Sala Główna i Prawdziwe Wnętrze', 'Kolacja Galowa, Show i Powitanie', 'Stoliki VIP Privé i Toast o Północy', 'Goście na Parkiecie i Dress Code'],
+    shots: ['Sala Główna i Prawdziwe Wnętrze', 'Kolacja Galowa, Show i Powitanie', 'Stoliki VIP Privé i Toast o Północy', 'Parkiet i Dress Code'],
   },
   ro: {
-    badge: 'Afișul Oficial al Evenimentului', eyebrow: 'GALERIE FOTO SEO GOOGLE FLOW · PUBLIC ȚINTĂ ȘI ȚINUTĂ',
-    headingTpl: 'Imagini Eveniment, Publicul Țintă și Ținuta Recomandată - {venue}',
-    targetPrefix: 'Public Țintă', outfitPrefix: 'Ținuta Evenimentului',
+    badge: 'Afișul Oficial al Evenimentului', eyebrow: 'ATMOSFERA LOCALULUI · SPAȚII REALE ȘI DRESS CODE',
+    headingTpl: 'Spațiile Reale și Ținuta Recomandată · {venue}',
+    targetPrefix: 'Oaspeții Serii', outfitPrefix: 'Ținuta Evenimentului',
     couples: 'Cupluri Romantice și Oaspeți VIP (25–45 ani)', singles: 'Persoane Singure, Grupuri de Prieteni și Mese Sociale (23–38 ani)',
     over30: 'Public Matur Selectat 30+ / 40+', families: 'Familii cu Copii la Cina Festivă de Gală',
     young: 'Tineri Clubberi și Iubitori de Muzică (20–32 ani)', fashion: 'Public Internațional de Modă și Mese VIP Privé (24–40 ani)',
@@ -315,11 +315,11 @@ const COMPACT_LOCALE_OVERRIDES: Record<string, {
     techno: 'Ținută Total Black Techno și Piele', thermal: 'Halat Alb de Spa Termal și Costum de Baie Elegant',
     ski: 'Ținută Après-Ski Chic de Munte și Cașmir', halloween: 'Dark Couture de Halloween și Mască Venețiană',
     smart: 'Smart Chic Milanez, Sacou Croit și Ținută Aperitivo',
-    shots: ['Sala Principală și Atmosfera Reală', 'Cina de Gală, Spectacol și Primire', 'Mese VIP Privé și Șampanie', 'Publicul pe Ringul de Dans și Dress Code'],
+    shots: ['Sala Principală și Atmosfera Reală', 'Cina de Gală, Spectacol și Primire', 'Mese VIP Privé și Șampanie', 'Ringul de Dans și Dress Code'],
   },
   ru: {
-    badge: 'Официальная Афиша Вечера', eyebrow: 'SEO-ФОТОГАЛЕРЕЯ GOOGLE FLOW · ПУБЛИКА И ДРЕСС-КОД',
-    headingTpl: 'Фотографии События, Целевая Публика и Дресс-Код - {venue}',
+    badge: 'Официальная Афиша Вечера', eyebrow: 'АТМОСФЕРА КЛУБА · РЕАЛЬНЫЕ ИНТЕРЬЕРЫ И ДРЕСС-КОД',
+    headingTpl: 'Реальные Интерьеры и Дресс-Код Вечера · {venue}',
     targetPrefix: 'Публика События', outfitPrefix: 'Дресс-Код Вечера',
     couples: 'Романтические Пары и VIP-Гости (25–45 лет)', singles: 'Компании Друзей и Новые Знакомства (23–38 лет)',
     over30: 'Изысканная Публика 30+ / 40+', families: 'Семьи с Детьми на Гала-Ужине',
@@ -329,12 +329,12 @@ const COMPACT_LOCALE_OVERRIDES: Record<string, {
     techno: 'Современный Total Black для Техно-Клуба и Кожа', thermal: 'Белый Халат Термального Спа и Купальный Костюм',
     ski: 'Альпийский Шик Шале, Кашемир и Мех', halloween: 'Вечерний Образ Хэллоуин Dark Couture и Венецианская Маска',
     smart: 'Миланский Smart Chic, Пиджак и Коктейльный Образ',
-    shots: ['Главный Зал и Реальный Интерьер', 'Гала-Ужин, Шоу-Программа и Сервис', 'VIP-Столы Privé и Полуночный Тост', 'Гости на Танцполе и Вечерние Образы'],
+    shots: ['Главный Зал и Реальный Интерьер', 'Гала-Ужин, Шоу-Программа и Сервис', 'VIP-Столы Privé и Полуночный Тост', 'Танцпол и Вечерние Образы'],
   },
   tr: {
-    badge: 'Resmi Etkinlik Afişi', eyebrow: 'GOOGLE FLOW SEO FOTOĞRAF GALERİSİ · HEDEF KİTLE VE KIYAFET',
-    headingTpl: 'Etkinlik Atmosferi, Katılımcı Profili ve Kıyafet Kodu - {venue}',
-    targetPrefix: 'Hedef Kitle', outfitPrefix: 'Etkinlik Kıyafeti',
+    badge: 'Resmi Etkinlik Afişi', eyebrow: 'MEKAN ATMOSFERİ · GERÇEK ALANLAR VE KIYAFET KODU',
+    headingTpl: 'Mekan Atmosferi ve Kıyafet Kodu · {venue}',
+    targetPrefix: 'Misafir Profili', outfitPrefix: 'Etkinlik Kıyafeti',
     couples: 'Romantik Çiftler ve VIP Misafirler (25–45 Yaş)', singles: 'Bekarlar, Arkadaş Grupları ve Sosyal Masalar (23–38 Yaş)',
     over30: 'Seçkin 30+ / 40+ Yetişkin Kitle', families: 'Çocuklu Aileler ve Gala Yemeği Misafirleri',
     young: 'Genç Kulüp Severler ve Müzik Tutkunları (20–32 Yaş)', fashion: 'Uluslararası Moda Çevresi ve VIP Loca Misafirleri (24–40 Yaş)',
@@ -343,12 +343,12 @@ const COMPACT_LOCALE_OVERRIDES: Record<string, {
     techno: 'Modern Simsiyah Tekno Kulüp Stili ve Deri', thermal: 'Termal Spa Beyaz Bornoz ve Şık Mayo',
     ski: 'Dağ Evi Après-Ski Şıklığı ve Kaşmir', halloween: 'Cadılar Bayramı Dark Couture ve Venedik Maskesi',
     smart: 'Milano Smart-Chic Blazer ve Aperitivo Şıklığı',
-    shots: ['Ana Salon ve Gerçek Mekan Atmosferi', 'Gala Yemeği, Sahne Şovu ve Karşılama', 'VIP Privé Masalar ve Gece Yarısı Kadehi', 'Pistteki Katılımcılar ve Kıyafet Kodu'],
+    shots: ['Ana Salon ve Gerçek Mekan Atmosferi', 'Gala Yemeği, Sahne Şovu ve Karşılama', 'VIP Privé Masalar ve Gece Yarısı Kadehi', 'Dans Pisti ve Kıyafet Kodu'],
   },
   zh: {
-    badge: '官方活动海报', eyebrow: 'GOOGLE FLOW SEO 实景图集 · 目标客群与穿搭指南',
-    headingTpl: '活动实景、目标人群与着装要求 - {venue}',
-    targetPrefix: '目标客群', outfitPrefix: '活动着装',
+    badge: '官方活动海报', eyebrow: '场地实景 · 真实空间与晚宴着装',
+    headingTpl: '场地真实空间与着装要求 · {venue}',
+    targetPrefix: '宾客画像', outfitPrefix: '活动着装',
     couples: '浪漫情侣与 VIP 贵宾（25–45岁）', singles: '单身人士、好友聚会与社交餐桌（23–38岁）',
     over30: '30+ / 40+ 成熟精英客群', families: '亲子家庭与跨年晚宴宾客',
     young: '年轻潮人、大学生与电子音乐爱好者（20–32岁）', fashion: '国际时尚名流与 VIP 卡座贵宾（24–40岁）',
@@ -357,12 +357,12 @@ const COMPACT_LOCALE_OVERRIDES: Record<string, {
     techno: '全黑先锋电子俱乐部穿搭与皮衣', thermal: '奢华温泉白色浴袍与优雅泳装',
     ski: '阿尔卑斯雪屋奢华羊绒与冬日穿搭', halloween: '万圣节暗黑高定礼服与威尼斯面具',
     smart: '米兰意式雅痞西装与开胃酒晚装',
-    shots: ['主厅实景与真实建筑氛围', '跨年晚宴、现场演出与迎宾服务', 'VIP 尊享卡座与午夜香槟祝酒', '舞池目标客群与晚宴着装展示'],
+    shots: ['主厅实景与真实建筑氛围', '跨年晚宴、现场演出与迎宾服务', 'VIP 尊享卡座与午夜香槟祝酒', '舞池现场与晚宴着装'],
   },
   ar: {
-    badge: 'الملصق الرسمي للفعالية', eyebrow: 'معرض صور SEO GOOGLE FLOW · الجمهور المستهدف والأزياء',
-    headingTpl: 'صور الفعالية، الجمهور المستهدف والزي الرسمي - {venue}',
-    targetPrefix: 'الجمهور المستهدف', outfitPrefix: 'زي السهرة',
+    badge: 'الملصق الرسمي للفعالية', eyebrow: 'أجواء المكان · القاعات الحقيقية وزي السهرة',
+    headingTpl: 'أجواء المكان الحقيقية والزي الرسمي · {venue}',
+    targetPrefix: 'ضيوف السهرة', outfitPrefix: 'زي السهرة',
     couples: 'الأزواج الرومانسيون وضيوف VIP (25–45 سنة)', singles: 'مجموعات الأصدقاء والطاولات الاجتماعية (23–38 سنة)',
     over30: 'جمهور النخبة 30+ / 40+', families: 'العائلات مع الأطفال في عشاء الغالا',
     young: 'الشباب وعشاق الموسيقى الإلكترونية (20–32 سنة)', fashion: 'جمهور الموضة العالمي وطاولات VIP (24–40 سنة)',
@@ -371,7 +371,7 @@ const COMPACT_LOCALE_OVERRIDES: Record<string, {
     techno: 'إطلالة تكنو باللون الأسود الكامل وجلد', thermal: 'رداء حمام أبيض فاخر في السبا الحراري',
     ski: 'أناقة شاليهات جبال الألب والكشمير', halloween: 'أزياء هالوين دارك كوتور وقناع البندقية',
     smart: 'أناقة ميلانو سمارت شيك وبليزر رسمي',
-    shots: ['القاعة الرئيسية والأجواء الحقيقية', 'عشاء الغالا والعرض الفني والترحيب', 'طاولات VIP Privé ونخب منتصف الليل', 'الجمهور في ساحة الرقص وزي السهرة'],
+    shots: ['القاعة الرئيسية والأجواء الحقيقية', 'عشاء الغالا والعرض الفني والترحيب', 'طاولات VIP Privé ونخب منتصف الليل', 'ساحة الرقص وزي السهرة'],
   },
 };
 
@@ -383,7 +383,7 @@ export function getSeoLocalePack(locale: string): SeoLocalePack {
       officialPosterBadge: ov.badge,
       galleryEyebrow: ov.eyebrow,
       galleryHeadingTpl: ov.headingTpl,
-      gallerySubTpl: `{h1} @ {venue}: {target} · {outfit}. WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}.`,
+      gallerySubTpl: `{venue}: {target} · {outfit}.`,
       targetPrefix: ov.targetPrefix,
       outfitPrefix: ov.outfitPrefix,
       targets: {
@@ -406,23 +406,23 @@ export function getSeoLocalePack(locale: string): SeoLocalePack {
         smart_chic_aperitivo: ov.smart,
       },
       shots: ov.shots,
-      posterDescTpl: `{h1} · {venue}: ${ov.badge} (WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}). ${ov.targetPrefix}: {target} · ${ov.outfitPrefix}: {outfit}.`,
-      shotDescTpl: `{h1} ({heading}) - {venue}: {target}, {outfit} ({shot}). WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}.`,
+      posterDescTpl: `{h1} · {venue}: ${ov.badge}. ${ov.targetPrefix}: {target} · ${ov.outfitPrefix}: {outfit}.`,
+      shotDescTpl: `{shot} — {h1} ({venue}): {target} · {outfit}.`,
     };
   }
-  // For all other European / Balkan / Nordic locales (cs, sv, da, no, fi, el, hu, sk, bg, hr, sl, lt, lv, et, ga, mt, is, uk, sq, sr, bs, mk)
+  // For any fallback locale
   return {
     officialPosterBadge: `${locale.toUpperCase()} · Official Event Poster`,
-    galleryEyebrow: 'GOOGLE FLOW SEO PHOTO GALLERY · TARGET & OUTFIT',
-    galleryHeadingTpl: `{venue} - SEO Photo Gallery, Target & Outfit`,
-    gallerySubTpl: `{h1} @ {venue}: {target} · {outfit}. WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}.`,
-    targetPrefix: 'Target',
-    outfitPrefix: 'Outfit',
+    galleryEyebrow: 'VENUE ATMOSPHERE · INTERIORS & DRESS CODE',
+    galleryHeadingTpl: `{venue} — Venue Atmosphere & Dress Code`,
+    gallerySubTpl: `{venue}: {target} · {outfit}.`,
+    targetPrefix: 'Guests',
+    outfitPrefix: 'Dress Code',
     targets: PACKS.en.targets,
     outfits: PACKS.en.outfits,
     shots: PACKS.en.shots,
-    posterDescTpl: `{h1} @ {venue}: {target} · {outfit} (WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}).`,
-    shotDescTpl: `{h1} ({heading}) @ {venue}: {target} · {outfit} ({shot}). WWW.NIGHTLIFEMILAN.COM · WhatsApp {phone}.`,
+    posterDescTpl: `{h1} · {venue}: {target} · {outfit}.`,
+    shotDescTpl: `{shot} — {h1} ({venue}): {target} · {outfit}.`,
   };
 }
 
@@ -520,6 +520,8 @@ const VENUE_MASTER_KEYS: Record<string, [string, string, string, string]> = {
   'qiclubbing': ['qiclubbing-01', 'qiclubbing-02', 'qiclubbing-03', 'qiclubbing-04'],
   'numberone': ['numberone-01', 'numberone-02', 'numberone-03', 'numberone-04'],
   'justme': ['just-me-milano-torre-branca-01', 'just-me-milano-cena-01', 'just-me-milano-prive-01', 'just-me-milano-party-01'],
+  'justme-nye': ['capodanno-justme-gatsby-01', 'capodanno-justme-gatsby-02', 'capodanno-justme-gatsby-03', 'capodanno-justme-gatsby-04'],
+  'justme-garda': ['barchetta-como-real-01', 'terminus-como-real-02', 'palace-como-real-03', 'capodanno-villa-castello-flow-01'],
   'armani': ['armani-prive-real-01', 'armani-prive-real-02', 'armani-prive-real-03', 'armani-prive-real-04'],
   'radio-rooftop': ['radio-rooftop-real-01', 'radio-rooftop-real-02', 'radio-rooftop-real-03', 'radio-rooftop-real-04'],
   'atmosfera': ['atmosfera-real-01', 'atmosfera-real-02', 'atmosfera-real-03', 'atmosfera-real-04'],
@@ -580,6 +582,22 @@ export function selectMasterAssetKeys(slug: string, venueName = '', categorySlug
   if (s.includes('qi-clubbing') || s.includes('qiclubbing') || s.includes('qi clubbing')) return VENUE_MASTER_KEYS['qiclubbing'];
   if ((s.includes('number-one') || s.includes('numberone') || s.includes('number one')) && !s.includes('fenaroli')) return VENUE_MASTER_KEYS['numberone'];
   if (s.includes('aprica') || s.includes('world-winter-week')) return VENUE_MASTER_KEYS['aprica'];
+  if (s.includes('garda-lake') || s.includes('desenzano') || s.includes('justme-garda')) return VENUE_MASTER_KEYS['justme-garda'];
+  if (
+    (s.includes('justme') || s.includes('just-me') || s.includes('torre-branca')) &&
+    !s.includes('orthodox') &&
+    !s.includes('ortodosso') &&
+    (s.includes('capodanno') ||
+      s.includes('new-year') ||
+      s.includes('nochevieja') ||
+      s.includes('nouvel-an') ||
+      s.includes('silvester') ||
+      s.includes('gatsby') ||
+      s.includes('2026-12-31') ||
+      s.includes('2027'))
+  ) {
+    return VENUE_MASTER_KEYS['justme-nye'];
+  }
   if (s.includes('justme') || s.includes('just-me') || s.includes('torre-branca')) return VENUE_MASTER_KEYS['justme'];
   if (s.includes('armani')) return VENUE_MASTER_KEYS['armani'];
   if (s.includes('philipp') || s.includes('plein-hotel')) return VENUE_MASTER_KEYS['philipps'];
@@ -1108,8 +1126,12 @@ export function buildSeoEventImagePack(params: {
 
   const assetKeys = params.customAssetKeys || selectMasterAssetKeys(params.eventSlug, params.venueName, params.categorySlug);
 
-  const posterTitle = `${params.h1} - ${pack.officialPosterBadge} · ${params.venueName}`;
-  const posterAlt = `${params.h1} - ${pack.officialPosterBadge} ${params.venueName} (${targetLabel} · ${outfitLabel})`;
+  const venueCore = params.venueName.split('(')[0].trim().toLowerCase();
+  const h1HasVenue = venueCore.length > 2 && params.h1.toLowerCase().includes(venueCore);
+  const posterTitle = h1HasVenue
+    ? `${params.h1} — ${pack.officialPosterBadge}`
+    : `${params.h1} — ${pack.officialPosterBadge} · ${params.venueName}`;
+  const posterAlt = `${posterTitle} · ${outfitLabel}`;
   const posterDesc = pack.posterDescTpl
     .replace('{h1}', params.h1)
     .replace('{venue}', params.venueName)
@@ -1125,8 +1147,11 @@ export function buildSeoEventImagePack(params: {
       82,
     );
     const src = `/images/seo-events/${params.locale}/${assetKey}--${seoFileSlug}.webp`;
-    const title = `${params.h1} · ${anchorHeading} - ${targetLabel} | ${outfitLabel}`;
-    const alt = `${params.h1} (${anchorHeading}) - ${params.venueName}: ${targetLabel}, ${outfitLabel} (${shotLabel})`;
+    const cleanHeading = anchorHeading && anchorHeading !== params.h1 ? anchorHeading : '';
+    const title = `${shotLabel} · ${params.h1}`;
+    const alt = cleanHeading
+      ? `${shotLabel} — ${params.h1} (${cleanHeading}) · ${outfitLabel}`
+      : `${shotLabel} — ${params.h1} · ${outfitLabel}`;
     const description = pack.shotDescTpl
       .replace('{h1}', params.h1)
       .replace('{heading}', anchorHeading)
@@ -1158,6 +1183,8 @@ export function buildSeoEventImagePack(params: {
       name: posterTitle,
       caption: posterAlt,
       description: posterDesc,
+      creditText: 'Nightlife Milan',
+      creator: { '@type': 'Organization' as const, name: 'Nightlife Milan', url: origin },
     },
     ...gallery.map((g) => ({
       '@type': 'ImageObject' as const,
@@ -1166,6 +1193,8 @@ export function buildSeoEventImagePack(params: {
       name: g.title,
       caption: g.alt,
       description: g.description,
+      creditText: 'Nightlife Milan',
+      creator: { '@type': 'Organization' as const, name: 'Nightlife Milan', url: origin },
     })),
   ];
 
