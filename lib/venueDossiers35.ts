@@ -22,6 +22,13 @@ import {
   JUST_SINGING_RAIN_POSTER_SRC,
   justSingingRainPath,
 } from './just-singing-rain/justme35';
+import { isBergamoBresciaVenueId } from './bergamo-brescia/clubsSeed';
+import {
+  BERGAMO_BRESCIA_ACTIVE_NIGHTS,
+  bergamoBresciaNightPath,
+  computeActiveNightWindowISO,
+  getNightUi35,
+} from './bergamo-brescia/activeNights35';
 
 function venueDisplayName(venue: Venue, locale: string): string {
   return (locale === 'it' ? venue.localizedContent?.name?.it : venue.localizedContent?.name?.en) || venue.localizedContent?.name?.en || 'Club Milano';
@@ -116,6 +123,48 @@ export function getEnhancedVenueGallery(venue: Venue): string[] {
       '/images/events/cards-4x5/partner-clubs/justme-garda-lake.webp',
       '/images/events/cards-4x5/october-2026/250310-garda-nye-rouge.webp',
       '/images/events/cards-4x5/october-2026/251849-garda-ritmo.webp',
+    ],
+    'v-setai-bergamo': [
+      '/images/events/cards-4x5/partner-clubs/setai-club-bergamo.webp',
+      '/images/seo-events/master/setai-01.webp',
+      '/images/seo-events/master/setai-02.webp',
+      '/images/seo-events/master/setai-03.webp',
+      '/images/seo-events/master/setai-04.webp',
+    ],
+    'v-capogiro-bergamo': [
+      '/images/events/cards-4x5/partner-clubs/capogiro-curno-bergamo.webp',
+      '/images/seo-events/master/capogiro-01.webp',
+      '/images/seo-events/master/capogiro-02.webp',
+      '/images/seo-events/master/capogiro-03.webp',
+      '/images/seo-events/master/capogiro-04.webp',
+    ],
+    'v-tiky-klub-bergamo': [
+      '/images/events/cards-4x5/partner-clubs/tiky-klub-seriate-bergamo.webp',
+      '/images/seo-events/master/tiky-01.webp',
+      '/images/seo-events/master/tiky-02.webp',
+      '/images/seo-events/master/tiky-03.webp',
+      '/images/seo-events/master/tiky-04.webp',
+    ],
+    'v-zero-club-bergamo': [
+      '/images/events/cards-4x5/partner-clubs/zero-club-bergamo.webp',
+      '/images/seo-events/master/zeroclub-01.webp',
+      '/images/seo-events/master/zeroclub-02.webp',
+      '/images/seo-events/master/zeroclub-03.webp',
+      '/images/seo-events/master/zeroclub-04.webp',
+    ],
+    'v-qi-clubbing-brescia': [
+      '/images/events/cards-4x5/partner-clubs/qi-clubbing-erbusco-brescia.webp',
+      '/images/seo-events/master/qiclubbing-01.webp',
+      '/images/seo-events/master/qiclubbing-02.webp',
+      '/images/seo-events/master/qiclubbing-03.webp',
+      '/images/seo-events/master/qiclubbing-04.webp',
+    ],
+    'v-number-one-brescia': [
+      '/images/events/cards-4x5/partner-clubs/number-one-corte-franca-brescia.webp',
+      '/images/seo-events/master/numberone-01.webp',
+      '/images/seo-events/master/numberone-02.webp',
+      '/images/seo-events/master/numberone-03.webp',
+      '/images/seo-events/master/numberone-04.webp',
     ],
   };
   if (map[venue.id]) return map[venue.id];
@@ -1252,6 +1301,63 @@ export function resolveVenueEventsForCarousel(
     if (curatedProposals.length < 6) curatedProposals.push(sig);
   }
 
+  if (isBergamoBresciaVenueId(venue.id)) {
+    const nightUi = getNightUi35(locale);
+    const nowDate = new Date();
+    const clubNights = BERGAMO_BRESCIA_ACTIVE_NIGHTS.filter((s) => s.venueId === venue.id);
+    for (const s of clubNights) {
+      const win = computeActiveNightWindowISO(s, nowDate);
+      if (win.isExpired) continue;
+      const evHref = bergamoBresciaNightPath(s.id, locale);
+      const card: CarouselEventCard = {
+        id: `bg-bs-${s.id}`,
+        title: isIt ? s.titleIt : s.titleEn,
+        dateLabel:
+          s.kind === 'weekly' && s.dayKey
+            ? nightUi.dayLabels[s.dayKey]
+            : win.startISO.slice(0, 10),
+        timeLabel: s.hoursLabel,
+        priceLabel: nightUi.uponRequest,
+        categoryLabel: `${s.venueName} · ${s.city} (${s.province})`,
+        genres: s.genres.slice(0, 3),
+        imageSrc: s.posterSrc,
+        href: evHref,
+        whatsappHref: getConciergeBookingUrl(locale, `${s.venueName} · ${s.hoursLabel}`, sourcePageUrl || evHref),
+        badge: s.kind === 'weekly' ? nightUi.weeklyBadge : nightUi.datedBadge,
+        isRecurring: s.kind === 'weekly',
+      };
+      if (s.kind === 'weekly') {
+        thisWeek.push(card);
+        curatedProposals.push(card);
+      } else {
+        future.push(card);
+      }
+    }
+    const capEv = getCapodannoEventForClub(clubSlug, venue.localizedContent.name.en);
+    if (capEv) {
+      const capHref = capodannoEventPath(capEv.slug, locale);
+      const nyeCard: CarouselEventCard = {
+        id: `cap-${capEv.slug}`,
+        title: isIt ? capEv.titleIt : capEv.titleEn,
+        dateLabel: '2026-12-31',
+        timeLabel: capEv.hours || '20:30 – 05:00',
+        priceLabel: nightUi.uponRequest,
+        categoryLabel: isIt ? 'Capodanno 31 Dicembre' : 'New Year’s Eve 31 Dec',
+        genres: ['Cenone / Gala', 'Countdown', 'VIP Privé'],
+        imageSrc: capEv.image || fallbackImg,
+        href: capHref,
+        whatsappHref: getConciergeBookingUrl(locale, `${vName} Capodanno 2027`, sourcePageUrl || capHref),
+        badge: isIt ? 'CAPODANNO 2027' : 'NYE 2027',
+      };
+      future.push(nyeCard);
+      curatedProposals.push(nyeCard);
+    }
+    if (tonight.length === 0 && thisWeek.length > 0) {
+      tonight.push(thisWeek[0]);
+    }
+    return { tonight, thisWeek, curatedProposals, future };
+  }
+
   const capEvent = getCapodannoEventForClub(clubSlug);
   if (capEvent) {
     const capHref = capodannoEventPath(capEvent.slug, locale);
@@ -1260,7 +1366,7 @@ export function resolveVenueEventsForCarousel(
       title: isIt ? capEvent.titleIt : capEvent.titleEn,
       dateLabel: '2026-12-31',
       timeLabel: capEvent.hours || '20:30 – 06:00',
-      priceLabel: `€${capEvent.priceFromEur || 40}`,
+      priceLabel: capEvent.priceFromEur > 0 ? `€${capEvent.priceFromEur}` : isIt ? 'Su richiesta WA' : 'Upon request WA',
       categoryLabel: isIt ? 'Capodanno 31 Dicembre' : 'New Year’s Eve 31 Dec',
       genres: ['Cenone / Buffet', 'Countdown', 'Open Format'],
       imageSrc: capEvent.image || fallbackImg,

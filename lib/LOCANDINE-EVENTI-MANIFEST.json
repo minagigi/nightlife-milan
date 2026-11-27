@@ -1,10 +1,10 @@
 {
   "schema_version": "2026-11-25.v1",
   "network": "nightlifemilan.com",
-  "generated_at": "2026-11-26T01:00:33.021956+00:00",
-  "total_entries": 259,
+  "generated_at": "2026-11-26T23:37:09.638193+00:00",
+  "total_entries": 287,
   "official_flyers": 102,
-  "flow_keyart_flyers": 157,
+  "flow_keyart_flyers": 185,
   "entries": {
     "capodanno-2027-posters/capodanno-11clubroom-milano.webp": {
       "source_kind": "flow_keyart_flyer",
@@ -180,6 +180,13 @@
       "height": 1350,
       "bytes": 245788,
       "sha256": "ad1244ac59c1dae7c06fc4a8861a58f2b6fd9ca26ddf87f6291d6c54ef7ae646"
+    },
+    "capodanno-2027-posters/capodanno-capogiro-curno-bergamo.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 164158,
+      "sha256": "ad10f4233e811b04274277459c99abb20d5959507ae61c8e954e11f015a768dd"
     },
     "capodanno-2027-posters/capodanno-carlsberg-ol-milano.webp": {
       "source_kind": "flow_keyart_flyer",
@@ -559,6 +566,13 @@
       "bytes": 243812,
       "sha256": "547009240d29c54767d092903ddc580f52adf0122a937a8a9c1d06d9514d6d62"
     },
+    "capodanno-2027-posters/capodanno-number-one-brescia.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 249774,
+      "sha256": "e8f88de3a61d5fcdeb36bda57c33661e7b31a3cf9eaa01e0e98c1be56a30c49f"
+    },
     "capodanno-2027-posters/capodanno-old-fashion-triennale.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
@@ -713,6 +727,13 @@
       "bytes": 270960,
       "sha256": "063adbb8432c69e520c3a61535ae56fdd5bfae09477b8aa4db166e5f6edc5f23"
     },
+    "capodanno-2027-posters/capodanno-qi-clubbing-brescia.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 218366,
+      "sha256": "44139a567f32b02d7e03e4888ef84ef725f7282a8cf23c9add6c59a2ad6c0f83"
+    },
     "capodanno-2027-posters/capodanno-radio-rooftop-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
@@ -747,6 +768,13 @@
       "height": 1350,
       "bytes": 271368,
       "sha256": "1f8f8d2c3b4123eafc0350c857e5ff185cc564971303f51ea687ede78d36fa22"
+    },
+    "capodanno-2027-posters/capodanno-setai-club-bergamo.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 211472,
+      "sha256": "4a92c4886c6af113262634351edc4e0ac2f154bec7f7eb50dc01f3af641bee88"
     },
     "capodanno-2027-posters/capodanno-sio-cafe-milano-bicocca.webp": {
       "source_kind": "flow_keyart_flyer",
@@ -867,6 +895,13 @@
       "bytes": 255574,
       "sha256": "3744f1e8e3c063d8d989b9eeefa6bb7bb48ecf72727a8b5bda7f81242d864700"
     },
+    "capodanno-2027-posters/capodanno-tiky-klub-seriate-bergamo.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 168266,
+      "sha256": "328c72c235724d5fe75f5a839c95c25e54502544f66a7be2b9ff9d70c9742b4c"
+    },
     "capodanno-2027-posters/capodanno-tocqueville-13-milano.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
@@ -929,6 +964,13 @@
       "height": 1350,
       "bytes": 265222,
       "sha256": "1bc33118b783099079cf55c76dc4ba0395dd4596a07a250813c0d5cd3edf76f4"
+    },
+    "capodanno-2027-posters/capodanno-zero-club-bergamo.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 167438,
+      "sha256": "3b93668b95c68c698d66c5ec9632abbaaebce8e3ae6738049269e2f338fc158c"
     },
     "capodanno-2027-posters/capodanno-zoo-club-milano.webp": {
       "source_kind": "flow_keyart_flyer",
@@ -1546,6 +1588,41 @@
       "bytes": 274016,
       "sha256": "dd9419ef80b219a21306a405a5aa17f3671815b14b8cd8476c222904ef539d9e"
     },
+    "weekly-posters/bergamo-brescia-hub-2026.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 141406,
+      "sha256": "dbe19ef7d2741f504bddeeb4b9c246bd23a9774647f966741e74cd43d3ba851e"
+    },
+    "weekly-posters/capogiro-bergamo-friday.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 158832,
+      "sha256": "a9b8763a0aa75043a0c6cbbd359d414c6ca052b7154fa97f18d97456e29e0c9f"
+    },
+    "weekly-posters/capogiro-bergamo-immacolata-7-dicembre.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 148310,
+      "sha256": "7f3b4eaf8c75478b2c59bc7d539f1c41efbbd4e8c4948b0de73d5804096baba6"
+    },
+    "weekly-posters/capogiro-bergamo-natale-25-dicembre.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 152302,
+      "sha256": "9a554e867c80521b8f1c5b30cd19fd19f2c1faabfef98e0d3994abd72c7d921b"
+    },
+    "weekly-posters/capogiro-bergamo-saturday.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 148734,
+      "sha256": "58ebc29544e228d3704278b916c505d45133a1c41e74e8b406f908fe761fcb6e"
+    },
     "weekly-posters/justme-wednesday-club-campanini.webp": {
       "source_kind": "official_flyer",
       "width": 1080,
@@ -1587,6 +1664,27 @@
       "height": 1350,
       "bytes": 252174,
       "sha256": "905a70e1aae9677f5e75f604116fbdc180fbacfed6f339416cf2e899a55531ab"
+    },
+    "weekly-posters/number-one-brescia-immacolata-7-dicembre.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 177586,
+      "sha256": "21b4a40b933a20e714a7c31377c3efdee2d829b7cc47518a570c16a84771c9b8"
+    },
+    "weekly-posters/number-one-brescia-saturday.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 196168,
+      "sha256": "bd8f579aae87a7d9885e87b389aafdf904031956a91aafc1c3066c20aae8520b"
+    },
+    "weekly-posters/number-one-brescia-student-xmas-22-dicembre.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 237068,
+      "sha256": "ca0d5ab6757fb79fcd907f438beb791fc4a51df66fbbb279e41d8f5690ddcb2a"
     },
     "weekly-posters/philipps-dinnershow.webp": {
       "source_kind": "flow_keyart_flyer",
@@ -1672,6 +1770,34 @@
       "bytes": 239742,
       "sha256": "dddba8d3b0699232d9eb454e884071d63419426e28ba94be2f653137ed84bbe5"
     },
+    "weekly-posters/qi-clubbing-brescia-friday.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 167324,
+      "sha256": "5294836f33c7c45a40cdb945955416ef46374f1e8784aff9700877053b773046"
+    },
+    "weekly-posters/qi-clubbing-brescia-immacolata-7-dicembre.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 144206,
+      "sha256": "bad7955df3ba41dc6233ba7fc07206f2025b18bf46ae389a66bf20804329e421"
+    },
+    "weekly-posters/qi-clubbing-brescia-natale-25-dicembre.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 198782,
+      "sha256": "a0d6c88b4dd2350a4fc1636caeb53959fdae60dc601383d71076da980dc0ae66"
+    },
+    "weekly-posters/qi-clubbing-brescia-saturday.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 152824,
+      "sha256": "e86339c809904a8c545af5c45f13b1d215bef2dd6612b865a391a0aba88c0354"
+    },
     "weekly-posters/repvblic-friday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
@@ -1720,6 +1846,34 @@
       "height": 1350,
       "bytes": 144164,
       "sha256": "d10acca47134b5ce0f74dd53585e7aeb5cca6af88c70d4336e293b3005fbf55a"
+    },
+    "weekly-posters/setai-bergamo-friday.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 188634,
+      "sha256": "4d74af294d42fc32e756dcfcaa10988388b1f70949920e833f28f588dd6f819a"
+    },
+    "weekly-posters/setai-bergamo-immacolata-7-dicembre.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 178172,
+      "sha256": "e0cc0708d7aace40a42bb53938045e3b2c71f4295ea17c40f4df666af95008e0"
+    },
+    "weekly-posters/setai-bergamo-natale-25-dicembre.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 205634,
+      "sha256": "253f5cc02baaf74d5d243aec2d990d29f1e7e2a59cce8dd525ce15df7de37d7e"
+    },
+    "weekly-posters/setai-bergamo-saturday.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 179680,
+      "sha256": "671b17325a127aa2628f0d7d2969d8be6b65780118e8be2f734a9a67716e6f95"
     },
     "weekly-posters/terrazza21-friday-skyline.webp": {
       "source_kind": "flow_keyart_flyer",
@@ -1777,6 +1931,27 @@
       "bytes": 244430,
       "sha256": "c097c6d11d4b69222bf6831aef1180859ba09d5ae13cb5747e39cbec63305238"
     },
+    "weekly-posters/tiky-klub-bergamo-friday.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 179888,
+      "sha256": "19e87218988070781b470aed26944e0f4fa78a8b50ced3e009dc7cb808c58fd7"
+    },
+    "weekly-posters/tiky-klub-bergamo-saturday.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 155042,
+      "sha256": "7fbaad44f89bdc45f0e67b4c1b7ab5635b49d933513cd1f35408c0d94eee3aaa"
+    },
+    "weekly-posters/tiky-klub-bergamo-wednesday.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 131088,
+      "sha256": "b4bae1cdf08cb2611440063e4ebd15e2855f9c9b61c371a2d51a59875d20bd91"
+    },
     "weekly-posters/voya-friday.webp": {
       "source_kind": "flow_keyart_flyer",
       "width": 1080,
@@ -1818,6 +1993,27 @@
       "height": 1350,
       "bytes": 171900,
       "sha256": "98f0b29b880a9ec40b168ebff9d73327c586f9170403e50a6ea920f7b70c495b"
+    },
+    "weekly-posters/zero-club-bergamo-friday.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 158840,
+      "sha256": "1a186a16fe802487cd5793faf09c6c5924fc8199595e3b137d7da158ddaedcbd"
+    },
+    "weekly-posters/zero-club-bergamo-saturday.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 159334,
+      "sha256": "d5210ac9b9e66c02ce7f18229c16d192487a0f03c0f5f1c379fd8d43db30bfcc"
+    },
+    "weekly-posters/zero-club-bergamo-wednesday.webp": {
+      "source_kind": "flow_keyart_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 168792,
+      "sha256": "fa1a8a1bdbc240e38925e061b829752219e95270f707d121853225030e2a7295"
     }
   }
 }

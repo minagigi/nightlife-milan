@@ -918,6 +918,22 @@ const STRATEGIC_HUBS = [
       'listino prezzi bottiglie tavoli vip 2026 2027 minimum spend dom perignon belvedere grey goose azul don julio 1942 magnum jeroboam',
   },
   {
+    id: 'hub-bergamo-brescia',
+    href: '/bergamo-brescia',
+    icon: 'sparkles',
+    badge: { en: 'BERGAMO & BRESCIA · 6 CLUBS', it: 'BERGAMO & BRESCIA · 6 CLUB' },
+    title: {
+      en: 'Bergamo & Brescia Nightlife: Setai, Capogiro, Tiky, Zero, Qi & Number One',
+      it: 'Discoteche Bergamo & Brescia: Setai, Capogiro, Tiky, Zero, Qi & Number One',
+    },
+    subtitle: {
+      en: 'All 21 active nights + 6 NYE 2027 galas along the A4 corridor (Orio BGY & Franciacorta)',
+      it: 'Tutte le 21 serate attive + 6 Capodanno 2027 sull’asse A4 (Orio BGY & Franciacorta)',
+    },
+    searchTerms:
+      'bergamo brescia franciacorta orio al serio curno seriate erbusco corte franca setai capogiro joyclub tiky klub zero club qi clubbing number one capodanno 2027 discoteche tavoli vip',
+  },
+  {
     id: 'hub-vip-tables',
     href: '/vip-tables',
     icon: 'sparkles',

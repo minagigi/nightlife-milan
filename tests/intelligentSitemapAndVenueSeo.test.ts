@@ -20,6 +20,7 @@ import {
   renderSitemapXml,
   toCompactSitemapEntries,
 } from '../lib/sitemapBuilder';
+import { isBergamoBresciaVenueId } from '../lib/bergamo-brescia/clubsSeed';
 import {
   buildCityQualifiedVenueH1,
   buildVenueAuthorityFaqs,
@@ -28,9 +29,9 @@ import {
   VENUE_AUTHORITY_33,
 } from '../lib/venueAuthority33';
 
-test('Pillar A: all 41 active public venues have full authority specs, SERP meta, FAQs, and rich Club schema', () => {
-  assert.equal(mockVenues.length, 41);
-  assert.equal(Object.keys(VENUE_AUTHORITY_33).length, 41);
+test('Pillar A: all 47 active public venues have full authority specs, SERP meta, FAQs, and rich Club schema', () => {
+  assert.equal(mockVenues.length, 47);
+  assert.equal(Object.keys(VENUE_AUTHORITY_33).length, 47);
   assert.equal(Object.keys(CLUB_SERP_35).length, 35);
 
   for (const venue of mockVenues) {
@@ -45,6 +46,11 @@ test('Pillar A: all 41 active public venues have full authority specs, SERP meta
     if (venue.id === 'v-justme-garda') {
       assert.match(h1It, /Garda/i);
       assert.match(h1En, /Garda/i);
+      assert.doesNotMatch(h1It, /Milano|Milan/i);
+      assert.doesNotMatch(h1En, /Milano|Milan/i);
+    } else if (isBergamoBresciaVenueId(venue.id)) {
+      assert.match(h1It, /Bergamo|Brescia|Franciacorta/i);
+      assert.match(h1En, /Bergamo|Brescia|Franciacorta/i);
       assert.doesNotMatch(h1It, /Milano|Milan/i);
       assert.doesNotMatch(h1En, /Milano|Milan/i);
     } else {

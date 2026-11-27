@@ -13,6 +13,7 @@ import { christmasVoyaSlug, resolveChristmasVoyaSlug } from '@/lib/christmas/voy
 import { orthodoxNyeJustMeSlug, resolveOrthodoxNyeJustMeSlug } from '@/lib/orthodox-nye/justme35';
 import { thanksgivingJustMeSlug, resolveThanksgivingJustMeSlug } from '@/lib/thanksgiving/justme35';
 import { partenopeaJustMeSlug, resolvePartenopeaJustMeSlug } from '@/lib/partenopea/justme35';
+import { bergamoBresciaNightSlug, resolveBergamoBresciaNightId } from '@/lib/bergamo-brescia/activeNights35';
 import { justSingingRainSlug, resolveJustSingingRainSlug } from '@/lib/just-singing-rain/justme35';
 import {
   CAPODANNO_CATEGORY_IDS,
@@ -457,6 +458,73 @@ const CANONICAL_VENUE_BASES: Array<{
     },
     aliases: ['justme-garda', 'just-me-garda', 'just-me-garda-lake', 'justme-lonato', 'justme-desenzano', 'just-me-lago-di-garda', 'justme-lago-di-garda'],
   },
+  // 6 Bergamo & Brescia Flagship Clubs
+  {
+    canonicalSlug: 'setai-club-bergamo',
+    id: 'v-setai-bergamo',
+    brandSlug: 'setai-club-bergamo',
+    customSlugBuilder: (locale, tk) => {
+      if (locale === 'en') return 'setai-club-bergamo';
+      if (locale === 'it') return 'setai-club-bergamo-tavoli-vip';
+      return `setai-club-bergamo-${tk.vipTables}`;
+    },
+    aliases: ['setai', 'setai-bergamo', 'setai-orio', 'setai-orio-al-serio', 'juice-setai-bergamo'],
+  },
+  {
+    canonicalSlug: 'capogiro-curno-bergamo',
+    id: 'v-capogiro-bergamo',
+    brandSlug: 'capogiro-curno-bergamo',
+    customSlugBuilder: (locale, tk) => {
+      if (locale === 'en') return 'capogiro-curno-bergamo';
+      if (locale === 'it') return 'capogiro-curno-bergamo-tavoli-vip';
+      return `capogiro-curno-bergamo-${tk.vipTables}`;
+    },
+    aliases: ['capogiro', 'capogiro-bergamo', 'capogiro-curno', 'capogiro-joyclub', 'capogiro-joyclub-bergamo'],
+  },
+  {
+    canonicalSlug: 'tiky-klub-seriate-bergamo',
+    id: 'v-tiky-klub-bergamo',
+    brandSlug: 'tiky-klub-seriate-bergamo',
+    customSlugBuilder: (locale, tk) => {
+      if (locale === 'en') return 'tiky-klub-seriate-bergamo';
+      if (locale === 'it') return 'tiky-klub-seriate-bergamo-tavoli-vip';
+      return `tiky-klub-seriate-bergamo-${tk.vipTables}`;
+    },
+    aliases: ['tiky', 'tiky-klub', 'tiky-klub-bergamo', 'tiky-seriate', 'tiky-club-bergamo'],
+  },
+  {
+    canonicalSlug: 'zero-club-bergamo',
+    id: 'v-zero-club-bergamo',
+    brandSlug: 'zero-club-bergamo',
+    customSlugBuilder: (locale, tk) => {
+      if (locale === 'en') return 'zero-club-bergamo';
+      if (locale === 'it') return 'zero-club-bergamo-tavoli-vip';
+      return `zero-club-bergamo-${tk.vipTables}`;
+    },
+    aliases: ['zero-club', 'zeroclub', 'zeroclub-bergamo', 'zero-bergamo'],
+  },
+  {
+    canonicalSlug: 'qi-clubbing-erbusco-brescia',
+    id: 'v-qi-clubbing-brescia',
+    brandSlug: 'qi-clubbing-erbusco-brescia',
+    customSlugBuilder: (locale, tk) => {
+      if (locale === 'en') return 'qi-clubbing-erbusco-brescia';
+      if (locale === 'it') return 'qi-clubbing-erbusco-brescia-tavoli-vip';
+      return `qi-clubbing-erbusco-brescia-${tk.vipTables}`;
+    },
+    aliases: ['qi-clubbing', 'qiclubbing', 'qi-clubbing-brescia', 'qi-clubbing-franciacorta', 'qi-erbusco'],
+  },
+  {
+    canonicalSlug: 'number-one-corte-franca-brescia',
+    id: 'v-number-one-brescia',
+    brandSlug: 'number-one-corte-franca-brescia',
+    customSlugBuilder: (locale, tk) => {
+      if (locale === 'en') return 'number-one-corte-franca-brescia';
+      if (locale === 'it') return 'number-one-corte-franca-brescia-tavoli-vip';
+      return `number-one-corte-franca-brescia-${tk.vipTables}`;
+    },
+    aliases: ['number-one', 'numberone', 'number-one-brescia', 'number-one-franciacorta', 'number-one-corte-franca', 'number-one-disco'],
+  },
 ];
 
 export const VENUE_SLUGS_35: Record<string, Record<LocaleCode, string>> = {};
@@ -496,6 +564,19 @@ const VENUE_SUFFIXES: readonly string[] = (() => {
   s.add('-lago-di-garda-tavoli-vip');
   s.add('-lago-di-garda');
   s.add('-lake-garda');
+  s.add('-curno-bergamo-tavoli-vip');
+  s.add('-seriate-bergamo-tavoli-vip');
+  s.add('-erbusco-brescia-tavoli-vip');
+  s.add('-corte-franca-brescia-tavoli-vip');
+  s.add('-bergamo-tavoli-vip');
+  s.add('-brescia-tavoli-vip');
+  s.add('-curno-bergamo');
+  s.add('-seriate-bergamo');
+  s.add('-erbusco-brescia');
+  s.add('-corte-franca-brescia');
+  s.add('-franciacorta');
+  s.add('-bergamo');
+  s.add('-brescia');
   s.add('-milano');
   s.add('-milan');
   return [...s].sort((a, b) => b.length - a.length);
@@ -558,7 +639,7 @@ const LEGACY_UNLISTED_CLUB_SET: ReadonlySet<string> = new Set([
   'jazz-cafe', 'jazz-cafe-milano',
   'masada', 'masada-milano', 'circolo-amelia', 'amelia-milano',
   'divina-milano', 'divina-club-milano', 'karma-milano', 'karma-borgo-milano',
-  'fura-desenzano', 'sesto-senso-desenzano', 'bolgia-bergamo', 'setai-bergamo', 'number-one-franciacorta',
+  'fura-desenzano', 'sesto-senso-desenzano', 'bolgia-bergamo',
 ]);
 
 export function resolveVenueSlug(slug: string): string {
@@ -1215,6 +1296,10 @@ export function resolveEventSlugToCanonical(slug: string, targetLocale?: LocaleC
   if (resolvePartenopeaJustMeSlug(slug)) {
     return partenopeaJustMeSlug(loc);
   }
+  const bgBsNight = resolveBergamoBresciaNightId(slug);
+  if (bgBsNight) {
+    return bergamoBresciaNightSlug(bgBsNight, loc);
+  }
   if (HALLOWEEN_SET.has(slug)) {
     return HALLOWEEN_NAVIGATION[loc]?.slug || HALLOWEEN_NAVIGATION.en.slug;
   }
@@ -1273,6 +1358,10 @@ export function getLocalizedEventSlug35(rawSlug: string, locale: LocaleCode): st
   }
   if (resolvePartenopeaJustMeSlug(rawSlug)) {
     return partenopeaJustMeSlug(locale);
+  }
+  const bgBsNightRaw = resolveBergamoBresciaNightId(rawSlug);
+  if (bgBsNightRaw) {
+    return bergamoBresciaNightSlug(bgBsNightRaw, locale);
   }
   if (HALLOWEEN_SET.has(rawSlug)) {
     return HALLOWEEN_NAVIGATION[locale]?.slug || HALLOWEEN_NAVIGATION.en.slug;
@@ -1369,6 +1458,12 @@ const SEO_HUB_SPECS: Array<{
   },
   { canonicalPath: '/aperitivo', itPath: '/aperitivo-cena-cantata-milano', build: (tk) => `/${tk.dinnerShow}-${tk.milan}` },
   { canonicalPath: '/clubs', itPath: '/discoteche-locali-milano', build: (tk) => `/${tk.club}-${tk.milan}` },
+  {
+    canonicalPath: '/bergamo-brescia',
+    itPath: '/discoteche-bergamo-brescia',
+    build: (tk) => `/bergamo-brescia-${tk.club}-${tk.vipTables}`,
+    aliases: ['/bergamo', '/brescia', '/franciacorta', '/clubs-bergamo-brescia'],
+  },
   { canonicalPath: '/guides', itPath: '/guide-vita-notturna-milano', build: (tk) => `/${tk.guide}-${tk.nightlife}-${tk.milan}` },
   { canonicalPath: '/zones', itPath: '/quartieri-vita-notturna-milano', build: (tk) => `/${tk.zone}-${tk.nightlife}-${tk.milan}` },
   { canonicalPath: '/genres', itPath: '/generi-musicali-discoteche-milano', build: (tk) => `/${tk.music}-${tk.milan}` },
@@ -1819,9 +1914,29 @@ const LEGACY_NYE_VENUE_TO_BASE: Readonly<Record<string, string>> = {
   '11-clubroom': 'capodanno-11clubroom-milano',
   'repvblic-milano': 'capodanno-repvblic-milano',
   'philipps-milano': 'capodanno-philipps-milano',
+  'setai-club-bergamo': 'capodanno-setai-club-bergamo',
+  'setai-bergamo': 'capodanno-setai-club-bergamo',
+  'capogiro-curno-bergamo': 'capodanno-capogiro-curno-bergamo',
+  'capogiro-bergamo': 'capodanno-capogiro-curno-bergamo',
+  'tiky-klub-seriate-bergamo': 'capodanno-tiky-klub-seriate-bergamo',
+  'tiky-klub-bergamo': 'capodanno-tiky-klub-seriate-bergamo',
+  'zero-club-bergamo': 'capodanno-zero-club-bergamo',
+  'qi-clubbing-erbusco-brescia': 'capodanno-qi-clubbing-brescia',
+  'qi-clubbing-brescia': 'capodanno-qi-clubbing-brescia',
+  'number-one-corte-franca-brescia': 'capodanno-number-one-brescia',
+  'number-one-brescia': 'capodanno-number-one-brescia',
+  'number-one-franciacorta': 'capodanno-number-one-brescia',
 };
 
 const NYE_EVENT_STEM_MATCHERS: ReadonlyArray<readonly [RegExp, string]> = [
+  [/bobadilla/i, 'capodanno-bergamo-setai-club-bobadilla'],
+  [/fenaroli/i, 'capodanno-franciacorta-number-one-villa-fenaroli'],
+  [/(?:^|-)(?:setai-club-bergamo|setai-orio|setai)(?:-|$)/i, 'capodanno-setai-club-bergamo'],
+  [/(?:^|-)(?:capogiro)(?:-|$)/i, 'capodanno-capogiro-curno-bergamo'],
+  [/(?:^|-)(?:tiky-klub|tiky)(?:-|$)/i, 'capodanno-tiky-klub-seriate-bergamo'],
+  [/(?:^|-)(?:zero-club-bergamo|zero-club|zeroclub)(?:-|$)/i, 'capodanno-zero-club-bergamo'],
+  [/(?:^|-)(?:qi-clubbing|qiclubbing)(?:-|$)/i, 'capodanno-qi-clubbing-brescia'],
+  [/(?:^|-)(?:number-one|numberone)(?:-|$)/i, 'capodanno-number-one-brescia'],
   ...CAPODANNO_EVENT_BASE_SLUGS.map((base) => {
     const core = base
       .replace(/^capodanno-/, '')
@@ -1893,6 +2008,12 @@ const ACTIVE_VENUE_EVENT_MATCHERS: ReadonlyArray<readonly [RegExp, string]> = [
   [/(?:^|-)(?:ristorante-torre)(?:-|$)/i, 'ristorante-torre-milano'],
   [/(?:^|-)(?:terrazza-triennale|innocenti-evasioni)(?:-|$)/i, 'innocenti-evasioni-terrazza-triennale'],
   [/(?:^|-)(?:super-club|superclub)(?:-|$)/i, 'super-club-milano'],
+  [/(?:^|-)(?:setai)(?:-|$)/i, 'setai-club-bergamo'],
+  [/(?:^|-)(?:capogiro)(?:-|$)/i, 'capogiro-curno-bergamo'],
+  [/(?:^|-)(?:tiky-klub|tiky)(?:-|$)/i, 'tiky-klub-seriate-bergamo'],
+  [/(?:^|-)(?:zero-club|zeroclub)(?:-|$)/i, 'zero-club-bergamo'],
+  [/(?:^|-)(?:qi-clubbing|qiclubbing)(?:-|$)/i, 'qi-clubbing-erbusco-brescia'],
+  [/(?:^|-)(?:number-one|numberone)(?:-|$)/i, 'number-one-corte-franca-brescia'],
 ];
 
 const LEGACY_HALLOWEEN_2026_RE = /(?:^|-)(?:halloween|noc-vjestica|noc-vestica|noc-carovnic|cadilar-bayrami|wanshengjie|halowin|helouin|hellouin|helovins|helovinas|hellovin|hlekkjavaka|oiche-shamhna|nokj-na-vesticite)(?:-|$)/i;
@@ -1990,6 +2111,9 @@ export function resolveLegacyOrExpiredEventRedirect(rawSlug: string, targetLocal
     resolvePartenopeaJustMeSlug(rawSlug) ||
     resolvePartenopeaJustMeSlug(slug) ||
     resolvePartenopeaJustMeSlug(stripped) ||
+    Boolean(resolveBergamoBresciaNightId(rawSlug)) ||
+    Boolean(resolveBergamoBresciaNightId(slug)) ||
+    Boolean(resolveBergamoBresciaNightId(stripped)) ||
     Boolean(resolveCapodannoCategoryIdByLocalizedSlug(rawSlug, targetLocale)) ||
     Boolean(resolveCapodannoEventBaseSlugByLocalizedSlug(rawSlug, targetLocale)) ||
     capLegacy?.type === 'hub' ||

@@ -1262,5 +1262,266 @@ export const weeklyEvents: WeeklyEvent[] = [
     faqs: defaultFaqs('Terrazza Duomo 21', 'Piazza del Duomo 21, Milan', '25+', 'Strictly Elegant', 'House and Commercial'),
     image: '/images/events/weekly-posters/terrazza21-saturday-duomo.webp',
     priority: 69
+  },
+  // --- BERGAMO & BRESCIA FLAGSHIP CLUBS (13 Active Weekly Nights) ---
+  {
+    id: 'setai-bergamo-friday',
+    clubSlug: 'setai-bergamo',
+    clubName: 'Setai Club Bergamo',
+    day: 'friday',
+    dayOfWeek: 5,
+    eventSlug: 'friday-urban-arena',
+    name: 'Friday Commercial, Urban & Reggaeton Arena',
+    genres: ['Commercial', 'Urban', 'Reggaeton'],
+    target: '18+ / 20+, Bergamo & Milan East A4 Crowd',
+    description: {
+      en: 'Every Friday at Setai Club Bergamo (Località Portico 21, Orio al Serio, 4 min from BGY Airport & A4 exit): main arena Commercial, Urban, Hip-Hop, and Reggaeton with VIP Privé tables via WhatsApp +39 351 912 7047.',
+      it: 'Ogni venerdì al Setai Club Bergamo (Località Portico 21, Orio al Serio, a 4 min da Orio BGY e casello A4): arena principale Commercial, Urban, Hip-Hop e Reggaeton con Tavoli VIP Privé su WhatsApp +39 351 912 7047.'
+    },
+    pricing: { club: 'Upon request via WhatsApp', tables: 'VIP Privé upon request via WhatsApp' },
+    dressCode: { en: 'Smart & Club Chic (no tracksuits).', it: 'Smart & Club Chic (vietate tute sportive).' },
+    faqs: defaultFaqs('Setai Club Bergamo', 'Località Portico 21, Orio al Serio (BG)', '18+ / 20+', 'Smart & Club Chic', 'Commercial, Urban and Reggaeton'),
+    image: '/images/events/weekly-posters/setai-bergamo-friday.webp',
+    priority: 68
+  },
+  {
+    id: 'setai-bergamo-saturday',
+    clubSlug: 'setai-bergamo',
+    clubName: 'Setai Club Bergamo',
+    day: 'saturday',
+    dayOfWeek: 6,
+    eventSlug: 'saturday-juice-tech-house',
+    name: 'Saturday Juice Tech-House & Main Room Showcase',
+    genres: ['Tech-House', 'House', 'Commercial'],
+    target: '20+, Electronic & Multi-Room Clubbers',
+    description: {
+      en: 'Flagship Saturday night at Setai Club Bergamo (Orio al Serio): Juice Tech-House showcase, international guest DJs, commercial room, and DJ Console Super Privé via WhatsApp +39 351 912 7047.',
+      it: 'Il sabato sera di punta al Setai Club Bergamo (Orio al Serio): showcase Juice Tech-House, guest DJ internazionali, sala commerciale e Super Privé Consolle su WhatsApp +39 351 912 7047.'
+    },
+    pricing: { club: 'Upon request via WhatsApp', tables: 'VIP Privé upon request via WhatsApp' },
+    dressCode: { en: 'Club Chic & Fashion.', it: 'Club Chic & Fashion.' },
+    faqs: defaultFaqs('Setai Club Bergamo', 'Località Portico 21, Orio al Serio (BG)', '20+', 'Club Chic', 'Tech-House, House and Commercial'),
+    image: '/images/events/weekly-posters/setai-bergamo-saturday.webp',
+    priority: 68
+  },
+  {
+    id: 'capogiro-bergamo-friday',
+    clubSlug: 'capogiro-bergamo',
+    clubName: 'Capogiro Joyclub Bergamo',
+    day: 'friday',
+    dayOfWeek: 5,
+    eventSlug: 'feel-friday-dinner-party',
+    name: 'Feel Friday Dinner Party · Voice Bar & 25+ Club',
+    genres: ['Dinner Show', 'House', 'Commercial', 'Revival'],
+    target: '25+ / Over 30 Adult Crowd',
+    description: {
+      en: 'Every Friday at Capogiro Joyclub (Via Trento 14, Curno BG): 21:00 Singing Dinner Party, 23:30 live karaoke Voice Bar, and Main Room clubbing for a polished 25+ adult crowd.',
+      it: 'Ogni venerdì al Capogiro Joyclub (Via Trento 14, Curno BG): Cena Party cantata dalle 21:00, Voice Bar karaoke dal vivo dalle 23:30 e Main Room per un pubblico adulto 25+ e over 30.'
+    },
+    pricing: { aperitif: 'Dinner Show upon request', club: 'Upon request via WhatsApp', tables: 'VIP Privé upon request via WhatsApp' },
+    dressCode: { en: 'Adult Smart Elegant (25+).', it: 'Adult Smart Elegant (25+).' },
+    faqs: defaultFaqs('Capogiro Joyclub Bergamo', 'Via Trento 14, Curno (BG)', '25+', 'Adult Smart Elegant', 'Dinner Show, Voice Bar and House/Revival'),
+    image: '/images/events/weekly-posters/capogiro-bergamo-friday.webp',
+    priority: 68
+  },
+  {
+    id: 'capogiro-bergamo-saturday',
+    clubSlug: 'capogiro-bergamo',
+    clubName: 'Capogiro Joyclub Bergamo',
+    day: 'saturday',
+    dayOfWeek: 6,
+    eventSlug: 'saturday-joyclub-dinner-voice-bar',
+    name: 'Saturday Joyclub · Singing Dinner, Voice Bar & 25+ Disco',
+    genres: ['Dinner Show', 'House', 'Commercial', 'Revival'],
+    target: '25+ / Over 30 Adult Crowd & Groups',
+    description: {
+      en: 'Saturday night at Capogiro Joyclub Curno (Bergamo): 21:00 Singing Dinner Show, live karaoke Voice Bar, and Main Room House & Commercial party tailored to 25+ guests.',
+      it: 'Il sabato sera al Capogiro Joyclub di Curno (Bergamo): Cena Spettacolo cantata dalle 21:00, Voice Bar live karaoke e Main Room House e Commerciale per ospiti 25+.'
+    },
+    pricing: { aperitif: 'Dinner Show upon request', club: 'Upon request via WhatsApp', tables: 'VIP Privé upon request via WhatsApp' },
+    dressCode: { en: 'Adult Smart Elegant (25+).', it: 'Adult Smart Elegant (25+).' },
+    faqs: defaultFaqs('Capogiro Joyclub Bergamo', 'Via Trento 14, Curno (BG)', '25+', 'Adult Smart Elegant', 'Singing Dinner, Voice Bar and Club'),
+    image: '/images/events/weekly-posters/capogiro-bergamo-saturday.webp',
+    priority: 68
+  },
+  {
+    id: 'tiky-klub-bergamo-wednesday',
+    clubSlug: 'tiky-klub-bergamo',
+    clubName: 'Tiky Klub Bergamo',
+    day: 'wednesday',
+    dayOfWeek: 3,
+    eventSlug: 'wednesday-house-session',
+    name: 'Wednesday Midweek House & Tech-House Session',
+    genres: ['House', 'Tech-House'],
+    target: '18+ / 20+, Electronic Lovers',
+    description: {
+      en: 'Every Wednesday at Tiky Klub (Via Nazionale 93, Seriate BG, 5 min from A4 Seriate exit): intimate midweek House and Tech-House club session.',
+      it: 'Ogni mercoledì al Tiky Klub (Via Nazionale 93, Seriate BG, a 5 min dal casello A4 Seriate): serata infrasettimanale House e Tech-House.'
+    },
+    pricing: { club: 'Upon request via WhatsApp', tables: 'VIP Booths upon request via WhatsApp' },
+    dressCode: { en: 'Contemporary Clubwear.', it: 'Contemporary Clubwear.' },
+    faqs: defaultFaqs('Tiky Klub Bergamo', 'Via Nazionale 93, Seriate (BG)', '18+', 'Contemporary Clubwear', 'House and Tech-House'),
+    image: '/images/events/weekly-posters/tiky-klub-bergamo-wednesday.webp',
+    priority: 66
+  },
+  {
+    id: 'tiky-klub-bergamo-friday',
+    clubSlug: 'tiky-klub-bergamo',
+    clubName: 'Tiky Klub Bergamo',
+    day: 'friday',
+    dayOfWeek: 5,
+    eventSlug: 'friday-icon-tech-house',
+    name: 'Icon Friday · Tech-House & Boutique Clubbing',
+    genres: ['Tech-House', 'House'],
+    target: '20+, Boutique Electronic Crowd',
+    description: {
+      en: 'Icon Friday at Tiky Klub Seriate (Bergamo): punchy Tech-House sound, close-up DJ booth energy, and VIP Console booths via WhatsApp +39 351 912 7047.',
+      it: 'Icon Friday al Tiky Klub di Seriate (Bergamo): sonorità Tech-House spinte, consolle ravvicinata e tavoli Privé su WhatsApp +39 351 912 7047.'
+    },
+    pricing: { club: 'Upon request via WhatsApp', tables: 'VIP Booths upon request via WhatsApp' },
+    dressCode: { en: 'Contemporary Clubwear.', it: 'Contemporary Clubwear.' },
+    faqs: defaultFaqs('Tiky Klub Bergamo', 'Via Nazionale 93, Seriate (BG)', '20+', 'Contemporary Clubwear', 'Tech-House and House'),
+    image: '/images/events/weekly-posters/tiky-klub-bergamo-friday.webp',
+    priority: 67
+  },
+  {
+    id: 'tiky-klub-bergamo-saturday',
+    clubSlug: 'tiky-klub-bergamo',
+    clubName: 'Tiky Klub Bergamo',
+    day: 'saturday',
+    dayOfWeek: 6,
+    eventSlug: 'saturday-house-showcase',
+    name: 'Saturday Guest DJ House & Tech-House Showcase',
+    genres: ['House', 'Tech-House'],
+    target: '20+, Electronic & Guest DJ Crowd',
+    description: {
+      en: 'Saturday Showcase at Tiky Klub Seriate (Via Nazionale 93, Bergamo): guest DJs, Vocal & Tech-House grooves, and boutique VIP service.',
+      it: 'Il sabato sera al Tiky Klub di Seriate (Via Nazionale 93, Bergamo): guest DJ, Vocal & Tech-House e servizio Tavoli VIP.'
+    },
+    pricing: { club: 'Upon request via WhatsApp', tables: 'VIP Booths upon request via WhatsApp' },
+    dressCode: { en: 'Smart Club Chic.', it: 'Smart Club Chic.' },
+    faqs: defaultFaqs('Tiky Klub Bergamo', 'Via Nazionale 93, Seriate (BG)', '20+', 'Smart Club Chic', 'House and Tech-House'),
+    image: '/images/events/weekly-posters/tiky-klub-bergamo-saturday.webp',
+    priority: 67
+  },
+  {
+    id: 'zero-club-bergamo-wednesday',
+    clubSlug: 'zero-club-bergamo',
+    clubName: 'Zero Club Bergamo',
+    day: 'wednesday',
+    dayOfWeek: 3,
+    eventSlug: 'please-wednesday',
+    name: 'Please Wednesday · Downtown Bergamo Midweek Party',
+    genres: ['Urban', 'Commercial', 'House'],
+    target: '18+ University & Downtown Crowd (Club Card)',
+    description: {
+      en: 'Every Wednesday in downtown Bergamo at Zero Club (Via Evaristo Baschenis 9): Please midweek university and urban night across two rooms.',
+      it: 'Ogni mercoledì in pieno centro a Bergamo allo Zero Club (Via Evaristo Baschenis 9): format Please universitario e urban su doppia sala.'
+    },
+    pricing: { club: 'Upon request via WhatsApp', tables: 'VIP Privé upon request via WhatsApp' },
+    dressCode: { en: 'Smart Urban Clubwear (Club Card + ID).', it: 'Smart Urban Clubwear (Tessera Club + Documento).' },
+    faqs: defaultFaqs('Zero Club Bergamo', 'Via Evaristo Baschenis 9, Bergamo', '18+', 'Smart Urban Clubwear', 'Urban, Commercial and House'),
+    image: '/images/events/weekly-posters/zero-club-bergamo-wednesday.webp',
+    priority: 66
+  },
+  {
+    id: 'zero-club-bergamo-friday',
+    clubSlug: 'zero-club-bergamo',
+    clubName: 'Zero Club Bergamo',
+    day: 'friday',
+    dayOfWeek: 5,
+    eventSlug: 'premiere-friday',
+    name: 'Premiere Friday · Tech-House & Urban Dual-Room',
+    genres: ['Tech-House', 'Hip-Hop', 'Urban'],
+    target: '18+ / 20+, Downtown Bergamo Crowd (Club Card)',
+    description: {
+      en: 'Premiere Friday at Zero Club Bergamo (Via Evaristo Baschenis 9): dual-room electronic Tech-House and Hip-Hop/Urban in central Bergamo.',
+      it: 'Premiere Friday allo Zero Club di Bergamo Centro (Via Evaristo Baschenis 9): doppia sala Tech-House e Hip-Hop/Urban.'
+    },
+    pricing: { club: 'Upon request via WhatsApp', tables: 'VIP Privé upon request via WhatsApp' },
+    dressCode: { en: 'Smart Urban Clubwear (Club Card + ID).', it: 'Smart Urban Clubwear (Tessera Club + Documento).' },
+    faqs: defaultFaqs('Zero Club Bergamo', 'Via Evaristo Baschenis 9, Bergamo', '18+ / 20+', 'Smart Urban Clubwear', 'Tech-House and Hip-Hop/Urban'),
+    image: '/images/events/weekly-posters/zero-club-bergamo-friday.webp',
+    priority: 67
+  },
+  {
+    id: 'zero-club-bergamo-saturday',
+    clubSlug: 'zero-club-bergamo',
+    clubName: 'Zero Club Bergamo',
+    day: 'saturday',
+    dayOfWeek: 6,
+    eventSlug: 'saturday-dual-room',
+    name: 'Saturday Dual-Room · Electronic & Urban Night',
+    genres: ['Tech-House', 'House', 'Urban'],
+    target: '20+, Downtown Bergamo Clubbers (Club Card)',
+    description: {
+      en: 'Saturday night in downtown Bergamo at Zero Club (Via Baschenis 9): Room 1 Electronic/Tech-House and Room 2 Urban/Hip-Hop with VIP Privé tables.',
+      it: 'Il sabato sera nel cuore di Bergamo allo Zero Club (Via Baschenis 9): Sala 1 Electronic/Tech-House e Sala 2 Urban/Hip-Hop con Tavoli Privé.'
+    },
+    pricing: { club: 'Upon request via WhatsApp', tables: 'VIP Privé upon request via WhatsApp' },
+    dressCode: { en: 'Club Chic (Club Card + ID).', it: 'Club Chic (Tessera Club + Documento).' },
+    faqs: defaultFaqs('Zero Club Bergamo', 'Via Evaristo Baschenis 9, Bergamo', '20+', 'Club Chic', 'Tech-House, House and Urban'),
+    image: '/images/events/weekly-posters/zero-club-bergamo-saturday.webp',
+    priority: 67
+  },
+  {
+    id: 'qi-clubbing-brescia-friday',
+    clubSlug: 'qi-clubbing-brescia',
+    clubName: 'Qi Clubbing Franciacorta',
+    day: 'friday',
+    dayOfWeek: 5,
+    eventSlug: 'friday-dinner-show-club',
+    name: 'Friday Franciacorta Dinner Show & Luxury Club',
+    genres: ['Dinner Show', 'House', 'Commercial'],
+    target: '21+ / 25+, Franciacorta & Brescia Crowd',
+    description: {
+      en: 'Every Friday at Qi Clubbing in Erbusco (Via dell’Industria 83, 2 min from A4 Rovato exit): 21:00 Gourmet Dinner Show and 23:30 Luxury Club.',
+      it: 'Ogni venerdì da Qi Clubbing a Erbusco (Via dell’Industria 83, a 2 min dal casello A4 Rovato): Dinner Show dalle 21:00 e Luxury Club dalle 23:30.'
+    },
+    pricing: { aperitif: 'Dinner Show upon request', club: 'Upon request via WhatsApp', tables: 'Luxury Privé upon request via WhatsApp' },
+    dressCode: { en: 'Strictly Elegant (21+).', it: 'Elegante Curato (21+).' },
+    faqs: defaultFaqs('Qi Clubbing Franciacorta', 'Via dell’Industria 83, Erbusco (BS)', '21+', 'Strictly Elegant', 'Dinner Show, House and Commercial'),
+    image: '/images/events/weekly-posters/qi-clubbing-brescia-friday.webp',
+    priority: 68
+  },
+  {
+    id: 'qi-clubbing-brescia-saturday',
+    clubSlug: 'qi-clubbing-brescia',
+    clubName: 'Qi Clubbing Franciacorta',
+    day: 'saturday',
+    dayOfWeek: 6,
+    eventSlug: 'saturday-gourmet-luxury-club',
+    name: 'Saturday Gourmet Dinner Show & Franciacorta Privé',
+    genres: ['Dinner Show', 'House', 'Tech-House'],
+    target: '21+ / 25+, Franciacorta & Brescia VIP Crowd',
+    description: {
+      en: 'Flagship Saturday night at Qi Clubbing Erbusco (Franciacorta, BS): 21:00 seated Dinner Show paired with Franciacorta wines and 23:30 House & Tech-House Privé.',
+      it: 'Il sabato sera simbolo della Franciacorta da Qi Clubbing Erbusco (BS): Dinner Show servito dalle 21:00 e Luxury Privé House & Tech-House dalle 23:30.'
+    },
+    pricing: { aperitif: 'Dinner Show upon request', club: 'Upon request via WhatsApp', tables: 'Luxury Privé upon request via WhatsApp' },
+    dressCode: { en: 'Strictly Elegant (21+ / 25+).', it: 'Elegante Curato (21+ / 25+).' },
+    faqs: defaultFaqs('Qi Clubbing Franciacorta', 'Via dell’Industria 83, Erbusco (BS)', '21+ / 25+', 'Strictly Elegant', 'Dinner Show, House and Tech-House'),
+    image: '/images/events/weekly-posters/qi-clubbing-brescia-saturday.webp',
+    priority: 68
+  },
+  {
+    id: 'number-one-brescia-saturday',
+    clubSlug: 'number-one-brescia',
+    clubName: 'Number One Franciacorta',
+    day: 'saturday',
+    dayOfWeek: 6,
+    eventSlug: 'saturday-multisala-megaclub',
+    name: 'Saturday Multisala · Multi-Arena Megaclub Night',
+    genres: ['EDM', 'Commercial', 'Tech-House', 'Urban'],
+    target: '18+, Brescia, Franciacorta & Lake Iseo Crowd',
+    description: {
+      en: 'Monumental Saturday multi-room night at Number One in Corte Franca (Via Provinciale 1/B, BS): EDM, Commercial, Tech-House, Urban, and panoramic VIP Balconies.',
+      it: 'Il monumentale sabato multisala al Number One di Corte Franca (Via Provinciale 1/B, BS): EDM, Commerciale, Tech-House, Urban e Balconate VIP panoramiche.'
+    },
+    pricing: { club: 'Upon request via WhatsApp', tables: 'VIP Balcony upon request via WhatsApp' },
+    dressCode: { en: 'Smart Club Casual (original physical ID mandatory).', it: 'Smart Club Casual (documento fisico originale obbligatorio).' },
+    faqs: defaultFaqs('Number One Franciacorta', 'Via Provinciale 1/B, Corte Franca (BS)', '18+', 'Smart Club Casual', 'EDM, Commercial, Tech-House and Urban'),
+    image: '/images/events/weekly-posters/number-one-brescia-saturday.webp',
+    priority: 68
   }
 ];

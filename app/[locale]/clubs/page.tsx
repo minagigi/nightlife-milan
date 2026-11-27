@@ -3,6 +3,7 @@ import { getLocaleDef, hreflangAlternates, canonicalPageUrl, isEnabledLocale, lo
 import { getLocalizedDir35 } from '@/lib/i18n/dirTokens35';
 import { getLocalizedVenueSlug35 } from '@/lib/i18n/localizedSlugs35';
 import { OFFICIAL_SERP_NAME_BY_ID } from '@/lib/clubSeoMeta35';
+import { BG_BS_CITY_META_BY_ID, isBergamoBresciaVenueId } from '@/lib/bergamo-brescia/clubsSeed';
 import { getClubsHubCopy } from '@/lib/i18n/clubsHubCopy';
 import Link from '@/components/LocalizedLink';
 import Image from 'next/image';
@@ -124,6 +125,12 @@ export default async function ClubsPage({
     armani: 'v-armani-prive',
     philipps: 'v-philipps',
     terrazza21: 'v-terrazza21',
+    'setai-bergamo': 'v-setai-bergamo',
+    'capogiro-bergamo': 'v-capogiro-bergamo',
+    'tiky-klub-bergamo': 'v-tiky-klub-bergamo',
+    'zero-club-bergamo': 'v-zero-club-bergamo',
+    'qi-clubbing-brescia': 'v-qi-clubbing-brescia',
+    'number-one-brescia': 'v-number-one-brescia',
   };
   const clubsDir = getLocalizedDir35('clubs', localeCode);
   const todayDow = new Date().getDay();
@@ -146,7 +153,11 @@ export default async function ClubsPage({
       slug,
       name: displayName,
       image: v.gallery?.[0] || v.image || '/images/milan-nightclub-luxury-vip-champagne.webp',
-      zone: v.id === 'v-justme-garda' ? 'Lago di Garda (Lonato BS)' : v.zone.replace(/_/g, ' '),
+      zone: isBergamoBresciaVenueId(v.id)
+        ? BG_BS_CITY_META_BY_ID[v.id].shortZoneLabel
+        : v.id === 'v-justme-garda'
+          ? 'Lago di Garda (Lonato BS)'
+          : v.zone.replace(/_/g, ' '),
       addressLocality: v.address.addressLocality || 'Milano',
       addressRegion: v.address.addressRegion || 'Lombardy',
       mood: v.tags?.[0] || v.category,

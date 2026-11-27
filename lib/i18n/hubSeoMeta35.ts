@@ -17,7 +17,8 @@ export type HubKey =
   | 'genres'
   | 'concierge'
   | 'faq'
-  | 'new-years-eve';
+  | 'new-years-eve'
+  | 'bergamo-brescia';
 
 export interface HubSeoEntry {
   title: string;
@@ -708,6 +709,43 @@ const TITLES: Record<HubKey, HubPhraseRow> = {
     bs: 'Doček Nove godine u Milanu 2027 | Klubovi i VIP',
     mk: 'Нова година во Милано 2027 | Гала вечери и VIP',
   },
+  'bergamo-brescia': {
+    en: 'Bergamo & Brescia Clubs 2026/2027 | 6 Clubs, Nights & NYE',
+    it: 'Discoteche Bergamo e Brescia 2026/2027 | 6 Club e Capodanno',
+    es: 'Discotecas Bérgamo y Brescia 2026/2027 | 6 Clubes y VIP',
+    fr: 'Clubs Bergame & Brescia 2026/2027 | 6 Clubs, Soirées & VIP',
+    de: 'Clubs Bergamo & Brescia 2026/2027 | 6 Clubs, Partys & VIP',
+    pt: 'Baladas Bérgamo e Brescia 2026/2027 | 6 Clubes e Réveillon',
+    nl: 'Clubs Bergamo & Brescia 2026/2027 | 6 Clubs & VIP-Tafels',
+    ru: 'Клубы Бергамо и Брешии 2026/2027 | 6 клубов и VIP-столы',
+    tr: 'Bergamo ve Brescia Kulüpleri 2026/2027 | 6 Kulüp ve VIP',
+    zh: '贝加莫与布雷西亚夜店指南 2026/2027 | 6大俱乐部与跨年派对',
+    ar: 'نوادي بيرغامو وبريشيا 2026/2027 | 6 نوادي وطاولات VIP',
+    bg: 'Клубове Бергамо и Бреша 2026/2027 | 6 клуба и VIP маси',
+    hr: 'Klubovi Bergamo i Brescia 2026/2027 | 6 klubova i VIP',
+    cs: 'Kluby Bergamo a Brescia 2026/2027 | 6 klubů a VIP stoly',
+    da: 'Klubber i Bergamo & Brescia 2026/2027 | 6 Klubber & VIP',
+    et: 'Bergamo ja Brescia klubid 2026/2027 | 6 klubi ja VIP',
+    fi: 'Bergamon ja Brescian klubit 2026/2027 | 6 klubia ja VIP',
+    el: 'Κλαμπ Μπέργκαμο & Μπρέσια 2026/2027 | 6 Κλαμπ & VIP',
+    hu: 'Bergamo és Brescia klubok 2026/2027 | 6 klub és VIP',
+    ga: 'Clubanna Bergamo & Brescia 2026/2027 | 6 Chlub & VIP',
+    lv: 'Bergamo un Brešas klubi 2026/2027 | 6 klubi un VIP',
+    lt: 'Bergamo ir Brešos klubai 2026/2027 | 6 klubai ir VIP',
+    mt: 'Klabbs Bergamo u Brescia 2026/2027 | 6 Klabbs u VIP',
+    pl: 'Kluby Bergamo i Brescia 2026/2027 | 6 Klubów i Stoliki VIP',
+    ro: 'Cluburi Bergamo și Brescia 2026/2027 | 6 Cluburi și VIP',
+    sk: 'Kluby Bergamo a Brescia 2026/2027 | 6 klubov a VIP stoly',
+    sl: 'Klubi Bergamo in Brescia 2026/2027 | 6 klubov in VIP',
+    sv: 'Klubbar i Bergamo & Brescia 2026/2027 | 6 Klubbar & VIP',
+    no: 'Klubber i Bergamo & Brescia 2026/2027 | 6 Klubber & VIP',
+    is: 'Klúbbar í Bergamo & Brescia 2026/2027 | 6 Klúbbar & VIP',
+    uk: 'Клуби Бергамо та Брешії 2026/2027 | 6 клубів та VIP',
+    sq: 'Klube Bergamo & Brescia 2026/2027 | 6 Klube dhe VIP',
+    sr: 'Klubovi Bergamo i Breša 2026/2027 | 6 klubova i VIP',
+    bs: 'Klubovi Bergamo i Brescia 2026/2027 | 6 klubova i VIP',
+    mk: 'Клубови Бергамо и Бреша 2026/2027 | 6 клубови и VIP',
+  },
 };
 
 const APERITIVO_H1: Record<LocaleCode, string> = {
@@ -861,6 +899,14 @@ const DESC_SUMMARY_LEAD: Record<HubKey, Record<'en' | 'it' | 'es' | 'fr' | 'de' 
     fr: 'Nouvel An Milan 2027 (31 déc. 2026) : comparez Dîners de Gala, Royal Buffets, Rooftops et Tables VIP dans 19 clubs à Milan.',
     de: 'Silvester Mailand 2027 (31. Dez. 2026): Galadinner, Royal Buffet, Rooftops und VIP-Tische in den 19 besten Clubs Mailands.',
     pt: 'Réveillon Milão 2027 (31 dez. 2026): compare Jantares de Gala, Royal Buffets, Rooftops e Mesas VIP em 19 clubes de Milão.',
+  },
+  'bergamo-brescia': {
+    en: 'Official guide to Bergamo & Brescia clubs (Setai, Capogiro, Tiky Klub, Zero Club, Qi Clubbing, Number One): all active nights, NYE 2027 & VIP tables.',
+    it: 'Guida ufficiale alle discoteche di Bergamo e Brescia (Setai, Capogiro, Tiky Klub, Zero Club, Qi Clubbing, Number One): serate attive, Capodanno 2027 e tavoli VIP.',
+    es: 'Guía oficial de discotecas en Bérgamo y Brescia (Setai, Capogiro, Tiky Klub, Zero Club, Qi Clubbing, Number One): fiestas activas, Nochevieja 2027 y mesas VIP.',
+    fr: 'Guide officiel des clubs de Bergame et Brescia (Setai, Capogiro, Tiky Klub, Zero Club, Qi Clubbing, Number One) : soirées actives, Nouvel An 2027 et tables VIP.',
+    de: 'Offizieller Club-Guide für Bergamo & Brescia (Setai, Capogiro, Tiky Klub, Zero Club, Qi Clubbing, Number One): aktive Partys, Silvester 2027 & VIP-Tische.',
+    pt: 'Guia oficial de baladas em Bérgamo e Brescia (Setai, Capogiro, Tiky Klub, Zero Club, Qi Clubbing, Number One): festas ativas, Réveillon 2027 e mesas VIP.',
   },
 };
 

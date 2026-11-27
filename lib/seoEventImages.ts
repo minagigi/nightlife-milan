@@ -455,6 +455,21 @@ export function inferTargetAndOutfit(params: {
   isHalloween?: boolean;
 }): { target: TargetArchetype; outfit: OutfitArchetype } {
   const s = `${params.slug} ${params.venueName || ''} ${params.categorySlug || ''} ${params.music || ''} ${params.dressCode || ''}`.toLowerCase();
+  if (s.includes('capogiro')) {
+    return { target: 'over30_adults', outfit: 'sequins_evening' };
+  }
+  if (s.includes('qi-clubbing') || s.includes('qiclubbing') || s.includes('qi clubbing')) {
+    return { target: 'couples_vip', outfit: 'haute_couture' };
+  }
+  if ((s.includes('setai') && !s.includes('bobadilla')) || s.includes('tiky')) {
+    return { target: 'fashion_international', outfit: 'sequins_evening' };
+  }
+  if (s.includes('zero-club') || s.includes('zeroclub') || s.includes('zero club')) {
+    return { target: 'singles_friends', outfit: 'urban_reggaeton' };
+  }
+  if ((s.includes('number-one') || s.includes('numberone') || s.includes('number one')) && !s.includes('fenaroli')) {
+    return { target: 'young_clubbers', outfit: 'sequins_evening' };
+  }
   if (s.includes('aprica') || s.includes('world-winter-week')) {
     return { target: 'young_clubbers', outfit: 'apres_ski_chalet' };
   }
@@ -498,6 +513,12 @@ export function inferTargetAndOutfit(params: {
 }
 
 const VENUE_MASTER_KEYS: Record<string, [string, string, string, string]> = {
+  'setai': ['setai-01', 'setai-02', 'setai-03', 'setai-04'],
+  'capogiro': ['capogiro-01', 'capogiro-02', 'capogiro-03', 'capogiro-04'],
+  'tiky': ['tiky-01', 'tiky-02', 'tiky-03', 'tiky-04'],
+  'zeroclub': ['zeroclub-01', 'zeroclub-02', 'zeroclub-03', 'zeroclub-04'],
+  'qiclubbing': ['qiclubbing-01', 'qiclubbing-02', 'qiclubbing-03', 'qiclubbing-04'],
+  'numberone': ['numberone-01', 'numberone-02', 'numberone-03', 'numberone-04'],
   'justme': ['just-me-milano-torre-branca-01', 'just-me-milano-cena-01', 'just-me-milano-prive-01', 'just-me-milano-party-01'],
   'armani': ['armani-prive-real-01', 'armani-prive-real-02', 'armani-prive-real-03', 'armani-prive-real-04'],
   'radio-rooftop': ['radio-rooftop-real-01', 'radio-rooftop-real-02', 'radio-rooftop-real-03', 'radio-rooftop-real-04'],
@@ -552,6 +573,12 @@ const VENUE_MASTER_KEYS: Record<string, [string, string, string, string]> = {
 
 export function selectMasterAssetKeys(slug: string, venueName = '', categorySlug = ''): [string, string, string, string] {
   const s = `${slug} ${venueName} ${categorySlug}`.toLowerCase();
+  if (s.includes('setai') && !s.includes('bobadilla')) return VENUE_MASTER_KEYS['setai'];
+  if (s.includes('capogiro')) return VENUE_MASTER_KEYS['capogiro'];
+  if (s.includes('tiky')) return VENUE_MASTER_KEYS['tiky'];
+  if (s.includes('zero-club') || s.includes('zeroclub') || s.includes('zero club')) return VENUE_MASTER_KEYS['zeroclub'];
+  if (s.includes('qi-clubbing') || s.includes('qiclubbing') || s.includes('qi clubbing')) return VENUE_MASTER_KEYS['qiclubbing'];
+  if ((s.includes('number-one') || s.includes('numberone') || s.includes('number one')) && !s.includes('fenaroli')) return VENUE_MASTER_KEYS['numberone'];
   if (s.includes('aprica') || s.includes('world-winter-week')) return VENUE_MASTER_KEYS['aprica'];
   if (s.includes('justme') || s.includes('just-me') || s.includes('torre-branca')) return VENUE_MASTER_KEYS['justme'];
   if (s.includes('armani')) return VENUE_MASTER_KEYS['armani'];
@@ -952,14 +979,52 @@ function buildSeoEventUxPack(params: {
       noTitle: base.dressNoTitle,
       noItems: base.dressNoItems,
     },
-    logistics: {
-      heading: base.logHeadingTpl.replace('{venue}', params.venueName),
-      items: [
-        { label: base.logLabels[0], text: base.logTexts[0] },
-        { label: base.logLabels[1], text: base.logTexts[1] },
-        { label: base.logLabels[2], text: base.logTexts[2] },
-      ],
-    },
+    logistics: (() => {
+      const hay = `${params.eventSlug} ${params.venueName}`.toLowerCase();
+      const isBgBs =
+        (hay.includes('setai') && !hay.includes('bobadilla')) ||
+        hay.includes('capogiro') ||
+        hay.includes('tiky') ||
+        hay.includes('zero-club') ||
+        hay.includes('zero club') ||
+        hay.includes('qi-clubbing') ||
+        hay.includes('qi clubbing') ||
+        ((hay.includes('number-one') || hay.includes('number one')) && !hay.includes('fenaroli'));
+      if (!isBgBs) {
+        return {
+          heading: base.logHeadingTpl.replace('{venue}', params.venueName),
+          items: [
+            { label: base.logLabels[0], text: base.logTexts[0] },
+            { label: base.logLabels[1], text: base.logTexts[1] },
+            { label: base.logLabels[2], text: base.logTexts[2] },
+          ] as [{ label: string; text: string }, { label: string; text: string }, { label: string; text: string }],
+        };
+      }
+      const isItLoc = locCode === 'it';
+      return {
+        heading: base.logHeadingTpl.replace('{venue}', params.venueName),
+        items: [
+          {
+            label: isItLoc ? 'Autostrada A4 & Aeroporto BGY' : 'A4 Motorway & BGY Airport',
+            text: isItLoc
+              ? 'Accesso rapido dai caselli A4 Dalmine, Bergamo / Orio al Serio BGY, Seriate o Rovato (35–55 min da Milano Est senza varchi Area C).'
+              : 'Fast highway access via A4 exits Dalmine, Bergamo / BGY Airport, Seriate, or Rovato (35–55 min east of Milan, zero Area C ZTL cameras).',
+          },
+          {
+            label: isItLoc ? 'Taxi Provinciali & Transfer NCC' : 'Official Taxis & Private Van / NCC',
+            text: isItLoc
+              ? 'Radiotaxi Bergamo (+39 035 4519090), Radiotaxi Brescia (+39 030 35111) oppure van NCC per gruppi coordinato via Concierge WhatsApp +39 351 912 7047.'
+              : 'Bergamo Taxi (+39 035 4519090), Brescia Taxi (+39 030 35111), or private group van/NCC arranged via WhatsApp Concierge +39 351 912 7047.',
+          },
+          {
+            label: isItLoc ? 'Parcheggi Dedicati & Documento' : 'Club Parking & Physical ID',
+            text: isItLoc
+              ? 'Aree parcheggio comode adiacenti ai locali; ricorda di portare sempre un documento d’identità fisico originale in corso di validità.'
+              : 'Convenient club parking right outside the venues; remember to bring an original physical government-issued photo ID.',
+          },
+        ] as [{ label: string; text: string }, { label: string; text: string }, { label: string; text: string }],
+      };
+    })(),
     privateParties: {
       badge: base.privBadge,
       heading: base.privHeadingTpl.replace('{venue}', params.venueName),

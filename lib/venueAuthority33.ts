@@ -1,6 +1,7 @@
 import type { LocaleCode } from './i18n/locales';
 import type { Venue } from './types';
 import { CLUB_SERP_35 } from './clubSeoMeta35';
+import { BG_BS_CITY_META_BY_ID, isBergamoBresciaVenueId } from './bergamo-brescia/clubsSeed';
 
 export interface OpeningHoursSpecItem {
   dayOfWeek: string[];
@@ -1223,6 +1224,174 @@ export const VENUE_AUTHORITY_33: Readonly<Record<string, VenueAuthoritySpec>> = 
     signatureFactEn: 'Official Lake Garda sister destination of Just Me Milano at Via Lavagnone 13 in Lonato del Garda (BS), combining theatrical dinner shows and luxury clubbing.',
     signatureFactIt: 'Sede ufficiale sul Lago di Garda del brand Just Me in Via Lavagnone 13 a Lonato del Garda (BS), tra cene spettacolo scenografiche e clubbing di lusso.',
   },
+  'v-setai-bergamo': {
+    id: 'v-setai-bergamo',
+    schemaType: 'NightClub',
+    alternateNames: ['Setai Club', 'Setai Club Bergamo', 'Setai Orio al Serio', 'Juice Setai Bergamo'],
+    neighborhoodEn: 'Orio al Serio / Bergamo BGY Airport (A4)',
+    neighborhoodIt: 'Orio al Serio / Aeroporto BGY (Casello A4 Bergamo)',
+    openingHoursSpec: [
+      { dayOfWeek: ['Friday', 'Saturday'], opens: '23:30', closes: '05:00' },
+    ],
+    metroEn: 'A4 Motorway Bergamo exit (4 min drive) or Milan Bergamo Airport BGY (4 min taxi to Località Portico 21)',
+    metroIt: 'Casello Autostrada A4 Bergamo (4 min in auto) o Aeroporto di Orio al Serio BGY (4 min di taxi in Località Portico 21)',
+    parkingEn: 'Dedicated spacious club parking lot adjacent to Località Portico 21, Orio al Serio (BG)',
+    parkingIt: 'Ampio parcheggio dedicato adiacente all’ingresso in Località Portico 21, Orio al Serio (BG)',
+    soundEn: 'Multi-Room Juice Tech-House, House, Commercial, Urban & Reggaeton Arena',
+    soundIt: 'Multisala Juice Tech-House, House, Commercial, Urban e Reggaeton',
+    vipZonesEn: 'Main Arena Elevated Privé, Second Room Booths & DJ Console Super Privé',
+    vipZonesIt: 'Privé Rialzato Main Arena, Tavoli Seconda Sala e Super Privé Consolle DJ',
+    minSpendEn: 'VIP Privé & Console Bottle Tables upon request via WhatsApp +39 351 912 7047',
+    minSpendIt: 'Tavoli VIP Privé e Consolle con bottiglie su richiesta via WhatsApp +39 351 912 7047',
+    entryFormulaEn: 'Nominal Guest List / Official Pre-Sale & Dedicated NYE 2027 Gala & Arena Party',
+    entryFormulaIt: 'Lista Nominale / Prevendita Ufficiale e Veglione Multisala di Capodanno 2027',
+    preClubEn: 'Pre-party dinner in Bergamo Città Bassa or Orio Center before 23:30 doors',
+    preClubIt: 'Cena pre-serata a Bergamo Centro o zona Orio prima dell’apertura porte alle 23:30',
+    bestNightsEn: 'Friday Urban/Commercial, Saturday Juice Tech-House, Dec 7 Eve, Dec 25 Xmas & Dec 31 NYE 2027',
+    bestNightsIt: 'Venerdì Urban/Commercial, Sabato Juice Tech-House, 7 Dic Immacolata, 25 Dic Natale e 31 Dic Capodanno 2027',
+    signatureFactEn: 'Bergamo’s flagship multi-room clubbing arena in Orio al Serio, just 4 minutes from Milan Bergamo Airport (BGY) and the A4 motorway.',
+    signatureFactIt: 'L’arena multisala simbolo della notte bergamasca a Orio al Serio, a soli 4 minuti dall’Aeroporto BGY e dal casello A4.',
+  },
+  'v-capogiro-bergamo': {
+    id: 'v-capogiro-bergamo',
+    schemaType: 'NightClub',
+    alternateNames: ['Capogiro', 'CaPoGiRo Joyclub', 'Capogiro Curno', 'Capogiro Bergamo'],
+    neighborhoodEn: 'Curno / Bergamo West (Via Trento 14)',
+    neighborhoodIt: 'Curno / Bergamo Ovest (Via Trento 14)',
+    openingHoursSpec: [
+      { dayOfWeek: ['Friday', 'Saturday'], opens: '21:00', closes: '04:30' },
+    ],
+    metroEn: 'A4 Motorway Dalmine or Bergamo exit via SS671 ring road (8 min drive to Via Trento 14, Curno)',
+    metroIt: 'Casello A4 Dalmine o Bergamo tramite SS671 Asse Interurbano (8 min fino a Via Trento 14, Curno)',
+    parkingEn: 'Large convenient parking areas right along Via Trento 14 in Curno (BG)',
+    parkingIt: 'Ampi parcheggi comodi lungo Via Trento 14 a Curno (BG)',
+    soundEn: '21:00 Singing Dinner Party, 23:30 Live Karaoke Voice Bar & Main Room House / Commercial / Revival (25+)',
+    soundIt: 'Cena Spettacolo Cantata (21:00), Voice Bar Karaoke dal Vivo (23:30) e Main Room House / Commercial / Revival (25+)',
+    vipZonesEn: 'Dinner Show Restaurant Tables, Voice Bar Booths & Main Room Adult VIP Privé',
+    vipZonesIt: 'Tavoli Ristorante Cena Party, Area Voice Bar e Tavoli VIP Privé Main Room',
+    minSpendEn: 'Dinner Show & VIP Privé Bottle Tables upon request via WhatsApp +39 351 912 7047',
+    minSpendIt: 'Tavoli Cena Spettacolo e Privé con bottiglie su richiesta via WhatsApp +39 351 912 7047',
+    entryFormulaEn: '21:00 Singing Dinner Reservation or 23:30 Adult 25+ Club Entry & VIP Tables',
+    entryFormulaIt: 'Cena Cantata su prenotazione dalle 21:00 oppure Ingresso Club Adulto 25+ e Tavoli dalle 23:30',
+    preClubEn: 'Full in-house Feel / Joyclub Singing Dinner starting at 21:00 with seamless table retention',
+    preClubIt: 'Cena Party cantata interna dalle 21:00 con possibilità di mantenimento tavolo per tutta la notte',
+    bestNightsEn: 'Friday Feel Dinner Party, Saturday Joyclub 25+, Dec 7 Eve, Dec 25 Xmas & Dec 31 NYE 2027 Gala',
+    bestNightsIt: 'Venerdì Feel Dinner Party, Sabato Joyclub 25+, 7 Dic Immacolata, 25 Dic Natale e 31 Dic Capodanno 2027',
+    signatureFactEn: 'Three-in-one adult 25+ venue in Curno (Bergamo) uniting a Singing Dinner restaurant, a live karaoke Voice Bar, and a Main Room club.',
+    signatureFactIt: 'Locale a tripla anima per pubblico adulto 25+ e over 30 a Curno (Bergamo) con ristorante Cena Party, Voice Bar karaoke e Main Room.',
+  },
+  'v-tiky-klub-bergamo': {
+    id: 'v-tiky-klub-bergamo',
+    schemaType: 'NightClub',
+    alternateNames: ['Tiky Klub', 'Tiky Klub Seriate', 'Tiky Bergamo'],
+    neighborhoodEn: 'Seriate / Bergamo East (Via Nazionale 93)',
+    neighborhoodIt: 'Seriate / Bergamo Est (Via Nazionale 93)',
+    openingHoursSpec: [
+      { dayOfWeek: ['Wednesday', 'Friday', 'Saturday'], opens: '23:30', closes: '04:30' },
+    ],
+    metroEn: 'A4 Motorway Seriate exit (5 min drive along Via Nazionale 93, Seriate BG)',
+    metroIt: 'Casello Autostrada A4 Seriate (5 min lungo Via Nazionale 93, Seriate BG)',
+    parkingEn: 'Convenient parking along Via Nazionale 93 in Seriate (Bergamo East)',
+    parkingIt: 'Parcheggi comodi lungo Via Nazionale 93 a Seriate (Bergamo Est)',
+    soundEn: 'Contemporary House, Tech-House & Intimate Electronic Club Showcases',
+    soundIt: 'House Contemporanea, Tech-House e Boutique Electronic Showcase',
+    vipZonesEn: 'DJ Console Ring Booths & Intimate Dancefloor VIP Tables',
+    vipZonesIt: 'Divanetti Privé attorno alla Consolle DJ e Tavoli Bordo Pista',
+    minSpendEn: 'VIP Privé & Console Bottle Tables upon request via WhatsApp +39 351 912 7047',
+    minSpendIt: 'Tavoli VIP Privé e Consolle su richiesta via WhatsApp +39 351 912 7047',
+    entryFormulaEn: 'Guest List / Entry & Boutique VIP Booths via WhatsApp Concierge',
+    entryFormulaIt: 'Lista / Ingresso e Tavoli VIP Privé tramite Concierge WhatsApp',
+    preClubEn: 'Late cocktails in Seriate or Bergamo East before 23:30 doors',
+    preClubIt: 'Cocktail pre-club tra Seriate e Bergamo Est prima dell’apertura alle 23:30',
+    bestNightsEn: 'Wednesday House Session, Friday Icon Tech-House, Saturday Showcase & Dec 31 NYE 2027',
+    bestNightsIt: 'Mercoledì House, Venerdì Icon Tech-House, Sabato Guest Showcase e 31 Dic Capodanno 2027',
+    signatureFactEn: 'Bergamo East’s boutique House and Tech-House club on Via Nazionale 93 in Seriate, 5 minutes off the A4 Seriate exit.',
+    signatureFactIt: 'Il boutique club di riferimento per House e Tech-House a Seriate (Bergamo Est), a 5 minuti dal casello A4.',
+  },
+  'v-zero-club-bergamo': {
+    id: 'v-zero-club-bergamo',
+    schemaType: 'NightClub',
+    alternateNames: ['Zero Club', 'Zero Club Bergamo', 'Zero Via Baschenis Bergamo'],
+    neighborhoodEn: 'Downtown Bergamo / Via Evaristo Baschenis 9',
+    neighborhoodIt: 'Bergamo Centro / Via Evaristo Baschenis 9',
+    openingHoursSpec: [
+      { dayOfWeek: ['Wednesday', 'Friday', 'Saturday'], opens: '23:30', closes: '04:30' },
+    ],
+    metroEn: 'A4 Bergamo exit (7 min drive) or Bergamo FS Train Station (10 min walk to Via Evaristo Baschenis 9)',
+    metroIt: 'Casello A4 Bergamo (7 min) oppure Stazione FS Bergamo (10 min a piedi fino a Via Evaristo Baschenis 9)',
+    parkingEn: 'Central Bergamo parking areas along Via Baschenis / Via San Giorgio',
+    parkingIt: 'Parcheggi cittadini in zona Via Baschenis / Via San Giorgio a Bergamo Bassa',
+    soundEn: 'Dual-Room Format: Room 1 Electronic & Tech-House · Room 2 Urban, Hip-Hop & Trap',
+    soundIt: 'Doppia Sala: Sala 1 Electronic & Tech-House · Sala 2 Urban, Hip-Hop & Trap',
+    vipZonesEn: 'Main Room Console Privé & Second Room Urban VIP Booths',
+    vipZonesIt: 'Privé Consolle Prima Sala e Divanetti VIP Seconda Sala Urban',
+    minSpendEn: 'VIP Privé Tables & Membership Info upon request via WhatsApp +39 351 912 7047',
+    minSpendIt: 'Tavoli VIP Privé e info tesseramento su richiesta via WhatsApp +39 351 912 7047',
+    entryFormulaEn: 'Club Membership Card + Guest List / Entry & Reserved VIP Tables',
+    entryFormulaIt: 'Tessera Associativa Club + Lista / Ingresso e Tavoli VIP Riservati',
+    preClubEn: 'Cocktails along Via XX Settembre or Piazza Pontida in downtown Bergamo (5 min away)',
+    preClubIt: 'Cocktail tra Via XX Settembre e Piazza Pontida nel centro di Bergamo (a 5 minuti)',
+    bestNightsEn: 'Wednesday Please, Friday Premiere, Saturday Dual-Room & Dec 31 NYE 2027',
+    bestNightsIt: 'Mercoledì Please, Venerdì Premiere, Sabato Dual-Room e 31 Dic Capodanno 2027',
+    signatureFactEn: 'Downtown Bergamo’s dual-room electronic and urban club at Via Evaristo Baschenis 9 (club membership card required).',
+    signatureFactIt: 'Il club a doppia sala elettronica e urban nel centro di Bergamo in Via Evaristo Baschenis 9 (richiesta tessera club).',
+  },
+  'v-qi-clubbing-brescia': {
+    id: 'v-qi-clubbing-brescia',
+    schemaType: 'NightClub',
+    alternateNames: ['Qi Clubbing', 'Qi Clubbing Erbusco', 'Qi Franciacorta', 'Qi Brescia'],
+    neighborhoodEn: 'Erbusco / Franciacorta Wine Region (BS)',
+    neighborhoodIt: 'Erbusco / Franciacorta (Via dell’Industria 83, BS)',
+    openingHoursSpec: [
+      { dayOfWeek: ['Friday', 'Saturday'], opens: '21:00', closes: '04:30' },
+    ],
+    metroEn: 'A4 Motorway Rovato exit (2 min drive straight to Via dell’Industria 83, Erbusco BS)',
+    metroIt: 'Casello Autostrada A4 Rovato (2 min reali dal casello fino a Via dell’Industria 83, Erbusco BS)',
+    parkingEn: 'Dedicated on-site parking lot right outside Qi Clubbing in Erbusco (BS)',
+    parkingIt: 'Ampio parcheggio dedicato proprio davanti a Qi Clubbing in Via dell’Industria 83, Erbusco (BS)',
+    soundEn: '21:00 Gourmet Franciacorta Dinner Show & 23:30 Luxury House, Tech-House & Commercial Club',
+    soundIt: 'Dinner Show Gourmet in Franciacorta (21:00) e Luxury Club House, Tech-House & Commercial (23:30)',
+    vipZonesEn: 'Gourmet Dinner Show Salon, Raised Luxury Privé & DJ Console Super Privé',
+    vipZonesIt: 'Salone Dinner Show Gourmet, Luxury Privé Rialzato e Super Privé Consolle DJ',
+    minSpendEn: 'Dinner Show & Luxury VIP Privé Tables upon request via WhatsApp +39 351 912 7047',
+    minSpendIt: 'Tavoli Dinner Show e Luxury Privé su richiesta via WhatsApp +39 351 912 7047',
+    entryFormulaEn: '21:00 Seated Dinner Show or 23:30 Club Entry & VIP Bottle Tables (21+ / 25+)',
+    entryFormulaIt: 'Cena Spettacolo servita dalle 21:00 oppure Ingresso Club e Tavoli VIP dalle 23:30 (21+ / 25+)',
+    preClubEn: 'Franciacorta sparkling wine tasting in Erbusco or in-house 21:00 Qi Dinner Show',
+    preClubIt: 'Calice in cantina in Franciacorta oppure Dinner Show interno dalle 21:00 con tavolo mantenuto',
+    bestNightsEn: 'Friday Dinner Show, Saturday Gourmet & Club, Dec 7 Eve, Dec 25 Xmas Gala & Dec 31 NYE 2027',
+    bestNightsIt: 'Venerdì Dinner Show, Sabato Gourmet & Club, 7 Dic Immacolata, 25 Dic Christmas Gala e 31 Dic Capodanno 2027',
+    signatureFactEn: 'Franciacorta’s iconic design supperclub and luxury nightclub in Erbusco (Brescia), 2 minutes off the A4 Rovato exit.',
+    signatureFactIt: 'Il supperclub e luxury club simbolo della Franciacorta a Erbusco (Brescia), a 2 minuti dal casello A4 Rovato.',
+  },
+  'v-number-one-brescia': {
+    id: 'v-number-one-brescia',
+    schemaType: 'NightClub',
+    alternateNames: ['Number One', 'Number One Disco', 'Number One Corte Franca', 'Number One Franciacorta', 'Number One Brescia'],
+    neighborhoodEn: 'Corte Franca / Franciacorta & Lake Iseo (BS)',
+    neighborhoodIt: 'Corte Franca / Franciacorta & Lago d’Iseo (BS)',
+    openingHoursSpec: [
+      { dayOfWeek: ['Saturday'], opens: '23:00', closes: '04:30' },
+    ],
+    metroEn: 'A4 Motorway Rovato or Palazzolo sull’Oglio exit -> SP XI toward Lake Iseo (12 min to Via Provinciale 1/B, Corte Franca)',
+    metroIt: 'Casello A4 Rovato o Palazzolo sull’Oglio -> SP XI direzione Lago d’Iseo (12 min fino a Via Provinciale 1/B, Corte Franca)',
+    parkingEn: 'Monumental multi-lot parking areas directly on-site at Via Provinciale 1/B, Corte Franca (BS)',
+    parkingIt: 'Grandi parcheggi dedicati ad alta capienza in Via Provinciale 1/B a Corte Franca (BS)',
+    soundEn: 'Monumental Multi-Arena Megaclub: EDM, Commercial, Tech-House, Urban & 90s/2000s',
+    soundIt: 'Mega-Club Multisala: EDM, Commerciale, Tech-House, Urban e Anni 90/2000',
+    vipZonesEn: 'Panoramic Main Arena VIP Balconies, Stage Privé & Multi-Room Bottle Booths',
+    vipZonesIt: 'Balconate VIP Panoramiche sull’Arena Centrale, Privé Palco e Tavoli Sale Multiple',
+    minSpendEn: 'VIP Balcony & Privé Bottle Tables upon request via WhatsApp +39 351 912 7047',
+    minSpendIt: 'Tavoli Balconata VIP e Privé su richiesta via WhatsApp +39 351 912 7047',
+    entryFormulaEn: 'Guest List / Pre-Sale Entry & Panoramic VIP Balcony Tables via WhatsApp',
+    entryFormulaIt: 'Lista / Prevendita Ufficiale e Tavoli Balconata VIP su WhatsApp',
+    preClubEn: 'Sunset aperitivo along Lake Iseo (Iseo / Sarnico) or Franciacorta before 23:00 doors',
+    preClubIt: 'Aperitivo o cena sul Lago d’Iseo (Iseo / Sarnico) o in Franciacorta prima delle 23:00',
+    bestNightsEn: 'Saturday Multisala, Dec 7 Eve, Tue Dec 22 THE END Student Xmas Party & Dec 31 NYE 2027',
+    bestNightsIt: 'Sabato Multisala, 7 Dic Immacolata, Mar 22 Dic THE END Student Xmas Party e 31 Dic Capodanno 2027',
+    signatureFactEn: 'One of Italy’s most famous historic multi-room megaclubs at Via Provinciale 1/B in Corte Franca, between Franciacorta and Lake Iseo.',
+    signatureFactIt: 'Uno dei megaclub multisala più celebri d’Italia in Via Provinciale 1/B a Corte Franca, tra la Franciacorta e il Lago d’Iseo.',
+  },
 };
 
 export function getVenueAuthoritySpec(venueId: string): VenueAuthoritySpec | undefined {
@@ -1238,6 +1407,14 @@ export function buildCityQualifiedVenueH1(
     return locale === 'it'
       ? 'JustMe Garda Lake (Lago di Garda)'
       : 'JustMe Garda Lake';
+  }
+  if (isBergamoBresciaVenueId(venue.id)) {
+    const meta = BG_BS_CITY_META_BY_ID[venue.id];
+    const cityLabel = locale === 'it' ? meta.cityIt : meta.cityEn;
+    if (localizedVenueName.toLowerCase().includes(venue.address.addressLocality.toLowerCase())) {
+      return localizedVenueName;
+    }
+    return `${localizedVenueName} · ${cityLabel}`;
   }
   const loc = (CLUB_SERP_35[locale as LocaleCode] ? locale : 'en') as LocaleCode;
   const city = CLUB_SERP_35[loc].city;
@@ -1267,15 +1444,28 @@ export function buildVenueAuthorityFaqs(
   const spec = VENUE_AUTHORITY_33[venue.id];
   const loc = (CLUB_SERP_35[locale as LocaleCode] ? locale : 'en') as LocaleCode;
   const isGarda = venue.id === 'v-justme-garda';
-  const city = isGarda
+  const bgBsMeta = isBergamoBresciaVenueId(venue.id) ? BG_BS_CITY_META_BY_ID[venue.id] : null;
+  const city = bgBsMeta
     ? loc === 'it'
-      ? 'Lonato del Garda (Lago di Garda)'
-      : 'Lonato del Garda (Lake Garda)'
-    : CLUB_SERP_35[loc].city;
-  const inCityIt = isGarda ? 'sul Lago di Garda' : 'a Milano';
-  const inCityEn = isGarda ? 'on Lake Garda' : 'in Milan';
-  const postalCityIt = isGarda ? `${venue.address.postalCode} Lonato del Garda (BS)` : `${venue.address.postalCode} Milano`;
-  const postalCityEn = isGarda ? `${venue.address.postalCode} Lonato del Garda (Lake Garda, BS)` : `${venue.address.postalCode} Milan`;
+      ? bgBsMeta.cityIt
+      : bgBsMeta.cityEn
+    : isGarda
+      ? loc === 'it'
+        ? 'Lonato del Garda (Lago di Garda)'
+        : 'Lonato del Garda (Lake Garda)'
+      : CLUB_SERP_35[loc].city;
+  const inCityIt = bgBsMeta ? bgBsMeta.inCityIt : isGarda ? 'sul Lago di Garda' : 'a Milano';
+  const inCityEn = bgBsMeta ? bgBsMeta.inCityEn : isGarda ? 'on Lake Garda' : 'in Milan';
+  const postalCityIt = bgBsMeta
+    ? bgBsMeta.postalCityIt
+    : isGarda
+      ? `${venue.address.postalCode} Lonato del Garda (BS)`
+      : `${venue.address.postalCode} Milano`;
+  const postalCityEn = bgBsMeta
+    ? bgBsMeta.postalCityEn
+    : isGarda
+      ? `${venue.address.postalCode} Lonato del Garda (Lake Garda, BS)`
+      : `${venue.address.postalCode} Milan`;
   const street = venue.address.streetAddress;
   const postal = venue.address.postalCode;
 

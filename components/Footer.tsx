@@ -135,6 +135,11 @@ export default function Footer({ lang, editorialFields = {}, copyrightYear }: Fo
                   </Link>
                 </li>
                 <li>
+                  <Link href={`${lp}/bergamo-brescia`} locale={lang} prefetch={false} className="text-[#F6F1E7] hover:underline transition-colors text-sm font-medium">
+                    {lang === 'it' ? 'Discoteche Bergamo & Brescia (6 Club)' : 'Bergamo & Brescia Clubs (6)'}
+                  </Link>
+                </li>
+                <li>
                   <Link href={`${lp}/concert-afterparties`} locale={lang} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
                     {v01.footerConcerts}
                   </Link>
@@ -181,6 +186,11 @@ export default function Footer({ lang, editorialFields = {}, copyrightYear }: Fo
                 <li>
                   <Link href={`${lp}/zones/citylife-portello`} locale={lang} prefetch={false} className="text-[#C2B9AA] hover:text-[#F6F1E7] transition-colors text-sm">
                     CityLife &amp; Portello (Voya)
+                  </Link>
+                </li>
+                <li>
+                  <Link href={`${lp}/bergamo-brescia`} locale={lang} prefetch={false} className="text-[#EAE3D5] hover:text-[#F6F1E7] transition-colors text-sm font-semibold">
+                    Bergamo &amp; Brescia · Franciacorta (A4)
                   </Link>
                 </li>
               </ul>

@@ -1,6 +1,7 @@
 import type { LocaleCode } from './i18n/locales';
 import type { Venue } from './types';
 import { seoTitle, withWhatsApp } from './seoMetadata';
+import { BG_BS_CITY_META_BY_ID, isBergamoBresciaVenueId } from './bergamo-brescia/clubsSeed';
 
 export interface ClubSerpPack {
   city: string;
@@ -409,6 +410,12 @@ export const OFFICIAL_SERP_NAME_BY_ID: Readonly<Record<string, string>> = {
   'v-terrazza-gallia-milano': 'Terrazza Gallia Milano',
   'v-ristorante-torre-milano': 'Ristorante Torre Milano',
   'v-innocenti-evasioni-terrazza-triennale': 'Terrazza Triennale Milano',
+  'v-setai-bergamo': 'Setai Club Bergamo',
+  'v-capogiro-bergamo': 'Capogiro Bergamo',
+  'v-tiky-klub-bergamo': 'Tiky Klub Bergamo',
+  'v-zero-club-bergamo': 'Zero Club Bergamo',
+  'v-qi-clubbing-brescia': 'Qi Clubbing Brescia',
+  'v-number-one-brescia': 'Number One Brescia',
 };
 
 /** Confirmed minimum VIP table spend (EUR) strictly for managed/verified venues in clubContent */
@@ -604,6 +611,30 @@ export const FLAGSHIP_TITLES_EN_IT: Readonly<Record<string, { en: string; it: st
     en: 'JustMe Garda Lake (Lonato): Dinner Show, Club & VIP Tables',
     it: 'JustMe Garda Lake (Lago di Garda): Cena Show e Tavoli VIP',
   },
+  'v-setai-bergamo': {
+    en: 'Setai Club Bergamo (Orio al Serio): Nights, NYE & VIP Tables',
+    it: 'Setai Club Bergamo (Orio al Serio): Serate, NYE e Tavoli VIP',
+  },
+  'v-capogiro-bergamo': {
+    en: 'Capogiro Curno Bergamo: Singing Dinner, Voice Bar & 25+ Club',
+    it: 'Capogiro Curno Bergamo: Cena Cantata, Voice Bar e Tavoli VIP',
+  },
+  'v-tiky-klub-bergamo': {
+    en: 'Tiky Klub Seriate (Bergamo): House, Tech-House & VIP Tables',
+    it: 'Tiky Klub Seriate (Bergamo): House, Tech-House e Tavoli VIP',
+  },
+  'v-zero-club-bergamo': {
+    en: 'Zero Club Bergamo Center: Dual-Room Nights, NYE & VIP Tables',
+    it: 'Zero Club Bergamo Centro: Doppia Sala, Serate e Tavoli VIP',
+  },
+  'v-qi-clubbing-brescia': {
+    en: 'Qi Clubbing Franciacorta (Erbusco): Dinner Show & VIP Tables',
+    it: 'Qi Clubbing Franciacorta (Erbusco BS): Cena Show e Tavoli VIP',
+  },
+  'v-number-one-brescia': {
+    en: 'Number One Corte Franca (Brescia): Megaclub, NYE & VIP Tables',
+    it: 'Number One Corte Franca (Brescia): Megaclub, Serate e Tavoli',
+  },
 };
 
 export function buildClubHighCtrTitle(venue: Venue, locale: string, localizedVenueName: string): string {
@@ -620,6 +651,9 @@ export function buildClubHighCtrTitle(venue: Venue, locale: string, localizedVen
       if (gardaCandidate.length <= 62) return seoTitle(gardaCandidate, 62);
     }
     return seoTitle(`JustMe Garda Lake: ${pack.titlePricesVip}`, 62);
+  }
+  if (isBergamoBresciaVenueId(venue.id)) {
+    return seoTitle(`${canonicalBrand}: ${pack.titlePricesVip}`, 62);
   }
   const hasCityInName =
     canonicalBrand.toLowerCase().includes('milan') ||
@@ -645,15 +679,20 @@ export function buildClubHighCtrDescription(
   const minVip = CONFIRMED_MIN_VIP_EUR[venue.id];
   const brand = OFFICIAL_SERP_NAME_BY_ID[venue.id] || localizedVenueName;
   const isGarda = venue.id === 'v-justme-garda';
-  const cityLabel = isGarda
+  const bgBsMeta = isBergamoBresciaVenueId(venue.id) ? BG_BS_CITY_META_BY_ID[venue.id] : null;
+  const cityLabel = bgBsMeta
     ? loc === 'it'
-      ? 'Lonato del Garda, Lago di Garda'
-      : 'Lonato del Garda, Lake Garda'
-    : loc === 'it'
-      ? 'Milano'
-      : loc === 'en'
-        ? 'Milan'
-        : pack.city;
+      ? bgBsMeta.cityIt
+      : bgBsMeta.cityEn
+    : isGarda
+      ? loc === 'it'
+        ? 'Lonato del Garda, Lago di Garda'
+        : 'Lonato del Garda, Lake Garda'
+      : loc === 'it'
+        ? 'Milano'
+        : loc === 'en'
+          ? 'Milan'
+          : pack.city;
 
   if (loc === 'it') {
     if (venue.id === 'v-justme') {

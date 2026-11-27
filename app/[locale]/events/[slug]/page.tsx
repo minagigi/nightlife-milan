@@ -35,6 +35,14 @@ import {
   partenopeaJustMeSlug,
   resolvePartenopeaJustMeSlug,
 } from '@/lib/partenopea/justme35';
+import BergamoBresciaEventDetailView from '@/components/BergamoBresciaEventDetailView';
+import {
+  bergamoBresciaNightHreflangAlternates,
+  bergamoBresciaNightPath,
+  bergamoBresciaNightSlug,
+  getBergamoBresciaNightLocalized,
+  resolveBergamoBresciaNightId,
+} from '@/lib/bergamo-brescia/activeNights35';
 import JustSingingJustMeDetailView from '@/components/JustSingingJustMeDetailView';
 import {
   getJustSingingRainContent,
@@ -432,6 +440,39 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
     };
   }
+  const bgBsNightIdMeta = resolveBergamoBresciaNightId(slug);
+  if (bgBsNightIdMeta) {
+    const canonicalSlug = bergamoBresciaNightSlug(bgBsNightIdMeta, locale);
+    if (slug !== canonicalSlug) permanentRedirect(bergamoBresciaNightPath(bgBsNightIdMeta, locale));
+    const detail = getBergamoBresciaNightLocalized(bgBsNightIdMeta, locale);
+    if (!detail) notFound();
+    const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
+    const canonical = `${baseUrl}${detail.canonicalPath}`;
+    return {
+      title: detail.metaTitle,
+      description: detail.metaDescription,
+      robots: seoRobots(locale, true, true),
+      alternates: {
+        canonical,
+        languages: bergamoBresciaNightHreflangAlternates(bgBsNightIdMeta),
+      },
+      openGraph: {
+        title: detail.metaTitle,
+        description: detail.metaDescription,
+        url: canonical,
+        type: 'website',
+        siteName: 'Nightlife Milan',
+        locale: getLocaleDef(locale)?.ogLocale || 'en_US',
+        images: [{ url: `${baseUrl}${detail.seed.posterSrc}`, width: 1080, height: 1350, alt: detail.h1 }],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: detail.metaTitle,
+        description: detail.metaDescription,
+        images: [`${baseUrl}${detail.seed.posterSrc}`],
+      },
+    };
+  }
   const capCatId = resolveCapodannoCategoryIdByLocalizedSlug(slug, locale);
   if (capCatId) {
     if (slug !== capodannoCategorySlug(capCatId, locale)) permanentRedirect(capodannoCategoryPath(capCatId, locale));
@@ -650,6 +691,12 @@ export default async function EventPage({ params }: Props) {
     if (slug !== canonicalSlug) permanentRedirect(partenopeaJustMePath(locale));
     return <PartenopeaJustMeDetailView locale={locale} />;
   }
+  const bgBsNightId = resolveBergamoBresciaNightId(slug);
+  if (bgBsNightId) {
+    const canonicalSlug = bergamoBresciaNightSlug(bgBsNightId, locale);
+    if (slug !== canonicalSlug) permanentRedirect(bergamoBresciaNightPath(bgBsNightId, locale));
+    return <BergamoBresciaEventDetailView idOrSlug={bgBsNightId} locale={locale} />;
+  }
   const capCatId = resolveCapodannoCategoryIdByLocalizedSlug(slug, locale);
   if (capCatId) {
     if (slug !== capodannoCategorySlug(capCatId, locale)) permanentRedirect(capodannoCategoryPath(capCatId, locale));
@@ -679,12 +726,15 @@ export default async function EventPage({ params }: Props) {
   const weeklyEvent = getWeeklyEventBySlug(slug);
   if (weeklyEvent) {
     const isIt = locale === 'it';
-    const title = `${weeklyEvent.name} @ ${weeklyEvent.clubName} Milano - ${weeklyEvent.day.charAt(0).toUpperCase() + weeklyEvent.day.slice(1)} 2026`;
+    const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
+    const weeklyVenue = getVenueById(`v-${weeklyEvent.clubSlug}`);
+    const weeklyCityLabel = weeklyVenue?.address?.addressLocality || (isIt ? 'Milano' : 'Milan');
+    const title = weeklyEvent.clubName.toLowerCase().includes(weeklyCityLabel.toLowerCase())
+      ? `${weeklyEvent.name} @ ${weeklyEvent.clubName} - ${weeklyEvent.day.charAt(0).toUpperCase() + weeklyEvent.day.slice(1)} 2026`
+      : `${weeklyEvent.name} @ ${weeklyEvent.clubName} ${weeklyCityLabel} - ${weeklyEvent.day.charAt(0).toUpperCase() + weeklyEvent.day.slice(1)} 2026`;
     const description = isIt ? weeklyEvent.description.it : weeklyEvent.description.en;
     const dressCode = isIt ? weeklyEvent.dressCode.it : weeklyEvent.dressCode.en;
 
-    const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
-    const weeklyVenue = getVenueById(`v-${weeklyEvent.clubSlug}`);
     const absoluteImage = weeklyEvent.image.startsWith('http')
       ? weeklyEvent.image
       : `${baseUrl}${weeklyEvent.image}`;
@@ -716,7 +766,9 @@ export default async function EventPage({ params }: Props) {
         address: {
           '@type': 'PostalAddress',
           ...(weeklyVenue?.address?.streetAddress ? { streetAddress: weeklyVenue.address.streetAddress } : {}),
-          addressLocality: 'Milan',
+          addressLocality: weeklyVenue?.address?.addressLocality || 'Milan',
+          ...(weeklyVenue?.address?.addressRegion ? { addressRegion: weeklyVenue.address.addressRegion } : {}),
+          ...(weeklyVenue?.address?.postalCode ? { postalCode: weeklyVenue.address.postalCode } : {}),
           addressCountry: 'IT'
         }
       },

@@ -25,6 +25,7 @@ import {
   getIlMarcheseNyeContent,
 } from '@/lib/capodanno/marcheseFrezzaBeach35';
 import { getApricaWinterWeekNyeContent } from '@/lib/capodanno/apricaWinterWeek35';
+import { getBergamoBresciaNyeContent } from '@/lib/capodanno/bergamoBresciaNye35';
 import {
   buildFallbackLocalizedEventContent35,
   formatCapodannoHours35,
@@ -672,6 +673,8 @@ function getOverrideEventContent(slug: string, locale: string): CapodannoLocaliz
   if (slug === 'capodanno-tom-the-ordinary-market-milano') return getTomNyeContent(locale);
   if (slug === 'capodanno-terrazza-duomo-21') return getTerrazzaDuomo21NyeContent(locale);
   if (slug === 'capodanno-ceresio-7-milano') return getCeresio7ClosedNyeContent(locale);
+  const bgBs = getBergamoBresciaNyeContent(slug, locale);
+  if (bgBs) return bgBs;
   const qc = getQcTermeAndSirmioneOverride35(slug, locale);
   if (qc) return qc;
   const wa = getWhatsappVenueNyeContent(slug, locale);

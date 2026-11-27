@@ -165,6 +165,30 @@ const venueTitles: Record<string, { en: string; it: string }> = {
     en: "Philipp's Milan (Philipp Plein Hotel) | Dinner Show, Luxury Club & VIP Tables 2026/2027",
     it: "Philipp's Milano (Philipp Plein) | Dinner Show, Luxury Club & Tavoli VIP 2026/2027",
   },
+  'v-setai-bergamo': {
+    en: 'Setai Club Bergamo (Orio al Serio) | Juice Tech-House, Friday Nights, NYE 2027 & VIP Tables',
+    it: 'Setai Club Bergamo (Orio al Serio) | Juice Tech-House, Serate, Capodanno 2027 & Tavoli VIP',
+  },
+  'v-capogiro-bergamo': {
+    en: 'Capogiro Joyclub Curno (Bergamo) | Singing Dinner, Voice Bar, 25+ Club & VIP Tables',
+    it: 'Capogiro Joyclub Curno (Bergamo) | Cena Cantata, Voice Bar, Serate 25+ & Tavoli VIP',
+  },
+  'v-tiky-klub-bergamo': {
+    en: 'Tiky Klub Seriate (Bergamo) | House & Tech-House Boutique Club, NYE 2027 & VIP Tables',
+    it: 'Tiky Klub Seriate (Bergamo) | Club House & Tech-House, Serate, Capodanno 2027 & Tavoli VIP',
+  },
+  'v-zero-club-bergamo': {
+    en: 'Zero Club Bergamo Center | Dual-Room Electronic & Urban Nights, NYE 2027 & VIP Tables',
+    it: 'Zero Club Bergamo Centro | Doppia Sala Electronic & Urban, Capodanno 2027 & Tavoli VIP',
+  },
+  'v-qi-clubbing-brescia': {
+    en: 'Qi Clubbing Erbusco (Franciacorta, Brescia) | Gourmet Dinner Show, NYE 2027 & VIP Tables',
+    it: 'Qi Clubbing Erbusco (Franciacorta, Brescia) | Dinner Show, Capodanno 2027 & Tavoli VIP',
+  },
+  'v-number-one-brescia': {
+    en: 'Number One Corte Franca (Brescia) | Multi-Room Megaclub, Student Xmas, NYE 2027 & VIP Tables',
+    it: 'Number One Corte Franca (Brescia) | Megaclub Multisala, Serate, Capodanno 2027 & Tavoli VIP',
+  },
 };
 
 const venueKeywords: Record<string, { en: string[]; it: string[] }> = {
@@ -267,6 +291,30 @@ const venueKeywords: Record<string, { en: string[]; it: string[] }> = {
   'v-philipps': {
     en: ["philipp's milan", 'philipp plein club milan', 'the plein hotel club milan', "the philipp's show dinner show", 'via daniele manin 21 nightclub', "philipp's milano vip tables", 'chef roberto conti dinner show'],
     it: ["philipp's milano", 'philipp plein locale milano', 'the plein hotel discoteca milano', "the philipp's show cena spettacolo", 'via daniele manin 21 milano', "tavoli vip philipp's milano", 'cena cantata philipp plein milano'],
+  },
+  'v-setai-bergamo': {
+    en: ['setai club bergamo', 'setai orio al serio', 'juice setai bergamo', 'setai bergamo vip tables', 'capodanno setai bergamo 2027'],
+    it: ['setai club bergamo', 'discoteca setai orio al serio', 'juice setai bergamo sabato', 'tavoli vip setai bergamo', 'capodanno setai club bergamo 2027'],
+  },
+  'v-capogiro-bergamo': {
+    en: ['capogiro bergamo', 'capogiro joyclub curno', 'singing dinner bergamo', 'voice bar capogiro curno', 'capogiro nye 2027'],
+    it: ['capogiro bergamo', 'capogiro curno cena cantata', 'voice bar capogiro bergamo', 'discoteca over 30 bergamo', 'capodanno capogiro bergamo 2027'],
+  },
+  'v-tiky-klub-bergamo': {
+    en: ['tiky klub bergamo', 'tiky klub seriate', 'house tech house club bergamo', 'tiky klub vip tables', 'tiky klub nye 2027'],
+    it: ['tiky klub bergamo', 'tiky klub seriate via nazionale 93', 'discoteca house bergamo', 'tavoli vip tiky klub', 'capodanno tiky klub 2027'],
+  },
+  'v-zero-club-bergamo': {
+    en: ['zero club bergamo', 'zero club via baschenis bergamo', 'downtown bergamo nightclub', 'zero club vip tables', 'zero club bergamo nye 2027'],
+    it: ['zero club bergamo', 'zero club via baschenis 9', 'discoteca bergamo centro', 'tavoli vip zero club bergamo', 'capodanno zero club bergamo 2027'],
+  },
+  'v-qi-clubbing-brescia': {
+    en: ['qi clubbing brescia', 'qi clubbing erbusco franciacorta', 'dinner show franciacorta brescia', 'qi clubbing vip tables', 'qi clubbing nye 2027'],
+    it: ['qi clubbing brescia', 'qi clubbing erbusco franciacorta', 'cena spettacolo franciacorta', 'tavoli vip qi clubbing', 'capodanno qi clubbing brescia 2027'],
+  },
+  'v-number-one-brescia': {
+    en: ['number one brescia', 'number one corte franca', 'number one franciacorta megaclub', 'the end student xmas party number one', 'number one nye 2027'],
+    it: ['number one brescia', 'discoteca number one corte franca', 'number one franciacorta tavoli vip', 'student xmas party number one 22 dicembre', 'capodanno number one brescia 2027'],
   },
 };
 

@@ -13,6 +13,11 @@ import { orthodoxNyeJustMePath } from '@/lib/orthodox-nye/justme35';
 import { thanksgivingJustMePath } from '@/lib/thanksgiving/justme35';
 import { partenopeaJustMePath } from '@/lib/partenopea/justme35';
 import { isJustSingingRainActive, justSingingRainPath } from '@/lib/just-singing-rain/justme35';
+import {
+  BERGAMO_BRESCIA_ACTIVE_NIGHTS,
+  bergamoBresciaNightPath,
+  computeActiveNightWindowISO,
+} from '@/lib/bergamo-brescia/activeNights35';
 import { halloweenPath } from '@/lib/halloween/routes';
 import { OCTOBER_EVENTS, OCTOBER_EVENTS_INVENTORY } from '@/lib/octoberEvents';
 import { octoberEventCanonical } from '@/lib/octoberEventSeo';
@@ -167,6 +172,7 @@ function buildCoreHubEntriesInternal(freshCatalogDate: Date): MetadataRoute.Site
     '/events/special',
     '/guest-lists',
     '/football-afterparties',
+    '/bergamo-brescia',
   ]);
 
   const staticRoutes = [
@@ -174,6 +180,7 @@ function buildCoreHubEntriesInternal(freshCatalogDate: Date): MetadataRoute.Site
     { path: '/vip-tables', priority: 0.95, changeFrequency: 'weekly' as const },
     { path: '/concierge', priority: 0.9, changeFrequency: 'monthly' as const },
     { path: '/clubs', priority: 0.95, changeFrequency: 'weekly' as const },
+    { path: '/bergamo-brescia', priority: 0.95, changeFrequency: 'daily' as const },
     { path: '/events/tonight', priority: 0.95, changeFrequency: 'hourly' as const },
     { path: '/events/this-week', priority: 0.9, changeFrequency: 'daily' as const },
     { path: '/events/october-2026', priority: 0.85, changeFrequency: 'weekly' as const },
@@ -426,6 +433,20 @@ function buildEventsEntriesInternal(ebEvents: readonly Event[]): MetadataRoute.S
       lastModified: catalogLastMod,
       changeFrequency: 'daily',
       priority: 0.94,
+    });
+  });
+
+  const nowDateForBgBs = new Date(nowMs);
+  BERGAMO_BRESCIA_ACTIVE_NIGHTS.forEach((bgBsEv) => {
+    const win = computeActiveNightWindowISO(bgBsEv, nowDateForBgBs);
+    if (win.isExpired) return;
+    locales.forEach((locale) => {
+      entries.push({
+        url: `${baseUrl}${bergamoBresciaNightPath(bgBsEv.id, locale)}`,
+        lastModified: catalogLastMod,
+        changeFrequency: 'daily',
+        priority: 0.92,
+      });
     });
   });
 

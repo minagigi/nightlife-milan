@@ -30,6 +30,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.95,
     },
     {
+      url: `${baseUrl}${localePrefix(locale)}${getLocalizedSeoPagePath35('/bergamo-brescia', locale)}`,
+      lastModified: catalogLastMod,
+      changeFrequency: 'daily' as const,
+      priority: 0.95,
+    },
+    {
       url: `${baseUrl}${localePrefix(locale)}/single-pass`,
       lastModified: catalogLastMod,
       changeFrequency: 'daily' as const,

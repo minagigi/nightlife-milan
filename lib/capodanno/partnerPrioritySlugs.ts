@@ -61,6 +61,12 @@ export const CAPODANNO_NON_PARTNER_PRIORITY_SLUGS: readonly string[] = [
   'capodanno-volt-club-milano',
   'capodanno-alcatraz-milano',
   'capodanno-fabbrica-del-vapore-milano',
+  'capodanno-setai-club-bergamo',
+  'capodanno-capogiro-curno-bergamo',
+  'capodanno-tiky-klub-seriate-bergamo',
+  'capodanno-zero-club-bergamo',
+  'capodanno-qi-clubbing-brescia',
+  'capodanno-number-one-brescia',
 ];
 
 export const CAPODANNO_PARTNER_PRIORITY_SLUGS: readonly string[] = [

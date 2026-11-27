@@ -1,5 +1,6 @@
 import { rooftopVenueBatch } from './venueRooftopBatch';
 import { superClubVenueBatch } from './venueSuperClubBatch';
+import { bergamoBresciaVenueBatch } from './bergamo-brescia/clubsSeed';
 import { Venue, MilanZone, VenueCategory } from './types';
 
 export const venuesData: Venue[] = [
@@ -1226,7 +1227,7 @@ export const venuesData: Venue[] = [
 ];
 
 const existingIds = new Set(venuesData.map((v) => v.id));
-for (const extra of [...rooftopVenueBatch, ...superClubVenueBatch]) {
+for (const extra of [...rooftopVenueBatch, ...superClubVenueBatch, ...bergamoBresciaVenueBatch]) {
   if (!existingIds.has(extra.id)) {
     venuesData.push(extra);
     existingIds.add(extra.id);
