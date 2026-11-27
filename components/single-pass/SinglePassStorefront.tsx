@@ -23,7 +23,15 @@ import {
   formatEurFromCents,
 } from '@/lib/single-pass/catalog';
 import type { SupportedCurrency } from '@/lib/single-pass/currency';
-import { getSinglePassCopy } from '@/lib/single-pass/i18n35';
+import { getSinglePassCopy, localizeSinglePassSku } from '@/lib/single-pass/i18n35';
+import {
+  getSinglePassPageExtras35,
+  localizeDietaryOptionLabel35,
+  localizeVenueAgeRange35,
+  localizeVenueDressCode35,
+  localizeVenueMusic35,
+  localizeVenueTagline35,
+} from '@/lib/single-pass/pageCopy35';
 import type { SinglePassPackageCategory, SinglePassVenueId } from '@/lib/single-pass/types';
 import { useSinglePassCart } from './SinglePassCartContext';
 
@@ -60,8 +68,8 @@ export default function SinglePassStorefront({
   const [menuChoices, setMenuChoices] = useState<Record<string, string>>({});
 
   const copy = getSinglePassCopy(locale);
+  const extras = getSinglePassPageExtras35(locale);
   const lp = localePrefix(locale);
-  const isIt = locale === 'it';
 
   const visibleVenues = useMemo(() => {
     return STOREFRONT_VENUES.filter((v) => {
@@ -181,7 +189,7 @@ export default function SinglePassStorefront({
 
             {/* Clickable TOC Navigation (SEO 21 points) */}
             <nav
-              aria-label="Single Pass index"
+              aria-label={extras.indexAriaLabel}
               className="mt-7 border border-[#050505]/15 bg-[#F6F1E7] p-5 text-[#050505]"
             >
               <p className="text-xs font-bold uppercase tracking-widest text-[#3D3830]">
@@ -200,17 +208,17 @@ export default function SinglePassStorefront({
                 </li>
                 <li>
                   <a href="#mini-gruppo-whatsapp-20-dicembre" className="text-[#050505] underline-offset-4 hover:underline">
-                    3. WhatsApp 20/12/2026
+                    3. {extras.tocWhatsappLabel}
                   </a>
                 </li>
                 <li>
-                  <a href="#mappa-milano-single-pass" className="text-[#050505] underline-offset-4 hover:underline">
-                    4. Milano Club Map
+                  <a href="#single-pass-milan-map" className="text-[#050505] underline-offset-4 hover:underline">
+                    4. {extras.tocMapLabel}
                   </a>
                 </li>
                 <li>
                   <a href="#faq-single-pass" className="text-[#050505] underline-offset-4 hover:underline">
-                    5. Domande &amp; Regole Ufficiali
+                    5. {extras.tocFaqLabel}
                   </a>
                 </li>
               </ul>
@@ -219,7 +227,7 @@ export default function SinglePassStorefront({
         </section>
       )}
 
-      {/* Light Interactive Catalog Surface (#F6F1E7) for High Clarity (chiarezza-visiva-gerarchia-ecommerce) */}
+      {/* Light Interactive Catalog Surface (#F6F1E7) for High Clarity */}
       <section
         id="catalogo-single-pass"
         data-surface="ivory"
@@ -229,7 +237,7 @@ export default function SinglePassStorefront({
           <div className="flex flex-col gap-4 border-b border-[#050505]/15 pb-6 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#3D3830]">
-                NIGHTLIFE MILAN · CAPODANNO 2027 SINGLE PASS SHOP
+                {extras.shopSectionEyebrow}
               </p>
               <h2 className="mt-1 font-serif text-3xl font-bold text-[#050505] sm:text-4xl">
                 {copy.filterHeading}
@@ -330,7 +338,7 @@ export default function SinglePassStorefront({
             </div>
           </div>
 
-          {/* 6 Venues & Package Cards */}
+          {/* Confirmed Venues & Package Cards */}
           <div className="mt-10 space-y-12">
             {visibleVenues.map((venue) => {
               const skus = SINGLE_PASS_SKUS.filter(
@@ -339,6 +347,7 @@ export default function SinglePassStorefront({
                   s.category !== 'vip-table-full' &&
                   (selectedCategory === 'all' || s.category === selectedCategory),
               );
+              const ageBand = localizeVenueAgeRange35(venue, locale);
               return (
                 <div
                   key={venue.id}
@@ -349,8 +358,8 @@ export default function SinglePassStorefront({
                     <div className="aspect-[4/5] w-full overflow-hidden border border-[#050505]/20 bg-[#050505]">
                       <img
                         src={venue.posterSrc}
-                        alt={`${venue.name} · ${isIt ? venue.ageBandLabelIt : venue.ageBandLabelEn}`}
-                        title={`${venue.name} Single Pass Capodanno 2027`}
+                        alt={`${venue.name} · ${ageBand}`}
+                        title={`${venue.name} · ${copy.navShopLabel} 2027`}
                         width={1080}
                         height={1350}
                         loading="eager"
@@ -362,23 +371,23 @@ export default function SinglePassStorefront({
                       <div>
                         <div className="flex flex-wrap items-center gap-2">
                           <span className="bg-[#050505] px-3 py-1 text-xs font-extrabold uppercase tracking-wider text-[#F6F1E7]">
-                            {isIt ? venue.ageBandLabelIt : venue.ageBandLabelEn}
+                            {ageBand}
                           </span>
                           <span className="border border-[#050505]/30 bg-[#F6F1E7] px-3 py-1 text-xs font-bold text-[#050505]">
                             {venue.district} · {venue.hours}
                           </span>
                           <span className="border border-[#050505]/20 bg-white/70 px-3 py-1 text-xs font-semibold text-[#24201B]">
-                            {skus.length} Single Pass
+                            {skus.length} {copy.navShopLabel}
                           </span>
                         </div>
                         <h3 className="mt-3 font-serif text-2xl font-bold text-[#050505] sm:text-3xl">
                           {venue.name}
                         </h3>
                         <p className="mt-1.5 text-sm font-semibold text-[#24201B]">
-                          {isIt ? venue.taglineIt : venue.taglineEn}
+                          {localizeVenueTagline35(venue, locale, copy)}
                         </p>
                         <p className="mt-2 text-xs leading-relaxed text-[#3D3830]">
-                          <strong>{venue.address}</strong> · {isIt ? venue.musicIt : venue.musicEn} · Dress code: {isIt ? venue.dressCodeIt : venue.dressCodeEn}
+                          <strong>{venue.address}</strong> · {localizeVenueMusic35(venue, locale)} · {extras.dressCodePrefix}: {localizeVenueDressCode35(venue, locale)}
                         </p>
                       </div>
                       <div className="mt-4 flex flex-wrap items-center gap-3">
@@ -396,13 +405,18 @@ export default function SinglePassStorefront({
                   <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     {skus.map((sku) => {
                       const added = justAddedId === sku.id;
-                      const skuTitle = isIt ? sku.titleIt : sku.titleEn;
-                      const skuDesc = isIt ? sku.descriptionIt : sku.descriptionEn;
+                      const { title: skuTitle, description: skuDesc } = localizeSinglePassSku(
+                        sku,
+                        locale,
+                        copy,
+                        venue.name,
+                      );
                       const selectedMenu = menuChoices[sku.id] || sku.dietaryPreset || '';
 
                       return (
                         <article
                           key={sku.id}
+                          id={sku.id}
                           data-single-pass-sku={sku.id}
                           className="flex flex-col justify-between border border-[#050505]/20 bg-[#F6F1E7] p-5"
                         >
@@ -437,10 +451,10 @@ export default function SinglePassStorefront({
                                     }
                                     className="mt-1 h-9 w-full border border-[#050505]/30 bg-white px-2.5 text-xs text-[#050505]"
                                   >
-                                    <option value="">{isIt ? 'Standard Gala Menu' : 'Standard Gala Menu'}</option>
+                                    <option value="">{extras.standardGalaMenuLabel}</option>
                                     {DINNER_DIETARY_OPTIONS.map((opt) => (
                                       <option key={opt.value} value={opt.value}>
-                                        {isIt ? opt.labelIt : opt.labelEn}
+                                        {localizeDietaryOptionLabel35(opt, locale)}
                                       </option>
                                     ))}
                                   </select>
@@ -530,7 +544,7 @@ export default function SinglePassStorefront({
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div>
                 <p className="font-mono text-xs font-bold uppercase tracking-widest text-[#25D366]">
-                  20 DICEMBRE 2026 ONWARDS · OFFICIAL SINGLE PASS GROUPING
+                  {extras.whatsappGroupingEyebrow}
                 </p>
                 <h3 className="mt-1 font-serif text-2xl font-bold text-[#F6F1E7]">
                   {copy.miniGroupHeading}
