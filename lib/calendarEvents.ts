@@ -19,6 +19,10 @@ import {
   JUST_SINGING_RAIN_SLUGS_35,
   JUST_SINGING_RAIN_START_ISO,
 } from './just-singing-rain/justme35';
+import {
+  AXEL_GROUP_DATED_EVENTS,
+  axelGroupEventAllSlugs35,
+} from './axel-group-events/events35';
 
 /** REGOLA (richiesta utente): ogni gallery/carosello/calendario mostra UNA sola
  * card per evento — mai due versioni (IT + EN) né due sorgenti (Eventbrite +
@@ -290,6 +294,80 @@ export async function getAllCalendarEvents(): Promise<{ event: Event; venue: Ven
         venue: justMeVenue,
       },
     );
+  }
+
+  const pinetaVenue = mockVenues.find((v) => v.id === 'v-pineta');
+  const zangolaSyntheticVenue: Venue | undefined = pinetaVenue
+    ? {
+        ...pinetaVenue,
+        id: 'v-zangola-campiglio',
+        slugs: { en: 'pineta-club-milano', it: 'pineta-milano' },
+        image: '/images/seo-events/master/zangola-campiglio-01.webp',
+        address: {
+          streetAddress: 'Via Nambino, 17',
+          addressLocality: 'Madonna di Campiglio',
+          addressRegion: 'TN',
+          postalCode: '38086',
+          addressCountry: 'IT' as const,
+        },
+        coordinates: { latitude: 46.2356, longitude: 10.8312 },
+        localizedContent: {
+          ...pinetaVenue.localizedContent,
+          name: {
+            en: 'Zangola Club Madonna di Campiglio',
+            it: 'Zangola Club Madonna di Campiglio',
+          },
+        },
+      }
+    : undefined;
+
+  for (const axEv of AXEL_GROUP_DATED_EVENTS) {
+    const targetVenue = axEv.venueType === 'pineta' ? pinetaVenue : zangolaSyntheticVenue;
+    if (!targetVenue) continue;
+    concreteItems.push({
+      event: {
+        id: axEv.id,
+        venueId: targetVenue.id,
+        genre:
+          axEv.venueType === 'pineta'
+            ? [MusicGenre.COMMERCIAL, MusicGenre.HOUSE]
+            : [MusicGenre.HOUSE, MusicGenre.COMMERCIAL],
+        dateISO: axEv.startISO,
+        endDateISO: axEv.endISO,
+        isSpecial: true,
+        isTrending: axEv.venueType === 'pineta' || axEv.isNye,
+        pricing: {
+          entry: axEv.entryEur,
+          currency: 'EUR',
+          tableMinSpend: axEv.vipEur,
+        },
+        localizedContent: {
+          title: {
+            en:
+              axEv.venueType === 'pineta'
+                ? 'Check&Love · Interactive Dinner Show & Club Night'
+                : `${axEv.seriesName} · ${axEv.performer}`,
+            it:
+              axEv.venueType === 'pineta'
+                ? 'Check&Love · Aperitivo, Cena Cantata & Serata Club'
+                : `${axEv.seriesName} · ${axEv.performer}`,
+          },
+          shortDescription: {
+            en:
+              axEv.venueType === 'pineta'
+                ? '20:00 Royal Aperitivo €15 · 21:00 Seated Dinner €35 · 23:00 Party & VIP Tables €250.'
+                : `${axEv.venueName} (${axEv.hours}) · Entry from €${axEv.entryEur} · VIP Tables €${axEv.vipEur}.`,
+            it:
+              axEv.venueType === 'pineta'
+                ? '20:00 Royal Aperitivo 15€ · 21:00 Cena Servita 35€ · 23:00 Club & Tavoli VIP 250€.'
+                : `${axEv.venueName} (${axEv.hours}) · Ingressi da ${axEv.entryEur}€ · Tavoli VIP ${axEv.vipEur}€.`,
+          },
+          slug: { ...axelGroupEventAllSlugs35(axEv.id) },
+        },
+        image: axEv.posterSrc,
+      },
+      venue: targetVenue,
+    });
   }
 
   // Le serate ricorrenti riempiono solo le notti prive già di un evento

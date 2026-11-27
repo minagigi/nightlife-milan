@@ -43,6 +43,14 @@ import {
   getBergamoBresciaNightLocalized,
   resolveBergamoBresciaNightId,
 } from '@/lib/bergamo-brescia/activeNights35';
+import AxelGroupDatedEventDetailView from '@/components/AxelGroupDatedEventDetailView';
+import {
+  axelGroupEventHreflangAlternates,
+  axelGroupEventPath,
+  axelGroupEventSlug,
+  getAxelGroupEventLocalized,
+  resolveAxelGroupEventId,
+} from '@/lib/axel-group-events/events35';
 import JustSingingJustMeDetailView from '@/components/JustSingingJustMeDetailView';
 import {
   getJustSingingRainContent,
@@ -440,6 +448,39 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
     };
   }
+  const axelEvIdMeta = resolveAxelGroupEventId(slug);
+  if (axelEvIdMeta) {
+    const canonicalSlug = axelGroupEventSlug(axelEvIdMeta, locale);
+    if (slug !== canonicalSlug) permanentRedirect(axelGroupEventPath(axelEvIdMeta, locale));
+    const detail = getAxelGroupEventLocalized(axelEvIdMeta, locale);
+    if (!detail) return notFound();
+    const baseUrl = process.env.APP_URL || 'https://nightlifemilan.com';
+    const canonical = `${baseUrl}${detail.canonicalPath}`;
+    return {
+      title: detail.metaTitle,
+      description: detail.metaDescription,
+      robots: seoRobots(locale, true, true),
+      alternates: {
+        canonical,
+        languages: axelGroupEventHreflangAlternates(axelEvIdMeta, baseUrl),
+      },
+      openGraph: {
+        title: detail.metaTitle,
+        description: detail.metaDescription,
+        url: canonical,
+        type: 'website',
+        siteName: 'Nightlife Milan',
+        locale: getLocaleDef(locale)?.ogLocale || 'en_US',
+        images: [{ url: `${baseUrl}${detail.seed.posterSrc}`, width: 1080, height: 1350, alt: detail.h1 }],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: detail.metaTitle,
+        description: detail.metaDescription,
+        images: [`${baseUrl}${detail.seed.posterSrc}`],
+      },
+    };
+  }
   const bgBsNightIdMeta = resolveBergamoBresciaNightId(slug);
   if (bgBsNightIdMeta) {
     const canonicalSlug = bergamoBresciaNightSlug(bgBsNightIdMeta, locale);
@@ -690,6 +731,12 @@ export default async function EventPage({ params }: Props) {
     const canonicalSlug = partenopeaJustMeSlug(locale);
     if (slug !== canonicalSlug) permanentRedirect(partenopeaJustMePath(locale));
     return <PartenopeaJustMeDetailView locale={locale} />;
+  }
+  const axelEvId = resolveAxelGroupEventId(slug);
+  if (axelEvId) {
+    const canonicalSlug = axelGroupEventSlug(axelEvId, locale);
+    if (slug !== canonicalSlug) permanentRedirect(axelGroupEventPath(axelEvId, locale));
+    return <AxelGroupDatedEventDetailView idOrSlug={axelEvId} locale={locale} />;
   }
   const bgBsNightId = resolveBergamoBresciaNightId(slug);
   if (bgBsNightId) {

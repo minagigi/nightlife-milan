@@ -126,6 +126,10 @@ export const EXPLORER_VENUE_PHOTOS: Record<string, { src: string; caption: strin
     src: '/images/guides-editorial/fiftyfive-loft.webp',
     caption: '55 Milano · Sempione 1.000 mq Loft',
   },
+  'carlsberg-ol': {
+    src: '/images/guides-editorial/carlsberg-ol-stage-candles.webp',
+    caption: 'Carlsberg Øl Milano · Capodanno per Famiglie (75 €)',
+  },
   'tocqueville-13': {
     src: '/images/guides-editorial/just-me-dancefloor.webp',
     caption: 'Tocqueville 13 · Corso Como',

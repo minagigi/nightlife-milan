@@ -18,6 +18,10 @@ import {
   bergamoBresciaNightPath,
   computeActiveNightWindowISO,
 } from '@/lib/bergamo-brescia/activeNights35';
+import {
+  AXEL_GROUP_DATED_EVENTS,
+  axelGroupEventPath,
+} from '@/lib/axel-group-events/events35';
 import { halloweenPath } from '@/lib/halloween/routes';
 import { OCTOBER_EVENTS, OCTOBER_EVENTS_INVENTORY } from '@/lib/octoberEvents';
 import { octoberEventCanonical } from '@/lib/octoberEventSeo';
@@ -433,6 +437,19 @@ function buildEventsEntriesInternal(ebEvents: readonly Event[]): MetadataRoute.S
       lastModified: catalogLastMod,
       changeFrequency: 'daily',
       priority: 0.94,
+    });
+  });
+
+  AXEL_GROUP_DATED_EVENTS.forEach((axEv) => {
+    const isUpcoming = Date.parse(axEv.endISO) >= nowMs;
+    const targetLocales = Date.parse(axEv.endISO) >= archiveCutoffMs ? locales : archiveCoreLocales;
+    targetLocales.forEach((locale) => {
+      entries.push({
+        url: `${baseUrl}${axelGroupEventPath(axEv.id, locale)}`,
+        lastModified: catalogLastMod,
+        changeFrequency: isUpcoming ? 'daily' : 'monthly',
+        priority: isUpcoming ? 0.94 : 0.65,
+      });
     });
   });
 

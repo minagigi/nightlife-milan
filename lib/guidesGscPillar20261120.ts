@@ -325,6 +325,7 @@ function renderClubbingGuide(locale: LocaleCode): ClubbingRendered {
   const theClubNyeUrl = capodannoEventPath('capodanno-the-club-milano', locale);
   const ariaNyeUrl = capodannoEventPath('capodanno-aria-club-milano', locale);
   const fiftyFiveNyeUrl = capodannoEventPath('capodanno-55-milano', locale);
+  const carlsbergNyeUrl = capodannoEventPath('capodanno-carlsberg-ol-milano', locale);
   const hollywoodNyeUrl = capodannoEventPath('capodanno-hollywood-milano', locale);
   const elevenNyeUrl = capodannoEventPath('capodanno-11clubroom-milano', locale);
   const tocquevilleNyeUrl = capodannoEventPath('capodanno-tocqueville-13-milano', locale);
@@ -342,6 +343,7 @@ function renderClubbingGuide(locale: LocaleCode): ClubbingRendered {
   const ariaClubUrl = clubUrl('aria-club-milano', locale);
   const voyaClubUrl = clubUrl('voya-rooftop-milan', locale);
   const fiftyFiveClubUrl = clubUrl('55-milano', locale);
+  const carlsbergClubUrl = clubUrl('carlsberg-ol-milano', locale);
   const repvblicClubUrl = clubUrl('repvblic-milano', locale);
   const tocquevilleClubUrl = clubUrl('tocqueville-13-milano', locale);
   const hollywoodClubUrl = clubUrl('hollywood-club-milano', locale);
@@ -389,6 +391,46 @@ function renderClubbingGuide(locale: LocaleCode): ClubbingRendered {
       tl.statusConfirmed,
     ],
     [
+      `${linkTag(fiftyFiveClubUrl, '55 Milano (1.000 mq Loft)')} · ${linkTag(fiftyFiveNyeUrl, 'NYE 2027')}`,
+      'Sempione · Via Piero della Francesca 55',
+      'Revival 80/90, Vocal House & Aperitivo',
+      tl.dressSmartChic,
+      tl.fiftyFiveRates,
+      tl.statusConfirmed,
+    ],
+    [
+      `${linkTag(carlsbergClubUrl, 'Carlsberg Øl Milano (Capodanno per Famiglie)')} · ${linkTag(carlsbergNyeUrl, 'NYE 2027')}`,
+      'Porta Nuova · Bastioni di Porta Nuova 9',
+      'Family Gala Dinner, Live Show & DJ Set',
+      tl.dressSmartChic,
+      '75 EUR',
+      tl.statusConfirmed,
+    ],
+    [
+      `${linkTag(magazziniClubUrl, 'Magazzini Generali Milano')} · ${linkTag(magazziniNyeUrl, 'NYE 2027')}`,
+      'Ripamonti / IEO · Via Pietrasanta 16',
+      'We Love 2000, Club Hits & Electronic',
+      tl.dressUrbanChic,
+      tl.magazziniRates,
+      tl.statusConfirmed,
+    ],
+    [
+      `${linkTag(bobinoClubUrl, 'Bobino Milano')} · ${linkTag(bobinoNyeUrl, 'NYE 2027')}`,
+      'Navigli / Porta Genova · Piazzale Stazione Genova 4',
+      'DJ Set 30+, House Revival & Aperitivo Show',
+      tl.dressSmartChic,
+      tl.bobinoRates,
+      tl.statusConfirmed,
+    ],
+    [
+      `${linkTag(theClubClubUrl, 'The Club Milano (Brera)')} · ${linkTag(theClubNyeUrl, 'NYE 2027')}`,
+      'Brera / Moscova · Corso Garibaldi 97',
+      'House, Hip-Hop, Reggaeton & International',
+      tl.dressSmartChic,
+      tl.theClubRates,
+      tl.statusConfirmed,
+    ],
+    [
       `${linkTag(bischeriNyeUrl, 'Bischeri Milano (NYE 2027)')}`,
       'Sud / Ripamonti · Via Giuseppe Ripamonti',
       'Gala Dinner Show, Commercial & Disco',
@@ -413,43 +455,11 @@ function renderClubbingGuide(locale: LocaleCode): ClubbingRendered {
       tl.statusConfirmed,
     ],
     [
-      `${linkTag(bobinoClubUrl, 'Bobino Milano')} · ${linkTag(bobinoNyeUrl, 'NYE 2027')}`,
-      'Navigli / Porta Genova · Piazzale Stazione Genova 4',
-      'DJ Set 30+, House Revival & Aperitivo Show',
-      tl.dressSmartChic,
-      tl.bobinoRates,
-      tl.statusConfirmed,
-    ],
-    [
-      `${linkTag(magazziniClubUrl, 'Magazzini Generali Milano')} · ${linkTag(magazziniNyeUrl, 'NYE 2027')}`,
-      'Ripamonti / IEO · Via Pietrasanta 16',
-      'We Love 2000, Club Hits & Electronic',
-      tl.dressUrbanChic,
-      tl.magazziniRates,
-      tl.statusConfirmed,
-    ],
-    [
-      `${linkTag(theClubClubUrl, 'The Club Milano (Brera)')} · ${linkTag(theClubNyeUrl, 'NYE 2027')}`,
-      'Brera / Moscova · Corso Garibaldi 97',
-      'House, Hip-Hop, Reggaeton & International',
-      tl.dressSmartChic,
-      tl.theClubRates,
-      tl.statusConfirmed,
-    ],
-    [
       `${linkTag(ariaClubUrl, 'Aria Club Milano (San Siro)')} · ${linkTag(ariaNyeUrl, 'NYE 2027')}`,
       'San Siro · Piazzale dello Sport 14 (150 m Stadio)',
       'Commercial, Reggaeton & Hip-Hop',
       tl.dressEveningElegance,
       tl.ariaRates,
-      tl.statusBenchmark,
-    ],
-    [
-      `${linkTag(fiftyFiveClubUrl, '55 Milano (1.000 mq Loft)')} · ${linkTag(fiftyFiveNyeUrl, 'NYE 2027')}`,
-      'Sempione · Via Piero della Francesca 55',
-      'Revival 80/90, Vocal House & Aperitivo',
-      tl.dressSmartChic,
-      tl.fiftyFiveRates,
       tl.statusBenchmark,
     ],
     [

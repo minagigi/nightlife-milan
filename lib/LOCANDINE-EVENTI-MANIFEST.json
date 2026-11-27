@@ -1,9 +1,9 @@
 {
   "schema_version": "2026-11-25.v1",
   "network": "nightlifemilan.com",
-  "generated_at": "2026-11-26T23:37:09.638193+00:00",
-  "total_entries": 287,
-  "official_flyers": 102,
+  "generated_at": "2026-11-27T19:53:39.103538+00:00",
+  "total_entries": 303,
+  "official_flyers": 118,
   "flow_keyart_flyers": 185,
   "entries": {
     "capodanno-2027-posters/capodanno-11clubroom-milano.webp": {
@@ -1623,6 +1623,13 @@
       "bytes": 148734,
       "sha256": "58ebc29544e228d3704278b916c505d45133a1c41e74e8b406f908fe761fcb6e"
     },
+    "weekly-posters/check-love-pineta-2026-12-04.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 153834,
+      "sha256": "3a13ba222c1db37d56ad12ef189d2b01f13c396058cf3cc710dc83014978e963"
+    },
     "weekly-posters/justme-wednesday-club-campanini.webp": {
       "source_kind": "official_flyer",
       "width": 1080,
@@ -1993,6 +2000,111 @@
       "height": 1350,
       "bytes": 171900,
       "sha256": "98f0b29b880a9ec40b168ebff9d73327c586f9170403e50a6ea920f7b70c495b"
+    },
+    "weekly-posters/zangola-ale-maestri-2027-01-03.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 57936,
+      "sha256": "6b1158f39ec35b63ee197f3a2dcb45d15c8fb40a7cfb570edef150056a3c2a80"
+    },
+    "weekly-posters/zangola-alessio-sisani-2026-12-12.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 63522,
+      "sha256": "3ed52ff3d71a07d4008858744c0452a78bcf8c66daea0dee7a2f5b55267cdaef"
+    },
+    "weekly-posters/zangola-bollo-epifania-2027-01-05.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 77596,
+      "sha256": "105babdd83d61cbb7c27b38926db00e6fbf90114fa08d372452efee3c530883a"
+    },
+    "weekly-posters/zangola-bollo-immacolata-2026-12-07.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 73584,
+      "sha256": "7a0f2e66598e9cb4d188980302811031da7bba352eac1af96cec25a21add3da8"
+    },
+    "weekly-posters/zangola-capodanno-mazay-2026-12-31.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 98722,
+      "sha256": "e15d99fc95e1683a2e67494d693cb7050097b9a50995f0bc6c94d3ef08c9c2f8"
+    },
+    "weekly-posters/zangola-ciuffo-frankie-p-2026-12-05.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 85448,
+      "sha256": "c9b1f4b79bde11c2d29d0f25c2e505434bb9c28b62cd7819aa232c5109c7b54e"
+    },
+    "weekly-posters/zangola-club-splendore-2026-12-28.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 92716,
+      "sha256": "369fdd073cb4435b4521f7204b6e863df15775f95d0a17bf85d9efd366ff78f2"
+    },
+    "weekly-posters/zangola-dj-a-ninetyfour-andrerrated-2027-01-02.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 78318,
+      "sha256": "8ec867449dc82a850fa8477c2397559333551f969582b18a379918fb4088974c"
+    },
+    "weekly-posters/zangola-double-clash-2026-12-30.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 82066,
+      "sha256": "9178c2364ee96169042cf3ea631baa1247497857e8aa1dc4602ab6a932b60636"
+    },
+    "weekly-posters/zangola-mazay-2026-12-19.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 64416,
+      "sha256": "fda377dd16ac84ef4583aa3fac4a79fea703c7fb705cf9d062026ab146dbdf79"
+    },
+    "weekly-posters/zangola-mazay-2027-01-04.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 68844,
+      "sha256": "0329a6b4850c41362ef935f8cc18fc7f5ba40527f69f8553b141b43c3403bda3"
+    },
+    "weekly-posters/zangola-mazay-santo-stefano-2026-12-26.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 70232,
+      "sha256": "2c7485162a4a663efcbdbccca0fdd7226f61179779b56ccc31c3b0d30a4c2086"
+    },
+    "weekly-posters/zangola-sante-sansone-2026-12-06.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 63292,
+      "sha256": "e3b1029e5288f860e99bd81cb983ae6f3681f346b86455c3f323bda24d102dfb"
+    },
+    "weekly-posters/zangola-toy-tonics-2026-12-27.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 81834,
+      "sha256": "9b27418702967bbadacecfcf81d1d309d3855d607cebb3b305f3780e28f211b9"
+    },
+    "weekly-posters/zangola-twish-2026-12-29.webp": {
+      "source_kind": "official_flyer",
+      "width": 1080,
+      "height": 1350,
+      "bytes": 65052,
+      "sha256": "8f059e89ddcbb824d016302959c46ef3fc9ac6289c19f509dfcc8fbda7d1f9c2"
     },
     "weekly-posters/zero-club-bergamo-friday.webp": {
       "source_kind": "flow_keyart_flyer",

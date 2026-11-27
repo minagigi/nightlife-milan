@@ -51,6 +51,10 @@ import {
   JUST_SINGING_RAIN_START_ISO,
   justSingingRainPath,
 } from '@/lib/just-singing-rain/justme35';
+import {
+  AXEL_GROUP_DATED_EVENTS,
+  axelGroupSearchPath,
+} from '@/lib/axel-group-events/seedsOnly';
 
 type SearchTabId = 'all' | 'clubs' | 'capodanno' | 'events' | 'hubs' | 'guides' | 'zones';
 
@@ -1753,12 +1757,41 @@ export default function GlobalSearch({ currentLocale }: { currentLocale: string 
       score: justSingingRainScore,
     };
 
+    const axelGroupSearchItems = AXEL_GROUP_DATED_EVENTS.filter((axEv) => romeDayKey(axEv.endISO) >= todayKey).map((axEv) => {
+      const title =
+        axEv.venueType === 'pineta'
+          ? `Check&Love · Pineta Milano (${axEv.ymd})`
+          : `${axEv.seriesName} · ${axEv.performer} (${axEv.ymd})`;
+      const score = isBrowsingCategory
+        ? axEv.venueType === 'pineta' || axEv.isNye
+          ? 97
+          : 88
+        : matchTokensScore(
+            `${title} ${axEv.venueName} ${axEv.city}`,
+            `${axEv.performer} ${axEv.seriesName} ${axEv.genres.join(' ')} ${axEv.streetAddress} ${axEv.ymd} madonna di campiglio dolomiti trentino pineta via messina check love speed date`,
+            qTokens,
+            fullQuery,
+          );
+      return {
+        id: axEv.id,
+        title,
+        venueName: `${axEv.venueName} · ${axEv.city}`,
+        dateISO: axEv.startISO,
+        image: axEv.posterSrc,
+        priceLabel: `€${axEv.entryEur} · VIP €${axEv.vipEur}`,
+        genres: axEv.genres.join(', '),
+        href: axelGroupSearchPath(axEv.id, currentLocale),
+        score,
+      };
+    });
+
     const scoredEvents = [
       ...(isJustSingingRainActive() ? [justSingingRainItem] : []),
       ...(romeDayKey('2026-11-26') >= todayKey ? [thanksgivingJustMeItem] : []),
       ...(romeDayKey('2026-11-27') >= todayKey ? [partenopeaJustMeItem] : []),
       ...(romeDayKey('2027-01-13') >= todayKey ? [orthodoxNyeJustMeItem] : []),
       ...(romeDayKey('2026-12-25') >= todayKey ? [voyaChristmasItem] : []),
+      ...axelGroupSearchItems,
       ...featuredItems,
       ...xceedItems,
     ]
